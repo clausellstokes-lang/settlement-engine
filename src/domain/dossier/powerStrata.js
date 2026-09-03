@@ -352,13 +352,13 @@ export function rulingChainOf(settlement) {
   let absence = null;
   if (!npc) {
     if (vacant) {
-      const line = `The seat stands empty; ${claimants.length === 1 ? 'a claimant circles' : `${claimants.length} claimants circle`} — ${claimants.join(', ')}.`;
+      const line = `The seat stands empty; ${claimants.length === 1 ? 'a claimant circles' : `${claimants.length} claimants circle`}: ${claimants.join(', ')}.`;
       absence = { kind: /** @type {'missing_seat'} */ ('missing_seat'), claimants, line };
     } else if (governing) {
       absence = {
         kind: /** @type {'unrecorded'} */ ('unrecorded'),
         claimants: [],
-        line: 'No named seat-holder stands in the record — the chain ends, honestly, at the faction.',
+        line: 'No named seat-holder stands in the record. The chain ends, honestly, at the faction.',
       };
     }
   }

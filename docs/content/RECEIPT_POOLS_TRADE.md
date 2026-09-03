@@ -193,7 +193,7 @@ AUDIENCE: public
 2. The quays of {settlement} have learned to expect {counterpart}'s wagons, and have not been disappointed.
 3. Season upon season, the book at {settlement} shows {counterpart}'s side of the contract clean.
 4. The compact with {counterpart} holds, and the factors of {settlement} borrow against it.
-5. Nothing has happened between {settlement} and {counterpart} for years — which, in trade, is the whole of the good news.
+5. Nothing has happened between {settlement} and {counterpart} for years, which, in trade, is the whole of the good news.
 6. Travellers out of {counterpart} say the {good} was loading before the season turned, and it was.
 7. The {settlement} gate looks for {counterpart}'s wagons in the same week every year, and the year is reckoned from them.
 8. A carter's boy at {settlement} knows the {counterpart} teams by their bells and runs to the gate before the clerks have heard anything.
@@ -292,7 +292,7 @@ SLOTS: {settlement} {counterpart} {good} {route}
 AUDIENCE: public
 1. {settlement} buys its {good} from {counterpart} and from nowhere else, and the court has begun to say so aloud.
 2. In the guildhall at {settlement} they ask what happens to the bread if the {route} closes.
-3. The books at {settlement} show one supplier of {good} and no second name — a column that reads as a leash.
+3. The books at {settlement} show one supplier of {good} and no second name: a column that reads as a leash.
 4. So long as {counterpart} holds the only road for {good}, every quarrel between them will be argued on {counterpart}'s terms.
 5. {counterpart} calls it a partnership; {settlement} has begun to call it a rope, though not yet in public.
 6. Travellers at the {settlement} gate are asked how the harvest looked at {counterpart}, and are asked before they are asked their business.
@@ -396,16 +396,16 @@ AUDIENCE: public
 ### dossier.trade_relation_line (TR-1) — town dossier, relations panel — significance: routine
 SLOTS: {counterpart} {band} {good} {route} {reason}
 AUDIENCE: public
-1. Trade with {counterpart}: severed — they shut their market in the spring. *(volume exemplar, slotted and de-digited)*
-2. Trade with {counterpart}: {band} — {good} moves both ways, and the road is policed.
-3. Trade with {counterpart}: strained — the toll on the {route} has not come down since the quarrel.
+1. Trade with {counterpart}: severed. They shut their market in the spring. *(volume exemplar, slotted and de-digited)*
+2. Trade with {counterpart}: {band}, {good} moves both ways, and the road is policed.
+3. Trade with {counterpart}: strained. The toll on the {route} has not come down since the quarrel.
 4. Trade with {counterpart}: none recorded; no cart has crossed in living memory.
-5. Trade with {counterpart}: {band} — bound to their {good}, and the guildhall says so uneasily.
-6. Trade with {counterpart}: severed — the reason recorded is {reason}, and neither court disputes it.
-7. Trade with {counterpart}: {band} — chiefly {good}, and chiefly one way.
-8. Trade with {counterpart}: reviving — the first carts in a generation came up the {route} last season.
+5. Trade with {counterpart}: {band}. Bound to their {good}, and the guildhall says so uneasily.
+6. Trade with {counterpart}: severed. The reason recorded is {reason}, and neither court disputes it.
+7. Trade with {counterpart}: {band}, chiefly {good}, and chiefly one way.
+8. Trade with {counterpart}: reviving. The first carts in a generation came up the {route} last season.
 9. Trade with {counterpart}: {band}, and seasonal; the {route} is shut from the first frost to the thaw.
-10. Trade with {counterpart}: {band} — steady for years, and nobody at the guildhall can name the year it began.
+10. Trade with {counterpart}: {band}. Steady for years, and nobody at the guildhall can name the year it began.
 
 ---
 

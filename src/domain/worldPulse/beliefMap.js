@@ -1567,11 +1567,11 @@ export function beliefMisjudgmentNewsEntries(selected, nameFor = (id) => String(
       reasons.push(`${mover} believed ${target} ${believedWord}; the truth is ${trueWord} (a stale, road-worn read).`);
     }
     if (relMis) {
-      reasons.push(`${mover} still counts ${target} an enemy, though that hostility has since cooled — word never reached it.`);
+      reasons.push(`${mover} still counts ${target} an enemy, though that hostility has since cooled. Word never reached it.`);
     }
-    reasons.push(`It acted on a read it ${trustWord} — and the read was wrong.`);
+    reasons.push(`It acted on a read it ${trustWord}, and the read was wrong.`);
     const summary = strengthMis
-      ? `${mover} commits to an offensive against ${target} on a belief its strength is ${believedWord} — the truth is ${trueWord}. The fog of war, made real.`
+      ? `${mover} commits to an offensive against ${target} on a belief its strength is ${believedWord}. The truth is ${trueWord}. The fog of war, made real.`
       : `${mover} marches on ${target} over a hostility the world has already left behind.`;
     return {
       id: `wizard_news.${tick}.belief_misjudgment.${mis.observerId}.${mis.subjectId}`,

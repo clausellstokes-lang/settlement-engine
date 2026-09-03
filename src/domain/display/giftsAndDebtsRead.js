@@ -117,8 +117,8 @@ export function giftsAndDebtsFor({ worldState, observerId, subjectId, includeGro
         // The IRONY: the observer believes a debt/extortion the mint intent does not support, or
         // credits a kindness that was truly a leash. Named so the DM reads the misjudgment.
         let divergence = '';
-        if (believedDark && !predatory) divergence = 'a debt believed, but the aid was freely given — a war brews over a kindness misremembered';
-        else if (believedBright && predatory) divergence = 'a kindness credited, but the aid was minted to indebt — the leash unseen';
+        if (believedDark && !predatory) divergence = 'a debt believed, but the aid was freely given. A war brews over a kindness misremembered';
+        else if (believedBright && predatory) divergence = 'a kindness credited, but the aid was minted to indebt: the leash unseen';
         else if (!believedDark && !believedBright && predatory) divergence = 'read as an honest gift; the true intent was leverage';
         act.truth = {
           predatoryIntent: predatory,

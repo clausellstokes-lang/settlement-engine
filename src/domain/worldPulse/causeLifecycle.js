@@ -376,7 +376,7 @@ export function advanceCauseLifecycle({ snapshot, worldState, priorLedger, rng, 
           causeClass: rec.causeClass, family: rec.family, stage: 'exposed-public',
           originTick: rec.originTick, exposedTick: tick, ageBand: ageBandForElapsed(tick - rec.originTick),
           headline: `${npc?.name || 'A compromised official'} is exposed`,
-          summary: `${npc?.name || 'The official'}'s compromise — rooted in ${causeLabel(rec.causeClass)} — has become public. The quiet arrangement is now a scandal.`,
+          summary: `${npc?.name || 'The official'}'s compromise (rooted in ${causeLabel(rec.causeClass)}) has become public. The quiet arrangement is now a scandal.`,
           reasons: ['The compromise crossed covert → revealed; the public arc supersedes the quiet lifecycle.'],
         }));
         return;
@@ -429,8 +429,8 @@ export function advanceCauseLifecycle({ snapshot, worldState, priorLedger, rng, 
             originTick: rec.originTick, ageBand: ageBandForElapsed(tick - rec.originTick),
             headline: `${npc?.name || 'A compromised official'} finds a new patron`,
             summary: localSustainerGone
-              ? `${localName || 'The syndicate'} is gone, but ${npc?.name || 'the official'} reaches for ${causeLabel(newCause)} — the arrangement re-forms around a live patron.`
-              : `The foreign patron is gone, but ${npc?.name || 'the official'} reaches for ${causeLabel(newCause)} — the arrangement re-forms around a live patron.`,
+              ? `${localName || 'The syndicate'} is gone, but ${npc?.name || 'the official'} reaches for ${causeLabel(newCause)}. The arrangement re-forms around a live patron.`
+              : `The foreign patron is gone, but ${npc?.name || 'the official'} reaches for ${causeLabel(newCause)}. The arrangement re-forms around a live patron.`,
             reasons: [localSustainerGone
               ? `Sustaining institution "${localName}" destroyed; re-adjudicated to ${causeLabel(newCause)}.`
               : `Foreign patron withdrawn or fallen; re-adjudicated to ${causeLabel(newCause)}.`],
@@ -482,7 +482,7 @@ export function advanceCauseLifecycle({ snapshot, worldState, priorLedger, rng, 
               originTick: rec.originTick, ageBand: band,
               headline: `${npc?.name || 'A compromised official'}'s need becomes appetite`,
               summary: `${causeLabel(oldCause)} eased, but ${npc?.name || 'the official'} has quietly found a new reason: ${causeLabel(newCause)}. The habit outlives its first cause.`,
-              reasons: [`${causeLabel(oldCause)} resolved; re-caused to ${causeLabel(newCause)} — the character reached for it.`],
+              reasons: [`${causeLabel(oldCause)} resolved; re-caused to ${causeLabel(newCause)}: the character reached for it.`],
             }));
           } else if (path === 'reform') {
             reforms.push({ cid, conditionId, npcId: conditionId, name: npc?.name || conditionId, causeClass: rec.causeClass });
@@ -491,7 +491,7 @@ export function advanceCauseLifecycle({ snapshot, worldState, priorLedger, rng, 
               causeClass: rec.causeClass, family: rec.family, stage: 'reformed',
               originTick: rec.originTick, resolvedTick: tick, ageBand: band,
               headline: `${npc?.name || 'A compromised official'} comes clean`,
-              summary: `The pressure lifted — ${causeLabel(rec.causeClass)} resolved — and ${npc?.name || 'the official'}, whose corruption was purely situational, reforms.`,
+              summary: `The pressure lifted (${causeLabel(rec.causeClass)} resolved), and ${npc?.name || 'the official'}, whose corruption was purely situational, reforms.`,
               reasons: [`${causeLabel(rec.causeClass)} resolved; the sole-support corruption ended (reform).`],
             }));
             return;   // record dropped — reform clears the tag (undo-clean)
@@ -509,7 +509,7 @@ export function advanceCauseLifecycle({ snapshot, worldState, priorLedger, rng, 
               originTick: rec.originTick, resolvedTick: tick, historicizedTick: tick, ageBand: band,
               headline: `${npc?.name || 'A compromised official'}'s habit outlives its reason`,
               summary: yearsPast
-                ? `${causeLabel(rec.causeClass)} passed into the lean years, but ${npc?.name || 'the official'}'s habit endures — the ledger never closed.`
+                ? `${causeLabel(rec.causeClass)} passed into the lean years, but ${npc?.name || 'the official'}'s habit endures. The ledger never closed.`
                 : `${causeLabel(rec.causeClass)} eased, yet ${npc?.name || 'the official'} carries the compromise forward out of habit. Its origin is now past-tense.`,
               reasons: [`${causeLabel(rec.causeClass)} resolved; the compromise persists with a historicized origin.`],
             }));

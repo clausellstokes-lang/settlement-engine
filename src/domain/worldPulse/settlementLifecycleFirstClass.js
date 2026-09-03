@@ -179,7 +179,7 @@ export function buildTerminalDeathOutcome({ item, snapshot, pIndex, tick, spatia
   /** @type {Array<{ saveId: string, delta: number, reason: string }>} */
   const populationDeltas = [{
     saveId: cid, delta: pop > 0 ? -pop : 0, // never -0 (an empty death moves nobody)
-    reason: 'The last residents leave with the wagons — the settlement dies.',
+    reason: 'The last residents leave with the wagons. The settlement dies.',
   }];
   /** @type {Record<string, unknown>} */
   // WAVE P4 (design §7b): the NAMED rung this death was reached at, recorded on the
@@ -229,7 +229,7 @@ export function buildTerminalDeathOutcome({ item, snapshot, pIndex, tick, spatia
         : `${name} has dwelled in terminal decline for ${dwell} ticks; its last ${formatCount(pop)} residents may scatter for good.`,
     reasons: [
       forced
-        ? 'FORCE_ABANDON — the DM-authority terminal-death verb (dwell-bypassing; resolves through the organic path).'
+        ? 'FORCE_ABANDON: the DM-authority terminal-death verb (dwell-bypassing; resolves through the organic path).'
         : emptied
           ? `Effectively empty (population ${formatCount(pop)}, at or below the ${T.ZERO_POP_FLOOR}-soul floor); an empty settlement is the strongest terminal signal.`
           : support <= 0.25
@@ -238,7 +238,7 @@ export function buildTerminalDeathOutcome({ item, snapshot, pIndex, tick, spatia
       forced ? null : emptied
         ? `Empty dwell ${dwell} at or past ${T.ZERO_POP_DWELL}; certain, never a lottery (an empty town cannot endure).`
         : `Terminal dwell ${dwell} ≥ ${T.TERMINAL_DWELL} — extended, never sudden.`,
-      'The last residents disperse with fates UNRESOLVED — the engine kills no named character, ever.',
+      'The last residents disperse with fates UNRESOLVED. The engine kills no named character, ever.',
     ].filter((r) => r != null).map(String),
     populationDeltas,
     lifecyclePatch: { kind: 'terminal_death', saveId: item.id, ...(viabilityLadder ? { viabilityLadder: true } : {}) },
@@ -310,13 +310,13 @@ export function buildResettleOutcome({ item, donorPool, tick, forkFn, applyMode,
     applyMode,
     headline: `Settlers eye the old ${name} site`,
     summary: grade === 'relic_ruin'
-      ? `${formatCount(seed)} settlers would raise ${newName} on the old stones — the ruin's glory is not inherited, it is aspired to.`
+      ? `${formatCount(seed)} settlers would raise ${newName} on the old stones. The ruin's glory is not inherited, it is aspired to.`
       : `${formatCount(seed)} settlers would found ${newName} where ${name} once stood.`,
     reasons: [
       forced
-        ? 'FORCE_RESETTLE — the DM-authority rebirth verb (fallow-bypassing; resolves through the organic path).'
-        : `The site has lain fallow ${fallow > 0 ? fallow : 'since a former age'} — a privileged birth site (${grade.replace(/_/g, ' ')}).`,
-      `Willing settlers: ${formatCount(seed)} from ${donorDebits.length} neighbouring settlement${donorDebits.length === 1 ? '' : 's'} (receipted debits — conserved).`,
+        ? 'FORCE_RESETTLE: the DM-authority rebirth verb (fallow-bypassing; resolves through the organic path).'
+        : `The site has lain fallow ${fallow > 0 ? fallow : 'since a former age'}: a privileged birth site (${grade.replace(/_/g, ' ')}).`,
+      `Willing settlers: ${formatCount(seed)} from ${donorDebits.length} neighbouring settlement${donorDebits.length === 1 ? '' : 's'} (receipted debits, conserved).`,
     ],
     populationDeltas: [
       { saveId: cid, delta: seed, reason: 'Settlers raise a new steading on the old stones.' },
@@ -606,8 +606,8 @@ export function applySettlementLifecycleOutcomeToSettlement(settlement, outcome)
     // tunnels disperses its people "through the underways" — a receipt only, never a fate
     // resolution. Absent the facet the note is byte-identical to before.
     const dispersalNote = settlementHasUnderways(settlement)
-      ? 'Escaped through the underways — fate unresolved.'
-      : 'Left with the last wagons — fate unresolved.';
+      ? 'Escaped through the underways: fate unresolved.'
+      : 'Left with the last wagons: fate unresolved.';
     const npcs = (Array.isArray(settlement.npcs) ? settlement.npcs : [])
       .map((npc) => (npc && !npc.dispersed
         ? { ...npc, dispersed: true, dispersedAtTick: tick, dispersalNote }
@@ -647,7 +647,7 @@ export function applySettlementLifecycleOutcomeToSettlement(settlement, outcome)
       name: grade === 'relic_ruin' ? `The Fall of ${name}` : `The Abandonment of ${name}`,
       type: 'decline',
       description: grade === 'relic_ruin'
-        ? `${name} — once a great city — dwindled to a final thorp and died; its stones stand as a relic ruin. The last residents left with the wagons, their fates unresolved.`
+        ? `${name} (once a great city) dwindled to a final thorp and died; its stones stand as a relic ruin. The last residents left with the wagons, their fates unresolved.`
         : `${name} dwindled and was abandoned; a quiet site marks where it stood. The last residents left with the wagons, their fates unresolved.`,
       severity: 'major',
       lastingEffects: grade === 'relic_ruin'
@@ -701,7 +701,7 @@ export function applySettlementLifecycleOutcomeToSettlement(settlement, outcome)
       name: `${newName}, Raised on the Old Stones`,
       type: 'founding',
       description: fromGrade === 'relic_ruin'
-        ? `${newName} was founded on the ruin of ${name} — the old stones remember, and the new thorp aspires.`
+        ? `${newName} was founded on the ruin of ${name}. The old stones remember, and the new thorp aspires.`
         : `${newName} was founded where ${name} once stood; the old site lives again.`,
       severity: 'moderate',
       lastingEffects: fromGrade === 'relic_ruin'
@@ -737,7 +737,7 @@ export function forceAbandonSettlement({ item, snapshot, pIndex, tick, spatialAc
   const s = item?.settlement || {};
   if (lifecycleStatusOf(s)) return { refusal: 'already a remnant' };
   const tier = String(s.tier || popToTier(num(s.population, 0)));
-  if (tier !== 'thorp') return { refusal: 'only a thorp-tier settlement can die — demote it first (the ladder ends where it began)' };
+  if (tier !== 'thorp') return { refusal: 'only a thorp-tier settlement can die. Demote it first (the ladder ends where it began)' };
   return buildTerminalDeathOutcome({
     item, snapshot, pIndex, tick, spatialActive,
     dwell: 0, support: supportOf(pIndex, String(item.id ?? '')),
@@ -759,7 +759,7 @@ export function forceAbandonSettlement({ item, snapshot, pIndex, tick, spatialAc
  */
 export function forceResettleSettlement({ item, donorPool, tick, forkFn, name = null }) {
   const s = item?.settlement || {};
-  if (!lifecycleStatusOf(s)) return { refusal: 'no remnant here — the site is alive' };
+  if (!lifecycleStatusOf(s)) return { refusal: 'no remnant here: the site is alive' };
   const outcome = buildResettleOutcome({
     item, donorPool, tick, forkFn, applyMode: 'auto', forced: true, nameOverride: name,
   });

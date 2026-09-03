@@ -138,7 +138,7 @@ export const GENESIS_CAUSE_TOKENS = Object.freeze(Object.keys(GENESIS_RELATION_C
  */
 function genesisDescription(neighbourName, roleWord, cause) {
   const row = GENESIS_RELATION_CAUSES[cause];
-  const because = row ? ` — ${row.phrase}` : '';
+  const because = row ? `, ${row.phrase}` : '';
   return `A tie that dates to the realm's founding: here stands as ${roleWord} to ${neighbourName}${because}.`;
 }
 

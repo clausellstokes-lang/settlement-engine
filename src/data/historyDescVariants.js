@@ -66,7 +66,7 @@ export const HISTORY_DESC_VARIANTS = Object.freeze({
   ],
   "infiltration_fear": [
     "Talk of enemy agents in the settlement, some of it true, spread suspicion and turned neighbours to informing on one another",
-    "Fear of hidden infiltrators \u2014 not always unfounded \u2014 bred denunciations and a climate of mistrust",
+    "Fear of hidden infiltrators (not always unfounded) bred denunciations and a climate of mistrust",
   ],
   "disputed_land": [
     "An old charter grants land to one party that another now holds, and neither claim is easily dismissed",

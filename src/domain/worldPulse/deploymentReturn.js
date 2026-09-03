@@ -464,7 +464,7 @@ export function deploymentReturnOutcomes({ resolvedDeployments = [], snapshot, g
           severity: 0.3,
           headline: `${homeName} throws off its occupiers`,
           summary: `${homeName}'s army returned to a captured home and broke the occupation; the settlement begins restoring its own authority.`,
-          reasons: [`A host come home ${returnMusterWordFor(ratio)} threw off the occupiers — ${returnOddsWordFor(pSuccess)}, and it came off.`],
+          reasons: [`A host come home ${returnMusterWordFor(ratio)} threw off the occupiers: ${returnOddsWordFor(pSuccess)}, and it came off.`],
           ...(liftTransfer ? { powerTransfer: liftTransfer } : {}),
           condition: {
             archetype: 'occupation_lifted',
@@ -501,7 +501,7 @@ export function deploymentReturnOutcomes({ resolvedDeployments = [], snapshot, g
           severity: 0.3,
           headline: `${homeName} lifts the siege at its gates`,
           summary: `${homeName}'s army returned to a besieged home and relieved it; the settlement begins to recover.`,
-          reasons: [`A host come home ${returnMusterWordFor(ratio)} relieved the siege — ${returnOddsWordFor(pSuccess)}, and it came off.`],
+          reasons: [`A host come home ${returnMusterWordFor(ratio)} relieved the siege: ${returnOddsWordFor(pSuccess)}, and it came off.`],
           condition: {
             archetype: 'siege_lifted',
             severity: 0.3,

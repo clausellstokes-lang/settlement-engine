@@ -54,7 +54,7 @@ export async function compileTableClerk({ text = '', targets = {} } = {}) {
   const notes = String(text || '').trim();
   if (!notes) return { ok: false, error: 'Write a line of what happened first.', refusalKind: 'input' };
   if (!isConfigured) {
-    return { ok: false, error: 'The clerk is resting — record it by hand below.', refusalKind: 'tier' };
+    return { ok: false, error: 'The clerk is resting: record it by hand below.', refusalKind: 'tier' };
   }
   // The CLOSED VOCABULARY posted to the edge (the schema wall the server grounds
   // on): the kinds, the named bands, the obligation types, and the campaign's

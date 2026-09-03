@@ -857,18 +857,18 @@ function fabricNews(sid, townName, kind, detail, tick, now) {
   if (kind === 'rebirth') {
     const classes = Array.isArray(detail.classes) && detail.classes.length ? detail.classes.join(', ') : 'its stricken';
     headline = `${townName} rebuilds from catastrophe`;
-    summary = `The ${detail.type || 'calamity'} has unmade whole quarters of ${townName}; the ${classes} fabric is cleared and rises anew — the one fast change stone permits.`;
-    reason = 'A catastrophe reset the struck district stocks and stamped a rebirth marker — buildings resist rapid change EXCEPT catastrophe and rebirth (the fabric law).';
+    summary = `The ${detail.type || 'calamity'} has unmade whole quarters of ${townName}; the ${classes} fabric is cleared and rises anew: the one fast change stone permits.`;
+    reason = 'A catastrophe reset the struck district stocks and stamped a rebirth marker. Buildings resist rapid change EXCEPT catastrophe and rebirth (the fabric law).';
     slug = `rebirth.${(detail.classes || []).join('_') || 'townwide'}`;
   } else if (kind === 'turn') {
     headline = `The face of ${townName} is turning`;
     summary = `Stone answers slowly, but it answers: the ${detail.to} quarter now overshadows the old ${detail.from} fabric of ${townName}, whose prominence lingers even as it fades.`;
-    reason = 'The dominant district class changed hands — the old stock decays on the masonry clock while the new deposits; never a flip.';
+    reason = 'The dominant district class changed hands. The old stock decays on the masonry clock while the new deposits; never a flip.';
     slug = `turn.${detail.from}.${detail.to}`;
   } else {
     headline = `The ${detail.to} quarter rises in ${townName}`;
     summary = `Years of steady patronage have told in stone: the ${detail.to} quarter of ${townName} has risen to prominence.`;
-    reason = 'A district class crossed the prominence floor with no prior incumbent — the first fabric dominance.';
+    reason = 'A district class crossed the prominence floor with no prior incumbent: the first fabric dominance.';
     slug = `rise.${detail.to}`;
   }
   return {

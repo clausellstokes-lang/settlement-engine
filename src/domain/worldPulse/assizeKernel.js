@@ -191,8 +191,8 @@ function assizeBeat({ sid, townName, accusedName, accusedPulseId, charge, sham, 
     ? `${townName}: the assize acquits its own over ${chargeWord}`
     : `${townName}: the assize passes judgement over ${chargeWord}`;
   const summary = sham
-    ? `The seat convened its court over ${chargeWord} and cleared ${accusedName} — a captured bench judging its own. The square saw it plainly${coupled ? ', and the petition it was meant to answer curdles into fury' : ''}: the seat's word is worth less by nightfall.`
-    : `The seat convened its court over ${chargeWord} and found against ${accusedName} in the open, before the crowd. Justice done in daylight${coupled ? ', answering the commons that demanded it,' : ''} steadies the town — the mark on ${accusedName} is now a public one.`;
+    ? `The seat convened its court over ${chargeWord} and cleared ${accusedName}: a captured bench judging its own. The square saw it plainly${coupled ? ', and the petition it was meant to answer curdles into fury' : ''}: the seat's word is worth less by nightfall.`
+    : `The seat convened its court over ${chargeWord} and found against ${accusedName} in the open, before the crowd. Justice done in daylight${coupled ? ', answering the commons that demanded it,' : ''} steadies the town. The mark on ${accusedName} is now a public one.`;
   return {
     // The id is keyed by (tick, sid, direction, ACCUSED+CHARGE): two same-direction verdicts in
     // one settlement/tick (e.g. a corruption exposure AND a lie, both judged JUST) are DISTINCT

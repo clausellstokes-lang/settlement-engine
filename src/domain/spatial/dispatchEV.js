@@ -290,7 +290,7 @@ export function stepAppetite(prior, { baseline, paid = 0, lost = 0, now }) {
 /** The receipt a risky paid-off run stamps ("emboldened by the <dest> run"). Pure.
  *  @param {string} destName @returns {string} */
 export function emboldenedReceipt(destName) {
-  return `The merchants are emboldened by the ${destName || 'far'} run — a risky delivery paid off.`;
+  return `The merchants are emboldened by the ${destName || 'far'} run. A risky delivery paid off.`;
 }
 
 // ── THE DISPATCH DECISION — EV + the willingness hysteresis latch ──────────────

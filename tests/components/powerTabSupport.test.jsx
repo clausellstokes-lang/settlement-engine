@@ -154,7 +154,7 @@ describe('PowerTab — the §815 ruling chain ("Who runs this place?")', () => {
     s.npcs = [{ id: 'n1', name: 'Old Mayor', role: 'Mayor (deposed)', factionAffiliation: 'Merchant Guild' }];
     render(<PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} />);
     const absence = screen.getByTestId('ruling-chain-absence');
-    expect(absence.textContent).toMatch(/The seat stands empty; 2 claimants circle — Claimant Bloc A, Claimant Bloc B\./);
+    expect(absence.textContent).toMatch(/The seat stands empty; 2 claimants circle: Claimant Bloc A, Claimant Bloc B\./);
     expect(screen.getByTestId('ruling-chain').textContent).toMatch(/the seat itself stands vacant/);
     expect(screen.queryByTestId('ruling-chain-npc')).toBeNull();
   });

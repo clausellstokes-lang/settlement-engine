@@ -276,8 +276,8 @@ export function deriveWarName({ attackerId, defenderId, reasonType, nameFor = (i
     : pickLine(UNTYPED_WAR_NAME_MOLDS, key, { a: nameFor(low), b: nameFor(high) });
   const clause = typed ? WAR_REASON_CLAUSES[typed] : null;
   const line = clause
-    ? `${name} — ${attackerName} against ${defenderName}, over ${clause}.`
-    : `${name} — ${attackerName} against ${defenderName}.`;
+    ? `${name}: ${attackerName} against ${defenderName}, over ${clause}.`
+    : `${name}: ${attackerName} against ${defenderName}.`;
   return { key, reasonType: typed, name, line, attackerName, defenderName };
 }
 
@@ -472,8 +472,8 @@ export function deriveRouteName({ row, fromId, nameFor = (id) => String(id) }) {
   const haul = ROUTE_HAUL_CLAUSES[String(r.band)] || null;
   const modeClause = ROUTE_MODE_CLAUSES[mode];
   const line = haul
-    ? `${name} — ${aName} to ${bName}, ${modeClause}, ${haul}.`
-    : `${name} — ${aName} to ${bName}, ${modeClause}.`;
+    ? `${name}: ${aName} to ${bName}, ${modeClause}, ${haul}.`
+    : `${name}: ${aName} to ${bName}, ${modeClause}.`;
   return { routeId, mode, name, line, aName, bName };
 }
 

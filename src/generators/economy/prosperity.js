@@ -61,7 +61,7 @@ export const deriveEconomicSituationDesc = (
   if (primaryStress === 'under_siege')
     return 'All normal economic activity is suspended. Markets are closed, merchant caravans have stopped arriving, and whatever currency existed is being redirected toward survival. The only economic question is the arithmetic of remaining supplies.';
   if (primaryStress === 'famine')
-    return 'The economy is structured around food scarcity. Those with grain have power. Those without are making increasingly desperate decisions. Normal market activity continues in a technical sense — prices are simply at levels that exclude most of the population.';
+    return 'The economy is structured around food scarcity. Those with grain have power. Those without are making increasingly desperate decisions. Normal market activity continues in a technical sense. Prices are simply at levels that exclude most of the population.';
   if (primaryStress === 'occupied') {
     const extractionChannel = worldLaw.supportsMaritime()
       ? 'maritime levies'
@@ -73,7 +73,7 @@ export const deriveEconomicSituationDesc = (
   if (primaryStress === 'indebted')
     return "Debt service obligations consume a meaningful share of revenue before any local investment is possible. The creditor's representative has effective veto power over fiscal decisions. Economic activity continues but its fruits are partly spoken for before they are earned.";
   if (primaryStress === 'plague_onset')
-    return "Market activity is reduced by fear and quarantine measures. Supply chains for common goods are disrupted. The economic situation would be manageable if it weren't compounded by the medical crisis — as it is, each problem is making the other worse.";
+    return "Market activity is reduced by fear and quarantine measures. Supply chains for common goods are disrupted. The economic situation would be manageable if it weren't compounded by the medical crisis. As it is, each problem is making the other worse.";
   if (primaryStress === 'politically_fractured')
     return 'Economic activity requires navigating factional lines that did not exist a year ago. Some merchants have aligned with specific factions. Cross-faction trade continues but it is slower and more expensive than it should be.';
 
@@ -88,29 +88,29 @@ export const deriveEconomicSituationDesc = (
     if (isTownPlus && !hasMagicTrade)
       return 'This settlement is too large to survive in true isolation. Without trade routes, specialist goods cannot be sourced, surpluses cannot be sold, and population density cannot be sustained. The economy is structurally broken.';
     if (isTownPlus && hasMagicTrade)
-      return 'Trade flows through magical channels — teleportation circles and planar contacts replace roads. The economy functions but depends entirely on maintaining that arcane infrastructure.';
+      return 'Trade flows through magical channels. Teleportation circles and planar contacts replace roads. The economy functions but depends entirely on maintaining that arcane infrastructure.';
     if (stress.stateCrime)
-      return 'Internal production is suppressed by institutional extraction — what little surplus exists flows upward rather than into communal welfare.';
+      return 'Internal production is suppressed by institutional extraction. What little surplus exists flows upward rather than into communal welfare.';
     if (econCat === 'very_high' || econCat === 'high')
-      return 'Despite isolation, internal production is well-organised — skilled crafts, efficient agriculture, and communal resource management keep the settlement self-sufficient.';
+      return 'Despite isolation, internal production is well-organised. Skilled crafts, efficient agriculture, and communal resource management keep the settlement self-sufficient.';
     if (econCat === 'low' || econCat === 'very_low')
       return 'The settlement struggles to sustain itself without outside trade. Resources are tightly rationed and growth is impossible.';
     return 'The settlement meets its own needs without external trade, though surpluses are modest and specialist goods are unavailable.';
   }
 
   if (stress.theocraticEconomy)
-    return 'The church controls most economic activity — land, markets, and trade flow through religious institutions. Commerce is present but the church sets the terms.';
+    return 'The church controls most economic activity. Land, markets, and trade flow through religious institutions. Commerce is present but the church sets the terms.';
   if (stress.merchantCriminalBlur)
     return 'Commerce is vigorous and the distinction between legitimate trade and criminal enterprise is largely academic. The wealthiest operators play both sides.';
   if (stress.stateCrime)
-    return 'The official economy appears functional. The reality is that institutional extraction — confiscations, forced sales, and selective taxation — suppresses productive activity.';
+    return 'The official economy appears functional. The reality is that institutional extraction (confiscations, forced sales, and selective taxation) suppresses productive activity.';
   if (econCat === 'very_high')
-    return 'Commerce is the lifeblood of this settlement — markets are active at all hours and guild influence reaches every trade.';
+    return 'Commerce is the lifeblood of this settlement. Markets are active at all hours and guild influence reaches every trade.';
   if (econCat === 'high')
     return 'Trade is vigorous and the guilds are well-organized, generating steady civic revenue.';
   if (econCat === 'low') return 'Commerce is sluggish; markets meet infrequently and many crafts are in decline.';
   if (econCat === 'very_low')
-    return 'The economy is barely functional — barter replaces coin and few outsiders bother to trade here.';
+    return 'The economy is barely functional. Barter replaces coin and few outsiders bother to trade here.';
   if (crimeCat === 'high' || crimeCat === 'very_high')
     return 'Official commerce is moderate but a thriving shadow economy undercuts legitimate trade.';
   return 'Trade proceeds at an ordinary pace for a settlement of this size.';
@@ -293,16 +293,16 @@ export const computeBaseProsperity = (tier, tradeRoute, institutions, config, _i
 export const deriveEconomicComplexity = (tier, incomeSourceCount, exportCount, hasMarketInst) =>
   tier === 'metropolis' || tier === 'city'
           ? incomeSourceCount >= 9
-            ? 'Highly diversified — multiple major revenue streams'
+            ? 'Highly diversified: multiple major revenue streams'
             : incomeSourceCount >= 6
-              ? 'Diversified — broad institutional economic base'
-              : 'Concentrated — fewer revenue streams than scale suggests'
+              ? 'Diversified: broad institutional economic base'
+              : 'Concentrated: fewer revenue streams than scale suggests'
           : tier === 'town'
             ? hasMarketInst && incomeSourceCount >= 6
               ? 'Diversified market economy'
               : incomeSourceCount >= 4
                 ? 'Specialized production and trade'
-                : 'Limited — narrow economic base for this scale'
+                : 'Limited: narrow economic base for this scale'
             : tier === 'village'
               ? hasMarketInst
                 ? 'Mixed subsistence and market'
@@ -311,4 +311,4 @@ export const deriveEconomicComplexity = (tier, incomeSourceCount, exportCount, h
                   : 'Subsistence with minor surplus'
               : exportCount >= 3
                 ? 'Subsistence with surplus'
-                : 'Subsistence — survival economy';
+                : 'Subsistence: survival economy';

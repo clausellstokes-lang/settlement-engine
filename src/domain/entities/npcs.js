@@ -200,7 +200,7 @@ export function killNpc(npc, eventId) {
         type: npc.importance === 'pillar' ? 'leadership' : 'membership',
         severity: weight,
         causeEventId: eventId,
-        description: `${npc.name} is gone — ${npc.importance === 'pillar' ? 'leadership' : 'ranks'} affected.`,
+        description: `${npc.name} is gone: ${npc.importance === 'pillar' ? 'leadership' : 'ranks'} affected.`,
       },
     });
   }

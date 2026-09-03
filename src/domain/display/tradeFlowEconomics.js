@@ -66,17 +66,17 @@ const BAND_COPY = Object.freeze({
   shortage: {
     label: 'Trade choked',
     dependency: 'strained',
-    headline: 'The roads have gone quiet — little reaches the markets, and what the town depends on is not arriving.',
+    headline: 'The roads have gone quiet. Little reaches the markets, and what the town depends on is not arriving.',
   },
   adequate: {
     label: 'Trade steady',
     dependency: 'met',
-    headline: 'Caravans keep to their rounds — trade moves at its accustomed pace.',
+    headline: 'Caravans keep to their rounds. Trade moves at its accustomed pace.',
   },
   surplus: {
     label: 'Trade brisk',
     dependency: 'abundant',
-    headline: 'The roads are busy — caravans arrive thick and depart laden, and the markets are well-fed.',
+    headline: 'The roads are busy. Caravans arrive thick and depart laden, and the markets are well-fed.',
   },
 });
 

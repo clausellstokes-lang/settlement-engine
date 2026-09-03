@@ -220,7 +220,7 @@ function deriveDawnWork(s, ctx) {
 
   let text;
   if (food.band === 'critical' || food.band === 'collapsed') {
-    text = 'Dawn work is the search for food — foragers leave before light, and the granary queue forms before the ovens are warm.';
+    text = 'Dawn work is the search for food. Foragers leave before light, and the granary queue forms before the ovens are warm.';
   } else if (defense.band === 'critical' || defense.band === 'collapsed') {
     text = 'The walls claim the first hours: the watch musters thin at first light, and ordinary work waits until the rounds are walked.';
   } else if (dominantCraftPower >= 25) {
@@ -266,8 +266,8 @@ function deriveGatheringPlaces(s, _ctx) {
   }
 
   const text = places.length
-    ? `By midday people are gathered at ${places.join(', ')} — talking, trading, and watching.`
-    : 'People gather where they can — the well, the bridge, the open square.';
+    ? `By midday people are gathered at ${places.join(', ')}: talking, trading, and watching.`
+    : 'People gather where they can: the well, the bridge, the open square.';
 
   return slot('gathering_places', text, 'institutions matched by category pattern', refs);
 }
@@ -305,7 +305,7 @@ function threatWarning(threat) {
     case 'siege':               return 'staying close when the bells ring three times';
     case 'rival_neighbor':      return `anything bearing the colors of the neighbour`;
     case 'plague':              return 'the sick-house and unfamiliar coughs';
-    case 'famine':              return 'wandering off — bread is short';
+    case 'famine':              return 'wandering off: bread is short';
     case 'corruption':          return 'talking to officials they don\'t know';
     case 'unrest':              return 'crowds that gather quickly';
     case 'arcane_instability':  return 'shimmering air and unfamiliar lights';
@@ -387,12 +387,12 @@ function deriveOutsiderImpressions(s, ctx) {
     refs.push({ id: top.id, label: top.label, type: 'threat' });
   }
   if (strainedCaps.length >= 3) {
-    parts.push('several civic services run short — visitors notice missing watch, slow service, or shuttered shops');
+    parts.push('several civic services run short. Visitors notice missing watch, slow service, or shuttered shops');
   }
 
   const text = parts.length
     ? `Outsiders notice ${parts.join('; ')}.`
-    : 'The settlement reads to outsiders as ordinary — quiet streets, predictable bells, faces that don\'t yet know yours.';
+    : 'The settlement reads to outsiders as ordinary. Quiet streets, predictable bells, faces that don\'t yet know yours.';
 
   return slot('outsider_impressions', text, 'dominant faction + top threat + strained capacities', refs);
 }
@@ -468,7 +468,7 @@ function deriveRecentChanges(s, ctx) {
 
   const text = changes.length
     ? `Recent changes: ${changes.join('; ')}.`
-    : 'The last few seasons have run their usual course — no notable shifts in the rhythm of the place.';
+    : 'The last few seasons have run their usual course. No notable shifts in the rhythm of the place.';
 
   return slot('recent_changes', text, 'history.recentDisruption + new conditions + acute threats', refs);
 }

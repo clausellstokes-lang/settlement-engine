@@ -404,7 +404,7 @@ AUDIENCE: public
 2. The parent house says the daughter cannot hold what it was given, and offers to hold it instead.
 3. There is a founding charter in the chest at {settlement} and a hungry season at {counterpart}; the two arguments arrived together.
 4. They call it reclamation and their neighbours call it what it is.
-5. A thriving parent has no quarrel with a modest steading — which is why this parent's books are worth reading.
+5. A thriving parent has no quarrel with a modest steading, which is why this parent's books are worth reading.
 
 ### casus_lineage_claim_child (WR-3) — Herald, war desk — significance: major
 SLOTS: {settlement}, {counterpart}, {house}
@@ -588,7 +588,7 @@ AUDIENCE: public
 SLOTS: {settlement}, {counterpart}, {npc}
 AUDIENCE: public
 1. {npc} came to the seat and widened the war his predecessor could not end.
-2. The same state, the same ledgers, a different character — and a new front.
+2. The same state, the same ledgers, a different character, and a new front.
 3. The successor opened with a muster, and the town read it correctly.
 4. The restraint was never in the ledgers; it sat in a chair, and it sits there no longer.
 5. He inherited a stalemate and called it an opportunity.
@@ -654,7 +654,7 @@ AUDIENCE: public
 1. The losers were assessed together and pay separately: {band} in {good} falls on {settlement} by capacity, culpability, and who called whom.
 2. One aggregate judgment became separate bilateral shares under the same settlement identifier.
 3. Capacity, culpability, field loss, and the alliance call all bear on the share; none alone dictates it.
-4. Collective liability, pairwise payment — the wagons roll along the edges they always rolled along.
+4. Collective liability, pairwise payment: the wagons roll along the edges they always rolled along.
 5. The apportionment is archived as a durable relationship fact.
 
 ### coalition_spoils_divided (WR-6) — the settlement, trade desk — significance: major
@@ -807,7 +807,7 @@ AUDIENCE: public
 ### parlay_at_an_occupied_venue (WR-7b) — Herald, adjudication desk — significance: notable
 SLOTS: {settlement}, {counterpart}, {third_party}
 AUDIENCE: public
-1. They parleyed at {settlement} — a town {counterpart} holds, which nobody thought worth mentioning.
+1. They parleyed at {settlement}: a town {counterpart} holds, which nobody thought worth mentioning.
 2. The terms of the war were drafted in a hall under the enemy's garrison, and the wine was good.
 3. A legal venue is a legal venue; the irony is not the clerks' business.
 4. The seat that owns the town was not in the room.

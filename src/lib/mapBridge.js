@@ -138,7 +138,7 @@ export function createMapBridge(getIframe, opts = {}) {
   function send(msg) {
     const iframe = getIframe?.();
     if (!iframe?.contentWindow) {
-      log('send dropped — no iframe', msg.type);
+      log('send dropped: no iframe', msg.type);
       return false;
     }
     try {

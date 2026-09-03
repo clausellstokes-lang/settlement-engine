@@ -255,7 +255,7 @@ export function classifyFeasibility({
   defenderFacets = {},
 }) {
   const ratio = feasibilityRatio(attackerCurrent, defenderCurrent);
-  const reasons = [`Weighed against the walls, the attacker is ${siegeMatchupWordFor(ratio)} — the defender's home ground counted.`];
+  const reasons = [`Weighed against the walls, the attacker is ${siegeMatchupWordFor(ratio)}: the defender's home ground counted.`];
 
   // The plausible band: a real contest. Hand it to RNG (open-topped above the floor).
   if (ratio >= PLAUSIBLE_FLOOR) {

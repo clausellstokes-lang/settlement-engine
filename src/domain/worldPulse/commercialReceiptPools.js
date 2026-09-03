@@ -61,7 +61,7 @@ export const COMMERCIAL_RECEIPTS = Object.freeze({
     (x) => `The quays of ${x.settlement} have learned to expect ${x.counterpart}'s wagons, and have not been disappointed.`,
     (x) => `Season upon season, the book at ${x.settlement} shows ${x.counterpart}'s side of the contract clean.`,
     (x) => `The compact with ${x.counterpart} holds, and the factors of ${x.settlement} borrow against it.`,
-    (x) => `Nothing has happened between ${x.settlement} and ${x.counterpart} for years — which, in trade, is the whole of the good news.`,
+    (x) => `Nothing has happened between ${x.settlement} and ${x.counterpart} for years, which, in trade, is the whole of the good news.`,
     (x) => `Travellers out of ${x.counterpart} say the ${x.good} was loading before the season turned, and it was.`,
     (x) => `The ${x.settlement} gate looks for ${x.counterpart}'s wagons in the same week every year, and the year is reckoned from them.`,
     (x) => `A carter's boy at ${x.settlement} knows the ${x.counterpart} teams by their bells and runs to the gate before the clerks have heard anything.`,
@@ -151,7 +151,7 @@ export const COMMERCIAL_RECEIPTS = Object.freeze({
   commercial_dependency_fear: [
     (x) => `${x.settlement} buys its ${x.good} from ${x.counterpart} and from nowhere else, and the court has begun to say so aloud.`,
     (x) => `In the guildhall at ${x.settlement} they ask what happens to the bread if the ${x.route} closes.`,
-    (x) => `The books at ${x.settlement} show one supplier of ${x.good} and no second name — a column that reads as a leash.`,
+    (x) => `The books at ${x.settlement} show one supplier of ${x.good} and no second name: a column that reads as a leash.`,
     (x) => `So long as ${x.counterpart} holds the only road for ${x.good}, every quarrel between them will be argued on ${x.counterpart}'s terms.`,
     (x) => `${x.counterpart} calls it a partnership; ${x.settlement} has begun to call it a rope, though not yet in public.`,
     (x) => `Travellers at the ${x.settlement} gate are asked how the harvest looked at ${x.counterpart}, and are asked before they are asked their business.`,
@@ -245,16 +245,16 @@ export const COMMERCIAL_RECEIPTS = Object.freeze({
   ],
   // dossier.trade_relation_line — routine, public
   commercial_relation_line: [
-    (x) => `Trade with ${x.counterpart}: severed — they shut their market in the spring.`,
-    (x) => `Trade with ${x.counterpart}: ${x.band} — ${x.good} moves both ways, and the road is policed.`,
-    (x) => `Trade with ${x.counterpart}: strained — the toll on the ${x.route} has not come down since the quarrel.`,
+    (x) => `Trade with ${x.counterpart}: severed. They shut their market in the spring.`,
+    (x) => `Trade with ${x.counterpart}: ${x.band}, ${x.good} moves both ways, and the road is policed.`,
+    (x) => `Trade with ${x.counterpart}: strained. The toll on the ${x.route} has not come down since the quarrel.`,
     (x) => `Trade with ${x.counterpart}: none recorded; no cart has crossed in living memory.`,
-    (x) => `Trade with ${x.counterpart}: ${x.band} — bound to their ${x.good}, and the guildhall says so uneasily.`,
-    (x) => `Trade with ${x.counterpart}: severed — the reason recorded is ${x.reason}, and neither court disputes it.`,
-    (x) => `Trade with ${x.counterpart}: ${x.band} — chiefly ${x.good}, and chiefly one way.`,
-    (x) => `Trade with ${x.counterpart}: reviving — the first carts in a generation came up the ${x.route} last season.`,
+    (x) => `Trade with ${x.counterpart}: ${x.band}. Bound to their ${x.good}, and the guildhall says so uneasily.`,
+    (x) => `Trade with ${x.counterpart}: severed. The reason recorded is ${x.reason}, and neither court disputes it.`,
+    (x) => `Trade with ${x.counterpart}: ${x.band}, chiefly ${x.good}, and chiefly one way.`,
+    (x) => `Trade with ${x.counterpart}: reviving. The first carts in a generation came up the ${x.route} last season.`,
     (x) => `Trade with ${x.counterpart}: ${x.band}, and seasonal; the ${x.route} is shut from the first frost to the thaw.`,
-    (x) => `Trade with ${x.counterpart}: ${x.band} — steady for years, and nobody at the guildhall can name the year it began.`,
+    (x) => `Trade with ${x.counterpart}: ${x.band}. Steady for years, and nobody at the guildhall can name the year it began.`,
   ],
 });
 

@@ -579,7 +579,7 @@ export function heraldTellingRegister({
     truncated: rootClauseless || links.some((l) => l.redacted || l.clauseless),
   });
 
-  const text = `${composeSentences({ links, rootClause, held }).join('; ')} — ${terminalText}.`;
+  const text = `${composeSentences({ links, rootClause, held }).join('; ')}: ${terminalText}.`;
   return { links, text, terminal: terminalText };
 }
 

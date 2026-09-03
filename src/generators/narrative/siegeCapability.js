@@ -59,7 +59,7 @@ export const generateSiegeCapability = (
     : `${tensionClause}.`;
 
   return (
-    `The ${eventName} is still present in living memory — ` +
+    `The ${eventName} is still present in living memory: ` +
     punctuatedTension
   );
 };

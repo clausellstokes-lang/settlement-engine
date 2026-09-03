@@ -84,7 +84,7 @@ function reportTerrainFit(bridge, data, showToast) {
       const pack = normalizeSpatialPack(reply?.pack);
       if (pack.cellCount <= 0) return;
       if (terrainAgreement(declared, pack, data.cellId) !== 'disagrees') return;
-      showToast('info', `${data.name || 'That settlement'} is ${declared}, but the map here is not — its dossier and its geography will disagree.`);
+      showToast('info', `${data.name || 'That settlement'} is ${declared}, but the map here is not. Its dossier and its geography will disagree.`);
     } catch (_) { /* advisory only: a slow, absent or failed pack read never surfaces */ }
   })();
 }

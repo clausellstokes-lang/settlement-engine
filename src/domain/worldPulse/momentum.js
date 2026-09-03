@@ -1162,20 +1162,20 @@ export function climbDownNews(actorId, targetId, name, stock, cliff, crack, exit
     //   would vanish; with it the Chronicle can also tell a DM order from an emergent crack.
     id: `wizard_news.${tick}.momentum_climb_down.${stablePart(origin)}.${stablePart(actorId)}.${stablePart(targetId)}`,
     kind: 'momentum_climb_down',
-    headline: faced ? `${A} climbs down from its war on ${Tn} — with honour intact` : `${A} climbs down from its war on ${Tn}`,
+    headline: faced ? `${A} climbs down from its war on ${Tn}, with honour intact` : `${A} climbs down from its war on ${Tn}`,
     // TE-HERALD-1. `depth` was the commitment stock as a multiple of the reconsideration
     // cliff and existed ONLY to be printed — the entry carries no typed home for it, so it
     // is deleted rather than left unused (EMERGENT row E-HER-7). What the reader is told is
     // the whole content of "past the cliff": the war had been held past the point where
     // turning back was cheap.
     summary: faced
-      ? `${A} had held its war on ${Tn} well past the point of easy return, but a ${faced} let the crown reverse course and still call it a victory — the reversal cost less.`
-      : `${A} had held its war on ${Tn} well past the point of easy return. Reversing it now spends real credibility and legitimacy — the price of the proud hold come due.`,
+      ? `${A} had held its war on ${Tn} well past the point of easy return, but a ${faced} let the crown reverse course and still call it a victory. The reversal cost less.`
+      : `${A} had held its war on ${Tn} well past the point of easy return. Reversing it now spends real credibility and legitimacy: the price of the proud hold come due.`,
     reasons: [
       `The war had been held long past the point where turning back was cheap, so this is a genuine climb-down and not a free reversal.`,
       faced
         ? `The ${faced} off-ramp took ${reliefWord} of the price off; the reversal could be told as a win.`
-        : `No face-saving off-ramp — the full climb-down price fell on the seat.`,
+        : `No face-saving off-ramp: the full climb-down price fell on the seat.`,
     ],
     settlementIds: [String(actorId), String(targetId)],
     significance: 'major',

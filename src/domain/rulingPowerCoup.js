@@ -150,7 +150,7 @@ export function resolveCoupVerdict({ settlement, rng, severity = 0.6, rulingAuth
   if (!challengers.length) {
     return {
       holds: true, pHold: 1, roll: 0, winner: null, challengers, incumbent,
-      reason: 'No faction holds enough power to move against the seat — the plot collapses on its own.',
+      reason: 'No faction holds enough power to move against the seat. The plot collapses on its own.',
     };
   }
 
@@ -214,7 +214,7 @@ export function resolveCoupVerdict({ settlement, rng, severity = 0.6, rulingAuth
     winner: { name: winner.name, archetype: winner.archetype }, challengers, incumbent,
     reason: incumbent.gated
       ? `${winner.name} united the strongest opposition and out-maneuvered both the seat and its rivals.`
-      : `${incumbent.name || 'The ruling power'}'s case never re-entered the field — ${winner.name} took the seat near-unopposed.`,
+      : `${incumbent.name || 'The ruling power'}'s case never re-entered the field. ${winner.name} took the seat near-unopposed.`,
   };
 }
 

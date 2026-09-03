@@ -590,12 +590,12 @@ export function processLies({
         id: `wizard_news.${now}.infowar_lie_exposed.${stablePart(rec.liarId)}.${stablePart(rec.audienceId)}`,
         kind: 'infowar_lie_exposed',
         headline: `${name(rec.liarId)}'s bluff is exposed`,
-        summary: `A telling ${name(rec.liarId)} planted in ${name(rec.audienceId)} — that its strength was greater than it is — has met independent word and collapsed. The lie traces to ${name(rec.liarId)}'s own court.`,
+        summary: `A telling ${name(rec.liarId)} planted in ${name(rec.audienceId)} (that its strength was greater than it is) has met independent word and collapsed. The lie traces to ${name(rec.liarId)}'s own court.`,
         reasons: [
           contradicted
             ? `${name(rec.audienceId)}'s reckoning re-anchored toward the truth; the exaggeration no longer holds.`
             : `The bluff outlived its shelf life; a lie meets contradiction in the end.`,
-          `The court that lies to neighbours lies to its own people — a legitimacy wound and a people-held grievance ride with the credibility charge.`,
+          `The court that lies to neighbours lies to its own people. A legitimacy wound and a people-held grievance ride with the credibility charge.`,
           // IN-0a: a BOUGHT lie names its seller here, and its buyer where the lineage
           // still carries one. Empty for a court's own bluff ⇒ byte-identical for every
           // exposure a world without both information flags lit can produce.
@@ -1031,10 +1031,10 @@ export function processSight({ snapshot, priorSight, secrecy, beliefMaps, rng, t
             id: `wizard_news.${now}.infowar_spy_exposed.${stablePart(watcherId)}.${stablePart(targetId)}`,
             kind: 'infowar_spy_exposed',
             headline: `${name(watcherId)}'s eyes in ${name(targetId)} go quiet`,
-            summary: `${name(targetId)} closed its gates and caught the watchers within: ${name(watcherId)}'s paid eyes are exposed. The lineage traces back to ${name(watcherId)}'s own court — a covert watch, now a public grievance.`,
+            summary: `${name(targetId)} closed its gates and caught the watchers within: ${name(watcherId)}'s paid eyes are exposed. The lineage traces back to ${name(watcherId)}'s own court: a covert watch, now a public grievance.`,
             reasons: [
               `${name(targetId)}'s secrecy tightened until the informants were found; deniability collapsed with the lineage.`,
-              `A court caught spying on a neighbour pays in credibility at home and grievance abroad — the blowback the covert instruments always carry.`,
+              `A court caught spying on a neighbour pays in credibility at home and grievance abroad. The blowback the covert instruments always carry.`,
             ],
             settlementIds: [String(watcherId), String(targetId)],
             significance: 'notable',
@@ -1405,9 +1405,9 @@ export function advanceInformationStatecraft({
           ? `Riders from ${nameFn(String(rec.sellerId))} bring ${nameFn(receiverId)} word of ${nameFn(subjectId)}`
           : `${nameFn(receiverId)} buys ${nameFn(String(rec.sellerId))}'s read of ${nameFn(subjectId)}`,
         summary: gift
-          ? `${nameFn(String(rec.sellerId))} shared what it knew of ${nameFn(subjectId)} — a gift of intelligence that binds like aid given in need.`
-          : `${nameFn(receiverId)} paid ${nameFn(String(rec.sellerId))} for its read of ${nameFn(subjectId)} — intelligence changing hands as a favor owed.`,
-        reasons: [`The report carries ${nameFn(String(rec.sellerId))}'s own certainty, no better — a courier's word is only as sure as its source.`],
+          ? `${nameFn(String(rec.sellerId))} shared what it knew of ${nameFn(subjectId)}: a gift of intelligence that binds like aid given in need.`
+          : `${nameFn(receiverId)} paid ${nameFn(String(rec.sellerId))} for its read of ${nameFn(subjectId)}. Intelligence changing hands as a favor owed.`,
+        reasons: [`The report carries ${nameFn(String(rec.sellerId))}'s own certainty, no better. A courier's word is only as sure as its source.`],
         settlementIds: [String(rec.sellerId), receiverId, subjectId],
         significance: 'notable',
         severity: 0.35, // information changing hands: the lightest material beat here

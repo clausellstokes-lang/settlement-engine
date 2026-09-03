@@ -34,7 +34,7 @@ export function whereaboutsLine(whereabouts, resolveName) {
   const place = placeOf(String(w.placeId || ''), resolveName);
   const purpose = (/** @type {Record<string, string>} */ (PURPOSE_LABEL))[String(w.purposeKind || '')] || 'business abroad';
   switch (w.state) {
-    case 'hostage': return `Held in ${place} — the ransom is being raised.`;
+    case 'hostage': return `Held in ${place}. The ransom is being raised.`;
     case 'returning': return `On the road home from ${place}.`;
     case 'visiting': return `Away in ${place}, on ${purpose}.`;
     case 'traveling': return `On the road to ${place}, on ${purpose}.`;

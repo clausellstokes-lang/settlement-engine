@@ -227,16 +227,16 @@ function causalReceipt(tag, driftBand) {
 /** @type {Readonly<Record<'dear'|'cheap', ReadonlyArray<string>>>} */
 export const CRIER_FRAMES = Object.freeze({
   dear: Object.freeze([
-    '{label} runs {phrase} — dear, {receipt}.',
+    '{label} runs {phrase}: dear, {receipt}.',
     '{label} is dear now, {phrase}, {receipt}.',
-    "They're asking {phrase} for {label} — dear, {receipt}.",
-    '{label} fetches {phrase} these days — dear, {receipt}.',
+    "They're asking {phrase} for {label}: dear, {receipt}.",
+    '{label} fetches {phrase} these days: dear, {receipt}.',
   ]),
   cheap: Object.freeze([
-    '{label} runs {phrase} — cheap, {receipt}.',
+    '{label} runs {phrase}: cheap, {receipt}.',
     '{label} is cheap now, {phrase}, {receipt}.',
-    "There's {label} going for {phrase} — cheap, {receipt}.",
-    '{label} fetches {phrase} these days — cheap, {receipt}.',
+    "There's {label} going for {phrase}: cheap, {receipt}.",
+    '{label} fetches {phrase} these days: cheap, {receipt}.',
   ]),
 });
 

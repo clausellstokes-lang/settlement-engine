@@ -72,12 +72,12 @@ export const STAGE_TEMPLATES = Object.freeze({
     'Sole-cause corruption, ended: the reason passed, and so did the compromise.',
   ],
   historicized: [
-    'The compromise persists, but its origin is past now — {cause}, once, and the habit outlived the reason.',
+    'The compromise persists, but its origin is past now: {cause}, once, and the habit outlived the reason.',
     'What began when {cause} endures out of habit; the ledger never closed.',
     'The originating cause is history now; the corruption carries on regardless.',
   ],
   'exposed-public': [
-    'The compromise is public now — {cause} was only the beginning; this is a scandal.',
+    'The compromise is public now: {cause} was only the beginning; this is a scandal.',
     'Once covert, now revealed: the arrangement that began when {cause} has broken into the open.',
     'The quiet is over. What started when {cause} is a public reckoning.',
   ],
@@ -91,7 +91,7 @@ export const STAGE_TEMPLATES = Object.freeze({
 /** The register-tuned historicize voice for the YEARS-PAST band (the constitution's
  *  PIN: "the lean years" language is impossible below years-past). */
 const HISTORICIZE_YEARS_PAST = Object.freeze([
-  'It began in the lean years — {cause} — and though that is long past, the habit endures. The ledger never closed.',
+  'It began in the lean years ({cause}), and though that is long past, the habit endures. The ledger never closed.',
   'Years ago, {cause}. The reason is history; the corruption is not.',
 ]);
 

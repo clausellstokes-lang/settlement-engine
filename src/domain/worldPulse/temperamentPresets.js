@@ -48,7 +48,7 @@ export const TEMPERAMENTS = Object.freeze([
   },
   {
     id: 'the_great_game', label: 'The great game', basePreset: 'full_simulation', overrides: {},
-    description: 'Every gear turning at once — the ceiling of the simulation. Sieges, levies, spreading creeds, shifting seasons, and a world that carries its own story forward.',
+    description: 'Every gear turning at once: the ceiling of the simulation. Sieges, levies, spreading creeds, shifting seasons, and a world that carries its own story forward.',
   },
 ]);
 

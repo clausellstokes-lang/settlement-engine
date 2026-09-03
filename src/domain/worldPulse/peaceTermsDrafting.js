@@ -105,16 +105,16 @@ export function treasuryShareWords(magnitude) {
 export function draftReceipt(type, asset, years, magnitude) {
   const shareWord = treasuryShareWords(magnitude);
   switch (type) {
-    case 'tribute': return `A tribute stream — ${shareWord} of the treasury for ${years} year${years === 1 ? '' : 's'}; it was always the coin they wanted.`;
-    case 'resource_share': return `${asset.good || 'The staple export'} shall flow to the victor — ${shareWord} of it for ${years} year${years === 1 ? '' : 's'}.`;
-    case 'reparations': return `Reparations in ${years} year${years === 1 ? '' : 's'} of installments — the price of the war laid on the loser.`;
-    case 'restitution': return `Restitution for a debt long unpaid — ${shareWord} for ${years} year${years === 1 ? '' : 's'}; the old grain-years, called in at last.`;
-    case 'compelled_alliance': return `Forced allyship for ${years} year${years === 1 ? '' : 's'} — a banner compelled, and compelled loyalty rots.`;
-    case 'demilitarization': return `A mobilization cap for ${years} year${years === 1 ? '' : 's'} — the beaten foe may not rearm.`;
-    case 'non_aggression': return `A non-aggression pact ${years} year${years === 1 ? '' : 's'} — no war between these courts while it stands.`;
-    case 'occupation_continuation': return `The occupation continues ${years} year${years === 1 ? '' : 's'} — the garrison stays at the walls.`;
-    case 'puppet_seat': return `A victor-aligned seat installed (registration seam) — cheap control, brittle control.`;
-    case 'disclosure': return `Observer/disclosure clause (registration seam) — the loser's court opened to the victor's eyes.`;
+    case 'tribute': return `A tribute stream: ${shareWord} of the treasury for ${years} year${years === 1 ? '' : 's'}; it was always the coin they wanted.`;
+    case 'resource_share': return `${asset.good || 'The staple export'} shall flow to the victor: ${shareWord} of it for ${years} year${years === 1 ? '' : 's'}.`;
+    case 'reparations': return `Reparations in ${years} year${years === 1 ? '' : 's'} of installments: the price of the war laid on the loser.`;
+    case 'restitution': return `Restitution for a debt long unpaid: ${shareWord} for ${years} year${years === 1 ? '' : 's'}; the old grain-years, called in at last.`;
+    case 'compelled_alliance': return `Forced allyship for ${years} year${years === 1 ? '' : 's'}. A banner compelled, and compelled loyalty rots.`;
+    case 'demilitarization': return `A mobilization cap for ${years} year${years === 1 ? '' : 's'}: the beaten foe may not rearm.`;
+    case 'non_aggression': return `A non-aggression pact ${years} year${years === 1 ? '' : 's'}: no war between these courts while it stands.`;
+    case 'occupation_continuation': return `The occupation continues ${years} year${years === 1 ? '' : 's'}. The garrison stays at the walls.`;
+    case 'puppet_seat': return `A victor-aligned seat installed (registration seam): cheap control, brittle control.`;
+    case 'disclosure': return `Observer/disclosure clause (registration seam): the loser's court opened to the victor's eyes.`;
     default: return `Term ${type} for ${years} year${years === 1 ? '' : 's'}.`;
   }
 }

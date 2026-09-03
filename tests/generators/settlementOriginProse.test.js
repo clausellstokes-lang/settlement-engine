@@ -52,9 +52,9 @@ afterEach(() => clearActiveRng());
 /** The pre-RR sentence of every arm, transcribed from narrativeGenerator.js at
  *  0ab5e03e. Independent of the module under test on purpose (law 1). */
 const PRE_RR_BODY = {
-  road: 'Established along a road route — trade flows in, goods flow out, people pass through.',
-  crossroads: 'Positioned at a major crossroads — trade flows through here by geography, not by choice.',
-  river: 'Built along the river — water access shapes every economic decision.',
+  road: 'Established along a road route. Trade flows in, goods flow out, people pass through.',
+  crossroads: 'Positioned at a major crossroads. Trade flows through here by geography, not by choice.',
+  river: 'Built along the river: water access shapes every economic decision.',
   'port.generic': 'A port settlement whose wharves and navigable water define its trade.',
   'port.riverside': 'A river port built around navigable inland water; barges, wharves, and seasonal river traffic shape its economy.',
   'port.coastal': 'A coastal seaport whose existence is inseparable from the sea.',

@@ -182,10 +182,10 @@ describe('FaithSection — the live faith panel + cause chains as sentences', ()
     expect(container.textContent).toMatch(/no longer lives like its god/i);
     expect(container.textContent).toMatch(/Crisis calls the faithful home/i);
     // The fall sentence is in the DOM, inside the cause-chain block that holds those siblings.
-    expect(container.textContent).toMatch(/The patron fell — suppressed: the creed was driven from its seat by force/);
+    expect(container.textContent).toMatch(/The patron fell\. Suppressed: the creed was driven from its seat by force/);
     // AND IT LEADS: a seat changing hands outranks devotion-drift lines, so it renders FIRST
     // inside the block. Ordering is the claim — compare positions, not mere presence.
-    const fallAt = container.textContent.indexOf('The patron fell —');
+    const fallAt = container.textContent.indexOf('The patron fell.');
     const driftAt = container.textContent.search(/no longer lives like its god/i);
     const sinkAt = container.textContent.search(/Crisis calls the faithful home/i);
     expect(fallAt).toBeGreaterThan(-1);

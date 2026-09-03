@@ -20,7 +20,7 @@ export const dossierFixture = Object.freeze({
   character: 'A wall town that learned to trade with the sea it once feared.',
   emblemKind: 'watch',
   arrival:
-    'You come to Thornwall by the coast road, and the wall shows first — grey stone the height of four men, salt-stained on its seaward face. The gate stands open in daylight; a toll-clerk keeps a ledger you are welcome to read and unwelcome to argue with. Beyond, the town falls toward a tidal harbour where the fishing fleet lies careened at low water and the warehouses smell of pitch and drying cod.',
+    'You come to Thornwall by the coast road, and the wall shows first: grey stone the height of four men, salt-stained on its seaward face. The gate stands open in daylight; a toll-clerk keeps a ledger you are welcome to read and unwelcome to argue with. Beyond, the town falls toward a tidal harbour where the fishing fleet lies careened at low water and the warehouses smell of pitch and drying cod.',
   situation: [
     { label: 'Power', score: 62, note: 'A merchant council, lately at odds with the harbour guild.' },
     { label: 'Economy', score: 71, note: 'Salt, salt-cod, and the toll on the coast road.' },
@@ -29,7 +29,7 @@ export const dossierFixture = Object.freeze({
   crisis: {
     label: 'The harbour silts',
     summary: 'A winter of storms has pushed the bar across the harbour mouth; deep-keeled ships now wait for the tide or unload offshore.',
-    hook: 'The council will pay well for a survey of the bar — and better for anyone who can move it.',
+    hook: 'The council will pay well for a survey of the bar, and better for anyone who can move it.',
   },
   npcs: [
     { name: 'Alderman Coss Rell', role: 'Head of the merchant council', trait: 'Reads every ledger; trusts none of them.' },
@@ -39,12 +39,12 @@ export const dossierFixture = Object.freeze({
   hooks: [
     'The toll-clerk’s ledger shows a barge that pays the road toll but is never seen on the road.',
     'Mother Vane wants the old sea-shrine on the bar re-consecrated before the dredging disturbs it.',
-    'A Redwater factor is quietly buying up silted-harbour warehouses at a loss — or an investment.',
+    'A Redwater factor is quietly buying up silted-harbour warehouses at a loss, or an investment.',
   ],
   institutions: ['The Merchant Council', 'The Harbour Guild', 'The Sea-Shrine of the Vane', 'The Coast-Road Toll'],
   provenance: [
     'Population from the tier band (Town: 1,000–5,000), settled near the median.',
-    'The harbour crisis is this settlement’s active stressor — it will resolve, worsen, or spread as the region advances.',
+    'The harbour crisis is this settlement’s active stressor. It will resolve, worsen, or spread as the region advances.',
     'The Redwater factor is a live relationship edge to a neighbouring settlement.',
   ],
 });
@@ -72,8 +72,8 @@ export const pricingFixture = Object.freeze({
     { name: 'Founder Charter', price: '$99', cadence: 'one-time', tagline: 'The first thirty supporters keep Cartographer forever.', cta: 'Claim a founder seat', featured: false,
       features: ['Everything Cartographer runs, forever', 'A founder’s mark on your dossiers', 'A direct line to the maker', 'Early access to new simulators'] },
   ],
-  bundle: { name: 'The settlement bundle', price: '$2.99', body: 'One settlement’s complete export bundle. Pay for the thing, own the thing — it downloads, it prints, it survives cancellation. No account required.' },
-  serviceLine: 'Cartographer is a service, not a feature key: your realm keeps living — wars resolve, prices move, chronicles write — and every month of simulation is a month of our servers doing it.',
+  bundle: { name: 'The settlement bundle', price: '$2.99', body: 'One settlement’s complete export bundle. Pay for the thing, own the thing: it downloads, it prints, it survives cancellation. No account required.' },
+  serviceLine: 'Cartographer is a service, not a feature key: your realm keeps living (wars resolve, prices move, chronicles write), and every month of simulation is a month of our servers doing it.',
 });
 
 export const libraryFixture = Object.freeze({

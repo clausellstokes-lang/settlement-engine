@@ -308,13 +308,13 @@ export function moralReckoningNewsEntries(reckonings, nameFor = (id) => String(i
     const betrayed = FRIENDLY_TYPES.has(String(r.trueRelationship));
     const headline = `${mover} reckons with an unjust war`;
     const summary = betrayed
-      ? `${mover} marched on ${victim} — a former friend, not the enemy it believed. The gap between what it professed and what it did drifts its very character.`
+      ? `${mover} marched on ${victim}: a former friend, not the enemy it believed. The gap between what it professed and what it did drifts its very character.`
       : `${mover} marched on ${victim}, a settlement that was no threat. An unjust war leaves a moral scar on the aggressor.`;
     const reasons = [
       `${mover} instigated conflict against ${victim} on a belief the world had already left behind.`,
-      `The reckoning: its derived alignment drifts (malice ${r.malice.toFixed(2)}, lawlessness ${r.lawlessness.toFixed(2)}) — sharpest for a lawful-good aggressor.`,
+      `The reckoning: its derived alignment drifts (malice ${r.malice.toFixed(2)}, lawlessness ${r.lawlessness.toFixed(2)}), sharpest for a lawful-good aggressor.`,
       r.instigations > 1
-        ? `This is unjust war number ${r.instigations} — the drift compounds into a spiral, not a lapse.`
+        ? `This is unjust war number ${r.instigations}. The drift compounds into a spiral, not a lapse.`
         : 'Left un-repeated, the drift decays as the settlement’s conscience reasserts (the reckoning).',
     ];
     return {

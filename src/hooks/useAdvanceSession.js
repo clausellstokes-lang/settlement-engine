@@ -263,7 +263,7 @@ export function useAdvanceSession({ activeCampaignId, worldPulseInterval, openIn
     setCanonizeBusy(true);
     try {
       await canonizeCampaignWorld(activeCampaignId);
-      showToast('success', 'World canonized. Its history begins now — advance when ready.');
+      showToast('success', 'World canonized. Its history begins now: advance when ready.');
     } catch (err) {
       console.warn('[WorldMap] canonize world failed', err);
       showToast('error', `Canonize failed: ${err?.message || err}`);

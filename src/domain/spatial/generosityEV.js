@@ -771,25 +771,25 @@ export function generosityReceipt({ verdict, giverId, receiverId, giverName, rec
       return `${g}'s granaries stayed shut: the army at the front eats first.`;
     }
     if (terms.route >= terms.margin && terms.route > 0.2) {
-      return `${g} held the grain back — the road to ${r} is cut, and seized bushels feed the enemy.`;
+      return `${g} held the grain back. The road to ${r} is cut, and seized bushels feed the enemy.`;
     }
     if (terms.dependency > 0.3) {
       return `${g}'s patience thins: ${r} asks again, and a repeated dole is a governance problem, not a harvest one.`;
     }
-    return `${g} kept the granaries shut — the reserve sits a razor above its own hunger line.`;
+    return `${g} kept the granaries shut. The reserve sits a razor above its own hunger line.`;
   }
   if (verdict === VERDICTS.GIVE_AS_CREDIT) {
-    return `${g} advanced grain to ${r} — as a loan, not a gift: the ledger of the debt begins.`;
+    return `${g} advanced grain to ${r}. As a loan, not a gift: the ledger of the debt begins.`;
   }
   // A gift (full or partial).
   const reasons = [];
-  if (strategicOverride) reasons.push(`their ground shields ${g}'s flank — the granary opened as defense spending`);
+  if (strategicOverride) reasons.push(`their ground shields ${g}'s flank: the granary opened as defense spending`);
   if (terms.history > 0.35) reasons.push('the old debt from the flood-year');
   if (terms.bond > 0.4) reasons.push('the bond between the two courts');
   if (terms.conscience > 0.3) reasons.push('plain mercy for the hungry');
   if (terms.faith > 0.3) reasons.push('a shared altar');
   if (leverageIntent > 0.3) reasons.push('and a favour owed is a favour banked');
-  const tail = reasons.length ? ` — ${reasons.slice(0, 3).join(', ')}` : '';
+  const tail = reasons.length ? `: ${reasons.slice(0, 3).join(', ')}` : '';
   const head = verdict === VERDICTS.GIVE_PARTIAL
     ? `A tenth of what was asked went to ${r}, with apologies`
     : `Grain went to ${r}`;

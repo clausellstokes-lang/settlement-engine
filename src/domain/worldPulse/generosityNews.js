@@ -80,7 +80,7 @@ export function refusalNews({ giverName, receiverName, receipt, damage, tick, no
  * @returns {Record<string, unknown>}
  */
 export function defaultNews({ debtorName, creditorName, tick, now }) {
-  const summary = `${debtorName} defaulted on the grain-debt owed to ${creditorName} — the ledger sours into a grievance.`;
+  const summary = `${debtorName} defaulted on the grain-debt owed to ${creditorName}. The ledger sours into a grievance.`;
   return {
     id: `wizard_news.${tick}.credit_default.${stablePart(debtorName)}.${stablePart(creditorName)}`,
     tick,
@@ -110,7 +110,7 @@ export function defaultNews({ debtorName, creditorName, tick, now }) {
  * @returns {Record<string, unknown>}
  */
 export function refugeNews({ giverName, receiverName, weight, tick, now }) {
-  const summary = `${giverName} opens its gates to the displaced of ${receiverName} — refuge in the ally's exodus.`;
+  const summary = `${giverName} opens its gates to the displaced of ${receiverName}: refuge in the ally's exodus.`;
   return {
     id: `wizard_news.${tick}.refuge.${stablePart(giverName)}.${stablePart(receiverName)}`,
     tick,
@@ -171,7 +171,7 @@ export function purchaseNews({ giverName, receiverName, magnitude, receipt, tick
  * @returns {Record<string, unknown>}
  */
 export function tradeOvertureNews({ giverName, receiverName, warmth, tick, now }) {
-  const summary = `${giverName}'s sustained aid to ${receiverName} warms into a trade overture — the grain road turns toward a trade road.`;
+  const summary = `${giverName}'s sustained aid to ${receiverName} warms into a trade overture. The grain road turns toward a trade road.`;
   return {
     id: `wizard_news.${tick}.trade_overture.${stablePart(giverName)}.${stablePart(receiverName)}`,
     tick,

@@ -247,7 +247,7 @@ const deriveBaselineStability = ({
   neighbourRelationship,
 }) => {
   if (stressFlags.stateCrime) return 'Enforced Order (authoritarian)';
-  if (stressFlags.crimeIsGovt) return 'Unstable — criminal governance';
+  if (stressFlags.crimeIsGovt) return 'Unstable: criminal governance';
   if (stressFlags.crusaderSynthesis) return 'Rigid (militant theocracy)';
   if (stressFlags.merchantArmy) return 'Fragile (private security, no public law)';
 
@@ -289,22 +289,22 @@ const applyStressStability = (baselineStability, hasStress) => {
     return 'Critical (active siege — survival priority)';
   }
   if (hasStress('occupied')) {
-    return 'Suppressed (under occupation — resistance simmers)';
+    return 'Suppressed (under occupation: resistance simmers)';
   }
   if (hasStress('politically_fractured')) {
-    return 'Fractured — no stable governing authority';
+    return 'Fractured: no stable governing authority';
   }
   if (hasStress('recently_betrayed')) {
-    return 'Shaken — institutional trust collapsed';
+    return 'Shaken: institutional trust collapsed';
   }
   if (hasStress('famine')) {
-    return 'Desperate — hunger is eroding order';
+    return 'Desperate: hunger is eroding order';
   }
   if (hasStress('plague_onset')) {
-    return 'Anxious — disease is overriding normal authority';
+    return 'Anxious. Disease is overriding normal authority';
   }
   if (hasStress('succession_void')) {
-    return 'Volatile — power is available to whoever moves first';
+    return 'Volatile: power is available to whoever moves first';
   }
   if (hasStress('infiltrated')) return baselineStability;
   if (hasStress('indebted')) {
@@ -444,7 +444,7 @@ const deriveBaselineConflict = ({
   }
   if (institutionFlags.militaryEffective > 68) {
     if (hasMilitaryInstitution) {
-      return 'The military commanders are pushing for expanded authority over civilian courts — and the council is losing ground.';
+      return 'The military commanders are pushing for expanded authority over civilian courts, and the council is losing ground.';
     }
     if (hasCivicInstitution) {
       return 'The village militia captain is pushing for authority over disputes that the reeve used to handle.';
@@ -513,7 +513,7 @@ const buildBetrayalNarrative = ({
   governingFactionName,
 }) => {
   if (hasRoyalAuthority && hasNoblePower) {
-    return 'A noble house passed intelligence to a rival power. The crown knows. The house denies it. The crown cannot yet afford to act — it needs their levies.';
+    return 'A noble house passed intelligence to a rival power. The crown knows. The house denies it. The crown cannot yet afford to act. It needs their levies.';
   }
   if (!hasCivicInstitution) {
     return 'Someone talked. Information that should have stayed inside the settlement reached an outside party. No one has admitted it. Everyone suspects someone.';
@@ -542,7 +542,7 @@ const buildInsurgencyNarrative = (
     (institutionFlags.economyOutput || 50) < 48;
 
   if (insurgencyOutmusclesAuthority) {
-    return "The commons no longer accept the authority's account of events. Inflammatory pamphlets are being distributed. Two guild masters refused to attend the last civic assembly. The governing faction has intelligence about cells meeting at night — but hasn't moved, because moving publicly would confirm what it officially denies.";
+    return "The commons no longer accept the authority's account of events. Inflammatory pamphlets are being distributed. Two guild masters refused to attend the last civic assembly. The governing faction has intelligence about cells meeting at night, but hasn't moved, because moving publicly would confirm what it officially denies.";
   }
   return (
     'The challenge to the governing faction is institutional, not popular. ' +
@@ -559,13 +559,13 @@ const buildWartimeNarrative = (institutionFlags, governingFactionName) => {
 
   if (isWellSupplied) {
     return (
-      'The war is present here as money and absence. The garrison has doubled in size and is well-supplied — the crown is paying for this one. ' +
+      'The war is present here as money and absence. The garrison has doubled in size and is well-supplied. The crown is paying for this one. ' +
       'Contracts for grain, leather, and ironwork are flowing to anyone with the capacity to fill them. ' +
       'The men who left to fight have not returned, which is a grief that runs beneath the commerce. ' +
       `${governingFactionName} is navigating the difference between what it can extract for the war effort and what the settlement can actually spare.`
     );
   }
-  return 'The war is present here as scarcity and fear. Conscription has taken workers, not soldiers — the farms and workshops feel their absence. Supply caravans pass through on crown requisition and local needs come second. Prices have risen and will rise further. A crown officer arrived last week and left with a list of what will be requisitioned next month. The governing faction signed the order. There was no alternative that anyone could see.';
+  return 'The war is present here as scarcity and fear. Conscription has taken workers, not soldiers. The farms and workshops feel their absence. Supply caravans pass through on crown requisition and local needs come second. Prices have risen and will rise further. A crown officer arrived last week and left with a list of what will be requisitioned next month. The governing faction signed the order. There was no alternative that anyone could see.';
 };
 
 const buildReligiousConversionNarrative = (governingFactionName) => {
@@ -577,7 +577,7 @@ const buildReligiousConversionNarrative = (governingFactionName) => {
   }
   if (variant === 1) {
     return (
-      'The schism is now formal. Two priests, two congregations, two sets of records — births, deaths, marriages — that may or may not be recognised depending on which authority the other party acknowledges. ' +
+      'The schism is now formal. Two priests, two congregations, two sets of records (births, deaths, marriages) that may or may not be recognised depending on which authority the other party acknowledges. ' +
       `${governingFactionName || 'The governing authority'} has not declared which succession is legitimate, ` +
       'which means every legal document dependent on religious sanction is in a grey zone.'
     );
@@ -599,7 +599,7 @@ const buildMigrationNarrative = (institutionFlags, governingFactionName) => {
       `${governingFactionName} is being asked to do something about it and cannot agree what that something is.`
     );
   }
-  return 'Three families left this week. Two more last week. The departure is quiet and orderly — which makes it worse. The people leaving have thought it through. What remains is those who cannot leave, those who choose to stay, and institutions running on fewer people than they were designed for.';
+  return 'Three families left this week. Two more last week. The departure is quiet and orderly, which makes it worse. The people leaving have thought it through. What remains is those who cannot leave, those who choose to stay, and institutions running on fewer people than they were designed for.';
 };
 
 const buildSlaveRevoltNarrative = (institutionNames) => {
@@ -633,7 +633,7 @@ const buildStressNarratives = ({
 
   return {
     under_siege:
-      'The settlement is under active siege. Every resource decision is a military decision. The debate is no longer about policy — it is about survival.',
+      'The settlement is under active siege. Every resource decision is a military decision. The debate is no longer about policy. It is about survival.',
     famine:
       hasMilitaryInstitution || hasCivicInstitution || hasMarketInstitution
         ? 'Food shortages have sharpened every tension in the settlement. Those with stocks are not advertising the fact. Those without are watching those with.'

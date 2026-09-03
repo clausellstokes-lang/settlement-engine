@@ -365,7 +365,7 @@ function explainImpact(kind, channel, localDelta, goods) {
     return `Religious authority around ${localDelta.sourceSettlementName || channel.from} is under regional strain.`;
   }
   if (kind === 'relief') {
-    return `Recovery at ${localDelta.sourceSettlementName || channel.from} eases the pressure on connected trade — ${goodText} flows again.`;
+    return `Recovery at ${localDelta.sourceSettlementName || channel.from} eases the pressure on connected trade: ${goodText} flows again.`;
   }
   return `Regional impact through ${channel.type}.`;
 }

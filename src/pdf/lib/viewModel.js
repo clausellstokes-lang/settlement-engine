@@ -680,7 +680,7 @@ function npcsSlice(active) {
     const secretsArr = Array.isArray(sec) ? sec.slice() : [];
     if (n?.secret && typeof n.secret === 'object' && n.secret.what) {
       secretsArr.push(n.secret.stakes
-        ? `${n.secret.what} — ${n.secret.stakes}`
+        ? `${n.secret.what}: ${n.secret.stakes}`
         : n.secret.what);
     }
     // Drop empty/blank entries so the SECRETS subsection vanishes when no real

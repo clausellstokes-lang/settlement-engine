@@ -258,7 +258,7 @@ const spareableMonthsOf = (/** @type {Mut} */ s) => {
 const generosityVerbPredicate = (/** @type {Mut} */ s) => {
   if (!qualifyingNeighbourOptions(s).length) {
     return no(['No allied, trade-partner, or vassal/patron neighbour to send grain to.'],
-      ['Broker an alliance or open a trade route first — generosity needs a qualifying bond (design law 1).']);
+      ['Broker an alliance or open a trade route first: generosity needs a qualifying bond (design law 1).']);
   }
   // The tenth-month flooring means anything under 0.1 spareable months moves ZERO grain.
   return gate(spareableMonthsOf(s) >= 0.1,
@@ -466,7 +466,7 @@ export const AFFORDANCE_MANIFEST = Object.freeze({
     // §3: the target dial lists only actually-compromised entities.
     targetOptions: (/** @type {Mut} */ s) => compromisedTargets(s),
     predicate: (/** @type {Mut} */ s) => gate(compromisedTargets(s).length > 0,
-      'Nothing here is compromised.', 'Impose corruption first — or let the rot spread on its own.'),
+      'Nothing here is compromised.', 'Impose corruption first, or let the rot spread on its own.'),
   }),
   IMPOSE_CORRUPTION: entry({
     type: 'IMPOSE_CORRUPTION', family: 'Power',
@@ -619,12 +619,12 @@ export const AFFORDANCE_MANIFEST = Object.freeze({
   // ── Folded types (§2: the fold is legible — each names its carrying verb) ──
   KILL_LEADER: entry({
     type: 'KILL_LEADER', family: 'People',
-    foldedInto: { via: 'KILL_NPC', note: 'A leader\'s death is authored as Kill / remove NPC — the consequences derive from the NPC\'s own pillar standing.' },
+    foldedInto: { via: 'KILL_NPC', note: 'A leader\'s death is authored as Kill / remove NPC. The consequences derive from the NPC\'s own pillar standing.' },
     predicate: () => no(['Folded into Kill / remove NPC.']),
   }),
   CUT_TRADE_ROUTE: entry({
     type: 'CUT_TRADE_ROUTE', family: 'Relations',
-    foldedInto: { via: 'SETTLEMENT_DISPUTE', note: 'A severed route is authored as Settlement dispute — pick the neighbour and sour the relationship.' },
+    foldedInto: { via: 'SETTLEMENT_DISPUTE', note: 'A severed route is authored as Settlement dispute: pick the neighbour and sour the relationship.' },
     predicate: () => no(['Folded into Settlement dispute.']),
   }),
   DAMAGE_INSTITUTION: entry({
@@ -634,7 +634,7 @@ export const AFFORDANCE_MANIFEST = Object.freeze({
   }),
   DEMOTE_NPC: entry({
     type: 'DEMOTE_NPC', family: 'People',
-    foldedInto: { via: 'PROMOTE_NPC', note: 'A demotion IS the merged Promote/Demote standing swap — a promote of A is a demote of B.' },
+    foldedInto: { via: 'PROMOTE_NPC', note: 'A demotion IS the merged Promote/Demote standing swap. A promote of A is a demote of B.' },
     predicate: () => no(['Folded into Promote/Demote NPC.']),
   }),
   REFUGEE_WAVE: entry({
@@ -644,7 +644,7 @@ export const AFFORDANCE_MANIFEST = Object.freeze({
   }),
   PLAGUE: entry({
     type: 'PLAGUE', family: 'War',
-    foldedInto: { via: 'APPLY_STRESSOR', note: 'PLAGUE arrives via Apply stressor (plague) — one fiction, one roaming stressor.' },
+    foldedInto: { via: 'APPLY_STRESSOR', note: 'PLAGUE arrives via Apply stressor (plague): one fiction, one roaming stressor.' },
     predicate: () => no(['Folded into Apply stressor.']),
   }),
   RAID_OR_MONSTER_ATTACK: entry({
@@ -659,7 +659,7 @@ export const AFFORDANCE_MANIFEST = Object.freeze({
   }),
   STARTED_RIOT: entry({
     type: 'STARTED_RIOT', family: 'War',
-    foldedInto: { via: 'APPLY_STRESSOR', note: 'A riot is authored as Apply stressor (unrest) — the aftermath condition follows.' },
+    foldedInto: { via: 'APPLY_STRESSOR', note: 'A riot is authored as Apply stressor (unrest). The aftermath condition follows.' },
     predicate: () => no(['Folded into Apply stressor.']),
   }),
 });
@@ -679,14 +679,14 @@ const VETO_PROSE = {
   no_criminal_org: () => 'No criminal organization operates here to link the NPC to.',
   swap_pair_incomplete: () => 'The standing swap needs both an NPC and a counterpart.',
   swap_pair_invalid: () => 'The standing swap needs two distinct NPCs that exist here.',
-  swap_cross_faction: d => `${d || 'The pair'} belong to different factions — standing swaps stay inside one faction.`,
+  swap_cross_faction: d => `${d || 'The pair'} belong to different factions: standing swaps stay inside one faction.`,
   cult_invalid: () => 'The cult names no deity.',
-  cult_is_patron: d => `${d || 'That deity'} already holds the patron seat — a patron cannot also be a cult.`,
+  cult_is_patron: d => `${d || 'That deity'} already holds the patron seat. A patron cannot also be a cult.`,
   cult_no_cult_slots: () => 'No cult slot at this settlement tier.',
   tier_unknown: d => `The settlement's tier ("${d}") is not on the tier ladder.`,
   tier_at_bound: d => d === 'promotion'
-    ? 'Already at the metropolis cap — no promotion possible.'
-    : 'Already at the thorp floor — no demotion possible.',
+    ? 'Already at the metropolis cap: no promotion possible.'
+    : 'Already at the thorp floor: no demotion possible.',
   empty_target: () => 'This change needs a target.',
   threat_not_found: d => `No active threat "${d}" to neutralize.`,
   neighbour_not_linked: d => `"${d}" is not a linked neighbour of this settlement.`,
@@ -697,10 +697,10 @@ const VETO_PROSE = {
   power_faction_not_found: d => `No faction "${d}" to hand power to.`,
   power_already_governing: d => `${d || 'That faction'} already holds power here.`,
   power_no_governing_faction: () => 'No faction currently holds the governing seat to transfer from.',
-  relief_unqualified: d => `${d || 'That neighbour'} holds no qualifying bond — grain relief needs an ally, trade partner, or vassal/patron (a decree overrides the willingness, never the law).`,
-  relief_nothing_to_send: () => 'The granary holds nothing above the reserve floor — no grain can be decreed away.',
-  credit_unqualified: d => `${d || 'That neighbour'} holds no qualifying bond — grain credit needs an ally, trade partner, or vassal/patron.`,
-  credit_nothing_to_lend: () => 'The granary holds nothing above the reserve floor — there is nothing to lend.',
+  relief_unqualified: d => `${d || 'That neighbour'} holds no qualifying bond. Grain relief needs an ally, trade partner, or vassal/patron (a decree overrides the willingness, never the law).`,
+  relief_nothing_to_send: () => 'The granary holds nothing above the reserve floor. No grain can be decreed away.',
+  credit_unqualified: d => `${d || 'That neighbour'} holds no qualifying bond. Grain credit needs an ally, trade partner, or vassal/patron.`,
+  credit_nothing_to_lend: () => 'The granary holds nothing above the reserve floor. There is nothing to lend.',
 };
 
 /** The DM-facing refusal sentence for a veto warning. Falls back to the terse
@@ -768,7 +768,7 @@ export function pressureSuggestions(settlement, cap = 3) {
       case 'regional_migration_pressure':
       case 'stressor_residual':
       case 'trade_route_cut':
-        push('RESOLVE_STRESSOR', `${label} grips the settlement — wind it down.`, c.triggeredAt?.sourceEventTargetId || null);
+        push('RESOLVE_STRESSOR', `${label} grips the settlement: wind it down.`, c.triggeredAt?.sourceEventTargetId || null);
         break;
       case 'corruption_exposed':
         push('CHANGE_RULING_POWER', `${label}: the scandal opens the seat to a challenger.`);
@@ -780,7 +780,7 @@ export function pressureSuggestions(settlement, cap = 3) {
         push('IMPAIR_FACTION', `${label}: the old power still has partisans to squeeze.`);
         break;
       case 'siege_lifted':
-        push('BROKERED_ALLIANCE', `${label}: relief won — bind the friendship.`);
+        push('BROKERED_ALLIANCE', `${label}: relief won, bind the friendship.`);
         break;
       default:
         push('RESOLVE_STRESSOR', `${label} weighs on the settlement.`, c.triggeredAt?.sourceEventTargetId || null);
@@ -789,7 +789,7 @@ export function pressureSuggestions(settlement, cap = 3) {
   }
   // Quiet town: suggest the corruption seam when a criminal org operates.
   if (out.length < cap && readCorruptionClimate(settlement).hasCriminalInst) {
-    push('IMPOSE_CORRUPTION', 'A criminal organization operates here — someone can be turned.');
+    push('IMPOSE_CORRUPTION', 'A criminal organization operates here. Someone can be turned.');
   }
   return out;
 }

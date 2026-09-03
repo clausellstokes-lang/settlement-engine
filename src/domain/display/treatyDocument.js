@@ -51,7 +51,7 @@ import { successionQuestionOpenLines } from './treatySuccessionDossier.js';
 export const TREATY_COMPLIANCE_VOICE = Object.freeze({
   economic: Object.freeze({
     honored: 'The tribute is paid on time, the wagons rolling as the treaty promised.',
-    strained: 'The tribute is paid, but grudgingly — the granaries grumble and the wagons run late.',
+    strained: 'The tribute is paid, but grudgingly: the granaries grumble and the wagons run late.',
     defaulted: 'The promised wagons no longer come; the tribute has stopped, and the oath lies broken here.',
   }),
   relational: Object.freeze({
@@ -65,7 +65,7 @@ export const TREATY_COMPLIANCE_VOICE = Object.freeze({
     defaulted: 'The cap on arms is thrown off, and the forbidden muster gathers in the open.',
   }),
   territorial: Object.freeze({
-    honored: 'The garrison keeps the walls without incident — resented, but unremoved.',
+    honored: 'The garrison keeps the walls without incident: resented, but unremoved.',
     strained: 'The garrison keeps the walls uneasily; the townsfolk chafe and stones are thrown.',
     defaulted: 'The garrison is besieged in the very town it holds; the occupation is repudiated.',
   }),
@@ -342,12 +342,12 @@ function decorate(doc, treaty = null, worldState = null) {
     ? `The seam that will tear first: the ${termLabel(doc.frayingType)}.`
     : null;
   const mediatorLine = doc.mediator && doc.mediator.name
-    ? `Brokered by ${doc.mediator.name}, torn between the courts — the terms came the lighter for it.`
+    ? `Brokered by ${doc.mediator.name}, torn between the courts. The terms came the lighter for it.`
     : null;
   const coalitionLine = doc.separateExit && doc.fracture
     ? `A separate peace: ${doc.victorName} peeled from a coalition of ${doc.fracture.coalitionSize}, its co-besiegers abandoned at the walls.`
     : (doc.coalitionScope && doc.coalitionScope.length > 1
-      ? `A coalition peace binding ${doc.loserName} — ${doc.coalitionScope.length} besiegers, the spoils split by the strength each brought.`
+      ? `A coalition peace binding ${doc.loserName}: ${doc.coalitionScope.length} besiegers, the spoils split by the strength each brought.`
       : null);
   return {
     ...doc,
@@ -357,7 +357,7 @@ function decorate(doc, treaty = null, worldState = null) {
     // parties are still whatever the orientation resolved, so neither branch can render
     // the string "undefined" the way `String(treaty.loserId)` once could.
     title: doc.orientationKind === 'sale'
-      ? `The Conveyance of ${conveyedHoldingOf(doc) || 'a holding'} — ${doc.loserName} to ${doc.victorName}`
+      ? `The Conveyance of ${conveyedHoldingOf(doc) || 'a holding'}: ${doc.loserName} to ${doc.victorName}`
       : `The Peace of ${doc.loserName}`,
     termLines,
     frayingLine,

@@ -70,7 +70,7 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
         desc:
           P && P.includes('Royal Authority')
             ? 'Noble houses that want a renegotiation of feudal obligations; not openly rebellious, but not cooperative.'
-            : 'Would support stability — if a price can be agreed. Currently being courted by both sides.',
+            : 'Would support stability, if a price can be agreed. Currently being courted by both sides.',
       })),
     ke('indebted') &&
       (factions.push({
@@ -116,7 +116,7 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
             ((N.power = Math.round(N.power * 1.8)),
             (N.desc =
               (N.desc || '') +
-              ' The succession crisis has transformed latent noble power into active leverage — every claimant needs their backing.')));
+              ' The succession crisis has transformed latent noble power into active leverage. Every claimant needs their backing.')));
       }),
       factions.push({
         faction: P && P.includes('Royal Authority') ? 'Noble Claimant (Senior Line)' : 'Claimant Bloc A',
@@ -200,7 +200,7 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
           faction: he,
           power: ye ? 18 : 22,
           desc: ye
-            ? "Organised common-population movement challenging the governing authority's legitimacy. Growing quickly. No unified leadership yet — which makes negotiation impossible."
+            ? "Organised common-population movement challenging the governing authority's legitimacy. Growing quickly. No unified leadership yet, which makes negotiation impossible."
             : 'Elite faction that has concluded the current governing arrangement is no longer viable. Pursuing institutional change through strategic non-cooperation, coalition-building, and selective pressure.',
         });
       })(),
@@ -211,7 +211,7 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
           ? (factions.push({
               faction: "Newcomers' Settlement",
               power: 12,
-              desc: 'The incoming population has begun self-organising — informal leadership, mutual aid networks, collective negotiation with landlords and employers. Not yet a formal political force, but cohesive enough to matter.',
+              desc: 'The incoming population has begun self-organising. Informal leadership, mutual aid networks, collective negotiation with landlords and employers. Not yet a formal political force, but cohesive enough to matter.',
             }),
             factions.forEach(function (he) {
               ((he.faction.toLowerCase().includes('religious') ||
@@ -256,7 +256,7 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
             ((he.power = Math.round(he.power * 1.5)),
             (he.desc =
               (he.desc || '') +
-              ' Wartime has transformed this faction from a civic institution into a primary power centre — crown authority flows through military channels now.')),
+              ' Wartime has transformed this faction from a civic institution into a primary power centre. Crown authority flows through military channels now.')),
             (he.faction.toLowerCase().includes('merchant') || he.faction.toLowerCase().includes('guild')) &&
               (ye
                 ? ((he.power = Math.round(he.power * 1.2)),
@@ -271,7 +271,7 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
               ((he.power = Math.round(he.power * 1.2)),
               (he.desc =
                 (he.desc || '') +
-                " The pastoral burden of wartime — soldiers praying before departure, families grieving — has made the institution indispensable in a way it wasn't before.")));
+                " The pastoral burden of wartime (soldiers praying before departure, families grieving) has made the institution indispensable in a way it wasn't before.")));
         }),
           // Siege pushes its own 'War Council' first (see the under_siege block);
           // siege AND wartime together minted TWO War Councils in one roster.
@@ -280,14 +280,14 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
             faction: 'War Council',
             power: ye ? 20 : 25,
             desc: ye
-              ? "Crown-appointed emergency body coordinating supply, conscription, and military contracting. Currently functioning smoothly — the war is going well enough that its authority isn't contested."
+              ? "Crown-appointed emergency body coordinating supply, conscription, and military contracting. Currently functioning smoothly: the war is going well enough that its authority isn't contested."
               : 'Crown-appointed emergency body with powers over requisition, conscription, and price controls. Unpopular. Accused of favouritism in contract awards. Probably correct on the military decisions.',
           }),
           ye ||
             factions.push({
               faction: 'Peace Faction',
               power: 10,
-              desc: 'Merchants, clergy, and common voices arguing that the cost of continued war exceeds any achievable gain. Not traitors — pragmatists. Growing.',
+              desc: 'Merchants, clergy, and common voices arguing that the cost of continued war exceeds any achievable gain. Not traitors: pragmatists. Growing.',
             }));
       })(),
     ke('religious_conversion') &&
@@ -311,7 +311,7 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
               (ye === 0
                 ? ' Losing congregation to the new faith faster than leadership acknowledges publicly.'
                 : ye === 1
-                  ? ' One of two competing factions claiming the legitimate succession — legal standing of their records is contested.'
+                  ? ' One of two competing factions claiming the legitimate succession: legal standing of their records is contested.'
                   : ' Formally compliant with the conversion order. Actual compliance among the congregation is harder to assess.'))),
             he.isGoverning &&
               ((he.power = Math.round(he.power * 0.88)),
@@ -325,7 +325,7 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
             ? factions.push({
                 faction: 'New Faith Community',
                 power: 14,
-                desc: 'Growing movement without formal institutions — meeting in homes, sharing resources, organising mutual aid. Politically naive but numerically significant and increasingly confident.',
+                desc: 'Growing movement without formal institutions. Meeting in homes, sharing resources, organising mutual aid. Politically naive but numerically significant and increasingly confident.',
               })
             : ye === 1
               ? factions.push({
@@ -341,7 +341,7 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
                 factions.push({
                   faction: 'Underground Old Faith',
                   power: 7,
-                  desc: "Not officially a faction — officially it doesn't exist. In practice it is the most cohesive social network in the settlement. Its membership overlaps with several other factions in ways nobody discusses.",
+                  desc: "Not officially a faction: officially it doesn't exist. In practice it is the most cohesive social network in the settlement. Its membership overlaps with several other factions in ways nobody discusses.",
                 })));
       })(),
     ke('slave_revolt') &&
@@ -357,7 +357,7 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
               (N.modifiers = [...(N.modifiers || []), 'authority contested']),
               (N.desc =
                 (N.desc || '') +
-                ' Managing an active slave revolt — the public posture is control, the private reality is containment at best.')),
+                ' Managing an active slave revolt: the public posture is control, the private reality is containment at best.')),
               (N.faction.toLowerCase().includes('military') ||
                 N.faction.toLowerCase().includes('guard') ||
                 N.faction.toLowerCase().includes('garrison')) &&
@@ -379,12 +379,12 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
           factions.push({
             faction: 'Revolt Leadership',
             power: 18,
-            desc: 'Organised leadership of the enslaved population — distributed, resilient, and holding territory. Has demands. Has not yet committed to whether those demands are negotiable.',
+            desc: 'Organised leadership of the enslaved population: distributed, resilient, and holding territory. Has demands. Has not yet committed to whether those demands are negotiable.',
           }),
           factions.push({
             faction: 'Abolitionist Network',
             power: 7,
-            desc: 'Free citizens, clergy, and outside agitators who have been supporting the revolt covertly — shelter, information, supplies. Their involvement is not yet public.',
+            desc: 'Free citizens, clergy, and outside agitators who have been supporting the revolt covertly: shelter, information, supplies. Their involvement is not yet public.',
           }));
       })());
 };

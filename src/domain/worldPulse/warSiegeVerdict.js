@@ -303,7 +303,7 @@ export function resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiv
         falls: true, harass: false, forcedLift: false, verdict, ratio,
         pFall: 1, roll: 0, coalitionCurrent, defenderCurrent, band: 'decisive_success',
         capitulation: true,
-        reasons: [...reasons, `${defenderItem?.name || targetId}'s will broke — starving, discredited, and out of hope, the defenders capitulated rather than be stormed.`],
+        reasons: [...reasons, `${defenderItem?.name || targetId}'s will broke. Starving, discredited, and out of hope, the defenders capitulated rather than be stormed.`],
       };
     }
   }

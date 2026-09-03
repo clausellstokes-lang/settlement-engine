@@ -375,7 +375,7 @@ export function readRelationshipExtremity(input) {
     ? `${partyId} stands at the extreme with ${counterpartId}: the border is openly hostile,`
       + ` the resentment has reached what open hostility itself implies, and the`
       + ` grievance between them is still live.`
-    : `${partyId} is not at the extreme with ${counterpartId} — ${missing.length === 3
+    : `${partyId} is not at the extreme with ${counterpartId}: ${missing.length === 3
       ? 'the border is not hostile, the resentment has not reached what hostility implies, and no live grievance stands'
       : missing.map((m) => (
         m === 'edge_type'
@@ -665,7 +665,7 @@ export function tierFallDescriptor(input) {
     band,
     receipt: rungsFallen === 0
       ? `${name} burned and is still a ${before}: the fire took its people and not its standing.`
-      : `${name} fell from ${before} to ${after} — ${rungsFallen === 1 ? 'one rung' : `${rungsFallen} rungs`}.`,
+      : `${name} fell from ${before} to ${after}: ${rungsFallen === 1 ? 'one rung' : `${rungsFallen} rungs`}.`,
   };
 }
 
@@ -867,7 +867,7 @@ export function compareSpoils(input) {
     receipt: razingIsPoorer
       ? `burning yields ${razingTotal} once; holding yields ${holdingTotal} over the same years.`
         + ' A realm that razes its neighbours impoverishes its own future taking.'
-      : `burning yields ${razingTotal} once against ${holdingTotal} from holding — this was a`
+      : `burning yields ${razingTotal} once against ${holdingTotal} from holding. This was a`
         + ' place worth more dead than alive, which is the rarer and darker case.',
   };
 }

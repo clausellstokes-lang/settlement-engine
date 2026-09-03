@@ -157,7 +157,7 @@ export const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
   // public grows uneasy, and the arcane substrate itself is destabilized.
   magical_instability: {
     label: 'Magical instability',
-    description: 'Magic in the settlement is misbehaving — surging wild, failing, or fallen silent.',
+    description: 'Magic in the settlement is misbehaving: surging wild, failing, or fallen silent.',
     affectedSystems: ['magical_stability', 'healing_capacity', 'public_legitimacy'],
     defaultExpiresAtTicks: 7,
     defaultStatus: 'worsening',
@@ -466,7 +466,7 @@ export const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
   // defaults + keep the archetype-registry consistency test green.
   reconstruction: {
     label: 'Reconstruction',
-    description: 'The settlement is rebuilding after a calamity or the lifting of a siege — the rebuild race is on.',
+    description: 'The settlement is rebuilding after a calamity or the lifting of a siege. The rebuild race is on.',
     affectedSystems: ['public_legitimacy', 'labor_capacity', 'social_trust'],
     defaultExpiresAtTicks: 12,
     defaultStatus: 'easing',
@@ -474,7 +474,7 @@ export const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
   },
   boom: {
     label: 'Boom',
-    description: 'Sustained trade and surplus have tipped the settlement into a boom — prosperous, and quietly dependent on the arteries feeding it.',
+    description: 'Sustained trade and surplus have tipped the settlement into a boom. Prosperous, and quietly dependent on the arteries feeding it.',
     affectedSystems: ['public_legitimacy', 'trade_connectivity'],
     defaultExpiresAtTicks: 14,
     defaultStatus: 'stable',
@@ -482,7 +482,7 @@ export const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
   },
   flourishing: {
     label: 'Flourishing',
-    description: 'A long peace and steady legitimacy have made the settlement culturally fertile — a golden age, modest and bounded.',
+    description: 'A long peace and steady legitimacy have made the settlement culturally fertile: a golden age, modest and bounded.',
     affectedSystems: ['public_legitimacy', 'social_trust'],
     defaultExpiresAtTicks: 16,
     defaultStatus: 'stable',
@@ -980,7 +980,7 @@ export function summarizeActiveConditions(settlement) {
   for (const c of all) {
     byArchetype[c.archetype] = (byArchetype[c.archetype] || 0) + 1;
     if (bySeverityBand[c.severityBand] !== undefined) bySeverityBand[c.severityBand] += 1;
-    summaryLines.push(`${c.label} — ${c.severityBand}, ${c.status} (elapsed ${c.duration.elapsedTicks.toFixed(2)} of ${c.duration.expiresAtTicks ?? '∞'})`);
+    summaryLines.push(`${c.label}: ${c.severityBand}, ${c.status} (elapsed ${c.duration.elapsedTicks.toFixed(2)} of ${c.duration.expiresAtTicks ?? '∞'})`);
   }
 
   return {

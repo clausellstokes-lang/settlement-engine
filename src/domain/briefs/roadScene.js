@@ -71,7 +71,7 @@ function purposeLabel(kind) {
 
 /** The per-hop road condition from the embattlement level. Pure. @param {number} level @returns {string} */
 function conditionLabel(level) {
-  if (level >= 0.35) return 'embattled — bandit ground';
+  if (level >= 0.35) return 'embattled: bandit ground';
   if (level >= 0.15) return 'unsettled';
   return 'quiet';
 }
@@ -179,7 +179,7 @@ export function composeRoadSceneBrief(args) {
   if (besiegers.length) gates.push({ state: 'under siege', by: [...besiegers].map(nameOf).sort(cmp).join(', ') });
   const traditionsLedger = asObject(getSpatialLedger(worldState, 'traditions'));
   if (hostHasActiveWindow(traditionsLedger[to], weekOfYear)) {
-    gates.push({ state: 'a festival is on', guestRight: 'the guest-right holds — a host is loath to seize a visitor mid-observance' });
+    gates.push({ state: 'a festival is on', guestRight: 'the guest-right holds. A host is loath to seize a visitor mid-observance' });
   }
 
   return assembleBrief({
@@ -251,7 +251,7 @@ export function composeRoadScenePlayerBrief(args) {
   if (publicBesiegers.length) gates.push({ state: 'under siege', by: publicBesiegers.join(', ') });
   const traditionsLedger = asObject(getSpatialLedger(worldState, 'traditions'));
   if (hostHasActiveWindow(traditionsLedger[to], weekOfYear)) {
-    gates.push({ state: 'a festival is on', guestRight: 'the guest-right holds — a host is loath to seize a visitor mid-observance' });
+    gates.push({ state: 'a festival is on', guestRight: 'the guest-right holds. A host is loath to seize a visitor mid-observance' });
   }
 
   return assembleBrief({

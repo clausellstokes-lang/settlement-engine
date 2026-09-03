@@ -341,7 +341,7 @@ export function openPactProposal({ worldState, from, to, trigger, sheet, tick, d
     proposal,
     refusal: '',
     receipt: due.measured
-      ? `An answer is owed in ${due.answerDueTick - Math.round(tick)} weeks — ${due.weeks} on the road each way.`
+      ? `An answer is owed in ${due.answerDueTick - Math.round(tick)} weeks: ${due.weeks} on the road each way.`
       : 'An answer is owed, though no road between these courts could be measured.',
   };
 }

@@ -350,7 +350,7 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
       const effectiveExportable = externalMillOnly ? false : chain.exportable;
       const externalMillNote = externalMillOnly
         ? 'Grain is processed at the lord\'s mill under feudal monopoly (banalité). ' +
-          'Local food security is maintained but surplus flour cannot be exported — ' +
+          'Local food security is maintained but surplus flour cannot be exported: ' +
           'the mill toll captures any excess. Loss of mill access would break this chain.'
         : null;
       const outputs = (
@@ -491,7 +491,7 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
     });
     if (impaired && downstream.status === 'running') {
       downstream.status = 'vulnerable';
-      downstream.upstreamNote = `Upstream supply chain impaired — ${upstreamIds.join(' or ')} disrupted`;
+      downstream.upstreamNote = `Upstream supply chain impaired: ${upstreamIds.join(' or ')} disrupted`;
     } else if (vulnerable && downstream.status === 'running') {
       // vulnerable upstream makes downstream slightly at risk — don't change status, just note
       downstream.upstreamNote = `Dependent on stressed upstream: ${upstreamIds.join(' or ')}`;
@@ -524,7 +524,7 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
       // Downgrade status unless already impaired/entrepot
       if (chain.status === 'running' || chain.status === 'operational') {
         chain.status = 'vulnerable';
-        chain.upstreamNote = `Needs imported ${missingUpstream.join(', ')} — no local source`;
+        chain.upstreamNote = `Needs imported ${missingUpstream.join(', ')}: no local source`;
         chain.upstreamMissing = missingUpstream;
       }
     } else if (impairedUpstream.length > 0) {

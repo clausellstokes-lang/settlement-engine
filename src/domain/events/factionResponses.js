@@ -110,7 +110,7 @@ function respondAsMerchantGuild(faction, event, _settlement) {
           factionId: id, factionName: name,
           stance: 'opportunity',
           response: `${name} mobilizes import contracts to fill the gap, offering grain on credit. Privately, members lobby the council against any temple-led rationing.`,
-          hookSeed: `A dockworker overhears guild leadership talking about timing — they knew the granary was vulnerable.`,
+          hookSeed: `A dockworker overhears guild leadership talking about timing. They knew the granary was vulnerable.`,
         };
       }
       if (targetKind === 'trade') {
@@ -140,7 +140,7 @@ function respondAsMerchantGuild(faction, event, _settlement) {
         factionId: id, factionName: name,
         stance: 'threat',
         response: `${name} suffers immediate cash-flow strain. Members with stockpiles raise prices; those without panic. Expect lobbying for armed escorts and tariff relief.`,
-        hookSeed: `The Guild seeks a small group willing to scout the route and report on what closed it — quietly, before competitors do.`,
+        hookSeed: `The Guild seeks a small group willing to scout the route and report on what closed it. Quietly, before competitors do.`,
       };
 
     case 'DEPLETE_RESOURCE':
@@ -157,7 +157,7 @@ function respondAsMerchantGuild(faction, event, _settlement) {
         factionId: id, factionName: name,
         stance: 'opportunity',
         response: event.payload?.entrepot
-          ? `${name} moves to control the new transit trade — warehouse leases, brokerage fees, and a quiet word with the customs clerks.`
+          ? `${name} moves to control the new transit trade. Warehouse leases, brokerage fees, and a quiet word with the customs clerks.`
           : `${name} maneuvers for first position on the new ${labelOf(event.targetId).toLowerCase()} trade, courting the producers before outside buyers arrive.`,
       };
 
@@ -173,7 +173,7 @@ function respondAsMerchantGuild(faction, event, _settlement) {
         return {
           factionId: id, factionName: name,
           stance: 'threat',
-          response: `${name} watches the new ${labelOf(event.targetId)} carefully — temple charity often becomes a competing distribution network. Some members propose donations to co-opt the leadership.`,
+          response: `${name} watches the new ${labelOf(event.targetId)} carefully. Temple charity often becomes a competing distribution network. Some members propose donations to co-opt the leadership.`,
         };
       }
       if (classifyInstitutionTarget(event.targetId) === 'trade') {
@@ -234,7 +234,7 @@ function respondAsTemple(faction, event /* , settlement */) {
         return {
           factionId: id, factionName: name,
           stance: 'threat',
-          response: `${name} treats the loss as desecration. Members demand a guilty party — preferably a rival faction. Public mourning ritual is announced.`,
+          response: `${name} treats the loss as desecration. Members demand a guilty party: preferably a rival faction. Public mourning ritual is announced.`,
           hookSeed: 'Clergy accuse a competing temple of arson with no evidence.',
         };
       }
@@ -348,7 +348,7 @@ function respondAsWatch(faction, event /* , settlement */) {
           factionId: id, factionName: name,
           stance: 'threat',
           response: `${name} doubles patrols around remaining warehouses. Curfew is declared after dusk. Suspect lists grow without much evidence.`,
-          hookSeed: 'A captain offers the party gold to identify whoever set the fire — accuracy not strictly required.',
+          hookSeed: 'A captain offers the party gold to identify whoever set the fire: accuracy not strictly required.',
         };
       }
       if (kind === 'law_enforcement') {
@@ -371,7 +371,7 @@ function respondAsWatch(faction, event /* , settlement */) {
         factionId: id, factionName: name,
         stance: 'opportunity_and_threat',
         response: `${name} purges visible offenders publicly while quietly shielding the well-connected. Internal morale fractures along seniority lines.`,
-        hookSeed: 'A rookie watch member begs the party for help — they have evidence pointing higher up than anyone wants to look.',
+        hookSeed: 'A rookie watch member begs the party for help. They have evidence pointing higher up than anyone wants to look.',
       };
 
     case 'KILL_LEADER':
@@ -482,7 +482,7 @@ function respondAsThievesGuild(faction, event /* , settlement */) {
           factionId: id, factionName: name,
           stance: 'opportunity',
           response: `${name} expands fast. Black-market goods move openly for the first time in years. Protection rackets fan out to streets that had been off-limits.`,
-          hookSeed: 'A shop owner who used to be untouchable approaches the party — they\'ll pay anything for protection.',
+          hookSeed: 'A shop owner who used to be untouchable approaches the party: they\'ll pay anything for protection.',
         };
       }
       if (kind === 'food_storage') {
@@ -513,7 +513,7 @@ function respondAsThievesGuild(faction, event /* , settlement */) {
         factionId: id, factionName: name,
         stance: 'opportunity_and_threat',
         response: `${name} burns its bought officials and recruits replacements. Several lieutenants disappear quietly to avoid being used as scapegoats.`,
-        hookSeed: 'A guild member breaks omertà — they need protection or they sing.',
+        hookSeed: 'A guild member breaks omertà: they need protection or they sing.',
       };
 
     case 'KILL_LEADER':
@@ -536,7 +536,7 @@ function respondAsThievesGuild(faction, event /* , settlement */) {
       return {
         factionId: id, factionName: name,
         stance: 'opportunity_and_threat',
-        response: `${name} smuggles medicine — for a price. Some members refuse to enter quarantine zones; others charge double to do so.`,
+        response: `${name} smuggles medicine: for a price. Some members refuse to enter quarantine zones; others charge double to do so.`,
       };
 
     case 'RAID_OR_MONSTER_ATTACK':

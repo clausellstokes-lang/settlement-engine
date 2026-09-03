@@ -24,7 +24,7 @@
 export const PDF_VARIANTS = {
   draft_brief: {
     label: 'Draft Brief',
-    description: 'Quick prep doc — no timeline, no canon-only sections.',
+    description: 'Quick prep doc: no timeline, no canon-only sections.',
     chapters: {
       cover: true,
       toc: true,
@@ -92,7 +92,7 @@ export const PDF_VARIANTS = {
 
   timeline_packet: {
     label: 'Timeline Packet',
-    description: 'Lean recap — cover, current state, timeline only. For reviewing what changed.',
+    description: 'Lean recap: cover, current state, timeline only. For reviewing what changed.',
     chapters: {
       cover: true,
       toc: true,

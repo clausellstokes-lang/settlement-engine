@@ -121,7 +121,7 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
   }
   if (stresses.includes('plague_onset')) {
     productionMult *= 0.75;
-    stressNotes.push('Plague: agricultural workforce decimated by illness — fields understaffed.');
+    stressNotes.push('Plague: agricultural workforce decimated by illness, fields understaffed.');
   }
   if (stresses.includes('occupied')) {
     consumptionMult *= 1.2;
@@ -397,7 +397,7 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
       category: 'Food Production',
       title: 'Agricultural Surplus',
       description: `Settlement produces ${Math.round((surplusFinal / dailyNeedFinal) * 100)}% more food than needed.`,
-      impact: 'Export opportunity — could generate significant trade income.',
+      impact: 'Export opportunity: could generate significant trade income.',
       suggestedFixes: [
         'Add merchants to export surplus grain',
         'Add granary for long-term storage',
@@ -415,7 +415,7 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
       severity: SEVERITY.CRITICAL,
       category: 'Food Storage',
       title: 'No Grain Storage Facility',
-      description: `Settlement of ${formatCount(population)} lacks a granary — cannot buffer harvests or maintain strategic food reserves.`,
+      description: `Settlement of ${formatCount(population)} lacks a granary. Cannot buffer harvests or maintain strategic food reserves.`,
       impact: 'Vulnerable to seasonal shortages and siege starvation without grain reserves.',
       suggestedFixes: ['Add Town granary, City granaries, or State granary complex'],
     });

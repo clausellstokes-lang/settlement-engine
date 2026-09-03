@@ -191,7 +191,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
       ? {
           source: 'Military Extraction',
           percentage: 20,
-          desc: 'Forced contributions and confiscations collected by the garrison — not formally a tax.',
+          desc: 'Forced contributions and confiscations collected by the garrison, not formally a tax.',
         }
       : {
           source: 'Military Levy',
@@ -277,7 +277,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
         desc:
           magPri < 60
             ? 'Fees for identification, minor enchanting, and divination. Adventurers and merchants both pay well for reliable magical services.'
-            : 'A busy market for spell services — identification, augury, message sending, and contract-grade enchanting brings steady coin.',
+            : 'A busy market for spell services. Identification, augury, message sending, and contract-grade enchanting brings steady coin.',
       });
     }
 
@@ -313,7 +313,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     incomeBuild.push({
       source: 'Security Contracts',
       percentage: 12,
-      desc: 'Guild-funded private security surcharges — effectively a privatised protection tax on trade.',
+      desc: 'Guild-funded private security surcharges: effectively a privatised protection tax on trade.',
     });
   }
   if (safetyProfile.blackMarketCapture > 10) {
@@ -339,7 +339,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
             : bmc >= 20
               ? 'Shadow Economy (untaxed)'
               : 'Black Market Revenue';
-    const desc = `An estimated ${bmc}% of economic activity flows through unofficial channels — ${
+    const desc = `An estimated ${bmc}% of economic activity flows through unofficial channels: ${
       hasGuild
         ? 'guild-organised fencing, extortion, and black market trade'
         : hasSmuggling
@@ -398,7 +398,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
         source: 'Grain Sales',
         percentage: Math.max(6, Math.round(ecoInstFlags.economyOutput / 9)),
         desc: hasNearbyResource('grain_field', 'fertile_flood')
-          ? 'Surplus from local harvest sold to nearby settlements and passing merchants — steady income tied to the growing season.'
+          ? 'Surplus from local harvest sold to nearby settlements and passing merchants: steady income tied to the growing season.'
           : 'Grain purchased from farming regions and resold or processed locally; margin depends on stable supply routes.',
       });
     }
@@ -418,7 +418,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
         percentage: Math.max(8, Math.round(ecoInstFlags.economyOutput / 7)),
         desc: hasNearbyResource('grazing_land')
           ? 'Local flocks provide raw wool; weavers and fullers convert it to cloth sold across the region.'
-          : 'Wool bought from pastoral regions and processed locally — value-add trade dependent on consistent supply.',
+          : 'Wool bought from pastoral regions and processed locally: value-add trade dependent on consistent supply.',
       });
     }
     if (
@@ -437,7 +437,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
         source: 'Iron & Metalwork',
         percentage: Math.max(8, Math.round(ecoInstFlags.economyOutput / 7)),
         desc: hasNearbyResource('iron_deposit', 'coal_deposit', 'precious_metal')
-          ? 'Local ore feeds the smithy directly — metalwork income is not trade-route dependent.'
+          ? 'Local ore feeds the smithy directly. Metalwork income is not trade-route dependent.'
           : 'Iron imported from mining regions and worked locally; this income stream is vulnerable to supply disruption.',
       });
     }
@@ -455,7 +455,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
         percentage: Math.max(7, Math.round(ecoInstFlags.economyOutput / 8)),
         desc: hasNearbyResource('managed_forest', 'shipbuilding_timber', 'hunting_ground')
           ? 'Local forest provides sustainable timber revenue; managed felling and sawmilling keep production consistent.'
-          : 'Timber sourced from more distant forests and resold or processed locally — trade route dependent.',
+          : 'Timber sourced from more distant forests and resold or processed locally: trade route dependent.',
       });
     }
     if (
@@ -490,7 +490,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
         source: 'Stone Quarrying',
         percentage: Math.max(6, Math.round(ecoInstFlags.economyOutput / 10)),
         desc: hasNearbyResource('stone_quarry', 'gemstone')
-          ? 'Local quarry provides dressed stone to regional builders — reliable income with low transport overhead.'
+          ? 'Local quarry provides dressed stone to regional builders: reliable income with low transport overhead.'
           : 'Stone masons work imported material; the quarrying income notation reflects processing margin only.',
       });
     }
@@ -653,12 +653,12 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
           isCaptiveSource = stressList.includes('occupied') || criminalEff > 65,
           slaveTradeLabel =
             isSlaveMarket && isCaptiveSource
-              ? 'Slave trade — transit market for human trafficking; imported labour and exported captives'
+              ? 'Slave trade: transit market for human trafficking; imported labour and exported captives'
               : isSlaveMarket
-                ? 'Slave labour — purchased workforce for agricultural estates, mines, and domestic service'
+                ? 'Slave labour: purchased workforce for agricultural estates, mines, and domestic service'
                 : isCaptiveSource
-                  ? 'Captive trade — war captives and debtors sold through established trafficking networks'
-                  : 'Slave trade — human trafficking and forced labour; legally tolerated or actively regulated';
+                  ? 'Captive trade: war captives and debtors sold through established trafficking networks'
+                  : 'Slave trade: human trafficking and forced labour; legally tolerated or actively regulated';
         primaryExports.push(slaveTradeLabel);
         stage5PushedExports.push(slaveTradeLabel);
         if (
@@ -667,7 +667,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
             return imp.toLowerCase().includes('slave');
           })
         ) {
-          const slaveImportLabel = 'Enslaved labour — purchased from regional trafficking networks';
+          const slaveImportLabel = 'Enslaved labour: purchased from regional trafficking networks';
           primaryImports.push(slaveImportLabel);
           stage5PushedImports.push(slaveImportLabel);
         }
@@ -703,11 +703,11 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
       return;
     const severity = isUnderStress || isEffectivelyIsolated ? 'critical' : 'vulnerable',
       impact = isUnderStress
-        ? 'Supply route severed — operating at minimal capacity or shut down.'
+        ? 'Supply route severed. Operating at minimal capacity or shut down.'
         : isEffectivelyIsolated
-          ? 'No trade access — running on existing stockpiles only.'
+          ? 'No trade access: running on existing stockpiles only.'
           : _hasMagicTradeForDeps && isIsolatedRoute
-            ? 'Supplied via magical trade infrastructure — teleportation imports replace road access.'
+            ? 'Supplied via magical trade infrastructure: teleportation imports replace road access.'
             : 'Dependent on trade routes. Siege, road closure, or blockade would impair operations.';
     tradeDependencies.push({
       institution: instName,

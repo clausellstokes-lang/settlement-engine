@@ -599,7 +599,7 @@ function fieldBattleNews(battle, snapshot, tick, now, loserBefore, loserAfter, f
   const pair = [battle.winnerId, battle.loserId].sort();
   const reasons = [`A crossing-path collision in ${nameOf(snapshot, battle.region)}'s approaches.`];
   if (fog.blind) {
-    reasons.push(`${loser} fought half-blind — its couriers home were cut, so it mis-read the enemy's strength (believed ~${formatCount(Math.max(0, Math.round(Number(fog.loserBelievedFoe) || 0)))}).`);
+    reasons.push(`${loser} fought half-blind. Its couriers home were cut, so it mis-read the enemy's strength (believed ~${formatCount(Math.max(0, Math.round(Number(fog.loserBelievedFoe) || 0)))}).`);
   }
   return {
     id: `wizard_news.${tick}.field_battle.${pair[0]}.${pair[1]}`,

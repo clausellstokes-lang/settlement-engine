@@ -505,7 +505,7 @@ export function tempoReceiptEntries(deferrals, tick) {
     severity: 0.4,
     tick,
     headline: 'Pressure builds beneath the calm',
-    summary: `The realm holds ${deferrals.length} gathering ${deferrals.length === 1 ? 'storm' : 'storms'} (${label}) — the tempo governor is pacing their arrival.`,
+    summary: `The realm holds ${deferrals.length} gathering ${deferrals.length === 1 ? 'storm' : 'storms'} (${label}). The tempo governor is pacing their arrival.`,
     settlementIds: [...settlementIds].sort(),
   }];
 }

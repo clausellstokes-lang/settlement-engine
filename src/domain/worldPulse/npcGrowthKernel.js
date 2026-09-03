@@ -714,7 +714,7 @@ function growthNews(nid, npcName, townName, sid, trait, minted, provenance, tick
     sourceEventId: `npc_growth.${nid}.${trait}.${tick}`,
     tags: ['world_pulse', 'npc_growth', minted ? 'trait_gained' : 'trait_shed'],
     reasons: [minted
-      ? `A learned trait, deposited by durable outcomes (${prov}) past the acquisition threshold — the core personality untouched.`
-      : `An unreinforced learned trait decayed below its hold threshold and was shed — both signs of the growth clock.`],
+      ? `A learned trait, deposited by durable outcomes (${prov}) past the acquisition threshold: the core personality untouched.`
+      : `An unreinforced learned trait decayed below its hold threshold and was shed: both signs of the growth clock.`],
   };
 }

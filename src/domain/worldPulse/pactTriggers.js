@@ -241,7 +241,7 @@ export function scoreFaithCommunion({ ladder, proposerWord, counterpartyWord }) 
       'Neither court is believed observant enough for a shared rite to mean anything.');
   }
   return crossing('faith_communion', (floor - T.COMMUNION_RUNG_FLOOR + 1) / (top - T.COMMUNION_RUNG_FLOOR + 1),
-    `Both courts are believed to keep the rites — ${word(proposerWord)} here, ${word(counterpartyWord)} there.`,
+    `Both courts are believed to keep the rites: ${word(proposerWord)} here, ${word(counterpartyWord)} there.`,
     word(proposerWord));
 }
 

@@ -165,7 +165,7 @@ export function blockadeNews(b, snapshot, tick, now) {
     significance: 'notable',
     score: 64,
     headline: `${navy}'s fleet blockades ${port}`,
-    summary: `${navy} threw a blockade across ${port}'s sea approaches — a siege from the water. Its harbor trade is strangled; combined with a land siege, ${port} will starve.`,
+    summary: `${navy} threw a blockade across ${port}'s sea approaches: a siege from the water. Its harbor trade is strangled; combined with a land siege, ${port} will starve.`,
     kind: 'applied',
     impactKind: 'blockade_declared',
     channelType: null,
@@ -193,7 +193,7 @@ export function blockadeLiftNews(b, snapshot, tick, now) {
     significance: 'notable',
     score: 62,
     headline: `${navy}'s fleet lifts the blockade of ${port}`,
-    summary: `With the war between ${navy} and ${port} settled, ${navy}'s fleet stood down from ${port}'s sea approaches — the harbor breathes again, its trade unstrangled.`,
+    summary: `With the war between ${navy} and ${port} settled, ${navy}'s fleet stood down from ${port}'s sea approaches. The harbor breathes again, its trade unstrangled.`,
     kind: 'applied',
     impactKind: 'blockade_lifted',
     channelType: null,
@@ -203,7 +203,7 @@ export function blockadeLiftNews(b, snapshot, tick, now) {
     channelIds: [],
     sourceEventId: `blockade_lifted.${b.ownerId}.${b.targetId}.${tick}`,
     tags: ['world_pulse', 'war', 'blockade'],
-    reasons: [`${navy} no longer holds ${port} hostile — the blockade has no war to serve.`],
+    reasons: [`${navy} no longer holds ${port} hostile. The blockade has no war to serve.`],
     createdAt: now,
   };
 }
@@ -218,7 +218,7 @@ function seaBattleNews(b, snapshot, tick, now) {
   const loser = nameOf(snapshot, b.loserId);
   const pair = [b.winnerId, b.loserId].sort();
   const summaryTail = b.lostConvoy && b.debarkPort
-    ? ` The convoy scattered — the embarked host lost ${formatCount(Math.max(0, Math.round(b.drowned)))} to the deep and debarked at ${nameOf(snapshot, b.debarkPort)} to march home overland.`
+    ? ` The convoy scattered. The embarked host lost ${formatCount(Math.max(0, Math.round(b.drowned)))} to the deep and debarked at ${nameOf(snapshot, b.debarkPort)} to march home overland.`
     : ' The beaten fleet fell back to home waters.';
   return {
     id: `wizard_news.${tick}.sea_battle.${pair[0]}.${pair[1]}`,
@@ -383,7 +383,7 @@ export function advanceNaval({ snapshot, worldState, digest, graph, rng, season 
           candidateType: 'blockade_declared', type: 'realm_verb',
           targetSaveId: navyId,
           headline: `${nameOf(snapshot, navyId)} seeks your word: blockade ${nameOf(snapshot, target)}`,
-          summary: `${nameOf(snapshot, navyId)}'s war fleet stands ready to throw a blockade across ${nameOf(snapshot, target)}'s sea approaches — a siege from the water.`,
+          summary: `${nameOf(snapshot, navyId)}'s war fleet stands ready to throw a blockade across ${nameOf(snapshot, target)}'s sea approaches: a siege from the water.`,
           severity: 0.7,
           reasons: [`${nameOf(snapshot, navyId)} holds the stronger fleet and a hostile port within reach.`],
           applyMode: 'proposal',
