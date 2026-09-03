@@ -3,14 +3,28 @@
  *
  * What is pinned here, and why each pin exists:
  *
- *   1. THE SIGNATURE RECORD is exactly `{ signed: false, live: false }` today. When
+ *   1. THE SIGNATURE RECORD is exactly `{ signed: false, live: true }` today. When
  *      the owner signs, THIS ARM MOVES WITH THE SIGNING DIFF — that is by design:
  *      the pen's one-file edit rides a collection, and the collection updates the
  *      pin beside it. An unsigned surface that drifted to `signed: true` without
  *      that ceremony is exactly what this arm refuses.
- *   2. THE SIGN-THEN-LIGHT LAW is executable, not just structural: `faithTuningArmed`
+ *   2. THE LAW IS EXECUTABLE, NOT MERELY STRUCTURAL: `faithTuningArmed` and
+ *      `faithTuningState` take the record as a defaulted argument, so every
+ *      counterfactual corner is driven here without mutating the frozen record.
+ *
+ * ⭐⭐ ROW O-17 (2026-09-03) REPLACED THE LAW THESE ARMS DRIVE, AND THE ARMS MOVED
+ * WITH IT AS A DECLARED INSTRUMENT EDIT — NOT A RE-RECORD. The superseded law is
+ * quoted here so nobody reads the change as drift:
+ *
+ *     "THE SIGN-THEN-LIGHT LAW is executable, not just structural: `faithTuningArmed`
  *      takes the record as a defaulted argument, so the counterfactual corners are
- *      driven here without mutating the frozen record. `live` alone arms NOTHING.
+ *      driven here without mutating the frozen record. `live` alone arms NOTHING."
+ *
+ * `live` alone now arms the DOOR — that is the whole of what the owner re-opened.
+ * What is still unconstructible, and is now pinned in its place, is a LIT surface
+ * calling itself SIGNED: `faithTuningState` reports DRAFT for exactly the corner
+ * the old `&&` used to refuse outright. The candidate VALUES are untouched and
+ * `signed` is still false; §763's carve-out on values is intact.
  *   3. THE PEN-FREEZE PINS state every candidate value literally. A value that moves
  *      without this file moving in the same diff is a tuning change smuggled past
  *      the signature surface — the exact defect the surface exists to end.
@@ -26,7 +40,9 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   FAITH_TUNING_SIGNATURE,
+  FAITH_SIGNATURE_STATES,
   faithTuningArmed,
+  faithTuningState,
   FAITH_FIELD_DOOR,
   FAITH_TUNING_PROVENANCE,
   FAITH_TUNING_COVERAGE,
@@ -41,11 +57,12 @@ import * as faithWitnessSource from '../../src/domain/worldPulse/faithWitnessSou
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 
-describe('the signature record — two words, unsigned and dark today', () => {
-  test('the record is EXACTLY { signed: false, live: false }, and it is frozen', () => {
+describe('the signature record — two words, unsigned and DRAFT-LIT today', () => {
+  test('the record is EXACTLY { signed: false, live: true }, and it is frozen', () => {
     // ⚠ When the owner signs, this arm is updated IN THE SIGNING DIFF — see the
     // header. Until that diff exists, any other state of the record is a defect.
-    expect(FAITH_TUNING_SIGNATURE).toEqual({ signed: false, live: false });
+    // `live` moved to true at row O-17; `signed` is the pen's and stays false.
+    expect(FAITH_TUNING_SIGNATURE).toEqual({ signed: false, live: true });
     expect(Object.isFrozen(FAITH_TUNING_SIGNATURE)).toBe(true);
   });
 
@@ -55,32 +72,133 @@ describe('the signature record — two words, unsigned and dark today', () => {
     expect(FAITH_TUNING_PROVENANCE.status).toContain('CANDIDATE');
     expect(Object.isFrozen(FAITH_TUNING_PROVENANCE)).toBe(true);
   });
+
+  test('the provenance says DRAFT-LIT and QUOTES the ritual it superseded', () => {
+    // The record of what a later reader is looking at, and the record of what it
+    // replaced, both in the artifact rather than only in a commit message.
+    expect(FAITH_TUNING_PROVENANCE.status).toContain('DRAFT-LIT');
+    expect(FAITH_TUNING_PROVENANCE.ritual).toContain('SUPERSEDED 2026-09-03');
+    expect(FAITH_TUNING_PROVENANCE.ritual).toContain('lighting an unsigned surface cannot be expressed');
+  });
 });
 
-describe('the sign-then-light law — executable at every corner', () => {
-  test('today the surface is NOT armed', () => {
-    expect(faithTuningArmed()).toBe(false);
+describe('the candidate-lit law — executable at every corner (row O-17)', () => {
+  test('today the surface IS armed, and it reads DRAFT', () => {
+    // The pair is the point: armed says the door is open, the state says the
+    // numbers behind it are the lane's claim and not the owner's word.
+    expect(faithTuningArmed()).toBe(true);
+    expect(faithTuningState()).toBe(FAITH_SIGNATURE_STATES.DRAFT);
   });
 
-  test('⛔ live alone arms NOTHING — lighting an unsigned surface is not expressible', () => {
-    // THE LAW THIS SURFACE EXISTS FOR (the §810 R5 shape, made structural the way
-    // the D4 density signature made it): a door opened over unsigned numbers is the
-    // "mint under unsigned numbers" defect, and the && derivation refuses it.
-    expect(faithTuningArmed({ signed: false, live: true })).toBe(false);
+  test('live alone arms the DOOR — this is the clause row O-17 re-opened', () => {
+    // ⚠ THIS ARM IS THE INVERSE OF THE ONE IT REPLACED, WHICH READ: "⛔ live alone
+    // arms NOTHING — lighting an unsigned surface is not expressible". That was
+    // §763's carve-out made structural. The owner re-opened it on 2026-09-03, so
+    // the conjunction is gone and the arm inverts with it, in this same diff.
+    expect(faithTuningArmed({ signed: false, live: true })).toBe(true);
   });
 
-  test('signed but unlit stays dark — the owner can sign, soak, then light', () => {
+  test('⛔ …but a LIT UNSIGNED surface can never call itself SIGNED', () => {
+    // The guarantee that REPLACES the conjunction. This is the corner the old law
+    // refused outright; it is now expressible, and it must announce itself.
+    expect(faithTuningState({ signed: false, live: true })).toBe(FAITH_SIGNATURE_STATES.DRAFT);
+    // Only the owner's literal boolean reaches SIGNED. A truthy imposter cannot.
+    for (const imposter of ['true', 1, {}, [], 'signed']) {
+      expect(
+        faithTuningState({ signed: imposter, live: true }),
+        `${JSON.stringify(imposter)} must not read as the owner's signature`,
+      ).toBe(FAITH_SIGNATURE_STATES.DRAFT);
+    }
+  });
+
+  test('unlit stays DARK whether or not it is signed — sign, soak, then light survives', () => {
     expect(faithTuningArmed({ signed: true, live: false })).toBe(false);
+    expect(faithTuningState({ signed: true, live: false })).toBe(FAITH_SIGNATURE_STATES.DARK);
+    expect(faithTuningState({ signed: false, live: false })).toBe(FAITH_SIGNATURE_STATES.DARK);
+    expect(faithTuningState({})).toBe(FAITH_SIGNATURE_STATES.DARK);
   });
 
-  test('signed AND lit arms', () => {
+  test('signed AND lit reads SIGNED — the corner the pen will one day reach', () => {
     expect(faithTuningArmed({ signed: true, live: true })).toBe(true);
+    expect(faithTuningState({ signed: true, live: true })).toBe(FAITH_SIGNATURE_STATES.SIGNED);
   });
 
-  test('only the literal boolean true signs — a truthy imposter does not', () => {
-    expect(faithTuningArmed({ signed: 'true', live: true })).toBe(false);
+  test('only the literal boolean true lights — a truthy imposter does not', () => {
     expect(faithTuningArmed({ signed: true, live: 1 })).toBe(false);
+    expect(faithTuningArmed({ signed: true, live: 'true' })).toBe(false);
     expect(faithTuningArmed({})).toBe(false);
+  });
+
+  test('the state vocabulary is the closed three, and every corner lands in it', () => {
+    const vocabulary = Object.values(FAITH_SIGNATURE_STATES);
+    expect(vocabulary).toEqual(['dark', 'draft', 'signed']);
+    expect(Object.isFrozen(FAITH_SIGNATURE_STATES)).toBe(true);
+    for (const signed of [true, false]) {
+      for (const live of [true, false]) {
+        expect(vocabulary).toContain(faithTuningState({ signed, live }));
+      }
+    }
+  });
+});
+
+/**
+ * ⭐⭐ THE SUPERSEDED §763 RULING IS KEPT, NOT OVERWRITTEN — AND THE COUNT IS THE ARM.
+ *
+ * Row O-17 re-opens a SPECIFIC earlier owner ruling, so the obligation is not merely to
+ * act on it: the record of WHAT WAS REPLACED has to survive in the artifact, dated and
+ * attributed, rather than being quietly rewritten into the new truth. Prose alone cannot
+ * hold that — prose is what rots — so it is asserted here.
+ *
+ * ⛔ WHY `toContain` WOULD BE A VACUOUS ARM, MEASURED RATHER THAN SUSPECTED. Row O-12
+ * planted exactly this arm one car ago, drafted it as a bare `toContain` on the superseded
+ * sentence, and the planted mutant PASSED: deleting the ORIGINAL ruling leaves the
+ * supersession record quoting the same words back, so a "contains" arm still sees them.
+ * The cure there and here is the same — demand the phrase appear TWICE. One occurrence is
+ * the original ruling left standing; the other is this row's record of having replaced it.
+ * Either alone is the silent overwrite this arm exists to refuse.
+ */
+describe('the superseded §763 ruling survives beside its supersession (row O-17)', () => {
+  const SURFACE_REL = 'src/domain/worldPulse/faithTuningSurface.js';
+
+  /**
+   * The file's comment prose with its ` * ` gutters removed and its wraps collapsed, so a
+   * sentence spanning two comment lines is ONE searchable string. Without this the arm
+   * would silently depend on where a re-wrap happened to break the line.
+   * @param {string} src
+   */
+  const flatten = (src) => src
+    .split('\n')
+    .map((line) => line.replace(/^\s*\/\*+/, '').replace(/^\s*\*\/?/, ''))
+    .join(' ')
+    .replace(/\s+/g, ' ');
+
+  /** The §763 wording this row re-opened, VERBATIM as it stood at 30c1667bc. */
+  const SUPERSEDED_763 = 'lighting an unsigned surface is structurally impossible,'
+    + ' not procedurally discouraged';
+
+  test('the §763 wording appears TWICE — the surviving original AND the record of it', () => {
+    const flat = flatten(readFileSync(join(ROOT, SURFACE_REL), 'utf8'));
+    expect(flat.length, `${SURFACE_REL}: read nothing — the scan is broken, not clean`)
+      .toBeGreaterThan(0);
+    // anchored: the read-length assertion above proves `flat` is real file text
+    const hits = flat.split(SUPERSEDED_763).length - 1;
+    expect(
+      hits,
+      `${SURFACE_REL}: the §763 ruling must stand ONCE as the surviving original and ONCE`
+      + " inside row O-17's supersession record — a count of 1 means one of the two was"
+      + ' silently overwritten, which is the act this row is forbidden to commit',
+    ).toBe(2);
+  });
+
+  test('the supersession is DATED and ATTRIBUTED, never an anonymous edit', () => {
+    const flat = flatten(readFileSync(join(ROOT, SURFACE_REL), 'utf8'));
+    expect(flat.length).toBeGreaterThan(0);
+    // anchored on the read-length assertion above
+    expect(flat).toContain('SUPERSEDED 2026-09-03 — ROW O-17');
+    expect(flat).toContain('Seat: Opus 5, lane REGISTRY');
+    // ⛔ AND THE VALUES ARE STILL THE PEN'S. This row lit a door; it signed nothing.
+    expect(FAITH_TUNING_SIGNATURE.signed).toBe(false);
+    expect(FAITH_TUNING_PROVENANCE.signedBy).toBe(null);
   });
 });
 

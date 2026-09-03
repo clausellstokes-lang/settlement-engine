@@ -22,6 +22,50 @@
  *     can therefore sign, soak, and only then light (the terminal-soak order the
  *     density signature was built to preserve).
  *
+ * ⭐⭐ SUPERSEDED 2026-09-03 — ROW O-17. THE PARAGRAPH ABOVE IS KEPT VERBATIM
+ * RATHER THAN REWRITTEN, BECAUSE IT RECORDS A SPECIFIC EARLIER OWNER RULING AND
+ * THE OWNER SHOULD READ THE CHANGE RATHER THAN DISCOVER IT. Seat: Opus 5, lane
+ * REGISTRY. Authority: the owner handed row O-17 to the chair in chat on
+ * 2026-09-03, which is what re-opens the §763 carve-out; §881.4's general word
+ * ("light everything up before the exhaustive review") does not on its own
+ * reverse a specific earlier ruling, which is exactly why this row sat on the
+ * desk instead of being taken as chair-class.
+ *
+ * WHAT IS SUPERSEDED, WORD FOR WORD: "lighting an unsigned surface is
+ * structurally impossible, not procedurally discouraged" — the `&&` that carried
+ * §763's carve-out, "nothing lights until the owner signs".
+ *
+ * ⛔ AND A STRUCTURAL LAW IS REPLACED, NOT DELETED. The cheap reading of this row
+ * is "relax the conjunction and move on", which would leave the surface able to
+ * light silently with nothing in the old law's place. What the owner's later word
+ * actually changed is WHICH law is true, not whether there is one:
+ *
+ *     WAS: a surface may not be LIT while its numbers are UNSIGNED.
+ *     IS:  a surface may be lit while its numbers are unsigned, and it MUST THEN
+ *          SAY SO. A lit-unsigned surface reports DRAFT, and it is unconstructible
+ *          for it to report SIGNED.
+ *
+ * That is `faithTuningState()` below, and the four corners of (signed, live) are
+ * driven in `tests/domain/faithTuningSurface.test.js` exactly as the old
+ * conjunction's corners were. The candidate values are untouched, and `signed`
+ * stays FALSE: this row lights a door, it does not sign a number. THE PROMISE
+ * keeps tuning owner-signed and the pen's act is still the LAST one.
+ *
+ * WHAT MOVES FOR A CUSTOMER: nothing, measurably. `faithTuningArmed()` has ZERO
+ * production readers at this tip (grep over `src/`: this file's own definition
+ * and its comments), `FAITH_FIELD_DOOR` is still a named string no gate reads,
+ * and the estate is DORMANT BY ABSENCE besides — no deity in it authors a boon or
+ * a bane. What changes is that the review can now READ this surface as lit-draft
+ * instead of reading it dark and inferring nothing from that.
+ *
+ * ⚠ THE DEITY DOCTRINE IS NOT ENGAGED BY THIS ROW, AND IT WAS CHECKED RATHER THAN
+ * ASSUMED. Faith is CULTURE, never theology. Nothing here asserts that a god
+ * exists or acts: every magnitude the field can produce is a function of ADHERENT
+ * SHARE and PIETY, `renormShares` conserves the adherent pool so adding a god
+ * DIVIDES it rather than adding to it, and the witness ladder only ever steps
+ * DOWN from what a community was authored to hold. The word this car changes is
+ * the ARMING word, which makes no claim about a deity in either direction.
+ *
  * WHAT `live` GOVERNS — AND, STATED HONESTLY, WHAT IT DOES NOT:
  *
  *   • IT GOVERNS THE DOOR. `FAITH_FIELD_DOOR` (the virtual flag key D7 names,
@@ -71,23 +115,53 @@ import { CAUSAL_SWING } from './faithChannelBindings.js';
 
 /**
  * THE SIGNATURE RECORD. Two words; see the header for why not one.
- * Today: unsigned and dark — every consumer of the tables below is either dormant
- * by data (no deity authors the fields) or chartered under its own governance.
+ * Today: LIT AND UNSIGNED — candidate-lit, row O-17 (2026-09-03). Every consumer
+ * of the tables below is still dormant by data (no deity authors the fields) or
+ * chartered under its own governance, so the lit word changes no output; what it
+ * changes is that the surface reads as DRAFT rather than as dark.
+ * ⛔ `signed` is the OWNER'S WORD and no lane may move it. `live` is the door.
  * @type {Readonly<{ signed: boolean, live: boolean }>}
  */
-export const FAITH_TUNING_SIGNATURE = Object.freeze({ signed: false, live: false });
+export const FAITH_TUNING_SIGNATURE = Object.freeze({ signed: false, live: true });
+
+/** The three honest states of this surface. Typed buckets, never free text. */
+export const FAITH_SIGNATURE_STATES = Object.freeze({
+  DARK: 'dark',
+  DRAFT: 'draft',
+  SIGNED: 'signed',
+});
 
 /**
- * THE DERIVATION — sign-then-light, structural. `live` cannot arm while `signed`
- * is false because the record only arms through this conjunction; there is no
- * second reader of the raw words. The signature argument is defaulted rather than
- * closed over so the law itself is executable: the test drives the three
- * counterfactual corners without mutating the frozen record.
+ * THE DERIVATION — the door word alone, since row O-17. The signature argument is
+ * defaulted rather than closed over so the law stays executable: the test drives
+ * the counterfactual corners without mutating the frozen record.
+ *
+ * ⚠ IT USED TO BE `signed && live`, AND THE HEADER RECORDS WHAT REPLACED IT. Read
+ * this with `faithTuningState()` below: arming no longer implies signed numbers,
+ * so a consumer that must not present candidate values as approved reads the
+ * STATE, not the boolean.
  * @param {{ signed?: unknown, live?: unknown }} [signature]
- * @returns {boolean} true only when the surface is BOTH signed and lit
+ * @returns {boolean} true when the surface's door is open
  */
 export function faithTuningArmed(signature = FAITH_TUNING_SIGNATURE) {
-  return signature.signed === true && signature.live === true;
+  return signature.live === true;
+}
+
+/**
+ * THE REPLACEMENT LAW, STRUCTURAL THE WAY THE CONJUNCTION WAS. A lit surface whose
+ * numbers are unsigned reports DRAFT; `signed` is reachable ONLY through the
+ * owner's literal `true`, so no arrangement of these two words can make an
+ * unsigned surface report itself as approved. That is the guarantee §763's `&&`
+ * used to carry, re-pointed at the claim the estate actually needs now that
+ * mechanisms light with candidate values and the pen signs LAST.
+ * @param {{ signed?: unknown, live?: unknown }} [signature]
+ * @returns {string} one of FAITH_SIGNATURE_STATES
+ */
+export function faithTuningState(signature = FAITH_TUNING_SIGNATURE) {
+  if (!faithTuningArmed(signature)) return FAITH_SIGNATURE_STATES.DARK;
+  return signature.signed === true
+    ? FAITH_SIGNATURE_STATES.SIGNED
+    : FAITH_SIGNATURE_STATES.DRAFT;
 }
 
 /**
@@ -109,10 +183,10 @@ export const FAITH_FIELD_DOOR = 'faithFieldEnabled';
  * @type {Readonly<{ status: string, signedBy: string|null, source: string, ritual: string, coverage: string }>}
  */
 export const FAITH_TUNING_PROVENANCE = Object.freeze({
-  status: 'CANDIDATE, OWNER-UNSIGNED (every table below is a draft; frozen only by the owner pen)',
+  status: 'CANDIDATE, OWNER-UNSIGNED, DRAFT-LIT (row O-17, 2026-09-03: the door is open over candidate numbers; every table below is a draft, frozen only by the owner pen)',
   signedBy: null,
   source: 'W-FAITH cars F1c-F5c as built; DESIGN_W_FAITH D3/D4 and the D2 supersession (ODQ 800.3 J2); the D4 density signature precedent',
-  ritual: 'To sign: set signed true and write the name here, in this file, in one diff. To light: set live true in a LATER diff; faithTuningArmed() answers true only when both words are true, so lighting an unsigned surface cannot be expressed.',
+  ritual: 'To sign: set signed true and write the name here, in this file, in one diff. SUPERSEDED 2026-09-03 by row O-17, and the old ritual is quoted here so the change is read rather than discovered: "To light: set live true in a LATER diff; faithTuningArmed() answers true only when both words are true, so lighting an unsigned surface cannot be expressed." The door now arms on live alone; what cannot be expressed is a LIT surface calling itself signed, which faithTuningState() refuses.',
   coverage: 'FAITH_TUNING_COVERAGE enumerates every tunable key and every candidate vocabulary this signature reaches; the partition test holds it to the tables both ways.',
 });
 
