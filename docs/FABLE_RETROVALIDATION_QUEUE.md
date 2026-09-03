@@ -2529,3 +2529,47 @@ The lane reported that at the §885 gated tip **both registers were refrozen BEF
 *What Fable re-derives:* the register-ordering law first — it is the one finding that would have silently landed a wrong figure, and it has no gate. Then the two self-found false-output defects, because a lane auditing its own instrument is the behaviour this program most wants to reward.
 
 *Priority:* **HIGH for the ordering law.** MEDIUM for the rest.
+
+---
+
+## §885.2 · THE DARK-READER DESIGN'S ELEVEN CHAIR ROWS, RULED (2026-09-03, chair session 58f0a8e2, SEAT: Opus 5 — Fable-unvalidated)
+
+**Why this act exists.** The chair had said its next act was to rule these rows and then ended a turn without doing it. **A build lane dispatched onto unruled design builds on sand.** Ruled here, before TRAIN 1 is dispatched.
+
+**ALL ELEVEN RATIFIED. Two carry ground the lane did not have, and one is ratified with a flag.**
+
+**J1 — ONE FACT, ONE SENTENCE, refusing the annex's own R-DST-W4-d. RATIFIED, and on a SECOND ground the lane could not know.** The lane's ground is measurement: once severity is honoured, DS-GEN-1 has **one** eligible variant at `catastrophic`, so "three surfaces say three different things" is **unachievable**, not merely unwise. ⭐ **The chair adds the ground that settles it: the OWNER already ruled this territory AFTER that annex note was written** — the angles are **anti-staleness variation, not a lens taxonomy**, and the site must not infer what a reader wants. **R-DST-W4-d is precisely an attempt to use angles as a per-surface taxonomy.** So the note is not only impossible, it is contrary to a later owner ruling. **Refusing an authored annex note is the loudest call in the document and it is correct twice over.** *Veto shape:* the parked seeded rotation, re-costed.
+
+**J2 RATIFIED** — and ⭐ **parking the rotation rather than rejecting it is the better craft**: it preserves the option with its price attached rather than deleting it and re-deriving later.
+
+**J3 RATIFIED with the veto named.** Vocabulary in the kernel as a frozen constant plus a walker costs no generator change, no regeneration and no annex edit, and the walker makes drift impossible. The alternative is *more correct by layer* and buys nothing for a regeneration that would disturb seven leaves whose byte-identity is a **proven** property. ⚠ *If a generator change happens anyway for another reason, move it then* — that is the moment the trade flips.
+
+**J4 RATIFIED — and it is not a judgment at all, it is a measurement.** Per-pool derivation is **forced by the data** (`DS-GEN-9 founding` unmarked; `DS-GEN-6 tier overlay: city` mixed). A per-block rule would be wrong on the tree as it stands.
+
+**J5 RATIFIED.** Fail-closed means `[] → null → silence`, never "render everything" and never "throw". It matches R-DST-K, which already means silence, and ⭐ **a throw on a display path is worse than a blank surface** — the blank degrades, the throw takes the page.
+
+**J6 RATIFIED.** ⭐ **Repairing the parser is hygiene regardless of whether anything routes on it** — a field that is 50% unroutable prose is a defect whether or not it is load-bearing, and separating the repair from the routing decision is what makes both cheap.
+
+**J7 RATIFIED — ⚠ BUT FLAGGED, and the flag is the point.** Shrink-only rather than assert-to-zero is chosen because **an assert-to-zero needs an eleventh census slot and there is none.** ⛔ **That is a self-imposed constant bounding a design choice, which this program's own law says must be re-asked rather than silently obeyed.** The ruling stands because shrink-only is the only *available* shape today — but it is recorded that **the shape was chosen by census scarcity, not by design preference**, and ⭐ **if the census ever gains headroom (by curing a banked failure rather than by raising the ceiling), assert-to-zero becomes available and should be re-asked.**
+
+**J8 RATIFIED.** No second reading, no stacked ladder; `legibilityRung` is the depth ladder. Consistent with the owner's ruling that the reader chooses depth by where they look and the software guesses nothing.
+
+**J9 RATIFIED** — per-desk `manualChunks` names, following the file's own in-tree precedent rather than inventing a scheme.
+
+**J10 RATIFIED, and it corrects both skeptics.** The parser car is **not** first; the draw key never contained `sectionTarget`, so the "must land first" reasoning both skeptics endorsed was wrong. ⭐ **A correction that survives two skeptics is worth more than an agreement that survives none.**
+
+**J11 RATIFIED.** The import stays and the docblock is corrected to stop claiming the leaves are import-free — fixing the import instead would inline a live engine string the generator deliberately refuses. ⭐ **This is the citation law applied to a docblock: a comment that makes a false claim about the tree is a mint wearing a citation's clothes.**
+
+### ⛔ THE OWNER ROWS — ROUTED, NOT ABSORBED, AND ONE OF THEM BLOCKS
+
+**O1 — the 338 em dashes. ⛔ THIS GENUINELY BLOCKS THE FIRST DESK CAR and the chair will not absorb it.** They are already banked ratchet debt, so nothing is owed today; **the day a desk lights they become customer-visible prose against VOICE_AND_TONE §3**, and they are an owner-signed ONE-REGEN constituent. Per-leaf counts exist so the ruling can be per desk. **The lane's conservative default is "none", meaning it stops rather than guessing — correct.** ⇒ **TRAIN 1 (dark) proceeds; DESK WIRING does not, until this is ruled.**
+
+**O2 — paid-surface exposure.** State prose derives at display time from fields that already survive `publicSafe.js`, so **it renders on gallery and anonymous dossiers automatically unless the mount gates it.** Conservative default until ruled: `publicDossier ⇒ no state prose`. ⭐ **The chair OPERATES under that default** — it is the restrictive read, and the restrictive read is the safe one when the caller is wrong.
+
+**O3 — the 13-state authoring bill.** Corpus authoring, not code. Default: record and light anyway, since the ratchet only falls. **Acceptable to operate under.**
+
+**O4 — DS-GEN-3 thin on the highest-cadence surface.** A **watch item, not a blocker** — and ⭐ it stops being a blocker *precisely because the angle axis was refused*, since under this design it reads ~2.95 distinct of 3 across ten settlements, the corpus's normal figure.
+
+*What Fable re-derives:* J1 first, because refusing an authored annex note is the largest single call and the chair added a ground the lane did not have. Then J7's flag, which is the one place a scarcity constraint is shaping a design.
+
+*Priority:* MEDIUM for the rulings. ⛔ **HIGH for O1**, which is a live block on the wave the owner most wants.
