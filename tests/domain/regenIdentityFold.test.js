@@ -16,7 +16,7 @@
  */
 import { describe, expect, test } from 'vitest';
 
-import { foldRegenIdentity, npcStatesAfterRosterReroll } from '../../src/domain/npc/regenIdentityFold.js';
+import { foldRegenIdentity, npcStatesAfterRosterReroll, npcLadderAfterRosterReroll } from '../../src/domain/npc/regenIdentityFold.js';
 import { graduateNpc, npcLedgerOf } from '../../src/domain/worldPulse/npcLedger.js';
 import { npcId } from '../../src/domain/worldPulse/npcAgency.js';
 
@@ -207,5 +207,151 @@ describe('the ledger half — one soul keeps one durable id, and nobody else is 
     expect(out.originRefsRefreshed).toEqual([g.wnpcId]);
     expect(out.worldState.npcStates[`${TOWN}:npc_8`].marker).toBe('two');
     expect(npcLedgerOf(out.worldState).roamers[g.wnpcId].originRef.rosterId).toBe('npc_8');
+  });
+});
+
+// ── ENC-6 THE FIFTH MAP: the ladder's two grains ───────────────────────────────
+
+/** A bond/grudge mark. `foreignSid` is what makes a mark CROSS-BORDER and therefore
+ *  vulnerable to the far town's reroll; a domestic mark carries none. */
+const mark = (foreignSid) => (foreignSid
+  ? { sev: 0.5, week: 10, kind: 'friendship', foreignSid }
+  : { sev: 0.5, week: 10, kind: 'friendship' });
+
+/** A world whose ladder holds TOWN's three standings and one rung list, plus a record in
+ *  OTHER carrying a cross-border bond INTO TOWN and a domestic bond that must not move. */
+function seededLadder() {
+  return {
+    tick: 5,
+    spatialLedgers: {
+      npcLadder: {
+        [TOWN]: {
+          npcs: {
+            [`${TOWN}:npc_1`]: { stock: 3, stigma: null, grudges: {} },
+            [`${TOWN}:npc_2`]: { stock: 7, stigma: { sev: 0.4, week: 3, tick: 3 }, grudges: {} },
+            [`${TOWN}:npc_3`]: { stock: 4, stigma: null, grudges: {} },
+          },
+          factions: { guild: { rungs: [`${TOWN}:npc_2`, `${TOWN}:npc_1`, `${TOWN}:npc_3`], week: 10 } },
+        },
+        [OTHER]: {
+          npcs: {
+            [`${OTHER}:npc_1`]: {
+              stock: 5, stigma: null, grudges: {},
+              bonds: {
+                [`${TOWN}:npc_2`]: mark(TOWN),           // a keeper who MOVES
+                [`${TOWN}:npc_3`]: mark(TOWN),           // a stranger's slot ⇒ DROPPED
+                [`${OTHER}:npc_9`]: mark(null),          // domestic ⇒ untouched
+              },
+              grudges: { [`${TOWN}:npc_1`]: { sev: 0.3, week: 8, foreignSid: TOWN } },
+            },
+          },
+          factions: { court: { rungs: [`${OTHER}:npc_1`] } },
+        },
+      },
+    },
+  };
+}
+
+const KEEPER = [{ fromId: 'npc_2', id: 'npc_3', name: 'Two' }];
+
+describe('ENC-6 the ladder fold — GRAIN 1, the record key in the rerolled town', () => {
+  test('a moved keeper carries his whole standing, and everybody replaced is dropped', () => {
+    // The grain a first reading misses. Before this fold a reroll handed a man's stock,
+    // his stigma, his grudges and every mark he held to the stranger who took his slot.
+    const out = npcLadderAfterRosterReroll(seededLadder(), TOWN, KEEPER);
+    expect(out.changed).toBe(true);
+    const rec = out.worldState.spatialLedgers.npcLadder[TOWN];
+    expect(rec.npcs[`${TOWN}:npc_3`].stock).toBe(7);                 // the keeper's own stock
+    expect(rec.npcs[`${TOWN}:npc_3`].stigma.sev).toBe(0.4);          // and his own stigma
+    expect(rec.npcs[`${TOWN}:npc_2`]).toBeUndefined();
+    expect(rec.npcs[`${TOWN}:npc_1`]).toBeUndefined();               // replaced ⇒ dropped
+    expect(out.moved).toEqual([`${TOWN}:npc_2`]);
+    expect(out.dropped.sort()).toEqual([`${TOWN}:npc_1`, `${TOWN}:npc_3`].sort());
+  });
+
+  test('the RUNG LIST follows the same two verdicts — a seat is not handed to a stranger', () => {
+    // A rungs array is a list of the same keys, so leaving it alone would re-seat the
+    // rerolled cast by arithmetic: index 0 would name whoever now holds that slot.
+    const out = npcLadderAfterRosterReroll(seededLadder(), TOWN, KEEPER);
+    expect(out.worldState.spatialLedgers.npcLadder[TOWN].factions.guild.rungs).toEqual([`${TOWN}:npc_3`]);
+  });
+
+  test('an UNLOCKED reroll preserves nobody, so the town keeps no standing at all', () => {
+    const out = npcLadderAfterRosterReroll(seededLadder(), TOWN, null);
+    expect(out.changed).toBe(true);
+    expect(out.worldState.spatialLedgers.npcLadder[TOWN].npcs).toEqual({});
+    expect(out.worldState.spatialLedgers.npcLadder[TOWN].factions.guild.rungs).toEqual([]);
+  });
+});
+
+describe('ENC-6 the ladder fold — GRAIN 2, the cross-border mark held elsewhere', () => {
+  test('a mark pointing at a keeper is RE-KEYED, and one pointing at a stranger is DROPPED', () => {
+    // Without this half a magistrate in one town goes on holding a friendship with a name
+    // that now belongs to somebody else — the same rebind, one border away.
+    const out = npcLadderAfterRosterReroll(seededLadder(), TOWN, KEEPER);
+    const held = out.worldState.spatialLedgers.npcLadder[OTHER].npcs[`${OTHER}:npc_1`];
+    expect(held.bonds[`${TOWN}:npc_3`]).toBeTruthy();     // the keeper's mark followed him
+    expect(held.bonds[`${TOWN}:npc_2`]).toBeUndefined();  // off the old key
+    expect(out.marksRekeyed).toEqual([`${OTHER}|${OTHER}:npc_1|${TOWN}:npc_2`]);
+    // TWO drops, and the second is the point: the GRUDGE on npc_1 is a cross-border mark
+    // too, and a fold that only walked bonds would have left it pointing at a stranger.
+    expect(out.marksDropped).toEqual([
+      `${OTHER}|${OTHER}:npc_1|${TOWN}:npc_1`,
+      `${OTHER}|${OTHER}:npc_1|${TOWN}:npc_3`,
+    ]);
+  });
+
+  test('GRUDGES take the same fold as bonds — the roads ransom bond is cured by this entry', () => {
+    const out = npcLadderAfterRosterReroll(seededLadder(), TOWN, KEEPER);
+    const held = out.worldState.spatialLedgers.npcLadder[OTHER].npcs[`${OTHER}:npc_1`];
+    expect(held.grudges[`${TOWN}:npc_1`]).toBeUndefined(); // npc_1 was replaced
+  });
+
+  test('a DOMESTIC mark is never touched — foreignSid is what makes a mark vulnerable', () => {
+    const out = npcLadderAfterRosterReroll(seededLadder(), TOWN, KEEPER);
+    const held = out.worldState.spatialLedgers.npcLadder[OTHER].npcs[`${OTHER}:npc_1`];
+    expect(held.bonds[`${OTHER}:npc_9`]).toBeTruthy();
+    expect(out.worldState.spatialLedgers.npcLadder[OTHER].factions.court.rungs).toEqual([`${OTHER}:npc_1`]);
+  });
+});
+
+describe('ENC-6 the ladder fold — the dormancy and totality contracts', () => {
+  test('a world with NO ladder ledger is returned by REFERENCE (no durable write burned)', () => {
+    const ws = { tick: 5, npcStates: {} };
+    const out = npcLadderAfterRosterReroll(ws, TOWN, KEEPER);
+    expect(out.changed).toBe(false);
+    expect(out.worldState).toBe(ws);
+  });
+
+  test('a reroll that moves nobody and drops nobody is also a no-op by reference', () => {
+    const ws = seededLadder();
+    const all = [
+      { fromId: 'npc_1', id: 'npc_1' }, { fromId: 'npc_2', id: 'npc_2' }, { fromId: 'npc_3', id: 'npc_3' },
+    ];
+    const out = npcLadderAfterRosterReroll(ws, TOWN, all);
+    expect(out.changed).toBe(false);
+    expect(out.worldState).toBe(ws);
+  });
+
+  test('garbage is survived: no worldState, no settlement id, a non-object ledger', () => {
+    expect(npcLadderAfterRosterReroll(null, TOWN, KEEPER).changed).toBe(false);
+    expect(npcLadderAfterRosterReroll(seededLadder(), '', KEEPER).changed).toBe(false);
+    expect(npcLadderAfterRosterReroll({ spatialLedgers: { npcLadder: 7 } }, TOWN, KEEPER).changed).toBe(false);
+  });
+
+  test('THE BRIDGE folds the ladder alongside npcStates in the one step', () => {
+    const ws = { ...seededStates(), ...seededLadder() };
+    const out = foldRegenIdentity({ worldState: ws, settlementId: TOWN, preserved: KEEPER });
+    expect(out.changed).toBe(true);
+    expect(out.npcStatesMoved).toEqual([`${TOWN}:npc_2`]);
+    expect(out.ladderMoved).toEqual([`${TOWN}:npc_2`]);
+    expect(out.ladderMarksRekeyed).toEqual([`${OTHER}|${OTHER}:npc_1|${TOWN}:npc_2`]);
+    expect(out.ladderMarksDropped).toEqual([
+      `${OTHER}|${OTHER}:npc_1|${TOWN}:npc_1`,
+      `${OTHER}|${OTHER}:npc_1|${TOWN}:npc_3`,
+    ]);
+    // Both maps really moved on the SAME pass, which is the bridge's whole claim.
+    expect(out.worldState.npcStates[`${TOWN}:npc_3`].marker).toBe('two');
+    expect(out.worldState.spatialLedgers.npcLadder[TOWN].npcs[`${TOWN}:npc_3`].stock).toBe(7);
   });
 });

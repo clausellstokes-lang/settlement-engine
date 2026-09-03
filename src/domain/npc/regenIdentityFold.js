@@ -89,6 +89,9 @@
  */
 
 import { refreshOriginRefsAfterRegen } from '../worldPulse/npcLedger.js';
+// The four spatial accessors, from the leaf that has ZERO imports of its own — so the
+// FIFTH map below costs this store-reached leaf no import graph at all.
+import { getSpatialLedger, setSpatialLedger } from '../spatial/spatialLedgerAccess.js';
 
 /**
  * THE KEY FORMAT, RE-SPELLED ON PURPOSE, AND PINNED.
@@ -199,6 +202,187 @@ export function npcStatesAfterRosterReroll(worldState, settlementId, preserved) 
 }
 
 /**
+ * ENC-6 — THE FIFTH MAP, AND IT HAS BOTH OF THIS DEFECT'S GRAINS.
+ *
+ * ── WHAT WAS BROKEN, AND WHY IT WAS INVISIBLE ───────────────────────────────
+ *
+ * `spatialLedgers.npcLadder[sid]` holds a person's STANDING — their stock, their
+ * stigma, their grudges and their bonds — under `npcs[nid]` with
+ * `nid = ${sid}:${npc.id}`, and their seat under `factions[fkey].rungs[]`, which is a
+ * list of the same keys. `regenIdentityFold.js` named `npcLadder` NOWHERE. So a reroll
+ * of a man's OWN settlement handed his standing, his stigma, his grudges and every
+ * mark he held to whichever stranger took his slot — the exact rebind class the header
+ * above describes for `npcStates`, on a map nobody had folded.
+ *
+ * It stayed invisible for the reason every rebind does: the key never leaves the
+ * roster, so no prune fires and no existence census objects. The entry exists; it is
+ * simply about the wrong person. And it stayed SMALL because almost nothing writes
+ * those records today.
+ *
+ * ── WHY IT IS BEING FIXED NOW, AND ON WHOSE CLOCK ───────────────────────────
+ *
+ * ENC's chance meetings mint a standing record per stop for nearly every operative and
+ * notable, which makes this defect load-bearing the day the flag lights. The defect is
+ * PRE-EXISTING and this design does not claim to have caused it — but a lit
+ * `chanceEncountersEnabled` over an unfolded ladder ghosts on the reroll path THE
+ * PROMISE names, and that is not a thing to discover in the soak. The gate this must
+ * not pass is the LIGHTING gate, not the landing.
+ *
+ * ── THE TWO GRAINS, AND WHY ONE OF THEM IS NOT ENOUGH ───────────────────────
+ *
+ *  1. THE RECORD KEY, for the settlement being rerolled. `npcs[nid]` and every
+ *     `factions[*].rungs[]` entry take the `npcStates` algebra verbatim: keepers
+ *     re-keyed `fromId -> id`, everybody else DROPPED. This is the grain a first
+ *     reading misses, because the obvious cross-border pointer below looks like the
+ *     whole problem and is in fact the smaller half.
+ *  2. THE CROSS-BORDER POINTER, held by OTHER settlements. A bond or grudge minted
+ *     across a border is keyed by the counterpart's composite id and carries
+ *     `foreignSid` naming their town (the D-7f convention). When THAT town rerolls,
+ *     every mark pointing into it must follow the same two verdicts: a keeper's mark
+ *     is re-keyed, a stranger's is dropped. Without this half a magistrate in one town
+ *     goes on holding a friendship with a name that now belongs to somebody else.
+ *
+ * THE ROADS RANSOM BOND IS CURED BY THE SAME ENTRY — it carries the identical
+ * `foreignSid` shape and was never folded either.
+ *
+ * ⚠ ONE-TIME DECLARED SHIFT: on a save that has BOTH a lit memory weave and a
+ * completed reroll, cross-border marks that were silently rebound now move or vanish.
+ * There are no such saves in product (the weave is lit in no preset), which is why the
+ * cure can ride here rather than a migration.
+ *
+ * PURE, and same-reference-when-nothing-moved like its siblings.
+ *
+ * @param {Record<string, unknown>|null|undefined} worldState
+ * @param {string} settlementId  the SAVE id the ladder's nids are built from
+ * @param {Array<{id?: string, fromId?: string}>|null|undefined} preserved
+ * @returns {{ worldState: Record<string, unknown>|null|undefined, changed: boolean,
+ *   moved: string[], dropped: string[], marksRekeyed: string[], marksDropped: string[] }}
+ */
+export function npcLadderAfterRosterReroll(worldState, settlementId, preserved) {
+  const unchanged = {
+    worldState,
+    changed: false,
+    moved: /** @type {string[]} */ ([]),
+    dropped: /** @type {string[]} */ ([]),
+    marksRekeyed: /** @type {string[]} */ ([]),
+    marksDropped: /** @type {string[]} */ ([]),
+  };
+  const prefix = keyPrefix(settlementId);
+  if (!prefix || prefix === ':') return unchanged;
+  const ledgerRaw = getSpatialLedger(/** @type {Record<string, unknown>} */ (worldState || {}), 'npcLadder');
+  if (!ledgerRaw || typeof ledgerRaw !== 'object' || Array.isArray(ledgerRaw)) return unchanged;
+  const ledger = /** @type {Record<string, unknown>} */ (ledgerRaw);
+
+  const survivors = survivorsOf(preserved);
+  /** @type {Map<string, string>} */
+  const rekeyed = new Map();
+  /** @type {Set<string>} */
+  const gone = new Set();
+  /** @type {Record<string, unknown>} */
+  const nextLedger = {};
+  let changed = false;
+
+  // Pass 1 — the RECORD KEY grain, in the rerolled town only. Source order is walked so
+  // a town whose rows did not move keeps its serialized key order byte-for-byte.
+  for (const [sid, raw] of Object.entries(ledger)) {
+    if (sid !== String(settlementId)) { nextLedger[sid] = raw; continue; }
+    const rec = asRecord(raw);
+    if (!rec) { nextLedger[sid] = raw; continue; }
+    const npcs = asRecord(rec.npcs);
+    /** @type {Record<string, unknown>} */
+    const nextNpcs = {};
+    if (npcs) {
+      for (const [nid, standing] of Object.entries(npcs)) {
+        if (!nid.startsWith(prefix)) { nextNpcs[nid] = standing; continue; }
+        const inherited = survivors.get(nid.slice(prefix.length));
+        if (inherited === undefined) { gone.add(nid); changed = true; continue; }
+        const nextNid = prefix + inherited;
+        if (nextNid !== nid) { rekeyed.set(nid, nextNid); changed = true; }
+        nextNpcs[nextNid] = standing;
+      }
+    }
+    // The rungs are a LIST of the same keys, so a seat follows its person or leaves with
+    // them. A rung left pointing at a dropped key would seat a stranger by arithmetic.
+    const factions = asRecord(rec.factions);
+    /** @type {Record<string, unknown>} */
+    const nextFactions = {};
+    if (factions) {
+      for (const [fkey, fraw] of Object.entries(factions)) {
+        const frec = asRecord(fraw);
+        const priorRungs = frec && Array.isArray(frec.rungs) ? frec.rungs.map((r) => String(r)) : null;
+        if (!frec || !priorRungs) { nextFactions[fkey] = fraw; continue; }
+        const rungs = priorRungs.filter((r) => !gone.has(r)).map((r) => rekeyed.get(r) ?? r);
+        if (rungs.length !== priorRungs.length || rungs.some((r, i) => r !== priorRungs[i])) {
+          nextFactions[fkey] = { ...frec, rungs };
+          changed = true;
+        } else nextFactions[fkey] = fraw;
+      }
+    }
+    nextLedger[sid] = { ...rec, ...(npcs ? { npcs: nextNpcs } : {}), ...(factions ? { factions: nextFactions } : {}) };
+  }
+
+  // Pass 2 — the CROSS-BORDER POINTER grain, everywhere ELSE. A mark whose `foreignSid`
+  // names the rerolled town is keyed by a composite id that town has just re-issued, so
+  // it takes the same two verdicts its subject did.
+  /** @type {string[]} */
+  const marksRekeyed = [];
+  /** @type {string[]} */
+  const marksDropped = [];
+  if (rekeyed.size > 0 || gone.size > 0) {
+    for (const [sid, raw] of Object.entries(nextLedger)) {
+      const rec = asRecord(raw);
+      const npcs = rec ? asRecord(rec.npcs) : null;
+      if (!rec || !npcs) continue;
+      /** @type {Record<string, unknown>} */
+      const nextNpcs = {};
+      let townMoved = false;
+      for (const [nid, standingRaw] of Object.entries(npcs)) {
+        const standing = asRecord(standingRaw);
+        if (!standing) { nextNpcs[nid] = standingRaw; continue; }
+        /** @type {Record<string, unknown>} */
+        const patch = {};
+        let personMoved = false;
+        for (const field of ['bonds', 'grudges']) {
+          const marks = asRecord(standing[field]);
+          if (!marks) continue;
+          /** @type {Record<string, unknown>} */
+          const nextMarks = {};
+          let fieldMoved = false;
+          for (const [otherNid, markRaw] of Object.entries(marks)) {
+            const mark = asRecord(markRaw);
+            if (!mark || mark.foreignSid !== String(settlementId)) { nextMarks[otherNid] = markRaw; continue; }
+            if (gone.has(otherNid)) { marksDropped.push(`${sid}|${nid}|${otherNid}`); fieldMoved = true; continue; }
+            const to = rekeyed.get(otherNid);
+            if (to === undefined) { nextMarks[otherNid] = markRaw; continue; }
+            nextMarks[to] = markRaw;
+            marksRekeyed.push(`${sid}|${nid}|${otherNid}`);
+            fieldMoved = true;
+          }
+          if (fieldMoved) { patch[field] = nextMarks; personMoved = true; }
+        }
+        if (personMoved) { nextNpcs[nid] = { ...standing, ...patch }; townMoved = true; } else nextNpcs[nid] = standingRaw;
+      }
+      if (townMoved) { nextLedger[sid] = { ...rec, npcs: nextNpcs }; changed = true; }
+    }
+  }
+
+  if (!changed) return unchanged;
+  return {
+    worldState: setSpatialLedger(/** @type {Record<string, unknown>} */ (worldState), 'npcLadder', nextLedger),
+    changed: true,
+    moved: [...rekeyed.keys()].sort(),
+    dropped: [...gone].sort(),
+    marksRekeyed: marksRekeyed.sort(),
+    marksDropped: marksDropped.sort(),
+  };
+}
+
+/** A plain object or null. @param {unknown} v @returns {Record<string, unknown>|null} */
+function asRecord(v) {
+  return v && typeof v === 'object' && !Array.isArray(v) ? /** @type {Record<string, unknown>} */ (v) : null;
+}
+
+/**
  * THE BRIDGE - both world-scoped identity maps folded from the one report, in the
  * one step that already folds the roster, the locks and the pins.
  *
@@ -212,17 +396,27 @@ export function npcStatesAfterRosterReroll(worldState, settlementId, preserved) 
  * @param {Record<string, unknown>|null|undefined} args.worldState
  * @param {string} args.settlementId
  * @param {Array<{id?: string, fromId?: string, name?: string}>|null|undefined} args.preserved
+ * ENC-6 adds a THIRD half on the same report and the same one step. It is independent of
+ * the other two in the same way they are of each other: a world with no ladder ledger takes
+ * the npcStates repair and pays nothing for it.
+ *
  * @returns {{ worldState: Record<string, unknown>|null|undefined, changed: boolean, npcStatesMoved: string[],
- *   npcStatesDropped: string[], originRefsRefreshed: string[] }}
+ *   npcStatesDropped: string[], originRefsRefreshed: string[], ladderMoved: string[],
+ *   ladderDropped: string[], ladderMarksRekeyed: string[], ladderMarksDropped: string[] }}
  */
 export function foldRegenIdentity({ worldState, settlementId, preserved }) {
   const states = npcStatesAfterRosterReroll(worldState, settlementId, preserved);
-  const ledger = refreshOriginRefsAfterRegen(states.worldState, settlementId, preserved);
+  const ladder = npcLadderAfterRosterReroll(states.worldState, settlementId, preserved);
+  const ledger = refreshOriginRefsAfterRegen(ladder.worldState, settlementId, preserved);
   return {
     worldState: ledger.worldState,
-    changed: states.changed || ledger.changed,
+    changed: states.changed || ladder.changed || ledger.changed,
     npcStatesMoved: states.moved,
     npcStatesDropped: states.dropped,
     originRefsRefreshed: ledger.refreshed,
+    ladderMoved: ladder.moved,
+    ladderDropped: ladder.dropped,
+    ladderMarksRekeyed: ladder.marksRekeyed,
+    ladderMarksDropped: ladder.marksDropped,
   };
 }
