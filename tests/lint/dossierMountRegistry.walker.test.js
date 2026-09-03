@@ -545,40 +545,6 @@ describe('C2 mount registry — the shipped table', () => {
       .toEqual(CANONICAL_ORDER.filter((id) => UNMOUNTED_BLOCKS.includes(id)));
   });
 
-  test('THE ROUTER READ: drawnAtMount hands a position the depth its ROW names', () => {
-    // The arm that makes a mount id a DRAW rather than a citation. The walker's
-    // reachability rule can only see that a literal appears once under src/components; it
-    // cannot see whether the component obeyed the table. This is that half, driven over
-    // the shipped rows so the two cannot part company.
-    const rung = Object.freeze({
-      glance: 'Deficit 12%',
-      sentence: 'The town does not grow what it eats.',
-      detail: Object.freeze([{ label: 'Produced against need', value: 'short' }]),
-      provenance: Object.freeze({ blockId: 'DS-ECO-2', poolKey: 'FOOD: deficit', angle: 'ledger' }),
-    });
-    // A SENTENCE row hands the rung back whole — the position may speak.
-    expect(drawnAtMount('economics.prosperityHeader', rung)).toBe(rung);
-    expect(drawnAtMount('economics.foodSecurity', rung)).toBe(rung);
-    // A GLANCE row keeps the band word and the rows and takes the sentence away — AND the
-    // provenance with it, because a trail describing a line that was not printed is the
-    // false-report shape.
-    const glanced = drawnAtMount('economics.foodTile', rung);
-    expect(glanced.glance).toBe('Deficit 12%');
-    expect(glanced.detail).toEqual(rung.detail);
-    expect(glanced.sentence).toBeNull();
-    expect(glanced.provenance).toBeNull();
-    // Non-vacuity: the two answers must actually DIFFER, or this arm proves nothing.
-    expect(glanced.sentence).not.toBe(rung.sentence);
-    // UNMOUNTED IS SILENCE (R-DST-K), not a fallback to speech; and a desk that built no
-    // rung for this state renders nothing rather than an empty frame.
-    expect(drawnAtMount('economics.__nowhere', rung)).toBeNull();
-    expect(drawnAtMount('economics.foodTile', null)).toBeNull();
-    expect(drawnAtMount('', rung)).toBeNull();
-    // Every shipped row is answerable — no position in the table is unreachable to the
-    // one function a component is allowed to ask.
-    for (const row of DOSSIER_MOUNTS) expect(drawnAtMount(row.mount, rung)).not.toBeNull();
-  });
-
   test('SHRINK-ONLY: the dark half never grows past its committed baseline', () => {
     const measured = { UNMOUNTED_BLOCKS: { blocks: UNMOUNTED_BLOCKS.length } };
     if (UPDATE) {
@@ -636,6 +602,43 @@ describe('C3 the room — one fact, one sentence', () => {
     expect(answer.length, 'the contradiction did not plant').toBe(2);
     expect(answer.length === 1 ? answer[0] : null, 'a contradiction must read as silence')
       .toBeNull();
+
+    // ── THE ROUTER READ, the other runtime accessor, folded into this test rather than
+    // given a title of its own: the live test-title count is an ASSERTED census figure
+    // (tests/lint/sovereigntyLightingContract.walker.test.js pins it exactly), and an arm
+    // is worth adding on its evidence, not on a number it happens to move.
+    //
+    // This is the half that makes a mount id a DRAW rather than a citation. The
+    // reachability rule above can only see that a literal appears once under
+    // src/components; it cannot see whether the component obeyed the table. Driven over
+    // the SHIPPED rows, so the table and its only reader cannot part company.
+    const rung = Object.freeze({
+      glance: 'Deficit 12%',
+      sentence: 'The town does not grow what it eats.',
+      detail: Object.freeze([{ label: 'Produced against need', value: 'short' }]),
+      provenance: Object.freeze({ blockId: 'DS-ECO-2', poolKey: 'FOOD: deficit', angle: 'ledger' }),
+    });
+    // A SENTENCE row hands the rung back whole — the position may speak.
+    expect(drawnAtMount('economics.prosperityHeader', rung)).toBe(rung);
+    expect(drawnAtMount('economics.foodSecurity', rung)).toBe(rung);
+    // A GLANCE row keeps the band word and the rows and takes the sentence away — AND the
+    // provenance with it, because a trail describing a line that was never printed is the
+    // false-report shape.
+    const glanced = drawnAtMount('economics.foodTile', rung);
+    expect(glanced.glance).toBe('Deficit 12%');
+    expect(glanced.detail).toEqual(rung.detail);
+    expect(glanced.sentence).toBeNull();
+    expect(glanced.provenance).toBeNull();
+    // Non-vacuity: the two answers must actually DIFFER, or this arm proves nothing.
+    expect(glanced.sentence).not.toBe(rung.sentence);
+    // UNMOUNTED IS SILENCE (R-DST-K), not a fallback to speech; and a desk that built no
+    // rung for this state renders nothing rather than an empty frame.
+    expect(drawnAtMount('economics.__nowhere', rung)).toBeNull();
+    expect(drawnAtMount('economics.foodTile', null)).toBeNull();
+    expect(drawnAtMount('', rung)).toBeNull();
+    // Every shipped row is answerable — no position in the table is unreachable to the one
+    // function a component is allowed to ask.
+    for (const row of DOSSIER_MOUNTS) expect(drawnAtMount(row.mount, rung)).not.toBeNull();
   });
 
   test('the rung vocabulary is closed, and DETAIL is deliberately not a mount choice', () => {
