@@ -2918,3 +2918,32 @@ Lighting `2506/370/2136/22748/6122` → **`2510/370/2140/22823/6139`** (files pr
 *What Fable re-derives:* the fork-chain collision check (the load-bearing claim is that the head token appears at exactly one of 118 sites), and the three cure-the-leaf rulings' judgment.
 
 *Priority:* **HIGH for the fork-label enrolment** — it is a THE PROMISE claim; MEDIUM for the rest.
+
+## §889.1 · ENC-4 STOPS BEFORE ITS FIRST BYTE, AND A LIVE BUG IN LANDED CODE FALLS OUT OF THE RECON (2026-09-03, chair session 58f0a8e2, SEAT: Opus 5 — Fable-unvalidated)
+
+### ⛔ ENC-4 IS BLOCKED ON NINE SENTENCES THAT ARE THE OWNER'S, AND THE STOP IS MEASURED
+
+The Herald lane committed **nothing** and was right to. `FLOOR_BY_SIGNIFICANCE = { routine: 8, notable: 6, major: 4 }` (derived at `tests/helpers/kindPoolWalker.js:56-71` as `8 − rank×2`), so `chance_meeting` (notable) needs **6** pool variants and `chance_meeting_exposed` (major) needs **4**. Design §8.3 spells **2 and 1**, each followed by the literal words *"· four more"* — **nine sentences were never written by anyone.** The floor walker exists specifically to refuse *"floor-gaming stubs in the pools"* and its under-floor backlog is frozen shrink-only (*"a wave may LEAVE the list, none may join it"*). ⭐ **And the car cannot be split:** registering without pools reds the floor; routing without registering moves `unvoiced` 274→276 against an exact-equality assertion. Base controls were taken first and were green, so the red would have been the lane's own.
+
+**What DID land, and it discharges an open row:** the source-closure probe from `src/main.jsx` puts all five ENC-4 files outside the 237-module closure — **first-paint delta 0 B, so J29 is discharged and Car 4 never needed to wait for T13.** The probe hard-throws on a non-existent path and caught three wrong guesses, so this is measurement rather than absence-by-typo.
+
+### ⛔⛔ A LIVE DEFECT IN LANDED CODE, CONFIRMED BY EXECUTION WITH A CONTROL
+
+`heraldRouting.js:609-626` honours an authored Herald desk only when `sectionAuthority` is one of **four** registries. `wizardNews.js`'s `normalizeEntry` allowlist rebuilds every entry and admits only **three** — **`sovereignty_registry` is missing.** `normalizeEntry` runs on the APPEND path (`:951`) as well as the load path (`:797`), and `sovereigntyNews.js:469` really does author that authority.
+
+**Probed, not inferred:** appending a sovereignty entry returns `sectionAuthority` **DROPPED**; the same append with `envoy_registry` **survives**. ⇒ **Every sovereignty news item silently loses the authority that gives its desk placement force**, and its desk is then decided by the prefix fallback rather than by the registry that authored it. This is the write-that-survives-one-path-and-ghosts-another class, in landed code, found incidentally by a recon that was looking at something else. **Queued as its own car; not fixed mid-flight.**
+
+### ⭐ THE CHAIR'S OWN BRIEF WAS WRONG, AND THE RECON REFUTED IT
+
+The brief asserted that a catalog row with no resolvable adapter throws at module evaluation. Measured across all eleven phrased-kind registries: **that is true of exactly ONE (COMMERCIAL, `commercialReasonsNews.js:72-88`)**, true-by-accident of GRAMMAR (an undefined dereference, not a designed guard), and **REFUTED for the other nine** — SOVEREIGNTY, FAITH, INFORMATION, ENVOY and all five WAR families do no validation at all, freeze cleanly with `pool: undefined`, and fail later at first render or never. ⭐ **Totality here is enforced by WALKERS, not by module evaluation — a missed join fails a test, not a compile.** A chair claim inherited into a brief is still a claim, and this one was 1-of-11 true.
+
+### RULINGS TAKEN
+
+**(a) The naming collision is real and the Herald kind moves.** `chance_meeting` is already a live string with a different meaning — `corruptionLeash.js:70` exports it as `WILLED_MEETING_CONSPIRACY`, wired at `corruptionWeb.js:831` and pinned at `envoyChanceMeetingLedger.test.js:167`. One word on two ladders is precisely the silent semantic error `bandFamilies.js:56-63` says this estate mints new vocabularies to avoid. ⇒ **The Herald kind becomes `chance_meeting_recorded`; the conspiracy constant is NOT renamed (its value is pinned by a landed test).** This supersedes design §8.3's spelling for the first kind only.
+**(b) §5.5 vs §8.3 on the second kind is ruled to `chance_meeting_exposed`** — the owner's own row-6 wording outranks both sections; §5.5's longer `chance_meeting_approach_exposed` is a drafting artifact. Sent to the ENC-3 lane mid-flight.
+**(c) The Herald seam is pinned:** ENC-4 exports ONE builder on `faithReceipt(...)`'s model; ENC-3 calls it once per outcome. One seam, one place to adapt.
+**(d) The lane's vetoable judgment is ACCEPTED** — it found its dock carrying another lane's untracked receipt residue, measured that the dock's HEAD was sealed and the lane had reported, preserved both files byte-identically (cksum-verified) outside the dock, and proceeded rather than stopping. That was right.
+
+*What Fable re-derives:* the 1-of-11 module-eval finding, and the naming ruling's premise that the two `chance_meeting` meanings genuinely collide.
+
+*Priority:* **HIGH for the sovereignty_registry drop** — it is landed and live.
