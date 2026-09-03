@@ -78,4 +78,5 @@ export {
   deriveWizardNewsEntriesFromGraphChange,
   ensureWizardNewsFeed,
   summarizeWizardNews,
+  wizardNewsCurrentTick,
 } from './wizardNews.js';

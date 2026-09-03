@@ -483,8 +483,14 @@ export async function runAdvanceCampaignWorld({
 
     // §10 (W-COMPOSER-2): the queue-mouth refusals ride the advance digest —
     // append them to the result's feed through the house appender (dedupe/cap).
+    // `{ now }` IS LOAD-BEARING, not tidiness: the appender's stamp chain is
+    // `entry.createdAt || options.now || wallClockNow()`, so omitting the options object
+    // gave every refusal entry a LIVE wall-clock createdAt while the rest of this advance
+    // carried the pinned `now` minted at the top of this function. Same seed, same advance,
+    // different bytes — and the sibling appender (reconcileWizardNewsForCommit) already
+    // threads it. The refusals belong to THIS tick's digest, so they take THIS tick's instant.
     if (simCampaign && result && drainRefusalNews.length && result.wizardNews) {
-      result.wizardNews = appendWizardNewsEntries(result.wizardNews, drainRefusalNews);
+      result.wizardNews = appendWizardNewsEntries(result.wizardNews, drainRefusalNews, { now });
     }
 
     // FULL AUTO-RESOLVE ruling pass (realm directive 7 / J-D7). Runs on the composed

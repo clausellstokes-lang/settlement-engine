@@ -292,7 +292,11 @@ export function composeInstantWorld({
 
     // ── Compute the staged connections (organic channel discovery from members) ─
     { name: 'discoverChannels', fn: (/** @type {any} */ c) => ({
-      regionalGraph: deriveGraphWithDiscoveredCandidates(c.settlements, ensureRegionalGraph(), { now: c.now }),
+      // The SEED graph takes `c.now` too. It was `ensureRegionalGraph()` with no options while
+      // the sibling argument threaded `{ now: c.now }` — so the composer's empty starting graph
+      // took its default stamp from the wall clock inside the one step whose whole job is to be
+      // a pure function of the seed.
+      regionalGraph: deriveGraphWithDiscoveredCandidates(c.settlements, ensureRegionalGraph(undefined, { now: c.now }), { now: c.now }),
     }) },
 
     { name: 'applyTonePreset', fn: (/** @type {any} */ c) => ({ worldState: applyTonePreset(c) }) },
@@ -459,9 +463,14 @@ function assembleCampaign(c) {
     settlementIds: settlements.map(s => s.id),
     mapState,
     regionalGraph,
-    // ensureWizardNewsFeed stamps its own wall-clock updatedAt; the composer owns
-    // the artifact's timestamp, so normalize it to `now` for full replayability.
-    wizardNews: { ...ensureWizardNewsFeed(), updatedAt: now },
+    // ⛔ THE COMPOSER'S CLOCK IS `now`, AND IT IS THREADED, NOT OVERWRITTEN. This used to
+    // read `{ ...ensureWizardNewsFeed(), updatedAt: now }` — the normalizer minted a live
+    // wall-clock `updatedAt` and the spread then overwrote it one property later. The BYTES
+    // were right; the READ was not, and it was right only by key order. The composer's whole
+    // contract is a pure function of the seed (`now` defaults to EPOCH_ISO via the injected
+    // clock), so a wall-clock read inside it forfeits that for nothing. Threading `now`
+    // produces the identical value with no clock read at all.
+    wizardNews: ensureWizardNewsFeed(undefined, { now }),
     worldState,
     collapsed: false,
     accessState: 'active',

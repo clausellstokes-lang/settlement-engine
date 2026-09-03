@@ -11,6 +11,7 @@ import {
   deriveWizardNewsEntriesFromGraphChange,
   ensureRegionalGraph,
   ensureWizardNewsFeed,
+  wizardNewsCurrentTick,
 } from '../domain/region/index.js';
 // Leaf-module imports (not the `export *` barrel). Light world-state helpers
 // come from worldState.js; normalizeStressor/resolveStressorById live in the
@@ -58,10 +59,18 @@ export function campaignStateForWorldPulse(state, save, systemState, now, result
 
 export function appendWizardNewsForGraphChange(campaign, beforeGraph, afterGraph, options = {}) {
   if (!campaign) return;
-  const feed = ensureWizardNewsFeed(campaign.wizardNews);
+  // The action's timestamp goes to the NORMALIZER TOO, not only to the appender below.
+  // `ensureWizardNewsFeed` mints `updatedAt` from the wall clock when the feed carries
+  // none, so a feed being normalized for the first time inside a store action took an
+  // instant that no other line of that action shares — the exact thing the comment below
+  // says this function must not do.
+  const feed = ensureWizardNewsFeed(campaign.wizardNews, { now: options.createdAt });
   const entries = deriveWizardNewsEntriesFromGraphChange(beforeGraph, afterGraph, {
     tick: feed.currentTick,
     ...options,
+    // Spelled out AFTER the spread rather than left to ride inside it: this is the value the
+    // whole function exists to thread, and a reader (or a guard) must be able to see it here.
+    createdAt: options.createdAt,
   });
   // Reuse the action's timestamp (threaded as createdAt) so one store action
   // stamps one instant everywhere instead of several wall-clock reads.
@@ -70,7 +79,10 @@ export function appendWizardNewsForGraphChange(campaign, beforeGraph, afterGraph
 
 export function ensureCampaignWizardNews(campaign) {
   if (!campaign) return null;
-  campaign.wizardNews = ensureWizardNewsFeed(campaign.wizardNews);
+  // The campaign's own instant, not a fresh one: normalizing mints `updatedAt` when the
+  // stored feed has none, and an unpinned mint makes two normalizations of the same stored
+  // campaign disagree.
+  campaign.wizardNews = ensureWizardNewsFeed(campaign.wizardNews, { now: campaign.updatedAt || campaign.createdAt });
   return campaign.wizardNews;
 }
 
@@ -84,7 +96,11 @@ export function campaignClockTick(campaign) {
     const tick = Number(campaign.worldState.tick);
     if (Number.isFinite(tick)) return Math.max(0, Math.floor(tick));
   }
-  return ensureWizardNewsFeed(campaign.wizardNews).currentTick;
+  // A SCALAR READ MUST NOT MINT A CLOCK. This read the tick off a fully normalized feed,
+  // and normalizing mints `updatedAt` from the wall clock when the stored feed has none —
+  // a wall-clock read on a pure read path, for a value discarded on the same line.
+  // `wizardNewsCurrentTick` is the normalizer's own clamp, single-sourced.
+  return wizardNewsCurrentTick(campaign.wizardNews);
 }
 
 export function applyWorldPulseResultToState(state, campaign, result, now, authoredEventBySave = null) {

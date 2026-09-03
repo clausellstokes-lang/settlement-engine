@@ -13,7 +13,6 @@ import { goodCriticality, goodsIntersect } from './goodsCatalog.js';
 import { canonicalEdgeForLink, canonicalRelationshipLabel } from '../relationships/canonicalRelationship.js';
 import { NO_TRADE_RELATIONSHIPS } from './tradeLinks.js';
 import { healingLedger } from '../healingLedger.js';
-import { wallClockNow } from '../clock.js';
 import { TIER_ORDER } from '../../data/constants.js';
 
 /**
@@ -71,8 +70,8 @@ function linkBetween(sourceSave, targetSave) {
   ) || null;
 }
 
-/** @param {{ type: string, from: NodeLike, to: NodeLike, rel: string, strength?: number, confidence?: number, explanation?: string }} args @returns {ChannelLike | null} */
-function relationshipChannel({ type, from, to, rel, strength = 0.5, confidence = 0.6, explanation }) {
+/** @param {{ type: string, from: NodeLike, to: NodeLike, rel: string, strength?: number, confidence?: number, explanation?: string, now?: string|null }} args @returns {ChannelLike | null} */
+function relationshipChannel({ type, from, to, rel, strength = 0.5, confidence = 0.6, explanation, now = null }) {
   return candidate({
     type,
     from: from.id,
@@ -83,17 +82,17 @@ function relationshipChannel({ type, from, to, rel, strength = 0.5, confidence =
     relationshipType: rel,
     evidence: [{ source: 'neighbourNetwork', reason: `Relationship is ${rel}.` }],
     explanation: explanation || `${from.name} can transmit ${type.replace(/_/g, ' ')} pressure to ${to.name}.`,
-  });
+  }, now);
 }
 
-/** @param {Array<ChannelLike | null>} out @param {string} type @param {NodeLike} a @param {NodeLike} b @param {string} rel @param {number} [strength] @param {number} [confidence] @param {string} [explanation] */
-function addTwoWay(out, type, a, b, rel, strength, confidence, explanation) {
-  out.push(relationshipChannel({ type, from: a, to: b, rel, strength, confidence, explanation }));
-  out.push(relationshipChannel({ type, from: b, to: a, rel, strength, confidence, explanation }));
+/** @param {Array<ChannelLike | null>} out @param {string|null} now @param {string} type @param {NodeLike} a @param {NodeLike} b @param {string} rel @param {number} [strength] @param {number} [confidence] @param {string} [explanation] */
+function addTwoWay(out, now, type, a, b, rel, strength, confidence, explanation) {
+  out.push(relationshipChannel({ type, from: a, to: b, rel, strength, confidence, explanation, now }));
+  out.push(relationshipChannel({ type, from: b, to: a, rel, strength, confidence, explanation, now }));
 }
 
-/** @param {Array<ChannelLike | null>} out @param {NodeLike} patron @param {NodeLike} client @param {string} rel @param {number} [strength] @param {number} [confidence] */
-function addPatronageChannels(out, patron, client, rel, strength = 0.62, confidence = 0.7) {
+/** @param {Array<ChannelLike | null>} out @param {string|null} now @param {NodeLike} patron @param {NodeLike} client @param {string} rel @param {number} [strength] @param {number} [confidence] */
+function addPatronageChannels(out, now, patron, client, rel, strength = 0.62, confidence = 0.7) {
   out.push(relationshipChannel({
     type: 'political_authority',
     from: patron,
@@ -102,6 +101,7 @@ function addPatronageChannels(out, patron, client, rel, strength = 0.62, confide
     strength,
     confidence,
     explanation: `${patron.name} appears to exercise patron authority over ${client.name}.`,
+    now,
   }));
   out.push(relationshipChannel({
     type: 'military_protection',
@@ -111,6 +111,7 @@ function addPatronageChannels(out, patron, client, rel, strength = 0.62, confide
     strength: Math.max(0.45, strength - 0.07),
     confidence: Math.max(0.55, confidence - 0.08),
     explanation: `${patron.name} may provide protection or leverage for ${client.name}.`,
+    now,
   }));
   out.push(relationshipChannel({
     type: 'tax_obligation',
@@ -120,11 +121,12 @@ function addPatronageChannels(out, patron, client, rel, strength = 0.62, confide
     strength: Math.max(0.38, strength - 0.17),
     confidence: Math.max(0.5, confidence - 0.15),
     explanation: `${client.name} may owe tribute, taxes, or obligations to ${patron.name}.`,
+    now,
   }));
 }
 
-/** @param {Array<ChannelLike | null>} out @param {NodeLike} overlord @param {NodeLike} vassal @param {string} rel @param {number} [strength] @param {number} [confidence] */
-function addVassalageChannels(out, overlord, vassal, rel, strength = 0.82, confidence = 0.82) {
+/** @param {Array<ChannelLike | null>} out @param {string|null} now @param {NodeLike} overlord @param {NodeLike} vassal @param {string} rel @param {number} [strength] @param {number} [confidence] */
+function addVassalageChannels(out, now, overlord, vassal, rel, strength = 0.82, confidence = 0.82) {
   out.push(relationshipChannel({
     type: 'political_authority',
     from: overlord,
@@ -133,6 +135,7 @@ function addVassalageChannels(out, overlord, vassal, rel, strength = 0.82, confi
     strength,
     confidence,
     explanation: `${overlord.name} appears to exercise overlord authority over ${vassal.name}.`,
+    now,
   }));
   out.push(relationshipChannel({
     type: 'military_protection',
@@ -142,6 +145,7 @@ function addVassalageChannels(out, overlord, vassal, rel, strength = 0.82, confi
     strength: Math.max(0.6, strength - 0.12),
     confidence: Math.max(0.68, confidence - 0.06),
     explanation: `${overlord.name} is expected to protect or command ${vassal.name}.`,
+    now,
   }));
   out.push(relationshipChannel({
     type: 'tax_obligation',
@@ -151,12 +155,13 @@ function addVassalageChannels(out, overlord, vassal, rel, strength = 0.82, confi
     strength: Math.max(0.64, strength - 0.06),
     confidence: Math.max(0.7, confidence - 0.04),
     explanation: `${vassal.name} likely owes tribute, levies, or legal obligation to ${overlord.name}.`,
+    now,
   }));
-  addTwoWay(out, 'information_flow', overlord, vassal, rel, 0.43, 0.6);
+  addTwoWay(out, now, 'information_flow', overlord, vassal, rel, 0.43, 0.6);
 }
 
-/** @param {SaveLike} sourceSave @param {SaveLike} targetSave @param {NodeLike} source @param {NodeLike} target @returns {Array<ChannelLike | null>} */
-function discoverRelationshipChannels(sourceSave, targetSave, source, target) {
+/** @param {SaveLike} sourceSave @param {SaveLike} targetSave @param {NodeLike} source @param {NodeLike} target @param {string|null} [now] @returns {Array<ChannelLike | null>} */
+function discoverRelationshipChannels(sourceSave, targetSave, source, target, now = null) {
   /** @type {Array<ChannelLike | null>} */
   const out = [];
   const sourceRel = relationBetween(sourceSave, targetSave);
@@ -167,29 +172,29 @@ function discoverRelationshipChannels(sourceSave, targetSave, source, target) {
   if (canonical?.relationshipType === 'patron') {
     const patron = String(canonical.from) === String(source.id) ? source : target;
     const client = patron === source ? target : source;
-    addPatronageChannels(out, patron, client, 'patron', 0.62, 0.7);
+    addPatronageChannels(out, now, patron, client, 'patron', 0.62, 0.7);
   } else if (canonical?.relationshipType === 'vassal') {
     const overlord = String(canonical.from) === String(source.id) ? source : target;
     const vassal = overlord === source ? target : source;
-    addVassalageChannels(out, overlord, vassal, 'vassal');
+    addVassalageChannels(out, now, overlord, vassal, 'vassal');
   }
 
   const rel = sourceRel || targetRel;
   if (!rel) return out.filter(Boolean);
   if (rel === 'allied' || rel === 'ally') {
-    addTwoWay(out, 'military_protection', source, target, rel, 0.58, 0.68);
-    addTwoWay(out, 'information_flow', source, target, rel, 0.5, 0.65);
+    addTwoWay(out, now, 'military_protection', source, target, rel, 0.58, 0.68);
+    addTwoWay(out, now, 'information_flow', source, target, rel, 0.5, 0.65);
   } else if (rel === 'trade_partner') {
-    addTwoWay(out, 'information_flow', source, target, rel, 0.42, 0.6);
+    addTwoWay(out, now, 'information_flow', source, target, rel, 0.42, 0.6);
   } else if (rel === 'hostile') {
-    addTwoWay(out, 'war_front', source, target, rel, 0.72, 0.75);
+    addTwoWay(out, now, 'war_front', source, target, rel, 0.72, 0.75);
   } else if (rel === 'rival' || rel === 'cold_war') {
-    addTwoWay(out, 'resource_competition', source, target, rel, 0.56, 0.58);
-    addTwoWay(out, 'information_flow', source, target, rel, 0.45, 0.55);
+    addTwoWay(out, now, 'resource_competition', source, target, rel, 0.56, 0.58);
+    addTwoWay(out, now, 'information_flow', source, target, rel, 0.45, 0.55);
   } else if (rel === 'criminal_network' || rel === 'criminal_corridor') {
-    addTwoWay(out, 'criminal_corridor', source, target, rel, 0.68, 0.72);
+    addTwoWay(out, now, 'criminal_corridor', source, target, rel, 0.68, 0.72);
   } else if (rel === 'religious_authority') {
-    addTwoWay(out, 'religious_authority', source, target, rel, 0.62, 0.65);
+    addTwoWay(out, now, 'religious_authority', source, target, rel, 0.62, 0.65);
   }
 
   return out.filter(Boolean);
@@ -216,13 +221,26 @@ function relationshipConfidence(rel) {
   return 0.5;
 }
 
-/** @param {ChannelLike} raw @returns {ChannelLike | null} */
-function candidate(raw) {
-  return normalizeChannel({
-    status: 'suggested',
-    discoveredAt: wallClockNow(),
-    ...raw,
-  });
+/**
+ * ⛔ `now` IS THREADED, NOT READ — through `normalizeChannel`'s OWN second parameter, which
+ * was already there and which this module was the only caller not to use.
+ *
+ * It used to build the literal `{ status, discoveredAt: wallClockNow(), ...raw }` and call
+ * `normalizeChannel(channel)` with no `now`, so EVERY candidate took TWO independent
+ * wall-clock reads — one here for `discoveredAt`, one inside normalizeChannel for
+ * `updatedAt` — and a realm compose mints well over a hundred candidates. Two consequences,
+ * both real: the seeded instant-world composer, whose whole contract is purity in the seed,
+ * read the clock a few hundred times per realm; and a now-less caller could get a channel
+ * whose `discoveredAt` and `updatedAt` DISAGREED, because the two reads straddled a
+ * millisecond boundary.
+ *
+ * ⚠ DECLARED BEHAVIOUR SHIFT, now-less callers only: those two stamps are now the same
+ * instant. On the threaded path nothing moves — the entry re-stamps both from `options.now`
+ * either way, so this read was dead work that only forfeited replayability.
+ * @param {ChannelLike} raw @param {string|null} [now] @returns {ChannelLike | null}
+ */
+function candidate(raw, now = null) {
+  return normalizeChannel({ status: 'suggested', ...raw }, now);
 }
 
 // ── R3 decision (2026-06-11): SUGGESTED-only heuristics for the two formerly
@@ -315,7 +333,7 @@ export function discoverDependencyCandidates(sourceSave, targetSave, options = {
         rel ? { source: 'neighbourNetwork', reason: `Current relationship is ${rel}.` } : null,
       ].filter(Boolean),
       explanation: `${target.name} likely depends on ${source.name} for ${sourceExportsTargetImports.map(g => g.label).join(', ')}.`,
-    }));
+    }, options.now || null));
 
     out.push(candidate({
       type: 'export_market',
@@ -328,7 +346,7 @@ export function discoverDependencyCandidates(sourceSave, targetSave, options = {
         { source: 'imports/exports', reason: `${target.name} is a likely market for ${source.name}'s exports.` },
       ],
       explanation: `${source.name}'s exporters likely care about demand in ${target.name}.`,
-    }));
+    }, options.now || null));
   }
 
   const targetExportsSourceImports = goodsIntersect(target.exports, source.imports);
@@ -345,7 +363,7 @@ export function discoverDependencyCandidates(sourceSave, targetSave, options = {
         rel ? { source: 'neighbourNetwork', reason: `Current relationship is ${rel}.` } : null,
       ].filter(Boolean),
       explanation: `${source.name} likely depends on ${target.name} for ${targetExportsSourceImports.map(g => g.label).join(', ')}.`,
-    }));
+    }, options.now || null));
 
     out.push(candidate({
       type: 'export_market',
@@ -358,7 +376,7 @@ export function discoverDependencyCandidates(sourceSave, targetSave, options = {
         { source: 'imports/exports', reason: `${source.name} is a likely market for ${target.name}'s exports.` },
       ],
       explanation: `${target.name}'s exporters likely care about demand in ${source.name}.`,
-    }));
+    }, options.now || null));
   }
 
   const bothHaveRoutes = source.route.open && target.route.open;
@@ -382,7 +400,7 @@ export function discoverDependencyCandidates(sourceSave, targetSave, options = {
           rel ? { source: 'neighbourNetwork', reason: `Relationship is ${rel}.` } : null,
         ].filter(Boolean),
         explanation: `${from.name} and ${to.name} can transmit route shocks through trade access.`,
-      }));
+      }, options.now || null));
     }
   }
 
@@ -409,7 +427,7 @@ export function discoverDependencyCandidates(sourceSave, targetSave, options = {
           { source: 'route_state', reason: `An open trade link makes ${provider.name}'s services reachable.` },
         ],
         explanation: `${dependent.name} likely relies on ${provider.name} for healing and temple services.`,
-      }));
+      }, options.now || null));
     }
   }
 
@@ -444,11 +462,11 @@ export function discoverDependencyCandidates(sourceSave, targetSave, options = {
           { source: 'route_state', reason: `The trade link between them gives migrants a path.` },
         ],
         explanation: `People under pressure in ${smaller.name} are likely to drift toward ${larger.name}.`,
-      }));
+      }, options.now || null));
     }
   }
 
-  out.push(...discoverRelationshipChannels(sourceSave, targetSave, source, target));
+  out.push(...discoverRelationshipChannels(sourceSave, targetSave, source, target, options.now || null));
 
   // Deterministic timestamp: same idiom as deriveRegionalImpacts — stamp the
   // threaded `now` over candidate()'s wall-clock default when provided.
