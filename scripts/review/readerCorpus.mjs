@@ -68,6 +68,7 @@ import { composeSoakRules, soakAdvanceEpoch } from '../audit/soakRules.mjs';
 import { foldDecades } from '../audit/soakInvariants.mjs';
 import { measureAddressChain } from '../audit/behavioral-observation.mjs';
 import { configFromGoldenKey } from '../lib/golden-corpus-key.mjs';
+import { tuningRegisterFingerprint } from '../lib/tuning-inventory.mjs';
 
 /** The soak's pinned instant. One `now` for the whole corpus. */
 export const READER_NOW = '2026-07-12T00:00:00.000Z';
@@ -957,7 +958,7 @@ export function readerCorpusManifest({ runId, sourceSha, campaigns, tuning = nul
     sourceSha: String(sourceSha || 'unknown'),
     now: READER_NOW,
     // §1.5: fail-closed. Every value is DRAFT to a reader unless the register says signed.
-    tuning: tuning || { state: 'unregistered', fingerprint: null },
+    tuning: tuning || readerTuningBlock(),
     posture: {
       launch: {
         presets: [...LAUNCH_POSTURE_PRESETS],
@@ -978,6 +979,40 @@ export function readerCorpusManifest({ runId, sourceSha, campaigns, tuning = nul
       documents: entry.documents,
     })),
   };
+}
+
+/**
+ * The manifest's tuning block, READ from the register rather than declared.
+ *
+ * WHY A READER NEEDS THIS AT ALL. Every number a document prints is either a value the owner
+ * has SIGNED or one that is still draft, and a panel scoring a band word as wrong when the
+ * band is unsigned is reporting a decision nobody has made yet. So the corpus carries the
+ * register's own fingerprint and the reader brief reads DRAFT or SIGNED from it.
+ *
+ * ⛔ FAIL CLOSED, IN BOTH DIRECTIONS. No register on disk reads `'unregistered'`, never
+ * `'signed'`; a register at signature version 0 reads `'draft'`. The one state this must never
+ * invent is the owner's approval — the whole tuning desk rests on nobody being able to spell
+ * `signed` except the owner's own signing act.
+ *
+ * ⚠ THE LABEL LIVES HERE AND IN A SIDE-CAR HEADER ONLY — never inside a SURFACE document's
+ * bytes. A `TUNING:` line inside a dossier PDF, the campaign PDF or a World Book would change
+ * the CUSTOMER's document, so the corpus would stop proving the customer's document, and every
+ * hash would flip at the signing for a reason that has nothing to do with the world.
+ *
+ * @param {string} [root]
+ * @returns {{ state: string, signatureVersion: number, fingerprint: any }}
+ */
+export function readerTuningBlock(root = new URL('../../', import.meta.url).pathname) {
+  try {
+    const fingerprint = tuningRegisterFingerprint(root);
+    if (!fingerprint?.declaredSha256) {
+      return { state: 'unregistered', signatureVersion: 0, fingerprint: fingerprint ?? null };
+    }
+    const version = Number(fingerprint.signatureVersion ?? 0);
+    return { state: version > 0 ? 'signed' : 'draft', signatureVersion: version, fingerprint };
+  } catch {
+    return { state: 'unregistered', signatureVersion: 0, fingerprint: null };
+  }
 }
 
 /**

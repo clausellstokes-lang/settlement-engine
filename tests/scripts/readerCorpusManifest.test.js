@@ -43,6 +43,7 @@ import {
   readerCorpusManifest,
   launchPostureIsDark,
   overlayForRow,
+  readerTuningBlock,
   refuseAdvanceResult,
   refuseNonFiniteWorld,
 } from '../../scripts/review/readerCorpus.mjs';
@@ -270,7 +271,15 @@ describe('the reader corpus is composed from the golden key', () => {
     });
     expect(built.runId).toBe('run-id-that-must-not-appear');
     expect(JSON.stringify(built.campaigns)).not.toContain('run-id-that-must-not-appear');
-    expect(built.tuning.state).toBe('unregistered');
+    // ⛔ THE TUNING BLOCK FAILS CLOSED, AND `signed` IS THE ONE WORD IT MAY NEVER INVENT.
+    // A reader scoring a band word as wrong when the band is still draft is reporting a
+    // decision nobody has made; a reader told `signed` when it is not would be worse.
+    expect(['unregistered', 'draft', 'signed']).toContain(built.tuning.state);
+    const live = readerTuningBlock();
+    expect(live.state).toBe(live.signatureVersion > 0 ? 'signed' : 'draft');
+    // No register on disk reads `unregistered` — never `signed`.
+    expect(readerTuningBlock('/nonexistent-root-for-this-arm').state).toBe('unregistered');
+    expect(readerTuningBlock('/nonexistent-root-for-this-arm').signatureVersion).toBe(0);
   }, 180_000);
 
   it('a paused year and a non-finite world are both refused, and each refusal names the campaign', () => {
