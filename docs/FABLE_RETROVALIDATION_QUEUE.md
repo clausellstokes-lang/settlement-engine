@@ -2838,3 +2838,21 @@ The **pre-gate** cleared all 14 cheap stages in **81.9 s** at the final seven-ca
 *What Fable re-derives:* the §882.13 rulings for rows 1, 5 and 5b against the design's §12 table, and the claim that ENC-5 alone is owner-gated.
 
 *Priority:* **HIGH** — it changes what is buildable right now.
+
+## §887.2 · THE HEARTBEAT CHECKPOINT — five lanes home, nine cars sealed, and a gate the chair built that could never open (2026-09-03, chair session 58f0a8e2, SEAT: Opus 5 — Fable-unvalidated)
+
+**All five lanes of the 09-03 wave reported and every car is sealed** — enc2-enc6 `f052d1e77`, emdash `4da38b8d3`, emdash-annex `e46d4c3f1`, horizondark-cars12 `43e063a70`, determinism-wip `55d77a8d2`, atop the in-flight enc1-registers `f4cc5cb7d`. Nine cars behind one landing. Every one was reachable from **no ref** when its lane reported; the §882.14 survival law paid out five times in one afternoon.
+
+### ⛔⛔ THE CHAIR'S ERROR, TWICE, AND THEN A THIRD TIME IN THE FIX
+
+The ENC-1 test ratchet **refused twice**, both times naming `tests/simulation/centuryLegSoak.test.js` running **0 ms against a 900,000 ms budget** with ten tests returning as skips. Load ended at **216.82** and then **276.47**. Both were contention the chair created: it read the load **at launch** (3.70, then 2.09) and launched, and the build lanes ramped up during the ~26-minute run.
+
+⭐ **THE LAW: A FULL-SUITE INSTRUMENT NEEDS A QUIET WINDOW FOR ITS DURATION, NOT AT ITS START.** A start-time load reading is a snapshot of a variable that moves, and §886's "hold for quiet" was read by the chair as a launch condition rather than a sustained one.
+
+⚠ **AND THE DIAGNOSIS WAS WRONG IN BOTH DIRECTIONS FIRST.** §886 banked the signature as *"a DIFFERENT test failed each time — varied casualties on a starved box"*. Here the **same** test fell twice, which by that letter meant a real defect. It is not: `centuryLegSoak` is the most expensive test in the tree, so under contention it is the **first** casualty every time, not a random one. ⭐ **The signature is not "varied casualties" — it is "a resource failure rather than an assertion failure, on a test foreign to the consist."** A test that ran 0 ms with no timeout signal, no assertion signal and no failure message did not fail; it never ran.
+
+⛔ **THE THIRD ERROR IS THE INSTRUCTIVE ONE: THE CHAIR MECHANIZED THE LAW AND BUILT A GATE THAT COULD NEVER OPEN.** The waiter counted competing workers with `ps -ax -o command | grep -c 'vitest/dist/workers'` — **which matches its own grep**, so the count could never reach zero and the streak stayed at 0 while the load fell to 3.89. The chair had hit this exact self-matching trap ninety minutes earlier reading `ps | grep -c vitest` by hand, named it, and then wrote it into the machinery. ⭐ **A PREDICATE THAT CAN MATCH ITS OWN COMMAND LINE IS NOT A GATE.** The bracket form `'[v]itest/dist/workers'` is the cure, and it must be proved to reach zero **before** it is trusted, which it now is.
+
+*What Fable re-derives:* the claim that both refusals were contention rather than a defect — the decisive evidence is the 0 ms against a 900,000 ms budget with no failure message, not the load number.
+
+*Priority:* **HIGH** — the landing track is blocked on it, and the self-matching-predicate law generalises to every guard this program writes.
