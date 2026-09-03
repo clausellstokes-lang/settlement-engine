@@ -179,7 +179,7 @@ settlement, typed action `cascade`, reason = the chain.
 ### cascade.braid_headline (CW-1) `[POOL HANDLE]` — Herald, the braided lead item — significance: derived (routine | notable | major — the cascade's top member class, per R5)
 SLOTS: {settlement} {counterpart} {band} {reason}
 AUDIENCE: public
-1. One thing happened at {settlement} — {reason} — and {band} towns have been answering for it since.
+1. One thing happened at {settlement} ({reason}), and {band} towns have been answering for it since.
 2. They are still arguing in the {settlement} taprooms over which part of it came first.
 3. The chroniclers have entered it as one account and not {band}: {reason} at {settlement}, and everything that followed from it.
 4. {counterpart} had no part in the beginning and will be paying for it into the next generation.
@@ -357,7 +357,7 @@ SLOTS: {settlement} {counterpart} {reason} {band}
 AUDIENCE: public
 1. Ask {settlement} why, and {settlement} can answer: it runs back to {reason}, at {counterpart}.
 2. The short of it, for a reader who wants no more: {reason}, and every season since.
-3. The clerks give one sentence and then the table — {counterpart}, {reason}, {band} steps between.
+3. The clerks give one sentence and then the table: {counterpart}, {reason}, {band} steps between.
 4. Whatever {settlement} does next, it will be doing it about {reason}.
 5. It is not a mystery. It is only long.
 6. Ask in the {settlement} market and you get the same answer as at the seat, with worse manners.
@@ -399,7 +399,7 @@ SLOTS: {settlement} {counterpart} {reason}
 AUDIENCE: public
 1. Here the record is of a belief and not a fact: {settlement} held that {reason}, and acted on it.
 2. A later entry marks it mistaken; the walk leaves the mistake where it was made.
-3. The entry reads believed and not confirmed — the clerks marked it so at the time, and it stands marked.
+3. The entry reads believed and not confirmed. The clerks marked it so at the time, and it stands marked.
 4. {settlement} moved on what it took to be true, and the page after this one answers for the taking.
 5. The reason on this step is not what {settlement} was, but what {counterpart} took it for.
 6. What {settlement} had was a report, and a report was enough to move a seat.
@@ -427,7 +427,7 @@ SLOTS: {settlement} {counterpart} {layer} {reason}
 AUDIENCE: public
 1. Here the account passes out of {layer} and into another hand entirely: the same cause, a different set of clerks.
 2. It stopped being a matter for {layer} at this step, and nobody at {settlement} noticed the crossing.
-3. The entry appears in two books at once — {layer}'s and the one that follows — with one reason between them, {reason}.
+3. The entry appears in two books at once ({layer}'s and the one that follows) with one reason between them, {reason}.
 4. From here on it is not the same kind of trouble, and the towns that answer for it are new ones.
 5. {layer} handed it on and did not follow it. The walk does.
 6. The hands that held it in {layer} would not recognise what it became.
@@ -471,7 +471,7 @@ SLOTS: {band}
 AUDIENCE: public
 1. The chain runs {band} steps further; the page shows what a page can hold.
 2. Ask further back at the taproom and you will get {band} steps more, told worse.
-3. The stop here is the page's and not the record's — the entries continue below it.
+3. The stop here is the page's and not the record's. The entries continue below it.
 4. Follow it further and you will be in another generation's business.
 5. The rest is entered and unread, which is the ordinary fate of entries.
 6. There is more, and the more of it is the same shape as this.
@@ -483,7 +483,7 @@ AUDIENCE: public
 ### walk.table_caption (CW-2) `[POOL HANDLE]` — the cause-walk surface, the table tier — significance: n/a (walk surface line)
 SLOTS: {band}
 AUDIENCE: public
-1. Step, town, reason — the whole chain, in the order the clerks entered it.
+1. Step, town, reason: the whole chain, in the order the clerks entered it.
 2. Read the table backward and you read the cause; read it forward and you read the ruin.
 3. The bottom row is the oldest, and it is the one still costing.
 4. What follows is the table the sentence above was made of.

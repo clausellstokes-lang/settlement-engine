@@ -234,9 +234,9 @@ AUDIENCE: public
 4. Seat: {standing}. The hall has not been asked since the season turned.
 5. Seat: {standing}. Counsel: the town's good, bought with the seat's own standing.
 6. Seat: {standing}. Counsel: {decision} carried on the seat's own account, over the hall's entered objection.
-7. Seat: {standing}. Counsel: divided — the hall was heard, and the book keeps both entries.
+7. Seat: {standing}. Counsel: divided. The hall was heard, and the book keeps both entries.
 8. Seat: {standing}. Counsel: unchanged since the seat was taken; nothing has moved the weighing.
-9. Seat: {standing}. Counsel: withheld — no position entered on {decision} at all.
+9. Seat: {standing}. Counsel: withheld. No position entered on {decision} at all.
 
 ---
 
@@ -438,7 +438,7 @@ AUDIENCE: public
 SLOTS: {settlement}, {counterpart}, {decision}, {band}, {reason}
 AUDIENCE: public
 1. {band} past: the seat fell; {decision} with {counterpart} is named in the verdict. *(volume exemplar, de-dated)*
-2. {band} past: the seat fell; no foreign decision is named — the verdict reads {reason}.
+2. {band} past: the seat fell; no foreign decision is named. The verdict reads {reason}.
 3. {band} past: the seat held; the grievance over {decision} stayed open.
 4. {band} past: the seat passed by succession; the standing pacts were re-read and kept.
 5. {band} past: the seat passed by succession; the pact with {counterpart} was repudiated at the transfer.
@@ -564,12 +564,12 @@ AUDIENCE: public
 1. {npc} of {settlement}, in exile at this court. *(volume exemplar)*
 2. {npc} of {settlement}, sheltered here since the contest; the home seat has asked for {npc} back.
 3. {npc} of {settlement}, at this court on a declared errand; the errand has not closed.
-4. {npc} of {settlement}, a guest of the hall — {settlement} has entered a grievance over it.
+4. {npc} of {settlement}, a guest of the hall: {settlement} has entered a grievance over it.
 5. {npc} of {settlement}, formerly of {faction}, seated below the salt these {band}.
 6. {npc} of {settlement}, received at the gate and quartered in the town rather than the hall.
 7. {npc} of {settlement}, a guest of this court; a price has been named for {npc} at home.
 8. {npc} of {settlement}, at this court {band}; the errand that brought {npc} here has closed.
-9. {npc} of {settlement}, sheltered without terms — nothing asked of {npc}, and nothing promised.
+9. {npc} of {settlement}, sheltered without terms: nothing asked of {npc}, and nothing promised.
 
 ### emigre_away_line (INT-3b) — home town page, faction card — significance: n/a (dossier line)
 SLOTS: {settlement}, {counterpart}, {npc}, {faction}, {band}
@@ -597,7 +597,7 @@ receipt and print nothing from these pools.*
 ### attributed_pressure (INT-4) — Herald, the seat's standing — significance: notable
 SLOTS: {settlement}, {counterpart}, {npc}, {burden}, {band}
 AUDIENCE: public
-1. The seat weakens, and these burdens stand — the tribute of {counterpart}, a war grown long. *(volume exemplar)*
+1. The seat weakens, and these burdens stand: the tribute of {counterpart}, a war grown long. *(volume exemplar)*
 2. The seat of {settlement} is pressed. Standing against it this season: {burden}, and {burden}.
 3. What {settlement} carries and what {settlement}'s seat is worth are two entries, and the same season carries both.
 4. {burden} sits on {settlement}, and the hall has grown short with {npc}. The book records both and joins neither.
@@ -620,13 +620,13 @@ AUDIENCE: public
 2. The terms were sealed in {settlement}, and the town believes the worst of them, which is customary.
 3. Men said the tribute of {counterpart} was heavier than the granary showed. Men were not shown the granary.
 4. {npc} kept the terms close, and the hall of {settlement} debated the rumour instead, and voted on it.
-5. A court that hides a price pays it twice — once in {good}, once in talk.
+5. A court that hides a price pays it twice: once in {good}, once in talk.
 6. What the market of {settlement} says the carts carried is {band} above anything a clerk will confirm.
 
 ### rally_receipt (INT-4) — Herald, the verdict — significance: notable
 SLOTS: {settlement}, {counterpart}, {npc}, {decision}
 AUDIENCE: public
-1. The seat steadied — the war did what the court could not. *(§9)*
+1. The seat steadied. The war did what the court could not. *(§9)*
 2. {npc} kept the hall of {settlement} on the strength of a war going well, and knows it.
 3. The men who would have moved against the seat of {settlement} are at the muster instead.
 4. {settlement} forgave its seat everything for a season, on account of {counterpart}.
@@ -655,7 +655,7 @@ AUDIENCE: public
 ### paid_and_forgiven (INT-4, ending token) — Herald, the street — significance: notable
 SLOTS: {settlement}, {counterpart}, {npc}, {good}, {band}
 AUDIENCE: public
-1. {npc} paid, and the town forgave {npc} — the war was over. *(§9)*
+1. {npc} paid, and the town forgave {npc}. The war was over. *(§9)*
 2. The tribute of {counterpart} is heavy in {settlement} and reckoned cheap against what it ended.
 3. {settlement} looked at the price, and at the years the price bought, and stopped complaining inside a season.
 4. They call it the price of the peace in {settlement} now, which is a kinder name than it had.
@@ -719,11 +719,11 @@ SLOTS: {settlement}, {counterpart}, {wound}, {band}
 AUDIENCE: public
 1. Oldest wound: the {wound} of {settlement}, {band} gone. *(volume exemplar)*
 2. Oldest wound with {counterpart}: the {wound}, {band} gone; {counterpart} is said to have let it go.
-3. Oldest wound with {counterpart}: the {wound} — buried by decree, and no longer read.
+3. Oldest wound with {counterpart}: the {wound}. Buried by decree, and no longer read.
 4. Oldest wound with {counterpart}: none still counted; the book is old and quiet.
 5. Oldest wound with {counterpart}: the {wound}, carried by {band} holders of this seat.
 6. Oldest wound with {counterpart}: the {wound}, {band} gone; {counterpart} is said to keep a heavier account of it than {settlement} does.
-7. Oldest wound with {counterpart}: the {wound} — buried by decree and dug up since; both entries stand.
+7. Oldest wound with {counterpart}: the {wound}. Buried by decree and dug up since; both entries stand.
 8. Oldest wound with {counterpart}: the {wound}, {band} gone and past the hall's own memory; the book carries it alone.
 9. Oldest wound with {counterpart}: the {wound}; there is no one on that road to hold it against now.
 
@@ -752,7 +752,7 @@ SLOTS: {settlement}, {counterpart}, {npc}, {good}, {wound}
 AUDIENCE: public
 1. The decree was read in {settlement} and the granary could not answer it; the burial binds nothing.
 2. {npc} promised {counterpart} more {good} than {settlement} had, and the clerks entered the shortfall.
-3. A peace was declared in {settlement} and not paid for, so there is no peace — only a declaration.
+3. A peace was declared in {settlement} and not paid for, so there is no peace, only a declaration.
 4. The carts never left {settlement}. The {wound} is where it was.
 5. {settlement} learned what its reconciliation cost by failing to afford it.
 6. The carts stood loaded in the yard of {settlement} until the grain in them was wanted elsewhere.
@@ -865,7 +865,7 @@ AUDIENCE: public
 SLOTS: {settlement}, {counterpart}, {wound}, {good}, {band}
 AUDIENCE: public
 1. The grudge with {counterpart}: buried by decree in the spring, {band} past; the price was paid in grain and pride. *(volume exemplar, de-dated)*
-2. The grudge with {counterpart}: buried by decree, {band} past — unearthed since. *(volume exemplar, de-dated)*
+2. The grudge with {counterpart}: buried by decree, {band} past. Unearthed since. *(volume exemplar, de-dated)*
 3. The grudge with {counterpart}: buried, and answered in kind by {counterpart}.
 4. The grudge with {counterpart}: buried by decree; the price was never paid, and the decree binds nothing.
 5. The grudge with {counterpart}: open. No decree stands.
@@ -896,7 +896,7 @@ AUDIENCE: public
 ### legitimacy_crossing_fallen (INT-7) — Herald, the seat's standing — significance: major
 SLOTS: {settlement}, {npc}, {standing}, {reason}
 AUDIENCE: public
-1. The seat has fallen to {standing} — {reason}. *(§9)*
+1. The seat has fallen to {standing}: {reason}. *(§9)*
 2. The standing of {npc} in {settlement} crossed downward this season, and the hall did not pretend otherwise.
 3. {settlement} has stopped giving its seat the benefit of the doubt; the entry names {reason}.
 4. The seat of {settlement} keeps its chair and has lost the good name that came with it.
@@ -906,7 +906,7 @@ AUDIENCE: public
 SLOTS: {settlement}, {npc}, {standing}, {reason}
 AUDIENCE: public
 1. The seat of {settlement} changed hands, and the town's confidence was set anew at the change.
-2. A new hand takes the chair in {settlement} and a different standing with it — the transfer is the cause, and the only one.
+2. A new hand takes the chair in {settlement} and a different standing with it. The transfer is the cause, and the only one.
 3. What {settlement} thought of the last seat did not pass to this one.
 4. The crossing is entered against the succession, not against any hearing or hit.
 5. Every seat in {settlement} begins somewhere; a seat taken by force begins where force leaves it.
@@ -915,14 +915,14 @@ AUDIENCE: public
 ### standing_line (INT-7) — town page, ruling-power card — significance: n/a (dossier line)
 SLOTS: {settlement}, {standing}, {reason}, {band}
 AUDIENCE: public
-1. Standing: {standing} (fell {band} past — {reason}). *(volume exemplar, de-dated)*
-2. Standing: {standing} (risen {band} past — {reason}).
+1. Standing: {standing} (fell {band} past, {reason}). *(volume exemplar, de-dated)*
+2. Standing: {standing} (risen {band} past, {reason}).
 3. Standing: {standing}; no crossing recorded since the seat was taken.
 4. Standing: {standing}, and held there {band}.
 5. Standing: {standing} (set at the succession; no hearing since).
-6. Standing: {standing} (fallen {band} past, and fallen again since — {reason}).
+6. Standing: {standing} (fallen {band} past, and fallen again since, {reason}).
 7. Standing: {standing}; the seat has been tested since and the standing did not move.
-8. Standing: {standing} — {reason}; the entry stands unanswered by the seat.
+8. Standing: {standing}, {reason}; the entry stands unanswered by the seat.
 9. Standing: {standing}; burdens stand against {settlement} that the book does not join to it.
 
 ---
@@ -995,7 +995,7 @@ ALSO POOLED: the R1 subject-phrase pool for this kind lives in `RECEIPT_POOLS_LE
 1. {faction} moves to capture an institution of {settlement}. *(existing verb table, applied voice)*
 2. The house stands in {settlement} where it stood; the hands on it are {faction}'s now.
 3. {faction} did not close the institution of {settlement}. {faction} kept it and changed the locks.
-4. The charter of {settlement} was not rewritten — only the names beneath it.
+4. The charter of {settlement} was not rewritten, only the names beneath it.
 5. Same hall, same seal, and a different interest served by both.
 6. Whatever the house does next in {settlement}, it will be done at {faction}'s asking.
 

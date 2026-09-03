@@ -125,7 +125,7 @@ POP-6 for the shape, the reason, and the eleven authored rows.
 ### pop_rush (POP-1) — Herald, demographic desk — significance: notable
 SLOTS: {settlement}, {counterpart}, {band}, {good}, {route}
 AUDIENCE: public
-1. They say in {counterpart} the streets want for hands and pay in {good} — and the {route} is full of feet. *(§8)*
+1. They say in {counterpart} the streets want for hands and pay in {good}, and the {route} is full of feet. *(§8)*
 2. Every inn on the {route} has taken a bed from {settlement} this season; the word is there is {good} in {counterpart}.
 3. {settlement}'s roll is short {band}, and the reason given at every gate is {counterpart}.
 4. The young of {settlement} have set out for {counterpart}; the fields will want them by harvest.
@@ -153,7 +153,7 @@ AUDIENCE: public
 2. The kin of {settlement} write from {counterpart} that the wages are what wages are.
 3. {settlement}'s clerks have stopped entering {counterpart} beside the departures.
 4. What the letters said in {settlement} this season the road will say next; the {route} runs quiet.
-5. They still speak of {good} in {settlement} — more quietly than they did.
+5. They still speak of {good} in {settlement}, more quietly than they did.
 6. The talk in the taverns of {settlement} has turned from {good} to the price of getting home.
 7. A house of {settlement} sold its roof for the road, and would like the roof back.
 
@@ -316,7 +316,7 @@ AUDIENCE: public
 SLOTS: {settlement}
 AUDIENCE: public
 1. The seat of {settlement} pressed on, and paid for it. *(§8 — the contract sentence, addressed per law 1a-5; the address law outranks verbatim, per the exemplar rule above)*
-2. The work at {settlement} was provisioned twice over — once for the stone, once for the ill will.
+2. The work at {settlement} was provisioned twice over: once for the stone, once for the ill will.
 3. The work went up in {settlement} with nobody watching it go up.
 4. {settlement} has what it built and a seat with less standing than it had.
 5. The seat was right, and it will be a while before anyone in {settlement} says so.
@@ -364,7 +364,7 @@ AUDIENCE: public
 1. The commons asked, and {settlement}'s seat answered before it had to.
 2. The grievance of {settlement} closed at the first rung, and the ledger shows the drain.
 3. It ended in the hall of {settlement}, which is where it should have ended.
-4. {settlement} learned that asking works — a thing a seat may live to regret.
+4. {settlement} learned that asking works, a thing a seat may live to regret.
 5. No crowd formed at {settlement}, no order went out, and the ledger for the season is a single answered petition.
 6. The square of {settlement} emptied in the time it takes to walk home from it.
 7. It was done before the season turned, which is faster than such things are done.
@@ -521,7 +521,7 @@ AUDIENCE: public
 2. {settlement} counted its dead when it had the leisure to count, and the count surprised nobody.
 3. The doors of {settlement} are open again, and the lanes are wider than they were.
 4. {settlement} will be short of hands at harvest, and short of them for years.
-5. It ended the way it began — quietly, and with nobody able to say why.
+5. It ended the way it began: quietly, and with nobody able to say why.
 6. It broke with the weather, and {settlement} has not settled whether to thank the weather.
 7. The sickhouse of {settlement} was scrubbed out and given back to whatever it had been before.
 
@@ -669,7 +669,7 @@ AUDIENCE: public
 3. {counterpart} fed {band} out of its own stores, and entered it as given, not lent.
 4. {settlement} owes {counterpart} a thing that is written nowhere.
 5. {counterpart} had little, and shared it, which is how these things usually go.
-6. The lanes of {counterpart} made room the way lanes do — badly at first, and then completely.
+6. The lanes of {counterpart} made room the way lanes do: badly at first, and then completely.
 7. They came in at the first hard frost and went out with the thaw, and were not idle between.
 8. Travellers who wintered at {counterpart} that year say the barns were warmer than the inn.
 9. A child of {settlement} learned to walk on a floor in {counterpart}, and the house has not forgotten it.
@@ -691,7 +691,7 @@ AUDIENCE: public
 SLOTS: {settlement}, {counterpart}, {route}
 AUDIENCE: public
 1. The column out of {settlement} parted on the {route}; some went on to {counterpart} and some did not.
-2. They argued at the crossroads and settled it the way such things are settled — by walking.
+2. They argued at the crossroads and settled it the way such things are settled: by walking.
 3. One departure out of {settlement} was entered at two gates, and both entries were right.
 4. {settlement}'s people are in two towns now, and will be counted as two peoples.
 5. Neither half thought it was the half that left.
@@ -787,7 +787,7 @@ only caller-agnostic lines, by this rule). Selecting the pool blind would put
 SLOTS: {settlement}, {counterpart}, {faction}, {route}
 AUDIENCE: public
 1. The road into {settlement} stands open to {counterpart}; there is an instrument between them that says so.
-2. {settlement} is failing, and the road in is open — which is how a town recovers.
+2. {settlement} is failing, and the road in is open, which is how a town recovers.
 3. {faction} licensed the founding on {settlement}'s ground under the standing pact with {counterpart}.
 4. They came in over the {route} without being stopped, which is new.
 5. The town could raise neither levy nor hall, and could still take in strangers; the clerks saw no contradiction in it.
@@ -853,7 +853,7 @@ AUDIENCE: public
 2. Nobody out of {settlement} takes the {route} blind; there is always a name at the other end.
 3. {counterpart}'s gate entered {band} out of {settlement}, and every one of them was vouched for.
 4. Where {settlement}'s blood already is, {settlement}'s people will go.
-5. They had heard nothing good of {counterpart} — but they had heard it from family.
+5. They had heard nothing good of {counterpart}, but they had heard it from family.
 6. The lane went where the lane had already gone, and nobody called it a decision.
 7. {counterpart}'s clerks stopped asking where from and began asking whose.
 8. They go after the harvest, when the cousins have room and work both.
