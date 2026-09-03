@@ -2762,3 +2762,33 @@ The lane **refused to move it**, correctly — the constant's own message reserv
 *What Fable re-derives:* the consolidation-is-not-a-fold distinction, since the index is the one artifact whose failure mode is silent — a tail that goes invisible reports nothing.
 
 *Priority:* LOW for the fold itself. **MEDIUM for the distinction**, which will govern every future index act.
+
+---
+
+## §886 · THE ELEVENTH LANDING — the first one a customer would notice (2026-09-03, chair session 58f0a8e2, SEAT: Opus 5)
+
+**The act.** `2d5112851` → **`d1a6c773e7d87dd44ef8fcc1ab2edab53c8081fc`**, sealed `refs/preserve/landing-886-2026-09-03`. Five cars, 11 paths +987/−95, porcelain 0, five trailers, all single-parent. **Gate GREEN ON THE FIRST RUN**, 1,138 s, 20 stages, ratchet **10 known of 30,994 (ceiling 10)**, `STRICT DIST OK 52/440 zero non-run`, typecheck 173/173, domain-strict 1121/1121. **Every commit is Opus-seat work and every row here is owed a Fable second look.**
+
+**What landed, and why it is the first landing with a reader on the other end.** Every prior landing this arc was machinery. This one removes two things a customer meets: a **category noun standing where a person belongs** (`"Conflict pressure takes hold in Elmspur"`), and a **raw engine identifier in a townsperson's mouth** — a century campaign printed *"settlement terminal death"* twenty times while the authored headline for that identical event read *"Thornwall is dying"*. ⭐ **The best sentence and the worst sentence in the program described the same event, and now only the good one ships.**
+
+**⭐ THE REAL DELIVERABLE IS THE WALKER, NOT THE TWO CURES.** It enumerates the **single consumer expression** rather than producers, and **CONVICTS an unresolvable mint instead of skipping it** — which is what closes the class rather than two instances. Six mint routes exist where the prior guards saw one; **eleven sites resolve only through module constants, and seven of their tokens no walker in this tree could see.** The estate's only prior defence against that route was a docblock asking authors to spell literals on purpose, and the file's own comment records that it *"failed that walker until the literals went in"* — ⭐ **a naming convention enforced by a comment is not machinery, and now it is.**
+
+### ⭐⭐ THE FINDING CONFIRMED A THIRD TIME, NOW WITH THREE FIGURES FOR ONE CONSIST
+
+**The census delta is NOT the arm delta.** The new walker carries **19 test arms**; the lighting census moved **+20 titles**; the test ratchet moved **+21 tests**. ⇒ **Budgeting a refreeze by counting the arms you wrote is wrong three separate ways on a single consist.** Both register acts were handled the way that fact demands: **the derivable figures predicted EXACTLY** (lighting `files` +1 and `credited` +1 with `parked` unmoved and the closure identity holding; ratchet `totalFiles` +1) **and the underivable ones left DELIBERATELY UNNAMED** rather than guessed — titles/suiteTitles measured at +20/+9, tests at +21. ⭐ **Refusing to name a figure you cannot derive remains a better outcome than guessing one and being right.**
+
+### THE TWO REFUSALS BEFORE THIS, AND WHY HOLDING WAS CORRECT
+
+The ratchet `--update` **refused twice**, both times on a test **foreign to the consist that passed 6/6 standalone**, while the machine ran two Apple Remote Desktop indexers and a filesystem sweep at **load 94 on eight cores** with nothing of the chair's running. ⭐ **A DIFFERENT test failed each time — varied casualties on a starved box is the signature of resource starvation, not a defect.** Held rather than retried, **nothing banked, nothing hand-added to the census**, against a resume condition written to disk as a **measured state rather than a timer**: indexers gone from `ps -r`, one-minute load under five. It was **checked, not assumed**, and the run that worked started at load **1.90**.
+
+### ⭐ BOTH NEW INSTRUMENTS EARNED THEIR KEEP ON THEIR FIRST REAL LANDING
+
+The **register pre-flight** named in ~2 s exactly what cost §885 a full 18-minute gate cycle — *"the census WILL move and is NOT refrozen"*, `files 2503 → 2504` derived as certain, with the four figures it cannot compute honestly printed **UNKNOWN rather than guessed**. The **pre-gate** cleared all 14 cheap stages in **85.6 s** at the exact five-car tip. ⚠ **Operational note for every future landing: copy them to the dock to run them and DELETE THEM IMMEDIATELY** — untracked files on the landing dock fail the seal's own porcelain assertion, which the chair nearly discovered the expensive way.
+
+### WHAT REMAINS OWED FROM THIS TRAIN
+
+⛔ The `createdAt` wall-clock fallthrough **and its five siblings** (`wizardNews.js` `:552 :712 :759 :779 :819 :867`) — untouched here by instruction, and **owed before the GOLDEN freeze** as its own determinism act. ⛔ The **twelve mutilated anchors** remain unrepaired and owner-gated; this landing **added a pin locking them** rather than touching them.
+
+*What Fable re-derives:* the wordings first — twelve labels, six frames, six summary frames, 29 registered rows — since **taste is the one thing no test holds**, though the chair's warrant is stronger than taste: they **mirror the vocabulary the product already speaks** on the rumor surface, verified by execution. Then the walker's six-route enumeration.
+
+*Priority:* MEDIUM. **HIGH for the seven previously-invisible tokens**, which were a live class rather than a finished one.
