@@ -3126,3 +3126,27 @@ Beyond three classifier bugs, the review found a **comparator** class (`safetyLa
 *What Fable re-derives:* the false-counter finding (39 by tokenizer, 0 by parser) and the four parse-coupled reverts.
 
 *Priority:* **HIGH** — 1,001 reader-facing sentences moved, and the car is gated only on a window.
+
+## §890.5 · A DOCK'S `node_modules` FORM CHANGES THE BUILT ARTIFACT — the chair breached the first-paint budget by 8,551 B and it was self-inflicted (2026-09-03, chair session 58f0a8e2, SEAT: Opus 5 — Fable-unvalidated)
+
+The §890 gate ran 1,087 s over 20 stages, cleared typecheck 173/173, domain-strict 1121/1121, the test ratchet **10 known of 31,141**, and lint at 0 errors — then **failed at the BUILD stage** on a real verdict, not a flake: *"first-paint static closure = 1,056,551 bytes (budget 1,048,000)"*, **over by 8,551 B**, an ASSERTION that ran in 21 ms against a 20 s budget.
+
+⭐⭐ **THE CAUSE WAS THE CHAIR'S OWN REPAIR, AND THE FINDING GENERALISES BEYOND IT.** Chasing an irreproducible edge bundle, the chair found that `node_modules/immer` and `node_modules/seedrandom` were **SYMLINKS** to the main repo, that esbuild follows a symlink to its REALPATH, and that the builder therefore recorded nine inputs as `../../../../../../../Users/…` paths **that no checkout can contain** — which is exactly what the reproducibility arm says: *"every input outside node_modules/ is git-TRACKED (nothing falls through to disk)."* Materialising those two took escaping inputs **9 → 0** and turned all four bundle arms green.
+
+⛔ **But the chair did not stop at two.** It began materialising **all 438** symlinks in the dock and `set -e` halted it at **45**. Those 45 real copies **changed the Vite build's own output** and pushed first paint over its budget.
+
+**Proved by execution in both directions, not by correlation:**
+- A sibling dock carrying **the same three lighting cars and none of the chair's** — symlinked `node_modules` — built **GREEN** (`vendorPdfLazy` 31 passed / 11 skipped, exit 0).
+- Restoring all 45 packages to symlinks in the landing dock and rebuilding returned it to **GREEN**, unchanged commits, porcelain 0.
+
+⭐⭐ **THE LAW: A DOCK'S `node_modules` FORM — SYMLINK VERSUS REAL DIRECTORY — CHANGES THE BUILT ARTIFACT'S FIRST-PAINT SIZE.** The byte budget is a load-bearing product constraint, and it is only meaningful in a dock with the canonical layout. **A lane that materialises packages will read a FALSE RED against that budget, and one that measures in a differently-laid-out dock is measuring its own environment.** This sits beside the banked "link the worktree's OWN node_modules" hazard and sharpens it: the linkage is not merely a convenience, it is part of what makes the byte figures comparable.
+
+### THE RESOLUTION, WHICH KEEPS BOTH CONSTRAINTS
+
+The two requirements looked contradictory — symlinks make the bundle irreproducible, real copies breach first paint. They are not. **Build the bundle ONCE with the packages materialised so the recorded input paths are clean, commit it, then RESTORE the symlinks.** The reproducibility arm re-verifies afterwards because, for an input that `git ls-files` does not contain, it falls back to reading the path from disk — and that read follows the link to identical content. Measured after the restore, with the commits untouched: **reproducibility 25/25, aiCharter 19/19, aiOutputSchema 23/23, vendorPdfLazy 31/42 — all exit 0 simultaneously.**
+
+⚠ **AND THE CHAIR'S OWN EARLIER MISREADING, RESTATED BECAUSE IT COST TWO CYCLES:** an attempt that ran the builder and left the result **uncommitted** watched reproducibility go 4 → 6 and concluded *"the fix made it worse"*. It had not — a regenerated-but-uncommitted bundle **is** the DIRTY-BUILD class the suite is named for, and the suite was describing the chair's own method back to it in its failure text.
+
+*What Fable re-derives:* the two-direction proof (sibling dock green; restore returns green) — the correlation alone would not carry it.
+
+*Priority:* **HIGH** — it makes a load-bearing byte budget environment-dependent, and any lane can trip it.
