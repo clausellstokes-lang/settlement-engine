@@ -188,6 +188,11 @@ export const PARADIGM_AXIS_IDS = Object.freeze(
  * @property {boolean} receiptDark          the receipt exists but is lit in no preset
  * @property {boolean} sourceUnverified     ⇒ no receipt found; the funnel refuses it
  * @property {boolean} ownerRulingPending   ⇒ the row's own existence/shape is a taste row
+ * @property {boolean} [vectorSupplied]     ENC-2 (§12 row 10) ⇒ the ADAPTER computes this
+ *   kind's pull vector and the funnel takes it, at span 1 and non-ambient. The table holds
+ *   no vector for such a kind because there is no constant one to hold: what a chance
+ *   meeting teaches is a function of WHO was met, and only the caller knows that. Absent
+ *   on every row at this commit, so the field is inert until ENC-3 lands `met_a_foreigner`.
  */
 
 /**

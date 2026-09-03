@@ -52,7 +52,7 @@ import { npcTraitPlane } from './clergyTraitPlane.js';
 import { hasRepressingDeity, npcHasTemperament } from '../corruption.js';
 // The resolver rides a LAZY leaf (see corruptionLeash.js); causeLifecycle is the
 // lazy engine chunk, so this import is free of first paint.
-import { resolveLeash } from '../corruptionLeash.js';
+import { resolveLeash, isWilledLeash } from '../corruptionLeash.js';
 // W-DOCTRINE-3b §4 — the foreign-endpoint re-pointing terminal reads the web gate + the
 // endpoint-liveness predicate (both engine-lazy leaves; corruptionWeb never imports
 // causeLifecycle, so the graph stays acyclic). Gate absent ⇒ Terminal 2b is inert.
@@ -310,6 +310,30 @@ export function advanceCauseLifecycle({ snapshot, worldState, priorLedger, rng, 
 
     npcs.forEach((/** @type {NpcLike} */ npc, /** @type {number} */ index) => {
       if (npc?.corrupt !== true || npc?.ousted === true) return;
+      // ⛔ ENC-2 FENCE 3 — THE CAUSE PASS NEVER ATTRIBUTES A WILLED LEASH (owner row 5b).
+      // A chance meeting HAS no settlement cause: nobody's guild leaned on the magistrate,
+      // no famine bought him. Left unfenced this pass would invent one on first touch, then
+      // RE-CAUSE, REFORM or HISTORICIZE a compromise that never had a cause to resolve —
+      // and hand the chronicle a lie about why a named person turned.
+      //
+      // ⚠⚠ THIS IS THE FENCE, AND IT IS NOT WHERE THE DESIGN PUT IT. DESIGN_ENCOUNTERS
+      // §5.4 fenced `anyCompromise` in pulseKernel.js, the pass's GATE. That gate is
+      // `memoryState.causeLifecycle !== undefined || anyCompromise` — an OR — so on any
+      // world already carrying a cause ledger from an ordinary compromise the pass opens
+      // through the FIRST arm and this loop attributes the willed leash anyway. Fencing the
+      // gate alone is a half-fence that looks total. The per-NPC loop is the real chokepoint
+      // and every path into the ledger passes through it.
+      //
+      // pulseKernel.js is left UNTOUCHED on purpose: it is frozen at EXACT 1581 effective
+      // lines by scripts/.size-baseline.json (which fails in BOTH directions), and the gate
+      // guard buys nothing this one does not — `rng.fork` is a pure derivation that builds a
+      // child PRNG from a label-suffixed seed (kernel/prng.js), so a pass that attributes
+      // nothing materializes no ledger, drops no key and advances no stream.
+      // ⚠ THAT IS PROSE AND NOT A CODE QUOTE ON PURPOSE: entropyRootCensus.walker counts
+      // the PRNG constructor's call form over RAW SOURCE TEXT, comments included, so quoting
+      // it here would have moved a census figure from inside a comment. Measured, not
+      // assumed. Plant P6 convicts this line.
+      if (isWilledLeash(resolveLeash(/** @type {SimNpc} */ (npc)))) return;
       if (!ctx) ctx = readCauseContext(/** @type {import('./causeVocabulary.js').SnapshotItem} */ (/** @type {unknown} */ (item)), worldState || {}, cid);
       const conditionId = npcId(cid, /** @type {SimNpc} */ (npc), index);
       const role = String(npcStates[conditionId]?.roleArchetype || 'civic');

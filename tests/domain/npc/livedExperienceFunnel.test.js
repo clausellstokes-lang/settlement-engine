@@ -69,7 +69,7 @@ import {
 import { HALF_LIFE_BANDS } from '../../../src/domain/worldPulse/bandedStock.js';
 import { INTERVAL_WEEKS } from '../../../src/domain/worldPulse/intervalWeeks.js';
 import { durableIdForRoster, npcLedgerOf } from '../../../src/domain/worldPulse/npcLedger.js';
-import { SOURCE_UNVERIFIED_KINDS } from '../../../src/domain/npc/livedExperienceCatalog.js';
+import { SOURCE_UNVERIFIED_KINDS, EXPERIENCE_TABLE } from '../../../src/domain/npc/livedExperienceCatalog.js';
 
 const REPO_ROOT = join(dirname(fileURLToPath(import.meta.url)), '../../..');
 const TOWN = 'save.town';
@@ -290,6 +290,24 @@ describe('RECEIPTED REFUSALS — every closed door says which door it was', () =
       tick: 11,
     });
     expect(reasons(out)).toEqual(['pulls_not_overridable']);
+  });
+
+  test('ENC-2 THE THIRD ADMISSION ARM is INERT at this commit — no table row carries vectorSupplied', () => {
+    // §12 row 10. The funnel gained a third road into a supplied vector, for a kind whose
+    // vector genuinely cannot be a constant: what a chance meeting teaches depends on WHO
+    // was met, and only the adapter knows that. The AMBIENT road cannot carry such a kind —
+    // an ambient entry divides its quantum by a season and a one-week meeting can never
+    // cross that floor — which is why the arm exists rather than a reuse.
+    //
+    // ⛔ THIS PIN IS THE BEHAVIOUR-NEUTRALITY CLAIM, MADE STRUCTURAL. While no row carries
+    // the field, the new condition can never change an outcome, and the test above proves
+    // every existing kind still refuses. It is EXPECTED to move when ENC-3 lands
+    // `met_a_foreigner` — that lane owns the positive arm (a supplied vector admitted at
+    // span 1), and this assertion is its reminder to write it.
+    const carriers = Object.entries(EXPERIENCE_TABLE)
+      .filter(([, spec]) => spec.vectorSupplied === true)
+      .map(([kind]) => kind);
+    expect(carriers).toEqual([]);
   });
 
   test('an ambient kind whose adapter sent no vector is refused, never silently taught nothing', () => {

@@ -55,9 +55,12 @@
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
 import { detIntPow } from '../../kernel/detMathDecay.js';
 import { beliefsActive } from './beliefMap.js';
-import { resolveLeash } from '../corruptionLeash.js';
-import { npcCorruptibleFlaw } from '../corruption.js';
-import { npcId } from './npcAgency.js';
+import { resolveLeash, isWilledLeash, WILLED_MEETING_CONSPIRACY } from '../corruptionLeash.js';
+import { npcCorruptibleFlaw, demoteDotRank } from '../corruption.js';
+import { npcId, roleSeatFor } from './npcAgency.js';
+// ENC-2: the chance-meeting LEAN channels. The reader lives in the writer's leaf, and
+// corruptionWeb.js is an unlayered-baseline member, so this import mints no coupling pair.
+import { readMeetingLeanChannels } from './envoyChanceMeetingLedger.js';
 import { compareCodepoint } from '../deterministicSort.js';
 import { PROSPERITY_TIERS, prosperityRank } from '../../data/constants.js';
 import { clamp01 } from '../../kernel/math.js';
@@ -202,6 +205,26 @@ export const CORRUPTION_WEB_TUNING = Object.freeze({
    *  the corrupted court looks rotten, the corrupting court looks villainous. */
   EXPOSURE_LEGITIMACY_MIN: 0.3,
   EXPOSURE_LEGITIMACY_SPAN: 0.4,
+
+  // ── ENC-2 THE WILLED LEASH'S TWO TYPED ENDS (owner rows 5, 5b) ───────────────────
+  // ⛔ BOTH VALUES ARE DRAFTS AND UNSIGNED. Tuning is the owner's and it is LAST.
+  /** DISCOVERY. The per-tick chance the home court finds a WILLED leash. It exists
+   *  because FENCE 1 takes a willed man out of the organic exposure lane entirely, and a
+   *  compromise nobody can ever find is not state — it is a secret the world is
+   *  incapable of holding against him. Discovery SEVERS the leash and demotes ONE rank;
+   *  it never ousts, never replaces and never sentences, which is the whole difference
+   *  between this end and the organic one. */
+  WILLED_DISCOVERY_BASE: 0.02,
+  /** LAPSE. Ticks after the mint at which an un-discovered willed leash simply ends —
+   *  a favour owed to a friend abroad that nobody ever called in. This arm is the FIRST
+   *  READER of `corruptionLeashTick`, which the mint has written since it shipped and
+   *  which nothing has ever read.
+   *  ⚠ READ THE ARM FOR WHAT IT IS: the design's words are "clears a willed leash that
+   *  has produced no leak", but NOTHING in the tree refreshes `corruptionLeashTick` after
+   *  the mint — the leak lane never touches it — so what is implementable today is AGE
+   *  SINCE MINT, and that is what this is. Recorded rather than dressed up; if the owner
+   *  wants leak-refreshed lapse, the leak lane owes a write and that is a second car. */
+  WILLED_LAPSE_TICKS: 520,
 });
 
 /** The importance rank ordering for the deterministic target-NPC pick — the SAME
@@ -296,6 +319,49 @@ function returnedCaptiveChannels(worldState) {
     if (npcKey) pinned.set(`${captor}|${home}`, npcKey);
   }
   return { pairs, pinned };
+}
+
+/**
+ * ENC-2 §5.4 — THE CHANCE-MEETING LEAN CHANNELS, the willed sibling of the roads channel
+ * above. A named person was persuaded, once, by a named foreigner; the meeting deposited a
+ * LEAN toward that foreigner's court, and this is where the web reads it.
+ *
+ * Returns the same three shapes the roads reader does, plus one:
+ *   pairs   — folded into `rawChannelQuality` exactly as a returned captive is, so a lean
+ *             IS a channel the patron can recruit through;
+ *   pinned  — the directional pick pin, so the asset is the person who was won over and
+ *             not whoever happens to rank highest in that court;
+ *   willed  — the directional set the CREATION SEAM reads, and the reason this reader is
+ *             not just a second `returnedCaptiveChannels`.
+ *
+ * ⚠ THE WEB MAY CONSUME A LEAN; IT DOES NOT CONSUME ONE ON DEMAND. It mints at most one
+ * asset per patron per tick, for that patron's STRICT-MAX target across every channel it
+ * holds, behind the per-patron cap, the pair rule and the upkeep floor — all of which
+ * still apply to a willed pair. A lean whose weight is not the patron's max is simply not
+ * reached this tick, and it may expire unconverted at its TTL while a stronger hostile-edge
+ * channel keeps winning. That is a lawful outcome, not a missed write.
+ *
+ * Absent ledger ⇒ empty ⇒ byte-neutral (the corruption-web dormancy golden holds). Pure.
+ * @param {Record<string, unknown> | null | undefined} worldState
+ * @returns {{ pairs: Set<string>, pinned: Map<string, string>, willed: Set<string> }}
+ */
+function meetingLeanChannels(worldState) {
+  /** @type {Set<string>} */
+  const pairs = new Set();
+  /** @type {Map<string, string>} */
+  const pinned = new Map();
+  /** @type {Set<string>} */
+  const willed = new Set();
+  for (const row of readMeetingLeanChannels(/** @type {Record<string, unknown>} */ (asObject(worldState)))) {
+    if (row.patronId === row.targetId) continue;
+    const unordered = row.patronId < row.targetId
+      ? `${row.patronId}|${row.targetId}` : `${row.targetId}|${row.patronId}`;
+    const directed = `${row.patronId}|${row.targetId}`;
+    pairs.add(unordered);
+    pinned.set(directed, row.npcKey);
+    willed.add(directed);
+  }
+  return { pairs, pinned, willed };
 }
 
 /**
@@ -590,7 +656,13 @@ export function advanceCorruptionWeb({ snapshot, worldState, rng = null, tick, n
 
   const existingByPatron = foreignAssetsByPatron(snapshot);
   const smuggle = smugglePairs(worldState);
-  const { pairs: returned, pinned: returnedPins } = returnedCaptiveChannels(worldState); // THE ROADS §10
+  const { pairs: roadsPairs, pinned: roadsPins } = returnedCaptiveChannels(worldState); // THE ROADS §10
+  // ENC-2 §5.4: the willed leans fold into the SAME pair set and the SAME pin map, so the
+  // creation seam has one notion of "a channel this patron can recruit through" rather than
+  // two that must be kept in step. `willed` is what the tempo and flaw arms below read.
+  const { pairs: leanPairs, pinned: leanPins, willed } = meetingLeanChannels(worldState);
+  const returned = leanPairs.size ? new Set([...roadsPairs, ...leanPairs]) : roadsPairs;
+  const returnedPins = leanPins.size ? new Map([...roadsPins, ...leanPins]) : roadsPins;
   /** @type {CorruptionWebResult['deferrals']} */
   const deferrals = [];
 
@@ -602,6 +674,13 @@ export function advanceCorruptionWeb({ snapshot, worldState, rng = null, tick, n
   /** @type {Record<string, unknown>} */
   let nextNpcStates = /** @type {Record<string, unknown>} */ (asObject(worldState.npcStates));
   let mutated = false;
+
+  // ENC-2 §5.4: the willed leash's two typed ends run FIRST, on the leashes that existed at
+  // tick start, so a leash minted below can never be ended on the tick it was won. A severed
+  // man is still `corrupt` in the PRE-MUTATION snapshot the mint loop reads for eligibility,
+  // so he cannot be re-recruited this tick either.
+  const willedEnds = advanceWilledLeashEnds(nextNpcStates, rng, now);
+  if (willedEnds.changed) { nextNpcStates = willedEnds.npcStates; mutated = true; }
 
   for (const patronId of patronIds) {
     const existing = existingByPatron.get(patronId) || [];
@@ -634,17 +713,28 @@ export function advanceCorruptionWeb({ snapshot, worldState, rng = null, tick, n
 
     // E0 TEMPO: the loaded-dice rarity gate (weight² ramps the rare baseline). Deferral-
     // not-denial: a miss is a deferral, tried again next tick.
+    // ⛔ ENC-2 §5.4 THE WILLED BYPASS (owner row 5): a willed pair SKIPS this die. The
+    // rarity die prices an UNWILLED recruitment — the patron's slow search for someone who
+    // might be turned — and a chance meeting already priced that decision when the target
+    // said yes. Rolling it again would price ONE decision twice, which is the exact
+    // disposition ENROLLMENT_GATE_DISPOSITION already records for L4 in infiltrationDepth.js.
+    // The draw is still TAKEN (the fork is keyed and per-pair, so consuming it costs no
+    // other stream) — only the deferral is skipped, so a non-willed pair is byte-identical.
+    // ⚠ THE CAP, THE PAIR RULE AND UPKEEP ABOVE STILL APPLY, deliberately: a patron court
+    // that cannot afford another asset does not get one because a magistrate liked its envoy.
+    const isWilledPair = willed.has(`${patronId}|${best.targetId}`);
     const fork = rng && typeof rng.fork === 'function' ? rng.fork(corruptionWebForkKey(patronId, best.targetId, now)) : null;
     const u = fork && typeof fork.random === 'function' ? clamp01(finiteNumber(fork.random(), 1)) : 1;
-    if (u >= T.INITIATE_BASE * best.weight * best.weight) {
+    if (!isWilledPair && u >= T.INITIATE_BASE * best.weight * best.weight) {
       deferrals.push({ patronId, targetId: best.targetId, reason: 'e0_deferred' });
       continue;
     }
 
     // MINT: the deterministic target-NPC pick (the seedBetrayalTraitor template) — PINNED to
-    // the returned captive when a roads §10 channel keys this (patron→target) pair.
+    // the returned captive when a roads §10 channel keys this (patron→target) pair, or to the
+    // person who was WON OVER when an ENC-2 lean channel does.
     const pin = returnedPins.get(`${patronId}|${best.targetId}`) || null;
-    const minted = mintAssetInto(nextNpcStates, snapshot, best.targetId, patronId, now, pin);
+    const minted = mintAssetInto(nextNpcStates, snapshot, best.targetId, patronId, now, pin, isWilledPair);
     if (!minted) {
       deferrals.push({ patronId, targetId: best.targetId, reason: 'no_eligible_npc' });
       continue;
@@ -676,23 +766,35 @@ export function advanceCorruptionWeb({ snapshot, worldState, rng = null, tick, n
  * @param {WebSnapshot} snapshot
  * @param {string} targetSid @param {string} patronId @param {number} tick
  * @param {string|null} [pinnedNpcKey]  THE ROADS §10 — pin the pick to the returned captive
+ * @param {boolean} [willed]  ENC-2 §5.4 — the pin was WON OVER at a chance meeting
  * @returns {{ npcStates: Record<string, unknown>, npcKey: string } | null}
  */
-function mintAssetInto(npcStates, snapshot, targetSid, patronId, tick, pinnedNpcKey = null) {
+function mintAssetInto(npcStates, snapshot, targetSid, patronId, tick, pinnedNpcKey = null, willed = false) {
   const item = snapshot?.byId?.get?.(targetSid);
   const npcs = Array.isArray(item?.settlement?.npcs) ? item.settlement.npcs : [];
   if (!npcs.length) return null;
-  const eligible = npcs
-    .map((npc, index) => ({ npc, index, flaw: npcCorruptibleFlaw(/** @type {SimNpc} */ (npc)) }))
-    // Corruptible + clean in the snapshot AND not already turned this tick (the in-progress
-    // npcStates — so two patrons targeting the same court can't overwrite one NPC's leash,
-    // and a mint never re-turns an NPC corrupted earlier in this same pass).
-    .filter((c) => c.flaw && c.npc.corrupt !== true && c.npc.ousted !== true
-      && asObject(npcStates[npcId(targetSid, c.npc, c.index)]).corruption !== true);
+  const candidates = npcs.map((npc, index) => ({ npc, index, flaw: npcCorruptibleFlaw(/** @type {SimNpc} */ (npc)) }));
+  // Corruptible + clean in the snapshot AND not already turned this tick (the in-progress
+  // npcStates — so two patrons targeting the same court can't overwrite one NPC's leash,
+  // and a mint never re-turns an NPC corrupted earlier in this same pass).
+  const clean = (/** @type {{ npc: SimNpc, index: number }} */ c) => c.npc.corrupt !== true && c.npc.ousted !== true
+    && asObject(npcStates[npcId(targetSid, c.npc, c.index)]).corruption !== true;
+  const eligible = candidates.filter((c) => c.flaw && clean(c));
+  // ⛔ ENC-2 §5.4 THE WILLED FLAW BYPASS (owner row 5) — FOR THE PINNED KEY ONLY.
+  // The flaw gate asks "is there a hook in this man a patron could pull?", and for an
+  // unwilled recruitment that question is the whole mechanism. A willed one already has its
+  // answer: the owner's own example is the GOOD MAGISTRATE of an evil town, who by
+  // construction has no corruptible flaw and was won over anyway — by likeness, by a shared
+  // reading of his own court, by a conversation. So a willed PIN may be flawless.
+  // ⚠ `clean` is NOT relaxed, ever: a man already corrupt or already ousted is not available
+  // to anyone, and this stays a recruitment rather than a second leash on one person.
+  // ⚠ The bypass is scoped to the pinned key. Every OTHER candidate in that court still needs
+  // a flaw, so a willed lean can never widen the default importance-ranked pick.
+  const pinnedC = pinnedNpcKey
+    ? (willed ? candidates : eligible).find((c) => npcId(targetSid, c.npc, c.index) === pinnedNpcKey && clean(c))
+    : null;
+  if (pinnedC) return mintLeashOnto(npcStates, targetSid, pinnedC, patronId, tick, willed);
   if (!eligible.length) return null;
-  // THE ROADS §10: pin the pick to the returned captive when it is eligible; else the default.
-  const pinnedC = pinnedNpcKey ? eligible.find((c) => npcId(targetSid, c.npc, c.index) === pinnedNpcKey) : null;
-  if (pinnedC) return mintLeashOnto(npcStates, targetSid, pinnedC, patronId, tick);
   eligible.sort((a, b) => {
     const rank = (/** @type {Record<string, number>} */ (IMPORTANCE_RANK)[String(b.npc.importance)] || 0)
       - (/** @type {Record<string, number>} */ (IMPORTANCE_RANK)[String(a.npc.importance)] || 0);
@@ -701,7 +803,7 @@ function mintAssetInto(npcStates, snapshot, targetSid, patronId, tick, pinnedNpc
     const bn = String(b.npc.name || '');
     return an < bn ? -1 : an > bn ? 1 : 0;
   });
-  return mintLeashOnto(npcStates, targetSid, eligible[0], patronId, tick);
+  return mintLeashOnto(npcStates, targetSid, eligible[0], patronId, tick, false);
 }
 
 /**
@@ -709,9 +811,10 @@ function mintAssetInto(npcStates, snapshot, targetSid, patronId, tick, pinnedNpc
  * Shared by the default importance-pick and THE ROADS §10 pinned-captive pick. Pure.
  * @param {Record<string, unknown>} npcStates @param {string} targetSid
  * @param {{ npc: SimNpc, index: number }} chosen @param {string} patronId @param {number} tick
+ * @param {boolean} [willed]  ENC-2 — the leash was WON at a chance meeting, not diced for
  * @returns {{ npcStates: Record<string, unknown>, npcKey: string } | null}
  */
-function mintLeashOnto(npcStates, targetSid, chosen, patronId, tick) {
+function mintLeashOnto(npcStates, targetSid, chosen, patronId, tick, willed = false) {
   const id = npcId(targetSid, chosen.npc, chosen.index);
   const st = asObject(npcStates[id]);
   if (!npcStates[id]) return null; // no ensured state to attach to (ensureNpcStates ran first)
@@ -720,7 +823,12 @@ function mintLeashOnto(npcStates, targetSid, chosen, patronId, tick) {
     settlementId: String(patronId),
     factionName: null,
     viaLocalOrg: null,
-    conspiracy: 'foreign_web',
+    // ⛔ ENC-2 — THE ONE LINE THE THREE FENCES READ. Without this ternary nothing downstream
+    // can tell a leash a MEETING produced from one the web diced for, and every fence has
+    // nothing to test. It is a VALUE in a slot every web leash already carries — not a new
+    // key, not an OSR shape widening, not a fold entry, and the reader ratchet sees a read
+    // of a field its own writer produces.
+    conspiracy: willed ? WILLED_MEETING_CONSPIRACY : 'foreign_web',
     covert: true,
   };
   return {
@@ -737,6 +845,81 @@ function mintLeashOnto(npcStates, targetSid, chosen, patronId, tick) {
     },
     npcKey: id,
   };
+}
+
+/**
+ * ENC-2 §5.4 — THE TWO TYPED ENDS OF A WILLED LEASH (owner row 5b, both recommended YES).
+ *
+ * ── WHY THIS PASS HAS TO EXIST ──────────────────────────────────────────────────
+ * FENCE 1 takes a willed man out of npcAgency's organic exposure lane, and at the tip that
+ * lane is the ONLY thing that ever ends a leash: `corruptionHeat` is HELD while
+ * `corruption === true` (only a clean man's heat cools ×0.92), `corruptionLeash` carries no
+ * TTL and no strength, and `corruptionLeashTick` has been WRITTEN by the mint since it
+ * shipped and READ BY NOTHING. So fencing without this pass would not be mercy — it would
+ * make a willed compromise the one permanent, undiscoverable condition in the estate, which
+ * is a worse answer to STATE, NEVER FATE than the fate was.
+ *
+ *   DISCOVERY — the home court finds out. The leash is SEVERED and the man loses ONE rank.
+ *               He is never ousted, never replaced by a generated successor, and never
+ *               sentenced: that is the whole distance between this end and the organic one.
+ *   LAPSE     — a favour owed to a friend abroad that nobody ever called in. This arm is
+ *               `corruptionLeashTick`'s FIRST READER in the tree.
+ *
+ * ── WHY IT LIVES HERE AND NOT IN npcAgency ──────────────────────────────────────
+ * SINGLE-WRITER. Severing a leash IS a leash write, and this module is the one leash
+ * writer. Homing it in the exposure lane would give the leash a second writer AND spend
+ * npcAgency's remaining size-baseline slack, which FENCE 1 needs. The demotion borrows
+ * npcAgency's own `roleSeatFor` and corruption.js's `demoteDotRank` rather than a second
+ * copy of either, so a rank and its seat can never drift apart.
+ *
+ * ── BYTE-NEUTRALITY, BY CONSTRUCTION ────────────────────────────────────────────
+ * A world with no willed leash — which is EVERY world until the encounters flag lights —
+ * walks the loop, matches nothing and returns the same object it was given. `rng.fork` is a
+ * pure derivation (kernel/prng.js), so the per-NPC discovery draw takes nothing from the
+ * parent stream. Deterministic: keys are codepoint-sorted and every draw is keyed.
+ *
+ * NO NEWS, deliberately: the seedBetrayalTraitor invariant holds for the willed leash as it
+ * does for every other — a covert tie is not a headline. The state IS the receipt, and the
+ * return contract of `advanceCorruptionWeb` is left unchanged so nothing upstream must
+ * grow a line to carry one.
+ *
+ * @param {Record<string, unknown>} npcStates
+ * @param {RngLike} rng
+ * @param {number} now
+ * @returns {{ npcStates: Record<string, unknown>, changed: boolean }}
+ */
+function advanceWilledLeashEnds(npcStates, rng, now) {
+  const T = CORRUPTION_WEB_TUNING;
+  let next = npcStates;
+  let changed = false;
+  for (const id of Object.keys(npcStates).sort(compareCodepoint)) {
+    const st = asObject(npcStates[id]);
+    if (st.corruption !== true || !isWilledLeash(st)) continue;
+    const age = now - Math.floor(finiteNumber(st.corruptionLeashTick, now));
+    let discovered = false;
+    if (age < T.WILLED_LAPSE_TICKS) {
+      const fork = rng && typeof rng.fork === 'function' ? rng.fork(`willed-leash-end::${now}::${id}`) : null;
+      const u = fork && typeof fork.random === 'function' ? clamp01(finiteNumber(fork.random(), 1)) : 1;
+      if (u >= T.WILLED_DISCOVERY_BASE) continue;
+      discovered = true;
+    }
+    if (!changed) { next = { ...npcStates }; changed = true; }
+    /** @type {Record<string, unknown>} */
+    const severed = { ...st, corruption: false, corruptionProfile: { corrupted: false, vector: null }, corruptionHeat: 0 };
+    delete severed.corruptionLeash;
+    delete severed.corruptionLeashTick;
+    if (discovered) {
+      // ⛔ ONE RANK, AND NOTHING ELSE. `ousted` is not written, no exposure record is
+      // pushed, and nothing reaches the verdict chain or the blowback triple. A man who
+      // was befriended into a favour loses standing for it; he does not lose his name.
+      const nextRank = demoteDotRank(st.dotRank);
+      severed.dotRank = nextRank;
+      severed.factionSeat = roleSeatFor(nextRank);
+      severed.timesExposed = Math.floor(finiteNumber(st.timesExposed, 0)) + 1;
+    }
+    next[id] = severed;
+  }
+  return { npcStates: next, changed };
 }
 
 // ── §4 THE FOREIGN CONSEQUENCE LANE ──────────────────────────────────────────────

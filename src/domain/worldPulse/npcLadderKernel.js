@@ -92,6 +92,10 @@ import {
 import { readRoadsBondEvents } from '../roads/thirdPartyRansom.js';
 import { readMissionCreditEvents } from './espionage/espionageCareerCredit.js';
 import { readGratitudeBondEvents, governingLadderFkeyOf, rulingSeatNidOf } from './gratitudeBonds.js';
+// ENC-2: the chance-meeting mark deposits. The reader lives in the WRITER's leaf (the
+// gratitudeBonds.js / espionageCareerCredit.js shape), and this import is the train's
+// INTERIOR→GRAMMAR coupling pair — licensed by its COUPLING_REGISTRY row, not by silence.
+import { readMeetingMarkEvents } from './envoyChanceMeetingLedger.js';
 import { GOAL_TUNING, mintGoal, evaluateGoal, attributionWeight, goalSignalVar } from './npcLadderGoals.js';
 import { CHALLENGE_TUNING, resolveFactionChallenges, clashOf } from './npcLadderChallenge.js';
 import { faithRuptured } from './npcLadderCoherence.js';
@@ -384,6 +388,35 @@ function applyMissionCredit(st, mc) {
   return { ...st, stock: round4(clamp(num(st.stock, 0) + num(mc.credit, 0), 0, LADDER_TUNING.STAND_MAX)) };
 }
 
+/**
+ * ENC-2 §5.2 — fold ONE chance-meeting mark deposit into a standing's bonds.
+ *
+ * The ladder is the only writer of a mark and this is the only place a MEETING mark
+ * becomes one, so all three consumers below (a rung-holder in the loop, a surviving
+ * orphan in the orphan pass, a freshly minted orphan after it) route through here and
+ * cannot drift apart.
+ *
+ * ⛔ THE SEVERITY WORD BECOMES A NUMBER HERE AND NOWHERE ELSE. The deposit says `half`;
+ * `LADDER_TUNING.BOND_MINT_SEV` is what half is worth, it is the owner's to sign, and it
+ * stays in this file. A ledger that carried the float would be a second home for a
+ * tuning value — signed once, drifting twice.
+ *
+ * ⚠ A `grudge` deposit is INERT until the owner rules the rivalry word (§12 row 3): the
+ * stage refuses `rivalry` with a receipted `vocabulary_unruled` and deposits nothing, so
+ * no such row can exist yet, and ENC-5 lifts both the refusal and this guard together.
+ * The branch is written rather than assumed so the shape is settled now and lifting it
+ * later owes no migration.
+ *
+ * @param {LadderStanding} st
+ * @param {{ mark: string, otherNid: string, foreignSid: string, kind: string, sev: string }} ev
+ * @param {number} weeks
+ * @returns {LadderStanding}
+ */
+function applyMeetingMark(st, ev, weeks) {
+  if (ev.mark !== 'bond' || ev.sev !== 'half') return st;
+  return { ...st, bonds: mintBond(st.bonds, ev.otherNid, ev.kind, LADDER_TUNING.BOND_MINT_SEV, weeks, ev.foreignSid) };
+}
+
 // ── The advance ───────────────────────────────────────────────────────────────
 /**
  * @typedef {Object} NpcLadderAdvanceResult
@@ -469,6 +502,12 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
   // it is hoisted ONCE per advance beside them rather than read per rung. Absent ⇒ empty ⇒
   // byte-neutral. Espionage-dark and ladder-dark both mint no key, so no flag read is owed here.
   const missionCredits = readMissionCreditEvents(worldState, now2);
+  // ENC-2 §5.2: the CHANCE-MEETING mark deposits — a named person met a named foreigner
+  // and the tie is minted through this kernel's own writer, exactly as the roads and
+  // generosity deposits are. WEAVE-GATED like every other bond source: the stage also
+  // reads memoryWeaveActive before depositing, so a weave-dark world writes no key at
+  // all and this read finds nothing. Absent ⇒ empty ⇒ byte-neutral.
+  const meetingMarkEvents = memWeave ? readMeetingMarkEvents(worldState, now2) : new Map();
   // D-4→D-2 THE BLUFF CHARGE rides BOTH flags (contestedGoals ∧ npcCredibility): the ladder
   // deposits a contradicted-bluff exposure into the bluffExposures sidecar ONLY when the credibility
   // system that consumes it is lit. Dark ⇒ no deposit, no sidecar key, byte-identical (a bluff that
@@ -703,6 +742,12 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
             if (giverSeatNid) npcs[nid].bonds = mintBond(npcs[nid].bonds, giverSeatNid, 'gratitude', gev.sev, weeks, gev.giverSid);
           }
         }
+        // ENC-2 §5.2: a chance meeting abroad forms a cross-border tie on THIS rung-holder
+        // (foreignSid = the counterpart's court, the D-7f convention the ransom bond uses).
+        if (meetingMarkEvents.size) {
+          const mev = meetingMarkEvents.get(`${sid}|${nid}`);
+          if (mev) npcs[nid] = applyMeetingMark(npcs[nid], mev, weeks);
+        }
         if (contestsLit) {
           nidMeta.set(nid, { fkey, faction, rungIndex, rungCount: rungs.length, npc: npcObj });
           if (gl.outcome) goalOutcomes.set(nid, gl.outcome);
@@ -850,17 +895,61 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
       const decayed = round4(decayStandingTowardBaseline(priorSt.stock, Math.max(0, weeks - priorSt.week)));
       // Exposure-preserving stub (off-ladder ⇒ no fresh exposure; keep timesExposed/ousted so no
       // false second-exposure fires should the NPC ever re-seat) — only the marks decay here.
-      const orphanSt = maintainMarks(
+      let orphanSt = maintainMarks(
         { ...priorSt, stock: decayed },
         { timesExposed: num(priorSt.lastExposed, 0), ousted: priorSt.wasOusted === true },
         bandMult, weeks, now2, null,
       ).st;
+      // ENC-2: a mark deposit may name a man who is ALREADY off the ladder. Folding it here
+      // rather than only in the fresh-mint pass below is what makes the deposit total: this
+      // loop rewrites npcs[nid] wholesale, so a mark applied anywhere else would be silently
+      // overwritten on the very tick it was earned.
+      const orphanMev = meetingMarkEvents.size ? meetingMarkEvents.get(`${sid}|${nid}`) : undefined;
+      if (orphanMev) orphanSt = applyMeetingMark(orphanSt, orphanMev, weeks);
       // goal is written null (dropped): an off-ladder NPC holds no rung to pursue, so it must not
       // be mirrored as an active goal, and dropping it lets the record prune once its marks fade.
+      // ⛔ ENC-2 — BONDS COUNT AS MEANINGFUL, and before this clause they did not. The rule kept a
+      // record alive for a stigma or a grudge but not for a friendship, so an orphan holding only
+      // a bond was pruned on the very next advance and every cross-border tie this design mints
+      // for a non-rung-holder died one tick after it was earned. Behaviour-neutral in every
+      // product preset today (the memory weave is dark, so no orphan carries a bond), and a
+      // corpus-visible shift only where the roads ransom bond already lands on an orphan under
+      // the all-flags-lit corpus. Plant P5 convicts: revert this clause and the orphan-with-only-
+      // a-bond pin reds on the second advance.
       const meaningful = Math.abs(decayed - T.STAND_BASELINE) >= T.PRUNE_EPSILON
-        || !!orphanSt.stigma || Object.keys(orphanSt.grudges).length > 0;
+        || !!orphanSt.stigma || Object.keys(orphanSt.grudges).length > 0
+        || Object.keys(orphanSt.bonds || {}).length > 0;
       if (!meaningful) continue;
       npcs[nid] = { ...orphanSt, goal: null, stock: decayed, week: weeks };
+    }
+
+    // ── ENC-2 §2.3 THE ORPHAN MINT (owner row 4) ────────────────────────────────────
+    // A mark deposit may name a man who holds NO standing record at all — and at the tip
+    // that is the common case, not the corner: standings are minted per RUNG-HOLDER, and
+    // covert casting's importance-INVERSE law means nearly every operative is a non-holder.
+    // Without this pass the owner's own clause — a chance meeting leaves a bond — would
+    // reach almost none of the people he named.
+    //
+    // The record is an ORPHAN FROM BIRTH: it is seeded at baseline with no goal, no stigma
+    // and no grudges, so it holds nothing but the tie, and the orphan pass above decays that
+    // tie on the band clock and prunes the record when it fades. No new persisted SHAPE, one
+    // new MINT PATH, and drop-when-empty by the existing rule rather than a new one.
+    //
+    // Deterministic: the reader hands rows back codepoint-sorted and a Map preserves that.
+    // Guarded on a mint actually landing, so a deposit this kernel cannot fold (an unruled
+    // grudge) never leaves an empty record for the next advance to churn.
+    if (meetingMarkEvents.size) {
+      const orphanPrefix = `${sid}|`;
+      for (const [markKey, mev] of meetingMarkEvents) {
+        if (!markKey.startsWith(orphanPrefix)) continue;
+        const nid = markKey.slice(orphanPrefix.length);
+        if (!nid || activeNids.has(nid) || prior.npcs[nid]) continue;
+        const seeded = applyMeetingMark(
+          { stock: T.STAND_BASELINE, since: weeks, week: weeks, goal: null, stigma: null, grudges: {} },
+          mev, weeks,
+        );
+        if (Object.keys(seeded.bonds || {}).length) npcs[nid] = seeded;
+      }
     }
 
     // ── D-4 THE SETTLEMENT-WIDE CONTEST PASS (§8) — runs AFTER the per-faction goal + challenge

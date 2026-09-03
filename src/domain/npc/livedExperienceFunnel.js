@@ -582,7 +582,16 @@ export function foldLivedExperience({ worldState, entries, tick }) {
     // A vector may be SUPPLIED only where the table honestly holds none and the
     // kind is ambient — dwell_milieu, whose poles are the host settlement's, not
     // a constant. Anywhere else the table is the authority.
-    if (supplied && !(spec.ambient && tabled.length === 0)) {
+    // ⛔ ENC-2 (§12 row 10) THE THIRD ADMISSION ARM. A `vectorSupplied` row is the second
+    // honest case: the table holds no vector because there is no constant one to hold —
+    // what a chance meeting teaches depends on WHO was met, and only the adapter knows
+    // that. The AMBIENT road cannot carry it: an ambient kind must declare a `spanTicks`
+    // and divides its quantum by a season (below), and a one-week meeting can never cross
+    // that floor, so routing it there would build a lesson that is arithmetically
+    // incapable of teaching anything. A `vectorSupplied` row is non-ambient and span 1.
+    // Behaviour-neutral at this commit: NO row in EXPERIENCE_TABLE carries the field, so
+    // every existing kind still refuses `pulls_not_overridable` exactly as before.
+    if (supplied && !(spec.ambient && tabled.length === 0) && spec.vectorSupplied !== true) {
       refusals.push(refusal('pulls_not_overridable', raw)); continue;
     }
     let span = 1;

@@ -437,6 +437,9 @@ export function normalizeBonds(v) {
  *  (a gratitude event over a loyalty tie reads as gratitude now). The caller has gated on
  *  memoryWeaveActive. Pure. @param {Record<string, import('./npcLadderKernel.js').LadderBond>|undefined} bonds
  *  @param {string} otherNid @param {string} kind @param {number} addSev @param {number} weeks
+ *  @param {string|null} [foreignSid] the D-7f cross-border counterpart marker (or inherit a prior
+ *  one). The tag was MISSING, so every caller passing a real sid was checked against the
+ *  initializer-inferred `null` instead of the contract the body actually implements.
  *  @returns {Record<string, import('./npcLadderKernel.js').LadderBond>} */
 export function mintBond(bonds, otherNid, kind, addSev, weeks, foreignSid = null) {
   const T = LADDER_TUNING;
