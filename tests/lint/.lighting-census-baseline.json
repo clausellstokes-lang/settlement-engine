@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "7733e064edd82baa6f03f22bf40dbb7b9d95ff82",
-  "measuredBy": "Opus 5 — chair, §890 train",
+  "measuredAtSha": "53fd36d2ca987aa94a47cd0a3d3c6861d723aa09",
+  "measuredBy": "Opus 5 — chair, §890 train +O-17",
   "date": "2026-09-03",
-  "note": "Three cars, no new test file: lighting O-12 and O-16 add arms to existing suites, and the Herald authority-drift guard adds one arm to heraldRouting.walker.test.js.",
+  "note": "O-17 joins the train: the faith tuning surface is candidate-lit, adding five arms to an existing suite. No new test file.",
   "files": 2510,
   "parked": 370,
   "credited": 2140,
-  "titles": 22836,
-  "suiteTitles": 6141
+  "titles": 22841,
+  "suiteTitles": 6142
 }
