@@ -22,6 +22,9 @@
  * it never touches first paint.
  */
 import { jsPDF } from 'jspdf';
+// THE ONE jsPDF text pass. This file's own copy differed from the campaign
+// book's by whitespace only, and both admitted the same set (measured).
+import { sanitizeJsPdfText as s } from './jsPdfText.js';
 import { formatCount } from '../domain/formatNumber.js';
 import { resolveSettlementCulture } from '../domain/resolveCulture.js';
 import { truncateAtWord } from '../lib/text.js';
@@ -58,10 +61,6 @@ function rect(d, x, y, w, h, fill, stroke = null) {
   else d.rect(x, y, w, h, 'F');
 }
 function hline(d, x1, y, x2, clr = TAN, lw = 0.2) { sd(d, clr); d.setLineWidth(lw); d.line(x1, y, x2, y); }
-function s(v) {
-  // eslint-disable-next-line no-control-regex
-  return String(v || '').replace(/[^\x09\x0A\x0D\x20-\x7E\xA0-\xFF]/g, ' ').replace(/\s+/g, ' ').trim();
-}
 function wrap(d, text, maxW, fontSize) { d.setFontSize(fontSize); return d.splitTextToSize(s(text), maxW); }
 function clampLines(lines, maxLines) {
   if (lines.length <= maxLines) return lines;

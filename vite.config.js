@@ -752,6 +752,18 @@ export default defineConfig({
           if (id.includes('/src/domain/formatNumber.js'))
             return 'format-number';
 
+          // ── The charset wall (LAZY LEAF, its own chunk) ───────────
+          // The leaf and its derived table answer one question: can this
+          // product DRAW this character. Nothing on first paint asks that, and
+          // nothing generator-side does either, so the pair gets its own chunk
+          // rather than being folded into engine-core by the derived grouping
+          // below (the custom-schema precedent). Its only imports are its own
+          // generated table, so the chunk cannot drag anything with it.
+          // @enforced-by tests/build/customContentCharsetLazy.test.js (absent
+          //   from the entry closure + present in a lazy chunk).
+          if (id.includes('/src/domain/content/customContentCharset'))
+            return 'custom-charset';
+
           // ── Engine-core (generator-shared domain vocabulary) ──────
           // This derived grouping prevents Rollup from folding shared domain
           // modules into the monolithic engine chunk. Its former eager anchors

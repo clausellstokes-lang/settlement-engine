@@ -19,6 +19,19 @@
     "deities",
     "traditions"
   ],
+  "surfaceClasses": [
+    "web-display",
+    "dossier-pdf",
+    "campaign-pdf",
+    "world-book",
+    "foundry",
+    "json-export"
+  ],
+  "charsetPolicy": {
+    "enforcement": "report",
+    "nonLatin": "undecided",
+    "embeddedFont": null
+  },
   "schemas": {
     "name": {
       "type": "string",
@@ -455,6 +468,12 @@
           "consumers": [
             "customRegistry",
             "dossier"
+          ],
+          "surfaces": [
+            "web-display",
+            "dossier-pdf",
+            "world-book",
+            "foundry"
           ]
         },
         {
@@ -464,6 +483,11 @@
           "activation": "always",
           "consumers": [
             "assembleInstitutions.dossierPlacement"
+          ],
+          "surfaces": [
+            "web-display",
+            "dossier-pdf",
+            "foundry"
           ]
         },
         {
@@ -483,6 +507,10 @@
           "consumers": [
             "customRegistry",
             "dossier"
+          ],
+          "surfaces": [
+            "web-display",
+            "dossier-pdf"
           ]
         },
         {
@@ -559,6 +587,9 @@
           "condition": "Only a registered live demand key changes local supply; other values organize presentation.",
           "consumers": [
             "dependencyEngine.finishedGoodsSupply"
+          ],
+          "surfaces": [
+            "web-display"
           ]
         },
         {
@@ -569,6 +600,11 @@
           "consumers": [
             "dossier",
             "compendium"
+          ],
+          "surfaces": [
+            "web-display",
+            "dossier-pdf",
+            "foundry"
           ]
         },
         {
@@ -648,6 +684,9 @@
           "consumers": [
             "institutionServices",
             "inferSupplyChains"
+          ],
+          "surfaces": [
+            "web-display"
           ]
         },
         {
@@ -667,6 +706,9 @@
           "consumers": [
             "inferSupplyChains",
             "customSupplyChainActivation"
+          ],
+          "surfaces": [
+            "web-display"
           ]
         },
         {
@@ -681,6 +723,9 @@
           "condition": "Only when both institutions are present during generation.",
           "consumers": [
             "assembleInstitutions"
+          ],
+          "surfaces": [
+            "web-display"
           ]
         }
       ]
@@ -701,6 +746,11 @@
           "consumers": [
             "customRegistry",
             "dossier"
+          ],
+          "surfaces": [
+            "web-display",
+            "dossier-pdf",
+            "foundry"
           ]
         },
         {
@@ -744,6 +794,10 @@
           "consumers": [
             "servicesGenerator",
             "capacityModel"
+          ],
+          "surfaces": [
+            "web-display",
+            "foundry"
           ]
         },
         {
@@ -811,6 +865,11 @@
           "consumers": [
             "dossier",
             "compendium"
+          ],
+          "surfaces": [
+            "web-display",
+            "dossier-pdf",
+            "foundry"
           ]
         },
         {
@@ -855,6 +914,9 @@
             "dependencyEngine.foodImpactTally",
             "inferSupplyChains",
             "customSupplyChainActivation"
+          ],
+          "surfaces": [
+            "web-display"
           ]
         },
         {
@@ -874,6 +936,9 @@
           "consumers": [
             "inferSupplyChains",
             "customSupplyChainActivation"
+          ],
+          "surfaces": [
+            "web-display"
           ]
         }
       ]
@@ -894,6 +959,11 @@
           "consumers": [
             "customRegistry",
             "dossier"
+          ],
+          "surfaces": [
+            "web-display",
+            "dossier-pdf",
+            "foundry"
           ]
         },
         {
@@ -903,6 +973,10 @@
           "activation": "always",
           "consumers": [
             "customRegistry"
+          ],
+          "surfaces": [
+            "web-display",
+            "foundry"
           ]
         },
         {
@@ -947,6 +1021,9 @@
             "customSupplyChainReview",
             "customSupplyChainActivation",
             "compendium"
+          ],
+          "surfaces": [
+            "web-display"
           ]
         },
         {
@@ -957,6 +1034,11 @@
           "consumers": [
             "dossier",
             "compendium"
+          ],
+          "surfaces": [
+            "web-display",
+            "dossier-pdf",
+            "foundry"
           ]
         },
         {
@@ -999,6 +1081,9 @@
           "consumers": [
             "inferSupplyChains",
             "customSupplyChainActivation"
+          ],
+          "surfaces": [
+            "web-display"
           ]
         },
         {
@@ -1012,6 +1097,9 @@
           "activation": "always",
           "consumers": [
             "inferSupplyChains"
+          ],
+          "surfaces": [
+            "web-display"
           ]
         }
       ]
@@ -1032,6 +1120,9 @@
           "consumers": [
             "customRegistry",
             "compendium"
+          ],
+          "surfaces": [
+            "web-display"
           ]
         },
         {
@@ -1041,6 +1132,9 @@
           "activation": "always",
           "consumers": [
             "compendium"
+          ],
+          "surfaces": [
+            "web-display"
           ]
         },
         {
@@ -1072,6 +1166,9 @@
           "activation": "always",
           "consumers": [
             "dependencyEngine.relationshipRead"
+          ],
+          "surfaces": [
+            "web-display"
           ]
         },
         {
@@ -1085,6 +1182,9 @@
           "activation": "always",
           "consumers": [
             "dependencyEngine.relationshipRead"
+          ],
+          "surfaces": [
+            "web-display"
           ]
         }
       ]
@@ -1105,6 +1205,10 @@
           "consumers": [
             "customRegistry",
             "dossier"
+          ],
+          "surfaces": [
+            "web-display",
+            "dossier-pdf"
           ]
         },
         {
@@ -1114,6 +1218,9 @@
           "activation": "always",
           "consumers": [
             "customRegistry"
+          ],
+          "surfaces": [
+            "web-display"
           ]
         },
         {
@@ -1162,6 +1269,9 @@
           "condition": "Only a registered live demand key changes local supply; other values organize presentation.",
           "consumers": [
             "dependencyEngine.finishedGoodsSupply"
+          ],
+          "surfaces": [
+            "web-display"
           ]
         },
         {
@@ -1172,6 +1282,10 @@
           "consumers": [
             "dossier",
             "compendium"
+          ],
+          "surfaces": [
+            "web-display",
+            "dossier-pdf"
           ]
         },
         {
@@ -1191,6 +1305,9 @@
             "dependencyEngine.foodImpactTally",
             "inferSupplyChains",
             "customSupplyChainActivation"
+          ],
+          "surfaces": [
+            "web-display"
           ]
         },
         {
@@ -1210,6 +1327,9 @@
           "consumers": [
             "inferSupplyChains",
             "customSupplyChainActivation"
+          ],
+          "surfaces": [
+            "web-display"
           ]
         }
       ]
@@ -1230,6 +1350,10 @@
           "consumers": [
             "pantheon",
             "dossier"
+          ],
+          "surfaces": [
+            "web-display",
+            "dossier-pdf"
           ]
         },
         {
@@ -1291,6 +1415,9 @@
           "consumers": [
             "pantheon",
             "dossier"
+          ],
+          "surfaces": [
+            "web-display"
           ]
         },
         {
@@ -1316,6 +1443,10 @@
             "pantheon",
             "dossier",
             "dispositionProfile"
+          ],
+          "surfaces": [
+            "web-display",
+            "dossier-pdf"
           ]
         },
         {
@@ -1424,6 +1555,10 @@
           "consumers": [
             "customFounding",
             "dossier"
+          ],
+          "surfaces": [
+            "web-display",
+            "dossier-pdf"
           ]
         },
         {
@@ -1454,6 +1589,10 @@
           "consumers": [
             "customFounding",
             "dossier"
+          ],
+          "surfaces": [
+            "web-display",
+            "dossier-pdf"
           ]
         }
       ]
@@ -1474,6 +1613,11 @@
           "consumers": [
             "compendium",
             "eventComposer"
+          ],
+          "surfaces": [
+            "web-display",
+            "campaign-pdf",
+            "foundry"
           ]
         },
         {
@@ -1492,6 +1636,9 @@
           "activation": "always",
           "consumers": [
             "compendium"
+          ],
+          "surfaces": [
+            "web-display"
           ]
         },
         {
@@ -1501,6 +1648,9 @@
           "activation": "always",
           "consumers": [
             "compendium"
+          ],
+          "surfaces": [
+            "web-display"
           ]
         },
         {
@@ -1519,6 +1669,9 @@
           "activation": "always",
           "consumers": [
             "compendium"
+          ],
+          "surfaces": [
+            "web-display"
           ]
         },
         {
@@ -1556,6 +1709,11 @@
           "consumers": [
             "compendium",
             "eventComposer"
+          ],
+          "surfaces": [
+            "web-display",
+            "campaign-pdf",
+            "foundry"
           ]
         },
         {
@@ -1578,6 +1736,9 @@
           "activation": "always",
           "consumers": [
             "compendium.dependencies"
+          ],
+          "surfaces": [
+            "web-display"
           ]
         },
         {
@@ -1591,6 +1752,9 @@
           "activation": "always",
           "consumers": [
             "compendium.dependencies"
+          ],
+          "surfaces": [
+            "web-display"
           ]
         }
       ]
