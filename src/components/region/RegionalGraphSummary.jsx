@@ -57,12 +57,15 @@ export default function RegionalGraphSummary({
   // the guard below has not run yet, so this hook stays unconditional (Rules of
   // Hooks): it must sit ABOVE the early return.
   const [suggestionsOpen, setSuggestionsOpen] = useState(
-    () => ensureRegionalGraph(campaign?.regionalGraph).channels.some(c => c.status === 'suggested'),
+    // The lazy initializer must not read a clock — it would stamp a throwaway graph at
+    // mount time. The campaign's own stamp is the deterministic in-band answer.
+    () => ensureRegionalGraph(campaign?.regionalGraph, { now: campaign?.updatedAt || campaign?.createdAt })
+      .channels.some(c => c.status === 'suggested'),
   );
 
   if (!campaign || settlementCount < 2) return null;
 
-  const graph = ensureRegionalGraph(campaign.regionalGraph);
+  const graph = ensureRegionalGraph(campaign.regionalGraph, { now: campaign.updatedAt || campaign.createdAt });
   const suggested = graph.channels.filter(c => c.status === 'suggested');
   const confirmed = graph.channels.filter(c => c.status === 'confirmed');
   const queuedImpacts = graph.queuedImpacts.filter(i => i.status === 'queued');

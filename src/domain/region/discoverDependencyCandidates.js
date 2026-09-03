@@ -71,7 +71,7 @@ function linkBetween(sourceSave, targetSave) {
 }
 
 /** @param {{ type: string, from: NodeLike, to: NodeLike, rel: string, strength?: number, confidence?: number, explanation?: string, now?: string|null }} args @returns {ChannelLike | null} */
-function relationshipChannel({ type, from, to, rel, strength = 0.5, confidence = 0.6, explanation, now = null }) {
+function relationshipChannel({ type, from, to, rel, strength = 0.5, confidence = 0.6, explanation, now }) {
   return candidate({
     type,
     from: from.id,
@@ -85,13 +85,13 @@ function relationshipChannel({ type, from, to, rel, strength = 0.5, confidence =
   }, now);
 }
 
-/** @param {Array<ChannelLike | null>} out @param {string|null} now @param {string} type @param {NodeLike} a @param {NodeLike} b @param {string} rel @param {number} [strength] @param {number} [confidence] @param {string} [explanation] */
+/** @param {Array<ChannelLike | null>} out @param {string|null|undefined} now @param {string} type @param {NodeLike} a @param {NodeLike} b @param {string} rel @param {number} [strength] @param {number} [confidence] @param {string} [explanation] */
 function addTwoWay(out, now, type, a, b, rel, strength, confidence, explanation) {
   out.push(relationshipChannel({ type, from: a, to: b, rel, strength, confidence, explanation, now }));
   out.push(relationshipChannel({ type, from: b, to: a, rel, strength, confidence, explanation, now }));
 }
 
-/** @param {Array<ChannelLike | null>} out @param {string|null} now @param {NodeLike} patron @param {NodeLike} client @param {string} rel @param {number} [strength] @param {number} [confidence] */
+/** @param {Array<ChannelLike | null>} out @param {string|null|undefined} now @param {NodeLike} patron @param {NodeLike} client @param {string} rel @param {number} [strength] @param {number} [confidence] */
 function addPatronageChannels(out, now, patron, client, rel, strength = 0.62, confidence = 0.7) {
   out.push(relationshipChannel({
     type: 'political_authority',
@@ -125,7 +125,7 @@ function addPatronageChannels(out, now, patron, client, rel, strength = 0.62, co
   }));
 }
 
-/** @param {Array<ChannelLike | null>} out @param {string|null} now @param {NodeLike} overlord @param {NodeLike} vassal @param {string} rel @param {number} [strength] @param {number} [confidence] */
+/** @param {Array<ChannelLike | null>} out @param {string|null|undefined} now @param {NodeLike} overlord @param {NodeLike} vassal @param {string} rel @param {number} [strength] @param {number} [confidence] */
 function addVassalageChannels(out, now, overlord, vassal, rel, strength = 0.82, confidence = 0.82) {
   out.push(relationshipChannel({
     type: 'political_authority',
@@ -160,8 +160,8 @@ function addVassalageChannels(out, now, overlord, vassal, rel, strength = 0.82, 
   addTwoWay(out, now, 'information_flow', overlord, vassal, rel, 0.43, 0.6);
 }
 
-/** @param {SaveLike} sourceSave @param {SaveLike} targetSave @param {NodeLike} source @param {NodeLike} target @param {string|null} [now] @returns {Array<ChannelLike | null>} */
-function discoverRelationshipChannels(sourceSave, targetSave, source, target, now = null) {
+/** @param {SaveLike} sourceSave @param {SaveLike} targetSave @param {NodeLike} source @param {NodeLike} target @param {string|null|undefined} [now] @returns {Array<ChannelLike | null>} */
+function discoverRelationshipChannels(sourceSave, targetSave, source, target, now) {
   /** @type {Array<ChannelLike | null>} */
   const out = [];
   const sourceRel = relationBetween(sourceSave, targetSave);
@@ -237,9 +237,9 @@ function relationshipConfidence(rel) {
  * ⚠ DECLARED BEHAVIOUR SHIFT, now-less callers only: those two stamps are now the same
  * instant. On the threaded path nothing moves — the entry re-stamps both from `options.now`
  * either way, so this read was dead work that only forfeited replayability.
- * @param {ChannelLike} raw @param {string|null} [now] @returns {ChannelLike | null}
+ * @param {ChannelLike} raw @param {string|null|undefined} [now] @returns {ChannelLike | null}
  */
-function candidate(raw, now = null) {
+function candidate(raw, now) {
   return normalizeChannel({ status: 'suggested', ...raw }, now);
 }
 
@@ -333,7 +333,7 @@ export function discoverDependencyCandidates(sourceSave, targetSave, options = {
         rel ? { source: 'neighbourNetwork', reason: `Current relationship is ${rel}.` } : null,
       ].filter(Boolean),
       explanation: `${target.name} likely depends on ${source.name} for ${sourceExportsTargetImports.map(g => g.label).join(', ')}.`,
-    }, options.now || null));
+    }, options.now));
 
     out.push(candidate({
       type: 'export_market',
@@ -346,7 +346,7 @@ export function discoverDependencyCandidates(sourceSave, targetSave, options = {
         { source: 'imports/exports', reason: `${target.name} is a likely market for ${source.name}'s exports.` },
       ],
       explanation: `${source.name}'s exporters likely care about demand in ${target.name}.`,
-    }, options.now || null));
+    }, options.now));
   }
 
   const targetExportsSourceImports = goodsIntersect(target.exports, source.imports);
@@ -363,7 +363,7 @@ export function discoverDependencyCandidates(sourceSave, targetSave, options = {
         rel ? { source: 'neighbourNetwork', reason: `Current relationship is ${rel}.` } : null,
       ].filter(Boolean),
       explanation: `${source.name} likely depends on ${target.name} for ${targetExportsSourceImports.map(g => g.label).join(', ')}.`,
-    }, options.now || null));
+    }, options.now));
 
     out.push(candidate({
       type: 'export_market',
@@ -376,7 +376,7 @@ export function discoverDependencyCandidates(sourceSave, targetSave, options = {
         { source: 'imports/exports', reason: `${source.name} is a likely market for ${target.name}'s exports.` },
       ],
       explanation: `${target.name}'s exporters likely care about demand in ${source.name}.`,
-    }, options.now || null));
+    }, options.now));
   }
 
   const bothHaveRoutes = source.route.open && target.route.open;
@@ -400,7 +400,7 @@ export function discoverDependencyCandidates(sourceSave, targetSave, options = {
           rel ? { source: 'neighbourNetwork', reason: `Relationship is ${rel}.` } : null,
         ].filter(Boolean),
         explanation: `${from.name} and ${to.name} can transmit route shocks through trade access.`,
-      }, options.now || null));
+      }, options.now));
     }
   }
 
@@ -427,7 +427,7 @@ export function discoverDependencyCandidates(sourceSave, targetSave, options = {
           { source: 'route_state', reason: `An open trade link makes ${provider.name}'s services reachable.` },
         ],
         explanation: `${dependent.name} likely relies on ${provider.name} for healing and temple services.`,
-      }, options.now || null));
+      }, options.now));
     }
   }
 
@@ -462,11 +462,11 @@ export function discoverDependencyCandidates(sourceSave, targetSave, options = {
           { source: 'route_state', reason: `The trade link between them gives migrants a path.` },
         ],
         explanation: `People under pressure in ${smaller.name} are likely to drift toward ${larger.name}.`,
-      }, options.now || null));
+      }, options.now));
     }
   }
 
-  out.push(...discoverRelationshipChannels(sourceSave, targetSave, source, target, options.now || null));
+  out.push(...discoverRelationshipChannels(sourceSave, targetSave, source, target, options.now));
 
   // Deterministic timestamp: same idiom as deriveRegionalImpacts — stamp the
   // threaded `now` over candidate()'s wall-clock default when provided.

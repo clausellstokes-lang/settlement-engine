@@ -57,7 +57,8 @@ export default function RegionalImpactInbox({ saveId, onApplied }) {
       (c.settlementIds || []).map(String).includes(String(saveId))
     );
     if (!campaign) return null;
-    const graph = ensureRegionalGraph(campaign.regionalGraph);
+    // Render path: the campaign's own stamp, never a clock (see RegionalGraphSummary).
+    const graph = ensureRegionalGraph(campaign.regionalGraph, { now: campaign.updatedAt || campaign.createdAt });
     const nodeNames = new Map(graph.nodes.map(node => [String(node.id), node.name]));
     const incoming = graph.queuedImpacts
       .filter(impact => String(impact.targetSettlementId) === String(saveId))

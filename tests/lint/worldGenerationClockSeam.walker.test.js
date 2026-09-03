@@ -206,15 +206,25 @@ const LEDGER_A = [
   },
   {
     file: 'src/domain/region/wizardNews.js', kind: 'wallClockNow', count: 1,
-    reason: 'nowIso(), the module\'s single chokepoint behind six `options.now ||` '
-      + 'fallthroughs. Arm B is what keeps callers off it; this ledger row records that the '
-      + 'fallthrough still EXISTS, because removing it means making the stamp nullable, and '
-      + 'the stamp is persisted campaign state — a schema change, which is owner-gated.',
+    reason: 'nowIso(), the module\'s single chokepoint — now behind resolveStamp rather than '
+      + 'six `options.now ||` fallthroughs. ⭐ UPDATED at the `now: null` cure. This row used '
+      + 'to say the fallthrough could not be removed "because removing it means making the '
+      + 'stamp nullable … a schema change, which is owner-gated". Half of that still stands '
+      + 'and half no longer describes the code. The FALLTHROUGH IS NOT REMOVED and must not '
+      + 'be: an ABSENT `now` still takes the wall clock, which is why this count is still 1 '
+      + 'and why the ~120 boundary callers are unaffected. What changed is that an EXPLICIT '
+      + '`now: null` is honoured as NO STAMP instead of being coerced to a live clock, so the '
+      + 'field type is `string|null`. That type widening IS a persisted-shape change and is '
+      + 'flagged to the owner; it moves no stored byte, because the chain is '
+      + '`row.createdAt || resolveStamp(now)` and a row that HAS a stamp never reaches the '
+      + 'resolver (proved by the "AN EXISTING STAMP IS NEVER ERASED" arm in '
+      + 'tests/domain/regionalNowThreading.test.js).',
   },
   {
     file: 'src/domain/region/graph.js', kind: 'wallClockNow', count: 1,
-    reason: 'The regional graph\'s own nowIso() fallback, for DM-direct graph edits. Every '
-      + 'sim caller threads `{ now }`; Arm C proves the advance never reaches it.',
+    reason: 'The regional graph\'s own nowIso() fallback, for DM-direct graph edits, reached '
+      + 'only through resolveStamp\'s absent-`now` branch. Every sim caller threads `{ now }`; '
+      + 'Arm C proves the advance never reaches it.',
   },
   {
     file: 'src/domain/region/propagation.js', kind: 'wallClockNow', count: 2,
@@ -405,19 +415,34 @@ describe('ARM B — every caller of a stamp-minting wizardNews writer threads a 
   });
 
   // ── THE DECEPTIVE SPELLING, BANNED AT ZERO ACROSS src/ AND tests/ ──────────────────────
-  // `{ now: null }` reads as "pin this to nothing" and behaves as "no pin at all", because
-  // the stamp chain is an `||` and `null` is falsy. It is the exact shape that produced the
-  // estate's only declared known-red: two appends in tests/domain/fieldBattleRegion.test.js,
-  // both "pinned" to null, stamping different wall clocks 3 ms apart, 0.392% of the time.
+  // ⭐ NARROWED at the `now: null` cure. It used to convict BOTH `null` and `undefined`.
   //
-  // ⚠ SCOPED DELIBERATELY TO THESE SIX WRITERS, NOT TO THE SPELLING. `now: null` is a
-  // legitimate and widespread estate idiom — 126 sites at this landing — because most
-  // consumers write `now` THROUGH (treasuryNews's own test asserts `createdAt` comes back
-  // null). It is a lie only where the consumer falls through to a clock. Banning the
-  // spelling everywhere would convict ~120 correct call sites; this bans it exactly where
-  // it deceives.
-  test('no caller passes the DECEPTIVE `now: null` to a writer that falls through to a clock', () => {
-    const FALSY_NOW = /\bnow\s*:\s*(?:null|undefined)\b/;
+  // WHAT IT ORIGINALLY GUARDED. `{ now: null }` read as "pin this to nothing" and behaved as
+  // "no pin at all", because the stamp chain was an `||` and `null` is falsy. It is the exact
+  // shape that produced the estate's only declared known-red: two appends in
+  // tests/domain/fieldBattleRegion.test.js, both "pinned" to null, stamping different wall
+  // clocks 3 ms apart, 0.392% of the time. The guard FENCED the trap at these six writers.
+  //
+  // WHY THE `null` HALF IS RETIRED. The trap itself is gone: the writers now route every
+  // stamp through `resolveStamp`, and `now: null` MEANS "no stamp" — honoured, not coerced.
+  // The ban's own stated rationale ("reads as a pin and is not one") is simply false for null
+  // now, and a guard that convicts correct code is a false red that teaches readers to ignore
+  // guards. It is also unprovable-in-place: the cure's proof arms in
+  // tests/domain/regionalNowThreading.test.js MUST write `now: null` against these very
+  // writers to demonstrate the contract, so keeping the null arm would convict the receipt.
+  //
+  // WHY THE `undefined` HALF IS KEPT, AND MUST BE. `now: undefined` still reads as a pin and
+  // still is not one. It CANNOT be cured the way null was: `undefined` has to keep meaning
+  // "absent" so the documented wall-clock boundary survives for the ~120 call sites that
+  // legitimately omit the option, and so that a spread of an option-less object
+  // (`{ ...opts }` where opts has no `now`) keeps behaving as absence. So exactly half of the
+  // original trap is removed and half is permanent — and the permanent half keeps its fence.
+  //
+  // ⚠ STILL SCOPED TO THESE SIX WRITERS, NOT TO THE SPELLING. `now: null` remains a
+  // legitimate and widespread estate idiom (126 sites) because most consumers write `now`
+  // THROUGH (treasuryNews's own test asserts `createdAt` comes back null).
+  test('no caller passes the DECEPTIVE `now: undefined` to a writer that falls through to a clock', () => {
+    const DECEPTIVE_NOW = /\bnow\s*:\s*undefined\b/;
     const problems = [];
     const roots = [path.join(REPO, 'src'), path.join(REPO, 'tests')];
     for (const abs of roots.flatMap((r) => srcFiles(r))) {
@@ -427,12 +452,13 @@ describe('ARM B — every caller of a stamp-minting wizardNews writer threads a 
       const code = codeOnly(fs.readFileSync(abs, 'utf8'));
       for (const fn of STAMP_MINTING_WRITERS) {
         for (const { args } of callArgs(code, fn)) {
-          if (!FALSY_NOW.test(args)) continue;
+          if (!DECEPTIVE_NOW.test(args)) continue;
           problems.push(
-            `${f}: ${fn}(…) passes \`now: null\` (or undefined).\n`
-            + '    That reads as a pin and is not one — the stamp chain is `|| options.now ||`,\n'
-            + '    so a falsy `now` takes a LIVE wall clock and two calls milliseconds apart\n'
-            + '    produce different bytes. Pass a fixed ISO-8601 instant instead.',
+            `${f}: ${fn}(…) passes \`now: undefined\`.\n`
+            + '    That reads as a pin and is not one — `undefined` means ABSENT, so the call\n'
+            + '    takes the wall-clock boundary fallback and two calls milliseconds apart\n'
+            + '    produce different bytes. Pass a fixed ISO-8601 instant, or `now: null` if\n'
+            + '    you genuinely want NO STAMP (that spelling is now honoured literally).',
           );
         }
       }
@@ -440,15 +466,79 @@ describe('ARM B — every caller of a stamp-minting wizardNews writer threads a 
     expect(problems, `\n${problems.join('\n')}\n`).toEqual([]);
   });
 
-  test('LIVENESS: the deceptive-spelling rule convicts null and undefined, and spares a real instant', () => {
-    const FALSY_NOW = /\bnow\s*:\s*(?:null|undefined)\b/;
-    expect(FALSY_NOW.test('{ now: null }')).toBe(true);
-    expect(FALSY_NOW.test('{ now: undefined }')).toBe(true);
-    expect(FALSY_NOW.test("{ now: '2026-01-01T00:00:00.000Z' }")).toBe(false);
-    expect(FALSY_NOW.test('{ now }')).toBe(false);
-    // …and it must not fire on a ROW field that is legitimately null: the entries argument
-    // routinely carries `createdAt: null`, and convicting that would make the arm unusable.
-    expect(FALSY_NOW.test('{}, [{ id: 1, createdAt: null }], { now: PINNED }')).toBe(false);
+  test('LIVENESS: the deceptive-spelling rule convicts undefined, and SPARES the now-honoured null', () => {
+    const DECEPTIVE_NOW = /\bnow\s*:\s*undefined\b/;
+    expect(DECEPTIVE_NOW.test('{ now: undefined }')).toBe(true);
+    // The cure's whole point: this spelling is honest now, so the guard must not convict it.
+    expect(DECEPTIVE_NOW.test('{ now: null }')).toBe(false);
+    expect(DECEPTIVE_NOW.test("{ now: '2026-01-01T00:00:00.000Z' }")).toBe(false);
+    expect(DECEPTIVE_NOW.test('{ now }')).toBe(false);
+    // …and it must not fire on a ROW field that is legitimately undefined.
+    expect(DECEPTIVE_NOW.test('{}, [{ id: 1, createdAt: undefined }], { now: PINNED }')).toBe(false);
+  });
+
+  // ── THE FLATTENING BAN (habitat removal for the class the cure created) ────────────────
+  //
+  // THE CLASS, and it bit three times inside one lane. `undefined` and `null` used to be
+  // INTERCHANGEABLE on a `now` path — both falsy, both landing on the wall clock — so the
+  // estate flattened one into the other freely: `now = null` default params, `options.now ||
+  // null`, `options.now ?? null`. The cure makes them MEAN DIFFERENT THINGS (absent ⇒ the
+  // boundary wall clock; null ⇒ NO STAMP), which silently converts every surviving
+  // flattening into a bug: a caller that omitted `now` reaches a resolver as an explicit
+  // null and gets NO STAMP where it had asked for the boundary default — or the reverse.
+  //
+  // It is invisible to every other arm here. Arm A counts clock READS and a flattening adds
+  // none. Arm B reads CALL ARGUMENTS and a flattening lives in a parameter list. Arm C runs
+  // world generation, where every caller pins a real instant, so the divergence never
+  // executes. The one that caught it was an ordinary unit assertion on the ABSENT-now
+  // boundary — after the fix was already written.
+  //
+  // SCOPED TO src/domain/region/**, which is where the two resolvers live and therefore the
+  // only tree where absent-vs-null is load-bearing. Elsewhere `now = null` is the correct
+  // and widespread idiom for news AUTHORS that write `now` through as DATA (they never
+  // resolve it against a clock), and banning it estate-wide would convict ~60 correct sites.
+  test('no undefined→null flattening on a `now` path inside src/domain/region', () => {
+    // A default param (`now = null`), or a coercion (`now || null` / `now ?? null`) — each
+    // destroys the distinction between "absent" and "explicitly no stamp" before the value
+    // can reach resolveStamp.
+    const FLATTEN = [
+      ['default param `now = null`', /\bnow\s*=\s*null\b/],
+      ['coercion `… .now || null`', /\.now\s*\|\|\s*null\b/],
+      ['coercion `… .now ?? null`', /\.now\s*\?\?\s*null\b/],
+    ];
+    const problems = [];
+    for (const abs of srcFiles(path.join(REPO, 'src', 'domain', 'region'))) {
+      const f = rel(abs);
+      const code = codeOnly(fs.readFileSync(abs, 'utf8'));
+      for (const [label, re] of FLATTEN) {
+        if (!re.test(code)) continue;
+        problems.push(
+          `${f}: ${label}.\n`
+          + '    On a `now` path inside src/domain/region this flattens ABSENT into an explicit\n'
+          + '    null, and the two now mean different things: absent ⇒ the documented wall-clock\n'
+          + '    boundary, null ⇒ NO STAMP. Pass the option through untouched and let\n'
+          + '    resolveStamp (region/graph.js, region/wizardNews.js) decide.',
+        );
+      }
+    }
+    expect(problems, `\n${problems.join('\n')}\n`).toEqual([]);
+  });
+
+  test('LIVENESS: the flattening rule convicts each spelling and spares the cured form', () => {
+    const DEFAULT_NULL = /\bnow\s*=\s*null\b/;
+    const OR_NULL = /\.now\s*\|\|\s*null\b/;
+    const NULLISH_NULL = /\.now\s*\?\?\s*null\b/;
+    expect(DEFAULT_NULL.test('function candidate(raw, now = null) {')).toBe(true);
+    expect(OR_NULL.test('candidate(row, options.now || null)')).toBe(true);
+    expect(NULLISH_NULL.test('const now = options.now ?? null;')).toBe(true);
+    // The cured spellings must all pass.
+    expect(DEFAULT_NULL.test('function candidate(raw, now) {')).toBe(false);
+    expect(OR_NULL.test('candidate(row, options.now)')).toBe(false);
+    expect(NULLISH_NULL.test('const now = options.now;')).toBe(false);
+    // …and a genuine `now: null` ARGUMENT is not a flattening — it is the cured contract.
+    expect(DEFAULT_NULL.test('ensureRegionalGraph(g, { now: null })')).toBe(false);
+    // The sweep must actually reach files, or the arm above passes on an empty walk.
+    expect(srcFiles(path.join(REPO, 'src', 'domain', 'region')).length).toBeGreaterThan(5);
   });
 });
 

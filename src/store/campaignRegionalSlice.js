@@ -143,7 +143,9 @@ export const createCampaignRegionalSlice = (set, get) => ({
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
       const now = new Date().toISOString();
-      const beforeGraph = ensureRegionalGraph(c.regionalGraph);
+      // Threaded: this action already minted ONE boundary instant above; without it the
+      // normalizer took a SECOND, later wall-clock read for every stamp-less row.
+      const beforeGraph = ensureRegionalGraph(c.regionalGraph, { now });
       const before = (beforeGraph.channels || []).find(ch => ch.id === channelId);
       // Build telemetry from the draft INSIDE set() (the channel proxy is revoked
       // after set returns). was_dm_action: this action is DM-initiated curation.
@@ -374,8 +376,10 @@ export const createCampaignRegionalSlice = (set, get) => ({
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
       const now = new Date().toISOString();
-      const beforeGraph = ensureRegionalGraph(c.regionalGraph);
-      c.regionalGraph = ensureRegionalGraph(regionalGraph);
+      // Threaded: this action already minted ONE boundary instant above; without it the
+      // normalizer took a SECOND, later wall-clock read for every stamp-less row.
+      const beforeGraph = ensureRegionalGraph(c.regionalGraph, { now });
+      c.regionalGraph = ensureRegionalGraph(regionalGraph, { now });
       appendWizardNewsForGraphChange(c, beforeGraph, c.regionalGraph, { createdAt: now });
       c.updatedAt = now;
       graph = c.regionalGraph;
@@ -404,7 +408,9 @@ export const createCampaignRegionalSlice = (set, get) => ({
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
       const now = new Date().toISOString();
-      const beforeGraph = ensureRegionalGraph(c.regionalGraph);
+      // Threaded: this action already minted ONE boundary instant above; without it the
+      // normalizer took a SECOND, later wall-clock read for every stamp-less row.
+      const beforeGraph = ensureRegionalGraph(c.regionalGraph, { now });
       const impact = (beforeGraph.queuedImpacts || []).find(i => i.id === impactId);
       // Flatten the draft impact to plain telemetry INSIDE set(); was_dm_action
       // defaults true (this action is DM-initiated unless a caller says otherwise).
@@ -436,7 +442,9 @@ export const createCampaignRegionalSlice = (set, get) => ({
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
       const now = options.now || new Date().toISOString();
-      const beforeGraph = ensureRegionalGraph(c.regionalGraph);
+      // Threaded: this action already minted ONE boundary instant above; without it the
+      // normalizer took a SECOND, later wall-clock read for every stamp-less row.
+      const beforeGraph = ensureRegionalGraph(c.regionalGraph, { now });
       c.wizardNews = advanceWizardNewsFeed(c.wizardNews, ticks, { now });
       c.regionalGraph = advanceRegionalImpacts(beforeGraph, ticks, {
         ...options,
@@ -482,7 +490,11 @@ export const createCampaignRegionalSlice = (set, get) => ({
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
-      const graph = ensureRegionalGraph(c.regionalGraph);
+      // Phase 1's ensure is a READ (it locates the impact; c.regionalGraph is not assigned
+      // here), and this action's own instant is not minted until further down. So it takes
+      // the campaign's own stamp — deterministic, and it reads no clock on the early-return
+      // paths above, which a hoisted `new Date()` would.
+      const graph = ensureRegionalGraph(c.regionalGraph, { now: c.updatedAt || c.createdAt });
       const impact = graph.queuedImpacts.find(i => i.id === impactId);
       if (!impact || !isRegionalImpactAvailable(impact)) return;
       // DM accepting a cross-settlement impact — the regional permission moment.
@@ -548,7 +560,9 @@ export const createCampaignRegionalSlice = (set, get) => ({
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
-      const beforeGraph = ensureRegionalGraph(c.regionalGraph);
+      // Threaded with the instant Phase 1 carried across the await, so both phases of one
+      // DM decision stamp the same moment instead of two clock reads a save apart.
+      const beforeGraph = ensureRegionalGraph(c.regionalGraph, { now: prepared.now });
       // Guard against a concurrent change between phases: only mark applied if the
       // impact is STILL queued. If a concurrent Ignore (or any status change)
       // landed during the awaited save, don't clobber it back to 'applied' — the
@@ -597,7 +611,11 @@ export const createCampaignRegionalSlice = (set, get) => ({
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
-      const graph = ensureRegionalGraph(c.regionalGraph);
+      // Phase 1's ensure is a READ (it locates the impact; c.regionalGraph is not assigned
+      // here), and this action's own instant is not minted until further down. So it takes
+      // the campaign's own stamp — deterministic, and it reads no clock on the early-return
+      // paths above, which a hoisted `new Date()` would.
+      const graph = ensureRegionalGraph(c.regionalGraph, { now: c.updatedAt || c.createdAt });
       const impact = graph.queuedImpacts.find(i => i.id === impactId);
       if (!impact || impact.status !== 'applied') return;
 
@@ -657,7 +675,9 @@ export const createCampaignRegionalSlice = (set, get) => ({
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
-      const beforeGraph = ensureRegionalGraph(c.regionalGraph);
+      // Threaded with the instant Phase 1 carried across the await, so both phases of one
+      // DM decision stamp the same moment instead of two clock reads a save apart.
+      const beforeGraph = ensureRegionalGraph(c.regionalGraph, { now: prepared.now });
       // Guard against a concurrent change between phases: only mark resolved if the
       // impact is STILL applied. If a concurrent status change landed during the
       // awaited save, don't clobber it — the settlement is already saved without the
@@ -711,6 +731,8 @@ export const createCampaignRegionalSlice = (set, get) => ({
 
   getCampaignRegionalGraph: (campaignId) => {
     const c = findActiveCampaign(get().campaigns, campaignId);
-    return ensureRegionalGraph(c?.regionalGraph);
+    // A READ must not mint a clock. The campaign's own stamp is the deterministic in-band
+    // answer (the idiom migrateCampaign already uses); absent both, the boundary stands.
+    return ensureRegionalGraph(c?.regionalGraph, { now: c?.updatedAt || c?.createdAt });
   },
 });

@@ -33,7 +33,9 @@ export default function RegionalCausalChainViewer({
   const [expandedImpactId, setExpandedImpactId] = useState(null);
 
   const model = useMemo(() => {
-    const graph = ensureRegionalGraph(campaign?.regionalGraph);
+    // A render must not mint a clock: the campaign's own stamp is the deterministic
+    // in-band answer (migrateCampaign's idiom), so re-rendering cannot restamp the graph.
+    const graph = ensureRegionalGraph(campaign?.regionalGraph, { now: campaign?.updatedAt || campaign?.createdAt });
     const nodeNames = new Map(graph.nodes.map(node => [String(node.id), node.name]));
     const channelsById = new Map(graph.channels.map(channel => [channel.id, channel]));
     const eventsByImpactId = new Map();
