@@ -809,7 +809,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
     "title": "DS-POW-4: `Power › Rule and succession` · `coupContenders(settlement) + powerStructure.previousGovernments[]`",
     "sectionTarget": [
       "power",
-      "history (the lineage arm)"
+      "history"
     ],
     "slots": [
       "settlement",
@@ -1077,7 +1077,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
     "title": "DS-POW-5: `POWER: ruling structure, governing body, and the ruling-power lens` · `powerStructure.{government,governingName,governingFaction,factions[]} + structuralLens({economicBase,governingArchetype})`",
     "sectionTarget": [
       "power",
-      "economy (the economic-base arm)"
+      "economy"
     ],
     "slots": [
       "settlement",
@@ -1412,7 +1412,7 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
     "title": "DS-POW-6: `POWER: public legitimacy, criminal capture, safety (the ladder cells the surfaces do not reach)` · `governanceLedger(settlement) + factionStates[].captureState + safetyProfile`",
     "sectionTarget": [
       "power",
-      "defense (the safety and criminal-structure arms)"
+      "defense"
     ],
     "slots": [
       "settlement",

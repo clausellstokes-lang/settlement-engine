@@ -283,7 +283,7 @@ function slotsOn(line) {
  */
 function parseAnnex(src, headerRe, label) {
   const lines = src.split('\n');
-  /** @type {Array<{id:string,title:string,sectionTarget:string[],arms:string[],slots:string[],pools:Array<{key:string,variants:Array<object>}>}>} */
+  /** @type {Array<{id:string,title:string,sectionTarget:string[],sectionTargetRaw:string|null,arms:string[],slots:string[],pools:Array<{key:string,variants:Array<object>}>}>} */
   const blocks = [];
   let block = null;
   let pool = null;
@@ -310,6 +310,7 @@ function parseAnnex(src, headerRe, label) {
         id: header[1],
         title: line.replace(/^###\s+/, '').trim(),
         sectionTarget: [],
+        sectionTargetRaw: null,
         arms: [],
         slots: [],
         pools: [],
@@ -327,8 +328,16 @@ function parseAnnex(src, headerRe, label) {
       continue;
     }
     if (/^\*\*SECTION-TARGET[:.]\*\*/.test(line)) {
-      block.sectionTarget = stripInlineCode(line.replace(/^\*\*SECTION-TARGET[:.]\*\*/, ''))
-        .split(/·|,/).map((s) => s.trim().replace(/^also\s+/i, '').trim()).filter(Boolean);
+      // BACKTICKED TOKENS ONLY, which is the shape the ARMS extractor below has always
+      // used. The rule this replaces split the declaration on `,` as well as the intended
+      // `·`, so `` `economy` (economic resilience, prosperity, food) `` projected as the
+      // three fragments `economy (economic resilience`, `prosperity` and `food)`, and 26
+      // of the 45 declaring state blocks carried at least one string outside the eight.
+      // Prose on this line is an aside to the reader, never a target; assertSectionTargets
+      // below judges what lands, and the raw line is kept so it can quote the row.
+      block.sectionTargetRaw = line.replace(/^\*\*SECTION-TARGET[:.]\*\*/, '');
+      block.sectionTarget = [...block.sectionTargetRaw.matchAll(/`([a-z][a-z0-9_-]*)`/g)]
+        .map((m) => m[1]);
       continue;
     }
     if (/^\*\*ARMS[:.]\*\*/.test(line)) {
@@ -441,6 +450,108 @@ function assertNothingDropped(src, headerRe, blocks, label) {
   return captured;
 }
 
+/**
+ * THE DOSSIER SECTIONS a block may be discovered under — the closed vocabulary a
+ * SECTION-TARGET line is allowed to name.
+ *
+ * WHY A CLOSED VOCABULARY FOR A FIELD NOTHING ROUTES ON. `sectionTarget` is DISCOVERY:
+ * the mount registry routes, and this field is not in the draw key (`drawVariant` keys on
+ * `${seed}::${blockId}::${poolKey}`), so nothing renders differently for it being right.
+ * It was still half unroutable prose, and a field that is half prose is a defect whether
+ * or not anything reads it. The causal register came out 100% canonical under the same
+ * parser only because its authors happen to write nothing but backticked tokens.
+ *
+ * THE EIGHT ARE THE DOC'S, NOT THIS FILE'S. assertSectionVocabulary re-reads them from the
+ * causal annex's own §0e table on every run, so a ninth section added there reds this
+ * projection instead of passing silently. `overview` and `viability` are STATE-ONLY and
+ * declared here rather than in §0e: the state register speaks at two page surfaces the
+ * causal register never reaches, while §0e speaks for the causal families, whose eight
+ * ship to the runtime as CAUSAL_SECTION_TARGETS in
+ * src/domain/display/stateProse/causalDossierProse.js.
+ */
+const SECTION_TARGETS_STATE_ONLY = Object.freeze(['overview', 'viability']);
+const SECTION_TARGETS = Object.freeze([
+  'economy', 'history', 'tensions', 'faith', 'power', 'population', 'defense', 'relations',
+  ...SECTION_TARGETS_STATE_ONLY,
+]);
+
+/**
+ * The blocks whose SECTION-TARGET line names NO dossier section, because the surface they
+ * are written FOR is not one: DS-GEN-10 targets the printed chapter openers and DS-HK-1
+ * the hooks panel header. Both are honest, and minting a section id for them would invent
+ * vocabulary no surface has. FROZEN so a new silent one cannot appear.
+ */
+const SECTION_TARGETLESS_BLOCKS = Object.freeze(['DS-GEN-10', 'DS-HK-1']);
+
+/**
+ * The section names the causal annex's §0e table declares, read rather than assumed.
+ * @param {string} src the causal markdown
+ * @returns {string[]}
+ */
+function parseSectionVocabulary(src) {
+  const lines = src.split('\n');
+  const at = lines.findIndex((l) => /^##\s+§0e\s+THE SECTION-TARGET CONVENTION\s*$/.test(l.trimEnd()));
+  if (at < 0) return [];
+  const found = [];
+  for (let i = at + 1; i < lines.length && !/^##\s/.test(lines[i]); i++) {
+    const row = lines[i].match(/^\|\s*`([a-z][a-z0-9_-]*)`\s*\|/);
+    if (row) found.push(row[1]);
+  }
+  return found;
+}
+
+/**
+ * FAIL-CLOSED BOTH WAYS, the shape assertLiveStringsBound already uses for this file's
+ * other doc-bound constant: the vocabulary enforced here must be exactly §0e's list plus
+ * the two state-only names, in §0e's own order.
+ * @param {string} causalDoc
+ */
+function assertSectionVocabulary(causalDoc) {
+  const declared = parseSectionVocabulary(causalDoc);
+  const expected = SECTION_TARGETS.filter((s) => !SECTION_TARGETS_STATE_ONLY.includes(s));
+  if (declared.join(' ') !== expected.join(' ')) {
+    throw new Error(
+      'the SECTION-TARGET vocabulary has drifted from the causal annex\'s §0e table.'
+      + `\n  §0e declares:       ${declared.join(' ') || '(nothing: the heading or the table moved)'}`
+      + `\n  this file enforces: ${expected.join(' ')}`
+      + '\n  Move SECTION_TARGETS here and CAUSAL_SECTION_TARGETS in'
+      + ' src/domain/display/stateProse/causalDossierProse.js together, or restore §0e.',
+    );
+  }
+}
+
+/**
+ * Every SECTION-TARGET token the annexes declare is one of the closed vocabulary.
+ *
+ * An UNKNOWN BACKTICKED TOKEN THROWS rather than being dropped: on this line a backticked
+ * token is indistinguishable from a target, and a plausible-looking wrong section id is
+ * worse than the fragments this repair removed. Un-backticked prose is ignored by
+ * construction, which is how both annexes spell a surface that is not a dossier section.
+ * @param {Array<object>} blocks @param {string} label
+ * @returns {{declaring: number, targetless: string[]}}
+ */
+function assertSectionTargets(blocks, label) {
+  const strays = [];
+  const targetless = [];
+  let declaring = 0;
+  for (const b of blocks) {
+    if (b.sectionTargetRaw === null) continue;
+    declaring += 1;
+    for (const t of b.sectionTarget) {
+      if (!SECTION_TARGETS.includes(t)) strays.push(`${b.id} names \`${t}\` in:${b.sectionTargetRaw}`);
+    }
+    if (b.sectionTarget.length === 0) targetless.push(b.id);
+  }
+  if (strays.length) {
+    throw new Error(
+      `${label}: ${strays.length} SECTION-TARGET token(s) name no dossier section:\n  `
+      + `${strays.join('\n  ')}\n  The vocabulary is: ${SECTION_TARGETS.join(' ')}.`
+      + ' Re-word the annex row so that only real targets are backticked.',
+    );
+  }
+  return { declaring, targetless };
+}
+
 /** @param {Array<object>} blocks @returns {object} the runtime shape */
 function projectBlocks(blocks) {
   const out = {};
@@ -494,6 +605,20 @@ const causalBlocks = parseAnnex(causalSrc, CAUSAL_HEADER, 'CAUSAL_DOSSIER');
 
 const stateCount = assertNothingDropped(stateSrc, STATE_HEADER, stateBlocks, 'DOSSIER_STATE');
 const causalCount = assertNothingDropped(causalSrc, CAUSAL_HEADER, causalBlocks, 'CAUSAL_DOSSIER');
+
+assertSectionVocabulary(causalSrc);
+const stateTargets = assertSectionTargets(stateBlocks, 'DOSSIER_STATE');
+const causalTargets = assertSectionTargets(causalBlocks, 'CAUSAL_DOSSIER');
+const targetless = [...stateTargets.targetless, ...causalTargets.targetless].sort();
+if (targetless.join(' ') !== [...SECTION_TARGETLESS_BLOCKS].sort().join(' ')) {
+  throw new Error(
+    'the set of blocks whose SECTION-TARGET names no dossier section has moved.'
+    + `\n  recorded: ${[...SECTION_TARGETLESS_BLOCKS].sort().join(' ')}`
+    + `\n  measured: ${targetless.join(' ') || '(none)'}`
+    + '\n  A block whose target surface IS a dossier section must name it in backticks;'
+    + ' one whose surface is not may join SECTION_TARGETLESS_BLOCKS deliberately.',
+  );
+}
 
 const stateData = projectBlocks(stateBlocks);
 const causalData = projectBlocks(causalBlocks);
@@ -585,6 +710,7 @@ if (checkOnly) {
       throw new Error(`${path.relative(ROOT, e.path)} is stale; run \`npm run gen:dossier-prose\`.`);
     }
   }
+  console.log(`[dossier-prose] section targets: ${stateTargets.declaring + causalTargets.declaring} blocks declare one over ${SECTION_TARGETS.length} sections; ${targetless.length} name none (${targetless.join(', ')})`);
   console.log(`[dossier-prose] verified ${Object.keys(stateData).length} state blocks / ${stateCount} variants across ${DESKS.length} desks, ${Object.keys(causalData).length} causal families / ${causalCount} variants`);
 } else {
   await mkdir(STATE_OUT_DIR, { recursive: true });
@@ -592,5 +718,6 @@ if (checkOnly) {
   for (const e of emitted) {
     console.log(`[dossier-prose]   ${path.relative(ROOT, e.path)} — ${e.blocks} blocks, ${e.variants} variants`);
   }
+  console.log(`[dossier-prose] section targets: ${stateTargets.declaring + causalTargets.declaring} blocks declare one over ${SECTION_TARGETS.length} sections; ${targetless.length} name none (${targetless.join(', ')})`);
   console.log(`[dossier-prose] wrote ${Object.keys(stateData).length} state blocks / ${stateCount} variants across ${DESKS.length} desks, ${Object.keys(causalData).length} causal families / ${causalCount} variants`);
 }

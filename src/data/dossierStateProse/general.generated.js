@@ -499,7 +499,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
     "title": "DS-GEN-1: Power/Overview/History › Current tensions . `history.currentTensions[] {type, description, severity[], factions[], plotHooks[]}`",
     "sectionTarget": [
       "tensions",
-      "power (the faction-named arms)"
+      "power"
     ],
     "slots": [
       "settlement",
@@ -1209,13 +1209,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
   "DS-GEN-3": {
     "title": "DS-GEN-3: Overview › Systems Health dashboard . `defenseProfile.scores{military,monster,internal,economic,magical} · economicState.prosperity · safetyProfile.safetyLabel · economicViability.viable · defenseProfile.readiness.label · economicState.foodSecurity{label,resilienceScore}`",
     "sectionTarget": [
-      "defense (the three defence axes)",
-      "economy (economic resilience",
-      "prosperity",
-      "food)",
-      "power (internal security)",
-      "overview (viability",
-      "readiness)"
+      "defense",
+      "economy",
+      "power",
+      "overview"
     ],
     "slots": [
       "settlement"
@@ -2368,7 +2365,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
     "title": "DS-GEN-6: Overview › Settlement origin (why it exists) . `settlement.settlementReason[]` from `tier` × `config.tradeRouteAccess` × `config.terrainType` × food-deficit ratio × `config.magicExists` / `priorityMagic`, with the arm's authored variant selected draw-free from the settlement seed",
     "sectionTarget": [
       "overview",
-      "economy (the deficit arms)"
+      "economy"
     ],
     "slots": [
       "settlement"
@@ -2686,9 +2683,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
     "title": "DS-GEN-7: Overview › Warnings & coherence notes . `structuralViolations[]{institution,group,reason,severity}` · `coherenceNotes[]{note,severity,tab,type}` · `structuralSuggestions[]{reason,suggested[]}`",
     "sectionTarget": [
       "overview",
-      "per-note tab field routes the second target (economics",
+      "economy",
       "power",
-      "history)"
+      "history"
     ],
     "slots": [
       "settlement",
@@ -2949,7 +2946,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
     "title": "DS-GEN-8: Overview › Steadings, remnant and ancient ruin (lifecycle) . `worldState.spatialLedgers.satellites[sid].steadings{}` · `settlement.lifecycleStatus` · `history.ancientRuin{name, yearsAgo}`",
     "sectionTarget": [
       "population",
-      "history (the ancient ruin)"
+      "history"
     ],
     "slots": [
       "settlement",
@@ -4072,9 +4069,6 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
   },
   "DS-GEN-10": {
     "title": "DS-GEN-10: PDF › overview / economics / defense / viability / power slices (the parallel surface) . the same settlement fields, re-shaped per chapter",
-    "sectionTarget": [
-      "the printed chapter openers"
-    ],
     "slots": [
       "settlement"
     ],
@@ -4198,10 +4192,6 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
   },
   "DS-HK-1": {
     "title": "DS-HK-1: HOOKS FRAMING: the state a hook is framed FROM (never the hook prose itself)",
-    "sectionTarget": [
-      "the hooks panel header",
-      "clock framings sit with the clock"
-    ],
     "slots": [
       "settlement",
       "controller",

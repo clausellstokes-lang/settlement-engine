@@ -5289,7 +5289,7 @@ unchanged.
 **RECEIPT:** `src/generators/narrativeGenerator.js:563-668` (`genCoherence`, six authored notes) · rendered `OverviewTab.jsx:320-344` and ViabilityTab
 **STATE-KEY:** note `type` (`power_economic` ×3 instances / `stress_economic` / `power_stress` / `historical_economic`) × `severity` (`contradiction` / `notable` / `context` / `by_design`)
 **SLOTS:** `{settlement}` `{faction}` `{govFaction}` `{band}`
-**SECTION-TARGET:** `overview` · per-note `tab` field routes the second target (`economics`, `power`, `history`)
+**SECTION-TARGET:** `overview` · also `economy` · `power` · `history` (the per-note tab field routes the second target)
 **PROVENANCE:** **MIXED, AND THIS IS THE ONE SHAPE WHERE REAL CROSS-FIELD REASONING ALREADY EXISTS.** Five of the six notes assert a *standing* relation between two live fields — structural cause, lawful. The sixth (`historical_economic`) reads `historicalEvents[]` for a collapse older than eighty years and a boom inside sixty, which is genuine **historical** provenance and the only place in this shape a "what happened" clause is entailed. It is also the one place a TIME BAND is owed rather than a year.
 **TWO DEFECTS CURED (R-DST-W4-e):** the existing notes leak percentage **digits** (`holds {N}% of power`) and refer to the **page layout** (*"Trade income **above** reflects pre-siege operations"*). The register's forms replace the digit with `{band}` and the layout reference with a statement about the world. Wiring these is a disclosed same-seed prose shift.
 

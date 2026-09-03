@@ -1253,7 +1253,6 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
   "DS-WAR-4": {
     "title": "DS-WAR-4: `PDF › liveWorld slice` · `campaign.worldState read through the same pure selectors + aggressionPosture`",
     "sectionTarget": [
-      "the printed chapter openers",
       "tensions"
     ],
     "slots": [

@@ -970,7 +970,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
     "title": "DS-DEF-4: `Defense › Criminal structure + capture consequence` · `deriveCriminalStructure(settlement) + powerStructure.criminalCaptureState + safetyProfile.criminalInstitutions[]`",
     "sectionTarget": [
       "defense",
-      "power (the capture arm)"
+      "power"
     ],
     "slots": [
       "settlement",
@@ -1481,7 +1481,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
     "title": "DS-DEF-6: `Defense › Supporting capabilities` · `scores.economic/magical + compound.inst{hasMagicInst,hasCourtSystem,hasPrison,hasHospital,hasChurch,hasGranary,hasPort,hasNavy} + tradeAccess + blockade`",
     "sectionTarget": [
       "defense",
-      "economy (the backing and logistics arms)"
+      "economy"
     ],
     "slots": [
       "settlement",
