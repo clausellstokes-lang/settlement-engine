@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "394d758ee0ae53cd8cc1193b382149a656c51370",
-  "measuredBy": "Opus 5 — chair, ENC-1 landing §888",
+  "measuredAtSha": "dfcc8eb72326bc5d1b0edc2cfa599ba087bfdc26",
+  "measuredBy": "Opus 5 — chair, §889 train",
   "date": "2026-09-03",
-  "note": "ENC-1 mints CHANCE_MEETING_TUNING, the chance-meeting leaf; every rung is a DRAFT and nothing here is signed. Enrolment only, per ODQ §882.13 encounters row 7 (values signed LAST by the owner).",
+  "note": "ENC-2 adds the two typed leash-ends the design owed (DISCOVERY and LAPSE) to CORRUPTION_WEB_TUNING. Enrolment only: both are DRAFT and nothing is signed.",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -2763,9 +2763,9 @@
     "src/domain/worldPulse/corruptionWeb.js#CORRUPTION_WEB_TUNING": {
       "exported": true,
       "idiom": "literal",
-      "keys": 27,
-      "line": 115,
-      "spanDigest": "52564bd3fe1b519d52062a1ff100b7d06d027b8e4092ed9dd0504746548e3f54",
+      "keys": 29,
+      "line": 118,
+      "spanDigest": "520eeeeaffdc19b3822b9cfab72e36fbd5411ab7b437f95efb7c35b0cc7a1089",
       "leaves": {
         "MAX_ASSETS_PER_PATRON": 3,
         "UPKEEP_AFFORD_FLOOR": 0.3,
@@ -2793,7 +2793,9 @@
         "EXPOSURE_GRIEVANCE_W": 0.5,
         "EXPOSURE_CREDIBILITY_W": 0.6,
         "EXPOSURE_LEGITIMACY_MIN": 0.3,
-        "EXPOSURE_LEGITIMACY_SPAN": 0.4
+        "EXPOSURE_LEGITIMACY_SPAN": 0.4,
+        "WILLED_DISCOVERY_BASE": 0.02,
+        "WILLED_LAPSE_TICKS": 520
       },
       "dependents": [
         "src/domain/worldPulse/causeLifecycle.js",
@@ -3406,7 +3408,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 26,
-      "line": 171,
+      "line": 201,
       "spanDigest": "68748daad82b632c5372660ef2a966fd760775a7fb60d223d5f654dbb21c0b19",
       "leaves": {
         "eighths": 8,
@@ -7776,7 +7778,7 @@
   "unclosed": [],
   "totals": {
     "tables": 225,
-    "keys": 2092,
+    "keys": 2094,
     "unregisteredNamed": 535,
     "bareDecimals": 6985,
     "zeroDependentTables": 9,
