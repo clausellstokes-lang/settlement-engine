@@ -2598,3 +2598,31 @@ The lane reported that at the §885 gated tip **both registers were refrozen BEF
 *What Fable re-derives:* the O1 ruling first — it is the only one of the four that changes reader-facing bytes, and the chair ruled a taste question on a grant rather than a specification. Then the deliberate non-exercise on the twelve anchors, which is the chair declining authority it was given.
 
 *Priority:* MEDIUM. **The carve-out list is the row that matters if anything here is wrong.**
+
+---
+
+## §885.4 · TRAIN 1 CAR C1 IS BUILT — the kernel gains the channel it never implemented, and its control is better than the chair briefed (2026-09-03, chair session 58f0a8e2, SEAT: Opus 5 — Fable-unvalidated)
+
+**The car.** `f60457296` on branch `lane-KERNELMARK-2026-09-02`, **parent exactly `2d5112851`**, one commit, porcelain 0, one trailer, reachable by its own ref. **3 files, +387/−7**: the kernel +116/−6, the projection contract test +173, the kernel test +98/−1. **No new test file, no manifest row, no census slot.**
+
+**⭐ CHAIR-VERIFIED BY OWN READS, every binding constraint:** `drawVariant` is **byte-identical to base** (`diff` exit 0 over the extracted function) — the constraint the chair made binding · the kernel still has **zero imports** · and on the ratchet question, **the whole kernel contains ZERO string literals carrying an em dash or exclamation mark**; the three em dashes in the diff are **docblock prose, which the tokenizer explicitly skips**, and the four apparent bang hits collapse to a single line of ordinary operators (`typeof value !== 'string' || !…`). The lane's `em=0 bang=0` claim holds under the scanner's own logic.
+
+**⭐⭐ THE CONTROL IS BETTER THAN THE BRIEF ASKED FOR, and the improvement is the point.** The chair asked for red-at-base. The lane found that the *literal* base kernel cannot even load the new arms (`TypeError: poolDimensions is not a function`, "no tests ran") — so **that red is real but IMPRECISE, and it said so rather than banking it.** It then built **two mutants**: **A**, the base reader's `eligibleVariants` body restored **verbatim and proven byte-identical by `diff`** with the new exports kept so the arms load — reds **exactly T2 and T3**; and **B**, the gate kept but the filter dropped — reds **T3 alone, T2 green**. ⇒ **The fail-closed gate and the per-variant filter are proven INDEPENDENTLY.** A single red proves an arm can fail; **a mutant pair reding different arms proves each mechanism separately**, and that is a materially stronger receipt than the one requested.
+
+**What T2 found against the unfixed reader: 24 pools that SPOKE**, each printing a sentence with severity, deficit or anchor ignored — `DS-GEN-1 :: leadership_vacuum` and `magical_controversy` returning `major`-marked prose chosen by a seed that never saw the severity.
+
+**⭐ IT REFUSED TO REFREEZE, AND THAT IS THE NEW LAW WORKING.** Base `tests/lint` = 5 failures, tip = 6; the extra is the lighting census. **The lane did not refreeze it** — two sibling lanes are still building and refreezing now is exactly *"a car after a register act"* (§885.1). It reports what the landing owes, last: lighting **titles 22676 → 22680, suiteTitles 6101 → 6102**, files/parked/credited **unchanged**; ratchet **totalTests 30973 → 30979**, files unchanged.
+
+**⭐⭐ AND A REAL FINDING ABOUT THE CENSUS ITSELF: THE CENSUS DELTA IS NOT THE ARM DELTA.** The +4/+1 comes **entirely from the contract test**, because `tests/domain/stateProseKernel.test.js` is **PARKED by that walker**, so its two new arms cost the census nothing. **Budgeting a refreeze by counting arms would have predicted +6 and been wrong.** Proven by isolation runs. ⚠ And `suiteTitles` had to be obtained **by probe** (register bumped, run, restored byte-identically) **because the census asserts `titles` FIRST and would otherwise under-report its own drift** — an instrument that stops at its first mismatch cannot tell you the size of the second.
+
+**FOUR CORRECTIONS TO THE RULED DESIGN, all CONFIRMED, all from measurement.** *(1)* ⭐ **The thin-state authoring bill is 14, not 13** — the design's 13 is the **DM** figure; `DS-GEN-1 :: infiltration_fear` at `major` collapses to one line on the **player's** page because the pool's second `major` variant is the block's only `major + dm-only` line. **O3's bill is 14**, and T4 now pins **both audiences** plus a zero-tolerance "no state goes silent" arm. *(2)* The severity split is 19/11 under the player read, not the design's 20/10. *(3)* `totalTests` is **30973** at base, not the design's **30962** — the design was stale by 11. *(4)* The design's "105 causal arms" is the **declared-arms** count; distinct causal **marks** are **92**, and T1 pins the measured figure.
+
+⚠ **A DOCK-HYGIENE WARNING WORTH CARRYING:** the shared `node_modules` is the **LEDGER tree's** install and lacks `@types/node` and `pg`, which the base sha's `package.json` declares. Harmless for vitest; **anything TYPECHECKING in such a dock would mis-report.** The lane ran no typecheck and labelled the consequence **PLAUSIBLE, not executed.** ⭐ The §885 gate typechecked in `laneINSTRLAND-tree` and passed 173/173, so the landing dock is unaffected — but a future lane docking casually could be.
+
+**RATIFIED:** the lane omitted a default `Co-Authored-By` line that would have named a different model than its seat trailer, on the ground that it would **misattribute an Opus 5 seat in a parser-visible line.** Correct, and it asked rather than assuming.
+
+**Behavioural reach is NIL** — no importer reads a dimension-bearing pool, so no rendered byte moves and there is no golden to re-record.
+
+*What Fable re-derives:* the census-delta-is-not-the-arm-delta finding first, because it silently mis-prices every future refreeze budget. Then the 14-not-13 correction, which moves an owner row.
+
+*Priority:* **HIGH for the census finding.** MEDIUM for the rest.
