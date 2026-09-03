@@ -266,7 +266,7 @@ const STAMP_MINTING_WRITERS = [
   'deriveWizardNewsEntriesFromGraphChange',
 ];
 
-/** Source files under src/ (jsx included — the store and components call these too). */
+/** Executable files under a root (jsx included — the store and components call these too). */
 function srcFiles(dir = path.join(REPO, 'src'), out = []) {
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
     const fp = path.join(dir, e.name);
@@ -402,6 +402,53 @@ describe('ARM B — every caller of a stamp-minting wizardNews writer threads a 
       for (const fn of STAMP_MINTING_WRITERS) seen += callArgs(code, fn).length;
     }
     expect(seen, 'the sweep found no wizardNews writer call sites at all — the walk is broken').toBeGreaterThan(20);
+  });
+
+  // ── THE DECEPTIVE SPELLING, BANNED AT ZERO ACROSS src/ AND tests/ ──────────────────────
+  // `{ now: null }` reads as "pin this to nothing" and behaves as "no pin at all", because
+  // the stamp chain is an `||` and `null` is falsy. It is the exact shape that produced the
+  // estate's only declared known-red: two appends in tests/domain/fieldBattleRegion.test.js,
+  // both "pinned" to null, stamping different wall clocks 3 ms apart, 0.392% of the time.
+  //
+  // ⚠ SCOPED DELIBERATELY TO THESE SIX WRITERS, NOT TO THE SPELLING. `now: null` is a
+  // legitimate and widespread estate idiom — 126 sites at this landing — because most
+  // consumers write `now` THROUGH (treasuryNews's own test asserts `createdAt` comes back
+  // null). It is a lie only where the consumer falls through to a clock. Banning the
+  // spelling everywhere would convict ~120 correct call sites; this bans it exactly where
+  // it deceives.
+  test('no caller passes the DECEPTIVE `now: null` to a writer that falls through to a clock', () => {
+    const FALSY_NOW = /\bnow\s*:\s*(?:null|undefined)\b/;
+    const problems = [];
+    const roots = [path.join(REPO, 'src'), path.join(REPO, 'tests')];
+    for (const abs of roots.flatMap((r) => srcFiles(r))) {
+      const f = rel(abs);
+      if (f === 'src/domain/region/wizardNews.js' || f === 'src/domain/region/index.js') continue;
+      if (f === rel(url.fileURLToPath(import.meta.url))) continue; // this file names the shape
+      const code = codeOnly(fs.readFileSync(abs, 'utf8'));
+      for (const fn of STAMP_MINTING_WRITERS) {
+        for (const { args } of callArgs(code, fn)) {
+          if (!FALSY_NOW.test(args)) continue;
+          problems.push(
+            `${f}: ${fn}(…) passes \`now: null\` (or undefined).\n`
+            + '    That reads as a pin and is not one — the stamp chain is `|| options.now ||`,\n'
+            + '    so a falsy `now` takes a LIVE wall clock and two calls milliseconds apart\n'
+            + '    produce different bytes. Pass a fixed ISO-8601 instant instead.',
+          );
+        }
+      }
+    }
+    expect(problems, `\n${problems.join('\n')}\n`).toEqual([]);
+  });
+
+  test('LIVENESS: the deceptive-spelling rule convicts null and undefined, and spares a real instant', () => {
+    const FALSY_NOW = /\bnow\s*:\s*(?:null|undefined)\b/;
+    expect(FALSY_NOW.test('{ now: null }')).toBe(true);
+    expect(FALSY_NOW.test('{ now: undefined }')).toBe(true);
+    expect(FALSY_NOW.test("{ now: '2026-01-01T00:00:00.000Z' }")).toBe(false);
+    expect(FALSY_NOW.test('{ now }')).toBe(false);
+    // …and it must not fire on a ROW field that is legitimately null: the entries argument
+    // routinely carries `createdAt: null`, and convicting that would make the arm unusable.
+    expect(FALSY_NOW.test('{}, [{ id: 1, createdAt: null }], { now: PINNED }')).toBe(false);
   });
 });
 
