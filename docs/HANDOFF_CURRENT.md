@@ -8,7 +8,27 @@ program's decisions; SPEC fold labels §§277–§286 are design sections, not m
 The repo is authoritative; trust executed evidence over any summary including
 this one.**
 
-## ⭐⭐⭐⭐⭐ PICKUP AT §891 — ⚠⚠ **ACCOUNT-SWITCH HANDOFF, 2026-09-03.** A SEVENTEEN-CAR TRAIN IS ONE BILL FROM ITS GATE. READ THIS WHOLE CARD BEFORE TOUCHING ANYTHING; it supersedes every card below.
+## ⭐⭐⭐⭐⭐ PICKUP AT §891.1 — ⚠⚠ **WINDOW-CLOSE HANDOFF MID-WALK, 2026-09-03 ~19:55 ET (Fable 5.1 chair, session d5b9a39f).** READ THIS BLOCK, THEN THE CUTOFF SECTION AT THE END OF `$SC/RESUME-NOTE.md`; it supersedes every card below.
+
+`$SC` = `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad` · `$SP` = `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/58f0a8e2-2c4f-4073-8635-ecc7cf5010f6/scratchpad` (the previous chair's: receipts, docks, LANE-QUEUE.md). **THE SEAT IS FABLE 5.1** (`Seat: Fable 5.1 — validated`); ⛔ OWNER CAP FOUR agents of any kind; every push, the walk and the tuning signature stay the owner's.
+
+### ⭐ THE STATE, BY GIT
+**Product `claude/composite-r4` = `ca651d54b`** (§890, NOT CASed). **The §891 train = `refs/preserve/train891-reg7-2026-09-03` = `15c6368a6`**, dock `$SP/laneKERNELMARK-tree`, **18 cars** over `ca651d54b`, porcelain 0, every car one strict `Seat:` trailer. **All seven register acts are taken** — the seventh (writer-reach `--write`) was predicted, reproduced byte-for-byte without touching the dock, committed and sealed by this chair (§891.1). ⚠ The §891 card's sentence about that bill was INVERTED (vitest prints actual then expected; the register said R, the tree measured N; the product still renders the string — the grade is a scanner-GROUNDING fact). **ONE act remains before the gate: the test ratchet `--update`** (pre-flight: WILL MOVE, NOT REFROZEN; predicted `totalFiles 2458 → 2462 CERTAIN`, totalTests refused in advance).
+
+### ⭐⭐ THE WALK IS IN FLIGHT — FINISH IT FIRST, THEN RULE (§892)
+The owner called the retrovalidation pass ("starting with the fable retrovalidation"). Workflow `wf_0a24cb28-a54` re-derives the Opus stratum §882.8→§891 as **nineteen READ-ONLY Fable verifier slices + a critic**, four at a time, each writing `$SC/walk/<id>.json`. **At the cutoff: S02 S05 S06 S08 S09 S11 S12 S14 S16 S17 S18 S19 COMPLETE; S07 S13 S15 in flight; S01 S03 S04 S10 + S99 not run.** ⛔ A run id dies with the account: re-launch the persisted script (`…/d5b9a39f…/workflows/scripts/fable-retrovalidation-882-891-wf_0a24cb28-a54.js`) with `args` = the slice ids whose file is not `COMPLETE` (re-derive from disk); the critic reads every file. Same session: `resumeFromRunId`. **No ruling is written yet** — the sitting is the chair's act over the slice files: `$SC/apply-rulings.py` (rulings under each row, built from the HEAD blob of the queue) + the §892 tail + `$SC/apply-892.py` + `chair-commit.sh` with the queue mapped (changed blob). ⚠ Never run the ratchet or the gate while slices run.
+
+### THE LANDING, AFTER THE WALK (all scripted, all `sh -n` clean, box QUIET)
+`$SC/run-ratchet-891c.sh` (nohup; TRUE_EXIT from the log) → commit the moved ratchet baseline as car 19 → seal `train891-final-2026-09-03` → `$SC/run-pregate-891b.sh` → `$SC/run-gate-891.sh` (~18 min) → `python3 $SC/chair-verify-891.py $D ca651d54b… $SC/gate-891.log 19` → CAS `ca651d54b`→tip → seal `landing-891-2026-09-03` → collect §893. Then `$SP/LANE-QUEUE.md`'s queue after §891.
+
+### THE OWNER'S DESK — UNCHANGED (each releases finished work): the prose window · the drift door (TE-VIRT-1 left it empty deliberately; a NEW decision) · ENC-4's nine sentences · 190 B for "Room to Grow" (HELD) · the deity-free review corpus.
+
+### LAWS THIS DAY ADDED
+- **Read the assertion's argument order before narrating a register bill's direction** (vitest: actual, then expected).
+- **The writer-reach grade is GROUNDING, not DISPLAY** — a JSX-prop read grades N; every desk extraction darkens web-display grades (memory `writer-reach-web-display-grade-is-a-grounding-fact`).
+- A `--write` can be reproduced without touching a dock (`run()` with readBaseline/writeBaseline overrides); `TRUE_EXIT=$?` after a pipe is the pipe's exit.
+
+## (superseded) PICKUP AT §891 — ⚠⚠ **ACCOUNT-SWITCH HANDOFF, 2026-09-03.** A SEVENTEEN-CAR TRAIN IS ONE BILL FROM ITS GATE — the §891.1 card above supersedes; its bill description is INVERTED (see §891.1).
 
 ### ⭐ THE ONE ACT TO DO FIRST — everything else on this card is context
 The **§891 train is COMPOSED, SEALED and 17 cars deep** at `refs/preserve/train891-registers-2026-09-03` = **`4233031ba`**, in dock `laneKERNELMARK-tree`, porcelain 0, 17 trailers, base `ca651d54b`. **ALL SIX REGISTER ACTS ARE TAKEN AND GREEN.** Exactly **ONE bill** stands between it and its gate:
