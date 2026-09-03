@@ -53,6 +53,7 @@ import {
   importPendingSurfaceRows,
   validateBacklog,
 } from '../../scripts/review/reader-backlog.mjs';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { DEFAULT_SIMULATION_PRESET_ID } from '../../src/domain/worldPulse/simulationRules.js';
 
 const MANIFEST_PATH = resolve(process.cwd(), 'tests', 'fixtures', 'generator-golden-master.json');
@@ -270,7 +271,16 @@ describe('the reader corpus is composed from the golden key', () => {
       runId: 'run-id-that-must-not-appear', sourceSha: 'deadbeef', campaigns: [{ ...row, documents: first.documents, yearlyWorldHashes: [first.worldHash], addressChain: [], liveness: [] }],
     });
     expect(built.runId).toBe('run-id-that-must-not-appear');
-    expect(JSON.stringify(built.campaigns)).not.toContain('run-id-that-must-not-appear');
+    // ANCHORED: a bare `not.toContain` here would pass just as happily if the campaigns array
+    // had drifted away entirely as if the run id were correctly excluded — and an empty array
+    // contains nothing, so the assertion would outlive the regression it exists to catch. The
+    // campaign id is the liveness anchor: it travels the same serialisation and MUST be there.
+    expectAbsentWithAnchor(
+      JSON.stringify(built.campaigns),
+      'run-id-that-must-not-appear',
+      row.campaignId,
+      'the manifest run id must not reach any campaign entry',
+    );
     // ⛔ THE TUNING BLOCK FAILS CLOSED, AND `signed` IS THE ONE WORD IT MAY NEVER INVENT.
     // A reader scoring a band word as wrong when the band is still draft is reporting a
     // decision nobody has made; a reader told `signed` when it is not would be worse.
