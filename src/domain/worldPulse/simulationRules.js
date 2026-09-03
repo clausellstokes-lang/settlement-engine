@@ -642,6 +642,31 @@ export const SIMULATION_RULE_PRESETS = Object.freeze({
     // (no deep war sub-flags / religionDynamics ceiling). commodityFlowEnabled stays
     // OPT-IN (not lit here) per owner design; disastersEnabled is an opt-in key absent
     // from DEFAULT_SIMULATION_RULES, so it rides the overrides spread.
+    //
+    // ⭐ SUPERSEDED 2026-09-03, AND THE OLD WORD IS KEPT ABOVE VERBATIM RATHER THAN
+    // OVERWRITTEN, SO THE CHANGE IS READ RATHER THAN DISCOVERED. Row O-12: the owner
+    // handed this ruling to the chair in chat on 2026-09-03, on top of §881.4 ("light
+    // everything up before the exhaustive review"). Seat: Opus 5, lane REGISTRY.
+    //
+    // WHAT IS SUPERSEDED, WORD FOR WORD: "It stays LIGHTER than full_simulation (no
+    // deep war sub-flags / religionDynamics ceiling)." The eight war sub-flags
+    // (defenderAttrition, warEconomyDrain, warSupplyQuality, defenderResolve,
+    // allyDefense, warForage, warLevy, warDisposition) are no longer held out of the
+    // drama set by owner word. The clause's second half was already spent when
+    // religionDynamicsEnabled lit below; only the sub-flag half was still binding.
+    //
+    // ⛔ THE LIT HOME IS NOT THIS ENTRY, WHICH IS WHY THE EIGHT ARE STILL ABSENT HERE.
+    // They are RULE_COMPARISON_KEYS members and every installed campaign carries them
+    // EXPLICITLY false, so lighting them on this LEGACY id makes rulesMatchPreset miss,
+    // presetIdForRules fall through to 'custom', and every installed Dramatic Campaign
+    // silently re-label itself at its next ensureWorldState with no receipt minted.
+    // The lighting therefore belongs on a LIT SUCCESSOR id (row O-1's birth form),
+    // where no installed world is re-labelled — THE PROMISE by construction. Until
+    // that successor exists the eight stay dark HERE BY THIS RECORD, not by the
+    // ruling above; the record is held honest in both directions by
+    // tests/domain/simulationRulesPreset.stability.test.js, whose WAR_DEPTH_FLAGS
+    // roster is the instrument that moves (a declared edit, never a re-record) on
+    // the day the successor lands.
     warLayerEnabled: true,
     settlementStrategyEnabled: true,
     faithSpreadEnabled: true,
