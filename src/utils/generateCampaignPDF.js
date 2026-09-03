@@ -30,6 +30,8 @@ import { liveSieges, warExhaustionStandings, dispositionStandings } from '../dom
 import { pantheonStandings, deityDisplayName } from '../domain/display/pantheonDepth.js';
 import { realmArcLines } from '../domain/display/realmArcSummary.js';
 import { collectPlotHooks } from '../domain/dossier/plotHooks.js';
+// THE ONE jsPDF text pass, hoisted (this file's spelling was the byte source).
+import { sanitizeJsPdfText as s } from './jsPdfText.js';
 
 /** duration_band vocabulary (taxonomy §Banding): lt_5s · 5_15s · 15_60s · 1_5m · 5_30m · gt_30m */
 // Exported for generateWorldBook, which reports the same campaign-scope completion
@@ -85,13 +87,6 @@ function rect(d,x,y,w,h,fill,stroke=null) {
 }
 function hline(d,x1,y,x2,clr=TAN,lw=0.2) { sd(d,clr); d.setLineWidth(lw); d.line(x1,y,x2,y); }
 
-function s(v) {
-  // Negated class allows TAB/LF/CR (0x09/0x0A/0x0D), printable ASCII,
-  // and printable Latin-1; everything else gets replaced with space
-  // so PDF-bound strings don't contain unprintable control bytes.
-  // eslint-disable-next-line no-control-regex
-  return String(v||'').replace(/[^\x09\x0A\x0D\x20-\x7E\xA0-\xFF]/g,' ').replace(/\s+/g,' ').trim();
-}
 function wrap(d,text,maxW,fontSize) {
   d.setFontSize(fontSize);
   return d.splitTextToSize(s(text),maxW);

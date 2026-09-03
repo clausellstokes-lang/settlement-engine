@@ -13,11 +13,13 @@
  */
 
 import { readFile, writeFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   parseContentJson,
 } from '../src/domain/content/contentFingerprint.js';
+import { sanitizeJsPdfText } from '../src/utils/jsPdfText.js';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const sourcePath = resolve(root, 'schema/custom-content.manifest.json');
@@ -27,6 +29,9 @@ const clientAdmissionPath = resolve(
   'src/domain/content/customContentAdmission.generated.js',
 );
 const edgePath = resolve(root, 'supabase/functions/_shared/customContentManifest.generated.ts');
+const charsetClientPath = resolve(root, 'src/domain/content/customContentCharset.generated.js');
+const charsetEdgePath = resolve(root, 'supabase/functions/_shared/customContentCharset.generated.ts');
+const themePath = resolve(root, 'src/pdf/theme.js');
 const versionedContentMigrationPath = resolve(root, 'supabase/migrations/185_custom_content_versions.sql');
 const checkOnly = process.argv.includes('--check');
 
@@ -149,7 +154,11 @@ function normalizeManifest(source) {
         ...(field.condition ? { explanation: field.condition } : {}),
         schema: undefined,
       };
-    }).map(({ schema: _schema, ...field }) => field);
+      // `surfaces` is a CHARSET input, not runtime vocabulary: it is read by
+      // deriveCharsetTable straight off the JSON source and emitted into the
+      // charset table. Stripping it here keeps the runtime manifest artifact
+      // byte-identical, so declaring a field's surfaces costs no product bytes.
+    }).map(({ schema: _schema, surfaces: _surfaces, ...field }) => field);
 
     const dependencies = fields
       .filter((field) => field.placement === 'dependency')
@@ -299,6 +308,251 @@ function admissionValidationManifest(manifest) {
   }));
 }
 
+// ── The charset table: DERIVED from the renderers, never typed ──────────────
+//
+// Every figure below is an output of a measurement. The dossier's set is the
+// intersection of the font faces theme.js actually registers, read through
+// fontkit. The two jsPDF books' set is the WinAnsi map the encoder itself reads
+// at runtime, narrowed by EXECUTING the one text pass over it. Nothing here is a
+// hand-typed list, so a font swap, a jsPDF bump or an edit to the text pass moves
+// the table and reds the gate instead of silently moving a paid surface.
+
+const CHARSET_SURFACES = [
+  'web-display',
+  'dossier-pdf',
+  'campaign-pdf',
+  'world-book',
+  'foundry',
+  'json-export',
+];
+const CHARSET_ENFORCEMENTS = ['report', 'refuse'];
+const NON_LATIN_POLICIES = ['undecided', 'embed', 'transliterate', 'keep_and_mark'];
+// The buckets whose fields materialize as engine keys and therefore carry an
+// observed-shape identity. The rest stay null until a surface roster lights them.
+const OSR_IDENTITY_BUCKETS = ['institutions', 'services', 'resources', 'tradeGoods'];
+const MULTILINE_SCHEMAS = ['text', 'shortText'];
+
+/** A field is free text when its schema admits an author's own string. */
+function isFreeTextSchema(schema) {
+  if (!schema || schema.values) return false;
+  return schema.type === 'string' || schema.type === 'string-or-string-list';
+}
+
+function toRangeString(codepoints) {
+  const sorted = [...codepoints].sort((a, b) => a - b);
+  const hex = (cp) => cp.toString(16).toUpperCase();
+  const out = [];
+  let start = null;
+  let prev = null;
+  for (const cp of sorted) {
+    if (start === null) { start = cp; prev = cp; continue; }
+    if (cp === prev + 1) { prev = cp; continue; }
+    out.push(start === prev ? hex(start) : `${hex(start)}-${hex(prev)}`);
+    start = cp;
+    prev = cp;
+  }
+  if (start !== null) out.push(start === prev ? hex(start) : `${hex(start)}-${hex(prev)}`);
+  return out.join(' ');
+}
+
+function sha256Of(parts) {
+  const hash = createHash('sha256');
+  for (const part of parts) hash.update(part);
+  return hash.digest('hex');
+}
+
+/**
+ * Read the registered face roster from theme.js source.
+ *
+ * Comments are stripped before the match and the `src:` string literals are kept:
+ * the literals ARE the registration, so reading them is a measurement of the code,
+ * while a commented-out face is not a registration. Do NOT remove the stripper as
+ * unnecessary -- it is a no-op on today's theme.js by luck, not by construction.
+ */
+function readFaceRoster(themeSource) {
+  const stripped = themeSource
+    .replace(/\/\*[\s\S]*?\*\//g, '')
+    .replace(/(^|[^:])\/\/[^\n]*/g, '$1');
+  const faces = [...stripped.matchAll(/src:\s*'(\/fonts\/[^'?]+\.ttf)(?:\?[^']*)?'/g)]
+    .map((match) => match[1]);
+  invariant(faces.length > 0, 'theme.js registers no font faces');
+  invariant(new Set(faces).size === faces.length, 'theme.js registers a face twice');
+  return faces;
+}
+
+async function deriveCharsetTable(manifest, source) {
+  const policy = source.charsetPolicy;
+  invariant(policy && typeof policy === 'object', 'charsetPolicy is required');
+  invariant(
+    CHARSET_ENFORCEMENTS.includes(policy.enforcement),
+    `charsetPolicy.enforcement must be one of ${CHARSET_ENFORCEMENTS.join('|')}`,
+  );
+  invariant(
+    NON_LATIN_POLICIES.includes(policy.nonLatin),
+    `charsetPolicy.nonLatin must be one of ${NON_LATIN_POLICIES.join('|')}`,
+  );
+  invariant(
+    policy.embeddedFont === null || typeof policy.embeddedFont === 'string',
+    'charsetPolicy.embeddedFont must be a string or null',
+  );
+  invariant(
+    Array.isArray(source.surfaceClasses)
+      && source.surfaceClasses.length === CHARSET_SURFACES.length
+      && source.surfaceClasses.every((entry, index) => entry === CHARSET_SURFACES[index]),
+    'surfaceClasses must mirror the charset surface vocabulary exactly',
+  );
+
+  // dossier-pdf: the intersection of every registered face, read from the TTFs.
+  const fontkit = await import('fontkit');
+  const themeSource = await readFile(themePath, 'utf8');
+  const faces = readFaceRoster(themeSource);
+  const faceBytes = [];
+  let dossier = null;
+  for (const face of faces) {
+    const path = resolve(root, 'public', face.replace(/^\//, ''));
+    faceBytes.push(await readFile(path));
+    const set = new Set(fontkit.openSync(path).characterSet);
+    dossier = dossier === null ? set : new Set([...dossier].filter((cp) => set.has(cp)));
+  }
+
+  // campaign-pdf / world-book: the encoder's own WinAnsi map, narrowed by
+  // EXECUTING the one text pass. The context anchor matters: a bare codepoint
+  // would read one lower, because a lone space trims to empty.
+  const { jsPDF } = await import('jspdf');
+  const winAnsi = new jsPDF().getFont().metadata?.Unicode?.encoding?.WinAnsiEncoding;
+  invariant(
+    winAnsi && Object.keys(winAnsi).length > 0,
+    'jsPDF exposes no runtime WinAnsiEncoding map; the derivation cannot proceed',
+  );
+  const encodable = new Set();
+  for (let cp = 0x20; cp <= 0x7e; cp += 1) encodable.add(cp);
+  for (let cp = 0xa0; cp <= 0xff; cp += 1) encodable.add(cp);
+  for (const key of Object.keys(winAnsi)) encodable.add(Number(key));
+  const textPass = new Set([...encodable].filter((cp) => {
+    const anchored = `a${String.fromCodePoint(cp)}a`;
+    return sanitizeJsPdfText(anchored) === anchored;
+  }));
+
+  const passSource = sanitizeJsPdfText.toString();
+  const surfaces = {
+    'web-display': { ranges: '', count: 0, method: 'unbounded', inputs: [], inputsSha256: '' },
+    'dossier-pdf': {
+      ranges: toRangeString(dossier),
+      count: dossier.size,
+      method: 'fontkit-intersection',
+      inputs: faces.map((face) => `public${face}`),
+      inputsSha256: sha256Of(faceBytes),
+    },
+    'campaign-pdf': {
+      ranges: toRangeString(textPass),
+      count: textPass.size,
+      method: 'winansi-and-textpass',
+      inputs: ['jspdf:WinAnsiEncoding', 'src/utils/jsPdfText.js'],
+      inputsSha256: sha256Of([JSON.stringify(winAnsi), passSource]),
+    },
+    foundry: { ranges: '', count: 0, method: 'unbounded', inputs: [], inputsSha256: '' },
+    'json-export': { ranges: '', count: 0, method: 'unbounded', inputs: [], inputsSha256: '' },
+  };
+  surfaces['world-book'] = { ...surfaces['campaign-pdf'] };
+
+  // The bans apply on EVERY surface, web included: none of these is a character a
+  // reader sees, and a bidi override in a name is an attack, not an accent.
+  // U+00A0 is here because both jsPDF passes silently collapse it to a space --
+  // a silent rewrite is exactly what this wall exists to make visible.
+  // `control` is C0 WHOLE plus DEL plus C1. TAB/LF/CR are NOT carved out here:
+  // the protocol exempts them per-field for multiline classes, which is the only
+  // place the distinction is knowable. Carving them out of the STORED set instead
+  // lets a newline in a single-line, web-only field produce no finding at all,
+  // because no bounded surface is left to catch it (measured, before the cure).
+  const bans = {
+    control: '0-1F 7F-9F',
+    bidi: '61C 200E-200F 202A-202E 2066-2069',
+    invisible: 'A0 AD 180E 200B-200D 2060-2064 FEFF FFF9-FFFB',
+    noncharacter: toRangeString([
+      ...Array.from({ length: 0xfdef - 0xfdd0 + 1 }, (_, i) => 0xfdd0 + i),
+      ...Array.from({ length: 17 }, (_, plane) => [
+        plane * 0x10000 + 0xfffe,
+        plane * 0x10000 + 0xffff,
+      ]).flat(),
+    ]),
+  };
+
+  const fields = {};
+  for (const bucket of manifest.authorableBuckets) {
+    const category = manifest.categories.find((candidate) => candidate.key === bucket);
+    invariant(category, `charset table cannot find authorable category ${bucket}`);
+    const sourceCategory = source.categories.find((candidate) => candidate.key === bucket);
+    const bucketFields = {};
+    for (const field of category.fields) {
+      const schema = source.schemas[
+        sourceCategory.fields.find((candidate) => candidate.key === field.key).schema
+      ];
+      if (!isFreeTextSchema(schema)) continue;
+      const declared = sourceCategory.fields.find((candidate) => candidate.key === field.key)
+        .surfaces;
+      invariant(
+        Array.isArray(declared) && declared.length > 0,
+        `${bucket}.${field.key} is free text and needs a surfaces declaration`,
+      );
+      for (const surface of declared) {
+        invariant(
+          CHARSET_SURFACES.includes(surface),
+          `${bucket}.${field.key} declares unknown surface ${surface}`,
+        );
+      }
+      invariant(
+        new Set(declared).size === declared.length,
+        `${bucket}.${field.key}.surfaces must be unique`,
+      );
+      const isList = schema.type === 'string-or-string-list';
+      bucketFields[field.key] = {
+        surfaces: [...declared].sort(
+          (a, b) => CHARSET_SURFACES.indexOf(a) - CHARSET_SURFACES.indexOf(b),
+        ),
+        multiline: MULTILINE_SCHEMAS.includes(
+          sourceCategory.fields.find((candidate) => candidate.key === field.key).schema,
+        ),
+        maxCodepoints: (isList ? schema.itemMaxLength : schema.maxLength) ?? null,
+        osrIdentity: OSR_IDENTITY_BUCKETS.includes(bucket) ? `${field.key} on ${bucket}` : null,
+      };
+    }
+    fields[bucket] = bucketFields;
+  }
+
+  return {
+    manifestVersion: manifest.manifestVersion,
+    policy: {
+      enforcement: policy.enforcement,
+      nonLatin: policy.nonLatin,
+      embeddedFont: policy.embeddedFont,
+    },
+    surfaces,
+    bans,
+    fields,
+  };
+}
+
+function generatedCharsetSource(table, typescript) {
+  const json = JSON.stringify(table, null, 2);
+  const cast = typescript ? ' as const' : '';
+  const freezeDeclaration = typescript
+    ? 'function deepFreeze<T>(value: T): T {'
+    : '/** @template T @param {T} value @returns {T} */\nfunction deepFreeze(value) {';
+  const objectValues = typescript
+    ? 'Object.values(value as object)'
+    : 'Object.values(value)';
+  return `/* eslint-disable */\n`
+    + `// GENERATED by scripts/generate-custom-content-manifest.mjs. Do not edit by hand.\n`
+    + `// Every set below is DERIVED by measuring a renderer, never hand-typed.\n\n`
+    + `${freezeDeclaration}\n`
+    + `  if (!value || typeof value !== 'object' || Object.isFrozen(value)) return value;\n`
+    + `  Object.freeze(value);\n`
+    + `  for (const child of ${objectValues}) deepFreeze(child);\n`
+    + `  return value;\n`
+    + `}\n\n`
+    + `export const CUSTOM_CONTENT_CHARSET = deepFreeze(${json}${cast});\n`;
+}
+
 function generatedSqlManifestBlock(manifest) {
   const compactManifest = JSON.stringify(admissionValidationManifest(manifest), null, 2)
     .split('\n')
@@ -334,10 +588,13 @@ function generatedBlockBounds(sourceText, pathLabel) {
 const sourceText = await readFile(sourcePath, 'utf8');
 const source = parseContentJson(sourceText);
 const manifest = normalizeManifest(source);
+const charsetTable = await deriveCharsetTable(manifest, source);
 const outputs = [
   [clientPath, generatedSource(manifest, false)],
   [clientAdmissionPath, generatedClientAdmissionSource(manifest)],
   [edgePath, generatedSource(manifest, true)],
+  [charsetClientPath, generatedCharsetSource(charsetTable, false)],
+  [charsetEdgePath, generatedCharsetSource(charsetTable, true)],
 ];
 
 for (const [path, next] of outputs) {
