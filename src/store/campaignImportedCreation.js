@@ -29,17 +29,24 @@ export function buildNewCampaign(current, name, initial = {}) {
   const contentCutoff = initial.contentBinding
     ? { binding: initial.contentBinding, failedClosed: false }
     : accountRuntimeBinding(current, 'account-environment');
+  // ONE ACTION, ONE INSTANT. This minted THREE separate wall-clock reads — `createdAt`,
+  // `updatedAt`, and a third inside `ensureWizardNewsFeed()`'s own fallthrough below — so a
+  // creation that straddled a millisecond boundary produced a campaign whose three stamps
+  // disagreed. Creating a campaign IS a wall-clock event (this is the store boundary, where
+  // the estate's temporal law says the clock legitimately enters); taking the instant more
+  // than once is what was wrong.
+  const now = new Date().toISOString();
   return {
     id,
     name: campaignName,
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
+    createdAt: now,
+    updatedAt: now,
     settlementIds: Array.isArray(initial.settlementIds)
       ? [...initial.settlementIds]
       : [],
     mapState: null,
-    regionalGraph: ensureRegionalGraph(),
-    wizardNews: ensureWizardNewsFeed(),
+    regionalGraph: ensureRegionalGraph(undefined, { now }),
+    wizardNews: ensureWizardNewsFeed(undefined, { now }),
     worldState: ensureWorldState(null, { id, name: campaignName }),
     collapsed: false,
     accessState: 'active',

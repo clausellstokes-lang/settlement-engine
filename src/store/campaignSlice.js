@@ -33,6 +33,7 @@ import {
   ensureRegionalGraph,
   ensureWizardNewsFeed,
   appendWizardNewsEntries,
+  wizardNewsCurrentTick,
 } from '../domain/region/index.js';
 // V-17 THE CAMPAIGN IMPORT — light domain leaf (pure schema wall + news projection);
 // no store/sim-graph imports, so it never rides into first paint.
@@ -277,7 +278,12 @@ export function migrateCampaign(camp, inferredCustomContent = undefined) {
   if (!isUuid(next.id)) next.id = (next.id == null || next.id === '') ? newCampaignId() : uuidFromLegacyId(next.id);
   if (camp.mapState) next.mapState = migrateMapState(camp.mapState);
   if (next.regionalGraph) next.regionalGraph = ensureRegionalGraph(next.regionalGraph);
-  next.wizardNews = ensureWizardNewsFeed(next.wizardNews);
+  // A MIGRATION MUST BE A FUNCTION OF THE CAMPAIGN IT MIGRATES. Normalizing a feed that
+  // carries no `updatedAt` mints one, and that mint falls through to the wall clock — so
+  // migrating the SAME stored campaign twice produced two different feeds. The campaign's
+  // own stamp is the deterministic answer and every stored campaign carries one; a campaign
+  // with neither stamp has no in-band answer and keeps the boundary fallthrough.
+  next.wizardNews = ensureWizardNewsFeed(next.wizardNews, { now: next.updatedAt || next.createdAt });
   next.worldState = ensureWorldState(next.worldState, next);
   next.accessState = next.accessState || 'active';
   // Normalize settlementIds at the single load chokepoint so no campaign ever
@@ -872,7 +878,11 @@ export const createCampaignSlice = (set, get) => {
 
   getCampaignWizardNews: (campaignId) => {
     const c = findActiveCampaign(get().campaigns, campaignId);
-    return ensureWizardNewsFeed(c?.wizardNews);
+    // A READ THAT MINTS A CLOCK IS NOT A READ. Normalizing a feed with no `updatedAt`
+    // stamps one, and that stamp falls through to the wall clock — so this selector
+    // returned a different feed on every call for a campaign that had never been stamped.
+    // The campaign's own instant is the deterministic answer.
+    return ensureWizardNewsFeed(c?.wizardNews, { now: c?.updatedAt || c?.createdAt });
   },
 
   // RETIRED (R-5b, owner queue #21): `clearCampaignWizardNews`. It blanked a
@@ -901,7 +911,9 @@ export const createCampaignSlice = (set, get) => {
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c || !Array.isArray(records) || !records.length) return;
       const now = new Date().toISOString();
-      const feed = ensureWizardNewsFeed(c.wizardNews);
+      // The action's instant goes to the normalizer as well as to the appender below —
+      // one action, one instant (the normalizer otherwise takes its own).
+      const feed = ensureWizardNewsFeed(c.wizardNews, { now });
       const entries = records.map(tableEventToNewsEntry);
       c.wizardNews = appendWizardNewsEntries(feed, entries, { now });
       c.updatedAt = now;
@@ -949,8 +961,11 @@ export const createCampaignSlice = (set, get) => {
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
-      const feed = ensureWizardNewsFeed(c.wizardNews);
-      c.lastReadTick = Number.isFinite(feed.currentTick) ? Number(feed.currentTick) : (Number(c.lastReadTick) || 0);
+      // Only the tick is wanted, so take only the tick: normalizing the whole feed mints an
+      // `updatedAt` from the wall clock when the stored feed carries none, and this line
+      // discards everything but the integer.
+      const currentTick = wizardNewsCurrentTick(c.wizardNews);
+      c.lastReadTick = Number.isFinite(currentTick) ? Number(currentTick) : (Number(c.lastReadTick) || 0);
       const rules = c.worldState && typeof c.worldState === 'object' ? c.worldState.simulationRules : null;
       c.flagsSeen = rules && typeof rules === 'object'
         ? Object.keys(rules).filter(k => rules[k] === true).sort()

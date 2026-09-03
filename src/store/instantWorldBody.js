@@ -240,9 +240,12 @@ export async function runInstantWorld({
     // Re-derive the staged connections against the real-id saves (the composer
     // already computed this over its provisional ids; re-deriving keeps the
     // persisted graph's node ids in lockstep with the persisted saves).
+    // The SEED graph takes the action's `now` too — it was the one argument here not
+    // threading it, so the empty starting graph stamped itself from the wall clock inside
+    // the persist step of a seeded realm, a millisecond or so away from every sibling stamp.
     const regionalGraph = deriveGraphWithDiscoveredCandidates(
       persistedSaves,
-      ensureRegionalGraph(),
+      ensureRegionalGraph(undefined, { now }),
       { now },
     );
 

@@ -772,6 +772,22 @@ function capEntries(sortedEntries, max = MAX_ENTRIES) {
 }
 
 /**
+ * The feed's normalized tick, WITHOUT normalizing the feed.
+ *
+ * ⛔ WHY THIS EXISTS AS ITS OWN EXPORT. `ensureWizardNewsFeed` mints an `updatedAt` when the
+ * feed carries none, and that mint falls through to the wall clock. A caller that wants only
+ * the integer tick — `campaignPulseHelpers.campaignClockTick` is the one in the estate — was
+ * paying a wall-clock read for a value it then threw away, on a READ path. This is the
+ * single source both it and `ensureWizardNewsFeed` now use, so the normalization cannot
+ * fork: change the clamp here and both move together.
+ * @param {WizardNewsFeed | null | undefined} feed
+ * @returns {number}
+ */
+export function wizardNewsCurrentTick(feed) {
+  return Math.max(0, Math.floor(finiteNumber(feed?.currentTick, 0)));
+}
+
+/**
  * @param {WizardNewsFeed | null | undefined} [feed]
  * @param {WizardNewsOptions} [options]
  * @returns {{schemaVersion: number, currentTick: number, entries: WizardNewsEntry[], updatedAt: string}}
@@ -782,7 +798,7 @@ export function ensureWizardNewsFeed(feed = {}, options = {}) {
     : []);
   return {
     schemaVersion: WIZARD_NEWS_SCHEMA_VERSION,
-    currentTick: Math.max(0, Math.floor(finiteNumber(feed?.currentTick, 0))),
+    currentTick: wizardNewsCurrentTick(feed),
     entries: capEntries(sortEntries(entries), MAX_ENTRIES),
     updatedAt: feed?.updatedAt || options.now || nowIso(),
   };
