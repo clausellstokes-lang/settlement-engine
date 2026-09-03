@@ -59,7 +59,7 @@ export const REACTIVE_RELATIONS = Object.freeze({
  */
 export function reactiveResponse({ believed = null, relation = REACTIVE_RELATIONS.ENEMY_COLUMN, myStrength01 = 0.5, exhaustion01 = 0 } = {}) {
   if (!believed || believed.present !== true) {
-    return { move: 'stand', ev: 0, priced: false, believedReal: false, receipt: 'No word of banners on the roads — the muster stands down.' };
+    return { move: 'stand', ev: 0, priced: false, believedReal: false, receipt: 'No word of banners on the roads: the muster stands down.' };
   }
   const bel = clamp01(num(believed.strength01, 0.5));
   const mine = clamp01(num(myStrength01, 0.5));
@@ -69,15 +69,15 @@ export function reactiveResponse({ believed = null, relation = REACTIVE_RELATION
   if (relation === REACTIVE_RELATIONS.ALLY_UNDER_SIEGE) {
     move = 'reinforce';
     ev = clamp01(mine * (1 - 0.5 * ex));
-    receipt = 'Word came of banners at a treaty-ally\'s gates — the relief column marches (the oath has teeth now).';
+    receipt = 'Word came of banners at a treaty-ally\'s gates. The relief column marches (the oath has teeth now).';
   } else if (relation === REACTIVE_RELATIONS.ENEMY_INTERVENER) {
     move = 'counter_intervene';
     ev = clamp01(bel * (1 - 0.4 * ex));
-    receipt = 'A rival marches to claim the seat — we march to deny it them.';
+    receipt = 'A rival marches to claim the seat: we march to deny it them.';
   } else {
     move = 'intercept';
     ev = clamp01(fieldBattleWinProbability(mine * 100, bel * 100) * (1 - 0.3 * ex));
-    receipt = 'Word came of banners on the north road — the muster answered a rumor, true or not, and moved to intercept.';
+    receipt = 'Word came of banners on the north road: the muster answered a rumor, true or not, and moved to intercept.';
   }
   // PRICED regardless of truth (the phantom-column law): real force commits to a believed fact.
   return { move, ev: round4(ev), priced: true, believedReal, receipt };

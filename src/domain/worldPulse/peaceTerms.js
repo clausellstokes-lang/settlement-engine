@@ -925,8 +925,8 @@ function mintTreaty(args) {
   const loserName = String(/** @type {{ name?: unknown }} */ (loserItem || {}).name || loserId);
 
   /** @type {string[]} */
-  const receipts = [`The Peace of ${loserName} — signed under ${victorName}'s terms (${terms.map((t) => t.type).join(', ')}).`];
-  if (mediator) receipts.push(`Brokered by ${mediator.name}, torn between the courts — the terms were the lighter for it.`);
+  const receipts = [`The Peace of ${loserName}: signed under ${victorName}'s terms (${terms.map((t) => t.type).join(', ')}).`];
+  if (mediator) receipts.push(`Brokered by ${mediator.name}, torn between the courts. The terms were the lighter for it.`);
   if (mediationDisposition && mediationDisposition.factor !== 1) {
     receipts.push(mediationDisposition.receipt);
   }
@@ -955,7 +955,7 @@ function mintTreaty(args) {
   if (!wr6Active && coalition.length > 1 && !separateExit) {
     treaty.coalitionScope = coalition;
     treaty.shares = coalitionShares(coalition, truthFor);
-    receipts.push(`A coalition peace — ${coalition.length} besiegers bind ${loserName} jointly, the spoils split by the strength each brought.`);
+    receipts.push(`A coalition peace: ${coalition.length} besiegers bind ${loserName} jointly, the spoils split by the strength each brought.`);
   }
   // SEPARATE EXIT: the typed fracture record (§7) — the deserter, its abandoned
   // co-besiegers, the coalition size, and the recorded credibility hit (the
@@ -965,7 +965,7 @@ function mintTreaty(args) {
     const deserterItem = snapshot?.byId?.get?.(deserterId) || null;
     const deserterName = String(/** @type {{ name?: unknown }} */ (deserterItem || {}).name || deserterId);
     const abandoned = coalitionContext?.abandoned || coBesiegers;
-    const fractureReceipt = `${deserterName} left the siege — its own peace bought, its allies' fronts left standing.`;
+    const fractureReceipt = `${deserterName} left the siege. Its own peace bought, its allies' fronts left standing.`;
     treaty.separateExit = true;
     treaty.fracture = {
       deserter: deserterId,
@@ -1099,7 +1099,7 @@ function mintTreatyFromCarriedSheet(args) {
   const coalitionContext = args.coalitionContext || null;
   const separateExit = !!coalitionContext;
   const receipts = [
-    `The Peace of ${loserName} — carried home under ${victorName}'s agreed terms (${terms.map((term) => term.type).join(', ')}).`,
+    `The Peace of ${loserName}: carried home under ${victorName}'s agreed terms (${terms.map((term) => term.type).join(', ')}).`,
   ];
   /** @type {TreatyRecord} */
   const treaty = {
@@ -1118,7 +1118,7 @@ function mintTreatyFromCarriedSheet(args) {
     const members = Array.isArray(coalitionContext.members)
       ? coalitionContext.members.map(String)
       : [departingId, ...abandoned];
-    const fractureReceipt = `${departingName} left the siege — its own peace bought, its allies' fronts left standing.`;
+    const fractureReceipt = `${departingName} left the siege. Its own peace bought, its allies' fronts left standing.`;
     treaty.separateExit = true;
     treaty.fracture = {
       deserter: departingId,

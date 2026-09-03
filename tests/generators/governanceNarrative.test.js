@@ -59,7 +59,7 @@ describe('governance narrative precedence', () => {
       'Critical (active siege — survival priority); monster threat active',
     );
     expect(result.recentConflict).toBe(
-      'The settlement is under active siege. Every resource decision is a military decision. The debate is no longer about policy — it is about survival.',
+      'The settlement is under active siege. Every resource decision is a military decision. The debate is no longer about policy. It is about survival.',
     );
   });
 
@@ -69,7 +69,7 @@ describe('governance narrative precedence', () => {
       instNames: ['council hall'],
     });
 
-    expect(result.stability).toBe('Desperate — hunger is eroding order');
+    expect(result.stability).toBe('Desperate: hunger is eroding order');
     expect(result.recentConflict).toBe(
       'Food shortages have sharpened every tension in the settlement. Those with stocks are not advertising the fact. Those without are watching those with.',
     );

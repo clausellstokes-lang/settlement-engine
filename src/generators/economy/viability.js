@@ -257,7 +257,7 @@ const generatePowerDynamics = (population, institutions, economicState, config =
       suggestions.push({
         category: 'Economic Diversity',
         title: 'Trade-dependent craft economy',
-        description: `Craft guilds operate on imported materials — sustained by strong ${config?.tradeRouteAccess} trade. Vulnerable to supply disruption.`,
+        description: `Craft guilds operate on imported materials: sustained by strong ${config?.tradeRouteAccess} trade. Vulnerable to supply disruption.`,
       });
     } else {
       warnings.push({
@@ -271,7 +271,7 @@ const generatePowerDynamics = (population, institutions, economicState, config =
         suggestedFixes: water.buffered
           ? ['Develop local resource base to reduce trade dependency']
           : [
-              'Add craft guilds — smiths, weavers, tanners, etc.',
+              'Add craft guilds: smiths, weavers, tanners, etc.',
               'Improve trade access and economy for trade-sustained crafts',
             ],
       });
@@ -348,7 +348,7 @@ const generatePowerDynamics = (population, institutions, economicState, config =
         description: 'Military slider is high but the settlement has no walls, garrison, or barracks.',
         impact: 'Military investment without physical infrastructure produces limited security.',
         suggestedFixes: ['Add Town Walls or Garrison'],
-        priorityNote: `Military priority is ${pri.military} — defence institutions are expected.`,
+        priorityNote: `Military priority is ${pri.military}. Defence institutions are expected.`,
       });
     }
   }
@@ -372,7 +372,7 @@ const generatePowerDynamics = (population, institutions, economicState, config =
         description: 'Religion slider is high but no religious institution is present.',
         impact: 'Religious fervour without institutional anchoring produces instability.',
         suggestedFixes: ['Add Parish Church, Temple, or Monastery'],
-        priorityNote: `Religion priority is ${pri.religion} — a religious centre is expected.`,
+        priorityNote: `Religion priority is ${pri.religion}. A religious centre is expected.`,
       });
     }
   }
@@ -395,14 +395,14 @@ const generatePowerDynamics = (population, institutions, economicState, config =
         severity: SEVERITY.INEFFICIENCY,
         category: 'Magical Priorities',
         title: smallSettlement
-          ? 'High Magic Priority — Informal Practice'
+          ? 'High Magic Priority: Informal Practice'
           : 'High Magic Priority Without Arcane Institutions',
         description: smallSettlement
           ? `Magic priority is high, but ${config?.tier || 'village'} scale limits formal arcane infrastructure. Practice is local, itinerant, or domestic rather than institutional.`
           : 'Magic priority is high but no arcane institution is present.',
         impact: smallSettlement
           ? 'The setting choice is present, but reliable commercial magical services remain scarce.'
-          : 'Magical potential is unrealised — adventurers will find no magical services.',
+          : 'Magical potential is unrealised. Adventurers will find no magical services.',
         suggestedFixes: smallSettlement
           ? ['Add a tier-plausible hedge practitioner or alchemical workshop']
           : ["Add Hedge Wizard, Alchemist Shop, or Wizard's Tower"],
@@ -425,11 +425,11 @@ const generatePowerDynamics = (population, institutions, economicState, config =
       warnings.push({
         severity: SEVERITY.DEPENDENCY,
         category: 'Criminal Activity',
-        title: 'High Crime Priority — No Criminal or Guard Institutions',
+        title: 'High Crime Priority: No Criminal or Guard Institutions',
         description: 'Criminal slider is high but neither criminal organisations nor guard infrastructure are present.',
         impact: 'High crime without institutions creates ungoverned chaos rather than structured underworld.',
         suggestedFixes: ["Add Thieves' Guild, Black Market, or City Watch"],
-        priorityNote: `Criminal priority is ${pri.criminal} — some underworld structure is expected.`,
+        priorityNote: `Criminal priority is ${pri.criminal}. Some underworld structure is expected.`,
       });
     }
   }
@@ -550,7 +550,7 @@ export const generateEconomicViability = (settlement, terrainType = null, nearby
         description: `${vulnerable.length} institution${vulnerable.length > 1 ? 's' : ''} depend on imported materials (${vulnerable
           .slice(0, 3)
           .map((d) => d.resource)
-          .join(', ')}). Standard for this trade route — vulnerability if supply is disrupted.`,
+          .join(', ')}). Standard for this trade route: vulnerability if supply is disrupted.`,
       });
   }
 

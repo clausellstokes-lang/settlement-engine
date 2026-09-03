@@ -113,7 +113,7 @@ export async function verifyAdvanceDeterminism({ workerResult, runSync, report =
   if (divergence) {
     try {
       // Report ONLY the path + reason (no world state) — the R-14 no-leak law.
-      report(new Error(`worker↔sync determinism divergence — ${divergence}`), {
+      report(new Error(`worker↔sync determinism divergence: ${divergence}`), {
         kind: 'determinism.worker-sync-divergence',
       });
       if (typeof console !== 'undefined') console.error('[paranoia] worker↔sync divergence:', divergence);

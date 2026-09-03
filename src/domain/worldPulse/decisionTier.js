@@ -250,7 +250,7 @@ export const DRAMA_CLASS_REGISTRY = Object.freeze({
 export const EXEMPT_STRESSOR_TYPES = Object.freeze({
   // Plan §5.1 explicit exemptions (consequence-adjacent or genuinely ambiguous).
   mass_migration: 'A migration is consequence-adjacent (it is usually the OUTCOME of a famine/war arc, not an independent birth).',
-  infiltration: 'Infiltration is a covert, ambiguous seed — safer un-governed than mis-paced.',
+  infiltration: 'Infiltration is a covert, ambiguous seed: safer un-governed than mis-paced.',
   criminal_corridor: 'A criminal corridor is a slow structural condition, not a spontaneous major-arc birth.',
   betrayal: 'A betrayal is a chain link inside another arc far more often than an independent birth.',
   // NOTE (architect ruling, 2026-07-14): political_fracture and slave_revolt were plan-gap

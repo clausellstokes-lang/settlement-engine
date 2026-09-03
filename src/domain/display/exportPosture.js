@@ -18,10 +18,10 @@
  */
 
 const EXPORT_STATUS_LABEL = Object.freeze({
-  none:             'No exports — economic isolation',
+  none:             'No exports: economic isolation',
   limited:          'Limited export access',
   vulnerable:       'Exports exist but trade routes are vulnerable',
-  entrepot:         'Entrepôt — re-exports transit goods',
+  entrepot:         'Entrepôt: re-exports transit goods',
   import_dependent: 'Import-dependent',
   established:      'Active exports',
 });

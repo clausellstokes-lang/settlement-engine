@@ -147,7 +147,7 @@ export const RESIDUE_STRIP_SITES = Object.freeze([
   { id: 'strategy_deploy',       banks: 'deployment seed + war_front channel + deploy-tick exhaustion ratchet + conscription/levy debits', coveredBy: 'warConservationDismiss.test.js' },
   { id: 'conquest',              banks: 'occupation seed + conquest disposition ratchet',     coveredBy: 'worldPulseDeferMajorResidue.test.js' },
   { id: 'occupation_vassalized', banks: 'vassal promotion + advance-win disposition residue', coveredBy: 'worldPulseDeferMajorResidue.test.js' },
-  { id: 'concluded_wars',        banks: 'the concluded-war record (W-MEM) — staged or sealed out of band',  coveredBy: 'concludedWarsWriter.test.js' },
+  { id: 'concluded_wars',        banks: 'the concluded-war record (W-MEM): staged or sealed out of band',  coveredBy: 'concludedWarsWriter.test.js' },
 ]);
 
 // The upward pressure to mobilize: a settlement RAMPS its war posture
@@ -698,7 +698,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
             source: `faction:${schism.factionKey}`,
             effect: 'council_schism',
             reason: schism.relFlip
-              ? `The ${schism.factionKey} faction reads ${schism.subjectId} on a different footing than the seat — a stance the ruling coalition has not accepted.`
+              ? `The ${schism.factionKey} faction reads ${schism.subjectId} on a different footing than the seat. A stance the ruling coalition has not accepted.`
               : `The ${schism.factionKey} faction reads ${schism.subjectId}'s strength ${schism.bandGap} bands from the seat's; the council is split over which threat is real.`,
           }],
         });
@@ -733,8 +733,8 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
             source: `foreign_corruption:${hit.role}`,
             effect: 'corruption_scandal',
             reason: rotten
-              ? `${hit.npcName || 'A trusted official'} was revealed as a foreign asset — the court looks rotten.`
-              : `${hit.npcName || 'A foreign asset'}'s exposure named this court as the patron behind the rot — it looks villainous.`,
+              ? `${hit.npcName || 'A trusted official'} was revealed as a foreign asset. The court looks rotten.`
+              : `${hit.npcName || 'A foreign asset'}'s exposure named this court as the patron behind the rot. It looks villainous.`,
           }],
         }));
       }

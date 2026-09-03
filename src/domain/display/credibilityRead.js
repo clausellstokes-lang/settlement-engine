@@ -40,9 +40,9 @@ export function credibilityBand(score) {
 
 /** @param {number} band @param {number} score */
 function presenceFor(band, score) {
-  if (band >= 3) return "The settlement's word is taken as gospel — its claims are believed on their face.";
+  if (band >= 3) return "The settlement's word is taken as gospel. Its claims are believed on their face.";
   if (band === 2) return 'The settlement has earned a name for straight dealing; its word carries weight.';
-  if (band === 0) return `The settlement has been caught out too often — its claims are heavily discounted${score < 0 ? ', believed at a fraction of their face' : ''}.`;
+  if (band === 0) return `The settlement has been caught out too often. Its claims are heavily discounted${score < 0 ? ', believed at a fraction of their face' : ''}.`;
   return 'The settlement is neither especially trusted nor doubted; its word is weighed on its merits.';
 }
 

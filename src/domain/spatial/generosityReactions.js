@@ -353,7 +353,7 @@ export function reliefIncident({ kind, tick, magnitude01, summary, holder = 'peo
     credit_repaid: 'A grain-debt was repaid.',
     credit_defaulted: 'A grain-debt fell into default.',
     refuge_granted: 'Refuge was opened to the displaced.',
-    trade_warmth: 'A trade was struck — the market warmed the relationship.',
+    trade_warmth: 'A trade was struck: the market warmed the relationship.',
   }[String(kind)] || 'A relief decision touched the relationship.';
   return {
     tick: Math.max(0, Math.floor(finiteNumber(tick, 0))),

@@ -386,7 +386,7 @@ describe('WR-1 cause dissolution', () => {
     expect(lit?.receipt.causeState).toBe('dissolved');
     expect(lit?.receipt.patronFallCause).toBe('discredited');
     expect(lit?.receipt.reason).toContain('no longer worshipped from the same throne'
-      + ' — the creed lost its rightful claim in the town it was named from');
+      + ': the creed lost its rightful claim in the town it was named from');
   });
 
   it('WF-1d dormancy: flag-absent and flag-false receipts are byte-identical, and only the lit drive moves a byte', () => {

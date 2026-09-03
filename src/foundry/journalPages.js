@@ -97,7 +97,7 @@ function overviewPage(vm) {
     kv('Safety', o.safety),
     kv('Viability', o.viabilityVerdict ? humanize(o.viabilityVerdict) : null),
     o.stress.length ? md('', '## Active crises', o.stress.map(x =>
-      `- **${esc(x.label || 'Crisis')}** — ${esc(x.summary || '')}${x.hook ? ` *Hook: ${esc(x.hook)}*` : ''}`)) : null,
+      `- **${esc(x.label || 'Crisis')}**: ${esc(x.summary || '')}${x.hook ? ` *Hook: ${esc(x.hook)}*` : ''}`)) : null,
     o.arrivalScene ? md('', '## Arrival', `> ${esc(o.arrivalScene)}`) : null,
     o.pressureSentence ? md('', `*${esc(o.pressureSentence)}*`) : null,
     o.settlementReason ? md('', '## Why this place exists', esc(o.settlementReason)) : null,
@@ -119,7 +119,7 @@ function statePage(vm) {
     dims.map(([name, d]) => `| ${name} | ${esc(d.value)} | ${esc(d.band || '')} |`),
     '',
     dims.map(([name, d]) => (d.drivers || []).length
-      ? md(`## ${name} — drivers`, d.drivers.map(bullet)) : null),
+      ? md(`## ${name}: drivers`, d.drivers.map(bullet)) : null),
   );
 }
 
@@ -129,9 +129,9 @@ function tonightPage(vm) {
   const hooks = (vm.hooks.all || []).slice(0, 4);
   return md(
     crisis.active ? md('## Crisis on the table', crisis.chips.map(c =>
-      `- **${esc(c.label || 'Crisis')}** — ${esc(c.hook || c.summary || '')}`)) : null,
+      `- **${esc(c.label || 'Crisis')}**: ${esc(c.hook || c.summary || '')}`)) : null,
     figures.length ? md('', '## Faces they will meet', figures.map(f =>
-      `- **${esc(f.name)}**${f.title ? ` (${esc(f.title)})` : ''}${f.faction ? ` — ${esc(f.faction)}` : ''}${f.sentence ? `. ${esc(f.sentence)}` : ''}`)) : null,
+      `- **${esc(f.name)}**${f.title ? ` (${esc(f.title)})` : ''}${f.faction ? `: ${esc(f.faction)}` : ''}${f.sentence ? `. ${esc(f.sentence)}` : ''}`)) : null,
     hooks.length ? md('', '## Threads to pull', hooks.map(h =>
       `- ${esc(hookText(h.hook))} *(${esc(h.sourceName)})*`)) : null,
   ) || null;
@@ -164,7 +164,7 @@ function notableNpcPage(n) {
       bullet(typeof s === 'string' ? s : (s.text || s.description || s.what || '')))) : null,
     n.plotHooks.length ? md('', '## Hooks', n.plotHooks.map(h => bullet(hookText(h)))) : null,
     n.relationships.length ? md('', '## Relationships', n.relationships.map(r =>
-      bullet(typeof r === 'string' ? r : `${r.with || r.target || r.name || ''}${r.type ? ` — ${r.type}` : ''}${r.description ? `. ${r.description}` : ''}`)) ) : null,
+      bullet(typeof r === 'string' ? r : `${r.with || r.target || r.name || ''}${r.type ? `: ${r.type}` : ''}${r.description ? `. ${r.description}` : ''}`)) ) : null,
   ) || null;
 }
 
@@ -195,11 +195,11 @@ function powerPage(vm) {
     kv('Stability', typeof p.stability === 'object' ? (p.stability?.label ?? p.stability?.value) : p.stability),
     p.legitimacy?.score != null ? kv('Public legitimacy', p.legitimacy.score) : null,
     p.factions.length ? md('', '## Factions', p.factions.map(f =>
-      `- **${esc(f.name)}**${f.isGoverning ? ' *(governing)*' : ''} — power ${esc(f.power)}${f.description ? `. ${esc(f.description)}` : ''}`)) : null,
+      `- **${esc(f.name)}**${f.isGoverning ? ' *(governing)*' : ''}: power ${esc(f.power)}${f.description ? `. ${esc(f.description)}` : ''}`)) : null,
     p.tensions.length ? md('', '## Tensions', p.tensions.map(tn =>
-      `- **${esc(tn.label || 'Tension')}**${tn.severity ? ` (${esc(tn.severity)})` : ''}${tn.description ? ` — ${esc(tn.description)}` : ''}`)) : null,
+      `- **${esc(tn.label || 'Tension')}**${tn.severity ? ` (${esc(tn.severity)})` : ''}${tn.description ? `: ${esc(tn.description)}` : ''}`)) : null,
     p.conflicts.length ? md('', '## Conflicts', p.conflicts.map(c =>
-      `- **${esc((c.parties || []).join(' vs '))}**${c.intensity ? ` (${esc(c.intensity)})` : ''}${c.issue ? ` — ${esc(c.issue)}` : ''}${c.stakes ? ` Stakes: ${esc(c.stakes)}` : ''}`)) : null,
+      `- **${esc((c.parties || []).join(' vs '))}**${c.intensity ? ` (${esc(c.intensity)})` : ''}${c.issue ? `: ${esc(c.issue)}` : ''}${c.stakes ? ` Stakes: ${esc(c.stakes)}` : ''}`)) : null,
   );
 }
 
@@ -212,7 +212,7 @@ function identityPage(vm) {
     kv('Governing faction', id.anchor.governingName),
     kv('Cultural notes', id.anchor.culturalNotes),
     id.quarters.length ? md('', '## Quarters', id.quarters.map(q =>
-      `- **${esc(q.name)}**${q.description ? ` — ${esc(q.description)}` : ''}${(q.landmarks || []).length ? ` Landmarks: ${q.landmarks.map(esc).join(', ')}.` : ''}`)) : null,
+      `- **${esc(q.name)}**${q.description ? `: ${esc(q.description)}` : ''}${(q.landmarks || []).length ? ` Landmarks: ${q.landmarks.map(esc).join(', ')}.` : ''}`)) : null,
   ) || null;
 }
 
@@ -238,7 +238,7 @@ function institutionsPage(vm) {
   return md(
     [...byCat.entries()].map(([cat, list]) => md(
       `## ${esc(cap(humanize(cat)))}`,
-      list.map(i => `- **${esc(i.name)}**${i.status && i.status !== 'healthy' ? ` *(${esc(i.status)})*` : ''}${i.description ? ` — ${esc(i.description)}` : ''}`),
+      list.map(i => `- **${esc(i.name)}**${i.status && i.status !== 'healthy' ? ` *(${esc(i.status)})*` : ''}${i.description ? `: ${esc(i.description)}` : ''}`),
       '',
     )),
   );
@@ -256,9 +256,9 @@ function economicsPage(vm) {
     kv('Imports', (e.primaryImports || []).map(x => label(x)).filter(Boolean).join(', ')),
     fb.display ? kv('Food', fb.display) : (fb.deficit ? kv('Food deficit', fb.deficit) : kv('Food surplus', fb.surplus)),
     (e.incomeSources || []).length ? md('', '## Income', e.incomeSources.map(s =>
-      `- ${esc(label(s.source) || s.source)} — ${esc(Math.round(s.percentage))}%`)) : null,
+      `- ${esc(label(s.source) || s.source)}: ${esc(Math.round(s.percentage))}%`)) : null,
     (e.chains || []).length ? md('', '## Supply chains', e.chains.map(c =>
-      `- **${esc(c.name)}** *(${esc(c.status)})*${c.description ? ` — ${esc(c.description)}` : ''}`)) : null,
+      `- **${esc(c.name)}** *(${esc(c.status)})*${c.description ? `: ${esc(c.description)}` : ''}`)) : null,
   );
 }
 
@@ -291,9 +291,9 @@ function defensePage(vm) {
     kv('Safety', d.safetyLabel),
     d.militaryStress ? kv('Military status', d.militaryStress.label || humanize(d.militaryStress.type)) : null,
     forces.length ? md('', '## Armed forces', forces.map(f =>
-      bullet(typeof f === 'string' ? f : `${f.name || ''}${f.desc ? ` — ${f.desc}` : ''}${f.source ? ` (${f.source})` : ''}`)) ) : null,
+      bullet(typeof f === 'string' ? f : `${f.name || ''}${f.desc ? `: ${f.desc}` : ''}${f.source ? ` (${f.source})` : ''}`)) ) : null,
     (d.criminalOps || []).length ? md('', '## Criminal operations', d.criminalOps.map(o =>
-      `- **${esc(o.name)}**${o.note ? ` — ${esc(o.note)}` : ''}`)) : null,
+      `- **${esc(o.name)}**${o.note ? `: ${esc(o.note)}` : ''}`)) : null,
     (d.vulnerabilities || []).length ? md('', '## Vulnerabilities',
       d.vulnerabilities.map(v => bullet(typeof v === 'string' ? v : (v?.label || v?.description || '')))) : null,
   );
@@ -312,7 +312,7 @@ function historyPage(vm) {
     f.initialChallenge ? kv('Initial challenge', f.initialChallenge) : null,
     f.overcoming ? kv('How it was overcome', f.overcoming) : null,
     (h.events || []).length ? md('', '## Historical events', h.events.map(e =>
-      `- **${esc(e.title || humanize(e.type || 'Event'))}**${e.yearsAgo != null ? ` *(${esc(e.yearsAgo)} years ago)*` : ''}${e.description ? ` — ${esc(e.description)}` : ''}`)) : null,
+      `- **${esc(e.title || humanize(e.type || 'Event'))}**${e.yearsAgo != null ? ` *(${esc(e.yearsAgo)} years ago)*` : ''}${e.description ? `: ${esc(e.description)}` : ''}`)) : null,
   );
 }
 
@@ -324,7 +324,7 @@ function viabilityPage(vm) {
     kv('Verdict', v.verdict ? humanize(v.verdict) : null),
     v.summary ? md('', esc(v.summary)) : null,
     (v.issues || []).length ? md('', '## Issues', v.issues.map(i =>
-      `- **${esc(i.title || 'Issue')}**${i.severity ? ` (${esc(i.severity)})` : ''}${i.description ? ` — ${esc(i.description)}` : ''}`)) : null,
+      `- **${esc(i.title || 'Issue')}**${i.severity ? ` (${esc(i.severity)})` : ''}${i.description ? `: ${esc(i.description)}` : ''}`)) : null,
   );
 }
 
@@ -340,7 +340,7 @@ function relationshipsPage(vm) {
   return md(
     lede(relationshipsHeadline(r)),
     (r.neighbours || []).length ? md('', '## Neighbours', r.neighbours.map(n =>
-      `- **${esc(n.name)}**${n.type ? ` *(${esc(humanize(n.type))})*` : ''}${n.description ? ` — ${esc(n.description)}` : ''}`)) : null,
+      `- **${esc(n.name)}**${n.type ? ` *(${esc(humanize(n.type))})*` : ''}${n.description ? `: ${esc(n.description)}` : ''}`)) : null,
     pr && (prHeading || prProse)
       ? md('', '## Prominent relationship', bullet(prHeading), prProse ? esc(prProse) : null)
       : null,
@@ -358,7 +358,7 @@ function timelinePage(vm, { faithUnlocked = false } = {}) {
     const ev = en?.event || {};
     const title = ev.description || humanize(ev.type || 'event');
     const when = ev.inWorldDate ? ` *(${esc(ev.inWorldDate)})*` : '';
-    const summary = en?.narrativeSummary ? ` — ${esc(en.narrativeSummary)}` : '';
+    const summary = en?.narrativeSummary ? `: ${esc(en.narrativeSummary)}` : '';
     return `- **${esc(title)}**${when}${summary}`;
   }));
 }
@@ -375,14 +375,14 @@ function faithWarPage(vm) {
     (lw.besiegedBy || []).length ? kv('Under siege', `${lw.besiegedBy.join(', ')} at the walls`) : null,
     lw.occupied ? kv('Occupied', `held by ${lw.occupied.occupier}`) : null,
     lw.mobilization ? kv('Mobilization', lw.mobilization.phrase) : null,
-    lw.army ? kv('Army in the field', `marching on ${lw.army.targetName} — ${lw.army.remainingPhrase}; ${lw.army.conditionPhrase}`) : null,
+    lw.army ? kv('Army in the field', `marching on ${lw.army.targetName}: ${lw.army.remainingPhrase}; ${lw.army.conditionPhrase}`) : null,
     (lw.tradeWars || []).length ? md('', '## Trade wars', lw.tradeWars.map(p =>
       bullet(p.role === 'supplier'
         ? `Now the primary supplier of ${p.commodityLabel} to ${p.buyer}.`
         : p.role === 'displaced'
           ? `Displaced as supplier of ${p.commodityLabel} to ${p.buyer}.`
           : `Contesting ${p.commodityLabel} (${p.buyer}).`))) : null,
-    deity ? md('', `## Patron deity — ${esc(deity.name)}`,
+    deity ? md('', `## Patron deity: ${esc(deity.name)}`,
       kv('Rank', deity.rankAxis ? cap(deity.rankAxis) : null),
       kv('Alignment', deity.alignmentAxis ? cap(deity.alignmentAxis) : null),
       // W-FAITH F7c: the derivation's word off the liveWorld slice; neutral is
@@ -392,11 +392,11 @@ function faithWarPage(vm) {
       (deity.effects || []).length ? md('', '### Faith effects', deity.effects.map(bullet)) : null,
     ) : null,
     (lw.livePantheon || []).length > 1 ? md('', '## Living pantheon', lw.livePantheon.map(d =>
-      `- **${esc(d.name)}**${d.isPatron ? ' *(patron)*' : ''} — ${esc(d.share)}% · ${esc(cap(d.standing))}`)) : null,
+      `- **${esc(d.name)}**${d.isPatron ? ' *(patron)*' : ''}: ${esc(d.share)}% · ${esc(cap(d.standing))}`)) : null,
     (lw.cults || []).length ? kv('Cults', lw.cults.map(c => `${c.name}${c.alignmentAxis ? ` (${c.alignmentAxis})` : ''}`).join(', ')) : null,
     lw.mandate ? kv('Divine mandate', lw.mandate.phrase || lw.mandate) : null,
     (lw.pantheon || []).length ? md('', '## Realm pantheon', lw.pantheon.map(p =>
-      `- **${esc(p.name)}** — ${esc(cap(p.tier))}, ${esc(p.seats)} seat${p.seats === 1 ? '' : 's'}`)) : null,
+      `- **${esc(p.name)}**: ${esc(cap(p.tier))}, ${esc(p.seats)} seat${p.seats === 1 ? '' : 's'}`)) : null,
     (lw.realmArcs || []).length ? md('', '## Realm arcs', lw.realmArcs.map(a => bullet(a))) : null,
   ) || null;
 }

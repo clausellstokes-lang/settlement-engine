@@ -69,6 +69,8 @@ import { landing } from '../../src/copy/landing.js';
 import { pricingPage } from '../../src/copy/pricingPage.js';
 import { footer } from '../../src/copy/footer.js';
 import { deityAuthoring } from '../../src/copy/deityAuthoring.js';
+import { parse } from 'espree';
+
 import { extractJsxProseStrings, scanJsxTree } from '../helpers/jsxLiteralWalk.js';
 import { writeShrinkOnlyBaseline } from '../helpers/shrinkOnlyBaseline.js';
 
@@ -99,7 +101,7 @@ const REGISTRIES = { en, landing, pricingPage, footer, deityAuthoring };
  * skipping // and /* *\/ comments and `${…}` template expressions.
  * @param {string} src @returns {string[]}
  */
-function stringLiteralContents(src) {
+function charScanStringContents(src) {
   const out = [];
   let i = 0;
   const n = src.length;
@@ -138,6 +140,69 @@ function stringLiteralContents(src) {
     }
     i++;
   }
+  return out;
+}
+
+/**
+ * ⛔ THE CHAR TOKENIZER WAS A FALSE INSTRUMENT, and it lied in BOTH directions.
+ * (Measured 2026-09-03, lane PARSER-3, against a real parser over the same files.)
+ *
+ * 1. IT HAS NO NOTION OF A REGEX LITERAL. A `'` inside `/[^']/` opens a string
+ *    that swallows the code after it, so whatever punctuation that code contains
+ *    is counted as reader copy. `src/generators/structuralValidator.js` measured
+ *    **39 exclamation points by the tokenizer and 0 by a parser**;
+ *    `generationCoherence.js` 10 vs 0; `npcGenerator.js` 7 em vs 0. Over the
+ *    directories an extension would add, **64 of 71 exclamation points were
+ *    phantom**.
+ * 2. IT IS BLIND TO A NESTED TEMPLATE. `${…}` collapses to a single space, so a
+ *    template inside an interpolation is never scanned at all — real reader prose
+ *    the ban governs, invisible. `subsystemRowsMemory.js` measured 1 em by the
+ *    tokenizer and 10 by a parser; `journalPages.js` 1 vs 3.
+ *
+ * Both defects sat INSIDE the covered surface, so the committed baseline was
+ * measured against a counter that could not see straight. This replaces it with
+ * the same parser the repo already uses for JSX-aware scanning (`espree`, per
+ * tests/helpers/jsxLiteralWalk.js and tests/lint/rawColorLiteral.test.js).
+ * Interpolation HOLES remain excluded — they are expressions, not string content
+ * — which is the handling the JSX helper documents and this file always intended.
+ *
+ * ⭐ DECLARED MEASUREMENT SHIFT, src/data + src/domain, at this lane's tip:
+ * **em 290 → 295, bang 15 → 8.** The em rise is debt the guard was BLIND to; the
+ * bang fall is phantom debt it INVENTED. Against the committed baseline (em 455,
+ * bang 10) both totals now FALL, which is what makes the documented shrink-only
+ * refreeze legal at all: under the old counter `bang 10 → 15` ROSE, so
+ * writeShrinkOnlyBaseline would have REFUSED to bank this lane's own shrink.
+ *
+ * The char scanner is kept as a FALLBACK rather than deleted: if a file ever fails
+ * to parse, degraded counting beats a silent zero (the dormancy hazard).
+ *
+ * @param {string} src @returns {string[]}
+ */
+function stringLiteralContents(src) {
+  /** @type {string[]} */
+  const out = [];
+  /** @type {import('espree').Node} */
+  let ast;
+  try {
+    ast = /** @type {any} */ (parse(src, { ecmaVersion: 'latest', sourceType: 'module', range: true }));
+  } catch {
+    return charScanStringContents(src);
+  }
+  /** @param {any} node */
+  const visit = (node) => {
+    if (!node || typeof node !== 'object') return;
+    if (Array.isArray(node)) { node.forEach(visit); return; }
+    if (!node.type) return;
+    if (node.type === 'Literal' && typeof node.value === 'string') out.push(node.value);
+    if (node.type === 'TemplateLiteral') {
+      for (const q of node.quasis) out.push(String(q.value.cooked ?? q.value.raw));
+    }
+    for (const k of Object.keys(node)) {
+      if (k === 'range' || k === 'loc' || k === 'parent') continue;
+      visit(node[k]);
+    }
+  };
+  visit(ast);
   return out;
 }
 

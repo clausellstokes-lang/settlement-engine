@@ -336,7 +336,7 @@ ALSO LIVE: whatPhrase subject "an allied court reckoning its wartime cost" [J-LE
 1. {settlement}'s surviving current-episode evidence reads {band}; no lifetime total is invented. `[live, verbatim]` · `requiredSlots: ['settlement','band']`
 2. The read uses deployed strength, recorded attrition, live exposure, and attributable home-front evidence. `[live, verbatim]` · `requiredSlots: []`
 3. Damage that healed or left the bounded record is silence in this reckoning. `[live, verbatim]` · `requiredSlots: []`
-4. What the alliance cost was never written down as a total — it is what the other books already say. `[live, verbatim]` · `requiredSlots: []`
+4. What the alliance cost was never written down as a total. It is what the other books already say. `[live, verbatim]` · `requiredSlots: []`
 5. The reckoning exists whether or not the coalition wants to hold it. `[live, verbatim]` · `requiredSlots: []`
 6. The tally was read at the table, and nobody asked to have it read twice. `requiredSlots: []`
 7. A factor down from the coast asked what the alliance had cost and was given a band, not a figure. `requiredSlots: []`

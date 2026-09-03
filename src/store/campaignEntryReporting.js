@@ -11,7 +11,7 @@ export const CAMPAIGN_REPORTING_LEASE = Symbol.for(
 );
 
 const SYNC_FAILURE_MESSAGE = 'Some changes could not be saved to the cloud. '
-  + 'They are applied locally but may not persist — check your connection, then reload to confirm.';
+  + 'They are applied locally but may not persist: check your connection, then reload to confirm.';
 
 /** Clear owner-scoped warning/status together at an account boundary. */
 export function clearCampaignOwnerReporting(state, nextOwnerId) {

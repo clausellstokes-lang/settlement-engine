@@ -225,7 +225,7 @@ export async function generateNarrative(type, settlement, settlementId, opts = {
   // 'aborted' (previously dead code — no path produced an abort here).
   const makeAbortError = () => {
     const e = new Error(idleTimedOut
-      ? 'AI generation stalled — the server stopped responding partway through. Please try again.'
+      ? 'AI generation stalled: the server stopped responding partway through. Please try again.'
       : 'AI generation was cancelled.');
     e.name = 'AbortError';
     return e;
@@ -407,7 +407,7 @@ export async function generateNarrative(type, settlement, settlementId, opts = {
   // Surface it so the caller retries instead of persisting a partial (but
   // credit-charged) generation as if it were complete.
   if (!sawDone) {
-    throw new Error('AI generation ended without a completion marker (truncated response) — please retry.');
+    throw new Error('AI generation ended without a completion marker (truncated response): please retry.');
   }
   return { result, creditsRemaining, type: finalType, partialFailure, failedFields, succeededFields };
 }
@@ -420,7 +420,7 @@ async function mockGenerate(type, settlement, onField) {
 
   if (type === 'narrative') {
     // Mock refinement architecture: thesis + a couple of refined sections
-    const thesis = `${name} is a settlement that remembers its debts. The old charter is signed but the signatures mean different things to different people — and the people who know the difference are the ones who decide which doors open after dark.`;
+    const thesis = `${name} is a settlement that remembers its debts. The old charter is signed but the signatures mean different things to different people, and the people who know the difference are the ones who decide which doors open after dark.`;
     await delay(400);
     try { onField?.('thesis', thesis); } catch (_) {}
 
@@ -431,7 +431,7 @@ async function mockGenerate(type, settlement, onField) {
       refinedSettlement.institutions = refinedSettlement.institutions.map((inst, _i) => ({
         ...inst,
         description: (inst?.description || inst?.detail || 'An institution of the settlement.') +
-          ' (Mock refinement — the real narrator would thread the thesis through this description.)',
+          ' (Mock refinement: the real narrator would thread the thesis through this description.)',
       }));
       await delay(300);
       try { onField?.('institutions', refinedSettlement.institutions); } catch (_) {}

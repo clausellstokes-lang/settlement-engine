@@ -109,7 +109,7 @@ function shareBand(share) {
 }
 
 const STRAIN_BANDS = Object.freeze([
-  { floor: 0.5, band: 'crumbling', phrase: 'its bonds are fraying badly — the crumbling has begun' },
+  { floor: 0.5, band: 'crumbling', phrase: 'its bonds are fraying badly. The crumbling has begun' },
   { floor: 0.0001, band: 'fraying', phrase: 'a few of its bonds are strained' },
   { floor: 0, band: 'firm', phrase: 'its bonds hold firm' },
 ]);

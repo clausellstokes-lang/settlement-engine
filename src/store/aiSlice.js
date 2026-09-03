@@ -517,7 +517,7 @@ export const createAiSlice = (set, get) => ({
       });
       get().updateSavedSettlement(saveId, { aiData });
       if (!(await persistSaveUpdate(saveId, { aiData }))) {
-        set(state => { state.aiError = 'Narrative generated but save failed — it may not persist across sessions.'; });
+        set(state => { state.aiError = 'Narrative generated but save failed. It may not persist across sessions.'; });
       }
 
       // Chronicle: after a successful generation, append an entry logging this
@@ -730,7 +730,7 @@ export const createAiSlice = (set, get) => ({
       });
       get().updateSavedSettlement(saveId, { aiData });
       if (!(await persistSaveUpdate(saveId, { aiData }))) {
-        set(state => { state.aiError = 'Daily life generated but save failed — it may not persist across sessions.'; });
+        set(state => { state.aiError = 'Daily life generated but save failed. It may not persist across sessions.'; });
       }
     } catch (e) {
       // F19 — 'abandon' leaves cleanup to the owner; otherwise release the lock.
@@ -949,7 +949,7 @@ export const createAiSlice = (set, get) => ({
       });
       get().updateSavedSettlement(saveId, { aiData });
       if (!(await persistSaveUpdate(saveId, { aiData }))) {
-        set(state => { state.aiError = 'Progression generated but save failed — it may not persist across sessions.'; });
+        set(state => { state.aiError = 'Progression generated but save failed. It may not persist across sessions.'; });
       }
 
       // Chronicle: record the progression with its human-readable trigger so
@@ -1154,7 +1154,7 @@ export const createAiSlice = (set, get) => ({
     // prose while the durable write was queued to remove it — the two disagreed).
     get().updateSavedSettlement(saveId, { aiData });
     if (!(await persistSaveUpdate(saveId, { aiData }))) {
-      set(state => { state.aiError = 'Reverted in view but save failed — it may persist on reload.'; });
+      set(state => { state.aiError = 'Reverted in view but save failed. It may persist on reload.'; });
     }
   },
 });

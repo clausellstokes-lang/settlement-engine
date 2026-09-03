@@ -378,7 +378,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
     },
     narrate(event) {
       const cause = event.payload?.cause ? ` (${event.payload.cause})` : '';
-      return `${labelOf(event.targetId)} — the settlement's leader — is gone${cause}.`;
+      return `${labelOf(event.targetId)} (the settlement's leader) is gone${cause}.`;
     },
   },
 
@@ -410,7 +410,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
     },
     narrate(event) {
       const org = event.payload?.criminalInstitution;
-      return `${labelOf(event.targetId)} has been turned${org ? ` by the ${org}` : ''} — corruption takes root in the shadows.`;
+      return `${labelOf(event.targetId)} has been turned${org ? ` by the ${org}` : ''}. Corruption takes root in the shadows.`;
     },
   },
 
@@ -750,7 +750,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
       return { resilience: -10, resourcePressure: +18 };
     },
     narrate(event) {
-      return `${labelOf(event.targetId)} is gone — no longer worked, no longer counted on.`;
+      return `${labelOf(event.targetId)} is gone. No longer worked, no longer counted on.`;
     },
   },
 
@@ -773,7 +773,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
       return { resourcePressure: +Math.round(mag * 8), resilience: -Math.round(mag * 4) };
     },
     narrate(event) {
-      return `Grain wagons rolled to ${labelOf(event.targetId)} — relief by decree.`;
+      return `Grain wagons rolled to ${labelOf(event.targetId)}: relief by decree.`;
     },
   },
 
@@ -787,7 +787,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
       return { resourcePressure: +Math.round(mag * 5), resilience: -Math.round(mag * 2) };
     },
     narrate(event) {
-      return `A measure of grain went to ${labelOf(event.targetId)} — as a loan, not a gift.`;
+      return `A measure of grain went to ${labelOf(event.targetId)}: as a loan, not a gift.`;
     },
   },
 

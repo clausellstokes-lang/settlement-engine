@@ -301,7 +301,7 @@ function describeCluster(members) {
     for (const b of members) {
       if (a === b) continue;
       const rev = reversalSignal(a.receipt, b.receipt);
-      if (rev) { conflicting = true; conflictText = `your ${a.kind} was undone by your ${b.kind} — ${rev}`; break; }
+      if (rev) { conflicting = true; conflictText = `your ${a.kind} was undone by your ${b.kind}: ${rev}`; break; }
     }
     if (conflicting) break;
   }

@@ -238,7 +238,7 @@ registerStep('resolveConfig', {
       result: 'rolled',
       causes: [{
         source: 'config.terrainOverride=auto',
-        reason: 'Terrain not pinned — weighted-rolled from regional pool.',
+        reason: 'Terrain not pinned: weighted-rolled from regional pool.',
       }],
       downstreamEffects: [
         { target: 'tradeRoutePool', effect: 'terrain-constrained' },
@@ -258,7 +258,7 @@ registerStep('resolveConfig', {
       result: 'derived',
       causes: [{
         source: `config.tradeRouteAccess=${config.tradeRouteAccess || 'road'}`,
-        reason: `Terrain left on 'auto' with an explicit trade route — derived from the route (${config.tradeRouteAccess || 'road'} → ${terrainType}). Pick a terrain override or 'random_trade' for a weighted terrain roll.`,
+        reason: `Terrain left on 'auto' with an explicit trade route: derived from the route (${config.tradeRouteAccess || 'road'} → ${terrainType}). Pick a terrain override or 'random_trade' for a weighted terrain roll.`,
       }],
       downstreamEffects: [
         { target: 'resourcePool', effect: 'terrain-biased' },
@@ -333,7 +333,7 @@ registerStep('resolveConfig', {
       result: 'overridden',
       causes: [{
         source: `config.monsterThreat=${config.monsterThreat}`,
-        reason: 'Explicit plagued-tier threat with priorityMilitary below 25 — a settlement under that pressure cannot field less than a skeleton garrison.',
+        reason: 'Explicit plagued-tier threat with priorityMilitary below 25. A settlement under that pressure cannot field less than a skeleton garrison.',
       }],
       downstreamEffects: [
         { target: 'priorityMilitary', effect: 'floored to 25' },
@@ -349,7 +349,7 @@ registerStep('resolveConfig', {
       result: 'rolled',
       causes: [{
         source: config.culture ? `config.culture=${config.culture}` : 'config.culture=null',
-        reason: 'Culture not pinned — picked from canonical 11-culture catalog.',
+        reason: 'Culture not pinned: picked from canonical 11-culture catalog.',
       }],
       downstreamEffects: [
         { target: 'namePool',          effect: 'culture-scoped' },

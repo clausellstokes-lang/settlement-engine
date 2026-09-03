@@ -680,7 +680,7 @@ function nameOf(id, nameFor) {
 export const HEADLINE_FRAMES = Object.freeze({
   firsthand: Object.freeze([
     '{What} in {where}',
-    '{What} — and {where} sees it firsthand',
+    '{What}, and {where} sees it firsthand',
     '{What}, here in {where}',
     '{What} in {where}, for all to see',
   ]),

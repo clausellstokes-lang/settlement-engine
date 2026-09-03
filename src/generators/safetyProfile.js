@@ -87,7 +87,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     safetyLabels.push('Controlled — Occupation Curfew');
     safetyDescs.push(
       `Movement is restricted and monitored. ${curfewAuthority} curfew and checkpoint protocols. ` +
-      `Common crime is suppressed by authoritarian presence — residents face little risk from thieves ` +
+      `Common crime is suppressed by authoritarian presence. Residents face little risk from thieves ` +
       `and considerably more from informers and occupation officials. Resistance activity operates underground.`
     );
   }
@@ -116,7 +116,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
   }
 
   if (hasStress('plague_onset')) {
-    const strainLabel = safetyRatio >= 2 ? 'Quarantined' : safetyRatio >= 1 ? 'Restricted' : 'Dangerous — Plague Unrest';
+    const strainLabel = safetyRatio >= 2 ? 'Quarantined' : safetyRatio >= 1 ? 'Restricted' : 'Dangerous: Plague Unrest';
     const quarRef = inst.hasGarrison ? 'The garrison enforces quarantine zones'
                   : inst.hasWatch    ? 'The watch manages quarantine compliance'
                   :                    'Informal community enforcement maintains quarantine';
@@ -230,7 +230,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     const crimeRef = inst.hasThievesGuild ? "The thieves' guild" : 'Organized crime';
     const garNote  = inst.hasGarrison ? ' The garrison takes orders from criminal leadership.' : '';
     safetyDesc = `There is no meaningful distinction between criminal organizations and civil authority here. ` +
-      `${crimeRef} provides order of a sort — its own. Protection must be purchased; those who cannot pay are unprotected.${garNote}`;
+      `${crimeRef} provides order of a sort: its own. Protection must be purchased; those who cannot pay are unprotected.${garNote}`;
   // ── Safety label thresholds ─────────────────────────────────────────────
   // effectiveSafety = max(militaryEffective/criminalEffective, communityBonus, courtFloor)
   // Intended meaning:
@@ -268,7 +268,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     safetyLabel = 'Moderate';
     const lawRef  = inst.hasGarrison ? 'The garrison patrols' : inst.hasWatch ? 'The watch covers'
                   : inst.hasMilitia  ? 'Militia volunteers patrol' : 'Locals watch over';
-    const wallNote = inst.hasWalls ? ' The walls contain the problem somewhat — crime is concentrated inside rather than spilling into the surrounding territory.' : '';
+    const wallNote = inst.hasWalls ? ' The walls contain the problem somewhat: crime is concentrated inside rather than spilling into the surrounding territory.' : '';
     safetyDesc = `A mix of safer and more exposed areas. ${lawRef} the main paths; quieter spots after dark carry genuine risk. ` +
       `Residents know which corners to avoid.${wallNote}`;
   } else if (effectiveSafety >= 0.6) {
@@ -276,7 +276,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     const lawRef =
       inst.hasGarrison  ? 'The garrison is overwhelmed or corrupt.'   :
       inst.hasWatch      ? 'The watch is stretched far beyond its capacity.' :
-      inst.hasMilitia    ? 'The militia cannot maintain consistent coverage — they have other jobs to do.' :
+      inst.hasMilitia    ? 'The militia cannot maintain consistent coverage. They have other jobs to do.' :
       inst.hasMercenary  ? 'The mercenary company focuses on protecting those who pay them, not the general population.' :
                            'There is no meaningful guard presence.';
     const wallNote = inst.hasWalls ? " Walls slow entry but don't solve what happens inside them." : '';
@@ -284,12 +284,12 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
   } else {
     safetyLabel = 'Dangerous';
     const lawRef =
-      inst.hasGarrison  ? 'The garrison is a formality — present on paper, absent in practice.' :
+      inst.hasGarrison  ? 'The garrison is a formality: present on paper, absent in practice.' :
       inst.hasWatch      ? 'The watch cannot respond effectively; reports are filed and forgotten.' :
       inst.hasMilitia    ? 'The militia musters for emergencies only; day-to-day crime is uncontested.' :
       inst.hasMercenary  ? 'The mercenary company has effectively become another criminal faction.' :
                            'There is effectively no law enforcement.';
-    const wallNote   = inst.hasWalls ? ' Even the walls provide limited protection — the threat is within.' : '';
+    const wallNote   = inst.hasWalls ? ' Even the walls provide limited protection. The threat is within.' : '';
     const courtNote  = inst.hasCourtSystem ? '' : ' With no court system, violence is the primary means of dispute resolution.';
     safetyDesc = `Violence and theft are routine. ${lawRef} Residents protect themselves through community networks or tribute paid to whoever controls their street.${courtNote}${wallNote}`;
   }
@@ -321,33 +321,33 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       guardEffectivenessDesc = `The ${lawRef} is well-organized but deployed as an instrument of state extraction rather than public protection. ` +
         `Loyalty is to whoever controls the payroll.${prisonNote}`;
     } else if (flags.militaryEffective < 30 && pri.economy < 35) {
-      const militiaNote = inst.hasMilitia ? ' — these are volunteers with day jobs, not soldiers' : '';
+      const militiaNote = inst.hasMilitia ? ': these are volunteers with day jobs, not soldiers' : '';
       guardEffectivenessDesc = `The ${lawRef} exists on paper. Chronically underpaid and poorly equipped${militiaNote}. ` +
         `Susceptible to bribery; enforcers who can be bought by whoever has coin.${prisonNote}`;
     } else if (stress.merchantArmy) {
       const secRef = inst.hasMercenary ? 'mercenary companies' : 'private security';
       const guildRef = inst.hasMerchantGuild ? 'The merchant guilds' : 'Wealthy interests';
-      guardEffectivenessDesc = `Public law enforcement is largely a formality. ${guildRef} maintain their own ${secRef} — ` +
+      guardEffectivenessDesc = `Public law enforcement is largely a formality. ${guildRef} maintain their own ${secRef}: ` +
         `real protection exists, but only for those with the right associations.${prisonNote}`;
     } else if (inst.hasMilitia && !inst.hasGarrison && !inst.hasWatch) {
       if (flags.militaryEffective >= 55) {
-        guardEffectivenessDesc = `The citizen militia is well-organized and motivated — these are people defending their own homes and livelihoods, which counts for something. ` +
+        guardEffectivenessDesc = `The citizen militia is well-organized and motivated. These are people defending their own homes and livelihoods, which counts for something. ` +
           `Coverage is irregular by professional standards, but local knowledge compensates.${prisonNote}${wallNote}`;
       } else {
         guardEffectivenessDesc = `The citizen militia musters when needed but cannot maintain consistent patrol. ` +
           `Volunteers with other work to do; reliable in a crisis, absent during routine crime.${prisonNote}`;
       }
     } else if (inst.hasMercenary && !inst.hasGarrison) {
-      guardEffectivenessDesc = `A mercenary company provides enforcement — professional and effective, but loyal to the contract, not the community. ` +
+      guardEffectivenessDesc = `A mercenary company provides enforcement: professional and effective, but loyal to the contract, not the community. ` +
         `When the coin stops, so does the protection.${prisonNote}${wallNote}`;
     } else if (inst.hasCharterHall && !inst.hasGarrison && !inst.hasWatch) {
-      guardEffectivenessDesc = `The adventurers' charter hall coordinates emergency response to threats — effective for monster incursions and major disturbances, ` +
+      guardEffectivenessDesc = `The adventurers' charter hall coordinates emergency response to threats. Effective for monster incursions and major disturbances, ` +
         `less so for routine crime prevention. Not a police force.${prisonNote}`;
     } else if (flags.militaryEffective >= 65 && pri.economy >= 50) {
       guardEffectivenessDesc = `The ${lawRef} is well-funded, properly equipped, and maintains meaningful patrol coverage. ` +
         `Response times are adequate; bribery exists but isn't normalized.${prisonNote}${wallNote}`;
     } else if (flags.militaryEffective >= 65 && pri.economy < 40) {
-      guardEffectivenessDesc = `The ${lawRef} is disciplined but resource-constrained — motivated with inadequate equipment and irregular pay. ` +
+      guardEffectivenessDesc = `The ${lawRef} is disciplined but resource-constrained: motivated with inadequate equipment and irregular pay. ` +
         `Effective in a fight; vulnerable to sustained corruption.${prisonNote}${wallNote}`;
     } else {
       guardEffectivenessDesc = `The ${lawRef} maintains standard patrol coverage. Effective against opportunistic crime; ` +
@@ -370,7 +370,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     const garRef = inst.hasGarrison ? 'the garrison' : 'armed officials';
     crimeTypes.push({
       type: 'State predation',
-      desc: `The primary threat comes from institutional actors — ${garRef} using their authority for personal extraction. ` +
+      desc: `The primary threat comes from institutional actors: ${garRef} using their authority for personal extraction. ` +
             'Tax extortion, forced confiscations, and selective enforcement targeting those without political connections.',
     });
   }
@@ -401,7 +401,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       : 'Religious structures provide cover';
     crimeTypes.push({
       type: 'Religious fraud',
-      desc: `${coverClause} for sophisticated fraud — fake relics, forged dispensations, and corrupt clergy who treat their position as a commercial opportunity.`,
+      desc: `${coverClause} for sophisticated fraud. Fake relics, forged dispensations, and corrupt clergy who treat their position as a commercial opportunity.`,
     });
   }
   if (stress.merchantCriminalBlur) {
@@ -414,11 +414,11 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
   if (flags.criminalEffective >= 60 && pri.economy >= 60 &&
       !stress.merchantCriminalBlur && inst.hasThievesGuild) {
     const courtNote = inst.hasCourtSystem && inst.hasPrison
-      ? ' Guild operations are careful and layered — they keep enough distance from violent crime that prosecution is difficult.'
+      ? ' Guild operations are careful and layered. They keep enough distance from violent crime that prosecution is difficult.'
       : ' With no reliable court system to fear, operations are conducted openly enough to be an open secret.';
     crimeTypes.push({
       type: 'Organized guild crime',
-      desc: `The thieves' guild is well-funded and structured — protection rackets, sophisticated smuggling operations, and contract services for discerning clients.${courtNote}`,
+      desc: `The thieves' guild is well-funded and structured. Protection rackets, sophisticated smuggling operations, and contract services for discerning clients.${courtNote}`,
     });
   }
   // Survival crime: requires either a criminal institution OR a settlement large enough
@@ -427,7 +427,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
   if (flags.criminalEffective >= 48 && pri.economy < 35 && !_isSmallCommunity) {
     crimeTypes.push({
       type: 'Survival crime',
-      desc: 'Theft driven by economic desperation rather than organization. No criminal infrastructure — just too many people with too little, doing what they must to survive.',
+      desc: 'Theft driven by economic desperation rather than organization. No criminal infrastructure: just too many people with too little, doing what they must to survive.',
     });
   }
   if (flags.criminalEffective >= 45 && pri.magic >= 48 &&
@@ -435,33 +435,33 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     const magRef = inst.hasWizardTower ? 'tower resources' : inst.hasAlchemist ? 'alchemical knowledge' : 'magical ability';
     crimeTypes.push({
       type: 'Magical crime',
-      desc: `Practitioners misuse ${magRef} for profit — identity alteration, scrying, alchemical fraud, or targeted curses-for-hire.`,
+      desc: `Practitioners misuse ${magRef} for profit. Identity alteration, scrying, alchemical fraud, or targeted curses-for-hire.`,
     });
   }
   if (inst.hasSmuggling) {
     const routeType = inst.hasPort ? 'port-based' : 'overland';
     const gateNote  = inst.hasGates
-      ? " The settlement's gates and walls are checkpoints that smugglers work around — bribing officials, using hidden routes, or moving shipments at shift changes."
+      ? " The settlement's gates and walls are checkpoints that smugglers work around. Bribing officials, using hidden routes, or moving shipments at shift changes."
       : ' The lack of controlled entry points makes movement relatively easy; no gates to bribe and no checkpoints to avoid.';
     const prosecuteNote = inst.hasPrison && inst.hasCourtSystem
-      ? ' Arrests do happen — prosecution is real, which is why the network is careful.'
+      ? ' Arrests do happen. Prosecution is real, which is why the network is careful.'
       : inst.hasPrison
       ? ' Offenders can be jailed, but without consistent courts, enforcement is sporadic.'
-      : ' Without prison or courts, the risk of operating is low — arrest means a fine at worst.';
+      : ' Without prison or courts, the risk of operating is low. Arrest means a fine at worst.';
     crimeTypes.push({
       type: 'Smuggling',
       desc: `An active ${routeType} smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol schedules.${gateNote}${prosecuteNote}`,
     });
   }
   if (inst.hasGangInfra && crimeTypes.length === 0) {
-    const garRef  = inst.hasGarrison ? ' The garrison acknowledges the problem but focuses on the walls and gates — interior policing is under-resourced.'
+    const garRef  = inst.hasGarrison ? ' The garrison acknowledges the problem but focuses on the walls and gates. Interior policing is under-resourced.'
                   : inst.hasWatch    ? ' The watch responds to the worst incidents but cannot contest territorial control.'
-                  : inst.hasMilitia  ? ' The militia is composed of locals who know the gangs personally — enforcement is complicated.'
+                  : inst.hasMilitia  ? ' The militia is composed of locals who know the gangs personally. Enforcement is complicated.'
                   :                    ' With no formal guard, the gangs operate without meaningful opposition.';
     const wallNote = inst.hasWalls ? ' District boundaries often follow the old wall lines and alleyways.' : '';
     crimeTypes.push({
       type: 'Street gang activity',
-      desc: `Territorial gangs control specific districts, extorting local businesses and residents. Violence is episodic rather than constant — mostly enforcing territorial boundaries.${garRef}${wallNote}`,
+      desc: `Territorial gangs control specific districts, extorting local businesses and residents. Violence is episodic rather than constant: mostly enforcing territorial boundaries.${garRef}${wallNote}`,
     });
   }
 
@@ -486,11 +486,11 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       });
     } else {
       const courtNote = inst.hasCourtSystem && inst.hasPrison
-        ? ' Consequences exist — offenders risk real prosecution — which keeps serious organised crime from taking root.'
+        ? ' Consequences exist (offenders risk real prosecution) which keeps serious organised crime from taking root.'
         : ' The lack of reliable courts and detention means most offenders face no meaningful consequences.';
       crimeTypes.push({
         type: 'Background crime',
-        desc: `Petty theft, minor fraud, and opportunistic violence are persistent. No single dominant organisation — just the steady pressure of too many people with too little, and too few consequences for taking.${courtNote}`,
+        desc: `Petty theft, minor fraud, and opportunistic violence are persistent. No single dominant organisation: just the steady pressure of too many people with too little, and too few consequences for taking.${courtNote}`,
       });
     }
   }
@@ -504,7 +504,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     addCrimeIfMissing('desperation theft',
       'Hunger-driven theft of food, livestock, and stored goods. Enforcement struggles to distinguish survival crime from organised theft.');
     addCrimeIfMissing('black market food',
-      'Controlled goods — grain, salt, preserved meat — changing hands at extortionate prices through unofficial channels.');
+      'Controlled goods (grain, salt, preserved meat) changing hands at extortionate prices through unofficial channels.');
   }
   if (hasStress('occupied')) {
     addCrimeIfMissing('resistance activity',
@@ -537,7 +537,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     addCrimeIfMissing('revolt violence',
       'Active armed conflict between revolt participants and security forces in contested districts. Civilians are avoiding specific streets. The watch has abandoned normal patrol patterns.');
     addCrimeIfMissing('escape networks',
-      'Organised infrastructure helping enslaved persons escape — safe houses, forged papers, passage out of the settlement. The same network that was small and cautious is now large and urgent.');
+      'Organised infrastructure helping enslaved persons escape. Safe houses, forged papers, passage out of the settlement. The same network that was small and cautious is now large and urgent.');
     addCrimeIfMissing('informant pressure',
       'Both the authorities and the revolt leadership are pressing people for information. Silence is being interpreted as allegiance. Some residents have left rather than be forced to choose.');
     addCrimeIfMissing('weapons trade',
@@ -620,7 +620,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
 
   let economicDragDesc = null;
   if (blackMarketCapture > 15) {
-    economicDragDesc = `The shadow economy captures an estimated ${blackMarketCapture}% of economic activity — goods moving through unofficial channels, taxes unpaid, and legitimate merchants undercut by operators with no overhead costs.`;
+    economicDragDesc = `The shadow economy captures an estimated ${blackMarketCapture}% of economic activity. Goods moving through unofficial channels, taxes unpaid, and legitimate merchants undercut by operators with no overhead costs.`;
   } else if (blackMarketCapture > 5) {
     economicDragDesc = `A modest shadow economy (~${blackMarketCapture}% of activity) operates alongside legitimate commerce. Noticeable but not yet structurally damaging.`;
   }
@@ -630,14 +630,14 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
 
   if (stress.stateCrime) {
     const _garRef = inst.hasGarrison ? 'the garrison' : 'armed officials';
-    plotHooks.push(`A local family wants evidence of tax extortion gathered quietly — but the extorter wears an official badge.`);
+    plotHooks.push(`A local family wants evidence of tax extortion gathered quietly, but the extorter wears an official badge.`);
   }
   if (stress.crimeIsGovt) {
     const crimeRef = inst.hasThievesGuild ? 'the guild' : 'whoever controls this block';
     plotHooks.push(`Someone approached the party seeking legitimate authority to settle a dispute. The only "authority" here is ${crimeRef}.`);
   }
   if (stress.arcaneBlackMarket) {
-    plotHooks.push("A wizard's tower component went missing. The black market has it. Getting it back means either paying their price or taking it — both have consequences.");
+    plotHooks.push("A wizard's tower component went missing. The black market has it. Getting it back means either paying their price or taking it. Both have consequences.");
   }
   if (stress.religiousFraud) {
     plotHooks.push("A pilgrim paid a fortune for a holy relic that is obviously fake. They want the fraud exposed without losing their faith in the process.");
@@ -646,13 +646,13 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     plotHooks.push("A guild merchant hired the party, then asked them to do something the guild officially forbids. The job was lucrative. The question is who else knows.");
   }
   if (inst.hasSmuggling) {
-    plotHooks.push("The smuggling network is moving something unusual this week — not the normal contraband. Someone wants to know what it is before it arrives.");
+    plotHooks.push("The smuggling network is moving something unusual this week, not the normal contraband. Someone wants to know what it is before it arrives.");
   }
   if (stress.crusaderSynthesis) {
     plotHooks.push("The garrison chaplain and the commander are the same man. He's authorizing military action for reasons that sound theological.");
   }
   if (stress.merchantArmy) {
-    plotHooks.push("The merchant guild's private security force just detained someone — with no legal authority to do so. The watch is looking the other way.");
+    plotHooks.push("The merchant guild's private security force just detained someone, with no legal authority to do so. The watch is looking the other way.");
   }
 
   return {

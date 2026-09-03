@@ -118,7 +118,7 @@ describe('faithPanelModel', () => {
     expect(m.piety.trend).toBe('rising');               // 0.3 → 0.5
     expect(m.piety.bars).toHaveLength(3);               // authority / institutions / devotion
     expect(m.piety.amplifier.dir).toBe('up');
-    expect(m.piety.sentences).toContain('The town no longer lives like its god — devotion is ebbing.');
+    expect(m.piety.sentences).toContain('The town no longer lives like its god. Devotion is ebbing.');
     // Rising piety + an unaffiliated bucket ⇒ REVIVAL.
     expect(m.sinkSentence).toMatch(/Crisis calls the faithful home/);
   });
@@ -153,7 +153,7 @@ describe('faithPanelModel', () => {
     // The LITERAL `faithUnseatingEnabled: true` drive is load-bearing: mechanismLitCoverage
     // grants lit credit only on a literal, and a computed key attributes to no flag at all.
     const model = faithPanelModel(project(fallBearing('discredited'), { faithUnseatingEnabled: true }));
-    expect(model.patronFallSentence).toBe('The patron fell — discredited: the creed lost its rightful claim, and the town let another take the seat.');
+    expect(model.patronFallSentence).toBe('The patron fell. Discredited: the creed lost its rightful claim, and the town let another take the seat.');
     // VOCABULARY TOTALITY. The copy table's key set EQUALS the frozen cause vocabulary, so a
     // fifth cause, a renamed token or a deleted row reds HERE rather than silently rendering
     // nothing for a fall the engine can really produce. Both sides sorted: neither literal's

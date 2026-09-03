@@ -180,12 +180,12 @@ export function extractionUpswingAdj({ worldState, snapshot, conquerorId, target
 // archetype seat (O.levers present) ⇒ a dormant / no-archetype world never emits one.
 const LEVER_COPY = Object.freeze({
   reroute: { headline: (/** @type {string} */ n) => `${n} reroutes its trade`, summary: (/** @type {string} */ n) => `${n}'s merchants steer their caravans around the danger rather than answer it with steel.` },
-  embargo: { headline: (/** @type {string} */ n, /** @type {string} */ t) => `${n} closes its markets to ${t}`, summary: (/** @type {string} */ n, /** @type {string} */ t) => `${n} answers ${t} with an embargo — economic pressure in the place of a march.` },
+  embargo: { headline: (/** @type {string} */ n, /** @type {string} */ t) => `${n} closes its markets to ${t}`, summary: (/** @type {string} */ n, /** @type {string} */ t) => `${n} answers ${t} with an embargo: economic pressure in the place of a march.` },
   credit: { headline: (/** @type {string} */ n) => `${n} extends its credit`, summary: (/** @type {string} */ n) => `${n}'s houses underwrite their partners, buying influence with coin instead of arms.` },
   missionize: { headline: (/** @type {string} */ n) => `${n} sends out missionaries`, summary: (/** @type {string} */ n) => `${n} spreads its faith outward rather than its soldiers.` },
   legitimacy: { headline: (/** @type {string} */ n) => `${n} shores up its legitimacy`, summary: (/** @type {string} */ n) => `${n}'s clergy consolidate the seat's authority at home.` },
   prestige: { headline: (/** @type {string} */ n) => `${n} seeks a stroke of prestige`, summary: (/** @type {string} */ n, /** @type {string} */ t) => `${n} eyes a glorious blow against ${t}.` },
-  opportunity: { headline: (/** @type {string} */ n) => `${n} weighs an opportunity`, summary: (/** @type {string} */ n, /** @type {string} */ t) => `${n} marks ${t} as ripe — a chance more than a grievance.` },
+  opportunity: { headline: (/** @type {string} */ n) => `${n} weighs an opportunity`, summary: (/** @type {string} */ n, /** @type {string} */ t) => `${n} marks ${t} as ripe: a chance more than a grievance.` },
 });
 
 // M9a LEVER APPLY EFFECTS (war-5). Each lever nudges ONE-or-two bounded diplomatic
@@ -282,7 +282,7 @@ function misjudgmentReason(mis, name, targetName) {
   const parts = [];
   if (mis.kinds.includes('strength')) parts.push("a stale read of its rival’s strength");
   if (mis.kinds.includes('relationship')) parts.push('a hostility the world has already left behind');
-  return `${name} marches on ${targetName} through ${parts.join(' and ')} — a misjudgment.`;
+  return `${name} marches on ${targetName} through ${parts.join(' and ')}: a misjudgment.`;
 }
 
 /**
@@ -800,7 +800,7 @@ function enumerateMoves({ sId, ctx, aggressiveness, peaceAggressiveness = aggres
  */
 function causalReasonLines(entry, label) {
   if (!entry) return [];
-  return topReasons(entry, 3).map((r) => `${label}: ${r.type} — ${r.receipt}`);
+  return topReasons(entry, 3).map((r) => `${label}: ${r.type}. ${r.receipt}`);
 }
 
 /**
@@ -862,7 +862,7 @@ function emitMove({ move, bestTargetId = null, sId, item, ctx, tick, exhaustion,
       const driver = chaosPull > 0 && rust > 0 ? "its patron's chaos and a rusty army"
         : chaosPull > 0 ? "its patron's chaos" : 'a rusty army';
       reasons.push(
-        `A misread of its own war-bankruptcy — ${driver} distorted the reading, so the suit came ${timingWord}.`,
+        `A misread of its own war-bankruptcy: ${driver} distorted the reading, so the suit came ${timingWord}.`,
       );
     }
     const warRulingRead = warRulingsLit ? compactWarRulingRead(termination) : null;
@@ -985,7 +985,7 @@ function emitMove({ move, bestTargetId = null, sId, item, ctx, tick, exhaustion,
       summary: copy.summary(name, targetName),
       reasons: [
         `${name}'s strategy chooser reached for the ${move} lever rather than a war move.`,
-        ...(nudge ? [`The ${move} lever presses ${targetName} — a bounded ${Object.keys(nudge.relationshipPatch).map(humanizeToken).join('/')} nudge.`] : []),
+        ...(nudge ? [`The ${move} lever presses ${targetName}: a bounded ${Object.keys(nudge.relationshipPatch).map(humanizeToken).join('/')} nudge.`] : []),
       ],
       relationshipNudge: nudge
         ? { relationshipKey: nudge.relationshipKey, relationshipPatch: nudge.relationshipPatch, incidentType: nudge.incidentType }

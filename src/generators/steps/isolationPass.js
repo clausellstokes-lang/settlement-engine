@@ -99,7 +99,7 @@ registerStep('isolationPass', {
       result:     'emergent',
       causes: [
         { source: `tradeRoute.${tradeRoute}`, effect: 'derived',
-          reason: `Isolated subsistence ${tier} has no external supply line — a failed harvest cannot be covered by imports, so famine is a live risk.` },
+          reason: `Isolated subsistence ${tier} has no external supply line. A failed harvest cannot be covered by imports, so famine is a live risk.` },
       ],
       downstreamEffects: [
         { target: 'stressConfirmPass', effect: 'context',
@@ -119,7 +119,7 @@ registerStep('isolationPass', {
         result:     'subsistence_stripped',
         causes: [
           { source: 'subsistenceMode', effect: 'removed',
-            reason: `Settlement is in subsistence mode — "${name}" requires external supply chains that don't reach here.` },
+            reason: `Settlement is in subsistence mode. "${name}" requires external supply chains that don't reach here.` },
         ],
       });
     }
@@ -137,7 +137,7 @@ registerStep('isolationPass', {
       result:     'requires_teleportation_circle',
       causes: [
         { source: instId('Teleportation circle'), effect: 'missing prerequisite',
-          reason: `"${name}" trades with other planes through a permanent teleportation circle — no circle exists here, so the institution cannot operate.` },
+          reason: `"${name}" trades with other planes through a permanent teleportation circle. No circle exists here, so the institution cannot operate.` },
       ],
     });
   }

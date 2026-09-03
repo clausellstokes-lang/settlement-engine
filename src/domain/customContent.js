@@ -326,14 +326,14 @@ export function classifyCustomInstitution(rawEntity, settlement) {
         source: 'magicLedger.magicExists',
         effect: 'environment_inert',
         reason: 'Magic does not function in this world. The institution stands, but nothing it '
-          + 'claims to do arcanely works — read its output as trade, scholarship, or belief.',
+          + 'claims to do arcanely works. Read its output as trade, scholarship, or belief.',
       });
     } else if (ledger.present && ledger.magicLevel === 'none') {
       contributors.push({
         source: 'magicLedger.magicLevel',
         effect: 'environment_dampen',
         reason: 'No arcane practice is established here. The institution stands without a local '
-          + 'tradition behind it — whoever works there learned it somewhere else.',
+          + 'tradition behind it: whoever works there learned it somewhere else.',
       });
     } else if (ledger.present && ledger.magicLevel === 'low') {
       contributors.push({

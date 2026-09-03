@@ -97,7 +97,7 @@ export const STEP_METADATA = Object.freeze({
   },
   stressConfirmPass: {
     label: 'Confirm stressors',
-    description: 'Re-weight emergent stressors against the real roster — walls suppress sieges, granaries suppress famine.',
+    description: 'Re-weight emergent stressors against the real roster. Walls suppress sieges, granaries suppress famine.',
     summary: (ctx) => {
       const n = Array.isArray(ctx.stressTypes) ? ctx.stressTypes.length : 0;
       return n ? `${n} stressor${n === 1 ? '' : 's'} confirmed` : 'No stressors survived confirmation';
@@ -152,10 +152,10 @@ export const STEP_METADATA = Object.freeze({
     // state the count the dossier will show (§767.3(d) — every surface agrees).
     summary: (ctx) => {
       const n = ctx.institutions?.length || 0;
-      const count = n ? ` — ${n} institution${n === 1 ? '' : 's'} stand` : '';
+      const count = n ? `: ${n} institution${n === 1 ? '' : 's'} stand` : '';
       return ctx._rosterChangedAfterEconomy
         ? `Economy re-derived for the final roster${count}`
-        : `Roster confirmed${count || ' — economy stands'}`;
+        : `Roster confirmed${count || ': economy stands'}`;
     },
   },
   powerEconomyReconcilePass: {
@@ -167,7 +167,7 @@ export const STEP_METADATA = Object.freeze({
   },
   structuralValidationPass: {
     label: 'Validate structure',
-    description: 'Check the FINAL roster for tier, dependency, and access contradictions — the coherence receipt.',
+    description: 'Check the FINAL roster for tier, dependency, and access contradictions: the coherence receipt.',
     summary: (ctx) => {
       const v = ctx.structural?.violations?.length || 0;
       return v ? `${v} structural finding${v === 1 ? '' : 's'}` : 'No structural findings';
@@ -191,7 +191,7 @@ export const STEP_METADATA = Object.freeze({
   },
   generateNarratives: {
     label: 'Compose narratives',
-    description: 'Write the prose layer — history, defense, daily-life, and per-faction asides.',
+    description: 'Write the prose layer: history, defense, daily-life, and per-faction asides.',
     summary: () => null,
   },
   assembleSettlement: {

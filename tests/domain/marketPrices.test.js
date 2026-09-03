@@ -260,8 +260,8 @@ describe('Wave 7 marketPrices — the strongest-deviation HIGHLIGHT', () => {
   });
 
   it('CANONICAL-AT-ZERO: index 0 of each pool is the pool\'s plainest line', () => {
-    expect(CRIER_FRAMES.dear[0]).toBe('{label} runs {phrase} — dear, {receipt}.');
-    expect(CRIER_FRAMES.cheap[0]).toBe('{label} runs {phrase} — cheap, {receipt}.');
+    expect(CRIER_FRAMES.dear[0]).toBe('{label} runs {phrase}: dear, {receipt}.');
+    expect(CRIER_FRAMES.cheap[0]).toBe('{label} runs {phrase}: cheap, {receipt}.');
     for (const [tag, pool] of Object.entries(CRIER_FRAMES)) {
       expect(pool.length, `${tag} has variety`).toBeGreaterThanOrEqual(2);
       for (const frame of pool) {

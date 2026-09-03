@@ -145,7 +145,7 @@ export function settlementPestilence({
   if (phase === 'incubating') {
     presence = `Word of plague has reached ${where}; the sickness has not yet broken out.`;
   } else if (phase === 'recovering') {
-    presence = `The plague in ${where} is passing — the worst is behind it.`;
+    presence = `The plague in ${where} is passing. The worst is behind it.`;
   } else {
     presence = `Plague burns in ${where}: ${severityPhrase(band)}.`;
   }

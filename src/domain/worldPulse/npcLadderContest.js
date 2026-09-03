@@ -812,9 +812,9 @@ function contestBeat(sid, townName, id, phase, c, m1, m2, tick, now) {
   const n2 = String(asObject(m2.npc).name || asObject(m2.npc).label || c.b.nid);
   const noun = String(c.signalVar).replace(/_/g, ' ');
   const map = {
-    opened: { h: `${n1} and ${n2} reach for the same prize`, s: `In ${townName}, ${n1} and ${n2} both bend their ambition to ${noun} — two hands reach for the same prize.`, sig: 'notable', sc: 46, sev: 0.3 },
-    discovered: { h: `${n1} learns of a rival's parallel ambition`, s: `In ${townName}, ${n1} has learned that ${n2} pursues the very same end — the race is now known to both.`, sig: 'notable', sc: 44, sev: 0.25 },
-    resolved: { h: `${n1} prevails over ${n2}`, s: `In ${townName}, the contest for ${noun} resolved head-to-head: ${n1} prevailed, ${n2} was thrown back — a goal decided, never a fate.`, sig: 'notable', sc: 48, sev: 0.35 },
+    opened: { h: `${n1} and ${n2} reach for the same prize`, s: `In ${townName}, ${n1} and ${n2} both bend their ambition to ${noun}: two hands reach for the same prize.`, sig: 'notable', sc: 46, sev: 0.3 },
+    discovered: { h: `${n1} learns of a rival's parallel ambition`, s: `In ${townName}, ${n1} has learned that ${n2} pursues the very same end. The race is now known to both.`, sig: 'notable', sc: 44, sev: 0.25 },
+    resolved: { h: `${n1} prevails over ${n2}`, s: `In ${townName}, the contest for ${noun} resolved head-to-head: ${n1} prevailed, ${n2} was thrown back. A goal decided, never a fate.`, sig: 'notable', sc: 48, sev: 0.35 },
     closed: { h: `The contest for ${noun} closes`, s: `In ${townName}, the rivalry over ${noun} between ${n1} and ${n2} closed without a victor.`, sig: 'notable', sc: 42, sev: 0.2 },
   };
   const e = map[phase] || map.closed;
@@ -840,7 +840,7 @@ function contestSupportBeat(sid, townName, nid, patronNid, phase, tick, now) {
     tick, createdAt: now, scope: 'local', significance: 'notable', severity: cascade ? 0.3 : 0.25, score: cascade ? 44 : 43,
     headline: cascade ? 'A supporter\'s cause falls with their patron\'s' : 'A supporter shares in their patron\'s victory',
     summary: cascade
-      ? `In ${townName}, a linked supporter's cause fell with their patron's — the dependency ran to its end.`
+      ? `In ${townName}, a linked supporter's cause fell with their patron's. The dependency ran to its end.`
       : `In ${townName}, a supporter shared in their patron's victory, and the bond deepened both ways.`,
     kind: 'applied', impactKind: 'npc_support', channelType: 'settlement',
     settlementIds: [sid], impactIds: [], channelIds: [], sourceEventId: `npc_support.${sid}.${phase}.${nid}.${patronNid}.${tick}`,

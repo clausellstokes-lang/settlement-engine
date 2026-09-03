@@ -59,7 +59,7 @@ export function validateNudge(nudge, { settlementIds = [] } = {}) {
   const n = /** @type {Record<string, unknown>} */ (nudge && typeof nudge === 'object' ? nudge : {});
   const type = typeof n.type === 'string' ? n.type : '';
   if (!NUDGE_TYPES.includes(type)) {
-    errors.push(`unknown stressor type "${type || '(empty)'}" — a nudge may only raise a catalogued pressure`);
+    errors.push(`unknown stressor type "${type || '(empty)'}": a nudge may only raise a catalogued pressure`);
   }
   const origin = typeof n.originSettlementId === 'string' ? n.originSettlementId : '';
   if (!origin) {

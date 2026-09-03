@@ -73,7 +73,7 @@ export const VIEW_DESCRIPTIONS = {
   // the content); the Practical Guide gets its own, task-shaped one. `howto`
   // stays keyed for the retired route's one pre-redirect frame.
   'about-what-this-is': 'Why SettlementForge can be trusted: a deterministic world simulator built by one person, with the AI caged by mechanism.',
-  'about-guide': 'The Keeper’s Handbook: how to drive SettlementForge day to day — quick start, power use, the living world, and the reference spine.',
+  'about-guide': 'The Keeper’s Handbook: how to drive SettlementForge day to day, quick start, power use, the living world, and the reference spine.',
   howto:      'Why SettlementForge can be trusted: a deterministic world simulator built by one person, with the AI caged by mechanism.',
   gallery:    'Browse settlements and realms shared by the SettlementForge community.',
   // The Hall is an invitation, never an offer — the description must not read as

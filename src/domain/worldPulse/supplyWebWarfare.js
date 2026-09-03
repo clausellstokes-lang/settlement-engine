@@ -434,7 +434,7 @@ export function scoreCampaignEV({ believedSelf, believedTarget, web, atrocityBra
     ? 'the target leans on single roads for much of what it needs'
     : "the target's supply is spread thin enough to be worth cutting";
   const receipt = margin < 0
-    ? `A direct assault is a losing bet, and ${webWord} — strangle it first.`
+    ? `A direct assault is a losing bet, and ${webWord}: strangle it first.`
     : 'The target can be taken directly, and the slow strangulation would cost more time than it is worth.';
   return { directEV, indirectEV, weakenReduction, timeDiscount, nStages, receipt };
 }
@@ -907,7 +907,7 @@ function mintNews(aggressorId, targetId, name, ev, stages, tick) {
     id: `wizard_news.${tick}.webwar_campaign_minted.${stablePart(aggressorId)}.${stablePart(targetId)}`,
     kind: 'webwar_campaign_minted',
     headline: `${A} opens an indirect campaign against ${Tn}`,
-    summary: `${A} cannot (or will not) take ${Tn} head-on. It plans to strangle ${Tn}'s supply web first — ${modes.join(', ')} — before the reckoning.`,
+    summary: `${A} cannot (or will not) take ${Tn} head-on. It plans to strangle ${Tn}'s supply web first (${modes.join(', ')}) before the reckoning.`,
     reasons: [
       ev.receipt,
       `The plan sequences ${stages.length} stage${stages.length === 1 ? '' : 's'} against ${Tn}'s suppliers, and by the planners' own reckoning that is the cheaper road to the same end.`,
@@ -935,14 +935,14 @@ function raidNews(aggressorId, targetId, stage, name, wrongVillage, confidence01
   ];
   if (wrongVillage) {
     const readWord = confidence01 < 0.5 ? 'thin and much-doubted' : 'confident but stale';
-    reasons.push(`But ${V} no longer fed ${Tn} — the ${stage.input} had come by another road. ${A} burned the wrong village on a ${readWord} read — a misjudgment.`);
+    reasons.push(`But ${V} no longer fed ${Tn}. The ${stage.input} had come by another road. ${A} burned the wrong village on a ${readWord} read: a misjudgment.`);
   }
   return {
     id: `wizard_news.${tick}.${kind}.${stablePart(aggressorId)}.${stablePart(stage.satelliteId)}.${stablePart(targetId)}`,
     kind,
     headline: wrongVillage ? `${A} burns the wrong village` : `${A} raids ${V}`,
     summary: wrongVillage
-      ? `${A} put ${V} to the torch believing it fed ${Tn} — but the ${stage.input} had come by another road for seasons. The atrocity bought nothing.`
+      ? `${A} put ${V} to the torch believing it fed ${Tn}, but the ${stage.input} had come by another road for seasons. The atrocity bought nothing.`
       : `${A}'s raiders put ${V}'s stores to the torch to sever ${Tn}'s supply of ${stage.input}. The villagers scatter; the town's web thins.`,
     reasons,
     settlementIds: [String(aggressorId), String(stage.satelliteId), String(targetId)],
@@ -962,11 +962,11 @@ function abandonNews(aggressorId, targetId, name, adapted, tick) {
     kind: 'webwar_campaign_abandoned',
     headline: `${A} abandons its strangulation of ${Tn}`,
     summary: adapted
-      ? `The strangulation of ${Tn} was abandoned; the river barges could not be stopped — ${Tn} re-sourced faster than ${A} could sever.`
-      : `${A} calls off its indirect campaign against ${Tn} — the slow squeeze was no longer worth its cost.`,
+      ? `The strangulation of ${Tn} was abandoned; the river barges could not be stopped: ${Tn} re-sourced faster than ${A} could sever.`
+      : `${A} calls off its indirect campaign against ${Tn}. The slow squeeze was no longer worth its cost.`,
     reasons: [
       adapted
-        ? `${Tn}'s supply web re-sourced (M2 failover) faster than the strangulation could outpace it — the campaign stalled.`
+        ? `${Tn}'s supply web re-sourced (M2 failover) faster than the strangulation could outpace it: the campaign stalled.`
         : `The re-scored campaign EV fell below the abandonment floor; ${A} does not grind a losing squeeze.`,
     ],
     settlementIds: [String(aggressorId), String(targetId)],
@@ -986,7 +986,7 @@ function completeNews(aggressorId, targetId, name, plan, tick) {
     id: `wizard_news.${tick}.webwar_campaign_complete.${stablePart(aggressorId)}.${stablePart(targetId)}`,
     kind: 'webwar_campaign_complete',
     headline: `${A} completes its strangulation of ${Tn}`,
-    summary: `${A} has struck ${plan.stages.length} of ${Tn}'s suppliers. ${Tn}'s web is thinned and its buffers bled — the town is ripe for the reckoning.`,
+    summary: `${A} has struck ${plan.stages.length} of ${Tn}'s suppliers. ${Tn}'s web is thinned and its buffers bled. The town is ripe for the reckoning.`,
     reasons: [
       `The campaign ran its ${plan.stages.length} stage${plan.stages.length === 1 ? '' : 's'}, and ${Tn} feels the grip of it ${gripWord}.`,
     ],

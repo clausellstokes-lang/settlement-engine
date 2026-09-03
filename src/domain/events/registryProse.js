@@ -56,7 +56,7 @@ export const EVENT_PROSE = {
   },
   ADD_NPC: {
     description: 'A new NPC arrives, is appointed, inherits office, or is recruited.',
-    targetPrompt: 'NPC name (or "role @ institution" — e.g. "High Priestess @ Temple")',
+    targetPrompt: 'NPC name (or "role @ institution", e.g. "High Priestess @ Temple")',
   },
   KILL_NPC: {
     description: 'An NPC dies, is exiled, or otherwise leaves play. Linked institutions and factions are affected.',
@@ -95,7 +95,7 @@ export const EVENT_PROSE = {
     targetPrompt: 'Corrupt NPC, faction, or institution name',
   },
   IMPOSE_CORRUPTION: {
-    description: 'A criminal organization in the settlement gets its hooks into a clean NPC. The NPC becomes COVERTLY corrupt and tied to that organization — so the dossier flags them, faction capture advances from the new corrupt seat, and a future Expose Corruption brings the reckoning. Quieter than exposure: the rot is hidden, not yet public.',
+    description: 'A criminal organization in the settlement gets its hooks into a clean NPC. The NPC becomes COVERTLY corrupt and tied to that organization, so the dossier flags them, faction capture advances from the new corrupt seat, and a future Expose Corruption brings the reckoning. Quieter than exposure: the rot is hidden, not yet public.',
     targetPrompt: 'Clean NPC to turn (pick the organization below)',
   },
   REFUGEE_WAVE: {
@@ -107,7 +107,7 @@ export const EVENT_PROSE = {
     targetPrompt: 'Optional: disease name (e.g. "Red Cough")',
   },
   RAID_OR_MONSTER_ATTACK: {
-    description: 'External force strikes — bandits, monsters, an enemy patrol. Defenders mobilize; civilians take losses.',
+    description: 'External force strikes: bandits, monsters, an enemy patrol. Defenders mobilize; civilians take losses.',
     targetPrompt: 'Optional: source (e.g. "frost trolls", "Iron Crow bandits")',
   },
   REMOVED_THREAT: {
@@ -131,40 +131,40 @@ export const EVENT_PROSE = {
     targetPrompt: 'Resource name (e.g. "iron vein", "river fish")',
   },
   APPLY_STRESSOR: {
-    description: 'An active crisis grips the settlement — pick any stressor from the full catalog, including your custom ones. Logged as an in-world onset; the matching condition feeds the causal substrate, and in a canon campaign it also becomes a roaming world-pulse stressor.',
+    description: 'An active crisis grips the settlement. Pick any stressor from the full catalog, including your custom ones. Logged as an in-world onset; the matching condition feeds the causal substrate, and in a canon campaign it also becomes a roaming world-pulse stressor.',
     targetPrompt: 'Stressor (from the catalog)',
   },
   CHANGE_RULING_POWER: {
-    description: "Hand the government to a different authoritative power — coup, election, succession, conquest, or appointment. The governing body persists; who commands it changes, and the government type reshapes to the new power's preference.",
+    description: "Hand the government to a different authoritative power: coup, election, succession, conquest, or appointment. The governing body persists; who commands it changes, and the government type reshapes to the new power's preference.",
     targetPrompt: 'Faction that takes power',
   },
   RESOLVE_STRESSOR: {
-    description: 'An active crisis ends — pick one of the settlement\'s current stressors. The stress entry is removed, its promoted condition winds down, and in a canon campaign the roaming world-pulse twin resolves with its residual aftermath.',
+    description: 'An active crisis ends. Pick one of the settlement\'s current stressors. The stress entry is removed, its promoted condition winds down, and in a canon campaign the roaming world-pulse twin resolves with its residual aftermath.',
     targetPrompt: 'Stressor currently gripping the settlement',
   },
   ADD_TRADE_GOOD: {
-    description: 'A new good enters the settlement\'s trade profile — exported, imported, or (for an entrepôt) re-exported in transit through its warehouses.',
+    description: 'A new good enters the settlement\'s trade profile. Exported, imported, or (for an entrepôt) re-exported in transit through its warehouses.',
     targetPrompt: 'Good label (e.g. "Salted fish", "Rare spices")',
   },
   REMOVE_TRADE_GOOD: {
-    description: 'A good drops out of the settlement\'s trade profile — the market moved on, the supplier dried up, or the route no longer carries it.',
+    description: 'A good drops out of the settlement\'s trade profile. The market moved on, the supplier dried up, or the route no longer carries it.',
     targetPrompt: 'Trade good to remove',
   },
   ADD_RESOURCE: {
-    description: 'A new resource node is discovered or opened nearby — a vein struck, fields cleared, grounds claimed. Supply chains can activate on the next rederivation.',
+    description: 'A new resource node is discovered or opened nearby. A vein struck, fields cleared, grounds claimed. Supply chains can activate on the next rederivation.',
     targetPrompt: 'Resource (from the catalog, or a custom name)',
   },
   SET_PRIMARY_DEITY: {
-    description: 'A settlement adopts (or sheds) its patron deity — the leading creed of the pantheon. The resolved deity snapshot is embedded on the settlement record so the religion substrate reads it without ever touching the custom-content store. No deity ⇒ the religion layer stays dormant.',
+    description: 'A settlement adopts (or sheds) its patron deity: the leading creed of the pantheon. The resolved deity snapshot is embedded on the settlement record so the religion substrate reads it without ever touching the custom-content store. No deity ⇒ the religion layer stays dormant.',
   },
   IMPOSE_CULT: {
-    description: "A cult-level deity is seeded into the settlement BENEATH the patron — a secondary faith taking root in its own niche (temperament × alignment). Large settlements sustain more cults across the niche grid; small ones reconcile by displacing the weakest cult, or refuse when only the patron's slot remains. The resolved snapshot is embedded on the settlement so the religion substrate reads it without touching the custom-content store.",
+    description: "A cult-level deity is seeded into the settlement BENEATH the patron: a secondary faith taking root in its own niche (temperament × alignment). Large settlements sustain more cults across the niche grid; small ones reconcile by displacing the weakest cult, or refuse when only the patron's slot remains. The resolved snapshot is embedded on the settlement so the religion substrate reads it without touching the custom-content store.",
   },
   SHIFT_TIER: {
     description: "Force the settlement up or down one size tier (thorp through metropolis), a DM override of the organic growth-and-decline drift. Population resettles into the new tier's band, and the institution roster reconciles exactly as an organic shift would: a promotion raises the institutions the larger tier sustains, while a demotion leaves the ones it can no longer support behind as ruined remnants (a watch-post where a garrison stood, a privatized market, a hollowed-out hall) rather than erasing them.",
   },
   REMOVE_RESOURCE: {
-    description: 'A resource node is lost outright — claimed by another power, rendered unreachable, or struck from the map. Harsher than depletion: nothing is left to recover.',
+    description: 'A resource node is lost outright. Claimed by another power, rendered unreachable, or struck from the map. Harsher than depletion: nothing is left to recover.',
     targetPrompt: 'Nearby resource to remove',
   },
   PROMOTE_NPC: {
@@ -176,7 +176,7 @@ export const EVENT_PROSE = {
     targetPrompt: 'NPC who falls',
   },
   FORCE_RELIEF: {
-    description: 'Decree a gift of grain to a qualifying neighbour — an ally, trade partner, or vassal/patron. Only grain above the hard reserve floor can go (the DM overrides the willingness, never the law); shipping it out is charity with a political price at home.',
+    description: 'Decree a gift of grain to a qualifying neighbour: an ally, trade partner, or vassal/patron. Only grain above the hard reserve floor can go (the DM overrides the willingness, never the law); shipping it out is charity with a political price at home.',
     targetPrompt: 'Qualifying neighbour to relieve',
   },
   CREATE_ROUTE: {
@@ -184,7 +184,7 @@ export const EVENT_PROSE = {
     targetPrompt: 'Settlement to charter a road to',
   },
   OFFER_CREDIT: {
-    description: 'Extend grain to a qualifying neighbour as a LOAN — the same wagons, a ledger behind them. Only grain above the hard reserve floor can go; a loan is not charity, so it spends no legitimacy. Maturity, repayment, and default play out with the living world.',
+    description: 'Extend grain to a qualifying neighbour as a LOAN: the same wagons, a ledger behind them. Only grain above the hard reserve floor can go; a loan is not charity, so it spends no legitimacy. Maturity, repayment, and default play out with the living world.',
     targetPrompt: 'Qualifying neighbour to lend to',
   },
 };

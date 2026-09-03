@@ -637,7 +637,7 @@ registerStep('assembleInstitutions', {
           causes: [
             { source: instId(inst.name),
               effect: 'absorbed',
-              reason: `"${absorbed.name}" was absorbed into "${inst.name}" — the custom definition declares it subsumes this institution.` },
+              reason: `"${absorbed.name}" was absorbed into "${inst.name}". The custom definition declares it subsumes this institution.` },
           ],
         });
       }

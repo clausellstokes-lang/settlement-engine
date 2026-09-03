@@ -55,7 +55,7 @@ export const REALM_SIZES = Object.freeze({
   small: Object.freeze({
     id: 'small',
     label: 'Small',
-    blurb: 'A compact frontier — one market town and its hamlets.',
+    blurb: 'A compact frontier: one market town and its hamlets.',
     // 5 settlements: 1 town · 2 villages · 1 hamlet · 1 thorp
     tiers: Object.freeze(['town', 'village', 'village', 'hamlet', 'thorp']),
   }),

@@ -175,7 +175,7 @@ export const generateAvailableServices = (
       },
       {
         name: 'Disappear quietly',
-        desc: 'Those who know the right people can arrange to vanish from the official register — for a price.',
+        desc: 'Those who know the right people can arrange to vanish from the official register: for a price.',
       },
       {
         name: 'Intelligence on officials',
@@ -221,11 +221,11 @@ export const generateAvailableServices = (
       },
       {
         name: 'Unlicensed enchantment',
-        desc: 'Practitioners working outside guild oversight — cheaper, less traceable, and legally inadvisable.',
+        desc: 'Practitioners working outside guild oversight: cheaper, less traceable, and legally inadvisable.',
       },
       {
         name: 'Magical forgery',
-        desc: 'Identification papers, writs, and seals with genuine magical authentication — fraudulently applied.',
+        desc: 'Identification papers, writs, and seals with genuine magical authentication: fraudulently applied.',
       },
     ].forEach((item) => {
       if (!buckets.criminal.some((existing) => existing.name === item.name)) {
@@ -263,7 +263,7 @@ export const generateAvailableServices = (
     [
       {
         name: 'Unofficial arbitration',
-        desc: 'Commercial disputes resolved outside the courts — faster, cheaper, and more reliably enforced.',
+        desc: 'Commercial disputes resolved outside the courts: faster, cheaper, and more reliably enforced.',
       },
       {
         name: 'Gray market goods',
@@ -299,7 +299,7 @@ export const generateAvailableServices = (
   if (crimeTypes.has('Survival crime')) {
     addCrimeService(
       'Fence (word of mouth)',
-      'No questions asked — stolen goods move through back channels for a fraction of value.',
+      'No questions asked. Stolen goods move through back channels for a fraction of value.',
       '(covert)'
     );
   }
@@ -311,7 +311,7 @@ export const generateAvailableServices = (
     );
     addCrimeService(
       'Muscle for hire',
-      'Rough up a target, intimidate a debtor, move a problem — informal, no contract.',
+      'Rough up a target, intimidate a debtor, move a problem: informal, no contract.',
       '(street gang)'
     );
   }
@@ -325,7 +325,7 @@ export const generateAvailableServices = (
   if (crimeTypes.has('Magical crime')) {
     addCrimeService(
       'Arcane services (illicit)',
-      'Magical practitioners outside guild oversight — identity work, scrying, targeted effects. Available if you know where to ask.',
+      'Magical practitioners outside guild oversight: identity work, scrying, targeted effects. Available if you know where to ask.',
       '(arcane underground)'
     );
   }
@@ -342,7 +342,7 @@ export const generateAvailableServices = (
     );
   }
   if (crimeTypes.has('Organized guild crime')) {
-    addCrimeService('Fence (stolen goods)', 'Move recovered goods, no questions — expect 30-50% of value.', '(thieves guild)');
+    addCrimeService('Fence (stolen goods)', 'Move recovered goods, no questions: expect 30-50% of value.', '(thieves guild)');
   }
   if (crimeTypes.has('Background crime')) {
     addCrimeService(

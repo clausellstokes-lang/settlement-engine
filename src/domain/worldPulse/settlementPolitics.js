@@ -430,7 +430,7 @@ function classifyGlue({ members, npcStates, tie, underThreat }) {
     const corrupt = st.corruption === true || st.corrupt === true || Object.keys(leash).length > 0;
     if (corrupt) {
       return {
-        glue: { type: 'compromise', detail: 'a seat-holder carries a corruption leash — a leash the bloc does not name aloud' },
+        glue: { type: 'compromise', detail: 'a seat-holder carries a corruption leash. A leash the bloc does not name aloud' },
         peopleHeld: false,
         covert: true,
       };
@@ -438,7 +438,7 @@ function classifyGlue({ members, npcStates, tie, underThreat }) {
   }
   // THREAT — a survival bloc born of an external rally (dissolves when the siege lifts).
   if (underThreat) {
-    return { glue: { type: 'threat', detail: 'a common danger at the walls — the fractious close ranks' }, peopleHeld: false, covert: false };
+    return { glue: { type: 'threat', detail: 'a common danger at the walls: the fractious close ranks' }, peopleHeld: false, covert: false };
   }
   // DOCTRINE — both anchored in faith/arcane authority (shared creed).
   const faithMembers = members.filter((m) => m.archetype === 'religious' || m.archetype === 'arcane');
@@ -815,7 +815,7 @@ export function advanceSettlementPolitics({ snapshot, worldState, rng = null, ti
           return leash.revealed === true || leash.covert === false || st.exposed === true;
         });
         if (revealed) {
-          receipts.push({ cid, kind: 'exposed', blocId: prev.id, detail: 'the leash was dragged into the light — the bloc shattered in scandal' });
+          receipts.push({ cid, kind: 'exposed', blocId: prev.id, detail: 'the leash was dragged into the light: the bloc shattered in scandal' });
           continue;
         }
       }
@@ -830,7 +830,7 @@ export function advanceSettlementPolitics({ snapshot, worldState, rng = null, ti
         const u = fork && typeof fork.random === 'function' ? clamp01(finiteNumber(fork.random(), 1)) : 1;
         const maturity = 1 + Math.min(age, T.DISCOVERY_MATURE_TICKS) / T.DISCOVERY_MATURE_TICKS;
         if (u < clamp01(T.DISCOVERY_BASE * maturity)) {
-          receipts.push({ cid, kind: 'exposed', blocId: prev.id, detail: 'the conspiracy was uncovered — the plot dragged into the light and broken' });
+          receipts.push({ cid, kind: 'exposed', blocId: prev.id, detail: 'the conspiracy was uncovered: the plot dragged into the light and broken' });
           continue;
         }
       }
@@ -852,7 +852,7 @@ export function advanceSettlementPolitics({ snapshot, worldState, rng = null, ti
 
       // STRAIN fracture (§4): a bloc past the fracture threshold breaks (past dwell).
       if (strain >= T.STRAIN_FRACTURE_AT && age >= T.MIN_DWELL_TICKS) {
-        receipts.push({ cid, kind: 'fractured', blocId: prev.id, detail: 'the differential burden broke the bloc — its bearer becomes the revanchist party' });
+        receipts.push({ cid, kind: 'fractured', blocId: prev.id, detail: 'the differential burden broke the bloc. Its bearer becomes the revanchist party' });
         continue;
       }
 
@@ -874,7 +874,7 @@ export function advanceSettlementPolitics({ snapshot, worldState, rng = null, ti
           for (const f of outsiders) {
             const offer = pairInterest(mv, f, null);
             if (offer >= internalPull - 1e-6 && f.power >= partnerPower * (1 + T.OUTBID_POWER_MARGIN)) {
-              outbidReceipt = `${f.name} outbid the bloc for ${mv.name}'s seat — the richer suitor took the concession`;
+              outbidReceipt = `${f.name} outbid the bloc for ${mv.name}'s seat: the richer suitor took the concession`;
               return false; // outbid — the member defects.
             }
           }
@@ -979,11 +979,11 @@ export function advanceSettlementPolitics({ snapshot, worldState, rng = null, ti
           receipts.push({ cid, kind: 'deferred', blocId: blocId([best.a.name, best.b.name]), detail: 'the alignment is there; the moment has not come' });
         }
       } else if (bestBlocked) {
-        receipts.push({ cid, kind: 'deferred', blocId: blocId([bestBlocked.a.name, bestBlocked.b.name]), detail: `${bestBlocked.a.name} and ${bestBlocked.b.name} need each other — ${bestBlocked.reason} keeps them apart` });
+        receipts.push({ cid, kind: 'deferred', blocId: blocId([bestBlocked.a.name, bestBlocked.b.name]), detail: `${bestBlocked.a.name} and ${bestBlocked.b.name} need each other: ${bestBlocked.reason} keeps them apart` });
       }
     } else if (free.length >= T.MIN_BLOC_MEMBERS) {
       // CAP: a fourth bloc cannot form — a visible E0 deferral (the depth-cap pin).
-      receipts.push({ cid, kind: 'deferred', blocId: '', detail: 'the settlement already holds three blocs — a fourth alignment is held at the cap' });
+      receipts.push({ cid, kind: 'deferred', blocId: '', detail: 'the settlement already holds three blocs. A fourth alignment is held at the cap' });
     }
 
     if (blocs.length) {

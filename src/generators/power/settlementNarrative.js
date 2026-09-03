@@ -29,7 +29,7 @@ export const STRESS_FLAVOR = {
 const STRESS_RUMORS = [
   (rel) => {
     var detail;
-    return `${rel.npc1Name} and ${rel.npc2Name} are connected by something neither discusses openly — ${((detail = rel.description.split('—')[1]) == null ? void 0 : detail.trim()) || rel.tension}`;
+    return `${rel.npc1Name} and ${rel.npc2Name} are connected by something neither discusses openly: ${((detail = rel.description.split('—')[1]) == null ? void 0 : detail.trim()) || rel.tension}`;
   },
   (rel) =>
     `${rel.npc1Name}'s relationship with ${rel.npc2Name} is more complicated than their public roles suggest. ${rel.tension}`,
@@ -84,7 +84,7 @@ export const genSuccessionNarr = (ctx) => {
     );
   if (!ctx.isViable && ctx.viabilityIssues?.length > 0)
     narratives.push(
-      `${ctx.name} has a structural problem it hasn't solved — ${((issueMessage = ctx.viabilityIssues[0].message) == null ? void 0 : issueMessage.toLowerCase()) || 'an economic vulnerability'} — that will eventually force a decision.`
+      `${ctx.name} has a structural problem it hasn't solved (${((issueMessage = ctx.viabilityIssues[0].message) == null ? void 0 : issueMessage.toLowerCase()) || 'an economic vulnerability'}) that will eventually force a decision.`
     );
   if (ctx.hasNeighborConflict && ctx.neighbor)
     narratives.push(
@@ -92,7 +92,7 @@ export const genSuccessionNarr = (ctx) => {
     );
   if (ctx.prosperity === 'Wealthy' || ctx.prosperity === 'Thriving')
     narratives.push(
-      `${ctx.name} is prosperous enough that the real conflicts are about who controls the surplus — ${ctx.topFaction || 'the dominant faction'} has the most and wants more.`
+      `${ctx.name} is prosperous enough that the real conflicts are about who controls the surplus. ${ctx.topFaction || 'the dominant faction'} has the most and wants more.`
     );
   if (ctx.prosperity === 'Poor') {
     const [costGov, costTop] = resolvePartyPair(
@@ -106,7 +106,7 @@ export const genSuccessionNarr = (ctx) => {
   }
   if (ctx.commodity && ctx.isCrossroads)
     narratives.push(
-      `${ctx.name} sits where trade roads cross; its ${ctx.commodity} trade moves through it in both directions, and whoever controls the tariff controls the settlement's revenue — a fact not lost on ${ctx.topFaction || 'the guilds'}.`
+      `${ctx.name} sits where trade roads cross; its ${ctx.commodity} trade moves through it in both directions, and whoever controls the tariff controls the settlement's revenue. A fact not lost on ${ctx.topFaction || 'the guilds'}.`
     );
   if (ctx.commodity && ctx.isPort)
     narratives.push(
@@ -133,8 +133,8 @@ export const genSuccessionNarr = (ctx) => {
     );
     narratives.push(
       surplusGov
-        ? `The wealth gap in ${ctx.name} has become a fact of daily life — ${surplusTop} controls the surplus and ${surplusGov} cannot or will not force redistribution. Resentment is structural now, not episodic.`
-        : `The wealth gap in ${ctx.name} has become a fact of daily life — ${surplusTop} controls the surplus and will not redistribute it. Resentment is structural now, not episodic.`
+        ? `The wealth gap in ${ctx.name} has become a fact of daily life: ${surplusTop} controls the surplus and ${surplusGov} cannot or will not force redistribution. Resentment is structural now, not episodic.`
+        : `The wealth gap in ${ctx.name} has become a fact of daily life: ${surplusTop} controls the surplus and will not redistribute it. Resentment is structural now, not episodic.`
     );
   }
   if (ctx.topTension === 'religious_tension')
@@ -143,7 +143,7 @@ export const genSuccessionNarr = (ctx) => {
     );
   if (ctx.topTension === 'guild_conflict')
     narratives.push(
-      `The guild dispute in ${ctx.name} is not about craft standards — it is about who controls access to the market. ${sentenceStart(ctx.topFaction || 'The dominant guild')} has held the advantage long enough that the challengers have stopped playing by guild rules.`
+      `The guild dispute in ${ctx.name} is not about craft standards. It is about who controls access to the market. ${sentenceStart(ctx.topFaction || 'The dominant guild')} has held the advantage long enough that the challengers have stopped playing by guild rules.`
     );
   if (ctx.topTension === 'external_threat' && ctx.neighbor)
     narratives.push(
@@ -151,7 +151,7 @@ export const genSuccessionNarr = (ctx) => {
     );
   if (ctx.topTension === 'external_threat' && !ctx.neighbor)
     narratives.push(
-      `The threat approaching ${ctx.name} is not yet visible to most residents. ${sentenceStart(ctx.topNPCName || 'The most senior figure')} knows the intelligence and has not shared it. The decision about when to share it — and how — is the real crisis.`
+      `The threat approaching ${ctx.name} is not yet visible to most residents. ${sentenceStart(ctx.topNPCName || 'The most senior figure')} knows the intelligence and has not shared it. The decision about when to share it (and how) is the real crisis.`
     );
   if (ctx.topTension === 'resource_scarcity' && ctx.commodity) {
     const [numbersTop, numbersGov] = resolvePartyPair(
@@ -165,7 +165,7 @@ export const genSuccessionNarr = (ctx) => {
   }
   if (ctx.topTension === 'resource_scarcity' && !ctx.commodity)
     narratives.push(
-      `Something essential in ${ctx.name} is running short — food, water, or coin. The shortage is being managed through allocation decisions that are, functionally, political decisions. ${sentenceStart(ctx.govFaction || 'The council')} controls the allocation.`
+      `Something essential in ${ctx.name} is running short: food, water, or coin. The shortage is being managed through allocation decisions that are, functionally, political decisions. ${sentenceStart(ctx.govFaction || 'The council')} controls the allocation.`
     );
   if (ctx.topTension === 'crime_wave')
     narratives.push(
@@ -173,7 +173,7 @@ export const genSuccessionNarr = (ctx) => {
     );
   if (ctx.topTension === 'magical_controversy')
     narratives.push(
-      `Magic in ${ctx.name} has done something recently that people cannot agree on how to interpret. ${sentenceStart(ctx.govFaction || 'The council')} is being pressured to regulate — by people who disagree about what regulation means.`
+      `Magic in ${ctx.name} has done something recently that people cannot agree on how to interpret. ${sentenceStart(ctx.govFaction || 'The council')} is being pressured to regulate. By people who disagree about what regulation means.`
     );
   if (ctx.topTension === 'generational_divide')
     narratives.push(
@@ -185,7 +185,7 @@ export const genSuccessionNarr = (ctx) => {
     );
   if (ctx.topTension === 'disputed_land')
     narratives.push(
-      `A land dispute in ${ctx.name} that was dormant is now active — someone filed a claim, or found a document, or simply started pressing. ${sentenceStart(ctx.govFaction || 'The council')} has delayed ruling because there is no outcome that does not cost them something.`
+      `A land dispute in ${ctx.name} that was dormant is now active. Someone filed a claim, or found a document, or simply started pressing. ${sentenceStart(ctx.govFaction || 'The council')} has delayed ruling because there is no outcome that does not cost them something.`
     );
   if (ctx.topTension === 'population_friction')
     narratives.push(
@@ -196,7 +196,7 @@ export const genSuccessionNarr = (ctx) => {
       `${ctx.name} has not had a strong authority since ${ctx.topNPCName || 'the last leader'} left or died. The pretense of normal governance is maintained. Every decision of consequence is being deferred or made informally by ${ctx.topFaction || 'the faction with the most to gain'}.`
     );
   narratives.push(
-    `The most important thing happening in ${ctx.name} right now is happening below the surface — ${ctx.topNPCName ? ctx.topNPCName + ', the ' + ctx.topNPCRole + ',' : 'the most senior figure'} knows it and isn't discussing it.`
+    `The most important thing happening in ${ctx.name} right now is happening below the surface: ${ctx.topNPCName ? ctx.topNPCName + ', the ' + ctx.topNPCRole + ',' : 'the most senior figure'} knows it and isn't discussing it.`
   );
   return narratives;
 };

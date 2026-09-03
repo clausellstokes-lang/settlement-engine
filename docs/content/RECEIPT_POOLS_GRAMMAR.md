@@ -110,10 +110,10 @@ carry `significance: n/a (dossier line)`.
 ### treaty_lapsed (GR-0) — Herald / chronicle (the eulogy) — significance: notable
 SLOTS: {settlement} {counterpart} {band} {term}
 AUDIENCE: public
-1. The peace of {settlement} and {counterpart} has run its course — {band} years, and no hand that signed it still holds a seat. `[exemplar, slotted + Law One]`
+1. The peace of {settlement} and {counterpart} has run its course: {band} years, and no hand that signed it still holds a seat. `[exemplar, slotted + Law One]`
 2. The {term} {settlement} and {counterpart} kept between them came to its last day and was filed as closed; neither court sent word, and the clerks who closed it were the only ones who marked it.
 3. In {settlement} the market kept its hours as always; the pact with {counterpart} ended that week, and the carters heard of it after the clerks.
-4. {settlement} and {counterpart} are bound by nothing now — the {term} ran out, and neither court asked for another.
+4. {settlement} and {counterpart} are bound by nothing now. The {term} ran out, and neither court asked for another.
 5. It was written for {band} years and it kept every one of them; both courts let it go without a word.
 6. A carter out of {counterpart} asked the gate clerks for the {term} and learned there was nothing left to ask for.
 7. It ended at the turn of the year, in a season when neither court had anyone watching the parchment.
@@ -124,7 +124,7 @@ AUDIENCE: public
 1. The {route} between {settlement} and {counterpart} is open again, to anything. `[exemplar, slotted]`
 2. Nothing written stands between the two courts now; what comes next is nobody's to forbid.
 3. The captains in {settlement} marked the week the pact lapsed and said nothing further.
-4. No oath forbids a march between {settlement} and {counterpart} — not since the spring.
+4. No oath forbids a march between {settlement} and {counterpart}, not since the spring.
 5. Where a treaty stood there is now distance and habit.
 6. The first caravan down the {route} this spring travelled without a writ, and nobody at either gate asked for one.
 7. Merchants in {settlement} have begun hiring their own guards for the {counterpart} road.
@@ -158,7 +158,7 @@ AUDIENCE: public
 2. Signed before most of the traders in the market were born, and still in force.
 3. It has outlasted many a lean harvest in {settlement} and in {counterpart}, and not a word of it has changed.
 4. The parchment is soft at the folds; the terms are kept.
-5. Young yet, as treaties go — the ink is barely set, and neither court has been tested.
+5. Young yet, as treaties go. The ink is barely set, and neither court has been tested.
 6. The clerks recopy it when the ink fades, and nothing in the wording has ever changed in the recopying.
 7. Old enough that the roads it opened are simply the roads now.
 8. Sworn in a year the elders in {counterpart} still name for its winter, and kept every year since.
@@ -178,7 +178,7 @@ AUDIENCE: dm-only
 1. On parchment the {term} is honored; in fact {settlement} has sent less than it swore for {band} seasons, and nobody across the border has weighed it.
 2. Kept in name. {settlement} throttles it quietly, and {counterpart}'s watchers sit too far off to tell.
 3. The court of {counterpart} holds this term sound. It is not.
-4. The shortfall is real and unseen — a quiet default, running since the turn of the year.
+4. The shortfall is real and unseen: a quiet default, running since the turn of the year.
 5. Honored on every surface a free eye can reach. The truth of it is short wagons.
 6. The breach began small and has widened every season; nothing in {counterpart}'s reach can measure it.
 7. {settlement} knows exactly what it is withholding. The figure is kept by one clerk and shown to nobody.
@@ -703,7 +703,7 @@ AUDIENCE: public
 ### disavowed_by_succession (GR-4) — pact ending; Herald — significance: major
 SLOTS: {settlement} {counterpart} {npc}
 AUDIENCE: public
-1. The oath {npc} swore has been torn up by the seat that followed him, and the world understands — and does not forgive. `[exemplar, slotted + re-slotted]`
+1. The oath {npc} swore has been torn up by the seat that followed him, and the world understands, and does not forgive. `[exemplar, slotted + re-slotted]`
 2. {settlement}'s new seat has cast off the oath; every term under it is broken from this week, and the parchment is kept only as evidence.
 3. In {counterpart} they had expected it, and it landed hard regardless.
 4. The seat that swore is gone, and the word went out of the door with it.

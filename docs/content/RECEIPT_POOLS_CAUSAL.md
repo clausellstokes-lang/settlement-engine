@@ -4048,29 +4048,29 @@ disclosure whole)
 
 **WORN IN THE TELLING** *(authorless — the road did it)*
 4. The tale grew in the carrying; nobody grew it on purpose.
-5. Worn in the telling — each mouth added a little, and no mouth owned it.
+5. Worn in the telling: each mouth added a little, and no mouth owned it.
 6. What left as a report arrived as a story; the road charges no one.
 7. The drift here is the ordinary kind: distance, seasons, and retelling.
 
 **PLANTED** *(the commissioner and the purpose, always)*
 8. Planted by {house}, to {purpose}. The record holds the sowing.
-9. This did not spring up; it was set — {house}'s hand, {timeband_since},
+9. This did not spring up; it was set. {house}'s hand, {timeband_since},
    and the purpose is entered: {purpose}.
 10. A bought tale: {npc} carried it, {house} paid for it, and what it was
-    for is on the record — {purpose}.
+    for is on the record, {purpose}.
 11. The seed is signed. {house} planted this at {settlement} to {purpose},
     and the ledger has held the receipt since.
 
 **PLANTED, THEN WORN** *(the seed-not-growth law: the sowing is charged;
 the growth is the road's)*
-12. Planted by {house} to {purpose} — and grown in the carrying into
+12. Planted by {house} to {purpose}, and grown in the carrying into
     something its planter never wrote. The record charges the sowing; the
     rest is the road's.
 13. The seed was {house}'s; the harvest is nobody's design. What was set
     as a whisper walks now as a tale twice its size.
 14. Begun on purpose, finished by accident: {house} set it, {timeband_since},
     and every mouth since has made it stranger.
-15. The intent is on the record — {house}, to {purpose}. What the tale
+15. The intent is on the record: {house}, to {purpose}. What the tale
     became after is wear, and wear has no author.
 
 **UNKNOWN** *(the honest terminal — never guessed)*
@@ -4078,5 +4078,5 @@ the growth is the road's)*
     carrier is not entered.
 17. Provenance ends here. What stands before this link was never
     receipted, and the paper will not invent it.
-18. Unknown — and marked so, because a guessed culprit would be a second
+18. Unknown, and marked so, because a guessed culprit would be a second
     manipulation.

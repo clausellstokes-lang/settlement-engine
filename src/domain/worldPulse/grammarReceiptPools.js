@@ -47,10 +47,10 @@
 /** @type {Readonly<Record<string, readonly ProseVariant[]>>} */
 export const GRAMMAR_RECEIPTS = Object.freeze({
   treaty_lapsed: [
-    (x) => `The peace of ${x.settlement} and ${x.counterpart} has run its course — ${x.band} years, and no hand that signed it still holds a seat.`,
+    (x) => `The peace of ${x.settlement} and ${x.counterpart} has run its course: ${x.band} years, and no hand that signed it still holds a seat.`,
     (x) => `The ${x.term} ${x.settlement} and ${x.counterpart} kept between them came to its last day and was filed as closed; neither court sent word, and the clerks who closed it were the only ones who marked it.`,
     (x) => `In ${x.settlement} the market kept its hours as always; the pact with ${x.counterpart} ended that week, and the carters heard of it after the clerks.`,
-    (x) => `${x.settlement} and ${x.counterpart} are bound by nothing now — the ${x.term} ran out, and neither court asked for another.`,
+    (x) => `${x.settlement} and ${x.counterpart} are bound by nothing now. The ${x.term} ran out, and neither court asked for another.`,
     (x) => `It was written for ${x.band} years and it kept every one of them; both courts let it go without a word.`,
     (x) => `A carter out of ${x.counterpart} asked the gate clerks for the ${x.term} and learned there was nothing left to ask for.`,
     'It ended at the turn of the year, in a season when neither court had anyone watching the parchment.',
@@ -59,7 +59,7 @@ export const GRAMMAR_RECEIPTS = Object.freeze({
     (x) => `The ${x.route} between ${x.settlement} and ${x.counterpart} is open again, to anything.`,
     "Nothing written stands between the two courts now; what comes next is nobody's to forbid.",
     (x) => `The captains in ${x.settlement} marked the week the pact lapsed and said nothing further.`,
-    (x) => `No oath forbids a march between ${x.settlement} and ${x.counterpart} — not since the spring.`,
+    (x) => `No oath forbids a march between ${x.settlement} and ${x.counterpart}, not since the spring.`,
     'Where a treaty stood there is now distance and habit.',
     (x) => `The first caravan down the ${x.route} this spring travelled without a writ, and nobody at either gate asked for one.`,
     (x) => `Merchants in ${x.settlement} have begun hiring their own guards for the ${x.counterpart} road.`,
@@ -87,7 +87,7 @@ export const GRAMMAR_RECEIPTS = Object.freeze({
     'Signed before most of the traders in the market were born, and still in force.',
     (x) => `It has outlasted many a lean harvest in ${x.settlement} and in ${x.counterpart}, and not a word of it has changed.`,
     'The parchment is soft at the folds; the terms are kept.',
-    'Young yet, as treaties go — the ink is barely set, and neither court has been tested.',
+    'Young yet, as treaties go. The ink is barely set, and neither court has been tested.',
     'The clerks recopy it when the ink fades, and nothing in the wording has ever changed in the recopying.',
     'Old enough that the roads it opened are simply the roads now.',
     (x) => `Sworn in a year the elders in ${x.counterpart} still name for its winter, and kept every year since.`,
@@ -96,7 +96,7 @@ export const GRAMMAR_RECEIPTS = Object.freeze({
     (x) => `On parchment the ${x.term} is honored; in fact ${x.settlement} has sent less than it swore for ${x.band} seasons, and nobody across the border has weighed it.`,
     (x) => `Kept in name. ${x.settlement} throttles it quietly, and ${x.counterpart}'s watchers sit too far off to tell.`,
     (x) => `The court of ${x.counterpart} holds this term sound. It is not.`,
-    'The shortfall is real and unseen — a quiet default, running since the turn of the year.',
+    'The shortfall is real and unseen: a quiet default, running since the turn of the year.',
     'Honored on every surface a free eye can reach. The truth of it is short wagons.',
     (x) => `The breach began small and has widened every season; nothing in ${x.counterpart}'s reach can measure it.`,
     (x) => `${x.settlement} knows exactly what it is withholding. The figure is kept by one clerk and shown to nobody.`,
@@ -125,7 +125,7 @@ export const GRAMMAR_RECEIPTS = Object.freeze({
   // oath stamp. The heir's name is on no surface this stage can read, which is why the ANNEX
   // was corrected rather than the slot filled (CR-GR4B-3).
   disavowed_by_succession: [
-    (x) => `The oath ${x.npc} swore has been torn up by the seat that followed him, and the world understands — and does not forgive.`,
+    (x) => `The oath ${x.npc} swore has been torn up by the seat that followed him, and the world understands, and does not forgive.`,
     (x) => `${x.settlement}'s new seat has cast off the oath; every term under it is broken from this week, and the parchment is kept only as evidence.`,
     (x) => `In ${x.counterpart} they had expected it, and it landed hard regardless.`,
     'The seat that swore is gone, and the word went out of the door with it.',

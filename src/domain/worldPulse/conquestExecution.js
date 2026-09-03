@@ -226,7 +226,7 @@ export function conquestMarginVerdict(input) {
     gap,
     ceiling: T.CAPPED_CEILING,
     receipt: band === 'clearly_winning'
-      ? `${occupierName} is plainly winning against ${occupiedName} by ${gap} points — and plainly`
+      ? `${occupierName} is plainly winning against ${occupiedName} by ${gap} points, and plainly`
         + ' winning is not overwhelming. It may hold and extract; it may not annex, and its war ends at a table.'
       : `${occupierName} holds ${occupiedName} by ${gap} points, which is a garrison and not a conquest.`,
   };

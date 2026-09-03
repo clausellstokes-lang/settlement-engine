@@ -101,7 +101,7 @@ function buildReadme({ name, moduleId, journalFile }) {
     'reload the world.',
     '',
     'Compatible with Foundry VTT v11–v13. Content is plain journal pages',
-    '(markdown) — no game-system dependency.',
+    '(markdown): no game-system dependency.',
     '',
   ].join('\n');
 }
@@ -130,7 +130,7 @@ export function buildFoundryModuleFiles({ settlement, vm, variant = 'canon_dossi
   const pages = buildJournalPages(vm, { variant, faithUnlocked });
 
   const journal = {
-    name: `${name} — Settlement Dossier`,
+    name: `${name}: Settlement Dossier`,
     pages: pages.map((p, i) => ({
       name: p.name,
       type: 'text',

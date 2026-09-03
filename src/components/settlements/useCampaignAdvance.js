@@ -29,7 +29,7 @@ export const ADVANCE_REFUSAL_TEXT = Object.freeze({
   busy: 'The realm is already advancing. Give it a moment.',
   advance_in_flight: 'The realm is already advancing. Give it a moment.',
   advance_paused: 'This realm has a paused advance. Resume it (or undo it) before advancing again.',
-  world_frozen: 'Time is frozen in this world — nothing moves until you unfreeze it. Change World progression in Simulation rules to advance.',
+  world_frozen: 'Time is frozen in this world. Nothing moves until you unfreeze it. Change World progression in Simulation rules to advance.',
 });
 
 /**

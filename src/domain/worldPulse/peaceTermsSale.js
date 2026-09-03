@@ -167,7 +167,7 @@ function buildSaleTreaty(sale, tick, swapId) {
   const sellerName = text(sale.sellerName) || sellerId;
   const buyerName = text(sale.buyerName) || buyerId;
   const receipts = [
-    `The Conveyance of ${assetId} — ${sellerName} to ${buyerName}, agreed in peace and paid for.`,
+    `The Conveyance of ${assetId}: ${sellerName} to ${buyerName}, agreed in peace and paid for.`,
     ...(Array.isArray(sale.reasons) ? sale.reasons.map(String) : []),
   ];
 
