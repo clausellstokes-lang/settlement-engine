@@ -2947,3 +2947,18 @@ The brief asserted that a catalog row with no resolvable adapter throws at modul
 *What Fable re-derives:* the 1-of-11 module-eval finding, and the naming ruling's premise that the two `chance_meeting` meanings genuinely collide.
 
 *Priority:* **HIGH for the sovereignty_registry drop** — it is landed and live.
+
+## §889.2 · THE THIRD INSTANCE OF ONE SHAPE — the guard lives in Python and the consequence lives in shell (2026-09-03, chair session 58f0a8e2, SEAT: Opus 5 — Fable-unvalidated)
+
+§889.1's ledger row landed but **its handoff amendment did not.** The splice embedded newlines inside a single list element, so the line-scoped assertion **correctly refused to write** — and then the shell, lacking `set -e`, **ran the ledger commit anyway** with the card unchanged. The row said the card carried the finding; the card did not.
+
+⭐⭐ **THIS IS THE THIRD INSTANCE TODAY OF EXACTLY ONE SHAPE, and naming the shape is worth more than the three fixes:**
+1. A merge resolution **asserted AFTER writing**, so a wrong assertion left a bad file and a shell with no `set -e` committed it.
+2. A gate wrapper's **`sh -n` FAILED and the launch ran anyway**, because only the trailing echo was gated on the check.
+3. Here: a **write-guard refused correctly and the commit ran anyway.**
+
+**The common cause is structural, not a lapse of attention: the GUARD lives in Python and the CONSEQUENCE lives in shell, so a failed guard declines its own edit while every later step proceeds as though it had succeeded.** ⭐ **THE FIX IS `set -e` AT THE HEAD OF ANY MULTI-STEP ACT THAT CARRIES A GUARD** — which this act used, and which is why this act stopped when the seat gate refused it rather than committing a half-record. The earlier §884.2 law ("an asserting edit must ABORT THE ACT, not merely decline the edit") was written about the *edit*; it needs this second half about the *act*.
+
+*What Fable re-derives:* nothing product-facing — this is a chair-process row. Verify the card now carries both §889.1 findings.
+
+*Priority:* **MEDIUM** — no product byte moved, but the shape has cost three corrections in one day.
