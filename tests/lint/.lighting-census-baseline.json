@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "a9984fb65d1f8f520efeeae6188bb6d7facb73ac",
-  "measuredBy": "Opus 5 — chair, ENC-1 landing",
+  "measuredAtSha": "15a83737fce9f17019223d0f53c37027a3908614",
+  "measuredBy": "Opus 5 — chair, §889 train",
   "date": "2026-09-03",
-  "note": "ENC-1 adds one test file (tests/domain/envoyChanceMeeting.test.js) at the composed tip.",
-  "files": 2506,
+  "note": "Four new test files at the composed tip: two READERREVIEW instrument suites, ENC-2 the meeting ledger, and the em-dash and determinism cars regenerating and re-pinning existing leaves.",
+  "files": 2510,
   "parked": 370,
-  "credited": 2136,
-  "titles": 22748,
-  "suiteTitles": 6122
+  "credited": 2140,
+  "titles": 22823,
+  "suiteTitles": 6139
 }
