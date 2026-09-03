@@ -14,17 +14,25 @@
  * says the Hall should know their name.
  *
  * Self-gates on:
- *   - flag('founderRecognition') (default off; flip when audience hook is stable)
- *   - useReaderAudience() === 'worldbuilder'
+ *   - flag('founderRecognition') (LIT 2026-09-03, row O-16; the stated
+ *     precondition "flip when audience hook is stable" is met — the ladder's
+ *     boundary matrix is pinned in tests/hooks/useReaderAudience.test.js)
+ *   - the reader audience verdict === 'worldbuilder'
  *   - founderSeatsRemaining > 0 (live RPC; null tolerated)
+ *
+ * ⭐ THE GATE IS READ FROM ONE PLACE AND IT CARRIES ITS EVIDENCE (row O-16).
+ * The first three conditions used to be recomputed here AND in
+ * useFounderTileEligible, kept in agreement by a comment. They now come from
+ * `useFounderRecognition()`, which returns the verdict WITH the typed grounds it
+ * rests on, so the tile, the parent's one-primary choice and the funnel receipt
+ * all speak about one reader from one computation. The seats RPC stays here: it
+ * is this component's own async narrowing and can only ever REMOVE eligibility.
  *
  * Click → navigates to the Hall. `lib/stripe.js` is deliberately NOT imported.
  */
 
 import { useEffect, useState } from 'react';
-import { useStore } from '../../store/index.js';
-import { useReaderAudience } from '../../hooks/useReaderAudience.js';
-import { flag } from '../../lib/flags.js';
+import { useFounderRecognition } from '../../hooks/useFounderTileEligible.js';
 import { FOUNDER_SEAT_CAP } from '../../lib/founderSeats.js';
 import { viewToPath } from '../../lib/routes.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
@@ -40,9 +48,8 @@ const INK_800 = swatch['#2C2210'];
 const GOLD_WASH = 'rgba(201,162,76,0.18)';
 
 export default function FounderTile() {
-  const audience = useReaderAudience();
-  const tier = useStore(s => s.auth.tier);
-  const recognitionEnabled = flag('founderRecognition');
+  const recognition = useFounderRecognition();
+  const { audience, earnedBy } = recognition;
   const [seatsRemaining, setSeatsRemaining] = useState(null);
 
   // Pull live seat counter once on mount. If the RPC errors, we leave
@@ -60,23 +67,27 @@ export default function FounderTile() {
   }, []);
 
   // Compute eligibility booleans up front so the effect's dep array
-  // captures them cleanly.
+  // captures them cleanly. The shared verdict carries flag + audience + tier;
+  // the sold-out narrowing is this component's own.
   const eligible =
-    recognitionEnabled &&
-    audience === 'worldbuilder' &&
-    tier !== 'premium' &&
+    recognition.eligible &&
     !(typeof seatsRemaining === 'number' && seatsRemaining <= 0);
 
   // FOUNDER_TILE_SHOWN fires once per session on first eligible render.
   // Putting this in an effect avoids the render-side analytics call
   // (purity rule) and the useState-as-ref hack that linted unhappy.
+  //
+  // `earnedBy` rides the receipt (row O-16): a recognition offer that cannot say
+  // what earned it is an assertion of entitlement. The codes are coarse enums,
+  // which is what the analytics prop contract admits — never names or free text.
   useEffect(() => {
     if (!eligible) return;
     Funnel.track(EVENTS.FOUNDER_TILE_SHOWN, {
       seatsRemaining,
       audience,
+      earnedBy,
     });
-  }, [eligible, seatsRemaining, audience]);
+  }, [eligible, seatsRemaining, audience, earnedBy]);
 
   if (!eligible) return null;
 
@@ -90,7 +101,7 @@ export default function FounderTile() {
     : null;
 
   function handleClick() {
-    Funnel.track(EVENTS.FOUNDER_TILE_CLICKED, { seatsRemaining, audience });
+    Funnel.track(EVENTS.FOUNDER_TILE_CLICKED, { seatsRemaining, audience, earnedBy });
   }
 
   return (

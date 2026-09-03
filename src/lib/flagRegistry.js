@@ -51,7 +51,27 @@ export const FLAG_DEFAULTS = Object.freeze({
   mapDropPreview: true,
   mapAutosave: true,
   welcomeBack: true,
-  founderRecognition: false,
+  // ⭐ LIT 2026-09-03 — row O-16, the owner's word of that day (a PAID-SURFACE
+  // flip: Founder Lifetime is a subscription tier, so this one was held on the
+  // desk by nature rather than by doubt). THE EVIDENCE LINE, because an
+  // entitlement surface may not be lit on an assertion:
+  //   • The flip's own stated precondition was "flip when audience hook is
+  //     stable" (FounderTile.jsx). The ladder's every boundary — anon, first
+  //     save, first export, first narrate, the five-save rung and each of the
+  //     three campaign signals — is pinned in tests/hooks/useReaderAudience.test.js.
+  //   • The tile SELLS NOTHING: the $99 checkout, its price arithmetic and its
+  //     retry path were removed at ODQ §118 (a chair is given, never bought), so
+  //     lighting it opens no purchase path.
+  //   • The scarcity claim agrees across surfaces: the tile and the pricing
+  //     cards both read FOUNDER_SEAT_CAP (30) and the same live RPC. The 500-vs-30
+  //     contradiction the 2026-07-13 review found was cured with the checkout.
+  //   • The gate now carries its grounds, not just its verdict
+  //     (hooks/useFounderTileEligible.js `founderRecognitionEvidence`).
+  // WHAT MOVES FOR A PAYING CUSTOMER: nothing. The tile self-gates on
+  // tier !== 'premium', so a subscriber sees exactly what they saw before. What
+  // changes is that a signed-in, non-premium reader whose behaviour has earned
+  // 'worldbuilder' now sees the Hall's recognition tile on the account page.
+  founderRecognition: true,
   heroV2: true,
   wizardChromeDiet: true,
   narrativeLayerStrip: true,
