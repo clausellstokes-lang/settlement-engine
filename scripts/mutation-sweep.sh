@@ -101,6 +101,7 @@ MUTATED_FILES=(
   src/lib/instantWorld/factionDedup.js
   src/domain/deitySnapshot.js
   src/domain/worldPulse/disposition.js
+  src/domain/display/stateProse/dossierMounts.js
 )
 if [ "${MUTATION_SWEEP_ALLOW_DIRTY:-}" != "1" ]; then
   dirty="$(git status --porcelain -- "${MUTATED_FILES[@]}" 2>/dev/null)"
@@ -970,6 +971,18 @@ check_caught "faith-embed/the restore path drops the authored-character keys" sr
 #     says is that seed's starting world forever.
 printf '\nconst _mut = Math.random();\n' >> src/lib/instantWorld/factionDedup.js
 check_caught "determinism/instantWorld Math.random()" src/lib/instantWorld/factionDedup.js "npx eslint src/lib/instantWorld/factionDedup.js"
+
+# 48. TRAIN 1 C2 — THE MOUNT REGISTRY'S TOTALITY LAW. dossierMounts.js is the dossier's
+#     router, and its whole claim is that every corpus block is either MOUNTED at a
+#     position or DECLARED DARK, with no third state. The failure it forecloses is the
+#     quiet one: a block leaves the dark list (or a new block arrives) and nothing on the
+#     page ever renders it, while the darkness figure the gate reads goes on looking
+#     healthy because the list got SHORTER. A shrink-only ratchet alone cannot see that —
+#     shrinking is the direction it exists to permit — so the totality join against the
+#     corpus is the arm that must red, and this plant is what proves it does. Strike
+#     DS-CND-1 from the dark half without mounting it anywhere.
+perl -0pi -e "s/  'DS-STR-1', 'DS-STR-2', 'DS-CND-1',\n/  'DS-STR-1', 'DS-STR-2',\n/" src/domain/display/stateProse/dossierMounts.js
+check_caught "dossier-mounts/a corpus block leaves the dark list with no mount" src/domain/display/stateProse/dossierMounts.js "npx vitest run tests/lint/dossierMountRegistry.walker.test.js --no-file-parallelism"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"
