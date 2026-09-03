@@ -21,7 +21,7 @@ export function useRealmMapExport(deps = {}) {
   const handleExportMap = useCallback(async () => {
     if (exportingMap) return;
     const bridge = bridgeRef?.current;
-    if (!bridge?.isReady) { showToast?.('info', 'The map is still loading — try again in a moment.'); return; }
+    if (!bridge?.isReady) { showToast?.('info', 'The map is still loading: try again in a moment.'); return; }
     setExportingMap(true);
     try {
       const { downloadRealmMapPng } = await import('../lib/realmMapExport.js');

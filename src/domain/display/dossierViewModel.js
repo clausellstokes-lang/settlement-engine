@@ -232,8 +232,8 @@ export function deriveViability(settlement) {
           : `feeds itself through ${through} and stored reserves`;
       } else {
         foodClause = magicFed
-          ? 'survives on local production, magical provision, and stored reserves — no meaningful import channel reaches it'
-          : 'survives on local production and stored reserves — no meaningful import channel reaches it';
+          ? 'survives on local production, magical provision, and stored reserves: no meaningful import channel reaches it'
+          : 'survives on local production and stored reserves: no meaningful import channel reaches it';
       }
     }
     return {
@@ -277,9 +277,9 @@ export function deriveBlockadeRelief(settlement) {
   let display = null;
   if (blockaded) {
     display = bypass === 'teleport'
-      ? "Supplies arrive by teleportation circle despite the siege — up to the circle's throughput."
+      ? "Supplies arrive by teleportation circle despite the siege: up to the circle's throughput."
       : bypass === 'airship'
-        ? 'Airships run the blockade — imports continue, impaired by siege countermeasures.'
+        ? 'Airships run the blockade. Imports continue, impaired by siege countermeasures.'
         : 'The blockade is biting: no magical channel runs it, and the import share of need goes unmet.';
   }
   return { available: true, blockaded, bypass, display };
@@ -448,7 +448,7 @@ export function deriveMagicPosture(settlement) {
     roles: { ...m.roles },
     display: m.magicExists === false
       ? 'Magic does not function in this world'
-      : `Availability ${m.availability} — ${m.legality}, ${m.cost} services, ${m.risk} risk`,
+      : `Availability ${m.availability}: ${m.legality}, ${m.cost} services, ${m.risk} risk`,
     roleLines: Object.entries(m.roles).map(([role, band]) => `${MAGIC_ROLE_LABEL[role] || role} role: ${band}`),
   };
 }

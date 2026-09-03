@@ -749,7 +749,7 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
         receipts.push({
           id: parentId, kind: 'satellite_orbit_dispersed', count: orphanSats.length,
           dispersedPopulation: dispersed, satIds: orphanSats.map((r) => r.id),
-          reason: 'parent terminal death — the orbit dispersed with the settlement',
+          reason: 'parent terminal death: the orbit dispersed with the settlement',
         });
         newsEntries.push(steadingNews('steading_orbit_dispersed', parentId, tick, now, {
           headline: pickLine(LIFECYCLE_NEWS.orbit_dispersed.headline, `${parentId}:${tick}:h`, { parent: String(parent0.name || parentId) }),
@@ -1005,7 +1005,7 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
           ledgerChanged = true;
           receipts.push({
             id: parentId, kind: 'satellite_abandoned', satId: next.id, name: next.name,
-            residualReturned: residual, dwell, remnant: 'none — a satellite never mints a ruin (the scarcity law)',
+            residualReturned: residual, dwell, remnant: 'none: a satellite never mints a ruin (the scarcity law)',
           });
           newsEntries.push(steadingNews('steading_abandoned', parentId, tick, now, {
             headline: pickLine(LIFECYCLE_NEWS.abandoned.headline, `${parentId}:${next.id}:${tick}:h`, { name: next.name }),
@@ -1108,7 +1108,7 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
                 id: condId,
                 archetype: STEADING_TRIBUTARY_ARCHETYPE,
                 label: 'Steading tributary',
-                description: `Fed by ${sats.length} outlying steading${sats.length === 1 ? '' : 's'} — grain, timber, and ore flow in from the orbit.`,
+                description: `Fed by ${sats.length} outlying steading${sats.length === 1 ? '' : 's'}: grain, timber, and ore flow in from the orbit.`,
                 severity,
                 status: 'stable',
                 // Both systems scan in SIGNED mode (causalState.applyConditions), so the
@@ -1231,7 +1231,7 @@ export function forceFoundSteadingEntry() {
     targetsFrom: null, entityKind: 'settlement', coversVetoCodes: [],
     dials: [
       { key: 'name', kind: 'text', default: '', clampAtCommit: false, label: 'Steading name (optional)' },
-      { key: 'resource', kind: 'text', default: '', clampAtCommit: false, label: 'Resource key (optional — the vein the camp exists for)' },
+      { key: 'resource', kind: 'text', default: '', clampAtCommit: false, label: 'Resource key (optional: the vein the camp exists for)' },
     ],
     // Town+ parents only; the cap + headroom walls hold under force (the verb refuses).
     predicate: () => ({ available: true, reasons: [], unlocks: [] }),

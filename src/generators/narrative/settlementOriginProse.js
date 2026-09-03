@@ -67,25 +67,25 @@ export const CHANNELS_TOKEN = '{channels}';
  */
 export const ORIGIN_POOLS = Object.freeze({
   road: Object.freeze([
-    'Established along a road route — trade flows in, goods flow out, people pass through.',
+    'Established along a road route. Trade flows in, goods flow out, people pass through.',
     'The road was here first. The settlement grew along its verge, and most of what it owns arrived on somebody else\'s cart.',
     'Founded roadside, where the day is measured in traffic: what arrives before noon, what leaves before dusk, and what stops for the night.',
-    'A road settlement — it makes its living from other people\'s journeys, in stabling and meals and small repairs.',
+    'A road settlement: it makes its living from other people\'s journeys, in stabling and meals and small repairs.',
     'Sited on a route already worn deep before anyone built here, on the reasoning that a road a century old will not be abandoned in one.',
   ]),
 
   crossroads: Object.freeze([
-    'Positioned at a major crossroads — trade flows through here by geography, not by choice.',
+    'Positioned at a major crossroads. Trade flows through here by geography, not by choice.',
     'Built where two roads refuse to avoid each other. Nobody chose this ground; the map did.',
-    'A crossroads settlement — the meeting of routes is the whole of its fortune and the whole of its exposure.',
+    'A crossroads settlement. The meeting of routes is the whole of its fortune and the whole of its exposure.',
     'Founded at a junction on the oldest logic there is: whoever holds the meeting of roads holds what moves along them.',
     'It exists because travellers had to stop somewhere, and the roads decided that somewhere was here.',
   ]),
 
   river: Object.freeze([
-    'Built along the river — water access shapes every economic decision.',
+    'Built along the river: water access shapes every economic decision.',
     'Founded on the bank, where the current does the hauling; every trade here is priced against what the water carries for nothing.',
-    'A river settlement. The channel sets the calendar — what floods, what freezes, and what can be moved between the two.',
+    'A river settlement. The channel sets the calendar: what floods, what freezes, and what can be moved between the two.',
     'Sited at the water\'s edge because the river was the only road worth having, and it has been the argument for staying ever since.',
     'Established along the river for drinking, for milling, and for moving what the fields produce. All three still hold.',
   ]),
@@ -93,7 +93,7 @@ export const ORIGIN_POOLS = Object.freeze({
   'port.generic': Object.freeze([
     'A port settlement whose wharves and navigable water define its trade.',
     'A port. The wharves are the reason the place exists, and everything inland of them is a consequence.',
-    'Founded where the water runs deep enough to unload — that fact, and no other, put a settlement on this ground.',
+    'Founded where the water runs deep enough to unload. That fact, and no other, put a settlement on this ground.',
     'A working port: what it is worth is counted in berths, and what it fears is counted in the same.',
     'Built around a landing. Trade arrives by hull rather than by axle, and the whole economy is shaped to that difference.',
   ]),
@@ -110,16 +110,16 @@ export const ORIGIN_POOLS = Object.freeze({
   // tests/generators/settlementOriginProse.test.js against the REAL predicate.
   'port.riverside': Object.freeze([
     'A river port built around navigable inland water; barges, wharves, and seasonal river traffic shape its economy.',
-    'An inland river port — barges rather than hulls, and a working season that closes when the channel does.',
+    'An inland river port: barges rather than hulls, and a working season that closes when the channel does.',
     'A river port whose wharves face a moving current; the year is divided by what the channel will allow.',
-    'A river port, founded where the water runs deep and steady enough to take a loaded barge — rarer than it sounds, and worth more.',
+    'A river port, founded where the water runs deep and steady enough to take a loaded barge. Rarer than it sounds, and worth more.',
     'An inland river port: cargo changes between barges and carts here, and the changing is itself the trade.',
   ]),
 
   'port.coastal': Object.freeze([
     'A coastal seaport whose existence is inseparable from the sea.',
     'A seaport. The tide sets the working day, and the harbour is the only asset that finally matters.',
-    'Founded on the coast for the shelter of its anchorage — the sea gives the settlement its living and sets the terms of it.',
+    'Founded on the coast for the shelter of its anchorage. The sea gives the settlement its living and sets the terms of it.',
     'A coastal settlement built to face the water. Most of what it eats, sells, and fears arrives the same way.',
     'A seaport whose horizon is its market; what the land behind it produces matters less than what the hulls carry off.',
   ]),

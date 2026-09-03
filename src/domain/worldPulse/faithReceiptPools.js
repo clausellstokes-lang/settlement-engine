@@ -59,7 +59,7 @@ export const FAITH_RECEIPTS = Object.freeze({
   faith_last_altar_dark: [
     (x) => `The last altar of ${x.creed} in ${x.settlement} went dark; none there now keep the rite.`,
     (x) => `The undercroft at ${x.temple} was cleared for grain, and the word is that nobody objected.`,
-    (x) => `${x.settlement}'s roster carries ${x.creed} no longer — not suppressed, not sleeping; gone from the parish entirely.`,
+    (x) => `${x.settlement}'s roster carries ${x.creed} no longer: not suppressed, not sleeping; gone from the parish entirely.`,
     (x) => `Whatever ${x.creed} was owed in ${x.settlement}, it is owed by nobody now.`,
     (x) => `${x.creed} kept ${x.settlement} for generations and lost it in a season nobody thought to write down.`,
   ],

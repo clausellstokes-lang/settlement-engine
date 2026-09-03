@@ -205,7 +205,7 @@ SLOTS: {creed} {settlement} {temple}
 AUDIENCE: public
 1. The last altar of {creed} in {settlement} went dark; none there now keep the rite.
 2. The undercroft at {temple} was cleared for grain, and the word is that nobody objected.
-3. {settlement}'s roster carries {creed} no longer — not suppressed, not sleeping; gone from the parish entirely.
+3. {settlement}'s roster carries {creed} no longer: not suppressed, not sleeping; gone from the parish entirely.
 4. Whatever {creed} was owed in {settlement}, it is owed by nobody now.
 5. {creed} kept {settlement} for generations and lost it in a season nobody thought to write down.
 

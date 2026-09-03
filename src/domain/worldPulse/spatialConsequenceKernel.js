@@ -262,7 +262,7 @@ function calamityWhereBeat(sub, stamps, sid, town, tick, now) {
   return spatialBeat(sid, 'calamity_where', {
     headline: `The calamity fell hardest on ${town}'s ${worstCat} quarter`,
     summary: `The disaster did not fall evenly on ${town}: the ${worstCat} quarter bore the worst of the toll, the harm running along the crowded, timber-close lots;${sparedClause}`,
-    reason: 'The spatial substrate distributed the calamity toll by district adjacency and flammability — WHERE the harm fell, never HOW MUCH (the totals are unchanged); the disaster kind is never asserted (bucket-neutral).',
+    reason: 'The spatial substrate distributed the calamity toll by district adjacency and flammability. WHERE the harm fell, never HOW MUCH (the totals are unchanged); the disaster kind is never asserted (bucket-neutral).',
     tag: 'calamity_where',
   }, tick, now);
 }
@@ -304,7 +304,7 @@ function covertDiffusionBeat(sub, sid, town, tick, now) {
   return spatialBeat(sid, 'covert_diffusion', {
     headline: `The exposed corruption in ${town} runs through the ${rootCat} quarter`,
     summary: `The rot laid bare in ${town} is no town-wide miasma: its roots run through the ${rootCat} quarter${creptClause}`,
-    reason: 'The spatial substrate diffused the exposed covert corruption along real district adjacency (leash-bounded) instead of a uniform town-wide spread — a WHERE swap; the settlement-level corruption magnitudes are unchanged.',
+    reason: 'The spatial substrate diffused the exposed covert corruption along real district adjacency (leash-bounded) instead of a uniform town-wide spread: a WHERE swap; the settlement-level corruption magnitudes are unchanged.',
     tag: 'covert_diffusion',
   }, tick, now);
 }

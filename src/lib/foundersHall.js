@@ -358,7 +358,7 @@ export const HALL_LETTER_PROMPTS = Object.freeze([
 
 /** The pre-typed subject that carries the request tag into the one support queue. */
 export const HALL_REQUEST_TAG = 'founders_request';
-export const HALL_REQUEST_SUBJECT = "Founders' Hall — a request for a chair";
+export const HALL_REQUEST_SUBJECT = "Founders' Hall: a request for a chair";
 
 /**
  * THE CIVILITY SEAM — the ONE place the Hall consults the guard.

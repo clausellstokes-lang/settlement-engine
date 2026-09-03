@@ -196,7 +196,7 @@ export function deriveHighWater(settlement) {
     readings.push({
       channel: 'PEAK_TIER_STAMP',
       peak: floorOf(stamp),
-      line: `peakTier stamp '${stamp}' over a ${derivedTier}-scale population — a recorded high water`,
+      line: `peakTier stamp '${stamp}' over a ${derivedTier}-scale population: a recorded high water`,
     });
     windows.push('peakTier: the monotone stamp (no history needed)');
   }
@@ -205,7 +205,7 @@ export function deriveHighWater(settlement) {
     readings.push({
       channel: 'TIER_DISAGREEMENT',
       peak: floorOf(storedTier),
-      line: `stored tier '${storedTier}' over a ${derivedTier}-scale population — a recorded demotion`,
+      line: `stored tier '${storedTier}' over a ${derivedTier}-scale population: a recorded demotion`,
     });
     windows.push('tier/population disagreement (no history needed)');
   }

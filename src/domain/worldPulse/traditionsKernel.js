@@ -491,7 +491,7 @@ function traditionBeat(a) {
     ? `${townName} sets aside ${rec.name}`
     : `${rec.name} ${phrase} in ${townName}`;
   const reason = outcome === TRADITION_OUTCOME.CANCELLED
-    ? `Set aside under hard stress or a lean season — no observance was held, at a mild cost to ${named ? `the town's standing, borne lightly since ${named} keep it` : "the seat's standing"}.`
+    ? `Set aside under hard stress or a lean season. No observance was held, at a mild cost to ${named ? `the town's standing, borne lightly since ${named} keep it` : "the seat's standing"}.`
     : `The observance was held and its fortune weighed: it ${positive ? 'lifted' : 'weighed on'} the town's trade and the standing of ${named ? `${named}, who answer for it` : 'the seat'}.`;
   return {
     id: `wizard_news.${tick}.tradition.${sid}.${rec.id}.${year}`,

@@ -96,7 +96,7 @@ const darkLifecycle = () => no(
 );
 const darkCalamity = () => no(
   ['The calamity layer is not active in this campaign.'],
-  ['Pick the Dramatic Campaign or Full Simulation preset — the calamity mover rides those presets.'],
+  ['Pick the Dramatic Campaign or Full Simulation preset: the calamity mover rides those presets.'],
 );
 // WR-10: the sovereignty market names NO settings path, deliberately. Every other
 // dark refusal above can point at a preset or a toggle because the layer it names is
@@ -166,7 +166,7 @@ export function conveyableAssetOptions(worldState, ctx) {
       const id = String(asset.assetId || '');
       if (!id || seen.has(id)) continue;
       seen.add(id);
-      out.push({ id, name: `${nameFor(ctx, id)} — held by ${holder.name}` });
+      out.push({ id, name: `${nameFor(ctx, id)}: held by ${holder.name}` });
     }
   }
   return out.sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
@@ -270,7 +270,7 @@ export const REALM_MANIFEST = Object.freeze({
     predicate: (/** @type {Mut} */ ws, /** @type {RealmCtx} */ ctx) =>
       !peaceCausalActive(ws) ? darkWar()
         : gate(campaignSettlementOptions(ctx).length >= 2,
-          'A grievance needs two courts — the campaign has fewer.', 'Canonize a second settlement.'),
+          'A grievance needs two courts. The campaign has fewer.', 'Canonize a second settlement.'),
   }),
   SUE_FOR_PEACE: Object.freeze({
     verb: 'SUE_FOR_PEACE', label: 'Sue for peace', family: 'War',
@@ -283,7 +283,7 @@ export const REALM_MANIFEST = Object.freeze({
     predicate: (/** @type {Mut} */ ws, /** @type {RealmCtx} */ ctx) =>
       !peaceCausalActive(ws) ? darkWar()
         : gate(belligerentOptions(ws, ctx).length > 0,
-          'No court has an army in the field — there is no war to wind down.'),
+          'No court has an army in the field. There is no war to wind down.'),
   }),
   REPUDIATE_TREATY: Object.freeze({
     verb: 'REPUDIATE_TREATY', label: 'Repudiate a treaty', family: 'War',
@@ -332,7 +332,7 @@ export const REALM_MANIFEST = Object.freeze({
       !sovereigntyTradeActive(ws) ? darkSovereignty()
         : gate(conveyableAssetOptions(ws, ctx).length > 0,
           'No court in this campaign holds anything it could convey.',
-          'A conveyance needs a holding the ledgers already name — a steading, or an occupation that has climbed to vassalage.'),
+          'A conveyance needs a holding the ledgers already name: a steading, or an occupation that has climbed to vassalage.'),
   }),
 
   // ── The supply-web doctrine pair (W-DOCTRINE-1) ────────────────────────
@@ -350,7 +350,7 @@ export const REALM_MANIFEST = Object.freeze({
     predicate: (/** @type {Mut} */ ws, /** @type {RealmCtx} */ ctx) =>
       !supplyWebWarfareActive(ws) ? darkWebwar()
         : gate(campaignSettlementOptions(ctx).length >= 2,
-          'An indirect campaign needs two courts — the campaign has fewer.', 'Canonize a second settlement.'),
+          'An indirect campaign needs two courts. The campaign has fewer.', 'Canonize a second settlement.'),
   }),
   DECLARE_TRADE_EMBARGO: Object.freeze({
     verb: 'DECLARE_TRADE_EMBARGO', label: 'Declare a trade embargo', family: 'War',
@@ -366,7 +366,7 @@ export const REALM_MANIFEST = Object.freeze({
     predicate: (/** @type {Mut} */ ws, /** @type {RealmCtx} */ ctx) =>
       !supplyWebWarfareActive(ws) ? darkWebwar()
         : gate(campaignSettlementOptions(ctx).length >= 2,
-          'An embargo needs two courts — the campaign has fewer.', 'Canonize a second settlement.'),
+          'An embargo needs two courts. The campaign has fewer.', 'Canonize a second settlement.'),
   }),
 
   // ── The convergence verbs (W-CONVERGENCE) ──────────────────────────────
@@ -402,7 +402,7 @@ export const REALM_MANIFEST = Object.freeze({
     // grayed-with-reason (LAW: grayed beats absent); execution lands with the
     // convergence column seam.
     predicate: () => no(
-      ['The relief-column commitment seam is not built yet — the reactive art of war ships its scorers; the column seam is a documented W-CONVERGENCE deferral.'],
+      ['The relief-column commitment seam is not built yet. The reactive art of war ships its scorers; the column seam is a documented W-CONVERGENCE deferral.'],
       ['Lands with the convergence spatial-column seam.'],
     ),
   }),
@@ -416,7 +416,7 @@ export const REALM_MANIFEST = Object.freeze({
     coversVetoCodes: ['intercept_deferred'],
     // Same honest deferral as REINFORCE (the shared spatial-column seam).
     predicate: () => no(
-      ['The intercept-column commitment seam is not built yet — a documented W-CONVERGENCE deferral (nothing to intercept spatially in wave 1).'],
+      ['The intercept-column commitment seam is not built yet: a documented W-CONVERGENCE deferral (nothing to intercept spatially in wave 1).'],
       ['Lands with the convergence spatial-column seam.'],
     ),
   }),
@@ -471,7 +471,7 @@ export const REALM_MANIFEST = Object.freeze({
     targetsFrom: 'campaignSettlements',
     targetOptions: (/** @type {Mut} */ ws, /** @type {RealmCtx} */ ctx) =>
       courseOptions(ws, Number(ws?.tick ?? ctx?.tick) || 0)
-        .map((/** @type {Mut} */ c) => ({ id: `${c.actorId}${COURSE_TARGET_SEP}${c.courseKey}`, name: `${nameFor(ctx, c.actorId)} — ${c.courseKey}` })),
+        .map((/** @type {Mut} */ c) => ({ id: `${c.actorId}${COURSE_TARGET_SEP}${c.courseKey}`, name: `${nameFor(ctx, c.actorId)}: ${c.courseKey}` })),
     stageArgs: splitCourseTarget,
     coversVetoCodes: ['reconsideration_gate_dark', 'reconsideration_no_course'],
     predicate: (/** @type {Mut} */ ws) =>
@@ -519,7 +519,7 @@ export const REALM_MANIFEST = Object.freeze({
     predicate: (/** @type {Mut} */ ws, /** @type {RealmCtx} */ ctx) =>
       !settlementLifecycleActive(ws) ? darkLifecycle()
         : gate(lifecycleTargets(ctx, false).length > 0,
-          'No living settlement to abandon.', 'Only a thorp-tier settlement can die — demote it first.'),
+          'No living settlement to abandon.', 'Only a thorp-tier settlement can die: demote it first.'),
   }),
   FORCE_RESETTLE: Object.freeze({
     ...resettleParked,
@@ -543,13 +543,13 @@ const REALM_VETO_PROSE_LOCAL = {
   treaty_breach_invalid: () => 'A treaty repudiation needs two different named signatories.',
   treaty_breach_no_live_nap: () => 'No live non-aggression pact binds those courts; there is no oath left to repudiate.',
   sovereignty_gate_dark: () => 'The sovereignty market is not active in this campaign. It rides the envoy layer, the demographic layer, and its own rule; no preset lights it yet.',
-  sovereignty_ineligible: d => d || 'The ledgers do not say that holding may be conveyed — a free settlement answers to no one, and its sovereignty is not a commodity.',
+  sovereignty_ineligible: d => d || 'The ledgers do not say that holding may be conveyed. A free settlement answers to no one, and its sovereignty is not a commodity.',
   intervention_gate_dark: () => `The intervention layer is not active in this campaign. Pick the Dramatic Campaign or Full Simulation preset, or light War and “Intervention” under ${WAVES_PATH}.`,
-  intervention_no_contest: d => `No coup contest is live at ${d || 'that settlement'} — an intervention needs a brewing coup to join.`,
+  intervention_no_contest: d => `No coup contest is live at ${d || 'that settlement'}. An intervention needs a brewing coup to join.`,
   intervention_busy: d => `${d || 'That court'} already has an army committed elsewhere (the one-army law).`,
   intervention_already: d => `${d || 'That court'} is already intervening in this contest.`,
-  reinforce_deferred: () => 'The relief-column commitment seam is a documented W-CONVERGENCE deferral — this verb is registered but not yet executable.',
-  intercept_deferred: () => 'The intercept-column commitment seam is a documented W-CONVERGENCE deferral — this verb is registered but not yet executable.',
+  reinforce_deferred: () => 'The relief-column commitment seam is a documented W-CONVERGENCE deferral. This verb is registered but not yet executable.',
+  intercept_deferred: () => 'The intercept-column commitment seam is a documented W-CONVERGENCE deferral. This verb is registered but not yet executable.',
   convoy_gate_dark: () => `The naval layer is not active. Canonize the realm map, then pick a world-alive preset or light “Sea lanes” under ${WAVES_PATH}.`,
   convoy_not_ports: d => `${d || 'Those settlements'} are not both sea-lane ports.`,
   convoy_no_deployment: d => `${d || 'That port'} has no deployed army to escort.`,
@@ -561,7 +561,7 @@ const REALM_VETO_PROSE_LOCAL = {
   blockade_already: d => `${d || 'That navy'} already blockades that port.`,
   reconsideration_gate_dark: () => `The momentum layer is not active in this campaign. Pick a world-alive preset, or light “Momentum” under ${WAVES_PATH}.`,
   reconsideration_no_course: d => `${d || 'That court'} holds no committed course to press.`,
-  calamity_gate_dark: () => 'The calamity layer is not active in this campaign. Pick the Dramatic Campaign or Full Simulation preset — the calamity mover rides those presets.',
+  calamity_gate_dark: () => 'The calamity layer is not active in this campaign. Pick the Dramatic Campaign or Full Simulation preset: the calamity mover rides those presets.',
   lifecycle_gate_dark: () => `The settlement lifecycle layer is not active in this campaign. Pick a world-alive preset, or light “New & lost steadings” under ${WAVES_PATH}.`,
   steading_refused: d => d || 'The founding was refused (the tier cap and headroom walls hold, even under force).',
   abandon_refused: d => d || 'The abandonment was refused (only a thorp-tier, living settlement can die).',

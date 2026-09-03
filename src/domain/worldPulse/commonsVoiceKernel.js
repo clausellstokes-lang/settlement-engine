@@ -191,9 +191,9 @@ function headlineFor(townName, rung, grievanceWord) {
 }
 /** @param {number} rung @param {string} grievanceWord @returns {string} */
 function summaryFor(rung, grievanceWord) {
-  if (rung === 1) return `The common folk have set their names to a petition, and their grievance — ${grievanceWord} — is carried to the seat in the open. No faction owns it; the crowd speaks for itself.`;
+  if (rung === 1) return `The common folk have set their names to a petition, and their grievance (${grievanceWord}) is carried to the seat in the open. No faction owns it; the crowd speaks for itself.`;
   if (rung === 2) return `The petition has become a gathering. The market square will not empty, and the talk of ${grievanceWord} hardens into a demand the seat can no longer pretend it has not heard.`;
-  return `The gathering has become a riot-band — an organised crowd, short of rebellion but past all petitioning, that holds the square and presses the seat over ${grievanceWord}. The watch is stretched, and the seat's standing bleeds by the hour.`;
+  return `The gathering has become a riot-band: an organised crowd, short of rebellion but past all petitioning, that holds the square and presses the seat over ${grievanceWord}. The watch is stretched, and the seat's standing bleeds by the hour.`;
 }
 
 /**

@@ -90,7 +90,7 @@ const TRADE_CHANNEL_TYPES = new Set(['trade_dependency', 'trade_route']);
 export const VOICE_LINES = Object.freeze({
   war: Object.freeze({
     onset: Object.freeze([
-      'Steel is drawn along the marches — the muster horns have not stopped since dawn.',
+      'Steel is drawn along the marches. The muster horns have not stopped since dawn.',
       'Hear it and mark it: a war is gathering at the borders, and the levy is called to the walls.',
       'The watchfires are doubled and the roads run thick with soldiers; the town braces for what is coming.',
       'Grievance has hardened into muster, and the drums along the front will not be quieted.',
@@ -101,7 +101,7 @@ export const VOICE_LINES = Object.freeze({
     ]),
     impact: Object.freeze([
       'The blow has fallen; smoke stands where the watchfires were.',
-      'War has come in earnest — the fighting is upon the front, and the wounded are already carried back.',
+      'War has come in earnest. The fighting is upon the front, and the wounded are already carried back.',
       'The clash is joined, and the town counts its dead before it counts the cost.',
       'Steel has met steel at the front; what was feared is now simply true.',
       'The fields are trampled and the barns emptied to feed the muster; the war eats everything it touches.',
@@ -110,10 +110,10 @@ export const VOICE_LINES = Object.freeze({
       'The ford is held by force and lost by force, and the river runs foul below the crossing.',
     ]),
     relief: Object.freeze([
-      'The banners are furled and the wounded carried home — this front, at least, goes quiet.',
+      'The banners are furled and the wounded carried home. This front, at least, goes quiet.',
       'The fighting has ebbed; the drums are silent and the muster horns hung up at last.',
       'Peace of a kind holds along the marches, and the levy may sleep in its own beds tonight.',
-      'The war has spent itself here — the roads are safe again, and the widows begin their mourning.',
+      'The war has spent itself here. The roads are safe again, and the widows begin their mourning.',
       'The gates stand open once more, and the plough is taken up where the pike was laid down.',
       'A truce is cried in the square, and the smiths turn from spearheads back to ploughshares.',
       'The garrison thins as the danger passes, and the walls are given back to the ivy.',
@@ -121,9 +121,9 @@ export const VOICE_LINES = Object.freeze({
     ]),
     fade: Object.freeze([
       'The threatened war never came to the sword; the levy stands down, grumbling.',
-      'The muster is dismissed — the threatened war never marched, and the horns fall quiet unblooded.',
+      'The muster is dismissed. The threatened war never marched, and the horns fall quiet unblooded.',
       'Whatever gathered at the borders has thought better of it; the walls are unmanned and the drums put away.',
-      'The alarm came to nothing — no steel was drawn, and the town returns to its plows.',
+      'The alarm came to nothing. No steel was drawn, and the town returns to its plows.',
       'The war-banners are rolled away unstained, and the whetstones go back to their pegs.',
       'The feared army melted from the marches before a blow fell, and the country lets out its breath.',
       'The quarrel cooled without bloodshed, and the pikes are stacked in the tithe-barn once more.',
@@ -132,10 +132,10 @@ export const VOICE_LINES = Object.freeze({
   }),
   faith: Object.freeze({
     onset: Object.freeze([
-      'The temples stir — a fervor is rising that the priests did not summon and cannot yet name.',
+      'The temples stir: a fervor is rising that the priests did not summon and cannot yet name.',
       'Hear the bells rung out of hour: something moves among the faithful, and the pews will not stay empty.',
       'A holy wind is gathering; the pilgrims are on the roads and the prayers grow loud.',
-      'The altars are crowded and the incense thick — a great devotion is coming over the people.',
+      'The altars are crowded and the incense thick. A great devotion is coming over the people.',
       'Strange dreams are spoken of at the well, and the shrine keeps its lamps burning past the midnight hour.',
       'The processions grow longer each holy day, and the old hymns are sung in the streets unbidden.',
       'A wandering preacher has set the market talking, and the tithe-box overflows for the first time in an age.',
@@ -143,9 +143,9 @@ export const VOICE_LINES = Object.freeze({
     ]),
     impact: Object.freeze([
       'The fervor has taken the town; every knee is bent and every voice raised to one name.',
-      'The faith has broken over the people like a wave — the temples overflow and the doubters have gone silent.',
+      'The faith has broken over the people like a wave. The temples overflow and the doubters have gone silent.',
       'What stirred in the temples now rules the streets; the devout carry their conviction like a torch.',
-      'The revival is upon us in full — the priests scarcely lead it, so hard does it pull.',
+      'The revival is upon us in full. The priests scarcely lead it, so hard does it pull.',
       'The holy days are kept with a fierce joy, and no craftsman works while the bells are ringing.',
       'Shrines spring up at every crossroad, and the pilgrims come in such numbers the inns cannot hold them.',
       'The whole country has caught the flame; feast and fast alike are observed with a zeal not seen in a lifetime.',
@@ -155,7 +155,7 @@ export const VOICE_LINES = Object.freeze({
       'The pilgrims disperse; whatever moved the faithful has, for now, moved on.',
       'The fervor has cooled to embers, and the temples keep their ordinary hours once more.',
       'The great devotion has passed its peak; the roads empty and the bells ring on their proper hours.',
-      'Calm returns to the altars — the people have prayed their fill and gone back to their labors.',
+      'Calm returns to the altars. The people have prayed their fill and gone back to their labors.',
       'The processions grow shorter, and the crossroad shrines are left to the wind and the sparrows.',
       'The wandering preacher has moved on down the road, and the congregation settles to its old quiet worship.',
       'The holy fire banks down to a steady warmth, and faith becomes a household thing again.',
@@ -163,7 +163,7 @@ export const VOICE_LINES = Object.freeze({
     ]),
     fade: Object.freeze([
       'The kindling of faith never caught; the pilgrims turned for home and the pews stand empty again.',
-      'The stir at the temples came to little — a season of talk, and the devout no more numerous than before.',
+      'The stir at the temples came to little. A season of talk, and the devout no more numerous than before.',
       'Whatever the priests feared or hoped for has guttered out; the altars are as quiet as ever.',
       'The looked-for revival did not come; the incense is packed away and the bells keep their old silence.',
       'The wandering preacher drew a crowd and then a shrug; the tithe-box is as light as it ever was.',
@@ -174,10 +174,10 @@ export const VOICE_LINES = Object.freeze({
   }),
   trade: Object.freeze({
     onset: Object.freeze([
-      'The caravan-masters trade worried looks — a shortage is riding in ahead of the wagons.',
+      'The caravan-masters trade worried looks. A shortage is riding in ahead of the wagons.',
       'Mark the market roads: a want is coming, and the wise are laying in stores while they can.',
       'The convoys run thin and the guilds mutter; hard bargaining is on the way.',
-      'Word runs ahead of the wagons that the goods will not come as they should — best fill the larder now.',
+      'Word runs ahead of the wagons that the goods will not come as they should: best fill the larder now.',
       'The weigh-house clerks frown over their tallies, and the price of barley creeps up by the day.',
       'A closed road upcountry has the merchants uneasy, and the wharves grow quiet before their time.',
       'The last convoy came in light, and the guildhall is thick with talk of a lean season ahead.',
@@ -185,7 +185,7 @@ export const VOICE_LINES = Object.freeze({
     ]),
     impact: Object.freeze([
       'The market has felt it: shelves thin, prices climb, and the guilds count what is left.',
-      'The shortage has bitten — the stalls stand half-empty and every coin buys less than it did.',
+      'The shortage has bitten. The stalls stand half-empty and every coin buys less than it did.',
       'The want is upon the market roads in full; the merchants ration and the poor go without.',
       'Trade has faltered and the town feels the pinch, from the guildhall down to the humblest cart.',
       'The wharves stand idle and the weigh-house scales gather dust; nothing comes and nothing goes.',
@@ -194,9 +194,9 @@ export const VOICE_LINES = Object.freeze({
       'The market square, so lately loud, is a thin and anxious place where every bargain is a quarrel.',
     ]),
     relief: Object.freeze([
-      'The roads run sweet again — the missing goods came in on the last convoy.',
+      'The roads run sweet again: the missing goods came in on the last convoy.',
       'The wagons are rolling once more; the stalls fill and the prices ease back toward reason.',
-      'The shortage has broken — the caravans are through and the market breathes again.',
+      'The shortage has broken. The caravans are through and the market breathes again.',
       'Plenty returns to the market roads, and the guilds breathe easy at last.',
       'The wharves are busy from dawn, and the weigh-house scales sing under honest weight once more.',
       "Bread is cheap at the stalls again, and the baker's queue is a place for gossip, not fear.",
@@ -205,7 +205,7 @@ export const VOICE_LINES = Object.freeze({
     ]),
     fade: Object.freeze([
       'The feared shortage never came; the wagons rolled in as they should and the worry was for nothing.',
-      'The market held after all — the trouble passed the town by, and the stalls stayed full.',
+      'The market held after all: the trouble passed the town by, and the stalls stayed full.',
       "The caravan-masters' fears proved idle; the goods arrived as ever and the prices never stirred.",
       'Whatever threatened the trade roads came to naught; the ledgers close as black as before.',
       'The closed road opened before the larders ran low, and the lean season the guilds dreaded never dawned.',
@@ -396,7 +396,7 @@ export const VOICE_LINES = Object.freeze({
     onset: Object.freeze([
       'The market roads run thick with laden wagons, and the guilds speak of fat years coming.',
       'A rising tide of trade lifts every stall; coin flows freer than it has in a long age.',
-      'Word runs of plenty on the way — the barns fill early and the merchants wear easy smiles.',
+      'Word runs of plenty on the way. The barns fill early and the merchants wear easy smiles.',
       'Good fortune gathers over the country, and the careful lay by against the day it turns.',
       'The harbours crowd with hulls and the sawmills run past dusk, and everyone can smell the coming good years.',
       'The first fat harvest in a lifetime is coming in, and the granary-keepers hardly know where to put it all.',
@@ -404,9 +404,9 @@ export const VOICE_LINES = Object.freeze({
       'A warmth of good fortune settles over the trade roads, and even the beggars at the gate eat better this season.',
     ]),
     impact: Object.freeze([
-      'The boom has come in earnest — the markets swell, the coin runs bright, and every craft finds a buyer.',
+      'The boom has come in earnest. The markets swell, the coin runs bright, and every craft finds a buyer.',
       'Plenty is upon the country in full; the granaries groan, the roads are gold with commerce, and the poorest table is not bare.',
-      'A golden season has broken over the town — the halls are warm, the temples kept, and no craftsman wants for work.',
+      'A golden season has broken over the town. The halls are warm, the temples kept, and no craftsman wants for work.',
       'The good years have arrived; wealth pools along the market roads, and the whole country seems to stand a little taller.',
       'The harbours cannot hold the hulls that crowd them, and the sawmills and forges run day and night to keep the pace.',
       'Every stall turns a profit and every barn is full, and the guilds coin new members faster than they can name them.',
@@ -415,7 +415,7 @@ export const VOICE_LINES = Object.freeze({
     ]),
     relief: Object.freeze([
       'The boom has eased to a steady plenty; the wild coin settles, and the country keeps the wealth it won.',
-      'The golden rush cools to a comfortable warmth — the markets calm, and the good fortune sinks quiet roots.',
+      'The golden rush cools to a comfortable warmth. The markets calm, and the good fortune sinks quiet roots.',
       'The fat years mellow into a long ease; the ledgers close black, and prosperity becomes an ordinary thing.',
       'The wild trade steadies into a dependable stream, and the country learns to wear its new wealth lightly.',
       'The harbours find their even rhythm again, and the plenty that flooded in becomes a comfortable, lasting tide.',
@@ -425,7 +425,7 @@ export const VOICE_LINES = Object.freeze({
     ]),
     fade: Object.freeze([
       'The promised plenty never quite arrived; the barns filled no fuller than most years, and the fat years stayed a rumour.',
-      'The looked-for boom came to little — the market roads stayed as they were, and the easy fortune passed the country by.',
+      'The looked-for boom came to little. The market roads stayed as they were, and the easy fortune passed the country by.',
       'The golden season that was foretold guttered out; the coin ran no brighter, and the merchants pack away their hopes.',
       'The harbours never did crowd, and the fat years the guilds toasted stayed a toast and nothing more.',
       'The rising tide the merchants promised each other rose no higher than the usual mark, and the sawmills keep their old hours.',
@@ -437,7 +437,7 @@ export const VOICE_LINES = Object.freeze({
   // Succor — mercy in grain, one town's granary opened for another's hunger.
   succor: Object.freeze({
     onset: Object.freeze([
-      'Word runs that the granaries of the fortunate are being asked to open — a neighbour goes hungry, and the plea has reached our gates.',
+      'Word runs that the granaries of the fortunate are being asked to open. A neighbour goes hungry, and the plea has reached our gates.',
       'A cry for relief comes up the road from a hungrier country, and the almoners are already counting what can be spared.',
       'The council is put to a hard question: how much mercy can the town afford before its own larder runs thin?',
       'A neighbour\'s harvest has failed, and their messengers stand at the gate asking grain of a country with barely enough.',
@@ -447,7 +447,7 @@ export const VOICE_LINES = Object.freeze({
       'The bells of a stricken neighbour ring for aid across the marches, and the council must decide how deep to reach.',
     ]),
     impact: Object.freeze([
-      'The grain-wagons are rolling to the stricken country — the mercy was weighed, and found affordable.',
+      'The grain-wagons are rolling to the stricken country. The mercy was weighed, and found affordable.',
       'Relief goes out from our stores to a neighbour in want, and the debt of it is quietly written down.',
       'The granaries have opened for the hungry beyond the walls; the wagons run heavy with charity and calculation both.',
       'Aid is on the road to the famined country, sent with one hand while the other keeps its careful accounts.',
@@ -457,7 +457,7 @@ export const VOICE_LINES = Object.freeze({
       'Relief rolls out from the granaries to the hungry country, and the givers watch it go with pride and calculation both.',
     ]),
     relief: Object.freeze([
-      'The sent grain has done its work — the hungry country steadies, and remembers well who fed it.',
+      'The sent grain has done its work. The hungry country steadies, and remembers well who fed it.',
       'The relief held; a neighbour is pulled back from the brink, and a bond is deepened by the giving.',
       'The wagons came in time, and a friend saved from famine is a friend for many a long season.',
       'The stricken country finds its feet on borrowed grain, and the debt of mercy binds the two the tighter.',
@@ -469,7 +469,7 @@ export const VOICE_LINES = Object.freeze({
     fade: Object.freeze([
       'The granaries stayed shut against the asking; the hungry country turns away, and the slight is not soon forgotten.',
       'The plea for relief went unanswered, and a grudge takes root where grain did not.',
-      'No wagons rolled — the mercy was weighed and refused, and the road home is long for the empty-handed.',
+      'No wagons rolled. The mercy was weighed and refused, and the road home is long for the empty-handed.',
       'The tithe-barn stayed locked while a neighbour starved, and the memory of the closed gate will outlast the famine.',
       'The council counted the cost and kept its stores, and the hungry country marks the refusal down in a colder ledger.',
       'The messengers of the starving marches go home with empty carts, and a bitterness settles where friendship might have.',

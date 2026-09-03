@@ -9,14 +9,14 @@ describe('roads whereabouts display (§12)', () => {
 
   it('formats a line per state, resolving place ids to names', () => {
     const resolve = (id) => (id === 'e' ? 'Dulwich' : null);
-    expect(whereaboutsLine(wa('hostage'), resolve)).toBe('Held in Dulwich — the ransom is being raised.');
+    expect(whereaboutsLine(wa('hostage'), resolve)).toBe('Held in Dulwich. The ransom is being raised.');
     expect(whereaboutsLine(wa('returning'), resolve)).toBe('On the road home from Dulwich.');
     expect(whereaboutsLine(wa('visiting', { purposeKind: 'observance' }), resolve)).toBe('Away in Dulwich, on a tradition.');
     expect(whereaboutsLine(wa('traveling', { purposeKind: 'diplomacy' }), resolve)).toBe('On the road to Dulwich, on a diplomatic errand.');
   });
 
   it('falls back to the raw place id when no resolver / unknown id', () => {
-    expect(whereaboutsLine(wa('hostage'))).toBe('Held in e — the ransom is being raised.');
+    expect(whereaboutsLine(wa('hostage'))).toBe('Held in e. The ransom is being raised.');
     expect(whereaboutsLine(wa('traveling', { placeId: '' }))).toBe('On the road to the road, on trade business.');
   });
 

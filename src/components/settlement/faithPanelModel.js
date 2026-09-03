@@ -90,10 +90,10 @@ export function pietyTrend(local01, target) {
 // The three STRUCTURAL inputs (authority / institutions / devotion) render as
 // bars, not sentences; these are the ARC drivers — why devotion is moving.
 const CAUSE_SENTENCE = Object.freeze({
-  conduct_drift: 'The town no longer lives like its god — devotion is ebbing.',
-  conduct_alignment: 'The town lives by its god’s creed — devotion runs deep.',
-  clergy_distortion: 'A compromised priesthood distorts the faith’s reach — the god arrives through bad priests.',
-  opposed_rivals: 'The patron’s word is muted — an opposed rival presses close behind the seat.',
+  conduct_drift: 'The town no longer lives like its god. Devotion is ebbing.',
+  conduct_alignment: 'The town lives by its god’s creed. Devotion runs deep.',
+  clergy_distortion: 'A compromised priesthood distorts the faith’s reach. The god arrives through bad priests.',
+  opposed_rivals: 'The patron’s word is muted. An opposed rival presses close behind the seat.',
 });
 const STRUCTURAL_SOURCES = new Set(['religious_authority', 'institutions', 'devotion']);
 const STRUCTURAL_LABEL = Object.freeze({
@@ -110,10 +110,10 @@ const STRUCTURAL_LABEL = Object.freeze({
 // out. None says a god fell, failed, died or departed; no deity axis is read and no deity
 // name is printed. An unknown cause renders NOTHING (total, never throws).
 export const FALL_SENTENCE = Object.freeze({
-  discredited: 'The patron fell — discredited: the creed lost its rightful claim, and the town let another take the seat.',
-  displaced: 'The patron fell — displaced: the town’s devotion drifted to another creed until the seat changed hands.',
-  imposed: 'The patron fell — imposed: the seat changed hands by decree of those who rule, not by the drift of belief.',
-  suppressed: 'The patron fell — suppressed: the creed was driven from its seat by force, its rites pushed out of the light.',
+  discredited: 'The patron fell. Discredited: the creed lost its rightful claim, and the town let another take the seat.',
+  displaced: 'The patron fell. Displaced: the town’s devotion drifted to another creed until the seat changed hands.',
+  imposed: 'The patron fell. Imposed: the seat changed hands by decree of those who rule, not by the drift of belief.',
+  suppressed: 'The patron fell. Suppressed: the creed was driven from its seat by force, its rites pushed out of the light.',
 });
 
 /**
@@ -129,8 +129,8 @@ function amplifierSource(localMult, realmMult) {
   const realm = Math.abs(realmMult - 1);
   if ((localMult - 1) * (realmMult - 1) < 0) {
     return local >= realm
-      ? 'The town’s own devotion carries it — the wider realm pulls the other way.'
-      : 'The wider realm carries it — the town’s own devotion pulls the other way.';
+      ? 'The town’s own devotion carries it. The wider realm pulls the other way.'
+      : 'The wider realm carries it. The town’s own devotion pulls the other way.';
   }
   if (local > realm * 1.5) return 'Mostly the town’s own devotion.';
   if (realm > local * 1.5) return 'Mostly the faith of the wider realm.';
@@ -158,9 +158,9 @@ function pietyModel(piety) {
   const source = realmActive ? amplifierSource(localMult, realmMult) : null;
   let amplifier = null;
   if (composite > 1.05) {
-    amplifier = { dir: 'up', mult: composite, source, sentence: `Faith runs strong here — the gods’ influence is amplified ×${composite.toFixed(2)}.` };
+    amplifier = { dir: 'up', mult: composite, source, sentence: `Faith runs strong here. The gods’ influence is amplified ×${composite.toFixed(2)}.` };
   } else if (composite < 0.95) {
-    amplifier = { dir: 'down', mult: composite, source, sentence: `Faith is thin here — the gods’ influence is dampened ×${composite.toFixed(2)}.` };
+    amplifier = { dir: 'down', mult: composite, source, sentence: `Faith is thin here. The gods’ influence is dampened ×${composite.toFixed(2)}.` };
   }
   const bars = causes
     .filter((c) => STRUCTURAL_SOURCES.has(c?.source))
@@ -218,8 +218,8 @@ export function faithPanelModel(settlement) {
   // the legible proxy — comfort drains, crisis reclaims). Owner's named phrases.
   let sinkSentence = null;
   if (unaffiliated != null && unaffiliated > 0 && piety) {
-    if (piety.trend === 'falling') sinkSentence = `Comfort drains the pews — ${unaffiliated}% of the town keeps no god now.`;
-    else if (piety.trend === 'rising') sinkSentence = `Crisis calls the faithful home — the unaffiliated (${unaffiliated}%) drift back to the temples.`;
+    if (piety.trend === 'falling') sinkSentence = `Comfort drains the pews: ${unaffiliated}% of the town keeps no god now.`;
+    else if (piety.trend === 'rising') sinkSentence = `Crisis calls the faithful home: the unaffiliated (${unaffiliated}%) drift back to the temples.`;
   }
 
   // WF-1E: the cause-chain line for a seat that CHANGED HANDS. profile.patronFall is the

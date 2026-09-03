@@ -177,7 +177,7 @@ export function treatyFrayingSummary(treaty, tick) {
   const frayingType = fray ? String(fray.type) : null;
   const line = frayingType
     ? `The peace holds by ${honored} term${honored === 1 ? '' : 's'} of ${terms.length}; the ${termLabel(frayingType)} frays.`
-    : `The peace holds — all ${terms.length} term${terms.length === 1 ? '' : 's'} stand.`;
+    : `The peace holds: all ${terms.length} term${terms.length === 1 ? '' : 's'} stand.`;
   return { total: terms.length, honored, frayingType, line };
 }
 

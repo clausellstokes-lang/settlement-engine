@@ -85,7 +85,7 @@ describe('war names — the key, and how it degrades', () => {
     const war = deriveWarName({ attackerId: 'kelby', defenderId: 'ashford', nameFor });
     expect(war.reasonType).toBeNull();
     expect(war.name).toMatch(/Ashford|Kelby/);
-    expect(war.line).toBe(`${war.name} — Kelby against Ashford.`);
+    expect(war.line).toBe(`${war.name}: Kelby against Ashford.`);
     expect(UNTYPED_WAR_NAME_MOLDS.map((mold) => mold({ a: 'Ashford', b: 'Kelby' }))).toContain(war.name);
   });
 
@@ -242,7 +242,7 @@ describe('road names — the first named-road surface', () => {
 
   test('the line carries the address, the mode and the typed band as a haul — never a cost', () => {
     const named = deriveRouteName({ row: landRow, fromId: 'ashford', nameFor });
-    expect(named.line).toBe(`${named.name} — Ashford to Kelby, overland, a steady haul.`);
+    expect(named.line).toBe(`${named.name}: Ashford to Kelby, overland, a steady haul.`);
     // anchored: the exact-equality assertion above pins the whole sentence, so this cannot go vacuous
     expect(named.line).not.toMatch(/\d/);
   });
@@ -260,7 +260,7 @@ describe('road names — the first named-road surface', () => {
 
   test('an absent band drops the haul clause rather than guessing one', () => {
     const named = deriveRouteName({ row: { ...landRow, band: null }, fromId: 'ashford', nameFor });
-    expect(named.line).toBe(`${named.name} — Ashford to Kelby, overland.`);
+    expect(named.line).toBe(`${named.name}: Ashford to Kelby, overland.`);
   });
 
   test('a foreign mode token is REFUSED, not renamed', () => {

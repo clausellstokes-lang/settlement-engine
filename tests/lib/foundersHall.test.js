@@ -294,7 +294,7 @@ describe('THE NEGATIVE PINS — the ones that pin hardest', () => {
   });
 
   test('the request subject carries the tag the admin panel filters on', () => {
-    expect(HALL_REQUEST_SUBJECT).toBe("Founders' Hall — a request for a chair");
+    expect(HALL_REQUEST_SUBJECT).toBe("Founders' Hall: a request for a chair");
   });
 
   // ── NON-VACUITY CONTROLS ──────────────────────────────────────────────────

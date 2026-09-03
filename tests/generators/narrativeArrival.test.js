@@ -191,7 +191,7 @@ describe('generateSiegeCapability joins the tensions array honestly', () => {
       { type: 'external_threat', description: 'Raiders probe the outlying farms' },
     ], 100);
     expect(out).toBe(
-      'The Sack of the Granary is still present in living memory — The supply of grain is under pressure.',
+      'The Sack of the Granary is still present in living memory: The supply of grain is under pressure.',
     );
     // The toBe above pins `out` to an exact full string, so this exclusion cannot
     // survive the subject drifting away — it names the defect that string encodes.
@@ -202,13 +202,13 @@ describe('generateSiegeCapability joins the tensions array honestly', () => {
   test('an EMPTY tensions array reaches the fallback clause (arrays are truthy)', () => {
     const out = generateSiegeCapability(recentEvents, [], 100);
     expect(out).toBe(
-      'The Sack of the Granary is still present in living memory — its effects shape current decisions.',
+      'The Sack of the Granary is still present in living memory: its effects shape current decisions.',
     );
   });
 
   test('plain-string tensions (legacy) pass through the join', () => {
     const out = generateSiegeCapability(recentEvents, ['old debts to the crown'], 100);
-    expect(out).toContain('— old debts to the crown.');
+    expect(out).toContain(': old debts to the crown.');
   });
 
   test('normalizes event articles and preserves existing terminal punctuation', () => {
@@ -225,7 +225,7 @@ describe('generateSiegeCapability joins the tensions array honestly', () => {
       100,
     );
     expect(out).toBe(
-      'The Succession Crisis is still present in living memory — The supply of grain is under pressure.',
+      'The Succession Crisis is still present in living memory: The supply of grain is under pressure.',
     );
     // The toBe above pins `out` to an exact full string, so this exclusion cannot
     // survive the subject drifting away — it names the defects that string encodes.

@@ -258,7 +258,7 @@ const ARCHETYPE_IMPACTS = Object.freeze({
       { field: 'power',       delta: -3, reason: 'Coin buys less leverage when the sword sets the agenda.' },
     ],
     criminal: [
-      { field: 'power',       delta: +4, reason: 'War economy — contraband arms, forged passes, deserters for hire.' },
+      { field: 'power',       delta: +4, reason: 'War economy: contraband arms, forged passes, deserters for hire.' },
       { field: 'wealth',      delta: +3, reason: 'Blockade-running commands a premium.' },
     ],
     religious: [
@@ -594,7 +594,7 @@ const ARCHETYPE_IMPACTS = Object.freeze({
       { field: 'publicTrust', delta: -3, reason: 'Empty shelves are laid at the guilds\' door whatever the cause.' },
     ],
     criminal: [
-      { field: 'power',       delta: +5, reason: 'Sanctions-busting is the underworld\'s ideal business — banned goods, ready buyers.' },
+      { field: 'power',       delta: +5, reason: 'Sanctions-busting is the underworld\'s ideal business: banned goods, ready buyers.' },
       { field: 'wealth',      delta: +5, reason: 'The embargo sets the smuggler\'s margin.' },
     ],
     government: [

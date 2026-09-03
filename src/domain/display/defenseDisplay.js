@@ -272,10 +272,10 @@ export function deriveSupportingCapabilities(settlement) {
       color: blockaded ? '#8b1a1a' : f.hasNavy ? '#1a3a6a' : '#3a5a7a', score: null,
       note: blockaded
         ? (bypass === 'teleport'
-            ? 'A hostile fleet blockades the sea approaches — only a teleportation circle still runs supply past it.'
+            ? 'A hostile fleet blockades the sea approaches. Only a teleportation circle still runs supply past it.'
             : bypass === 'airship'
-              ? 'A hostile fleet blockades the sea approaches — airships run the blockade, impaired by siege countermeasures.'
-              : 'A hostile fleet blockades the sea approaches — the port is choked, and no magical channel runs the line.')
+              ? 'A hostile fleet blockades the sea approaches. Airships run the blockade, impaired by siege countermeasures.'
+              : 'A hostile fleet blockades the sea approaches. The port is choked, and no magical channel runs the line.')
         : f.hasNavy
           ? 'Naval force controls sea approaches. Amphibious assault requires fleet superiority.'
           : 'Port facility but no naval force. Sea approaches are accessible to any vessel.',
@@ -329,7 +329,7 @@ export function deriveDefenseReadiness(settlement) {
     const [gateKey, expense] = READINESS_GATE_FOR[row.label] || [];
     const gate = gateKey ? gates[gateKey] : undefined;
     const fundingNote = Number.isFinite(gate) && /** @type {number} */ (gate) < 1
-      ? `Upkeep underfunded — ${expense} at ${Math.round(/** @type {number} */ (gate) * 100)}%`
+      ? `Upkeep underfunded: ${expense} at ${Math.round(/** @type {number} */ (gate) * 100)}%`
       : null;
     return {
       label: row.label,

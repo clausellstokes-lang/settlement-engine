@@ -1580,7 +1580,7 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
         reasons: [
           `The occupations return ${occupationYieldWordFor(benefitYield)}, and what comes in eases the weariness of the war at home.`,
           ...(inheritedHere && inheritedHere.hunger > 0
-            ? [`Netted down by the famine it annexed — ${inheritedHere.receipt}`]
+            ? [`Netted down by the famine it annexed: ${inheritedHere.receipt}`]
             : []),
         ],
         ...(recordMode ? { recordMode } : {}),

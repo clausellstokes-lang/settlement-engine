@@ -73,7 +73,7 @@ export const PROFILE_COERCION_LAWS = Object.freeze([
         ? {
           key: 'worldProgression', from: input.worldProgression, to: canonical.worldProgression,
           kind: 'stored', law: 'progression_unrecognized',
-          message: 'That world-progression setting isn’t recognized — defaulting to advancing it yourself.',
+          message: 'That world-progression setting isn’t recognized: defaulting to advancing it yourself.',
         }
         : null
     ),
@@ -102,7 +102,7 @@ export const PROFILE_COERCION_LAWS = Object.freeze([
         ? {
           key: 'spatialMode', from: input.spatialMode, to: canonical.spatialMode,
           kind: 'stored', law: 'geography_not_yet_built',
-          message: 'The realm does not yet reckon distance — every settlement is a neighbour.',
+          message: 'The realm does not yet reckon distance. Every settlement is a neighbour.',
         }
         : null
     ),
@@ -136,7 +136,7 @@ export const PROFILE_COERCION_LAWS = Object.freeze([
         ? {
           key: 'infoMode', from: input.infoMode, to: canonical.infoMode,
           kind: 'stored', law: 'information_not_yet_built',
-          message: 'That is not a custom of news the realm keeps — news can be all-knowing, true-but-slow, unreliable, or the full web of carriers and whispers.',
+          message: 'That is not a custom of news the realm keeps. News can be all-knowing, true-but-slow, unreliable, or the full web of carriers and whispers.',
         }
         : null
     ),
@@ -278,9 +278,9 @@ const CHANGE_PHRASES = {
     : 'time now passes as you advance it'),
   infoMode: value => ({
     omniscient: 'all news is now true and immediate',
-    perfect_delayed: 'news now travels — true, but only as fast as the roads',
-    unreliable: 'news now travels and twists — distance breeds rumor',
-    full: 'each faction now believes its own version — news travels, twists, and is reconciled from many tellings',
+    perfect_delayed: 'news now travels. True, but only as fast as the roads',
+    unreliable: 'news now travels and twists: distance breeds rumor',
+    full: 'each faction now believes its own version. News travels, twists, and is reconciled from many tellings',
   })[/** @type {string} */ (value)] || 'the realm follows a new custom of news',
   majorChangesRequireProposal: value => (value
     ? 'major turns now ask you first'
@@ -304,7 +304,7 @@ const CHANGE_PHRASES = {
     ? 'people now move on their own'
     : 'migrations now wait for your word'),
   seasonsEnabled: value => (value
-    ? 'the year now turns — harvests fill the granaries and winters draw them down'
+    ? 'the year now turns. Harvests fill the granaries and winters draw them down'
     : 'the seasons now hold still'),
 };
 

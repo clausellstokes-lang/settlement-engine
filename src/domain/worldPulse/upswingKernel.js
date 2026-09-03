@@ -576,7 +576,7 @@ export function advanceUpswing({ snapshot, worldState, settlementUpdates, graph,
           label: 'Reconstruction',
           severity: 0.4,
           affectedSystems: ['public_legitimacy', 'labor_capacity', 'social_trust'],
-          description: 'The settlement is rebuilding — the rebuild race is on.',
+          description: 'The settlement is rebuilding. The rebuild race is on.',
         },
       ));
       // CONSUME a siege/occupation-clearing trigger so it cannot re-arm the arc; the
@@ -690,7 +690,7 @@ export function advanceUpswing({ snapshot, worldState, settlementUpdates, graph,
               {
                 id: `condition.boom.${tick}`, archetype: 'boom', label: 'Boom',
                 severity: 0.4, affectedSystems: ['public_legitimacy', 'trade_connectivity'],
-                description: `A trade boom — prosperous, and quietly dependent on ${arteries.length} artery${arteries.length === 1 ? '' : 's'}${fragile ? ' (fragile: a single failure could bust it)' : ''}.`,
+                description: `A trade boom: prosperous, and quietly dependent on ${arteries.length} artery${arteries.length === 1 ? '' : 's'}${fragile ? ' (fragile: a single failure could bust it)' : ''}.`,
               },
             ));
             nextUpdates[ui] = { ...nextUpdates[ui], settlement };
@@ -752,7 +752,7 @@ export function advanceUpswing({ snapshot, worldState, settlementUpdates, graph,
         {
           id: `condition.flourishing.${tick}`, archetype: 'flourishing', label: 'Flourishing',
           severity: 0.35, affectedSystems: ['public_legitimacy', 'social_trust'], // NO economic/martial system
-          description: 'A long peace and steady legitimacy have made the settlement culturally fertile — a golden age, modest and bounded.',
+          description: 'A long peace and steady legitimacy have made the settlement culturally fertile: a golden age, modest and bounded.',
         },
       ));
       // The founding BIAS made concrete + bounded: found ONE cultural institution if none.
@@ -846,7 +846,7 @@ function sortedRecord(rec) {
  */
 function reconstructionNews(id, name, upgrade, skimmed, year, tick, now) {
   const built = upgrade ? ` The ${upgrade.to} rises where the ${upgrade.from} stood.` : '';
-  const graft = skimmed ? ' Yet not all the rebuilding coin reached the stonemasons — a quiet graft has taken root.' : '';
+  const graft = skimmed ? ' Yet not all the rebuilding coin reached the stonemasons. A quiet graft has taken root.' : '';
   return {
     id: `wizard_news.${tick}.reconstruction.${id}`,
     tick, createdAt: now, scope: 'local', significance: 'notable', severity: 0.4, score: 62,
@@ -929,7 +929,7 @@ function applyProsperityDeltasToUpdates(updates, updateIndex, prosperityDeltas) 
 /** The boom-enter news (house voice, AGGREGATE). @param {string} id @param {string} name
  *  @param {string[]} arteries @param {boolean} fragile @param {number} tick @param {string|null} now */
 function boomNews(id, name, arteries, fragile, tick, now) {
-  const dep = fragile ? ' Its wealth rides on a single artery — a fragile prosperity.' : '';
+  const dep = fragile ? ' Its wealth rides on a single artery: a fragile prosperity.' : '';
   return {
     id: `wizard_news.${tick}.boom.${id}`,
     tick, createdAt: now, scope: 'regional', significance: 'notable', severity: 0.4, score: 60,
@@ -956,14 +956,14 @@ function bustNews(id, name, arteries, embattled, tick, now) {
     settlementIds: [id], impactIds: [], channelIds: [],
     sourceEventId: `bust.${id}.${tick}`,
     tags: ['world_pulse', 'upswing', 'bust'],
-    reasons: [pickLine(UPSWING_NEWS.bust.reasons, `${id}:${tick}:r`, { arteryClause: arteries[0] ? ` — the ${arteries[0]} artery` : '' })],
+    reasons: [pickLine(UPSWING_NEWS.bust.reasons, `${id}:${tick}:r`, { arteryClause: arteries[0] ? `: the ${arteries[0]} artery` : '' })],
   };
 }
 
 /** The flourishing (golden-age) chronicle beat. @param {string} id @param {string} name
  *  @param {string|null} founded @param {number} tick @param {string|null} now */
 function flourishingNews(id, name, founded, tick, now) {
-  const built = founded ? ` A new ${founded} opens its doors — the founding bias of a fertile peace.` : '';
+  const built = founded ? ` A new ${founded} opens its doors. The founding bias of a fertile peace.` : '';
   return {
     id: `wizard_news.${tick}.flourishing.${id}`,
     tick, createdAt: now, scope: 'regional', significance: 'notable', severity: 0.3, score: 55,

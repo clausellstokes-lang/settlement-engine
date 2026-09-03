@@ -364,12 +364,12 @@ export function evaluateMoralInstitutionPressure(worldState, snapshot, context =
           : `${item.name || item.id} may abolish its ${instName}`,
         summary: best.martial
           ? `Long peace under ${patronName} is letting the ${instName} lapse.`
-          : `Under ${patronName}, ${instName} faces abolition — ${cause}.`,
+          : `Under ${patronName}, ${instName} faces abolition: ${cause}.`,
         reasons: [
           best.martial
             ? `A demilitarizing town no longer sustains the ${instName}.`
             : `${patronName} leads the abolition: ${cause}.`,
-          'The case against it has been building for seasons rather than arriving in a single ruling — an arc, not a decree.',
+          'The case against it has been building for seasons rather than arriving in a single ruling: an arc, not a decree.',
         ],
         institutionPatch: {
           saveId: item.id,
@@ -523,7 +523,7 @@ export function evaluateMoralInstitutionFounding(worldState, snapshot, context =
         summary: `Under ${patronName}, ${nameLower} rises because ${cause}.`,
         reasons: [
           `${patronName} raises the ${nameLower}: ${cause}.`,
-          'The case for it has been building for years rather than arriving in a single ruling — an arc, not a decree.',
+          'The case for it has been building for years rather than arriving in a single ruling: an arc, not a decree.',
         ],
         institutionPatch: {
           saveId: item.id,

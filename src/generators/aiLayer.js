@@ -257,7 +257,7 @@ export function buildAiLayerPrompt(ctx) {
   if (ctx.tensions.length)  lines.push(`Current tensions: ${ctx.tensions.join('; ')}`);
 
   lines.push('\nECONOMY & TRADE');
-  lines.push(`Economic score: ${ctx.econScore}/100 — ${ctx.foodSituation}`);
+  lines.push(`Economic score: ${ctx.econScore}/100, ${ctx.foodSituation}`);
   lines.push(`Income sources: ${ctx.incomeSources}`);
   if (ctx.chains.length) lines.push(`Active supply chains: ${ctx.chains.join(', ')}`);
   if (ctx.tradeDeps.length) lines.push(`Critical import dependencies: ${ctx.tradeDeps.join(', ')}`);
@@ -265,7 +265,7 @@ export function buildAiLayerPrompt(ctx) {
 
   lines.push('\nSAFETY & DEFENSE');
   lines.push(`Safety: ${ctx.safetyLabel || ctx.safetyScore+'/100'}`);
-  lines.push(`Defense posture: ${ctx.defense || 'unrated'} — military score ${ctx.milScore}/100`);
+  lines.push(`Defense posture: ${ctx.defense || 'unrated'}, military score ${ctx.milScore}/100`);
   if (ctx.walls.length)    lines.push(`Fortifications: ${ctx.walls.join(', ')}`);
   if (ctx.garrison.length) lines.push(`Military presence: ${ctx.garrison.join(', ')}`);
   if (ctx.crimeTypes.length) lines.push(`Crime types: ${ctx.crimeTypes.join(', ')}`);
@@ -282,11 +282,11 @@ export function buildAiLayerPrompt(ctx) {
   if (ctx.services.length)    lines.push(`Available services: ${ctx.services.join(', ')}`);
 
   lines.push('\nNPCS & RELATIONSHIPS');
-  lines.push(`${ctx.npcsCount} NPCs total — ${ctx.relationships} rivalries/alliances`);
+  lines.push(`${ctx.npcsCount} NPCs total: ${ctx.relationships} rivalries/alliances`);
   if (ctx.keyNPCs.length) lines.push(`Key figures: ${ctx.keyNPCs.join('; ')}`);
 
   lines.push('\nHISTORY');
-  if (ctx.age) lines.push(`Age: ~${ctx.age} years — ${ctx.historicalChar || 'varied history'}`);
+  if (ctx.age) lines.push(`Age: ~${ctx.age} years, ${ctx.historicalChar || 'varied history'}`);
   if (ctx.eventTypes.length) lines.push(`Event history: ${ctx.eventTypes.join(', ')}`);
   if (ctx.siegeNarrative) lines.push(`Historical memory: ${ctx.siegeNarrative}`);
 

@@ -108,9 +108,9 @@ const buildTradeNarrative = (tier, culture, magicPriority, materializedDetail = 
   const TIER_BASE = {
     thorp: `The settlement is small enough that you can see all of it from the road: ${detail}.`,
     hamlet: `A dozen buildings around a central green, most of them old. ${sentenceDetail}.`,
-    village: `A proper village, large enough to have a market and small enough that strangers are noticed — ${detail}.`,
+    village: `A proper village, large enough to have a market and small enough that strangers are noticed: ${detail}.`,
     town: `A market town of substance: multiple streets, a visible guild quarter, ${detail}.`,
-    city: `A city, properly speaking — dense, layered, too large to take in at once. ${sentenceDetail}.`,
+    city: `A city, properly speaking: dense, layered, too large to take in at once. ${sentenceDetail}.`,
     metropolis: `The scale of the place takes a moment to register. This is not one city so much as several districts, markets, and old settlements grown together into the region's great urban centre. ${sentenceDetail}.`,
   };
 
@@ -283,7 +283,7 @@ export const genArrivalDetail = (
           ]
         : [
             'started as a seasonal camp for deep-water fishers who stopped bothering to go home between seasons',
-            'grew around a natural harbour that fish seemed to prefer — nobody knows why, and nobody questions it',
+            'grew around a natural harbour that fish seemed to prefer. Nobody knows why, and nobody questions it',
           ],
       iron: [
         'was founded the week someone hit iron three feet below the surface and word reached the nearest city',
@@ -291,7 +291,7 @@ export const genArrivalDetail = (
       ],
       stone: [
         'began when quarry workers sent to extract stone for a distant cathedral decided the site was worth keeping for themselves',
-        "was established because the local stone cuts cleanly and doesn't crack in frost — a property worth more than it sounds",
+        "was established because the local stone cuts cleanly and doesn't crack in frost: a property worth more than it sounds",
       ],
       gems: [
         "was founded the day a shepherd's child found a stone in a streambed that turned out to be worth more than the flock",
@@ -307,7 +307,7 @@ export const genArrivalDetail = (
       ],
       salt: [
         'was established to control a salt deposit that the local lord considered more valuable than the surrounding farmland combined',
-        'grew around salt workings that made everything they touched last longer — including the settlement itself',
+        'grew around salt workings that made everything they touched last longer: including the settlement itself',
       ],
       alchemy: [
         "attracted practitioners seeking ingredients found nowhere else within three days' travel",
@@ -315,7 +315,7 @@ export const genArrivalDetail = (
       ],
       crafts: [
         'was founded when a group of skilled artisans pooled resources to build a permanent workshop district away from guild restrictions',
-        "grew because the local clay and water made the finest ceramic work in the region — a reputation that preceded the settlement's name",
+        "grew because the local clay and water made the finest ceramic work in the region: a reputation that preceded the settlement's name",
       ],
     };
     const commodityHooks = COMMODITY_HOOKS[commodity] || [];
@@ -644,7 +644,7 @@ const genCoherence = settlement => {
       type: 'power_economic',
       severity: 'notable',
       tab: 'overview',
-      note: `${crimeFaction.faction} controls ${crimeFaction.power}% of power here. Stated prosperity reflects gross output — a meaningful share flows outside official taxation.`,
+      note: `${crimeFaction.faction} controls ${crimeFaction.power}% of power here. Stated prosperity reflects gross output. A meaningful share flows outside official taxation.`,
     });
   }
 
@@ -662,7 +662,7 @@ const genCoherence = settlement => {
         type: 'historical_economic',
         severity: 'context',
         tab: 'history',
-        note: 'This settlement has a recovery narrative — significant economic hardship in its past, followed by more recent growth. Current prosperity was rebuilt, not inherited. The memory of the collapse shapes how risk and surplus are managed.',
+        note: 'This settlement has a recovery narrative: significant economic hardship in its past, followed by more recent growth. Current prosperity was rebuilt, not inherited. The memory of the collapse shapes how risk and surplus are managed.',
       });
     }
   }
@@ -699,7 +699,7 @@ const _getSettReason = (safetyLabel, monsterThreat, hasStress) => {
   }
   if (label.includes('military') || label.includes('ordered')) {
     return pickRandom([
-      'The settlement has a military discipline to it — not oppressive, but structured.',
+      'The settlement has a military discipline to it, not oppressive, but structured.',
       'The guards are well-turned-out. Someone takes their job seriously.',
     ]);
   }
@@ -785,12 +785,12 @@ export const generateSettlementReason = (tier, route, neighbor, _config = {}, fo
   // Tier-specific context
   if (tier === 'metropolis') {
     lines.push(
-      'At this scale, the settlement no longer serves a single economic function — it IS the economic function for its region.',
+      'At this scale, the settlement no longer serves a single economic function. It IS the economic function for its region.',
     );
   } else if (tier === 'city') {
     lines.push(
       hasFoodDeficit
-        ? 'Large enough that its appetites outrun its fields — what the city consumes, it cannot fully produce.'
+        ? 'Large enough that its appetites outrun its fields. What the city consumes, it cannot fully produce.'
         : 'Large enough to produce what it consumes and consume what it produces. External trade amplifies rather than sustains.',
     );
   } else if (['thorp', 'hamlet'].includes(tier)) {

@@ -546,7 +546,7 @@ export const generatePowerStructure = (
               ? "The local lord's household; land rights and feudal obligation give them a formal claim to authority, though other factions hold more practical influence day to day."
               : hasNobleInst && governingFaction && governingFaction.includes('Royal Authority')
                 ? noblePower > 25
-                  ? "The great noble houses are the crown's military and fiscal foundation — and they know it. Royal policy is negotiated with them as much as decreed over them."
+                  ? "The great noble houses are the crown's military and fiscal foundation, and they know it. Royal policy is negotiated with them as much as decreed over them."
                   : noblePower > 15
                     ? 'Hereditary landowners whose cooperation the crown depends on for levies, taxes, and regional order. Not powerful enough to dictate, but essential enough to court.'
                     : 'Noble families nominally loyal to the crown, but watching which way the political wind is blowing before committing resources.'
@@ -589,7 +589,7 @@ export const generatePowerStructure = (
       militaryDescFinal =
         governingFaction && (governingFaction.toLowerCase().includes('military council') || governingFaction.toLowerCase().includes('martial'))
           ? militaryDesc +
-            ' Operationally distinct from the command council — these are the soldiers and watchmen, not the officers who govern.'
+            ' Operationally distinct from the command council: these are the soldiers and watchmen, not the officers who govern.'
           : militaryDesc,
       militaryCap = governingFaction && governingFaction.includes('Merchant oligarchy') ? Math.round(merchantPower * 0.85) : 9999;
     factions.push({
@@ -625,7 +625,7 @@ export const generatePowerStructure = (
                 : "Church holds substantial temporal power; tithes fund civic works and the clergy's opinion on appointments carries decisive weight."
               : religiousPower > 17
                 ? ['city', 'metropolis'].includes(tier)
-                  ? 'Major church institutions hold structural influence — land grants, hospital networks, and moral authority give them leverage across multiple civic domains.'
+                  ? 'Major church institutions hold structural influence. Land grants, hospital networks, and moral authority give them leverage across multiple civic domains.'
                   : ['hamlet', 'village'].includes(tier)
                     ? 'The parish priest is the most educated person for miles; moral authority and practical influence are inseparable at this scale.'
                     : 'Church institutions are well-embedded in civic life; their opinion on appointments, taxation, and law is sought and usually influential.'
@@ -683,12 +683,12 @@ export const generatePowerStructure = (
       power: arcaneAdjPower,
       desc:
         arcaneAdjPower > 22
-          ? 'Arcane institutions hold substantial political leverage here — contracts, security, and infrastructure all depend on magical services only they provide.'
+          ? 'Arcane institutions hold substantial political leverage here. Contracts, security, and infrastructure all depend on magical services only they provide.'
           : arcaneAdjPower > 16
             ? 'Wizard towers and mage guilds hold genuine political weight; their services are structurally irreplaceable and they know it.'
             : arcaneAdjPower > 10
               ? 'Mages and arcane practitioners hold real influence through monopoly on magical services and the latent fear their capabilities inspire.'
-              : 'Magical practitioners are consulted but not formally empowered — their influence is advisory, transactional, and quietly resented.',
+              : 'Magical practitioners are consulted but not formally empowered. Their influence is advisory, transactional, and quietly resented.',
     });
   const stressType = (config == null ? void 0 : config.stressType) || null,
     stressTypes = (config == null ? void 0 : config.stressTypes) || (stressType ? [stressType] : []),

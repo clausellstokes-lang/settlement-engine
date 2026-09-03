@@ -263,7 +263,7 @@ export function executeSovereigntyTransfer({
       };
     }
     state = moved.worldState;
-    receipts.push(`${assetId} passed from ${seller} to ${buyer} — a steading is property, and property changes hands.`);
+    receipts.push(`${assetId} passed from ${seller} to ${buyer}. A steading is property, and property changes hands.`);
     newsSeeds.push(Object.freeze({
       kind: 'sovereignty_edge_rewritten',
       assetId, fromId: seller, toId: buyer, tick, assetKind: 'satellite',

@@ -51,7 +51,7 @@ export async function requestCampaignChronicle({ campaign, snapshot, tick = null
     if (error) return { error: error.message || 'Chronicle failed', grounding };
     return { chronicle: body?.chronicle, creditsRemaining: body?.creditsRemaining, grounding };
   } catch (e) {
-    return { error: `Chronicle unavailable — ${e?.message || e}`, grounding };
+    return { error: `Chronicle unavailable: ${e?.message || e}`, grounding };
   }
 }
 

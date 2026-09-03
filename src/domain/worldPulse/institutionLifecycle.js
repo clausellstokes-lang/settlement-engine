@@ -445,7 +445,7 @@ export function detectInstitutionGaps(/** @type {any} */ settlement, /** @type {
       addGap(
         buildableCatalogEntry('Underground network', settlement, existingNames),
         'clandestine',
-        'A thriving criminal underground calls for excavated tunnels — smugglers’ warrens and escape ways.',
+        'A thriving criminal underground calls for excavated tunnels: smugglers’ warrens and escape ways.',
         { via: 'underways' },
       );
     }

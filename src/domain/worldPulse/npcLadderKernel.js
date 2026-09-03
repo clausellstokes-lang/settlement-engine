@@ -1171,13 +1171,13 @@ function ladderBeat(sid, townName, fkey, ev, tick, now) {
     ? `${ev.challengerName} takes the seat above ${ev.defenderName}`
     : `${ev.challengerName}'s bid against ${ev.defenderName} fails`;
   const summary = win
-    ? `In ${townName}, ${ev.challengerName} has displaced ${ev.defenderName} and risen a rung — a promotion is a displacement, and every rise has a named loser.`
-    : `In ${townName}, ${ev.challengerName} moved against ${ev.defenderName} and was thrown back — ambition risked something real, and the challenger drops a rung for it.`;
+    ? `In ${townName}, ${ev.challengerName} has displaced ${ev.defenderName} and risen a rung. A promotion is a displacement, and every rise has a named loser.`
+    : `In ${townName}, ${ev.challengerName} moved against ${ev.defenderName} and was thrown back. Ambition risked something real, and the challenger drops a rung for it.`;
   // TE-HERALD-1: `cScore` and `dScore` ride the event record; what the sentence needed
   // from them it already says — the challenge CLEARED or FELL SHORT of the sustained
   // margin, which is the whole meaning of comparing the two.
   const reason = win
-    ? `A challenge pressed through ${windows} cleared the sustained margin. The ranks swapped — conservation holds, no title inflation.`
+    ? `A challenge pressed through ${windows} cleared the sustained margin. The ranks swapped. Conservation holds, no title inflation.`
     : `A challenge pressed through ${windows} fell short of the sustained margin. The defender held; the challenger dropped a rung and carries the grudge.`;
   const slug = `${ev.kind}.${fkey}.${ev.challengerNid}.${ev.defenderNid}`;
   return {
@@ -1213,9 +1213,9 @@ function investitureBeat(sid, townName, fkey, heirNid, predNid, nameByNid, kind,
   const predName = nameByNid.get(predNid) || predNid;
   const headline = `${heirName} takes the seat after ${predName}`;
   const summary = kind === 'coup'
-    ? `In ${townName}, a coup has thrown down ${predName}; ${heirName}, the closest of the old court, takes the seat and inherits its ties — the friends and the grudges carried on, dampened but not forgotten.`
-    : `In ${townName}, ${heirName} has taken the seat from ${predName} and inherits the office's memory — its friends and its enemies, carried forward and faded by the succession.`;
-  const reason = `A ${kind} succession seated ${heirName} above ${predName}; the seat's bonds and grudges pass to the heir at a bounded, dampened fraction (marked inherited) — the memory carries, the ranks stay a permutation.`;
+    ? `In ${townName}, a coup has thrown down ${predName}; ${heirName}, the closest of the old court, takes the seat and inherits its ties. The friends and the grudges carried on, dampened but not forgotten.`
+    : `In ${townName}, ${heirName} has taken the seat from ${predName} and inherits the office's memory: its friends and its enemies, carried forward and faded by the succession.`;
+  const reason = `A ${kind} succession seated ${heirName} above ${predName}; the seat's bonds and grudges pass to the heir at a bounded, dampened fraction (marked inherited). The memory carries, the ranks stay a permutation.`;
   const slug = `investiture.${fkey}.${heirNid}.${predNid}`;
   return {
     id: `wizard_news.${tick}.npc_ladder.${sid}.${slug}`,

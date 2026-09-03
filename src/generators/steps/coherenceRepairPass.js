@@ -255,7 +255,7 @@ function recordUnrepairable(ctx, violation) {
       reason: 'The pass observed this violation and has no lawful repair for it: '
         + 'the subject is a settlement-scope condition rather than a roster entry, '
         + 'and the institutions that would answer it are either unavailable at this '
-        + 'tier or explicitly excluded by the DM — an exclusion this pass may never '
+        + 'tier or explicitly excluded by the DM: an exclusion this pass may never '
         + 'override. The violation is left standing and reported.'
         + (violation.reason ? ` Observed: ${violation.reason}` : ''),
     }],

@@ -75,7 +75,7 @@ function projectBloc(bloc, includeGroundTruth) {
   const kind = covert ? 'conspiracy' : 'bloc';
   const who = members.length >= 2 ? members.join(' and ') : (members[0] || 'a faction');
   const presence = covert
-    ? `A quiet faction moves against the seat — ${who}, bound ${endPhrase(bloc.end)}.`
+    ? `A quiet faction moves against the seat: ${who}, bound ${endPhrase(bloc.end)}.`
     : `${who} stand together as a bloc, ${endPhrase(bloc.end)}.`;
   /** @type {Record<string, unknown>} */
   const out = {

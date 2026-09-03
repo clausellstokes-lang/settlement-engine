@@ -28,7 +28,7 @@ export function applyRefusalPayload(entry, forKey) {
  */
 export function applyRefusalMessage(applyRefusal, vetoProse) {
   if (applyRefusal?.queueReason) {
-    return `✕ ${ADVANCE_ERROR_TEXT[applyRefusal.queueReason] || 'This change could not be queued right now — try again in a moment.'}`;
+    return `✕ ${ADVANCE_ERROR_TEXT[applyRefusal.queueReason] || 'This change could not be queued right now. Try again in a moment.'}`;
   }
   return `✕ The world refuses: ${vetoProse(applyRefusal.code, applyRefusal.detail)}`;
 }
@@ -51,6 +51,6 @@ export function batchApplyOutcome(r) {
 /** Prose for the BatchCart's refusal notice (null when there is none). */
 export function batchRefusalText(reason) {
   return reason
-    ? (ADVANCE_ERROR_TEXT[reason] || 'These changes could not be queued right now — try again in a moment.')
+    ? (ADVANCE_ERROR_TEXT[reason] || 'These changes could not be queued right now. Try again in a moment.')
     : null;
 }

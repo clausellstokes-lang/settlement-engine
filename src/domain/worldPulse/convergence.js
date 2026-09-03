@@ -246,7 +246,7 @@ export function scorePreserveOrder({ foreignGrip01 = 0, treatyWithIncumbent = fa
   const score = clamp01(Math.max(gripHit, treatyHit));
   if (score <= 0) return { score: 0, receipt: '' };
   return { score, receipt: treatyHit >= gripHit
-    ? 'A tribute binds the seat to us — a client that falls is an empire that shrinks.'
+    ? 'A tribute binds the seat to us. A client that falls is an empire that shrinks.'
     : 'Our hand already moves beneath this seat; better the devil we hold than the one they raise.' };
 }
 
@@ -266,7 +266,7 @@ export function scoreInstallFriendlier({ hostile01 = 0, challengerAffinity01 = 0
   const score = clamp01(Math.max(politicalPath, leash));
   if (score <= 0) return { score: 0, receipt: '' };
   return { score, receipt: leash >= politicalPath
-    ? 'We already hold a string on the pretender — install him and the seat is ours by proxy.'
+    ? 'We already hold a string on the pretender: install him and the seat is ours by proxy.'
     : 'The seat is no friend of ours; a friendlier claimant is worth an army.' };
 }
 
@@ -282,7 +282,7 @@ export function scoreProtectInvestment({ obligationDebt01 = 0, tradeDependence01
   const score = clamp01(Math.max(debt, 0.7 * trade));
   if (score <= 0) return { score: 0, receipt: '' };
   return { score, receipt: debt >= 0.7 * trade
-    ? 'This seat owes us a decade of debts — a change of hands is a change of ledgers.'
+    ? 'This seat owes us a decade of debts. A change of hands is a change of ledgers.'
     : 'Our trade runs through this seat; its fall is our loss.' };
 }
 
@@ -298,8 +298,8 @@ export function scoreKinship({ kinshipIncumbent01 = 0, kinshipChallenger01 = 0 }
   if (best < CONVERGENCE_TUNING.KINSHIP_FLOOR) return { score: 0, receipt: '', side: null };
   const side = cha > inc ? INTERVENTION_SIDES.CHALLENGER : INTERVENTION_SIDES.INCUMBENT;
   return { score: clamp01(best), side, receipt: side === INTERVENTION_SIDES.CHALLENGER
-    ? 'Our kin rise against the seat — we do not watch our blood fight alone.'
-    : 'Our kin hold this seat — we will not see them thrown down.' };
+    ? 'Our kin rise against the seat: we do not watch our blood fight alone.'
+    : 'Our kin hold this seat: we will not see them thrown down.' };
 }
 
 /**
@@ -320,8 +320,8 @@ export function scoreDenial({ rivalSide = null, rivalStrength01 = 0, hegemonFear
   const fear = clamp01(num(hegemonFear01, 0));
   const score = clamp01(strength * (1 + CONVERGENCE_TUNING.DENIAL_HEGEMON_FEAR_W * fear));
   const receipt = fear > 0
-    ? 'A rising power marches to claim this seat — better a coalition now than a conqueror at our own gate later.'
-    : 'A rival marches to claim this seat — we march to deny it them.';
+    ? 'A rising power marches to claim this seat: better a coalition now than a conqueror at our own gate later.'
+    : 'A rival marches to claim this seat: we march to deny it them.';
   return { score, side, receipt };
 }
 
@@ -417,8 +417,8 @@ export function interventionLegitimacy({ side = INTERVENTION_SIDES.CHALLENGER, i
     legitimacyCost: round4(cost),
     casusGenerative,
     receipt: trulyInvited
-      ? 'Called in by the rightful seat — the neighbors read a friend answering, not an aggressor.'
-      : 'An army sent to raise up rebels — every neighbor now reads a ring tightening, and arms.',
+      ? 'Called in by the rightful seat. The neighbors read a friend answering, not an aggressor.'
+      : 'An army sent to raise up rebels. Every neighbor now reads a ring tightening, and arms.',
   };
 }
 
@@ -662,10 +662,10 @@ export function engagementOptions({ myStrength, rivalStrengths = [], exhaustion0
     if (byMove[m] > bestEV) { bestEV = byMove[m]; move = m; }
   }
   let receipt;
-  if (move === 'hold' && rivalsGrind) receipt = 'Held its banners — better the rivals bleed each other while we grow the stronger for it.';
-  else if (move === 'engage') receipt = 'Committed to the field — the prize is worth the blood.';
-  else if (move === 'screen') receipt = 'Screened the rival\'s march — a block, not a battle.';
-  else if (move === 'withdraw') receipt = 'Broke off — the war costs more than the seat is worth to us now.';
+  if (move === 'hold' && rivalsGrind) receipt = 'Held its banners: better the rivals bleed each other while we grow the stronger for it.';
+  else if (move === 'engage') receipt = 'Committed to the field. The prize is worth the blood.';
+  else if (move === 'screen') receipt = 'Screened the rival\'s march: a block, not a battle.';
+  else if (move === 'withdraw') receipt = 'Broke off. The war costs more than the seat is worth to us now.';
   else receipt = 'Held its ground.';
   return { move, byMove, receipt };
 }
@@ -723,7 +723,7 @@ export function prizeRivalryCasus(aId, bId, intensity01 = 0.5) {
   const a = String(aId); const b = String(bId);
   if (!a || !b || a === b) return null;
   const [x, y] = [a, b].sort(codepoint);
-  return { a: x, b: y, reason: 'Two banners raced for one crown — the prize itself is now the quarrel between them.', intensity: round4(clamp01(num(intensity01, 0.5))) };
+  return { a: x, b: y, reason: 'Two banners raced for one crown. The prize itself is now the quarrel between them.', intensity: round4(clamp01(num(intensity01, 0.5))) };
 }
 
 /**

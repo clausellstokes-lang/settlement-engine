@@ -343,7 +343,7 @@ export function applyRealmVerbOrder({ state, snapshot, settlementUpdates, outcom
       if (r.ok !== true) return refused(refuse(r.code, r.detail));
       return applied(r.worldState, [orderNews(verb,
         headlineFor(verb, args, shim),
-        `A typed grievance (${String(args.type)}) now stands on the ledger — the war layer weighs it as it weighs the world's own.`,
+        `A typed grievance (${String(args.type)}) now stands on the ledger. The war layer weighs it as it weighs the world's own.`,
         [String(args.fromId), String(args.toId)], nowTick, now)]);
     }
     case 'SUE_FOR_PEACE': {
@@ -354,7 +354,7 @@ export function applyRealmVerbOrder({ state, snapshot, settlementUpdates, outcom
       if (r.ok !== true) return refused(refuse(r.code, r.detail));
       return applied(r.worldState, [orderNews(verb,
         headlineFor(verb, args, shim),
-        `${nameOf(shim, partyId)}'s army is ordered home — the recall resolves through the standing withdrawal next tick.`,
+        `${nameOf(shim, partyId)}'s army is ordered home. The recall resolves through the standing withdrawal next tick.`,
         [partyId, foeId].filter(Boolean), nowTick, now)]);
     }
     case 'REPUDIATE_TREATY': {
@@ -478,8 +478,8 @@ export function applyRealmVerbOrder({ state, snapshot, settlementUpdates, outcom
       return applied(r.worldState, [orderNews(verb,
         headlineFor(verb, args, shim),
         verb === 'ORDER_SUPPLY_RAID'
-          ? 'The indirect campaign is planned — the supply web, not the walls, takes the blow.'
-          : 'The embargo rides the target\'s cheapest supply artery — a bloodless single stage.',
+          ? 'The indirect campaign is planned. The supply web, not the walls, takes the blow.'
+          : 'The embargo rides the target\'s cheapest supply artery: a bloodless single stage.',
         [String(args.aggressorId), String(args.targetId)], nowTick, now)]);
     }
 
@@ -508,7 +508,7 @@ export function applyRealmVerbOrder({ state, snapshot, settlementUpdates, outcom
       for (const k of Object.keys(next).sort(codepoint)) ordered[k] = next[k];
       return applied(setSpatialLedger(state, 'interventions', ordered), [orderNews(verb,
         headlineFor(verb, args, shim),
-        `${nameOf(shim, patron)} backs the ${record.side} at ${nameOf(shim, target)} — the column joins the contest and the verdict tilts with it.`,
+        `${nameOf(shim, patron)} backs the ${record.side} at ${nameOf(shim, target)}. The column joins the contest and the verdict tilts with it.`,
         [patron, target], nowTick, now)]);
     }
 
@@ -538,7 +538,7 @@ export function applyRealmVerbOrder({ state, snapshot, settlementUpdates, outcom
       }
       return applied(setSpatialLedger(state, 'navalTransit', { ...records, [ownerId]: plan.record }), [orderNews(verb,
         headlineFor(verb, args, shim),
-        `${nameOf(shim, ownerId)}'s war fleet takes its army aboard for ${nameOf(shim, destId)} — the crossing carries the sea's own risks.`,
+        `${nameOf(shim, ownerId)}'s war fleet takes its army aboard for ${nameOf(shim, destId)}. The crossing carries the sea's own risks.`,
         [ownerId, destId], nowTick, now)]);
     }
     case 'DECLARE_BLOCKADE': {
@@ -587,7 +587,7 @@ export function applyRealmVerbOrder({ state, snapshot, settlementUpdates, outcom
           [key]: { ...cur, stock: round4(remaining), lastDepositTick: nowTick, deposits },
         });
         news.push(orderNews(verb, `${nameOf(shim, actorId)} is pressed toward reconsideration`,
-          `Counsel and pressure eat at the court's committed course (${courseKey}) — the commitment thins, though the course holds for now.`,
+          `Counsel and pressure eat at the court's committed course (${courseKey}). The commitment thins, though the course holds for now.`,
           [actorId], nowTick, now));
         return applied(withdrawn, news);
       }
@@ -661,7 +661,7 @@ export function applyRealmVerbOrder({ state, snapshot, settlementUpdates, outcom
         news.push(climbDownNews(actorId, target, (/** @type {string} */ id) => nameOf(shim, id), stock, th.cliff, crack, '', nowTick, 'forced'));
       } else {
         news.push(orderNews(verb, `${nameOf(shim, actorId)} reconsiders its course`,
-          `The pressed court lets its course (${courseKey}) go — below its cliff, the reversal is felt but not priced.`,
+          `The pressed court lets its course (${courseKey}) go. Below its cliff, the reversal is felt but not priced.`,
           [actorId], nowTick, now));
       }
       return applied(ws, news, patches);
@@ -731,7 +731,7 @@ export function applyRealmVerbOrder({ state, snapshot, settlementUpdates, outcom
       }
       return applied(ws, [orderNews(verb,
         `Calamity strikes ${nameOf(shim, targetId)}`,
-        `The blow lands through the world's own strike path — ${result.loss.deaths} dead, ${result.loss.exodus} fled; the walls of the severity band held.`,
+        `The blow lands through the world's own strike path: ${result.loss.deaths} dead, ${result.loss.exodus} fled; the walls of the severity band held.`,
         [targetId], nowTick, now)], patches);
     }
 
@@ -791,7 +791,7 @@ export function applyRealmVerbOrder({ state, snapshot, settlementUpdates, outcom
       }]]);
       return applied(ws, [orderNews(verb,
         `${nameOf(shim, parentId)} founds ${String(minted.record.name)}`,
-        `${minted.debit} settlers strike out under decree — the tier caps and headroom walls held, and the camp exists for what the land offers.`,
+        `${minted.debit} settlers strike out under decree. The tier caps and headroom walls held, and the camp exists for what the land offers.`,
         [parentId], nowTick, now)], patches);
     }
 

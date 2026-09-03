@@ -815,7 +815,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       // they MEANT — how the two hosts weighed against each other, why the gate let the
       // storm happen at all, and whether the walls were expected to break.
       reasons: [
-        `Weighed against the walls, the besiegers were ${siegeMatchupWordFor(verdict.ratio)} — ${feasibilityVerdictClause(verdict.verdict)}.`,
+        `Weighed against the walls, the besiegers were ${siegeMatchupWordFor(verdict.ratio)}: ${feasibilityVerdictClause(verdict.verdict)}.`,
         `Before the walls broke, the storm looked ${siegeFallOddsWordFor(verdict.pFall)}.`,
       ],
       powerTransfer: {
@@ -1217,7 +1217,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       // TE-HERALD-1: the ranking score rides `seededRecord.casusReasons` on the
       // deployment record; the receipt is the sentence, and it always said the thing
       // the score only ordered.
-      deployReasons.push(`Casus belli: ${c.type} — ${c.receipt}`);
+      deployReasons.push(`Casus belli: ${c.type}. ${c.receipt}`);
     }
     outcomes.push({
       id: `world_outcome.strategy_deploy.${stablePart(fromId)}.${stablePart(chosenTarget)}.${tick}`,

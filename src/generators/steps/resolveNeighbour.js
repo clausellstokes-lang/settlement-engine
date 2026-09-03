@@ -90,7 +90,7 @@ registerStep('resolveNeighbour', {
       downstreamEffects.push({ target: 'effectiveScores', effect: 'relationship modifies military/economy scores' });
     }
     if (downstreamEffects.length === 0) {
-      downstreamEffects.push({ target: 'generation', effect: `no mechanical bias — ${relType} relationship dynamics are identity` });
+      downstreamEffects.push({ target: 'generation', effect: `no mechanical bias: ${relType} relationship dynamics are identity` });
     }
     recordTrace(ctx, {
       targetType: 'condition',

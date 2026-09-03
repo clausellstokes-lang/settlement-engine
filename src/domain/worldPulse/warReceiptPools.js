@@ -196,7 +196,7 @@ export const WAR_RECEIPTS = Object.freeze({
     'The parent house says the daughter cannot hold what it was given, and offers to hold it instead.',
     (x) => `There is a founding charter in the chest at ${x.settlement} and a hungry season at ${x.counterpart}; the two arguments arrived together.`,
     'They call it reclamation and their neighbours call it what it is.',
-    "A thriving parent has no quarrel with a modest steading — which is why this parent's books are worth reading.",
+    "A thriving parent has no quarrel with a modest steading, which is why this parent's books are worth reading.",
   ],
   casus_lineage_claim_child: [
     (x) => `${x.settlement} was founded out of ${x.counterpart} and has outgrown it; the seat, it says, should follow the granary.`,
@@ -376,7 +376,7 @@ export const WAR_RECEIPTS = Object.freeze({
   ],
   successor_escalates_war: [
     (x) => `${x.npc} came to the seat and widened the war his predecessor could not end.`,
-    'The same state, the same ledgers, a different character — and a new front.',
+    'The same state, the same ledgers, a different character, and a new front.',
     'The successor opened with a muster, and the town read it correctly.',
     'The restraint was never in the ledgers; it sat in a chair, and it sits there no longer.',
     'He inherited a stalemate and called it an opportunity.',
@@ -431,7 +431,7 @@ export const WAR_RECEIPTS = Object.freeze({
     (x) => `${x.settlement}'s surviving current-episode evidence reads ${x.band}; no lifetime total is invented.`,
     'The read uses deployed strength, recorded attrition, live exposure, and attributable home-front evidence.',
     'Damage that healed or left the bounded record is silence in this reckoning.',
-    'What the alliance cost was never written down as a total — it is what the other books already say.',
+    'What the alliance cost was never written down as a total. It is what the other books already say.',
     'The reckoning exists whether or not the coalition wants to hold it.',
   ],
   coalition_stayed: [
@@ -452,7 +452,7 @@ export const WAR_RECEIPTS = Object.freeze({
     (x) => `The losers were assessed together and pay separately: ${x.band} in ${x.good} falls on ${x.settlement} by capacity, culpability, and who called whom.`,
     'One aggregate judgment became separate bilateral shares under the same settlement identifier.',
     'Capacity, culpability, field loss, and the alliance call all bear on the share; none alone dictates it.',
-    'Collective liability, pairwise payment — the wagons roll along the edges they always rolled along.',
+    'Collective liability, pairwise payment: the wagons roll along the edges they always rolled along.',
     'The apportionment is archived as a durable relationship fact.',
   ],
   coalition_spoils_divided: [
@@ -575,7 +575,7 @@ export const WAR_RECEIPTS = Object.freeze({
     'The mismatch will be discovered in the ordinary way and become the next grievance.',
   ],
   parlay_at_an_occupied_venue: [
-    (x) => `They parleyed at ${x.settlement} — a town ${x.counterpart} holds, which nobody thought worth mentioning.`,
+    (x) => `They parleyed at ${x.settlement}: a town ${x.counterpart} holds, which nobody thought worth mentioning.`,
     "The terms of the war were drafted in a hall under the enemy's garrison, and the wine was good.",
     "A legal venue is a legal venue; the irony is not the clerks' business.",
     'The seat that owns the town was not in the room.',

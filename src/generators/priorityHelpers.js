@@ -233,7 +233,7 @@ export const evaluateWaterDependency = (config = {}, institutions = []) => {
       ? { buffered: true,  strength: 'moderate',
           note: 'Magical trade infrastructure (teleportation) enables limited craft imports despite isolation.' }
       : { buffered: false, strength: 'none',
-          note: 'No trade pipeline — isolated settlement cannot import raw materials.' };
+          note: 'No trade pipeline: isolated settlement cannot import raw materials.' };
   }
 
   if (effectiveEconomy < 40) {

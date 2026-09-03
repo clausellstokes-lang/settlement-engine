@@ -127,7 +127,7 @@ export function dissolvedClauseFor(type, fallCause = null) {
   const base = DISSOLVED_CAUSE_PROSE[type];
   if (type !== 'sacred_claim' || !base) return base;
   const named = fallCause === null || fallCause === undefined ? '' : FALL_CAUSE_PROSE[String(fallCause)];
-  return named ? `${base} — ${named}` : base;
+  return named ? `${base}: ${named}` : base;
 }
 
 /** Closed, number-free peace clauses for the WR-1 reader surface. */

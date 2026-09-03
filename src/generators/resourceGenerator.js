@@ -455,7 +455,7 @@ export const generateResourceAnalysis = (
     const unexploited = exploitation.unexploited || [];
     if (unexploited.length > 0) {
       priorityNotes.push(
-        `Strong economic focus creates pressure to develop untapped ${unexploited[0].rawResource || 'resources'} — significant trade opportunity.`
+        `Strong economic focus creates pressure to develop untapped ${unexploited[0].rawResource || 'resources'}: significant trade opportunity.`
       );
     }
   }
@@ -464,7 +464,7 @@ export const generateResourceAnalysis = (
   if ((priorityToCategory(pri.economy) === 'low' || priorityToCategory(pri.economy) === 'very_low') &&
       (exploitation.partiallyExploited?.length || 0) > 0) {
     priorityNotes.push(
-      'Weak economic focus leaves several resource chains underdeveloped — production capacity exists but is not being realised.'
+      'Weak economic focus leaves several resource chains underdeveloped. Production capacity exists but is not being realised.'
     );
   }
 
@@ -480,7 +480,7 @@ export const generateResourceAnalysis = (
     );
     if (strategicGaps.length > 0) {
       priorityNotes.push(
-        `Military focus highlights gap: ${gapResource(strategicGaps[0])} processing is incomplete — strategic vulnerability.`
+        `Military focus highlights gap: ${gapResource(strategicGaps[0])} processing is incomplete, strategic vulnerability.`
       );
     }
   }
