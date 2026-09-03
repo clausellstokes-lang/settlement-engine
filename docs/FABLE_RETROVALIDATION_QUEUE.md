@@ -2988,3 +2988,47 @@ The lighting lane held **TWO COMMITTED CARS reachable from NO REF** — `b6ca059
 *What Fable re-derives:* O-10(b)'s three-build measurement and its identical content hash, and the funnel-door emptiness the chair's ruling rests on.
 
 *Priority:* **HIGH** — the salvage is the only reason six cars' worth of work exists to validate.
+
+## §890.1 · THE CHAIR'S FUNNEL-DOOR RULING IS WITHDRAWN — the lane refused it, brought evidence, and was right (2026-09-03, chair session 58f0a8e2, SEAT: Opus 5 — Fable-unvalidated)
+
+**The chair ruled that the lived-experience funnel door was UNOWNED and that ENCOUNTERS should take it.** The ENC-3 lane refused to build it, committed nothing, and returned the evidence. ⭐ **The ruling is WITHDRAWN. It was wrong, and it was wrong in a way this program has a named law against.**
+
+### WHAT THE CHAIR MEASURED, AND WHY THE MEASUREMENT WAS NOT THE ANSWER
+
+The chair's ruling rested on three true readings: `LIVES_SUBSYSTEM_ROWS = Object.freeze([])`, `characterDriftEnabled` absent from `simulationRules.js`, and the manifest at 29. **Every one is correct. All three describe a RESERVATION, not an absence of an owner** — and the reservation names its owner in four places in the very source the chair was ruling about, verified by the chair's own read after the refusal:
+- `subsystemRowsLives.js:11` — *"chartered to TE-VIRT-1, not a landing's to make" (ODQ §868)*
+- `subsystemRowsLives.js:19` — names the lane in its own header
+- `characterDrift.js:89` — *"⚠ TE-VIRT-1 OWES THE FLAG'S HOME"*
+- `characterDrift.js:113` — *"THE DOOR SEAM — the virtual flag TE-VIRT-1 owes a home to."*
+
+And §868 itself records the precedent verbatim: *"the lane declined to author a family leaf at a landing — **TE-VIRT-1's structural call, not a landing's**"*, while §870.4 narrows the charter but keeps this door inside it: *"the drift/dispatcher doors still need their homes — measure at dispatch."*
+
+⭐⭐ **THE LAW, AND THE CHAIR BROKE IT TODAY HAVING BANKED IT TODAY: VERIFY THE ANTECEDENT, NOT ONLY THE INFERENCE.** The chair asked *"is the door claimed?"*, measured *"the rows are empty"*, and inferred *"therefore available"*. **An empty structure held empty BY A LANDED TEST is the opposite of available** — the emptiness is the enforcement. ⛔ **And worse: the ruling overruled a RECORDED STRUCTURAL CHARTER (§868) that the chair had not read.** A restrictive ruling in the record binds immediately; the chair ruled past one it never looked for.
+
+### THE LANE'S EVIDENCE, WHICH IS BETTER THAN THE RULING IT REFUSED
+
+**The door is enforced from three independent directions, any one of which reds:** a landed test named *"AND NO KEY IS REGISTERED — the door car's bill is still the door car's"* asserts `not.toContain('characterDriftEnabled')` over the **raw** file, so **even a comment naming the key reds it**; the manifest walker's direction 1 demands a *literal* `.key === true` read while the only read is a computed `[CHARACTER_DRIFT_FLAG_KEY]` that the walker's own header says *"attributes to no key at all"*; and curing that needs a second literal spelling **which the ONE SPELLING walker exists to forbid.**
+
+⚠ **AND THE WALKER WAS HIDING TWO OF THREE REDS.** It reported one failure; its own header explains why — *"a red at an early assertion BLINDS every later assertion in the same test."* The lane replicated the steps in isolation over 1,637 files and found **three**. ⭐ **A walker that stops at its first red UNDER-REPORTS, and a lane that trusts its count is measuring the walker rather than the tree.**
+
+**Its dark-path proof is the model.** Both gates driven on a real world carrying prior deposits: gate B dark → ledgers drain to `[]`; gate A dark → `[]`; both dark → `[]`; never-lit → JSON identical with no key minted. With a **negative control** from the base showing the early return was the first statement of the body, so the drain is new behaviour. ⭐ **And it caught its own FALSE GREEN and said so:** `envoyDiplomacyActive` is a six-key conjunction, so its first fixture left gate B dark too and silently re-tested gate A's twin. The reported figures are the corrected run.
+
+### THE CORRECTED RULING
+
+⛔ **ENCOUNTERS DOES NOT TAKE THE DRIFT FLAG DOOR. It remains TE-VIRT-1's, per §868 and §870.4.** ⭐ **What ENCOUNTERS MAY do, and the precedent is explicit:** mint **its own family leaf**, exactly as SEAT-1 minted `subsystemRowsSeat.js` — which §870.4 records as *"the upheaval mint was never blocked"* and §868 calls **TE-VIRT-1's WORKED PATTERN**. The lane had already drafted that record verbatim, dated and attributed, and it is the right one.
+
+⛔ **The `positionValue` question is NOT the chair's either, and the lane was right to escalate rather than decide.** It is load-bearing for the whole car (chart distance at `resolveChanceMeeting:880`, empty `axisRungs:409` without it), the family's one door imports it five times but does not re-export it, so **there is no legal supplier in `src/`** — and the only buildable route changes the drift family's PUBLIC DOOR SURFACE, which is TE-VIRT-1's by the same charter. ⇒ **ENC-3 is BLOCKED ON TE-VIRT-1, and that is a real dependency rather than a stop the chair may rule away.**
+
+*What Fable re-derives:* the four in-source citations of TE-VIRT-1's ownership, and the three independent enforcement directions.
+
+*Priority:* **HIGH** — it is the chair overruling a recorded charter.
+
+### ⭐ AND THE CHAIR'S FIRST READING OF THE FIX WAS ALSO WRONG — CORRECTED BEFORE IT WAS REPORTED
+
+The chair's initial conclusion was *"ENC-3 is blocked on TE-VIRT-1, which never ran"*, on finding `TE-VIRT-1 038311ed2` **not an ancestor** of `claude/composite-r4`. **That was a false alarm and it was checked before it was told to the owner.** Measured: `8114a54e6` (car 1) and `b1e5f9e3b` (car 2) **ARE LANDED** on the branch; `a068e5899`/`038311ed2` are their **pre-rebase twins**, preserved under `refs/preserve/dock-laneVIRT-tree-2026-09-01` — the same work under different shas, exactly the shape ENC-2/ENC-6 showed earlier today. **No TE-VIRT-1 work is unlanded and nothing is lost.** The HYGIENE car `698ad1600` — *"the door ruling reaches the leaf"* — is landed too.
+
+⭐⭐ **WHICH MAKES THE FINDING SHARPER, NOT LOOSER.** At `claude/composite-r4`, `subsystemRowsLives.js` is present, 72 lines, **names `characterDriftEnabled` three times in prose**, and still ends `export const LIVES_SUBSYSTEM_ROWS = Object.freeze([]);`. Car 2's own subject says it: *"two empty files, and the emptiness is the deliverable."* ⇒ **TE-VIRT-1 ALREADY RAN AND DELIBERATELY DECLINED TO HOME THE FLAG, and a landed test enforces that decision.**
+
+⇒ **The corrected dependency: the drift flag door is NOT waiting on a lane that never ran. It is a SHIPPED, DELIBERATE RESERVATION whose owning car landed and chose the emptiness.** Homing that flag is therefore **a NEW decision, not a pending one** — and by §868's own words a structural call rather than a landing's. ⛔ **It goes to the owner, or to a fresh charter; the chair may not take it, and dispatching "TE-VIRT-1" again would be dispatching a lane that already finished.**
+
+*The chair's second lesson in one act:* **an absence has a history, and the history is in the log.** The first error read an empty structure as available; the second read a missing ancestor as unlanded work. Both were cured the same way — by asking the repository instead of the inference.
