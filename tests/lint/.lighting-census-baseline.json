@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "e2f4993cf98272d9773cfd8c4d1faf61a7223540",
-  "measuredBy": "Opus 5 — chair, §886 register 1/2",
+  "measuredAtSha": "0fdbc53a06f80b7e3788fb566ae2ab0387764e72",
+  "measuredBy": "Opus 5 — chair, §887 register 1/2",
   "date": "2026-09-03",
-  "note": "TRAIN 2 adds one tests/lint walker (newsSubjectVocabulary) and modifies five existing test files; files +1, nothing parks",
-  "files": 2504,
+  "note": "TRAIN 1 adds one tests/lint walker (dossierMountRegistry) and extends two existing test files; files +1, nothing parks",
+  "files": 2505,
   "parked": 370,
-  "credited": 2134,
-  "titles": 22696,
-  "suiteTitles": 6110
+  "credited": 2135,
+  "titles": 22716,
+  "suiteTitles": 6114
 }
