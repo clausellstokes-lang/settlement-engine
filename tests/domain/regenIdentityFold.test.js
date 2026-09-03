@@ -236,7 +236,7 @@ function seededLadder() {
         [OTHER]: {
           npcs: {
             [`${OTHER}:npc_1`]: {
-              stock: 5, stigma: null, grudges: {},
+              stock: 5, stigma: null,
               bonds: {
                 [`${TOWN}:npc_2`]: mark(TOWN),           // a keeper who MOVES
                 [`${TOWN}:npc_3`]: mark(TOWN),           // a stranger's slot ⇒ DROPPED
