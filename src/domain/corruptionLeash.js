@@ -39,6 +39,57 @@
  *  the ones whose exposure must NEVER impair a local organization. */
 const FOREIGN_LEASH_KINDS = Object.freeze(new Set(['foreign_settlement', 'foreign_faction', 'foreign_org']));
 
+/**
+ * ── THE WILLED MARKER (ENC-2; DESIGN_ENCOUNTERS §5.4, owner rows 5 + 5b) ──────
+ *
+ * A leash a CHANCE MEETING produced is WILLED: a named person was persuaded, once,
+ * by another named person, and the meeting already priced that decision. Every other
+ * leash the web mints is UNWILLED — the rarity die bought it.
+ *
+ * The distinction is a VALUE in the leash's own existing open `conspiracy` slot, never
+ * a new persisted field: `mintLeashOnto` already writes `conspiracy: 'foreign_web'`
+ * (corruptionWeb.js), `resolveLeash` already carries the slot through on both explicit
+ * branches, and no closed vocabulary governs it. So a willed leash costs zero shape.
+ *
+ * ⛔ WHY THE MARKER EXISTS AT ALL — it is the only thing three fences can read, and the
+ * three fences are what make STATE, NEVER FATE true of this mechanism BY CONSTRUCTION
+ * rather than by assertion. Left in the estate's ordinary chain a meeting-born leash
+ * ends with the honest magistrate ousted (npcAgency's organic exposure lane), replaced
+ * by a generated successor, and sentenced a TURNCOAT (npcVerdictTable's `rival_power`
+ * arm). The owner closed that fate in §881.11. The fences:
+ *   FENCE 1  npcAgency.js  — the organic exposure lane returns before `exposureChance`.
+ *   FENCE 2  npcVerdictTable.js — `compromiseSourceOf` never answers `rival_power`.
+ *   FENCE 3  causeLifecycle.js — the cause pass never attributes a cause to it.
+ * Each is one line and each is convicted by plant P6.
+ *
+ * ⚠ A willed leash is NOT permanent-and-unreachable in exchange: the web's own pass
+ * gives it the two typed ends the estate's leash lacks — DISCOVERY (severs it and
+ * demotes the man ONE rank) and LAPSE (clears a leash that never leaked). Fence 1
+ * removes the FATE, not the consequence.
+ */
+export const WILLED_MEETING_CONSPIRACY = 'chance_meeting';
+
+/**
+ * True iff a leash was WILLED by a chance meeting. TOTAL: garbage, null, a leashless
+ * npcState and a pre-feature save all read false, which is what keeps every dark and
+ * every legacy world byte-identical through all three fences.
+ *
+ * Accepts either grain, because the marker is read from both sides of the mirror:
+ *   - a RESOLVED leash (`resolveLeash(npc)`) — npcAgency, npcVerdictTable, causeLifecycle;
+ *   - a RAW carrier that holds one under `corruptionLeash` (an npcStates row) — the web.
+ * @param {unknown} subject  a ResolvedLeash, a raw leash object, or an npcStates row
+ * @returns {boolean}
+ */
+export function isWilledLeash(subject) {
+  if (!subject || typeof subject !== 'object') return false;
+  const carrier = /** @type {Record<string, unknown>} */ (subject);
+  const nested = carrier.corruptionLeash;
+  const leash = nested && typeof nested === 'object'
+    ? /** @type {Record<string, unknown>} */ (nested)
+    : carrier;
+  return leash.conspiracy === WILLED_MEETING_CONSPIRACY;
+}
+
 /** True iff a normalized leash kind is foreign (beneficiary in another court).
  *  @param {string} kind */
 export function isForeignLeashKind(kind) {

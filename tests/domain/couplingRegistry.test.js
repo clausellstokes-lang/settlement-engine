@@ -67,6 +67,7 @@ import {
   ES6A_DOUBLE_AGENT_LEAK_COUPLING,
   ESDA_COVERT_RIDER_COUPLING,
   ES_ESPIONAGE_COUPLINGS,
+  ENC_ENCOUNTERS_COUPLINGS,
   IN0A_PLANT_HANDOFF_COUPLING,
   IN0C_DISCLOSURE_SIGNING_CREDIT_COUPLING,
   IN_INFORMATION_COUPLINGS,
@@ -97,7 +98,11 @@ import {
  * prefix. The FIRST ES or WY row additionally widens the owningVolume set
  * asserted below, in that row's own commit.
  */
-const CHARTERED_VOLUME_PREFIXES = Object.freeze(['WR', 'TR', 'GR', 'WF', 'POP', 'IN', 'INT', 'SP', 'CW', 'ES', 'WY', 'HB']);
+// ⏱ ENC-2 (2026-09-03) admits `ENC`, the ENCOUNTERS volume — chance meetings between named
+// NPCs across settlements. Its first live row is the ladder kernel's consume of a meeting
+// mark deposit, so this widening and the owningVolume widening below are that row's arrival,
+// exactly as the header says the first ES or WY row would be.
+const CHARTERED_VOLUME_PREFIXES = Object.freeze(['WR', 'TR', 'GR', 'WF', 'POP', 'IN', 'INT', 'SP', 'CW', 'ES', 'WY', 'HB', 'ENC']);
 
 /**
  * `CPL-<pair>.<DIRECTION>.<VOLUME>-<wave>[letter].<facet>`, built FROM the list
@@ -162,6 +167,7 @@ describe('CW-0 coupling registry', () => {
       ...IN_INFORMATION_COUPLINGS,
       // FP ES-1 (2026-08-06): the first ESPIONAGE rows, appended in wave order.
       ...ES_ESPIONAGE_COUPLINGS,
+      ...ENC_ENCOUNTERS_COUPLINGS,
       // FP WF-1d (2026-08-21): the estate's FIRST FAITH→WAR row, appended in wave order.
       // It rides the WAR leaf rather than opening a FAITH one because its owningVolume IS
       // WAR — the read lives in warTermination.js, and the row is what licenses that file's
@@ -472,7 +478,7 @@ describe('CW-0 coupling registry', () => {
     // until now — the header above records that a chartered prefix with no rows is green
     // by design, so this widening is the row's arrival and not the charter's.
     expect(new Set(COUPLING_REGISTRY.map((row) => row.owningVolume)))
-      .toEqual(new Set(['WAR', 'TRADE', 'GRAMMAR', 'INFORMATION', 'ESPIONAGE']));
+      .toEqual(new Set(['ENCOUNTERS', 'WAR', 'TRADE', 'GRAMMAR', 'INFORMATION', 'ESPIONAGE']));
   });
 
   test('every schema-v3 row has one stable unique identity and a closed shape', () => {
@@ -540,11 +546,13 @@ describe('CW-0 coupling registry', () => {
   describe('the couplingId shape admits every chartered volume prefix and no other', () => {
     const SYNTHETIC = (prefix) => `CPL-1.TRADE_TO_WAR.${prefix}-1.synthetic_row`;
 
-    test('all twelve chartered volume prefixes pass, including the INT/IN pair', () => {
+    test('all thirteen chartered volume prefixes pass, including the INT/IN pair', () => {
       // INT and IN share a leading two characters; both are asserted so the
-      // alternation's ORDER can never silently swallow the longer one.
+      // alternation's ORDER can never silently swallow the longer one. ENC (ENC-2,
+      // 2026-09-03) shares only its first character with ES and is listed last, so it
+      // opens no second swallowing case — but it is asserted here for the same reason.
       expect(CHARTERED_VOLUME_PREFIXES)
-        .toEqual(['WR', 'TR', 'GR', 'WF', 'POP', 'IN', 'INT', 'SP', 'CW', 'ES', 'WY', 'HB']);
+        .toEqual(['WR', 'TR', 'GR', 'WF', 'POP', 'IN', 'INT', 'SP', 'CW', 'ES', 'WY', 'HB', 'ENC']);
       for (const prefix of CHARTERED_VOLUME_PREFIXES) {
         expect(SYNTHETIC(prefix), prefix).toMatch(COUPLING_ID_SHAPE);
       }

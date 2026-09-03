@@ -9,7 +9,7 @@ import {
 // THE RESOLVER CHOKEPOINT (§1) rides a LAZY leaf, NOT eager corruption.js — see
 // corruptionLeash.js's first-paint note. npcAgency is the lazy engine chunk, so
 // this import adds nothing to first paint.
-import { resolveLeash } from '../corruptionLeash.js';
+import { resolveLeash, isWilledLeash } from '../corruptionLeash.js';
 // Phase 4 W-F3 site #7 — the corruption-plane amplifier over the onset (flaw-expression)
 // pressure channel. Reads the settlement's TICK-START faithProfile.piety + patron plane
 // position; 1.0 (byte-identical) for a deity-free / legacy 3-axis / non-devout settlement.
@@ -403,8 +403,12 @@ function branchedGoals(state, context) {
   return branchedGoalsFor({ state, context });
 }
 
-/** @param {any} dotRank */
-function roleSeatFor(dotRank) {
+/** The faction seat a dot-rank carries. EXPORTED for ENC-2's willed-leash DISCOVERY end:
+ *  a demotion writes `dotRank` and `factionSeat` together, and the corruption web — the
+ *  ONE writer of a leash, and therefore the only lawful home for severing one — must
+ *  demote with the same table this lane does rather than a second copy of it.
+ *  @param {any} dotRank */
+export function roleSeatFor(dotRank) {
   if (dotRank >= 3) return 'leader_champion';
   if (dotRank === 2) return 'lieutenant_operator';
   return 'agent_protege';
@@ -775,6 +779,31 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guil
       // (the clandestineFacet import would exceed it), AND exposureChance lives in the EAGER
       // corruption.js first-paint chunk, so a covertShelter param there costs eager bytes for a
       // dark path (the ratchet forbids that). Lands with a size-baseline refresh (owner-gated).
+      // ⛔ ENC-2 FENCE 1 — THE WILLED-LEASH SKIP (owner row 5b; STATE, NEVER FATE).
+      // A leash a CHANCE MEETING produced never enters this lane. Left in it, the organic
+      // chain runs to its end: this loop demotes or, at the bottom rank, sets `ousted`;
+      // an ousting mints `corruption_exposed` and `replaceOustedNpcs` REPLACES the named
+      // person with a generated successor; and the verdict table reads a foreign leash as
+      // `rival_power`, making TURNCOAT eligible. So the honest envoy's charm would end
+      // with the good magistrate ousted, replaced and sentenced a turncoat — the exact
+      // fate §881.11 closed. The `leash` const is HOISTED from eleven lines below (a pure
+      // call, behaviour-neutral to move) so the guard costs ONE effective line in the
+      // tightest file in the train.
+      // ⚠ THE STREAM CONSEQUENCE, STATED RATHER THAN HIDDEN: returning before
+      // `local.random()` means a willed leash does not consume the exposure draw, so a LIT
+      // world's local stream differs from a hypothetical lit world without this guard. That
+      // sits INSIDE the flag's declared shift — a willed leash cannot exist while
+      // chanceEncountersEnabled is dark — and the dark arm is byte-identical by FENCE 1 of
+      // the dormancy fence. The alternative (consume the draw, then skip) was refused: it
+      // preserves the first draw but not the second, so it buys partial stream neutrality
+      // for a second guard and a reader who must ask why a roll is thrown away.
+      // ⚠ THE SKIP IS NOT AN AMNESTY. The web's own pass gives a willed leash the two typed
+      // ends the estate's leash lacks — DISCOVERY (severs it, demotes ONE rank, never ousts,
+      // never sentences) and LAPSE. This removes the FATE, not the consequence.
+      // Plant P6 convicts: revert this and a willed magistrate is ousted and a `turncoat`
+      // verdict appears in a seed family.
+      const leash = resolveLeash(npc, item.settlement);
+      if (isWilledLeash(leash)) return;
       const exposeP = exposureChance({ security: exposureSecurity, prosperity: climate.prosperity, guildStrength: guildStr, visibility, priorExposures, deityDisfavor: disfavor.exposure });
       if (local.random() >= exposeP) return;
 
@@ -784,7 +813,7 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guil
       // criminal org — BYTE-IDENTICAL. A FOREIGN leash blames NO local org (the
       // innocent-guild fix: a foreign conspirator's exposure never impairs the
       // local guild); the foreign-consequence lane rides the leash instead.
-      const leash = resolveLeash(npc, item.settlement);
+      // (`leash` is resolved once, above FENCE 1, and read here — the same pure value.)
       const criminalInstitution = leash.foreign ? null : (leash.criminalInstitution || climate.criminalInstitutions[0] || null);
       const atBottom = (s.dotRank || 1) <= 1;
       // W-DOCTRINE-3b §4 — annotate a FOREIGN exposure with its resolved patron endpoint +

@@ -43,6 +43,15 @@ import { IN_INFORMATION_COUPLINGS } from './couplingRegistryInfo.js';
 // the LAYER map, and a volume of its own in the WAVE map — couplingIds carry the `ES`
 // prefix and two lanes building IN-* and ES-* must not serialize on one registry file.
 import { ES_ESPIONAGE_COUPLINGS } from './couplingRegistryEspionage.js';
+// ENCOUNTERS opens its own leaf on the same concurrency law: the couplingId carries the
+// volume prefix ENC and the cars append there, so an ENC lane and an ES lane never
+// serialize on one registry file.
+import { ENC_ENCOUNTERS_COUPLINGS } from './couplingRegistryEncounters.js';
+
+export {
+  ENC2_MEETING_MARK_CONSUME_COUPLING,
+  ENC_ENCOUNTERS_COUPLINGS,
+} from './couplingRegistryEncounters.js';
 
 export {
   TR1_SEVERANCE_PRESSURE_COUPLING,
@@ -155,6 +164,10 @@ export const COUPLING_REGISTRY = Object.freeze([
   // arithmetic borrowing the row vocabulary it used to author, and the covert
   // traveller's hidden-path franchise read.
   ...ES_ESPIONAGE_COUPLINGS,
+  // ENC-2 (2026-09-03): the ENCOUNTERS volume's first row — the ladder kernel consuming a
+  // chance-meeting mark deposit through its own mintBond writer, licensed here because a
+  // tie between two named people is the ladder's subject and the meeting only deposits it.
+  ...ENC_ENCOUNTERS_COUPLINGS,
   // FP WF-1d (2026-08-21): the estate's FIRST FAITH→WAR rows. One — the war-dissolution
   // receipt naming the typed patron fall. It rides the WAR leaf rather than opening a
   // FAITH one because its owningVolume IS WAR: the read lives in warTermination.js and

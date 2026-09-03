@@ -56,7 +56,7 @@
 
 import { isCriminalInstitution, npcAlignmentScore } from '../corruption.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
-import { resolveLeash } from '../corruptionLeash.js';
+import { resolveLeash, isWilledLeash } from '../corruptionLeash.js';
 import { factionArchetype, FACTION_ARCHETYPES } from '../factionArchetypes.js';
 import { importanceWeight } from '../entities/npcs.js';
 import { nameOf } from '../rulingPower.js';
@@ -343,10 +343,24 @@ export function settlementVerdictState(settlement) {
 export function compromiseSourceOf({ npc = null, exposure = null } = {}) {
   const record = asObject(exposure);
   const hasRecord = record.kind != null;
+  // ⛔ ENC-2 FENCE 2 — A WILLED LEASH IS NEVER `rival_power` (owner row 5b).
+  // A leash a chance meeting produced is foreign, and `foreign === true` is precisely
+  // what makes TURNCOAT eligible in rule 1 of the resolution order above. So a man an
+  // envoy befriended could be sentenced as a defector to that envoy's court — the fate
+  // §881.11 closed, reached through a table that never heard of the meeting.
+  // The leash is resolved FIRST (a pure call; hoisting it changes nothing it decides) so
+  // the fence covers BOTH arms: the exposure-record arm and the NPC-fallback arm. That is
+  // deliberate belt-and-braces. FENCE 1 already stops a willed man reaching a verdict at
+  // all; this stops a HAND-BUILT or RESTORED record — a DM verb, a replayed fixture —
+  // doing it behind FENCE 1's back, on a path that never runs the exposure lane.
+  // `none` is the honest answer, not a euphemism: the closed COMPROMISE_SOURCES
+  // vocabulary has no word for "a friend in another court", and naming no source is what
+  // leaves the base verdict standing.
+  const leash = resolveLeash(/** @type {Parameters<typeof resolveLeash>[0]} */ (npc || {}));
+  if (isWilledLeash(leash)) return 'none';
   if (record.foreign === true) return 'rival_power';
   if (text(record.criminalInstitution)) return 'criminal_institution';
   if (hasRecord) return 'none';
-  const leash = resolveLeash(/** @type {Parameters<typeof resolveLeash>[0]} */ (npc || {}));
   if (leash.foreign) return 'rival_power';
   if (text(leash.criminalInstitution)) return 'criminal_institution';
   return 'none';
