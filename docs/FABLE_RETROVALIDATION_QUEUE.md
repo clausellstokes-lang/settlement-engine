@@ -2742,3 +2742,23 @@ The lane **refused to move it**, correctly — the constant's own message reserv
 *What Fable re-derives:* the chair's own load-figure error first — a brief that carries a transient reading as though it were stable is a defect the chair repeated after banking the law about it. Then ENC's control-that-found-its-own-absence, which is a method worth copying.
 
 *Priority:* MEDIUM. **HIGH for the brief-carries-a-stale-live-fact defect**, which will recur in every brief the chair writes.
+
+---
+
+## §885.8 · THE INDEX IS FOLDED AND THE CARD REFRESHED — with a chair error inside the fold itself (2026-09-03, chair session 58f0a8e2, SEAT: Opus 5 — Fable-unvalidated)
+
+**Why.** `MEMORY.md` stood at **16,767 B** against a **~17 KB HARD read limit where the TAIL goes invisible first**, and two topic-file rows were **owed** to a lane that correctly wrote its files and left the index to the chair (the standing rule: lanes do not write the index).
+
+**⛔ THE CHAIR ERROR, self-caught by read-back.** The first fold was a *consolidation*: three rows added this session — the stale-copy hazard, the anchor-span hazard, the background-exit hazard — folded into one archive as **THE FALSE-REPORT FAMILY**, since they are not three lessons but **one lesson with three faces**. That reasoning is sound and the archive is worth having. ⚠ **But the arithmetic was not: the replacement row plus the two owed rows came to MORE than the three folded rows, and the index went UP by 144 bytes** — a fold that grew the file it was meant to shrink. Caught only because the chair measured after writing rather than trusting the intent. **A real fold followed**, taking four SETTLED build-era rows verbatim into FOLD 30: **16,911 → 15,623 B, −1,288.**
+
+⭐ **THE LESSON, and it belongs beside the false-report family rather than apart from it: a consolidation is not a fold.** Merging N rows into one is a *legibility* act; it reduces bytes only if the merged row is smaller than the sum, and a merged row carrying five hooks usually is not. **Fold for SIZE by removing SETTLED subjects; consolidate for CLARITY; and measure which one you just did.**
+
+**What the archives now hold, verbatim and roster-registered:** `archive-2026-09-03-false-report-family.md` (the three rows plus the two later faces — the stale-live-reading brief and the unverified-premise ruling) and `archive-2026-09-03-index-fold-30.md` (the map-module descope ⚠ *folded because the arc was DESCOPED module-side, not because its GPL laws stopped mattering* · the retrovalidation mark and seat · the 08-21 sitting directives · the walker-census law). Both listed in `archive-index.md`.
+
+**The two owed rows are now indexed:** the OSR input-arm hazard (regenerating a prose leaf reds it; a **landing** register act, and the walker's own CLI calls the leaves generated inputs rather than detector sources, so no governed migration is owed) and C9's closed SECTION-TARGET vocabulary.
+
+**The successor card is refreshed to §885.7** with all six docks, the composition arithmetic (parser and registry **both branch from the kernel car**, so TRAIN 1 composes to three), and the arc through to the full stop.
+
+*What Fable re-derives:* the consolidation-is-not-a-fold distinction, since the index is the one artifact whose failure mode is silent — a tail that goes invisible reports nothing.
+
+*Priority:* LOW for the fold itself. **MEDIUM for the distinction**, which will govern every future index act.
