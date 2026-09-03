@@ -1,4 +1,7 @@
 import { describe, expect, test } from 'vitest';
+import { readFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import {
   DEFAULT_SIMULATION_RULES,
@@ -26,6 +29,7 @@ import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 // canonical set from the PUBLIC surface so this oracle tracks the real defaults
 // rather than a frozen copy: the three enum keys plus every boolean rule key
 // derived from DEFAULT_SIMULATION_RULES (presetId/schemaVersion excluded).
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const ENUM_COMPARISON_KEYS = ['propagationMode', 'intensity', 'migrationMode'];
 const BOOLEAN_KEYS = Object.entries(DEFAULT_SIMULATION_RULES)
   .filter(([, value]) => typeof value === 'boolean')
@@ -180,6 +184,83 @@ describe('simulation rules preset — stability under future-flag churn', () => 
     const keyless = { ...SIMULATION_RULE_PRESETS.full_simulation.rules };
     delete keyless.presetId;
     expect(normalizeSimulationRules(keyless).presetId).toBe('full_simulation');
+  });
+
+  // ── O-12: THE SUPERSEDED OWNER RULING, HELD HONEST IN BOTH DIRECTIONS ──────
+  //
+  // On 2026-09-03 the owner handed row O-12 to the chair: §881.4 supersedes the
+  // in-file owner ruling that dramatic_campaign "stays LIGHTER than
+  // full_simulation (no deep war sub-flags / religionDynamics ceiling)". The
+  // supersession is RECORDED beside that ruling rather than overwriting it, and
+  // these two arms are what stop the record from decaying in either direction:
+  //
+  //   • ARM 1 refuses a SILENT DELETION. A later lane that quietly strikes the
+  //     old owner sentence, or lands the sub-flags without leaving the record,
+  //     reds here. The whole point of O-12 is that the owner can SEE the change.
+  //   • ARM 2 refuses a SILENT RE-LABEL, and it outlives the wave. The eight are
+  //     RULE_COMPARISON_KEYS members, so lighting them on the LEGACY id would
+  //     make every installed Dramatic Campaign infer 'custom' at its next
+  //     ensureWorldState with no receipt minted. The lit successor id (row O-1's
+  //     birth form) is the home; this arm holds the legacy id dark FOREVER, and
+  //     it stays green after the successor lands, when the WAR_DEPTH_FLAGS
+  //     roster above must be rewritten as a declared instrument edit.
+  const RULES_SOURCE = readFileSync(
+    join(ROOT, 'src/domain/worldPulse/simulationRules.js'),
+    'utf-8',
+  );
+
+  test('the superseded owner ruling is kept VERBATIM, with its supersession recorded beside it', () => {
+    // Liveness anchor first, so a moved/empty read reds HERE rather than making
+    // every absence-and-presence claim below pass vacuously.
+    expect(RULES_SOURCE).toContain("dramatic_campaign: preset('dramatic_campaign'");
+
+    // The superseded sentence itself, word for word. It may be superseded; it
+    // may not be quietly deleted.
+    //
+    // ⚠ AND IT IS ASSERTED IN THE ORIGINAL'S OWN CONTEXT, NOT BY THE BARE PHRASE.
+    // A bare `toContain` on the sentence is VACUOUS here and was measured to be:
+    // the supersession record below QUOTES the same sentence, so deleting the
+    // original ruling outright still left the phrase in the file and the arm
+    // passed a planted mutant. The original line carries words the quote does
+    // not, and the pair must appear TWICE — once as the ruling, once as the
+    // quote — so neither copy can stand in for the other.
+    expect(
+      RULES_SOURCE,
+      'the superseded owner ruling was removed instead of being recorded as superseded',
+    ).toContain('faith spread, seasons, and calamities. It stays LIGHTER than full_simulation');
+    expect(
+      RULES_SOURCE.split('It stays LIGHTER than full_simulation').length - 1,
+      'the ruling and the record must BOTH carry the sentence: one as the superseded word, one as the quote of it',
+    ).toBeGreaterThanOrEqual(2);
+
+    // …and the record of what replaced it: dated, attributed, and naming the row.
+    expect(RULES_SOURCE).toContain('SUPERSEDED 2026-09-03');
+    expect(RULES_SOURCE).toContain('Row O-12');
+    // The record names every flag it frees, so the reader never has to infer the
+    // population from the phrase "deep war sub-flags".
+    for (const flag of WAR_DEPTH_FLAGS) {
+      const bare = flag.replace(/Enabled$/, '');
+      expect(RULES_SOURCE, `the O-12 record must name ${bare}`).toContain(bare);
+    }
+  });
+
+  test('the LEGACY dramatic_campaign id keeps the eight dark — no installed campaign is silently re-labelled', () => {
+    for (const flag of WAR_DEPTH_FLAGS) {
+      expect(
+        SIMULATION_RULE_PRESETS.dramatic_campaign.rules[flag],
+        `${flag} lit on the LEGACY dramatic_campaign id re-labels every installed Dramatic Campaign to 'custom' with no receipt — the lit SUCCESSOR id is the home`,
+      ).toBe(false);
+    }
+    // The consequence stated as a behaviour rather than as a value: an installed
+    // Dramatic Campaign that lost its presetId still infers dramatic_campaign.
+    const keyless = { ...SIMULATION_RULE_PRESETS.dramatic_campaign.rules };
+    delete keyless.presetId;
+    expect(normalizeSimulationRules(keyless).presetId).toBe('dramatic_campaign');
+    // And a save that carries the eight explicitly false — which is what every
+    // normalized installed campaign carries — still matches this preset.
+    const installed = { ...keyless };
+    for (const flag of WAR_DEPTH_FLAGS) installed[flag] = false;
+    expect(normalizeSimulationRules(installed).presetId).toBe('dramatic_campaign');
   });
 
   // WR-1 — termination is a VIRTUAL, declared-dark certification key. It is
