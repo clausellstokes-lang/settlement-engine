@@ -2792,3 +2792,33 @@ The **register pre-flight** named in ~2 s exactly what cost §885 a full 18-minu
 *What Fable re-derives:* the wordings first — twelve labels, six frames, six summary frames, 29 registered rows — since **taste is the one thing no test holds**, though the chair's warrant is stronger than taste: they **mirror the vocabulary the product already speaks** on the rumor surface, verified by execution. Then the walker's six-route enumeration.
 
 *Priority:* MEDIUM. **HIGH for the seven previously-invisible tokens**, which were a live class rather than a finished one.
+
+## §887 · THE TWELFTH LANDING — TRAIN 1, and a collision that only exists at the composed tip (2026-09-03, chair session 58f0a8e2, SEAT: Opus 5)
+
+**The act.** `d1a6c773e` → **`f123601850917f549d0d6e34a44b14676b7e6e66`**, sealed `refs/preserve/landing-887-2026-09-03`. **Seven cars, 17 paths +1,423/−100**, porcelain 0, seven trailers, all single-parent. **Gate GREEN ON THE FIRST RUN**, 1,039 s, 20 stages, ratchet **10 known of 31,016 (ceiling 10)**, `STRICT DIST OK 52/440 zero non-run`, typecheck 173/173, domain-strict 1121/1121. **Every commit is Opus-seat work and every row here is owed a Fable second look.**
+
+**What landed.** Three lane cars and four chair cars. The kernel gained the **demotion channel it never implemented**, so a minor crime wave can no longer print the catastrophic sentence — and the arm proving it was **red against a byte-identical copy of the base reader** before it was green against the cure. The **SECTION-TARGET parser** stopped splitting on a comma and started reading the shape its own neighbour has always used, closing the field's vocabulary and moving four prose leaves 584 bytes for the first time. And the dossier got a **router that can say WHERE**, with the rule that one fact is given exactly one sentence: the dark half is **68 blocks a gate can count**, and the registry is **empty at birth by design** so that the walker's controls red on the defect before the table has a single row.
+
+### ⚠⚠ THE COLLISION EXISTED ONLY AT THE COMPOSED TIP — NEITHER DOCK COULD SEE IT
+
+§886's fill-layer guard treats **every exported string map in the desk directory** as a candidate fill table. Train 1's registry car landed `dossierMounts.js` in exactly that directory, exporting `MOUNT_RUNGS`. Both cars are correct; **the pair is not**, and no dock held both. ⭐ **The cure was the guard's own pre-built door, used honestly:** `NOT_A_FILL_TABLE` exists precisely for a map that is vocabulary rather than fill, and the entry states the true reason — the two legibility depths a mount may draw at, consumed only as the router's rung vocabulary, no value of which ever reaches a `{slot}`. **Classified, not exempted.** The distinction matters because an exemption suppresses a question and a classification answers it.
+
+### ⭐⭐ THE CENSUS DELTA IS NOT THE ARM DELTA — CONFIRMED A FOURTH TIME
+
+The registry walker carries **16 arms**; the lighting census moved **+20 titles**; the test ratchet moved **+22 tests**. Three different numbers for one consist, for the fourth consecutive landing (§885.4: two arms, **zero** census cost; §886: 19 / +20 / +21). **Budgeting a refreeze by counting the arms you wrote is wrong in three independent ways at once**, and the only correct move remains what both register acts did here: **predict the derivable figures exactly and leave the underivable ones deliberately unnamed until measured.** Lighting went `2504/370/2134/22696/6110` → **`2505/370/2135/22716/6114`** with the three derivable figures predicted exact and the closure identity holding; the ratchet went `30,994/2,452` → **`31,016/2,453`**, files predicted +1 exact and tests refused in advance; the OSR baseline refroze **1,993 findings / 1,409 identities across 388 files** — figures unchanged, input fingerprint only, **exactly as the parser lane predicted.**
+
+### ⚠ A CHAIR ERROR THE RECORD SHOULD CARRY: A LAW BROKEN TWICE, ONE LANDING APART
+
+The chair wrote the **cures-first-registers-last** law and then inverted it at §885 and again here — committing a register act while a cure was still owed. **Both times it was harmless only by luck**, the cure happening to add no test title, which was *checked* rather than assumed. ⭐ **A law the chair keeps breaking is not a law, it is a hope.** The mechanization is named and not yet built: the **register pre-flight already knows** which registers a consist disturbs and whether they are refrozen, so it can equally refuse a register act committed with uncommitted cures ahead of it. Recorded here as owed work, not as a resolved item.
+
+### THE INSTRUMENTS, ON THEIR SECOND LANDING
+
+The **pre-gate** cleared all 14 cheap stages in **81.9 s** at the final seven-car tip, and the two copied instrument files were deleted immediately with porcelain returning to 0 — the operational note from §886 held. The ratchet's earlier refusal on this consist was **not the machine this time**: it named two real failures, one the cross-car collision above and one a register act the chair had been told about and forgotten. **Neither was banked, both were cured, and the census stayed at 10/10.**
+
+### WHAT REMAINS OWED FROM THIS TRAIN
+
+⛔ The `createdAt` wall-clock fallthrough **and its five siblings** (`wizardNews.js` `:552 :712 :759 :779 :819 :867`) — named in this gate's `GATE_KNOWN_RED` and still **owed before the GOLDEN freeze** as its own determinism act. ⛔ The **twelve mutilated anchors** stay owner-gated and untouched. ⏳ The dossier mount registry is **empty at birth**: the 68 unmounted blocks are a measured backlog, not a defect, and the wiring is the desk act that follows.
+
+*What Fable re-derives:* the mount **rung vocabulary and the one-fact-one-sentence rule** — a taste judgment no test holds — then the parser's closed-vocabulary reading against the neighbour it now mirrors, then the demotion channel's threshold placement in the kernel.
+
+*Priority:* **HIGH for the kernel demotion channel** (it changes which sentence a reader meets); MEDIUM for the registry, which ships dark.
