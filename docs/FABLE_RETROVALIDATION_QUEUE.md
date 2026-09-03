@@ -2962,3 +2962,29 @@ The brief asserted that a catalog row with no resolvable adapter throws at modul
 *What Fable re-derives:* nothing product-facing — this is a chair-process row. Verify the card now carries both §889.1 findings.
 
 *Priority:* **MEDIUM** — no product byte moved, but the shape has cost three corrections in one day.
+
+## §889.3 · FOUR LANES DIE AT ONCE ON THE INFRASTRUCTURE, TWO CARS ARE FOUND UNREFERENCED, AND EVERYTHING IS RECOVERED (2026-09-03, chair session 58f0a8e2, SEAT: Opus 5 — Fable-unvalidated)
+
+**All four running lanes terminated simultaneously on API 500s.** Not one had reported. Each had real work in flight, and the standing law is that a dead lane is **resumed from its last point, never discarded**.
+
+### ⛔ WHAT WAS ACTUALLY AT RISK
+
+The lighting lane held **TWO COMMITTED CARS reachable from NO REF** — `b6ca05958` (O-12) and `f47433b32` (O-16) — the §882.14 survival shape, live and garbage-collectable. **Sealed at `refs/preserve/lighting-rows-wip-2026-09-03` before anything else was touched.** ⭐ **That law has now paid out SIX separate times in one day.** The other three docks held **13, 2 and 0** dirty tracked paths; every one was copied byte-identically with a `git diff` patch and a MANIFEST to `$ME/salvage-*/`, one copy `cmp`-verified rather than trusted, and **no dock was reverted** — the live work stayed in place and the salvage is insurance only.
+
+⭐ **THE RESUME LAW EARNED ITS KEEP AT THE BRIEF LEVEL, NOT THE DOCK LEVEL.** Every ordinary lane brief in this program says *"if the dock is dirty, STOP and report"* — which for a resumed lane is exactly wrong, because **the dirt is its own work**. All four resume briefs therefore open with the dirty path list and the words *"THAT DIRT IS YOUR OWN WORK. DO NOT STOP. DO NOT RESET."* A resume brief that inherits the fresh-lane intake rule destroys what it was sent to save.
+
+⚠ **AND THE CAP WAS EXCEEDED EARLIER BY A MECHANISM NO ONE WATCHED:** the ENC-4 lane spawned its own recon child, putting five agents on a four-agent cap. **Every resume brief now forbids subagents explicitly.**
+
+### ⭐⭐ WHAT THE DEAD LANES HAD ALREADY PROVEN, AND IT IS BETTER THAN THE BRIEFS
+
+**O-10(b) is CLOSED, and closed the right way: NO RAISE REACHED, RESIDUAL MEASURED AT ZERO.** Three real `npm run build` runs — base, dial-flipped to v2, and a reverted control — each put `engine-C9-_paJc.js` at **675,764 B against a 676,000 ceiling, margin +236, with an IDENTICAL content hash across all three builds**, which is the strongest available witness that the dial moved not one byte. The docs' `+1,047 B` could not reproduce for a reason in the source: `livingContentLaw.js:79-87` records that a convenience re-export block *"was written first and MEASURED"* and **was not taken**, while the roster payload rides a dynamic `await import(...)` seam (`livingContentSeam.js:94`) and `materializesLivingContent` reads the **config, never the dial**. ⇒ **A ceiling the owner delegated turned out not to need raising. A measured zero beats a granted raise**, and the lane refused to claim the row's *whole* car was engine-free — only the dial's, stated as the dial's.
+
+**The now-null lane's Census B reshapes its own car:** the estate is **already built for a null stamp everywhere except the two seams that mint one**. `RegionImpact.createdAt` is already `string|null`; `compareCodepoint` coerces nullish to `''` by documented design; two prior-art writers already pass a null through; and the guard's own comment records `now: null` as a **126-site estate idiom**. ⇒ the two regional seams are the **OUTLIERS**, so this is surgical rather than sweeping. It also **refused an inherited figure** — the ledger's "32 further sites" measured as **20 outstanding** at this base, and said so.
+
+**The ENC-3 lane's recon is worse than the chair briefed, in the useful direction:** there are **TWO** gates above the drop pass, not one. A world that lit `chanceEncountersEnabled` and `envoyDiplomacyEnabled`, deposited, then darkened the second **keeps `meetingMarkEvents` forever and the spatial namespace can never drain.** It also raised a real charter STOP — the lived-experience funnel door is **UNOWNED** (`LIVES_SUBSYSTEM_ROWS` empty, `characterDriftEnabled` absent from `simulationRules.js`) — which the chair ruled: **ENCOUNTERS takes the door, records the claim in-file, and a later train extends rather than re-mints it.**
+
+**The src-prose lane's measurement corrected the chair twice:** **1,458** em dashes in `src/` (not ~1,516), **688 of them outside EVERY guard**, and the 27 byte-twins reconciled independently against the shipping tree as **28** across five owning files (27 listed + 1 wrapped).
+
+*What Fable re-derives:* O-10(b)'s three-build measurement and its identical content hash, and the funnel-door emptiness the chair's ruling rests on.
+
+*Priority:* **HIGH** — the salvage is the only reason six cars' worth of work exists to validate.
