@@ -20,6 +20,20 @@ import {
   ensureWizardNewsFeed,
 } from '../../src/domain/region/wizardNews.js';
 
+/**
+ * ⛔ THE PINNED INSTANT, AND WHY IT IS NOT `null`.
+ *
+ * Every call below passed `{ now: PINNED }`, which READS as "pin this to nothing" and
+ * BEHAVES as "no pin at all": the writers stamp through
+ * `entry.createdAt || options.now || nowIso()`, an `||` chain in which `null` is falsy,
+ * so each call took a LIVE WALL CLOCK. The dormancy arm at the bottom of this file
+ * compares two feeds byte-for-byte, so it failed whenever its two appends landed either
+ * side of a millisecond boundary — measured at 784 mismatches in 200,000 iterations
+ * (0.392%), and it was the estate's only declared known-red. A fixed instant is what the
+ * `null` was reaching for.
+ */
+const PINNED = '2026-01-01T00:00:00.000Z';
+
 /** A field-battle row shaped exactly as the transit kernel mints one. */
 const battleRow = (over = {}) => ({
   id: 'wizard_news.6.field_battle.ashford.kelby',
@@ -54,18 +68,18 @@ const soleEntry = (feed) => {
 
 describe('the region survives the allowlist rebuilder — both doors', () => {
   test('WRITE door: a region set by the minter reaches the feed', () => {
-    const feed = appendWizardNewsEntries({}, [battleRow({ region: 'morrow' })], { now: null });
+    const feed = appendWizardNewsEntries({}, [battleRow({ region: 'morrow' })], { now: PINNED });
     expect(soleEntry(feed).region).toBe('morrow');
   });
 
   test('READ door: a persisted region survives re-normalization on load', () => {
-    const written = appendWizardNewsEntries({}, [battleRow({ region: 'morrow' })], { now: null });
-    const reloaded = ensureWizardNewsFeed(JSON.parse(JSON.stringify(written)), { now: null });
+    const written = appendWizardNewsEntries({}, [battleRow({ region: 'morrow' })], { now: PINNED });
+    const reloaded = ensureWizardNewsFeed(JSON.parse(JSON.stringify(written)), { now: PINNED });
     expect(soleEntry(reloaded).region).toBe('morrow');
   });
 
   test('the place is an ID, carried verbatim — not a name and not a terrain class', () => {
-    const feed = appendWizardNewsEntries({}, [battleRow({ region: 'morrow_vale' })], { now: null });
+    const feed = appendWizardNewsEntries({}, [battleRow({ region: 'morrow_vale' })], { now: PINNED });
     const entry = soleEntry(feed);
     expect(entry.region).toBe('morrow_vale');
     // anchored: the entry really carries a region (asserted on the line above); what is
@@ -76,27 +90,27 @@ describe('the region survives the allowlist rebuilder — both doors', () => {
 
 describe('absence is absence — never an empty or null sentinel', () => {
   test('a battle whose region the transit layer never resolved adds NO key', () => {
-    const entry = soleEntry(appendWizardNewsEntries({}, [battleRow()], { now: null }));
+    const entry = soleEntry(appendWizardNewsEntries({}, [battleRow()], { now: PINNED }));
     expect(Object.prototype.hasOwnProperty.call(entry, 'region')).toBe(false);
   });
 
   test("an empty-string region is refused rather than persisted as ''", () => {
     // The one reachable degenerate value: a path-less transit record with an empty
     // destination id. Persisting it would make "" indistinguishable from a real place.
-    const entry = soleEntry(appendWizardNewsEntries({}, [battleRow({ region: '' })], { now: null }));
+    const entry = soleEntry(appendWizardNewsEntries({}, [battleRow({ region: '' })], { now: PINNED }));
     expect(Object.prototype.hasOwnProperty.call(entry, 'region')).toBe(false);
   });
 
   test('a whitespace-only region is refused, and a padded one is trimmed', () => {
-    const blank = soleEntry(appendWizardNewsEntries({}, [battleRow({ region: '   ' })], { now: null }));
+    const blank = soleEntry(appendWizardNewsEntries({}, [battleRow({ region: '   ' })], { now: PINNED }));
     expect(Object.prototype.hasOwnProperty.call(blank, 'region')).toBe(false);
-    const padded = soleEntry(appendWizardNewsEntries({}, [battleRow({ region: ' morrow ' })], { now: null }));
+    const padded = soleEntry(appendWizardNewsEntries({}, [battleRow({ region: ' morrow ' })], { now: PINNED }));
     expect(padded.region).toBe('morrow');
   });
 
   test('a non-string region is refused', () => {
     for (const junk of [null, 7, {}, ['morrow']]) {
-      const entry = soleEntry(appendWizardNewsEntries({}, [battleRow({ region: junk })], { now: null }));
+      const entry = soleEntry(appendWizardNewsEntries({}, [battleRow({ region: junk })], { now: PINNED }));
       expect(Object.prototype.hasOwnProperty.call(entry, 'region')).toBe(false);
     }
   });
@@ -106,8 +120,8 @@ describe('dormancy: the added key moves no byte on any world that fights no fiel
   test('a row with no region serializes IDENTICALLY to one normalized before the key existed', () => {
     // The bit claim, not the canonical-form claim. Every entry in every existing feed
     // lacks a region, so the conditional spread must add nothing to any of them.
-    const withoutKey = appendWizardNewsEntries({}, [battleRow()], { now: null });
-    const explicitlyEmpty = appendWizardNewsEntries({}, [battleRow({ region: '' })], { now: null });
+    const withoutKey = appendWizardNewsEntries({}, [battleRow()], { now: PINNED });
+    const explicitlyEmpty = appendWizardNewsEntries({}, [battleRow({ region: '' })], { now: PINNED });
     expect(JSON.stringify(explicitlyEmpty)).toBe(JSON.stringify(withoutKey));
   });
 
@@ -118,7 +132,7 @@ describe('dormancy: the added key moves no byte on any world that fights no fiel
       channelType: null, severity: 0.1, settlementIds: ['ashford'], impactIds: [], channelIds: [],
       sourceEventId: null, tags: [], reasons: [], createdAt: null,
     };
-    const entry = soleEntry(appendWizardNewsEntries({}, [plain], { now: null }));
+    const entry = soleEntry(appendWizardNewsEntries({}, [plain], { now: PINNED }));
     expect(Object.prototype.hasOwnProperty.call(entry, 'region')).toBe(false);
   });
 });
