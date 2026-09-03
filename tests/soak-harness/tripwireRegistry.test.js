@@ -43,6 +43,7 @@ describe('the tripwire registry', () => {
     expect([...TRIPWIRE_IDS]).toEqual([
       'throw_or_assert', 'non_finite_ledger_figure', 'population_collapse',
       'negative_stock', 'unbounded_growth', 'liveness_floor',
+      'capacity_plateau', 'capacity_floor_thaw', 'capacity_realm_load',
       'tick_duration_blowout', 'memory_watermark',
     ]);
     // TOTAL and DISJOINT: every row is in exactly one class, and both classes are live.
@@ -53,7 +54,20 @@ describe('the tripwire registry', () => {
     // SOAKCHAIN Car 1 adds `liveness_floor` — deterministic, so 5 -> 6 and 7 -> 8. The
     // registry order is load-bearing (§10): the new row lands after `unbounded_growth` and
     // before both host-observability rows.
-    expect(deterministic.length).toBe(6);
+    //
+    // CAPACITY C3 adds THREE capacity rows on the same reading, so 6 -> 9 and 8 -> 11, and
+    // they land in the same place for the same reason: after the deterministic rows that
+    // preceded them and before both host-observability rows.
+    //
+    // ⚠ THREE, NOT THE DESIGNED FOUR, AND THE MISSING ONE IS RECORDED RATHER THAN QUIETLY
+    // DROPPED. `capacity_envelope_30y` would key on
+    // `behavioral.yearly[29].motion.populationMoved / populationTransitions`; MEASURED at
+    // this tip no such field is written — the yearly observation carries `majorEventCount`,
+    // `eventTypeCounts` and `moverCounts` and no `motion` block. Adding it is a receipt
+    // SCHEMA change, and a row over an absent field is an instrument that is NOT-EXECUTABLE
+    // forever while presenting as coverage. The property is measured instead in the
+    // unconditional chain, by demographicsEnvelope.test.js's STATE MOTION arm.
+    expect(deterministic.length).toBe(9);
     expect(observability.length).toBe(2);
   });
 
@@ -128,6 +142,61 @@ describe('the tripwire registry', () => {
     // can be shown to have — the row reports what it measured, never what it could not.
     expect(fired(clean())).toEqual([]);
     expect(fired(clean({ nonFiniteFigures: [] }))).toEqual([]);
+
+    // ── CAPACITY C3: three rows, three planted defects, and the DARK control ──────
+    // ⛔ THE GATE FIRST, BECAUSE IT IS THE ROWS' MOST IMPORTANT PROPERTY. Every capacity
+    // row is NOT-EXECUTABLE unless the receipt's own subsystem block says the demographic
+    // term was RUNNING. A clean receipt has no such block, which is why every arm above is
+    // unchanged by three new rows.
+    const lit = (over) => clean({ subsystems: { rules: { demographicsEnabled: true } }, ...over });
+    // A capacity row names EVERY settlement it convicts, so it can fire more than once on
+    // one receipt. WHICH rows fired is the question these plants ask, so the distinct ids
+    // are what is compared — and the per-settlement detail is asserted separately below.
+    const firedRows = (receipt) => [...new Set(fired(receipt))];
+    /** @param {(y: number, i: number) => number} f */
+    const years = (n, f) => Array.from({ length: n }, (_, y) => [0, 1, 2, 3].map((i) => f(y, i)));
+
+    // 1. A REALM STILL CLIMBING AT YEAR 200 never plateaued. It is not FROZEN either, so
+    //    the thaw row beside it must stay silent — that is the "only on its own" half.
+    const climbing = lit({ yearlyPopulations: years(201, (y, i) => 100 + i * 100 + y) });
+    expect(firedRows(climbing)).toEqual(['capacity_plateau']);
+    // and it named EVERY settlement that never plateaued, not just the first
+    expect(fired(climbing)).toHaveLength(4);
+    // and the DARK twin of the very same receipt is convicted by nothing at all
+    expect(fired(clean({ yearlyPopulations: climbing.yearlyPopulations }))).toEqual([]);
+
+    // 2. A SETTLEMENT HELD AT ONE HEAD COUNT FOR A CENTURY is the pre-cure defect's OTHER
+    //    half — the floored losers the bounded check never saw. Its three siblings step
+    //    once, so they are neither frozen nor still climbing, and only the thaw row fires.
+    const frozen = lit({
+      yearlyPopulations: years(150, (y, i) => (i === 0 ? 200 : 500 + i * 100 + Math.floor(y / 100))),
+    });
+    expect(firedRows(frozen)).toEqual(['capacity_floor_thaw']);
+    // exactly the ONE frozen settlement, not its three moving siblings
+    expect(fired(frozen)).toHaveLength(1);
+    expect(fired(clean({ yearlyPopulations: frozen.yearlyPopulations }))).toEqual([]);
+
+    // 3. A REALM SITTING AT A FIFTH OF ITS OWN BOUND is not a plateaued realm. This plant
+    //    carries no yearly series at all, so the two rows above are NOT-EXECUTABLE on it
+    //    and their silence here is the design rather than a miss.
+    const underloaded = lit({
+      behavioral: { yearly: [{ realmDemography: { loadRatio01: 0.2, binding: { granary: 2, walls: 2 } } }] },
+    });
+    expect(firedRows(underloaded)).toEqual(['capacity_realm_load']);
+    expect(fired(clean({ behavioral: underloaded.behavioral }))).toEqual([]);
+
+    // 4. A BINDING CENSUS THAT DOES NOT ACCOUNT FOR EVERY SETTLEMENT is the other clause,
+    //    and it fires with the load inside its window so the two are not one arm.
+    expect(firedRows(lit({
+      behavioral: { yearly: [{ realmDemography: { loadRatio01: 0.8, binding: { granary: 1, walls: 1 } } }] },
+    }))).toEqual(['capacity_realm_load']);
+
+    // 5. AND THE PASSING CORNER, without which every plant above proves only that the rows
+    //    can fire and never that they can be satisfied.
+    expect(fired(lit({
+      yearlyPopulations: years(201, (y, i) => (y < 50 ? 100 + i * 100 + y : 150 + i * 100 + (y % 7))),
+      behavioral: { yearly: [{ realmDemography: { loadRatio01: 0.8, binding: { granary: 2, walls: 2 } } }] },
+    }))).toEqual([]);
   });
 
   it('HOST-OBSERVABILITY rows never mint a finding, which is what makes the pool proof possible', () => {

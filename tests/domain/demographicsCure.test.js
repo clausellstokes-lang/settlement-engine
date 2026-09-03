@@ -24,52 +24,14 @@
 import { describe, expect, test, vi } from 'vitest';
 import { createPRNG } from '../../src/kernel/prng.js';
 import { advanceDemographics } from '../../src/domain/worldPulse/demographicsKernel.js';
-import {
-  BIRTH_BANDS, densityCeilingOf, effectiveBoundOf, foodCapacityOf,
-} from '../../src/domain/worldPulse/demographicsRates.js';
+import { BIRTH_BANDS } from '../../src/domain/worldPulse/demographicsRates.js';
+// CAPACITY C3 extracted this realm to a shared helper so the ENVELOPE suite measures the
+// SAME six settlements this file plateaus. The fixture is byte-identical to the one this
+// file authored; every pin below is unchanged.
+import { LIT, boundsOf, realmUpdates, snapshotOf } from '../helpers/demographicsRealmFixture.js';
 
 const RATES_MODULE = '../../src/domain/worldPulse/demographicsRates.js';
-const LIT = { simulationRules: { demographicsEnabled: true } };
 const YEARS = 300;
-
-function place({ id, tier, terrain, population, dailyProduction }) {
-  return {
-    population, tier, name: id,
-    config: { tier, terrainType: terrain },
-    economicState: {
-      foodSecurity: {
-        dailyNeed: population * 2, dailyProduction, deficitPct: 0, surplusPct: 5,
-        importDependency: 0.2, storageMonths: 6, resilienceScore: 60,
-      },
-    },
-    npcs: [],
-  };
-}
-
-/** A realm shaped like the failing soak's: every tier, every terrain class, mixed
- *  granary-bound and wall-bound, from a thorp to a metropolis. */
-const REALM = Object.freeze([
-  ['Ashford', { tier: 'town', terrain: 'plains', population: 1200, dailyProduction: 6000 }],
-  ['Brackwater', { tier: 'hamlet', terrain: 'riverside', population: 320, dailyProduction: 1600 }],
-  ['Cairnhold', { tier: 'thorp', terrain: 'mountain', population: 40, dailyProduction: 300 }],
-  ['Dunmarch', { tier: 'city', terrain: 'hills', population: 7000, dailyProduction: 30000 }],
-  ['Elderfen', { tier: 'village', terrain: 'forest', population: 700, dailyProduction: 2600 }],
-  ['Fallowmere', { tier: 'metropolis', terrain: 'coastal', population: 30000, dailyProduction: 130000 }],
-]);
-
-const realmUpdates = () => REALM.map(([id, spec]) => ({ saveId: id, settlement: place({ id, ...spec }) }));
-const snapshotOf = (updates) => ({
-  settlements: updates.map((u) => ({ id: u.saveId, name: u.saveId, settlement: u.settlement })),
-});
-
-/** The authored bound each settlement is measured against, read from the live tables. */
-function boundsOf(updates) {
-  const out = new Map();
-  for (const u of updates) {
-    out.set(u.saveId, effectiveBoundOf(foodCapacityOf(u.settlement, LIT, u.saveId), densityCeilingOf(u.settlement)).bound);
-  }
-  return out;
-}
 
 /**
  * Drive `step` for YEARS years and return a per-settlement yearly series.

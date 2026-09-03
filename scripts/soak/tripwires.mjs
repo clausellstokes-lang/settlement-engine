@@ -206,6 +206,119 @@ export const TRIPWIRES = Object.freeze([
       return out;
     },
   }),
+  // ═══════════════════════════════════════════════════════════════════════════
+  // CAPACITY C3 — THE CAPACITY ROWS. Arm B of the engine wall: receipts only.
+  // ═══════════════════════════════════════════════════════════════════════════
+  // ⛔⛔ EVERY ROW BELOW IS NOT-EXECUTABLE ON A DARK CELL, AND THAT IS A RULING RATHER
+  // THAN CAUTION (the integrator's §13 C8 rider). The demographic term ships DARK, so a
+  // capacity row that ran anyway would convict every dark soak of failing to plateau a
+  // model that was never running. Its CONSEQUENCE is recorded here rather than discovered
+  // later: the DARK twin — the run that RE-CREATES the runaway — can never be convicted by
+  // these rows. It is convicted by the EXISTING realm-population-bounded check and by
+  // `unbounded_growth`, and the signing record must cite those rather than these.
+  //
+  // ⚠ THE GATE READS `subsystems.rules.demographicsEnabled`, CONFIRMED PRESENT: the soak
+  // writes `rules: runA.simulationRules` into its subsystem block
+  // (`whole-world-soak.mjs:1050-1052`), so this is a field that exists, not one hoped for.
+  //
+  // ⛔ AND THE FOURTH DESIGNED ROW IS NOT HERE. `capacity_envelope_30y` would key on
+  // `behavioral.yearly[29].motion.populationMoved / populationTransitions`, and MEASURED at
+  // this tip that field does not exist: the yearly observation carries `majorEventCount`,
+  // `eventTypeCounts` and `moverCounts` and no `motion` block at all. Writing it is a
+  // receipt SCHEMA change, which is persistence shape and not a lane's act, and building the
+  // row over an absent field would mint an instrument that is NOT-EXECUTABLE forever while
+  // looking like coverage. The property itself is NOT lost: it is measured in the
+  // unconditional chain by `tests/domain/demographicsEnvelope.test.js`'s STATE MOTION arm.
+  Object.freeze({
+    id: 'capacity_plateau',
+    class: 'deterministic',
+    band: 'over >= 150 observed years: |y_last - y_mid| / y_mid <= 0.05, and every century multiplier < 50',
+    home: 'tests/domain/demographicsCure.test.js:108-149 — the cure suite\'s own plateau clauses, INHERITED verbatim so the soak and the unit pin cannot disagree about what a plateau is',
+    detect: (receipt) => {
+      if (receipt?.subsystems?.rules?.demographicsEnabled !== true) return [];
+      const pops = Array.isArray(receipt?.yearlyPopulations) ? receipt.yearlyPopulations : [];
+      // A run under 150 years did not observe a plateau; reading that silence as either a
+      // pass or a finding is the §206.2b error the liveness row already paid for.
+      if (pops.length < 150) return [];
+      const died = Array.isArray(receipt?.yearlyDiedFlags) ? receipt.yearlyDiedFlags : [];
+      const last = pops.length - 1;
+      const mid = Math.floor(last / 2);
+      const out = [];
+      const count = Array.isArray(pops[last]) ? pops[last].length : 0;
+      for (let i = 0; i < count; i += 1) {
+        // A settlement that DIED is not required to plateau; it has no head count to hold.
+        if (died[last] && died[last][i]) continue;
+        const yMid = Number(pops[mid]?.[i]);
+        const yLast = Number(pops[last]?.[i]);
+        if (!finite(yMid) || !finite(yLast) || yMid <= 0) continue;
+        if (Math.abs(yLast - yMid) / yMid > 0.05) {
+          out.push(`settlement ${i} never plateaued: ${yMid} at year ${mid} against ${yLast} at year ${last}`);
+        }
+        for (let y = 100; y <= last; y += 100) {
+          const from = Number(pops[y - 100]?.[i]);
+          const to = Number(pops[y]?.[i]);
+          if (!finite(from) || !finite(to) || from <= 0) continue;
+          if (to / from >= 50) {
+            out.push(`settlement ${i} century multiplier ${(to / from).toFixed(1)} over years ${y - 100} to ${y}`);
+          }
+        }
+      }
+      return out;
+    },
+  }),
+  Object.freeze({
+    id: 'capacity_floor_thaw',
+    class: 'deterministic',
+    band: 'no LIVING settlement holds one head count across its last 100 observed years',
+    home: 'tests/domain/demographicsFloor.test.js — the floored-six unfreeze. The pre-cure defect had TWO halves and the bounded check only ever saw one: a settlement frozen at 200 for a century is as broken as one at 2.9e13, and it fires nothing',
+    detect: (receipt) => {
+      if (receipt?.subsystems?.rules?.demographicsEnabled !== true) return [];
+      const pops = Array.isArray(receipt?.yearlyPopulations) ? receipt.yearlyPopulations : [];
+      if (pops.length < 100) return [];
+      const died = Array.isArray(receipt?.yearlyDiedFlags) ? receipt.yearlyDiedFlags : [];
+      const last = pops.length - 1;
+      const from = last - 100;
+      const out = [];
+      const count = Array.isArray(pops[last]) ? pops[last].length : 0;
+      for (let i = 0; i < count; i += 1) {
+        if (died[last] && died[last][i]) continue;
+        const held = Number(pops[from]?.[i]);
+        if (!finite(held)) continue;
+        let frozen = true;
+        for (let y = from + 1; y <= last && frozen; y += 1) {
+          if (Number(pops[y]?.[i]) !== held) frozen = false;
+        }
+        if (frozen) out.push(`settlement ${i} held ${held} souls unchanged from year ${from} to year ${last}`);
+      }
+      return out;
+    },
+  }),
+  Object.freeze({
+    id: 'capacity_realm_load',
+    class: 'deterministic',
+    band: 'final realmDemography.loadRatio01 in [0.6, 1.05], and binding.granary + binding.walls === settlements',
+    home: 'src/domain/worldPulse/demographicsObservation.js observeRealmDemography — the realm reading the engine already writes; the band is the cure suite\'s own plateau window (0.6 floor, 1.05 overshoot allowance) read at realm scale',
+    detect: (receipt) => {
+      if (receipt?.subsystems?.rules?.demographicsEnabled !== true) return [];
+      const yearly = Array.isArray(receipt?.behavioral?.yearly) ? receipt.behavioral.yearly : [];
+      // The observation is an ADDITIVE key: a v4 receipt simply lacks it, and a consumer
+      // must read that as an instrument gap rather than a finding.
+      const reading = yearly.length ? yearly[yearly.length - 1]?.realmDemography : null;
+      if (!reading || typeof reading !== 'object') return [];
+      const out = [];
+      const load = Number(reading.loadRatio01);
+      if (!finite(load) || load < 0.6 || load > 1.05) {
+        out.push(`realm load ${finite(load) ? load.toFixed(4) : 'non-finite'} outside the plateau window [0.6, 1.05]`);
+      }
+      const settlements = Number(receipt?.settlements) || 0;
+      const granary = Number(reading.binding?.granary) || 0;
+      const walls = Number(reading.binding?.walls) || 0;
+      if (settlements && granary + walls !== settlements) {
+        out.push(`binding census ${granary} granary + ${walls} walls does not account for ${settlements} settlements`);
+      }
+      return out;
+    },
+  }),
   Object.freeze({
     id: 'tick_duration_blowout',
     class: 'host-observability',
