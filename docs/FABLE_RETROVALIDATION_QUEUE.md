@@ -2499,3 +2499,33 @@ Lighting predicted `2503/370/2133/22676/(unpredicted)` and measured **`2503/370/
 *What Fable re-derives:* the misreported budget first — an instrument that reports the wrong governing figure will mis-diagnose every future expiry the same way. Then the foreign cure riding a landing. Then the chair's skipped register act, which is a process defect rather than a code one and has no gate.
 
 *Priority:* ⛔ **HIGH for the misreported budget.** MEDIUM for the rest.
+
+---
+
+## §885.1 · THE EFFICIENCY LANE RETURNS — and finds a defect in the landing it was built to make cheaper (2026-09-03, chair session 58f0a8e2, SEAT: Opus 5 — Fable-unvalidated)
+
+**What was built.** Lane PREGATE holds at **`41a565e8b`** on branch `lane-PREGATE-2026-09-02` off `f5a6c3bbf`, three files / 821 lines, nothing else touched. **(a)** `scripts/pre-gate.sh` + `.mjs` — the cheap half of `npm run check` with **`;` semantics rather than `&&`**, so one run reports **every** cheap failure instead of the first. **(b)** `scripts/register-preflight.mjs` — which registers a consist disturbs, **from git alone**, in under a second.
+
+**⭐ THE MEASURED SAVING, AND ITS HONEST LIMITS.** Tonight's four attempts cost **31 + 1,001 + 1,136 + 1,214 = 3,382 s**. With both instruments: **2,439 s. A saving of 943 s (15.7 min, 27.9%), four attempts down to three.** ⚠ **And the lane states plainly what it does NOT catch:** run 3's `writerReach` red was a test-runtime timeout inside the expensive stage and **neither instrument sees it**; and for a run-1-shaped failure *alone* the pre-gate is **57 s SLOWER** than the `&&` chain — it pays only because it reports everything else in the same pass. **A tool that names its own non-coverage is worth more than one that does not.**
+
+**⛔ IT CORRECTED THE CHAIR'S BRIEF.** The brief named tip `2d5112851` as the reproduction target for tonight's miss. **That tree was already refrozen and therefore cannot reproduce it** — the miss lives at `37e285498`. The lane ran both, plus three negative controls, rather than reporting a pass against the wrong target. ⚠ It also **corrected the chair's headline figure**: the cheap stages measured **88.0 s** on its dock, not the ~4.5 min the chair briefed — while noting the chair's figure may be the honest one *under gate load* (its runs were at load 3–12; the gates ran at 20–30). **That care is the difference between a correction and a contradiction.**
+
+**⭐⭐ IT FOUND TWO FALSE-OUTPUT DEFECTS IN ITS OWN INSTRUMENT, and both are this program's named classes.** *(1)* A first version declared only the test corpus as the ratchet's input, so it called a **src-only consist CLEAR — a FALSE GREEN.** Cured with per-register input groups; CLEAR now requires every group byte-identical. *(2)* A first version **exited 1 on a tree that gates green — a FALSE RED**, and *"an instrument that reds a green tree gets ignored."* Cured by splitting **BLOCKER** (exit 1, never refrozen) from **CAUTION** (exit 4, refrozen but not on this tree), printing the trailing diff as measurement. ⭐ A third: a base mismatch has two causes, and re-deriving at the register's own `measuredAtSha` **discriminates "my model is wrong" from "the base's register is already stale"** — at one tip it correctly reported the latter.
+
+### ⭐ THE LIVE FINDING, CHAIR-VERIFIED, AND THE LAW IT BANKS
+
+The lane reported that at the §885 gated tip **both registers were refrozen BEFORE the final cure car**. **The chair verified it by own reads:** lighting `measuredAtSha` = **`37e285498`** (car 3), ratchet = **`d4b91b26a`** (car 4), landed tip = **`2d5112851`** (car 6). ⇒ **Neither tuple was measured on the tree that gated.**
+
+**RULED: NOTHING IS OWED, and the ground is measured rather than assumed.** Car 6 changed **exactly one line** — `});` → `}, 120_000);` — which adds **no test title and no describe block**, so neither figure could move; and **the gate ran the plain ratchet and the lighting walker AT the landed tip and both passed**, which proves currency by execution rather than by argument.
+
+⛔⛔ **BUT THE LAW IS REAL AND IT IS NEW: REGISTER ACTS ARE THE LAST CARS OF A CONSIST, AFTER EVERY CURE.** The chair took registers at cars 4–5 and then added a cure at car 6. It was harmless *this time* only because the cure happened to be title-neutral — **a fact nobody checked before landing, and which the chair only checked afterwards because a lane raised it.** A cure that added one `test(...)` would have landed two stale registers behind a green gate. ⇒ **Order every consist: cures first, registers last, and never a car after a register act.**
+
+### THE CHAIR'S RULINGS
+
+⭐ **THE SCRIPTS DO NOT NEED TO LAND TO BE USED.** They live on a dock and read git; the pre-flight can be pointed at any base/tip **today**. ⇒ **Ruled: use them from now on immediately, and land them with TRAIN 1 rather than spending a dedicated ~20-minute gate** — landing is for permanence and CI, not for benefit. **RATIFIED** without amendment: the two-file split (an inline `node -e` in sh is the quoting hazard that killed a wrapper tonight) · stages invoked as `npm run <name>` verbatim for PATH and hook fidelity · ⭐ **an unrecognised new stage defaults to CHEAP and IS RUN** — *"a slower pre-gate is recoverable; a false green is not"*, which is exactly the right asymmetry · the BLOCKER/CAUTION split · the register roster discovered from the tree, with **27 of 29 printing "INPUTS UNDECLARED" so a new register is loudly unanalysed rather than silently invisible** · branch not detached head (the §882.14 survival law) · `node_modules` by APFS clone rather than a symlink that would share write paths across lanes.
+
+*Deferred, documented, not bugs to re-find:* the other **27 registers have undeclared inputs** — named by the lane as the highest-value follow-on, and the chair agrees · no `--measure` mode (it would turn four UNKNOWN figures into numbers for one file-run instead of 13 minutes; deferred as cheap-and-honest without it) · four census figures stay UNKNOWN by design rather than by forking a 7,789-line grammar that would drift.
+
+*What Fable re-derives:* the register-ordering law first — it is the one finding that would have silently landed a wrong figure, and it has no gate. Then the two self-found false-output defects, because a lane auditing its own instrument is the behaviour this program most wants to reward.
+
+*Priority:* **HIGH for the ordering law.** MEDIUM for the rest.
