@@ -2697,3 +2697,48 @@ Dock `laneINSTRLAND-tree` = **`108a02ef4`**, 4 cars over `2d5112851`, porcelain 
 *What Fable re-derives:* the "DISPROVES" refinement, because a confident word in a landing row is exactly the kind of thing a later seat inherits as settled.
 
 *Priority:* MEDIUM. The hold is correct and cheap; the over-stated word is the durable part.
+
+---
+
+## §885.7 · THREE LANES RETURN — and every one refuses a figure it was handed (2026-09-03, chair session 58f0a8e2, SEAT: Opus 5 — Fable-unvalidated)
+
+### PARSER — car C9, `c461dc296` on `lane-PARSER-2026-09-03`, parent = the kernel car
+
+⭐ **Every predicted leaf byte measured EXACT, and the chair verified all seven independently**: `general` −413 → 182,623 · `power` −83 → 81,910 · `defense` −51 → 111,938 · `warFaith` −37 → 115,928 · `economy`, `stressors` and **the causal leaf** at **delta 0**. The causal leaf holding is what protects its three live readers. **Total −584 B.**
+
+⭐ **THE PROPERTY BREAK WAS DECLARED LOUDLY, AS INSTRUCTED:** the seven leaves are **no longer byte-identical across cars**. Legitimate, dark, and stated rather than discovered.
+
+**⛔ IT REFUSED THREE INHERITED FIGURES.** *(a)* **The chair's brief said "23 of 45"; it does not reproduce** — measured **26 of 45** against the canonical eight and **13 of 45** against the ten the state register actually uses, with the denominator named. *(b)* The design's "25 of 45 against a 14-name vocabulary" does not reproduce either. *(c)* **The design's "`sectionTarget` has no consumer" is REFUTED IN ITS REASON** — there are **three live readers** plus a test arm, all over the **causal** leaf; **the conclusion survives only because the causal leaf is byte-identical**, which is a different and much narrower warrant than the one the design gave. **After: 45 of 45 canonical**, 43 carrying a key over exactly ten strings and two carrying none, *"which is the truth."*
+⚠ **AND IT CORRECTED THE CHAIR ON A LIVE FACT:** the brief stated the box was at load 60–90; at lane start it measured **2.91 / 6.26 / 20.91**. ⭐ **The chair stated a transient condition as though it were stable.** A brief that carries a live reading must timestamp it or omit it.
+**Owed at landing:** the OSR `--write` refreeze (the walker's own CLI characterises the four leaves as *"generated/data inputs, not detector sources"*, so no governed migration is owed).
+
+### REGISTRY — cars C2+C3, `5e749a0b0`, parent = the kernel car
+
+⭐⭐ **THE REGISTRY SHIPS EMPTY, AND THAT IS THE JUDGMENT WORTH KEEPING.** `DOSSIER_MOUNTS = Object.freeze([])` — chair-verified — because **no desk has landed, so a row naming a position the tree does not build would be fiction on day one.** All **68** blocks are listed in `UNMOUNTED_BLOCKS` (chair-verified count) as *"the corpus's darkness, as a number"*, shrink-only. Zero imports. Nothing reached into: the kernel, the contract test, the generator and the annexes are all absent from its diff (chair-verified).
+**C3 is held in two places that cannot disagree**, and `sentenceMountForBlock` is **fail-closed — `null` on a contradiction rather than first-wins by array order.**
+⭐ **The sweep plant is aimed at the one arm a shrink-only ratchet CANNOT see:** striking a block from the dark half reds the TOTALITY arm, *"deliberately the arm a shrink-only ratchet cannot see, since shrinking is the direction it exists to permit."*
+**Design corrections:** `max-lines: 600` is scoped to `src/components/**/*.jsx`, not layer-wide · the design's eslint command **does not run under this repo's flat config** · **the design's "T5 arm 1 reds today with 68 unmounted" is WRONG** — with all 68 declared dark the arm is **green**, which is precisely what lets this car land against a full census.
+⭐ **And a measured correction to the ratchet's own reputation:** `check-test-ratchet.mjs:1118-1142` uses `totalTests`/`totalFiles` **only as a 90% scope floor, never as growth ceilings** — so a new test file **does not red without a refreeze**; that figure is hygiene, not a gate.
+⭐ **It refused the census refreeze on better grounds than the chair's law**: not merely "registers last", but that *"a number measured from my dock alone would not reproduce at the composed tip"* — the **multi-lane** form of the rule.
+
+### ENC-1 — `bbe56b957` + the chair's `ea8451bbb`, on the product tip
+
+**Only ONE of seven cars was buildable**, and the design's own §17.4 says so. ⭐ **Ruling none of the seventeen owner rows leaves exactly one car** — the lane built it and refused the rest rather than absorbing a row to unblock itself.
+⭐⭐ **THE CONTROL THAT PROVED ITS OWN ABSENCE.** Planting `Math.random()` in the pick **did not convict on the first run** — the hole was real: the resolution arm never touched the census, the order arm ran an empty roster, and a two-seed arm is *satisfied* by randomness. ⭐ ***"The arm exists because the plant found its absence."*** That is the strongest thing a control can do, and it is the difference between a control and a ceremony.
+**Its plane-projection control found FOUR real defects the design's arithmetic hid**: the axis id was being dropped so every disclosed axis read plane-neutral · `planeFromAxes` was lossy because a trait carries a lean and lives in no axis, so *"the design's 'equivalently `npcTraitPlane` walked by disclosed axes' was FALSE until `planeFromChart` existed"* · a refused offer was overwritten by the mark arm, **erasing every `rejected` from the measured distribution** · and the pick's eighth arm reached no receipt.
+⭐ **It refused the unit-dodge the chair refused at §883.6** — `unit: null` would have grown `UNITLESS_TABLE_CEILING` 220→221, so it **split provenance into its own export** so every leaf carries an honest unit. Four cures at source, no ceiling raised.
+⭐ **It caught its own voice debt**: its registry rows had added three em dashes to `src/domain` string literals; cured, after which its list is **identical to the control** — **ENC adds zero voice debt.**
+**One FINDING by the design's own factor-of-two rule:** at the worst-case corner, exposures measure **0.6% of stops against a predicted ~4%**, a factor of ~7. ⭐ **"I moved no rung"** — correct, because that is a tuning value and tuning is gated.
+**STATE-NEVER-FATE holds by construction** (the widest outcome is `compromised`, a lean channel and a loyalty mark, pinned by an exact key-set assertion). **DARK holds**: goldens 0/525, no flag, no persisted key, no importer.
+
+### ⛔ THE CHAIR ACT: `DEFER_CEILING` 31 → 35, AUTHORIZED
+
+The lane **refused to move it**, correctly — the constant's own message reserves growth to *"a chair conversation, not an automatic deferral"*, and its comment records two prior moves with their ledger sections (29→30 at ODQ §85.1, 30→31 at §350), *"each move a chair-authorized registry mint landing its fork row, **never a lane absorbing a discovery**."*
+**The chair verified before authorizing**, not after: the six rows exist (**HBF-36…HBF-41**, four carrying the `closeOwed` the constant demands so each deferral says what would have to exist), the red was exactly **`expected 35 to be 31`**, and the walker is green on a pristine control dock. Moved in `ea8451bbb` **with its authorization recorded beside the constant in the file's own convention**; green **8/8** after.
+
+### COMPOSITION STATE
+`lane-KERNELMARK` (1 car) → `lane-PARSER` and `lane-REGISTRY` both branch from it (2 cars each) ⇒ **TRAIN 1 composes to 3 cars.** `lane-ENC` is 2 cars on the product tip, its own train. TRAIN 2 sits composed at `108a02ef4` awaiting a quiet box.
+
+*What Fable re-derives:* the chair's own load-figure error first — a brief that carries a transient reading as though it were stable is a defect the chair repeated after banking the law about it. Then ENC's control-that-found-its-own-absence, which is a method worth copying.
+
+*Priority:* MEDIUM. **HIGH for the brief-carries-a-stale-live-fact defect**, which will recur in every brief the chair writes.
