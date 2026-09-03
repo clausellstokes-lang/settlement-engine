@@ -10,7 +10,7 @@
  * It is a PURE, HEADLESS LEAF: no imports, no state, no clock, no RNG. Composition
  * lives display-side and nothing here is persisted — dark, the page is byte-identical.
  *
- * ── THE FOUR LAWS THIS FILE ENFORCES ────────────────────────────────────────────────
+ * ── THE FIVE LAWS THIS FILE ENFORCES ────────────────────────────────────────────────
  *
  * 1. ANCHORED LIVENESS (the spec's item 3, and the reason this is a kernel rather than
  *    a lookup). A variant renders ONLY when every slot it names has a real fill. A
@@ -37,6 +37,21 @@
  *    walker, a census or a print path that has no telling to key on reads a stable
  *    sentence rather than an arbitrary one.
  *
+ * 5. THE DEMOTED STATE DIMENSION, FAIL-CLOSED. Some blocks carry a STATE-KEY with more
+ *    dimensions than a pool key can hold, and the projection demotes the surplus into
+ *    per-variant channels. A pool that partitions itself by such a dimension is
+ *    UNREADABLE until the caller answers it, not "readable with everything": half its
+ *    sentences are false about this town and nothing here can tell which half. See
+ *    STATE_MARK_DIMENSIONS. This is the only law in the file that protects a TRUTH
+ *    CLAIM rather than a surface, and it is the reason `marks` is read twice.
+ *
+ * ⚠ `marks` IS AN UNTYPED BAG CARRYING THREE DISTINCT SEMANTICS, and a reader that
+ * knows only one of them fails silently rather than loudly. They are: the AUDIENCE mark
+ * (`dm-only`, law 2); the STATE DIMENSION words (law 5); and, in the causal register
+ * only, the family-local CAUSAL ARM names, which are open and family-scoped and so are
+ * filtered by causalDossierProse.js rather than here. The three vocabularies are
+ * disjoint over the shipped corpus, and the contract test is what keeps them that way.
+ *
  * THE PROMISE holds: same seed + same state ⇒ same sentence, forever. Eligibility is a
  * function of the state alone, and the draw is a function of the seed and the pool
  * identity alone.
@@ -48,7 +63,8 @@
  * One authored sentence, as the corpus projection emits it.
  * @typedef {object} StateProseVariant
  * @property {string} [angle] the standpoint tag (`ledger`, `street`, `visitor`, …)
- * @property {ReadonlyArray<string>} [marks] inline marks — `dm-only`, the causal arm
+ * @property {ReadonlyArray<string>} [marks] inline marks — `dm-only`, a STATE DIMENSION
+ *   word (see STATE_MARK_DIMENSIONS), or a causal arm name
  * @property {string} text the sentence, slots unfilled
  * @property {ReadonlyArray<string>} [slots] every `{slot}` the sentence names
  */
@@ -147,17 +163,108 @@ export function variantIsAudible(variant, audience) {
 }
 
 /**
+ * The second STATE dimensions the projection demotes into `marks`.
+ *
+ * WHY THIS EXISTS. Three blocks carry a STATE-KEY the pool key cannot hold: DS-GEN-1 is
+ * `type` by `severity` by `factions.length`, DS-GEN-6 is `route` by `hasFoodDeficit` by
+ * `tier`, DS-GEN-9 is `type` by `severity` by `anchored` by `yearsAgo`. The projection
+ * demotes the surplus dimensions into two per-variant channels, `slots` and `marks`.
+ * `variantIsAnchored` enforces the first. Nothing enforced the second, so a MINOR crime
+ * wave could draw the variant marked CATASTROPHIC and the page would state something
+ * false about the town. A wrong sentence is worse than no sentence.
+ *
+ * DERIVED FROM THE POOL, NEVER DECLARED BY THE CALLER. A registry a desk author must
+ * remember to fill is a guard against a defect of ignorance, written by someone who
+ * already knows. And the derivation is per POOL, not per block, because the corpus is
+ * mixed at the block grain: DS-GEN-9's `founding` pool carries no marks at all while its
+ * `event type: *` pools are fully marked, and DS-GEN-6's `tier overlay: city` pool holds
+ * a marked and an unmarked variant side by side. A block-level rule would demand an
+ * answer from a surface that has no business knowing one.
+ *
+ * FROZEN HERE RATHER THAN EMITTED BY THE GENERATOR. The alternative is a `dimension`
+ * field on every variant, which is tidier by layer and costs a regeneration to buy
+ * nothing: the words are already in the corpus, and the contract test refuses drift
+ * between this constant and what the corpus actually spells.
+ *
+ * @enforced-by tests/data/dossierStateProseProjection.contract.test.js
+ * @type {Readonly<Record<string, ReadonlyArray<string>>>}
+ */
+export const STATE_MARK_DIMENSIONS = Object.freeze({
+  severity: Object.freeze(['minor', 'major', 'catastrophic']),
+  deficit: Object.freeze(['deficit', 'no deficit']),
+  anchor: Object.freeze(['anchored', 'not anchored']),
+});
+
+/**
+ * mark word → the one dimension it belongs to. Derived, so the vocabulary is written
+ * once above and a word cannot drift into two dimensions without the contract noticing.
+ * @type {Readonly<Record<string, string>>}
+ */
+const DIMENSION_OF_MARK = Object.freeze(Object.fromEntries(
+  Object.entries(STATE_MARK_DIMENSIONS)
+    .flatMap(([dimension, words]) => words.map((word) => [word, dimension])),
+));
+
+/**
+ * Which dimensions does THIS POOL partition itself by? Empty for every pool the
+ * projection did not demote a dimension into — which is most of them, and is what makes
+ * law 5 free for the rest of the corpus and for the whole causal register.
+ * @param {ReadonlyArray<StateProseVariant>|undefined} pool
+ * @returns {string[]} dimension names, sorted
+ */
+export function poolDimensions(pool) {
+  const found = new Set();
+  for (const variant of pool || []) {
+    for (const mark of variant?.marks || []) {
+      const dimension = DIMENSION_OF_MARK[mark];
+      if (dimension) found.add(dimension);
+    }
+  }
+  return [...found].sort();
+}
+
+/**
+ * A variant carrying marks from a dimension speaks ONLY over the value it names. One
+ * carrying none is dimension-neutral and speaks over every value, which is what lets a
+ * mixed pool hold a general sentence beside two specific ones.
+ * @param {StateProseVariant|undefined} variant
+ * @param {string} dimension
+ * @param {string} value
+ * @returns {boolean}
+ */
+function variantSpeaksOver(variant, dimension, value) {
+  const own = (variant?.marks || []).filter((mark) => DIMENSION_OF_MARK[mark] === dimension);
+  return own.length === 0 || own.includes(value);
+}
+
+/**
  * The variants of one pool that this state and this audience can actually carry.
  * @param {ReadonlyArray<StateProseVariant>|undefined} pool
- * @param {{slots?: Record<string, unknown>, audience?: string}} [options]
+ * @param {{slots?: Record<string, unknown>, audience?: string,
+ *   dimensions?: Record<string, string>}} [options]
  * @returns {ReadonlyArray<StateProseVariant>}
  */
 export function eligibleVariants(pool, options = {}) {
   if (!Array.isArray(pool) || pool.length === 0) return [];
+  // Read on the RAW pool, before any filter: the audience or a missing slot could remove
+  // the last variant carrying a dimension word and turn a partitioned pool into one that
+  // looks unpartitioned, which is the fail-OPEN reading wearing the gate's coat.
+  const dimensions = poolDimensions(pool);
+  const given = options.dimensions || {};
+  // FAIL-CLOSED (law 5). A pool that partitions itself by a dimension the caller did not
+  // answer is UNREADABLE, and silence is the safe failure: R-DST-K already means silence
+  // and a contradiction has no safe reading. Not a throw — this is a display path, and a
+  // blank surface beats a crashed one.
+  for (const dimension of dimensions) {
+    const value = given[dimension];
+    if (typeof value !== 'string' || !STATE_MARK_DIMENSIONS[dimension].includes(value)) return [];
+  }
   const slots = options.slots || {};
   const audience = options.audience === AUDIENCE_DM ? AUDIENCE_DM : AUDIENCE_PLAYER;
   return pool.filter(
-    (variant) => variantIsAudible(variant, audience) && variantIsAnchored(variant, slots),
+    (variant) => variantIsAudible(variant, audience)
+      && variantIsAnchored(variant, slots)
+      && dimensions.every((dimension) => variantSpeaksOver(variant, dimension, given[dimension])),
   );
 }
 
@@ -203,7 +310,9 @@ export function drawVariant(eligible, blockId, poolKey, seed) {
  * @param {StateProseCorpus} corpus a desk leaf
  * @param {string} blockId e.g. 'DS-ECO-8'
  * @param {string} poolKey e.g. 'SUBSISTENCE' (or SOLE_POOL for an unlabelled block)
- * @param {{slots?: Record<string, unknown>, seed?: string, audience?: string}} [options]
+ * @param {{slots?: Record<string, unknown>, seed?: string, audience?: string,
+ *   dimensions?: Record<string, string>}} [options] `dimensions` answers every dimension
+ *   the pool partitions itself by (law 5); an unanswered one reads as `null`
  * @returns {{blockId: string, poolKey: string, angle: string, text: string}|null}
  */
 export function readStateProse(corpus, blockId, poolKey, options = {}) {
@@ -225,7 +334,8 @@ export function readStateProse(corpus, blockId, poolKey, options = {}) {
  * @param {StateProseCorpus} corpus
  * @param {string} blockId
  * @param {string} poolKey
- * @param {{slots?: Record<string, unknown>, seed?: string, audience?: string}} [options]
+ * @param {{slots?: Record<string, unknown>, seed?: string, audience?: string,
+ *   dimensions?: Record<string, string>}} [options]
  * @returns {string|null}
  */
 export function stateProseSentence(corpus, blockId, poolKey, options = {}) {

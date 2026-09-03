@@ -38,6 +38,10 @@ import { DOSSIER_STATE_PROSE_WAR_FAITH } from '../../src/data/dossierStateProse/
 import { DOSSIER_STATE_PROSE_STRESSORS } from '../../src/data/dossierStateProse/stressors.generated.js';
 import { DOSSIER_STATE_PROSE_GENERAL } from '../../src/data/dossierStateProse/general.generated.js';
 import { DOSSIER_CAUSAL_PROSE } from '../../src/data/dossierCausalProse.generated.js';
+import {
+  AUDIENCE_DM, AUDIENCE_PLAYER, STATE_MARK_DIMENSIONS,
+  eligibleVariants, poolDimensions, readStateProse,
+} from '../../src/domain/display/stateProse/stateProseKernel.js';
 
 const ROOT = resolve(import.meta.dirname, '../..');
 
@@ -505,5 +509,174 @@ describe('the slot SHAPE contract — a fill obeys the grammar its seam assumes'
     }
     expect(defects).toEqual([]);
     expect(renders).toBeGreaterThanOrEqual(35);
+  });
+});
+
+// ── THE DEMOTED STATE DIMENSION (kernel law 5) ───────────────────────────────
+// The annex keys DS-GEN-1 on THREE dimensions (`type` x max of `severity[]` x
+// `factions[].length`) and the projection's pool key carries ONE. The surplus two were
+// demoted into per-variant channels: faction count into `slots`, severity into `marks`.
+// `eligibleVariants` enforced the slots demotion via `variantIsAnchored` and IGNORED the
+// marks one, so a `minor` crime wave could draw the variant marked `catastrophic` and the
+// page would state something false about the town. DS-GEN-6 (`hasFoodDeficit`) and
+// DS-GEN-9 (`anchored`) carry the same shape.
+//
+// These four arms live HERE, beside the corpus, because the defect is a disagreement
+// between the corpus's key and the reader's key and neither half proves it alone. They
+// need no desk, no mount and no component, which is why they could have caught this on
+// the day the projection landed.
+
+/** Every slot any variant of a pool names, filled with a conformant, non-empty value. */
+function bagFor(pool) {
+  const slots = {};
+  for (const variant of pool) for (const slot of variant.slots) slots[slot] = 'X';
+  return slots;
+}
+
+/** The dimension words one variant carries, for one dimension. */
+function marksOf(variant, dimension) {
+  return (variant.marks || []).filter((m) => STATE_MARK_DIMENSIONS[dimension].includes(m));
+}
+
+/** Every (block, pool) the projection demoted a dimension into. Derived, never listed. */
+const DIMENSIONED_POOLS = allStateBlocks.flatMap(([id, block]) => Object.entries(block.pools)
+  .filter(([, pool]) => poolDimensions(pool).length > 0)
+  .map(([key, pool]) => ({ id, key, pool, dims: poolDimensions(pool) })));
+
+/** Every (pool x dimension value) state those pools partition themselves into. */
+const DIMENSION_STATES = DIMENSIONED_POOLS.flatMap(({ id, key, pool, dims }) => dims
+  .flatMap((dimension) => STATE_MARK_DIMENSIONS[dimension]
+    .map((value) => ({ id, key, pool, dimension, value }))));
+
+describe('the demoted state dimension — the channel the kernel enforces', () => {
+  it('closes the mark vocabulary and keeps the three semantics disjoint', () => {
+    // T1. `marks` is an untyped bag carrying THREE semantics — the audience mark, the
+    // state dimension, and the causal arm — and the kernel understands two of them. This
+    // arm is what stops the third from ever colliding with the second, and it reds the day
+    // an author invents a ninth state mark: that is the fail-open hole reopening, because
+    // an unclassified word is a dimension the kernel cannot see.
+    const stateMarks = new Set(allStateBlocks.flatMap(([, block]) => Object.values(block.pools)
+      .flat().flatMap((variant) => variant.marks || [])));
+    const causalMarks = new Set(Object.values(DOSSIER_CAUSAL_PROSE)
+      .flatMap((family) => Object.values(family.pools).flat())
+      .flatMap((variant) => variant.marks || []));
+    const vocabulary = Object.values(STATE_MARK_DIMENSIONS).flat();
+
+    const unclassified = [...stateMarks].filter((m) => m !== 'dm-only' && !vocabulary.includes(m));
+    const inTwoDimensions = vocabulary.filter((word, i) => vocabulary.indexOf(word) !== i);
+    // The causal register's arm names are family-local and OPEN (92 distinct today), so
+    // they cannot be a closed vocabulary and stay outside STATE_MARK_DIMENSIONS. What must
+    // hold is that they never collide with a dimension word — that collision is exactly
+    // what would make `poolDimensions` see a dimension in a causal pool and silence the
+    // causal reader, which is the one way this change could reach a shipped surface.
+    const collisions = [...causalMarks].filter((m) => vocabulary.includes(m));
+
+    expect({ unclassified, inTwoDimensions, collisions })
+      .toEqual({ unclassified: [], inTwoDimensions: [], collisions: [] });
+    // Non-vacuity, MEASURED at 2d5112851: 8 distinct state marks (dm-only + the 7
+    // dimension words the three blocks use) and 92 distinct causal arms. Floors, not pins.
+    expect(stateMarks.size).toBeGreaterThanOrEqual(8);
+    expect(causalMarks.size).toBeGreaterThanOrEqual(92);
+    expect(vocabulary.length).toBe(7);
+  });
+
+  it('reads NOTHING from a partitioned pool the caller did not answer', () => {
+    // ⭐ T2 — THE ARM THAT REDS ON THE LIVE DEFECT. Against the pre-cure kernel every one
+    // of these reads returns a SENTENCE, drawn from the whole pool with the severity, the
+    // deficit or the anchor ignored. Fail-closed means [] -> null -> silence: R-DST-K
+    // already means silence, and a contradiction has no safe reading.
+    const spoke = [];
+    const mute = [];
+    for (const { id, key, pool, dims } of DIMENSIONED_POOLS) {
+      const slots = bagFor(pool);
+      const blind = readStateProse({ [id]: { pools: { [key]: pool } } }, id, key,
+        { slots, seed: 's', audience: AUDIENCE_DM });
+      if (blind !== null) spoke.push(`${id} :: ${key} :: ${blind.text}`);
+      // THE TRANSITION, so the null above is the GATE and not an empty pool or a missing
+      // fill: answering the dimension must bring the sentence back at every legal value.
+      for (const dimension of dims) {
+        for (const value of STATE_MARK_DIMENSIONS[dimension]) {
+          const answered = readStateProse({ [id]: { pools: { [key]: pool } } }, id, key,
+            { slots, seed: 's', audience: AUDIENCE_DM, dimensions: { [dimension]: value } });
+          if (answered === null) mute.push(`${id} :: ${key} :: ${dimension}=${value}`);
+        }
+      }
+    }
+    expect({ spoke, mute }).toEqual({ spoke: [], mute: [] });
+
+    // The named case, spelled out because it is the one a reader can check by eye.
+    expect(readStateProse(DOSSIER_STATE_PROSE_GENERAL, 'DS-GEN-1', 'crime_wave',
+      { slots: { settlement: 'X' }, seed: 's' })).toBeNull();
+    expect(readStateProse(DOSSIER_STATE_PROSE_GENERAL, 'DS-GEN-1', 'crime_wave',
+      { slots: { settlement: 'X' }, seed: 's', dimensions: { severity: 'minor' } })?.text)
+      .toEqual(expect.any(String));
+
+    // Non-vacuity, MEASURED: 24 pools across DS-GEN-1, DS-GEN-6 and DS-GEN-9.
+    expect(DIMENSIONED_POOLS.length).toBeGreaterThanOrEqual(24);
+    expect([...new Set(DIMENSIONED_POOLS.map((p) => p.id))].sort())
+      .toEqual(['DS-GEN-1', 'DS-GEN-6', 'DS-GEN-9']);
+  });
+
+  it('never returns a variant that contradicts the state it was asked about', () => {
+    // T3 — THE CONTRADICTION SWEEP, over every (pool x dimension value) state in the
+    // corpus and both audiences. A returned variant either carries the asked value or
+    // carries no word of that dimension at all; anything else is the page stating
+    // something false about the town, which is worse than the page saying nothing.
+    const contradictions = [];
+    for (const audience of [AUDIENCE_DM, AUDIENCE_PLAYER]) {
+      for (const { id, key, pool, dimension, value } of DIMENSION_STATES) {
+        const slots = bagFor(pool);
+        for (const variant of eligibleVariants(pool, { slots, audience, dimensions: { [dimension]: value } })) {
+          const own = marksOf(variant, dimension);
+          if (own.length > 0 && !own.includes(value)) {
+            contradictions.push(`${audience} :: ${id} :: ${key} :: asked ${dimension}=${value} :: got [${own.join(', ')}]`);
+          }
+        }
+      }
+    }
+    expect(contradictions).toEqual([]);
+
+    // THE NAMED CASE, derived from the corpus rather than transcribed: the catastrophic
+    // crime-wave line must be unreachable at `minor`. Before the cure the seeded draw over
+    // the unfiltered pool could return exactly this sentence for a minor crime wave.
+    const crimeWave = DOSSIER_STATE_PROSE_GENERAL['DS-GEN-1'].pools.crime_wave;
+    const catastrophic = crimeWave.find((v) => (v.marks || []).includes('catastrophic'));
+    expect(catastrophic.angle).toBe('unfolding');
+    const minorReachable = new Set(eligibleVariants(crimeWave,
+      { slots: { settlement: 'X' }, audience: AUDIENCE_DM, dimensions: { severity: 'minor' } })
+      .map((v) => v.text));
+    expect(minorReachable.has(catastrophic.text)).toBe(false);
+    expect(minorReachable.size).toBeGreaterThanOrEqual(2);
+
+    // Non-vacuity, MEASURED: 58 states — DS-GEN-1 30, DS-GEN-6 12, DS-GEN-9 16.
+    expect(DIMENSION_STATES.length).toBeGreaterThanOrEqual(58);
+  });
+
+  it('names the authoring bill: the states a seed cannot vary', () => {
+    // T4 — THE THIN-STATE RATCHET, the sibling of `leaves no pool thin enough to be
+    // single-voiced` above and written to the same `declares every slot` idiom: recorded,
+    // not asserted-to-zero, and it only ratchets DOWN. Honouring the dimension costs
+    // variety in the states where the corpus authored only one line for a value, and every
+    // settlement in such a state prints the same sentence. That is a CORPUS bill, payable
+    // by authoring, and hiding it would be the fail-open reading in a different coat.
+    const thin = {};
+    for (const audience of [AUDIENCE_DM, AUDIENCE_PLAYER]) {
+      thin[audience] = DIMENSION_STATES.filter(({ pool, dimension, value }) => eligibleVariants(
+        pool, { slots: bagFor(pool), audience, dimensions: { [dimension]: value } },
+      ).length <= 1).length;
+    }
+    // MEASURED at 2d5112851, and the two audiences DIFFER BY ONE. The design volume
+    // recorded 13; that is the DM figure. On the player's page DS-GEN-1 :: infiltration_fear
+    // at `severity: major` also collapses to one line, because the second `major` variant
+    // there is the block's only `major + dm-only` line and the player cannot hear it. The
+    // reader-facing number is 14. Both are pinned so neither audience can drift unseen.
+    expect(thin[AUDIENCE_DM]).toBeLessThanOrEqual(13);
+    expect(thin[AUDIENCE_PLAYER]).toBeLessThanOrEqual(14);
+    // No state may go SILENT: a value with zero eligible variants is a dead branch of the
+    // corpus dressed as a town with nothing to say, and the ratchet above would not see it.
+    const silent = DIMENSION_STATES.filter(({ pool, dimension, value }) => eligibleVariants(
+      pool, { slots: bagFor(pool), audience: AUDIENCE_DM, dimensions: { [dimension]: value } },
+    ).length === 0);
+    expect(silent).toEqual([]);
   });
 });

@@ -1,5 +1,5 @@
 /**
- * stateProseKernel.test.js — LANE P-2: the reader's four laws, proven.
+ * stateProseKernel.test.js — LANE P-2: the reader's five laws, proven.
  *
  * The kernel is small and everything it does is load-bearing, so each law gets a pin
  * that FAILS when the law is removed rather than a pin that merely exercises the happy
@@ -13,6 +13,12 @@
  *   3. THE AVALANCHE DRAW — measured against the degenerate seed family that killed
  *      half a pool before the finalizer existed.
  *   4. SEEDLESS IS CANONICAL-AT-ZERO — plus same-seed determinism (THE PROMISE).
+ *   5. THE DEMOTED STATE DIMENSION, FAIL-CLOSED — pinned here as DARKNESS (the reader is
+ *      byte-identical on the 762 pools that demote nothing) because the law itself is
+ *      pinned against the CORPUS, in tests/data/dossierStateProseProjection.contract.test.js,
+ *      where the corpus and the reader can be read against each other. Splitting it that
+ *      way is deliberate: the defect was a disagreement between the annex's STATE-KEY and
+ *      the projection's pool key, and neither file alone can see both halves.
  *
  * The corpus is read live from the projected desk leaves, not from a fixture: a pin
  * over an invented pool would prove the kernel works on prose that does not ship.
@@ -25,12 +31,19 @@ import {
   eligibleVariants,
   fillSlots,
   hasStateProsePool,
+  poolDimensions,
   readStateProse,
   stateProseSentence,
   variantIsAnchored,
   variantIsAudible,
+  STATE_MARK_DIMENSIONS,
 } from '../../src/domain/display/stateProse/stateProseKernel.js';
 import { DOSSIER_STATE_PROSE_ECONOMY } from '../../src/data/dossierStateProse/economy.generated.js';
+import { DOSSIER_STATE_PROSE_POWER } from '../../src/data/dossierStateProse/power.generated.js';
+import { DOSSIER_STATE_PROSE_DEFENSE } from '../../src/data/dossierStateProse/defense.generated.js';
+import { DOSSIER_STATE_PROSE_WAR_FAITH } from '../../src/data/dossierStateProse/warFaith.generated.js';
+import { DOSSIER_STATE_PROSE_STRESSORS } from '../../src/data/dossierStateProse/stressors.generated.js';
+import { DOSSIER_STATE_PROSE_GENERAL } from '../../src/data/dossierStateProse/general.generated.js';
 import { DOSSIER_CAUSAL_PROSE } from '../../src/data/dossierCausalProse.generated.js';
 import { PROSPERITY_TIERS } from '../../src/data/constants.js';
 import { deriveProsperityLabel } from '../../src/generators/economy/prosperity.js';
@@ -353,4 +366,88 @@ describe('the state-prose reader — THE PROMISE', () => {
       expect(seedless?.text).toBe(pool[0].text.replace('{settlement}', 'Thornwall'));
     });
   }
+});
+
+describe('the state-prose reader — law 5, and the darkness of it', () => {
+  /**
+   * THE WHOLE SHIPPED CORPUS, all seven leaves. The law-5 gate reads `marks`, which every
+   * pool in the estate carries, so a proof over one desk would be a proof over 105 of 786
+   * pools. Discovered by import rather than by filesystem walk because these are the seven
+   * the projection actually emits and the contract test already holds that roster.
+   */
+  const ALL_POOLS = [
+    ['economy', DOSSIER_STATE_PROSE_ECONOMY], ['power', DOSSIER_STATE_PROSE_POWER],
+    ['defense', DOSSIER_STATE_PROSE_DEFENSE], ['warFaith', DOSSIER_STATE_PROSE_WAR_FAITH],
+    ['stressors', DOSSIER_STATE_PROSE_STRESSORS], ['general', DOSSIER_STATE_PROSE_GENERAL],
+    ['causal', DOSSIER_CAUSAL_PROSE],
+  ].flatMap(([desk, corpus]) => Object.entries(corpus)
+    .flatMap(([blockId, block]) => Object.entries(block.pools)
+      .map(([poolKey, pool]) => ({ desk, blockId, poolKey, pool }))));
+
+  /** Every slot the pool names, filled, so eligibility turns on the LAW and not on a gap. */
+  function bagFor(pool) {
+    const slots = {};
+    for (const variant of pool) for (const slot of variant.slots || []) slots[slot] = 'Thornwall';
+    return slots;
+  }
+
+  const SWEEP_SEEDS = ['', 'a', 'b', 'world-7', 'Thornwall::1', 'wizard_news.4.applied.evt4', 'zz', '19'];
+
+  it('is BYTE-IDENTICAL to the pre-cure reader on every pool with no demoted dimension', () => {
+    // T6 — WHAT LETS THIS LAND DARK AND SAY SO. The reference is the pre-cure eligibility
+    // rule spelled out from the two predicates this file already exports, so the comparison
+    // is against the reader as it behaved at 2d5112851 rather than against a memory of it.
+    // 684 of 708 state pools and ALL 78 causal pools demote no dimension, and on every one
+    // of them the gate must be invisible: same eligible set, same draw, same sentence.
+    //
+    // The loop collects instead of asserting inside — a bare `expect(` under a seed loop
+    // reports a floor, never a count (tests/lint/seedLoopTotality.walker.test.js).
+    const drift = [];
+    let poolsChecked = 0;
+    let draws = 0;
+    for (const { desk, blockId, poolKey, pool } of ALL_POOLS) {
+      if (poolDimensions(pool).length > 0) continue;
+      poolsChecked += 1;
+      const slots = bagFor(pool);
+      for (const audience of [AUDIENCE_DM, AUDIENCE_PLAYER]) {
+        const reference = pool.filter(
+          (variant) => variantIsAudible(variant, audience) && variantIsAnchored(variant, slots),
+        );
+        const cured = eligibleVariants(pool, { slots, audience });
+        if (cured.length !== reference.length || cured.some((v, i) => v !== reference[i])) {
+          drift.push(`ELIGIBILITY :: ${desk} :: ${blockId} :: ${poolKey} :: ${audience}`);
+        }
+        for (const seed of SWEEP_SEEDS) {
+          draws += 1;
+          const was = drawVariant(reference, blockId, poolKey, seed);
+          const wasText = was ? fillSlots(was.text, slots) : null;
+          const nowText = readStateProse({ [blockId]: { pools: { [poolKey]: pool } } },
+            blockId, poolKey, { slots, seed, audience })?.text ?? null;
+          if (wasText !== nowText) {
+            drift.push(`DRAW :: ${desk} :: ${blockId} :: ${poolKey} :: ${audience} :: seed "${seed}"`);
+          }
+        }
+      }
+    }
+    expect(drift).toEqual([]);
+    // Non-vacuity, MEASURED at 2d5112851: 786 pools ship, 24 of them demote a dimension,
+    // so 762 are swept here. A sweep that stopped finding pools would satisfy the list above
+    // by being empty, which is the failure mode this pair of floors exists to refuse.
+    expect(poolsChecked).toBeGreaterThanOrEqual(762);
+    expect(draws).toBeGreaterThanOrEqual(762 * 2 * SWEEP_SEEDS.length);
+  });
+
+  it('leaves the causal register untouched — no arm name is a dimension word', () => {
+    // The one way this change could reach a SHIPPED surface. causalDossierProse.js hand-rolls
+    // its own `marks` filter over 92 open, family-local arm names and then calls
+    // eligibleVariants; if any arm name were also a dimension word, poolDimensions would see
+    // a dimension in a causal pool and the causal reader would go silent. It cannot today,
+    // and this is the arm that keeps it so.
+    const causal = ALL_POOLS.filter((p) => p.desk === 'causal');
+    const dimensioned = causal.filter((p) => poolDimensions(p.pool).length > 0);
+    expect(dimensioned).toEqual([]);
+    expect(causal.length).toBeGreaterThanOrEqual(78);
+    const vocabulary = Object.values(STATE_MARK_DIMENSIONS).flat();
+    expect(vocabulary).toEqual(['minor', 'major', 'catastrophic', 'deficit', 'no deficit', 'anchored', 'not anchored']);
+  });
 });
