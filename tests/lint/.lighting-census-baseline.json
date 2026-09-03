@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "37e285498924655df568ff4204a24ceb1c4ad48a",
-  "measuredBy": "Opus 5 — chair, §885 register 1/2",
-  "date": "2026-09-02",
-  "note": "the composed consist (capsule + fill-layer + the strict cure) adds 11 test titles and 2 suite titles to EXISTING test files; zero new test files, so files/parked/credited are unmoved and the closure identity holds",
-  "files": 2503,
+  "measuredAtSha": "e2f4993cf98272d9773cfd8c4d1faf61a7223540",
+  "measuredBy": "Opus 5 — chair, §886 register 1/2",
+  "date": "2026-09-03",
+  "note": "TRAIN 2 adds one tests/lint walker (newsSubjectVocabulary) and modifies five existing test files; files +1, nothing parks",
+  "files": 2504,
   "parked": 370,
-  "credited": 2133,
-  "titles": 22676,
-  "suiteTitles": 6101
+  "credited": 2134,
+  "titles": 22696,
+  "suiteTitles": 6110
 }
