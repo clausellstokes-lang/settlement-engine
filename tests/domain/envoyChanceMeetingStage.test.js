@@ -330,3 +330,129 @@ describe('⭐ THE FLAG-ON LIT WALKTHROUGH — chanceEncountersEnabled: true, end
     expect(JSON.stringify(out.worldState.envoyErrands)).toBe(before);
   });
 });
+
+describe('⛔ THE GRIEVANCE ARM — proven live, and pinned at last', () => {
+  // ⛔⛔ THIS ARM WAS REPORTED AS DEAD AND IS NOT. The observed-shape ratchet convicted the
+  // stage of reading `grievance.fromSid` / `.toSid` / `.incidentType` — "a key no writer
+  // produces … the arm behind it is dead on every generated world" — and the prescribed
+  // cures were to read a key the producer writes, or delete the arm. Neither applied: the
+  // leaf writes those EXACT three names (`envoyChanceMeeting.js:955`), and the arm fires.
+  // MEASURED before anything was changed: 360 lit runs (3 postures × 120 seeds) produced 5
+  // `exposed` outcomes, each carrying the full grievance.
+  //
+  // ⭐ THE INSTRUMENT WAS TRUE ABOUT ITS CORPUS AND FALSE ABOUT THE CODE. Its corpus never
+  // executes this leaf, and it predates the `band` cure — before that no meeting could occur
+  // at all, so it had recorded a world in which the arm really WAS unreachable. A blocker is
+  // a claim, and that one had decayed. Deleting proven product to satisfy a stale corpus
+  // would have been the worst outcome available; the row is admitted through the door's
+  // fourth gate instead (schema 16), and this suite is why that admission is honest.
+  //
+  // ⚠ AND THE REASON IT WENT UNPINNED SO LONG IS THE SAME REASON THE STAGE SHIPPED DEAD: an
+  // arm with proven behaviour and no test is exactly the condition that let two dead arms
+  // live in this file. This is the pin.
+  const HOME = 'ashford';
+  const HOST = 'irontown';
+  const EXPOSED_SEED = 'g85';   // verified: reproduces `exposed` on this fixture
+  const QUIET_SEED = 'g1';      // verified: reproduces `nothing` on the SAME fixture
+  const EDGE_KEY = 'rel.ashford.irontown';
+
+  const soul = (id, name, role) => ({
+    id, name, role, importance: 'pillar', dots: 3, structuralRank: 'dominant',
+    personality: { dominant: 'shrewd', flaw: 'proud', modifier: 'bold' },
+  });
+  const court = (id, name, npcs) => ({
+    id, name, settlement: { id, name, seed: `seed_${id}`, tier: 'city', population: 9000, npcs },
+  });
+
+  /** The lit world, seeded so the exposure roll is deterministic. */
+  function grievanceWorld(rngSeed) {
+    const base = spineWorld({ spine: true });
+    base.simulationRules = {
+      ...base.simulationRules,
+      chanceEncountersEnabled: true,
+      memoryWeaveEnabled: true,
+      npcLadderEnabled: true,
+      corruptionWebEnabled: true,
+    };
+    base.rngSeed = rngSeed;
+    return /** @type {Record<string, unknown>} */ (mintOne(base).worldState);
+  }
+
+  function runSeeded(rngSeed) {
+    const world = grievanceWorld(rngSeed);
+    const settlements = [
+      court(HOME, 'Ashford', [soul('npc.envoy.1', 'A Named Legate', 'Legate')]),
+      court(HOST, 'Irontown', [soul('npc.host.1', 'Host Notable', 'Steward')]),
+    ];
+    const out = advanceChanceMeetings({
+      worldState: world,
+      snapshot: { settlements, byId: new Map(settlements.map((s) => [s.id, s])) },
+      regionalGraph: { edges: [{ from: HOME, to: HOST, relationshipType: 'neutral' }] },
+      startErrands: world.envoyErrands,
+      errands: world.envoyErrands,
+      tick: 12,
+    });
+    return { before: JSON.stringify(world.relationshipStates || {}), out };
+  }
+
+  it('⭐ AN EXPOSED APPROACH FILES A GRIEVANCE carrying both courts and the incident word', () => {
+    const { out } = runSeeded(EXPOSED_SEED);
+    // anchored first: the run really produced a receipt, so the grievance below is a fact
+    // about the OUTCOME rather than about an empty receipt list.
+    expect(out.receipts.length).toBeGreaterThan(0);
+    const receipt = /** @type {Record<string, unknown>} */ (out.receipts[0]);
+    expect(receipt.outcome).toBe('exposed');
+    // THE THREE KEYS THE STAGE READS, produced by the leaf. Asserted as an exact object so a
+    // renamed or dropped field cannot pass by still being truthy.
+    //
+    // ⚠ THE DIRECTION IS MEASURED, NOT REASONED, AND I GOT IT WRONG FIRST. The leaf writes
+    // `fromSid: lead.target.homeSid` and `toSid: lead.approacher.homeSid`, from which I
+    // predicted HOST→HOME and the run returned HOME→HOST. Which party the lead makes the
+    // approacher on this fixture is therefore NOT what I assumed, and this pin deliberately
+    // does not claim it: it fixes the observed pair so a change of direction REDS and gets
+    // read by someone, rather than asserting a role mapping I have not verified.
+    expect(receipt.grievance).toEqual({
+      fromSid: HOME, toSid: HOST, incidentType: 'approach_exposed',
+    });
+  });
+
+  it('⭐ AND IT REACHES THE RELATIONSHIP PLANE — the arm writes, it does not merely receipt', () => {
+    // The half that makes this a live arm rather than a live RECEIPT. `fileGrievances` reads
+    // the three keys, resolves the courts' edge and patches the plane through its ONE writer.
+    const { before, out } = runSeeded(EXPOSED_SEED);
+    const after = /** @type {Record<string, unknown>} */ (out.worldState.relationshipStates || {});
+    expect(JSON.stringify(after) === before).toBe(false);
+    const edge = /** @type {Record<string, unknown>} */ (after[EDGE_KEY]);
+    expect(typeof edge).toBe('object');
+    expect(Array.isArray(edge.recentIncidents)).toBe(true);
+    expect(/** @type {unknown[]} */ (edge.recentIncidents).length).toBeGreaterThan(0);
+  });
+
+  it('⭐ THE DIFFERENTIAL: no exposure ⇒ no grievance ⇒ the plane is untouched', () => {
+    // ONE fixture, TWO seeds, opposite outcomes. Without this the pin above would pass just
+    // as happily if the stage patched the plane on EVERY meeting — which is the shape of a
+    // guard nobody has watched refuse.
+    const { before, out } = runSeeded(QUIET_SEED);
+    expect(out.receipts.length).toBeGreaterThan(0);       // anchored: a meeting DID happen
+    const receipt = /** @type {Record<string, unknown>} */ (out.receipts[0]);
+    expect(receipt.outcome).toBe('nothing');
+    expect(receipt.grievance ?? null).toBe(null);
+    expect(JSON.stringify(out.worldState.relationshipStates || {})).toBe(before);
+  });
+
+  it('⭐ THE TUNING IS LIVE, NOT DECORATIVE — exposureGrievance lands VERBATIM', () => {
+    // ⚠ THIS PIN EXISTS SO NOBODY SIGNS A VALUE THAT DOES NOTHING. `CHANCE_MEETING_STAGE_TUNING`
+    // is registered as a DRAFT row, and two of its three values exist only to drive this arm.
+    // Registering is not signing — but a value whose only consumer was a dead arm would be a
+    // dial connected to nothing, and this asserts the opposite by measuring what LANDS.
+    const { out } = runSeeded(EXPOSED_SEED);
+    const after = /** @type {Record<string, unknown>} */ (out.worldState.relationshipStates || {});
+    const edge = /** @type {Record<string, unknown>} */ (after[EDGE_KEY]);
+    // The approacher is NOT covert on this fixture, so the multiplier is 1 and the tuned
+    // value lands unmodified. The covert arm doubles it at the same site; it is reachable
+    // and is deliberately NOT pinned here, because that needs a covert errand fixture.
+    expect(CHANCE_MEETING_STAGE_TUNING.exposureGrievance).toBe(0.25);
+    expect(CHANCE_MEETING_STAGE_TUNING.exposureCovertMultiplier).toBe(2);
+    expect(edge.resentment).toBe(CHANCE_MEETING_STAGE_TUNING.exposureGrievance);
+  });
+});
