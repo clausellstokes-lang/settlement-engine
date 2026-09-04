@@ -187,16 +187,30 @@ describe('the covering array and its constraint manifest', () => {
     // have closed — so the lockstep, not the sum, is the assertion doing the work.
     // ⭐ AND 28 → 29 AT THE WAR LANDING (§876): the coupled union carries T12's
     // `warMemoryEnabled` beside SEAT-2b's mint — re-measured, never re-applied.
-    expect(census.virtual.length).toBe(29);
+    // ⭐ AND 29 → 30 AT ENC-3 (§893), which mints `chanceEncountersEnabled` with its
+    // certification row in one commit. THE CLOSURE IS THE PROOF, exactly as at EP-1, WF-1a,
+    // W-COIN-1a, SEAT-1 and SEAT-2b, and it was MEASURED BEFORE THE LITERALS WERE MOVED
+    // rather than after: `union` moves 86 → 87 in lockstep while `governed` (25) and
+    // `ungoverned` (32) do NOT move at all — affirmative evidence the key is genuinely
+    // VIRTUAL, absent from DEFAULT_SIMULATION_RULES and from all seven preset spreads
+    // (both checked directly, not inferred from the arithmetic). `union − governed` rises
+    // with it by construction (61 → 62): a virtual key is never normalizer-governed.
+    // ⚠ AND THE MEASUREMENT HAD TO BE TAKEN OUT OF BAND, because the virtual assertion is
+    // the FIRST one here and a red at an early assertion blinds every later one in the same
+    // test — so "governed and ungoverned did not move" could not have been read off this
+    // suite's own failure. It was measured by calling `flagDomainCensus` directly.
+    expect(census.virtual.length).toBe(30);
     expect(census.overlap).toEqual([]);
     // 85 -> 86 at the WAR landing (§876): the same coupled-union key, same re-measure.
-    expect(census.union.length).toBe(86);
+    // 86 -> 87 at ENC-3 (§893): the virtual mint above, moving in lockstep.
+    expect(census.union.length).toBe(87);
     expect(census.governed.length + census.ungoverned.length + census.virtual.length).toBe(census.union.length);
     // 57 of 82 sit outside the normalizer's fail-closed coercion — the measured content of
     // "the normalizer is NOT the oracle", and the reason the manifest had to be minted. It
     // rises with the virtual arm by construction: a virtual key is never governed.
     // 60 -> 61 at the WAR landing (§876): the coupled key is virtual, not governed.
-    expect(census.union.length - census.governed.length).toBe(61);
+    // 61 -> 62 at ENC-3 (§893): likewise virtual, so it lands outside the normalizer.
+    expect(census.union.length - census.governed.length).toBe(62);
     expect(census.nonBoolean.length).toBe(13);
   });
 

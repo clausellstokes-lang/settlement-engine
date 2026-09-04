@@ -317,6 +317,20 @@ function projectTravellers({ startErrands, snapshot, worldState, tick }) {
       homeSid,
       nodeId,
       journey,
+      // ⛔⛔ `band` IS A REQUIRED FIELD OF THE TRAVELLER CONTRACT, AND OMITTING IT MADE THE
+      // WHOLE MECHANISM DEAD WHEN LIT. `normalizeTraveller` in the leaf refuses any row whose
+      // `band` is not exactly 'arrived' (envoyChanceMeeting.js:530), and the leaf's own suite
+      // pins that refusal with a `band: 'underway'` case. This projection filtered on
+      // `progressBand === 'arrived'` above and then DID NOT CARRY THE WORD FORWARD, so every
+      // traveller it produced was rejected by the census and `censusChanceMeetingCandidates`
+      // returned zero for every world. Not one chance meeting could ever occur.
+      //
+      // ⭐ NO TEST SAW IT because there was no flag-ON lit test at all — the gap the
+      // `mechanismLitCoverage` ratchet convicted. Measured both directions before this line
+      // was written: the same fixture yields 0 candidates without `band` and 1 with it.
+      // The real word is passed rather than the literal 'arrived', so a future widening of
+      // the accepted bands cannot silently re-diverge the filter from the payload.
+      band: text(positionRef.progressBand),
       arrivalTick: num(leg.arrivalTick),
       nodeKind: placeOf(snapshot, nodeId) ? 'settlement' : 'route_node',
       covert: Object.keys(asObject(errand.covert)).length > 0 || errand.covert === true,

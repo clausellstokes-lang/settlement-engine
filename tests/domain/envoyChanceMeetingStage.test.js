@@ -20,6 +20,9 @@
  * The §7.4 measured meeting and mark RATES asserted in the certification row are NOT pinned
  * anywhere yet, and that debt is recorded rather than papered over.
  */
+import { readFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 
 import {
@@ -33,7 +36,10 @@ import {
 import { MEETING_MARK_GRAINS, meetingMarkKey } from '../../src/domain/worldPulse/envoyChanceMeetingLedger.js';
 import { BOND_KINDS, GRUDGE_KINDS, mintBond } from '../../src/domain/worldPulse/npcLadderState.js';
 import { ADAPTER_HOMED_ELSEWHERE } from '../../src/domain/npc/livedExperienceSources.js';
+import { resolveChanceMeeting } from '../../src/domain/worldPulse/envoyChanceMeeting.js';
 import { mintOne, spineWorld } from '../helpers/errandSpineFixture.js';
+
+const REPO_ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 
 /** A world carrying real errands, with the chance-encounters key in whatever state. */
 function stageWorld(flag) {
@@ -200,5 +206,127 @@ describe('ENC-3 stage — THE MARK GRAIN IS CHOSEN BY THE KIND', () => {
     expect(typeof CHANCE_MEETING_STAGE_TUNING).toBe('object');
     expect(Object.isFrozen(CHANCE_MEETING_STAGE_TUNING)).toBe(true);
     expect(Object.keys(CHANCE_MEETING_STAGE_TUNING).length).toBeGreaterThan(0);
+  });
+});
+
+describe('⭐ THE FLAG-ON LIT WALKTHROUGH — chanceEncountersEnabled: true, end to end', () => {
+  // ⛔⛔ THIS SUITE EXISTS BECAUSE THE MECHANISM HAD NEVER ONCE BEEN RUN LIT, AND WHEN IT
+  // FINALLY WAS, IT DID NOT WORK. `mechanismLitCoverage`'s flag ratchet convicted
+  // `chanceEncountersEnabled` as shipping with no lit walkthrough. Writing the walkthrough
+  // immediately found the reason the gap mattered: the stage's traveller projection omitted
+  // the `band` field, the leaf's `normalizeTraveller` refuses any row whose band is not
+  // 'arrived', and so `censusChanceMeetingCandidates` returned ZERO for every possible
+  // world. The feature was dead on arrival in the strongest sense — not mis-tuned, not rare,
+  // but structurally incapable of producing a single meeting. A dormancy fence cannot see
+  // that: a mechanism that does nothing when lit is byte-identical to one that is dark.
+  //
+  // ⭐ SO THE ONE ASSERTION THIS FILE MOST NEEDED WAS THE CHEAPEST ONE: light the flag and
+  // check that something happens.
+  const HOME = 'ashford';
+  const HOST = 'irontown';
+  const ARRIVAL_TICK = 12;
+
+  const person = (id, name, role) => ({
+    id, name, role, importance: 'pillar', dots: 3, structuralRank: 'dominant',
+    personality: { dominant: 'shrewd', flaw: 'proud', modifier: 'bold' },
+  });
+  const town = (id, name, npcs) => ({
+    id, name, settlement: { id, name, seed: `seed_${id}`, tier: 'city', population: 9000, npcs },
+  });
+
+  /** A world with the errand spine lit AND the chance-encounters flag lit. */
+  function litWorld() {
+    const base = spineWorld({ spine: true });
+    // ⭐ THE LITERAL SPELLING IS DELIBERATE. `mechanismLitCoverage` credits a flag as
+    // lit-covered by scanning the test corpus for `<flag>: true`, so a computed key
+    // (`[FLAG]: true`) earns no credit — which is exactly how this mechanism slipped
+    // through while a dormancy fence that DID drive the flag sat right beside it.
+    base.simulationRules = { ...base.simulationRules, chanceEncountersEnabled: true };
+    return /** @type {Record<string, unknown>} */ (mintOne(base).worldState);
+  }
+
+  function litSnapshot() {
+    const settlements = [
+      town(HOME, 'Ashford', [person('npc.envoy.1', 'A Named Legate', 'Legate')]),
+      town(HOST, 'Irontown', [person('npc.host.1', 'Host Notable', 'Steward')]),
+    ];
+    return { settlements, byId: new Map(settlements.map((s) => [s.id, s])) };
+  }
+
+  const runLit = (tick = ARRIVAL_TICK) => {
+    const world = litWorld();
+    return advanceChanceMeetings({
+      worldState: world,
+      snapshot: litSnapshot(),
+      regionalGraph: { edges: [{ from: HOME, to: HOST, relationshipType: 'neutral' }] },
+      startErrands: world.envoyErrands,
+      errands: world.envoyErrands,
+      tick,
+    });
+  };
+
+  it('⭐ A MEETING ACTUALLY HAPPENS: the lit stage produces a receipt on the arrival tick', () => {
+    const world = litWorld();
+    // anchored first, so a receipt count is a fact about the STAGE and not about a world
+    // that was dark, or an errand list that was empty, or a traveller who never arrived.
+    expect(chanceEncountersActive(world)).toBe(true);
+    expect(/** @type {unknown[]} */ (world.envoyErrands).length).toBeGreaterThan(0);
+
+    const out = runLit();
+    expect(out.receipts.length).toBeGreaterThan(0);
+    const receipt = /** @type {Record<string, unknown>} */ (out.receipts[0]);
+    expect(receipt.kind).toBe('traveller_resident');
+    expect(receipt.venue).toBe('host_settlement');
+    expect(receipt.nodeId).toBe(HOST);
+    expect(receipt.tick).toBe(ARRIVAL_TICK);
+  });
+
+  it('⛔ THE REGRESSION PIN: the traveller carries its `band`, or no meeting can EVER occur', () => {
+    // The defect this suite found, pinned at the seam that caused it. `normalizeTraveller`
+    // refuses a row whose band is not 'arrived'; the projection filters on exactly that
+    // word, so the word must travel with the row. Drop it and the census silently returns
+    // zero for every world — no error, no refusal receipt, just a feature that never fires.
+    const source = readFileSync(
+      join(REPO_ROOT, 'src/domain/worldPulse/envoyChanceMeetingStage.js'), 'utf8',
+    );
+    expect(source.length).toBeGreaterThan(5000);           // anchored: the real file
+    expect(source).toContain('band: text(positionRef.progressBand)');
+  });
+
+  it('the meeting fires on the ARRIVAL tick only, which is what makes it a chance and not a stay', () => {
+    // A traveller who is still standing in the host court on the next tick does not meet
+    // the same notable again: the census keys on the arrival tick exactly.
+    expect(runLit(ARRIVAL_TICK).receipts.length).toBeGreaterThan(0);
+    expect(runLit(ARRIVAL_TICK + 1).receipts).toHaveLength(0);
+    expect(runLit(ARRIVAL_TICK - 1).receipts).toHaveLength(0);
+  });
+
+  it('⭐ THE CALL-PATH, LIT: the resolver really executes (FENCE 3\'s other half)', () => {
+    // The dormancy fence pins ZERO resolver calls dark. That half is only worth something
+    // beside this one: a spy that counts zero in both states measures nothing at all.
+    // Asserted here through the resolver's own output rather than a mock, because the
+    // receipt shape below is only producible BY `resolveChanceMeeting`.
+    expect(typeof resolveChanceMeeting).toBe('function');
+    const out = runLit();
+    const receipt = /** @type {Record<string, unknown>} */ (out.receipts[0]);
+    expect(typeof receipt.id).toBe('string');
+    expect(String(receipt.id).startsWith('chance_meeting:')).toBe(true);
+    expect(Array.isArray(receipt.refusals)).toBe(true);
+    expect(typeof receipt.outcome).toBe('string');
+  });
+
+  it('and the LIT run still spends no errand transition — neutrality is not a dark-only claim', () => {
+    const world = litWorld();
+    const before = JSON.stringify(world.envoyErrands);
+    const out = advanceChanceMeetings({
+      worldState: world,
+      snapshot: litSnapshot(),
+      regionalGraph: { edges: [{ from: HOME, to: HOST, relationshipType: 'neutral' }] },
+      startErrands: world.envoyErrands,
+      errands: world.envoyErrands,
+      tick: ARRIVAL_TICK,
+    });
+    expect(out.receipts.length).toBeGreaterThan(0);        // anchored: the lit path really ran
+    expect(JSON.stringify(out.worldState.envoyErrands)).toBe(before);
   });
 });
