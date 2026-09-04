@@ -2,9 +2,11 @@
  * domain/display/stateProse/powerStateProse.js — DESK CAR 2: THE POWER DESK.
  *
  * The second desk, and the first one written against a leaf that inherits none of the
- * three shape residues §0c-4 records. One corpus block, one rendered surface:
+ * three shape residues §0c-4 records. Two corpus blocks, two rendered surfaces:
  *
  *   DS-POW-1  Power › Public legitimacy banner — `powerStructure.publicLegitimacy`
+ *   DS-POW-2  Power › Stability + governing authority header —
+ *             `powerStructure.{stability, governingName, factions[], recentConflict}`
  *
  * ── WHY THIS LEAF, AND WHY THIS BLOCK FIRST ──────────────────────────────────────────
  *
@@ -101,9 +103,18 @@ const CORPUS = /** @type {import('./stateProseKernel.js').StateProseCorpus} */ (
  * @property {unknown} [governanceFractured]
  */
 /**
+ * @typedef {object} RulingFactionView
+ * @property {unknown} [faction]
+ * @property {unknown} [isGoverning]
+ * @property {unknown} [power]
+ */
+/**
  * @typedef {object} PowerStructureView
  * @property {PublicLegitimacyView|number|null} [publicLegitimacy]
  * @property {unknown} [governingName]
+ * @property {unknown} [stability]
+ * @property {unknown} [recentConflict]
+ * @property {ReadonlyArray<RulingFactionView>|null} [factions]
  */
 /**
  * @typedef {object} PowerDeskSettlement
@@ -242,6 +253,118 @@ export function legitimacyLensPoolKey(legitimacy) {
 }
 
 /**
+ * ── DS-POW-2, THE STABILITY LADDER ───────────────────────────────────────────────────
+ *
+ * ⚠ THE CANONICAL READER IS TOO COARSE FOR THIS CORPUS, AND SAYING SO IS THE POINT.
+ * `simulationSpine.js`'s STABILITY_ARC collapses the label into THREE arcs — crisis, test,
+ * continuity — and `crisis` conflates `critical`, `siege` and `desperate`, which DS-POW-2
+ * writes as THREE SEPARATE POOLS. Reading the pool key off `likelyFutureFacts` would
+ * therefore leave two of them unreachable in every world, which is the lit-but-incapable
+ * failure. So this ladder REFINES the canonical one rather than forking it, and the desk
+ * test pins every token to the canonical arc that contains it — a drift between the two
+ * reds instead of quietly disagreeing about a settlement.
+ *
+ * ⛔ MATCHED ON THE LABEL'S FIRST WORD, NEVER ON A SUBSTRING, AND THIS IS A BUG FIX RATHER
+ * THAN A STYLE CHOICE. The producer emits `Fractured — no stable governing authority`.
+ * A substring test for `stable` MATCHES IT, and would print "The hall is settled" about a
+ * settlement that has no governing authority at all — a false statement about the world,
+ * which is the one outcome this subsystem exists to refuse. Every label the producer can
+ * emit leads with its classifier word (`governanceNarrative.js`: Stable · Unstable ·
+ * Volatile · Critical · Desperate · Fractured · Shaken · Tense · Anxious · Suppressed ·
+ * Ordered · Rigid · Fragile · Strained · Vulnerable), so the first word IS the classifier
+ * and reading it is both correct and cheaper.
+ * ⚠ THE SAME SUBSTRING DEFECT IS LIVE IN `likelyFutureFacts` ITSELF, which reports
+ * `continuity` for that Fractured label. That is a defect in a shipped canonical reader,
+ * it is NOT this desk's to fix (the cure changes narrative output on lit surfaces for
+ * existing worlds), and it is raised for the chair rather than patched here.
+ *
+ * ⚠ `siege matched` IS CHECKED BEFORE THE FIRST WORD, and it costs a pool. The only label
+ * carrying either token is `Critical (active siege — survival priority)`, so exactly one of
+ * `siege matched` / `critical matched` can ever fire. The siege prose ("the walls have
+ * settled it") is written for precisely that state and the critical prose is the general
+ * case, so most-specific-wins takes siege — the same rule DS-POW-1's lens uses.
+ * ⇒ `critical matched` HAS NO PRODUCER TODAY. It is mounted and unreachable, declared here
+ * rather than left to be re-found, and PINNED by the desk test so that a producer which
+ * later emits a critical-without-siege stability REDS and someone lights the pool.
+ * @type {ReadonlyArray<[string, string]>}
+ */
+const STABILITY_LADDER = Object.freeze([
+  ['stable', 'stable matched'],
+  ['unstable', 'unstable matched'],
+  ['volatile', 'unstable matched'],
+  ['critical', 'critical matched'],
+  ['desperate', 'Desperate matched'],
+]);
+
+/** The floor: a label the corpus wrote no token for still gets a plain description. */
+const STABILITY_FLOOR = 'no token matched: unclassified (the plain-description floor)';
+
+/**
+ * DS-POW-2's headline pool key. Never null: every label lands somewhere, and an absent
+ * label is the only silence.
+ * @param {unknown} stability
+ * @returns {string|null}
+ */
+export function stabilityPoolKey(stability) {
+  const label = text(stability);
+  if (!label) return null;
+  const lower = label.toLowerCase();
+  if (/\bsiege\b/.test(lower)) return 'siege matched';
+  const first = lower.split(/[^a-z]+/).filter(Boolean)[0] || '';
+  const hit = STABILITY_LADDER.find(([token]) => token === first);
+  return hit ? hit[1] : STABILITY_FLOOR;
+}
+
+/**
+ * DS-POW-2's share lens. DOMINANT is the corpus's own phrasing made arithmetic — "it
+ * outweighs everything else in the town put together" is literally `governing > rest`.
+ *
+ * JUDGMENT (vetoable): NARROW is a runner-up within 15% of the governing faction's power.
+ * The annex says "by the smallest margin the town has" and "first and not because it is
+ * large" and leaves the cut to the implementer. A share between the two bands renders
+ * NOTHING rather than being rounded into one, because the middle is the ordinary case and
+ * the corpus wrote no sentence for it. Say "veto" to move it.
+ * @param {ReadonlyArray<{faction?: unknown, isGoverning?: unknown, power?: unknown}>|null|undefined} factions
+ * @returns {string|null}
+ */
+export function governingSharePoolKey(factions) {
+  if (!Array.isArray(factions) || factions.length === 0) return null;
+  const scored = factions
+    .map((f) => ({ governing: Boolean(f?.isGoverning), power: contribution(f?.power) }))
+    .filter((f) => f.power > 0);
+  const governing = scored.find((f) => f.governing);
+  if (!governing) return null;
+  const others = scored.filter((f) => f !== governing);
+  const rest = others.reduce((sum, f) => sum + f.power, 0);
+  if (governing.power > rest) return 'governing faction holds a DOMINANT share';
+  const runnerUp = others.reduce((top, f) => (f.power > top ? f.power : top), 0);
+  // Not the largest at all ⇒ it does not hold a plurality, and neither pool is true.
+  if (runnerUp > governing.power) return null;
+  return governing.power - runnerUp <= governing.power * NARROW_MARGIN
+    ? 'governing faction holds a NARROW plurality'
+    : null;
+}
+
+/** See governingSharePoolKey. A vetoable cut, not a measured constant. */
+const NARROW_MARGIN = 0.15;
+
+/**
+ * DS-POW-2's lens, underneath the stability line. RECENT CONFLICT FIRST, and for the same
+ * reachability reason DS-POW-1's lens orders itself: the share is determinate for almost
+ * every generated town, so preferring it would leave `recentConflict present` reachable
+ * only on the rare town with no computable share. Ordering the conflict first makes both
+ * pools ordinary — a town with a recent quarrel tells that story, and every other town
+ * tells the share story.
+ * @param {unknown} recentConflict
+ * @param {ReadonlyArray<{faction?: unknown, isGoverning?: unknown, power?: unknown}>|null|undefined} factions
+ * @returns {string|null}
+ */
+export function stabilityLensPoolKey(recentConflict, factions) {
+  if (text(recentConflict)) return 'recentConflict present';
+  return governingSharePoolKey(factions);
+}
+
+/**
  * THE DESK. Returns the two rungs the legitimacy banner draws, or null for each where the
  * state does not support one.
  *
@@ -251,7 +374,8 @@ export function legitimacyLensPoolKey(legitimacy) {
  *
  * @param {PowerDeskSettlement|null|undefined} settlement
  * @param {{seed?: string, audience?: string}} [options]
- * @returns {Readonly<{legitimacyBanner: object|null, legitimacyLens: object|null}>}
+ * @returns {Readonly<{legitimacyBanner: object|null, legitimacyLens: object|null,
+ *   stabilityHeader: object|null, stabilityLens: object|null}>}
  */
 export function powerStateProse(settlement, options = {}) {
   const power = settlement?.powerStructure || {};
@@ -262,25 +386,50 @@ export function powerStateProse(settlement, options = {}) {
     ? power.publicLegitimacy
     : /** @type {PublicLegitimacyView} */ ({});
 
-  const slots = {
-    settlement: properFill(text(settlement?.name)),
-    // The canonical "who governs" name, never a hand-rolled second spelling of it.
-    seat: properFill(text(power.governingName)),
-  };
+  const town = properFill(text(settlement?.name));
+  // The canonical "who governs" name, never a hand-rolled second spelling of it.
+  const governing = properFill(text(power.governingName));
+
+  // ⚠ TWO BAGS, BECAUSE {seat} CARRIES TWO INCOMPATIBLE ROLES ACROSS THESE BLOCKS, AND ONE
+  // FILL CANNOT SATISFY BOTH. In DS-POW-1 every {seat} seam is the governing BODY — "The
+  // {seat} at {settlement} is obeyed", "the {seat}'s writ" — which is exactly
+  // `governingName`. In DS-POW-2 it is the HALL, a PLACE the body occupies: "The {seat} at
+  // {settlement} is {faction}'s, and the town takes its questions there." Filling both from
+  // one name renders "The Merchant Council at Thornwall is Merchant Council's".
+  //
+  // No hall-name producer exists, so DS-POW-2 leaves {seat} UNFILLED and supplies {faction}
+  // only. Anchored liveness then drops the 10 seat-naming variants and keeps 21 of 31 —
+  // MEASURED: all NINE pools still speak, none goes dark. Variety is the price; a broken
+  // sentence and a dead pool are the alternatives, and both are worse.
+  // This is a corpus-side slot-role ambiguity of the same KIND the annex records for
+  // {band}, and it is raised for the chair rather than papered over with a second fill.
+  const slots = { settlement: town, seat: governing };
+  const stabilitySlots = { settlement: town, faction: governing };
 
   /** @param {string|null} poolKey */
   const line = (poolKey) => (poolKey
     ? readStateProse(CORPUS, 'DS-POW-1', poolKey, { ...options, slots })
+    : null);
+  /** @param {string|null} poolKey */
+  const line2 = (poolKey) => (poolKey
+    ? readStateProse(CORPUS, 'DS-POW-2', poolKey, { ...options, slots: stabilitySlots })
     : null);
 
   const bandKey = legitimacyBandPoolKey(legitimacy.label);
   const lensKey = legitimacyLensPoolKey(legitimacy);
   const glance = text(legitimacy.label);
 
+  const stabilityKey = stabilityPoolKey(power.stability);
+  const stabilityLens = stabilityLensPoolKey(power.recentConflict, power.factions);
+
   return Object.freeze({
     legitimacyBanner: bandKey ? legibilityRung(glance, line(bandKey), []) : null,
     // The lens rung carries no glance of its own: the band word is already on the banner
     // an inch above it, and a second copy of one word is the page repeating itself.
     legitimacyLens: lensKey ? legibilityRung('', line(lensKey), []) : null,
+    stabilityHeader: stabilityKey
+      ? legibilityRung(text(power.stability), line2(stabilityKey), [])
+      : null,
+    stabilityLens: stabilityLens ? legibilityRung('', line2(stabilityLens), []) : null,
   });
 }

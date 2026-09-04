@@ -18,6 +18,12 @@ import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.j
  */
 const LEGITIMACY_MOUNT = 'power.legitimacyBanner';
 
+/**
+ * The stability header's mount id, bound once for the same reason: two draws (the ladder
+ * line and the lens beneath it) at ONE position, and the reachability arm counts literals.
+ */
+const STABILITY_MOUNT = 'power.stabilityHeader';
+
 /** §815 — one row of the ruling chain: a small uppercase link label + the answer. */
 function ChainRow({ label, children }) {
   return (
@@ -142,10 +148,12 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
   // untouched either way: the score, the label, the breakdown chips and the fracture note
   // never read the desk.
   const deskProse = publicDossier
-    ? Object.freeze({ legitimacyBanner: null, legitimacyLens: null })
+    ? Object.freeze({ legitimacyBanner: null, legitimacyLens: null, stabilityHeader: null, stabilityLens: null })
     : powerStateProse(s, { seed: String(s?._seed ?? s?.id ?? '') });
   const drawnBanner = drawnAtMount(LEGITIMACY_MOUNT, deskProse.legitimacyBanner);
   const drawnLens   = drawnAtMount(LEGITIMACY_MOUNT, deskProse.legitimacyLens);
+  const drawnStab   = drawnAtMount(STABILITY_MOUNT, deskProse.stabilityHeader);
+  const drawnStabLens = drawnAtMount(STABILITY_MOUNT, deskProse.stabilityLens);
 
   return (
     <div style={{paddingBottom:16}}>
@@ -254,6 +262,18 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
           )}
         </div>
         {h && <p style={{fontSize:FS.sm,color:swatch['#5A3A10'],lineHeight:1.5,margin:'8px 0 0',borderTop:`1px solid ${isCritical?'#e8c0c0':isStable?'#c8e8c8':'#e0c860'}`,paddingTop:8,fontStyle:'italic'}}>{h}</p>}
+        {/* DS-POW-2: the stability ladder line, then its lens — two pools of one block at
+            ONE position, routed through one mount, exactly as the legitimacy banner above. */}
+        {(drawnStab?.sentence || drawnStabLens?.sentence) && (
+          <div style={{marginTop:10,borderTop:`1px solid ${stabilityColor}30`,paddingTop:8}}>
+            {drawnStab?.sentence && (
+              <p style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.65,margin:0,fontStyle:'italic'}}>{drawnStab.sentence}</p>
+            )}
+            {drawnStabLens?.sentence && (
+              <p style={{fontSize:FS.sm,color:swatch.inkMag3,lineHeight:1.6,margin:'6px 0 0',fontStyle:'italic'}}>{drawnStabLens.sentence}</p>
+            )}
+          </div>
+        )}
       </div>
 
       {/* ── THE THREE STRATA (owner order 2026-07-22) ─────────────────────────
