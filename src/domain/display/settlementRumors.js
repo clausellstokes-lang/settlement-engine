@@ -40,7 +40,7 @@ import { compareCodepoint } from '../deterministicSort.js';
 import { getSpatialLedger, activeSpatialDigest } from '../spatial/distanceRead.js';
 import { routeAwareHopDelayTicks } from '../worldPulse/distancePricedNews.js';
 import { embattlementLevel } from '../spatial/embattlement.js';
-import { FALLBACK_PHRASE_POOLS } from './rumorFallbackPhrasePools.js';
+import { FALLBACK_CANONICALS, FALLBACK_PHRASE_POOLS } from './rumorFallbackPhrasePools.js';
 import { WHAT_PHRASE_POOLS } from './rumorPhrasePools.js';
 
 /** @typedef {import('../spatial/rumorNetwork.js').RumorArrivalRecord} RumorArrivalRecord */
@@ -532,15 +532,18 @@ export const UNREGISTERED_SUBJECT = 'a matter of some moment';
  * their variant 1 comes from:
  *   • THE CANONICAL ARM (§3, 63 kinds) — the kind has a WHAT_PHRASES row, and that
  *     row is index 0. Variants come from WHAT_PHRASE_POOLS.
- *   • THE FALLBACK ARM (§4, 107 kinds) — the kind has NO WHAT_PHRASES row, so its
- *     live phrase is the one this function COMPUTES by stripping and de-underscoring
- *     the token. That computed string is index 0. Variants come from
- *     FALLBACK_PHRASE_POOLS. Before this corpus these kinds were not merely
- *     single-voiced, they were UNVOICED — the reader was shown de-underscored engine
- *     slugs like 'realm verb force found steading'.
+ *   • THE FALLBACK ARM (§4, 107 kinds) — the kind has NO WHAT_PHRASES row. For 95 of
+ *     them the live phrase is the one this function COMPUTES by stripping and
+ *     de-underscoring the token; for the twelve the strip MUTILATED (DEFECT-1/2/3) it
+ *     is the authored string in FALLBACK_CANONICALS, de-slugged at §894. Either way
+ *     that string is index 0 and the variants come from FALLBACK_PHRASE_POOLS. Before
+ *     this corpus these kinds were not merely single-voiced, they were UNVOICED — the
+ *     reader was shown de-underscored engine slugs like 'realm verb force found
+ *     steading', and twelve of them a fragment such as 'detat'.
  * Three properties hold by CONSTRUCTION rather than by inspection:
- *   • CANONICAL AT ZERO — index 0 is the live string itself, never a transcription of
- *     it, on both arms. The byte-identity anchor cannot drift from what it anchors.
+ *   • CANONICAL AT ZERO — index 0 is whatever this function returns seedless, never a
+ *     separate transcription of it, on both arms. The byte-identity anchor cannot
+ *     drift from what it anchors, because the pins read it from the live call.
  *   • SEEDLESS IS BYTE-IDENTICAL — no seed means index 0, so every caller that asks
  *     for a phrase without a telling to key on (walkers, glossary checks, the
  *     impactKind census) reads exactly what it read before this wiring.
@@ -557,15 +560,25 @@ export function whatPhrase(value, seed = '') {
   const canonical = WHAT_PHRASES[key];
   if (canonical) return widenedPhrase(key, canonical, WHAT_PHRASE_POOLS[key], seed);
   if (TRANSITION_KINDS.has(key)) return NEUTRAL_SUBJECT;
-  // THE §4 ARM, GATED ON REGISTRATION. The strip-and-de-underscore computation is
-  // unchanged and still produces the byte-identical canonical for all 107 governed
-  // kinds — including the twelve MUTILATED anchors, which stay mutilated on purpose
-  // (owner-gated, wiring note LEG-7). What changed is that it is now reachable ONLY
-  // for a kind the §4 corpus actually holds. Gating rather than freezing 107 literals
-  // keeps the estate's own CANONICAL-AT-ZERO property: index 0 remains the live
-  // computation, never a transcription of it that could drift from what it anchors.
+  // THE §4 ARM, GATED ON REGISTRATION. The strip-and-de-underscore computation still
+  // produces the byte-identical canonical for 95 of the 107 governed kinds, and it is
+  // reachable ONLY for a kind the §4 corpus actually holds. Gating rather than freezing
+  // 95 literals keeps the estate's own CANONICAL-AT-ZERO property: for those kinds index
+  // 0 remains the live computation, never a transcription that could drift from what it
+  // anchors.
+  //
+  // ✅ THE TWELVE DE-SLUGGED ANCHORS ARE CONSULTED FIRST (§894, DEFECT-1/2/3). For those
+  // the strip ATE THE MEANING — `coup_detat` produced "detat", and
+  // `faction_institution_capture` produced the exact de-underscored spelling of the
+  // DISTINCT kind `institution_capture`, so the reader was told about the kind that was
+  // NOT firing. An unguarded prefix blacklist cannot be made safe by widening the
+  // blacklist (dropping `institution_` would make that impersonation a literal
+  // collision), so the twelve carry an AUTHORED canonical instead. This is the
+  // inclusion-list half of DEFECT-5, applied at exactly the sites that need it.
   const legacyPool = FALLBACK_PHRASE_POOLS[key];
   if (legacyPool) {
+    const authored = FALLBACK_CANONICALS[key];
+    if (authored) return widenedPhrase(key, authored, legacyPool, seed);
     const stripped = key.replace(WHAT_STRIP_PREFIX, '').replace(/_/g, ' ').trim();
     if (stripped) return widenedPhrase(key, stripped, legacyPool, seed);
   }

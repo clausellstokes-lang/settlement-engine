@@ -11,10 +11,11 @@
  *
  * WHY THE SPLIT IS REAL AND NOT BOOKKEEPING. On the §3 arm, index 0 of a pool is a string
  * an author wrote and the engine stores. On this arm, index 0 is a string NOTHING stores —
- * it is computed at call time, which is why twelve of these anchors are mutilated slugs
- * ('detat' for coup_detat, 'capture' for institution_capture). The byte-identity anchor is
- * therefore proved differently here: not by comparing against a stored row, but by
- * comparing against what the live function itself returns with no seed.
+ * it is computed at call time — which is why twelve of these anchors WERE mutilated slugs
+ * ('detat' for coup_detat, 'capture' for institution_capture) until §894 gave those twelve
+ * an authored canonical in FALLBACK_CANONICALS. The byte-identity anchor is therefore
+ * proved differently here: not by comparing against a stored row, but by comparing against
+ * what the live function itself returns with no seed, which holds on both arms.
  *
  * SEVEN THINGS ARE PINNED.
  *
@@ -24,23 +25,29 @@
  *   2. THE BYTE-IDENTITY ANCHOR. Variant 1 is not stored in the leaf at all. It must
  *      byte-equal the seedless return of the live whatPhrase() — the strongest available
  *      form of the annex's rule, because the anchor IS the live computation.
- *   3. THE MUTILATED ROSTER, PINNED EXACTLY. Twelve anchors are known-mutilated and their
- *      repair is OWNER-GATED (DEFECT-1/2/3, wiring note LEG-7). The roster is frozen here
- *      so neither a silent de-slugging nor a silent NEW mutilation can land unremarked.
+ *   3. THE DE-SLUGGED ROSTER, PINNED EXACTLY AND FROM BOTH SIDES. Twelve anchors were
+ *      mutilated slugs until §894 repaired them (DEFECT-1/2/3). The roster, the authored
+ *      replacements and the RETIRED strip outputs are all frozen here and re-parsed from
+ *      the doc, so a silent reversal, a drift between doc and leaf, and a NEW mutilation
+ *      each red. The general form of the defect — two kinds rendering one subject phrase
+ *      — is pinned across all 107 (DEFECT-5's inclusion-list arm).
  *   4. THE STRICT NO-OP. Every seedless call returns exactly what it returned before the
  *      wiring, and every token in NEITHER corpus stays seed-inert.
  *   5. THE REPETITION ENVELOPE, PER DESK, plus the anti-aliasing pin that caught the
  *      FNV-1a parity defect in slice 1.
  *   6. THE ATTRIBUTION INVARIANT. No authored variant nests inside another, so a rendered
  *      headline can be attributed to exactly one pool member. The bare-token canonical MAY
- *      nest (three do, unavoidably — 'hostile' is a word), and that exact set is frozen.
+ *      nest (TWO do, unavoidably — 'hostile' is a word), and that exact set is frozen. It
+ *      was three until §894: 'capture' was the third, and de-slugging retired it.
  *   7. THE LIVE PATH, DRIVEN — once per desk, through settlementRumors over a settled
  *      ledger.
  *
- * THE DISCLOSED SHIFT. Lighting this changes same-seed PROSE on a shipped surface for
+ * THE DISCLOSED SHIFT. Lighting this changed same-seed PROSE on a shipped surface for
  * these 107 kinds. Layout, structured record, ledger and address chain are untouched.
- * For the twelve mutilated kinds the shift is strictly an improvement: the slug stops
- * being the ONLY voice and becomes one of six or eight.
+ * ⚠ §894 DISCLOSES A SECOND, SMALLER SHIFT ON TOP OF IT: for the twelve de-slugged kinds
+ * the string at index 0 changed. No pool changed LENGTH, so every existing seed still
+ * draws the same INDEX — the roughly one-draw-in-seven that lands on index 0 now reads
+ * the authored phrase instead of the slug.
  */
 import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
@@ -54,6 +61,7 @@ import {
 import {
   DIVINATION_FALLBACK_KINDS,
   FAITH_FALLBACK_KINDS,
+  FALLBACK_CANONICALS,
   FALLBACK_PHRASE_POOLS,
   FALLBACK_WIRED_KINDS,
   TRADE_FALLBACK_KINDS,
@@ -80,10 +88,12 @@ const DESKS = Object.freeze([
 
 /**
  * Parse the §4 pools out of the corpus, with the floor its CADENCE line prices and
- * whether the doc marks variant 1 MUTILATED. Deliberately NOT shared with the source
- * module or with the sibling test: a parser both sides used would let one bug agree with
- * itself. Section-aware, because §3's pools live in the same file and must not leak in.
- * @returns {{ pools: Record<string, string[]>, floors: Record<string, number>, mutilated: string[] }}
+ * whether the doc marks variant 1 MUTILATED, and — where §894 de-slugged it — the strip
+ * output the row records as RETIRED. Deliberately NOT shared with the source module or
+ * with the sibling test: a parser both sides used would let one bug agree with itself.
+ * Section-aware, because §3's pools live in the same file and must not leak in.
+ * @returns {{ pools: Record<string, string[]>, floors: Record<string, number>,
+ *   mutilated: string[], deslugged: Record<string, string> }}
  */
 function corpusFallbackPools() {
   /** @type {Record<string, string[]>} */
@@ -92,6 +102,8 @@ function corpusFallbackPools() {
   const floors = {};
   /** @type {string[]} */
   const mutilated = [];
+  /** @type {Record<string, string>} */
+  const deslugged = {};
   /** @type {string | null} */
   let section = null;
   /** @type {string | null} */
@@ -116,10 +128,12 @@ function corpusFallbackPools() {
     const row = line.match(/^(\d+)\.\s+(.*)$/);
     if (row) {
       if (row[1] === '1' && /MUTILATED/.test(row[2])) mutilated.push(current);
+      const retired = row[1] === '1' && row[2].match(/✅ DE-SLUGGED at §894[^"]*was "([^"]+)"/);
+      if (retired) deslugged[current] = retired[1];
       pools[current].push(row[2].replace(/\s*`\[[^`]*\]`\s*$/, '').trim());
     }
   }
-  return { pools, floors, mutilated };
+  return { pools, floors, mutilated, deslugged };
 }
 
 /**
@@ -128,15 +142,27 @@ function corpusFallbackPools() {
  */
 const livePool = (kind) => [whatPhrase(kind), ...(FALLBACK_PHRASE_POOLS[kind] || [])];
 
-const { pools: PARSED, floors: FLOORS, mutilated: DOC_MUTILATED } = corpusFallbackPools();
+const {
+  pools: PARSED,
+  floors: FLOORS,
+  mutilated: DOC_MUTILATED,
+  deslugged: DOC_DESLUGGED,
+} = corpusFallbackPools();
 
 /**
- * The twelve anchors the strip regex mutilated. Frozen as a LITERAL, independently of the
- * doc parse, so the two must agree: a de-slugging repair (owner-gated, DEFECT-1/2/3) has
- * to come here and be seen, and a NEW mutilation introduced by a future strip-prefix edit
- * reds instead of shipping.
+ * The twelve anchors the strip regex mutilated until §894 DE-SLUGGED them. Frozen as a
+ * LITERAL, independently of the doc parse, so the two must agree: a silent REVERSAL has to
+ * come here and be seen, and a NEW mutilation introduced by a future strip-prefix edit reds
+ * instead of shipping.
+ *
+ * ⭐ WHY THE ROSTER SURVIVED THE REPAIR RATHER THAN BEING DELETED WITH IT. The obvious move
+ * — drop the list once the defect is gone — would have left `DOC_MUTILATED` pinned against
+ * an empty literal, and every `for (const kind of …)` arm below iterating zero times: an
+ * assertion that cannot fail, certifying the repair over nothing. The roster is kept and
+ * REPOINTED instead, so all twelve arms still execute against twelve real kinds, and the
+ * doc's mutilation tag is asserted ABSENT as a separate, independently falsifiable fact.
  */
-const MUTILATED_ANCHORS = Object.freeze([
+const DESLUGGED_ANCHORS = Object.freeze([
   'coup_detat',
   'faction_institution_capture',
   'faction_institution_suppression',
@@ -152,12 +178,42 @@ const MUTILATED_ANCHORS = Object.freeze([
 ]);
 
 /**
- * The three kinds whose BARE-TOKEN canonical legitimately nests inside one of its own
- * variants. Frozen because the attribution rule below depends on the set being small and
- * known: 'hostile' is an ordinary English word, so a variant may contain it, but two
- * AUTHORED variants nesting would make a rendered headline ambiguous.
+ * WHAT EACH ONE USED TO RENDER — the retired strip output, frozen as history. These are
+ * the strings a reader was actually shown before §894, and they are pinned from BOTH
+ * sides: this literal, and the `was "<slug>"` tag the corpus row now carries. A future
+ * strip-prefix edit that reintroduced one of them reds against this record rather than
+ * being read as a fresh computed canonical.
+ * @type {Readonly<Record<string, string>>}
  */
-const CANONICAL_NESTS_IN_VARIANT = Object.freeze(['hostile', 'institution_capture', 'patron']);
+const MUTILATIONS_RETIRED = Object.freeze({
+  coup_detat: 'detat',
+  faction_institution_capture: 'institution capture',
+  faction_institution_suppression: 'institution suppression',
+  faction_law_preference_push: 'law preference push',
+  faction_power_shift: 'power shift',
+  faction_service_bolster: 'service bolster',
+  institution_capture: 'capture',
+  institution_suppression: 'suppression',
+  npc_action: 'action',
+  occupation_burden: 'burden',
+  occupation_burden_cleared: 'burden cleared',
+  occupation_resistance: 'resistance',
+});
+
+/**
+ * The kinds whose BARE-TOKEN canonical legitimately nests inside one of its own variants.
+ * Frozen because the attribution rule below depends on the set being small and known:
+ * 'hostile' is an ordinary English word, so a variant may contain it, but two AUTHORED
+ * variants nesting would make a rendered headline ambiguous.
+ *
+ * ⭐ THREE BECAME TWO AT §894, AND THE FALL IS THE POINT. `institution_capture` was the
+ * third: its canonical was the bare verb *"capture"*, which nested inside its own variant
+ * "a capture entered against the institution's own roll". The de-slugging replaced that
+ * canonical with "a captured hall", which nests in nothing — so the repair did not merely
+ * improve the words, it removed an attribution ambiguity outright. Anything that put a
+ * third kind back in this set would be a regression, and this exact-set pin says so.
+ */
+const CANONICAL_NESTS_IN_VARIANT = Object.freeze(['hostile', 'patron']);
 
 describe('the corpus join (RECEIPT_POOLS_LEGACY.md §4)', () => {
   it('the corpus parser found the §4 pools at all (this join is not vacuous)', () => {
@@ -214,28 +270,90 @@ describe('the corpus join (RECEIPT_POOLS_LEGACY.md §4)', () => {
   });
 });
 
-describe('THE MUTILATED ANCHORS (owner-gated DEFECT-1/2/3 — pinned, not repaired)', () => {
-  it('the doc and this file name the same twelve', () => {
-    expect([...DOC_MUTILATED].sort()).toEqual([...MUTILATED_ANCHORS].sort());
-  });
-
-  it('each mutilated anchor is still the live computed string, unrepaired', () => {
-    // Retiring these REPLACES a live string rather than widening a pool, so it is a larger
-    // disclosed shift with its own golden and is OWNER-GATED (wiring note LEG-7,
-    // "do not bundle either into a pool-wiring wave"). This pin is what makes the
-    // deferral visible instead of forgotten.
-    for (const kind of MUTILATED_ANCHORS) {
-      expect(livePool(kind)[0], `${kind}: index 0 must remain the mutilated slug`).toBe(whatPhrase(kind));
+describe('THE DE-SLUGGED ANCHORS (DEFECT-1/2/3, repaired at §894)', () => {
+  it('the doc marks NO variant 1 mutilated, and this file still names the twelve it repaired', () => {
+    // TWO facts, deliberately separate. The first is the repair: the corpus carries zero
+    // `MUTILATED` tags, so a reversal in the DOC reds. The second keeps the roster live
+    // and exact, so the twelve arms below iterate over twelve real kinds rather than
+    // certifying the repair over an empty list.
+    expect(DOC_MUTILATED, 'a variant-1 row is tagged mutilated again').toEqual([]);
+    expect(DESLUGGED_ANCHORS).toHaveLength(12);
+    for (const kind of DESLUGGED_ANCHORS) {
+      expect(FALLBACK_WIRED_KINDS, `${kind} left the §4 roster`).toContain(kind);
     }
   });
 
-  it('the widening still improves every mutilated kind (the slug stops being the only voice)', () => {
-    for (const kind of MUTILATED_ANCHORS) {
-      expect(livePool(kind).length, `${kind}: a mutilated anchor with no pool is the defect at full strength`)
-        .toBeGreaterThanOrEqual(FLOORS[kind]);
+  it('each repaired anchor is the AUTHORED canonical, and the strip output is gone', () => {
+    // The two-sided pin. Index 0 must BE the authored string (so the doc, the leaf and the
+    // live call cannot fork), and it must NOT be what the strip would have produced (so a
+    // silent reversal to the slug reds here rather than passing as "still byte-identical").
+    for (const kind of DESLUGGED_ANCHORS) {
+      const authored = FALLBACK_CANONICALS[kind];
+      expect(authored, `${kind}: no authored canonical — the repair was reverted`).toBeTruthy();
+      expect(livePool(kind)[0], `${kind}: index 0 is not the authored canonical`).toBe(authored);
+      expect(whatPhrase(kind), `${kind}: the live call disagrees with the pool`).toBe(authored);
+      expect(authored, `${kind}: index 0 is the retired strip output again`)
+        .not.toBe(MUTILATIONS_RETIRED[kind]);
+      // ⭐ THE TWELVE ARE NOW AUTHORED PROSE, SO THE R1 REGISTER LAW BINDS THEM. Before
+      // §894 variant 1 was exempt on the grounds that it was engine output; that reason
+      // no longer holds for these, and an authored canonical that broke the register
+      // would be a defect the corpus law was written to catch. R1_FORBIDDEN is declared
+      // below and read at run time, so this arm and the corpus arm share one table.
+      expect(authored[0], `${kind}: "${authored}" must not start capitalized`)
+        .toBe(authored[0].toLowerCase());
+      for (const [shape, why] of R1_FORBIDDEN) {
+        // The subject is a STRING this test body already proved live, not a collection
+        // that can silently vanish: `authored` is asserted truthy and byte-equal to
+        // livePool[0] four lines up, so an emptied map reds THERE rather than certifying
+        // the register law over nothing.
+        // anchored: `authored` pinned truthy and equal to livePool(kind)[0] above
+        expect(authored, `${kind}: "${authored}" carries ${why}`).not.toMatch(shape);
+      }
+    }
+  });
+
+  it('the doc records the same twelve retirements this file names, string for string', () => {
+    // The doc's own `was "<slug>"` tag, parsed back and pinned against the frozen record.
+    // It is what stops the repair from being re-litigated from memory: the strings that
+    // WERE live are history, and history is anchored on both sides or it rots.
+    expect(Object.keys(DOC_DESLUGGED).sort()).toEqual([...DESLUGGED_ANCHORS].sort());
+    expect(DOC_DESLUGGED).toEqual(MUTILATIONS_RETIRED);
+  });
+
+  it('the repair changed the WORDS and not the SELECTION — no pool moved an index', () => {
+    // THE BOUND ON THE DISCLOSED SHIFT, asserted rather than asserted-about. Selection is
+    // hash(seed) % pool.length; the repair replaced the string AT index 0 and touched no
+    // length, so every existing seed still draws the same index. A repair that had also
+    // appended or reordered would red here even though every other arm stayed green.
+    for (const kind of DESLUGGED_ANCHORS) {
+      expect(livePool(kind).length, `${kind}: the pool changed length — every seed re-rolls`)
+        .toBe(1 + FALLBACK_PHRASE_POOLS[kind].length);
+      expect(livePool(kind).length, `${kind}: below its cadence floor`).toBeGreaterThanOrEqual(FLOORS[kind]);
+      expect(livePool(kind).slice(1), `${kind}: an authored variant moved`).toEqual([...FALLBACK_PHRASE_POOLS[kind]]);
       const drawn = new Set(Array.from({ length: 200 }, (_, i) => whatPhrase(kind, `evt-${i}`)));
-      expect(drawn.size, `${kind}: the mutilated slug is still the only voice`).toBeGreaterThan(1);
+      expect(drawn.size, `${kind}: the canonical is the only voice again`).toBeGreaterThan(1);
     }
+  });
+
+  it('DEFECT-5 IN ITS GENERAL FORM — no two §4 kinds share a canonical', () => {
+    // The impersonation class, generalised past the twelve. `faction_institution_capture`
+    // used to render the exact de-underscored spelling of the DISTINCT kind
+    // `institution_capture`, telling the reader about the kind that was NOT firing. This
+    // pin reds for ANY future kind whose strip output collides with another's — which is
+    // the inclusion-list gate DEFECT-5 asks for, at the one place a collision can be seen.
+    /** @type {Map<string, string>} */
+    const owner = new Map();
+    /** @type {string[]} */
+    const collisions = [];
+    for (const kind of FALLBACK_WIRED_KINDS) {
+      const canonical = whatPhrase(kind);
+      if (owner.has(canonical)) collisions.push(`"${canonical}": ${owner.get(canonical)} and ${kind}`);
+      else owner.set(canonical, kind);
+    }
+    expect(collisions, 'two §4 kinds render one subject phrase — a reader cannot tell them apart')
+      .toEqual([]);
+    // The census that stops the negative above from passing over an empty walk.
+    expect(owner.size).toBe(FALLBACK_WIRED_KINDS.length);
   });
 });
 
@@ -253,9 +371,10 @@ const R1_FORBIDDEN = Object.freeze([
 
 describe('the R1 register law (a variant that only reads in one frame is a defect)', () => {
   it.each(FALLBACK_WIRED_KINDS)('%s — every AUTHORED variant is a bare lowercase noun phrase', (kind) => {
-    // Variant 1 is deliberately EXEMPT: it is engine output, not authored prose, and for
-    // twelve kinds it is a mutilated slug this lane is forbidden to repair. The law binds
-    // what this corpus wrote.
+    // Variant 1 is EXEMPT here because for 95 kinds it is engine output rather than
+    // authored prose, and the law binds what this corpus wrote. ⚠ The twelve §894
+    // canonicals ARE authored prose, so they are held to this same table — see the
+    // de-slugged describe above, which runs R1_FORBIDDEN over FALLBACK_CANONICALS.
     const authored = FALLBACK_PHRASE_POOLS[kind];
     // THE LIVENESS ANCHOR for the negative below. A register law asserted over an EMPTY
     // pool is vacuously green — it would survive the exact regression it exists to catch.
@@ -321,10 +440,11 @@ describe('THE ATTRIBUTION INVARIANT (a rendered headline names exactly one membe
     expect(nested, 'two authored variants nesting makes a rendered headline ambiguous').toEqual([]);
   });
 
-  it('exactly three bare-token canonicals nest in a variant, and they are the known three', () => {
-    // Unavoidable and harmless: index 0 here is a de-underscored token, and 'hostile',
-    // 'patron' and 'capture' are ordinary words. It is pinned as an exact set so the
-    // longest-match attribution below stays justified rather than assumed.
+  it('exactly two bare-token canonicals nest in a variant, and they are the known two', () => {
+    // Unavoidable and harmless: index 0 for these is a de-underscored token, and 'hostile'
+    // and 'patron' are ordinary words. It is pinned as an exact set so the longest-match
+    // attribution below stays justified rather than assumed. It was THREE until §894 —
+    // 'capture' was the third, and de-slugging `institution_capture` retired it.
     const nests = FALLBACK_WIRED_KINDS.filter(
       (kind) => FALLBACK_PHRASE_POOLS[kind].some((v) => v.includes(whatPhrase(kind))),
     );
@@ -398,14 +518,23 @@ describe('THE STRICT NO-OP — a seedless call is byte-identical to before the w
   it('THE GATE IS THE REGISTRATION, NOT THE SHAPE — the 107 are byte-identical', () => {
     // The positive control on the two negatives above. Refusing everything would
     // satisfy them both; this proves the gate admits exactly the governed corpus, and
-    // that the strip computation behind it still produces the same bytes it always
-    // did — including the twelve anchors it mutilates on purpose.
+    // that the strip computation behind it still produces the same bytes it always did
+    // for the 95 kinds it still serves.
     for (const kind of FALLBACK_WIRED_KINDS) {
-      expect(whatPhrase(kind), `${kind} must still compute its corpus canonical`)
+      expect(whatPhrase(kind), `${kind} must still resolve to its corpus canonical`)
         .not.toBe(UNREGISTERED_SUBJECT);
     }
-    expect(whatPhrase('coup_detat')).toBe('detat');
-    expect(whatPhrase('institution_capture')).toBe('capture');
+    // Two computed canonicals spelled out, chosen because their prefixes (`compound_`
+    // never stripped, `realm_verb_` never stripped) exercise the de-underscore path
+    // itself. These are the ARM the §894 repair deliberately left alone.
+    expect(whatPhrase('criminal_corridor')).toBe('criminal corridor');
+    expect(whatPhrase('realm_verb_force_found_steading')).toBe('realm verb force found steading');
+    // …and the two the repair DID move, pinned to their authored strings. Before §894
+    // these read 'detat' and 'capture'; the second was also the bare verb half of the
+    // impersonation pair, so both halves are named here.
+    expect(whatPhrase('coup_detat')).toBe('a seizure of the seat');
+    expect(whatPhrase('institution_capture')).toBe('a captured hall');
+    expect(whatPhrase('faction_institution_capture')).toBe("a faction's capture of a hall");
   });
 });
 
