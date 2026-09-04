@@ -1,0 +1,51 @@
+# PARTIAL — lane CENSUSHEADROOM (seat Opus 5)
+
+STATUS: **PARTIAL — IN FLIGHT.** Nothing below is final until this header says SEALED.
+
+- Dock (read-only): `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/58f0a8e2-2c4f-4073-8635-ecc7cf5010f6/scratchpad/laneKERNELMARK-tree`
+- HEAD at open: `c2f80ffc9` — "§891 cure: the capsule battery's runtime-tests fixture stops being a green with an expiry date"
+- Dirty at open (SIBLING LANE'S WORK — untouched by me): `src/components/new/tabs/EconomicsGlance.jsx`, `src/domain/display/dossierViewModel.js`
+- Mandate: MEASUREMENT AND PLAN ONLY. No edit, no stage, no commit, no ref write, no register door, no subagent.
+- Out dir (only writable surface): `.../d5b9a39f-.../scratchpad/censushead/`
+
+## Scope
+Four `war*KindPools` census slots (3 warCost + 1 warRuling), plus brief triage of
+`tests/docs/enforcement-claims.test.js` and `tests/lint/clampPrimitiveBaseline.test.js`.
+EXCLUDED by brief: the four `voiceMechanics` arms (another lane owns them).
+
+(body follows)
+
+## PREDICTIONS, WRITTEN BEFORE ANY INSTRUMENT RAN
+
+Derived from static reads only (annex row counts, `WAR_RECEIPTS` pool lengths measured by a
+node import of the pure-data leaf, and the walkers' own assertion text).
+
+**P1 — `npx vitest run tests/lint/warCostKindPools.walker.test.js`**
+- EXACTLY 3 failing tests, all in the `test.each` arm
+  `'$kind retains the five receipt-annex families verbatim'`.
+- Failing kinds: `war_trajectory_winning`, `war_trajectory_losing`, `trajectory_misread`.
+- Failing assertion: `expect(rendered).toEqual(annex.lines)`.
+- Message shape (vitest prints ACTUAL then EXPECTED):
+  `expected [ …(5) ] to deeply equal [ …(6) ]` for winning and losing;
+  `expected [ …(5) ] to deeply equal [ …(10) ]` for `trajectory_misread`.
+  ⇒ the FIVE is the `src/` pool (ACTUAL); the 6/6/10 is the ANNEX (EXPECTED).
+- Every other test in the file passes, including
+  `expect(row.pool).toHaveLength(5)` and the nine-kind census arm.
+
+**P2 — `npx vitest run tests/lint/warRulingKindPools.walker.test.js`**
+- EXACTLY 1 failing test: `succession_demand_inherited retains the five annex families
+  without editorial cross-references`, message `expected [ …(5) ] to deeply equal [ …(6) ]`.
+- Every other test in the file passes, including the fourteen-kind census arm's
+  `expect(row.pool).toHaveLength(5)` and `expect(row.requiredSlots).toHaveLength(5)`.
+
+**P3 — `tests/lint/kindPoolFloors.walker.test.js` is GREEN today** and will RED the moment any
+of these pools deepens unless its `LEGACY_UNDER_FLOOR` entry is struck in the SAME commit
+(`expect(violations.map(v => v.kind)).toEqual([...LEGACY_UNDER_FLOOR])` is exact equality,
+and `expect(LEGACY_UNDER_FLOOR).toHaveLength(28)` is a hard literal).
+
+**P4 (singletons, predicted before measuring)** — `clampPrimitiveBaseline`: replicating the
+test's own scan will find **78** `src/**` files defining a local `clamp`/`clamp01` against a
+committed baseline JSON of **62**; `BASELINE_CEILING = 62` and `baseline.length === 62`, so the
+second arm ("never grows past its committed ceiling") is green and would BREACH on a re-freeze.
+`enforcement-claims`: the failing arm reports **6** completeness claims with no resolvable
+`@enforced-by` target, and the sibling `FROZEN_NAKED` per-claim pin is GREEN.

@@ -1,0 +1,224 @@
+{
+ "tier3": {
+  "diffFiles": 17,
+  "emSum": 37,
+  "bangSum": 0,
+  "repoTotalEm": 40,
+  "repoTotalBang": 0,
+  "diffs": [
+   "src/components/account/AccountIdentitySection.jsx: baseline em:0 bang:0 -> current em:3 bang:0",
+   "src/components/account/FounderChairBio.jsx: baseline em:0 bang:0 -> current em:1 bang:0",
+   "src/components/dossier/LockControls.jsx: baseline em:0 bang:0 -> current em:1 bang:0",
+   "src/components/founders/FoundersHallPage.jsx: baseline em:0 bang:0 -> current em:2 bang:0",
+   "src/components/founders/HallCovenant.jsx: baseline em:0 bang:0 -> current em:1 bang:0",
+   "src/components/founders/RequestChairLetter.jsx: baseline em:0 bang:0 -> current em:2 bang:0",
+   "src/components/instant/InstantWorldEntry.jsx: baseline em:0 bang:0 -> current em:2 bang:0",
+   "src/components/map/HeraldGazetteer.jsx: baseline em:0 bang:0 -> current em:3 bang:0",
+   "src/components/map/PerspectiveStandings.jsx: baseline em:0 bang:0 -> current em:4 bang:0",
+   "src/components/map/RealmComparisons.jsx: baseline em:0 bang:0 -> current em:2 bang:0",
+   "src/components/map/SimulationRulesAxes.jsx: baseline em:0 bang:0 -> current em:2 bang:0",
+   "src/components/new/tabs/EconomicsGlance.jsx: baseline em:0 bang:0 -> current em:3 bang:0",
+   "src/components/new/tabs/EconomicsTab.jsx: baseline em:3 bang:0 -> current em:0 bang:0",
+   "src/components/new/tabs/FaithTab.jsx: baseline em:0 bang:0 -> current em:2 bang:0",
+   "src/components/new/tabs/PowerTab.jsx: baseline em:0 bang:0 -> current em:3 bang:0",
+   "src/components/new/tabs/WarTab.jsx: baseline em:0 bang:0 -> current em:4 bang:0",
+   "src/components/settlements/LivingWorldGates.jsx: baseline em:0 bang:0 -> current em:2 bang:0"
+  ]
+ },
+ "tier2_dossierViewModel": {
+  "em": 6,
+  "bang": 0
+ },
+ "behaviour": {
+  "unavailable-null": {
+   "out": {
+    "available": false,
+    "season": null,
+    "band": null,
+    "display": null,
+    "lastsUntil": null,
+    "yearEvent": null
+   },
+   "tileValue_viaSplit": null,
+   "tileSub_viaSplit": null
+  },
+  "unavailable-empty": {
+   "out": {
+    "available": false,
+    "season": null,
+    "band": null,
+    "display": null,
+    "lastsUntil": null,
+    "yearEvent": null
+   },
+   "tileValue_viaSplit": null,
+   "tileSub_viaSplit": null
+  },
+  "unavailable-noseason": {
+   "out": {
+    "available": false,
+    "season": null,
+    "band": null,
+    "display": null,
+    "lastsUntil": null,
+    "yearEvent": null
+   },
+   "tileValue_viaSplit": null,
+   "tileSub_viaSplit": null
+  },
+  "winter-thin-nodraw": {
+   "out": {
+    "available": true,
+    "season": "winter",
+    "band": "thin",
+    "level": 1.3,
+    "capacity": 5,
+    "lastsUntil": null,
+    "yearEvent": null,
+    "display": "Winter — the granary is thin (1.3 of 5.0 months)"
+   },
+   "tileValue_viaSplit": "Winter",
+   "tileSub_viaSplit": "the granary is thin (1.3 of 5.0 months)"
+  },
+  "spring-welstocked": {
+   "out": {
+    "available": true,
+    "season": "spring",
+    "band": "well stocked",
+    "level": 4.6,
+    "capacity": 5,
+    "lastsUntil": null,
+    "yearEvent": null,
+    "display": "Spring — the granary is well stocked (4.6 of 5.0 months)"
+   },
+   "tileValue_viaSplit": "Spring",
+   "tileSub_viaSplit": "the granary is well stocked (4.6 of 5.0 months)"
+  },
+  "summer-stocked-draw": {
+   "out": {
+    "available": true,
+    "season": "summer",
+    "band": "stocked",
+    "level": 2.2,
+    "capacity": 5,
+    "lastsUntil": "~early summer",
+    "yearEvent": null,
+    "display": "Summer — the granary is stocked (2.2 of 5.0 months). stores will last until ~early summer"
+   },
+   "tileValue_viaSplit": "Summer",
+   "tileSub_viaSplit": "the granary is stocked (2.2 of 5.0 months). stores will last until ~early summer"
+  },
+  "autumn-spent": {
+   "out": {
+    "available": true,
+    "season": "autumn",
+    "band": "nearly empty",
+    "level": 0,
+    "capacity": 5,
+    "lastsUntil": "already spent",
+    "yearEvent": null,
+    "display": "Autumn — the granary is nearly empty (0.0 of 5.0 months). the granary is spent"
+   },
+   "tileValue_viaSplit": "Autumn",
+   "tileSub_viaSplit": "the granary is nearly empty (0.0 of 5.0 months). the granary is spent"
+  },
+  "hard_winter": {
+   "out": {
+    "available": true,
+    "season": "winter",
+    "band": "thin",
+    "level": 1.3,
+    "capacity": 5,
+    "lastsUntil": null,
+    "yearEvent": "A hard winter grips the year.",
+    "display": "Winter — the granary is thin (1.3 of 5.0 months). A hard winter grips the year."
+   },
+   "tileValue_viaSplit": "Winter",
+   "tileSub_viaSplit": "the granary is thin (1.3 of 5.0 months). A hard winter grips the year."
+  },
+  "drought": {
+   "out": {
+    "available": true,
+    "season": "winter",
+    "band": "thin",
+    "level": 1.3,
+    "capacity": 5,
+    "lastsUntil": null,
+    "yearEvent": "Drought struck the harvest.",
+    "display": "Winter — the granary is thin (1.3 of 5.0 months). Drought struck the harvest."
+   },
+   "tileValue_viaSplit": "Winter",
+   "tileSub_viaSplit": "the granary is thin (1.3 of 5.0 months). Drought struck the harvest."
+  },
+  "bountiful-draw": {
+   "out": {
+    "available": true,
+    "season": "winter",
+    "band": "stocked",
+    "level": 3,
+    "capacity": 5,
+    "lastsUntil": "~late summer",
+    "yearEvent": "A bountiful year.",
+    "display": "Winter — the granary is stocked (3.0 of 5.0 months). stores will last until ~late summer. A bountiful year."
+   },
+   "tileValue_viaSplit": "Winter",
+   "tileSub_viaSplit": "the granary is stocked (3.0 of 5.0 months). stores will last until ~late summer. A bountiful year."
+  },
+  "nearly-empty": {
+   "out": {
+    "available": true,
+    "season": "winter",
+    "band": "nearly empty",
+    "level": 0.2,
+    "capacity": 5,
+    "lastsUntil": null,
+    "yearEvent": null,
+    "display": "Winter — the granary is nearly empty (0.2 of 5.0 months)"
+   },
+   "tileValue_viaSplit": "Winter",
+   "tileSub_viaSplit": "the granary is nearly empty (0.2 of 5.0 months)"
+  },
+  "zero-capacity": {
+   "out": {
+    "available": true,
+    "season": "winter",
+    "band": "nearly empty",
+    "level": 1.3,
+    "capacity": 0,
+    "lastsUntil": null,
+    "yearEvent": null,
+    "display": "Winter — the granary is nearly empty (1.3 of 0.0 months)"
+   },
+   "tileValue_viaSplit": "Winter",
+   "tileSub_viaSplit": "the granary is nearly empty (1.3 of 0.0 months)"
+  },
+  "unknown-season-key": {
+   "out": {
+    "available": true,
+    "season": "monsoon",
+    "band": "thin",
+    "level": 1.3,
+    "capacity": 5,
+    "lastsUntil": null,
+    "yearEvent": null,
+    "display": "monsoon — the granary is thin (1.3 of 5.0 months)"
+   },
+   "tileValue_viaSplit": "monsoon",
+   "tileSub_viaSplit": "the granary is thin (1.3 of 5.0 months)"
+  },
+  "beyond-the-year": {
+   "out": {
+    "available": true,
+    "season": "winter",
+    "band": "well stocked",
+    "level": 4.9,
+    "capacity": 5,
+    "lastsUntil": "beyond the year",
+    "yearEvent": null,
+    "display": "Winter — the granary is well stocked (4.9 of 5.0 months). stores will last until beyond the year"
+   },
+   "tileValue_viaSplit": "Winter",
+   "tileSub_viaSplit": "the granary is well stocked (4.9 of 5.0 months). stores will last until beyond the year"
+  }
+ }
+}

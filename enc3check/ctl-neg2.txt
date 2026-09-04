@@ -1,0 +1,2 @@
+error: patch failed: tests/domain/subsystemRowsVirtual.test.js:195
+error: tests/domain/subsystemRowsVirtual.test.js: patch does not apply

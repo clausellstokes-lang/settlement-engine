@@ -1,0 +1,83 @@
+## jsPDF version: 4.2.1
+## WinAnsiEncoding map size: 27
+## winAnsi key range: U+0152 .. U+2122
+## encodable size: 218  textPass size: 190
+## STRIPPED-BUT-ENCODABLE count: 28
+    U+00A0 " " | inWinAnsiMap=false
+    U+0152 "Œ" | inWinAnsiMap=true
+    U+0153 "œ" | inWinAnsiMap=true
+    U+0160 "Š" | inWinAnsiMap=true
+    U+0161 "š" | inWinAnsiMap=true
+    U+0178 "Ÿ" | inWinAnsiMap=true
+    U+017D "Ž" | inWinAnsiMap=true
+    U+017E "ž" | inWinAnsiMap=true
+    U+0192 "ƒ" | inWinAnsiMap=true
+    U+02C6 "ˆ" | inWinAnsiMap=true
+    U+02DC "˜" | inWinAnsiMap=true
+    U+2013 "–" | inWinAnsiMap=true
+    U+2014 "—" | inWinAnsiMap=true
+    U+2018 "‘" | inWinAnsiMap=true
+    U+2019 "’" | inWinAnsiMap=true
+    U+201A "‚" | inWinAnsiMap=true
+    U+201C "“" | inWinAnsiMap=true
+    U+201D "”" | inWinAnsiMap=true
+    U+201E "„" | inWinAnsiMap=true
+    U+2020 "†" | inWinAnsiMap=true
+    U+2021 "‡" | inWinAnsiMap=true
+    U+2022 "•" | inWinAnsiMap=true
+    U+2026 "…" | inWinAnsiMap=true
+    U+2030 "‰" | inWinAnsiMap=true
+    U+2039 "‹" | inWinAnsiMap=true
+    U+203A "›" | inWinAnsiMap=true
+    U+20AC "€" | inWinAnsiMap=true
+    U+2122 "™" | inWinAnsiMap=true
+## FULL WINANSI EXTRA MAP (cp -> byte):
+    U+0152 "Œ" -> 0x8C
+    U+0153 "œ" -> 0x9C
+    U+0160 "Š" -> 0x8A
+    U+0161 "š" -> 0x9A
+    U+0178 "Ÿ" -> 0x9F
+    U+017D "Ž" -> 0x8E
+    U+017E "ž" -> 0x9E
+    U+0192 "ƒ" -> 0x83
+    U+02C6 "ˆ" -> 0x88
+    U+02DC "˜" -> 0x98
+    U+2013 "–" -> 0x96
+    U+2014 "—" -> 0x97
+    U+2018 "‘" -> 0x91
+    U+2019 "’" -> 0x92
+    U+201A "‚" -> 0x82
+    U+201C "“" -> 0x93
+    U+201D "”" -> 0x94
+    U+201E "„" -> 0x84
+    U+2020 "†" -> 0x86
+    U+2021 "‡" -> 0x87
+    U+2022 "•" -> 0x95
+    U+2026 "…" -> 0x85
+    U+2030 "‰" -> 0x89
+    U+2039 "‹" -> 0x8B
+    U+203A "›" -> 0x9B
+    U+20AC "€" -> 0x80
+    U+2122 "™" -> 0x99
+## faces: 8 /fonts/Lora-Regular.ttf,/fonts/Lora-Bold.ttf,/fonts/Lora-Italic.ttf,/fonts/Lora-BoldItalic.ttf,/fonts/Nunito-Regular.ttf,/fonts/Nunito-Bold.ttf,/fonts/Nunito-ExtraBold.ttf,/fonts/Nunito-Italic.ttf
+## dossier intersection size: 759
+## of the stripped set, drawable by dossier fonts too: U+00A0 U+0152 U+0153 U+0160 U+0161 U+0178 U+017D U+017E U+0192 U+02C6 U+02DC U+2013 U+2014 U+2018 U+2019 U+201A U+201C U+201D U+201E U+2020 U+2021 U+2022 U+2026 U+2030 U+2039 U+203A U+20AC U+2122
+## NAME PROBES (jsPDF surfaces: campaign PDF + World Book)
+    "Uroš" -> "Uro" (MANGLED) | dossier-undrawable: none
+    "Hadžić" -> "Had i" (MANGLED) | dossier-undrawable: none
+    "Zoë" -> "Zoë" (intact) | dossier-undrawable: none
+    "Björn" -> "Björn" (intact) | dossier-undrawable: none
+    "Łukasz" -> "ukasz" (MANGLED) | dossier-undrawable: none
+    "Ægir" -> "Ægir" (intact) | dossier-undrawable: none
+    "Nguyễn" -> "Nguy n" (MANGLED) | dossier-undrawable: none
+    "Müller" -> "Müller" (intact) | dossier-undrawable: none
+    "Çelik" -> "Çelik" (intact) | dossier-undrawable: none
+    "Šimon" -> "imon" (MANGLED) | dossier-undrawable: none
+    "Æthelred" -> "Æthelred" (intact) | dossier-undrawable: none
+    "Þórunn" -> "Þórunn" (intact) | dossier-undrawable: none
+    "Renée" -> "Renée" (intact) | dossier-undrawable: none
+    "Søren" -> "Søren" (intact) | dossier-undrawable: none
+    "Krzysztof" -> "Krzysztof" (intact) | dossier-undrawable: none
+    "Ana Ćurić" -> "Ana uri" (MANGLED) | dossier-undrawable: none
+    "Dvořák" -> "Dvo ák" (MANGLED) | dossier-undrawable: none
+    "Székely" -> "Székely" (intact) | dossier-undrawable: none

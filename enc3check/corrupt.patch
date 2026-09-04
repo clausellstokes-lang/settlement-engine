@@ -1,0 +1,421 @@
+diff --git a/src/domain/certification/couplingRegistry.js b/src/domain/certification/couplingRegistry.js
+index 49403eb48..260471112 100644
+--- a/src/domain/certification/couplingRegistry.js
++++ b/src/domain/certification/couplingRegistry.js
+@@ -50,6 +50,8 @@ import { ENC_ENCOUNTERS_COUPLINGS } from './couplingRegistryEncounters.js';
+ 
+ export {
+   ENC2_MEETING_MARK_CONSUME_COUPLING,
++  ENC3_MEETING_EXPOSURE_WARINESS_COUPLING,
++  ENC3_MEETING_STAGE_INTERIOR_COUPLING,
+   ENC_ENCOUNTERS_COUPLINGS,
+ } from './couplingRegistryEncounters.js';
+ 
+diff --git a/src/domain/certification/couplingRegistryEncounters.js b/src/domain/certification/couplingRegistryEncounters.js
+index af6218a1f..71e22248a 100644
+--- a/src/domain/certification/couplingRegistryEncounters.js
++++ b/src/domain/certification/couplingRegistryEncounters.js
+@@ -59,7 +59,101 @@ export const ENC2_MEETING_MARK_CONSUME_COUPLING = couplingRow({
+   intendedDesk: 'diplomacy',
+ });
+ 
++/**
++ * ENC-3 / INFO→GRAMMAR. THE HOST COURT'S OWN WARINESS SHARPENS THE EXPOSURE DIE.
++ *
++ * When an approach is refused, whether the refusal is SPOKEN OF depends on how watchful the
++ * host court already is — and this design mints no second wariness law for that. It reads
++ * the term the espionage gauntlet already reads, `overdueForeignNotables`, which counts the
++ * foreign notables whose declared schedule has lapsed inside the host's own cluster. That
++ * is an INFO-layer subject (what a court believes about who is overdue), consumed by a
++ * GRAMMAR-layer stage, so it is a cross-layer read and it is licensed here.
++ *
++ * THE COUNTERFORCE IS THE LEAF'S OWN NARROWNESS, and it is why this import is cheap: the
++ * wariness leaf is IMPORT-FREE and pure, it returns a count with its own `termsAbsent`
++ * declaration, and the stage caps the rung it contributes at two. So the widest thing this
++ * edge can do is move one die by two eighths — it can never reach a person, a record or a
++ * ledger. Nothing is written back toward INFO in either direction.
++ *
++ * ⚠ THE ARROW IS THE WALKER'S, NOT THE DESIGN'S. `DESIGN_ENCOUNTERS.md` §11 row 5 calls
++ * this pair "GRAMMAR→INFO". The walker composes `${importedLayer}→${importerLayer}`
++ * (`couplingInclusion.walker.test.js:1152`), so the live direction of a GRAMMAR file
++ * importing an INFO file is `INFO→GRAMMAR`. Derived at the dock, never restated — a row
++ * carrying the design's arrow would license nothing and the pair would red as unlicensed.
++ * @type {Readonly<CouplingRegistryRow>}
++ */
++export const ENC3_MEETING_EXPOSURE_WARINESS_COUPLING = couplingRow({
++  couplingId: 'CPL-19.INFO_TO_GRAMMAR.ENC-3.meeting_exposure_wariness',
++  pairId: 'CPL-19',
++  direction: 'INFO→GRAMMAR',
++  read: 'src/domain/worldPulse/envoyChanceMeetingStage.js#advanceChanceMeetings',
++  receiptField: 'worldState.relationshipStates[].{resentment,recentIncidents}',
++  counterforce: 'src/domain/worldPulse/espionage/espionageWariness.js#overdueForeignNotables',
++  flags: Object.freeze([
++    'chanceEncountersEnabled',
++    'envoyDiplomacyEnabled',
++  ]),
++  owningVolume: 'ENCOUNTERS',
++  owningWave: 'ENC-3',
++  intendedDesk: 'diplomacy',
++});
++
++/**
++ * ENC-3 / INTERIOR→GRAMMAR. THE STAGE ASKS THE INTERIOR FOR ITS DOORS, ITS WORDS AND ITS
++ * ONE WRITER — AND ASKS FOR NOTHING ELSE.
++ *
++ * A meeting is an envoy-family event about two people whose standing, whose personality
++ * words and whose courts' edge are all INTERIOR subjects. Rather than re-deriving any of
++ * them, the stage reaches for the interior's own spellings. FOUR reads, and each is the
++ * estate's single home for the fact it answers:
++ *
++ *   • `npcLadderKernel#npcLadderActive` and `relationshipEvolution#memoryWeaveActive` — the
++ *     two CONSUMER doors over a mark. They are re-read HERE, at the deposit site, because
++ *     the deposit IS the gate: a weave-dark or ladder-dark world must write no ledger key
++ *     at all rather than an orphaned one nobody will ever consume.
++ *   • `npcLadderGoals#traitsOf` — the estate's ONE reader of an NPC's personality words,
++ *     and a registered coupling counterforce in its own right. A second spelling here
++ *     would be the fourth in a tree that already refused the third.
++ *   • `relationshipState#relationshipKeyFromEdge` and
++ *     `relationshipEvolution#applyRelationshipPatch` — the relationship plane's key law and
++ *     its ONE writer. An exposed approach is a grievance on the two courts' edge, and it is
++ *     written through that writer WITH ITS EDGE as the fourth argument, which is the
++ *     `relationshipPatchEdgeCarry` walker's own law.
++ *
++ * THE COUNTERFORCE IS A REAL REFUSAL: `applyRelationshipPatch` returns the world UNCHANGED
++ * when the patch names no relationship key, and the stage reaches it only for an `exposed`
++ * outcome that resolved an edge — so a meeting at a court with no regional edge files no
++ * grievance rather than inventing one. And nothing here writes a standing record: the mark
++ * is DEPOSITED and the ladder kernel mints it through `mintBond` on its own tick, which is
++ * the coupling ENC-2 licensed in the other direction.
++ *
++ * ⚠ ONE ROW LICENSES ALL FOUR IMPORTS, and that is the walker's own rule rather than a
++ * shortcut: `licensingRows` matches on DIRECTION plus the IMPORTER module of the row's read
++ * address (`couplingInclusion.walker.test.js:1251-1255`), never on the imported module. A
++ * row per import would be four rows describing one seam. ⚠ The arrow is again the walker's:
++ * the design calls this "GRAMMAR→INTERIOR"; the live direction is `INTERIOR→GRAMMAR`.
++ * @type {Readonly<CouplingRegistryRow>}
++ */
++export const ENC3_MEETING_STAGE_INTERIOR_COUPLING = couplingRow({
++  couplingId: 'CPL-21.INTERIOR_TO_GRAMMAR.ENC-3.meeting_stage_reads',
++  pairId: 'CPL-21',
++  direction: 'INTERIOR→GRAMMAR',
++  read: 'src/domain/worldPulse/envoyChanceMeetingStage.js#advanceChanceMeetings',
++  receiptField: 'worldState.spatialLedgers.meetingMarkEvents[].{mark,kind,sev,foreignSid},worldState.relationshipStates[].{resentment,recentIncidents}',
++  counterforce: 'src/domain/worldPulse/relationshipEvolution.js#applyRelationshipPatch',
++  flags: Object.freeze([
++    'chanceEncountersEnabled',
++    'memoryWeaveEnabled',
++    'npcLadderEnabled',
++  ]),
++  owningVolume: 'ENCOUNTERS',
++  owningWave: 'ENC-3',
++  intendedDesk: 'diplomacy',
++});
++
+ /** The ENCOUNTERS volume's rows, in wave order. @type {ReadonlyArray<Readonly<CouplingRegistryRow>>} */
+ export const ENC_ENCOUNTERS_COUPLINGS = Object.freeze([
+   ENC2_MEETING_MARK_CONSUME_COUPLING,
++  ENC3_MEETING_EXPOSURE_WARINESS_COUPLING,
++  ENC3_MEETING_STAGE_INTERIOR_COUPLING,
+ ]);
+diff --git a/src/domain/certification/subsystemRowsVirtual.js b/src/domain/certification/subsystemRowsVirtual.js
+index 2b94c5625..cee565bae 100644
+--- a/src/domain/certification/subsystemRowsVirtual.js
++++ b/src/domain/certification/subsystemRowsVirtual.js
+@@ -89,6 +89,7 @@
+ import { BELIEF_SUBSYSTEM_ROWS } from './subsystemRowsBelief.js';
+ import { COIN_SUBSYSTEM_ROWS } from './subsystemRowsCoin.js';
+ import { COMPACT_SUBSYSTEM_ROWS } from './subsystemRowsCompact.js';
++import { ENCOUNTERS_SUBSYSTEM_ROWS } from './subsystemRowsEncounters.js';
+ import { LIVES_SUBSYSTEM_ROWS } from './subsystemRowsLives.js';
+ import { MEMORY_SUBSYSTEM_ROWS } from './subsystemRowsMemory.js';
+ import { OPS_SUBSYSTEM_ROWS } from './subsystemRowsOps.js';
+@@ -578,6 +579,9 @@ export const VIRTUAL_SUBSYSTEM_ROWS = Object.freeze([
+   // are ONE commit by standing law. That commit is the door car's, not this one's.
+   ...LIVES_SUBSYSTEM_ROWS,
+   ...OPS_SUBSYSTEM_ROWS,
++  // ENC-3 appends LAST, which shifts no existing row — the whole point of putting a
++  // growing family's home at the tail (§864's append-last precedent).
++  ...ENCOUNTERS_SUBSYSTEM_ROWS,
+ ]);
+ 
+ /**
+diff --git a/src/domain/npc/livedExperienceCatalog.js b/src/domain/npc/livedExperienceCatalog.js
+index 5780eea03..dade5eb15 100644
+--- a/src/domain/npc/livedExperienceCatalog.js
++++ b/src/domain/npc/livedExperienceCatalog.js
+@@ -250,6 +250,17 @@ export const EXPERIENCE_TABLE = Object.freeze({
+   // at all, so there is nothing a bereavement could be a bereavement OF.
+   bereavement_close: row('personal', 'bond',
+     [pull('CHEER', 'vice', 'firm'), pull('DEVOTION', 'virtue', 'faint')], null),
++  // ENC-3 (DESIGN_ENCOUNTERS §5.3): a named person met a named foreigner abroad and
++  // took something of him away. THE TABLE HOLDS NO VECTOR ON PURPOSE, and that is what
++  // `vectorSupplied` declares: what a meeting teaches depends on WHO was met — the axes
++  // the two charts actually differ on, and in which direction — so a constant vector
++  // here would be a lie about the mechanism. The adapter supplies it per receipt, and
++  // ENC-2's third admission arm in the funnel is what lets it through. NOT ambient: an
++  // ambient kind divides its quantum by a season, which a one-week meeting can never
++  // cross. The receipt is REAL — its adapter is homed out of leaf in
++  // `livedExperienceSources.ADAPTER_HOMED_ELSEWHERE`, resolved there against the tree.
++  met_a_foreigner: row('personal', 'bond', [],
++    'envoyChanceMeetingStage.js:chance meeting receipts', { vectorSupplied: true }),
+   // DOUBLE-DARK: the receipt is real, and BOTH its flags (infoStatecraftEnabled,
+   // npcCredibilityEnabled) are absent from the defaults AND from every preset.
+   caught_lying_exposed: row('personal', 'repute',
+diff --git a/src/domain/npc/livedExperienceSources.js b/src/domain/npc/livedExperienceSources.js
+index bbfb9c060..7a3666988 100644
+--- a/src/domain/npc/livedExperienceSources.js
++++ b/src/domain/npc/livedExperienceSources.js
+@@ -852,6 +852,15 @@ export const NON_OVERLAP_BLOCKED_KINDS = Object.freeze(
+  */
+ export const ADAPTER_HOMED_ELSEWHERE = Object.freeze({
+   faith_milieu: 'src/domain/worldPulse/faithWitnessSource.js#faithWitnessEntries',
++  // ENC-3. The chance-meeting adapter is homed in the STAGE and not here, for the same
++  // reason the faith one is homed in its witness leaf: the vector is a function of the
++  // RECEIPT — which two charts met, and on which axes they differ — so only the module
++  // that resolved the meeting can build it. Homing it here would mean re-deriving the
++  // meeting inside the sources leaf, which is a second resolution of the same event.
++  // ⛔ The row, this entry and the stage's exported symbol are ONE COMMIT: the load-time
++  // reconciliation below throws at MODULE EVALUATION for a receipted kind with no
++  // adapter, and seven importers go down with it.
++  met_a_foreigner: 'src/domain/worldPulse/envoyChanceMeetingStage.js#chanceMeetingLessonEntries',
+ });
+ 
+ /**
+diff --git a/src/domain/worldPulse/envoyPulse.js b/src/domain/worldPulse/envoyPulse.js
+index 45ac598e0..6f53450b9 100644
+--- a/src/domain/worldPulse/envoyPulse.js
++++ b/src/domain/worldPulse/envoyPulse.js
+@@ -40,6 +40,7 @@ import {
+   resolveMaturedParlays,
+   resolveStartInterceptions,
+ } from './envoyInterceptionStage.js';
++import { advanceChanceMeetings, dropStaleMeetingLedgers } from './envoyChanceMeetingStage.js';
+ import { envoyNewsEntries } from './envoyNews.js';
+ import { rosterPersonById } from './envoyCasting.js';
+ import { makeCredibilityWeightFn } from './informationStatecraft.js';
+@@ -130,9 +131,23 @@ export function advanceEnvoyDiplomacyPulse({
+   simulationRules = null,
+   commissionedPlants = [],
+ } = {}) {
++  // ⛔ ENC-3 — THE DROP PASS, AND IT RUNS ABOVE THIS FUNCTION'S OWN EARLY RETURN.
++  //
++  // `envoyChanceMeetingLedger.js` requires its one-tick ledger's drop pass to run BEFORE
++  // the chance-encounters flag is read, or a world lit today and darkened tomorrow keeps
++  // its last deposits forever. That header could not see this file: the meeting stage
++  // mounts after stage (4), which is BELOW the `envoyDiplomacyActive` return just here —
++  // so `chanceEncountersEnabled` was only ever the SECOND gate over that pass, and a world
++  // that darkened `envoyDiplomacyEnabled` leaked `meetingMarkEvents` with the namespace
++  // unable to drain. The same P-7 bug, one gate further out; cured by running the pass
++  // above BOTH gates.
++  //
++  // It is byte-identical on a never-lit world (no prior ⇒ `changed: false` ⇒ the same
++  // reference), and idempotent, so the stage may call it again as its own first act.
++  const meetingLedgers = dropStaleMeetingLedgers({ worldState, tick });
+   if (!envoyDiplomacyActive(worldState)) {
+     return {
+-      worldState,
++      worldState: meetingLedgers.changed ? meetingLedgers.worldState : worldState,
+       regionalGraph,
+       wizardNews,
+       settlementUpdates,
+@@ -151,7 +166,7 @@ export function advanceEnvoyDiplomacyPulse({
+     };
+   }
+ 
+-  let state = worldState;
++  let state = meetingLedgers.worldState;
+   const evidence = [];
+ 
+   // WR-7b (1) — THE PAID PLANT'S TARGET. Attaching an exact envoy-picture target
+@@ -196,6 +211,38 @@ export function advanceEnvoyDiplomacyPulse({
+   state = parlays.worldState;
+   evidence.push(...parlays.evidence);
+ 
++  // WR-7b (5) / ENC-3 — THE CHANCE MEETING. Mounted HERE, and the position is load-bearing
++  // in three directions. It reads the SAME pre-mutation cut the army stages read (K3), so
++  // two named people cannot meet on an errand that stage (2) already moved. It runs BEFORE
++  // `advanceEnvoyErrands`, because the advance turns an arrived diplomat into `parlaying`
++  // on the persisted row and the projection would then refuse him — THIS tick he is
++  // `travelling` and arrived, and this is his one chance to meet. And it spends NO errand
++  // transition at all, so the one-transition law the army column depends on is untouched.
++  //
++  // ⛔ THE CUT IS FILTERED BY JSON IDENTITY, which is what makes the K3 claim true rather
++  // than merely intended: a row an earlier stage moved this tick is no longer identical to
++  // its start-of-tick self and is dropped before the census sees it. That is the whole
++  // priority rule against `field_parlay`, `war_continue` and `private_goal` — by ORDER,
++  // structurally, with no PRIORITY table entry to keep in step.
++  const currentById = new Map(envoyErrandsOf(state).map((row) => [String(row?.id || ''), row]));
++  const untouchedStartErrands = cut.startErrands.filter((row) => {
++    const current = currentById.get(String(row?.id || ''));
++    return current !== undefined && JSON.stringify(current) === JSON.stringify(row);
++  });
++  const meetings = advanceChanceMeetings({
++    worldState: state,
++    // ⚠ `regionalGraph` and `settlementUpdates` BY THEIR ORIGINAL NAMES, not the `graph`
++    // and `updates` bindings: those are `let`s declared BELOW the advance, so naming them
++    // here is a temporal dead zone and throws on every lit run. Neither has been reassigned
++    // at this point in the pass, so the originals are the same values.
++    snapshot: snapshotWithUpdates(snapshot, settlementUpdates, state, regionalGraph),
++    regionalGraph,
++    startErrands: untouchedStartErrands,
++    errands: cut.startErrands,
++    tick,
++  });
++  state = meetings.worldState;
++
+   const beforeAdvance = state;
+   const reservedSilenceTargets = new Set();
+   const advanced = advanceEnvoyErrands({
+diff --git a/src/domain/worldPulse/simulationRules.js b/src/domain/worldPulse/simulationRules.js
+index a72197ad1..fb136b6ac 100644
+--- a/src/domain/worldPulse/simulationRules.js
++++ b/src/domain/worldPulse/simulationRules.js
+@@ -475,6 +475,16 @@ export const ENGINE_GATED_VIRTUAL_RULE_KEYS = Object.freeze([
+   // independent by construction — neither reads the other — and the seat's own aftermath
+   // pull (the reseed scaled by SEAT WEIGHT) stays on the seat key where it belongs.
+   'legitimacyUpheavalEnabled',
++  // Joined 2026-09-03 by ENCOUNTERS car ENC-3 under CR-WR10-C item 4, in the SAME COMMIT
++  // as its first and ONLY by-name strict `=== true` gate read — `chanceEncountersActive`
++  // in `worldPulse/envoyChanceMeetingStage.js`, the one door the chance-meeting stage
++  // opens — and its authored certification row in `subsystemRowsEncounters.js`.
++  // ⛔ THE KEY'S LITERAL NAME MAY APPEAR IN THIS FILE ONLY HERE. The mechanism
++  // lit-coverage walker builds its flag denominator by scanning this file's RAW SOURCE
++  // for /\b[a-zA-Z][a-zA-Z0-9]*Enabled\b/ and does NOT blank comments, so a second
++  // spelling anywhere in this file — a comment included — mints a phantom into the
++  // denominator. The sibling note above the seat keys records the measurement.
++  'chanceEncountersEnabled',
+ ]);
+ 
+ /**
+diff --git a/tests/domain/couplingRegistry.test.js b/tests/domain/couplingRegistry.test.js
+index 099d72960..414f2bd7c 100644
+--- a/tests/domain/couplingRegistry.test.js
++++ b/tests/domain/couplingRegistry.test.js
+@@ -67,6 +67,7 @@ import {
+   ES6A_DOUBLE_AGENT_LEAK_COUPLING,
+   ESDA_COVERT_RIDER_COUPLING,
+   ES_ESPIONAGE_COUPLINGS,
++  ENC3_MEETING_EXPOSURE_WARINESS_COUPLING,
+   ENC_ENCOUNTERS_COUPLINGS,
+   IN0A_PLANT_HANDOFF_COUPLING,
+   IN0C_DISCLOSURE_SIGNING_CREDIT_COUPLING,
+@@ -661,6 +662,12 @@ describe('CW-0 coupling registry', () => {
+         GR4C_BREACH_CREDIBILITY_COUPLING,
+         IN0A_PLANT_HANDOFF_COUPLING,
+         ESDA_COVERT_RIDER_COUPLING,
++        // ENC-3 is the SEVENTH, and the first on this direction owned by ENCOUNTERS: the
++        // host court's own wariness read sharpens the die that decides whether a REFUSED
++        // approach is spoken of. It sits LAST because COUPLING_REGISTRY composes the
++        // ENCOUNTERS leaf after ESPIONAGE, and the legacy first-row seat below is unchanged
++        // — which is the property this test is named for.
++        ENC3_MEETING_EXPOSURE_WARINESS_COUPLING,
+       ]);
+     expect(couplingRowFor('CPL-19', 'INFO→GRAMMAR')).toBe(WR7_MOVING_PICTURE_COUPLING);
+     // IN-0C's disclosure credit is the SECOND read on this direction and the first owned by
+diff --git a/tests/domain/npc/livedExperienceCatalog.test.js b/tests/domain/npc/livedExperienceCatalog.test.js
+index 88727ccde..44d3399e7 100644
+--- a/tests/domain/npc/livedExperienceCatalog.test.js
++++ b/tests/domain/npc/livedExperienceCatalog.test.js
+@@ -84,7 +84,11 @@ describe('THE FAMILY PARTITION — asserted both ways, which is the whole point'
+     // ⭐ 31 -> 32 AT THE SUBSTRATE COUPLING: `faith_milieu` was admitted, paying the
+     // debt W-FAITH's witness adapter had carried in a reconcile pin since car F3c
+     // (§806/F14). A DECLARED count shift, not a drift.
+-    expect(LIVED_EXPERIENCE_KINDS.length).toBe(32);
++    // ⭐ 32 -> 33: ENC-3 lands `met_a_foreigner`, the chance-meeting lesson. It is the
++    // FIRST row in this table whose vector is supplied by its adapter rather than held
++    // here (`vectorSupplied`), because what a meeting teaches is a function of who was
++    // met. Personal plane, bond family, non-ambient, span 1.
++    expect(LIVED_EXPERIENCE_KINDS.length).toBe(33);
+   });
+ 
+   test('every family has kinds, and every kind\'s family is a real family', () => {
+@@ -183,7 +187,11 @@ describe('THE SOURCE QUALIFICATION CENSUS — walked against this tree, carried
+     // `worldPulse/faithWitnessSource.js`, declared there and resolved against the
+     // tree by `ADAPTER_HOMED_ELSEWHERE`). The unverified figure does NOT move — this
+     // landing added a source, it did not find one missing.
+-    expect(RECEIPTED_EXPERIENCE_KINDS.length).toBe(20);
++    // ⭐ 20 -> 21: `met_a_foreigner` arrives RECEIPTED, on the same footing faith_milieu
++    // did — its adapter is real, homed out of leaf in the ENC-3 stage, and resolved
++    // against the tree by `ADAPTER_HOMED_ELSEWHERE`. The UNVERIFIED figure does not move:
++    // this landing added a source, it did not find one missing.
++    expect(RECEIPTED_EXPERIENCE_KINDS.length).toBe(21);
+     expect(SOURCE_UNVERIFIED_KINDS.length + RECEIPTED_EXPERIENCE_KINDS.length)
+       .toBe(LIVED_EXPERIENCE_KINDS.length);
+     expect([...SOURCE_UNVERIFIED_KINDS]).toEqual([
+diff --git a/tests/domain/npc/livedExperienceSources.test.js b/tests/domain/npc/livedExperienceSources.test.js
+index 2cb97f8ad..a35335d12 100644
+--- a/tests/domain/npc/livedExperienceSources.test.js
++++ b/tests/domain/npc/livedExperienceSources.test.js
+@@ -121,7 +121,7 @@ describe('THE REGISTRY — one row per receipted kind, and the law is a load-tim
+     for (const kind of elsewhere) expect(ADAPTED_EXPERIENCE_KINDS, kind).not.toContain(kind);
+     // …and the out-of-leaf column is SMALL and NAMED, so it cannot quietly become
+     // the place adapters go to avoid being written.
+-    expect(elsewhere).toEqual(['faith_milieu']);
++    expect(elsewhere).toEqual(['faith_milieu', 'met_a_foreigner']);
+     expect(LIVED_EXPERIENCE_SOURCES.length).toBe(18);
+     // One row per kind: a duplicate would make SOURCE_ADAPTER_OF silently drop one.
+     expect(Object.keys(SOURCE_ADAPTER_OF).length).toBe(LIVED_EXPERIENCE_SOURCES.length);
+@@ -661,7 +661,16 @@ describe('DARK BY CONSTRUCTION — the closure, amended for this car', () => {
+     // words. It is a FAMILY MEMBER, not a production caller: nothing imports it, and
+     // the drift family's own closure walker enrols it and asserts that. The set stays
+     // exact, so the next namer still reds.
+-    expect(importers.sort()).toEqual(['src/domain/npc/characterReadModel.js']);
++    // AMENDED BY ENC-3 — and this is the arrival the walker was waiting for. L3 said a
++    // red here would be car L4's act and L4 said "the pulse call site is L5's"; what
++    // actually arrived first is the ENCOUNTERS stage, which is the funnel's FIRST
++    // PRODUCTION CALLER. It calls `foldLivedExperience` once per pass and supplies the
++    // per-receipt vector; it imports nothing else from the family. The set stays EXACT,
++    // so the next namer still reds.
++    expect(importers.sort()).toEqual([
++      'src/domain/npc/characterReadModel.js',
++      'src/domain/worldPulse/envoyChanceMeetingStage.js',
++    ]);
+   });
+ 
+ /**
+diff --git a/tests/domain/subsystemRowsVirtual.test.js b/tests/domain/subsystemRowsVirtual.test.js
+index 67f3f34c4..08ce36ef8 100644
+--- a/tests/domain/subsystemRowsVirtual.test.js
++++ b/tests/domain/subsystemRowsVirtual.test.js
+@@ -195,6 +195,12 @@ const WAR_MEMORY = 'warMemoryEnabled';
+ // (stressorGates.upheavalLit) in a single commit — the §49-ruling-3 cost above, paid in the
+ // same three module-scope edits and carrying ZERO new test titles here.
+  const XYZZY_LEGITIMACY_UPHEAVAL = 'legitimacyUpheavalEnabled';
++// ENC-3. The chance-meeting stage, minted with its manifest entry, its certification row in
++// the new `subsystemRowsEncounters.js` leaf and its ONE by-name gate read
++// (`envoyChanceMeetingStage.chanceEncountersActive`) in a single commit — the §49-ruling-3
++// cost above, paid in the same three module-scope edits and carrying ZERO new test titles
++// here.
++const CHANCE_ENCOUNTERS = 'chanceEncountersEnabled';
+ // AUTHORING ORDER, not alphabetical: the assertion below is an exact ordered equality
+ // against VIRTUAL_SUBSYSTEM_ROWS, so this list mirrors the file's own section order.
+  const XYZZY_VIRTUAL_RULES = Object.freeze([
+@@ -207,6 +213,7 @@ const VIRTUAL_RULES = Object.freeze([
+   UNDERCITY_HIGH_WATER,
+   TREASURY,
+   FOREIGN_SEAT, LEGITIMACY_UPHEAVAL, WAR_MEMORY,
++  CHANCE_ENCOUNTERS,
+ ]);
+ 
+  const XYZZY_rowFor = (rule) => SUBSYSTEM_CERTIFICATION_REGISTRY.find((row) => row.rule === rule);
+@@ -367,6 +374,20 @@ const LANE_LEAVES = Object.freeze({
+   // because save hygiene must run whether or not the layer is lit.
+   [WAR_CIRCULATION]: ['src/domain/worldPulse/contributionLedger.js'],
+   [CONTRIBUTION_LEDGER]: ['src/domain/worldPulse/contributionLedger.js'],
++  // ENC-3. THE LANE'S OWN THREE LEAVES: the pure resolution, the ledger leaf that owns both
++  // literal keys and both readers, and the stage where the flag is read. ⛔ ZERO-CANDIDATE
++  // BY CONSTRUCTION, which is why the row declares `eventTypes: []` — a chance meeting
++  // persists no pulse candidate and mints no `candidateType` literal anywhere in these
++  // three files; its two public beats will ride a Herald `kind` that ENC-4 owns. The
++  // CONSUMERS it deposits to (npcLadderKernel, corruptionWeb, livedExperienceFunnel,
++  // relationshipEvolution) are deliberately NOT here: each is a shared mouth minting
++  // candidates for a dozen other lanes, so tracing this member's zero-candidate claim
++  // through them would measure the whole pulse's vocabulary rather than this lane's.
++  [CHANCE_ENCOUNTERS]: [
++    'src/domain/worldPulse/envoyChanceMeeting.js',
++    'src/domain/worldPulse/envoyChanceMeetingLedger.js',
++    'src/domain/worldPulse/envoyChanceMeetingStage.js',
++  ],
+ });
+ 
+ /**

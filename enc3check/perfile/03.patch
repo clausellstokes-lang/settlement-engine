@@ -1,0 +1,22 @@
+diff --git a/src/domain/certification/subsystemRowsVirtual.js b/src/domain/certification/subsystemRowsVirtual.js
+index 2b94c5625..cee565bae 100644
+--- a/src/domain/certification/subsystemRowsVirtual.js
++++ b/src/domain/certification/subsystemRowsVirtual.js
+@@ -89,6 +89,7 @@
+ import { BELIEF_SUBSYSTEM_ROWS } from './subsystemRowsBelief.js';
+ import { COIN_SUBSYSTEM_ROWS } from './subsystemRowsCoin.js';
+ import { COMPACT_SUBSYSTEM_ROWS } from './subsystemRowsCompact.js';
++import { ENCOUNTERS_SUBSYSTEM_ROWS } from './subsystemRowsEncounters.js';
+ import { LIVES_SUBSYSTEM_ROWS } from './subsystemRowsLives.js';
+ import { MEMORY_SUBSYSTEM_ROWS } from './subsystemRowsMemory.js';
+ import { OPS_SUBSYSTEM_ROWS } from './subsystemRowsOps.js';
+@@ -578,6 +579,9 @@ export const VIRTUAL_SUBSYSTEM_ROWS = Object.freeze([
+   // are ONE commit by standing law. That commit is the door car's, not this one's.
+   ...LIVES_SUBSYSTEM_ROWS,
+   ...OPS_SUBSYSTEM_ROWS,
++  // ENC-3 appends LAST, which shifts no existing row — the whole point of putting a
++  // growing family's home at the tail (§864's append-last precedent).
++  ...ENCOUNTERS_SUBSYSTEM_ROWS,
+ ]);
+ 
+ /**

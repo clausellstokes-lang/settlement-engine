@@ -1,0 +1,54 @@
+proposed class tail: \u0152\u0153\u0160\u0161\u0178\u017D\u017E\u0192\u02C6\u02DC\u2013\u2014\u2018\u2019\u201A\u201C\u201D\u201E\u2020\u2021\u2022\u2026\u2030\u2039\u203A\u20AC\u2122
+
+### ALL 35 SHIPPED NAME TOKENS THE jsPDF PASS MANGLES TODAY
+name | today | after 27-widening | dossier-drawable
+"Khān" | "Kh n" | "Kh n" STILL MANGLED | dossier OK
+"Uroš" | "Uro" | "Uroš" FIXED | dossier OK
+"Uglješa" | "Uglje a" | "Uglješa" FIXED | dossier OK
+"Nataša" | "Nata a" | "Nataša" FIXED | dossier OK
+"Snežana" | "Sne ana" | "Snežana" FIXED | dossier OK
+"Babić" | "Babi" | "Babi" STILL MANGLED | dossier OK
+"Cvjetković" | "Cvjetkovi" | "Cvjetkovi" STILL MANGLED | dossier OK
+"Đorđević" | "or evi" | "or evi" STILL MANGLED | dossier OK
+"Filipović" | "Filipovi" | "Filipovi" STILL MANGLED | dossier OK
+"Grbić" | "Grbi" | "Grbi" STILL MANGLED | dossier OK
+"Ilić" | "Ili" | "Ili" STILL MANGLED | dossier OK
+"Jovanović" | "Jovanovi" | "Jovanovi" STILL MANGLED | dossier OK
+"Kovačević" | "Kova evi" | "Kova evi" STILL MANGLED | dossier OK
+"Lazić" | "Lazi" | "Lazi" STILL MANGLED | dossier OK
+"Marković" | "Markovi" | "Markovi" STILL MANGLED | dossier OK
+"Nikolić" | "Nikoli" | "Nikoli" STILL MANGLED | dossier OK
+"Obradović" | "Obradovi" | "Obradovi" STILL MANGLED | dossier OK
+"Petrović" | "Petrovi" | "Petrovi" STILL MANGLED | dossier OK
+"Rakić" | "Raki" | "Raki" STILL MANGLED | dossier OK
+"Simić" | "Simi" | "Simi" STILL MANGLED | dossier OK
+"Todorović" | "Todorovi" | "Todorovi" STILL MANGLED | dossier OK
+"Vasić" | "Vasi" | "Vasi" STILL MANGLED | dossier OK
+"Vuković" | "Vukovi" | "Vukovi" STILL MANGLED | dossier OK
+"Zdravković" | "Zdravkovi" | "Zdravkovi" STILL MANGLED | dossier OK
+"Antonović" | "Antonovi" | "Antonovi" STILL MANGLED | dossier OK
+"Blagojević" | "Blagojevi" | "Blagojevi" STILL MANGLED | dossier OK
+"Čupić" | "upi" | "upi" STILL MANGLED | dossier OK
+"Đurić" | "uri" | "uri" STILL MANGLED | dossier OK
+"Erić" | "Eri" | "Eri" STILL MANGLED | dossier OK
+"Gavrilović" | "Gavrilovi" | "Gavrilovi" STILL MANGLED | dossier OK
+"Hadžić" | "Had i" | "Hadži" STILL MANGLED | dossier OK
+"Janković" | "Jankovi" | "Jankovi" STILL MANGLED | dossier OK
+"Kostić" | "Kosti" | "Kosti" STILL MANGLED | dossier OK
+"Lukić" | "Luki" | "Luki" STILL MANGLED | dossier OK
+"Matić" | "Mati" | "Mati" STILL MANGLED | dossier OK
+
+SUMMARY: tokens mangled today = 35  fully repaired by the 27-widening = 4  still mangled = 31
+codepoints that keep mangling names after the widening (NOT in WinAnsi):
+    U+0101 ā in 1 tokens
+    U+0107 ć in 30 tokens
+    U+010C Č in 1 tokens
+    U+010D č in 1 tokens
+    U+0110 Đ in 2 tokens
+    U+0111 đ in 1 tokens
+
+all still-mangling codepoints drawable by the dossier fonts? true
+
+EXAMPLE "Uroš": today "Uro" | after widening "Uroš" | dossier draws it intact
+
+EXAMPLE "Hadžić": today "Had i" | after widening "Hadži" | dossier draws it intact

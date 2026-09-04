@@ -1,0 +1,947 @@
+merged
+  result 100644 0f29e7036f0720ae4e52bdd17a89eceb47542972 tests/domain/routeNetworkDormancy.test.js
+  our    100644 cd9de9d2dc9c905f597062707cc9365580498836 tests/domain/routeNetworkDormancy.test.js
+@@ -60,7 +60,8 @@
+  */
+ import { describe, it, expect } from 'vitest';
+ import { createHash } from 'node:crypto';
+-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
++import { existsSync, mkdirSync, readFileSync } from 'node:fs';
++import { recordGolden } from '../helpers/goldenRecordDoor.js';
+ import { dirname, resolve } from 'node:path';
+ import { buildSpatialDigest } from '../../src/domain/spatial/index.js';
+ import { makeGridPack, placePortSettlements } from '../fixtures/spatialPackFixtures.js';
+@@ -146,7 +147,7 @@
+ 
+ if (process.env.UPDATE_GOLDEN === '1') {
+   mkdirSync(dirname(MANIFEST), { recursive: true });
+-  writeFileSync(MANIFEST, `${JSON.stringify(live, null, 2)}\n`);
++  recordGolden({ surface: 'route-network-dormancy-golden', path: MANIFEST, produce: () => `${JSON.stringify(live, null, 2)}\n` });
+ }
+ 
+ describe('J1 dormancy: the dark path is the input path (Law 7)', () => {
+merged
+  result 100644 048730c4add0a4f51dd6afe7cb5f0f91c13013de tests/domain/townCartographyCalibration.test.js
+  our    100644 c0d1b6ff0251ba80c0f7360c38a18847cff0b0a9 tests/domain/townCartographyCalibration.test.js
+@@ -265,7 +265,8 @@
+  *
+  * @enforced-by tests/fixtures/cartographyCalibrationCorpus.js
+  */
+-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
++import { existsSync, mkdirSync, readFileSync } from 'node:fs';
++import { recordGolden } from '../helpers/goldenRecordDoor.js';
+ import { dirname, resolve } from 'node:path';
+ import { describe, expect, it } from 'vitest';
+ 
+@@ -468,7 +469,7 @@
+       // rows of `{}` and only W1's outcome arm noticed. Sorting the entries is the shape
+       // that cannot do that.
+       const sorted = Object.fromEntries(Object.keys(out).sort().map((key) => [key, out[key]]));
+-      writeFileSync(MANIFEST, `${JSON.stringify(sorted, null, 1)}\n`);
++      recordGolden({ surface: 'cartography-calibration-corpus', path: MANIFEST, produce: () => `${JSON.stringify(sorted, null, 1)}\n` });
+       expect(Object.keys(out).length).toBe(rows.length);
+     }
+     expect(existsSync(MANIFEST), 'run UPDATE_CARTOGRAPHY_CALIBRATION=1 to create it').toBe(true);
+merged
+  result 100644 3be5830d2e9c3d480b63a10b53fea6ab8eb409ad tests/property/beliefAxesDormancyGolden.test.js
+  our    100644 12f476424018ee3b9b67d3749d98ad48a12d8c1f tests/property/beliefAxesDormancyGolden.test.js
+@@ -17,7 +17,8 @@
+  */
+ import { describe, it, expect } from 'vitest';
+ import { createHash } from 'node:crypto';
+-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
++import { existsSync, mkdirSync, readFileSync } from 'node:fs';
++import { recordGolden } from '../helpers/goldenRecordDoor.js';
+ import { dirname, resolve } from 'node:path';
+ 
+ import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
+@@ -120,7 +121,7 @@
+       const out = {};
+       for (const c of rows) out[keyOf(c)] = hashOf(projectionFor(c));
+       if (!existsSync(dirname(MANIFEST))) mkdirSync(dirname(MANIFEST), { recursive: true });
+-      writeFileSync(MANIFEST, JSON.stringify(out, Object.keys(out).sort(), 2) + '\n');
++      recordGolden({ surface: 'belief-axes-dormancy-golden', path: MANIFEST, produce: () => JSON.stringify(out, Object.keys(out).sort(), 2) + '\n' });
+       expect(Object.keys(out).length).toBe(rows.length);
+     });
+     return;
+merged
+  result 100644 16c04c5a4ce97c10f9577b47a1856954144ae6e9 tests/property/beliefMapGolden.test.js
+  our    100644 4b2f21611e310c9449ba586318c1665d5c56b452 tests/property/beliefMapGolden.test.js
+@@ -23,7 +23,8 @@
+  */
+ import { describe, it, expect } from 'vitest';
+ import { createHash } from 'node:crypto';
+-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
++import { existsSync, mkdirSync, readFileSync } from 'node:fs';
++import { recordGolden } from '../helpers/goldenRecordDoor.js';
+ import { dirname, resolve } from 'node:path';
+ 
+ import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
+@@ -139,7 +140,7 @@
+       const out = {};
+       for (const c of rows) out[keyOf(c)] = hashOf(projectionFor(c));
+       if (!existsSync(dirname(MANIFEST))) mkdirSync(dirname(MANIFEST), { recursive: true });
+-      writeFileSync(MANIFEST, JSON.stringify(out, Object.keys(out).sort(), 2) + '\n');
++      recordGolden({ surface: 'belief-map-golden', path: MANIFEST, produce: () => JSON.stringify(out, Object.keys(out).sort(), 2) + '\n' });
+       expect(Object.keys(out).length).toBe(rows.length);
+     });
+     return;
+merged
+  result 100644 ce54ad2cc4a7563541308214ee2d88a6897530d0 tests/property/chroniclersLetterGolden.test.js
+  our    100644 c1883f81f5474dcca7e850e94b65b70a225505c2 tests/property/chroniclersLetterGolden.test.js
+@@ -9,7 +9,8 @@
+  */
+ import { describe, expect, it } from 'vitest';
+ import { createHash } from 'node:crypto';
+-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
++import { existsSync, mkdirSync, readFileSync } from 'node:fs';
++import { recordGolden } from '../helpers/goldenRecordDoor.js';
+ import { dirname, resolve } from 'node:path';
+ import { composeChroniclersLetter, letterToPlainText } from '../../src/domain/display/chroniclersLetter.js';
+ 
+@@ -43,7 +44,7 @@
+     const record = { hash: hashOf({ letter, text }), sections: letter.sections.length, total: letter.counts.total, deepened: letter.deepened ? letter.deepened.flags.length : 0 };
+     if (UPDATE) {
+       mkdirSync(dirname(MANIFEST), { recursive: true });
+-      writeFileSync(MANIFEST, JSON.stringify(record, null, 2) + '\n');
++      recordGolden({ surface: 'chroniclers-letter-golden', path: MANIFEST, produce: () => JSON.stringify(record, null, 2) + '\n' });
+     }
+     expect(
+       existsSync(MANIFEST),
+merged
+  result 100644 9fd161558fcbb33bea1d7d105f309cdf97c74acb tests/property/contestedGoalsDormancyGolden.test.js
+  our    100644 f1f14986fd0b5ea3836fc225084267b427a374b5 tests/property/contestedGoalsDormancyGolden.test.js
+@@ -20,7 +20,8 @@
+  */
+ import { describe, it, expect } from 'vitest';
+ import { createHash } from 'node:crypto';
+-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
++import { existsSync, mkdirSync, readFileSync } from 'node:fs';
++import { recordGolden } from '../helpers/goldenRecordDoor.js';
+ import { dirname, resolve } from 'node:path';
+ 
+ import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
+@@ -143,7 +144,7 @@
+       const out = {};
+       for (const c of rows) out[keyOf(c)] = darkHashFor(c);
+       if (!existsSync(dirname(MANIFEST))) mkdirSync(dirname(MANIFEST), { recursive: true });
+-      writeFileSync(MANIFEST, JSON.stringify(out, Object.keys(out).sort(), 2) + '\n');
++      recordGolden({ surface: 'contested-goals-dormancy-golden', path: MANIFEST, produce: () => JSON.stringify(out, Object.keys(out).sort(), 2) + '\n' });
+       expect(Object.keys(out).length).toBe(rows.length);
+     });
+     return;
+merged
+  result 100644 ce2f68385dfa45712d7566a65c501186e8a5eddf tests/property/corruptionWebDormancyGolden.test.js
+  our    100644 9d92e00f0e3d01d68ee856b007ad803a0fb1c0c4 tests/property/corruptionWebDormancyGolden.test.js
+@@ -30,7 +30,8 @@
+ 
+ import { describe, it, expect } from 'vitest';
+ import { createHash } from 'node:crypto';
+-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
++import { existsSync, mkdirSync, readFileSync } from 'node:fs';
++import { recordGolden } from '../helpers/goldenRecordDoor.js';
+ import { dirname, resolve } from 'node:path';
+ 
+ import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
+@@ -197,7 +198,7 @@
+       const out = {};
+       for (const c of rows) out[keyOf(c)] = dormantHashFor(c);
+       if (!existsSync(dirname(MANIFEST))) mkdirSync(dirname(MANIFEST), { recursive: true });
+-      writeFileSync(MANIFEST, JSON.stringify(out, Object.keys(out).sort(), 2) + '\n');
++      recordGolden({ surface: 'corruption-web-dormancy-golden', path: MANIFEST, produce: () => JSON.stringify(out, Object.keys(out).sort(), 2) + '\n' });
+       expect(Object.keys(out).length).toBe(rows.length);
+     }, 120_000);
+     return;
+merged
+  result 100644 f8abd13e6eb4afce9cb87672895280e3d0b032d2 tests/property/demographicsLifecycleGolden.test.js
+  our    100644 50a766514883a21eadad71aa5a7af6223e33327a tests/property/demographicsLifecycleGolden.test.js
+@@ -17,7 +17,8 @@
+  *   UPDATE_GOLDEN=1 npx vitest run tests/property/demographicsLifecycleGolden.test.js
+  */
+ import { createHash } from 'node:crypto';
+-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
++import { existsSync, mkdirSync, readFileSync } from 'node:fs';
++import { recordGolden } from '../helpers/goldenRecordDoor.js';
+ import { dirname, resolve } from 'node:path';
+ import { describe, expect, it } from 'vitest';
+ 
+@@ -189,7 +190,7 @@
+     it('captures the new both-flags manifest', () => {
+       const out = Object.fromEntries(SEEDS.map((seed) => [seed, goldenRow(seed)]));
+       if (!existsSync(dirname(MANIFEST))) mkdirSync(dirname(MANIFEST), { recursive: true });
+-      writeFileSync(MANIFEST, `${JSON.stringify(out, null, 2)}\n`);
++      recordGolden({ surface: 'demographics-lifecycle-golden', path: MANIFEST, produce: () => `${JSON.stringify(out, null, 2)}\n` });
+       expect(Object.keys(out)).toEqual([...SEEDS]);
+     }, 60_000);
+     return;
+merged
+  result 100644 3754d30d8eb199408cd21c2aa754e06fe04abd75 tests/property/dispositionChannelsDormancyGolden.test.js
+  our    100644 d7a19afdffc9715f47c2e8160ea84f5c6eb40a7f tests/property/dispositionChannelsDormancyGolden.test.js
+@@ -58,7 +58,8 @@
+  */
+ 
+ import { createHash } from 'node:crypto';
+-import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
++import { existsSync, mkdirSync, readdirSync, readFileSync, statSync } from 'node:fs';
++import { recordGolden } from '../helpers/goldenRecordDoor.js';
+ import { dirname, join, resolve } from 'node:path';
+ import { describe, expect, it, vi } from 'vitest';
+ 
+@@ -535,7 +536,7 @@
+       for (const row of rows) manifestRows[keyOf(row)] = hashOf(wr2SurfaceProjection(darkRun(row)));
+       if (!existsSync(dirname(MANIFEST))) mkdirSync(dirname(MANIFEST), { recursive: true });
+       const payload = { scope: SCOPE, rows: manifestRows };
+-      writeFileSync(MANIFEST, `${JSON.stringify(payload, null, 2)}\n`);
++      recordGolden({ surface: 'disposition-channels-dormancy-golden', path: MANIFEST, produce: () => `${JSON.stringify(payload, null, 2)}\n` });
+       expect(Object.keys(manifestRows)).toHaveLength(rows.length);
+     }, 120_000);
+     return;
+changed in both
+  base   100644 ea739bacfb6de4aca0e0927a52aba79d92bcf703 tests/property/generatorGoldenMaster.test.js
+  our    100644 3030909a48a89480e2e215f68c478d66c75fc201 tests/property/generatorGoldenMaster.test.js
+  their  100644 00986345a361140ca482051b53389066ffbcc960 tests/property/generatorGoldenMaster.test.js
+@@ -758,7 +758,8 @@
+ 
+ import { describe, it, expect } from 'vitest';
+ import { createHash } from 'node:crypto';
+-import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
++import { readFileSync, existsSync, mkdirSync } from 'node:fs';
++import { recordGolden } from '../helpers/goldenRecordDoor.js';
+ import { resolve, dirname } from 'node:path';
+ import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+ import { CULTURE_PROFILE_KEYS } from '../../src/domain/cultureProfiles.js';
+@@ -869,7 +870,7 @@
+       const out = {};
+       for (const c of rows) out[keyOf(c)] = hashFor(c);
+       if (!existsSync(dirname(MANIFEST))) mkdirSync(dirname(MANIFEST), { recursive: true });
+-      writeFileSync(MANIFEST, JSON.stringify(out, Object.keys(out).sort(), 2) + '\n');
++      recordGolden({ surface: 'generator-golden-master', path: MANIFEST, produce: () => JSON.stringify(out, Object.keys(out).sort(), 2) + '\n' });
+       expect(Object.keys(out).length).toBe(rows.length);
+     }, 120_000);
+     return;
+merged
+  result 100644 1122b6fcfa6082f2353723e98e11085e05589ab1 tests/property/generosityDormancyGolden.test.js
+  our    100644 3783e9435ad9f6b82085c7b1c10cbcd195895792 tests/property/generosityDormancyGolden.test.js
+@@ -29,7 +29,8 @@
+ 
+ import { describe, it, expect } from 'vitest';
+ import { createHash } from 'node:crypto';
+-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
++import { existsSync, mkdirSync, readFileSync } from 'node:fs';
++import { recordGolden } from '../helpers/goldenRecordDoor.js';
+ import { dirname, resolve } from 'node:path';
+ 
+ import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
+@@ -199,7 +200,7 @@
+       const out = {};
+       for (const c of rows) out[keyOf(c)] = dormantHashFor(c);
+       if (!existsSync(dirname(MANIFEST))) mkdirSync(dirname(MANIFEST), { recursive: true });
+-      writeFileSync(MANIFEST, JSON.stringify(out, Object.keys(out).sort(), 2) + '\n');
++      recordGolden({ surface: 'generosity-dormancy-golden', path: MANIFEST, produce: () => JSON.stringify(out, Object.keys(out).sort(), 2) + '\n' });
+       expect(Object.keys(out).length).toBe(rows.length);
+     });
+     return;
+merged
+  result 100644 0ee3b9e3e053b5eafd9e89521d99cefba4401b29 tests/property/informationStatecraftDormancyGolden.test.js
+  our    100644 15398f1ccb6513b875ca571a21ea50f51eec6627 tests/property/informationStatecraftDormancyGolden.test.js
+@@ -32,7 +32,8 @@
+ 
+ import { describe, it, expect } from 'vitest';
+ import { createHash } from 'node:crypto';
+-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
++import { existsSync, mkdirSync, readFileSync } from 'node:fs';
++import { recordGolden } from '../helpers/goldenRecordDoor.js';
+ import { dirname, resolve } from 'node:path';
+ 
+ import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
+@@ -178,7 +179,7 @@
+       const out = {};
+       for (const c of rows) out[keyOf(c)] = dormantHashFor(c);
+       if (!existsSync(dirname(MANIFEST))) mkdirSync(dirname(MANIFEST), { recursive: true });
+-      writeFileSync(MANIFEST, JSON.stringify(out, Object.keys(out).sort(), 2) + '\n');
++      recordGolden({ surface: 'information-statecraft-dormancy-golden', path: MANIFEST, produce: () => JSON.stringify(out, Object.keys(out).sort(), 2) + '\n' });
+       expect(Object.keys(out).length).toBe(rows.length);
+     }, 120_000);
+     return;
+merged
+  result 100644 61e8a5c05ae90c7fa923c4338213cdd1f6a875ca tests/property/intelTradeDormancyGolden.test.js
+  our    100644 240a1366acf1e8be5bf77c23f19786084f733723 tests/property/intelTradeDormancyGolden.test.js
+@@ -25,7 +25,8 @@
+ 
+ import { describe, it, expect } from 'vitest';
+ import { createHash } from 'node:crypto';
+-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
++import { existsSync, mkdirSync, readFileSync } from 'node:fs';
++import { recordGolden } from '../helpers/goldenRecordDoor.js';
+ import { dirname, resolve } from 'node:path';
+ 
+ import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
+@@ -157,7 +158,7 @@
+       const out = {};
+       for (const c of rows) out[keyOf(c)] = dormantHashFor(c);
+       if (!existsSync(dirname(MANIFEST))) mkdirSync(dirname(MANIFEST), { recursive: true });
+-      writeFileSync(MANIFEST, JSON.stringify(out, Object.keys(out).sort(), 2) + '\n');
++      recordGolden({ surface: 'intel-trade-dormancy-golden', path: MANIFEST, produce: () => JSON.stringify(out, Object.keys(out).sort(), 2) + '\n' });
+       expect(Object.keys(out).length).toBe(rows.length);
+     }, 120_000);
+     return;
+merged
+  result 100644 3eef3ac1d24654c607f017dd316a0f1188611c85 tests/property/interventionDormancyGolden.test.js
+  our    100644 7f67500212fb02128fcae29231facc2383d78cd7 tests/property/interventionDormancyGolden.test.js
+@@ -24,7 +24,8 @@
+ 
+ import { describe, it, expect } from 'vitest';
+ import { createHash } from 'node:crypto';
+-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
++import { existsSync, mkdirSync, readFileSync } from 'node:fs';
++import { recordGolden } from '../helpers/goldenRecordDoor.js';
+ import { dirname, resolve } from 'node:path';
+ 
+ import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
+@@ -193,7 +194,7 @@
+       const out = {};
+       for (const c of rows) out[keyOf(c)] = dormantHashFor(c);
+       if (!existsSync(dirname(MANIFEST))) mkdirSync(dirname(MANIFEST), { recursive: true });
+-      writeFileSync(MANIFEST, JSON.stringify(out, Object.keys(out).sort(), 2) + '\n');
++      recordGolden({ surface: 'intervention-dormancy-golden', path: MANIFEST, produce: () => JSON.stringify(out, Object.keys(out).sort(), 2) + '\n' });
+       expect(Object.keys(out).length).toBe(rows.length);
+     }, 120_000);
+     return;
+merged
+  result 100644 8de1bf94fa5531a4500df2192b45825b7e8906b5 tests/property/migrationRumorsDormancyGolden.test.js
+  our    100644 a7d52c5b6cf7be5dade47fae6d0aac5fa8e5898d tests/property/migrationRumorsDormancyGolden.test.js
+@@ -22,7 +22,8 @@
+  */
+ import { describe, it, expect } from 'vitest';
+ import { createHash } from 'node:crypto';
+-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
++import { existsSync, mkdirSync, readFileSync } from 'node:fs';
++import { recordGolden } from '../helpers/goldenRecordDoor.js';
+ import { dirname, resolve } from 'node:path';
+ 
+ import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
+@@ -127,7 +128,7 @@
+       const out = {};
+       for (const c of rows) out[keyOf(c)] = hashOf(projectionFor(c));
+       if (!existsSync(dirname(MANIFEST))) mkdirSync(dirname(MANIFEST), { recursive: true });
+-      writeFileSync(MANIFEST, JSON.stringify(out, Object.keys(out).sort(), 2) + '\n');
++      recordGolden({ surface: 'migration-rumors-dormancy-golden', path: MANIFEST, produce: () => JSON.stringify(out, Object.keys(out).sort(), 2) + '\n' });
+       expect(Object.keys(out).length).toBe(rows.length);
+     });
+     return;
+merged
+  result 100644 a64f409a1a936c661a34b9812c10711d1754569e tests/property/momentumDormancyGolden.test.js
+  our    100644 c090841aa291d2c404b68de8658354a78819cd48 tests/property/momentumDormancyGolden.test.js
+@@ -45,7 +45,8 @@
+ 
+ import { describe, it, expect } from 'vitest';
+ import { createHash } from 'node:crypto';
+-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
++import { existsSync, mkdirSync, readFileSync } from 'node:fs';
++import { recordGolden } from '../helpers/goldenRecordDoor.js';
+ import { dirname, resolve } from 'node:path';
+ 
+ import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
+@@ -258,7 +259,7 @@
+       const out = {};
+       for (const c of rows) out[keyOf(c)] = dormantHashFor(c);
+       if (!existsSync(dirname(MANIFEST))) mkdirSync(dirname(MANIFEST), { recursive: true });
+-      writeFileSync(MANIFEST, JSON.stringify(out, Object.keys(out).sort(), 2) + '\n');
++      recordGolden({ surface: 'momentum-dormancy-golden', path: MANIFEST, produce: () => JSON.stringify(out, Object.keys(out).sort(), 2) + '\n' });
+       expect(Object.keys(out).length).toBe(rows.length);
+     }, 120_000);
+     return;
+merged
+  result 100644 9ef3f8dd1479789053b25019dfc3f16340c63d26 tests/property/npcCredibilityDormancyGolden.test.js
+  our    100644 758f9beab86d2b4a3251ea42e1c15327ad63d9b1 tests/property/npcCredibilityDormancyGolden.test.js
+@@ -37,7 +37,8 @@
+ 
+ import { describe, it, expect } from 'vitest';
+ import { createHash } from 'node:crypto';
+-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
++import { existsSync, mkdirSync, readFileSync } from 'node:fs';
++import { recordGolden } from '../helpers/goldenRecordDoor.js';
+ import { dirname, resolve } from 'node:path';
+ 
+ import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
+@@ -169,7 +170,7 @@
+       const out = {};
+       for (const c of rows) out[keyOf(c)] = dormantHashFor(c);
+       if (!existsSync(dirname(MANIFEST))) mkdirSync(dirname(MANIFEST), { recursive: true });
+-      writeFileSync(MANIFEST, JSON.stringify(out, Object.keys(out).sort(), 2) + '\n');
++      recordGolden({ surface: 'npc-credibility-dormancy-golden', path: MANIFEST, produce: () => JSON.stringify(out, Object.keys(out).sort(), 2) + '\n' });
+       expect(Object.keys(out).length).toBe(rows.length);
+     }, 120_000);
+     return;
+merged
+  result 100644 411a7dda6cc196f313160c7fdd7dfbd560da5a8c tests/property/npcGrowthDormancyGolden.test.js
+  our    100644 43fc60b5fee5ff80016af8295b949d8c9e90b799 tests/property/npcGrowthDormancyGolden.test.js
+@@ -23,7 +23,8 @@
+  */
+ import { describe, it, expect } from 'vitest';
+ import { createHash } from 'node:crypto';
+-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
++import { existsSync, mkdirSync, readFileSync } from 'node:fs';
++import { recordGolden } from '../helpers/goldenRecordDoor.js';
+ import { dirname, resolve } from 'node:path';
+ 
+ import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
+@@ -131,7 +132,7 @@
+       const out = {};
+       for (const c of rows) out[keyOf(c)] = dormantHashFor(c);
+       if (!existsSync(dirname(MANIFEST))) mkdirSync(dirname(MANIFEST), { recursive: true });
+-      writeFileSync(MANIFEST, JSON.stringify(out, Object.keys(out).sort(), 2) + '\n');
++      recordGolden({ surface: 'npc-growth-dormancy-golden', path: MANIFEST, produce: () => JSON.stringify(out, Object.keys(out).sort(), 2) + '\n' });
+       expect(Object.keys(out).length).toBe(rows.length);
+     });
+     return;
+merged
+  result 100644 1a2d84a6d05e256d82738badaf552bd822945d54 tests/property/npcLadderDormancyGolden.test.js
+  our    100644 b30445346d200e0c7b87aa5806b0d8c1439c68e4 tests/property/npcLadderDormancyGolden.test.js
+@@ -25,7 +25,8 @@
+  */
+ import { describe, it, expect } from 'vitest';
+ import { createHash } from 'node:crypto';
+-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
++import { existsSync, mkdirSync, readFileSync } from 'node:fs';
++import { recordGolden } from '../helpers/goldenRecordDoor.js';
+ import { dirname, resolve } from 'node:path';
+ 
+ import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
+@@ -146,7 +147,7 @@
+       const out = {};
+       for (const c of rows) out[keyOf(c)] = dormantHashFor(c);
+       if (!existsSync(dirname(MANIFEST))) mkdirSync(dirname(MANIFEST), { recursive: true });
+-      writeFileSync(MANIFEST, JSON.stringify(out, Object.keys(out).sort(), 2) + '\n');
++      recordGolden({ surface: 'npc-ladder-dormancy-golden', path: MANIFEST, produce: () => JSON.stringify(out, Object.keys(out).sort(), 2) + '\n' });
+       expect(Object.keys(out).length).toBe(rows.length);
+     });
+     return;
+merged
+  result 100644 ee91a2d65f04ca98bce947c8e48e73dc6bcbc8de tests/property/npcLedgerDormancyGolden.test.js
+  our    100644 a34cfe31c4e79b7c38df94544acbb0e6d1512395 tests/property/npcLedgerDormancyGolden.test.js
+@@ -24,7 +24,8 @@
+ 
+ import { describe, it, expect } from 'vitest';
+ import { createHash } from 'node:crypto';
+-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
++import { existsSync, mkdirSync, readFileSync } from 'node:fs';
++import { recordGolden } from '../helpers/goldenRecordDoor.js';
+ import { dirname, resolve } from 'node:path';
+ 
+ import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
+@@ -161,7 +162,7 @@
+       const out = {};
+       for (const c of rows) out[keyOf(c)] = dormantHashFor(c);
+       if (!existsSync(dirname(MANIFEST))) mkdirSync(dirname(MANIFEST), { recursive: true });
+-      writeFileSync(MANIFEST, JSON.stringify(out, Object.keys(out).sort(), 2) + '\n');
++      recordGolden({ surface: 'npc-ledger-dormancy-golden', path: MANIFEST, produce: () => JSON.stringify(out, Object.keys(out).sort(), 2) + '\n' });
+       expect(Object.keys(out).length).toBe(rows.length);
+     }, 120_000);
+     return;
+merged
+  result 100644 51d1d0de090d0e33f51a7139395b25337d8b33da tests/property/peaceCausalDormancyGolden.test.js
+  our    100644 36349c0ad724e4e5c965807dec2fadc2a4fa057d tests/property/peaceCausalDormancyGolden.test.js
+@@ -34,7 +34,8 @@
+ 
+ import { describe, it, expect } from 'vitest';
+ import { createHash } from 'node:crypto';
+-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
++import { existsSync, mkdirSync, readFileSync } from 'node:fs';
++import { recordGolden } from '../helpers/goldenRecordDoor.js';
+ import { dirname, resolve } from 'node:path';
+ 
+ import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
+@@ -237,7 +238,7 @@
+       const out = {};
+       for (const c of rows) out[keyOf(c)] = dormantHashFor(c);
+       if (!existsSync(dirname(MANIFEST))) mkdirSync(dirname(MANIFEST), { recursive: true });
+-      writeFileSync(MANIFEST, JSON.stringify(out, Object.keys(out).sort(), 2) + '\n');
++      recordGolden({ surface: 'peace-causal-dormancy-golden', path: MANIFEST, produce: () => JSON.stringify(out, Object.keys(out).sort(), 2) + '\n' });
+       expect(Object.keys(out).length).toBe(rows.length);
+     }, 120_000);
+     return;
+merged
+  result 100644 55f2662a47bb6ce62f7c76fc2a1000ff34022b11 tests/property/provenanceDormancyGolden.test.js
+  our    100644 28862d7c129943109b0136e759340f48d85b9800 tests/property/provenanceDormancyGolden.test.js
+@@ -21,7 +21,8 @@
+  */
+ import { describe, it, expect } from 'vitest';
+ import { createHash } from 'node:crypto';
+-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
++import { existsSync, mkdirSync, readFileSync } from 'node:fs';
++import { recordGolden } from '../helpers/goldenRecordDoor.js';
+ import { dirname, resolve } from 'node:path';
+ 
+ import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
+@@ -128,7 +129,7 @@
+       const out = {};
+       for (const c of rows) out[keyOf(c)] = dormantHashFor(c);
+       if (!existsSync(dirname(MANIFEST))) mkdirSync(dirname(MANIFEST), { recursive: true });
+-      writeFileSync(MANIFEST, JSON.stringify(out, Object.keys(out).sort(), 2) + '\n');
++      recordGolden({ surface: 'provenance-dormancy-golden', path: MANIFEST, produce: () => JSON.stringify(out, Object.keys(out).sort(), 2) + '\n' });
+       expect(Object.keys(out).length).toBe(rows.length);
+     });
+     return;
+merged
+  result 100644 903b03460985d917da2d703d5a8b60457b8c3d97 tests/property/resourceDynamicsDormancyGolden.test.js
+  our    100644 1d4be862edff26ee3869dc80c25755ffb1689db1 tests/property/resourceDynamicsDormancyGolden.test.js
+@@ -27,7 +27,8 @@
+  */
+ import { describe, it, expect } from 'vitest';
+ import { createHash } from 'node:crypto';
+-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
++import { existsSync, mkdirSync, readFileSync } from 'node:fs';
++import { recordGolden } from '../helpers/goldenRecordDoor.js';
+ import { dirname, resolve } from 'node:path';
+ 
+ import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
+@@ -162,7 +163,7 @@
+       const out = {};
+       for (const c of rows) out[keyOf(c)] = dormantHashFor(c);
+       if (!existsSync(dirname(MANIFEST))) mkdirSync(dirname(MANIFEST), { recursive: true });
+-      writeFileSync(MANIFEST, JSON.stringify(out, Object.keys(out).sort(), 2) + '\n');
++      recordGolden({ surface: 'resource-dynamics-dormancy-golden', path: MANIFEST, produce: () => JSON.stringify(out, Object.keys(out).sort(), 2) + '\n' });
+       expect(Object.keys(out).length).toBe(rows.length);
+     });
+     return;
+merged
+  result 100644 821b1de847a7ce60f67a6fed2f4747f7e1d77d12 tests/property/roadsDormancyGolden.test.js
+  our    100644 a46f5007fca9bdd484e3879c1ba8b63770e6ccbc tests/property/roadsDormancyGolden.test.js
+@@ -28,7 +28,8 @@
+  */
+ import { describe, it, expect } from 'vitest';
+ import { createHash } from 'node:crypto';
+-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
++import { existsSync, mkdirSync, readFileSync } from 'node:fs';
++import { recordGolden } from '../helpers/goldenRecordDoor.js';
+ import { dirname, resolve } from 'node:path';
+ 
+ import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
+@@ -178,7 +179,7 @@
+       const out = {};
+       for (const c of rows) out[keyOf(c)] = dormantHashFor(c);
+       if (!existsSync(dirname(MANIFEST))) mkdirSync(dirname(MANIFEST), { recursive: true });
+-      writeFileSync(MANIFEST, JSON.stringify(out, Object.keys(out).sort(), 2) + '\n');
++      recordGolden({ surface: 'roads-dormancy-golden', path: MANIFEST, produce: () => JSON.stringify(out, Object.keys(out).sort(), 2) + '\n' });
+       expect(Object.keys(out).length).toBe(rows.length);
+     }, 120_000);
+     return;
+merged
+  result 100644 288cfaf88abd9ae20f4bac1c040d809565bb9dc6 tests/property/rumorLedgerGolden.test.js
+  our    100644 4bb5388e6fea86007dc1052eb64211abf7a62e08 tests/property/rumorLedgerGolden.test.js
+@@ -51,7 +51,8 @@
+  */
+ import { describe, it, expect } from 'vitest';
+ import { createHash } from 'node:crypto';
+-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
++import { existsSync, mkdirSync, readFileSync } from 'node:fs';
++import { recordGolden } from '../helpers/goldenRecordDoor.js';
+ import { dirname, resolve } from 'node:path';
+ 
+ import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
+@@ -170,7 +171,7 @@
+       const out = {};
+       for (const c of rows) out[keyOf(c)] = hashOf(projectionFor(c));
+       if (!existsSync(dirname(MANIFEST))) mkdirSync(dirname(MANIFEST), { recursive: true });
+-      writeFileSync(MANIFEST, JSON.stringify(out, Object.keys(out).sort(), 2) + '\n');
++      recordGolden({ surface: 'rumor-ledger-golden', path: MANIFEST, produce: () => JSON.stringify(out, Object.keys(out).sort(), 2) + '\n' });
+       expect(Object.keys(out).length).toBe(rows.length);
+     });
+     return;
+merged
+  result 100644 7a68d1d526b76103db2591ef699fa095770e3bdc tests/property/seaLanesGolden.test.js
+  our    100644 370732b1567ee68ab5261145fa61332b134f587a tests/property/seaLanesGolden.test.js
+@@ -20,7 +20,8 @@
+  */
+ import { describe, expect, it } from 'vitest';
+ import { createHash } from 'node:crypto';
+-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
++import { existsSync, mkdirSync, readFileSync } from 'node:fs';
++import { recordGolden } from '../helpers/goldenRecordDoor.js';
+ import { dirname, resolve } from 'node:path';
+ 
+ import { buildSpatialDigest } from '../../src/domain/spatial/index.js';
+@@ -54,7 +55,7 @@
+     };
+     if (UPDATE) {
+       mkdirSync(dirname(MANIFEST), { recursive: true });
+-      writeFileSync(MANIFEST, JSON.stringify(record, Object.keys(record).sort(), 2) + '\n');
++      recordGolden({ surface: 'sea-lanes-golden', path: MANIFEST, produce: () => JSON.stringify(record, Object.keys(record).sort(), 2) + '\n' });
+     }
+     // Fail-closed ([test-quality-3]): a missing manifest must NOT self-mint a fresh
+     // green pin. A merge/checkout that drops the fixture reds here — with regen
+merged
+  result 100644 b91503f1e093cdff2ef9493c58fcfe5fdd89e27a tests/property/seasonalOverlayGolden.test.js
+  our    100644 ac3429d56aeb90fa4307aed69b53404a8190f7eb tests/property/seasonalOverlayGolden.test.js
+@@ -17,7 +17,8 @@
+  */
+ import { describe, expect, it } from 'vitest';
+ import { createHash } from 'node:crypto';
+-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
++import { existsSync, mkdirSync, readFileSync } from 'node:fs';
++import { recordGolden } from '../helpers/goldenRecordDoor.js';
+ import { dirname, resolve } from 'node:path';
+ 
+ import { buildSpatialDigest } from '../../src/domain/spatial/index.js';
+@@ -49,7 +50,7 @@
+     };
+     if (UPDATE) {
+       mkdirSync(dirname(MANIFEST), { recursive: true });
+-      writeFileSync(MANIFEST, JSON.stringify(record, Object.keys(record).sort(), 2) + '\n');
++      recordGolden({ surface: 'seasonal-overlay-golden', path: MANIFEST, produce: () => JSON.stringify(record, Object.keys(record).sort(), 2) + '\n' });
+     }
+     // Fail-closed ([test-quality-3]): a missing manifest must NOT self-mint a fresh
+     // green pin. A merge/checkout that drops the fixture reds here — with regen
+merged
+  result 100644 a7bacec9d34d754ab62f27acd808c6e81a209a58 tests/property/settlementLifecycleDormancyGolden.test.js
+  our    100644 ceddc679c2751c2903a29d4b2d9da058da3487ef tests/property/settlementLifecycleDormancyGolden.test.js
+@@ -20,7 +20,8 @@
+  */
+ import { describe, it, expect } from 'vitest';
+ import { createHash } from 'node:crypto';
+-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
++import { existsSync, mkdirSync, readFileSync } from 'node:fs';
++import { recordGolden } from '../helpers/goldenRecordDoor.js';
+ import { dirname, resolve } from 'node:path';
+ 
+ import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
+@@ -196,7 +197,7 @@
+       const out = {};
+       for (const c of rows) out[keyOf(c)] = dormantHashFor(c);
+       if (!existsSync(dirname(MANIFEST))) mkdirSync(dirname(MANIFEST), { recursive: true });
+-      writeFileSync(MANIFEST, JSON.stringify(out, Object.keys(out).sort(), 2) + '\n');
++      recordGolden({ surface: 'settlement-lifecycle-dormancy-golden', path: MANIFEST, produce: () => JSON.stringify(out, Object.keys(out).sort(), 2) + '\n' });
+       expect(Object.keys(out).length).toBe(rows.length);
+     });
+     return;
+merged
+  result 100644 883a8d6b0cd865a3a79b844ad00210200dde5db1 tests/property/settlementPoliticsDormancyGolden.test.js
+  our    100644 d8451874bc959b4f0933d0d7b22d865d447b02f1 tests/property/settlementPoliticsDormancyGolden.test.js
+@@ -24,7 +24,8 @@
+ 
+ import { describe, it, expect } from 'vitest';
+ import { createHash } from 'node:crypto';
+-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
++import { existsSync, mkdirSync, readFileSync } from 'node:fs';
++import { recordGolden } from '../helpers/goldenRecordDoor.js';
+ import { dirname, resolve } from 'node:path';
+ 
+ import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
+@@ -158,7 +159,7 @@
+       const out = {};
+       for (const c of rows) out[keyOf(c)] = dormantHashFor(c);
+       if (!existsSync(dirname(MANIFEST))) mkdirSync(dirname(MANIFEST), { recursive: true });
+-      writeFileSync(MANIFEST, JSON.stringify(out, Object.keys(out).sort(), 2) + '\n');
++      recordGolden({ surface: 'settlement-politics-dormancy-golden', path: MANIFEST, produce: () => JSON.stringify(out, Object.keys(out).sort(), 2) + '\n' });
+       expect(Object.keys(out).length).toBe(rows.length);
+     }, 120_000);
+     return;
+merged
+  result 100644 e348ddeb2db1ad90c3fd166b7a252dcecb4b1148 tests/property/spatialConsequenceDormancyGolden.test.js
+  our    100644 7787e4264ead526b1d3b43b68b1bc936e7f943b9 tests/property/spatialConsequenceDormancyGolden.test.js
+@@ -25,7 +25,8 @@
+  */
+ import { describe, it, expect } from 'vitest';
+ import { createHash } from 'node:crypto';
+-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
++import { existsSync, mkdirSync, readFileSync } from 'node:fs';
++import { recordGolden } from '../helpers/goldenRecordDoor.js';
+ import { dirname, resolve } from 'node:path';
+ 
+ import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
+@@ -147,7 +148,7 @@
+       const out = {};
+       for (const c of rows) out[keyOf(c)] = dormantHashFor(c);
+       if (!existsSync(dirname(MANIFEST))) mkdirSync(dirname(MANIFEST), { recursive: true });
+-      writeFileSync(MANIFEST, JSON.stringify(out, Object.keys(out).sort(), 2) + '\n');
++      recordGolden({ surface: 'spatial-consequence-dormancy-golden', path: MANIFEST, produce: () => JSON.stringify(out, Object.keys(out).sort(), 2) + '\n' });
+       expect(Object.keys(out).length).toBe(rows.length);
+     });
+     return;
+merged
+  result 100644 7c9252a67f84e2f7f5587eb5df19e0f920f2d8d0 tests/property/spatialDigestGolden.test.js
+  our    100644 e784fac51bbec578f61544f1369493791f9e36bb tests/property/spatialDigestGolden.test.js
+@@ -13,7 +13,8 @@
+  */
+ import { describe, expect, it } from 'vitest';
+ import { createHash } from 'node:crypto';
+-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
++import { existsSync, mkdirSync, readFileSync } from 'node:fs';
++import { recordGolden } from '../helpers/goldenRecordDoor.js';
+ import { dirname, resolve } from 'node:path';
+ 
+ import { buildSpatialDigest } from '../../src/domain/spatial/index.js';
+@@ -51,7 +52,7 @@
+     };
+     if (UPDATE) {
+       mkdirSync(dirname(MANIFEST), { recursive: true });
+-      writeFileSync(MANIFEST, JSON.stringify(record, Object.keys(record).sort(), 2) + '\n');
++      recordGolden({ surface: 'spatial-digest-golden', path: MANIFEST, produce: () => JSON.stringify(record, Object.keys(record).sort(), 2) + '\n' });
+     }
+     // Fail-closed ([test-quality-3]): a missing manifest must NOT self-mint a fresh
+     // green pin. A merge/checkout that drops the fixture reds here — with regen
+merged
+  result 100644 4fcc481b97279bdf3cc49645cb4d38af1c83e775 tests/property/supplyWebWarfareDormancyGolden.test.js
+  our    100644 e116b1de93fb2417cbe04882d16fdd4aa1d59490 tests/property/supplyWebWarfareDormancyGolden.test.js
+@@ -29,7 +29,8 @@
+ 
+ import { describe, it, expect } from 'vitest';
+ import { createHash } from 'node:crypto';
+-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
++import { existsSync, mkdirSync, readFileSync } from 'node:fs';
++import { recordGolden } from '../helpers/goldenRecordDoor.js';
+ import { dirname, resolve } from 'node:path';
+ 
+ import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
+@@ -176,7 +177,7 @@
+       const out = {};
+       for (const c of rows) out[keyOf(c)] = dormantHashFor(c);
+       if (!existsSync(dirname(MANIFEST))) mkdirSync(dirname(MANIFEST), { recursive: true });
+-      writeFileSync(MANIFEST, JSON.stringify(out, Object.keys(out).sort(), 2) + '\n');
++      recordGolden({ surface: 'supply-web-warfare-dormancy-golden', path: MANIFEST, produce: () => JSON.stringify(out, Object.keys(out).sort(), 2) + '\n' });
+       expect(Object.keys(out).length).toBe(rows.length);
+     }, 120_000);
+     return;
+merged
+  result 100644 198e075c2a3599a5841f3b6990be862d16125256 tests/property/teleportEdgesGolden.test.js
+  our    100644 29cc5dd012ec90f6c25556d145fd61003ea6e7c8 tests/property/teleportEdgesGolden.test.js
+@@ -20,7 +20,8 @@
+  */
+ import { describe, expect, it } from 'vitest';
+ import { createHash } from 'node:crypto';
+-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
++import { existsSync, mkdirSync, readFileSync } from 'node:fs';
++import { recordGolden } from '../helpers/goldenRecordDoor.js';
+ import { dirname, resolve } from 'node:path';
+ 
+ import { buildSpatialDigest } from '../../src/domain/spatial/index.js';
+@@ -54,7 +55,7 @@
+     };
+     if (UPDATE) {
+       mkdirSync(dirname(MANIFEST), { recursive: true });
+-      writeFileSync(MANIFEST, JSON.stringify(record, Object.keys(record).sort(), 2) + '\n');
++      recordGolden({ surface: 'teleport-edges-golden', path: MANIFEST, produce: () => JSON.stringify(record, Object.keys(record).sort(), 2) + '\n' });
+     }
+     // Fail-closed ([test-quality-3]): a missing manifest must NOT self-mint a fresh
+     // green pin. A merge/checkout that drops the fixture reds here — with regen
+merged
+  result 100644 12d89c22f3955a6f91a7ca6c5ee0d8d439617faa tests/property/timelineTrackGolden.test.js
+  our    100644 39ede220f5caea74086634a45d050b2660e43eef tests/property/timelineTrackGolden.test.js
+@@ -9,7 +9,8 @@
+  */
+ import { describe, expect, it } from 'vitest';
+ import { createHash } from 'node:crypto';
+-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
++import { existsSync, mkdirSync, readFileSync } from 'node:fs';
++import { recordGolden } from '../helpers/goldenRecordDoor.js';
+ import { dirname, resolve } from 'node:path';
+ import { buildTimelineTrack } from '../../src/domain/display/timelineTrack.js';
+ 
+@@ -41,7 +42,7 @@
+     const record = { hash: hashOf(track), frames: track.frames.length, ticks: track.ticks };
+     if (UPDATE) {
+       mkdirSync(dirname(MANIFEST), { recursive: true });
+-      writeFileSync(MANIFEST, JSON.stringify(record, null, 2) + '\n');
++      recordGolden({ surface: 'timeline-track-golden', path: MANIFEST, produce: () => JSON.stringify(record, null, 2) + '\n' });
+     }
+     expect(
+       existsSync(MANIFEST),
+merged
+  result 100644 2dd2425e8874b5995d13294ef3d233df92d4807b tests/property/townCartographyDormancyGolden.test.js
+  our    100644 f47afa5656d92def3b0b10b331862481c704a492 tests/property/townCartographyDormancyGolden.test.js
+@@ -32,7 +32,8 @@
+ 
+ import { describe, it, expect } from 'vitest';
+ import { createHash } from 'node:crypto';
+-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
++import { existsSync, mkdirSync, readFileSync } from 'node:fs';
++import { recordGolden } from '../helpers/goldenRecordDoor.js';
+ import { dirname, resolve } from 'node:path';
+ 
+ import {
+@@ -93,7 +94,7 @@
+       const out = {};
+       for (const row of rows) out[keyOf(row)] = dormantHashFor(row);
+       if (!existsSync(dirname(MANIFEST))) mkdirSync(dirname(MANIFEST), { recursive: true });
+-      writeFileSync(MANIFEST, `${JSON.stringify(out, Object.keys(out).sort(), 2)}\n`);
++      recordGolden({ surface: 'town-cartography-dormancy-golden', path: MANIFEST, produce: () => `${JSON.stringify(out, Object.keys(out).sort(), 2)}\n` });
+       expect(Object.keys(out).length).toBe(rows.length);
+     }, 180_000);
+     return;
+merged
+  result 100644 7e3f94e2957a3a29d1d6a47df83a4d493323abe9 tests/property/townMapGolden.test.js
+  our    100644 24feb03d03eab3305ffea8f42c1f1ecf1b221b3f tests/property/townMapGolden.test.js
+@@ -13,7 +13,8 @@
+  */
+ import { describe, expect, it } from 'vitest';
+ import { createHash } from 'node:crypto';
+-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
++import { existsSync, mkdirSync, readFileSync } from 'node:fs';
++import { recordGolden } from '../helpers/goldenRecordDoor.js';
+ import { dirname, resolve } from 'node:path';
+ 
+ import { buildTownMapModel } from '../../src/domain/townMap/townMapModel.js';
+@@ -74,7 +75,7 @@
+     const record = { hash, ...meta };
+     if (UPDATE) {
+       mkdirSync(dirname(MANIFEST), { recursive: true });
+-      writeFileSync(MANIFEST, JSON.stringify(record, Object.keys(record).sort(), 2) + '\n');
++      recordGolden({ surface: 'town-map-golden', path: MANIFEST, produce: () => JSON.stringify(record, Object.keys(record).sort(), 2) + '\n' });
+     }
+     // Fail-closed: a missing manifest must NOT self-mint a fresh green pin. A
+     // merge/checkout that drops the fixture reds here — with regen instructions —
+merged
+  result 100644 25d764e6acb7710f11327ce16f41f6b54ef57106 tests/property/townMapV2Golden.test.js
+  our    100644 6a9f5fb6fbadff301e6a277b506632bd0a9cf5eb tests/property/townMapV2Golden.test.js
+@@ -15,7 +15,8 @@
+  */
+ import { describe, expect, it } from 'vitest';
+ import { createHash } from 'node:crypto';
+-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
++import { existsSync, mkdirSync, readFileSync } from 'node:fs';
++import { recordGolden } from '../helpers/goldenRecordDoor.js';
+ import { dirname, resolve } from 'node:path';
+ 
+ import { buildTownMapModel } from '../../src/domain/townMap/townMapModel.js';
+@@ -67,7 +68,7 @@
+     const record = { hash, ...meta };
+     if (UPDATE) {
+       mkdirSync(dirname(MANIFEST), { recursive: true });
+-      writeFileSync(MANIFEST, JSON.stringify(record, Object.keys(record).sort(), 2) + '\n');
++      recordGolden({ surface: 'town-map-v2-golden', path: MANIFEST, produce: () => JSON.stringify(record, Object.keys(record).sort(), 2) + '\n' });
+     }
+     expect(
+       existsSync(MANIFEST),
+merged
+  result 100644 2d52f1808f4a92b486fd67a6bf7488d551a39ae9 tests/property/traditionsDormancyGolden.test.js
+  our    100644 ab0b89e4dfef3dcc63ff413e5d09b445a08e5ea1 tests/property/traditionsDormancyGolden.test.js
+@@ -25,7 +25,8 @@
+  */
+ import { describe, it, expect } from 'vitest';
+ import { createHash } from 'node:crypto';
+-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
++import { existsSync, mkdirSync, readFileSync } from 'node:fs';
++import { recordGolden } from '../helpers/goldenRecordDoor.js';
+ import { dirname, resolve } from 'node:path';
+ 
+ import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
+@@ -144,7 +145,7 @@
+       const out = {};
+       for (const c of rows) out[keyOf(c)] = dormantHashFor(c);
+       if (!existsSync(dirname(MANIFEST))) mkdirSync(dirname(MANIFEST), { recursive: true });
+-      writeFileSync(MANIFEST, JSON.stringify(out, Object.keys(out).sort(), 2) + '\n');
++      recordGolden({ surface: 'traditions-dormancy-golden', path: MANIFEST, produce: () => JSON.stringify(out, Object.keys(out).sort(), 2) + '\n' });
+       expect(Object.keys(out).length).toBe(rows.length);
+     });
+     return;
+merged
+  result 100644 b5a2153a1b29c3347ec819597b923cf44abc43aa tests/property/upswingDormancyGolden.test.js
+  our    100644 8f44564d6199cb3d027a05530dd7dd804fd78819 tests/property/upswingDormancyGolden.test.js
+@@ -25,7 +25,8 @@
+  */
+ import { describe, it, expect } from 'vitest';
+ import { createHash } from 'node:crypto';
+-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
++import { existsSync, mkdirSync, readFileSync } from 'node:fs';
++import { recordGolden } from '../helpers/goldenRecordDoor.js';
+ import { dirname, resolve } from 'node:path';
+ 
+ import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
+@@ -145,7 +146,7 @@
+       const out = {};
+       for (const c of rows) out[keyOf(c)] = dormantHashFor(c);
+       if (!existsSync(dirname(MANIFEST))) mkdirSync(dirname(MANIFEST), { recursive: true });
+-      writeFileSync(MANIFEST, JSON.stringify(out, Object.keys(out).sort(), 2) + '\n');
++      recordGolden({ surface: 'upswing-dormancy-golden', path: MANIFEST, produce: () => JSON.stringify(out, Object.keys(out).sort(), 2) + '\n' });
+       expect(Object.keys(out).length).toBe(rows.length);
+     });
+     return;
+merged
+  result 100644 27557c2d3d3e458d121a28bbed311875d6d3ebb4 tests/property/urbanFabricDormancyGolden.test.js
+  our    100644 3df3fee1fc1e927080b157e1d290b8111ec92463 tests/property/urbanFabricDormancyGolden.test.js
+@@ -27,7 +27,8 @@
+  */
+ import { describe, it, expect } from 'vitest';
+ import { createHash } from 'node:crypto';
+-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
++import { existsSync, mkdirSync, readFileSync } from 'node:fs';
++import { recordGolden } from '../helpers/goldenRecordDoor.js';
+ import { dirname, resolve } from 'node:path';
+ 
+ import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
+@@ -142,7 +143,7 @@
+       const out = {};
+       for (const c of rows) out[keyOf(c)] = dormantHashFor(c);
+       if (!existsSync(dirname(MANIFEST))) mkdirSync(dirname(MANIFEST), { recursive: true });
+-      writeFileSync(MANIFEST, JSON.stringify(out, Object.keys(out).sort(), 2) + '\n');
++      recordGolden({ surface: 'urban-fabric-dormancy-golden', path: MANIFEST, produce: () => JSON.stringify(out, Object.keys(out).sort(), 2) + '\n' });
+       expect(Object.keys(out).length).toBe(rows.length);
+     });
+     return;
+merged
+  result 100644 04bf8ac8d983f85a60acad19bea622899ad9bd33 tests/property/worldpulseDeityGolden.test.js
+  our    100644 f85090bde784cc57f512f18080038ec473ef16ef tests/property/worldpulseDeityGolden.test.js
+@@ -22,7 +22,8 @@
+ 
+ import { describe, it, expect } from 'vitest';
+ import { createHash } from 'node:crypto';
+-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
++import { existsSync, mkdirSync, readFileSync } from 'node:fs';
++import { recordGolden } from '../helpers/goldenRecordDoor.js';
+ import { dirname, resolve } from 'node:path';
+ 
+ import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
+@@ -173,7 +174,7 @@
+       const out = {};
+       for (const c of rows) out[pulseKeyOf(c)] = pulseHashFor(c);
+       if (!existsSync(dirname(PULSE_MANIFEST))) mkdirSync(dirname(PULSE_MANIFEST), { recursive: true });
+-      writeFileSync(PULSE_MANIFEST, JSON.stringify(out, Object.keys(out).sort(), 2) + '\n');
++      recordGolden({ surface: 'worldpulse-golden-master', path: PULSE_MANIFEST, produce: () => JSON.stringify(out, Object.keys(out).sort(), 2) + '\n' });
+       expect(Object.keys(out).length).toBe(rows.length);
+     });
+     return;
+merged
+  result 100644 ace1393a42d49f08b25bcf93313e8eed4e224b8b tests/property/worldpulseSeasonsGolden.test.js
+  our    100644 99b8c81784a3819ff5d7d4a19c099b4c966f95e1 tests/property/worldpulseSeasonsGolden.test.js
+@@ -19,7 +19,8 @@
+  */
+ import { describe, expect, it } from 'vitest';
+ import { createHash } from 'node:crypto';
+-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
++import { existsSync, mkdirSync, readFileSync } from 'node:fs';
++import { recordGolden } from '../helpers/goldenRecordDoor.js';
+ import { dirname, resolve } from 'node:path';
+ 
+ import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
+@@ -169,7 +170,7 @@
+       const out = {};
+       for (const c of rows) out[keyOf(c)] = seasonsHashFor(c);
+       if (!existsSync(dirname(MANIFEST))) mkdirSync(dirname(MANIFEST), { recursive: true });
+-      writeFileSync(MANIFEST, JSON.stringify(out, Object.keys(out).sort(), 2) + '\n');
++      recordGolden({ surface: 'worldpulse-seasons-golden', path: MANIFEST, produce: () => JSON.stringify(out, Object.keys(out).sort(), 2) + '\n' });
+       expect(Object.keys(out).length).toBe(rows.length);
+     });
+     return;
+merged
+  result 100644 6fa0defd1e4fff15d98af55c68f894e9c4981535 tests/property/worldpulseSpatialGolden.test.js
+  our    100644 17a0ac47201ac361da5b6c95904ca05664f088e9 tests/property/worldpulseSpatialGolden.test.js
+@@ -19,7 +19,8 @@
+  */
+ import { describe, it, expect } from 'vitest';
+ import { createHash } from 'node:crypto';
+-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
++import { existsSync, mkdirSync, readFileSync } from 'node:fs';
++import { recordGolden } from '../helpers/goldenRecordDoor.js';
+ import { dirname, resolve } from 'node:path';
+ 
+ import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
+@@ -189,7 +190,7 @@
+       const out = {};
+       for (const c of rows) out[keyOf(c)] = hashOf(projectionFor({ ...c, spatial: true }));
+       if (!existsSync(dirname(MANIFEST))) mkdirSync(dirname(MANIFEST), { recursive: true });
+-      writeFileSync(MANIFEST, JSON.stringify(out, Object.keys(out).sort(), 2) + '\n');
++      recordGolden({ surface: 'worldpulse-spatial-golden', path: MANIFEST, produce: () => JSON.stringify(out, Object.keys(out).sort(), 2) + '\n' });
+       expect(Object.keys(out).length).toBe(rows.length);
+     });
+     return;

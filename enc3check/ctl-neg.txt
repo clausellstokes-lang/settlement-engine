@@ -1,0 +1,7 @@
+error: patch failed: src/domain/certification/couplingRegistry.js:50
+error: src/domain/certification/couplingRegistry.js: patch does not apply
+error: src/domain/certification/couplingRegistryEncounters.js: does not exist in index
+error: patch failed: tests/domain/couplingRegistry.test.js:67
+error: tests/domain/couplingRegistry.test.js: patch does not apply
+error: patch failed: tests/domain/npc/livedExperienceSources.test.js:661
+error: tests/domain/npc/livedExperienceSources.test.js: patch does not apply

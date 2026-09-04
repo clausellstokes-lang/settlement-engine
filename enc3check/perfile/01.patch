@@ -1,0 +1,13 @@
+diff --git a/src/domain/certification/couplingRegistry.js b/src/domain/certification/couplingRegistry.js
+index 49403eb48..260471112 100644
+--- a/src/domain/certification/couplingRegistry.js
++++ b/src/domain/certification/couplingRegistry.js
+@@ -50,6 +50,8 @@ import { ENC_ENCOUNTERS_COUPLINGS } from './couplingRegistryEncounters.js';
+ 
+ export {
+   ENC2_MEETING_MARK_CONSUME_COUPLING,
++  ENC3_MEETING_EXPOSURE_WARINESS_COUPLING,
++  ENC3_MEETING_STAGE_INTERIOR_COUPLING,
+   ENC_ENCOUNTERS_COUPLINGS,
+ } from './couplingRegistryEncounters.js';
+ 

@@ -1,0 +1,1262 @@
+[
+ {
+  "id": "src/domain/certification/warConvergenceContract.js#WAR_CONVERGENCE_TUNING",
+  "file": "src/domain/certification/warConvergenceContract.js",
+  "exp": "WAR_CONVERGENCE_TUNING",
+  "line": 169,
+  "keys": 11,
+  "exported": true,
+  "fileDeps": 3
+ },
+ {
+  "id": "src/domain/certification/warConvergenceForces.js#WAR_CONVERGENCE_FORCE_TUNING",
+  "file": "src/domain/certification/warConvergenceForces.js",
+  "exp": "WAR_CONVERGENCE_FORCE_TUNING",
+  "line": 179,
+  "keys": 8,
+  "exported": true,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/corruption.js#CAPTURE_TUNING",
+  "file": "src/domain/corruption.js",
+  "exp": "CAPTURE_TUNING",
+  "line": 485,
+  "keys": 2,
+  "exported": true,
+  "fileDeps": 23
+ },
+ {
+  "id": "src/domain/density/densityBands.js#TIER_ORDER",
+  "file": "src/domain/density/densityBands.js",
+  "exp": "TIER_ORDER",
+  "line": 66,
+  "keys": 6,
+  "exported": true,
+  "fileDeps": 9
+ },
+ {
+  "id": "src/domain/density/densityBands.js#DENSITY_BANDS",
+  "file": "src/domain/density/densityBands.js",
+  "exp": "DENSITY_BANDS",
+  "line": 110,
+  "keys": 6,
+  "exported": true,
+  "fileDeps": 9
+ },
+ {
+  "id": "src/domain/density/densityBands.js#RANK_CEILING_BY_TIER",
+  "file": "src/domain/density/densityBands.js",
+  "exp": "RANK_CEILING_BY_TIER",
+  "line": 135,
+  "keys": 6,
+  "exported": true,
+  "fileDeps": 9
+ },
+ {
+  "id": "src/domain/dossier/hookRetention.js#DEFAULT_RETENTION_TUNING",
+  "file": "src/domain/dossier/hookRetention.js",
+  "exp": "DEFAULT_RETENTION_TUNING",
+  "line": 87,
+  "keys": 6,
+  "exported": true,
+  "fileDeps": 2
+ },
+ {
+  "id": "src/domain/npc/livedExperienceFunnel.js#FUNNEL_TUNING",
+  "file": "src/domain/npc/livedExperienceFunnel.js",
+  "exp": "FUNNEL_TUNING",
+  "line": 222,
+  "keys": 6,
+  "exported": true,
+  "fileDeps": 2
+ },
+ {
+  "id": "src/domain/realm/autoplacement.js#AUTOPLACEMENT_TUNING",
+  "file": "src/domain/realm/autoplacement.js",
+  "exp": "AUTOPLACEMENT_TUNING",
+  "line": 83,
+  "keys": 11,
+  "exported": true,
+  "fileDeps": 0
+ },
+ {
+  "id": "src/domain/roads/seaRoads.js#SEA_ROADS_TUNING",
+  "file": "src/domain/roads/seaRoads.js",
+  "exp": "SEA_ROADS_TUNING",
+  "line": 49,
+  "keys": 7,
+  "exported": true,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/rulingPowerSeat.js#SEAT_TUNING",
+  "file": "src/domain/rulingPowerSeat.js",
+  "exp": "SEAT_TUNING",
+  "line": 89,
+  "keys": 12,
+  "exported": true,
+  "fileDeps": 9
+ },
+ {
+  "id": "src/domain/spatial/calamity.js#EXPOSURE_TUNING",
+  "file": "src/domain/spatial/calamity.js",
+  "exp": "EXPOSURE_TUNING",
+  "line": 159,
+  "keys": 5,
+  "exported": true,
+  "fileDeps": 4
+ },
+ {
+  "id": "src/domain/spatial/cohesionWeave.js#QUADRANT_TUNING",
+  "file": "src/domain/spatial/cohesionWeave.js",
+  "exp": "QUADRANT_TUNING",
+  "line": 41,
+  "keys": 5,
+  "exported": true,
+  "fileDeps": 16
+ },
+ {
+  "id": "src/domain/spatial/cultureDistance.js#CULTURE_TUNING",
+  "file": "src/domain/spatial/cultureDistance.js",
+  "exp": "CULTURE_TUNING",
+  "line": 41,
+  "keys": 8,
+  "exported": true,
+  "fileDeps": 3
+ },
+ {
+  "id": "src/domain/spatial/embattlement.js#EMBATTLEMENT_TUNING",
+  "file": "src/domain/spatial/embattlement.js",
+  "exp": "EMBATTLEMENT_TUNING",
+  "line": 69,
+  "keys": 18,
+  "exported": true,
+  "fileDeps": 18
+ },
+ {
+  "id": "src/domain/spatial/generosityEV.js#GENEROSITY_TUNING",
+  "file": "src/domain/spatial/generosityEV.js",
+  "exp": "GENEROSITY_TUNING",
+  "line": 47,
+  "keys": 29,
+  "exported": true,
+  "fileDeps": 3
+ },
+ {
+  "id": "src/domain/spatial/generosityEV.js#INTEL_SALE_TUNING",
+  "file": "src/domain/spatial/generosityEV.js",
+  "exp": "INTEL_SALE_TUNING",
+  "line": 898,
+  "keys": 3,
+  "exported": true,
+  "fileDeps": 3
+ },
+ {
+  "id": "src/domain/spatial/migrationRumors.js#MIGRATION_RUMOR_TUNING",
+  "file": "src/domain/spatial/migrationRumors.js",
+  "exp": "MIGRATION_RUMOR_TUNING",
+  "line": 46,
+  "keys": 2,
+  "exported": true,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/spatial/smuggle.js#SMUGGLE_TUNING",
+  "file": "src/domain/spatial/smuggle.js",
+  "exp": "SMUGGLE_TUNING",
+  "line": 52,
+  "keys": 9,
+  "exported": true,
+  "fileDeps": 2
+ },
+ {
+  "id": "src/domain/undercity/colonization.js#UNDERCITY_TUNING",
+  "file": "src/domain/undercity/colonization.js",
+  "exp": "UNDERCITY_TUNING",
+  "line": 169,
+  "keys": 4,
+  "exported": true,
+  "fileDeps": 2
+ },
+ {
+  "id": "src/domain/undercity/monotoneComponents.js#MONOTONE_EXTENT_TUNING",
+  "file": "src/domain/undercity/monotoneComponents.js",
+  "exp": "MONOTONE_EXTENT_TUNING",
+  "line": 283,
+  "keys": 8,
+  "exported": true,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/undercity/sewerDerivation.js#SEWER_DERIVATION_TUNING",
+  "file": "src/domain/undercity/sewerDerivation.js",
+  "exp": "SEWER_DERIVATION_TUNING",
+  "line": 227,
+  "keys": 7,
+  "exported": true,
+  "fileDeps": 2
+ },
+ {
+  "id": "src/domain/worldPulse/anticipatedReactions.js#REACTION_TUNING",
+  "file": "src/domain/worldPulse/anticipatedReactions.js",
+  "exp": "REACTION_TUNING",
+  "line": 59,
+  "keys": 3,
+  "exported": true,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/worldPulse/armyTransitKernel.js#ARMY_ENVOY_INTENT_TUNING",
+  "file": "src/domain/worldPulse/armyTransitKernel.js",
+  "exp": "ARMY_ENVOY_INTENT_TUNING",
+  "line": 76,
+  "keys": 3,
+  "exported": true,
+  "fileDeps": 2
+ },
+ {
+  "id": "src/domain/worldPulse/attrition.js#ATTRITION_TUNING",
+  "file": "src/domain/worldPulse/attrition.js",
+  "exp": "ATTRITION_TUNING",
+  "line": 318,
+  "keys": 17,
+  "exported": true,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/worldPulse/bandedStock.js#HALF_LIFE_WEEKS",
+  "file": "src/domain/worldPulse/bandedStock.js",
+  "exp": "HALF_LIFE_WEEKS",
+  "line": 71,
+  "keys": 5,
+  "exported": true,
+  "fileDeps": 13
+ },
+ {
+  "id": "src/domain/worldPulse/beliefAxisSubjects.js#SUBJECT_AXIS_TUNING",
+  "file": "src/domain/worldPulse/beliefAxisSubjects.js",
+  "exp": "SUBJECT_AXIS_TUNING",
+  "line": 141,
+  "keys": 11,
+  "exported": true,
+  "fileDeps": 3
+ },
+ {
+  "id": "src/domain/worldPulse/brokerageFidelity.js#BROKERAGE_FIDELITY_TUNING",
+  "file": "src/domain/worldPulse/brokerageFidelity.js",
+  "exp": "BROKERAGE_FIDELITY_TUNING",
+  "line": 67,
+  "keys": 3,
+  "exported": true,
+  "fileDeps": 2
+ },
+ {
+  "id": "src/domain/worldPulse/brokerageServices.js#QUERY_PRICE_TUNING",
+  "file": "src/domain/worldPulse/brokerageServices.js",
+  "exp": "QUERY_PRICE_TUNING",
+  "line": 167,
+  "keys": 6,
+  "exported": true,
+  "fileDeps": 3
+ },
+ {
+  "id": "src/domain/worldPulse/brokerageServices.js#INTERCEPT_FOG_TUNING",
+  "file": "src/domain/worldPulse/brokerageServices.js",
+  "exp": "INTERCEPT_FOG_TUNING",
+  "line": 537,
+  "keys": 3,
+  "exported": true,
+  "fileDeps": 3
+ },
+ {
+  "id": "src/domain/worldPulse/brokerageServicesFeed.js#PATRON_FEED_TUNING",
+  "file": "src/domain/worldPulse/brokerageServicesFeed.js",
+  "exp": "PATRON_FEED_TUNING",
+  "line": 93,
+  "keys": 3,
+  "exported": true,
+  "fileDeps": 2
+ },
+ {
+  "id": "src/domain/worldPulse/brokerageServicesPlant.js#PLANT_PRICE_TUNING",
+  "file": "src/domain/worldPulse/brokerageServicesPlant.js",
+  "exp": "PLANT_PRICE_TUNING",
+  "line": 114,
+  "keys": 6,
+  "exported": true,
+  "fileDeps": 3
+ },
+ {
+  "id": "src/domain/worldPulse/causeLifecycle.js#LIFECYCLE_TUNING",
+  "file": "src/domain/worldPulse/causeLifecycle.js",
+  "exp": "LIFECYCLE_TUNING",
+  "line": 100,
+  "keys": 10,
+  "exported": true,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/worldPulse/causeVocabulary.js#CAUSE_TUNING",
+  "file": "src/domain/worldPulse/causeVocabulary.js",
+  "exp": "CAUSE_TUNING",
+  "line": 77,
+  "keys": 3,
+  "exported": true,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/worldPulse/clergyTraitPlane.js#FOOTHOLD_TUNING",
+  "file": "src/domain/worldPulse/clergyTraitPlane.js",
+  "exp": "FOOTHOLD_TUNING",
+  "line": 232,
+  "keys": 4,
+  "exported": true,
+  "fileDeps": 4
+ },
+ {
+  "id": "src/domain/worldPulse/commercialReasons.js#COMMERCIAL_REASON_TUNING",
+  "file": "src/domain/worldPulse/commercialReasons.js",
+  "exp": "COMMERCIAL_REASON_TUNING",
+  "line": 104,
+  "keys": 9,
+  "exported": true,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/worldPulse/compromiseRound.js#COMPROMISE_ROUND_TUNING",
+  "file": "src/domain/worldPulse/compromiseRound.js",
+  "exp": "COMPROMISE_ROUND_TUNING",
+  "line": 51,
+  "keys": 6,
+  "exported": true,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/worldPulse/conquestDoctrineStage.js#CONQUEST_STAGE_TUNING",
+  "file": "src/domain/worldPulse/conquestDoctrineStage.js",
+  "exp": "CONQUEST_STAGE_TUNING",
+  "line": 640,
+  "keys": 1,
+  "exported": true,
+  "fileDeps": 6
+ },
+ {
+  "id": "src/domain/worldPulse/conquestExecution.js#CONQUEST_EXECUTION_TUNING",
+  "file": "src/domain/worldPulse/conquestExecution.js",
+  "exp": "CONQUEST_EXECUTION_TUNING",
+  "line": 92,
+  "keys": 5,
+  "exported": true,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/worldPulse/conquestFeasibility.js#CONQUEST_FEASIBILITY_TUNING",
+  "file": "src/domain/worldPulse/conquestFeasibility.js",
+  "exp": "CONQUEST_FEASIBILITY_TUNING",
+  "line": 119,
+  "keys": 14,
+  "exported": true,
+  "fileDeps": 2
+ },
+ {
+  "id": "src/domain/worldPulse/conquestFeeds.js#CONQUEST_FEED_TUNING",
+  "file": "src/domain/worldPulse/conquestFeeds.js",
+  "exp": "CONQUEST_FEED_TUNING",
+  "line": 43,
+  "keys": 14,
+  "exported": true,
+  "fileDeps": 3
+ },
+ {
+  "id": "src/domain/worldPulse/conquestIntent.js#CONQUEST_INTENT_TUNING",
+  "file": "src/domain/worldPulse/conquestIntent.js",
+  "exp": "CONQUEST_INTENT_TUNING",
+  "line": 86,
+  "keys": 5,
+  "exported": true,
+  "fileDeps": 2
+ },
+ {
+  "id": "src/domain/worldPulse/convergence.js#CONVERGENCE_TUNING",
+  "file": "src/domain/worldPulse/convergence.js",
+  "exp": "CONVERGENCE_TUNING",
+  "line": 114,
+  "keys": 22,
+  "exported": true,
+  "fileDeps": 6
+ },
+ {
+  "id": "src/domain/worldPulse/corruptionImpair.js#REFORM_TUNING",
+  "file": "src/domain/worldPulse/corruptionImpair.js",
+  "exp": "REFORM_TUNING",
+  "line": 131,
+  "keys": 5,
+  "exported": true,
+  "fileDeps": 2
+ },
+ {
+  "id": "src/domain/worldPulse/corruptionWeb.js#CORRUPTION_WEB_TUNING",
+  "file": "src/domain/worldPulse/corruptionWeb.js",
+  "exp": "CORRUPTION_WEB_TUNING",
+  "line": 118,
+  "keys": 29,
+  "exported": true,
+  "fileDeps": 10
+ },
+ {
+  "id": "src/domain/worldPulse/deityStanceLane.js#STANCE_LANE_TUNING",
+  "file": "src/domain/worldPulse/deityStanceLane.js",
+  "exp": "STANCE_LANE_TUNING",
+  "line": 51,
+  "keys": 10,
+  "exported": true,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/worldPulse/demographicsHerald.js#HERALD_TUNING",
+  "file": "src/domain/worldPulse/demographicsHerald.js",
+  "exp": "HERALD_TUNING",
+  "line": 83,
+  "keys": 10,
+  "exported": true,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/worldPulse/demographicsLadder.js#LADDER_TUNING",
+  "file": "src/domain/worldPulse/demographicsLadder.js",
+  "exp": "LADDER_TUNING",
+  "line": 104,
+  "keys": 2,
+  "exported": true,
+  "fileDeps": 3
+ },
+ {
+  "id": "src/domain/worldPulse/demographicsLand.js#SPATIAL_LAW_TUNING",
+  "file": "src/domain/worldPulse/demographicsLand.js",
+  "exp": "SPATIAL_LAW_TUNING",
+  "line": 164,
+  "keys": 3,
+  "exported": true,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/worldPulse/demographicsPlans.js#PLAN_TUNING",
+  "file": "src/domain/worldPulse/demographicsPlans.js",
+  "exp": "PLAN_TUNING",
+  "line": 139,
+  "keys": 10,
+  "exported": true,
+  "fileDeps": 2
+ },
+ {
+  "id": "src/domain/worldPulse/demographicsResponses.js#RESPONSE_TUNING",
+  "file": "src/domain/worldPulse/demographicsResponses.js",
+  "exp": "RESPONSE_TUNING",
+  "line": 158,
+  "keys": 6,
+  "exported": true,
+  "fileDeps": 4
+ },
+ {
+  "id": "src/domain/worldPulse/demographicsRisk.js#RISK_TUNING",
+  "file": "src/domain/worldPulse/demographicsRisk.js",
+  "exp": "RISK_TUNING",
+  "line": 78,
+  "keys": 10,
+  "exported": true,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/worldPulse/demographicsWar.js#WAR_DEMOGRAPHIC_TUNING",
+  "file": "src/domain/worldPulse/demographicsWar.js",
+  "exp": "WAR_DEMOGRAPHIC_TUNING",
+  "line": 68,
+  "keys": 8,
+  "exported": true,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/worldPulse/disposition.js#ALIGNMENT_TUNING",
+  "file": "src/domain/worldPulse/disposition.js",
+  "exp": "ALIGNMENT_TUNING",
+  "line": 595,
+  "keys": 12,
+  "exported": true,
+  "fileDeps": 14
+ },
+ {
+  "id": "src/domain/worldPulse/dispositionLedger.js#APPETITE_TUNING",
+  "file": "src/domain/worldPulse/dispositionLedger.js",
+  "exp": "APPETITE_TUNING",
+  "line": 787,
+  "keys": 7,
+  "exported": true,
+  "fileDeps": 10
+ },
+ {
+  "id": "src/domain/worldPulse/eliteBleed.js#ELITE_BLEED_TUNING",
+  "file": "src/domain/worldPulse/eliteBleed.js",
+  "exp": "ELITE_BLEED_TUNING",
+  "line": 36,
+  "keys": 4,
+  "exported": true,
+  "fileDeps": 0
+ },
+ {
+  "id": "src/domain/worldPulse/envoyChanceMeeting.js#CHANCE_MEETING_TUNING",
+  "file": "src/domain/worldPulse/envoyChanceMeeting.js",
+  "exp": "CHANCE_MEETING_TUNING",
+  "line": 201,
+  "keys": 26,
+  "exported": true,
+  "fileDeps": 0
+ },
+ {
+  "id": "src/domain/worldPulse/espionage/espionageCareerCredit.js#CAREER_CREDIT_TUNING",
+  "file": "src/domain/worldPulse/espionage/espionageCareerCredit.js",
+  "exp": "CAREER_CREDIT_TUNING",
+  "line": 121,
+  "keys": 2,
+  "exported": true,
+  "fileDeps": 2
+ },
+ {
+  "id": "src/domain/worldPulse/espionage/espionageDoctrineStage.js#DISPATCH_TUNING",
+  "file": "src/domain/worldPulse/espionage/espionageDoctrineStage.js",
+  "exp": "DISPATCH_TUNING",
+  "line": 99,
+  "keys": 2,
+  "exported": true,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/worldPulse/espionage/espionageLeak.js#LEAK_TUNING",
+  "file": "src/domain/worldPulse/espionage/espionageLeak.js",
+  "exp": "LEAK_TUNING",
+  "line": 123,
+  "keys": 1,
+  "exported": true,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/worldPulse/espionage/espionageProducts.js#PRODUCT_TUNING",
+  "file": "src/domain/worldPulse/espionage/espionageProducts.js",
+  "exp": "PRODUCT_TUNING",
+  "line": 85,
+  "keys": 2,
+  "exported": true,
+  "fileDeps": 2
+ },
+ {
+  "id": "src/domain/worldPulse/espionage/espionageTap.js#TAP_TUNING",
+  "file": "src/domain/worldPulse/espionage/espionageTap.js",
+  "exp": "TAP_TUNING",
+  "line": 83,
+  "keys": 3,
+  "exported": true,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/worldPulse/espionage/espionageWariness.js#TELL_TUNING",
+  "file": "src/domain/worldPulse/espionage/espionageWariness.js",
+  "exp": "TELL_TUNING",
+  "line": 92,
+  "keys": 1,
+  "exported": true,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/worldPulse/espionage/infiltrationDepth.js#INFILTRATION_DEPTH_TUNING",
+  "file": "src/domain/worldPulse/espionage/infiltrationDepth.js",
+  "exp": "INFILTRATION_DEPTH_TUNING",
+  "line": 151,
+  "keys": 2,
+  "exported": true,
+  "fileDeps": 0
+ },
+ {
+  "id": "src/domain/worldPulse/factionPairLedger.js#FACTION_PAIR_TUNING",
+  "file": "src/domain/worldPulse/factionPairLedger.js",
+  "exp": "FACTION_PAIR_TUNING",
+  "line": 43,
+  "keys": 3,
+  "exported": true,
+  "fileDeps": 5
+ },
+ {
+  "id": "src/domain/worldPulse/faithNews.js#FAITH_NEWS_TUNING",
+  "file": "src/domain/worldPulse/faithNews.js",
+  "exp": "FAITH_NEWS_TUNING",
+  "line": 140,
+  "keys": 1,
+  "exported": true,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/worldPulse/faithTuningSurface.js#FAITH_TUNING_COVERAGE",
+  "file": "src/domain/worldPulse/faithTuningSurface.js",
+  "exp": "FAITH_TUNING_COVERAGE",
+  "line": 307,
+  "keys": 15,
+  "exported": true,
+  "fileDeps": 4
+ },
+ {
+  "id": "src/domain/worldPulse/feasibilityGate.js#FEASIBILITY_TUNING",
+  "file": "src/domain/worldPulse/feasibilityGate.js",
+  "exp": "FEASIBILITY_TUNING",
+  "line": 338,
+  "keys": 9,
+  "exported": true,
+  "fileDeps": 4
+ },
+ {
+  "id": "src/domain/worldPulse/generosityKernel.js#GENEROSITY_MOVER_TUNING",
+  "file": "src/domain/worldPulse/generosityKernel.js",
+  "exp": "GENEROSITY_MOVER_TUNING",
+  "line": 195,
+  "keys": 18,
+  "exported": true,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/worldPulse/grievanceRead.js#GRIEVANCE_READ_TUNING",
+  "file": "src/domain/worldPulse/grievanceRead.js",
+  "exp": "GRIEVANCE_READ_TUNING",
+  "line": 27,
+  "keys": 6,
+  "exported": true,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/worldPulse/hegemonyFear.js#HEGEMONY_FEAR_TUNING",
+  "file": "src/domain/worldPulse/hegemonyFear.js",
+  "exp": "HEGEMONY_FEAR_TUNING",
+  "line": 35,
+  "keys": 1,
+  "exported": true,
+  "fileDeps": 3
+ },
+ {
+  "id": "src/domain/worldPulse/informationStatecraft.js#SIGHT_TUNING",
+  "file": "src/domain/worldPulse/informationStatecraft.js",
+  "exp": "SIGHT_TUNING",
+  "line": 744,
+  "keys": 23,
+  "exported": true,
+  "fileDeps": 12
+ },
+ {
+  "id": "src/domain/worldPulse/institutionLifecycle.js#INSTITUTION_LIFECYCLE_TUNING",
+  "file": "src/domain/worldPulse/institutionLifecycle.js",
+  "exp": "INSTITUTION_LIFECYCLE_TUNING",
+  "line": 82,
+  "keys": 7,
+  "exported": true,
+  "fileDeps": 3
+ },
+ {
+  "id": "src/domain/worldPulse/institutionTolerance.js#TOLERANCE_TUNING",
+  "file": "src/domain/worldPulse/institutionTolerance.js",
+  "exp": "TOLERANCE_TUNING",
+  "line": 30,
+  "keys": 10,
+  "exported": true,
+  "fileDeps": 3
+ },
+ {
+  "id": "src/domain/worldPulse/lineageClaim.js#LINEAGE_CLAIM_TUNING",
+  "file": "src/domain/worldPulse/lineageClaim.js",
+  "exp": "LINEAGE_CLAIM_TUNING",
+  "line": 27,
+  "keys": 2,
+  "exported": true,
+  "fileDeps": 2
+ },
+ {
+  "id": "src/domain/worldPulse/magicForms.js#MAGIC_FORMS_TUNING",
+  "file": "src/domain/worldPulse/magicForms.js",
+  "exp": "MAGIC_FORMS_TUNING",
+  "line": 226,
+  "keys": 5,
+  "exported": true,
+  "fileDeps": 2
+ },
+ {
+  "id": "src/domain/worldPulse/magicRegimeModel.js#MAGIC_REGIME_TUNING",
+  "file": "src/domain/worldPulse/magicRegimeModel.js",
+  "exp": "MAGIC_REGIME_TUNING",
+  "line": 148,
+  "keys": 3,
+  "exported": true,
+  "fileDeps": 4
+ },
+ {
+  "id": "src/domain/worldPulse/magicSubstitution.js#MAGIC_SUBSTITUTION_TUNING",
+  "file": "src/domain/worldPulse/magicSubstitution.js",
+  "exp": "MAGIC_SUBSTITUTION_TUNING",
+  "line": 146,
+  "keys": 5,
+  "exported": true,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/worldPulse/magicSubstitutionReagents.js#REAGENT_TUNING",
+  "file": "src/domain/worldPulse/magicSubstitutionReagents.js",
+  "exp": "REAGENT_TUNING",
+  "line": 113,
+  "keys": 4,
+  "exported": true,
+  "fileDeps": 0
+ },
+ {
+  "id": "src/domain/worldPulse/martialReadiness.js#MARTIAL_READINESS_TUNING",
+  "file": "src/domain/worldPulse/martialReadiness.js",
+  "exp": "MARTIAL_READINESS_TUNING",
+  "line": 54,
+  "keys": 31,
+  "exported": true,
+  "fileDeps": 16
+ },
+ {
+  "id": "src/domain/worldPulse/mercenaryMarket.js#MERCENARY_MARKET_TUNING",
+  "file": "src/domain/worldPulse/mercenaryMarket.js",
+  "exp": "MERCENARY_MARKET_TUNING",
+  "line": 41,
+  "keys": 10,
+  "exported": true,
+  "fileDeps": 4
+ },
+ {
+  "id": "src/domain/worldPulse/migrationKernel.js#MIGRATION_KERNEL_TUNING",
+  "file": "src/domain/worldPulse/migrationKernel.js",
+  "exp": "MIGRATION_KERNEL_TUNING",
+  "line": 67,
+  "keys": 8,
+  "exported": true,
+  "fileDeps": 5
+ },
+ {
+  "id": "src/domain/worldPulse/mobilization.js#MOBILIZATION_TUNING",
+  "file": "src/domain/worldPulse/mobilization.js",
+  "exp": "MOBILIZATION_TUNING",
+  "line": 511,
+  "keys": 11,
+  "exported": true,
+  "fileDeps": 5
+ },
+ {
+  "id": "src/domain/worldPulse/mobilizationReactions.js#REACTION_TUNING",
+  "file": "src/domain/worldPulse/mobilizationReactions.js",
+  "exp": "REACTION_TUNING",
+  "line": 349,
+  "keys": 3,
+  "exported": true,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/worldPulse/momentum.js#THRESHOLD_TUNING",
+  "file": "src/domain/worldPulse/momentum.js",
+  "exp": "THRESHOLD_TUNING",
+  "line": 566,
+  "keys": 12,
+  "exported": true,
+  "fileDeps": 7
+ },
+ {
+  "id": "src/domain/worldPulse/momentum.js#CONSUMPTION_TUNING",
+  "file": "src/domain/worldPulse/momentum.js",
+  "exp": "CONSUMPTION_TUNING",
+  "line": 857,
+  "keys": 5,
+  "exported": true,
+  "fileDeps": 7
+ },
+ {
+  "id": "src/domain/worldPulse/momentum.js#CRACK_TUNING",
+  "file": "src/domain/worldPulse/momentum.js",
+  "exp": "CRACK_TUNING",
+  "line": 1020,
+  "keys": 2,
+  "exported": true,
+  "fileDeps": 7
+ },
+ {
+  "id": "src/domain/worldPulse/npcCredibility.js#NPC_CREDIBILITY_TUNING",
+  "file": "src/domain/worldPulse/npcCredibility.js",
+  "exp": "NPC_CREDIBILITY_TUNING",
+  "line": 80,
+  "keys": 11,
+  "exported": true,
+  "fileDeps": 4
+ },
+ {
+  "id": "src/domain/worldPulse/npcLadderContest.js#CONTEST_TUNING",
+  "file": "src/domain/worldPulse/npcLadderContest.js",
+  "exp": "CONTEST_TUNING",
+  "line": 46,
+  "keys": 29,
+  "exported": true,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/worldPulse/opportunism.js#OPPORTUNISM_TUNING",
+  "file": "src/domain/worldPulse/opportunism.js",
+  "exp": "OPPORTUNISM_TUNING",
+  "line": 80,
+  "keys": 6,
+  "exported": true,
+  "fileDeps": 3
+ },
+ {
+  "id": "src/domain/worldPulse/pactFormation.js#PACT_FORMATION_TUNING",
+  "file": "src/domain/worldPulse/pactFormation.js",
+  "exp": "PACT_FORMATION_TUNING",
+  "line": 117,
+  "keys": 7,
+  "exported": true,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/worldPulse/pactProposals.js#PACT_PROPOSAL_TUNING",
+  "file": "src/domain/worldPulse/pactProposals.js",
+  "exp": "PACT_PROPOSAL_TUNING",
+  "line": 98,
+  "keys": 3,
+  "exported": true,
+  "fileDeps": 2
+ },
+ {
+  "id": "src/domain/worldPulse/pactTriggers.js#PACT_TRIGGER_TUNING",
+  "file": "src/domain/worldPulse/pactTriggers.js",
+  "exp": "PACT_TRIGGER_TUNING",
+  "line": 73,
+  "keys": 9,
+  "exported": true,
+  "fileDeps": 2
+ },
+ {
+  "id": "src/domain/worldPulse/peaceReasons.js#PEACE_REASON_TUNING",
+  "file": "src/domain/worldPulse/peaceReasons.js",
+  "exp": "PEACE_REASON_TUNING",
+  "line": 72,
+  "keys": 7,
+  "exported": true,
+  "fileDeps": 7
+ },
+ {
+  "id": "src/domain/worldPulse/pestilenceKernel.js#PESTILENCE_KERNEL_TUNING",
+  "file": "src/domain/worldPulse/pestilenceKernel.js",
+  "exp": "PESTILENCE_KERNEL_TUNING",
+  "line": 71,
+  "keys": 3,
+  "exported": true,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/worldPulse/ransomClaim.js#RANSOM_TUNING",
+  "file": "src/domain/worldPulse/ransomClaim.js",
+  "exp": "RANSOM_TUNING",
+  "line": 71,
+  "keys": 7,
+  "exported": true,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/worldPulse/razingExecution.js#RAZING_EXECUTION_TUNING",
+  "file": "src/domain/worldPulse/razingExecution.js",
+  "exp": "RAZING_EXECUTION_TUNING",
+  "line": 196,
+  "keys": 5,
+  "exported": true,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/worldPulse/razingWitness.js#RAZING_WITNESS_TUNING",
+  "file": "src/domain/worldPulse/razingWitness.js",
+  "exp": "RAZING_WITNESS_TUNING",
+  "line": 87,
+  "keys": 10,
+  "exported": true,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/worldPulse/reframeKernel.js#REFRAME_TUNING",
+  "file": "src/domain/worldPulse/reframeKernel.js",
+  "exp": "REFRAME_TUNING",
+  "line": 133,
+  "keys": 15,
+  "exported": true,
+  "fileDeps": 5
+ },
+ {
+  "id": "src/domain/worldPulse/reinforcement.js#REINFORCEMENT_TUNING",
+  "file": "src/domain/worldPulse/reinforcement.js",
+  "exp": "REINFORCEMENT_TUNING",
+  "line": 217,
+  "keys": 14,
+  "exported": true,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/worldPulse/religiousContest.js#CRISIS_CONVERSION_TUNING",
+  "file": "src/domain/worldPulse/religiousContest.js",
+  "exp": "CRISIS_CONVERSION_TUNING",
+  "line": 149,
+  "keys": 9,
+  "exported": false,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/worldPulse/resourceDynamicsKernel.js#RESOURCE_DYNAMICS_TUNING",
+  "file": "src/domain/worldPulse/resourceDynamicsKernel.js",
+  "exp": "RESOURCE_DYNAMICS_TUNING",
+  "line": 131,
+  "keys": 14,
+  "exported": true,
+  "fileDeps": 3
+ },
+ {
+  "id": "src/domain/worldPulse/routeNetworkCharterBypass.js#ROUTE_BYPASS_TUNING",
+  "file": "src/domain/worldPulse/routeNetworkCharterBypass.js",
+  "exp": "ROUTE_BYPASS_TUNING",
+  "line": 72,
+  "keys": 5,
+  "exported": true,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/worldPulse/routeNetworkCharterDanger.js#ROUTE_DANGER_TUNING",
+  "file": "src/domain/worldPulse/routeNetworkCharterDanger.js",
+  "exp": "ROUTE_DANGER_TUNING",
+  "line": 91,
+  "keys": 9,
+  "exported": true,
+  "fileDeps": 3
+ },
+ {
+  "id": "src/domain/worldPulse/routeNetworkConsumersRace.js#ROUTE_RACE_TUNING",
+  "file": "src/domain/worldPulse/routeNetworkConsumersRace.js",
+  "exp": "ROUTE_RACE_TUNING",
+  "line": 85,
+  "keys": 4,
+  "exported": true,
+  "fileDeps": 0
+ },
+ {
+  "id": "src/domain/worldPulse/routeNetworkConsumersStrategic.js#ROUTE_STRATEGIC_TUNING",
+  "file": "src/domain/worldPulse/routeNetworkConsumersStrategic.js",
+  "exp": "ROUTE_STRATEGIC_TUNING",
+  "line": 80,
+  "keys": 2,
+  "exported": true,
+  "fileDeps": 0
+ },
+ {
+  "id": "src/domain/worldPulse/routeNetworkConsumersTransit.js#ROUTE_TRANSIT_TUNING",
+  "file": "src/domain/worldPulse/routeNetworkConsumersTransit.js",
+  "exp": "ROUTE_TRANSIT_TUNING",
+  "line": 82,
+  "keys": 3,
+  "exported": true,
+  "fileDeps": 5
+ },
+ {
+  "id": "src/domain/worldPulse/routeNetworkFlows.js#ROUTE_FLOW_TUNING",
+  "file": "src/domain/worldPulse/routeNetworkFlows.js",
+  "exp": "ROUTE_FLOW_TUNING",
+  "line": 118,
+  "keys": 5,
+  "exported": true,
+  "fileDeps": 4
+ },
+ {
+  "id": "src/domain/worldPulse/sacredClaim.js#SACRED_CLAIM_TUNING",
+  "file": "src/domain/worldPulse/sacredClaim.js",
+  "exp": "SACRED_CLAIM_TUNING",
+  "line": 67,
+  "keys": 3,
+  "exported": true,
+  "fileDeps": 5
+ },
+ {
+  "id": "src/domain/worldPulse/seatIntervention.js#SEAT_INTERVENTION_TUNING",
+  "file": "src/domain/worldPulse/seatIntervention.js",
+  "exp": "SEAT_INTERVENTION_TUNING",
+  "line": 52,
+  "keys": 1,
+  "exported": true,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/worldPulse/secrecyTradeFactor.js#SECRECY_TRADE_TUNING",
+  "file": "src/domain/worldPulse/secrecyTradeFactor.js",
+  "exp": "SECRECY_TRADE_TUNING",
+  "line": 119,
+  "keys": 2,
+  "exported": true,
+  "fileDeps": 0
+ },
+ {
+  "id": "src/domain/worldPulse/settlementPolitics.js#SETTLEMENT_POLITICS_TUNING",
+  "file": "src/domain/worldPulse/settlementPolitics.js",
+  "exp": "SETTLEMENT_POLITICS_TUNING",
+  "line": 83,
+  "keys": 16,
+  "exported": true,
+  "fileDeps": 5
+ },
+ {
+  "id": "src/domain/worldPulse/settlementStrategy.js#STRATEGY_TUNING",
+  "file": "src/domain/worldPulse/settlementStrategy.js",
+  "exp": "STRATEGY_TUNING",
+  "line": 1287,
+  "keys": 3,
+  "exported": true,
+  "fileDeps": 2
+ },
+ {
+  "id": "src/domain/worldPulse/sovereigntyAppraisal.js#SOVEREIGNTY_APPRAISAL_TUNING",
+  "file": "src/domain/worldPulse/sovereigntyAppraisal.js",
+  "exp": "SOVEREIGNTY_APPRAISAL_TUNING",
+  "line": 126,
+  "keys": 9,
+  "exported": true,
+  "fileDeps": 2
+ },
+ {
+  "id": "src/domain/worldPulse/sovereigntyBundle.js#SOVEREIGNTY_BUNDLE_TUNING",
+  "file": "src/domain/worldPulse/sovereigntyBundle.js",
+  "exp": "SOVEREIGNTY_BUNDLE_TUNING",
+  "line": 126,
+  "keys": 1,
+  "exported": true,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/worldPulse/sovereigntyIntent.js#SOVEREIGNTY_INTENT_TUNING",
+  "file": "src/domain/worldPulse/sovereigntyIntent.js",
+  "exp": "SOVEREIGNTY_INTENT_TUNING",
+  "line": 102,
+  "keys": 6,
+  "exported": true,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/worldPulse/sovereigntyMarketStage.js#SOVEREIGNTY_MARKET_TUNING",
+  "file": "src/domain/worldPulse/sovereigntyMarketStage.js",
+  "exp": "SOVEREIGNTY_MARKET_TUNING",
+  "line": 120,
+  "keys": 3,
+  "exported": true,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/worldPulse/sovereigntyReach.js#SOVEREIGNTY_REACH_TUNING",
+  "file": "src/domain/worldPulse/sovereigntyReach.js",
+  "exp": "SOVEREIGNTY_REACH_TUNING",
+  "line": 55,
+  "keys": 2,
+  "exported": true,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/worldPulse/sovereigntyTransfer.js#SOVEREIGNTY_TRANSFER_TUNING",
+  "file": "src/domain/worldPulse/sovereigntyTransfer.js",
+  "exp": "SOVEREIGNTY_TRANSFER_TUNING",
+  "line": 89,
+  "keys": 3,
+  "exported": true,
+  "fileDeps": 3
+ },
+ {
+  "id": "src/domain/worldPulse/steadingTopography.js#STEADING_TOPOGRAPHY_TUNING",
+  "file": "src/domain/worldPulse/steadingTopography.js",
+  "exp": "STEADING_TOPOGRAPHY_TUNING",
+  "line": 185,
+  "keys": 6,
+  "exported": true,
+  "fileDeps": 3
+ },
+ {
+  "id": "src/domain/worldPulse/strategicPosture.js#POSTURE_TUNING",
+  "file": "src/domain/worldPulse/strategicPosture.js",
+  "exp": "POSTURE_TUNING",
+  "line": 320,
+  "keys": 3,
+  "exported": true,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/worldPulse/stressorGates.js#UPHEAVAL_TUNING",
+  "file": "src/domain/worldPulse/stressorGates.js",
+  "exp": "UPHEAVAL_TUNING",
+  "line": 77,
+  "keys": 5,
+  "exported": true,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/worldPulse/supplyWebWarfare.js#WEBWAR_TUNING",
+  "file": "src/domain/worldPulse/supplyWebWarfare.js",
+  "exp": "WEBWAR_TUNING",
+  "line": 125,
+  "keys": 15,
+  "exported": true,
+  "fileDeps": 4
+ },
+ {
+  "id": "src/domain/worldPulse/traditionsKernel.js#TRAD_TUNING",
+  "file": "src/domain/worldPulse/traditionsKernel.js",
+  "exp": "TRAD_TUNING",
+  "line": 130,
+  "keys": 24,
+  "exported": false,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/worldPulse/treasury.js#TREASURY_TUNING",
+  "file": "src/domain/worldPulse/treasury.js",
+  "exp": "TREASURY_TUNING",
+  "line": 98,
+  "keys": 16,
+  "exported": true,
+  "fileDeps": 4
+ },
+ {
+  "id": "src/domain/worldPulse/treatyBreachCredibility.js#BREACH_CREDIBILITY_TUNING",
+  "file": "src/domain/worldPulse/treatyBreachCredibility.js",
+  "exp": "BREACH_CREDIBILITY_TUNING",
+  "line": 61,
+  "keys": 1,
+  "exported": true,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/worldPulse/treatyEnforcement.js#TREATY_ENFORCEMENT_TUNING",
+  "file": "src/domain/worldPulse/treatyEnforcement.js",
+  "exp": "TREATY_ENFORCEMENT_TUNING",
+  "line": 41,
+  "keys": 1,
+  "exported": true,
+  "fileDeps": 16
+ },
+ {
+  "id": "src/domain/worldPulse/treatySuccession.js#SUCCESSION_TUNING",
+  "file": "src/domain/worldPulse/treatySuccession.js",
+  "exp": "SUCCESSION_TUNING",
+  "line": 89,
+  "keys": 3,
+  "exported": false,
+  "fileDeps": 3
+ },
+ {
+  "id": "src/domain/worldPulse/upswingKernel.js#UPSWING_TUNING",
+  "file": "src/domain/worldPulse/upswingKernel.js",
+  "exp": "UPSWING_TUNING",
+  "line": 100,
+  "keys": 27,
+  "exported": true,
+  "fileDeps": 2
+ },
+ {
+  "id": "src/domain/worldPulse/urbanFabricKernel.js#FABRIC_TUNING",
+  "file": "src/domain/worldPulse/urbanFabricKernel.js",
+  "exp": "FABRIC_TUNING",
+  "line": 237,
+  "keys": 15,
+  "exported": true,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/worldPulse/vengeanceLicense.js#VENGEANCE_LICENSE_TUNING",
+  "file": "src/domain/worldPulse/vengeanceLicense.js",
+  "exp": "VENGEANCE_LICENSE_TUNING",
+  "line": 82,
+  "keys": 4,
+  "exported": true,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/worldPulse/warCoalitionExpenditure.js#COALITION_EXPENDITURE_TUNING",
+  "file": "src/domain/worldPulse/warCoalitionExpenditure.js",
+  "exp": "COALITION_EXPENDITURE_TUNING",
+  "line": 21,
+  "keys": 6,
+  "exported": true,
+  "fileDeps": 6
+ },
+ {
+  "id": "src/domain/worldPulse/warCoalitionSettlement.js#COALITION_SETTLEMENT_TUNING",
+  "file": "src/domain/worldPulse/warCoalitionSettlement.js",
+  "exp": "COALITION_SETTLEMENT_TUNING",
+  "line": 44,
+  "keys": 8,
+  "exported": true,
+  "fileDeps": 2
+ },
+ {
+  "id": "src/domain/worldPulse/warCosts.js#WAR_COSTS_TUNING",
+  "file": "src/domain/worldPulse/warCosts.js",
+  "exp": "WAR_COSTS_TUNING",
+  "line": 59,
+  "keys": 14,
+  "exported": true,
+  "fileDeps": 4
+ },
+ {
+  "id": "src/domain/worldPulse/warIntent.js#WAR_INTENT_TUNING",
+  "file": "src/domain/worldPulse/warIntent.js",
+  "exp": "WAR_INTENT_TUNING",
+  "line": 420,
+  "keys": 1,
+  "exported": true,
+  "fileDeps": 6
+ },
+ {
+  "id": "src/domain/worldPulse/warPeaceDecision.js#WAR_PEACE_DECISION_TUNING",
+  "file": "src/domain/worldPulse/warPeaceDecision.js",
+  "exp": "WAR_PEACE_DECISION_TUNING",
+  "line": 32,
+  "keys": 1,
+  "exported": true,
+  "fileDeps": 3
+ },
+ {
+  "id": "src/domain/worldPulse/warPeaceRefusal.js#WAR_PEACE_REFUSAL_TUNING",
+  "file": "src/domain/worldPulse/warPeaceRefusal.js",
+  "exp": "WAR_PEACE_REFUSAL_TUNING",
+  "line": 21,
+  "keys": 5,
+  "exported": true,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/worldPulse/warPoliticalLoop.js#WAR_POLITICAL_TUNING",
+  "file": "src/domain/worldPulse/warPoliticalLoop.js",
+  "exp": "WAR_POLITICAL_TUNING",
+  "line": 20,
+  "keys": 4,
+  "exported": true,
+  "fileDeps": 1
+ },
+ {
+  "id": "src/domain/worldPulse/warTermination.js#WAR_TERMINATION_TUNING",
+  "file": "src/domain/worldPulse/warTermination.js",
+  "exp": "WAR_TERMINATION_TUNING",
+  "line": 103,
+  "keys": 19,
+  "exported": true,
+  "fileDeps": 5
+ },
+ {
+  "id": "src/lib/townScene/adaptiveQuality.js#GOVERNOR_TUNING",
+  "file": "src/lib/townScene/adaptiveQuality.js",
+  "exp": "GOVERNOR_TUNING",
+  "line": 32,
+  "keys": 13,
+  "exported": true,
+  "fileDeps": 0
+ }
+]

@@ -1,0 +1,30 @@
+diff --git a/tests/domain/npc/livedExperienceCatalog.test.js b/tests/domain/npc/livedExperienceCatalog.test.js
+index 88727ccde..44d3399e7 100644
+--- a/tests/domain/npc/livedExperienceCatalog.test.js
++++ b/tests/domain/npc/livedExperienceCatalog.test.js
+@@ -84,7 +84,11 @@ describe('THE FAMILY PARTITION — asserted both ways, which is the whole point'
+     // ⭐ 31 -> 32 AT THE SUBSTRATE COUPLING: `faith_milieu` was admitted, paying the
+     // debt W-FAITH's witness adapter had carried in a reconcile pin since car F3c
+     // (§806/F14). A DECLARED count shift, not a drift.
+-    expect(LIVED_EXPERIENCE_KINDS.length).toBe(32);
++    // ⭐ 32 -> 33: ENC-3 lands `met_a_foreigner`, the chance-meeting lesson. It is the
++    // FIRST row in this table whose vector is supplied by its adapter rather than held
++    // here (`vectorSupplied`), because what a meeting teaches is a function of who was
++    // met. Personal plane, bond family, non-ambient, span 1.
++    expect(LIVED_EXPERIENCE_KINDS.length).toBe(33);
+   });
+ 
+   test('every family has kinds, and every kind\'s family is a real family', () => {
+@@ -183,7 +187,11 @@ describe('THE SOURCE QUALIFICATION CENSUS — walked against this tree, carried
+     // `worldPulse/faithWitnessSource.js`, declared there and resolved against the
+     // tree by `ADAPTER_HOMED_ELSEWHERE`). The unverified figure does NOT move — this
+     // landing added a source, it did not find one missing.
+-    expect(RECEIPTED_EXPERIENCE_KINDS.length).toBe(20);
++    // ⭐ 20 -> 21: `met_a_foreigner` arrives RECEIPTED, on the same footing faith_milieu
++    // did — its adapter is real, homed out of leaf in the ENC-3 stage, and resolved
++    // against the tree by `ADAPTER_HOMED_ELSEWHERE`. The UNVERIFIED figure does not move:
++    // this landing added a source, it did not find one missing.
++    expect(RECEIPTED_EXPERIENCE_KINDS.length).toBe(21);
+     expect(SOURCE_UNVERIFIED_KINDS.length + RECEIPTED_EXPERIENCE_KINDS.length)
+       .toBe(LIVED_EXPERIENCE_KINDS.length);
+     expect([...SOURCE_UNVERIFIED_KINDS]).toEqual([

@@ -1,0 +1,267 @@
+# RESUME NOTE — session d5b9a39f (Fable 5.1 chair, fresh account), opened 2026-09-03 18:27 ET
+
+Owner's instruction (verbatim): "Please continue the pending work, starting with the fable retrovalidation! thank you!"
+
+## STATE AT OPEN (survey by git, 18:28–18:40)
+- Ledger tip `review-fixes-2026-07-08` = `fd3c6e25c` (§891). Working-tree copies of ODQ / FRQ / HANDOFF are md5-IDENTICAL to HEAD (the three-copies trap is NOT live).
+- Product `claude/composite-r4` = `ca651d54b` (§890, sealed `landing-890-2026-09-03`).
+- The §891 train: dock `58f0a8e2…/scratchpad/laneKERNELMARK-tree` HEAD `4233031ba` = `refs/preserve/train891-registers-2026-09-03`, 17 cars, 17 `Seat: Opus 5 — Fable-unvalidated` trailers, base `ca651d54b`, node_modules symlinked (immer/seedrandom are links).
+- ⚠ Dock porcelain is ONE, not zero: ` M scripts/.writer-reach-baseline.json`, mtime 18:26 (after the 18:23:54 ledger commit, before this session). It is a `--write` output stamped `frozenAtSha 4233031ba`, 17 ins / 17 del: frozenAtSha, verdictDigest, 6 closureSizes (+4..+6), 7 scanStats, and TWO surfaceReach movements — `situationDesc on economicState` web-display R→N and `_seed on settlement` web-display N→R. Cohort unchanged. NO prediction was written for it. The handoff card's description of the bill has the DIRECTION BACKWARDS (vitest prints "expected <actual=frozen> to be <expected=live>"; frozen says R, live says N).
+- Root cause hypothesis (checking): DESK CAR 1 `a59e66e5a` moved the `eco.situationDesc` render from EconomicsTab.jsx into a new EconomicsGlance.jsx that receives `eco` as a PROP, so the reach scanner cannot resolve the receiver → a FALSE DARK on web-display for an identity the product still renders.
+- No sibling chair is live: only my claude process runs; the three 18:26–18:27 session dirs are empty.
+- Cron heartbeat: none armed (session-only; the old template is STALE and names a Fable trailer for an Opus seat — now the seat IS Fable 5.1 again).
+- Other docks: see the survey block appended below when taken.
+
+## THE PLAN (in order)
+1. THE WALK (§236/§5 — the owner called it): retrovalidate the Opus stratum §882.8 → §891 in `docs/FABLE_RETROVALIDATION_QUEUE.md` (FRQ lines 1946–3176, 258 KB, ~40 rows, ~250 calls). Method: fan-out of Fable-seat verifier agents (validation is Fable's work, §881.7), FOUR at a time (owner cap), read-only, no subagents, no symlink materialising, no git mutation, no full-suite runs; each re-derives its slice from PRIMARY receipts and returns structured verdicts + evidence; the chair rules RATIFIED / AMENDED / REVERSED / EVIDENCE-THIN per call and writes `*RULED (§892, Fable 5.1):*` lines under each row; a §892 sitting section at the FRQ tail; an ODQ §892 row; handoff refresh; commit via chair-commit.sh with `Seat: Fable 5.1 — validated`.
+2. THE §891 LANDING: settle the writer-reach bill honestly (false dark vs absorb) → ratchet `--update` (predicted totalFiles 2458→2462) → pre-gate → bare gate (`npm run check`, quiet window) → chair-verify (Python) → CAS `claude/composite-r4` ca651d54b→tip → seal `landing-891-2026-09-03` → collect §892/§893.
+3. Then the queue after §891 per `$SP/LANE-QUEUE.md` (HORIZON-DARK 5 chair-class cars; desk remainder; lighting wave; GOLDEN...). Owner's desk items untouched.
+
+## SCRATCH LAYOUT (this session)
+- `$SC` = `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad`
+- `$SC/stratum/full.md` + `chunk-00..10.md` — the stratum extracted from FRQ HEAD (line 1 = FRQ line 1946).
+- `$SC/chair-tools/` — chair-commit.sh, seal-wave.sh, lighting-tuple-probe.mjs (copied from 58f0a8e2; run with `SP=$SC`).
+- `$SC/walk/` — the verifier agents' outputs (one JSON per slice) once the workflow runs.
+
+## LAWS RE-CONFIRMED THIS SESSION
+- Survey by git first; the dirt on a dock is somebody's work — analyse, never discard.
+- "expected X to be Y" in vitest is actual=X, expected=Y; a prediction about a register bill must read the assertion's direction, not the card's prose.
+
+## CHECKPOINT 18:5x ET — THE WALK IS RUNNING
+- Workflow `wf_0a24cb28-a54` (task w2fs1g6zs), script `/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/workflows/scripts/fable-retrovalidation-882-891-wf_0a24cb28-a54.js`; 19 slices S01–S19 + critic S99, four concurrent (manual pool), each writes `$SC/walk/<id>.json` (PARTIAL → COMPLETE). Resume in THIS session: `Workflow({scriptPath, resumeFromRunId: "wf_0a24cb28-a54"})`; on an account switch the run id dies — re-launch the script; completed slices' JSON files survive and can be fed to the critic by hand.
+- Heartbeat cron `8d794afc` at 13,43 (session-only; Fable-seat prompt).
+- The reach-register mechanism (CONFIRMED by reading scripts/lib/legacy-reader-shape-scan.mjs makeResolver + the probe): a component PARAMETER is resolved from CALL SITES; a JSX element is not a CallExpression; so a read through a JSX-passed prop is UNGROUNDED and grades N unless the key has a single home. `situationDesc` is not single-home (it moved from EconomicsTab, where `eco = economicState || s?.economicState` grounds via the single-home key `economicState`, to EconomicsGlance where `eco` is a bare prop). The register's web-display grade therefore means "groundable read in the closure", NOT "displayed". Decision pending the probe: absorb via plain `--write` (predicted first) + record the handoff's inverted description + docket the prop-blindness as a scanner finding for the lighting wave (every desk extraction will darken web-display grades this way).
+- Saved the previous chair's dirty register byte-for-byte at `$SC/writer-reach-dirty-1826.json` (md5 to be compared against my own --write reproduction).
+
+## CHECKPOINT 18:53 ET — register 7/7 PROVEN, pre-flight run, waiting on the walk
+- `--write` REPRODUCED without touching the dock: `$SC/writer-reach-repro.json` md5 `0602e826197b87ee6b98379ce30167c3` == the previous chair's 18:26 dirty file, 715,150 B; cohort 1322→1322, 0 stale, 0 struck, 0 violations; every figure in `$SC/PREDICT-writer-reach-891.md` held. The dirty file on the dock IS register 7/7 and is to be COMMITTED as-is with `$SC/msg-891-reg7.txt` (trailer `Seat: Fable 5.1 — validated`) — deliberately AFTER slice S18 finishes reading the dock (it was told HEAD is 4233031ba with one dirty path).
+- Register pre-flight at ca651d54b..4233031ba (`$SC/preflight-891.log`): LIGHTING CENSUS refrozen + CURRENT; TEST RATCHET WILL MOVE — NOT REFROZEN (expected; the `--update` is the next act, predicted totalFiles 2458→2462 CERTAIN, totalTests refused in advance). OSR and prose-numerics listed as touched (their register acts 3/6 and 5/6 are in the train).
+- Landing wrappers written from scratch and `sh -n` clean: `$SC/run-ratchet-891c.sh` (quiet window → `--update`), `$SC/run-pregate-891b.sh` (copies `$SC/pregate/pre-gate.*` in, deletes after), `$SC/run-gate-891.sh` (quiet window → `npm run check`, GATE_* lines the collector reads). Chair-verify: `$SC/chair-verify-891.py <dock> ca651d54b <gate-log> 18` (Python; py_compile OK).
+- ORDER AFTER THE WALK COMPLETES (box quiet): commit register 7 on the dock → `nohup sh $SC/run-ratchet-891c.sh > $SC/ratchet-891c.log 2>&1` (outlast it; read TRUE_EXIT from the log, never the notification) → register commit (ratchet) → seal the train → pre-gate → gate (`$SC/gate-891.log`) → chair-verify → CAS ca651d54b→tip → seal `landing-891-2026-09-03` → ledger §892 (the sitting) + §893 (the landing) — or one act if the walk's rulings are ready first.
+- Memory written: `writer-reach-web-display-grade-is-a-grounding-fact.md` (+ index line; MEMORY.md now 16,348 B — ⚠ under 17 KB but a FOLD is owed before the next index line).
+
+## ⏱⏱ CUTOFF — 2026-09-03 ~19:55 ET (the owner's 5-hour window) — THE SUCCESSOR'S MAP (any model, any account)
+Read this section top to bottom, then act in this order. Survey by git first; trust nothing here over git.
+
+### 0. SURVEY (≤2 minutes)
+```
+SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad
+SP=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/58f0a8e2-2c4f-4073-8635-ecc7cf5010f6/scratchpad
+D=$SP/laneKERNELMARK-tree
+git -C /Users/cstokes/Desktop/settlement-engine rev-parse --short refs/heads/review-fixes-2026-07-08 refs/heads/claude/composite-r4 refs/preserve/train891-reg7-2026-09-03
+git -C $D rev-parse --short HEAD; git -C $D status --porcelain | wc -l     # expect 15c6368a6 and 0
+for f in $SC/walk/S*.json; do python3 -c "import json; d=json.load(open('$f')); print('$(basename $f)', d.get('status'), len(d.get('calls',[])))"; done
+ps -eo pid,etime,command | grep -E '[v]itest|[n]ode scripts' | head          # anything still running?
+```
+Expected at the cutoff: ledger `fd3c6e25c` → `§891.1` commit on top (this act); product `ca651d54b` (NOT CASed); dock `15c6368a6` porcelain 0 = `refs/preserve/train891-reg7-2026-09-03` (18 cars over ca651d54b); walk files: S02 S05 S06 S08 S09 S11 S12 S14 S16 S17 S18 S19 COMPLETE; S07 S13 S15 PARTIAL/in flight; S01 S03 S04 S10 + S99 (critic) not yet run.
+
+### 1. THE WALK — finish it, then RULE (the chair's act; this is what the owner asked for FIRST)
+- Same session, window merely paused: `Workflow({scriptPath: "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/workflows/scripts/fable-retrovalidation-882-891-wf_0a24cb28-a54.js", resumeFromRunId: "wf_0a24cb28-a54"})` — completed slices replay from cache.
+- NEW account/session (run ids are gone): `Workflow({scriptPath: <same path>, args: ["S07","S13","S15","S01","S03","S04","S10"]})` — pass ONLY the ids whose `$SC/walk/<id>.json` is not `"status": "COMPLETE"` (re-derive the list from disk; a PARTIAL file is a resume substrate the fresh slice overwrites). The script honours `args`; the critic S99 runs at the end and reads EVERY S*.json on disk. Four agents at a time is the owner's cap — the script's pool is four; dispatch nothing beside it.
+- ⚠ Do not run the ratchet or the gate while slices run (single-file vitest runs inside them starve a full-suite instrument and make it report the WRONG reason — §888's law).
+- THE SITTING (§892): read every `$SC/walk/*.json` (S99 last — its tables list every AMEND/REVERSE and every gap). For each numbered call in the stratum (`$SC/stratum/full.md`, FRQ line = full.md line + 1945; anchors = every `## §` / `**§` heading) rule RATIFIED / AMENDED / REVERSED / EVIDENCE-THIN with the evidence the slice quoted, re-executing anything decisive that a slice left PLAUSIBLE. Build `$SC/rulings.json` = `[{"anchor": "<exact heading line>", "ruling": "*RULED (§892, Fable 5.1):* …"}]`, then `python3 $SC/apply-rulings.py <(git show HEAD:docs/FABLE_RETROVALIDATION_QUEUE.md) $SC/rulings.json $SC/queue-892.md` (⚠ build from the HEAD blob, never the worktree copy — three-copies hazard; verify by md5 before and by prefix after), append the §892 sitting section (scope statement per §5: this pass covers §882.8→§891 ONLY; the historical strata stay QUEUED; tally N calls: RATIFIED/AMENDED/REVERSED/EVIDENCE-THIN; every re-derivation EXECUTED by the chair listed), then the ledger row + card via `$SC/apply-892.py <payload.json>` and `SP=$SC sh $SC/chair-tools/chair-commit.sh <ledger-tip> <msg> docs/HANDOFF_CURRENT.md:docs/HANDOFF_CURRENT.md $SC/queue-892.md:docs/FABLE_RETROVALIDATION_QUEUE.md` with `Seat: Fable 5.1 — validated`. Read back at the committed tip.
+- Already known for the sitting: §891's bill direction was INVERTED in the card (this chair's finding, §891.1); the register act is RATIFIED as a shrink/absorb; S18 CONFIRMED the charset plant, the OSR twelve→one, and the six register figures.
+
+### 2. THE §891 LANDING (after the walk; box QUIET; all scripts `sh -n` clean)
+1. `nohup sh $SC/run-ratchet-891c.sh > $SC/ratchet-891c.log 2>&1 &` — waits for a quiet window itself; predicted `totalFiles 2458 -> 2462 CERTAIN`, totalTests refused in advance, entries 10 / 0 removed. OUTLAST it; read `TRUE_EXIT=` from the LOG (never the notification). On a refusal: read WHICH test — a foreign test at 0 ms with no assertion = starvation, HOLD; a real red = diagnose, never hand-add to the census.
+2. Commit the moved `scripts/.test-ratchet-baseline.json` on the dock as car 19 ("§891 register 8/8: the test ratchet refrozen — files 2462 as predicted, tests measured"), trailer `Seat: Fable 5.1 — validated`; seal `train891-final-2026-09-03` with `sh $SC/chair-tools/seal-wave.sh $D ca651d54bab1fc68d5c417226d6a5f719562cc5b <tip> train891-final-2026-09-03`.
+3. `sh $SC/run-pregate-891b.sh > $SC/pregate-891b.log 2>&1` (copies the instruments in, deletes them after; PORCELAIN_AFTER_CLEANUP must be [0]).
+4. `nohup sh $SC/run-gate-891.sh > $SC/gate-891.log 2>&1 &` (~18 min, 20 stages); outlast it; TRUE_EXIT from the log.
+5. `python3 $SC/chair-verify-891.py $D ca651d54bab1fc68d5c417226d6a5f719562cc5b $SC/gate-891.log 19` → must print CHAIR-VERIFY GREEN.
+6. CAS: `git update-ref refs/heads/claude/composite-r4 <tip> ca651d54bab1fc68d5c417226d6a5f719562cc5b`; seal `landing-891-2026-09-03`; collect (§893) — ledger row + card + queue (the train's own retro rows: this chair's register-7 call is RULED in §891.1; the Opus cars' rows are §891's, walked in §892).
+7. Then `$SP/LANE-QUEUE.md`'s queue after §891 (HORIZON-DARK's 5 chair-class cars, the desk remainder, the lighting wave, GOLDEN…). The owner's desk items stay the owner's.
+
+### 3. TOOLS AND PATHS
+`$SC/chair-tools/` (chair-commit.sh · seal-wave.sh · lighting-tuple-probe.mjs — run with `SP=$SC`) · `$SC/apply-rulings.py` · `$SC/apply-892.py` · `$SC/apply-cutoff.py` · `$SC/chair-verify-891.py` · `$SC/run-*.sh` · `$SC/pregate/` (the pre-gate + preflight extracted from 41a565e8b) · `$SC/probe-reach.mjs` + `repro-write.mjs` (the register-7 proof) · `$SC/PREDICT-writer-reach-891.md` · `$SC/preflight-891.log` · `$SC/HEARTBEAT-PROMPT.txt` (re-arm with CronCreate `13,43 * * * *`) · `$SC/stratum/` · `$SC/walk/`. Receipts and docks: see the preamble inside the workflow script.
+
+### 4. LAWS THIS SESSION RE-CONFIRMED
+- vitest prints ACTUAL then EXPECTED; read the assertion's argument order before narrating a register bill's direction.
+- The writer-reach grade is a GROUNDING fact (JSX-prop reads grade N); every desk extraction darkens web-display grades.
+- A `--write` can be reproduced without touching a dock by driving `run()` with readBaseline/writeBaseline overrides.
+- `TRUE_EXIT=$?` after a pipe reports the LAST command's exit — capture the status before piping.
+
+## CHECKPOINT 19:58 ET — CUTOFF ACT LANDED
+- Ledger `review-fixes-2026-07-08` = `15c3ff224` (§891.1; card top block = §891.1; `Seat: Fable 5.1 — validated`; `Enrols: none`). Product still `ca651d54b`. Train `15c6368a6` sealed `train891-reg7-2026-09-03`. The walk workflow was STILL RUNNING at this line (12 COMPLETE, S03/S07/S13/S15 in flight, S01/S04/S10 + S99 pending) — if you are a successor, re-derive the list from disk before re-launching with `args`.
+
+## CHECKPOINT 23:22 ET — SESSION-LIMIT DEATH (class 2) at ~20:0x, RESET 23:20, RESUMED
+- Failure text on all 8 dead agents: "You have hit your session limit · resets 11:20pm". 12 slices COMPLETE + S07 COMPLETE on disk (14 calls; its agent died after writing). Remaining: S01 S03 S04 S10 S13 S15 + critic. Resumed in THIS session via the persisted script with args = those six (S07 excluded so its COMPLETE file is not overwritten); backup of all slice files at $SC/walk-backup-2322/. Ledger 15c3ff224 · product ca651d54b · dock 15c6368a6 p0 — the heartbeat text figures (4233031ba, one dirty path, fd3c6e25c) are STALE and superseded by §891.1.
+
+## CHECKPOINT 23:27 ET — 13 slices READ in full; chair re-derivations running; rulings drafting begins ($SC/rulings-part*.json); resumed run wf_edb0b5fe-ba2 in flight (S03 S10 S13 S15; S01 S04 queued; critic last); S20 (enrolment of the four §891 lanes) added to the script, to be launched with args ["S20"] when the run completes.
+
+## CHECKPOINT 23:39 ET — rulings 38 drafted (parts 1–5), build-queue-892.py DRY-RUN GREEN (§3 amended, 38 placed, deletions = the two old §3 lines only); brief-O2GATE.md ready (dispatch after the run, cap); S20 to launch with args ["S20"]; awaiting S01 S03 S04 S13 S15 + S99.
+
+## CHECKPOINT 23:43 ET — 43 rulings drafted (parts 1–7; rows still owed: §882.8.1 §882.9 §882.12 §883.7-lane §885.6 §885.7 §885.8 §886 §887 §887.1 §887.2), build-queue-892.py dry-run GREEN at 43; awaiting S01 S04 S15 then the critic S99; then launch S20 (args ["S20"]) and dispatch the O2GATE lane (brief at $SC/briefs/brief-O2GATE.md) inside the cap; collect-892.sh ready (needs msg-892.txt + payload-892.json + tally.json TALLY/S20/CRITIC fills).
+
+## ⏱⏱ CUTOFF #2 — 2026-09-03 ~23:5x ET — THE FABLE MODEL LIMIT ("we are about to run out of fable") — THE SUCCESSOR'S MAP, EITHER SEAT
+Everything is in git: `refs/preserve/sitting-892-kit-2026-09-03` (this scratchpad: every walk/S*.json, rulings-part1..7.json, tally.json, frq-tail-892.md, payload-892.json, msg-892.txt, build-queue-892.py, apply-892.py, apply-rulings.py, collect-892.sh, chair-verify-891.py, run-*.sh, pregate/, briefs/brief-O2GATE.md, walk-workflow.js, this note). On the same machine read `$SC` directly; on a new machine `git archive refs/preserve/sitting-892-kit-2026-09-03 | tar -x` into a scratch dir and re-point the absolute `$SC` paths in the scripts.
+
+### 0. SURVEY (git, never transcript)
+```
+SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad
+SP=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/58f0a8e2-2c4f-4073-8635-ecc7cf5010f6/scratchpad
+cd /Users/cstokes/Desktop/settlement-engine
+git rev-parse --short refs/heads/review-fixes-2026-07-08 refs/heads/claude/composite-r4 refs/preserve/train891-reg7-2026-09-03 refs/preserve/sitting-892-kit-2026-09-03
+git -C $SP/laneKERNELMARK-tree rev-parse --short HEAD; git -C $SP/laneKERNELMARK-tree status --porcelain | wc -l   # 15c6368a6, 0 (unless O2GATE has landed car 19)
+for f in $SC/walk/S*.json; do python3 -c "import json; d=json.load(open('$f')); print('$(basename $f)', d.get('status'), len(d.get('calls',[])))"; done
+git show HEAD:docs/FABLE_RETROVALIDATION_QUEUE.md | grep -c '^\*RULED (§892'    # 43 if the §892 commit landed
+```
+
+### 1. THE SITTING (§892 on the ledger, PARTIAL) — a FABLE seat finishes it
+- Rows RULED (43): every `## §`/`**§` row from §882.10 to §891 except: §882.8/§882.8.1/§882.9 (S01), §882.12 + the §883.7 LANE row (S04), §885.6 §885.7 §885.8 §886 §887 §887.1 §887.2 (S15 is COMPLETE — read `$SC/walk/S15.json` and rule), §892.1 the four §891 lanes (S20), the critic.
+- To finish: read the remaining slice files; write `$SC/rulings-part8.json` (+ part9 for S20's enrolment rows and the S15 rows) in the same `{"line": N, "id": "§X", "ruling": "*RULED (§892.1, Fable 5.1):* …"}` form — ⚠ `line` is the heading's line number in the CURRENT HEAD blob (re-derive with `git show HEAD:docs/FABLE_RETROVALIDATION_QUEUE.md | grep -n '^## §885.6\|^\*\*§882.8.1'` etc.); then a new §892.1 tail (a fresh `frq-tail-8921.md`) and a new build that does NOT re-apply the §3 amendment or the 43 (build-queue-892.py must be copied and its §3 step and rulings glob adjusted, or write the few rulings with apply-rulings.py directly on the HEAD blob and append the tail); `collect-892.sh` pattern for the commit (Fable trailer; queue mapped).
+- The three in-flight slices at the cutoff: main run `wf_edb0b5fe-ba2` (S01, S04, then S99), side run `wf_f80bb646-76d` (S20). SAME SESSION: they may have completed — check the files. NEW ACCOUNT: re-launch `Workflow({scriptPath: <walk-workflow.js from the kit or the session's workflows/scripts/>, args: ["S01","S04"]})` (the critic runs after) and `args: ["S20","--no-critic"]`; a Fable seat rules; an Opus seat only gathers (mark files ⟦OPUS-AUTHORED⟧).
+
+### 2. THE §891 LANDING (either seat; Opus marks unvalidated) — box QUIET
+1. Dispatch O2GATE (`$SC/briefs/brief-O2GATE.md`, Opus, one agent) → car 19 on the dock → re-take the LIGHTING census (`TUNING…` no; it is `tests/lint/sovereigntyLightingContract.walker.test.js`'s refreeze — see the §891 register 1/6 commit `250d4e464` for the exact command and prediction shape) → seal.
+2. `nohup sh $SC/run-ratchet-891c.sh > $SC/ratchet-891c.log 2>&1 &` (predicted totalFiles 2458→2462 + O2GATE's file if it added none stays 2462; totalTests refused in advance) → commit the register → seal `train891-final-2026-09-03`.
+3. `sh $SC/run-pregate-891b.sh` → `nohup sh $SC/run-gate-891.sh > $SC/gate-891.log 2>&1 &` → `python3 $SC/chair-verify-891.py $SP/laneKERNELMARK-tree ca651d54bab1fc68d5c417226d6a5f719562cc5b $SC/gate-891.log <cars>` → CAS `git update-ref refs/heads/claude/composite-r4 <tip> ca651d54bab1fc68d5c417226d6a5f719562cc5b` → `sh $SC/chair-tools/seal-wave.sh $SP/laneKERNELMARK-tree ca651d54b… <tip> landing-891-2026-09-03` → collect §893 (ledger row + card + queue rows for the train's lanes: the §891 row's ruling names them; S20's file is the enrolment evidence).
+4. Then `$SP/LANE-QUEUE.md`'s queue after §891. The owner's desk items stay the owner's.
+
+### 3. HEARTBEAT: re-arm with `$SC/HEARTBEAT-PROMPT.txt` (CronCreate `13,43 * * * *`); it names the seat once — change the trailer line if the seat is Opus.
+
+## CHECKPOINT 23:53 ET — §892 (PARTIAL SITTING) LANDED: ledger `f6c150528` — 43 rulings + the §3 amendment in the queue (+122/−2), the §892 row, the card top block = §892; worktree copies == HEAD. Owed rows and S20/critic per the CUTOFF #2 map above. Kit re-sealed as refs/preserve/sitting-892-kit-2026-09-03b.
+
+## ⏱⏱ CUTOFF #3 — 2026-09-04 ~00:0x ET — OWNER DIRECTIVE: "continue to let opus implement and hold the fable retrovalidation for later (I've run out of fable but not weekly usage)… there might be more to review that is built off of any opus faults. keep it in mind"
+**Operative reading (the chair's, vetoable):** the seat becomes OPUS 5 for implementation NOW; every act carries `Seat: Opus 5 — Fable-unvalidated` and lands a queue row in the same commit (§685/§882.14 gates); the Fable pass over §882.8→§891 stays PARTIAL at §892 and is HELD at the owner's trigger together with everything built from here; **no `*RULED (§892…)*` line is written by an Opus seat.** The owner's caution is the standing law of this span: **before building on any landed or sealed Opus artifact, check the LIVE-FAULT LIST below — a fault built upon is a fault the next pass has to unpick twice.**
+
+### THE OPUS CHAIR'S FIRST ACTS, IN ORDER
+0. Survey by git (the block in CUTOFF #2). The three Fable verifier agents (S01, S04, S20) die with the Fable limit — leave their PARTIAL files; do NOT re-run them on Opus unless as fact-gathering marked `⟦OPUS-AUTHORED⟧`.
+1. **Lane O2GATE is DISPATCHED (Opus, background) at ~00:0x** from `$SC/briefs/brief-O2GATE.md` onto `$SP/laneKERNELMARK-tree` (15c6368a6). Collect its receipt (`$SC/o2gate/receipt-o2gate.md`), verify porcelain 0 and the new sha, seal it (`sh $SC/chair-tools/seal-wave.sh $SP/laneKERNELMARK-tree ca651d54bab1fc68d5c417226d6a5f719562cc5b <tip> train891-o2gate-2026-09-04`).
+2. Registers LAST, after that cure: re-take the LIGHTING census on the dock (the refreeze command and prediction shape are in `250d4e464`'s message — predict `files` and `credited` exactly, leave titles/suiteTitles unnamed), commit it; then `nohup sh $SC/run-ratchet-891c.sh > $SC/ratchet-891c.log 2>&1 &` on a QUIET box (predicted totalFiles 2458→2462 unless O2GATE added a test file — it was told not to), commit the ratchet register; seal `train891-final-2026-09-04`.
+3. `sh $SC/run-pregate-891b.sh > $SC/pregate-891b.log 2>&1` → `nohup sh $SC/run-gate-891.sh > $SC/gate-891.log 2>&1 &` → `python3 $SC/chair-verify-891.py $SP/laneKERNELMARK-tree ca651d54bab1fc68d5c417226d6a5f719562cc5b $SC/gate-891.log <cars>` → CAS → seal `landing-891-2026-09-04` → collect §893 (Opus trailer; the queue MUST ride with rows for O2GATE and for the four §891 lanes the §891 row named and never enrolled — their receipts are `$SP/receipt-capacity.md`, `receipt-charset1.md`, `receipt-deskwiring.md`, `receipt-readerreview2.md`; S20's partial file may help).
+4. Then `$SP/LANE-QUEUE.md` (refreshed below): HORIZON-DARK's remaining chair-class cars → the desk remainder → the lighting wave (which also carries the prose car AFTER its rebase) → GOLDEN (⛔ the seven GOLDEN cars are UNLANDED — rebase, re-prove and land them before any freeze act) → W-ARMS → the owner's walk → the review → STOP before the soak.
+5. Re-arm the heartbeat from `$SC/HEARTBEAT-PROMPT.txt` with the trailer line changed to `Seat: Opus 5 — Fable-unvalidated`.
+
+### ⛔ THE LIVE-FAULT LIST — Opus findings the §892 walk confirmed and that the tree still carries; DO NOT BUILD ON THEM UNCORRECTED
+1. **Paid-surface gap on the §891 train** — the economy desk's state prose renders on public dossiers (O2GATE cures it; nothing else may land on that train before it).
+2. **Three §882.13 rulings never executed:** RR-10 (`errandSpineEnabled` into `PREVIEW_OVERLAY` — `scripts/review/readerCorpus.mjs:101–115` in the train says the OPPOSITE), ENC rows 2 and 3 (`respect` coerces to `friendship` at `npcLadderState.js:450`; `rivalry` refused at the stage "until the owner rules") — any car reading those files must not inherit the stale comments as rulings.
+3. **The ENC-3 stage (UNCOMMITTED in `laneENC-tree`)** implements the season cap as `taughtRecently(driftMap, nid, …)` that never reads `nid` — cure before commit; and ENC-3 is blocked on the drift door (owner's decision), not on TE-VIRT-1.
+4. **The prose car `8f4d5c648`** is based on `30c1667bc`, overlapping the trains on `settlementRumors.js` and `propagation.js` — REBASE before it rides; and it is gated on the owner's window regardless.
+5. **The seven GOLDEN cars (`ba08939d7`) are UNLANDED**, 197+ commits behind; `commitTrailerRefusal` is unwired; the momentum fixture was re-recorded outside the door. No freeze act until they are rebased, re-proven and landed.
+6. **`{complexity}` is dark on all eleven values** — with the desk now wired, four of five DS-ECO-1 pools lose a variant: a BLOCKER on lighting the economy desk's C1 pool.
+7. **The writer-reach register's `web-display` grade is a GROUNDING fact** — every desk extraction (a read moved behind a JSX prop) darkens it; absorb with plain `--write`, predict BOTH entries, never "cure" the component.
+8. **The ratchet's budget message misreports** (`check-test-ratchet.mjs:818` prints max(config, literals) under the config label) — read a timeout's true budget from the file; the instrument is uncured.
+9. **`sovereigntyLightingContract` DOOR 3 PARSER DOOR** is a recurring timeout under load; the known-failure census is FULL (10/10) — it cannot be banked; hold, never hand-add.
+10. **The tuning register charges a name-for-bare replacement as debt** (+1 unregisteredNamed / −1 bareDecimal); every naming needs a `declaredGrowth` citation until the rule is changed.
+11. **`chair-commit.sh` has no parent-blob prefix gate** and the ledger worktree's three files sit `D` + `??` — ALWAYS build the queue from `git show HEAD:docs/FABLE_RETROVALIDATION_QUEUE.md`, never the worktree copy; the ENROLMENT GATE's predicate misses `ACCEPTED`.
+12. **Hygiene debts** (one car): `bandedStock.js:46`, `detMathDecay.js:88`, `vite.config.js:609–612` (a false present-tense premise), the porcelain canned-record battery + the fold of two `parsePorcelainPaths` copies, `compareDark`'s rolled-direction plant, the stale `frozen-dialgated.txt`.
+13. **Provenance looseness to stop repeating:** LEG-7 is a lane note, not an owner ruling; the angle ruling is enrolled at §892; the `now: null` delegation is unconfirmed — cite the ledger, never "the owner said" from memory.
+14. **Record-keeping:** the queue has duplicate identifiers (§883.5–§883.7 twice); §889.2 has no ledger row; anchor by heading line. Every ruling an Opus chair withdraws gets a `⛔ SUPERSEDED at §N` line in the earlier row in the same act.
+
+## CHECKPOINT 00:01 ET — §892.1 LANDED at ledger `04f6b255e` (the owner's directive: Opus implements, the Fable pass HELD; the live-fault list on the card). O2GATE running (Opus). S01 COMPLETE on disk; S04/S20 PARTIAL (Fable agents, will die with the limit).
+
+## CHECKPOINT 2026-09-04 ~00:3x ET — O2GATE LANDED AND SEALED; ITS "BLOCKER" DISPOSITIONED
+- Car 19 = `450f7dbb7` on the dock (3 files, +98/−8, `Seat: Opus 5 — Fable-unvalidated` + `Lane: O2GATE`, porcelain 0), sealed **`refs/preserve/train891-o2gate-2026-09-04`**. The train is 19 cars over `ca651d54b`.
+- The lane's two corrections are RIGHT and worth keeping: there are **TWO** sentence mounts (the DS-ECO-1 prosperity header as well as the food line), so gating the food line alone would have left the header speaking on a public dossier; and the kernel's `audience` option is a DM/player COVERTNESS axis, not a public gate — using it would have been a false gate. It gated at the DRAW, upstream of both mounts, and both source edits are physical-line-neutral because `OutputContainer.jsx` sits at exactly 600/600 and prose-numerics freezes debt by exact path+line.
+- ⛔ **ITS FIRST OWED ITEM IS NOT A LANDING BLOCKER — DISPOSITIONED BY THE CHAIR (Opus seat, 2026-09-04).** `tests/copy/voiceMechanics.test.js` is red at the train tip on FOUR arms (E2 per-file 69 rows · E2 total 770>670 · E-E JSX per-file 17 rows · E-E JSX total 40>6) — EXECUTED at `450f7dbb7`: `Tests 4 failed | 15 passed (19)`, porcelain 0 before and after. **All four are among the ten banked census entries, keyed by `file :: test` identity** (`scripts/.test-ratchet-baseline.json` `entries` is a dict of ten `file`+`test` records; the magnitudes live in each row's `cause` PROSE and are not asserted by the ratchet). The same four were red under §890's green gate at `ca651d54b`. ⇒ **the gate does not fail on this**; what is real is that DESK CAR 1's extraction moved three em dashes `EconomicsTab → EconomicsGlance` and the voice baseline was never refrozen, so the debt list is stale in its details. That is an OPTIONAL shrink-only `UPDATE_VOICE_BASELINE=1` bank-the-win at the landing, not a cure car. ⚠ The census stays FULL at 10/10 with ZERO headroom, so an ELEVENTH failing identity still cannot land.
+- Its second owed item (R3: the tab prop defaults `publicDossier = false`, fail-OPEN) is a real vetoable call: the leak is bounded because `PublicDossierView` is the only public mount and arm 3 pins that thread, but structural fail-closure means gating where `publicDossier` is COMPUTED. Left as the lane wrote it; recorded for the held Fable pass.
+- ⭐ LESSON FOR THIS SPAN, and it is the owner's caution in miniature: **an Opus lane's alarm is a claim like any other.** "Owed a disposition before the CAS" would have cost a cure car; the census settled it in one read. Check the instrument's own comparison key before treating a red as a blocker.
+
+## CHECKPOINT 2026-09-04 ~00:4x ET — THE PENDING-WORK SURVEY IS DONE (workflow `wf_f3c216a9-719`, 9 readers + a reconciler, all read-only, every dock's porcelain unchanged)
+Outputs: `$SC/pending/ALL-READERS.json` (nine readers, 161 items) · `$SC/pending/RECONCILED.json` (the ordered stages, the owner list, 8 contradictions resolved against the tree) · `$SC/pending/*.json` per reader.
+⭐ **THE HEADLINE FOR PLANNING:** ~60–72 chair-class cars across 7–8 gates, and **~45 distinct owner decisions/acts — a third of the remaining work is the owner's**. ⛔ **THE LONGEST POLE IS NOT GOLDEN** (its rebase was MEASURED cheap: 1 of 43 migrated files drifted, no overlap at the migration sites) — it is **SEAT-7/8 + `irregularForceEnabled`**, ≈4 cars on its own consist, the only item any source says adds DAYS to the critical path (2–3), chair-ruled FUND at §882.1, confirmed unbuilt (0 hits at `ca651d54b` AND `15c6368a6`).
+⭐ **THE FOUR SENTENCES THAT UNBLOCK THE MOST:** CS-9 (restore vs authoring wall — blocks CHARSET Car 2 and half of L-DOORS; three sources call it the most blocking row in the arc) · the DRIFT DOOR (unblocks ENC-3's ~17 files and the wave's drift row) · O-5 (fund the Remembrance reader; the dark-inert car may start ahead of the word and be dropped free) · O-11 (sign the MAT dial's three persistence paths; 0 B, one sentence, without it L-MAT lands wiring only).
+⛔ **THE GAP NO CHARTER FUNDS:** the lighting charter has ZERO mentions of the dossier state-prose corpus across all 436 lines (grep-confirmed twice, independently) — the 64 dark blocks carrying **2,185 authored variants that ship in the bundle and reach no reader** are on nobody's bill. Stage C must be scheduled deliberately or it will not happen.
+⚠ **NOBODY HAS SIZED** (treat as unknown, not small): L-DEFAULT (the wave's centre of mass — "no file count is given") · the Remembrance reader · the characterDrift funnel · READERREVIEW Car 4's fix cars · WRWALKER Car 4's triage of ~301 identities · the general desk beyond "3–5 cars".
+⭐ **TWO CHEAP ACTS AVAILABLE AT THE §891 LANDING:** the dossier-mounts baseline is SLACK (records 68 dark, tree has 64 — a car could re-park four blocks unnoticed); and the voiceMechanics shrink-only refreeze may **retire two of the ten banked known-failure slots**, which is the cheap road to the census headroom DOOR 3's timeout has nowhere to park in.
+
+## HEARTBEAT CHECKPOINT 2026-09-04 ~00:5x ET (Opus 5 chair — ⚠ the cron text asks for a `Seat: Fable 5.1` trailer and the seat has been OPUS 5 since §892.1; the INTENT is followed and that specific is REFUSED, the second time this instruction has needed it — §884.1's law)
+**Survey by git:** ledger `04f6b255e` (§892.1, ahead of the cron's expectation because this chair moved it) · product `ca651d54b` (NOT CASed) · dock `laneKERNELMARK-tree` at **`e49353a33`, porcelain 0, 21 cars** (the cron's `15c6368a6`/18 is STALE: O2GATE + two register acts landed since) · board 0 agents, load ~2.2, no gate lock.
+**The walk: 20 of 20 slices COMPLETE.** Only the critic S99 is absent — it died on the Fable MODEL limit. ⛔ **NOT re-launched:** the critic is a Fable validation act and the owner has HELD the pass; re-running it on Opus would produce ⟦OPUS-AUTHORED⟧ facts, not a validation. It waits with the eleven owed rows.
+**THREE REGISTER ACTS TAKEN, each predicted in writing first (`$SC/PREDICT-891-registers.md`):**
+- **register 8/10 `412a096f3` — the lighting census: five figures predicted, FIVE EXACT** (2515/371/2144/22919→22922/6152→6153, measuredAtSha 450f7dbb7). ⭐ The `suiteTitles` +1 is the point: the walker asserts `titles` first and throws, so a single run hides the second figure — predicting both is what caught it. Refreeze exit 1 by design; plain proof 34/34 exit 0.
+- **register 9/10 `e49353a33` — the dossier-mounts baseline 68 → 64.** ⭐ A shrink-only ratchet that had gone SLACK by four: DESK CAR 1 mounted four blocks and the baseline still said 68, so a later car could have re-parked four unseen. The `<=` arm was green, which is why nothing complained — a slack ratchet is silent by construction. 16/16 exit 0.
+- **the VOICE baseline: REFUSED, exactly as predicted, and the act was NOT taken.** `UPDATE_VOICE_BASELINE=1` → `REFUSED: regenerating the Tier-2 src/data + src/domain voice baseline would RAISE its committed totals — em 455 → 770 (+315), bang 10 → 15 (+5)`; shrink-only, nothing written, porcelain clean. ⭐ **THE DISPOSITION, and it raises the value of the prose car:** that growth is measured by the guard's own CHAR TOKENIZER, which §890.4 proved a FALSE instrument in both directions (39 bangs by tokenizer vs 0 by a parser; 64 of 71 phantom), and the `espree` replacement rides the UNLANDED src-prose car. ⇒ **the voice baseline cannot be honestly refrozen until that car lands**, after which it should bank a large FALL rather than refuse a phantom rise. The four arms stay banked by `file :: test` identity so the gate is unaffected; the two census slots stay spent.
+**IN FLIGHT:** `run-ratchet-891c.sh` (pid 31006, log `$SC/ratchet-891c.log`) — predicted `totalFiles 2458 → 2462 CERTAIN`, `totalTests` REFUSED IN ADVANCE, entries 10 / 0 removed. It waits for three consecutive quiet readings, ends in `exit $TRUE_EXIT`, and its result must be read FROM THE LOG, never from a task notification (§884.4). Next after it: the register commit (10/10) → seal → pre-gate → gate → chair-verify → CAS → seal `landing-891-2026-09-04` → §893.
+
+---
+## CHECKPOINT 2026-09-04 ~01:2x ET — the owner's SECOND grant, and the ratchet's refusal
+**OWNER, in chat:** permission to *"follow ammend or modify"* the carve-out sentence itself
+(*"anything irreversible, externally visible, or constitutional in nature stays owner-gated even
+under this grant"*), with **Fable retrovalidation named as the remedy for any mistake**.
+
+**THE CHAIR'S AMENDMENT** — `$SC/RULINGS-893.md` §6, and `memory/owner-amends-the-carve-out-line-2026-09-04.md`.
+Re-cut on ONE test: *can a later retrovalidation actually undo this?* **⛔ STILL GATED — exactly two:
+every `git push`/deploy, and the owner's WALK.** TAKEN, each marked ⟦OPUS-AUTHORED — Fable
+retrovalidation OWED⟧: the CULL · paid-surface behaviour (CHARSET Car 3 is a REPAIR — 27 drawable
+codepoints) · ceiling raises by the measured residual · ENC-4/5's WORDS (drafted, the pen's to
+overwrite) · the twelve anchors (LEG-7 was a LANE note) · persisted shapes. The tuning SIGNATURE is
+DECLINED by the chair's own judgment, not gated — a promise made to players — and blocks nothing.
+
+**THE RATCHET REFUSED, and it was right.** `run-ratchet-891c.sh` → `$SC/ratchet-891c.log`,
+**TRUE_EXIT=1**: a NEW identity, `negativeAssertionAnchor.walker.test.js`, `economicsTabFlow.test.js:
+3 un-anchored negatives at 43/135/136 (ceiling 1)`. The census is FULL 10/10, so it could not be
+banked. **Cured at car 22 `62afd84d3`** (sealed `refs/preserve/train891-cure22-2026-09-04`,
+read-back verified): the two O2GATE sites now go through `expectPresentThenAbsent`; **line 43 is left
+alone deliberately** — curing it too takes the file to 0 < ceiling 1 and reds the walker's
+`inventory honesty` arm, which then demands a census-row deletion (a LANDING act, program law puts it
+LAST). Proof at the COMMITTED tip: 2 files, 16 tests, exit 0. Hazard recorded at
+`memory/anchored-negative-walker-is-a-two-sided-trap.md`.
+
+**STATE BY GIT:** train `62afd84d3` (**22 cars**, porcelain 0, base `ca651d54b`); registers 9 of 10 in
+(8/10 lighting `412a096f3`, 9/10 mounts `e49353a33`, both sealed `train891-reg9-2026-09-04`); ledger
+`04f6b255e`; product `ca651d54b` NOT CASed. `run-ratchet-891d.log` is the re-run in flight.
+⚠ MEMORY.md crossed 17 KB and was FOLDED to `archive-2026-09-04-index-fold-32.md` (3 rows verbatim).
+**NEXT:** ratchet 10/10 → seal → pre-gate → gate → chair-verify (Python) → CAS → seal
+`landing-891-2026-09-04` → §893. Then dispatch four-wide from `$SC/briefs/`: CHARSET2, ENC3, CULL,
+ANCHORS, CHARSET3 (five ready, cap is four).
+
+---
+## ✅ CHECKPOINT 2026-09-04 ~07:3x ET — §891 LANDED, §893 COLLECTED
+**Ledger `88be66ab8`** (§893, 14 retrovalidation rows, 1 seat trailer, queue +142/−0).
+**Product `claude/composite-r4` = `f537ce47e`** — §891 LANDED at 27 cars, gate TRUE_EXIT=0 in 1017s,
+CHAIR-VERIFY GREEN on 20 checks, CAS `ca651d54b`→`f537ce47e`, sealed `landing-891-2026-09-04`.
+⛔ **Nothing pushed.** The remote exists; the push is one of only two things still gated.
+
+**SEALED TONIGHT:** `landing-891-2026-09-04` · `train891-{o2gate,reg9,cure22,final,cure24,final2}-2026-09-04`
+· ⭐ **`session-kit-893-2026-09-04` (463 files)** — every ruling, receipt and lane deliverable, sealed
+because the scratch dirs die with the account and the lighting inventory had NO git home at all.
+
+**⚠⚠ SUCCESSOR HAZARD — THE LEDGER INDEX IS ARMED TO DELETE.** `git status` in the ledger worktree
+shows `D ` (staged deletion) for `docs/FABLE_RETROVALIDATION_QUEUE.md` and `docs/HANDOFF_CURRENT.md`
+plus `??` for the same paths, and `MM` for the ODQ — while **all three match HEAD byte-for-byte**
+(md5 verified). This is PRE-EXISTING (recorded at §892) and harmless ONLY because `chair-commit.sh`
+builds commits by PLUMBING and never consults the index. ⛔ **A naive `git commit -a` here would
+DELETE two governed files.** Left untouched deliberately: it is foreign index state, not WIP, and
+changing it risks the very machinery that works around it.
+
+**THE NEXT ACT, and it is scheduling not building:** ⭐ **census headroom is the binding constraint on
+everything remaining** and is now written down (§893 R12). 6 of 10 slots reachable, four in ONE act —
+wire the eight authored annex families into `WAR_RECEIPTS`, ⚠ COUPLED with `kindPoolFloors`'
+`28 → 24` in the SAME commit. **CURE FIRST, remove the census row AFTER** (reverse order = REGRESSION
++ red gate, proved from `check-test-ratchet.mjs:1292/:1435`). Plan at `$SC/censushead/headroom-plan.md`.
+Then GOLDEN (landable now, `$SC/goldenplan/landing-plan.md`), the CHARSET EMBED (0 B first paint),
+LIGHTING, DESK, W-ARMS → ⛔ the owner's WALK → the review → ⛔ FULL STOP.
+
+**⚠ ZERO HEADROOM ON SEVEN MEASURES AT ONCE:** JSX voice 34/34, 0/0, 15/15 · Tier-2 382/382, 69/69,
+9/9, 770/770 · typecheck ratchets 1121/1121 and 173/173. One em dash in a `src/data`/`src/domain`
+string literal, or one type error, breaches on arrival.
+
+## HEARTBEAT CHECKPOINT 2026-09-04 ~07:4x ET — its seat AND all three of its git facts refused as stale
+The recurring heartbeat asserts `Seat: Fable 5.1` and three shas. **All four are stale and were
+refused, not acted on** (§884.1's law: follow a heartbeat's STRUCTURE, refuse its stale specifics).
+
+| the heartbeat says | git says | |
+|---|---|---|
+| seat is FABLE 5.1 | **OPUS 5** — the owner handed implementation back at §892.1 and HELD the pass | refused |
+| dock at `15c6368a6` *"until the ratchet car lands"* | **`f537ce47e`**, 27 cars — it landed, and so did five more | stale |
+| product at `ca651d54b` *"until the §891 CAS"* | **`f537ce47e`** — the CAS is DONE | stale |
+| ledger at/after `15c3ff224` (§891.1) | **`88be66ab8`** (§893) | stale |
+
+⭐ **A GENUINE CORRECTION TO THE §892 RECORD, and it is good news for the held pass.** §892 recorded
+S01, S04 and S20 as IN FLIGHT at the Fable-limit cutoff, with their evidence owed *"when it
+completes"*. **It completed.** All twenty slices read `status=COMPLETE` on disk — S01 31,381 B,
+S04 34,440 B, S15 67,604 B, S20 63,670 B. **The walk's EVIDENCE is whole; only the RULINGS are owed**
+(11 rows + §892.1's four lanes), and 43 `*RULED (§892…)*` paragraphs are already at the ledger tip.
+
+⛔ **THE ONE PIECE OF WORK GENUINELY MISSING IS THE CRITIC — it never ran** (no `S99`/critic file).
+**Deliberately NOT run by this seat.** The heartbeat's step (2) says to re-launch slices that are not
+COMPLETE; there are none, so that step had nothing to act on. And the critic is not a slice: its job
+is to critique the Fable pass's own coverage and contradictions, so **an Opus critique of a Fable pass
+is not validation** — the Fable seat would re-derive it anyway, and the artifact would muddy the
+record. It is owed to a FABLE seat with the eleven rows.
+
+**Cap honoured: 0 agents running.** No ratchet or gate run against verifier agents — the board was
+clear before every instrument tonight except the one contention red, which is recorded at §893 R11.
+
+- HEARTBEAT 2026-09-04T07:57Z: nothing moved since the previous checkpoint. ledger `88be66ab8` · product `f537ce47e` · dock `f537ce47e` porcelain 0 · 20/20 slices COMPLETE · critic still owed to a FABLE seat · 0 agents. The heartbeat's seat and its three shas remain STALE and remain refused; see the block above. **Turn spent BUILDING rather than re-checkpointing.**

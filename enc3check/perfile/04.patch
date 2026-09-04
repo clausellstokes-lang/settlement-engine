@@ -1,0 +1,22 @@
+diff --git a/src/domain/npc/livedExperienceCatalog.js b/src/domain/npc/livedExperienceCatalog.js
+index 5780eea03..dade5eb15 100644
+--- a/src/domain/npc/livedExperienceCatalog.js
++++ b/src/domain/npc/livedExperienceCatalog.js
+@@ -250,6 +250,17 @@ export const EXPERIENCE_TABLE = Object.freeze({
+   // at all, so there is nothing a bereavement could be a bereavement OF.
+   bereavement_close: row('personal', 'bond',
+     [pull('CHEER', 'vice', 'firm'), pull('DEVOTION', 'virtue', 'faint')], null),
++  // ENC-3 (DESIGN_ENCOUNTERS §5.3): a named person met a named foreigner abroad and
++  // took something of him away. THE TABLE HOLDS NO VECTOR ON PURPOSE, and that is what
++  // `vectorSupplied` declares: what a meeting teaches depends on WHO was met — the axes
++  // the two charts actually differ on, and in which direction — so a constant vector
++  // here would be a lie about the mechanism. The adapter supplies it per receipt, and
++  // ENC-2's third admission arm in the funnel is what lets it through. NOT ambient: an
++  // ambient kind divides its quantum by a season, which a one-week meeting can never
++  // cross. The receipt is REAL — its adapter is homed out of leaf in
++  // `livedExperienceSources.ADAPTER_HOMED_ELSEWHERE`, resolved there against the tree.
++  met_a_foreigner: row('personal', 'bond', [],
++    'envoyChanceMeetingStage.js:chance meeting receipts', { vectorSupplied: true }),
+   // DOUBLE-DARK: the receipt is real, and BOTH its flags (infoStatecraftEnabled,
+   // npcCredibilityEnabled) are absent from the defaults AND from every preset.
+   caught_lying_exposed: row('personal', 'repute',

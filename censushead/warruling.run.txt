@@ -1,0 +1,39 @@
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/58f0a8e2-2c4f-4073-8635-ecc7cf5010f6/scratchpad/laneKERNELMARK-tree
+
+ ❯ tests/lint/warRulingKindPools.walker.test.js (45 tests | 1 failed) 38ms
+     × 'succession_demand_inherited' retains the five annex families without editorial cross-references 4ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/warRulingKindPools.walker.test.js > SP-6 phrased-kind registry — WR-5 war rulings > 'succession_demand_inherited' retains the five annex families without editorial cross-references
+AssertionError: expected [ …(5) ] to deeply equal [ …(6) ]
+
+- Expected
++ Received
+
+@@ -2,7 +2,6 @@
+    "House Rowan seated Aldric Venn on one condition, and the condition rides the succession record.",
+    "The new seat is not free: it was seated to do a particular thing about the war.",
+    "A coup that does not bind its successor was a coup for nothing.",
+    "The demand is written where the succession is written, and the next re-read must answer it.",
+    "He holds the hall, and the hall holds a receipt.",
+-   "Should Aldric Venn read the war some other way, the hall that opened for him is still a door.",
+  ]
+
+ ❯ tests/lint/warRulingKindPools.walker.test.js:95:24
+     93|       ));
+     94|       const annex = annexPool(row.kind);
+     95|       expect(rendered).toEqual(annex.lines);
+       |                        ^
+     96|       // A relocated pool is selected out of a seven-row legacy block …
+     97|       // `[live, verbatim]` tags; the annex's own per-row requiredSlot…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 44 passed (45)
+   Start at  02:59:15
+   Duration  321ms (transform 116ms, setup 27ms, import 144ms, tests 38ms, environment 0ms)
+
