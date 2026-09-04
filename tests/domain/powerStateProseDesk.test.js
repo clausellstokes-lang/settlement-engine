@@ -35,9 +35,11 @@ import {
 import { likelyFutureFacts } from '../../src/domain/simulationSpine.js';
 import { CRIMINAL_OP_ROLES, criminalOpEcon } from '../../src/domain/criminalOpRole.js';
 import { COUP_RISK_LABELS, coupRiskLabel } from '../../src/domain/rulingPowerCoup.js';
+import { mirrorOf } from '../../src/domain/worldPulse/npcLadderState.js';
+import { hasLadder, ladderInstabilityOf, ladderRungsOf } from '../../src/domain/townMap/ladderRead.js';
 import {
   capturePoolKey, legitimacyHoldPoolKey, legitimacyReadingPoolKey,
-  operationRolePoolKey, riskPoolKey,
+  ladderPoolKey, operationRolePoolKey, powerLadderRung, riskPoolKey,
 } from '../../src/domain/display/stateProse/powerStateProse.js';
 import { legitimacyBandFor } from '../../src/generators/factionDynamics.js';
 import {
@@ -910,5 +912,145 @@ describe('DS-POW-4 — the hold lens needs no new reader, and the lineage needs 
     expect(rows).toHaveLength(1);
     expect(rows[0]).toMatchObject({ mount: 'power.succession', tab: 'power', desk: 'power', rung: 'sentence' });
     expect(UNMOUNTED_BLOCKS).not.toContain(POW4);
+  });
+});
+
+/**
+ * DS-POW-3 — THE LADDER. The first block whose state is play-time only, so its aliveness
+ * proof is built with the KERNEL'S OWN WRITER and never with a birth fixture.
+ *
+ * ⛔ WHY THAT IS NOT A FORMALITY. `settlement.npcLadder` has no generation-time writer, so
+ * a "proof" that this block is silent at birth would be a DORMANCY proof — and a dormancy
+ * proof is byte-indistinguishable from the four dead-arm pathologies this suite exists to
+ * refuse. The block must be shown to SPEAK in the world where it can speak. Everything
+ * below therefore runs against a sidecar projected by `mirrorOf`, the same function
+ * `npcLadderKernel` calls when it writes one during play, and the fixtures are read back
+ * through the canonical `ladderRungsOf` / `ladderInstabilityOf` rather than inspected
+ * directly — so a fixture this suite builds is one the shipped readers actually accept.
+ */
+const POW3 = 'DS-POW-3';
+const POW3_POOLS = DOSSIER_STATE_PROSE_POWER[POW3].pools;
+const LADDER_NAMES = new Map([['n1', 'Maera Voss'], ['n2', 'Haldor Renn'], ['n3', 'Sil Ateva']]);
+
+/**
+ * A SIMULATED settlement: a real LadderRecord projected by the kernel's own mirror writer.
+ * @param {number[]} stocks standing stocks, top rung first (STAND_MAX is 10)
+ * @param {number} instab the churn tax the kernel would have recorded
+ */
+function played(stocks, instab) {
+  const nids = stocks.map((_, i) => `n${i + 1}`);
+  const rec = {
+    factions: { iron: { rungs: nids } },
+    npcs: Object.fromEntries(nids.map((nid, i) => [nid, { stock: stocks[i] }])),
+  };
+  const mirror = mirrorOf(rec, LADDER_NAMES, new Map([['iron', { power: 1, legit: 1, instab }]]));
+  return { name: 'Thornwall', _seed: 'seed-pow3', npcLadder: mirror };
+}
+/** The reading PowerTab's faction loop hands the desk, via the canonical readers. */
+const ladderReading = (settlement, factionName = 'Iron Circle') => ({
+  factionName,
+  rungs: ladderRungsOf(settlement, 'iron'),
+  instability: ladderInstabilityOf(settlement, 'iron'),
+});
+
+describe('DS-POW-3 — the fixture is a PLAYED world, built by the kernel\'s own writer', () => {
+  it('mirrorOf produces a sidecar the shipped readers accept', () => {
+    const settlement = played([9.0, 5.0, 2.0], 0.5);
+    // If this is false the whole suite below is measuring a hand-shaped object rather than
+    // a world, and every aliveness claim in it would be worthless.
+    expect(hasLadder(settlement), 'the kernel writer produced no readable mirror').toBe(true);
+    const rungs = ladderRungsOf(settlement, 'iron');
+    expect(rungs).toHaveLength(3);
+    expect(rungs[0]).toMatchObject({ npcId: 'n1', name: 'Maera Voss' });
+    // Standing is normalised against STAND_MAX by the writer, not by this fixture.
+    expect(rungs[0].standing).toBeCloseTo(0.9, 4);
+    expect(ladderInstabilityOf(settlement, 'iron')).toBeCloseTo(0.5, 4);
+  });
+
+  it('ALIVENESS: all five pools SPEAK over played worlds', () => {
+    const CASES = [
+      ['shallow ladder (few rungs recorded)', played([9.0, 5.0], 0)],
+      ['high instability (churn at the top)', played([9.0, 5.0, 2.0], 0.5)],
+      ['crowded top rung, low instability', played([9.0, 8.5, 5.0], 0)],
+      ['low instability, long-held order', played([9.0, 6.0, 3.0], 0)],
+      ['clear top rung, low instability', played([9.0, 7.0, 6.5], 0)],
+    ];
+    const reached = new Set();
+    for (const [key, settlement] of CASES) {
+      const drawn = powerLadderRung(settlement, ladderReading(settlement), { seed: `l-${key}` });
+      expect(drawn, `no rung for ${key}`).toBeTruthy();
+      expect(drawn.provenance).toEqual(expect.objectContaining({ blockId: POW3, poolKey: key }));
+      expect(drawn.sentence, `SILENT pool ${key}`).toBeTruthy();
+      expect(drawn.sentence.length).toBeGreaterThan(20);
+      expect(drawn.sentence).not.toMatch(/[{}]/);
+      expect(drawn.sentence).not.toMatch(/[0-9]/);
+      // The faction reaches the reader by name — every variant of this block names it.
+      expect(drawn.sentence).toContain('Iron Circle');
+      reached.add(key);
+    }
+    expect(reached.size).toBe(Object.keys(POW3_POOLS).length);
+    expect(Object.keys(POW3_POOLS)).toHaveLength(5);
+  });
+
+  it('the top rung\'s holder reaches the reader, on the pools that name one', () => {
+    const settlement = played([9.0, 5.0], 0);
+    const seen = new Set();
+    for (let i = 0; i < 40; i += 1) {
+      const line = powerLadderRung(settlement, ladderReading(settlement), { seed: `npc-${i}` })?.sentence;
+      if (line) seen.add(line);
+    }
+    expect(seen.size, 'the pool drew one variant across forty seeds').toBeGreaterThan(1);
+    expect([...seen].some((line) => line.includes('Maera Voss'))).toBe(true);
+  });
+});
+
+describe('DS-POW-3 — the cuts, the mandatory faction, and the surface condition', () => {
+  it('each cut is the boundary it claims to be', () => {
+    // Driven on the reading shape directly, so a threshold move reds here with a name.
+    const rung = (standing) => ({ name: 'X', standing });
+    expect(ladderPoolKey([rung(0.9), rung(0.5)], 0)).toBe('shallow ladder (few rungs recorded)');
+    // Churn is tested BEFORE the gaps, because a churning ladder's gaps are not the story.
+    expect(ladderPoolKey([rung(0.9), rung(0.6), rung(0.3)], 0.35)).toBe('high instability (churn at the top)');
+    expect(ladderPoolKey([rung(0.9), rung(0.6), rung(0.3)], 0.34)).toBe('low instability, long-held order');
+    expect(ladderPoolKey([rung(0.9), rung(0.83), rung(0.5)], 0)).toBe('crowded top rung, low instability');
+    expect(ladderPoolKey([rung(0.9), rung(0.7), rung(0.65)], 0)).toBe('clear top rung, low instability');
+    // No ladder at all is silence, never a band.
+    expect(ladderPoolKey([], 0)).toBeNull();
+    expect(ladderPoolKey(null, 0)).toBeNull();
+  });
+
+  it('{faction} is MANDATORY — every variant names it, so a nameless faction is silent', () => {
+    const settlement = played([9.0, 6.0, 3.0], 0);
+    const named = Object.values(POW3_POOLS).flat()
+      .filter((v) => (v.slots || []).includes('faction'));
+    // The measurement the rule rests on: 16 of 16.
+    expect(named).toHaveLength(Object.values(POW3_POOLS).flat().length);
+    expect(powerLadderRung(settlement, { ...ladderReading(settlement), factionName: '' })).toBeNull();
+    // A raw engine token is refused rather than printed at a reader.
+    expect(powerLadderRung(settlement, { ...ladderReading(settlement), factionName: 'iron_circle' })).toBeNull();
+  });
+
+  it('⚠ THE SURFACE CONDITION, stated separately so it is never mistaken for aliveness', () => {
+    // A settlement with no sidecar has no ladder, the canonical readers return empty, and
+    // PowerTab hides the whole section. Nothing degrades and nothing false is said. This is
+    // a SURFACE arm; the aliveness proof is the played-world arm above, and substituting
+    // this one for it would be the dormancy proof this file refuses to accept.
+    const birth = { name: 'Thornwall' };
+    expect(hasLadder(birth)).toBe(false);
+    expect(ladderRungsOf(birth, 'iron')).toEqual([]);
+    expect(powerLadderRung(birth, { factionName: 'Iron Circle', rungs: ladderRungsOf(birth, 'iron'), instability: 0 }))
+      .toBeNull();
+  });
+
+  it('the registry mounts DS-POW-3 once, as a sentence, on the power tab', () => {
+    const rows = DOSSIER_MOUNTS.filter((row) => row.blockId === POW3);
+    expect(rows).toHaveLength(1);
+    expect(rows[0]).toMatchObject({ mount: 'power.factionLadder', tab: 'power', desk: 'power', rung: 'sentence' });
+    expect(UNMOUNTED_BLOCKS).not.toContain(POW3);
+  });
+
+  it('DS-POW-3 carries no covert variant', () => {
+    const covert = Object.values(POW3_POOLS).flat().filter((v) => (v.marks || []).includes('dm-only'));
+    expect(covert).toHaveLength(0);
   });
 });

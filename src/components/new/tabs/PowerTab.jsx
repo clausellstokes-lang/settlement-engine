@@ -9,7 +9,7 @@ import { hasLadder, ladderRungsOf, ladderInstabilityOf, ladderFactionKeyOf } fro
 import { PowerStrata } from './power/PowerStrata.jsx';
 import { rulingChainOf } from '../../../domain/dossier/powerStrata.js';
 import { coupContenders, coupRiskLabel } from '../../../domain/rulingPowerCoup.js';
-import { powerStateProse } from '../../../domain/display/stateProse/powerStateProse.js';
+import { powerStateProse, powerLadderRung } from '../../../domain/display/stateProse/powerStateProse.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
 
 /**
@@ -35,6 +35,13 @@ const UNDERSIDE_MOUNT = 'power.criminalUnderside';
 
 /** Rule and succession: the risk ladder, the hold, and the lineage. Three draws, one position. */
 const SUCCESSION_MOUNT = 'power.succession';
+
+/**
+ * The ladder's mount id. PER FACTION — it renders once per roster row, which is still ONE
+ * position on the page-set: the row says where a ladder speaks, not how many a town has.
+ * Bound once so the reachability arm counts a single literal.
+ */
+const LADDER_MOUNT = 'power.factionLadder';
 
 /** §815 — one row of the ruling chain: a small uppercase link label + the answer. */
 function ChainRow({ label, children }) {
@@ -395,6 +402,19 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
                         </span>
                       )}
                     </div>
+                    {(() => {
+                      // DS-POW-3, per faction. The desk takes the canonical readers' OUTPUTS
+                      // (this loop already computed them) so it reads no npcLadder shape of
+                      // its own. Skipped on a public dossier with the rest of the desk.
+                      const drawn = publicDossier ? null : drawnAtMount(LADDER_MOUNT, powerLadderRung(
+                        s,
+                        { factionName: f.faction, rungs, instability: instab },
+                        { seed: `${String(s?._seed ?? s?.id ?? '')}::${f.faction}`, audience },
+                      ));
+                      return drawn?.sentence ? (
+                        <p style={{fontSize:FS.xs,color:swatch.inkMag3,lineHeight:1.55,margin:'0 0 5px 15px',fontStyle:'italic'}}>{drawn.sentence}</p>
+                      ) : null;
+                    })()}
                     <div style={{display:'flex',flexDirection:'column',gap:2}}>
                       {rungs.map((rung, j) => (
                         <div key={rung.npcId} style={{display:'flex',alignItems:'center',gap:8,padding:'1px 0 1px 15px'}}>
