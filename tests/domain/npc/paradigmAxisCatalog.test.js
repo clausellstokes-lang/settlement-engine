@@ -550,22 +550,16 @@ describe('THE NPC READ MODEL STAYS DARK — the vocabulary is lit ONLY through t
     // `AXIS:pole:level` token rung-for-rung onto the funnel's band ladder
     // (§806/F14; W-LIVES §6). Reached by NOBODY.
     'src/domain/worldPulse/faithWitnessSource.js',
-    // ⭐ ENC-1's CHANCE-MEETING LEAF, enrolled as a THIRD dark consumer, and the row is
-    // classified rather than waved through. The leaf reads two legacy personality word
-    // lists as axis positions and projects them back to words — `axisPositionForWord`,
-    // `wordForAxisPosition` and `traitColumns`, which is this catalog's whole purpose and
-    // has no second home. It is a TRUE-LEAF read: the catalog imports nothing, so no
-    // darkness travels in with it, and the leaf itself is reached by NOBODY under src/
-    // (its stage is ENC-3, unbuilt) — proven by the closure law below, which the row is
-    // also enrolled in because DARK_CONSUMERS may not hold a member the closure cannot see.
-    //
-    // ⚠ AND THE ROW IS AN ENROLMENT, NOT A CURE, BECAUSE THE READ IS CORRECT. The leaf's
-    // OTHER character reads were defects and were cured in the leaf rather than enrolled
-    // here: it imported `characterDrift.js` (a second production door onto a family whose
-    // one door is enumerated) and hand-spelled the authored-core key off a KnownReading.
-    // Both now arrive as arguments. What is left is a new, legitimate, dark consumer of a
-    // vocabulary that exists to be consumed, so the honest act is to name it.
-    'src/domain/worldPulse/envoyChanceMeeting.js',
+    // ⛔⛔ FORWARD POINTER — ENC-1's CHANCE-MEETING LEAF LEFT THIS ROSTER ON 2026-09-03.
+    // It sat here as the THIRD dark consumer on the strength of one measured fact: "the
+    // leaf itself is reached by NOBODY under src/ (its stage is ENC-3, unbuilt)". ENC-3 is
+    // built, `envoyPulse.js` mounts the stage, and that fact is now false — so the row is
+    // MOVED to LIT_CONSUMERS below rather than kept, because a dark roster that holds a
+    // reachable member is the one failure this split was created to make impossible. The
+    // ruling, its measured chain and the reason it is a re-classification rather than a
+    // widening are written on the new row; nothing about the leaf's OWN read changed and
+    // it was never a defect. This stub exists so a reader who greps this roster for the
+    // leaf finds the withdrawal instead of a silence.
   ].sort());
 
   /**
@@ -600,6 +594,51 @@ describe('THE NPC READ MODEL STAYS DARK — the vocabulary is lit ONLY through t
         ]),
       ]),
     }),
+    // ⭐⭐ ENC-1's CHANCE-MEETING LEAF, RE-CLASSIFIED FROM DARK TO LIT ON 2026-09-03, AND
+    // THIS IS A PRODUCT STATEMENT RATHER THAN BOOKKEEPING. Until ENC-3 the leaf was read
+    // by nobody, so the catalog stayed dark through it and the dark closure below said so.
+    // ENC-3 built `envoyChanceMeetingStage.js` and `envoyPulse.js` mounts it, so the
+    // vocabulary is now reachable from the production door — MEASURED as the chain below,
+    // hop by hop, not inferred. The honest home for a reachable consumer is this roster,
+    // whose obligation is a POSITIVE (this exact path exists) rather than a negative.
+    //
+    // ⚠ THE SECOND LIT ROW IS AN ENGINE CHAIN, NOT A DISPLAY CHAIN, and the difference is
+    // stated rather than smuggled. `faithDeepening.js` above is reached because a player
+    // opens a tab; this leaf is reached because the world takes a tick. Both terminate at
+    // the same production door, which is what this roster's contract actually asks, but a
+    // reader must not take the two rows to mean the same thing about what is on screen:
+    // the catalog's WORDS reach a reader here only as far as a chance-meeting receipt is
+    // rendered, and ENC-4 — which owns the Herald beats — is unbuilt and owner-blocked.
+    //
+    // ⛔ AND WHAT IS STILL TRUE, WHICH THIS ROW MUST NOT BE READ AS DENYING: at RUNTIME the
+    // lane is dark in every world that exists. `chanceEncountersEnabled` is a VIRTUAL key,
+    // MEASURED absent from DEFAULT_SIMULATION_RULES and from all 7 presets, and the stage's
+    // one strict `=== true` gate sits ABOVE every call into this leaf, so `resolveChanceMeeting`
+    // is invoked zero times in a shipped world (the dormancy fence's FENCE 3 is a
+    // pass-through spy that asserts exactly that). What changed is STATIC reachability,
+    // which is what this file measures and what the L5 inversion cares about. THE LIGHTING
+    // WAVE, when it puts the key in the presets, changes the runtime half — and it will not
+    // red this file, so the runtime claim lives in the certification row, not here.
+    //
+    // ⚠ WHY THE L5 HAZARD DOES NOT TRAVEL THIS PATH, because that is the risk the darkness
+    // existed to hold off: the leaf consumes `axisPositionForWord`, `wordForAxisPosition`
+    // and `traitColumns` — catalog-NATIVE accessors with no second home — and none of the
+    // four MIRRORED tables car L5 will invert. A catalog/legacy divergence therefore cannot
+    // change engine behaviour through this chain before L5 lands its byte-identity proof.
+    Object.freeze({
+      rel: 'src/domain/worldPulse/envoyChanceMeeting.js',
+      symbols: Object.freeze(['resolveChanceMeeting', 'censusChanceMeetingCandidates', 'selectChanceMeetings', 'CHANCE_MEETING_TUNING']),
+      chains: Object.freeze([
+        Object.freeze([
+          'src/domain/worldPulse/envoyChanceMeetingStage.js',
+          'src/domain/worldPulse/envoyPulse.js',
+          'src/domain/worldPulse/pulseKernel.js',
+          'src/domain/worldPulse/advanceCampaignWorld.js',
+          'src/domain/worldPulse/index.js',
+          'src/components/OutputContainer.jsx',
+        ]),
+      ]),
+    }),
   ]);
 
   /** The production door the lit chains must terminate at, and the tag it must render. */
@@ -626,13 +665,23 @@ describe('THE NPC READ MODEL STAYS DARK — the vocabulary is lit ONLY through t
     // the lighting day's subject, and this closure is where it stays dark until then.
     Object.freeze({ rel: 'src/domain/npc/characterReadModel.js',
       symbols: Object.freeze(['characterDossier', 'biographyOf', 'characterArticles', 'readingOf', 'leadLine']) }),
-    // ⭐ ENC-1's chance-meeting leaf, on the same hop as every other dark member: it reads
-    // the catalog and is itself read by nobody. The symbols are its entry points and its
-    // tuning table — the four names a reach into this leaf would have to spell — so a
-    // stage wired early reds HERE rather than lighting the vocabulary unannounced. ENC-3
-    // is the car that lights it, and it arrives with the flag door and the dormancy proof.
-    Object.freeze({ rel: 'src/domain/worldPulse/envoyChanceMeeting.js',
-      symbols: Object.freeze(['resolveChanceMeeting', 'censusChanceMeetingCandidates', 'selectChanceMeetings', 'CHANCE_MEETING_TUNING']) }),
+    // ⛔⛔ ENC-1's chance-meeting leaf LEFT THIS CLOSURE ON 2026-09-03, AND THE ROW THAT
+    // STOOD HERE PREDICTED THE DAY IT WOULD: "so a stage wired early reds HERE rather than
+    // lighting the vocabulary unannounced. ENC-3 is the car that lights it, and it arrives
+    // with the flag door and the dormancy proof." ENC-3 landed, this law red, and the red
+    // was the instrument working exactly as designed — the single outside reacher it named
+    // was `envoyChanceMeetingStage.js` and nothing else. Both conditions the row demanded
+    // arrived with it: the flag door (`chanceEncountersActive`, ONE strict `=== true` read)
+    // and the dormancy proof (tests/property/chanceEncountersDormancyFence.test.js).
+    //
+    // ⚠ AND IT WAS NOT ANSWERED BY WIDENING THIS CLOSURE, WHICH IS STRUCTURALLY IMPOSSIBLE
+    // — MEASURED, not asserted. Admitting the stage as a seventh member drags its own
+    // reachers in: `envoyPulse.js` at depth 1, `pulseKernel.js` at 2,
+    // `advanceCampaignWorld.js` + `advanceInterval.js` at 3, and seven more at 4 including
+    // `worldPulse/index.js`, two store slices and a worker — thirteen modules and still
+    // climbing, terminating at the production door itself. A closure that must contain the
+    // pulse is not a darkness claim. The leaf is therefore RE-CLASSIFIED as lit, and its
+    // proof obligation inverts from a negative to a positive: see LIT_CONSUMERS above.
   ]);
 
   const ENROLLED_CONSUMERS = [...DARK_CONSUMERS, ...LIT_CONSUMERS.map(({ rel }) => rel)].sort();
@@ -744,7 +793,10 @@ describe('THE NPC READ MODEL STAYS DARK — the vocabulary is lit ONLY through t
       ['riskRegister', 'vettingTemperBand', 'effectiveDescriptors'], []).length).toBeGreaterThan(2);
   });
 
-  test('⭐ AND THE LIT PATH REALLY EXISTS — the faith tab reaches the vocabulary, hop by hop', () => {
+  // ⚠ RE-TITLED 2026-09-03: the roster gained a SECOND lit row (ENC-3's engine chain), so a
+  // title naming only the faith tab described one of two chains this arm now walks. The
+  // number of chains is deliberately NOT in the title — that figure lives in the roster.
+  test('⭐ AND THE LIT PATHS REALLY EXIST — every lit consumer reaches the door, hop by hop', () => {
     // The POSITIVE half of R-TAILF-1. A lit consumer whose designed chain has quietly
     // broken is as much a defect as a dark one that has quietly lit — and this arm is
     // also what refuses a dark consumer smuggled into the lit roster, because such a
