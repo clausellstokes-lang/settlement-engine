@@ -108,6 +108,26 @@
     "live"
    ],
    "note": "F6c (TAIL-F). INDEXED here, never replaced."
+  },
+  {
+   "kind": "tables",
+   "file": "src/domain/display/stateProse/powerStateProse.js",
+   "exports": [
+    "NARROW_MARGIN",
+    "SHALLOW_RUNGS_BELOW",
+    "HIGH_INSTABILITY_FROM",
+    "CROWDED_TOP_GAP",
+    "SETTLED_MIN_GAP"
+   ],
+   "note": "the power desk's five reader-facing cuts. Module-private scalars the _TUNING glob cannot see, indexed by roster exactly as faithChannelBindings.js#CAUSAL_SWING is. Deliberately NOT exported: a register row is never a reason to widen a module's public surface."
+  },
+  {
+   "kind": "tables",
+   "file": "src/domain/display/stateProse/stressorsStateProse.js",
+   "exports": [
+    "WIND_DOWN_FRACTION"
+   ],
+   "note": "the condition desk's wind-down cut, one module-private scalar indexed by roster."
   }
  ],
  "moduleSide": [
@@ -1997,6 +2017,66 @@
    },
    "band": null,
    "note": "ENC-3's chance-meeting STAGE (§893.2), distinct from the leaf's CHANCE_MEETING_TUNING beside it. Three values, and the source's own provenance block already names all three as OWNER-UNSIGNED (§12 row 7): exposureGrievance is deliberately HALF corruptionWeb's EXPOSURE_GRIEVANCE_W (0.5) because an approach is smaller than a discovered leash; exposureCovertMultiplier doubles it for a covert face; residentImportanceFloor is the estate's existing 'notable' line, NOT a number this lane chose. Units derived, not guessed: exposureGrievance adds into a clamp01'd resentment scaled by a magnitude01 (envoyChanceMeetingStage.js:778, corruptionWeb.js:1119), and residentImportanceFloor mirrors npcGrowthKernel's IMPORTANCE_FLOOR: fraction01. DRAFT — registering is not signing."
+  },
+  "src/domain/display/stateProse/powerStateProse.js#NARROW_MARGIN": {
+   "role": null,
+   "status": "draft",
+   "signedAt": null,
+   "unit": {
+    "value": "fraction01"
+   },
+   "band": null,
+   "note": "DS-POW-2's NARROW cut. PROPOSED = 0.15, which is the value shipping today; this row moves nothing. EVIDENCE: governingSharePoolKey renders 'governing faction holds a NARROW plurality' when `governing.power - runnerUp <= governing.power * NARROW_MARGIN`, so the dial is a proportion OF THE GOVERNING FACTION'S OWN POWER rather than of the town's total — fraction01. The source's docblock marks it a vetoable JUDGMENT and records that the DS-POW-2 annex says only \"by the smallest margin the town has\" and leaves the cut to the implementer, so no canonical value was overridden. A share falling between DOMINANT and NARROW renders NOTHING by design. READER-FACING: this dial decides which of two sentences a paying customer reads about a town's power. DRAFT — registering is not signing."
+  },
+  "src/domain/display/stateProse/powerStateProse.js#SHALLOW_RUNGS_BELOW": {
+   "role": null,
+   "status": "draft",
+   "signedAt": null,
+   "unit": {
+    "value": "count"
+   },
+   "band": null,
+   "note": "DS-POW-3's shallow-ladder cut. PROPOSED = 3, the value shipping today. EVIDENCE: compared against `rungs.length` in ladderPoolKey, so it counts THINGS rather than naming a position — the distinction DEITY_FLAW_TUNING's WRATH_SHARPEN_RUNGS row draws in the other direction, where rungs are a rank. It is tested first because the two gap cuts below it are meaningless on two rungs. Vetoable JUDGMENT per the source: npcLadderState.js#LADDER_TUNING carries STAND_MAX and a baseline but no rung-count band, so there was no canonical cut to reuse. DRAFT — registering is not signing."
+  },
+  "src/domain/display/stateProse/powerStateProse.js#HIGH_INSTABILITY_FROM": {
+   "role": null,
+   "status": "draft",
+   "signedAt": null,
+   "unit": {
+    "value": "fraction01"
+   },
+   "band": null,
+   "note": "DS-POW-3's churn cut. PROPOSED = 0.35, the value shipping today. EVIDENCE: compared against the churn tax returned by ladderInstabilityOf (src/domain/townMap/ladderRead.js:138), which pushes its reading through `num01` and is documented \"0..1, decaying\" — fraction01, and NOT on LADDER_TUNING's raw STAND_MAX 0..10 scale. FOR THE SITTING, THE SHARPEST ROW HERE: 0.35 is byte-equal to npcLadderState.js#LADDER_TUNING.CHURN_BUMP (0.35, commented \"per contested challenge this advance (win OR fail)\"), so the desk calls a faction 'high instability (churn at the top)' on the strength of exactly ONE undecayed contested challenge. Whether that coupling is intended or coincidence is the owner's to say; this lane neither moved the value nor bound the two into a role. DRAFT — registering is not signing."
+  },
+  "src/domain/display/stateProse/powerStateProse.js#CROWDED_TOP_GAP": {
+   "role": null,
+   "status": "draft",
+   "signedAt": null,
+   "unit": {
+    "value": "fraction01"
+   },
+   "band": null,
+   "note": "DS-POW-3's crowded-top cut. PROPOSED = 0.08, the value shipping today. EVIDENCE: `standing[0] - standing[1] <= CROWDED_TOP_GAP`, and ladderRungsOf (src/domain/townMap/ladderRead.js:95) normalises every standing through `num01` and documents \"standing 0..1\" — so this is a fraction01 gap on the NORMALISED reading and not on LADDER_TUNING's raw STAND_MAX 0..10. Vetoable JUDGMENT per the source, with no canonical band to reuse. DRAFT — registering is not signing."
+  },
+  "src/domain/display/stateProse/powerStateProse.js#SETTLED_MIN_GAP": {
+   "role": null,
+   "status": "draft",
+   "signedAt": null,
+   "unit": {
+    "value": "fraction01"
+   },
+   "band": null,
+   "note": "DS-POW-3's settled-order cut. PROPOSED = 0.15, the value shipping today. EVIDENCE: every adjacent pair must satisfy `standing[i-1] - v >= SETTLED_MIN_GAP` over the same num01-normalised standings CROWDED_TOP_GAP reads — same population, same unit. FOR THE SITTING: it and CROWDED_TOP_GAP (0.08) are the two ends of ONE scale and are best read on one page. They are deliberately NOT bound into a role, because a role asserts ONE value and these are two different cuts by design. Its 0.15 equals NARROW_MARGIN's 0.15 by coincidence over a different population — also no role. DRAFT — registering is not signing."
+  },
+  "src/domain/display/stateProse/stressorsStateProse.js#WIND_DOWN_FRACTION": {
+   "role": null,
+   "status": "draft",
+   "signedAt": null,
+   "unit": {
+    "value": "fraction01"
+   },
+   "band": null,
+   "note": "DS-CND-1's wind-down window. PROPOSED = 0.25, the value shipping today. EVIDENCE: `remaining <= expires * WIND_DOWN_FRACTION` in conditionDurationPoolKey — a proportion of a condition's own expiry, dimensionless, so it is fraction01 and NOT a ticks dial. The source's docblock records that activeConditions.js carries SEVERITY_DRIFT_PER_TICK and expiry bookkeeping but NO wind-down boundary, so no canonical cut was overridden. DRAFT — registering is not signing."
   }
  },
  "roles": {
