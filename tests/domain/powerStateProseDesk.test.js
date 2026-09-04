@@ -228,6 +228,51 @@ describe('the power desk — the {seat} fill and its refusal', () => {
     expect(drawn.legitimacyBanner.sentence).toBeTruthy();
   });
 
+  // ⭐ THE ARM THAT PROVES THE DESK IS ALIVE IN PRODUCTION, NOT MERELY ON A FIXTURE.
+  // A hand-written fixture proves the desk CAN speak; it cannot prove the real producer
+  // hands it something it will accept. Measured during the build: a non-conforming name
+  // ("the Ashford Concern") silences 38 of the block's 41 variants and takes the whole
+  // `Tolerated` pool dark, because every one of its five variants names {seat}. That is
+  // the refusal working — but if the REAL vocabulary ever tripped it, this desk would be
+  // lit and mute in front of every reader while every other arm in this file stayed green.
+  // So the real names are pinned here, and a producer change that lowercases one reds.
+  const REAL_GOVERNING_NAMES = Object.freeze([
+    "Headman's Authority", 'Arcane Council', 'Arcane Senate', 'Church Council', 'City Council',
+    'Corrupt City Council', 'Corrupt Council', 'Ecclesiastical Council', 'Elder Council',
+    'Grand Council', 'Grand Merchant Senate', 'Grand Military Council', 'High Theocratic Council',
+    'Household Council', 'Merchant City Council', 'Merchant Council', 'Military City Council',
+    'Military Council', 'Priestly Guidance', 'Shadow Senate', 'Town Council', 'Town Mayor',
+    'Military/Guard', 'Religious Authorities', 'Craft Guilds', "Thieves' Guild", 'Arcane Orders',
+  ]);
+
+  it('every REAL governing name conforms, and the banner speaks at every score 0..100', () => {
+    for (const name of REAL_GOVERNING_NAMES) {
+      expect(fillShapeViolation('proper', name), `the real governing name ${name} would be refused`).toBe('');
+    }
+    // The whole score domain, against the real names, through the real band function.
+    let spoke = 0;
+    let lensSpoke = 0;
+    for (let score = 0; score <= 100; score += 1) {
+      const band = legitimacyBandFor(score);
+      const record = {
+        score,
+        label: band.label,
+        breakdown: { prosperity: score >= 60 ? 15 : -15, safety: 0, defense: 0, food: 0 },
+        governanceFractured: band.governanceFractured,
+      };
+      const drawn = powerStateProse(
+        town(record, { governingName: REAL_GOVERNING_NAMES[score % REAL_GOVERNING_NAMES.length] }),
+        { seed: `s${score}` },
+      );
+      if (drawn.legitimacyBanner?.sentence) spoke += 1;
+      if (drawn.legitimacyLens?.sentence) lensSpoke += 1;
+    }
+    // MEASURED 101/101 for both at the time of writing. Anything less means the desk has
+    // gone partly mute over real state, which is the one failure a reader never reports.
+    expect(spoke, 'the banner went silent over a real score point').toBe(101);
+    expect(lensSpoke, 'the lens went silent over a real score point').toBe(101);
+  });
+
   it('a NON-conforming governingName degrades the pool instead of printing a token', () => {
     // 38 of the block's 41 variants name {seat}; three name only {settlement}. A refused
     // fill must drop the 38 and leave the three speaking — anchored liveness doing its
