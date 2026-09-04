@@ -36,14 +36,14 @@
  "digests": {
   "corpusMeta": "d76c3a2f235e861d2e93f7debcaa29913138ed7f4833c1ac677d8188272ff5e4",
   "inventory": "5a74442aa13825ad8f75ad2277c06740e948aad8e3a406f6245b30398fe9b3f4",
-  "manifests": "e48289012ac3f7d4871ecd565ad5b4308a0e315fd7a37fba001a0a86e90bbddb",
+  "manifests": "b7e0e79cd2984105de338232e09f71106ea1f06d535d12c4db43e93e997fdac4",
   "migrationReview": "e65207de86a2f53d499b43aff6ee49503c9e4b466feca38b86067eb0cd433a92",
   "rowTags": "83b81cb1b20f039715385d514b40459728d8071c61e1e8ff7627a9375cebf49a",
-  "scanStats": "2061818e543bb40dce49fb5f3810820c8c02e9ec59bdd5cca480c233b9a8f7a7",
+  "scanStats": "e7f3ae8ef23e5907d59a4a8ca9a5e2e7be4144d1159f67173094775d847d688d",
   "sentinel": "47ba5d1e682f667c87e2e790cd38ed66e23174a444541581ee8758b009b6fe8e"
  },
  "frozen": "2026-09-04",
- "frozenAtSha": "0cf7185e16bf41352433a4b48db91bee3c4d0427",
+ "frozenAtSha": "c08df7d595d0d6531104930dedb66690921bfbc8",
  "identities": 1409,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
@@ -2318,7 +2318,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "66c3892a48a856212ada214302115fa2d8700b4a9c67cb8a05ff9af2229295fd",
+   "digest": "f385b8d383768e4f742a6b476c5ede36e61c9cc86f79ebb37ad41079d9ef4c21",
    "entries": [
     {
      "mode": "100644",
@@ -7797,8 +7797,8 @@
     {
      "mode": "100644",
      "path": "src/domain/content/customContentCharset.generated.js",
-     "sha256": "b81240387cb9125184e7d30f2bfa50e091a6ab6757275a3f3cdbeb9b02998c16",
-     "size": 11641,
+     "sha256": "fc888112833966851c53b4e92425c97c31c9d169122c533ae16419bb66b5b61b",
+     "size": 13045,
      "type": "file"
     },
     {
@@ -17499,8 +17499,8 @@
     {
      "mode": "100644",
      "path": "src/utils/generateCampaignPDF.js",
-     "sha256": "45dbd908159420349cdd1d57db1d68ec082b22c6916f11d4e800de9169e34413",
-     "size": 41948,
+     "sha256": "4a27ba32f67a0c3a303ee9126ff4fa2ae281777160f876ed7e1b7efe4af15e47",
+     "size": 43020,
      "type": "file"
     },
     {
@@ -17513,8 +17513,8 @@
     {
      "mode": "100644",
      "path": "src/utils/generateWorldBook.js",
-     "sha256": "cd2fc82974670a31e943c8f49cfa5c221fbd1fcad791b234393f8777865d68f8",
-     "size": 25753,
+     "sha256": "d795a3be1bae58ae296b4b58a9a4aa0c592a3f4664d808a095cbf76463c17858",
+     "size": 26218,
      "type": "file"
     },
     {
@@ -17526,9 +17526,16 @@
     },
     {
      "mode": "100644",
+     "path": "src/utils/jsPdfBookFont.js",
+     "sha256": "641a701abc8639359d87e19b12ab16579649686018f6ad20a7027654c498854c",
+     "size": 7707,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/utils/jsPdfText.js",
-     "sha256": "78ae0ca64ca76e57e5afd251a166ec552d03cd425fece339fa92a697291d490c",
-     "size": 1532,
+     "sha256": "d2bb9a87134fb7ae64948ff6d4b9dd0c57ff2a8d5fb8ac0fc44d5a11a0715af9",
+     "size": 3193,
      "type": "file"
     },
     {
@@ -17584,7 +17591,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "a5e9e99a8f53b8c0c2e19d71648d80f19aed68ca23bdf921f060d2473db73065",
+   "digest": "d9853e52f7ad6f856b56997f4595cebd7fd5ca5a528260e838a380801f620b6d",
    "entries": [
     {
      "mode": "100644",
@@ -32597,8 +32604,8 @@
     {
      "mode": "100644",
      "path": "src/utils/generateCampaignPDF.js",
-     "sha256": "45dbd908159420349cdd1d57db1d68ec082b22c6916f11d4e800de9169e34413",
-     "size": 41948,
+     "sha256": "4a27ba32f67a0c3a303ee9126ff4fa2ae281777160f876ed7e1b7efe4af15e47",
+     "size": 43020,
      "type": "file"
     },
     {
@@ -32611,8 +32618,8 @@
     {
      "mode": "100644",
      "path": "src/utils/generateWorldBook.js",
-     "sha256": "cd2fc82974670a31e943c8f49cfa5c221fbd1fcad791b234393f8777865d68f8",
-     "size": 25753,
+     "sha256": "d795a3be1bae58ae296b4b58a9a4aa0c592a3f4664d808a095cbf76463c17858",
+     "size": 26218,
      "type": "file"
     },
     {
@@ -32624,9 +32631,16 @@
     },
     {
      "mode": "100644",
+     "path": "src/utils/jsPdfBookFont.js",
+     "sha256": "641a701abc8639359d87e19b12ab16579649686018f6ad20a7027654c498854c",
+     "size": 7707,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/utils/jsPdfText.js",
-     "sha256": "78ae0ca64ca76e57e5afd251a166ec552d03cd425fece339fa92a697291d490c",
-     "size": 1532,
+     "sha256": "d2bb9a87134fb7ae64948ff6d4b9dd0c57ff2a8d5fb8ac0fc44d5a11a0715af9",
+     "size": 3193,
      "type": "file"
     },
     {
@@ -32675,7 +32689,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "1d7bcadcf75a914ac5b7b358efea62c4a5693f39a2ae958968cfaa9d12131241",
+   "digest": "2fbddf22906ccfae0e13e5dffd7b70a06718a2ca66a72806459cbad3b95c905c",
    "entries": [
     {
      "mode": "100644",
@@ -38084,8 +38098,8 @@
     {
      "mode": "100644",
      "path": "src/domain/content/customContentCharset.generated.js",
-     "sha256": "b81240387cb9125184e7d30f2bfa50e091a6ab6757275a3f3cdbeb9b02998c16",
-     "size": 11641,
+     "sha256": "fc888112833966851c53b4e92425c97c31c9d169122c533ae16419bb66b5b61b",
+     "size": 13045,
      "type": "file"
     },
     {
@@ -47786,8 +47800,8 @@
     {
      "mode": "100644",
      "path": "src/utils/generateCampaignPDF.js",
-     "sha256": "45dbd908159420349cdd1d57db1d68ec082b22c6916f11d4e800de9169e34413",
-     "size": 41948,
+     "sha256": "4a27ba32f67a0c3a303ee9126ff4fa2ae281777160f876ed7e1b7efe4af15e47",
+     "size": 43020,
      "type": "file"
     },
     {
@@ -47800,8 +47814,8 @@
     {
      "mode": "100644",
      "path": "src/utils/generateWorldBook.js",
-     "sha256": "cd2fc82974670a31e943c8f49cfa5c221fbd1fcad791b234393f8777865d68f8",
-     "size": 25753,
+     "sha256": "d795a3be1bae58ae296b4b58a9a4aa0c592a3f4664d808a095cbf76463c17858",
+     "size": 26218,
      "type": "file"
     },
     {
@@ -47813,9 +47827,16 @@
     },
     {
      "mode": "100644",
+     "path": "src/utils/jsPdfBookFont.js",
+     "sha256": "641a701abc8639359d87e19b12ab16579649686018f6ad20a7027654c498854c",
+     "size": 7707,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/utils/jsPdfText.js",
-     "sha256": "78ae0ca64ca76e57e5afd251a166ec552d03cd425fece339fa92a697291d490c",
-     "size": 1532,
+     "sha256": "d2bb9a87134fb7ae64948ff6d4b9dd0c57ff2a8d5fb8ac0fc44d5a11a0715af9",
+     "size": 3193,
      "type": "file"
     },
     {
@@ -48142,17 +48163,17 @@
   }
  },
  "scanStats": {
-  "files": 2155,
-  "reads": 123729,
+  "files": 2156,
+  "reads": 123750,
   "resolved": 9425,
-  "unresolved": 114304
+  "unresolved": 114325
  },
  "scannerProvenance": {
   "detectorDigest": "313ada0b003740a2824af13713da44aa690d304561066ee7293f427c6877337b",
-  "executionTreeDigest": "66c3892a48a856212ada214302115fa2d8700b4a9c67cb8a05ff9af2229295fd",
-  "scanTreeDigest": "a5e9e99a8f53b8c0c2e19d71648d80f19aed68ca23bdf921f060d2473db73065",
-  "sourceTreeDigest": "1d7bcadcf75a914ac5b7b358efea62c4a5693f39a2ae958968cfaa9d12131241",
-  "unscannedInputDigest": "21e5f310185e05fd0fabef5db8d0107b0b5805a0d6aee7fcd776cb51b0e9f700"
+  "executionTreeDigest": "f385b8d383768e4f742a6b476c5ede36e61c9cc86f79ebb37ad41079d9ef4c21",
+  "scanTreeDigest": "d9853e52f7ad6f856b56997f4595cebd7fd5ca5a528260e838a380801f620b6d",
+  "sourceTreeDigest": "2fbddf22906ccfae0e13e5dffd7b70a06718a2ca66a72806459cbad3b95c905c",
+  "unscannedInputDigest": "158d2a7bb5d62f1c14023e64b1310405a32803591be0d54c69cf3a84fe1c46ea"
  },
  "schema": 16,
  "sentinel": {
