@@ -87,8 +87,18 @@ describe('WC-0E · the war-circulation flags, the contribution ledger shape, and
     // forces onto consecutive lines. THE LANDING RE-MEASURES; it never re-applies these.
     // RE-MEASURED AT THE WAR LANDING (§876), exactly as the hazard note above ordered:
     // the coupled union is 29 (T12's warMemoryEnabled + SEAT-2b's legitimacyUpheavalEnabled).
-    expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toHaveLength(29);
-    expect(VIRTUAL_SUBSYSTEM_ROWS).toHaveLength(29);
+    // 29 → 30 at ENCOUNTERS car ENC-3 (2026-09-03), which mints `chanceEncountersEnabled`
+    // with its manifest member, its ONE by-name strict gate read (`chanceEncountersActive`
+    // in `worldPulse/envoyChanceMeetingStage.js`) and its authored certification row in
+    // `subsystemRowsEncounters.js` — the three-in-one-commit law, met. ⭐ AND THE PAIR WAS
+    // FOUND AT THE LANDING, NOT BY THE MINTING LANE: ENC-3 paid the manifest, the row and
+    // the gate, and this war-circulation suite met the delta only when the landing ran the
+    // whole gate. That is the fifth recorded sighting of the habitat the four notes above
+    // describe, and it is unchanged — one registry the mint site can enumerate, still
+    // TE-GUARDS-1's subject. The figure is RE-MEASURED here, never re-applied: both
+    // literals were read off the live modules (30 and 30) before this line was written.
+    expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toHaveLength(30);
+    expect(VIRTUAL_SUBSYSTEM_ROWS).toHaveLength(30);
     // ⭐ THE BIJECTION IS A TRIPLE, NOT A PAIR. The ordered-equality pin in
     // subsystemRowsVirtual.test.js couples the manifest to VIRTUAL_RULES; direction 3 of
     // engineGatedRuleKeys couples the manifest to the certification rows. A flag mint moves

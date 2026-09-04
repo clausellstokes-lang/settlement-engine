@@ -140,6 +140,14 @@ const READ_SITES = Object.freeze([
   ['RS-8', 'src/domain/traditions/relations.js', "String(asObject(x).rngSeed || '') ⇒ ''", 'row 8', 'YEAR-KEYED'],
   ['RS-10', 'src/domain/worldPulse/demographicsKernel.js', "typeof-guarded ⇒ 'realm'", 'row 22 upstream', 'TICK-VARYING'],
   ['RS-11', 'src/domain/worldPulse/demographicsPlans.js', "⇒ 'realm', realmId SHADOWING", 'rows 22, 23', 'TICK-VARYING'],
+  // ⭐ ARRIVED 2026-09-03 WITH ENCOUNTERS CAR ENC-3, and it is a NEW SITE rather than a
+  // moved one: the chance-meeting stage is a new module and this is its only seed read.
+  // It is BORN RE-ROOTED — the read exists solely as the `base` of a `tickStreamSeedOf`
+  // call, so it never had an epoch-blind life to be cured of, and its row in
+  // FAMILY_1_REROOTS below is an enrolment rather than a repair. It feeds NO composition
+  // row: the lane draws integer eighths from a keyed hash over the returned stream seed
+  // and forks no PRNG, which is why baseline A's denominator is unmoved at twenty-five.
+  ['RS-23', 'src/domain/worldPulse/envoyChanceMeetingStage.js', "text(x) ⇒ '' (typeof-guarded, trimmed)", 'no composition row — a keyed-hash draw, not a template slot', 'TICK-VARYING'],
   ['RS-3', 'src/domain/worldPulse/generosityKernel.js', "String(x ?? '') ⇒ ''; 0 ⇒ '0'", 'row 13', 'YEAR-KEYED'],
   ['RS-9', 'src/domain/worldPulse/npcLadderKernel.js', "String(asObject(x).rngSeed || '') ⇒ ''", 'rows 17,18,19,21 AND row 20', 'TICK-VARYING'],
   ['RS-1', 'src/domain/worldPulse/pulseKernel.js', 'none (raw interpolation)', 'THE PULSE ROOT', 'SEAM'],
@@ -337,9 +345,10 @@ function rosterBy(rows, col) {
 }
 
 describe('EP-0 · baseline B — the read-site census', () => {
-  test('the roster is exactly the twenty-two dispositioned sites', () => {
-    expect(READ_SITES).toHaveLength(22);
-    expect(new Set(READ_SITES.map((r) => r[0])).size).toBe(22);
+  test('the roster is exactly the twenty-three dispositioned sites', () => {
+    // 22 → 23 at ENC-3 (2026-09-03): RS-23, the chance-meeting stage's own seed read.
+    expect(READ_SITES).toHaveLength(23);
+    expect(new Set(READ_SITES.map((r) => r[0])).size).toBe(23);
   });
 
   test('every measured read site has a disposition row, counted PER MODULE', () => {
@@ -358,10 +367,12 @@ describe('EP-0 · baseline B — the read-site census', () => {
     ).toEqual(roster);
   });
 
-  test('the read count is exactly twenty-two, counting the writer once', () => {
+  test('the read count is exactly twenty-three, counting the writer once', () => {
     const reads = Object.values(measuredReads()).reduce((n, xs) => n + xs.length, 0);
-    // 21 readable sites + RS-18, the writer, which mints the root and reads nothing.
-    expect(reads, 'measured read expressions').toBe(21);
+    // 22 readable sites + RS-18, the writer, which mints the root and reads nothing.
+    // 21 → 22 at ENC-3 (2026-09-03): RS-23 arrived with a new module, and the delta
+    // decomposes with nothing left over — no existing module's count moved.
+    expect(reads, 'measured read expressions').toBe(22);
     expect(reads + 1).toBe(READ_SITES.length);
   });
 
@@ -384,6 +395,11 @@ const FAMILY_1_REROOTS = Object.freeze([
   ['RS-11', 'src/domain/worldPulse/demographicsPlans.js', 1],
   ['RS-12', 'src/domain/worldPulse/sovereigntyMarketStage.js', 1],
   ['RS-13/14/15', 'src/domain/worldPulse/realmVerbExecution.js', 3],
+  // ENC-3's stage, ENROLLED rather than repaired: the read was written as the `base` of
+  // the family-1 accessor in the same commit that created the module, so there is no
+  // re-root event here to record — only a member the roster must name, because a
+  // TICK-VARYING site absent from this list draws epoch-blind and nothing else sees it.
+  ['RS-23', 'src/domain/worldPulse/envoyChanceMeetingStage.js', 1],
 ]);
 
 /** Non-import, non-comment call sites of a symbol in a file. */
@@ -740,7 +756,7 @@ describe('EP-0 · the three executed mutants', () => {
 describe('EP-0 · the closure record, re-run rather than transcribed', () => {
   // Each figure states the command that reproduces it. The volume published 68/37/TEN/31/"8";
   // the corrected, executable set is below and every one is asserted here.
-  test('`rngSeed` LINES in src = 70 across 31 files', () => {
+  test('`rngSeed` LINES in src = 73 across 31 files', () => {
     // grep -rn "rngSeed" src --include="*.js" --include="*.jsx" | wc -l
     // ⚠ LINES, not occurrences. The per-OCCURRENCE count (grep -o) is higher, and quoting
     // one number under the other's label is how this figure was reported as "grown by 12"
@@ -770,7 +786,14 @@ describe('EP-0 · the closure record, re-run rather than transcribed', () => {
     // nothing else — src/components/townMap/SettlementMapPane.jsx carried exactly ONE `rngSeed`
     // line and left with the legacy settlement map (verified per file against 73f5dfc02: it is
     // the only deleted src file that mentions the identifier at all). No re-rooted site moved.
-    expect({ lines, files: hits.length }).toEqual({ lines: 72, files: 30 });
+    // ⭐ RE-MEASURED 2026-09-03 AT THE ENC-3 LANDING: 72/30 → 73/31, and the delta
+    // decomposes exactly with nothing left over. THE CAUSE IS ONE ADDED FILE and nothing
+    // else — src/domain/worldPulse/envoyChanceMeetingStage.js is new and carries exactly
+    // ONE `rngSeed` line (its `tickStreamSeedOf` base at :414), which is why the FILE count
+    // and the LINE count move by the same one. Verified per file: no existing module's
+    // count changed, so this figure and the read-site census above moved together for the
+    // same single reason rather than coincidentally.
+    expect({ lines, files: hits.length }).toEqual({ lines: 73, files: 31 });
   });
 
   test('`createPRNG(` sites: 35 in src/domain, 45 whole-src; `generateSeed()` 9 hits / 6 call sites', () => {

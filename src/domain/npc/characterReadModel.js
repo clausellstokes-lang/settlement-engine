@@ -157,6 +157,14 @@ export const EXPERIENCE_CLAUSES = Object.freeze({
   home_occupied: 'a home under occupation',
   house_power_fell: 'a house losing its standing',
   house_power_rose: 'a house rising in standing',
+  // ⭐ ENC-3's kind, and the clause is worded for BOTH parties rather than for the
+  // traveller. A chance meeting teaches the visitor and the host alike, so a phrase
+  // naming a journey ("a stranger met far from home") would be false of the notable who
+  // never left his own hall, and a phrase naming a duration would contradict the kind's
+  // own span — the catalog files it non-ambient precisely because a meeting is a week,
+  // not a season. What is true of both souls is that the other one came from somewhere
+  // else, which is the only fact the clause states.
+  met_a_foreigner: 'the company of a stranger from far off',
   news_believed_atrocity: 'word of an atrocity, believed',
   news_believed_triumph: 'word of a triumph, believed',
   pardoned_released: 'a pardon',

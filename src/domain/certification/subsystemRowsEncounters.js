@@ -90,10 +90,27 @@ export const ENCOUNTERS_SUBSYSTEM_ROWS = Object.freeze([
         check: 'Expressible from state and asserted that way in tests/domain/corruptionWebPins.test.js (ENC-2) with plant P6: reverting the exposure-lane skip ousts a willed magistrate and puts a `turncoat` verdict in a seed family, which is what convicts the fence rather than merely exercising it.',
       }),
     ]),
-    // No receipt channel reaches the soak: the soak builds its rules from the
-    // full_simulation spread, which declares no virtual key, so this row cannot be
-    // graded ALIVE from a soak year until the lighting wave puts the key in a preset.
-    // The observation window is E5's, and the lit arm's measured rates are §7.4's.
-    soakEvidence: 'unobserved',
+    // The soak builds its rules from the full_simulation spread, which declares no virtual
+    // key (MEASURED: the key is in 0 of the 7 presets and not in DEFAULT_SIMULATION_RULES),
+    // so this row cannot be graded ALIVE from a soak year until the lighting wave puts the
+    // key in a preset. The observation window is E5's, and the lit arm's rates are §7.4's.
+    //
+    // ⛔ AND THAT IS `indirect`, NOT `unobserved` — CORRECTED AT THE ENC-3 LANDING, on the
+    // distinction subsystemRowsGrowth.js already wrote down and this row got wrong:
+    // "`unobserved` is the row telling the evaluator to downgrade its own zero readings,
+    // which is the escape hatch the corpus guard ceilings; `indirect` says the soak simply
+    // has not run against the instrument yet, and lets the SCHEMA decide". This row DOES
+    // declare a dispositive channel — the two stateKeys above — so `unobserved` was the
+    // escape hatch taken by a row that did not need it, and it took the last seat under the
+    // corpus guard's ceiling of five. The schema decides correctly without it: the soak's
+    // rules carry no boolean for this key, so `ruleState` resolves to `unknown` and
+    // `evaluateSubsystemCertification` grades UNOBSERVED at its fourth branch anyway.
+    //
+    // ⚠ THE DIFFERENCE IS NOT COSMETIC, AND IT ARMS ON THE LIGHTING WAVE. The moment a
+    // preset carries the key, `ruleState` becomes `on`; with `unobserved` this row would
+    // then downgrade a REAL SILENT — a lit lane depositing nothing — into an instrument
+    // gap, silently, forever. With `indirect` that same world grades SILENT and the finding
+    // surfaces. The corpus guard was convicting a live time bomb, not counting wrong.
+    soakEvidence: 'indirect',
   }),
 ]);

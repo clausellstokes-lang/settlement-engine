@@ -533,6 +533,29 @@ const REVIEWED_STAGE_EXEMPTIONS = Object.freeze([
   // pinned above at ZERO imports — cannot reach any of it. The belief composite
   // is closed; the stage that fills its plate is declared, not silent.
   'src/domain/worldPulse/conquestDoctrineStage.js',
+  // ⭐ ENC-3's stage, exempt — AND THE REASON IS A DIFFERENT ONE FROM THE TWO ABOVE, which
+  // is why it is written out rather than pointed at them. Both rows above are exempt
+  // because they legitimately touch a TRUE_STATE_TOKEN and would red the token scan
+  // forever. This one would NOT: measured over the code-only strip, all seven tokens
+  // appear ZERO times in `envoyChanceMeetingStage.js`, so it would pass the scan and could
+  // be pinned. It is exempt on the prior question instead — it is not a negotiation path
+  // at all. K3's subject is the enumerated set "terms, vote, interceptor judgment,
+  // close-vote comparison, feasibility", and a chance meeting is none of them: it decides
+  // nothing a court is allowed to know about another court, spends no errand transition
+  // (its own certification invariant `no_errand_row_changes` pins the handed-back rows
+  // JSON-identical), and writes only into two encounter sub-ledgers. Pinning it would
+  // therefore assert something false — that this is belief-sourced negotiation machinery
+  // whose reach K3 closes — and would put the amendment's name on a lane it does not
+  // govern, which is worse than leaving it unnamed and exactly what this list exists to
+  // prevent. It reads truth about PEOPLE (who is standing where, and what they are like),
+  // because who happened to be in a hall is a physical fact and never a court's estimate.
+  //
+  // WHAT KEEPS THE SEAM REAL, in the direction the two rows above use: nothing pinned can
+  // reach it. MEASURED — the ONLY module under src/domain/worldPulse that imports this
+  // stage is `envoyPulse.js`, which is itself outside this file by the standing ruling in
+  // the discovery docstring above; no member of NEGOTIATION_MODULES imports it, so no
+  // negotiation can take delivery of a truth read through this file.
+  'src/domain/worldPulse/envoyChanceMeetingStage.js',
 ]);
 
 function discoverStageFamily() {

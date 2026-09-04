@@ -92,6 +92,26 @@ describe('participation chokepoint — the .npcs-reader inventory ratchet (§8 c
     'src/domain/worldPulse/corruptionImpair.js',
     'src/domain/worldPulse/corruptionWeb.js',
     'src/domain/worldPulse/disposition.js',
+    // ENC-3 THE CHANCE-MEETING STAGE (dark): VIA-SNAPSHOT, protected by the master gate,
+    // and the gate is WANTED here rather than merely tolerated. All three `.npcs` reads in
+    // the file reach the roster through the same one accessor — `placeOf(snapshot, sid)`,
+    // which returns `snapshot.byId.get(sid).settlement` — and the snapshot handed to the
+    // stage is `envoyPulse.js`'s `snapshotWithUpdates(...)` re-projection of
+    // `buildWorldSnapshot`'s rows, i.e. the participation view this file's master-gate arm
+    // above pins. There is no raw `item.save` roster read in the stage and no second door:
+    // the traveller projection indexes the projected roster to mint its `npcId`, the
+    // resident census walks the projected roster to weigh candidates, and the party
+    // re-resolve reads the same projection. Participation-DEPENDENT, and correctly so —
+    // this is the one lane where being off-stage is exactly the right reason not to be met.
+    // A hostage or a DM-shelved figure filtered out here cannot be picked as a resident
+    // candidate, cannot be marked, cannot be leaned on and cannot be taught, which is what
+    // keeps a captive out of a feast he could not have attended; read through a raw roster
+    // instead, the lane would deposit a bond between a foreign envoy and a man who is
+    // physically in another realm's cell. Dark by default (`chanceEncountersEnabled` is
+    // virtual — MEASURED absent from DEFAULT_SIMULATION_RULES and from all 7 presets), and
+    // the flag gate sits ABOVE every read: `advanceChanceMeetings` returns its input state
+    // before `projectTravellers` is called at all.
+    'src/domain/worldPulse/envoyChanceMeetingStage.js',
     // ES-5b §3.11 THE ABSENCE COST: a RAW roster read, and it is the ONE disposition in
     // this table where the gate would not merely be unnecessary but would INVERT the
     // feature. `presenceSharesFor` indexes `settlement.npcs` to ask, of each faction
