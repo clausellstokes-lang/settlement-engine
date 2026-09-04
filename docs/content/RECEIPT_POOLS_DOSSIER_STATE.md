@@ -697,9 +697,11 @@ The Economy tile repeats the prosperity rung and draws from DS-ECO-8, not here
 (R-DST-D). The band and the season are state facts and may be named; the
 *reason* the granary is where it is has no field behind it here and is never
 supplied. **Seasons off ⇒ no tile ⇒ no sentence** (R-DST-K). The Season tile
-currently fakes two fields by splitting `deriveGranaryOutlook`'s display string
-on `' — '`; the point of this block is to give the section a sentence instead
-of a split.
+read two fields back out of `deriveGranaryOutlook`'s joined display string by
+splitting it on a delimiter it had to guess; §891 gave the producer `seasonTitle`
+and `detail` as real fields, so the split is gone and the delimiter has one home.
+The point of this block is unchanged: a tile is not a sentence, and the section
+wants a sentence.
 
 **SLOTS.** `{settlement}` `{season}`
 
