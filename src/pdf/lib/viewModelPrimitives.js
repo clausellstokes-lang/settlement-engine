@@ -78,8 +78,9 @@ export function foodCore(viability) {
   };
 }
 
-export function avgScore(scores) {
-  const vals = Object.values(scores || {}).filter(v => typeof v === 'number');
-  if (!vals.length) return null;
-  return Math.round(vals.reduce((a, b) => a + b, 0) / vals.length);
-}
+// `avgScore` MOVED to domain/display/defenseScoreBands.js — the module that already owns the
+// defence-score BAND vocabulary every consumer of this mean pairs it with, and a pure
+// zero-import leaf. It was duplicated inline in dossierViewModel's deriveDefensePosture, and
+// `parityContract.js`'s `defense.scoreAvg` row exists because two copies of one mean drift.
+// Re-exported here so this module's readers are untouched.
+export { avgScore } from '../../domain/display/defenseScoreBands.js';

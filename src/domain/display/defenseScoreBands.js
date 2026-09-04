@@ -37,3 +37,34 @@ export const scoreColor = (n) =>
  */
 export const scoreBand = (n) =>
   n >= 65 ? 'STRONG' : n >= 40 ? 'ADEQUATE' : n >= 20 ? 'WEAK' : 'CRITICAL';
+
+/**
+ * THE OVERALL DEFENCE SCORE — the rounded mean of the numeric score values, and the ONE
+ * derivation of it.
+ *
+ * ⛔ WHY IT MOVED HERE. This four-line pure function lived in `pdf/lib/viewModelPrimitives.js`
+ * and was DUPLICATED inline in `domain/display/dossierViewModel.js`'s `deriveDefensePosture`
+ * — and `parityContract.js` carries a `defense.scoreAvg` row precisely because two copies of
+ * one mean is a drift waiting to happen. Both homes are expensive to reach: importing
+ * `viewModelPrimitives.js` adds 293,079 B of transitive weight over the first-paint closure,
+ * and `dossierViewModel.js` adds 278,633 B. So a display consumer that wanted the overall
+ * defence score had three options — pay ~280 KB, or hand-roll a THIRD copy, or go without.
+ * DS-DEF-1's readiness lens is exactly that consumer.
+ *
+ * This module is the right home rather than a new file: it already owns the defence-score
+ * BAND vocabulary (`scoreBand`, the frozen four) that every consumer of this mean pairs it
+ * with, it is a pure zero-import leaf, and it is already reachable wherever the bands are.
+ * The two former homes now delegate here, so there is ONE implementation and the parity row
+ * guards a shape that can no longer diverge.
+ *
+ * `null` for no numeric scores, deliberately — an absent score is not a zero, and a consumer
+ * that banded 0 would report CRITICAL for a settlement that simply has no defence profile.
+ *
+ * @param {Record<string, unknown>|null|undefined} scores
+ * @returns {number|null}
+ */
+export function avgScore(scores) {
+  const vals = Object.values(scores || {}).filter((v) => typeof v === 'number');
+  if (!vals.length) return null;
+  return Math.round(vals.reduce((a, b) => a + b, 0) / vals.length);
+}
