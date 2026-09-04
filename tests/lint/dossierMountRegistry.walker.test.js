@@ -750,6 +750,10 @@ describe('THE PUBLIC-DOSSIER GUARD — a mounted desk never draws for a free vie
     expect(caseOffset('real', raw, code)).toBeGreaterThan(-1);
     expect(routerCaseBlock('real', raw, code)).toContain('publicDossier');
     // The negative the arms depend on: an ungated block is DISTINGUISHABLE, or arm 1 is vacuous.
+    // `raw` is a literal built four lines up in this test body, and the line above proves
+    // the SAME reader finds the flag in the 'real' branch of that literal — so this
+    // absence is the reader discriminating, not the reader having stopped working.
+    // anchored: the line above finds the flag in the 'real' branch of this same literal
     expect(routerCaseBlock('bare', raw, code)).not.toContain('publicDossier');
   });
 
@@ -789,13 +793,21 @@ describe('THE PUBLIC-DOSSIER GUARD — a mounted desk never draws for a free vie
 
   test('NON-VACUITY: an ungated tab and an ungated desk call are both convicted', () => {
     const ungatedRouter = "switch (t) { case 'power': return <PowerTab settlement={s} />; }";
+    // `ungatedRouter` is a literal built on the line above, and the SHIPPED positive
+    // control at the end of this test proves the same reader finds the flag. The
+    // annotation rides the `.not.` line itself because this negative is split across two
+    // lines and the walker's lookback is exactly one line from the matcher, not the expect.
     expect(routerCaseBlock('power', ungatedRouter, codeOnly(ungatedRouter)))
-      .not.toContain('publicDossier');
+      .not.toContain('publicDossier'); // anchored: the shipped positive control below proves the reader works
     const ungatedCaller = codeOnly([
       "import { powerStateProse } from '../../../domain/display/stateProse/powerStateProse.js';",
       'const deskProse = powerStateProse(s, { seed });',
     ].join('\n'));
     const at = ungatedCaller.indexOf('powerStateProse(');
+    expect(at, 'the fixture no longer contains the call the slice is taken around').toBeGreaterThan(-1);
+    // `ungatedCaller` is a literal built in this test body and `at` is pinned to a real
+    // offset on the line above, so the slice is non-empty by construction.
+    // anchored: `at` is pinned to a real offset on the line above
     expect(ungatedCaller.slice(Math.max(0, at - 400), at)).not.toContain('publicDossier');
     // The SHIPPED tree is the positive control standing beside both negatives.
     expect(routerCaseBlock('power')).toContain('publicDossier');

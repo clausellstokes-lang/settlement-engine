@@ -54,6 +54,22 @@ import { DOSSIER_STATE_PROSE_POWER } from '../../src/data/dossierStateProse/powe
 import {
   DOSSIER_MOUNTS, UNMOUNTED_BLOCKS, drawnAtMount, sentenceMountForBlock,
 } from '../../src/domain/display/stateProse/dossierMounts.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+
+/**
+ * THE LIVENESS ANCHOR for every "this block is not in the dark half" assertion below,
+ * DERIVED and never named. An entry of UNMOUNTED_BLOCKS that genuinely carries no mount
+ * row proves two things at once: the dark list is populated, and it is still correctly
+ * keyed against the registry — which is exactly the partition those assertions depend on.
+ * A bare absence check cannot tell "this block is mounted" from "the dark list drifted
+ * away", and naming a dark block instead would go stale the moment it was lit (this suite
+ * lost an arm that way one wave ago); a `.find` simply picks another. If the corpus ever
+ * went fully mounted this is undefined and the anchored assertions red — which is right,
+ * because the claim they make stops meaning anything at that point.
+ */
+const A_DARK_SIBLING = UNMOUNTED_BLOCKS.find(
+  (id) => !DOSSIER_MOUNTS.some((row) => row.blockId === id),
+);
 
 const BLOCK = 'DS-POW-1';
 const POOLS = DOSSIER_STATE_PROSE_POWER[BLOCK].pools;
@@ -152,9 +168,15 @@ describe('the power desk — ALIVENESS: every pool fires over a state the genera
       expect(typeof rung.sentence, `sentence type for ${key}`).toBe('string');
       expect(rung.sentence.length, `sentence length for ${key}`).toBeGreaterThan(20);
       // No slot survived unfilled, and no engine token reached the reader.
+      // The two assertions directly above pin THIS `rung.sentence` as a string of length
+      // > 20, so a silenced or emptied sentence reds there and can never reach these
+      // three absence checks to satisfy them by having nothing to say.
+      // anchored: `rung.sentence` is pinned a string of length > 20 two lines up
       expect(rung.sentence, `unfilled slot in ${key}`).not.toMatch(/[{}]/);
+      // anchored: same sentence, pinned non-empty by the length assertion above
       expect(rung.sentence, `engine token in ${key}`).not.toMatch(/[a-z]+_[a-z]+/);
       // §0d — the prose bands the figure, it never prints one.
+      // anchored: same sentence, pinned non-empty by the length assertion above
       expect(rung.sentence, `digit in ${key}`).not.toMatch(/[0-9]/);
     }
   });
@@ -299,6 +321,9 @@ describe('the power desk — the {seat} fill and its refusal', () => {
     const drawn = powerStateProse(bad, {}, { seed: 'seed-alpha' });
     // Endorsed carries one {settlement}-only variant, so the surface still speaks.
     expect(drawn.legitimacyBanner.sentence).toBeTruthy();
+    // The line above pins this same sentence non-empty, so "the raw token did not reach
+    // the reader" cannot be satisfied by the surface having gone silent.
+    // anchored: the same sentence is pinned truthy on the line above
     expect(drawn.legitimacyBanner.sentence).not.toMatch(/merchant_league/);
     // A pool whose every variant names {seat} goes fully silent instead.
     const allSeat = powerStateProse(
@@ -337,7 +362,9 @@ describe('the power desk — THE PROMISE and the mount wiring', () => {
       mount: 'power.legitimacyBanner', tab: 'power', desk: 'power', rung: 'sentence',
     });
     expect(sentenceMountForBlock(BLOCK)?.mount).toBe('power.legitimacyBanner');
-    expect(UNMOUNTED_BLOCKS).not.toContain(BLOCK);
+    expectAbsentWithAnchor(
+      UNMOUNTED_BLOCKS, BLOCK, A_DARK_SIBLING, 'DS-POW-1 is mounted, so the dark half must not name it',
+    );
   });
 
   it('the mount ROUTES: flipping the row to glance would silence both readings together', () => {
@@ -532,7 +559,11 @@ describe('DS-POW-2 — ALIVENESS: all nine pools fire, and {seat} stays delibera
         expect.objectContaining({ blockId: POW2, poolKey: key }),
       );
       expect(drawn.stabilityHeader.sentence, `silent pool ${key}`).toBeTruthy();
+      // The `silent pool` assertion above pins this same sentence non-empty for this key,
+      // so neither absence check below can pass on a surface that went dark.
+      // anchored: the same sentence is pinned truthy by `silent pool ${key}` above
       expect(drawn.stabilityHeader.sentence).not.toMatch(/[{}]/);
+      // anchored: same sentence, pinned non-empty by the `silent pool` assertion above
       expect(drawn.stabilityHeader.sentence).not.toMatch(/[0-9]/);
     }
     // The three lens pools, each over its own state.
@@ -557,7 +588,12 @@ describe('DS-POW-2 — ALIVENESS: all nine pools fire, and {seat} stays delibera
     }
     expect(seen.size).toBeGreaterThan(1);
     for (const line of seen) {
+      // `seen.size` is pinned > 1 above and every member of `seen` is a rendered line, so
+      // this loop cannot run zero times over a dead producer — an empty draw reds at that
+      // assertion rather than passing both checks here.
+      // anchored: `seen` is pinned non-empty (size > 1) before this loop
       expect(line, 'a doubled name reached the reader').not.toMatch(/Merchant Council at Thornwall is Merchant Council/);
+      // anchored: same live `seen` set, pinned non-empty above
       expect(line).not.toMatch(/[{}]/);
     }
   });
@@ -577,7 +613,9 @@ describe('DS-POW-2 — ALIVENESS: all nine pools fire, and {seat} stays delibera
     expect(rows).toHaveLength(1);
     expect(rows[0]).toMatchObject({ mount: 'power.stabilityHeader', tab: 'power', desk: 'power', rung: 'sentence' });
     expect(sentenceMountForBlock(POW2)?.mount).toBe('power.stabilityHeader');
-    expect(UNMOUNTED_BLOCKS).not.toContain(POW2);
+    expectAbsentWithAnchor(
+      UNMOUNTED_BLOCKS, POW2, A_DARK_SIBLING, 'DS-POW-2 is mounted, so the dark half must not name it',
+    );
   });
 });
 
@@ -705,7 +743,9 @@ describe('DS-POW-6 — the reading lens TILES with DS-POW-1 rather than overlapp
     const rows = DOSSIER_MOUNTS.filter((row) => row.blockId === POW6);
     expect(rows).toHaveLength(1);
     expect(rows[0]).toMatchObject({ mount: 'power.criminalUnderside', tab: 'power', desk: 'power', rung: 'sentence' });
-    expect(UNMOUNTED_BLOCKS).not.toContain(POW6);
+    expectAbsentWithAnchor(
+      UNMOUNTED_BLOCKS, POW6, A_DARK_SIBLING, 'DS-POW-6 is mounted, so the dark half must not name it',
+    );
   });
 
   it('ALIVENESS: all thirteen pools fire across the two audiences', () => {
@@ -839,6 +879,16 @@ describe('DS-POW-4 — the risk ladder arrives as a READING, never as an import'
     const anon = powerStateProse(
       seat(1.0), { contenders: { challengers: [] }, riskLabel: 'Contested' }, { seed: 'cp-x' },
     ).successionRisk?.sentence;
+    // THE LIVENESS ANCHOR for the guarded negative below. `anon` is allowed to be null —
+    // the pool may correctly refuse every {counterpart}-naming variant when there is no
+    // challenger — so `if (anon)` could skip the check entirely and the arm would pass
+    // over a wholly dead desk. This renders the SAME seed and pool WITH a challenger and
+    // requires a sentence, so a null `anon` is a refusal we have proved is deliberate.
+    const withChallenger = powerStateProse(
+      seat(1.0), { contenders: CONTENDERS, riskLabel: 'Contested' }, { seed: 'cp-x' },
+    ).successionRisk?.sentence;
+    expect(withChallenger, 'the pool is silent even WITH a challenger — the desk is dark').toBeTruthy();
+    // anchored: `withChallenger` above proves this seed and pool render at all
     if (anon) expect(anon).not.toMatch(/[{}]/);
   });
 });
@@ -867,7 +917,10 @@ describe('DS-POW-4 — the hold lens needs no new reader, and the lineage needs 
       resolve(import.meta.dirname, '../../src/domain/display/stateProse/powerStateProse.js'), 'utf8',
     );
     const code = source.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/[^\n]*/g, '');
-    expect(code, 'the desk reads a key no generator writes').not.toMatch(/previousGovernments/);
+    expectAbsentWithAnchor(
+      code, 'previousGovernments', 'export function powerStateProse',
+      'the desk reads a key no generator writes',
+    );
     // The pools exist and remain unmounted-in-effect, recorded so nobody re-finds them.
     expect(POW4_POOLS['previousGovernments present with a recorded cause']).toBeTruthy();
     expect(POW4_POOLS['previousGovernments empty (no recorded lineage)']).toBeTruthy();
@@ -916,7 +969,9 @@ describe('DS-POW-4 — the hold lens needs no new reader, and the lineage needs 
     const rows = DOSSIER_MOUNTS.filter((row) => row.blockId === POW4);
     expect(rows).toHaveLength(1);
     expect(rows[0]).toMatchObject({ mount: 'power.succession', tab: 'power', desk: 'power', rung: 'sentence' });
-    expect(UNMOUNTED_BLOCKS).not.toContain(POW4);
+    expectAbsentWithAnchor(
+      UNMOUNTED_BLOCKS, POW4, A_DARK_SIBLING, 'DS-POW-4 is mounted, so the dark half must not name it',
+    );
   });
 });
 
@@ -987,7 +1042,11 @@ describe('DS-POW-3 — the fixture is a PLAYED world, built by the kernel\'s own
       expect(drawn.provenance).toEqual(expect.objectContaining({ blockId: POW3, poolKey: key }));
       expect(drawn.sentence, `SILENT pool ${key}`).toBeTruthy();
       expect(drawn.sentence.length).toBeGreaterThan(20);
+      // The length assertion above pins this same sentence at > 20 characters, so neither
+      // absence check can be satisfied by an empty or missing sentence.
+      // anchored: `drawn.sentence` is pinned > 20 characters on the line above
       expect(drawn.sentence).not.toMatch(/[{}]/);
+      // anchored: same sentence, pinned > 20 characters above
       expect(drawn.sentence).not.toMatch(/[0-9]/);
       // The faction reaches the reader by name — every variant of this block names it.
       expect(drawn.sentence).toContain('Iron Circle');
@@ -1051,7 +1110,9 @@ describe('DS-POW-3 — the cuts, the mandatory faction, and the surface conditio
     const rows = DOSSIER_MOUNTS.filter((row) => row.blockId === POW3);
     expect(rows).toHaveLength(1);
     expect(rows[0]).toMatchObject({ mount: 'power.factionLadder', tab: 'power', desk: 'power', rung: 'sentence' });
-    expect(UNMOUNTED_BLOCKS).not.toContain(POW3);
+    expectAbsentWithAnchor(
+      UNMOUNTED_BLOCKS, POW3, A_DARK_SIBLING, 'DS-POW-3 is mounted, so the dark half must not name it',
+    );
   });
 
   it('DS-POW-3 carries no covert variant', () => {
@@ -1102,7 +1163,16 @@ describe('DS-POW-5 — the lens vocabularies ARE the pool keys, both directions'
     const code = source.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/[^\n]*/g, '');
     const lensOf = code.slice(code.indexOf('export function structuralLensOf'));
     const body = lensOf.slice(0, lensOf.indexOf('\n}'));
-    expect(body, 'the lift reads a key no generator writes').not.toMatch(/primaryIndustry|economicBase/);
+    // The anchor is `governingArchetype`: the ONE key structuralLensOf really derives
+    // from. It travels the same extraction as the two forbidden keys, so a `body` that
+    // silently came back empty — the slice is bounded by two indexOf calls that both
+    // return -1 when the function is renamed — reds here instead of passing both checks.
+    expectAbsentWithAnchor(
+      body, 'primaryIndustry', 'governingArchetype', 'the lift reads a key no generator writes',
+    );
+    expectAbsentWithAnchor(
+      body, 'economicBase', 'governingArchetype', 'the lift reads a key no generator writes',
+    );
   });
 
   it('an unrecognised lens word renders nothing rather than falling into `mixed`', () => {
@@ -1176,7 +1246,11 @@ describe('DS-POW-5 — ALIVENESS, the covert pool, and the three rare slots', ()
             const line = drawn[rung];
             if (line?.sentence) {
               reached.add(line.provenance.poolKey);
+              // This branch is guarded, so it could run zero times — but the arm pins
+              // `reached.size` at exactly 7 below, which a dead desk fails.
+              // anchored: `reached.size` is pinned at exactly 7 after this loop
               expect(line.sentence).not.toMatch(/[{}]/);
+              // anchored: same guarded line; `reached.size` is pinned at 7 below
               expect(line.sentence).not.toMatch(/[0-9]/);
             }
           }
@@ -1223,7 +1297,9 @@ describe('DS-POW-5 — ALIVENESS, the covert pool, and the three rare slots', ()
     const rows = DOSSIER_MOUNTS.filter((row) => row.blockId === POW5);
     expect(rows).toHaveLength(1);
     expect(rows[0]).toMatchObject({ mount: 'power.rulingStructure', tab: 'power', desk: 'power', rung: 'sentence' });
-    expect(UNMOUNTED_BLOCKS).not.toContain(POW5);
+    expectAbsentWithAnchor(
+      UNMOUNTED_BLOCKS, POW5, A_DARK_SIBLING, 'DS-POW-5 is mounted, so the dark half must not name it',
+    );
   });
 });
 
@@ -1301,7 +1377,11 @@ describe('DS-POW-7 — ALIVENESS over a PLAYED world, read through the shipped r
               const line = drawn[rung];
               if (line?.sentence) {
                 reached.add(line.provenance.poolKey);
+                // This branch is guarded, so it could run zero times — but the arm pins
+                // `reached.size` against the corpus below, which a dead desk fails.
+                // anchored: `reached.size` is pinned against the corpus after this loop
                 expect(line.sentence).not.toMatch(/[{}]/);
+                // anchored: same guarded line; `reached.size` is pinned below
                 expect(line.sentence).not.toMatch(/[0-9]/);
               }
             }
@@ -1341,9 +1421,18 @@ describe('DS-POW-7 — ALIVENESS over a PLAYED world, read through the shipped r
       resolve(import.meta.dirname, '../../src/domain/display/stateProse/powerStateProse.js'), 'utf8',
     );
     const code = source.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/[^\n]*/g, '');
-    // No read of a receipts bag, and no import of the heavy kernel module.
+    // THE LIVENESS ANCHOR for both negatives below: the comment stripper must leave the
+    // desk's own entry point standing. An emptied or over-stripped `code` reds HERE
+    // rather than passing two absence checks with nothing to search.
+    expect(code, 'the comment stripper ate the module').toContain('export function powerStateProse');
+    // No read of a receipts bag, and no import of the heavy kernel module. The word-
+    // boundary spelling is deliberate, so this one keeps its regex and cites the anchor.
+    // anchored: `code` is proved above to still contain the desk's own entry point
     expect(code, 'the desk reads receipt state that nothing persists').not.toMatch(/\breceipts\b/);
-    expect(code, 'the desk reached for the 61.9 KB kernel module').not.toMatch(/settlementPolitics/);
+    expectAbsentWithAnchor(
+      code, 'settlementPolitics', 'export function powerStateProse',
+      'the desk reached for the 61.9 KB kernel module',
+    );
   });
 
   it('THE SEAM: a player routed to a covert pool gets SILENCE, not a secret', () => {

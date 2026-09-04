@@ -27,6 +27,22 @@ import { DM_FIELD_FRAMED_BY_BLOCK, isDmEditableProsePath } from '../../src/domai
 import { DOSSIER_STATE_PROSE_DEFENSE } from '../../src/data/dossierStateProse/defense.generated.js';
 import { DOSSIER_MOUNTS, UNMOUNTED_BLOCKS, sentenceMountForBlock } from '../../src/domain/display/stateProse/dossierMounts.js';
 import { parseSlotShapes, mergeSlotShapes } from '../../scripts/lib/dossier-slot-shapes.mjs';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+
+/**
+ * THE LIVENESS ANCHOR for every "this block is not in the dark half" assertion below,
+ * DERIVED and never named. An entry of UNMOUNTED_BLOCKS that genuinely carries no mount
+ * row proves two things at once: the dark list is populated, and it is still correctly
+ * keyed against the registry — which is exactly the partition those assertions depend on.
+ * A bare absence check cannot tell "this block is mounted" from "the dark list drifted
+ * away", and naming a dark block instead would go stale the moment it was lit (this suite
+ * lost an arm that way one wave ago); a `.find` simply picks another. If the corpus ever
+ * went fully mounted this is undefined and the anchored assertions red — which is right,
+ * because the claim they make stops meaning anything at that point.
+ */
+const A_DARK_SIBLING = UNMOUNTED_BLOCKS.find(
+  (id) => !DOSSIER_MOUNTS.some((row) => row.blockId === id),
+);
 
 const DEF3 = 'DS-DEF-3';
 const DEF3_POOLS = DOSSIER_STATE_PROSE_DEFENSE[DEF3].pools;
@@ -119,7 +135,12 @@ describe('the defense desk — the FIRST-SURVEY framing rests on a measurement',
         if (rung?.sentence) {
           reached.add(rung.provenance.poolKey);
           expect(rung.provenance.blockId).toBe(DEF3);
+          // This branch is guarded by `if (rung?.sentence)`, so it could run zero times —
+          // but the arm pins `reached.size` at exactly 7 below, which a desk that had gone
+          // silent over every label fails.
+          // anchored: `reached.size` is pinned at exactly 7 after this loop
           expect(rung.sentence).not.toMatch(/[{}]/);
+          // anchored: same guarded sentence; `reached.size` is pinned at 7 below
           expect(rung.sentence).not.toMatch(/[0-9]/);
         }
       }
@@ -181,7 +202,10 @@ describe('the defense desk — ⭐ THE DM\'S PEN, first production use', () => {
     // Derived, never a hardcoded dark-block literal — an assertion naming a block as DARK
     // goes stale the moment it is lit, which cost this lane an arm one wave ago.
     for (const row of DOSSIER_MOUNTS.filter((r) => r.desk === 'defense')) {
-      expect(UNMOUNTED_BLOCKS).not.toContain(row.blockId);
+      expectAbsentWithAnchor(
+        UNMOUNTED_BLOCKS, row.blockId, A_DARK_SIBLING,
+        `${row.blockId} carries a defense mount row, so the dark half must not name it`,
+      );
     }
   });
 });
@@ -213,8 +237,10 @@ describe('DS-DEF-2 — ⭐ THE LABEL-TRAP RULE, third instance', () => {
     // Three instances across two leaves now: `indebted`, `religious_conversion`, and this.
     // A consumer keyed on the CORPUS word would carry an arm no producer emits AND miss the
     // tier that is emitted — the dead-vocabulary defect from both sides at once.
-    expect(MONSTER_THREAT_TIERS).toContain('heartland');
-    expect(MONSTER_THREAT_TIERS).not.toContain('settled');
+    expectAbsentWithAnchor(
+      MONSTER_THREAT_TIERS, 'settled', 'heartland',
+      'the producer emits `heartland`; `settled` is the CORPUS word and no tier',
+    );
     // …and the corpus's family word is `settled`, reached FROM the producer token.
     expect(beastsRowPoolKey('heartland', true, true)).toBe('Beasts & Monsters: settled, defenses beyond the need');
     expect(Object.keys(DEF2_POOLS).some((k) => k.startsWith('Beasts & Monsters: settled'))).toBe(true);
@@ -227,7 +253,10 @@ describe('DS-DEF-2 — ⭐ THE LABEL-TRAP RULE, third instance', () => {
     // Recorded, not fixed here. The desk is TOTAL over the canonical three and returns null
     // for anything else, so an un-normalised value renders SILENCE, never a wrong family.
     expect(normalizeMonsterThreat('civilized')).toBe('civilized');
-    expect(MONSTER_THREAT_TIERS).not.toContain('civilized');
+    expectAbsentWithAnchor(
+      MONSTER_THREAT_TIERS, 'civilized', 'heartland',
+      'the normaliser forwards `civilized` although it is not a canonical tier',
+    );
     expect(beastsRowPoolKey('civilized', true, true)).toBeNull();
     // The legacy aliases the normaliser DOES map still route correctly.
     expect(normalizeMonsterThreat('low')).toBe('heartland');
@@ -283,7 +312,12 @@ describe('DS-DEF-2 — each row lens at its boundaries', () => {
       resolve(import.meta.dirname, '../../src/domain/display/stateProse/defenseStateProse.js'), 'utf8',
     );
     const code = source.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/[^\n]*/g, '');
-    expect(code, 'the desk reached for avgScore or its heavy homes').not.toMatch(/avgScore|dossierViewModel|viewModelPrimitives/);
+    for (const heavy of ['avgScore', 'dossierViewModel', 'viewModelPrimitives']) {
+      expectAbsentWithAnchor(
+        code, heavy, 'export function defenseStateProse',
+        'the desk reached for avgScore or its heavy homes',
+      );
+    }
   });
 
   it('DISASTERS treats parish care as medical provision ONLY in the granary branch', () => {
@@ -321,7 +355,12 @@ describe('DS-DEF-2 — ALIVENESS over every combination the generator can build'
                           if (!rung?.sentence) continue;
                           reached.add(rung.provenance.poolKey);
                           expect(rung.provenance.blockId).toBe(DEF2);
+                          // This branch is guarded by `if (!rung?.sentence) continue`, so
+                          // it could run zero times — but the arm pins `reached.size` at
+                          // the corpus pool count below, which a dead desk fails.
+                          // anchored: `reached.size` is pinned at the corpus pool count
                           expect(rung.sentence).not.toMatch(/[{}]/);
+                          // anchored: same guarded sentence; `reached.size` pinned below
                           expect(rung.sentence).not.toMatch(/[0-9]/);
                         }
                       }

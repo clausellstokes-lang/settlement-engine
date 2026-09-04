@@ -37,6 +37,22 @@ import { STRESSOR_LIFECYCLE_STAGES, normalizeStressor } from '../../src/domain/w
 import { VARIANT_HOOKS } from '../../src/domain/worldPulse/stressorDynamics.js';
 import { DOSSIER_MOUNTS, UNMOUNTED_BLOCKS, sentenceMountForBlock } from '../../src/domain/display/stateProse/dossierMounts.js';
 import { parseSlotShapes, mergeSlotShapes } from '../../scripts/lib/dossier-slot-shapes.mjs';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+
+/**
+ * THE LIVENESS ANCHOR for every "this block is not in the dark half" assertion below,
+ * DERIVED and never named. An entry of UNMOUNTED_BLOCKS that genuinely carries no mount
+ * row proves two things at once: the dark list is populated, and it is still correctly
+ * keyed against the registry — which is exactly the partition those assertions depend on.
+ * A bare absence check cannot tell "this block is mounted" from "the dark list drifted
+ * away", and naming a dark block instead would go stale the moment it was lit (this suite
+ * lost an arm that way one wave ago); a `.find` simply picks another. If the corpus ever
+ * went fully mounted this is undefined and the anchored assertions red — which is right,
+ * because the claim they make stops meaning anything at that point.
+ */
+const A_DARK_SIBLING = UNMOUNTED_BLOCKS.find(
+  (id) => !DOSSIER_MOUNTS.some((row) => row.blockId === id),
+);
 
 const STR1 = 'DS-STR-1';
 const CND1 = 'DS-CND-1';
@@ -108,7 +124,11 @@ describe('the stressor desk — ALIVENESS at BIRTH', () => {
       expect(drawn, `no rung for ${type}`).toBeTruthy();
       expect(drawn.sentence, `SILENT banner ${type}`).toBeTruthy();
       expect(drawn.sentence.length).toBeGreaterThan(20);
+      // The length assertion above pins this same sentence at > 20 characters, so neither
+      // absence check can be satisfied by a banner that went silent.
+      // anchored: `drawn.sentence` is pinned > 20 characters on the line above
       expect(drawn.sentence).not.toMatch(/[{}]/);
+      // anchored: same sentence, pinned > 20 characters above
       expect(drawn.sentence).not.toMatch(/[0-9]/);
       expect(drawn.provenance.blockId).toBe(STR1);
       reached.add(drawn.provenance.poolKey);
@@ -204,7 +224,10 @@ describe('the stressor desk — the wrong-reader trap, and the two declared dark
       resolve(import.meta.dirname, '../../src/domain/display/stateProse/stressorsStateProse.js'), 'utf8',
     );
     const code = source.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/[^\n]*/g, '');
-    expect(code, 'the desk routes provenance on the narrower predicate').not.toMatch(/isEventSourcedCondition/);
+    expectAbsentWithAnchor(
+      code, 'isEventSourcedCondition', 'export function stressorsStateProse',
+      'the desk routes provenance on the narrower predicate',
+    );
     // The untraced side, and the sourceEventType side.
     expect(conditionProvenancePoolKey(condition({}))).toBe('PROVENANCE: no causes[] and no sourceEventType');
     expect(conditionProvenancePoolKey(condition({ triggeredAt: { sourceEventType: 'war' } })))
@@ -243,7 +266,10 @@ describe('the stressor desk — the wrong-reader trap, and the two declared dark
       resolve(import.meta.dirname, '../../src/domain/display/stateProse/stressorsStateProse.js'), 'utf8',
     );
     const code = source.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/[^\n]*/g, '');
-    expect(code, 'the desk invented a family classification').not.toMatch(/FAMILY:/);
+    expectAbsentWithAnchor(
+      code, 'FAMILY:', 'export function stressorsStateProse',
+      'the desk invented a family classification',
+    );
   });
 
   it('the registry mounts both blocks once each, on the overview tab', () => {
@@ -252,7 +278,9 @@ describe('the stressor desk — the wrong-reader trap, and the two declared dark
       expect(rows).toHaveLength(1);
       expect(rows[0]).toMatchObject({ mount, tab: 'overview', desk: 'stressors', rung: 'sentence' });
       expect(sentenceMountForBlock(blockId)?.mount).toBe(mount);
-      expect(UNMOUNTED_BLOCKS).not.toContain(blockId);
+      expectAbsentWithAnchor(
+        UNMOUNTED_BLOCKS, blockId, A_DARK_SIBLING, `${blockId} is mounted, so the dark half must not name it`,
+      );
     }
     // ⚠ THIS ARM ONCE ASSERTED `DS-STR-2` WAS STILL DARK, and the very next car mounted it.
     // An assertion naming a block as DARK goes stale the moment that block is lit — the same
@@ -260,7 +288,12 @@ describe('the stressor desk — the wrong-reader trap, and the two declared dark
     // claim is DERIVED: every block this desk's registry rows name is mounted, and the count
     // comes from the registry rather than from a literal that has to be maintained.
     const deskRows = DOSSIER_MOUNTS.filter((row) => row.desk === 'stressors');
-    for (const row of deskRows) expect(UNMOUNTED_BLOCKS).not.toContain(row.blockId);
+    for (const row of deskRows) {
+      expectAbsentWithAnchor(
+        UNMOUNTED_BLOCKS, row.blockId, A_DARK_SIBLING,
+        `${row.blockId} carries a stressors mount row, so the dark half must not name it`,
+      );
+    }
   });
 
   it('a settlement with no crises and no conditions is wholly silent, not a crash', () => {
@@ -341,7 +374,11 @@ describe('DS-STR-2 — the two wired lenses are identities over PERSISTED fields
           if (line?.sentence) {
             reached.add(line.provenance.poolKey);
             expect(line.provenance.blockId).toBe(STR2);
+            // This branch is guarded, so it could run zero times — but the arm pins
+            // `reached.size` at exactly 22 below, which a dead desk fails.
+            // anchored: `reached.size` is pinned at exactly 22 after this loop
             expect(line.sentence).not.toMatch(/[{}]/);
+            // anchored: same guarded line; `reached.size` is pinned at 22 below
             expect(line.sentence).not.toMatch(/[0-9]/);
           }
         }
@@ -369,8 +406,18 @@ describe('DS-STR-2 — the ten dark pools, and the coupling measurement behind t
       resolve(import.meta.dirname, '../../src/domain/display/stateProse/stressorsStateProse.js'), 'utf8',
     );
     const code = source.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/[^\n]*/g, '');
-    expect(code, 'the desk reached for the 602 KB kernel').not.toMatch(/stressorDynamics/);
-    expect(code, 'the desk invented a synergy or counterforce lens').not.toMatch(/SYNERGY:|COUNTERFORCE:/);
+    expectAbsentWithAnchor(
+      code, 'stressorDynamics', 'export function stressorsStateProse',
+      'the desk reached for the 602 KB kernel',
+    );
+    expectAbsentWithAnchor(
+      code, 'SYNERGY:', 'export function stressorsStateProse',
+      'the desk invented a synergy lens',
+    );
+    expectAbsentWithAnchor(
+      code, 'COUNTERFORCE:', 'export function stressorsStateProse',
+      'the desk invented a counterforce lens',
+    );
   });
 
   it('⚠ THE SURFACE CONDITION, labelled so it is never mistaken for aliveness', () => {
