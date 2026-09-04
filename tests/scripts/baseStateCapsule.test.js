@@ -38,6 +38,22 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const read = (rel) => readFileSync(join(ROOT, rel), 'utf8');
 const json = (rel) => JSON.parse(read(rel));
 
+/**
+ * A `--runtime-tests` count that clears the ratchet's MOVING scope floor.
+ *
+ * ⛔ NEVER HARDCODE THIS. The generator's floor is `baseline.totalTests * SCOPE_FLOOR_RATIO`, and it
+ * RISES with every landing that adds tests. The literal 28032 that stood here sat SIX units above
+ * the floor of the day it was written; a landing that added 82 tests moved the floor to 28100, and
+ * the dirty-paths case below began failing on the floor guard instead of reaching the assertion it
+ * exists to make. Nothing was wrong with the generator and nothing was wrong with the landing — the
+ * fixture was a green with an expiry date nobody was watching.
+ *
+ * The baseline's own `totalTests` is the honest value: it is what a FULL run reports, and it can
+ * never fall below its own 90%. Read from the canonical home with this file's own reader rather than
+ * through the generator's helper, per the doctrine at the head of this file.
+ */
+const RUNTIME_TESTS = json('scripts/.test-ratchet-baseline.json').totalTests;
+
 const CAPSULE = 'docs/implementation/BASE_STATE.json';
 const STANDARD = 'docs/implementation/PACKET_STANDARD.md';
 const RATCHET_BASELINE = 'scripts/.test-ratchet-baseline.json';
@@ -173,7 +189,7 @@ let readings;
 
 describe('base-state capsule generator', () => {
   beforeAll(async () => {
-    readings = await readAll(28032, { shell: cannedShell });
+    readings = await readAll(RUNTIME_TESTS, { shell: cannedShell });
   }, 60_000);
 
   it('emits the committed artifact shape: six top-level keys and the frozen figure order', () => {
@@ -281,11 +297,11 @@ describe('base-state capsule generator', () => {
   });
 
   it('reads porcelain by its column law, and throws naming the row when a home is missing, a shell-out reds, or the tree is dirty', async () => {
-    await expect(readAll(28032, { shell: (row) => { throw new Error(`boom in ${row}`); } }))
+    await expect(readAll(RUNTIME_TESTS, { shell: (row) => { throw new Error(`boom in ${row}`); } }))
       .rejects.toThrow(/boom in/);
-    await expect(readAll(28032, { shell: () => 'nothing the parser recognises' }))
+    await expect(readAll(RUNTIME_TESTS, { shell: () => 'nothing the parser recognises' }))
       .rejects.toThrow(/stdout did not match the declared parse/);
-    await expect(main(['--runtime-tests=28032'], {
+    await expect(main([`--runtime-tests=${RUNTIME_TESTS}`], {
       io: { shell: cannedShell }, dirtyMeasuredPaths: () => ['src/domain/worldPulse/peaceTerms.js'],
     })).rejects.toThrow(/measured paths are dirty/);
     expect(() => capsuleFrom({ ...readings, stray: 1 })).toThrow(/undeclared \[stray\]/);
