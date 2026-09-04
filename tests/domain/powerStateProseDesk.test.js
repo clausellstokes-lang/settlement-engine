@@ -33,6 +33,10 @@ import {
   stabilityPoolKey,
 } from '../../src/domain/display/stateProse/powerStateProse.js';
 import { likelyFutureFacts } from '../../src/domain/simulationSpine.js';
+import { CRIMINAL_OP_ROLES, criminalOpEcon } from '../../src/domain/criminalOpRole.js';
+import {
+  capturePoolKey, legitimacyReadingPoolKey, operationRolePoolKey,
+} from '../../src/domain/display/stateProse/powerStateProse.js';
 import { legitimacyBandFor } from '../../src/generators/factionDynamics.js';
 import {
   parseSlotShapes, mergeSlotShapes, fillShapeViolation,
@@ -565,5 +569,160 @@ describe('DS-POW-2 — ALIVENESS: all nine pools fire, and {seat} stays delibera
     expect(rows[0]).toMatchObject({ mount: 'power.stabilityHeader', tab: 'power', desk: 'power', rung: 'sentence' });
     expect(sentenceMountForBlock(POW2)?.mount).toBe('power.stabilityHeader');
     expect(UNMOUNTED_BLOCKS).not.toContain(POW2);
+  });
+});
+
+/** DS-POW-6 — the criminal underside. */
+const POW6 = 'DS-POW-6';
+const POW6_POOLS = DOSSIER_STATE_PROSE_POWER[POW6].pools;
+
+function underside(legitimacy, captureState, operations = []) {
+  return {
+    name: 'Thornwall',
+    _seed: 'seed-pow6',
+    powerStructure: { publicLegitimacy: legitimacy, governingName: 'Merchant Council', criminalCaptureState: captureState },
+    economicState: { safetyProfile: { criminalInstitutions: operations } },
+  };
+}
+const BREAK = (b) => ({ score: 50, label: 'Tolerated', breakdown: { prosperity: 0, safety: 0, defense: 0, food: 0, ...b }, governanceFractured: false });
+
+describe('DS-POW-6 — the operation role is an IDENTITY with the producer', () => {
+  it('every role criminalOpEcon can emit has a pool, and the roster is TOTAL', () => {
+    // Pinned against the producer's own exported roster, never a hand list beside it.
+    expect(CRIMINAL_OP_ROLES).toHaveLength(7);
+    for (const role of CRIMINAL_OP_ROLES) {
+      const key = role === 'criminal revenue stream'
+        ? 'operation role criminal revenue stream (unclassified)'
+        : `operation role ${role}`;
+      expect(POW6_POOLS[key], `no pool for role ${role}`).toBeTruthy();
+    }
+    // And the corpus holds no operation-role pool the producer cannot emit.
+    const corpusRoles = Object.keys(POW6_POOLS).filter((k) => k.startsWith('operation role'));
+    expect(corpusRoles).toHaveLength(CRIMINAL_OP_ROLES.length);
+  });
+
+  it('each named operation reaches its own pool, the fallback included', () => {
+    const NAMES = [
+      ['Black Market Ring', 'operation role parallel marketplace'],
+      ['Smuggling Operation', 'operation role duty evasion'],
+      ['Gambling Den', 'operation role unlicensed revenue'],
+      ['Front Business', 'operation role money laundering'],
+      ['Fence Network', 'operation role stolen goods market'],
+      ['Thieves Guild', 'operation role protection + extraction'],
+      ['Odd Syndicate', 'operation role criminal revenue stream (unclassified)'],
+    ];
+    for (const [name, key] of NAMES) {
+      expect(operationRolePoolKey(name), name).toBe(key);
+      // The desk really renders it, rather than merely computing a key.
+      const drawn = powerStateProse(underside(BREAK({}), 'equilibrium', [name]), { seed: `op-${name}` });
+      expect(drawn.operationReading?.sentence, `silent for ${name}`).toBeTruthy();
+      expect(drawn.operationReading.provenance.poolKey).toBe(key);
+    }
+    expect(operationRolePoolKey('')).toBeNull();
+    expect(operationRolePoolKey(null)).toBeNull();
+  });
+});
+
+describe('DS-POW-6 — the capture pools are COVERT, and that is the kernel working', () => {
+  it('all four capture pools are wholly dm-only in the shipped corpus', () => {
+    // The measurement the desk depends on. If the corpus ever un-marks one, this reds and
+    // the audience decision gets revisited deliberately rather than by surprise.
+    for (const key of [
+      'capture pressure ADVANCING (weak security, poor prosperity)',
+      'capture pressure RECOVERING (strong security, prosperity)',
+      'capture reached an AGENT of a faction',
+      'capture reached a LEADER',
+    ]) {
+      const pool = POW6_POOLS[key];
+      expect(pool.every((v) => (v.marks || []).includes('dm-only')), `${key} is not wholly covert`).toBe(true);
+    }
+  });
+
+  it('FAIL-CLOSED: the player sees silence, the DM sees the line', () => {
+    const state = underside(BREAK({ prosperity: -10, safety: -12 }), 'capture');
+    expect(powerStateProse(state, { seed: 'a' }).captureReading?.sentence ?? null).toBeNull();
+    expect(powerStateProse(state, { seed: 'a', audience: 'player' }).captureReading?.sentence ?? null).toBeNull();
+    const dm = powerStateProse(state, { seed: 'a', audience: 'dm' });
+    expect(dm.captureReading.sentence).toBeTruthy();
+    expect(dm.captureReading.provenance.poolKey).toBe('capture reached a LEADER');
+  });
+
+  it('the AGENT/LEADER split is grounded in the shipped capture labels', () => {
+    // No person-level captured-role record exists; the two top rungs already say which it
+    // is — `corrupted` renders as "Corrupted Officials", `capture` as "Governance Captured".
+    expect(capturePoolKey('capture', { prosperity: 0, safety: 0 })).toBe('capture reached a LEADER');
+    expect(capturePoolKey('corrupted', { prosperity: 0, safety: 0 })).toBe('capture reached an AGENT of a faction');
+  });
+
+  it('pressure direction reads the CANONICAL contributions, and a mixed pair is silence', () => {
+    expect(capturePoolKey('equilibrium', { safety: -12, prosperity: -10 }))
+      .toBe('capture pressure ADVANCING (weak security, poor prosperity)');
+    expect(capturePoolKey('none', { safety: 8, prosperity: 15 }))
+      .toBe('capture pressure RECOVERING (strong security, prosperity)');
+    // Mixed and flat are neither direction — the corpus wrote no sentence for them.
+    expect(capturePoolKey('none', { safety: -12, prosperity: 15 })).toBeNull();
+    expect(capturePoolKey('none', { safety: 0, prosperity: 0 })).toBeNull();
+    expect(capturePoolKey('none', null)).toBeNull();
+  });
+});
+
+describe('DS-POW-6 — the reading lens TILES with DS-POW-1 rather than overlapping it', () => {
+  it('no legitimacy record at all ⇒ the "no reading" pool', () => {
+    const drawn = powerStateProse(underside(null, 'none'), { seed: 'r' });
+    expect(drawn.legitimacyReading.provenance.poolKey).toBe('present: false (no legitimacy reading)');
+    expect(drawn.legitimacyReading.sentence).toBeTruthy();
+    // DS-POW-1 is correctly silent there, so the page is not saying two things at once.
+    expect(drawn.legitimacyBanner).toBeNull();
+  });
+
+  it('a flat breakdown is exactly where DS-POW-1 goes quiet, and DS-POW-6 speaks', () => {
+    const flat = underside(BREAK({}), 'none');
+    const drawn = powerStateProse(flat, { seed: 'r' });
+    // DS-POW-1's LENS is silent on an all-zero breakdown (measured in its own arm above)…
+    expect(drawn.legitimacyLens).toBeNull();
+    // …and DS-POW-6 owns that cell.
+    expect(drawn.legitimacyReading.provenance.poolKey).toBe('neutral baseline (nothing pulling either way)');
+    expect(drawn.legitimacyReading.sentence).toBeTruthy();
+  });
+
+  it('a breakdown that IS pulling leaves the reading lens silent — no double narration', () => {
+    const pulling = underside(BREAK({ prosperity: -20 }), 'none');
+    expect(legitimacyReadingPoolKey({ present: true }, BREAK({ prosperity: -20 }))).toBeNull();
+    const drawn = powerStateProse(pulling, { seed: 'r' });
+    expect(drawn.legitimacyReading).toBeNull();
+  });
+
+  it('the registry mounts DS-POW-6 once, as a sentence, on the power tab', () => {
+    const rows = DOSSIER_MOUNTS.filter((row) => row.blockId === POW6);
+    expect(rows).toHaveLength(1);
+    expect(rows[0]).toMatchObject({ mount: 'power.criminalUnderside', tab: 'power', desk: 'power', rung: 'sentence' });
+    expect(UNMOUNTED_BLOCKS).not.toContain(POW6);
+  });
+
+  it('ALIVENESS: all thirteen pools fire across the two audiences', () => {
+    const reached = new Set();
+    const cases = [
+      underside(null, 'none'),
+      underside(BREAK({}), 'none'),
+      underside(BREAK({ prosperity: -10, safety: -12 }), 'equilibrium'),
+      underside(BREAK({ prosperity: 15, safety: 8 }), 'none'),
+      underside(BREAK({ prosperity: -10, safety: -12 }), 'corrupted'),
+      underside(BREAK({ prosperity: -10, safety: -12 }), 'capture'),
+      ...['Black Market Ring', 'Smuggling Operation', 'Gambling Den', 'Front Business',
+        'Fence Network', 'Thieves Guild', 'Odd Syndicate']
+        .map((n) => underside(BREAK({}), 'equilibrium', [n])),
+    ];
+    for (const state of cases) {
+      for (const audience of ['dm', 'player']) {
+        const drawn = powerStateProse(state, { seed: 'aliveness', audience });
+        for (const rung of ['legitimacyReading', 'captureReading', 'operationReading']) {
+          const line = drawn[rung];
+          if (line?.sentence) reached.add(line.provenance.poolKey);
+        }
+      }
+    }
+    expect(reached.size, `unreached: ${Object.keys(POW6_POOLS).filter((k) => !reached.has(k))}`)
+      .toBe(Object.keys(POW6_POOLS).length);
+    expect(Object.keys(POW6_POOLS)).toHaveLength(13);
   });
 });

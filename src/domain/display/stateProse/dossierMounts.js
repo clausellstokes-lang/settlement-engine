@@ -105,8 +105,9 @@ export const MOUNT_RUNGS = Object.freeze({
  * component could draw.
  *
  * ── DESK CAR 2: THE POWER DESK, THE SIXTH POSITION ───────────────────────────────────
- * `powerStateProse.js` adds `power.legitimacyBanner` (DS-POW-1) and `power.stabilityHeader`
- * (DS-POW-2), each taking its block out of the dark list in the same commit. Four of the
+ * `powerStateProse.js` adds `power.legitimacyBanner` (DS-POW-1), `power.stabilityHeader`
+ * (DS-POW-2) and `power.criminalUnderside` (DS-POW-6), each taking its block out of the
+ * dark list in the same commit. Four of the
  * six desks remain unwritten; the count below is the authority on the dark number, not
  * this comment.
  *
@@ -154,6 +155,9 @@ export const DOSSIER_MOUNTS = Object.freeze([
   Object.freeze({
     mount: 'power.stabilityHeader', tab: 'power', desk: 'power', blockId: 'DS-POW-2', rung: 'sentence',
   }),
+  Object.freeze({
+    mount: 'power.criminalUnderside', tab: 'power', desk: 'power', blockId: 'DS-POW-6', rung: 'sentence',
+  }),
 ]);
 
 /**
@@ -183,7 +187,7 @@ export const UNMOUNTED_BLOCKS = Object.freeze([
   'DS-GEN-13', 'DS-GEN-14', 'DS-POP-3', 'DS-GEN-15',
   'DS-GEN-16', 'DS-GEN-17', 'DS-GEN-18',
   'DS-POW-3', 'DS-POW-4',
-  'DS-POW-5', 'DS-POW-6', 'DS-POW-7',
+  'DS-POW-5', 'DS-POW-7',
   'DS-STR-1', 'DS-STR-2', 'DS-CND-1',
   'DS-WAR-1', 'DS-WAR-2', 'DS-WAR-3', 'DS-WAR-4',
   'DS-WAR-5', 'DS-FTH-1', 'DS-FTH-2', 'DS-FTH-3',
