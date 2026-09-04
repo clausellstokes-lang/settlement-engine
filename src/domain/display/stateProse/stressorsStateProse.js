@@ -1,0 +1,380 @@
+/**
+ * domain/display/stateProse/stressorsStateProse.js — DESK CAR 10: THE STRESSOR DESK.
+ *
+ * The third desk module, and the first on a leaf whose state is written AT GENERATION on
+ * both of its wired blocks — so unlike the last three power blocks, these speak at birth.
+ *
+ *   DS-STR-1  Overview › Active crisis banners — `settlement.stress[] {type, label, …}`
+ *   DS-CND-1  Overview › Active conditions — `settlement.activeConditions[] {archetype,
+ *             severityBand, status, triggeredAt, duration, causes}`
+ *
+ * ── WHY THIS LEAF NEXT, MEASURED AT THE VARIANT LEVEL ────────────────────────────────
+ *
+ * The scoping recorded `stressors` as inheriting all three §0c-4 shape residues and flagged
+ * `{band}`. Counted as variant USES rather than blocks that DECLARE one, the whole leaf
+ * carries `{band}` ×1 and `{reason}` ×6 out of 246 variants — ten variant-uses of residue,
+ * which is a handful of dropped sentences under anchored liveness rather than a gate. The
+ * general lesson, now the metric this arc uses: A DECLARATION COUNT IS NOT A USAGE COUNT.
+ *
+ * ── THE IMPORTS ARE FREE, MEASURED ───────────────────────────────────────────────────
+ * `data/stressTypes.js` and `domain/activeConditions.js` are ALREADY in the first-paint
+ * static closure of `src/main.jsx` (233 modules; the walk is proven non-vacuous by the
+ * `store/index.js` eager anchor), so importing their classifiers costs no additional bytes
+ * anywhere. That is why this desk imports `severityBand` and `isEventSourcedCondition`
+ * directly instead of taking them as readings: the reference desk's own precedent is to
+ * IMPORT a canonical classifier (`prosperityRank`) and to take a derived VIEW-MODEL reading
+ * as an argument (`foodBalance`). These are classifiers.
+ * ⚠ FIRST-PAINT HEADROOM ITSELF REMAINS UNMEASURED — the 504 B figure in the scoping is
+ * stale and is not acted on here. This note is about MEMBERSHIP, which is structural, not
+ * about the budget, which needs a build gate.
+ *
+ * ── THE CRISIS BANNER KEYS ARE THE TYPE TOKEN, NOT THE LABEL, AND THAT IS A CURE ─────
+ * `STRESS_TYPE_MAP` carries a reader-facing `label` per type, and 13 of the 15 labels
+ * uppercase exactly onto a banner pool key. TWO DO NOT: `indebted` labels "Indebted to
+ * Outside Power" against the pool `INDEBTED TO AN OUTSIDE POWER`, and
+ * `religious_conversion` labels "Religious Conversion" against the pool `RELIGIOUS CRISIS`.
+ * So a `label.toUpperCase()` route would have silently darkened 2 of 15 banners — the
+ * quiet-degradation shape this subsystem exists to refuse. This desk keys on the TYPE
+ * TOKEN, which is the stable machine identity (a label is display prose and may be
+ * re-worded), through the closed map below, and the desk test asserts that map TOTAL in
+ * both directions: every producer type has an entry, and every banner pool is claimed by
+ * exactly one. ⚠ The two divergences are raised for the chair as a naming question — the
+ * corpus and the label table disagree, and either side could be the one to move.
+ *
+ * ── §0d, THE DIGIT BAN ───────────────────────────────────────────────────────────────
+ * The banner keeps its own datum (label, summary, hook); the prose bands the same fact.
+ *
+ * @enforced-by tests/domain/stressorsStateProseDesk.test.js
+ */
+import { STRESS_TYPE_MAP } from '../../../data/stressTypes.js';
+import { severityBand } from '../../activeConditions.js';
+import { DOSSIER_STATE_PROSE_STRESSORS } from '../../../data/dossierStateProse/stressors.generated.js';
+import { readStateProse } from './stateProseKernel.js';
+import { legibilityRung } from './legibilityRung.js';
+
+/**
+ * The desk's corpus, typed at the import boundary — the generated leaves stay PURE DATA.
+ * @type {import('./stateProseKernel.js').StateProseCorpus}
+ */
+const CORPUS = /** @type {import('./stateProseKernel.js').StateProseCorpus} */ (
+  /** @type {unknown} */ (DOSSIER_STATE_PROSE_STRESSORS)
+);
+
+/**
+ * THE SHAPES THIS DESK BELIEVES ITS SLOTS HAVE, mirroring §0c's Shape column. Only
+ * `{settlement}` is filled; see SLOT_FILL_TABLES for what is deliberately left alone.
+ * @type {Readonly<Record<string, string>>}
+ */
+export const SLOT_FILL_SHAPES = Object.freeze({ settlement: 'proper' });
+
+/**
+ * This desk owns NO literal fill table, and the empty object is the honest declaration.
+ * ⚠ FOUR SLOTS ARE DELIBERATELY UNFILLED, each named by ONE OR FEW variants, so anchored
+ * liveness drops those variants and no POOL is lost — measured, not assumed:
+ *   `{season}` (FAMINE, 1 of 6) · `{band}` (MASS MIGRATION, 1 of 6, and RESERVED so it
+ *   cannot be filled at all) · `{reason}` (PROVENANCE, bare-common with no producer) ·
+ *   `{timeband_age}` (PROVENANCE, no duration former in the tree).
+ * @type {Readonly<Record<string, Readonly<Record<string, string>>>>}
+ */
+export const SLOT_FILL_TABLES = Object.freeze({});
+
+/**
+ * stress `type` → its banner pool. CLOSED, and asserted total in both directions against
+ * `STRESS_TYPE_MAP` and the shipped corpus, so neither a new stress type nor a renamed pool
+ * can drift past this desk in silence.
+ * ⚠ NOT EXPORTED, and the projection contract test is why. That guard walks this directory,
+ * treats every exported string map as a candidate FILL TABLE, and refuses one that
+ * `SLOT_FILL_TABLES` does not name — the mechanism that stops a desk landing a fill table
+ * the shape check has never seen. This is a POOL-KEY map, not a fill table; declaring it as
+ * one would submit banner pool names to fill-shape checking, which is a lie about what they
+ * are. So the map stays private and `crisisBannerPoolKey` is the contract the desk test
+ * asserts totality against — the FUNCTION is the surface, the table is an implementation
+ * detail.
+ * @type {Readonly<Record<string, string>>}
+ */
+const CRISIS_POOL_OF = Object.freeze({
+  under_siege: 'UNDER SIEGE',
+  famine: 'FAMINE',
+  occupied: 'UNDER OCCUPATION',
+  politically_fractured: 'POLITICALLY FRACTURED',
+  // ⚠ The label says "Indebted to Outside Power"; the corpus pool says "…TO AN OUTSIDE
+  // POWER". Keyed on the token so the wording difference costs nothing.
+  indebted: 'INDEBTED TO AN OUTSIDE POWER',
+  recently_betrayed: 'RECENTLY BETRAYED',
+  infiltrated: 'INFILTRATED',
+  plague_onset: 'DISEASE OUTBREAK',
+  succession_void: 'SUCCESSION VOID',
+  monster_pressure: 'BEAST & RAIDER THREAT',
+  insurgency: 'INSURGENCY',
+  // ⚠ The label says "Religious Conversion"; the corpus pool says "RELIGIOUS CRISIS".
+  religious_conversion: 'RELIGIOUS CRISIS',
+  slave_revolt: 'SLAVE REVOLT',
+  wartime: 'WARTIME',
+  mass_migration: 'MASS MIGRATION',
+});
+
+/** The two DS-STR-1 pools that are about the SECTION rather than about one banner. */
+const CRISIS_ARITY_POOL = 'ARITY: several banners standing at once';
+const CRISIS_FRAMING_POOL = "Overview's own section framing";
+
+/** @param {unknown} value @returns {string} */
+function text(value) {
+  return typeof value === 'string' ? value.trim() : '';
+}
+
+/**
+ * A `proper` fill, or `undefined` — the desk's own half of the shape contract, mirroring
+ * `fillShapeViolation`'s PROPER branch in scripts/lib/dossier-slot-shapes.mjs.
+ * @param {string} value @returns {string|undefined}
+ */
+function properFill(value) {
+  if (!value) return undefined;
+  if (/[—–]/.test(value)) return undefined;
+  if (/[.!?]\s|[.!?]$/.test(value)) return undefined;
+  if (/[0-9]/.test(value)) return undefined;
+  if (/[a-z]+_[a-z]+/.test(value)) return undefined;
+  return /^[A-Z]/.test(value) ? value : undefined;
+}
+
+/**
+ * DS-STR-1's banner key for ONE active crisis. An unknown type renders NOTHING rather than
+ * falling into a neighbouring banner: a type this desk does not know is a producer change,
+ * and guessing which crisis it meant is how a page states something false about a town.
+ * @param {unknown} stressType @returns {string|null}
+ */
+export function crisisBannerPoolKey(stressType) {
+  const token = text(stressType);
+  if (!token) return null;
+  const key = CRISIS_POOL_OF[token];
+  return key && CORPUS['DS-STR-1'].pools[key] ? key : null;
+}
+
+/**
+ * DS-STR-1's arity key — the sentence about several crises standing at once. One crisis is
+ * not an arity story, and zero is no story at all.
+ * @param {unknown} banners @returns {string|null}
+ */
+export function crisisArityPoolKey(banners) {
+  const count = Array.isArray(banners) ? banners.length : 0;
+  return count > 1 ? CRISIS_ARITY_POOL : null;
+}
+
+/**
+ * DS-STR-1's section framing — the line the Overview's crisis section carries about itself.
+ * It speaks whenever the section renders at all, which is whenever there is a crisis.
+ * @param {unknown} banners @returns {string|null}
+ */
+export function crisisFramingPoolKey(banners) {
+  return Array.isArray(banners) && banners.length > 0 ? CRISIS_FRAMING_POOL : null;
+}
+
+/**
+ * DS-CND-1's severity key, read through the CANONICAL band derivation rather than a second
+ * spelling of the cut. A record that already carries `severityBand` is trusted; one that
+ * carries only the numeric `severity` is banded by `severityBand()`, which is the one
+ * derivation of that ladder.
+ * @param {{severityBand?: unknown, severity?: unknown}|null|undefined} condition
+ * @returns {string|null}
+ */
+export function conditionSeverityPoolKey(condition) {
+  const declared = text(condition?.severityBand);
+  const band = declared || (typeof condition?.severity === 'number'
+    ? severityBand(condition.severity)
+    : '');
+  if (!band) return null;
+  const key = `SEVERITY: ${band}`;
+  return CORPUS['DS-CND-1'].pools[key] ? key : null;
+}
+
+/** The FLAT case is the corpus's own spelling: stable, or no valid directional status. */
+const DIRECTION_FLAT = 'DIRECTION: stable, and the FLAT case (no valid directional status)';
+
+/**
+ * DS-CND-1's direction key. `worsening` and `easing` are their own pools; everything else —
+ * `stable`, an absent status, an unrecognised one — is the FLAT case, which the corpus names
+ * that way on purpose. So this lens is TOTAL and never silent on a real condition.
+ * @param {{status?: unknown}|null|undefined} condition @returns {string|null}
+ */
+export function conditionDirectionPoolKey(condition) {
+  if (!condition) return null;
+  const status = text(condition.status);
+  if (status === 'worsening') return 'DIRECTION: worsening';
+  if (status === 'easing') return 'DIRECTION: easing';
+  return DIRECTION_FLAT;
+}
+
+/**
+ * DS-CND-1's archetype key. The corpus writes a pool for THREE of the 46 archetypes —
+ * `reconstruction`, `boom`, `flourishing`, the recovery-shaped ones — and nothing for the
+ * other 43. That is the corpus choosing its subject, not a gap: a condition outside those
+ * three renders no archetype line and the other four lenses still speak.
+ * @param {{archetype?: unknown}|null|undefined} condition @returns {string|null}
+ */
+export function conditionArchetypePoolKey(condition) {
+  const archetype = text(condition?.archetype);
+  if (!archetype) return null;
+  const key = `ARCHETYPE: ${archetype}`;
+  return CORPUS['DS-CND-1'].pools[key] ? key : null;
+}
+
+/**
+ * DS-CND-1's provenance key.
+ *
+ * ⚠ IT DOES NOT USE `isEventSourcedCondition`, AND THAT IS THE POINT. I reached for it
+ * first, because "use the canonical reader rather than re-deriving" is the rule three lifts
+ * in this arc were built on. It answers a DIFFERENT QUESTION: it requires
+ * `causes.some(c => c.source === 'event')`, and its own docblock says generation,
+ * world-pulse and regional causes are DELIBERATELY EXCLUDED because those layers re-derive
+ * their own. So a generation-sourced condition WITH a full `causes[]` returns false from it
+ * — and routing on that would have told a reader the condition has no traceable origin when
+ * the record plainly carries one. A false statement, from correctly using the wrong reader.
+ * ⇒ THE REFINEMENT TO THE ANTI-FORK RULE: use the canonical reader when it answers YOUR
+ * question. Check what it answers, not just what it is named.
+ * The two pools name their own split — `causes[] or triggeredAt.sourceEventType populated`
+ * versus `no causes[] and no sourceEventType` — so this reads exactly that, and nothing in
+ * the tree answers it more authoritatively.
+ *
+ * @param {{causes?: unknown, triggeredAt?: {sourceEventType?: unknown}|null}|null|undefined} condition
+ * @returns {string|null}
+ */
+export function conditionProvenancePoolKey(condition) {
+  if (!condition) return null;
+  const causes = condition.causes;
+  const traced = (Array.isArray(causes) && causes.length > 0)
+    || text(condition.triggeredAt?.sourceEventType) !== '';
+  return traced
+    ? 'PROVENANCE: causes[] or triggeredAt.sourceEventType populated'
+    : 'PROVENANCE: no causes[] and no sourceEventType';
+}
+
+/**
+ * JUDGMENT (vetoable): the wind-down window is the last quarter of a condition's life.
+ * `activeConditions.js` carries `SEVERITY_DRIFT_PER_TICK` and expiry bookkeeping but NO
+ * wind-down boundary, so there was no canonical cut to reuse and inventing one silently
+ * would have been the worse move. Say "veto" to move it.
+ */
+const WIND_DOWN_FRACTION = 0.25;
+
+/**
+ * DS-CND-1's duration key — the one pool about a condition that is running out.
+ * A condition with no expiry never enters a wind-down, and says nothing.
+ * @param {{duration?: {elapsedTicks?: unknown, expiresAtTicks?: unknown}|null}|null|undefined} condition
+ * @returns {string|null}
+ */
+export function conditionDurationPoolKey(condition) {
+  const duration = condition?.duration;
+  const expires = duration?.expiresAtTicks;
+  const elapsed = duration?.elapsedTicks;
+  if (typeof expires !== 'number' || !Number.isFinite(expires) || expires <= 0) return null;
+  if (typeof elapsed !== 'number' || !Number.isFinite(elapsed)) return null;
+  const remaining = expires - elapsed;
+  if (remaining < 0) return null;
+  return remaining <= expires * WIND_DOWN_FRACTION
+    ? 'DURATION: inside the expiry wind-down window'
+    : null;
+}
+
+/**
+ * ⛔ THE TRACED-PROVENANCE POOL IS ROUTED BUT SILENT, AND IT IS THE `{complexity}` SHAPE.
+ *
+ * ALL THREE variants of `PROVENANCE: causes[] or traceable…populated` name `{reason}` —
+ * measured, there is no `{reason}`-free variant to degrade to — and `{reason}` is
+ * `bare-common` with NO producer anywhere in the tree. The annex's own position is that it
+ * "has no producer, so this is decidable at wiring"; but the VALUES are reader-facing words
+ * in the dossier's own register, which is exactly the class §0c-3 records for `{complexity}`
+ * and which the lane there deliberately did NOT choose. A desk inventing that vocabulary
+ * would be a lane ruling reader-facing prose.
+ *
+ * So the desk ROUTES to the pool correctly and the kernel's anchored liveness holds it
+ * silent — which is the honest state, and it costs nothing later: rule a `{reason}` fill
+ * vocabulary and the pool lights with NO desk change at all. The untraced pool beside it
+ * has `{settlement}`-only variants and speaks today.
+ */
+
+/**
+ * ⛔ THE FIVE `FAMILY:` POOLS ARE DARK, AND THE REASON IS A MISSING PRODUCER FIELD.
+ *
+ * DS-CND-1 writes five family pools — acute crisis, regional transmission, war layer
+ * (aggressor side), occupation layer, recovery. `CONDITION_ARCHETYPE_TEMPLATES` carries
+ * `label`, `description`, `affectedSystems`, `defaultExpiresAtTicks`, `defaultStatus` and
+ * `defaultSeverity` — and NO family. So a family lens would have to invent a 46-archetype →
+ * 5-family classification inside a display desk, which is a VOCABULARY decision and the
+ * fork-that-drifts shape three lifts in this arc have already corrected.
+ *
+ * The pools stay dark BY DECLARATION rather than served by a guess, and the door is one
+ * act wide: add a `family` field to `CONDITION_ARCHETYPE_TEMPLATES` — the producer owns the
+ * vocabulary — and this desk lights all five with no corpus work at all, exactly as the
+ * economic-base pools wait on one economy-generator field.
+ */
+
+/**
+ * THE DESK, page-wide. Named `stressorsStateProse` to match its DESK name (`stressors`, the
+ * leaf's basename) — the public-dossier guard's ARM 2 derives `<desk>StateProse` from the
+ * registry and caught the singular spelling I first used, which is the convention working. The per-banner rung is a separate entry point below, because a
+ * settlement has several crises and folding a per-banner answer into a once-per-page object
+ * would force the caller to pick one crisis and call it the town's.
+ *
+ * `conditions` is the CALLER'S reading: the Overview already holds the settlement, and the
+ * FIRST condition is the one the lenses describe — the corpus writes one sentence per lens,
+ * not a list, so narrating every condition would repeat one fact in several voices.
+ *
+ * @param {{name?: string, stress?: unknown, activeConditions?: unknown}|null|undefined} settlement
+ * @param {{banners?: unknown, conditions?: ReadonlyArray<object>|null}} [readings]
+ * @param {{seed?: string, audience?: string}} [options]
+ * @returns {Readonly<{crisisArity: object|null, crisisFraming: object|null,
+ *   conditionSeverity: object|null, conditionDirection: object|null,
+ *   conditionArchetype: object|null, conditionProvenance: object|null,
+ *   conditionDuration: object|null}>}
+ */
+export function stressorsStateProse(settlement, readings = {}, options = {}) {
+  const town = properFill(text(settlement?.name));
+  const slots = { settlement: town };
+  const banners = readings.banners ?? null;
+  const conditions = Array.isArray(readings.conditions) ? readings.conditions : [];
+  const condition = conditions.length > 0 ? conditions[0] : null;
+
+  /** @param {string} blockId @param {string|null} poolKey */
+  const line = (blockId, poolKey) => (poolKey
+    ? readStateProse(CORPUS, blockId, poolKey, { ...options, slots })
+    : null);
+
+  const arityKey = crisisArityPoolKey(banners);
+  const framingKey = crisisFramingPoolKey(banners);
+  const severityKey = conditionSeverityPoolKey(condition);
+  const directionKey = conditionDirectionPoolKey(condition);
+  const archetypeKey = conditionArchetypePoolKey(condition);
+  const provenanceKey = conditionProvenancePoolKey(condition);
+  const durationKey = conditionDurationPoolKey(condition);
+
+  return Object.freeze({
+    crisisArity: arityKey ? legibilityRung('', line('DS-STR-1', arityKey), []) : null,
+    crisisFraming: framingKey ? legibilityRung('', line('DS-STR-1', framingKey), []) : null,
+    conditionSeverity: severityKey
+      ? legibilityRung(text(condition?.severityBand), line('DS-CND-1', severityKey), [])
+      : null,
+    conditionDirection: directionKey ? legibilityRung('', line('DS-CND-1', directionKey), []) : null,
+    conditionArchetype: archetypeKey ? legibilityRung('', line('DS-CND-1', archetypeKey), []) : null,
+    conditionProvenance: provenanceKey ? legibilityRung('', line('DS-CND-1', provenanceKey), []) : null,
+    conditionDuration: durationKey ? legibilityRung('', line('DS-CND-1', durationKey), []) : null,
+  });
+}
+
+/**
+ * THE CRISIS BANNER DESK, per banner. Returns one rung, or null where the crisis type is
+ * one this desk does not know.
+ *
+ * @param {{name?: string}|null|undefined} settlement
+ * @param {{type?: unknown, label?: unknown}|null|undefined} banner one `settlement.stress[]` entry
+ * @param {{seed?: string, audience?: string}} [options]
+ * @returns {object|null}
+ */
+export function crisisBannerRung(settlement, banner, options = {}) {
+  const key = crisisBannerPoolKey(banner?.type);
+  if (!key) return null;
+  const slots = { settlement: properFill(text(settlement?.name)) };
+  return legibilityRung(
+    text(banner?.label),
+    readStateProse(CORPUS, 'DS-STR-1', key, { ...options, slots }),
+    [],
+  );
+}

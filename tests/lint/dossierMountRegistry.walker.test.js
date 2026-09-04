@@ -488,8 +488,14 @@ describe('C2 mount registry — the guards can see the defects they guard', () =
     // reads as unrouted, and the control would red because the thing it controls changed
     // rather than because the plant worked. The clean-table arm above already derives its
     // dark half from the corpus for exactly this reason; this line is the same discipline.
-    const short = UNMOUNTED_BLOCKS.filter((id) => id !== 'DS-CND-1');
-    expect(routingLedger(DOSSIER_MOUNTS, short).unrouted).toEqual(['DS-CND-1']);
+    // ⚠ THE PLANT IS DERIVED, NOT HARDCODED, AND THIS ARM'S OWN COMMENT PREDICTED WHY.
+    // It named `DS-CND-1` literally, and the stressor desk car mounted that block — so the
+    // control reddened because the thing it controls changed, which is the exact staleness
+    // the `doubled` plant below was already cured of. Same cure: take the dark list's own
+    // first member, which is still dark by construction.
+    const unroutedPlant = UNMOUNTED_BLOCKS[0];
+    const short = UNMOUNTED_BLOCKS.filter((id) => id !== unroutedPlant);
+    expect(routingLedger(DOSSIER_MOUNTS, short).unrouted).toEqual([unroutedPlant]);
     // Doubled: mounted AND still declared dark, so the darkness figure lies. The plant is
     // built from the dark list's OWN first member, which is still dark by construction, so
     // this control cannot go stale as desk cars mount blocks out of that list — the way a
