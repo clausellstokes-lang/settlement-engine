@@ -1,0 +1,67 @@
+TRAIN 1 car C1 (lane KERNELMARK): the kernel gains the demotion channel it never implemented — a minor crime wave can no longer print the catastrophic sentence, and the arm that proves it was red against a byte-identical copy of the base reader
+
+THE DEFECT. The annex keys DS-GEN-1 on three dimensions (type x max of severity[] x
+factions[].length) and the projection's pool key carries one. The surplus two were
+demoted into per-variant channels: faction count into `slots`, severity into `marks`.
+`eligibleVariants` enforced the slots demotion through `variantIsAnchored` and silently
+ignored the marks one, so a read over a MINOR crime wave could draw the variant marked
+CATASTROPHIC. DS-GEN-6 (hasFoodDeficit) and DS-GEN-9 (anchored) carry the same shape.
+Lighting a desk on that reader would print sentences that contradict the state, which is
+worse than dark. The corroborating witness was already in the tree: causalDossierProse.js
+hand-rolls its own marks filter outside the kernel because the kernel could not read them.
+
+THE CURE (design E1, chair rows J3/J4/J5 at ledger 885.2). stateProseKernel.js gains
+STATE_MARK_DIMENSIONS (a frozen kernel constant, not a corpus field: no generator change,
+no regeneration, no annex edit), poolDimensions, and a fail-closed gate in
+eligibleVariants evaluated on the RAW pool. Derivation is per POOL, not per block, because
+the corpus is mixed at the block grain. Fail-closed is [] -> null -> silence, never a
+throw and never render-everything. Still zero imports; 77 -> 108 effective lines against
+the 800 layer ceiling. drawVariant is UNTOUCHED and byte-compares identical to the base.
+
+THE PROOF, EXECUTED, RED BEFORE GREEN. Four controls, every exit captured in-shell:
+  1. the LITERAL base kernel in place                -> exit 1, "poolDimensions is not a
+     function", no tests ran (red, but imprecise)
+  2. MUTANT A, the base kernel's eligibleVariants body restored VERBATIM (diff against
+     the base function: exit 0) with the new exports kept so the arms can load
+                                                     -> exit 1, 2 failed | 17 passed,
+     and the failures are exactly T2 and T3. T2 named 24 pools that SPOKE, printing a
+     sentence apiece with the severity, the deficit or the anchor ignored.
+  3. MUTANT B, gate kept and the per-variant filter dropped
+                                                     -> exit 1, 1 failed | 18 passed:
+     T3 alone. T2 stays green, so the two halves are proven independently.
+  4. the tip                                          -> exit 0, 19 passed (19)
+
+THE ARMS, all in files that already exist (no new test file, no manifest row, no census
+slot). tests/data/dossierStateProseProjection.contract.test.js gains four: T1 the
+vocabulary is closed and disjoint (8 state marks, 0 unclassified, and 0 of the 92 causal
+arm names collides with a dimension word, which is what keeps the causal reader
+byte-identical); T2 a partitioned pool the caller did not answer reads NOTHING, with the
+answered transition proving the null is the gate; T3 the contradiction sweep over all 58
+(pool x dimension value) states and both audiences, with the named catastrophic
+crime-wave line derived from the corpus rather than transcribed; T4 the thin-state
+ratchet. tests/domain/stateProseKernel.test.js gains T6, the darkness proof: over 762 of
+the 786 shipped pools, both audiences and eight seeds, the reader is byte-identical to
+the pre-cure rule spelled out from its own two predicates.
+
+THE DESIGN'S THIN-STATE FIGURE IS CORRECTED, MEASURED. The volume records 13 single-voiced
+states; that is the DM figure. DS-GEN-1 :: infiltration_fear at severity `major` also
+collapses to one line on the PLAYER's page, because the pool's second `major` variant is
+its only `major + dm-only` line. The reader-facing number is 14. T4 pins both so neither
+audience can drift unseen, and adds a zero-tolerance arm for a state going silent.
+
+BEHAVIOURAL REACH: NIL. The corpus is dark — no importer of this kernel reads a
+dimension-bearing pool — so no rendered byte moves and there is no golden to re-record.
+
+REGISTERS OWED, DELIBERATELY NOT TAKEN (cures first, registers last). This car reds
+tests/lint/.lighting-census-baseline.json, and the landing must refreeze it AFTER every
+TRAIN 1 car: titles 22676 -> 22680, suiteTitles 6101 -> 6102, with files/parked/credited
+UNCHANGED at 2503/370/2133 (those three are asserted before titles and passed). The delta
+is +4/+1 and comes ENTIRELY from the contract test: tests/domain/stateProseKernel.test.js
+is PARKED by that walker, so its two new arms cost the census nothing — the census delta
+is NOT the arm delta, which is the trap in budgeting one refreeze per car by counting
+arms. suiteTitles was measured by probe, because the census asserts titles first and
+would otherwise have under-reported its own drift. scripts/.test-ratchet-baseline.json
+owes totalTests 30973 -> 30979 (+6 runtime arms) with totalFiles UNCHANGED at 2451.
+
+Seat: Opus 5 — Fable-unvalidated
+

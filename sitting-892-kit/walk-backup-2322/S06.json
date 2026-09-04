@@ -1,0 +1,218 @@
+{
+  "slice": "S06",
+  "status": "COMPLETE",
+  "calls": [
+    {
+      "row": "§882.14 (survival)",
+      "call": "Three unreferenced tips sealed: golden-build-2026-09-02 = ba08939d7, t13-consist-2026-09-02 = 9f0df13a1, paidprep-rehearsal-2026-09-01 = f02fd7c4b; before the seal no branch, refs/preserve/* or refs/trains/* contained ba08939d7.",
+      "claim": "The seven GOLDEN cars were alive only on a detached worktree HEAD and are now reachable from a ref.",
+      "method": "git for-each-ref on the three names; git for-each-ref --contains ba08939d7; git worktree list; git -C laneGOLDEN-tree rev-parse HEAD + status --porcelain; git log --format 8b07ce45f..ba08939d7 (trailers).",
+      "evidence": "for-each-ref: `ba08939d718b43702bcf1dd5ca37b650370b55d6 commit refs/preserve/golden-build-2026-09-02` · `9f0df13a1e9fe0062884207293b1caba02bf6102 commit refs/preserve/t13-consist-2026-09-02` · `f02fd7c4bcbb70d148b9e2eec6a604c3902cbb65 commit refs/preserve/paidprep-rehearsal-2026-09-01`. `--contains ba08939d7` → only `refs/preserve/golden-build-2026-09-02` (refs/trains has 31 refs, none contain it). Dock HEAD ba08939d7…, porcelain 0. Log 8b07ce45f..ba08939d7: 7 commits, 7× `Seat: Opus 5 (lane GOLDEN)`.",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "The seal is still the ONLY holder: none of the seven cars' files exist at ca651d54b or 4233031ba (git ls-tree empty for all five paths). See beyond[0]."
+    },
+    {
+      "row": "§882.14 (the finding)",
+      "call": "Lane GOLDEN-BUILD was dispatched at §879.15, never held, never collected, never ruled — ruled nowhere until §882.14.",
+      "claim": "Thirteen calls with no queue row and no ledger collection row.",
+      "method": "grep the ledger for §879.15 and any GOLDEN ruling; read AUDIT.md :164–186; confirm the FRQ row at :2028–2043 is the first Fable-facing entry.",
+      "evidence": "ODQ :32316 (§879.15): `GOLDEN-BUILD DISPATCHED as a fifth, a JUDGMENT (vetoable)`. AUDIT.md :165–168: `Not a queue row, not a ledger collection row … thereafter only as a dock sha in survey lines (§880.3, §880.7, §880.11, §881.19: laneGOLDEN-tree ba08939d7 p0). It was never held, never collected, never ruled.` git log --all -- tests/fixtures/.golden-freeze-register.json → only `635dc0f70 TE-GOLDEN-1 car 1`.",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "Receipt drafted its own row at laneGOLDEN-receipt.md :391–409 (R1–R13); the stratum reproduces it faithfully in substance."
+    },
+    {
+      "row": "§882.14.1 R1",
+      "call": "The door's refusal plants live in the walker file, not a separate goldenRecordDoor.test.js.",
+      "claim": "A second test file costs a second three-census bill for zero extra enforcement; charter prices ONE walker file and marks the door 'no census'.",
+      "method": "git ls-tree ba08939d7 for goldenRecordDoor.test.js; describe titles in the walker; charter Appendix A row for the door; charter §7.4.",
+      "evidence": "ls-tree ba08939d7 tests/helpers/goldenRecordDoor.test.js tests/lint/goldenRecordDoor.test.js → 0 entries. Walker describes :619 `the signed door — refusal 1: the record, not the env var`, :671 `action verbs`, :703 `refusal 2 [A3]: the dirty-tree check`, :755 `refusal 4: the prediction, and the commit-level backstop`; 31 door-API references in the walker. Charter :862: `The door | tests/helpers/goldenRecordDoor.js … | NEW (helper — no census)`; charter :777 `§7.4 The census bill, priced now`.",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "Reversal is genuinely trivial (move four describes; pay one more three-census bill)."
+    },
+    {
+      "row": "§882.14.1 R2",
+      "call": "The oracle bit-arm proofs live in the walker, not in religionDormancy.byteIdentity.test.js.",
+      "claim": "Adding titles to an existing suite moves the lighting tuple and needs a refreeze the brief forbids in-lane.",
+      "method": "git log 8b07ce45f..ba08939d7 -- religionDormancy.byteIdentity.test.js; git diff --stat base..tip on .lighting-census-baseline.json; brief :21; walker describe :777.",
+      "evidence": "Commits touching religionDormancy.byteIdentity.test.js in the seven cars: 0. `git diff --stat 8b07ce45f ba08939d7 -- tests/lint/.lighting-census-baseline.json` → 0 lines (tuple stays files 2480 / titles 21877 / suiteTitles 5965). Brief :21: `NOT YOURS: the fence header edit; any *-dormancy-golden.json hash; the corpus widening; lit-arm goldens; the REC signature; any register refreeze.` Walker :777 `describe('the dormancy oracle bit arm — §713.2 made a standing instrument'` with 16 oracle references.",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": ""
+    },
+    {
+      "row": "§882.14.1 R3",
+      "call": "Added `frozenAt` as a top-level tri-state gate beside `frozenAtSha` + `genesis`, asserting null-together or set-together (plant 3 reds a half-filled freeze).",
+      "claim": "Turns an interrupted freeze act into a conviction instead of a pass; the brief mandates an explicit frozenAt: null.",
+      "method": "Parse the register at ba08939d7; read walker :122 and :306–313; brief :14; charter :332–333; execute the walker single-file at the dock.",
+      "evidence": "Register keys: `frozenAt: null frozenAtSha: null genesis: null`; walker :122 `const FROZEN = REGISTER.frozenAt !== null && REGISTER.frozenAt !== undefined;` :306–313 `it('frozenAt, frozenAtSha and genesis are null together or set together' … expect(new Set(state).size, 'the freeze block is half-filled: …').toBe(1)`. Brief :14: `\"through the door\" values stay empty/unset with an explicit \\`frozenAt: null\\``. Charter :332–333 schema carries only `frozenAtSha` + `genesis`. Executed: `npx vitest run tests/lint/goldenFreeze.walker.test.js` at ba08939d7 → `Tests 84 passed (84)`, porcelain 0 before/after.",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "Sound and cheap to veto (one field, one arm). Schema note for the freeze act: once frozen, `frozenAt` and the charter's `genesis.date` carry the same fact in two places and no arm asserts them equal — either drop `genesis.date` or add the equality arm at L9."
+    },
+    {
+      "row": "§882.14.1 R4",
+      "call": "`excludedEnvSpellings` holds objects {envSpelling, files, reason}, not bare strings.",
+      "claim": "A bare-string list is the unit-less-field hazard; an exclusion nobody can justify is one nobody will remove.",
+      "method": "Parse the 7 entries; grep the walker for every read of the object; probe each listed file for the spelling at ba08939d7; read the stale-exclusion arm :430–442.",
+      "evidence": "7 entries, every one `envSpelling,files,reason`; reasons 58–303 chars, none blank. Probe: all 7 `files` lists accurate at ba08939d7 (each listed file reads `process.env.<spelling>`). Walker reads the object ONLY at :208 `new Set((REGISTER.excludedEnvSpellings ?? []).map((e) => e.envSpelling))`; no `.files` or `.reason` read anywhere. :430–442 convicts a spelling no file reads (`these exclusion spellings no longer exist in the tree`).",
+      "verdict": "AMEND",
+      "confidence": "CONFIRMED",
+      "note": "The shape holds. Amend the row to state: the walker asserts only `envSpelling`; `files` and `reason` are unasserted prose, so a `files` entry that stops reading its spelling rots silently (the spelling itself cannot). The freeze act should add a one-line arm asserting each listed file still reads the spelling and `reason` is non-blank — a cheap addition, not a reversal."
+    },
+    {
+      "row": "§882.14.1 R5",
+      "call": "Added `constantSites` as an inventory field on the three in-file-constant surfaces (live ratchet before the freeze).",
+      "claim": "A constant added or deleted convicts today, not at L9 (plant 5).",
+      "method": "Count quoted 64-hex constants per fence at ba08939d7; read walker :480–491.",
+      "evidence": "Register: espionage-dormancy-fence constantSites 1 · mission 11 · rider 11. Tree at ba08939d7 (`grep -oE \"'[0-9a-f]{64}'\"`): 1 / 11 / 11. Walker :486–487: `if (row.constantSites !== constants.length) drift.push(\\`${rel}: register says ${row.constantSites} sites, tree has ${constants.length}\\`)`; :470–475 also convicts a carrier with NO row.",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "Plant 5's message in the receipt (:315 `register says 1 sites, tree has 2`) matches the source template."
+    },
+    {
+      "row": "§882.14.1 R6",
+      "call": "Added `governance` riders to four rows (three fences, the PDF snapshot) because two carry seals stronger than door traffic and one has an un-refusable writer.",
+      "claim": "Silently enrolling them would downgrade real protection.",
+      "method": "Parse the four riders; read the three fence headers at ba08939d7; ls-tree the snapshot; grep the walker for `governance`.",
+      "evidence": "Exactly 4 rows carry `governance`. Headers at ba08939d7: espionageDormancyFence :212–213 `Any movement outside T13's own recorded window is a STOP, never a re-record`; espionageRiderDormancyFence :68 `⛔ THIS NUMBER MOVING IS A STOP, NEVER A RE-RECORD — it is the owner's condition.`; espionageMissionDormancyFence :210 `Re-record it only with a stated…` (rider says `Compatible with door traffic`); `tests/pdf/__snapshots__/goldenViewModel.test.js.snap` exists (rider: `THE DOOR CANNOT REFUSE IT`). Walker: zero reads of `governance` (prose only, as the row says).",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "'Two stronger seals + one un-refusable writer' is an accurate count (dormancy fence + rider fence; PDF snapshot). Nothing foreclosed — each rider hands the ruling to the freeze act. Because the walker never reads `governance`, a freeze act could fill the rider fence's `frozenConstants` without the STOP being noticed; a machine-visible flag the walker honours at freeze is worth adding at L9."
+    },
+    {
+      "row": "§882.14.1 R7",
+      "call": "Added `unresolvedRoster` for the six fixture-less *DormancyGolden suites rather than forcing rows or dropping them; the walker asserts the list still matches the tree.",
+      "claim": "An item neither enrolled nor written-excluded is the silence the design forbids; it cannot be resolved by forgetting.",
+      "method": "Parse the roster; ls-tree the six at ba08939d7 and 4233031ba; git grep them for UPDATE_GOLDEN / writeFileSync (zsh-split fixed); read walker :346–355 and :460.",
+      "evidence": "Roster names 6 suites (assize, commonsVoice, naval, reframe, seaRoads, thirdPartyRansom). ls-tree ba08939d7 → 6/6 exist (also 6/6 at 4233031ba); UPDATE_GOLDEN readers among them 0; writeFileSync 0. Charter :219 row 5 prices `32 suites (one register row EACH…)`. Walker :349–354: `const vanished = listed.filter((rel) => !present.has(rel)); expect(vanished, 'an unresolved-roster entry no longer exists in the tree').toEqual([]);`.",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "One over-claim in the walker's own comment (:347–348 says the arm reds if a suite is 'deleted or given a manifest'): the code asserts EXISTENCE only. The manifest-gain direction is still closed, by the fixture-claim arm at :460 ('every golden fixture file in tests/fixtures is claimed by a register row'), so the row's substance holds."
+    },
+    {
+      "row": "§882.14.1 R8",
+      "call": "The migration keeps the `existsSync(dirname(…)) && mkdirSync(…)` line above each migrated call site although the door now does it, so the hunks stay line-local and auto-merge at L9.",
+      "claim": "Removing it widens every hunk for zero enforcement.",
+      "method": "git grep -l existsSync(dirname / mkdirSync over the 43 at 8b07ce45f and ba08939d7; git diff --stat 8b07ce45f..{ca651d54b,4233031ba} over the 43 (list built from `git grep -l recordGolden`); hunk positions of car 6 vs the mainline change.",
+      "evidence": "`existsSync(dirname` carriers among the 43: 34 at base, 34 at tip; `mkdirSync` carriers: 43 at base, 43 at tip (nothing removed). Drift of the 43 since base: only `tests/property/generatorGoldenMaster.test.js | 108 +` (at both ca651d54b and 4233031ba), hunk `@@ -18,6 +18,114 @@`; car 6's hunks in that file sit at `@@ -650` and `@@ -761` (offset only). 197 commits base..ca651d54b, 214 base..4233031ba.",
+      "verdict": "AMEND",
+      "confidence": "CONFIRMED",
+      "note": "Substance holds; wording: 'each migrated call site' → 'the 34 that carried it (all 43 keep their mkdirSync form)'. Record the forward figure: as of 4233031ba one of the 43 has moved, offset-only, so the auto-merge premise is intact but must be re-proven at the L9 rebase."
+    },
+    {
+      "row": "§882.14.1 R9",
+      "call": "The migration drops `writeFileSync` from each `node:fs` import (43 sites / 43 files).",
+      "claim": "It becomes unused and would fail lint.",
+      "method": "git grep -l writeFileSync over the 43 at ba08939d7; count recordGolden importers; walker arm :512–516.",
+      "evidence": "writeFileSync among the 43 migrated files at ba08939d7: 0. recordGolden importers under tests/ (excluding door + walker): 43. Car 6 stat: `43 files changed, 129 insertions(+), 86 deletions(-)`. Walker :512–516 `it('no enrolled capture arm still calls writeFileSync itself' … expect(selfWriters, 'one writer, or the bypass returns').toEqual([])`.",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": ""
+    },
+    {
+      "row": "§882.14.1 R10",
+      "call": "The comparator's `soak` arm REFUSES instead of shipping an invented corpus.",
+      "claim": "Half a corpus definition is worse than none: it would be frozen and then believed; the corpus half of probe C is REC Q2's to rule.",
+      "method": "Read scripts/dormancy-bit-compare.mjs :57–61 and :172–176 at ba08939d7; execute `node scripts/dormancy-bit-compare.mjs --arm soak --tree /nonexistent-a --against /nonexistent-b` at the dock.",
+      "evidence": "Source :172–176: `if (args.arm === 'soak') { die('the \\`soak\\` arm is deliberately unbuilt: probe C's corpus definition is not recorded anywhere this script can read, and inventing one would mint a frozen corpus rather than build an instrument. It is REC Q2's to rule…', 3); }`. Executed at ba08939d7: `SOAK_EXIT=3`, stderr carries that sentence verbatim; dock porcelain 0 after.",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "The refusal is an exit-3 die, not a silent no-op — a fallback branch that prints no finding. Correct shape."
+    },
+    {
+      "row": "§882.14.1 R11",
+      "call": "The commit-trailer backstop is an exported checker (`commitTrailerRefusal`), not an installed hook — '§709.5: the sandbox line has zero .husky/, so a hook is absent exactly where it matters and mutates a shared surface'.",
+      "claim": "Hooks do not exist on every line; installing one mutates shared config.",
+      "method": "Read door :200–216; ODQ §709.5 (:30216–30218); charter §4.3 (:530–537); git ls-tree .husky at 8b07ce45f/ba08939d7/ca651d54b; git grep commitTrailerRefusal at ba08939d7/ca651d54b/4233031ba; grep Owner-Signed/commitTrailerRefusal in all five chair-commit.sh copies.",
+      "evidence": "§709.5: `The sandbox branch tracks eight top-level entries and carries zero scripts/, zero eslint.config, zero .husky/ — against the build branch's 176 scripts/ files, an eslint config and a husky shim.` ls-tree at 8b07ce45f, ba08939d7, ca651d54b: `.husky/pre-commit` (`npx lint-staged`) and `.husky/pre-push` PRESENT. `commitTrailerRefusal` consumers: walker :769/:773 unit tests only; none at ca651d54b or 4233031ba. All five chair-commit.sh copies (incl. 58f0a8e2 chair-tools 09-02 10:58, 7979 B, the ENROLMENT-gate version): `Owner-Signed`=0, `commitTrailerRefusal`=0. Charter §4.3: `Chair tooling enforces it where chair tooling runs; the in-tree walker is the load-bearing half`.",
+      "verdict": "AMEND",
+      "confidence": "CONFIRMED",
+      "note": "The decision (no hook) stands — on charter §4.3 and the shared-surface ground. Two corrections owed: (1) 'absent exactly where it matters' is misapplied — the zero-.husky line is the map-module sandbox branch (descoped module-side §724/§738); the build branch, where the register and fixtures live, carries a husky pre-commit shim; (2) the checker is UNWIRED — no chair tooling consumes it — so the §4.3 commit-level backstop is presently a library function. Wiring into chair-commit.sh is owed before the L9 freeze act; raise priority to HIGH."
+    },
+    {
+      "row": "§882.14.1 R12",
+      "call": "Did NOT fix the five pre-existing red lint tests (clampPrimitiveBaseline ×1, warCostKindPools ×3, warRulingKindPools ×1) — reported for routing.",
+      "claim": "Not its, not dispatched; an unattributed fix inside a freeze consist is worse than a reported red.",
+      "method": "Grep scripts/.test-ratchet-baseline.json at 8b07ce45f for the five titles; confirm the control worktree at 8b07ce45f exists and is clean; read receipt :342–363 and :426–459.",
+      "evidence": "Baseline at 8b07ce45f lists all five as banked known failures: :49 `clampPrimitiveBaseline … baseline exactly matches the files that still define a local clamp/clamp01`, :57/:65/:73 the three `warCostKindPools … retains the five receipt-annex families verbatim`, :81 `warRulingKindPools … 'succession_demand_inherited'`, :86 `introducedAt: unbisectable: same SP-6 registry drift`. laneGOLDEN-ctrl HEAD 8b07ce45f, porcelain 0. Receipt :458–459: `The frozen census is 10 failing tests at 4f9206fac; the five pre-existing lint reds recorded above are inside it`.",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "No routing is owed: the five are already banked in the known-failure census at the base (which is FULL, 10/10). The stratum's 'reported for routing' should read 'banked known failures, no action'."
+    },
+    {
+      "row": "§882.14.1 R13",
+      "call": "Superseded — the second full-corpus ratchet measurement WAS run.",
+      "claim": "Receipt §426 executed check-test-ratchet at ba08939d7.",
+      "method": "Read receipt :426–459.",
+      "evidence": "Receipt :428–429: `sh scripts/gate-mutex.sh --run -- node scripts/check-test-ratchet.mjs at ba08939d7, exclusive tier, completed. It reports 3 failing tests not in the frozen census` — the lighting census bill (2481 vs 2480), the mutation-manifest TOTALITY bill, and `npcAuthoringScope.test.jsx` QUERY-BUDGET at load 21.34/8 cores (`NOT MINE`). :452: the run `exited on the regressions before printing the totalTests/totalFiles envelope`, so +84/+1 stays a projection.",
+      "verdict": "OUT-OF-SCOPE",
+      "confidence": "CONFIRMED",
+      "note": "Not a live judgment. The two census bills and the manifest entry remain unpaid because the cars are unlanded (beyond[0])."
+    },
+    {
+      "row": "§882.14.1 priority ruling",
+      "call": "HIGH for R3/R4/R6/R7 (freeze-register schema, unread by any seat); MEDIUM for R10/R11; LOW for the rest.",
+      "claim": "The freeze act at L9 is the arc's own gate and this register governs every output change after it.",
+      "method": "Re-derived from the findings above.",
+      "evidence": "R3/R4/R6/R7 all hold (one AMEND on R4's unasserted fields). R11 carries the only consequential gap: the §4.3 backstop is unwired anywhere (walker unit tests only; five chair-commit.sh copies have no `Owner-Signed`), and its cited reason names the wrong line (the build branch has `.husky/pre-commit`).",
+      "verdict": "AMEND",
+      "confidence": "CONFIRMED",
+      "note": "Raise R11 to HIGH beside the schema four; the rest of the ordering stands."
+    },
+    {
+      "row": "§882.14.3",
+      "call": "Correctly owed, not missing: T13's §C5.10 six rows + the landing's 24-row bill → §883; the three in-flight lanes carry ⟦OPUS-AUTHORED — Fable retrovalidation OWED⟧ per §881.19; the historical strata (§685's dark window, §687–§723) stay QUEUED at the owner's trigger (:1199, :1826).",
+      "claim": "The queue does not report itself empty.",
+      "method": "grep the FRQ at HEAD fd3c6e25c for QUEUED and read :1199/:1826; grep §881.19 in the ODQ; grep the three receipts for the marker; grep the FRQ for §C5.10.",
+      "evidence": "FRQ :1199 `The historical strata (§685's dark window, §687–§723) stay QUEUED at the owner's trigger; this file does NOT report itself empty.` :1826 `… stay QUEUED at the owner's trigger — this file does not repor[t itself empty]`. ODQ `^- **§881.19` → 1 hit. `OPUS-AUTHORED` hits: laneT13LAND-receipt 2, laneINSTRWRW-receipt 2, laneINSTRTUNE-receipt 2. FRQ :2106 `§883.2 · lane T13-PRELAND — SIX calls … Receipt: $SP/laneT13-receipt.md §C5.`",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "Line numbers :1199 and :1826 hold at the ledger HEAD fd3c6e25c."
+    }
+  ],
+  "beyond": [
+    "UNLANDED AND UNSTATED: none of the seven GOLDEN cars' files (register, walker, door, comparator, docs/shift-records) exist at ca651d54b (§890 tip) or 4233031ba (§891 train) — `git ls-tree` returns nothing for all five paths; the seal refs/preserve/golden-build-2026-09-02 is the ONLY holder. Neither the stratum row nor ODQ §882.14 says the freeze machinery is off every product tip, nor that its base 8b07ce45f is 197 commits behind ca651d54b / 214 behind 4233031ba. The L9 rebase bill is real: the three census bills (lighting +84 titles/+12 suites/+1 file, mutation manifest entry, test-ratchet +84/+1) remain unpaid, and the register's inventory is stale by one fixture (below).",
+    "A FIXTURE IN THE INVENTORY MOVED ON MAINLINE OUTSIDE THE DOOR: `tests/fixtures/momentum-dormancy-golden.json` was re-recorded at 66c9abaac (`The declared window's ONE flipped row, attributed and re-recorded: momentumDormancyGolden mo-b|8|one_month`) between 8b07ce45f and 4233031ba. Lawful under the lighting-wave declared window, but it went through writeFileSync because the door is unlanded — the cost of the seal-only state is already measurable. The register carries no sha256 yet, so nothing conflicts; the freeze act must cut from post-landing bytes.",
+    "THE §4.3 COMMIT-LEVEL BACKSTOP IS UNWIRED EVERYWHERE: `commitTrailerRefusal` is imported only by the walker's own two unit tests (:769, :773); no consumer at ca651d54b or 4233031ba; all five chair-commit.sh copies on this box — including the 09-02 10:58 ENROLMENT-gate version in the §882.14 chair's scratchpad — contain neither `Owner-Signed` nor `commitTrailerRefusal`. The charter (§4.3) assigns wiring to chair tooling; nobody has done it. The stratum carries R11 as a routing-neutral MEDIUM and does not say the backstop is a library function with no caller.",
+    "THE `.husky` PREMISE IS MISAPPLIED, NOT JUST IN THE LANE: `.husky/pre-commit` (`npx lint-staged`) and `.husky/pre-push` exist at 8b07ce45f, ba08939d7 and ca651d54b. §709.5's 'zero .husky/' is the map-module sandbox BRANCH (eight top-level entries), descoped module-side at §724/§738. The receipt, the door's docblock (:202–205), charter §4.3 and the stratum row all repeat 'a hook is absent exactly where it matters' for a line that cannot re-record a golden (it holds no tests/fixtures). The lane's second ground (shared-surface mutation) is the one that actually carries the decision.",
+    "WALKER ROSTER-ARM COMMENT OVER-CLAIMS: :347–348 says the unresolved-roster arm reds if a listed suite is 'deleted or given a manifest'; the code (:349–354) checks existence only. The manifest-gain direction is closed by the fixture-claim arm at :460, so the closure exists — but the derivation history the register's _doc says 'lives in the WALKER beside the assertions' is wrong at that line and will mislead the freeze act's reader.",
+    "R4's `files` and `reason` are unasserted (walker reads only `.envSpelling` at :208). All seven `files` lists are accurate at ba08939d7 today (probed), which is exactly when an unasserted field looks fine.",
+    "R12's five reds are banked in scripts/.test-ratchet-baseline.json at 8b07ce45f (:49–:86); the receipt's 'whether these are known-and-accepted … is a question the board answers' was already answered by the census at the base, and the receipt's own §426 concedes it. The stratum's 'reported for routing' owes nothing.",
+    "Probe-method hazard confirmed in this walk (same class as receipt :260 'a zsh false red'): zsh does not word-split unquoted variables, so `git ls-tree $LIST` / `git diff -- $LIST` silently match nothing and print a clean result. My first six-suite and 43-file probes returned false zeros; both were redone with `${=VAR}` / a file list before any verdict was written."
+  ],
+  "chair_errors": [
+    "ODQ §882.14 / FRQ §882.14.1 describe the seven cars as sealed but never state they are UNLANDED on every product tip and 197+ commits behind (CONFIRMED: ls-tree empty at ca651d54b and 4233031ba). For a row whose stated priority rests on 'this register governs every output change after L9', the omission that the register is on no tip is material.",
+    "The chair carried R11's '§709.5: the sandbox line has zero .husky/, so a hook is absent exactly where it matters' into the queue without checking the build branch, which carries .husky/pre-commit at every sha in scope (CONFIRMED by ls-tree), and without noticing that the exported checker has no consumer in any chair-commit.sh — including the chair's own ENROLMENT-gate version written in the same act."
+  ],
+  "commands": [
+    "sed -n '83,98p;113,114p' …/stratum/full.md",
+    "grep -n '^#' $SP2/laneGOLDEN-receipt.md; sed -n '1,30p;217,260p;285,342p;342,476p' $SP2/laneGOLDEN-receipt.md",
+    "git -C REPO log --format='--- %h %s%n%b' --stat 8b07ce45f..ba08939d7",
+    "git -C REPO for-each-ref refs/preserve | grep 2026-09-0; git for-each-ref refs/preserve/golden-build-2026-09-02 refs/preserve/t13-consist-2026-09-02 refs/preserve/paidprep-rehearsal-2026-09-01; git for-each-ref --contains ba08939d7; git for-each-ref refs/trains | wc -l; git worktree list | grep -i golden",
+    "git -C $SP2/laneGOLDEN-tree rev-parse HEAD; git -C $SP2/laneGOLDEN-tree status --porcelain | wc -l (before/after every run); same for laneGOLDEN-ctrl",
+    "git show ba08939d7:tests/fixtures/.golden-freeze-register.json > $W/register.json; node -e (keys, tri-state, excludedEnvSpellings shape, unresolvedRoster, governance rows, constantSites, corrected recorded-values count = 0)",
+    "git show ba08939d7:tests/lint/goldenFreeze.walker.test.js > $W/walker.js; git show ba08939d7:scripts/dormancy-bit-compare.mjs > $W/comparator.mjs; git show ba08939d7:tests/helpers/goldenRecordDoor.js > $W/door.js; grep/sed over the three",
+    "git ls-tree --name-only {8b07ce45f,ba08939d7,ca651d54b} .husky/; git show ba08939d7:.husky/pre-commit",
+    "git ls-tree --name-only {ca651d54b,4233031ba} <the five GOLDEN paths>; git log --all --oneline -- tests/fixtures/.golden-freeze-register.json",
+    "sed -n '30216,30224p;32363p;32316p' docs/OWNER_DECISION_QUEUE.md; grep -n '^- \\*\\*§881\\.19' docs/OWNER_DECISION_QUEUE.md",
+    "grep -n 'QUEUED' docs/FABLE_RETROVALIDATION_QUEUE.md; sed -n '1197,1200p;1826p' …; grep -n 'C5\\.10\\|24-row' …; git rev-parse HEAD",
+    "git grep -l writeFileSync ba08939d7 -- 'tests/property/*Golden*.test.js' tests/domain/routeNetworkDormancy.test.js tests/domain/townCartographyCalibration.test.js | wc -l; git grep -l recordGolden ba08939d7 -- tests/ | wc -l",
+    "git show ba08939d7:tests/property/espionage{,Mission,Rider}DormancyFence.test.js | grep -oE \"'[0-9a-f]{64}'\" | wc -l; grep -n -i 'STOP\\|re-record\\|window' on each header",
+    "git grep -l 'existsSync(dirname' / 'mkdirSync' at 8b07ce45f and ba08939d7 over the 43",
+    "git show 8b07ce45f:scripts/.test-ratchet-baseline.json | grep -n 'clampPrimitiveBaseline\\|warCostKindPools\\|warRulingKindPools'",
+    "cd $SP2/laneGOLDEN-tree && npx vitest run tests/lint/goldenFreeze.walker.test.js --reporter=dot (exit 0, 84/84, 2.64s; porcelain 0→0)",
+    "cd $SP2/laneGOLDEN-tree && node scripts/dormancy-bit-compare.mjs --arm soak --tree /nonexistent-a --against /nonexistent-b (exit 3; porcelain 0)",
+    "git grep -l recordGolden ba08939d7 -- 'tests/property/*.test.js' tests/domain/ > $W/migrated43.txt; git diff --stat 8b07ce45f {ca651d54b,4233031ba} -- $(cat $W/migrated43.txt); git diff --stat 8b07ce45f 4233031ba -- tests/fixtures/; git log 8b07ce45f..4233031ba -- tests/fixtures/momentum-dormancy-golden.json; git rev-list --count 8b07ce45f..{ca651d54b,4233031ba}",
+    "git ls-tree ba08939d7 / 4233031ba over the six roster suites with ${=SIX}; git grep -l UPDATE_GOLDEN / writeFileSync ba08939d7 -- ${=SIX}",
+    "node -e probe: for each excludedEnvSpellings entry, git grep -c process.env.<spelling> ba08939d7 -- <each listed file>",
+    "git grep -n commitTrailerRefusal {ba08939d7,ca651d54b,4233031ba} -- .; find … -name chair-commit.sh | grep -c 'Owner-Signed' / 'commitTrailerRefusal' / -i enrol on each of five copies",
+    "sed -n '326,340p;530,540p;219p;840,866p' $SP2/GOLDEN-BUILD-CHARTER.md; sed -n '14p;21p' $SP2/brief-GOLDEN-BUILD.md; md5 -q both brief copies (identical)",
+    "sed -n '164,186p' $SP/retro-audit/AUDIT.md; grep -c OPUS-AUTHORED $SP2/lane{T13LAND,INSTRWRW,INSTRTUNE}-receipt.md",
+    "git show 4233031ba:tests/property/generatorGoldenMaster.test.js | grep -n node:fs/writeFileSync; git diff 8b07ce45f 4233031ba -- that file | grep '^@@'; git show fdb2ea62f -- that file | grep '^@@'"
+  ],
+  "porcelain_unchanged": true,
+  "summary": "S06 (§882.14 GOLDEN-BUILD R1–R13 + §882.14.3): 17 calls — 12 RATIFY · 4 AMEND · 0 REVERSE · 0 EVIDENCE-THIN · 1 OUT-OF-SCOPE. Survival CONFIRMED (three seals at the exact shas; the seal is still ba08939d7's only holder). The schema four hold: the tri-state gate, the four governance riders, constantSites and the unresolved roster all re-derive from the register and walker at ba08939d7, and the walker executed 84/84 at the dock with porcelain 0 before and after; R4 is amended because `files`/`reason` are unasserted. R10's soak refusal executed (exit 3). The consequential amendment is R11: the build branch carries .husky/pre-commit at every sha in scope (the 'zero .husky/' line is the descoped map-module sandbox branch), and `commitTrailerRefusal` has no consumer anywhere — not in the walker beyond its own unit tests, not in any of five chair-commit.sh copies including the §882.14 ENROLMENT-gate version — so the §4.3 backstop is a library function; raise R11 to HIGH. Beyond the rows: the seven cars are UNLANDED on every product tip (ls-tree empty at ca651d54b and 4233031ba), 197–214 commits behind, with one of the 43 migrated files drifted offset-only and one inventoried fixture (momentum) re-recorded on mainline outside the unlanded door. §882.14.3's QUEUED marks hold at :1199/:1826 of the FRQ at HEAD fd3c6e25c. No file inside the repo or any dock was written; both GOLDEN docks show porcelain 0 before and after."
+}

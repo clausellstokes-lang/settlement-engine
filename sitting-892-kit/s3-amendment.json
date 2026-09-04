@@ -1,0 +1,4 @@
+{
+  "old": "- Lane (subagent) work inherits its dispatching chair's seat and is enrolled by that\n  chair at collection. A lane never writes this file.",
+  "new": "- Lane (subagent) work is MARKED by the seat that DID the work, never by the seat that\n  dispatched it (ruled §882.14.2; the clause was declared amended there and never edited —\n  executed at §892): an Opus lane's judgment calls are enrolled in §6 under `SEAT: Opus 5` by\n  whichever chair collects them, a Fable chair included, and carry a `*RULED (§N, Fable …)*`\n  line when a Fable seat walks them. A lane never writes this file."
+}

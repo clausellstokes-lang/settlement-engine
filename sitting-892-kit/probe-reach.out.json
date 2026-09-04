@@ -1,0 +1,182 @@
+{
+  "root": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/58f0a8e2-2c4f-4073-8635-ecc7cf5010f6/scratchpad/laneKERNELMARK-tree",
+  "ms": 13650,
+  "closureSizes": {
+    "web-display": 685,
+    "web-transitive": 887,
+    "dossier-pdf": 373,
+    "campaign-pdf": 74,
+    "world-book": 80,
+    "foundry": 321,
+    "json-export": 8,
+    "news": 28
+  },
+  "population": {
+    "judged": 6520,
+    "lit": 547,
+    "litName": 4647,
+    "dark": 1326,
+    "thinKeys": 9142,
+    "thinShapes": 962,
+    "knownShapes": 337
+  },
+  "identities": {
+    "situationDesc on economicState": {
+      "verdict": "LIT",
+      "reach": "dossier-pdf=R web-display=N web-transitive=R",
+      "R": [
+        "src/domain/summary/settlementQuickGuide.js"
+      ],
+      "N": [
+        "src/components/new/tabs/EconomicsGlance.jsx",
+        "src/domain/summary/settlementQuickGuide.js"
+      ]
+    },
+    "_seed on settlement": {
+      "verdict": "LIT",
+      "reach": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
+      "R": [
+        "src/components/new/tabs/EconomicsTab.jsx",
+        "src/domain/normalizeSettlement.js",
+        "src/domain/traditions/genesis.js",
+        "src/domain/traditions/politics.js",
+        "src/domain/worldPulse/lineageMemberBirth.js",
+        "src/lib/dossierClaimStash.js",
+        "src/lib/saveAdmission.js",
+        "src/lib/structuralFingerprint.js"
+      ],
+      "N": [
+        "src/components/new/tabs/EconomicsTab.jsx",
+        "src/components/new/tabs/RelationshipsTab.jsx",
+        "src/domain/normalizeSettlement.js",
+        "src/domain/traditions/genesis.js",
+        "src/domain/traditions/politics.js",
+        "src/domain/worldPulse/lineageMemberBirth.js",
+        "src/lib/dossierClaimStash.js",
+        "src/lib/importScrub.js",
+        "src/lib/saveAdmission.js",
+        "src/lib/saves.js",
+        "src/lib/structuralFingerprint.js"
+      ]
+    },
+    "prosperity on economicState": {
+      "verdict": "LIT",
+      "reach": "campaign-pdf=R dossier-pdf=R foundry=R news=R web-display=R web-transitive=R world-book=R",
+      "R": [
+        "src/components/ShareToGallery.jsx",
+        "src/components/TableView.jsx",
+        "src/components/map/heraldRegister.js",
+        "src/components/new/dailyLifeLogic.js",
+        "src/components/new/tabs/EconomicsTab.jsx",
+        "src/components/new/tabs/OverviewTab.jsx",
+        "src/domain/autonomy/signalRegistry.js",
+        "src/domain/causalState.js",
+        "src/domain/conditionPromotion.js",
+        "src/domain/corruption.js",
+        "src/domain/display/dossierViewModel.js",
+        "src/domain/display/stateProse/economyStateProse.js",
+        "src/domain/districtProfile.js",
+        "src/domain/roads/state.js",
+        "src/domain/simulationSpine.js",
+        "src/domain/state/deriveSystemState.js",
+        "src/domain/summary/settlementQuickGuide.js",
+        "src/domain/worldPulse/beliefAxisSubjects.js",
+        "src/domain/worldPulse/corruptionWeb.js",
+        "src/domain/worldPulse/generosityKernel.js",
+        "src/domain/worldPulse/generosityUpdates.js",
+        "src/domain/worldPulse/informationStatecraft.js",
+        "src/domain/worldPulse/navalStrength.js",
+        "src/domain/worldPulse/religiousContest.js",
+        "src/domain/worldPulse/settlementLifecycleFirstClass.js",
+        "src/domain/worldPulse/settlementLifecycleKernel.js",
+        "src/domain/worldPulse/traditionsKernel.js",
+        "src/domain/worldPulse/treasury.js",
+        "src/domain/worldPulse/upswingKernel.js",
+        "src/lib/gallery.js",
+        "src/lib/generationTelemetry.js",
+        "src/lib/structuralFingerprint.js",
+        "src/pdf/lib/viewModel.js",
+        "src/pdf/lib/viewModelBodySlices.js"
+      ],
+      "N": [
+        "src/components/ShareToGallery.jsx",
+        "src/components/TableView.jsx",
+        "src/components/gallery/GallerySidebar.jsx",
+        "src/components/map/HeraldGazetteer.jsx",
+        "src/components/map/RealmComparisons.jsx",
+        "src/components/map/heraldRegister.js",
+        "src/components/new/SummaryTab.jsx",
+        "src/components/new/dailyLifeLogic.js",
+        "src/components/new/tabs/EconomicsGlance.jsx",
+        "src/components/new/tabs/EconomicsTab.jsx",
+        "src/components/new/tabs/OverviewTab.jsx",
+        "src/domain/autonomy/signalRegistry.js",
+        "src/domain/causalState.js",
+        "src/domain/conditionPromotion.js",
+        "src/domain/corruption.js",
+        "src/domain/display/dossierViewModel.js",
+        "src/domain/display/stateProse/economyStateProse.js",
+        "src/domain/districtProfile.js",
+        "src/domain/roads/state.js",
+        "src/domain/simulationSpine.js",
+        "src/domain/state/deriveSystemState.js",
+        "src/domain/summary/settlementQuickGuide.js",
+        "src/domain/undercity/colonization.js",
+        "src/domain/worldPulse/beliefAxisSubjects.js",
+        "src/domain/worldPulse/corruptionImpair.js",
+        "src/domain/worldPulse/corruptionWeb.js",
+        "src/domain/worldPulse/factionCapture.js",
+        "src/domain/worldPulse/generosityKernel.js",
+        "src/domain/worldPulse/generosityUpdates.js",
+        "src/domain/worldPulse/informationStatecraft.js",
+        "src/domain/worldPulse/navalStrength.js",
+        "src/domain/worldPulse/npcAgency.js",
+        "src/domain/worldPulse/npcReplacement.js",
+        "src/domain/worldPulse/religiousContest.js",
+        "src/domain/worldPulse/settlementLifecycleFirstClass.js",
+        "src/domain/worldPulse/settlementLifecycleKernel.js",
+        "src/domain/worldPulse/traditionsKernel.js",
+        "src/domain/worldPulse/treasury.js",
+        "src/domain/worldPulse/upswingKernel.js",
+        "src/foundry/journalPages.js",
+        "src/lib/gallery.js",
+        "src/lib/generationTelemetry.js",
+        "src/lib/researchCapture.js",
+        "src/lib/structuralFingerprint.js",
+        "src/pdf/lib/headlines.js",
+        "src/pdf/lib/viewModel.js",
+        "src/pdf/lib/viewModelBodySlices.js",
+        "src/pdf/sections/Cover.jsx",
+        "src/pdf/sections/EconomicsTrade.jsx",
+        "src/pdf/sections/IdentityDailyLife.jsx",
+        "src/pdf/sections/Overview.jsx"
+      ]
+    },
+    "economicComplexity on economicState": {
+      "verdict": "LIT",
+      "reach": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
+      "R": [
+        "src/domain/causalState.js",
+        "src/domain/display/stateProse/economyStateProse.js",
+        "src/pdf/lib/viewModel.js",
+        "src/pdf/lib/viewModelBodySlices.js"
+      ],
+      "N": [
+        "src/components/new/SummaryTab.jsx",
+        "src/components/new/tabs/EconomicsGlance.jsx",
+        "src/domain/causalState.js",
+        "src/domain/display/stateProse/economyStateProse.js",
+        "src/foundry/journalPages.js",
+        "src/pdf/lib/headlines.js",
+        "src/pdf/lib/viewModel.js",
+        "src/pdf/lib/viewModelBodySlices.js",
+        "src/pdf/sections/EconomicsTrade.jsx"
+      ]
+    }
+  },
+  "closureMembership": {
+    "EconomicsGlance.jsx in web-display": true,
+    "EconomicsTab.jsx in web-display": true,
+    "EconomicsGlance.jsx in web-transitive": false
+  }
+}

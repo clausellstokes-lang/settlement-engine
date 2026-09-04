@@ -1,0 +1,569 @@
+commit f60457296461764edf6aebcee2c2951e53c71f0a
+Author: Fixture <fixture@example.test>
+Date:   Wed Sep 2 22:26:06 2026 -0400
+
+    TRAIN 1 car C1 (lane KERNELMARK): the kernel gains the demotion channel it never implemented — a minor crime wave can no longer print the catastrophic sentence, and the arm that proves it was red against a byte-identical copy of the base reader
+    
+    THE DEFECT. The annex keys DS-GEN-1 on three dimensions (type x max of severity[] x
+    factions[].length) and the projection's pool key carries one. The surplus two were
+    demoted into per-variant channels: faction count into `slots`, severity into `marks`.
+    `eligibleVariants` enforced the slots demotion through `variantIsAnchored` and silently
+    ignored the marks one, so a read over a MINOR crime wave could draw the variant marked
+    CATASTROPHIC. DS-GEN-6 (hasFoodDeficit) and DS-GEN-9 (anchored) carry the same shape.
+    Lighting a desk on that reader would print sentences that contradict the state, which is
+    worse than dark. The corroborating witness was already in the tree: causalDossierProse.js
+    hand-rolls its own marks filter outside the kernel because the kernel could not read them.
+    
+    THE CURE (design E1, chair rows J3/J4/J5 at ledger 885.2). stateProseKernel.js gains
+    STATE_MARK_DIMENSIONS (a frozen kernel constant, not a corpus field: no generator change,
+    no regeneration, no annex edit), poolDimensions, and a fail-closed gate in
+    eligibleVariants evaluated on the RAW pool. Derivation is per POOL, not per block, because
+    the corpus is mixed at the block grain. Fail-closed is [] -> null -> silence, never a
+    throw and never render-everything. Still zero imports; 77 -> 108 effective lines against
+    the 800 layer ceiling. drawVariant is UNTOUCHED and byte-compares identical to the base.
+    
+    THE PROOF, EXECUTED, RED BEFORE GREEN. Four controls, every exit captured in-shell:
+      1. the LITERAL base kernel in place                -> exit 1, "poolDimensions is not a
+         function", no tests ran (red, but imprecise)
+      2. MUTANT A, the base kernel's eligibleVariants body restored VERBATIM (diff against
+         the base function: exit 0) with the new exports kept so the arms can load
+                                                         -> exit 1, 2 failed | 17 passed,
+         and the failures are exactly T2 and T3. T2 named 24 pools that SPOKE, printing a
+         sentence apiece with the severity, the deficit or the anchor ignored.
+      3. MUTANT B, gate kept and the per-variant filter dropped
+                                                         -> exit 1, 1 failed | 18 passed:
+         T3 alone. T2 stays green, so the two halves are proven independently.
+      4. the tip                                          -> exit 0, 19 passed (19)
+    
+    THE ARMS, all in files that already exist (no new test file, no manifest row, no census
+    slot). tests/data/dossierStateProseProjection.contract.test.js gains four: T1 the
+    vocabulary is closed and disjoint (8 state marks, 0 unclassified, and 0 of the 92 causal
+    arm names collides with a dimension word, which is what keeps the causal reader
+    byte-identical); T2 a partitioned pool the caller did not answer reads NOTHING, with the
+    answered transition proving the null is the gate; T3 the contradiction sweep over all 58
+    (pool x dimension value) states and both audiences, with the named catastrophic
+    crime-wave line derived from the corpus rather than transcribed; T4 the thin-state
+    ratchet. tests/domain/stateProseKernel.test.js gains T6, the darkness proof: over 762 of
+    the 786 shipped pools, both audiences and eight seeds, the reader is byte-identical to
+    the pre-cure rule spelled out from its own two predicates.
+    
+    THE DESIGN'S THIN-STATE FIGURE IS CORRECTED, MEASURED. The volume records 13 single-voiced
+    states; that is the DM figure. DS-GEN-1 :: infiltration_fear at severity `major` also
+    collapses to one line on the PLAYER's page, because the pool's second `major` variant is
+    its only `major + dm-only` line. The reader-facing number is 14. T4 pins both so neither
+    audience can drift unseen, and adds a zero-tolerance arm for a state going silent.
+    
+    BEHAVIOURAL REACH: NIL. The corpus is dark — no importer of this kernel reads a
+    dimension-bearing pool — so no rendered byte moves and there is no golden to re-record.
+    
+    REGISTERS OWED, DELIBERATELY NOT TAKEN (cures first, registers last). This car reds
+    tests/lint/.lighting-census-baseline.json, and the landing must refreeze it AFTER every
+    TRAIN 1 car: titles 22676 -> 22680, suiteTitles 6101 -> 6102, with files/parked/credited
+    UNCHANGED at 2503/370/2133 (those three are asserted before titles and passed). The delta
+    is +4/+1 and comes ENTIRELY from the contract test: tests/domain/stateProseKernel.test.js
+    is PARKED by that walker, so its two new arms cost the census nothing — the census delta
+    is NOT the arm delta, which is the trap in budgeting one refreeze per car by counting
+    arms. suiteTitles was measured by probe, because the census asserts titles first and
+    would otherwise have under-reported its own drift. scripts/.test-ratchet-baseline.json
+    owes totalTests 30973 -> 30979 (+6 runtime arms) with totalFiles UNCHANGED at 2451.
+    
+    Seat: Opus 5 — Fable-unvalidated
+
+diff --git a/src/domain/display/stateProse/stateProseKernel.js b/src/domain/display/stateProse/stateProseKernel.js
+index 4837b5b6c..2d08c1601 100644
+--- a/src/domain/display/stateProse/stateProseKernel.js
++++ b/src/domain/display/stateProse/stateProseKernel.js
+@@ -10,7 +10,7 @@
+  * It is a PURE, HEADLESS LEAF: no imports, no state, no clock, no RNG. Composition
+  * lives display-side and nothing here is persisted — dark, the page is byte-identical.
+  *
+- * ── THE FOUR LAWS THIS FILE ENFORCES ────────────────────────────────────────────────
++ * ── THE FIVE LAWS THIS FILE ENFORCES ────────────────────────────────────────────────
+  *
+  * 1. ANCHORED LIVENESS (the spec's item 3, and the reason this is a kernel rather than
+  *    a lookup). A variant renders ONLY when every slot it names has a real fill. A
+@@ -37,6 +37,21 @@
+  *    walker, a census or a print path that has no telling to key on reads a stable
+  *    sentence rather than an arbitrary one.
+  *
++ * 5. THE DEMOTED STATE DIMENSION, FAIL-CLOSED. Some blocks carry a STATE-KEY with more
++ *    dimensions than a pool key can hold, and the projection demotes the surplus into
++ *    per-variant channels. A pool that partitions itself by such a dimension is
++ *    UNREADABLE until the caller answers it, not "readable with everything": half its
++ *    sentences are false about this town and nothing here can tell which half. See
++ *    STATE_MARK_DIMENSIONS. This is the only law in the file that protects a TRUTH
++ *    CLAIM rather than a surface, and it is the reason `marks` is read twice.
++ *
++ * ⚠ `marks` IS AN UNTYPED BAG CARRYING THREE DISTINCT SEMANTICS, and a reader that
++ * knows only one of them fails silently rather than loudly. They are: the AUDIENCE mark
++ * (`dm-only`, law 2); the STATE DIMENSION words (law 5); and, in the causal register
++ * only, the family-local CAUSAL ARM names, which are open and family-scoped and so are
++ * filtered by causalDossierProse.js rather than here. The three vocabularies are
++ * disjoint over the shipped corpus, and the contract test is what keeps them that way.
++ *
+  * THE PROMISE holds: same seed + same state ⇒ same sentence, forever. Eligibility is a
+  * function of the state alone, and the draw is a function of the seed and the pool
+  * identity alone.
+@@ -48,7 +63,8 @@
+  * One authored sentence, as the corpus projection emits it.
+  * @typedef {object} StateProseVariant
+  * @property {string} [angle] the standpoint tag (`ledger`, `street`, `visitor`, …)
+- * @property {ReadonlyArray<string>} [marks] inline marks — `dm-only`, the causal arm
++ * @property {ReadonlyArray<string>} [marks] inline marks — `dm-only`, a STATE DIMENSION
++ *   word (see STATE_MARK_DIMENSIONS), or a causal arm name
+  * @property {string} text the sentence, slots unfilled
+  * @property {ReadonlyArray<string>} [slots] every `{slot}` the sentence names
+  */
+@@ -146,18 +162,109 @@ export function variantIsAudible(variant, audience) {
+   return !Array.isArray(marks) || !marks.includes(COVERT_MARK);
+ }
+ 
++/**
++ * The second STATE dimensions the projection demotes into `marks`.
++ *
++ * WHY THIS EXISTS. Three blocks carry a STATE-KEY the pool key cannot hold: DS-GEN-1 is
++ * `type` by `severity` by `factions.length`, DS-GEN-6 is `route` by `hasFoodDeficit` by
++ * `tier`, DS-GEN-9 is `type` by `severity` by `anchored` by `yearsAgo`. The projection
++ * demotes the surplus dimensions into two per-variant channels, `slots` and `marks`.
++ * `variantIsAnchored` enforces the first. Nothing enforced the second, so a MINOR crime
++ * wave could draw the variant marked CATASTROPHIC and the page would state something
++ * false about the town. A wrong sentence is worse than no sentence.
++ *
++ * DERIVED FROM THE POOL, NEVER DECLARED BY THE CALLER. A registry a desk author must
++ * remember to fill is a guard against a defect of ignorance, written by someone who
++ * already knows. And the derivation is per POOL, not per block, because the corpus is
++ * mixed at the block grain: DS-GEN-9's `founding` pool carries no marks at all while its
++ * `event type: *` pools are fully marked, and DS-GEN-6's `tier overlay: city` pool holds
++ * a marked and an unmarked variant side by side. A block-level rule would demand an
++ * answer from a surface that has no business knowing one.
++ *
++ * FROZEN HERE RATHER THAN EMITTED BY THE GENERATOR. The alternative is a `dimension`
++ * field on every variant, which is tidier by layer and costs a regeneration to buy
++ * nothing: the words are already in the corpus, and the contract test refuses drift
++ * between this constant and what the corpus actually spells.
++ *
++ * @enforced-by tests/data/dossierStateProseProjection.contract.test.js
++ * @type {Readonly<Record<string, ReadonlyArray<string>>>}
++ */
++export const STATE_MARK_DIMENSIONS = Object.freeze({
++  severity: Object.freeze(['minor', 'major', 'catastrophic']),
++  deficit: Object.freeze(['deficit', 'no deficit']),
++  anchor: Object.freeze(['anchored', 'not anchored']),
++});
++
++/**
++ * mark word → the one dimension it belongs to. Derived, so the vocabulary is written
++ * once above and a word cannot drift into two dimensions without the contract noticing.
++ * @type {Readonly<Record<string, string>>}
++ */
++const DIMENSION_OF_MARK = Object.freeze(Object.fromEntries(
++  Object.entries(STATE_MARK_DIMENSIONS)
++    .flatMap(([dimension, words]) => words.map((word) => [word, dimension])),
++));
++
++/**
++ * Which dimensions does THIS POOL partition itself by? Empty for every pool the
++ * projection did not demote a dimension into — which is most of them, and is what makes
++ * law 5 free for the rest of the corpus and for the whole causal register.
++ * @param {ReadonlyArray<StateProseVariant>|undefined} pool
++ * @returns {string[]} dimension names, sorted
++ */
++export function poolDimensions(pool) {
++  const found = new Set();
++  for (const variant of pool || []) {
++    for (const mark of variant?.marks || []) {
++      const dimension = DIMENSION_OF_MARK[mark];
++      if (dimension) found.add(dimension);
++    }
++  }
++  return [...found].sort();
++}
++
++/**
++ * A variant carrying marks from a dimension speaks ONLY over the value it names. One
++ * carrying none is dimension-neutral and speaks over every value, which is what lets a
++ * mixed pool hold a general sentence beside two specific ones.
++ * @param {StateProseVariant|undefined} variant
++ * @param {string} dimension
++ * @param {string} value
++ * @returns {boolean}
++ */
++function variantSpeaksOver(variant, dimension, value) {
++  const own = (variant?.marks || []).filter((mark) => DIMENSION_OF_MARK[mark] === dimension);
++  return own.length === 0 || own.includes(value);
++}
++
+ /**
+  * The variants of one pool that this state and this audience can actually carry.
+  * @param {ReadonlyArray<StateProseVariant>|undefined} pool
+- * @param {{slots?: Record<string, unknown>, audience?: string}} [options]
++ * @param {{slots?: Record<string, unknown>, audience?: string,
++ *   dimensions?: Record<string, string>}} [options]
+  * @returns {ReadonlyArray<StateProseVariant>}
+  */
+ export function eligibleVariants(pool, options = {}) {
+   if (!Array.isArray(pool) || pool.length === 0) return [];
++  // Read on the RAW pool, before any filter: the audience or a missing slot could remove
++  // the last variant carrying a dimension word and turn a partitioned pool into one that
++  // looks unpartitioned, which is the fail-OPEN reading wearing the gate's coat.
++  const dimensions = poolDimensions(pool);
++  const given = options.dimensions || {};
++  // FAIL-CLOSED (law 5). A pool that partitions itself by a dimension the caller did not
++  // answer is UNREADABLE, and silence is the safe failure: R-DST-K already means silence
++  // and a contradiction has no safe reading. Not a throw — this is a display path, and a
++  // blank surface beats a crashed one.
++  for (const dimension of dimensions) {
++    const value = given[dimension];
++    if (typeof value !== 'string' || !STATE_MARK_DIMENSIONS[dimension].includes(value)) return [];
++  }
+   const slots = options.slots || {};
+   const audience = options.audience === AUDIENCE_DM ? AUDIENCE_DM : AUDIENCE_PLAYER;
+   return pool.filter(
+-    (variant) => variantIsAudible(variant, audience) && variantIsAnchored(variant, slots),
++    (variant) => variantIsAudible(variant, audience)
++      && variantIsAnchored(variant, slots)
++      && dimensions.every((dimension) => variantSpeaksOver(variant, dimension, given[dimension])),
+   );
+ }
+ 
+@@ -203,7 +310,9 @@ export function drawVariant(eligible, blockId, poolKey, seed) {
+  * @param {StateProseCorpus} corpus a desk leaf
+  * @param {string} blockId e.g. 'DS-ECO-8'
+  * @param {string} poolKey e.g. 'SUBSISTENCE' (or SOLE_POOL for an unlabelled block)
+- * @param {{slots?: Record<string, unknown>, seed?: string, audience?: string}} [options]
++ * @param {{slots?: Record<string, unknown>, seed?: string, audience?: string,
++ *   dimensions?: Record<string, string>}} [options] `dimensions` answers every dimension
++ *   the pool partitions itself by (law 5); an unanswered one reads as `null`
+  * @returns {{blockId: string, poolKey: string, angle: string, text: string}|null}
+  */
+ export function readStateProse(corpus, blockId, poolKey, options = {}) {
+@@ -225,7 +334,8 @@ export function readStateProse(corpus, blockId, poolKey, options = {}) {
+  * @param {StateProseCorpus} corpus
+  * @param {string} blockId
+  * @param {string} poolKey
+- * @param {{slots?: Record<string, unknown>, seed?: string, audience?: string}} [options]
++ * @param {{slots?: Record<string, unknown>, seed?: string, audience?: string,
++ *   dimensions?: Record<string, string>}} [options]
+  * @returns {string|null}
+  */
+ export function stateProseSentence(corpus, blockId, poolKey, options = {}) {
+diff --git a/tests/data/dossierStateProseProjection.contract.test.js b/tests/data/dossierStateProseProjection.contract.test.js
+index 7d5a00ad4..761b6d8a7 100644
+--- a/tests/data/dossierStateProseProjection.contract.test.js
++++ b/tests/data/dossierStateProseProjection.contract.test.js
+@@ -38,6 +38,10 @@ import { DOSSIER_STATE_PROSE_WAR_FAITH } from '../../src/data/dossierStateProse/
+ import { DOSSIER_STATE_PROSE_STRESSORS } from '../../src/data/dossierStateProse/stressors.generated.js';
+ import { DOSSIER_STATE_PROSE_GENERAL } from '../../src/data/dossierStateProse/general.generated.js';
+ import { DOSSIER_CAUSAL_PROSE } from '../../src/data/dossierCausalProse.generated.js';
++import {
++  AUDIENCE_DM, AUDIENCE_PLAYER, STATE_MARK_DIMENSIONS,
++  eligibleVariants, poolDimensions, readStateProse,
++} from '../../src/domain/display/stateProse/stateProseKernel.js';
+ 
+ const ROOT = resolve(import.meta.dirname, '../..');
+ 
+@@ -507,3 +511,172 @@ describe('the slot SHAPE contract — a fill obeys the grammar its seam assumes'
+     expect(renders).toBeGreaterThanOrEqual(35);
+   });
+ });
++
++// ── THE DEMOTED STATE DIMENSION (kernel law 5) ───────────────────────────────
++// The annex keys DS-GEN-1 on THREE dimensions (`type` x max of `severity[]` x
++// `factions[].length`) and the projection's pool key carries ONE. The surplus two were
++// demoted into per-variant channels: faction count into `slots`, severity into `marks`.
++// `eligibleVariants` enforced the slots demotion via `variantIsAnchored` and IGNORED the
++// marks one, so a `minor` crime wave could draw the variant marked `catastrophic` and the
++// page would state something false about the town. DS-GEN-6 (`hasFoodDeficit`) and
++// DS-GEN-9 (`anchored`) carry the same shape.
++//
++// These four arms live HERE, beside the corpus, because the defect is a disagreement
++// between the corpus's key and the reader's key and neither half proves it alone. They
++// need no desk, no mount and no component, which is why they could have caught this on
++// the day the projection landed.
++
++/** Every slot any variant of a pool names, filled with a conformant, non-empty value. */
++function bagFor(pool) {
++  const slots = {};
++  for (const variant of pool) for (const slot of variant.slots) slots[slot] = 'X';
++  return slots;
++}
++
++/** The dimension words one variant carries, for one dimension. */
++function marksOf(variant, dimension) {
++  return (variant.marks || []).filter((m) => STATE_MARK_DIMENSIONS[dimension].includes(m));
++}
++
++/** Every (block, pool) the projection demoted a dimension into. Derived, never listed. */
++const DIMENSIONED_POOLS = allStateBlocks.flatMap(([id, block]) => Object.entries(block.pools)
++  .filter(([, pool]) => poolDimensions(pool).length > 0)
++  .map(([key, pool]) => ({ id, key, pool, dims: poolDimensions(pool) })));
++
++/** Every (pool x dimension value) state those pools partition themselves into. */
++const DIMENSION_STATES = DIMENSIONED_POOLS.flatMap(({ id, key, pool, dims }) => dims
++  .flatMap((dimension) => STATE_MARK_DIMENSIONS[dimension]
++    .map((value) => ({ id, key, pool, dimension, value }))));
++
++describe('the demoted state dimension — the channel the kernel enforces', () => {
++  it('closes the mark vocabulary and keeps the three semantics disjoint', () => {
++    // T1. `marks` is an untyped bag carrying THREE semantics — the audience mark, the
++    // state dimension, and the causal arm — and the kernel understands two of them. This
++    // arm is what stops the third from ever colliding with the second, and it reds the day
++    // an author invents a ninth state mark: that is the fail-open hole reopening, because
++    // an unclassified word is a dimension the kernel cannot see.
++    const stateMarks = new Set(allStateBlocks.flatMap(([, block]) => Object.values(block.pools)
++      .flat().flatMap((variant) => variant.marks || [])));
++    const causalMarks = new Set(Object.values(DOSSIER_CAUSAL_PROSE)
++      .flatMap((family) => Object.values(family.pools).flat())
++      .flatMap((variant) => variant.marks || []));
++    const vocabulary = Object.values(STATE_MARK_DIMENSIONS).flat();
++
++    const unclassified = [...stateMarks].filter((m) => m !== 'dm-only' && !vocabulary.includes(m));
++    const inTwoDimensions = vocabulary.filter((word, i) => vocabulary.indexOf(word) !== i);
++    // The causal register's arm names are family-local and OPEN (92 distinct today), so
++    // they cannot be a closed vocabulary and stay outside STATE_MARK_DIMENSIONS. What must
++    // hold is that they never collide with a dimension word — that collision is exactly
++    // what would make `poolDimensions` see a dimension in a causal pool and silence the
++    // causal reader, which is the one way this change could reach a shipped surface.
++    const collisions = [...causalMarks].filter((m) => vocabulary.includes(m));
++
++    expect({ unclassified, inTwoDimensions, collisions })
++      .toEqual({ unclassified: [], inTwoDimensions: [], collisions: [] });
++    // Non-vacuity, MEASURED at 2d5112851: 8 distinct state marks (dm-only + the 7
++    // dimension words the three blocks use) and 92 distinct causal arms. Floors, not pins.
++    expect(stateMarks.size).toBeGreaterThanOrEqual(8);
++    expect(causalMarks.size).toBeGreaterThanOrEqual(92);
++    expect(vocabulary.length).toBe(7);
++  });
++
++  it('reads NOTHING from a partitioned pool the caller did not answer', () => {
++    // ⭐ T2 — THE ARM THAT REDS ON THE LIVE DEFECT. Against the pre-cure kernel every one
++    // of these reads returns a SENTENCE, drawn from the whole pool with the severity, the
++    // deficit or the anchor ignored. Fail-closed means [] -> null -> silence: R-DST-K
++    // already means silence, and a contradiction has no safe reading.
++    const spoke = [];
++    const mute = [];
++    for (const { id, key, pool, dims } of DIMENSIONED_POOLS) {
++      const slots = bagFor(pool);
++      const blind = readStateProse({ [id]: { pools: { [key]: pool } } }, id, key,
++        { slots, seed: 's', audience: AUDIENCE_DM });
++      if (blind !== null) spoke.push(`${id} :: ${key} :: ${blind.text}`);
++      // THE TRANSITION, so the null above is the GATE and not an empty pool or a missing
++      // fill: answering the dimension must bring the sentence back at every legal value.
++      for (const dimension of dims) {
++        for (const value of STATE_MARK_DIMENSIONS[dimension]) {
++          const answered = readStateProse({ [id]: { pools: { [key]: pool } } }, id, key,
++            { slots, seed: 's', audience: AUDIENCE_DM, dimensions: { [dimension]: value } });
++          if (answered === null) mute.push(`${id} :: ${key} :: ${dimension}=${value}`);
++        }
++      }
++    }
++    expect({ spoke, mute }).toEqual({ spoke: [], mute: [] });
++
++    // The named case, spelled out because it is the one a reader can check by eye.
++    expect(readStateProse(DOSSIER_STATE_PROSE_GENERAL, 'DS-GEN-1', 'crime_wave',
++      { slots: { settlement: 'X' }, seed: 's' })).toBeNull();
++    expect(readStateProse(DOSSIER_STATE_PROSE_GENERAL, 'DS-GEN-1', 'crime_wave',
++      { slots: { settlement: 'X' }, seed: 's', dimensions: { severity: 'minor' } })?.text)
++      .toEqual(expect.any(String));
++
++    // Non-vacuity, MEASURED: 24 pools across DS-GEN-1, DS-GEN-6 and DS-GEN-9.
++    expect(DIMENSIONED_POOLS.length).toBeGreaterThanOrEqual(24);
++    expect([...new Set(DIMENSIONED_POOLS.map((p) => p.id))].sort())
++      .toEqual(['DS-GEN-1', 'DS-GEN-6', 'DS-GEN-9']);
++  });
++
++  it('never returns a variant that contradicts the state it was asked about', () => {
++    // T3 — THE CONTRADICTION SWEEP, over every (pool x dimension value) state in the
++    // corpus and both audiences. A returned variant either carries the asked value or
++    // carries no word of that dimension at all; anything else is the page stating
++    // something false about the town, which is worse than the page saying nothing.
++    const contradictions = [];
++    for (const audience of [AUDIENCE_DM, AUDIENCE_PLAYER]) {
++      for (const { id, key, pool, dimension, value } of DIMENSION_STATES) {
++        const slots = bagFor(pool);
++        for (const variant of eligibleVariants(pool, { slots, audience, dimensions: { [dimension]: value } })) {
++          const own = marksOf(variant, dimension);
++          if (own.length > 0 && !own.includes(value)) {
++            contradictions.push(`${audience} :: ${id} :: ${key} :: asked ${dimension}=${value} :: got [${own.join(', ')}]`);
++          }
++        }
++      }
++    }
++    expect(contradictions).toEqual([]);
++
++    // THE NAMED CASE, derived from the corpus rather than transcribed: the catastrophic
++    // crime-wave line must be unreachable at `minor`. Before the cure the seeded draw over
++    // the unfiltered pool could return exactly this sentence for a minor crime wave.
++    const crimeWave = DOSSIER_STATE_PROSE_GENERAL['DS-GEN-1'].pools.crime_wave;
++    const catastrophic = crimeWave.find((v) => (v.marks || []).includes('catastrophic'));
++    expect(catastrophic.angle).toBe('unfolding');
++    const minorReachable = new Set(eligibleVariants(crimeWave,
++      { slots: { settlement: 'X' }, audience: AUDIENCE_DM, dimensions: { severity: 'minor' } })
++      .map((v) => v.text));
++    expect(minorReachable.has(catastrophic.text)).toBe(false);
++    expect(minorReachable.size).toBeGreaterThanOrEqual(2);
++
++    // Non-vacuity, MEASURED: 58 states — DS-GEN-1 30, DS-GEN-6 12, DS-GEN-9 16.
++    expect(DIMENSION_STATES.length).toBeGreaterThanOrEqual(58);
++  });
++
++  it('names the authoring bill: the states a seed cannot vary', () => {
++    // T4 — THE THIN-STATE RATCHET, the sibling of `leaves no pool thin enough to be
++    // single-voiced` above and written to the same `declares every slot` idiom: recorded,
++    // not asserted-to-zero, and it only ratchets DOWN. Honouring the dimension costs
++    // variety in the states where the corpus authored only one line for a value, and every
++    // settlement in such a state prints the same sentence. That is a CORPUS bill, payable
++    // by authoring, and hiding it would be the fail-open reading in a different coat.
++    const thin = {};
++    for (const audience of [AUDIENCE_DM, AUDIENCE_PLAYER]) {
++      thin[audience] = DIMENSION_STATES.filter(({ pool, dimension, value }) => eligibleVariants(
++        pool, { slots: bagFor(pool), audience, dimensions: { [dimension]: value } },
++      ).length <= 1).length;
++    }
++    // MEASURED at 2d5112851, and the two audiences DIFFER BY ONE. The design volume
++    // recorded 13; that is the DM figure. On the player's page DS-GEN-1 :: infiltration_fear
++    // at `severity: major` also collapses to one line, because the second `major` variant
++    // there is the block's only `major + dm-only` line and the player cannot hear it. The
++    // reader-facing number is 14. Both are pinned so neither audience can drift unseen.
++    expect(thin[AUDIENCE_DM]).toBeLessThanOrEqual(13);
++    expect(thin[AUDIENCE_PLAYER]).toBeLessThanOrEqual(14);
++    // No state may go SILENT: a value with zero eligible variants is a dead branch of the
++    // corpus dressed as a town with nothing to say, and the ratchet above would not see it.
++    const silent = DIMENSION_STATES.filter(({ pool, dimension, value }) => eligibleVariants(
++      pool, { slots: bagFor(pool), audience: AUDIENCE_DM, dimensions: { [dimension]: value } },
++    ).length === 0);
++    expect(silent).toEqual([]);
++  });
++});
+diff --git a/tests/domain/stateProseKernel.test.js b/tests/domain/stateProseKernel.test.js
+index 4a4662365..bb4934da8 100644
+--- a/tests/domain/stateProseKernel.test.js
++++ b/tests/domain/stateProseKernel.test.js
+@@ -1,5 +1,5 @@
+ /**
+- * stateProseKernel.test.js — LANE P-2: the reader's four laws, proven.
++ * stateProseKernel.test.js — LANE P-2: the reader's five laws, proven.
+  *
+  * The kernel is small and everything it does is load-bearing, so each law gets a pin
+  * that FAILS when the law is removed rather than a pin that merely exercises the happy
+@@ -13,6 +13,12 @@
+  *   3. THE AVALANCHE DRAW — measured against the degenerate seed family that killed
+  *      half a pool before the finalizer existed.
+  *   4. SEEDLESS IS CANONICAL-AT-ZERO — plus same-seed determinism (THE PROMISE).
++ *   5. THE DEMOTED STATE DIMENSION, FAIL-CLOSED — pinned here as DARKNESS (the reader is
++ *      byte-identical on the 762 pools that demote nothing) because the law itself is
++ *      pinned against the CORPUS, in tests/data/dossierStateProseProjection.contract.test.js,
++ *      where the corpus and the reader can be read against each other. Splitting it that
++ *      way is deliberate: the defect was a disagreement between the annex's STATE-KEY and
++ *      the projection's pool key, and neither file alone can see both halves.
+  *
+  * The corpus is read live from the projected desk leaves, not from a fixture: a pin
+  * over an invented pool would prove the kernel works on prose that does not ship.
+@@ -25,12 +31,19 @@ import {
+   eligibleVariants,
+   fillSlots,
+   hasStateProsePool,
++  poolDimensions,
+   readStateProse,
+   stateProseSentence,
+   variantIsAnchored,
+   variantIsAudible,
++  STATE_MARK_DIMENSIONS,
+ } from '../../src/domain/display/stateProse/stateProseKernel.js';
+ import { DOSSIER_STATE_PROSE_ECONOMY } from '../../src/data/dossierStateProse/economy.generated.js';
++import { DOSSIER_STATE_PROSE_POWER } from '../../src/data/dossierStateProse/power.generated.js';
++import { DOSSIER_STATE_PROSE_DEFENSE } from '../../src/data/dossierStateProse/defense.generated.js';
++import { DOSSIER_STATE_PROSE_WAR_FAITH } from '../../src/data/dossierStateProse/warFaith.generated.js';
++import { DOSSIER_STATE_PROSE_STRESSORS } from '../../src/data/dossierStateProse/stressors.generated.js';
++import { DOSSIER_STATE_PROSE_GENERAL } from '../../src/data/dossierStateProse/general.generated.js';
+ import { DOSSIER_CAUSAL_PROSE } from '../../src/data/dossierCausalProse.generated.js';
+ import { PROSPERITY_TIERS } from '../../src/data/constants.js';
+ import { deriveProsperityLabel } from '../../src/generators/economy/prosperity.js';
+@@ -354,3 +367,87 @@ describe('the state-prose reader — THE PROMISE', () => {
+     });
+   }
+ });
++
++describe('the state-prose reader — law 5, and the darkness of it', () => {
++  /**
++   * THE WHOLE SHIPPED CORPUS, all seven leaves. The law-5 gate reads `marks`, which every
++   * pool in the estate carries, so a proof over one desk would be a proof over 105 of 786
++   * pools. Discovered by import rather than by filesystem walk because these are the seven
++   * the projection actually emits and the contract test already holds that roster.
++   */
++  const ALL_POOLS = [
++    ['economy', DOSSIER_STATE_PROSE_ECONOMY], ['power', DOSSIER_STATE_PROSE_POWER],
++    ['defense', DOSSIER_STATE_PROSE_DEFENSE], ['warFaith', DOSSIER_STATE_PROSE_WAR_FAITH],
++    ['stressors', DOSSIER_STATE_PROSE_STRESSORS], ['general', DOSSIER_STATE_PROSE_GENERAL],
++    ['causal', DOSSIER_CAUSAL_PROSE],
++  ].flatMap(([desk, corpus]) => Object.entries(corpus)
++    .flatMap(([blockId, block]) => Object.entries(block.pools)
++      .map(([poolKey, pool]) => ({ desk, blockId, poolKey, pool }))));
++
++  /** Every slot the pool names, filled, so eligibility turns on the LAW and not on a gap. */
++  function bagFor(pool) {
++    const slots = {};
++    for (const variant of pool) for (const slot of variant.slots || []) slots[slot] = 'Thornwall';
++    return slots;
++  }
++
++  const SWEEP_SEEDS = ['', 'a', 'b', 'world-7', 'Thornwall::1', 'wizard_news.4.applied.evt4', 'zz', '19'];
++
++  it('is BYTE-IDENTICAL to the pre-cure reader on every pool with no demoted dimension', () => {
++    // T6 — WHAT LETS THIS LAND DARK AND SAY SO. The reference is the pre-cure eligibility
++    // rule spelled out from the two predicates this file already exports, so the comparison
++    // is against the reader as it behaved at 2d5112851 rather than against a memory of it.
++    // 684 of 708 state pools and ALL 78 causal pools demote no dimension, and on every one
++    // of them the gate must be invisible: same eligible set, same draw, same sentence.
++    //
++    // The loop collects instead of asserting inside — a bare `expect(` under a seed loop
++    // reports a floor, never a count (tests/lint/seedLoopTotality.walker.test.js).
++    const drift = [];
++    let poolsChecked = 0;
++    let draws = 0;
++    for (const { desk, blockId, poolKey, pool } of ALL_POOLS) {
++      if (poolDimensions(pool).length > 0) continue;
++      poolsChecked += 1;
++      const slots = bagFor(pool);
++      for (const audience of [AUDIENCE_DM, AUDIENCE_PLAYER]) {
++        const reference = pool.filter(
++          (variant) => variantIsAudible(variant, audience) && variantIsAnchored(variant, slots),
++        );
++        const cured = eligibleVariants(pool, { slots, audience });
++        if (cured.length !== reference.length || cured.some((v, i) => v !== reference[i])) {
++          drift.push(`ELIGIBILITY :: ${desk} :: ${blockId} :: ${poolKey} :: ${audience}`);
++        }
++        for (const seed of SWEEP_SEEDS) {
++          draws += 1;
++          const was = drawVariant(reference, blockId, poolKey, seed);
++          const wasText = was ? fillSlots(was.text, slots) : null;
++          const nowText = readStateProse({ [blockId]: { pools: { [poolKey]: pool } } },
++            blockId, poolKey, { slots, seed, audience })?.text ?? null;
++          if (wasText !== nowText) {
++            drift.push(`DRAW :: ${desk} :: ${blockId} :: ${poolKey} :: ${audience} :: seed "${seed}"`);
++          }
++        }
++      }
++    }
++    expect(drift).toEqual([]);
++    // Non-vacuity, MEASURED at 2d5112851: 786 pools ship, 24 of them demote a dimension,
++    // so 762 are swept here. A sweep that stopped finding pools would satisfy the list above
++    // by being empty, which is the failure mode this pair of floors exists to refuse.
++    expect(poolsChecked).toBeGreaterThanOrEqual(762);
++    expect(draws).toBeGreaterThanOrEqual(762 * 2 * SWEEP_SEEDS.length);
++  });
++
++  it('leaves the causal register untouched — no arm name is a dimension word', () => {
++    // The one way this change could reach a SHIPPED surface. causalDossierProse.js hand-rolls
++    // its own `marks` filter over 92 open, family-local arm names and then calls
++    // eligibleVariants; if any arm name were also a dimension word, poolDimensions would see
++    // a dimension in a causal pool and the causal reader would go silent. It cannot today,
++    // and this is the arm that keeps it so.
++    const causal = ALL_POOLS.filter((p) => p.desk === 'causal');
++    const dimensioned = causal.filter((p) => poolDimensions(p.pool).length > 0);
++    expect(dimensioned).toEqual([]);
++    expect(causal.length).toBeGreaterThanOrEqual(78);
++    const vocabulary = Object.values(STATE_MARK_DIMENSIONS).flat();
++    expect(vocabulary).toEqual(['minor', 'major', 'catastrophic', 'deficit', 'no deficit', 'anchored', 'not anchored']);
++  });
++});

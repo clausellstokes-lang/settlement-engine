@@ -1,0 +1,23 @@
+ENC chair act: DEFER_CEILING 31 -> 35, authorizing the six forks ENC-1 minted
+
+The constant's own message reserves growth to a chair conversation
+rather than an automatic deferral, and its comment records the two
+prior moves with their ledger sections. This is the third, recorded the
+same way.
+
+The lane authored HBF-36 through HBF-41 and refused to move the ceiling
+itself, which is exactly right: a lane absorbing its own discovery is
+what the stop law exists to prevent. Four rows carry the closeOwed the
+constant demands, so each deferral says what would have to exist before
+it can close. Two are stay-deterministic on measured grounds: a
+coincidence gate with no candidate set, and a draw that is HBF-35
+verbatim one family over.
+
+Verified before authorizing: the six rows exist, the red was exactly
+"expected 35 to be 31", and the walker is green on a pristine control
+dock, so the attribution is measured rather than argued. Green at 8 of 8
+after.
+
+Seat: Opus 5 — Fable-unvalidated
+Lane: chair (ENC-1 ceiling authorization)
+

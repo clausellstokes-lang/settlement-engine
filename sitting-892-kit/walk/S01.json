@@ -1,0 +1,236 @@
+{
+ "slice": "S01",
+ "status": "COMPLETE",
+ "calls": [
+  {
+   "row": "§882.8 intro — THE TRIGGER",
+   "call": "three Fable agents died on the model limit while the Opus lane (READERREVIEW Car 0) finished at 09:08; states quoted: G0 31 of ~52, T13 order 6 of 24, ENCOUNTERS 0 of 20",
+   "claim": "laneG0RR-receipt.md mtime 09:08; a MODEL limit not a session limit; the three partial states",
+   "method": "stat of the receipt; fold.json + fold-batch*.py mtimes and marker sets; the three artifacts' headers; ledger §882.10",
+   "evidence": "stat: '2026-09-02 09:08:35 laneG0RR-receipt.md' (SP2; no copy in SP); receipt tail '### RESUME POINT — 09:09 ET — LANE COMPLETE'. fold-batch1.py 05:27 (G0-1..19), fold-batch2.py 05:33 (G0-20..31), batch3..7 10:10–10:25 (G0-32..93); HORIZON footer: 'continued at ⟦G0-32⟧'. T13 order L3: 'died ... with this header still reading 6 of 24'. DESIGN_ENCOUNTERS L3: 'a Fable seat that folded A1 to A4 and died at its window'; ledger §882.10: 'the dead Fable seat had folded four amendments at 05:38 without updating its own fold: 0 of 20 header'.",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "The 09:08 mtime, the 31-marker G0 state and the '6 of 24' header are CONFIRMED. The failure text 'You've reached your Fable limit' is transcript-only (PLAUSIBLE; no durable trace exists to settle it). The ENCOUNTERS '0 of 20' was a header quote, not a state: A1–A4 were already folded — the row should say 'header read 0 of 20 (four folded)'; §882.10 self-corrected this later."
+  },
+  {
+   "row": "§882.8 intro — THE SPAN'S RULE",
+   "call": "every act carries 'Seat: Opus 5 — Fable-unvalidated', chair-commit.sh checks trailer + queue presence + blob DIFFERS; each folded artifact carries ⟦OPUS-AUTHORED⟧; fold judgments enrolled not merely errors",
+   "claim": "the marking machinery exists and was applied to all three folds",
+   "method": "read chair-commit.sh; read the three artifacts' headers; read the stratum section heads and AUDIT.md enrolment table",
+   "evidence": "chair-commit.sh L34 grep for '^Seat: ...Opus 5 — Fable-unvalidated$'; L42-45 QUEUED=yes only if docs/FABLE_RETROVALIDATION_QUEUE.md is a mapped path; L53-59 'The blob must actually DIFFER from the parent's' + rev-parse of refs/heads/review-fixes-2026-07-08:docs/FABLE_RETROVALIDATION_QUEUE.md. Headers: T13 order L3, DESIGN_ENCOUNTERS L3, DESIGN_HORIZON L3 each carry '⟦OPUS-AUTHORED — Fable retrovalidation OWED⟧'. Stratum L21 R-FOLD-1…8, L35 J31–J38, L47 JF-1…JF-8; AUDIT.md: 'T13-ORDER fold (workflow wf_3b941f97-72f) ... queue §882.9 (R-FOLD-1…8)'.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The commit log shows §882.8 at 10:03:13 (43dc69853) and §882.9 at 10:23:03 (9965b4df7); ledger tip at the switch f46be1d1f = §882.7 08:35:59 as the row says."
+  },
+  {
+   "row": "§882.8.1 (1)",
+   "call": "the three dead folds are RE-DISPATCHED on the Opus seat because 'fold = execution' — the judgment content is already on the ledger",
+   "claim": "holding would strand three partial files; the folds write design documents only; veto = re-fold from the same inputs",
+   "method": "read fold.json chairRows, DESIGN_HORIZON §18/§19 headings, ledger §882.11, the T13 order's fold-authored amendments, DESIGN_ENCOUNTERS header",
+   "evidence": "fold.json chairRows: 'CR-1 web split provisional (§882.3) — CHARSET adopts web-display verbatim (fold JUDGMENT)', CR-2, CR-3, CR-4, CR-8, CR-13, CR-15, CR-16 all '(fold JUDGMENT)'; HORIZON heading '## §18 THE INSTR CAR LIST AS RE-CUT — every car of HORIZON-INSTR'; §882.11: '31 inherited + 62 this dispatch ... 18 chair rows ... The fold's eight judgments JF-1…JF-8 are enrolled'; T13 order L672 seven fold-authored amendments ⟦A2⟧⟦A19⟧–⟦A24⟧; ENCOUNTERS stratum L35: 'eight numbered J31–J38 plus five fold-level calls'.",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "The dispatch decision holds (the marking law was obeyed, the veto shape is real, nothing product-side landed) but its stated GROUND is false for G0: 62 of 93 marks, the INSTR car re-cut (§18) and eight self-labelled 'fold JUDGMENT' chair rows are Opus authorship, not execution of Fable rulings; the T13 and ENCOUNTERS folds also authored judgments (7 amendments / 13 calls). Re-word to 'Opus-authored design work under the marking law, vetoable by re-fold', which is what the row's own HIGH re-derivation flag already suspected."
+  },
+  {
+   "row": "§882.8.1 (2)",
+   "call": "the two Workflow chains resumed BY RUN ID with only the fold stage's model changed; author/design/recon/skeptic stages replay from cache, not re-run",
+   "claim": "no Fable-authored analysis silently re-authored by Opus",
+   "method": "mtimes of the skeptic JSONs; artifact headers; search for the run ids on disk",
+   "evidence": "t13-order-panel/comp.json 05:06:02, bill.json 05:24:55; encounters-panel/promise.json 05:03:57, estate.json 05:22:54 — none rewritten after the 10:0x resume. T13 order L3: 'fold lane RESUMED on the OPUS 5 seat'; DESIGN_ENCOUNTERS L3: 'RESUMED and COMPLETED on the OPUS 5 seat'. Run ids appear only in kit-882/fills-882.json and retro-audit/AUDIT.md ('workflow wf_3b941f97-72f' / 'wf_b18f6db8-789'); find ~/.claude -iname '*3b941f97*' → nothing.",
+   "verdict": "RATIFY",
+   "confidence": "PLAUSIBLE",
+   "note": "The 'not re-run' half is CONFIRMED by mtimes; the run-id resume mechanics are PLAUSIBLE only — no workflow run record exists on disk. Settling command: open the Workflow runtime's record for wf_3b941f97-72f and wf_b18f6db8-789 and read which stages were cache hits. The G0 fold was not a workflow (fold.json 'third dispatch'; batch3–7 written 10:10–10:25)."
+  },
+  {
+   "row": "§882.8.1 (3)",
+   "call": "no landing, gate, CAS or seal attempted in the opening act; T13's landing waits on the fold",
+   "claim": "no landing act preceded the folded order",
+   "method": "git log committer dates of the landing picks vs the ledger commits",
+   "evidence": "git log --format='%h %cd' 9a0584f0f..7f974e855: first pick f010d26da committed 09-02 10:25:42, second 10:26:12; ledger §882.8 43dc69853 10:03:13, §882.9 9965b4df7 10:23:03; brief-T13LAND.md mtime 10:21; refs/preserve/t13-consist-2026-09-02 = 9f0df13a1 (dock unchanged at 16 cars); refs/preserve/landing-T13-2026-09-02 = 7f974e855 (11:37:44).",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Every landing act post-dates the folded order (10:18) and the dispatch ledger row (10:23)."
+  },
+  {
+   "row": "§882.8.1 (4)",
+   "call": "SOAKCHAIN Car 0's MEASUREMENT dispatched into the fourth slot — an Opus measurement act by nature (§4.5 splits module half from measurement half)",
+   "claim": "the seat is correct, not merely available",
+   "method": "read HORIZON §4.5, the brief, the receipt's header and RESUME POINTs, ledger §882.12",
+   "evidence": "HORIZON §4.5: 'Car 0 — THE INVARIANTS MODULE + THE MEASUREMENT: the module + soakInvariants…'; brief-G0-SOAK-car0.md: 'the MODULE half of Car 0 is an HORIZON-INSTR build car, NOT yours: you commit nothing and mint no module'; laneG0SOAK-receipt.md L3 '⟦OPUS-AUTHORED — Fable retrovalidation OWED⟧', RESUME POINTs 10:08/10:12(corrected to 10:06)/10:19/10:24, mtime 10:27; §882.12: 'zero tracked edits, no commit; nine runs, nine TRUE_EXIT=0'.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Minor label mismatch: the brief (mtime 08:36) says 'dispatched ... by the Fable 5.1 chair' — it was pre-written at the 08:35 re-dispatch (when the four slots went to G0 fold/RR/ENC/T13-order per §882.7) and the actual dispatch was the Opus seat's at ~10:0x."
+  },
+  {
+   "row": "§882.9 R-FOLD-1",
+   "call": "the dead seat's '6 of 24' header judged STALE; true state re-derived by marker census + content read; five findings missing (COMP-4, BILL-3/6/8/10), nine PARTIAL",
+   "claim": "5 missing / 9 partial",
+   "method": "read the order's header L3 and its enumeration of placed markers; marker census",
+   "evidence": "L3: 'this header still reading 6 of 24 while ⟦A1⟧–⟦A6⟧, ⟦A8⟧, ⟦A9⟧, ⟦A11⟧, ⟦A12⟧, ⟦A14⟧, ⟦A16⟧, ⟦A18⟧–⟦A21⟧ and ⟦A23⟧ were already placed, several of them PARTIAL — the resumed seat completed those and folded the five that were missing entirely: ⟦A7 · COMP-4⟧, ⟦A10 · BILL-3⟧, ⟦A13 · BILL-6⟧, ⟦A15 · BILL-8⟧, ⟦A17 · BILL-10⟧'. 17 placed + 5 missing + A22/A24 fold-authored = 24. Census now: A1…A24 all present.",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "'Five missing' is CONFIRMED by the header's own enumeration; 'nine PARTIAL' is the fold's unreceipted self-count (the artifact says only 'several') — EVIDENCE-THIN as a figure. The header also misattributes: it says 'the FIRST fold seat died at its session limit' with A8–A23 placed, but A1–A6 were the first (05:40 session-limit) seat's and A8–A23 the second (model-limit) seat's per §882.7/§882.8 — an artifact self-report error, not a stratum error."
+  },
+  {
+   "row": "§882.9 R-FOLD-2",
+   "call": "KEEP the dead seat's numbering; disambiguate the ⟦A11⟧/⟦A12⟧/⟦A13⟧ collision with inherited TAIL-F markers by the ⟦A22⟧ header rule instead of renumbering; veto = renumber to A25+",
+   "claim": "'this panel's amendments always carry the finding id; a bare number is the OTHER one'",
+   "method": "full bare-marker census of T13-LANDING-ORDER.md vs TAILF-LANDING-ORDER.md, context of every bare marker, meaning check against TAIL-F's definitions, brief and receipt usage",
+   "evidence": "T13 order bare: ⟦A11⟧×4 ⟦A12⟧×5 ⟦A13⟧×3 (TAIL-F: ×2/×6/×3). Inherited sites = exactly the four ⟦A22⟧ names: L425 §4.2 row 2 (=TAIL-F L319 probe C can-it-see), L459 §5 heading + L470 §5.4 (=TAIL-F L352 whole family), L516 §6.1.8 (=TAIL-F L403 hygiene by name). BUT this panel's own amendments appear BARE ~40×: ⟦A1⟧×22 (L36–L170, all 'Car 5 tip re-read'), ⟦A5⟧ L236/L237/L514, ⟦A6⟧ L514, and the whole §9.1 table L654–L670 (A3…A17 bare). Third namespace: L445 '(charter ⟦A6⟧)'. brief-T13LAND.md: no 'collision/inherited/numbering/A22' text; uses bare ⟦A13⟧ (TAIL-F sense). Receipt R-T13L-2 uses bare ⟦A12⟧ for THIS panel's BILL-5.",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "No renumber is owed — the inherited set is exactly four sites, enumerated exhaustively and verified against TAIL-F, so the ambiguity is resolved by the SITE LIST, not by the stated rule. The rule as worded is false about the document that carries it (this panel's amendments are bare ~40 times) and must be re-worded: 'the four inherited sites are L425/L459/L470/L516; every other bare ⟦An⟧ is this panel's; charter ⟦A6⟧ at L445 is the T13-BUILD-CHARTER's'. The ledger's 'carried into the landing brief by name' is FALSE (see chair_errors)."
+  },
+  {
+   "row": "§882.9 R-FOLD-3",
+   "call": "the fold re-cut the OWNER-VISIBLE §7 row 1 itself ('no golden re-recorded / flip enumeration EMPTY' → 'ONE row re-recorded') and raised it as CR-14",
+   "claim": "§7 row 1's wording",
+   "method": "read §7 row 1 (L563), CR-14 (L681), ledger §883",
+   "evidence": "L563: 'EXACTLY ONE dormancy-golden row DID flip and is named here as the REC required: momentumDormancyGolden key mo-b|8|one_month ... attributed to ⏳<family> by single-family revert and re-recorded ONCE inside the window. The flip enumeration is that ONE row, not empty; the earlier draft of this sentence said no golden re-recorded and was FALSE.' L681 CR-14: '§7 row 1's owner text is re-cut from no golden re-recorded, the flip enumeration EMPTY to exactly one row flipped, named, attributed and re-recorded once'. Ledger §883 (L32365): '§7's owner-visible row 1 is re-cut from no golden re-recorded to ONE row re-recorded, attributed to Ca…'.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The re-cut is honest and was escalated as a chair row and then carried on §883 as owner-visible. One wording caution for the owner surface: row 1 says 'Measured: ... ZERO of the 525 ... at both the build dock and the composed landing tip' although the composed tip was not yet measured at 10:18; it came true (§882.15: DRIFT_COUNT=0), but it was a prediction written in the past tense."
+  },
+  {
+   "row": "§882.9 R-FOLD-4 / CR-17",
+   "call": "CR-17 SPLIT — row 11 an openly-labelled dock re-derivation (a), row 12 a NAMED re-pointed copy (b)",
+   "claim": "row 11's composed-tip fact is settled by the §0.5.2 blob comparator so a re-point buys nothing",
+   "method": "read §9.2 CR-17; read the landing receipt R-T13L-1; ledger §882.15",
+   "evidence": "L685 CR-17: '(a) for row 11, (b) for row 12. Row 11's composed-tip fact is already settled by §0.5.2's blob comparator'. Receipt R-T13L-1: 'CR-17(a) was executed as (b) for row 11 as well ... the probe printed 686 mismatches, not 0 — because the DOCK has advanced to Car 5 and its bandedStock.js is now b87fb631d ... re-pointed a NAMED copy ... 8988 / 0 / control-can-fail'. §882.15: 'the chair's §882.9 split ... needed the re-point on both'.",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "The split's reasoning held but its (a) form was stale by execution time (the dock's Car 5 tip rewrote bandedStock.js); the lane executed (b) for both. The §882.9 stratum row carries no supersession mark — add 'superseded in form at §882.15 / R-T13L-1'."
+  },
+  {
+   "row": "§882.9 R-FOLD-5",
+   "call": "landing-commit count raised 24–27 → 26–29 as an arithmetic consequence (anchor cure + momentum re-record)",
+   "claim": "26–29",
+   "method": "read L514 and §8b item 23; count the landed commits",
+   "evidence": "L514: '⟦A5⟧⟦A6⟧ 26–29, not the author's 24–27 — the two new cures/re-records are landing commits'; §8b 23 same. git rev-list --count 9a0584f0f..7f974e855 = 28 (§882.15: '28 commits over C′').",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Measured 28, inside the raised band and outside the author's 24–27 — the raise was necessary."
+  },
+  {
+   "row": "§882.9 R-FOLD-6",
+   "call": "§2.6's 'manifest byte-identical' scoped to generator-golden-master.json ONLY; the §6.3.5 blob comparator now prints TWO lawful lines (vite.config.js + tests/kernel/detMathIdentity.test.js); the momentum fixture is outside that loop's path set and 'owed its own check at §6.3.8'",
+   "claim": "two lawful MOVED lines; manifest identical; fixture checked at §6.3.8",
+   "method": "re-ran the §6.3.5 comparator in python (base 8b07ce45f, dock 9f0df13a1, T13′ 7f974e855); rev-parse of both fixtures at C′/dock/T13′; read L533 and L536",
+   "evidence": "Comparator: 'pick paths: 48 / MOVED 2 [tests/kernel/detMathIdentity.test.js, vite.config.js]'. generator-golden-master.json b99a14d1a… at 9a0584f0f AND 7f974e855. momentum-dormancy-golden.json 32f9bf326… at 9a0584f0f and 9f0df13a1, 7a92f25c4… at 7f974e855. L533 ends: 'so the loop's ONE line is the whole story'. L536 (§6.3.8) checks only the fence constants and 'the golden manifest blob ... IDENTICAL (nothing re-recorded)' — the momentum fixture appears at L225/L235/L429/L533 only, never at L536.",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "The two-line claim, the manifest scoping and the fixture movement are all CONFIRMED and consistent with §882.15 'MOVED 2' and §883. Two text defects remain in the order: the cross-reference 'check it separately at §6.3.8' is dangling (§6.3.8 was never amended to include the fixture) and §6.3.5's closing clause still says ONE line. The chair-verify performed the fixture check anyway (§883: '§6.3.8 checked separately')."
+  },
+  {
+   "row": "§882.9 R-FOLD-7",
+   "call": "§8b items 12/14/16 marked SETTLED rather than could-not-verify",
+   "claim": "Car 5 committed; seal + branch + four §882 rows present; pipeline return at :193",
+   "method": "read §8b L611/L613/L615; git checks",
+   "evidence": "L611 '⟦A2⟧ SETTLED — Car 5 COMMITTED at 04:31/04:33 (f95305812 · 9f0df13a1, dock porcelain 0, 16 over $BASE)'; L613 '⟦A2⟧ SETTLED — all THREE present: claude/composite-r4 = 9a0584f0f, refs/preserve/landing-TAILF-2026-09-02 = 9a0584f0f…'; L615 '⟦A15 · BILL-8⟧ SETTLED ... return finalCtx.settlement; at src/generators/generateSettlementPipeline.js:193'. Verified: git rev-list --count 8b07ce45f..9f0df13a1 = 16; cat-file -t f95305812/9f0df13a1 = commit; f95305812 ancestor of 9f0df13a1; refs/preserve/landing-TAILF-2026-09-02 = 9a0584f0fdbf…; git show 9a0584f0f:src/generators/generateSettlementPipeline.js | sed -n 193p → 'return finalCtx.settlement;'.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Each SETTLED mark rests on a read I reproduced."
+  },
+  {
+   "row": "§882.9 R-FOLD-8",
+   "call": "REFUSED NOTHING — all seventeen findings foldable; CR-16's cost named as the likeliest refusal candidate",
+   "claim": "17 folded / 0 refused",
+   "method": "count **FOLDED** rows in §9.1; read L648/L674 and CR-16",
+   "evidence": "L648: 'Seventeen findings, seventeen FOLDED, ZERO refused'; §9.1 rows L654–L670: 16 + 1 = 17 '**FOLDED**' (COMP-1…7, BILL-1…10); L674: 'Nothing was refused. Every clause of every finding is folded at its point. Two clauses are folded as CHOICES ... (COMP-2's dock-side alternative; BILL-2's two lawful forms for rows 11/12)'; CR-16 L683: 'roughly two extra suite sweeps of board time on a drained board'.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Refutation attempt: the one clause that later failed (BILL-2's form (a)) was folded as a CHOICE and would not have been a refusal. CR-16's cost was paid and repaid: row 6b found the attribution at both arms."
+  },
+  {
+   "row": "§882.9 CR-13",
+   "call": "the negativeAssertionAnchor red is a LANDING cure act, never a 17th dock pick",
+   "claim": "the dock is a sealed sixteen-car consist",
+   "method": "landing commit log; seal of the dock",
+   "evidence": "git log 9a0584f0f..7f974e855: '6c31fcf00 10:42:33 T13 landing cure 2/2: two liveness anchors for Car 1's kernel-identity suite'; refs/preserve/t13-consist-2026-09-02 = 9f0df13a1 (16 over 8b07ce45f, unchanged); §882.15 blob comparator: 'tests/kernel/detMathIdentity.test.js §2.1b's cure' as the second lawful MOVED line — reproduced by my comparator run.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Executed exactly as ruled; the dock's count stayed 16."
+  },
+  {
+   "row": "§882.9 CR-14 (HIGH)",
+   "call": "the moved momentumDormancyGolden row is attributed by the §4.3 ladder then re-recorded ONCE inside T13's signed window with the mover named; §7 row 1 re-cut; ruled CHAIR-CLASS not owner-gated, rides §883 as OWNER-VISIBLE",
+   "claim": "T13's window is the SIGNED one (§879.11 REC) and the arc's last ruled same-seed mover; an attributed, declared movement inside it is what the window exists for",
+   "method": "read §879.11 verbatim; read the-promise-ratified.md; read §882.15/§883; scan ledger L32362–L32420 for any veto; git show da8cd72fb attrition.js; fixture blobs",
+   "evidence": "§879.11: 'THE T13 REC IS SIGNED HERE, under the owner's refreshed grant (§876.4 ... \"i leave all judgements to you\"), LOUDLY VETOABLE — the veto window is OPEN from this row until Car 4's gate ... one declared, fully-recorded ~1e-14 shift with every flipped row named'. Promise memory: 'tuning changes are always versioned + honesty-rowed + owner-signed; the lived past NEVER rewrites'. da8cd72fb attrition.js: '-  const logRatio = Math.log(a / d); +  const logRatio = detLn(a / d);'. Fixture 32f9bf326 (C′, dock) → 7a92f25c4 (T13′). Landing commit 66c9abaac 10:58:26 'The declared window's ONE flipped row ... re-recorded'. No veto in L32362–L32420; only §882.15/§883 (attribution correction).",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Chair-class holds: the re-record is a TEST FIXTURE inside a declared, attributed same-seed window the REC explicitly promised ('every flipped row named'); THE PROMISE governs tuning signatures and lived history, neither touched; the owner-visible row rides §883 (32365) and no veto followed. It survives the changed cause because the ground is the WINDOW, not the car — attrition.js at da8cd72fb (Car 4 family (iii)) is a T13 pick inside it. Two amendments of wording, not of ruling: (i) 'SIGNED' means chair-signed under delegation and loudly vetoable, not the owner's hand — say so; (ii) the ruling's probable cause (Car 3 / pick 9) was wrong and corrected at §882.15 — the 'CONFIRM it, never assume it' clause is what saved it."
+  },
+  {
+   "row": "§882.9 CR-15",
+   "call": "§2.2's stale soak-template sentence lands as home (b), a line-count-neutral hygiene commit",
+   "claim": "home (a) closed by pick 15; no test pins the sentence",
+   "method": "landing commit log; ⟦A21⟧/⟦A23⟧ text",
+   "evidence": "git log: 'dbe469084 10:50:18 Landing hygiene: the soak replay template's transcendental claim is FALSE after Car 5'; L672: '⟦A21⟧ §2.2's home (a) is CLOSED (pick 15 committed without the sentence) so home (b) is the plan · ⟦A23⟧ no test pins §2.2's sentence (grep grandfather over tests/soak-harness hits only the template's own :16)'.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Landed as ruled."
+  },
+  {
+   "row": "§882.9 CR-16",
+   "call": "row 6b — the whole 70-file tests/property golden/fence/dormancy family — runs at BOTH arms",
+   "claim": "the base arm is what makes a tip red attributable",
+   "method": "read the landing receipt's battery table",
+   "evidence": "laneT13LAND-receipt.md L225: '6b | ⭐ CR-16 — the WHOLE family, enumerated BY COMMAND (ls-files tests/property/*Golden* *Fence* *Dormancy* → 70 files of the directory's 84) | 70/70 files · 535 tests (312 + 223), ALL …'; L228/L229 rows 9 and 10 'green (inside row 6b)'; §4.3a attribution ladder ran base-vs-tip.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The both-arms run is exactly what made the single red classifiable as a MOVE and attributable by revert."
+  },
+  {
+   "row": "§882.9 receipts line",
+   "call": "folded order 695 lines / 237,768 B; verdict 'BOARD-READY WITH CHAIR ROWS 5'; ⟦A1⟧…⟦A24⟧ complete; 17 folded / 0 refused; picks 15–16 f95305812 · 9f0df13a1, 16 over 8b07ce45f; seal = 9a0584f0f; lane dispatched ~10:25",
+   "claim": "the figures",
+   "method": "wc; stat; marker census; git",
+   "evidence": "wc -lc → 694 237768 (file ends with a newline; python line count 694); L3 verdict string exact; markers A1…A24 each present; 17 **FOLDED**; git rev-list --count 8b07ce45f..9f0df13a1 = 16; refs/preserve/landing-TAILF-2026-09-02 = 9a0584f0f; brief mtime 10:21; first pick committed 10:25:42.",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "One figure: 695 lines → 694 (the brief repeats 695). Everything else exact."
+  }
+ ],
+ "beyond": [
+  "The §882.9 LEDGER row claims the ⟦A22⟧ marker-collision convention was 'carried into the landing brief by name'. brief-T13LAND.md (mtime 10:21, the dispatch brief) contains no 'collision', 'inherited', 'numbering' or 'A22' text at all; it uses a bare ⟦A13⟧ in the TAIL-F sense ('⟦A13⟧'s four instruments ... EXEMPT BY NAME'), and the landing receipt's R-T13L-2 uses a bare ⟦A12⟧ meaning THIS panel's BILL-5 — the exact ambiguity the rule names, harmless here because context disambiguates. The stratum's softer 'the landing lane is now carrying that convention in its head' is unverifiable and, by the receipt's usage, not true.",
+  "T13-LANDING-ORDER §6.3.5 (L533) still ends 'so the loop's ONE line is the whole story' after the fold amended the same cell to 'TWO lines', and its 'check it separately at §6.3.8' points at a row (L536) that never received the momentum-fixture check. The §883 chair-verify did the check anyway (32f9bf326 → 7a92f25c4), so no finding was lost — but a future reader executing §6.3.8 as written would not check the fixture.",
+  "The order's own header (L3) conflates the two deaths: it attributes markers A8–A23 to 'the FIRST fold seat died at its session limit', whereas §882.7 records the 05:40 session-limit death at A1–A6 and §882.8 the ~09:1x model-limit death after A8–A23 were placed. An artifact self-report error, not carried into the stratum.",
+  "A THIRD marker namespace exists in the T13 order — '(charter ⟦A6⟧)' at L445 refers to the T13-BUILD-CHARTER's amendment — outside the ⟦A22⟧ rule's two-namespace framing.",
+  "G0 fold provenance conflict between two ledger claims: §882.7 says fold-batch2.py (05:33, G0-20..31) was NOT applied at the 05:40 death ('the volume's mtime proves it') and re-dispatched the Fable seat from ⟦G0-20⟧; the HORIZON footer written by the Opus fold says dispatch 1 died 'at ⟦G0 PARTIAL: 19⟧ by its last checkpoint but 31 by the volume's own markers', i.e. that the 31 marks already existed at 05:40. No batch file was written between 08:35 and 09:1x (only the chair's verify-batch.py at 08:35:09), so the second Fable dispatch's only possible contribution was applying batch2 — one of the two records misattributes it. Low stakes (the marks are contiguous 1–93 either way); no on-disk evidence settles it (the pre-resume volume mtime is gone; SP2's copy is 10:25:26).",
+  "§882.8's trigger quotes the ENCOUNTERS header '0 of 20' as the fold's state; DESIGN_ENCOUNTERS L3 and §882.10 both record that A1–A4 were folded at 05:38 under that header — the same 'a fold's counter is a claim' law the span banked at §882.9, hit twice in one morning; §882.10 self-reported it.",
+  "brief-G0-SOAK-car0.md (mtime 08:36) says 'dispatched 2026-09-02 by the Fable 5.1 chair' while §882.8.1 (4) and the receipt (RESUME POINTs from 10:06, ⟦OPUS-AUTHORED⟧ header) show the dispatch was the Opus seat's act at ~10:0x — a label mismatch between brief and ledger.",
+  "§7 row 2's owner-visible figure '⏳1,046,712 — under the OLD ceiling by 288 B' was superseded by measurement (1,046,732 / 268 B under, §882.15/§883) — recorded there; the §882.9 stratum does not need it but a Fable reader of §7 should read §883's figure."
+ ],
+ "chair_errors": [
+  "§882.9 ledger row: 'carried into the landing brief by name' — FALSE; brief-T13LAND.md carries no such sentence (CONFIRMED by reading the whole 9,142-byte brief).",
+  "§882.9 receipts: '695 lines' — the folded order is 694 lines (wc -l 694, file newline-terminated); the brief repeats the figure.",
+  "§882.9 CR-14's probable-cause naming (Car 3 / pick 9 via momentum.js) was wrong — the mover is attrition.js at da8cd72fb (Car 4 family (iii)); self-reported at §882.15 and confirmed here by git show da8cd72fb (Math.log → detLn in relativeStrengthTilt).",
+  "§882.8 trigger: the ENCOUNTERS fold's state was quoted from a stale header ('0 of 20') when four amendments were already folded; self-reported at §882.10."
+ ],
+ "commands": [
+  "sed -n '1,32p' <stratum>/full.md",
+  "sed -n '32357p;32358p;32364p;32359,32363p;32365p' docs/OWNER_DECISION_QUEUE.md (ledger rows §882.8/.9/.15/.10–.14/§883)",
+  "grep -n '^- \\*\\*§879\\.11\\|^- \\*\\*§882\\.7' docs/OWNER_DECISION_QUEUE.md; sed -n '32312p;32356p'",
+  "git for-each-ref refs/preserve | grep 2026-09-0",
+  "git log -1 --date=iso f46be1d1f / 9a0584f0f / 7f974e855; git log --since='2026-09-02 08:00' --until='2026-09-02 12:30' HEAD",
+  "wc -lc / stat -f '%Sm' on SP2/T13-LANDING-ORDER.md, SP2/laneG0RR-receipt.md, SP/DESIGN_HORIZON.md, SP2/DESIGN_HORIZON.md, SP2/DESIGN_ENCOUNTERS.md, SP/g0-fold/*, SP/briefs/*, SP/t13-order-panel/*.json, SP/encounters-panel/*.json, SP2/laneT13LAND-receipt.md, SP2/laneG0SOAK-receipt.md",
+  "python3 marker censuses over T13-LANDING-ORDER.md and TAILF-LANDING-ORDER.md (⟦An⟧ / ⟦An · X⟧ counts and per-line contexts)",
+  "sed -n on T13-LANDING-ORDER.md lines 3, 225–238, 425, 429, 443–446, 533, 536, 562–574, 600–628, 646–653, 670–694",
+  "grep -n over SP/briefs/brief-T13LAND.md, brief-G0-SOAK-car0.md, brief-G0-FOLD.md; cut -c1-1800 brief-T13LAND.md (whole)",
+  "grep -rl 'wf_3b941f97\\|wf_b18f6db8' SP SP2; find ~/.claude -maxdepth 4 -iname '*3b941f97*'",
+  "grep -rl 'R-FOLD' SP SP2; python containment check of stratum L1–18 / L19–32 in SP/queue-882.8.md and SP/queue-882.9.md",
+  "cat memory/the-promise-ratified.md; grep seamless-resume-directive.md L55",
+  "grep -n on SP/chair-tools/chair-commit.sh (Seat trailer, queue path, blob DIFFER checks)",
+  "git show 9a0584f0f:src/generators/generateSettlementPipeline.js | sed -n 193p",
+  "git log --format='%h %cd %s' 9a0584f0f..7f974e855 (committer dates); git rev-list --count 9a0584f0f..7f974e855; git rev-list --count 8b07ce45f..9f0df13a1; git cat-file -t f95305812 9f0df13a1; git merge-base --is-ancestor f95305812 9f0df13a1; git merge-base --is-ancestor 9a0584f0f ca651d54b",
+  "git rev-parse <sha>:tests/fixtures/momentum-dormancy-golden.json and :tests/fixtures/generator-golden-master.json at 9a0584f0f / 9f0df13a1 / 7f974e855",
+  "python3 re-run of the §6.3.5 blob comparator: git diff --name-only 8b07ce45f 9f0df13a1 (48 paths) → rev-parse at 7f974e855 vs 9f0df13a1 → MOVED 2",
+  "git show da8cd72fb -- src/domain/worldPulse/attrition.js | grep Math.log/detLn",
+  "git status --porcelain | wc -l in the ledger repo (5611, the pre-existing dirty state; untouched)",
+  "writes: only mkdir/printf/cat > under <scratchpad>/walk/S01/ and walk/S01.json"
+ ],
+ "porcelain_unchanged": true,
+ "summary": "S01 re-derived 19 calls from primary receipts and the repo: 12 RATIFY, 7 AMEND, 0 REVERSE. HIGH items: CR-14's chair-class ruling HOLDS (the REC §879.11 is a chair-signed, loudly-vetoable declared-shift window that promised every flipped row named; the re-record is a test fixture, attributed, owner-visible on §883, never vetoed; it survives the corrected cause because the ground is the window, not the car — attrition.js da8cd72fb confirmed by diff) with two wording amendments. R-FOLD-2 AMEND: the four inherited TAIL-F sites are exhaustively enumerated and verified, so no renumber is owed, but the stated rule ('this panel's amendments always carry the finding id') is violated ~40 times by the order itself and a third (charter) namespace exists; the ledger's 'carried into the landing brief by name' is false. R-FOLD-3 RATIFY (§7 row 1 wording confirmed at L563). R-FOLD-6 AMEND: my re-run of the blob comparator prints exactly the two lawful MOVED lines and the manifest/fixture blobs match §882.15, but §6.3.8 never received the fixture check it is said to owe and §6.3.5 keeps a stale 'ONE line' clause. §882.8.1 (1) AMEND: the dispatch stands but 'fold = execution' is false for G0 (62 of 93 marks, the INSTR car re-cut and eight self-labelled fold JUDGMENT rows are Opus authorship). (2) RATIFY/PLAUSIBLE (skeptic JSONs untouched after 05:24; run-id mechanics unverifiable on disk). (3) and (4) RATIFY CONFIRMED (first landing pick committed 10:25:42; SOAK receipt Opus-marked, measurement half only). Trigger AMEND: 09:08:35 mtime confirmed; the ENCOUNTERS '0 of 20' was a stale header. No dock was entered; every command was read-only; writes only to walk/S01."
+}

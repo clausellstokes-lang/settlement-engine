@@ -1,0 +1,43 @@
+commit ea8451bbb449b8853ee6abaa3ecbcfa19a114fe9
+Author: Fixture <settlementforge@gmail.com>
+Date:   Thu Sep 3 01:03:09 2026 -0400
+
+    ENC chair act: DEFER_CEILING 31 -> 35, authorizing the six forks ENC-1 minted
+    
+    The constant's own message reserves growth to a chair conversation
+    rather than an automatic deferral, and its comment records the two
+    prior moves with their ledger sections. This is the third, recorded the
+    same way.
+    
+    The lane authored HBF-36 through HBF-41 and refused to move the ceiling
+    itself, which is exactly right: a lane absorbing its own discovery is
+    what the stop law exists to prevent. Four rows carry the closeOwed the
+    constant demands, so each deferral says what would have to exist before
+    it can close. Two are stay-deterministic on measured grounds: a
+    coincidence gate with no candidate set, and a draw that is HBF-35
+    verbatim one family over.
+    
+    Verified before authorizing: the six rows exist, the red was exactly
+    "expected 35 to be 31", and the walker is green on a pristine control
+    dock, so the attribution is measured rather than argued. Green at 8 of 8
+    after.
+    
+    Seat: Opus 5 — Fable-unvalidated
+    Lane: chair (ENC-1 ceiling authorization)
+
+diff --git a/tests/lint/chooserTotality.walker.test.js b/tests/lint/chooserTotality.walker.test.js
+index f175db31b..0ecce40b1 100644
+--- a/tests/lint/chooserTotality.walker.test.js
++++ b/tests/lint/chooserTotality.walker.test.js
+@@ -96,9 +96,9 @@ const DECLARES_IDIOM = /(?:export\s+)?function\s+(?:hash01|softmaxWeights|stable
+  * the argued-roster idiom, and it is why the constant is a COUNT rather than a list: a list
+  * would restate what the registry already answers.
+  */
+-// 29 -> 30 at IN-1c-a (HBF-33, ODQ §85.1); 30 -> 31 at WF-8a (HBF-34, ODQ §350) — each move a
++// 29 -> 30 at IN-1c-a (HBF-33, ODQ §85.1); 30 -> 31 at WF-8a (HBF-34, ODQ §350); 31 -> 35 at ENC-1 (HBF-36..HBF-41, ODQ §885.7) — each move a
+ // chair-authorized registry mint landing its fork row, never a lane absorbing a discovery.
+-const DEFER_CEILING = 31;
++const DEFER_CEILING = 35;
+ 
+ /** The named-domain checklist's row count, asserted rather than read off. */
+ const NAMED_DOMAIN_ROWS = 14;

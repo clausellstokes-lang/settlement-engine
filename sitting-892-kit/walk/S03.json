@@ -1,0 +1,178 @@
+{
+ "slice": "S03",
+ "status": "COMPLETE",
+ "calls": [
+  {
+   "row": "§882.11 JF-2 (HIGH)",
+   "call": "COVERAGE's eleven corrections folded as ONE inserted table ⟦G0-39⟧ IN ADDITION to per-row inline folds; veto = delete the block, every correction survives inline",
+   "claim": "Two copies exist by design and can drift; the table is redundant to the inline folds.",
+   "method": "md5 SP vs SP2 volume; located ⟦G0-39⟧ (lines 539–553 table C1–C11, 555 absent-map); python census of each correction's distinctive figure across §6 lines 531–664 excluding the table; compared figures to laneG0COV-receipt.md §4.",
+   "evidence": "Volumes identical (md5 ec389c5a…, 728,943 B). Inline sites found: C1 L537 ⟦G0-34⟧ · C3/C4 L537 ⟦G0-36⟧ · C5/C10 L534 ⟦G0-33⟧ · C6 L537 ⟦G0-35⟧ · C7/C8 L537 ⟦G0-37⟧ · C11 L534 ⟦G0-32⟧ — each figure equal to the table (0/7 over 1,029 · 0/1,323 · 516/525 · 36 · :468-471 four · SIX · crossroads 3 · Struggling 36). C2 `generationCoherenceReceipt` → NO INLINE SITE IN §6 (L537 still reads \"(8) `status on generationCoherence` pinned 3 · `contentProfile on generationCoherence` pinned 4\", no mark); C9 `isolationSupport.js:54` → NO INLINE SITE IN §6 (only table L551; '125-139' appears only at L551). L539: \"Each is folded at its row above\".",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "Duplication is real for 9 of 11 and they agree today. But C2 and C9 exist ONLY in the table inside §6, so the block is load-bearing, not redundant: the row's veto ('delete the ⟦G0-39⟧ block; every correction survives inline') would lose two corrections, and L539's 'Each is folded at its row above' is false for two. Amend: either fold C2/C9 inline first (row 8's spelling and row 4's vocabulary home) or state that the table is the sole §6 carrier for those two; correct L539."
+  },
+  {
+   "row": "§882.11 JF-5 (HIGH)",
+   "call": "CR-15 written as a CHAIR ROW: Car 3's rubric scores the address law by depthHistogram[2..4], not fullyAddressedRateMilli",
+   "claim": "958‰ would otherwise ship as a four-part figure although the actor layer never resolves.",
+   "method": "Read CR-15 (L1450), R11 (L1396), ⟦G0-65⟧; laneG0RR-receipt.md §5 :235–265; git show 9a0584f0f:scripts/audit/behavioral-observation.mjs :754–812.",
+   "evidence": "Source :754 ADDRESS_LEVELS = settlement→power→faction→npc; depth counted contiguously (`if (!carriesAny(entry, keys)) break; depth += 1`); `if (depth >= 1 && hasAction && hasSettlements && hasReason) fullyAddressed += 1`. Receipt :239 `fullyAddressedRateMilli` raw **958**; :247 `depthHistogram = {0: 3, 1: 426, 2: 0, 3: 0, 4: 0}`; :263–265 'Recommend to Car 3: the rubric should NOT quote fullyAddressedRateMilli … The honest live figure … is depthHistogram[2..4] = 0 of 429 = 0‰'. CR-15 L1450 restates exactly this with veto shape.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Elevating a receipt recommendation about a customer-facing score to a vetoable chair row is the right register. One nuance for the rubric author: depth 2 is `power` (a polity), so [2..4] counts a power-id as the named actor; a stricter NPC/faction reading is [3..4] — both read 0 at C′."
+  },
+  {
+   "row": "§882.11 JF-3 (MEDIUM)",
+   "call": "STRUCK the drafted chain `captured`/`collapsing` producer-less exemption entirely rather than narrowing it, because it named 2 of 7 unreached tokens when all 7 are unreached and the cure is the read-time mapping",
+   "claim": "All seven canonical tokens are unreached; the mapping makes the exemption moot.",
+   "method": "Read ⟦G0-44⟧, ⟦G0-34⟧, ⟦G0-45⟧, §17 V1; laneG0COV-receipt.md C1 :173 and §6 recs :214–218; the fold's own re-derivation $ME/g0-fold/cov-canonical-roster.log and -with-control.log; diffed the log's 141 zero cells against $SP/cov-floored-zeros.txt (71); git show 9a0584f0f:src/domain/supplyChainState.js :174–203.",
+   "evidence": "Raw: receipt :173 'All 7 canonical tokens score 0 rows' (persisted legacy seven). Under the RULED cure (⟦G0-34⟧ 'RULED (§882.5): the field's read(s) APPLIES canonicalSupplyChainStatus'), the fold's own log — `status on activeChains [derived] vocab:pinned(7)` — reads :540 `0 … :: captured` · :541 `0 … :: collapsing` · :681 `<3 … :: blocked (rows 1)`; the other four tokens are at/above floor. Receipt §6 rec 4 deletes THREE exemptions (C5, C6, C11) — not this one. cov-floored-zeros.txt (71) EXCLUDES captured/collapsing; ⟦G0-45⟧'s 5 under-floor exclude `blocked` 1 → the 76-row block was priced with the exemption KEPT. ⟦G0-44⟧ says 'three drafted blocks struck' then strikes four.",
+   "verdict": "REVERSE",
+   "confidence": "CONFIRMED",
+   "note": "The rationale is a raw-reading fact; under the cure the same act ruled (CR-9) the drafted exemption named precisely the right two, is already narrow, and cannot red as `exempt-but-reached` (0 rows) or `unknown-band` (in CANONICAL_STATUSES). Striking it leaves captured/collapsing (and blocked 1) with NO disposition and ⟦G0-45⟧'s 76 stale. Right call: restore the exemption as drafted, OR add the three cells to the authored block and re-price 76 → 79. The stratum's veto text ('a live exemption the mapping makes moot') inverts the log."
+  },
+  {
+   "row": "§882.11 JF-6 (MEDIUM)",
+   "call": "§18 SOAKCHAIN Car 0 row: P0.4's 61.88 s bounds (a) from below but does not discharge it",
+   "claim": "The reader runner's advance-only figure is a lower bound on the soak's per-year fixture cost.",
+   "method": "Read L1423 (§18 Car 0), §4 Car 0 act (a) definition (L373), the fixture (L328), laneG0RR-receipt.md §3 P0.4 (:155).",
+   "evidence": "L1423: 'an ADVANCE-only figure on the reader runner's composer, **not** the soak's own per-year observation legs, so it does not discharge (a) but it bounds it from below'. §4 (a) = 'the Tier-1 fixture's cost — century-a SHIPPED 10 years ×3, median ms/year'. L328: 'The fixture — hand-authored, receipted, light: four settlements one per tier band … two `npcs`, `activeConditions: []`'. P0.4 measured a generated 4-settlement `full_simulation` reader campaign (61.88 s; per-year 2,673 → 1,851 ms).",
+   "verdict": "AMEND",
+   "confidence": "PLAUSIBLE",
+   "note": "The half-discharge is honest; the phrase 'bounds it from below' is not established: per-year advance cost scales with world content, and the soak's fixture is lighter (2 NPCs/settlement, no conditions) than a generated campaign, so (a) may fall BELOW 1,851 ms/yr. Amend to 'the nearest comparable figure (same engine, rules, 4 settlements, advance-only); (a) is neither discharged nor bounded until Car 0 times the §4 fixture'. Settle by: Car 0's own act (a) — time the §4 fixture 10y ×3 against the reader campaign."
+  },
+  {
+   "row": "§882.11 JF-1 (LOW)",
+   "call": "Trusted the volume's MARKERS over fold.json and continued at ⟦G0-32⟧; corroborated by verify-batch.py showing 32 of batch2's 33 anchors consumed; 'the one surviving anchor, a CHARSET STOP line, is the only unapplied replacement'",
+   "claim": "Markers are the truth; one batch2 replacement was never applied.",
+   "method": "Read verify-batch.py/foldlib.py (dry-run stubs save/checkpoint/fold_json); ran `python3 verify-batch.py fold-batch2.py` and `fold-batch1.py` in $ME/g0-fold with md5 of the SP2 volume and fold.json before/after; a recording run tested, for each surviving anchor, whether its `new` text is present.",
+   "evidence": "[DRY batch2 CHARSET] would-apply reps: 1 / 33 (32 BAD count=0 = consumed; 1 OK). md5 before/after ec389c5a… / 594eaa7a… unchanged. The survivor is batch2 #13 'STOP: probe 4 > 0 (redesign the reads before any bytes); probe 2 ≠ 8 faces…' — old-present=1 new-present=1 new-contains-old=True; its new carries ⟦G0-25⟧ (present ×5 in the volume). batch1: 9/49 survive, all new-present=1 new-contains-old=True.",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "The decision (trust markers, resume at 32) holds and the 32/33 figure reproduces today. But the characterisation is wrong: all 33 batch2 replacements WERE applied; the anchor survives only because its replacement text contains it. The stratum's veto ('re-run it; … the only unapplied replacement') would double-apply #13 and duplicate ⟦G0-25⟧ if a seat obeyed it. Amend to '33/33 applied; one anchor survives by construction'."
+  },
+  {
+   "row": "§882.11 receipts",
+   "call": "93 ⟦G0-n⟧ marks contiguous 1–93 with no gaps (31 inherited + 62 this dispatch: COVERAGE 32–46 · WORKER 47–58 · READERREVIEW 59–73 · §14 74–92 · §16 93)",
+   "claim": "Every mark 1..93 is present; none missing.",
+   "method": "grep -o '⟦G0-[0-9]*⟧' | sort -n -u; comm against seq 1 93; batch docstrings; pre-G0 backup mark count.",
+   "evidence": "distinct marks: 93 max: 93; gaps in 1..93: (none); 377 total occurrences. pre-g0.bak ⟦G0- count: 0. Batch docstrings: batch2 'CHARSET … ⟦G0-20⟧ … ⟦G0-31⟧'; batch3 'COVERAGE … into §6'; batch4 'WORKER … §9'; batch5 'READERREVIEW … §5'; batch6 '§14'. Only other ⟦G0 forms: the header, 2× literal '⟦G0-n⟧' in prose, 1× '⟦G0 PARTIAL: 19⟧' quoted in the colophon L1465.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The '⟦G0 PARTIAL: 19⟧' at L1465 is historical prose, not a stray checkpoint."
+  },
+  {
+   "row": "§882.11 chair's commit",
+   "call": "The amended volume is committed to docs/DESIGN_HORIZON.md in the SAME ledger act (82c073af9) so the INSTR cars are cut from the ledger line, not a scratchpad copy",
+   "claim": "The committed blob equals the scratch volume; the product branch does not carry it; briefs read it from the ledger line.",
+   "method": "git show 82c073af9:docs/DESIGN_HORIZON.md | md5; git cat-file -e on ca651d54b and 4233031ba; merge-base --is-ancestor; git status of the ledger worktree path; brief-INSTR-WRW.md citation.",
+   "evidence": "82c073af9 (Fixture, Sep 2 10:28:24 2026 -0400) touches docs/DESIGN_HORIZON.md (315+/116−), FRQ (+12), ODQ (+1). Blob md5 ec389c5abb3fec1dd27c3ce05df7202c == SP == SP2 == HEAD:docs/DESIGN_HORIZON.md. `cat-file -e ca651d54b:docs/DESIGN_HORIZON.md` → fatal: path does not exist (same for 4233031ba). 82c073af9 is-ancestor HEAD exit=0; of ca651d54b exit=1. Ledger worktree: `D  docs/DESIGN_HORIZON.md` (staged deletion, live state). brief-INSTR-WRW.md: '`docs/DESIGN_HORIZON.md` is in HEAD's tree but DELETED in that working tree, so read it as `git -C $R show HEAD:docs/DESIGN_HORIZON.md`'.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Claim satisfied: the bytes on the ledger line are the bytes the briefs direct lanes to read. Parent blob = 589,393 B pre-G0 (md5 1affeecb…), so the 631,264 B intermediate was never committed — consistent with the §881.15 precedent applied once at the amendment."
+  },
+  {
+   "row": "§882.11 JF-4 (LOW)",
+   "call": "E47/E48 entered as NEW §14 rows (and closed in one act) rather than recorded only in §17",
+   "claim": "Both claims were unledgered, refuted by execution, and load-bearing.",
+   "method": "Read L1219–1220, CR-16 L1451; laneG0COV-receipt.md :205–208 and C1/C5 :173/:177.",
+   "evidence": "Receipt :205 'Two rows §14 does not carry that Car 0 has now measured…' :207 '`status on activeChains` vocabulary claim … never entered … REFUTED by execution: 0/7 canonical tokens over 1,029 rows' :208 '`severityBand on activeConditions` \"0 by construction\" … REFUTED: 516/525'. Volume E47 L1219 / E48 L1220 carry the same figures with the receipt cite; fold.json settled14 lists 'E47 + E48'.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Figures match the receipt cell-for-cell; entering-and-closing is the ledger-completeness law applied."
+  },
+  {
+   "row": "§882.11 JF-7 (LOW)",
+   "call": "WORKER's `tests/property` vs `tests/generators` citation recorded as NO EDIT OWED (K11) — the volume cites the correct path",
+   "claim": "Folding a correction to a miscitation that does not exist would be a phantom.",
+   "method": "Counted 'tests/generators/generatorGoldenMaster' and 'tests/property/generatorGoldenMaster' in the pre-G0 backup and the current volume; git ls-tree 9a0584f0f; ENFORCER_DIRS at 9a0584f0f; laneG0WORKER-receipt.md :62, :586–588.",
+   "evidence": "pre-g0.bak: tests/generators/generatorGoldenMaster 0 | tests/property/generatorGoldenMaster 1; current: 0 | 2; all other citations are bare `generatorGoldenMaster.test.js`. ls-tree 9a0584f0f: tests/property/generatorGoldenMaster.test.js exists. ENFORCER_DIRS (tests/lint/mutationCoverage.shared.mjs:36) = 8 dirs incl. tests/generators, not tests/property. WORKER receipt :586 'not `tests/generators/` as several volume citations spell it' — unsupported by either volume.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The receipt's premise was false; K11's caution about bare-basename citations is a fair residue."
+  },
+  {
+   "row": "§882.11 JF-8 (LOW)",
+   "call": "~93 marks over the dispatch's '~52' estimate because §6, §9 AND §5 were all unfolded at resume — not §5 alone",
+   "claim": "The dispatch assumed only §5 remained.",
+   "method": "Batch docstrings/mark ranges; `F.checkpoint(31, '~52')` in fold-batch2.py; ODQ §882.8 (L32357) and §882.11 (L32360) text; brief-G0-FOLD.md.",
+   "evidence": "batch1 = WRWALKER + §1 (G0-1..19), batch2 = CHARSET (20–31, `F.checkpoint(31, '~52')`); batch3 = COVERAGE §6 (32–46), batch4 = WORKER §9 (47–58), batch5 = READERREVIEW §5 (59–73) — all three in dispatch 3 (mtimes 10:10–10:19). §882.8: 'the G0 fold (having advanced to ⟦G0 PARTIAL: 31 of ~52⟧ …)' and re-dispatch 'from ⟦G0-32⟧'. §882.11: '⚠ §5 AND §9 were both unfolded at the resume — the chair's dispatch had assumed only §5 was'.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The '~52' was the Fable dispatch-1 lane's own header estimate, echoed by the chair. The ledger row under-states its own correction: it says '§5 AND §9' while crediting COVERAGE 32–46 to the same dispatch — §6 was unfolded too (see chair_errors)."
+  },
+  {
+   "row": "§882.11 receipts",
+   "call": "589,393 B pre-G0 → 631,264 at resume → 728,943 B / 1,469 lines; header string; pre-fold copy intact at 589,393 B",
+   "claim": "Byte/line figures and the header are as stated.",
+   "method": "wc -c/-l on SP, SP2, the committed blob; sed -n 3p; md5 of pre-g0.bak vs 82c073af9^ blob.",
+   "evidence": "728943 / 1469 on SP, SP2 and 82c073af9:docs/DESIGN_HORIZON.md. L3 carries '⟦G0 FOLDED 2026-09-02 10:25 ET · OPUS-AUTHORED — Fable retrovalidation OWED: the INSTR cars are cut; WRWALKER Car 1 on web-display⟧'. pre-g0.bak 589393 B, md5 1affeecb636af40204557c7ac8530055 == 82c073af9^:docs/DESIGN_HORIZON.md. No copy at 631,264 B exists in either scratchpad.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The 631,264 resume figure alone is unverifiable (no intermediate copy survives); the endpoints are exact."
+  },
+  {
+   "row": "§882.11 receipts",
+   "call": "93 folded · 0 refused · 18 chair rows · 27 §14 rows dispositioned",
+   "claim": "The four counts describe the volume.",
+   "method": "fold.json; grep of §14 rows with a G0 mark (L1170–1224); grep '^| CR-' across the volume; §19 read whole (L1437–1469); grep for REFUSE marks.",
+   "evidence": "fold.json: folded 93, refused [], chairRows 18 (CR-1…CR-16 + OWNER WK-11 + OWNER RR-10), settled14 27 entries. §14 rows carrying ⟦G0-: 27. ⟦G0-n⟧ **REFUSE… marks: 0. §19 table rows in the volume: CR-8 … CR-16 (9) + WK-11 + RR-10 + '(carried)'; grep for CR-1…CR-7 anywhere in the volume: none (their substance is inline as ⟦G0-2⟧/⟦G0-9⟧/⟦G0-14⟧ etc. and in ODQ §882.3/§882.4).",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "93/0/27 hold. '18 chair rows' counts fold.json entries; the volume's §19 — which says it 'hands up' the fold's decisions — carries only 9 CR rows plus 2 owner rows. Amend to '16 chair rows (9 tabled in §19, CR-1…CR-7 recorded only in fold.json and inline marks) + 2 owner rows', or table CR-1…7 in §19."
+  },
+  {
+   "row": "§882.11 receipts",
+   "call": "batches fold-batch3.py…fold-batch7.py, every anchor asserted exactly once, atomic, header checkpointed after each; nothing executed",
+   "claim": "Mechanism and read-only posture as stated.",
+   "method": "Read foldlib.py; grep checkpoint/save in batches 3–7; grep direct writes in all batches; listed $ME/g0-fold with mtimes; read probe log heads and volume L9.",
+   "evidence": "foldlib.rep: `if n != count: raise AssertionError`; save() writes once per batch; batch3 `f.checkpoint(46, 84)`, batch4 `(58, 84)`, batch5 `(73, 90)`, batch6 `(92, 96)`, batch7 flip='⟦G0 FOLDED…'. No write_text/open/shutil/subprocess in any batch. But $ME/g0-fold holds wrw-split.probe.mjs + wrw-split-run.log (05:14) and cov-canonical.probe.mjs + two logs (05:23; log head '══ COVERAGE Car 0 — THE PREDICTION PROBE ══ manifest …/laneG0COV-tree/tests/fixtures/generator-golden-master.json'); volume L9 discloses 'a patched COPY of a lane's own probe run read-only against that lane's dock from $ME/g0-fold/'.",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "Anchor/atomic/checkpoint claims hold. 'nothing executed' is overstated: dispatch 1 executed two read-only node probes against the G0 docks (no vitest/build/npm/git). Amend to the colophon's wording plus the two probes."
+  },
+  {
+   "row": "§882.11 chair's 'What Fable re-derives: nothing owed' on the commit",
+   "call": "Holding the amended volume in scratch until a Fable seat re-folds it would have left the INSTR briefs citing a file no successor could find",
+   "claim": "Committing was the only option that kept the briefs' citations resolvable.",
+   "method": "Brief citations; ledger worktree state.",
+   "evidence": "brief-INSTR-WRW/-SOAK/-TUNEREG and brief-HORIZONDARK cite `docs/DESIGN_HORIZON.md` and read it via `git -C $R show HEAD:docs/DESIGN_HORIZON.md` because the ledger working tree has it `D ` (staged deletion).",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Nothing owed; the alternative is worse for the reasons stated."
+  }
+ ],
+ "beyond": [
+  "JF-3 consequence not carried by the stratum: after the strike, `status on activeChains :: captured/collapsing` (0 rows under the ruled mapping, fold's own log :540–541) and `:: blocked` (1 row, :681) have NO disposition — not exempt, not in the 71 floored zeros (cov-floored-zeros.txt excludes them), not in ⟦G0-45⟧'s 5 under-floor (which instead lists the CONTROL field's legacy `unexploited` 1). The 76-row genesis block was priced with the exemption KEPT; ⟦G0-45⟧ is stale under CR-9. ⟦G0-44⟧ also says 'three drafted blocks struck' and then strikes four.",
+  "L539 ('Each is folded at its row above') is false for C2 and C9: L537 row (8) still reads `status on generationCoherence` / `contentProfile on generationCoherence` (the pre-G0 spelling, no mark); row 4's `paths[].type/stability` vocabulary home appears corrected only in the table L551. The stratum's JF-2 veto would delete the only §6 carrier of two corrections.",
+  "Marks 1–31 are FABLE-authored, not Opus: brief-G0-FOLD.md dispatches 'lane HORIZON-G0-FOLD (Fable 5.1 seat …) by the Fable 5.1 chair'; batch1/2 mtimes 05:27/05:33 precede the 09:1x Fable-limit death; volume L9 says 'Fable 5.1 seat' while L3/L1465 say OPUS-AUTHORED/Opus 5. The retrovalidation owed is marks 32–93 + §17–§19 + the fold.json rewrite, not the whole fold; the header over-claims and the volume disagrees with itself on the seat.",
+  "The fold's re-derivation logs ($ME/g0-fold/cov-canonical-roster.log, -with-control.log, wrw-split-run.log) are cited nowhere in the volume by name (grep 'cov-canonical' = 0); the mapped-vocabulary census that decides JF-3 exists only in the chair's scratchpad.",
+  "Insertions-only check (proxy): of 116 deleted diff lines, 115 survive as strikethrough-wrapped or prefix-extended text; the one line with no surviving 40-char window is the WRW-4 owner row, which was re-written (L1100 ⟦G0-14⟧⟦CHAIR §882.3 F3⟧ RETRACTED) — a content rewrite, not a pure insertion; 'C0 scan clean, insertions only' is true in substance with that one exception."
+ ],
+ "chair_errors": [
+  "ODQ §882.11 (L32360): '§5 AND §9 were both unfolded at the resume' omits §6 — the same row credits COVERAGE 32–46 to this dispatch and batch3's docstring is 'the COVERAGE Car 0 receipt folded into §6' (CONFIRMED).",
+  "ODQ §882.11 / stratum: '18 chair rows' — only 9 CR rows (CR-8…CR-16) plus 2 owner rows are tabled in the volume's §19; CR-1…CR-7 exist only in fold.json (CONFIRMED).",
+  "Stratum receipts line: 'nothing executed' — two read-only node probes were executed by dispatch 1 from $ME/g0-fold against the G0 docks (logs at 05:14 and 05:23 ET; disclosed at volume L9) (CONFIRMED).",
+  "Stratum JF-1: 'the one surviving anchor … is the only unapplied replacement' — batch2 #13 was applied; its replacement contains the anchor (⟦G0-25⟧ present ×5); the veto 're-run it' would double-apply (CONFIRMED).",
+  "Stratum JF-3 veto text: 'the census then carries a live exemption the mapping makes moot' — the fold's own mapped census shows captured/collapsing are exactly the zero cells the mapping leaves (CONFIRMED)."
+ ],
+ "commands": [
+  "mkdir -p $W/S03; printf partial JSON > $W/S03.json",
+  "sed -n '45,56p' stratum/full.md; sed -n '32360p' docs/OWNER_DECISION_QUEUE.md; sed -n '1990,2001p' docs/FABLE_RETROVALIDATION_QUEUE.md | md5",
+  "md5 -q / wc -c / wc -l on SP/DESIGN_HORIZON.md, SP2/DESIGN_HORIZON.md, $ME/g0-fold/DESIGN_HORIZON.pre-g0.bak",
+  "git -C R log -1 82c073af9; git show --stat/--numstat 82c073af9; git show 82c073af9:docs/DESIGN_HORIZON.md | md5/wc; git show 82c073af9^:docs/DESIGN_HORIZON.md | wc -c/md5; git show HEAD:docs/DESIGN_HORIZON.md | md5",
+  "git -C R cat-file -e ca651d54b:docs/DESIGN_HORIZON.md; cat-file -e 4233031ba:…; merge-base --is-ancestor 82c073af9 HEAD / ca651d54b",
+  "grep -o '⟦G0-[0-9]*⟧' volume | sort -n -u; seq 1 93 | comm -23; grep -n for ⟦G0-39⟧, CR-15, 958, captured/collapsing, 61.88, E47/E48, tests/property|generators, section headings",
+  "cat $ME/g0-fold/verify-batch.py foldlib.py fold.json; head/tail fold-batch2.py; grep write_text|open(|shutil|subprocess fold-batch*.py; head -1 fold-batch[3-7].py; grep checkpoint fold-batch[3-7].py",
+  "python3 census of C1–C11 inline sites in §6 lines 531–664 excluding 541–553; contexts for generationCoherence / paths[] / stability / :125 on L534/L537",
+  "git -C R show 9a0584f0f:src/domain/supplyChainState.js | sed -n 170,210p; git grep -n 'CANONICAL_STATUSES\\s*=' 9a0584f0f -- src; git show 9a0584f0f:scripts/audit/behavioral-observation.mjs | sed -n 754,812p; git grep -n ADDRESS_LEVELS / ENFORCER_DIRS 9a0584f0f; git ls-tree 9a0584f0f -- tests/property/generatorGoldenMaster.test.js",
+  "grep -n in laneG0COV-receipt.md (:124,:138,:173–183,:187,:205–225,:255–262), laneG0RR-receipt.md (:235–266, P0.4), laneG0WORKER-receipt.md (:62,:586–588); cat $SP/cov-floored-zeros.txt; grep activeChains in $ME/g0-fold/cov-canonical-roster.log and -with-control.log; python diff of log zero cells vs floored list",
+  "cd $ME/g0-fold && python3 verify-batch.py fold-batch2.py; python3 verify-batch.py fold-batch1.py (dry-run; md5 of SP2 volume + fold.json captured before and after: unchanged); python recording run testing new-present for surviving anchors (no writes)",
+  "git diff 82c073af9^ 82c073af9 -- docs/DESIGN_HORIZON.md | grep '^-' > $W/deleted.txt; git show 82c073af9:docs/DESIGN_HORIZON.md > $W/new.txt; python prefix/window survival proxy",
+  "cut -c1-500 $ME/briefs/brief-G0-FOLD.md; grep DESIGN_HORIZON in $ME/briefs/brief-INSTR-*.md; sed -n 32357p ODQ | python fold-context extraction",
+  "git -C R status --porcelain | wc -l (5611 at start and end); git -C R status --porcelain -- docs/DESIGN_HORIZON.md; git -C laneG0COV-tree / laneG0WRW-tree rev-parse HEAD + status --porcelain"
+ ],
+ "porcelain_unchanged": true,
+ "summary": "S03 re-derived §882.11's HORIZON G0 fold (JF-1…JF-8), its receipt figures and the chair's commit from the volume, the fold kit, the five G0 receipts, the fold's own re-derivation logs and the product tree at 9a0584f0f. RATIFY: marks 1–93 contiguous; the commit (blob md5 ec389c5a… on the ledger line, absent from the product branch, briefs read it via git show HEAD); JF-4, JF-5, JF-7, JF-8; 93 folded/0 refused/27 §14 rows. AMEND: JF-2 (C2 and C9 live ONLY in the ⟦G0-39⟧ table — the veto would lose them; L539 is false for two), JF-1 (all 33 batch2 replacements applied; the survivor is by construction, the veto would double-apply), JF-6 ('bounds from below' is unproven — the soak fixture is lighter than the reader campaign), '18 chair rows' (9 tabled), 'nothing executed' (two probes ran). REVERSE: JF-3 — under the cure the same act ruled (read-time mapping), the fold's own log shows captured/collapsing are exactly the two unreached tokens and blocked is under-floor; the strike leaves three cells undispositioned and ⟦G0-45⟧'s 76 stale. Five chair errors confirmed. No file inside the repo or any dock was written; ledger porcelain 5611 → 5611; laneG0COV-tree 0; laneG0WRW-tree arrived with 3 untracked probes and was not touched."
+}

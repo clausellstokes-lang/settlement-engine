@@ -1,0 +1,371 @@
+{
+  "slice": "S16",
+  "status": "COMPLETE",
+  "porcelain_unchanged": true,
+  "summary": "S16 re-derived 32 calls across §888/§889/§889.1/§889.2/§889.3. All HIGH items hold on the tree: the fork-label guard's own regex counts exactly 118 literal sites at 30c1667bc (a plain grep is 133 lines), the head token sits at one site and `now` is a floored tick; the sovereignty_registry drop is REPRODUCED by my own probe at 30c1667bc (DROPPED vs envoy/war controls survive) and cured at 7733e064e in §890; the cure-the-leaf closure figures re-measure to 10/211 KB and 113/2.03 MB; O-10(b) and the salvage/seals are receipted. Two reversals: §888's 'two lanes reached it independently / living undetected' framing is contradicted by the chair's own §884 (784/200,000 = 0.392%, mechanism and home named), §886/§887 (STILL OWED, declared known-red) and brief-REGISTRY.md:27 which assigned that lane to it; and §889.3's funnel-door ruling was withdrawn at §890.1 with no mark in §889.3. Amendments: §888 lighting from-figures 2134/6110 should read 2135/6114; §888 'cured at cause' is test-side (cause closed in §889); the §886 signature amendment was first written in §887.2; enc3 salvage is 11 tracked + 2 untracked; §889.2 has no ledger row. No dock was mutated; laneENC-tree porcelain md5 45b7f7cc… identical before and after the probe.",
+  "calls": [
+    {
+      "row": "§888",
+      "call": "888-ACT: eight single-parent cars f12360185→bbba1be24, 11 paths +1,848/−24, sealed landing-888, gate green first run 1,016 s, ratchet 10 known of 31,048, STRICT DIST 52/440, typecheck 173/173, domain-strict 1121/1121, porcelain 0",
+      "claim": "The landing act and its gate figures are as stated.",
+      "method": "git log --format='%h %p' f12360185..bbba1be24; git diff --shortstat; for-each-ref refs/preserve; grep of SP/gate-888.log",
+      "evidence": "8 cars each with one parent; ' 11 files changed, 1848 insertions(+), 24 deletions(-)'; 'bbba1be24 refs/preserve/landing-888-2026-09-03'; gate-888.log: GATE_START=2026-09-03T11:18:55Z GATE_END=11:35:51Z (=1,016 s) TRUE_EXIT=0 GATE_PORCELAIN_PRE/POST=[0]; :80 '[typecheck-ratchet] OK … (173 error(s), ceiling 173)'; :85 '[domain-strict] ✓ … (1121 errors, ceiling 1121)'; :395 '[test-ratchet] OK … (10 known failure(s) of 31048 tests, ceiling 10)'; :927 'STRICT DIST OK — 52 … file(s), 440 test(s)'.",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "'20 stages' not independently counted (the log shows 11 distinct bracket tags; npm run check's stage list is elsewhere) — immaterial."
+    },
+    {
+      "row": "§888",
+      "call": "888-WALLCLOCK-MECHANISM+MEASURE (HIGH 2): byte-identity arm in fieldBattleRegion.test.js races new Date().toISOString() via createdAt fallthrough when now is null; 88/20,000 idle, 100% at 3 ms gap, 0% threaded; region key absent both sides; pre-existing since efebc7e5b, unrelated to ENC-1",
+      "claim": "The mechanism, the two-direction measurement and the pre-existence are real.",
+      "method": "git show 30c1667bc:src/domain/region/wizardNews.js (normalizeEntry); git show b6822dcae (body + test diff); git show efebc7e5b --stat and grep '+.*now: null'; SP/receipt-enc1-census.md:24-35; ratchet baselines grep fieldBattleRegion",
+      "evidence": "wizardNews.js normalizeEntry: 'createdAt: entry.createdAt || options.now || nowIso()'. b6822dcae body: '88 mismatches in 20,000 back-to-back repetitions on an idle box (0.44%) … 100% failure once a 3 ms gap is forced … 0% failure with one stamp threaded'. Diff: '-    const withoutKey = appendWizardNewsEntries({}, [battleRow()], { now: null });' → '+    const STAMP = ... { now: STAMP }' plus two anchors 'expect(JSON.stringify(withoutKey)).toContain(STAMP)' / hasOwnProperty 'region' false. efebc7e5b 'T12 car 2 of 3' added tests/domain/fieldBattleRegion.test.js (+124) with 12 '+…now: null' lines. fieldBattleRegion appears 0 times in the ratchet entries at f12360185 and bbba1be24 (never banked).",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "Mechanism, cure shape and pre-existence read from source; the 20,000-iteration rates are receipt-quoted, not re-run — settle with: node probe looping appendWizardNewsEntries({},[row],{now:null}) ×20,000 at bbba1be24^ comparing JSON bytes."
+    },
+    {
+      "row": "§888",
+      "call": "888-DISCOVERY-FRAMING: 'a ~0.45% random red HAS BEEN LIVING in the landing gate and every green this arc rolled that die'; 'TWO LANES REACHED IT INDEPENDENTLY … neither lane knew of the other … independent convergence is the strongest evidence this program has produced for a defect'",
+      "claim": "The defect was unknown until two lanes converged on it independently on 2026-09-03.",
+      "method": "sed -n 32374p/32390p/32393p docs/OWNER_DECISION_QUEUE.md (§884, §886, §887); grep SP/briefs/brief-REGISTRY.md; SP/salvage-lighting/files/receipt-determinism.md:94-99",
+      "evidence": "§884 (ODQ 32374): 'A FOREIGN DETERMINISM LEAK, DIAGNOSED AND DELIBERATELY NOT CURED HERE: wizardNews.js:552 reads createdAt: entry.createdAt || options.now || nowIso() … 784 mismatches in 200,000 iterations, 0.392% … It did NOT fire in the gate. ⛔ THE GOLDEN FREEZE WOULD BAKE IT IN — close it before the freeze, test-side, at tests/domain/fieldBattleRegion.test.js:108-110. Recorded as a deferral with a home'. §886: 'STILL OWED: ⛔ the createdAt wall-clock fallthrough and its five siblings'. §887: 'named again in this gate's declared known-red'. brief-REGISTRY.md:27 assigns the createdAt fallthrough + five siblings. receipt-determinism.md:95 'The §884 known-red REPRODUCED BY EXECUTION'.",
+      "verdict": "REVERSE",
+      "confidence": "CONFIRMED",
+      "note": "The mechanism, rate (0.392%), home and deferral were in the ledger four rows earlier and carried as STILL OWED through §886/§887; the REGISTRY (determinism) lane was BRIEFED to close it. Only the ENC-1 census lane arrived blind. The right record: a declared, homed deferral rediscovered blind by one lane and closed by the lane assigned to it — not independent convergence, and not an unknown die. The 'every green rolled the die' clause is true but was known when rolled."
+    },
+    {
+      "row": "§888",
+      "call": "888-CURED-AT-CAUSE: 'Pre-existing, unrelated to this consist, cured at cause here'",
+      "claim": "§888 closes the wall-clock race at its cause.",
+      "method": "git show b6822dcae --stat; git show efed4ba91 --stat; git show 3c2410be2 --stat (both in bbba1be24..30c1667bc)",
+      "evidence": "b6822dcae touches only tests/domain/fieldBattleRegion.test.js (+17/−2) — the exact §884-named home. efed4ba91 (§889 train) 'The known-red closes at its cause: `now: null` was a pin that was not one' touches fieldBattleRegion.test.js (58) and worldGenerationClockSeam.walker.test.js (49); 3c2410be2 'The wall-clock leak closes at every caller: fourteen unpinned instants threaded across six lifecycle paths' touches 11 files incl. src/store/instantWorldBody.js.",
+      "verdict": "AMEND",
+      "confidence": "CONFIRMED",
+      "note": "§888's cure is at the ARM (a threaded stamp plus two anchors, test-side). The cause — `now: null` falling through `||` to the wall clock — closed in §889 at efed4ba91/3c2410be2. Wording should read 'cured at the arm here; cause closed in §889'."
+    },
+    {
+      "row": "§888",
+      "call": "888-887.2-CORRECTION: §887.2 recorded both early ratchet refusals as contention; the scope sentinel fires before the census check so a starved soak hid five genuine census bills",
+      "claim": "§887.2 was incomplete: the census bills were unmentioned and the sentinel ordering explains why.",
+      "method": "sed -n 32397p ODQ | grep -c 'census'; git show bbba1be24:scripts/check-test-ratchet.mjs | grep -n sentinel/census; SP/receipt-enc1-census.md:12-22",
+      "evidence": "§887.2 contains 0 occurrences of 'census' or 'five'. receipt-enc1-census.md table rows 1-5: three 'CURE THE LEAF', two 'ENROL' — five bills at the tip, green at base. check-test-ratchet.mjs:23 'an anti-vacuity sentinel, a scope sentinel'; :419 'THE SCOPE-COLLAPSE DISGUISE — a run that DIES wears the skip ceiling's clothes'.",
+      "verdict": "RATIFY",
+      "confidence": "PLAUSIBLE",
+      "note": "That §887.2 omitted the five bills is CONFIRMED; that the sentinel short-circuits BEFORE the per-row census comparison is read from the runner's doc comments, not from its gate() control flow — settle with: git show bbba1be24:scripts/check-test-ratchet.mjs | sed -n 650,740p."
+    },
+    {
+      "row": "§888",
+      "call": "888-886-SIGNATURE-AMENDED: '§886's starvation signature is AMENDED … the true signature is a RESOURCE failure on a test FOREIGN to the consist'",
+      "claim": "§888 amends the signature §886 banked as 'a DIFFERENT test failed each time'.",
+      "method": "sed -n 32390p/32397p ODQ; git show 16b603ebd -- docs/OWNER_DECISION_QUEUE.md (§887.2 -/+ pair compared byte-wise)",
+      "evidence": "§886 (32390): 'a DIFFERENT test failed each time, which is the signature of resource starvation rather than a defect'. §887.2 (32397) ALREADY reads: 'Here the same test fell twice, which by that letter meant a real defect, and the chair said so. It is not: centuryLegSoak is the most expensive test in the tree, so under contention it is the FIRST casualty every time … The true signature is not \"varied casualties\" — it is \"a RESOURCE failure rather than an ASSERTION failure, on a test FOREIGN to…\"'. The §888 commit's -/+ of §887.2 is byte-identical (trailing-newline artefact), so §887.2 was not rewritten.",
+      "verdict": "AMEND",
+      "confidence": "CONFIRMED",
+      "note": "The amendment was first written at §887.2; §888 re-announces it as its own. Attribute it to §887.2 and let §888 merely restate."
+    },
+    {
+      "row": "§888",
+      "call": "888-CURE-THE-LEAF (HIGH 3): three of five bills cured in the leaf (a second production door refused; family membership refused as writer-seal exemption); routing through the door measured at 10 modules/211 KB → 111/~2.0 MB; two honest enrolments; 268,800 receipts 0 diffs with a firing negative control",
+      "claim": "The judgment to cure the leaf rather than enrol it rests on a measured cost and a proven behaviour identity.",
+      "method": "Independent ESM closure walk (scratch closure4.js over `git show f4cc5cb7d:<path>`) of the pre-cure leaf alone and leaf+door (DOOR = src/domain/npc/characterConsumers.js per characterDrift.test.js:620); git show 5d34dfce5 --stat and body; SP/receipt-enc1-census.md:17,37-41",
+      "evidence": "Pre-cure leaf imports 'positionValue' from '../npc/characterDrift.js' (envoyChanceMeeting.js:60 @f4cc5cb7d). My walk: leaf closure 11 modules incl. itself = 'excluding leaf: 10 modules 211 KB'; leaf+door = 'excluding leaf: 113 modules 2082 KB 2.03 MB'. 5d34dfce5 touches only envoyChanceMeeting.js, its test, paradigmAxisCatalog.test.js — characterDrift.test.js untouched. Receipt: '268,800 resolveChanceMeeting receipts compared byte-for-byte … 0 diffs … Negative control FIRES: … rungs 0 / alike against rungs 4 / differing'.",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "The lane's 10/211 KB reproduces exactly (closure excluding the leaf itself); the door route reproduces at 113/2.03 MB vs the lane's 111/~2.0 MB — same order, method-level difference. The 268,800 comparison is receipt-quoted, not re-run."
+    },
+    {
+      "row": "§888",
+      "call": "888-REGISTERS: tuning 224→225 tables, unregisteredNamed 535 / bareDecimals 6,985 unchanged, keys +40 predicted / +26 measured; lighting 2505/370/2134/22716/6110 → 2506/370/2136/22748/6122; ratchet 31,016/2,453 → 31,048/2,454; OSR not owed",
+      "claim": "Every register figure is as stated.",
+      "method": "git show <sha>:tests/lint/.tuning-inventory.json|.lighting-census-baseline.json, scripts/.test-ratchet-baseline.json, scripts/.observed-shape-readers-baseline.json at f12360185 and bbba1be24 via a read-only node summariser; git show -s f4cc5cb7d",
+      "evidence": "tuning totals: f12360185 {tables:224,keys:2066,unregisteredNamed:535,bareDecimals:6985} → bbba1be24 {tables:225,keys:2092,535,6985} (+26). ratchet: totalTests 31016/totalFiles 2453 → 31048/2454. OSR frozenAtSha 98366ffd5 at BOTH shas (not refrozen). lighting baseline at f12360185: files 2505, parked 370, credited 2135, titles 22716, suiteTitles 6114 → bbba1be24 2506/370/2136/22748/6122. Register car f4cc5cb7d body: '2505/370/2135/22716/6114 -> 2506/370/2136/22748/6122, refrozen at a9984fb65'.",
+      "verdict": "AMEND",
+      "confidence": "CONFIRMED",
+      "note": "The lighting FROM figures in the stratum and in ledger §888 (line 32399) read credited 2134 / suiteTitles 6110; the committed baseline at f12360185 and the register car's own message say 2135 / 6114. Transcription error; every other figure exact."
+    },
+    {
+      "row": "§888",
+      "call": "888-TRAILER-GAP (HIGH 6): 394d758ee carries no Seat trailer; not rebased because tests/lint/.tuning-inventory.json cites it as measuredAtSha",
+      "claim": "Both facts hold and the not-rebase reasoning is sound.",
+      "method": "git show -s --format=%B for each of the 8 cars | grep -c '^Seat:'; git show bbba1be24:tests/lint/.tuning-inventory.json | grep measuredAtSha; same at 30c1667bc",
+      "evidence": "Seat trailer counts: 895b328a9 1, 36aafe57d 1, 394d758ee 0, a9984fb65 1, f4cc5cb7d 1, 5d34dfce5 1, b6822dcae 1, bbba1be24 1. bbba1be24:.tuning-inventory.json:10 '\"measuredAtSha\": \"394d758ee0ae53cd8cc1193b382149a656c51370\"'. At 30c1667bc the same field reads 'dfcc8eb72…' (the §889 register 4/4 refreeze).",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "The provenance reason held at landing time; after §889's refreeze the citation moved, but the car is landed and sealed so a rewrite is moot. 394d758ee's body itself carries the Opus-seat text (16 tsc errors cured; esbuild sha256 identity), so §685's purpose is served as the row says."
+    },
+    {
+      "row": "§889",
+      "call": "889-ACT: fifteen single-parent cars bbba1be24→30c1667bc, 59 paths +4,746/−1,356, trailers == cars, sealed landing-889, gate green first run 1,034 s, ratchet 10 known of 31,123, STRICT DIST 52/440, 173/173, 1121/1121",
+      "claim": "The landing act and its figures are as stated.",
+      "method": "git log --format='%h %p' bbba1be24..30c1667bc; rev-list --count; per-car grep -c '^Seat:'; git diff --shortstat; for-each-ref; grep SP/gate-889.log",
+      "evidence": "'cars=15 seat-trailers=15'; every car shows exactly one parent; ' 59 files changed, 4746 insertions(+), 1356 deletions(-)'; '30c1667bc refs/preserve/landing-889-2026-09-03'; gate-889.log GATE_START=12:34:45Z GATE_END=12:51:59Z (=1,034 s) TRUE_EXIT=0 porcelain [0]; :393 '10 known failure(s) of 31123 tests, ceiling 10'; :925 'STRICT DIST OK — 52 … 440'; :78 '173 error(s), ceiling 173'; :83 '1121 errors, ceiling 1121'.",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": ""
+    },
+    {
+      "row": "§889",
+      "call": "889-EM-338: ratchet shrink-only arm banked voiceMechanics [em] 720→382 (exactly 338, the corpus lane's independently measured count); total voice debt 1,108→770",
+      "claim": "Two independent instruments agree to the unit.",
+      "method": "node summariser over scripts/.test-ratchet-baseline.json entries at bbba1be24 and 30c1667bc; git show -s d32bb8832",
+      "evidence": "E2 voiceMechanics entry magnitude 'em' ceiling 720 → 382; 'total' ceiling 1108 → 770 (attribution 'RAISED 649 to 720 at the INSTRUMENTS consist landing'). d32bb8832: '§888: the 338 reader-facing em dashes leave the dossier prose corpus…'; body :7 'an espree walk over string literals rather than a structural field walk, reproduced 338 exactly'.",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": ""
+    },
+    {
+      "row": "§889",
+      "call": "889-FORK-LABEL (HIGH 1, THE PROMISE): willed-leash-end::<tick>::<npcId> enrolled after a chain check over all 118 literal .fork( sites; head token at exactly one site; root head epoch at zero; now is Math.floor of a tick; npcId single-colon; footholdCooldownKey's :: key never reaches fork()",
+      "claim": "No fork chain aliases the new family and the label carries no wall clock.",
+      "method": "git grep -o -P with the guard's own FORK_LITERAL_RE at 30c1667bc; git grep -n '\\.fork(' (plain); git grep willed-leash-end / epoch; git show 30c1667bc:src/domain/worldPulse/corruptionWeb.js (lines 654, 682, 891-903); deityStanceLane.js:149-150,349; git show dfcc8eb72; guard test source",
+      "evidence": "PCRE count with the guard's FORK_LITERAL_RE = 118; plain `.fork(` lines = 133 (11 comment-leading). 'willed-leash-end' appears only at corruptionWeb.js:901 'rng.fork(`willed-leash-end::${now}::${id}`)'. Fork lines containing 'epoch' = 0. corruptionWeb.js:654 'const now = Math.max(0, Math.floor(finiteNumber(tick, 0)));' → :682 'advanceWilledLeashEnds(nextNpcStates, rng, now)'. Ids: 'npc_${idx+1}' (characterEdit.js:51). deityStanceLane.js:150 builds '${settlementId}::${rivalRef}::${npcId}'; its one fork (:349) is the frozen 'deity-stance::…' family, not that key; footholdCooldownKey consumers containing 'fork' = 0. dfcc8eb72 adds the 17-line check to the guard test.",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "'118' is the guard's literal-label count, which is what the row says; the brief's 'expect 118' via plain grep would read 133 — future verifiers should use FORK_LITERAL_RE. The guard's own green at 30c1667bc is inferred from the gate log (TRUE_EXIT=0), not re-run here: settle with npx vitest run tests/kernel/prngForkLabelDelimiter.test.js in a CLEAN dock at 30c1667bc (laneENC-tree has an untracked src file that the scanner would read)."
+    },
+    {
+      "row": "§889",
+      "call": "889-REGISTERS: lighting →2510/370/2140/22823/6139; OSR unchanged 1,993/1,409/388; prose-numerics discoverDependencyCandidates.js 443→461 because the determinism car touched that file; tuning 225 tables / 2,094 keys; ratchet 31,123/2,458",
+      "claim": "Every derivable figure predicted exact; the OSR and prose-numerics moves are as explained.",
+      "method": "node summariser over the five baselines at bbba1be24 and 30c1667bc; git show --stat 3c2410be2 | grep discoverDependencyCandidates",
+      "evidence": "lighting 30c1667bc: files 2510, parked 370, credited 2140, titles 22823, suiteTitles 6139 (2140+370=2510). OSR: total 1993, identities 1409, inventory obj:388 at both shas; frozenAtSha 98366ffd5 → 019829e99 (refrozen, figures unchanged). prose-numerics entry path discoverDependencyCandidates.js line 443 → 461, same snippet. tuning totals {tables:225,keys:2094}. ratchet totalTests 31123 / totalFiles 2458. 3c2410be2 stat includes discoverDependencyCandidates.js (1 match).",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": ""
+    },
+    {
+      "row": "§889",
+      "call": "889-CHAIR-ERR-1: the chair sed-patched the gate wrapper, sh -n failed, launched anyway; wrapper rewritten from scratch with the launch genuinely conditional",
+      "claim": "Self-reported process error and its cure.",
+      "method": "ls SP; cat -n SP/run-gate-889.sh",
+      "evidence": "SP holds run-gate-888.sh and run-gate-889.sh; run-gate-889.sh is a 30-line #!/bin/sh quiet-wait wrapper ('§889 bare gate. Waits for sustained quiet before starting.') with no in-script `sh -n` or `set -e`; the failed sed-patched version is not preserved.",
+      "verdict": "OUT-OF-SCOPE",
+      "confidence": "PLAUSIBLE",
+      "note": "A chair-process self-report with no product byte; the failed artefact and the 'launch is now conditional' launcher line exist only in the chair transcript. Settle by reading the chair session's launch command for gate-889."
+    },
+    {
+      "row": "§889",
+      "call": "889-CHAIR-ERR-2: a merge resolution asserted AFTER writing; a shell without set -e committed the bad file; 'build in memory, assert, then write' adopted and caught two later errors",
+      "claim": "Self-reported process error and its cure.",
+      "method": "None available beyond the stratum/ledger text; see §889.2 evidence for the sibling instance",
+      "evidence": "No artefact of the mis-merged file survives in SP; the ledger §889 row and HANDOFF_CURRENT.md:52 carry the law ('THE GUARD AND THE CONSEQUENCE MUST LIVE IN THE SAME PLACE … set -e at the head of any mul…').",
+      "verdict": "OUT-OF-SCOPE",
+      "confidence": "PLAUSIBLE",
+      "note": "Process row; settle in the chair transcript."
+    },
+    {
+      "row": "§889.1",
+      "call": "889.1-STOP: floors {routine 8, notable 6, major 4} derived as 8 − rank×2; chance_meeting (notable) needs 6, _exposed (major) needs 4; design §8.3 spells 2 and 1 + '· four more'; the car cannot split (floor red vs unvoiced 274→276 exact-equality)",
+      "claim": "The stop is measured, not cautious.",
+      "method": "git show 30c1667bc:tests/helpers/kindPoolWalker.js 54-72; bandFamilies.js:75; git grep FLOOR_BY_SIGNIFICANCE; SP2/DESIGN_ENCOUNTERS.md grep '· four more'; SP/receipt-enc4.md:37-51,52-62",
+      "evidence": "kindPoolWalker.js: 'CHRONIC_FLOOR = 8', 'CADENCE_STEP = 2', 'FREQUENCY_FLOORS = … SIGNIFICANCE_CLASSES.map((cls) => [cls, CHRONIC_FLOOR - significanceRankOf(cls) * CADENCE_STEP])'; bandFamilies.js:75 SIGNIFICANCE_CLASSES = ['routine','notable','major'] ⇒ 8/6/4. The name FLOOR_BY_SIGNIFICANCE is the estate's hand-transcribed form (kindPoolWalker.js:8 doc; kindPoolWalker.test.js:62 regex). DESIGN_ENCOUNTERS.md lines 438-439 each end '· four more' (count 2). receipt-enc4 FINDING 2: 'expect(unvoiced.length).toBe(LEGACY_UNVOICED_TOKENS) — exact equality at 274. Two EXACT_SECTION rows without two registrations makes it 276'; base controls kindPoolFloors 12/12 exit 0.",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "The derived constant is named FREQUENCY_FLOORS at :68-70; the stratum's FLOOR_BY_SIGNIFICANCE is the transcribed alias the walker test matches — acceptable, but a future reader looking for that identifier in the helper will find only the doc comment."
+    },
+    {
+      "row": "§889.1",
+      "call": "889.1-J29: the source-closure probe from src/main.jsx puts all five ENC-4 files outside the 237-module first-paint closure, delta 0 B; J29 discharged",
+      "claim": "J29 (conditional on a source-closure probe per §882.10) is discharged by measurement.",
+      "method": "SP/receipt-enc4.md:133-151; grep -o 'J29…' ODQ:32359",
+      "evidence": "receipt-enc4.md:142 'CLOSURE_SIZE=237'; :151 '**First-paint delta = 0 B, CONFIRMED** (the script hard-throws on a non-existent target path…'. ODQ §882.10 (32359): '…the predicted closure delta is 0 at every car and J29 becomes conditional on a source-closure probe'.",
+      "verdict": "RATIFY",
+      "confidence": "PLAUSIBLE",
+      "note": "Receipt-read, not re-executed. Settle: re-run the closure script quoted in receipt-enc4 §'WHAT DID LAND' from src/main.jsx at 30c1667bc and confirm none of the five ENC-4 paths appears."
+    },
+    {
+      "row": "§889.1",
+      "call": "889.1-SOVEREIGNTY-DROP (HIGH 4): heraldRouting honours four registries, wizardNews.normalizeEntry admits three (sovereignty_registry missing), runs on append (:951) and load (:797); sovereigntyNews.js:469 authors it; probed with an envoy control; queued as its own car",
+      "claim": "A live defect in landed code, confirmed by execution with a control.",
+      "method": "git show 30c1667bc: heraldRouting.js 607-627, wizardNews.js 613-660/700-712/797/951, sovereigntyNews.js 466-471; my own probe (scratch probe.mjs importing laneENC-tree/src/domain/region/wizardNews.js at HEAD 30c1667bc; closure of 39 modules ∩ dock dirty paths = []); porcelain md5 before/after; git log -S sovereignty_registry 30c1667bc..ca651d54b -- src/",
+      "evidence": "heraldRouting.js:615-621 admits war_rulings_registry, war_coalition_registry, envoy_registry and 'r.sectionAuthority === \"sovereignty_registry\"'. wizardNews.js:705-707 allowlist: war_rulings_registry || war_coalition_registry || envoy_registry only; :797 load and :951 append both call normalizeEntry(raw, options). sovereigntyNews.js:469 'sectionAuthority: \"sovereignty_registry\"'. PROBE OUTPUT at 30c1667bc: 'probe-sov section= adjudication sectionAuthority= undefined / probe-env … \"envoy_registry\" / probe-war … \"war_rulings_registry\"'. Cure: 7733e064e (wizardNews.js +20, walker test +49) in §890's train; ledger §890: 'five sovereignty headlines stop filing to the wrong desk'.",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "No captured probe receipt exists in SP (receipt-enc4.md has no 'sovereignty' text; msg-8891.txt is the ledger draft) — my probe is now the executed receipt. The brief's path 'src/domain/worldPulse/wizardNews.js' is wrong; the file is src/domain/region/wizardNews.js."
+    },
+    {
+      "row": "§889.1",
+      "call": "889.1-1of11: the brief's claim that a catalog row with no adapter throws at module evaluation is true of exactly ONE of eleven registries (COMMERCIAL), true-by-accident of GRAMMAR, false for the other nine; totality is enforced by walkers",
+      "claim": "The chair's inherited brief claim was refuted by measurement.",
+      "method": "git show 30c1667bc: commercialReasonsNews.js 70-90, sovereigntyNews.js grep pool/throw, grammarNews.js grep pool; SP/receipt-enc4.md:169 (REGISTRIES length); grep -rn across SP for the eleven-registry measurement",
+      "evidence": "commercialReasonsNews.js:74-79 'if (!pool || !slots || pool.length !== slots.length) { throw new Error(`commercialReasonsNews: ${kind} has no annex pool of matching arity`); }'. sovereigntyNews.js:71 'pool: … (SOVEREIGNTY_RECEIPTS[kind]),' with no throw. grammarNews.js:73 'const pool = … (GRAMMAR_RECEIPTS[kind]);' then :81 'pool.map(() => null)' — an undefined pool TypeErrors at evaluation (accidental). receipt-enc4.md:169 '| 1 | `REGISTRIES` length | 11 | **12** |'. No SP receipt contains the per-registry table; the only text is msg-8891.txt (ledger draft): 'true of exactly one of eleven registries'.",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "Spot-checks (COMMERCIAL, SOVEREIGNTY, GRAMMAR) confirm the shape; the full 11-registry census has no receipt on disk — the remaining eight are PLAUSIBLE by the same pattern. Settle: grep 'throw new' in each of the eleven *News.js registry-row builders at 30c1667bc."
+    },
+    {
+      "row": "§889.1",
+      "call": "889.1-(a) naming collision: chance_meeting is already WILLED_MEETING_CONSPIRACY (corruptionLeash.js:70, corruptionWeb.js:831, pinned at envoyChanceMeetingLedger.test.js:167); Herald kind becomes chance_meeting_recorded; constant not renamed",
+      "claim": "The two meanings genuinely collide and the Herald kind must move.",
+      "method": "git show 30c1667bc: corruptionLeash.js 66-72, corruptionWeb.js 828-833, envoyChanceMeetingLedger.test.js 165-168; git grep chance_meeting 30c1667bc -- src; SP/receipt-enc4.md FINDING 3; grep ENC4-TYPED-HOLES sheet",
+      "evidence": "corruptionLeash.js:70 'export const WILLED_MEETING_CONSPIRACY = \"chance_meeting\";'; corruptionWeb.js:831 'conspiracy: willed ? WILLED_MEETING_CONSPIRACY : \"foreign_web\",'; test :167 'expect(WILLED_MEETING_CONSPIRACY).toBe(\"chance_meeting\")'. src at 30c1667bc also mints 'id: `chance_meeting:${meetingKey}`' (envoyChanceMeeting.js:585,613,860). The Herald kind 'chance_meeting' exists only in DESIGN §8.3 (line 438) / row 6 (line 546) — never landed. receipt-enc4 FINDING 3: 'A Herald kind of the same name is a **third** meaning for one string … Do **not** rename the constant'. ENC4-TYPED-HOLES sheet: 'chance_meeting_recorded' 0 hits; hole rows still say '`chance_meeting` | | ⛔ HOLE — unwritten'.",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "Premise holds (live constant + pinned test vs a design-only kind). Two omissions: the stratum does not mention the third live use (the `chance_meeting:` id prefix), and the owner's fill-in sheet the row points to still carries the pre-ruling name — a successor filling it would author under the colliding token unless they read the ledger."
+    },
+    {
+      "row": "§889.1",
+      "call": "889.1-(b) second kind ruled chance_meeting_exposed (row 6 outranks §5.5's chance_meeting_approach_exposed); sent to ENC-3 mid-flight",
+      "claim": "The spelling ruling and its delivery.",
+      "method": "grep SP2/DESIGN_ENCOUNTERS.md lines 312, 439, 546; grep -c in laneENC-tree's untracked src/domain/worldPulse/envoyChanceMeetingStage.js (read-only)",
+      "evidence": "DESIGN_ENCOUNTERS.md:312 '- **The Herald line** (§8): `chance_meeting_approach_exposed`, public…'; :439 '| `chance_meeting_exposed` | major · public · events |'; :546 '| 6 | Two public Herald kinds, `chance_meeting` (notable) and `chance_meeting_exposed` (major)'. laneENC-tree untracked envoyChanceMeetingStage.js: 'chance_meeting_exposed' 1 hit, 'chance_meeting_approach_exposed' 0 hits.",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "The ENC-3 stage in the dock spells the ruled token, so the mid-flight delivery landed."
+    },
+    {
+      "row": "§889.1",
+      "call": "889.1-(c) the Herald seam is pinned: ENC-4 exports ONE builder on faithReceipt(...)'s model; ENC-3 calls it once per outcome",
+      "claim": "A design ruling on the seam shape.",
+      "method": "SP/receipt-enc4.md:210-236 (A1)",
+      "evidence": "receipt-enc4.md:212 '**A1 — the mint site is ENC-3's file, so ENC-4 must expose one adapter, not nine call sites.**'; :215 'The shape I had planned, and which I recommend the chair pin for both…'.",
+      "verdict": "RATIFY",
+      "confidence": "PLAUSIBLE",
+      "note": "A ruling with no landed code yet (ENC-4 stopped); it adopts the lane's own recommendation. Nothing to refute on the tree."
+    },
+    {
+      "row": "§889.1",
+      "call": "889.1-(d) the lane's vetoable judgment accepted: dock carried another lane's untracked receipt residue; HEAD sealed; residue preserved byte-identically (cksum) outside the dock; proceeded",
+      "claim": "Preserve-and-proceed was the right call.",
+      "method": "SP/receipt-enc4.md:237-256; for-each-ref refs/preserve (horizondark-cars12); cksum of SP/horizondark-dock-residue/*",
+      "evidence": "receipt: 'HEAD was `43e063a70`; `git for-each-ref --contains` returns `refs/preserve/horizondark-cars12-2026-09-03` — every commit in the dock was already SEALED'; '1632035011 27256  HORIZON-DARK-CARLIST.md (dock == $ME copy) / 254230544 12200  receipt-horizondark.md'. Seal list: '43e063a70 refs/preserve/horizondark-cars12-2026-09-03'. My cksum of the residue dir: '1632035011 27256 …/HORIZON-DARK-CARLIST.md' and '254230544 12200 …/receipt-horizondark.md' — identical.",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": ""
+    },
+    {
+      "row": "§889.2",
+      "call": "889.2-SET-E-LAW: third instance of guard-in-Python/consequence-in-shell; fix is set -e at the head of any multi-step act; 'verify the card now carries both §889.1 findings'",
+      "claim": "A chair-process law; the card carries both §889.1 findings.",
+      "method": "grep HANDOFF_CURRENT.md:52,96; grep -n '889\\.2' ODQ; git log --oneline -- docs/OWNER_DECISION_QUEUE.md; git log -S 'THIRD INSTANCE OF ONE SHAPE' -- docs/FABLE_RETROVALIDATION_QUEUE.md",
+      "evidence": "HANDOFF_CURRENT.md:96 '⛔⛔ **§889.1 — TWO THINGS A SUCCESSOR MUST NOT LOSE.** **(1) ENC-4 IS STOPPED BEFORE ITS FIRST BYTE … **(2) A LIVE DEFECT IN LANDED CODE:** … `sovereignty_registry` is MISSING'; :52 '⛔ **THE GUARD AND THE CONSEQUENCE MUST LIVE IN THE SAME PLACE.** … `set -e` at the head of any mul…'. ODQ contains 0 lines matching '889\\.2'; ledger commits go cfb683546 (§889.1) → 836fde7e9 (§889.3) with nothing between; the §889.2 stratum text was committed in 01dcd57df '§889.1 (card): the §889.1 findings reach the live handoff card, which the ledger commit left behind' (FRQ +15, HANDOFF +2).",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "The verifiable claim (the card carries both findings) holds. Record-keeping gap: §889.2 exists as an FRQ section and a handoff law but has NO ledger row of that number — a successor grepping the ledger for §889.2 finds nothing."
+    },
+    {
+      "row": "§889.3",
+      "call": "889.3-SEAL: two committed lighting cars b6ca05958 (O-12) and f47433b32 (O-16) reachable from no ref; sealed at refs/preserve/lighting-rows-wip-2026-09-03 before anything else was touched; the law has paid out six times in one day",
+      "claim": "Unreferenced work was sealed first.",
+      "method": "for-each-ref refs/preserve | grep 2026-09-03; git log --oneline -3 f47433b32; for-each-ref --contains b6ca05958",
+      "evidence": "'f47433b32 refs/preserve/lighting-rows-wip-2026-09-03'; chain 'f47433b32 O-16: Founder recognition is lit…' → 'b6ca05958 O-12: the owner ruling that held the eight war sub-flags…' → '30c1667bc §889 register 5/5'; refs containing b6ca05958: lighting-rows-2026-09-03 and lighting-rows-wip-2026-09-03.",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "The seal exists and covers both cars. That they were reachable from NO ref at the moment of death, and the 'six times in one day' tally, are transcript claims not reconstructible from refs — PLAUSIBLE."
+    },
+    {
+      "row": "§889.3",
+      "call": "889.3-SALVAGE: the other three docks held 13, 2 and 0 dirty tracked paths; each copied byte-identically with a patch and MANIFEST to $ME/salvage-*/; one copy cmp-verified; no dock reverted",
+      "claim": "All in-flight work was preserved without mutating any dock.",
+      "method": "ls SP/salvage-*; head MANIFEST.txt files; find … -type f | wc -l; grep -rn cmp MANIFEST*; git -C laneENC-tree status --porcelain (now)",
+      "evidence": "salvage-enc3/MANIFEST.txt: 11 ' M' tracked paths + 2 '??' (subsystemRowsEncounters.js, envoyChanceMeetingStage.js) = 13 lines; salvage-nownull: 2 ' M' (graph.js, regionalNowThreading.test.js) plus a MANIFEST2.txt listing 12+ ' M' paths; salvage-srcprose: 0 tracked, 4 '??' receipts/ledgers; salvage-lighting: 2 ' M' + 2 '??'. Each dir has tracked.patch/staged.patch and a files/ tree (13/2/4/4 files). 'cmp' appears in no MANIFEST. laneENC-tree today: HEAD 30c1667bc, 13 porcelain lines, the same 11+2 set — still in place.",
+      "verdict": "AMEND",
+      "confidence": "CONFIRMED",
+      "note": "'13 dirty TRACKED paths' is 11 tracked-modified + 2 untracked. The cmp verification left no artefact (transcript-only). salvage-nownull's MANIFEST2/files2/tracked2.patch record a SECOND salvage the row does not mention. The 'no dock reverted' claim is confirmed for laneENC-tree by its unchanged dirt."
+    },
+    {
+      "row": "§889.3",
+      "call": "889.3-RESUME-BRIEF-LAW + CAP: resume briefs must open with 'THAT DIRT IS YOUR OWN WORK'; the ENC-4 lane spawned a recon child (five agents on a four cap); every resume brief now forbids subagents",
+      "claim": "Brief-level lessons from the mass death.",
+      "method": "grep -n -i 'recon\\|subagent\\|spawn' SP/receipt-enc4.md; ls SP/briefs",
+      "evidence": "receipt-enc4.md contains no 'subagent'/'spawn'/'recon child' text; SP/briefs holds brief-LIGHTFOLD-resume.md, brief-T13PRELAND-resume.md, brief-TAILFLAND-resume.md (resume-brief pattern exists).",
+      "verdict": "OUT-OF-SCOPE",
+      "confidence": "PLAUSIBLE",
+      "note": "Process rows; the recon-child overrun has no receipt on disk. Settle in the ENC-4 lane transcript (Agent tool calls) and the resume briefs' opening lines."
+    },
+    {
+      "row": "§889.3",
+      "call": "889.3-O10b (HIGH 8): NO RAISE REACHED, residual zero — three builds (base, dial-flipped, reverted control) each 675,764 B vs 676,000 ceiling, +236, identical content hash; the docs' +1,047 B was priced for a re-export block written, measured and NOT taken (livingContentLaw.js:79-87); payload rides a dynamic import (livingContentSeam.js:94); materializesLivingContent reads config not the dial",
+      "claim": "The delegated ceiling raise is not needed; the dial moves no engine byte.",
+      "method": "SP/receipt-lighting-rows.md:19-68; git show 30c1667bc: livingContentLaw.js 78-88, livingContentSeam.js 92-96, livingContentLawVersion.js 108-116",
+      "evidence": "receipt rows 1-3: '`engine-C9-_paJc.js` | **675,764** | 676,000 (strict `<`) | **+236**' ×3, 'BUILD_EXIT=0 all three', 'content hash is identical in all three builds (`C9-_paJc`)'. livingContentLaw.js:79-86 '⛔ AND IT IS DELIBERATELY NOT RE-EXPORTED FROM HERE. A convenience export … block was written first and MEASURED against the seam … the engine chunk grew by ~1,047 B on the day the payload is retained, against a 677 B ceiling margin.' livingContentSeam.js:94 'const mod = await import(\"./livingContentRoster.js\");'. livingContentLawVersion.js:112 'materializesLivingContent(config) { return resolveLivingContentLawVersion(config) === ROSTER_LIVING_CONTENT_LAW_VERSION; }'.",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "Source reads confirm the mechanism; the three build sizes are receipt-quoted (builds not re-run — and per §890's hazard a build in a dock with materialised node_modules would read falsely, so re-running here was refused). 'Identical content hash' is Vite's filename hash C9-_paJc, which is what the receipt measured."
+    },
+    {
+      "row": "§889.3",
+      "call": "889.3-NOWNULL-CENSUS: the estate is already built for a null stamp except the two regional seams; RegionImpact.createdAt is string|null; now:null is a 126-site idiom; the ledger's '32 further sites' measured as 20 outstanding",
+      "claim": "The now-null car is surgical, and the inherited figure was refused.",
+      "method": "SP/receipt-nownull.md:27-32,47; git show 30c1667bc:src/domain/region/graph.js:21",
+      "evidence": "receipt-nownull.md:27 '⚠ The DETERMINISM-LEDGER said \"32 further sites across src/store, src/components and src/lib\"'; :29 'already cured by the landed lane → **20 outstanding**. Reported as measured; the ledger figure was…'; :47 'The guard's own comment records `now: null` as a **126-site estate idiom** where consumers…'. graph.js:21 typedef fragment 'createdAt?: string|null'.",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "The compareCodepoint nullish-coercion and 'two prior-art writers' clauses were not checked — PLAUSIBLE; settle: git grep -n 'compareCodepoint' 30c1667bc -- src/domain/deterministicSort.js and the two writer sites named in receipt-nownull Census B."
+    },
+    {
+      "row": "§889.3",
+      "call": "889.3-ENC3-TWO-GATES: TWO gates above the drop pass (chanceEncountersEnabled and envoyDiplomacyEnabled); a world that lit both, deposited, then darkened the second keeps meetingMarkEvents forever",
+      "claim": "The ENC-3 recon found a second gate the chair's brief missed.",
+      "method": "SP/receipt-enc3.md:52-55; git grep for both flags and meetingMarkEvents at 30c1667bc -- src",
+      "evidence": "receipt-enc3.md:52-55 'So there are TWO gates above the drop pass, not one: `chanceEncountersEnabled` (which the ledger header accounts for) and `envoyDiplomacyEnabled` (which it does not). A world that lit both, deposited, then darkened `envoyDiplomacyEnabled` keeps `meetingMarkEvents` forever and the spatial namespace can never drain. Fixed in this car; proof below.' At 30c1667bc `chanceEncountersEnabled` appears in src only in comments/lists; `envoyDiplomacyEnabled: false` at simulationRules.js:756; meetingMarkEvents is written by envoyChanceMeetingLedger.js (applyMeetingMarkLedger/readMeetingMarkEvents).",
+      "verdict": "RATIFY",
+      "confidence": "PLAUSIBLE",
+      "note": "The receipt states it and the flag topology at the base is consistent, but the drop pass and its caller chain live in ENC-3's UNCOMMITTED stage (laneENC-tree untracked envoyChanceMeetingStage.js + dirty envoyPulse.js), which I did not trace. Settle: read salvage-enc3/tracked.patch (envoyPulse.js hunk) and files/src/domain/worldPulse/envoyChanceMeetingStage.js for the two gate reads."
+    },
+    {
+      "row": "§889.3",
+      "call": "889.3-FUNNEL-DOOR RULING: the lived-experience funnel door is UNOWNED (LIVES_SUBSYSTEM_ROWS empty; characterDriftEnabled absent from simulationRules.js) ⇒ ENCOUNTERS takes the door, records the claim in-file, later train extends",
+      "claim": "The door is unowned and ENCOUNTERS may take it.",
+      "method": "git show 30c1667bc: subsystemRowsLives.js:9-13,72; git grep characterDriftEnabled -- simulationRules.js; characterDrift.js:112-114; SP/receipt-enc3.md:130-150; sed -n 32407p ODQ (§890.1); grep FRQ line 2992",
+      "evidence": "Emptiness CONFIRMED: subsystemRowsLives.js:72 'export const LIVES_SUBSYSTEM_ROWS = Object.freeze([]);'; characterDriftEnabled in simulationRules.js: no match. But subsystemRowsLives.js:11 '…chartered to TE-VIRT-1, not a landing's to make\" (ODQ §868)'; characterDrift.js:113 'THE DOOR SEAM — the virtual flag TE-VIRT-1 owes a home to.' receipt-enc3.md:139 'So the emptiness the ruling rests on is real. I do NOT stop on the premise.' … 'the funnel door and the W-LIVES door are the SAME door'. ODQ §890.1 (32407): 'THE CHAIR'S FUNNEL-DOOR RULING IS WITHDRAWN — THE LANE REFUSED IT, BROUGHT EVIDENCE, AND WAS RIGHT … all three describe a RESERVATION, not an absence of an owner.'",
+      "verdict": "REVERSE",
+      "confidence": "CONFIRMED",
+      "note": "The antecedent (emptiness) is real; the inference (unowned) is wrong — the emptiness is a landed, test-enforced reservation for TE-VIRT-1. The chair itself withdrew the ruling at §890.1, but the §889.3 stratum section carries no supersession mark, so a reader of §889.3 alone would act on a withdrawn ruling."
+    },
+    {
+      "row": "§889.3",
+      "call": "889.3-SRCPROSE: 1,458 em dashes in src/ (not ~1,516); 688 outside every guard; 27 byte-twins reconciled as 28 across five owning files",
+      "claim": "The lane corrected the chair's figures twice.",
+      "method": "grep SP/receipt-src-prose.md:14,48,101,123",
+      "evidence": "receipt-src-prose.md:14 '| the guard's OWN char tokenizer (`voiceMechanics.test.js` `stringLiteralContents`) | **1,458** |'; :48 '**688 of 1,458 sit outside every guard.**'; :101 'The predecessor refused 28 rows because `faithKindPools.walker.test.js:168` asserts byte equality.'; :123 '## THE 28 BYTE-TWINS — PAIRED BY TEXT, 28/28, INDEPENDENTLY OF THE LEDGER'.",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "Receipt-read; the 1,458 count is by the guard's own tokenizer, which is the right instrument. Not re-run."
+    }
+  ],
+  "beyond": [
+    "§888 CONTRADICTS THE CHAIR'S OWN EARLIER ROWS: §884 (ODQ 32374) diagnosed the createdAt wall-clock fallthrough at wizardNews.js:552, measured it (784/200,000 = 0.392%), named the test-side home (fieldBattleRegion.test.js:108-110) and deferred it; §886 and §887 both carry 'STILL OWED: the createdAt wall-clock fallthrough and its five siblings' and §887 calls it 'this gate's declared known-red'; brief-REGISTRY.md:27 assigned that lane to it. §888's '⭐⭐⭐ living undetected / two lanes independently / strongest evidence' framing should be replaced with 'a declared, homed deferral rediscovered blind by ENC-1's census lane and closed by the lane briefed for it'.",
+    "§888 'cured at cause here' is test-side (b6822dcae threads a stamp into the arm at the §884 home); the cause (`now: null` falling through `||`) closed in §889 at efed4ba91 and 3c2410be2. The two rows should cross-reference.",
+    "§889.3's funnel-door ruling was WITHDRAWN at §890.1 (ODQ 32407; FRQ line 2992) — the §889.3 stratum section and the ledger row carry no supersession mark.",
+    "§888 lighting FROM figures 2505/370/2134/22716/6110 (stratum and ledger 32399) are a transcription error: the committed baseline at f12360185 and register car f4cc5cb7d both say 2505/370/2135/22716/6114.",
+    "§888 re-announces the §886 starvation-signature amendment as its own; the amended wording ('a RESOURCE failure rather than an ASSERTION failure on a test FOREIGN to the consist') was already written in §887.2 (ODQ 32397), unchanged by the §888 commit.",
+    "§889.2 has no ledger row: ODQ contains no '889.2', no ledger commit sits between cfb683546 (§889.1) and 836fde7e9 (§889.3); its text lives only in the FRQ (committed under 01dcd57df '§889.1 (card)') and HANDOFF_CURRENT.md:52.",
+    "The owner's fill-in sheet $SP/ENC4-TYPED-HOLES-FOR-THE-VOICE-SITTING.md still names the first Herald kind `chance_meeting` (0 occurrences of `chance_meeting_recorded`) — it predates ruling §889.1(a) and contradicts it; §889.1 and §890 both point the owner at that sheet.",
+    "The §889.1 sovereignty probe-with-control has NO captured receipt in SP (receipt-enc4.md contains no 'sovereignty'/'sectionAuthority' text; msg-8891.txt is the ledger draft). My probe at 30c1667bc now supplies one: sovereignty DROPPED, envoy_registry and war_rulings_registry survive. Also the 1-of-11 module-eval census has no on-disk table; spot-checks hold.",
+    "The brief's path for the sovereignty search was wrong: wizardNews.js is src/domain/region/wizardNews.js (not worldPulse/); the cure is 7733e064e in §890's train.",
+    "The brief's 'expect 118' for a plain `.fork(` grep is the guard's FORK_LITERAL_RE count; a plain grep at 30c1667bc gives 133 lines (11 comment-leading). Future retrovalidators should count with the guard's regex.",
+    "§889.3's enc3 salvage is 11 tracked-modified + 2 untracked (stratum: '13 dirty tracked paths'); no MANIFEST records the `cmp` verification; salvage-nownull carries a MANIFEST2/files2/tracked2.patch second salvage the row does not mention.",
+    "The REGISTRY lane's determinism receipt (the 979/200,000 = 0.489% figure) is filed under $SP/salvage-lighting/files/receipt-determinism.md — misfiled under the lighting salvage; a successor looking for it beside receipt-nownull.md will not find it.",
+    "§889.1's stratum omits the third live use of the string: envoyChanceMeeting.js:585/613/860 mint ids `chance_meeting:${key}` (receipt-enc4 FINDING 3 lists it).",
+    "§888 says the two lanes converged 'on the same afternoon'; b6822dcae is timestamped 2026-09-03 06:53:01 -0400 (morning local; gate-889 started 12:34Z = 08:34 local)."
+  ],
+  "chair_errors": [
+    "CONFIRMED: §888's headline framing (unknown ~0.45% die; two independent discoveries; 'strongest evidence this program has produced') contradicts the chair's own §884/§886/§887 rows and the REGISTRY brief, which recorded, rated, homed and assigned the same defect.",
+    "CONFIRMED: §888 (stratum and ledger 32399) mis-transcribes the lighting FROM figures (2134/6110 for 2135/6114).",
+    "CONFIRMED: §889.3 ruled the funnel door UNOWNED on a verified antecedent and a wrong inference; withdrawn by the chair at §890.1, but §889.3 was never marked superseded.",
+    "CONFIRMED: §888 presents the §886 starvation-signature amendment as new when §887.2 already carried it verbatim.",
+    "CONFIRMED (record-keeping): §889.2 was numbered as a ledger section but never given a ledger row; and the ENC-4 holes sheet was not updated after ruling §889.1(a).",
+    "NOT INDEPENDENTLY CONFIRMABLE (self-reported, transcript-only): the sed-patched wrapper launched after a failed sh -n; the assert-after-write merge; the handoff splice committed after a refused write."
+  ],
+  "commands": [
+    "mkdir -p …/walk/S16 && printf '{\"slice\": \"S16\", \"status\": \"PARTIAL\", \"calls\": []}' > …/walk/S16.json",
+    "sed -n '915,1046p' …/stratum/full.md",
+    "sed -n '32399p;32401p;32403p;32405p;32415p;32407p;32374p;32390p;32393p;32395p;32397p;32359p;32363p' docs/OWNER_DECISION_QUEUE.md (cut); grep -n '889\\.2' docs/OWNER_DECISION_QUEUE.md",
+    "git log --format='%h %p %s' f12360185..bbba1be24 ; bbba1be24..30c1667bc ; git diff --shortstat (both ranges); git rev-list --count bbba1be24..30c1667bc",
+    "git for-each-ref refs/preserve --format='%(objectname:short) %(refname)' | grep 2026-09-0 ; git for-each-ref --contains b6ca05958 ; git log --oneline -3 f47433b32",
+    "git grep -n '\\.fork(' 30c1667bc -- src | wc -l (=133) ; git grep -o -P '<FORK_LITERAL_RE>' 30c1667bc -- src | wc -l (=118) ; comment-excluded (=122) ; at dfcc8eb72/3702af0a2/efed4ba91/bbba1be24 ; git grep -n willed-leash-end 30c1667bc -- src ; git grep -n '\\.fork(' 30c1667bc -- src | grep -c epoch",
+    "git show 30c1667bc:<path> | sed -n … for corruptionWeb.js (600-684, 828-833, 885-903), corruptionLeash.js 66-72, envoyChanceMeetingLedger.test.js 165-168, heraldRouting.js 607-627, wizardNews.js (17-20, 613-660, 700-712, 786-1160 exports, 940-958), sovereigntyNews.js 466-471 + grep pool, commercialReasonsNews.js 70-90, grammarNews.js grep pool, kindPoolWalker.js 54-72, bandFamilies.js 75, subsystemRowsLives.js 9-13/72, characterDrift.js 112-114, livingContentLaw.js 78-88, livingContentSeam.js 92-96, livingContentLawVersion.js 108-116, graph.js:21, deityStanceLane.js 149-151/349, tests/kernel/prngForkLabelDelimiter.test.js (grep), tests/lint/testRatchet.test.js (grep), scripts/check-test-ratchet.mjs (grep), characterDrift.test.js@f4cc5cb7d 541-631",
+    "git grep -n 'chance_meeting' / 'advanceWilledLeashEnds' / 'FLOOR_BY_SIGNIFICANCE' / 'LIVES_SUBSYSTEM_ROWS' / 'characterDriftEnabled' / 'materializesLivingContent' / 'meetingMarkEvents' / 'chanceEncountersEnabled|envoyDiplomacyEnabled' / 'footholdCooldownKey' / 'npc_${' / 'sentinel|unmeasur' 30c1667bc|bbba1be24 -- src|scripts|tests",
+    "git show -s --format=%B for 394d758ee, 36aafe57d, 5d34dfce5, b6822dcae, dfcc8eb72, f4cc5cb7d, 3c2410be2, d32bb8832 ; per-car grep -c '^Seat:' over both trains ; git show --stat for 5d34dfce5, b6822dcae, 7733e064e, efed4ba91, 3c2410be2, efebc7e5b, cfb683546, 836fde7e9, 01dcd57df ; git show b6822dcae -- tests/domain/fieldBattleRegion.test.js ; git show 36aafe57d | grep DEFER_CEILING ; git show 16b603ebd -- docs/OWNER_DECISION_QUEUE.md | grep '^[-+]§' (+ node byte compare of the §887.2 pair)",
+    "git log --oneline -S sovereignty_registry 30c1667bc..ca651d54b -- src/ ; git log -S 'THIRD INSTANCE OF ONE SHAPE' -- docs/FABLE_RETROVALIDATION_QUEUE.md ; git log --all --grep='889\\.2' ; git log --oneline -10 -- docs/OWNER_DECISION_QUEUE.md",
+    "git show <sha>:tests/lint/.lighting-census-baseline.json|.tuning-inventory.json|.prose-numerics-baseline.json|.news-voice-baseline.json, scripts/.test-ratchet-baseline.json|.observed-shape-readers-baseline.json at f12360185/bbba1be24/30c1667bc piped to scratch node summarisers (summ.js; totals; voiceMechanics magnitudes)",
+    "node …/walk/S16/closure3.js|closure4.js <repo> f4cc5cb7d src/domain/worldPulse/envoyChanceMeeting.js [src/domain/npc/characterConsumers.js] (read-only ESM closure walk over `git show`) ; node closure.js … 30c1667bc src/domain/region/wizardNews.js <laneENC-tree dirty paths> (closure 39, intersection [])",
+    "node …/walk/S16/probe.mjs …/laneENC-tree (imports wizardNews.js at HEAD 30c1667bc; appendWizardNewsEntries with sovereignty_registry / envoy_registry / war_rulings_registry entries) — with `git -C laneENC-tree status --porcelain | md5` before and after (45b7f7cc194fee908ad0b4e67013e4b3 both) and rev-parse HEAD",
+    "grep/sed over SP receipts: receipt-enc4.md (52, 90-132, 133-151, 160-215, 237-275, 299-311), receipt-enc1-census.md (12-42), receipt-enc1cure.md (grep), receipt-lighting-rows.md (19-68), receipt-enc3.md (24-70, 130-150), receipt-nownull.md (27-47), receipt-src-prose.md (14-123), receipt-deskwiring.md (grep), salvage-lighting/files/receipt-determinism.md (1-30, 94-100, 232-244), msg-8891.txt (cat), gate-888.log / gate-889.log (grep), run-gate-888.sh / run-gate-889.sh (cat), briefs/brief-REGISTRY.md (grep), ENC4-TYPED-HOLES-FOR-THE-VOICE-SITTING.md (grep), SP2/DESIGN_ENCOUNTERS.md (grep 'four more', spellings)",
+    "ls/head/find/cksum over SP/salvage-{enc3,lighting,nownull,srcprose}/ (MANIFEST*.txt, files/) and SP/horizondark-dock-residue/ ; grep -rl sovereignty_registry|envoy_registry|GRAMMAR|true-by-accident across SP/SP2 excluding docks",
+    "grep -n over docs/HANDOFF_CURRENT.md (28, 52, 92, 96) and docs/FABLE_RETROVALIDATION_QUEUE.md (withdrawn marks; §890.1 at 2992)",
+    "git -C …/laneENC-tree status --porcelain (13 lines, unchanged set) — no other dock was entered; no git state was mutated anywhere"
+  ]
+}

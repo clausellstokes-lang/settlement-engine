@@ -1,0 +1,98 @@
+[preflight] REGISTER PRE-FLIGHT
+  base ca651d54b  §890 register 2/2: the test ratchet refrozen — files unmoved as predicted, t
+  tip  4233031ba  §891 register 6/6: the edge bundles rebuild over committed inputs, by the se
+  consist: 17 commit(s), 65 path(s) changed
+
+── LIGHTING CENSUS  (tests/lint/.lighting-census-baseline.json)
+   ▸ THE FIVE FIGURES [DERIVING] — inputs: tests/**/*.test.{js,jsx} — and NOTHING else
+     (verified at f5a6c3bbf: measureCensus() in the walker reads only TEST_FILES, and parkReasonsFor(src) / liveTitlesIn(src) / liveSuiteTitlesIn(src) each take a file body and nothing more. The walker is itself a .test.js file, so a change to the grammar is a change to this input set.)
+     CERTAIN: this input set CHANGED (ef79cf26b5efa3e8 -> da91d7b9447abf77): +5 added, -0 removed, ~11 modified.
+              + tests/build/customContentCharsetLazy.test.js
+              + tests/data/namingDataCharset.test.js
+              + tests/domain/customContentCharset.test.js
+              + tests/domain/demographicReading.test.js
+              + tests/domain/demographicsEnvelope.test.js
+              ~ tests/domain/demographicsCure.test.js
+              ~ tests/domain/demographicsRates.test.js
+              ~ tests/domain/demographicsWorldsHand.test.js
+              ~ tests/domain/impactKindWalkers.test.js
+              ~ tests/domain/regionalNowThreading.test.js
+              ~ tests/lint/dossierMountRegistry.walker.test.js
+              ~ tests/lint/economyReadModelCoverage.walker.test.js
+              ~ tests/lint/tuningRegister.walker.test.js
+              ~ tests/lint/worldGenerationClockSeam.walker.test.js
+              ~ tests/scripts/readerCorpusManifest.test.js
+     CERTAIN: files 2510 -> 2515  ⇐ MOVES   [count of tests/**/*.test.{js,jsx}; base self-check PASSED]
+     parked         UNKNOWN — requires the suite  (needs the espree grammar in sovereigntyLightingContract.walker.test.js)
+     credited       UNKNOWN — requires the suite  (needs the espree grammar in sovereigntyLightingContract.walker.test.js)
+     titles         UNKNOWN — requires the suite  (needs the espree grammar — a title counts only if its opener resolves)
+     suiteTitles    UNKNOWN — requires the suite  (needs the espree grammar — same resolution rules as titles)
+   REFROZEN IN THIS CONSIST: YES
+   REFREEZE CURRENCY: CURRENT — the DERIVING inputs at measuredAtSha 3d3ad217b are byte-identical to the tip's
+   VERDICT: [OK] WILL MOVE — REFROZEN, CURRENT
+
+── TEST RATCHET  (scripts/.test-ratchet-baseline.json)
+   ▸ THE COUNTS [DERIVING] — inputs: tests/**/*.test.{js,jsx} except tests/build/**
+     (the baseline's own _doc scopes the source phase to all tests except tests/build/**)
+     CERTAIN: this input set CHANGED (697de5b9bea8a23f -> d7398b6f75dbb90d): +4 added, -0 removed, ~11 modified.
+              + tests/data/namingDataCharset.test.js
+              + tests/domain/customContentCharset.test.js
+              + tests/domain/demographicReading.test.js
+              + tests/domain/demographicsEnvelope.test.js
+              ~ tests/domain/demographicsCure.test.js
+              ~ tests/domain/demographicsRates.test.js
+              ~ tests/domain/demographicsWorldsHand.test.js
+              ~ tests/domain/impactKindWalkers.test.js
+              ~ tests/domain/regionalNowThreading.test.js
+              ~ tests/lint/dossierMountRegistry.walker.test.js
+              ~ tests/lint/economyReadModelCoverage.walker.test.js
+              ~ tests/lint/tuningRegister.walker.test.js
+              ~ tests/lint/worldGenerationClockSeam.walker.test.js
+              ~ tests/scripts/readerCorpusManifest.test.js
+     CERTAIN: totalFiles 2458 -> 2462  ⇐ MOVES   [count of tests/**/*.test.{js,jsx} outside tests/build/**; base self-check PASSED]
+     ⛔ CERTAIN: the register at the tip says totalFiles=2458 but the tip's tree derives 2462. That figure is WRONG for this tip.
+     totalTests     UNKNOWN — requires the suite  (needs collection — the runner must enumerate every registered test)
+   ▸ THE FAILURE CENSUS AND THE MAGNITUDES [INFLUENCING] — inputs: THE WHOLE REPO
+     (`entries` records which tests FAIL and at what magnitude, so a src-only consist can move this register with no test file touched at all. Declaring only the test corpus here would produce a FALSE CLEAR.)
+     CERTAIN: this input set CHANGED (e8456193dbcb7dfa -> f88c4ca5cd4db44c): +16 added, -0 removed, ~48 modified.
+              + scripts/review/reader-backlog.mjs
+              + scripts/review/reader-corpus.mjs
+              + scripts/review/readerCorpus.mjs
+              + scripts/review/readerStoreStub.mjs
+              + src/components/new/tabs/EconomicsGlance.jsx
+              + src/domain/content/customContentCharset.generated.js
+              + src/domain/content/customContentCharset.js
+              + src/domain/display/demographicReading.js
+              + src/utils/jsPdfText.js
+              + supabase/functions/_shared/customContentCharset.generated.ts
+              ~ schema/custom-content.manifest.json
+              ~ scripts/.observed-shape-readers-baseline.json
+              ~ scripts/generate-custom-content-manifest.mjs
+              ~ scripts/mutation-coverage-manifest.json
+              ~ scripts/mutation-sweep.sh
+              ~ scripts/soak/tripwires.mjs
+              ~ src/components/new/tabs/EconomicsTab.jsx
+              ~ src/components/region/RegionalCausalChainViewer.jsx
+              ~ src/components/region/RegionalGraphSummary.jsx
+              ~ src/components/region/RegionalImpactInbox.jsx
+              ... and 34 more
+     entries        UNKNOWN — requires the suite  (needs execution — it is a census of which tests fail)
+     skippedCeiling UNKNOWN — requires the suite  (needs execution)
+   REFROZEN IN THIS CONSIST: NO
+   ⛔ REFREEZE COMMAND: sh scripts/gate-mutex.sh --run -- node scripts/check-test-ratchet.mjs --update
+   VERDICT: [BLOCKER] WILL MOVE — NOT REFROZEN
+
+── OTHER REGISTERS DISCOVERED IN THE TREE: 28 (inputs UNDECLARED here)
+   touched by this consist: 2
+      ~ scripts/.observed-shape-readers-baseline.json
+      ~ tests/lint/.prose-numerics-baseline.json
+   Each is UNKNOWN — requires the suite. They are listed so that a register added
+   after this script was written is loudly unanalysed, never silently invisible.
+
+══════ PRE-FLIGHT VERDICT ══════
+  OK       LIGHTING CENSUS   WILL MOVE — REFROZEN, CURRENT
+  BLOCKER  TEST RATCHET      WILL MOVE — NOT REFROZEN
+
+[preflight] ⛔ BLOCKER — 1 REGISTER(S) OWE A REFREEZE BEFORE YOU GATE: TEST RATCHET.
+            Their inputs moved and nothing in this consist refroze them.
+            Gating now spends a full suite to be told exactly this.
