@@ -49,6 +49,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join, relative } from 'node:path';
 import { describe, expect, test } from 'vitest';
 
+import { codeOnly } from '../helpers/codeOnlySource.js';
 import { mustExtract } from '../helpers/sourceContract.js';
 import { writeShrinkOnlyBaseline } from '../helpers/shrinkOnlyBaseline.js';
 import {
@@ -647,5 +648,150 @@ describe('C3 the room — one fact, one sentence', () => {
     // translated rows, so every position may render one and no position competes for it;
     // putting `detail` in this vocabulary would invite a row that renders nothing at all.
     expect(RUNG_VOCABULARY.has('detail')).toBe(false);
+  });
+});
+
+/**
+ * THE PUBLIC-DOSSIER GUARD — the structural cure for a leak that was patched twice.
+ *
+ * WHY THIS EXISTS AS A GUARD RATHER THAN A THIRD GATE. `publicDossier` is
+ * `readOnly && !saveId` (OutputContainer.jsx), i.e. a shared gallery dossier with no owning
+ * save — a FREE, ANONYMOUS viewer. §885.3 rules dossier corpus prose a PAID surface, so a
+ * desk must not draw there. That gate was added by hand for `economics`, then again by hand
+ * for `power`. Two hand-fitted instances of one rule is the point at which the third ships
+ * broken: only four of the router's fourteen tabs receive the flag at all, so a desk landing
+ * on any of the other ten would leak SILENTLY — a free viewer simply sees prose, and nothing
+ * in the estate reads rendered output.
+ *
+ * DERIVED FROM THE REGISTRY SO IT CANNOT ROT. The mounted tab set and mounted desk set both
+ * come from DOSSIER_MOUNTS, never a hand list, so a car that adds a row for a new tab is
+ * measured by this arm on the same commit that adds the row.
+ *
+ * ⚠ THE READING DISCIPLINE, AND IT IS THIS FILE'S OWN LESSON RE-LEARNED. `codeOnly` blanks
+ * comments AND string CONTENTS, so a tab id — which lives inside a quoted `case 'power':` —
+ * is blanked by it, and an import path is blanked entirely. A first cut of this guard read
+ * the tab id out of `codeOnly` and every arm failed at once. The correct discipline, and the
+ * reason `codeOnly` preserves offsets: LOCATE in the raw source, VERIFY at the same offset
+ * in the stripped source. A `case 'x':` inside a comment has its whole span blanked, and one
+ * inside a string literal has its contents blanked, so neither survives the offset check
+ * while a real branch does.
+ *
+ * ⚠ WHAT ARM 2 PROVES AND WHAT IT DOES NOT, stated rather than implied. It is a PROXIMITY
+ * test — the desk call must sit within 400 characters of a `publicDossier` read — which is a
+ * structural claim about one expression, not a dataflow proof. It cannot catch a caller that
+ * reads the flag and ignores it. It CAN catch the defect that actually shipped twice: a desk
+ * wired on a tab whose component never received the flag. A guard that overstated itself
+ * would be worse than one that says where it stops.
+ */
+describe('THE PUBLIC-DOSSIER GUARD — a mounted desk never draws for a free viewer', () => {
+  const ROUTER_RAW = readFileSync(join(ROOT, ROUTER), 'utf8');
+  const ROUTER_CODE = codeOnly(ROUTER_RAW);
+  const MOUNTED_TABS = [...new Set(DOSSIER_MOUNTS.map((row) => row.tab))].sort();
+  const MOUNTED_DESKS = [...new Set(DOSSIER_MOUNTS.map((row) => row.desk))].sort();
+
+  /**
+   * The offset of a REAL `case '<tab>':` branch — located in raw, verified in stripped.
+   * @param {string} tab @param {string} raw @param {string} code @returns {number}
+   */
+  function caseOffset(tab, raw, code) {
+    const needle = `case '${tab}':`;
+    for (let i = raw.indexOf(needle); i >= 0; i = raw.indexOf(needle, i + 1)) {
+      // A commented branch has its whole span blanked; one inside a string literal has its
+      // contents blanked. Only a real branch still reads `case '` at this exact offset.
+      if (code.startsWith("case '", i)) return i;
+    }
+    return -1;
+  }
+
+  /**
+   * One tab's case block, returned as STRIPPED source so the containment test below reads
+   * an identifier in code and never a mention in prose.
+   * @param {string} tab @param {string} [raw] @param {string} [code] @returns {string}
+   */
+  function routerCaseBlock(tab, raw = ROUTER_RAW, code = ROUTER_CODE) {
+    const start = caseOffset(tab, raw, code);
+    if (start < 0) return '';
+    const next = code.indexOf("case '", start + 6);
+    return code.slice(start, next < 0 ? code.length : next);
+  }
+
+  const COMPONENT_FILES = walkSources(COMPONENTS);
+
+  /**
+   * The file(s) that CALL one desk. The call is read from stripped source (a call cannot
+   * execute from inside a literal); the import is confirmed in raw, because the path IS a
+   * literal and `codeOnly` blanks it by design.
+   * @param {string} desk @returns {string[]}
+   */
+  function deskCallSites(desk) {
+    const fn = `${desk}StateProse`;
+    return COMPONENT_FILES.filter((path) => {
+      const raw = readFileSync(path, 'utf8');
+      return raw.includes(`stateProse/${fn}.js`) && codeOnly(raw).includes(`${fn}(`);
+    });
+  }
+
+  test('guard the guard: the case reader takes a real branch and skips prose and literals', () => {
+    const raw = [
+      "// case 'ghost': a comment, and it must not be found",
+      'const s = "case \'phantom\':";',
+      "switch (t) { case 'real': return <X publicDossier={publicDossier} />;",
+      "  case 'bare': return <Y />; }",
+    ].join('\n');
+    const code = codeOnly(raw);
+    expect(caseOffset('ghost', raw, code), 'a commented branch was taken for a real one').toBe(-1);
+    expect(caseOffset('phantom', raw, code), 'a branch inside a string was taken').toBe(-1);
+    expect(caseOffset('real', raw, code)).toBeGreaterThan(-1);
+    expect(routerCaseBlock('real', raw, code)).toContain('publicDossier');
+    // The negative the arms depend on: an ungated block is DISTINGUISHABLE, or arm 1 is vacuous.
+    expect(routerCaseBlock('bare', raw, code)).not.toContain('publicDossier');
+  });
+
+  test('ARM 1: every tab carrying a mount row receives publicDossier from the router', () => {
+    expect(MOUNTED_TABS.length).toBeGreaterThan(0);
+    for (const tab of MOUNTED_TABS) {
+      const block = routerCaseBlock(tab);
+      expect(block, `the router has no real case block for the mounted tab '${tab}'`).not.toBe('');
+      expect(
+        block,
+        `TAB '${tab}' MOUNTS A STATE-PROSE DESK AND DOES NOT RECEIVE publicDossier.`
+        + ' A public gallery dossier is a free, anonymous viewer and §885.3 rules corpus'
+        + ' prose a PAID surface. Pass publicDossier={publicDossier} to this tab and gate'
+        + ' the desk call on it, the way EconomicsTab and PowerTab do.',
+      ).toContain('publicDossier');
+    }
+  });
+
+  test('ARM 2: every mounted desk has exactly one caller, and that caller gates on the flag', () => {
+    expect(MOUNTED_DESKS.length).toBeGreaterThan(0);
+    for (const desk of MOUNTED_DESKS) {
+      const sites = deskCallSites(desk);
+      // Exactly one caller is what keeps the gate auditable: two call sites are two places
+      // to forget, and would also break the one-position reading the registry assumes.
+      expect(sites.map((p) => relative(ROOT, p)), `desk '${desk}' call sites`).toHaveLength(1);
+      const code = codeOnly(readFileSync(sites[0], 'utf8'));
+      const call = code.indexOf(`${desk}StateProse(`);
+      expect(call).toBeGreaterThan(-1);
+      expect(
+        code.slice(Math.max(0, call - 400), call),
+        `desk '${desk}' is called in ${relative(ROOT, sites[0])} with no publicDossier read`
+        + ` in the same expression. Gate it: const deskProse = publicDossier ? <rungs null>`
+        + ` : ${desk}StateProse(...)`,
+      ).toContain('publicDossier');
+    }
+  });
+
+  test('NON-VACUITY: an ungated tab and an ungated desk call are both convicted', () => {
+    const ungatedRouter = "switch (t) { case 'power': return <PowerTab settlement={s} />; }";
+    expect(routerCaseBlock('power', ungatedRouter, codeOnly(ungatedRouter)))
+      .not.toContain('publicDossier');
+    const ungatedCaller = codeOnly([
+      "import { powerStateProse } from '../../../domain/display/stateProse/powerStateProse.js';",
+      'const deskProse = powerStateProse(s, { seed });',
+    ].join('\n'));
+    const at = ungatedCaller.indexOf('powerStateProse(');
+    expect(ungatedCaller.slice(Math.max(0, at - 400), at)).not.toContain('publicDossier');
+    // The SHIPPED tree is the positive control standing beside both negatives.
+    expect(routerCaseBlock('power')).toContain('publicDossier');
   });
 });

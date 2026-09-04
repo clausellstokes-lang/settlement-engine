@@ -25,10 +25,14 @@ import { describe, expect, it } from 'vitest';
 import {
   SLOT_FILL_SHAPES,
   SLOT_FILL_TABLES,
+  governingSharePoolKey,
   legitimacyBandPoolKey,
   legitimacyLensPoolKey,
   powerStateProse,
+  stabilityLensPoolKey,
+  stabilityPoolKey,
 } from '../../src/domain/display/stateProse/powerStateProse.js';
+import { likelyFutureFacts } from '../../src/domain/simulationSpine.js';
 import { legitimacyBandFor } from '../../src/generators/factionDynamics.js';
 import {
   parseSlotShapes, mergeSlotShapes, fillShapeViolation,
@@ -40,6 +44,7 @@ import {
 
 const BLOCK = 'DS-POW-1';
 const POOLS = DOSSIER_STATE_PROSE_POWER[BLOCK].pools;
+const POWER_POOLS2 = DOSSIER_STATE_PROSE_POWER['DS-POW-2'].pools;
 
 const DOCS = resolve(import.meta.dirname, '../../docs/content');
 const SHAPES = mergeSlotShapes([
@@ -334,5 +339,217 @@ describe('the power desk — THE PROMISE and the mount wiring', () => {
     expect(asGlance.provenance).toBeNull();
     // An unmounted position is silence, not a fallback to speech.
     expect(drawnAtMount('power.notAPosition', drawn.legitimacyBanner)).toBeNull();
+  });
+});
+
+/**
+ * DS-POW-2 — the stability ladder. The arms below are shaped by what the PRODUCER actually
+ * emits (governanceNarrative.js's authored labels), not by the pool keys alone: the whole
+ * lesson of this file is that a suite can be green over a corpus no real state reaches.
+ */
+const POW2 = 'DS-POW-2';
+
+/** Every stability label `governanceNarrative.js` can emit, and the pool each must reach. */
+const REAL_STABILITY = Object.freeze([
+  ['Stable', 'stable matched'],
+  ['Stable (theocratic governance)', 'stable matched'],
+  ['Unstable (pervasive organized crime)', 'unstable matched'],
+  ['Unstable — criminal governance', 'unstable matched'],
+  ['Volatile — power is available to whoever moves first', 'unstable matched'],
+  ['Critical (active siege — survival priority)', 'siege matched'],
+  ['Desperate — hunger is eroding order', 'Desperate matched'],
+  // ⛔ THE REGRESSION PIN. A substring test for `stable` MATCHES "no stable governing
+  // authority" and would print "The hall is settled" about a settlement that has none.
+  ['Fractured — no stable governing authority', 'no token matched: unclassified (the plain-description floor)'],
+  ['Shaken — institutional trust collapsed', 'no token matched: unclassified (the plain-description floor)'],
+  ['Tense (external threat)', 'no token matched: unclassified (the plain-description floor)'],
+  ['Anxious — disease is overriding normal authority', 'no token matched: unclassified (the plain-description floor)'],
+  ['Suppressed (under occupation — resistance simmers)', 'no token matched: unclassified (the plain-description floor)'],
+  ['Ordered (strong military presence)', 'no token matched: unclassified (the plain-description floor)'],
+  ['Vulnerable (prosperous but underdefended)', 'no token matched: unclassified (the plain-description floor)'],
+]);
+
+/** A settlement carrying the DS-POW-2 slice. */
+function ruled(stability, { factions = null, recentConflict = null, governingName = 'Merchant Council' } = {}) {
+  return {
+    name: 'Thornwall',
+    _seed: 'seed-pow2',
+    powerStructure: { stability, governingName, factions, recentConflict, publicLegitimacy: null },
+  };
+}
+
+const DOMINANT_FACTIONS = Object.freeze([
+  Object.freeze({ faction: 'Merchant Council', isGoverning: true, power: 60 }),
+  Object.freeze({ faction: 'Craft Guilds', power: 20 }),
+]);
+// NARROW needs the governing faction to LEAD without outweighing the rest combined —
+// otherwise DOMINANT correctly fires first, which is what the first draft of this fixture
+// got wrong. 42 leads 40 by inside the 15% margin, and 40 + 20 out-weighs 42.
+const NARROW_FACTIONS = Object.freeze([
+  Object.freeze({ faction: 'Merchant Council', isGoverning: true, power: 42 }),
+  Object.freeze({ faction: 'Craft Guilds', power: 40 }),
+  Object.freeze({ faction: 'Arcane Orders', power: 20 }),
+]);
+
+describe('DS-POW-2 — the ladder is the producer\'s, and the substring bug stays dead', () => {
+  it('every real stability label reaches the pool the corpus wrote for it', () => {
+    for (const [label, key] of REAL_STABILITY) {
+      expect(stabilityPoolKey(label), `label ${label}`).toBe(key);
+      expect(POWER_POOLS2[key], `no such pool: ${key}`).toBeTruthy();
+    }
+  });
+
+  it('⛔ REGRESSION: a negated token never matches — "no stable governing authority"', () => {
+    // The exact defect, pinned from both sides.
+    expect(stabilityPoolKey('Fractured — no stable governing authority'))
+      .not.toBe('stable matched');
+    // And a genuinely stable town still matches, or the pin is just a broken matcher.
+    expect(stabilityPoolKey('Stable')).toBe('stable matched');
+  });
+
+  it('⚠ the CANONICAL reader carries that same substring defect — raised, not patched here', () => {
+    // This is a defect in a SHIPPED canonical reader (simulationSpine.likelyFutureFacts):
+    // it reports `continuity` for a settlement with no governing authority. Curing it
+    // changes narrative output on lit surfaces for existing worlds, so it is the chair's,
+    // not this desk's. Pinned so the day it IS cured, this arm reds and says so.
+    expect(likelyFutureFacts({ powerStructure: { stability: 'Fractured — no stable governing authority' } }).arc)
+      .toBe('continuity');
+  });
+
+  it('the desk REFINES the canonical arc rather than forking it', () => {
+    // Every token this desk distinguishes must fall inside the canonical bucket that
+    // contains it, so the two can differ in GRAIN but never about a settlement.
+    const ARC_OF_POOL = {
+      'stable matched': 'continuity',
+      'unstable matched': 'test',
+      'siege matched': 'crisis',
+      'critical matched': 'crisis',
+      'Desperate matched': 'crisis',
+    };
+    for (const [label, key] of REAL_STABILITY) {
+      const arc = likelyFutureFacts({ powerStructure: { stability: label } }).arc;
+      if (!ARC_OF_POOL[key]) continue;
+      // The Fractured label is the ONE place the canonical reader is wrong; it is pinned
+      // above and excluded here rather than silently tolerated.
+      if (label.startsWith('Fractured')) continue;
+      expect(arc, `${label} -> ${key}`).toBe(ARC_OF_POOL[key]);
+    }
+  });
+
+  it('⚠ `critical matched` has NO producer today — declared, and pinned so it cannot hide', () => {
+    // The only label carrying either token is `Critical (active siege — survival priority)`,
+    // and most-specific-wins routes it to `siege matched`. So this pool is mounted and
+    // unreachable. If a producer ever emits a critical stability WITHOUT a siege, this arm
+    // reds and someone lights the pool instead of it staying quietly dead.
+    const producerLabels = REAL_STABILITY.map(([l]) => l);
+    const criticalWithoutSiege = producerLabels
+      .filter((l) => /critical/i.test(l) && !/siege/i.test(l));
+    expect(criticalWithoutSiege, 'a critical-without-siege label now exists — light `critical matched`').toEqual([]);
+    // The pool is real, and the desk CAN reach it if such a label appears.
+    expect(POWER_POOLS2['critical matched']).toBeTruthy();
+    expect(stabilityPoolKey('Critical — the seat is failing')).toBe('critical matched');
+  });
+});
+
+describe('DS-POW-2 — the share lens, and the silence in the middle', () => {
+  it('DOMINANT is the corpus phrasing made arithmetic: governing outweighs the rest', () => {
+    expect(governingSharePoolKey(DOMINANT_FACTIONS)).toBe('governing faction holds a DOMINANT share');
+  });
+
+  it('NARROW is a runner-up inside the vetoable 15% margin', () => {
+    expect(governingSharePoolKey(NARROW_FACTIONS)).toBe('governing faction holds a NARROW plurality');
+  });
+
+  it('the ordinary middle renders NOTHING rather than being rounded into a band', () => {
+    // Governing leads clearly but does not outweigh the rest, and the margin is wide.
+    const middle = [
+      { faction: 'Merchant Council', isGoverning: true, power: 40 },
+      { faction: 'Craft Guilds', power: 30 },
+      { faction: 'Arcane Orders', power: 25 },
+    ];
+    expect(governingSharePoolKey(middle)).toBeNull();
+    // And a governing faction that is not even the largest holds neither band.
+    expect(governingSharePoolKey([
+      { faction: 'Merchant Council', isGoverning: true, power: 10 },
+      { faction: 'Craft Guilds', power: 50 },
+    ])).toBeNull();
+    expect(governingSharePoolKey([])).toBeNull();
+    expect(governingSharePoolKey(null)).toBeNull();
+  });
+
+  it('LENS ORDER: a recent conflict speaks before the share, so both stay reachable', () => {
+    // The share is determinate for almost every generated town, so preferring it would
+    // leave `recentConflict present` reachable only on the rare town with no share.
+    expect(stabilityLensPoolKey('a quarrel over the levy', DOMINANT_FACTIONS))
+      .toBe('recentConflict present');
+    // THE CONTROL: same factions, no conflict ⇒ the share speaks, proving the ORDER.
+    expect(stabilityLensPoolKey(null, DOMINANT_FACTIONS))
+      .toBe('governing faction holds a DOMINANT share');
+  });
+});
+
+describe('DS-POW-2 — ALIVENESS: all nine pools fire, and {seat} stays deliberately unfilled', () => {
+  it('every one of the nine pools renders a real sentence over a state the generator builds', () => {
+    const CASES = [
+      ['stable matched', ruled('Stable', { factions: DOMINANT_FACTIONS })],
+      ['unstable matched', ruled('Unstable — criminal governance', { factions: DOMINANT_FACTIONS })],
+      ['siege matched', ruled('Critical (active siege — survival priority)', { factions: DOMINANT_FACTIONS })],
+      ['Desperate matched', ruled('Desperate — hunger is eroding order', { factions: DOMINANT_FACTIONS })],
+      ['no token matched: unclassified (the plain-description floor)', ruled('Tense (external threat)', { factions: DOMINANT_FACTIONS })],
+      ['critical matched', ruled('Critical — the seat is failing', { factions: DOMINANT_FACTIONS })],
+    ];
+    for (const [key, settlement] of CASES) {
+      const drawn = powerStateProse(settlement, { seed: `p2-${key}` });
+      expect(drawn.stabilityHeader, `no rung for ${key}`).toBeTruthy();
+      expect(drawn.stabilityHeader.provenance).toEqual(
+        expect.objectContaining({ blockId: POW2, poolKey: key }),
+      );
+      expect(drawn.stabilityHeader.sentence, `silent pool ${key}`).toBeTruthy();
+      expect(drawn.stabilityHeader.sentence).not.toMatch(/[{}]/);
+      expect(drawn.stabilityHeader.sentence).not.toMatch(/[0-9]/);
+    }
+    // The three lens pools, each over its own state.
+    const dominant = powerStateProse(ruled('Stable', { factions: DOMINANT_FACTIONS }), { seed: 'd' });
+    const narrow = powerStateProse(ruled('Stable', { factions: NARROW_FACTIONS }), { seed: 'n' });
+    const conflict = powerStateProse(ruled('Stable', { factions: DOMINANT_FACTIONS, recentConflict: 'a quarrel over the levy' }), { seed: 'c' });
+    expect(dominant.stabilityLens.provenance.poolKey).toBe('governing faction holds a DOMINANT share');
+    expect(narrow.stabilityLens.provenance.poolKey).toBe('governing faction holds a NARROW plurality');
+    expect(conflict.stabilityLens.provenance.poolKey).toBe('recentConflict present');
+    for (const d of [dominant, narrow, conflict]) expect(d.stabilityLens.sentence).toBeTruthy();
+  });
+
+  it('{seat} is UNFILLED for DS-POW-2, so no line reads "X at Thornwall is X\'s"', () => {
+    // {seat} is the governing BODY in DS-POW-1 and the HALL in DS-POW-2. One fill cannot
+    // serve both, and there is no hall-name producer, so DS-POW-2 supplies {faction} only.
+    // Anchored liveness drops the seat-naming variants; MEASURED, all nine pools survive.
+    const seen = new Set();
+    for (let i = 0; i < 60; i += 1) {
+      const drawn = powerStateProse(ruled('Stable', { factions: DOMINANT_FACTIONS }), { seed: `s${i}` });
+      const line = drawn.stabilityHeader?.sentence;
+      if (line) seen.add(line);
+    }
+    expect(seen.size).toBeGreaterThan(1);
+    for (const line of seen) {
+      expect(line, 'a doubled name reached the reader').not.toMatch(/Merchant Council at Thornwall is Merchant Council/);
+      expect(line).not.toMatch(/[{}]/);
+    }
+  });
+
+  it('an absent stability label is silence, and DS-POW-1 is unaffected by DS-POW-2', () => {
+    expect(powerStateProse(ruled(null)).stabilityHeader).toBeNull();
+    expect(powerStateProse(ruled('')).stabilityHeader).toBeNull();
+    expect(powerStateProse(undefined).stabilityHeader).toBeNull();
+    // The two blocks are independent: a legitimacy-less town still gets its ladder line.
+    const drawn = powerStateProse(ruled('Stable', { factions: DOMINANT_FACTIONS }), { seed: 'x' });
+    expect(drawn.legitimacyBanner).toBeNull();
+    expect(drawn.stabilityHeader.sentence).toBeTruthy();
+  });
+
+  it('the registry mounts DS-POW-2 once, as a sentence, on the power tab', () => {
+    const rows = DOSSIER_MOUNTS.filter((row) => row.blockId === POW2);
+    expect(rows).toHaveLength(1);
+    expect(rows[0]).toMatchObject({ mount: 'power.stabilityHeader', tab: 'power', desk: 'power', rung: 'sentence' });
+    expect(sentenceMountForBlock(POW2)?.mount).toBe('power.stabilityHeader');
+    expect(UNMOUNTED_BLOCKS).not.toContain(POW2);
   });
 });

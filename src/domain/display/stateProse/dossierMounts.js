@@ -105,9 +105,10 @@ export const MOUNT_RUNGS = Object.freeze({
  * component could draw.
  *
  * ── DESK CAR 2: THE POWER DESK, THE SIXTH POSITION ───────────────────────────────────
- * `powerStateProse.js` adds `power.legitimacyBanner` and takes DS-POW-1 out of the dark
- * list in the same commit. Four of the six desks remain unwritten and 63 blocks remain
- * dark; the count below is the authority on that number, not this comment.
+ * `powerStateProse.js` adds `power.legitimacyBanner` (DS-POW-1) and `power.stabilityHeader`
+ * (DS-POW-2), each taking its block out of the dark list in the same commit. Four of the
+ * six desks remain unwritten; the count below is the authority on the dark number, not
+ * this comment.
  *
  * ⚠ THAT ONE ROW READS TWO POOLS OF ITS BLOCK, and it is the C3 law rather than an
  * exception to it. DS-POW-1's eleven pools are three LENSES over one legitimacy record —
@@ -150,6 +151,9 @@ export const DOSSIER_MOUNTS = Object.freeze([
   Object.freeze({
     mount: 'power.legitimacyBanner', tab: 'power', desk: 'power', blockId: 'DS-POW-1', rung: 'sentence',
   }),
+  Object.freeze({
+    mount: 'power.stabilityHeader', tab: 'power', desk: 'power', blockId: 'DS-POW-2', rung: 'sentence',
+  }),
 ]);
 
 /**
@@ -178,7 +182,7 @@ export const UNMOUNTED_BLOCKS = Object.freeze([
   'DS-GEN-10', 'DS-HK-1', 'DS-GEN-11', 'DS-GEN-12',
   'DS-GEN-13', 'DS-GEN-14', 'DS-POP-3', 'DS-GEN-15',
   'DS-GEN-16', 'DS-GEN-17', 'DS-GEN-18',
-  'DS-POW-2', 'DS-POW-3', 'DS-POW-4',
+  'DS-POW-3', 'DS-POW-4',
   'DS-POW-5', 'DS-POW-6', 'DS-POW-7',
   'DS-STR-1', 'DS-STR-2', 'DS-CND-1',
   'DS-WAR-1', 'DS-WAR-2', 'DS-WAR-3', 'DS-WAR-4',
