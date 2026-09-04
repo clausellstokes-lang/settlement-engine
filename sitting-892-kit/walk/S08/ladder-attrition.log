@@ -1,0 +1,35 @@
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/walk/S08/tipcopy
+
+ ❯ tests/property/momentumDormancyGolden.test.js (6 tests | 1 failed) 337ms
+     × every dormant config reproduces the golden projection (any drift ⇒ dormancy broke) 172ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/property/momentumDormancyGolden.test.js > momentum layer — dormancy golden (wired-but-dormant is byte-identical to pre-wire) > every dormant config reproduces the golden projection (any drift ⇒ dormancy broke)
+AssertionError: expected [ 'mo-b|8|one_month' ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "mo-b|8|one_month",
++ ]
+
+ ❯ tests/property/momentumDormancyGolden.test.js:280:19
+    278|     const drift = [];
+    279|     for (const c of rows) if (manifest[keyOf(c)] !== dormantHashFor(c)…
+    280|     expect(drift).toEqual([]);
+       |                   ^
+    281|   }, 120_000);
+    282|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 5 passed (6)
+   Start at  19:10:27
+   Duration  3.22s (transform 2.02s, setup 23ms, import 2.77s, tests 337ms, environment 0ms)
+

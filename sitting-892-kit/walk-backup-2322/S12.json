@@ -1,0 +1,327 @@
+{
+ "slice": "S12",
+ "status": "COMPLETE",
+ "calls": [
+  {
+   "row": "§883.7",
+   "call": "P — chair's original 'not competitive' claim was an inference presented as a judgment (self-reported process failure)",
+   "claim": "The chair reasoned from the finite-semantics law to a quality verdict without reading the prose, withdrew it and measured instead.",
+   "method": "Read ledger row 32372 and stratum lines 304-308; checked that a measurement followed (probes desk.mjs/desk2.mjs/m3.mjs/m6.mjs/m7.mjs in SP, all dated 2026-09-02 and importing SP/tree, which is byte-identical to 7f974e855 for the four files I hashed).",
+   "evidence": "ledger 32372: 'The chair's earlier claim that it was not was an INFERENCE PRESENTED AS A JUDGMENT ... without reading one line of the prose'. git hash-object SP/tree/src/domain/display/stateProse/economyStateProse.js = afe25281a = 7f974e855 blob; phraseRepetitionEnvelope.js 400d860c1 = same; economy.generated.js daa7bcd8e = same.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The self-report is honest and the correction was executed, not promised. HIGH priority for the process failure stands."
+  },
+  {
+   "row": "§883.7",
+   "call": "L — reading-lens verdicts (CLEARLY BETTER / COMPETITIVE / COMPETITIVE), the adversary split, and the critic's systematic-sample concession",
+   "claim": "Three lenses and two adversaries returned those verdicts; the critic conceded on an every-109th sample of 2,734.",
+   "method": "Searched both scratchpads for the lens/adversary outputs ('CLEARLY BETTER', 'That attack line fails', 'every 109th'). Only SP/more.mjs (the sampling script) and kit-8837/msg-8837.txt (the chair's own ledger message) match; no agent output is preserved.",
+   "evidence": "grep -rl 'That attack line fails' SP SP2 (excluding queue copies) -> no files. grep 'every 109th' SP/more.mjs:28-29: '// systematic sample every 109th' / 'SYSTEMATIC SAMPLE (every 109th, unbiased)'. The quoted concession exists only inside ledger row 32372.",
+   "verdict": "EVIDENCE-THIN",
+   "confidence": "CONFIRMED",
+   "note": "The most-cited piece of evidence in the row (the hostile critic's concession) survives only as the chair's transcription. The sampling script is reproducible; the concession is a judgment and is not. Settling command: none — the adversary transcripts were never written to disk."
+  },
+  {
+   "row": "§883.7",
+   "call": "E — the estate figures: ~20,600 strings / ~317,000 words / 712 files; corpus 146 blocks / 786 pools / 2,734 distinct variants / ~64,300 words / mean 23.5; 'two hand-authored ... annexes'",
+   "claim": "Estate and corpus census as stated; annexes hand-authored.",
+   "method": "Re-derived the corpus census from SP/filllayer/variants.json in Python; summarised SP/ast-prose.json (the AST scan the estate figure came from); compared the 'hand-authored' phrase with the row's own provenance paragraph.",
+   "evidence": "variants.json: variants 2734, distinct texts 2734, naming>=1 slot 2207 (80.7%), occurrences 3238, distinct slots 39, pools 786, blocks 146, mean words 23.5, total words 64344. ast-prose.json: list of 22651 strings over 771 files, 21945 distinct, 378008 words — the filter that yields 20,600/712/317k is not preserved. Same row, next paragraph: 'The corpus is model-authored and then edited'.",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "Corpus figures RATIFIED exactly. The estate-wide triple is unreproducible from what survives (raw scan is 22,651/771/378k) — label it 'chair-filtered, filter not preserved'. Replace 'hand-authored' with 'model-drafted under writer/verifier/chair passes' so the paragraph stops contradicting the provenance ruling three paragraphs later."
+  },
+  {
+   "row": "§883.7",
+   "call": "Defect 1 — the best prose is not shipped: one call site outside the kernel, 0 hits in src/components, five of six desks without a pool-key map, SPINE says the reader is built and dark",
+   "claim": "Corpus has zero product consumers; only economyStateProse.js reads it; docs/DESIGN_FP_SPINE.md says 'THE READER IS BUILT AND DARK'.",
+   "method": "git grep at 7f974e855 for stateProse in src/components and for callers of economyStateProse/stateProseKernel outside the stateProse directory; ls-tree of the stateProse directory; grep of the SPINE quote.",
+   "evidence": "git grep -n 'stateProse' 7f974e855 -- src/components/ | wc -l -> 0. Callers outside src/domain/display/stateProse/: none. ls-tree 7f974e855 src/domain/display/stateProse/: causalDossierProse.js dmFieldProjection.js economyStateProse.js legibilityRung.js stateProseKernel.js (one desk for six leaves). git grep -i 'built and dark' 7f974e855 -- docs/ -> DESIGN_FP_SPINE.md:586-587: '> **LANE H — THE HERALD CAUSAL-VOICE SURFACE ...: the DISPLAY SLICE IS BUILT AND DARK, 2026-08-03.**' — the phrase 'THE READER IS BUILT AND DARK' does not occur.",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "Substance holds and is the lighting wave's measured size. The SPINE quotation is not verbatim and is about Lane H's herald display slice, not 'the reader'; quote it as such or drop it."
+  },
+  {
+   "row": "§883.7",
+   "call": "Defect 2 — the one wired desk prints 'a working the road' on 11 of 20 towns; fillSlots is a raw regex; ACCESS_PROSE.road='the road'; all 7 {access} variants ungrammatical, 'in DS-ECO-1'",
+   "claim": "As stated; cured by §884.3.",
+   "method": "Read economyStateProse.js and stateProseKernel.js at 7f974e855; listed the annex's {access} variants at 7f974e855; re-ran the chair's own 20-town probe (SP/desk2.mjs, deterministic seeds 'seed-'+name) against SP/tree (hash-verified = 7f974e855); compared generated leaves f5a6c3bbf vs adb9f19b7 by blob id; re-derived the FILL-LAYER before/after from render-base.json / render-fixed.json.",
+   "evidence": "economyStateProse.js@7f974e855:101-107 'const ACCESS_PROSE = Object.freeze({ road: \"the road\", river: \"the river\", ...})'; :219 'access: ACCESS_PROSE[access]'. stateProseKernel.js:173-181 fillSlots = text.replace(/\\{([a-zA-Z_][a-zA-Z0-9_]*)\\}/g, ... String(value).trim()). Annex {access} variants: lines 572,573,574,584,587,589 (DS-ECO-1) + 1197 (block at :1183, DS-ECO-10) = 7 variants / 8 seams, all determiner-led ('off its {access}', 'the {access} carries', 'a working {access}', 'by the {access}', 'over the {access}'). desk2.mjs re-run: grep -c 'a working the road' = 10 of 20 headers. Leaves: all 7 .generated.js blob ids identical at f5a6c3bbf and adb9f19b7. render-base.json: 3696 rows, distinct headers 144; render-fixed.json: distinct 23, broken 0.",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "Mechanism, cure and leaf-identity all hold. Two figures must change: the count is 10 of 20 (not 11) on the chair's own deterministic probe; the seven variants live in DS-ECO-1 (6) and DS-ECO-10 (1), as the panel noted at panel-filllayer.md:392. The lane's 133-of-144 uses four template-differenced detectors; my two-detector re-derivation gives 118 -> 0, the panel's 122 — the after-count of 0 is the load-bearing figure and is CONFIRMED."
+  },
+  {
+   "row": "§883.7",
+   "call": "Defect 3 — phraseRepetitionEnvelope counts rendered lines, so town-name substitution manufactures variety; it 'scored 0.3667 (a pass)' on the 20-town run vs 0.85 reader-experienced; zero consumers; unratified ceiling",
+   "claim": "The instrument would sign off on the exact failure it exists to catch.",
+   "method": "Read the instrument at 7f974e855 in full (windows, buckets, docblock); re-ran the chair's probes desk2.mjs, m3.mjs and m7.mjs against the hash-verified tree; grepped for product consumers.",
+   "evidence": "phraseRepetitionEnvelope.js:133-186: buckets are Map<settlementId, Map<window, lines>>; :169 'const distinct = new Set(lines).size' per settlement per window; :82 POWERED_WINDOW_MINIMUM = 4; :66-74 ceiling 'UNRATIFIED until the owner signs it'; docblock 'Consumed by nothing at land time — dark by construction (the lane-P precedent)'. git grep phraseRepetition 7f974e855 -- src/ outside the leaf -> none. desk2.mjs (the chair's cross-town formula): 'repeatShare as the certification instrument measures it (rendered): 0.3667 / frames: 0.8500'. m3.mjs, THE SHIPPED INSTRUMENT on the same 20-town stream: '{ powered: 0, unpowered: 20, worst: null, carriesEvidence: false, withinEnvelope: false }'; pooled under one synthetic settlement 'REALM' (the chair's comment: 'what the assessment must have done'): rendered 0.4 / frame 0.85. m7.mjs collapse mutant (one template, {counterpart} varying within one settlement window): rendered 0.0000 withinEnvelope=true vs frame 0.9231 withinEnvelope=false.",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "The conclusion (rendered-line counting is the wrong measure) survives, but on different evidence than the row gives. The instrument never scored 0.3667 and never passed that stream: on its own contract it returned NO EVIDENCE (20 unpowered windows). 0.3667 is the chair's hand formula over a cross-town pool, and inside a per-settlement window the town name is constant, so 'substituting the town name manufactures variety' cannot happen on-contract. The genuine blind spot is m7's: a collapsed pool whose in-window slot fills vary (envoy {counterpart}) scores 0.0 and passes. Re-state defect 3 on m7; withdraw the 0.3667-pass sentence. This is a chair error the stratum does not self-report."
+  },
+  {
+   "row": "§883.7",
+   "call": "Defect 4 — wizardNews.js:477 '${label} takes hold in ${target}'; whatPhrase de-underscores a raw family slug ('burden cleared'); cured by §886",
+   "claim": "Both sites as stated; §886 cured them.",
+   "method": "Read wizardNews.js at 7f974e855 and d1a6c773e; located whatPhrase (settlementRumors.js) at both shas; git log of §886 cars on both files; checked registration of occupation_burden_cleared.",
+   "evidence": "wizardNews.js@7f974e855:478 'if (transition === \\'applied\\') return `${label} takes hold in ${target}`;' (line 478, not 477). @d1a6c773e the template is gone; :181 comment 'so a reader met \"Conflict pressure takes hold in Elmspur\"'. §886 cars: 7d0987ea0 NEWSTRAIN car 1/3 (wizardNews), 6c862159e car 2/3 ('the de-underscore arm is deleted' — settlementRumors). whatPhrase@7f974e855 settlementRumors.js:458-467: 'const stripped = key.replace(WHAT_STRIP_PREFIX, \\'\\').replace(/_/g, \\' \\')'. @d1a6c773e:550-570: the strip-and-de-underscore arm is kept for registered kinds — 'reachable ONLY for a kind the §4 corpus actually holds ... including the twelve MUTILATED anchors, which stay mutilated on purpose (owner-gated, wiring note LEG-7)'; unknown kinds -> UNREGISTERED_SUBJECT. rumorFallbackPhrasePools.js:249 at both shas: 'occupation_burden_cleared: Object.freeze([' (:247 'variant 1 (\\'burden cleare…').",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "Line is 478. The headline frame is cured at §886. The slug half is GATED, not cured: the quoted example occupation_burden_cleared is a registered kind whose variant 1 is still the computed 'burden cleared', kept on purpose as one of twelve mutilated anchors under owner-gated LEG-7. The stratum's 'confirm that §886 cured them' needs that carve-out, and the anchor list belongs on the owner's voice sitting."
+  },
+  {
+   "row": "§883.7",
+   "call": "PROV — the chair rules FOR the advocate on provenance (corpus model-authored then edited; 9a9094a33)",
+   "claim": "Capturing model quality while discarding model behaviour is the stated design goal and is strictly stronger than re-rolling per session; the critic's 'purchasable' point stands unanswered.",
+   "method": "git show --stat and message of 9a9094a33; header of the annex at that commit; git log --diff-filter=A on the annex; then my own weighing of the ruling.",
+   "evidence": "git log --diff-filter=A -- docs/content/RECEIPT_POOLS_DOSSIER_STATE.md -> 9a9094a33 (Mon Aug 3 03:59:17 2026), 1 file, 5520 insertions. Message: 'Run wf_444949dc-ca7 (8 agents, 0 errors): two-surveyor census ... four cluster writers ... two verifiers PASS with 40 fixes ... 2,149 variants ... 5,520 lines; 59 blocks', Co-Authored-By: Claude Fable 5. Annex header :13 '**AS MERGED (VERIFIER-1, 2026-08-03).**', :15 'Section order is WRITER-1 → WRITER-4'. prompts.ts@7f974e855:53 'no \"nestled,\" no \"bustling,\"', :77 'Do NOT invent water infrastructure (wharves, docks, harbours, boats, sea charts, sailors)', :125-126 '\"isolated\" drifts into \"feeds itself entirely\" — even when the engine recorded a 45% shortfall'; inventionSignal.ts:7-9.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "My own view, for the ruling: (1) every guarantee the product sells — THE PROMISE's immutable lived history, same-seed determinism, no invented harbour, no per-read cost — is a property of fixed text, and the tree's prompts.ts prohibitions are executed evidence of what runtime generation costs; who drafted the sentences does not change that. (2) Against it, and unanswered: the process is purchasable, so the defensible claim is 'the entailment/anchoring/veto machinery is the moat', not 'the sentences are' — the row already concedes this, and should stop describing the annexes as hand-authored (see E)."
+  },
+  {
+   "row": "§883.7",
+   "call": "EV — the strongest evidence paragraph (prompts.ts bans, summarizeFoodSituation docblock, inventionSignal.ts, hookVariety 8.19%/35%)",
+   "claim": "The tree holds an executed record of LLM failure modes and two in-repo cures for the corpus's failure mode.",
+   "method": "git grep of each quoted phrase at 7f974e855.",
+   "evidence": "prompts.ts:53 HOUSE_STYLE 'No adjective fatigue, no \"nestled,\" no \"bustling,\"'; :77 six-noun enumeration; :125-126 docblock above summarizeFoodSituation (:128) 'ledger to check its prose against and \"isolated\" drifts into \"feeds itself entirely\" — even when the engine recorded a 45% shortfall'; inventionSignal.ts:7 'most likely invention vector is PROSE', :9 'This does not enforce: it MEASURES'; hookVariety.js:7 'the measured 8.19% corpus / 35% worst-settlement repeat rate'.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Every quotation checks out verbatim at 7f974e855."
+  },
+  {
+   "row": "§884.1",
+   "call": "RANK — FILL-LAYER ranked first on the board over everything, on the one-way-door ground; 'both skeptics ... independently reached the same sequencing'",
+   "claim": "Scheduling judgment; zero consumers make the fix free today and impossible after wiring.",
+   "method": "git grep for the ratchet-baseline quotation at f5a6c3bbf; consumer census (Defect 1); read panel-filllayer.md R0.sequencing (:460-475) and R1.sequencing (:591-606).",
+   "evidence": "scripts/.test-ratchet-baseline.json@f5a6c3bbf carries 'becomes impossible the day the stack is wired' (git grep match, lines 13/44/61/94). panel :463 'fill-layer, FIRST and ALONE, with amendments A7–A10'; :465 'This should not wait for anything.' panel R1 :593-597 'Ships now, as bugs, independent of the wave: 1. instrument-and-news Car 2 ... 2. Car 1 ... 3. NEW car, A4'; :600-601 'Then, before any lighting ... 4. fill-layer Cars 1-3'.",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "The ranking is sound and I would not reverse it: the door is one-way, the car is one commit, and the alternative cost is a declared shift on every lit surface. But 'both skeptics reached the same sequencing' overstates R1, which put three lit-surface bugs ahead of FILL-LAYER and ranked it first only among the dark one-way-door work. The row should say both agree it precedes any lighting."
+  },
+  {
+   "row": "§884.1",
+   "call": "HB — the 30-minute heartbeat carried 'gate-tailf.log' and 'Seat: Fable 5.1 — validated'; refused; 'will keep issuing the wrong one for the rest of the arc'",
+   "claim": "Standing instruction hard-codes a seat; the chair followed intent and refused the trailer.",
+   "method": "Listed live scheduled tasks; read the §884.1 commit's trailer; searched the scratchpad for the heartbeat text.",
+   "evidence": "mcp scheduled-tasks list -> 'No scheduled tasks found.' git show -s 17970ea7c | grep '^Seat:' -> 'Seat: Opus 5 — Fable-unvalidated'. The heartbeat text survives only in ledger row 32375 ('carries stale text naming `gate-tailf.log` ... instructing the chair to commit with **`Seat: Fable 5.1 — validated`**').",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "The refusal is CONFIRMED by outcome (the commit carries the Opus trailer). The heartbeat text itself is EVIDENCE-THIN — no scheduled task exists now, so it was session-bound (a /loop) and did not outlive the session; 'for the rest of the arc' overstated. The class finding is right: a standing instruction must derive the seat from the session, never carry it. Note the seat is Fable 5.1 again now, so the same hard-coded text would today be accidentally correct — which is exactly why it must not be hard-coded."
+  },
+  {
+   "row": "§884.2",
+   "call": "GUARD — the asserting handoff edit fired (span 862 vs guessed 1000–2000), the act continued, 17970ea7c 'carries three files, of which docs/HANDOFF_CURRENT.md is byte-identical to its parent's'; successor card stale by one fact",
+   "claim": "As stated.",
+   "method": "git show --stat 17970ea7c; blob ids of HANDOFF_CURRENT.md at 17970ea7c and parent; diff of HANDOFF_CURRENT.md between 17970ea7c and the §884.2 commit 99f1aeaf6; looked for the collection script in kit-8841/chair-tools.",
+   "evidence": "git show --stat 17970ea7c: 'docs/FABLE_RETROVALIDATION_QUEUE.md | 12 ++++' 'docs/OWNER_DECISION_QUEUE.md | 1 +' '2 files changed, 13 insertions(+)'. git rev-parse 17970ea7c:docs/HANDOFF_CURRENT.md = 17970ea7c^:docs/HANDOFF_CURRENT.md = 59ee278b4. git diff 17970ea7c 99f1aeaf6 -- docs/HANDOFF_CURRENT.md: 1 insertion, 1 deletion — '-**THE IN-FLIGHT TREES ...' / '+⭐⭐ **RUNNING NOW (2 of 4, dispatched 21:3x after the §884 collection): `CURE-CAPSULE-REBASE`...'. kit-8841/chair-tools contains only commit.index; the '862' figure has no receipt outside the row.",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "The failure and its one-fact cost are CONFIRMED (identical blob; the refresh was exactly one line). 'Carries three files' is wrong — the commit changed two files; an unchanged handoff is not in a commit. The 862/1000–2000 figures are the chair's own record only (EVIDENCE-THIN on the number, immaterial to the finding)."
+  },
+  {
+   "row": "§884.2",
+   "call": "LAW — an asserting edit must abort the act (set -e / || exit 1); measure the span before asserting it; should the ritual become one Python transaction?",
+   "claim": "Necessary completion of the §882.11 cure.",
+   "method": "Reasoning over the confirmed failure; inspected the chair's own wrappers for the same pattern.",
+   "evidence": "kit-884/run-cr2.sh and run-gate-instr.sh both end in 'exit $TRUE_EXIT' (tail -5 of each); no ritual script with the guard-and-continue shape is preserved to re-test.",
+   "verdict": "RATIFY",
+   "confidence": "PLAUSIBLE",
+   "note": "The law is correct and the recurrence is proven by 17970ea7c. On the re-derivation question: yes — a single Python program that measures every span, asserts, and writes all files (or none) removes the habitat; a shell ritual with set -euo pipefail is the minimum. Settling command: none needed; this is a design ruling."
+  },
+  {
+   "row": "§884.3",
+   "call": "CAR — adb9f19b7 one car over f5a6c3bbf, porcelain 0, one parser-visible trailer, self-sealed at refs/heads/claude/lane-filllayer-2026-09-02; zero new test files; stateProseKernel.js untouched",
+   "claim": "As stated.",
+   "method": "git show adb9f19b7; dock rev-parse/status; for-each-ref --contains; diff --diff-filter=A and --name-only against f5a6c3bbf.",
+   "evidence": "adb9f19b7 parent f5a6c3bbfd86…; trailer 'Seat: Opus 5 — Fable-unvalidated'. laneFILLLAYER-tree HEAD adb9f19b7, porcelain 0 lines. for-each-ref --contains adb9f19b7 -> refs/heads/claude/lane-filllayer-2026-09-02 (= adb9f19b70fa…). diff --diff-filter=A f5a6c3bbf adb9f19b7 -> scripts/lib/dossier-slot-shapes.mjs only. Changed paths (8): the two annexes, generate-dossier-state-prose.mjs, dossier-slot-shapes.mjs, economyStateProse.js, dossierStateProseProjection.contract.test.js, causalDossierProse.test.js, economyStateProseDesk.test.js — no stateProseKernel.js.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Every structural claim checks."
+  },
+  {
+   "row": "§884.3",
+   "call": "PROOF — template-differenced over 3,696 renders: 1,100/836/660/140 -> 0; DS-ECO-1 133 of 144 -> 0; headers 3,696/3,696 before and after; two controls (plant 'the road' reds five arms, 149/149 after; register rename throws)",
+   "claim": "As stated.",
+   "method": "Re-derived distinct/broken/non-null header counts from SP/filllayer/render-base.json and render-fixed.json in Python with two detectors; read the receipt's own counts; controls read from the receipt and commit message.",
+   "evidence": "render-base.json rows 3696, header non-null 3696, distinct 144, broken(det|cap) 118; render-fixed.json rows 3696, non-null 3696, distinct 23, broken 0. filllayer/RECEIPT.md:63-68 'BEFORE ADJACENT-DET 1100 · DOUBLED-WORD 836 · DET+CAPITAL 660 · DASH 140 / AFTER NONE / DS-ECO-1 distinct header sentences 144 → 23, broken 133 → 0 ... header renders non-null on 3696/3696 rows before AND after'; :55-56 'renaming the {season} register row makes the generator THROW \"used but undeclared: {season}\"'. Commit message: 'Planting the original \\'the road\\' back reds FIVE arms across two files; restore blob-verified by sha256; 149/149 green after.'",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "144 -> 23 distinct, 0 broken after, and 3,696/3,696 non-null are CONFIRMED by my re-derivation; the 133 (vs my 118 and the panel's 122) is detector-dependent and the four-detector template-differenced counts are PLAUSIBLE (settling: re-run SP/filllayer/seams.py and census1.py over the two render dumps). The controls are PLAUSIBLE (settling: plant 'the road' in a scratch copy at adb9f19b7 and run the two test files)."
+  },
+  {
+   "row": "§884.3",
+   "call": "CENSUS — 39 slots · 2,734 variants · 2,207 (80.7%) · 3,238 occurrences · 786 pools · 146 blocks; shapes 21/11/6/1; ONE fill table in the tree; 4 of 39 slots have a producer, 2 unsafe; §0d digit ban holds (twenty hits are all {faction2})",
+   "claim": "As stated.",
+   "method": "Python over variants.json; read slots object at 7f974e855; Object.freeze census of the stateProse directory at f5a6c3bbf.",
+   "evidence": "variants.json: 2734 variants (all distinct), 2207 naming >=1 slot (80.7%), 3238 occurrences, 39 distinct slots, 786 pools, 146 blocks; 'variants with a digit in raw text 20; with a digit outside slot tokens 0'. economyStateProse.js@7f974e855:216-221 slots = { settlement, access: ACCESS_PROSE[access], complexity: text(eco.economicComplexity), season }. git grep 'Object.freeze({$' f5a6c3bbf -- src/domain/display/stateProse/: ACCESS_PROSE is the only slot fill table (DM_* maps and function-local returns are not). Shapes 21/11/6/1: RECEIPT.md:53-54 'proper 21 · bare-common 11 · phrase 6 · RESERVED 1'.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Every figure re-derives exactly; shape split PLAUSIBLE from the receipt (settling: node -e over scripts/lib/dossier-slot-shapes.mjs at adb9f19b7)."
+  },
+  {
+   "row": "§884.3",
+   "call": "VERIFY — chair's own reads: seven generated leaves byte-identical to base, ancestry OK, survival ref, no new test file, kernel untouched; CORRECTION that a build IS owed",
+   "claim": "As stated.",
+   "method": "Blob comparison of all *.generated.js between f5a6c3bbf and adb9f19b7; §885 ledger row for whether a build was spent; inspected the FILL-LAYER dock's node_modules form.",
+   "evidence": "dossierCausalProse.generated.js e0b6dbb27 SAME; dossierStateProse/{defense b8fd3da29, economy daa7bcd8e, general 92926389e, power df7f3dc92, stressors dd024cc15, warFaith f8aa31ec9} SAME (and the other four generated leaves in the tree also SAME). ledger 32381 (§885): 'A build WAS owed and spent, unlike §884 which inherited its ceilings.' RECEIPT.md:5 'node_modules: cloned with `cp -Rc` from the main repo, 434 entries'; ls laneFILLLAYER-tree/node_modules/vitest -> a real directory, not a symlink.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "All chair reads hold and the build correction was honoured at §885. One thing the chair's verification did not flag: the FILL-LAYER dock (and the CURECAP dock) carry materialised cp -Rc node_modules, contrary to the symlink-by-design law; harmless here because neither dock built, but a dock in that form must never be used for a size-gated build."
+  },
+  {
+   "row": "§884.3",
+   "call": "PANEL — the lane strengthened the panel: lowercase determiner-led fixture, Shape column found by header name across two annexes, control floors re-measured 108/101/150 (panel ≥200/≥150/≥150), refused exporting the parser from the side-effecting generator",
+   "claim": "As stated.",
+   "method": "Read RECEIPT.md checkpoint 1 and the bills table; read dossier-slot-shapes.mjs at adb9f19b7; grep the generator at f5a6c3bbf for top-level await.",
+   "evidence": "RECEIPT.md:32-34 'economyStateProseDesk.test.js fixture L40 is `economicComplexity: \\'a mixed market economy\\'` — a LOWERCASE DETERMINER-LED fill ... which neither the designer nor either skeptic reported'; :14-18 the register split (2-col §0c, 3-col §0c-2, causal §0c 2-col + prose). dossier-slot-shapes.mjs@adb9f19b7:71 'THE COLUMN IS FOUND BY ITS HEADER, never by index', :106 'shapeCol = lower.includes(\\'shape\\') ? lower.indexOf(\\'shape\\') : -1'. generate-dossier-state-prose.mjs@f5a6c3bbf:485-486 top-level 'const stateSrc = await readFile(...)'. RECEIPT.md:90 floors '108 / 101 / 150 — the panel's figures were inflated by the false positives my span-anchoring removes; floors re-frozen to MEASURED'.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Fixture, header-by-name and generator side effects CONFIRMED by reading the sources; the 108/101/150 floors are PLAUSIBLE from the receipt (settling: run tests/data/dossierStateProseProjection.contract.test.js at adb9f19b7 and read the floor arms)."
+  },
+  {
+   "row": "§884.3",
+   "call": "DEFER — {complexity} refused on all eleven producer values, pool C1 drops to one eligible variant of three; ruled a DEFERRAL with a home (lighting wave), recorded at annex §0c-3",
+   "claim": "Deferral, not blocker, because the economy desk has zero consumers; the collapse costs nothing today.",
+   "method": "Read annex §0c-3 at adb9f19b7; consumer census (Defect 1); read §885's cure commit for the type change's fallout.",
+   "evidence": "annex@adb9f19b7:219 '### §0c-3 THE COMPLEXITY BAND — **OPEN, THE CHAIR'S** (2026-09-02)'; :223-224 '**11 of 11 are refused**'; :229-232 'Eligible variants per DS-ECO-1 pool while the slot stays dark: C1 **1 of 3** · C2 2 of 3 · C3 2 of 3 · C4 3 of 3 · C5 2 of 3. C1 at one variant means every high-rung, working-approach settlement in a world prints the SAME sentence'. Zero consumers at 7f974e855/f5a6c3bbf (Defect 1 evidence). 37e285498 (§885 cure 1/1): 'bareCommonFill returns string|undefined by design ... That widened slots.season's type, and a detail row written by an earlier commit consumed it as a string.'",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "The ruling is right today and I would not reverse it: with zero consumers the collapse costs zero rendered bytes, and minting eleven reader-facing forms is chair/owner content. Two amendments: (1) the cost is understated — the annex's own arithmetic shows four of five DS-ECO-1 pools lose a variant (C1 1/3, C2 2/3, C3 2/3, C5 2/3), not only C1; (2) 'deferral, not blocker' must be re-typed as a BLOCKER on lighting the economy desk specifically, since under the owner's variety ruling lighting it unruled ships the one outcome the corpus exists to prevent. The veto shape (rule the eleven forms now) remains the cheapest cure."
+  },
+  {
+   "row": "§884.3",
+   "call": "0c-4 — sentence-initial lowercase seams (20 over six slots, cure belongs to the kernel consist), {band} six roles / 37 uses / 26 blocks, {reason}; digit ban checked clean",
+   "claim": "Deferred and documented at annex §0c-4; not dropped.",
+   "method": "Read annex §0c-4 at adb9f19b7; digit census in Python.",
+   "evidence": "annex@adb9f19b7:242 '### §0c-4 THE SHAPE RESIDUE — recorded, deliberately deferred, with its cure named'; :246-247 'A SENTENCE-INITIAL LOWERCASE SEAM, 20 sites over six slots ({timeband_since} 8, {good} 5, {reason} 3, {stakes} 2, {issue} 1, {burden} 1)'; :250-254 'IT IS NOT TAKEN HERE BECAUSE THE KERNEL IS A SHARED SEAM: three separate designs each propose to edit stateProseKernel.js'; :258 '{band} IS ONE NAME FOR SIX INCOMPATIBLE ROLES, measured at 37 uses across 26 blocks'. Digit census: 20 variants carry a digit, 0 outside slot tokens.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Recorded where a successor will find it, with the cure named. The 20-site figure is PLAUSIBLE (settling: regex over variants.json for a slot at template index 0)."
+  },
+  {
+   "row": "§884.4",
+   "call": "REBASE+CONSIST — 62be253f3 parent f5a6c3bbf, content blob-identical to c422ee824, both sealed; composed consist 36f04bfcd = 2 commits, 10 paths +1,179/−85, empty path intersection, one gate instead of two",
+   "claim": "As stated.",
+   "method": "md5 of git diff-tree -p for both cars; sorted touched-blob sets; parents and diff --stat of the consist; comm of the two cars' path sets; for-each-ref --contains; ancestry into §885.",
+   "evidence": "diff-tree -p c422ee824 | md5 = 35319b292ae643a99a4bf69feb26e69d = diff-tree -p 62be253f3 | md5; touched-blob sets both 13d206e4a…. 62be253f3 P=f5a6c3bbf; c422ee824 P=7f974e855. refs containing 62be253f3: refs/heads/preserve/curecapsule-rebased-2026-09-02; c422ee824 = refs/preserve/curecapsule-2026-09-02. 36f04bfcd P=9feb645f8 (P=f5a6c3bbf, tree-identical to 62be253f3: empty diff); diff --stat f5a6c3bbf 36f04bfcd '10 files changed, 1179 insertions(+), 85 deletions(-)'; path intersection 0. merge-base --is-ancestor 36f04bfcd 2d5112851 -> true (landed at §885).",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "All figures re-derive. One precision: the re-based car's seal is a branch under refs/heads/preserve/, not refs/preserve/, so the brief's for-each-ref refs/preserve census would not list it. CR-1's 'not alone, just not on the landing it protects' reading is sound."
+  },
+  {
+   "row": "§884.4",
+   "call": "HAZARD 1 — the harness reported a red full-suite ratchet as 'exit code 0' because the wrapper ended in echo; the law; the chair's wrappers end in exit $TRUE_EXIT; the red was an eleventh failure (STACK_TRACE_ERROR) at load 40.87 in writerReach.walker.test.js, not the car's, 56/56 standalone; HOLD the consist gate until the box is quiet",
+   "claim": "As stated.",
+   "method": "Read CURECAP-REBASE-RECEIPT.md §12 and the closing hazard note; tail of both chair wrappers; ran tests/lint/writerReach.walker.test.js single-file at the CURECAP dock (HEAD 62be253f3) with GATE_MUTEX_TIER=shared --maxWorkers=2, capturing exit and porcelain before/after; read §885 register 2/2 (c8b83b25e).",
+   "evidence": "receipt:391-393 'launched as `npm run test:ratchet > log 2>&1; echo $? > sentinel`. The harness reported the task **\"completed (exit code 0)\"** because the final `echo` succeeded. The ratchet's own exit was **1**.' :277-282 'writerReach.walker.test.js ... `Error: STACK_TRACE_ERROR` ... load 40.87/33.63/33.81 over 8 core(s)'. kit-884/run-cr2.sh and run-gate-instr.sh: last line 'exit $TRUE_EXIT'. My run: 'Test Files 1 passed (1) / Tests 56 passed (56) / Duration 39.50s / TRUE_EXIT=0'; porcelain 0 before and 0 after, HEAD 62be253f3. c8b83b25e (§885): 'CONFIRMED intermittent in-suite, and the earlier lane's load diagnosis does not explain it: it passed in-suite at load 47 and failed in-suite at load 3.8, and it passes 56/56 standalone ... Its cause is unknown'.",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "The law, the false-green mechanism, the honest wrappers and 'not the car's' all hold (the car cannot reach the file; it failed again later with the file unchanged; 56/56 standalone re-confirmed by me). But the causal story — load 40.87 with a sibling on the shared tier, hence HOLD until quiet — was refuted by the very next landing (fails at load 3.8) and the stratum does not mark it superseded. Re-label the cause 'intermittent in-suite, cause unknown, not in the census', per c8b83b25e. Fable's question on the guard: it is still a shell convention; a harness that reported the sentinel instead of the last command's exit is the structural fix and does not exist."
+  },
+  {
+   "row": "§884.4",
+   "call": "HAZARD 2 — two seat-trailer grammars; chair-commit.sh:34 greps the ledger message only; product convention 'Seat: <model> (lane <NAME>)' is 100% consistent (§884 21/23, §883 28/28, TAIL-F all); ruling: lane edit ratified on outcome, must not be generalised into a re-write of the product convention",
+   "claim": "As stated.",
+   "method": "Trailer census by git log --format=%B over each landing range with exact regexes; read chair-commit.sh:32-40; census over the brief's range f5a6c3bbf..ca651d54b; checked the ledger for the one no-seat commit.",
+   "evidence": "chair-commit.sh:34 'SEATLINE=$(grep -c \\'^Seat: \\\\(Fable 5 — validated\\\\|Fable 5\\\\.1 — validated\\\\|Opus 5 — Fable-unvalidated\\\\)$\\' \"$MSGFILE\" || true)'. §883 9a0584f0f..7f974e855: 28 commits, lane-form 28. §884 7f974e855..f5a6c3bbf: 23 commits, lane-form 21, strict 2, any-Seat 23. TAIL-F fab576aba..9a0584f0f: 12 commits — 5 'Seat: Fable 5 (lane X)', 7 'Seat: Opus 5 (lane X)'. Asked range f5a6c3bbf..ca651d54b: 49 commits — '(lane ' form 5, '— Fable-unvalidated' form 43, no Seat line 1 (394d758ee, ENC-1 cure, in ca651d54b's ancestry). Per landing: §885 0/6 strict 6, §886 0/5, §887 0/7, §888 lane 3 strict 4 none 1, §889 lane 2 strict 13, §890 0/8. Ledger already records 394d758ee: 'has none (the day's first lane brief omitted the requirement) and was NOT rebased, because the tuning inventory cites that exact sha'.",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "Every figure the row states was true when written, and the ruling on the lane's edit is right. But the actual split over the asked range is 5 lane-form / 43 strict / 1 none: the 'ungated product convention' flipped to the strict grammar at §885 (the chair's own cure commits carry 'Seat: Opus 5 — Fable-unvalidated' + 'Lane:') and stayed flipped — the RV-6 form became the de facto convention within hours, by adoption rather than re-write, and nothing recorded the change. The ruling should be marked overtaken, and the convention should now be declared (one grammar, walker-checked on product commits — the loose ^Seat: audit did not stop a no-seat commit from landing at §888)."
+  },
+  {
+   "row": "§884.4",
+   "call": "RV-6 — the lane's message edits: the car cited 'Lighting 2497/370/2127/22491/6078' (true at 7f974e855, false at f5a6c3bbf); replaced with measured figures; RUN 1's red reported; OSR/typecheck/strict-domain readings retired rather than carried",
+   "claim": "Ratified: carrying a green you did not run is the citation-law defect.",
+   "method": "Read both lighting baselines from git; read receipt §RV-6; read §885 cure 1/1 for what an un-run reading would have hidden.",
+   "evidence": "tests/lint/.lighting-census-baseline.json@7f974e855: files 2497, parked 370, credited 2127, titles 22491, suiteTitles 6078; @f5a6c3bbf: 2503/370/2133/22665/6099. receipt:252-258 'RV-6 ⭐ THE MOST VETOABLE ACT OF THIS LANE — I rewrote part of a commit message I did not author ... (b) the figures paragraph, re-measured at the new base with the old-base figure set retired'. 37e285498 (§885 cure 1/1): 'the fill-layer car changed a slot's type and an existing consumer went strict-dirty ... The chair's gate caught it at typecheck:domain:strict'.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Both tuples are exactly the two baselines, so the original message was a true citation of the wrong base. Retiring the un-run readings was vindicated the same night: strict-domain was in fact dirty at the composed consist (from the other car), which a carried-forward green would have masked."
+  },
+  {
+   "row": "§884.4",
+   "call": "NC — the negative control: C-A deletes the column-law assertion (battery red, sha-identical restore); C-B drives both real parsers over identical bytes and reproduces the false-CLEAN (one trimmed record -> [], record one vanishes with two, cured throws and names the record); 6 of 6 verdicts",
+   "claim": "Ratified as the model control.",
+   "method": "Read receipt sections C-A and C-B (lines 135-175).",
+   "evidence": "receipt:136-147 'Plant: deleted lines 489-495, the ENTIRE column-law assertion ... Blob moved `8ec4773ff` → `49a5ca485` ... Tests 1 failed | 8 passed (9) ... AssertionError: expected [Function] to throw an error ... Restore → blob back to `8ec4773ff` (**sha-identical**), battery **9 passed, TRUE_EXIT=0**'. :152-171 'precure/single/trimmed -> returned [] ⛔ FALSE-CLEAN / precure/double/trimmed -> returned [\"src/domain/worldPulse/peaceTerms.js\"] ⛔ record ONE vanished / cured/single/trimmed -> THREW [base-state-capsule] dirty-tree ... V1..V5 True, CONTROL_C_B_ALL_VERDICTS_PASS = True'.",
+   "verdict": "RATIFY",
+   "confidence": "PLAUSIBLE",
+   "note": "The receipt is specific, blob-addressed and internally consistent; I did not re-execute it. Settling command: re-run the lane's C-B harness (its transform is described at receipt:153-156) at 62be253f3 in a scratch copy and compare the eight verdict lines."
+  },
+  {
+   "row": "§884.4",
+   "call": "BILLS — both registers predicted then measured at Δ=0: lighting 2503/370/2133/22665/6099 (walker green at 34), ratchet 30,962 / 2,451 with the census 10/10 and no headroom consumed; no refreeze owed",
+   "claim": "As stated for the re-based CURE-CAPSULE car.",
+   "method": "Read both baselines at f5a6c3bbf from git; read the receipt's measured rows; read §885's register commits for what moved at the consist.",
+   "evidence": "@f5a6c3bbf lighting 2503/370/2133/22665/6099; scripts/.test-ratchet-baseline.json totalTests 30962, totalFiles 2451. receipt:310-313 'totalFiles 2451 ... CONFIRMED / totalTests 30962 ... CONFIRMED / passed 30950, failed 11, skipped 1'; :335 '[test-ratchet] OK — no test regressions (10 known failure(s) of 30962 tests, ceiling 10)'. §885 register acts: lighting -> 2503/370/2133/22676/6101 (d4b91b26a), ratchet 30,962 -> 30,973 (c8b83b25e: 'files +0 exact, tests at least 11').",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Δ=0 holds for the CURE-CAPSULE car alone (its D1–D7 cases sit inside one existing it()). The consist then moved +11 titles/tests from the FILL-LAYER arms, which §885 predicted and refroze — consistent with, not contrary to, this row."
+  },
+  {
+   "row": "§884.4",
+   "call": "DEFER — OSR, typecheck and strict-domain not re-measured on the re-based car; owed at the composed consist's gate",
+   "claim": "PLAUSIBLE deferral with a home.",
+   "method": "Read §885's commits f5a6c3bbf..2d5112851.",
+   "evidence": "git log f5a6c3bbf..2d5112851: 9feb645f8 CURE-CAPSULE, 36f04bfcd FILL-LAYER, 37e285498 '§885 cure 1/1: the fill-layer car changed a slot's type and an existing consumer went strict-dirty', d4b91b26a register 1/2, c8b83b25e register 2/2, 2d5112851 cure 2/2.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The deferral was honoured at the consist gate and it paid: strict-domain was dirty there (from the FILL-LAYER car). The scope argument (a scripts/ porcelain parser cannot mint an OSR shape) is PLAUSIBLE and was not contradicted by §885."
+  }
+ ],
+ "beyond": [
+  "§883.7 defect 3 misreports the instrument: on the 20-town stream the shipped phraseRepetitionEnvelope returns powered 0 / unpowered 20 / carriesEvidence false / withinEnvelope false (m3.mjs re-run), never 0.3667 and never a pass; 0.3667 is the chair's own cross-town formula in desk2.mjs, and m3.mjs:46 shows the chair knew ('POOLED AS ONE WINDOW (what the assessment must have done)'). The valid blind spot is m7's collapse mutant (0.0000 rendered vs 0.9231 frame, withinEnvelope=true) and the row should be re-based on it. Not self-reported.",
+  "§883.7 defect 2's '11 of 20' is 10 of 20 on the chair's own deterministic probe (desk2.mjs, seeds 'seed-'+name) against a tree hash-verified equal to 7f974e855; and one of the seven {access} variants is in DS-ECO-10 (annex :1197), which the panel noted (panel-filllayer.md:392) and the row does not.",
+  "§884.4 Hazard 1's causal diagnosis (load 40.87, sibling on the shared tier, hence HOLD until quiet) was refuted by §885 register 2/2 (c8b83b25e: 'passed in-suite at load 47 and failed in-suite at load 3.8 ... CONFIRMED intermittent in-suite ... cause is unknown'); the stratum row is not marked superseded on the cause, only the not-the-car's conclusion survives.",
+  "§884.4 Hazard 2's ruling ('must not be generalised into a re-write of the product convention', '100% consistent across three landings') was overtaken within one landing: over f5a6c3bbf..ca651d54b the split is 5 '(lane NAME)' / 43 '— Fable-unvalidated' / 1 no-seat — the chair's own §885 cure commits adopted the strict grammar plus 'Lane:' and every landing since is majority-strict. The flip is unrecorded; the program still has no walker on product-commit trailers.",
+  "§884.2 states 17970ea7c 'carries three files'; git shows two (FRQ +12, ODQ +1). The unchanged HANDOFF_CURRENT.md (blob 59ee278b4 at both 17970ea7c and its parent) is not in the commit — which is the finding, so the wording should say 'the third file the ritual meant to write was not written'.",
+  "§883.7's DESIGN_FP_SPINE quotation is not verbatim: SPINE:586-587 at 7f974e855 reads 'LANE H — THE HERALD CAUSAL-VOICE SURFACE ...: the DISPLAY SLICE IS BUILT AND DARK, 2026-08-03' — about the herald display slice, not 'THE READER'.",
+  "§883.7 calls the annexes 'hand-authored' in the estate paragraph and 'model-authored and then edited' in the provenance paragraph; 9a9094a33's own message ('8 agents ... four cluster writers ... two verifiers', Co-Authored-By Claude Fable 5) settles it for the second wording.",
+  "§883.7 defect 4's slug half was gated, not cured, at §886: whatPhrase@d1a6c773e keeps the strip-and-de-underscore arm for registered kinds ('twelve MUTILATED anchors, which stay mutilated on purpose (owner-gated, wiring note LEG-7)'), and the row's own example occupation_burden_cleared is registered (rumorFallbackPhrasePools.js:249) so variant 1 'burden cleared' still computes. The 'takes hold in' line is wizardNews.js:478, not 477.",
+  "§883.7's reading-lens and adversary transcripts are not preserved anywhere on disk; the critic's concession — the row's single most decisive piece of evidence — exists only as the chair's transcription in ledger row 32372.",
+  "§884.3's {complexity} cost is understated: annex §0c-3's own arithmetic is C1 1/3, C2 2/3, C3 2/3, C4 3/3, C5 2/3 — four of five DS-ECO-1 pools lose a variant, not only C1; and §885 cure 1/1 (37e285498) shows the car's string|undefined type change had a consumer the lane missed (slots.season in a detail row) — caught by the chair's strict gate, consistent with §884.4's deferral of strict-domain.",
+  "Both the FILL-LAYER and CURE-CAPSULE docks carry materialised (cp -Rc) node_modules (RECEIPT.md:5; node_modules/vitest is a real directory in each), contrary to the symlink-by-design law; harmless because neither dock built, but neither §884.3's nor §884.4's chair verification mentions it, and either dock re-used for a size-gated build would reproduce the 8,551 B hazard.",
+  "§884.1's heartbeat no longer exists (scheduled-tasks list returns none), so it was session-bound and 'for the rest of the arc' overstated; the class finding stands, and with the seat back at Fable 5.1 the same hard-coded text would today be accidentally correct — the strongest reason not to hard-code it.",
+  "§884.1's 'both skeptics ... reached the same sequencing' overstates R1, which ranked three lit-surface bugs (instrument-and-news Car 2, Car 1, A4) ahead of FILL-LAYER (panel-filllayer.md:593-601); both agree only that FILL-LAYER precedes any lighting."
+ ],
+ "chair_errors": [
+  "Attributed to phraseRepetitionEnvelope a score (0.3667, 'a pass') the instrument never produced; on that stream it reports no evidence (powered 0). The 0.3667 is the chair's own cross-town formula (desk2.mjs) — §883.7 defect 3, in both the stratum and ledger row 32372.",
+  "'11 of 20' towns printing 'a working the road' is 10 of 20 on the chair's own deterministic probe (desk2.mjs) — §883.7 defect 2.",
+  "'the §884.1 commit 17970ea7c carries three files' — it carries two (git show --stat) — §884.2.",
+  "DESIGN_FP_SPINE.md misquoted as 'THE READER IS BUILT AND DARK'; the text is 'the DISPLAY SLICE IS BUILT AND DARK' about Lane H's herald surface (SPINE:586-587) — §883.7 defect 1.",
+  "'wizardNews.js:477' is line 478 at 7f974e855 — §883.7 defect 4 (trivial).",
+  "The annexes are described as 'hand-authored' one paragraph before the provenance ruling that they are model-authored then edited — §883.7.",
+  "§884.4 Hazard 1's load-contention explanation was presented as proven ('proven not-the-car's' is right; 'environmental at load 40.87' is not) and was refuted by the chair's own §885 register act (c8b83b25e) without the row being marked superseded.",
+  "§884.4 Hazard 2: the chair ruled the product convention must not change and then adopted the other grammar in its own §885 cure commits the same night, without recording the flip."
+ ],
+ "commands": [
+  "mkdir -p .../walk/S12; printf partial JSON > .../walk/S12.json",
+  "sed -n '304,327p;378,468p' .../stratum/full.md",
+  "sed -n '32372p;32375p;32376p;32377p;32378p;32381p' docs/OWNER_DECISION_QUEUE.md (to scratch, then python slicing)",
+  "git -C REPO ls-tree -r --name-only 7f974e855 | grep -E 'economyStateProse|phraseRepetitionEnvelope|wizardNews|stateProseKernel'",
+  "git -C REPO show --stat --format=... adb9f19b7 / 9a9094a33 / 17970ea7c / 62be253f3 / c422ee824 / 36f04bfcd / 9feb645f8 / 394d758ee / 37e285498 / c8b83b25e",
+  "git -C REPO for-each-ref refs/preserve | grep 2026-09-0; git for-each-ref --contains 62be253f3 / 36f04bfcd / adb9f19b7; git rev-parse refs/heads/claude/lane-filllayer-2026-09-02 refs/heads/preserve/curecapsule-rebased-2026-09-02",
+  "git -C REPO show 7f974e855:<path> for economyStateProse.js, stateProseKernel.js, phraseRepetitionEnvelope.js, wizardNews.js, settlementRumors.js, docs/content/RECEIPT_POOLS_DOSSIER_STATE.md, docs/DESIGN_FP_SPINE.md, supabase/functions/generate-narrative/prompts.ts; git show adb9f19b7:economyStateProse.js / RECEIPT_POOLS_DOSSIER_STATE.md / scripts/lib/dossier-slot-shapes.mjs / tests/data/dossierStateProseProjection.contract.test.js; git show d1a6c773e:wizardNews.js / settlementRumors.js; git show ca651d54b:wizardNews.js",
+  "git -C REPO grep -n ... at 7f974e855 / f5a6c3bbf / d1a6c773e for: stateProse in src/components, phraseRepetition consumers, whatPhrase, occupation_burden_cleared, WHAT_STRIP_PREFIX, 'built and dark', 'feeds itself', nestled/wharves, inventionSignal, hookVariety 8.19, 'becomes impossible the day the stack is wired', Object.freeze({ in stateProse/, 22665, build.input",
+  "for f in $(git ls-tree -r --name-only adb9f19b7 | grep '\\.generated\\.js$'): git rev-parse f5a6c3bbf:$f adb9f19b7:$f (blob identity of all generated leaves)",
+  "git -C REPO rev-parse 17970ea7c:docs/HANDOFF_CURRENT.md 17970ea7c^:docs/HANDOFF_CURRENT.md; git diff 17970ea7c 99f1aeaf6 -- docs/HANDOFF_CURRENT.md",
+  "git -C REPO diff-tree -p --no-commit-id c422ee824 | md5; same for 62be253f3; git diff-tree -r <sha> | awk '{print $4,$6}' | sort | md5; git diff --stat f5a6c3bbf 36f04bfcd; comm -12 of the two cars' path lists; git merge-base --is-ancestor 36f04bfcd 2d5112851; git merge-base --is-ancestor 394d758ee ca651d54b",
+  "git -C REPO diff --diff-filter=A --name-only f5a6c3bbf adb9f19b7; git diff --name-only f5a6c3bbf adb9f19b7; git log --format='%h %s' f5a6c3bbf..2d5112851; git log 2d5112851..d1a6c773e -- wizardNews.js / settlementRumors.js",
+  "git -C REPO log --format='%H%x00%B%x01' f5a6c3bbf..ca651d54b | python3 trailer census; bash loop: git log --format=%B <range> | grep -c '^Seat: Opus 5 (lane ' / '^Seat: Opus 5 — Fable-unvalidated' / '^Seat: ' for §883,§884,§885..§890 and fab576aba..9a0584f0f (TAIL-F, with sed uniq -c)",
+  "git -C REPO show <sha>:tests/lint/.lighting-census-baseline.json (7f974e855, f5a6c3bbf, 2d5112851); git show <sha>:scripts/.test-ratchet-baseline.json | grep totalTests/totalFiles (7f974e855, f5a6c3bbf)",
+  "ls / cat / sed -n / grep over SP: filllayer/RECEIPT.md, filllayer/used-slots.json, filllayer/panel-filllayer.md, kit-884/run-cr2.sh, kit-884/run-gate-instr.sh, chair-tools/chair-commit.sh:28-40, kit-8841/chair-tools, desk.mjs, desk2.mjs, m3.mjs, m6.mjs, m7.mjs, m11/m12/m15.mjs, more.mjs, an/prose.mjs, CORPUS_CENSUS.txt; SP2: CURECAP-REBASE-RECEIPT.md (grep + lines 135-175, 252-265, 391-396)",
+  "git hash-object SP/tree/<4 files> vs git rev-parse 7f974e855:<file> (extracted-tree identity)",
+  "node SP/desk2.mjs; node SP/desk.mjs; node SP/m3.mjs; node SP/m7.mjs (read-only probes over SP/tree, output captured to walk/S12/probe-*.out)",
+  "python3 over SP/filllayer/render-base.json, render-fixed.json (distinct/broken/non-null headers), variants.json (variants, distinct, naming, occurrences, slots, pools, blocks, digit census, words), SP/ast-prose.json (strings, files, distinct, words)",
+  "git -C <dock> rev-parse HEAD; git -C <dock> status --porcelain | wc -l for laneFILLLAYER-tree, laneCURECAP-tree, laneT13-tree; ls -la <dock>/node_modules, node_modules/vitest",
+  "cd laneCURECAP-tree && GATE_MUTEX_TIER=shared npx vitest run tests/lint/writerReach.walker.test.js --maxWorkers=2 > walk/S12/writerReach-standalone.log 2>&1; echo TRUE_EXIT=$? (porcelain captured before and after)",
+  "mcp scheduled-tasks list_scheduled_tasks",
+  "grep -c / grep -o '394d758ee...' docs/OWNER_DECISION_QUEUE.md"
+ ],
+ "porcelain_unchanged": true,
+ "summary": "S12 covers §883.7, §884.1–§884.4 (28 calls). Ratified outright: the corpus census (re-derived exactly from variants.json: 2,734/2,207/3,238/39/786/146), the seven generated leaves byte-identical at adb9f19b7, the FILL-LAYER car's structure and its 144->23 / 0-broken / 3,696-non-null proof (re-derived from the render dumps), the re-base (patch md5 identical to c422ee824) and the composed consist (10 paths +1,179/−85, empty intersection, landed at §885), the chair's exit-$TRUE_EXIT wrappers, RV-6 (both lighting tuples are exactly the two baselines), the provenance ruling (with my own two considerations), and every quotation in the strongest-evidence paragraph. Amended: defect 3's evidence is wrong at its core — the instrument never scored 0.3667 or passed (it returns no evidence on that stream; 0.3667 is the chair's cross-town formula), the town-name mechanism cannot operate inside per-settlement windows, and the real blind spot is m7's collapse mutant (0.0 rendered vs 0.92 frame passes); defect 2 is 10 of 20, not 11, over DS-ECO-1 and DS-ECO-10; defect 4's slug half is owner-gated, not cured, at §886; Hazard 1's load diagnosis was refuted by §885 (intermittent at load 3.8, cause unknown) — 56/56 standalone re-confirmed by my own run at 62be253f3, porcelain 0 before and after; Hazard 2's split over f5a6c3bbf..ca651d54b is 5 lane-form / 43 strict / 1 none, so the product convention flipped to the strict grammar at §885 without a record; §884.2's 'three files' is two; the {complexity} deferral understates its cost (four of five pools) and should be a blocker on lighting the economy desk. Evidence-thin: the lens/adversary transcripts, the estate-wide 20,600/317k/712 triple, the heartbeat text (no scheduled task exists now). No file in the repo or any dock was written; the only dock I ran anything in (laneCURECAP-tree) shows porcelain 0 before and after."
+}

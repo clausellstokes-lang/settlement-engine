@@ -1,0 +1,199 @@
+{
+ "slice": "S07",
+ "status": "COMPLETE",
+ "calls": [
+  {
+   "row": "§882.14.2 DOCKRETIRE — the deletion (45 docks, 13.9 GiB) + J1 + J2",
+   "call": "Removed 45 docks under a per-dock reachability guard; J1 treated a lone untracked node_modules SYMLINK as clean; J2 sealed-but-kept laneINSTR2-tree",
+   "claim": "45 of 45 removed, zero commits lost, 25 seals load-bearing; nothing removed was unreferenced",
+   "method": "git for-each-ref --contains over all 39 distinct removed shas; count refs/preserve/dock-*; read DOCKRETIRE-receipt.md, removals.log and dockretire-remove.sh in the lane's own scratchpad (25b6c8bb); ledger §880.3; git show 8b07ce45f:.gitignore; git worktree list | grep INSTR2",
+   "evidence": "for-each-ref --contains: every one of the 39 distinct shas resolves (e.g. `ab786aaa6 refs=1 preserve/enforcedby-car1-2026-09-01`, `871467418 refs=1 review-fixes-2026-07-08`, `47ba2bb80 refs=1 preserve/dock-laneD4-tree-2026-09-01`); `dock-*` seals = 25; removals.log 54 lines, 45 REMOVED, `DF-BEFORE: 6.1Gi`; dockretire-remove.sh: `# GUARD 1: the sha must be reachable from at least one ref right now.` … `SKIP-UNREACHABLE` … `# GUARD 2: porcelain must still be 0` … `# GUARD 3 (J1): the symlink target must survive`; no SKIP line in the log; `.gitignore:1 node_modules/`; laneINSTR2-tree still registered (1) and present under c10ad0a2",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Receipt has 0 hits for 'retrovalid' — the stratum's 'NO retrovalidation section' is exact. Reachability TODAY is executed; reachability AT THE TIME rests on GUARD 1 printing SKIP-UNREACHABLE on failure (guard and consequence in one script) and none printed. Figure mismatch: §880.3 says 'registered worktrees 72 → 27', the receipt says `worktree list = 66 entries` (66−45 ≠ 27) — not resolvable now (git worktree list = 45 today); LOW."
+  },
+  {
+   "row": "§882.14.2 HORIZON-G0-WORKER R4",
+   "call": "The throwaway lane body carried the 294 extracted lines VERBATIM rather than an empty body, so the probe measures the extraction's sign",
+   "claim": "closure −6,366 B, engine +8 B accepted (margin 236 → 228), §880.8 raise left banked, Car 1 on the FULL extraction shape",
+   "method": "cat worker-car0-closure-{base,probe}.txt; git show 9a0584f0f:src/store/settlementSlice.js (wc -l; lines 335/628); wc -l over worker-car0-probe-stage/*; receipt §9.5(b), S0.3, S0.4, RV table; ledger §882.6",
+   "evidence": "closure-base: `CLOSURE_RAW 1046662 (budget 1047000, margin 338)` `ENGINE_CHUNK engine-CPEpqGWb.js 675764 (margin 236)`; closure-probe: `CLOSURE_RAW 1040296 (margin 6704)` `ENGINE_CHUNK engine-mT20LjFx.js 675772 (margin 228)` ⇒ Δ −6,366 / +8 exact; slice at C′ = 1969 lines, :335 `generateSettlement: async (seedOverride) => {`, :628 `},` ⇒ 294 lines; probe-stage: `294 action-body.txt`, `1969 settlementSlice.js.orig`, `1671 settlementSlice.js.probe` (−298 as the receipt says); R4 text: `an empty body does not remove 294 lines from settlementSlice.js, and the closure SIGN … is exactly that removal`",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Refutation attempt: the volume's own PREDICTED figure (`−4…−7 KB (extraction) + ~60 B`) presupposes the extraction is measured, so R4 is in the volume's spirit, not against it. The lane's veto line ('re-run with a hollow body to see the sign vanish') is PLAUSIBLE only — settle with one `npm run build` in a dock at 9a0584f0f with the stage files minus action-body.txt (not run: a build)."
+  },
+  {
+   "row": "§882.14.2 HORIZON-G0-WORKER R1, R2, R3, R5, R6, R7",
+   "call": "R1 priced S0.3 against the UNRAISED 1,047,000; R2/R3 kept the census instrument and key law out of the dock; R5 read the base engine/kernel chunk from a sibling dock instead of a third build; R6 timed headlessly in worker_threads; R7 cured the instrument's early-return defect and re-ran",
+   "claim": "seven calls RATIFIED at §882.6",
+   "method": "receipt lines 441–483 (S0.3 both thresholds), 353–413 (S0.4 method note), 609–627 (RV table); ls $SP2/worker-car0-*",
+   "evidence": "S0.3: `margin at MY base, MEASURED: 338 B … threshold > +238 B` / `BANKED 1,048,000: 1,338 B → threshold > +1,238 B` / `MEASURED DELTA: −6,366 B … does not fire against EITHER ceiling`; R5 method note: `sibling dock ($SP/laneINSTRLAND-tree/dist/assets) … SAME commit 9a0584f0f … sha256 (45567abc0d4b4f0b…) and size (675,764) are byte-identical`; artefacts present: worker-car0-generation-clone-census.mjs (16,020 B), -timing.log, -listing-{base,probe}.txt, -build-{base,probe}.log",
+   "verdict": "RATIFY",
+   "confidence": "PLAUSIBLE",
+   "note": "R1 is CONFIRMED (both thresholds quoted, verdict-invariant). R5's sibling equality cannot be re-executed now (laneINSTRLAND-tree has moved to 03da380ab and its dist is not at C′); settle by `sha256sum` on a fresh base build's engine chunk vs the receipt's `45567abc0d4b4f0b…`. R6's exclusion (network fetch) is stated plainly; R7 re-ran the whole census — sound."
+  },
+  {
+   "row": "§882.14.2 HORIZON-G0-WRW — the `web` split and the 880 → 301 re-size",
+   "call": "Recommended (not taken) splitting `web` into `web-display` (counting) / `web-transitive` (reported) — a name minted in §1.10's closed vocabulary; reported the reviewable DARK cohort as 301 of 880 under an osr*/data-valued exclusion",
+   "claim": "seven RATIFIED; the split ADOPTED PROVISIONALLY (§882.3); 880 → 301 rests on the lane's own rule",
+   "method": "node probe over $SP2/wrw-car0-dump2-verdicts.json (6,520 rows: {i,v,r,rows}); git show f5a6c3bbf:scripts/lib/writer-reach-scan.mjs; grep SURFACE_CLASSES in the folded DESIGN_HORIZON.md; receipt §5 F2, §7, §8",
+   "evidence": "probe: `total 6520 tally {LIT-NAME:5044,LIT:596,DARK:880}`; `DARK 880 exact-osr-shape 383 keyNotIdent 162 shapeNotIdent 95 eitherDataValued 257 union 579 REVIEWABLE 301` — every F2 figure reproduced exactly; product at §884 tip: `f5a6c3bbf:scripts/lib/writer-reach-scan.mjs:69 export const SURFACE_CLASSES = Object.freeze([ 'web-display', 'web-transitive', 'dossier-pdf', 'campaign-pdf',` and `:87 REPORT_ONLY_CLASSES = Object.freeze(['web-transitive', 'json-export'])`; volume §1.10:116 `⟦G0-2⟧⟦CHAIR §882.3⟧ SURFACE_CLASSES = ['web-display','web-transitive',…]`",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "It IS a vocabulary act and it was minted into shipping code at §884. Wording: §882.3's '(383 on osr000…osr015 shapes …, 257 data-valued)' reads as a sum but is a UNION (overlap 61; 383+257−61 = 579). The lane's refusal to take the split itself (`it changes SURFACE_CLASSES`) was right."
+  },
+  {
+   "row": "§882.14.2 HORIZON-G0-WRW — the three self-flagged calls (1 throwaway re-implementation · 2 the 70-name BUILTIN_MEMBERS twin · 3 the contended label)",
+   "call": "The lane flagged that its figures are figures about ITS reading of §7.1 and that Car 1 may move them",
+   "claim": "carried to the fold as its first checks (§882.3)",
+   "method": "receipt §8 calls 1–3; grep BUILTIN_MEMBERS in the folded volume; FRQ:2068 (INSTR-WRW's HOLD)",
+   "evidence": "receipt §8.1: `Every figure below is therefore a figure about MY reading of §7.1, and a Car 1 that spells a rule differently will move it`; volume carries 6 BUILTIN_MEMBERS mentions incl. ⟦G0-10⟧; FRQ:2068: `its first act hit EXACTLY — 547 LIT / 4,647 LIT-NAME / 1,326 DARK … Two web-whole legacy figures came in one LOW (reviewable 301 → 300; settlement 43/2/1 → 44/1/1) … both are ⟦G0-10⟧'s own BUILTIN-twin cure`",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "The calls hold and the fold carried them, but the stratum row's figures (596/5,044/880, reviewable 301) are Car 0 PROBE figures; Car 1's instrument moved them (301 → 300, exactly as call 2 predicted). The row should say '301 (probe) → 300 (Car 1, §884)' so a returning seat does not treat 301 as the banked number."
+  },
+  {
+   "row": "§882.14.2 HORIZON-G0-CHARSET J1",
+   "call": "`S` is three sizes by predicate; adopt the CONTEXT-ANCHORED whole pass (191 → 190, institutions.name 190 → 189) and add U+00A0 to bans.invisible",
+   "claim": "J1 RATIFIED at §882.4 — a paid-renderer call",
+   "method": "git show 9a0584f0f:src/utils/generateCampaignPDF.js :88-90 and generateWorldBook.js :61-63; node probe re-implementing s() over U+0020–U+00FF under the three predicates; receipt probe 3; §882.4; volume line 799 (Car 3)",
+   "evidence": "bodies at C′: `.replace(/[^\\x09\\x0A\\x0D\\x20-\\x7E\\xA0-\\xFF]/g, ' ').replace(/\\s+/g, ' ').trim()`; probe output: `NBSP a\\u00a0a -> \"a a\" | over 0x20-0xFF ( 224 ): class 191 ctx 190 bare 189 | dropped-by-ctx-not-class: U+A0` — the receipt's 191/190/189 and the NBSP collapse reproduced; §882.4: `RULED: the volume adopts the context-anchored whole-pass reading (190) as S's definition and adds NBSP to bans.invisible (the lane's J1)`; volume :799 `Car 3 — THE SANITISER RE-DERIVATION … PAID-SURFACE BYTES; before GOLDEN; owner veto — CS-3`",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The measurement is right and the design call follows the no-silent-strip law. The paid-surface byte change is correctly routed to an owner-veto row (CS-3) in the volume, so 'a paid-renderer call' is gated, not silently taken. Refutation attempt (that the ban widens §8.1's four classes without owner word) fails because Car 3 is owner-vetoed."
+  },
+  {
+   "row": "§882.14.2 HORIZON-G0-CHARSET — the enrolment shape + J2–J6",
+   "call": "The lane's own heading asked for a queue row; the chair deferred it in the ledger only. J2 APFS-clone gate faithfulness; J3 the .generated.js red is an input-digest absorb, not a G5 STOP; J4 the four draft files as a probe-5 stand-in (E30 high); J5 static graph settles E28 → import() cure by default; J6 probe 6's build half declared OWED",
+   "claim": "'four findings ruled; J1 RATIFIED'",
+   "method": "receipt :265 heading, probe 4 table, probe 5 figures, RV row; grep FRQ for laneG0CHARSET/J-rows/NBSP; §882.4 rulings",
+   "evidence": "receipt :265 `## RETROVALIDATION ROW (for the chair to land — docs/FABLE_RETROVALIDATION_QUEUE.md)`; §882.4: `Retro row J1–J6 drafted in the receipt for §883-era collection`; FRQ grep for laneG0CHARSET/NBSP/U+00A0 hits ONLY line 2050 (this table) — no §883-era row exists; probe 4 run 2 `output byte-identical to run 1 — the clone is a faithful control`, run 5 plant `NEW zzzCharsetProbeKey on powerStructure — 1 read(s)`; §882.4 rulings: (2) `not a §10.1 G5 STOP (no growth)` = J3; (3) `R2's import() cure is Car 1's DEFAULT` = J5; (4) `the bill is corrected to the measured arithmetic` = J4; `Declared deviation … RATIFIED` = J6",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "The characterisation is exact (ledger-only deferral; the pass would not have seen it). But 'J1 RATIFIED' under-states the ledger: J3, J4, J5 and J6 were each ruled by substance in §882.4; only J2 (the clone-as-commit method) is unruled and rests on the byte-identical control + plant, which the receipt quotes. Amend the verdict cell to 'J1, J3–J6 ruled; J2 unruled (method, controlled)'."
+  },
+  {
+   "row": "§882.14.2 READERREVIEW Car 0 R4 (and §6 Correction 1)",
+   "call": "R4: chased espionage to 30 years and to the belief-map CONTAINER rather than stopping at the charter's one month. Correction 1: 'one lit MONTH per key' is measured insufficient — reach checks must run at ONE YEAR",
+   "claim": "'R4 changed the reach method from one MONTH to one YEAR'; the ledger says the month method would have produced a false negative",
+   "method": "receipt §6 (P0.3 table, Correction 1, the espionage section), RV row R4; grep rr-car0-p03-esp-belief-30y.log; ledger §882.8; FRQ §882.8.1",
+   "evidence": "RV R4: `Chased espionage to 30 years and to the belief-map CONTAINER rather than stopping at the charter's one month`; Correction 1: `At one month warMemoryEnabled produces zero new census paths … a FALSE NEGATIVE. At one YEAR it produces 102 new paths`; belief-30y log :70-71 `\"lit\": 268, \"dark\": 268`; §882.8: `§5.5's \"one lit MONTH per key\" is measured INSUFFICIENT and would have produced a false negative` and `The lane's seven retrovalidation calls R1–R7 are RATIFIED`; §882.8 trailer `SEAT: Opus 5 — Fable-unvalidated`; FRQ:1952-1966 §882.8.1 lists four numbered chair calls and cites `laneG0RR-receipt.md 09:08` only under Receipts",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "Substance holds and the 'worst SHAPE' characterisation is exact. But the stratum conflates two things: R4 is the 30-year espionage chase (268 = 268, NOT REACHED); the month → year method change is §6 CORRECTION 1 (warMemory 0 vs 102 paths), which the Opus chair RULED into Car 1 at §882.8. Re-label: 'R4 (30-year chase) and Correction 1 (month → year), both adopted at §882.8'. The month → year rule is sound: a war must conclude before it can be remembered."
+  },
+  {
+   "row": "§882.14.2 READERREVIEW Car 0 R1, R2, R3, R5, R6, R7",
+   "call": "R1 ran nine probes not five (the volume wins); R2 priced P0.4 as advance-only; R3 discarded a vacuous hash-moved detector; R5 did not run the lighting refreeze (writes tests/); R6 built the eight design skeletons then preserved and removed them; R7 corrected two estimated timestamps",
+   "claim": "seven RATIFIED (§882.8)",
+   "method": "receipt RV table; ls $SP2/laneG0RR-probes and rr-car0-p03-overlay{,-r2}.json; find laneG0RR-newfiles",
+   "evidence": "R3: `the first pass scored 5/5 REACHED on a detector — \"the world hash moved\" — that is VACUOUS, because the flag's value sits inside the hashed worldState.simulationRules`; artefacts: rr-car0-p03-overlay.json AND rr-car0-p03-overlay-r2.json both present (the discarded run preserved as R3 promises); laneG0RR-newfiles = 8 files (`scripts/review/readerRubric.mjs`, `scripts/lib/golden-corpus-key.mjs`, `tests/scripts/readerRubric.test.js` …) — R6's veto path intact; R5: `the refreeze WRITES tests/lint/.lighting-census-baseline.json — a tests/ edit my brief forbids — and refuses on a dirty tree anyway`",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "R3 is the call to keep in memory: 'a dormancy claim is a BIT claim' — the flag's own value moves the hash. R1's over-run of the brief is licensed by the brief's own 'the volume wins' clause. R7 is honesty, not judgment."
+  },
+  {
+   "row": "§882.14.2 T13-BUILD — the count (15 → 23 → 24), the 196 B placement cure, the det-pow chunk",
+   "call": "Twenty-four lane calls across §RV/§RV3/§RV3b; the 196 B closure breach cured at the PLACEMENT with no ceiling ask; det-pow as its own lazy chunk",
+   "claim": "'the queue holds only §881.16.3's four PAUSE-report calls — the build's own 24 are not here'",
+   "method": "count table rows in laneT13-receipt.md at :721, :2431, :2761, :3582; ledger §881.3/§881.9/§881.14; git show --stat 594c7521f and grep detPow in its vite.config.js; FRQ :2096-2110",
+   "evidence": "§RV rows 1–9 (9); §RV3 rows 1–9 (9); §RV3b rows 10–15 (6) ⇒ 24; §C5.10 R-T13P-1…6 (a different lane, T13-PRELAND); §881.3 `Fifteen retro rows (§RV3/§RV3b)` (true of those two sections); §881.9 `\"fifteen retro rows\" is 23` (wrong: 9+9+6=24); §881.14 `PB-6: §883 owes 24 retro rows`; 594c7521f `T13 Car 4 (v) FOLLOW-ON — … detPow … Cured at the placement, never at the ceiling.` touching `vite.config.js | 19 +` with `:585 if (id.includes('/src/kernel/detPow.js'))`; receipt dock table: `build #6 ⛔ 1,048,196 — 196 B OVER` → `#6b 1,047,496 — 504 B UNDER; kernel chunk back to 10,683 B exactly`; FRQ:2096 `§883.1 · lane T13-BUILD — TWENTY-FOUR calls … §RV (:721), §RV3 (:2431), §RV3b (:2761)`; FRQ:2106 `§883.2 · lane T13-PRELAND — SIX calls`",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "The count 24 and the placement cure are exact. The row's 'the build's own 24 are not here' was true when written but is superseded INSIDE THIS SAME STRATUM by §883.1 (24) and §883.2 (6) — add a forward pointer ('paid at §883.1/§883.2') or a future pass re-finds a phantom debt. §881.9's '23' is a chair arithmetic miss already corrected at §881.14."
+  },
+  {
+   "row": "§882.14.2 HORIZON-G0-COVERAGE — the eleven roster corrections and the C1 read-time cure",
+   "call": "C1–C11 measured against the drafted roster; RULED: `status on activeChains` read(s) applies canonicalSupplyChainStatus so the census counts customer-visible bands; the legacy persisted vocabulary is a WRWALKER/OSR handover, not a COVERAGE cure or an exemption",
+   "claim": "eleven corrections are the register's roster; 'persisted ≠ read vocabulary' is the right cure rather than an exemption",
+   "method": "git show 9a0584f0f:src/domain/supplyChainState.js :172-208; git grep for canonical-token assignments in src/generators at 9a0584f0f; grep cov-car0-census2.log; volume :543/:1367/:1444; git ls-tree f5a6c3bbf for a coverage register",
+   "evidence": "C′ :174-182 `LEGACY_TO_CANONICAL = Object.freeze({ operational: 'stable', running: 'stable', entrepot: 'stable', vulnerable: 'strained', impaired: 'scarce', magically_sustained: 'substituted', unexploited: 'blocked' })`, :185-188 CANONICAL_STATUSES (7), single consumer `:547 const baseStatus = canonicalSupplyChainStatus(chain.status)`; `git grep -E \"status: *'(stable|strained|scarce|blocked|captured|substituted|collapsing)'\" 9a0584f0f -- src/generators` → no output; census2 :721 `9/525 severityBand on activeConditions` (absent) ⇒ 516/525 carry one (C5); :23 `36 rows 36 occ Deficit — Active Famine` (C6); volume :1444 `CR-9 … READ-TIME MAPPING (⟦G0-34⟧, §882.5) | veto: \"keep it persisted with the LEGACY list\" → the census then counts a vocabulary no customer sees`",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "The eleven corrections are measured, not reasoned, and the read-time cure is right on FINITE-SEMANTICS (count the typed bucket the customer sees) and beats the exemption (which would red exempt-but-reached on C5/C6 by the walker's own inversion arm). ONE weakness the ruling does not name: `canonicalSupplyChainStatus` maps any unknown token to 'stable' (C′ :198-203 `return LEGACY_TO_CANONICAL[legacyStatus] || 'stable'`), so a read-time-mapped field can NEVER surface an out-of-vocabulary token — `knownDefects.outOfVocabulary` is blind on it unless Car 1 keeps J-COV0-2's raw LEGACY-VOCAB CONTROL field beside the mapped one. Car 1 has not landed (no coverage register under scripts/ at f5a6c3bbf), so this is a design amendment, not a code defect."
+  },
+  {
+   "row": "§882.14.2 HORIZON-G0-COVERAGE J-COV0-1…5",
+   "call": "J-COV0-1 re-ran after correcting five of its own pinned vocabularies; J-COV0-2 added a LEGACY-VOCAB CONTROL field + four receipt sub-fields; J-COV0-3 ran carto in full (504); J-COV0-4 added a 300-seed negative control; J-COV0-5 deleted the probes from the dock and preserved copies",
+   "claim": "ruled at §882.5",
+   "method": "receipt §7.4; ls $SP2 for the probes and both census logs; §882.5",
+   "evidence": "both logs present (`cov-car0-census.log`, `cov-car0-census2.log`) — J-COV0-1's audit trail; probes present (`laneG0COV-bandCensus.probe.mjs` 22,311 B, `laneG0COV-bandCensusDial.probe.mjs`, `cov-car0-dial.log`, `cov-car0-carto.log`); §882.5: `Wealthy 0/42 on the 6×7 grid at the default dial, 21/42 at priorityEconomy: 95, 0 in a 300-seed sweep`; receipt: `Nothing owner-gated was decided. Every roster correction in §4 is a MEASUREMENT handed to Car 1`",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "J-COV0-1 is the citation law applied to the probe's own pins (a pin error must not masquerade as an engine finding). J-COV0-2's control field is what makes C1 legible and is the field the C1 amendment above depends on."
+  },
+  {
+   "row": "§882.14.2 — the §3 amendment ('the mark follows the SEAT THAT DID THE WORK, never the seat that dispatched it')",
+   "call": "RATIFIED practice over §3's literal inheritance clause; §3 declared AMENDED; the ENROLMENT GATE installed in chair-commit.sh as the structural cure",
+   "claim": "sound, and it widens what the queue must carry",
+   "method": "sed FRQ §3 (:37-75); grep FRQ for the amendment wording; diff $SP/chair-tools/chair-commit.sh.pre-882.14 vs current; run the gate's regex over each of the seven ruling rows; git show HEAD:.husky/commit-msg; ledger §882.14",
+   "evidence": "FRQ:45 at HEAD still reads `Lane (subagent) work inherits its dispatching chair's seat and is enrolled by that chair at collection.` — grep for 'SEAT THAT DID'/'did the work' hits ONLY FRQ:2056 (this row); chair-commit.sh diff adds `# --- THE ENROLMENT GATE (§882.14) …` keyed on `grep -qiE 'retrovalidation|retro row|RATIFIED|SEAT: Opus 5'` over the ledger diff; regex over the seven ruling rows: `§880.3 gate-hit=0 tokens=[]` while §881.3/§882.3/§882.4/§882.5/§882.6/§882.8 all hit; .husky/commit-msg at HEAD checks only the Seat trailer on ledger commits; chair-tools/ is NOT tracked at HEAD (lives in the chair scratchpad)",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "Sound in substance: the judgment content is the working seat's, and nine prior lanes already carried the mark that way; a literal reading would have hidden CLASS-C entirely. Three amendments owed: (1) §3's clause text was NOT edited — the ruling says AMENDED but the amendment exists only inside §882.14.2's paragraph, so a chair reading §3 alone still reads the literal rule; write the clause. (2) The gate's predicate misses the very shape that lost DOCKRETIRE: §880.3 rules two lane judgments with the word ACCEPTED and matches none of the four tokens (gate-hit=0), so 'the gate that let it happen is closed' is over-broad — add 'lane judgment|ACCEPTED|J[0-9]+ ' or key on the lane-receipt path instead. (3) §3's 'STILL ESCAPING' list should name both, and that the gate is a scratchpad tool, not a tracked hook. Widening: yes — every Opus lane under a Fable chair now owes an enrolment at collection, and nothing in §3 or any hook says so."
+  },
+  {
+   "row": "§882.14.2 — the framing ('each row is an ENROLMENT, not a new ruling; re-derive from the receipt, not the summary')",
+   "call": "The seven rows carry existing ledger verdicts across without re-ruling",
+   "claim": "verdict carried verbatim in substance",
+   "method": "each ruling row read against its table cell (above)",
+   "evidence": "Six of seven cells match their ledger row; the CHARSET cell ('J1 RATIFIED') under-states §882.4 and the T13 cell lacks the §883.1 pointer (both AMENDED above)",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The instruction to re-derive from the receipt is the right law — three of this slice's amendments came from reading receipts the summaries had compressed."
+  }
+ ],
+ "beyond": [
+  "The §882.14 ENROLMENT GATE would NOT have fired on §880.3 — the DOCKRETIRE ruling row, the very case that motivated the cure: its two lane judgments are worded 'ACCEPTED' and the predicate `retrovalidation|retro row|RATIFIED|SEAT: Opus 5` matches nothing in that line (executed: gate-hit=0). The negative control the chair ran used a synthetic row 'speaking of a RATIFIED lane row', i.e. it tested the tokens, not the lost shape.",
+  "FRQ §3's inheritance clause (line 45) is textually unamended at HEAD although both ledger §882.14 and FRQ §882.14.2 say it 'is AMENDED'; the amendment lives only in the §882.14.2 paragraph.",
+  "Within the same stratum, §883.1 (FRQ:2096, 24 calls) and §883.2 (FRQ:2106, 6 calls) pay the T13 debt that the §882.14.2 table row still describes as 'not here'; the table lacks the forward pointer.",
+  "INSTR-WRW Car 1 (§884, FRQ:2068) moved the WRW probe figures — 596 LIT → 547, 5,044 LIT-NAME → 4,647, reviewable 301 → 300 — exactly as the lane's self-flagged call 1 and call 2 (the BUILTIN_MEMBERS twin) predicted; the stratum row quotes only the probe figures.",
+  "`canonicalSupplyChainStatus` maps unknown tokens to 'stable' (C′ supplyChainState.js:198-203), so the §882.5 read-time cure blinds `knownDefects.outOfVocabulary` on `status on activeChains` unless the raw LEGACY-VOCAB CONTROL field (J-COV0-2) is kept in Car 1's roster; the ruling and the volume's CR-9 do not say so.",
+  "CHARSET J2–J6 are enrolled nowhere as rows — the §882.14.2 table names only J1; §882.4 ruled J3–J6 by substance (findings 2–4 + the declared deviation) and never J2. The paid-surface byte change (Car 3) is owner-vetoed in the volume (CS-3, line 799), so J1 is gated, not silently taken.",
+  "§882.3's '(383 on osr000…osr015 shapes …, 257 data-valued)' is a UNION (overlap 61 by the exact-shape reading; 478 dark rows have an osr-prefixed shape, 383 an exact osrNNN shape) — reproduced from wrw-car0-dump2-verdicts.json: 383/162/95/257/579/301 all exact.",
+  "§880.3 states 'registered worktrees 72 → 27' while the DOCKRETIRE receipt states `worktree list = 66 entries` (59 in scope + 7 other-tool); 66 − 45 ≠ 27. Not resolvable today (worktree list = 45 now). LOW.",
+  "The ledger worktree shows `.husky/commit-msg` STAGED FOR DELETION (`D  .husky/commit-msg` in git status) — the second seat-gate channel §3 describes as 'tracked on the branch' is absent from the index right now. Foreign WIP; not touched; the chair should know before the next ledger commit."
+ ],
+ "chair_errors": [
+  "§882.14 / §882.14.2 claim '§3's clause is AMENDED to say so' — the FRQ §3 text was not edited (CONFIRMED by grep at HEAD).",
+  "§882.14's 'the gate that let it happen is closed with a negative control' is over-broad: the installed predicate does not match §880.3's own wording (ACCEPTED lane judgments), CONFIRMED by running the regex over the row.",
+  "§882.14.2's READERREVIEW cell attributes the month → year method change to R4; R4 is the 30-year espionage chase, the method change is §6 Correction 1 (CONFIRMED from the receipt).",
+  "§882.14.2's CHARSET cell 'four findings ruled; J1 RATIFIED' under-reports §882.4, which ruled J3, J4, J5 and J6 by substance (CONFIRMED from the row text).",
+  "§881.9's 'fifteen retro rows is 23' was itself an arithmetic miss (24), corrected at §881.14 PB-6 and §883.1 — pre-stratum, carried inside the T13 cell (CONFIRMED by counting the receipt tables).",
+  "§882.14.2's T13 cell 'the build's own 24 are not here' is superseded by §883.1 in the same stratum without a pointer (CONFIRMED)."
+ ],
+ "commands": [
+  "mkdir -p …/walk/S07 && printf '{\"slice\": \"S07\", \"status\": \"PARTIAL\", \"calls\": []}' > …/walk/S07.json",
+  "sed -n '99,112p' …/stratum/full.md",
+  "grep -n '^- \\*\\*§882\\.6…' docs/OWNER_DECISION_QUEUE.md (locate §880.3 §881.3 §881.9 §881.14 §882.3 §882.4 §882.5 §882.6 §882.8)",
+  "sed -n '32321p;32332p;32338p;32343p;32352p;32353p;32354p;32355p;32357p;32363p' docs/OWNER_DECISION_QUEUE.md",
+  "ls -la / wc -l over $SP2/laneG0{WORKER,WRW,CHARSET,RR,COV}-receipt.md, laneT13-receipt.md, DOCKRETIRE-receipt.md; cat DOCKRETIRE-receipt.md",
+  "for s in <39 removed shas>; do git for-each-ref --contains $s | wc -l; git cat-file -t $s; done",
+  "git for-each-ref refs/preserve | grep dock- | wc -l (25); git for-each-ref refs/preserve | wc -l (158); git worktree list | wc -l (45)",
+  "grep -ci retrovalid $SP2/DOCKRETIRE-receipt.md (0)",
+  "sed -n '254,330p;441,483p;609,627p;353,413p' $SP2/laneG0WORKER-receipt.md; cat $SP2/worker-car0-closure-{base,probe}.txt; ls $SP2 | grep worker-car0; wc -l $SP2/worker-car0-probe-stage/*",
+  "git show 9a0584f0f:src/store/settlementSlice.js | wc -l; sed -n '333,336p;627,630p'",
+  "sed -n '295,320p;411,451p;457,521p' $SP2/laneG0WRW-receipt.md; head -c 700 $SP2/wrw-car0-dump2-verdicts.json",
+  "node -e '<count DARK/osr/identifier splits over wrw-car0-dump2-verdicts.json>' (two runs: prefix and exact osr)",
+  "git show f5a6c3bbf:scripts/lib/writer-reach-scan.mjs | grep -n SURFACE_CLASSES; same at 4233031ba; grep -n SURFACE_CLASSES/web-display/U+00A0/BUILTIN_MEMBERS/canonicalSupplyChainStatus $SP/DESIGN_HORIZON.md",
+  "sed -n '87,118p;120,160p;163,190p;260,285p' $SP2/laneG0CHARSET-receipt.md",
+  "git show 9a0584f0f:src/utils/generateCampaignPDF.js | sed -n '88,90p'; git show 9a0584f0f:src/utils/generateWorldBook.js | sed -n '61,63p'",
+  "node -e '<re-implement s(); count class/ctx/bare survivors over U+0020–U+00FF; print NBSP result>'",
+  "sed -n '287,340p;340,396p;584,598p' $SP2/laneG0RR-receipt.md; ls $SP2/laneG0RR-probes; ls $SP2 | grep rr-car0-p03; find $SP2/laneG0RR-newfiles -type f; grep -n '268\\|espionageActive' $SP2/rr-car0-p03-esp-belief-30y.log",
+  "sed -n '167,196p;253,267p' $SP2/laneG0COV-receipt.md; grep -n -i 'severityBand\\|Famine\\|activeConditions' $SP2/cov-car0-census2.log; ls $SP2 | grep -i 'laneG0COV\\|cov-car0'",
+  "git ls-tree -r --name-only 9a0584f0f | grep supplyChainState; git show 9a0584f0f:src/domain/supplyChainState.js | sed -n '172,208p'; git grep -n canonicalSupplyChainStatus 9a0584f0f -- src/domain/supplyChainState.js",
+  "git grep -n -E \"status: *'(stable|strained|scarce|blocked|captured|substituted|collapsing)'\" 9a0584f0f -- src/generators (no output)",
+  "git grep -n 'canonicalSupplyChainStatus\\|activeChains' f5a6c3bbf -- scripts tests; git ls-tree -r --name-only f5a6c3bbf | grep -i coverage",
+  "sed -n '721,780p;2431,2520p;2761,2830p;3582,3700p' $SP2/laneT13-receipt.md | grep '^|' (row counts 9/9/6/6); grep -n '## §RV' laneT13-receipt.md",
+  "git show --stat --format='%h %s' 594c7521f; git show 594c7521f:vite.config.js | grep -n detPow",
+  "sed -n '37,80p' docs/FABLE_RETROVALIDATION_QUEUE.md; grep -n 'SEAT THAT DID\\|did the work' …; grep -n '882.14.2\\|§882.8.1\\|laneG0RR\\|laneG0CHARSET\\|J-COV0\\|laneG0WORKER\\|laneG0WRW\\|T13P\\|PRELAND\\|NBSP' docs/FABLE_RETROVALIDATION_QUEUE.md; sed -n '1952,1966p;2094,2112p;2068p' …",
+  "cat $L/dockretire-remove.sh; head -30 $L/removals.log; wc -l; grep -c REMOVED; wc -l $L/dock-survey.tsv $L/dock-plan.tsv (L = the DOCKRETIRE lane scratchpad 25b6c8bb)",
+  "diff $SP/chair-tools/chair-commit.sh.pre-882.14 $SP/chair-tools/chair-commit.sh; git ls-tree HEAD chair-tools/ (empty); git show HEAD:.husky/commit-msg | grep -n -i seat",
+  "for ln in 32321 32332 32352 32353 32354 32355 32357; do sed -n ${ln}p ODQ | grep -ciE 'retrovalidation|retro row|RATIFIED|SEAT: Opus 5'; done",
+  "git show 8b07ce45f:.gitignore | grep node_modules; ls -d …/c10ad0a2*/scratchpad/laneINSTR2-tree; git worktree list | grep -c INSTR2",
+  "git status --porcelain | wc -l; git status --porcelain | md5 (ledger worktree, before and after: 5611 / 088fe14bb56e8bc0bbeb1b129732d669 both times)",
+  "node …/walk/S07/build.mjs (writes only …/walk/S07.json)"
+ ],
+ "porcelain_unchanged": true,
+ "summary": "S07 re-derived all seven CLASS-C enrolments and the §3 amendment from primary receipts and the tree, read-only. RATIFY: DOCKRETIRE (all 39 distinct removed shas reachable today, 25 seals present, guards live in the removal script, receipt has no retrovalidation section), WORKER R4 (−6,366 / +8 / 294 lines reproduced from the closure files and C′), WRW's split and 880→301 (every F2 figure reproduced from the verdict dump; the name is minted at f5a6c3bbf:69), CHARSET J1 (191/190/189 and the NBSP collapse reproduced by an independent probe; the paid-surface change is owner-vetoed via CS-3), COVERAGE J-COV0-1…5 and the READERREVIEW/WORKER remaining calls. AMEND: the §3 amendment (its clause text is unedited at HEAD; the ENROLMENT GATE's predicate does not match §880.3's ACCEPTED wording — gate-hit=0 — so the DOCKRETIRE shape still escapes; the gate is a scratchpad tool, not a tracked hook), READERREVIEW (R4 is the 30-year espionage chase; month→year is §6 Correction 1), CHARSET's verdict cell (J3–J6 were ruled too), T13 (24 is exact but §883.1/§883.2 pay it inside the same stratum), COVERAGE's read-time cure (unknown tokens map to 'stable', blinding OOV unless the control field is kept), WRW's figures (Car 1 moved reviewable 301→300). No REVERSE, no EVIDENCE-THIN: every row named its receipt and every receipt and artefact was found. Ledger worktree porcelain unchanged (5611 lines, same md5 before and after); no dock was entered or run in; no test, build, or door was run; the only writes were under walk/S07."
+}

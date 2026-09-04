@@ -1,0 +1,9 @@
+
+ RUN  v4.1.8 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/825f209c-0e84-4a1e-b6f0-79a46de834dc/scratchpad/laneINSTRWRW-tree
+
+
+ Test Files  1 passed (1)
+      Tests  56 passed (56)
+   Start at  23:29:49
+   Duration  37.26s (transform 2.75s, setup 24ms, import 547ms, tests 36.59s, environment 0ms)
+

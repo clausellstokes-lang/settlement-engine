@@ -1,0 +1,147 @@
+TRAIN 1 car C9 (lane PARSER): the SECTION-TARGET parser stops splitting on a comma and starts reading the shape its own neighbour has always used — the field is a closed vocabulary at last, and four prose leaves move 584 bytes for the first time
+
+THE DEFECT, MEASURED. generate-dossier-state-prose.mjs split its SECTION-TARGET
+declaration on `,` as well as the intended `·`, so a line reading `` `economy`
+(economic resilience, prosperity, food) `` projected as the three fragments
+"economy (economic resilience", "prosperity" and "food)". Measured against the
+eight sections the causal annex declares in its own §0e table, 26 of the 45
+declaring state blocks carried at least one string outside them; measured against
+the ten the STATE register actually uses (the eight plus `overview` and
+`viability`), 13 of 45 did. The causal register came out 100% canonical under the
+same parser only because its authors happen to write nothing but backticked
+tokens. The ARMS extractor two lines below has always read exactly that shape.
+
+⚠ THE BRIEF SAID 23 OF 45 AND THE DESIGN DOC SAID 25 OF 45 AGAINST A 14-NAME
+VOCABULARY. Neither reproduces. Both figures are corrected here to the measured
+26-of-45 against the eight and 13-of-45 against the ten, with the vocabulary
+named, because a census whose denominator is not stated cannot be checked.
+
+THE CURE (design E4a, chair rows J6/J10 at ledger §885.2). Three moves in one
+file. (1) The extractor becomes the ARMS extractor's shape: backticked lowercase
+tokens, prose ignored. Every backticked span on all 123 SECTION-TARGET lines in
+both annexes already matches that token class, measured, so it drops nothing the
+old rule caught. (2) A closed vocabulary of ten, CROSS-CHECKED AGAINST THE DOC on
+every run: assertSectionVocabulary re-reads §0e's table out of the causal annex
+and refuses to run if the eight there stop matching the eight here, so a ninth
+section reds this projection instead of drifting past it. `overview` and
+`viability` are declared state-only, because §0e speaks for the causal families
+and their eight ship to the runtime as CAUSAL_SECTION_TARGETS. (3) An unknown
+backticked token THROWS rather than being dropped: on this line a backticked
+token is indistinguishable from a target, and a plausible-looking wrong section id
+is worse than the fragments this repair removes. Un-backticked prose stays
+ignored by construction, and the two blocks whose target surface is not a dossier
+section at all — DS-GEN-10 (the printed chapter openers) and DS-HK-1 (the hooks
+panel header) — are frozen in SECTION_TARGETLESS_BLOCKS, so a new silent one
+cannot appear.
+
+ONE ANNEX ROW HAND-FIXED, and it is the row the new gate names. DS-GEN-7's
+declaration backticked `tab` (a field name, from `coherenceNotes[]{note,severity,
+tab,type}`) and `economics` (that field's VALUE, not a section). Re-worded to
+`overview` · also `economy` · `power` · `history`, which is grounded rather than
+guessed: narrativeGenerator's genCoherence emits tab: 'economics' | 'power' |
+'overview' | 'history' at six sites, and `economics` is spelled `economy`
+everywhere else in this annex.
+
+⛔ THE DECLARED SHIFT: THE LEAVES ARE NO LONGER BYTE-IDENTICAL. The lane before
+this one found the seven prose leaves byte-identical across its work and treated
+that as a proven property. This car breaks it, deliberately, on four of the
+seven. PREDICTED IN WRITING BEFORE THE GENERATOR RAN, then measured — every
+figure exact:
+
+  general.generated.js    -413 B   183,036 -> 182,623
+  power.generated.js       -83 B    81,993 ->  81,910
+  defense.generated.js     -51 B   111,989 -> 111,938
+  warFaith.generated.js    -37 B   115,965 -> 115,928
+  economy / stressors / dossierCausalProse   BYTE-IDENTICAL (absent from the diff)
+
+Total -584 B, 13 of 45 state blocks, 0 of 78 causal families. Every changed line
+in the four leaves is inside a `sectionTarget` array or its own brackets: no
+variant text, angle, mark, slot or pool key moves, so no seeded draw anywhere in
+the estate moves. The causal leaf staying byte-identical is what protects
+causalFamiliesForSection and the "lands every family in at least one of the eight
+dossier sections" arm, which reads this exact field.
+
+THE CENSUS, BEFORE AND AFTER. 45 state blocks declare a SECTION-TARGET. Before:
+32 of 45 carried only canonical strings against the ten, 19 of 45 against the
+eight, over 30 distinct strings. After: 43 blocks carry a sectionTarget and ALL 43
+are canonical, over exactly 10 distinct strings; the other 2 are DS-GEN-10 and
+DS-HK-1, which now carry no sectionTarget key at all because they name no dossier
+section, which is the truth. Causal: 78 of 78 canonical over 8, before and after.
+
+THE PROOF, EVERY EXIT CAPTURED IN-SHELL. Base control first, on a dock cut from
+this car's base with its own node_modules.
+  1. `--check` at base, before any edit                 exit 0, 68 state blocks /
+     2266 variants / 6 desks, 78 causal families / 468 variants
+  2. `--check` after the edit, before regenerating      exit 1, "power.generated.js
+     is stale" — and it names POWER, not economy, corroborating the prediction
+     that the economy leaf does not move
+  3. regenerate                                          exit 0
+  4. `--check` after regenerating                        exit 0, same census line
+  5. blast-radius battery, 8 files, BASE                 TRUE_EXIT 1, 4 failed /
+     134 passed — tests/copy/voiceMechanics.test.js alone, the banked ratchet
+  6. the same battery at the TIP                         TRUE_EXIT 1, 4 failed /
+     134 passed, and the two logs diff to nothing but a PID and file ordering.
+     The voice ratchet's per-file leaf rows are unchanged, arm for arm: causal 66
+     · defense 37 · economy 42 · general 36 · power 36 · stressors 62 · warFaith
+     59, total still 1108 against its 670 budget. Nothing fell, so the
+     "fell => bank the win" arm gains nothing to bank.
+  7. supplementary lint battery (governedArtifactIo, observedShapeMigration,
+     sizeBaseline)                                       TRUE_EXIT 0, 39/39
+  8. eslint over the generator and all seven leaves      exit 0
+
+FOUR NEGATIVE CONTROLS, each doctoring one file, running the projector, then
+restoring from a copy held in memory and re-asserting byte-identity:
+  M1  drop one of the eight from the enforced vocabulary   exit 1, and the message
+      prints §0e's list beside this file's
+  M2  restore the un-fixed DS-GEN-7 annex row              exit 1, naming `tab` and
+      `economics` — so the hand-fix was necessary, not cosmetic
+  M3  forget DS-HK-1 in SECTION_TARGETLESS_BLOCKS          exit 1
+  M4  put the comma back in the split                      exit 1, and the gate
+      names TWENTY stray tokens — the shipped rule can no longer pass at all
+  CONTROL, undoctored tip                                  exit 0
+Mutants that failed to convict: 0 of 4.
+
+⛔ ONE REGISTER ACT IS OWED AND THIS LANE DOES NOT TAKE IT. The four moved leaves
+are entries in the sourceTree and executionTree of
+scripts/.observed-shape-readers-baseline.json, and they are UNSCANNED EXECUTION
+INPUTS, not detector sources. So:
+  tests/lint/observedShapeReaders.walker.test.js  GREEN at base (3 files, 115/115,
+  TRUE_EXIT 0), RED at tip on ONE arm — "THE LIVE ESTATE INSTANCE: a freshly
+  re-minted baseline has NO drift at all" — listing exactly the four leaves and
+  nothing else. Its detectorSources half is EMPTY (that assertion passes first),
+  which is the good case: the gate CLI says so in as many words — "These are
+  generated/data inputs, not detector sources, so the shrink-only --write
+  re-freeze may absorb them; the instrument is NOT darkened by them" (exit 1).
+  THE CURE IS `node scripts/check-observed-shape-readers.mjs --write`, which
+  refuses on an uncommitted tree and therefore cannot be run before this commit
+  exists. It belongs to the landing, with the rest of the registers. The arm's own
+  docblock records that this exact class — dossier-prose leaves as unscanned
+  inputs — is what the drift classifier was built to separate.
+No test file, no test and no `it(` moved, so totalTests and totalFiles are
+untouched and the known-failure census stays where it is at 10 of 10.
+
+JUDGMENT ROWS, recorded to be vetoed.
+  J-P1  The vocabulary is TEN, not the causal annex's eight, because the state
+        register genuinely speaks at `overview` (16 uses) and `viability` (2).
+        Chose to declare the two here as state-only rather than widen §0e, which
+        would put CAUSAL_SECTION_TARGETS and its "reaches every section from the
+        discovery index" arm in front of two sections no causal family targets.
+  J-P2  An unknown backticked token THROWS instead of being dropped-and-reported.
+        A drop report nobody reads is how this defect survived; the file's own
+        doctrine is that a silent drop is the failure mode that matters.
+  J-P3  The eight are cross-checked against §0e's table on every run rather than
+        merely copied. Costs 15 lines and removes the drift class entirely; the
+        precedent is this same file's parseSlotShapes, which already reads §0c out
+        of the doc rather than restating it.
+  J-P4  DS-GEN-10, DS-HK-1 and DS-WAR-4's print target are NOT given invented
+        section ids. Minting `printed` or `hooks` would put vocabulary in the
+        corpus that no surface has, and that is an authoring act, not a repair.
+
+DELIBERATELY DEFERRED — documented, not a bug to re-find. DS-WAR-4 declares "the
+printed chapter openers · also `tensions`"; it keeps `tensions` and its PRINT
+target is now unrecorded in the leaf, exactly as it was unusable before. The PDF
+composition path is already deferred as its own car in the recut design §5, and
+naming print surfaces in this vocabulary is that car's business, not this one's.
+
+Seat: Opus 5 — Fable-unvalidated
+

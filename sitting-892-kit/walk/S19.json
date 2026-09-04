@@ -1,0 +1,188 @@
+{
+ "slice": "S19",
+ "status": "COMPLETE",
+ "calls": [
+  {
+   "row": "A1 · ENROLMENT — seat trailers",
+   "call": "Every ledger commit 43dc69853..fd3c6e25c carries exactly one Seat trailer",
+   "claim": "49 ledger commits on review-fixes-2026-07-08 from §882.8 (43dc69853) to §891 (fd3c6e25c); each carries exactly one 'Seat: Opus 5 — Fable-unvalidated'.",
+   "method": "git log --format='%h %s' 43dc69853^..fd3c6e25c review-fixes-2026-07-08 (49 lines); per commit: git log -1 --format='%B' <sha> | grep -c '^Seat:'",
+   "evidence": "49/49 lines of the form 'fd3c6e25c seatcount=1 seat=[Seat: Opus 5 — Fable-unvalidated|]' … '43dc69853 seatcount=1 seat=[Seat: Opus 5 — Fable-unvalidated|]'; zero commits with 0 or 2 trailers.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The §882.8 commit itself (the seat-switch act) is already Opus-marked, consistent with the mark following the seat that wrote it."
+  },
+  {
+   "row": "A2 · ENROLMENT — queue ride-along",
+   "call": "Every Opus-seat commit carries docs/FABLE_RETROVALIDATION_QUEUE.md with a blob different from its parent",
+   "claim": "49/49 commits include the FRQ and its blob differs from the parent; every FRQ change is pure insertion.",
+   "method": "git show --stat <sha> -- docs/FABLE_RETROVALIDATION_QUEUE.md; git rev-parse <sha>:docs/FABLE_RETROVALIDATION_QUEUE.md vs <sha>^:…; git show --numstat",
+   "evidence": "e.g. 'fd3c6e25c … frq_in_commit=1 blob=451134c03 parent=d9e804813 DIFF'; '43dc69853 … blob=f2e704081 parent=ab87148d2 DIFF'; numstat per commit ranges +12/-0 (§882.9–§882.12) to +45/-0 (§885.7), every one '-0'. Whole span: git diff --numstat 43dc69853^ fd3c6e25c -- docs/FABLE_RETROVALIDATION_QUEUE.md → '1232 0'.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "No commit carries an 'Enrols:' line (grep -c '^Enrols:' = 0 for all 49), so the §882.14 ENROLMENT GATE's escape hatch was never used in the span."
+  },
+  {
+   "row": "A3 · ENROLMENT — commit→row mapping",
+   "call": "Every ledger commit has a queue row, and the row numbering matches the ledger act",
+   "claim": "Every commit added ≥1 FRQ row, but three mappings are broken: (i) ledger acts §883.2/§883.3/§883.4 (7a5a6f585/0fd589f66/2ee73f4b7) added FRQ rows numbered §883.5/§883.6/§883.7 (bold lane rows INSTR-WRW/CURE-CAPSULE/INSTR-SOAK), and later e4f840774/9b7d6998b/efcf98b89 added '## §883.5/§883.6/§883.7' chair rows — the FRQ now carries DUPLICATE identifiers §883.5, §883.6, §883.7; (ii) 01dcd57df ('§889.1 (card)') added FRQ row §889.2 and touched only the FRQ + HANDOFF_CURRENT.md — no ledger row §889.2 exists; (iii) 9d615b864 (ledger §890, the fifteenth landing) added only FRQ '§890.5' — no ledger act §890.5 exists and the FRQ has no '## §890' row.",
+   "method": "per-commit: git show <sha> -- FRQ | grep '^+' | grep -o '^+(## |\\*\\*)§[0-9.]+'; grep -n '^\\*\\*§883\\.[0-9]|^## §883\\.[0-9]' full.md; grep -c '889\\.2' docs/OWNER_DECISION_QUEUE.md; git show --stat 01dcd57df",
+   "evidence": "'7a5a6f585 +16/-0 rows_added=[§883.5]', '0fd589f66 +12/-0 rows_added=[§883.6]', '2ee73f4b7 +16/-0 rows_added=[§883.7]', then 'e4f840774 +44/-0 rows_added=[§883.5]', '9b7d6998b … [§883.6]', 'efcf98b89 … [§883.7]'. full.md: 193 '**§883.5 · lane INSTR-WRW', 209 '**§883.6 · lane CURE-CAPSULE', 221 '**§883.7 · lane INSTR-SOAK' vs 239 '## §883.5 · THE INSTRUMENT LANDING ORDER', 283 '## §883.6 · THE STALE-BASE REGISTER', 304 '## §883.7 · THE PROSE ASSESSMENT'. Ledger grep '889.2' → 0. '01dcd57df … docs/FABLE_RETROVALIDATION_QUEUE.md | 15 +, docs/HANDOFF_CURRENT.md | 2 +'. '9d615b864 +24/-0 rows_added=[§890.5]'.",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "Rename the three bold lane rows (e.g. §883.4b–d or §883.1e–g) so '§883.6' resolves to one row; add a one-line ledger anchor for §889.2 or fold it into §889.3; add a '## §890' landing row (or retitle §890.5 as the §890 landing stratum) carrying the landing's own calls — see B1 for the herald car."
+  },
+  {
+   "row": "B1 · LANE ENROLMENT — receipts vs rows",
+   "call": "Every lane that reported in the span is named by a queue row that carries its calls",
+   "claim": "Enrolled with calls: T13-BUILD/PRELAND/land, CURE-PORCELAIN, INSTR-WRW, CURE-CAPSULE, INSTR-SOAK, INSTR-TUNEREG, the six G0 lanes, GOLDEN, RETRO-AUDIT, INSTR-land, CURECAP-REBASE, FILLLAYER, DARKREADER, NEWSLAYER, PREGATE, KERNELMARK, NEWSTRAIN, PARSER, REGISTRY, ENC-1, ENC-2/3/4/6, lighting-rows (O-17), nownull, src-prose. NOT enrolled — named in one line of §891 with no calls and a seal sha cited in neither the FRQ nor the ledger: CAPACITY (receipt-capacity.md 09-03 16:24, seal d02c5acde; four C1 STOP rulings + three C2), CHARSET Car 1 (receipt-charset1.md 15:58, seal 9a95d6799; its own line 42 says 'NO REF — the chair must enrol it'), DESKWIRING (receipt-deskwiring.md 15:56, seal eb0a5762b; JUDGMENT 1–3), READERREVIEW Car 2 (receipt-readerreview2.md 16:27, seal 9885cfb97; 'JUDGMENTS I TOOK' 1–6+). Also the HERALD cure car bf1464952 (Seat: Opus 5 — Fable-unvalidated, landed as 7733e064e in §890) is cited nowhere.",
+   "method": "stat -f mtimes of SP/receipt-*.md and SP2/lane*-receipt.md; grep -c of each lane name in full.md; for each refs/preserve 2026-09-0[23] sha: grep -c in full.md and the ledger; sed of the receipts' judgment sections",
+   "evidence": "Seal citations: 'd02c5acde preserve/capacity-2026-09-03 stratum=0 ledger=0', '9a95d6799 preserve/charset1-2026-09-03 stratum=0 ledger=0', 'eb0a5762b preserve/deskwiring-2026-09-03 stratum=0 ledger=0', '9885cfb97 preserve/readerreview2-2026-09-03 stratum=0 ledger=0', 'bf1464952 preserve/herald-authority-drift-2026-09-03 stratum=0 ledger=0'. §891 FRQ row cites no receipt path (grep 'receipt-' in 1209–1231 → none). receipt-deskwiring.md:109 '### JUDGMENT 1 — the rungs, decided by LEGIBILITY and by R-DST-A'; :132 'JUDGMENT 2 — the seed is the settlement's own identity, never a clock'; :142 'JUDGMENT 3 — the ceiling is bought by decomposition'. receipt-readerreview2.md:219 '## JUDGMENTS I TOOK (e",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "This is exactly the §882.14 shape ('an Opus lane … whose queue row covered only the chair's own calls and cited the receipt merely as a receipt') recurring in the span's final row. §891 must enrol the four lanes' rows (and the herald cure's design) before the walk can see them."
+  },
+  {
+   "row": "C1 · SURVIVAL — reachability",
+   "call": "Every dock HEAD and every worktree HEAD is reachable from a branch or refs/preserve/*",
+   "claim": "All 43 worktrees in 'git worktree list' plus the seven lane-branch tips: every HEAD is contained by ≥1 ref. Zero unreachable.",
+   "method": "git worktree list; per HEAD: git for-each-ref --contains <sha> refs/heads refs/preserve refs/trains refs/remotes | wc -l",
+   "evidence": "'4233031ba containing_refs=1 first=[preserve/train891-registers-2026-09-03]', '9885cfb97 =1 [preserve/readerreview2-2026-09-03]', '8f4d5c648 =1 [preserve/srcprose-2026-09-03]', '9a95d6799 =1 [preserve/charset1-2026-09-03]', 'eb0a5762b =1 [preserve/deskwiring-2026-09-03]', 'ba08939d7 =1 [preserve/golden-build-2026-09-02]', '03da380ab =1 [preserve/nownull-2026-09-03]', '9f0df13a1 =1 [preserve/t13-consist-2026-09-02]', '62be253f3 =1 [preserve/curecapsule-rebased-2026-09-02]', 'adb9f19b7 =1 [claude/lane-filllayer-2026-09-02]', '0ed18d77d =1 [claude/phase55-review-fixes-r1]' … no line with containing_refs=0.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Eleven docks hang from exactly ONE ref each; a single bad ref deletion is the remaining exposure."
+  },
+  {
+   "row": "C2 · SURVIVAL — mis-namespaced seal",
+   "call": "laneCURECAP-tree @62be253f3 is sealed under refs/preserve/*",
+   "claim": "62be253f3 (CURE-CAPSULE rebased, §884.4) is reachable ONLY from refs/heads/preserve/curecapsule-rebased-2026-09-02 — a BRANCH under refs/heads/preserve/, not a refs/preserve/* seal; a duplicate refs/heads/preserve/curecapsule-2026-09-02 also sits beside refs/preserve/curecapsule-2026-09-02. A refs/preserve-scoped survival scan reports 62be253f3 unreferenced. It is not an ancestor of any landing (landed by cherry-pick as 9feb645f8).",
+   "method": "git show-ref | grep -i curecap; git for-each-ref --format='%(refname)' --contains 62be253f3; git for-each-ref refs/heads/preserve; git merge-base --is-ancestor 62be253f3 2d5112851",
+   "evidence": "'c422ee824… refs/heads/preserve/curecapsule-2026-09-02 / 62be253f3… refs/heads/preserve/curecapsule-rebased-2026-09-02 / c422ee824… refs/preserve/curecapsule-2026-09-02'; --contains 62be253f3 → 'refs/heads/preserve/curecapsule-rebased-2026-09-02' only; '62be253f3 NOT ancestor of 2d5112851'; ledger §884.4 (32378): 'Lane CURE-CAPSULE-REBASE re-based the prevention car onto the moved tip at 62be253f3278…' with no refs/preserve name.",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "Whoever sealed it wrote 'git branch preserve/…' not 'git update-ref refs/preserve/…'. A chair act should mirror it into refs/preserve/ and record the seal at §884.4; I touched nothing."
+  },
+  {
+   "row": "C3 · SURVIVAL — dirty docks",
+   "call": "Dirty docks are named and their dirt is someone's live work",
+   "claim": "Dirty at arrival and unchanged at exit: laneKERNELMARK-tree @4233031ba ' M scripts/.writer-reach-baseline.json' (tracked — the pending writerReach --write §891 names; §891's 'porcelain 0' is now stale); laneENC-tree @30c1667bc 11 tracked M + 2 untracked = ENC-3's 13 (salvage-enc3/MANIFEST.txt lists the same 13; tracked.patch 24,725 B; files/ carries all 13); lanePARSER-tree @8f4d5c648 4 untracked (EMDASH-ANNEX-LEDGER.md, EMDASH-LEDGER.md, receipt-emdash-annex.md, receipt-emdash.md — salvage-srcprose MANIFEST lists exactly these; tracked.patch 0 B); laneREGISTRY-tree @eb0a5762b 2 untracked (DETERMINISM-LEDGER.md, receipt-determinism.md — listed, mis-filed, in salvage-lighting/MANIFEST.txt); laneG0CHARSET-tree 9 untracked probes; laneG0SOAK-tree 2; laneG0WRW-tree 3; lanePAIDFIX-tree @6fe6eaa58 2 untracked (.dormancy.mjs, .paidfix/). All other worktrees porcelain 0.",
+   "method": "git -C <dock> status --porcelain (arrival and exit); cat SP/salvage-*/MANIFEST.txt; ls -R SP/salvage-*/files",
+   "evidence": "'laneKERNELMARK-tree HEAD=4233031ba porcelain_lines=1 / laneENC-tree HEAD=30c1667bc porcelain_lines=13 / lanePARSER-tree … 4 / laneREGISTRY-tree … 2 / laneG0CHARSET-tree … 9 / laneG0SOAK-tree … 2 / laneG0WRW-tree … 3 / lanePAIDFIX-tree @6fe6eaa58 porcelain=2'. salvage-enc3/MANIFEST.txt: ' M src/domain/certification/couplingRegistry.js … ?? src/domain/worldPulse/envoyChanceMeetingStage.js' (13 lines). salvage-lighting/MANIFEST.txt: ' M src/domain/worldPulse/faithTuningSurface.js / M tests/domain/faithTuningSurface.test.js / ?? DETERMINISM-LEDGER.md / ?? receipt-determinism.md'.",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "The three lane receipts (emdash, emdash-annex, determinism) exist ONLY as untracked dock files plus scratchpad salvage copies — a dock retire destroys the originals; they should be copied to $SP as receipt-*.md like the others. §891's 'porcelain 0' should read 'porcelain 0 at seal; the writerReach baseline is the one pending register'."
+  },
+  {
+   "row": "D1 · SUPERSESSION — forward pointers",
+   "call": "Each earlier ruling that a later row withdrew carries a visible pointer to its correction",
+   "claim": "None does, and structurally none can: the FRQ is append-only over the whole span (1232 insertions, 0 deletions), so no earlier row was ever edited. All five pairs verified as real supersessions: §883.6 'REFREEZE PLUS ONE CEILING UNIT' + DECLARED_GROWTH 'moot' → §883.8 'THE CHAIR'S ERROR, NAMED… TAKE THE DECLARED_GROWTH DOOR'; §884.5 → §884.6 '§884.5's ruling that Cure A is FREEZE-BLOCKING is WITHDRAWN'; §885 'DISPROVES the earlier lane's load-artifact diagnosis' → §885.6 'the confident word DISPROVES was over-stated'; §887.2 'Both were contention the chair created' → §888 'Incomplete… five genuine census bills sat underneath'; §889.3 'ENCOUNTERS takes the door' → §890.1 'The ruling is WITHDRAWN'. §890.1 additionally never cites §889.3 by number.",
+   "method": "git diff --numstat 43dc69853^ fd3c6e25c -- docs/FABLE_RETROVALIDATION_QUEUE.md; git diff … | grep '^-' | grep -v '^---' | wc -l; sed -n <range>p full.md | grep for the later § number in each earlier row; sed -n 1047,1090p | grep 889",
+   "evidence": "numstat '1232 0 docs/FABLE_RETROVALIDATION_QUEUE.md'; deleted-line count '0'. Earlier-row greps for §883.8/§884.6/§885.6/§888/§890.1 all empty. full.md:296 (§883.6) '(b) A DECLARED_GROWTH entry — moot after a refreeze'; :332 (§883.8) 'So the DECLARED_GROWTH row the chair dismissed as \"moot after a refreeze\" is the gate'; :542 (§885) 'which DISPROVES the earlier lane's load-artifact diagnosis'; :745 (§885.6) 'the confident word \"DISPROVES\" was over-stated'; :903 (§887.2) 'Both were contention the chair created'; :927 (§888) 'Incomplete, and the incompleteness is the lesson'; :1039 (§889.3) 'ENCOUNTERS takes the door'; :1049 (§890.1) 'The ruling is WITHDRAWN'; grep '889' in 1047–1090 → 0.",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "A reader walking top-to-bottom (as §5 instructs) meets five rulings as live before meeting their withdrawal. Add a one-line '⛔ SUPERSEDED at §N' marker under each earlier heading; the per-artifact staleness §3 already names ('a document amended in place keeps a stale header') has its inverse here — a document never amended keeps a stale ruling."
+  },
+  {
+   "row": "D2 · SUPERSESSION — §889.1 brief claim",
+   "call": "The §889.1 brief claim's correction is visible from §889.1",
+   "claim": "The correction lives inside the same row: §889.1 carries the section 'THE CHAIR'S OWN BRIEF WAS WRONG, AND THE RECON REFUTED IT' (full.md:991), and the card (01dcd57df, surviving at HEAD line 96) carries 'module-eval validation of a catalog row is true of 1 of 11 registries'.",
+   "method": "grep -n '^###' full.md 977–1005; git show 01dcd57df -- docs/HANDOFF_CURRENT.md; grep -n 'sovereignty_registry' docs/HANDOFF_CURRENT.md",
+   "evidence": "full.md:991 '### ⭐ THE CHAIR'S OWN BRIEF WAS WRONG, AND THE RECON REFUTED IT'; card diff: '⚠ AND THE CHAIR'S OWN BRIEF WAS REFUTED BY MEASUREMENT: module-eval validation of a catalog row is true of 1 of 11 registries, not all'; HEAD card :96 '(2) A LIVE DEFECT IN LANDED CODE: … sovereignty_registry is MISSING'.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Self-contained; no pointer owed. This also settles §889.2's own re-derive item ('verify the card now carries both §889.1 findings') — it does, at HEAD line 96."
+  },
+  {
+   "row": "E1 · §882.14.2 — the §3 amendment",
+   "call": "§3 was AMENDED to read 'the mark follows the seat that did the work'",
+   "claim": "Not executed. FRQ §3 at HEAD (lines 45–46) still reads the old clause: 'Lane (subagent) work inherits its dispatching chair's seat and is enrolled by that chair at collection.' No text 'follows the seat' / 'did the work' exists anywhere in the FRQ outside the §882.14.2 row's own sentence, and the whole-span diff has zero deletions, so no edit to §3 could have occurred. Both the ledger §882.14 (line 32363) and the FRQ §882.14.2 assert '§3's clause is AMENDED to say so'.",
+   "method": "sed -n 37,66p docs/FABLE_RETROVALIDATION_QUEUE.md; grep -n 'follows the seat|did the work|882\\.14\\.2' docs/FABLE_RETROVALIDATION_QUEUE.md; git diff --numstat 43dc69853^ fd3c6e25c -- docs/FABLE_RETROVALIDATION_QUEUE.md; sed -n 32363p docs/OWNER_DECISION_QUEUE.md | grep -o '.{160}AMENDED.{160}'",
+   "evidence": "FRQ:45–46 '- Lane (subagent) work inherits its dispatching chair's seat and is enrolled by that\\n  chair at collection. A lane never writes this file.' grep → only ':2044:**§882.14.2 · THE SEVEN CLASS-C LANES…'. Ledger 32363: 'RATIFIED — practice is the law: the mark follows the SEAT THAT DID THE WORK, never the seat that dispatched it — and §3's clause is AMENDED to say so'. numstat '1232 0'.",
+   "verdict": "REVERSE",
+   "confidence": "CONFIRMED",
+   "note": "The RULING (practice is the law; the auditor's reading ratified) holds and should be RATIFIED on its merits; the CLAIM that §3 was amended is false and is a chair error not self-reported. Execute the amendment as a chair act, ideally in the same commit that adds the forward pointers of D1 — the first in-place edit of the span."
+  },
+  {
+   "row": "F1 · §882.14 — the audit's headline census",
+   "call": "All 56 ledger acts §879→tip carry exactly one legal Seat line: 47 Fable 5.1 · 9 Opus 5 · zero unmarked",
+   "claim": "Re-derived exactly: 56 commits from §879 (c4b5dce53) to ab4ef2501^; 47 'Seat: Fable', 9 'Seat: Opus', 0 unmarked, 0 multi-trailer.",
+   "method": "git log --format='%h %s' ab4ef2501^ | grep '§879:' | tail -1; git rev-list --count c4b5dce53^..ab4ef2501^; per commit grep -c '^Seat:' and grep '^Seat: Fable|^Seat: Opus'",
+   "evidence": "'§879 commit = c4b5dce53'; 'acts §879..§882.13 = 56'; 'fable=47 opus=9 unmarked=0 multi=0'.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The audit's mechanical half is exact; its judgment half (CLASS-C practice) is E1."
+  },
+  {
+   "row": "F2 · §882.14 / §889.3 / §891 — the seals claimed",
+   "call": "The seals each row claims exist at the named shas and hold the named cars",
+   "claim": "refs/preserve/golden-build-2026-09-02 = ba08939d7, t13-consist-2026-09-02 = 9f0df13a1, paidprep-rehearsal-2026-09-01 = f02fd7c4b (§882.14); lighting-rows-wip-2026-09-03 = f47433b32 and contains b6ca05958 (O-12) (§889.3); train891-registers-2026-09-03 = 4233031ba, 17 cars over ca651d54b, 17 trailers (§891); laneINSTRLAND-tree, 'the only unreferenced dock' at §882.14, is now sealed as nownull-2026-09-03 = 03da380ab.",
+   "method": "git for-each-ref refs/preserve | grep 2026-09-0; git merge-base --is-ancestor b6ca05958 f47433b32; git rev-list --count ca651d54b..4233031ba; git log --format='%B' ca651d54b..4233031ba | grep -c '^Seat:'",
+   "evidence": "'ba08939d7 refs/preserve/golden-build-2026-09-02', '9f0df13a1 refs/preserve/t13-consist-2026-09-02', 'f02fd7c4b refs/preserve/paidprep-rehearsal-2026-09-01', 'f47433b32 refs/preserve/lighting-rows-wip-2026-09-03', 'b6ca05958 IS ancestor of f47433b32', 'cars=17 trailers=17', '03da380ab refs/preserve/nownull-2026-09-03'.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The '#NINE times in one day' / 'SIX times' tallies in §891/§889.3 were not recounted; PLAUSIBLE only — settle with git log -S'refs/preserve' over the ledger commits of 09-03."
+  },
+  {
+   "row": "F3 · §888 / §890 / §889 — car and trailer counts",
+   "call": "The landings' car counts, trailer counts and the §888 trailer gap are as stated",
+   "claim": "§888: 8 cars f12360185..bbba1be24, 7 trailers, 394d758ee ('ENC-1 cure: the chance-meeting leaf's types tell the truth') has 0 — as recorded, not rewritten. §889: 15 cars / 15 trailers. §890: 8 cars / 8 trailers, 22 files +855/−88 exactly as the ledger row says.",
+   "method": "git rev-list --count A..B; git log --format='%B' A..B | grep -c '^Seat:'; git log -1 --format='%B' 394d758ee | grep -c '^Seat:'; git diff --shortstat 30c1667bc ca651d54b",
+   "evidence": "'§888 cars=8 trailers=7', '394d758ee ENC-1 cure…' → Seat count '0'; '§889 cars=15 trailers=15'; '§890 cars=8 trailers=8', '22 files changed, 855 insertions(+), 88 deletions(-)'.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The JUDGMENT-missing-trailer.md decision (keep 394d758ee untrailered because .tuning-inventory.json cites it as measuredAtSha) is enrolled at §888 'THE TRAILER GAP, RECORDED RATHER THAN REWRITTEN'."
+  },
+  {
+   "row": "F4 · Uncited intermediate seals",
+   "call": "Every refs/preserve/*-2026-09-0[23] sha cited nowhere is an intermediate state of a cited tip",
+   "claim": "Uncited (stratum=0, ledger=0) but ancestors of their cited tip: enc1-composed 36aafe57d and enc1-cured2 b6822dcae → bbba1be24; train889-composed/registers/registers2 → 30c1667bc; train890-bundles/composed/o17 → ca651d54b; train891-composed/reg1 → 4233031ba; capacity d02c5acde → 4233031ba. NOT ancestors and uncited: charset1 9a95d6799, deskwiring eb0a5762b, readerreview2 9885cfb97 (cherry-picked into the §891 train), herald bf1464952 (cherry-picked as 7733e064e into §890) — these four are the B1 gap.",
+   "method": "for each pair: git merge-base --is-ancestor <seal> <tip>",
+   "evidence": "'36aafe57d IS ancestor of bbba1be24', 'b6822dcae IS ancestor of bbba1be24', 'efed4ba91/3702af0a2/4f3eac16c IS ancestor of 30c1667bc', '69bd44f65/7733e064e/8d639dc54 IS ancestor of ca651d54b', '3d3ad217b/250d4e464 IS ancestor of 4233031ba', 'd02c5acde IS ancestor of 4233031ba'; '9a95d6799 NOT ancestor of 4233031ba', 'eb0a5762b NOT…', '9885cfb97 NOT…', 'bf1464952 NOT ancestor of ca651d54b'.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Benign for the ancestors (the tip's citation covers them). The four non-ancestor seals are the only refs holding those lanes' original tips and are cited nowhere — folded into B1."
+  }
+ ],
+ "beyond": [
+  "The FRQ carries DUPLICATE row identifiers §883.5, §883.6 and §883.7: bold lane rows (INSTR-WRW :193, CURE-CAPSULE :209, INSTR-SOAK :221 of full.md) and '## ' chair rows (instrument-order fold :239, stale-base :283, prose :304). Ledger acts §883.2/§883.3/§883.4 map to FRQ lane rows §883.5/§883.6/§883.7, so a cross-reference '§883.6' resolves three ways (ledger stale-base act; FRQ stale-base row; FRQ CURE-CAPSULE lane row). The preamble's note ('different numbering, same era') understates it: the collision is INSIDE the queue.",
+  "§889.2 (FRQ) has no ledger row — commit 01dcd57df touched only the FRQ and HANDOFF_CURRENT.md; the ledger grep for '889.2' is 0. §890.5 (FRQ) has no ledger act — it is the hazard section of ledger §890. Ledger §890 (the fifteenth landing) has no FRQ landing row; its own calls (the herald cure car bf1464952/7733e064e 'Seat: Opus 5 — Fable-unvalidated', the O-12/O-16/O-17 landing, the three owner routings) are enrolled only insofar as §890.1–§890.4 and §890.5 cover them.",
+  "The §3 amendment ruled at §882.14.2 ('§3's clause is AMENDED') was never executed — §3 at HEAD still reads the old inheritance clause, and the whole span is append-only (1232/0). A chair error not self-reported anywhere in §882.15→§891.",
+  "§891 repeats the §882.14 shape it was written to prevent: CAPACITY, CHARSET Car 1, DESKWIRING and READERREVIEW Car 2 are named in one line each with no calls, and their four seals (d02c5acde, 9a95d6799, eb0a5762b, 9885cfb97) are cited in neither the FRQ nor the ledger. CHARSET's receipt says at :42 'detached, NO REF — the chair must enrol it'. DESKWIRING carries three explicit JUDGMENT sections; READERREVIEW2 six numbered 'JUDGMENTS I TOOK'; CAPACITY seven STOP dispositions.",
+  "Two seals live under refs/heads/preserve/ (curecapsule-2026-09-02 and curecapsule-rebased-2026-09-02) instead of refs/preserve/; the rebased CURE-CAPSULE car 62be253f3 (§884.4) survives ONLY there. A refs/preserve-scoped survival audit would report it unreferenced.",
+  "§891's 'porcelain 0' for the train dock is stale: laneKERNELMARK-tree carries ' M scripts/.writer-reach-baseline.json' — presumably the pending writerReach --write the row itself names as 'one register from its gate'. Not touched.",
+  "Three lane receipts exist only as UNTRACKED files inside docks (lanePARSER-tree: receipt-emdash.md, receipt-emdash-annex.md; laneREGISTRY-tree: receipt-determinism.md) plus scratchpad salvage copies — the determinism pair is filed under salvage-lighting/MANIFEST.txt, not a determinism salvage. A dock retire destroys the originals. The emdash/emdash-annex/determinism/horizondark-cars12 lanes are enrolled by sha only (§887.2 line 899), not by calls.",
+  "§890.1 withdraws the §889.3 funnel-door ruling without citing §889.3 by number (grep '889' over full.md 1047–1090 → 0); the other four later rows do name their earlier row.",
+  "No commit in the span carries an 'Enrols:' line, so the §882.14 ENROLMENT GATE's stated escape hatch has never been exercised on the branch — consistent, but its negative control is therefore the only proof it works."
+ ],
+ "chair_errors": [
+  "§882.14.2 / ledger §882.14: claims '§3's clause is AMENDED to say so' — the amendment was never written (FRQ §3 lines 45–46 unchanged; span diff 1232/0). Not self-reported.",
+  "§883.2/§883.3/§883.4 ledger acts enrolled as FRQ rows §883.5/§883.6/§883.7, then the same three identifiers re-used for '## ' chair rows at §883.5/§883.6/§883.7 — duplicate identifiers in the queue. Not self-reported.",
+  "§890 (the fifteenth landing) enrolled only its hazard (§890.5), numbered as if a ledger act §890.5 existed; the landing itself has no FRQ row. §889.2 was enrolled with no ledger row.",
+  "§891 names four Opus lanes and the herald cure car without enrolling their calls or citing their seals — the §882.14 shape recurring in the span's own final row.",
+  "The CURE-CAPSULE-REBASE seal (62be253f3, §884.4) was written as a branch under refs/heads/preserve/ rather than refs/preserve/, and §884.4 records the sha with no seal name.",
+  "Five withdrawn rulings (§883.6, §884.5, §885, §887.2, §889.3) carry no forward pointer; the queue was never edited in place during the span, so a top-to-bottom walk meets each as live."
+ ],
+ "commands": [
+  "mkdir -p …/scratchpad/walk/S19 && printf '{\"slice\": \"S19\", \"status\": \"PARTIAL\", \"calls\": []}' > …/walk/S19.json",
+  "git log --format='%h %ci %s' 43dc69853^..fd3c6e25c review-fixes-2026-07-08",
+  "for s in $(git log --format='%h' 43dc69853^..fd3c6e25c review-fixes-2026-07-08); do git log -1 --format='%B' $s | grep -c '^Seat:'; git show --stat --format='' $s -- docs/FABLE_RETROVALIDATION_QUEUE.md; git rev-parse $s:docs/FABLE_RETROVALIDATION_QUEUE.md; git rev-parse $s^:docs/FABLE_RETROVALIDATION_QUEUE.md; done",
+  "for s in …; do git show $s -- docs/FABLE_RETROVALIDATION_QUEUE.md | grep '^+' | grep -o '^+(## |\\*\\*)§[0-9][0-9.]*'; git show --numstat --format='' $s -- docs/FABLE_RETROVALIDATION_QUEUE.md; git log -1 --format='%B' $s | grep -c '^Enrols:'; done",
+  "grep -n '^#' …/stratum/full.md; grep -n -o '§882\\.9|§882\\.1[0-3]|§882\\.15|§883\\.[1-4]|§889\\.2|§890\\.5' full.md; grep -n '^\\*\\*§883\\.[0-9]|^## §883\\.[0-9]' full.md",
+  "sed -n 37,66p docs/FABLE_RETROVALIDATION_QUEUE.md; grep -n 'follows the seat|882\\.14\\.2|did the work' docs/FABLE_RETROVALIDATION_QUEUE.md",
+  "git diff --numstat 43dc69853^ fd3c6e25c -- docs/FABLE_RETROVALIDATION_QUEUE.md; git diff 43dc69853^ fd3c6e25c -- docs/FABLE_RETROVALIDATION_QUEUE.md | grep '^-' | grep -v '^---' | wc -l",
+  "grep -n '^- \\*\\*§889\\.2|^§889\\.2|^§890\\.5|^§890 ' docs/OWNER_DECISION_QUEUE.md; grep -c '889\\.2' docs/OWNER_DECISION_QUEUE.md; sed -n '32399,32418p;32415p;32363p;32378p;32417p' docs/OWNER_DECISION_QUEUE.md",
+  "git show --stat --format='%h %s' 01dcd57df; git show 01dcd57df -- docs/HANDOFF_CURRENT.md | grep '^+'; grep -n 'sovereignty_registry|TWO THINGS A SUCCESSOR|889\\.1' docs/HANDOFF_CURRENT.md",
+  "git worktree list; git for-each-ref --format='%(objectname:short) %(refname)' refs/preserve | grep 2026-09-0; git for-each-ref refs/heads | grep -i 'lane-|composite-r4|review-fixes|filllayer'; git show-ref | grep -i curecap; git for-each-ref refs/heads/preserve",
+  "for h in <43 worktree HEADs + 6 lane tips>; do git for-each-ref --contains $h refs/heads refs/preserve refs/trains refs/remotes; done",
+  "for d in <21 preamble docks + 11 other worktrees>; do git -C $d rev-parse --short HEAD; git -C $d status --porcelain; done (arrival and exit)",
+  "stat -f '%Sm %z %N' -t '%m-%d_%H:%M' SP/receipt-*.md SP/laneINSTRLAND/laneINSTRLAND-receipt.md SP/*.md SP/retro-audit/*.md SP/kit-*/*.md SP2/lane*-receipt.md SP2/*RECEIPT*.md; stat … lanePARSER-tree/receipt-emdash*.md laneREGISTRY-tree/receipt-determinism.md",
+  "for k in <41 lane-name patterns>; do grep -c -i \"$k\" full.md; done; for each 09-02/03 preserve sha: grep -c <sha> full.md docs/OWNER_DECISION_QUEUE.md",
+  "sed -n 83,146p full.md; sed -n 1185,1231p full.md; sed -n 283,303p; sed -n 328,347p; sed -n 469,526p; sed -n 977,1090p; sed -n 925,946p; grep-in-range for §883.8/§884.6/§885.6/§888/§890.1/DISPROVES/contention/funnel",
+  "cat SP/salvage-*/MANIFEST.txt; ls -R SP/salvage-*/files; grep -n '^#|JUDG|STOP' SP/receipt-{capacity,charset1,deskwiring,readerreview2,lighting-rows,enc1-census,enc1cure,enc3,nownull}.md; head -c 700 SP/JUDGMENT-missing-trailer.md",
+  "printf pairs | while read a b; do git merge-base --is-ancestor $a $b; done (19 seal→tip pairs incl. 62be253f3→2d5112851, bf1464952→ca651d54b); git log --format='%h %an %s' 30c1667bc..ca651d54b; git log -1 --format='%B' bf1464952 | tail -6; git log --format='%h %s' 7f974e855..2d5112851 | grep -i capsule",
+  "git log --format='%h %s' ab4ef2501^ | grep '§879:' | tail -1; git rev-list --count c4b5dce53^..ab4ef2501^; per commit grep -c '^Seat:' / '^Seat: Fable' / '^Seat: Opus'",
+  "git rev-list --count and Seat-trailer counts for f12360185..bbba1be24, bbba1be24..30c1667bc, 30c1667bc..ca651d54b, ca651d54b..4233031ba; git diff --shortstat 30c1667bc ca651d54b; git log -1 --format='%B' 394d758ee | grep -c '^Seat:'; git merge-base --is-ancestor b6ca05958 f47433b32"
+ ],
+ "porcelain_unchanged": true,
+ "summary": "P0 census over §882.8→§891 (49 ledger commits). ENROLMENT: every commit carries exactly one 'Seat: Opus 5 — Fable-unvalidated' trailer and a changed FRQ blob, and every commit added a row — but the row map is bent in three places (duplicate FRQ identifiers §883.5–§883.7; §889.2 with no ledger row; the §890 landing with no FRQ row, only §890.5). LANE ENROLMENT: four §891-train lanes (CAPACITY, CHARSET Car 1, DESKWIRING, READERREVIEW Car 2) and the herald cure car are named but not enrolled, their seals cited nowhere — the §882.14 shape recurring in the final row. SURVIVAL: all 43 worktree HEADs and 6 lane tips are reachable, but the rebased CURE-CAPSULE car survives only under a mis-namespaced refs/heads/preserve/ branch; eight docks are dirty (named; untouched), including the §891 train's pending register file and three lane receipts that exist only as untracked dock files. SUPERSESSION: the queue was append-only for the whole span (1232/0), so none of the five withdrawn rulings carries a forward pointer, and §890.1 never names §889.3. §3 AMENDMENT: never executed — §3 still carries the old inheritance clause while §882.14.2 and the ledger both say it was amended (REVERSE that claim; the ruling itself stands). The §882.14 audit's 56/47/9/0 census re-derives exactly; the §888/§889/§890/§891 car and trailer counts all re-derive exactly. Porcelain of every dock unchanged between arrival and exit."
+}

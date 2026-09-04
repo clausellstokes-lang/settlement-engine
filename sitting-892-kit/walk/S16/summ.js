@@ -1,0 +1,1 @@
+let s='';process.stdin.on('data',d=>s+=d).on('end',()=>{const j=JSON.parse(s);const out={};for(const [k,v] of Object.entries(j)){if(typeof v==='number'||typeof v==='string')out[k]=v;else if(Array.isArray(v))out[k]='arr:'+v.length;else if(v&&typeof v==='object')out[k]='obj:'+Object.keys(v).length;}console.log(JSON.stringify(out));});
