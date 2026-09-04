@@ -62,6 +62,7 @@ import {
   validateSchema13Baseline,
   validateSchema14Baseline,
   validateSchema15Baseline,
+  validateSchema16Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   artifactBaselineSchemaOf,
@@ -1333,7 +1334,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // of it and collapsed records into id-keyed maps; it now carries the whole-node
     // guarantee its two sibling branches already had. Classification-only, so the cured
     // register reproduces schema 14's row for row and the reconciliation is EMPTY.
-    expect(BASELINE_SCHEMA).toBe(15);
+    expect(BASELINE_SCHEMA).toBe(16);
     expect(RETIRED_GENESIS_TIES_BASELINE_SCHEMA).toBe(12);
     expect(RETIRED_TREASURY_ADMISSION_BASELINE_SCHEMA).toBe(11);
     expect(RETIRED_PROSE_REGEN_BASELINE_SCHEMA).toBe(10);
@@ -1348,7 +1349,8 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     const stats = leafStats();
     const live = validBaseline({ corpus, stats, frozen: [leafFindingOf()] });
     expect(live.schema).toBe(BASELINE_SCHEMA);
-    expect(validateSchema15Baseline(live)).toBe(live);
+    // ⭐ 15 retired at §893.4; the LIVE envelope is validated by 16 now.
+    expect(validateSchema16Baseline(live)).toBe(live);
     expect(assertExplainedWriterRowTags(live)).toBe(live);
     expect(() => validateSchema4Baseline(live)).toThrow(/noncanonical fields/);
     expect(() => validateSchema5Baseline(live)).toThrow(/noncanonical fields/);
@@ -1482,7 +1484,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // `artifactBaselineSchemaOf` exists to prevent.
     expect(artifactBaselineSchemaOf('legacy-leaf')).toBe(2);
     expect(artifactBaselineSchemaOf('exact-origin')).toBe(3);
-    expect(BASELINE_SCHEMA).toBe(15);
+    expect(BASELINE_SCHEMA).toBe(16);
     expect(() => artifactBaselineSchemaOf('heuristic')).toThrow(/scan mode is unsupported/);
   });
 

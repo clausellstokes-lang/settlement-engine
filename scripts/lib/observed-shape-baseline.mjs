@@ -257,7 +257,15 @@ export const RETIRED_DEAD_DEPENDENCY_BASELINE_SCHEMA = 13;
  *  against BASELINE_SCHEMA, and this constant exists so a schema-14 PREDECESSOR is
  *  still validated as schema 14 after the live number moves past it. */
 export const RETIRED_PRESET_LIGHT_BASELINE_SCHEMA = 14;
-export const BASELINE_SCHEMA = 15;
+/** The RETIRED stable-core definition — schema 16's predecessor. Same tagged topology
+ *  envelope, the same nine-identity bank and the SAME 1,409 identities; schema 16
+ *  re-governs it to the virtual-dormant-writer door's SHAPE-SCOPED clause 1 and its
+ *  COMPANION-GATE clause 2, and, like 13, 14 and 15, moves no row at all. Never
+ *  redefined, never deleted — a live baseline is validated against BASELINE_SCHEMA, and
+ *  this constant exists so a schema-15 PREDECESSOR is still validated as schema 15 after
+ *  the live number moves past it. */
+export const RETIRED_STABLE_CORE_BASELINE_SCHEMA = 15;
+export const BASELINE_SCHEMA = 16;
 /** The RETIRED exact per-site definition. Never redefined, never deleted. */
 export const RETIRED_EXACT_BASELINE_SCHEMA = 3;
 /** The RETIRED UNFILTERED heuristic-leaf definition — schema 5's predecessor.
@@ -768,10 +776,22 @@ export function validateSchema14Baseline(baseline) {
   );
 }
 
+/** The RETIRED authority — schema 15's tagged envelope re-governed to the churn rule's
+ *  stable-core guard. Re-bound to its own LITERAL now that the authority has moved to 16,
+ *  exactly as its predecessors were: a retired validator that reads `BASELINE_SCHEMA`
+ *  stops validating the rung it is named after the moment the number moves. */
+export function validateSchema15Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_STABLE_CORE_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
 /** The LIVE envelope validator. Bound to `BASELINE_SCHEMA` rather than a literal,
  *  so the retired rungs above keep validating their own numbers while this one
  *  always names the authority. */
-export function validateSchema15Baseline(baseline) {
+export function validateSchema16Baseline(baseline) {
   return validateLeafBaseline(baseline, BASELINE_SCHEMA, { tagged: true });
 }
 

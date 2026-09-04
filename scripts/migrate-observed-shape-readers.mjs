@@ -66,6 +66,36 @@
  *     carried custody — see `assertPredecessorCustody`. BIND BY DIGEST, NEVER BY
  *     GENESIS; this is the third recorded instance of that family law.
  *
+ *   ⚠ RUNGS 11 -> 12 THROUGH 14 -> 15 KEEP THEIR RATIONALE BESIDE THEIR OWN TARGET
+ *     CONSTANTS rather than in this list, and that is where to read them. This note
+ *     exists because the list above stops at 10 -> 11 and a reader could otherwise
+ *     take that for the newest rung; it is not.
+ *
+ *   schema 15 -> 16 (LIVE)   the same tagged numeric reconciliation, re-governing the
+ *     instrument to a DOOR whose VALIDATOR changed while its DETECTOR did not. The
+ *     virtual-dormant-writer door's clause 1 became SHAPE-SCOPED and its clause 2 now
+ *     accepts a gate in a row-declared COMPANION file. Two things make it not a straight
+ *     repeat of its predecessor:
+ *       - THE DRIFT IS A CLOSED VALIDATOR HOLE, NOT A NEW DETECTION. Clause 1 accepted a
+ *         READ SITE as a write shape (measured: an argument-list token as `shorthand`, a
+ *         re-emission onto another shape as `property`), so a row could name a pure
+ *         reader as its writer and pass for two of three keys. Which reads are FOUND did
+ *         not change; only which explanations are ACCEPTED.
+ *       - THE ALPHABET IS UNCHANGED AND THAT WAS PROVED BY A PASSING ARM, not argued: the
+ *         walker's inventory triple reproduces five figures frozen under the PREVIOUS
+ *         detector, which a different alphabet could not do. So the reconciliation is
+ *         `predecessorRows` with row delta ZERO.
+ *     Its delta is THREE instrument paths, MEASURED against the predecessor's own
+ *     manifest and re-measured after the set was written — a fixed point, because writing
+ *     the set changes a file that is itself in it. See
+ *     `COMPANION_GATE_SCANNER_DELTA_PATHS`.
+ *     ⭐ AND IT IS RE-RUNNABLE, DEMONSTRATED RATHER THAN ASSUMED, because 10 -> 11's
+ *     disaster was not a bad migration but one that left the instrument unable to move
+ *     again: `assertPredecessorCustody` was executed against a predecessor whose
+ *     `frozenAtSha` had been advanced past its `subjectSha` and it ACCEPTED, while still
+ *     refusing a review edited under its own digest. Nothing this rung adds reads that
+ *     equality, and a 16 -> 17 needs the same four data rows this one added.
+ *
  * In every family, the predecessor baseline and scan artifacts are
  * canonical, content-addressed inputs sharing one committed source, execution
  * tree, executed corpus and scan configuration. The legacy detector is the
@@ -105,6 +135,7 @@ import {
   validateSchema9Baseline,
   validateSchema10Baseline,
   validateSchema14Baseline,
+  validateSchema15Baseline,
 } from './lib/observed-shape-baseline.mjs';
 
 export const MIGRATION_REPORT_SCHEMA = 2;
@@ -249,6 +280,42 @@ export const PRESET_LIGHT_TARGET_SCHEMA = 14;
  *  ZERO; any moved row means the cure was not classification-only and the mint STOPS
  *  rather than banking it. */
 export const STABLE_CORE_TARGET_SCHEMA = 15;
+
+/* ⭐⭐ THE SCHEMA 15 → 16 RUNG — THE COMPANION-GATE MINT (ENC-3, ruled §893.4).
+ *
+ *  WHAT MOVED, AND IT IS THE DOOR'S VALIDATOR RATHER THAN THE DETECTOR. The
+ *  virtual-dormant-writer door (M13) gained two corrections in one act:
+ *    · CLAUSE 1 IS NOW SHAPE-SCOPED. It asked whether a file wrote the key ANYWHERE
+ *      while the door's identities are `"<key> on <shape>"` — a shape it then ignored.
+ *      MEASURED on a pure READER of a `grievance`: `fromSid` passed as `shorthand` off
+ *      an argument list, `incidentType` as `property` off a re-emission onto another
+ *      shape, and `toSid` not at all. So a row naming the reader as its writer passed
+ *      for two of three keys on the strength of its own READ SITE. A door that convicts
+ *      for the wrong reason is worse than one that refuses, because it blesses the next
+ *      case silently.
+ *    · CLAUSE 2 ACCEPTS A GATE IN A ROW-DECLARED COMPANION. It required the gate in the
+ *      writer, assuming one file both writes the key and reads the flag. A better-built
+ *      subsystem splits them: ENCOUNTERS has a PURE leaf that computes receipts and a
+ *      STAGE that owns the ONE gate read. The old clause's only route was to spell the
+ *      flag inside the pure leaf — degrading the product to satisfy the tool, and
+ *      reddening that subsystem's own polarity census, which pins the gate at EXACTLY
+ *      ONE site. Two instruments in tension means one has the narrower premise.
+ *
+ *  ⭐ THE ALPHABET DID NOT MOVE, AND THAT IS WHY THIS IS THE LIGHT FAMILY. The door is
+ *  a POST-FILTER: it narrows the VERDICT, it does not change what the detector DETECTS.
+ *  PROVED BY A PASSING ARM rather than by argument — the walker's inventory triple
+ *  reproduces `reads`/`identities`/`files`/`bankedReads`/`taggedRows` against literals
+ *  frozen under the PREVIOUS detector, and a detector with a different alphabet could
+ *  not reproduce five predecessor figures. So the reconciliation is `predecessorRows`
+ *  and the mint must report predecessorSame 1409 with new, gone, increased and decreased
+ *  ALL ZERO; any moved row means the change was not verdict-only and the mint STOPS.
+ *
+ *  ⚠ THE DRIFT CAME FROM CLOSING A VALIDATOR HOLE, NOT FROM A NEW DETECTION — the
+ *  distinction this rung exists to record. The detector source moved, so `--write`
+ *  refuses BY DESIGN (executed, not inferred: it throws and leaves the baseline
+ *  untouched); but nothing about which reads are FOUND has changed, only which
+ *  explanations are ACCEPTED. */
+export const COMPANION_GATE_TARGET_SCHEMA = 16;
 
 /**
  * The complete, reviewed detector transition admitted by the retired 6→7 mint.
@@ -445,6 +512,36 @@ export const STABLE_CORE_SCANNER_DELTA_PATHS = Object.freeze([
   'scripts/migrate-observed-shape-readers.mjs',
 ]);
 
+/**
+ * The schema-15 → 16 delta: THREE instrument paths and nothing else.
+ *
+ * ⛔ MEASURED, NEVER LISTED (chair condition, §893.4). The set below was derived by
+ * observing what minting this rung actually changed — `git diff --name-only` over the
+ * eleven governed inputs at the minted tip — and then re-measured after the set was
+ * written, because writing it changes `migrate-observed-shape-readers.mjs`, which is
+ * itself a member. The declared set is therefore a FIXED POINT of its own measurement.
+ * A mis-declared delta set is how rung 10 → 11 became permanently unmigratable.
+ *
+ * The subject of this rung IS one of the instrument files, as at 13 → 14, which is what
+ * makes its delta three rather than a subject plus its bookkeeping:
+ *   - `check-observed-shape-readers.mjs` — THE SUBJECT: the door's shape-scoped clause 1,
+ *     its companion-gate clause 2 and the three ENCOUNTERS rows, plus the live-validator
+ *     binding moving from `validateSchema15Baseline` to `validateSchema16Baseline`;
+ *   - `observed-shape-baseline.mjs` — the 15 → 16 bump, the retired-15 constant and its
+ *     re-bound validator;
+ *   - `migrate-observed-shape-readers.mjs` — this rung.
+ *
+ * ⛔ NO package file is in this delta and none may be: this rung changes no dependency
+ * and no script, and any `package.json` byte is itself a mint trigger. An extra path
+ * here — or one of these three remaining byte-identical — is a different migration and
+ * fails closed.
+ */
+export const COMPANION_GATE_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
 export const BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS = Object.freeze([
   'package-lock.json',
   'package.json',
@@ -471,6 +568,8 @@ const PRESET_LIGHT_SCANNER_TRANSITION_POLICY =
   'schema-13-to-14-exact-scanner-transition-v1';
 const STABLE_CORE_SCANNER_TRANSITION_POLICY =
   'schema-14-to-15-exact-scanner-transition-v1';
+const COMPANION_GATE_SCANNER_TRANSITION_POLICY =
+  'schema-15-to-16-exact-scanner-transition-v1';
 const CORPUS_COVERAGE_SCANNER_TRANSITION_POLICY =
   'schema-7-to-8-exact-scanner-transition-v1';
 const EPOCH_DARK_CORPUS_SCANNER_TRANSITION_POLICY =
@@ -504,6 +603,7 @@ export const LEAF_MIGRATION_PREDECESSOR = Object.freeze({
   [DEAD_DEPENDENCY_TARGET_SCHEMA]: GENESIS_TIES_TARGET_SCHEMA,
   [PRESET_LIGHT_TARGET_SCHEMA]: DEAD_DEPENDENCY_TARGET_SCHEMA,
   [STABLE_CORE_TARGET_SCHEMA]: PRESET_LIGHT_TARGET_SCHEMA,
+  [COMPANION_GATE_TARGET_SCHEMA]: STABLE_CORE_TARGET_SCHEMA,
 });
 
 /**
@@ -534,6 +634,10 @@ const LEAF_PREDECESSOR_VALIDATOR = Object.freeze({
   // RETIRED literal from this rung onward, so this entry keeps validating schema 14
   // as schema 14 after the live number moves past it.
   [PRESET_LIGHT_TARGET_SCHEMA]: validateSchema14Baseline,
+  // The schema-16 rung's own predecessor. `validateSchema15Baseline` is bound to the
+  // RETIRED literal from this rung onward, so this entry keeps validating schema 15
+  // as schema 15 after the live number moves past it.
+  [STABLE_CORE_TARGET_SCHEMA]: validateSchema15Baseline,
 });
 
 const RETIRED_EXACT_MIGRATION_KIND = `observed-shape-schema-2-to-${RETIRED_EXACT_TARGET_SCHEMA}-migration`;
@@ -960,6 +1064,18 @@ const SCANNER_TRANSITION_BY_TARGET = new Map([
     // under `scripts/`, which are not subject paths at all, so the digest cannot move
     // and the report's `unscannedMovement` is null. The permission is carried because
     // the class is lawful, not because this rung exercises it.
+    reviewableUnscannedMovement: true,
+  })],
+  [COMPANION_GATE_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: COMPANION_GATE_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: COMPANION_GATE_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9 — the flag is PER-TARGET and never
+    // retroactive. `unscannedInputDigestOf` is the SUBJECT tree minus the SCAN tree,
+    // and the subject tree is `src/**`; this rung touches three files under `scripts/`,
+    // which are not subject paths at all, so the digest cannot move and the report's
+    // `unscannedMovement` is null. The permission is carried because the class is
+    // lawful, not because this rung exercises it.
     reviewableUnscannedMovement: true,
   })],
   [STABLE_CORE_TARGET_SCHEMA, Object.freeze({
@@ -2014,14 +2130,16 @@ export function run(argv = process.argv.slice(2)) {
   // any mismatch into a refusal rather than a silent mode switch.
   const targetSchema = command.targetSchema
     ? Number(command.targetSchema)
-    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : STABLE_CORE_TARGET_SCHEMA);
+    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : COMPANION_GATE_TARGET_SCHEMA);
   if (![RETIRED_EXACT_TARGET_SCHEMA, HEURISTIC_TARGET_SCHEMA, FILTERED_TARGET_SCHEMA,
     SURFACE_FILTERED_TARGET_SCHEMA, BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
     CORPUS_COVERAGE_TARGET_SCHEMA, EPOCH_DARK_CORPUS_TARGET_SCHEMA,
     PROSE_REGEN_TARGET_SCHEMA, TREASURY_ADMISSION_TARGET_SCHEMA,
     GENESIS_TIES_TARGET_SCHEMA, DEAD_DEPENDENCY_TARGET_SCHEMA,
-    PRESET_LIGHT_TARGET_SCHEMA, STABLE_CORE_TARGET_SCHEMA].includes(targetSchema)) {
-    throw new Error(`observed-shape --target-schema must be ${STABLE_CORE_TARGET_SCHEMA} (live stable-core leaf),`
+    PRESET_LIGHT_TARGET_SCHEMA, STABLE_CORE_TARGET_SCHEMA,
+    COMPANION_GATE_TARGET_SCHEMA].includes(targetSchema)) {
+    throw new Error(`observed-shape --target-schema must be ${COMPANION_GATE_TARGET_SCHEMA} (live companion-gate leaf),`
+      + ` ${STABLE_CORE_TARGET_SCHEMA} (retired stable-core leaf),`
       + ` ${PRESET_LIGHT_TARGET_SCHEMA} (retired preset-light leaf),`
       + ` ${DEAD_DEPENDENCY_TARGET_SCHEMA} (retired dead-dependency leaf),`
       + ` ${GENESIS_TIES_TARGET_SCHEMA} (retired genesis-ties leaf),`

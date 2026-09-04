@@ -18,6 +18,7 @@ import {
   RETIRED_GENESIS_TIES_BASELINE_SCHEMA,
   RETIRED_DEAD_DEPENDENCY_BASELINE_SCHEMA,
   RETIRED_PRESET_LIGHT_BASELINE_SCHEMA,
+  RETIRED_STABLE_CORE_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   validateSchema3Baseline,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
@@ -35,6 +36,7 @@ import {
   validateSchema13Baseline,
   validateSchema14Baseline,
   validateSchema15Baseline,
+  validateSchema16Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   digestOf,
@@ -283,7 +285,7 @@ describe('observed-shape schema-3 baseline envelope', () => {
     // keys landed on its own shape. The branch now states the guarantee its two sibling
     // branches already had. Classification-only, so its reconciliation is EMPTY — the
     // cured tip reproduces the schema-14 register row for row.
-    expect(BASELINE_SCHEMA).toBe(15);
+    expect(BASELINE_SCHEMA).toBe(16);
     expect(RETIRED_GENESIS_TIES_BASELINE_SCHEMA).toBe(12);
     expect(RETIRED_TREASURY_ADMISSION_BASELINE_SCHEMA).toBe(11);
     expect(RETIRED_PROSE_REGEN_BASELINE_SCHEMA).toBe(10);
@@ -466,6 +468,14 @@ function validSchema13Baseline() {
 function validSchema14Baseline() {
   const baseline = validSchema7Baseline();
   baseline.schema = RETIRED_PRESET_LIGHT_BASELINE_SCHEMA;
+  return baseline;
+}
+
+/** The RETIRED schema-15 envelope, pinned to its own LITERAL number for the reason the
+ *  schema-10 through schema-14 fixtures above record. */
+function validSchema15Baseline_fixture() {
+  const baseline = validSchema7Baseline();
+  baseline.schema = RETIRED_STABLE_CORE_BASELINE_SCHEMA;
   return baseline;
 }
 
@@ -697,7 +707,12 @@ describe('observed-shape schema-7 bank-by-rule envelope', () => {
     expect(validateSchema12Baseline(genesisTies)).toBe(genesisTies);
     expect(validateSchema13Baseline(deadDependency)).toBe(deadDependency);
     expect(validateSchema14Baseline(presetLight)).toBe(presetLight);
-    expect(validateSchema15Baseline(live)).toBe(live);
+    // ⭐ 15 IS RETIRED AT §893.4 and now validates its OWN literal, so it is paired with a
+    // schema-15 fixture rather than with `live` — the same move every rung makes when the
+    // authority passes it. `live` belongs to 16 now.
+    const stableCore = validSchema15Baseline_fixture();
+    expect(validateSchema15Baseline(stableCore)).toBe(stableCore);
+    expect(validateSchema16Baseline(live)).toBe(live);
     expect(() => validateSchema7Baseline(baseline)).toThrow(/is not schema 7/);
     expect(() => validateSchema8Baseline(retired)).toThrow(/is not schema 8/);
     // ⚠ EVERY ADJACENT PAIR IS PINNED IN BOTH DIRECTIONS FOR ONE REASON: FOUR
