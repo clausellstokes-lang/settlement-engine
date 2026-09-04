@@ -403,7 +403,7 @@
   },
   {
     "path": "src/components/new/tabs/DefenseTab.jsx",
-    "line": 242,
+    "line": 294,
     "category": "floatInterpolation",
     "snippet": "{crimFaction.power||0}"
   },
@@ -553,31 +553,31 @@
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 149,
+    "line": 270,
     "category": "floatInterpolation",
     "snippet": "{leg.score}"
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 198,
+    "line": 334,
     "category": "floatInterpolation",
     "snippet": "{governing.power}"
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 268,
+    "line": 469,
     "category": "floatInterpolation",
     "snippet": "{Math.round(instab*100)}"
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 268,
+    "line": 469,
     "category": "percentToken",
     "snippet": "{Math.round(instab*100)}"
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 280,
+    "line": 494,
     "category": "floatInterpolation",
     "snippet": "{Math.round(rung.standing*100)}"
   },
