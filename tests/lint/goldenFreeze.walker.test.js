@@ -61,6 +61,7 @@
  */
 
 import { readFileSync, readdirSync, statSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, relative } from 'node:path';
@@ -889,5 +890,72 @@ describe('the shift-record home — docs/shift-records/', () => {
     const records = readdirSync(join(ROOT, 'docs/shift-records'))
       .filter((name) => name.endsWith('.json') && !name.startsWith('_'));
     expect(records, 'a shift record exists but the register is unfrozen').toEqual([]);
+  });
+});
+
+// ───────────────────────────────────────────────────────────────────────────────────
+describe('the lane ritual — scripts/dormancy-bit-compare.mjs', () => {
+  // WHY THIS BLOCK EXISTS, AND WHY IT IS NOT A CALLER. The comparator is a MANUAL instrument:
+  // it is driven by hand across two trees, and nothing in the suite calls it. That is a
+  // legitimate shape for a ritual tool — a committed script does not need a caller to be
+  // real. But until this block, "no caller" also meant "no proof it runs at all", and a
+  // freeze ritual leaning on a script nobody has executed is exactly the dormancy class this
+  // walker exists to refuse: a dark tool and a lit-but-broken tool are indistinguishable from
+  // outside. So these arms do NOT drive a generation — that is minutes of work and needs two
+  // trees, and it is the ritual's job, not the gate's. They prove the narrower thing a gate
+  // can honestly prove: the script LOADS, parses its arguments, and every documented REFUSAL
+  // fires with its documented EXIT CODE. A refusal that never fires is the half of a guard
+  // that rots invisibly, and the exit codes are load-bearing — 2 means "you called it wrong",
+  // 3 means "this arm is not defined yet", and a ritual that cannot tell those apart will
+  // read an unbuilt arm as a clean comparison.
+  const SCRIPT = 'scripts/dormancy-bit-compare.mjs';
+  const run = (...argv) => {
+    const result = spawnSync(process.execPath, [join(ROOT, SCRIPT), ...argv], {
+      cwd: ROOT, encoding: 'utf8',
+    });
+    return { code: result.status, out: result.stdout ?? '', err: result.stderr ?? '' };
+  };
+
+  it('the script loads and answers --help with its own usage, on exit 0', () => {
+    const { code, err } = run('--help');
+    expect(code, `--help must exit 0. stderr was: ${err}`).toBe(0);
+    expect(err).toContain('usage: node scripts/dormancy-bit-compare.mjs');
+    expect(err).toContain('--against');
+  });
+
+  it('a bare invocation refuses with the usage rather than defaulting to a tree', () => {
+    const { code, err } = run();
+    expect(code).toBe(2);
+    expect(err).toContain('usage: node scripts/dormancy-bit-compare.mjs');
+  });
+
+  it('an unknown argument is refused BY NAME rather than silently ignored', () => {
+    // A ritual tool that ignores a typo’d flag runs the wrong comparison and says nothing.
+    const { code, err } = run('--tree', ROOT, '--nonsense');
+    expect(code).toBe(2);
+    expect(err).toContain('unknown argument');
+    expect(err).toContain('--nonsense');
+  });
+
+  it('THE SELF-COMPARISON GUARD FIRES — the one refusal a real run depends on', () => {
+    // Two trees that are the same tree answer "identical" whatever the pipeline does. §713.3
+    // recorded that exact false pass. It must REFUSE, not compare.
+    const { code, err } = run('--tree', ROOT, '--against', ROOT);
+    expect(code).toBe(2);
+    expect(err).toContain('refusing a SELF-COMPARISON');
+  });
+
+  it('a missing tree is refused before anything is imported from it', () => {
+    const { code, err } = run('--tree', join(ROOT, 'no-such-tree-goldenfreeze-probe'));
+    expect(code).toBe(2);
+    expect(err).toContain('no such tree');
+  });
+
+  it('the unbuilt `soak` arm refuses on its OWN exit code rather than inventing a corpus', () => {
+    // ARMS declares soak deliberately unbuilt and REC Q2’s to rule. Exit 3 is what keeps
+    // "not defined yet" from reading as "you called it wrong".
+    const { code, err } = run('--tree', ROOT, '--arm', 'soak');
+    expect(code).toBe(3);
+    expect(err).toContain('deliberately unbuilt');
   });
 });

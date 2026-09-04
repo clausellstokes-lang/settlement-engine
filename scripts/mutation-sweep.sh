@@ -103,6 +103,7 @@ MUTATED_FILES=(
   src/domain/worldPulse/disposition.js
   src/domain/display/stateProse/dossierMounts.js
   src/domain/content/customContentCharset.generated.js
+  tests/fixtures/.golden-freeze-register.json
 )
 if [ "${MUTATION_SWEEP_ALLOW_DIRTY:-}" != "1" ]; then
   dirty="$(git status --porcelain -- "${MUTATED_FILES[@]}" 2>/dev/null)"
@@ -992,6 +993,27 @@ check_caught "dossier-mounts/a corpus block leaves the dark list with no mount" 
 #     U+00C1 U+00C9 U+00CD U+00D3 U+00D6 U+00DA U+00DC U+00DE; restored, 5/5 green.
 perl -0pi -e 's/"ranges": "D 20-7E A0-AC AE-132 /"ranges": "D 20-7E A0-AC /' src/domain/content/customContentCharset.generated.js
 check_caught "naming-charset/a range leaves the dossier surface and a shipped name stops printing" src/domain/content/customContentCharset.generated.js "npx vitest run tests/data/namingDataCharset.test.js --no-file-parallelism"
+
+# 73. TE-GOLDEN-1 car 2 — THE ROSTER-CLOSURE LAW. The golden freeze register's whole claim
+#     is that every same-seed instrument in tests/ is EITHER enrolled with a register row OR
+#     carries an affirmative written exclusion — no third state, because silence is not a
+#     disposition. The failure it forecloses is the quiet one: an edit to the exclusion roster
+#     clobbers one spelling with another, so the roster still READS as maintained (same length,
+#     every row well-formed, every listed spelling still live in the tree) while one instrument
+#     has silently stopped being covered. A schema check cannot see that and neither can a
+#     length floor — only the join against the live AST census can, and this plant is what
+#     proves it does. Collapse the UPDATE_MOUNT_BASELINE row onto the LIGHTING_CENSUS_REFREEZE
+#     spelling: UPDATE_MOUNT_BASELINE goes unclaimed, and because the surviving spelling is
+#     still live in the tree the stale-exclusion arm stays GREEN, so the red is attributable to
+#     the closure arm ALONE.
+#     ⭐ THE OTHER DIRECTION IS ALREADY COVERED IN-TREE, which is why this plant takes the
+#     register side: the walker ships PLANT_NEW_SPELLING, an in-memory source minting an
+#     unenrolled spelling, asserted on every gate run. Tree-gains-an-instrument is proved
+#     there; roster-loses-a-member is proved here. Neither alone closes the law.
+#     Measured before landing (lane GOLDENLAND, 2026-09-04): planted => EXACTLY 1 red of 84,
+#     naming the arm and the file; restored cmp-exact => 84 passed.
+perl -0pi -e 's/"UPDATE_MOUNT_BASELINE"/"LIGHTING_CENSUS_REFREEZE"/' tests/fixtures/.golden-freeze-register.json
+check_caught "golden-freeze/the exclusion roster loses a spelling while reading as maintained" tests/fixtures/.golden-freeze-register.json "npx vitest run tests/lint/goldenFreeze.walker.test.js --no-file-parallelism" "every golden-adjacent env spelling in tests is enrolled or written-excluded"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"

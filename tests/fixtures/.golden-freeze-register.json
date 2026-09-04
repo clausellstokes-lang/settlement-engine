@@ -69,7 +69,7 @@
     "measuredAtSha": "8b07ce45f179b583c6a152412a23777cb1a15a38",
     "measuredBy": "lane GOLDEN-BUILD (Opus 5) — TE-GOLDEN-1 machinery, pre-freeze",
     "date": "2026-09-01",
-    "note": "ROSTER INVENTORY ONLY, measured by execution against the build base. No frozen value is recorded here and none may be until the freeze act. Counts: 43 env-bearing enrolled instruments (40 UPDATE_GOLDEN + UPDATE_TIMELINE_GOLDEN + UPDATE_LETTER_GOLDEN + UPDATE_CARTOGRAPHY_CALIBRATION), 3 in-file-constant surfaces, 2 writer-less surfaces (interior hand-maintained, pdf vitest snapshot) = 48 rows. 7 written exclusion spellings across 8 files.",
+    "note": "ROSTER INVENTORY ONLY, measured by execution against the build base. No frozen value is recorded here and none may be until the freeze act. Counts: 43 env-bearing enrolled instruments (40 UPDATE_GOLDEN + UPDATE_TIMELINE_GOLDEN + UPDATE_LETTER_GOLDEN + UPDATE_CARTOGRAPHY_CALIBRATION), 3 in-file-constant surfaces, 2 writer-less surfaces (interior hand-maintained, pdf vitest snapshot) = 48 rows. 7 written exclusion spellings across 9 files. POST-BASE, NOT PART OF THIS MEASUREMENT: one further exclusion was written at the TE-GOLDEN-1 landing for a spelling minted after this base (see excludedEnvSpellings), so the LIVE roster reads 8 spellings across 10 files while this block continues to describe 8b07ce45f. The file count here was 8 until 2026-09-04 and that was simply wrong against this register’s own data; corrected by measurement, not by re-wording.",
     "envBearingSurfaces": 43,
     "constantSurfaces": 3,
     "writerlessSurfaces": 2,
