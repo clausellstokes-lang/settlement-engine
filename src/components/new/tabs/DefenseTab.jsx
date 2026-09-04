@@ -8,7 +8,7 @@ import {NarrativeNote} from '../NarrativeNote';
 import { criminalOpNote, deriveCriminalStructure, deriveDefenseReadiness, deriveSupportingCapabilities, deriveGuardAssessment, deriveDefenseVulnerabilities, DEFENSE_STRESS_STATUS } from '../../../domain/display/defenseDisplay.js';
 import { safetySeverityOf } from '../../../domain/display/safetySeverity.js';
 import { scoreBand, scoreColor } from '../../../domain/display/defenseScoreBands.js';
-import { defenseStateProse } from '../../../domain/display/stateProse/defenseStateProse.js';
+import { defenseStateProse, defenseThreatProse } from '../../../domain/display/stateProse/defenseStateProse.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
 import { truncateAtWord } from '../../../lib/text.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
@@ -19,6 +19,12 @@ import useIsMobile from '../../../hooks/useIsMobile.js';
  * render a machine sentence into the position the DM's own sentence occupies.
  */
 const PUBLIC_ORDER_MOUNT = 'defense.publicOrder';
+
+/**
+ * The threat-assessment position. FIVE readiness rows of ONE block at ONE position — the
+ * C3 law is about rungs per page-set, not draws, so one position may read several pools.
+ */
+const THREAT_MOUNT = 'defense.threatAssessment';
 
 export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false, playerView = false}) {
   const [expandedThreat, setExpandedThreat] = useState(null);
@@ -51,6 +57,16 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
     ? deskProse.publicOrder.beside : null;
   const surveyBeside = drawnAtMount(PUBLIC_ORDER_MOUNT, deskProse.firstSurvey?.rung)?.sentence
     ? deskProse.firstSurvey.beside : null;
+  // DS-DEF-2, the five readiness rows. Same public gate as the banner above; DS-DEF-2
+  // frames no DM-editable field, so these are plain rungs rather than projections.
+  const threatProse = publicDossier
+    ? Object.freeze({ beasts: null, invasion: null, internal: null, economic: null, disaster: null })
+    : defenseThreatProse(r, {
+      seed: String(r?._seed ?? r?.id ?? ''),
+      audience: playerView ? 'player' : 'dm',
+    });
+  const threatLines = ['beasts', 'invasion', 'internal', 'economic', 'disaster']
+    .map((k) => drawnAtMount(THREAT_MOUNT, threatProse[k])?.sentence).filter(Boolean);
   const stresses = (Array.isArray(r.stress)?r.stress:r.stress?[r.stress]:[]).filter(Boolean);
   const stressTypes = stresses.map(s=>s?.type).filter(Boolean);
   const crimCapture = r.powerStructure?.criminalCaptureState || 'none';
@@ -173,6 +189,13 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
       <div style={{marginBottom:14}}>
         <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:2}}>Threat Assessment</div>
         <div style={{fontSize:FS.xxs,color:MUTED,marginBottom:8,fontStyle:'italic'}}>Bars show the settlement&apos;s defense readiness against each threat, as judged at the first survey; Disasters & Famine is re-judged as the campaign advances. Higher is better.</div>
+        {/* DS-DEF-2: what each row MEANS, in the town's own voice. Five pools of one block
+            at one position; the bars and their scores above are untouched. */}
+        {threatLines.length>0&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #8b1a1a',padding:'9px 13px',marginBottom:10}}>
+          {threatLines.map((line,i)=>(
+            <p key={i} style={{fontSize:i===0?FS.sm:FS.xs,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.55,margin:i===0?0:'5px 0 0',fontStyle:'italic'}}>{line}</p>
+          ))}
+        </div>}
         <div style={{display:'flex',flexDirection:'column',gap:6}}>
           {threats.map(({label,color,assess},i)=>{
             const sc = threatScores[label]||0;

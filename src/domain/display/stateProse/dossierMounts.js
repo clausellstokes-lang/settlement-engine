@@ -70,6 +70,19 @@
  *     politics layer, and its prose is accurate about an unorganised hall. That is a
  *     measurement of an absence, not a guess at a presence. It was DRAWN. (DESK CAR 9.)
  *
+ * ── ⭐ THE LABEL-TRAP RULE (three instances across two leaves) ───────────────────────
+ * A producer's token and the corpus's word for the same thing are OFTEN NOT THE SAME
+ * STRING, and the difference is silent:
+ *   `indebted` labels "Indebted to Outside Power"; the pool is `INDEBTED TO AN OUTSIDE POWER`
+ *   `religious_conversion` labels "Religious Conversion"; the pool is `RELIGIOUS CRISIS`
+ *   `heartland` is the producer's tier; the corpus's family is `settled`
+ * A route that reads the LABEL, or that works for most of a vocabulary and drops the rest,
+ * is a DEFAULT WEARING A READING'S CLOTHES one layer up from the value.
+ *   ⇒ KEY ON THE CANONICAL PRODUCER TOKEN, NEVER ON THE CORPUS WORD, AND ASSERT THE MAP
+ *     TOTAL IN BOTH DIRECTIONS.
+ * Measured cost of getting it wrong: the label route darkens 2 of 15 crisis banners, and it
+ * does so without an error anywhere.
+ *
  * The companion distinction, at the READ rather than the POOL: a mounted-but-unreachable
  * pool is a FINDING (declare it, pin it, name the one act that lights it); a read of a key
  * no writer produces is a DEFECT (remove it). They get different treatment.
@@ -211,6 +224,9 @@ export const DOSSIER_MOUNTS = Object.freeze([
   Object.freeze({
     mount: 'defense.publicOrder', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-3', rung: 'sentence',
   }),
+  Object.freeze({
+    mount: 'defense.threatAssessment', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-2', rung: 'sentence',
+  }),
 ]);
 
 /**
@@ -226,7 +242,7 @@ export const DOSSIER_MOUNTS = Object.freeze([
  * @type {ReadonlyArray<string>}
  */
 export const UNMOUNTED_BLOCKS = Object.freeze([
-  'DS-DEF-1', 'DS-DEF-2', 'DS-DEF-4',
+  'DS-DEF-1', 'DS-DEF-4',
   'DS-DEF-5', 'DS-DEF-6', 'DS-DEF-7', 'DS-DEF-8',
   'DS-DEF-9', 'DS-DEF-10', 'DS-DEF-11',
   'DS-ECO-3', 'DS-ECO-4',
