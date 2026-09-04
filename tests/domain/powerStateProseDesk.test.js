@@ -40,9 +40,11 @@ import {
   ECONOMIC_BASES, RULING_POWERS, structuralLens, structuralLensOf,
 } from '../../src/domain/spatial/cohesionWeave.js';
 import { hasLadder, ladderInstabilityOf, ladderRungsOf } from '../../src/domain/townMap/ladderRead.js';
+import { hasPolitics, settlementBlocs as politicsBlocsOf } from '../../src/domain/display/politicsRead.js';
 import {
   capturePoolKey, legitimacyHoldPoolKey, legitimacyReadingPoolKey,
-  ladderPoolKey, operationRolePoolKey, powerLadderRung, riskPoolKey, rulingPowerPoolKey,
+  ladderPoolKey, operationRolePoolKey, politicsEndPoolKey, politicsGluePoolKey,
+  politicsPresencePoolKey, powerLadderRung, riskPoolKey, rulingPowerPoolKey,
 } from '../../src/domain/display/stateProse/powerStateProse.js';
 import { legitimacyBandFor } from '../../src/generators/factionDynamics.js';
 import {
@@ -1222,5 +1224,181 @@ describe('DS-POW-5 — ALIVENESS, the covert pool, and the three rare slots', ()
     expect(rows).toHaveLength(1);
     expect(rows[0]).toMatchObject({ mount: 'power.rulingStructure', tab: 'power', desk: 'power', rung: 'sentence' });
     expect(UNMOUNTED_BLOCKS).not.toContain(POW5);
+  });
+});
+
+/**
+ * DS-POW-7 — BLOCS. The last block in the leaf. Conditional surface (the DS-POW-3 class),
+ * so the aliveness proof uses a PLAYED world read back through the shipped display reader.
+ */
+const POW7 = 'DS-POW-7';
+const POW7_POOLS = DOSSIER_STATE_PROSE_POWER[POW7].pools;
+/** The glue and end vocabularies, from the Bloc typedef's own unions. */
+const GLUE_TYPES = ['concession', 'patronage', 'doctrine', 'threat', 'compromise'];
+const END_KINDS = ['seats', 'doctrine', 'commerce', 'survival', 'patron'];
+
+const politicsWorld = (blocs) => ({ politicsLedgers: { 'sid-1': { blocs } } });
+const aBloc = (glue, end, covert = false) => ({
+  id: 'b1', members: ['Iron Circle', 'Craft Guilds'],
+  glue: [{ type: glue, detail: 'a receipt fragment' }],
+  end, strain: 0.2, sinceTick: 5, covert,
+});
+const politicsSettlement = (category = 'noble') => ({
+  id: 'sid-1', name: 'Thornwall', _seed: 'seed-pow7',
+  powerStructure: { governingName: 'Merchant Council', factions: [{ category, power: 50 }] },
+});
+/** The reading PowerTab hands the desk — the DISPLAY projection, never the kernel. */
+const politicsReading = (worldState, { groundTruth = true, covert = true } = {}) => politicsBlocsOf({
+  worldState, settlementId: 'sid-1', includeGroundTruth: groundTruth, includeCovert: covert,
+});
+
+describe('DS-POW-7 — the corpus is its own key table', () => {
+  it('every glue type and every end kind maps to a pool, both directions', () => {
+    // The maps are DERIVED by scanning shipped pool names, so a renamed pool cannot drift
+    // from a hand-written table — the failure mode a literal map here would have.
+    for (const type of GLUE_TYPES) {
+      const world = politicsWorld([aBloc(type, 'seats')]);
+      expect(politicsGluePoolKey(politicsReading(world)), `glue ${type}`).toBeTruthy();
+    }
+    for (const kind of END_KINDS) {
+      const world = politicsWorld([aBloc('concession', kind)]);
+      expect(politicsEndPoolKey(politicsReading(world)), `end ${kind}`).toBeTruthy();
+    }
+    expect(Object.keys(POW7_POOLS).filter((k) => k.startsWith('glue '))).toHaveLength(GLUE_TYPES.length);
+    expect(Object.keys(POW7_POOLS).filter((k) => k.startsWith('end '))).toHaveLength(END_KINDS.length);
+    // An unknown token renders nothing rather than guessing a binding.
+    expect(politicsGluePoolKey(politicsReading(politicsWorld([aBloc('blackmail', 'seats')])))).toBeNull();
+    expect(politicsEndPoolKey(politicsReading(politicsWorld([aBloc('concession', 'conquest')])))).toBeNull();
+  });
+});
+
+describe('DS-POW-7 — ALIVENESS over a PLAYED world, read through the shipped reader', () => {
+  it('the fixture is a world the shipped politics reader accepts', () => {
+    const world = politicsWorld([aBloc('concession', 'seats')]);
+    // If this is false the suite below is measuring a hand-shaped object, not a world.
+    expect(hasPolitics(world), 'the shipped reader sees no politics in the fixture').toBe(true);
+    expect(hasPolitics({}), 'a birth world must carry no politics').toBe(false);
+    const projection = politicsReading(world);
+    expect(projection).toBeTruthy();
+    expect(projection.blocCount).toBe(1);
+    expect(projection.blocs[0].truth.end).toBe('seats');
+  });
+
+  it('all TWELVE lit pools speak, and the eight dark ones stay dark', () => {
+    const reached = new Set();
+    for (const glue of GLUE_TYPES) {
+      for (const end of END_KINDS) {
+        for (const category of ['noble', 'merchant']) {
+          for (const audience of ['dm', 'player']) {
+            const world = politicsWorld([aBloc(glue, end, category === 'noble')]);
+            const settlement = politicsSettlement(category);
+            const drawn = powerStateProse(
+              settlement,
+              { politics: politicsReading(world), structuralLens: structuralLensOf(settlement) },
+              { seed: `p7-${glue}-${end}-${category}`, audience },
+            );
+            for (const rung of ['blocPresence', 'blocGlue', 'blocEnd']) {
+              const line = drawn[rung];
+              if (line?.sentence) {
+                reached.add(line.provenance.poolKey);
+                expect(line.sentence).not.toMatch(/[{}]/);
+                expect(line.sentence).not.toMatch(/[0-9]/);
+              }
+            }
+          }
+        }
+      }
+    }
+    // The dormant line, which the corpus wrote FOR the absent layer.
+    const birth = politicsSettlement();
+    const dormant = powerStateProse(
+      birth, { politics: null, structuralLens: structuralLensOf(birth) }, { seed: 'dormant' },
+    );
+    expect(dormant.blocPresence.provenance.poolKey).toBe('layer DORMANT (no ledger materialized)');
+    expect(dormant.blocPresence.sentence).toBeTruthy();
+    reached.add('layer DORMANT (no ledger materialized)');
+
+    expect(reached.size, `reached: ${[...reached]}`).toBe(12);
+    expect(Object.keys(POW7_POOLS)).toHaveLength(20);
+  });
+
+  it('⛔ the eight dark pools are declared, and the desk reads no receipt state', () => {
+    // 5 receipt pools: `advanceSettlementPolitics` returns a receipts array and its ONLY
+    // caller discards it (pulseKernel keeps `changed` and `worldState`). No readable state
+    // ⇒ a read would be the dead-read defect. 1 hostile-tie pool: nothing persists a
+    // BLOCKED alignment. 2 ruling-bloc pools: they need a 61.9 KB kernel module the display
+    // projection does not expose — a cost reason, deliberately not bundled into this car.
+    for (const key of [
+      'receipt formed', 'receipt realigned', 'receipt fractured', 'receipt exposed',
+      'receipt deferred (the alignment exists and has not happened)',
+      'hostile leader tie HARD-BLOCKS an otherwise natural alignment',
+      'consolidation 0: a fully divided court (live layer, no ruling bloc)',
+      'a RULING bloc, consolidated',
+    ]) {
+      expect(POW7_POOLS[key], `corpus lost ${key}`).toBeTruthy();
+    }
+    const source = readFileSync(
+      resolve(import.meta.dirname, '../../src/domain/display/stateProse/powerStateProse.js'), 'utf8',
+    );
+    const code = source.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/[^\n]*/g, '');
+    // No read of a receipts bag, and no import of the heavy kernel module.
+    expect(code, 'the desk reads receipt state that nothing persists').not.toMatch(/\breceipts\b/);
+    expect(code, 'the desk reached for the 61.9 KB kernel module').not.toMatch(/settlementPolitics/);
+  });
+
+  it('THE SEAM: a player routed to a covert pool gets SILENCE, not a secret', () => {
+    // `glue compromise (a corruption leash)` and `end patron` are wholly dm-only in the
+    // corpus. The desk may hold the token (it routes on it); the kernel refuses the
+    // sentence. That is the two mechanisms composing, and it is the whole seam argument.
+    for (const key of ['glue compromise (a corruption leash)', 'end patron']) {
+      expect(POW7_POOLS[key].every((v) => (v.marks || []).includes('dm-only')), key).toBe(true);
+    }
+    const world = politicsWorld([aBloc('compromise', 'patron')]);
+    const settlement = politicsSettlement('merchant');
+    const reading = { politics: politicsReading(world), structuralLens: structuralLensOf(settlement) };
+    const asPlayer = powerStateProse(settlement, reading, { seed: 'seam', audience: 'player' });
+    const asDm = powerStateProse(settlement, reading, { seed: 'seam', audience: 'dm' });
+    // Routed to the covert pools in BOTH cases…
+    expect(asDm.blocGlue.provenance.poolKey).toBe('glue compromise (a corruption leash)');
+    expect(asDm.blocEnd.provenance.poolKey).toBe('end patron');
+    // …and only the DM is told.
+    expect(asDm.blocGlue.sentence).toBeTruthy();
+    expect(asDm.blocEnd.sentence).toBeTruthy();
+    expect(asPlayer.blocGlue?.sentence ?? null).toBeNull();
+    expect(asPlayer.blocEnd?.sentence ?? null).toBeNull();
+  });
+
+  it('the COVERT-under-autarchy pool needs both a conspiracy and an autarchy', () => {
+    const covertWorld = politicsWorld([aBloc('concession', 'seats', true)]);
+    const autarchy = politicsSettlement('noble');   // noble -> autocrat
+    const council = politicsSettlement('government'); // government -> council
+    expect(structuralLensOf(autarchy).rulingPower).toBe('autocrat');
+    expect(politicsPresencePoolKey(politicsReading(covertWorld), 'autocrat'))
+      .toBe('an opposition bloc forms COVERT under an autarchy');
+    // A conspiracy under a council is not that pool — the corpus wrote it about an autarchy.
+    expect(structuralLensOf(council).rulingPower).toBe('council');
+    expect(politicsPresencePoolKey(politicsReading(covertWorld), 'council')).toBeNull();
+    // And an OPEN bloc under an autarchy is not a conspiracy.
+    expect(politicsPresencePoolKey(politicsReading(politicsWorld([aBloc('concession', 'seats')])), 'autocrat'))
+      .toBeNull();
+  });
+
+  it('⚠ THE SURFACE CONDITION — dormant is a TRUE statement, not a fallback', () => {
+    // Distinct from the economicBase case, where `mixed` would have been a fail-soft
+    // default dressed as a reading. Here the corpus WROTE a pool for the absent layer and
+    // its prose is accurate about an unorganised hall.
+    expect(politicsPresencePoolKey(null, 'autocrat')).toBe('layer DORMANT (no ledger materialized)');
+    expect(politicsPresencePoolKey({ blocs: [] }, 'autocrat')).toBe('layer DORMANT (no ledger materialized)');
+    expect(POW7_POOLS['layer DORMANT (no ledger materialized)'].every((v) => !(v.marks || []).includes('dm-only')))
+      .toBe(true);
+  });
+
+  it('the registry mounts DS-POW-7 once, and the POWER LEAF IS COMPLETE', () => {
+    const rows = DOSSIER_MOUNTS.filter((row) => row.blockId === POW7);
+    expect(rows).toHaveLength(1);
+    expect(rows[0]).toMatchObject({ mount: 'power.blocs', tab: 'power', desk: 'power', rung: 'sentence' });
+    // THE MILESTONE, asserted rather than claimed: no DS-POW- block remains dark.
+    expect(UNMOUNTED_BLOCKS.filter((b) => b.startsWith('DS-POW-'))).toEqual([]);
+    expect(DOSSIER_MOUNTS.filter((row) => row.desk === 'power')).toHaveLength(7);
   });
 });

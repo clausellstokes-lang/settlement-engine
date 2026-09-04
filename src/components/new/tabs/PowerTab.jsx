@@ -10,6 +10,7 @@ import { PowerStrata } from './power/PowerStrata.jsx';
 import { rulingChainOf } from '../../../domain/dossier/powerStrata.js';
 import { coupContenders, coupRiskLabel } from '../../../domain/rulingPowerCoup.js';
 import { structuralLensOf } from '../../../domain/spatial/cohesionWeave.js';
+import { settlementBlocs as politicsBlocsOf } from '../../../domain/display/politicsRead.js';
 import { powerStateProse, powerLadderRung } from '../../../domain/display/stateProse/powerStateProse.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
 
@@ -46,6 +47,19 @@ const LADDER_MOUNT = 'power.factionLadder';
 
 /** Ruling structure: the ruling-power word, the economic base, and the body's own title. */
 const STRUCTURE_MOUNT = 'power.rulingStructure';
+
+/** Blocs and the divided court. Three draws at one position. */
+const BLOCS_MOUNT = 'power.blocs';
+
+/**
+ * The politics ledger is keyed by SETTLEMENT id. A settlement carries `id` in every path
+ * that has a ledger (the ledger is written per-settlement during play), so this is a plain
+ * read with a defensive fallback rather than a derivation.
+ * @param {{id?: unknown, _seed?: unknown}|null|undefined} settlement
+ */
+function saveIdOfSettlement(settlement) {
+  return settlement?.id ?? null;
+}
 
 /** §815 — one row of the ruling chain: a small uppercase link label + the answer. */
 function ChainRow({ label, children }) {
@@ -111,7 +125,7 @@ function RulingChainBlock({ settlement }) {
   );
 }
 
-export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, publicDossier = false, playerView = false }) {
+export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, publicDossier = false, playerView = false, worldState = null }) {
   const [expandedFaction, setExpandedFaction] = useState(null);
 
   // Dossier hyperlink focus. When a link navigates to a faction (e.g. from an
@@ -186,6 +200,17 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
   const deskReadings = publicDossier ? {} : {
     ...(contenders ? { contenders, riskLabel: coupRiskLabel(contenders) } : {}),
     structuralLens: structuralLensOf(s),
+    // DS-POW-7. The DISPLAY projection, never the 61.9 KB kernel module. `includeCovert`
+    // honours the projection's own secrets filter — a conspiracy does not enter a player's
+    // projection at all — while `includeGroundTruth` hands over the raw end/glue tokens the
+    // desk needs to ROUTE. The corpus's own dm-only marks then gate the SENTENCE under
+    // kernel law 2, so a player routed to a covert pool gets silence rather than a secret.
+    politics: politicsBlocsOf({
+      worldState,
+      settlementId: s?.id ?? saveIdOfSettlement(s),
+      includeGroundTruth: !playerView,
+      includeCovert: !playerView,
+    }),
   };
   const deskProse = publicDossier
     ? Object.freeze({
@@ -193,6 +218,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
       legitimacyReading: null, captureReading: null, operationReading: null,
       successionRisk: null, successionHold: null,
       rulingStructure: null, governingTitle: null,
+      blocPresence: null, blocGlue: null, blocEnd: null,
     })
     : powerStateProse(s, deskReadings, { seed: String(s?._seed ?? s?.id ?? ''), audience });
   const drawnBanner = drawnAtMount(LEGITIMACY_MOUNT, deskProse.legitimacyBanner);
@@ -204,6 +230,11 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
   const drawnOperation = drawnAtMount(UNDERSIDE_MOUNT, deskProse.operationReading);
   const undersideLines = [drawnReading, drawnCapture, drawnOperation]
     .map((d) => d?.sentence).filter(Boolean);
+  const blocLines = [
+    drawnAtMount(BLOCS_MOUNT, deskProse.blocPresence),
+    drawnAtMount(BLOCS_MOUNT, deskProse.blocGlue),
+    drawnAtMount(BLOCS_MOUNT, deskProse.blocEnd),
+  ].map((d) => d?.sentence).filter(Boolean);
   const structureLines = [
     drawnAtMount(STRUCTURE_MOUNT, deskProse.rulingStructure),
     drawnAtMount(STRUCTURE_MOUNT, deskProse.governingTitle),
@@ -343,6 +374,20 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
         <div style={{background:swatch['#FAF8F4'],border:'1px solid #e0c890',borderLeft:'4px solid #4a1a4a',padding:'10px 14px',marginBottom:14}}>
           <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>The quieter arithmetic</div>
           {undersideLines.map((line, i) => (
+            <p key={i} style={{fontSize:i===0?FS.md:FS.sm,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.6,margin:i===0?0:'6px 0 0',fontStyle:'italic'}}>{line}</p>
+          ))}
+        </div>
+      )}
+
+      {/* ── BLOCS AND THE DIVIDED COURT (DS-POW-7) ───────────────────────────
+          Whether the hall is organized into sides at all, what binds the first
+          bloc, and what it is for. Three pools of ONE block at ONE position. The
+          politics layer is written during play, so a world that has not been
+          played reads the DORMANT line — which is true, not a fallback. */}
+      {blocLines.length > 0 && (
+        <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #4a4a7a',padding:'10px 14px',marginBottom:14}}>
+          <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>Sides and combinations</div>
+          {blocLines.map((line, i) => (
             <p key={i} style={{fontSize:i===0?FS.md:FS.sm,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.6,margin:i===0?0:'6px 0 0',fontStyle:'italic'}}>{line}</p>
           ))}
         </div>

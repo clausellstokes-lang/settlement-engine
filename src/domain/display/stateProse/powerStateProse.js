@@ -14,6 +14,7 @@
  *   DS-POW-3  Power › The Ladder — `ladderRungsOf` + `ladderInstabilityOf`, PER FACTION
  *   DS-POW-5  Power › ruling structure and the structural lens — `structuralLensOf` +
  *             `governingName`
+ *   DS-POW-7  Power › blocs and the divided court — `politicsRead.settlementBlocs`
  *
  * ── WHY THIS LEAF, AND WHY THIS BLOCK FIRST ──────────────────────────────────────────
  *
@@ -707,6 +708,116 @@ export function rulingPowerPoolKey(lens) {
 const GOVERNING_NAME_POOL = 'governing body name: a SLOT, never a baked noun';
 
 /**
+ * ── DS-POW-7, THE BLOCS — the last block in the leaf, and the only one needing a data route ─
+ *
+ * ⚠ CONDITIONAL SURFACE, the DS-POW-3 class. `worldState.politicsLedgers` is written only by
+ * `worldPulse/settlementPolitics.js` during play — no generator writes it — so the layer is
+ * dormant at birth. The corpus ANTICIPATES that with its own `layer DORMANT (no ledger
+ * materialized)` pool, which is why this is a surface condition rather than a dead read: the
+ * dormant sentence is a TRUE statement about an unorganised hall ("the factions sit as
+ * factions, and nothing binds any"), not a fail-soft default dressed as a reading. Its
+ * aliveness proof therefore uses a PLAYED-world fixture, verified through the shipped reader.
+ *
+ * ⚠ IT READS THE DISPLAY PROJECTION, NEVER THE KERNEL. `settlementPolitics.js` is 61.9 KB
+ * behind EIGHT transitive imports (treaty orientation, war fronts, mobilization, espionage
+ * presence…). `display/politicsRead.js` is 7.3 KB behind two, is the display layer's own
+ * projection of the same ledger, and already implements the §13 secrets seam. Reaching for
+ * the kernel to serve a dossier sentence would repeat exactly the mistake the criminal-op
+ * lift corrected, so the reading arrives as an argument from the caller's `politicsRead`.
+ *
+ * ⚠ THE SEAM JUDGMENT, STATED BECAUSE IT IS A JUDGMENT (vetoable). `politicsRead` puts a
+ * bloc's raw `end` and `glue` behind `includeGroundTruth`, while the CORPUS marks only the
+ * genuinely secret members covert — `glue compromise (a corruption leash)` and `end patron`
+ * are wholly `dm-only`, the other four of each are public — and the projection's always-
+ * visible `presence` line already speaks the end in phrase form. Two mechanisms, two jobs:
+ * the projection gates the raw DETAIL BAG, and the corpus's marks gate the SENTENCE under
+ * kernel law 2. So the caller hands over ground truth for ROUTING and the kernel refuses the
+ * covert variants on a player page — a player reading a corruption-leash bloc gets the pool
+ * key and then SILENCE, because all three of its variants are covert. Nothing the desk holds
+ * reaches a reader except a sentence the kernel approved. The caller still honours the
+ * projection's own covert FILTER (`includeCovert` off for a player), so a conspiracy does not
+ * even enter the projection there.
+ *
+ * ⛔ SIX OF THE TWENTY POOLS ARE DARK BY DECLARATION, each with a measured reason:
+ *   • `receipt formed / realigned / fractured / exposed / deferred` (5). These narrate
+ *     TRANSITIONS, and `advanceSettlementPolitics` returns a `receipts` array that its ONLY
+ *     caller discards — `pulseKernel.js:425` keeps `politics.changed` and
+ *     `politics.worldState` and drops the rest. There is no readable state, so a read would
+ *     be the dead-read defect. (That the machinery feeds nothing is itself a finding.)
+ *   • `hostile leader tie HARD-BLOCKS an otherwise natural alignment` (1). Nothing persists
+ *     a BLOCKED alignment; deriving it would fork the kernel's own alignment reasoning.
+ * And TWO more are dark for a cost reason rather than a truth reason:
+ *   • `consolidation 0: a fully divided court` and `a RULING bloc, consolidated`. Both need
+ *     `rulingBlocOf` / `coalitionConsolidation01`, which live in that 61.9 KB kernel module
+ *     and which the display projection does not expose. Lighting them wants a small
+ *     ruling-bloc derivation added to `politicsRead` — a separate act, deliberately not
+ *     bundled into this car.
+ */
+
+/**
+ * The corpus IS the key table. Both families are derived by scanning the shipped pool names,
+ * so a renamed pool or a new glue type cannot drift from a hand-written map — the failure
+ * mode a literal table here would have.
+ * @param {string} prefix @returns {Readonly<Record<string, string>>} token → pool key
+ */
+function poolsByToken(prefix) {
+  /** @type {Record<string, string>} */
+  const out = {};
+  for (const key of Object.keys(CORPUS['DS-POW-7'].pools)) {
+    if (!key.startsWith(`${prefix} `)) continue;
+    const token = key.slice(prefix.length + 1).split(' ')[0];
+    if (token) out[token] = key;
+  }
+  return Object.freeze(out);
+}
+const GLUE_POOL_OF = poolsByToken('glue');
+const END_POOL_OF = poolsByToken('end');
+
+/** @param {{blocs?: ReadonlyArray<Record<string, unknown>>}|null|undefined} projection */
+function firstBloc(projection) {
+  const blocs = projection?.blocs;
+  return Array.isArray(blocs) && blocs.length > 0 ? blocs[0] : null;
+}
+
+/**
+ * DS-POW-7's presence lens. A dormant layer says so; a conspiracy under an autarchy is the
+ * one presence fact the projection exposes that this desk can route.
+ * @param {{blocs?: ReadonlyArray<Record<string, unknown>>}|null|undefined} projection
+ * @param {unknown} rulingPower a RULING_POWERS word, from the DS-POW-5 lens
+ * @returns {string|null}
+ */
+export function politicsPresencePoolKey(projection, rulingPower) {
+  const blocs = projection?.blocs;
+  if (!Array.isArray(blocs) || blocs.length === 0) return 'layer DORMANT (no ledger materialized)';
+  const covert = blocs.some((b) => b?.covert === true);
+  return covert && text(rulingPower) === 'autocrat'
+    ? 'an opposition bloc forms COVERT under an autarchy'
+    : null;
+}
+
+/**
+ * DS-POW-7's glue lens — the binding of the first bloc, from the ground-truth bag.
+ * @param {{blocs?: ReadonlyArray<Record<string, unknown>>}|null|undefined} projection
+ * @returns {string|null}
+ */
+export function politicsGluePoolKey(projection) {
+  const truth = /** @type {{glue?: ReadonlyArray<{type?: unknown}>}|undefined} */ (firstBloc(projection)?.truth);
+  const glue = truth?.glue;
+  if (!Array.isArray(glue) || glue.length === 0) return null;
+  return GLUE_POOL_OF[text(glue[0]?.type)] || null;
+}
+
+/**
+ * DS-POW-7's end lens — what the first bloc is FOR.
+ * @param {{blocs?: ReadonlyArray<Record<string, unknown>>}|null|undefined} projection
+ * @returns {string|null}
+ */
+export function politicsEndPoolKey(projection) {
+  const truth = /** @type {{end?: unknown}|undefined} */ (firstBloc(projection)?.truth);
+  return END_POOL_OF[text(truth?.end)] || null;
+}
+
+/**
  * THE DESK. Returns the two rungs the legitimacy banner draws, or null for each where the
  * state does not support one.
  *
@@ -717,13 +828,15 @@ const GOVERNING_NAME_POOL = 'governing body name: a SLOT, never a baked noun';
  * @param {PowerDeskSettlement|null|undefined} settlement
  * @param {{contenders?: {challengers?: ReadonlyArray<{name?: unknown}>}|null,
  *   riskLabel?: string|null,
- *   structuralLens?: {rulingPower?: unknown, economicBase?: unknown}|null}} [readings]
- *   the caller's own derivations — see DS-POW-4 and DS-POW-5 above
+ *   structuralLens?: {rulingPower?: unknown, economicBase?: unknown}|null,
+ *   politics?: {blocs?: ReadonlyArray<Record<string, unknown>>}|null}} [readings]
+ *   the caller's own derivations — see DS-POW-4, DS-POW-5 and DS-POW-7 above
  * @param {{seed?: string, audience?: string}} [options]
  * @returns {Readonly<{legitimacyBanner: object|null, legitimacyLens: object|null,
  *   stabilityHeader: object|null, stabilityLens: object|null, legitimacyReading: object|null,
  *   captureReading: object|null, operationReading: object|null, successionRisk: object|null,
- *   successionHold: object|null, rulingStructure: object|null, governingTitle: object|null}>}
+ *   successionHold: object|null, rulingStructure: object|null, governingTitle: object|null,
+ *   blocPresence: object|null, blocGlue: object|null, blocEnd: object|null}>}
  */
 export function powerStateProse(settlement, readings = {}, options = {}) {
   const power = settlement?.powerStructure || {};
@@ -764,6 +877,16 @@ export function powerStateProse(settlement, readings = {}, options = {}) {
     : null);
   // DS-POW-6 uses {seat} as the governing BODY (like DS-POW-1) and {faction} for the
   // captured house, so it takes BOTH fills — the two roles do not collide in this block.
+  // DS-POW-7 fills {settlement} (59 of its 60 variants), plus {seat}/{faction}/{counterpart}
+  // for the two variants each that name them. The counterpart is the challenger the
+  // succession reading already resolved, so no second derivation is made for it.
+  /** @param {string|null} poolKey */
+  const line7 = (poolKey) => (poolKey
+    ? readStateProse(CORPUS, 'DS-POW-7', poolKey, {
+      ...options,
+      slots: { settlement: town, seat: governing, faction: governing, counterpart: challenger },
+    })
+    : null);
   // DS-POW-5 uses {seat} as the governing BODY, the DS-POW-1 role. {institution}, {route}
   // and {good} are deliberately absent — one variant each of forty, no producer, and
   // anchored liveness drops them without costing a pool.
@@ -823,6 +946,13 @@ export function powerStateProse(settlement, readings = {}, options = {}) {
   const rulingKey = rulingPowerPoolKey(readings.structuralLens);
   const namedKey = governing ? GOVERNING_NAME_POOL : null;
 
+  // DS-POW-7. The projection is the caller's `politicsRead` read; the ruling-power word comes
+  // from the DS-POW-5 lens it already holds, so no second derivation is made here.
+  const politics = readings.politics ?? null;
+  const presenceKey = politicsPresencePoolKey(politics, readings.structuralLens?.rulingPower);
+  const glueKey = politicsGluePoolKey(politics);
+  const endKey = politicsEndPoolKey(politics);
+
   return Object.freeze({
     legitimacyBanner: bandKey ? legibilityRung(glance, line(bandKey), []) : null,
     // The lens rung carries no glance of its own: the band word is already on the banner
@@ -839,5 +969,8 @@ export function powerStateProse(settlement, readings = {}, options = {}) {
     successionHold: holdKey ? legibilityRung('', line4(holdKey), []) : null,
     rulingStructure: rulingKey ? legibilityRung(rulingKey, line5(rulingKey), []) : null,
     governingTitle: namedKey ? legibilityRung('', line5(namedKey), []) : null,
+    blocPresence: presenceKey ? legibilityRung('', line7(presenceKey), []) : null,
+    blocGlue: glueKey ? legibilityRung('', line7(glueKey), []) : null,
+    blocEnd: endKey ? legibilityRung('', line7(endKey), []) : null,
   });
 }
