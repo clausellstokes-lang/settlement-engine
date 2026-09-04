@@ -401,11 +401,12 @@ function applyMissionCredit(st, mc) {
  * stays in this file. A ledger that carried the float would be a second home for a
  * tuning value — signed once, drifting twice.
  *
- * ⚠ A `grudge` deposit is INERT until the owner rules the rivalry word (§12 row 3): the
- * stage refuses `rivalry` with a receipted `vocabulary_unruled` and deposits nothing, so
- * no such row can exist yet, and ENC-5 lifts both the refusal and this guard together.
- * The branch is written rather than assumed so the shape is settled now and lifting it
- * later owes no migration.
+ * ⚠ A `grudge` deposit is INERT, and the guard below is the ONLY thing that makes it so.
+ * This note used to say the stage refused `rivalry` upstream and deposited nothing. IT DID
+ * NOT — no such refusal was ever written, and because `collectDeposits` hardcoded the bond
+ * grain, a rivalry reached `mintBond`, whose unknown-kind coercion turned it into a
+ * `friendship`. The stage now grains by kind, so a rivalry arrives here as `mark:'grudge'`
+ * and this guard drops it. ENC-5 lifts the fold; until then the row is written and ignored.
  *
  * @param {LadderStanding} st
  * @param {{ mark: string, otherNid: string, foreignSid: string, kind: string, sev: string }} ev

@@ -22,7 +22,17 @@ describe('D-7e mintBond — additive stacking, bounded cap, kind', () => {
     const after = mintBond(before, 'npc:b', 'gratitude', T.BOND_MINT_SEV, 20);
     expect(after['npc:b']).toEqual({ sev: T.BOND_MINT_SEV, week: 20, kind: 'gratitude' });
     expect(before).toEqual({}); // purity
-    expect([...BOND_KINDS]).toEqual(['loyalty', 'gratitude', 'friendship']);
+    // ⭐ FOUR SINCE THE ENC LEDGER ROWS WERE RULED. `respect` is a real bond kind, not a
+    // shade of `friendship`: the chance-meeting leaf emits it, and while it was absent
+    // from this set `mintBond`'s unknown-kind coercion turned every respect into a
+    // friendship — the tie a meeting formed was not the tie that got persisted. The
+    // roster is enumerated rather than counted so a fifth member cannot arrive unread.
+    expect([...BOND_KINDS]).toEqual(['loyalty', 'gratitude', 'friendship', 'respect']);
+    // and the coercion is still a coercion for a word that is NOT a bond kind at all
+    expect(mintBond({}, 'npc:c', 'rivalry', T.BOND_MINT_SEV, 20)['npc:c'].kind).toBe('friendship');
+    // ⛔ which is exactly why a rivalry must never REACH this writer: the stage grains it
+    // as a `grudge` deposit, and the ladder's meeting-mark fold declines that grain.
+    expect(mintBond({}, 'npc:c', 'respect', T.BOND_MINT_SEV, 20)['npc:c'].kind).toBe('respect');
   });
   it('STACKS additively on repeat, bounded by BOND_MAX_SEV; the latest formation sets the kind', () => {
     let bonds = mintBond(undefined, 'npc:b', 'loyalty', 0.5, 10);

@@ -126,8 +126,11 @@ export const DISTANCE_BANDS = Object.freeze(['alike', 'differing', 'opposed']);
  */
 export const POSTURE_BANDS = Object.freeze(['friendly', 'neutral', 'hostile']);
 
-/** The mark kinds a receipt can name. `respect` and `rivalry` ride OWNER ROWS 2 and 3 and
- *  are REFUSED by the consumer until those rows are ruled. @type {readonly string[]} */
+/** The mark kinds a receipt can name. OWNER ROWS 2 and 3 are RULED: `respect` is a bond kind
+ *  and `rivalry` a grudge kind on the ladder. The stage grains a mark by its kind, so a
+ *  `rivalry` is deposited under `grudge` and folded by nobody yet; it is no longer coerced
+ *  into a friendship, which is what the old refusal text claimed to prevent and did not.
+ *  @type {readonly string[]} */
 export const MEETING_MARK_KINDS = Object.freeze(['friendship', 'gratitude', 'loyalty', 'respect', 'rivalry']);
 
 /** The two quanta a meeting can teach, the funnel's own words. @type {readonly string[]} */

@@ -52,9 +52,10 @@
  * Every field is present on every row of both ledgers; neither has an optional field.
  * The OSR reader ratchet mints a GROWTH row for a read of a key the corpus never
  * writes, and a total row shape gives it nothing to judge. That is also why `mark`
- * rides every mark row today even though only `bond` is reachable until the owner
- * rules the rivalry word (§12 row 3): the SHAPE is settled now, so lifting that
- * refusal later owes no migration.
+ * rides every mark row, and BOTH grains are now reachable: the owner ruled the rivalry
+ * word (§12 row 3), so the stage grains a mark by its kind. What is still unreachable is
+ * the ladder-side FOLD of a `grudge` row, which ENC-5 owns; the shape was settled first,
+ * so lifting that fold owes no migration.
  *
  * @enforced-by tests/domain/envoyChanceMeetingLedger.test.js
  */
@@ -64,8 +65,9 @@ import { compareCodepoint } from '../deterministicSort.js';
 /** @typedef {{ mark: string, otherNid: string, foreignSid: string, kind: string, sev: string, depositTick: number }} MeetingMarkEvent */
 /** @typedef {{ patronId: string, targetId: string, npcKey: string, depositTick: number, band: string, willed: boolean }} MeetingLeanChannel */
 
-/** The mark grains a deposit may carry. `grudge` is SHAPE-READY and UNREACHABLE until
- *  the owner rules the rivalry word (§12 row 3); ENC-5 lifts the stage's refusal. */
+/** The mark grains a deposit may carry. `grudge` is REACHABLE (the rivalry word is ruled,
+ *  §12 row 3) and INERT: the stage deposits it and `applyMeetingMark` declines to fold it,
+ *  so it is written, read back and ignored. ENC-5 lifts the fold. */
 export const MEETING_MARK_GRAINS = Object.freeze(['bond', 'grudge']);
 
 /** The severity WORDS a deposit may carry. One member today; the consumer owns the

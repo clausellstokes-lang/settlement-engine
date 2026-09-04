@@ -379,8 +379,12 @@ function normalizeStigma(v) {
   if (!(sev > 0)) return null;
   return { sev: round4(clamp01(sev)), week: num(o.week, 0), tick: Math.floor(num(o.tick, 0)) };
 }
-/** The typed contest-grudge kinds (D-4c) — the memory-weave loss→fixation loop. @type {ReadonlySet<string>} */
-export const GRUDGE_KINDS = Object.freeze(new Set(['contest_loss', 'contest_forestalled']));
+/** The typed grudge kinds (D-4c) — the memory-weave loss→fixation loop, plus the chance
+ *  meeting's `rivalry` (ENC ledger row 3, RULED). `rivalry` is a KIND here, not a mint path:
+ *  the ladder's meeting-mark fold still folds only the `bond` grain, so a rivalry deposit is
+ *  correctly grained and INERT rather than silently re-grained as a friendship.
+ *  @type {ReadonlySet<string>} */
+export const GRUDGE_KINDS = Object.freeze(new Set(['contest_loss', 'contest_forestalled', 'rivalry']));
 /** @param {unknown} v @returns {Record<string, import('./npcLadderKernel.js').LadderGrudge>} */
 function normalizeGrudges(v) {
   const o = asObject(v);
@@ -403,8 +407,11 @@ function normalizeGrudges(v) {
   return out;
 }
 // ── D-7e THE PERSON BONDS (the grudge twin; loyalty / gratitude / friendship) ──
-/** The three positive-bond kinds — the grudge's mirror image. @type {ReadonlySet<string>} */
-export const BOND_KINDS = Object.freeze(new Set(['loyalty', 'gratitude', 'friendship']));
+/** The positive-bond kinds — the grudge's mirror image. `respect` joins the original three
+ *  (ENC ledger row 2, RULED): the chance-meeting leaf already EMITS it, and while it was
+ *  absent here `mintBond` coerced it to `friendship`, so the tie a meeting actually formed
+ *  was not the tie that got persisted. @type {ReadonlySet<string>} */
+export const BOND_KINDS = Object.freeze(new Set(['loyalty', 'gratitude', 'friendship', 'respect']));
 
 /** Normalize a persisted bonds map (defensive; drop-when-invalid). Each entry is
  *  {sev, week, kind∈BOND_KINDS}; a bad kind coerces to 'friendship' (the generic tie).
