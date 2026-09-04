@@ -24,6 +24,14 @@ const LEGITIMACY_MOUNT = 'power.legitimacyBanner';
  */
 const STABILITY_MOUNT = 'power.stabilityHeader';
 
+/**
+ * The criminal underside's mount id. THREE draws at this one position — the legitimacy
+ * reading DS-POW-1 has none for, the capture rung, and the operation's economic role.
+ * The C3 law is about RUNGS per page-set, not draws, so one position may read several
+ * pools of one block; binding the id once also keeps the reachability arm's count at one.
+ */
+const UNDERSIDE_MOUNT = 'power.criminalUnderside';
+
 /** §815 — one row of the ruling chain: a small uppercase link label + the answer. */
 function ChainRow({ label, children }) {
   return (
@@ -88,7 +96,7 @@ function RulingChainBlock({ settlement }) {
   );
 }
 
-export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, publicDossier = false }) {
+export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, publicDossier = false, playerView = false }) {
   const [expandedFaction, setExpandedFaction] = useState(null);
 
   // Dossier hyperlink focus. When a link navigates to a faction (e.g. from an
@@ -147,13 +155,29 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
   // drawnAtMount answers null at the mount ⇒ no corpus sentence renders. The DATUM is
   // untouched either way: the score, the label, the breakdown chips and the fracture note
   // never read the desk.
+  // ⚠ THE AUDIENCE IS LOAD-BEARING, AND OMITTING IT SILENTLY DARKENS AUTHORED CONTENT.
+  // All FOUR of DS-POW-6's capture pools are 100% `dm-only` (measured: 3/3 covert variants
+  // each). The kernel's law 2 is fail-closed — an unstated audience reads as the PLAYER's —
+  // so a desk called without one can never draw them, and the block would ship mounted with
+  // four pools no world could reach. The corpus authored them FOR the DM; the DM's own
+  // dossier is where they belong, and the player view truncates them to silence rather than
+  // to a hint. `publicDossier` still nulls everything before this ever matters.
+  const audience = playerView ? 'player' : 'dm';
   const deskProse = publicDossier
-    ? Object.freeze({ legitimacyBanner: null, legitimacyLens: null, stabilityHeader: null, stabilityLens: null })
-    : powerStateProse(s, { seed: String(s?._seed ?? s?.id ?? '') });
+    ? Object.freeze({
+      legitimacyBanner: null, legitimacyLens: null, stabilityHeader: null, stabilityLens: null,
+      legitimacyReading: null, captureReading: null, operationReading: null,
+    })
+    : powerStateProse(s, { seed: String(s?._seed ?? s?.id ?? ''), audience });
   const drawnBanner = drawnAtMount(LEGITIMACY_MOUNT, deskProse.legitimacyBanner);
   const drawnLens   = drawnAtMount(LEGITIMACY_MOUNT, deskProse.legitimacyLens);
   const drawnStab   = drawnAtMount(STABILITY_MOUNT, deskProse.stabilityHeader);
   const drawnStabLens = drawnAtMount(STABILITY_MOUNT, deskProse.stabilityLens);
+  const drawnReading  = drawnAtMount(UNDERSIDE_MOUNT, deskProse.legitimacyReading);
+  const drawnCapture  = drawnAtMount(UNDERSIDE_MOUNT, deskProse.captureReading);
+  const drawnOperation = drawnAtMount(UNDERSIDE_MOUNT, deskProse.operationReading);
+  const undersideLines = [drawnReading, drawnCapture, drawnOperation]
+    .map((d) => d?.sentence).filter(Boolean);
 
   return (
     <div style={{paddingBottom:16}}>
@@ -275,6 +299,20 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
           </div>
         )}
       </div>
+
+      {/* ── THE CRIMINAL UNDERSIDE (DS-POW-6) ────────────────────────────────
+          The ladder cells the surfaces above do not reach: whether there is a
+          legitimacy reading at all, how far criminal capture has gone, and what
+          the operation actually does for a living. Three pools of ONE block at
+          ONE position, so the registry silences them together. */}
+      {undersideLines.length > 0 && (
+        <div style={{background:swatch['#FAF8F4'],border:'1px solid #e0c890',borderLeft:'4px solid #4a1a4a',padding:'10px 14px',marginBottom:14}}>
+          <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>The quieter arithmetic</div>
+          {undersideLines.map((line, i) => (
+            <p key={i} style={{fontSize:i===0?FS.md:FS.sm,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.6,margin:i===0?0:'6px 0 0',fontStyle:'italic'}}>{line}</p>
+          ))}
+        </div>
+      )}
 
       {/* ── THE THREE STRATA (owner order 2026-07-22) ─────────────────────────
           The flat "Power Distribution" list is replaced by three semantically

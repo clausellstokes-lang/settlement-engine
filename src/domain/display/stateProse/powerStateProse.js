@@ -7,6 +7,8 @@
  *   DS-POW-1  Power › Public legitimacy banner — `powerStructure.publicLegitimacy`
  *   DS-POW-2  Power › Stability + governing authority header —
  *             `powerStructure.{stability, governingName, factions[], recentConflict}`
+ *   DS-POW-6  Power › the criminal underside — `governanceLedger(settlement)` +
+ *             `powerStructure.criminalCaptureState` + `safetyProfile.criminalInstitutions`
  *
  * ── WHY THIS LEAF, AND WHY THIS BLOCK FIRST ──────────────────────────────────────────
  *
@@ -68,6 +70,8 @@
  * @enforced-by tests/domain/powerStateProseDesk.test.js
  */
 import { DOSSIER_STATE_PROSE_POWER } from '../../../data/dossierStateProse/power.generated.js';
+import { criminalOpEcon } from '../../criminalOpRole.js';
+import { governanceLedger } from '../../governanceLedger.js';
 import { readStateProse } from './stateProseKernel.js';
 import { legibilityRung } from './legibilityRung.js';
 
@@ -115,11 +119,13 @@ const CORPUS = /** @type {import('./stateProseKernel.js').StateProseCorpus} */ (
  * @property {unknown} [stability]
  * @property {unknown} [recentConflict]
  * @property {ReadonlyArray<RulingFactionView>|null} [factions]
+ * @property {unknown} [criminalCaptureState]
  */
 /**
  * @typedef {object} PowerDeskSettlement
  * @property {string} [name]
  * @property {PowerStructureView|null} [powerStructure]
+ * @property {{safetyProfile?: {criminalInstitutions?: unknown}|null}|null} [economicState]
  */
 
 /**
@@ -365,6 +371,87 @@ export function stabilityLensPoolKey(recentConflict, factions) {
 }
 
 /**
+ * ── DS-POW-6, THE CRIMINAL UNDERSIDE ─────────────────────────────────────────────────
+ *
+ * Thirteen pools in THREE lenses, and this block is the complement of DS-POW-1 rather than
+ * a second opinion about it: where DS-POW-1 narrates the legitimacy reading that EXISTS,
+ * DS-POW-6 owns the two cells where there is no reading to narrate, plus the criminal
+ * capture ladder and the economic role of each operation.
+ *
+ * ⭐ THE ROLE LENS IS AN IDENTITY, NOT A TABLE. `criminalOpEcon` (domain/criminalOpRole.js)
+ * emits exactly seven values and the corpus keys seven pools on `operation role <value>`,
+ * with the sole fallback spelled `(unclassified)` in the corpus. So the desk appends rather
+ * than translates, and the test pins the mapping TOTAL against the producer's own exported
+ * roster (CRIMINAL_OP_ROLES) instead of a hand list beside it.
+ *
+ * ⚠ THE CAPTURE MAPPING IS A JUDGMENT, AND IT IS GROUNDED IN THE SHIPPED LABELS RATHER THAN
+ * INVENTED. The corpus wants `an AGENT of a faction` vs `a LEADER`, and there is no
+ * person-level captured-role record anywhere in the tree — `CAPTURE_LADDER` is
+ * faction-level (`none · adversarial · equilibrium · corrupted · capture`). But the two top
+ * rungs already SAY which it is, in the display labels the power tab renders today:
+ * `corrupted` is "Criminal: Corrupted Officials" (officials, not the head) and `capture` is
+ * "Criminal: Governance Captured" (the head). So corrupted → AGENT and capture → LEADER,
+ * which keeps both pools reachable from a real producer instead of leaving them dark on a
+ * missing person-role field. Say "veto" to move it.
+ *
+ * ⭐ THE PRESSURE DIRECTION REUSES THE CANONICAL CONTRIBUTIONS rather than re-deriving from
+ * labels. `publicLegitimacy.breakdown` already carries signed safety and prosperity
+ * contributions computed by the generator, and the corpus's own pool names are
+ * "(weak security, poor prosperity)" and "(strong security, prosperity)" — so the sign pair
+ * IS the reading. A second derivation from `safetyLabel` and the prosperity tier would be
+ * the fork that drifts, and this desk has no business owning a safety band.
+ */
+
+/**
+ * DS-POW-6's legitimacy-reading lens: the two cells DS-POW-1 leaves empty.
+ * @param {{present?: unknown}|null|undefined} ledger the governanceLedger reading
+ * @param {PublicLegitimacyView|null|undefined} legitimacy
+ * @returns {string|null}
+ */
+export function legitimacyReadingPoolKey(ledger, legitimacy) {
+  if (!ledger?.present) return 'present: false (no legitimacy reading)';
+  const b = legitimacy?.breakdown;
+  if (!b) return null;
+  const flat = ['prosperity', 'safety', 'defense', 'food']
+    .every((f) => contribution(b[/** @type {keyof LegitimacyBreakdownView} */ (f)]) === 0);
+  // Nothing pulling either way is exactly the state DS-POW-1's lens goes silent on, so the
+  // two blocks tile the space instead of overlapping or leaving a hole in it.
+  return flat ? 'neutral baseline (nothing pulling either way)' : null;
+}
+
+/**
+ * DS-POW-6's capture lens.
+ * @param {unknown} captureState
+ * @param {LegitimacyBreakdownView|null|undefined} breakdown
+ * @returns {string|null}
+ */
+export function capturePoolKey(captureState, breakdown) {
+  const state = text(captureState);
+  if (state === 'capture') return 'capture reached a LEADER';
+  if (state === 'corrupted') return 'capture reached an AGENT of a faction';
+  if (!breakdown) return null;
+  const safety = contribution(breakdown.safety);
+  const prosperity = contribution(breakdown.prosperity);
+  if (safety < 0 && prosperity < 0) return 'capture pressure ADVANCING (weak security, poor prosperity)';
+  if (safety > 0 && prosperity > 0) return 'capture pressure RECOVERING (strong security, prosperity)';
+  // A mixed or flat pair is neither direction, and the corpus wrote no sentence for it.
+  return null;
+}
+
+/**
+ * DS-POW-6's operation-role lens, for ONE named operation.
+ * @param {unknown} name
+ * @returns {string|null}
+ */
+export function operationRolePoolKey(name) {
+  if (!text(name)) return null;
+  const role = criminalOpEcon(text(name));
+  return role === 'criminal revenue stream'
+    ? 'operation role criminal revenue stream (unclassified)'
+    : `operation role ${role}`;
+}
+
+/**
  * THE DESK. Returns the two rungs the legitimacy banner draws, or null for each where the
  * state does not support one.
  *
@@ -375,7 +462,8 @@ export function stabilityLensPoolKey(recentConflict, factions) {
  * @param {PowerDeskSettlement|null|undefined} settlement
  * @param {{seed?: string, audience?: string}} [options]
  * @returns {Readonly<{legitimacyBanner: object|null, legitimacyLens: object|null,
- *   stabilityHeader: object|null, stabilityLens: object|null}>}
+ *   stabilityHeader: object|null, stabilityLens: object|null, legitimacyReading: object|null,
+ *   captureReading: object|null, operationReading: object|null}>}
  */
 export function powerStateProse(settlement, options = {}) {
   const power = settlement?.powerStructure || {};
@@ -414,6 +502,13 @@ export function powerStateProse(settlement, options = {}) {
   const line2 = (poolKey) => (poolKey
     ? readStateProse(CORPUS, 'DS-POW-2', poolKey, { ...options, slots: stabilitySlots })
     : null);
+  // DS-POW-6 uses {seat} as the governing BODY (like DS-POW-1) and {faction} for the
+  // captured house, so it takes BOTH fills — the two roles do not collide in this block.
+  /** @param {string|null} poolKey */
+  const line6 = (poolKey) => (poolKey
+    ? readStateProse(CORPUS, 'DS-POW-6', poolKey,
+      { ...options, slots: { settlement: town, seat: governing, faction: governing } })
+    : null);
 
   const bandKey = legitimacyBandPoolKey(legitimacy.label);
   const lensKey = legitimacyLensPoolKey(legitimacy);
@@ -421,6 +516,20 @@ export function powerStateProse(settlement, options = {}) {
 
   const stabilityKey = stabilityPoolKey(power.stability);
   const stabilityLens = stabilityLensPoolKey(power.recentConflict, power.factions);
+
+  // DS-POW-6. The ledger is the canonical reader for "is there a reading at all"; the
+  // breakdown is the generator's own signed contributions; the operations are the safety
+  // profile's own list. This desk derives none of the three.
+  const ledger = governanceLedger(settlement);
+  const breakdown = legitimacy.breakdown;
+  const readingKey = legitimacyReadingPoolKey(ledger, legitimacy);
+  const captureKey = capturePoolKey(power.criminalCaptureState, breakdown);
+  const operations = Array.isArray(settlement?.economicState?.safetyProfile?.criminalInstitutions)
+    ? settlement.economicState.safetyProfile.criminalInstitutions
+    : [];
+  // The FIRST classifiable operation speaks. A page that narrated all of them would repeat
+  // one fact in several voices, and the corpus writes one sentence per role, not a list.
+  const operationKey = operations.map(operationRolePoolKey).find(Boolean) || null;
 
   return Object.freeze({
     legitimacyBanner: bandKey ? legibilityRung(glance, line(bandKey), []) : null,
@@ -431,5 +540,8 @@ export function powerStateProse(settlement, options = {}) {
       ? legibilityRung(text(power.stability), line2(stabilityKey), [])
       : null,
     stabilityLens: stabilityLens ? legibilityRung('', line2(stabilityLens), []) : null,
+    legitimacyReading: readingKey ? legibilityRung('', line6(readingKey), []) : null,
+    captureReading: captureKey ? legibilityRung('', line6(captureKey), []) : null,
+    operationReading: operationKey ? legibilityRung('', line6(operationKey), []) : null,
   });
 }
