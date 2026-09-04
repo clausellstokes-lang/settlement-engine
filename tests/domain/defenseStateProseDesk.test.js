@@ -10,7 +10,7 @@
  * ⛔ No `it.each`: the lighting walker parks a whole file that registers tests from a
  * non-literal table, and its each-family debt is a SHRINK-ONLY ratchet.
  */
-import { readFileSync, readdirSync } from 'node:fs';
+import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import {
@@ -23,7 +23,6 @@ import { MONSTER_THREAT_TIERS, normalizeMonsterThreat } from '../../src/data/mon
 import { avgScore, scoreBand } from '../../src/domain/display/defenseScoreBands.js';
 import { avgScore as avgScoreViaPdf } from '../../src/pdf/lib/viewModelPrimitives.js';
 import { deriveDefensePosture } from '../../src/domain/display/dossierViewModel.js';
-import { readdirSync, statSync } from 'node:fs';
 import { DM_FIELD_FRAMED_BY_BLOCK, isDmEditableProsePath } from '../../src/domain/display/stateProse/dmFieldProjection.js';
 import { DOSSIER_STATE_PROSE_DEFENSE } from '../../src/data/dossierStateProse/defense.generated.js';
 import { DOSSIER_MOUNTS, UNMOUNTED_BLOCKS, sentenceMountForBlock } from '../../src/domain/display/stateProse/dossierMounts.js';
