@@ -140,12 +140,13 @@ export function coupContenders(settlement) {
  * @param {number} [args.interventionAdj]  W-CONVERGENCE flag: signed shift to the incumbent hold-chance from surviving foreign interveners — +raises for an incumbent-backer, −lowers for a challenger-backer (0 = off ⇒ byte-identical)
  * @param {number} [args.economicAdj]  coherence-13 flag (economicCoupReadEnabled): signed shift to the incumbent hold-chance from the settlement's economic capacity — a prosperous seat holds, a hollowed treasury falls; the caller supplies 0 when the flag is dark ⇒ byte-identical (the warSentimentAdj precedent)
  * @param {number} [args.foreignSeatAdj]  W-SEAT D4 (foreignSeatEnabled): signed shift from the occupier or overlord who looms over this court — a foreign seat DEFENDS the government it deals with, so the term is positive by construction; 0 when the flag is dark or no seat resolves ⇒ byte-identical
+ * @param {number} [args.forceRatioFactor]  W-SEAT D10 (irregularForceEnabled): a DIMENSIONLESS factor on the incumbent's political share, carrying how much of the settlement would rise and what that mass is worth against the loyal side — 1 = off ⇒ byte-identical (x × 1 is exact). MULTIPLICATIVE rather than a sixth adj by measurement: the declared adj budget has five thousandths of headroom and its own instrument calls a raise a tuning-signature act, and a force ratio is a claim ABOUT share rather than a term beside it
  * @returns {{ holds:boolean, pHold:number, roll:number,
  *            winner:{name:string,archetype:string}|null,
  *            challengers:Array<{name:string, archetype:string, power:number, weight:number}>,
  *            incumbent:Object, reason:string }}
  */
-export function resolveCoupVerdict({ settlement, rng, severity = 0.6, rulingAuthorityScore = null, warSentimentAdj = 0, interventionAdj = 0, economicAdj = 0, foreignSeatAdj = 0 }) {
+export function resolveCoupVerdict({ settlement, rng, severity = 0.6, rulingAuthorityScore = null, warSentimentAdj = 0, interventionAdj = 0, economicAdj = 0, foreignSeatAdj = 0, forceRatioFactor = 1 }) {
   const { challengers, incumbent } = coupContenders(settlement);
   if (!challengers.length) {
     return {
@@ -180,7 +181,17 @@ export function resolveCoupVerdict({ settlement, rng, severity = 0.6, rulingAuth
     //
     // ⚠⚠ THE ADJ BUDGET, DECLARED — F3 named this and it is now real. FIVE signed terms
     // compose here (authority ±0.125 · warSentiment ±0.22 · intervention ±0.22 · economic
-    // ±0.125 · foreignSeat +0.125) and SEAT-7's forceRatioAdj is chartered as a SIXTH.
+    // ±0.125 · foreignSeat +0.125) and SEAT-7's force ratio was chartered as a SIXTH.
+    // ⛔ IT DID NOT LAND AS ONE, AND THE REASON IS MEASURED RATHER THAN STYLISTIC. The five
+    // bounds sum to exactly 0.815 against a DECLARED_BUDGET of 0.82, and the budget
+    // instrument says of itself "Raising it is a tuning-signature act, not a lane's call" —
+    // so a sixth ADDITIVE term of any magnitude a designer would pick needs an owner tuning
+    // signature THE PROMISE reserves to the tuning sitting. SEAT-7a therefore lands the
+    // force ratio as `forceRatioFactor`, a MULTIPLICATIVE factor on `share` below, which
+    // leaves this budget untouched and is the better home besides: the budget exists to
+    // stop adjs from saturating the clamp until `share` stops mattering, and a force ratio
+    // is a claim ABOUT share rather than a term competing with it. The additive slot stays
+    // OPEN and unclaimed; taking it is an owner tuning act, not a later lane's.
     // Worst-case they sum to ±0.815 against a clamp of [0.1, 0.9] over a base of
     // `share × severityDrag`, which lives in roughly [0, 1.15]. The risk is NOT overflow —
     // the clamp bounds it — it is SATURATION: enough adjs pointing one way pin pHold to a
@@ -188,7 +199,12 @@ export function resolveCoupVerdict({ settlement, rng, severity = 0.6, rulingAuth
     // The budget is asserted rather than hoped for at
     // tests/domain/foreignSeatCoupAdj.test.js, and the composition is a declared row on the
     // tuning walking sheet. ⛔ SEAT-2 → SEAT-7 are SERIAL on this file for that reason.
-    pHold = Math.max(0.1, Math.min(0.9, share * severityDrag + authorityAdj + (Number(warSentimentAdj) || 0) + (Number(interventionAdj) || 0) + (Number(economicAdj) || 0) + (Number(foreignSeatAdj) || 0)));
+    // W-SEAT D10 (irregularForceEnabled): EXACTLY 1 when the key is dark, and `x * 1` is
+    // exact for every finite double, so the dark expression below is the pre-SEAT-7a one
+    // BIT for BIT rather than arithmetically equivalent. The `ladderEffectivePowerFactor`
+    // idiom at :93/:108 verbatim — a factor a consumer can gate on `=== 1`.
+    const forceFactor = Number.isFinite(forceRatioFactor) ? Number(forceRatioFactor) : 1;
+    pHold = Math.max(0.1, Math.min(0.9, share * forceFactor * severityDrag + authorityAdj + (Number(warSentimentAdj) || 0) + (Number(interventionAdj) || 0) + (Number(economicAdj) || 0) + (Number(foreignSeatAdj) || 0)));
   }
 
   const roll = rng.random();

@@ -80,6 +80,35 @@ function legitimacyScoreOf(settlement) {
 }
 
 /**
+ * `commonsGrievance01` — THE ONE HOME of the commons grievance blend (law 2.1).
+ *
+ * Extracted verbatim from `advanceCommonsVoice`'s per-settlement loop so that a SECOND
+ * consumer can read the quantity without re-deriving it. W-SEAT D10's `participation01`
+ * (SEAT-7) is that consumer: F4 rules that participation reads the commons rung where
+ * `commonsVoiceEnabled` is lit and "else the STATELESS grievance re-derivation (its inputs
+ * are always-on)", which is exactly this function with no ledger passed. Re-deriving the
+ * blend in the force leaf would have put `LEGIT_FLOOR` and the three weights in two homes,
+ * which is the §711.6 failure by construction.
+ *
+ * The corruption leg is a PARAMETER rather than a ledger read, because that is the only leg
+ * whose input is not always-on: the kernel passes its exposed-ledger signal, and a stateless
+ * caller passes nothing and gets the blend without it. Stating it as a boolean keeps the
+ * arithmetic identical to the pre-extraction expression for the kernel's own call.
+ *
+ * @param {Record<string, unknown>} settlement
+ * @param {{ corruptionSignal?: boolean }} [opts]
+ * @returns {number} 0..1
+ */
+export function commonsGrievance01(settlement, opts = {}) {
+  const legit = legitimacyScoreOf(settlement);
+  const legitDeficit = Number.isFinite(legit) ? clamp01((CV.LEGIT_FLOOR - legit) / CV.LEGIT_FLOOR) : 0;
+  const unrest = topUnrestStressor(settlement);
+  return clamp01(
+    CV.W_LEGIT * legitDeficit + CV.W_CORRUPT * (opts.corruptionSignal ? 1 : 0) + CV.W_UNREST * (unrest ? unrest.severity : 0),
+  );
+}
+
+/**
  * The highest-severity live UNREST stressor on a settlement (id + severity), or null.
  * @param {Record<string, unknown>} settlement @returns {{ id: string, severity: number }|null}
  */
@@ -250,13 +279,9 @@ function advanceLitCommonsVoice({ snapshot, worldState, settlementUpdates, tick,
       if (carried && Number.isFinite(Number(carried.rung))) nextLedger[sid] = carried;
       continue;
     }
-    const legit = legitimacyScoreOf(s);
-    const legitDeficit = Number.isFinite(legit) ? clamp01((CV.LEGIT_FLOOR - legit) / CV.LEGIT_FLOOR) : 0;
     const unrest = topUnrestStressor(s);
     const corr = corruptionSignalOf(sid, s, exposedLedger);
-    const grievance = clamp01(
-      CV.W_LEGIT * legitDeficit + CV.W_CORRUPT * (corr.signal ? 1 : 0) + CV.W_UNREST * (unrest ? unrest.severity : 0),
-    );
+    const grievance = commonsGrievance01(s, { corruptionSignal: !!corr.signal });
 
     const target = grievance >= CV.RUNG_RIOT ? 3 : grievance >= CV.RUNG_GATHERING ? 2 : grievance >= CV.RUNG_PETITION ? 1 : 0;
     const prior = asObject(priorLedger[sid]);
