@@ -704,7 +704,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       case 'services':   return <ServicesTab services={s.availableServices} settlement={s} narrativeNote={null} />;
       case 'power':      return (
         <>
-          <PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} publicDossier={publicDossier} playerView={playerView} />
+          <PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} publicDossier={publicDossier} playerView={playerView} worldState={owningWorldState} />
           {/* The patron/cult assignment control — the settlement editor's write
               surface for the SET_PRIMARY_DEITY canon event. Editable dossiers only
               (never a public/shared read-only view); self-gates by tier inside.
