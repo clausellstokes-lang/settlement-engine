@@ -14,7 +14,7 @@ export const CUSTOM_CONTENT_CHARSET = deepFreeze({
   "policy": {
     "enforcement": "report",
     "nonLatin": "undecided",
-    "embeddedFont": null
+    "embeddedFont": "Lora"
   },
   "surfaces": {
     "web-display": {
@@ -41,14 +41,17 @@ export const CUSTOM_CONTENT_CHARSET = deepFreeze({
       "inputsSha256": "d879390789c8f2c501bd3ad7ae90745e58e062be5ab90b7c57cc27ae0e7a3463"
     },
     "campaign-pdf": {
-      "ranges": "20-7E A1-FF",
-      "count": 190,
-      "method": "winansi-and-textpass",
+      "ranges": "20-7E A1-AC AE-137 139-17F 18F 192 1A0-1A1 1AF-1B0 1B7 1CD-1CE 1D3-1D4 1E4-1E9 1EE-1EF 1FE-1FF 218-21B 21E-21F 237 259 292 2BB-2BC 2C6-2C7 2C9 2D8-2DD 300-304 306-30C 312 31B 323 326-328 335-336 393-394 3A0 3A9 3BC 3C0 400-45F 462-463 46A-46D 472-475 48A-4FF 510-513 51A-51D 524-529 52E-52F 1C81 1C85 1E80-1E85 1E9E 1EA0-1EF9 2010 2013-2014 2018-201A 201C-201E 2020-2022 2026 2030 2032-2033 2039-203A 2044 2052 2074 20AC 20AE 20B4 20B8 20BA 20BD 2113 2116 2122 2126 212A-212B 212E 2202 2206 220F 2211-2212 2215 2219-221A 221E 222B 2248 2260 2264-2265 25CA 27E8-27E9 EFFD FB01-FB02",
+      "count": 776,
+      "method": "embedded-roster-and-textpass",
       "inputs": [
-        "jspdf:WinAnsiEncoding",
+        "public/fonts/Lora-Regular.ttf",
+        "public/fonts/Lora-Bold.ttf",
+        "public/fonts/Lora-Italic.ttf",
+        "src/utils/jsPdfBookFont.js",
         "src/utils/jsPdfText.js"
       ],
-      "inputsSha256": "a031bd2f20646ecd8d772a49ac1163da6468f67485feb6df8fbce2f886f21a4e"
+      "inputsSha256": "9d57d4b3a17c8d9aa0a56d30e709bd8a296f10933003d3a2769a6751c49fdcee"
     },
     "foundry": {
       "ranges": "",
@@ -65,14 +68,17 @@ export const CUSTOM_CONTENT_CHARSET = deepFreeze({
       "inputsSha256": ""
     },
     "world-book": {
-      "ranges": "20-7E A1-FF",
-      "count": 190,
-      "method": "winansi-and-textpass",
+      "ranges": "20-7E A1-AC AE-137 139-17F 18F 192 1A0-1A1 1AF-1B0 1B7 1CD-1CE 1D3-1D4 1E4-1E9 1EE-1EF 1FE-1FF 218-21B 21E-21F 237 259 292 2BB-2BC 2C6-2C7 2C9 2D8-2DD 300-304 306-30C 312 31B 323 326-328 335-336 393-394 3A0 3A9 3BC 3C0 400-45F 462-463 46A-46D 472-475 48A-4FF 510-513 51A-51D 524-529 52E-52F 1C81 1C85 1E80-1E85 1E9E 1EA0-1EF9 2010 2013-2014 2018-201A 201C-201E 2020-2022 2026 2030 2032-2033 2039-203A 2044 2052 2074 20AC 20AE 20B4 20B8 20BA 20BD 2113 2116 2122 2126 212A-212B 212E 2202 2206 220F 2211-2212 2215 2219-221A 221E 222B 2248 2260 2264-2265 25CA 27E8-27E9 EFFD FB01-FB02",
+      "count": 776,
+      "method": "embedded-roster-and-textpass",
       "inputs": [
-        "jspdf:WinAnsiEncoding",
+        "public/fonts/Lora-Regular.ttf",
+        "public/fonts/Lora-Bold.ttf",
+        "public/fonts/Lora-Italic.ttf",
+        "src/utils/jsPdfBookFont.js",
         "src/utils/jsPdfText.js"
       ],
-      "inputsSha256": "a031bd2f20646ecd8d772a49ac1163da6468f67485feb6df8fbce2f886f21a4e"
+      "inputsSha256": "9d57d4b3a17c8d9aa0a56d30e709bd8a296f10933003d3a2769a6751c49fdcee"
     }
   },
   "bans": {
