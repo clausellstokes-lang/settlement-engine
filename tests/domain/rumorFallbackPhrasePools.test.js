@@ -225,14 +225,17 @@ describe('the corpus join (RECEIPT_POOLS_LEGACY.md §4)', () => {
     }
   });
 
-  it.each(FALLBACK_WIRED_KINDS)('%s — variant 1 IS the computed fallback, byte for byte', (kind) => {
+  it.each(FALLBACK_WIRED_KINDS)('%s — variant 1 IS the live canonical, byte for byte', (kind) => {
     expect(
       PARSED[kind][0],
-      `${kind}: the corpus's variant 1 must reproduce what whatPhrase() COMPUTES today, `
-      + 'exactly. If these have drifted, STOP: either the corpus was authored against a '
-      + 'different strip regex or WHAT_STRIP_PREFIX was edited without the corpus. Do not '
-      + '"fix" it by re-recording the variant — the computed string is the byte-identity '
-      + 'anchor, and for twelve kinds it is a MUTILATED slug ON PURPOSE (J-LEG-4).',
+      `${kind}: the corpus's variant 1 must reproduce what whatPhrase() RETURNS SEEDLESS `
+      + 'today, exactly. If these have drifted, STOP: either the corpus was authored '
+      + 'against a different strip regex, or WHAT_STRIP_PREFIX was edited without the '
+      + 'corpus, or FALLBACK_CANONICALS was edited without it. Do not "fix" it by '
+      + 're-recording the variant — the live return is the byte-identity anchor. For 95 '
+      + 'kinds it is the strip computation; for the twelve §894 de-slugged it is the '
+      + 'AUTHORED canonical, and reverting one to its old slug is a repair being undone, '
+      + 'not a drift being corrected.',
     ).toBe(whatPhrase(kind));
   });
 
