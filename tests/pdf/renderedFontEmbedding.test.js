@@ -53,7 +53,7 @@ import { dirname, join } from 'node:path';
 import zlib from 'node:zlib';
 import fs from 'node:fs';
 import React from 'react';
-import { describe, test, expect } from 'vitest';
+import { beforeAll, describe, test, expect } from 'vitest';
 import * as fontkit from 'fontkit';
 import { Font, renderToBuffer } from '@react-pdf/renderer';
 
@@ -233,5 +233,149 @@ describe('a rendered dossier draws every text run with an embedded font', () => 
       [...offenders.entries()].map(([cp, n]) => `${toHex(cp)} ×${n}`),
       'uncovered codepoint(s) reached the rendered dossier',
     ).toEqual([]);
+  });
+});
+
+/**
+ * ── THE jsPDF ARM ────────────────────────────────────────────────────────────
+ *
+ * ⭐ THE NEGATIVE CONTROL THIS TREE DID NOT HAVE. exoticUnicodeRender.test.js
+ * recorded the gap in prose — "there is NO campaignPdfSanitize.test.js — no test
+ * asserts that fold" — so nothing would have gone red when the two jsPDF books
+ * changed what they print. This block is that arm, and it was written and run
+ * RED before the cure existed: against the pre-cure tree it failed twice over,
+ * once because the painter drew with a non-embedded standard-14 Helvetica and
+ * once because the text pass had already replaced every diacritic with a space.
+ *
+ * ⚠ THE PROBE NAMES ARE SHIPPED POOL ENTRIES, NOT HAND-TYPED EXOTICA. Each is a
+ * real member of src/data/namingData.js (Babić = slavic.surnames[60], Đorđević =
+ * [62], Kovačević = [68], Čupić = [82], Uroš = slavic.maleNames[86], Snežana =
+ * slavic.femaleNames[85], Khān = arabic.settlementPrefixes[26]), which is what
+ * makes this a product defect rather than a synthetic one — the register in
+ * tests/data/namingDataCharset.test.js counts 41 instances of exactly these.
+ *
+ * ⛔ AND THE FAILURE MODE UNDER Identity-H IS NOT A TOFU BOX EITHER — it is worse
+ * than the react-pdf substitution above, because it is SILENT IN TWO DIFFERENT
+ * WAYS. jsPDF's utf8TextFunction pre-filters each character against the loaded
+ * face's cmap (jspdf.es.js:22047-22067):
+ *   - a codepoint >= U+0100 with no glyph is DROPPED from the run, leaving no
+ *     mark at all — "BEFORE影AFTER" paints as "BEFOREAFTER";
+ *   - a codepoint < U+0100 with no glyph is KEPT and handed to pdfEscape16,
+ *     where `characterToGlyph` returns 0 and the `t == "0"` guard at
+ *     jspdf.es.js:21855 RETURNS EARLY — TRUNCATING THE REST OF THE RUN.
+ *     "SOFT­HYPHEN" paints as "SOFT". Measured, both directions.
+ * For the Lora-3 roster there are exactly 65 such sub-U+0100 truncators (C0, DEL,
+ * C1, and U+00AD), and the text pass removes all 65 — which is why the pass and
+ * the embed are one act and not two.
+ */
+const BOOK_PROBES = ['Babić', 'Đorđević', 'Kovačević', 'Uroš', 'Snežana', 'Čupić', 'Khān', 'Hadžić'];
+
+/** jsPDF's Identity-H show operators are HEX strings, not literal `(...)` runs. */
+function jsPdfShowRuns(latin1) {
+  const raw = indexObjects(latin1);
+  const fonts = {};
+  for (const [num, body] of Object.entries(raw)) {
+    const bf = /\/BaseFont\s*\/([A-Za-z0-9+\-,._]+)/.exec(body);
+    if (bf) fonts[num] = { base: bf[1], embedded: descriptorEmbedded(raw, body) };
+  }
+  const alias = {};
+  for (const res of latin1.matchAll(/\/Font\s*<<([\s\S]*?)>>/g)) {
+    for (const pair of res[1].matchAll(/\/([A-Za-z0-9]+)\s+(\d+)\s+0\s+R/g)) {
+      if (fonts[pair[2]]) alias[pair[1]] = fonts[pair[2]];
+    }
+  }
+  const runs = [];
+  const tok = /\/([A-Za-z0-9]+)\s+[\d.]+\s+Tf|<([0-9a-fA-F]*)>\s*Tj|\(((?:\\.|[^()\\])*)\)\s*Tj/g;
+  for (const stream of inflateStreams(latin1)) {
+    let cur = null;
+    let t;
+    while ((t = tok.exec(stream))) {
+      if (t[1] !== undefined) { cur = alias[t[1]] ?? { base: `UNMAPPED:${t[1]}`, embedded: false }; continue; }
+      const payload = t[2] !== undefined ? t[2] : t[3];
+      if (payload === '') continue;
+      runs.push({ font: cur, hex: t[2] !== undefined, payload });
+    }
+    tok.lastIndex = 0;
+  }
+  return runs;
+}
+
+describe('a rendered campaign book draws every text run with an embedded font', () => {
+  const FILE = 'campaign-embedded-face.pdf';
+  let latin1;
+  let painted;
+
+  beforeAll(async () => {
+    const { generateCampaignPDF } = await import('../../src/utils/generateCampaignPDF.js');
+    const { paintedText } = await import('../helpers/jsPdfPaintedText.js');
+    const { loadBookFace } = await import('../helpers/bookFaceLoader.js');
+    const saves = BOOK_PROBES.map((name, index) => ({
+      id: `probe-${index}`,
+      name,
+      settlement: { name, tier: 'town', population: 1200 + index, npcs: [], neighbourNetwork: [] },
+    }));
+    try {
+      // `await` is correct whether or not the painter is async: awaiting a
+      // non-promise is a no-op, and a forgotten await here would read the file
+      // before it exists rather than passing silently.
+      await generateCampaignPDF(
+        { id: 'embed-1', name: 'Embedded Face', settlementIds: saves.map((s) => s.id) },
+        saves,
+        { now: 'Cyfrin 1, 2026', loadFace: loadBookFace },
+      );
+      latin1 = fs.readFileSync(FILE).toString('latin1');
+      painted = paintedText(FILE);
+    } finally {
+      fs.rmSync(FILE, { force: true });
+    }
+  }, 60000);
+
+  test('paints a real multi-page book with real show operators (the arm is not vacuous)', () => {
+    expect(latin1.slice(0, 5)).toBe('%PDF-');
+    expect((latin1.match(/\/Type\s*\/Page[^s]/g) || []).length).toBeGreaterThan(2);
+    const runs = jsPdfShowRuns(latin1);
+    expect(runs.length).toBeGreaterThan(100);
+    // Both halves: the runs exist AND they are the 2-byte glyph-id form, which is
+    // what proves the document went through Identity-H rather than WinAnsi.
+    expect(runs.filter((r) => r.hex).length).toBeGreaterThan(100);
+  });
+
+  test('NO text run is drawn with a non-embedded font', () => {
+    const bad = jsPdfShowRuns(latin1).filter((r) => !r.font?.embedded);
+    const summary = [...new Set(bad.map((r) => r.font?.base))].join(', ');
+    // ⛔ Do not ratchet this to the observed count. jsPDF declares all fourteen
+    // standard faces in every page's resource dictionary whether or not they are
+    // used, so a DECLARATION is not a defect — a RUN is.
+    expect(
+      bad.length,
+      `${bad.length} run(s) drawn with NON-EMBEDDED font(s): ${summary}. `
+      + `First payloads: ${bad.slice(0, 5).map((r) => JSON.stringify(r.payload.slice(0, 40))).join(' ')}`,
+    ).toBe(0);
+  });
+
+  test('every shipped pool name ROUND-TRIPS through the ToUnicode CMap onto the page', () => {
+    // ⭐ THE ARM THAT MEASURES THE READER RATHER THAN THE SANITISER. Asking
+    // sanitizeJsPdfText what it returned proves the sanitiser; only decoding the
+    // painted glyph ids back through the document's own ToUnicode CMap proves
+    // that the letter a customer prints is the letter the pool holds.
+    const missing = BOOK_PROBES.filter((name) => !painted.includes(name));
+    expect(missing, `the book did not paint ${missing.join(' ')}`).toEqual([]);
+  });
+
+  test('the decoded reader still CONVICTS — a name nobody painted is absent', () => {
+    // Non-vacuity for the arm above: a decoder that returned every string would
+    // pass it forever. Anchored on a probe asserted present in the same document.
+    expect(painted).toContain('Đorđević');
+    expect(painted).not.toContain('Ravenspire Was Never Bound'); // anchored: 'Đorđević' asserted present on the line above, so this document demonstrably decoded
+  });
+
+  test('the mangling the register counts is GONE: no probe paints as its stripped form', () => {
+    // The pre-cure spellings, from the shipped pass: Babić -> "Babi",
+    // Đorđević -> "or evi", Kovačević -> "Kova evi", Čupić -> "upi",
+    // Khān -> "Kh n", Hadžić -> "Had i". Each is what the paid page used to say.
+    for (const stripped of ['Kova evi', 'Had i', 'Kh n', 'or evi']) {
+      expect(painted, `the book still paints the stripped form ${JSON.stringify(stripped)}`)
+        .not.toContain(stripped); // anchored: every BOOK_PROBES name is asserted present two tests above, so the book demonstrably painted these rows
+    }
   });
 });

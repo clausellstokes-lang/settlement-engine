@@ -16,10 +16,14 @@
  * pass -- and compare. A font swap, a jsPDF bump or a sanitiser edit moves the
  * table; if the table did not move, one of these arms reds.
  *
- * The dossier set and the jsPDF set are DIFFERENT sets, and the difference is
- * the point: the dossier embeds eight faces and can draw 759 codepoints, while
- * the two jsPDF books are bounded by an encoder table and a text pass and can
- * draw 190. A field that reaches both is bounded by the intersection.
+ * The dossier set and the jsPDF set are DIFFERENT sets, and the difference used
+ * to be THE defect: the dossier embedded eight faces and drew 759 codepoints
+ * while the two jsPDF books were bounded by an ENCODER TABLE and drew 190, so 41
+ * of the product's own shipped names could not be printed on a paid page. The
+ * books now embed Lora Regular/Bold/Italic and are bounded by a FONT and a text
+ * pass at 776. The sets are still not identical — a field that reaches both is
+ * still bounded by the intersection — but the three that divide them (U+00A0,
+ * U+00AD, U+FFFF) are characters no reader sees.
  */
 
 import { describe, expect, it } from 'vitest';
@@ -30,6 +34,7 @@ import * as fontkit from 'fontkit';
 import { jsPDF } from 'jspdf';
 
 import { sanitizeJsPdfText } from '../../src/utils/jsPdfText.js';
+import { BOOK_FACES, BOOK_FAMILY } from '../../src/utils/jsPdfBookFont.js';
 import { CUSTOM_CONTENT_CHARSET } from '../../src/domain/content/customContentCharset.generated.js';
 import {
   CHARSET_REJECTION_CODES,
@@ -83,19 +88,37 @@ describe('the charset table is a measurement, not a list', () => {
     expect(expand(decodeRanges(TABLE.surfaces['dossier-pdf'].ranges))).toEqual(live);
   });
 
-  it('the campaign-book set equals the WinAnsi map narrowed by EXECUTING the one text pass', () => {
-    const winAnsi = new jsPDF().getFont().metadata.Unicode.encoding.WinAnsiEncoding;
-    const encodable = new Set();
-    for (let cp = 0x20; cp <= 0x7e; cp += 1) encodable.add(cp);
-    for (let cp = 0xa0; cp <= 0xff; cp += 1) encodable.add(cp);
-    for (const key of Object.keys(winAnsi)) encodable.add(Number(key));
+  it('the campaign-book set equals the EMBEDDED ROSTER narrowed by EXECUTING the one text pass', () => {
+    // ⭐ THIS ARM MOVED WITH ITS SUBJECT. It used to derive from jsPDF's
+    // WinAnsiEncoding map, because the two books painted with standard-14
+    // Helvetica and were bounded by an encoder table — 190 codepoints against the
+    // dossier's 759, which is the asymmetry namingDataCharset.test.js calls "the
+    // defect". The books now embed Lora (src/utils/jsPdfBookFont.js), so the
+    // honest bound is what those three faces can DRAW.
+    // ⚠ READ THROUGH jsPDF's OWN LOADED cmap, NOT fontkit: fontkit reports the
+    // format-4 sentinel U+FFFF as covered and jsPDF maps it to glyph 0. Measured,
+    // per face: fontkit 779, jsPDF 778. A .notdef is not a drawable glyph.
+    const probe = new jsPDF();
+    let drawable = null;
+    for (const face of BOOK_FACES) {
+      probe.addFileToVFS(face.file, readFileSync(join(ROOT, 'public/fonts', face.file)).toString('base64'));
+      probe.addFont(face.file, BOOK_FAMILY, face.style);
+      probe.setFont(BOOK_FAMILY, face.style);
+      const { metadata } = probe.getFont(BOOK_FAMILY, face.style);
+      const set = new Set(Object.keys(metadata.cmap.unicode.codeMap)
+        .map(Number).filter((cp) => metadata.characterToGlyph(cp) !== 0));
+      drawable = drawable === null ? set : new Set([...drawable].filter((cp) => set.has(cp)));
+    }
+    expect(drawable.size, 'the roster draws nothing — the derivation would be vacuous').toBeGreaterThan(700);
     // Context-anchored, and the anchor is load-bearing: a bare lone space trims
     // to empty, which would read one codepoint lower and disagree with the
     // derivation by construction.
-    const live = new Set([...encodable].filter((cp) => {
+    const live = new Set([...drawable].filter((cp) => {
       const anchored = `a${String.fromCodePoint(cp)}a`;
       return sanitizeJsPdfText(anchored) === anchored;
     }));
+    // The two the whitespace collapse removes, named so the gap is not a mystery.
+    expect([...drawable].filter((cp) => !live.has(cp))).toEqual([0x0d, 0xa0]);
     expect(TABLE.surfaces['campaign-pdf'].count).toBe(live.size);
     expect(expand(decodeRanges(TABLE.surfaces['campaign-pdf'].ranges))).toEqual(live);
   });
@@ -123,7 +146,12 @@ describe('the charset table is a measurement, not a list', () => {
     const intersection = [...dossier].filter((cp) => book.has(cp));
     expect(customContentFieldSurfaces('institutions', 'name'))
       .toEqual(['web-display', 'dossier-pdf', 'world-book', 'foundry']);
-    expect(intersection.length).toBe(189);
+    // 189 -> 756 when the books stopped being bounded by an encoder table and
+    // started being bounded by the face they embed. The 3 the dossier draws and
+    // the books do not are U+00A0, U+00AD and U+FFFF — a non-breaking space the
+    // whitespace collapse rewrites, a soft hyphen Lora has no glyph for, and a
+    // format-4 sentinel. None is a character a reader sees.
+    expect(intersection.length).toBe(756);
   });
 
   it('every classified field declares surfaces drawn from the closed vocabulary', () => {
@@ -154,10 +182,16 @@ describe('the charset table is a measurement, not a list', () => {
     expect(charsetSetFor(TABLE, 'dossier-pdf')).not.toBe(null);
   });
 
-  it('the door ships dark, at report', () => {
+  it('the books declare their embedded face; the wall still only reports', () => {
+    // ⚠ THE TITLE CHANGED BECAUSE THE CLAIM DID. It read "the door ships dark"
+    // while embeddedFont was null. The two jsPDF books now embed Lora, so the
+    // policy names it — but ENFORCEMENT is untouched (still `report`, never
+    // `refuse`), and nonLatin stays `undecided` ON PURPOSE: embedding a Latin
+    // serif does not answer the CJK/Arabic question, and writing `embed` here
+    // would claim an answer this car did not earn.
     expect(TABLE.policy.enforcement).toBe('report');
     expect(TABLE.policy.nonLatin).toBe('undecided');
-    expect(TABLE.policy.embeddedFont).toBe(null);
+    expect(TABLE.policy.embeddedFont).toBe('Lora');
   });
 });
 
@@ -287,14 +321,33 @@ describe('the wall names what it refuses', () => {
   });
 
   it('nfcWouldPass is true when normalising the string clears it, and false otherwise', () => {
+    // ⭐ THE PROBE MOVED, AND THE REASON IS THE GOOD NEWS. This arm used to use
+    // `Andre` + U+0301 COMBINING ACUTE, which produced a finding because the two
+    // jsPDF books were bounded by WinAnsiEncoding and had no combining marks at
+    // all. They now embed Lora, whose cmap carries U+0300-U+030C — and MEASURED,
+    // every one of those 20 marks has ADVANCE WIDTH 0, so it stacks on the
+    // preceding glyph instead of displacing it: jsPDF gives the decomposed
+    // "Andre\u0301" and the precomposed "André" the SAME text width (11.879 mm at
+    // 12pt). The decomposed spelling now prints correctly on every surface, so
+    // reporting nothing about it is right, not a hole.
+    // U+0340 COMBINING GRAVE TONE MARK is outside the roster and still needs NFC
+    // (which maps it to U+0300 and then composes), so it keeps the true branch
+    // honest rather than leaving it vacuous.
     const decomposed = validateCustomContentCharset(
       'institutions',
-      { name: `Andre${String.fromCodePoint(0x301)}` },
+      { name: `Andr${String.fromCodePoint(0x65, 0x340)}` },
     ).rejections;
     expect(decomposed.length).toBe(1);
     expect(decomposed[0].nfcWouldPass).toBe(true);
-    expect(validateCustomContentCharset('institutions', { name: 'André' }).rejections)
-      .toEqual([]);
+    expect(validateCustomContentCharset(
+      'institutions',
+      { name: `Andr${String.fromCodePoint(0x65, 0x340)}`.normalize('NFC') },
+    ).rejections).toEqual([]);
+    // And the codepoint the old probe used is now genuinely printable everywhere.
+    expect(validateCustomContentCharset(
+      'institutions',
+      { name: `Andre${String.fromCodePoint(0x301)}` },
+    ).rejections).toEqual([]);
 
     const [cjk] = validateCustomContentCharset('institutions', { name: '影' }).rejections;
     expect(cjk.nfcWouldPass).toBe(false);

@@ -11,9 +11,15 @@
  * pinned here is ONLY that they do not CRASH: layout/pagination still produce a
  * valid PDF. ⚠ NOT that they render right — renderedFontEmbedding.test.js convicts them.
  *
- * (The campaign PDF, by contrast, uses jsPDF/Helvetica and folds these to ASCII in
- * s() at generateCampaignPDF.js:83-89. ⛔ CORRECTED 2026-09-01: there is NO
- * campaignPdfSanitize.test.js — no test asserts that fold. This is the react-pdf side.)
+ * (The two jsPDF books, by contrast, EMBED Lora Regular/Bold/Italic and fold what
+ * that roster cannot draw to a space in sanitizeJsPdfText — src/utils/jsPdfText.js,
+ * NOT generateCampaignPDF.js:83-89, which this note cited for two revisions after
+ * the pass was hoisted out of it. ⭐ CORRECTED AGAIN: the fold IS asserted now.
+ * tests/pdf/renderedFontEmbedding.test.js emits a real campaign book and decodes
+ * its painted glyph ids back through the document's own ToUnicode CMap, so CJK and
+ * emoji are proved absent and the eight shipped diacritic names proved present.
+ * That arm was written and run RED before the cure existed. This file is the
+ * react-pdf side, whose faces still have no glyph for CJK / Arabic / emoji.)
  */
 
 import { fileURLToPath } from 'node:url';

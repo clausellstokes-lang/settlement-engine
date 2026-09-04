@@ -6,25 +6,40 @@
  * estate wrote is exactly as capable of carrying an unprintable codepoint as a
  * name a customer types, and nothing was checking.
  *
- * WHAT IT FOUND, MEASURED RATHER THAN FEARED. Walking every string in
- * NAMING_DATA against the two derived sets:
+ * WHAT IT FOUND, AND WHAT CLOSED IT. Walking every string in NAMING_DATA against
+ * the two derived sets, this register read for the whole life of the defect:
  *
  *   dossier PDF          0 misses   (eight embedded faces, 759 codepoints)
  *   campaign book / World Book   41 misses across 8 codepoints
+ *     U+0101 a-macron x1 . U+0107 c-acute x30 . U+010C x1 . U+010D x1
+ *     U+0110 D-stroke x2 . U+0111 x1 . U+0161 s-caron x3 . U+017E z-caron x2
  *
- * The 41 are Slavic and Arabic diacritics -- Kovacevic, Uros, Snezana,
- * Dordevic, Cupic, Khan -- which the dossier prints correctly and the two jsPDF
- * books cannot print at all, because those two are bounded by an encoder table
- * rather than by an embedded font. This is a real, shipped, paid-surface defect
- * and the number is its size.
+ * The 41 were Slavic and Arabic diacritics -- Kovacevic, Uros, Snezana,
+ * Dordevic, Cupic, Khan -- which the dossier printed correctly and the two jsPDF
+ * books could not print at all, because those two were bounded by an ENCODER
+ * TABLE rather than by an embedded font. Dordevic reached a paid page as
+ * "or evi": not a truncation, a name a reader cannot recognise.
  *
- * THE EXACT-EQUALITY IDIOM IS DELIBERATE. Growth reds, because a new pool entry
- * with a diacritic silently enlarges a defect. Shrinkage ALSO reds, because the
- * debt only shrinks when someone changes a renderer or a pool, and that is a
- * paid-surface movement which owes a re-record with its cause -- never a quiet
- * edit of the number here. The cure that would move it (re-deriving the jsPDF
- * text pass from the table, so the books stop erasing codepoints their own
- * encoder can draw) is owner-gated and NOT this file's to take.
+ * ⭐ RE-RECORDED 41 -> 0, WITH ITS CAUSE. The two books now EMBED Lora
+ * Regular/Bold/Italic (src/utils/jsPdfBookFont.js) and the one text pass admits
+ * what that roster can DRAW rather than what WinAnsi can encode, so the set the
+ * books are bounded by went 190 -> 776 and every one of the 41 is inside it.
+ * ⚠ The cure was NOT the one this header used to predict. Re-deriving the pass
+ * from the charset table would have cured 5 of the 41 (12%) and left Dordevic
+ * printing "or evi"; the 27 codepoints it would have added are all inside the
+ * font the product already shipped, so the embed DELETES that step rather than
+ * building on it. Measured, both counts, before either was built.
+ * ⛔ AND IT IS PROVED AT THE RENDER, NOT HERE. This file compares codepoint sets;
+ * a set can agree while the encoder still drops the letter. The arm that emits a
+ * real campaign book and decodes its painted glyph ids back through the
+ * document's own ToUnicode CMap lives in tests/pdf/renderedFontEmbedding.test.js.
+ *
+ * THE EXACT-EQUALITY IDIOM IS DELIBERATE, AND MATTERS MORE AT ZERO. Growth reds,
+ * because a new pool entry carrying a codepoint outside the embedded roster --
+ * a CJK name, an emoji, a soft hyphen -- would silently reopen the defect. And
+ * `codepoints: []` is why the arm below no longer iterates the miss list: a `for`
+ * over an empty list passes forever, so the relationship is stated over the
+ * POOLS, which the vacuity arm pins at 3,000+ strings.
  *
  * A note for whoever re-records it: `namingDecontamination.test.js` pins pool
  * SIZES for rng draw stability. A transliteration of the pools is a same-seed
@@ -99,11 +114,8 @@ describe('the shipped name pools against the renderers that must print them', ()
   it('the campaign-book miss census is EXACT, so it can neither grow nor shrink in silence', () => {
     const result = census(BOOK);
     expect({ instances: result.instances, codepoints: result.codepoints }).toEqual({
-      instances: 41,
-      codepoints: [
-        'U+0101', 'U+0107', 'U+010C', 'U+010D',
-        'U+0110', 'U+0111', 'U+0161', 'U+017E',
-      ],
+      instances: 0,
+      codepoints: [],
     });
   });
 
@@ -124,14 +136,20 @@ describe('the shipped name pools against the renderers that must print them', ()
     }
   });
 
-  it('the debt is a property of the BOOK set, not of the pools alone', () => {
-    // Stated as a relationship so the reason survives: every missing codepoint
-    // is one the dossier CAN draw. The pools are fine; one renderer is narrower
-    // than the other, and that asymmetry is the defect.
-    const result = census(BOOK);
-    for (const label of result.codepoints) {
-      const cp = Number.parseInt(label.slice(2), 16);
-      expect(has(DOSSIER, cp), `${label} should be printable in the dossier`).toBe(true);
-    }
+  it('the ASYMMETRY that was the defect is gone: no pooled codepoint divides the two renderers', () => {
+    // WAS: iterate the miss list and assert the dossier could draw each one --
+    // the debt is a property of the BOOK set, not of the pools. With the census
+    // at zero that loop iterates nothing and passes forever, so the same
+    // relationship is stated over a collection that CANNOT go empty: every
+    // codepoint the shipped pools actually use, which the two renderers must now
+    // agree about. It reds if either renderer narrows under the pools again.
+    const pooled = new Set();
+    for (const [, value] of pooledStrings()) for (const char of value) pooled.add(char.codePointAt(0));
+    // Non-vacuity, and not a round number: the pools genuinely span this many.
+    expect(pooled.size, 'the pooled codepoint set is empty — the arm would be vacuous').toBeGreaterThan(60);
+    const divided = [...pooled]
+      .filter((cp) => has(DOSSIER, cp) !== has(BOOK, cp))
+      .map((cp) => `U+${cp.toString(16).toUpperCase().padStart(4, '0')}`);
+    expect(divided, 'a pooled codepoint one renderer can draw and the other cannot').toEqual([]);
   });
 });

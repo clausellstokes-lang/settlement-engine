@@ -24,6 +24,7 @@ import { existsSync, rmSync } from 'node:fs';
 import { Cover } from '../../src/pdf/sections/Cover.jsx';
 import { generateCampaignPDF } from '../../src/utils/generateCampaignPDF.js';
 import { paintedText } from '../helpers/jsPdfPaintedText.js';
+import { loadBookFace as loadFace } from '../helpers/bookFaceLoader.js';
 
 // Collect every string leaf from a react-pdf element tree, expanding function
 // components (the walker idiom from timelineLigatureDefuse.test.js).
@@ -58,10 +59,10 @@ describe('campaign PDF — the export date is injectable (the World Book seam)',
   const campaign = { id: 'c1', name: 'Seam Probe', settlementIds: ['a'] };
   const saves = [{ id: 'a', name: 'Ashford', settlement }];
 
-  test('an injected label reaches the painted cover byline', () => {
+  test('an injected label reaches the painted cover byline', async () => {
     const file = 'campaign-seam-probe.pdf';
     try {
-      generateCampaignPDF(campaign, saves, { now: 'Cyfrin 1, 2026' });
+      await generateCampaignPDF(campaign, saves, { now: 'Cyfrin 1, 2026', loadFace });
       const text = paintedText(file);
       expect(text).toContain('Generated Cyfrin 1, 2026');
       // The wall clock is NOT consulted when a label is injected.
@@ -71,10 +72,10 @@ describe('campaign PDF — the export date is injectable (the World Book seam)',
     }
   });
 
-  test('omitting it keeps the wall-clock byline (the default is unchanged)', () => {
+  test('omitting it keeps the wall-clock byline (the default is unchanged)', async () => {
     const file = 'campaign-seam-probe.pdf';
     try {
-      generateCampaignPDF(campaign, saves);
+      await generateCampaignPDF(campaign, saves, { loadFace });
       expect(paintedText(file)).toContain(`Generated ${new Date().toLocaleDateString('en-US')}`);
     } finally {
       rmSync(file, { force: true });
@@ -98,12 +99,12 @@ describe('campaign PDF — culture is read from the RESOLVED config', () => {
     return { id, name, settlement: { name, tier: 'town', population: 1500, npcs: [], neighbourNetwork: [], ...settlement } };
   }
 
-  test('a culture that lives ONLY under settlement.config.culture reaches the page', () => {
+  test('a culture that lives ONLY under settlement.config.culture reaches the page', async () => {
     const file = 'campaign-coast-watch.pdf';
     try {
       // The real generator shape: resolved config, no top-level culture key.
       const saves = [member('gen-1', 'Tidewatch', { config: { culture: 'tide_reaver' } })];
-      generateCampaignPDF({ id: 'c9', name: 'Coast Watch', settlementIds: ['gen-1'] }, saves, { now: 'Cyfrin 1, 2026' });
+      await generateCampaignPDF({ id: 'c9', name: 'Coast Watch', settlementIds: ['gen-1'] }, saves, { now: 'Cyfrin 1, 2026', loadFace });
       const painted = paintedText(file).toLowerCase();
       // The label is painted on three surfaces; one occurrence is the repair, and
       // the count proves the cover list, the index column and the digest pill all
@@ -115,20 +116,20 @@ describe('campaign PDF — culture is read from the RESOLVED config', () => {
     }
   });
 
-  test('the materialized culturalIdentity.key resolves a config-stripped save', () => {
+  test('the materialized culturalIdentity.key resolves a config-stripped save', async () => {
     const file = 'campaign-keyed.pdf';
     try {
       // assembleSettlement stamps culturalIdentity on the settlement ROOT; it is the
       // one live root address, and it survives a save whose config was stripped.
       const saves = [member('keyed-1', 'Keyford', { culturalIdentity: { key: 'norse' } })];
-      generateCampaignPDF({ id: 'c10', name: 'Keyed', settlementIds: ['keyed-1'] }, saves, { now: 'Cyfrin 1, 2026' });
+      await generateCampaignPDF({ id: 'c10', name: 'Keyed', settlementIds: ['keyed-1'] }, saves, { now: 'Cyfrin 1, 2026', loadFace });
       expect(paintedText(file).toLowerCase()).toContain('norse');
     } finally {
       rmSync(file, { force: true });
     }
   });
 
-  test('the DEAD root address settlement.culture is no longer read', () => {
+  test('the DEAD root address settlement.culture is no longer read', async () => {
     // ONE-TIME BEHAVIOUR SHIFT, stated: the exporter used to print a top-level
     // `settlement.culture`. No writer in src/ produces that key (the generator
     // writes config.culture + culturalIdentity; normalizeSettlement's identity
@@ -137,7 +138,7 @@ describe('campaign PDF — culture is read from the RESOLVED config', () => {
     const file = 'campaign-dead-key.pdf';
     try {
       const saves = [member('dead-1', 'Twinford', { culture: 'stale_root' })];
-      generateCampaignPDF({ id: 'c11', name: 'Dead Key', settlementIds: ['dead-1'] }, saves, { now: 'Cyfrin 1, 2026' });
+      await generateCampaignPDF({ id: 'c11', name: 'Dead Key', settlementIds: ['dead-1'] }, saves, { now: 'Cyfrin 1, 2026', loadFace });
       const painted = paintedText(file).toLowerCase();
       expect(painted).toContain('twinford');
       // anchored: 'twinford' is painted by the SAME index + digest rows that carry the culture column and pill, so those rows demonstrably rendered — the absence is a selection, not an empty page.
@@ -147,11 +148,11 @@ describe('campaign PDF — culture is read from the RESOLVED config', () => {
     }
   });
 
-  test('the `random_culture` UI sentinel is never printed as a culture', () => {
+  test('the `random_culture` UI sentinel is never printed as a culture', async () => {
     const file = 'campaign-sentinel.pdf';
     try {
       const saves = [member('sent-1', 'Rollford', { config: { culture: 'random_culture' } })];
-      generateCampaignPDF({ id: 'c12', name: 'Sentinel', settlementIds: ['sent-1'] }, saves, { now: 'Cyfrin 1, 2026' });
+      await generateCampaignPDF({ id: 'c12', name: 'Sentinel', settlementIds: ['sent-1'] }, saves, { now: 'Cyfrin 1, 2026', loadFace });
       const painted = paintedText(file).toLowerCase();
       expect(painted).toContain('rollford');
       // anchored: 'rollford' is painted by the SAME index row that carries the culture column, so its presence proves that row rendered at all.
@@ -180,17 +181,17 @@ describe('campaign PDF — member ids resolve across the id-type seam', () => {
     return { id, name, settlement: { name, tier: 'town', population: 1500, npcs: [], neighbourNetwork: [] } };
   }
 
-  function paintedNames(campaign, saves, file) {
+  async function paintedNames(campaign, saves, file) {
     try {
-      generateCampaignPDF(campaign, saves, { now: 'Cyfrin 1, 2026' });
+      await generateCampaignPDF(campaign, saves, { now: 'Cyfrin 1, 2026', loadFace });
       return paintedText(file).toLowerCase();
     } finally {
       rmSync(file, { force: true });
     }
   }
 
-  test('NUMERIC save ids resolve against STRING settlementIds', () => {
-    const painted = paintedNames(
+  test('NUMERIC save ids resolve against STRING settlementIds', async () => {
+    const painted = await paintedNames(
       { id: 'c13', name: 'Numeric Saves', settlementIds: ['1', '2'] },
       [member(1, 'Ashford'), member(2, 'Grimhold')],
       'campaign-numeric-saves.pdf',
@@ -199,8 +200,8 @@ describe('campaign PDF — member ids resolve across the id-type seam', () => {
     expect(painted).toContain('grimhold');
   });
 
-  test('STRING save ids resolve against NUMERIC settlementIds', () => {
-    const painted = paintedNames(
+  test('STRING save ids resolve against NUMERIC settlementIds', async () => {
+    const painted = await paintedNames(
       { id: 'c14', name: 'Numeric Ids', settlementIds: [1, 2] },
       [member('1', 'Ashford'), member('2', 'Grimhold')],
       'campaign-numeric-ids.pdf',
@@ -209,8 +210,8 @@ describe('campaign PDF — member ids resolve across the id-type seam', () => {
     expect(painted).toContain('grimhold');
   });
 
-  test('a genuine non-member is still excluded (the coercion is not a wildcard)', () => {
-    const painted = paintedNames(
+  test('a genuine non-member is still excluded (the coercion is not a wildcard)', async () => {
+    const painted = await paintedNames(
       { id: 'c15', name: 'Exclusion', settlementIds: ['1'] },
       [member(1, 'Ashford'), member(2, 'Grimhold')],
       'campaign-exclusion.pdf',
@@ -247,9 +248,9 @@ describe('campaign PDF — every page is footered exactly once, and says its pag
     return { id, name, settlement: { name, tier: 'town', population: 1200, npcs: [], neighbourNetwork: [], ...settlement } };
   }
 
-  function paint(campaign, saves, file) {
+  async function paint(campaign, saves, file) {
     try {
-      generateCampaignPDF(campaign, saves, { now: 'Cyfrin 1, 2026' });
+      await generateCampaignPDF(campaign, saves, { now: 'Cyfrin 1, 2026', loadFace });
       return paintedText(file);
     } finally {
       rmSync(file, { force: true });
@@ -261,13 +262,13 @@ describe('campaign PDF — every page is footered exactly once, and says its pag
   // advancing the page) — the exact shape that double-stamped.
   const NO_EFFECTS = [member('n1', 'Ashford'), member('n2', 'Grimhold')];
 
-  test('the page count is rendered — the total is no longer a dead parameter', () => {
-    const painted = paint({ id: 'f1', name: 'Footer Count', settlementIds: ['n1', 'n2'] }, NO_EFFECTS, 'campaign-footer-count.pdf');
+  test('the page count is rendered — the total is no longer a dead parameter', async () => {
+    const painted = await paint({ id: 'f1', name: 'Footer Count', settlementIds: ['n1', 'n2'] }, NO_EFFECTS, 'campaign-footer-count.pdf');
     expect(painted).toMatch(/Page \d+ of \d+/);
   });
 
-  test('the printed total equals the number of pages the reader can turn to', () => {
-    const painted = paint({ id: 'f2', name: 'Footer Total', settlementIds: ['n1', 'n2'] }, NO_EFFECTS, 'campaign-footer-total.pdf');
+  test('the printed total equals the number of pages the reader can turn to', async () => {
+    const painted = await paint({ id: 'f2', name: 'Footer Total', settlementIds: ['n1', 'n2'] }, NO_EFFECTS, 'campaign-footer-total.pdf');
     const totals = [...painted.matchAll(/Page \d+ of (\d+)/g)].map(m => Number(m[1]));
     expect(totals.length).toBeGreaterThan(0);
     // One total, agreed by every page.
@@ -278,8 +279,8 @@ describe('campaign PDF — every page is footered exactly once, and says its pag
     expect(Math.max(...pages)).toBe(totals[0]);
   });
 
-  test('no page is stamped twice (the appendix early-return no longer double-footers)', () => {
-    const painted = paint({ id: 'f3', name: 'Footer Once', settlementIds: ['n1', 'n2'] }, NO_EFFECTS, 'campaign-footer-once.pdf');
+  test('no page is stamped twice (the appendix early-return no longer double-footers)', async () => {
+    const painted = await paint({ id: 'f3', name: 'Footer Once', settlementIds: ['n1', 'n2'] }, NO_EFFECTS, 'campaign-footer-once.pdf');
     const pages = [...painted.matchAll(/Page (\d+) of \d+/g)].map(m => Number(m[1]));
     expect(pages.length).toBeGreaterThan(0);
     // anchored: pages were demonstrably footered, so this compares real stamps.
@@ -307,12 +308,12 @@ describe('campaign PDF — every page is footered exactly once, and says its pag
 describe('campaign PDF — the 40-character cap never leaves a dangling separator', () => {
   const LONG = 'Thornbury Under The Everwatchful Cliffs Of Old Kingsmoor And The Sundered Vale';
 
-  function savedNameFor(name) {
+  async function savedNameFor(name) {
     // The painter names the file itself; find which of the two candidates landed.
     const trimmed = 'campaign-thornbury-under-the-everwatchful-cliffs.pdf';
     const dangling = 'campaign-thornbury-under-the-everwatchful-cliffs-.pdf';
     try {
-      generateCampaignPDF({ id: 'slug1', name, settlementIds: [] }, [], { now: 'Cyfrin 1, 2026' });
+      await generateCampaignPDF({ id: 'slug1', name, settlementIds: [] }, [], { now: 'Cyfrin 1, 2026', loadFace });
       if (existsSync(trimmed)) return trimmed;
       if (existsSync(dangling)) return dangling;
       return null;
@@ -322,8 +323,8 @@ describe('campaign PDF — the 40-character cap never leaves a dangling separato
     }
   }
 
-  test('a long campaign name is capped at 40 and trimmed clean', () => {
-    const saved = savedNameFor(LONG);
+  test('a long campaign name is capped at 40 and trimmed clean', async () => {
+    const saved = await savedNameFor(LONG);
     // anchored: a file really was written under one of the two candidate names, so
     // the assertion below is about WHICH, not about a missing export.
     expect(saved).not.toBeNull();

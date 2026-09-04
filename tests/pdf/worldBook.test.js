@@ -29,6 +29,7 @@ vi.mock('../../src/utils/graphLayout.js', async (importOriginal) => {
 });
 import { existsSync, rmSync, statSync } from 'node:fs';
 import { collectWorldBook, generateWorldBook, realmChapterRows } from '../../src/utils/generateWorldBook.js';
+import { loadBookFace as loadFace } from '../helpers/bookFaceLoader.js';
 import { autoLayout } from '../../src/utils/graphLayout.js';
 import { track, EVENTS } from '../../src/lib/analytics.js';
 
@@ -283,7 +284,7 @@ describe('painter smoke (no bytes asserted — the collector pins stay the contr
   // Fix wave 3 rewired the chronicle row (calendar date via tickCalendarLabel +
   // a measured at-the-table offset); this proves the painter still runs
   // end-to-end over the fixture, without ever comparing painter bytes.
-  it('generateWorldBook paints and saves without throwing (dm + player faces)', () => {
+  it('generateWorldBook paints and saves without throwing (dm + player faces)', async () => {
     const { campaign, saves } = fixtureCampaign();
     // jsPDF's save is an OWN instance property (defineProperty in its
     // constructor — un-stubbable from outside), and its node build writes a
@@ -292,8 +293,8 @@ describe('painter smoke (no bytes asserted — the collector pins stay the contr
     const dmFile = 'world-book-the-long-winter.pdf';
     const playerFile = 'world-book-the-long-winter-player.pdf';
     try {
-      generateWorldBook(campaign, saves, { mode: 'dm', now: '1/1/2026' });
-      generateWorldBook(campaign, saves, { mode: 'player', now: '1/1/2026' });
+      await generateWorldBook(campaign, saves, { mode: 'dm', now: '1/1/2026', loadFace });
+      await generateWorldBook(campaign, saves, { mode: 'player', now: '1/1/2026', loadFace });
       expect(existsSync(dmFile), 'dm face saved').toBe(true);
       expect(existsSync(playerFile), 'player face saved').toBe(true);
       expect(statSync(dmFile).size).toBeGreaterThan(1000);
@@ -384,13 +385,13 @@ describe('the realm map hands the layout edges it can actually read (9+ settleme
     }
   });
 
-  it('the painter hands those edges to autoLayout UNCHANGED — every spring survives', () => {
+  it('the painter hands those edges to autoLayout UNCHANGED — every spring survives', async () => {
     const { campaign, saves } = ringRealm();
     const book = collectWorldBook(campaign, saves, {});
     const file = 'world-book-the-ring.pdf';
     autoLayout.mockClear();
     try {
-      generateWorldBook(campaign, saves, { mode: 'dm', now: '1/1/2026' });
+      await generateWorldBook(campaign, saves, { mode: 'dm', now: '1/1/2026', loadFace });
     } finally {
       rmSync(file, { force: true });
     }
@@ -425,12 +426,12 @@ describe('the realm map hands the layout edges it can actually read (9+ settleme
  * no narrative variant).
  */
 describe('a completed World Book reports itself (the funnel numerator)', () => {
-  it('emits PDF_EXPORT_COMPLETED once, with the campaign-scope payload shape', () => {
+  it('emits PDF_EXPORT_COMPLETED once, with the campaign-scope payload shape', async () => {
     const { campaign, saves } = fixtureCampaign();
     const file = 'world-book-the-long-winter.pdf';
     track.mockClear();
     try {
-      generateWorldBook(campaign, saves, { mode: 'dm', now: '1/1/2026' });
+      await generateWorldBook(campaign, saves, { mode: 'dm', now: '1/1/2026', loadFace });
     } finally {
       rmSync(file, { force: true });
     }
@@ -445,12 +446,12 @@ describe('a completed World Book reports itself (the funnel numerator)', () => {
     expect(props).not.toHaveProperty('canon_phase'); // anchored: toMatchObject({ scope, narrative_mode }) above proves props is the live COMPLETED payload
   });
 
-  it('the player face reports too (both faces are real exports)', () => {
+  it('the player face reports too (both faces are real exports)', async () => {
     const { campaign, saves } = fixtureCampaign();
     const file = 'world-book-the-long-winter-player.pdf';
     track.mockClear();
     try {
-      generateWorldBook(campaign, saves, { mode: 'player', now: '1/1/2026' });
+      await generateWorldBook(campaign, saves, { mode: 'player', now: '1/1/2026', loadFace });
     } finally {
       rmSync(file, { force: true });
     }
@@ -468,12 +469,12 @@ describe('a completed World Book reports itself (the funnel numerator)', () => {
 describe('the World Book filename cap never leaves a dangling separator', () => {
   const LONG = 'Thornbury Under The Everwatchful Cliffs Of Old Kingsmoor And The Sundered Vale';
 
-  it('a long book title is capped at 40 and trimmed clean', () => {
+  it('a long book title is capped at 40 and trimmed clean', async () => {
     const trimmed = 'world-book-thornbury-under-the-everwatchful-cliffs.pdf';
     const dangling = 'world-book-thornbury-under-the-everwatchful-cliffs-.pdf';
     let saved = null;
     try {
-      generateWorldBook({ id: 'wb-slug', name: LONG, settlementIds: [] }, [], { mode: 'dm', now: '1/1/2026' });
+      await generateWorldBook({ id: 'wb-slug', name: LONG, settlementIds: [] }, [], { mode: 'dm', now: '1/1/2026', loadFace });
       if (existsSync(trimmed)) saved = trimmed;
       else if (existsSync(dangling)) saved = dangling;
     } finally {

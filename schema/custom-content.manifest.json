@@ -30,7 +30,7 @@
   "charsetPolicy": {
     "enforcement": "report",
     "nonLatin": "undecided",
-    "embeddedFont": null
+    "embeddedFont": "Lora"
   },
   "schemas": {
     "name": {

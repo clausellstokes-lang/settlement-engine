@@ -25,6 +25,7 @@ import { rmSync } from 'node:fs';
 import { collectRealmSummary, generateCampaignPDF } from '../../src/utils/generateCampaignPDF.js';
 import { collectWorldBook } from '../../src/utils/generateWorldBook.js';
 import { paintedText } from '../helpers/jsPdfPaintedText.js';
+import { loadBookFace as loadFace } from '../helpers/bookFaceLoader.js';
 import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 
 // A minted ref whose display name is one distinctive token, so a substring assertion
@@ -129,7 +130,7 @@ describe('collectRealmSummary — the faith seam is the collector, and it fails 
 describe('generateCampaignPDF — the painted realm chapter carries ZERO deity names by default', () => {
   const FILE = 'campaign-faith-seam-realm.pdf';
 
-  it('premium paints the deity name; the default export paints none, war content intact', () => {
+  it('premium paints the deity name; the default export paints none, war content intact', async () => {
     const campaign = faithAndWarCampaign();
     // Left undefined on purpose: if a painter throws, the anchored-negative helper
     // reds with "the collection cannot answer a toContain question" rather than
@@ -137,9 +138,9 @@ describe('generateCampaignPDF — the painted realm chapter carries ZERO deity n
     let premiumText;
     let freeText;
     try {
-      generateCampaignPDF(campaign, saves, { now: 'Cyfrin 1, 2026', faithUnlocked: true });
+      await generateCampaignPDF(campaign, saves, { now: 'Cyfrin 1, 2026', faithUnlocked: true, loadFace });
       premiumText = paintedText(FILE);
-      generateCampaignPDF(campaign, saves, { now: 'Cyfrin 1, 2026' });
+      await generateCampaignPDF(campaign, saves, { now: 'Cyfrin 1, 2026', loadFace });
       freeText = paintedText(FILE);
     } finally {
       rmSync(FILE, { force: true });

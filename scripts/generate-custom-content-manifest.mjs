@@ -20,6 +20,7 @@ import {
   parseContentJson,
 } from '../src/domain/content/contentFingerprint.js';
 import { sanitizeJsPdfText } from '../src/utils/jsPdfText.js';
+import { BOOK_DRAWABLE_RANGES, BOOK_FACES, BOOK_FAMILY } from '../src/utils/jsPdfBookFont.js';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const sourcePath = resolve(root, 'schema/custom-content.manifest.json');
@@ -312,10 +313,19 @@ function admissionValidationManifest(manifest) {
 //
 // Every figure below is an output of a measurement. The dossier's set is the
 // intersection of the font faces theme.js actually registers, read through
-// fontkit. The two jsPDF books' set is the WinAnsi map the encoder itself reads
-// at runtime, narrowed by EXECUTING the one text pass over it. Nothing here is a
-// hand-typed list, so a font swap, a jsPDF bump or an edit to the text pass moves
-// the table and reds the gate instead of silently moving a paid surface.
+// fontkit. The two jsPDF books' set is what the EMBEDDED book roster
+// (src/utils/jsPdfBookFont.js) can actually DRAW, narrowed by EXECUTING the one
+// text pass over it. Nothing here is a hand-typed list, so a font swap, a jsPDF
+// bump or an edit to the text pass moves the table and reds the gate instead of
+// silently moving a paid surface.
+//
+// ⚠ THE BOOK SET USED TO BE jsPDF's WinAnsiEncoding MAP, and it was 190 codepoints
+// while the dossier drew 759 — the asymmetry namingDataCharset.test.js calls "the
+// defect", and the reason 41 shipped pool names could not be printed on a paid page.
+// The books now embed Lora, so the honest bound is the FONT, not an encoder table.
+// ⭐ AND IT IS READ THROUGH jsPDF's OWN LOADED cmap, NOT THROUGH fontkit: fontkit
+// reports the format-4 sentinel U+FFFF as covered, jsPDF maps it to glyph 0, and a
+// .notdef is not a drawable glyph. Measured: fontkit 779 vs jsPDF 778 per face.
 
 const CHARSET_SURFACES = [
   'web-display',
@@ -415,20 +425,39 @@ async function deriveCharsetTable(manifest, source) {
     dossier = dossier === null ? set : new Set([...dossier].filter((cp) => set.has(cp)));
   }
 
-  // campaign-pdf / world-book: the encoder's own WinAnsi map, narrowed by
-  // EXECUTING the one text pass. The context anchor matters: a bare codepoint
-  // would read one lower, because a lone space trims to empty.
+  // campaign-pdf / world-book: load the EMBEDDED roster the two painters register
+  // and ask jsPDF itself which codepoints it can draw, then narrow by EXECUTING the
+  // one text pass. The context anchor matters: a bare codepoint would read one
+  // lower, because a lone space trims to empty.
   const { jsPDF } = await import('jspdf');
-  const winAnsi = new jsPDF().getFont().metadata?.Unicode?.encoding?.WinAnsiEncoding;
-  invariant(
-    winAnsi && Object.keys(winAnsi).length > 0,
-    'jsPDF exposes no runtime WinAnsiEncoding map; the derivation cannot proceed',
-  );
-  const encodable = new Set();
-  for (let cp = 0x20; cp <= 0x7e; cp += 1) encodable.add(cp);
-  for (let cp = 0xa0; cp <= 0xff; cp += 1) encodable.add(cp);
-  for (const key of Object.keys(winAnsi)) encodable.add(Number(key));
-  const textPass = new Set([...encodable].filter((cp) => {
+  const probe = new jsPDF();
+  const rosterBytes = [];
+  let drawable = null;
+  for (const face of BOOK_FACES) {
+    const facePath = resolve(root, 'public/fonts', face.file);
+    const bytes = await readFile(facePath);
+    rosterBytes.push(bytes);
+    probe.addFileToVFS(face.file, bytes.toString('base64'));
+    probe.addFont(face.file, BOOK_FAMILY, face.style);
+    probe.setFont(BOOK_FAMILY, face.style);
+    const { metadata } = probe.getFont(BOOK_FAMILY, face.style);
+    invariant(
+      metadata?.cmap?.unicode?.codeMap,
+      `jsPDF exposes no loaded cmap for ${face.file}; the derivation cannot proceed`,
+    );
+    // glyph id 0 is .notdef — present in the cmap, not drawable.
+    const set = new Set(
+      Object.keys(metadata.cmap.unicode.codeMap)
+        .map(Number)
+        .filter((cp) => metadata.characterToGlyph(cp) !== 0),
+    );
+    drawable = drawable === null ? set : new Set([...drawable].filter((cp) => set.has(cp)));
+  }
+  invariant(drawable && drawable.size > 0, 'the embedded book roster draws nothing');
+  // The pass admits only what the roster declares, so this narrowing is the
+  // whitespace collapse showing up: U+000D and U+00A0 are drawable but cannot
+  // survive `\s+ -> ' '`, so the derived set sits two below the drawable one.
+  const textPass = new Set([...drawable].filter((cp) => {
     const anchored = `a${String.fromCodePoint(cp)}a`;
     return sanitizeJsPdfText(anchored) === anchored;
   }));
@@ -446,9 +475,16 @@ async function deriveCharsetTable(manifest, source) {
     'campaign-pdf': {
       ranges: toRangeString(textPass),
       count: textPass.size,
-      method: 'winansi-and-textpass',
-      inputs: ['jspdf:WinAnsiEncoding', 'src/utils/jsPdfText.js'],
-      inputsSha256: sha256Of([JSON.stringify(winAnsi), passSource]),
+      method: 'embedded-roster-and-textpass',
+      inputs: [
+        ...BOOK_FACES.map((face) => `public/fonts/${face.file}`),
+        'src/utils/jsPdfBookFont.js',
+        'src/utils/jsPdfText.js',
+      ],
+      // The roster BYTES plus the two things that can narrow them: the declared
+      // drawable ranges the pass reads, and the pass body itself. Comments in
+      // either module deliberately do not move it.
+      inputsSha256: sha256Of([...rosterBytes, BOOK_DRAWABLE_RANGES, passSource]),
     },
     foundry: { ranges: '', count: 0, method: 'unbounded', inputs: [], inputsSha256: '' },
     'json-export': { ranges: '', count: 0, method: 'unbounded', inputs: [], inputsSha256: '' },

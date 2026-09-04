@@ -25,6 +25,8 @@ import { jsPDF } from 'jspdf';
 // THE ONE jsPDF text pass. This file's own copy differed from the campaign
 // book's by whitespace only, and both admitted the same set (measured).
 import { sanitizeJsPdfText as s } from './jsPdfText.js';
+// THE EMBEDDED FACE — see generateCampaignPDF.js; the two books share the roster.
+import { BOOK_FAMILY, registerBookFont } from './jsPdfBookFont.js';
 import { formatCount } from '../domain/formatNumber.js';
 import { resolveSettlementCulture } from '../domain/resolveCulture.js';
 import { truncateAtWord } from '../lib/text.js';
@@ -71,12 +73,12 @@ function clampLines(lines, maxLines) {
 function secBar(d, y, label, clr = INK) {
   const bh = 6;
   rect(d, ML, y, CW, bh, clr);
-  d.setFont('helvetica', 'bold'); d.setFontSize(8); st(d, [255, 255, 255]);
+  d.setFont(BOOK_FAMILY, 'bold'); d.setFontSize(8); st(d, [255, 255, 255]);
   d.text(s(label).toUpperCase(), ML + 3, y + 4.2);
   return y + bh + 3;
 }
 function footer(d, title, pageN) {
-  d.setFont('helvetica', 'italic'); d.setFontSize(7); st(d, MUTED);
+  d.setFont(BOOK_FAMILY, 'italic'); d.setFontSize(7); st(d, MUTED);
   d.text(s(title), ML, PH - 5);
   const right = `Page ${pageN}`;
   const w = d.getStringUnitWidth(right) * 7 / d.internal.scaleFactor;
@@ -272,20 +274,20 @@ function buildCover(d, book, generatedLabel) {
   sd(d, GOLD); d.setLineWidth(1.2); d.rect(10, 10, PW - 20, PH - 20);
   sd(d, GOLD); d.setLineWidth(0.35); d.rect(13, 13, PW - 26, PH - 26);
   const cx = PW / 2;
-  d.setFont('helvetica', 'italic'); d.setFontSize(11); st(d, BROWN);
+  d.setFont(BOOK_FAMILY, 'italic'); d.setFontSize(11); st(d, BROWN);
   d.text(book.mode === 'player' ? 'A WORLD BOOK' : 'A WORLD BOOK - DM EDITION', cx, 60, { align: 'center' });
-  d.setFont('helvetica', 'bold'); d.setFontSize(28); st(d, INK);
+  d.setFont(BOOK_FAMILY, 'bold'); d.setFontSize(28); st(d, INK);
   let ty = 76;
   for (const line of wrap(d, book.title, CW - 20, 28).slice(0, 3)) { d.text(line, cx, ty, { align: 'center' }); ty += 12; }
   sd(d, GOLD); d.setLineWidth(0.6); d.line(cx - 30, ty + 4, cx + 30, ty + 4);
   if (book.description) {
-    d.setFont('helvetica', 'normal'); d.setFontSize(10); st(d, BROWN);
+    d.setFont(BOOK_FAMILY, 'normal'); d.setFontSize(10); st(d, BROWN);
     let dy = ty + 14;
     for (const line of clampLines(wrap(d, book.description, CW - 40, 10), 6)) { d.text(line, cx, dy, { align: 'center' }); dy += 5; }
   }
-  d.setFont('helvetica', 'normal'); d.setFontSize(9); st(d, MUTED);
+  d.setFont(BOOK_FAMILY, 'normal'); d.setFontSize(9); st(d, MUTED);
   d.text(`${formatCount(book.settlementCount)} settlement${book.settlementCount === 1 ? '' : 's'} bound within`, cx, 236, { align: 'center' });
-  if (generatedLabel) { d.setFont('helvetica', 'italic'); d.setFontSize(8); st(d, MUTED); d.text(s(`Bound ${generatedLabel}`), cx, 250, { align: 'center' }); }
+  if (generatedLabel) { d.setFont(BOOK_FAMILY, 'italic'); d.setFontSize(8); st(d, MUTED); d.text(s(`Bound ${generatedLabel}`), cx, 250, { align: 'center' }); }
 }
 
 function chapterHeading(d, title, pageN) {
@@ -297,7 +299,7 @@ function buildChronicle(d, book, pageN) {
   let s2 = chapterHeading(d, 'The Chronicle', pageN);
   let { y } = s2; pageN = s2.pageN;
   if (!book.chronicle.length) {
-    d.setFont('helvetica', 'italic'); d.setFontSize(9); st(d, MUTED);
+    d.setFont(BOOK_FAMILY, 'italic'); d.setFontSize(9); st(d, MUTED);
     d.text('The ledger holds no chronicle for this world yet.', ML, y + 4);
     return pageN;
   }
@@ -306,18 +308,18 @@ function buildChronicle(d, book, pageN) {
     const rowH = 8 + lines.length * 4;
     const sp = ensureSpace(d, y, rowH, book.title, pageN); y = sp.y; pageN = sp.pageN;
     // The reader gets a calendar date, never a bare engine tick (fix wave 3).
-    d.setFont('helvetica', 'bold'); d.setFontSize(8); st(d, e.source === 'table' ? BROWN : INK);
+    d.setFont(BOOK_FAMILY, 'bold'); d.setFontSize(8); st(d, e.source === 'table' ? BROWN : INK);
     const when = s(tickCalendarLabel(e.tick));
     d.text(when, ML, y + 3);
     if (e.source === 'table') {
       const wWhen = d.getStringUnitWidth(when) * 8 / d.internal.scaleFactor;
-      d.setFont('helvetica', 'italic'); d.setFontSize(6.5); st(d, MUTED);
+      d.setFont(BOOK_FAMILY, 'italic'); d.setFontSize(6.5); st(d, MUTED);
       d.text('at the table', ML + wWhen + 2, y + 3);
     }
-    d.setFont('helvetica', 'bold'); d.setFontSize(9); st(d, INK);
+    d.setFont(BOOK_FAMILY, 'bold'); d.setFontSize(9); st(d, INK);
     d.text(s(e.headline), ML + 52, y + 3);
     y += 5;
-    d.setFont('helvetica', 'normal'); d.setFontSize(8); st(d, BROWN);
+    d.setFont(BOOK_FAMILY, 'normal'); d.setFontSize(8); st(d, BROWN);
     for (const line of clampLines(lines, 4)) { d.text(line, ML + 6, y + 3); y += 4; }
     y += 3; hline(d, ML, y, ML + CW, TAN, 0.15); y += 3;
   }
@@ -328,22 +330,22 @@ function buildChronicle(d, book, pageN) {
 function buildDossiers(d, book, pageN) {
   for (const dos of book.dossiers) {
     let sp = chapterHeading(d, `Dossier - ${dos.name}`, pageN); let y = sp.y; pageN = sp.pageN;
-    d.setFont('helvetica', 'normal'); d.setFontSize(9); st(d, BROWN);
+    d.setFont(BOOK_FAMILY, 'normal'); d.setFontSize(9); st(d, BROWN);
     d.text(s(`${dos.tier || 'settlement'} - ${formatCount(dos.population)} souls${dos.culture ? ` - ${dos.culture}` : ''}`), ML, y + 3); y += 8;
     if (dos.overview) {
-      d.setFont('helvetica', 'italic'); d.setFontSize(9); st(d, INK);
+      d.setFont(BOOK_FAMILY, 'italic'); d.setFontSize(9); st(d, INK);
       for (const line of clampLines(wrap(d, dos.overview, CW - 6, 9), 6)) { d.text(line, ML, y + 3); y += 4.4; }
       y += 3;
     }
     if (dos.institutions.length) {
-      d.setFont('helvetica', 'bold'); d.setFontSize(8); st(d, GOLD); d.text('INSTITUTIONS', ML, y + 3); y += 5;
-      d.setFont('helvetica', 'normal'); d.setFontSize(8); st(d, BROWN);
+      d.setFont(BOOK_FAMILY, 'bold'); d.setFontSize(8); st(d, GOLD); d.text('INSTITUTIONS', ML, y + 3); y += 5;
+      d.setFont(BOOK_FAMILY, 'normal'); d.setFontSize(8); st(d, BROWN);
       for (const line of clampLines(wrap(d, dos.institutions.join(', '), CW - 6, 8), 4)) { d.text(line, ML, y + 3); y += 4; }
       y += 3;
     }
     if (dos.npcs.length) {
-      d.setFont('helvetica', 'bold'); d.setFontSize(8); st(d, GOLD); d.text('NOTABLE FIGURES', ML, y + 3); y += 5;
-      d.setFont('helvetica', 'normal'); d.setFontSize(8); st(d, BROWN);
+      d.setFont(BOOK_FAMILY, 'bold'); d.setFontSize(8); st(d, GOLD); d.text('NOTABLE FIGURES', ML, y + 3); y += 5;
+      d.setFont(BOOK_FAMILY, 'normal'); d.setFontSize(8); st(d, BROWN);
       for (const n of dos.npcs.slice(0, 12)) {
         const sp2 = ensureSpace(d, y, 5, book.title, pageN); y = sp2.y; pageN = sp2.pageN;
         d.text(s(`${n.name}${n.role ? ` - ${n.role}` : ''}`), ML + 3, y + 3); y += 4;
@@ -351,8 +353,8 @@ function buildDossiers(d, book, pageN) {
       y += 3;
     }
     if (dos.hooks.length) {
-      d.setFont('helvetica', 'bold'); d.setFontSize(8); st(d, GOLD); d.text('HOOKS (DM)', ML, y + 3); y += 5;
-      d.setFont('helvetica', 'normal'); d.setFontSize(8); st(d, BROWN);
+      d.setFont(BOOK_FAMILY, 'bold'); d.setFontSize(8); st(d, GOLD); d.text('HOOKS (DM)', ML, y + 3); y += 5;
+      d.setFont(BOOK_FAMILY, 'normal'); d.setFontSize(8); st(d, BROWN);
       for (const h of dos.hooks.slice(0, 6)) {
         for (const line of clampLines(wrap(d, `- ${h}`, CW - 6, 8), 2)) {
           const sp3 = ensureSpace(d, y, 5, book.title, pageN); y = sp3.y; pageN = sp3.pageN;
@@ -368,7 +370,7 @@ function buildDossiers(d, book, pageN) {
 function buildMapChapter(d, book, pageN) {
   let sp = chapterHeading(d, 'The Realm Map', pageN); const y0 = sp.y; pageN = sp.pageN;
   if (!book.map.nodes.length) {
-    d.setFont('helvetica', 'italic'); d.setFontSize(9); st(d, MUTED);
+    d.setFont(BOOK_FAMILY, 'italic'); d.setFontSize(9); st(d, MUTED);
     d.text('No settlements are bound into a realm yet.', ML, y0 + 4); footer(d, book.title, pageN); return pageN;
   }
   const frameY = y0 + 2, frameH = 150;
@@ -397,7 +399,7 @@ function buildMapChapter(d, book, pageN) {
   for (const n of book.map.nodes) {
     const p = pos.get(String(n.id)); if (!p) continue;
     sf(d, GOLD); d.circle(px(p.x), py(p.y), 1.6, 'F');
-    d.setFont('helvetica', 'normal'); d.setFontSize(7); st(d, INK);
+    d.setFont(BOOK_FAMILY, 'normal'); d.setFontSize(7); st(d, INK);
     d.text(s(n.name), px(p.x) + 2.4, py(p.y) + 1);
   }
   footer(d, book.title, pageN);
@@ -409,8 +411,8 @@ function buildReceiptsAppendix(d, book, pageN) {
   let sp = chapterHeading(d, 'Receipts - the forces between places', pageN); let y = sp.y; pageN = sp.pageN;
   for (const r of book.receipts) {
     const sp2 = ensureSpace(d, y, 8, book.title, pageN); y = sp2.y; pageN = sp2.pageN;
-    d.setFont('helvetica', 'bold'); d.setFontSize(9); st(d, INK); d.text(s(r.name), ML, y + 3); y += 5;
-    d.setFont('helvetica', 'normal'); d.setFontSize(8); st(d, BROWN);
+    d.setFont(BOOK_FAMILY, 'bold'); d.setFontSize(9); st(d, INK); d.text(s(r.name), ML, y + 3); y += 5;
+    d.setFont(BOOK_FAMILY, 'normal'); d.setFontSize(8); st(d, BROWN);
     for (const src of r.sources.slice(0, 8)) {
       const sp3 = ensureSpace(d, y, 5, book.title, pageN); y = sp3.y; pageN = sp3.pageN;
       const line = `- ${src.from ? `${src.from}: ` : ''}${src.effect}${src.detail ? ` (${src.detail})` : ''}`;
@@ -447,8 +449,8 @@ function buildRealmChapter(d, book, pageN) {
   let sp = chapterHeading(d, 'State of the Realm', pageN); let y = sp.y; pageN = sp.pageN;
   const section = (label, rows) => {
     if (!rows || !rows.length) return;
-    d.setFont('helvetica', 'bold'); d.setFontSize(8); st(d, GOLD); d.text(s(label).toUpperCase(), ML, y + 3); y += 5;
-    d.setFont('helvetica', 'normal'); d.setFontSize(8); st(d, BROWN);
+    d.setFont(BOOK_FAMILY, 'bold'); d.setFontSize(8); st(d, GOLD); d.text(s(label).toUpperCase(), ML, y + 3); y += 5;
+    d.setFont(BOOK_FAMILY, 'normal'); d.setFontSize(8); st(d, BROWN);
     for (const row of rows.slice(0, 10)) {
       const sp2 = ensureSpace(d, y, 5, book.title, pageN); y = sp2.y; pageN = sp2.pageN;
       d.text(s(`- ${row}`), ML + 3, y + 3); y += 4;
@@ -471,13 +473,18 @@ function buildRealmChapter(d, book, pageN) {
  * faith seam, so a free / lapsed / anon book is bound with no deity name in it.
  * @param {Object} campaign
  * @param {Array} allSaves
- * @param {{ mode?: 'dm' | 'player', now?: string, faithUnlocked?: boolean }} [opts]
+ * @param {{ mode?: 'dm' | 'player', now?: string, faithUnlocked?: boolean,
+ *   loadFace?: Function }} [opts] `loadFace` is the embedded-face seam — see
+ *   generateCampaignPDF.js for why it exists and who passes it.
+ * @returns {Promise<void>} ASYNC since the embedded face is fetched.
  */
-export function generateWorldBook(campaign, allSaves = [], opts = {}) {
+export async function generateWorldBook(campaign, allSaves = [], opts = {}) {
   if (!campaign) throw new Error('generateWorldBook: missing campaign');
   const startedAt = Date.now();
   const book = collectWorldBook(campaign, allSaves, opts);
   const d = new jsPDF({ unit: 'mm', format: 'a4', compress: true });
+  // Before any setFont — see generateCampaignPDF.js.
+  await registerBookFont(d, opts.loadFace);
   let pageN = 1;
   const generatedLabel = opts.now || new Date().toLocaleDateString('en-US');
   buildCover(d, book, generatedLabel);
