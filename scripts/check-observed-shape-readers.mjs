@@ -923,6 +923,72 @@ export function writeShapesIn(source, key) {
 }
 
 /**
+ * ⭐⭐ THE SAME FOUR SPELLINGS, BUT ONLY INSIDE THE OBJECT LITERAL THAT BUILDS `shape`.
+ *
+ * ⛔ THE HOLE THIS CLOSES, AND IT WAS FOUND BY A LANE TRYING TO ENROL AN HONEST ROW.
+ * `writeShapesIn` asks "does this file write this key ANYWHERE", and the fourth door's
+ * clause 1 asked exactly that — while its identities are `"<key> on <shape>"`, naming a
+ * shape the clause then ignored. Measured on `envoyChanceMeetingStage.js`, which only ever
+ * READS a grievance:
+ *
+ *     fromSid      -> "shorthand"  from `edgeForPair(regionalGraph, fromSid, toSid)`
+ *                                  an ARGUMENT LIST, not an object literal
+ *     incidentType -> "property"   from `metadata: { incidentType: text(...) }`
+ *                                  a RE-EMISSION of the value it had just read
+ *     toSid        -> none
+ *
+ * So a row naming the reader as its writer PASSED clause 1 for two of three keys, on the
+ * strength of its own read site. That is the citation law in the write direction: a token
+ * in an argument list is not a write, and a key re-emitted onto a DIFFERENT shape is not a
+ * write of THIS one. A door that convicts for the wrong reason is worse than one that
+ * refuses, because it blesses the next case silently.
+ *
+ * ⭐ THE FIX USES THE IDENTITY THE ROW ALREADY DECLARES. Spans are located on the EXECUTED
+ * source, so a comment or a receipt string can never mint one, and offsets are preserved —
+ * then each span's RAW bytes are probed, which keeps the documented clause-1 asymmetry
+ * intact (`token-in-string-literal` must see real quotes). Brace matching runs on the
+ * blanked text, so a `}` inside a string cannot unbalance it.
+ *
+ * ⚠ THE LOOKBEHIND ADMITS A DOT ON PURPOSE. A shape is most often built by member
+ * assignment (`receipt.grievance = {`) or as a nested property (`economicState: {`), so
+ * `(?<![.\w$])` — the guard the property probe correctly uses for KEYS — would reject the
+ * commonest real writer. `(?<![\w$])` still rejects a longer identifier that merely ends
+ * in the shape name.
+ *
+ * A shape this cannot locate yields NO spellings, so the row REFUSES rather than passes.
+ * That direction is deliberate: an unverifiable row is a lie, not an exemption.
+ *
+ * @param {string} source @param {string} key @param {string} shape
+ * @returns {string[]} the spellings found inside a `shape` literal, in declaration order
+ */
+export function writeShapesOnShapeIn(source, key, shape) {
+  if (typeof shape !== 'string' || !shape || /\s/.test(shape)) {
+    throw new Error(`observed-shape shape-scoped write probe requires a whitespace-free shape; received ${JSON.stringify(shape)}`);
+  }
+  const raw = String(source ?? '');
+  const executed = executedSourceOf(raw);
+  const opener = new RegExp(`(?<![\\w$])${escapeForRegExp(shape)}\\s*[:=]\\s*\\{`, 'g');
+  /** @type {Set<string>} */
+  const found = new Set();
+  for (const match of executed.matchAll(opener)) {
+    const open = /** @type {number} */ (match.index) + match[0].length - 1;
+    let depth = 0;
+    let close = -1;
+    for (let i = open; i < executed.length; i += 1) {
+      const ch = executed[i];
+      if (ch === '{') depth += 1;
+      else if (ch === '}') {
+        depth -= 1;
+        if (depth === 0) { close = i; break; }
+      }
+    }
+    if (close < 0) continue;
+    for (const spelling of writeShapesIn(raw.slice(open, close + 1), key)) found.add(spelling);
+  }
+  return WRITE_SHAPE_SPELLINGS.filter((spelling) => found.has(spelling));
+}
+
+/**
  * ⭐⭐⭐ M8 / M9 — THE EXPLAINED-WRITER BANK. THE STRUCTURAL POINT OF THIS
  * MINT, and the reason the previous four items were worth carrying with it.
  *
@@ -1608,6 +1674,33 @@ export const VIRTUAL_DORMANT_WRITERS = Object.freeze([
       + ' before it reads anything else.',
     charter: 'ODQ 768.3 (TE-OSHAPE-1) enrolling the row; ODQ 763.2-Q10 ruling the lighting',
   }),
+  Object.freeze({
+    identity: 'fromSid on grievance',
+    writer: 'src/domain/worldPulse/envoyChanceMeeting.js',
+    companion: 'src/domain/worldPulse/envoyChanceMeetingStage.js',
+    key: 'fromSid',
+    flag: 'chanceEncountersEnabled',
+    lighting: "ENC-3 (DESIGN_ENCOUNTERS §5.5, ruled §893.3). `chanceEncountersEnabled` is VIRTUAL: measured absent from DEFAULT_SIMULATION_RULES and from all SEVEN preset spreads, so it is false everywhere by ABSENCE and no corpus run can light it. The write is real and was EXECUTED to prove it: 360 lit runs (3 postures x 120 seeds) produced 5 `exposed` outcomes, each writing this grievance with exactly {fromSid, toSid, incidentType} -- the same three names the stage reads. ⚠ THE ARM WAS GENUINELY DEAD UNTIL §893: the stage's traveller projection omitted `band`, so no meeting could occur at all and the observed-shape corpus recorded a world in which this really was unreachable. That corpus reading was TRUE about the corpus and FALSE as an inference about the code; curing `band` is what let the write be observed. The gate is not in the writer BY DESIGN -- the leaf is PURE and the stage owns the ONE gate read, which that subsystem's own polarity census pins at exactly one site.",
+    charter: 'ODQ 768.3 (TE-OSHAPE-1) enrolling the row; §893.3 ruling the clause-2 companion widening and the clause-1 shape-scoping that had to land with it',
+  }),
+  Object.freeze({
+    identity: 'toSid on grievance',
+    writer: 'src/domain/worldPulse/envoyChanceMeeting.js',
+    companion: 'src/domain/worldPulse/envoyChanceMeetingStage.js',
+    key: 'toSid',
+    flag: 'chanceEncountersEnabled',
+    lighting: "ENC-3 (DESIGN_ENCOUNTERS §5.5, ruled §893.3). `chanceEncountersEnabled` is VIRTUAL: measured absent from DEFAULT_SIMULATION_RULES and from all SEVEN preset spreads, so it is false everywhere by ABSENCE and no corpus run can light it. The write is real and was EXECUTED to prove it: 360 lit runs (3 postures x 120 seeds) produced 5 `exposed` outcomes, each writing this grievance with exactly {fromSid, toSid, incidentType} -- the same three names the stage reads. ⚠ THE ARM WAS GENUINELY DEAD UNTIL §893: the stage's traveller projection omitted `band`, so no meeting could occur at all and the observed-shape corpus recorded a world in which this really was unreachable. That corpus reading was TRUE about the corpus and FALSE as an inference about the code; curing `band` is what let the write be observed. The gate is not in the writer BY DESIGN -- the leaf is PURE and the stage owns the ONE gate read, which that subsystem's own polarity census pins at exactly one site.",
+    charter: 'ODQ 768.3 (TE-OSHAPE-1) enrolling the row; §893.3 ruling the clause-2 companion widening and the clause-1 shape-scoping that had to land with it',
+  }),
+  Object.freeze({
+    identity: 'incidentType on grievance',
+    writer: 'src/domain/worldPulse/envoyChanceMeeting.js',
+    companion: 'src/domain/worldPulse/envoyChanceMeetingStage.js',
+    key: 'incidentType',
+    flag: 'chanceEncountersEnabled',
+    lighting: "ENC-3 (DESIGN_ENCOUNTERS §5.5, ruled §893.3). `chanceEncountersEnabled` is VIRTUAL: measured absent from DEFAULT_SIMULATION_RULES and from all SEVEN preset spreads, so it is false everywhere by ABSENCE and no corpus run can light it. The write is real and was EXECUTED to prove it: 360 lit runs (3 postures x 120 seeds) produced 5 `exposed` outcomes, each writing this grievance with exactly {fromSid, toSid, incidentType} -- the same three names the stage reads. ⚠ THE ARM WAS GENUINELY DEAD UNTIL §893: the stage's traveller projection omitted `band`, so no meeting could occur at all and the observed-shape corpus recorded a world in which this really was unreachable. That corpus reading was TRUE about the corpus and FALSE as an inference about the code; curing `band` is what let the write be observed. The gate is not in the writer BY DESIGN -- the leaf is PURE and the stage owns the ONE gate read, which that subsystem's own polarity census pins at exactly one site.",
+    charter: 'ODQ 768.3 (TE-OSHAPE-1) enrolling the row; §893.3 ruling the clause-2 companion widening and the clause-1 shape-scoping that had to land with it',
+  }),
 ]);
 
 /** Structural law for the fourth door's registry. Runs at module load. */
@@ -1620,7 +1713,8 @@ export function assertVirtualDormantWriters(entries = VIRTUAL_DORMANT_WRITERS) {
   const seen = new Set();
   for (const entry of entries) {
     const fields = Object.keys(entry || {}).sort().join(',');
-    if (fields !== 'charter,flag,identity,key,lighting,writer') {
+    if (fields !== 'charter,flag,identity,key,lighting,writer'
+      && fields !== 'charter,companion,flag,identity,key,lighting,writer') {
       throw new Error(`observed-shape virtual-dormant writer has noncanonical fields: ${JSON.stringify(entry)}`);
     }
     if (!/^\S+ on \S+$/.test(entry.identity)) {
@@ -1644,6 +1738,18 @@ export function assertVirtualDormantWriters(entries = VIRTUAL_DORMANT_WRITERS) {
     }
     if (!/^[a-z][A-Za-z0-9]*Enabled$/.test(entry.flag)) {
       throw new Error(`observed-shape virtual-dormant writer ${JSON.stringify(entry.identity)} must name a "<x>Enabled" simulation-rules flag; received ${JSON.stringify(entry.flag)}`);
+    }
+    // ⭐ THE COMPANION IS OPTIONAL BUT NEVER IMPLICIT. A row may declare that the gate
+    // lives in a DIFFERENT file from the write — see clause 2 — but it must NAME that
+    // file, so an unexplained split still convicts. Same src/ shape law as the writer,
+    // and it may not be the writer itself, which would be a row explaining nothing.
+    if (entry.companion !== undefined) {
+      if (!/^src\//.test(entry.companion) || !/\.(js|jsx)$/.test(entry.companion)) {
+        throw new Error(`observed-shape virtual-dormant writer ${JSON.stringify(entry.identity)} must name a repository-relative src/ companion; received ${JSON.stringify(entry.companion)}`);
+      }
+      if (entry.companion === entry.writer) {
+        throw new Error(`observed-shape virtual-dormant writer ${JSON.stringify(entry.identity)} names its own writer as its companion, which declares nothing; drop the field or name the gate's real home.`);
+      }
     }
     if (typeof entry.lighting !== 'string' || entry.lighting.trim().length < 80) {
       throw new Error(`observed-shape virtual-dormant writer ${JSON.stringify(entry.identity)} lacks a substantive LIGHTING CONDITION —`
@@ -1725,19 +1831,51 @@ export function assertVirtualDormantWriterEvidence(
     } catch {
       throw new Error(`observed-shape virtual-dormant writer ${JSON.stringify(entry.identity)} names a writer that cannot be read: ${entry.writer}`);
     }
-    const spellings = writeShapesIn(writerSource, entry.key);
+    // ⛔ CLAUSE 1 IS SHAPE-SCOPED, and it was not always: it used to ask whether the key
+    // appeared in ANY write shape anywhere in the file, which let a row name a pure READER
+    // as its writer and pass on its own read site (an argument list read as `shorthand`, a
+    // re-emission onto another shape read as `property`). The identity already names the
+    // shape; the clause now uses it. See `writeShapesOnShapeIn`.
+    const shape = entry.identity.slice(entry.identity.indexOf(' on ') + 4);
+    const spellings = writeShapesOnShapeIn(writerSource, entry.key, shape);
     if (!spellings.length) {
       throw new Error(`observed-shape virtual-dormant writer ${JSON.stringify(entry.identity)} is UNVERIFIABLE (clause 1):`
-        + ` ${entry.writer} no longer writes ${JSON.stringify(entry.key)} in any of the ${WRITE_SHAPE_SPELLINGS.length} measured`
-        + ` write shapes (${WRITE_SHAPE_SPELLINGS.join(', ')}). An unverifiable row is a lie, not an exemption.`);
+        + ` ${entry.writer} writes no ${JSON.stringify(entry.key)} INSIDE a ${JSON.stringify(shape)} literal, in any of the`
+        + ` ${WRITE_SHAPE_SPELLINGS.length} measured write shapes (${WRITE_SHAPE_SPELLINGS.join(', ')}).`
+        + ' A key written onto some other shape, or merely passed as an argument, is not a write of THIS'
+        + ' identity. An unverifiable row is a lie, not an exemption.');
     }
-    const gated = new RegExp(
+    // ⭐⭐ CLAUSE 2 ACCEPTS A GATE IN A NAMED COMPANION, BECAUSE A PURE LEAF SHOULD NOT
+    // CARRY A FLAG. The clause once required the gate in the writer itself, which assumed
+    // one file both writes the key and reads the flag. A better-built subsystem splits
+    // them: ENCOUNTERS has a PURE leaf that computes receipts and a STAGE that owns the
+    // one gate read. Under the old clause the only way to enrol such a row was to spell
+    // the flag inside the pure leaf — degrading the product to satisfy the tool, and
+    // reddening `characterDrift`-style closures plus that subsystem's own polarity census,
+    // which pins the gate at EXACTLY ONE site. Two instruments in tension means one has
+    // the narrower premise; this was the narrower one.
+    //
+    // ⚠ THE COMPANION MUST BE NAMED BY THE ROW. The gate is searched in the writer FIRST
+    // and in the companion only if the row declared one, so a split nobody wrote down
+    // still convicts exactly as before.
+    const gateRe = new RegExp(
       `\\b(?:rules|simulationRules)\\s*\\)?\\s*\\??\\.\\s*${escapeForRegExp(entry.flag)}\\s*===\\s*true`,
-    ).test(executedSourceOf(writerSource));
-    if (!gated) {
+    );
+    let gateHome = gateRe.test(executedSourceOf(writerSource)) ? entry.writer : '';
+    if (!gateHome && entry.companion) {
+      let companionSource;
+      try {
+        companionSource = readSource(entry.companion);
+      } catch {
+        throw new Error(`observed-shape virtual-dormant writer ${JSON.stringify(entry.identity)} names a companion that cannot be read: ${entry.companion}`);
+      }
+      if (gateRe.test(executedSourceOf(companionSource))) gateHome = entry.companion;
+    }
+    if (!gateHome) {
       throw new Error(`observed-shape virtual-dormant writer ${JSON.stringify(entry.identity)} is UNVERIFIABLE (clause 2):`
-        + ` ${entry.writer} carries no by-name strict \`${entry.flag} === true\` gate. A row may not claim a`
-        + ' gate no reader can find; spell it by name or retire the row.');
+        + ` neither ${entry.writer}${entry.companion ? ` nor its declared companion ${entry.companion}` : ''}`
+        + ` carries a by-name strict \`${entry.flag} === true\` gate. A row may not claim a`
+        + ' gate no reader can find; spell it by name, name the companion that holds it, or retire the row.');
     }
     let manifestSource;
     try {
@@ -1783,7 +1921,7 @@ export function assertVirtualDormantWriterEvidence(
         + ' observe the write from that moment and this read must be judged normally. Retire the row rather than'
         + ' outliving its own premise.');
     }
-    evidence.push({ identity: entry.identity, writer: entry.writer, flag: entry.flag, spellings });
+    evidence.push({ identity: entry.identity, writer: entry.writer, flag: entry.flag, spellings, gateHome });
   }
   return evidence;
 }

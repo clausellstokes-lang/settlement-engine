@@ -817,9 +817,18 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
     });
 
     test('the door CLEARS exactly its verified identities, and nothing else', () => {
+      // ⭐ FOUR IDENTITIES SINCE §893.3. The three ENCOUNTERS rows are the first to use the
+      // clause-2 COMPANION: their key is written by a PURE leaf that carries no flag, and the
+      // gate lives in the stage that reads it. They are enumerated rather than counted, so a
+      // fifth row cannot arrive unread — which is the whole point of a door that convicts.
       expect(live.virtualDormantWriters.applied).toBe(true);
-      expect(live.virtualDormantWriters.clearedIdentities).toEqual([REAL.identity]);
-      expect(live.virtualDormantWriters.cleared).toBe(1);
+      expect(live.virtualDormantWriters.clearedIdentities).toEqual([
+        'fromSid on grievance',
+        'incidentType on grievance',
+        'toSid on grievance',
+        REAL.identity,
+      ]);
+      expect(live.virtualDormantWriters.cleared).toBe(4);
       // …and the cleared read is really GONE from the post-filter findings, while the
       // raw scan still holds it — the door narrows the verdict, it does not blind the
       // detector.
@@ -842,7 +851,7 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
     });
 
     test('the notice names the door in both states', () => {
-      expect(virtualDormantWriterNotice(live.virtualDormantWriters)).toMatch(/cleared 1 read/);
+      expect(virtualDormantWriterNotice(live.virtualDormantWriters)).toMatch(/cleared 4 read/);
       expect(virtualDormantWriterNotice({ applied: false })).toMatch(/NOT APPLIED/);
     });
   });
