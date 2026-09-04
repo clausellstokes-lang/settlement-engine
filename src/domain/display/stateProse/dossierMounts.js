@@ -107,7 +107,8 @@ export const MOUNT_RUNGS = Object.freeze({
  * ── DESK CAR 2: THE POWER DESK, THE SIXTH POSITION ───────────────────────────────────
  * `powerStateProse.js` adds `power.legitimacyBanner` (DS-POW-1), `power.stabilityHeader`
  * (DS-POW-2), `power.criminalUnderside` (DS-POW-6), `power.succession` (DS-POW-4) and
- * `power.factionLadder` (DS-POW-3), each taking its block out of the dark list in the same
+ * `power.factionLadder` (DS-POW-3) and `power.rulingStructure` (DS-POW-5), each taking its
+ * block out of the dark list in the same
  * commit. ⚠ `power.factionLadder` is the first PER-FACTION position: it renders once per
  * faction inside the roster loop, which is still ONE position on the page-set — the row
  * says where the ladder speaks, not how many ladders a town has. Four of the
@@ -167,6 +168,9 @@ export const DOSSIER_MOUNTS = Object.freeze([
   Object.freeze({
     mount: 'power.factionLadder', tab: 'power', desk: 'power', blockId: 'DS-POW-3', rung: 'sentence',
   }),
+  Object.freeze({
+    mount: 'power.rulingStructure', tab: 'power', desk: 'power', blockId: 'DS-POW-5', rung: 'sentence',
+  }),
 ]);
 
 /**
@@ -195,7 +199,7 @@ export const UNMOUNTED_BLOCKS = Object.freeze([
   'DS-GEN-10', 'DS-HK-1', 'DS-GEN-11', 'DS-GEN-12',
   'DS-GEN-13', 'DS-GEN-14', 'DS-POP-3', 'DS-GEN-15',
   'DS-GEN-16', 'DS-GEN-17', 'DS-GEN-18',
-  'DS-POW-5', 'DS-POW-7',
+  'DS-POW-7',
   'DS-STR-1', 'DS-STR-2', 'DS-CND-1',
   'DS-WAR-1', 'DS-WAR-2', 'DS-WAR-3', 'DS-WAR-4',
   'DS-WAR-5', 'DS-FTH-1', 'DS-FTH-2', 'DS-FTH-3',

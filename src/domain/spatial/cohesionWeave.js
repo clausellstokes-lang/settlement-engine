@@ -239,6 +239,53 @@ export function structuralLens({ economicBase, governingArchetype, rulingPower }
   };
 }
 
+/**
+ * THE LENS, DERIVED FROM A SETTLEMENT — the one place that extraction lives.
+ *
+ * ⛔ WHY THIS EXISTS. `structuralLens` takes the two input STRINGS, so every caller has had
+ * to derive them itself, and `governingArchetypeOf` is currently a LOCAL helper in three
+ * worldPulse files. Two of those three (`armyTransitKernel`, `envoyNegotiationPictureBuilder`)
+ * are byte-identical to each other and answer a DIFFERENT question — a public-knowledge band
+ * collapsing to merchant/military/religious/other — so they are not feeders for this lens and
+ * are left alone. The third (`generosityKernel`) IS the feeder, and its semantics are
+ * transcribed here verbatim: the highest-power faction's `category`, which is exactly the key
+ * space `ARCHETYPE_TO_RULING` above is written against.
+ *
+ * A fourth copy was about to be written for the power desk, which is the point at which a
+ * duplicated derivation becomes a drift that ships. The extraction belongs where the
+ * vocabularies live, and this file is a pure zero-import leaf, so it costs nothing to reach.
+ *
+ * ⛔ IT DERIVES THE ARCHETYPE ONLY, AND THE ECONOMIC BASE IS DELIBERATELY NOT READ.
+ * `economicBaseOf` in `generosityKernel.js` reads three keys — `economicState.economicBase`,
+ * `config.economicBase`, `economicState.primaryIndustry` — and
+ * `check-observed-shape-readers` convicts ALL THREE as keys no writer produces. So
+ * `normalizeEconomicBase` has always received `''` on a generated world and has always
+ * failed soft to `mixed`: THE ECONOMIC-BASE AXIS OF THIS LENS HAS NEVER VARIED for any
+ * consumer. That is a pre-existing finding about the lens, not about this function, and it
+ * is raised rather than papered over.
+ * Reading those keys here would be a fresh DEAD READ, and passing the fail-soft `mixed`
+ * on to a reader as though it were a measurement would be a false statement about the town
+ * — so this derivation reads none of them and leaves the base at its documented default.
+ * TO CURE: give the economy generator a real economic-base field, then read it here once.
+ *
+ * @param {{powerStructure?: {factions?: ReadonlyArray<{power?: unknown, category?: unknown}>|null}|null
+ *   }|null|undefined} settlement
+ * @returns {StructuralLens} always a lens — the archetype mapper is total and fails soft
+ */
+export function structuralLensOf(settlement) {
+  const factions = Array.isArray(settlement?.powerStructure?.factions)
+    ? settlement.powerStructure.factions
+    : [];
+  let best = null;
+  let bestPower = -Infinity;
+  for (const f of factions) {
+    const p = typeof f?.power === 'number' && Number.isFinite(f.power) ? f.power : 0;
+    if (p > bestPower) { bestPower = p; best = f; }
+  }
+  const governingArchetype = String(best?.category || '');
+  return structuralLens({ governingArchetype });
+}
+
 // ── §I THE FACET LAW — the entity-classification CHOKEPOINT (owner-ratified 2026-07-14) ──
 // docs/DESIGN_COHESION_WEAVE.md §I: "DECLARED OVER INFERRED." Every coherence consumer that
 // must classify a CUSTOM entity resolves it HERE (declared ?? inferred ?? kind-default),
