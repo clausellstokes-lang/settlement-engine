@@ -11,6 +11,7 @@
  *             `powerStructure.criminalCaptureState` + `safetyProfile.criminalInstitutions`
  *   DS-POW-4  Power › Rule and succession — `coupContenders(settlement)` (as a READING) +
  *             `publicLegitimacy.govMultiplier`. Its lineage pools stay dark; see below.
+ *   DS-POW-3  Power › The Ladder — `ladderRungsOf` + `ladderInstabilityOf`, PER FACTION
  *
  * ── WHY THIS LEAF, AND WHY THIS BLOCK FIRST ──────────────────────────────────────────
  *
@@ -539,6 +540,103 @@ export function legitimacyHoldPoolKey(govMultiplier) {
  * TO LIGHT THEM: bank the explained-writer row naming `rulingPower.js` as the writer, then
  * add a lineage lens that takes the array as a READING from the caller.
  */
+
+/**
+ * ── DS-POW-3, THE LADDER — the first PER-FACTION block, and the first CONDITIONAL one ──
+ *
+ * Every other block this desk serves answers once per page. This one answers once per
+ * FACTION, because a ladder is a faction's internal order and a town has several. So it
+ * gets its own entry point (`powerLadderRung`) rather than a key on the page-wide return:
+ * folding a per-faction answer into a once-per-page object would have forced the caller to
+ * pick one faction and call it the town's, which is a claim the corpus never makes.
+ *
+ * ⚠ THIS BLOCK IS DARK AT BIRTH, AND THAT IS A SURFACE CONDITION RATHER THAN A DEFECT.
+ * `settlement.npcLadder` has NO generation-time writer — it is a play-time sidecar written
+ * by `worldPulse/npcLadderKernel.js`, and `ladderRead.js` returns empty for every reader
+ * when the mirror is absent, so PowerTab's ladder section hides itself
+ * (`hasLadder(s) && …`). Nothing degrades and nothing lies in a world without one.
+ * ⛔ THE DISTINCTION FROM THE LINEAGE POOLS ABOVE IS LOAD-BEARING. Those were a DEAD READ:
+ * the desk read a field no writer produces and the read would silently degrade to a
+ * default. This is a CONDITIONAL SURFACE: a real writer exists, the caller checks presence
+ * and hides. A played world is a real world, and a block that speaks only about lived
+ * history is describing the thing the product exists to produce.
+ * ⇒ Its aliveness proof therefore uses a SIMULATED fixture built by the kernel's own
+ * `mirrorOf` writer, never a birth fixture. A proof that it is silent at birth would be a
+ * DORMANCY proof, and a dormancy proof is indistinguishable from the four dead-arm
+ * pathologies this suite exists to refuse.
+ *
+ * ⚠ THE READINGS ARRIVE AS ARGUMENTS (the DS-POW-4 pattern, and for a second reason here):
+ * `ladderRungsOf`/`ladderInstabilityOf` are the canonical readers and PowerTab already
+ * calls both in its faction loop, so the desk takes their OUTPUTS. That also means this
+ * desk reads no `npcLadder` shape of its own and gains no observed-shape row.
+ */
+
+/** Fewer rungs than this is a ladder that is short because the faction is. JUDGMENT. */
+const SHALLOW_RUNGS_BELOW = 3;
+/** Churn tax at or above this reads as churning. JUDGMENT — no canonical cut exists. */
+const HIGH_INSTABILITY_FROM = 0.35;
+/** Top and runner-up within this standing gap are a crowded top rung. JUDGMENT. */
+const CROWDED_TOP_GAP = 0.08;
+/** Every adjacent pair at least this far apart reads as settled order. JUDGMENT. */
+const SETTLED_MIN_GAP = 0.15;
+
+/**
+ * DS-POW-3's pool key for ONE faction's ladder.
+ *
+ * The order is the corpus's own specificity, and each step is a different question: how
+ * MANY rungs there are at all, then whether the order is CHURNING, then — only for a
+ * settled ladder — how the standings SIT. A shallow ladder is tested first because the
+ * gap questions below it are meaningless on two rungs.
+ *
+ * The four cuts are JUDGMENTS and are vetoable: `LADDER_TUNING` carries STAND_MAX and a
+ * baseline but no band boundaries, so there was no canonical cut to reuse and inventing one
+ * silently would have been the worse move. Say "veto" to move any of them.
+ *
+ * @param {ReadonlyArray<{name?: unknown, standing?: unknown}>|null|undefined} rungs
+ *   ordered top-rung first, as `ladderRungsOf` returns them
+ * @param {unknown} instability the churn tax 0..1, as `ladderInstabilityOf` returns it
+ * @returns {string|null} null when there is no ladder to describe
+ */
+export function ladderPoolKey(rungs, instability) {
+  if (!Array.isArray(rungs) || rungs.length === 0) return null;
+  if (rungs.length < SHALLOW_RUNGS_BELOW) return 'shallow ladder (few rungs recorded)';
+  const churn = typeof instability === 'number' && Number.isFinite(instability) ? instability : 0;
+  if (churn >= HIGH_INSTABILITY_FROM) return 'high instability (churn at the top)';
+  const standing = rungs.map((r) => (typeof r?.standing === 'number' ? r.standing : 0));
+  if (standing[0] - standing[1] <= CROWDED_TOP_GAP) return 'crowded top rung, low instability';
+  const settled = standing.every((v, i) => i === 0 || standing[i - 1] - v >= SETTLED_MIN_GAP);
+  return settled ? 'low instability, long-held order' : 'clear top rung, low instability';
+}
+
+/**
+ * THE LADDER DESK, per faction. Returns one rung, or null where there is nothing to say.
+ *
+ * `{faction}` is MANDATORY here in a way it is not elsewhere: every one of DS-POW-3's
+ * sixteen variants names it, so a faction without a usable name renders NOTHING rather
+ * than degrading — there is no faction-free variant to fall back to, and the anchored
+ * liveness law makes that silence automatic rather than a special case.
+ *
+ * @param {PowerDeskSettlement|null|undefined} settlement
+ * @param {{factionName?: unknown, rungs?: ReadonlyArray<{name?: unknown, standing?: unknown}>|null,
+ *   instability?: unknown}} [reading] the caller's own `ladderRungsOf`/`ladderInstabilityOf`
+ * @param {{seed?: string, audience?: string}} [options]
+ * @returns {object|null}
+ */
+export function powerLadderRung(settlement, reading = {}, options = {}) {
+  const key = ladderPoolKey(reading.rungs, reading.instability);
+  if (!key) return null;
+  const faction = properFill(text(reading.factionName));
+  if (!faction) return null;
+  const slots = {
+    settlement: properFill(text(settlement?.name)),
+    faction,
+    // The top rung's holder. Absent or oddly-named ⇒ the six {npc} variants drop and the
+    // ten that never needed one still speak.
+    npc: properFill(text(reading.rungs?.[0]?.name)),
+  };
+  const line = readStateProse(CORPUS, 'DS-POW-3', key, { ...options, slots });
+  return legibilityRung(faction, line, []);
+}
 
 /**
  * THE DESK. Returns the two rungs the legitimacy banner draws, or null for each where the
