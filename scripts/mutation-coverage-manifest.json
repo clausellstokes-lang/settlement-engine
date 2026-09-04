@@ -66,6 +66,10 @@
       "kind": "mutation",
       "label": "dossier-mounts/a corpus block leaves the dark list with no mount"
     },
+    "tests/lint/goldenFreeze.walker.test.js": {
+      "kind": "mutation",
+      "label": "golden-freeze/the exclusion roster loses a spelling while reading as maintained"
+    },
     "tests/domain/bespokeStyleWallContract.test.js": {
       "kind": "uncovered"
     },
