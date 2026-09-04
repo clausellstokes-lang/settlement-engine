@@ -50,6 +50,8 @@ import { ENC_ENCOUNTERS_COUPLINGS } from './couplingRegistryEncounters.js';
 
 export {
   ENC2_MEETING_MARK_CONSUME_COUPLING,
+  ENC3_MEETING_EXPOSURE_WARINESS_COUPLING,
+  ENC3_MEETING_STAGE_INTERIOR_COUPLING,
   ENC_ENCOUNTERS_COUPLINGS,
 } from './couplingRegistryEncounters.js';
 

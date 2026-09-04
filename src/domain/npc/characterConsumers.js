@@ -80,6 +80,7 @@ import { riskAppetiteOf, traitsOf } from '../worldPulse/npcLadderGoals.js';
 import {
   AXIS_LEVELS,
   SPECTRUM_HALF_SPAN,
+  driftEntryOf,
   effectiveCharacter,
   positionValue,
 } from './characterDrift.js';
@@ -623,6 +624,57 @@ export function vettingTemperBand(chart) {
   if (value >= SPECTRUM_HALF_SPAN) return 'dutiful';
   if (value <= -SPECTRUM_HALF_SPAN) return 'self_serving';
   return 'ordinary';
+}
+
+// ── THE ENCOUNTERS SUPPLY (ENC-3) ─────────────────────────────────────────────
+//
+// ⭐ WHY THESE TWO LIVE HERE AND NOT ON THE CALLER. `tests/domain/npc/characterDrift.test.js`
+// STEP 1 says exactly one file outside the drift family may depend on `characterDrift.js`,
+// and this module is that file. Its `dependsOn` predicate has a MODULE-PATH arm, so the
+// import LINE convicts on its own, whatever symbol it names — a consumer cannot buy its way
+// out by importing a symbol that happens to be absent from `DRIFT_SYMBOLS`. So a new consumer
+// has exactly two lawful shapes: come through this door, or widen the closure. The chance
+// meeting stage comes through the door, and these are the two reads it needs.
+//
+// Both were already reachable here: `positionValue` was ALREADY imported by this module for
+// its own spectrum arithmetic, so the spectrum half of this supply is a re-export and not a
+// new reach into the family.
+
+/**
+ * THE SPECTRUM READ, re-exported for consumers that must score an authored position without
+ * importing the family. Pure over `AXIS_LEVELS`: it reads no world state, no chart and no
+ * drift map, and neutral / unknown / malformed all score 0 (a chart that cannot be understood
+ * makes no claim, never a guessed one).
+ */
+export { positionValue };
+
+/**
+ * THE SUBJECT-SCOPED DRIFT RECENCY READ — "was THIS soul taught inside the window?"
+ *
+ * ⛔⛔ THE SIGNATURE IS THE POINT, AND IT IS A CURE. The caller that needed this asked the
+ * question with a whole-map read plus a subject id, and then never used the id: it looped
+ * `Object.values(driftMap)` over EVERY soul in the world. A per-subject season cap became a
+ * world-wide lockout — one NPC taught anywhere refused every lesson everywhere — and no test
+ * could see it, because the refusal is silent and sits in front of the funnel. Handing out a
+ * map is what made that bug expressible. This read takes ONE identity and never sees a second
+ * soul's cells, so the same mistake has nowhere to live.
+ *
+ * @param {{ worldState?: unknown, wnpcId?: unknown, now?: unknown, within?: unknown }} [args]
+ * @returns {boolean} true when some axis of THIS subject was written inside `within` ticks
+ */
+export function driftTaughtWithin({ worldState, wnpcId, now, within } = {}) {
+  const window = num(within);
+  if (!(window > 0)) return false;
+  const at = num(now);
+  const entry = driftEntryOf(
+    /** @type {{ characterDrift?: unknown }} */ (asObject(worldState)),
+    String(wnpcId ?? ''),
+  );
+  for (const cell of Object.values(asObject(entry))) {
+    const updated = num(asObject(cell).updatedTick);
+    if (updated > 0 && at - updated < window) return true;
+  }
+  return false;
 }
 
 /**

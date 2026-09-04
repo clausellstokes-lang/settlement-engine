@@ -67,6 +67,7 @@ import {
   ES6A_DOUBLE_AGENT_LEAK_COUPLING,
   ESDA_COVERT_RIDER_COUPLING,
   ES_ESPIONAGE_COUPLINGS,
+  ENC3_MEETING_EXPOSURE_WARINESS_COUPLING,
   ENC_ENCOUNTERS_COUPLINGS,
   IN0A_PLANT_HANDOFF_COUPLING,
   IN0C_DISCLOSURE_SIGNING_CREDIT_COUPLING,
@@ -661,6 +662,12 @@ describe('CW-0 coupling registry', () => {
         GR4C_BREACH_CREDIBILITY_COUPLING,
         IN0A_PLANT_HANDOFF_COUPLING,
         ESDA_COVERT_RIDER_COUPLING,
+        // ENC-3 is the SEVENTH, and the first on this direction owned by ENCOUNTERS: the
+        // host court's own wariness read sharpens the die that decides whether a REFUSED
+        // approach is spoken of. It sits LAST because COUPLING_REGISTRY composes the
+        // ENCOUNTERS leaf after ESPIONAGE, and the legacy first-row seat below is unchanged
+        // — which is the property this test is named for.
+        ENC3_MEETING_EXPOSURE_WARINESS_COUPLING,
       ]);
     expect(couplingRowFor('CPL-19', 'INFO→GRAMMAR')).toBe(WR7_MOVING_PICTURE_COUPLING);
     // IN-0C's disclosure credit is the SECOND read on this direction and the first owned by

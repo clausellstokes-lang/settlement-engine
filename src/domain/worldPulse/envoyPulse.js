@@ -40,6 +40,7 @@ import {
   resolveMaturedParlays,
   resolveStartInterceptions,
 } from './envoyInterceptionStage.js';
+import { advanceChanceMeetings, dropStaleMeetingLedgers } from './envoyChanceMeetingStage.js';
 import { envoyNewsEntries } from './envoyNews.js';
 import { rosterPersonById } from './envoyCasting.js';
 import { makeCredibilityWeightFn } from './informationStatecraft.js';
@@ -130,9 +131,23 @@ export function advanceEnvoyDiplomacyPulse({
   simulationRules = null,
   commissionedPlants = [],
 } = {}) {
+  // ⛔ ENC-3 — THE DROP PASS, AND IT RUNS ABOVE THIS FUNCTION'S OWN EARLY RETURN.
+  //
+  // `envoyChanceMeetingLedger.js` requires its one-tick ledger's drop pass to run BEFORE
+  // the chance-encounters flag is read, or a world lit today and darkened tomorrow keeps
+  // its last deposits forever. That header could not see this file: the meeting stage
+  // mounts after stage (4), which is BELOW the `envoyDiplomacyActive` return just here —
+  // so `chanceEncountersEnabled` was only ever the SECOND gate over that pass, and a world
+  // that darkened `envoyDiplomacyEnabled` leaked `meetingMarkEvents` with the namespace
+  // unable to drain. The same P-7 bug, one gate further out; cured by running the pass
+  // above BOTH gates.
+  //
+  // It is byte-identical on a never-lit world (no prior ⇒ `changed: false` ⇒ the same
+  // reference), and idempotent, so the stage may call it again as its own first act.
+  const meetingLedgers = dropStaleMeetingLedgers({ worldState, tick });
   if (!envoyDiplomacyActive(worldState)) {
     return {
-      worldState,
+      worldState: meetingLedgers.changed ? meetingLedgers.worldState : worldState,
       regionalGraph,
       wizardNews,
       settlementUpdates,
@@ -151,7 +166,7 @@ export function advanceEnvoyDiplomacyPulse({
     };
   }
 
-  let state = worldState;
+  let state = meetingLedgers.worldState;
   const evidence = [];
 
   // WR-7b (1) — THE PAID PLANT'S TARGET. Attaching an exact envoy-picture target
@@ -195,6 +210,38 @@ export function advanceEnvoyDiplomacyPulse({
   const parlays = resolveMaturedParlays({ worldState: state, tick, season });
   state = parlays.worldState;
   evidence.push(...parlays.evidence);
+
+  // WR-7b (5) / ENC-3 — THE CHANCE MEETING. Mounted HERE, and the position is load-bearing
+  // in three directions. It reads the SAME pre-mutation cut the army stages read (K3), so
+  // two named people cannot meet on an errand that stage (2) already moved. It runs BEFORE
+  // `advanceEnvoyErrands`, because the advance turns an arrived diplomat into `parlaying`
+  // on the persisted row and the projection would then refuse him — THIS tick he is
+  // `travelling` and arrived, and this is his one chance to meet. And it spends NO errand
+  // transition at all, so the one-transition law the army column depends on is untouched.
+  //
+  // ⛔ THE CUT IS FILTERED BY JSON IDENTITY, which is what makes the K3 claim true rather
+  // than merely intended: a row an earlier stage moved this tick is no longer identical to
+  // its start-of-tick self and is dropped before the census sees it. That is the whole
+  // priority rule against `field_parlay`, `war_continue` and `private_goal` — by ORDER,
+  // structurally, with no PRIORITY table entry to keep in step.
+  const currentById = new Map(envoyErrandsOf(state).map((row) => [String(row?.id || ''), row]));
+  const untouchedStartErrands = cut.startErrands.filter((row) => {
+    const current = currentById.get(String(row?.id || ''));
+    return current !== undefined && JSON.stringify(current) === JSON.stringify(row);
+  });
+  const meetings = advanceChanceMeetings({
+    worldState: state,
+    // ⚠ `regionalGraph` and `settlementUpdates` BY THEIR ORIGINAL NAMES, not the `graph`
+    // and `updates` bindings: those are `let`s declared BELOW the advance, so naming them
+    // here is a temporal dead zone and throws on every lit run. Neither has been reassigned
+    // at this point in the pass, so the originals are the same values.
+    snapshot: snapshotWithUpdates(snapshot, settlementUpdates, state, regionalGraph),
+    regionalGraph,
+    startErrands: untouchedStartErrands,
+    errands: cut.startErrands,
+    tick,
+  });
+  state = meetings.worldState;
 
   const beforeAdvance = state;
   const reservedSilenceTargets = new Set();

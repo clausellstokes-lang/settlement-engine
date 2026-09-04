@@ -38,11 +38,13 @@ import {
   corruptibleAxisByDepth,
   corruptionVectorByDepth,
   derivedAlignment,
+  driftTaughtWithin,
   effectiveAxesOf,
   effectiveDescriptors,
   riskRegister,
   vettingTemperBand,
 } from '../../../src/domain/npc/characterConsumers.js';
+import { CHARACTER_DRIFT_KEY } from '../../../src/domain/npc/characterDrift.js';
 import { NPC_ALIGNMENTS } from '../../../src/domain/npc/npcFacetContract.js';
 import { CORRUPTION_VECTORS, corruptibility, npcCorruptibleFlaw, npcCorruptibleVector }
   from '../../../src/domain/corruption.js';
@@ -805,5 +807,82 @@ describe('F10 — THE ALIGNMENT CENSUS, and the cache declared with its reconcil
       'src/domain/worldPulse/settlementPolitics.js',
       'src/domain/worldPulse/warSeatBooks.js',
     ]);
+  });
+});
+
+describe('driftTaughtWithin — THE SUBJECT-SCOPED RECENCY READ (ENC-3 supply)', () => {
+  // ⛔⛔ THIS SUITE EXISTS BECAUSE THE BUG IT CATCHES SHIPPED AND NO GATE SAW IT.
+  //
+  // The chance-meeting stage caps how often one soul may be taught by a chance
+  // meeting. Its first implementation took the WHOLE drift map plus a subject id,
+  // and then looped `Object.values(driftMap)` — every soul in the world — while
+  // never reading the id it was handed. So the per-subject season cap answered a
+  // world-wide question: if ANY npc anywhere had been taught inside the window,
+  // EVERY chance meeting in the world was refused its lesson. In a populated world
+  // that is very nearly always true, so the whole `met_a_foreigner` experience was
+  // dead on arrival — silently, in front of the funnel, with every test green.
+  //
+  // The cure is structural, not a patch: the read takes ONE identity and never sees
+  // a second soul's cells. THE TEST THAT WOULD HAVE CAUGHT IT is the two-subject
+  // one below, and it is the reason the signature changed shape.
+  const WINDOW = 13;
+  const NOW = 105;
+  /** Two souls in ONE world: `taught` was written inside the window, `untaught` never. */
+  const TWO_SUBJECTS = Object.freeze({
+    [CHARACTER_DRIFT_KEY]: {
+      taught: { MERCY: { offset: -2, updatedTick: 100 } },
+      untaught: { MERCY: { offset: -2, updatedTick: 10 } },
+    },
+  });
+
+  test('⭐ TWO SUBJECTS, ONE WORLD: a soul taught recently does not lock out a soul who was not', () => {
+    // The convicting pair. Under the world-wide scan BOTH of these read `true`,
+    // because `taught` is in the same map; only a subject-scoped read separates them.
+    expect(driftTaughtWithin({
+      worldState: TWO_SUBJECTS, wnpcId: 'taught', now: NOW, within: WINDOW,
+    })).toBe(true);
+    expect(driftTaughtWithin({
+      worldState: TWO_SUBJECTS, wnpcId: 'untaught', now: NOW, within: WINDOW,
+    })).toBe(false);
+    // ANCHORED, so the `false` above is a fact about the SUBJECT and not about a
+    // world that turned out to be empty, a key that was misspelled, or a window
+    // that refuses everything: the map really does hold both souls, and the read
+    // really can say `true` about this very world.
+    expect(Object.keys(TWO_SUBJECTS[CHARACTER_DRIFT_KEY]).sort()).toEqual(['taught', 'untaught']);
+  });
+
+  test('a soul this world has never heard of reads false rather than throwing', () => {
+    expect(driftTaughtWithin({
+      worldState: TWO_SUBJECTS, wnpcId: 'no_such_soul', now: NOW, within: WINDOW,
+    })).toBe(false);
+    // total on garbage, like every other read on this seam
+    expect(driftTaughtWithin({ worldState: null, wnpcId: 'taught', now: NOW, within: WINDOW })).toBe(false);
+    expect(driftTaughtWithin()).toBe(false);
+  });
+
+  test('the window is a STRICT age comparison, and a non-positive window refuses everything', () => {
+    // `taught` was written at 100. At now=113 the age is exactly the window (13) and
+    // the cap has expired; at 112 it has not. Both sides of the boundary are pinned,
+    // so a later `<=`/`<` slip cannot pass.
+    expect(driftTaughtWithin({ worldState: TWO_SUBJECTS, wnpcId: 'taught', now: 112, within: WINDOW })).toBe(true);
+    expect(driftTaughtWithin({ worldState: TWO_SUBJECTS, wnpcId: 'taught', now: 113, within: WINDOW })).toBe(false);
+    // A zero or negative cadence is not "refuse nothing"; it is "there is no window".
+    expect(driftTaughtWithin({ worldState: TWO_SUBJECTS, wnpcId: 'taught', now: NOW, within: 0 })).toBe(false);
+    expect(driftTaughtWithin({ worldState: TWO_SUBJECTS, wnpcId: 'taught', now: NOW, within: -1 })).toBe(false);
+  });
+
+  test('⛔ THE STAGE TAKES THIS READ THROUGH THE DOOR AND HOLDS NO MAP OF ITS OWN', () => {
+    // The habitat claim, asserted rather than trusted: the stage must not have kept a
+    // whole-map read anywhere. If either name comes back into that file the
+    // world-wide scan can be written again.
+    const stage = readFileSync(
+      join(REPO_ROOT, 'src/domain/worldPulse/envoyChanceMeetingStage.js'), 'utf8',
+    );
+    expect(stage.length).toBeGreaterThan(5000);          // anchored: the real file
+    expect(stage).toContain('driftTaughtWithin');
+    // anchored: the toContain above proves this haystack is the live stage and still holds the door's read
+    expect(stage).not.toContain('characterDriftOf');
+    // anchored: same haystack, proved non-empty and correctly loaded by the toContain above
+    expect(stage).not.toContain('taughtRecently');
   });
 });

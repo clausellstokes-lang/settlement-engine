@@ -852,6 +852,15 @@ export const NON_OVERLAP_BLOCKED_KINDS = Object.freeze(
  */
 export const ADAPTER_HOMED_ELSEWHERE = Object.freeze({
   faith_milieu: 'src/domain/worldPulse/faithWitnessSource.js#faithWitnessEntries',
+  // ENC-3. The chance-meeting adapter is homed in the STAGE and not here, for the same
+  // reason the faith one is homed in its witness leaf: the vector is a function of the
+  // RECEIPT — which two charts met, and on which axes they differ — so only the module
+  // that resolved the meeting can build it. Homing it here would mean re-deriving the
+  // meeting inside the sources leaf, which is a second resolution of the same event.
+  // ⛔ The row, this entry and the stage's exported symbol are ONE COMMIT: the load-time
+  // reconciliation below throws at MODULE EVALUATION for a receipted kind with no
+  // adapter, and seven importers go down with it.
+  met_a_foreigner: 'src/domain/worldPulse/envoyChanceMeetingStage.js#chanceMeetingLessonEntries',
 });
 
 /**

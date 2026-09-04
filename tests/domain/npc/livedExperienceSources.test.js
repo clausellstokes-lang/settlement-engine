@@ -121,7 +121,7 @@ describe('THE REGISTRY — one row per receipted kind, and the law is a load-tim
     for (const kind of elsewhere) expect(ADAPTED_EXPERIENCE_KINDS, kind).not.toContain(kind);
     // …and the out-of-leaf column is SMALL and NAMED, so it cannot quietly become
     // the place adapters go to avoid being written.
-    expect(elsewhere).toEqual(['faith_milieu']);
+    expect(elsewhere).toEqual(['faith_milieu', 'met_a_foreigner']);
     expect(LIVED_EXPERIENCE_SOURCES.length).toBe(18);
     // One row per kind: a duplicate would make SOURCE_ADAPTER_OF silently drop one.
     expect(Object.keys(SOURCE_ADAPTER_OF).length).toBe(LIVED_EXPERIENCE_SOURCES.length);
@@ -661,7 +661,16 @@ describe('DARK BY CONSTRUCTION — the closure, amended for this car', () => {
     // words. It is a FAMILY MEMBER, not a production caller: nothing imports it, and
     // the drift family's own closure walker enrols it and asserts that. The set stays
     // exact, so the next namer still reds.
-    expect(importers.sort()).toEqual(['src/domain/npc/characterReadModel.js']);
+    // AMENDED BY ENC-3 — and this is the arrival the walker was waiting for. L3 said a
+    // red here would be car L4's act and L4 said "the pulse call site is L5's"; what
+    // actually arrived first is the ENCOUNTERS stage, which is the funnel's FIRST
+    // PRODUCTION CALLER. It calls `foldLivedExperience` once per pass and supplies the
+    // per-receipt vector; it imports nothing else from the family. The set stays EXACT,
+    // so the next namer still reds.
+    expect(importers.sort()).toEqual([
+      'src/domain/npc/characterReadModel.js',
+      'src/domain/worldPulse/envoyChanceMeetingStage.js',
+    ]);
   });
 
 /**

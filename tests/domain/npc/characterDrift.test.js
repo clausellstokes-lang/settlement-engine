@@ -640,10 +640,27 @@ const dependsOn = (text, moduleRe, symbols) => (
      * nobody in src — pinned two tests below, so the darkness claim still holds
      * through it.
      */
+    /**
+     * ⭐ THE FIFTH ROW — the chance-meeting stage (ENC-3), enrolled deliberately.
+     *
+     * The stage needs two reads: the SPECTRUM score of an authored position, and
+     * "was this one soul taught inside the season window?" (its lesson cadence cap).
+     * It first took both by importing `characterDrift.js` directly, which STEP 1
+     * convicted on the module-path arm. It now takes both from the door, which is
+     * the shape STEP 1 exists to force, so the row is an enrolment and not a
+     * loosening: the closure still says exactly one file reaches the family.
+     *
+     * ⛔ AND THE REWIRE CURED A LIVE BUG, which is why the supplier is subject-scoped.
+     * The stage's own helper took the whole drift map plus a subject id and then
+     * never read the id — it scanned every soul in the world — so a per-subject cap
+     * silently became a world-wide lesson lockout. `driftTaughtWithin` takes ONE
+     * identity and cannot express that mistake. See the door's note beside it.
+     */
     const DOOR_CONSUMERS = [
       'src/domain/ai/personaSlicer.js',
       'src/domain/npc/acceptanceCharacterReads.js',
       'src/domain/worldPulse/clergyTraitPlane.js',
+      'src/domain/worldPulse/envoyChanceMeetingStage.js',
       'src/domain/worldPulse/espionage/espionageTap.js',
     ];
     const files = jsFilesUnder(join(REPO_ROOT, 'src'));
