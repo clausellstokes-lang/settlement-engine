@@ -227,7 +227,7 @@ describe('SP-6 phrased-kind registry — WR-4 war costs', () => {
   });
 
   test.each(WAR_COST_KIND_REGISTRY)(
-    '$kind retains the five receipt-annex families verbatim',
+    '$kind retains its receipt-annex families verbatim',
     (row) => {
       const rendered = renderedPool(row);
       const annex = annexPool(row.kind);

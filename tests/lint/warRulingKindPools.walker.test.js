@@ -111,7 +111,7 @@ describe('SP-6 phrased-kind registry — WR-5 war rulings', () => {
   });
 
   test.each(WAR_RULING_KIND_REGISTRY)(
-    '$kind retains the five annex families without editorial cross-references',
+    '$kind retains its annex families without editorial cross-references',
     (row) => {
       const rendered = row.pool.map((variant) => (
         typeof variant === 'function' ? String(variant(INTERP)) : String(variant)
