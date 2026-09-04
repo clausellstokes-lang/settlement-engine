@@ -179,6 +179,11 @@ export const WAR_RECEIPTS = Object.freeze({
     'A town that has lost its wars and prays for rain is not made warlike by being asked.',
     'The court could be pressed and would not move; the ledger explains why before anyone asks.',
     'The contradiction is visible rather than silent: the warlike reading yields nothing, and every record behind that judgment is on the sheet.',
+    (x) => `The sheet names every input (the ${x.temple}'s calendar, the book of losses, the town's temper), and each of them argues the other way.`,
+    (x) => `Press the town again next season and the read returns the same nothing, unless the ${x.temple} changes hands.`,
+    (x) => `Somebody wanted a war out of ${x.settlement} and went looking for the temper to build it on; the sheet is what they found.`,
+    (x) => `The drill ground at ${x.settlement} is pasture most of the year, and the reeve rents it out.`,
+    (x) => `A war culture is built rather than asked for, and nothing in ${x.settlement}'s book has been building one.`,
   ],
   // WR-3 LINEAGE CLAIM. The five governed kinds are copied from the receipt
   // annex. A parent/child name is interpolated only where the selected family
@@ -229,6 +234,7 @@ export const WAR_RECEIPTS = Object.freeze({
     'Terms that would have been signed in the spring are refused by the harvest, on no better evidence.',
     'Believing you are winning is expensive; the court has begun to pay for it.',
     (x) => `It is said the enemy is spent ${x.band}. The couriers who say so have been a fortnight on the road.`,
+    (x) => `The lenders of ${x.settlement} have begun advancing against the victory, which is the surest sign the hall has convinced somebody.`,
   ],
   war_trajectory_losing: [
     (x) => `${x.settlement}'s court believes the war is going against it, and the belief moves faster than the news.`,
@@ -236,6 +242,7 @@ export const WAR_RECEIPTS = Object.freeze({
     'Every report is read for the worst line in it.',
     (x) => `They may be wrong. They are certainly frightened, and the ${x.term} they draft will show it.`,
     'A court that believes it is losing will sign what a court that is losing would not.',
+    'The plate is going inland by cart, and the town has counted every cart.',
   ],
   home_front_roads: [
     (x) => `${x.route} has gone to ruts while the levies were away, and the tolls have gone with it.`,
@@ -285,6 +292,11 @@ export const WAR_RECEIPTS = Object.freeze({
     'The belief is honest and wrong, which is the most expensive combination there is.',
     'The terms about to be drafted rest on a report the world has already overtaken.',
     'Nobody in that hall is wrong on purpose, which will be no comfort to anyone afterward.',
+    (x) => `The clerk at ${x.settlement} entered the report exactly as it came, correctly, and the entry has been wrong ever since.`,
+    (x) => `Every offer ${x.settlement}'s hall prices this season is priced against a country that is no longer there.`,
+    (x) => `One arrival from the field closes the gap at ${x.settlement}, and nothing else in the world will.`,
+    'The captains who could correct the hall are the ones the hall has not heard from.',
+    (x) => `Carters through ${x.counterpart} have carried the truer picture for a season, and nobody at ${x.settlement} thought to ask them.`,
   ],
   // WR-5 THE TWO BOOKS + THE POLITICAL LOOP. These fourteen kinds are copied
   // from the war receipt annex. The section-eight parentheticals in the source
@@ -366,6 +378,7 @@ export const WAR_RECEIPTS = Object.freeze({
     'A coup that does not bind its successor was a coup for nothing.',
     'The demand is written where the succession is written, and the next re-read must answer it.',
     'He holds the hall, and the hall holds a receipt.',
+    (x) => `Should ${x.npc} read the war some other way, the hall that opened for him is still a door.`,
   ],
   successor_repudiates_war: [
     (x) => `${x.npc} came to the seat, read the war again, and the levies are coming home.`,

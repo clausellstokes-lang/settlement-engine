@@ -34,6 +34,26 @@ const EXPECTED = Object.freeze([
   ['war_dissolved_by_verdict', 'major', 'public', 'adjudication'],
 ]);
 
+/**
+ * ⭐ THE FIXED FIVE IS THE DEFAULT, AND EVERY DEPARTURE FROM IT IS NAMED HERE.
+ *
+ * Thirteen of these fourteen pools are still at CR-FP-7's fixed five. `1e8bf8a87` (THE
+ * CHRONIC-TIER DEEPENING) authored `succession_demand_inherited` to the notable floor of
+ * six in the annex and the wiring step was never taken; it is taken now, so the walker
+ * measures an EXACT per-kind depth rather than a blanket literal. A pool that grows or
+ * shrinks by one still reds — the exception is a value a reviewer can see, not a bound.
+ *
+ * ⚠ THE TWO `test.each` TITLES BELOW STILL SAY "the five annex families" / "all five
+ * structural families", DELIBERATELY. The first is the exact key of a census row in
+ * `scripts/.test-ratchet-baseline.json` and of `WALKER_ROWS_ADMITTED` in
+ * tests/lint/testRatchet.test.js; renaming it in the curing commit would change the identity
+ * the chair removes by exact match, in the same act that removes it. THE RENAME IS OWED TO
+ * THAT LANDING ACT — deliberately deferred and written down, not a bug to re-find.
+ */
+const FIXED_FIVE = 5;
+const DEEPENED_DEPTH = Object.freeze({ succession_demand_inherited: 6 });
+const depthOf = (kind) => DEEPENED_DEPTH[kind] ?? FIXED_FIVE;
+
 const INTERP = Object.freeze({
   settlement: 'Ashford',
   counterpart: 'Eastvale',
@@ -66,11 +86,16 @@ describe('SP-6 phrased-kind registry — WR-5 war rulings', () => {
   test('the fourteen-kind census and every governed join are exact', () => {
     expect(WAR_RULING_KINDS).toEqual(EXPECTED.map(([kind]) => kind));
     expect(WAR_RULING_KIND_REGISTRY).toHaveLength(14);
+    // The named exception cannot rot into a slot for a kind that no longer exists, and the
+    // default cannot quietly become the whole law: exactly one kind departs the fixed five.
+    expect(Object.keys(DEEPENED_DEPTH).filter((kind) => !WAR_RULING_KINDS.includes(kind))).toEqual([]);
+    expect(WAR_RULING_KIND_REGISTRY.filter((row) => row.pool.length !== FIXED_FIVE).map((row) => row.kind))
+      .toEqual(Object.keys(DEEPENED_DEPTH));
     for (const [kind, significance, audience, section] of EXPECTED) {
       const row = WAR_RULING_KIND_REGISTRY.find((candidate) => candidate.kind === kind);
       expect(row).toMatchObject({ kind, significance, audience, section });
-      expect(row.pool).toHaveLength(5);
-      expect(row.requiredSlots).toHaveLength(5);
+      expect(row.pool).toHaveLength(depthOf(kind));
+      expect(row.requiredSlots).toHaveLength(depthOf(kind));
       expect(Object.isFrozen(row)).toBe(true);
       expect(Object.isFrozen(row.requiredSlots)).toBe(true);
       expect(WHAT_PHRASES[kind]).toBeTruthy();
@@ -97,7 +122,7 @@ describe('SP-6 phrased-kind registry — WR-5 war rulings', () => {
       // `[live, verbatim]` tags; the annex's own per-row requiredSlots is the orthogonal
       // witness that the filter took the right five rows in the right order.
       if (annex.requiredSlots) expect(annex.requiredSlots).toEqual(row.requiredSlots);
-      expect(new Set(rendered).size).toBe(5);
+      expect(new Set(rendered).size).toBe(depthOf(row.kind));
       for (const line of rendered) {
         expect(line).toBe(line.trim());
         expect(line).not.toMatch(/\d|%|×|_|\$\{|\bundefined\b|\bNaN\b/);
@@ -112,7 +137,7 @@ describe('SP-6 phrased-kind registry — WR-5 war rulings', () => {
         warRulingReceipt(row.kind, `wr-five:${index}`, INTERP)
       ));
       expect(receipts.every(Boolean)).toBe(true);
-      expect(new Set(receipts.map((receipt) => receipt.familyId)).size).toBe(5);
+      expect(new Set(receipts.map((receipt) => receipt.familyId)).size).toBe(depthOf(row.kind));
       expect(warRulingReceipt(row.kind, 'same', INTERP))
         .toEqual(warRulingReceipt(row.kind, 'same', INTERP));
     },

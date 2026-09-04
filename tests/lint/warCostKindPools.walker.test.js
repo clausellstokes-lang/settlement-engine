@@ -33,16 +33,49 @@ const EXPECTED = Object.freeze([
   Object.freeze({ kind: 'trajectory_misread', significance: 'routine', audience: 'dm-only', section: 'war' }),
 ]);
 
+/**
+ * ⭐ THE AUTHORED DEPTH OF EACH POOL, PINNED PER KIND — the fixed five is gone.
+ *
+ * These nine pools used to be asserted at a hard-coded FIVE in three separate arms. That
+ * literal was not a law: it was CR-FP-7's fixed-five class, and `1e8bf8a87` (THE
+ * CHRONIC-TIER DEEPENING) authored the frequency-scaled depth the floor table actually
+ * owes — notable → 6, routine → 8 — into the annex while its wiring step was never taken.
+ * The wiring is now taken, so the pin is an EXACT per-kind map rather than a bound: a pool
+ * that grows OR shrinks by one reds here, exactly as the blanket five did, and a kind
+ * missing from this map fails closed (`toHaveLength(undefined)` throws).
+ *
+ * ⚠ THE FOUR `test.each` TITLES BELOW STILL SAY "the five receipt-annex families", AND THAT
+ * IS DELIBERATE, NOT AN OVERSIGHT. Three of them are the exact keys of census rows in
+ * `scripts/.test-ratchet-baseline.json` and of `WALKER_ROWS_ADMITTED` in
+ * tests/lint/testRatchet.test.js; renaming them in the curing commit would change the
+ * identity the chair removes by exact match, in the same act that removes it. THE RENAME IS
+ * OWED TO THAT LANDING ACT — deliberately deferred and written down, not a bug to re-find.
+ */
+const EXPECTED_DEPTH = Object.freeze({
+  war_trajectory_winning: 6,
+  war_trajectory_losing: 6,
+  home_front_roads: 5,
+  home_front_stores: 5,
+  home_front_hands: 5,
+  home_front_institutions: 5,
+  home_front_markets: 5,
+  winning_abroad_losing_at_home: 5,
+  trajectory_misread: 10,
+});
+
 const EXPECTED_SLOTS = Object.freeze({
-  war_trajectory_winning: [['settlement'], ['fieldReport'], ['offerHistory'], [], ['fieldReport', 'band', 'courierDelay']],
-  war_trajectory_losing: [['settlement', 'newsLag'], [], ['fieldReport'], ['term'], []],
+  war_trajectory_winning: [['settlement'], ['fieldReport'], ['offerHistory'], [], ['fieldReport', 'band', 'courierDelay'],
+    ['settlement', 'lenderAdvances']],
+  war_trajectory_losing: [['settlement', 'newsLag'], [], ['fieldReport'], ['term'], [], ['plateRemoval']],
   home_front_roads: [['route', 'tollLoss'], ['causewayNeglect'], [], ['bridgeDamage'], ['settlement', 'band']],
   home_front_stores: [['settlement', 'band', 'granary'], ['seedGood'], [], [], ['breadSupply']],
   home_front_hands: [['settlement', 'band'], ['harvestLabor'], ['smithMuster'], ['npc'], []],
   home_front_institutions: [['settlement', 'courtOffice'], ['temple', 'school'], [], ['courtOffice'], []],
   home_front_markets: [['house', 'settlement'], ['wharfLabor'], ['good'], [], ['tollLoss']],
   winning_abroad_losing_at_home: [['settlement', 'counterpart', 'band', 'storesEvidence', 'occupation'], ['marketAccount'], ['breadPrice'], ['compoundLoss'], []],
-  trajectory_misread: [['fieldReport'], ['settlement'], [], ['draftedTerms'], ['intentEvidence']],
+  trajectory_misread: [['fieldReport'], ['settlement'], [], ['draftedTerms'], ['intentEvidence'],
+    ['settlement', 'clerkEntry'], ['settlement', 'offerHistory'], ['settlement', 'fieldReport'],
+    ['courierDelay'], ['settlement', 'counterpart', 'carterTestimony']],
 });
 
 const INTERP = Object.freeze({
@@ -77,6 +110,10 @@ const INTERP = Object.freeze({
   compoundLoss: 'the three-source loss receipt',
   draftedTerms: 'the current draft terms',
   intentEvidence: 'the court testimony',
+  lenderAdvances: 'the lending house ledger',
+  plateRemoval: 'the cart tally at the gate',
+  clerkEntry: 'the clerk\'s entry book',
+  carterTestimony: 'the carters\' account',
 });
 
 const NOW = '2026-01-01T00:00:00.000Z';
@@ -115,11 +152,14 @@ describe('SP-6 phrased-kind registry — WR-4 war costs', () => {
   test('the nine-kind census, metadata, truth slots, and reader joins are exact', () => {
     expect(WAR_COST_KINDS).toEqual(EXPECTED.map((row) => row.kind));
     expect(WAR_COST_KIND_REGISTRY).toHaveLength(9);
+    // The depth map is a census of its own: a kind added or renamed must appear here, or
+    // the per-kind `toHaveLength` below would silently be handed `undefined`.
+    expect(Object.keys(EXPECTED_DEPTH)).toEqual(WAR_COST_KINDS);
 
     for (const expected of EXPECTED) {
       const row = WAR_COST_KIND_REGISTRY.find((candidate) => candidate.kind === expected.kind);
       expect(row).toMatchObject(expected);
-      expect(row.pool).toHaveLength(5);
+      expect(row.pool).toHaveLength(EXPECTED_DEPTH[row.kind]);
       expect(row.requiredSlots).toEqual(EXPECTED_SLOTS[row.kind]);
       expect(Object.isFrozen(row)).toBe(true);
       expect(Object.isFrozen(row.requiredSlots)).toBe(true);
@@ -197,7 +237,7 @@ describe('SP-6 phrased-kind registry — WR-4 war costs', () => {
       // parallel array against it is an ORTHOGONAL witness that the filter took the right
       // five rows in the right order — five plausible sentences alone would not prove that.
       if (annex.requiredSlots) expect(annex.requiredSlots).toEqual(EXPECTED_SLOTS[row.kind]);
-      expect(new Set(rendered).size).toBe(5);
+      expect(new Set(rendered).size).toBe(EXPECTED_DEPTH[row.kind]);
       for (const line of rendered) {
         expect(line).toBe(line.trim());
         expect(line).not.toMatch(/\$\{|\bundefined\b|\bNaN\b/);
@@ -214,7 +254,7 @@ describe('SP-6 phrased-kind registry — WR-4 war costs', () => {
         warCostReceipt(row.kind, `war-cost:${index}`, INTERP)
       ));
       expect(receipts.every(Boolean)).toBe(true);
-      expect(new Set(receipts.map((receipt) => receipt.familyId)).size).toBe(5);
+      expect(new Set(receipts.map((receipt) => receipt.familyId)).size).toBe(EXPECTED_DEPTH[row.kind]);
       expect(warCostReceipt(row.kind, 'fixed-seed', INTERP))
         .toEqual(warCostReceipt(row.kind, 'fixed-seed', INTERP));
     },
@@ -263,15 +303,15 @@ describe('SP-6 phrased-kind registry — WR-4 war costs', () => {
       trajectory_misread: { settlement: 'Ashford', counterpart: 'Eastvale' },
     };
     const unsupported = {
-      war_trajectory_winning: /word from the field|spring|harvest|courier|fortnight|enemy is spent/i,
-      war_trajectory_losing: /report|faster than the news|term they draft/i,
+      war_trajectory_winning: /word from the field|spring|harvest|courier|fortnight|enemy is spent|lenders/i,
+      war_trajectory_losing: /report|faster than the news|term they draft|plate is going inland/i,
       home_front_roads: /toll|causeway|drover|bridge|\bford\b|brush|mud|poorer/i,
       home_front_stores: /seed|bread|carried the winter|drawn down|drawing down/i,
       home_front_hands: /harvest|smith|craftsmen|names that ran the market/i,
       home_front_institutions: /assize|clerk|justice|working court/i,
       home_front_markets: /factor|wharf|toll|house|generation to open/i,
       winning_abroad_losing_at_home: /banner|wall|courier|reeve|market square|bread|craftsman|hunger|victory/i,
-      trajectory_misread: /field says|terms about to be drafted|wrong on purpose/i,
+      trajectory_misread: /field says|terms about to be drafted|wrong on purpose|clerk at|priced against|arrival from the field|captains who could correct|carters through/i,
     };
 
     for (const kind of WAR_COST_KINDS) {

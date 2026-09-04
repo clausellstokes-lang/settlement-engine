@@ -29,6 +29,26 @@ const EXPECTED_KINDS = Object.freeze([
   'war_culture_suppressed',
 ]);
 
+/**
+ * ⭐ THE FIXED FIVE IS THE DEFAULT; THE ONE DEPARTURE IS NAMED.
+ *
+ * `war_culture_suppressed` is a `routine` kind, so the frequency-scaled floor
+ * (tests/helpers/kindPoolWalker.js) owes it EIGHT variants, and `1e8bf8a87` (THE
+ * CHRONIC-TIER DEEPENING) authored ten into docs/content/RECEIPT_POOLS_WAR.md while the
+ * wiring step was never taken. This walker reads no annex, so it could not SEE that defect —
+ * which is not evidence the defect was absent. The pool is wired now and the pin is exact
+ * per kind: growing OR shrinking either side of this map still reds.
+ *
+ * ⚠ The `test.each` title below still says "five clean structural templates", deliberately:
+ * the four sibling titles across the war walkers are census-row keys the chair removes by
+ * exact match, and renaming this one alone would leave the estate inconsistent mid-landing.
+ * The rename is OWED to that same landing act — deferred and written down, not a bug to
+ * re-find.
+ */
+const FIXED_FIVE = 5;
+const DEEPENED_DEPTH = Object.freeze({ war_culture_suppressed: 10 });
+const depthOf = (kind) => DEEPENED_DEPTH[kind] ?? FIXED_FIVE;
+
 const INTERP = Object.freeze({
   settlement: 'Ashford',
   band: 'guarded',
@@ -67,17 +87,21 @@ describe('SP-6 phrased-kind registry — WR-2', () => {
   test('the governed census is exact and every registration join is paid', () => {
     expect(WAR_DISPOSITION_KINDS).toEqual(EXPECTED_KINDS);
     expect(WAR_DISPOSITION_KIND_REGISTRY.map((row) => row.kind)).toEqual(EXPECTED_KINDS);
+    // Exactly one kind departs the fixed five, and the exception names a live kind.
+    expect(Object.keys(DEEPENED_DEPTH).filter((kind) => !EXPECTED_KINDS.includes(kind))).toEqual([]);
+    expect(WAR_DISPOSITION_KIND_REGISTRY.filter((row) => row.pool.length !== FIXED_FIVE).map((row) => row.kind))
+      .toEqual(Object.keys(DEEPENED_DEPTH));
     expect(registrationIssues(WAR_DISPOSITION_KIND_REGISTRY)).toEqual([]);
   });
 
   test.each(WAR_DISPOSITION_KIND_REGISTRY)(
     '$kind has five clean structural templates above the floor',
     (row) => {
-      expect(row.pool).toHaveLength(5);
+      expect(row.pool).toHaveLength(depthOf(row.kind));
       const rendered = row.pool.map((variant) => (
         typeof variant === 'function' ? String(variant(INTERP)) : String(variant)
       ));
-      expect(new Set(rendered).size).toBe(5);
+      expect(new Set(rendered).size).toBe(depthOf(row.kind));
       for (const line of rendered) {
         expect(line).toBe(line.trim());
         expect(/\$\{|\bundefined\b|\bNaN\b/.test(line)).toBe(false);

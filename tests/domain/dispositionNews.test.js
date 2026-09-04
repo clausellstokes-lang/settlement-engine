@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import { dispositionTransitionNewsEntries } from '../../src/domain/worldPulse/dispositionNews.js';
+import { WAR_DISPOSITION_KIND_REGISTRY } from '../../src/domain/worldPulse/eventProse.js';
 import {
   advanceDispositionChannels,
   coalesceDispositionTransitions,
@@ -93,7 +94,12 @@ describe('WR-2 disposition transition news', () => {
     for (const entry of entries) {
       expect(entry.id).toMatch(/^wizard_news\./);
       expect(entry.kind).toBe(entry.impactKind);
-      expect(entry.familyId).toMatch(new RegExp(`^${entry.kind}\\.[1-5]$`));
+      // Derived from the kind's OWN pool, not a hard-coded five: `war_culture_suppressed` is
+      // a routine kind wired to the annex's ten. Still exact — an ordinal one past the real
+      // pool reds, which a widened `\d+` alone would not catch.
+      expect(entry.familyId).toMatch(new RegExp(`^${entry.kind}\\.\\d+$`));
+      expect(Number(entry.familyId.split('.').at(-1)), `${entry.kind}: familyId ordinal is outside its own authored pool`)
+        .toBeLessThanOrEqual(WAR_DISPOSITION_KIND_REGISTRY.find((row) => row.kind === entry.kind)?.pool.length ?? 0);
       expect(entry.settlementIds).toHaveLength(1);
       expect(entry.settlementNames).toHaveLength(1);
       expect(entry.headline).toContain(entry.settlementNames[0]);

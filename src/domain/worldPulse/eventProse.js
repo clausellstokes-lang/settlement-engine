@@ -311,8 +311,13 @@ export const WAR_DISPOSITION_KIND_REGISTRY = Object.freeze([
     [['settlement', 'domain'], [], [], [], []]),
   dispositionKindRow('deity_peace_pressure', 'notable', 'public', 'faith',
     [['settlement', 'band'], [], ['good'], [], []]),
+  // WIRED TO THE FULL ANNEX DEPTH (1e8bf8a87, THE CHRONIC-TIER DEEPENING). The five
+  // families below the original five are the corpus this pool was always meant to hold;
+  // each names the evidence its sentence claims, so an absent temple removes exactly the
+  // two families that speak of one and never fabricates a house of worship.
   dispositionKindRow('war_culture_suppressed', 'routine', 'dm-only', 'war',
-    [['settlement'], ['settlement'], [], [], []]),
+    [['settlement'], ['settlement'], [], [], [],
+      ['temple'], ['temple'], ['settlement'], ['settlement'], ['settlement']]),
 ]);
 
 /** The exact WR-2 kind set, shared by emitters and structural walkers. */
@@ -496,10 +501,13 @@ function warCostKindRow(kind, significance, audience, section, requiredSlots) {
 
 /** @type {ReadonlyArray<Readonly<WarCostReceiptRegistryEntry>>} */
 export const WAR_COST_KIND_REGISTRY = Object.freeze([
+  // `lenderAdvances` is the sixth family's named truth: a court whose lenders are
+  // advancing against a victory is a CREDIT record, not an inference from the trajectory.
   warCostKindRow('war_trajectory_winning', 'notable', 'public', 'war',
-    [['settlement'], ['fieldReport'], ['offerHistory'], [], ['fieldReport', 'band', 'courierDelay']]),
+    [['settlement'], ['fieldReport'], ['offerHistory'], [], ['fieldReport', 'band', 'courierDelay'],
+      ['settlement', 'lenderAdvances']]),
   warCostKindRow('war_trajectory_losing', 'notable', 'public', 'war',
-    [['settlement', 'newsLag'], [], ['fieldReport'], ['term'], []]),
+    [['settlement', 'newsLag'], [], ['fieldReport'], ['term'], [], ['plateRemoval']]),
   warCostKindRow('home_front_roads', 'notable', 'public', 'trade',
     [['route', 'tollLoss'], ['causewayNeglect'], [], ['bridgeDamage'], ['settlement', 'band']]),
   warCostKindRow('home_front_stores', 'notable', 'public', 'events',
@@ -514,8 +522,14 @@ export const WAR_COST_KIND_REGISTRY = Object.freeze([
     [['house', 'settlement'], ['wharfLabor'], ['good'], [], ['tollLoss']]),
   warCostKindRow('winning_abroad_losing_at_home', 'major', 'public', 'war',
     [['settlement', 'counterpart', 'band', 'storesEvidence', 'occupation'], ['marketAccount'], ['breadPrice'], ['compoundLoss'], []]),
+  // The chronic tier owes eight variants and the annex authored ten; all ten are wired.
+  // Each added family names the record that carries it — the clerk's entry, the offer
+  // book, an arriving field report, the courier silence, the carters' account — so a
+  // producer holding only settlement and counterpart reaches none of them.
   warCostKindRow('trajectory_misread', 'routine', 'dm-only', 'war',
-    [['fieldReport'], ['settlement'], [], ['draftedTerms'], ['intentEvidence']]),
+    [['fieldReport'], ['settlement'], [], ['draftedTerms'], ['intentEvidence'],
+      ['settlement', 'clerkEntry'], ['settlement', 'offerHistory'], ['settlement', 'fieldReport'],
+      ['courierDelay'], ['settlement', 'counterpart', 'carterTestimony']]),
 ]);
 
 /** The exact WR-4 reader-kind set, shared by future emitters and walkers. */
@@ -626,7 +640,7 @@ export const WAR_RULING_KIND_REGISTRY = Object.freeze([
   warRulingKindRow('peace_party_overturns_warmonger', 'major', 'public', 'adjudication',
     [['settlement'], ['faction'], [], [], []]),
   warRulingKindRow('succession_demand_inherited', 'notable', 'public', 'adjudication',
-    [['faction', 'npc'], [], [], [], []]),
+    [['faction', 'npc'], [], [], [], [], ['faction', 'npc']]),
   warRulingKindRow('successor_repudiates_war', 'major', 'public', 'war',
     [['npc'], [], [], [], []]),
   warRulingKindRow('successor_escalates_war', 'major', 'public', 'war',

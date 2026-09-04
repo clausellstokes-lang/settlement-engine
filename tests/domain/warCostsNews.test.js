@@ -1,6 +1,19 @@
 import { describe, expect, it } from 'vitest';
 
 import { warCostTransitionNewsEntries } from '../../src/domain/worldPulse/warCostsNews.js';
+import { WAR_COST_KIND_REGISTRY } from '../../src/domain/worldPulse/eventProse.js';
+
+/**
+ * The authored depth of a kind's OWN pool, read from the registry rather than transcribed.
+ * This replaced a hard-coded `\.[1-5]$` bound: the annex's frequency-scaled depth is wired
+ * now (6 for the two notable trajectory kinds, 10 for `trajectory_misread`), so a fixed five
+ * would refuse a legitimate family. Deriving is also STRONGER than widening to `\d+` — a
+ * familyId one past the kind's real pool still reds.
+ */
+function poolDepthOf(kind) {
+  const row = WAR_COST_KIND_REGISTRY.find((candidate) => candidate.kind === kind);
+  return row ? row.pool.length : 0;
+}
 
 const NOW = '2026-08-02T12:00:00.000Z';
 
@@ -142,7 +155,9 @@ describe('WR-4 war-cost transition news', () => {
       expect(entry.settlementNames.slice(0, 2)).toEqual(['Alderwatch', 'Brackenford']);
       expect(entry.id).toMatch(new RegExp(`^wizard_news\\.18\\.${entry.kind}\\.`));
       expect(entry.sourceEventId).toMatch(new RegExp(`^war_cost_transition\\.${entry.kind}\\.`));
-      expect(entry.familyId).toMatch(new RegExp(`^${entry.kind}\\.[1-5]$`));
+      expect(entry.familyId).toMatch(new RegExp(`^${entry.kind}\\.\\d+$`));
+      expect(Number(entry.familyId.split('.').at(-1)), `${entry.kind}: familyId ordinal is outside its own authored pool`)
+        .toBeLessThanOrEqual(poolDepthOf(entry.kind));
       expect(entry.reasons).toHaveLength(1);
       expect(readerText(entry)).not.toMatch(
         /\d|%|\u00d7|\b(?:quiet|present|pressing|decisive|narrow|clear)\b|(?:route_network|food_stockpile|deployed_population|institution_shell|trade_war)|undefined/i,

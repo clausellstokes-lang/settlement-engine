@@ -9,12 +9,24 @@
  *
  * ── J-SP-8 BINDS: THIS WALKER MAY NOT RED THE ESTATE AT BIRTH ───────────────────
  *
- * The measurement at this commit is 28 registered kinds under their own floor, every one of
+ * The measurement at the freeze was 28 registered kinds under their own floor, every one of
  * them at depth EXACTLY FIVE — the fixed-five class chair ruling CR-FP-7 closed by
- * countersigning the cap-raise arm. Raising 28 pools is a content program's work across five
- * war annexes, not a test estate's. So the 28 land as a FROZEN SHRINK-ONLY BACKLOG (the EP
- * burn-down idiom): a wave may LEAVE the list, none may join it, and a NEW kind under its
+ * countersigning the cap-raise arm. Raising those pools is a content program's work across
+ * five war annexes, not a test estate's. So they landed as a FROZEN SHRINK-ONLY BACKLOG (the
+ * EP burn-down idiom): a wave may LEAVE the list, none may join it, and a NEW kind under its
  * floor reds on the day it lands.
+ *
+ * ⭐ 28 → 23 (CENSUSWIRE). FIVE kinds LEFT — they were not forgiven, they were WIRED.
+ * `war_trajectory_winning`, `war_trajectory_losing`, `trajectory_misread`,
+ * `succession_demand_inherited` and `war_culture_suppressed` each had the frequency-scaled
+ * depth the floor owes ALREADY AUTHORED in docs/content/RECEIPT_POOLS_WAR.md by `1e8bf8a87`
+ * (THE CHRONIC-TIER DEEPENING, a nine-file `docs/` commit that touched ZERO `src/`), against
+ * a `src/` pool still wired at five. Wiring the thirteen missing families takes the two
+ * notable trajectory kinds and the succession record to 6 ≥ 6, and the two routine kinds
+ * (`trajectory_misread`, `war_culture_suppressed`) to 10 ≥ 8. THE REMOVAL IS NOT OPTIONAL AND
+ * NOT COSMETIC: three arms below refuse a member that meets its floor — the shrink-only
+ * EQUALITY, the fixed-five witness, and the compliant-row sweep — so this list and the pools
+ * MOVE IN ONE COMMIT or the walker reds in both directions.
  *
  * A walker born red is a walker someone disables. That is the whole reason this shape was
  * chosen over green-at-birth, which would have demanded either a content program before SP-E
@@ -115,11 +127,6 @@ const LEGACY_UNDER_FLOOR = Object.freeze([
   'mirror_obligation_discharged', //   notable, 5 of 6
   'refusal_cost_ally_patience', //     notable, 5 of 6
   'refusal_cost_legitimacy', //        notable, 5 of 6
-  'succession_demand_inherited', //    notable, 5 of 6
-  'trajectory_misread', //             routine, 5 of 8
-  'war_culture_suppressed', //         routine, 5 of 8
-  'war_trajectory_losing', //          notable, 5 of 6
-  'war_trajectory_winning', //         notable, 5 of 6
 ]);
 
 /**
@@ -253,7 +260,7 @@ describe('SP-E frequency-scaled floors — the frozen legacy backlog (J-SP-8)', 
     // at the freeze the two sides are identical, so the `<=` above is a ratchet on a real
     // inventory instead of a bound nothing touches.
     expect(violations.map((v) => v.kind)).toEqual([...LEGACY_UNDER_FLOOR]);
-    expect(LEGACY_UNDER_FLOOR).toHaveLength(28);
+    expect(LEGACY_UNDER_FLOOR).toHaveLength(23);
   });
 
   test('no backlog entry is an ORPHAN: every one still names a registered kind', () => {
