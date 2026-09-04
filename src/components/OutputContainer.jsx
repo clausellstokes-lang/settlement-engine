@@ -727,7 +727,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       // DM-truth reveal self-gates inside (premium owner, never playerView /
       // public dossier — the includeGroundTruth convention).
       case 'rumors':     return <RumorsTab settlement={s} saveId={saveId} playerView={playerView} publicDossier={publicDossier} />;
-      case 'defense':    return <DefenseTab settlement={s} narrativeNote={null} />;
+      case 'defense':    return <DefenseTab settlement={s} narrativeNote={null}  publicDossier={publicDossier} playerView={playerView} />;
       case 'npcs':       return <NPCsTab npcs={s.npcs} settlement={s} narrativeNote={null}
         onRerollNPCs={npcAuthoringAllowed && onRegenerate ? () => onRegenerate('npcs') : null} pinnedIds={pinnedIds}
         onTogglePin={onTogglePin} canAuthorNpc={npcAuthoringAllowed}

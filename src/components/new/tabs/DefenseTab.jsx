@@ -8,10 +8,19 @@ import {NarrativeNote} from '../NarrativeNote';
 import { criminalOpNote, deriveCriminalStructure, deriveDefenseReadiness, deriveSupportingCapabilities, deriveGuardAssessment, deriveDefenseVulnerabilities, DEFENSE_STRESS_STATUS } from '../../../domain/display/defenseDisplay.js';
 import { safetySeverityOf } from '../../../domain/display/safetySeverity.js';
 import { scoreBand, scoreColor } from '../../../domain/display/defenseScoreBands.js';
+import { defenseStateProse } from '../../../domain/display/stateProse/defenseStateProse.js';
+import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
 import { truncateAtWord } from '../../../lib/text.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 
-export function DefenseTab({ settlement:r, narrativeNote}) {
+/**
+ * The public-order position. ⚠ Its rungs arrive already PROJECTED BESIDE the DM's field —
+ * the desk returns `{field, beside, hasField}`, never a bare rung — so this file cannot
+ * render a machine sentence into the position the DM's own sentence occupies.
+ */
+const PUBLIC_ORDER_MOUNT = 'defense.publicOrder';
+
+export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false, playerView = false}) {
   const [expandedThreat, setExpandedThreat] = useState(null);
   const [showForces, setShowForces] = useState(true);
   // Mobile: let the threat row wrap and the label flex, so a long threat name
@@ -26,6 +35,22 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
   const f = r.economicState?.compound?.inst || {};
   const sp = r.economicState?.safetyProfile || {};
   const ra = r.resourceAnalysis || {};
+  // THE DEFENSE DESK. THE PUBLIC GATE (§885.3): a public gallery dossier is a PAID surface
+  // and the `defense` tab is not filtered off one, so the desk is NOT DRAWN there. The
+  // audience follows kernel law 2's fail-closed default, stated rather than defaulted.
+  const deskProse = publicDossier
+    ? Object.freeze({ publicOrder: null, firstSurvey: null })
+    : defenseStateProse(r, {
+      seed: String(r?._seed ?? r?.id ?? ''),
+      audience: playerView ? 'player' : 'dm',
+    });
+  // `drawnAtMount` routes the RUNG the projection carries; the `beside` line is only
+  // rendered when the registry lets that rung speak, so flipping the row to `glance`
+  // silences the machine line and leaves the DM's field untouched.
+  const orderBeside = drawnAtMount(PUBLIC_ORDER_MOUNT, deskProse.publicOrder?.rung)?.sentence
+    ? deskProse.publicOrder.beside : null;
+  const surveyBeside = drawnAtMount(PUBLIC_ORDER_MOUNT, deskProse.firstSurvey?.rung)?.sentence
+    ? deskProse.firstSurvey.beside : null;
   const stresses = (Array.isArray(r.stress)?r.stress:r.stress?[r.stress]:[]).filter(Boolean);
   const stressTypes = stresses.map(s=>s?.type).filter(Boolean);
   const crimCapture = r.powerStructure?.criminalCaptureState || 'none';
@@ -202,8 +227,12 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
                     </div>
                     {safetyLabel&&!safetyLabel.includes('Moderate')&&<div style={{fontSize:FS.xxs,color:MUTED,marginTop:5,fontStyle:'italic'}}>{safetyLabel}</div>}
                   </div>
-                  {sp.safetyDesc&&<div style={{flex:1,minWidth:160}}>
-                    <p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.55,margin:0}}>{sp.safetyDesc}</p>
+                  {(sp.safetyDesc||orderBeside||surveyBeside)&&<div style={{flex:1,minWidth:160}}>
+                    {/* THE DM'S FIELD, rendered exactly as before and BY IDENTITY. The
+                        corpus lines sit BESIDE it and never in its place. */}
+                    {sp.safetyDesc&&<p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.55,margin:0}}>{sp.safetyDesc}</p>}
+                    {orderBeside&&<p style={{fontSize:FS.sm,color:swatch.inkMag3,lineHeight:1.55,margin:sp.safetyDesc?'6px 0 0':0,fontStyle:'italic'}}>{orderBeside}</p>}
+                    {surveyBeside&&<p style={{fontSize:FS.xs,color:swatch.inkMag3,lineHeight:1.5,margin:'6px 0 0',fontStyle:'italic'}}>{surveyBeside}</p>}
                   </div>}
                 </div>
               </div>

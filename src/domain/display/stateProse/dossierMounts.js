@@ -208,6 +208,9 @@ export const DOSSIER_MOUNTS = Object.freeze([
   Object.freeze({
     mount: 'overview.stressorLifecycle', tab: 'overview', desk: 'stressors', blockId: 'DS-STR-2', rung: 'sentence',
   }),
+  Object.freeze({
+    mount: 'defense.publicOrder', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-3', rung: 'sentence',
+  }),
 ]);
 
 /**
@@ -223,7 +226,7 @@ export const DOSSIER_MOUNTS = Object.freeze([
  * @type {ReadonlyArray<string>}
  */
 export const UNMOUNTED_BLOCKS = Object.freeze([
-  'DS-DEF-1', 'DS-DEF-2', 'DS-DEF-3', 'DS-DEF-4',
+  'DS-DEF-1', 'DS-DEF-2', 'DS-DEF-4',
   'DS-DEF-5', 'DS-DEF-6', 'DS-DEF-7', 'DS-DEF-8',
   'DS-DEF-9', 'DS-DEF-10', 'DS-DEF-11',
   'DS-ECO-3', 'DS-ECO-4',
