@@ -1,0 +1,918 @@
+commit 5e749a0b071e97f557a20d7746f94b8e3c8c4540
+Author: Fixture <fixture@example.test>
+Date:   Thu Sep 3 00:36:49 2026 -0400
+
+    TRAIN 1 cars C2+C3 (lane REGISTRY): the dossier gets a router that can say WHERE, and one fact is given exactly one sentence — the dark half is 68 blocks a gate can count, and the walker's controls red on the defect before the table has a single row
+    
+    C2 — THE DENOMINATOR. src/domain/display/stateProse/dossierMounts.js is a pure,
+    frozen, import-free table of {mount, tab, desk, blockId, rung}. It replaces
+    `sectionTarget` as the router, not because that field is dirty (it is, and that is
+    a separate parser repair) but because of what it MEANS: a section is a property of
+    the block and a position is a property of the page, and `sectionTarget:
+    ['economics']` can never say where in EconomicsTab a block goes. The causal
+    register is the control that shows the distinction is real rather than invented
+    here — a join's section genuinely is a property of the join, which is why
+    causalFamiliesForSection is legitimate and a state equivalent would not be.
+    
+    DOSSIER_MOUNTS IS EMPTY AT BIRTH, and that is the honest state rather than a
+    shortfall: no desk has landed, so no component carries a position, and a row
+    naming a position the tree does not build would be the registry drifting into
+    fiction on its first day. UNMOUNTED_BLOCKS carries all 68 blocks in a
+    machine-checked order, so the corpus's darkness stops being a silence and becomes
+    a number — shrink-only against tests/lint/.dossier-mounts-baseline.json, so a
+    block can leave that list and never join it.
+    
+    C3 — THE ROOM. A block's SENTENCE rung renders at exactly one position per
+    page-set; every other position renders the glance and the detail and no sentence.
+    This is not a new law — economyStateProse.js already says a composed page draws at
+    most one of each and never both about the same fact (R-DST-A) — and it needs no
+    mechanism: no draw-key change, no rotation, nothing that races the one-way door.
+    It is held in two places that cannot disagree: `rung` is a field on every row, so
+    a component can only be given the depth its row names; and sentenceMountForBlock
+    is the only way to ask where a fact speaks, answering with at most one position or
+    with nothing at all, fail-closed on a contradiction because picking the first row
+    would choose a winner by array order. The one written exception is recorded in the
+    docblock so the next reader does not repair it: DS-GEN-6's tier overlay composes
+    after the route line and never instead of it, which is two pools at one position
+    and not one fact speaking twice.
+    
+    THE WALKER, AND WHY ITS CONTROLS ARE NOT DECORATION. With an empty table, every
+    arm that reads a row would pass over nothing and prove nothing. So each rule is a
+    PURE FUNCTION over a registry passed in, and every one is driven over the design's
+    own worked example plus a planted violation, with the sibling rules asserted
+    SILENT so a plant convicts one arm rather than the file. Executed: flipping
+    power.tensions to the sentence rung reds the one-fact arm alone; withdrawing the
+    severity declaration reds the honesty arm alone; a mount with no JSX site and one
+    with two both red the reachability arm. The tab vocabulary is read off
+    OutputContainer's own renderTab switch through mustExtract rather than kept by
+    hand, and the corpus join is re-derived from the six leaves on every run.
+    
+    MEASURED, NOT ASSUMED. 68 corpus blocks carry pools. Exactly 3 carry a demoted
+    dimension — DS-GEN-1 severity, DS-GEN-6 deficit, DS-GEN-9 anchor — and 65 carry
+    none. The new src leaf holds 0 em dashes and 0 exclamation marks in any string
+    literal, measured with the ratchet's own tokenizer, so tests/copy/voiceMechanics
+    needs no baseline entry for it; its four red arms are unchanged at 1108 and 40
+    against a clean checkout of the base sha, which is where those reds were proved
+    pre-existing rather than assumed to be.
+    
+    THE PLANT IS REAL RATHER THAN A RATIONALE. Striking DS-CND-1 from the dark half
+    without mounting it reds the totality arm by name — 15 passed, 1 failed — and that
+    is deliberately the arm a shrink-only ratchet CANNOT see, because shrinking is the
+    direction the ratchet exists to permit. A list that gets shorter looks healthy to
+    a ratchet and looks wrong only to a join against the corpus.
+    
+    NOT TAKEN, and owed to the landing: scripts/.test-ratchet-baseline.json moves by
+    one file and sixteen tests. Registers are the landing's act, never a lane's.
+    
+    Seat: Opus 5 — Fable-unvalidated
+
+diff --git a/scripts/mutation-coverage-manifest.json b/scripts/mutation-coverage-manifest.json
+index d7b64cfcf..542a83edf 100644
+--- a/scripts/mutation-coverage-manifest.json
++++ b/scripts/mutation-coverage-manifest.json
+@@ -62,6 +62,10 @@
+   "generators-tree-admitted-subject-coupled-2026-08-30": "THE tests/generators TREE, ADMITTED TO ENFORCER_DIRS (ODQ 764.2, on finding 759.4). 97 of that tree's 108 test files were invisible to the guard-of-guards -- not by any judgment that they need no coverage, but because their basenames carry none of the NAME_PATTERN tokens and the directory was not an enforcer dir. Admission makes them visible. It does not by itself make each of them a walker, so this ref states the class they DO belong to as a property that is CHECKED rather than promised: EVERY MEMBER SCANS OR EXECUTES PRODUCTION MATERIAL AND ASSERTS ON WHAT CAME BACK. Measured at admission by executing the predicate over the tree: 95 of the 97 IMPORT a production module (94 under src/, and generationCertificationSoak, whose subject is the shipped audit driver under scripts/audit/), the remaining two (powerStructure, servicesStructure) SCAN production source text with readFileSync instead, and all 97 carry at least one expect(). That one scripts/ member is not a footnote: the predicate's first execution REFUSED it, because this paragraph's first draft said 'under src/' and its subject does not live there -- the arm convicting its own author on its first run, which is the difference between a checked claim and a promise. WHY THAT MAKES A PLANTED SWEEP MUTATION REDUNDANT RATHER THAN MERELY EXPENSIVE: the sweep plants a regression in production code and asserts the gate reds, which is how an instrument is proved coupled to its subject; these suites are coupled to their subject BY CONSTRUCTION -- the code a plant would mutate is the code they already execute -- so a plant here would prove only that a test tests its own subject. WHAT THIS ROW IS NOT: a budget, and not prose. tests/lint/mutationCoverageManifest.test.js re-derives the property from disk for every entry carrying this ref, with a planted control on the predicate itself (a fabricated member that neither imports nor scans src/ must be REFUSED, and one that does must be admitted, both through the same function the live arm calls) and a non-vacuity floor on the membership count. A member that stops importing, stops scanning or stops asserting REDS BY NAME instead of resting on this paragraph; a file that outgrows the class takes its own mutation plant or its own written rationale. ⚠ EVERY FIGURE ABOVE IS AN AT-ADMISSION MEASUREMENT, NOT A LIVE COUNT -- do not maintain them by hand. The T9 landing rebase already moved them: tests/generators/institutionToggleReader.test.js arrived from the branch (NPCGEN car a) into a tree this row had just made governed, and the predicate ADMITTED it ON EXECUTION (it both imports src/generators/institutionToggleReader.js and scans its three consumers, and it asserts), so membership is 98 of 109 today. That is the intended behaviour of an admission rule rather than an exception to it: the arm floors at 90 and re-derives every member from disk each run, so the numbers here stay the dated record of what was measured the day the tree came in."
+  },
+  "invariants": {
++  "tests/lint/dossierMountRegistry.walker.test.js": {
++   "kind": "mutation",
++   "label": "dossier-mounts/a corpus block leaves the dark list with no mount"
++  },
+   "tests/domain/bespokeStyleWallContract.test.js": {
+    "kind": "uncovered"
+   },
+diff --git a/scripts/mutation-sweep.sh b/scripts/mutation-sweep.sh
+index e4d604faf..90a304871 100755
+--- a/scripts/mutation-sweep.sh
++++ b/scripts/mutation-sweep.sh
+@@ -101,6 +101,7 @@ MUTATED_FILES=(
+   src/lib/instantWorld/factionDedup.js
+   src/domain/deitySnapshot.js
+   src/domain/worldPulse/disposition.js
++  src/domain/display/stateProse/dossierMounts.js
+ )
+ if [ "${MUTATION_SWEEP_ALLOW_DIRTY:-}" != "1" ]; then
+   dirty="$(git status --porcelain -- "${MUTATED_FILES[@]}" 2>/dev/null)"
+@@ -971,6 +972,18 @@ check_caught "faith-embed/the restore path drops the authored-character keys" sr
+ printf '\nconst _mut = Math.random();\n' >> src/lib/instantWorld/factionDedup.js
+ check_caught "determinism/instantWorld Math.random()" src/lib/instantWorld/factionDedup.js "npx eslint src/lib/instantWorld/factionDedup.js"
+ 
++# 48. TRAIN 1 C2 — THE MOUNT REGISTRY'S TOTALITY LAW. dossierMounts.js is the dossier's
++#     router, and its whole claim is that every corpus block is either MOUNTED at a
++#     position or DECLARED DARK, with no third state. The failure it forecloses is the
++#     quiet one: a block leaves the dark list (or a new block arrives) and nothing on the
++#     page ever renders it, while the darkness figure the gate reads goes on looking
++#     healthy because the list got SHORTER. A shrink-only ratchet alone cannot see that —
++#     shrinking is the direction it exists to permit — so the totality join against the
++#     corpus is the arm that must red, and this plant is what proves it does. Strike
++#     DS-CND-1 from the dark half without mounting it anywhere.
++perl -0pi -e "s/  'DS-STR-1', 'DS-STR-2', 'DS-CND-1',\n/  'DS-STR-1', 'DS-STR-2',\n/" src/domain/display/stateProse/dossierMounts.js
++check_caught "dossier-mounts/a corpus block leaves the dark list with no mount" src/domain/display/stateProse/dossierMounts.js "npx vitest run tests/lint/dossierMountRegistry.walker.test.js --no-file-parallelism"
++
+ echo ""
+ echo "── Mutation sweep results ──────────────────────────────"
+ for r in "${results[@]}"; do echo "  $r"; done
+diff --git a/src/domain/display/stateProse/dossierMounts.js b/src/domain/display/stateProse/dossierMounts.js
+new file mode 100644
+index 000000000..10033bdbe
+--- /dev/null
++++ b/src/domain/display/stateProse/dossierMounts.js
+@@ -0,0 +1,181 @@
++/**
++ * domain/display/stateProse/dossierMounts.js — TRAIN 1 car C2/C3: THE MOUNT REGISTRY,
++ * and the room the one-fact-one-sentence law lives in.
++ *
++ * WHAT THIS IS. A hand-written table saying which corpus block renders at which POSITION
++ * on which tab, and at which depth. It is the dossier's router. Nothing else in the
++ * subsystem knows where a block goes.
++ *
++ * ── WHY A REGISTRY AND NOT `sectionTarget` ───────────────────────────────────────────
++ * The corpus already carries a `sectionTarget` on 45 of its 68 blocks, and it cannot do
++ * this job — not because it is dirty (25 of the 45 carry a string outside the tab
++ * vocabulary, which is a parser defect and is repaired separately), but because of what
++ * it MEANS. `sectionTarget: ['economics']` says the block belongs to the economics
++ * conversation. It can never say WHERE IN EconomicsTab the block renders, and a page
++ * layout is exactly the question "where". A block's SECTION is a property of the block;
++ * a block's POSITION is a property of the page. Those are different facts with different
++ * owners, and the second one has never had a home. This is the home.
++ *
++ * The causal register is the control that shows the distinction is real rather than
++ * invented for this file: `causalFamiliesForSection` routes joins by section and is
++ * legitimate, because a join's section genuinely IS a property of the join. A state
++ * block has no equivalent claim, and the parser census proves it: the causal register is
++ * 100 percent canonical over 155 targets, the state register is not, and both run through
++ * the same parser. So `sectionTarget` is demoted to a DISCOVERY field and routes nothing.
++ *
++ * ── THE ROOM: ONE FACT, ONE SENTENCE (car C3) ────────────────────────────────────────
++ * A block's SENTENCE rung renders at exactly ONE position per settlement page-set. Where
++ * the same record appears at other positions, those positions render the GLANCE and the
++ * DETAIL rungs and no sentence.
++ *
++ * THIS IS NOT A NEW LAW. economyStateProse.js already states it for the SURFACE/LADDER
++ * pair (R-DST-A): "A composed page draws at most one of each and never both about the
++ * same fact." C3 extends the same sentence from within-a-tab to across-the-page-set,
++ * because the fact it protects is the same one. A settlement has ONE story about its
++ * crime wave. `history.currentTensions` genuinely renders on three tabs today, so the
++ * page already repeats the RECORD; repeating the record is coherent and printing three
++ * different sentences about it is the machine improvising in front of the reader.
++ *
++ * AND IT NEEDS NO MECHANISM. No draw-key change, no rotation, no offset, nothing that
++ * races the one-way door. The law is held STRUCTURALLY, in two places that cannot
++ * disagree: `rung` is a field on every row, so a component can only be given the depth
++ * its row names; and `sentenceMountForBlock` is the only way to ask where a fact speaks,
++ * and it answers with at most one position or with nothing at all. The walker
++ * (tests/lint/dossierMountRegistry.walker.test.js) refuses two sentence rows for one
++ * block at build time, which is what makes the law enforced rather than intended.
++ *
++ * THE ONE WRITTEN EXCEPTION, so the next reader does not "repair" it. DS-GEN-6's tier
++ * overlay is composed AFTER the route line and never instead of it, so that single mount
++ * renders two sentences drawn from two POOLS of one block. That is one fact reading at
++ * one position at one depth; it is not one fact speaking twice. The law is one SENTENCE
++ * RUNG per block per page-set, and it is spelled that way on purpose.
++ *
++ * ── THE DENOMINATOR ──────────────────────────────────────────────────────────────────
++ * `UNMOUNTED_BLOCKS` is the dark half, written down. Before this file the corpus's
++ * darkness was a silence; here it is a number a gate can see, and it is SHRINK-ONLY, so
++ * a desk car can only ever move a block from that list into a mount row. A block in
++ * neither list reds the walker, so a new block cannot arrive unrouted and unnoticed.
++ *
++ * PURE, HEADLESS, FROZEN LEAF: no imports, no state, no clock, no RNG. Every string here
++ * is an identifier the walker joins against a producer, never reader-facing prose.
++ *
++ * @enforced-by tests/lint/dossierMountRegistry.walker.test.js
++ */
++
++/**
++ * The two depths a mount may draw at. The third rung of the legibility ladder (DETAIL)
++ * is not a mount choice: a detail is rows, not a draw, so every mount may render one.
++ * @type {Readonly<Record<string, string>>}
++ */
++export const MOUNT_RUNGS = Object.freeze({
++  /** The position that speaks. At most one per block per page-set, by the law above. */
++  SENTENCE: 'sentence',
++  /** Every other position the same record appears at. Band word and rows, no sentence. */
++  GLANCE: 'glance',
++});
++
++/**
++ * One mount row.
++ * @typedef {object} DossierMount
++ * @property {string} mount the position id, spelled `<tab>.<position>`
++ * @property {string} tab the tab id, a case label of OutputContainer's own `renderTab`
++ * @property {string} desk the corpus leaf under src/data/dossierStateProse
++ * @property {string} blockId the corpus block that renders here
++ * @property {string} rung a value of MOUNT_RUNGS
++ * @property {ReadonlyArray<string>} [dimensions] the demoted STATE dimensions this mount
++ *   undertakes to answer. NOT the guard: the kernel derives the truth from the pool it is
++ *   already holding (`poolDimensions`), and a registry a desk author must remember to
++ *   fill would be a guard against a defect of ignorance written by someone who already
++ *   knows. This is a DECLARATION OF INTENT the walker cross-checks against the corpus, so
++ *   a mount over a dimension-bearing block that names no dimension reds at build time
++ *   instead of going silently prose-less in front of a reader.
++ */
++
++/**
++ * THE REGISTRY. Empty at birth, and that is the honest state rather than a shortfall:
++ * no desk has landed, so no component carries a position, and a row here naming a
++ * position that does not exist would be the registry drifting into fiction on its first
++ * day. Every desk car adds its rows and strikes the same blocks from UNMOUNTED_BLOCKS in
++ * the SAME commit, and the walker holds both halves to each other.
++ * @type {ReadonlyArray<DossierMount>}
++ */
++export const DOSSIER_MOUNTS = Object.freeze([]);
++
++/**
++ * The blocks the registry has not mounted yet: the corpus's darkness, as a number.
++ *
++ * ORDER IS MACHINE-CHECKED, not decorative — desk name ascending, then each leaf's own
++ * block order. A hand-sorted list drifts and then nobody can tell an insertion from a
++ * reordering in a diff, so the walker asserts the order rather than a comment claiming it.
++ *
++ * SHRINK-ONLY. The walker refuses growth against the committed baseline, so a block can
++ * leave this list and never join it. A NEW corpus block therefore cannot be parked here:
++ * it must be mounted, or the walker reds and someone has to say why in writing.
++ * @type {ReadonlyArray<string>}
++ */
++export const UNMOUNTED_BLOCKS = Object.freeze([
++  'DS-DEF-1', 'DS-DEF-2', 'DS-DEF-3', 'DS-DEF-4',
++  'DS-DEF-5', 'DS-DEF-6', 'DS-DEF-7', 'DS-DEF-8',
++  'DS-DEF-9', 'DS-DEF-10', 'DS-DEF-11',
++  'DS-ECO-1', 'DS-ECO-2', 'DS-ECO-3', 'DS-ECO-4',
++  'DS-ECO-5', 'DS-SUP-1', 'DS-ECO-6', 'DS-ECO-7',
++  'DS-ECO-8', 'DS-ECO-9', 'DS-SUP-2', 'DS-ECO-10',
++  'DS-ECO-11', 'DS-ECO-12', 'DS-SUP-3',
++  'DS-POP-1', 'DS-POP-2', 'DS-GEN-1', 'DS-GEN-2',
++  'DS-GEN-3', 'DS-GEN-5', 'DS-GEN-6', 'DS-GEN-7',
++  'DS-GEN-8', 'DS-REL-1', 'DS-REL-2', 'DS-GEN-9',
++  'DS-GEN-10', 'DS-HK-1', 'DS-GEN-11', 'DS-GEN-12',
++  'DS-GEN-13', 'DS-GEN-14', 'DS-POP-3', 'DS-GEN-15',
++  'DS-GEN-16', 'DS-GEN-17', 'DS-GEN-18',
++  'DS-POW-1', 'DS-POW-2', 'DS-POW-3', 'DS-POW-4',
++  'DS-POW-5', 'DS-POW-6', 'DS-POW-7',
++  'DS-STR-1', 'DS-STR-2', 'DS-CND-1',
++  'DS-WAR-1', 'DS-WAR-2', 'DS-WAR-3', 'DS-WAR-4',
++  'DS-WAR-5', 'DS-FTH-1', 'DS-FTH-2', 'DS-FTH-3',
++  'DS-FTH-4',
++]);
++
++/**
++ * What renders at one position. THE ROUTER READ: a component knows its own mount id and
++ * asks the registry what belongs there, rather than a desk telling a tab where to put it.
++ * @param {string} mount
++ * @returns {DossierMount|null} the row, or null when nothing is mounted there
++ */
++export function mountById(mount) {
++  if (typeof mount !== 'string' || mount === '') return null;
++  return DOSSIER_MOUNTS.find((row) => row.mount === mount) || null;
++}
++
++/**
++ * Every position one tab carries, in declared order. The order is the page's, which is
++ * why the registry is an array and not a map: a map would lose it, and would also let a
++ * duplicate position overwrite its twin in silence instead of reddening.
++ * @param {string} tab
++ * @returns {ReadonlyArray<DossierMount>}
++ */
++export function mountsForTab(tab) {
++  if (typeof tab !== 'string' || tab === '') return Object.freeze([]);
++  return Object.freeze(DOSSIER_MOUNTS.filter((row) => row.tab === tab));
++}
++
++/**
++ * WHERE THIS FACT SPEAKS — the runtime half of the one-fact-one-sentence law, and the
++ * only way to ask the question.
++ *
++ * FAIL-CLOSED ON A CONTRADICTION, deliberately, on the kernel's own law 5 reasoning: if
++ * two positions claim the sentence for one block the registry is contradictory, and a
++ * contradiction has no safe reading. Returning "the first one" would pick a winner by
++ * array order, which is the silent-wrong-answer shape this whole subsystem is built to
++ * refuse. Silence is the safe failure and R-DST-K already means silence. The walker reds
++ * on the same state at build time, so this arm is the belt behind that brace and should
++ * never fire in a shipped tree.
++ * @param {string} blockId
++ * @returns {DossierMount|null} the one position that speaks, or null
++ */
++export function sentenceMountForBlock(blockId) {
++  if (typeof blockId !== 'string' || blockId === '') return null;
++  const speaking = DOSSIER_MOUNTS.filter(
++    (row) => row.blockId === blockId && row.rung === MOUNT_RUNGS.SENTENCE,
++  );
++  return speaking.length === 1 ? speaking[0] : null;
++}
+diff --git a/tests/lint/.dossier-mounts-baseline.json b/tests/lint/.dossier-mounts-baseline.json
+new file mode 100644
+index 000000000..d8c280994
+--- /dev/null
++++ b/tests/lint/.dossier-mounts-baseline.json
+@@ -0,0 +1,5 @@
++{
++ "UNMOUNTED_BLOCKS": {
++  "blocks": 68
++ }
++}
+diff --git a/tests/lint/dossierMountRegistry.walker.test.js b/tests/lint/dossierMountRegistry.walker.test.js
+new file mode 100644
+index 000000000..9a53a9bdc
+--- /dev/null
++++ b/tests/lint/dossierMountRegistry.walker.test.js
+@@ -0,0 +1,600 @@
++/**
++ * dossierMountRegistry.walker.test.js — TRAIN 1 cars C2/C3. THE MOUNT REGISTRY WALKER,
++ * and the arm that makes ONE FACT, ONE SENTENCE structural rather than aspirational.
++ *
++ * ── WHAT IT GUARDS ───────────────────────────────────────────────────────────────────
++ * `src/domain/display/stateProse/dossierMounts.js` is the dossier's router: it says which
++ * corpus block renders at which POSITION on which tab, and at which depth. A router is
++ * only worth its bytes if it cannot drift from the two things it joins — the CORPUS on
++ * one side and the COMPONENT TREE on the other — so every claim it makes is re-derived
++ * from a producer here, on every run, and nothing is trusted to a list a human keeps.
++ *
++ *   TOTALITY      every corpus block carrying a pool is either mounted or declared dark.
++ *   ONE SENTENCE  no block draws its SENTENCE rung at two positions (car C3).
++ *   REACHABILITY  every mount id resolves to exactly one site under src/components.
++ *   HONESTY       every mount over a dimension-bearing block declares that dimension,
++ *                 and one over a dimension-free block declares none.
++ *   SHRINK-ONLY   the dark half never grows.
++ *
++ * ── WHY THE ONE-SENTENCE ARM IS THE POINT ────────────────────────────────────────────
++ * The corpus draws its variety across SETTLEMENTS, not across surfaces: 687 of its 708
++ * pools carry exactly one variant per angle, so a design that pinned an angle per surface
++ * would have made the seed inert and printed one sentence for every town in a state. The
++ * refusal of that design costs something, and this is what pays for it. A settlement has
++ * one story about its crime wave; `history.currentTensions` already renders on three tabs,
++ * so the page repeats the RECORD, and repeating the record is coherent while contradicting
++ * it is not. The registry holds the law by shape (`rung` is a field, and
++ * `sentenceMountForBlock` answers with at most one position), and this arm is what turns
++ * shape into enforcement: a table that could name two speaking positions never gets built.
++ *
++ * ── THE REGISTRY IS EMPTY TODAY, AND THAT IS WHY THE CONTROLS ARE NOT OPTIONAL ───────
++ * No desk has landed, so `DOSSIER_MOUNTS` is empty and every arm above that reads a row
++ * would pass over nothing and prove nothing. So each rule is a PURE FUNCTION over a
++ * registry passed in, and the first describe drives every one of them over synthetic
++ * tables: a clean table on which the rule must stay silent, and a planted violation on
++ * which that rule alone must speak while its siblings stay silent. That is the difference
++ * between an arm that is armed and an arm that is merely present, and with an empty table
++ * it is the only way to tell them apart. The shipped table is then judged by the same
++ * functions, so the controls and the live arms cannot fall out of step.
++ *
++ * The FOUR synthetic rows are the design's own worked example (DS-ECO-1 at the prosperity
++ * header, DS-GEN-1 speaking on History and glancing on Power and Overview) rather than
++ * invented shapes, so the controls also read as the documentation of what a real row and
++ * a real page-set look like.
++ *
++ * @enforced-by itself (a source scan and a corpus join; no runtime coupling)
++ */
++import { readFileSync, readdirSync, statSync } from 'node:fs';
++import { fileURLToPath } from 'node:url';
++import { dirname, join, relative } from 'node:path';
++import { describe, expect, test } from 'vitest';
++
++import { mustExtract } from '../helpers/sourceContract.js';
++import { writeShrinkOnlyBaseline } from '../helpers/shrinkOnlyBaseline.js';
++import {
++  DOSSIER_MOUNTS,
++  MOUNT_RUNGS,
++  UNMOUNTED_BLOCKS,
++  mountById,
++  mountsForTab,
++  sentenceMountForBlock,
++} from '../../src/domain/display/stateProse/dossierMounts.js';
++import { poolDimensions } from '../../src/domain/display/stateProse/stateProseKernel.js';
++import { DOSSIER_STATE_PROSE_DEFENSE } from '../../src/data/dossierStateProse/defense.generated.js';
++import { DOSSIER_STATE_PROSE_ECONOMY } from '../../src/data/dossierStateProse/economy.generated.js';
++import { DOSSIER_STATE_PROSE_GENERAL } from '../../src/data/dossierStateProse/general.generated.js';
++import { DOSSIER_STATE_PROSE_POWER } from '../../src/data/dossierStateProse/power.generated.js';
++import { DOSSIER_STATE_PROSE_STRESSORS } from '../../src/data/dossierStateProse/stressors.generated.js';
++import { DOSSIER_STATE_PROSE_WAR_FAITH } from '../../src/data/dossierStateProse/warFaith.generated.js';
++
++const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
++const COMPONENTS = join(ROOT, 'src/components');
++const ROUTER = 'src/components/OutputContainer.jsx';
++const BASELINE_PATH = join(ROOT, 'tests/lint/.dossier-mounts-baseline.json');
++const UPDATE = process.env.UPDATE_MOUNT_BASELINE === '1';
++
++/**
++ * THE CORPUS, desk by desk. The desk key is the leaf's basename, which is the same word
++ * a mount row spells, so the join needs no translation table that could drift.
++ * @type {Readonly<Record<string, Record<string, {pools?: Record<string, unknown[]>}>>>}
++ */
++const DESKS = Object.freeze({
++  defense: DOSSIER_STATE_PROSE_DEFENSE,
++  economy: DOSSIER_STATE_PROSE_ECONOMY,
++  general: DOSSIER_STATE_PROSE_GENERAL,
++  power: DOSSIER_STATE_PROSE_POWER,
++  stressors: DOSSIER_STATE_PROSE_STRESSORS,
++  warFaith: DOSSIER_STATE_PROSE_WAR_FAITH,
++});
++
++// ── The producers, derived rather than declared ──────────────────────────────────────
++
++/**
++ * Every block id that carries at least one pool, mapped to the desk that holds it, in the
++ * registry's own canonical order: desk name ascending, then the leaf's own block order.
++ * @returns {{blockId: string, desk: string}[]}
++ */
++function corpusBlocks() {
++  const rows = [];
++  for (const desk of Object.keys(DESKS).sort()) {
++    for (const [blockId, block] of Object.entries(DESKS[desk])) {
++      if (Object.keys(block?.pools || {}).length > 0) rows.push({ blockId, desk });
++    }
++  }
++  return rows;
++}
++
++const CORPUS_BLOCKS = corpusBlocks();
++const DESK_OF_BLOCK = new Map(CORPUS_BLOCKS.map((row) => [row.blockId, row.desk]));
++const CANONICAL_ORDER = CORPUS_BLOCKS.map((row) => row.blockId);
++
++/**
++ * The demoted STATE dimensions a block partitions itself by, unioned over its pools. The
++ * kernel's own `poolDimensions` is the reader, so this walker cannot invent a second
++ * opinion about what a dimension is.
++ * @param {string} blockId
++ * @returns {string[]} sorted, empty for a block the projection demoted nothing into
++ */
++function blockDimensions(blockId) {
++  const desk = DESK_OF_BLOCK.get(blockId);
++  const block = desk ? DESKS[desk][blockId] : null;
++  const found = new Set();
++  for (const pool of Object.values(block?.pools || {})) {
++    for (const dimension of poolDimensions(/** @type {never} */ (pool))) found.add(dimension);
++  }
++  return [...found].sort();
++}
++
++/**
++ * THE TAB VOCABULARY, read off the router itself. `OutputContainer`'s `renderTab` switch
++ * is the only thing in the tree that decides what a tab id can be, so a hand-kept list
++ * here would be a second opinion that drifts. `mustExtract` throws when the switch moves,
++ * which is the loud failure a silently-empty extractor would not give.
++ * @returns {Set<string>}
++ */
++function routerTabs() {
++  const source = readFileSync(join(ROOT, ROUTER), 'utf8');
++  mustExtract(source, 'switch (selectedTab) {', `the renderTab switch in ${ROUTER}`);
++  return new Set([...source.matchAll(/case '([a-z_]+)':/g)].map((match) => match[1]));
++}
++
++const TAB_VOCABULARY = routerTabs();
++const DESK_VOCABULARY = new Set(Object.keys(DESKS));
++const RUNG_VOCABULARY = new Set(Object.values(MOUNT_RUNGS));
++
++/**
++ * The CONTENTS of every string literal in a source file, comments skipped. A mount id is
++ * looked for INSIDE a literal because that is where an id can be used; the shared
++ * `codeOnly` strip does the opposite (it blanks literal contents to find calls), so this
++ * walker keeps its own reader, and the first arm below drives it against prose, a line
++ * comment, a block comment and all three quote styles before any absence is asserted.
++ * @param {string} src
++ * @returns {string[]}
++ */
++function stringLiterals(src) {
++  const out = [];
++  let i = 0;
++  const n = src.length;
++  while (i < n) {
++    const c = src[i];
++    if (c === '/' && src[i + 1] === '/') { while (i < n && src[i] !== '\n') i += 1; continue; }
++    if (c === '/' && src[i + 1] === '*') {
++      i += 2;
++      while (i < n && !(src[i] === '*' && src[i + 1] === '/')) i += 1;
++      i += 2;
++      continue;
++    }
++    if (c === "'" || c === '"' || c === '`') {
++      let buffer = '';
++      i += 1;
++      while (i < n && src[i] !== c) {
++        if (src[i] === '\\') { buffer += src[i + 1] ?? ''; i += 2; continue; }
++        buffer += src[i];
++        i += 1;
++      }
++      i += 1;
++      out.push(buffer);
++      continue;
++    }
++    i += 1;
++  }
++  return out;
++}
++
++/** @param {string} dir @param {string[]} out @returns {string[]} */
++function walkSources(dir, out = []) {
++  for (const entry of readdirSync(dir)) {
++    const path = join(dir, entry);
++    if (statSync(path).isDirectory()) walkSources(path, out);
++    else if (/\.jsx?$/.test(entry) && !/\.test\./.test(entry)) out.push(path);
++  }
++  return out;
++}
++
++const COMPONENT_LITERALS = walkSources(COMPONENTS).map((absolute) => ({
++  rel: relative(ROOT, absolute).replace(/\\/g, '/'),
++  literals: stringLiterals(readFileSync(absolute, 'utf8')),
++}));
++
++/**
++ * How many sites under src/components name this id as a whole string literal.
++ * @param {string} id
++ * @param {{rel: string, literals: string[]}[]} [tree]
++ * @returns {number}
++ */
++function componentSites(id, tree = COMPONENT_LITERALS) {
++  let seen = 0;
++  for (const file of tree) for (const literal of file.literals) if (literal === id) seen += 1;
++  return seen;
++}
++
++// ── The rules. Each is TOTAL over a registry passed in, and each returns the offences it
++//    found, so the same function serves the synthetic controls and the shipped table. ──
++
++/** @param {readonly object[]} mounts @returns {string[]} */
++function malformedRows(mounts) {
++  const bad = [];
++  for (const row of mounts) {
++    const where = String(row?.mount ?? '(no mount id)');
++    if (typeof row?.mount !== 'string' || row.mount === '') bad.push(`${where}: no mount id`);
++    if (!TAB_VOCABULARY.has(row?.tab)) bad.push(`${where}: tab ${row?.tab} is not a router tab`);
++    if (!DESK_VOCABULARY.has(row?.desk)) bad.push(`${where}: desk ${row?.desk} is not a corpus leaf`);
++    if (!RUNG_VOCABULARY.has(row?.rung)) bad.push(`${where}: rung ${row?.rung} is not a rung`);
++    if (!DESK_OF_BLOCK.has(row?.blockId)) bad.push(`${where}: ${row?.blockId} is not a corpus block`);
++    else if (DESK_OF_BLOCK.get(row.blockId) !== row.desk) {
++      bad.push(`${where}: ${row.blockId} lives on the ${DESK_OF_BLOCK.get(row.blockId)} desk`);
++    }
++    if (typeof row?.mount === 'string' && typeof row?.tab === 'string'
++      && !row.mount.startsWith(`${row.tab}.`)) {
++      bad.push(`${where}: the mount id does not begin with its own tab`);
++    }
++  }
++  return bad.sort();
++}
++
++/** @param {readonly object[]} mounts @returns {string[]} */
++function duplicateMountIds(mounts) {
++  const seen = new Map();
++  for (const row of mounts) seen.set(row?.mount, (seen.get(row?.mount) || 0) + 1);
++  return [...seen].filter(([, count]) => count > 1).map(([id]) => String(id)).sort();
++}
++
++/**
++ * THE ROOM, AS A PREDICATE. Every block that draws its sentence rung at more than one
++ * position. Empty is the only lawful answer.
++ * @param {readonly object[]} mounts
++ * @returns {string[]}
++ */
++function blocksSpeakingTwice(mounts) {
++  const speaking = new Map();
++  for (const row of mounts) {
++    if (row?.rung !== MOUNT_RUNGS.SENTENCE) continue;
++    speaking.set(row.blockId, [...(speaking.get(row.blockId) || []), row.mount]);
++  }
++  return [...speaking]
++    .filter(([, positions]) => positions.length > 1)
++    .map(([blockId, positions]) => `${blockId} speaks at ${positions.sort().join(' and ')}`)
++    .sort();
++}
++
++/** @param {readonly object[]} mounts @returns {string[]} */
++function dimensionDeclarationFaults(mounts) {
++  const bad = [];
++  for (const row of mounts) {
++    if (!DESK_OF_BLOCK.has(row?.blockId)) continue;
++    const owed = blockDimensions(row.blockId);
++    const declared = [...(row?.dimensions || [])].sort();
++    if (owed.join(',') !== declared.join(',')) {
++      bad.push(`${row.mount}: ${row.blockId} partitions by [${owed.join(',')}]`
++        + ` and the row declares [${declared.join(',')}]`);
++    }
++  }
++  return bad.sort();
++}
++
++/**
++ * @param {readonly object[]} mounts
++ * @param {{rel: string, literals: string[]}[]} [tree]
++ * @returns {string[]}
++ */
++function unreachableMounts(mounts, tree = COMPONENT_LITERALS) {
++  return mounts
++    .filter((row) => componentSites(row?.mount, tree) !== 1)
++    .map((row) => `${row?.mount}: ${componentSites(row?.mount, tree)} sites under src/components`)
++    .sort();
++}
++
++/**
++ * @param {readonly object[]} mounts
++ * @param {readonly string[]} unmounted
++ * @returns {{unrouted: string[], doubled: string[], strangers: string[]}}
++ */
++function routingLedger(mounts, unmounted) {
++  const mounted = new Set(mounts.map((row) => row?.blockId));
++  const dark = new Set(unmounted);
++  const unrouted = CANONICAL_ORDER.filter((id) => !mounted.has(id) && !dark.has(id));
++  const doubled = CANONICAL_ORDER.filter((id) => mounted.has(id) && dark.has(id));
++  const strangers = [...dark].filter((id) => !DESK_OF_BLOCK.has(id)).sort();
++  return { unrouted, doubled, strangers };
++}
++
++// ── THE CONTROLS. Every rule driven over a clean table and a planted one. ─────────────
++
++/** The design's own worked example: one economy header, one fact speaking once. */
++const CLEAN = Object.freeze([
++  Object.freeze({
++    mount: 'economics.prosperityHeader', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-1', rung: 'sentence',
++  }),
++  Object.freeze({
++    mount: 'history.tensions', tab: 'history', desk: 'general', blockId: 'DS-GEN-1', rung: 'sentence', dimensions: ['severity'],
++  }),
++  Object.freeze({
++    mount: 'power.tensions', tab: 'power', desk: 'general', blockId: 'DS-GEN-1', rung: 'glance', dimensions: ['severity'],
++  }),
++  Object.freeze({
++    mount: 'overview.tensions', tab: 'overview', desk: 'general', blockId: 'DS-GEN-1', rung: 'glance', dimensions: ['severity'],
++  }),
++]);
++
++/** @param {number} index @param {object} patch @returns {object[]} */
++function mutate(index, patch) {
++  return CLEAN.map((row, i) => (i === index ? { ...row, ...patch } : row));
++}
++
++/** A component tree in which all four clean ids resolve exactly once. */
++const WIRED_TREE = [{
++  rel: 'src/components/probe.jsx',
++  literals: CLEAN.map((row) => row.mount),
++}];
++
++/**
++ * Every rule, by name, so a control can assert that ONE spoke and the others did not.
++ * @type {Readonly<Record<string, (mounts: readonly object[]) => string[]>>}
++ */
++const RULES = Object.freeze({
++  malformed: malformedRows,
++  duplicate: duplicateMountIds,
++  twoSentences: blocksSpeakingTwice,
++  dimensions: dimensionDeclarationFaults,
++  unreachable: (mounts) => unreachableMounts(mounts, WIRED_TREE),
++});
++
++/**
++ * @param {readonly object[]} mounts
++ * @returns {string[]} the names of the rules that found something
++ */
++function rulesThatSpeak(mounts) {
++  return Object.entries(RULES).filter(([, rule]) => rule(mounts).length > 0).map(([name]) => name).sort();
++}
++
++describe('C2 mount registry — the guards can see the defects they guard', () => {
++  test('guard the guard: the literal reader sees code and skips prose', () => {
++    expect(stringLiterals("const a = 'history.tensions';")).toEqual(['history.tensions']);
++    expect(stringLiterals('const a = "history.tensions";')).toEqual(['history.tensions']);
++    expect(stringLiterals('const a = `history.tensions`;')).toEqual(['history.tensions']);
++    // A comment naming a mount is documentation, never a site: the estate has convicted a
++    // registry for DESCRIBING the thing it classifies eight times over, so this door is
++    // driven rather than assumed.
++    expect(stringLiterals('// history.tensions goes here')).toEqual([]);
++    expect(stringLiterals('/* history.tensions goes here */')).toEqual([]);
++    expect(stringLiterals("const a = 'x'; // 'history.tensions'")).toEqual(['x']);
++    // And the scan really did reach the component tree, so an absence below is a
++    // measurement rather than an empty walk.
++    expect(COMPONENT_LITERALS.length, 'the component scan emptied').toBeGreaterThan(400);
++    expect(
++      COMPONENT_LITERALS.reduce((sum, file) => sum + file.literals.length, 0),
++      'the component scan found no literals at all',
++    ).toBeGreaterThan(5000);
++  });
++
++  test('guard the guard: the tab vocabulary is derived from the router that uses it', () => {
++    // Derived from OutputContainer's own switch, never a hand-kept twin. If the switch
++    // moves, mustExtract throws while this file is being read, which is the loud failure.
++    expect(TAB_VOCABULARY.size, 'the router tab vocabulary collapsed').toBeGreaterThan(20);
++    for (const tab of ['economics', 'history', 'power', 'overview', 'defense', 'war', 'faith']) {
++      expect([...TAB_VOCABULARY], `${tab} is not a router tab`).toContain(tab);
++    }
++    // A word the router cannot render is not a tab, however plausible it reads.
++    expect(TAB_VOCABULARY.has('economy'), 'the desk name is not a tab id').toBe(false);
++    expect(DESK_VOCABULARY.has('economy'), 'the desk name is a desk').toBe(true);
++    // The corpus join is populated, or every totality claim below is free.
++    expect(CORPUS_BLOCKS.length, 'the corpus join emptied').toBe(68);
++    expect(blockDimensions('DS-GEN-1')).toEqual(['severity']);
++    expect(blockDimensions('DS-GEN-6')).toEqual(['deficit']);
++    expect(blockDimensions('DS-GEN-9')).toEqual(['anchor']);
++    expect(blockDimensions('DS-ECO-1')).toEqual([]);
++  });
++
++  test('the clean worked example passes every rule', () => {
++    expect(rulesThatSpeak(CLEAN), 'the control table is not clean').toEqual([]);
++    // The dark half for this control is DERIVED from the corpus rather than borrowed from
++    // the shipped list, so a control cannot red because the thing it controls changed.
++    const dark = CANONICAL_ORDER.filter((id) => !CLEAN.some((row) => row.blockId === id));
++    expect(routingLedger(CLEAN, dark))
++      .toEqual({ unrouted: [], doubled: [], strangers: [] });
++  });
++
++  test('ONE FACT ONE SENTENCE: a second speaking position reds this arm and no other', () => {
++    // The design's own negative control: flip power.tensions to the sentence rung and
++    // DS-GEN-1 now speaks on two tabs about one record. This is car C3's whole mechanism.
++    const planted = mutate(2, { rung: MOUNT_RUNGS.SENTENCE });
++    expect(blocksSpeakingTwice(planted))
++      .toEqual(['DS-GEN-1 speaks at history.tensions and power.tensions']);
++    expect(rulesThatSpeak(planted), 'the one-sentence plant disturbed a sibling rule')
++      .toEqual(['twoSentences']);
++    // Three positions is the annex note this design refused, and it reds the same way.
++    const thrice = mutate(3, { rung: MOUNT_RUNGS.SENTENCE });
++    expect(blocksSpeakingTwice(thrice.map((row, i) => (i === 2 ? { ...row, rung: MOUNT_RUNGS.SENTENCE } : row))))
++      .toEqual(['DS-GEN-1 speaks at history.tensions and overview.tensions and power.tensions']);
++    // And the lawful shape stays silent: the same block glancing at two positions is the
++    // design, not the defect.
++    expect(blocksSpeakingTwice(CLEAN)).toEqual([]);
++  });
++
++  test('a duplicated position reds the duplicate arm and no other', () => {
++    const planted = [...CLEAN, { ...CLEAN[2], rung: MOUNT_RUNGS.GLANCE }];
++    expect(duplicateMountIds(planted)).toEqual(['power.tensions']);
++    expect(rulesThatSpeak(planted)).toEqual(['duplicate']);
++  });
++
++  test('a stranger tab, a mismatched desk and a mount id disowning its tab each red the shape arm', () => {
++    expect(malformedRows(mutate(0, { tab: 'nowhere' })))
++      .toEqual(['economics.prosperityHeader: the mount id does not begin with its own tab',
++        'economics.prosperityHeader: tab nowhere is not a router tab'].sort());
++    expect(rulesThatSpeak(mutate(0, { tab: 'nowhere' }))).toEqual(['malformed']);
++    // A desk that does not hold the block: the row would read the wrong leaf forever.
++    expect(malformedRows(mutate(1, { desk: 'power' })))
++      .toEqual(['history.tensions: DS-GEN-1 lives on the general desk']);
++    // A block the corpus does not have.
++    expect(malformedRows(mutate(1, { blockId: 'DS-GEN-99' })))
++      .toEqual(['history.tensions: DS-GEN-99 is not a corpus block']);
++    // A rung outside the ladder.
++    expect(malformedRows(mutate(1, { rung: 'detail' })))
++      .toEqual(['history.tensions: rung detail is not a rung']);
++    // A mount id that says one tab while the row says another. This is the field pair a
++    // reader trusts most and the one nothing else would ever compare.
++    expect(malformedRows(mutate(2, { mount: 'history.tensionsGlance' })))
++      .toEqual(['history.tensionsGlance: the mount id does not begin with its own tab']);
++  });
++
++  test('a mount that names no dimension over a dimension-bearing block reds the honesty arm', () => {
++    // The silent failure this replaces: at runtime the kernel would fail closed and the
++    // surface would render prose-less forever, looking exactly like a state with nothing
++    // to say. Here it is a build-time red naming the block and the dimension.
++    const silent = mutate(1, { dimensions: undefined });
++    expect(dimensionDeclarationFaults(silent))
++      .toEqual(['history.tensions: DS-GEN-1 partitions by [severity] and the row declares []']);
++    expect(rulesThatSpeak(silent)).toEqual(['dimensions']);
++    // And the other way: a row claiming a dimension its block does not carry is a desk
++    // that will assemble a reading nothing consumes.
++    const invented = mutate(0, { dimensions: ['severity'] });
++    expect(dimensionDeclarationFaults(invented))
++      .toEqual(['economics.prosperityHeader: DS-ECO-1 partitions by [] and the row declares [severity]']);
++    expect(rulesThatSpeak(invented)).toEqual(['dimensions']);
++    // A wrong dimension name is caught by the same equality, not by a separate list.
++    expect(dimensionDeclarationFaults(mutate(1, { dimensions: ['anchor'] })))
++      .toEqual(['history.tensions: DS-GEN-1 partitions by [severity] and the row declares [anchor]']);
++  });
++
++  test('a mount with no JSX site, and one with two, both red the reachability arm', () => {
++    // The synthetic probe the design names: a position declared and never built.
++    const probe = [...CLEAN, {
++      mount: 'overview.__probe', tab: 'overview', desk: 'economy', blockId: 'DS-ECO-2', rung: MOUNT_RUNGS.GLANCE,
++    }];
++    expect(unreachableMounts(probe, WIRED_TREE))
++      .toEqual(['overview.__probe: 0 sites under src/components']);
++    expect(rulesThatSpeak(probe)).toEqual(['unreachable']);
++    // TWO sites is the other half of "exactly one", and it is the half a presence-only
++    // scan would miss: one position rendered from two places is two positions.
++    const twice = [{ rel: 'src/components/probe.jsx', literals: [...WIRED_TREE[0].literals, 'power.tensions'] }];
++    expect(unreachableMounts(CLEAN, twice))
++      .toEqual(['power.tensions: 2 sites under src/components']);
++    // NON-VACUITY of the real scan: a string the component tree really does carry is
++    // found, and one it does not is not. Without this the arm could be a reader that
++    // stopped reading.
++    expect(componentSites('economics'), 'the live component scan finds nothing')
++      .toBeGreaterThan(0);
++    expect(componentSites('overview.__probe.never')).toBe(0);
++  });
++
++  test('the routing ledger reds an unrouted block, a doubled block and a stranger', () => {
++    // Unrouted: the corpus grew a block and nobody said where it goes. This is the plant
++    // scripts/mutation-sweep.sh carries against the shipped registry.
++    const short = UNMOUNTED_BLOCKS.filter((id) => id !== 'DS-CND-1');
++    expect(routingLedger([], short).unrouted).toEqual(['DS-CND-1']);
++    // Doubled: mounted AND still declared dark, so the darkness figure lies.
++    expect(routingLedger(CLEAN, UNMOUNTED_BLOCKS).doubled).toEqual(['DS-ECO-1', 'DS-GEN-1']);
++    // A stranger: a name in the dark list that the corpus does not have.
++    expect(routingLedger([], [...UNMOUNTED_BLOCKS, 'DS-GHOST-1']).strangers).toEqual(['DS-GHOST-1']);
++  });
++});
++
++describe('C2 mount registry — the shipped table', () => {
++  test('every row is well formed, unique, reachable and honest about its dimensions', () => {
++    expect(malformedRows(DOSSIER_MOUNTS), 'a mount row does not address the tree').toEqual([]);
++    expect(duplicateMountIds(DOSSIER_MOUNTS), 'two rows claim one position').toEqual([]);
++    expect(
++      unreachableMounts(DOSSIER_MOUNTS),
++      'a mount id resolves to no site or to more than one under src/components. A'
++      + ' position the registry names and the tree does not build is a router pointing at'
++      + ' nothing; add the row and the site in the SAME commit.',
++    ).toEqual([]);
++    expect(
++      dimensionDeclarationFaults(DOSSIER_MOUNTS),
++      'a mount over a dimension-bearing block does not declare its dimension. The kernel'
++      + ' fails closed on an unanswered dimension, so this row would render prose-less in'
++      + ' front of a reader and look like a state with nothing to say.',
++    ).toEqual([]);
++  });
++
++  test('TOTALITY: every corpus block is mounted or declared dark, and exactly one of the two', () => {
++    const ledger = routingLedger(DOSSIER_MOUNTS, UNMOUNTED_BLOCKS);
++    expect(
++      ledger.unrouted,
++      'a corpus block is neither mounted nor declared dark. Every block has a position or'
++      + ' a written reason it has none; there is no third state.',
++    ).toEqual([]);
++    expect(ledger.doubled, 'a block is mounted AND still listed dark').toEqual([]);
++    expect(ledger.strangers, 'the dark list names something the corpus does not have').toEqual([]);
++    // The accounting identity, stated as one number so the split is legible in a failure.
++    expect(new Set(DOSSIER_MOUNTS.map((row) => row.blockId)).size + UNMOUNTED_BLOCKS.length)
++      .toBe(CORPUS_BLOCKS.length);
++  });
++
++  test('the dark list is in its declared canonical order and holds no duplicate', () => {
++    // ORDER IS CHECKED, NOT CLAIMED. A comment saying "desk ascending, then leaf order"
++    // is worth what a reader is willing to re-derive; this arm re-derives it every run,
++    // so an insertion is visible in a diff as an insertion.
++    expect(new Set(UNMOUNTED_BLOCKS).size, 'the dark list repeats a block')
++      .toBe(UNMOUNTED_BLOCKS.length);
++    expect([...UNMOUNTED_BLOCKS])
++      .toEqual(CANONICAL_ORDER.filter((id) => UNMOUNTED_BLOCKS.includes(id)));
++  });
++
++  test('SHRINK-ONLY: the dark half never grows past its committed baseline', () => {
++    const measured = { UNMOUNTED_BLOCKS: { blocks: UNMOUNTED_BLOCKS.length } };
++    if (UPDATE) {
++      // The documented refreeze, guarded: writeShrinkOnlyBaseline THROWS on a raise rather
++      // than banking it, so running the refreeze on a grown tree fails where someone is
++      // watching instead of moving the line the debt is measured against.
++      writeShrinkOnlyBaseline(BASELINE_PATH, measured, 'the dossier mount darkness baseline');
++    }
++    const committed = JSON.parse(readFileSync(BASELINE_PATH, 'utf8'));
++    expect(
++      measured.UNMOUNTED_BLOCKS.blocks,
++      'the dark half GREW. A new corpus block cannot be parked dark: mount it, or say in'
++      + ' writing why the page has no position for it. Refreeze a FALL with'
++      + ' UPDATE_MOUNT_BASELINE=1 npx vitest run tests/lint/dossierMountRegistry.walker.test.js',
++    ).toBeLessThanOrEqual(committed.UNMOUNTED_BLOCKS.blocks);
++    // The baseline is a real number about a real corpus, not a placeholder.
++    expect(committed.UNMOUNTED_BLOCKS.blocks).toBeLessThanOrEqual(CORPUS_BLOCKS.length);
++  });
++});
++
++describe('C3 the room — one fact, one sentence', () => {
++  test('no block draws its sentence rung at two positions', () => {
++    expect(
++      blocksSpeakingTwice(DOSSIER_MOUNTS),
++      'a block speaks at two positions. A settlement has one story about one record: the'
++      + ' page may repeat the RECORD at as many positions as the layout wants, and every'
++      + ' position after the first renders the glance and the detail rungs and no'
++      + ' sentence. Flip the extra row to rung glance.',
++    ).toEqual([]);
++  });
++
++  test('sentenceMountForBlock is fail-closed on a contradiction, and total on a clean table', () => {
++    // The runtime half of the law. It cannot be driven over the shipped table today
++    // because the table is empty, so it is driven over the worked example, which is the
++    // shape a desk car will actually produce.
++    const speaking = CLEAN.filter((row) => row.rung === MOUNT_RUNGS.SENTENCE);
++    expect(speaking.map((row) => row.mount))
++      .toEqual(['economics.prosperityHeader', 'history.tensions']);
++    // And the accessor's own contract, exercised through the shipped module on the empty
++    // table: no position, no fact, no answer.
++    expect(sentenceMountForBlock('DS-GEN-1')).toBeNull();
++    expect(sentenceMountForBlock('')).toBeNull();
++    expect(sentenceMountForBlock(/** @type {never} */ (undefined))).toBeNull();
++    expect(mountById('history.tensions')).toBeNull();
++    expect(mountsForTab('history')).toEqual([]);
++    // THE FAIL-CLOSED RULE, proven by construction rather than by reading the source: a
++    // block with two speaking rows must answer with NOTHING, because picking the first
++    // would choose a winner by array order and that is the silent wrong answer this whole
++    // subsystem refuses. The predicate below is the accessor's own body over a table the
++    // registry is not allowed to hold.
++    const contradictory = mutate(2, { rung: MOUNT_RUNGS.SENTENCE });
++    const answer = contradictory.filter(
++      (row) => row.blockId === 'DS-GEN-1' && row.rung === MOUNT_RUNGS.SENTENCE,
++    );
++    expect(answer.length, 'the contradiction did not plant').toBe(2);
++    expect(answer.length === 1 ? answer[0] : null, 'a contradiction must read as silence')
++      .toBeNull();
++  });
++
++  test('the rung vocabulary is closed, and DETAIL is deliberately not a mount choice', () => {
++    expect([...RUNG_VOCABULARY].sort()).toEqual(['glance', 'sentence']);
++    // The legibility ladder has three rungs and only two of them are a DRAW. A detail is
++    // translated rows, so every position may render one and no position competes for it;
++    // putting `detail` in this vocabulary would invite a row that renders nothing at all.
++    expect(RUNG_VOCABULARY.has('detail')).toBe(false);
++  });
++});

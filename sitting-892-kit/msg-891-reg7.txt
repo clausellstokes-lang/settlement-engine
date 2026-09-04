@@ -1,0 +1,36 @@
+§891 register 7/7: the writer-reach register re-frozen at the composed tip — two identities move, the direction the card gave was inverted, and the act is reproduced byte-for-byte without touching the dock
+
+The seventh and last register act of the §891 train. `check-writer-reach.mjs --write`
+at 4233031ba: cohort 1322 → 1322, 0 stale folded out, 0 registered rows lit, 0
+violations. Exactly two surfaceReach entries move — `situationDesc on economicState`
+web-display R → N, and `_seed on settlement` web-display N → R — plus the six closure
+sizes and seven scan stats that follow the train's new files (web-display 679 → 685).
+
+THE DIRECTION THE HANDOFF GAVE WAS BACKWARDS. The card said DESK CAR 1 made
+situationDesc REACH the web display while the frozen register still called it dark.
+Vitest prints actual first and expected second; the walker asserts
+expect(frozen[id]).toBe(formatted), so "expected 'web-display=R' to be 'web-display=N'"
+means the REGISTER said R and the TREE measured N. The product still renders the
+string — EconomicsGlance.jsx carries `{eco.situationDesc && <p …>}` inside the
+web-display closure, probe-confirmed — but the scanner can no longer GROUND the read:
+makeResolver resolves a parameter from its call sites, a JSX element is not a call, and
+`situationDesc` has no single home in the corpus. The read moved from EconomicsTab.jsx,
+where `eco = economicState || s?.economicState` grounds through the single-home key,
+into a leaf that takes `eco` as a bare prop. The register's per-surface grade is a
+GROUNDING fact, not a display fact, and this is how it already grades every prop-bound
+read in the estate (6,423 grounded receivers of 37,517 sites).
+
+Why absorb rather than cure: a cure would re-route one read through a groundable
+receiver in a sealed train AFTER six register acts, and both files carry OSR rows (8)
+and prose-numerics rows (24), so it would re-open two taken registers to keep a grade
+that means less than the card thought. Docketed instead for the lighting wave: every
+desk-extraction car will darken web-display grades this way, and the register's reader
+must know what the grade means.
+
+Predicted in writing before the run ($SC/PREDICT-writer-reach-891.md), then REPRODUCED
+by driving run(['--write']) with the committed blob as readBaseline and a scratch path
+as writeBaseline — the dock untouched — and compared byte-for-byte with the file the
+previous chair wrote at 18:26 without a prediction: md5 0602e826197b87ee6b98379ce30167c3
+on both, 715,150 B, identical. The committed bytes here are that file.
+
+Seat: Fable 5.1 — validated

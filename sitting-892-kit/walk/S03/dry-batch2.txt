@@ -1,0 +1,34 @@
+[DRY batch2 CHARSET] would-apply reps: 1 / 33
+BAD #01 count=0 want=1 :: "where every allowed set is DERIVED by the existing manifest compiler from the renderers' own bytes ("
+BAD #02 count=0 want=1 :: "`CharsetSurface` (six = WRWALKER's seven minus `news`)"
+BAD #03 count=0 want=1 :: 'invisible (U+00AD, U+180E, U+200B-200D, U+2060-2064, U+FEFF, U+FFF9-FFFB)'
+BAD #04 count=0 want=1 :: 'the runtime PATH is PLAUSIBLE — Car 0 probe 1 settles it, fallback §8.7 R1) = **218**;'
+BAD #05 count=0 want=1 :: '`S = { cp ∈ C : sanitizeJsPdfText(String.fromCodePoint(cp)) === String.fromCodePoint(cp) }` — the te'
+BAD #06 count=0 want=1 :: '(`institutions.name` = `D ∩ S` = 190; `U+00AD` is in `S`, not in `D`, and banned anyway)'
+BAD #07 count=0 want=1 :: "`custom-charset` · 0 B; excluded from OSR's scan by name (`isObservedShapeScanPath` excludes `.gener"
+BAD #08 count=0 want=1 :: "`sanitizeJsPdfText(v)` — Car 1: the hoisted `s()` body, byte-identical (`String(v||'').replace(/[^\\x"
+BAD #09 count=0 want=1 :: '`surfaceClasses` (the six), `charsetPolicy`, per free-text field `surfaces: [...]` (41 fields;'
+BAD #10 count=0 want=1 :: "`customContentSliceRuntime-*` (lazy) · 0 B PLAUSIBLE — ⟦A5 B5⟧ the slice's OWN dynamic edge writes t"
+BAD #11 count=0 want=1 :: "`surfaces['campaign-pdf'].count === |{cp ∈ C : sanitizeJsPdfText(cp) === cp}|` recomputed live; `D ∩"
+BAD #12 count=0 want=1 :: 'HONESTY → the one derivation step not executable read-only (the jsPDF runtime path) is PLAUSIBLE wit'
+OK  #13 count=1 want=1 :: 'STOP: probe 4 > 0 (redesign the reads before any bytes); probe 2 ≠ 8 faces (the roster parse is wron'
+BAD #14 count=0 want=1 :: '`jsPdfText.js` + the two painters importing it (byte-identical), the vite pin, the three tests (`cus'
+BAD #15 count=0 want=1 :: '(6) a full `npm run build` + `matseam-closure.mjs` on the dock vs the base: the eight closure chunks'
+BAD #16 count=0 want=1 :: "STOP: any closure byte moved (find the eager edge); proof 4's plants do not red; the hoist changes a"
+BAD #17 count=0 want=1 :: 'OSR 0 findings (probe 4), `.generated.js` excluded from OSR;'
+BAD #18 count=0 want=1 :: 'test-side — three new test files: lighting `files +3`, `parked +1`, `credited +2` (⟦A18 E2⟧ `customC'
+BAD #19 count=0 want=1 :: '`S` converges to `C` (218) on the next regen; `world-book` fields grow by the 27 (`institutions.name'
+BAD #20 count=0 want=1 :: 'the owner vetoes (then `S` stays 191 and the table records it — honest in both states).'
+BAD #21 count=0 want=1 :: "| Car 0 | any time after COUPLED lands (it READS the coupled tip's `s()` lines and the GLYPH arm) | "
+BAD #22 count=0 want=1 :: '| R1 | the jsPDF runtime table is not reachable in node the way `:3011-3027` suggests | 25 % · half '
+BAD #23 count=0 want=1 :: "| ⟦A5 B5⟧ LIKELY, MEASURED (was '20 %') · one edit |"
+BAD #24 count=0 want=1 :: 'and `customContentManifest.js` has FIVE static importers at `60255ca8e` (`contentEffectProjection`, '
+BAD #25 count=0 want=1 :: '| R8 | OSR: two new `src/domain/content` files enter the scan; a resolver-visible read would be a fi'
+BAD #26 count=0 want=1 :: "(⟦A25 E9⟧ the expected reading is 0 new findings — the 'per-file sha' write the volume feared was a "
+BAD #27 count=0 want=1 :: 'OSR 0 new findings (⟦A25 E9⟧; `.generated.js` excluded by name)'
+BAD #28 count=0 want=1 :: 'titles per Car 0 probe 5 (PLAUSIBLE ≈ 25–35)'
+BAD #29 count=0 want=1 :: 'new literal titles ≈ **250** (PLAUSIBLE: CAPACITY 27 · TUNEREG 42 · SOAKCHAIN ≈ 37 · READERREVIEW 15'
+BAD #30 count=0 want=1 :: "`check:observed-shape-readers` RUN at every src car's tip; 0 new findings and no sentinel/rowTag mov"
+BAD #31 count=0 want=1 :: '| E27 | the jsPDF runtime WinAnsi table is reachable at `getFont().metadata.Unicode.encoding.WinAnsi'
+BAD #32 count=0 want=1 :: "| E28 | the `custom-charset` mapDeps row stays out of the ENTRY's map (§8.2) — ⟦A5 B5⟧ the row is ow"
+BAD #33 count=0 want=1 :: "| E30 | CHARSET's four new test files' title/suite counts (≈ 25–35 titles) (§11.1) | Car 0 probe 5 t"

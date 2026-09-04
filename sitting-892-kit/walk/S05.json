@@ -1,0 +1,216 @@
+{
+  "slice": "S05",
+  "status": "COMPLETE",
+  "summary": "S05 (§882.13, FRQ 2014-2027) re-derived from the ledger, three design volumes, the ENC/lighting receipts and the product trees at 9a0584f0f, 30c1667bc and 4233031ba. Net: the delegation reading and the five holds hold; the pre-launch boundary is sound in substance but is an UNNAMED supersession of four same-day classifications that called persisted shape owner-by-nature (§881.6, LIGHTING §7, HORIZON §19 :1240, DESIGN_ENCOUNTERS §12 preamble) and its 'carries no migration' overstates (OSR governed migrations are still owed); 5b NO is ratified as an application of §881.11/§881.10(1) with a citation error and a superseded fence-3 description; WK-11 KEEP is executed evidence. Three rulings the row counts as done are NOT executed at any tip and are read by the lanes as still owner-pending: RR-10 (readerCorpus.mjs at 4233031ba says the opposite in a comment), ENC rows 2 and 3 (respect coerces to friendship, rivalry refused, 'until the owner rules the rivalry word'). Row 6's kind name and 5b's fence 3 were superseded later and the stratum does not mark it. Verdicts: RATIFY 10 · AMEND 7 · no REVERSE; one EVIDENCE-THIN note (row 13's docket) is carried inside S05-17. Porcelain unchanged on every dock touched.",
+  "calls": [
+    {
+      "row": "S05-1",
+      "call": "§882.13 reads the owner's 'I leave everything to your judgment' as a RESTATEMENT of the standing grant, never new authority over carve-outs by nature",
+      "claim": "The sentence restates §170/§217/§223 + the 08-10 grant; the by-nature carve-outs (tuning values/signature, paid tier, re-opening a specific owner ruling, budget raise) survive it.",
+      "method": "Read the §882.13 ledger row (32362), §881.6 (32335, Fable-validated), §763.1 (31686), §464.1 (18866), memory full-delegation-grant-2026-08-10.md; grep -c for the sentence in the ledger; grep SP/LANE-QUEUE.md for a receipt.",
+      "evidence": "§881.6: \"I leave all decisions to you\" RULED \"the full delegation (§879.6, §880.12) is REAFFIRMED with the owner-gated classes by nature untouched (push and deploy, legal, data deletion, tuning VALUES, security posture, persisted shapes)\". §763.1: \"THE BY-NATURE CARVE-OUTS STAND regardless of breadth (the 08-10 grant's own law)\". memory: \"The four BY-NATURE carve-outs are UNCHANGED and cannot be released by any blanket wording\". The sentence \"I leave everything to your judgment\" appears in the ledger exactly once (grep -c = 1, line 32362) and nowhere in SP/LANE-QUEUE.md.",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "The reading is the program's settled pattern (§464, §763.1, §881.6) and the chair's carve-out list is a superset of the 08-10 four, consistent with the canonical judgment-ledger §3 list quoted in CLAUDE.md. The sentence itself has no receipt beyond the chair's own row (PLAUSIBLE that it was said verbatim; settle only by the owner's chat transcript)."
+    },
+    {
+      "row": "S05-2",
+      "call": "THE BOUNDARY: pre-launch, no installed users (§725) ⇒ a persisted-SHAPE decision is reversible by a code revert, carries no migration, so persisted shape is CHAIR-CLASS in this window and not after launch",
+      "claim": "Sound, rests on §725's finding, expires at launch.",
+      "method": "Read §725.1 (31449), §884.6 (32380), the 08-10 grant memory; read §881.6, LIGHTING-INVENTORY §7 test (:328) and §7.A O-11, DESIGN_HORIZON §19 :1240, DESIGN_ENCOUNTERS §12 preamble (:536) and §6.6, §881.10 clause (5); python search of §882.13 for any naming of those rows.",
+      "evidence": "§725.1 owner verbatim: \"We have no existing users… we are still prelaunch.\" §884.6 owner: \"there is no save before this fix; we are entirely prelaunch.\" 08-10 grant: \"the OSR freeze docket becomes Fable-ruleable\". BUT same morning: §881.6 lists \"persisted shapes\" among by-nature classes; LIGHTING §7: \"OWNER-BY-NATURE if it is … a persisted or exported shape\"; HORIZON :1240: \"persisted shapes COV-3/CS-6/WK-2 … are the owner's by law\"; DESIGN_ENCOUNTERS §12: \"Rows 4 and 9 are the two owner-gated PERSISTED-SHAPE rows … they stay OWNER rows here and are NEVER chair-ruled\"; §881.10(5): \"cross-settlement NPC ties are a NEW persisted shape (owner-gated)\". §882.13 names none of these.",
+      "verdict": "AMEND",
+      "confidence": "CONFIRMED",
+      "note": "Substance holds: the ground is the owner's own words twice over, the OSR docket was already chair-ruleable since 08-10, and the expiry at launch is correctly stated. Two amendments: (a) the row must NAME §881.6 / LIGHTING §7 / HORIZON :1240 / DESIGN §12 preamble / §881.10(5) as the classifications it supersedes — a silent reversal is the shape the row's own law forbids, and the design's 'NEVER chair-ruled' rows 4 and 9 were ruled without a word; (b) 'carries no migration' → 'carries no CUSTOMER migration': OSR governed migrations are still owed pre-launch (DESIGN §6.6; LIGHTING CH-8 schema-16), only their consumer is the corpus."
+    },
+    {
+      "row": "S05-3",
+      "call": "ENCOUNTERS 5b NO — the three fences stand; a willed compromise never enters exposure → ousting → replacement → verdict; ruled as APPLYING the owner's STATE-NEVER-FATE law and §881.11, not making a new law",
+      "claim": "Application of existing law; the design owes DISCOVERY and LAPSE ends.",
+      "method": "Read DESIGN_ENCOUNTERS §12 row 5b, §5.4 (:276-308), §881.10, §881.11, memory engine-kills-no-named-character; git show at 9a0584f0f of npcLadderKernel.js:38-46, npcAgency.js:212-236, npcVerdictTable.js:14-26/:340-352, pulseKernel.js:628-645, successorNpc.js:60-80, npcVerdictPulse.js:120-145; §888 row and SP/receipt-enc2346.md :128-147 (fence 3); git grep corruptionLeashTick at 4233031ba.",
+      "evidence": "§881.11 (owner): \"compromised to another settlement\" ⇒ \"a leash band … never a change of sides … 'never executes, permanently turns, or ends a named character' stand unchanged\". §881.10 chair refinement (1): \"'turned' is expressed as a leash band, not a defection — state, never fate\". Code @9a0584f0f: replaceOustedNpcs → `return successorNpc(npc, child)` (successorNpc.js:64-75); compromiseSourceOf: `if (leash.foreign) return 'rival_power'` (npcVerdictTable.js:350) ⇒ \"1. rival-compromised ⇒ turncoat is ELIGIBLE\" (:19). npcLadderKernel.js:42: \"STATE, NEVER FATE (§4g): the engine moves RANKS only\". §888: \"§882.13 row 5b's fence 3 guarded an `||` gate … the ruled fence would have held only in worlds that had never had a scandal.\" corruptionWeb.js:866 @4233031ba: \"`corruptionLeashTick`'s FIRST READER\" (LAPSE built).",
+      "verdict": "AMEND",
+      "confidence": "CONFIRMED",
+      "note": "The NO is RATIFIED and is an application, not a new law — but of §881.11's specific word and §881.10(1)/the architecture's no-turn law; npcLadderKernel's STATE-NEVER-FATE is the rank-law sibling, and the estate's own chain already does exactly this to UNWILLED leashes, so that law alone would not decide 5b. Three text fixes: (i) 'fence 3 shuts the cause pass' is SUPERSEDED by §888 (the guard moved to causeLifecycle's attribution loop) — mark it; (ii) 'pulseKernel.js:634-641' is the corruption_exposed condition, not replaceOustedNpcs (successorNpc.js:64 via npcVerdictPulse.js:133) — a citation copied from the design without checking; (iii) the two ends were built (WILLED_DISCOVERY_BASE / WILLED_LAPSE_TICKS, unsigned) — say so."
+    },
+    {
+      "row": "S05-4",
+      "call": "THE FIVE HELD: ENC 7 (tuning values), O-12 (specific in-file owner ruling), O-17 (§763 carve-out), O-16 (paid surface), O-10(b) (budget raise)",
+      "claim": "Each is the owner's by nature; the holds were correct at the time.",
+      "method": "git show 9a0584f0f simulationRules.js:634-648, faithTuningSurface.js:1-40, FounderTile.jsx/useFounderTileEligible.js grep, §880.8, §881.4(b), §763.1, §464.1, LIGHTING §7.A rows, SP/receipt-lighting-rows.md :1-60, §889 row (32401) and §889.3/§890.3, SP/receipt-enc3.md :386-389.",
+      "evidence": "simulationRules.js:639-642: \"Owner ruling (golden sign-off — LIGHT EVERYTHING RECOMMENDED): dramatic_campaign … It stays LIGHTER than full_simulation (no deep war sub-flags / religionDynamics ceiling)\". faithTuningSurface.js:15-21: \"Until then every value below is a CANDIDATE (§763's tuning carve-out) … `faithTuningArmed()`, which is `signed && live`\". useFounderTileEligible.js:25: `flag('founderRecognition') && audience === 'worldbuilder' && tier !== 'premium'`. §881.4(b): a budget raise is \"never silently withheld and never silently raised\"; §880.8: the T13 raise was the OWNER'S SIGNATURE. §889: \"the work the owner delegated today: … the four lighting rows\"; receipt-lighting-rows.md: \"three cars: b6ca05958 O-12 · f47433b32 O-16 · 8ae07b5fc O-17\"; O-10(b): \"NO RAISE REACHED. RESIDUAL MEASURED AT ZERO\" (675,764 B vs 676,000 in three builds). enc3 receipt: \"Both tuning registers UNSIGNED … §12 row 7, signed LAST\".",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "All five holds correct when made; the owner delegated O-12/O-16/O-17/O-10(b) in chat on 09-03 (§889) and they landed or closed (O-10(b) with residual zero, no raise). Two wording notes: O-17's quoted \"nothing lights until the owner signs\" is the LIGHTING inventory's paraphrase (:267/:339) of TAIL-F's `&&`, not an owner sentence — cite §763.1's tuning carve-out instead; O-16's 'by nature' is conservative rather than absolute, since §464 shows the chair ruling paid-surface rows O-P1/O-P2/O-P3 under the same grant."
+    },
+    {
+      "row": "S05-5",
+      "call": "ENCOUNTERS 1 YES — mint spatialLedgers.meetingMarkEvents + meetingLeanChannels, drop-when-empty, zero first-paint",
+      "claim": "As recommended; supported by the design text.",
+      "method": "DESIGN_ENCOUNTERS §12 row 1; git grep at 30c1667bc for the ledger keys; §889.1 first-paint probe.",
+      "evidence": "Design row 1 recommended: \"YES: both drop-when-empty, both under the namespace that costs zero first-paint bytes, both readers total\". envoyChanceMeetingLedger.js @30c1667bc :120 `dropSpatialLedger(nextWorldState, 'meetingMarkEvents')`, :171 `dropSpatialLedger(nextWorldState, 'meetingLeanChannels')`. §889.1: \"the source-closure probe from src/main.jsx puts all five ENC-4 files outside the 237-module closure — first-paint delta 0 B\".",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "Ruled and executed in §889 (ENC-2). Its legitimacy as a chair ruling depends on S05-2's boundary (the design itself classed it 'persisted shape (by nature)')."
+    },
+    {
+      "row": "S05-6",
+      "call": "ENCOUNTERS 4 YES — the orphan standing-record mint for a non-rung NPC named by a mark deposit",
+      "claim": "The only road on which the owner's clause 2 reaches the people he named.",
+      "method": "DESIGN_ENCOUNTERS §12 row 4 and preamble; SP/receipt-enc2346.md :108-124; npcLadderKernel.js @30c1667bc :908.",
+      "evidence": "Design row 4: \"YES: the only road on which the owner's clause 2 reaches the people he named (nearly every operative is a non-holder)\". Preamble: \"Rows 4 and 9 … NEVER chair-ruled\". enc2346 receipt: \"npcLadderKernel.js — … the orphan-pass apply, THE ORPHAN MINT, and the `meaningful` bonds clause. 588 -> 614 eff.\" @30c1667bc :908 `if (orphanMev) orphanSt = applyMeetingMark(orphanSt, orphanMev, weeks);`",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "As recommended and landed. Ruled against the design's own 'NEVER chair-ruled' label — valid only under S05-2's boundary, which must name that label as superseded."
+    },
+    {
+      "row": "S05-7",
+      "call": "ENCOUNTERS 6 YES at lighting — Herald kinds chance_meeting (notable) and chance_meeting_exposed (major); pool sentences stay the pen's",
+      "claim": "As recommended; the words remain owner's.",
+      "method": "DESIGN_ENCOUNTERS §12 row 6; SP/receipt-enc4.md :90-100 and :24-34; §889.1(a)/(b) (stratum :997-998); SP/receipt-enc3.md :383-385; git grep WILLED_MEETING_CONSPIRACY at 4233031ba.",
+      "evidence": "Design row 6: \"YES, at lighting (the wave's declared shift); the pool sentences are the pen's to amend at the voice sitting\". enc4 receipt: \"`chance_meeting` IS ALREADY A LIVE TOKEN … corruptionLeash.js:70 export const WILLED_MEETING_CONSPIRACY = 'chance_meeting' … The chair should rename the news kind\". §889.1(a): \"The naming collision is real and the Herald kind moves.\" enc3 receipt: \"Kinds pinned: `chance_meeting_exposed` / `chance_meeting_recorded`\". §889.1: nine pool sentences \"are the owner's\" (ENC-4 stopped).",
+      "verdict": "AMEND",
+      "confidence": "CONFIRMED",
+      "note": "The ruling holds (show both kinds at lighting; words to the pen), but the first kind's NAME as ruled was superseded by §889.1(a) → `chance_meeting_recorded`; the stratum's §882.13 text still carries `chance_meeting` unmarked. Add the supersession."
+    },
+    {
+      "row": "S05-8",
+      "call": "ENCOUNTERS 8 LEAVE TO THE WAVE — the elite bleed's wiring is the memory weave's seam",
+      "claim": "As recommended.",
+      "method": "DESIGN_ENCOUNTERS §12 row 8; git grep eliteBleed importers at 9a0584f0f; §887.1.",
+      "evidence": "Design row 8: \"LEAVE IT TO THE WAVE with the dependency recorded (this row)\". At 9a0584f0f the only src reference to eliteBleed outside its own file is a comment (sovereigntyTransfer.js:69) — unwired at the tip, as the design says. §887.1: \"ENC-7 is DEFERRED to the lighting wave by row 8's ruling, not blocked.\"",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "Ground supported by the tree."
+    },
+    {
+      "row": "S05-9",
+      "call": "ENCOUNTERS 9 YES to both grains and onto the critical path before lighting",
+      "claim": "regenIdentityFold names npcLadder nowhere; a reroll hands a man's standing to whoever takes his slot.",
+      "method": "git grep npcLadder in src/domain/npc/regenIdentityFold.js at 9a0584f0f and 30c1667bc; DESIGN_ENCOUNTERS §12 row 9 and preamble.",
+      "evidence": "`git grep -c 'npcLadder' 9a0584f0f -- src/domain/npc/regenIdentityFold.js` → no match. @30c1667bc :212 \"`regenIdentityFold.js` named `npcLadder` NOWHERE. So a reroll…\", :261 `export function npcLadderAfterRosterReroll(worldState, settlementId, preserved)`. Design row 9: \"YES to both: the record-key defect is PRE-EXISTING but this design makes it load-bearing … a lit flag over an unfolded ladder ghosts on the reroll path THE PROMISE names\".",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "Ground verified at the tip; landed in §889 (ENC-6) before the lighting wave, as ruled. Like row 4, ruled against the design's 'NEVER chair-ruled' label — valid under S05-2 once the supersession is named."
+    },
+    {
+      "row": "S05-10",
+      "call": "ENCOUNTERS 12 DEFER the ROADS visitor arm with its projector named",
+      "claim": "One substrate per train.",
+      "method": "DESIGN_ENCOUNTERS §2.1 (:47-58) and §12 row 12.",
+      "evidence": "§2.1: \"roads visitor | a different substrate (`whereabouts.state`, `spatialLedgers.roads.missions`) with NO projection into the envoy census | never, by this design\"; \"JUDGMENT (vetoable): v1 covers the errand spine only. The roads visitor arm is a DOCUMENTED DEFERRAL: it needs a second candidate source (`projectRoadsTravellerForEncounter` …) … Recorded in §12 row 12\".",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "As recommended; the projector is named in the design as the row requires."
+    },
+    {
+      "row": "S05-11",
+      "call": "HORIZON WK-11 KEEP — do not lower CLOSURE_BUDGET_BYTES to bank the −6,366 B",
+      "claim": "Margin stays until the lighting wave's cars are measured; banking a ceiling before its consumers are measured makes a self-imposed constant a design constraint.",
+      "method": "DESIGN_HORIZON §19 WK-11 (:1457); git grep CLOSURE_BUDGET_BYTES in tests/build/vendorPdfLazy.test.js at 9a0584f0f, ca651d54b, 4233031ba; §880.8; memory time-is-not-the-constraint.",
+      "evidence": "§19 WK-11: \"the chair's standing recommendation is NOT before the lighting wave, revisited at the tuning sitting\". vendorPdfLazy.test.js: @9a0584f0f :509 `const CLOSURE_BUDGET_BYTES = 1_047_000;` → @ca651d54b and @4233031ba :565 `const CLOSURE_BUDGET_BYTES = 1_048_000;` (the §880.8 owner-signed raise banked by T13; never lowered). memory: \"A self-imposed constant silently becomes a design constraint unless someone re-asks\".",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "Executed evidence: the ceiling was not lowered at any later tip. The §882.6 'carried' row correctly treats the T13 banking question as the same object."
+    },
+    {
+      "row": "S05-12",
+      "call": "HORIZON RR-10 ADD errandSpineEnabled to PREVIEW_OVERLAY (else the espionage member is dead on arrival)",
+      "claim": "A chair act; without it the LIT-PREVIEW corpus cannot serve its purpose.",
+      "method": "DESIGN_HORIZON §19 CR-13 (:1448) and RR-10 (:1458), E16 (:1189); git show 4233031ba:scripts/review/readerCorpus.mjs :95-125; git log dates of ac427cc5c/7b10224fd/c84437766; git grep errandSpineEnabled in espionageGate.js at 4233031ba; python search of ledger lines 32363-32417 for errandSpineEnabled/PREVIEW_OVERLAY/RR-10.",
+      "evidence": "§19 CR-13 (a CHAIR row): \"`PREVIEW_OVERLAY` gains `errandSpineEnabled` | YEAR + THE CONJUNCTION MEMBER\"; RR-10: \"The chair's minimum act is already folded and is not the owner's\". readerCorpus.mjs @4233031ba :101-115 (READERREVIEW Car 2, authored 2026-09-03 15:39, a day AFTER §882.13): \"THE LIT-PREVIEW OVERLAY — the FOUR-key form, as ruled. … That is an OPEN OWNER ROW, not a lane's to decide: adding `errandSpineEnabled` here would answer the owner's question by editing a literal.\" :116-121 PREVIEW_OVERLAY = {warMemoryEnabled, espionageEnabled, demographicsEnabled, neutralNeighborsEnabled}. espionageGate.js:80 `if (rules.errandSpineEnabled !== true) return false;`. No ledger row after 32362 mentions errandSpineEnabled, PREVIEW_OVERLAY or RR-10.",
+      "verdict": "AMEND",
+      "confidence": "CONFIRMED",
+      "note": "The ruling is right (it restates the fold's own CR-13) — but it is UNEXECUTED and the §891 train's car states the opposite in code, so at 4233031ba the preview corpus's espionage member is exactly the 'dead on arrival' the row warned of. The stratum must carry the discrepancy and the ruling must be re-issued to whoever lands READERREVIEW."
+    },
+    {
+      "row": "S05-13",
+      "call": "LIGHTING O-5 BUILD the Remembrance reader, ruled a COMPLETION of §881.4's lighting rather than new capability",
+      "claim": "Without it warMemoryEnabled writes records nobody can read; LAZY/PROSE_RENDER, droppable at zero cost.",
+      "method": "LIGHTING-INVENTORY §7.A O-5 and CH-9/CH-11; DESIGN_HORIZON :510 and :1077 (RR-2); §881.4 (32333); §882.1 O-5 line.",
+      "evidence": "§7.A O-5 why-owner: \"NEW CAPABILITY by HORIZON RR-2's own class; 'must be given one' is the chair's application of the owner's nine words, not the owner's sentence\". HORIZON :510: \"Owner-gated, exactly: … a war-memory RENDERER (RR-2 — no surface reads `concludedWars` at the tip)\". §881.4 (Fable-validated ruling of the owner's word): \"warMemoryEnabled which has no lighting home yet and must be given one\". CH-11: \"The reader car (O-5) … may START before the word, dropped at zero product cost if vetoed.\"",
+      "verdict": "AMEND",
+      "confidence": "CONFIRMED",
+      "note": "Defensible: §881.4 is a validated ruling and a lit flag with no reader is a walk absence, and the car is droppable. But the row reverses two explicit 'new capability / owner-gated' classifications (HORIZON RR-2 :510 and the inventory's own §7.A line written six hours earlier) without naming either; add the supersession and keep CH-11's 'droppable if vetoed' as the safety."
+    },
+    {
+      "row": "S05-14",
+      "call": "LIGHTING O-11 SIGN the three persistence paths (publicSafe allowlist, accountImport id-resolution, provenance receiptHash)",
+      "claim": "Persisted/exported shapes, chair-class under the pre-launch boundary.",
+      "method": "LIGHTING-INVENTORY §7.A O-11; §882.1's OWNER-BY-NATURE list; §874.7 head (32233).",
+      "evidence": "§7.A O-11: \"persisted / exported shapes (publicSafe allowlist = DM-share export shape; accountImportBody id-resolution = import shape; provenance receiptHash = a hash input — §874.7) | SIGN | 0 B, one sentence; unsigned → the MAT dial stays at v1\". §882.1: \"The seven OWNER-BY-NATURE rows stay on the desk … O-11 SIGN the three persistence paths\".",
+      "verdict": "AMEND",
+      "confidence": "CONFIRMED",
+      "note": "As recommended; its validity is exactly S05-2's boundary (export/import shapes have no installed consumers pre-launch). Same amendment: name §882.1's own by-nature classification as superseded."
+    },
+    {
+      "row": "S05-15",
+      "call": "LIGHTING O-14 premium-only canonize STAYS AS DESIGNED for launch (status quo, not a paid-surface change)",
+      "claim": "Every belief-conjoined shift record says PREMIUM.",
+      "method": "git show 9a0584f0f:src/store/campaignWorldPulseSlice.js :386-394; LIGHTING §7.A O-14.",
+      "evidence": "campaignWorldPulseSlice.js:389-391 @9a0584f0f: \"// ENTITLEMENT — read at the store call site … if (state.auth?.tier !== 'premium') return { ok: false, reason: 'not_entitled' };\". §7.A O-14 recommended: \"premium-only stays as designed for launch; every belief-conjoined shift record says PREMIUM\".",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "Choosing the shipped state changes no paid surface; the 'canonize at birth' build stays unpriced and unordered, as the row says."
+    },
+    {
+      "row": "S05-16",
+      "call": "ENCOUNTERS 2 YES (`respect` joins BOND_KINDS) and 3 YES (`rivalry` joins GRUDGE_KINDS + foreignSid)",
+      "claim": "The owner's own words (§881.10 'bond, rivalry or respect'); the grudge mirrors the bond.",
+      "method": "§881.10 row; DESIGN_ENCOUNTERS §12 rows 2/3; git grep BOND_KINDS/GRUDGE_KINDS/'respect'/'rivalry'/vocabulary_unruled at 30c1667bc and 4233031ba; npcLadderState.js :405-425 and mintBond :444-452 @30c1667bc; envoyChanceMeetingLedger.js :50-70 and npcLadderKernel.js :405/:415-418 @30c1667bc; SP/receipt-enc3.md :392; laneENC-tree read-only diff of npcLadderState.js.",
+      "evidence": "§881.10 owner: \"a new bond / rivalry / respect across settlements\". @30c1667bc and @4233031ba npcLadderState.js:407 `BOND_KINDS = … ['loyalty','gratitude','friendship']`, :383 `GRUDGE_KINDS = … ['contest_loss','contest_forestalled']`; :450 `const k = … BOND_KINDS.has(kind) ? kind : 'friendship'`; applyMeetingMark :416 `if (ev.mark !== 'bond' …) return st;`; envoyChanceMeetingLedger.js:55-57 \"only `bond` is reachable until the owner rules the rivalry word (§12 row 3)\", :67-68 \"`grudge` is SHAPE-READY and UNREACHABLE until the owner rules the rivalry word (§12 row 3); ENC-5 lifts the stage's refusal\"; envoyChanceMeeting.js:151 'vocabulary_unruled'. enc3 receipt :392: \"The rivalry word (§12 row 3) — the `grudge` mark grain is shaped but unreachable.\" laneENC-tree dirt does not touch npcLadderState.js.",
+      "verdict": "AMEND",
+      "confidence": "CONFIRMED",
+      "note": "Both rulings are as recommended and well-grounded (the owner's own three words). But NEITHER is executed at 30c1667bc, 4233031ba or in the uncommitted ENC-3: `respect` is silently coerced to `friendship` at mintBond and `rivalry` is refused at the stage, and the lanes' comments attribute the lift to a FUTURE owner ruling / ENC-5 — i.e., the ruling never reached the briefs. §889's plain-words claim 'a bond, a respect or a rivalry' therefore overstates what landed, and §887.1's 'the one held encounters row is 7' is contradicted by the lanes' own reading. Re-issue rows 2/3 to the ENC lane explicitly."
+    },
+    {
+      "row": "S05-17",
+      "call": "The remaining one-liners: 1b AGREE · 10 YES · 11 YES by §881.4 · 13 DOCKET · 14 CLOSED by §881.11 · 15 RECORD",
+      "claim": "Each as the design recommended.",
+      "method": "DESIGN_ENCOUNTERS §12 rows 1b/10/11/13/14/15; git grep vectorSupplied at 30c1667bc/4233031ba; §881.4/§881.11 rows; git grep roadsReturnedCaptives in HEAD docs and ledger lines >32362.",
+      "evidence": "Row 1b: \"AGREE (no new field): the priced-not-taken road … costs an OSR shape on a 6,507-row corpus\". Row 10 executed: livedExperienceFunnel.js:585 @30c1667bc \"⛔ ENC-2 (§12 row 10) THE THIRD ADMISSION ARM. A `vectorSupplied` row …\". Row 11: §881.4 \"the walk's lighting questions are pre-answered YES\". Row 14: §881.11 \"the 'if you want true defections' fork is CLOSED by the owner's word\". Row 15: \"RECORD … leaf-local, finite and unpersisted\". Row 13: the only ledger mention of roadsReturnedCaptives after 32362 is none; HEAD docs mention it only in §882.13 itself and an archived roads-lane memory.",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "All six match the design's recommended answers and their grounds are the owner's own rulings or leaf-local facts. Row 13's DOCKET has no visible docket entry anywhere at HEAD beyond the ruling row — EVIDENCE-THIN for the docket's landing; settle with: git grep -n 'roadsReturnedCaptives' HEAD -- docs/HANDOFF_CURRENT.md docs/DISPATCH-QUEUE.md and the module docket."
+    }
+  ],
+  "beyond": [
+    "CONTRADICTION NOT CARRIED: §882.13's boundary moves 'persisted shapes' out of the by-nature list that §881.6 (Fable-validated, ~02:25 the same morning), the LIGHTING inventory's §7 test (04:06), HORIZON §19 :1240 and DESIGN_ENCOUNTERS §12's preamble ('NEVER chair-ruled') all state — and the row names none of them. It also reverses the chair's own §881.10 clause (5) ('a NEW persisted shape (owner-gated)'). The reversal is defensible on the owner's prelaunch words but must be recorded as a supersession, not left implicit.",
+    "RULING INVERTED IN THE BUILT ARTIFACT: RR-10's chair act (add errandSpineEnabled to PREVIEW_OVERLAY; also the fold's CR-13) is unexecuted at 4233031ba, and scripts/review/readerCorpus.mjs:101-115 (READERREVIEW Car 2, 2026-09-03 15:39) states the opposite: 'That is an OPEN OWNER ROW, not a lane's to decide: adding errandSpineEnabled here would answer the owner's question by editing a literal.' espionageGate.js:80 requires the key, so the preview corpus's espionage member is dead on arrival exactly as the row warned. No ledger row after §882.13 mentions it.",
+    "RULINGS NOT REACHING THE LANES: ENC rows 2 and 3 (respect/rivalry) ruled YES on 09-02 are unexecuted at 30c1667bc, 4233031ba and the uncommitted ENC-3; the landed code says 'until the owner rules the rivalry word (§12 row 3); ENC-5 lifts the stage's refusal' (envoyChanceMeetingLedger.js:55-68) and ENC-3's receipt lists row 3 as deferred. §889's 'a bond, a respect or a rivalry' overstates (respect folds to friendship at mintBond :450; rivalry refused `vocabulary_unruled`), and §887.1's 'the one held encounters row is 7' is contradicted by the lanes' own understanding.",
+    "SUPERSESSIONS UNMARKED IN THE STRATUM: (a) row 6's kind `chance_meeting` was renamed by §889.1(a) (collision with WILLED_MEETING_CONSPIRACY, corruptionLeash.js:70) → `chance_meeting_recorded` per ENC-3; (b) 5b's 'fence 3 shuts the cause pass' was a HALF-FENCE (an `||` gate) corrected by ENC-2 and recorded at §888 — the guard lives in causeLifecycle's attribution loop. Both should be marked on the §882.13 stratum text.",
+    "CITATION COPIED UNCHECKED: 'replaceOustedNpcs … (pulseKernel.js:634–641)' — those lines are the ousting→corruption_exposed condition; replaceOustedNpcs is successorNpc.js:64, called from npcVerdictPulse.js:133. The design's §5.4 point 4 carries the same wrong cite; the chair's row inherited it.",
+    "PREMISE LATER FALSIFIED (harmless because the hold was conditional): O-10(b) was held on the inventory's 'RED 190/220 after the best measured recovery'; at 30c1667bc three builds measured the engine chunk at 675,764 B vs 676,000 with an identical content hash — residual ZERO, no raise (receipt-lighting-rows.md). Same class as §884.6's unverified antecedent.",
+    "O-17's quoted owner phrase 'nothing lights until the owner signs' is the inventory's paraphrase (LIGHTING-INVENTORY :267/:339) of TAIL-F's `signed && live`; faithTuningSurface.js:16 cites '§763's tuning carve-out' — the hold's class is right, the quotation marks are not.",
+    "CITATION TARGET STATE: §882.13 cites `docs/DESIGN_HORIZON.md §19`, but in the ledger worktree the file is staged-DELETED ('D  docs/DESIGN_HORIZON.md', someone's live work). HEAD's blob md5 ec389c5abb3fec1dd27c3ce05df7202c equals SP2/DESIGN_HORIZON.md, so the citation resolves via `git show HEAD:` only; the row (and the FRQ) should cite the sha or the SP2 copy.",
+    "The owner's sentence 'I leave everything to your judgment' has exactly one receipt — the §882.13 row itself (ledger grep -c = 1; absent from SP/LANE-QUEUE.md). Not doubted, but a Fable pass cannot confirm the words; only the chat transcript can.",
+    "The chair's carve-out list at §882.13 (tuning VALUES+signature, paid tier, specific-ruling re-open, budget raise) is broader than the 08-10 memory's four and narrower than §881.6's six (it drops 'persisted shapes' and does not mention security posture or data deletion) — three different by-nature lists now exist across two days; one canonical list should be written and the others pointed at it.",
+    "Row 13's DOCKET ('roadsReturnedCaptives twin rebind defect to the roads family') has no docket entry anywhere at HEAD docs beyond the ruling row itself."
+  ],
+  "chair_errors": [
+    "Silent supersession: re-classified persisted shape from owner-by-nature (§881.6, LIGHTING §7, HORIZON :1240, DESIGN §12 preamble, §881.10(5)) to chair-class without naming any of the rows it overrides — the exact 'later general word silently reverses a specific one' shape the row itself forbids.",
+    "Overstatement: 'carries no migration' — OSR governed migrations are still owed pre-launch (DESIGN_ENCOUNTERS §6.6; LIGHTING CH-8 schema-16); only the customer migration is absent.",
+    "Execution untracked: three §882.13 rulings (RR-10, ENC rows 2 and 3) never reached the lanes' briefs; the landed code and a §891 car assert the opposite (still owner-pending), and later chair rows (§887.1, §889, §891) report them as ruled/landed without checking the tree.",
+    "Citation copied from the design without verification: pulseKernel.js:634-641 ≠ replaceOustedNpcs (successorNpc.js:64 via npcVerdictPulse.js:133).",
+    "O-17's hold quotes as an owner sentence a phrase that is the inventory's paraphrase; the correct cite is §763.1's tuning carve-out (faithTuningSurface.js:16)."
+  ],
+  "commands": [
+    "mkdir -p …/scratchpad/walk/S05 && printf '{\"slice\":\"S05\",\"status\":\"PARTIAL\",\"calls\":[]}' > …/walk/S05.json",
+    "sed -n '69,82p' …/stratum/full.md",
+    "sed -n '32362p' docs/OWNER_DECISION_QUEUE.md (§882.13); also 32350 (§882.1), 32333 (§881.4), 32335 (§881.6), 32339 (§881.10), 32340 (§881.11), 32380 (§884.6), 32399 (§888), 32401 (§889), 32405 (§889.3), 32411 (§890.3), 32417 (§891), 31449 (§725.1), 31686 (§763.1), 32326 (§880.8), 32355 (§882.6), 32233 (§874.7), 18866 (§464.1), 6338/7847/7994 (§170/§217/§223)",
+    "python3 regex-context searches over docs/OWNER_DECISION_QUEUE.md for: persisted shape · ENCOUNTERS/OWNER-BY-NATURE in §882.1 · fence 3/HALF/causeLifecycle · O-12/O-16/O-17/O-10(b)/delegat in 32393-32420 · faith/'until the owner signs'/'signed && live' · errandSpineEnabled/PREVIEW_OVERLAY/RR-10 after 32362 · roadsReturnedCaptives after 32362 · 'I leave everything to your judgment' (grep -c = 1)",
+    "cat memory/engine-kills-no-named-character-state-never-fate.md, product-scope-boundaries.md, full-delegation-grant-2026-08-10.md, time-is-not-the-constraint-quality-is.md; find ~/.claude for judgment-ledger SKILL.md (not found; canonical list taken from CLAUDE.md)",
+    "grep/sed over SP2/DESIGN_ENCOUNTERS.md (headings; §12 :534-560; §5.4 :276-308; §2.1 :47-58; §13 :560-618) — md5 3684c6978fb9512af4f017501969d493",
+    "grep/sed over SP2/DESIGN_HORIZON.md (§19 :1437-1459; E16 :1189; R6 :1391; RR-2 :503/:510/:1077/:1240) — md5 ec389c5abb3fec1dd27c3ce05df7202c; git show HEAD:docs/DESIGN_HORIZON.md | md5 (equal); git status --porcelain -- docs/DESIGN_HORIZON.md ('D ')",
+    "sed -n '326,373p' SP2/LIGHTING-INVENTORY.md (§7/§7.A/§7.B); grep -n '§763' (:110/:151/:267/:339)",
+    "grep/sed over SP/receipt-enc2346.md (:100-150 fence 3; DISCOVERY/LAPSE :157/:231-252), SP/receipt-enc3.md (:383-400), SP/receipt-enc4.md (:24-34, :90-115), SP/receipt-enc1-census.md (headings), SP/receipt-lighting-rows.md (:1-60); grep SP/LANE-QUEUE.md for the owner sentence (none)",
+    "git ls-tree -r --name-only 9a0584f0f | grep (paths); git show 9a0584f0f:src/domain/worldPulse/{pulseKernel.js:628-645, npcVerdictTable.js:14-26+340-352, npcAgency.js:212-236, npcLadderKernel.js:38-46, simulationRules.js:634-648, corruptionWeb.js:728-736, successorNpc.js:60-80, npcVerdictPulse.js:120-145, faithTuningSurface.js:1-40}; git show 9a0584f0f:src/store/campaignWorldPulseSlice.js:386-394",
+    "git grep at 9a0584f0f: replaceOustedNpcs · corruptionLeashTick · npcLadder in regenIdentityFold.js (-c: none) · eliteBleed importers · founderRecognition · faithTuningArmed · CLOSURE_BUDGET_BYTES; at ca651d54b/4233031ba: CLOSURE_BUDGET_BYTES (1_048_000) · PREVIEW_OVERLAY · errandSpineEnabled (scripts/review, espionageGate.js) · WILLED_MEETING_CONSPIRACY · corruptionLeashTick; at 30c1667bc: BOND_KINDS/GRUDGE_KINDS · 'respect'/'rivalry' · meetingMarkEvents/meetingLeanChannels · applyMeetingMark · vocabulary_unruled · vectorSupplied · npcLadderAfterRosterReroll",
+    "git show 4233031ba:scripts/review/readerCorpus.mjs :95-125; git log --date=iso -1 ac427cc5c 7b10224fd c84437766; git for-each-ref --contains ac427cc5c refs/preserve",
+    "git show 30c1667bc:src/domain/worldPulse/{envoyChanceMeetingLedger.js:50-70, npcLadderKernel.js:415-440, npcLadderState.js:405-425 + mintBond :444-452}",
+    "git -C laneENC-tree rev-parse HEAD (30c1667bc); git -C laneENC-tree status --porcelain (13 paths, before and after, md5 45b7f7cc…); git -C laneENC-tree diff -- src/domain/worldPulse/npcLadderState.js (empty); git -C laneKERNELMARK-tree rev-parse HEAD (4233031ba); status --porcelain (1 path: scripts/.writer-reach-baseline.json, before and after)",
+    "sed -n '2014p' docs/FABLE_RETROVALIDATION_QUEUE.md vs full.md line 69 (identical head)",
+    "cat > …/walk/S05.json (final); python3 -c json.load (validated)"
+  ],
+  "porcelain_unchanged": true
+}

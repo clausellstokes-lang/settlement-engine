@@ -1,0 +1,4 @@
+{"slice": "S01", "status": "PARTIAL", "calls": [
+ {"row": "§882.8 trigger", "call": "three Fable agents died on the model limit while the Opus lane finished at 09:08", "claim": "laneG0RR-receipt.md mtime 09:08", "method": "stat", "evidence": "stat: 2026-09-02 09:08:35 laneG0RR-receipt.md (SP2)", "verdict": "RATIFY", "confidence": "CONFIRMED", "note": "partial"},
+ {"row": "§882.9 R-FOLD-2", "call": "keep numbering, disambiguate by A22 convention", "claim": "bare A11/A12/A13 inherited", "method": "marker census", "evidence": "T13 order bare ⟦A11⟧×4 ⟦A12⟧×5 ⟦A13⟧×3; TAILF order ⟦A11⟧×2 ⟦A12⟧×6 ⟦A13⟧×3; A22 rule sites L425/L459/L470/L516 match inherited meanings; but this panel's A1/A5/A6/A11-13 also appear BARE (L36-129, L236, L514, L664-666)", "verdict": "AMEND", "confidence": "CONFIRMED", "note": "partial"}
+]}
