@@ -234,7 +234,7 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
   );
 }
 
-export function EconomicsTab({economicState, settlement, narrativeNote, saveId = null}) {
+export function EconomicsTab({economicState, settlement, narrativeNote, saveId = null, publicDossier = false}) {
   const s = settlement;
   const mobile = useIsMobile();
   // M6d FLOW-DERIVED ECONOMICS — thread worldState the RumorsTab way: read the owning
@@ -311,12 +311,12 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
   // which is why the band's accent is returned by the derivation instead.
   const granaryColor = granary.available ? (granary.band === 'nearly empty' ? '#8b1a1a' : granary.band === 'thin' ? '#a0762a' : '#1a5a28') : '#a0762a'; const treasury = deriveTreasuryGlance(s);
   // THE ECONOMY DESK, read ONCE per render and routed by the mount registry below. The
-  // seed is the settlement's own stable identity, never a clock and never the transient
-  // {name} shape — the `_seed / id` convention RelationshipsTab already states, so THE
-  // PROMISE holds: same seed + same state ⇒ same sentence, forever. No `audience` is
-  // passed, so the kernel's law 2 reads it as the PLAYER's, which is the fail-closed
-  // half; this tab has no DM surface to widen it with.
-  const deskProse = economyStateProse(s, { foodBalance: fbal, granaryOutlook: granary }, { seed: String(s?._seed ?? s?.id ?? '') });
+  // seed is the settlement's own stable identity, so THE PROMISE holds: same seed + same
+  // state ⇒ same sentence, forever. THE PUBLIC GATE (§885.3): a public gallery dossier is
+  // a PAID-SURFACE carve-out, so the desk is NOT DRAWN there and every rung is null ⇒
+  // drawnAtMount answers null at all five mounts ⇒ no corpus sentence renders anywhere.
+  // Datum is untouched: situationDesc, the tiles and their sub-lines never read the desk.
+  const deskProse = publicDossier ? Object.freeze({ prosperityHeader: null, prosperityRung: null, foodTile: null, granaryTile: null, foodSecurityRung: null }) : economyStateProse(s, { foodBalance: fbal, granaryOutlook: granary }, { seed: String(s?._seed ?? s?.id ?? '') });
   const drawnFoodLine = drawnAtMount('economics.foodSecurity', deskProse.foodSecurityRung);
 
   return (

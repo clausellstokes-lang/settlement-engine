@@ -700,7 +700,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       // the settlement.traditions mirror; then this same tab renders the live state.
       case 'traditions': return <TraditionsTab settlement={s} saveId={saveId} />;
       case 'overview':   return <OverviewTab settlement={s} narrativeNote={null} onNavigateTab={setActiveTab} />;
-      case 'economics':  return <EconomicsTab settlement={s} narrativeNote={null} saveId={saveId} />;
+      case 'economics':  return <EconomicsTab settlement={s} narrativeNote={null} saveId={saveId} publicDossier={publicDossier} />;
       case 'services':   return <ServicesTab services={s.availableServices} settlement={s} narrativeNote={null} />;
       case 'power':      return (
         <>
