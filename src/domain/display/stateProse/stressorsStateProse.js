@@ -7,6 +7,8 @@
  *   DS-STR-1  Overview › Active crisis banners — `settlement.stress[] {type, label, …}`
  *   DS-CND-1  Overview › Active conditions — `settlement.activeConditions[] {archetype,
  *             severityBand, status, triggeredAt, duration, causes}`
+ *   DS-STR-2  Stressor lifecycle and origin — `worldState.stressors[] {lifecycleStage,
+ *             originContext}`, a CONDITIONAL SURFACE (play-time state)
  *
  * ── WHY THIS LEAF NEXT, MEASURED AT THE VARIANT LEVEL ────────────────────────────────
  *
@@ -308,6 +310,87 @@ export function conditionDurationPoolKey(condition) {
  */
 
 /**
+ * ── DS-STR-2, THE WORLD STRESSOR — a CONDITIONAL SURFACE, and two lenses of four ─────
+ *
+ * ⚠ PLAY-TIME STATE, the DS-POW-3 / DS-POW-7 class. `worldState.stressors[]` has no
+ * generation writer, so this block is dark at birth and speaks in a played world. Its
+ * aliveness proof therefore uses a SIMULATED fixture, normalized by the kernel's own
+ * `normalizeStressor`, never a birth fixture — a dormancy proof here would be
+ * indistinguishable from the dead arms this suite exists to refuse.
+ *
+ * ⭐ BOTH WIRED LENSES ARE IDENTITIES, AND BOTH READ PERSISTED FIELDS.
+ *   LIFECYCLE (5 of the corpus's pools): `stressor.lifecycleStage`.
+ *   `STRESSOR_LIFECYCLE_STAGES` holds SEVEN — `emerging active peaking easing resolved
+ *   residual dormant` — and the corpus writes five. `resolved` and `dormant` get no pool,
+ *   which is the corpus choosing its subject: a stressor that is over is not a story about
+ *   a stressor. Those two render nothing and the origin lens still speaks.
+ *   ORIGIN (17 pools): `stressor.originContext.variant`, a PERFECT 17/17 identity with
+ *   `VARIANT_HOOKS` — asserted in the desk test, which can import that roster because a
+ *   TEST import costs no production bytes.
+ *
+ * ⭐ THE PRODUCTION READ VALIDATES AGAINST THE CORPUS, NOT AGAINST THE ROSTER, AND THE
+ * REASON IS MEASURED. `VARIANT_HOOKS` and `synergyAssessment` live in
+ * `worldPulse/stressorDynamics.js`, which is 45,532 B — and whose import drags TWENTY-NINE
+ * modules totalling 602,004 B that are not already in first paint. THE FILE SIZE UNDERSTATES
+ * THE COUPLING COST BY THIRTEEN TIMES, which is only visible by walking the transitive
+ * closure rather than reading the file. So production reads the persisted field and checks
+ * it against the shipped corpus (the corpus is the authority a desk already holds), and the
+ * identity with the producer's roster is asserted where it is free: in the test.
+ * By contrast `worldPulse/stressorsCore.js` — the lifecycle vocabulary and
+ * `normalizeStressor` — is ALREADY in the first-paint closure, so reaching it costs nothing.
+ *
+ * ⛔ TWO LENSES ARE DARK, TEN POOLS, each for a measured reason:
+ *   • SYNERGY × 6. `synergyAssessment` sits behind that 602 KB transitive drag, on the
+ *     OVERVIEW tab — the most-visited surface in the dossier. Six pools do not buy it.
+ *   • COUNTERFORCE × 4. `counterforceAssessment(stressor, snapshot)` needs a WORLD SNAPSHOT
+ *     (`{ byId, regionalGraph }`) that a dossier tab does not have and should not build; and
+ *     one of its four pools additionally needs `{reason}`, the same unruled reader-facing
+ *     vocabulary that holds the traced-provenance pool silent above.
+ * THE CURE FOR BOTH IS THE ONE THE CHAIR ALREADY HAS DOCKETED FROM DS-POW-7: a small
+ * display-layer projection, on the `display/politicsRead.js` precedent, that hands a
+ * dossier what it needs without dragging a simulation kernel behind it.
+ */
+
+/**
+ * The narrow slice of a normalized world stressor this desk reads. Declared rather than
+ * left as `object`: the any-cast ratchet is right that a reader which types its input
+ * loosely has given up the one check that would catch a renamed field, and both fields
+ * below are real reads. (domain-strict caught the bare `object` here — the third time in
+ * this arc it convicted a tree `typecheck:ratchet` called green.)
+ * @typedef {object} WorldStressorView
+ * @property {unknown} [lifecycleStage]
+ * @property {{variant?: unknown}|null} [originContext]
+ */
+
+/**
+ * DS-STR-2's lifecycle key. Validated against the shipped corpus rather than against the
+ * seven-stage roster, so the two stages the corpus does not narrate render nothing instead
+ * of a missing pool.
+ * @param {{lifecycleStage?: unknown}|null|undefined} stressor @returns {string|null}
+ */
+export function stressorLifecyclePoolKey(stressor) {
+  const stage = text(stressor?.lifecycleStage);
+  if (!stage) return null;
+  const key = `LIFECYCLE: ${stage}`;
+  return CORPUS['DS-STR-2'].pools[key] ? key : null;
+}
+
+/**
+ * DS-STR-2's origin key — `originContext.variant`, a 17/17 identity with the producer's own
+ * variant roster. An unknown variant renders nothing rather than guessing an origin: a
+ * stressor's origin is a claim about who did this to the town, and the wrong one is the
+ * worst sentence this corpus could print.
+ * @param {{originContext?: {variant?: unknown}|null}|null|undefined} stressor
+ * @returns {string|null}
+ */
+export function stressorOriginPoolKey(stressor) {
+  const variant = text(stressor?.originContext?.variant);
+  if (!variant) return null;
+  const key = `ORIGIN: ${variant}`;
+  return CORPUS['DS-STR-2'].pools[key] ? key : null;
+}
+
+/**
  * THE DESK, page-wide. Named `stressorsStateProse` to match its DESK name (`stressors`, the
  * leaf's basename) — the public-dossier guard's ARM 2 derives `<desk>StateProse` from the
  * registry and caught the singular spelling I first used, which is the convention working. The per-banner rung is a separate entry point below, because a
@@ -319,12 +402,15 @@ export function conditionDurationPoolKey(condition) {
  * not a list, so narrating every condition would repeat one fact in several voices.
  *
  * @param {{name?: string, stress?: unknown, activeConditions?: unknown}|null|undefined} settlement
- * @param {{banners?: unknown, conditions?: ReadonlyArray<object>|null}} [readings]
+ * @param {{banners?: unknown, conditions?: ReadonlyArray<object>|null,
+ *   worldStressor?: WorldStressorView|null}} [readings] the caller selects and normalizes
+ *   the world stressor; see DS-STR-2 above for why the desk does not reach for it
  * @param {{seed?: string, audience?: string}} [options]
  * @returns {Readonly<{crisisArity: object|null, crisisFraming: object|null,
  *   conditionSeverity: object|null, conditionDirection: object|null,
  *   conditionArchetype: object|null, conditionProvenance: object|null,
- *   conditionDuration: object|null}>}
+ *   conditionDuration: object|null, worldStressorLifecycle: object|null,
+ *   worldStressorOrigin: object|null}>}
  */
 export function stressorsStateProse(settlement, readings = {}, options = {}) {
   const town = properFill(text(settlement?.name));
@@ -345,6 +431,9 @@ export function stressorsStateProse(settlement, readings = {}, options = {}) {
   const archetypeKey = conditionArchetypePoolKey(condition);
   const provenanceKey = conditionProvenancePoolKey(condition);
   const durationKey = conditionDurationPoolKey(condition);
+  const worldStressor = readings.worldStressor ?? null;
+  const lifecycleKey = stressorLifecyclePoolKey(worldStressor);
+  const originKey = stressorOriginPoolKey(worldStressor);
 
   return Object.freeze({
     crisisArity: arityKey ? legibilityRung('', line('DS-STR-1', arityKey), []) : null,
@@ -356,6 +445,10 @@ export function stressorsStateProse(settlement, readings = {}, options = {}) {
     conditionArchetype: archetypeKey ? legibilityRung('', line('DS-CND-1', archetypeKey), []) : null,
     conditionProvenance: provenanceKey ? legibilityRung('', line('DS-CND-1', provenanceKey), []) : null,
     conditionDuration: durationKey ? legibilityRung('', line('DS-CND-1', durationKey), []) : null,
+    worldStressorLifecycle: lifecycleKey
+      ? legibilityRung(text(worldStressor?.lifecycleStage), line('DS-STR-2', lifecycleKey), [])
+      : null,
+    worldStressorOrigin: originKey ? legibilityRung('', line('DS-STR-2', originKey), []) : null,
   });
 }
 

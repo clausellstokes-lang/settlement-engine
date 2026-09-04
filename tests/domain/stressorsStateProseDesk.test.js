@@ -23,13 +23,18 @@ import {
   SLOT_FILL_SHAPES, SLOT_FILL_TABLES, conditionArchetypePoolKey,
   conditionDirectionPoolKey, conditionDurationPoolKey, conditionProvenancePoolKey,
   conditionSeverityPoolKey, crisisArityPoolKey, crisisBannerPoolKey, crisisBannerRung,
-  crisisFramingPoolKey, stressorsStateProse,
+  crisisFramingPoolKey, stressorLifecyclePoolKey, stressorOriginPoolKey, stressorsStateProse,
 } from '../../src/domain/display/stateProse/stressorsStateProse.js';
 import { STRESS_TYPE_MAP } from '../../src/data/stressTypes.js';
 import {
   isEventSourcedCondition, severityBand, severityBands, supportedConditionArchetypes,
 } from '../../src/domain/activeConditions.js';
 import { DOSSIER_STATE_PROSE_STRESSORS } from '../../src/data/dossierStateProse/stressors.generated.js';
+import { STRESSOR_LIFECYCLE_STAGES, normalizeStressor } from '../../src/domain/worldPulse/stressorsCore.js';
+// ⭐ A TEST IMPORT COSTS NO PRODUCTION BYTES. `stressorDynamics.js` drags 29 modules /
+// 602 KB and the DESK deliberately does not touch it — but the identity between its variant
+// roster and the corpus's origin pools is worth asserting, and here is where that is free.
+import { VARIANT_HOOKS } from '../../src/domain/worldPulse/stressorDynamics.js';
 import { DOSSIER_MOUNTS, UNMOUNTED_BLOCKS, sentenceMountForBlock } from '../../src/domain/display/stateProse/dossierMounts.js';
 import { parseSlotShapes, mergeSlotShapes } from '../../scripts/lib/dossier-slot-shapes.mjs';
 
@@ -249,8 +254,13 @@ describe('the stressor desk — the wrong-reader trap, and the two declared dark
       expect(sentenceMountForBlock(blockId)?.mount).toBe(mount);
       expect(UNMOUNTED_BLOCKS).not.toContain(blockId);
     }
-    // DS-STR-2 remains dark: its state is worldState.stressors, written only during play.
-    expect(UNMOUNTED_BLOCKS).toContain('DS-STR-2');
+    // ⚠ THIS ARM ONCE ASSERTED `DS-STR-2` WAS STILL DARK, and the very next car mounted it.
+    // An assertion naming a block as DARK goes stale the moment that block is lit — the same
+    // staleness the mount walker's hardcoded routing plant hit in this same wave. So the
+    // claim is DERIVED: every block this desk's registry rows name is mounted, and the count
+    // comes from the registry rather than from a literal that has to be maintained.
+    const deskRows = DOSSIER_MOUNTS.filter((row) => row.desk === 'stressors');
+    for (const row of deskRows) expect(UNMOUNTED_BLOCKS).not.toContain(row.blockId);
   });
 
   it('a settlement with no crises and no conditions is wholly silent, not a crash', () => {
@@ -258,5 +268,135 @@ describe('the stressor desk — the wrong-reader trap, and the two declared dark
     for (const key of Object.keys(empty)) expect(empty[key], key).toBeNull();
     expect(stressorsStateProse(undefined).crisisFraming).toBeNull();
     expect(crisisBannerRung(undefined, undefined)).toBeNull();
+  });
+});
+
+/**
+ * DS-STR-2 — the world stressor. A CONDITIONAL SURFACE: `worldState.stressors[]` is written
+ * only during play, so every aliveness arm below runs against a SIMULATED fixture normalized
+ * by the kernel's own `normalizeStressor`. The birth case is a separate, labelled arm — a
+ * dormancy proof standing in for an aliveness proof is the failure this file refuses.
+ */
+const STR2 = 'DS-STR-2';
+const STR2_POOLS = DOSSIER_STATE_PROSE_STRESSORS[STR2].pools;
+
+/** A played-world stressor, through the shipped normalizer. */
+const playedStressor = (lifecycleStage, variant) => normalizeStressor({
+  type: 'famine', severity: 0.6, status: 'active', lifecycleStage,
+  affectedSettlementIds: ['sid-1'], originContext: { variant },
+});
+
+describe('DS-STR-2 — the two wired lenses are identities over PERSISTED fields', () => {
+  it('the fixture is what the shipped normalizer produces', () => {
+    const stressor = playedStressor('peaking', 'foreign_sponsored');
+    // If the normalizer dropped either field the arms below would be measuring a
+    // hand-shaped object rather than what the simulation writes.
+    expect(stressor.lifecycleStage).toBe('peaking');
+    expect(stressor.originContext).toEqual({ variant: 'foreign_sponsored' });
+    expect(stressor.affectedSettlementIds).toEqual(['sid-1']);
+  });
+
+  it('⭐ the ORIGIN lens is a 17/17 identity with the producer\'s variant roster', () => {
+    const variants = Object.keys(VARIANT_HOOKS);
+    expect(variants).toHaveLength(17);
+    for (const variant of variants) {
+      const key = `ORIGIN: ${variant}`;
+      expect(STR2_POOLS[key], `corpus has no pool for origin ${variant}`).toBeTruthy();
+      expect(stressorOriginPoolKey({ originContext: { variant } })).toBe(key);
+    }
+    // Both directions: the corpus holds no origin pool the producer cannot emit.
+    const originPools = Object.keys(STR2_POOLS).filter((k) => k.startsWith('ORIGIN: '));
+    expect(originPools).toHaveLength(variants.length);
+    // An unknown variant renders nothing. An origin is a claim about who did this to the
+    // town, and the wrong one is the worst sentence this corpus could print.
+    expect(stressorOriginPoolKey({ originContext: { variant: 'alien_invasion' } })).toBeNull();
+    expect(stressorOriginPoolKey({})).toBeNull();
+  });
+
+  it('the LIFECYCLE lens covers FIVE of the roster\'s seven stages, by the corpus\'s choice', () => {
+    expect(STRESSOR_LIFECYCLE_STAGES).toHaveLength(7);
+    const narrated = ['emerging', 'active', 'peaking', 'easing', 'residual'];
+    for (const stage of narrated) {
+      expect(stressorLifecyclePoolKey({ lifecycleStage: stage })).toBe(`LIFECYCLE: ${stage}`);
+    }
+    // `resolved` and `dormant` get no pool — a stressor that is over is not a story about a
+    // stressor — so they render NOTHING rather than a missing-pool error.
+    for (const stage of ['resolved', 'dormant']) {
+      expect(STRESSOR_LIFECYCLE_STAGES).toContain(stage);
+      expect(stressorLifecyclePoolKey({ lifecycleStage: stage })).toBeNull();
+    }
+    expect(stressorLifecyclePoolKey({})).toBeNull();
+    expect(stressorLifecyclePoolKey(null)).toBeNull();
+  });
+
+  it('ALIVENESS: all TWENTY-TWO lit pools speak over played worlds', () => {
+    const reached = new Set();
+    for (const stage of STRESSOR_LIFECYCLE_STAGES) {
+      for (const variant of Object.keys(VARIANT_HOOKS)) {
+        const drawn = stressorsStateProse(
+          town, { worldStressor: playedStressor(stage, variant) }, { seed: `s2-${stage}-${variant}` },
+        );
+        for (const rung of ['worldStressorLifecycle', 'worldStressorOrigin']) {
+          const line = drawn[rung];
+          if (line?.sentence) {
+            reached.add(line.provenance.poolKey);
+            expect(line.provenance.blockId).toBe(STR2);
+            expect(line.sentence).not.toMatch(/[{}]/);
+            expect(line.sentence).not.toMatch(/[0-9]/);
+          }
+        }
+      }
+    }
+    expect(reached.size, `reached ${reached.size}`).toBe(22);
+    expect(Object.keys(STR2_POOLS)).toHaveLength(32);
+  });
+});
+
+describe('DS-STR-2 — the ten dark pools, and the coupling measurement behind them', () => {
+  it('⛔ SYNERGY × 6 and COUNTERFORCE × 4 are dark, and the desk touches neither kernel', () => {
+    for (const key of Object.keys(STR2_POOLS)) {
+      if (!key.startsWith('SYNERGY: ') && !key.startsWith('COUNTERFORCE: ')) continue;
+      expect(STR2_POOLS[key], `corpus lost ${key}`).toBeTruthy();
+    }
+    expect(Object.keys(STR2_POOLS).filter((k) => k.startsWith('SYNERGY: '))).toHaveLength(6);
+    expect(Object.keys(STR2_POOLS).filter((k) => k.startsWith('COUNTERFORCE: '))).toHaveLength(4);
+    // SYNERGY needs `synergyAssessment`, and COUNTERFORCE needs
+    // `counterforceAssessment(stressor, snapshot)` — a WORLD SNAPSHOT a dossier tab does not
+    // have. Both live in `stressorDynamics.js`, whose import drags 29 modules / 602,004 B
+    // that are not already in first paint, onto the most-visited tab in the dossier. The
+    // desk must not reach for it, and this asserts the abstinence rather than trusting it.
+    const source = readFileSync(
+      resolve(import.meta.dirname, '../../src/domain/display/stateProse/stressorsStateProse.js'), 'utf8',
+    );
+    const code = source.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/[^\n]*/g, '');
+    expect(code, 'the desk reached for the 602 KB kernel').not.toMatch(/stressorDynamics/);
+    expect(code, 'the desk invented a synergy or counterforce lens').not.toMatch(/SYNERGY:|COUNTERFORCE:/);
+  });
+
+  it('⚠ THE SURFACE CONDITION, labelled so it is never mistaken for aliveness', () => {
+    // No played world ⇒ no world stressor ⇒ both lenses silent. Nothing degrades and
+    // nothing false is said; the aliveness proof is the played-world arm above, and
+    // substituting this one for it would be the dormancy proof this file refuses.
+    const birth = stressorsStateProse(town, { worldStressor: null }, { seed: 'birth' });
+    expect(birth.worldStressorLifecycle).toBeNull();
+    expect(birth.worldStressorOrigin).toBeNull();
+    // …while the two BIRTH-time blocks in this same desk still speak, which is the whole
+    // reason this leaf split into two cars.
+    const lit = stressorsStateProse(
+      town,
+      { banners: [banner('famine')], conditions: [condition({ severityBand: 'high' })], worldStressor: null },
+      { seed: 'birth2' },
+    );
+    expect(lit.crisisFraming.sentence).toBeTruthy();
+    expect(lit.conditionSeverity.sentence).toBeTruthy();
+  });
+
+  it('the registry mounts DS-STR-2 once, and the STRESSORS LEAF IS COMPLETE', () => {
+    const rows = DOSSIER_MOUNTS.filter((row) => row.blockId === STR2);
+    expect(rows).toHaveLength(1);
+    expect(rows[0]).toMatchObject({ mount: 'overview.stressorLifecycle', tab: 'overview', desk: 'stressors', rung: 'sentence' });
+    // THE MILESTONE, asserted rather than claimed: no stressors-leaf block remains dark.
+    expect(UNMOUNTED_BLOCKS.filter((b) => b.startsWith('DS-STR-') || b.startsWith('DS-CND-'))).toEqual([]);
+    expect(DOSSIER_MOUNTS.filter((row) => row.desk === 'stressors')).toHaveLength(3);
   });
 });
