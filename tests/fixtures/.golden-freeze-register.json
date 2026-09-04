@@ -126,6 +126,13 @@
         "tests/lint/sovereigntyLightingContract.walker.test.js"
       ],
       "reason": "The lighting census refreeze ritual, paired with LIGHTING_CENSUS_NOTE. A test-estate census register with its own governed walker and its own refusals; it counts test titles, not world bytes. It does not match the UPDATE_ pattern and is listed here so the boundary is affirmative rather than accidental."
+    },
+    {
+      "envSpelling": "UPDATE_MOUNT_BASELINE",
+      "files": [
+        "tests/lint/dossierMountRegistry.walker.test.js"
+      ],
+      "reason": "A dossier-mount REGISTRY ratchet baseline over src/components, written through writeShrinkOnlyBaseline into tests/lint/.dossier-mounts-baseline.json. It records which mounts exist and which facts are routed, not what a seed produces, so it is not a same-seed world fingerprint. Same disposition as UPDATE_SITE_COHERENCE_BASELINE and UPDATE_PROSE_SEAMS_BASELINE. ⚠ MINTED AFTER THIS REGISTER WAS MEASURED: it landed in 0fdbc53a0, downstream of inventory.measuredAtSha 8b07ce45f, so the inventory block above describes the base roster and this entry is the landing-time addition that keeps the roster closed. Enrolled by lane GOLDENLAND at the TE-GOLDEN-1 landing after arm 2 convicted it by name on the rebased tip."
     }
   ],
   "unresolvedRoster": {
