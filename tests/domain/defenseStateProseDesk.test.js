@@ -20,7 +20,10 @@ import {
   publicOrderPoolKey,
 } from '../../src/domain/display/stateProse/defenseStateProse.js';
 import { MONSTER_THREAT_TIERS, normalizeMonsterThreat } from '../../src/data/monsterThreat.js';
-import { scoreBand } from '../../src/domain/display/defenseScoreBands.js';
+import { avgScore, scoreBand } from '../../src/domain/display/defenseScoreBands.js';
+import { avgScore as avgScoreViaPdf } from '../../src/pdf/lib/viewModelPrimitives.js';
+import { deriveDefensePosture } from '../../src/domain/display/dossierViewModel.js';
+import { readdirSync, statSync } from 'node:fs';
 import { DM_FIELD_FRAMED_BY_BLOCK, isDmEditableProsePath } from '../../src/domain/display/stateProse/dmFieldProjection.js';
 import { DOSSIER_STATE_PROSE_DEFENSE } from '../../src/data/dossierStateProse/defense.generated.js';
 import { DOSSIER_MOUNTS, UNMOUNTED_BLOCKS, sentenceMountForBlock } from '../../src/domain/display/stateProse/dossierMounts.js';
@@ -361,5 +364,67 @@ describe('DS-DEF-2 — ALIVENESS over every combination the generator can build'
     expect(rows).toHaveLength(1);
     expect(rows[0]).toMatchObject({ mount: 'defense.threatAssessment', tab: 'defense', desk: 'defense', rung: 'sentence' });
     expect(sentenceMountForBlock(DEF2)?.mount).toBe('defense.threatAssessment');
+  });
+});
+
+/**
+ * ⭐ THE `avgScore` LIFT — guarded here because DS-DEF-1 is the consumer that motivated it.
+ *
+ * The overall defence mean was a four-line pure function in `pdf/lib/viewModelPrimitives.js`
+ * AND an inline copy in `dossierViewModel.deriveDefensePosture`. `parityContract.js` carries
+ * a `defense.scoreAvg` row precisely because two copies of one mean drift. Both homes were
+ * expensive: reaching them cost 297,048 B and 282,319 B of transitive weight over the
+ * first-paint closure, so a display consumer had three options — pay ~280 KB, hand-roll a
+ * THIRD copy, or go without. It now lives in `defenseScoreBands.js`, the module that owns
+ * the band vocabulary every consumer pairs it with, at 3,617 B.
+ */
+describe('the avgScore lift — ONE implementation, reachable cheaply', () => {
+  it('⛔ exactly ONE implementation of the mean remains in src/', () => {
+    // A source scan, because the defect this lift cures is a SECOND copy — and a third
+    // could be hand-rolled by anyone who finds the real one expensive to reach.
+    const hits = [];
+    const walk = (dir) => {
+      for (const entry of readdirSync(dir)) {
+        const path = resolve(dir, entry);
+        if (statSync(path).isDirectory()) { walk(path); continue; }
+        if (!/\.jsx?$/.test(entry)) continue;
+        const src = readFileSync(path, 'utf8');
+        if (/reduce\(\(a,\s*b\)\s*=>\s*a\s*\+\s*b,\s*0\)\s*\/\s*vals\.length/.test(src)) hits.push(entry);
+      }
+    };
+    walk(resolve(import.meta.dirname, '../../src'));
+    expect(hits, `the mean is implemented in ${hits.length} places`).toEqual(['defenseScoreBands.js']);
+  });
+
+  it('both former homes DELEGATE, and agree with the leaf exactly', () => {
+    // The PDF primitive re-exports; dossierViewModel calls. Agreement is asserted with
+    // Object.is so the NaN-in/NaN-out case counts as equal rather than silently passing.
+    const cases = [
+      { monster: 40, military: 55, internal: 60, economic: 50, magical: 30 },
+      { a: 1 }, { a: 0 }, {}, null, undefined, { a: 'x', b: 5 },
+      { a: 66, b: 67 }, { a: -10, b: 10 }, { a: 99.6 }, { a: Number.NaN, b: 50 },
+    ];
+    const reached = new Set();
+    for (const scores of cases) {
+      const mine = avgScore(scores);
+      reached.add(String(mine));
+      expect(Object.is(avgScoreViaPdf(scores), mine), `pdf re-export for ${JSON.stringify(scores)}`).toBe(true);
+      const posture = deriveDefensePosture({ defenseProfile: { scores } });
+      expect(Object.is(posture.scoreAvg, mine), `dossierViewModel for ${JSON.stringify(scores)}`).toBe(true);
+    }
+    // Non-vacuity: the cases must have produced several distinct answers, or agreement
+    // could be three functions all returning the same constant.
+    expect(reached.size).toBeGreaterThan(5);
+  });
+
+  it('`null` on no numeric scores — an absent score is NOT a zero', () => {
+    // A consumer that banded 0 would report CRITICAL for a settlement with no defence
+    // profile at all, which is a false statement rather than a missing one.
+    expect(avgScore({})).toBeNull();
+    expect(avgScore(null)).toBeNull();
+    expect(avgScore({ a: 'x' })).toBeNull();
+    expect(scoreBand(0)).toBe('CRITICAL');
+    // …and the desk's economic row is silent rather than CRITICAL on an absent score.
+    expect(economicRowPoolKey(avgScore({}))).toBeNull();
   });
 });

@@ -24,6 +24,7 @@
  */
 
 import { cleanNum } from './placeholders.js';
+import { avgScore } from './defenseScoreBands.js';
 import { deriveMagicProfile } from '../magicProfile.js';
 import { formatCount } from '../formatNumber.js';
 // The export-posture derivation lives in its own dependency-free leaf so the
@@ -515,9 +516,9 @@ export function deriveSafetyPosture(settlement) {
  */
 export function deriveDefensePosture(settlement) {
   const dp = settlement?.defenseProfile || {};
-  const vals = Object.values(dp.scores || {}).filter((v) => typeof v === 'number');
-  const scoreAvg = vals.length ? Math.round(vals.reduce((a, b) => a + b, 0) / vals.length) : null;
-  return { readinessLabel: dp.readiness?.label || null, scoreAvg };
+  // ONE derivation, in defenseScoreBands.js. This was a second inline copy of the same mean,
+  // which is the drift `parityContract.js`'s `defense.scoreAvg` row exists to catch.
+  return { readinessLabel: dp.readiness?.label || null, scoreAvg: avgScore(dp.scores) };
 }
 
 /**
