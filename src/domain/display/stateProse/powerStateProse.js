@@ -741,9 +741,9 @@ const GOVERNING_NAME_POOL = 'governing body name: a SLOT, never a baked noun';
  * ⛔ SIX OF THE TWENTY POOLS ARE DARK BY DECLARATION, each with a measured reason:
  *   • `receipt formed / realigned / fractured / exposed / deferred` (5). These narrate
  *     TRANSITIONS, and `advanceSettlementPolitics` returns a `receipts` array that its ONLY
- *     caller discards — `pulseKernel.js:425` keeps `politics.changed` and
- *     `politics.worldState` and drops the rest. There is no readable state, so a read would
- *     be the dead-read defect. (That the machinery feeds nothing is itself a finding.)
+ *     caller discards — pulseKernel.js `if (politics.changed) worldState =` keeps only the
+ *     changed flag and the world state, dropping the rest. There is no readable state, so a
+ *     read would be the dead-read defect. (The machinery feeding nothing is itself a finding.)
  *   • `hostile leader tie HARD-BLOCKS an otherwise natural alignment` (1). Nothing persists
  *     a BLOCKED alignment; deriving it would fork the kernel's own alignment reasoning.
  * And TWO more are dark for a cost reason rather than a truth reason:
