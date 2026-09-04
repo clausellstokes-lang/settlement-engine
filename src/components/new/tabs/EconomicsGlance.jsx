@@ -54,7 +54,7 @@ import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.j
  * @param {object|null} props.fb the canonical food balance
  * @param {string} props.foodLabel
  * @param {string} props.foodColor
- * @param {object} props.granary the seasonal granary outlook
+ * @param {object} props.granary the seasonal granary outlook (`seasonTitle` + `detail` are the tile's two parts)
  * @param {string} props.granaryColor
  * @param {object} props.treasury the coin-band glance
  * @param {object|null} [props.headerRung] the DS-ECO-1 rung the desk built
@@ -98,7 +98,7 @@ export default function EconomicsGlance({
         {[
           {label:'Economy',value:eco.prosperity,sub:ecoScore?`Output score: ${ecoScore}/100`:undefined,color:prosColor,drawn:drawnAtMount('economics.economyTile',economyRung)},
           {label:'Food',value:foodLabel,sub:fb?`${formatCount(fb.dailyProduction)} / ${formatCount(fb.dailyNeed)} lbs/day`:undefined,color:foodColor,drawn:drawnAtMount('economics.foodTile',foodRung)},
-          ...(granary.available?[{label:'Season',value:granary.display.split(' — ')[0],sub:granary.display.split(' — ').slice(1).join(' — '),color:granaryColor,drawn:drawnAtMount('economics.seasonTile',seasonRung)}]:[]), ...(treasury.available?[{label:'Treasury',value:treasury.band,color:treasury.color,drawn:null}]:[]),
+          ...(granary.available?[{label:'Season',value:granary.seasonTitle,sub:granary.detail,color:granaryColor,drawn:drawnAtMount('economics.seasonTile',seasonRung)}]:[]), ...(treasury.available?[{label:'Treasury',value:treasury.band,color:treasury.color,drawn:null}]:[]),
         ].map(({label,value,sub,color,drawn})=>(
           <div key={label} style={{flex:'1 1 120px',background:swatch['#FAF8F4'],border:`1px solid ${color}30`,borderTop:`3px solid ${color}`,padding:'8px 10px',minWidth:0}}>
             <div style={{fontSize:FS.xxs,fontWeight:700,color,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:3}}>{label}</div>

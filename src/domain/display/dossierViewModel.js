@@ -327,7 +327,7 @@ export function deriveGranaryOutlook(settlement) {
   );
   const sp = fs?.stockpile || null;
   if (!sp || !sp.season) {
-    return { available: false, season: null, band: null, display: null, lastsUntil: null, yearEvent: null };
+    return { available: false, season: null, seasonTitle: null, band: null, display: null, detail: null, lastsUntil: null, yearEvent: null };
   }
   const level = cleanNum(fs?.storageMonths, 0) ?? 0;
   const cap = cleanNum(sp.capacityMonths, 0) ?? 0;
@@ -345,13 +345,20 @@ export function deriveGranaryOutlook(settlement) {
     lastsUntil = 'already spent';
   }
   const yearEvent = SEASONAL_EVENT_NOTE[/** @type {string} */ (sp.seasonalEvent)] || null;
-  const display = [
-    `${seasonTitle} — the granary is ${band} (${level.toFixed(1)} of ${cap.toFixed(1)} months)`,
+  // ⛔ THE TILE'S TWO PARTS ARE FIELDS, NOT A SPLIT. `display` is a JOINED string, so any
+  // consumer that wanted the heading and the sub-line back had to re-parse it on the ` — `
+  // delimiter, which is a contract spelled twice: once here by the composer, once in a view
+  // that had to guess it. EconomicsGlance.jsx did exactly that, three times on one line. The
+  // parts are returned now and `display` is composed FROM them, so the delimiter has one
+  // home and `display` stays byte-identical to what it always was.
+  const detail = [
+    `the granary is ${band} (${level.toFixed(1)} of ${cap.toFixed(1)} months)`,
     lastsUntil && lastsUntil !== 'already spent' ? `stores will last until ${lastsUntil}` : null,
     lastsUntil === 'already spent' ? 'the granary is spent' : null,
     yearEvent,
   ].filter(Boolean).join('. ');
-  return { available: true, season: sp.season, band, level, capacity: cap, lastsUntil, yearEvent, display };
+  const display = `${seasonTitle} — ${detail}`;
+  return { available: true, season: sp.season, seasonTitle, band, level, capacity: cap, lastsUntil, yearEvent, detail, display };
 }
 
 // ── W-COIN-2: the treasury's at-a-glance band (A1.21) ────────────────────────
