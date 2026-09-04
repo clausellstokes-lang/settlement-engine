@@ -194,6 +194,9 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
   'src/domain/display/defenseDisplay.js': 'display — defenseProfile.institutions force buckets, not the roster',
   'src/domain/display/institutionProfile.js': 'display — defenseProfile.institutions buckets',
   'src/domain/display/threatAssessment.js': 'display — defenseProfile.institutions buckets',
+  // THE DESK CONSIST (2026-09-04) added a FOURTH reader of the same facet. Same shape, same
+  // disposition — and see the count arm below for where the ruin question actually lives.
+  'src/domain/display/stateProse/defenseStateProse.js': 'display — defenseProfile.institutions buckets (the DS-DEF-2 perimeter/force rows), not the settlement roster',
   'src/domain/display/dossierViewModel.js': 'display — roster count for the dossier overview',
   'src/domain/dossier/powerSupport.js': 'display/list — lists institutions aligned to each power for the Power-tab support web (a relationship/alignment display keyed on category + factionSource, NOT a live-provider capacity aggregate); each row is an InstitutionLink that surfaces the institution\'s actual state, so a ruin is shown, never credited with function',
   // ── canon-path string literal: RETIRED 2026-08-14, THE READ WAS NEVER A READ ────
@@ -373,7 +376,22 @@ describe('ruin-filter roster ratchet (structural-prevention Pattern 2)', () => {
     // space; but crediting a flattened building with a growing excavation would be this walker's
     // own defect class, so the row stops growing and says why. The disposition is stated in the
     // leaf's own header. Read from this arm's own failure message ("expected 92 to be 91").
-    expect(readers.length).toBe(92);
+    // RE-MEASURED 2026-09-04 BY LANE DESKCURE: 92 → 93. ONE new reader,
+    // src/domain/display/stateProse/defenseStateProse.js, arriving with the DESK consist, and it
+    // is EXEMPT rather than compliant because it reads `defenseProfile.institutions` — the
+    // precomputed defense buckets — and never `settlement.institutions`. That is not a fresh
+    // judgment: defenseDisplay.js, institutionProfile.js and threatAssessment.js are all
+    // exempted above for reading the SAME facet, so this is the fourth instance of a settled
+    // shape rather than a new exception.
+    // ⚠ WHERE THE RUIN QUESTION ACTUALLY LIVES, written down rather than laundered into this
+    // exemption: the buckets are built by `getDefenseInstitutions` in
+    // src/generators/defenseGenerator.js, which partitions the roster by NAME KEYWORD ONLY and
+    // consults no ruin status — so a flattened citadel still lands in the `walls` bucket. That
+    // producer sits in src/generators/, OUTSIDE this walker's src/domain scan root, so no arm
+    // here can reach it. Exempting the desk is the right layer; the producer is a separate act
+    // and is reported, not silently absorbed.
+    // Read from this arm's own failure message ("expected 93 to be 92"), never computed.
+    expect(readers.length).toBe(93);
   });
 
   test('exempt honesty: every exempt entry still reads .institutions and is not already compliant', () => {
