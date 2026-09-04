@@ -56,11 +56,17 @@ carrying live interp keys. Different consumer, different failure mode, different
 Bundling them into an R1 wiring wave is exactly what LEG-7 forbids for the sibling case.
 **Deliberately deferred, documented, priced — not a bug to re-find.**
 
-**WHAT DID NOT MOVE.** The three owner-gated items are untouched and remain owner-gated:
-DEFECT-1/2/3's de-slugging of the twelve MUTILATED §4 anchors (`coup_detat` → "detat" is
-still live, now as one voice in six rather than the only one), and DEFECT-8's digit
-retirement. `tests/domain/rumorFallbackPhrasePools.test.js` freezes the mutilated roster
-at exactly twelve so neither a silent repair nor a new mutilation can land unremarked.
+**WHAT DID NOT MOVE AT THE WIRING, AND WHAT HAS MOVED SINCE.** At the wiring, three
+items were held as owner-gated. **DEFECT-1/2/3's de-slugging of the twelve §4 anchors is
+now DONE (§894)** — `coup_detat` reads *"a seizure of the seat"*, `institution_capture`
+*"a captured hall"*, and the twelve authored canonicals live in `FALLBACK_CANONICALS`
+(`src/domain/display/rumorFallbackPhrasePools.js`). The gate was never the owner's: it
+cited wiring note LEG-7, and the §892 retrovalidation walk found no owner word behind
+LEG-7 in the ledger, so the repair was taken under the 2026-09-04 carve-out amendment.
+**DEFECT-8's digit retirement is still open.**
+`tests/domain/rumorFallbackPhrasePools.test.js` now freezes the DE-SLUGGED roster at
+exactly twelve, and separately asserts that NO variant-1 row is tagged mutilated — so a
+silent reversal and a NEW mutilation both still red.
 
 ---
 
@@ -1435,15 +1441,22 @@ fiction surface, of *"word of realm verb force found steading"*.
 RECORDED SEPARATELY.** The byte-identity clause is absolute: variant 1 of every
 pool below is the string `whatPhrase()` returns TODAY, marked `[fallback, live —
 byte-identity anchor]`. Wiring the pool with the selector dark therefore remains
-provably byte-identical. But TWELVE of these fallbacks are not merely plain, they
-are **mutilated** — the strip regex ate the meaningful half of the token, so
-`coup_detat` renders as *"detat"* and `institution_capture` as *"capture"* (one
-under DEFECT-1, eight under DEFECT-2, three under DEFECT-3; each is tagged
-`⚠️ MUTILATED` inline, and the twelve inline tags are the whole list).
+provably byte-identical. But TWELVE of these fallbacks were not merely plain, they
+were **mutilated** — the strip regex ate the meaningful half of the token, so
+`coup_detat` rendered as *"detat"* and `institution_capture` as *"capture"* (one
+under DEFECT-1, eight under DEFECT-2, three under DEFECT-3).
 Retiring a mutilated variant 1 is a second, larger prose shift with its own golden,
-and it is NOT bundled into the pool wiring. Each is tagged inline and listed as
-DEFECT-1 / DEFECT-2 / DEFECT-3 at the tail, with the recommended repair, for the
-owner to authorise or veto on its own merits.
+so it was NOT bundled into the pool wiring.
+
+**⛔ SUPERSEDED IN PART AT §894 (2026-09-04) — THE TWELVE ARE NOW DE-SLUGGED.** This
+ruling's deferral is discharged; its byte-identity clause is NOT. Each of the twelve now
+carries an AUTHORED index 0 in `FALLBACK_CANONICALS`, tagged `✅ DE-SLUGGED at §894`
+inline, and the byte-identity clause binds it exactly as before — the test still proves
+variant 1 byte-equal to what `whatPhrase()` returns seedless, which is now the authored
+string rather than the strip output. **No pool changed length**, so selection is
+unmoved: every existing seed draws the same INDEX and only the string at index 0 differs.
+The deferral cited LEG-7 as owner-gated; the §892 walk proved LEG-7 a LANE-authored
+wiring note with no owner word in the ledger behind it.
 
 ## §4a — THE WAR DESK
 
@@ -1605,7 +1618,7 @@ ALSO LIVE: stressor catalog label "Occupation pressure" [J-LEG-1]
 ### occupation_burden — R1 subject phrase — significance: routine — desk: war
 CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 ALSO LIVE: condition label "Occupation burden" + gloss [J-LEG-1]
-1. burden `[fallback, live — byte-identity anchor · ⚠️ MUTILATED, DEFECT-3]`
+1. the weight of an occupation `[fallback, live — byte-identity anchor · ✅ DE-SLUGGED at §894, DEFECT-3 repaired — was "burden"]`
 2. holding a town costing more than taking it did
 3. garrisons entered against the occupier's own strength
 4. men tied down where there is no battle
@@ -1616,7 +1629,7 @@ ALSO LIVE: condition label "Occupation burden" + gloss [J-LEG-1]
 
 ### occupation_burden_cleared — R1 subject phrase — significance: routine — desk: war
 CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
-1. burden cleared `[fallback, live — byte-identity anchor · ⚠️ MUTILATED, DEFECT-3]`
+1. an occupation's weight lifted `[fallback, live — byte-identity anchor · ✅ DE-SLUGGED at §894, DEFECT-3 repaired — was "burden cleared"]`
 2. a garrison called back off a held town
 3. an obligation struck from the occupier's rolls
 4. men free to be somewhere else at last
@@ -1628,7 +1641,7 @@ CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 ### occupation_resistance — R1 subject phrase — significance: routine — desk: war
 CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 ALSO LIVE: condition label "Occupation resistance" + gloss [J-LEG-1]
-1. resistance `[fallback, live — byte-identity anchor · ⚠️ MUTILATED, DEFECT-3]`
+1. resistance under occupation `[fallback, live — byte-identity anchor · ✅ DE-SLUGGED at §894, DEFECT-3 repaired — was "resistance"]`
 2. a held town that will not be quiet
 3. sabotage entered in the garrison's own record
 4. orders posted at night and torn down by morning
@@ -2232,7 +2245,7 @@ ALSO LIVE: compound signature label "The Wasting" + summary [J-LEG-1]
 ### coup_detat — R1 subject phrase — significance: notable — desk: events
 CADENCE: notable → floor 6 · live 1 · +5 · AUDIENCE: public
 LAW ONE: a seizure empties a seat; no fate is resolved.
-1. detat `[fallback, live — byte-identity anchor · ⚠️⚠️ MUTILATED, DEFECT-1 — the coup_ strip prefix eats the meaningful half of the token]`
+1. a seizure of the seat `[fallback, live — byte-identity anchor · ✅ DE-SLUGGED at §894, DEFECT-1 repaired — was "detat" — the coup_ strip prefix ate the meaningful half of the token; the canonical is now authored in FALLBACK_CANONICALS]`
 2. a seizure attempted at the top
 3. a stroke against the seat entered in the record
 4. men moving on the council chamber at an odd hour
@@ -2303,7 +2316,7 @@ LAW ONE: OUT OF THE SEAT — never a resolved fate.
 ### faction_institution_capture — R1 subject phrase — significance: routine — desk: events
 CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 ALSO POOLED: the R2 Herald receipt-sentence pool for this kind lives in `RECEIPT_POOLS_INTERIOR.md` (INT-8) — a DIFFERENT AXIS of one kind, not a co-owned pool [J-LEG-8]
-1. institution capture `[fallback, live — byte-identity anchor · ⚠️ MUTILATED, DEFECT-2 — this is the de-underscored spelling of the DISTINCT kind institution_capture, which itself renders only "capture"]`
+1. a faction's capture of a hall `[fallback, live — byte-identity anchor · ✅ DE-SLUGGED at §894, DEFECT-2 repaired — was "institution capture" — was the de-underscored spelling of the DISTINCT kind institution_capture; the actor is now named]`
 2. an interest taking a hall for its own
 3. an entry on the roll naming the interest the hall now answers to
 4. an office whose decisions now have an owner
@@ -2315,7 +2328,7 @@ ALSO POOLED: the R2 Herald receipt-sentence pool for this kind lives in `RECEIPT
 ### faction_institution_suppression — R1 subject phrase — significance: routine — desk: events
 CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 ALSO POOLED: the R2 Herald receipt-sentence pool for this kind lives in `RECEIPT_POOLS_INTERIOR.md` (INT-8) — a DIFFERENT AXIS of one kind, not a co-owned pool [J-LEG-8]
-1. institution suppression `[fallback, live — byte-identity anchor · ⚠️ MUTILATED, DEFECT-2 — this is the de-underscored spelling of the DISTINCT kind institution_suppression, which itself renders only "suppression"]`
+1. a faction's silencing of a hall `[fallback, live — byte-identity anchor · ✅ DE-SLUGGED at §894, DEFECT-2 repaired — was "institution suppression" — was the de-underscored spelling of the DISTINCT kind institution_suppression; the actor is now named]`
 2. an interest closing a hall it could not hold
 3. a suppression entered against the hall under a faction's name
 4. an office prevented from doing its work
@@ -2327,7 +2340,7 @@ ALSO POOLED: the R2 Herald receipt-sentence pool for this kind lives in `RECEIPT
 ### faction_law_preference_push — R1 subject phrase — significance: routine — desk: events
 CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 ALSO POOLED: the R2 Herald receipt-sentence pool for this kind lives in `RECEIPT_POOLS_INTERIOR.md` (INT-8) — a DIFFERENT AXIS of one kind, not a co-owned pool [J-LEG-8]
-1. law preference push `[fallback, live — byte-identity anchor · ⚠️ MUTILATED, DEFECT-2]`
+1. a faction's push for the law it wants `[fallback, live — byte-identity anchor · ✅ DE-SLUGGED at §894, DEFECT-2 repaired — was "law preference push"]`
 2. an interest pressing for the law it wants
 3. a preference entered on the council's own record
 4. rules proposed by the people they would suit
@@ -2338,7 +2351,7 @@ ALSO POOLED: the R2 Herald receipt-sentence pool for this kind lives in `RECEIPT
 
 ### faction_power_shift — R1 subject phrase — significance: routine — desk: events
 CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
-1. power shift `[fallback, live — byte-identity anchor · ⚠️ MUTILATED, DEFECT-2]`
+1. a shift of power between factions `[fallback, live — byte-identity anchor · ✅ DE-SLUGGED at §894, DEFECT-2 repaired — was "power shift"]`
 2. weight moving from one interest to another
 3. a shift entered on the faction rolls
 4. rooms that used to be full emptying into other rooms
@@ -2350,7 +2363,7 @@ CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 ### faction_service_bolster — R1 subject phrase — significance: routine — desk: events
 CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 ALSO POOLED: the R2 Herald receipt-sentence pool for this kind lives in `RECEIPT_POOLS_INTERIOR.md` (INT-8) — a DIFFERENT AXIS of one kind, not a co-owned pool [J-LEG-8]
-1. service bolster `[fallback, live — byte-identity anchor · ⚠️ MUTILATED, DEFECT-2]`
+1. a faction propping up a service `[fallback, live — byte-identity anchor · ✅ DE-SLUGGED at §894, DEFECT-2 repaired — was "service bolster"]`
 2. an interest paying to keep a service standing
 3. a payment entered where a levy would normally stand
 4. a hall kept open by somebody's money
@@ -2411,7 +2424,7 @@ CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 
 ### institution_capture — R1 subject phrase — significance: routine — desk: events
 CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
-1. capture `[fallback, live — byte-identity anchor · ⚠️⚠️ MUTILATED, DEFECT-2 — the institution_ strip prefix leaves a bare verb]`
+1. a captured hall `[fallback, live — byte-identity anchor · ✅ DE-SLUGGED at §894, DEFECT-2 repaired — was "capture" — the institution_ strip prefix left a bare verb]`
 2. a hall taken over by an interest
 3. a capture entered against the institution's own roll
 4. an office that has acquired an owner
@@ -2422,7 +2435,7 @@ CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 
 ### institution_suppression — R1 subject phrase — significance: routine — desk: events
 CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
-1. suppression `[fallback, live — byte-identity anchor · ⚠️⚠️ MUTILATED, DEFECT-2]`
+1. a silenced hall `[fallback, live — byte-identity anchor · ✅ DE-SLUGGED at §894, DEFECT-2 repaired — was "suppression"]`
 2. a hall prevented from working
 3. a body entered as prevented rather than as failed
 4. an office kept from doing what it is for
@@ -2476,7 +2489,7 @@ ALSO LIVE: stressor catalog label "Monster or raider pressure" [J-LEG-1] · real
 ### npc_action — R1 subject phrase — significance: routine — desk: events
 CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 LAW ONE: an act changes a standing; it never resolves a fate.
-1. action `[fallback, live — byte-identity anchor · ⚠️⚠️ MUTILATED, DEFECT-2 — the npc_ strip prefix leaves a bare noun]`
+1. one person's act `[fallback, live — byte-identity anchor · ✅ DE-SLUGGED at §894, DEFECT-2 repaired — was "action" — the npc_ strip prefix left a bare noun]`
 2. a name in the town doing something about it
 3. an act entered against a person's own record
 4. one hand moving where the council would not
@@ -2652,7 +2665,7 @@ there and THE PROMISE is undisturbed. The only deleted lines are the 23 restated
 | **J-LEG-1** | A NAME IS NOT A TELLING. Condition/stressor/relationship/deity-tier LABELS and condition GLOSSES are excluded from the frequency-scaled floor by their kind. | The LEGIBILITY LAW's glance tier requires a stable name. A chip that renames itself is not deeper, it is unrecognisable. FIFTY of the 200 pools carry a label of some class (20 condition · 13 relationship · 9 stressor-catalog · 3 deity-tier, plus 11 realm and 5 compound-signature labels across them); TWENTY carry a condition gloss as well, and that gloss subset is the whole of the contingent bill below. Each is recorded on its pool's `ALSO LIVE:` line so the exclusion is auditable. |
 | **J-LEG-2** | A kind's SECOND telling axis is DEFERRED, not denied. This file deepens the axis the census measured. | Twenty-nine kinds carry both a receipt-sentence pool and an authored subject phrase. Deepening both here would double the file and blur which axis the census actually found short. The second bill is priced below. |
 | **J-LEG-3** | EIGHT is the authored chronic floor; the soak's phrase-repetition envelope PROMOTES to 10–12. | The spine's chronic band is 8–12 "according to cadence, and then MEASURED". No pre-wiring cadence measurement exists for legacy tokens. Authoring a guessed 12 would be fabricated precision. |
-| **J-LEG-4** | Variant 1 stays the FALLBACK string for the 107 unvoiced kinds; the twelve MUTILATED fallbacks are a separate, owner-gated repair. | The byte-identity clause is absolute and does not distinguish authored strings from computed ones. But retiring *"detat"* is a second prose shift with its own golden and must not ride in on a pool-widening commit. |
+| **J-LEG-4** | Variant 1 stays the FALLBACK string for the 107 unvoiced kinds; the twelve mutilated fallbacks are a separate repair. **⛔ SUPERSEDED IN PART at §894** — the twelve ARE now de-slugged (`FALLBACK_CANONICALS`); the byte-identity clause stands unchanged and still binds them. | The byte-identity clause is absolute and does not distinguish authored strings from computed ones. Retiring *"detat"* was a second prose shift with its own golden and rightly did not ride in on a pool-widening commit — it rode on its own act instead, once the §892 walk showed the LEG-7 gate was a lane note rather than the owner's. |
 | **J-LEG-5** | The R1 subject-phrase pools take NO SLOTS. | The live frame supplies the settlement name and the address chain around the phrase — the NEWS ADDRESS LAW is satisfied by the sentence the phrase lands in, not by the phrase. A slot inside the phrase would double the name. |
 | **J-LEG-6** | `requiredSlots` parity is a WIRING PRECONDITION, and a walker must assert it. | Six registries index a parallel array by template index. A pool grown without its row throws at the new index — a defect this annex's own additions would cause if wired carelessly. Structural prevention, not vigilance. |
 | **J-LEG-7** | **ONE KIND, ONE POOL — and where the kind is LIVE, THIS ANNEX OWNS IT.** The 23 kinds that carried a same-register (R2) pool in BOTH this file and `RECEIPT_POOLS_WAR.md` are merged here; the war annex's pool body is replaced by a one-line pointer. | Two annexes claiming one selector is not a prose defect, it is an ownership defect: at wiring the two lists either merge into one draw set — and the duplicated members become literal repeats inside one pool — or one annex silently loses. LIVE beats DARK: these kinds already mint and route today, their live strings are the byte-identity anchors, and those anchors live here. The merge is APPEND-ONLY (variant 1..N untouched, nothing renumbered), so THE PROMISE holds. **62 variants moved; 80 exact duplicates dropped.** |
@@ -2738,11 +2751,17 @@ merged pool) are untouchable in that wave, as they are here.**
 
 # THE DEFECT REGISTER (found while authoring; each is a repair, not a pool)
 
-**DEFECT-1 — `coup_detat` renders as *"detat"*.** `WHAT_STRIP_PREFIX`
-(`settlementRumors.js:304`) strips `coup_`, leaving a fragment that is not a word
-in any language the reader speaks. **Severity: high** — it reaches the flagship
-fiction surface. *Repair:* an authored `WHAT_PHRASES` row. Disclosed prose shift,
-its own golden.
+**DEFECT-1 — `coup_detat` rendered as *"detat"*. ✅ REPAIRED at §894.**
+`WHAT_STRIP_PREFIX` strips `coup_`, leaving a fragment that is not a word in any
+language the reader speaks. **Severity: high** — it reached the flagship fiction
+surface. *Repaired as:* **"a seizure of the seat"**, an authored index 0 in
+`FALLBACK_CANONICALS`. ⚠️ **The recommended repair in this row — "an authored
+`WHAT_PHRASES` row" — was MEASURED AND REJECTED at §894, and the row is left standing
+so the reasoning is not re-derived.** `whatPhrase` consults `WHAT_PHRASES` FIRST and
+draws its variants from `WHAT_PHRASE_POOLS`, which holds no row for this kind, so an
+authored `WHAT_PHRASES` row would have COLLAPSED the kind from a six-member pool back
+to single-voiced — and moved it from §4 to §3, which is this annex's 107/63/170 census
+and a physically relocated `###` heading that the corpus walkers anchor on.
 
 **DEFECT-2 — the `institution_` / `npc_` / `faction_` strips mutilate eight
 tokens.** `institution_capture` → *"capture"* · `institution_suppression` →
@@ -2760,10 +2779,27 @@ them, about the kind that is NOT firing. `faction_institution_suppression` /
 `institution_suppression` do the same. Note the two are not byte-identical to each
 other — the defect is misattribution, not literal ambiguity. **Severity: high.**
 
-**DEFECT-3 — the `occupation_` strip mutilates three tokens.** `occupation_burden`
-→ *"burden"* · `occupation_burden_cleared` → *"burden cleared"* ·
-`occupation_resistance` → *"resistance"*. Each loses the fact that it is about an
-occupation at all. **Severity: medium.**
+**✅ REPAIRED at §894**, as authored index-0 strings in `FALLBACK_CANONICALS`:
+`institution_capture` → **"a captured hall"** · `institution_suppression` → **"a
+silenced hall"** · `npc_action` → **"one person's act"** ·
+`faction_institution_capture` → **"a faction's capture of a hall"** ·
+`faction_institution_suppression` → **"a faction's silencing of a hall"** ·
+`faction_law_preference_push` → **"a faction's push for the law it wants"** ·
+`faction_power_shift` → **"a shift of power between factions"** ·
+`faction_service_bolster` → **"a faction propping up a service"**. The impersonation is
+cured by NAMING THE ACTOR in the faction pair and dropping it in the institution pair,
+which is what makes the two readable as different beats rather than as two spellings of
+one. ⛔ **Widening `WHAT_STRIP_PREFIX` cannot cure this and would make it worse:**
+dropping `institution_` would make `faction_institution_capture` and
+`institution_capture` BOTH compute *"institution capture"*, converting the
+misattribution into literal byte-identical ambiguity.
+
+**DEFECT-3 — the `occupation_` strip mutilated three tokens. ✅ REPAIRED at §894.**
+`occupation_burden` → *"burden"* · `occupation_burden_cleared` → *"burden cleared"* ·
+`occupation_resistance` → *"resistance"*. Each lost the fact that it was about an
+occupation at all. **Severity: medium.** *Repaired as:* **"the weight of an
+occupation"** · **"an occupation's weight lifted"** · **"resistance under
+occupation"**.
 
 **DEFECT-4 — two distinct kinds share one live phrase.** `flow_migration` and
 `migration_pressure` both render *"people on the move"* (`WHAT_PHRASES:220,221`).
@@ -2780,6 +2816,16 @@ instance of it.** *Structural repair:* a walker over every routed token assertin
 either an explicit `WHAT_PHRASES` row OR that the stripped output is a
 multi-word phrase not equal to a bare verb from a closed stop-list. That converts
 "nobody noticed" into a red gate.
+
+**PARTLY DISCHARGED at §894, and the residual is named.** The twelve worst instances now
+take an AUTHORED canonical from `FALLBACK_CANONICALS` — the inclusion-list half of this
+repair, applied at exactly the sites that needed it — and
+`tests/domain/rumorFallbackPhrasePools.test.js` gained the general pin this row asks for:
+**no two §4 kinds may share a canonical**, which is the impersonation class in its
+general form and reds for any FUTURE kind whose strip output collides with another's.
+**RESIDUAL, deliberately not taken here:** the bare-verb stop-list arm. It needs an
+authored stop-list, which is a vocabulary decision rather than a mechanical one, and the
+95 remaining computed canonicals were measured clean of the collision class at §894.
 
 **DEFECT-6 — 108 routed tokens in this file's scope have no `WHAT_PHRASES` row at
 all.** The registration walker (`settlementRumors.walker.test.js`) source-scans

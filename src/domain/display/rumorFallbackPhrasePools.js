@@ -29,23 +29,26 @@
  * hide which anchors are authored strings and which are engine output.
  *
  * ── THE CANONICAL-AT-ZERO CONTRACT (identical in force, different in provenance) ────────
- * Variant 1 is NOT stored in this file. `whatPhrase()` computes the fallback and PREPENDS
- * it, so index 0 cannot drift from the live string — it IS the live string rather than a
- * transcription of it. Two properties follow by construction:
- *   • SEEDLESS IS BYTE-IDENTICAL — no seed means index 0, so every caller that asks for a
- *     phrase without a telling to key on reads exactly what it read before this wiring.
+ * Variant 1 is NOT stored per-pool in this file. For 95 of the 107 kinds `whatPhrase()`
+ * computes the fallback and PREPENDS it, so index 0 cannot drift from the live string — it
+ * IS the live string rather than a transcription of it. For the remaining twelve it is the
+ * authored string in `FALLBACK_CANONICALS` below, which the selector prepends in exactly
+ * the same position; the join is proved by `whatPhrase(kind) === pool[0]` on both arms, so
+ * the contract holds in force for all 107. Two properties follow by construction:
+ *   • SEEDLESS IS BYTE-IDENTICAL for the 95 — no seed means index 0, so every caller that
+ *     asks for a phrase without a telling to key on reads exactly what it read before.
  *   • AN UNREGISTERED TOKEN IS UNTOUCHED — a token absent from this map still degrades to
  *     its computed fallback exactly as before, so the blast radius is these 107 kinds and
  *     nothing else, seeded or not.
  *
- * ⚠️ TWELVE ANCHORS ARE MUTILATED, AND THAT IS DELIBERATE. For twelve kinds the strip
- * regex ate the meaningful half of the token — `coup_detat` computes to "detat",
- * `institution_capture` to "capture". J-LEG-4 rules that variant 1 STAYS that string:
- * retiring it replaces a live string rather than widening a pool, a larger disclosed shift
- * with its own golden, OWNER-GATED as DEFECT-1/2/3 under wiring note LEG-7 and explicitly
- * not to be bundled into a pool-wiring wave. Widening around a mutilated anchor is still a
- * strict improvement: it stops being the ONLY voice and becomes one of six or eight. Each
- * is marked inline.
+ * ✅ THE TWELVE MUTILATED ANCHORS ARE REPAIRED — see `FALLBACK_CANONICALS`. Until §894 the
+ * strip regex ate the meaningful half of twelve tokens (`coup_detat` computed to "detat",
+ * `institution_capture` to "capture") and J-LEG-4 held variant 1 at that string because
+ * retiring it REPLACES a live string rather than widening a pool. The gate was believed to
+ * be the owner's; the §892 retrovalidation walk proved LEG-7 a LANE-authored wiring note
+ * with no owner word behind it, and the repair was taken under the 2026-09-04 carve-out
+ * amendment. The shift is disclosed and bounded: pool ORDER and LENGTH are untouched, so
+ * every existing seed draws the same INDEX it always did — only the string at index 0 moved.
  *
  * ORDER IS LOAD-BEARING. Selection is `hash(seed) % pool.length` over
  * `[computedFallback, ...variants]`. APPEND ONLY — never insert, never re-sort.
@@ -232,8 +235,8 @@ const WAR_FALLBACK_POOLS = Object.freeze({
     "a year of being somebody else's",
   ]),
 
-  // occupation_burden — doc variants 2..8; variant 1 ('burden') is the live
-  // anchor and is NOT stored here. CADENCE chronic → floor 8 · live 1 · +7. ⚠️ MUTILATED variant 1 (owner-gated DEFECT — kept verbatim).
+  // occupation_burden — doc variants 2..8; variant 1 ('the weight of an occupation') is the
+  // AUTHORED canonical in FALLBACK_CANONICALS and is NOT stored here. CADENCE chronic → floor 8 · live 1 · +7. ✅ §894 de-slugged (was 'burden').
   occupation_burden: Object.freeze([
     'holding a town costing more than taking it did',
     "garrisons entered against the occupier's own strength",
@@ -244,8 +247,8 @@ const WAR_FALLBACK_POOLS = Object.freeze({
     'a season of keeping what was won',
   ]),
 
-  // occupation_burden_cleared — doc variants 2..8; variant 1 ('burden cleared') is the live
-  // anchor and is NOT stored here. CADENCE chronic → floor 8 · live 1 · +7. ⚠️ MUTILATED variant 1 (owner-gated DEFECT — kept verbatim).
+  // occupation_burden_cleared — doc variants 2..8; variant 1 ('an occupation's weight lifted') is the
+  // AUTHORED canonical in FALLBACK_CANONICALS and is NOT stored here. CADENCE chronic → floor 8 · live 1 · +7. ✅ §894 de-slugged (was 'burden cleared').
   occupation_burden_cleared: Object.freeze([
     'a garrison called back off a held town',
     "an obligation struck from the occupier's rolls",
@@ -256,8 +259,8 @@ const WAR_FALLBACK_POOLS = Object.freeze({
     'a weight put down at the turn of the season',
   ]),
 
-  // occupation_resistance — doc variants 2..8; variant 1 ('resistance') is the live
-  // anchor and is NOT stored here. CADENCE chronic → floor 8 · live 1 · +7. ⚠️ MUTILATED variant 1 (owner-gated DEFECT — kept verbatim).
+  // occupation_resistance — doc variants 2..8; variant 1 ('resistance under occupation') is the
+  // AUTHORED canonical in FALLBACK_CANONICALS and is NOT stored here. CADENCE chronic → floor 8 · live 1 · +7. ✅ §894 de-slugged (was 'resistance').
   occupation_resistance: Object.freeze([
     'a held town that will not be quiet',
     "sabotage entered in the garrison's own record",
@@ -860,6 +863,59 @@ export const FALLBACK_PHRASE_POOLS = Object.freeze({
   ...FAITH_FALLBACK_POOLS,
   ...DIVINATION_FALLBACK_POOLS,
   ...EVENTS_FALLBACK_POOLS,
+});
+
+/**
+ * THE TWELVE AUTHORED CANONICALS — the §894 repair of DEFECT-1/2/3, and the ONLY place a
+ * §4 index 0 is authored rather than computed.
+ *
+ * ── WHY A MAP AND NOT A `WHAT_PHRASES` ROW, WHICH IS WHAT THE ANNEX RECOMMENDED ─────────
+ * MEASURED, not argued. `whatPhrase` consults `WHAT_PHRASES` FIRST and draws its variants
+ * from `WHAT_PHRASE_POOLS`, which holds no row for any of these twelve — so an authored
+ * `WHAT_PHRASES` row would silently COLLAPSE each of them from a 6- or 8-member pool back
+ * to single-voiced. It would also move twelve kinds from §4 to §3, which is the annex's
+ * 107/63/170 census and twelve physically relocated `### … — R1 subject phrase` headings,
+ * and those headings are what the corpus walkers anchor on. The narrower change is the
+ * correct one: keep the kinds in §4, keep their pools, and author only index 0.
+ *
+ * ── WHY NOT EDIT `WHAT_STRIP_PREFIX` ────────────────────────────────────────────────────
+ * Dropping `institution_` / `faction_` from the strip makes `faction_institution_capture`
+ * and `institution_capture` BOTH compute "institution capture" — it converts DEFECT-2's
+ * IMPERSONATION into literal byte-identical AMBIGUITY, which is strictly worse than the
+ * defect it would be curing.
+ *
+ * ── THE DISCLOSED SHIFT, AND ITS EXACT BOUND ────────────────────────────────────────────
+ * Selection is `hash(seed) % pool.length` and no pool CHANGES LENGTH here, so every
+ * existing seed still draws the same INDEX; what moved is the string sitting at index 0.
+ * Layout, structured record, ledger and address chain are untouched.
+ *
+ * ⛔ APPEND NOTHING HERE WITHOUT THE DOC. Each string must byte-equal variant 1 of its
+ * block in `RECEIPT_POOLS_LEGACY.md` §4, which the test re-parses on every run.
+ * @type {Readonly<Record<string, string>>}
+ */
+export const FALLBACK_CANONICALS = Object.freeze({
+  // DEFECT-1 — the `coup_` strip left "detat", which is not a word in any language the
+  // reader speaks. It reached the flagship fiction surface.
+  coup_detat: 'a seizure of the seat',
+  // DEFECT-2 — the `faction_` / `institution_` / `npc_` strips left bare verbs and nouns,
+  // and two PAIRS were impersonations: `faction_institution_capture` rendered the exact
+  // de-underscored spelling of the DISTINCT kind `institution_capture`, so a reader was
+  // told, in the only words the surface gives them, about the kind that was NOT firing.
+  // The repair names the actor in the faction pair and drops it in the institution pair,
+  // which is what makes the two readable as different beats.
+  faction_institution_capture: "a faction's capture of a hall",
+  faction_institution_suppression: "a faction's silencing of a hall",
+  faction_law_preference_push: "a faction's push for the law it wants",
+  faction_power_shift: 'a shift of power between factions',
+  faction_service_bolster: 'a faction propping up a service',
+  institution_capture: 'a captured hall',
+  institution_suppression: 'a silenced hall',
+  npc_action: "one person's act",
+  // DEFECT-3 — the `occupation_` strip left three tokens that had lost the fact that they
+  // were about an occupation at all.
+  occupation_burden: 'the weight of an occupation',
+  occupation_burden_cleared: "an occupation's weight lifted",
+  occupation_resistance: 'resistance under occupation',
 });
 
 /*

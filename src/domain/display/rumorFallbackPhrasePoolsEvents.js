@@ -18,19 +18,21 @@
  * verb force found steading". These pools give those tokens a voice for the first time.
  *
  * ── THE CANONICAL-AT-ZERO CONTRACT (identical in force, different in provenance) ────────
- * Variant 1 of every pool is NOT stored here. It is the string `whatPhrase()` already
- * computes, and the selector PREPENDS it. So the byte-identity anchor cannot drift from
- * the live string, because it IS the live string rather than a transcription of it —
- * exactly the property the §3 leaf gets by leaving variant 1 in WHAT_PHRASES.
+ * Variant 1 of every pool is NOT stored here. For all but nine of this leaf's kinds it is
+ * the string `whatPhrase()` already computes; for those nine it is the authored string in
+ * the family head's `FALLBACK_CANONICALS`. Either way the selector PREPENDS it, so the
+ * byte-identity anchor cannot drift from the live string — it IS what the live function
+ * returns rather than a transcription of it, exactly the property the §3 leaf gets by
+ * leaving variant 1 in WHAT_PHRASES.
  *
- * ⚠️ TWELVE ANCHORS ARE MUTILATED, AND THAT IS DELIBERATE. For twelve of the 107 kinds the
- * strip regex ate the meaningful half of the token, so `coup_detat` computes to "detat"
- * and `institution_capture` to "capture". RECEIPT_POOLS_LEGACY.md's J-LEG-4 rules that
- * variant 1 stays that mutilated string: retiring it REPLACES a live string rather than
- * widening a pool, which is a larger disclosed shift with its own golden, and it is
- * OWNER-GATED as DEFECT-1/2/3 under wiring note LEG-7. Widening around it is still a
- * strict improvement — a mutilated anchor that used to be the only voice becomes one
- * voice in six or eight — and each is marked inline below.
+ * ✅ NINE OF THE TWELVE REPAIRED ANCHORS ARE THIS LEAF'S. Until §894 the strip regex ate
+ * the meaningful half of twelve tokens across the family, so `coup_detat` computed to
+ * "detat" and `institution_capture` to "capture", and RECEIPT_POOLS_LEGACY.md's J-LEG-4
+ * held variant 1 at that string because retiring it REPLACES a live string rather than
+ * widening a pool. That deferral cited wiring note LEG-7 as owner-gated; the §892
+ * retrovalidation walk proved LEG-7 a LANE note with no owner word behind it, and the
+ * de-slugging was taken under the 2026-09-04 carve-out amendment. No pool changed LENGTH,
+ * so every existing seed still draws the same index. Each repair is marked inline below.
  *
  * ORDER IS LOAD-BEARING. Selection is `hash(seed) % pool.length` over
  * `[computedFallback, ...variants]`, so inserting or re-sorting moves every later index
@@ -103,8 +105,8 @@ export const EVENTS_FALLBACK_POOLS = Object.freeze({
     'two troubles that have become one',
   ]),
 
-  // coup_detat — doc variants 2..6; variant 1 ('detat') is the live
-  // anchor and is NOT stored here. CADENCE notable → floor 6 · live 1 · +5. ⚠️ MUTILATED variant 1 (owner-gated DEFECT — kept verbatim).
+  // coup_detat — doc variants 2..6; variant 1 ('a seizure of the seat') is the
+  // AUTHORED canonical in FALLBACK_CANONICALS and is NOT stored here. CADENCE notable → floor 6 · live 1 · +5. ✅ §894 de-slugged (was 'detat').
   coup_detat: Object.freeze([
     'a seizure attempted at the top',
     'a stroke against the seat entered in the record',
@@ -175,8 +177,8 @@ export const EVENTS_FALLBACK_POOLS = Object.freeze({
     'travellers told there is nobody to see about it just now',
   ]),
 
-  // faction_institution_capture — doc variants 2..8; variant 1 ('institution capture') is the live
-  // anchor and is NOT stored here. CADENCE chronic → floor 8 · live 1 · +7. ⚠️ MUTILATED variant 1 (owner-gated DEFECT — kept verbatim).
+  // faction_institution_capture — doc variants 2..8; variant 1 ('a faction's capture of a hall') is the
+  // AUTHORED canonical in FALLBACK_CANONICALS and is NOT stored here. CADENCE chronic → floor 8 · live 1 · +7. ✅ §894 de-slugged (was 'institution capture').
   faction_institution_capture: Object.freeze([
     'an interest taking a hall for its own',
     'an entry on the roll naming the interest the hall now answers to',
@@ -187,8 +189,8 @@ export const EVENTS_FALLBACK_POOLS = Object.freeze({
     'a takeover conducted entirely in appointments',
   ]),
 
-  // faction_institution_suppression — doc variants 2..8; variant 1 ('institution suppression') is the live
-  // anchor and is NOT stored here. CADENCE chronic → floor 8 · live 1 · +7. ⚠️ MUTILATED variant 1 (owner-gated DEFECT — kept verbatim).
+  // faction_institution_suppression — doc variants 2..8; variant 1 ('a faction's silencing of a hall') is the
+  // AUTHORED canonical in FALLBACK_CANONICALS and is NOT stored here. CADENCE chronic → floor 8 · live 1 · +7. ✅ §894 de-slugged (was 'institution suppression').
   faction_institution_suppression: Object.freeze([
     'an interest closing a hall it could not hold',
     "a suppression entered against the hall under a faction's name",
@@ -199,8 +201,8 @@ export const EVENTS_FALLBACK_POOLS = Object.freeze({
     "a dismantling done in a faction's name and entered in no minute book",
   ]),
 
-  // faction_law_preference_push — doc variants 2..8; variant 1 ('law preference push') is the live
-  // anchor and is NOT stored here. CADENCE chronic → floor 8 · live 1 · +7. ⚠️ MUTILATED variant 1 (owner-gated DEFECT — kept verbatim).
+  // faction_law_preference_push — doc variants 2..8; variant 1 ('a faction's push for the law it wants') is the
+  // AUTHORED canonical in FALLBACK_CANONICALS and is NOT stored here. CADENCE chronic → floor 8 · live 1 · +7. ✅ §894 de-slugged (was 'law preference push').
   faction_law_preference_push: Object.freeze([
     'an interest pressing for the law it wants',
     "a preference entered on the council's own record",
@@ -211,8 +213,8 @@ export const EVENTS_FALLBACK_POOLS = Object.freeze({
     "a season of one faction's drafting",
   ]),
 
-  // faction_power_shift — doc variants 2..8; variant 1 ('power shift') is the live
-  // anchor and is NOT stored here. CADENCE chronic → floor 8 · live 1 · +7. ⚠️ MUTILATED variant 1 (owner-gated DEFECT — kept verbatim).
+  // faction_power_shift — doc variants 2..8; variant 1 ('a shift of power between factions') is the
+  // AUTHORED canonical in FALLBACK_CANONICALS and is NOT stored here. CADENCE chronic → floor 8 · live 1 · +7. ✅ §894 de-slugged (was 'power shift').
   faction_power_shift: Object.freeze([
     'weight moving from one interest to another',
     'a shift entered on the faction rolls',
@@ -223,8 +225,8 @@ export const EVENTS_FALLBACK_POOLS = Object.freeze({
     'a turn that took a season and will take a generation to undo',
   ]),
 
-  // faction_service_bolster — doc variants 2..8; variant 1 ('service bolster') is the live
-  // anchor and is NOT stored here. CADENCE chronic → floor 8 · live 1 · +7. ⚠️ MUTILATED variant 1 (owner-gated DEFECT — kept verbatim).
+  // faction_service_bolster — doc variants 2..8; variant 1 ('a faction propping up a service') is the
+  // AUTHORED canonical in FALLBACK_CANONICALS and is NOT stored here. CADENCE chronic → floor 8 · live 1 · +7. ✅ §894 de-slugged (was 'service bolster').
   faction_service_bolster: Object.freeze([
     'an interest paying to keep a service standing',
     'a payment entered where a levy would normally stand',
@@ -287,8 +289,8 @@ export const EVENTS_FALLBACK_POOLS = Object.freeze({
     'a standing arrangement for knowing',
   ]),
 
-  // institution_capture — doc variants 2..8; variant 1 ('capture') is the live
-  // anchor and is NOT stored here. CADENCE chronic → floor 8 · live 1 · +7. ⚠️ MUTILATED variant 1 (owner-gated DEFECT — kept verbatim).
+  // institution_capture — doc variants 2..8; variant 1 ('a captured hall') is the
+  // AUTHORED canonical in FALLBACK_CANONICALS and is NOT stored here. CADENCE chronic → floor 8 · live 1 · +7. ✅ §894 de-slugged (was 'capture').
   institution_capture: Object.freeze([
     'a hall taken over by an interest',
     "a capture entered against the institution's own roll",
@@ -299,8 +301,8 @@ export const EVENTS_FALLBACK_POOLS = Object.freeze({
     'a takeover done entirely through appointments',
   ]),
 
-  // institution_suppression — doc variants 2..8; variant 1 ('suppression') is the live
-  // anchor and is NOT stored here. CADENCE chronic → floor 8 · live 1 · +7. ⚠️ MUTILATED variant 1 (owner-gated DEFECT — kept verbatim).
+  // institution_suppression — doc variants 2..8; variant 1 ('a silenced hall') is the
+  // AUTHORED canonical in FALLBACK_CANONICALS and is NOT stored here. CADENCE chronic → floor 8 · live 1 · +7. ✅ §894 de-slugged (was 'suppression').
   institution_suppression: Object.freeze([
     'a hall prevented from working',
     'a body entered as prevented rather than as failed',
@@ -353,8 +355,8 @@ export const EVENTS_FALLBACK_POOLS = Object.freeze({
     'a season the frontier is dreading',
   ]),
 
-  // npc_action — doc variants 2..8; variant 1 ('action') is the live
-  // anchor and is NOT stored here. CADENCE chronic → floor 8 · live 1 · +7. ⚠️ MUTILATED variant 1 (owner-gated DEFECT — kept verbatim).
+  // npc_action — doc variants 2..8; variant 1 ('one person's act') is the
+  // AUTHORED canonical in FALLBACK_CANONICALS and is NOT stored here. CADENCE chronic → floor 8 · live 1 · +7. ✅ §894 de-slugged (was 'action').
   npc_action: Object.freeze([
     'a name in the town doing something about it',
     "an act entered against a person's own record",
