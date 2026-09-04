@@ -217,3 +217,50 @@ export function resolveCoupVerdict({ settlement, rng, severity = 0.6, rulingAuth
       : `${incumbent.name || 'The ruling power'}'s case never re-entered the field — ${winner.name} took the seat near-unopposed.`,
   };
 }
+
+/**
+ * THE COUP-RISK LADDER — a closed vocabulary of four, and the ONE derivation of it.
+ *
+ * ⛔ WHY IT MOVED HERE. This four-way lived inline in
+ * `src/components/dossier/EngineSections.jsx`, which is a COMPONENT, and DS-POW-4's corpus
+ * keys four pools on these exact strings — `Critical. The seat could fall` byte for byte.
+ * A desk reading the same state would have had to re-derive the ladder, and a second
+ * spelling of a classification is the fork that drifts: the page and the prose would have
+ * disagreed about whether a seat was Contested or Holding, each correct against its own
+ * copy. The classification belongs beside the record it reads, which is `coupContenders`
+ * directly above.
+ *
+ * ONLY THE CLASSIFICATION MOVED. The component keeps its own label→colour map, because a
+ * palette is a display concern and dragging `GOLD`/`AMBER`/`RED` into the domain layer
+ * would trade one layering error for another.
+ *
+ * @type {ReadonlyArray<string>}
+ */
+export const COUP_RISK_LABELS = Object.freeze([
+  'Stable',
+  'Holding',
+  'Contested',
+  'Critical. The seat could fall',
+]);
+
+/**
+ * A coarse coup-risk read from the gated/ungated incumbent case. No RNG, no clock.
+ *
+ * The order is load-bearing and is the original's: an UNGATED incumbent is the gravest
+ * case and is tested first, because a seat whose case never entered the field can fall to
+ * anyone; only then does the weight comparison decide Contested from Holding. No
+ * challengers at all is Stable, and it is the only branch that does not read the incumbent.
+ *
+ * @param {{challengers?: ReadonlyArray<{weight?: number}>,
+ *          incumbent?: {gated?: boolean, amplifiedWeight?: number}}|null|undefined} contenders
+ * @returns {string} one of COUP_RISK_LABELS
+ */
+export function coupRiskLabel(contenders) {
+  const challengers = contenders?.challengers;
+  if (!Array.isArray(challengers) || challengers.length === 0) return 'Stable';
+  const incumbent = contenders?.incumbent;
+  if (!incumbent?.gated) return 'Critical. The seat could fall';
+  return Number(incumbent.amplifiedWeight) < Number(challengers[0]?.weight)
+    ? 'Contested'
+    : 'Holding';
+}

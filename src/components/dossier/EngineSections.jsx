@@ -18,7 +18,7 @@
 import { useMemo } from 'react';
 import { deriveBlockadeRelief } from '../../domain/display/dossierViewModel.js';
 import { deriveCausalState } from '../../domain/causalState.js';
-import { coupContenders } from '../../domain/rulingPowerCoup.js';
+import { coupContenders, coupRiskLabel } from '../../domain/rulingPowerCoup.js';
 import EntityLink from '../primitives/EntityLink.jsx';
 import { entityIdFor, localNpcId } from '../../domain/dossier/entityLinks.js';
 import { factionIdFromName } from '../../lib/entities.js';
@@ -232,13 +232,15 @@ export function PowerSuccessionSection({ settlement }) {
   // Self-gate: a placeholder with no ruler, no challengers, no lineage adds nothing.
   if (!incumbentName && contenders.challengers.length === 0 && previous.length === 0) return null;
 
-  // A coarse coup-risk read from the gated/ungated incumbent case (no rng).
-  let riskLabel = 'Stable', riskColor = GREEN;
-  if (contenders.challengers.length) {
-    if (!contenders.incumbent.gated) { riskLabel = 'Critical. The seat could fall'; riskColor = RED; }
-    else if (contenders.incumbent.amplifiedWeight < contenders.challengers[0].weight) { riskLabel = 'Contested'; riskColor = AMBER; }
-    else { riskLabel = 'Holding'; riskColor = GOLD; }
-  }
+  // THE CLASSIFICATION IS THE DOMAIN'S, the PALETTE is this file's. The four-way used to
+  // live inline here, and DS-POW-4's corpus keys four pools on these exact strings — so a
+  // desk reading the same state would have forked the ladder. `coupRiskLabel` is now the one
+  // derivation; the colour map below stays, because a palette is not a domain concern.
+  const riskLabel = coupRiskLabel(contenders);
+  const riskColor = riskLabel === 'Critical. The seat could fall' ? RED
+    : riskLabel === 'Contested' ? AMBER
+      : riskLabel === 'Holding' ? GOLD
+        : GREEN;
 
   return (
     <SectionShell title="Rule and succession" accent={GOLD} testid="power-succession-section">
