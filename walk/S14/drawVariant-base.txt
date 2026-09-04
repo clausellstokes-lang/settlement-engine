@@ -1,0 +1,5 @@
+export function drawVariant(eligible, blockId, poolKey, seed) {
+  if (!Array.isArray(eligible) || eligible.length === 0) return null;
+  if (!seed) return eligible[0];
+  return eligible[avalanche32(fnv1a32(`${seed}::${blockId}::${poolKey}`)) % eligible.length];
+}

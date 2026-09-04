@@ -1,0 +1,30 @@
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/58f0a8e2-2c4f-4073-8635-ecc7cf5010f6/scratchpad/laneKERNELMARK-tree
+
+ ❯ tests/ui/economicsTabFlow.test.js (7 tests | 1 failed) 213ms
+     × a PUBLIC dossier draws ZERO state-prose sentences, and the SAME town drawn non-public draws BOTH 30ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/ui/economicsTabFlow.test.js > THE PUBLIC GATE — the economy desk stays silent on a public dossier > a PUBLIC dossier draws ZERO state-prose sentences, and the SAME town drawn non-public draws BOTH
+AssertionError: expected 'Comfortablea market townTraderoadThe …' not to contain 'There is nothing striking about Forge…'
+
+Expected: "There is nothing striking about Forge Town"
+Received: "Comfortablea market townTraderoadThe market square keeps its hours.There is nothing striking about Forge Town's condition in either direction: a working road, a working market, a town neither building nor selling off.EconomyComfortableFoodDeficit 40%600 / 1,000 lbs/dayFood Security▲Production: 600 lbs/dayNeed: 1,000 lbs/dayAgriculture modifier: 100% Production deficit of 40%. Settlement requires food imports to sustain population.Forge Town cannot feed itself and does not come close. The shortfall is large, standing, and covered incompletely."
+
+ ❯ tests/ui/economicsTabFlow.test.js:135:43
+    133|     // Direction 2 — the SAME town on a public dossier says NOTHING fr…
+    134|     const pub = render(e(EconomicsTab, { settlement: SPEAKING, saveId:…
+    135|     expect(pub.container.textContent).not.toContain(HEADER_SENTENCE);
+       |                                           ^
+    136|     expect(pub.container.textContent).not.toContain(FOOD_SENTENCE);
+    137|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 6 passed (7)
+   Start at  00:09:11
+   Duration  2.60s (transform 997ms, setup 27ms, import 1.51s, tests 213ms, environment 744ms)
+

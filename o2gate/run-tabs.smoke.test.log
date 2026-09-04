@@ -1,0 +1,9 @@
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/58f0a8e2-2c4f-4073-8635-ecc7cf5010f6/scratchpad/laneKERNELMARK-tree
+
+
+ Test Files  1 passed (1)
+      Tests  36 passed (36)
+   Start at  00:13:03
+   Duration  4.83s (transform 2.37s, setup 23ms, import 3.33s, tests 960ms, environment 437ms)
+

@@ -1,0 +1,1 @@
+dormancy-bit-compare: the `soak` arm is deliberately unbuilt: probe C's corpus definition is not recorded anywhere this script can read, and inventing one would mint a frozen corpus rather than build an instrument. It is REC Q2's to rule. See this file's ARMS block.

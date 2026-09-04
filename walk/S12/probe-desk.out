@@ -1,0 +1,60 @@
+DISTINCT HEADER SENTENCES: 56 
+
+✗ [DOUBLED-DET,CLAUSE-IN-SLOT,CAPS-MID-SENTENCE] Coldmere's books close with a margin, and the margin is broad rather than lucky — the Highly diversified — multiple major revenue streams earns from several directions at once and the the road carries all of it.
+✗ [DOUBLED-DET] Nobody here talks about the price of bread. The town is well off, the the road keeps it that way, and the talk is about what to build next.
+✗ [DOUBLED-DET,CLAUSE-IN-SLOT,CAPS-MID-SENTENCE] A stranger reads Coldmere's standing off its the road before anyone tells him: the traffic is steady, the Highly diversified — multiple major revenue streams keeps more hands busy than the town strictly needs, and none of it looks improvised.
+✓ The accounts here balance on a thin margin. Nothing in them is failing; nothing in them is spare either.
+✓ Coldmere manages. The Highly diversified — multiple major revenue streams covers what the town needs and leaves a little over, and the little over is what the year gets argued about.
+✗ [DET-AFTER-ADJ] There is nothing striking about Coldmere's condition in either direction — a working the road, a working market, a town neither building nor selling off.
+✓ The roads into this town are busy and the town is poor, which is the complaint a visitor will hear first and hear most.
+✗ [DOUBLED-DET] A stranger arriving by the the road finds more moving through Coldmere than settling in it — the market turns, and the town does not thicken on the turning.
+✗ [DET-AFTER-ADJ] Coldmere sits on a working the road and still counts short. The traffic is real; the share of it that stays here is not.
+✗ [DOUBLED-DET,CLAUSE-IN-SLOT,CAPS-MID-SENTENCE] Coldmere's books close with a margin, and the margin is broad rather than lucky — the Highly diversified — multiple major revenue streams earns from several directions at once and the the river carries all of it.
+✗ [DOUBLED-DET] Nobody here talks about the price of bread. The town is well off, the the river keeps it that way, and the talk is about what to build next.
+✗ [DOUBLED-DET,CLAUSE-IN-SLOT,CAPS-MID-SENTENCE] A stranger reads Coldmere's standing off its the river before anyone tells him: the traffic is steady, the Highly diversified — multiple major revenue streams keeps more hands busy than the town strictly needs, and none of it looks improvised.
+✗ [DET-AFTER-ADJ] There is nothing striking about Coldmere's condition in either direction — a working the river, a working market, a town neither building nor selling off.
+✗ [DOUBLED-DET] A stranger arriving by the the river finds more moving through Coldmere than settling in it — the market turns, and the town does not thicken on the turning.
+✗ [DET-AFTER-ADJ] Coldmere sits on a working the river and still counts short. The traffic is real; the share of it that stays here is not.
+✗ [DOUBLED-DET,CLAUSE-IN-SLOT,CAPS-MID-SENTENCE] Coldmere's books close with a margin, and the margin is broad rather than lucky — the Highly diversified — multiple major revenue streams earns from several directions at once and the the port carries all of it.
+✗ [DOUBLED-DET] Nobody here talks about the price of bread. The town is well off, the the port keeps it that way, and the talk is about what to build next.
+✗ [DOUBLED-DET,CLAUSE-IN-SLOT,CAPS-MID-SENTENCE] A stranger reads Coldmere's standing off its the port before anyone tells him: the traffic is steady, the Highly diversified — multiple major revenue streams keeps more hands busy than the town strictly needs, and none of it looks improvised.
+✗ [DET-AFTER-ADJ] There is nothing striking about Coldmere's condition in either direction — a working the port, a working market, a town neither building nor selling off.
+✗ [DOUBLED-DET] A stranger arriving by the the port finds more moving through Coldmere than settling in it — the market turns, and the town does not thicken on the turning.
+✗ [DET-AFTER-ADJ] Coldmere sits on a working the port and still counts short. The traffic is real; the share of it that stays here is not.
+✗ [DOUBLED-DET,CLAUSE-IN-SLOT,CAPS-MID-SENTENCE] Coldmere's books close with a margin, and the margin is broad rather than lucky — the Highly diversified — multiple major revenue streams earns from several directions at once and the the crossroads carries all of it.
+✗ [DOUBLED-DET] Nobody here talks about the price of bread. The town is well off, the the crossroads keeps it that way, and the talk is about what to build next.
+✗ [DOUBLED-DET,CLAUSE-IN-SLOT,CAPS-MID-SENTENCE] A stranger reads Coldmere's standing off its the crossroads before anyone tells him: the traffic is steady, the Highly diversified — multiple major revenue streams keeps more hands busy than the town strictly needs, and none of it looks improvised.
+✗ [DET-AFTER-ADJ] There is nothing striking about Coldmere's condition in either direction — a working the crossroads, a working market, a town neither building nor selling off.
+✗ [DOUBLED-DET] A stranger arriving by the the crossroads finds more moving through Coldmere than settling in it — the market turns, and the town does not thicken on the turning.
+✗ [DET-AFTER-ADJ] Coldmere sits on a working the crossroads and still counts short. The traffic is real; the share of it that stays here is not.
+✓ Coldmere is richer than its road suggests. Nothing reaches it easily and the stores are deep and the halls are finished anyway.
+✓ A narrow way in has not kept Coldmere poor. The approach is the thing that would ordinarily decide a town's condition here, and this town's condition is comfortable regardless of it.
+✗ [CAPS-MID-SENTENCE] The books here are strong on a thin channel: one way in, one way out, and a Highly diversified — multiple major revenue streams that has learned to earn on it.
+✗ [DET-AFTER-ADJ] There is nothing striking about Coldmere's condition in either direction — a working the pass, a working market, a town neither building nor selling off.
+✓ Coldmere is poor and hard to reach, and the two hold each other in place: nothing about the approach would change the arithmetic, and nothing in the arithmetic would pay to widen the approach.
+✗ [CAPS-MID-SENTENCE] The books are short in the ordinary way — a Highly diversified — multiple major revenue streams sized to the town and no further, and no approach wide enough to change the arithmetic.
+✓ Coldmere is poor and hard to reach, and the two read as one fact: what the road does not carry, the town does without.
+✗ [DOUBLED-DET,CLAUSE-IN-SLOT,CAPS-MID-SENTENCE] Coldmere's books close with a margin, and the margin is broad rather than lucky — the Diversified market economy earns from several directions at once and the the road carries all of it.
+✗ [DOUBLED-DET,CAPS-MID-SENTENCE] A stranger reads Coldmere's standing off its the road before anyone tells him: the traffic is steady, the Diversified market economy keeps more hands busy than the town strictly needs, and none of it looks improvised.
+✓ Coldmere manages. The Diversified market economy covers what the town needs and leaves a little over, and the little over is what the year gets argued about.
+✗ [DOUBLED-DET,CLAUSE-IN-SLOT,CAPS-MID-SENTENCE] Coldmere's books close with a margin, and the margin is broad rather than lucky — the Diversified market economy earns from several directions at once and the the river carries all of it.
+✗ [DOUBLED-DET,CAPS-MID-SENTENCE] A stranger reads Coldmere's standing off its the river before anyone tells him: the traffic is steady, the Diversified market economy keeps more hands busy than the town strictly needs, and none of it looks improvised.
+✗ [DOUBLED-DET,CLAUSE-IN-SLOT,CAPS-MID-SENTENCE] Coldmere's books close with a margin, and the margin is broad rather than lucky — the Diversified market economy earns from several directions at once and the the port carries all of it.
+✗ [DOUBLED-DET,CAPS-MID-SENTENCE] A stranger reads Coldmere's standing off its the port before anyone tells him: the traffic is steady, the Diversified market economy keeps more hands busy than the town strictly needs, and none of it looks improvised.
+✗ [DOUBLED-DET,CLAUSE-IN-SLOT,CAPS-MID-SENTENCE] Coldmere's books close with a margin, and the margin is broad rather than lucky — the Diversified market economy earns from several directions at once and the the crossroads carries all of it.
+✗ [DOUBLED-DET,CAPS-MID-SENTENCE] A stranger reads Coldmere's standing off its the crossroads before anyone tells him: the traffic is steady, the Diversified market economy keeps more hands busy than the town strictly needs, and none of it looks improvised.
+✗ [CAPS-MID-SENTENCE] The books here are strong on a thin channel: one way in, one way out, and a Diversified market economy that has learned to earn on it.
+✗ [CAPS-MID-SENTENCE] The books are short in the ordinary way — a Diversified market economy sized to the town and no further, and no approach wide enough to change the arithmetic.
+✗ [DOUBLED-DET,CLAUSE-IN-SLOT,CAPS-MID-SENTENCE] Coldmere's books close with a margin, and the margin is broad rather than lucky — the Subsistence — survival economy earns from several directions at once and the the road carries all of it.
+✗ [DOUBLED-DET,CLAUSE-IN-SLOT,CAPS-MID-SENTENCE] A stranger reads Coldmere's standing off its the road before anyone tells him: the traffic is steady, the Subsistence — survival economy keeps more hands busy than the town strictly needs, and none of it looks improvised.
+✓ Coldmere manages. The Subsistence — survival economy covers what the town needs and leaves a little over, and the little over is what the year gets argued about.
+✗ [DOUBLED-DET,CLAUSE-IN-SLOT,CAPS-MID-SENTENCE] Coldmere's books close with a margin, and the margin is broad rather than lucky — the Subsistence — survival economy earns from several directions at once and the the river carries all of it.
+✗ [DOUBLED-DET,CLAUSE-IN-SLOT,CAPS-MID-SENTENCE] A stranger reads Coldmere's standing off its the river before anyone tells him: the traffic is steady, the Subsistence — survival economy keeps more hands busy than the town strictly needs, and none of it looks improvised.
+✗ [DOUBLED-DET,CLAUSE-IN-SLOT,CAPS-MID-SENTENCE] Coldmere's books close with a margin, and the margin is broad rather than lucky — the Subsistence — survival economy earns from several directions at once and the the port carries all of it.
+✗ [DOUBLED-DET,CLAUSE-IN-SLOT,CAPS-MID-SENTENCE] A stranger reads Coldmere's standing off its the port before anyone tells him: the traffic is steady, the Subsistence — survival economy keeps more hands busy than the town strictly needs, and none of it looks improvised.
+✗ [DOUBLED-DET,CLAUSE-IN-SLOT,CAPS-MID-SENTENCE] Coldmere's books close with a margin, and the margin is broad rather than lucky — the Subsistence — survival economy earns from several directions at once and the the crossroads carries all of it.
+✗ [DOUBLED-DET,CLAUSE-IN-SLOT,CAPS-MID-SENTENCE] A stranger reads Coldmere's standing off its the crossroads before anyone tells him: the traffic is steady, the Subsistence — survival economy keeps more hands busy than the town strictly needs, and none of it looks improvised.
+✗ [CAPS-MID-SENTENCE] The books here are strong on a thin channel: one way in, one way out, and a Subsistence — survival economy that has learned to earn on it.
+✗ [CAPS-MID-SENTENCE] The books are short in the ordinary way — a Subsistence — survival economy sized to the town and no further, and no approach wide enough to change the arithmetic.
+
+BROKEN: 47 / 56

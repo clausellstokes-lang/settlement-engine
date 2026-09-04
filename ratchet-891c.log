@@ -1,0 +1,18 @@
+  probe: load=3.53 workers=0 streak=1 waited=0s
+  probe: load=2.99 workers=0 streak=2 waited=60s
+  probe: load=2.48 workers=0 streak=3 waited=120s
+QUIET CONFIRMED after 120s
+RATCHET_HEAD=e49353a3317d716eb8ccc4bfb6a89e7c34860f9d
+RATCHET_PORCELAIN_PRE=[0]
+PREDICTED: totalFiles 2458 -> 2462 CERTAIN (+4). totalTests refused in advance. entries 10, 0 removed.
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 31129 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+[test-ratchet] --update REFUSED: these failing tests are not in the census, and
+  `--update` NEVER BANKS A NEW REGRESSION:
+    tests/lint/negativeAssertionAnchor.walker.test.js :: negative-assertion anchor walker (habitat removal) no NEW un-anchored negative assertion anywhere in the test corpus
+
+Fix them. If one is genuinely deferred debt, add it BY HAND with its full attribution
+(subsystem, cause, introducedAt, class) — that hand edit is the point: an unattributed
+entry is a defect being laundered into debt.
+TRUE_EXIT=1
+MEASURED: totalTests=31141 totalFiles=2458 entries=10
+RATCHET_PORCELAIN_POST=[0]

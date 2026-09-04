@@ -1,0 +1,35 @@
+const D = process.argv[2];
+const m = await import(D + "/src/domain/worldPulse/simulationRules.js");
+const P = m.SIMULATION_RULE_PRESETS;
+const DEF = m.DEFAULT_SIMULATION_RULES;
+const GATED = m.ENGINE_GATED_VIRTUAL_RULE_KEYS;
+const ids = Object.keys(P);
+console.log("PRESET IDS (key order): " + ids.join(" | "));
+console.log("DEFAULT_SIMULATION_PRESET_ID = " + m.DEFAULT_SIMULATION_PRESET_ID);
+console.log("ENGINE_GATED_VIRTUAL_RULE_KEYS n = " + GATED.length);
+const defKeys = Object.keys(DEF).filter(k => k.endsWith("Enabled"));
+console.log("DEFAULT_SIMULATION_RULES *Enabled keys n = " + defKeys.length);
+console.log("  default TRUE  (" + defKeys.filter(k=>DEF[k]===true).length + "): " + defKeys.filter(k=>DEF[k]===true).join(" "));
+console.log("  default FALSE (" + defKeys.filter(k=>DEF[k]===false).length + "): " + defKeys.filter(k=>DEF[k]===false).join(" "));
+// union of every *Enabled key that appears in any preset's rules
+const all = new Set(defKeys);
+for (const id of ids) for (const k of Object.keys(P[id].rules||{})) if (k.endsWith("Enabled")) all.add(k);
+const keys = [...all].sort();
+console.log("\nUNION of *Enabled keys across DEFAULT + all presets: " + keys.length);
+const rowOf = (k) => ids.map(id => { const r = P[id].rules||{}; return (k in r) ? (r[k]===true?"T":(r[k]===false?"f":"?")) : "·"; }).join(" ");
+console.log("\nkey".padEnd(38) + ids.map(i=>i.slice(0,6).padEnd(7)).join(""));
+for (const k of keys) console.log(k.padEnd(38) + rowOf(k).split(" ").map(c=>c.padEnd(7)).join(""));
+// classification against the DEFAULT preset
+const defRules = P[m.DEFAULT_SIMULATION_PRESET_ID].rules || {};
+const litInDefault = keys.filter(k => defRules[k] === true || (!(k in defRules) && DEF[k] === true));
+const darkInDefault = keys.filter(k => !litInDefault.includes(k));
+const litSomewhere = darkInDefault.filter(k => ids.some(id => (P[id].rules||{})[k] === true));
+const darkEverywhere = darkInDefault.filter(k => !litSomewhere.includes(k));
+console.log("\n--- DENOMINATOR AT THIS TIP ---");
+console.log("union keys                        = " + keys.length);
+console.log("LIT in the default preset         = " + litInDefault.length);
+console.log("DARK in the default preset        = " + darkInDefault.length);
+console.log("   of which lit in SOME preset    = " + litSomewhere.length + "  [" + litSomewhere.join(" ") + "]");
+console.log("   of which dark in EVERY preset  = " + darkEverywhere.length + "  [" + darkEverywhere.join(" ") + "]");
+console.log("ENGINE_GATED (declared nowhere)   = " + GATED.length);
+console.log("union ∪ engine-gated (no overlap check) = " + new Set([...keys, ...GATED]).size);

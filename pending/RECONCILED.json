@@ -1,0 +1,786 @@
+{
+ "summary": "OPUS-AUTHORED (SYNTH, the reconciler). Nine readers, ~150 raw rows, deduped to 96 pending items across ten stages. The headline the owner needs: the arc is NOT mostly done — roughly 60-72 chair-class cars remain across 7-8 gates, and three of the four largest items (L-DEFAULT, the Remembrance reader, READERREVIEW Car 4's fix cars) have never been sized by anyone. The single longest pole is SEAT-7/8 + irregularForce (≈4 cars, its own consist, the only item the lighting charter says adds days to the critical path). Two structural facts dominate the plan: (1) the LIGHTING WAVE does not cover the dossier state-prose corpus at all — CONFIRMED, zero hits for stateProse/DS-ECO/DS-GEN across all 436 charter lines — so the 64 dark blocks (2,185 authored variants shipping in the bundle and reaching no reader) are a parallel track nobody has funded inside the wave's bill; and (2) the GOLDEN freeze machinery exists on no product tip at all and sits 197 commits behind, though its rebase price was MEASURED small (1 of 43 migrated files drifted, no overlap at the migration sites). Since eight of the nine readers took their measurements, the §891 train grew a 19th car: O2GATE committed mid-survey (450f7dbb7), curing the paid-surface leak. The most valuable thing the owner can do in one minute is answer four sentences — CS-9, the characterDrift door, O-5 and O-11 — which between them unblock CHARSET Car 2, ENC-3 (~17 files), the wave's drift row, the Remembrance reader and the whole L-MAT car.",
+ "totals": "CHAIR-CLASS CARS REMAINING: 60-72, across 7-8 gates/landings. By stage — A §891 landing: 0 build cars (3 register acts inside one landing). B HORIZON-DARK: 3 firm + 2 optional/droppable (WORKER Car 3 droppable, TUNEREG Car 4 optional) + 3 zero-byte long-running measurements. C desk wiring: 11-16 cars (DESK re-derived 6 dispatchable leaf items at 8-13 cars, plus {complexity}, the walker arm and the fail-closed cure). D ENCOUNTERS: 5-6. E LIGHTING WAVE: 18-24 (the charter's own sum is 12-16 prerequisite cars of which SEAT-7/8 alone is ≈4, plus L-DEFAULT unpriced, plus 3 small flips, plus 2 zero-byte chair sessions, plus the prose-car rebase, EP-1, the fences car and the witness). F machinery/hygiene: 8-9 small. G GOLDEN freeze: 11 (7 GOLDEN cars + COVERAGE 1-3 + the trailer caller + the freeze act). H W-ARMS: 3 chair + 2 owner-gated. J review-phase fix cars: UNSIZED by construction. GATES: (1) the §891 landing, (2) HORIZON-DARK G5, (3) the desk series — no source says whether it is one landing or several, (4) ENCOUNTERS, (5) the LIGHTING WAVE (ONE landing by charter, but SEAT-7/8 rides its OWN consist, so 2), (6) the GOLDEN freeze G6, (7) W-ARMS, (8) the review phase's fix consists. LONGEST POLE: SEAT-7/8 + irregularForceEnabled — the lighting charter prices it at 2-3 days on the critical path before the freeze, calls it the largest single funding decision in the wave, and it is the ONLY item any source says adds days. It was chair-ruled FUND at §882.1 under TIME IS NOT THE CONSTRAINT, and CONFIRMED unbuilt (irregularForceEnabled has 0 hits over src/tests/scripts/docs at BOTH ca651d54b and 15c6368a6). Runner-up: L-DEFAULT, the wave's centre of mass, a six-hunk commit series whose file count no source gives. NOT THE POLE, despite looking like it: the seven GOLDEN cars 197 commits behind — the GOLDEN reader measured the rebase and it is cheap. NOBODY HAS SIZED, and the owner should treat these as unknown rather than small: L-DEFAULT (explicitly \"no file count is given\"); the Remembrance reader RR-2 (\"the inventory prices it nowhere\" — the 1-2 car figure is a declared GUESS); the characterDrift funnel (a GUESS from the W-LIVES charter); READERREVIEW Car 4's fix cars (unknowable until the reading runs); WRWALKER Car 4's triage of ~301 identities; DESK-2's general desk beyond \"3-5 cars\" (PLAUSIBLE it exceeds the 800-line domain ceiling and needs splitting — unmeasured); the three CAPACITY evidence measurements beyond the ~2.3 h plateau receipt.",
+ "ordered": [
+  {
+   "stage": "A — FINISH THE §891 LANDING",
+   "gate": "The landing gate green first run, chair-verify, CAS, seal, §893 collection. The three register acts below ride INSIDE it; refreezes belong to the landing, never to a lane.",
+   "why_here": "Nothing else can be measured until this lands. Every byte figure in the lighting charter is quoted at fab576aba and is now three landings stale; the wave's boarding rule is that T13's build re-bases both margins at the CURRENT tip. The train also discharges five HORIZON-DARK cars (CAPACITY C1/C2/C3, CHARSET Car 1, READERREVIEW Car 2) and the createdAt leak, so stages B and E shrink the moment it lands.",
+   "items": [
+    {
+     "id": "A1",
+     "name": "Land the §891 train — now NINETEEN cars, not eighteen",
+     "what": "Puts the last three months of composed work on the product branch: the capacity model a reader can question, the charset table, the reader corpus that can finally be read, and the paid-surface fix. Until it lands, the product tip is §890 and every later measurement is taken against a world that is three landings behind.",
+     "klass": "chair-class",
+     "size": "19 cars over ca651d54b. CONFIRMED by me: git rev-list --count ca651d54b..450f7dbb7 = 19; refs/preserve/train891-o2gate-2026-09-04 = 450f7dbb7. Eight of the nine readers measured 15c6368a6 (18 cars) before O2GATE committed mid-survey.",
+     "blocked_by": "Nothing. O2GATE's build finished during this survey (receipt STATUS COMPLETE, 3 files +98/-8, porcelain 0)."
+    },
+    {
+     "id": "A2",
+     "name": "Refreeze the dossier-mounts darkness baseline 68 → 64",
+     "what": "Banks a win already paid for. The shrink-only baseline still records 68 dark blocks while the tree has 64, so the ratchet is slack by four — a later car could re-park four blocks and no gate would notice.",
+     "klass": "machinery-debt",
+     "size": "Trivial. One file, one number: UPDATE_MOUNT_BASELINE=1 on tests/lint/dossierMountRegistry.walker.test.js. The <= arm is already green, so this is a bank, not a repair.",
+     "blocked_by": "Nothing beyond the landing itself."
+    },
+    {
+     "id": "A3",
+     "name": "Shrink-only refreeze of the voiceMechanics baseline — and with it, decide FD-12's road",
+     "what": "Three em dashes moved between two component files when the economy glance was extracted, so the frozen debt list points at a tree that no longer exists. The real prize is downstream: retiring those two stale entries may free two of the ten banked known-failure slots.",
+     "klass": "machinery-debt",
+     "size": "0 cars — one baseline file, UPDATE_VOICE_BASELINE=1, shrink-only and never a widening.",
+     "blocked_by": "Nothing. Optional at this landing but it is the cheap road to the census headroom that stage F's DOOR 3 timeout needs, and the known-failure census is FULL at 10/10 with zero headroom, so no later red can be parked."
+    }
+   ]
+  },
+  {
+   "stage": "B — HORIZON-DARK REMAINDER",
+   "gate": "HORIZON-DARK's own gate G5, admitted under a BIT claim: every car is dark by construction and must move no output. Proof bar for the riskiest (TUNEREG Car 4) is all bits — golden 0/525, 32 DormancyGolden + 18 DormancyFence green, one same-seed whole-world finalHash equal base vs tip.",
+   "why_here": "The lighting charter names HORIZON-DARK landing as boarding blocker #1 in its own words. Concretely: L-DOORS cannot flip the worker default because WORKER Car 1 has not yet created the registry entry to flip (generationWorker has ZERO hits in src/tests at ca651d54b, CONFIRMED), and the charset wall cannot move from report to refuse until CS-9's restore plant is green.",
+   "items": [
+    {
+     "id": "B1",
+     "name": "CHARSET Car 2 — the wiring, the typed rejection surface, the reachability proof",
+     "what": "Wires the character wall into the custom-content editor and import path so a refusal gives a legible typed reason instead of silently mangling a user's text. Also builds the restore split so account-import of a user's own export stops being charset-blind.",
+     "klass": "chair-class",
+     "size": "1 car, ~10 files: customContentManifest.js, customContentCommands.js, customContentSliceRuntime.js, customContentCore.ts, aiOutputSchema.js, aiCharter.js (+ the build:edge-shared re-mint), CustomContentEditor.jsx, en.js and the edge twin. Risk HIGH.",
+     "blocked_by": "OWNER ROW CS-9 (the RESTORE-vs-authoring-wall ruling). A lane must build the split and STOP before the flip — the report→refuse flip is HELD for the lighting wave. Named BLOCKING and on the lighting wave's critical path."
+    },
+    {
+     "id": "B2",
+     "name": "WORKER Car 1 — the lane and the transport, dark",
+     "what": "Moves settlement generation onto a Web Worker behind a typed protocol so the tab stops freezing during generation, with the flag off. Nothing a customer sees changes until the wave flips it.",
+     "klass": "chair-class",
+     "size": "1 car, ~15 files: FIVE new src files (generationProtocol.js, generationRequest.js, generation.worker.js, generationClient.js, settlementGenerateAction.js) plus densityCreateBoundary, settlementSliceHelpers, settlementSlice, flagRegistry (+1 key), flags; 4 new test files; the Playwright spec; the worker-bundle ceiling. Risk HIGH — WORKER Car 0 measured engine +8 B, kernel −218 B, and 370 of 484 shared stems re-hashing, with the minimal shape at +~60 B against 504 B of margin.",
+     "blocked_by": "Nothing to build. It GRAZES owner row WK-2 (delete the zero-reader lastCtx slice key) — a deletion the owner said belongs in the same landing as the lighting, so a lane must not take it early."
+    },
+    {
+     "id": "B3",
+     "name": "WORKER Car 2 — the instant world op + the headless isolate",
+     "what": "Adds the instant-world operation to the worker lane and a headless isolate that the soak and coverage instruments can call directly.",
+     "klass": "chair-class",
+     "size": "1 car. Risk MEDIUM.",
+     "blocked_by": "WORKER Car 1."
+    },
+    {
+     "id": "B4",
+     "name": "WORKER Car 3 — the regen ops (DROPPABLE)",
+     "what": "Adds regen-npcs and regen-history to the worker lane. Explicitly droppable: the whole extraction shape is dropped on a positive closure delta beyond (margin − 100 B).",
+     "klass": "chair-class",
+     "size": "1 car, +3 unless dropped. Risk LOW-MEDIUM.",
+     "blocked_by": "WORKER Cars 1-2."
+    },
+    {
+     "id": "B5",
+     "name": "TUNEREG Car 4 — consolidation by import (OPTIONAL, LAST, STOP-heavy)",
+     "what": "Folds a duplicated INTERVAL_WEEKS literal into one imported home in two files. It must not change a value — it is a fold by import, so THE PROMISE holds by construction, and any value movement means it was done wrong.",
+     "klass": "chair-class",
+     "size": "1 car, 2 files (foodStockpile.js, populationDynamics.js). The only src car TUNEREG has. Predicted −60…−120 B engine; DROPPED on any growth.",
+     "blocked_by": "Nothing, but it is same-seed risk and is sequenced LAST inside the gate."
+    },
+    {
+     "id": "B6",
+     "name": "The three CAPACITY evidence measurements (C2/C3's boarding proof)",
+     "what": "Three long-running measurements the demographics flip cannot board without: the research-lit-4s 300-year plateau receipt, the century leg's LIT arm, and the kernel-only 300-year pin. No bytes — wall-clock and receipts.",
+     "klass": "chair-class",
+     "size": "Zero product bytes. ~2.3 h for the plateau receipt alone; the other two are unsized by any source. Named by both HORIZONVOL (E44) and LIGHTING (LGT-P3-CAPSIG).",
+     "blocked_by": "The §891 landing (C1's signature surface rides that train). CONFIRMED: DEMOGRAPHIC_TUNING_SIGNATURE = Object.freeze({signed:false, lit:null}) exists at 15c6368a6:src/domain/worldPulse/demographicsRates.js:375 and has 0 hits at ca651d54b."
+    }
+   ]
+  },
+  {
+   "stage": "C — DESK WIRING + THE UNMOUNTED DOSSIER BLOCKS",
+   "gate": "No single gate — a car series, each owing FOUR register acts beyond its code (the mounts baseline, prose-numerics, the lighting census, the observed-shape-readers register). The real closing condition is that desk work must be DONE or explicitly paused before the lighting wave's single lighting-census refreeze.",
+   "why_here": "⛔ THE MOST IMPORTANT STRUCTURAL FINDING IN THE SURVEY: this work is NOT in the lighting charter. CONFIRMED by grep over all 436 lines — stateProse, DS-GEN and DS-ECO return ZERO hits. So it is a parallel track that no wave bill funds, and it can run alongside stages B/D/E rather than after them. It sits before the freeze because 2,185 authored variants are shipping in the bundle's lazy chunk today and reaching no reader, and because every desk car moves registers the wave refreezes exactly once.",
+   "items": [
+    {
+     "id": "C1",
+     "name": "{complexity}'s eleven in-sentence forms — the content blocker under the whole economy desk",
+     "what": "Authors eleven bare common-noun phrases mapping the generator's eleven title-cased display strings, so the {complexity} slot can be filled. Until it exists, every variant naming that slot is ineligible and the DS-ECO-1 pools collapse — pool C1 to ONE variant of three, meaning every high-rung working-approach settlement in a world prints the SAME sentence. That is the exact outcome the corpus was authored to prevent.",
+     "klass": "chair-class",
+     "size": "1 car, ~2 files. Named independently by DESK (DESK-7) and FAULTDEBT (FD-10) — ONE item, two names.",
+     "blocked_by": "Nothing technical; it is WORDS, and the words are the chair's. Two mechanical shapes were tried and refused on evidence (lower-casing yields 'a agricultural surplus'; em-dash splitting yields adjectives no seam takes). It was ratified as a free deferral at §892 and RE-RULED a blocker in the same act: it stops being free the day the §891 train lands."
+    },
+    {
+     "id": "C2",
+     "name": "A walker arm making the public-dossier gate a DUTY of every desk car",
+     "what": "O2GATE cured the paid-surface leak on one tab by hand. Nothing in the tree stops the NEXT desk car from drawing a corpus sentence on the anonymous gallery dossier the same way — the leak was found by a chair reading, not by an instrument, and five more desk cars are queued behind it.",
+     "klass": "machinery-debt",
+     "size": "1 small car — an arm in an EXISTING walker file (never a new test file: a new file reds three censuses) plus a planted mutant proving it convicts.",
+     "blocked_by": "Nothing. Build it BEFORE C4-C9, not after — each of those is a fresh chance to repeat the omission. Respect the pinch: OutputContainer.jsx sits at EXACTLY 600/600 effective lines."
+    },
+    {
+     "id": "C3",
+     "name": "O2GATE R3 — make the public gate structurally fail-CLOSED",
+     "what": "Today the tab prop defaults publicDossier=false, so any future public mount that forgets to thread the flag leaks the desk prose again. Gating where publicDossier is COMPUTED removes the habitat instead of patching the instance.",
+     "klass": "chair-class",
+     "size": "1 car, 1-2 files. STRICT physical-line-neutrality applies (OutputContainer.jsx at 600/600).",
+     "blocked_by": "Nothing, but the lane recorded it as a real vetoable paid-surface-adjacent call and wants a chair ruling before it rides."
+    },
+    {
+     "id": "C4",
+     "name": "ECONOMY DESK REMAINDER — mount the 11 dark DS-ECO/DS-SUP blocks",
+     "what": "The economy desk exists and lights 4 of its 15 blocks. Eleven more authored blocks (income mix, markets, supply chains, treasury, trade routes) sit dark: the reader gets tiles and numbers where the corpus already holds 78 pools and 249 authored variants of prose about the same facts.",
+     "klass": "chair-class",
+     "size": "1-2 cars, ~6 files. The cheapest next car — the desk module, the router seam and the classification precedents all exist.",
+     "blocked_by": "C1 ({complexity}); and SIZE — EconomicsTab.jsx is at 580/600 effective lines, so positions must land in EconomicsGlance.jsx (~550 free) or a second extracted leaf."
+    },
+    {
+     "id": "C5",
+     "name": "POWER DESK — write it and mount its 7 blocks",
+     "what": "Writes the state-to-pool-key desk for the power leaf (who rules, how contested, how legitimate) and mounts 7 blocks on PowerTab, so the power structure reads as prose about its own state.",
+     "klass": "chair-class",
+     "size": "1 car. 7 blocks / 79 pools / 256 variants — closest in scale to the car already built, so the best second dispatch. PowerTab has 300 effective lines of headroom.",
+     "blocked_by": "The desk module does not exist. Nothing else."
+    },
+    {
+     "id": "C6",
+     "name": "DEFENSE DESK — write it and mount its 11 blocks",
+     "what": "Writes the desk for the defense leaf (walls, garrison, readiness, threat posture) so a settlement's defensive standing reads as sentences rather than only band words and counts.",
+     "klass": "chair-class",
+     "size": "1-2 cars. 11 blocks / 126 pools / 383 variants. DefenseTab has 286 lines of headroom.",
+     "blocked_by": "The desk module does not exist (darkness PROVED: the pool key 'readiness STRONG' returns ZERO src files)."
+    },
+    {
+     "id": "C7",
+     "name": "WAR + FAITH DESK — write it and mount its 9 blocks across two tabs",
+     "what": "Writes the desk for the warFaith leaf (war footing, sieges, treaties, creed standing). The only leaf whose blocks split across two host tabs, so it is the first real test of the one-fact-one-sentence law across a page-set boundary.",
+     "klass": "chair-class",
+     "size": "1-2 cars. 9 blocks / 138 pools / 418 variants. WarTab 233 free, FaithTab 453 — comfortable, so possibly no extraction leaf at all.",
+     "blocked_by": "The desk module does not exist. Separately, the faith mounts cannot be WALKED until the review corpus stops being deity-free (0 of 44 settlements carry a patron) — that is the OWNER's blocker on the walk, not on the build. Build it anyway."
+    },
+    {
+     "id": "C8",
+     "name": "STRESSORS DESK — write it and mount its 3 blocks",
+     "what": "Writes the desk for the stressors leaf (what is going wrong and how bad). Smallest by block count but the DENSEST leaf in the corpus at 22 pools per block.",
+     "klass": "chair-class",
+     "size": "1 car. 3 blocks / 67 pools / 246 variants. The pool-key resolvers are the cost, not the block count.",
+     "blocked_by": "The desk module does not exist, and THE HOST TAB IS UNDECIDED — stressors have no dedicated tab in the router's switch. A mount id is spelled <tab>.<position> where the tab must be a case label of the router's own renderTab, machine-checked. That choice is the car's first judgment call."
+    },
+    {
+     "id": "C9",
+     "name": "GENERAL DESK — the largest unwritten desk (23 blocks, 193 pools)",
+     "what": "Writes the desk for the general leaf (population, settlement character, relationships, housekeeping) and mounts 23 blocks. A third of the whole dark half, and the only leaf carrying dimension-partitioned blocks.",
+     "klass": "chair-class",
+     "size": "3-5 cars. 23 blocks / 193 pools / 634 variants. PLAUSIBLE it exceeds the 800-effective-line src/domain ceiling and needs splitting across two or three modules — nobody has measured that.",
+     "blocked_by": "Three of its blocks are DIMENSION-BEARING and the kernel fails CLOSED (renders nothing) on an unanswered dimension, so the desk must both DECLARE the dimension on the mount row and ANSWER it from live state. THERE IS NO WORKED PRECEDENT IN THE TREE — the economy desk never had to do this."
+    },
+    {
+     "id": "C10",
+     "name": "DS-ECO-8 owes a sentence position on a page that is not the economics tab",
+     "what": "The prosperity rung read on its own currently only GLANCES, because another block already speaks about prosperity a few inches above and a page may not say two things about one fact. Its speaking position is genuinely owed elsewhere; the block's 21 authored variants are otherwise mute.",
+     "klass": "chair-class",
+     "size": "Small — folds into whichever car lands the chosen host tab's positions (i.e. part of C9's Overview work). One mount row + one draw site.",
+     "blocked_by": "A page decision (which non-economics surface hosts it). Deliberately deferred and written down — not a bug to re-find."
+    },
+    {
+     "id": "C11",
+     "name": "EconomicsGlance.jsx's docblock is stale on the count AND the rung it ships",
+     "what": "The file says all three of its positions are GLANCE rungs and none prints a corpus sentence. It carries FOUR positions and one of them IS a sentence rung the file renders. A reader auditing the paid-surface boundary from this docblock reaches exactly the wrong conclusion — which is how the O2GATE leak was nearly mis-scoped.",
+     "klass": "machinery-debt",
+     "size": "Trivial — one docblock, ride it on the next desk car. Free there (550 lines of headroom).",
+     "blocked_by": "Nothing. O2GATE found it and could not fix it because both its edits had to be physical-line-neutral."
+    },
+    {
+     "id": "C12",
+     "name": "Write down the rule: every desk car darkens the writer-reach register — ABSORB, never 'cure'",
+     "what": "The scanner resolves a component parameter from its CALL SITES, and a JSX element is not a call, so a read moved behind a JSX prop becomes ungrounded and grades dark. That is a FALSE DARK for an identity the product still renders. Five more desk cars will each do it again, and without a standing rule the next seat will 'fix' the component to satisfy the scanner — a real product change made to appease a false reading.",
+     "klass": "machinery-debt",
+     "size": "Trivial to record; recurring ~1 register act per desk car thereafter (plain --write, predicting BOTH moved entries in advance).",
+     "blocked_by": "Nothing to build — it is a rule to write where a lane will find it."
+    }
+   ]
+  },
+  {
+   "stage": "D — ENCOUNTERS REMAINDER",
+   "gate": "No dedicated landing named by any source; the cars ride an available consist, except ENC-LIGHT which boards the lighting wave.",
+   "why_here": "ENC-3 must land before chanceEncountersEnabled can join the wave's preset acts, and ENC-3 is blocked on the SAME owner sentence that blocks the wave's drift row — so answering it once discharges both. ENC-6 is already LANDED and is excluded here.",
+   "items": [
+    {
+     "id": "D1",
+     "name": "THE DRIFT DOOR — one owner sentence that three sources name differently",
+     "what": "Decides whether the character-drift plane gets a public door and a manifest home. Today the flag has no manifest entry and no caller at all, so the drift plane is machinery nobody can switch on.",
+     "klass": "owner-gated",
+     "size": "A ruling, then ~3 files. CONFIRMED by me: characterDriftEnabled has hits ONLY in subsystemRowsLives.js and characterDrift.js at BOTH ca651d54b and 15c6368a6 — no manifest, no schema home.",
+     "blocked_by": "Nothing but a word. ⭐ DEDUPE: ENCOUNTERS calls it ENC-3-DOOR, LIGHTING calls it LGT-P7-DRIFTDOOR, HORIZONVOL calls it WRW-6b. ONE decision. Note the lighting inventory recommends the chair just build it (O-9); that recommendation is SUPERSEDED — the funnel door is reserved to a landed test, that lane already ran and deliberately left it empty, and the chair's contrary ruling was WITHDRAWN at §890.1."
+    },
+    {
+     "id": "D2",
+     "name": "ENC-3 — the stage, the flag, the fence: land the 13 uncommitted dock paths",
+     "what": "Lands the machinery that lets two named NPCs actually meet by chance and have it leave a mark. Currently sitting uncommitted on a dock.",
+     "klass": "chair-class",
+     "size": "1 car, ~17 files.",
+     "blocked_by": "D1."
+    },
+    {
+     "id": "D3",
+     "name": "The season cap ignores its own subject — one lesson anywhere mutes every NPC",
+     "what": "The once-a-season teaching cap scans every subject's drift cells instead of the one NPC it was handed, so a single lesson taught to anybody blocks every other NPC for a whole season, and the skipped subject is dropped silently with no receipt.",
+     "klass": "chair-class",
+     "size": "2 files, ~4 lines. Named by ENCOUNTERS (ENC-3-NIDCAP) and FAULTDEBT (FD-06) — ONE item.",
+     "blocked_by": "Nothing, but it MUST be cured BEFORE the ENC-3 lane commits, not after — it is a two-line body fix in uncommitted lane WIP right now."
+    },
+    {
+     "id": "D4",
+     "name": "The lean channel's reroll fold entry — unbuilt on the tree AND absent from the dock",
+     "what": "Closes a fold gap so the lean channel's reroll behaves like its siblings.",
+     "klass": "machinery-debt",
+     "size": "2 files; rides ENC-3.",
+     "blocked_by": "Nothing."
+    },
+    {
+     "id": "D5",
+     "name": "ENC-5 — the words in code: 'respect' and 'rivalry'",
+     "what": "Two named NPCs who fall out cannot record it, and a meeting that should deposit respect deposits friendship instead. So every encounter reads as positive and the encounters program is half a program. CONFIRMED at 15c6368a6: BOND_KINDS = loyalty/gratitude/friendship with no 'respect', and mintBond coerces an unknown kind to 'friendship'; the ledger's grudge grain is shape-ready and the stage refuses to write it.",
+     "klass": "chair-class",
+     "size": "1 car, ~5 files. The SHAPE is already settled, so lifting the refusal owes no migration.",
+     "blocked_by": "⚠ A CONFLICT OF RECORD, not a real blocker — see contradictions. The code comment says 'UNREACHABLE until the owner rules the rivalry word'; §882.13 rows 2 and 3 already ruled YES on 2026-09-02 and were never executed. The chair must say which stands before a car rides."
+    },
+    {
+     "id": "D6",
+     "name": "ENC-4 — the Herald: pick the road, get the words, build the car",
+     "what": "Gives chance meetings a voice the player reads. Two roads: Road B is a full registry + pools + annex + walker needing 9 owner sentences; Road A is one prefix row and 2 hand-authored lines.",
+     "klass": "chair-class",
+     "size": "A ruling (the road), then an owner act (the words), then 1-2 cars: ~10 files on Road B or ~4 on Road A.",
+     "blocked_by": "Unruled and carrying no ledger row. The road is the chair's; the sentences are the owner's."
+    },
+    {
+     "id": "D7",
+     "name": "ENC-7 — the elite-bleed in-pass wiring, a HOMELESS car",
+     "what": "Wires the elite-bleed effect in-pass. It was deferred to the lighting wave and then enrolled in NO roster — the wave's own inventory carries no ENC-7 car.",
+     "klass": "chair-class",
+     "size": "1 car, ~2 files.",
+     "blocked_by": "⛔ NO HOME. This is the one item in the survey that will simply be dropped unless someone gives it a consist. Recorded as deferred, but the deferral points at a wave that does not list it."
+    },
+    {
+     "id": "D8",
+     "name": "roadsReturnedCaptives carries the same positional-key rebind defect and has no fold entry",
+     "what": "A sibling of an already-cured defect, left uncured because it was docketed and never dispatched.",
+     "klass": "machinery-debt",
+     "size": "1 small car, 2 files.",
+     "blocked_by": "Nothing."
+    },
+    {
+     "id": "D9",
+     "name": "chanceEncountersEnabled joins the LIGHTING roster",
+     "what": "Makes chance encounters actually happen in the shipped world, as a declared shift in every preset including the default.",
+     "klass": "chair-class",
+     "size": "~1-3 files inside the wave.",
+     "blocked_by": "ENC-3 (D2) landing. Rides stage E."
+    }
+   ]
+  },
+  {
+   "stage": "E — THE LIGHTING WAVE",
+   "gate": "By charter: ONE landing, ONE gate, ONE lighting-census refreeze, ONE OSR schema-16 migration, ELEVEN shift declarations (one per cause), and the two-arm probe battery run ONCE at the composed tip. Exception: SEAT-7/8 rides its OWN consist.",
+   "why_here": "The owner's word (2026-09-02, verbatim: 'oh light everything up before the exhaustive review') puts it after HORIZON-DARK and before the GOLDEN freeze. That order is load-bearing, not habitual: the freeze records the LIT world, so no per-flag door signature is owed. Freezing first would force a second same-seed shift for every flip. NOTHING OF THE WAVE HAS BOARDED — CONFIRMED: presetLightingWitness, irregularForceEnabled and generationWorker all return 0 hits at both ca651d54b and the train, and the four W-OPS doors still say 'NAMED, NOT MINTED' in the code's own words.",
+   "items": [
+    {
+     "id": "E0",
+     "name": "L-PROBE — the DARK-ARM battery (FIRST, zero bytes)",
+     "what": "Measures what the world does BEFORE anything lights, so every later claim of movement has a control. Also carries the class-C byte measurement that decides whether an owner re-ask is needed at all.",
+     "klass": "chair-class",
+     "size": "Zero bytes, one chair session. Outputs: the 3/3 + 0/525 golden control, per-preset certification receipts, the flag census, OSR and lighting-census tuples, a REAL-birth fixture per preset, 52-tick pulse hashes, the per-parent presence dump, and the class-C hashed-chunk listing diff.",
+     "blocked_by": "The boarding base must exist: HORIZON-DARK landed, and T13's margins RE-MEASURED at the current tip (every figure in the charter is quoted at fab576aba, three landings stale)."
+    },
+    {
+     "id": "E1",
+     "name": "DEFAULT-AT-BIRTH — make a new campaign actually receive the lit preset",
+     "what": "Today every fresh campaign birth goes through plain normalize(), so a default campaign would stay dark even after the preset table is lit. NOTHING IN THE WAVE IS VISIBLE TO A CUSTOMER WITHOUT THIS.",
+     "klass": "chair-class",
+     "size": "1 small car — buildNewCampaign + campaignImportedCreation + createDefaultWorldState + a sibling pin.",
+     "blocked_by": "Nothing. Already chair-ruled. It is the first build car of the wave."
+    },
+    {
+     "id": "E2",
+     "name": "L-MANIFEST split — a gated REGISTER and a derived VIRTUAL set",
+     "what": "Splits one overloaded key list so a key can be lit without being deleted from the register. Without it, the two lighting contracts INVERT the moment a key lights.",
+     "klass": "chair-class",
+     "size": "1 car — re-points two walkers, five fences' virtuality arms, an OSR clause, a contribution-ledger shape and a bijection.",
+     "blocked_by": "Must land before ANY class-F/G flip. No owner word owed."
+    },
+    {
+     "id": "E3",
+     "name": "Per-key dormancy FENCES for the twelve no-fence keys",
+     "what": "Writes the proof that each of twelve mechanisms is genuinely dark BEFORE lighting it. Lighting destroys the only state in which the dark claim was ever exercised — after the flip, nothing can ever re-prove it.",
+     "klass": "chair-class",
+     "size": "1 car — a dark half and a lit-mutant control per key. Eleven names, twelve keys (conquestDoctrine, faithUnseating, habitConditioning, treatyRenewal, undercityHighWater, underwaysOrganicFounding, warCirculation/contributionLedger, warMemory, lineageClaim, coalitionLedger, magicEconomy).",
+     "blocked_by": "Follows L-MANIFEST; must precede each of those twelve flips. CONFIRMED not started — the train adds no fence file."
+    },
+    {
+     "id": "E4",
+     "name": "The four W-OPS door mints",
+     "what": "Four espionage/operations subsystems are fully built but have NO door to switch them on — the code names the flag and says outright it was never minted. Lighting the espionage arm needs these doors to exist first.",
+     "klass": "chair-class",
+     "size": "1 car = four one-commit mints on an existing shape.",
+     "blocked_by": "Nothing. CONFIRMED unlanded by direct read at ca651d54b: 'envoyTaskCatalogEnabled: NAMED, NOT MINTED', 'NO FLAG IS MINTED', and a three-part mint the dispatcher still owes."
+    },
+    {
+     "id": "E5",
+     "name": "The espionage Herald WIRING car",
+     "what": "Makes espionage missions, captures and products file news the player actually sees. Lit espionage without it means silent machinery in the walk — a NEWS ADDRESS LAW breach by construction.",
+     "klass": "chair-class",
+     "size": "1 car.",
+     "blocked_by": "Nothing (un-parked at §881.4). Must board BEFORE the espionage flip. Survived: no file under worldPulse/espionage/ writes a news entry at the tip."
+    },
+    {
+     "id": "E6",
+     "name": "The MAT create-boundary car",
+     "what": "Decides which store path counts as a world's BIRTH, so the materialization dial can stamp new worlds without stamping existing ones. The generate action is both birth and regen today; minting there would restamp lived worlds on their next regen — a direct PROMISE breach.",
+     "klass": "chair-class",
+     "size": "1 small car.",
+     "blocked_by": "Nothing; precedes L-MAT."
+    },
+    {
+     "id": "E7",
+     "name": "The ~200 B preload cure — and RE-MEASURE the engine at the current build",
+     "what": "Recovers engine bytes so the materialization dial can flip without asking the owner to raise a budget ceiling. The driver is the bundler's preload array, not code.",
+     "klass": "chair-class",
+     "size": "1 small car.",
+     "blocked_by": "Nothing to build, but the engine MUST be re-measured at the current landed build first — every figure is based on a sha three landings back."
+    },
+    {
+     "id": "E8",
+     "name": "The lighter default-edge class for neutral neighbours",
+     "what": "A performance car that lets neighbour relations light without blowing the tick-scan ratchet (lit k-nearest measured 3.891/2.620 against a 2.6 ceiling).",
+     "klass": "chair-class",
+     "size": "1-2 cars (a declared GUESS — the inventory does not price it).",
+     "blocked_by": "Must be PROVEN on the tick-scan budget's own fixture BEFORE the flag enters any preset spread. The failure route (re-calibrating the ratchet) is owner-gated and recommended NEVER."
+    },
+    {
+     "id": "E9",
+     "name": "⭐ SEAT-7/8 + the irregularForceEnabled mint — THE LONGEST POLE",
+     "what": "Builds the irregular-force topology so a whole subsystem does not ship two-thirds lit. The largest single funding decision in the wave and the ONLY item any source says adds days to the critical path before the freeze.",
+     "klass": "chair-class",
+     "size": "≈4 Opus cars (GUESS) plus a design fold. The inventory prices it at 2-3 DAYS on the critical path. It rides its OWN consist, not the wave's.",
+     "blocked_by": "A mini-panel FOLD runs first. Chair-ruled FUND under TIME IS NOT THE CONSTRAINT. CONFIRMED unbuilt: 0 hits over src/tests/scripts/docs at BOTH shas."
+    },
+    {
+     "id": "E10",
+     "name": "The per-preset NEW-CAMPAIGN WITNESS — the wave's only bit-level proof",
+     "what": "⛔ THE ONE INSTRUMENT THAT DOES NOT EXIST AND MATTERS MOST. Every pulse golden drives literal rules, so a preset flip is invisible to all 525 generator rows and to every dormancy golden. Without this, the wave has NO bit-level proof it lit anything, and no instrument would ever catch a later silent re-darkening of the shipped default.",
+     "klass": "chair-class",
+     "size": "≈0.5 car — one test file plus one fixture; owes THREE new-test-file censuses.",
+     "blocked_by": "E1 (fixtures must be born through the REAL birth path or they measure a world no customer receives). CONFIRMED absent at both shas."
+    },
+    {
+     "id": "E11",
+     "name": "The authored boon/bane preview fixture",
+     "what": "Lets the exhaustive review READ the faith field on an authored world instead of a data-dark default.",
+     "klass": "chair-class",
+     "size": "≈1 fixture through the existing surface.",
+     "blocked_by": "Nothing — the follow-on it waited on has landed. PARTIAL: the law half landed at §890 (2 files, no fixture); the fixture did not."
+    },
+    {
+     "id": "E12",
+     "name": "L-DEFAULT — the preset-table acts, six ordered hunks in one commit series",
+     "what": "The wave's centre of mass, and what 'light everything up' actually means in the code: spreads the world-alive stack into the lit default, moves the belief stack off omniscient, flips the eleven declared-dark ceiling keys, and lights 29 manifest keys plus 17 backlog keys in dependency order across every lit preset.",
+     "klass": "chair-class",
+     "size": "⚠ THE LARGEST CAR OF THE WAVE AND NOBODY HAS SIZED IT — 'no file count is given'. Touches the rules file, three stability rosters, a soak baseline, the certification receipts, four preset-table suites, the compendium regen and the OSR.",
+     "blocked_by": "E0's class-C diff, then E1 and E2; the espionage sub-step needs E5 landed; the demographics sub-step STOPs without stage B's three evidence items."
+    },
+    {
+     "id": "E13",
+     "name": "L-DOORS — the charset wall refuses, and generation runs in the worker by default",
+     "what": "Two doors HORIZON named but never gave a car: the custom-content charset policy moves from report to refuse (so the review does not read an authoring wall that is off), and generation moves to the worker by default.",
+     "klass": "chair-class",
+     "size": "Small — 2 flips.",
+     "blocked_by": "(i) needs CS-9's restore plant GREEN; (ii) needs the Playwright spec green AND WORKER Car 1 to have landed the false registry entry first — CONFIRMED, generationWorker has ZERO hits in src/tests at ca651d54b, so the entry does not yet exist to flip."
+    },
+    {
+     "id": "E14",
+     "name": "L-UI — flip the three product flags whose promotion contracts are satisfied",
+     "what": "Turns on three finished UI surfaces the player can see: the War & Resolve tab, the house-voice handbook copy, and the single mobile chrome.",
+     "klass": "chair-class",
+     "size": "Small — 3 boolean flips plus snapshot re-records as declared display shifts.",
+     "blocked_by": "Nothing. The other four of the seven flags do NOT ride (unmet promotion proofs; one needs font vendoring). CONFIRMED still dark at BOTH shas: mobileSingleChrome, handbookVoice and warEconomySurfacing all false, while founderRecognition is true (proving §890's car landed)."
+    },
+    {
+     "id": "E15",
+     "name": "L-MAT — the materialization dial flip and its three persistence paths",
+     "what": "Turns on custom-content materialization for newly created worlds. The three persistence paths are not optional extras: without them a roster leaks into shares with no public-safe drop and restores into another account with ids nothing resolves.",
+     "klass": "owner-gated",
+     "size": "1 car (the dial flip + the preload cure + the three paths in the SAME car).",
+     "blocked_by": "OWNER O-11 (persisted/exported shapes). UNSIGNED ⇒ the dial stays at v1, the car lands wiring only, and the flip becomes a named residue for the walk's desk. Also needs E6 and E7."
+    },
+    {
+     "id": "E16",
+     "name": "The EP-1 corpus re-key + the wave's ONE schema-16 migration",
+     "what": "Releases a deliberate hold in the observed-shape corpus so it stops modelling a world the customer does not get, and carries the whole wave's corpus growth through a single governed migration.",
+     "klass": "chair-class",
+     "size": "1 car. Population: the 25 keys the wave newly makes discoverable (21 class F + 4 class G).",
+     "blocked_by": "Runs at the END of L-DEFAULT. ⛔ It edits a DETECTOR SOURCE, so it is a CAR, never a row — and the MIN_ROWS=40 detonation class is LIVE here, since the newly-discoverable keys create whole ledgers for the first time."
+    },
+    {
+     "id": "E17",
+     "name": "L-PROBE-2 — the LIT-ARM battery at the composed tip",
+     "what": "Re-runs the whole dark-arm battery and produces the numbers every shift declaration must quote. Nothing in the wave may be declared by hand.",
+     "klass": "chair-class",
+     "size": "Zero bytes, one chair session.",
+     "blocked_by": "Every build car above composed into one tip."
+    },
+    {
+     "id": "E18",
+     "name": "The ELEVEN shift DECLARATIONS, causes (i)-(xi)",
+     "what": "The written record of every way the shipped world moved, one declaration per cause, each quoting a measured base-hash → lit-hash movement. This is what makes the wave auditable rather than a mass flip.",
+     "klass": "chair-class",
+     "size": "11 ledger rows + 11 section rows + the landing commit body.",
+     "blocked_by": "E17's outputs. ⛔ A shift-record FILE is forbidden while the freeze register is unfrozen — the door lands at the freeze, AFTER this wave — so these are ledger rows, not door verbs."
+    },
+    {
+     "id": "E19",
+     "name": "The wave's register acts — one lighting refreeze, one OSR migration, the treasury shrink, the ratchet re-record",
+     "what": "The bookkeeping that makes the landing gate pass.",
+     "klass": "machinery-debt",
+     "size": "One register commit series. Deltas predicted PER FILE from title counts, never raw diff lines.",
+     "blocked_by": "The composed tip. ⚠ Every register figure in the charter is three landings stale, and the known-failure census is FULL at 10/10."
+    },
+    {
+     "id": "E20",
+     "name": "The src/ prose car — REBASE, then ride",
+     "what": "1,001 cured reader sentences across 200 paths, already built and sealed. Gated only because a landed fence admits ONE named chartered window, and the chair ruled it rides this wave rather than minting a second window.",
+     "klass": "chair-class",
+     "size": "1 car, 200 files (+1084/-1019). CONFIRMED by me: 8f4d5c648 parent = 30c1667bc, 26 commits behind the train; EXACTLY TWO conflict files against §891 and ZERO against §890. Named by LIGHTING (LGT-PROSE) and FAULTDEBT (FD-07) — ONE item.",
+     "blocked_by": "The rebase itself. Also 8 files / 11 assertions of a driven-corpus constant re-record stand owed. ⚠ It is NOT in the lighting charter — the inventory was folded before the car was sealed, so the charter prices nothing for it."
+    },
+    {
+     "id": "E21",
+     "name": "The Remembrance READER (RR-2) — dark-inert car may start ahead of the word",
+     "what": "Gives war-memory something a player can actually read — a World Book realm chapter and a Herald war section. Without it the flag lights and writes records nobody can see, and the walk would read it as a dark mechanism wearing a lit flag.",
+     "klass": "owner-gated",
+     "size": "⚠ UNSIZED — 'the inventory prices it nowhere'. 1-2 cars is a declared GUESS, plus a closure listing diff, a voice-magnitude bill and three censuses.",
+     "blocked_by": "OWNER O-5 (a NEW CAPABILITY by its own class). The charter permits the dark-inert car to START before the word and be dropped at ZERO product cost if vetoed — so this need not sit idle."
+    }
+   ]
+  },
+  {
+   "stage": "F — MACHINERY AND HYGIENE DEBTS THAT MUST PRECEDE THE FREEZE",
+   "gate": "No landing of its own; these ride available consists. The closing condition is the freeze — after it, each of these is either frozen in or costs a governed door.",
+   "why_here": "Two reasons that are dependencies, not tidiness. First, the exhaustive review will find every one of them, and the owner's standing order is that everything is BUILT AND LANDED before the review phase — the review consumes instruments, it does not build them. Second, several are instrument-integrity items: an instrument that misreports is worse than a missing one, and the freeze makes their readings permanent.",
+   "items": [
+    {
+     "id": "F1",
+     "name": "DOOR 3's parser arm times out under load, and the census has no room to park it",
+     "what": "The strictest arm of the sovereignty lighting walker runs about twice its budget when several agents share the box, so a LANDING GATE CAN GO RED for a reason that is not a defect — and the known-failure census is exactly full, so the red cannot be banked.",
+     "klass": "machinery-debt",
+     "size": "Road (a) cure the cost: 1 car, 1 file. Road (b) free a slot: a register act, not a car — stage A's shrink-only refreeze may retire two stale entries and open the room.",
+     "blocked_by": "Nothing, but this is a RISK TO EVERY REMAINING LANDING, not just the freeze. Road (b) is the cheap one and belongs in stage A."
+    },
+    {
+     "id": "F2",
+     "name": "The tuning register charges a name-for-bare replacement as new debt",
+     "what": "Giving a bare magic number a name is exactly the cure the tuning program wants, but the register counts it as growth in the named population and demands a signed growth citation — so the instrument TAXES ITS OWN CURE.",
+     "klass": "machinery-debt",
+     "size": "1 car, 2 files. The cure is a NET rule: a file whose named count grows by n while bare decimals fall by at least n is a REPLACEMENT, not growth.",
+     "blocked_by": "Nothing. ⚠ This is machinery and chair-class: no tuning VALUE and no SIGNATURE moves, and none may."
+    },
+    {
+     "id": "F3",
+     "name": "The test ratchet prints the wrong budget under the right label",
+     "what": "When a failing test is judged against its timeout, the gate prints the LARGER of the config budget and the file's own literal but attributes it to the config every time — so a reader debugging a timeout is told a number and a source that do not go together.",
+     "klass": "machinery-debt",
+     "size": "Well under 1 car, 2 files, ~15 lines. No register act; rides any train.",
+     "blocked_by": "Nothing."
+    },
+    {
+     "id": "F4",
+     "name": "The hygiene car — six recorded debts, one commit",
+     "what": "Six small places where the code says something no longer true, or where one job is done by two copies of the same reader. None changes behaviour; each is a trap for the next reader, and the exhaustive review will find every one.",
+     "klass": "machinery-debt",
+     "size": "1 car, ~6 files.",
+     "blocked_by": "Nothing. ⚠ HAZARD: three are COMMENT edits inside src files the prose-numerics baseline addresses BY EXACT PATH AND LINE, so the car must be physical-line-neutral or pay a register; one ADDS a test title and therefore owes a lighting-census and ratchet movement."
+    },
+    {
+     "id": "F5",
+     "name": "chair-commit.sh — the missing parent-blob prefix gate and the enrolment predicate's blind word",
+     "what": "The committer can overwrite a ledger file with a TRUNCATED worktree copy without noticing, because it only checks that the blob DIFFERS, never that it still contains what HEAD had. Separately, the gate that forces a lane's rows into the retrovalidation queue does not recognise the word ACCEPTED, so a row using it enrols nothing.",
+     "klass": "machinery-debt",
+     "size": "Under 1 car, ~15 lines. ⚠ EIGHT copies exist on the box — decide once whether the others are retired or synced.",
+     "blocked_by": "Nothing. This is chair TOOLING in a scratchpad, not product: it rides no train and owes no register. It is also the tool that writes the ledger, so its silent-truncation hole is a continuity risk, not a nicety."
+    },
+    {
+     "id": "F6",
+     "name": "RR-10 — the lit-preview corpus cannot light OPERATIONS",
+     "what": "The review corpus's espionage member is dead on arrival because the espionage gate is a three-part conjunction and one key is missing from the preview overlay, so the operations questions score dark-by-flag on BOTH postures — which defeats the whole purpose of having a preview corpus.",
+     "klass": "owner-gated",
+     "size": "1 car, 1 file — one key added to a frozen literal plus a 15-line docblock rewritten.",
+     "blocked_by": "⚠ A CONFLICT OF RECORD that must be settled before any car rides — see contradictions. Named by HORIZONVOL (HV-4, chair-class) and FAULTDEBT (FD-03, owner-gated). Must be resolved before the review phase's corpus render."
+    },
+    {
+     "id": "F7",
+     "name": "The three deferred worker riders",
+     "what": "Instrument work that was deferred pending the worker lane.",
+     "klass": "machinery-debt",
+     "size": "Unsized.",
+     "blocked_by": "WORKER Car 2 (stage B)."
+    },
+    {
+     "id": "F8",
+     "name": "The globalSetup observed-corpus cache",
+     "what": "A recorded fold — the named cure if the instrument gate's measured wall-clock exceeds tolerance under CI's single 30-minute job.",
+     "klass": "machinery-debt",
+     "size": "Unsized.",
+     "blocked_by": "Nothing; it is a fallback held in reserve."
+    },
+    {
+     "id": "F9",
+     "name": "The regen clone-census extension",
+     "what": "Extends a census to cover the regen path.",
+     "klass": "machinery-debt",
+     "size": "Unsized.",
+     "blocked_by": "Nothing recorded."
+    },
+    {
+     "id": "F10",
+     "name": "Read check-tests' CI wall-clock",
+     "what": "Confirms whether the instrument estate's cumulative cost fits CI's one 30-minute job.",
+     "klass": "machinery-debt",
+     "size": "A measurement. ⚠ The only item in the survey whose LANDED state nobody could determine (PLAUSIBLE, UNKNOWN).",
+     "blocked_by": "Unknown."
+    }
+   ]
+  },
+  {
+   "stage": "G — THE GOLDEN FREEZE",
+   "gate": "The freeze act itself — a register act that must cut its hashes from POST-landing bytes. Its door (goldenRecordDoor.js and the freeze register) lands with these cars and not before.",
+   "why_here": "It must follow the lighting wave because the freeze records the LIT world, so no per-flag door signature is owed; freezing first would force a SECOND same-seed shift for every flip. It must precede W-ARMS by an explicit correction of record (W-ARMS lands AFTER the freeze), and it must precede the walk because the walk reads a frozen world.",
+   "items": [
+    {
+     "id": "G1",
+     "name": "The seven GOLDEN cars are unlanded and 197 commits behind — rebase, re-prove, land",
+     "what": "The machinery that freezes the same-seed golden outputs — the register, the roster walker, the record door, the comparator, the shift-record docs — EXISTS ON NO PRODUCT TIP AT ALL. Until it lands there is no door in front of the goldens, and the freeze act cannot happen.",
+     "klass": "chair-class",
+     "size": "7 cars, 49 files. CONFIRMED by me: merge-base ba08939d7 ca651d54b = 8b07ce45f; 7 cars over that base; 197 commits behind ca651d54b (214 behind the train); NOT an ancestor. Census bills: lighting +84 titles / +12 suites / +1 file, one mutation-manifest entry, ratchet +84 / +1.",
+     "blocked_by": "Nothing but the rebase. ⭐ THE REBASE PRICE WAS MEASURED AND IT IS SMALL: only 1 of 43 migrated files drifted (a docblock at line 18; the migration sites are at lines 653 and 764, no overlap), and only 2 of 48 register row paths moved with the pinned constant UNCHANGED. One new env spelling must be absorbed. So this looks like the longest pole and is not."
+    },
+    {
+     "id": "G2",
+     "name": "COVERAGE Cars 1-3 — the denominator and count, the widening fixture, the proposer",
+     "what": "Makes band coverage a measured number with a denominator rather than an impression, and proposes widenings from measured cells.",
+     "klass": "chair-class",
+     "size": "3 cars. Cars 1-2 ride the freeze gate (Car 1 imports the record-door helpers); Car 3 runs OFF-GATE before the freeze.",
+     "blocked_by": "G1 (Car 1 imports helpers that do not exist on any product tip yet)."
+    },
+    {
+     "id": "G3",
+     "name": "commitTrailerRefusal is a library function with no caller",
+     "what": "The commit-level backstop that is supposed to refuse a golden re-record whose commit message lacks the owner's signature NEVER RUNS, because nothing calls it — not the product tree, not any of the eight committer copies on this box. The freeze's own enforcement is decorative until it is wired.",
+     "klass": "machinery-debt",
+     "size": "Well under 1 car — ~15 lines of shell calling the already-exported checker.",
+     "blocked_by": "G1 — the function does not exist on any product tip until the GOLDEN cars land. CONFIRMED: git grep at 15c6368a6 returns NOTHING; at the golden tip the only hits are its own definition and its two unit tests."
+    },
+    {
+     "id": "G4",
+     "name": "The freeze act",
+     "what": "Cuts and banks the same-seed hashes of the lit, walked world. After this, any output movement costs a governed door and an owner signature.",
+     "klass": "chair-class",
+     "size": "A register act at the composed tip.",
+     "blocked_by": "G1-G3, and every output-moving car landed."
+    },
+    {
+     "id": "G5",
+     "name": "COVERAGE Car 4 — the freeze-act rider",
+     "what": "The enrol-and-record step that rides the freeze act itself.",
+     "klass": "owner-gated",
+     "size": "1 car, owner-signed.",
+     "blocked_by": "The freeze act; the owner's signature."
+    }
+   ]
+  },
+  {
+   "stage": "H — W-ARMS",
+   "gate": "Its own consist after the freeze. A correction of record moved it here: an earlier premise had it before the freeze.",
+   "why_here": "Explicitly re-cut — W-ARMS lands AFTER the freeze. Its cars are output-moving in the rendered-document sense, so they ride the freeze's governed door rather than preceding it.",
+   "items": [
+    {
+     "id": "H1",
+     "name": "W-ARMS Car 0 — MEASURE",
+     "what": "A read-only rider that measures before anything is built. Zero product bytes.",
+     "klass": "chair-class",
+     "size": "0 product bytes.",
+     "blocked_by": "The freeze."
+    },
+    {
+     "id": "H2",
+     "name": "W-ARMS Car 1 — the arms leaf and its pins",
+     "what": "Builds the heraldic arms leaf.",
+     "klass": "chair-class",
+     "size": "1 car (the design volume prices it; unverified at the boarding base).",
+     "blocked_by": "H1."
+    },
+    {
+     "id": "H3",
+     "name": "W-ARMS Car 2 — the kinship adapter and the web seam",
+     "what": "Connects arms to kinship and renders them on the web surface.",
+     "klass": "chair-class",
+     "size": "1 car.",
+     "blocked_by": "H2."
+    },
+    {
+     "id": "H4",
+     "name": "⛔ DESIGN_W_ARMS.md exists in NO git ref — a continuity hazard, not a car",
+     "what": "The 55,812-byte design volume that governs all five W-ARMS cars lives ONLY in a scratchpad. If that scratchpad is lost, five cars lose their charter and a successor rebuilds it from nothing.",
+     "klass": "machinery-debt",
+     "size": "A commit. Trivial to fix, expensive to lose.",
+     "blocked_by": "Nothing. Fix this before anything else in stage H."
+    },
+    {
+     "id": "H5",
+     "name": "Re-measure the design's point-in-time figures at the boarding base",
+     "what": "Every figure in the W-ARMS design was measured at a base that no longer exists.",
+     "klass": "machinery-debt",
+     "size": "A measurement pass.",
+     "blocked_by": "The boarding base existing (i.e. the freeze)."
+    },
+    {
+     "id": "H6",
+     "name": "The independent skeptic pass on W-ARMS",
+     "what": "A required adversarial read of the design before its cars are built.",
+     "klass": "machinery-debt",
+     "size": "One reader seat. ⚠ Whether it has already run is UNKNOWN (PLAUSIBLE only).",
+     "blocked_by": "Unknown — determine this before dispatching H2."
+    }
+   ]
+  },
+  {
+   "stage": "I — THE OWNER'S WALK + ONE REGEN",
+   "gate": "An OWNER ACT. The chair cannot perform it; it is flagged OWED rather than absorbed.",
+   "why_here": "It sits after everything is built and lit and frozen, and before the review — because the review reads the world the customer gets, and the ONE regen is output-moving by definition, so it must happen on the frozen tree before the reading starts. The walk's lighting questions are already pre-answered YES by the owner's lighting word; the walk keeps its non-lighting decisions.",
+   "items": [
+    {
+     "id": "I1",
+     "name": "The owner walks the built world",
+     "what": "The owner plays the finished product and rules on what they find. Every source names this as an owner act inside the remaining arc that the chair explicitly cannot do.",
+     "klass": "owner-act",
+     "size": "An owner sitting. Unsized by anyone.",
+     "blocked_by": "Stages A-H complete."
+    },
+    {
+     "id": "I2",
+     "name": "ONE regen",
+     "what": "A single regeneration on the walked tree, producing the world the review reads and the soak soaks.",
+     "klass": "owner-act",
+     "size": "One act; output-moving by definition.",
+     "blocked_by": "I1."
+    }
+   ]
+  },
+  {
+   "stage": "J — THE EXHAUSTIVE REVIEW",
+   "gate": "The owner-directed review phase. The owner's standing order governs it: everything is BUILT AND LANDED before this phase — the review consumes instruments, it does not build them.",
+   "why_here": "Last by the owner's own words ('we do a review' after 'finish building and landing everything'). It runs on the tree after the walk and ONE regen, because a corpus rendered earlier would be re-rendered anyway.",
+   "items": [
+    {
+     "id": "J1",
+     "name": "READERREVIEW Car 3 — THE READING",
+     "what": "Seats read the rendered world against the rubric and file findings. This IS the review phase.",
+     "klass": "owner-act",
+     "size": "An owner-directed phase across multiple reader seats. The corpus RENDER happens at the START of it.",
+     "blocked_by": "Stage I. The instrument is nearly ready: Car 1 LANDED at §890, Car 2 sits in the §891 train (CONFIRMED — the composer gap an earlier list flagged is CLOSED)."
+    },
+    {
+     "id": "J2",
+     "name": "READERREVIEW Car 4 — THE FIX CARS",
+     "what": "The consists that fix what the reading found, grouped by car class. Rows that move a world hash ride the freeze's governed door.",
+     "klass": "chair-class",
+     "size": "⚠ UNSIZED BY CONSTRUCTION — unknowable until the reading runs. The single largest unquantified block in the whole arc. Rows classed ENGINE_OWNER are the owner's.",
+     "blocked_by": "J1."
+    },
+    {
+     "id": "J3",
+     "name": "WRWALKER Car 4 (THE REAL ONE) — the triage of ~301 unreviewed-dark identities",
+     "what": "Partitions every writer-with-no-reader identity into pending-surface, engine-internal, or cure. ⚠ IT IS OMITTED FROM EVERY REMAINING LIST because §884 minted a DIFFERENT car under the same number, and the car list then marked that sha as 'WRWALKER Car 4'. Nobody would find this by reading the lists.",
+     "klass": "chair-class",
+     "size": "~301 identities to triage. UNSIZED in cars.",
+     "blocked_by": "Its gate is the review phase. The naming collision is the finding; the item is real and unbuilt either way."
+    },
+    {
+     "id": "J4",
+     "name": "docs/review/ does not exist on any tip",
+     "what": "The panel's reports were ruled to live on the durable ledger line rather than a scratchpad, and that directory has never been created.",
+     "klass": "machinery-debt",
+     "size": "Trivial, but it must exist before the reading files anything.",
+     "blocked_by": "Nothing. CONFIRMED absent at both ca651d54b and the train."
+    }
+   ]
+  },
+  {
+   "stage": "⛔ FULL STOP — everything below is the owner's, after the stop line",
+   "gate": "The chair stops here with the owner's package on the desk (the tuning desk, the legal batch, the walk manifest).",
+   "why_here": "The owner's instruction is to get to right before the soak and stop. These are listed so nothing is mistaken for chair work.",
+   "items": [
+    {
+     "id": "Z1",
+     "name": "The terminal soak",
+     "what": "Soaks the lit, frozen, reviewed world.",
+     "klass": "owner-act",
+     "size": "An owner act.",
+     "blocked_by": "Stage J."
+    },
+    {
+     "id": "Z2",
+     "name": "The tuning signature and every tuning VALUE",
+     "what": "Signs the tuning values LAST, at the sitting, after the soak. Includes the demographics ids, the four unsigned encounters registers, and the CAPACITY signature car.",
+     "klass": "owner-gated",
+     "size": "A signature, then a signing pass. A retune costs a ~17.6 h re-run before push.",
+     "blocked_by": "Z1. Nothing in the lighting wave asks for a signature."
+    },
+    {
+     "id": "Z3",
+     "name": "Every git push and the deploy",
+     "what": "No delegation has ever covered these.",
+     "klass": "owner-gated",
+     "size": "-",
+     "blocked_by": "Everything."
+    }
+   ]
+  }
+ ],
+ "owner_gated": [
+  "⭐ THE FOUR SENTENCES WORTH ANSWERING FIRST — together they unblock more chair work than everything else on this list combined:",
+  "1. CS-9 — the RESTORE-vs-authoring-wall ruling. THE MOST BLOCKING SINGLE ROW IN THE ARC: it blocks CHARSET Car 2 (stage B), it gates the charset half of L-DOORS (stage E), and three sources independently call it BLOCKING and on the lighting wave's critical path. Nothing else in the survey blocks two stages at once.",
+  "2. THE DRIFT DOOR — may characterConsumers re-export positionValue, and does characterDriftEnabled get a manifest home? ONE decision that three sources name differently (ENC-3-DOOR / LGT-P7-DRIFTDOOR / WRW-6b). It unblocks ENC-3 (~17 files) AND the wave's drift row. ⚠ The lighting inventory's recommendation to just build it (O-9) is SUPERSEDED — the door is reserved to a landed test, that lane already ran and deliberately left it empty, so homing it is a NEW decision and the chair's contrary ruling was WITHDRAWN. CONFIRMED by me: the flag has no manifest or schema home at either tip.",
+  "3. O-5 / RR-2 — fund the Remembrance reader. One word deciding whether war-memory ships with something a player can read, or lights alone. Releases 1-2 cars (a GUESS — nobody priced it). ⭐ The dark-inert car MAY START AHEAD OF THE WORD and be dropped at zero product cost if vetoed, so this need not idle a lane.",
+  "4. O-11 — sign the MAT dial's three persistence paths (public-safe allowlist, account-import id resolution, provenance receipt hash). Cost 0 B, one sentence, recommendation on the desk is SIGN. Unsigned, the materialization dial CANNOT flip at all and L-MAT lands wiring only, with the flip becoming a named residue for the walk's desk.",
+  "",
+  "OWNER-GATED BUILDS — the chair may not build these at all:",
+  "5. TUNEREG Car 5 — THE CULL: delete ~113 zero-consumer tunable tables. Data deletion, an owner carve-out by nature. Recommended as its own HORIZON-DARK car BEFORE the freeze rather than a post-launch deferral, because doing it later puts a src-moving train inside a phase the owner defined as review.",
+  "6. CHARSET Car 3 — the sanitiser re-derivation.",
+  "7. CHARSET Car 4 — the DB wall (CS-6). Unslotted; on no gate.",
+  "8. COVERAGE's five vocabulary exports (COV-7a) — the conditional item that also boards HORIZON-DARK's gate.",
+  "9. COVERAGE Car 4 — the freeze-act rider; owner-SIGNED.",
+  "10. W-ARMS Car 3 — the PDF cover seam (PAID SURFACE, gated by nature).",
+  "11. W-ARMS Car 4 — the CC0 charge roster (optional).",
+  "12. READERREVIEW Car 4's ENGINE_OWNER rows — chair per row, owner for that class.",
+  "13. WK-2 — delete the zero-reader lastCtx slice key. A deletion; the owner's word says it happens in the same landing as the lighting, so WORKER Car 1 must NOT take it early.",
+  "",
+  "OWNER WORDS STILL OPEN — each releases or shapes chair work:",
+  "14. ENC-4-WORDS — the Herald sentences: 9 sentences + 3 band fills + 2 noun phrases on Road B, or 2 lines + 2 noun phrases on Road A. (The ROAD is the chair's to pick first.)",
+  "15. ENC-5's rivalry word — OR a chair sentence confirming that §882.13 row 3 already ruled it. See contradictions: the code comment and the ruling disagree, and the code is being obeyed.",
+  "16. O-14 — the belief stack's entitlement, and whether a default world canonizes at birth. Without a word, EVERY belief-conjoined lighting is a PREMIUM sentence in its record. Recommendation: premium-only stays as designed for launch. A YES on canonize-at-birth is a NEW BUILD, unpriced.",
+  "17. O-10(b) — the conditional engine-ceiling raise by exactly the measured residual. ⚠ DELEGATED to the chair on 2026-09-03, but §890 landed no ceiling change, so what moved was AUTHORITY, not a build — the conditional raise is still a live act awaiting a measurement.",
+  "18. The closure two-option re-ask (conditional) — if the dark-arm probe's class-C listing diff shows the preset catalog is eager, the wave STOPS and puts a two-option re-ask on the desk WITH figures. Never a silent raise, never a silent descope.",
+  "19. CAP-6 — the 'Room to Grow' block on the dossier PDF (paid surface).",
+  "20. WORKER Car 4 (WK-4/WK-5) — cancel + live progress. Explicitly NOT a car; an owner-lit note.",
+  "21. WK-11 — bank the −6,366 B or keep the margin.",
+  "22. WRW-1 — wire the deferred json-export control.",
+  "23. ENC-LAPSE — the willed-leash LAPSE arm reads AGE SINCE MINT rather than 'no leak since'. 1 small car once ruled.",
+  "24. THE DEITY-FREE REVIEW CORPUS — 0 of 44 settlements carry a patron. Blocks WALKING the faith mounts (stage C7) and reading the faith field. The build proceeds regardless; only the walk-readiness waits.",
+  "25. Review-charter rows still open: RR-3 (DM-truth on the dossier NPC card — which surface is DM?), RR-4 (widen the 11-campaign roster at ~15-19 min per campaign), RR-5 (a deity's BANE, authored and rendered nowhere), RR-7 (should the two fresh regions be the owner's own seeds?). RR-8 is a veto window on the charter's SHAPE only — silence is assent.",
+  "26. W-ARMS: the open one-word veto, and the eleven taste rows in its §9.",
+  "",
+  "OWNER ACTS INSIDE THE ARC (not decisions — things only the owner can DO):",
+  "27. THE WALK + ONE REGEN — sits between the freeze and the review. Explicitly flagged OWED rather than absorbed; the chair cannot perform it.",
+  "28. Beyond the FULL STOP: the terminal soak; the tuning signature and every tuning VALUE (the demographics ids, the four unsigned encounters registers, the CAPACITY signature car); every git push and the deploy."
+ ],
+ "contradictions": [
+  "1. TRAIN SIZE — 18 cars or 19? RESOLVED BY THE TREE: 19. Seven of the nine readers measured 15c6368a6 (18 cars over ca651d54b); DESK and FAULTDEBT caught the O2GATE lane committing DURING the survey. CONFIRMED by me: git rev-list --count ca651d54b..450f7dbb7 = 19, and refs/preserve/train891-o2gate-2026-09-04 = 450f7dbb7 (3 files, +98/-8, porcelain 0). CONSEQUENCE: the paid-surface state-prose leak on the public dossier is CURED and is NOT a pending item — only the missing INSTRUMENT behind it is (stage C2).",
+  "2. THE DESK REMAINDER'S SIZE — ~17 more desks, or 8-13 cars? THE TREE SUPPORTS 8-13. The lane queue says '4 mounts cost one component ⇒ roughly 17 more desks', which is 68/4 and COUNTS THE CAR ALREADY BUILT; the true remainder is 64 dark blocks, so at that rate it is 16, not 17. But the per-car rate is the wrong unit: the built car delivered 4 blocks over 5 positions in ONE tab, and the real unit is one corpus leaf per host tab — SIX dispatchable items. The re-derived 8-13 is better founded because five of the six host tabs have 233-453 effective lines of headroom and need no forced extraction, whereas the built car spent a whole component leaf buying room in a tab sitting at exactly 600/600.",
+  "3. RR-10's CLASS — chair act or open owner row? A GENUINE CONFLICT OF RECORD, and it is TWO RECORDS AGAINST ONE. HORIZONVOL (reading the design volume) calls it chair-class, and the volume's own fold text says verbatim that adding the key 'is a chair act, not an owner one, and is folded'; §882.13 ruled it. FAULTDEBT (reading the code) calls it owner-gated, because the BUILT ARTIFACT at the train tip says the opposite in its own docblock — CONFIRMED by me at 15c6368a6:scripts/review/readerCorpus.mjs: 'That is an OPEN OWNER ROW, not a lane's to decide: adding errandSpineEnabled here would answer the owner's question by editing a literal.' The docblock is the LATER artifact but a lane's docblock is not a ruling. VERDICT: the volume and the §882.13 ruling both say CHAIR; one chair sentence should reconcile it, and it must be settled before the review phase's corpus render or the operations questions score dark-by-flag on both postures.",
+  "4. ENC-5's CLASS — one chair car, or a chair half and an owner half? THE TREE SHOWS A STALE BLOCKER. ENCOUNTERS calls ENC-5 one chair-class car blocked by nothing, citing the §882.13 rows 2 and 3 YES of 2026-09-02. FAULTDEBT splits it: the 'respect' half chair-class, the 'rivalry' half owner-gated, citing the code. CONFIRMED by me at 15c6368a6: BOND_KINDS = loyalty/gratitude/friendship with no 'respect' and mintBond silently coercing to 'friendship'; and envoyChanceMeetingLedger.js says grudge is 'UNREACHABLE until the owner rules the rivalry word (§12 row 3)'. VERDICT: this is the A-BLOCKER-IS-A-CLAIM-AND-A-CLAIM-DECAYS shape — the ruling POSTDATES the comment, so ENCOUNTERS' reading is supported and the comment is stale. Note the ledger prose at §889 already OVERSTATES the tree by describing 'a bond, a respect or a rivalry'.",
+  "5. THE DRIFT DOOR'S CLASS — chair-class 'build it', or owner-gated? OWNER-GATED STANDS. The lighting inventory's own row (O-9) recommends the chair build it. The LIGHTING reader re-classed it on later evidence: the funnel door is reserved to a specific lane by a LANDED test, that lane already ran and deliberately left it empty, so homing it is a NEW decision — and the chair's contrary ruling was WITHDRAWN at §890.1. ENCOUNTERS reached owner-gated independently. CONFIRMED by me: characterDriftEnabled appears only in subsystemRowsLives.js and characterDrift.js at BOTH tips — no manifest, no schema home, no caller.",
+  "6. WRWALKER CAR 4 — omitted from every list, or correctly slotted to the review phase? BOTH ARE TRUE AND THE LIST IS DEFECTIVE. HORIZONVOL finds the real Car 4 (the triage of ~301 unreviewed-dark identities) unbuilt and invisible, because §884 minted a DIFFERENT car under the same number and the car list then recorded that sha as 'WRWALKER Car 4'. The car list's own §18.1 does say 'Car 4 is the review phase's', so the GATE is right. VERDICT: the item is real, unbuilt, and correctly belongs to the review phase — but anyone reading the lists would conclude it was done. Filed in stage J.",
+  "7. 'THE HORIZON-DARK REMAINDER IS INTACT AND ENTIRELY UNBUILT' — FALSE, and the car list says it about itself. CONFIRMED by me: READERREVIEW Car 1a (33c9f530c) and Car 1b (116df0a3f) are ancestors of ca651d54b, i.e. LANDED at §890; CAPACITY C1 (ec6b0a132), C2 (6bddd6183), C3 (d02c5acde), CHARSET Car 1 (4ae140102) and READERREVIEW Car 2 (ac427cc5c) are in the train and not yet landed. So 1 of 11 chair-class cars landed and 5 more are composed. The queue's separate claim that '5 of 11 chair-class cars remain' is CORRECT — the two figures are consistent, but the car list's own prose is not. ⚠ Also note the seal refs/preserve/horizondark-cars12-2026-09-03 (43e063a70) is the PRE-REBASE pair and is NOT an ancestor of ca651d54b — do not reason from it.",
+  "8. NOBODY DISAGREES, BUT NOBODY AGREED EITHER — the desk track's place in the arc. The lighting charter contains ZERO mentions of the state-prose corpus across all 436 lines (CONFIRMED by grep, exit 1 on every probe), so the 64 dark blocks are in NO wave's bill. The handoff reached the same finding independently. This is not a contradiction between readers; it is a GAP between the plan documents, and it means stage C is unfunded by any charter and must be scheduled deliberately or it will simply not happen."
+ ]
+}

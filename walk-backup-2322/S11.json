@@ -1,0 +1,299 @@
+{
+ "slice": "S11",
+ "status": "COMPLETE",
+ "calls": [
+  {
+   "row": "§883.6 → §883.8 (HIGH 1)",
+   "call": "§883.6 ruled 'a refreeze clears arms 1–4 by construction'; §883.8 reversed it: refreezeRefusals throws UPSTREAM of the write",
+   "claim": "POPULATION_GREW is raised before the wholesale `...measured` write, so a refreeze cannot clear arms 2/4; the DECLARED_GROWTH row is the gate",
+   "method": "Read the walker at f3d33e4b9 (= composed-tip code) and at f5a6c3bbf; read scripts/lib/tuning-inventory.mjs at f5a6c3bbf; read the lane receipt's refusal payload",
+   "evidence": "f3d33e4b9 walker: `:92 const verdict = refreezeRefusals({` · `:104 if (!verdict.ok) {` throw · `:120 ...measured,` · `:124 renameSync(temporary, INVENTORY_PATH)`. tuning-inventory.mjs@f5a6c3bbf `:1055 const declared = declaredGrowth[population]?.[file];` … `:1075 return { ok: false, refusal: 'POPULATION_GREW', detail: grew.join('; ') };`. Receipt :387-389: `REFREEZE_TRUE_EXIT=1` … `refreeze REFUSED [POPULATION_GREW] — unregisteredNamed:src/domain/relationships/canonicalRelationship.js 0 -> 1 (no DECLARED_GROWTH row); bareDecimals:src/domain/worldPulse/thievesGuild.js 0 -> 2 (no DECLARED_GROWTH row)`; blob f884af145 unchanged.",
+   "verdict": "REVERSE",
+   "confidence": "CONFIRMED",
+   "note": "The REVERSE is of the §883.6 ruling, exactly as §883.8 already recorded; the chair's self-report is correct on every point. AMEND one address: the stratum's `:71–78` / `:117–121` / `:92-103` / `:104-106` are COMPOSED-TIP line numbers (f3d33e4b9/72b513b85); at the landed tip f5a6c3bbf CEILINGS spans :71-93, the call is :106, the throw :118, `...measured` :134, renameSync :138."
+  },
+  {
+   "row": "§883.8 re-ruling (HIGH 1)",
+   "call": "Take the DECLARED_GROWTH door: two rows → refreeze → ceilings DECLARED_GROWTH 0→2, UNREGISTERED_NAMED 534→535, BARE_DECIMAL 7003→6985; E4 'exactly two problems, no BARE_DECIMAL_CEILING'",
+   "claim": "Door shape {introducedAt, cause, sites}; ceilings landed as ruled; the act is attribution not authoring",
+   "method": "git show f3d33e4b9 and f5a6c3bbf walker CEILINGS; parsed .tuning-register.json and .tuning-inventory.json at f5a6c3bbf; EXECUTED the walker single-file at the §891 dock 4233031ba",
+   "evidence": "f3d33e4b9:72-77 `BARE_DECIMAL_CEILING: 7003` `UNREGISTERED_NAMED_CEILING: 534` `DECLARED_GROWTH_CEILING: 0`; f5a6c3bbf `…: 6985` `…: 535` `…: 2`. Register@f5a6c3bbf declaredGrowth: canonicalRelationship.js {sites 1, introducedAt 754856b12…, cause 350 chars}; thievesGuild.js {sites 2, same sha, cause 314 chars}; tuning-inventory.mjs:1046-1060 requires a resolving 40-hex sha, cause >60, sites ≥ growth. Inventory@f5a6c3bbf measuredAtSha 32573759e, named 535 / bare 6985. Receipt :477-483 `73 passed | 1 failed (74)`, problems exactly [UNREGISTERED_NAMED 534->535, DECLARED_GROWTH 0->2]. EXECUTED at laneKERNELMARK-tree @4233031ba: `Tests 75 passed (75)`, porcelain unchanged.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The attributing-vs-authoring distinction holds on the code: a declaredGrowth row carries no value/unit/band and is validated only as a citation (sha resolves, cause length, sites). The E4 arm-5 outcome is receipt-read, not re-executed at f5a6c3bbf (no dock sits at that sha); settling command: `git worktree`-free — `npx vitest run tests/lint/tuningRegister.walker.test.js` in a dock at f5a6c3bbf."
+  },
+  {
+   "row": "§883.8 / §884 POPULATION_SATURATION (HIGH 2)",
+   "call": "'+1 unregisteredNamed and −1 bareDecimal in one commit 754856b12 — the register scores the act it exists to encourage as a debt; a defect of the INSTRUMENT'",
+   "claim": "T13 gave a magic number a name and the instrument charged it",
+   "method": "git merge-base --is-ancestor; git show --numstat 754856b12; read the canonicalRelationship.js hunk",
+   "evidence": "`git merge-base --is-ancestor 754856b12 7f974e855` exit 0. numstat `42 6 src/domain/relationships/canonicalRelationship.js` · `24 1 src/domain/worldPulse/thievesGuild.js`. Hunk: `+const POPULATION_SATURATION = 2511886.43150957906619;` and the removed line `-  return (TIER_RANK[tier] ?? 2) + Math.min(0.8, detLog10(Math.max(1, population)) / 8);` → `+  return Math.min(POPULATION_SATURATION, Math.max(1, population));`. Receipt arms: canonicalRelationship.js bare `1→0`, named `0→1`. thievesGuild growth is `+  const diversityMult = 0.6 + 0.4 * Math.min(1, …/GUILD_TUNING.diversityFull);` — two relocated bare literals, not a naming act.",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "The +1/−1 same-file same-commit fact is exact. But the −1 bare is the CAP `0.8`, and the +1 named is a DIFFERENT, measured value (the population at which the old bonus saturated) — the act is 'a capped formula replaced by a named saturation constant', not literally 'the same magic number given a name'. The 'instrument defect' label is a judgment: P2 counts unregistered named constants shrink-only BY CHARTER (a name without a register row is exactly the debt it counts). State it as the rule-change proposal the row itself poses (net-zero when a bare literal becomes a named constant in one commit) beside the counter-position (registration duty), not as a settled defect."
+  },
+  {
+   "row": "§883.5(a) CR-1 (HIGH 3)",
+   "call": "CURE-CAPSULE c422ee824 does not board; lands as its own act after §884; '+56/−2 is titles in an existing file'; its two paths intersect none of the 33",
+   "claim": "Boarding it would stale every §3 bill; composition unaffected either way",
+   "method": "git show --numstat c422ee824; cat-file at 7f974e855; grep the diff for test titles; intersect with git diff --name-only 7f974e855 f5a6c3bbf; git worktree list",
+   "evidence": "`85 3 scripts/base-state-capsule.mjs` · `56 2 tests/scripts/baseStateCapsule.test.js`; file EXISTS at 7f974e855 (315 lines). Added test titles in the +56: exactly ONE — `+  it('reads porcelain by its column law, and throws naming the row when a home is missing, a shell-out reds, or the tree is dirty', async () => {`. Landing paths 35, matches for base-state-capsule|baseStateCapsule: 0. Executed as ruled: laneCURECAP-tree HEAD 62be253f3 (re-based on f5a6c3bbf per §884.4).",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "The ruling holds (prevention car must not ride the landing it guards; disjoint paths confirmed; executed at §884.4). Wording must change: '+56/−2 is titles' (and ledger §884's '+56 titles consequence') overstates — the +56 lines carry ONE new title; the lighting bill would move by one title, which still makes it stale in kind but not '+56'."
+  },
+  {
+   "row": "§883.5(a) CR-2 (HIGH 4)",
+   "call": "The chair runs the post-build remainder of §5.4 batch 2 after the bare gate; the lane runs the no-dist suites by count",
+   "claim": "~45 files were owned by nobody (a dropped thread by construction)",
+   "method": "Read package.json scripts and check-test-ratchet.mjs at f5a6c3bbf; read gate-instr.log and cr2-instr.log",
+   "evidence": "package.json@7f974e855 `:56 \"verify:dist\": \"… node scripts/check-test-ratchet.mjs --verify-dist\"`, `:58 \"check\": … && npm run build && npm run verify:dist`. check-test-ratchet.mjs@f5a6c3bbf `:702 if (VERIFY_DIST) runnerEnv.VERIFY_DIST = '1';`; strict block `:843 if (VERIFY_DIST) {` → `runner exited NON-ZERO; strict dist never banks…` / `suite status was not PASSED`. gate-instr.log:924 `STRICT DIST OK — 52 discovered/reported file(s), 440 test(s), zero failed/non-run/uncollected/missing/extra/duplicate rows.` cr2-instr.log: `CR2_HEAD=f5a6c3bbf…` `Test Files 52 passed (52)` `Tests 383 passed | 57 skipped (440)` `TRUE_EXIT=0`. 26 tests/build files carry VERIFY_DIST guards.",
+   "verdict": "REVERSE",
+   "confidence": "CONFIRMED",
+   "note": "Exactly as §884(2) self-reports: the premise was false (verify:dist already owns every dist-reading suite with the flag set), and the chair's own flagless re-run was the vacuous one (57 skipped, exit 0). The lane's early run of the no-dist 26 was harmless and its e2eNotVacuous correction (L-10) was right."
+  },
+  {
+   "row": "§883.5(a) CR-3",
+   "call": "§3.4.5's plain ratchet gate is run WHOLE and budgeted at ~+250 s",
+   "claim": "The plain gate must prove the COMMITTED state after the register commit",
+   "method": "Read receipt CR-3 table :495-503 and L-17/L-19",
+   "evidence": "Receipt: `--update … 1,589 s` · `§3.4.5 run 1 … 1,046 s … writerReach.walker \"TIMEOUT\"` (uncapped pool, load 48.98/8) · `§3.4.5 run 2 (quiet re-run) --maxWorkers=2 … 1,488 s … fieldBattleRegion ASSERTION` — the foreign 0.392% flake surfaced HERE. Ledger §884: 'CR-3 EARNED ITS COST AND WAS MIS-PRICED BY THE CHAIR: ruled at ~250 s, it actually cost 1,046 s + 1,488 s'.",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "The ruling holds and paid for itself; the §883.5 stratum text still carries the ~+250 s figure, which was wrong by 4–6× per run. Receipt-read; wall-clocks not re-executed."
+  },
+  {
+   "row": "§883.5(a) CR-4 (HIGH 3)",
+   "call": "§6.3.4 uses the corrected build-input set + a 33-path Python intersection; four build-graph members were outside the original pathspec",
+   "claim": "prebuild/postbuild under scripts/; prerender-routes.mjs:56 imports ../api/_galleryMeta.js; eslint.config.js:32 imports scripts/count-transcendental-math.mjs; REALM_SCALE_SOURCE_PATHS names scripts/audit, where the consist writes four files",
+   "method": "git show at 7f974e855 for each address; git diff --name-only 7f974e855 f5a6c3bbf | grep scripts/audit",
+   "evidence": "package.json:8-10 `\"prebuild\": \"node scripts/generate-sitemap.mjs\"`, `\"build\": \"vite build\"`, `\"postbuild\": \"node scripts/prerender-routes.mjs\"`. scripts/prerender-routes.mjs:56 `import { injectGalleryMeta, SITE_NAME } from '../api/_galleryMeta.js';`. eslint.config.js:32 `import { TRANSCENDENTAL_FNS } from './scripts/count-transcendental-math.mjs';` (:28-31 are other imports; :1 is a docblock, so F-4's ':32 not FIRST LINE' is right). scripts/audit/realm-scale-certification.mjs:37-39 `export const REALM_SCALE_SOURCE_PATHS = Object.freeze([ 'src', 'scripts/audit', …`. Landing writes scripts/audit/{behavioral-observation,realm-scale-certification,soakInvariants,whole-world-soak}.mjs (4).",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "All four addresses verified at 7f974e855 without a dock. The lane executed the corrected two-set instrument: receipt §3.5.1 '(a) … → ZERO ROWS · (b) … FOUR ROWS, all under scripts/audit · the 33-path intersection … EMPTY'."
+  },
+  {
+   "row": "§883.5(b) F-10 / O-2 (HIGH 7)",
+   "call": "BOARD-READY rather than NOT READY; NO LANE BUILD is spent on a diff-shaped proof where T13 had a measurement",
+   "claim": "Both skeptics re-executed the apparatus and everything reproduced; the closure would be caught by §6.3.7 measuring from the gate's own build",
+   "method": "Read order §9.3 O-2, §9.7 F-10, §9.4 row 2; gate-instr.log; searched SP/SP2 for any closure measurement at f5a6c3bbf; checked docks for a dist at that sha",
+   "evidence": "Gate: `GATE_START=2026-09-02T21:09:30Z` → `GATE_END=…21:27:18Z` (=1,068 s); `:392 [test-ratchet] OK — no test regressions (10 known failure(s) of 30962 tests, ceiling 10).`; `:925 TRUE_EXIT=0`. Lighting census blob @f5a6c3bbf 2503/370/2133/22665/6099, measuredAtSha 88a89539f. Only executed closure check at this tip: `tests/build/vendorPdfLazy.test.js:957-970 … toBeLessThanOrEqual(CLOSURE_BUDGET_BYTES)`, `:565 const CLOSURE_BUDGET_BYTES = 1_048_000;`. No closure-bytes artifact for f5a6c3bbf in SP: `closure-tip.log` is dated Sep 3 15:47 and reads `CLOSURE RAW BYTES: 1046996 / budget 1048000 => margin 1004` (a later tip); no dock at f5a6c3bbf/62be253f3/adb9f19b7 holds a dist/.",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "F-10 and O-2 hold on outcome (green first run, every register exact, zero build-input rows). But the ledger §884 sentence 'first-paint closure stays 1,046,732 — 268 B under the UNRAISED 1,047,000 — with engine 675,764' is INFERRED from byte-identical inputs, not measured at f5a6c3bbf; the order's own §6.3.7 mitigation ('measure the closure from the gate's own build before the CAS') has no receipt. Relabel as inferred. Settling: build at f5a6c3bbf and run `VERIFY_DIST=1 npx vitest run tests/build/vendorPdfLazy.test.js` with the closure printed (PLAUSIBLE that it equals 1,046,732)."
+  },
+  {
+   "row": "§883.5(b) F-2",
+   "call": "Split B-2's widened pathspec into two sets (build/lint/typecheck MUST be empty; certification-fingerprint EXPECTED non-empty) rather than one convicting set",
+   "claim": "A proof that reds for a non-build reason will be argued around rather than obeyed",
+   "method": "Receipt §3.5.1 and L-3; my own diff of scripts/audit",
+   "evidence": "Receipt :107-110 `(a) … → ZERO ROWS` · `(b) certification-fingerprint set (scripts/audit tests/fixtures/spatialPackFixtures.js) → FOUR ROWS, all under scripts/audit … EXPECTED, and NOT a build finding` · `the 33-path intersection … IN PYTHON → EMPTY`. My diff: four scripts/audit files in 7f974e855..f5a6c3bbf.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Nothing is hidden by the split: both sets are run and both results printed; the certification-fingerprint move is carried at §3.2 (B-3) rather than dropped."
+  },
+  {
+   "row": "§883.5(b) 'Skeptic A: five … three-method tuple' and SB-1",
+   "call": "Enrolment of Skeptic A's five calls (sharpest: confirming the lighting tuple by three-method agreement instead of the walker's classifier) and Skeptic B's one call SB-1",
+   "claim": "Attribution of the panel's own judgment calls",
+   "method": "Parsed instr-order-panel/comp.json (Skeptic A) and bill.json (Skeptic B)",
+   "evidence": "comp.json keys: ['lens','verdict','findings','survived','seat','base'] — findings A-1..A-5 only, NO own-judgment-call table, no 'classifier' text. bill.json `own_judgment_calls_for_the_retrovalidation_queue`: SB-1 … SB-5, with `SB-4 | I did not attempt to re-derive the lighting tuple through the walker's OWN classifier (measureCensus at :601-607 …). I used statement-position static counts and cross-checked them against three independent measurements`. Tuple measured EXACT at the tip (lighting-census-baseline.json 2503/370/2133/22665/6099).",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "The three-method-tuple call is Skeptic B's SB-4, not Skeptic A's; Skeptic A's 'five' are its five FINDINGS, and Skeptic B has FIVE own calls (SB-1..SB-5), not one. §884's enrolment line 'Skeptic A 5 · Skeptic B's SB-1' inherits the same error. SB-1 itself (MAJOR not blocking, because the 33-path enumeration confirms the conclusion) is RATIFIED by outcome."
+  },
+  {
+   "row": "§883.5(b) O-1, O-3, O-4, O-8",
+   "call": "Pick order CURE→TUNEREG→WRW→SOAK; battery re-scoped to 11 arms; STOP-3 inversion; SOAK gate as STOP with WAIT default",
+   "claim": "Sequencing and scoping calls of the order's author",
+   "method": "git diff --shortstat 7f974e855 72b513b85; receipt L-2, L-4, probe C row",
+   "evidence": "`33 files changed, 34011 insertions(+), 78 deletions(-)` at 72b513b85 — the order's figure to the byte; receipt :76 pick 11 `+16788/−0 — THE UNION LANDED … ZERO markers`; L-4 `4 of 9 measurement arms carry a proving control`; registers table `probe C @ final tip … 87e8b25c…f695 (§4.2 row 11: no register act touched src/)`; SOAK reached LANE COMPLETE 13:18 so O-8's STOP never fired.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "All executed as ruled and reproduced; O-8 is moot in the event."
+  },
+  {
+   "row": "§883.5(b) O-5",
+   "call": "The espionage fence is NOT re-armed by this landing",
+   "claim": "Fence constant untouched, blob unedited",
+   "method": "git show f5a6c3bbf fence file :262; git rev-parse blob at C″ and tip",
+   "evidence": "tests/property/espionageDormancyFence.test.js@f5a6c3bbf:262 `const PRE_COUPLING_CORPUS_SHA = '72acacd8583f70f6b0a5a551ad067f32eb35060e5e08cf8589e8e2135a5c4f6d';`; blob b83b44c05 at BOTH 7f974e855 and f5a6c3bbf.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": ""
+  },
+  {
+   "row": "§883.5(b) O-6 / §884 'L-6 DISCHARGED'",
+   "call": "Run the lighting refreeze a second time from a dirty register at a real landing (CURE-PORCELAIN's plant P1b)",
+   "claim": "Repeatability demonstrated on the landing tree",
+   "method": "git ls-tree f5a6c3bbf tests/lint; receipt registers table",
+   "evidence": "Tip blob `a4a905bf443a7bbae51efb2d37829cfbc40acef4 tests/lint/.lighting-census-baseline.json`; receipt: `REFROZE again, 2503 -> 2503 on all five, zero refusals, zero \"Dirty: ests/\" occurrences, register blob a4a905bf4 byte-identical across both runs`. Receipt L-6 first read DEFERRED (:337) and was later marked DISCHARGED in the registers table.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Blob identity checked by me; the two runs are receipt-read."
+  },
+  {
+   "row": "§883.5(b) O-7 / O-9",
+   "call": "OSR predicted as a receipt not a commit (frozenAtSha stays b0c3e2bb4); every §0.6 absolute re-read at 7f974e855, catching `b0c3e2bb4` vs a receipt's `c28c7b43c`",
+   "claim": "OSR stamp unmoved across the landing",
+   "method": "Parsed scripts/.observed-shape-readers-baseline.json at 7f974e855 and f5a6c3bbf",
+   "evidence": "7f974e855: frozenAtSha `b0c3e2bb43c6674ee541ea1e9dd25cd0a80ea2ba` schema 15; f5a6c3bbf: identical. Receipt: `OSR … 1993 finding(s), exactly matching`.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": ""
+  },
+  {
+   "row": "§883.5(b) F-1, F-3, F-4, F-7, F-8, F-9",
+   "call": "Control-coverage denominator 3 of 9; centuryLegSoak excluded by name; B-2's address corrected to :32; L-9 numbered; A-1's ls-files command verified (86); STOP-15 re-pointed",
+   "claim": "Fold-side corrections and refusals",
+   "method": "Read §9.7; git show eslint.config.js; exact reproduction of the 86 at 7f974e855; receipt L-9",
+   "evidence": "eslint.config.js@7f974e855 :28-32 — the import is at :32, :1 is a docblock. `git ls-tree -r --name-only 7f974e855 tests | grep -E 'Golden|Fence|Dormancy' | wc -l` → 86 (case-insensitive 'golden' alone gives 92; 'Golden' alone 48 — so 86 is the family, not a coincidence). Receipt L-9 `centuryLegSoak.test.js excluded from §5.5's batch BY NAME, census kept whole, ground stated, wallclock recorded (74 s)`.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "F-8's 86 reproduces exactly; F-3's named exclusion is a receipt line, meaningfully different from silent curation."
+  },
+  {
+   "row": "§883.5(b) F-5",
+   "call": "B-9's `closure 1,046,662` is C′'s recorded closure carried forward (a stale-base absolute), not a slip",
+   "claim": "The figure appears in the §882 row",
+   "method": "grep -n -F '1,046,662' docs/OWNER_DECISION_QUEUE.md",
+   "evidence": "Hits at ledger lines 32346 (§881.17), 32348 (§881.19), 32349 (§882), 32350 (§882.1), 32355, 32356 — the §882 TAIL-F row is line 32349.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": ""
+  },
+  {
+   "row": "§883.5(b) F-6",
+   "call": "Elevated B-6's aside ('batch 2 cannot run before §6.2') into a named hole and opened CR-2",
+   "claim": "~45 files owned by nobody — a dropped thread by construction",
+   "method": "Same evidence as CR-2",
+   "evidence": "verify:dist runs the whole of tests/build with VERIFY_DIST=1 as the last stage of `npm run check` (package.json:58; check-test-ratchet.mjs:702); gate-instr.log:924 `STRICT DIST OK — 52 … 440 test(s), zero … non-run`.",
+   "verdict": "REVERSE",
+   "confidence": "CONFIRMED",
+   "note": "The hole did not exist for the gate; §884 marks CR-2 as unnecessary but F-6 — the fold call that created it — is not marked. It should carry the same disposition."
+  },
+  {
+   "row": "§883.5(c) three copies of the queue + the missing prefix gate (HIGH 5)",
+   "call": "Three sources on disk, two stale; the cure — refuse a mapped queue that does not CONTAIN the parent blob as a prefix — should become a gate in chair-commit.sh",
+   "claim": "A live structural gap",
+   "method": "git cat-file -s / wc -l at e4f840774~1; wc on kit-883/queue-883.md; read chair-commit.sh (58f0a8e2) and diff against this session's copy; git status in the ledger worktree",
+   "evidence": "HEAD blob before §883.5 (e4f840774~1): 319,498 B / 2,180 lines ✓. kit-883/queue-883.md: 300,067 B / 2,118 lines ✓. HANDOFF at e4f840774~1: 46,617 B ✓. chair-commit.sh:54-64 carries only `# … The blob must actually DIFFER from the parent's.` … `if [ \"$QNEW\" = \"$QOLD\" ]; then echo \"ABORT: the retrovalidation queue is UNCHANGED\"`; grep for prefix/contain/md5: none. `diff` of this session's chair-tools/chair-commit.sh against 58f0a8e2's → IDENTICAL (7,979 B). Today `git status --porcelain -- docs/FABLE_RETROVALIDATION_QUEUE.md docs/HANDOFF_CURRENT.md` → `D ` + `??` for BOTH; md5 of each worktree copy == HEAD blob.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The gap is still open: no copy of chair-commit.sh carries the prefix check. The (1) stale-worktree figures 152,041 B / 1,410 lines are transient and unverifiable now (PLAUSIBLE); the staged-delete-plus-untracked state is the ledger worktree's NORMAL state today, so the prefix gate is the only protection that would catch a regression."
+  },
+  {
+   "row": "§883.6 refusal (a) — no register row / no invented unit",
+   "call": "UNITLESS_TABLE_CEILING is 220 of 220; assigning a unit to dodge it is estate authoring",
+   "claim": "Zero headroom measured",
+   "method": "Parsed .tuning-register.json at f5a6c3bbf",
+   "evidence": "unit === null on 220 of 224 tables; signatureVersion 0; ceiling `UNITLESS_TABLE_CEILING: 220`.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Refutation attempted: 'a factual unit (persons) is a census fact'. It fails on posture — every row is draft at signatureVersion 0 and the walker's own docblock calls the register 'the pen's'; writing a unit to make a gate green is the act the consist refused everywhere else. A dissent remains defensible, as the row itself invites."
+  },
+  {
+   "row": "§883.6 refusal (c) — no src/ byte",
+   "call": "Any src/ byte voids the zero-build-input claim and edits T13's sealed landing",
+   "claim": "src is in the build-input set",
+   "method": "Receipt §3.5.1 set (a); seal refs",
+   "evidence": "Set (a) begins `src api public index.html package.json …`; `refs/preserve/landing-T13-2026-09-02` seals 7f974e855.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": ""
+  },
+  {
+   "row": "§883.6 structural law / §884 'STRUCTURAL LAW BANKED' (HIGH 6)",
+   "call": "Any src/**-subject register frozen one landing back is stale by construction; 'that design question is queued'; Fable re-derives base-relative walker vs standing landing act",
+   "claim": "The defect recurs at every landing unless cured",
+   "method": "git diff f5a6c3bbf..4233031ba on the walker; inventory measuredAtSha across tips; git log for register acts; grep LANE-QUEUE.md and the ledger for base-relative/stale-base",
+   "evidence": "Walker diff f5a6c3bbf..4233031ba: `1 file changed, 96 insertions(+)` — only ARM 42 (CAPACITY C1); no base-relative logic. Inventory measuredAtSha: f5a6c3bbf→32573759e · 30c1667bc/ca651d54b→dfcc8eb72 ('chair, §889 train') · 4233031ba→250d4e464 ('§891 train'); register acts `a9984fb65 ENC-1 register 1/4: the tuning inventory enrols…`, `4f3eac16c §889 register 4/4: the tuning inventory takes…`, `79d45d274 §891 register 2/6: the tuning inventory takes…`. LANE-QUEUE.md: zero hits for base-relative/stale-base/refreeze; ledger 'base-relative' only at §882.1 and §883.6.",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "The law holds. But 'that design question is queued' is FALSE — no queue row, docket row or LANE-QUEUE entry exists. What exists is a de-facto standing register act (each landing that moves the measurement refreezes the inventory, forced by arm 1's exact-match red), never written as law. Mark the design question as OPEN, not queued."
+  },
+  {
+   "row": "§884 wizardNews determinism leak (HIGH 6)",
+   "call": "`wizardNews.js:552` createdAt || options.now || nowIso(); FOREIGN; 0.392%; deferred with a home: cure test-side before the freeze",
+   "claim": "Diagnosis and deferral",
+   "method": "git show f5a6c3bbf:src/domain/region/wizardNews.js; blob identity; git log -S nowIso; merge-base against later tips",
+   "evidence": "f5a6c3bbf src/domain/region/wizardNews.js:552 `createdAt: entry.createdAt || options.now || nowIso(),`; blob 787999905 at BOTH 7f974e855 and f5a6c3bbf (foreign). Test :109 `appendWizardNewsEntries({}, [battleRow()], { now: null })`. Later: `b6822dcae … a byte-identity arm was racing the wall clock` is an ancestor of bbba1be24 (§888) and adds `const PINNED = '2026-01-01T00:00:00.000Z'`; `efed4ba91` (§889) bans the `now: null` spelling; ledger §888: 'IT CURES A RANDOM RED THAT HAS BEEN LIVING IN EVERY LANDING GATE THIS ARC'. src-side `resolveStamp` (3a6f0d761) is in 4233031ba only — NOT in ca651d54b, where :627 still reads `|| options.now || nowIso()`.",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "Diagnosis exact; the deferral was DISCHARGED test-side at §888 and fenced at §889, and the §884 row is not marked superseded. Path should be spelled in full (src/domain/region/wizardNews.js — the brief's worldPulse guess was wrong). The src-side trap is cured only in the unlanded §891 train."
+  },
+  {
+   "row": "§884 net ceiling movement −17",
+   "call": "'Net ceiling movement −17 (one raise of +1, one ratchet-down of −18): the landing tightens the estate'",
+   "claim": "Arithmetic over the moved ceilings",
+   "method": "Ceiling values at f3d33e4b9 vs f5a6c3bbf",
+   "evidence": "Three ceilings moved: DECLARED_GROWTH 0→2 (+2), UNREGISTERED_NAMED 534→535 (+1), BARE_DECIMAL 7003→6985 (−18). Receipt scoped its figure: `Net movement across the counted populations: −18 +1 = −17`.",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "−17 is the P2/P3 population figure; across all ceilings the net is −15. The stratum's phrase 'net ceiling movement' should say −15, or keep −17 with the receipt's 'counted populations' qualifier. Still net-tightening."
+  },
+  {
+   "row": "§884 landing figures and lane conduct",
+   "call": "23 commits/23 trailers, 35 paths +34,054/−88, seal, gate green first run 1,068 s; the lane held twice, ran the red once quietly (L-17), did not cure the foreign flake (L-20)",
+   "claim": "The landing's executed figures",
+   "method": "git log/diff/for-each-ref; gate-instr.log; receipt rows",
+   "evidence": "`git log --format=%B 7f974e855..f5a6c3bbf | grep -c '^Seat: '` → 23 (1 CURE-PORCELAIN · 9 TUNEREG · 4 WRW · 5 SOAK · 2 INSTR-land · 2 Fable-unvalidated); `35 files changed, 34054 insertions(+), 88 deletions(-)`; `refs/preserve/landing-INSTR-2026-09-02` → f5a6c3bbf; gate 21:09:30→21:27:18 = 1,068 s; travelersGeometry.js exists at 9a0584f0f and is ABSENT at 7f974e855 (the `2 → 0` row). Receipt L-13 'HELD A SECOND TIME', L-17 'RE-RUN QUIET ONCE, not repeatedly', L-20 'The FOREIGN flake was NOT cured'.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": ""
+  },
+  {
+   "row": "§883.8 second chair defect — HANDOFF truncation",
+   "call": "Index-surgery edit truncated docs/HANDOFF_CURRENT.md 51,035 → 4,580 B in the worktree; recovered from HEAD; law: an anchor pair must assert the SPAN",
+   "claim": "Self-reported chair error",
+   "method": "git cat-file -s on the ledger commits around it",
+   "evidence": "HANDOFF at 9b7d6998b (§883.6) and efcf98b89 (§883.7): 51,035 B ✓; at bf883f01c (§883.8): 52,117 B (recovered + edited); §884.2 corroborates 'the §883.8 truncation, whose first retry also failed its own guessed bound (1000 guessed, 905 real)'.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The 4,580 B transient size is unverifiable now (PLAUSIBLE); the pre-size and the fact nothing truncated was committed are confirmed."
+  }
+ ],
+ "beyond": [
+  "MISATTRIBUTION: the 'three-method lighting tuple' call enrolled as Skeptic A's is Skeptic B's SB-4; comp.json has no own-call table; Skeptic B has five own calls (SB-1..SB-5). §883.5(b) and §884's enrolment line both carry the error.",
+  "UNMEASURED FIGURE PRESENTED AS MEASURED: ledger §884 'first-paint closure stays 1,046,732 … engine 675,764' is inferred from the zero-rows diff; no closure-bytes receipt exists for f5a6c3bbf (closure-tip.log is Sep 3, a later tip, 1,046,996). The order's §6.3.7 measurement step has no receipt.",
+  "NET −17 vs −15: three ceilings moved (+2, +1, −18); the stratum's 'net ceiling movement −17' drops the DECLARED_GROWTH raise the chair itself called 'a second raise' in §883.6(b).",
+  "'+56/−2 is titles' (CR-1, and ledger §884's '+56 titles consequence'): the diff adds ONE test title.",
+  "F-6 is not re-marked after §884 reversed CR-2, though F-6 is the fold call that opened CR-2 on the false 'owned by nobody' premise.",
+  "§884's wizardNews deferral was discharged test-side at §888 (b6822dcae) and fenced at §889 (efed4ba91); the §884 row is not marked superseded. The src-side cure (resolveStamp, 3a6f0d761) is only in the unlanded §891 train; ca651d54b:627 still has the `|| nowIso()` chain.",
+  "'That design question is queued' (§883.6 structural law) is false: no LANE-QUEUE, docket or ledger row exists for a base-relative tuning walker; the practice is an undocumented per-landing refreeze register act.",
+  "Line addresses in §883.6/§883.8 (`:71–78`, `:92-103`, `:104-106`, `:117–121`) are composed-tip (72b513b85/f3d33e4b9) addresses; at the landed tip f5a6c3bbf the CEILINGS block is :71-93 and the call/throw/write are :106/:118/:134-138.",
+  "The ledger worktree today shows docs/FABLE_RETROVALIDATION_QUEUE.md AND docs/HANDOFF_CURRENT.md as `D ` + `??` (md5 == HEAD) — the exact shape §883.5(c) warned about is the worktree's steady state, and the prefix gate is still not in any copy of chair-commit.sh (58f0a8e2 and d5b9a39f copies identical).",
+  "POPULATION_SATURATION: the removed bare literal is the cap `0.8`, the added constant is a different measured value — 'gave a magic number a name' is loose; the +1/−1 fact stands."
+ ],
+ "chair_errors": [
+  "§883.6 ruling (refreeze clears arms 1–4): CONFIRMED wrong by code — refreezeRefusals throws at walker:104 before the write at :120-124 (self-reported at §883.8).",
+  "CR-2: CONFIRMED vacuous — verify:dist already runs tests/build with VERIFY_DIST=1; the chair's flagless re-run skipped 57 of 440 and exited 0 (cr2-instr.log; self-reported at §884).",
+  "CR-3 budget ~+250 s: CONFIRMED mis-priced (1,046 s and 1,488 s measured; self-reported in ledger §884, not in the §883.5 stratum text).",
+  "Skeptic A/B misattribution of the three-method tuple call (SB-4) — NOT self-reported.",
+  "'Net ceiling movement −17' omits the DECLARED_GROWTH +2 — NOT self-reported.",
+  "Closure 1,046,732 at f5a6c3bbf stated as if measured ('THE PROOF IS A MEASUREMENT') — the diff was measured, the byte figure inferred; §6.3.7 unreceipted — NOT self-reported.",
+  "'That design question is queued' — nothing was queued — NOT self-reported.",
+  "HANDOFF truncation 51,035→4,580 (self-reported at §883.8; pre-size CONFIRMED)."
+ ],
+ "commands": [
+  "mkdir -p …/walk/S11; printf partial S11.json",
+  "sed -n '239,303p;328,377p' …/stratum/full.md",
+  "git show f5a6c3bbf:tests/lint/tuningRegister.walker.test.js | sed -n '60,140p;470,520p'; git show f3d33e4b9:tests/lint/tuningRegister.walker.test.js | grep -n '_CEILING:\\|refreezeRefusals({\\|verdict.ok\\|\\.\\.\\.measured\\|renameSync'",
+  "git show f5a6c3bbf:scripts/lib/tuning-inventory.mjs | sed -n '1020,1100p'",
+  "git merge-base --is-ancestor 754856b12 7f974e855; git show --stat/--numstat 754856b12; git show 754856b12 -- src/domain/relationships/canonicalRelationship.js",
+  "git show --numstat --oneline c422ee824; git cat-file -e 7f974e855:tests/scripts/baseStateCapsule.test.js; git show c422ee824 -- tests/scripts/baseStateCapsule.test.js | grep '^+.*\\b(test|it|describe)('",
+  "git diff --name-only/--shortstat 7f974e855 f5a6c3bbf; git diff --shortstat 7f974e855 72b513b85; git log --format=%B 7f974e855..f5a6c3bbf | grep -c '^Seat: '; git for-each-ref refs/preserve/landing-INSTR-2026-09-02",
+  "git show 7f974e855:package.json | grep prebuild/build/postbuild/verify:dist/check; git show 7f974e855:scripts/prerender-routes.mjs | sed -n '50,60p'; git show 7f974e855:eslint.config.js | sed -n '28,36p'; git show 7f974e855:scripts/audit/realm-scale-certification.mjs | sed -n '37,46p'",
+  "git show f5a6c3bbf:scripts/check-test-ratchet.mjs | sed -n '690,720p;840,880p' and grep -n VERIFY_DIST; git grep -l VERIFY_DIST f5a6c3bbf -- tests/build | wc -l",
+  "git ls-tree -r --name-only f5a6c3bbf | grep -i wizardNews; git show f5a6c3bbf:src/domain/region/wizardNews.js | sed -n '548,556p'; git rev-parse {7f974e855,f5a6c3bbf,ca651d54b}:src/domain/region/wizardNews.js; git log -S nowIso --oneline f5a6c3bbf..4233031ba -- src/domain/region/wizardNews.js; git log --oneline f5a6c3bbf..ca651d54b -- tests/domain/fieldBattleRegion.test.js; git merge-base --is-ancestor b6822dcae/efed4ba91/3a6f0d761 <tips>",
+  "python3 parse of tests/lint/.tuning-register.json and .tuning-inventory.json at f3d33e4b9,f5a6c3bbf,30c1667bc,ca651d54b,4233031ba; git diff f5a6c3bbf 4233031ba -- tests/lint/tuningRegister.walker.test.js",
+  "grep -n prefix/parent/md5 $SP/chair-tools/chair-commit.sh; sed -n '40,75p' …; diff d5b9a39f copy vs 58f0a8e2 copy; git status --porcelain -- docs/FABLE_RETROVALIDATION_QUEUE.md docs/HANDOFF_CURRENT.md; md5 vs git show HEAD; git cat-file -s <ledger commits>:docs/{HANDOFF_CURRENT,FABLE_RETROVALIDATION_QUEUE}.md; wc -l $SP/kit-883/queue-883.md",
+  "sed -n '597,618p;619,646p;647,675p' $SP2/INSTR-LANDING-ORDER.md; sed -n '102,111p;118,160p;243,263p;331,348p;381,447p;459,533p' $SP/laneINSTRLAND/laneINSTRLAND-receipt.md",
+  "python3 parse of $SP/instr-order-panel/{comp,bill}.json; grep gate-instr.log for TRUE_EXIT/STRICT DIST/GATE_START/GATE_END; cat $SP/cr2-instr.log; ls -lT $SP/closure-tip.log …; git worktree list",
+  "sed -n '32365p;32370p;32371p;32373p;32374p;32375p;…;32380p' docs/OWNER_DECISION_QUEUE.md; grep -n -F '1,046,662' / 'base-relative' / 'fieldBattleRegion' docs/OWNER_DECISION_QUEUE.md",
+  "git show f5a6c3bbf:tests/property/espionageDormancyFence.test.js | sed -n '258,264p'; git rev-parse blobs; scripts/.observed-shape-readers-baseline.json frozenAtSha at 7f974e855/f5a6c3bbf; git ls-tree -r --name-only 7f974e855 tests | grep -E 'Golden|Fence|Dormancy' | wc -l",
+  "EXECUTED (read-only, single file): cd laneKERNELMARK-tree && npx vitest run tests/lint/tuningRegister.walker.test.js --reporter=dot → 75 passed (75), exit 0; git status --porcelain captured before and after → identical (` M scripts/.writer-reach-baseline.json` only)"
+ ],
+ "porcelain_unchanged": true,
+ "summary": "S11 re-derived the §883.5 landing order rulings, the §883.6 stale-base ruling and its §883.8 reversal, and the §884 landing. HIGH items: the refreeze mechanism is exactly as §883.8 says (refreezeRefusals throws at walker:104 before the write at :120-124; POPULATION_GREW at tuning-inventory.mjs:1075), the DECLARED_GROWTH door shape and all three ceilings landed as ruled, and the walker runs 75/75 at the §891 dock with porcelain unchanged. CR-4's four build-graph addresses all verify at 7f974e855; CR-2 is confirmed vacuous by cr2-instr.log (57 skipped, exit 0) and REVERSED as §884 self-reported; CR-1 holds but '+56 titles' is one title; CR-3 holds but was mis-priced ~5x. The chair-commit.sh prefix gate is still NOT installed in any copy, and the ledger worktree today again shows both append-only files as staged-deleted-plus-untracked. Beyond the rows: the three-method tuple call belongs to Skeptic B (SB-4), Skeptic B has five own calls not one; the closure 1,046,732 at f5a6c3bbf was inferred not measured; 'net ceiling movement −17' should be −15 (or qualified); the wizardNews deferral was discharged at §888 (test-side) and the src cure sits only in the unlanded §891 train; the 'queued' base-relative design question was never queued. Verdicts over 25 entries: 3 REVERSE (the §883.6 ruling, CR-2, F-6 — all consistent with the chair's own later reversals), 8 AMEND, 14 RATIFY, 0 EVIDENCE-THIN; one figure left PLAUSIBLE (the byte-exact closure at f5a6c3bbf)."
+}

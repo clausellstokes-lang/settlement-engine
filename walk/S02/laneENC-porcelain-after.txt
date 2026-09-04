@@ -1,0 +1,13 @@
+ M src/domain/certification/couplingRegistry.js
+ M src/domain/certification/couplingRegistryEncounters.js
+ M src/domain/certification/subsystemRowsVirtual.js
+ M src/domain/npc/livedExperienceCatalog.js
+ M src/domain/npc/livedExperienceSources.js
+ M src/domain/worldPulse/envoyPulse.js
+ M src/domain/worldPulse/simulationRules.js
+ M tests/domain/couplingRegistry.test.js
+ M tests/domain/npc/livedExperienceCatalog.test.js
+ M tests/domain/npc/livedExperienceSources.test.js
+ M tests/domain/subsystemRowsVirtual.test.js
+?? src/domain/certification/subsystemRowsEncounters.js
+?? src/domain/worldPulse/envoyChanceMeetingStage.js

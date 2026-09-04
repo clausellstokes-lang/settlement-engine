@@ -1,0 +1,29 @@
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/58f0a8e2-2c4f-4073-8635-ecc7cf5010f6/scratchpad/laneKERNELMARK-tree
+
+ ❯ tests/copy/voiceMechanics.test.js (0 test)
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/copy/voiceMechanics.test.js [ tests/copy/voiceMechanics.test.js ]
+Error: REFUSED: regenerating the Tier-2 src/data + src/domain voice baseline would RAISE its committed totals.
+  bang: 10 → 15 (+5)
+  em: 455 → 770 (+315)
+The documented refreeze is shrink-only (the standing STRIP-never-raise ruling). A total that grew means new debt landed: rewrite the string per docs/VOICE_AND_TONE.md §6, or burn the debt down, and run the refreeze again. Re-freezing around the growth would turn the per-file arms green ON the growth while the hardcoded budget arms stayed red, and the resulting RATCHET-DOWN notice would invite deleting the very census rows holding this debt visible.
+ ❯ writeShrinkOnlyBaseline tests/helpers/shrinkOnlyBaseline.js:84:11
+     82|   const grew = growthRows(before, after);
+     83|   if (grew.length > 0) {
+     84|     throw new Error(
+       |           ^
+     85|       `REFUSED: regenerating ${label} would RAISE its committed totals…
+     86|       + `${grew.map((r) => `  ${r}`).join('\n')}\n`
+ ❯ tests/copy/voiceMechanics.test.js:180:26
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  no tests
+   Start at  00:51:23
+   Duration  378ms (transform 47ms, setup 22ms, import 0ms, tests 0ms, environment 0ms)
+

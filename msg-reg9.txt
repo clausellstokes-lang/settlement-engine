@@ -1,0 +1,11 @@
+§891 register 9/10: the dossier-mounts darkness baseline banks the four blocks DESK CAR 1 mounted — a shrink-only ratchet that had gone slack
+
+UNMOUNTED_BLOCKS.blocks 68 -> 64. DESK CAR 1 mounted four blocks and the shrink-only
+baseline still recorded 68, so the ratchet was slack by exactly four: a later car could
+have re-parked four blocks and no gate would have noticed. The <= arm was already green,
+which is why nothing complained — a slack ratchet is silent by construction.
+
+This is a bank, not a repair. 16 passed, exit 0.
+
+Seat: Opus 5 — Fable-unvalidated
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>

@@ -1,0 +1,4 @@
+{"slice":"S03","status":"PARTIAL","calls":[
+{"row":"§882.11 receipts","call":"93 marks contiguous 1–93, no gaps","verdict":"RATIFY","confidence":"CONFIRMED"},
+{"row":"§882.11 chair commit","call":"82c073af9 blob == SP/SP2 volume; product branch lacks the file","verdict":"RATIFY","confidence":"CONFIRMED"},
+{"row":"§882.11 receipts","call":"pre-fold copy intact 589,393 B == parent blob","verdict":"RATIFY","confidence":"CONFIRMED"}]}

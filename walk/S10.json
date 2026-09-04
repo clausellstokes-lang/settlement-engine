@@ -1,0 +1,257 @@
+{
+  "slice": "S10",
+  "status": "COMPLETE",
+  "calls": [
+    {
+      "row": "§883.4 CURE-PORCELAIN (HIGH 1)",
+      "call": "The trigger is dirty-UNSTAGED and FIRST; a STAGED register reads `M  path` and slices correctly; the refreeze was NOT REPEATABLE.",
+      "claim": "Pre-cure parser mis-slices only when the first porcelain record opens with a space (unstaged); staged first line is safe; the state a first refreeze creates is exactly the refusing state.",
+      "method": "Read pre-cure code at 7f974e855 (:621 gitOut trims whole output; :657-661 slice(3)); ran a scratch canned-record probe of the OLD parser vs the CURED parser (logic copied from d0c1a777e :668-678).",
+      "evidence": "7f974e855 :621 `const gitOut = (...args) => execFileSync('git', args, {...}).trim();` :657-661 `.split('\\n').map((line) => line.slice(3).trim())`. Scratch probe output: `unstaged-first OLD dirty= [\"ests/lint/.lighting-census-baseline.json\"] CURED dirty= []` · `staged-first OLD dirty= [] CURED dirty= []` · `foreign-first OLD dirty= [\"RCHITECTURE.md\"] CURED dirty= [\"ARCHITECTURE.md\"]` · `clean OLD [] CURED []`. Live corroboration: d124eae45 (§884 landing) message: second refreeze with the register dirty-unstaged and first REFROZE, register blob a4a905bf… identical both runs.",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "Refutation attempted via the staged case and the foreign-first case; both behave exactly as the row states. The lane's narrowing of both prior readings holds."
+    },
+    {
+      "row": "§883.4 CURE-PORCELAIN (HIGH 2)",
+      "call": "(2) the `.trim()` was CONFINED not removed; pure `parsePorcelainPaths(raw)` ASSERTS `line[2] === ' '` — an unstated column law made a checked one.",
+      "claim": "gitRaw is the exec, gitOut = gitRaw().trim() with exactly one remaining caller (rev-parse HEAD → measuredAtSha); the parser throws on a record without the separator.",
+      "method": "git show d0c1a777e:tests/lint/sovereigntyLightingContract.walker.test.js; grep every gitOut(/gitRaw( call; scratch probe of direction B (trim re-introduced).",
+      "evidence": "d0c1a777e :629 `const gitRaw = (...args) => execFileSync('git', args, { cwd: ROOT, encoding: 'utf8' });` :630 `const gitOut = (...args) => gitRaw(...args).trim();` :668-678 `function parsePorcelainPaths(raw) { ... if (line.length < 4 || line[2] !== ' ') { throw new Error('census refreeze REFUSED — this is not a `git status --porcelain` record: ...` :717 `parsePorcelainPaths(gitRaw('status', '--porcelain'))` :742 `measuredAtSha: gitOut('rev-parse', 'HEAD')` — the ONLY gitOut( call. Probe: `trim-reintroduced CURED= THROW REFUSED: not a porcelain record: \"M tests/lint/.lighting-census-baseline.json\"`. Commit stat: 1 file, 62 insertions(+), 5 deletions(-); trailer `Opus 5 (lane CURE-PORCELAIN)`.",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "The assertion is per-record (map over every line), so it also refuses a damaged second record — stronger than the row states."
+    },
+    {
+      "row": "§883.4 CURE-PORCELAIN (HIGH 3 — the deferral)",
+      "call": "(3) No canned-record battery added because an in-file battery moves titles 22491→22492 (a cure for a broken refreeze would itself require a refreeze); the zero-title half (pure parser + runtime assertion) taken; battery and -z reader handed over PRICED. Fable to check the enabled battery actually gets built.",
+      "claim": "The trade is right; the enabled battery is a later act.",
+      "method": "Read receipt §2 judgment + §5 handover row 2; measured the lighting tuple at the d0c1a777e dock with a scratch-built probe (walker's own measureCensus, ROOT re-pointed, nothing written into the dock); checked 4233031ba (§891 train tip) for the battery and for a scripts/lib fold.",
+      "evidence": "Receipt :157-166 `every spelling of it inside this file mints a test title and therefore moves titles 22491 → 22492 ... chose the asserted separator + a priced handover row over an in-file regression test`. Scratch probe at laneCUREPORC-tree @d0c1a777e: `TUPLE {\"files\":2497,\"parked\":370,\"credited\":2127,\"titles\":22491,\"suiteTitles\":6078}` (UNMOVED, as predicted). At 4233031ba: lighting walker `parsePorcelainPaths(` occurrences = 2 (definition + the one call site) — NO canned-record battery; `git ls-tree -r --name-only 4233031ba | grep -i porcelain` → empty (no shared module); capsule copy still a second copy (4 mentions). Ledger/FRQ grep 'canned-record' hits only §883.1 prose and FRQ:2124.",
+      "verdict": "AMEND",
+      "confidence": "CONFIRMED",
+      "note": "The call holds; the amendment is that the stratum should state the battery it enabled has NOT been built through §891 and the fold of the two parsePorcelainPaths copies is likewise unbuilt, with no docket row beyond receipt prose — a deferral that is recorded only in a receipt decays into a dropped thread."
+    },
+    {
+      "row": "§883.4 CURE-PORCELAIN (HIGH — the base-state-capsule handover)",
+      "call": "scripts/base-state-capsule.mjs:431-434 is ONE .trim() from the identical bug, correct only because shellOut returns untrimmed (unstated), ZERO coverage (unexported; four injections). RULED: cured as its own prevention car, NOT riding the INSTR consist. CURE-CAPSULE cured it (invariant explicit, D1–D7 driving the real parser).",
+      "claim": "Handover accurate at 7f974e855; cure real at c422ee824.",
+      "method": "git show 7f974e855 for the capsule (:123-131 shellOut, :431-434 parser, exports) and the battery's injection sites; full diff of c422ee824; executed the battery single-file at laneCURECAP-tree @62be253f3 (blob-identical to c422ee824 on both files — `git diff --stat c422ee824 62be253f3 -- <2 files>` empty).",
+      "evidence": "7f974e855 base-state-capsule.mjs :125 execFileSync(...) returned UNTRIMMED; :431-434 `porcelain.split('\\n').map((line) => line.slice(3).trim()).filter(Boolean).filter((path) => DIRTY_SCOPES.some((scope) => path === scope || path.startsWith(scope)))` — unexported (only :450 `(options.dirtyMeasuredPaths ?? dirtyMeasuredPaths)()`); injections :273,:275,:277,:288. c422ee824: `export function parsePorcelainPaths(row, raw)` with `if (line.length < 4 || line[2] !== ' ') { fail(row, …`; `export function dirtyMeasuredPaths(shell = shellOut)`; shellOut docblock `IT RETURNS STDOUT **UNTRIMMED**, AND THAT IS A CONTRACT`; D1–D7 present. My run: `Tests 9 passed (9)` TRUE_EXIT=0, porcelain [] before/after.",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "The prefix allowlist at :434 is what makes the mangled path DROP rather than refuse — verified by reading; the false-CLEAN direction is real."
+    },
+    {
+      "row": "§883.4 CURE-PORCELAIN (MEDIUM — call (1) re-cut)",
+      "call": "Dock cut at 7f974e855 not the brief's 9a0584f0f (28 commits stale), proven by merge-base --is-ancestor and an EMPTY diff --stat on the target file.",
+      "claim": "Re-cut cost nothing; predictions answer to the live tip.",
+      "method": "git rev-list --count; merge-base --is-ancestor; git diff --stat across the gap on the file.",
+      "evidence": "`git rev-list --count 9a0584f0f..7f974e855` → 28; `merge-base --is-ancestor 9a0584f0f 7f974e855` → ANCESTOR=yes; `git diff --stat 9a0584f0f 7f974e855 -- tests/lint/sovereigntyLightingContract.walker.test.js` → (empty). d0c1a777e parent = 7f974e8555c8… (`git show --format=%P`).",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "Whether a lane may re-cut its own dock mid-dispatch: the receipt recorded it vetoably in §0 and §6 J-1; the chair ratified; nothing to reverse."
+    },
+    {
+      "row": "§883.4 CURE-PORCELAIN (chair ordering ruling)",
+      "call": "The cure car rides the HORIZON-INSTR consist AHEAD of that consist's own lighting refreeze.",
+      "claim": "Executed as ruled.",
+      "method": "git log --reverse 7f974e855..f5a6c3bbf; read the refreeze commit's message.",
+      "evidence": "Pick 1 of 23 = `20f089aaa CURE-PORCELAIN (1/1): the lighting refreeze stops refusing the one path it exists to permit`; pick 22 = `d124eae45 INSTR-land register 1/2: the lighting census refrozen at 2503/370/2133/22665/6099 — and the repaired refreezer proves itself on the tree it was cured for`. d124eae45 body: `The refreeze was run a SECOND time with the register dirty-unstaged and FIRST in porcelain ... It REFROZE cleanly ... zero occurrences of the cured defect's signature \"Dirty: ests/lint/\"`. d0c1a777e itself is not an ancestor of f5a6c3bbf (cherry-picked, blob carried).",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "This live P1b at the landing is the strongest receipt for the whole row and the stratum does not cite it."
+    },
+    {
+      "row": "§883.4 CURE-PORCELAIN (chair ruling — capsule car does NOT ride the INSTR consist)",
+      "call": "A prevention car for a landing gate should not first appear inside the landing it protects.",
+      "claim": "Executed: CURE-CAPSULE is absent from 7f974e855..f5a6c3bbf and landed at §885.",
+      "method": "git log over both ranges; merge-base checks; blob diff.",
+      "evidence": "No CURE-CAPSULE commit among the 23 in 7f974e855..f5a6c3bbf; `9feb645f8 in f5a6c3bbf: no`, `9feb645f8 in 2d5112851: yes`; `git log --reverse f5a6c3bbf..2d5112851` → pick 1 of 6 = `9feb645f8 CURE-CAPSULE (1/1)…`, pick 4 = `d4b91b26a §885 register 1/2: the lighting census refrozen`; `git diff --stat c422ee824 9feb645f8 -- <2 files>` → empty. Ledger §885: `the prevention car — the landing gate's parser permitted where it should refuse ... its control drove BOTH real parsers over identical bytes and reproduced the false CLEAN at this base, 6/6 verdicts`.",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "Consistent with the ordering law too: the capsule car rode ahead of §885's own refreeze."
+    },
+    {
+      "row": "§883.4 CURE-PORCELAIN (LOW — plant P0–P3, registers, the one red)",
+      "call": "P0 34 passed · P1b refreezes · P2a/P2b refuse and name in full · P3 reds loudly; lighting UNMOVED twice; ratchet 30788/2445 UNMOVED (34 tests before/after); OSR UNMOVED; 4 voiceMechanics reds = 4 of 10 banked entries; no STOP.",
+      "claim": "Registers and plant as stated.",
+      "method": "Static title count at both shas; scratch lighting probe at the dock; parsed scripts/.test-ratchet-baseline.json at 7f974e855; canned probe for P2b/P3.",
+      "evidence": "`7f974e855 it/test:34` · `d0c1a777e it/test:34`; scratch probe tuple at d0c1a777e dock 2497/370/2127/22491/6078; ratchet baseline `entries 10 · voiceMechanics 4 · sovereigntyLighting 0`, totalTests 30788 totalFiles 2445 measuredAtSha e06ea94d1; probe P2b/P3 outputs quoted in HIGH 1/2 rows. Receipt §3 P0 `P0_TRUE_EXIT=0 · Tests 34 passed (34)`; §4 base-dock reproduction of the four voiceMechanics magnitudes (`1108 … 670`, `40 … 6`).",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "OSR 1993/1409/388 UNMOVED and the throwaway base-dock attribution are PLAUSIBLE from the receipt only; settling commands: `node scripts/check-observed-shape-readers.mjs` in laneCUREPORC-tree, and the vanished base dock cannot be re-inspected (J-6)."
+    },
+    {
+      "row": "§883.4 CURE-PORCELAIN (LOW — J-3/J-4, census 12 sites)",
+      "call": "Per-path .trim() DROPPED (false-CLEAN risk); -z reader REJECTED for this car; census 12 sites = 1 cured / 1 handover / 10 not-affected.",
+      "claim": "Dispositions sound; arithmetic closes.",
+      "method": "Read receipt §5 table; read implementation-session.mjs at 7f974e855 (the GOLD site).",
+      "evidence": "implementation-session.mjs :157-158 `'status', '--porcelain=v1', '-z', '--untracked-files=all'` with `parseStatus(rawStatus, …)`; receipt §5 rows: lighting (CURED), implementation-session (CORRECT/model), base-state-capsule (HANDOVER), realm-scale/releaseEvidenceCore/worktree-inventory/track-voice/ratchet-inventory/mutation-sweep (6 NOT AFFECTED), three NOT APPLICABLE (livedExperienceSources:800, chronicle.test:114, news-voice-contract:114) ⇒ 1+1+1+6+3 = 12; 1+6+3 = 10 dispositioned.",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "J-3's reasoning (a whitespace-only difference must never compare EQUAL to the register path) is the conservative direction; ratified."
+    },
+    {
+      "row": "§883.5 INSTR-WRW Car 4 (HIGH — clause S INVERTS for generation-dial)",
+      "call": "Clause W owns 'is it written' with `identity ∈ dialGated` for generation-dial; D-dial keeps only `dial !== lit`; clause S inverts (absence = dormancy; presence convicts as BANK THE WIN if LIT else 'the dial has ROLLED'); compareDark needed the same awareness.",
+      "claim": "Built as ruled at e2967f2a1.",
+      "method": "Read scripts/lib/writer-dark-register.mjs :312-470 and the compareDark diff in scripts/check-writer-reach.mjs at e2967f2a1; executed the walker single-file in laneINSTRWRW-tree @e2967f2a1.",
+      "evidence": "register :332 `const isDialRow = row.reason === 'dark-by-construction' && row.door.kind === 'generation-dial';` :361-370 `if (!dialGated) fail('W', '…An absent measurement is not an acquittal.'); if (!dialGated.has(row.identity)) fail('W', …BIT claim…)`; :389 `if (dial === lit) fail('D-dial', …already EQUALS…)`; :438-456 `if (isDialRow) { if (live && live.verdict === 'LIT') fail('S', …BANK THE WIN…); if (live) fail('S', 'the dial has ROLLED…'); } else { if (!live) fail('S', …); if (live.verdict !== 'DARK') fail('S', …) }`. compareDark filter: `isDialRow(row) ? liveJudged.has(row.identity) : !liveDark.has(row.identity)`. My run: `Tests 56 passed (56)` TRUE_EXIT=0, porcelain [] before/after.",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "The 'first live --report reported both dial rows as STRUCK' narrative is PLAUSIBLE (commit message + receipt §11.2; no log file names it). Small gap flagged under beyond: compareDark's 'ROLLED' (presence) direction has no plant — the walker asserts only `compareDark(liveView, baseline).struck` toEqual([]) (:896)."
+    },
+    {
+      "row": "§883.5 INSTR-WRW Car 4 (HIGH — the three plants)",
+      "call": "(a) one-bit narrowness plant (identical dial row, not in dialGated → convicts at W; admitted → passes); (b) reason-scoping (engine-internal and pending-surface rows with an invisible assignment still convict at W); (c) absent measurement is not an acquittal (dial row with no set convicts; measure() builds the corpora).",
+      "claim": "All three exist and pass.",
+      "method": "Read walker :809-908 at e2967f2a1; ran the walker (56/56).",
+      "evidence": "(a) walker :809 `test('THE WIDENING IS NARROW: a generation-dial identity that is NOT dial-gated still convicts at clause W'` → `toContain('not in the measured dialGated set')`; admitted via `new Set([...live.dialGated, notGated.identity])` → writeProof `dialGated membership (executed…)`. (b) :848 `test('THE WIDENING IS REASON-SCOPED: an engine-internal row … still convicts at clause W'` + pending-surface twin :862-870. (c) :899 `test('a generation-dial row with NO measured dialGated set convicts — an absent measurement is not an acquittal'` … `expect(live.dialGated.size).toBe(31)`; measure(): `if (withDialCorpus) { … buildLitDialCorpus … rollDials: false … dialGated = dialGatedOf(…)`.",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "'Absent measurement is not an acquittal' is enforced at the one clause that admits the reason (W); D-dial and S both run after W, so no dial row can reach them without a measured set."
+    },
+    {
+      "row": "§883.5 INSTR-WRW Car 4 (MEDIUM — positional-index defect)",
+      "call": "The structural-law test indexed WRITER_DARK_REGISTER[0], which CHANGED REASON when the dial rows landed; it now NAMES its row.",
+      "claim": "A real false-green shape, found and cured inside Car 4.",
+      "method": "grep at the Car 3 tip and Car 4; read the lane's first Car 4 walker log.",
+      "evidence": "355ff603b walker :733 `const row = WRITER_DARK_REGISTER[0];` — register[0].reason `engine-internal` at 355ff603b (:81) vs `dark-by-construction` at e2967f2a1 (:85). walker-car4.log: `FAIL … the structural law refuses a malformed, duplicated, wrong-reason, or foreign-field row — AssertionError: expected [Function] to throw error matching /at least 80 characters/ but got 'writer dark register row \"customContentRoster on settlement\" (dark-by-construction) has noncanonical fields…'` (`1 failed | 55 passed (56)`); walker-car4b.log `56 passed (56)`. Cure :749-755 `WRITER_DARK_REGISTER.find((entry) => entry.identity === 'cultureProfileKey on config') … expect(row.reason).toBe('engine-internal');`.",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "The lane's own first-run log is the primary receipt for this finding; the receipt narrates it without quoting the log."
+    },
+    {
+      "row": "§883.5 INSTR-WRW Car 4 (MEDIUM — the owed direction, 29 of 31; chair: a TRIAGE act)",
+      "call": "Every dialGated identity carrying a row is owed for 29 of 31; the frozen exact roster guards them; the reverse direction is live. RULED a triage act for the review-phase sibling, not a clause change.",
+      "claim": "Counts correct; reverse direction enforced.",
+      "method": "Counted generation-dial rows in the register; read FROZEN_DIAL_GATED and its arm; read clause W.",
+      "evidence": "`grep -c \"kind: 'generation-dial'\"` on the register → 2; walker :91 `const FROZEN_DIAL_GATED = Object.freeze([` with 31 entries (counted), :1201-1204 `expect([...gated].sort()).toEqual([...FROZEN_DIAL_GATED]); expect(FROZEN_DIAL_GATED.length).toBe(31);` :907 `expect(live.dialGated.size).toBe(31)`; :786 dial-row list `toEqual(['customContentRoster on settlement', 'densityRungRole on npcs'])`; reverse direction = clause W :366 `if (!dialGated.has(row.identity)) fail('W', …)` plus :796 `expect(live.dialGated.has(row.identity)…).toBe(true)`. 31 − 2 = 29.",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "The probes dir's frozen-dialgated.txt is the stale 34-entry (pack-control-only) roster, not the committed 31 — a stale artifact, harmless to the tree but misleading to a reader (see beyond)."
+    },
+    {
+      "row": "§883.5 INSTR-WRW Car 4 (LOW — predicted→measured, baseline refreeze, gate, landing arithmetic)",
+      "call": "Lighting 2496/370/2126/22493/6075 EXACT; baseline refreeze three lines with cohort/population/ceiling unmoved; whole gate 6 red = 5 base + lighting, 1,913 = 1,908 + 5; consist deltas +1/+0/+1/+56/+6 ⇒ 2498/370/2128/22547/6084 and 30844/2446; dock NOT re-based (4 cars over C′).",
+      "claim": "Figures reproduce.",
+      "method": "Scratch-built lighting probe at the WRW dock (walker's own measureCensus, ROOT re-pointed); diff of the baseline; static title counts per car; lane's whole-lint log; git log.",
+      "evidence": "Scratch probe at laneINSTRWRW-tree @e2967f2a1: `TUPLE {\"files\":2496,\"parked\":370,\"credited\":2126,\"titles\":22493,\"suiteTitles\":6075}` — EXACT. Baseline diff: only frozenAtSha, detectorDigest, registerDigest. test(/describe( counts: 6dcdb0784 39/5 · b2d4e961e 45/5 · 355ff603b 51/6 · e2967f2a1 56/6. lint-whole-car4tip.log: 6 FAILs = clampPrimitiveBaseline, lighting CENSUS, warCostKindPools ×3, warRulingKindPools; `Tests 6 failed | 1907 passed (1913)`. 4 commits over 9a0584f0f. Arithmetic: 22437+56=22493; 22491+56=22547; 6078+6=6084; 30788+56=30844; 2445+1=2446. d124eae45 used INSTR-WRW `+1/+0/+1/+56/+6` and landed exact.",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "typecheck 173/1121 and eslint 0 are PLAUSIBLE (receipt only); settling commands in the dock: `node scripts/check-full-typecheck.mjs`, `node scripts/check-domain-strict.mjs`, `npx eslint <five files>`. The whole-gate figure is CONFIRMED from the lane's log, not re-run."
+    },
+    {
+      "row": "§883.5 INSTR-WRW Car 4 (wording)",
+      "call": "Stratum: 'Receipt $SP/laneINSTRWRW-receipt.md, nine rows at §6 plus Car 4's.'",
+      "claim": "There is a Car 4 §879-form row.",
+      "method": "grep the receipt for R10/Car 4 rows.",
+      "evidence": "Receipt §6 holds R1–R9 only; §12 says `Nine rows at §6 remain as written; R5 is now DISCHARGED BY RULING AND BUILT`; no R10 and no Car 4 row exists — Car 4's calls (clause design, the three plants, the positional-index cure) are narrated in §11.1–11.3 without a numbered row.",
+      "verdict": "AMEND",
+      "confidence": "CONFIRMED",
+      "note": "Change 'plus Car 4's' to 'Car 4's calls are narrated in §11, not rowed' — a returning seat looking for a tenth row will not find one."
+    },
+    {
+      "row": "§883.6 CURE-CAPSULE (HIGH — the false-CLEAN direction)",
+      "call": "The hazard fails the OTHER way: DIRTY_SCOPES is a prefix allowlist, so a mangled path is DROPPED and the generator stamps BASE_STATE.json at HEAD over an unmeasured tree.",
+      "claim": "Mechanism correct at 7f974e855; now reds loudly.",
+      "method": "Read the pre-cure consumer; read D4 in the committed battery; ran the battery.",
+      "evidence": "7f974e855 :434 `.filter((path) => DIRTY_SCOPES.some((scope) => path === scope || path.startsWith(scope)))` — ` M scripts/x` trimmed → `M scripts/x` → slice(3) `ripts/x` matches no scope → dropped → `dirty.length` 0 → main proceeds (:450-452). Committed D4: `expect(() => scoped(records.trim())).toThrow(/dirty-tree: this is not a `git status --porcelain` record: \"M scripts\\/base-state-capsule\\.mjs\"/)`. Receipt §1 H2 pre-cure `OUTCOME=PERMITTED MESSAGE=HARNESS-READALL-REACHED` vs H1 `OUTCOME=REFUSED`; §5b at the tip H2 `REFUSED — dirty-tree: this is not a git status --porcelain record`. My run at the blob-identical rebased tip: `Tests 9 passed (9)`.",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "The five-arm pre-cure execution is the lane's (PLAUSIBLE as to its run), but the mechanism is fully derivable from the code and the committed D4 case encodes it."
+    },
+    {
+      "row": "§883.6 CURE-CAPSULE (HIGH — the consumer law's generality)",
+      "call": "THE CONSUMER DECIDES WHETHER A MIS-SLICE SHOUTS OR LIES: prefix-allowlist hides, equality-test shouts; grep the consumers, not just the parsers. Fable: does it hold at the three newly named safe MODELS?",
+      "claim": "A general law.",
+      "method": "Read the two consumers (lighting :718 `path !== CENSUS_BASELINE_REL`; capsule :434 allowlist) and the three models at 7f974e855.",
+      "evidence": "Lighting consumer is an EXCLUSION filter (`.filter((path) => path !== CENSUS_BASELINE_REL)`): a mangled record stays in `dirty` → refusal (shouts). Capsule consumer is an INCLUSION allowlist → mangled record dropped (lies). Models: worktree-inventory.mjs :37-39 `if (line.startsWith('worktree ')) { … path: line.slice('worktree '.length)` (slices by a prefix it just proved); premortem.mjs :104-105 `const parts = line.split('\\t'); const code = parts[0];` (separator-based); :121-122 `if (line.startsWith('+++ ')) { const p = line.slice(4)` (prefix-proved). All three are PARSER-side immunities: no mis-slice is possible, so the consumer's disposition never comes into play.",
+      "verdict": "AMEND",
+      "confidence": "CONFIRMED",
+      "note": "The law holds for the two live sites and generalises, but its precise form is the consumer's DEFAULT for an unrecognised record — fail-closed (exclusion/equality: unknown stays dirty) shouts, fail-open (inclusion/allowlist: unknown is not mine) lies. An allowlist consumer that refuses on any unmatched record would shout too, so 'prefix-allowlist vs equality-test' is the instance, not the law. At the three models the distinction is NOT exercised (they cannot mis-slice); the stratum should say they are parser-side models, not evidence for the consumer law."
+    },
+    {
+      "row": "§883.6 CURE-CAPSULE (MEDIUM — J-1 zero-register shape)",
+      "call": "Coverage EXTENDS an existing arm; the car moves ZERO registers; shape A priced at +2 titles (22491→22493), one refreeze stamped at a base no landing uses, one commit; standing form: a HELD car pays no register it can pay later.",
+      "claim": "Zero movement; veto priced exactly.",
+      "method": "Diff of c422ee824 (no new it()/describe()/file); battery run; landing position at §885.",
+      "evidence": "`git show --stat c422ee824` → 2 files, +141/−5, 0 created; test diff adds only the import line, a retitle, and D1–D7 inside the existing `it('reads porcelain by its column law, and throws naming the row …')`; my run `Tests 9 passed (9)` (9 before per receipt §3). Landed at §885 as pick 1 of 6 BEFORE `d4b91b26a §885 register 1/2: the lighting census refrozen` — the register was paid at the landing, as the standing form says. Receipt §2 names the two split-out arms.",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "The lighting tuple at the CURECAP dock cannot be re-probed against 2497/… because the dock now sits on the rebased base f5a6c3bbf; zero movement is established by construction (no title, no file, no describe) and by the receipt's walker green (34 passed)."
+    },
+    {
+      "row": "§883.6 CURE-CAPSULE (MEDIUM — J-2 ratchet not executed, PLAUSIBLE flagged)",
+      "call": "Test ratchet 30788/2445 predicted unmoved and NOT executed (no collect-only mode; would seize an exclusive slot from three live lanes); four executed components; owed at boarding.",
+      "claim": "The label is honest and the components hold.",
+      "method": "Read check-test-ratchet.mjs :1117-1122 at 7f974e855; parsed the baseline entries; title count; ledger §885.",
+      "evidence": "`const floor = Math.floor((baseline.totalTests || 0) * SCOPE_FLOOR_RATIO); if (baseline.totalTests && rows.length < floor) { scopeFailures.push('total test count collapsed…')` — count arm reds only on COLLAPSE. Baseline entries: 10, `baseStateCapsule` 0. Battery 9 → 9 (my run). Ledger §885: `GATE GREEN in 1,214 s … ratchet 10 known of 30,973 tests against a ceiling of 10` — the owed run was paid at boarding.",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "A PLAUSIBLE flagged and priced, later discharged by the landing gate; nothing to amend."
+    },
+    {
+      "row": "§883.6 CURE-CAPSULE (LOW — negative control, restore sha, second copy, retitle)",
+      "call": "Negative control `Tests 1 failed | 8 passed (9)` TRUE_EXIT=1, restored sha-identical 1ee9fb67…; parser is a KNOWING second copy (d0c1a777e is a child of 7f974e855, not in this tree); an existing arm's title text changed, ratchet-safe.",
+      "claim": "As stated.",
+      "method": "sha256 of the committed blob; ancestry; ratchet entries; grep at 4233031ba.",
+      "evidence": "`git show c422ee824:scripts/base-state-capsule.mjs | shasum -a 256` → 1ee9fb67fd3095b540667508e1fbaf21c538a7b8b65a255c20c874c3d3671438 (matches the receipt). d0c1a777e parent 7f974e855 and `d0c1_ANCESTOR=no` for the INSTR tip — never in the CURECAP dock's tree. Ratchet baseline: 10 entries, none names baseStateCapsule. Both copies still present at 4233031ba (capsule 4 mentions, lighting 3), no scripts/lib fold.",
+      "verdict": "RATIFY",
+      "confidence": "CONFIRMED",
+      "note": "The negative-control run itself is PLAUSIBLE (receipt quote); settling command: copy the file to scratch, delete the assertion, run the battery against the copy. The fold of the two copies remains owed (beyond)."
+    },
+    {
+      "row": "§883.6 CURE-CAPSULE (LOW — second census 4,852 files / 17 sites)",
+      "call": "Second census widened to three questions over 4,852 files; 17 sites; no new affected site; three safe MODELS named.",
+      "claim": "Denominator reproducible.",
+      "method": "Recounted the receipt §5 table.",
+      "evidence": "Table rows: capsule (cured), lighting (live-not-ours), implementation-session (GOLD), worktree-inventory, premortem ×2 (3 models), the `git ls-files` class row labelled `NEW class (5)` listing 4 files / 5 locations, realm-scale, track-voice, releaseEvidenceCore, `ratchet-inventory.sh:142 · mutation-sweep.sh` (one row, two scripts), implementationSession.test, mutationCoverageManifest, advanceEpochStampSurvival. 17 = 1+1+1+3+11 only if the ls-files class counts as 4 and the two shell scripts as 1; counting the class as its stated 5 gives 18.",
+      "verdict": "AMEND",
+      "confidence": "CONFIRMED",
+      "note": "Substance unaffected (no affected site either way); the figure '17 sites' should be stated with its counting convention or corrected to 18. The 4,852-file count is receipt-only (PLAUSIBLE)."
+    },
+    {
+      "row": "§883.6 CURE-CAPSULE (dock identity)",
+      "call": "Stratum: car `c422ee824` in dock `$SP/laneCURECAP-tree`.",
+      "claim": "The dock is at the car.",
+      "method": "git rev-parse HEAD in the dock; seals; blob diff.",
+      "evidence": "laneCURECAP-tree HEAD = 62be253f3278cf88cfd3656d39e8f9e2357e59bf, parent f5a6c3bbf, trailer `Opus 5 — Fable-unvalidated` (the §884.4 rebase); seals `refs/preserve/curecapsule-2026-09-02` → c422ee824 and `curecapsule-rebased-2026-09-02` → 62be253f3; `git diff --stat c422ee824 62be253f3 -- scripts/base-state-capsule.mjs tests/scripts/baseStateCapsule.test.js` → empty (blob-identical car).",
+      "verdict": "AMEND",
+      "confidence": "CONFIRMED",
+      "note": "Not a chair error at §883.6's time (the rebase is §884.4's act) but the stratum's dock pointer is now stale; a returning seat should read c422ee824 via the seal, not via the dock."
+    }
+  ],
+  "beyond": [
+    "OPEN DEFERRAL NOT DOCKETED: CURE-PORCELAIN's priced handover row 2 (the canned-record battery over the lighting walker's pure parsePorcelainPaths) and the fold of the two same-named copies into one scripts/lib module are BOTH still unbuilt at the §891 train tip 4233031ba (lighting walker: definition + one call site only; `git ls-tree 4233031ba | grep -i porcelain` empty; capsule copy still separate). The only records are receipt prose and the §883.1 ledger sentence; no docket/queue row exists, so the deferral is decaying toward a dropped thread. Recommend one open row naming both.",
+    "UNPLANTED DIRECTION: compareDark's reason-aware fix (check-writer-reach.mjs) has its PRESENCE direction (`dialRolled: true` → 'THE DIAL HAS ROLLED') unplanted; the walker asserts only `compareDark(liveView, baseline).struck` toEqual([]) at :896 (absent direction). The register's clause-S rolled direction IS planted (:880-889). The 'what is a dial row' predicate is also spelled twice (register :332 and compareDark `row.door?.kind`), a two-copy drift risk.",
+    "STRONGEST RECEIPT NOT CITED: the §884 landing commit d124eae45 executed CURE-PORCELAIN's P1b on the real landing tree (second refreeze with the register dirty-unstaged and first → REFROZE; register blob a4a905bf… identical across both runs; zero 'Dirty: ests/lint/'). The stratum's §883.4 should point at it as the closing receipt for the repeatability promise.",
+    "PRIMARY LOG FOR THE POSITIONAL-INDEX DEFECT: laneINSTRWRW-probes/walker-car4.log records the first Car 4 run failing exactly at the structural-law arm (`customContentRoster on settlement … noncanonical fields`, 1 failed | 55 passed), walker-car4b.log the cured 56/56. The receipt narrates the defect without quoting this log.",
+    "STALE ARTIFACT: laneINSTRWRW-probes/frozen-dialgated.txt holds the 34-entry pack-control-only roster (includes 'description on factions', 'name on traditions', 'severity on stressors'), while the committed FROZEN_DIAL_GATED is 31. A successor reading the probes dir would take the wrong roster.",
+    "CONSISTENT LANDINGS: both cure cars landed in the shapes the chair ruled — 20f089aaa (CURE-PORCELAIN) is pick 1 of 23 in HORIZON-INSTR ahead of the refreeze at pick 22; 9feb645f8 (CURE-CAPSULE) is pick 1 of 6 in §885 ahead of that landing's refreeze at pick 4, blob-identical to c422ee824; the §885 ledger records the capsule's control reproducing the false CLEAN at that base 6/6."
+  ],
+  "chair_errors": [
+    "§883.5 stratum text: 'nine rows at §6 plus Car 4's' — the receipt has R1–R9 only; Car 4 has no §879-form row (its calls live in §11 prose). Minor misstatement.",
+    "§883.6 stratum carries the lane's '17 sites' denominator, which is not reproducible from the receipt's own table without an unstated counting convention (the ls-files class row says '(5)' but must be counted as 4; the two shell scripts as one row). Minor; substance unaffected."
+  ],
+  "commands": [
+    "git -C REPO rev-parse HEAD / status --porcelain on laneCUREPORC-tree, laneCURECAP-tree, laneINSTRWRW-tree (before and after every run)",
+    "git -C REPO show 7f974e855:tests/lint/sovereigntyLightingContract.walker.test.js | sed -n '615,665p'; git show d0c1a777e:<same> | sed -n '618,680p;712,745p' and grep gitOut(/gitRaw(",
+    "git -C REPO show 7f974e855:scripts/base-state-capsule.mjs | sed -n '118,128p;425,440p' and grep export/dirtyMeasuredPaths; git show 7f974e855:tests/scripts/baseStateCapsule.test.js | grep -n dirtyMeasuredPaths",
+    "git -C REPO show --stat --format='%H%nparent %P%n%(trailers:key=Seat,valueonly)' c422ee824 / 62be253f3 / d0c1a777e / e2967f2a1; git show c422ee824 -- scripts/base-state-capsule.mjs tests/scripts/baseStateCapsule.test.js",
+    "git -C REPO rev-list --count 9a0584f0f..7f974e855; merge-base --is-ancestor 9a0584f0f 7f974e855; diff --stat 9a0584f0f 7f974e855 -- tests/lint/sovereigntyLightingContract.walker.test.js; diff --stat c422ee824 62be253f3 -- <2 files>; diff --stat c422ee824 9feb645f8 -- <2 files>",
+    "git -C REPO log --oneline --reverse 7f974e855..f5a6c3bbf; log --oneline --reverse f5a6c3bbf..2d5112851; merge-base --is-ancestor 9feb645f8 {f5a6c3bbf,2d5112851,d1a6c773e}; merge-base --is-ancestor d0c1a777e f5a6c3bbf; show -s --format=%B d124eae45",
+    "git -C REPO show e2967f2a1:scripts/lib/writer-dark-register.mjs | sed -n '296,470p'; show e2967f2a1:tests/lint/writerReach.walker.test.js | sed -n '590,660p;745,760p;786,910p;1140,1205p'; show e2967f2a1 -- scripts/check-writer-reach.mjs scripts/.writer-reach-baseline.json; show 355ff603b:tests/lint/writerReach.walker.test.js | grep -n 'WRITER_DARK_REGISTER\\[0\\]'; grep -c \"kind: 'generation-dial'\" on the register; test(/describe( counts at 6dcdb0784 b2d4e961e 355ff603b e2967f2a1 and 7f974e855 d0c1a777e",
+    "node -e (scratch) parse of scripts/.test-ratchet-baseline.json @7f974e855: entries=10, voiceMechanics=4, baseStateCapsule=0, sovereigntyLighting=0",
+    "git -C REPO for-each-ref refs/preserve | grep 2026-09-0; sed -n '32364p;32366p;32367p;32368p;32369p;32381p' docs/OWNER_DECISION_QUEUE.md; grep -n 'canned-record' on the ledger and FRQ; git show 7f974e855:scripts/check-test-ratchet.mjs | sed -n '1110,1130p'; show 7f974e855:{scripts/ops/worktree-inventory.mjs:30-52, scripts/premortem.mjs:98-126, scripts/implementation-session.mjs:150-165,200-210}",
+    "git -C REPO show <sha>:scripts/base-state-capsule.mjs | grep -c parsePorcelainPaths and the lighting walker's 'parsePorcelainPaths(' count at f5a6c3bbf 2d5112851 ca651d54b 4233031ba; git ls-tree -r --name-only 4233031ba | grep -i porcelain; git show c422ee824:scripts/base-state-capsule.mjs | shasum -a 256",
+    "node SCRATCH/walk/S10/porcelain-probe.mjs (canned records through the OLD and CURED parsers; scratch only)",
+    "cd laneCURECAP-tree (@62be253f3) && npx vitest run tests/scripts/baseStateCapsule.test.js --maxWorkers=2 → TRUE_EXIT=0, Tests 9 passed (9); porcelain [] before/after",
+    "cd laneINSTRWRW-tree (@e2967f2a1) && npx vitest run tests/lint/writerReach.walker.test.js --maxWorkers=2 → TRUE_EXIT=0, Tests 56 passed (56); porcelain [] before/after",
+    "node SCRATCH/walk/S10/build-lighting-probe.mjs <sha> <dock> <out> then node <out> — a scratch-built copy of the walker's pure region (measureCensus) with ROOT re-pointed at the dock and imports made absolute; writes NOTHING into the dock. Results: e2967f2a1/laneINSTRWRW-tree → 2496/370/2126/22493/6075; d0c1a777e/laneCUREPORC-tree → 2497/370/2127/22491/6078",
+    "Read receipts in full: SP2/laneCUREPORC-receipt.md (365 lines), SP2/laneCURECAP-receipt.md (529), SP2/laneINSTRWRW-receipt.md (590); SP2/CURECAP-REBASE-RECEIPT.md head; SP2/laneINSTRWRW-probes/{walker-car4.log,walker-car4b.log,lint-whole-car4tip.log,frozen-dialgated.txt}; memory file a-line-reader-must-never-travel-through-a-scalar-trimmer.md"
+  ],
+  "porcelain_unchanged": true,
+  "summary": "S10 re-derived 22 calls across §883.4 CURE-PORCELAIN, §883.5 INSTR-WRW Car 4 and §883.6 CURE-CAPSULE. Every HIGH item RATIFIES on primary evidence I executed or read myself: the dirty-UNSTAGED-and-FIRST trigger and the staged/foreign/clean cases reproduced through a canned-record probe of the old vs cured parser; the confined trim and the per-record `line[2] === ' '` assertion read at d0c1a777e; the capsule handover verified at 7f974e855 (prefix allowlist at :434 makes the mangled path DROP — the false-CLEAN direction is real) and its cure executed (9/9 at the blob-identical rebased tip); Car 4's clause-S inversion, the three plants and the positional-index cure read in the register and walker and executed (56/56 at e2967f2a1), with the lane's own first-run log showing the index defect firing; both lighting tuples re-measured exactly (2496/370/2126/22493/6075 and 2497/370/2127/22491/6078) with a scratch-built probe that wrote nothing into either dock; both cure cars landed in the shapes the chair ruled. Five AMENDs, none reversing substance: the deferred canned-record battery and the two-copy fold remain unbuilt through §891 and undocketed; the consumer law should be stated by the consumer's fail-open/fail-closed default (the three 'safe models' are parser-side and do not exercise it); the receipt has no Car 4 row; the '17 sites' denominator needs its counting convention; the CURECAP dock now sits at the rebased 62be253f3, not c422ee824. No REVERSE. All three docks' porcelain unchanged before and after every read and run."
+}

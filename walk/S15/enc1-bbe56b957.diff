@@ -1,0 +1,1722 @@
+commit bbe56b95756ab7c3afa75fd9076a46b095532164
+Author: Fixture <fixture@example.test>
+Date:   Thu Sep 3 00:59:09 2026 -0400
+
+    ENC-1: the chance-meeting leaf is built and proved, and the car STOPS one line short of green on the chooser registry's DEFER ceiling
+    
+    The pure leaf of the chartered ENCOUNTERS wave: the pair census under the envoy
+    family's exact-node law, the one-meeting-per-person select, and the resolution over
+    two charts, two courts and the posture between them. It writes nothing, reads no
+    worldState, names no persisted key and has no importer under src/ — every writer it
+    would feed sits behind an owner row this lane did not touch. Six draw symbols rather
+    than one helper, because the chooser registry holds one disposition per symbol.
+    
+    ⛔ THE CAR DOES NOT LAND. `chooserTotality.walker` requires DEFER_CEILING to move
+    31 -> 35 for the four DEFER rows this leaf mints, and that constant's own message
+    reserves growth to a chair conversation with an ODQ authorization, exactly as
+    IN-1c-a (§85.1) and WF-8a (§350) took one. This lane did not move it: an asserting
+    edit aborts the act. The four rows and their written closes are authored, so the
+    chair act is one line.
+    
+    Measured, not argued: 14 of 15 instruments green at this tip; the leaf's plane
+    projection reproduces npcTraitPlane on all 44 plane-carrying legacy words; six
+    plants convict; the voiceMechanics and enforcement-claims reds are proved
+    PRE-EXISTING against a pristine control dock cut from the same tip.
+    
+    ⛔ NO OWNER ROW ABSORBED. Every tuning value lands draft and unsigned, the register
+    row is declared with status draft and signedAt null, and the seventeen rows of
+    DESIGN_ENCOUNTERS §12 are untouched and unruled.
+    
+    Seat: Opus 5 (lane ENC-1) — Fable-unvalidated
+    Retrovalidation: OWED
+
+diff --git a/src/domain/worldPulse/envoyChanceMeeting.js b/src/domain/worldPulse/envoyChanceMeeting.js
+new file mode 100644
+index 000000000..fbcb8c4af
+--- /dev/null
++++ b/src/domain/worldPulse/envoyChanceMeeting.js
+@@ -0,0 +1,919 @@
++/**
++ * envoyChanceMeeting.js — ENC-1. THE CHANCE-MEETING LEAF.
++ *
++ * A named person away from home (a diplomatic envoy on the errand spine, or a covert
++ * operative wearing a diplomatic face) may, ONCE PER STOP, meet a named notable of the
++ * place he stands in, or another named traveller from a third court standing in the same
++ * place. This leaf is the pure half of that: the candidate census, the one-meeting-per-
++ * person select, and the resolution over two charts, two courts and the posture between
++ * them. It returns a typed receipt; the writers who already own each ledger apply it on
++ * their own ticks, and none of those writers is here.
++ *
++ * ⛔ PURE. No world state, no clock, no store, no PRNG, no mutation. Every draw is a
++ * KEYED HASH over a stable key (`hash01`, the estate's cured root) and never a fork off
++ * the pulse confluence, so no later stream moves: THE PROMISE's own requirement, and the
++ * reason the envoy family draws no PRNG at all.
++ *
++ * ⛔ STATE, NEVER FATE. Nothing this leaf can return kills, marries off, replaces or
++ * concludes a person. The widest outcome it names is `compromised`, and a compromise is a
++ * LEASH the corruption web already mints, never a defection: the owner's word, and the
++ * three fences that make it true by construction are ENC-2's, not this file's.
++ *
++ * ── WHAT THIS FILE DELIBERATELY DOES NOT DO ─────────────────────────────────────
++ *
++ * It writes nothing, reads no `worldState`, and names no persisted key: the two deposit
++ * ledgers, the ladder's mark mint, the web's willed pin, the funnel entry and the Herald
++ * line are ENC-2, ENC-3 and ENC-4, and every one of them sits behind an OWNER ROW that is
++ * unruled at this commit. It also has NO IMPORTER under `src/`: the stage that calls it is
++ * ENC-3. That is the car order (data before consumers), not an oversight.
++ *
++ * ── THE SIX DRAW SYMBOLS, AND WHY THEY ARE SIX RATHER THAN ONE HELPER ───────────
++ *
++ * `tests/lint/chooserTotality.walker.test.js` discovers a weighted decision fork by the
++ * `hash01(` signature and attributes it to the NEAREST PRECEDING TOP-LEVEL DECLARATION,
++ * then asserts that no symbol carries two dispositions. Six arms with six different honest
++ * dispositions therefore need six symbols: routing them through one `eighth()` helper would
++ * collapse six questions into one row and launder four deferrals into whatever the helper
++ * was filed as. The duplication is the instrument's price and it is paid on purpose.
++ *
++ * ── THE ONE KEY LAW ─────────────────────────────────────────────────────────────
++ *
++ * EVERY arm, `pick` included, draws from `${seed}|chance-meeting:${meetingKey}:${arm}`
++ * with the seed threaded in by the caller. A seed-less key would make two campaigns that
++ * happen to share an errand episode meet the same way, and errand ids are deterministic
++ * from the offer, so the exemption the first draft granted the resident pick was the exact
++ * defect the law refuses.
++ *
++ * ── FINITE SEMANTICS ────────────────────────────────────────────────────────────
++ *
++ * Every chance is an integer number of EIGHTHS (0..8) and every roll is an integer 0..7
++ * compared `roll < rung`. Every distance is an integer RUNG count over `positionValue`,
++ * banded into three words. A receipt carries words and integers only: no float reaches
++ * one, and the only numbers on it are drawn eighths, rung counts and the tick.
++ *
++ * ⛔ EVERY VALUE IN `CHANCE_MEETING_TUNING` IS A DRAFT AND UNSIGNED. Tuning is the owner's
++ * and it is LAST (§12 row 7). Nothing here is taste this leaf claims.
++ *
++ * @enforced-by tests/domain/envoyChanceMeeting.test.js
++ */
++import { hash01 } from '../region/contestMath.js';
++import { positionValue } from '../npc/characterDrift.js';
++import { axisPositionForWord, traitColumns, wordForAxisPosition } from '../npc/paradigmAxisCatalog.js';
++
++// ── THE CLOSED VOCABULARIES ───────────────────────────────────────────────────
++// Leaf-local, finite and UNPERSISTED. Four of them are words this design mints
++// (`DISTANCE_BANDS`, `POSTURE_BANDS`, `LEAN_BANDS` and `MEETING_REFUSALS`), which is
++// recorded at §12 row 15: the law is "typed bands, existing where one exists", not
++// "typed bands from existing vocabularies". The persisted words a deposit row would
++// carry are the ladder's and the funnel's own, and they ride OWNER ROWS 1, 2 and 3.
++
++/** The two shapes a chance meeting can take. @type {readonly string[]} */
++export const MEETING_KINDS = Object.freeze(['traveller_resident', 'traveller_traveller']);
++
++/**
++ * The venue words, taken BY VALUE from two members of `ENVOY_ENCOUNTER_VENUE_KINDS`
++ * without importing either of its two homes: a meeting persists no encounter row, so the
++ * twin law that binds the census and the DTO does not reach here, and importing either
++ * home would put this leaf inside a pin it has no business moving.
++ * @type {readonly string[]}
++ */
++export const MEETING_VENUES = Object.freeze(['host_settlement', 'field_node']);
++
++/** Every outcome the resolution can name. @type {readonly string[]} */
++export const MEETING_OUTCOMES = Object.freeze([
++  'nothing', 'bond', 'respect', 'rivalry', 'compromised', 'rejected', 'exposed',
++]);
++
++/** How alike two people read, in three words. @type {readonly string[]} */
++export const DISTANCE_BANDS = Object.freeze(['alike', 'differing', 'opposed']);
++
++/**
++ * The two courts' edge, BANDED. ⚠ This is a banding OF the estate's `relationshipType`,
++ * never a rename of the posture vocabulary `relationshipMemory.js` speaks: that family is
++ * a different grain (`strained_trade`, `protective_alliance`, `escalating_rivalry`) and
++ * nothing here may be mistaken for it.
++ * @type {readonly string[]}
++ */
++export const POSTURE_BANDS = Object.freeze(['friendly', 'neutral', 'hostile']);
++
++/** The mark kinds a receipt can name. `respect` and `rivalry` ride OWNER ROWS 2 and 3 and
++ *  are REFUSED by the consumer until those rows are ruled. @type {readonly string[]} */
++export const MEETING_MARK_KINDS = Object.freeze(['friendship', 'gratitude', 'loyalty', 'respect', 'rivalry']);
++
++/** The two quanta a meeting can teach, the funnel's own words. @type {readonly string[]} */
++export const MEETING_DRIFT_BANDS = Object.freeze(['faint', 'firm']);
++
++/** The lean channel's two rungs before the web mints anything. @type {readonly string[]} */
++export const LEAN_BANDS = Object.freeze(['leaning', 'won_over']);
++
++/** The approach die's two words. @type {readonly string[]} */
++export const APPROACH_WORDS = Object.freeze(['not_made', 'made']);
++
++/**
++ * THE CLOSED REFUSAL VOCABULARY. A refused arm is a RECEIPTED refusal, never a silent
++ * drop, on the funnel's own law: "nothing happened" and "nothing COULD happen here" are
++ * different facts. ⚠ These words live HERE and never in `FUNNEL_REFUSALS`, which is a
++ * closed chartered W-LIVES vocabulary this train has no business widening.
++ * @type {readonly string[]}
++ */
++export const MEETING_REFUSALS = Object.freeze([
++  'no_home_record',
++  'vocabulary_unruled',
++  'drift_dormant',
++  'web_dark',
++  'weave_dark',
++  'ladder_dark',
++  'ineligible_target',
++  'already_taught_this_season',
++]);
++
++/** The six named draw arms, in resolution order. @type {readonly string[]} */
++export const MEETING_ARMS = Object.freeze([
++  'meet', 'pick', 'approach', 'mark', 'compromise', 'exposure',
++]);
++
++/**
++ * THE TUNING REGISTER — every row a DRAFT, `signedBy: null`, on the `FUNNEL_TUNING` idiom.
++ * ⛔ OWNER ROW §12 row 7. Nothing here is signed, and this lane signs nothing: the values
++ * are the design's recommendations carried verbatim so the lit arm can measure numbers
++ * that were written down before the instrument ran.
++ * @type {Readonly<Record<string, unknown>>}
++ */
++export const CHANCE_MEETING_TUNING_PROVENANCE = Object.freeze({
++  status: 'CANDIDATE, OWNER-UNSIGNED (§12 row 7; enrolled in TUNEREG at its landing)',
++  signedBy: null,
++  ownerRows: Object.freeze([
++    'the three base rungs 3 / 4 / 2 and the plus-or-minus-one modifiers',
++    'the approach die: base 2, plus 2 at an at-odds target, plus 1 covert',
++    'the compromise caps 6 and 4, the fast path 7, the arithmetic floor 2',
++    'the mark ladder per distance band and the never-below-two-eighths nothing floor',
++    'the exposure rungs: base 2, covert 2, wariness capped at 2, hostile 1',
++    'the lesson cadence (one season recommended; one year puts every axis strictly inside the clamp)',
++    'the lean TTL of one year, and the leash lapse ticks ENC-2 owes',
++    'the die itself: eight faces, and the alignment no-signal point of one half',
++    'the exposure grievance magnitude, which lives with its writer in ENC-3',
++  ]),
++});
++
++/**
++ * THE VALUES THEMSELVES, every leaf a number so every leaf can carry a unit. The tuning
++ * walker holds units ALL-OR-NONE per table and a status word has no honest unit, so the
++ * provenance above is its own export rather than three unlabelled keys inside this one.
++ * @type {Readonly<Record<string, unknown>>}
++ */
++export const CHANCE_MEETING_TUNING = Object.freeze({
++  /** the die's face count: every chance is an integer number of these */
++  eighths: 8,
++  /** the alignment axes' no-signal point, the estate's own 0.5 */
++  courtNeutralPoint: 0.5,
++  /** base rung of 8 per venue and kind */
++  baseRung: Object.freeze({
++    traveller_resident: Object.freeze({ host_settlement: 3, field_node: 0 }),
++    traveller_traveller: Object.freeze({ host_settlement: 4, field_node: 2 }),
++  }),
++  posturePlus: Object.freeze({ friendly: 1, neutral: 0, hostile: -1 }),
++  covertMeetStep: -1,
++  approachBaseRung: 2,
++  approachAtOddsRung: 4,
++  approachAtOddsStep: 2,
++  approachCovertStep: 1,
++  compromiseFloor: 2,
++  compromiseCapCorruptible: 6,
++  compromiseCapPlain: 4,
++  compromiseFastPath: 7,
++  markLadder: Object.freeze({
++    alike: Object.freeze({ bond: 4, respect: 0, rivalry: 1 }),
++    differing: Object.freeze({ bond: 2, respect: 2, rivalry: 2 }),
++    opposed: Object.freeze({ bond: 0, respect: 2, rivalry: 3 }),
++  }),
++  markPostureStep: 1,
++  markRefusedRivalryStep: 1,
++  nothingFloor: 2,
++  exposureBaseRung: 2,
++  exposureCovertStep: 2,
++  exposureWarinessCap: 2,
++  exposureHostileStep: 1,
++  distanceEdges: Object.freeze({ alike: 3, differing: 8 }),
++  driftAxisCap: 3,
++  driftFirmGap: 4,
++  /** one season, the funnel's own cadence (`INTERVAL_WEEKS.one_season`), RECOMMENDED not signed */
++  lessonCadenceTicks: 13,
++  /** one year; the lean channel's TTL, enforced by ENC-2's ledger leaf */
++  leanTtlTicks: 52,
++});
++
++/** The die. Every chance is an integer number of these; the face count is a REGISTERED
++ *  dial rather than a loose constant, because a die with a different number of faces is a
++ *  different mechanism and the owner should see it named. */
++export const EIGHTHS = CHANCE_MEETING_TUNING.eighths;
++
++
++// ── TOTAL READERS ─────────────────────────────────────────────────────────────
++
++/** @param {unknown} value @returns {Record<string, unknown>} */
++function asObject(value) {
++  return value && typeof value === 'object' && !Array.isArray(value)
++    ? /** @type {Record<string, unknown>} */ (value)
++    : {};
++}
++
++/** @param {unknown} value @returns {unknown[]} */
++function asArray(value) {
++  return Array.isArray(value) ? value : [];
++}
++
++/** @param {unknown} value @returns {string} */
++function text(value) {
++  return typeof value === 'string' ? value.trim() : '';
++}
++
++/** @param {unknown} value @returns {number} */
++function num(value) {
++  return typeof value === 'number' && Number.isFinite(value) ? value : 0;
++}
++
++/** @param {unknown} value @returns {number|null} */
++function wholeTick(value) {
++  return typeof value === 'number' && Number.isFinite(value) && value >= 0
++    ? Math.floor(value)
++    : null;
++}
++
++/** @param {string} a @param {string} b @returns {number} */
++function codepoint(a, b) {
++  return a < b ? -1 : a > b ? 1 : 0;
++}
++
++/** @param {number} value @param {number} low @param {number} high @returns {number} */
++function clampInt(value, low, high) {
++  return Math.max(low, Math.min(high, Math.round(num(value))));
++}
++
++/** Length-prefixed join, the envoy census's own id idiom: no separator can be forged.
++ *  @param {unknown[]} parts @returns {string} */
++function stableParts(parts) {
++  return parts.map((value) => {
++    const part = String(value);
++    return `${part.length}:${part}`;
++  }).join('|');
++}
++
++// ── THE KEY LAW ───────────────────────────────────────────────────────────────
++
++/**
++ * THE ONE KEY EVERY ARM DRAWS FROM. The seed is threaded in by the caller (the stage
++ * reads it through `tickStreamSeedOf`, which is how the ladder keys its own contests and
++ * what carries the advance-epoch suffix onto this stream with every other).
++ * @param {unknown} seed @param {unknown} meetingKey @param {unknown} arm @returns {string}
++ */
++export function meetingRollKey(seed, meetingKey, arm) {
++  return `${text(seed)}|chance-meeting:${text(meetingKey)}:${text(arm)}`;
++}
++
++/** The stable key of a traveller meeting a resident: one per stop, not one per tick.
++ *  @param {{errandId?: unknown, journey?: unknown, nodeId?: unknown}} row @returns {string} */
++export function residentMeetingKey(row) {
++  const it = asObject(row);
++  return stableParts([text(it.errandId), text(it.journey), text(it.nodeId)]);
++}
++
++/** The stable key of two travellers meeting, codepoint-ordered so either order keys alike.
++ *  @param {{a?: unknown, b?: unknown, nodeId?: unknown}} row @returns {string} */
++export function pairMeetingKey(row) {
++  const it = asObject(row);
++  const a = asObject(it.a);
++  const b = asObject(it.b);
++  const one = stableParts([text(a.errandId), text(a.journey)]);
++  const two = stableParts([text(b.errandId), text(b.journey)]);
++  const ordered = codepoint(one, two) <= 0 ? [one, two] : [two, one];
++  return stableParts([...ordered, text(it.nodeId)]);
++}
++
++// ── THE SIX DRAWS ─────────────────────────────────────────────────────────────
++// One symbol per arm, one honest disposition per symbol. See the header.
++
++/** Whether two co-located people notice each other at all. @param {string} seed
++ *  @param {string} meetingKey @returns {number} an integer 0..7 */
++function drawMeet(seed, meetingKey) {
++  return Math.floor(hash01(meetingRollKey(seed, meetingKey, 'meet')) * EIGHTHS);
++}
++
++/** Which of the eligible residents the traveller happens upon. @param {string} seed
++ *  @param {string} meetingKey @returns {number} an integer 0..7 */
++function drawPick(seed, meetingKey) {
++  return Math.floor(hash01(meetingRollKey(seed, meetingKey, 'pick')) * EIGHTHS);
++}
++
++/** Whether an offer is made at all. @param {string} seed
++ *  @param {string} meetingKey @returns {number} an integer 0..7 */
++function drawApproach(seed, meetingKey) {
++  return Math.floor(hash01(meetingRollKey(seed, meetingKey, 'approach')) * EIGHTHS);
++}
++
++/** Which mark, if any, the meeting leaves. @param {string} seed
++ *  @param {string} meetingKey @returns {number} an integer 0..7 */
++function drawMark(seed, meetingKey) {
++  return Math.floor(hash01(meetingRollKey(seed, meetingKey, 'mark')) * EIGHTHS);
++}
++
++/** The target's own will, against the offer. @param {string} seed
++ *  @param {string} meetingKey @returns {number} an integer 0..7 */
++function drawCompromise(seed, meetingKey) {
++  return Math.floor(hash01(meetingRollKey(seed, meetingKey, 'compromise')) * EIGHTHS);
++}
++
++/** Whether a refusal is spoken of. @param {string} seed
++ *  @param {string} meetingKey @returns {number} an integer 0..7 */
++function drawExposure(seed, meetingKey) {
++  return Math.floor(hash01(meetingRollKey(seed, meetingKey, 'exposure')) * EIGHTHS);
++}
++
++// ── THE CHARTS ────────────────────────────────────────────────────────────────
++
++/**
++ * The LEGACY CORE: a flat personality word list read as leveled axis positions. On every
++ * generated world `npc.character` is absent, so this IS the authored chart, and the word
++ * plane is the production read the design names.
++ * @param {unknown} words
++ * @returns {Record<string, {axisId: string, pole: string, level: string, word: string}>}
++ */
++export function legacyCoreAxes(words) {
++  /** @type {Record<string, {axisId: string, pole: string, level: string, word: string}>} */
++  const out = {};
++  for (const raw of asArray(words)) {
++    const position = axisPositionForWord(raw);
++    if (!position) continue;
++    const axisId = text(position.axisId);
++    if (!axisId || out[axisId]) continue;
++    out[axisId] = {
++      axisId,
++      pole: text(position.pole),
++      level: text(position.level),
++      word: text(position.word),
++    };
++  }
++  return out;
++}
++
++/**
++ * Axis positions as signed rungs, −3..3, zero where the chart makes no claim.
++ * @param {unknown} axes @returns {Record<string, number>}
++ */
++export function axisRungs(axes) {
++  /** @type {Record<string, number>} */
++  const out = {};
++  for (const [axisId, position] of Object.entries(asObject(axes))) {
++    const value = positionValue(/** @type {{pole?: 'virtue'|'vice', level?: string}} */ (position));
++    if (value !== 0) out[axisId] = value;
++  }
++  return out;
++}
++
++/**
++ * The conduct plane of a chart, projected through the catalog's own word columns. For an
++ * undrifted, undisclosed person this reproduces `npcTraitPlane`'s numbers exactly, because
++ * `axisPositionForWord` carries the source word and `wordForAxisPosition` returns it
++ * losslessly. That equality is the leaf's control, and it is asserted rather than claimed.
++ * @param {unknown} axes @returns {{e: number, c: number}}
++ */
++export function planeFromAxes(axes) {
++  return planeFromChart(axes, []);
++}
++
++/**
++ * ⭐ THE WHOLE CHART's plane, and the reason it takes the WORDS as well as the axes.
++ * Not every legacy personality word has an axis home: `ambitious` carries a real plane lean
++ * and lives in no axis, so an axis-only projection silently drops it and reads a schemer as
++ * plane-neutral. The design's "equivalently `npcTraitPlane` walked by disclosed axes" is
++ * therefore true only for the axis-homed half, and this function is what makes the whole
++ * sentence true: axis-homed words read through their (possibly disclosed) axis position,
++ * and the homeless ones read through their own columns, which is exactly what the true
++ * plane does with them.
++ * @param {unknown} axes @param {unknown} words @returns {{e: number, c: number}}
++ */
++export function planeFromChart(axes, words) {
++  let e = 0;
++  let c = 0;
++  /** @param {unknown} word */
++  const add = (word) => {
++    const columns = typeof word === 'string' ? traitColumns(word) : null;
++    const lean = columns ? columns.plane : null;
++    if (!lean) return;
++    e += num(lean.e);
++    c += num(lean.c);
++  };
++  for (const [axisId, position] of Object.entries(asObject(axes))) {
++    const at = asObject(position);
++    add(wordForAxisPosition({ axisId, pole: text(at.pole), level: text(at.level), word: text(at.word) }));
++  }
++  for (const raw of asArray(words)) {
++    // A word the axes already speak for is not counted twice.
++    if (axisPositionForWord(raw)) continue;
++    add(text(raw));
++  }
++  return { e: Math.max(-1, Math.min(1, e)), c: Math.max(-1, Math.min(1, c)) };
++}
++
++/**
++ * How different two charts read, as an integer rung sum over the union of the axes either
++ * one speaks of, banded in three words. Two people who share no axis read two rungs apart
++ * on each, which is the honest reading of strangers with nothing in common.
++ * @param {unknown} axesA @param {unknown} axesB
++ * @returns {{rungs: number, band: string}}
++ */
++export function pairDistance(axesA, axesB) {
++  const one = axisRungs(axesA);
++  const two = axisRungs(axesB);
++  const ids = [...new Set([...Object.keys(one), ...Object.keys(two)])];
++  let rungs = 0;
++  for (const axisId of ids) rungs += Math.abs(num(one[axisId]) - num(two[axisId]));
++  const edges = asObject(CHANCE_MEETING_TUNING.distanceEdges);
++  const band = rungs <= num(edges.alike)
++    ? DISTANCE_BANDS[0]
++    : rungs <= num(edges.differing) ? DISTANCE_BANDS[1] : DISTANCE_BANDS[2];
++  return { rungs, band };
++}
++
++/**
++ * How far a person stands from a court's own character, as a rung 0..8. A person whose
++ * plane matches his town reads 0; the good magistrate of an evil town reads high. A court
++ * with no signal reads 0.5 on both axes, which is no signal rather than a middle claim.
++ * @param {unknown} plane @param {unknown} court @returns {number}
++ */
++export function personCourtRung(plane, court) {
++  const p = asObject(plane);
++  const c = asObject(court);
++  const neutral = num(CHANCE_MEETING_TUNING.courtNeutralPoint);
++  const malice = (num(c.malice01) - neutral) * 2;
++  const lawless = (neutral - num(c.lawfulness01)) * 2;
++  const spread = Math.abs(num(p.e) - malice) + Math.abs(num(p.c) - lawless);
++  return clampInt(Math.min(EIGHTHS, Math.floor(Math.round(4 * spread) / 2)), 0, EIGHTHS);
++}
++
++// ── THE CENSUS ────────────────────────────────────────────────────────────────
++
++/** @param {unknown} raw @param {number} tick @returns {Record<string, unknown>|null} */
++function normalizeTraveller(raw, tick) {
++  const row = asObject(raw);
++  const errandId = text(row.errandId);
++  const nid = text(row.nid || row.npcId);
++  const homeSid = text(row.homeSid);
++  const nodeId = text(row.nodeId);
++  const journey = text(row.journey);
++  const arrivalTick = wholeTick(row.arrivalTick);
++  const nodeKind = text(row.nodeKind) === 'settlement' ? 'settlement' : 'route_node';
++  if (!errandId || !nid || !homeSid || !nodeId || !journey) return null;
++  if (text(row.band) !== 'arrived') return null;
++  if (arrivalTick === null || arrivalTick > tick) return null;
++  if (nodeId === homeSid) return null;
++  return {
++    errandId, nid, homeSid, nodeId, journey, arrivalTick, nodeKind, covert: row.covert === true,
++  };
++}
++
++/** @param {unknown} raw @returns {Record<string, unknown>|null} */
++function normalizeResident(raw) {
++  const row = asObject(raw);
++  const residentNid = text(row.residentNid);
++  if (!residentNid) return null;
++  return { residentNid, index: num(row.index), npc: row.npc ?? null };
++}
++
++/** @param {unknown} source @param {string} nodeId @returns {unknown[]} */
++function residentsOf(source, nodeId) {
++  if (typeof source === 'function') return asArray(source(nodeId));
++  return asArray(asObject(source)[nodeId]);
++}
++
++/**
++ * THE PAIR CENSUS — a SIBLING of the army encounter census, under the same exact-node law,
++ * and never a fourth member of `ENVOY_ENCOUNTER_KINDS`. Rules, in order: a party must be
++ * STANDING (`arrived`), the nodes must be EQUAL, the node must not be the traveller's own
++ * home, and a candidate is emitted only on the tick the LATER party arrived, which is what
++ * makes a dwelling operative roll ONCE per stop with no persisted "met already" mark.
++ * @param {{travellers?: unknown, residentsAt?: unknown, tick?: unknown, seed?: unknown}} [args]
++ * @returns {Record<string, unknown>[]}
++ */
++export function censusChanceMeetingCandidates({ travellers, residentsAt, tick, seed } = {}) {
++  const at = wholeTick(tick);
++  if (at === null) return [];
++  const key = text(seed);
++  /** @type {Record<string, unknown>[]} */
++  const rows = [];
++  for (const raw of asArray(travellers)) {
++    const row = normalizeTraveller(raw, at);
++    if (row) rows.push(row);
++  }
++  rows.sort((a, b) => codepoint(text(a.errandId), text(b.errandId)));
++
++  /** @type {Record<string, unknown>[]} */
++  const candidates = [];
++
++  // Rule 5 — traveller x traveller, at a settlement node or a route node.
++  for (let i = 0; i < rows.length; i += 1) {
++    for (let j = i + 1; j < rows.length; j += 1) {
++      const a = rows[i];
++      const b = rows[j];
++      if (text(a.nodeId) !== text(b.nodeId)) continue;
++      if (text(a.homeSid) === text(b.homeSid)) continue;
++      if (Math.max(num(a.arrivalTick), num(b.arrivalTick)) !== at) continue;
++      const nodeId = text(a.nodeId);
++      const meetingKey = pairMeetingKey({ a, b, nodeId });
++      const venue = text(a.nodeKind) === 'settlement' ? MEETING_VENUES[0] : MEETING_VENUES[1];
++      candidates.push({
++        id: `chance_meeting:${meetingKey}`,
++        meetingKey,
++        kind: 'traveller_traveller',
++        venue,
++        nodeId,
++        tick: at,
++        parties: [travellerParty(a), travellerParty(b)],
++      });
++    }
++  }
++
++  // Rule 4 — traveller x resident, at a settlement node only, ONE picked resident.
++  for (const row of rows) {
++    if (num(row.arrivalTick) !== at) continue;
++    if (text(row.nodeKind) !== 'settlement') continue;
++    const nodeId = text(row.nodeId);
++    /** @type {Record<string, unknown>[]} */
++    const eligible = [];
++    for (const raw of residentsOf(residentsAt, nodeId)) {
++      const resident = normalizeResident(raw);
++      if (resident) eligible.push(resident);
++    }
++    if (eligible.length === 0) continue;
++    eligible.sort((a, b) => codepoint(text(a.residentNid), text(b.residentNid)));
++    const meetingKey = residentMeetingKey({ ...row, nodeId });
++    const pickRoll = drawPick(key, meetingKey);
++    const picked = eligible[pickRoll % eligible.length];
++    candidates.push({
++      id: `chance_meeting:${meetingKey}`,
++      meetingKey,
++      kind: 'traveller_resident',
++      venue: MEETING_VENUES[0],
++      nodeId,
++      tick: at,
++      pickRoll,
++      parties: [travellerParty(row), {
++        nid: text(picked.residentNid), homeSid: nodeId, index: num(picked.index),
++        errandId: '', covert: false, resident: true,
++      }],
++    });
++  }
++  return candidates.sort(candidateOrder);
++}
++
++/** @param {Record<string, unknown>} row @returns {Record<string, unknown>} */
++function travellerParty(row) {
++  return {
++    nid: text(row.nid),
++    homeSid: text(row.homeSid),
++    errandId: text(row.errandId),
++    journey: text(row.journey),
++    covert: row.covert === true,
++    resident: false,
++  };
++}
++
++/** @param {Record<string, unknown>} a @param {Record<string, unknown>} b @returns {number} */
++function candidateOrder(a, b) {
++  const priority = { traveller_traveller: 0, traveller_resident: 1 };
++  const pa = priority[/** @type {'traveller_traveller'|'traveller_resident'} */ (text(a.kind))] ?? 9;
++  const pb = priority[/** @type {'traveller_traveller'|'traveller_resident'} */ (text(b.kind))] ?? 9;
++  const partiesA = asArray(a.parties).map((p) => text(asObject(p).errandId) || text(asObject(p).nid));
++  const partiesB = asArray(b.parties).map((p) => text(asObject(p).errandId) || text(asObject(p).nid));
++  return (pa - pb)
++    || codepoint(partiesA[0] || '', partiesB[0] || '')
++    || codepoint(partiesA[1] || '', partiesB[1] || '')
++    || codepoint(text(a.id), text(b.id));
++}
++
++/** @param {unknown} party @returns {string} */
++function personKey(party) {
++  const it = asObject(party);
++  return `${text(it.homeSid)}|${text(it.nid)}`;
++}
++
++/**
++ * ONE MEETING PER PERSON PER TICK, both parties. Greedy over the census order, so two
++ * foreign notables in one hall (the rarer, more consequential event) take their slot
++ * before a guest and a local do.
++ * @param {{travellers?: unknown, residentsAt?: unknown, tick?: unknown, seed?: unknown}} [args]
++ * @returns {Record<string, unknown>[]}
++ */
++export function selectChanceMeetings(args = {}) {
++  /** @type {Set<string>} */
++  const taken = new Set();
++  /** @type {Record<string, unknown>[]} */
++  const out = [];
++  for (const candidate of censusChanceMeetingCandidates(args)) {
++    const parties = asArray(candidate.parties);
++    const keys = parties.map(personKey);
++    if (keys.some((k) => taken.has(k))) continue;
++    for (const k of keys) taken.add(k);
++    out.push(candidate);
++  }
++  return out;
++}
++
++// ── THE RESOLUTION ────────────────────────────────────────────────────────────
++
++/**
++ * @typedef {Object} MeetingParty
++ * @property {string} nid
++ * @property {string} homeSid
++ * @property {boolean} covert     his errand wears a covert sub-record
++ * @property {boolean} clean      not already corrupt
++ * @property {boolean} corruptible has a flaw the web could pull on
++ * @property {boolean} hasRecord  a standing record exists at his home, or an orphan may be minted
++ * @property {string[]} words     the legacy personality words: the TRUE chart on every generated world
++ * @property {unknown} [known]    the counterpart's KnownReading of him, when the sight seam supplied one
++ * @property {{e: number, c: number}} [truePlane] his conduct plane, TRUE
++ */
++
++/** @param {unknown} raw @returns {Record<string, unknown>} */
++function normalizeParty(raw) {
++  const row = asObject(raw);
++  const words = asArray(row.words).map(text).filter(Boolean);
++  const trueAxes = legacyCoreAxes(words);
++  const knownAxes = asObject(asObject(asObject(row.known).character).axes);
++  return {
++    nid: text(row.nid),
++    homeSid: text(row.homeSid),
++    covert: row.covert === true,
++    clean: row.clean !== false,
++    corruptible: row.corruptible === true,
++    hasRecord: row.hasRecord === true,
++    words,
++    trueAxes,
++    // THE SIGHT LAW: an axis the record never spoke of reads at the AUTHORED CORE, so the
++    // core is the base and whatever was disclosed is the overlay. A sparse reading that
++    // REPLACED the core would make a single disclosure erase a man's whole chart.
++    knownAxes: { ...trueAxes, ...knownAxes },
++    truePlane: row.truePlane ? asObject(row.truePlane) : planeFromChart(trueAxes, words),
++  };
++}
++
++/** The three owner terms of the compromise chance, each an integer rung.
++ *  @param {Record<string, unknown>} target @param {Record<string, unknown>} approacher
++ *  @param {Record<string, unknown>} courts @param {string} band @returns {Record<string, number>} */
++function compromiseTerms(target, approacher, courts, band) {
++  const knownPlane = planeFromChart(target.knownAxes, target.words);
++  // T1 — how different the target is from his OWN court, read on his KNOWN chart:
++  // the approacher decides on his estimate of the man, which is what the sight law protects.
++  const t1 = personCourtRung(knownPlane, asObject(courts)[text(target.homeSid)]);
++  // T2 — how alike the two of them read, by the distance band.
++  const t2 = band === 'alike' ? 6 : band === 'differing' ? 3 : 0;
++  // T3 — how close the PATRON court stands to the target's own plane.
++  const t3 = EIGHTHS - personCourtRung(knownPlane, asObject(courts)[text(approacher.homeSid)]);
++  return { t1, t2, t3 };
++}
++
++/** @param {Record<string, unknown>} target @param {Record<string, number>} terms @returns {number} */
++function compromiseChance(target, terms) {
++  const words = asArray(target.words).map(text);
++  const fastPath = target.corruptible === true && words.includes('ambitious');
++  if (fastPath) return num(CHANCE_MEETING_TUNING.compromiseFastPath);
++  const cap = target.corruptible === true
++    ? num(CHANCE_MEETING_TUNING.compromiseCapCorruptible)
++    : num(CHANCE_MEETING_TUNING.compromiseCapPlain);
++  return Math.min(cap, Math.floor((terms.t1 + terms.t2 + terms.t3) / 3));
++}
++
++/**
++ * The drift vector one subject takes from the other. TRUE for where the subject stands,
++ * KNOWN for what he perceived: you are moved from where you really are, toward what you
++ * saw. At most three axes, the three largest differences, codepoint tiebreak.
++ * @param {Record<string, unknown>} subject @param {Record<string, unknown>} other
++ * @returns {Record<string, string>[]}
++ */
++function driftVector(subject, other) {
++  const mine = axisRungs(subject.trueAxes);
++  const theirs = axisRungs(other.knownAxes);
++  const firmGap = num(CHANCE_MEETING_TUNING.driftFirmGap);
++  /** @type {{axisId: string, pole: string, band: string, gap: number}[]} */
++  const pulls = [];
++  for (const [axisId, value] of Object.entries(theirs)) {
++    const gap = Math.abs(value - num(mine[axisId]));
++    if (gap === 0) continue;
++    pulls.push({
++      axisId,
++      pole: value > 0 ? 'virtue' : 'vice',
++      band: gap >= firmGap ? 'firm' : 'faint',
++      gap,
++    });
++  }
++  pulls.sort((a, b) => (b.gap - a.gap) || codepoint(a.axisId, b.axisId));
++  return pulls
++    .slice(0, num(CHANCE_MEETING_TUNING.driftAxisCap))
++    .map((pull) => ({ axisId: pull.axisId, pole: pull.pole, band: pull.band }));
++}
++
++/** The mark the ladder draw lands on, or null. @param {number} roll @param {string} band
++ *  @param {string} posture @param {number} rivalryStep @returns {string|null} */
++function markOutcome(roll, band, posture, rivalryStep) {
++  const ladder = asObject(asObject(CHANCE_MEETING_TUNING.markLadder)[band]);
++  const step = num(CHANCE_MEETING_TUNING.markPostureStep);
++  const shift = posture === 'hostile' ? step : posture === 'friendly' ? -step : 0;
++  const bond = Math.max(0, num(ladder.bond) - shift);
++  const respect = Math.max(0, num(ladder.respect));
++  const rivalry = Math.max(0, num(ladder.rivalry) + shift + Math.max(0, rivalryStep));
++  const floor = num(CHANCE_MEETING_TUNING.nothingFloor);
++  // The nothing band is never below its floor: a three-century world may not accumulate a
++  // foreign bond per stop, and the floor is what makes that a property rather than a hope.
++  const room = Math.max(0, EIGHTHS - floor);
++  let cut = Math.min(bond, room);
++  if (roll < cut) return 'bond';
++  cut += Math.min(respect, Math.max(0, room - cut));
++  if (roll < cut) return 'respect';
++  cut += Math.min(rivalry, Math.max(0, room - cut));
++  if (roll < cut) return 'rivalry';
++  return null;
++}
++
++/**
++ * THE MEETING. Pure, total on garbage (a missing reading reads as neutral, which lands in
++ * the `nothing` band by arithmetic), and every number it returns is an integer.
++ *
++ * ⛔ Nothing here kills, moves, marries, replaces or concludes a person. The outcome words
++ * are the whole surface, and the widest of them is a LEASH the corruption web already
++ * mints from a lean it may or may not consume.
++ *
++ * @param {{meetingKey?: unknown, kind?: unknown, venue?: unknown, nodeId?: unknown,
++ *   tick?: unknown, seed?: unknown, a?: unknown, b?: unknown, courts?: unknown,
++ *   posture?: unknown, wariness?: unknown}} [args]
++ * @returns {Record<string, unknown>}
++ */
++export function resolveChanceMeeting({
++  meetingKey, kind, venue, nodeId, tick, seed, a, b, courts, posture, wariness, pickRoll,
++} = {}) {
++  const key = text(meetingKey);
++  const seedText = text(seed);
++  const at = wholeTick(tick) ?? 0;
++  const meetingKind = MEETING_KINDS.includes(text(kind)) ? text(kind) : MEETING_KINDS[0];
++  const meetingVenue = MEETING_VENUES.includes(text(venue)) ? text(venue) : MEETING_VENUES[0];
++  const stance = POSTURE_BANDS.includes(text(posture)) ? text(posture) : 'neutral';
++  const one = normalizeParty(a);
++  const two = normalizeParty(b);
++  /** @type {Record<string, string>[]} */
++  const refusals = [];
++
++  const base = num(asObject(asObject(CHANCE_MEETING_TUNING.baseRung)[meetingKind])[meetingVenue]);
++  const covertStep = (one.covert === true || two.covert === true)
++    ? num(CHANCE_MEETING_TUNING.covertMeetStep)
++    : 0;
++  const meetRung = clampInt(
++    base + num(asObject(CHANCE_MEETING_TUNING.posturePlus)[stance]) + covertStep,
++    0,
++    EIGHTHS,
++  );
++  const meetRoll = drawMeet(seedText, key);
++
++  /** @type {Record<string, number>} */
++  const rolls = { meet: meetRoll };
++  // The PICK is drawn one layer up, by the census that chose which resident is standing
++  // there; the receipt carries it so every arm the mechanism draws is visible in one place.
++  if (Number.isInteger(pickRoll)) rolls.pick = /** @type {number} */ (pickRoll);
++  /** @type {Record<string, unknown>} */
++  const receipt = {
++    id: `chance_meeting:${key}`,
++    kind: meetingKind,
++    venue: meetingVenue,
++    nodeId: text(nodeId),
++    tick: at,
++    parties: [
++      { nid: one.nid, homeSid: one.homeSid, covert: one.covert === true },
++      { nid: two.nid, homeSid: two.homeSid, covert: two.covert === true },
++    ],
++    posture: stance,
++    outcome: 'nothing',
++    mark: null,
++    drift: [],
++    lean: null,
++    grievance: null,
++    approach: 'not_made',
++    refusals,
++    rolls,
++  };
++
++  const distance = pairDistance(one.knownAxes, two.knownAxes);
++  receipt.distance = { rungs: distance.rungs, band: distance.band };
++
++  if (!(meetRoll < meetRung)) {
++    receipt.reason = 'no_meeting';
++    return freezeReceipt(receipt);
++  }
++
++  // ── THE APPROACH. One direction only: the one with the higher chance, ties by the
++  //    target's nid. An attempt needs BOTH an arithmetic opening and its own die.
++  const directions = [
++    { approacher: one, target: two },
++    { approacher: two, target: one },
++  ].map((pair) => {
++    const terms = compromiseTerms(pair.target, pair.approacher, courts, distance.band);
++    return { ...pair, terms, chance: compromiseChance(pair.target, terms) };
++  });
++  directions.sort((x, y) => (y.chance - x.chance) || codepoint(text(x.target.nid), text(y.target.nid)));
++  const lead = directions[0];
++
++  const eligible = lead.target.clean === true && lead.target.hasRecord === true;
++  if (!eligible) refusals.push({ arm: 'approach', word: 'ineligible_target' });
++  if (!lead.target.hasRecord) refusals.push({ arm: 'mark', word: 'no_home_record' });
++
++  const approachRung = clampInt(
++    num(CHANCE_MEETING_TUNING.approachBaseRung)
++      + (lead.terms.t1 >= num(CHANCE_MEETING_TUNING.approachAtOddsRung)
++        ? num(CHANCE_MEETING_TUNING.approachAtOddsStep) : 0)
++      + (lead.approacher.covert === true ? num(CHANCE_MEETING_TUNING.approachCovertStep) : 0),
++    0,
++    EIGHTHS,
++  );
++
++  let rivalryStep = 0;
++  let markArmRuns = true;
++  if (eligible && lead.chance >= num(CHANCE_MEETING_TUNING.compromiseFloor)) {
++    const approachRoll = drawApproach(seedText, key);
++    rolls.approach = approachRoll;
++    if (approachRoll < approachRung) {
++      receipt.approach = 'made';
++      const willRoll = drawCompromise(seedText, key);
++      rolls.compromise = willRoll;
++      if (willRoll < lead.chance) {
++        receipt.outcome = 'compromised';
++        receipt.lean = {
++          patronSid: lead.approacher.homeSid,
++          targetSid: lead.target.homeSid,
++          targetNid: lead.target.nid,
++          band: LEAN_BANDS[0],
++        };
++        // The person plane records the tie the compromise made; the settlement plane
++        // follows through the elite bleed when that seam is wired, which is not here.
++        receipt.mark = { kind: 'loyalty', sev: 'half', holderNid: lead.target.nid, otherNid: lead.approacher.nid };
++        markArmRuns = false;
++      } else {
++        receipt.outcome = 'rejected';
++        const warinessRung = Math.min(
++          num(CHANCE_MEETING_TUNING.exposureWarinessCap),
++          Math.max(0, Math.floor(num(wariness))),
++        );
++        const exposureRung = clampInt(
++          num(CHANCE_MEETING_TUNING.exposureBaseRung)
++            + (lead.approacher.covert === true ? num(CHANCE_MEETING_TUNING.exposureCovertStep) : 0)
++            + warinessRung
++            + (stance === 'hostile' ? num(CHANCE_MEETING_TUNING.exposureHostileStep) : 0),
++          0,
++          EIGHTHS,
++        );
++        const exposureRoll = drawExposure(seedText, key);
++        rolls.exposure = exposureRoll;
++        if (exposureRoll < exposureRung) {
++          receipt.outcome = 'exposed';
++          receipt.grievance = {
++            fromSid: lead.target.homeSid,
++            toSid: lead.approacher.homeSid,
++            incidentType: 'approach_exposed',
++          };
++          markArmRuns = false;
++        } else {
++          // People who declined an offer may still like each other, a little less.
++          rivalryStep = num(CHANCE_MEETING_TUNING.markRefusedRivalryStep);
++        }
++      }
++    }
++  }
++
++  if (markArmRuns && lead.target.hasRecord === true && one.hasRecord === true && two.hasRecord === true) {
++    const markRoll = drawMark(seedText, key);
++    rolls.mark = markRoll;
++    const outcome = markOutcome(markRoll, distance.band, stance, rivalryStep);
++    if (outcome) {
++      // ⚠ A REFUSED OFFER KEEPS ITS OWN WORD. The mark arm records what the two people
++      // made of each other; it may not overwrite the fact that an offer was turned down,
++      // because 'rejected' is a counted outcome of its own and a mark word in its place
++      // would erase every refusal from the measured distribution.
++      if (receipt.outcome === 'nothing') receipt.outcome = outcome;
++      receipt.mark = {
++        kind: outcome === 'bond' ? 'friendship' : outcome,
++        sev: 'half',
++        holderNid: one.nid,
++        otherNid: two.nid,
++      };
++    }
++  }
++
++  // People rub off on each other whether or not they become friends, so the drift arm
++  // runs on every meeting that HAPPENED, the `nothing` band included.
++  receipt.drift = [
++    ...driftVector(one, two).map((pull) => ({ subjectNid: one.nid, ...pull })),
++    ...driftVector(two, one).map((pull) => ({ subjectNid: two.nid, ...pull })),
++  ];
++
++  return freezeReceipt(receipt);
++}
++
++/** @param {Record<string, unknown>} receipt @returns {Record<string, unknown>} */
++function freezeReceipt(receipt) {
++  return Object.freeze({ ...receipt });
++}
+diff --git a/src/domain/worldPulse/habitForkRegistry.js b/src/domain/worldPulse/habitForkRegistry.js
+index 4c5b74d05..97e358e04 100644
+--- a/src/domain/worldPulse/habitForkRegistry.js
++++ b/src/domain/worldPulse/habitForkRegistry.js
+@@ -336,6 +336,46 @@ export const HABIT_FORK_REGISTRY = Object.freeze([
+     reason: 'GOAL ORIENTATION — which ambition KINDS pay off, the personality-forming loop the owner named. It is the goal-kind AXIS of the same symbol as the selection row, graded through the ladder\'s existing progress read, which already weights credit by office and domain. ⚠ The continuous grade must be BANDED by frozen edges before it enters the curve — a float grade would be a second scale',
+     closeOwed: 'grade a goal KIND against the progress goals of that kind reached, banded rather than carried as a float',
+   }),
++  // ── ENC-1: THE CHANCE-MEETING LEAF'S SIX ARMS ─────────────────────────────────
++  // Six symbols rather than one draw helper, because this registry holds one disposition
++  // per symbol: routing six questions through a shared helper would file four deferrals as
++  // whatever the helper was dispositioned as. ⛔ THE LEAF IS DARK AT THIS COMMIT — nothing
++  // under src/ imports it (the stage is ENC-3, and every writer it would feed sits behind
++  // an unruled owner row), so each arrival is a SOURCE FACT and not yet a behaviour.
++  fork({
++    forkId: 'HBF-36', module: 'src/domain/worldPulse/envoyChanceMeeting',
++    symbol: 'drawMeet', discovery: 'idiom', disposition: 'STAY',
++    reason: 'the coincidence gate: whether two people already standing in the same place on the same tick notice each other at all. ⛔ STAY-DETERMINISTIC on a MEASURED absence of a candidate set: there is no second act to choose, and neither party selects. The rung it is compared against carries weighted terms (the courts posture, the travellers covert craft) but those are CIRCUMSTANCES OF THE WORLD rather than preferences of an actor, and the only thing a habit load could teach here is to bump into strangers more often, which is a rate and not a choice. The ENCOUNTERS design rules it the same way at its Car 1 line, and this row records the reading rather than inheriting it',
++  }),
++  fork({
++    forkId: 'HBF-37', module: 'src/domain/worldPulse/envoyChanceMeeting',
++    symbol: 'drawPick', discovery: 'idiom', disposition: 'STAY',
++    reason: 'which of the eligible residents the traveller happens upon. ⛔ STAY-DETERMINISTIC, and it is HBF-35 verbatim one family over: the draw is UNWEIGHTED (nothing about a resident enters it: only the list length and the meeting key) over a list ALREADY canonically ordered by codepoint on a rename-stable id, and it exists solely so the pick is unbiased by alphabet. ⭐ The one dimension a habit load could tilt is WHICH PERSON a traveller meets, a preference over identities rather than over acts, which HBF-35 and HBF-22 both rule forbidden ground. ⚠ SAID OUT LOUD: the seed IS threaded into this key on purpose, so the pick is not stable across campaigns that share an errand episode; that is a determinism requirement, not a preference',
++  }),
++  fork({
++    forkId: 'HBF-38', module: 'src/domain/worldPulse/envoyChanceMeeting',
++    symbol: 'drawApproach', discovery: 'idiom', disposition: 'DEFER',
++    reason: 'whether an approacher makes an offer at all. Unlike the two rows above this is genuinely actor-addressable and genuinely weighted, since the rung reads how far the target stands from his own court and whether the approacher is covert, so the STAY reading is refused on evidence rather than deferred for want of a reading',
++    closeOwed: 'grade an approach against what it produced: a lean the web converted, a refusal, or a refusal that was spoken of. All three are already typed outcomes of the same receipt, so the close exists the moment the stage that emits it lands',
++  }),
++  fork({
++    forkId: 'HBF-39', module: 'src/domain/worldPulse/envoyChanceMeeting',
++    symbol: 'drawMark', discovery: 'idiom', disposition: 'DEFER',
++    reason: 'which mark a meeting leaves, drawn against a cumulative ladder over a four-member vocabulary (bond, respect, rivalry, nothing) weighted by how alike the two people read and by the posture between their courts. This is the clearest weighted chooser in the leaf and the one with a real action vocabulary',
++    closeOwed: 'grade a minted mark against whether it survived its own decay without being renewed, which the ladder record already carries; the mark and its half-life are one another\u2019s close',
++  }),
++  fork({
++    forkId: 'HBF-40', module: 'src/domain/worldPulse/envoyChanceMeeting',
++    symbol: 'drawCompromise', discovery: 'idiom', disposition: 'DEFER',
++    reason: 'the targets own will against an offer, drawn against a chance composed from three weighted terms in the owners own order. Whether a mans will resolving is a CHOOSER or a CONTEST is exactly the question HBF-08 leaves open for the ladder challenge, and one answer cannot be true there and false here',
++    closeOwed: 'grade a yielded will against whether the leash the web minted from it ever produced anything, and a refused one against whether the refusal was found out; ⚠ this row closes with HBF-08 or not at all, because both ask whether a will resolving is a choice',
++  }),
++  fork({
++    forkId: 'HBF-41', module: 'src/domain/worldPulse/envoyChanceMeeting',
++    symbol: 'drawExposure', discovery: 'idiom', disposition: 'DEFER',
++    reason: 'whether a refused approach is spoken of, drawn against a rung the host courts own wariness weights. The actor here is the watching court rather than either party to the meeting, which is a third shape neither of the two STAY rows above covers and which this lane has not read at its load point',
++    closeOwed: 'grade an exposure against the grievance it actually moved on the two courts edge, which the relationship plane already records; establish first whether a court WATCHING is an act it chooses or a property it has',
++  }),
+   // ── THE FOURTH IDIOM: THE EXPLICIT GUARD-CHAIN REGISTER ───────────────────────
+   fork({
+     forkId: 'HBF-31', module: 'src/domain/worldPulse/espionage/espionageMath',
+diff --git a/tests/domain/envoyChanceMeeting.test.js b/tests/domain/envoyChanceMeeting.test.js
+new file mode 100644
+index 000000000..d85719d04
+--- /dev/null
++++ b/tests/domain/envoyChanceMeeting.test.js
+@@ -0,0 +1,625 @@
++/**
++ * tests/domain/envoyChanceMeeting.test.js — ENC-1's proof, and the leaf's only driver.
++ *
++ * ⭐ IT IS LIT-ELIGIBLE ON PURPOSE. `mechanismLitCoverage.test.js` computes AUTO mechanism
++ * credit only over test files whose names do NOT match `/(dormanc|byteidentity)/i`, so the
++ * dormancy fence ENC-3 will write can credit the FLAG and never the MECHANISM. Every flat
++ * `worldPulse/*.js` leaf therefore needs a lit-eligible direct importer of its own, and
++ * this file is the leaf's.
++ *
++ * ⭐ EVERY ABSENCE HERE IS ANCHORED ON A PRESENCE. The negative arms are written as
++ * exact-set equalities or as `toBe(false)` over a subject the same arm proves non-empty,
++ * so a fixture that silently emptied reds instead of passing having proved nothing.
++ */
++import { describe, expect, test } from 'vitest';
++import {
++  MEETING_KINDS,
++  MEETING_VENUES,
++  MEETING_OUTCOMES,
++  MEETING_MARK_KINDS,
++  MEETING_DRIFT_BANDS,
++  MEETING_REFUSALS,
++  MEETING_ARMS,
++  DISTANCE_BANDS,
++  POSTURE_BANDS,
++  LEAN_BANDS,
++  APPROACH_WORDS,
++  EIGHTHS,
++  CHANCE_MEETING_TUNING,
++  CHANCE_MEETING_TUNING_PROVENANCE,
++  meetingRollKey,
++  residentMeetingKey,
++  pairMeetingKey,
++  legacyCoreAxes,
++  axisRungs,
++  planeFromAxes,
++  planeFromChart,
++  pairDistance,
++  personCourtRung,
++  censusChanceMeetingCandidates,
++  selectChanceMeetings,
++  resolveChanceMeeting,
++} from '../../src/domain/worldPulse/envoyChanceMeeting.js';
++import { npcTraitPlane } from '../../src/domain/worldPulse/clergyTraitPlane.js';
++import { TRAIT_COLUMNS } from '../../src/domain/npc/paradigmAxisCatalog.js';
++
++const COURTS = {
++  S1: { lawfulness01: 0.5, malice01: 0.5 },
++  S2: { lawfulness01: 0.2, malice01: 0.8 },
++  S3: { lawfulness01: 0.9, malice01: 0.1 },
++};
++
++/** @param {string} nid @param {string} homeSid @param {string[]} words @param {object} [extra] */
++function person(nid, homeSid, words, extra = {}) {
++  return {
++    nid, homeSid, words, clean: true, corruptible: true, hasRecord: true, covert: false, ...extra,
++  };
++}
++
++/** @param {object} [over] */
++function meeting(over = {}) {
++  return resolveChanceMeeting({
++    meetingKey: 'stop-1',
++    kind: 'traveller_resident',
++    venue: 'host_settlement',
++    nodeId: 'S2',
++    tick: 10,
++    seed: 'seed-a',
++    a: person('n1', 'S1', ['brave', 'cautious', 'ambitious']),
++    b: person('n2', 'S2', ['compassionate', 'cautious', 'stern']),
++    courts: COURTS,
++    posture: 'neutral',
++    wariness: 0,
++    ...over,
++  });
++}
++
++/** @param {string} errandId @param {object} [over] */
++function traveller(errandId, over = {}) {
++  return {
++    errandId,
++    nid: `w-${errandId}`,
++    homeSid: 'S1',
++    nodeId: 'S2',
++    nodeKind: 'settlement',
++    journey: 'outbound',
++    band: 'arrived',
++    arrivalTick: 10,
++    covert: false,
++    ...over,
++  };
++}
++
++describe('ENC-1 — the chance-meeting leaf: the vocabularies', () => {
++  test('every closed vocabulary is frozen, non-empty and duplicate-free', () => {
++    const families = {
++      MEETING_KINDS, MEETING_VENUES, MEETING_OUTCOMES, MEETING_MARK_KINDS,
++      MEETING_DRIFT_BANDS, MEETING_REFUSALS, MEETING_ARMS, DISTANCE_BANDS,
++      POSTURE_BANDS, LEAN_BANDS, APPROACH_WORDS,
++    };
++    for (const [name, family] of Object.entries(families)) {
++      expect(Object.isFrozen(family), `${name} is not frozen`).toBe(true);
++      expect(family.length, `${name} is empty`).toBeGreaterThan(0);
++      expect(new Set(family).size, `${name} repeats a word`).toBe(family.length);
++      for (const word of family) expect(typeof word).toBe('string');
++    }
++  });
++
++  test('the venue words are a SUBSET of the errand family\'s, taken by value and not by import', () => {
++    // The parity that matters is that a meeting never names a venue the errand family
++    // cannot spell. It is asserted against the literal pair rather than the import,
++    // because importing either twin home would put this leaf inside a pin it must not move.
++    expect([...MEETING_VENUES].sort()).toEqual(['field_node', 'host_settlement']);
++  });
++
++  test('the six arms are exactly the arms the leaf can draw, and every one reaches a receipt', () => {
++    expect([...MEETING_ARMS]).toEqual(['meet', 'pick', 'approach', 'mark', 'compromise', 'exposure']);
++    const drawn = new Set();
++    // Five arms are drawn by the resolution ...
++    for (let i = 0; i < 400; i += 1) {
++      const r = meeting({ meetingKey: `k-${i}`, posture: 'hostile', wariness: 2 });
++      for (const arm of Object.keys(r.rolls)) drawn.add(arm);
++    }
++    // ... and the sixth, the PICK, is drawn one layer up by the census that chose which
++    // resident is standing there. It reaches the receipt through the candidate, because an
++    // arm no receipt records is an arm no fence can ever see.
++    const candidate = censusChanceMeetingCandidates({
++      travellers: [traveller('e1')],
++      residentsAt: { S2: [{ residentNid: 'r1', index: 0, npc: null }, { residentNid: 'r2', index: 1, npc: null }] },
++      tick: 10,
++      seed: 'seed-a',
++    })[0];
++    expect(Number.isInteger(candidate.pickRoll)).toBe(true);
++    for (const arm of Object.keys(meeting({ pickRoll: candidate.pickRoll }).rolls)) drawn.add(arm);
++    expect([...drawn].sort()).toEqual([...MEETING_ARMS].sort());
++  });
++
++  test('every outcome word the leaf can emit is a MEETING_OUTCOMES member, and the set is reachable', () => {
++    const seen = new Set();
++    for (let i = 0; i < 2000; i += 1) seen.add(meeting({ meetingKey: `k-${i}` }).outcome);
++    for (const word of seen) expect(MEETING_OUTCOMES).toContain(word);
++    expect(seen.size, 'the fixture reached only one outcome, so the membership arm proved nothing')
++      .toBeGreaterThan(4);
++  });
++});
++
++describe('ENC-1 — the tuning register is a DRAFT and this lane signs nothing', () => {
++  test('the provenance is unsigned and the table is frozen', () => {
++    expect(CHANCE_MEETING_TUNING_PROVENANCE.signedBy).toBe(null);
++    expect(CHANCE_MEETING_TUNING_PROVENANCE.status).toContain('OWNER-UNSIGNED');
++    expect(CHANCE_MEETING_TUNING_PROVENANCE.ownerRows.length).toBeGreaterThan(5);
++    expect(Object.isFrozen(CHANCE_MEETING_TUNING)).toBe(true);
++  });
++
++  test('every rung in the register is an integer of the die, and the die is eight', () => {
++    expect(EIGHTHS).toBe(8);
++    const t = CHANCE_MEETING_TUNING;
++    const rungs = [
++      t.baseRung.traveller_resident.host_settlement,
++      t.baseRung.traveller_traveller.host_settlement,
++      t.baseRung.traveller_traveller.field_node,
++      t.approachBaseRung, t.compromiseFloor, t.compromiseCapCorruptible,
++      t.compromiseCapPlain, t.compromiseFastPath, t.nothingFloor,
++      t.exposureBaseRung, t.exposureWarinessCap,
++    ];
++    for (const rung of rungs) {
++      expect(Number.isInteger(rung)).toBe(true);
++      expect(rung).toBeGreaterThanOrEqual(0);
++      expect(rung).toBeLessThanOrEqual(EIGHTHS);
++    }
++    // The fast path is near-certain and never certain: the die always keeps one face for
++    // the man who surprises everyone.
++    expect(t.compromiseFastPath).toBe(EIGHTHS - 1);
++  });
++});
++
++describe('ENC-1 — the charts', () => {
++  test('THE CONTROL: the leaf\'s plane projection reproduces npcTraitPlane on an undrifted chart', () => {
++    // The leaf reads the word plane through the catalog's own columns rather than through
++    // clergyTraitPlane, so that it mints no cross-layer coupling pair. This arm is what
++    // makes that substitution a measurement instead of a hope.
++    // Over EVERY legacy word that carries a plane, not a hand-picked four: a control that
++    // chose its own subjects would prove only that four words happen to agree.
++    let matched = 0;
++    /** @type {string[]} */
++    const divergent = [];
++    for (const [word, columns] of Object.entries(TRAIT_COLUMNS)) {
++      if (!columns.plane) continue;
++      matched += 1;
++      const mine = planeFromChart(legacyCoreAxes([word]), [word]);
++      const theirs = npcTraitPlane({ personality: { dominant: word } }, null);
++      if (Math.abs(mine.e - theirs.e) > 1e-12 || Math.abs(mine.c - theirs.c) > 1e-12) divergent.push(word);
++    }
++    expect(matched, 'no word carried a plane, so the control compared nothing')
++      .toBeGreaterThan(40);
++    expect(divergent, 'the leaf projection diverged from the estate\'s own true plane').toEqual([]);
++    // ⚠ AND THE AXIS-ONLY HALF IS NOT THE WHOLE CHART, which is why planeFromChart exists:
++    // `ambitious` carries a real plane lean and lives in no axis at all, so an axis-only
++    // projection reads a schemer as plane-neutral.
++    expect(planeFromAxes(legacyCoreAxes(['ambitious']))).toEqual({ e: 0, c: 0 });
++    expect(planeFromChart(legacyCoreAxes(['ambitious']), ['ambitious']).e).toBeGreaterThan(0);
++  });
++
++  test('axis positions are integer rungs and the distance bands are the closed three', () => {
++    const axes = legacyCoreAxes(['brave', 'callous', 'compassionate']);
++    for (const value of Object.values(axisRungs(axes))) {
++      expect(Number.isInteger(value)).toBe(true);
++      expect(Math.abs(value)).toBeLessThanOrEqual(3);
++    }
++    const near = pairDistance(legacyCoreAxes(['callous']), legacyCoreAxes(['callous']));
++    const far = pairDistance(legacyCoreAxes(['callous']), legacyCoreAxes(['compassionate']));
++    expect(near.rungs).toBe(0);
++    expect(near.band).toBe('alike');
++    expect(DISTANCE_BANDS).toContain(far.band);
++    expect(far.rungs).toBeGreaterThan(near.rungs);
++  });
++
++  test('a person-to-court rung is an integer 0..8, and a court with no signal reads low', () => {
++    const flat = personCourtRung({ e: 0, c: 0 }, { lawfulness01: 0.5, malice01: 0.5 });
++    expect(flat).toBe(0);
++    for (const e of [-1, -0.5, 0, 0.5, 1]) {
++      for (const court of Object.values(COURTS)) {
++        const rung = personCourtRung({ e, c: -e }, court);
++        expect(Number.isInteger(rung)).toBe(true);
++        expect(rung).toBeGreaterThanOrEqual(0);
++        expect(rung).toBeLessThanOrEqual(EIGHTHS);
++      }
++    }
++    // A good man in an evil, lawless town reads FAR from it; the same man at home reads 0.
++    expect(personCourtRung({ e: -1, c: -1 }, COURTS.S2)).toBeGreaterThan(0);
++  });
++});
++
++describe('ENC-1 — the key law and determinism', () => {
++  test('every arm draws from one key shape, and the seed is inside it', () => {
++    for (const arm of MEETING_ARMS) {
++      expect(meetingRollKey('sd', 'mk', arm)).toBe(`sd|chance-meeting:mk:${arm}`);
++    }
++    expect(meetingRollKey('one', 'mk', 'meet')).not.toBe(meetingRollKey('two', 'mk', 'meet'));
++  });
++
++  test('the same inputs resolve identically, and a different seed moves the world', () => {
++    const first = meeting();
++    const second = meeting();
++    expect(second).toEqual(first);
++    let moved = 0;
++    for (let i = 0; i < 200; i += 1) {
++      const x = meeting({ meetingKey: `k-${i}`, seed: 'seed-a' });
++      const y = meeting({ meetingKey: `k-${i}`, seed: 'seed-b' });
++      if (x.outcome !== y.outcome || x.rolls.meet !== y.rolls.meet) moved += 1;
++    }
++    expect(moved, 'two seeds produced an identical world: the seed is not in the key')
++      .toBeGreaterThan(20);
++  });
++
++  test('P7 GUARD — the resident PICK is seeded, so two seeds pick differently somewhere', () => {
++    const residents = ['r1', 'r2', 'r3', 'r4', 'r5', 'r6'].map((residentNid, index) => ({
++      residentNid, index, npc: null,
++    }));
++    const args = (seed) => ({
++      travellers: [traveller('e1'), traveller('e2', { nid: 'w-e2', journey: 'return' })],
++      residentsAt: { S2: residents },
++      tick: 10,
++      seed,
++    });
++    const pickedWith = (seed) => censusChanceMeetingCandidates(args(seed))
++      .filter((c) => c.kind === 'traveller_resident')
++      .map((c) => c.parties[1].nid)
++      .join(',');
++    const one = pickedWith('seed-a');
++    const two = pickedWith('seed-zzz');
++    expect(one.length, 'the census produced no resident candidate, so the arm proved nothing')
++      .toBeGreaterThan(0);
++    expect(two).not.toBe(one);
++  });
++
++  test('P1 GUARD — the CENSUS itself is a function of its inputs, drawn from no ambient source', () => {
++    // ⚠ THIS ARM EXISTS BECAUSE THE PLANT FOUND ITS ABSENCE. A `Math.random()` planted in
++    // the resident pick passed the whole suite: the resolution's determinism arm never
++    // touches the census, the order arm ran with an empty roster so no pick was drawn, and
++    // the two-seed arm is SATISFIED by randomness, which is the trap. Only running the same
++    // census twice can convict an ambient draw.
++    const args = () => ({
++      travellers: [traveller('e1'), traveller('e2', { nid: 'w-e2', journey: 'return' })],
++      residentsAt: { S2: [1, 2, 3, 4, 5, 6, 7].map((n) => ({ residentNid: `r${n}`, index: n, npc: null })) },
++      tick: 10,
++      seed: 'seed-a',
++    });
++    const first = censusChanceMeetingCandidates(args());
++    expect(first.filter((c) => c.kind === 'traveller_resident').length,
++      'the fixture drew no pick, so this arm could not see an ambient one').toBeGreaterThan(0);
++    for (let i = 0; i < 12; i += 1) {
++      expect(censusChanceMeetingCandidates(args()), 'the census moved between two identical calls')
++        .toEqual(first);
++    }
++  });
++
++  test('the census is independent of the order it is handed its rows', () => {
++    const rows = [traveller('e3'), traveller('e1'), traveller('e2', { homeSid: 'S3' })];
++    const args = (travellers) => ({ travellers, residentsAt: { S2: [] }, tick: 10, seed: 'seed-a' });
++    const forward = censusChanceMeetingCandidates(args(rows)).map((c) => c.id);
++    const reversed = censusChanceMeetingCandidates(args([...rows].reverse())).map((c) => c.id);
++    expect(forward.length).toBeGreaterThan(0);
++    expect(reversed).toEqual(forward);
++  });
++});
++
++describe('ENC-1 — the census, the stop law and the select', () => {
++  test('THE STOP LAW: a dwelling operative at one stop yields exactly ONE candidate over six ticks', () => {
++    const dwell = (tick) => censusChanceMeetingCandidates({
++      // The projection puts a dwelling operative at his stop on EVERY dwell tick; his
++      // arrivalTick does not move, so only the arrival tick can key a candidate.
++      travellers: [traveller('e1', { covert: true })],
++      residentsAt: { S2: [{ residentNid: 'r1', index: 0, npc: null }] },
++      tick,
++      seed: 'seed-a',
++    });
++    const counts = [10, 11, 12, 13, 14, 15].map((t) => dwell(t).length);
++    expect(counts).toEqual([1, 0, 0, 0, 0, 0]);
++  });
++
++  test('a traveller standing at his own home is not a traveller, and a passing one is not standing', () => {
++    const args = (over) => ({
++      travellers: [traveller('e1', over)],
++      residentsAt: { S2: [{ residentNid: 'r1', index: 0, npc: null }] },
++      tick: 10,
++      seed: 'seed-a',
++    });
++    expect(censusChanceMeetingCandidates(args({})).length).toBe(1);
++    expect(censusChanceMeetingCandidates(args({ homeSid: 'S2' })).length).toBe(0);
++    expect(censusChanceMeetingCandidates(args({ band: 'underway' })).length).toBe(0);
++    expect(censusChanceMeetingCandidates(args({ nodeKind: 'route_node' })).length).toBe(0);
++  });
++
++  test('one candidate per traveller per node, and the resident pick is exactly one person', () => {
++    const candidates = censusChanceMeetingCandidates({
++      travellers: [traveller('e1')],
++      residentsAt: { S2: [1, 2, 3, 4, 5].map((n) => ({ residentNid: `r${n}`, index: n, npc: null })) },
++      tick: 10,
++      seed: 'seed-a',
++    });
++    expect(candidates.length).toBe(1);
++    expect(candidates[0].parties.length).toBe(2);
++    expect(candidates[0].kind).toBe('traveller_resident');
++  });
++
++  test('two countrymen at a third place never meet; two foreigners do', () => {
++    const both = (homeB) => censusChanceMeetingCandidates({
++      travellers: [traveller('e1'), traveller('e2', { nid: 'w-e2', homeSid: homeB })],
++      residentsAt: { S2: [] },
++      tick: 10,
++      seed: 'seed-a',
++    }).filter((c) => c.kind === 'traveller_traveller');
++    expect(both('S1').length, 'countrymen met').toBe(0);
++    expect(both('S3').length, 'two foreign courts failed to meet').toBe(1);
++  });
++
++  test('THE SELECT takes at most one meeting per PERSON, and prefers the rarer pair event', () => {
++    const selected = selectChanceMeetings({
++      travellers: [
++        traveller('e1'),
++        traveller('e2', { nid: 'w-e2', homeSid: 'S3' }),
++        traveller('e3', { nid: 'w-e3', homeSid: 'S1' }),
++      ],
++      residentsAt: { S2: [{ residentNid: 'r1', index: 0, npc: null }] },
++      tick: 10,
++      seed: 'seed-a',
++    });
++    const keys = selected.flatMap((c) => c.parties.map((p) => `${p.homeSid}|${p.nid}`));
++    expect(new Set(keys).size, 'a person met twice in one tick').toBe(keys.length);
++    expect(selected[0].kind).toBe('traveller_traveller');
++  });
++});
++
++describe('ENC-1 — the resolution', () => {
++  test('a receipt carries words and integers only: no float reaches one', () => {
++    /** @param {unknown} value @param {string} path @param {string[]} out */
++    const floats = (value, path, out) => {
++      if (typeof value === 'number' && !Number.isInteger(value)) out.push(path);
++      else if (Array.isArray(value)) value.forEach((v, i) => floats(v, `${path}[${i}]`, out));
++      else if (value && typeof value === 'object') {
++        for (const [k, v] of Object.entries(value)) floats(v, `${path}.${k}`, out);
++      }
++      return out;
++    };
++    let receipts = 0;
++    /** @type {string[]} */
++    const offenders = [];
++    for (let i = 0; i < 1500; i += 1) {
++      const r = meeting({ meetingKey: `k-${i}`, posture: i % 3 === 0 ? 'hostile' : 'friendly', wariness: i % 3 });
++      receipts += 1;
++      floats(r, 'receipt', offenders);
++    }
++    expect(receipts).toBe(1500);
++    expect(offenders).toEqual([]);
++  });
++
++  test('the mark severity is the WORD half, never the ladder\'s number', () => {
++    let marks = 0;
++    for (let i = 0; i < 1500; i += 1) {
++      const r = meeting({ meetingKey: `k-${i}` });
++      if (!r.mark) continue;
++      marks += 1;
++      expect(r.mark.sev).toBe('half');
++      expect(MEETING_MARK_KINDS).toContain(r.mark.kind);
++    }
++    expect(marks, 'no mark was minted, so the arm proved nothing').toBeGreaterThan(50);
++  });
++
++  test('THE NOTHING FLOOR: no band and no posture lets the mark ladder claim more than six faces', () => {
++    // ⭐ EXACT, NOT STATISTICAL. The claim is about the LADDER, so it is measured as the set
++    // of mark-die FACES that produce a mark, per band and per posture. A frequency arm over
++    // the same fixture would pass or fail on sampling noise and would prove nothing about
++    // the law it is named for.
++    const pairs = {
++      alike: [['callous', 'cautious'], ['callous', 'cautious']],
++      differing: [['brave', 'cautious', 'ambitious'], ['compassionate', 'cautious', 'stern']],
++      opposed: [['callous', 'cruel', 'greedy'], ['compassionate', 'humble', 'generous']],
++    };
++    const room = EIGHTHS - CHANCE_MEETING_TUNING.nothingFloor;
++    let measured = 0;
++    for (const [band, [wordsA, wordsB]] of Object.entries(pairs)) {
++      for (const posture of POSTURE_BANDS) {
++        /** @type {Map<number, string>} */
++        const byFace = new Map();
++        let sawBand = false;
++        for (let i = 0; i < 3000; i += 1) {
++          const r = meeting({
++            meetingKey: `f-${band}-${posture}-${i}`,
++            posture,
++            a: person('n1', 'S1', wordsA, { corruptible: false }),
++            b: person('n2', 'S2', wordsB, { corruptible: false }),
++          });
++          if (r.distance.band !== band) continue;
++          sawBand = true;
++          if (r.rolls.mark === undefined) continue;
++          byFace.set(r.rolls.mark, r.outcome);
++        }
++        expect(sawBand, `the fixture never produced band ${band}`).toBe(true);
++        const marking = [...byFace.values()].filter((o) => o !== 'nothing' && o !== 'rejected');
++        expect(byFace.size, `${band}/${posture} reached too few faces to judge`).toBeGreaterThan(5);
++        expect(
++          marking.length,
++          `${band}/${posture}: the mark ladder claimed ${marking.length} of eight faces`,
++        ).toBeLessThanOrEqual(room);
++        measured += 1;
++      }
++    }
++    expect(measured, 'no band and posture pair was measured').toBe(9);
++  });
++
++  test('the approach die gates the offer: an attempt is rarer than a meeting', () => {
++    let met = 0;
++    let made = 0;
++    for (let i = 0; i < 4000; i += 1) {
++      const r = meeting({ meetingKey: `a-${i}` });
++      if (r.reason === 'no_meeting') continue;
++      met += 1;
++      expect(APPROACH_WORDS).toContain(r.approach);
++      if (r.approach === 'made') made += 1;
++    }
++    expect(made).toBeGreaterThan(0);
++    // The whole point of the fold's approach die: an offer is NOT the median meeting.
++    expect(made / met).toBeLessThan(0.5);
++  });
++
++  test('a compromise is a LEAN and never a defection: it moves nobody and concludes nobody', () => {
++    let compromises = 0;
++    for (let i = 0; i < 4000; i += 1) {
++      const r = meeting({ meetingKey: `c-${i}` });
++      if (r.outcome !== 'compromised') continue;
++      compromises += 1;
++      expect(LEAN_BANDS).toContain(r.lean.band);
++      expect(r.lean.band).toBe('leaning');
++      expect(r.lean.patronSid.length).toBeGreaterThan(0);
++      expect(r.lean.targetNid.length).toBeGreaterThan(0);
++      // The person plane records the tie; nothing about the man's place changes.
++      expect(r.mark.kind).toBe('loyalty');
++      expect(Object.keys(r).sort()).toEqual([
++        'approach', 'distance', 'drift', 'grievance', 'id', 'kind', 'lean', 'mark',
++        'nodeId', 'outcome', 'parties', 'posture', 'refusals', 'rolls', 'tick', 'venue',
++      ]);
++    }
++    expect(compromises, 'no compromise was reached, so the arm proved nothing').toBeGreaterThan(20);
++  });
++
++  test('a REFUSED offer keeps its own word and is not overwritten by the mark arm', () => {
++    let rejected = 0;
++    let rejectedWithMark = 0;
++    for (let i = 0; i < 4000; i += 1) {
++      const r = meeting({ meetingKey: `r-${i}` });
++      if (r.outcome !== 'rejected') continue;
++      rejected += 1;
++      if (r.mark) rejectedWithMark += 1;
++    }
++    expect(rejected, 'no offer was refused, so the arm proved nothing').toBeGreaterThan(20);
++    expect(rejectedWithMark, 'a refusal never also left a mark, so the two facts were never both carried')
++      .toBeGreaterThan(0);
++  });
++
++  test('an exposed approach carries its grievance with both courts named, and wariness is load-bearing', () => {
++    const run = (wariness) => {
++      let exposed = 0;
++      for (let i = 0; i < 8000; i += 1) {
++        const r = meeting({ meetingKey: `x-${i}`, posture: 'hostile', wariness });
++        if (r.outcome !== 'exposed') continue;
++        exposed += 1;
++        expect(r.grievance.incidentType).toBe('approach_exposed');
++        expect(r.grievance.fromSid).not.toBe(r.grievance.toSid);
++        expect(r.mark).toBe(null);
++      }
++      return exposed;
++    };
++    const calm = run(0);
++    const watchful = run(2);
++    expect(calm, 'nothing was exposed at all, so the arm proved nothing').toBeGreaterThan(0);
++    // The host court's OWN wariness read is what sharpens exposure, so a watchful court
++    // must find out more often than a calm one over the same eight thousand stops.
++    expect(watchful).toBeGreaterThan(calm);
++  });
++
++  test('a target with no home record is refused rather than silently dropped', () => {
++    const r = meeting({
++      meetingKey: 'no-home',
++      a: person('n1', 'S1', ['brave', 'cautious', 'ambitious'], { hasRecord: false }),
++      b: person('n2', 'S2', ['compassionate', 'cautious', 'stern'], { hasRecord: false }),
++    });
++    const words = r.refusals.map((x) => x.word);
++    expect(words.length, 'the refusal list is empty, so the membership arm proved nothing')
++      .toBeGreaterThan(0);
++    for (const word of words) expect(MEETING_REFUSALS).toContain(word);
++    expect(words).toContain('no_home_record');
++    expect(r.mark).toBe(null);
++  });
++
++  test('drift runs on every meeting that happened, in bands and never in floats', () => {
++    let withDrift = 0;
++    for (let i = 0; i < 1000; i += 1) {
++      const r = meeting({ meetingKey: `d-${i}` });
++      if (r.reason === 'no_meeting') {
++        expect(r.drift).toEqual([]);
++        continue;
++      }
++      if (r.drift.length > 0) withDrift += 1;
++      const perSubject = {};
++      for (const pull of r.drift) {
++        expect(MEETING_DRIFT_BANDS).toContain(pull.band);
++        expect(['virtue', 'vice']).toContain(pull.pole);
++        perSubject[pull.subjectNid] = (perSubject[pull.subjectNid] || 0) + 1;
++      }
++      for (const count of Object.values(perSubject)) {
++        expect(count).toBeLessThanOrEqual(CHANCE_MEETING_TUNING.driftAxisCap);
++      }
++    }
++    expect(withDrift, 'no meeting taught anything, so the cap arm proved nothing').toBeGreaterThan(50);
++  });
++});
++
++describe('ENC-1 — the sight law: choose on KNOWN, resolve on TRUE', () => {
++  test('a disclosed chart moves the DECISION and leaves the subject\'s own drift origin alone', () => {
++    const words = ['brave', 'cautious', 'ambitious'];
++    const bare = person('n1', 'S1', words);
++    const disclosed = person('n1', 'S1', words, {
++      // The same man, seen differently: his words (his TRUE chart) do not move.
++      known: { character: { axes: { MERCY: { pole: 'vice', level: 'defining', word: 'callous' } } } },
++    });
++    const other = person('n2', 'S2', ['compassionate', 'cautious', 'stern']);
++    const run = (a) => resolveChanceMeeting({
++      meetingKey: 'sight', kind: 'traveller_resident', venue: 'host_settlement',
++      nodeId: 'S2', tick: 10, seed: 'seed-a', a, b: other, courts: COURTS,
++      posture: 'neutral', wariness: 0,
++    });
++    const plain = run(bare);
++    const seen = run(disclosed);
++
++    // THE DECISION MOVES: the pair distance is read on the KNOWN charts.
++    expect(seen.distance.rungs).not.toBe(plain.distance.rungs);
++
++    // THE RESOLUTION DOES NOT: this subject's own drift origin is his TRUE chart, so the
++    // axes HE is pulled on are unchanged by what the other man came to believe about him.
++    const mine = (r) => r.drift.filter((p) => p.subjectNid === 'n1').map((p) => `${p.axisId}:${p.pole}:${p.band}`);
++    expect(mine(seen)).toEqual(mine(plain));
++
++    // ...and the COUNTERPART is pulled toward what he perceived, which did move.
++    const theirs = (r) => r.drift.filter((p) => p.subjectNid === 'n2').map((p) => `${p.axisId}:${p.pole}:${p.band}`);
++    expect(theirs(plain).length).toBeGreaterThan(0);
++    expect(theirs(seen)).not.toEqual(theirs(plain));
++  });
++
++  test('an undisclosed chart reads at the authored core, which is the sight law itself', () => {
++    const words = ['brave', 'cautious', 'ambitious'];
++    const bare = resolveChanceMeeting({
++      meetingKey: 'core', kind: 'traveller_resident', venue: 'host_settlement', nodeId: 'S2',
++      tick: 10, seed: 'seed-a', a: person('n1', 'S1', words),
++      b: person('n2', 'S2', ['compassionate']), courts: COURTS, posture: 'neutral', wariness: 0,
++    });
++    expect(bare.distance.rungs)
++      .toBe(pairDistance(legacyCoreAxes(words), legacyCoreAxes(['compassionate'])).rungs);
++  });
++});
++
++describe('ENC-1 — total on garbage', () => {
++  test('the census and the resolution survive nonsense without throwing', () => {
++    expect(censusChanceMeetingCandidates()).toEqual([]);
++    expect(censusChanceMeetingCandidates({ travellers: 'nope', tick: 'soon' })).toEqual([]);
++    expect(censusChanceMeetingCandidates({ travellers: [null, 7, {}], residentsAt: 3, tick: 1 })).toEqual([]);
++    expect(selectChanceMeetings({ travellers: null, tick: null })).toEqual([]);
++    const junk = resolveChanceMeeting();
++    expect(junk.outcome).toBe('nothing');
++    expect(MEETING_KINDS).toContain(junk.kind);
++    expect(MEETING_VENUES).toContain(junk.venue);
++    const junk2 = resolveChanceMeeting({ meetingKey: 5, a: 'x', b: [], courts: 'no', posture: 'sideways' });
++    expect(junk2.posture).toBe('neutral');
++    expect(junk2.drift).toEqual([]);
++  });
++
++  test('the meeting keys are stable and order-free for a pair', () => {
++    const a = { errandId: 'e1', journey: 'outbound' };
++    const b = { errandId: 'e2', journey: 'return' };
++    expect(pairMeetingKey({ a, b, nodeId: 'S2' })).toBe(pairMeetingKey({ a: b, b: a, nodeId: 'S2' }));
++    expect(residentMeetingKey({ errandId: 'e1', journey: 'outbound', nodeId: 'S2' }))
++      .toBe(residentMeetingKey({ errandId: 'e1', journey: 'outbound', nodeId: 'S2' }));
++    expect(residentMeetingKey({ errandId: 'e1', journey: 'return', nodeId: 'S2' }))
++      .not.toBe(residentMeetingKey({ errandId: 'e1', journey: 'outbound', nodeId: 'S2' }));
++  });
++});
+diff --git a/tests/lint/.tuning-register.json b/tests/lint/.tuning-register.json
+index 4fe8a5ae3..1df54d8a4 100644
+--- a/tests/lint/.tuning-register.json
++++ b/tests/lint/.tuning-register.json
+@@ -907,6 +907,55 @@
+       "band": null,
+       "note": ""
+     },
++    "src/domain/worldPulse/envoyChanceMeeting.js#CHANCE_MEETING_TUNING": {
++      "role": null,
++      "status": "draft",
++      "signedAt": null,
++      "unit": {
++        "eighths": "count",
++        "courtNeutralPoint": "fraction01",
++        "baseRung.traveller_resident.host_settlement": "count",
++        "baseRung.traveller_resident.field_node": "count",
++        "baseRung.traveller_traveller.host_settlement": "count",
++        "baseRung.traveller_traveller.field_node": "count",
++        "posturePlus.friendly": "count",
++        "posturePlus.neutral": "count",
++        "posturePlus.hostile": "count",
++        "covertMeetStep": "count",
++        "approachBaseRung": "count",
++        "approachAtOddsRung": "count",
++        "approachAtOddsStep": "count",
++        "approachCovertStep": "count",
++        "compromiseFloor": "count",
++        "compromiseCapCorruptible": "count",
++        "compromiseCapPlain": "count",
++        "compromiseFastPath": "count",
++        "markLadder.alike.bond": "count",
++        "markLadder.alike.respect": "count",
++        "markLadder.alike.rivalry": "count",
++        "markLadder.differing.bond": "count",
++        "markLadder.differing.respect": "count",
++        "markLadder.differing.rivalry": "count",
++        "markLadder.opposed.bond": "count",
++        "markLadder.opposed.respect": "count",
++        "markLadder.opposed.rivalry": "count",
++        "markPostureStep": "count",
++        "markRefusedRivalryStep": "count",
++        "nothingFloor": "count",
++        "exposureBaseRung": "count",
++        "exposureCovertStep": "count",
++        "exposureWarinessCap": "count",
++        "exposureHostileStep": "count",
++        "distanceEdges.alike": "count",
++        "distanceEdges.differing": "count",
++        "driftAxisCap": "count",
++        "driftFirmGap": "count",
++        "lessonCadenceTicks": "ticks",
++        "leanTtlTicks": "ticks"
++      },
++      "band": null,
++      "note": "ENC-1, the chance-meeting leaf. Every rung a DRAFT: the base rungs, the approach die, the compromise caps, the mark ladder, the exposure rungs, the lesson cadence, the lean TTL, the die itself. Nothing here is signed and this lane signs nothing."
++    },
+     "src/domain/worldPulse/espionage/espionageCareerCredit.js#CAREER_CREDIT_TUNING": {
+       "role": null,
+       "status": "draft",
+diff --git a/tests/lint/entropyRootCensus.walker.test.js b/tests/lint/entropyRootCensus.walker.test.js
+index 74cd49ba9..3df8ff883 100644
+--- a/tests/lint/entropyRootCensus.walker.test.js
++++ b/tests/lint/entropyRootCensus.walker.test.js
+@@ -839,7 +839,17 @@ describe('EP-0 · the closure record, re-run rather than transcribed', () => {
+     // citation was never a caller, and the sixteen were right before and after.
+     const callers = ALL_FILES.filter((f) => codeOnly(read(f)).split('\n')
+       .some((l) => l.includes('hash01(') && !/function hash01\(/.test(l)));
+-    expect(callers).toHaveLength(16);
++    // ⭐ RE-RECORDED 2026-09-03 BY ENCOUNTERS ENC-1: 16 -> 17, a DECLARED arrival rather than a
++    // discovered one. `src/domain/worldPulse/envoyChanceMeeting.js` is the chance-meeting leaf, and
++    // it takes the CURED root for the reason every caller above it did: its six arms are keyed
++    // hashes over (seed, meeting key, arm) and a raw `fnv % 8` would alias an eighth onto a parity
++    // class of meeting keys. ⛔ IT COMPOSES NO ROOT AND READS NO WORLD — the seed arrives as an
++    // ARGUMENT and the leaf never reaches for `worldState.rngSeed`, so this counter is the only arm
++    // of this file the arrival moves; COMPOSITIONS and READ_SITES both stay green, and the read site
++    // lands with the stage that supplies the seed. The caller is DARK at this commit (zero importers
++    // under src/, its only driver being tests/domain/envoyChanceMeeting.test.js), so the arrival is a
++    // source fact and not yet a behaviour — the W-OPS O1 disposition verbatim, one family over.
++    expect(callers).toHaveLength(17);
+     // ⭐ AND THE TWO POPULATIONS NOW DIFFER IN KIND RATHER THAN BY LUCK. `mentions` stays a
+     // RAW scan deliberately — it is the mention population, and the contrast is the claim.
+     const mentions = ALL_FILES.filter((f) => read(f).includes('hash01'));

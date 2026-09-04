@@ -1,0 +1,255 @@
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/58f0a8e2-2c4f-4073-8635-ecc7cf5010f6/scratchpad/laneKERNELMARK-tree
+
+ ❯ tests/copy/voiceMechanics.test.js (19 tests | 4 failed) 766ms
+     × per-file debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win) 7ms
+     × total debt never grows past its committed budget 0ms
+     × per-file JSX debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win) 1ms
+     × total JSX debt never grows past its committed budget 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/copy/voiceMechanics.test.js > E2 voiceMechanics — src/data + src/domain string-literal ratchet (shrink-only) > per-file debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win)
+AssertionError: 
+src/domain/certification/subsystemRowsBelief.js: baseline em:0 bang:0 → current em:27 bang:1
+src/domain/certification/subsystemRowsCoin.js: baseline em:0 bang:0 → current em:7 bang:0
+src/domain/certification/subsystemRowsCompact.js: baseline em:0 bang:0 → current em:30 bang:0
+src/domain/certification/subsystemRowsGrowth.js: baseline em:0 bang:0 → current em:1 bang:0
+src/domain/certification/subsystemRowsMemory.js: baseline em:0 bang:0 → current em:1 bang:0
+src/domain/certification/subsystemRowsSeat.js: baseline em:0 bang:0 → current em:9 bang:0
+src/domain/certification/subsystemRowsVirtual.js: baseline em:0 bang:0 → current em:25 bang:0
+src/domain/certification/tradeConvergenceContract.js: baseline em:0 bang:0 → current em:4 bang:0
+src/domain/certification/warConvergenceContract.js: baseline em:0 bang:0 → current em:4 bang:0
+src/domain/certification/warConvergenceForces.js: baseline em:0 bang:0 → current em:6 bang:0
+src/domain/clock.js: baseline em:1 bang:0 → current em:2 bang:0
+src/domain/content/customContentManifest.generated.js: baseline em:0 bang:0 → current em:22 bang:0
+src/domain/customContent.js: baseline em:0 bang:0 → current em:2 bang:0
+src/domain/display/engagementNarrative.js: baseline em:0 bang:0 → current em:1 bang:0
+src/domain/display/heraldCausalVoice.js: baseline em:0 bang:0 → current em:2 bang:0
+src/domain/display/heraldIntegrity.js: baseline em:0 bang:0 → current em:6 bang:0
+src/domain/display/heraldJoinMolds.js: baseline em:0 bang:0 → current em:2 bang:0
+src/domain/display/treatyDocument.js: baseline em:4 bang:0 → current em:5 bang:0
+src/domain/display/warAndRoadNames.js: baseline em:0 bang:0 → current em:4 bang:0
+src/domain/dossier/powerStrata.js: baseline em:0 bang:0 → current em:2 bang:0
+src/domain/events/realmManifest.js: baseline em:13 bang:0 → current em:16 bang:0
+src/domain/fieldManifest.js: baseline em:4 bang:4 → current em:12 bang:4
+src/domain/highWater.js: baseline em:0 bang:0 → current em:4 bang:0
+src/domain/hookThemes.js: baseline em:0 bang:0 → current em:0 bang:1
+src/domain/instantWorld/genesisDiplomacy.js: baseline em:0 bang:0 → current em:1 bang:0
+src/domain/magicAssertionText.js: baseline em:0 bang:0 → current em:1 bang:0
+src/domain/magicProfile.js: baseline em:13 bang:0 → current em:14 bang:0
+src/domain/npc/acceptanceCharacterReads.js: baseline em:0 bang:0 → current em:5 bang:0
+src/domain/npc/characterConsumers.js: baseline em:0 bang:0 → current em:1 bang:0
+src/domain/npc/knownCharacter.js: baseline em:0 bang:0 → current em:4 bang:0
+src/domain/npc/livedExperienceCatalog.js: baseline em:0 bang:0 → current em:6 bang:0
+src/domain/npc/livedExperienceSources.js: baseline em:0 bang:0 → current em:10 bang:0
+src/domain/undercity/monotoneComponents.js: baseline em:0 bang:0 → current em:1 bang:0
+src/domain/worldPulse/bandFamilies.js: baseline em:0 bang:0 → current em:1 bang:0
+src/domain/worldPulse/bandedStock.js: baseline em:0 bang:0 → current em:2 bang:0
+src/domain/worldPulse/beliefMap.js: baseline em:2 bang:0 → current em:3 bang:0
+src/domain/worldPulse/changeAuthorityPolicy.js: baseline em:6 bang:0 → current em:7 bang:0
+src/domain/worldPulse/commercialReceiptPools.js: baseline em:0 bang:0 → current em:10 bang:0
+src/domain/worldPulse/conquestExecution.js: baseline em:0 bang:0 → current em:1 bang:0
+src/domain/worldPulse/contributionLedger.js: baseline em:0 bang:0 → current em:1 bang:0
+src/domain/worldPulse/convergence.js: baseline em:18 bang:0 → current em:14 bang:0
+src/domain/worldPulse/convergenceReactive.js: baseline em:0 bang:0 → current em:4 bang:0
+src/domain/worldPulse/deploymentReturn.js: baseline em:0 bang:0 → current em:2 bang:0
+src/domain/worldPulse/faithField.js: baseline em:0 bang:0 → current em:1 bang:0
+src/domain/worldPulse/faithReceiptPools.js: baseline em:0 bang:0 → current em:1 bang:0
+src/domain/worldPulse/feasibilityGate.js: baseline em:0 bang:0 → current em:1 bang:0
+src/domain/worldPulse/grammarReceiptPools.js: baseline em:0 bang:0 → current em:6 bang:0
+src/domain/worldPulse/habit/habitCurve.js: baseline em:0 bang:0 → current em:1 bang:0
+src/domain/worldPulse/habit/habitVocabulary.js: baseline em:0 bang:0 → current em:1 bang:0
+src/domain/worldPulse/habitForkRegistry.js: baseline em:0 bang:0 → current em:34 bang:0
+src/domain/worldPulse/lawBandModulation.js: baseline em:0 bang:0 → current em:2 bang:0
+src/domain/worldPulse/moralInstitutionPressure.js: baseline em:1 bang:0 → current em:3 bang:0
+src/domain/worldPulse/occupation.js: baseline em:0 bang:0 → current em:1 bang:0
+src/domain/worldPulse/operations/operationGrammar.js: baseline em:0 bang:0 → current em:13 bang:0
+src/domain/worldPulse/pactProposals.js: baseline em:0 bang:0 → current em:1 bang:0
+src/domain/worldPulse/pactTriggers.js: baseline em:0 bang:0 → current em:1 bang:0
+src/domain/worldPulse/peaceTermsDocument.js: baseline em:0 bang:0 → current em:1 bang:0
+src/domain/worldPulse/peaceTermsDrafting.js: baseline em:0 bang:0 → current em:10 bang:0
+src/domain/worldPulse/peaceTermsSale.js: baseline em:0 bang:0 → current em:1 bang:0
+src/domain/worldPulse/peopleLedger.js: baseline em:0 bang:0 → current em:2 bang:0
+src/domain/worldPulse/pulseKernel.js: baseline em:3 bang:0 → current em:4 bang:0
+src/domain/worldPulse/pulseStageManifest.js: baseline em:0 bang:0 → current em:0 bang:3
+src/domain/worldPulse/razing.js: baseline em:0 bang:0 → current em:3 bang:0
+src/domain/worldPulse/resourceDynamicsKernel.js: baseline em:2 bang:0 → current em:3 bang:0
+src/domain/worldPulse/sovereigntyTransfer.js: baseline em:0 bang:0 → current em:1 bang:0
+src/domain/worldPulse/warReceiptPools.js: baseline em:0 bang:0 → current em:5 bang:0
+src/domain/worldPulse/warSiegeVerdict.js: baseline em:0 bang:0 → current em:1 bang:0
+src/domain/worldPulse/warStance.js: baseline em:0 bang:0 → current em:2 bang:0
+src/domain/worldPulse/warTerminationCauseTables.js: baseline em:0 bang:0 → current em:1 bang:0
+: expected [ …(69) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "src/domain/certification/subsystemRowsBelief.js: baseline em:0 bang:0 → current em:27 bang:1",
++   "src/domain/certification/subsystemRowsCoin.js: baseline em:0 bang:0 → current em:7 bang:0",
++   "src/domain/certification/subsystemRowsCompact.js: baseline em:0 bang:0 → current em:30 bang:0",
++   "src/domain/certification/subsystemRowsGrowth.js: baseline em:0 bang:0 → current em:1 bang:0",
++   "src/domain/certification/subsystemRowsMemory.js: baseline em:0 bang:0 → current em:1 bang:0",
++   "src/domain/certification/subsystemRowsSeat.js: baseline em:0 bang:0 → current em:9 bang:0",
++   "src/domain/certification/subsystemRowsVirtual.js: baseline em:0 bang:0 → current em:25 bang:0",
++   "src/domain/certification/tradeConvergenceContract.js: baseline em:0 bang:0 → current em:4 bang:0",
++   "src/domain/certification/warConvergenceContract.js: baseline em:0 bang:0 → current em:4 bang:0",
++   "src/domain/certification/warConvergenceForces.js: baseline em:0 bang:0 → current em:6 bang:0",
++   "src/domain/clock.js: baseline em:1 bang:0 → current em:2 bang:0",
++   "src/domain/content/customContentManifest.generated.js: baseline em:0 bang:0 → current em:22 bang:0",
++   "src/domain/customContent.js: baseline em:0 bang:0 → current em:2 bang:0",
++   "src/domain/display/engagementNarrative.js: baseline em:0 bang:0 → current em:1 bang:0",
++   "src/domain/display/heraldCausalVoice.js: baseline em:0 bang:0 → current em:2 bang:0",
++   "src/domain/display/heraldIntegrity.js: baseline em:0 bang:0 → current em:6 bang:0",
++   "src/domain/display/heraldJoinMolds.js: baseline em:0 bang:0 → current em:2 bang:0",
++   "src/domain/display/treatyDocument.js: baseline em:4 bang:0 → current em:5 bang:0",
++   "src/domain/display/warAndRoadNames.js: baseline em:0 bang:0 → current em:4 bang:0",
++   "src/domain/dossier/powerStrata.js: baseline em:0 bang:0 → current em:2 bang:0",
++   "src/domain/events/realmManifest.js: baseline em:13 bang:0 → current em:16 bang:0",
++   "src/domain/fieldManifest.js: baseline em:4 bang:4 → current em:12 bang:4",
++   "src/domain/highWater.js: baseline em:0 bang:0 → current em:4 bang:0",
++   "src/domain/hookThemes.js: baseline em:0 bang:0 → current em:0 bang:1",
++   "src/domain/instantWorld/genesisDiplomacy.js: baseline em:0 bang:0 → current em:1 bang:0",
++   "src/domain/magicAssertionText.js: baseline em:0 bang:0 → current em:1 bang:0",
++   "src/domain/magicProfile.js: baseline em:13 bang:0 → current em:14 bang:0",
++   "src/domain/npc/acceptanceCharacterReads.js: baseline em:0 bang:0 → current em:5 bang:0",
++   "src/domain/npc/characterConsumers.js: baseline em:0 bang:0 → current em:1 bang:0",
++   "src/domain/npc/knownCharacter.js: baseline em:0 bang:0 → current em:4 bang:0",
++   "src/domain/npc/livedExperienceCatalog.js: baseline em:0 bang:0 → current em:6 bang:0",
++   "src/domain/npc/livedExperienceSources.js: baseline em:0 bang:0 → current em:10 bang:0",
++   "src/domain/undercity/monotoneComponents.js: baseline em:0 bang:0 → current em:1 bang:0",
++   "src/domain/worldPulse/bandFamilies.js: baseline em:0 bang:0 → current em:1 bang:0",
++   "src/domain/worldPulse/bandedStock.js: baseline em:0 bang:0 → current em:2 bang:0",
++   "src/domain/worldPulse/beliefMap.js: baseline em:2 bang:0 → current em:3 bang:0",
++   "src/domain/worldPulse/changeAuthorityPolicy.js: baseline em:6 bang:0 → current em:7 bang:0",
++   "src/domain/worldPulse/commercialReceiptPools.js: baseline em:0 bang:0 → current em:10 bang:0",
++   "src/domain/worldPulse/conquestExecution.js: baseline em:0 bang:0 → current em:1 bang:0",
++   "src/domain/worldPulse/contributionLedger.js: baseline em:0 bang:0 → current em:1 bang:0",
++   "src/domain/worldPulse/convergence.js: baseline em:18 bang:0 → current em:14 bang:0",
++   "src/domain/worldPulse/convergenceReactive.js: baseline em:0 bang:0 → current em:4 bang:0",
++   "src/domain/worldPulse/deploymentReturn.js: baseline em:0 bang:0 → current em:2 bang:0",
++   "src/domain/worldPulse/faithField.js: baseline em:0 bang:0 → current em:1 bang:0",
++   "src/domain/worldPulse/faithReceiptPools.js: baseline em:0 bang:0 → current em:1 bang:0",
++   "src/domain/worldPulse/feasibilityGate.js: baseline em:0 bang:0 → current em:1 bang:0",
++   "src/domain/worldPulse/grammarReceiptPools.js: baseline em:0 bang:0 → current em:6 bang:0",
++   "src/domain/worldPulse/habit/habitCurve.js: baseline em:0 bang:0 → current em:1 bang:0",
++   "src/domain/worldPulse/habit/habitVocabulary.js: baseline em:0 bang:0 → current em:1 bang:0",
++   "src/domain/worldPulse/habitForkRegistry.js: baseline em:0 bang:0 → current em:34 bang:0",
++   "src/domain/worldPulse/lawBandModulation.js: baseline em:0 bang:0 → current em:2 bang:0",
++   "src/domain/worldPulse/moralInstitutionPressure.js: baseline em:1 bang:0 → current em:3 bang:0",
++   "src/domain/worldPulse/occupation.js: baseline em:0 bang:0 → current em:1 bang:0",
++   "src/domain/worldPulse/operations/operationGrammar.js: baseline em:0 bang:0 → current em:13 bang:0",
++   "src/domain/worldPulse/pactProposals.js: baseline em:0 bang:0 → current em:1 bang:0",
++   "src/domain/worldPulse/pactTriggers.js: baseline em:0 bang:0 → current em:1 bang:0",
++   "src/domain/worldPulse/peaceTermsDocument.js: baseline em:0 bang:0 → current em:1 bang:0",
++   "src/domain/worldPulse/peaceTermsDrafting.js: baseline em:0 bang:0 → current em:10 bang:0",
++   "src/domain/worldPulse/peaceTermsSale.js: baseline em:0 bang:0 → current em:1 bang:0",
++   "src/domain/worldPulse/peopleLedger.js: baseline em:0 bang:0 → current em:2 bang:0",
++   "src/domain/worldPulse/pulseKernel.js: baseline em:3 bang:0 → current em:4 bang:0",
++   "src/domain/worldPulse/pulseStageManifest.js: baseline em:0 bang:0 → current em:0 bang:3",
++   "src/domain/worldPulse/razing.js: baseline em:0 bang:0 → current em:3 bang:0",
++   "src/domain/worldPulse/resourceDynamicsKernel.js: baseline em:2 bang:0 → current em:3 bang:0",
++   "src/domain/worldPulse/sovereigntyTransfer.js: baseline em:0 bang:0 → current em:1 bang:0",
++   "src/domain/worldPulse/warReceiptPools.js: baseline em:0 bang:0 → current em:5 bang:0",
++   "src/domain/worldPulse/warSiegeVerdict.js: baseline em:0 bang:0 → current em:1 bang:0",
++   "src/domain/worldPulse/warStance.js: baseline em:0 bang:0 → current em:2 bang:0",
++   "src/domain/worldPulse/warTerminationCauseTables.js: baseline em:0 bang:0 → current em:1 bang:0",
++ ]
+
+ ❯ tests/copy/voiceMechanics.test.js:243:46
+    241|       }
+    242|     }
+    243|     expect(diffs, `\n${diffs.join('\n')}\n`).toEqual([]);
+       |                                              ^
+    244|   });
+    245|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  tests/copy/voiceMechanics.test.js > E2 voiceMechanics — src/data + src/domain string-literal ratchet (shrink-only) > total debt never grows past its committed budget
+AssertionError: expected 770 to be less than or equal to 670
+ ❯ tests/copy/voiceMechanics.test.js:257:23
+    255|       { em: 0, bang: 0 },
+    256|     );
+    257|     expect(totals.em).toBeLessThanOrEqual(EM_BUDGET);
+       |                       ^
+    258|     expect(totals.bang).toBeLessThanOrEqual(BANG_BUDGET);
+    259|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  tests/copy/voiceMechanics.test.js > E-E voiceMechanics JSX extension — src/**/*.jsx component ratchet (shrink-only) > per-file JSX debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win)
+AssertionError: 
+src/components/account/AccountIdentitySection.jsx: baseline em:0 bang:0 → current em:3 bang:0
+src/components/account/FounderChairBio.jsx: baseline em:0 bang:0 → current em:1 bang:0
+src/components/dossier/LockControls.jsx: baseline em:0 bang:0 → current em:1 bang:0
+src/components/founders/FoundersHallPage.jsx: baseline em:0 bang:0 → current em:2 bang:0
+src/components/founders/HallCovenant.jsx: baseline em:0 bang:0 → current em:1 bang:0
+src/components/founders/RequestChairLetter.jsx: baseline em:0 bang:0 → current em:2 bang:0
+src/components/instant/InstantWorldEntry.jsx: baseline em:0 bang:0 → current em:2 bang:0
+src/components/map/HeraldGazetteer.jsx: baseline em:0 bang:0 → current em:3 bang:0
+src/components/map/PerspectiveStandings.jsx: baseline em:0 bang:0 → current em:4 bang:0
+src/components/map/RealmComparisons.jsx: baseline em:0 bang:0 → current em:2 bang:0
+src/components/map/SimulationRulesAxes.jsx: baseline em:0 bang:0 → current em:2 bang:0
+src/components/new/tabs/EconomicsGlance.jsx: baseline em:0 bang:0 → current em:3 bang:0
+src/components/new/tabs/EconomicsTab.jsx: baseline em:3 bang:0 → current em:0 bang:0
+src/components/new/tabs/FaithTab.jsx: baseline em:0 bang:0 → current em:2 bang:0
+src/components/new/tabs/PowerTab.jsx: baseline em:0 bang:0 → current em:3 bang:0
+src/components/new/tabs/WarTab.jsx: baseline em:0 bang:0 → current em:4 bang:0
+src/components/settlements/LivingWorldGates.jsx: baseline em:0 bang:0 → current em:2 bang:0
+: expected [ …(17) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "src/components/account/AccountIdentitySection.jsx: baseline em:0 bang:0 → current em:3 bang:0",
++   "src/components/account/FounderChairBio.jsx: baseline em:0 bang:0 → current em:1 bang:0",
++   "src/components/dossier/LockControls.jsx: baseline em:0 bang:0 → current em:1 bang:0",
++   "src/components/founders/FoundersHallPage.jsx: baseline em:0 bang:0 → current em:2 bang:0",
++   "src/components/founders/HallCovenant.jsx: baseline em:0 bang:0 → current em:1 bang:0",
++   "src/components/founders/RequestChairLetter.jsx: baseline em:0 bang:0 → current em:2 bang:0",
++   "src/components/instant/InstantWorldEntry.jsx: baseline em:0 bang:0 → current em:2 bang:0",
++   "src/components/map/HeraldGazetteer.jsx: baseline em:0 bang:0 → current em:3 bang:0",
++   "src/components/map/PerspectiveStandings.jsx: baseline em:0 bang:0 → current em:4 bang:0",
++   "src/components/map/RealmComparisons.jsx: baseline em:0 bang:0 → current em:2 bang:0",
++   "src/components/map/SimulationRulesAxes.jsx: baseline em:0 bang:0 → current em:2 bang:0",
++   "src/components/new/tabs/EconomicsGlance.jsx: baseline em:0 bang:0 → current em:3 bang:0",
++   "src/components/new/tabs/EconomicsTab.jsx: baseline em:3 bang:0 → current em:0 bang:0",
++   "src/components/new/tabs/FaithTab.jsx: baseline em:0 bang:0 → current em:2 bang:0",
++   "src/components/new/tabs/PowerTab.jsx: baseline em:0 bang:0 → current em:3 bang:0",
++   "src/components/new/tabs/WarTab.jsx: baseline em:0 bang:0 → current em:4 bang:0",
++   "src/components/settlements/LivingWorldGates.jsx: baseline em:0 bang:0 → current em:2 bang:0",
++ ]
+
+ ❯ tests/copy/voiceMechanics.test.js:301:46
+    299|       }
+    300|     }
+    301|     expect(diffs, `\n${diffs.join('\n')}\n`).toEqual([]);
+       |                                              ^
+    302|   });
+    303|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  tests/copy/voiceMechanics.test.js > E-E voiceMechanics JSX extension — src/**/*.jsx component ratchet (shrink-only) > total JSX debt never grows past its committed budget
+AssertionError: expected 40 to be less than or equal to 6
+ ❯ tests/copy/voiceMechanics.test.js:326:23
+    324|       { em: 0, bang: 0 },
+    325|     );
+    326|     expect(totals.em).toBeLessThanOrEqual(EM_BUDGET_JSX);
+       |                       ^
+    327|     expect(totals.bang).toBeLessThanOrEqual(BANG_BUDGET_JSX);
+    328|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  4 failed | 15 passed (19)
+   Start at  00:18:33
+   Duration  1.69s (transform 61ms, setup 33ms, import 763ms, tests 766ms, environment 0ms)
+

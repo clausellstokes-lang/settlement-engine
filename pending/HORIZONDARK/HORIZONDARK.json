@@ -1,0 +1,16 @@
+{
+  "_header": "OPUS-AUTHORED",
+  "source": "HORIZONDARK",
+  "status": "COMPLETE",
+  "verified_at": {"product_tip": "ca651d54b (§890)", "train_tip": "15c6368a6 (§891, 18 cars, unlanded)", "ledger_tip": "04f6b255e", "carlist_derived_at": "f12360185 (§887) — STALE by two landings and one train"},
+  "headline": "LANE-QUEUE's '5 of 11 chair-class cars remain' is CONFIRMED, but the carlist's own §1.1 ('the HORIZON-DARK remainder is intact and entirely unbuilt') is now FALSE: 1 of the 11 landed in §890 and 5 more sit composed in the unlanded §891 train.",
+  "consumed_since_the_carlist_was_written": [
+    "READERREVIEW Car 1 — LANDED in §890 as 33c9f530c (Car 1a) + 116df0a3f (Car 1b); seal refs/preserve/horizondark-cars12-2026-09-03=43e063a70 is the pre-rebase pair and is NOT an ancestor of ca651d54b (git merge-base --is-ancestor 43e063a70 ca651d54b -> NO)",
+    "CAPACITY C1 — ec6b0a132, in the §891 train",
+    "CAPACITY C2 — 6bddd6183, in the §891 train (its Outlook-tab surface HELD OUT, see HD-09)",
+    "CAPACITY C3 — d02c5acde, in the §891 train",
+    "CHARSET Car 1 — 4ae140102, in the §891 train (ships DARK at charsetPolicy.enforcement 'report')",
+    "READERREVIEW Car 2 — ac427cc5c + 3 cures (7b10224fd, c84437766, 3d3ad217b), in the §891 train; the composer gap the carlist §6 flagged is CLOSED (composeReaderRegion/advanceReaderCampaign/renderReaderDocuments/readerCorpusManifest all export at 15c6368a6:scripts/review/readerCorpus.mjs)"
+  ],
+  "items": "see StructuredOutput payload returned to the chair — 22 entries, ids HD-01..HD-22"
+}

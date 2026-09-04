@@ -1,0 +1,12 @@
+=== A. WITHIN one settlement window, when a SLOT VARIES per beat (counterpart changes) ===
+kind                       depth  renderedShare  frameShare   gap
+envoy_on_the_road          12     0.3077         0.3077       0.0000
+envoy_departed             6      0.3077         0.5385       0.2308
+envoy_home                 5      0.6154         0.6154       0.0000
+envoy_lost                 5      0.4615         0.6154       0.1538
+
+=== B. THE COLLAPSE MUTANT, but with a varying slot — can it now HIDE? ===
+sample line 0: A road concession was struck at Irontown and is a sheet of paper on a road.
+sample line 1: A road concession was struck at Westmere and is a sheet of paper on a road.
+rendered-counted worst = 0.0000  -> withinEnvelope=true
+frame-counted    worst = 0.9231  -> withinEnvelope=false

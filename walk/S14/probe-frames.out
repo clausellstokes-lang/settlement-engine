@@ -1,0 +1,75 @@
+IMPACT_LABELS 12 {"import_shortage":"a shortage of goods","export_market_loss":"lost markets","route_disruption":"the roads gone bad","authority_instability":"a shaken authority","tax_revenue_disruption":"coffers running short","protection_gap":"defences grown thin","service_disruption":"services faltering","conflict_pressure":"the drums of war","migration_pressure":"people on the move","information_shock":"unsettling news","criminal_pressure":"a rise in lawlessness","religious_pressure":"a stir among the faithful"}
+import_shortage | ready | H: Elmspur braces for a shortage of goods | S: Elmspur braces for a shortage of goods, come from Ashford across the region.
+import_shortage | applied | H: Elmspur wakes to a shortage of goods | S: Elmspur wakes to a shortage of goods, come from Ashford across the region.
+import_shortage | resolved | H: Elmspur has seen the last of a shortage of goods | S: Elmspur has seen the last of a shortage of goods, which came from Ashford across the region.
+import_shortage | ignored | H: Elmspur pays no heed to a shortage of goods | S: Elmspur pays no heed to a shortage of goods, come from Ashford across the region.
+import_shortage | expired | H: Elmspur is spared a shortage of goods | S: Elmspur is spared a shortage of goods, which Ashford sent across the region.
+import_shortage | queued | H: Elmspur has word of a shortage of goods | S: Elmspur has word of a shortage of goods, on the way from Ashford across the region.
+export_market_loss | ready | H: Elmspur braces for lost markets | S: Elmspur braces for lost markets, come from Ashford across the region.
+export_market_loss | applied | H: Elmspur wakes to lost markets | S: Elmspur wakes to lost markets, come from Ashford across the region.
+export_market_loss | resolved | H: Elmspur has seen the last of lost markets | S: Elmspur has seen the last of lost markets, which came from Ashford across the region.
+export_market_loss | ignored | H: Elmspur pays no heed to lost markets | S: Elmspur pays no heed to lost markets, come from Ashford across the region.
+export_market_loss | expired | H: Elmspur is spared lost markets | S: Elmspur is spared lost markets, which Ashford sent across the region.
+export_market_loss | queued | H: Elmspur has word of lost markets | S: Elmspur has word of lost markets, on the way from Ashford across the region.
+route_disruption | ready | H: Elmspur braces for the roads gone bad | S: Elmspur braces for the roads gone bad, come from Ashford across the region.
+route_disruption | applied | H: Elmspur wakes to the roads gone bad | S: Elmspur wakes to the roads gone bad, come from Ashford across the region.
+route_disruption | resolved | H: Elmspur has seen the last of the roads gone bad | S: Elmspur has seen the last of the roads gone bad, which came from Ashford across the region.
+route_disruption | ignored | H: Elmspur pays no heed to the roads gone bad | S: Elmspur pays no heed to the roads gone bad, come from Ashford across the region.
+route_disruption | expired | H: Elmspur is spared the roads gone bad | S: Elmspur is spared the roads gone bad, which Ashford sent across the region.
+route_disruption | queued | H: Elmspur has word of the roads gone bad | S: Elmspur has word of the roads gone bad, on the way from Ashford across the region.
+authority_instability | ready | H: Elmspur braces for a shaken authority | S: Elmspur braces for a shaken authority, come from Ashford across the region.
+authority_instability | applied | H: Elmspur wakes to a shaken authority | S: Elmspur wakes to a shaken authority, come from Ashford across the region.
+authority_instability | resolved | H: Elmspur has seen the last of a shaken authority | S: Elmspur has seen the last of a shaken authority, which came from Ashford across the region.
+authority_instability | ignored | H: Elmspur pays no heed to a shaken authority | S: Elmspur pays no heed to a shaken authority, come from Ashford across the region.
+authority_instability | expired | H: Elmspur is spared a shaken authority | S: Elmspur is spared a shaken authority, which Ashford sent across the region.
+authority_instability | queued | H: Elmspur has word of a shaken authority | S: Elmspur has word of a shaken authority, on the way from Ashford across the region.
+tax_revenue_disruption | ready | H: Elmspur braces for coffers running short | S: Elmspur braces for coffers running short, come from Ashford across the region.
+tax_revenue_disruption | applied | H: Elmspur wakes to coffers running short | S: Elmspur wakes to coffers running short, come from Ashford across the region.
+tax_revenue_disruption | resolved | H: Elmspur has seen the last of coffers running short | S: Elmspur has seen the last of coffers running short, which came from Ashford across the region.
+tax_revenue_disruption | ignored | H: Elmspur pays no heed to coffers running short | S: Elmspur pays no heed to coffers running short, come from Ashford across the region.
+tax_revenue_disruption | expired | H: Elmspur is spared coffers running short | S: Elmspur is spared coffers running short, which Ashford sent across the region.
+tax_revenue_disruption | queued | H: Elmspur has word of coffers running short | S: Elmspur has word of coffers running short, on the way from Ashford across the region.
+protection_gap | ready | H: Elmspur braces for defences grown thin | S: Elmspur braces for defences grown thin, come from Ashford across the region.
+protection_gap | applied | H: Elmspur wakes to defences grown thin | S: Elmspur wakes to defences grown thin, come from Ashford across the region.
+protection_gap | resolved | H: Elmspur has seen the last of defences grown thin | S: Elmspur has seen the last of defences grown thin, which came from Ashford across the region.
+protection_gap | ignored | H: Elmspur pays no heed to defences grown thin | S: Elmspur pays no heed to defences grown thin, come from Ashford across the region.
+protection_gap | expired | H: Elmspur is spared defences grown thin | S: Elmspur is spared defences grown thin, which Ashford sent across the region.
+protection_gap | queued | H: Elmspur has word of defences grown thin | S: Elmspur has word of defences grown thin, on the way from Ashford across the region.
+service_disruption | ready | H: Elmspur braces for services faltering | S: Elmspur braces for services faltering, come from Ashford across the region.
+service_disruption | applied | H: Elmspur wakes to services faltering | S: Elmspur wakes to services faltering, come from Ashford across the region.
+service_disruption | resolved | H: Elmspur has seen the last of services faltering | S: Elmspur has seen the last of services faltering, which came from Ashford across the region.
+service_disruption | ignored | H: Elmspur pays no heed to services faltering | S: Elmspur pays no heed to services faltering, come from Ashford across the region.
+service_disruption | expired | H: Elmspur is spared services faltering | S: Elmspur is spared services faltering, which Ashford sent across the region.
+service_disruption | queued | H: Elmspur has word of services faltering | S: Elmspur has word of services faltering, on the way from Ashford across the region.
+conflict_pressure | ready | H: Elmspur braces for the drums of war | S: Elmspur braces for the drums of war, come from Ashford across the region.
+conflict_pressure | applied | H: Elmspur wakes to the drums of war | S: Elmspur wakes to the drums of war, come from Ashford across the region.
+conflict_pressure | resolved | H: Elmspur has seen the last of the drums of war | S: Elmspur has seen the last of the drums of war, which came from Ashford across the region.
+conflict_pressure | ignored | H: Elmspur pays no heed to the drums of war | S: Elmspur pays no heed to the drums of war, come from Ashford across the region.
+conflict_pressure | expired | H: Elmspur is spared the drums of war | S: Elmspur is spared the drums of war, which Ashford sent across the region.
+conflict_pressure | queued | H: Elmspur has word of the drums of war | S: Elmspur has word of the drums of war, on the way from Ashford across the region.
+migration_pressure | ready | H: Elmspur braces for people on the move | S: Elmspur braces for people on the move, come from Ashford across the region.
+migration_pressure | applied | H: Elmspur wakes to people on the move | S: Elmspur wakes to people on the move, come from Ashford across the region.
+migration_pressure | resolved | H: Elmspur has seen the last of people on the move | S: Elmspur has seen the last of people on the move, which came from Ashford across the region.
+migration_pressure | ignored | H: Elmspur pays no heed to people on the move | S: Elmspur pays no heed to people on the move, come from Ashford across the region.
+migration_pressure | expired | H: Elmspur is spared people on the move | S: Elmspur is spared people on the move, which Ashford sent across the region.
+migration_pressure | queued | H: Elmspur has word of people on the move | S: Elmspur has word of people on the move, on the way from Ashford across the region.
+information_shock | ready | H: Elmspur braces for unsettling news | S: Elmspur braces for unsettling news, come from Ashford across the region.
+information_shock | applied | H: Elmspur wakes to unsettling news | S: Elmspur wakes to unsettling news, come from Ashford across the region.
+information_shock | resolved | H: Elmspur has seen the last of unsettling news | S: Elmspur has seen the last of unsettling news, which came from Ashford across the region.
+information_shock | ignored | H: Elmspur pays no heed to unsettling news | S: Elmspur pays no heed to unsettling news, come from Ashford across the region.
+information_shock | expired | H: Elmspur is spared unsettling news | S: Elmspur is spared unsettling news, which Ashford sent across the region.
+information_shock | queued | H: Elmspur has word of unsettling news | S: Elmspur has word of unsettling news, on the way from Ashford across the region.
+criminal_pressure | ready | H: Elmspur braces for a rise in lawlessness | S: Elmspur braces for a rise in lawlessness, come from Ashford across the region.
+criminal_pressure | applied | H: Elmspur wakes to a rise in lawlessness | S: Elmspur wakes to a rise in lawlessness, come from Ashford across the region.
+criminal_pressure | resolved | H: Elmspur has seen the last of a rise in lawlessness | S: Elmspur has seen the last of a rise in lawlessness, which came from Ashford across the region.
+criminal_pressure | ignored | H: Elmspur pays no heed to a rise in lawlessness | S: Elmspur pays no heed to a rise in lawlessness, come from Ashford across the region.
+criminal_pressure | expired | H: Elmspur is spared a rise in lawlessness | S: Elmspur is spared a rise in lawlessness, which Ashford sent across the region.
+criminal_pressure | queued | H: Elmspur has word of a rise in lawlessness | S: Elmspur has word of a rise in lawlessness, on the way from Ashford across the region.
+religious_pressure | ready | H: Elmspur braces for a stir among the faithful | S: Elmspur braces for a stir among the faithful, come from Ashford across the region.
+religious_pressure | applied | H: Elmspur wakes to a stir among the faithful | S: Elmspur wakes to a stir among the faithful, come from Ashford across the region.
+religious_pressure | resolved | H: Elmspur has seen the last of a stir among the faithful | S: Elmspur has seen the last of a stir among the faithful, which came from Ashford across the region.
+religious_pressure | ignored | H: Elmspur pays no heed to a stir among the faithful | S: Elmspur pays no heed to a stir among the faithful, come from Ashford across the region.
+religious_pressure | expired | H: Elmspur is spared a stir among the faithful | S: Elmspur is spared a stir among the faithful, which Ashford sent across the region.
+religious_pressure | queued | H: Elmspur has word of a stir among the faithful | S: Elmspur has word of a stir among the faithful, on the way from Ashford across the region.
+FALLBACK | H: A far settlement braces for the roads gone bad | S: A far settlement braces for the roads gone bad, come from a neighbouring town across the region.
+UNREGISTERED | H: Elmspur wakes to a hard turn in its fortunes | S: Elmspur wakes to a hard turn in its fortunes, come from Ashford across the region.

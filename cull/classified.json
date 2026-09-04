@@ -1,0 +1,4019 @@
+[
+ {
+  "id": "src/domain/certification/warConvergenceContract.js#WAR_CONVERGENCE_TUNING",
+  "file": "src/domain/certification/warConvergenceContract.js",
+  "exp": "WAR_CONVERGENCE_TUNING",
+  "line": 169,
+  "keys": 11,
+  "exported": true,
+  "fileDeps": 3,
+  "collides": false,
+  "totalHits": 35,
+  "homeHits": 22,
+  "foreignHits": 13,
+  "buckets": {
+   "docs": [
+    "docs/FABLE_VALIDATION_QUEUE.md(1)"
+   ],
+   "src": [
+    "src/domain/certification/tradeConvergenceContract.js(1)",
+    "src/domain/certification/warConvergenceForces.js(1)"
+   ],
+   "tests": [
+    "tests/domain/behavioralCertificationContract.test.js(8)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "docs",
+   "src",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/certification/warConvergenceForces.js#WAR_CONVERGENCE_FORCE_TUNING",
+  "file": "src/domain/certification/warConvergenceForces.js",
+  "exp": "WAR_CONVERGENCE_FORCE_TUNING",
+  "line": 179,
+  "keys": 8,
+  "exported": true,
+  "fileDeps": 1,
+  "collides": false,
+  "totalHits": 14,
+  "homeHits": 7,
+  "foreignHits": 7,
+  "buckets": {
+   "docs": [
+    "docs/FABLE_VALIDATION_QUEUE.md(1)"
+   ],
+   "tests": [
+    "tests/domain/warConvergenceForces.test.js(4)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "docs",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/corruption.js#CAPTURE_TUNING",
+  "file": "src/domain/corruption.js",
+  "exp": "CAPTURE_TUNING",
+  "line": 485,
+  "keys": 2,
+  "exported": true,
+  "fileDeps": 23,
+  "collides": false,
+  "totalHits": 10,
+  "homeHits": 3,
+  "foreignHits": 7,
+  "buckets": {
+   "docs": [
+    "docs/SIMULATION_LOGIC_AUDIT.md(1)",
+    "docs/content/RECEIPT_POOLS_DOSSIER_STATE.md(1)"
+   ],
+   "other": [
+    "supabase/functions/_shared/aiCharterBundle.js(1)",
+    "supabase/functions/_shared/aiGroundingBundle.js(1)",
+    "supabase/functions/_shared/aiOutputSchemaBundle.js(1)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "docs",
+   "other"
+  ]
+ },
+ {
+  "id": "src/domain/density/densityBands.js#TIER_ORDER",
+  "file": "src/domain/density/densityBands.js",
+  "exp": "TIER_ORDER",
+  "line": 66,
+  "keys": 6,
+  "exported": true,
+  "fileDeps": 9,
+  "collides": false,
+  "totalHits": 412,
+  "homeHits": 2,
+  "foreignHits": 410,
+  "buckets": {
+   "other": [
+    "CODEBASE_REVIEW.md(3)",
+    "supabase/functions/_shared/aiGroundingBundle.js(1)",
+    "vite.config.js(2)"
+   ],
+   "docs": [
+    "docs/COMPREHENSIVE_REVIEW_2026-07-15.md(1)",
+    "docs/DESIGN_EVENT_COMPOSER_V2.md(1)",
+    "docs/DESIGN_FP_ARCH_CENSUS.md(1)",
+    "docs/DESIGN_FP_ARCH_SP.md(1)",
+    "docs/DESIGN_SETTLEMENT_MAP.md(1)",
+    "docs/EPISTEMIC_PREVENTION_PLAN.md(1)",
+    "docs/FABLE_VALIDATION_QUEUE.md(2)",
+    "docs/GENERATION_COHERENCE_AUDIT.md(1)",
+    "docs/PHASE4_FAITH_DELTA.md(1)",
+    "docs/SETTLEMENT_CAPABILITY_ATLAS.md(1)",
+    "docs/implementation/INDEX.md(1)",
+    "docs/implementation/PACKET_MANIFEST.json(6)",
+    "docs/implementation/packets/catalog-hygiene/MF-CH3.md(1)",
+    "docs/implementation/packets/site-coherence/SCW-0.md(3)",
+    "docs/implementation/packets/town-cartography/MF-T2R.md(4)",
+    "docs/implementation/packets/town-cartography/MF-UC1.md(3)",
+    "docs/review-r2/RAW_SURVEY_RESULTS.json(1)"
+   ],
+   "scripts": [
+    "scripts/audit/generate-audit.mjs(12)",
+    "scripts/audit/generation-certification-soak.mjs(8)",
+    "scripts/audit/simulate-deep.mjs(2)",
+    "scripts/audit/simulate-world.mjs(2)",
+    "scripts/count-tuning-inventory.mjs(1)",
+    "scripts/generate-compendium-data.mjs(2)",
+    "scripts/lib/tuning-inventory.mjs(1)"
+   ],
+   "src": [
+    "src/components/ConfigurationPanel.jsx(3)",
+    "src/components/HomeHero.jsx(4)",
+    "src/components/TradeDynamicsPanel.jsx(4)",
+    "src/components/gallery/CampaignStatePanel.jsx(2)",
+    "src/components/gallery/galleryMapsFilters.js(1)",
+    "src/components/gallery/galleryMapsUtils.js(3)",
+    "src/components/gallery/galleryUtils.js(1)",
+    "src/components/loadingJourney/journeyManifest.js(5)",
+    "src/components/map/HeraldGazetteer.jsx(3)",
+    "src/components/map/PantheonPanel.jsx(2)",
+    "src/components/map/RealmComparisons.jsx(3)",
+    "src/components/map/TerritoryLayer.jsx(2)",
+    "src/components/settlement/eventComposer/EventComposerTierField.jsx(5)",
+    "src/data/constants.js(3)",
+    "src/domain/certification/subsystemRowsBelief.js(1)",
+    "src/domain/content/contentSampleCategoryFixtures.js(7)",
+    "src/domain/content/reviewedSupplyChainPersistence.js(4)",
+    "src/domain/customContentSchema.js(4)",
+    "src/domain/events/affordanceManifest.js(4)",
+    "src/domain/events/mutateEntities.js(3)",
+    "src/domain/highWater.js(3)",
+    "src/domain/instantWorld/worldPlan.js(1)",
+    "src/domain/interior/interiorTemplates.js(5)",
+    "src/domain/realm/autoplacement.js(3)",
+    "src/domain/region/deriveRegionalState.js(2)",
+    "src/domain/region/discoverDependencyCandidates.js(2)",
+    "src/domain/townMap/townLayoutV2.js(3)",
+    "src/domain/townMap/townMapModel.js(3)",
+    "src/domain/traditions/genesis.js(3)",
+    "src/domain/traditions/politics.js(2)",
+    "src/domain/worldPulse/beliefAxisSubjects.js(4)",
+    "src/domain/worldPulse/calamityKernel.js(6)",
+    "src/domain/worldPulse/conquestFeeds.js(3)",
+    "src/domain/worldPulse/demographicsLand.js(5)",
+    "src/domain/worldPulse/demographicsRates.js(3)",
+    "src/domain/worldPulse/demographicsResponses.js(5)",
+    "src/domain/worldPulse/institutionLifecycle.js(6)",
+    "src/domain/worldPulse/lineageClaim.js(7)",
+    "src/domain/worldPulse/magicForms.js(3)",
+    "src/domain/worldPulse/militaryStrength.js(4)",
+    "src/domain/worldPulse/navalStrength.js(5)",
+    "src/domain/worldPulse/npcGoalBranches.js(3)",
+    "src/domain/worldPulse/pestilenceKernel.js(3)",
+    "src/domain/worldPulse/relationshipMemory.js(4)",
+    "src/domain/worldPulse/relationshipRuleHelpers.js(4)",
+    "src/domain/worldPulse/religiousContest.js(1)",
+    "src/domain/worldPulse/settlementLifecycleFirstClass.js(3)",
+    "src/domain/worldPulse/settlementLifecycleKernel.js(3)",
+    "src/domain/worldPulse/sovereigntyAppraisal.js(2)",
+    "src/domain/worldPulse/tierOutcomeApply.js(2)",
+    "src/domain/worldPulse/tierResourceDynamics.js(6)",
+    "src/domain/worldPulse/urbanFabricKernel.js(5)",
+    "src/generators/computeActiveChains.js(3)",
+    "src/generators/economy/finishedGoodsDemand.js(3)",
+    "src/generators/economy/tradeGoods.js(3)",
+    "src/generators/economy/upgradeOpportunities.js(3)",
+    "src/generators/economy/viability.js(4)",
+    "src/generators/helpers.js(2)",
+    "src/generators/institutionProbability.js(6)",
+    "src/generators/isolationGenerator.js(3)",
+    "src/generators/lookups.js(6)",
+    "src/generators/steps/assembleInstitutions.js(3)",
+    "src/generators/steps/coherenceRepairPass.js(5)",
+    "src/generators/steps/resolveConfig.js(3)",
+    "src/generators/structuralValidator.js(3)",
+    "src/store/selectors.js(2)"
+   ],
+   "tests": [
+    "tests/components/gallery/facetAlignment.test.js(4)",
+    "tests/components/tradeDynamicsGoodsSource.test.js(3)",
+    "tests/data/popToTierBoundary.test.js(4)",
+    "tests/docs/compendiumDataFreshness.test.js(2)",
+    "tests/domain/customContentSchema.test.js(5)",
+    "tests/domain/demographicsRates.test.js(18)",
+    "tests/domain/magicForms.test.js(7)",
+    "tests/domain/razingWr8.test.js(6)",
+    "tests/domain/sovereigntyAppraisalWr10.test.js(4)",
+    "tests/domain/undercitySewerDerivation.test.js(9)",
+    "tests/generators/densityLaw.test.js(19)",
+    "tests/generators/economicViabilitySuggestions.test.js(3)",
+    "tests/generators/metropolisCatalogReachable.test.js(2)",
+    "tests/joins/chains.test.js(7)",
+    "tests/lint/catalogTierGateParity.walker.test.js(10)",
+    "tests/lint/facetInferenceHonesty.walker.test.js(2)",
+    "tests/lint/siteCoherenceRatchet.test.js(3)",
+    "tests/lint/spAxisVocabulary.walker.test.js(4)",
+    "tests/simulation/tierInertiaEnvelope.test.js(3)",
+    "tests/ui/homeHeroAnonGauge.test.jsx(1)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(2)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "other",
+   "docs",
+   "scripts",
+   "src",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/density/densityBands.js#DENSITY_BANDS",
+  "file": "src/domain/density/densityBands.js",
+  "exp": "DENSITY_BANDS",
+  "line": 110,
+  "keys": 6,
+  "exported": true,
+  "fileDeps": 9,
+  "collides": false,
+  "totalHits": 14,
+  "homeHits": 5,
+  "foreignHits": 9,
+  "buckets": {
+   "scripts": [
+    "scripts/count-tuning-inventory.mjs(1)"
+   ],
+   "other": [
+    "supabase/functions/_shared/aiGroundingBundle.js(1)"
+   ],
+   "tests": [
+    "tests/generators/densityLaw.test.js(4)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(2)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "scripts",
+   "other",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/density/densityBands.js#RANK_CEILING_BY_TIER",
+  "file": "src/domain/density/densityBands.js",
+  "exp": "RANK_CEILING_BY_TIER",
+  "line": 135,
+  "keys": 6,
+  "exported": true,
+  "fileDeps": 9,
+  "collides": false,
+  "totalHits": 9,
+  "homeHits": 2,
+  "foreignHits": 7,
+  "buckets": {
+   "scripts": [
+    "scripts/count-tuning-inventory.mjs(1)"
+   ],
+   "other": [
+    "supabase/functions/_shared/aiGroundingBundle.js(1)"
+   ],
+   "tests": [
+    "tests/generators/densityLaw.test.js(2)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(2)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "scripts",
+   "other",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/dossier/hookRetention.js#DEFAULT_RETENTION_TUNING",
+  "file": "src/domain/dossier/hookRetention.js",
+  "exp": "DEFAULT_RETENTION_TUNING",
+  "line": 87,
+  "keys": 6,
+  "exported": true,
+  "fileDeps": 2,
+  "collides": false,
+  "totalHits": 12,
+  "homeHits": 4,
+  "foreignHits": 8,
+  "buckets": {
+   "other": [
+    "supabase/functions/_shared/aiGroundingBundle.js(4)"
+   ],
+   "tests": [
+    "tests/domain/hookRetention.test.js(2)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "other",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/npc/livedExperienceFunnel.js#FUNNEL_TUNING",
+  "file": "src/domain/npc/livedExperienceFunnel.js",
+  "exp": "FUNNEL_TUNING",
+  "line": 222,
+  "keys": 6,
+  "exported": true,
+  "fileDeps": 2,
+  "collides": false,
+  "totalHits": 33,
+  "homeHits": 7,
+  "foreignHits": 26,
+  "buckets": {
+   "src": [
+    "src/domain/worldPulse/envoyChanceMeeting.js(1)"
+   ],
+   "tests": [
+    "tests/domain/infiltrationDrift.test.js(2)",
+    "tests/domain/npc/livedExperienceFunnel.test.js(12)",
+    "tests/domain/npc/livedExperienceLoops.test.js(9)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "src",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/realm/autoplacement.js#AUTOPLACEMENT_TUNING",
+  "file": "src/domain/realm/autoplacement.js",
+  "exp": "AUTOPLACEMENT_TUNING",
+  "line": 83,
+  "keys": 11,
+  "exported": true,
+  "fileDeps": 0,
+  "collides": false,
+  "totalHits": 9,
+  "homeHits": 4,
+  "foreignHits": 5,
+  "buckets": {
+   "tests": [
+    "tests/domain/autoplacement.test.js(3)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/roads/seaRoads.js#SEA_ROADS_TUNING",
+  "file": "src/domain/roads/seaRoads.js",
+  "exp": "SEA_ROADS_TUNING",
+  "line": 49,
+  "keys": 7,
+  "exported": true,
+  "fileDeps": 1,
+  "collides": false,
+  "totalHits": 10,
+  "homeHits": 2,
+  "foreignHits": 8,
+  "buckets": {
+   "tests": [
+    "tests/domain/roadsGauntlet.test.js(3)",
+    "tests/domain/seaRoads.test.js(3)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/rulingPowerSeat.js#SEAT_TUNING",
+  "file": "src/domain/rulingPowerSeat.js",
+  "exp": "SEAT_TUNING",
+  "line": 89,
+  "keys": 12,
+  "exported": true,
+  "fileDeps": 9,
+  "collides": false,
+  "totalHits": 24,
+  "homeHits": 12,
+  "foreignHits": 12,
+  "buckets": {
+   "src": [
+    "src/domain/worldPulse/foreignPrimacy.js(1)"
+   ],
+   "tests": [
+    "tests/domain/foreignSeatCoupAdj.test.js(6)",
+    "tests/domain/foreignSeatResolver.test.js(3)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "src",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/spatial/calamity.js#EXPOSURE_TUNING",
+  "file": "src/domain/spatial/calamity.js",
+  "exp": "EXPOSURE_TUNING",
+  "line": 159,
+  "keys": 5,
+  "exported": true,
+  "fileDeps": 4,
+  "collides": false,
+  "totalHits": 8,
+  "homeHits": 2,
+  "foreignHits": 6,
+  "buckets": {
+   "tests": [
+    "tests/domain/calamity.test.js(4)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/spatial/cohesionWeave.js#QUADRANT_TUNING",
+  "file": "src/domain/spatial/cohesionWeave.js",
+  "exp": "QUADRANT_TUNING",
+  "line": 41,
+  "keys": 5,
+  "exported": true,
+  "fileDeps": 16,
+  "collides": false,
+  "totalHits": 12,
+  "homeHits": 6,
+  "foreignHits": 6,
+  "buckets": {
+   "other": [
+    "supabase/functions/_shared/aiCharterBundle.js(1)",
+    "supabase/functions/_shared/aiGroundingBundle.js(1)",
+    "supabase/functions/_shared/aiOutputSchemaBundle.js(1)"
+   ],
+   "tests": [
+    "tests/domain/cohesionWeave.test.js(1)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "other",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/spatial/cultureDistance.js#CULTURE_TUNING",
+  "file": "src/domain/spatial/cultureDistance.js",
+  "exp": "CULTURE_TUNING",
+  "line": 41,
+  "keys": 8,
+  "exported": true,
+  "fileDeps": 3,
+  "collides": false,
+  "totalHits": 7,
+  "homeHits": 2,
+  "foreignHits": 5,
+  "buckets": {
+   "tests": [
+    "tests/domain/migrationWithMortality.test.js(3)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/spatial/embattlement.js#EMBATTLEMENT_TUNING",
+  "file": "src/domain/spatial/embattlement.js",
+  "exp": "EMBATTLEMENT_TUNING",
+  "line": 69,
+  "keys": 18,
+  "exported": true,
+  "fileDeps": 18,
+  "collides": false,
+  "totalHits": 14,
+  "homeHits": 6,
+  "foreignHits": 8,
+  "buckets": {
+   "src": [
+    "src/domain/worldPulse/routeNetworkCharterDanger.js(1)"
+   ],
+   "tests": [
+    "tests/domain/embattlement.test.js(2)",
+    "tests/domain/entrepots.test.js(3)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "src",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/spatial/generosityEV.js#GENEROSITY_TUNING",
+  "file": "src/domain/spatial/generosityEV.js",
+  "exp": "GENEROSITY_TUNING",
+  "line": 47,
+  "keys": 29,
+  "exported": true,
+  "fileDeps": 3,
+  "collides": false,
+  "totalHits": 12,
+  "homeHits": 4,
+  "foreignHits": 8,
+  "buckets": {
+   "tests": [
+    "tests/domain/generosityEV.test.js(6)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/spatial/generosityEV.js#INTEL_SALE_TUNING",
+  "file": "src/domain/spatial/generosityEV.js",
+  "exp": "INTEL_SALE_TUNING",
+  "line": 898,
+  "keys": 3,
+  "exported": true,
+  "fileDeps": 3,
+  "collides": false,
+  "totalHits": 4,
+  "homeHits": 2,
+  "foreignHits": 2,
+  "buckets": {
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": []
+ },
+ {
+  "id": "src/domain/spatial/migrationRumors.js#MIGRATION_RUMOR_TUNING",
+  "file": "src/domain/spatial/migrationRumors.js",
+  "exp": "MIGRATION_RUMOR_TUNING",
+  "line": 46,
+  "keys": 2,
+  "exported": true,
+  "fileDeps": 1,
+  "collides": false,
+  "totalHits": 7,
+  "homeHits": 2,
+  "foreignHits": 5,
+  "buckets": {
+   "tests": [
+    "tests/domain/migrationRumors.test.js(2)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(2)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/spatial/smuggle.js#SMUGGLE_TUNING",
+  "file": "src/domain/spatial/smuggle.js",
+  "exp": "SMUGGLE_TUNING",
+  "line": 52,
+  "keys": 9,
+  "exported": true,
+  "fileDeps": 2,
+  "collides": false,
+  "totalHits": 9,
+  "homeHits": 5,
+  "foreignHits": 4,
+  "buckets": {
+   "tests": [
+    "tests/domain/smuggle.test.js(2)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/undercity/colonization.js#UNDERCITY_TUNING",
+  "file": "src/domain/undercity/colonization.js",
+  "exp": "UNDERCITY_TUNING",
+  "line": 169,
+  "keys": 4,
+  "exported": true,
+  "fileDeps": 2,
+  "collides": false,
+  "totalHits": 12,
+  "homeHits": 6,
+  "foreignHits": 6,
+  "buckets": {
+   "docs": [
+    "docs/implementation/packets/town-cartography/MF-UC4.md(2)"
+   ],
+   "tests": [
+    "tests/domain/undercityColonization.test.js(2)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "docs",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/undercity/monotoneComponents.js#MONOTONE_EXTENT_TUNING",
+  "file": "src/domain/undercity/monotoneComponents.js",
+  "exp": "MONOTONE_EXTENT_TUNING",
+  "line": 283,
+  "keys": 8,
+  "exported": true,
+  "fileDeps": 1,
+  "collides": false,
+  "totalHits": 16,
+  "homeHits": 8,
+  "foreignHits": 8,
+  "buckets": {
+   "docs": [
+    "docs/implementation/PACKET_MANIFEST.json(1)",
+    "docs/implementation/packets/town-cartography/MF-UC2.md(2)"
+   ],
+   "tests": [
+    "tests/domain/undercityMonotoneComponents.test.js(3)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "docs",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/undercity/sewerDerivation.js#SEWER_DERIVATION_TUNING",
+  "file": "src/domain/undercity/sewerDerivation.js",
+  "exp": "SEWER_DERIVATION_TUNING",
+  "line": 227,
+  "keys": 7,
+  "exported": true,
+  "fileDeps": 2,
+  "collides": false,
+  "totalHits": 24,
+  "homeHits": 5,
+  "foreignHits": 19,
+  "buckets": {
+   "docs": [
+    "docs/implementation/packets/town-cartography/MF-UC1.md(1)",
+    "docs/implementation/packets/town-cartography/MF-UC2.md(1)"
+   ],
+   "src": [
+    "src/domain/undercity/colonization.js(1)",
+    "src/domain/undercity/monotoneComponents.js(1)"
+   ],
+   "tests": [
+    "tests/domain/undercitySewerDerivation.test.js(13)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "docs",
+   "src",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/anticipatedReactions.js#REACTION_TUNING",
+  "file": "src/domain/worldPulse/anticipatedReactions.js",
+  "exp": "REACTION_TUNING",
+  "line": 59,
+  "keys": 3,
+  "exported": true,
+  "fileDeps": 1,
+  "collides": true,
+  "totalHits": 64,
+  "homeHits": 5,
+  "foreignHits": 59,
+  "buckets": {
+   "docs": [
+    "docs/COMPREHENSIVE_REVIEW_2026-07-15.md(1)",
+    "docs/review-r2/RAW_SURVEY_RESULTS.json(1)"
+   ],
+   "scripts": [
+    "scripts/lib/tuning-inventory.mjs(1)"
+   ],
+   "src": [
+    "src/domain/spatial/generosityReactions.js(20)",
+    "src/domain/worldPulse/generosityKernel.js(3)",
+    "src/domain/worldPulse/mobilizationReactions.js(1)",
+    "src/domain/worldPulse/obligationDecay.js(2)",
+    "src/domain/worldPulse/warCoalitionSettlement.js(6)"
+   ],
+   "tests": [
+    "tests/domain/anticipatedReactions.test.js(3)",
+    "tests/domain/generosityKernel.credit.test.js(4)",
+    "tests/domain/generosityReactions.test.js(8)",
+    "tests/lint/tuningRegister.walker.test.js(1)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(3)",
+    "tests/lint/.tuning-register.json(5)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "docs",
+   "scripts",
+   "src",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/armyTransitKernel.js#ARMY_ENVOY_INTENT_TUNING",
+  "file": "src/domain/worldPulse/armyTransitKernel.js",
+  "exp": "ARMY_ENVOY_INTENT_TUNING",
+  "line": 76,
+  "keys": 3,
+  "exported": true,
+  "fileDeps": 2,
+  "collides": false,
+  "totalHits": 11,
+  "homeHits": 6,
+  "foreignHits": 5,
+  "buckets": {
+   "tests": [
+    "tests/domain/warSeatBooksPartition.test.js(3)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/attrition.js#ATTRITION_TUNING",
+  "file": "src/domain/worldPulse/attrition.js",
+  "exp": "ATTRITION_TUNING",
+  "line": 318,
+  "keys": 17,
+  "exported": true,
+  "fileDeps": 1,
+  "collides": false,
+  "totalHits": 6,
+  "homeHits": 1,
+  "foreignHits": 5,
+  "buckets": {
+   "scripts": [
+    "scripts/lib/tuning-inventory.mjs(1)"
+   ],
+   "tests": [
+    "tests/domain/statefulArmies.test.js(2)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "scripts",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/bandedStock.js#HALF_LIFE_WEEKS",
+  "file": "src/domain/worldPulse/bandedStock.js",
+  "exp": "HALF_LIFE_WEEKS",
+  "line": 71,
+  "keys": 5,
+  "exported": true,
+  "fileDeps": 13,
+  "collides": false,
+  "totalHits": 42,
+  "homeHits": 3,
+  "foreignHits": 39,
+  "buckets": {
+   "docs": [
+    "docs/DESIGN_FP_ARCH_INT.md(1)",
+    "docs/implementation/PACKET_MANIFEST.json(2)",
+    "docs/implementation/packets/foreign-policy/IN-1A.md(4)",
+    "docs/implementation/packets/fp/HB-0B.md(3)"
+   ],
+   "scripts": [
+    "scripts/count-tuning-inventory.mjs(1)",
+    "scripts/lib/tuning-inventory.mjs(2)"
+   ],
+   "src": [
+    "src/domain/worldPulse/factionPairLedger.js(2)"
+   ],
+   "other": [
+    "supabase/functions/_shared/aiCharterBundle.js(1)",
+    "supabase/functions/_shared/aiGroundingBundle.js(1)",
+    "supabase/functions/_shared/aiOutputSchemaBundle.js(1)"
+   ],
+   "tests": [
+    "tests/domain/bandedStock.test.js(7)",
+    "tests/domain/factionPairLedger.test.js(4)",
+    "tests/domain/habitCurve.test.js(2)",
+    "tests/kernel/detMath.test.js(1)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(2)",
+    "tests/lint/.tuning-register.json(5)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "docs",
+   "scripts",
+   "src",
+   "other",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/beliefAxisSubjects.js#SUBJECT_AXIS_TUNING",
+  "file": "src/domain/worldPulse/beliefAxisSubjects.js",
+  "exp": "SUBJECT_AXIS_TUNING",
+  "line": 141,
+  "keys": 11,
+  "exported": true,
+  "fileDeps": 3,
+  "collides": false,
+  "totalHits": 12,
+  "homeHits": 4,
+  "foreignHits": 8,
+  "buckets": {
+   "docs": [
+    "docs/DESIGN_FP_ARCH_HB.md(2)"
+   ],
+   "tests": [
+    "tests/domain/beliefAxisSubjects.test.js(2)",
+    "tests/domain/beliefAxisSubjectsFoldPin.test.js(2)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "docs",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/brokerageFidelity.js#BROKERAGE_FIDELITY_TUNING",
+  "file": "src/domain/worldPulse/brokerageFidelity.js",
+  "exp": "BROKERAGE_FIDELITY_TUNING",
+  "line": 67,
+  "keys": 3,
+  "exported": true,
+  "fileDeps": 2,
+  "collides": false,
+  "totalHits": 6,
+  "homeHits": 2,
+  "foreignHits": 4,
+  "buckets": {
+   "tests": [
+    "tests/domain/brokerageFidelity.test.js(2)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/brokerageServices.js#QUERY_PRICE_TUNING",
+  "file": "src/domain/worldPulse/brokerageServices.js",
+  "exp": "QUERY_PRICE_TUNING",
+  "line": 167,
+  "keys": 6,
+  "exported": true,
+  "fileDeps": 3,
+  "collides": false,
+  "totalHits": 8,
+  "homeHits": 3,
+  "foreignHits": 5,
+  "buckets": {
+   "docs": [
+    "docs/COMPREHENSIVE_REVIEW_2026-08-01.md(1)"
+   ],
+   "tests": [
+    "tests/domain/brokerageServices.test.js(2)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "docs",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/brokerageServices.js#INTERCEPT_FOG_TUNING",
+  "file": "src/domain/worldPulse/brokerageServices.js",
+  "exp": "INTERCEPT_FOG_TUNING",
+  "line": 537,
+  "keys": 3,
+  "exported": true,
+  "fileDeps": 3,
+  "collides": false,
+  "totalHits": 7,
+  "homeHits": 2,
+  "foreignHits": 5,
+  "buckets": {
+   "tests": [
+    "tests/domain/brokerageIntercept.test.js(3)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/brokerageServicesFeed.js#PATRON_FEED_TUNING",
+  "file": "src/domain/worldPulse/brokerageServicesFeed.js",
+  "exp": "PATRON_FEED_TUNING",
+  "line": 93,
+  "keys": 3,
+  "exported": true,
+  "fileDeps": 2,
+  "collides": false,
+  "totalHits": 6,
+  "homeHits": 4,
+  "foreignHits": 2,
+  "buckets": {
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": []
+ },
+ {
+  "id": "src/domain/worldPulse/brokerageServicesPlant.js#PLANT_PRICE_TUNING",
+  "file": "src/domain/worldPulse/brokerageServicesPlant.js",
+  "exp": "PLANT_PRICE_TUNING",
+  "line": 114,
+  "keys": 6,
+  "exported": true,
+  "fileDeps": 3,
+  "collides": false,
+  "totalHits": 5,
+  "homeHits": 3,
+  "foreignHits": 2,
+  "buckets": {
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": []
+ },
+ {
+  "id": "src/domain/worldPulse/causeLifecycle.js#LIFECYCLE_TUNING",
+  "file": "src/domain/worldPulse/causeLifecycle.js",
+  "exp": "LIFECYCLE_TUNING",
+  "line": 100,
+  "keys": 10,
+  "exported": true,
+  "fileDeps": 1,
+  "collides": false,
+  "totalHits": 10,
+  "homeHits": 3,
+  "foreignHits": 7,
+  "buckets": {
+   "scripts": [
+    "scripts/audit/cause-lifecycle-soak.mjs(3)"
+   ],
+   "tests": [
+    "tests/domain/causeResolutionLifecycle.test.js(2)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "scripts",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/causeVocabulary.js#CAUSE_TUNING",
+  "file": "src/domain/worldPulse/causeVocabulary.js",
+  "exp": "CAUSE_TUNING",
+  "line": 77,
+  "keys": 3,
+  "exported": true,
+  "fileDeps": 1,
+  "collides": false,
+  "totalHits": 6,
+  "homeHits": 4,
+  "foreignHits": 2,
+  "buckets": {
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": []
+ },
+ {
+  "id": "src/domain/worldPulse/clergyTraitPlane.js#FOOTHOLD_TUNING",
+  "file": "src/domain/worldPulse/clergyTraitPlane.js",
+  "exp": "FOOTHOLD_TUNING",
+  "line": 232,
+  "keys": 4,
+  "exported": true,
+  "fileDeps": 4,
+  "collides": false,
+  "totalHits": 4,
+  "homeHits": 2,
+  "foreignHits": 2,
+  "buckets": {
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": []
+ },
+ {
+  "id": "src/domain/worldPulse/commercialReasons.js#COMMERCIAL_REASON_TUNING",
+  "file": "src/domain/worldPulse/commercialReasons.js",
+  "exp": "COMMERCIAL_REASON_TUNING",
+  "line": 104,
+  "keys": 9,
+  "exported": true,
+  "fileDeps": 1,
+  "collides": false,
+  "totalHits": 12,
+  "homeHits": 6,
+  "foreignHits": 6,
+  "buckets": {
+   "tests": [
+    "tests/domain/commercialReasons.test.js(4)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/compromiseRound.js#COMPROMISE_ROUND_TUNING",
+  "file": "src/domain/worldPulse/compromiseRound.js",
+  "exp": "COMPROMISE_ROUND_TUNING",
+  "line": 51,
+  "keys": 6,
+  "exported": true,
+  "fileDeps": 1,
+  "collides": false,
+  "totalHits": 20,
+  "homeHits": 7,
+  "foreignHits": 13,
+  "buckets": {
+   "docs": [
+    "docs/DESIGN_FP_ARCH_HB.md(1)",
+    "docs/DESIGN_WAR_RULINGS_ARCHITECTURE.md(1)",
+    "docs/FABLE_VALIDATION_QUEUE.md(1)"
+   ],
+   "src": [
+    "src/domain/certification/warConvergenceContract.js(1)"
+   ],
+   "tests": [
+    "tests/domain/compromiseRoundWr7c.test.js(4)",
+    "tests/domain/warConvergenceForces.test.js(3)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "docs",
+   "src",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/conquestDoctrineStage.js#CONQUEST_STAGE_TUNING",
+  "file": "src/domain/worldPulse/conquestDoctrineStage.js",
+  "exp": "CONQUEST_STAGE_TUNING",
+  "line": 640,
+  "keys": 1,
+  "exported": true,
+  "fileDeps": 6,
+  "collides": false,
+  "totalHits": 9,
+  "homeHits": 2,
+  "foreignHits": 7,
+  "buckets": {
+   "docs": [
+    "docs/FABLE_VALIDATION_QUEUE.md(1)"
+   ],
+   "tests": [
+    "tests/domain/conquestFeasibilityWr8.test.js(4)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "docs",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/conquestExecution.js#CONQUEST_EXECUTION_TUNING",
+  "file": "src/domain/worldPulse/conquestExecution.js",
+  "exp": "CONQUEST_EXECUTION_TUNING",
+  "line": 92,
+  "keys": 5,
+  "exported": true,
+  "fileDeps": 1,
+  "collides": false,
+  "totalHits": 18,
+  "homeHits": 5,
+  "foreignHits": 13,
+  "buckets": {
+   "tests": [
+    "tests/domain/conquestExecutionWr8.test.js(11)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/conquestFeasibility.js#CONQUEST_FEASIBILITY_TUNING",
+  "file": "src/domain/worldPulse/conquestFeasibility.js",
+  "exp": "CONQUEST_FEASIBILITY_TUNING",
+  "line": 119,
+  "keys": 14,
+  "exported": true,
+  "fileDeps": 2,
+  "collides": false,
+  "totalHits": 15,
+  "homeHits": 5,
+  "foreignHits": 10,
+  "buckets": {
+   "tests": [
+    "tests/domain/conquestFeasibilityWr8.test.js(8)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/conquestFeeds.js#CONQUEST_FEED_TUNING",
+  "file": "src/domain/worldPulse/conquestFeeds.js",
+  "exp": "CONQUEST_FEED_TUNING",
+  "line": 43,
+  "keys": 14,
+  "exported": true,
+  "fileDeps": 3,
+  "collides": false,
+  "totalHits": 15,
+  "homeHits": 8,
+  "foreignHits": 7,
+  "buckets": {
+   "scripts": [
+    "scripts/audit/conquest-market-soak.mjs(2)"
+   ],
+   "tests": [
+    "tests/domain/conquestMarketWC2.test.js(3)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "scripts",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/conquestIntent.js#CONQUEST_INTENT_TUNING",
+  "file": "src/domain/worldPulse/conquestIntent.js",
+  "exp": "CONQUEST_INTENT_TUNING",
+  "line": 86,
+  "keys": 5,
+  "exported": true,
+  "fileDeps": 2,
+  "collides": false,
+  "totalHits": 6,
+  "homeHits": 2,
+  "foreignHits": 4,
+  "buckets": {
+   "tests": [
+    "tests/domain/conquestIntentWr8.test.js(2)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/convergence.js#CONVERGENCE_TUNING",
+  "file": "src/domain/worldPulse/convergence.js",
+  "exp": "CONVERGENCE_TUNING",
+  "line": 114,
+  "keys": 22,
+  "exported": true,
+  "fileDeps": 6,
+  "collides": false,
+  "totalHits": 40,
+  "homeHits": 15,
+  "foreignHits": 25,
+  "buckets": {
+   "src": [
+    "src/domain/worldPulse/seatIntervention.js(1)"
+   ],
+   "tests": [
+    "tests/domain/convergence.test.js(14)",
+    "tests/domain/foreignSeatCoupAdj.test.js(1)",
+    "tests/domain/seatIntervention.test.js(7)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "src",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/corruptionImpair.js#REFORM_TUNING",
+  "file": "src/domain/worldPulse/corruptionImpair.js",
+  "exp": "REFORM_TUNING",
+  "line": 131,
+  "keys": 5,
+  "exported": true,
+  "fileDeps": 2,
+  "collides": false,
+  "totalHits": 8,
+  "homeHits": 6,
+  "foreignHits": 2,
+  "buckets": {
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": []
+ },
+ {
+  "id": "src/domain/worldPulse/corruptionWeb.js#CORRUPTION_WEB_TUNING",
+  "file": "src/domain/worldPulse/corruptionWeb.js",
+  "exp": "CORRUPTION_WEB_TUNING",
+  "line": 118,
+  "keys": 29,
+  "exported": true,
+  "fileDeps": 10,
+  "collides": false,
+  "totalHits": 40,
+  "homeHits": 20,
+  "foreignHits": 20,
+  "buckets": {
+   "src": [
+    "src/domain/worldPulse/espionage/infiltrationDepth.js(3)",
+    "src/domain/worldPulse/settlementPolitics.js(1)"
+   ],
+   "tests": [
+    "tests/domain/corruptionWebPins.test.js(4)",
+    "tests/domain/envoyChanceMeetingLedger.test.js(3)",
+    "tests/domain/infiltrationDepth.test.js(3)",
+    "tests/domain/roadsConversion.test.js(2)",
+    "tests/domain/thirdPartyRansomLit.test.js(2)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "src",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/deityStanceLane.js#STANCE_LANE_TUNING",
+  "file": "src/domain/worldPulse/deityStanceLane.js",
+  "exp": "STANCE_LANE_TUNING",
+  "line": 51,
+  "keys": 10,
+  "exported": true,
+  "fileDeps": 1,
+  "collides": false,
+  "totalHits": 18,
+  "homeHits": 6,
+  "foreignHits": 12,
+  "buckets": {
+   "docs": [
+    "docs/DESIGN_FP_ARCH_WF.md(1)",
+    "docs/implementation/preverification/WF-SUBSTRATE.md(1)"
+   ],
+   "tests": [
+    "tests/domain/deityStanceLane.test.js(3)",
+    "tests/domain/newLaneCouplingsG1d.test.js(5)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "docs",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/demographicsHerald.js#HERALD_TUNING",
+  "file": "src/domain/worldPulse/demographicsHerald.js",
+  "exp": "HERALD_TUNING",
+  "line": 83,
+  "keys": 10,
+  "exported": true,
+  "fileDeps": 1,
+  "collides": false,
+  "totalHits": 26,
+  "homeHits": 14,
+  "foreignHits": 12,
+  "buckets": {
+   "docs": [
+    "docs/DESIGN_FP_POPULATIONS.md(1)"
+   ],
+   "src": [
+    "src/domain/worldPulse/demographicsRates.js(1)"
+   ],
+   "other": [
+    "supabase/functions/_shared/aiCharterBundle.js(1)",
+    "supabase/functions/_shared/aiOutputSchemaBundle.js(1)"
+   ],
+   "tests": [
+    "tests/domain/demographicsWorldsHand.test.js(5)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(2)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "docs",
+   "src",
+   "other",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/demographicsLadder.js#LADDER_TUNING",
+  "file": "src/domain/worldPulse/demographicsLadder.js",
+  "exp": "LADDER_TUNING",
+  "line": 104,
+  "keys": 2,
+  "exported": true,
+  "fileDeps": 3,
+  "collides": true,
+  "totalHits": 109,
+  "homeHits": 2,
+  "foreignHits": 107,
+  "buckets": {
+   "docs": [
+    "docs/implementation/packets/foreign-policy/ES-5D.md(11)",
+    "docs/implementation/packets/foreign-policy/GR-4A.md(3)"
+   ],
+   "scripts": [
+    "scripts/lib/tuning-inventory.mjs(1)"
+   ],
+   "src": [
+    "src/domain/worldPulse/demographicsRates.js(2)",
+    "src/domain/worldPulse/envoyChanceMeetingLedger.js(1)",
+    "src/domain/worldPulse/npcLadderChallenge.js(2)",
+    "src/domain/worldPulse/npcLadderContest.js(6)",
+    "src/domain/worldPulse/npcLadderKernel.js(14)",
+    "src/domain/worldPulse/npcLadderState.js(11)",
+    "src/domain/worldPulse/warSeatBooks.js(2)"
+   ],
+   "other": [
+    "supabase/functions/_shared/aiCharterBundle.js(2)",
+    "supabase/functions/_shared/aiOutputSchemaBundle.js(2)"
+   ],
+   "tests": [
+    "tests/domain/envoyChanceMeetingLedger.test.js(2)",
+    "tests/domain/espionageCareer.test.js(2)",
+    "tests/domain/espionageCareerCredit.test.js(2)",
+    "tests/domain/npcCredibilityLadderHook.test.js(3)",
+    "tests/domain/npcLadderBonds.test.js(8)",
+    "tests/domain/npcLadderChallenge.test.js(2)",
+    "tests/domain/npcLadderContest.test.js(3)",
+    "tests/domain/npcLadderHeirs.test.js(4)",
+    "tests/domain/npcLadderKernel.test.js(9)",
+    "tests/domain/npcLadderSeatTransitions.test.js(3)",
+    "tests/generators/densityLaw.test.js(3)",
+    "tests/lint/tuningRegister.walker.test.js(1)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(2)",
+    "tests/lint/.tuning-register.json(6)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "docs",
+   "scripts",
+   "src",
+   "other",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/demographicsLand.js#SPATIAL_LAW_TUNING",
+  "file": "src/domain/worldPulse/demographicsLand.js",
+  "exp": "SPATIAL_LAW_TUNING",
+  "line": 164,
+  "keys": 3,
+  "exported": true,
+  "fileDeps": 1,
+  "collides": false,
+  "totalHits": 9,
+  "homeHits": 2,
+  "foreignHits": 7,
+  "buckets": {
+   "src": [
+    "src/domain/worldPulse/demographicsRates.js(1)"
+   ],
+   "other": [
+    "supabase/functions/_shared/aiCharterBundle.js(1)",
+    "supabase/functions/_shared/aiOutputSchemaBundle.js(1)"
+   ],
+   "tests": [
+    "tests/domain/demographicsPlans.test.js(2)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "src",
+   "other",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/demographicsPlans.js#PLAN_TUNING",
+  "file": "src/domain/worldPulse/demographicsPlans.js",
+  "exp": "PLAN_TUNING",
+  "line": 139,
+  "keys": 10,
+  "exported": true,
+  "fileDeps": 2,
+  "collides": false,
+  "totalHits": 10,
+  "homeHits": 2,
+  "foreignHits": 8,
+  "buckets": {
+   "docs": [
+    "docs/DESIGN_REALM_DIRECTIVES.md(1)"
+   ],
+   "src": [
+    "src/domain/worldPulse/demographicsRates.js(1)"
+   ],
+   "other": [
+    "supabase/functions/_shared/aiCharterBundle.js(1)",
+    "supabase/functions/_shared/aiOutputSchemaBundle.js(1)"
+   ],
+   "tests": [
+    "tests/domain/demographicsPlans.test.js(2)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "docs",
+   "src",
+   "other",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/demographicsResponses.js#RESPONSE_TUNING",
+  "file": "src/domain/worldPulse/demographicsResponses.js",
+  "exp": "RESPONSE_TUNING",
+  "line": 158,
+  "keys": 6,
+  "exported": true,
+  "fileDeps": 4,
+  "collides": false,
+  "totalHits": 8,
+  "homeHits": 2,
+  "foreignHits": 6,
+  "buckets": {
+   "src": [
+    "src/domain/worldPulse/demographicsRates.js(1)"
+   ],
+   "other": [
+    "supabase/functions/_shared/aiCharterBundle.js(1)",
+    "supabase/functions/_shared/aiOutputSchemaBundle.js(1)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(2)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "src",
+   "other"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/demographicsRisk.js#RISK_TUNING",
+  "file": "src/domain/worldPulse/demographicsRisk.js",
+  "exp": "RISK_TUNING",
+  "line": 78,
+  "keys": 10,
+  "exported": true,
+  "fileDeps": 1,
+  "collides": false,
+  "totalHits": 9,
+  "homeHits": 2,
+  "foreignHits": 7,
+  "buckets": {
+   "src": [
+    "src/domain/worldPulse/demographicsRates.js(1)"
+   ],
+   "other": [
+    "supabase/functions/_shared/aiCharterBundle.js(2)",
+    "supabase/functions/_shared/aiOutputSchemaBundle.js(2)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "src",
+   "other"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/demographicsWar.js#WAR_DEMOGRAPHIC_TUNING",
+  "file": "src/domain/worldPulse/demographicsWar.js",
+  "exp": "WAR_DEMOGRAPHIC_TUNING",
+  "line": 68,
+  "keys": 8,
+  "exported": true,
+  "fileDeps": 1,
+  "collides": false,
+  "totalHits": 18,
+  "homeHits": 2,
+  "foreignHits": 16,
+  "buckets": {
+   "docs": [
+    "docs/FABLE_VALIDATION_QUEUE.md(1)"
+   ],
+   "src": [
+    "src/domain/certification/warConvergenceForces.js(2)",
+    "src/domain/worldPulse/demographicsRates.js(1)"
+   ],
+   "other": [
+    "supabase/functions/_shared/aiCharterBundle.js(1)",
+    "supabase/functions/_shared/aiOutputSchemaBundle.js(1)"
+   ],
+   "tests": [
+    "tests/domain/demographicsWorldsHand.test.js(4)",
+    "tests/domain/warConvergenceForces.test.js(4)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "docs",
+   "src",
+   "other",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/disposition.js#ALIGNMENT_TUNING",
+  "file": "src/domain/worldPulse/disposition.js",
+  "exp": "ALIGNMENT_TUNING",
+  "line": 595,
+  "keys": 12,
+  "exported": true,
+  "fileDeps": 14,
+  "collides": false,
+  "totalHits": 7,
+  "homeHits": 1,
+  "foreignHits": 6,
+  "buckets": {
+   "tests": [
+    "tests/domain/settlementAlignment.test.js(4)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/dispositionLedger.js#APPETITE_TUNING",
+  "file": "src/domain/worldPulse/dispositionLedger.js",
+  "exp": "APPETITE_TUNING",
+  "line": 787,
+  "keys": 7,
+  "exported": true,
+  "fileDeps": 10,
+  "collides": false,
+  "totalHits": 25,
+  "homeHits": 1,
+  "foreignHits": 24,
+  "buckets": {
+   "other": [
+    "supabase/functions/_shared/aiCharterBundle.js(1)",
+    "supabase/functions/_shared/aiOutputSchemaBundle.js(1)"
+   ],
+   "tests": [
+    "tests/domain/dispositionAppetite.test.js(14)",
+    "tests/domain/strategicPosture.test.js(5)",
+    "tests/lint/sovereigntyLightingContract.walker.test.js(1)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "other",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/eliteBleed.js#ELITE_BLEED_TUNING",
+  "file": "src/domain/worldPulse/eliteBleed.js",
+  "exp": "ELITE_BLEED_TUNING",
+  "line": 36,
+  "keys": 4,
+  "exported": true,
+  "fileDeps": 0,
+  "collides": false,
+  "totalHits": 12,
+  "homeHits": 7,
+  "foreignHits": 5,
+  "buckets": {
+   "tests": [
+    "tests/domain/eliteBleed.test.js(2)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(2)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/envoyChanceMeeting.js#CHANCE_MEETING_TUNING",
+  "file": "src/domain/worldPulse/envoyChanceMeeting.js",
+  "exp": "CHANCE_MEETING_TUNING",
+  "line": 201,
+  "keys": 26,
+  "exported": true,
+  "fileDeps": 0,
+  "collides": false,
+  "totalHits": 34,
+  "homeHits": 26,
+  "foreignHits": 8,
+  "buckets": {
+   "tests": [
+    "tests/domain/envoyChanceMeeting.test.js(5)",
+    "tests/domain/npc/paradigmAxisCatalog.test.js(1)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/espionage/espionageCareerCredit.js#CAREER_CREDIT_TUNING",
+  "file": "src/domain/worldPulse/espionage/espionageCareerCredit.js",
+  "exp": "CAREER_CREDIT_TUNING",
+  "line": 121,
+  "keys": 2,
+  "exported": true,
+  "fileDeps": 2,
+  "collides": false,
+  "totalHits": 13,
+  "homeHits": 3,
+  "foreignHits": 10,
+  "buckets": {
+   "docs": [
+    "docs/implementation/packets/foreign-policy/ES-5D.md(4)"
+   ],
+   "tests": [
+    "tests/domain/espionageCareerCredit.test.js(2)",
+    "tests/property/espionageCareerCreditDormancy.test.js(2)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "docs",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/espionage/espionageDoctrineStage.js#DISPATCH_TUNING",
+  "file": "src/domain/worldPulse/espionage/espionageDoctrineStage.js",
+  "exp": "DISPATCH_TUNING",
+  "line": 99,
+  "keys": 2,
+  "exported": true,
+  "fileDeps": 1,
+  "collides": true,
+  "totalHits": 40,
+  "homeHits": 3,
+  "foreignHits": 37,
+  "buckets": {
+   "docs": [
+    "docs/implementation/packets/foreign-policy/ES-DA.md(1)"
+   ],
+   "scripts": [
+    "scripts/lib/tuning-inventory.mjs(1)"
+   ],
+   "src": [
+    "src/domain/spatial/commodityFlow.js(8)",
+    "src/domain/spatial/dispatchEV.js(8)"
+   ],
+   "tests": [
+    "tests/domain/dispatchEV.integration.test.js(9)",
+    "tests/domain/dispatchEV.test.js(2)",
+    "tests/domain/espionageDoctrineStage.test.js(3)",
+    "tests/lint/tuningRegister.walker.test.js(1)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(2)",
+    "tests/lint/.tuning-register.json(2)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "docs",
+   "scripts",
+   "src",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/espionage/espionageLeak.js#LEAK_TUNING",
+  "file": "src/domain/worldPulse/espionage/espionageLeak.js",
+  "exp": "LEAK_TUNING",
+  "line": 123,
+  "keys": 1,
+  "exported": true,
+  "fileDeps": 1,
+  "collides": false,
+  "totalHits": 17,
+  "homeHits": 2,
+  "foreignHits": 15,
+  "buckets": {
+   "docs": [
+    "docs/DESIGN_FP_ARCH_ES.md(1)",
+    "docs/implementation/packets/foreign-policy/ES-6A.md(10)"
+   ],
+   "tests": [
+    "tests/domain/espionageLeak.test.js(2)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "docs",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/espionage/espionageProducts.js#PRODUCT_TUNING",
+  "file": "src/domain/worldPulse/espionage/espionageProducts.js",
+  "exp": "PRODUCT_TUNING",
+  "line": 85,
+  "keys": 2,
+  "exported": true,
+  "fileDeps": 2,
+  "collides": false,
+  "totalHits": 9,
+  "homeHits": 3,
+  "foreignHits": 6,
+  "buckets": {
+   "docs": [
+    "docs/implementation/packets/foreign-policy/ES-6A.md(1)"
+   ],
+   "tests": [
+    "tests/domain/espionageProducts.test.js(3)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "docs",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/espionage/espionageTap.js#TAP_TUNING",
+  "file": "src/domain/worldPulse/espionage/espionageTap.js",
+  "exp": "TAP_TUNING",
+  "line": 83,
+  "keys": 3,
+  "exported": true,
+  "fileDeps": 1,
+  "collides": false,
+  "totalHits": 11,
+  "homeHits": 3,
+  "foreignHits": 8,
+  "buckets": {
+   "docs": [
+    "docs/implementation/packets/foreign-policy/ES-5B.md(2)"
+   ],
+   "src": [
+    "src/domain/certification/couplingRegistryEspionage.js(1)",
+    "src/domain/worldPulse/espionage/espionageWariness.js(1)"
+   ],
+   "tests": [
+    "tests/domain/espionageProducts.test.js(2)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "docs",
+   "src",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/espionage/espionageWariness.js#TELL_TUNING",
+  "file": "src/domain/worldPulse/espionage/espionageWariness.js",
+  "exp": "TELL_TUNING",
+  "line": 92,
+  "keys": 1,
+  "exported": true,
+  "fileDeps": 1,
+  "collides": false,
+  "totalHits": 6,
+  "homeHits": 2,
+  "foreignHits": 4,
+  "buckets": {
+   "tests": [
+    "tests/domain/espionageWariness.test.js(2)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/espionage/infiltrationDepth.js#INFILTRATION_DEPTH_TUNING",
+  "file": "src/domain/worldPulse/espionage/infiltrationDepth.js",
+  "exp": "INFILTRATION_DEPTH_TUNING",
+  "line": 151,
+  "keys": 2,
+  "exported": true,
+  "fileDeps": 0,
+  "collides": false,
+  "totalHits": 15,
+  "homeHits": 3,
+  "foreignHits": 12,
+  "buckets": {
+   "tests": [
+    "tests/domain/infiltrationDepth.test.js(9)",
+    "tests/domain/sendTwoDivergenceWr7d.test.js(1)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/factionPairLedger.js#FACTION_PAIR_TUNING",
+  "file": "src/domain/worldPulse/factionPairLedger.js",
+  "exp": "FACTION_PAIR_TUNING",
+  "line": 43,
+  "keys": 3,
+  "exported": true,
+  "fileDeps": 5,
+  "collides": false,
+  "totalHits": 10,
+  "homeHits": 4,
+  "foreignHits": 6,
+  "buckets": {
+   "tests": [
+    "tests/domain/factionPairLedger.test.js(2)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(3)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/faithNews.js#FAITH_NEWS_TUNING",
+  "file": "src/domain/worldPulse/faithNews.js",
+  "exp": "FAITH_NEWS_TUNING",
+  "line": 140,
+  "keys": 1,
+  "exported": true,
+  "fileDeps": 1,
+  "collides": false,
+  "totalHits": 13,
+  "homeHits": 2,
+  "foreignHits": 11,
+  "buckets": {
+   "docs": [
+    "docs/implementation/PACKET_MANIFEST.json(2)",
+    "docs/implementation/packets/fp/WF-8A.md(2)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ],
+   "tests": [
+    "tests/lint/faithKindPools.walker.test.js(5)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "docs",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/faithTuningSurface.js#FAITH_TUNING_COVERAGE",
+  "file": "src/domain/worldPulse/faithTuningSurface.js",
+  "exp": "FAITH_TUNING_COVERAGE",
+  "line": 307,
+  "keys": 15,
+  "exported": true,
+  "fileDeps": 4,
+  "collides": false,
+  "totalHits": 19,
+  "homeHits": 3,
+  "foreignHits": 16,
+  "buckets": {
+   "scripts": [
+    "scripts/count-tuning-inventory.mjs(1)",
+    "scripts/lib/tuning-inventory.mjs(1)"
+   ],
+   "tests": [
+    "tests/domain/faithTuningSurface.test.js(8)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(5)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "scripts",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/feasibilityGate.js#FEASIBILITY_TUNING",
+  "file": "src/domain/worldPulse/feasibilityGate.js",
+  "exp": "FEASIBILITY_TUNING",
+  "line": 338,
+  "keys": 9,
+  "exported": true,
+  "fileDeps": 4,
+  "collides": false,
+  "totalHits": 7,
+  "homeHits": 2,
+  "foreignHits": 5,
+  "buckets": {
+   "tests": [
+    "tests/domain/feasibilityGate.test.js(3)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/generosityKernel.js#GENEROSITY_MOVER_TUNING",
+  "file": "src/domain/worldPulse/generosityKernel.js",
+  "exp": "GENEROSITY_MOVER_TUNING",
+  "line": 195,
+  "keys": 18,
+  "exported": true,
+  "fileDeps": 1,
+  "collides": false,
+  "totalHits": 10,
+  "homeHits": 3,
+  "foreignHits": 7,
+  "buckets": {
+   "src": [
+    "src/domain/events/mutateWorld.js(1)"
+   ],
+   "tests": [
+    "tests/domain/events/generosityVerbs.test.js(4)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "src",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/grievanceRead.js#GRIEVANCE_READ_TUNING",
+  "file": "src/domain/worldPulse/grievanceRead.js",
+  "exp": "GRIEVANCE_READ_TUNING",
+  "line": 27,
+  "keys": 6,
+  "exported": true,
+  "fileDeps": 1,
+  "collides": false,
+  "totalHits": 11,
+  "homeHits": 7,
+  "foreignHits": 4,
+  "buckets": {
+   "tests": [
+    "tests/domain/grievanceRead.test.js(2)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/hegemonyFear.js#HEGEMONY_FEAR_TUNING",
+  "file": "src/domain/worldPulse/hegemonyFear.js",
+  "exp": "HEGEMONY_FEAR_TUNING",
+  "line": 35,
+  "keys": 1,
+  "exported": true,
+  "fileDeps": 3,
+  "collides": false,
+  "totalHits": 4,
+  "homeHits": 2,
+  "foreignHits": 2,
+  "buckets": {
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": []
+ },
+ {
+  "id": "src/domain/worldPulse/informationStatecraft.js#SIGHT_TUNING",
+  "file": "src/domain/worldPulse/informationStatecraft.js",
+  "exp": "SIGHT_TUNING",
+  "line": 744,
+  "keys": 23,
+  "exported": true,
+  "fileDeps": 12,
+  "collides": false,
+  "totalHits": 29,
+  "homeHits": 7,
+  "foreignHits": 22,
+  "buckets": {
+   "docs": [
+    "docs/DESIGN_FP_ARCH_ES.md(5)"
+   ],
+   "src": [
+    "src/domain/worldPulse/brokerageServices.js(2)",
+    "src/domain/worldPulse/secrecyTradeFactor.js(1)"
+   ],
+   "tests": [
+    "tests/domain/brokerageIntercept.test.js(7)",
+    "tests/domain/informationStatecraftPins.test.js(3)",
+    "tests/property/secrecyTradeDormancyFence.test.js(2)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "docs",
+   "src",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/institutionLifecycle.js#INSTITUTION_LIFECYCLE_TUNING",
+  "file": "src/domain/worldPulse/institutionLifecycle.js",
+  "exp": "INSTITUTION_LIFECYCLE_TUNING",
+  "line": 82,
+  "keys": 7,
+  "exported": true,
+  "fileDeps": 3,
+  "collides": false,
+  "totalHits": 43,
+  "homeHits": 10,
+  "foreignHits": 33,
+  "buckets": {
+   "src": [
+    "src/domain/worldPulse/magicRegimeModel.js(2)"
+   ],
+   "tests": [
+    "tests/domain/evaluateInstitutionLifecycle.test.js(13)",
+    "tests/domain/institutionLifecycle.test.js(13)",
+    "tests/domain/magicRegimeModel.test.js(3)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "src",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/institutionTolerance.js#TOLERANCE_TUNING",
+  "file": "src/domain/worldPulse/institutionTolerance.js",
+  "exp": "TOLERANCE_TUNING",
+  "line": 30,
+  "keys": 10,
+  "exported": true,
+  "fileDeps": 3,
+  "collides": false,
+  "totalHits": 14,
+  "homeHits": 4,
+  "foreignHits": 10,
+  "buckets": {
+   "scripts": [
+    "scripts/audit/institution-ecology-soak.mjs(5)"
+   ],
+   "tests": [
+    "tests/domain/institutionEcology.test.js(2)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(2)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "scripts",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/lineageClaim.js#LINEAGE_CLAIM_TUNING",
+  "file": "src/domain/worldPulse/lineageClaim.js",
+  "exp": "LINEAGE_CLAIM_TUNING",
+  "line": 27,
+  "keys": 2,
+  "exported": true,
+  "fileDeps": 2,
+  "collides": false,
+  "totalHits": 12,
+  "homeHits": 7,
+  "foreignHits": 5,
+  "buckets": {
+   "tests": [
+    "tests/domain/lineageClaim.test.js(3)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/magicForms.js#MAGIC_FORMS_TUNING",
+  "file": "src/domain/worldPulse/magicForms.js",
+  "exp": "MAGIC_FORMS_TUNING",
+  "line": 226,
+  "keys": 5,
+  "exported": true,
+  "fileDeps": 2,
+  "collides": false,
+  "totalHits": 18,
+  "homeHits": 12,
+  "foreignHits": 6,
+  "buckets": {
+   "tests": [
+    "tests/domain/magicForms.test.js(4)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/magicRegimeModel.js#MAGIC_REGIME_TUNING",
+  "file": "src/domain/worldPulse/magicRegimeModel.js",
+  "exp": "MAGIC_REGIME_TUNING",
+  "line": 148,
+  "keys": 3,
+  "exported": true,
+  "fileDeps": 4,
+  "collides": false,
+  "totalHits": 28,
+  "homeHits": 7,
+  "foreignHits": 21,
+  "buckets": {
+   "tests": [
+    "tests/domain/magicBufferIntegration.test.js(1)",
+    "tests/domain/magicRegimeLifecycle.test.js(4)",
+    "tests/domain/magicRegimeModel.test.js(14)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/magicSubstitution.js#MAGIC_SUBSTITUTION_TUNING",
+  "file": "src/domain/worldPulse/magicSubstitution.js",
+  "exp": "MAGIC_SUBSTITUTION_TUNING",
+  "line": 146,
+  "keys": 5,
+  "exported": true,
+  "fileDeps": 1,
+  "collides": false,
+  "totalHits": 14,
+  "homeHits": 6,
+  "foreignHits": 8,
+  "buckets": {
+   "src": [
+    "src/data/supplyChainResourceIndex.js(1)",
+    "src/domain/goods.schema.js(1)"
+   ],
+   "tests": [
+    "tests/domain/magicSubstitution.test.js(4)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "src",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/magicSubstitutionReagents.js#REAGENT_TUNING",
+  "file": "src/domain/worldPulse/magicSubstitutionReagents.js",
+  "exp": "REAGENT_TUNING",
+  "line": 113,
+  "keys": 4,
+  "exported": true,
+  "fileDeps": 0,
+  "collides": false,
+  "totalHits": 14,
+  "homeHits": 7,
+  "foreignHits": 7,
+  "buckets": {
+   "tests": [
+    "tests/domain/magicSubstitutionReagents.test.js(5)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/martialReadiness.js#MARTIAL_READINESS_TUNING",
+  "file": "src/domain/worldPulse/martialReadiness.js",
+  "exp": "MARTIAL_READINESS_TUNING",
+  "line": 54,
+  "keys": 31,
+  "exported": true,
+  "fileDeps": 16,
+  "collides": false,
+  "totalHits": 24,
+  "homeHits": 14,
+  "foreignHits": 10,
+  "buckets": {
+   "scripts": [
+    "scripts/audit/war-cluster-soak.mjs(3)"
+   ],
+   "tests": [
+    "tests/domain/martialMoralWF8.test.js(2)",
+    "tests/domain/warClusterWC1.test.js(3)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "scripts",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/mercenaryMarket.js#MERCENARY_MARKET_TUNING",
+  "file": "src/domain/worldPulse/mercenaryMarket.js",
+  "exp": "MERCENARY_MARKET_TUNING",
+  "line": 41,
+  "keys": 10,
+  "exported": true,
+  "fileDeps": 4,
+  "collides": false,
+  "totalHits": 15,
+  "homeHits": 5,
+  "foreignHits": 10,
+  "buckets": {
+   "docs": [
+    "docs/DESIGN_FP_ARCH_WC.md(1)"
+   ],
+   "scripts": [
+    "scripts/audit/conquest-market-soak.mjs(2)"
+   ],
+   "tests": [
+    "tests/domain/conquestMarketWC2.test.js(5)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "docs",
+   "scripts",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/migrationKernel.js#MIGRATION_KERNEL_TUNING",
+  "file": "src/domain/worldPulse/migrationKernel.js",
+  "exp": "MIGRATION_KERNEL_TUNING",
+  "line": 67,
+  "keys": 8,
+  "exported": true,
+  "fileDeps": 5,
+  "collides": false,
+  "totalHits": 14,
+  "homeHits": 6,
+  "foreignHits": 8,
+  "buckets": {
+   "src": [
+    "src/domain/worldPulse/demographicsRates.js(2)"
+   ],
+   "other": [
+    "supabase/functions/_shared/aiCharterBundle.js(1)",
+    "supabase/functions/_shared/aiOutputSchemaBundle.js(1)"
+   ],
+   "tests": [
+    "tests/domain/migrationWithMortality.test.js(2)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "src",
+   "other",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/mobilization.js#MOBILIZATION_TUNING",
+  "file": "src/domain/worldPulse/mobilization.js",
+  "exp": "MOBILIZATION_TUNING",
+  "line": 511,
+  "keys": 11,
+  "exported": true,
+  "fileDeps": 5,
+  "collides": false,
+  "totalHits": 7,
+  "homeHits": 1,
+  "foreignHits": 6,
+  "buckets": {
+   "src": [
+    "src/domain/worldPulse/treatyTransfer.js(1)"
+   ],
+   "tests": [
+    "tests/domain/mobilization.test.js(3)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "src",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/mobilizationReactions.js#REACTION_TUNING",
+  "file": "src/domain/worldPulse/mobilizationReactions.js",
+  "exp": "REACTION_TUNING",
+  "line": 349,
+  "keys": 3,
+  "exported": true,
+  "fileDeps": 1,
+  "collides": true,
+  "totalHits": 64,
+  "homeHits": 1,
+  "foreignHits": 63,
+  "buckets": {
+   "docs": [
+    "docs/COMPREHENSIVE_REVIEW_2026-07-15.md(1)",
+    "docs/review-r2/RAW_SURVEY_RESULTS.json(1)"
+   ],
+   "scripts": [
+    "scripts/lib/tuning-inventory.mjs(1)"
+   ],
+   "src": [
+    "src/domain/spatial/generosityReactions.js(20)",
+    "src/domain/worldPulse/anticipatedReactions.js(5)",
+    "src/domain/worldPulse/generosityKernel.js(3)",
+    "src/domain/worldPulse/obligationDecay.js(2)",
+    "src/domain/worldPulse/warCoalitionSettlement.js(6)"
+   ],
+   "tests": [
+    "tests/domain/anticipatedReactions.test.js(3)",
+    "tests/domain/generosityKernel.credit.test.js(4)",
+    "tests/domain/generosityReactions.test.js(8)",
+    "tests/lint/tuningRegister.walker.test.js(1)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(3)",
+    "tests/lint/.tuning-register.json(5)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "docs",
+   "scripts",
+   "src",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/momentum.js#THRESHOLD_TUNING",
+  "file": "src/domain/worldPulse/momentum.js",
+  "exp": "THRESHOLD_TUNING",
+  "line": 566,
+  "keys": 12,
+  "exported": true,
+  "fileDeps": 7,
+  "collides": false,
+  "totalHits": 14,
+  "homeHits": 6,
+  "foreignHits": 8,
+  "buckets": {
+   "tests": [
+    "tests/domain/momentumThreshold.test.js(6)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/momentum.js#CONSUMPTION_TUNING",
+  "file": "src/domain/worldPulse/momentum.js",
+  "exp": "CONSUMPTION_TUNING",
+  "line": 857,
+  "keys": 5,
+  "exported": true,
+  "fileDeps": 7,
+  "collides": false,
+  "totalHits": 9,
+  "homeHits": 4,
+  "foreignHits": 5,
+  "buckets": {
+   "tests": [
+    "tests/domain/momentumConsumption.test.js(3)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/momentum.js#CRACK_TUNING",
+  "file": "src/domain/worldPulse/momentum.js",
+  "exp": "CRACK_TUNING",
+  "line": 1020,
+  "keys": 2,
+  "exported": true,
+  "fileDeps": 7,
+  "collides": false,
+  "totalHits": 7,
+  "homeHits": 3,
+  "foreignHits": 4,
+  "buckets": {
+   "tests": [
+    "tests/domain/momentumCrack.test.js(2)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/npcCredibility.js#NPC_CREDIBILITY_TUNING",
+  "file": "src/domain/worldPulse/npcCredibility.js",
+  "exp": "NPC_CREDIBILITY_TUNING",
+  "line": 80,
+  "keys": 11,
+  "exported": true,
+  "fileDeps": 4,
+  "collides": false,
+  "totalHits": 18,
+  "homeHits": 5,
+  "foreignHits": 13,
+  "buckets": {
+   "tests": [
+    "tests/domain/npcCredibility.test.js(6)",
+    "tests/domain/npcCredibilityAttribution.test.js(2)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(4)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/npcLadderContest.js#CONTEST_TUNING",
+  "file": "src/domain/worldPulse/npcLadderContest.js",
+  "exp": "CONTEST_TUNING",
+  "line": 46,
+  "keys": 29,
+  "exported": true,
+  "fileDeps": 1,
+  "collides": false,
+  "totalHits": 20,
+  "homeHits": 13,
+  "foreignHits": 7,
+  "buckets": {
+   "tests": [
+    "tests/domain/npcLadderContest.test.js(3)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(3)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/opportunism.js#OPPORTUNISM_TUNING",
+  "file": "src/domain/worldPulse/opportunism.js",
+  "exp": "OPPORTUNISM_TUNING",
+  "line": 80,
+  "keys": 6,
+  "exported": true,
+  "fileDeps": 3,
+  "collides": false,
+  "totalHits": 4,
+  "homeHits": 2,
+  "foreignHits": 2,
+  "buckets": {
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": []
+ },
+ {
+  "id": "src/domain/worldPulse/pactFormation.js#PACT_FORMATION_TUNING",
+  "file": "src/domain/worldPulse/pactFormation.js",
+  "exp": "PACT_FORMATION_TUNING",
+  "line": 117,
+  "keys": 7,
+  "exported": true,
+  "fileDeps": 1,
+  "collides": false,
+  "totalHits": 14,
+  "homeHits": 4,
+  "foreignHits": 10,
+  "buckets": {
+   "docs": [
+    "docs/implementation/packets/foreign-policy/GR-3B.md(1)"
+   ],
+   "tests": [
+    "tests/domain/pactFormation.test.js(2)",
+    "tests/domain/treatyBreachCredibility.test.js(5)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "docs",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/pactProposals.js#PACT_PROPOSAL_TUNING",
+  "file": "src/domain/worldPulse/pactProposals.js",
+  "exp": "PACT_PROPOSAL_TUNING",
+  "line": 98,
+  "keys": 3,
+  "exported": true,
+  "fileDeps": 2,
+  "collides": false,
+  "totalHits": 8,
+  "homeHits": 3,
+  "foreignHits": 5,
+  "buckets": {
+   "docs": [
+    "docs/implementation/packets/foreign-policy/GR-4A.md(1)"
+   ],
+   "tests": [
+    "tests/domain/pactProposals.test.js(2)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "docs",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/pactTriggers.js#PACT_TRIGGER_TUNING",
+  "file": "src/domain/worldPulse/pactTriggers.js",
+  "exp": "PACT_TRIGGER_TUNING",
+  "line": 73,
+  "keys": 9,
+  "exported": true,
+  "fileDeps": 2,
+  "collides": false,
+  "totalHits": 8,
+  "homeHits": 3,
+  "foreignHits": 5,
+  "buckets": {
+   "tests": [
+    "tests/domain/pactTriggers.test.js(2)",
+    "tests/lint/allianceWebRiskConsumers.walker.test.js(1)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/peaceReasons.js#PEACE_REASON_TUNING",
+  "file": "src/domain/worldPulse/peaceReasons.js",
+  "exp": "PEACE_REASON_TUNING",
+  "line": 72,
+  "keys": 7,
+  "exported": true,
+  "fileDeps": 7,
+  "collides": false,
+  "totalHits": 16,
+  "homeHits": 8,
+  "foreignHits": 8,
+  "buckets": {
+   "tests": [
+    "tests/domain/peaceReasons.test.js(6)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/pestilenceKernel.js#PESTILENCE_KERNEL_TUNING",
+  "file": "src/domain/worldPulse/pestilenceKernel.js",
+  "exp": "PESTILENCE_KERNEL_TUNING",
+  "line": 71,
+  "keys": 3,
+  "exported": true,
+  "fileDeps": 1,
+  "collides": false,
+  "totalHits": 4,
+  "homeHits": 2,
+  "foreignHits": 2,
+  "buckets": {
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": []
+ },
+ {
+  "id": "src/domain/worldPulse/ransomClaim.js#RANSOM_TUNING",
+  "file": "src/domain/worldPulse/ransomClaim.js",
+  "exp": "RANSOM_TUNING",
+  "line": 71,
+  "keys": 7,
+  "exported": true,
+  "fileDeps": 1,
+  "collides": false,
+  "totalHits": 19,
+  "homeHits": 8,
+  "foreignHits": 11,
+  "buckets": {
+   "tests": [
+    "tests/domain/envoyRansomWiring.test.js(4)",
+    "tests/domain/espionageGauntlet.test.js(2)",
+    "tests/domain/ransomClaimWr7d.test.js(3)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/razingExecution.js#RAZING_EXECUTION_TUNING",
+  "file": "src/domain/worldPulse/razingExecution.js",
+  "exp": "RAZING_EXECUTION_TUNING",
+  "line": 196,
+  "keys": 5,
+  "exported": true,
+  "fileDeps": 1,
+  "collides": false,
+  "totalHits": 14,
+  "homeHits": 3,
+  "foreignHits": 11,
+  "buckets": {
+   "tests": [
+    "tests/domain/razingDeterrenceWr8.test.js(2)",
+    "tests/domain/razingExecutionWr8.test.js(6)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(2)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/razingWitness.js#RAZING_WITNESS_TUNING",
+  "file": "src/domain/worldPulse/razingWitness.js",
+  "exp": "RAZING_WITNESS_TUNING",
+  "line": 87,
+  "keys": 10,
+  "exported": true,
+  "fileDeps": 1,
+  "collides": false,
+  "totalHits": 9,
+  "homeHits": 3,
+  "foreignHits": 6,
+  "buckets": {
+   "tests": [
+    "tests/domain/razingWitnessWr8.test.js(4)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/reframeKernel.js#REFRAME_TUNING",
+  "file": "src/domain/worldPulse/reframeKernel.js",
+  "exp": "REFRAME_TUNING",
+  "line": 133,
+  "keys": 15,
+  "exported": true,
+  "fileDeps": 5,
+  "collides": false,
+  "totalHits": 22,
+  "homeHits": 6,
+  "foreignHits": 16,
+  "buckets": {
+   "src": [
+    "src/domain/certification/subsystemRowsRegen.js(1)"
+   ],
+   "tests": [
+    "tests/domain/reframeKernel.test.js(12)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(2)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "src",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/reinforcement.js#REINFORCEMENT_TUNING",
+  "file": "src/domain/worldPulse/reinforcement.js",
+  "exp": "REINFORCEMENT_TUNING",
+  "line": 217,
+  "keys": 14,
+  "exported": true,
+  "fileDeps": 1,
+  "collides": false,
+  "totalHits": 3,
+  "homeHits": 1,
+  "foreignHits": 2,
+  "buckets": {
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": []
+ },
+ {
+  "id": "src/domain/worldPulse/religiousContest.js#CRISIS_CONVERSION_TUNING",
+  "file": "src/domain/worldPulse/religiousContest.js",
+  "exp": "CRISIS_CONVERSION_TUNING",
+  "line": 149,
+  "keys": 9,
+  "exported": false,
+  "fileDeps": 1,
+  "collides": false,
+  "totalHits": 7,
+  "homeHits": 3,
+  "foreignHits": 4,
+  "buckets": {
+   "docs": [
+    "docs/DESIGN_FP_ARCH_WF.md(1)",
+    "docs/implementation/preverification/WF-SUBSTRATE.md(1)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "docs"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/resourceDynamicsKernel.js#RESOURCE_DYNAMICS_TUNING",
+  "file": "src/domain/worldPulse/resourceDynamicsKernel.js",
+  "exp": "RESOURCE_DYNAMICS_TUNING",
+  "line": 131,
+  "keys": 14,
+  "exported": true,
+  "fileDeps": 3,
+  "collides": false,
+  "totalHits": 8,
+  "homeHits": 3,
+  "foreignHits": 5,
+  "buckets": {
+   "tests": [
+    "tests/domain/resourceDynamicsKernel.test.js(1)",
+    "tests/property/resourceDynamicsDormancyGolden.test.js(2)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/routeNetworkCharterBypass.js#ROUTE_BYPASS_TUNING",
+  "file": "src/domain/worldPulse/routeNetworkCharterBypass.js",
+  "exp": "ROUTE_BYPASS_TUNING",
+  "line": 72,
+  "keys": 5,
+  "exported": true,
+  "fileDeps": 1,
+  "collides": false,
+  "totalHits": 15,
+  "homeHits": 6,
+  "foreignHits": 9,
+  "buckets": {
+   "tests": [
+    "tests/domain/routeNetworkDanger.test.js(7)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/routeNetworkCharterDanger.js#ROUTE_DANGER_TUNING",
+  "file": "src/domain/worldPulse/routeNetworkCharterDanger.js",
+  "exp": "ROUTE_DANGER_TUNING",
+  "line": 91,
+  "keys": 9,
+  "exported": true,
+  "fileDeps": 3,
+  "collides": false,
+  "totalHits": 16,
+  "homeHits": 10,
+  "foreignHits": 6,
+  "buckets": {
+   "tests": [
+    "tests/domain/routeNetworkDanger.test.js(4)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/routeNetworkConsumersRace.js#ROUTE_RACE_TUNING",
+  "file": "src/domain/worldPulse/routeNetworkConsumersRace.js",
+  "exp": "ROUTE_RACE_TUNING",
+  "line": 85,
+  "keys": 4,
+  "exported": true,
+  "fileDeps": 0,
+  "collides": false,
+  "totalHits": 8,
+  "homeHits": 4,
+  "foreignHits": 4,
+  "buckets": {
+   "tests": [
+    "tests/domain/routeNetworkConsumersRace.test.js(2)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/routeNetworkConsumersStrategic.js#ROUTE_STRATEGIC_TUNING",
+  "file": "src/domain/worldPulse/routeNetworkConsumersStrategic.js",
+  "exp": "ROUTE_STRATEGIC_TUNING",
+  "line": 80,
+  "keys": 2,
+  "exported": true,
+  "fileDeps": 0,
+  "collides": false,
+  "totalHits": 7,
+  "homeHits": 3,
+  "foreignHits": 4,
+  "buckets": {
+   "tests": [
+    "tests/domain/routeNetworkConsumersStrategic.test.js(2)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/routeNetworkConsumersTransit.js#ROUTE_TRANSIT_TUNING",
+  "file": "src/domain/worldPulse/routeNetworkConsumersTransit.js",
+  "exp": "ROUTE_TRANSIT_TUNING",
+  "line": 82,
+  "keys": 3,
+  "exported": true,
+  "fileDeps": 5,
+  "collides": false,
+  "totalHits": 8,
+  "homeHits": 3,
+  "foreignHits": 5,
+  "buckets": {
+   "tests": [
+    "tests/domain/routeNetworkConsumers.test.js(3)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/routeNetworkFlows.js#ROUTE_FLOW_TUNING",
+  "file": "src/domain/worldPulse/routeNetworkFlows.js",
+  "exp": "ROUTE_FLOW_TUNING",
+  "line": 118,
+  "keys": 5,
+  "exported": true,
+  "fileDeps": 4,
+  "collides": false,
+  "totalHits": 13,
+  "homeHits": 9,
+  "foreignHits": 4,
+  "buckets": {
+   "tests": [
+    "tests/domain/routeNetworkFlows.test.js(2)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/sacredClaim.js#SACRED_CLAIM_TUNING",
+  "file": "src/domain/worldPulse/sacredClaim.js",
+  "exp": "SACRED_CLAIM_TUNING",
+  "line": 67,
+  "keys": 3,
+  "exported": true,
+  "fileDeps": 5,
+  "collides": false,
+  "totalHits": 6,
+  "homeHits": 2,
+  "foreignHits": 4,
+  "buckets": {
+   "docs": [
+    "docs/DESIGN_FP_ARCH_WF.md(1)",
+    "docs/implementation/preverification/WF-SUBSTRATE.md(1)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "docs"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/seatIntervention.js#SEAT_INTERVENTION_TUNING",
+  "file": "src/domain/worldPulse/seatIntervention.js",
+  "exp": "SEAT_INTERVENTION_TUNING",
+  "line": 52,
+  "keys": 1,
+  "exported": true,
+  "fileDeps": 1,
+  "collides": false,
+  "totalHits": 10,
+  "homeHits": 2,
+  "foreignHits": 8,
+  "buckets": {
+   "tests": [
+    "tests/domain/seatIntervention.test.js(6)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/secrecyTradeFactor.js#SECRECY_TRADE_TUNING",
+  "file": "src/domain/worldPulse/secrecyTradeFactor.js",
+  "exp": "SECRECY_TRADE_TUNING",
+  "line": 119,
+  "keys": 2,
+  "exported": true,
+  "fileDeps": 0,
+  "collides": false,
+  "totalHits": 25,
+  "homeHits": 5,
+  "foreignHits": 20,
+  "buckets": {
+   "docs": [
+    "docs/implementation/packets/foreign-policy/IN-1A.md(2)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ],
+   "tests": [
+    "tests/property/secrecyTradeDormancyFence.test.js(16)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "docs",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/settlementPolitics.js#SETTLEMENT_POLITICS_TUNING",
+  "file": "src/domain/worldPulse/settlementPolitics.js",
+  "exp": "SETTLEMENT_POLITICS_TUNING",
+  "line": 83,
+  "keys": 16,
+  "exported": true,
+  "fileDeps": 5,
+  "collides": false,
+  "totalHits": 20,
+  "homeHits": 6,
+  "foreignHits": 14,
+  "buckets": {
+   "docs": [
+    "docs/SETTLEMENT_CAPABILITY_ATLAS.md(1)"
+   ],
+   "tests": [
+    "tests/domain/espionagePresence.test.js(2)",
+    "tests/domain/settlementPoliticsPins.test.js(7)",
+    "tests/domain/strategyMoves.test.js(2)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "docs",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/settlementStrategy.js#STRATEGY_TUNING",
+  "file": "src/domain/worldPulse/settlementStrategy.js",
+  "exp": "STRATEGY_TUNING",
+  "line": 1287,
+  "keys": 3,
+  "exported": true,
+  "fileDeps": 2,
+  "collides": false,
+  "totalHits": 3,
+  "homeHits": 1,
+  "foreignHits": 2,
+  "buckets": {
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": []
+ },
+ {
+  "id": "src/domain/worldPulse/sovereigntyAppraisal.js#SOVEREIGNTY_APPRAISAL_TUNING",
+  "file": "src/domain/worldPulse/sovereigntyAppraisal.js",
+  "exp": "SOVEREIGNTY_APPRAISAL_TUNING",
+  "line": 126,
+  "keys": 9,
+  "exported": true,
+  "fileDeps": 2,
+  "collides": false,
+  "totalHits": 8,
+  "homeHits": 4,
+  "foreignHits": 4,
+  "buckets": {
+   "tests": [
+    "tests/domain/sovereigntyAppraisalWr10.test.js(2)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/sovereigntyBundle.js#SOVEREIGNTY_BUNDLE_TUNING",
+  "file": "src/domain/worldPulse/sovereigntyBundle.js",
+  "exp": "SOVEREIGNTY_BUNDLE_TUNING",
+  "line": 126,
+  "keys": 1,
+  "exported": true,
+  "fileDeps": 1,
+  "collides": false,
+  "totalHits": 4,
+  "homeHits": 2,
+  "foreignHits": 2,
+  "buckets": {
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": []
+ },
+ {
+  "id": "src/domain/worldPulse/sovereigntyIntent.js#SOVEREIGNTY_INTENT_TUNING",
+  "file": "src/domain/worldPulse/sovereigntyIntent.js",
+  "exp": "SOVEREIGNTY_INTENT_TUNING",
+  "line": 102,
+  "keys": 6,
+  "exported": true,
+  "fileDeps": 1,
+  "collides": false,
+  "totalHits": 15,
+  "homeHits": 8,
+  "foreignHits": 7,
+  "buckets": {
+   "tests": [
+    "tests/domain/sovereigntyIntentWr10.test.js(5)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/sovereigntyMarketStage.js#SOVEREIGNTY_MARKET_TUNING",
+  "file": "src/domain/worldPulse/sovereigntyMarketStage.js",
+  "exp": "SOVEREIGNTY_MARKET_TUNING",
+  "line": 120,
+  "keys": 3,
+  "exported": true,
+  "fileDeps": 1,
+  "collides": false,
+  "totalHits": 6,
+  "homeHits": 2,
+  "foreignHits": 4,
+  "buckets": {
+   "tests": [
+    "tests/domain/sovereigntyMarketStageWr10w.test.js(2)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/sovereigntyReach.js#SOVEREIGNTY_REACH_TUNING",
+  "file": "src/domain/worldPulse/sovereigntyReach.js",
+  "exp": "SOVEREIGNTY_REACH_TUNING",
+  "line": 55,
+  "keys": 2,
+  "exported": true,
+  "fileDeps": 1,
+  "collides": false,
+  "totalHits": 9,
+  "homeHits": 3,
+  "foreignHits": 6,
+  "buckets": {
+   "tests": [
+    "tests/domain/sovereigntyMarketReadsWr10.test.js(4)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/sovereigntyTransfer.js#SOVEREIGNTY_TRANSFER_TUNING",
+  "file": "src/domain/worldPulse/sovereigntyTransfer.js",
+  "exp": "SOVEREIGNTY_TRANSFER_TUNING",
+  "line": 89,
+  "keys": 3,
+  "exported": true,
+  "fileDeps": 3,
+  "collides": false,
+  "totalHits": 12,
+  "homeHits": 2,
+  "foreignHits": 10,
+  "buckets": {
+   "tests": [
+    "tests/domain/sovereigntyDmVerbWr10w.test.js(6)",
+    "tests/domain/sovereigntyTransferWr10w.test.js(2)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/steadingTopography.js#STEADING_TOPOGRAPHY_TUNING",
+  "file": "src/domain/worldPulse/steadingTopography.js",
+  "exp": "STEADING_TOPOGRAPHY_TUNING",
+  "line": 185,
+  "keys": 6,
+  "exported": true,
+  "fileDeps": 3,
+  "collides": false,
+  "totalHits": 6,
+  "homeHits": 2,
+  "foreignHits": 4,
+  "buckets": {
+   "tests": [
+    "tests/domain/steadingTopography.test.js(2)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/strategicPosture.js#POSTURE_TUNING",
+  "file": "src/domain/worldPulse/strategicPosture.js",
+  "exp": "POSTURE_TUNING",
+  "line": 320,
+  "keys": 3,
+  "exported": true,
+  "fileDeps": 1,
+  "collides": false,
+  "totalHits": 6,
+  "homeHits": 1,
+  "foreignHits": 5,
+  "buckets": {
+   "docs": [
+    "docs/implementation/preverification/WF-SUBSTRATE.md(1)"
+   ],
+   "tests": [
+    "tests/domain/strategicPosture.test.js(2)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "docs",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/stressorGates.js#UPHEAVAL_TUNING",
+  "file": "src/domain/worldPulse/stressorGates.js",
+  "exp": "UPHEAVAL_TUNING",
+  "line": 77,
+  "keys": 5,
+  "exported": true,
+  "fileDeps": 1,
+  "collides": false,
+  "totalHits": 15,
+  "homeHits": 4,
+  "foreignHits": 11,
+  "buckets": {
+   "scripts": [
+    "scripts/lib/tuning-inventory.mjs(1)"
+   ],
+   "tests": [
+    "tests/domain/legitimacyUpheaval.test.js(8)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "scripts",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/supplyWebWarfare.js#WEBWAR_TUNING",
+  "file": "src/domain/worldPulse/supplyWebWarfare.js",
+  "exp": "WEBWAR_TUNING",
+  "line": 125,
+  "keys": 15,
+  "exported": true,
+  "fileDeps": 4,
+  "collides": false,
+  "totalHits": 20,
+  "homeHits": 15,
+  "foreignHits": 5,
+  "buckets": {
+   "tests": [
+    "tests/domain/supplyWebWarfare.test.js(3)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/traditionsKernel.js#TRAD_TUNING",
+  "file": "src/domain/worldPulse/traditionsKernel.js",
+  "exp": "TRAD_TUNING",
+  "line": 130,
+  "keys": 24,
+  "exported": false,
+  "fileDeps": 1,
+  "collides": false,
+  "totalHits": 17,
+  "homeHits": 10,
+  "foreignHits": 7,
+  "buckets": {
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(5)"
+   ],
+   "tests": [
+    "tests/lint/tuningRegister.walker.test.js(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/treasury.js#TREASURY_TUNING",
+  "file": "src/domain/worldPulse/treasury.js",
+  "exp": "TREASURY_TUNING",
+  "line": 98,
+  "keys": 16,
+  "exported": true,
+  "fileDeps": 4,
+  "collides": false,
+  "totalHits": 40,
+  "homeHits": 20,
+  "foreignHits": 20,
+  "buckets": {
+   "tests": [
+    "tests/domain/treasury.test.js(14)",
+    "tests/lint/treasuryConservation.walker.test.js(4)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/treatyBreachCredibility.js#BREACH_CREDIBILITY_TUNING",
+  "file": "src/domain/worldPulse/treatyBreachCredibility.js",
+  "exp": "BREACH_CREDIBILITY_TUNING",
+  "line": 61,
+  "keys": 1,
+  "exported": true,
+  "fileDeps": 1,
+  "collides": false,
+  "totalHits": 9,
+  "homeHits": 2,
+  "foreignHits": 7,
+  "buckets": {
+   "docs": [
+    "docs/implementation/packets/foreign-policy/GR-4C.md(3)"
+   ],
+   "tests": [
+    "tests/domain/treatyBreachCredibility.test.js(2)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "docs",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/treatyEnforcement.js#TREATY_ENFORCEMENT_TUNING",
+  "file": "src/domain/worldPulse/treatyEnforcement.js",
+  "exp": "TREATY_ENFORCEMENT_TUNING",
+  "line": 41,
+  "keys": 1,
+  "exported": true,
+  "fileDeps": 16,
+  "collides": false,
+  "totalHits": 9,
+  "homeHits": 2,
+  "foreignHits": 7,
+  "buckets": {
+   "tests": [
+    "tests/domain/peaceTerms.test.js(1)",
+    "tests/domain/treatyEnforcement.test.js(4)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/treatySuccession.js#SUCCESSION_TUNING",
+  "file": "src/domain/worldPulse/treatySuccession.js",
+  "exp": "SUCCESSION_TUNING",
+  "line": 89,
+  "keys": 3,
+  "exported": false,
+  "fileDeps": 3,
+  "collides": false,
+  "totalHits": 15,
+  "homeHits": 4,
+  "foreignHits": 11,
+  "buckets": {
+   "docs": [
+    "docs/implementation/packets/foreign-policy/GR-4A.md(4)",
+    "docs/implementation/packets/foreign-policy/GR-4B.md(1)",
+    "docs/implementation/packets/foreign-policy/GR-4C.md(4)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "docs"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/upswingKernel.js#UPSWING_TUNING",
+  "file": "src/domain/worldPulse/upswingKernel.js",
+  "exp": "UPSWING_TUNING",
+  "line": 100,
+  "keys": 27,
+  "exported": true,
+  "fileDeps": 2,
+  "collides": false,
+  "totalHits": 13,
+  "homeHits": 3,
+  "foreignHits": 10,
+  "buckets": {
+   "tests": [
+    "tests/domain/upswingKernel.test.js(8)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/urbanFabricKernel.js#FABRIC_TUNING",
+  "file": "src/domain/worldPulse/urbanFabricKernel.js",
+  "exp": "FABRIC_TUNING",
+  "line": 237,
+  "keys": 15,
+  "exported": true,
+  "fileDeps": 1,
+  "collides": false,
+  "totalHits": 22,
+  "homeHits": 6,
+  "foreignHits": 16,
+  "buckets": {
+   "docs": [
+    "docs/implementation/packets/town-cartography/MF-UC2.md(2)"
+   ],
+   "src": [
+    "src/domain/undercity/monotoneComponents.js(1)"
+   ],
+   "tests": [
+    "tests/domain/urbanFabricKernel.test.js(10)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(2)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "docs",
+   "src",
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/vengeanceLicense.js#VENGEANCE_LICENSE_TUNING",
+  "file": "src/domain/worldPulse/vengeanceLicense.js",
+  "exp": "VENGEANCE_LICENSE_TUNING",
+  "line": 82,
+  "keys": 4,
+  "exported": true,
+  "fileDeps": 1,
+  "collides": false,
+  "totalHits": 9,
+  "homeHits": 3,
+  "foreignHits": 6,
+  "buckets": {
+   "tests": [
+    "tests/domain/vengeanceLicenseWr8.test.js(4)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/warCoalitionExpenditure.js#COALITION_EXPENDITURE_TUNING",
+  "file": "src/domain/worldPulse/warCoalitionExpenditure.js",
+  "exp": "COALITION_EXPENDITURE_TUNING",
+  "line": 21,
+  "keys": 6,
+  "exported": true,
+  "fileDeps": 6,
+  "collides": false,
+  "totalHits": 5,
+  "homeHits": 3,
+  "foreignHits": 2,
+  "buckets": {
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": []
+ },
+ {
+  "id": "src/domain/worldPulse/warCoalitionSettlement.js#COALITION_SETTLEMENT_TUNING",
+  "file": "src/domain/worldPulse/warCoalitionSettlement.js",
+  "exp": "COALITION_SETTLEMENT_TUNING",
+  "line": 44,
+  "keys": 8,
+  "exported": true,
+  "fileDeps": 2,
+  "collides": false,
+  "totalHits": 4,
+  "homeHits": 2,
+  "foreignHits": 2,
+  "buckets": {
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": []
+ },
+ {
+  "id": "src/domain/worldPulse/warCosts.js#WAR_COSTS_TUNING",
+  "file": "src/domain/worldPulse/warCosts.js",
+  "exp": "WAR_COSTS_TUNING",
+  "line": 59,
+  "keys": 14,
+  "exported": true,
+  "fileDeps": 4,
+  "collides": false,
+  "totalHits": 21,
+  "homeHits": 15,
+  "foreignHits": 6,
+  "buckets": {
+   "tests": [
+    "tests/domain/warCosts.test.js(4)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "tests"
+  ]
+ },
+ {
+  "id": "src/domain/worldPulse/warIntent.js#WAR_INTENT_TUNING",
+  "file": "src/domain/worldPulse/warIntent.js",
+  "exp": "WAR_INTENT_TUNING",
+  "line": 420,
+  "keys": 1,
+  "exported": true,
+  "fileDeps": 6,
+  "collides": false,
+  "totalHits": 3,
+  "homeHits": 1,
+  "foreignHits": 2,
+  "buckets": {
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": []
+ },
+ {
+  "id": "src/domain/worldPulse/warPeaceDecision.js#WAR_PEACE_DECISION_TUNING",
+  "file": "src/domain/worldPulse/warPeaceDecision.js",
+  "exp": "WAR_PEACE_DECISION_TUNING",
+  "line": 32,
+  "keys": 1,
+  "exported": true,
+  "fileDeps": 3,
+  "collides": false,
+  "totalHits": 5,
+  "homeHits": 3,
+  "foreignHits": 2,
+  "buckets": {
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": []
+ },
+ {
+  "id": "src/domain/worldPulse/warPeaceRefusal.js#WAR_PEACE_REFUSAL_TUNING",
+  "file": "src/domain/worldPulse/warPeaceRefusal.js",
+  "exp": "WAR_PEACE_REFUSAL_TUNING",
+  "line": 21,
+  "keys": 5,
+  "exported": true,
+  "fileDeps": 1,
+  "collides": false,
+  "totalHits": 4,
+  "homeHits": 2,
+  "foreignHits": 2,
+  "buckets": {
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": []
+ },
+ {
+  "id": "src/domain/worldPulse/warPoliticalLoop.js#WAR_POLITICAL_TUNING",
+  "file": "src/domain/worldPulse/warPoliticalLoop.js",
+  "exp": "WAR_POLITICAL_TUNING",
+  "line": 20,
+  "keys": 4,
+  "exported": true,
+  "fileDeps": 1,
+  "collides": false,
+  "totalHits": 7,
+  "homeHits": 5,
+  "foreignHits": 2,
+  "buckets": {
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": []
+ },
+ {
+  "id": "src/domain/worldPulse/warTermination.js#WAR_TERMINATION_TUNING",
+  "file": "src/domain/worldPulse/warTermination.js",
+  "exp": "WAR_TERMINATION_TUNING",
+  "line": 103,
+  "keys": 19,
+  "exported": true,
+  "fileDeps": 5,
+  "collides": false,
+  "totalHits": 11,
+  "homeHits": 8,
+  "foreignHits": 3,
+  "buckets": {
+   "docs": [
+    "docs/implementation/packets/fp/WF-1D.md(1)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "docs"
+  ]
+ },
+ {
+  "id": "src/lib/townScene/adaptiveQuality.js#GOVERNOR_TUNING",
+  "file": "src/lib/townScene/adaptiveQuality.js",
+  "exp": "GOVERNOR_TUNING",
+  "line": 32,
+  "keys": 13,
+  "exported": true,
+  "fileDeps": 0,
+  "collides": false,
+  "totalHits": 39,
+  "homeHits": 6,
+  "foreignHits": 33,
+  "buckets": {
+   "other": [
+    "public/landing-maps/k1-exhibit/index.html(7)",
+    "public/landing-maps/k4-exhibit/index.html(7)"
+   ],
+   "scripts": [
+    "scripts/generate-k1.mjs(2)",
+    "scripts/generate-k4.mjs(2)",
+    "scripts/lib/adaptiveGovernor.mjs(6)"
+   ],
+   "tests": [
+    "tests/architecture/adaptiveGovernor.test.js(4)",
+    "tests/architecture/archViewWall.test.js(3)"
+   ],
+   "REGISTER": [
+    "tests/lint/.tuning-inventory.json(1)",
+    "tests/lint/.tuning-register.json(1)"
+   ]
+  },
+  "realConsumerBuckets": [
+   "other",
+   "scripts",
+   "tests"
+  ]
+ }
+]

@@ -1,0 +1,15 @@
+§891 register 8/10: the lighting census refrozen after the O2GATE car — five figures predicted in writing, five exact, including the one the walker's own throw hides
+
+files 2515 -> 2515, parked 371 -> 371, credited 2144 -> 2144, titles 22919 -> 22922,
+suiteTitles 6152 -> 6153, measuredAtSha 450f7dbb7. Every figure was written down before
+the instrument ran ($SC/PREDICT-891-registers.md) and every one is exact.
+
+The suiteTitles +1 is the point. The walker asserts titles BEFORE suiteTitles and throws
+at the first mismatch, so a single run reports one moved figure and hides the second. The
+lane that built the car said so explicitly and predicted both; a first-mismatch throw is a
+lower bound on the drift, never the whole of it.
+
+Refreeze exit 1 by design; the plain re-run is the proof: 34 passed, exit 0.
+
+Seat: Opus 5 — Fable-unvalidated
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>

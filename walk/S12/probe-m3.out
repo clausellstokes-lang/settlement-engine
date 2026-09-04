@@ -1,0 +1,33 @@
+rendered lines: 40
+distinct rendered: 24
+distinct frames (name masked): 6
+
+by surface:
+ prosperityHeader: n=20 rendered=14 frames=3
+ prosperityRung: n=20 rendered=10 frames=3
+
+--- sample of prosperityHeader ---
+  • Elmspur manages. The mixed trade covers what the town needs and leaves a little over, and the little over is what the year gets argued about.
+  • Thornwall manages. The mixed trade covers what the town needs and leaves a little over, and the little over is what the year gets argued about.
+  • The accounts here balance on a thin margin. Nothing in them is failing; nothing in them is spare either.
+  • The accounts here balance on a thin margin. Nothing in them is failing; nothing in them is spare either.
+  • There is nothing striking about Westmere's condition in either direction — a working the road, a working market, a town neither building nor selling off.
+  • Blackmoor manages. The mixed trade covers what the town needs and leaves a little over, and the little over is what the year gets argued about.
+  • There is nothing striking about Redhollow's condition in either direction — a working the road, a working market, a town neither building nor selling off.
+  • Stonebridge manages. The mixed trade covers what the town needs and leaves a little over, and the little over is what the year gets argued about.
+
+=== THE SHIPPED INSTRUMENT ON THIS EXACT STREAM ===
+{
+  powered: 0,
+  unpowered: 20,
+  worst: null,
+  carriesEvidence: false,
+  withinEnvelope: false,
+  violations: 0
+}
+
+=== POOLED AS ONE WINDOW (what the assessment must have done) ===
+rendered-counted worst: 0.4 withinEnvelope: true
+frame-counted   worst: 0.85 withinEnvelope: false
+
+whole-corpus shares: rendered 0.4000  frame 0.8500

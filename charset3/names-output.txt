@@ -1,0 +1,81 @@
+### FILES IN src/ WHOSE LETTERS THE jsPDF PASS ERASES
+   41 src/data/namingData.js | U+0101 ā×1 U+0161 š×3 U+017E ž×2 U+0107 ć×30 U+0110 Đ×2 U+0111 đ×1 U+010D č×1 U+010C Č×1
+   28 src/lib/civility.js | U+0430 а×1 U+0435 е×1 U+043E о×1 U+0440 р×1 U+0441 с×1 U+0443 у×1 U+0445 х×1 U+043A к×1 U+043C м×1 U+043D н×1 U+0442 т×1 U+0432 в×1 U+0456 і×1 U+0455 ѕ×1 U+0458 ј×1 U+0501 ԁ×1 U+0261 ɡ×1 U+03BF ο×1 U+03B9 ι×1 U+03BA κ×1 U+03BD ν×1 U+03C1 ρ×1 U+03C4 τ×1 U+03C5 υ×1 U+03C7 χ×1 U+03B1 α×1 U+03B5 ε×1 U+0475 ѵ×1
+   27 src/domain/spatial/commodityFlow.js | U+03A3 Σ×27
+   27 src/domain/spatial/migration.js | U+03C4 τ×19 U+03A3 Σ×8
+   11 src/domain/worldPulse/piety.js | U+0436 ж×2 U+0438 и×2 U+0432 в×2 U+043E о×2 U+0439 й×2 U+03A3 Σ×1
+    6 src/domain/content/customContentCharset.js | U+0111 đ×1 U+0110 Đ×1 U+0142 ł×1 U+0141 Ł×1 U+0153 œ×1 U+0152 Œ×1
+    6 src/domain/spatial/generosityEV.js | U+03A3 Σ×2 U+1D62 ᵢ×2 U+2C7C ⱼ×2
+    3 src/domain/roads/state.js | U+03B1 α×3
+    3 src/domain/spatial/embattlement.js | U+03A3 Σ×3
+    3 src/domain/worldPulse/calamityKernel.js | U+03A3 Σ×3
+    3 src/domain/worldPulse/migrationKernel.js | U+03C4 τ×3
+    3 src/domain/worldPulse/settlementLifecycleKernel.js | U+03A3 Σ×3
+    3 src/domain/worldPulse/treasury.js | U+0394 Δ×2 U+03A3 Σ×1
+    2 src/components/theme.js | U+03B8 θ×2
+    2 src/copy/pseudo.js | U+0161 š×1 U+0160 Š×1
+    2 src/domain/spatial/entrepots.js | U+03A3 Σ×2
+    2 src/domain/traditions/pilgrimage.js | U+03A3 Σ×2
+    2 src/domain/worldPulse/disposition.js | U+03A3 Σ×2
+    2 src/domain/worldPulse/populationDynamics.js | U+03A3 Σ×2
+    1 src/components/loadingJourney/useScrollJourney.js | U+0394 Δ×1
+    1 src/components/nav/ShaftWrap.jsx | U+0394 Δ×1
+    1 src/components/new/tabs/OverviewTab.jsx | U+2139 ℹ×1
+    1 src/design/organic/fluidScale.js | U+03C6 φ×1
+    1 src/domain/corruption.js | U+03A3 Σ×1
+    1 src/domain/entities/propagate.js | U+1D62 ᵢ×1
+    1 src/domain/spatial/waterBodies.js | U+03A3 Σ×1
+    1 src/domain/townMap/townLayoutV2.js | U+03B8 θ×1
+    1 src/domain/worldPulse/demographicsMigration.js | U+03A3 Σ×1
+    1 src/domain/worldPulse/deploymentReturn.js | U+03A3 Σ×1
+    1 src/domain/worldPulse/faithField.js | U+03A3 Σ×1
+    1 src/domain/worldPulse/faithTuningSurface.js | U+03A3 Σ×1
+    1 src/domain/worldPulse/feasibilityGate.js | U+03B5 ε×1
+    1 src/domain/worldPulse/grammarNews.js | U+03B1 α×1
+    1 src/domain/worldPulse/grammarReceiptPools.js | U+03B1 α×1
+    1 src/domain/worldPulse/momentum.js | U+03A3 Σ×1
+    1 src/domain/worldPulse/moralInstitutionPressure.js | U+03C3 σ×1
+    1 src/domain/worldPulse/npcGoalBranches.js | U+0394 Δ×1
+    1 src/domain/worldPulse/razingExecution.js | U+03A3 Σ×1
+    1 src/domain/worldPulse/settlementLifecycleFirstClass.js | U+03A3 Σ×1
+    1 src/domain/worldPulse/treatySuccessionVoice.js | U+03B1 α×1
+    1 src/domain/worldPulse/warDeployment.js | U+03A3 Σ×1
+    1 src/domain/worldPulse/warReasons.js | U+03A3 Σ×1
+    1 src/utils/generateSettlementPDF.js | U+0130 İ×1
+
+### namingData.js STRING LITERALS THE jsPDF PASS MANGLES: 35
+    "Khān" -> "Kh n"
+    "Uroš" -> "Uro"
+    "Uglješa" -> "Uglje a"
+    "Nataša" -> "Nata a"
+    "Snežana" -> "Sne ana"
+    "Babić" -> "Babi"
+    "Cvjetković" -> "Cvjetkovi"
+    "Đorđević" -> "or evi"
+    "Filipović" -> "Filipovi"
+    "Grbić" -> "Grbi"
+    "Ilić" -> "Ili"
+    "Jovanović" -> "Jovanovi"
+    "Kovačević" -> "Kova evi"
+    "Lazić" -> "Lazi"
+    "Marković" -> "Markovi"
+    "Nikolić" -> "Nikoli"
+    "Obradović" -> "Obradovi"
+    "Petrović" -> "Petrovi"
+    "Rakić" -> "Raki"
+    "Simić" -> "Simi"
+    "Todorović" -> "Todorovi"
+    "Vasić" -> "Vasi"
+    "Vuković" -> "Vukovi"
+    "Zdravković" -> "Zdravkovi"
+    "Antonović" -> "Antonovi"
+    "Blagojević" -> "Blagojevi"
+    "Čupić" -> "upi"
+    "Đurić" -> "uri"
+    "Erić" -> "Eri"
+    "Gavrilović" -> "Gavrilovi"
+    "Hadžić" -> "Had i"
+    "Janković" -> "Jankovi"
+    "Kostić" -> "Kosti"
+    "Lukić" -> "Luki"
+    "Matić" -> "Mati"

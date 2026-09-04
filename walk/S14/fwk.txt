@@ -1,0 +1,15 @@
+
+coup_detat
+faction_institution_capture
+faction_institution_suppression
+faction_law_preference_push
+faction_power_shift
+faction_service_bolster
+hostile
+institution_capture
+institution_suppression
+npc_action
+occupation_burden
+occupation_burden_cleared
+occupation_resistance
+patron
