@@ -12,6 +12,8 @@
  *   DS-POW-4  Power › Rule and succession — `coupContenders(settlement)` (as a READING) +
  *             `publicLegitimacy.govMultiplier`. Its lineage pools stay dark; see below.
  *   DS-POW-3  Power › The Ladder — `ladderRungsOf` + `ladderInstabilityOf`, PER FACTION
+ *   DS-POW-5  Power › ruling structure and the structural lens — `structuralLensOf` +
+ *             `governingName`
  *
  * ── WHY THIS LEAF, AND WHY THIS BLOCK FIRST ──────────────────────────────────────────
  *
@@ -639,6 +641,72 @@ export function powerLadderRung(settlement, reading = {}, options = {}) {
 }
 
 /**
+ * ── DS-POW-5, THE RULING STRUCTURE AND THE STRUCTURAL LENS ───────────────────────────
+ *
+ * Twelve pools in THREE lenses, and every one of them is an IDENTITY with a canonical
+ * vocabulary rather than a mapping this desk invents:
+ *
+ *   RULING POWER (6)   `cohesionWeave.RULING_POWERS` is
+ *                      `autocrat · council · theocracy · merchant_league · criminal · mixed`
+ *                      and the corpus keys six pools on exactly those six words.
+ *   THE NAME (1)       the governing body's own title, which is a SLOT and never a baked
+ *                      noun — it fires whenever `{seat}` has a real fill.
+ *
+ * The archetype mapper is TOTAL and fails soft to `mixed`, so the ruling-power lens always
+ * answers on a generated world. The desk asserts its vocabulary against `RULING_POWERS`
+ * directly instead of carrying a table that could drift from it.
+ *
+ * ⛔ THE FIVE `economicBase:` POOLS ARE DARK, AND THE REASON IS A MEASUREMENT.
+ * `check-observed-shape-readers` convicts all three keys the base is derived from —
+ * `economicState.economicBase`, `config.economicBase`, `economicState.primaryIndustry` — as
+ * keys NO WRITER PRODUCES. So `normalizeEconomicBase` receives `''` on every generated
+ * world and fails soft to `mixed`: the axis has never varied for ANY consumer of the lens,
+ * which is a pre-existing finding about the lens rather than about this desk.
+ * Drawing `economicBase: mixed` off that default would hand a reader a FAIL-SOFT VALUE
+ * DRESSED AS A READING — a false statement about the town, which is the one thing this
+ * subsystem exists to refuse. So the desk does not draw the base lens at all, and does not
+ * read the keys. The five pools stay dark BY DECLARATION.
+ * TO LIGHT THEM: give the economy generator a real economic-base field; the corpus, the
+ * vocabulary and the pool keys are already in place and agree 1:1.
+ *
+ * ⚠ THE READING ARRIVES AS AN ARGUMENT (the DS-POW-4 / DS-POW-3 pattern). `structuralLensOf`
+ * is the ONE derivation of the lens from a settlement, and it was lifted into
+ * `cohesionWeave.js` for this car: the extraction it performs lived as a LOCAL helper in
+ * `generosityKernel.js`, and writing a fourth copy for this desk is the point at which a
+ * duplicated derivation becomes a drift that ships. The caller derives; the desk consumes.
+ *
+ * ⚠ `criminal` IS WHOLLY COVERT — all three of its variants are `dm-only`, measured — so it
+ * draws only on the DM's own dossier, through the audience the caller already passes. The
+ * same fail-closed law that would have left DS-POW-6's capture pools dark applies here, and
+ * it is already satisfied.
+ *
+ * ⚠ `{institution}`, `{route}` and `{good}` are named by exactly ONE variant EACH of the
+ * block's forty (in `theocracy`, `economicBase: trade_hub` and `economicBase: craft`
+ * respectively). `{good}` is the only `bare-common` slot this leaf touches — the shape class
+ * that leaves DS-ECO-1's C1 pool at one eligible variant — and at one variant of forty its
+ * exposure is a single dropped sentence rather than a degraded pool. They are left unfilled;
+ * anchored liveness drops those three variants and no POOL is lost, which the desk test
+ * measures rather than assumes.
+ */
+
+/**
+ * DS-POW-5's ruling-power pool key. The lens word IS the pool key; an unrecognised word
+ * renders nothing rather than falling into `mixed`, because a vocabulary this desk does not
+ * know is a producer change and guessing which rung it meant is how a page states something
+ * false.
+ * @param {{rulingPower?: unknown}|null|undefined} lens
+ * @returns {string|null}
+ */
+export function rulingPowerPoolKey(lens) {
+  const word = text(lens?.rulingPower);
+  if (!word) return null;
+  return CORPUS['DS-POW-5'].pools[word] ? word : null;
+}
+
+/** The pool that narrates the governing body's own title. */
+const GOVERNING_NAME_POOL = 'governing body name: a SLOT, never a baked noun';
+
+/**
  * THE DESK. Returns the two rungs the legitimacy banner draws, or null for each where the
  * state does not support one.
  *
@@ -648,12 +716,14 @@ export function powerLadderRung(settlement, reading = {}, options = {}) {
  *
  * @param {PowerDeskSettlement|null|undefined} settlement
  * @param {{contenders?: {challengers?: ReadonlyArray<{name?: unknown}>}|null,
- *   riskLabel?: string|null}} [readings] the caller's own derivations — see DS-POW-4 above
+ *   riskLabel?: string|null,
+ *   structuralLens?: {rulingPower?: unknown, economicBase?: unknown}|null}} [readings]
+ *   the caller's own derivations — see DS-POW-4 and DS-POW-5 above
  * @param {{seed?: string, audience?: string}} [options]
  * @returns {Readonly<{legitimacyBanner: object|null, legitimacyLens: object|null,
  *   stabilityHeader: object|null, stabilityLens: object|null, legitimacyReading: object|null,
  *   captureReading: object|null, operationReading: object|null, successionRisk: object|null,
- *   successionHold: object|null}>}
+ *   successionHold: object|null, rulingStructure: object|null, governingTitle: object|null}>}
  */
 export function powerStateProse(settlement, readings = {}, options = {}) {
   const power = settlement?.powerStructure || {};
@@ -694,6 +764,15 @@ export function powerStateProse(settlement, readings = {}, options = {}) {
     : null);
   // DS-POW-6 uses {seat} as the governing BODY (like DS-POW-1) and {faction} for the
   // captured house, so it takes BOTH fills — the two roles do not collide in this block.
+  // DS-POW-5 uses {seat} as the governing BODY, the DS-POW-1 role. {institution}, {route}
+  // and {good} are deliberately absent — one variant each of forty, no producer, and
+  // anchored liveness drops them without costing a pool.
+  /** @param {string|null} poolKey */
+  const line5 = (poolKey) => (poolKey
+    ? readStateProse(CORPUS, 'DS-POW-5', poolKey, {
+      ...options, slots: { settlement: town, seat: governing },
+    })
+    : null);
   // DS-POW-4 uses {seat} as the OFFICE ("the seat could fall"), the same role DS-POW-1
   // gives it, so governingName fills it here too. {timeband_age} is deliberately absent:
   // it is named by ONE variant of 29 and there is no duration former, so anchored liveness
@@ -739,6 +818,11 @@ export function powerStateProse(settlement, readings = {}, options = {}) {
   const holdKey = legitimacyHoldPoolKey(legitimacy.govMultiplier);
   const challenger = properFill(text(readings.contenders?.challengers?.[0]?.name));
 
+  // DS-POW-5. The lens is the caller's reading; both of its words are canonical vocabularies
+  // and both mappers are total, so these two lenses answer on every generated world.
+  const rulingKey = rulingPowerPoolKey(readings.structuralLens);
+  const namedKey = governing ? GOVERNING_NAME_POOL : null;
+
   return Object.freeze({
     legitimacyBanner: bandKey ? legibilityRung(glance, line(bandKey), []) : null,
     // The lens rung carries no glance of its own: the band word is already on the banner
@@ -753,5 +837,7 @@ export function powerStateProse(settlement, readings = {}, options = {}) {
     operationReading: operationKey ? legibilityRung('', line6(operationKey), []) : null,
     successionRisk: riskKey ? legibilityRung(text(readings.riskLabel), line4(riskKey), []) : null,
     successionHold: holdKey ? legibilityRung('', line4(holdKey), []) : null,
+    rulingStructure: rulingKey ? legibilityRung(rulingKey, line5(rulingKey), []) : null,
+    governingTitle: namedKey ? legibilityRung('', line5(namedKey), []) : null,
   });
 }

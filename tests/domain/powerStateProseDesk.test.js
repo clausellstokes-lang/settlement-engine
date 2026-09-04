@@ -36,10 +36,13 @@ import { likelyFutureFacts } from '../../src/domain/simulationSpine.js';
 import { CRIMINAL_OP_ROLES, criminalOpEcon } from '../../src/domain/criminalOpRole.js';
 import { COUP_RISK_LABELS, coupRiskLabel } from '../../src/domain/rulingPowerCoup.js';
 import { mirrorOf } from '../../src/domain/worldPulse/npcLadderState.js';
+import {
+  ECONOMIC_BASES, RULING_POWERS, structuralLens, structuralLensOf,
+} from '../../src/domain/spatial/cohesionWeave.js';
 import { hasLadder, ladderInstabilityOf, ladderRungsOf } from '../../src/domain/townMap/ladderRead.js';
 import {
   capturePoolKey, legitimacyHoldPoolKey, legitimacyReadingPoolKey,
-  ladderPoolKey, operationRolePoolKey, powerLadderRung, riskPoolKey,
+  ladderPoolKey, operationRolePoolKey, powerLadderRung, riskPoolKey, rulingPowerPoolKey,
 } from '../../src/domain/display/stateProse/powerStateProse.js';
 import { legitimacyBandFor } from '../../src/generators/factionDynamics.js';
 import {
@@ -1052,5 +1055,172 @@ describe('DS-POW-3 — the cuts, the mandatory faction, and the surface conditio
   it('DS-POW-3 carries no covert variant', () => {
     const covert = Object.values(POW3_POOLS).flat().filter((v) => (v.marks || []).includes('dm-only'));
     expect(covert).toHaveLength(0);
+  });
+});
+
+/** DS-POW-5 — ruling structure and the structural lens. */
+const POW5 = 'DS-POW-5';
+const POW5_POOLS = DOSSIER_STATE_PROSE_POWER[POW5].pools;
+
+function ruled5(category, economicBase, governingName = 'Merchant Council') {
+  return {
+    name: 'Thornwall',
+    _seed: 'seed-pow5',
+    powerStructure: { governingName, factions: [{ category, power: 50 }] },
+    economicState: { economicBase },
+  };
+}
+
+describe('DS-POW-5 — the lens vocabularies ARE the pool keys, both directions', () => {
+  it('every RULING_POWERS word is a pool, and every ruling pool is a RULING_POWERS word', () => {
+    // Asserted against cohesionWeave's own frozen roster, never a table in this desk that
+    // could drift from it. Both directions, so neither side can gain a member unnoticed.
+    for (const word of RULING_POWERS) {
+      expect(POW5_POOLS[word], `no pool for ruling power ${word}`).toBeTruthy();
+      expect(rulingPowerPoolKey({ rulingPower: word })).toBe(word);
+    }
+    const poolWords = Object.keys(POW5_POOLS)
+      .filter((k) => !k.startsWith('economicBase: ') && !k.startsWith('governing body name'));
+    expect([...poolWords].sort()).toEqual([...RULING_POWERS].sort());
+  });
+
+  it('⛔ the five economicBase pools are DARK, and the desk reads none of their keys', () => {
+    // All three keys the base is derived from are convicted by
+    // check-observed-shape-readers as keys NO WRITER PRODUCES, so normalizeEconomicBase
+    // always receives '' and fails soft to `mixed` — the axis has never varied for any
+    // consumer of the lens. Drawing off that default would hand a reader a fail-soft value
+    // dressed as a reading. The corpus is READY (the vocabulary agrees 1:1), so the pools
+    // are pinned present-and-unread rather than deleted.
+    for (const word of ECONOMIC_BASES) {
+      expect(POW5_POOLS[`economicBase: ${word}`], `corpus lost ${word}`).toBeTruthy();
+    }
+    const source = readFileSync(
+      resolve(import.meta.dirname, '../../src/domain/spatial/cohesionWeave.js'), 'utf8',
+    );
+    const code = source.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/[^\n]*/g, '');
+    const lensOf = code.slice(code.indexOf('export function structuralLensOf'));
+    const body = lensOf.slice(0, lensOf.indexOf('\n}'));
+    expect(body, 'the lift reads a key no generator writes').not.toMatch(/primaryIndustry|economicBase/);
+  });
+
+  it('an unrecognised lens word renders nothing rather than falling into `mixed`', () => {
+    expect(rulingPowerPoolKey({ rulingPower: 'junta' })).toBeNull();
+    expect(rulingPowerPoolKey(null)).toBeNull();
+    expect(rulingPowerPoolKey(undefined)).toBeNull();
+  });
+});
+
+describe('DS-POW-5 — structuralLensOf is the ONE derivation, and it matches its origin', () => {
+  it('the lift is behaviour-identical to the generosityKernel helpers it replaces', () => {
+    // THE ORACLE: the two local helpers in worldPulse/generosityKernel.js, transcribed as
+    // they stand. A lift is only a lift if it cannot change an answer.
+    const originalArchetype = (s) => {
+      const factions = Array.isArray(s?.powerStructure?.factions) ? s.powerStructure.factions : [];
+      let best = null;
+      let bestPower = -Infinity;
+      for (const f of factions) {
+        const p = typeof f?.power === 'number' && Number.isFinite(f.power) ? f.power : 0;
+        if (p > bestPower) { bestPower = p; best = f; }
+      }
+      return String(best?.category || '');
+    };
+    // Kept only to prove the oracle's INPUTS varied; the lift no longer derives a base.
+    const originalBase = (s) => String(
+      s?.economicState?.economicBase || s?.config?.economicBase || s?.economicState?.primaryIndustry || '',
+    );
+    const cases = [
+      ruled5('noble', 'mining'),
+      ruled5('government', 'farming'),
+      ruled5('religious', 'trade'),
+      ruled5('merchant', 'crafting'),
+      ruled5('criminal', 'nonsense'),
+      { name: 'T', powerStructure: { factions: [{ category: 'noble', power: 10 }, { category: 'criminal', power: 90 }] }, economicState: { primaryIndustry: 'mining' } },
+      { name: 'T', config: { economicBase: 'trade' }, powerStructure: { factions: [] } },
+      { name: 'T' },
+    ];
+    const reachedRuling = new Set();
+    const reachedBase = new Set();
+    for (const s of cases) {
+      // The base is NOT part of the lift (see the arm above), so the oracle compares the
+      // ARCHETYPE axis only — comparing a base this function deliberately no longer derives
+      // would be asserting a dead read still happens.
+      const expected = structuralLens({ governingArchetype: originalArchetype(s) });
+      const got = structuralLensOf(s);
+      expect(got.rulingPower, JSON.stringify(s)).toBe(expected.rulingPower);
+      reachedRuling.add(got.rulingPower);
+      reachedBase.add(originalBase(s));
+    }
+    // NON-VACUITY: the oracle must have been exercised across several answers, or it could
+    // be agreeing by always returning the fail-soft default.
+    expect(reachedRuling.size).toBeGreaterThan(3);
+    expect(reachedBase.size).toBeGreaterThan(3);
+    // The highest-power faction wins, not the first — the case the loop exists for.
+    expect(structuralLensOf(cases[5]).rulingPower).toBe('criminal');
+  });
+});
+
+describe('DS-POW-5 — ALIVENESS, the covert pool, and the three rare slots', () => {
+  it('all twelve pools fire across the two audiences', () => {
+    const reached = new Set();
+    for (const category of ['noble', 'government', 'religious', 'merchant', 'criminal', 'zzz-unknown']) {
+      for (const base of ['mining', 'farming', 'trade', 'crafting', 'nonsense']) {
+        for (const audience of ['dm', 'player']) {
+          const settlement = ruled5(category, base);
+          const drawn = powerStateProse(
+            settlement, { structuralLens: structuralLensOf(settlement) },
+            { seed: `p5-${category}-${base}`, audience },
+          );
+          for (const rung of ['rulingStructure', 'governingTitle']) {
+            const line = drawn[rung];
+            if (line?.sentence) {
+              reached.add(line.provenance.poolKey);
+              expect(line.sentence).not.toMatch(/[{}]/);
+              expect(line.sentence).not.toMatch(/[0-9]/);
+            }
+          }
+        }
+      }
+    }
+    // SEVEN of twelve: the six ruling-power pools plus the name pool. The five
+    // economicBase pools are dark by declaration (see the arm above), and stating the
+    // number here is what stops a later reader assuming all twelve were wired.
+    expect(reached.size, `unreached: ${Object.keys(POW5_POOLS).filter((k) => !reached.has(k))}`).toBe(7);
+    expect(Object.keys(POW5_POOLS)).toHaveLength(12);
+  });
+
+  it('`criminal` is WHOLLY covert, so the player sees silence and the DM sees the line', () => {
+    const pool = POW5_POOLS.criminal;
+    expect(pool.every((v) => (v.marks || []).includes('dm-only'))).toBe(true);
+    const settlement = ruled5('criminal', 'mining');
+    const reading = { structuralLens: structuralLensOf(settlement) };
+    expect(powerStateProse(settlement, reading, { seed: 'c', audience: 'player' }).rulingStructure?.sentence ?? null)
+      .toBeNull();
+    expect(powerStateProse(settlement, reading, { seed: 'c', audience: 'dm' }).rulingStructure.sentence)
+      .toBeTruthy();
+  });
+
+  it('{institution}, {route} and {good} are ONE variant each and cost no pool', () => {
+    // {good} is the only bare-common slot this leaf touches — the shape class that leaves
+    // DS-ECO-1's C1 pool at one eligible variant. At one variant of forty its exposure is a
+    // single dropped sentence, which is why it is left unfilled rather than given a table.
+    const all = Object.values(POW5_POOLS).flat();
+    for (const slot of ['institution', 'route', 'good']) {
+      const named = all.filter((v) => (v.slots || []).includes(slot));
+      expect(named, `slot {${slot}}`).toHaveLength(1);
+    }
+    // The one LIT pool that holds such a slot still speaks, because its other variants
+    // need none. ({route} and {good} sit in the dark economicBase pools.)
+    const settlement = ruled5('religious', 'mining');
+    const drawn = powerStateProse(
+      settlement, { structuralLens: structuralLensOf(settlement) }, { seed: 'slot-theocracy', audience: 'dm' },
+    );
+    expect(drawn.rulingStructure?.sentence, 'theocracy went silent').toBeTruthy();
+  });
+
+  it('the registry mounts DS-POW-5 once, as a sentence, on the power tab', () => {
+    const rows = DOSSIER_MOUNTS.filter((row) => row.blockId === POW5);
+    expect(rows).toHaveLength(1);
+    expect(rows[0]).toMatchObject({ mount: 'power.rulingStructure', tab: 'power', desk: 'power', rung: 'sentence' });
+    expect(UNMOUNTED_BLOCKS).not.toContain(POW5);
   });
 });

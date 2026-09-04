@@ -9,6 +9,7 @@ import { hasLadder, ladderRungsOf, ladderInstabilityOf, ladderFactionKeyOf } fro
 import { PowerStrata } from './power/PowerStrata.jsx';
 import { rulingChainOf } from '../../../domain/dossier/powerStrata.js';
 import { coupContenders, coupRiskLabel } from '../../../domain/rulingPowerCoup.js';
+import { structuralLensOf } from '../../../domain/spatial/cohesionWeave.js';
 import { powerStateProse, powerLadderRung } from '../../../domain/display/stateProse/powerStateProse.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
 
@@ -42,6 +43,9 @@ const SUCCESSION_MOUNT = 'power.succession';
  * Bound once so the reachability arm counts a single literal.
  */
 const LADDER_MOUNT = 'power.factionLadder';
+
+/** Ruling structure: the ruling-power word, the economic base, and the body's own title. */
+const STRUCTURE_MOUNT = 'power.rulingStructure';
 
 /** §815 — one row of the ruling chain: a small uppercase link label + the answer. */
 function ChainRow({ label, children }) {
@@ -178,14 +182,17 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
   // stays a pure display leaf and rulingPowerCoup's 13.9 KB stays out of its import graph.
   // Skipped entirely on a public dossier, where the desk is not drawn at all.
   const contenders = publicDossier ? null : coupContenders(s);
-  const deskReadings = contenders
-    ? { contenders, riskLabel: coupRiskLabel(contenders) }
-    : {};
+  // Both derivations are the CALLER'S, handed over rather than reached for by the desk.
+  const deskReadings = publicDossier ? {} : {
+    ...(contenders ? { contenders, riskLabel: coupRiskLabel(contenders) } : {}),
+    structuralLens: structuralLensOf(s),
+  };
   const deskProse = publicDossier
     ? Object.freeze({
       legitimacyBanner: null, legitimacyLens: null, stabilityHeader: null, stabilityLens: null,
       legitimacyReading: null, captureReading: null, operationReading: null,
       successionRisk: null, successionHold: null,
+      rulingStructure: null, governingTitle: null,
     })
     : powerStateProse(s, deskReadings, { seed: String(s?._seed ?? s?.id ?? ''), audience });
   const drawnBanner = drawnAtMount(LEGITIMACY_MOUNT, deskProse.legitimacyBanner);
@@ -197,6 +204,10 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
   const drawnOperation = drawnAtMount(UNDERSIDE_MOUNT, deskProse.operationReading);
   const undersideLines = [drawnReading, drawnCapture, drawnOperation]
     .map((d) => d?.sentence).filter(Boolean);
+  const structureLines = [
+    drawnAtMount(STRUCTURE_MOUNT, deskProse.rulingStructure),
+    drawnAtMount(STRUCTURE_MOUNT, deskProse.governingTitle),
+  ].map((d) => d?.sentence).filter(Boolean);
   const successionLines = [
     drawnAtMount(SUCCESSION_MOUNT, deskProse.successionRisk),
     drawnAtMount(SUCCESSION_MOUNT, deskProse.successionHold),
@@ -332,6 +343,18 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
         <div style={{background:swatch['#FAF8F4'],border:'1px solid #e0c890',borderLeft:'4px solid #4a1a4a',padding:'10px 14px',marginBottom:14}}>
           <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>The quieter arithmetic</div>
           {undersideLines.map((line, i) => (
+            <p key={i} style={{fontSize:i===0?FS.md:FS.sm,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.6,margin:i===0?0:'6px 0 0',fontStyle:'italic'}}>{line}</p>
+          ))}
+        </div>
+      )}
+
+      {/* ── RULING STRUCTURE (DS-POW-5) ──────────────────────────────────────
+          What KIND of power governs, what the town lives on, and what the hall
+          calls itself. Three pools of ONE block at ONE position. */}
+      {structureLines.length > 0 && (
+        <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #5A6A1A',padding:'10px 14px',marginBottom:14}}>
+          <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>The shape of authority</div>
+          {structureLines.map((line, i) => (
             <p key={i} style={{fontSize:i===0?FS.md:FS.sm,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.6,margin:i===0?0:'6px 0 0',fontStyle:'italic'}}>{line}</p>
           ))}
         </div>
