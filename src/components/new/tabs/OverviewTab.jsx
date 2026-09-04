@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { stressorsStateProse, crisisBannerRung } from '../../../domain/display/stateProse/stressorsStateProse.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
 import { deriveAllActiveConditions } from '../../../domain/activeConditions.js';
+// FREE: `stressorsCore.js` is already in the first-paint closure, so reaching its canonical
+// normalizer costs no additional bytes. Its sibling `stressorDynamics.js` is NOT — that one
+// drags 29 modules / 602 KB, which is why the synergy and counterforce lenses stay dark.
+import { normalizeStressor } from '../../../domain/worldPulse/stressorsCore.js';
 import { FS, swatch, MUTED, GOLD_TINT, GOLD_DEEP, EMPTY_VALUE } from '../../theme.js';
 import { Ti, serif, Section } from '../Primitives';
 import { formatCount } from '../../../domain/formatNumber.js';
@@ -103,8 +107,27 @@ function StatusTag({ label, value, _color, accent }) {
  */
 const CRISIS_MOUNT = 'overview.crisisBanners';
 const CONDITIONS_MOUNT = 'overview.activeConditions';
+const STRESSOR_MOUNT = 'overview.stressorLifecycle';
 
-export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, publicDossier = false, playerView = false}) {
+/**
+ * The world stressor this settlement is inside, normalized — or null in a world that has
+ * not been played. A world stressor names its settlements in `affectedSettlementIds`, so
+ * this is a membership SELECTION, not a derivation; the FIRST match is the one the block's
+ * two lenses describe, because the corpus writes one sentence per lens and not a list.
+ * @param {{stressors?: unknown}|null|undefined} worldState
+ * @param {unknown} settlementId
+ */
+function worldStressorFor(worldState, settlementId) {
+  if (settlementId == null) return null;
+  const all = Array.isArray(worldState?.stressors) ? worldState.stressors : [];
+  const mine = all.find((s) => {
+    const ids = Array.isArray(s?.affectedSettlementIds) ? s.affectedSettlementIds : [];
+    return ids.some((id) => String(id) === String(settlementId));
+  });
+  return mine ? normalizeStressor(mine) : null;
+}
+
+export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, publicDossier = false, playerView = false, worldState = null}) {
   const [instOpen, setInstOpen] = useState(false);
   const mobile = useIsMobile(); // hook must precede the early return (rules-of-hooks)
   if (!r) return null;
@@ -130,16 +153,28 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
     ? Object.freeze({
       crisisArity: null, crisisFraming: null, conditionSeverity: null,
       conditionDirection: null, conditionArchetype: null, conditionProvenance: null,
-      conditionDuration: null,
+      conditionDuration: null, worldStressorLifecycle: null, worldStressorOrigin: null,
     })
     : stressorsStateProse(
       r,
-      { banners: stresses, conditions: deriveAllActiveConditions(r) },
+      {
+        banners: stresses,
+        conditions: deriveAllActiveConditions(r),
+        // DS-STR-2. The CALLER selects — a world stressor is keyed to the settlement by
+        // `affectedSettlementIds`, which is selection rather than classification — and
+        // normalizes through the kernel's own `normalizeStressor` so the desk sees the
+        // shape the simulation writes. Dark at birth: no generator writes worldState.
+        worldStressor: worldStressorFor(worldState, r?.id),
+      },
       { seed: deskSeed, audience: deskAudience },
     );
   const crisisSectionLines = [
     drawnAtMount(CRISIS_MOUNT, stressorProse.crisisFraming),
     drawnAtMount(CRISIS_MOUNT, stressorProse.crisisArity),
+  ].map((d) => d?.sentence).filter(Boolean);
+  const stressorLines = [
+    drawnAtMount(STRESSOR_MOUNT, stressorProse.worldStressorLifecycle),
+    drawnAtMount(STRESSOR_MOUNT, stressorProse.worldStressorOrigin),
   ].map((d) => d?.sentence).filter(Boolean);
   const conditionLines = [
     drawnAtMount(CONDITIONS_MOUNT, stressorProse.conditionSeverity),
@@ -223,6 +258,19 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
           </div>
         )}
       </div>}
+
+      {/* ── THE WORLD STRESSOR (DS-STR-2) ────────────────────────────────
+          Where a regional stressor sits in its lifecycle, and what put it there.
+          Two pools of ONE block at ONE position. Dark until the world is played:
+          worldState.stressors is written by the pulse, never by generation. */}
+      {stressorLines.length>0&&(
+        <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #8b1a1a',padding:'10px 14px',marginBottom:14}}>
+          <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>The pressure from outside</div>
+          {stressorLines.map((line,i)=>(
+            <p key={i} style={{fontSize:i===0?FS.md:FS.sm,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.6,margin:i===0?0:'6px 0 0',fontStyle:'italic'}}>{line}</p>
+          ))}
+        </div>
+      )}
 
       {/* ── ACTIVE CONDITIONS (DS-CND-1) ──────────────────────────────────
           Five lenses over the settlement's first active condition: how bad, which
