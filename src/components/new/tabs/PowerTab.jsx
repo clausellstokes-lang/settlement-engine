@@ -8,6 +8,7 @@ import { factionIdFromName } from '../../../lib/entities.js';
 import { hasLadder, ladderRungsOf, ladderInstabilityOf, ladderFactionKeyOf } from '../../../domain/townMap/ladderRead.js';
 import { PowerStrata } from './power/PowerStrata.jsx';
 import { rulingChainOf } from '../../../domain/dossier/powerStrata.js';
+import { coupContenders, coupRiskLabel } from '../../../domain/rulingPowerCoup.js';
 import { powerStateProse } from '../../../domain/display/stateProse/powerStateProse.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
 
@@ -31,6 +32,9 @@ const STABILITY_MOUNT = 'power.stabilityHeader';
  * pools of one block; binding the id once also keeps the reachability arm's count at one.
  */
 const UNDERSIDE_MOUNT = 'power.criminalUnderside';
+
+/** Rule and succession: the risk ladder, the hold, and the lineage. Three draws, one position. */
+const SUCCESSION_MOUNT = 'power.succession';
 
 /** §815 — one row of the ruling chain: a small uppercase link label + the answer. */
 function ChainRow({ label, children }) {
@@ -163,12 +167,20 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
   // dossier is where they belong, and the player view truncates them to silence rather than
   // to a hint. `publicDossier` still nulls everything before this ever matters.
   const audience = playerView ? 'player' : 'dm';
+  // THE CALLER'S OWN DERIVATION, handed to the desk rather than reached for by it: the desk
+  // stays a pure display leaf and rulingPowerCoup's 13.9 KB stays out of its import graph.
+  // Skipped entirely on a public dossier, where the desk is not drawn at all.
+  const contenders = publicDossier ? null : coupContenders(s);
+  const deskReadings = contenders
+    ? { contenders, riskLabel: coupRiskLabel(contenders) }
+    : {};
   const deskProse = publicDossier
     ? Object.freeze({
       legitimacyBanner: null, legitimacyLens: null, stabilityHeader: null, stabilityLens: null,
       legitimacyReading: null, captureReading: null, operationReading: null,
+      successionRisk: null, successionHold: null,
     })
-    : powerStateProse(s, { seed: String(s?._seed ?? s?.id ?? ''), audience });
+    : powerStateProse(s, deskReadings, { seed: String(s?._seed ?? s?.id ?? ''), audience });
   const drawnBanner = drawnAtMount(LEGITIMACY_MOUNT, deskProse.legitimacyBanner);
   const drawnLens   = drawnAtMount(LEGITIMACY_MOUNT, deskProse.legitimacyLens);
   const drawnStab   = drawnAtMount(STABILITY_MOUNT, deskProse.stabilityHeader);
@@ -178,6 +190,10 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
   const drawnOperation = drawnAtMount(UNDERSIDE_MOUNT, deskProse.operationReading);
   const undersideLines = [drawnReading, drawnCapture, drawnOperation]
     .map((d) => d?.sentence).filter(Boolean);
+  const successionLines = [
+    drawnAtMount(SUCCESSION_MOUNT, deskProse.successionRisk),
+    drawnAtMount(SUCCESSION_MOUNT, deskProse.successionHold),
+  ].map((d) => d?.sentence).filter(Boolean);
 
   return (
     <div style={{paddingBottom:16}}>
@@ -309,6 +325,19 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
         <div style={{background:swatch['#FAF8F4'],border:'1px solid #e0c890',borderLeft:'4px solid #4a1a4a',padding:'10px 14px',marginBottom:14}}>
           <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>The quieter arithmetic</div>
           {undersideLines.map((line, i) => (
+            <p key={i} style={{fontSize:i===0?FS.md:FS.sm,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.6,margin:i===0?0:'6px 0 0',fontStyle:'italic'}}>{line}</p>
+          ))}
+        </div>
+      )}
+
+      {/* ── RULE AND SUCCESSION (DS-POW-4) ───────────────────────────────────
+          The coup-risk ladder, what public legitimacy is doing to the hold, and
+          whether the seat has a recorded lineage. Three pools of ONE block at ONE
+          position; the registry silences them together. */}
+      {successionLines.length > 0 && (
+        <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #a0762a',padding:'10px 14px',marginBottom:14}}>
+          <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>Rule and succession</div>
+          {successionLines.map((line, i) => (
             <p key={i} style={{fontSize:i===0?FS.md:FS.sm,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.6,margin:i===0?0:'6px 0 0',fontStyle:'italic'}}>{line}</p>
           ))}
         </div>

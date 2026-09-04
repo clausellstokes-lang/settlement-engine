@@ -9,6 +9,8 @@
  *             `powerStructure.{stability, governingName, factions[], recentConflict}`
  *   DS-POW-6  Power › the criminal underside — `governanceLedger(settlement)` +
  *             `powerStructure.criminalCaptureState` + `safetyProfile.criminalInstitutions`
+ *   DS-POW-4  Power › Rule and succession — `coupContenders(settlement)` (as a READING) +
+ *             `publicLegitimacy.govMultiplier`. Its lineage pools stay dark; see below.
  *
  * ── WHY THIS LEAF, AND WHY THIS BLOCK FIRST ──────────────────────────────────────────
  *
@@ -105,6 +107,7 @@ const CORPUS = /** @type {import('./stateProseKernel.js').StateProseCorpus} */ (
  * @property {unknown} [label]
  * @property {LegitimacyBreakdownView|null} [breakdown]
  * @property {unknown} [governanceFractured]
+ * @property {unknown} [govMultiplier] the band's hold multiplier, 1.30 down to 0.60
  */
 /**
  * @typedef {object} RulingFactionView
@@ -452,6 +455,92 @@ export function operationRolePoolKey(name) {
 }
 
 /**
+ * ── DS-POW-4, RULE AND SUCCESSION ────────────────────────────────────────────────────
+ *
+ * Nine pools, three lenses, and ZERO covert variants — this block is entirely public.
+ *
+ * ⭐ THE RISK LADDER ARRIVES AS A READING, NOT AS AN IMPORT. `coupRiskLabel` lives beside
+ * `coupContenders` in domain/rulingPowerCoup.js, which is 13.9 KB behind four transitive
+ * imports. A desk that imported it would drag all of that into the power tab's chunk to
+ * classify four pools, and would also break this file's own law — the reference desk states
+ * it plainly: a desk "never derives a number a canonical reader already owns … their
+ * readings arrive here as arguments". So the CALLER derives the contenders and hands them
+ * over, exactly as EconomicsTab hands over `foodBalance` and `granaryOutlook`. A caller that
+ * supplies none leaves the four risk pools silent and the other five speaking, which is
+ * anchored liveness doing its ordinary work rather than a special case.
+ *
+ * ⚠ THE LADDER WAS DISPLAY-RESIDENT AND IS NOW THE DOMAIN'S. The four-way lived inline in
+ * `components/dossier/EngineSections.jsx`, and this corpus keys four pools on its exact
+ * strings — `Critical. The seat could fall` byte for byte. Reading it here would have been
+ * a SECOND spelling of one classification, and the page and the prose would have drifted
+ * apart about whether a seat was Contested or Holding, each correct against its own copy.
+ * The lift is proven equivalent to the original inline logic over all four branches.
+ *
+ * ⭐ THE HOLD LENS NEEDS NO NEW READER AT ALL. `computePublicLegitimacy` already returns
+ * `govMultiplier` — 1.30 / 1.15 / 1.00 / 0.80 / 0.60 straight off the band — and the
+ * corpus's three pools are exactly "backing hardens", "neither helps nor hurts" and
+ * "rejection is breaking". So the multiplier's position relative to 1 IS the reading, and
+ * this desk derives no second opinion about legitimacy's effect on a hold.
+ */
+
+/**
+ * The risk labels that need no rewriting: the corpus keys them verbatim.
+ * @type {Readonly<Record<string, string>>}
+ */
+const RISK_POOL_OF = Object.freeze({
+  // `Stable` is the one label the corpus re-spells, because its pool says WHY.
+  Stable: 'riskLabel: Stable (no challengers)',
+  Holding: 'riskLabel: Holding',
+  Contested: 'riskLabel: Contested',
+  'Critical. The seat could fall': 'riskLabel: Critical. The seat could fall',
+});
+
+/**
+ * DS-POW-4's risk lens. Null when the caller handed over no contenders — the desk does not
+ * reach for them itself.
+ * @param {string|null|undefined} riskLabel a value of COUP_RISK_LABELS
+ * @returns {string|null}
+ */
+export function riskPoolKey(riskLabel) {
+  const label = text(riskLabel);
+  return label ? RISK_POOL_OF[label] || null : null;
+}
+
+/**
+ * DS-POW-4's hold lens, read off the band's own multiplier.
+ * @param {unknown} govMultiplier
+ * @returns {string|null}
+ */
+export function legitimacyHoldPoolKey(govMultiplier) {
+  if (typeof govMultiplier !== 'number' || !Number.isFinite(govMultiplier)) return null;
+  if (govMultiplier > 1) return 'legitimacyHold: public backing hardens the hold';
+  if (govMultiplier < 1) return 'legitimacyHold: public rejection is breaking the hold';
+  return 'legitimacyHold: public opinion neither helps nor hurts';
+}
+
+/**
+ * ⛔ THE LINEAGE LENS IS NOT WIRED, AND THE REASON IS A MEASUREMENT RATHER THAN A CHOICE.
+ *
+ * DS-POW-4's last two pools key on `powerStructure.previousGovernments`. That field has NO
+ * GENERATION-TIME WRITER: it is written only when a power transfer happens in play
+ * (domain/rulingPower.js), so `check-observed-shape-readers` convicts a fresh read of it —
+ * "a guarded read of a key the real generator never writes cannot throw; it degrades to a
+ * default, and the arm behind it is dead on every generated world." I confirmed the
+ * conviction by running the door: every one of the tree's `previousGovernments` sites is a
+ * READER. My earlier note that it had "29 hits" was a grep count, and a grep count is not a
+ * producer — the same error class this desk has been built to refuse.
+ *
+ * The sanctioned home for exactly this case is the scan's M8/M9 explained-writer bank
+ * (declared identities whose writer the GENERATION corpus never runs). Adding a row there
+ * is a REGISTER ACT and therefore the chair's, not a lane's. So the two pools stay dark,
+ * DECLARED here rather than left for an auditor to re-find, and the desk reads the field
+ * NOWHERE — a mounted-but-unreachable pool is a finding; a dead read is a defect.
+ *
+ * TO LIGHT THEM: bank the explained-writer row naming `rulingPower.js` as the writer, then
+ * add a lineage lens that takes the array as a READING from the caller.
+ */
+
+/**
  * THE DESK. Returns the two rungs the legitimacy banner draws, or null for each where the
  * state does not support one.
  *
@@ -460,12 +549,15 @@ export function operationRolePoolKey(name) {
  * together rather than leaving half a reading on the page.
  *
  * @param {PowerDeskSettlement|null|undefined} settlement
+ * @param {{contenders?: {challengers?: ReadonlyArray<{name?: unknown}>}|null,
+ *   riskLabel?: string|null}} [readings] the caller's own derivations — see DS-POW-4 above
  * @param {{seed?: string, audience?: string}} [options]
  * @returns {Readonly<{legitimacyBanner: object|null, legitimacyLens: object|null,
  *   stabilityHeader: object|null, stabilityLens: object|null, legitimacyReading: object|null,
- *   captureReading: object|null, operationReading: object|null}>}
+ *   captureReading: object|null, operationReading: object|null, successionRisk: object|null,
+ *   successionHold: object|null}>}
  */
-export function powerStateProse(settlement, options = {}) {
+export function powerStateProse(settlement, readings = {}, options = {}) {
   const power = settlement?.powerStructure || {};
   // A legacy numeric `publicLegitimacy` carries no label, breakdown or flag. Reading it as
   // an object would yield `undefined` at every field and silence at every pool, which is
@@ -504,6 +596,17 @@ export function powerStateProse(settlement, options = {}) {
     : null);
   // DS-POW-6 uses {seat} as the governing BODY (like DS-POW-1) and {faction} for the
   // captured house, so it takes BOTH fills — the two roles do not collide in this block.
+  // DS-POW-4 uses {seat} as the OFFICE ("the seat could fall"), the same role DS-POW-1
+  // gives it, so governingName fills it here too. {timeband_age} is deliberately absent:
+  // it is named by ONE variant of 29 and there is no duration former, so anchored liveness
+  // drops that single variant and all nine pools still speak. MEASURED, not assumed.
+  /** @param {string|null} poolKey */
+  const line4 = (poolKey) => (poolKey
+    ? readStateProse(CORPUS, 'DS-POW-4', poolKey, {
+      ...options,
+      slots: { settlement: town, seat: governing, faction: governing, counterpart: challenger },
+    })
+    : null);
   /** @param {string|null} poolKey */
   const line6 = (poolKey) => (poolKey
     ? readStateProse(CORPUS, 'DS-POW-6', poolKey,
@@ -531,6 +634,13 @@ export function powerStateProse(settlement, options = {}) {
   // one fact in several voices, and the corpus writes one sentence per role, not a list.
   const operationKey = operations.map(operationRolePoolKey).find(Boolean) || null;
 
+  // DS-POW-4. The risk label is the caller's reading; the hold is the band's own multiplier;
+  // the lineage is the settlement's own record. {counterpart} is the top challenger — the
+  // corpus's own reading of it ("{counterpart} now outweighs the {seat}").
+  const riskKey = riskPoolKey(readings.riskLabel);
+  const holdKey = legitimacyHoldPoolKey(legitimacy.govMultiplier);
+  const challenger = properFill(text(readings.contenders?.challengers?.[0]?.name));
+
   return Object.freeze({
     legitimacyBanner: bandKey ? legibilityRung(glance, line(bandKey), []) : null,
     // The lens rung carries no glance of its own: the band word is already on the banner
@@ -543,5 +653,7 @@ export function powerStateProse(settlement, options = {}) {
     legitimacyReading: readingKey ? legibilityRung('', line6(readingKey), []) : null,
     captureReading: captureKey ? legibilityRung('', line6(captureKey), []) : null,
     operationReading: operationKey ? legibilityRung('', line6(operationKey), []) : null,
+    successionRisk: riskKey ? legibilityRung(text(readings.riskLabel), line4(riskKey), []) : null,
+    successionHold: holdKey ? legibilityRung('', line4(holdKey), []) : null,
   });
 }

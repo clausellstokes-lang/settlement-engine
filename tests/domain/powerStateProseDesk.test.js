@@ -34,8 +34,10 @@ import {
 } from '../../src/domain/display/stateProse/powerStateProse.js';
 import { likelyFutureFacts } from '../../src/domain/simulationSpine.js';
 import { CRIMINAL_OP_ROLES, criminalOpEcon } from '../../src/domain/criminalOpRole.js';
+import { COUP_RISK_LABELS, coupRiskLabel } from '../../src/domain/rulingPowerCoup.js';
 import {
-  capturePoolKey, legitimacyReadingPoolKey, operationRolePoolKey,
+  capturePoolKey, legitimacyHoldPoolKey, legitimacyReadingPoolKey,
+  operationRolePoolKey, riskPoolKey,
 } from '../../src/domain/display/stateProse/powerStateProse.js';
 import { legitimacyBandFor } from '../../src/generators/factionDynamics.js';
 import {
@@ -133,7 +135,7 @@ describe('the power desk — ALIVENESS: every pool fires over a state the genera
   // pool key in its message, so a failure still names the pool that went dark.
   it('every one of the eleven pools renders a real sentence, not a null and not a stub', () => {
     for (const [key, record] of CASES) {
-      const drawn = powerStateProse(town(record), { seed: 'seed-alpha' });
+      const drawn = powerStateProse(town(record), {}, { seed: 'seed-alpha' });
       const rung = BAND_LABELS.includes(key) ? drawn.legitimacyBanner : drawn.legitimacyLens;
       expect(rung, `the pool is mounted and the desk produced no rung for ${key}`).toBeTruthy();
       expect(rung.provenance, `provenance for ${key}`).toEqual(
@@ -213,7 +215,7 @@ describe('the power desk — the deliberate silences', () => {
 
   it('a legacy numeric publicLegitimacy narrates nothing rather than half a record', () => {
     const legacy = { name: 'Thornwall', powerStructure: { publicLegitimacy: 62, governingName: 'Ashford Company' } };
-    const drawn = powerStateProse(legacy, { seed: 's' });
+    const drawn = powerStateProse(legacy, {}, { seed: 's' });
     expect(drawn.legitimacyBanner).toBeNull();
     expect(drawn.legitimacyLens).toBeNull();
   });
@@ -271,7 +273,7 @@ describe('the power desk — the {seat} fill and its refusal', () => {
       };
       const drawn = powerStateProse(
         town(record, { governingName: REAL_GOVERNING_NAMES[score % REAL_GOVERNING_NAMES.length] }),
-        { seed: `s${score}` },
+        {}, { seed: `s${score}` },
       );
       if (drawn.legitimacyBanner?.sentence) spoke += 1;
       if (drawn.legitimacyLens?.sentence) lensSpoke += 1;
@@ -287,7 +289,7 @@ describe('the power desk — the {seat} fill and its refusal', () => {
     // fill must drop the 38 and leave the three speaking — anchored liveness doing its
     // work — rather than rendering `merchant_league` at a reader.
     const bad = town(legit('Endorsed'), { governingName: 'merchant_league' });
-    const drawn = powerStateProse(bad, { seed: 'seed-alpha' });
+    const drawn = powerStateProse(bad, {}, { seed: 'seed-alpha' });
     // Endorsed carries one {settlement}-only variant, so the surface still speaks.
     expect(drawn.legitimacyBanner.sentence).toBeTruthy();
     expect(drawn.legitimacyBanner.sentence).not.toMatch(/merchant_league/);
@@ -302,8 +304,8 @@ describe('the power desk — the {seat} fill and its refusal', () => {
 describe('the power desk — THE PROMISE and the mount wiring', () => {
   it('same seed + same state ⇒ same sentence, and a different seed may differ', () => {
     const state = () => town(legit('Tolerated'));
-    const a = powerStateProse(state(), { seed: 'seed-alpha' });
-    const b = powerStateProse(state(), { seed: 'seed-alpha' });
+    const a = powerStateProse(state(), {}, { seed: 'seed-alpha' });
+    const b = powerStateProse(state(), {}, { seed: 'seed-alpha' });
     expect(a.legitimacyBanner.sentence).toBe(b.legitimacyBanner.sentence);
     expect(a.legitimacyBanner.provenance).toEqual(b.legitimacyBanner.provenance);
   });
@@ -517,7 +519,7 @@ describe('DS-POW-2 — ALIVENESS: all nine pools fire, and {seat} stays delibera
       ['critical matched', ruled('Critical — the seat is failing', { factions: DOMINANT_FACTIONS })],
     ];
     for (const [key, settlement] of CASES) {
-      const drawn = powerStateProse(settlement, { seed: `p2-${key}` });
+      const drawn = powerStateProse(settlement, {}, { seed: `p2-${key}` });
       expect(drawn.stabilityHeader, `no rung for ${key}`).toBeTruthy();
       expect(drawn.stabilityHeader.provenance).toEqual(
         expect.objectContaining({ blockId: POW2, poolKey: key }),
@@ -527,9 +529,9 @@ describe('DS-POW-2 — ALIVENESS: all nine pools fire, and {seat} stays delibera
       expect(drawn.stabilityHeader.sentence).not.toMatch(/[0-9]/);
     }
     // The three lens pools, each over its own state.
-    const dominant = powerStateProse(ruled('Stable', { factions: DOMINANT_FACTIONS }), { seed: 'd' });
-    const narrow = powerStateProse(ruled('Stable', { factions: NARROW_FACTIONS }), { seed: 'n' });
-    const conflict = powerStateProse(ruled('Stable', { factions: DOMINANT_FACTIONS, recentConflict: 'a quarrel over the levy' }), { seed: 'c' });
+    const dominant = powerStateProse(ruled('Stable', { factions: DOMINANT_FACTIONS }), {}, { seed: 'd' });
+    const narrow = powerStateProse(ruled('Stable', { factions: NARROW_FACTIONS }), {}, { seed: 'n' });
+    const conflict = powerStateProse(ruled('Stable', { factions: DOMINANT_FACTIONS, recentConflict: 'a quarrel over the levy' }), {}, { seed: 'c' });
     expect(dominant.stabilityLens.provenance.poolKey).toBe('governing faction holds a DOMINANT share');
     expect(narrow.stabilityLens.provenance.poolKey).toBe('governing faction holds a NARROW plurality');
     expect(conflict.stabilityLens.provenance.poolKey).toBe('recentConflict present');
@@ -542,7 +544,7 @@ describe('DS-POW-2 — ALIVENESS: all nine pools fire, and {seat} stays delibera
     // Anchored liveness drops the seat-naming variants; MEASURED, all nine pools survive.
     const seen = new Set();
     for (let i = 0; i < 60; i += 1) {
-      const drawn = powerStateProse(ruled('Stable', { factions: DOMINANT_FACTIONS }), { seed: `s${i}` });
+      const drawn = powerStateProse(ruled('Stable', { factions: DOMINANT_FACTIONS }), {}, { seed: `s${i}` });
       const line = drawn.stabilityHeader?.sentence;
       if (line) seen.add(line);
     }
@@ -558,7 +560,7 @@ describe('DS-POW-2 — ALIVENESS: all nine pools fire, and {seat} stays delibera
     expect(powerStateProse(ruled('')).stabilityHeader).toBeNull();
     expect(powerStateProse(undefined).stabilityHeader).toBeNull();
     // The two blocks are independent: a legitimacy-less town still gets its ladder line.
-    const drawn = powerStateProse(ruled('Stable', { factions: DOMINANT_FACTIONS }), { seed: 'x' });
+    const drawn = powerStateProse(ruled('Stable', { factions: DOMINANT_FACTIONS }), {}, { seed: 'x' });
     expect(drawn.legitimacyBanner).toBeNull();
     expect(drawn.stabilityHeader.sentence).toBeTruthy();
   });
@@ -640,9 +642,9 @@ describe('DS-POW-6 — the capture pools are COVERT, and that is the kernel work
 
   it('FAIL-CLOSED: the player sees silence, the DM sees the line', () => {
     const state = underside(BREAK({ prosperity: -10, safety: -12 }), 'capture');
-    expect(powerStateProse(state, { seed: 'a' }).captureReading?.sentence ?? null).toBeNull();
-    expect(powerStateProse(state, { seed: 'a', audience: 'player' }).captureReading?.sentence ?? null).toBeNull();
-    const dm = powerStateProse(state, { seed: 'a', audience: 'dm' });
+    expect(powerStateProse(state, {}, { seed: 'a' }).captureReading?.sentence ?? null).toBeNull();
+    expect(powerStateProse(state, {}, { seed: 'a', audience: 'player' }).captureReading?.sentence ?? null).toBeNull();
+    const dm = powerStateProse(state, {}, { seed: 'a', audience: 'dm' });
     expect(dm.captureReading.sentence).toBeTruthy();
     expect(dm.captureReading.provenance.poolKey).toBe('capture reached a LEADER');
   });
@@ -668,7 +670,7 @@ describe('DS-POW-6 — the capture pools are COVERT, and that is the kernel work
 
 describe('DS-POW-6 — the reading lens TILES with DS-POW-1 rather than overlapping it', () => {
   it('no legitimacy record at all ⇒ the "no reading" pool', () => {
-    const drawn = powerStateProse(underside(null, 'none'), { seed: 'r' });
+    const drawn = powerStateProse(underside(null, 'none'), {}, { seed: 'r' });
     expect(drawn.legitimacyReading.provenance.poolKey).toBe('present: false (no legitimacy reading)');
     expect(drawn.legitimacyReading.sentence).toBeTruthy();
     // DS-POW-1 is correctly silent there, so the page is not saying two things at once.
@@ -677,7 +679,7 @@ describe('DS-POW-6 — the reading lens TILES with DS-POW-1 rather than overlapp
 
   it('a flat breakdown is exactly where DS-POW-1 goes quiet, and DS-POW-6 speaks', () => {
     const flat = underside(BREAK({}), 'none');
-    const drawn = powerStateProse(flat, { seed: 'r' });
+    const drawn = powerStateProse(flat, {}, { seed: 'r' });
     // DS-POW-1's LENS is silent on an all-zero breakdown (measured in its own arm above)…
     expect(drawn.legitimacyLens).toBeNull();
     // …and DS-POW-6 owns that cell.
@@ -688,7 +690,7 @@ describe('DS-POW-6 — the reading lens TILES with DS-POW-1 rather than overlapp
   it('a breakdown that IS pulling leaves the reading lens silent — no double narration', () => {
     const pulling = underside(BREAK({ prosperity: -20 }), 'none');
     expect(legitimacyReadingPoolKey({ present: true }, BREAK({ prosperity: -20 }))).toBeNull();
-    const drawn = powerStateProse(pulling, { seed: 'r' });
+    const drawn = powerStateProse(pulling, {}, { seed: 'r' });
     expect(drawn.legitimacyReading).toBeNull();
   });
 
@@ -714,7 +716,7 @@ describe('DS-POW-6 — the reading lens TILES with DS-POW-1 rather than overlapp
     ];
     for (const state of cases) {
       for (const audience of ['dm', 'player']) {
-        const drawn = powerStateProse(state, { seed: 'aliveness', audience });
+        const drawn = powerStateProse(state, {}, { seed: 'aliveness', audience });
         for (const rung of ['legitimacyReading', 'captureReading', 'operationReading']) {
           const line = drawn[rung];
           if (line?.sentence) reached.add(line.provenance.poolKey);
@@ -724,5 +726,189 @@ describe('DS-POW-6 — the reading lens TILES with DS-POW-1 rather than overlapp
     expect(reached.size, `unreached: ${Object.keys(POW6_POOLS).filter((k) => !reached.has(k))}`)
       .toBe(Object.keys(POW6_POOLS).length);
     expect(Object.keys(POW6_POOLS)).toHaveLength(13);
+  });
+});
+
+/** DS-POW-4 — rule and succession. */
+const POW4 = 'DS-POW-4';
+const POW4_POOLS = DOSSIER_STATE_PROSE_POWER[POW4].pools;
+
+function seat(govMultiplier, previousGovernments = []) {
+  return {
+    name: 'Thornwall',
+    _seed: 'seed-pow4',
+    powerStructure: {
+      publicLegitimacy: {
+        score: 50, label: 'Tolerated', govMultiplier,
+        breakdown: { prosperity: 0, safety: 0, defense: 0, food: 0 },
+      },
+      governingName: 'Merchant Council',
+      previousGovernments,
+    },
+  };
+}
+const CONTENDERS = Object.freeze({
+  challengers: Object.freeze([Object.freeze({ name: 'Craft Guilds', weight: 60 })]),
+  incumbent: Object.freeze({ gated: true, amplifiedWeight: 50 }),
+});
+
+describe('DS-POW-4 — the lifted risk ladder is the ONE derivation', () => {
+  it('the lift is behaviour-identical to the inline logic it replaced, on all four branches', () => {
+    // The ORACLE is the original inline four-way, transcribed from EngineSections.jsx as it
+    // stood before the lift. A lift is only a lift if it cannot change an answer.
+    const original = (c) => {
+      let risk = 'Stable';
+      if (c.challengers.length) {
+        if (!c.incumbent.gated) risk = 'Critical. The seat could fall';
+        else if (c.incumbent.amplifiedWeight < c.challengers[0].weight) risk = 'Contested';
+        else risk = 'Holding';
+      }
+      return risk;
+    };
+    const cases = [
+      { challengers: [], incumbent: { gated: true, amplifiedWeight: 50 } },
+      { challengers: [{ weight: 60 }], incumbent: { gated: false, amplifiedWeight: 50 } },
+      { challengers: [{ weight: 60 }], incumbent: { gated: true, amplifiedWeight: 50 } },
+      { challengers: [{ weight: 40 }], incumbent: { gated: true, amplifiedWeight: 50 } },
+      { challengers: [{ weight: 50 }], incumbent: { gated: true, amplifiedWeight: 50 } },
+    ];
+    const reached = new Set();
+    for (const c of cases) {
+      expect(coupRiskLabel(c), JSON.stringify(c)).toBe(original(c));
+      reached.add(coupRiskLabel(c));
+    }
+    // Non-vacuity: the oracle and the lift must have exercised the WHOLE vocabulary.
+    expect([...reached].sort()).toEqual([...COUP_RISK_LABELS].sort());
+    // Defensive, because a desk reading is allowed to be absent.
+    expect(coupRiskLabel(null)).toBe('Stable');
+    expect(coupRiskLabel(undefined)).toBe('Stable');
+  });
+
+  it('every label the ladder emits has a pool, and the corpus has no risk pool it cannot emit', () => {
+    for (const label of COUP_RISK_LABELS) {
+      const key = riskPoolKey(label);
+      expect(key, `no pool for risk label ${label}`).toBeTruthy();
+      expect(POW4_POOLS[key], `corpus lacks ${key}`).toBeTruthy();
+    }
+    const corpusRisk = Object.keys(POW4_POOLS).filter((k) => k.startsWith('riskLabel:'));
+    expect(corpusRisk).toHaveLength(COUP_RISK_LABELS.length);
+    // An unknown label renders nothing rather than guessing a rung.
+    expect(riskPoolKey('Doomed')).toBeNull();
+    expect(riskPoolKey('')).toBeNull();
+  });
+});
+
+describe('DS-POW-4 — the risk ladder arrives as a READING, never as an import', () => {
+  it('no contenders handed over ⇒ the risk lens is silent and the other two still speak', () => {
+    // The desk does not reach for coupContenders: that would drag 13.9 KB behind four
+    // transitive imports into this leaf and break the reference desk's own law.
+    const drawn = powerStateProse(seat(1.3, [{ cause: 'a coup' }]), {}, { seed: 'x' });
+    expect(drawn.successionRisk).toBeNull();
+    expect(drawn.successionHold?.sentence).toBeTruthy();
+  });
+
+  it('with the reading handed over, the risk lens speaks and cites the right pool', () => {
+    const drawn = powerStateProse(
+      seat(1.0), { contenders: CONTENDERS, riskLabel: coupRiskLabel(CONTENDERS) }, { seed: 'x' },
+    );
+    expect(drawn.successionRisk.provenance).toEqual(
+      expect.objectContaining({ blockId: POW4, poolKey: 'riskLabel: Contested' }),
+    );
+    expect(drawn.successionRisk.sentence).toBeTruthy();
+    // {counterpart} is the top challenger, and it reaches the reader by name. Only ONE of
+    // the four Contested variants names it, so the draw is swept across enough seeds to
+    // reach that variant — nine were not enough, which is itself the reason this is a sweep
+    // rather than a single read.
+    const named = new Set();
+    for (let i = 0; i < 60; i += 1) {
+      const line = powerStateProse(
+        seat(1.0), { contenders: CONTENDERS, riskLabel: 'Contested' }, { seed: `cp-${i}` },
+      ).successionRisk?.sentence;
+      if (line) named.add(line);
+    }
+    expect(named.size, 'the pool drew only one variant across sixty seeds').toBeGreaterThan(1);
+    expect([...named].some((line) => line.includes('Craft Guilds'))).toBe(true);
+    // And no line leaks an unfilled slot while the challenger is absent.
+    const anon = powerStateProse(
+      seat(1.0), { contenders: { challengers: [] }, riskLabel: 'Contested' }, { seed: 'cp-x' },
+    ).successionRisk?.sentence;
+    if (anon) expect(anon).not.toMatch(/[{}]/);
+  });
+});
+
+describe('DS-POW-4 — the hold lens needs no new reader, and the lineage needs a cause', () => {
+  it('govMultiplier position relative to 1 IS the reading', () => {
+    // The band's own multiplier: 1.30 / 1.15 / 1.00 / 0.80 / 0.60.
+    expect(legitimacyHoldPoolKey(1.3)).toBe('legitimacyHold: public backing hardens the hold');
+    expect(legitimacyHoldPoolKey(1.15)).toBe('legitimacyHold: public backing hardens the hold');
+    expect(legitimacyHoldPoolKey(1.0)).toBe('legitimacyHold: public opinion neither helps nor hurts');
+    expect(legitimacyHoldPoolKey(0.8)).toBe('legitimacyHold: public rejection is breaking the hold');
+    expect(legitimacyHoldPoolKey(0.6)).toBe('legitimacyHold: public rejection is breaking the hold');
+    // Absent or non-numeric is silence, never a band.
+    expect(legitimacyHoldPoolKey(undefined)).toBeNull();
+    expect(legitimacyHoldPoolKey('1.3')).toBeNull();
+    expect(legitimacyHoldPoolKey(Number.NaN)).toBeNull();
+  });
+
+  it('⛔ the two LINEAGE pools are dark, and the desk reads the field NOWHERE', () => {
+    // `powerStructure.previousGovernments` has no generation-time writer — it is written
+    // only by a play-time power transfer — so `check-observed-shape-readers` convicts a
+    // fresh read of it as an arm dead on every generated world. Lighting these two needs an
+    // M8/M9 explained-writer row, which is a REGISTER act and the chair's. Until then the
+    // pools stay dark BY DECLARATION and this arm proves the desk does not read the key.
+    const source = readFileSync(
+      resolve(import.meta.dirname, '../../src/domain/display/stateProse/powerStateProse.js'), 'utf8',
+    );
+    const code = source.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/[^\n]*/g, '');
+    expect(code, 'the desk reads a key no generator writes').not.toMatch(/previousGovernments/);
+    // The pools exist and remain unmounted-in-effect, recorded so nobody re-finds them.
+    expect(POW4_POOLS['previousGovernments present with a recorded cause']).toBeTruthy();
+    expect(POW4_POOLS['previousGovernments empty (no recorded lineage)']).toBeTruthy();
+  });
+
+  it('ALIVENESS: all nine pools fire, with {timeband_age} left deliberately unfilled', () => {
+    const reached = new Set();
+    for (const label of COUP_RISK_LABELS) {
+      for (const gm of [1.3, 1.0, 0.6]) {
+        for (const previous of [[{ cause: 'a coup' }], [], [{}]]) {
+          const drawn = powerStateProse(
+            seat(gm, previous),
+            { contenders: CONTENDERS, riskLabel: label },
+            { seed: `p4-${label}-${gm}` },
+          );
+          for (const rung of ['successionRisk', 'successionHold']) {
+            const line = drawn[rung];
+            if (line?.sentence) reached.add(line.provenance.poolKey);
+            if (line) expect(line.sentence, `${rung} for ${label}`).toBeTruthy();
+          }
+        }
+      }
+    }
+    // SEVEN of nine. The two lineage pools are dark by declaration (see the arm above), and
+    // stating the number here is what stops a later reader assuming all nine were wired.
+    expect(reached.size, `unreached: ${Object.keys(POW4_POOLS).filter((k) => !reached.has(k))}`).toBe(7);
+    expect(Object.keys(POW4_POOLS)).toHaveLength(9);
+    // {timeband_age} is named by ONE variant of 29 and has no duration former anywhere in
+    // the tree. It stays unfilled, anchored liveness drops that single variant, and the
+    // count above proves no POOL is lost by it. Measured, not assumed.
+    const named = Object.values(POW4_POOLS).flat()
+      .filter((v) => (v.slots || []).includes('timeband_age'));
+    expect(named).toHaveLength(1);
+  });
+
+  it('DS-POW-4 carries no covert variant, so the player and the DM read the same lines', () => {
+    const covert = Object.values(POW4_POOLS).flat()
+      .filter((v) => (v.marks || []).includes('dm-only'));
+    expect(covert).toHaveLength(0);
+    const asPlayer = powerStateProse(seat(1.3, []), { contenders: CONTENDERS, riskLabel: 'Holding' }, { seed: 'q', audience: 'player' });
+    const asDm = powerStateProse(seat(1.3, []), { contenders: CONTENDERS, riskLabel: 'Holding' }, { seed: 'q', audience: 'dm' });
+    expect(asPlayer.successionRisk.sentence).toBe(asDm.successionRisk.sentence);
+  });
+
+  it('the registry mounts DS-POW-4 once, as a sentence, on the power tab', () => {
+    const rows = DOSSIER_MOUNTS.filter((row) => row.blockId === POW4);
+    expect(rows).toHaveLength(1);
+    expect(rows[0]).toMatchObject({ mount: 'power.succession', tab: 'power', desk: 'power', rung: 'sentence' });
+    expect(UNMOUNTED_BLOCKS).not.toContain(POW4);
   });
 });
