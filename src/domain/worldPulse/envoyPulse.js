@@ -166,6 +166,28 @@ export function advanceEnvoyDiplomacyPulse({
     };
   }
 
+  // ⛔ THE ANNOTATION IS LOAD-BEARING, AND IT IS HERE BECAUSE THE DROP PASS IS HONEST.
+  //
+  // This binding carries the world through every stage below, and each of those stages
+  // (`advanceEnvoyErrands`, `advanceEspionageProducts`, …) declares `worldState: unknown`.
+  // `unknown` is therefore this file's real type for the world, and it is what this
+  // binding held before the ENC-3 drop pass moved in above it (`let state = worldState`,
+  // the parameter, which is `unknown`).
+  //
+  // `dropStaleMeetingLedgers` declares the TRUTH about itself — it returns
+  // `{worldState: Record<string, unknown>, changed: boolean}`, because it really does
+  // return `asObject(...)`. Initialising from it therefore NARROWED this binding to
+  // `Record<string, unknown>`, and the later `state = advanced.worldState` assignments
+  // then failed TS2322: `unknown` is not assignable to the narrower type. Two new full
+  // errors and two new strict ones, on two ratchets that sit at exactly zero headroom.
+  //
+  // ⭐ THE CURE IS HERE AND NOT IN THE STAGE. Widening the stage's return to `unknown`
+  // would make a truthful annotation lie in order to satisfy one consumer, and would
+  // degrade every other caller of it. Casting at each `state =` site would silence the
+  // reader rather than tell it anything. Naming this binding `unknown` says what is
+  // actually true of it, restores the type it has always had, and costs no safety that
+  // existed before — the parent commit's binding was `unknown` too.
+  /** @type {unknown} */
   let state = meetingLedgers.worldState;
   const evidence = [];
 
