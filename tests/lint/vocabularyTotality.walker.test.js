@@ -41,6 +41,7 @@ import { MONSTER_THREAT_TIERS } from '../../src/data/monsterThreat.js';
 import { STRESS_TYPE_MAP } from '../../src/data/stressTypes.js';
 import { DEFENSE_STRESS_STATUS } from '../../src/domain/display/defenseDisplay.js';
 import { safetySeverityOf } from '../../src/domain/display/safetySeverity.js';
+import { RECOGNISED_MONSTER_TIERS } from '../../src/domain/display/stateProse/defenseStateProse.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const read = (rel) => readFileSync(join(ROOT, rel), 'utf8');
@@ -106,6 +107,18 @@ describe('vocabularyTotality — bound consumers (exact set, both ways)', () => 
     // Both ways: no dead arm ('embattled'), no missing tier ('heartland').
     expect(setDiff(keys, PRODUCER_THREAT), 'dead threat-display arm(s)').toEqual([]);
     expect(setDiff(PRODUCER_THREAT, keys), 'missing threat-display arm(s)').toEqual([]);
+  });
+
+  it('the defense DESK recognises exactly the canonical monster-threat tiers (H1b)', () => {
+    // DS-DEF-2's Beasts & Monsters row branches on the monster-threat tier, and the CORPUS
+    // names its third family `settled` where the producer says `heartland`. That name
+    // difference is exactly the dead-vocabulary shape this walker exists for: a consumer
+    // keyed on the corpus word would carry an arm no producer emits AND miss the tier that
+    // is emitted. The desk keys on the producer token and exports what it recognises, so
+    // the binding is checked here rather than trusted.
+    const keys = [...RECOGNISED_MONSTER_TIERS].sort();
+    expect(setDiff(keys, PRODUCER_THREAT), 'dead defense-desk tier arm(s)').toEqual([]);
+    expect(setDiff(PRODUCER_THREAT, keys), 'missing defense-desk tier arm(s)').toEqual([]);
   });
 
   it('DEFENSE_STRESS_STATUS keys === every registered stress type (H3)', () => {

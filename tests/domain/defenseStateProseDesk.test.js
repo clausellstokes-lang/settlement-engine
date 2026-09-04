@@ -14,9 +14,13 @@ import { readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import {
-  SLOT_FILL_SHAPES, SLOT_FILL_TABLES, defenseStateProse, firstSurveyPoolKey,
-  isCompoundSafetyLabel, publicOrderPoolKey,
+  RECOGNISED_MONSTER_TIERS, SLOT_FILL_SHAPES, SLOT_FILL_TABLES, beastsRowPoolKey,
+  defenseStateProse, defenseThreatProse, disasterRowPoolKey, economicRowPoolKey,
+  firstSurveyPoolKey, internalRowPoolKey, invasionRowPoolKey, isCompoundSafetyLabel,
+  publicOrderPoolKey,
 } from '../../src/domain/display/stateProse/defenseStateProse.js';
+import { MONSTER_THREAT_TIERS, normalizeMonsterThreat } from '../../src/data/monsterThreat.js';
+import { scoreBand } from '../../src/domain/display/defenseScoreBands.js';
 import { DM_FIELD_FRAMED_BY_BLOCK, isDmEditableProsePath } from '../../src/domain/display/stateProse/dmFieldProjection.js';
 import { DOSSIER_STATE_PROSE_DEFENSE } from '../../src/data/dossierStateProse/defense.generated.js';
 import { DOSSIER_MOUNTS, UNMOUNTED_BLOCKS, sentenceMountForBlock } from '../../src/domain/display/stateProse/dossierMounts.js';
@@ -177,5 +181,185 @@ describe('the defense desk — ⭐ THE DM\'S PEN, first production use', () => {
     for (const row of DOSSIER_MOUNTS.filter((r) => r.desk === 'defense')) {
       expect(UNMOUNTED_BLOCKS).not.toContain(row.blockId);
     }
+  });
+});
+
+/** DS-DEF-2 — the five readiness rows. */
+const DEF2 = 'DS-DEF-2';
+const DEF2_POOLS = DOSSIER_STATE_PROSE_DEFENSE[DEF2].pools;
+
+/** A settlement carrying exactly the slice DS-DEF-2 reads. */
+function fort({
+  monsterThreat = 'frontier', walls = false, garrison = false, militia = false,
+  hasCourtSystem = false, hasPrison = false, hasGranary = false, hasHospital = false,
+  hasChurch = false, economic = 50,
+} = {}) {
+  return {
+    name: 'Thornwall', _seed: 'seed-def2',
+    config: { monsterThreat },
+    defenseProfile: { scores: { economic }, institutions: { walls, garrison, militia } },
+    economicState: { compound: { inst: { hasCourtSystem, hasPrison, hasGranary, hasHospital, hasChurch } } },
+  };
+}
+
+describe('DS-DEF-2 — ⭐ THE LABEL-TRAP RULE, third instance', () => {
+  it('the desk recognises EXACTLY the canonical tiers, both ways', () => {
+    expect([...RECOGNISED_MONSTER_TIERS].sort()).toEqual([...MONSTER_THREAT_TIERS].sort());
+  });
+
+  it('⛔ the producer says `heartland` where the corpus says `settled` — keyed on the TOKEN', () => {
+    // Three instances across two leaves now: `indebted`, `religious_conversion`, and this.
+    // A consumer keyed on the CORPUS word would carry an arm no producer emits AND miss the
+    // tier that is emitted — the dead-vocabulary defect from both sides at once.
+    expect(MONSTER_THREAT_TIERS).toContain('heartland');
+    expect(MONSTER_THREAT_TIERS).not.toContain('settled');
+    // …and the corpus's family word is `settled`, reached FROM the producer token.
+    expect(beastsRowPoolKey('heartland', true, true)).toBe('Beasts & Monsters: settled, defenses beyond the need');
+    expect(Object.keys(DEF2_POOLS).some((k) => k.startsWith('Beasts & Monsters: settled'))).toBe(true);
+    expect(Object.keys(DEF2_POOLS).some((k) => k.includes('heartland'))).toBe(false);
+  });
+
+  it('⚠ RAISED NOT CURED: the normaliser forwards a non-canonical tier, and the desk is silent on it', () => {
+    // `normalizeMonsterThreat` passes 'civilized' through UNCHANGED although it is not a
+    // canonical tier — a normaliser that forwards a non-canonical value is not normalising.
+    // Recorded, not fixed here. The desk is TOTAL over the canonical three and returns null
+    // for anything else, so an un-normalised value renders SILENCE, never a wrong family.
+    expect(normalizeMonsterThreat('civilized')).toBe('civilized');
+    expect(MONSTER_THREAT_TIERS).not.toContain('civilized');
+    expect(beastsRowPoolKey('civilized', true, true)).toBeNull();
+    // The legacy aliases the normaliser DOES map still route correctly.
+    expect(normalizeMonsterThreat('low')).toBe('heartland');
+    expect(beastsRowPoolKey('low', true, true)).toBe('Beasts & Monsters: settled, defenses beyond the need');
+  });
+});
+
+describe('DS-DEF-2 — each row lens at its boundaries', () => {
+  it('BEASTS branches per tier, and says nothing where the corpus wrote nothing', () => {
+    expect(beastsRowPoolKey('plagued', true, true)).toBe('Beasts & Monsters: plagued, perimeter AND organized force');
+    expect(beastsRowPoolKey('plagued', true, false)).toBe('Beasts & Monsters: plagued, perimeter but NO force to hold it');
+    expect(beastsRowPoolKey('plagued', false, false)).toBe('Beasts & Monsters: plagued, NO perimeter and NO force');
+    // A plagued country with a force and no wall: the corpus wrote no sentence, so silence.
+    expect(beastsRowPoolKey('plagued', false, true)).toBeNull();
+    expect(beastsRowPoolKey('frontier', true, true)).toBe('Beasts & Monsters: frontier, credible deterrence');
+    expect(beastsRowPoolKey('frontier', false, true)).toBe('Beasts & Monsters: frontier, force without a perimeter');
+    expect(beastsRowPoolKey('frontier', false, false)).toBeNull();
+    expect(beastsRowPoolKey('heartland', true, false)).toBe('Beasts & Monsters: settled, defenses beyond the need');
+    expect(beastsRowPoolKey('heartland', false, false)).toBe('Beasts & Monsters: settled, nothing organized');
+    expect(beastsRowPoolKey('heartland', false, true)).toBeNull();
+  });
+
+  it('INVASION and INTERNAL are TOTAL over their boolean combinations', () => {
+    expect(invasionRowPoolKey(true, true, false)).toBe('Invasion & War: walls AND professional garrison');
+    // A garrison outranks a militia: a town with both is defended by the professionals.
+    expect(invasionRowPoolKey(true, true, true)).toBe('Invasion & War: walls AND professional garrison');
+    expect(invasionRowPoolKey(true, false, true)).toBe('Invasion & War: walls with citizen militia');
+    expect(invasionRowPoolKey(true, false, false)).toBe('Invasion & War: walls with NO force');
+    expect(invasionRowPoolKey(false, true, false)).toBe('Invasion & War: force with NO walls');
+    expect(invasionRowPoolKey(false, false, true)).toBe('Invasion & War: militia only');
+    expect(invasionRowPoolKey(false, false, false)).toBe('Invasion & War: neither walls nor force');
+    expect(internalRowPoolKey(true, true)).toBe('Internal Security: full legal chain (court AND prison)');
+    expect(internalRowPoolKey(true, false)).toBe('Internal Security: court without detention');
+    expect(internalRowPoolKey(false, true)).toBe('Internal Security: detention without process');
+    expect(internalRowPoolKey(false, false)).toBe('Internal Security: no legal infrastructure');
+  });
+
+  it('⭐ ECONOMIC reads ONE score through the canonical band — no `avgScore` mean needed', () => {
+    // This is why DS-DEF-2 could land before DS-DEF-1: the band comes from
+    // `scores.economic` alone, not from the overall mean that is stranded behind ~280 KB.
+    for (const n of [80, 50, 30, 10]) {
+      expect(economicRowPoolKey(n)).toBe(`Economic Survival: ${scoreBand(n)}`);
+    }
+    expect(economicRowPoolKey(65)).toBe('Economic Survival: STRONG');
+    expect(economicRowPoolKey(64)).toBe('Economic Survival: ADEQUATE');
+    expect(economicRowPoolKey(20)).toBe('Economic Survival: WEAK');
+    expect(economicRowPoolKey(19)).toBe('Economic Survival: CRITICAL');
+    // Absent or non-numeric is silence, never a band.
+    expect(economicRowPoolKey(undefined)).toBeNull();
+    expect(economicRowPoolKey('50')).toBeNull();
+    // And the desk does not reach for the stranded mean.
+    const source = readFileSync(
+      resolve(import.meta.dirname, '../../src/domain/display/stateProse/defenseStateProse.js'), 'utf8',
+    );
+    const code = source.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/[^\n]*/g, '');
+    expect(code, 'the desk reached for avgScore or its heavy homes').not.toMatch(/avgScore|dossierViewModel|viewModelPrimitives/);
+  });
+
+  it('DISASTERS treats parish care as medical provision ONLY in the granary branch', () => {
+    // The corpus's own shape: it wrote `granary AND parish care only` but no matching
+    // "no reserves, parish care" pool, so for a town with no reserves the split is
+    // hospital-or-nothing. Total over the five pools the corpus actually carries.
+    expect(disasterRowPoolKey(true, true, false)).toBe('Disasters & Famine: granary AND hospital');
+    expect(disasterRowPoolKey(true, false, true)).toBe('Disasters & Famine: granary AND parish care only');
+    expect(disasterRowPoolKey(true, false, false)).toBe('Disasters & Famine: granary, NO medical provision');
+    expect(disasterRowPoolKey(false, true, false)).toBe('Disasters & Famine: NO reserves, hospital present');
+    expect(disasterRowPoolKey(false, false, false)).toBe('Disasters & Famine: NO reserves, NO medical provision');
+    expect(disasterRowPoolKey(false, false, true)).toBe('Disasters & Famine: NO reserves, NO medical provision');
+  });
+});
+
+describe('DS-DEF-2 — ALIVENESS over every combination the generator can build', () => {
+  it('all TWENTY-SIX pools speak, swept over the full combination space', () => {
+    const reached = new Set();
+    for (const monsterThreat of MONSTER_THREAT_TIERS) {
+      for (const walls of [true, false]) {
+        for (const garrison of [true, false]) {
+          for (const militia of [true, false]) {
+            for (const hasCourtSystem of [true, false]) {
+              for (const hasPrison of [true, false]) {
+                for (const hasGranary of [true, false]) {
+                  for (const hasHospital of [true, false]) {
+                    for (const hasChurch of [true, false]) {
+                      for (const economic of [80, 50, 30, 10]) {
+                        const drawn = defenseThreatProse(fort({
+                          monsterThreat, walls, garrison, militia, hasCourtSystem,
+                          hasPrison, hasGranary, hasHospital, hasChurch, economic,
+                        }), { seed: 'sweep' });
+                        for (const row of ['beasts', 'invasion', 'internal', 'economic', 'disaster']) {
+                          const rung = drawn[row];
+                          if (!rung?.sentence) continue;
+                          reached.add(rung.provenance.poolKey);
+                          expect(rung.provenance.blockId).toBe(DEF2);
+                          expect(rung.sentence).not.toMatch(/[{}]/);
+                          expect(rung.sentence).not.toMatch(/[0-9]/);
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    expect(reached.size, `unreached: ${Object.keys(DEF2_POOLS).filter((k) => !reached.has(k))}`)
+      .toBe(Object.keys(DEF2_POOLS).length);
+    expect(Object.keys(DEF2_POOLS)).toHaveLength(26);
+  });
+
+  it('DS-DEF-2 frames no DM field, so it returns plain rungs rather than projections', () => {
+    // The DM's-pen shape is DS-DEF-3's. Handing back a projection where no DM-editable
+    // field exists would be ceremony rather than protection, and would tell a reader of
+    // this code that a field is at risk when none is.
+    expect(DM_FIELD_FRAMED_BY_BLOCK[DEF2]).toBeUndefined();
+    const drawn = defenseThreatProse(fort({ walls: true, garrison: true }), { seed: 'shape' });
+    expect(Object.keys(drawn.invasion).sort()).toEqual(['detail', 'glance', 'provenance', 'sentence']);
+  });
+
+  it('a settlement with no defence profile says nothing at all, and does not crash', () => {
+    const empty = defenseThreatProse({ name: 'Thornwall' }, { seed: 'z' });
+    // The boolean rows are TOTAL, so they still speak on an absent profile (all-false is a
+    // real reading: no walls, no force, no legal chain, no reserves). The SCORE row is the
+    // one that goes silent, because an absent score is not a band.
+    expect(empty.economic).toBeNull();
+    expect(empty.invasion.sentence).toBeTruthy();
+    expect(defenseThreatProse(undefined).economic).toBeNull();
+  });
+
+  it('the registry mounts DS-DEF-2 once, as a sentence, on the defense tab', () => {
+    const rows = DOSSIER_MOUNTS.filter((row) => row.blockId === DEF2);
+    expect(rows).toHaveLength(1);
+    expect(rows[0]).toMatchObject({ mount: 'defense.threatAssessment', tab: 'defense', desk: 'defense', rung: 'sentence' });
+    expect(sentenceMountForBlock(DEF2)?.mount).toBe('defense.threatAssessment');
   });
 });
