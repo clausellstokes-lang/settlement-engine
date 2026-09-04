@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "dc42a22c8e518ee034693862b79d94f818f62659",
-  "measuredBy": "Opus 5 chair, §893.2",
+  "measuredAtSha": "19126aaacd00907b446cd19d512ed65adb2f9a4c",
+  "measuredBy": "Opus 5 chair, §893.2 (2/2)",
   "date": "2026-09-04",
-  "note": "ENC-3's four cars add two test files (the two ENC-3 certification instruments); predicted files 2515->2517, parked 371 unchanged, credited 2144->2146, titles 22922->22947, suiteTitles 6153->6162 in writing before this run, derived from a read-only tuple probe rather than guessed",
+  "note": "the flag-ON lit test for chanceEncountersEnabled adds one describe and five its; predicted files 2517 parked 371 credited 2146 UNCHANGED, titles 22947->22952, suiteTitles 6162->6163, all five derived from a read-only tuple probe before this run",
   "files": 2517,
   "parked": 371,
   "credited": 2146,
-  "titles": 22947,
-  "suiteTitles": 6162
+  "titles": 22952,
+  "suiteTitles": 6163
 }
