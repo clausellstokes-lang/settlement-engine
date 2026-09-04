@@ -3294,3 +3294,145 @@ This is the first sitting to edit the queue in place, and every edit is enumerat
 
 ### §892.5 · THE CRITIC (S99) — coverage, contradictions, and what stays PLAUSIBLE
 Not yet run at the cutoff — it follows S01/S04 in the main run `wf_edb0b5fe-ba2` (same session only; on a new account re-launch the persisted script with `args` = the ids not COMPLETE and the critic runs after them). When it returns, its coverage, contradiction and PLAUSIBLE tables are ruled at §892.x.
+## §893 — THE CARVE-OUT AMENDMENT, THE §891 LANDING, AND FIVE ROWS THE LEDGER RULED AND THE CODE NEVER HEARD
+⟦OPUS-AUTHORED — Fable retrovalidation OWED⟧ · SEAT: Opus 5 — Fable-unvalidated. The chair writes no `*RULED*` line.
+
+### R1 ⭐⭐ THE CARVE-OUT LINE ITSELF WAS AMENDED — the single largest judgment of the span
+**What was judged.** The owner, in chat 2026-09-04, granted permission to *"follow ammend or modify"* the sentence *"anything irreversible, externally visible, or constitutional in nature stays owner-gated even under this grant"*, naming this queue as the remedy. The chair REPLACED the class-based line with a single test: **can a later retrovalidation actually undo this?** Kept gated: every `git push`/deploy, and the owner's WALK. Taken: the CULL, paid-surface behaviour, ceiling raises, ENC-4/5's words, the twelve anchors, persisted shapes. Declined-but-not-gated by the chair's own judgment: the tuning SIGNATURE and every tuning VALUE.
+**What Fable re-derives.** (a) Whether reversibility is the right axis, or whether class-sorting protected something the chair cannot see. (b) Whether the chair was right to KEEP the walk and the push when the owner offered them. (c) ⚠ Whether the chair was right to DECLINE the tuning signature — this is a refusal of a grant, and a refusal can be as wrong as an overreach; the ground given is that THE PROMISE is made to PLAYERS, not to the chair, and a third-party promise is not the owner's to hand over in passing. (d) Whether 'pre-launch, no installed users' is doing too much work in the reasoning.
+**Receipts.** `$SC/RULINGS-893.md` §6 · `memory/owner-amends-the-carve-out-line-2026-09-04.md`.
+**Priority: HIGHEST.** Every later row in this section inherits it.
+
+### R2 ⛔ RULING 5 WAS WITHDRAWN ONE HOUR AFTER IT WAS MADE — its premise was destroyed under it
+**What was judged.** Ruling 5 preferred the ENC-4 road with the smaller OWNER-authoring bill, on the ground that *"the owner's words are the scarcest resource in this arc."* R1 then took the drafting of those words, so the premise became false and the preference void. The road is now chosen on PRODUCT QUALITY with no thumb on the scale.
+**What Fable re-derives.** Whether the withdrawal is complete (the measurement duty and the refusal to rule the road from the chair were deliberately left STANDING), and whether a chair that amends its own ruling within the hour is self-correcting or unstable. ⚠ The premise here was not discovered false; it was MADE false by a grant.
+**Receipts.** `$SC/RULINGS-893.md` §5b. **Priority: HIGH.**
+
+### R3 THE RATCHET REFUSED, AND THE CURE CHOSE NOT TO GO ALL THE WAY
+**What was judged.** `--update` refused at exit 1 on a NEW identity (`negativeAssertionAnchor.walker`, `economicsTabFlow.test.js`: 3 un-anchored negatives at 43/135/136, ceiling 1) that the FULL 10/10 census could not bank. The chair CURED the two new sites via `expectPresentThenAbsent` and **deliberately did NOT cure line 43**, because 0 < ceiling 1 reds the walker's `inventory honesty` arm and forces a census-row deletion, which program law puts LAST. Car `62afd84d3`.
+**What Fable re-derives.** Whether leaving a known un-anchored site uncured to protect a landing is the right trade, or debt taken for scheduling convenience. Also whether the O2GATE lane's original hand-paired proof was genuinely weaker, or whether the walker is over-strict and the chair complied with an instrument rather than a truth.
+**Receipts.** commit `62afd84d3` · `memory/anchored-negative-walker-is-a-two-sided-trap.md` · `$SC/ratchet-891c.log` (the refusal) and `ratchet-891d.log` (the clean re-run). **Priority: MEDIUM-HIGH.**
+
+### R4 FOUR UNBLOCKING RULINGS, EACH VETOABLE BY NAME
+CS-9 an account import of a user's OWN export is a RESTORE path, not an authoring wall (releases CHARSET Car 2 and the charset half of L-DOORS) · THE DRIFT DOOR chartered in three parts, ENCOUNTERS minting its own family leaf and `positionValue` gaining a legal named export (releases ENC-3's ~17 built files) · O-5/RR-2 FUND the Remembrance reader · O-11 SIGN the MAT dial's three persistence paths.
+**What Fable re-derives.** Each on its own ground; CS-9 and the drift door are the two that change product behaviour. ⚠ §890.1 WITHDREW a contrary chair ruling on the drift door and said the decision belonged to *"the owner, or a fresh charter"*; the chair has taken it as the fresh charter. That reading is the thing to test.
+**Receipts.** `$SC/RULINGS-893.md` §§1–4. **Priority: HIGH.**
+
+### R5 ⛔ THREE LEDGER RULINGS NEVER REACHED THE CODE, AND A FOURTH BLOCKER WAS A GHOST
+**What was measured** at train tip `62afd84d3`, by executed grep, not recall: `BOND_KINDS` lacks `respect` (`npcLadderState.js:407`) · `GRUDGE_KINDS` lacks `rivalry` (`:383`) · `PREVIEW_OVERLAY` (`scripts/review/readerCorpus.mjs:116`) freezes four keys and `errandSpineEnabled` is not among them. Separately, ENC-4's HOLE 0 — *"TWO NAMING RULINGS, AND BOTH ARE BLOCKING"* — was ALREADY CURED by the §892 banner at the top of the same file, which was never carried down; both amended tokens measure ZERO occurrences in src and tests.
+**What Fable re-derives.** Whether the chair's structural claim holds — that this is ONE fault shape (*an amendment declared is not an amendment; the clause text is the receipt*) now proven at four sites — and whether the standing cure should be a gate rather than four more hand fixes.
+**⚠ A collateral finding the walk depends on:** `PREVIEW_OVERLAY` sets `warMemoryEnabled: true`, so the review corpus the owner walks turns ON a flag whose records nothing can read. This raises O-5/RR-2 from optional to walk-degrading.
+**Receipts.** `$SC/LIVEFAULT-VERIFIED-893.md` · `$SC/RULINGS-893-ENC4.md`. **Priority: HIGH.**
+
+### R6 THE CHAIR DRAFTED PLAYER-FACING WORDS FOR THE FIRST TIME
+**What was authored.** Two R1 noun phrases, mandatory on both ENC-4 roads: `chance_meeting_recorded` → `a meeting neither party arranged`; `chance_meeting_exposed` → `a refusal that did not stay private`. Both checked against all six R1 refusals and read aloud in all six frames. The second is chosen to be true under BOTH the §8.3 and §5.5 readings, so the phrase ships without the surviving reason being adjudicated first.
+**What Fable re-derives.** ⭐ Whether they are any good, and whether a machine should be writing them at all. They are pool-adjacent DATA rows and the pen overwrites either at the cost of the writing alone.
+**Receipts.** `$SC/RULINGS-893-ENC4.md` · the sheet's HOLE 3 table. **Priority: MEDIUM — but the pen's to veto.**
+
+### R7 THE §891 LANDING AND ITS ENROLMENTS
+Registers 8/10 lighting (`412a096f3`, five figures predicted, five exact), 9/10 dossier-mounts (`e49353a33`, a shrink-only ratchet found SLACK by four), 10/10 the census (`1223489c9`: totalFiles 2458→2462 predicted CERTAIN and EXACT; totalTests REFUSED in advance and measured 31223; zero entries added, removed or changed; two voiceMechanics magnitude ceilings HELD, never raised). The voice refreeze was REFUSED as predicted and cannot be honest until the unlanded src-prose car lands. **Enrolled here, having been named at §891 and never enrolled:** lane O2GATE and the four §891 lanes CAPACITY, CHARSET Car 1, DESKWIRING, READERREVIEW Car 2.
+**Receipts.** `$SP/receipt-capacity.md`, `receipt-charset1.md`, `receipt-deskwiring.md`, `receipt-readerreview2.md`, `$SC/briefs/brief-O2GATE.md`. **Priority: MEDIUM.**
+
+### R8 ⛔⛔ THE CHAIR READ AN ASSERTION BACKWARDS AND RULED ON IT — the sharpest error of the span
+**What was judged.** The chair ruled the four war-kind census slots STALE PINS, quoting the census's
+own cause (*"extra families were minted into the war-cost pools without amending the registry pin"*),
+and directed a re-pin. **Backwards.** Vitest prints ACTUAL then EXPECTED, so `expected [ …(5) ] to
+deeply equal [ …(6) ]` means src=5 and ANNEX=6; the pools hold exactly five, proved by a GREEN sibling
+arm `expect(row.pool).toHaveLength(5)`. The source is MISSING AUTHORED CONTENT and the cure is to WIRE
+it. Corrected in `$SC/RULINGS-893-CENSUS-HEADROOM.md` §0 before any act was taken.
+**What Fable re-derives.** (a) Whether the corrected reading is right. (b) ⭐ Whether a chair that
+folded the memory recording this exact inversion FOUR HOURS before repeating it should be trusted to
+manage its own index — the row was un-folded and the folding rule rewritten (fold by whether the LAW
+is restated elsewhere, never by whether a row looks like a narrow instrument note). (c) That the
+census's stored `cause` prose carries the same inversion and propagated it: **a stale figure is
+refused by a gate; a stale EXPLANATION is believed.**
+**Receipts.** `$SC/censushead/` · `memory/writer-reach-web-display-grade-is-a-grounding-fact.md`.
+**Priority: HIGHEST of the error rows.**
+
+### R9 THREE MORE OF THE CHAIR'S RULINGS OVERTURNED BY MEASUREMENT, ALL BEFORE THEY BECAME CARS
+**THE CULL — CANCELLED.** 140 exports measured against a 225-export denominator: **0 provably dead**.
+130 are used inside their own module; 6 are read by tests or docs; 4 are facades whose deletion would
+PROMOTE 21 dials into unregistered ones and trip the very guard protecting the surface the owner
+signs. The "113" is a docblock sentence, not a register column, and `namedDependents === 0` never
+meant "no consumer". ⭐ The chair took this under the amended carve-out because deletion is
+reversible — **reversibility answers MAY I, never SHOULD I**, and the chair treated its own new test
+as sufficient when it is only necessary.
+**CHARSET Car 3 — CANCELLED.** All 27 codepoints it would recover are already inside the shipped
+font (27/27 measured), so it is a step the embed DELETES, buying 12.2% for the full ceremony while
+`Đorđević` still renders `"or evi"`. **The embed costs 0 B at first paint** (the eight faces already
+ship and are reached only by the PDF worker) and cures 41/41 instances. Proved at the RENDER by
+decoding Identity-H `Tj` operands through the ToUnicode CMap, with a failing control.
+**RULING 5 — WITHDRAWN** an hour after it was made: it preferred the cheaper ENC-4 road because the
+owner's words were the scarcest resource, and the second grant made that premise false.
+**What Fable re-derives.** Each reversal on its own ground, and whether the chair's rate of
+self-correction reads as rigour or as instability. **Priority: HIGH.**
+
+### R10 ⭐ A DEFECT CLASS FOUND BY ACCIDENT, SWEPT IN FULL, AND GIVEN A HABITAT CURE
+2,567 of 2,567 test files parsed; **11 assertions cannot fail, 6 load-bearing.** The sharpest is a
+liveness ANCHOR whose two sides are the identical call, so a producer returning null for everything
+passes all three of its refusals AND the anchor — **it passes in exactly the scenario it excludes.**
+A second, in a test named `NO-DRIFT`, declares two configs and uses NEITHER. Cure: extend
+`negativeAssertionAnchor.walker.test.js` (no new file ⇒ no census hit); the seed arm is born at exact
+zero. The lane's gated/looped arms were REFUSED and the refusal upheld — with the census at 10/10 an
+instrument that would convict a world the owner has not ruled on must EXPOSE, not JUDGE.
+**What Fable re-derives.** Whether the 6 load-bearing calls are correctly graded, and ⭐ whether the
+lane's method should become standing law: its loose pass convicted 414 sites, its sound pass 2, and
+it kept BOTH so the discard was auditable. **A sweep whose false-positive pass is discarded is a
+scare, not a measurement.** **Priority: HIGH.**
+
+### R11 THE LANDING WENT RED TWICE, AND BOTH REDS WERE EARNED
+**Red 1 — the chair's own.** Four lanes running beside the gate took load to 22 on 8 cores; a sentinel
+using 15% of its budget alone (3.07s of 20s) timed out at 27.2s. The instrument advises freezing the
+measured figure as a per-test budget; **the chair REFUSED**, because that figure is the cost of its
+own scheduling and freezing it would blind the row to a real regression.
+**Red 2 — real, and latent for months.** A fixture hardcoded `--runtime-tests=28032` against a floor
+of `baseline.totalTests * 0.9`. It had **SIX units of headroom**; register 10/10 added 82 tests and the
+floor moved 28026 → 28100. Cured by DISSOLVING the coupling (derive from the baseline), never by
+bumping the number, which would have bought one landing and rearmed the trap.
+**Red 3 — the banked magnitude.** Three em dashes MOVED between two files (a `split(' — ')` delimiter,
+not prose); repo-wide debt was 40 before and 40 after, but the arm sums only DRIFTED files so a pure
+relocation read as growth. Cured at cause: the producer now returns the two fields it was joining, a
+defect the repo had ALREADY documented. The register act that followed was a HAND edit, because the
+guard's own door would have thrown — proved by calling its pure functions, not reasoned.
+**What Fable re-derives.** Whether the contention red should have been prevented rather than
+diagnosed, and whether cure-at-cause was right in all three. **Priority: MEDIUM-HIGH.**
+
+### R12 ⛔ THE ARC'S BINDING CONSTRAINT IS CENSUS HEADROOM, AND IT WAS WRITTEN DOWN NOWHERE
+Two lanes converged independently: five remaining desk leaves each want a NEW TEST FILE, and the
+lighting wave's only bit-level witness would be one too — and a new test file reds three censuses
+against a census FULL at 10/10. **Reachable: 6 of 10 slots**, four of them in ONE act (wire the eight
+authored families; ⚠ COUPLED with `kindPoolFloors`' `28 → 24` in the same commit or it reds both
+ways). Order is MECHANICS, proved from the instrument: cure first ⇒ green with a `bank the win`
+advisory; remove the row first ⇒ REGRESSION and a red gate. ⚠ **Two slots have NO road at all** — the
+prose car touches 114 `src/data`+`src/domain` files and **zero** `.jsx`. ⚠ A disclosed shift rides
+the cure: `templateIndex = fnv1a32(seed) % pool.length`, so growing a pool **re-maps every seed**.
+**What Fable re-derives.** The 6-of-10 arithmetic, the coupling, and the seed re-map's acceptability.
+**Priority: HIGHEST for scheduling.**
+
+### R13 GOLDEN IS LANDABLE, AND ITS RECORDED BLOCKER WAS NEVER THE BLOCKER
+7 of 7 cars still needed, 0 superseded (positive control: `recordGolden` 0 hits on product, 45 on
+golden). The single colliding file has the product at lines 18–131 and the car at ~650/~761;
+`git merge-tree` returns a clean tree, hunks shift +108. **R11 `commitTrailerRefusal` is a MISGRADE** —
+its own docblock says the absent hook is *"deliberate rather than unfinished"*; regraded HIGH →
+INFO/ACCEPTED. **The REAL blocker was unrecorded:** `0fdbc53a0` minted `UPDATE_MOUNT_BASELINE`, which
+car 2's walker enumerates by `/^UPDATE_[A-Z_]+$/` and which sits in neither the 43 enrolled values nor
+the 7 exclusions — arm 2 reds on landing, and an 11th red has no lawful disposition. Cure: one
+`excludedEnvSpellings` entry folded into car 1. ⚠ The rebase REPLAY is PLAUSIBLE, not CONFIRMED
+(Apple Git lacks `merge-tree --merge-base`). **Priority: HIGH.**
+
+### R14 THE SCOPE NUMBERS THIS PROGRAM HAS BEEN CARRYING ARE WRONG IN BOTH DIRECTIONS
+**LIGHTING:** "31" is real but is an ITEM count, not a door count — measured **151 doors, 113 dark, 91
+dark in the default preset**. Of the docket's six owner rows, **NONE still gates the wave**. ⚠ The
+wave has **no bit-level witness**: every pulse golden drives a literal rules object, so the entire
+preset table could be lit — or silently re-darkened — without moving one instrument row.
+**DESK:** six leaves TOTAL, not six remaining; economy is partly lit (4 of 15 blocks). Denominator
+**68 blocks / 708 pools / 2,266 variants**, 64 blocks and 681 pools dark; ≈29 cars, ≈39–43 with the
+causal register. `{complexity}` is no longer a deferral but a **SHIPPING DEFECT** — every high-rung
+working-approach settlement prints the identical sentence. `dmFieldProjection.js` costs **+0 cars**
+(zero callers); `causalDossierProse.js` is the real unpriced surface at 210,260 B, zero consumers, and
+**57 two-armed families that can print a NEIGHBOUR's history as this town's**. Two annex figures
+refuted (the sentence-initial seam is 11 sites, not 20; `{band}` is 27 declaring / 7 using / 16 sites,
+not 37 across 26). ⚠ **761,458 B of authored corpus is on disk and in NO build**, with no test guarding
+leaf chunk placement.
+**What Fable re-derives.** Every refuted figure, and whether the chair was right to re-scope from
+lane measurements rather than the standing docket. **Priority: MEDIUM-HIGH.**

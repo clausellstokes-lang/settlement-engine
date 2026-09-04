@@ -8,7 +8,27 @@ program's decisions; SPEC fold labels §§277–§286 are design sections, not m
 The repo is authoritative; trust executed evidence over any summary including
 this one.**
 
-## ⭐⭐⭐⭐⭐ PICKUP AT §892.1 — ⚠⚠ **OWNER, 2026-09-04: OPUS IMPLEMENTS FROM HERE; THE FABLE RETROVALIDATION IS HELD.** THE SEAT IS OPUS 5. READ THIS BLOCK, THEN THE CUTOFF #3 SECTION AT THE END OF `$SC/RESUME-NOTE.md` (the Opus chair's first acts and the fourteen-item LIVE-FAULT LIST); it supersedes every card below.
+## ⭐⭐⭐⭐⭐ PICKUP AT §893 — ⚠⚠ **§891 IS LANDED AT 27 CARS, THE CARVE-OUT LINE HAS MOVED, AND FOUR OF THE CHAIR'S OWN RULINGS WERE OVERTURNED BY MEASUREMENT.** THE SEAT IS OPUS 5. READ THIS BLOCK, THEN `$SC/RULINGS-893*.md` (six files); it supersedes every card below.
+
+`$SC` = `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad` · `$SP` = `/private/tmp/.../58f0a8e2-.../scratchpad`. ⛔ **EVERYTHING of this session is sealed at `refs/preserve/session-kit-893-2026-09-04` (463 files)** — the scratch dirs die with the account, and the lighting inventory had no git home at all.
+
+### ⭐⭐ THE TWO GRANTS, AND WHAT IS LEFT OF THE OWNER'S DESK
+**⛔ ONLY TWO THINGS ARE STILL GATED: every `git push`/deploy, and the owner's WALK.** The tuning SIGNATURE is DECLINED by the chair rather than gated (a promise made to players) and blocks nothing. Everything else is the chair's, marked ⟦OPUS-AUTHORED — Fable retrovalidation OWED⟧ and enrolled at §893 in **fourteen rows**.
+⭐ **AND THE LESSON THAT COST THE MOST: reversibility answers MAY I, never SHOULD I.** The amended test is necessary and NOT sufficient. Pair every carve-out judgment with a measurement of the MERITS — a measuring lane before the ruling hardens into a car caught four bad rulings tonight, and vigilance caught none of them.
+
+### ⭐ THE STATE, BY GIT
+Product `claude/composite-r4` = **`f537ce47e`** (§891 LANDED, 27 cars, gate TRUE_EXIT=0, CHAIR-VERIFY GREEN, sealed `landing-891-2026-09-04`; pre-CAS base `ca651d54b` preserved). ⚠ **ZERO HEADROOM ON SEVEN MEASURES AT ONCE** — one em dash in a `src/data`/`src/domain` string literal, or one type error, breaches on arrival.
+
+### ⛔⛔ THE BINDING CONSTRAINT ON EVERYTHING REMAINING: CENSUS HEADROOM
+The census is FULL at 10/10; a new test file reds three censuses; and **five desk leaves plus the lighting wave's only bit-level witness each need one.** **6 of 10 slots are reachable, four in ONE act** — wire the eight authored annex families into `WAR_RECEIPTS`, ⚠ COUPLED with `kindPoolFloors`' `28 → 24` in the SAME commit or it reds both ways. **Order is mechanics: CURE FIRST (green + `bank the win` advisory), remove the row after (removing first = REGRESSION + red gate).** ⚠ Two slots have NO road: the prose car touches zero `.jsx`. Plan: `$SC/censushead/headroom-plan.md`.
+
+### THE ROAD FROM HERE, RE-SCOPED BY MEASUREMENT
+**GOLDEN is landable now** — 7/7 needed, the one collision conflicts on nothing, `commitTrailerRefusal` was a MISGRADE, and the real blocker is one `excludedEnvSpellings` entry (`$SC/goldenplan/landing-plan.md`). Then the **CHARSET EMBED** (0 B first paint, cures 41/41 — NOT the cancelled 27-widening). Then **LIGHTING** (151 doors, 113 dark, 91 dark in the default preset; ⚠ the wave has NO bit-level witness) and **DESK** (≈29 cars, ≈39–43 with the causal register; `{complexity}` is now a SHIPPING defect; 761,458 B of corpus is in NO build). Then W-ARMS → ⛔ the owner's WALK → the review → ⛔ FULL STOP before the soak.
+
+### ⛔ THE LIVE-FAULT LIST IS NOT OPTIONAL READING
+`$SC/RESUME-NOTE.md` CUTOFF #3. §893 re-measured four faults and all four are STILL UNWIRED: `respect` → `BOND_KINDS`, `rivalry` → `GRUDGE_KINDS`, `errandSpineEnabled` → `PREVIEW_OVERLAY`, eight families → `WAR_RECEIPTS`. **That is the characteristic shape of this program's debt: ruled, authored, never wired.**
+
+## (superseded) PICKUP AT §892.1 — the seat is OPUS 5 and the Fable retrovalidation is HELD; the §893 card above supersedes, and its LIVE-FAULT pointer still holds.
 
 `$SC` = `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad` · `$SP` = `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/58f0a8e2-2c4f-4073-8635-ecc7cf5010f6/scratchpad` · everything of the §892 sitting is in git at `refs/preserve/sitting-892-kit-2026-09-03b`. ⛔ OWNER CAP FOUR agents of any kind.
 
