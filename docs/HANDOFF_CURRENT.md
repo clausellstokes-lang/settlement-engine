@@ -8,7 +8,30 @@ program's decisions; SPEC fold labels §§277–§286 are design sections, not m
 The repo is authoritative; trust executed evidence over any summary including
 this one.**
 
-## ⭐⭐⭐⭐⭐ PICKUP AT §891.1 — ⚠⚠ **WINDOW-CLOSE HANDOFF MID-WALK, 2026-09-03 ~19:55 ET (Fable 5.1 chair, session d5b9a39f).** READ THIS BLOCK, THEN THE CUTOFF SECTION AT THE END OF `$SC/RESUME-NOTE.md`; it supersedes every card below.
+## ⭐⭐⭐⭐⭐ PICKUP AT §892 — ⚠⚠ **FABLE-LIMIT CUTOFF MID-SITTING, 2026-09-03 ~23:5x ET (Fable 5.1 chair, session d5b9a39f).** THE SITTING IS PARTIAL AND ON THE LEDGER; READ THIS BLOCK, THEN THE CUTOFF #2 SECTION AT THE END OF `$SC/RESUME-NOTE.md`; it supersedes every card below.
+
+`$SC` = `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad` · `$SP` = `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/58f0a8e2-2c4f-4073-8635-ecc7cf5010f6/scratchpad`. ⛔ OWNER CAP FOUR agents of any kind. **Everything of this sitting is in git: `refs/preserve/sitting-892-kit-2026-09-03` = `bd9554285` (251 files: every slice JSON, every ruling file, every builder and wrapper, the briefs, RESUME-NOTE).** A new MACHINE restores from that ref; the same machine reads `$SC` directly.
+
+### ⭐ THE STATE, BY GIT
+**Product `claude/composite-r4` = `ca651d54b`** (§890, NOT CASed). **The §891 train = `refs/preserve/train891-reg7-2026-09-03` = `15c6368a6`**, dock `$SP/laneKERNELMARK-tree`, 18 cars, porcelain 0, all seven register acts in (the seventh proven at §891.1). **Ledger = this §892 commit.** The queue now carries 43 `*RULED (§892, Fable 5.1)*` paragraphs and the amended §3 clause.
+
+### ⭐⭐ THE SITTING IS PARTIAL — WHAT IS RULED AND WHAT IS OWED
+485 calls across 17 complete slices (357 RATIFY · 104 AMEND · 10 REVERSE · 7 EVIDENCE-THIN · 7 OUT-OF-SCOPE); 43 rows RULED. ⛔ **OWED, walked, rulings not written:** §882.8/§882.8.1/§882.9 (S01) · §882.12 + the §883.7 lane row (S04) · §885.6 §885.7 §885.8 §886 §887 §887.1 §887.2 (S15 — COMPLETE on disk, unruled) · §892.1 the four §891 lanes (S20) · the critic S99. **Only a FABLE seat rules them** (`$SC/rulings-part8+.json` → `python3 $SC/build-queue-892.py` → `sh $SC/collect-892.sh`, the same pattern as this act; anchors are FRQ line numbers AT THE PRE-§892 BLOB — re-derive them against the new HEAD before building).
+
+### ⛔ IF YOU ARE AN OPUS SEAT
+Mark every act `Seat: Opus 5 — Fable-unvalidated` with a queue row (chair-commit.sh enforces it). You MAY: re-launch the unfinished slices as fact-gathering (`Workflow({scriptPath: <the kit's walk-workflow.js>, args: [ids not COMPLETE]})`, output marked `⟦OPUS-AUTHORED⟧`); dispatch the **O2GATE** lane from `$SC/briefs/brief-O2GATE.md` (the paid-surface gap on the train — car 19, BEFORE the CAS); then, on a QUIET box, the §891 landing: `run-ratchet-891c.sh` (predicted totalFiles 2458→2462; after O2GATE re-take the LIGHTING census first) → commit the ratchet register → seal → `run-pregate-891b.sh` → `run-gate-891.sh` → `chair-verify-891.py <dock> ca651d54b… <log> <cars>` → CAS → seal `landing-891-2026-09-03` → collect §893. You may NOT write a `*RULED (§892, …)*` line.
+
+### ⛔ THE OWNER'S DESK (unchanged + three from the walk)
+The prose window (rebase owed first) · the drift door · ENC-4's nine sentences (sheet amended) · 190 B "Room to Grow" · the deity-free corpus · **NEW:** one word confirming the `now: null` delegation §890.2 cites · the twelve mutilated anchors are an OPEN row (LEG-7 is a lane note) · the encounters exposure rate for the tuning sitting. Permanently the owner's: the walk · the tuning signature · every push.
+
+### THE LAWS THIS DAY ADDED
+- **A DECLARED AMENDMENT IS NOT AN AMENDMENT** — the clause text is the receipt (§3 was declared amended at §882.14 and never edited).
+- **An append-only ruling queue needs FORWARD POINTERS** when a ruling is withdrawn, or a top-to-bottom walk meets it as live.
+- **A first-mismatch throw hides the second drift** (the writer-reach bill moved two entries; the card saw one).
+- **The writer-reach grade is GROUNDING, not DISPLAY** (a JSX-prop read grades N); vitest prints ACTUAL then EXPECTED.
+- Three death classes, again: the SESSION limit killed 8 agents at ~20:0x and the run resumed by id after the reset; the MODEL limit is closing this window now — read the failure text.
+
+## (superseded) PICKUP AT §891.1 — ⚠⚠ **WINDOW-CLOSE HANDOFF MID-WALK, 2026-09-03 ~19:55 ET (Fable 5.1 chair, session d5b9a39f).** — the §892 card above supersedes.
 
 `$SC` = `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad` · `$SP` = `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/58f0a8e2-2c4f-4073-8635-ecc7cf5010f6/scratchpad` (the previous chair's: receipts, docks, LANE-QUEUE.md). **THE SEAT IS FABLE 5.1** (`Seat: Fable 5.1 — validated`); ⛔ OWNER CAP FOUR agents of any kind; every push, the walk and the tuning signature stay the owner's.
 
