@@ -1,0 +1,286 @@
+/**
+ * domain/display/stateProse/powerStateProse.js — DESK CAR 2: THE POWER DESK.
+ *
+ * The second desk, and the first one written against a leaf that inherits none of the
+ * three shape residues §0c-4 records. One corpus block, one rendered surface:
+ *
+ *   DS-POW-1  Power › Public legitimacy banner — `powerStructure.publicLegitimacy`
+ *
+ * ── WHY THIS LEAF, AND WHY THIS BLOCK FIRST ──────────────────────────────────────────
+ *
+ * `power` is the only wholly dark leaf with NO sentence-initial lowercase seam, NO
+ * `{band}` variant use and NO demoted STATE dimension, measured over all 79 of its pools.
+ * Every slot its blocks name is `proper` in the annex register — and a `proper` fill is
+ * the one class `bareCommonFill` does not refuse — so the `{complexity}` failure mode
+ * that leaves the economy desk's C1 pool at one eligible variant CANNOT arise here. The
+ * desk that proves the second-desk shape should be the one paying no residue.
+ *
+ * ── WHAT A DESK IS RESPONSIBLE FOR (unchanged from the reference desk) ───────────────
+ *
+ * A desk maps LIVE STATE to a POOL KEY, and nothing else. It does not select prose (the
+ * kernel draws), it does not compose sections (the panel does), and it never re-derives a
+ * number a canonical reader already owns. `publicLegitimacy` arrives here as the
+ * generator built it; this file reads its `label`, its `breakdown` and its
+ * `governanceFractured` flag and turns them into pool keys.
+ *
+ * ── ELEVEN POOLS, THREE LENSES, ONE POSITION — AND WHY ALL ELEVEN CAN FIRE ───────────
+ *
+ * DS-POW-1's eleven pools are not eleven mutually exclusive states. They are THREE
+ * LENSES over one record:
+ *
+ *   LENS A — the band ladder (5 pools). `Endorsed` · `Approved` · `Tolerated` ·
+ *            `Contested` · `Legitimacy Crisis`. Mutually exclusive, total over the score.
+ *   LENS B — the breakdown dominance (5 pools). Which of the four contributions is
+ *            carrying the score, and in which direction.
+ *   LENS C — `governanceFractured true` (1 pool). The governing body's internal cohesion.
+ *
+ * A block speaks at ONE POSITION per page-set (dossierMounts.js's C3 law), and that law
+ * is spelled about RUNGS rather than draws precisely so that one position may read more
+ * than one pool of one block — the DS-GEN-6 tier overlay is the same shape. So the banner
+ * draws LENS A as its headline and ONE OF LENS B/C as the reading underneath it, at one
+ * position, at one depth. That is one fact reading once, not one fact speaking twice.
+ *
+ * ⚠ THE ORDERING OF LENS C AHEAD OF LENS B IS LOAD-BEARING, AND THE REVERSE WOULD KILL A
+ * POOL. `legitimacyBandFor` sets `governanceFractured: score < 30` and sets the label to
+ * `Legitimacy Crisis` on the same predicate, so the two are COEXTENSIVE at the producer.
+ * Had the lens preferred the breakdown, `governanceFractured true` would be reachable only
+ * on a state the generator cannot build, and the pool would be lit-but-unfireable — a
+ * dark world and a lit-but-incapable world are byte-identical to every test that does not
+ * assert a rendered sentence. Ordering C first makes the crisis band print the ladder line
+ * AND the fracture line, and leaves LENS B to the eleven-in-twenty worlds above the
+ * threshold. Every one of the eleven pools is reachable from a state the generator
+ * produces, and the desk test drives each one.
+ *
+ * ── THE DELIBERATE SILENCE, WHICH IS NOT A GAP ───────────────────────────────────────
+ * A breakdown whose dominant contribution is FAVOURABLE and is not prosperity has NO
+ * pool: the corpus writes a favourable lens for prosperity alone. This desk returns null
+ * for that state rather than falling back to the prosperity line, because the fallback
+ * would state something false about the town — safety, defense and food all reach
+ * positive contributions, so the state is real and reachable. R-DST-K: the absence of a
+ * sentence is the correct rendering of a state the corpus does not cover.
+ *
+ * ── §0d, THE DIGIT BAN ───────────────────────────────────────────────────────────────
+ * The banner keeps its `score/100` datum; the prose bands the same fact. Nothing this
+ * desk puts in a slot is ever a figure, and the kernel rejects a numeric fill outright.
+ *
+ * @enforced-by tests/domain/powerStateProseDesk.test.js
+ */
+import { DOSSIER_STATE_PROSE_POWER } from '../../../data/dossierStateProse/power.generated.js';
+import { readStateProse } from './stateProseKernel.js';
+import { legibilityRung } from './legibilityRung.js';
+
+/**
+ * The desk's corpus, typed at the import boundary. The generated leaves stay PURE DATA
+ * with no import of any kind — including a JSDoc type import, which would couple
+ * src/data to a domain module path — so the shape assertion lives here, once.
+ * @type {import('./stateProseKernel.js').StateProseCorpus}
+ */
+const CORPUS = /** @type {import('./stateProseKernel.js').StateProseCorpus} */ (
+  /** @type {unknown} */ (DOSSIER_STATE_PROSE_POWER)
+);
+
+/**
+ * The narrow slice of a settlement this desk reads. Declared rather than cast: a desk
+ * which types its input `any` has given up the one check that would catch a renamed
+ * field, and every field below is a real read.
+ * @typedef {object} LegitimacyBreakdownView
+ * @property {unknown} [prosperity]
+ * @property {unknown} [safety]
+ * @property {unknown} [defense]
+ * @property {unknown} [food]
+ */
+/**
+ * `publicLegitimacy` is canonically an object. It is ALSO legacy-numeric on old saves —
+ * governanceLedger.js:42 says so and carries the same caveat — and a number has no label,
+ * no breakdown and no flag, so this desk reads nothing from it and renders nothing. That
+ * is the honest outcome: a save that predates the record cannot be narrated by it.
+ * @typedef {object} PublicLegitimacyView
+ * @property {unknown} [score]
+ * @property {unknown} [label]
+ * @property {LegitimacyBreakdownView|null} [breakdown]
+ * @property {unknown} [governanceFractured]
+ */
+/**
+ * @typedef {object} PowerStructureView
+ * @property {PublicLegitimacyView|number|null} [publicLegitimacy]
+ * @property {unknown} [governingName]
+ */
+/**
+ * @typedef {object} PowerDeskSettlement
+ * @property {string} [name]
+ * @property {PowerStructureView|null} [powerStructure]
+ */
+
+/**
+ * THE SHAPES THIS DESK BELIEVES ITS SLOTS HAVE, mirroring §0c's Shape column.
+ *
+ * The ANNEX is the authority and this is a checked mirror, not a second home: the
+ * projection contract test asserts this map equals the register parsed out of the
+ * annexes, slot for slot, so a desk that drifts from the corpus reds rather than
+ * rendering. Both slots below are the ones DS-POW-1's variants actually name — 38 of its
+ * 41 variants name `{seat}` and all 41 name `{settlement}`.
+ * @type {Readonly<Record<string, string>>}
+ */
+export const SLOT_FILL_SHAPES = Object.freeze({
+  settlement: 'proper',
+  seat: 'proper',
+});
+
+/**
+ * Every LITERAL fill table this desk owns, by the slot it fills. THIS DESK OWNS NONE, and
+ * the empty object is the honest declaration rather than an omission: both its slots take
+ * a generated NAME, not a table-mapped enum. The guard walks this directory and refuses an
+ * exported string map that is not declared here, so declaring the emptiness is what keeps
+ * a future table from arriving unchecked.
+ * @type {Readonly<Record<string, Readonly<Record<string, string>>>>}
+ */
+export const SLOT_FILL_TABLES = Object.freeze({});
+
+/**
+ * A `proper` fill, or `undefined` — the desk's own half of the shape contract.
+ *
+ * The rules mirror `fillShapeViolation`'s PROPER branch in
+ * scripts/lib/dossier-slot-shapes.mjs: a name must be capitalised, and must not carry a
+ * gloss dash, a sentence break, a digit or a raw snake_case engine token. `governingName`
+ * is a generated faction name and conforms in every world measured, but it is also the
+ * field a future transfer-of-power path writes, so the refusal is kept rather than
+ * assumed away. Refusing yields SILENCE for the 38 variants that name `{seat}`, and the
+ * three that name only `{settlement}` still speak — the kernel's anchored liveness
+ * degrading a pool exactly as designed, instead of printing a token at a reader.
+ * @param {string} value
+ * @returns {string|undefined}
+ */
+function properFill(value) {
+  if (!value) return undefined;
+  if (/[—–]/.test(value)) return undefined;
+  if (/[.!?]\s|[.!?]$/.test(value)) return undefined;
+  if (/[0-9]/.test(value)) return undefined;
+  if (/[a-z]+_[a-z]+/.test(value)) return undefined;
+  return /^[A-Z]/.test(value) ? value : undefined;
+}
+
+/** @param {unknown} value @returns {string} */
+function text(value) {
+  return typeof value === 'string' ? value.trim() : '';
+}
+
+/**
+ * LENS A. The band ladder's pool key — the producer's own label, unmapped.
+ *
+ * There is deliberately NO translation table here. `legitimacyBandFor` in
+ * src/generators/factionDynamics.js emits exactly `Endorsed` · `Approved` · `Tolerated` ·
+ * `Contested` · `Legitimacy Crisis`, and DS-POW-1's five ladder pools are keyed by those
+ * same five strings byte for byte. A map would be a second spelling of an identity, and
+ * the identity is the thing worth asserting — so the desk test asserts the producer's
+ * vocabulary equals the corpus's rather than trusting a table to bridge them.
+ *
+ * An unrecognised label renders NOTHING rather than falling into a band: a spelling this
+ * desk does not know is a producer change, and guessing which band it meant is how a page
+ * states something false.
+ * @param {unknown} label
+ * @returns {string|null}
+ */
+export function legitimacyBandPoolKey(label) {
+  const key = text(label);
+  if (!key) return null;
+  return CORPUS['DS-POW-1'].pools[key] ? key : null;
+}
+
+/**
+ * The four contributions, in the corpus's own pool-key spelling. The keys are the
+ * `breakdown` record's field names and the values are the words the pool keys use, so the
+ * join is written once here instead of five times in a conditional chain.
+ * @type {Readonly<Record<string, string>>}
+ */
+const BREAKDOWN_WORD = Object.freeze({
+  prosperity: 'PROSPERITY',
+  safety: 'SAFETY',
+  defense: 'DEFENSE',
+  food: 'FOOD',
+});
+
+/** @param {unknown} value @returns {number} */
+function contribution(value) {
+  return typeof value === 'number' && Number.isFinite(value) ? value : 0;
+}
+
+/**
+ * LENS B and LENS C. The reading UNDERNEATH the ladder line, or null.
+ *
+ * LENS C first, and the docblock above says why at length: the fracture flag and the
+ * crisis band are coextensive at the producer, so preferring the breakdown here would
+ * make `governanceFractured true` unreachable in every world the generator can build.
+ *
+ * Then the dominant contribution, by absolute magnitude. Ties break in the declared order
+ * of BREAKDOWN_WORD (prosperity, safety, defense, food) — a stable order rather than
+ * whichever key an object literal happened to yield first, because a tie that resolved by
+ * iteration order would make the same state read differently after an unrelated edit.
+ *
+ * A dominant contribution of ZERO is no dominance at all: a town whose four contributions
+ * are all zero is the neutral middle, the ladder line already says so, and there is no
+ * second reading to add.
+ * @param {PublicLegitimacyView} legitimacy
+ * @returns {string|null}
+ */
+export function legitimacyLensPoolKey(legitimacy) {
+  if (legitimacy?.governanceFractured === true) return 'governanceFractured true';
+  const breakdown = legitimacy?.breakdown;
+  if (!breakdown) return null;
+  /** @type {{field: string, value: number}|null} */
+  let top = null;
+  for (const field of Object.keys(BREAKDOWN_WORD)) {
+    const value = contribution(breakdown[/** @type {keyof LegitimacyBreakdownView} */ (field)]);
+    if (top === null || Math.abs(value) > Math.abs(top.value)) top = { field, value };
+  }
+  if (top === null || top.value === 0) return null;
+  const word = BREAKDOWN_WORD[top.field];
+  if (top.value < 0) return `breakdown dominated by ${word}, adverse`;
+  // THE DELIBERATE SILENCE. Only prosperity has a favourable lens in the corpus, and
+  // safety, defense and food all reach positive contributions, so this branch is a state
+  // the generator really produces. Silence beats the prosperity line, which would be false.
+  return top.field === 'prosperity' ? `breakdown dominated by ${word}, favourable` : null;
+}
+
+/**
+ * THE DESK. Returns the two rungs the legitimacy banner draws, or null for each where the
+ * state does not support one.
+ *
+ * Both rungs are routed through ONE mount id by the caller, which is the C3 law held: the
+ * banner is one position, and flipping its registry row to `glance` silences both lines
+ * together rather than leaving half a reading on the page.
+ *
+ * @param {PowerDeskSettlement|null|undefined} settlement
+ * @param {{seed?: string, audience?: string}} [options]
+ * @returns {Readonly<{legitimacyBanner: object|null, legitimacyLens: object|null}>}
+ */
+export function powerStateProse(settlement, options = {}) {
+  const power = settlement?.powerStructure || {};
+  // A legacy numeric `publicLegitimacy` carries no label, breakdown or flag. Reading it as
+  // an object would yield `undefined` at every field and silence at every pool, which is
+  // the right outcome; narrowing to it explicitly is what makes that outcome deliberate.
+  const legitimacy = typeof power.publicLegitimacy === 'object' && power.publicLegitimacy !== null
+    ? power.publicLegitimacy
+    : /** @type {PublicLegitimacyView} */ ({});
+
+  const slots = {
+    settlement: properFill(text(settlement?.name)),
+    // The canonical "who governs" name, never a hand-rolled second spelling of it.
+    seat: properFill(text(power.governingName)),
+  };
+
+  /** @param {string|null} poolKey */
+  const line = (poolKey) => (poolKey
+    ? readStateProse(CORPUS, 'DS-POW-1', poolKey, { ...options, slots })
+    : null);
+
+  const bandKey = legitimacyBandPoolKey(legitimacy.label);
+  const lensKey = legitimacyLensPoolKey(legitimacy);
+  const glance = text(legitimacy.label);
+
+  return Object.freeze({
+    legitimacyBanner: bandKey ? legibilityRung(glance, line(bandKey), []) : null,
+    // The lens rung carries no glance of its own: the band word is already on the banner
+    // an inch above it, and a second copy of one word is the page repeating itself.
+    legitimacyLens: lensKey ? legibilityRung('', line(lensKey), []) : null,
+  });
+}

@@ -98,11 +98,25 @@ export const MOUNT_RUNGS = Object.freeze({
  * first day. Every desk car adds its rows and strikes the same blocks from
  * UNMOUNTED_BLOCKS in the SAME commit, and the walker holds both halves to each other.
  *
- * ── DESK CAR 1: THE ECONOMY DESK, THE FIVE POSITIONS BELOW ───────────────────────────
- * `economyStateProse.js` is the only desk that exists, so these four blocks are the only
- * four the tree can honestly route today. The other 64 are not parked by preference: a
- * mount needs a desk to turn live state into a pool key, and five of the six desks are
- * unwritten. A row without one would name a position no component could draw.
+ * ── DESK CAR 1: THE ECONOMY DESK, THE FIRST FIVE POSITIONS BELOW ─────────────────────
+ * `economyStateProse.js` was the only desk that existed when this table was born, so its
+ * four blocks were the only four the tree could honestly route. A mount needs a desk to
+ * turn live state into a pool key, and a row without one would name a position no
+ * component could draw.
+ *
+ * ── DESK CAR 2: THE POWER DESK, THE SIXTH POSITION ───────────────────────────────────
+ * `powerStateProse.js` adds `power.legitimacyBanner` and takes DS-POW-1 out of the dark
+ * list in the same commit. Four of the six desks remain unwritten and 63 blocks remain
+ * dark; the count below is the authority on that number, not this comment.
+ *
+ * ⚠ THAT ONE ROW READS TWO POOLS OF ITS BLOCK, and it is the C3 law rather than an
+ * exception to it. DS-POW-1's eleven pools are three LENSES over one legitimacy record —
+ * the band ladder, the breakdown dominance, and the fracture flag — and the banner draws
+ * the ladder line with one of the other two underneath it, at one position, at one depth.
+ * The law is one SENTENCE RUNG per block per page-set and is spelled that way on purpose;
+ * DS-GEN-6's tier overlay below is the same shape. `powerStateProse.js` carries the
+ * measurement showing why the lens ordering is load-bearing: reversed, it would make one
+ * of the eleven pools unreachable in every world the generator can build.
  *
  * WHY ONLY TWO OF THE FIVE SPEAK. R-DST-A — a composed page draws at most one of the
  * SURFACE/LADDER pair and never both about the same fact:
@@ -133,6 +147,9 @@ export const DOSSIER_MOUNTS = Object.freeze([
   Object.freeze({
     mount: 'economics.foodSecurity', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-9', rung: 'sentence',
   }),
+  Object.freeze({
+    mount: 'power.legitimacyBanner', tab: 'power', desk: 'power', blockId: 'DS-POW-1', rung: 'sentence',
+  }),
 ]);
 
 /**
@@ -161,7 +178,7 @@ export const UNMOUNTED_BLOCKS = Object.freeze([
   'DS-GEN-10', 'DS-HK-1', 'DS-GEN-11', 'DS-GEN-12',
   'DS-GEN-13', 'DS-GEN-14', 'DS-POP-3', 'DS-GEN-15',
   'DS-GEN-16', 'DS-GEN-17', 'DS-GEN-18',
-  'DS-POW-1', 'DS-POW-2', 'DS-POW-3', 'DS-POW-4',
+  'DS-POW-2', 'DS-POW-3', 'DS-POW-4',
   'DS-POW-5', 'DS-POW-6', 'DS-POW-7',
   'DS-STR-1', 'DS-STR-2', 'DS-CND-1',
   'DS-WAR-1', 'DS-WAR-2', 'DS-WAR-3', 'DS-WAR-4',

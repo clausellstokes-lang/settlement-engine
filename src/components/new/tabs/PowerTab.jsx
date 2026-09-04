@@ -8,6 +8,15 @@ import { factionIdFromName } from '../../../lib/entities.js';
 import { hasLadder, ladderRungsOf, ladderInstabilityOf, ladderFactionKeyOf } from '../../../domain/townMap/ladderRead.js';
 import { PowerStrata } from './power/PowerStrata.jsx';
 import { rulingChainOf } from '../../../domain/dossier/powerStrata.js';
+import { powerStateProse } from '../../../domain/display/stateProse/powerStateProse.js';
+import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
+
+/**
+ * The legitimacy banner's mount id, bound once. It is used at TWO draws below and the
+ * reachability arm counts string LITERALS under src/components, so the literal lives here
+ * and the position stays one position — which is what the C3 law is actually about.
+ */
+const LEGITIMACY_MOUNT = 'power.legitimacyBanner';
 
 /** §815 — one row of the ruling chain: a small uppercase link label + the answer. */
 function ChainRow({ label, children }) {
@@ -73,7 +82,7 @@ function RulingChainBlock({ settlement }) {
   );
 }
 
-export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
+export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, publicDossier = false }) {
   const [expandedFaction, setExpandedFaction] = useState(null);
 
   // Dossier hyperlink focus. When a link navigates to a faction (e.g. from an
@@ -122,6 +131,21 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
     capture:     { color:'#4a1a4a', bg:'#fdf0fc', label:'Criminal: Governance Captured' },
   };
   const captureStyle = CAPTURE[crimCapture] || CAPTURE.none;
+
+  // THE POWER DESK, read ONCE per render and routed by the mount registry. The seed is the
+  // settlement's own stable identity, so THE PROMISE holds: same seed + same state ⇒ same
+  // sentence, forever. THE PUBLIC GATE (§885.3, the carve-out the economy desk already
+  // holds): a public gallery dossier is a PAID SURFACE, and the `power` tab is NOT filtered
+  // off one — only dm_notes/ai_notes are — so without this line the corpus would light on a
+  // free/anon visitor's view. The desk is not drawn there and both rungs are null ⇒
+  // drawnAtMount answers null at the mount ⇒ no corpus sentence renders. The DATUM is
+  // untouched either way: the score, the label, the breakdown chips and the fracture note
+  // never read the desk.
+  const deskProse = publicDossier
+    ? Object.freeze({ legitimacyBanner: null, legitimacyLens: null })
+    : powerStateProse(s, { seed: String(s?._seed ?? s?.id ?? '') });
+  const drawnBanner = drawnAtMount(LEGITIMACY_MOUNT, deskProse.legitimacyBanner);
+  const drawnLens   = drawnAtMount(LEGITIMACY_MOUNT, deskProse.legitimacyLens);
 
   return (
     <div style={{paddingBottom:16}}>
@@ -175,6 +199,21 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
             </div>
 
           </div>
+          {/* THE CORPUS READING. The ladder line, then the lens line underneath it — two
+              pools of DS-POW-1 at ONE position, which is the C3 law rather than an
+              exception to it (see dossierMounts.js). Both are routed through the same
+              mount, so flipping that row to `glance` silences the pair together instead
+              of leaving half a reading on the page. Neither displaces a datum above. */}
+          {(drawnBanner?.sentence || drawnLens?.sentence) && (
+            <div style={{marginTop:10,borderTop:`1px solid ${leg.color}30`,paddingTop:8}}>
+              {drawnBanner?.sentence && (
+                <p style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.65,margin:0,fontStyle:'italic'}}>{drawnBanner.sentence}</p>
+              )}
+              {drawnLens?.sentence && (
+                <p style={{fontSize:FS.sm,color:swatch.inkMag3,lineHeight:1.6,margin:'6px 0 0',fontStyle:'italic'}}>{drawnLens.sentence}</p>
+              )}
+            </div>
+          )}
         </div>
       )}
 
