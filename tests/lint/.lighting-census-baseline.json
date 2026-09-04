@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "3d3ad217b5ff37a563fb80076c84e034a2d3907c",
-  "measuredBy": "Opus 5 — chair, §891 train",
-  "date": "2026-09-03",
-  "note": "Five lanes batched: CAPACITY C1/C2/C3, the now-null root fix, DESK CAR 1 + correction, CHARSET Car 1, READERREVIEW Car 2 + three cures. Five new test files.",
+  "measuredAtSha": "450f7dbb7a3ccaf3f71da24ff8f0b7b54b65f669",
+  "measuredBy": "Opus 5 chair (session d5b9a39f), §891 landing",
+  "date": "2026-09-04",
+  "note": "the O2GATE car adds one describe and three tests to tests/ui/economicsTabFlow.test.js; predicted titles 22919->22922 and suiteTitles 6152->6153 in writing before this run",
   "files": 2515,
   "parked": 371,
   "credited": 2144,
-  "titles": 22919,
-  "suiteTitles": 6152
+  "titles": 22922,
+  "suiteTitles": 6153
 }
