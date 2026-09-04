@@ -1,6 +1,6 @@
 {
   "_doc": "PER-TEST failure census for the source phase (all tests except tests/build/**). SHRINK-ONLY. A failing test ABSENT from `entries` is a REGRESSION and reds the gate. Every entry MUST carry a full attribution — subsystem, cause, introducedAt, class — or tests/lint/testRatchet.test.js refuses it. Every entry MUST also carry a `magnitude` array: a banked row freezes its EXISTENCE, and the magnitude is what freezes its SIZE, so the population behind a permitted red cannot grow invisibly (ODQ 854, TE-RATCHET-MAG). `--update` can only REMOVE entries and LOWER magnitude ceilings; adding one is a deliberate, attributed hand edit. See scripts/check-test-ratchet.mjs.",
-  "measuredAtSha": "62afd84d30d63e6440545570aafcebd37bec0172",
+  "measuredAtSha": "ea0d671024ae7bc457f6444749a69d958a5fa2aa",
   "totalTests": 31223,
   "totalFiles": 2462,
   "skippedCeiling": 1,
@@ -49,7 +49,7 @@
           "name": "total",
           "kind": "capture",
           "pattern": "expected (\\d+) to be less than or equal to 6$",
-          "ceiling": 40,
+          "ceiling": 37,
           "unit": "total JSX em dashes against the hardcoded budget of 6"
         }
       ]
@@ -137,74 +137,6 @@
           "ceiling": 78,
           "unit": "files defining a local clamp/clamp01 against a frozen baseline of 62",
           "attribution": "RAISED 76 to 78 at the INSTRUMENTS consist landing, 2026-09-01, by lane INSTR-land. THIS BANKS MEASURED DEBT, NOT MOVEMENT. The decisive control: the measure is IDENTICAL at the landing BASE 8b07ce45f and at the landing TIP - base=78 tip=78, computed by running the gate s own magnitudeReportOf and identityOf over the base s report and the tip s. ATTRIBUTION: the SUBSTRATE landing s two clamp01 definitions, in src/domain/npc/characterConsumers.js and src/domain/npc/knownCharacter.js - pre-attributed EXACTLY (+2 / -0) by the pre-board s closed-era table before the dock existed, and named in the 16-file diff. Ruled work sealed on-branch. RMAG froze the old ceiling at its own base 689bf2cc6, before this population was ever measured, and the magnitude machinery ARMS for the first time at this landing - the base baseline carries magnitude blocks on 0 of 10 rows and RMAG s on 10 of 10 - so this is a FIRST TRUE MEASUREMENT, never a growth bank. A ceiling is raised only by a deliberate attributed hand edit: --update can only LOWER, and it HOLDS a breach rather than raising it."
-        }
-      ]
-    },
-    "tests/lint/warCostKindPools.walker.test.js :: SP-6 phrased-kind registry — WR-4 war costs 'trajectory_misread' retains the five receipt-annex families verbatim": {
-      "file": "tests/lint/warCostKindPools.walker.test.js",
-      "test": "SP-6 phrased-kind registry — WR-4 war costs 'trajectory_misread' retains the five receipt-annex families verbatim",
-      "subsystem": "war / SP-6 phrased-kind registry (war costs)",
-      "cause": "The receipt-annex family sets for 'war_trajectory_winning', 'war_trajectory_losing' and 'trajectory_misread' no longer retain exactly the five annex families verbatim (measured 6, 6 and 10). Extra families were minted into the war-cost pools without amending the registry pin.",
-      "introducedAt": "unbisectable: pool families were added across several WR-4/SP-6 waves. Burn-down lane must reconcile the registry against the pools.",
-      "class": "debt",
-      "magnitude": [
-        {
-          "name": "population",
-          "kind": "capture",
-          "pattern": "expected \\[ …\\(5\\) \\] to deeply equal \\[ …\\((\\d+)\\) \\]",
-          "ceiling": 10,
-          "unit": "receipt-annex families on this kind against the wired five"
-        }
-      ]
-    },
-    "tests/lint/warCostKindPools.walker.test.js :: SP-6 phrased-kind registry — WR-4 war costs 'war_trajectory_losing' retains the five receipt-annex families verbatim": {
-      "file": "tests/lint/warCostKindPools.walker.test.js",
-      "test": "SP-6 phrased-kind registry — WR-4 war costs 'war_trajectory_losing' retains the five receipt-annex families verbatim",
-      "subsystem": "war / SP-6 phrased-kind registry (war costs)",
-      "cause": "The receipt-annex family sets for 'war_trajectory_winning', 'war_trajectory_losing' and 'trajectory_misread' no longer retain exactly the five annex families verbatim (measured 6, 6 and 10). Extra families were minted into the war-cost pools without amending the registry pin.",
-      "introducedAt": "unbisectable: pool families were added across several WR-4/SP-6 waves. Burn-down lane must reconcile the registry against the pools.",
-      "class": "debt",
-      "magnitude": [
-        {
-          "name": "population",
-          "kind": "capture",
-          "pattern": "expected \\[ …\\(5\\) \\] to deeply equal \\[ …\\((\\d+)\\) \\]",
-          "ceiling": 6,
-          "unit": "receipt-annex families on this kind against the wired five"
-        }
-      ]
-    },
-    "tests/lint/warCostKindPools.walker.test.js :: SP-6 phrased-kind registry — WR-4 war costs 'war_trajectory_winning' retains the five receipt-annex families verbatim": {
-      "file": "tests/lint/warCostKindPools.walker.test.js",
-      "test": "SP-6 phrased-kind registry — WR-4 war costs 'war_trajectory_winning' retains the five receipt-annex families verbatim",
-      "subsystem": "war / SP-6 phrased-kind registry (war costs)",
-      "cause": "The receipt-annex family sets for 'war_trajectory_winning', 'war_trajectory_losing' and 'trajectory_misread' no longer retain exactly the five annex families verbatim (measured 6, 6 and 10). Extra families were minted into the war-cost pools without amending the registry pin.",
-      "introducedAt": "unbisectable: pool families were added across several WR-4/SP-6 waves. Burn-down lane must reconcile the registry against the pools.",
-      "class": "debt",
-      "magnitude": [
-        {
-          "name": "population",
-          "kind": "capture",
-          "pattern": "expected \\[ …\\(5\\) \\] to deeply equal \\[ …\\((\\d+)\\) \\]",
-          "ceiling": 6,
-          "unit": "receipt-annex families on this kind against the wired five"
-        }
-      ]
-    },
-    "tests/lint/warRulingKindPools.walker.test.js :: SP-6 phrased-kind registry — WR-5 war rulings 'succession_demand_inherited' retains the five annex families without editorial cross-references": {
-      "file": "tests/lint/warRulingKindPools.walker.test.js",
-      "test": "SP-6 phrased-kind registry — WR-5 war rulings 'succession_demand_inherited' retains the five annex families without editorial cross-references",
-      "subsystem": "war / SP-6 phrased-kind registry (war rulings)",
-      "cause": "'succession_demand_inherited' no longer retains the five annex families without editorial cross-references (measured 6).",
-      "introducedAt": "unbisectable: same SP-6 registry drift as warCostKindPools. Burn-down lane must reconcile the registry against the pools.",
-      "class": "debt",
-      "magnitude": [
-        {
-          "name": "population",
-          "kind": "capture",
-          "pattern": "expected \\[ …\\(5\\) \\] to deeply equal \\[ …\\((\\d+)\\) \\]",
-          "ceiling": 6,
-          "unit": "annex families on this kind against the wired five"
         }
       ]
     }
