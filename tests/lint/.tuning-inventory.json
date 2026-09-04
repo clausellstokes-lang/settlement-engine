@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "4ad2b5694ca014e006f90fbd6f7198ba074e2ac8",
-  "measuredBy": "Opus 5 chair, §893.2",
+  "measuredAtSha": "536d2e1dc2f44566c425c2bed798d697b2c72a68",
+  "measuredBy": "Opus 5 chair — DESK consist landing",
   "date": "2026-09-04",
-  "note": "ENC-3's chance-meeting stage lands: CHANCE_MEETING_STAGE_TUNING is measured in for the first time, and twelve existing tables' dependent counts move because the new stage imports them. No tuning VALUE changed and none is signed; the new register row is DRAFT.",
+  "note": "six power/stressors prose dials registered as scalar-roster homes (zero src change), and QUADRANT_TUNING gained the PowerTab.jsx dependent from a consist car — the exactness arm was already red before the register edit",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -724,6 +724,90 @@
         "src/generators/density/successionGrammar.js"
       ]
     },
+    "src/domain/display/stateProse/powerStateProse.js#NARROW_MARGIN": {
+      "exported": false,
+      "idiom": "literal",
+      "keys": 1,
+      "line": 362,
+      "spanDigest": "861a71e24fdda07cea9d8f740fbe51ca1685d27dfd0a9f822f579ea609747fe2",
+      "leaves": {
+        "value": 0.15
+      },
+      "dependents": [
+        "src/components/new/tabs/PowerTab.jsx"
+      ],
+      "namedDependents": []
+    },
+    "src/domain/display/stateProse/powerStateProse.js#SHALLOW_RUNGS_BELOW": {
+      "exported": false,
+      "idiom": "literal",
+      "keys": 1,
+      "line": 578,
+      "spanDigest": "d8c363dde6af24802c24ec308fde1963fd20f88ef9f80765dbeb6bd7c6899e55",
+      "leaves": {
+        "value": 3
+      },
+      "dependents": [
+        "src/components/new/tabs/PowerTab.jsx"
+      ],
+      "namedDependents": []
+    },
+    "src/domain/display/stateProse/powerStateProse.js#HIGH_INSTABILITY_FROM": {
+      "exported": false,
+      "idiom": "literal",
+      "keys": 1,
+      "line": 580,
+      "spanDigest": "61090f7451b7f2aadae1709fa76edc9f360ae61664c9f8fd48b677a1e8ecfa07",
+      "leaves": {
+        "value": 0.35
+      },
+      "dependents": [
+        "src/components/new/tabs/PowerTab.jsx"
+      ],
+      "namedDependents": []
+    },
+    "src/domain/display/stateProse/powerStateProse.js#CROWDED_TOP_GAP": {
+      "exported": false,
+      "idiom": "literal",
+      "keys": 1,
+      "line": 582,
+      "spanDigest": "0b8b01d51be797cd0143574956002d9faabb6345790cafa0a91e78f63118f528",
+      "leaves": {
+        "value": 0.08
+      },
+      "dependents": [
+        "src/components/new/tabs/PowerTab.jsx"
+      ],
+      "namedDependents": []
+    },
+    "src/domain/display/stateProse/powerStateProse.js#SETTLED_MIN_GAP": {
+      "exported": false,
+      "idiom": "literal",
+      "keys": 1,
+      "line": 584,
+      "spanDigest": "013116d8a083862271257454b6e161900d075e0a05df61a52dfd7e61938389e3",
+      "leaves": {
+        "value": 0.15
+      },
+      "dependents": [
+        "src/components/new/tabs/PowerTab.jsx"
+      ],
+      "namedDependents": []
+    },
+    "src/domain/display/stateProse/stressorsStateProse.js#WIND_DOWN_FRACTION": {
+      "exported": false,
+      "idiom": "literal",
+      "keys": 1,
+      "line": 258,
+      "spanDigest": "7ba947e7a8eeeeaf7c1099788047bdabcfe31b570173434bd82b0f9d83263184",
+      "leaves": {
+        "value": 0.25
+      },
+      "dependents": [
+        "src/components/new/tabs/OverviewTab.jsx"
+      ],
+      "namedDependents": []
+    },
     "src/domain/dossier/hookRetention.js#DEFAULT_RETENTION_TUNING": {
       "exported": true,
       "idiom": "literal",
@@ -1156,6 +1240,7 @@
         "NATURAL_ENEMY.gate": 0.55
       },
       "dependents": [
+        "src/components/new/tabs/PowerTab.jsx",
         "src/domain/interior/interiorTemplates.js",
         "src/domain/npc/npcBank.js",
         "src/domain/spatial/navalLayer.js",
@@ -7817,11 +7902,11 @@
   },
   "unclosed": [],
   "totals": {
-    "tables": 226,
-    "keys": 2102,
+    "tables": 232,
+    "keys": 2108,
     "unregisteredNamed": 535,
     "bareDecimals": 6985,
     "zeroDependentTables": 8,
-    "zeroNamedDependentTables": 140
+    "zeroNamedDependentTables": 146
   }
 }
