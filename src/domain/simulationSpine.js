@@ -627,18 +627,45 @@ function tensionName(tension) {
 }
 
 /**
- * The stability trajectory, as an ORDERED ladder. Order is load-bearing:
- * 'unstable' CONTAINS 'stable', so the test rung must be read before the
- * continuity rung or every unstable settlement reports continuity. Spelled once
- * here rather than twice in two files, which is how the ordering stayed correct
- * in both copies only by luck.
+ * The stability trajectory, as CLOSED TOKEN SETS matched against the label's
+ * FIRST WORD.
+ *
+ * ⛔ IT WAS A SUBSTRING TEST, AND THE SUBSTRING WAS A FALSE-STATEMENT BUG.
+ * `governanceNarrative.js` emits `Fractured - no stable governing authority`.
+ * A substring test for `stable` MATCHES IT, so this deriver reported the
+ * trajectory `continuity` for a settlement that has NO GOVERNING AUTHORITY AT
+ * ALL — the reader saying the opposite of the truth, and every consumer of it
+ * repeating that. Ordering could not save it: the ordered ladder was written to
+ * stop 'unstable' being eaten by 'stable' and it did that correctly, but no
+ * ordering makes a substring stop matching inside a NEGATION.
+ *
+ * The producer's labels all LEAD with their classifier word (Stable, Unstable,
+ * Volatile, Critical, Desperate, Fractured, Shaken, Tense, Anxious, Suppressed,
+ * Ordered, Rigid, Fragile, Strained, Vulnerable, and the play-time Unsettled,
+ * Subjugated, Transitional). So the first word IS the classification, reading it
+ * cannot be fooled by a negation or by a token buried in a gloss, and a word
+ * outside these sets is honestly UNCLASSIFIED rather than forced into a rung.
+ *
+ * ORDER IS NO LONGER LOAD-BEARING — a first word matches at most one set, so
+ * 'unstable' can never be taken for 'stable'. The order is kept for reading
+ * only, and the test pins the property rather than the sequence.
+ *
+ * MEASURED SHIFT of this repair, over all 25 labels the tree can emit (20 birth
+ * + 5 play-time): exactly ONE changes — `Fractured - no stable governing
+ * authority`, continuity -> unclassified. Every other label is byte-identical.
+ * Each pattern is ANCHORED and is tested against the extracted first word alone,
+ * never against the label — the anchors are what make it a word match rather than
+ * a substring, and they keep this table the same shape it has always been.
  * @type {ReadonlyArray<[LikelyFutureArc, RegExp]>}
  */
 const STABILITY_ARC = Object.freeze([
-  ['crisis',     /critical|desperate|siege/],
-  ['test',       /unstable|volatile/],
-  ['continuity', /stable/],
+  ['crisis',     /^(?:critical|desperate|siege)$/],
+  ['test',       /^(?:unstable|volatile)$/],
+  ['continuity', /^stable$/],
 ]);
+
+/** @param {string} label @returns {string} the first run of letters, lowercased */
+const classifierWord = (label) => (label.toLowerCase().match(/[a-z]+/) || [''])[0];
 
 /**
  * @typedef {'crisis'|'test'|'continuity'} LikelyFutureArc
@@ -676,8 +703,8 @@ export function likelyFutureFacts(settlement) {
 
   const stability = firstText(s.powerStructure?.stability);
   if (stability) {
-    const normalized = stability.toLowerCase();
-    const matched = STABILITY_ARC.find(([, pattern]) => pattern.test(normalized));
+    const word = classifierWord(stability);
+    const matched = STABILITY_ARC.find(([, pattern]) => pattern.test(word));
     if (matched) return { arm: 'stability', tensions: [], arc: matched[0] };
   }
 

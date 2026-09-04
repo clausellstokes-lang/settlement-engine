@@ -152,22 +152,10 @@ export function criminalOpNote(name) {
   return 'Criminal infrastructure with local territorial or economic influence.';
 }
 
-/**
- * Per-criminal-operation economic role (Economics-tab voice). Short label.
- *
- * @param {string | null | undefined} name
- * @returns {string}
- */
-export function criminalOpEcon(name) {
-  const n = String(name || '').toLowerCase();
-  if (n.includes('black market'))   return 'parallel marketplace';
-  if (n.includes('smuggling'))      return 'duty evasion';
-  if (n.includes('gambling'))       return 'unlicensed revenue';
-  if (n.includes('front business')) return 'money laundering';
-  if (n.includes('fence'))          return 'stolen goods market';
-  if (n.includes('thieves'))        return 'protection + extraction';
-  return 'criminal revenue stream';
-}
+// `criminalOpEcon` LIVED HERE and was a passenger: this module never called it, while the
+// economics tab imported it and nothing else from here — dragging 19.6 KB plus
+// threatAssessment into that chunk for an eight-line string map. It is a CLASSIFIER, not a
+// display concern, and now lives in `domain/criminalOpRole.js` as a pure leaf.
 
 const CRIM_STRUCTURE_DATA = Object.freeze({
   organized: {

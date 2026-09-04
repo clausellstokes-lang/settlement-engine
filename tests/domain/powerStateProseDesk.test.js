@@ -407,13 +407,26 @@ describe('DS-POW-2 — the ladder is the producer\'s, and the substring bug stay
     expect(stabilityPoolKey('Stable')).toBe('stable matched');
   });
 
-  it('⚠ the CANONICAL reader carries that same substring defect — raised, not patched here', () => {
-    // This is a defect in a SHIPPED canonical reader (simulationSpine.likelyFutureFacts):
-    // it reports `continuity` for a settlement with no governing authority. Curing it
-    // changes narrative output on lit surfaces for existing worlds, so it is the chair's,
-    // not this desk's. Pinned so the day it IS cured, this arm reds and says so.
+  it('⭐ the CANONICAL reader is CURED: a negated token no longer forces a trajectory', () => {
+    // This arm previously pinned the DEFECT — likelyFutureFacts reported `continuity` for
+    // a settlement with no governing authority, because it substring-tested for `stable`
+    // and "no stable governing authority" contains it. The chair ruled it a repair (the
+    // world is unchanged; only what the reader SAYS about it was wrong), it was cured in
+    // simulationSpine.js by matching the label's first word against closed token sets, and
+    // this arm now pins the CURED behaviour so the defect cannot return.
     expect(likelyFutureFacts({ powerStructure: { stability: 'Fractured — no stable governing authority' } }).arc)
-      .toBe('continuity');
+      .toBeNull();
+    // The cure must not have broken the classifications that were already right — the
+    // ordered-ladder property the old comment protected still holds under first-word
+    // matching, and is pinned here as a PROPERTY rather than as a sequence.
+    const arcOf = (label) => likelyFutureFacts({ powerStructure: { stability: label } }).arc;
+    expect(arcOf('Stable')).toBe('continuity');
+    expect(arcOf('Unstable (pervasive organized crime)')).toBe('test');
+    expect(arcOf('Volatile — power is available to whoever moves first')).toBe('test');
+    expect(arcOf('Critical (active siege — survival priority)')).toBe('crisis');
+    expect(arcOf('Desperate — hunger is eroding order')).toBe('crisis');
+    // A monster-threat annotation appends a suffix and must not move the classification.
+    expect(arcOf('Unstable — criminal governance; monster threat active')).toBe('test');
   });
 
   it('the desk REFINES the canonical arc rather than forking it', () => {
@@ -429,9 +442,10 @@ describe('DS-POW-2 — the ladder is the producer\'s, and the substring bug stay
     for (const [label, key] of REAL_STABILITY) {
       const arc = likelyFutureFacts({ powerStructure: { stability: label } }).arc;
       if (!ARC_OF_POOL[key]) continue;
-      // The Fractured label is the ONE place the canonical reader is wrong; it is pinned
-      // above and excluded here rather than silently tolerated.
-      if (label.startsWith('Fractured')) continue;
+      // Fractured needed excluding while the canonical reader was WRONG about it. Since
+      // the cure it is honestly unclassified there and floor-matched here, so it no longer
+      // reaches this loop at all (ARC_OF_POOL has no entry for the floor) and needs no
+      // special case. The exclusion is deliberately GONE rather than left as dead cover.
       expect(arc, `${label} -> ${key}`).toBe(ARC_OF_POOL[key]);
     }
   });

@@ -9,7 +9,7 @@ import { useStore } from '../../../store/index.js';
 
 import {NarrativeNote} from '../NarrativeNote';
 import {SupplyChainsPanel} from '../SupplyChainsPanel';
-import { criminalOpEcon } from '../../../domain/display/defenseDisplay.js';
+import { criminalOpEcon } from '../../../domain/criminalOpRole.js';
 import { displayLabel, humanizeToken } from '../../../domain/display/humanizeEngineTokens.js';
 import { deriveFoodBalance, deriveGranaryOutlook, deriveTreasuryGlance } from '../../../domain/display/dossierViewModel.js';
 import { flowDerivedDependency } from '../../../domain/display/tradeFlowEconomics.js';

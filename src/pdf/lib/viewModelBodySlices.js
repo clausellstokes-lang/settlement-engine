@@ -13,7 +13,8 @@
  * ./viewModelPrimitives.js, which the head reads too; nothing here imports the
  * head, so there is no cycle.
  */
-import { criminalOpNote, criminalOpEcon, deriveCriminalStructure, deriveSupportingCapabilities,
+import { criminalOpEcon } from '../../domain/criminalOpRole.js';
+import { criminalOpNote, deriveCriminalStructure, deriveSupportingCapabilities,
   deriveDefenseReadiness, deriveArmedForces, deriveGuardAssessment,
   deriveDefenseVulnerabilities, DEFENSE_STRESS_STATUS } from '../../domain/display/defenseDisplay.js';
 import { deriveNotableAbsences } from '../../domain/display/servicesDisplay.js';
