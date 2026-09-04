@@ -777,15 +777,30 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
   // and reds as a regression — the law pinned in "A FAILING TEST ABSENT FROM THE CENSUS
   // IS A REGRESSION"). Measured at af8815e9: 6 of the 9 war-cost kinds PASS while these
   // 3 fail. That is ordinary banked debt and it is allowed to stay.
+  // ⭐⭐ 2026-09-04 (§893) — ALL FOUR ADMITTED ROWS ARE DISCHARGED, 4 → 0.
+  //
+  // Every one of the four gave the SAME reason for being admitted: the corpus had DEEPENED past
+  // the fixed-five assumption (1e8bf8a8) and the row stayed red under D-W3 Class B, which
+  // "needs a ruling (cap raised vs corpus trimmed), not a parser."
+  //
+  // ⭐ THAT RULING WAS MADE AND EXECUTED. CR-FP-7 countersigned the CAP-RAISE arm, and
+  // CENSUSWIRE (ea0d67102) wired all thirteen authored annex families byte-verbatim into
+  // WAR_RECEIPTS — five kinds landing exactly on their frequency floors. The four walker
+  // identities now PASS on their own merits, so their census rows retired at 4dea2dc20 and
+  // these ledger rows retire with them. Nothing was widened, excluded or trimmed.
+  //
+  // ⛔ THE DISCHARGE IS A RECORD, NOT A DELETION — the same discipline this file applies to the
+  // 2026-08-10 owner-gated retirement above. The object is empty because the debt is GONE, and
+  // ADMITTED_CEILING falls 4 → 0 so the emptiness is RATCHETED rather than merely current: a
+  // future row cannot slip back in under a ceiling nobody lowered.
+  //
+  // ⚠ ONE HONEST CONSEQUENCE, NAMED RATHER THAN HIDDEN: with the object empty, the
+  // "every ledger entry carries a REAL reason" arm below iterates nothing and is VACUOUSLY
+  // true for this ledger. That is inherent to an empty allowlist, not a defect introduced
+  // here — WALKER_ROWS_OWED still populates the same arm — but it is written down because an
+  // assertion that cannot fail is exactly the class §893 swept the corpus for.
   const WALKER_ROWS_ADMITTED = Object.freeze({
-    "tests/lint/warCostKindPools.walker.test.js :: SP-6 phrased-kind registry — WR-4 war costs 'war_trajectory_winning' retains the five receipt-annex families verbatim":
-      'PER-KIND IDENTITY, not an open population: test.each mints one test per kind, 6 of 9 war-cost kinds pass, and a NEW kind mints a NEW identity that reds. The corpus itself is chair-gated — tests/helpers/receiptAnnex.js records that the kinds DEEPENED past the fixed-five assumption (1e8bf8a8) stay red under D-W3 Class B, which needs a ruling (cap raised vs corpus trimmed), not a parser.',
-    "tests/lint/warCostKindPools.walker.test.js :: SP-6 phrased-kind registry — WR-4 war costs 'war_trajectory_losing' retains the five receipt-annex families verbatim":
-      'PER-KIND IDENTITY (see war_trajectory_winning). Annex deepened to 6 families against a wired 5; D-W3 Class B, chair-gated.',
-    "tests/lint/warCostKindPools.walker.test.js :: SP-6 phrased-kind registry — WR-4 war costs 'trajectory_misread' retains the five receipt-annex families verbatim":
-      'PER-KIND IDENTITY (see war_trajectory_winning). Annex deepened to 10 families against a wired 5; D-W3 Class B, chair-gated.',
-    "tests/lint/warRulingKindPools.walker.test.js :: SP-6 phrased-kind registry — WR-5 war rulings 'succession_demand_inherited' retains the five annex families without editorial cross-references":
-      'PER-KIND IDENTITY (see war_trajectory_winning). Annex deepened to 6 families against a wired 5; D-W3 Class B, chair-gated.',
+
   });
 
   // OWED — CONFIRMED disabled guards this lane did not free. Each is ONE assertion over
@@ -856,7 +871,7 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
   // LITERALS, not figures read out of the objects they are supposed to cap — a ceiling
   // derived from its own list proves list == list and rises silently with every entry.
   // MONOTONE DOWN from here. You may burn them; you may never pad them.
-  const ADMITTED_CEILING = 4;
+  const ADMITTED_CEILING = 0; // 4 → 0 at §893: the four admitted rows are discharged, not re-homed.
   // 11 → 9 on 2026-08-10: the two crisisTripleSync rows were FREED, not forgiven. Both were
   // mis-pointed source-address pins; re-pointing them at the live consumer
   // (settlementLifecycleHelpers.js / campaignRegionalSliceEntry.js) turned the walker green
