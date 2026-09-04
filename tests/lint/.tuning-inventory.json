@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "250d4e46407826778c3dc38331fa3aed9cc63a9b",
-  "measuredBy": "Opus 5 — chair, §891 train",
-  "date": "2026-09-03",
-  "note": "CAPACITY C1 gives the demographic family its signed address: HERALD_TUNING gains five leaves and RESPONSE_TUNING gains demographicsHerald.js as a dependent. Enrolment only; nothing signed.",
+  "measuredAtSha": "4ad2b5694ca014e006f90fbd6f7198ba074e2ac8",
+  "measuredBy": "Opus 5 chair, §893.2",
+  "date": "2026-09-04",
+  "note": "ENC-3's chance-meeting stage lands: CHANCE_MEETING_STAGE_TUNING is measured in for the first time, and twelve existing tables' dependent counts move because the new stage imports them. No tuning VALUE changed and none is signed; the new register row is DRAFT.",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -169,6 +169,7 @@
         "src/domain/worldPulse/clergyTraitPlane.js",
         "src/domain/worldPulse/corruptionImpair.js",
         "src/domain/worldPulse/corruptionWeb.js",
+        "src/domain/worldPulse/envoyChanceMeetingStage.js",
         "src/domain/worldPulse/espionage/espionageGauntlet.js",
         "src/domain/worldPulse/espionage/espionageMath.js",
         "src/domain/worldPulse/factionCapture.js",
@@ -210,6 +211,7 @@
         "src/domain/worldPulse/clergyTraitPlane.js",
         "src/domain/worldPulse/corruptionImpair.js",
         "src/domain/worldPulse/corruptionWeb.js",
+        "src/domain/worldPulse/envoyChanceMeetingStage.js",
         "src/domain/worldPulse/espionage/espionageGauntlet.js",
         "src/domain/worldPulse/espionage/espionageMath.js",
         "src/domain/worldPulse/factionCapture.js",
@@ -252,6 +254,7 @@
         "src/domain/worldPulse/clergyTraitPlane.js",
         "src/domain/worldPulse/corruptionImpair.js",
         "src/domain/worldPulse/corruptionWeb.js",
+        "src/domain/worldPulse/envoyChanceMeetingStage.js",
         "src/domain/worldPulse/espionage/espionageGauntlet.js",
         "src/domain/worldPulse/espionage/espionageMath.js",
         "src/domain/worldPulse/factionCapture.js",
@@ -301,6 +304,7 @@
         "src/domain/worldPulse/clergyTraitPlane.js",
         "src/domain/worldPulse/corruptionImpair.js",
         "src/domain/worldPulse/corruptionWeb.js",
+        "src/domain/worldPulse/envoyChanceMeetingStage.js",
         "src/domain/worldPulse/espionage/espionageGauntlet.js",
         "src/domain/worldPulse/espionage/espionageMath.js",
         "src/domain/worldPulse/factionCapture.js",
@@ -342,6 +346,7 @@
         "src/domain/worldPulse/clergyTraitPlane.js",
         "src/domain/worldPulse/corruptionImpair.js",
         "src/domain/worldPulse/corruptionWeb.js",
+        "src/domain/worldPulse/envoyChanceMeetingStage.js",
         "src/domain/worldPulse/espionage/espionageGauntlet.js",
         "src/domain/worldPulse/espionage/espionageMath.js",
         "src/domain/worldPulse/factionCapture.js",
@@ -382,6 +387,7 @@
         "src/domain/worldPulse/clergyTraitPlane.js",
         "src/domain/worldPulse/corruptionImpair.js",
         "src/domain/worldPulse/corruptionWeb.js",
+        "src/domain/worldPulse/envoyChanceMeetingStage.js",
         "src/domain/worldPulse/espionage/espionageGauntlet.js",
         "src/domain/worldPulse/espionage/espionageMath.js",
         "src/domain/worldPulse/factionCapture.js",
@@ -2516,6 +2522,7 @@
       "dependents": [
         "src/domain/worldPulse/causeLifecycle.js",
         "src/domain/worldPulse/causeVocabulary.js",
+        "src/domain/worldPulse/envoyChanceMeetingStage.js",
         "src/domain/worldPulse/npcLadderCoherence.js",
         "src/domain/worldPulse/religiousContest.js"
       ],
@@ -2800,6 +2807,7 @@
       "dependents": [
         "src/domain/worldPulse/causeLifecycle.js",
         "src/domain/worldPulse/convergence.js",
+        "src/domain/worldPulse/envoyChanceMeetingStage.js",
         "src/domain/worldPulse/espionage/espionageLeak.js",
         "src/domain/worldPulse/factionCapture.js",
         "src/domain/worldPulse/pulseKernel.js",
@@ -3417,7 +3425,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 26,
-      "line": 201,
+      "line": 204,
       "spanDigest": "68748daad82b632c5372660ef2a966fd760775a7fb60d223d5f654dbb21c0b19",
       "leaves": {
         "eighths": 8,
@@ -3461,7 +3469,27 @@
         "lessonCadenceTicks": 13,
         "leanTtlTicks": 52
       },
-      "dependents": [],
+      "dependents": [
+        "src/domain/worldPulse/envoyChanceMeetingStage.js"
+      ],
+      "namedDependents": [
+        "src/domain/worldPulse/envoyChanceMeetingStage.js"
+      ]
+    },
+    "src/domain/worldPulse/envoyChanceMeetingStage.js#CHANCE_MEETING_STAGE_TUNING": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 3,
+      "line": 135,
+      "spanDigest": "928801f499b35ea50668c8b4f40a2af6552b7cfe1408a6fe937bdaeb271bda89",
+      "leaves": {
+        "exposureGrievance": 0.25,
+        "exposureCovertMultiplier": 2,
+        "residentImportanceFloor": 0.4
+      },
+      "dependents": [
+        "src/domain/worldPulse/envoyPulse.js"
+      ],
       "namedDependents": []
     },
     "src/domain/worldPulse/espionage/espionageCareerCredit.js#CAREER_CREDIT_TUNING": {
@@ -3673,6 +3701,7 @@
         "LAPSE_LOOKBACK_TICKS": 26
       },
       "dependents": [
+        "src/domain/worldPulse/envoyChanceMeetingStage.js",
         "src/domain/worldPulse/espionage/espionageGauntlet.js"
       ],
       "namedDependents": []
@@ -5112,6 +5141,7 @@
       },
       "dependents": [
         "src/domain/npc/characterConsumers.js",
+        "src/domain/worldPulse/envoyChanceMeetingStage.js",
         "src/domain/worldPulse/espionage/espionageTap.js",
         "src/domain/worldPulse/npcLadderContest.js",
         "src/domain/worldPulse/npcLadderKernel.js"
@@ -5161,6 +5191,7 @@
         "src/domain/roads/thirdPartyRansom.js",
         "src/domain/worldPulse/assizeKernel.js",
         "src/domain/worldPulse/commonsVoiceKernel.js",
+        "src/domain/worldPulse/envoyChanceMeetingStage.js",
         "src/domain/worldPulse/factionDensityKernel.js",
         "src/domain/worldPulse/gratitudeBonds.js",
         "src/domain/worldPulse/npcLadderChallenge.js",
@@ -7786,11 +7817,11 @@
   },
   "unclosed": [],
   "totals": {
-    "tables": 225,
-    "keys": 2099,
+    "tables": 226,
+    "keys": 2102,
     "unregisteredNamed": 535,
     "bareDecimals": 6985,
-    "zeroDependentTables": 9,
+    "zeroDependentTables": 8,
     "zeroNamedDependentTables": 140
   }
 }
