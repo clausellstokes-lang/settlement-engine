@@ -8,7 +8,23 @@ program's decisions; SPEC fold labels §§277–§286 are design sections, not m
 The repo is authoritative; trust executed evidence over any summary including
 this one.**
 
-## ⭐⭐⭐⭐⭐ PICKUP AT §893 — ⚠⚠ **§891 IS LANDED AT 27 CARS, THE CARVE-OUT LINE HAS MOVED, AND FOUR OF THE CHAIR'S OWN RULINGS WERE OVERTURNED BY MEASUREMENT.** THE SEAT IS OPUS 5. READ THIS BLOCK, THEN `$SC/RULINGS-893*.md` (six files); it supersedes every card below.
+## ⭐⭐⭐⭐⭐ PICKUP AT §893.1 — ⚠⚠ **THE CENSUS IS 6, NOT 10, AND IT WAS NEVER FULL.** Product `6c49ecbbf`, 31 cars landed since `ca651d54b`. THE SEAT IS OPUS 5. Read this, then `$SC/RULINGS-893*.md` (eight files).
+
+⛔ **EVERYTHING of this session is sealed at `refs/preserve/session-kit-893-2026-09-04` and `…-893b-…` — the scratch dirs die with the account, and TWO artifacts (the lighting inventory, the 55,812 B W-ARMS volume) had no git home at all.**
+
+### ⭐⭐ THE PREMISE THAT COST THE MOST, CORRECTED
+**"The census is FULL at 10/10 with ZERO headroom" was FALSE.** The size cap is `CEILING = 17` (`tests/lint/testRatchet.test.js:268`, `<=`, green); the gate's printed `ceiling N` is just the entry count meaning *no new regressions*; `totalTests`/`totalFiles` are scope-COLLAPSE FLOORS. **A new test file does NOT breach the census.** It was in a dozen briefs, TWO lanes reported phantom blockers from it, and a chair ruling built on it is withdrawn. ⭐ **A premise repeated in every brief is the most expensive thing to get wrong: every lane inherits it and none re-derives it.**
+
+### ⛔ ONLY TWO THINGS ARE STILL GATED: every `git push`/deploy, and the owner's WALK
+The tuning SIGNATURE is DECLINED by the chair rather than gated. ⭐ **And the lesson that cost the most: reversibility answers MAY I, never SHOULD I** — pair every carve-out judgment with a measurement of the MERITS. A measuring lane before a ruling hardens into a car caught FOUR bad rulings; vigilance caught none.
+
+### THE ROAD FROM HERE
+**ENC-3** — its patch STILL APPLIES cleanly at the new tip (20 hunks, one benign comment-only collision) but carries three live bugs: a **rivalry is silently recorded as a friendship**, a per-subject season cap is a **world-wide lesson lockout** (`taughtRecently` never reads `nid`), and 10 em dashes breach the Tier-2 arm. Plan: `$SC/enc3check/`. Then **GOLDEN** (7/7 needed, landable, `$SC/goldenplan/`), the **CHARSET EMBED** (0 B first paint, cures 41/41 — NOT the cancelled 27-widening), **LIGHTING** (151 doors, 113 dark; ⚠ no bit-level witness), **DESK** (≈29 cars; `{complexity}` is a SHIPPING defect), **W-ARMS** (14 items, not 9) → ⛔ the WALK → the review → ⛔ FULL STOP.
+
+### ⛔ THE CHARACTERISTIC SHAPE OF THIS PROGRAMME'S DEBT — now at SIX instances
+**A ruling made, the content authored, and the WIRING STEP NEVER TAKEN.** `respect` → `BOND_KINDS`, `rivalry` → `GRUDGE_KINDS`, `errandSpineEnabled` → `PREVIEW_OVERLAY`, eight families → `WAR_RECEIPTS` (wired at §893.1), the W-ARMS charter never committed, and a chair charter that named a mechanism it had not measured. **Check for it explicitly in every lane brief.**
+
+## (superseded) PICKUP AT §893 — §891 landed at 27 cars; the §893.1 card above supersedes and carries the census fall.
 
 `$SC` = `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad` · `$SP` = `/private/tmp/.../58f0a8e2-.../scratchpad`. ⛔ **EVERYTHING of this session is sealed at `refs/preserve/session-kit-893-2026-09-04` (463 files)** — the scratch dirs die with the account, and the lighting inventory had no git home at all.
 

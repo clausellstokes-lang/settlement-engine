@@ -3436,3 +3436,57 @@ not 37 across 26). ⚠ **761,458 B of authored corpus is on disk and in NO build
 leaf chunk placement.
 **What Fable re-derives.** Every refuted figure, and whether the chair was right to re-scope from
 lane measurements rather than the standing docket. **Priority: MEDIUM-HIGH.**
+## §893.1 · THE CHRONIC-TIER WIRING AND THE CENSUS FALL 10 → 6 (2026-09-04, chair session d5b9a39f, SEAT: Opus 5 — Fable-unvalidated)
+⟦OPUS-AUTHORED — Fable retrovalidation OWED⟧
+
+### R15 THE OWNER'S OWN CORPUS WAS WIRED, A MONTH LATE
+**What was judged.** `1e8bf8a87` (the owner's 13-agent chronic-tier deepening, three adversarial
+verifiers) touched **nine `docs/` files and ZERO `src/`**. Thirteen annex families were authored and
+never wired; four walkers reported them missing; four census rows banked the absence as debt "awaiting
+a ruling (cap raised vs corpus trimmed)" — **a ruling CR-FP-7 had already made** by countersigning the
+cap-raise arm. Wired byte-verbatim at `ea0d67102`; rows retired at `4dea2dc20`; the four
+`WALKER_ROWS_ADMITTED` entries discharged at `647915fe9` with `ADMITTED_CEILING` ratcheted 4 → 0.
+**What Fable re-derives.** Whether the direction reading is right this time (src=5/annex=6, ACTUAL
+then EXPECTED), whether CR-FP-7 really settles cap-vs-trim, and whether the discharge should have been
+a deletion or the record it was written as. **Priority: HIGH.**
+
+### R16 ⛔ THE CHAIR PROPAGATED A WRONG FIGURE AND A LANE REFUSED IT BY EXECUTION
+The plan and the chair's own correction message both said `kindPoolFloors` goes **28 → 24**, four rows
+leaving. It is **28 → 23, five rows** — `war_culture_suppressed` is itself a `LEGACY_UNDER_FLOOR`
+member, so lighting it forces its own removal. The lane PROVED 24 fails (putting a row back reds 3 of
+12 arms; the other direction reds too) rather than accepting the chair's number. Verified by the chair:
+`expect(LEGACY_UNDER_FLOOR).toHaveLength(23)`.
+**What Fable re-derives.** ⭐ Whether the chair's briefs carry too many pre-computed figures. A lane
+that trusts a chair's number lands a red; this one did not, and the near-miss is the finding.
+**Priority: HIGH.**
+
+### R17 THE SEQUENCING ERROR, AND THE TWO INSTRUMENTS LEFT BETTER THAN FOUND
+The lane's receipt listed **four items owed to the chair's landing act**; the chair gated before taking
+them and the gate redded on the first (four stale `WALKER_ROWS_ADMITTED` ids). **The failure mode was
+not ignorance — it was running the expensive instrument before finishing the cheap list beside it.**
+⭐ **CURED AT CAUSE, TWICE.** (a) The census `cause` prose that stated the direction backwards — the
+sentence that produced the chair's own withdrawn ruling — **left the tree with the rows it annotated**
+(verified: zero occurrences remain). (b) `chair-verify-891.py` hardcoded `10 known, ceiling 10` from
+§891 and **FALSE-REDDED the very next consist**, plus demanded a same-consist measurement sha from
+three registers this consist never touched. Patched: the census figures are DERIVED, and a register is
+asked for a fresh sha **only when a diff proves the consist moved it**, with skips printed rather than
+silent. **A verifier that cries wolf teaches a chair to wave it through.**
+**What Fable re-derives.** Whether the verifier's new conditional is too permissive. **Priority: HIGH.**
+
+### R18 ⚠ ONE THIRD OF THE WIRED CONTENT IS DARK, AND IS COUNTED AS DARK
+Measured over 20,000 seeds per kind: `succession_demand_inherited` **83.4%** and
+`war_culture_suppressed` **87.5%** of same-seed picks change — a real, disclosed, one-time shift, no
+golden moved, none re-recorded. **But the three WR-4 war-cost kinds move 0.00%**: their new families
+name evidence `warCostsNews.js` does not carry, so the content is correct, wired, and **cannot reach a
+player**. ⭐ **WIRING IS NOT LIGHTING** — the "door lights into a void" shape one layer down. Docketed
+as its own row, NOT counted as delivered.
+**What Fable re-derives.** Whether a producer is owed, and whether the chair should have wired content
+it knew could not yet be read. **Priority: MEDIUM-HIGH.**
+
+### R19 TWO TITLES DE-NUMBERED; A THIRD LEFT ALONE ON PURPOSE
+Two test titles read "retains the FIVE …" over assertions demanding six and ten. **De-numbered, not
+re-numbered** — writing "six" buys one deepening and rearms the trap, the same fault as the capsule
+fixture that detonated with six units of headroom. Register-neutral, measured: `titles` is an integer
+COUNT. ⛔ `warCoalitionKindPools.walker.test.js:83` carries the same shape and is **currently TRUE**
+(39 passed); changing an accurate title is not a cure, so it is docketed as latent, not swept.
+**What Fable re-derives.** The scope boundary. **Priority: LOW-MEDIUM.**
