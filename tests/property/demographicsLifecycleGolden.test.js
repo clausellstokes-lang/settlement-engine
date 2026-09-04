@@ -17,7 +17,8 @@
  *   UPDATE_GOLDEN=1 npx vitest run tests/property/demographicsLifecycleGolden.test.js
  */
 import { createHash } from 'node:crypto';
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync } from 'node:fs';
+import { recordGolden } from '../helpers/goldenRecordDoor.js';
 import { dirname, resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 
@@ -189,7 +190,7 @@ describe('demographics + settlement lifecycle — the dedicated both-flags golde
     it('captures the new both-flags manifest', () => {
       const out = Object.fromEntries(SEEDS.map((seed) => [seed, goldenRow(seed)]));
       if (!existsSync(dirname(MANIFEST))) mkdirSync(dirname(MANIFEST), { recursive: true });
-      writeFileSync(MANIFEST, `${JSON.stringify(out, null, 2)}\n`);
+      recordGolden({ surface: 'demographics-lifecycle-golden', path: MANIFEST, produce: () => `${JSON.stringify(out, null, 2)}\n` });
       expect(Object.keys(out)).toEqual([...SEEDS]);
     }, 60_000);
     return;

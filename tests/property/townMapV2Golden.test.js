@@ -15,7 +15,8 @@
  */
 import { describe, expect, it } from 'vitest';
 import { createHash } from 'node:crypto';
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync } from 'node:fs';
+import { recordGolden } from '../helpers/goldenRecordDoor.js';
 import { dirname, resolve } from 'node:path';
 
 import { buildTownMapModel } from '../../src/domain/townMap/townMapModel.js';
@@ -67,7 +68,7 @@ describe('GOLDEN — town-map v2 model', () => {
     const record = { hash, ...meta };
     if (UPDATE) {
       mkdirSync(dirname(MANIFEST), { recursive: true });
-      writeFileSync(MANIFEST, JSON.stringify(record, Object.keys(record).sort(), 2) + '\n');
+      recordGolden({ surface: 'town-map-v2-golden', path: MANIFEST, produce: () => JSON.stringify(record, Object.keys(record).sort(), 2) + '\n' });
     }
     expect(
       existsSync(MANIFEST),

@@ -17,7 +17,8 @@
  */
 import { describe, it, expect } from 'vitest';
 import { createHash } from 'node:crypto';
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync } from 'node:fs';
+import { recordGolden } from '../helpers/goldenRecordDoor.js';
 import { dirname, resolve } from 'node:path';
 
 import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
@@ -120,7 +121,7 @@ describe('belief axes — dormancy golden (dark is byte-identical to pre-D-1)', 
       const out = {};
       for (const c of rows) out[keyOf(c)] = hashOf(projectionFor(c));
       if (!existsSync(dirname(MANIFEST))) mkdirSync(dirname(MANIFEST), { recursive: true });
-      writeFileSync(MANIFEST, JSON.stringify(out, Object.keys(out).sort(), 2) + '\n');
+      recordGolden({ surface: 'belief-axes-dormancy-golden', path: MANIFEST, produce: () => JSON.stringify(out, Object.keys(out).sort(), 2) + '\n' });
       expect(Object.keys(out).length).toBe(rows.length);
     });
     return;

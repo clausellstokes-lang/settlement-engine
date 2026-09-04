@@ -9,7 +9,8 @@
  */
 import { describe, expect, it } from 'vitest';
 import { createHash } from 'node:crypto';
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync } from 'node:fs';
+import { recordGolden } from '../helpers/goldenRecordDoor.js';
 import { dirname, resolve } from 'node:path';
 import { composeChroniclersLetter, letterToPlainText } from '../../src/domain/display/chroniclersLetter.js';
 
@@ -43,7 +44,7 @@ describe('GOLDEN — V-2 chronicler’s letter → bytes', () => {
     const record = { hash: hashOf({ letter, text }), sections: letter.sections.length, total: letter.counts.total, deepened: letter.deepened ? letter.deepened.flags.length : 0 };
     if (UPDATE) {
       mkdirSync(dirname(MANIFEST), { recursive: true });
-      writeFileSync(MANIFEST, JSON.stringify(record, null, 2) + '\n');
+      recordGolden({ surface: 'chroniclers-letter-golden', path: MANIFEST, produce: () => JSON.stringify(record, null, 2) + '\n' });
     }
     expect(
       existsSync(MANIFEST),
