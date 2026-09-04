@@ -50,6 +50,30 @@
  * one position at one depth; it is not one fact speaking twice. The law is one SENTENCE
  * RUNG per block per page-set, and it is spelled that way on purpose.
  *
+ * ── ⭐⭐ THE GENERAL TEST: A MEASUREMENT, OR A DEFAULT? ───────────────────────────────
+ *
+ * Every dead arm this subsystem has shipped was A DEFAULT WEARING A READING'S CLOTHES — a
+ * filter that dropped the field it filtered on, a cap that read no subject, a consumer
+ * reading keys no writer writes, four pools defaulting into an audience nobody stated. The
+ * test that separates them, and it is sharper than "prove aliveness":
+ *
+ *   DORMANT IS A TRUE STATEMENT, NOT A FALLBACK.
+ *   Ask whether the value a surface is about to print is a MEASUREMENT or a DEFAULT.
+ *
+ * Two rulings in this arc show the same shape resolving opposite ways, which is why the
+ * test is worth stating rather than the verdicts:
+ *   • `economicBase: mixed` — every key it derives from has NO WRITER, so
+ *     `normalizeEconomicBase` always failed soft to `mixed`. Printing it would hand a reader
+ *     a fail-soft default dressed as a reading. The lens was DROPPED and its pools declared
+ *     dark. (DESK CAR 8.)
+ *   • `layer DORMANT (no ledger materialized)` — the corpus WROTE a pool for the absent
+ *     politics layer, and its prose is accurate about an unorganised hall. That is a
+ *     measurement of an absence, not a guess at a presence. It was DRAWN. (DESK CAR 9.)
+ *
+ * The companion distinction, at the READ rather than the POOL: a mounted-but-unreachable
+ * pool is a FINDING (declare it, pin it, name the one act that lights it); a read of a key
+ * no writer produces is a DEFECT (remove it). They get different treatment.
+ *
  * ── THE DENOMINATOR ──────────────────────────────────────────────────────────────────
  * `UNMOUNTED_BLOCKS` is the dark half, written down. Before this file the corpus's
  * darkness was a silence; here it is a number a gate can see, and it is SHRINK-ONLY, so
@@ -175,6 +199,12 @@ export const DOSSIER_MOUNTS = Object.freeze([
   Object.freeze({
     mount: 'power.blocs', tab: 'power', desk: 'power', blockId: 'DS-POW-7', rung: 'sentence',
   }),
+  Object.freeze({
+    mount: 'overview.crisisBanners', tab: 'overview', desk: 'stressors', blockId: 'DS-STR-1', rung: 'sentence',
+  }),
+  Object.freeze({
+    mount: 'overview.activeConditions', tab: 'overview', desk: 'stressors', blockId: 'DS-CND-1', rung: 'sentence',
+  }),
 ]);
 
 /**
@@ -203,7 +233,7 @@ export const UNMOUNTED_BLOCKS = Object.freeze([
   'DS-GEN-10', 'DS-HK-1', 'DS-GEN-11', 'DS-GEN-12',
   'DS-GEN-13', 'DS-GEN-14', 'DS-POP-3', 'DS-GEN-15',
   'DS-GEN-16', 'DS-GEN-17', 'DS-GEN-18',
-  'DS-STR-1', 'DS-STR-2', 'DS-CND-1',
+  'DS-STR-2',
   'DS-WAR-1', 'DS-WAR-2', 'DS-WAR-3', 'DS-WAR-4',
   'DS-WAR-5', 'DS-FTH-1', 'DS-FTH-2', 'DS-FTH-3',
   'DS-FTH-4',

@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { stressorsStateProse, crisisBannerRung } from '../../../domain/display/stateProse/stressorsStateProse.js';
+import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
+import { deriveAllActiveConditions } from '../../../domain/activeConditions.js';
 import { FS, swatch, MUTED, GOLD_TINT, GOLD_DEEP, EMPTY_VALUE } from '../../theme.js';
 import { Ti, serif, Section } from '../Primitives';
 import { formatCount } from '../../../domain/formatNumber.js';
@@ -93,7 +96,15 @@ function StatusTag({ label, value, _color, accent }) {
   );
 }
 
-export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab}) {
+/**
+ * The two Overview positions the mount registry routes. Bound once each: the reachability
+ * arm counts string LITERALS under src/components, and the banner id is drawn once PER
+ * CRISIS inside the loop below — still one position on the page-set.
+ */
+const CRISIS_MOUNT = 'overview.crisisBanners';
+const CONDITIONS_MOUNT = 'overview.activeConditions';
+
+export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, publicDossier = false, playerView = false}) {
   const [instOpen, setInstOpen] = useState(false);
   const mobile = useIsMobile(); // hook must precede the early return (rules-of-hooks)
   if (!r) return null;
@@ -107,6 +118,36 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab}) {
   const hist = r.history || {};
   const ra = r.resourceAnalysis || {};
   const stresses = (Array.isArray(r.stress) ? r.stress : r.stress ? [r.stress] : []).filter(Boolean);
+  // THE STRESSOR DESK, read ONCE per render and routed by the mount registry. THE PUBLIC
+  // GATE (§885.3): a public gallery dossier is a PAID surface and the `overview` tab is not
+  // filtered off one, so the desk is NOT DRAWN there and every rung is null ⇒ drawnAtMount
+  // answers null at both mounts. The DATUM is untouched either way — the banner's label,
+  // summary and hook never read the desk. The audience follows kernel law 2's fail-closed
+  // default: an unstated audience reads as the player's, so it is stated.
+  const deskAudience = playerView ? 'player' : 'dm';
+  const deskSeed = String(r?._seed ?? r?.id ?? '');
+  const stressorProse = publicDossier
+    ? Object.freeze({
+      crisisArity: null, crisisFraming: null, conditionSeverity: null,
+      conditionDirection: null, conditionArchetype: null, conditionProvenance: null,
+      conditionDuration: null,
+    })
+    : stressorsStateProse(
+      r,
+      { banners: stresses, conditions: deriveAllActiveConditions(r) },
+      { seed: deskSeed, audience: deskAudience },
+    );
+  const crisisSectionLines = [
+    drawnAtMount(CRISIS_MOUNT, stressorProse.crisisFraming),
+    drawnAtMount(CRISIS_MOUNT, stressorProse.crisisArity),
+  ].map((d) => d?.sentence).filter(Boolean);
+  const conditionLines = [
+    drawnAtMount(CONDITIONS_MOUNT, stressorProse.conditionSeverity),
+    drawnAtMount(CONDITIONS_MOUNT, stressorProse.conditionDirection),
+    drawnAtMount(CONDITIONS_MOUNT, stressorProse.conditionArchetype),
+    drawnAtMount(CONDITIONS_MOUNT, stressorProse.conditionProvenance),
+    drawnAtMount(CONDITIONS_MOUNT, stressorProse.conditionDuration),
+  ].map((d) => d?.sentence).filter(Boolean);
 
   // Institution layout — guard `r.institutions` because sparse saves
   // (mid-migration, partial gen) can land here without an institutions
@@ -160,10 +201,41 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab}) {
               </div>
               <p style={{fontSize: FS['12.5'],color:swatch.inkMag,lineHeight:1.5,margin:'0 0 4px'}}>{v.summary}</p>
               <p style={{fontSize:FS.xs,color:swatch['#3A2A10'],fontStyle:'italic',margin:0}}><span style={{fontWeight:700,fontStyle:'normal',color:v.colour}}>Hook: </span>{v.crisisHook}</p>
+              {(() => {
+                // DS-STR-1, per banner. The desk keys on v.type — the stable machine
+                // identity — never on the label, because two of the fifteen labels differ
+                // from their pool key and a label route would darken them silently.
+                const drawn = publicDossier ? null : drawnAtMount(CRISIS_MOUNT, crisisBannerRung(
+                  r, v, { seed: `${deskSeed}::${v.type}`, audience: deskAudience },
+                ));
+                return drawn?.sentence ? (
+                  <p style={{fontSize: FS['12.5'],color:swatch.inkMag2,lineHeight:1.55,margin:'6px 0 0',fontStyle:'italic'}}>{drawn.sentence}</p>
+                ) : null;
+              })()}
             </div>
           </div>
         ))}
+        {crisisSectionLines.length>0&&(
+          <div style={{borderTop:'1px solid #e0c890',paddingTop:8}}>
+            {crisisSectionLines.map((line,i)=>(
+              <p key={i} style={{fontSize:i===0?FS.md:FS.sm,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.6,margin:i===0?0:'6px 0 0',fontStyle:'italic'}}>{line}</p>
+            ))}
+          </div>
+        )}
       </div>}
+
+      {/* ── ACTIVE CONDITIONS (DS-CND-1) ──────────────────────────────────
+          Five lenses over the settlement's first active condition: how bad, which
+          way it is moving, what kind it is, whether an event put it there, and
+          whether it is running out. Five pools of ONE block at ONE position. */}
+      {conditionLines.length>0&&(
+        <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #7a4a1a',padding:'10px 14px',marginBottom:14}}>
+          <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>What the town is living through</div>
+          {conditionLines.map((line,i)=>(
+            <p key={i} style={{fontSize:i===0?FS.md:FS.sm,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.6,margin:i===0?0:'6px 0 0',fontStyle:'italic'}}>{line}</p>
+          ))}
+        </div>
+      )}
 
       {/* ── SYSTEMS HEALTH DASHBOARD ─────────────────────────────────────── */}
       <Section title="Systems Health" collapsible defaultOpen accent="#3d2b1a">
