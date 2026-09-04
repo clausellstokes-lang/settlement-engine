@@ -292,22 +292,73 @@ describe('RECEIPTED REFUSALS — every closed door says which door it was', () =
     expect(reasons(out)).toEqual(['pulls_not_overridable']);
   });
 
-  test('ENC-2 THE THIRD ADMISSION ARM is INERT at this commit — no table row carries vectorSupplied', () => {
+  test('⭐ ENC-3 THE THIRD ADMISSION ARM IS LIVE — met_a_foreigner is its ONE carrier', () => {
     // §12 row 10. The funnel gained a third road into a supplied vector, for a kind whose
     // vector genuinely cannot be a constant: what a chance meeting teaches depends on WHO
     // was met, and only the adapter knows that. The AMBIENT road cannot carry such a kind —
     // an ambient entry divides its quantum by a season and a one-week meeting can never
     // cross that floor — which is why the arm exists rather than a reuse.
     //
-    // ⛔ THIS PIN IS THE BEHAVIOUR-NEUTRALITY CLAIM, MADE STRUCTURAL. While no row carries
-    // the field, the new condition can never change an outcome, and the test above proves
-    // every existing kind still refuses. It is EXPECTED to move when ENC-3 lands
-    // `met_a_foreigner` — that lane owns the positive arm (a supplied vector admitted at
-    // span 1), and this assertion is its reminder to write it.
+    // ⛔ THIS ASSERTION USED TO SAY THE ARM WAS INERT, and it said so as a REMINDER: "it is
+    // EXPECTED to move when ENC-3 lands `met_a_foreigner` — that lane owns the positive arm
+    // (a supplied vector admitted at span 1), and this assertion is its reminder to write
+    // it." ENC-3 landed the row and did NOT write the arm; the reminder did its job. The
+    // roster is now exact in the other direction, so a SECOND carrier still reds here.
     const carriers = Object.entries(EXPERIENCE_TABLE)
       .filter(([, spec]) => spec.vectorSupplied === true)
       .map(([kind]) => kind);
-    expect(carriers).toEqual([]);
+    expect(carriers).toEqual(['met_a_foreigner']);
+    // and it is NON-AMBIENT by construction, which is the half the design leans on
+    expect(EXPERIENCE_TABLE.met_a_foreigner.ambient === true).toBe(false);
+    expect(EXPERIENCE_TABLE.met_a_foreigner.pulls).toEqual([]);
+  });
+
+  test('⭐ THE POSITIVE ARM ENC-3 OWED: a supplied vector is ADMITTED for met_a_foreigner', () => {
+    // The claim the previous test was a placeholder for. Without this, `vectorSupplied`
+    // would be a field that only ever proved a refusal did NOT happen — which is exactly
+    // the shape of a guard nobody has watched work.
+    const out = foldLivedExperience({
+      worldState: lit(),
+      entries: [entry('met_a_foreigner', ALDA, 'e1', {
+        pulls: [{ axisId: 'JUSTICE', pole: 'vice', band: 'heavy' }],
+      })],
+      tick: 11,
+    });
+    expect(reasons(out)).toEqual([]);
+    // ⚠ the receipt names the funnel's OWN event word (`band_crossing`), not the experience
+    // kind — the supplied vector really moved JUSTICE across a band, which is the whole
+    // point. Measured, not assumed: I predicted `met_a_foreigner:JUSTICE` and was wrong.
+    expect(kindsOf(out)).toEqual(['band_crossing:JUSTICE']);
+  });
+
+  test('⭐ AND THE ARM IS NARROW: the SAME supplied vector is refused for a table-owned kind', () => {
+    // THE DIFFERENTIAL, which is what makes the admission above a fact about
+    // `vectorSupplied` rather than about the funnel having stopped refusing anything.
+    // One entry shape, two kinds, opposite outcomes.
+    const supplied = [{ axisId: 'JUSTICE', pole: 'vice', band: 'heavy' }];
+    const admitted = foldLivedExperience({
+      worldState: lit(),
+      entries: [entry('met_a_foreigner', ALDA, 'e1', { pulls: supplied })],
+      tick: 11,
+    });
+    const refused = foldLivedExperience({
+      worldState: lit(),
+      entries: [entry('turned_by_crime', ALDA, 'e2', { pulls: supplied })],
+      tick: 11,
+    });
+    expect(reasons(admitted)).toEqual([]);
+    expect(reasons(refused)).toEqual(['pulls_not_overridable']);
+  });
+
+  test('a met_a_foreigner entry that supplies NO vector is refused, never silently taught nothing', () => {
+    // The table holds no vector for this kind ON PURPOSE, so an adapter that forgets to
+    // compute one must hear about it rather than watch nobody drift.
+    const out = foldLivedExperience({
+      worldState: lit(),
+      entries: [entry('met_a_foreigner', ALDA, 'e1')],
+      tick: 11,
+    });
+    expect(reasons(out)).toEqual(['no_pull_vector']);
   });
 
   test('an ambient kind whose adapter sent no vector is refused, never silently taught nothing', () => {

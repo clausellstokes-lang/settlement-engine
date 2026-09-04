@@ -60,8 +60,27 @@
  * whichever train lands first. CHECKED at this dock: `LIVES_SUBSYSTEM_ROWS` is empty
  * and `characterDriftEnabled` is in no manifest, so the door is UNBUILT — and this
  * lane's charter does not name it as the owner, which §16 attack 10 makes the
- * deciding fact. So the stage CALLS `foldLivedExperience` and carries its `dormant`
- * refusals into the receipt. It is the funnel's first production caller either way.
+ * deciding fact.
+ *
+ * ⛔ THIS STAGE THEREFORE DOES NOT CALL THE FUNNEL, AND THAT IS A RULING, NOT AN
+ * OVERSIGHT. An earlier draft of this file called `foldLivedExperience` directly and
+ * said so here. It was convicted by `characterDrift.test.js` STEP 2 (nothing outside
+ * the family may name the funnel) — a red that had been INVISIBLE because STEP 1 was
+ * failing first and a red at an early assertion blinds every later one in the same
+ * test. Ruled at §893: the stage produces the funnel's INTAKE SHAPE and hands it to
+ * nobody, exactly as `faithWitnessSource.js` does for the same funnel and for the same
+ * reason. The reservation stays UNCLAIMED: STEP 2's roster is still empty and no door
+ * exception was added for this file.
+ *
+ * ⭐ AND THE DEFERRAL COSTS NO PRODUCT TODAY, which is why it was preferred to claiming
+ * the door. The funnel is absent from this tree, so a lesson cannot land through ANY
+ * route at this tip — calling it, claiming the door, or building one would each ship
+ * exactly what deferring ships: nothing taught, marks and leans and grievances landing
+ * as before. Deferring was chosen because it is the option that ships the same product
+ * without claiming a reserved door, NOT because it is cheaper.
+ *
+ * The successor is FUNDED: a real funnel door (a flag plus a supplier module) is its own
+ * car, and it inherits `chanceMeetingLessonEntries` and the season cap below UNCHANGED.
  *
  * @enforced-by tests/domain/envoyChanceMeetingStage.test.js
  * @enforced-by tests/property/chanceEncountersDormancyFence.test.js
@@ -70,7 +89,6 @@ import { tickStreamSeedOf } from '../advanceEpochLedger.js';
 import { npcCorruptibleFlaw } from '../corruption.js';
 import { importanceWeight } from '../entities/npcs.js';
 import { driftTaughtWithin, positionValue } from '../npc/characterConsumers.js';
-import { foldLivedExperience } from '../npc/livedExperienceFunnel.js';
 import { npcTraitPlane } from './clergyTraitPlane.js';
 import { corruptionWebActive } from './corruptionWeb.js';
 import {
@@ -450,7 +468,7 @@ export function advanceChanceMeetings({
   }
 
   state = depositLedgers({ state, markWrites, leanWrites, tick, dropped: dropped.worldState });
-  const taught = teachSubjects(state, lessons, tick, receipts);
+  const taught = deferLessons(state, lessons, receipts);
   state = fileGrievances(taught.worldState, receipts, regionalGraph, tick);
   return {
     worldState: state,
@@ -683,41 +701,49 @@ function depositLedgers({ state, markWrites, leanWrites, tick, dropped }) {
 }
 
 /**
- * Hand every lesson to the funnel — the ONE mover of a soul.
+ * Build every lesson's intake row and hand it to NOBODY — the deferred funnel door.
  *
- * ⚠ THE TWO REFUSAL VOCABULARIES ARE KEPT APART, DELIBERATELY. `MEETING_REFUSALS` is
- * ENC-1's CLOSED set and this lane may not widen it; `FUNNEL_REFUSALS` is a chartered
- * W-LIVES vocabulary this train has no business widening either. So exactly one funnel
- * word is translated into the receipt — `dormant` becomes `drift_dormant`, which is the
- * member the leaf minted for precisely this fact — and every OTHER funnel refusal is
- * returned verbatim in its own channel rather than being coerced into a word that would
- * misname it. A shut door is a receipted fact on both surfaces; nothing is silent.
+ * ⛔⛔ DELIBERATELY DEFERRED — DOCUMENTED, NOT A BUG TO RE-FIND. ⟦A20⟧/§882.1 reserve
+ * the lived-experience funnel's ONE production door for whichever train lands first, and
+ * this lane's charter does not name it as the owner. An earlier draft called
+ * `foldLivedExperience` from here; `characterDrift.test.js` STEP 2 convicts exactly that,
+ * and the conviction was hidden behind STEP 1's red until §893. Ruled: DEFER.
+ *
+ * ⭐ WHAT IS DEFERRED IS THE HAND-OFF, NOT THE WORK. Every lesson is still SELECTED (the
+ * per-subject season cap runs, through the drift family's own door) and still SHAPED (the
+ * adapter below produces the funnel's intake row, which `livedExperienceSources.js`
+ * already resolves BY NAME through `ADAPTER_HOMED_ELSEWHERE`). The successor car wires a
+ * consumer to rows that already exist; it does not rebuild them.
+ *
+ * ⚠ AND NOTHING IS SILENT, which is the same standard the funnel call was held to. Each
+ * affected receipt carries `drift_dormant` — an EXISTING member of ENC-1's CLOSED
+ * `MEETING_REFUSALS`, chosen rather than minted because this lane may not widen that set,
+ * and honest on its face: the drift plane really is dormant, there being no door onto it.
+ * The `driftRefusals` channel names the deferral itself, so a reader can tell "the funnel
+ * refused" from "the funnel was never asked".
+ *
+ * ⚠ THIS FUNCTION MOVES NO STATE, BY CONSTRUCTION. It returns `state` by reference. That
+ * is what makes the dark-world byte-identity claim hold through the lit path too, and it
+ * is why the successor's diff will be legible: today this returns its input.
  *
  * @param {Record<string, unknown>} state @param {Record<string, unknown>[]} lessons
- * @param {unknown} tick @param {Record<string, unknown>[]} receipts
+ * @param {Record<string, unknown>[]} receipts
  * @returns {{worldState: Record<string, unknown>,
  *   driftRefusals: ReadonlyArray<Record<string, unknown>>}}
  */
-function teachSubjects(state, lessons, tick, receipts) {
+function deferLessons(state, lessons, receipts) {
   if (!lessons.length) return { worldState: state, driftRefusals: Object.freeze([]) };
-  const folded = foldLivedExperience({
-    worldState: state,
-    entries: /** @type {Parameters<typeof foldLivedExperience>[0]['entries']} */ (
-      /** @type {unknown} */ (lessons)),
-    tick: num(tick),
-  });
   /** @type {Record<string, unknown>[]} */
   const driftRefusals = [];
-  for (const raw of asArray(folded.refusals)) {
-    const refusal = asObject(raw);
-    driftRefusals.push({ reason: text(refusal.reason), eventId: text(refusal.eventId) });
-    if (text(refusal.reason) !== 'dormant') continue;
+  for (const raw of lessons) {
+    const eventId = text(asObject(raw).eventId);
+    driftRefusals.push({ reason: 'funnel_door_deferred', eventId });
     for (const receipt of receipts) {
-      if (text(asObject(receipt).id) !== text(refusal.eventId)) continue;
+      if (text(asObject(receipt).id) !== eventId) continue;
       asArray(asObject(receipt).refusals).push({ arm: 'drift', word: 'drift_dormant' });
     }
   }
-  return { worldState: asObject(folded.worldState), driftRefusals: Object.freeze(driftRefusals) };
+  return { worldState: state, driftRefusals: Object.freeze(driftRefusals) };
 }
 
 /** A refused-and-discovered approach is a grievance on the two courts' edge, written by

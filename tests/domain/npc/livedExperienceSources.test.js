@@ -661,15 +661,17 @@ describe('DARK BY CONSTRUCTION — the closure, amended for this car', () => {
     // words. It is a FAMILY MEMBER, not a production caller: nothing imports it, and
     // the drift family's own closure walker enrols it and asserts that. The set stays
     // exact, so the next namer still reds.
-    // AMENDED BY ENC-3 — and this is the arrival the walker was waiting for. L3 said a
-    // red here would be car L4's act and L4 said "the pulse call site is L5's"; what
-    // actually arrived first is the ENCOUNTERS stage, which is the funnel's FIRST
-    // PRODUCTION CALLER. It calls `foldLivedExperience` once per pass and supplies the
-    // per-receipt vector; it imports nothing else from the family. The set stays EXACT,
-    // so the next namer still reds.
+    // ⛔ ENC-3 WAS ADDED HERE AND THEN TAKEN BACK OUT, AND THE ROUND TRIP IS THE RECORD.
+    // The encounters stage did briefly call `foldLivedExperience`, and this roster named
+    // it as the funnel's first production caller. `characterDrift.test.js` STEP 2 (nothing
+    // outside the family may name the funnel) convicts exactly that, and the conviction had
+    // been INVISIBLE because STEP 1 was failing first — a red at an early assertion blinds
+    // every later one in the same test. Ruled at §893: the stage DEFERS, producing the
+    // funnel's intake shape and handing it to nobody, the way `faithWitnessSource.js` already
+    // does. ⟦A20⟧/§882.1's reservation is therefore still UNCLAIMED and this roster is back
+    // to one. The funnel still has NO production caller; the next namer still reds.
     expect(importers.sort()).toEqual([
       'src/domain/npc/characterReadModel.js',
-      'src/domain/worldPulse/envoyChanceMeetingStage.js',
     ]);
   });
 
