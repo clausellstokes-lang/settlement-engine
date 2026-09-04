@@ -1,0 +1,353 @@
+{
+ "slice": "S18",
+ "status": "COMPLETE",
+ "calls": [
+  {
+   "row": "§890.4",
+   "call": "seal + size of the prose car",
+   "claim": "Sealed refs/preserve/srcprose-2026-09-03 = 8f4d5c648, one commit, 200 paths, +1,084/−1,019",
+   "method": "git for-each-ref refs/preserve; git show --stat 8f4d5c648; git log -2 8f4d5c648; stat .git/refs/preserve/srcprose-2026-09-03",
+   "evidence": "refs/preserve/srcprose-2026-09-03 → 8f4d5c648ce62fc51231110b9c4ace2127fbdd18 (ref file written 2026-09-03 13:15:12); '200 files changed, 1084 insertions(+), 1019 deletions(-)'; parent = 30c1667bc '§889 register 5/5' — NOT ca651d54b",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "Figures hold. The row never states the car's BASE: it is 30c1667bc (the §889 tip), one landing behind §890 and 25 cars behind the live train; its 200 paths overlap the §890+§891 trains on 2 files (src/domain/display/settlementRumors.js, src/domain/region/propagation.js), so a rebase is owed before it can ride anything. Settle conflict risk with: git merge-tree --write-tree 4233031ba 8f4d5c648"
+  },
+  {
+   "row": "§890.4",
+   "call": "the measured shape (1,481 / 1,001 / 480; 437·402·84·39; re-sweep zero; 989/989)",
+   "claim": "1,481 em dashes, 1,001 cured, 480 exempt (348/51/30/24/18/7/2), dispositions COLON 437 PERIOD 402 COMMA 84 PAREN 39 pairs, re-sweep in-scope zero, prose diff 989/989 symmetric",
+   "method": "receipt-src-prose.md :560-571 (read)",
+   "evidence": "receipt:567-571 'units.mjs at the committed tip: 1481 → 480 em dashes, exactly 1001 removed … PROSE 0 … COLON 437 · PERIOD 402 · COMMA 84 · PAREN 39 pairs (78 marks) = 1001 … DEV 348 · SEP_PARSED 51 · DEVLOG 30 · GENERATED 24 · STRUCT 18 · GLYPH 7 · COMPARATOR 2'; :560 'the prose cure alone (src/ + docs/content/): 185 files, 989 / 989, symmetric.'",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The stratum's 'colon/period split moved by 108 rows during review in both directions' is NOT in the receipt as searched (nearest: :246 '106 hand rulings'; COLON 455→437 net −18). That one figure is EVIDENCE-THIN; settle with grep -n '108' receipt-src-prose.md and the review sheets in $SP/PARSER-SRC/."
+  },
+  {
+   "row": "§890.4",
+   "call": "28 byte-twins bound by text, re-verified after the cure, 17-file battery byte-identical",
+   "claim": "28/28 paired by text not line numbers, 28/28 again after the cure, twin battery identical base vs tip",
+   "method": "receipt-src-prose.md :124, :263-276, :376-385; git show 8f4d5c648:tests/lint/faithKindPools.walker.test.js :168",
+   "evidence": "receipt:124 'THE 28 BYTE-TWINS — PAIRED BY TEXT, 28/28, INDEPENDENTLY OF THE LEDGER'; :266 'verify-twins.mjs … 28/28 (27 exact + 1 apostrophe-only)' after the cure; :377-382 'the same 17 files both times: BASE 2 failed | 15 passed (17) / 4 failed | 374 passed (378) … MY TIP identical'; faithKindPools.walker.test.js:168 'expect(rendered).toEqual(annexPool(ANNEX_KIND, WITH_TEMPLE).lines)'",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Receipt's own arithmetic '9 + 4 + 3' = 16 while the vitest tally says 17 files; the tally is the receipt."
+  },
+  {
+   "row": "§890.4",
+   "call": "THE GUARD'S COUNTER WAS A FALSE INSTRUMENT (39 by tokenizer, 0 by parser; 64 of 71 phantom; replaced with espree)",
+   "claim": "structuralValidator.js 39 bangs by tokenizer vs 0 by parser; 64 of 71 bangs over unscanned dirs phantom; tokenizer replaced with espree",
+   "method": "git show 8f4d5c648 -- tests/copy/voiceMechanics.test.js; receipt-src-prose.md :283-300",
+   "evidence": "guard diff: '+import { parse } from \\'espree\\'' … '`src/generators/structuralValidator.js` measured **39 exclamation points by the tokenizer and 0 by a parser** … **64 of 71 exclamation points were phantom**' … 'The char scanner is kept as a FALLBACK'; receipt table: added dirs 'em 179, bang 71' (tokenizer) vs 'em 165, bang 7' (parser); covered dirs 'em 290, bang 15' vs 'em 295, bang 8'",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Refutation attempted by reading the diff for a widened ceiling or renamed arm: none — the docblock says 'No ceiling moved, no arm renamed, no arm added' and the diff shows none."
+  },
+  {
+   "row": "§890.4",
+   "call": "the E2 total arm went green, 770 → 290",
+   "claim": "voice-debt total arm green 770 → 290",
+   "method": "guard docblock in 8f4d5c648; receipt table :318-323",
+   "evidence": "guard docblock: 'DECLARED MEASUREMENT SHIFT, src/data + src/domain, at this lane's tip: em 290 → 295, bang 15 → 8'; receipt:323 '| E2 total | total | 770 (budget 670) | 770 FAILS | 290/295 → the arm now PASSES |'",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "The live instrument is now the parser and it reads 295, not 290; 290 is the retired tokenizer's figure. Write '770 → 295 (parser; 290 under the retired counter)'. The arm passes under both (budget 670)."
+  },
+  {
+   "row": "§890.4",
+   "call": "the per-file magnitude punishes its own cure (69 → 126), reported not widened",
+   "claim": "removing debt from 88 files pushes the E2 files magnitude 69 → 126; lane refused to widen",
+   "method": "receipt-src-prose.md :318-333",
+   "evidence": "receipt:320 '| E2 per-file | files | 69 | 69 | 126 ⛔ BREACH +57 |'; :327-331 'REMOVING debt from 88 files makes 57 more files \"drifted\". The instrument punishes the cure … The cure is the landing's UPDATE_VOICE_BASELINE=1 refreeze — now legal … I did not run it: a register act.'",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": ""
+  },
+  {
+   "row": "§890.4",
+   "call": "FOUR PARSE-COUPLED PRODUCERS reverted at cause (customContentSchema.js, heraldCausalVoice headline register 56/56, economicState services rows, NPC — journal prefix) + the comparator/backtick/quasi/splitter classifier classes",
+   "claim": "each of the four is reverted in the sealed commit; consumers live in tests/, .jsx, and regexes",
+   "method": "git diff --stat 30c1667bc 8f4d5c648 -- src/domain/customContentSchema.js; git show 8f4d5c648:<file> greps; git grep at 8f4d5c648; receipt :149-233, :505-535",
+   "evidence": "customContentSchema.js: empty diff vs base, 37 em dashes retained; economicState.js:626-629 'Military services — standing army…' retained, consumer tests/generators/economicUpgradeChainAndStage5.test.js:104 'MILITARY_EXPORT = /^(military|mercenary) services —/i'; journalPages.js:444 push(`NPC — ${n.name}`) retained, consumer tests/foundry/foundryManifest.test.js:121 startsWith('NPC — '); heraldCausalVoice.js:398 '`${event} — ${join.text} …`' retained while :? telling register moved to ':'; heraldCausalVoice.test.js splits on ' — ' at :128 :492 :554; receipt:511 'reddened 56 of 56 molded-gesture cases … Reverted at cause'",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The classifier-class narrative (comparator 'Dangerous — Criminal Governance' :149-151, backtick boundary :155, quasi aside :173-178, splitter :224-233) is in the receipt; the specific '23 appended fragments' count was not found by grep and is PLAUSIBLE only — settle with grep -n -A6 'BACKTICK BOUNDARY' receipt-src-prose.md."
+  },
+  {
+   "row": "§890.4",
+   "call": "the lane corrected its own golden claim and refused the ~20 timeouts",
+   "claim": "fragment search was the wrong instrument (a digest golden is invisible to it); full suite found two; 21 base failures pass at tip so the timeouts were contention",
+   "method": "receipt-src-prose.md :363, :413-425, :484-504",
+   "evidence": "receipt:413 'Earlier in this receipt I wrote \"No golden was re-recorded, because none needed it\"'; :425 'a golden that stores a DIGEST is invisible to a content search'; :488 '1642 assertions at base, 1642 at tip'; :500-504 'The ~20 \"timeouts\" … were CPU contention, not verdicts — 21 assertions that failed at base PASS at tip … Reporting those as my failures would have been a false report.'",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": ""
+  },
+  {
+   "row": "§890.4",
+   "call": "THE BLOCKER: the fence admits ONE named window; 8 files / 11 assertions owed",
+   "claim": "espionageDormancyFence.test.js:332 says re-record ONLY inside a NAMED CHARTERED WINDOW, 'exactly ONE remains: the LIGHTING WAVE (§881.4)'; the mover is this car; 8 files and 11 assertions owed",
+   "method": "git show ca651d54b:tests/property/espionageDormancyFence.test.js sed 318-348; receipt :444-461, :573-581",
+   "evidence": "fence: 'THE DRIVEN CORPUS MOVED. This is a STOP, not a re-record. The constant is re-recorded ONLY inside a NAMED CHARTERED WINDOW, and after the ENGINE-HYGIENE landing spent AGN's, T13 TRANS closed with zero movement (§883); exactly ONE remains: the LIGHTING WAVE (§881.4). Anything else moving this number is an unpriced same-seed shift in the world a player gets.' .toBe(PRE_COUPLING_CORPUS_SHA); receipt:451 'THE MOVER IS FOUND AND ATTRIBUTED: it is this car'; :573 'OWED … 8 files, 11 assertions'",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "File lives at tests/property/, not tests/lint/. The 8/11 count is the receipt's heading; its own table shows six rows (one of them '4 × edgeFunctions'), so the count is PLAUSIBLE, not re-derived."
+  },
+  {
+   "row": "§890.4",
+   "call": "CHAIR RULING: the prose car RIDES THE LIGHTING WAVE; no second window minted",
+   "claim": "the surviving window is owner-named (§881.4); naming one is the owner's act; the car is sealed and rides",
+   "method": "fence text at ca651d54b; ledger row 32413; LANE-QUEUE.md 'THE OWNER'S DESK' 1",
+   "evidence": "fence names '§881.4' as the one remaining window; ledger §890.4 'CHAIR RULING: the car RIDES THE LIGHTING WAVE; the chair does not mint a second window … naming one is the owner's act'; LANE-QUEUE: '1. THE PROSE WINDOW — one word charters it sooner than the lighting wave.'",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Refutation attempted: could the chair lawfully re-record under the delegation grant? The fence's own text makes the window a NAMED, owner-directed thing and the two spent windows were owner-named; the ruling follows the instrument rather than overriding it. Holds."
+  },
+  {
+   "row": "§890.5",
+   "call": "the §890 gate: 1,087 s / 20 stages, 173/173, 1121/1121, 10 known of 31,141, lint 0, failed at BUILD by 8,551 B",
+   "claim": "first gate attempt ran 1,087 s and failed a real first-paint verdict 1,056,551 vs 1,048,000",
+   "method": "grep gate-890.log; grep gate-890b.log",
+   "evidence": "gate-890.log: GATE_START=2026-09-03T18:06:51Z … GATE_END=2026-09-03T18:24:58Z (=1,087 s); '[typecheck-ratchet] OK … (173 error(s), ceiling 173)'; '[domain-strict] ✓ … (1121 errors, ceiling 1121)'; '✖ 28 problems (0 errors, 28 warnings)'; '[test-ratchet] OK — … (10 known failure(s) of 31141 tests…)'; 'tests/build/vendorPdfLazy.test.js :: … stay under the first-paint budget (1048000) ASSERTION · ran 21ms against a 20000ms budget — a real verdict … first-paint static closure = 1056551 bytes (budget 1048000)'; TRUE_EXIT=1",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "All figures hold for the FIRST run. The stratum should say so: the landing's gate is the second run, gate-890b.log 18:30:03Z→18:47:41Z = 1,058 s, which is the figure the §890 ledger row carries. As written the two rows look contradictory (1,087 vs 1,058)."
+  },
+  {
+   "row": "§890.5",
+   "call": "the cause: immer/seedrandom symlinks → esbuild realpath → nine escaping inputs; materialising took 9 → 0",
+   "claim": "nine bundle inputs recorded as ../../../Users/… paths; materialising two packages cured them",
+   "method": "git show 4233031ba:supabase/functions/_shared/aiCharterBundle.meta.json; 4233031ba commit message; search SP for a 9→0 log",
+   "evidence": "meta.json at 4233031ba: inputs 'node_modules/immer/dist/immer.mjs', 'node_modules/seedrandom/index.js', …/lib/{alea,tychei,xor128,xor4096,xorshift7,xorwow}.js, seedrandom.js (exactly nine node_modules inputs, all in-project paths); 4233031ba message: 'materialise ONLY immer and seedrandom so the builder records clean input paths (esbuild follows a symlink to its REALPATH…)'. No log of the 9→0 measurement found in SP.",
+   "verdict": "RATIFY",
+   "confidence": "PLAUSIBLE",
+   "note": "The nine inputs exist and are exactly the two packages named; the mechanism is coherent with the committed artefact. Settle: at a dock with symlinked immer, run node scripts/build-edge-shared.mjs to a scratch output and count '../' inputs (do not commit)."
+  },
+  {
+   "row": "§890.5",
+   "call": "438 symlinks; set -e halted materialisation at 45; all 45 restored",
+   "claim": "the chair began materialising all 438 symlinks, stopped at 45, later restored all 45",
+   "method": "find laneKERNELMARK-tree/node_modules -maxdepth 1 -type l|d; per-dir existence check against /Users/cstokes/Desktop/settlement-engine/node_modules; ls -ld immer seedrandom",
+   "evidence": "dock now: 436 symlinks, 39 real dirs (.bin, .vite-temp + 37 packages); EVERY one of the 37 real packages is DOCK-ONLY (absent from the main repo's node_modules: pg chain mtime 09-03 10:22, listr2/log-update/… chain 11:14); immer → …/settlement-engine/node_modules/immer and seedrandom → … both symlinks, mtime 17:49 = 4233031ba's 17:49:28 commit",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "The restore is CONFIRMED complete: no real directory in the dock shadows a main-repo package. The counts 438 and 45 have no log; the dock carries 436 symlinks today (main repo has 437 top-level entries). Also worth carrying: the dock holds 37 DOCK-ONLY installed packages (pg, listr2…) the main repo lacks, so its node_modules is not the canonical layout either — relevant to the law this row states."
+  },
+  {
+   "row": "§890.5",
+   "call": "the two-direction proof — (a) sibling symlinked dock green, (b) restore returns the landing dock to green",
+   "claim": "a sibling dock with the same cars and symlinks built GREEN (vendorPdfLazy 31 passed / 11 skipped); restoring the 45 symlinks returned the landing dock to GREEN, commits untouched, porcelain 0",
+   "method": "grep gate-890b.log (dock refs, HEAD, porcelain, STRICT DIST); receipt-charset1.md byte table; closure-tip.log; search SP for '11 skipped'",
+   "evidence": "(b) gate-890b.log: 21 references to laneKERNELMARK-tree, GATE_HEAD=ca651d54b…, GATE_PORCELAIN_PRE=[0], '[test-ratchet] STRICT DIST OK — 52 discovered/reported file(s), 440 test(s), zero failed…', GATE_PORCELAIN_POST=[0], GATE_HEAD_POST=ca651d54b; no first-paint line. (a) the chair's named sibling run has no log in SP; but the CHARSET lane built the same sha in lanePREGATE-tree with symlinked node_modules: closure-tip.log 'CLOSURE RAW BYTES: 1046996 / budget 1048000 => margin 1004'; receipt-charset1 'first-paint closure RAW | 1,046,996 | 1,046,996' base ca651d54b vs tip, 'vendorPdfLazy -> 42 passed'",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "Direction (b) is CONFIRMED from the gate log. Direction (a) is CONFIRMED by an independent same-sha symlinked build (1,046,996 B, 9,555 B under the materialised dock's 1,056,551) — cite that; the specific '31 passed / 11 skipped' sibling run is EVIDENCE-THIN (settle: find the sibling dock's build log)."
+  },
+  {
+   "row": "§890.5",
+   "call": "THE RESOLUTION: materialise two → build → commit → restore; 25/25, 19/19, 23/23, 31/42 all green after restore",
+   "claim": "the sequence keeps both constraints; the reproducibility arm re-verifies via its disk fallback; four suites green simultaneously after the restore",
+   "method": "4233031ba meta inputs + commit message; symlink census; search SP for the four-suite figures",
+   "evidence": "4233031ba (register 6/6) was built by exactly this sequence: 'materialise ONLY immer and seedrandom … → build → commit the bundles WITH their inputs → RESTORE the symlinks'; committed inputs are clean 'node_modules/…' paths; immer/seedrandom are symlinks again (17:49). No log carrying '25 passed'/'19 passed'/'23 passed' for the §890 dock was found.",
+   "verdict": "RATIFY",
+   "confidence": "PLAUSIBLE",
+   "note": "The sequence is proven by its second execution (the §891 register 6/6 artefact); the four figures are unlogged. Settle: at laneKERNELMARK-tree run the four files singly (edgeSharedBundleReproducibility, aiCharterBundle.freshness, aiOutputSchemaBundle.freshness, vendorPdfLazy)."
+  },
+  {
+   "row": "§890.5",
+   "call": "the chair's earlier misreading (uncommitted rebuild → reproducibility 4 → 6 → 'the fix made it worse')",
+   "claim": "an uncommitted regenerated bundle IS the dirty-build class the suite names",
+   "method": "search SP logs/receipts for 'reproducib' and '4 → 6'",
+   "evidence": "No log or receipt in SP carries the 4→6 run; only msg-890.txt restates the law. The suite's own name at 4233031ba: 'edge-shared bundles reproduce AT THE COMMITTED TREE (the dirty-build class)' (ratchet-891.log).",
+   "verdict": "EVIDENCE-THIN",
+   "confidence": "PLAUSIBLE",
+   "note": "Self-reported chair error; consistent with the suite's title but unverifiable from receipts."
+  },
+  {
+   "row": "§891",
+   "call": "the train: 4233031ba, base ca651d54b, 17 cars, 17 trailers, porcelain 0, six register acts green",
+   "claim": "sealed at refs/preserve/train891-registers-2026-09-03 with 17 single-parent cars each trailered; porcelain 0",
+   "method": "git log --oneline ca651d54b..4233031ba; git log --format='%(trailers:key=Seat)'; for-each-ref; ratchet-891b.log; git -C dock status --porcelain",
+   "evidence": "17 commits ca651d54b..4233031ba (ec6b0a132 … 4233031ba); 17/17 carry 'Seat: Opus 5 — Fable-unvalidated'; ref train891-registers-2026-09-03 → 4233031ba (written 18:20:41); ratchet-891b.log at RATCHET_HEAD=4233031ba 'PORCELAIN=[0]'; dock today: ' M scripts/.writer-reach-baseline.json' (a --write in progress, frozenAtSha 4233031ba)",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Porcelain 0 held at 18:18; the dock is now dirty by one file from someone's live writerReach --write (untouched by this walk)."
+  },
+  {
+   "row": "§891",
+   "call": "THE SURVIVAL AUDIT CAUGHT THE LIVE TRAIN — 'reachable from NO REF, every register act in it'; ninth payout",
+   "claim": "at handoff the seventeen-car train with every register act was unreferenced",
+   "method": "stat .git/refs/preserve/train891-*; for-each-ref",
+   "evidence": "refs/preserve/train891-composed-2026-09-03 → 3d3ad217b written 2026-09-03 16:27:53; train891-reg1-2026-09-03 → 250d4e464 written 16:33:39; train891-registers-2026-09-03 → 4233031ba written 18:20:41",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "Overstated. At handoff (~18:18) the eleven lane cars and register 1 were already reachable from two seals written two hours earlier; the exposure was the FIVE register commits 79d45d274…4233031ba. Still a real catch of the most expensive class, but 'every register act in it' is false for register 1. 'Ninth payout' is a running count with no receipt — EVIDENCE-THIN."
+  },
+  {
+   "row": "§891",
+   "call": "what the train carries: five lanes batched into one gate",
+   "claim": "CAPACITY C1/C2/C3 · now:null · DESK CAR 1 + correction · CHARSET Car 1 · READERREVIEW Car 2 + three cures",
+   "method": "git log ca651d54b..4233031ba",
+   "evidence": "ec6b0a132 CAPACITY C1 · 6bddd6183 C2 · d02c5acde C3 · 3a6f0d761 `now: null` · a59e66e5a DESK CAR 1 · a9e0121bc correction · 4ae140102 CHARSET Car 1 · ac427cc5c READERREVIEW Car 2 · 7b10224fd/c84437766/3d3ad217b cures 1-3 · then six §891 register commits",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": ""
+  },
+  {
+   "row": "§891",
+   "call": "register 1/6 lighting: files 2515 EXACT; titles +75 predicted-by-sum vs +78 measured",
+   "claim": "2510/370/2140/22841/6142 → 2515/371/2144/22919/6152; four lanes' deltas sum +75, composed +78",
+   "method": "git show 250d4e464 -- tests/lint/.lighting-census-baseline.json; receipt-charset1/capacity/readerreview2/deskwiring",
+   "evidence": "diff: files 2510→2515, parked 370→371, credited 2140→2144, titles 22841→22919 (+78), suiteTitles 6142→6152, measuredAtSha 3d3ad217b; receipt-charset1 'titles +40 … files 2510 -> 2513 (+3) MEASURED'; receipt-capacity:343 'titles 22,841 → 22,868 (+27…)' :342 'expected 2512 to be 2510; two new test files'; receipt-readerreview2:296 'titles 22841 → 22849 = +8, MEASURED'; deskwiring folded its arms, census flat (+0). 40+27+8+0 = 75; +3+2 = +5 files.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": ""
+  },
+  {
+   "row": "§891",
+   "call": "register 2/6 tuning: 225 tables / 2,099 keys BOTH EXACT, predicted by CAPACITY",
+   "claim": "predicted before build; measured exact",
+   "method": "git show 79d45d274 -- tests/lint/.tuning-inventory.json; receipt-capacity.md :99,:102,:338",
+   "evidence": "committed :7789-7790 '\"tables\": 225, \"keys\": 2099'; diff '-\"keys\": 2094 +\"keys\": 2099', HERALD_TUNING keys 5→10 (+CROWDING_* five keys), '+src/domain/worldPulse/demographicsHerald.js' dependent; receipt-capacity:99 '| totals.keys | 2094 | 2099 (+5, exactly the five new keys) |' :102 'totals.tables 225 → 225'",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": ""
+  },
+  {
+   "row": "§891",
+   "call": "register 3/6 prose numerics: 225 → 225, debt SHAPE byte-identical, two rows relocated",
+   "claim": "row count unchanged; multiset of (category, snippet) identical; only path/line moved",
+   "method": "python probe over git show fbcfbaeac^ / fbcfbaeac :tests/lint/.prose-numerics-baseline.json",
+   "evidence": "probe: 'prose-numerics rows before/after: 225 225 · multiset (category,snippet) identical: True · path count deltas: EconomicsTab.jsx (24, 22), EconomicsGlance.jsx (0, 2) · rows relocated (path changed): 2 · line-drifted rows with same (path,category,snippet): 36'",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Commit says '34 line addresses drifted'; my pairing counts 36. Immaterial to the claim (line-only drift), noted for accuracy."
+  },
+  {
+   "row": "§891",
+   "call": "register 4/6 charset invariant earns a MUTATION entry: plant 72 strikes ONE measured range from the dossier surface, anchor unique, 2 of 5 arms red naming the codepoints, restored 5/5",
+   "claim": "a real plant with catching power rather than a false rationale",
+   "method": "git show ffe0dbb81 -- scripts/mutation-sweep.sh; grep manifest at ffe0dbb81 and parent; grep -c anchor in 4233031ba:customContentCharset.generated.js; read-only node probe striking the range IN MEMORY against the dock's leaf and pools; npx vitest run tests/data/namingDataCharset.test.js at laneKERNELMARK-tree",
+   "evidence": "sweep: perl 's/\"ranges\": \"D 20-7E A0-AC AE-132 /\"ranges\": \"D 20-7E A0-AC /' + check_caught 'naming-charset/a range leaves the dossier surface…'; MUTATED_FILES += customContentCharset.generated.js; manifest: 'tests/data/namingDataCharset.test.js': {kind: mutation} (0 hits in parent); anchor count 1, at surfaces['dossier-pdf'] (count 759; campaign-pdf/world-book are '20-7E A1-FF'); probe: CLEAN 5/5 pass; PLANT → FAIL arm 2 'dossier printable' instances 206, codepoints begin U+00C1 U+00C9 U+00CD U+00D3 U+00D6 U+00DA U+00DC U+00DE (28 total), FAIL arm 5 'book-miss drawable in dossier'; other three pass; dock run: 'Tests 5 passed (5)', porcelain unchanged",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Exactly 2 of 5 arms red, exactly one range (U+00AE–U+0132) struck from one surface. Minor: the commit quotes the first eight of 28 codepoints the message names."
+  },
+  {
+   "row": "§891",
+   "call": "register 4/6 judgment: a rationale would have been FALSE; the sweep's dirty-guard convicted the chair",
+   "claim": "the model rationale requires catching power 'EXECUTED IN THE TEST BODY'; the file has five arms and no plants; the sweep reverts with git checkout -- so an unlisted file destroys uncommitted work",
+   "method": "test body read (5 `it` arms, no plant); sweep diff; manifest neighbour entries",
+   "evidence": "namingDataCharset.test.js: five `it(` arms (walk not vacuous / dossier printable / book census EXACT / keys printable / debt is BOOK's), zero in-body plants; manifest sibling rationale wording 'the catching power here is already a plant (six of them, in temp trees…)'; sweep diff adds the generated leaf to MUTATED_FILES under the dirty-guard 'git status --porcelain -- ${MUTATED_FILES[@]}'",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The conviction EVENT itself (a second arm refusing) has no log; the machinery that would convict is in the diff."
+  },
+  {
+   "row": "§891",
+   "call": "register 5/6 OSR figures: 1,993 / 1,409 / 388 unchanged; frozenAtSha 019829e99 → this tip",
+   "claim": "findings, identities and files predicted unchanged and measured unchanged",
+   "method": "python probe over 2445bb3c5^ / 2445bb3c5 :scripts/.observed-shape-readers-baseline.json",
+   "evidence": "probe: 'total before: 1993 after: 1993 · identities 1409 → 1409 · inventory <dict len 388> → 388 · frozenAtSha 019829e99… → ffe0dbb81…'; scanStats files 2149→2153, resolved 9425→9421",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": ""
+  },
+  {
+   "row": "§891",
+   "call": "register 5/6 'the twelve OSR entries collapse to ONE at the composed tip' / 'What moved is the execution-input fingerprint for exactly one path'",
+   "claim": "at the lane tip --write moved twelve manifest entries (five its own); at the composed tip exactly one path moved because the seven foreign ones are in the base",
+   "method": "python probe diffing manifests entries (path→sha256) between 2445bb3c5^ and 2445bb3c5; provenanceDriftOf at 4233031ba:scripts/check-observed-shape-readers.mjs :2298-2328; receipt-charset1 STOP section",
+   "evidence": "probe: 'manifest entries before/after: 2173 2178 added: 5 removed: 0 changed: 27' — CHANGED includes FounderTile.jsx, wizardNews.js, faithTuningSurface.js, simulationRules.js, useFounderTileEligible.js, useReaderAudience.js, flagRegistry.js (the lane's seven 'FOREIGN'); ADDED includes customContentCharset.generated.js. provenanceDriftOf: `inputs` = detector-tree non-detector paths + sourceTree entries NOT in scanTree; the message prints `drift.inputs` only. receipt-charset1: 'the execution-input manifest moved on 12 entries, only 5 of them mine'",
+   "verdict": "REVERSE",
+   "confidence": "CONFIRMED",
+   "note": "The twelve were MANIFEST entries; at the composed tip that figure is 32 (5 added + 27 changed) and it absorbs all seven the lane refused — nothing collapsed. The 'one' is provenanceDriftOf's UNSCANNED-input list, which would also have read one (the .generated.js) at the lane's tip. The commit message's 'What moved is the execution-input fingerprint for exactly one path' is false. The ACT itself (a landing absorbing base-to-tip source drift) remains legitimate — see next entry."
+  },
+  {
+   "row": "§891",
+   "call": "'A LANE AND A LANDING ARE NOT THE SAME VANTAGE POINT; a register act is legitimate at exactly one of them' — the OSR absorb taken at the landing",
+   "claim": "the charset lane was right to refuse; the chair was right to absorb at the composed tip",
+   "method": "receipt-charset1 STOP section; walker message block :2690-2705; 2445bb3c5 diff",
+   "evidence": "receipt-charset1: 'A lane's absorb would have laundered all seven under my commit's frozenAtSha … THE FINDINGS DO NOT MOVE'; walker: 'observed-shape execution INPUT changed since the last re-freeze (N path(s): …). These are generated/data inputs, not detector sources, so the shrink-only --write re-freeze may absorb them'; 2445bb3c5: inventory/total/identities unchanged, frozenAtSha → ffe0dbb81",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Holds in substance: the landing's frozenAtSha is the composed tip, so absorbing all 32 source/input movements under it launders nothing. The stated MECHANISM (collapse to one) must be corrected per the previous entry."
+  },
+  {
+   "row": "§891",
+   "call": "register 6/6 edge bundles rebuilt by the proved sequence",
+   "claim": "CAPACITY C1 changed simulationRules.js; four arms red; materialise two → build → commit → restore",
+   "method": "git show 4233031ba --stat and meta diffs; ratchet-891.log; symlink census",
+   "evidence": "ratchet-891.log (at 250d4e464) lists aiCharterBundle.freshness, aiOutputSchemaBundle.freshness and two edgeSharedBundleReproducibility arms among the ten reds; 4233031ba: aiCharterBundle sourceHash af88ebc92e069f83→1973da25af360b02, inputs all 'node_modules/…' (no '../'); immer/seedrandom symlinks mtime 17:49 = commit 17:49:28",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": ""
+  },
+  {
+   "row": "§891",
+   "call": "THE ONE BILL: 'writerReach's frozen register still calls situationDesc on economicState DARK, and DESK CAR 1 made it REACH the web display'; plain --write door",
+   "claim": "one failing register; frozen says dark, live says lit",
+   "method": "git show 4233031ba:tests/lint/writerReach.walker.test.js :289-303; git show 4233031ba:scripts/.writer-reach-baseline.json grep; git -C laneKERNELMARK-tree diff -- scripts/.writer-reach-baseline.json (someone's live --write, read only); LANE-QUEUE.md :11-13; git grep situationDesc at ca651d54b and 4233031ba; scan grade legend :466-474; ratchet-891b.log",
+   "evidence": "test: 'expect(frozen[row.identity], …).toBe(formatted)' — vitest prints actual first; LANE-QUEUE: \"expected 'web-display=R' to be 'web-display=N'\" ⇒ frozen=R, live=N; committed baseline:8682 '\"situationDesc on economicState\": \"dossier-pdf=R web-display=R web-transitive=R\"'; live --write output: '… web-display=N …' and ALSO '\"_seed on settlement\": … web-display=N → web-display=R'; base ca651d54b: the only display reader is EconomicsTab.jsx:335 '{eco.situationDesc&&<p…>'; tip: EconomicsGlance.jsx:92 same JSX behind prop `eco` (Tab: 'const eco = economicState || s?.economicState' → '<EconomicsGlance eco={eco}'); ratchet-891b: writerReach is the ONLY red outside the census",
+   "verdict": "REVERSE",
+   "confidence": "CONFIRMED",
+   "note": "Direction inverted (the vitest 'expected X to be Y' misread). The frozen register says web-display REACHES (R); the live scan at 4233031ba grades it N because DESK CAR 1 moved the read behind a prop the scanner cannot resolve — the datum still renders. A plain --write would record web-display=N, a FALSE non-reach, and would also flip '_seed on settlement' N→R, unpredicted and hidden because the test throws at the first mismatch. 'One bill' as a COUNT of failing registers holds. Correct act: --write only with a written shift note ('scanner resolution lost through the EconomicsGlance prop boundary; display unchanged; two entries move') or resolve the prop first."
+  },
+  {
+   "row": "§891",
+   "call": "the owner's desk items and 'nothing pushed, deployed, migrated or deleted'",
+   "claim": "prose window · drift door · ENC-4 nine sentences · 190 B held · corpus deity-free; no push/deploy/migration/deletion",
+   "method": "LANE-QUEUE.md; for-each-ref (claude/composite-r4 = ca651d54b unchanged)",
+   "evidence": "LANE-QUEUE 'THE OWNER'S DESK' items 1-5 match the ledger row verbatim; refs/heads/claude/composite-r4 → ca651d54b (the §890 tip) — the train is not on the branch; c2-HELD-outlook-surface.patch present",
+   "verdict": "OUT-OF-SCOPE",
+   "confidence": "CONFIRMED",
+   "note": "Owner-gated items; recorded, not ruled."
+  }
+ ],
+ "beyond": [
+  "The writerReach --write at 4233031ba moves TWO surfaceReach entries, not one: 'situationDesc on economicState' web-display R→N and '_seed on settlement' web-display N→R (plus closureSizes web-display 679→685, scanStats files 1563→1573, verdictDigest). The round-trip test throws at the first mismatch, so the chair could only see the first; the successor's 'PREDICT before you measure' will predict one and measure two. Source: the live diff in laneKERNELMARK-tree (someone's in-progress --write, frozenAtSha 4233031ba), read only.",
+  "§890.4's prose car 8f4d5c648 is based on 30c1667bc (§889), not the §890 tip; neither the stratum nor the ledger row states the base. It is 25 commits behind the live train and its 200 paths overlap the §890+§891 trains on 2 files (src/domain/display/settlementRumors.js, src/domain/region/propagation.js) — a rebase is owed before the lighting wave can carry it.",
+  "§891 'twelve → one' contradicts receipt-charset1's own definition of the twelve (manifest entries): the composed-tip write moved 32 manifest entries including every one of the seven the lane refused to launder. The instrument's 'one path' is its UNSCANNED-input classifier and reads one at either vantage point.",
+  "Seal timing contradicts 'reachable from NO REF, every register act in it': refs train891-composed (16:27:53) and train891-reg1 (16:33:39) predate the 18:20:41 handoff seal; only registers 2–6 were unreferenced.",
+  "The landing dock (laneKERNELMARK-tree, the §890 gate dock per gate-890.log paths) carries 37 DOCK-ONLY real packages absent from the main repo's node_modules (pg chain installed 10:22, listr2/log-update chain 11:14). None shadows a main-repo package, so the restore is complete — but the dock is not the canonical layout either, which bears on the §890.5 law that byte figures are only comparable in a canonical dock.",
+  "§890.5's 1,087 s is the FAILED first gate (gate-890.log 18:06:51Z→18:24:58Z); the §890 ledger row's 1,058 s is the second, passing gate (gate-890b.log 18:30:03Z→18:47:41Z, same dock, same HEAD, porcelain 0). Both true; the stratum should name which run it is describing.",
+  "An independent same-sha symlinked build exists for §890.5 direction (a): the CHARSET lane at ca651d54b in lanePREGATE-tree measured first-paint 1,046,996 B (closure-tip.log, receipt-charset1), 9,555 B below the materialised dock's 1,056,551 — stronger evidence than the unlogged '31 passed / 11 skipped' sibling run.",
+  "ratchet-891.log (16:50, at register 1) lists the ten reds the six register acts had to clear (mutationCoverageManifest TOTALITY, OSR 'freshly re-minted baseline has NO drift', proseNumerics ×2, tuningRegister, writerReach, edgeFunctions ×4); ratchet-891b.log (18:18, at 4233031ba) lists only writerReach — direct evidence for 'one register from its gate' that the stratum does not cite.",
+  "§890.4's '770 → 290' mixes instruments: the parser that now IS the guard reads 295 (guard docblock 'em 290 → 295'); and the '108 rows in both directions' review figure could not be found in the receipt."
+ ],
+ "chair_errors": [
+  "§891 ledger row 32417, msg-891.txt and LANE-QUEUE.md all describe the writerReach bill inverted: the frozen register calls 'situationDesc on economicState' web-display=R (lit), the live scan says N; DESK CAR 1 did not make it reach the web display (EconomicsTab.jsx:335 already rendered it at base) — it moved the read behind a prop the scanner cannot resolve. CONFIRMED.",
+  "§891 register 5/6 commit 2445bb3c5: 'What moved is the execution-input fingerprint for exactly one path' — 32 manifest entries moved (5 added, 27 changed), including the seven the charset lane refused. CONFIRMED.",
+  "§891 stratum: 'the seventeen-car train, every register act in it — was reachable from NO REF' — twelve of seventeen commits were sealed at 16:27/16:33; five register commits were exposed. CONFIRMED.",
+  "§890.4 stratum/ledger: 'green, 770 → 290' — the live instrument reads 295; 290 is the retired tokenizer's figure. CONFIRMED.",
+  "§890.4 stratum/ledger omit the car's base (30c1667bc, one landing behind), leaving the owed rebase unstated. CONFIRMED.",
+  "§890.5 stratum states 'The §890 gate ran 1,087 s' without saying it is the failed first run; the ledger's 1,058 s is the landing gate. CONFIRMED (both logs)."
+ ],
+ "commands": [
+  "mkdir -p …/walk/S18; printf partial JSON > …/walk/S18.json",
+  "sed -n '1155,1231p' …/stratum/full.md",
+  "grep -n '^- \\*\\*§890\\|^§890\\|^- \\*\\*§891\\|^§891' docs/OWNER_DECISION_QUEUE.md; sed -n '32413p;32415p;32417p' docs/OWNER_DECISION_QUEUE.md; grep -n '890\\.5\\|8,551\\|1,056,551' docs/OWNER_DECISION_QUEUE.md",
+  "git log --oneline ca651d54b..4233031ba; git log --format='%h %s' --stat ca651d54b..4233031ba",
+  "git -C <dock> rev-parse HEAD; git -C <dock> status --porcelain (laneKERNELMARK-tree, lanePARSER-tree, laneENC-tree); git for-each-ref refs/preserve | grep 2026-09-0; git for-each-ref refs/heads | grep lane-",
+  "cat $SP/receipt-charset1.md; cat $SP/receipt-src-prose.md (read via persisted output); ls $SP/receipt-*.md $SP/logs",
+  "git show -s --format='%H%n%B' 250d4e464 79d45d274 fbcfbaeac ffe0dbb81 2445bb3c5 4233031ba",
+  "git show ffe0dbb81 -- scripts/mutation-sweep.sh scripts/mutation-coverage-manifest.json; git show ffe0dbb81:scripts/mutation-coverage-manifest.json | grep -B2 -A22 namingDataCharset; git show ffe0dbb81^:scripts/mutation-coverage-manifest.json | grep -c namingDataCharset",
+  "git show 4233031ba:tests/lint/writerReach.walker.test.js (grep + sed 286-305); git show 4233031ba:scripts/.writer-reach-baseline.json | grep -B2 -A12 'situationDesc on economicState'; git -C laneKERNELMARK-tree diff -- scripts/.writer-reach-baseline.json",
+  "git show a59e66e5a -- src/components/new/tabs/EconomicsTab.jsx src/components/new/tabs/EconomicsGlance.jsx; git show a9e0121bc -- src/components/new/tabs/EconomicsGlance.jsx; git show 4233031ba:src/components/new/tabs/EconomicsTab.jsx | grep eco",
+  "git ls-tree -r ca651d54b --name-only | grep -i dormancy; git show ca651d54b:tests/property/espionageDormancyFence.test.js | sed -n '318,348p'",
+  "git log --oneline -2 8f4d5c648; git show --stat 8f4d5c648; git diff --stat 30c1667bc 8f4d5c648 -- src/domain/customContentSchema.js; git show 8f4d5c648:{customContentSchema.js,economicState.js,journalPages.js,heraldCausalVoice.js,heraldCausalVoice.test.js,faithKindPools.walker.test.js} greps; git grep -n 'services —/' 8f4d5c648 -- src tests; git grep -n \"startsWith('NPC — ')\" 8f4d5c648 -- src tests",
+  "git show 8f4d5c648 -- tests/copy/voiceMechanics.test.js | grep '^[-+]'",
+  "git show 250d4e464 -- tests/lint/.lighting-census-baseline.json; git show 79d45d274 -- tests/lint/.tuning-inventory.json; git show 79d45d274:tests/lint/.tuning-inventory.json | grep tables/keys; grep receipts capacity/readerreview2/deskwiring for title/keys predictions",
+  "git show 2445bb3c5 -- scripts/.observed-shape-readers-baseline.json | grep '^[-+]'; git show 2445bb3c5^:… and 2445bb3c5:… > scratch; python3 probe (rows, multiset, manifests entries added/changed, total/identities/inventory, scanStats); same for fbcfbaeac^/fbcfbaeac prose-numerics",
+  "git show 4233031ba:supabase/functions/_shared/{aiCharterBundle,aiOutputSchemaBundle}.meta.json | grep inputs; git show 4233031ba -- *.meta.json; git log --format='%h|%(trailers:key=Seat,valueonly)' ca651d54b..4233031ba",
+  "git show 4233031ba:scripts/check-observed-shape-readers.mjs | sed -n '2660,2720p'; grep -n 'function provenanceDriftOf' -A32; grep -n 'function unscannedInputDigestOf' -A12; git show 4233031ba:scripts/lib/writer-reach-scan.mjs | grep -n grade/WEB_DISPLAY_DIRS",
+  "grep gate-890.log / gate-890b.log for GATE_START/GATE_END/HEAD/PORCELAIN/typecheck/domain/test-ratchet/lint/first-paint/STRICT DIST/laneKERNELMARK; grep msg-890*.txt msg-891.txt; cat ratchet-891.log ratchet-891b.log; cat closure-tip.log; grep build-tip.log build-base.log; sed -n '1,40p' LANE-QUEUE.md; find $SP -newermt '2026-09-03 17:50' ! -newermt '2026-09-03 18:35'",
+  "find laneKERNELMARK-tree/node_modules -maxdepth 1 -type l | wc -l; -type d | wc -l; per-dir test -e /Users/cstokes/Desktop/settlement-engine/node_modules/<name>; ls -ld immer seedrandom vite; git show -s --format='%h %ci' 4233031ba 2445bb3c5 ffe0dbb81 ca651d54b",
+  "git diff --name-only 30c1667bc 8f4d5c648 | sort; git diff --name-only 30c1667bc 4233031ba | sort; comm -12",
+  "git show 4233031ba:tests/data/namingDataCharset.test.js (whole); git show 4233031ba:src/domain/content/customContentCharset.generated.js | grep -c/-n '\"ranges\": \"D 20-7E A0-AC AE-132 ' and sed 18-31; git show 4233031ba:package.json | grep type",
+  "(cd laneKERNELMARK-tree && npx vitest run tests/data/namingDataCharset.test.js --no-file-parallelism) with git status --porcelain captured before and after — 5 passed (5), porcelain identical",
+  "node …/walk/S18/plant72-probe.mjs — imports the dock's leaf/pools by absolute path (read-only), strikes 'AE-132 ' in memory, replicates the five arms: CLEAN 5/5 pass; PLANT arms 2 and 5 fail; porcelain unchanged",
+  "stat -f '%Sm %N' .git/refs/preserve/train891-{composed,reg1,registers}-2026-09-03 .git/refs/preserve/srcprose-2026-09-03; git reflog show refs/preserve/train891-registers-2026-09-03 (empty)"
+ ],
+ "porcelain_unchanged": true,
+ "summary": "S18 walked §890.4, §890.5 and §891 against primary receipts, the committed tree and two read-only probes. HIGH items: the charset plant is real (unique anchor, one range struck from dossier-pdf only, arms 2 and 5 red by in-memory re-derivation, 5/5 green at the dock) — RATIFY. The OSR 'twelve collapse to one' is REVERSED: the composed-tip write moved 32 manifest entries including all seven the lane refused; the 'one' is the instrument's unscanned-input list and reads one at either vantage; the landing absorb itself stands. THE ONE BILL is REVERSED in direction: the frozen register says web-display=R, the live scan says N because DESK CAR 1 moved the read behind a prop the scanner cannot resolve; a plain --write would record a false non-reach AND flip a second entry ('_seed on settlement') the first-mismatch throw hid. Five register acts' figures confirmed exact by diff/probe (lighting 2515/+78, tuning 225/2099, prose numerics 225/225 multiset-identical, OSR 1993/1409/388, bundle inputs clean). §890.5: first-run 1,087 s failure and the restore-to-green second gate (1,058 s) are CONFIRMED from logs; the sibling-dock run is unlogged but an independent same-sha symlinked build at 1,046,996 B carries the direction; the restore is complete (no real dir shadows a main-repo package). §890.4: counter finding, four reverts, byte-twins, fence wording and the lighting-wave ruling all RATIFY; the car's unstated base (30c1667bc, 25 cars behind, 2 overlapping files) and '770 → 290' (parser reads 295) are AMENDS. 'Every register act unreferenced' is overstated (two seals predate the handoff). Every dock touched has unchanged porcelain; the only dock dirt (writer-reach-baseline.json, a live --write) was read, never touched."
+}

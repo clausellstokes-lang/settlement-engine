@@ -1,0 +1,21 @@
+{
+  "source": "ENCOUNTERS",
+  "_header": "OPUS-AUTHORED — read-only survey seat, 2026-09-04. Product tip ca651d54b (§890); train 15c6368a6 (§891, unlanded); ENC-3 dock laneENC-tree at base 30c1667bc.",
+  "status": "COMPLETE",
+  "items": [
+    {"id": "ENC-3", "name": "ENC-3 the stage, the flag, the fence — resume and land the 13 uncommitted dock paths", "klass": "chair-class", "blocked_by": "ENC-3-DOOR (the drift-family public-door decision, §890.1)", "size": "1 car, ~17 files", "landed": "NO", "confidence": "CONFIRMED"},
+    {"id": "ENC-3-DOOR", "name": "The drift family's public door — may characterConsumers.js re-export positionValue (and does characterDriftEnabled get a manifest home)", "klass": "owner-gated", "blocked_by": "nothing — awaiting a word", "size": "a ruling; then ~3 files", "landed": "NO", "confidence": "CONFIRMED"},
+    {"id": "ENC-3-NIDCAP", "name": "The season cap ignores its subject id — taughtRecently(driftMap, nid, ...) never reads nid", "klass": "chair-class", "blocked_by": "nothing (rides ENC-3's first commit)", "size": "2 files, ~4 lines", "landed": "NO", "confidence": "CONFIRMED"},
+    {"id": "ENC-3-LEANFOLD", "name": "The lean channel's reroll fold entry — unbuilt on the tree AND absent from the dock", "klass": "machinery-debt", "blocked_by": "nothing (rides ENC-3)", "size": "2 files", "landed": "NO", "confidence": "CONFIRMED"},
+    {"id": "ENC-4-ROAD", "name": "The Herald road fork — Road B (registry+pools+annex+walker, 9 owner sentences) vs Road A (one prefix row, 2 hand-authored lines)", "klass": "chair-class", "blocked_by": "nothing — unruled, no ledger row", "size": "a ruling", "landed": "NO", "confidence": "CONFIRMED"},
+    {"id": "ENC-4-WORDS", "name": "The Herald sentences — the owner's voice sitting", "klass": "owner-act", "blocked_by": "ENC-4-ROAD", "size": "9 sentences + 3 band fills + 2 noun phrases (Road B) or 2 lines + 2 noun phrases (Road A)", "landed": "NO", "confidence": "CONFIRMED"},
+    {"id": "ENC-4", "name": "ENC-4 the Herald — build the car", "klass": "chair-class", "blocked_by": "ENC-4-ROAD then ENC-4-WORDS", "size": "1-2 cars, ~10 files (Road B) or ~4 (Road A)", "landed": "NO", "confidence": "CONFIRMED"},
+    {"id": "ENC-5", "name": "ENC-5 the words in code — respect into BOND_KINDS, rivalry into GRUDGE_KINDS + foreignSid on LadderGrudge (RULED §882.13 rows 2/3, never executed)", "klass": "chair-class", "blocked_by": "nothing", "size": "1 car, ~5 files", "landed": "NO", "confidence": "CONFIRMED"},
+    {"id": "ENC-6", "name": "ENC-6 the reroll fold, both grains", "klass": "chair-class", "blocked_by": "-", "size": "-", "landed": "YES", "confidence": "CONFIRMED"},
+    {"id": "ENC-7", "name": "ENC-7 the elite-bleed in-pass wiring — deferred to the lighting wave and enrolled in no roster", "klass": "chair-class", "blocked_by": "no home: the wave's inventory carries no ENC-7 car", "size": "1 car, ~2 files", "landed": "NO", "confidence": "CONFIRMED"},
+    {"id": "ENC-LIGHT", "name": "chanceEncountersEnabled joins the LIGHTING WAVE roster as a declared shift in every preset incl. the default", "klass": "chair-class", "blocked_by": "ENC-3 landing", "size": "~1-3 files inside the wave", "landed": "NO", "confidence": "CONFIRMED"},
+    {"id": "ENC-TUNE", "name": "The encounters tuning signature — 4 draft registers unsigned", "klass": "owner-gated", "blocked_by": "the tuning sitting (LAST)", "size": "owner act, then a signing pass", "landed": "NO", "confidence": "CONFIRMED"},
+    {"id": "ENC-LAPSE", "name": "The willed-leash LAPSE arm reads AGE SINCE MINT, not 'no leak since'", "klass": "owner-gated", "blocked_by": "an owner word", "size": "1 small car, ~2 files", "landed": "NO", "confidence": "CONFIRMED"},
+    {"id": "ENC-ROADS13", "name": "§12 row 13 docket — roadsReturnedCaptives carries the same positional-key rebind defect and has no fold entry", "klass": "machinery-debt", "blocked_by": "nothing", "size": "1 small car, 2 files", "landed": "NO", "confidence": "CONFIRMED"}
+  ]
+}

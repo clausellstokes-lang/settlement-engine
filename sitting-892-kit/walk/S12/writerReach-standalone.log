@@ -1,0 +1,10 @@
+
+ RUN  v4.1.8 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/825f209c-0e84-4a1e-b6f0-79a46de834dc/scratchpad/laneCURECAP-tree
+
+
+ Test Files  1 passed (1)
+      Tests  56 passed (56)
+   Start at  19:36:48
+   Duration  39.50s (transform 3.30s, setup 32ms, import 652ms, tests 38.70s, environment 0ms)
+
+TRUE_EXIT=0

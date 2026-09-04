@@ -1,0 +1,50 @@
+[DRY batch1 WRWALKER + §1] would-apply reps: 9 / 49
+BAD #01 count=0 want=1 :: '## COMPLETE — folded (2026-09-02 03:10 ET); verdict: BUILD-READY WITH OWNER ROWS 69'
+OK  #02 count=1 want=1 :: '**Label key.** **CONFIRMED** = a design or recon lane read/measured it'
+BAD #03 count=0 want=1 :: "WRWALKER's `writerIdentity(k, s)` is pinned EQUAL to it by an executed test (§7);"
+BAD #04 count=0 want=1 :: "- **`SURFACE_CLASSES = ['web','dossier-pdf','campaign-pdf','world-book','foundry','json-export','new"
+BAD #05 count=0 want=1 :: '(web: two-phase from `src/main.jsx` — LIVE components then a STOP-bounded closure;'
+BAD #06 count=0 want=1 :: '`closureSizes` (0.9× sentinel floors)'
+BAD #07 count=0 want=1 :: '`PendingSurfaceRow` (`surface ∈ SURFACE_CLASSES`,'
+BAD #08 count=0 want=1 :: 'so the review reads what was MEASURED dark (thousands, R2/R10), not only the handful of rows a lane '
+BAD #09 count=0 want=1 :: '∩ the EXECUTED sanitiser = `S` = **191** today (Car 3 converges `S → C`); `web`/`foundry`/`json-expo'
+OK  #10 count=1 want=1 :: '- **THE STANDING BILL** — a new test file owes THREE censuses'
+OK  #11 count=1 want=1 :: "'the OSR per-file baseline sha' was a PHANTOM census"
+BAD #12 count=0 want=1 :: 'making cross-process determinism a BIT — or, when the deferred `globalSetup` corpus cache lands, the'
+BAD #13 count=0 want=1 :: "Two recon figures moved under the lane's own read and are corrected: `PUBLIC_TOPLEVEL_KEYS` has **38"
+OK  #14 count=1 want=1 :: 'Landing base = the COUPLED tip (rows 1–2 and the culture strike exist only there — `a-cure-site-live'
+BAD #15 count=0 want=1 :: 'at the tip `sentinel.totalKeys 6520` over `usableShapes 337` (CONFIRMED (recon)) — W is a few thousa'
+BAD #16 count=0 want=1 :: "— plus `configs 4`, the ninth field the volume's list omitted — at `60255ca8e`; Car 0 measures the l"
+BAD #17 count=0 want=1 :: '`web`: phase A `LIVE = reach(main.jsx, ALL edges, no stop) ∩ src/components/**` (566 files under `sr'
+OK  #18 count=1 want=1 :: 'the cost is the kernel leak-through in §7.7 R4, MEASURED in Car 0 — vetoable; the constant is declar'
+BAD #19 count=0 want=1 :: "a local `BUILTIN_MEMBERS` (OSR's is private) with a test asserting no key in W collides with it."
+BAD #20 count=0 want=1 :: 'credited to EVERY shape in `known` carrying `k` (deliberately over-permissive — the conservative dir'
+BAD #21 count=0 want=1 :: "`LIT` if any counting class has `'R'`; `LIT-NAME` if only `'N'`; else `DARK`."
+BAD #22 count=0 want=1 :: "at the landing tip the live join for `culture` is expected EMPTY and the arm's plant is synthetic."
+OK  #23 count=1 want=1 :: 'Everything else DARK at genesis enters the banked cohort, tagged `UNREVIEWED-DARK`, queryable, shrin'
+BAD #24 count=0 want=1 :: "`beforeAll` budget `900_000` (OSR's, sized against the measured contended corpus build 251,002 ms); "
+OK  #25 count=1 want=1 :: 'kernel leak-through > 50 % of `src/domain/worldPulse` files (re-open the STOP judgment). Bill: none;'
+BAD #26 count=0 want=1 :: "(with the rows Car 0 confirmed DARK among §7.1's 1–6 minus row 1, which needs Car 3 — until then the"
+BAD #27 count=0 want=1 :: "`'the identity grammar is OSR's: writerIdentity(k, s) equals identityOf({key:k, shapes:[s]})'`"
+OK  #28 count=1 want=1 :: "`'the surface roots are real files, every counting class has a non-empty closure, and the STOP set i"
+BAD #29 count=0 want=1 :: 'the genesis cohort > 4,000 identities (back to Car 0); the contended `beforeAll` > 600 s (cut work, '
+BAD #30 count=0 want=1 :: 'lighting expected `files +1, credited +1, parked +0, titles +≈30, suiteTitles +5`'
+BAD #31 count=0 want=1 :: "**and the CHARSET pin `expect(CHARSET_SURFACES).toEqual(SURFACE_CLASSES.filter(c => c !== 'news'))` "
+BAD #32 count=0 want=1 :: '(synthetic; the live join asserted EMPTY for `culture` with an anchor)'
+BAD #33 count=0 want=1 :: "`'the web-only gap report lists identities LIT on web with no paid-PDF reach, and the recon's cultur"
+BAD #34 count=0 want=1 :: "Bill: titles +4 (folded into Car 1's ONE refreeze if the cars land as one train)"
+OK  #35 count=1 want=1 :: "the first landing's gate log IS the contended measurement — vetoable.**"
+BAD #36 count=0 want=1 :: '| +≈ 4 min CPU per gate; wall-clock +0–4 min on the dev box; ⟦A23 E7⟧ in CI it is cumulative inside '
+BAD #37 count=0 want=1 :: 'the `LIT-NAME-only` cohort is frozen and reportable; `R` is the strong claim; WRW-4 may tighten the '
+BAD #38 count=0 want=1 :: '| Car 0 measures both; the STOP set is a declared, plantable constant; a store-selector read is exac'
+BAD #39 count=0 want=1 :: '| that IS a finding for the owner; the red still guards the future; Car 0 STOPS before any register '
+BAD #40 count=0 want=1 :: '`tests/lint/writerReach.walker.test.js` (≈ 30 + 4 + 5 titles / 5 suites; ENFORCER + `walker` basenam'
+BAD #41 count=0 want=1 :: '| WRWALKER `writerReach.walker.test.js` | `test:ratchet` (`tests/lint`) | a SECOND `buildObservedCor'
+BAD #42 count=0 want=1 :: 'the second `buildObservedCorpus` (~264 s contended)'
+BAD #43 count=0 want=1 :: '**≈ +13–14 min CPU; PLAUSIBLE +4–8 min wall-clock on parallel vitest workers** — the two long poles '
+BAD #44 count=0 want=1 :: "- **WRW-2** — Which dark generated facts are to be SHOWN (Car 0's measured list replaces the recon's"
+BAD #45 count=0 want=1 :: '- **WRW-4** — Should the red demand grade `R` (resolver-grounded) rather than `N` (name-level)? — *R'
+BAD #46 count=0 want=1 :: "CHARSET's six are a PINNED MIRROR of WRWALKER's seven minus `news`, the pin in WRWALKER Car 2's walk"
+BAD #47 count=0 want=1 :: "| E24 | WRWALKER's `judged ≥ 3,000`, `dark ≤ 60 %`, corpus+scan ≤ 90 s solo, kernel leak-through ≤ 5"
+BAD #48 count=0 want=1 :: '| E25 | the `LIT-NAME-only` share and which of the six drafted DARK rows are actually DARK; whether '
+BAD #49 count=0 want=1 :: "| `observedShapeReaders.walker` in each car's WHOLE `tests/lint` run; cure = OSR `--write` at the la"

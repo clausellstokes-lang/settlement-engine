@@ -1,0 +1,64 @@
+TRAIN 1 cars C2+C3 (lane REGISTRY): the dossier gets a router that can say WHERE, and one fact is given exactly one sentence — the dark half is 68 blocks a gate can count, and the walker's controls red on the defect before the table has a single row
+
+C2 — THE DENOMINATOR. src/domain/display/stateProse/dossierMounts.js is a pure,
+frozen, import-free table of {mount, tab, desk, blockId, rung}. It replaces
+`sectionTarget` as the router, not because that field is dirty (it is, and that is
+a separate parser repair) but because of what it MEANS: a section is a property of
+the block and a position is a property of the page, and `sectionTarget:
+['economics']` can never say where in EconomicsTab a block goes. The causal
+register is the control that shows the distinction is real rather than invented
+here — a join's section genuinely is a property of the join, which is why
+causalFamiliesForSection is legitimate and a state equivalent would not be.
+
+DOSSIER_MOUNTS IS EMPTY AT BIRTH, and that is the honest state rather than a
+shortfall: no desk has landed, so no component carries a position, and a row
+naming a position the tree does not build would be the registry drifting into
+fiction on its first day. UNMOUNTED_BLOCKS carries all 68 blocks in a
+machine-checked order, so the corpus's darkness stops being a silence and becomes
+a number — shrink-only against tests/lint/.dossier-mounts-baseline.json, so a
+block can leave that list and never join it.
+
+C3 — THE ROOM. A block's SENTENCE rung renders at exactly one position per
+page-set; every other position renders the glance and the detail and no sentence.
+This is not a new law — economyStateProse.js already says a composed page draws at
+most one of each and never both about the same fact (R-DST-A) — and it needs no
+mechanism: no draw-key change, no rotation, nothing that races the one-way door.
+It is held in two places that cannot disagree: `rung` is a field on every row, so
+a component can only be given the depth its row names; and sentenceMountForBlock
+is the only way to ask where a fact speaks, answering with at most one position or
+with nothing at all, fail-closed on a contradiction because picking the first row
+would choose a winner by array order. The one written exception is recorded in the
+docblock so the next reader does not repair it: DS-GEN-6's tier overlay composes
+after the route line and never instead of it, which is two pools at one position
+and not one fact speaking twice.
+
+THE WALKER, AND WHY ITS CONTROLS ARE NOT DECORATION. With an empty table, every
+arm that reads a row would pass over nothing and prove nothing. So each rule is a
+PURE FUNCTION over a registry passed in, and every one is driven over the design's
+own worked example plus a planted violation, with the sibling rules asserted
+SILENT so a plant convicts one arm rather than the file. Executed: flipping
+power.tensions to the sentence rung reds the one-fact arm alone; withdrawing the
+severity declaration reds the honesty arm alone; a mount with no JSX site and one
+with two both red the reachability arm. The tab vocabulary is read off
+OutputContainer's own renderTab switch through mustExtract rather than kept by
+hand, and the corpus join is re-derived from the six leaves on every run.
+
+MEASURED, NOT ASSUMED. 68 corpus blocks carry pools. Exactly 3 carry a demoted
+dimension — DS-GEN-1 severity, DS-GEN-6 deficit, DS-GEN-9 anchor — and 65 carry
+none. The new src leaf holds 0 em dashes and 0 exclamation marks in any string
+literal, measured with the ratchet's own tokenizer, so tests/copy/voiceMechanics
+needs no baseline entry for it; its four red arms are unchanged at 1108 and 40
+against a clean checkout of the base sha, which is where those reds were proved
+pre-existing rather than assumed to be.
+
+THE PLANT IS REAL RATHER THAN A RATIONALE. Striking DS-CND-1 from the dark half
+without mounting it reds the totality arm by name — 15 passed, 1 failed — and that
+is deliberately the arm a shrink-only ratchet CANNOT see, because shrinking is the
+direction the ratchet exists to permit. A list that gets shorter looks healthy to
+a ratchet and looks wrong only to a join against the corpus.
+
+NOT TAKEN, and owed to the landing: scripts/.test-ratchet-baseline.json moves by
+one file and sixteen tests. Registers are the landing's act, never a lane's.
+
+Seat: Opus 5 — Fable-unvalidated
+

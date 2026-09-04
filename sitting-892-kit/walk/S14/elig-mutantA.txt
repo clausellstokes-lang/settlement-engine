@@ -1,0 +1,8 @@
+export function eligibleVariants(pool, options = {}) {
+  if (!Array.isArray(pool) || pool.length === 0) return [];
+  const slots = options.slots || {};
+  const audience = options.audience === AUDIENCE_DM ? AUDIENCE_DM : AUDIENCE_PLAYER;
+  return pool.filter(
+    (variant) => variantIsAudible(variant, audience) && variantIsAnchored(variant, slots),
+  );
+}

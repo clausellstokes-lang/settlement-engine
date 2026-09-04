@@ -1,0 +1,9 @@
+
+ RUN  v4.1.8 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/825f209c-0e84-4a1e-b6f0-79a46de834dc/scratchpad/laneINSTRLAND-tree
+
+
+ Test Files  1 passed (1)
+      Tests  12 passed (12)
+   Start at  19:36:42
+   Duration  8.63s (transform 2.49s, setup 27ms, import 3.60s, tests 4.90s, environment 0ms)
+

@@ -1,0 +1,2 @@
+src/domain/display/settlementRumors.js
+src/domain/region/propagation.js

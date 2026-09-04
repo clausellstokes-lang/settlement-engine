@@ -1,0 +1,11 @@
+{"source":"WARMS","_header":"OPUS-AUTHORED","status":"COMPLETE","volume_found":"/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/825f209c-0e84-4a1e-b6f0-79a46de834dc/scratchpad/DESIGN_W_ARMS.md (55,812 B, 558 lines) — NOT committed to any git ref","items":[
+{"id":"WARMS-0","name":"Car 0 — MEASURE (read-only rider, zero product bytes)","klass":"chair-class","landed":"NO","confidence":"CONFIRMED"},
+{"id":"WARMS-1","name":"Car 1 — the arms leaf + pins","klass":"chair-class","landed":"NO","confidence":"CONFIRMED"},
+{"id":"WARMS-2","name":"Car 2 — the kinship adapter + the web seam","klass":"chair-class","landed":"NO","confidence":"CONFIRMED"},
+{"id":"WARMS-3","name":"Car 3 — the PDF cover seam (paid surface)","klass":"owner-gated","landed":"NO","confidence":"CONFIRMED"},
+{"id":"WARMS-4","name":"Car 4 — the CC0 charge roster (optional)","klass":"owner-gated","landed":"NO","confidence":"CONFIRMED"},
+{"id":"WARMS-VETO","name":"The open one-word owner veto on W-ARMS","klass":"owner-act","landed":"NO","confidence":"CONFIRMED"},
+{"id":"WARMS-TASTE","name":"The eleven §9 taste rows","klass":"owner-act","landed":"NO","confidence":"CONFIRMED"},
+{"id":"WARMS-DOC","name":"DESIGN_W_ARMS.md is not in the repo","klass":"machinery-debt","landed":"NO","confidence":"CONFIRMED"},
+{"id":"WARMS-SKEPTIC","name":"The independent skeptic pass §879.11 required","klass":"machinery-debt","landed":"UNKNOWN","confidence":"PLAUSIBLE"},
+{"id":"WARMS-REMEASURE","name":"Re-measure the design's point-in-time figures at the boarding base","klass":"machinery-debt","landed":"NO","confidence":"CONFIRMED"}]}

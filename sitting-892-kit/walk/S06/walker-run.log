@@ -1,0 +1,10 @@
+
+ RUN  v4.1.8 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/825f209c-0e84-4a1e-b6f0-79a46de834dc/scratchpad/laneGOLDEN-tree
+
+····················································································
+
+ Test Files  1 passed (1)
+      Tests  84 passed (84)
+   Start at  18:51:14
+   Duration  2.64s (transform 38ms, setup 28ms, import 2.16s, tests 90ms, environment 0ms)
+

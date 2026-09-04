@@ -1,0 +1,526 @@
+{
+ "slice": "S13",
+ "status": "COMPLETE",
+ "calls": [
+  {
+   "row": "§884.5 DARKREADER",
+   "call": "D1 kernel implements one of two channels (slots enforced, marks ignored); causalDossierProse.js:110-112 hand-rolls a marks filter",
+   "claim": "The kernel enforces slots via variantIsAnchored and silently ignores marks; compensating marks filter lives outside the kernel.",
+   "method": "git show f5a6c3bbf:src/domain/display/stateProse/stateProseKernel.js (eligibleVariants :155-161, variantIsAnchored :130-134, variantIsAudible :145-146); git show f5a6c3bbf:src/domain/display/stateProse/causalDossierProse.js :100-120; node probe over the six leaves counting mark kinds.",
+   "evidence": "stateProseKernel.js:155-161 `return pool.filter((variant) => variantIsAudible(variant, audience) && variantIsAnchored(variant, slots))`; :145-146 `const marks = variant?.marks; return !Array.isArray(marks) || !marks.includes(COVERT_MARK)`; :130-134 checks `variant?.slots` only. causalDossierProse.js:110-112 `.filter((variant) => (variant.marks || []).includes(join.arm))`. Probe mark kinds at f5a6c3bbf: dm-only 83, minor 20, major 20, catastrophic 10, 'no deficit' 11, deficit 11, anchored 19, 'not anchored' 13 — the DS-GEN-1 / DS-GEN-6 / DS-GEN-9 dimensions exactly.",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "Substance holds. Wording: the kernel does read `marks`, for exactly one value (`dm-only`, the audience gate) — it ignores every DIMENSION mark (severity, deficit, anchored, arm). 'Silently ignores the second channel' should say that."
+  },
+  {
+   "row": "§884.5 DARKREADER",
+   "call": "D2 the figures: 687 of 708 seed-inert under the angle axis; 13 of 58 states ≤1 variant; ZERO of 650 unmarked pools lose anything; method validated 83+6=89 against dmOnly>=89",
+   "claim": "Pool/state census figures and the pin-validated method.",
+   "method": "Read-only node probe (scratch only) over git show f5a6c3bbf:src/data/dossierStateProse/*.generated.js; git grep dmOnly at f5a6c3bbf; DESIGN-dark-reader-recut.md :51-53, :58, :63, :91-94.",
+   "evidence": "Probe: {blocks: 68, pools: 708, variants: 2266, markedVariants: 186}; pools with dimension marks 24 (DS-GEN-1 10, DS-GEN-6 6, DS-GEN-9 8) → states 10×3+6×2+8×2 = 58 exact; pools with NO marks at all 652; pools with no dimension mark 684. dm-only marks 83; receipt :53 '83 state + 6 causal = **89 exactly**'; pin tests/data/dossierStateProseProjection.contract.test.js:215 `expect(dmOnly.length).toBeGreaterThanOrEqual(89)`. Receipt :58 '687 of 708 ← kill 1, reproduced'.",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "708, 58 and 89 reproduce to the digit. '650 unmarked pools' is 708 − 58, which subtracts STATES from POOLS; the pool figure is 684 (no dimension marks) or 652 (no marks). 687/708 not re-derived here (PLAUSIBLE; settle: per-variant angle count over the leaves)."
+  },
+  {
+   "row": "§884.5 DARKREADER",
+   "call": "D3(a) routing-parser fix is not behind the one-way door — draw key never contained sectionTarget",
+   "claim": "Draw key is `${seed}::${blockId}::${poolKey}`.",
+   "method": "git grep at f5a6c3bbf in src/domain/display/stateProse.",
+   "evidence": "stateProseKernel.js:197 `return eligible[avalanche32(fnv1a32(`${seed}::${blockId}::${poolKey}`)) % eligible.length];`",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Exact; sectionTarget absent from the key."
+  },
+  {
+   "row": "§884.5 DARKREADER",
+   "call": "D3(b) the voice ratchet ALREADY counts the corpus (voiceMechanics.test.js:164-166 walks src/data); two of the ten banked failures are red because of these leaves; 338 em dashes",
+   "claim": "Wiring moves no ratchet; the em-dash debt is already banked.",
+   "method": "git show f5a6c3bbf:tests/copy/voiceMechanics.test.js :155-175, :40-48; scripts/.test-ratchet-baseline.json titles; tests/copy/.voice-mechanics-baseline.json grep; raw em-dash count of the seven leaves.",
+   "evidence": "voiceMechanics.test.js:164-167 `const SCANNED_FILES = [...walkJs(join(ROOT, 'src/data')), ...walkJs(join(ROOT, 'src/domain'))]`. Baseline entries 3 and 4 of 10: 'E2 voiceMechanics — src/data + src/domain string-literal ratchet (shrink-only) per-file debt exactly matches the baseline' and '... total debt never grows past its committed budget'. `.voice-mechanics-baseline.json` has 0 rows matching dossierStateProse. Receipt :65 'EM DASHES (the ratchet's own scanner) state 272 + causal 66 = 338'; raw `—` count incl. comments: six desk leaves 279 + causal 67 = 346 (consistent upper bound).",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Line cite is :164-167 (four lines), trivial."
+  },
+  {
+   "row": "§884.5 DARKREADER",
+   "call": "D3(c) economy.generated.js is not import-free",
+   "claim": "The leaf carries an import against its docblock claim.",
+   "method": "git show f5a6c3bbf:src/data/dossierStateProse/economy.generated.js head.",
+   "evidence": "economy.generated.js:6 `import { ECONOMY_FRESHNESS_SENTENCES } from '../../domain/display/economyFreshness.js';` under the header 'A canonical row that IS a live engine string is IMPORTED, never inlined'.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": ""
+  },
+  {
+   "row": "§884.5 DARKREADER",
+   "call": "D3(d) OutputContainer.jsx measures ~600/600 with zero headroom",
+   "claim": "Threading audience props must add zero lines.",
+   "method": "git show f5a6c3bbf:eslint.config.js :654-670; docs/implementation/BASE_STATE.json; scripts/.size-baseline.json grep; receipt :417-436.",
+   "evidence": "eslint.config.js:667 `'max-lines': ['error', { max: 600, skipBlankLines: true, skipComments: true }]` for src/components/**/*.jsx; OutputContainer absent from scripts/.size-baseline.json; docs/implementation/BASE_STATE.json:18 `\"src/components/OutputContainer.jsx\": \"599/600\"`; receipt :417 'effective (this lane's estimate)', :428 'refute-2 estimated ~650 ... It cannot be over — the tree is [green]'.",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "The figure is the lane's ESTIMATE, not a measurement; the committed record says 599/600 (one line of headroom). Say 'estimated at the 600 ceiling' rather than 'measures'."
+  },
+  {
+   "row": "§884.5 DARKREADER",
+   "call": "D4 chair scope finding: LIGHTING-INVENTORY.md is 436 lines with ZERO mentions of stateProse/dossierStateProse/readStateProse/DS-GEN/DS-ECO",
+   "claim": "The lighting charter carries no car for the state-prose corpus (2,734 sentences).",
+   "method": "wc -l and grep -c -E on SP2/LIGHTING-INVENTORY.md; probe variant counts.",
+   "evidence": "`wc -l` → 436; `grep -c -E 'stateProse|dossierStateProse|readStateProse|DS-GEN|DS-ECO'` → 0 (grep exit 1). Probe: six desk leaves 2266 variants + receipt :63 causal 'variants 468' = 2734, matching the ledger row's '2,734 authored sentences'.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": ""
+  },
+  {
+   "row": "§884.5 DARKREADER",
+   "call": "D5 self-reported deviation RATIFIED: the lane ran three short single-process JSON parses despite a no-execution instruction and flagged it explicitly",
+   "claim": "The lane breached a constraint and declared it.",
+   "method": "grep -nE 'JSON|process|pars|execut|deviat|scratchpad' DESIGN-dark-reader-recut.md; header :1-12; tail; briefs/brief-DARKREADER-REDESIGN.md :4-8.",
+   "evidence": "Receipt header :3 'Read-only lane. Every figure below was executed by this lane against `git show f5a6c3bbf:<path>`, not inherited.' No line in the 41,507-byte receipt mentions JSON parses, ~1 s CPU, or a declared breach. Brief :5-8 '⛔ FORBIDDEN, without exception: `npm run *`, `npx vitest`, any build ... If you find yourself wanting to execute the tree, STOP and write down'.",
+   "verdict": "EVIDENCE-THIN",
+   "confidence": "CONFIRMED",
+   "note": "The flag the chair ratified is not in the persisted receipt; it can only have lived in the lane's chat return. Settle: search the chair session 58f0a8e2 transcript for 'JSON' in the DARKREADER return."
+  },
+  {
+   "row": "§884.5 NEWSLAYER",
+   "call": "N1 THE HEADLINE IS A SUPPRESSION KEY — isMetronomeRepeat compares prior.headline === entry.headline; pooling would disable a six-tick suppressor; single-valued frames leave the class unchanged by construction",
+   "claim": "Pooled headlines would break metronome suppression; single-valued frames do not.",
+   "method": "git show f5a6c3bbf:src/domain/worldPulse/worldPulseFeedCuration.js :119, :140-151; git diff f5a6c3bbf ca651d54b on that file; git show 4b00f971b (Cure A) diff.",
+   "evidence": ":119 `export const DRIFT_REEMIT_COOLDOWN_TICKS = 6;` :140-151 `priorEntries.some((prior) => prior.kind === 'applied' && normalizedTick - (prior.tick ?? -Infinity) < DRIFT_REEMIT_COOLDOWN_TICKS && prior.impactKind === entry.impactKind && prior.headline === entry.headline && ...settlementsKey... && ...reasonsKey...)`; diff f5a6c3bbf..ca651d54b = 0 changed lines. Cure A 4b00f971b +190-196 '⛔ THE HEADLINE IS A METRONOME SUPPRESSION KEY ... These frames are SINGLE-VALUED for that reason'; +221 `if (transition === 'expired') return `${town} is spared ${phrase}`;`.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Refutation attempt: a pooled headline drawn per entry would make two same-input entries differ in `headline`, so the `===` arm fails and the entry survives — the suppressor is disabled exactly as claimed. §885.5 built single-valued frames (CONFIRMED)."
+  },
+  {
+   "row": "§884.5 NEWSLAYER",
+   "call": "N2(1) occupation_burden_cleared is one of TWELVE owner-gated mutilated anchors (rumorFallbackPhrasePools.test.js:138-151, :221-229, LEG-7)",
+   "claim": "The chair briefed an owner-gated token as the flagship defect.",
+   "method": "git show f5a6c3bbf:tests/domain/rumorFallbackPhrasePools.test.js :136-152, :219-230.",
+   "evidence": ":138-151 `const MUTILATED_ANCHORS = Object.freeze(['coup_detat', ..., 'occupation_burden', 'occupation_burden_cleared', 'occupation_resistance'])` — 12 entries; :221-229 `it('each mutilated anchor is still the live computed string, unrepaired', ...)` with the comment 'OWNER-GATED (wiring note LEG-7, \"do not bundle either into a pool-wiring wave\")'.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": ""
+  },
+  {
+   "row": "§884.5 NEWSLAYER",
+   "call": "N2(2) 72 shapes (12×6), not 78 — relief has its own branch",
+   "claim": "The thirteenth label is intercepted before the frames.",
+   "method": "git grep relief at f5a6c3bbf in wizardNews.js.",
+   "evidence": "wizardNews.js:194 `relief: 'Regional relief',` :471-473 `// relief reads as a POSITIVE beat (pressure eases), not \"faces relief\" / \"relief takes hold\". if (impact.kind === 'relief') {`.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "12×6 = 72 follows if IMPACT_LABELS has 13 keys; not counted here (PLAUSIBLE)."
+  },
+  {
+   "row": "§884.5 NEWSLAYER",
+   "call": "N2(3) SIX mint shapes across ~20 sites; the only defence against route 5 is a docblock at treatySuccessionVoice.js:64",
+   "claim": "A naming convention enforced by a comment is not machinery.",
+   "method": "git show f5a6c3bbf:src/domain/worldPulse/treatySuccessionVoice.js :60-68; NEWSLAYER-SPEC-return.md :111-117.",
+   "evidence": "treatySuccessionVoice.js:61-68 '`kind`, `impactKind` and `ending` below are spelled as STRING LITERALS on purpose ... a kind minted through a constant is INVISIBLE to it ... Measured here, not theorised: this file failed that walker until the literals went in.' Receipt :111 'There are at least six mint SHAPES across roughly twenty sites, and the existing walkers see only the first.'",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "Docblock CONFIRMED (spans :61-68, not a single line). The six-shape/20-site count is the lane's and was SUPERSEDED at §885.5 by the sound scan: '199 sites — 147 literal, 14 template families, 11 through module constants, 27 unresolvable'. The stratum row should carry that mark."
+  },
+  {
+   "row": "§884.5 NEWSLAYER",
+   "call": "N3 census 379 routed · 214 registered · 174 unregistered (107 governed, 12 owner-gated, 67 BARE) · 19 BARE live; 107 reproduces toBe(107); chair's '52 live' superseded",
+   "claim": "Census anchored on the estate's pins.",
+   "method": "git grep toBe(107) at f5a6c3bbf; NEWSLAYER-SPEC-return.md :79-99; ledger §885.5 (line 32386).",
+   "evidence": "rumorFallbackPhrasePools.test.js:163-164 `expect(Object.keys(PARSED).length).toBe(107); expect(FALLBACK_WIRED_KINDS.length).toBe(107);`. Receipt :79-84 table 379/214/174/107, :95 'news-reaching field ... **36**', :99 'I could not reproduce the brief's \"52 live\"'. §885.5: 'the 19-token live roster is PARTLY UNSOUND ... scanned from `kind:` anywhere in `src` ... Its sound scan ... found 199 sites ... yielding 26 unregistered tokens.'",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "379/214/174/107 stand; '19 BARE, live and reader-reachable' was ruled partly unsound one row later (§885.5) and the §884.5 stratum text carries no superseded mark."
+  },
+  {
+   "row": "§884.5 NEWSLAYER",
+   "call": "N4 settlement_terminal_death is live; first fires at the 100-year horizon with 20 deaths; a century campaign prints the slug twenty times while the Herald says `${name} is dying`",
+   "claim": "Best and worst sentence describe the same event.",
+   "method": "git grep at f5a6c3bbf for settlement_terminal_death and 'is dying'.",
+   "evidence": "subsystemRowsWaves.js:55 'the first-class lane first fires at the 100-year horizon (20 deaths and 20 resettlements in release-100y-4s-seed1)'; settlementLifecycleFirstClass.js:224 `headline: `${name} is dying`,`; heraldRouting.js:323/653 `settlement_terminal_death: 'events'`; settlementRumors.js:514 at ca651d54b 'why a hundred-year campaign printed \"Merchants bring word of settlement terminal…'.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "'Twenty times' is PLAUSIBLE (20 distinct settlements → 20 distinct headlines, none metronome-suppressed); the liveness trace mint→render is the receipt's (:69), not re-executed."
+  },
+  {
+   "row": "§884.5 NEWSLAYER",
+   "call": "N5 stale enforcement citation: settlementRumors.js:112-113 names tests/domain/settlementRumors.walker.test.js, which does not exist at f5a6c3bbf",
+   "claim": "A §883-class false green.",
+   "method": "git show f5a6c3bbf:src/domain/display/settlementRumors.js :105-118; git cat-file -e f5a6c3bbf:tests/domain/settlementRumors.walker.test.js.",
+   "evidence": "settlementRumors.js:113-114 '// Exported for the impactKind walker (tests/domain/settlementRumors.walker.test.js), // which source-scans every minted impactKind and reds until it is phrased here.' `git cat-file -e` → 'fatal: path ... does not exist in f5a6c3bbf' (exit 128); ls-tree shows only tests/domain/settlementRumors.test.js.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Line cite is :113-114 at f5a6c3bbf (row says :112-113), trivial."
+  },
+  {
+   "row": "§884.5 rulings",
+   "call": "R1 single-valued frames rather than pooled",
+   "claim": "Ratified on the metronome ground.",
+   "method": "as N1.",
+   "evidence": "See N1; the news-headline contract baseline is count-shaped (`distinctValues`/`occurrences` per home|field), so single-valued frames also leave its distinctValues unchanged.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": ""
+  },
+  {
+   "row": "§884.5 rulings",
+   "call": "R2 IMPACT_LABELS re-authored in place rather than a second table (module-private, two prose-only consumers)",
+   "claim": "In-place re-authoring is safe.",
+   "method": "git grep IMPACT_LABELS at f5a6c3bbf.",
+   "evidence": "wizardNews.js:180 `const IMPACT_LABELS = Object.freeze({` (not exported); only other src hit is a comment at heraldRouting.js:196; consumer :272.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "'Two prose-only consumers' not counted (PLAUSIBLE)."
+  },
+  {
+   "row": "§884.5 rulings",
+   "call": "R3 human() deleted from impactLabel — a second de-underscore leak reaching a PERSISTED headline",
+   "claim": "The fallback reaches persisted data.",
+   "method": "git grep at f5a6c3bbf; normalizeEntry :538-560.",
+   "evidence": "wizardNews.js:260 `function human(value)`; :271-272 `function impactLabel(kind) { return IMPACT_LABELS[kind] || human(kind) || 'Regional pressure'; }`; normalizeEntry :556 `headline: entry.headline || 'Regional update',` — passthrough of a persisted headline.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": ""
+  },
+  {
+   "row": "§884.5 rulings",
+   "call": "R4 negative control is a tmpdir fixture tree, the lane having refused the chair's briefed src plant",
+   "claim": "Deterministic, parallel-safe control.",
+   "method": "NEWSLAYER-SPEC-return.md :172.",
+   "evidence": "Receipt :172 'C1 — DISCOVERY control (the arm no existing walker has). `mkdtempSync(join(tmpdir(), 'newslayer-'))`; write one fixture file containing `impactKind: 'newslayer_probe_unregistered'`; run `scanMints(fixtureRoot)`'.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The refusal's grounds (poison file a sibling stages) are sound: the §890.4/§891 era docks show untracked files graded by fs scanners (memory: 'an untracked file is still inside a filesystem scanner')."
+  },
+  {
+   "row": "§884.5 rulings",
+   "call": "R5 the superseded '52 live' count recorded as superseded",
+   "claim": "Housekeeping.",
+   "method": "receipt :99; ledger row.",
+   "evidence": "Receipt :99 'I could not reproduce the brief's \"52 live\", and I do not think it is recoverable — it sits between my 36 (news-reaching fields) and 72 (all four fields)'.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": ""
+  },
+  {
+   "row": "§884.5 rulings",
+   "call": "R6 RULED: Cure A is FREEZE-BLOCKING because normalizeEntry passes persisted headlines through and THE PROMISE forbids migrating saves",
+   "claim": "Urgency ruling.",
+   "method": "§884.6 owner statement; my fixture census at ca651d54b (see O1).",
+   "evidence": "Mechanism CONFIRMED (normalizeEntry :556 passthrough). Premise refuted by the owner (§884.6: 'there is no save before this fix. we are entirely prelaunch') and by the tree: no committed fixture or golden carries a persisted headline of the template (O1).",
+   "verdict": "REVERSE",
+   "confidence": "CONFIRMED",
+   "note": "Already reversed by §884.6; as a §884.5 call it was wrong — a mechanism ruled on an unverified antecedent. The stratum's §884.5 text carries the ruling with no inline superseded mark."
+  },
+  {
+   "row": "§884.5 rulings",
+   "call": "R7 routed to the owner: twelve anchors, phrase/frame wordings, 338 em dashes reader-facing, paid-surface exposure, 13-state authoring bill",
+   "claim": "Owner-gated items not absorbed.",
+   "method": "read.",
+   "evidence": "Anchors are owner-gated by pin (:221-229); wordings were later owner-approved at §885.5.",
+   "verdict": "OUT-OF-SCOPE",
+   "confidence": "CONFIRMED",
+   "note": "Correctly routed."
+  },
+  {
+   "row": "§884.6",
+   "call": "O1 WITHDRAWAL: Cure A not freeze-blocking but freeze-PREFERRED; residual question — does any COMMITTED fixture or golden corpus carry a persisted wizardNews headline?",
+   "claim": "No saves exist; the fixture question is the last persistence exposure.",
+   "method": "git grep -l 'takes hold in\\|Merchants bring word' ca651d54b -- tests src/data; git grep -n same -- tests; git grep -l '\"headline\"' ca651d54b -- tests/**/*.json src/data/**/*.json; git grep -n 'headline:' ca651d54b -- tests/fixtures.",
+   "evidence": "Five .js hits, all assertion templates or comments: impactKindWalkers.test.js:10 (comment), rumorFallbackPhrasePools.test.js:286 and rumorPhrasePools.test.js:231 `expect(`Merchants bring word of ${variant} in Thornwall`).toContain(variant)`, settlementRumors.test.js:437 `expect(h).toBe('Merchants bring word of the drums of war in Thornwall')`, newsSubjectVocabulary.walker.test.js:411/484. JSON with a \"headline\" key: only tests/lint/.news-headline-contract-baseline.json and .prose-family-contract-baseline.json — count-shaped (`distinctValues`, `occurrences`), 0 string hits. tests/fixtures/gameGradeHeraldFixtures.js headlines are hand-authored ('The roads remain quiet').",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "SETTLED: no committed fixture or golden carries a persisted headline of the rumor template; Cure A moves only a rendered assertion in settlementRumors.test.js:437 and the contract baselines' counts stay put under single-valued frames."
+  },
+  {
+   "row": "§884.6",
+   "call": "O2 THE CHAIR'S ERROR NAMED — third of one shape today (§883.6 unopened upstream guard; §884.2 guessed span bound)",
+   "claim": "Pattern: mechanism verified, antecedent assumed.",
+   "method": "sed -n 32371p / 32373p / 32376p of the ledger.",
+   "evidence": "§883.8 (line 32373): '`refreezeRefusals(...)` is called at `walker:92-103` and throws at `:104-106`, UPSTREAM of that write, and the chair never opened it. The chair saw a guard, assumed it knew what the guard guarded, and ruled from the half it had read.' §884.2 (32376): 'against a bound of 1000–2000 the chair had **guessed rather than measured**'.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": ""
+  },
+  {
+   "row": "§884.6",
+   "call": "O3(a) the FILL-LAYER one-way door STANDS — its ground is zero product consumers, not persistence",
+   "claim": "Wiring, not saving.",
+   "method": "git grep -l dossierStateProse f5a6c3bbf -- src (minus src/data); git grep economyStateProse|stateProse/ outside stateProse/.",
+   "evidence": "Consumers of the leaves at f5a6c3bbf: economyFreshness.js (comment), economyStateProse.js:40 (imports the economy leaf), stateProseKernel.js. Outside src/domain/display/stateProse/ the only hit is a docblock at src/generators/narrative/settlementOriginProse.js:53. No src/components import.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Zero product (component) consumers CONFIRMED at f5a6c3bbf."
+  },
+  {
+   "row": "§884.6",
+   "call": "O3(b) the createdAt leak's 'the GOLDEN FREEZE would bake it in' stands",
+   "claim": "A statement about goldens, not saves.",
+   "method": "read; normalizeEntry :551.",
+   "evidence": "normalizeEntry :551 `createdAt: entry.createdAt || options.now || nowIso(),` — a wall-clock fallthrough that a golden recorded at freeze time would pin.",
+   "verdict": "RATIFY",
+   "confidence": "PLAUSIBLE",
+   "note": "Settle: identify the golden that serialises wizardNews entries (git grep -n createdAt -- tests/fixtures tests/**/*golden*)."
+  },
+  {
+   "row": "§885",
+   "call": "L1 the act: f5a6c3bbf → 2d5112851, sealed refs/preserve/landing-885-2026-09-03, six cars, 13 paths +1,188/−94, six trailers, gate green in 1,214 s",
+   "claim": "Landing facts.",
+   "method": "git log/diff --shortstat/for-each-ref/log --format=%(trailers); SP/gate-885.log.",
+   "evidence": "`git log --oneline f5a6c3bbf..2d5112851` = 6 commits (9feb645f8, 36f04bfcd, 37e285498, d4b91b26a, c8b83b25e, 2d5112851); `--shortstat` '13 files changed, 1188 insertions(+), 94 deletions(-)'; refs/preserve/landing-885-2026-09-03 → 2d5112851c2e…; all six carry 'Seat: Opus 5 — Fable-unvalidated'. gate-885.log: GATE_START 00:48:34Z, GATE_END 01:08:48Z (1,214 s), TRUE_EXIT=0, GATE_PORCELAIN_POST=[], GATE_HEAD_POST=2d5112851.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The ledger row's '20 stages' vs package.json `check` at f5a6c3bbf = 17 stages (16 `&&`) — minor; pre-gate.mjs also says 17."
+  },
+  {
+   "row": "§885",
+   "call": "L2 CURE-CAPSULE negative control drove both real parsers over identical bytes and reproduced the false CLEAN, 6/6",
+   "claim": "Prevention car proven.",
+   "method": "commit 9feb645f8 exists in the consist; receipt not opened.",
+   "evidence": "9feb645f8 'CURE-CAPSULE (1/1): the capsule's dirt gate stops depending on a politeness nothing stated — the hazard proved by execution first ... a parser that had no coverage at all now has seven cases'; trailer 'Lane: CURE-CAPSULE (re-based by lane CURE-CAPSULE-REBASE)'.",
+   "verdict": "RATIFY",
+   "confidence": "PLAUSIBLE",
+   "note": "Settle: read SP2/laneCURECAP-receipt.md control section and `npx vitest run` the capsule parser test at laneCURECAP-tree (HEAD 62be253f3, porcelain 0)."
+  },
+  {
+   "row": "§885",
+   "call": "L3 FILL-LAYER proven by template-differencing 3,696 renders (1,100/836/660/140 → none), seven leaves byte-identical",
+   "claim": "Cure at the annex.",
+   "method": "commit 36f04bfcd exists; receipt not opened.",
+   "evidence": "36f04bfcd 'FILL-LAYER: the slot contract grows its missing half — a shape — and the eight seams that printed \"off its the road\" print prose again'.",
+   "verdict": "RATIFY",
+   "confidence": "PLAUSIBLE",
+   "note": "Settle: SP2 lane FILLLAYER receipt (laneFILLLAYER-tree HEAD adb9f19b7, porcelain 0)."
+  },
+  {
+   "row": "§885",
+   "call": "L4–L7 FOUR GATE ATTEMPTS, three of them the chair's: (1) parse death exit 2 no log; (2) strict red; (3) register red; (4) green",
+   "claim": "Attempt enumeration and the exit-signature law.",
+   "method": "ls SP/gate-885*; grep GATE_START/END/HEAD_POST/TRUE_EXIT in each.",
+   "evidence": "Four LOGGED attempts: gate-885-run1-RED-strict.log 23:06:39→23:07:10 (31 s) HEAD 36f04bfcd TRUE_EXIT=1 (domain-strict: economyStateProse.js +1); run2-RED-census.log 23:12:37→23:29:18 (1,001 s) HEAD 37e285498 TRUE_EXIT=1 (sovereigntyLightingContract.walker not in census measured at d124eae45); run3-RED-writerReach.log 00:19:01→00:37:57 (1,136 s) HEAD c8b83b25e TRUE_EXIT=1; gate-885.log 00:48:34→01:08:48 (1,214 s) HEAD 2d5112851 TRUE_EXIT=0. No log exists for a parse-time death, consistent with 'exit 2, no log'.",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "There were FIVE launches: one unlogged parse death plus four logged runs. The §885 list drops the writerReach-red run (c8b83b25e, 1,136 s) as an attempt, while §885.1's '31 + 1,001 + 1,136 + 1,214' counts the four logged runs and excludes the parse death — the two rows count different sets under the same phrase 'four attempts'. The exit-signature law (exit 2 no log = wrapper; exit 1 full log = tree) is consistent with all four logs."
+  },
+  {
+   "row": "§885",
+   "call": "L5 attempt 2 strict red — the FILL-LAYER car's type widening reached an older consumer; cured with text(undefined) → '' verified behaviour-identical",
+   "claim": "Defect in a reached line.",
+   "method": "run1 log :75-87; car 37e285498 title.",
+   "evidence": "run1 log: '[domain-strict] strict-type regressions in the domain kernel ... src/domain/display/stateProse/economyStateProse.js: 1 strict errors (baseline 0) — +1'; car 37e285498 '§885 cure 1/1: the fill-layer car changed a slot's type and an existing consumer went strict-dirty'.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The behaviour-identity claim (`text(undefined)` returns '' and legibilityRung drops '' as it drops undefined) is PLAUSIBLE here; settle: git show 37e285498 and read legibilityRung.js at that sha."
+  },
+  {
+   "row": "§885",
+   "call": "L6 attempt 3 red on a register the chair never refroze — lanes build cars and HOLD, the landing takes register acts",
+   "claim": "Process defect.",
+   "method": "run2 log :393-403; baselines' measuredAtSha at f5a6c3bbf.",
+   "evidence": "run2 log :394-395 '1 failing test(s) NOT in the frozen census: tests/lint/sovereigntyLightingContract.walker.test.js :: the sovereignty lighting condition — a marker is EVIDENCE only in a live title'; :403 'Frozen census is 10 failing test(s), measured at d124eae45'. Lighting baseline at f5a6c3bbf measuredAtSha 88a89539f with titles 22665/suiteTitles 6099 vs 22676/6101 after refreeze.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The 18-minute figure = 1,001 s, exact."
+  },
+  {
+   "row": "§885",
+   "call": "L8 writerReach: blew testTimeout 20000 at 21,758 ms; the ratchet's message misreported the budget as 'against a 300000ms budget (vite.config.js testTimeout)'; passed at load 47 / failed at load 3.8 disproves the load diagnosis",
+   "claim": "Instrument misreports its governing budget.",
+   "method": "run3 log :396-402; git show 2d5112851:vite.config.js; scripts/check-test-ratchet.mjs :362-375, :817-818, :272; git diff on the script f5a6c3bbf..4233031ba.",
+   "evidence": "run3 log: 'TIMEOUT · ran 21758ms against a 300000ms budget (vite.config.js testTimeout; the file also declares 300000ms) — vitest serialises a timeout kill as `Error: STACK_TRACE_ERROR`'. vite.config.js:892 `testTimeout: 20000,`. check-test-ratchet.mjs:818 `const budget = Math.max(globalBudget, ...literals);` :373 `against a ${budget}ms budget (${budgetSource}${declared})`; :272 'it cannot tell WHICH test an override belongs to'. writerReach.walker.test.js `}, 300_000);` at :173/:998/:1158 (beforeAll hooks). Script byte-identical f5a6c3bbf → 2d5112851 → 4233031ba.",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "Substance holds and the mechanism is now named: the message prints max(config, file literals) under the CONFIG's source label. The row's quotation truncates the message — it also says '; the file also declares 300000ms'. And the instrument is UNCURED through the §891 train; no row records that as a deferral. The load-47/3.8 observation is PLAUSIBLE (in §884.4, not re-read)."
+  },
+  {
+   "row": "§885",
+   "call": "L9 cure: explicit per-test budget 120,000 (~5.5× measured), not banked, suite-wide timeout untouched",
+   "claim": "Cured as the instrument prescribes.",
+   "method": "git show 2d5112851 --stat and diff; baseline entry count; vite.config.js.",
+   "evidence": "2d5112851 stat: 'tests/lint/writerReach.walker.test.js | 2 +-' with the only hunk `-  });` / `+  }, 120_000);` (now :525). scripts/.test-ratchet-baseline.json at 2d5112851: 10 `\"file\":` entries, none for writerReach; vite.config.js testTimeout still 20000. Instrument prescription at check-test-ratchet.mjs:1333-1334 'explicit per-test budget carrying the measured figure — never bank one in the census, and never raise the suite-wide testTimeout'. 120000/21758 = 5.52.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": ""
+  },
+  {
+   "row": "§885",
+   "call": "L10 honesty rows: the cure is FOREIGN (predates the consist) and whether sibling rows sit near the same line is NOT ESTABLISHED",
+   "claim": "Declared limits.",
+   "method": "git log -1 on the file before f5a6c3bbf.",
+   "evidence": "`git log --format='%h %ad' -1 f5a6c3bbf -- tests/lint/writerReach.walker.test.js` → 5e324d614 2026-09-02, i.e. the file and its budgets predate the consist; the per-test-durations gap is stated in the row itself.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": ""
+  },
+  {
+   "row": "§885",
+   "call": "L11 the stopping rule held — both --update runs recorded, never only the green one",
+   "claim": "Discipline honoured.",
+   "method": "ls SP; tail update-885-run1-REFUSED.log, update-885.log.",
+   "evidence": "update-885-run1-REFUSED.log (1,095 B) TRUE_EXIT=1, UPDATE_END 2026-09-02T23:51:24Z; update-885.log (575 B) TRUE_EXIT=0, UPDATE_END 2026-09-03T00:12:42Z, UPDATE_PORCELAIN_POST=[ M scripts/.test-ratchet-baseline.json ]. Both on disk; c8b83b25e's title records writerReach 'as intermittent in-suite, not written off because the second run was green'.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": ""
+  },
+  {
+   "row": "§885",
+   "call": "L12 E4 held on every register: lighting 2503/370/2133/22676/6101 (fifth unpredicted, +2); ratchet files +0, tests +11",
+   "claim": "Predictions matched.",
+   "method": "grep the two baselines at f5a6c3bbf and 2d5112851.",
+   "evidence": "tests/lint/.lighting-census-baseline.json: f5a6c3bbf files 2503 / parked 370 / credited 2133 / titles 22665 / suiteTitles 6099 → 2d5112851 2503/370/2133/22676/6101 (titles +11, suiteTitles +2). scripts/.test-ratchet-baseline.json: totalTests 30962 → 30973 (+11), totalFiles 2451 → 2451 (+0), 10 entries both.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": ""
+  },
+  {
+   "row": "§885.1",
+   "call": "P1 lane PREGATE holds at 41a565e8b off f5a6c3bbf, three files / 821 lines",
+   "claim": "Lane facts.",
+   "method": "git log f5a6c3bbf..41a565e8b; git diff --stat.",
+   "evidence": "One commit 41a565e8b 'PREGATE: the cheap half of the gate learns to report every failure at once...'; diff --stat 'scripts/pre-gate.mjs 215, scripts/pre-gate.sh 36, scripts/register-preflight.mjs 570 — 3 files changed, 821 insertions(+)'.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The lanePREGATE-tree dock now sits at 9a95d6799 (later work), porcelain 0."
+  },
+  {
+   "row": "§885.1",
+   "call": "P2 measured saving: 31 + 1,001 + 1,136 + 1,214 = 3,382 s → 2,439 s, 943 s (27.9%), four attempts to three; non-coverage named (writerReach red unseen; run-1 shape 57 s slower)",
+   "claim": "Honest savings model.",
+   "method": "gate log timestamps; msg-pregate.txt.",
+   "evidence": "Timestamps give exactly 31 / 1,001 / 1,136 / 1,214 s (sum 3,382). msg-pregate.txt: 'fourteen stages, 88.0 seconds, of which lint is 58.9'; C2 'At base f5a6c3bbf and tip 37e285498 ... BLOCKER on both registers ... exit 1, in 0.9 seconds. That gate spent 1,001 seconds to reach the same finding.'",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The 2,439 s counterfactual is the lane's model (PLAUSIBLE); the measured inputs reproduce."
+  },
+  {
+   "row": "§885.1",
+   "call": "P3 corrected the chair's brief: 2d5112851 cannot reproduce the miss (already refrozen) — it lives at 37e285498; cheap stages 88.0 s not ~4.5 min",
+   "claim": "Right target, honest figure.",
+   "method": "msg-pregate.txt C2; baselines' measuredAtSha.",
+   "evidence": "msg-pregate.txt C2: 'At the run-4 tip 2d5112851 it returns CAUTION, not a red, and that gate was green'. Lighting baseline measuredAtSha at 2d5112851 = 37e285498 confirms the refreeze predates the tip. 88.0 s stated with load caveat in the row.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Not re-executed; the receipt's own figures are quoted."
+  },
+  {
+   "row": "§885.1",
+   "call": "P4 two self-found false-output defects: per-register input groups (cures a src-only FALSE CLEAR) and the BLOCKER(exit 1)/CAUTION(exit 4) split (cures a FALSE RED on a green tree)",
+   "claim": "Instrument audited itself.",
+   "method": "git show 41a565e8b:scripts/register-preflight.mjs :29-55, :130-176, :178-186, :376, :544-552.",
+   "evidence": ":29-30 'called a src-only consist CLEAR for the ratchet, which is a FALSE GREEN — the one output class this instrument may never produce. So a register declares one group per input set, and CLEAR'; :43 'BLOCKER (exit 1) — the inputs moved and the register was never refrozen'; :45 'CAUTION (exit 4) — the register WAS refrozen, but an input changed after the tuple was'; :55 'Exit: 0 = nothing owed. 1 = BLOCKER. 4 = CAUTION only. 2 = the pre-flight is unsound'. Groups: LIGHTING CENSUS one hard group 'tests/**/*.test.{js,jsx} — and NOTHING else'; TEST RATCHET 'the counts' (hard) + 'the failure census and the magnitudes' (soft).",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The measuredAtSha re-derivation discriminator is at :291-300."
+  },
+  {
+   "row": "§885.1",
+   "call": "P5 live finding: at the §885 tip lighting measuredAtSha = 37e285498 (car 3), ratchet = d4b91b26a (car 4), landed tip 2d5112851 (car 6) — neither tuple measured on the tree that gated",
+   "claim": "Registers frozen before the last cure.",
+   "method": "git show 2d5112851:<baseline> | grep measuredAtSha; git log order.",
+   "evidence": "tests/lint/.lighting-census-baseline.json:27 `\"measuredAtSha\": \"37e285498924655df568ff4204a24ceb1c4ad48a\"`; scripts/.test-ratchet-baseline.json:3 `\"measuredAtSha\": \"d4b91b26ac8825ce52c2cb063b5ec2b197f83702\"`; consist order 9feb645f8 → 36f04bfcd → 37e285498 → d4b91b26a → c8b83b25e → 2d5112851.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": ""
+  },
+  {
+   "row": "§885.1",
+   "call": "P6 RULED nothing owed: car 6 changed exactly one line (`});` → `}, 120_000);`), no title/describe; the gate ran the ratchet and lighting walker at the tip and both passed",
+   "claim": "Currency by execution.",
+   "method": "git show 2d5112851; gate-885.log.",
+   "evidence": "2d5112851: '1 file changed, 1 insertion(+), 1 deletion(-)'; hunk `-  });` `+  }, 120_000);`. gate-885.log TRUE_EXIT=0 at GATE_HEAD_POST=2d5112851; the ratchet line 'writerReach is NO LONGER a known red ... explicit 120000ms budget against a measured 21758ms expiry'.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": ""
+  },
+  {
+   "row": "§885.1",
+   "call": "P7 THE LAW: register acts are the LAST cars of a consist, after every cure",
+   "claim": "Ordering law banked.",
+   "method": "grounded on P5/P6.",
+   "evidence": "Harmlessness rested on a title-neutral car 6 that nobody checked before landing; a `test(...)` addition would have moved titles/totalTests behind both registers.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "No gate enforces it; register-preflight's CAUTION arm is the closest instrument."
+  },
+  {
+   "row": "§885.1",
+   "call": "P8 the scripts need not land to be used — use immediately, land with TRAIN 1",
+   "claim": "Scheduling ruling.",
+   "method": "ls SP for pregate-*.log.",
+   "evidence": "SP carries pregate-889.log, pregate-890.log, pregate-891.log, pregate-enc.log, pregate-enc2.log and run-pregate-889/890/891.sh — the instruments were used from the dock at every later landing.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Whether they landed with TRAIN 1 is outside this slice."
+  },
+  {
+   "row": "§885.1",
+   "call": "P9 RATIFIED without amendment: two-file split; `npm run <name>` verbatim; unrecognised stage defaults to CHEAP and IS RUN; BLOCKER/CAUTION; 27 of 29 registers INPUTS UNDECLARED; branch not detached; node_modules by APFS clone",
+   "claim": "Design choices.",
+   "method": "git show 41a565e8b:scripts/pre-gate.mjs :3-31, :119, :148, :181-182; register-preflight.mjs :124, :523; pre-gate.sh.",
+   "evidence": "pre-gate.mjs:24-25 'THE CHEAP/EXPENSIVE SPLIT IS ALSO DERIVED, AND IT FAILS SAFE. A stage is EXPENSIVE only if its resolved command text ... names' one of EXPENSIVE_MARKERS (:55, :119); :181-182 `const bin = st.name === null ? 'sh' : 'npm'; spawnSync(bin, argv, { cwd: ROOT, stdio: 'inherit' })`. register-preflight.mjs:523 'OTHER REGISTERS DISCOVERED IN THE TREE: ${others.length} (inputs UNDECLARED here)'. pre-gate.sh ends `exit $TRUE_EXIT` and documents `sh -n`.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "'27 of 29' and the APFS-clone/branch choices are the lane's report (PLAUSIBLE; settle: `node scripts/register-preflight.mjs` at lanePREGATE-tree and `ls -la lanePREGATE-tree/node_modules`)."
+  },
+  {
+   "row": "§885.1",
+   "call": "P10 deferred and documented: 27 undeclared registers; no --measure mode; four census figures UNKNOWN by design",
+   "claim": "Deferrals written down.",
+   "method": "msg-pregate.txt; register-preflight.mjs :144-150.",
+   "evidence": "register-preflight.mjs unknown map: 'parked: needs the espree grammar in sovereigntyLightingContract.walker.test.js', 'titles: needs the espree grammar — a title counts only if its opener resolves', 'totalTests: needs collection'. msg-pregate.txt: 'prints `UNKNOWN — requires the suite` for every figure that needs the grammar or the runner'.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": ""
+  }
+ ],
+ "beyond": [
+  "B1 §884.5's '19 BARE, live and reader-reachable' and its 'six mint shapes across ~20 sites' were ruled PARTLY UNSOUND one row later (§885.5: scanned from `kind:` anywhere in src; the sound scan found 199 sites and 26 unregistered tokens). The stratum's §884.5 text carries no superseded mark on either figure.",
+  "B2 §885 and §885.1 both say 'four attempts' but count different sets: the gate logs show FOUR logged runs (36f04bfcd strict 31 s · 37e285498 census 1,001 s · c8b83b25e writerReach 1,136 s · 2d5112851 green 1,214 s) plus one unlogged parse death — five launches. §885's numbered list omits the writerReach-red run; §885.1's arithmetic omits the parse death.",
+  "B3 The ratchet's budget misreport (check-test-ratchet.mjs:818 `Math.max(globalBudget, ...literals)` printed under the config source label) is UNCURED: the script is byte-identical from f5a6c3bbf through 2d5112851 to the §891 train 4233031ba, and no row in the slice records a cure or a documented deferral for the instrument itself.",
+  "B4 The DARKREADER figure 'ZERO of the 650 unmarked pools' subtracts states from pools (708 − 58). Probe at f5a6c3bbf: 684 pools carry no dimension mark, 652 carry no mark at all. The claim's substance (unmarked pools lose nothing) holds.",
+  "B5 §884.5 RATIFIED a 'self-reported deviation' (three JSON parses) that the persisted DARKREADER receipt does not contain; the receipt's only execution statement is 'executed by this lane against git show'.",
+  "B6 The ledger §885 row says the gate ran 'across 20 stages'; package.json `check` at f5a6c3bbf has 17 stages and pre-gate.mjs also says 17.",
+  "B7 §884.5 carries the FREEZE-BLOCKING ruling without an inline superseded mark, and §885.5 had to correct the NEWSTRAIN lane for repeating it — the withdrawal did not propagate to the brief.",
+  "B8 Dock state differs from the brief: laneKERNELMARK-tree HEAD is 15c6368a6 (not 4233031ba) with porcelain 0 (the brief's dirty writer-reach baseline is gone); lanePREGATE-tree is at 9a95d6799 (not 41a565e8b). Untouched by S13.",
+  "B9 The ledger's §884.5 '2,734 authored sentences' reproduces exactly: 2,266 desk variants (probe) + 468 causal variants (receipt :63)."
+ ],
+ "chair_errors": [
+  "CE1 (self-reported at §884.6, confirmed here) Ratified Cure A as FREEZE-BLOCKING on an unverified premise; the tree corroborates the withdrawal — no committed fixture or golden carries a persisted headline of the template.",
+  "CE2 (not self-reported) Misquoted the ratchet message: the log says 'against a 300000ms budget (vite.config.js testTimeout; the file also declares 300000ms)' — the row drops the clause that names the file literal, which changes the character of the misreport from 'wrong source' to 'right ingredients, wrong pairing'.",
+  "CE3 (not self-reported) The §885 attempt enumeration is inconsistent with §885.1 and with the logs (five launches, four logged; writerReach-red run dropped from the list).",
+  "CE4 (not self-reported) Ratified a lane's 'self-reported deviation' that is absent from the persisted receipt.",
+  "CE5 (not self-reported) Carried '650 unmarked pools' (a states-from-pools subtraction) and 'OutputContainer measures ~600/600' (a lane estimate; BASE_STATE.json says 599/600) as measured figures."
+ ],
+ "commands": [
+  "mkdir -p …/walk/S13 && printf partial JSON > …/walk/S13.json",
+  "sed -n '469,589p' …/stratum/full.md",
+  "git ls-tree -r f5a6c3bbf --name-only | grep -E '<cited files>'",
+  "git show f5a6c3bbf:src/domain/worldPulse/worldPulseFeedCuration.js | sed -n '130,160p'; | grep -n 'headline'; | grep -n DRIFT_REEMIT_COOLDOWN_TICKS",
+  "git show f5a6c3bbf:src/domain/display/stateProse/causalDossierProse.js | sed -n '100,120p'",
+  "git show f5a6c3bbf:src/domain/display/stateProse/stateProseKernel.js | grep -n 'marks|variantIsAnchored|eligibleVariants|slots'; sed -n around eligibleVariants/variantIsAnchored",
+  "git show f5a6c3bbf:tests/copy/voiceMechanics.test.js | sed -n '155,175p'; '40,48p'; grep -n describe/it",
+  "wc -l SP2/LIGHTING-INVENTORY.md; grep -c -E 'stateProse|dossierStateProse|readStateProse|DS-GEN|DS-ECO' SP2/LIGHTING-INVENTORY.md",
+  "git grep -l 'takes hold in\\|Merchants bring word' ca651d54b -- tests src/data; git grep -n same -- tests; git grep -l '\"headline\"' ca651d54b -- tests/**/*.json src/data/**/*.json; git grep -n 'headline:' ca651d54b -- tests/fixtures; git show ca651d54b:tests/lint/.news-headline-contract-baseline.json | head -c 500 (and .prose-family-contract-baseline.json)",
+  "git grep -n 'function normalizeEntry' f5a6c3bbf -- src; git grep -n 'is dying' f5a6c3bbf -- src; git grep -n settlement_terminal_death f5a6c3bbf -- src",
+  "git show 2d5112851:scripts/check-test-ratchet.mjs | grep -n 'budget|testTimeout|300000'; sed -n '360,378p'; git show ca651d54b:scripts/check-test-ratchet.mjs | grep -n budget; git diff --stat f5a6c3bbf 2d5112851 -- scripts/check-test-ratchet.mjs; git diff --stat 2d5112851 4233031ba -- scripts/check-test-ratchet.mjs; git log --oneline f5a6c3bbf..ca651d54b -- scripts/check-test-ratchet.mjs",
+  "git show 2d5112851:vite.config.js | grep -n testTimeout; git show 2d5112851:tests/lint/writerReach.walker.test.js | grep -n '300_000|120_000|beforeAll'",
+  "git log --oneline f5a6c3bbf..2d5112851; git diff --shortstat f5a6c3bbf 2d5112851; git for-each-ref refs/preserve | grep -E '885|…'; git log --format='%h %s%n%(trailers)' f5a6c3bbf..2d5112851; git show 2d5112851 --stat; git show 2d5112851 -- tests/lint/writerReach.walker.test.js | grep -n '^[-+][^-+]'",
+  "for f in baseline JSONs at 2d5112851: git show 2d5112851:$f | grep -m1 measuredAtSha; grep -nE '\"(files|parked|credited|titles|suiteTitles|measuredAtSha|totalFiles|totalTests)\"' on tests/lint/.lighting-census-baseline.json and scripts/.test-ratchet-baseline.json at f5a6c3bbf and 2d5112851; grep -c '\"file\":'",
+  "ls -la SP | grep -iE 'gate|885'; grep -nE 'GATE_(START|END)=|TRUE_EXIT' SP/gate-885-run{1,2,3}*.log SP/gate-885.log; sed -n '55,87p' run1; grep -n 'lighting|census|…' run2; sed -n '385,412p' run3; tail SP/update-885-run1-REFUSED.log SP/update-885.log",
+  "sed -n '32379p;32380p;32381p;32382p;32386p' docs/OWNER_DECISION_QUEUE.md; sed -n '32371p;32376p' | cut -c1-1300; grep -n 'upstream guard|never opened' docs/OWNER_DECISION_QUEUE.md",
+  "git show f5a6c3bbf:src/domain/display/settlementRumors.js | sed -n '105,118p'; git cat-file -e f5a6c3bbf:tests/domain/settlementRumors.walker.test.js; git show f5a6c3bbf:tests/domain/rumorFallbackPhrasePools.test.js | sed -n '136,152p;219,230p'; git show f5a6c3bbf:src/domain/worldPulse/treatySuccessionVoice.js | sed -n '60,68p'",
+  "git show f5a6c3bbf:src/domain/region/wizardNews.js | sed -n '538,560p'; git grep -n 'function impactLabel|function human|human(' f5a6c3bbf -- src/domain/region/wizardNews.js src/domain/display/settlementRumors.js; git grep -n IMPACT_LABELS f5a6c3bbf -- src; git grep -n relief f5a6c3bbf -- src/domain/region/wizardNews.js; git grep -n 'toBe(107)' f5a6c3bbf -- tests",
+  "git show f5a6c3bbf:src/data/dossierStateProse/economy.generated.js | sed -n '1,12p'; git show f5a6c3bbf:src/components/OutputContainer.jsx | wc -l; git grep -n OutputContainer f5a6c3bbf -- '*.json'; git show f5a6c3bbf:scripts/.size-baseline.json | grep OutputContainer; git show f5a6c3bbf:eslint.config.js | grep -n max-lines; sed -n '654,672p'",
+  "git grep -n dmOnly f5a6c3bbf -- tests; git grep -n '::\\${' f5a6c3bbf -- src/domain/display/stateProse; git show f5a6c3bbf:scripts/.test-ratchet-baseline.json | grep -n '\"test\":'; git show f5a6c3bbf:tests/copy/.voice-mechanics-baseline.json | grep -c dossierStateProse",
+  "for leaf in src/data/dossierStateProse/*.generated.js and src/data/*.generated.js: git show f5a6c3bbf:$leaf | grep -o '—' | wc -l",
+  "git show f5a6c3bbf:src/data/dossierStateProse/{defense,economy,general,power,stressors,warFaith}.generated.js > …/walk/S13/leaves/; node …/walk/S13/probe-dsgen.mjs; node …/walk/S13/probe-dsgen2.mjs (read-only, scratch-only)",
+  "wc -c SP/DESIGN-dark-reader-recut.md SP/NEWSLAYER-SPEC-return.md; grep -nE '<decisive patterns>' both; sed -n '1,12p' and tail -n 22 of the DARKREADER receipt; sed -n '328,334p' NEWSLAYER; grep -nE 'execut|FORBIDDEN' SP/briefs/brief-DARKREADER-REDESIGN.md; cat SP/msg-pregate.txt; ls SP/pregate-stage SP/briefs",
+  "git log --format='%h %s' f5a6c3bbf..41a565e8b; git diff --stat f5a6c3bbf 41a565e8b; git show 41a565e8b:scripts/register-preflight.mjs | grep -n 'BLOCKER|CAUTION|process.exit|UNDECLARED|inputs|measuredAtSha|CLEAR'; sed -n '130,176p'; git show 41a565e8b:scripts/pre-gate.mjs | grep -n 'EXPENSIVE|CHEAP|npm|spawnSync'; git show 41a565e8b:scripts/pre-gate.sh",
+  "git show f5a6c3bbf:package.json | grep -n '\"check\":' ; count of '&&'",
+  "git diff f5a6c3bbf ca651d54b -- src/domain/worldPulse/worldPulseFeedCuration.js | grep -c '^[-+][^-+]'; git grep -n FRAME 0362adcd4 -- src/domain/region/wizardNews.js; git show 4b00f971b --stat; git show 4b00f971b -- src | grep -n '^+' | grep -iE 'frame|takes hold|is spared|headline'",
+  "git grep -l dossierStateProse f5a6c3bbf -- src | grep -v src/data; git grep -n \"from '.*dossierStateProse/\" f5a6c3bbf -- src scripts; git grep -n 'economyStateProse|stateProse/' f5a6c3bbf -- src (outside stateProse/); git log --format='%h %ad' -1 f5a6c3bbf -- tests/lint/writerReach.walker.test.js",
+  "for six docks (lanePREGATE, laneNEWSTRAIN, laneKERNELMARK, laneFILLLAYER, laneCURECAP, laneINSTRLAND): git -C <dock> rev-parse HEAD; git -C <dock> status --porcelain | wc -l — run BEFORE and AFTER all work; git -C REPO status --porcelain | wc -l"
+ ],
+ "porcelain_unchanged": true,
+ "summary": "S13 re-derived 47 calls across §884.5 (DARKREADER + NEWSLAYER), §884.6, §885 and §885.1 from primary receipts and the tree at the cited shas. HIGH items: (1) the metronome finding RATIFIED — isMetronomeRepeat compares prior.headline === entry.headline (worldPulseFeedCuration.js:148, cooldown 6, byte-unchanged through ca651d54b) and §885.5's Cure A 4b00f971b built single-valued frames citing exactly that reason; (2) §884.6's withdrawal RATIFIED and its residual question SETTLED — no committed fixture or golden at ca651d54b carries a persisted headline of the template (the five test hits are assertion templates/comments; the only JSON 'headline' keys are two count-shaped lint baselines); (3) DARKREADER's kernel finding holds with one wording amendment (the kernel reads marks for exactly one value, dm-only, and ignores every dimension mark), the 708/58/89 figures reproduce to the digit by a read-only probe, but '650 unmarked pools' subtracts states from pools (684/652 are the pool figures); the lighting inventory scope finding is CONFIRMED (436 lines, 0 hits); (4) §885's budget misreport is CONFIRMED and its mechanism named — check-test-ratchet.mjs:818 prints max(config, file literals) under the config's source label — but the row's quote drops the message's '; the file also declares 300000ms' clause, and the instrument is uncured through 4233031ba; the foreign cure (one line, 120_000, not banked, suite-wide untouched) and E4 (2503/370/2133/22676/6101; +0/+11) are exact; the 'four attempts' enumeration is AMENDED — five launches, four logged, with the writerReach-red run (c8b83b25e, 1,136 s) missing from §885's list while §885.1 counts a different four; (5) §885.1's register-ordering finding is CONFIRMED (measuredAtSha 37e285498 / d4b91b26a vs tip 2d5112851; car 6 = one line) and the BLOCKER/CAUTION split and per-register input groups are in the code at 41a565e8b. One EVIDENCE-THIN: the DARKREADER 'self-reported deviation' the chair ratified is not in the persisted receipt. One REVERSE: the §884.5 freeze-blocking ruling (already withdrawn at §884.6). All six docks touched: porcelain 0 before and after; only my scratch dir was written."
+}

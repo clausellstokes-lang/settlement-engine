@@ -1,0 +1,30 @@
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/58f0a8e2-2c4f-4073-8635-ecc7cf5010f6/scratchpad/laneKERNELMARK-tree
+
+ ❯ tests/ui/economicsTabFlow.test.js (7 tests | 1 failed) 168ms
+     × the ROUTER threads the public condition — OutputContainer hands publicDossier to the tab 5ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/ui/economicsTabFlow.test.js > THE PUBLIC GATE — the economy desk stays silent on a public dossier > the ROUTER threads the public condition — OutputContainer hands publicDossier to the tab
+AssertionError: expected '      case \'economics\':  return <Ec…' to contain 'publicDossier={publicDossier}'
+
+Expected: "publicDossier={publicDossier}"
+Received: "      case 'economics':  return <EconomicsTab settlement={s} narrativeNote={null} saveId={saveId} />;"
+
+ ❯ tests/ui/economicsTabFlow.test.js:161:27
+    159|     const economicsCase = router.split('\n').find((l) => l.includes("c…
+    160|     expect(economicsCase).toBeTruthy();
+    161|     expect(economicsCase).toContain('publicDossier={publicDossier}');
+       |                           ^
+    162|   });
+    163| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 6 passed (7)
+   Start at  00:09:31
+   Duration  2.50s (transform 863ms, setup 26ms, import 1.33s, tests 168ms, environment 870ms)
+

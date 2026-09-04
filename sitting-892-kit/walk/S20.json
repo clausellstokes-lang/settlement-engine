@@ -1,0 +1,586 @@
+{
+ "slice": "S20",
+ "status": "COMPLETE",
+ "calls": [
+  {
+   "row": "CAPACITY C1 — receipt-capacity.md:86-111,328-339 (tuning-inventory prediction)",
+   "call": "C1-F1 the refreeze is a landing act; four rows move: HERALD_TUNING keys 5→10, line 69→83, spanDigest 3811c…→2f820c…, +5 leaves; RESPONSE_TUNING dependents +demographicsHerald.js; totals.keys 2094→2099; tables 225 unmoved",
+   "claim": "Prediction exact and complete",
+   "method": "git show ca651d54b/4233031ba:tests/lint/.tuning-inventory.json parsed with python",
+   "evidence": "@4233031ba: HERALD_TUNING keys 10, line 83, spanDigest 2f820c03deb05c72…, leaves +CROWDING_LINE_MIN_SOULS/CROWDING_FILLED_SEVERITY/CROWDING_THINNED_SEVERITY/CROWDING_FILLED_SCORE/CROWDING_THINNED_SCORE; totals.keys 2094→2099; tables 225→225. RESPONSE_TUNING dependents base ['demographicsPlans.js','sovereigntyMarketStage.js'] → tip ['src/domain/display/demographicReading.js','src/domain/worldPulse/demographicsHerald.js', …]. demographicReading.js:55 `import { OVERFLOW_BANDS, overflowBandOf } from '../worldPulse/demographicsResponses.js'`",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "The four named figures are exact, but the final-tip prediction (receipt:337-338) names ONE new dependent and the composed register carries TWO: C2's demographicReading.js also joined. The chair's reg-2/6 note (79d45d274) repeats the omission verbatim. Amend the row: 'RESPONSE_TUNING gains demographicsHerald.js AND demographicReading.js as dependents'."
+  },
+  {
+   "row": "CAPACITY C1 — receipt-capacity.md:54-61 (F7 phantom citation)",
+   "call": "F7 the design's `migrationKernel.js:MIGRATION_KERNEL_TUNING.CONGEST_DECAY` does not exist; the dial is `migration.js#MIGRATION_TUNING.CONGEST_DECAY = 0.85`",
+   "claim": "Wrong file and wrong table in the design volume, corrected by measurement",
+   "method": "git grep CONGEST_DECAY 4233031ba -- src; git show 4233031ba:src/domain/spatial/migration.js",
+   "evidence": "Only hits: src/domain/spatial/migration.js:117,118,120,247,260; `:73 export const MIGRATION_TUNING = Object.freeze({` and `:120 CONGEST_DECAY: 0.85,`. No CONGEST_DECAY anywhere else under src. Coverage row at demographicsRates.js:457-458 cites `src/domain/spatial/migration.js#MIGRATION_TUNING.CONGEST_DECAY`.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Refutation attempted (searched every src file for the key); the design citation is a phantom exactly as the lane said."
+  },
+  {
+   "row": "CAPACITY C1 — receipt-capacity.md:63-73 (F8 roster)",
+   "call": "F8 23 tunable + 8 vocabulary = 31 coverage rows; QUANTITY_BANDS rostered; REALM_DEMOGRAPHY_VERSION excluded by name",
+   "claim": "The both-ways arm supersedes the design's '16 rows'",
+   "method": "git show 4233031ba:src/domain/worldPulse/demographicsRates.js | grep DEMOGRAPHIC_TUNING_COVERAGE rows",
+   "evidence": "Rows counted at lines 429-458: 23 `kind: 'tunable'` (incl. :438 `demographicsHerald.js#QUANTITY_BANDS … UNSUFFIXED, so the _TUNING glob cannot see it` and :457-458 the CONGEST_DECAY cross-family row); lines 468-475: 8 `kind: 'vocabulary'`. :420 comment excludes `REALM_DEMOGRAPHY_VERSION`, 'a SCHEMA version and not a dial'.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "31 rows counted by hand at the train tip; the negative-control plant (receipt:79-84) is the lane's own executed evidence and is not re-run here."
+  },
+  {
+   "row": "CAPACITY C1 — receipt-capacity.md:134-153 (registration 3/3 divergence)",
+   "call": "Dropped the designed `EXACT_SECTION.population_crowding: 'trade'` row (it reds a shrink-only census with no growth door) and routed by the `population_` family prefix; divergence recorded at the site",
+   "claim": "Vetoable divergence from the design's letter, honest at zero census cost",
+   "method": "git show 4233031ba:src/domain/realm/heraldRouting.js",
+   "evidence": "`:176 // ⛔ \\`population_crowding\\` IS ROUTED BY THE \\`population_\\` FAMILY PREFIX, NOT FROM HERE,` and `:408 ['population_', 'trade'],` in PREFIX_RULES; :175 the sibling exact rows `population_growth: 'trade', population_emigration: 'trade', population_decline: 'trade'`.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The reason is recorded at the site as claimed; the kindPoolFloors reds (275>274 shrink-only) are the lane's executed evidence, consistent with the file's own comments the lane quotes."
+  },
+  {
+   "row": "CAPACITY C1 — receipt-capacity.md:160-165,184-185 (S4 relocation of the +1 home)",
+   "call": "The news contracts do not move because the crowding term is DARK in every shipped preset; the '+1 home' the design bills to C1 is the LIGHTING WAVE's bill",
+   "claim": "A relocation of a bill on structural grounds",
+   "method": "git show 4233031ba:src/domain/worldPulse/simulationRules.js | grep demographicsEnabled",
+   "evidence": "`:874 // \\`demographicsEnabled\\` is a VIRTUAL flag (no DEFAULT_SIMULATION_RULES entry; every` … `:888 demographicsEnabled: false,`. tripwires.mjs:212-218 `EVERY ROW BELOW IS NOT-EXECUTABLE ON A DARK CELL … The demographic term ships DARK`.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Default is false at the tip. 'Every shipped preset' is PLAUSIBLE — settle with `git show 4233031ba:src/domain/worldPulse/simulationRules.js | grep -n -B2 -A2 demographicsEnabled` over each preset literal."
+  },
+  {
+   "row": "CAPACITY C2 — receipt-capacity.md:202-226,232-234 (S2 STOP: the 190 B HELD surface)",
+   "call": "The Outlook-tab section is built, green and HELD out of the commit; wiring it costs 190 B of first-paint closure (chunk-graph, not leaf bytes); patch = 192 lines / 3 files",
+   "claim": "Owner-gated byte spend correctly stopped and priced",
+   "method": "wc -l / grep '^diff --git' on $SP/c2-HELD-outlook-surface.patch; git diff-tree 6bddd6183",
+   "evidence": "Patch: 192 lines; `diff --git a/src/components/new/tabs/ViabilityTab.jsx`, `a/tests/build/vendorPdfLazy.test.js`, `a/tests/components/viabilityTabAdjudication.test.jsx` (3 files, 150 '+' lines). 6bddd6183 name-status: `A src/domain/display/demographicReading.js`, `A tests/domain/demographicReading.test.js` — nothing under src/components or src/pdf.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The STOP disposition and the held-patch shape are CONFIRMED; the 190 B figure itself is PLAUSIBLE (settle: apply the patch in a scratch worktree, `npm run build` both ways, compare vendorPdfLazy's entryStaticClosure). Correctly listed on the owner's desk in §891."
+  },
+  {
+   "row": "CAPACITY C2 — receipt-capacity.md:235-239 (S3 paid-surface boundary)",
+   "call": "No `src/pdf/` file changed; the PDF capacity block stays CAP-6 / the owner's",
+   "claim": "Boundary held",
+   "method": "git diff-tree --name-status 6bddd6183",
+   "evidence": "Exactly two paths, both `A`: src/domain/display/demographicReading.js, tests/domain/demographicReading.test.js.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Refutation attempt: no src/pdf path in the car."
+  },
+  {
+   "row": "CAPACITY C2 — receipt-capacity.md:249-253 (defect 1: confident reading from garbage)",
+   "call": "A settlement whose population is not a real count is not readable at all",
+   "claim": "Cured at cause",
+   "method": "git show 4233031ba:src/domain/display/demographicReading.js",
+   "evidence": "`:188 // settlement whose population is not a real count is not readable at all.` `:190 if (typeof population !== 'number' || !Number.isFinite(population) || population < 0) return null;` `:195 if (!(readings.bound > 0)) return null;` `:181 if (!demographicsActive(worldState)) return null;`",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Guard present and total (type, finiteness, sign, bound)."
+  },
+  {
+   "row": "CAPACITY C3 — receipt-capacity.md:286-294; tripwires.mjs:224-232; tripwireRegistry.test.js:63-66 (the refused fourth row)",
+   "call": "`capacity_envelope_30y` REFUSED because `behavioral.yearly[29].motion.populationMoved / populationTransitions` is 'MEASURED: no such field is written … no `motion` block at all'; writing it would be a receipt SCHEMA change",
+   "claim": "The refusal rests on a measurement",
+   "method": "git show ca651d54b:scripts/audit/behavioral-observation.mjs (lines 936-960, 1016-1024, 1216-1225); git log -S'motion: {'",
+   "evidence": "At the lane's OWN BASE ca651d54b, observeBehavioralYear returns `:1016 motion: {` `:1017 populationTransitions,` `:1018 populationMoved,` … `powerMoved, },` computed at :938-958 (`if (Math.abs(afterPopulation - beforePopulation) / Math.max(1, beforePopulation) >= 0.0025) populationMoved += 1;`); buildBehavioralObservation passes `:1225 yearly: Array.isArray(yearly) ? yearly : [],` through whole; whole-world-soak.mjs:427 `yearlyBehavior.push(observeBehavioralYear({` and :1055 `behavioral: buildBehavioralObservation({`. The block dates from 37459391a (2026-07-28). No commit touches the file in ca651d54b..4233031ba.",
+   "verdict": "REVERSE",
+   "confidence": "CONFIRMED",
+   "note": "The premise is false: the field IS written by the soak at the lane's base, under exactly the path the design named. No schema change is owed and the fourth row is buildable. Worse, the false measurement is now written INTO THE TREE twice (tripwires.mjs:224-232, tripwireRegistry.test.js:63-66) as a citation. Receipt-level settle: `node scripts/audit/whole-world-soak.mjs --years 1 --json` and read `.behavioral.yearly[0].motion` (writes under artifacts/, so run it in a scratch worktree)."
+  },
+  {
+   "row": "CAPACITY C3 — receipt-capacity.md:268-284,304-308 (envelope bars; tuning grazed not touched)",
+   "call": "Bars set an order of magnitude under the measurement (≥0.05 moving share, >0.10 differentiation, arrival ≤60y); no dial read or changed; ZERO product bytes",
+   "claim": "Floors not goldens; no tuning act",
+   "method": "git show 4233031ba:tests/domain/demographicsEnvelope.test.js; git diff-tree d02c5acde",
+   "evidence": "`:45 const MOTION_FLOOR_01 = 0.0025;` `:47 const MOVING_SHARE_FLOOR = 0.05;` `:127 ).toBeGreaterThanOrEqual(MOVING_SHARE_FLOOR);` `:140 ).toBeGreaterThan(0.1);` `:171/181/188 toBeGreaterThanOrEqual(1)` over within60/within30. d02c5acde paths: scripts/soak/tripwires.mjs, tests/domain/demographicsCure.test.js, tests/domain/demographicsEnvelope.test.js (A), tests/helpers/demographicsRealmFixture.js (A), tests/soak-harness/tripwireRegistry.test.js — no src/.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The measured figures (0.95, 0.4098, year 14) are the lane's executed evidence; the bars and the no-src-byte claim are verified here."
+  },
+  {
+   "row": "CAPACITY — the SOAK lane's H-1 handover (laneINSTRSOAK-receipt.md:287; brief-INSTR-SOAK.md:7)",
+   "call": "Did CAPACITY take or refuse the re-shape `population(y) ≤ 1.5 × max(bound(y), bound(y−1))` routed to 'CAPACITY's author' as handover row H-1?",
+   "claim": "Neither: the row never reached the lane",
+   "method": "grep 'H-1' / 'bound(y' over receipt-capacity.md, briefs/brief-KERNELMARK.md, tripwires.mjs@4233031ba, DESIGN_HORIZON.md",
+   "evidence": "receipt-capacity.md: 0 hits for H-1. brief-KERNELMARK.md (the CAPACITY lane's brief): 0 hits for CAPACITY, H-1, bound(y, handover or 1.5. DESIGN_HORIZON.md (both copies): 0 hits for `bound(y`. brief-INSTR-SOAK.md:7 `the recommended re-shape (…) is CAPACITY's author's to take, not yours — carry it as a named handover row.` laneINSTRSOAK-receipt.md:287 `RECOMMENDED (not banked, not written): population(y) ≤ 1.5 × max(bound(y), bound(y−1))`. tripwires.mjs@4233031ba: no bound-allowance row, no 1.5 literal.",
+   "verdict": "EVIDENCE-THIN",
+   "confidence": "CONFIRMED",
+   "note": "The lane cannot be faulted — it was never asked. The handover was DROPPED at the chair's brief-authoring step between the SOAK receipt and the CAPACITY brief, and the CAPACITY design volume never carried it. H-1 is still OWED (the LIT bound-allowance arm has no admissible value and no reshape); enrol it as an open row at §892 rather than as a lane call."
+  },
+  {
+   "row": "CAPACITY — receipt-capacity.md:341-348 (predicted lighting movement)",
+   "call": "files 2510→2512, titles +27 (13 walker-measured + 14 arithmetic), suiteTitles +4, credited +2, parked unchanged",
+   "claim": "Prediction of the landing's refreeze",
+   "method": "tests/lint/.lighting-census-baseline.json at ca651d54b vs 4233031ba; git diff-tree per car",
+   "evidence": "Composed: files 2510→2515 (+5 = CAPACITY 2 [demographicReading.test.js, demographicsEnvelope.test.js new] + CHARSET 3), suiteTitles 6142→6152 (+10 = CAPACITY 4 + CHARSET 6), credited 2140→2144 (+4 = CAPACITY 2 + CHARSET 2), parked 370→371 (+1 CHARSET). grep of added `it(`/`test(` lines per car: ec6b0a132 13, 6bddd6183 8, d02c5acde 6 = 27.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Every non-title figure reconciles as a plain sum with the CHARSET lane's prediction; the per-lane title share cannot be isolated at the composed tip (see the reg-1/2 entry)."
+  },
+  {
+   "row": "CHARSET Car 1 — receipt-charset1.md:24-25 (J: `surfaces` stripped from runtime vocabulary)",
+   "call": "Declaring a field's surfaces costs ZERO product bytes because normalizeManifest strips `surfaces` in the same map that strips `schema`",
+   "claim": "The three existing generated artifacts stay byte-identical",
+   "method": "git show 4233031ba:scripts/generate-custom-content-manifest.mjs",
+   "evidence": "`:157 // \\`surfaces\\` is a CHARSET input, not runtime vocabulary` … `:161 }).map(({ schema: _schema, surfaces: _surfaces, ...field }) => field);`",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The strip is in the tree exactly as described."
+  },
+  {
+   "row": "CHARSET Car 1 — receipt-charset1.md:28 (J: bans.control stored WHOLE)",
+   "call": "Store C0 whole + DEL + C1 (`0-1F 7F-9F`) and let the protocol exempt per field, curing the silent pass on a single-line web-only field",
+   "claim": "Defect cured at cause",
+   "method": "git show 4233031ba:src/domain/content/customContentCharset.generated.js",
+   "evidence": "`:80 \"control\": \"0-1F 7F-9F\",`",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The stored set is the whole control range; the per-field exemption is at customContentCharset.js:418-423."
+  },
+  {
+   "row": "CHARSET Car 1 — receipt-charset1.md:29 (J: TAB/LF/CR on multiline are LAYOUT)",
+   "call": "A multiline field's TAB/LF/CR skip the codepoint entirely, curing the false `uncovered_codepoint` on every paragraph break",
+   "claim": "Defect cured at cause",
+   "method": "git show 4233031ba:src/domain/content/customContentCharset.js",
+   "evidence": "`:162 /** TAB, LF and CR, which a multiline field is allowed to carry. */` `:418 // TAB, LF and CR on a multiline field are LAYOUT, not glyphs.` `:423 if (cls.multiline && MULTILINE_CONTROLS.includes(cp)) return;`",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Refutation attempt: the skip precedes the surface check at :447, so LF cannot reach `uncovered_codepoint` on a multiline field."
+  },
+  {
+   "row": "CHARSET Car 1 — receipt-charset1.md:45-54 (the OSR STOP: the lane ran the write, measured 12 entries / 5 own / 7 foreign, and REVERTED)",
+   "call": "A lane's absorb would launder seven foreign entries under its sha; the red is left OWED to the landing",
+   "claim": "Refusal at the lane's vantage",
+   "method": "python diff of scripts/.observed-shape-readers-baseline.json 2445bb3c5^ vs 2445bb3c5; charset receipt :48-54",
+   "evidence": "At the lane's base AND at the composed base the baseline's `frozenAtSha` was still `019829e99ef4e4…` (§889 register 1/3) — §890 never refroze it. The composed write (2445bb3c5) CHANGED 81 manifest entries and ADDED 14 across executionTree/scanTree/sourceTree (32 distinct paths), including every one of the seven foreign files the lane refused: FounderTile.jsx, wizardNews.js, faithTuningSurface.js, simulationRules.js, useFounderTileEligible.js, useReaderAudience.js, flagRegistry.js. inventory/identities/total (1993) byte-same.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The lane's refusal was correct on its own terms and its measurement is reproduced: the seven foreign entries were STILL unabsorbed at the composed tip. See the §891 OSR entry for the chair's counter-claim."
+  },
+  {
+   "row": "CHARSET Car 1 — receipt-charset1.md:93 (J: keep the `/* eslint-disable */` header, +1 warning)",
+   "call": "The header holds a generated projection out of the per-file size ratchet; vetoable",
+   "claim": "Recorded, vetoable",
+   "method": "git show 4233031ba:src/domain/content/customContentCharset.generated.js | head -2",
+   "evidence": "`/* eslint-disable */` `// GENERATED by scripts/generate-custom-content-manifest.mjs. Do not edit by hand.`",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Header present; the 28→29 warning delta is the lane's executed evidence."
+  },
+  {
+   "row": "CHARSET Car 1 — receipt-charset1.md:96-97 (J: Car 2 wiring NOT cut; Car 3 NOT touched)",
+   "call": "No src importer of the leaf; the byte answer is zero by construction; Car 3 is owner-gated paid-surface bytes",
+   "claim": "Scope held",
+   "method": "git grep customContentCharset|jsPdfText 4233031ba -- src",
+   "evidence": "Only importers outside the leaf: `src/utils/generateCampaignPDF.js:34 import { sanitizeJsPdfText as s } from './jsPdfText.js';` and `src/utils/generateWorldBook.js:27` (the hoist). No src file imports customContentCharset.js. Two full-build figures (engine 675,764 both sides; closure 1,046,996 both sides) are the lane's executed evidence.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The zero-byte claim follows structurally from the absent importer; the measured build figures are not re-run here."
+  },
+  {
+   "row": "CHARSET Car 1 — receipt-charset1.md:85-90 (predicted lighting/register movement)",
+   "call": "files +3 MEASURED; parked +1; titles +40, suiteTitles +6, credited +2 PREDICTED; one `rationale` row owed on mutation-coverage-manifest",
+   "claim": "Prediction of landing acts",
+   "method": "name-status 4ae140102; customContentCharsetLazy.test.js:166; lighting baseline both ends; mutation manifest diff at ffe0dbb81",
+   "evidence": "Three new test files (tests/build/customContentCharsetLazy.test.js, tests/data/namingDataCharset.test.js, tests/domain/customContentCharset.test.js). `:166 describe.runIf(distExists)('the built bundle carries no charset bytes on first paint'` → parked 370→371 exact. suiteTitles/credited composed deltas (+10/+4) reconcile with CAPACITY 4/2 + CHARSET 6/2. The manifest gained a `mutation` entry, not the predicted `rationale` (see the reg-4 entry).",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Titles +40 is PLAUSIBLE (43 plain `it(` added by grep, 3 inside the parked suite)."
+  },
+  {
+   "row": "CHARSET Car 1 — receipt-charset1.md:42 (seal) and the train car",
+   "call": "Tip 9a95d6799 sealed as refs/preserve/charset1-2026-09-03; the train car 4ae140102 is its rebase",
+   "claim": "Identity of seal and car",
+   "method": "git for-each-ref; git patch-id --stable",
+   "evidence": "`9a95d67998… refs/preserve/charset1-2026-09-03`; `9a95d6799 == 4ae140102 SAME patch-id 2c47b302f048`.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Byte-identical rebase."
+  },
+  {
+   "row": "§891 register 4/6 — ffe0dbb81 (the charset invariant EARNS a mutation entry; stratum HIGH item 'the charset plant's catching power')",
+   "call": "A rationale would have been false (five arms, no executed plants); plant 72 strikes one dossier range, anchor unique, 2 of 5 arms red naming U+00C1 U+00C9 U+00CD U+00D3 U+00D6 U+00DA U+00DC U+00DE; restored cmp-identical, 5/5 green",
+   "claim": "The harder, honest register act",
+   "method": "python diff of scripts/mutation-coverage-manifest.json ffe0dbb81^ vs ffe0dbb81; git show ffe0dbb81 -- scripts/mutation-sweep.sh; grep anchor @4233031ba; npx vitest run tests/data/namingDataCharset.test.js at laneKERNELMARK-tree @15c6368a",
+   "evidence": "Manifest delta is exactly one key: `invariants['tests/data/namingDataCharset.test.js']: None -> {'kind': 'mutation', 'label': 'naming-charset/a range leaves the dossier surface and a shipped name stops printing'}` (the 5,248-line diff is a re-serialisation). Sweep adds `+ src/domain/content/customContentCharset.generated.js` to MUTATED_FILES and `# 72.` with `perl -0pi -e 's/\"ranges\": \"D 20-7E A0-AC AE-132 /\"ranges\": \"D 20-7E A0-AC /'`. Anchor count at 4233031ba: 1 (generated.js:29). AE-132 spans U+00C1..U+00DE; src/data/namingData.js is the one src/data file carrying Á/É/Í/Ó/Ö/Ú/Ü/Þ. Un-planted run at the dock: `Test Files 1 passed (1) / Tests 5 passed (5)`, VITEST1_EXIT=0, porcelain 0→0.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The entry's shape, the anchor's uniqueness, the struck range's coverage of the named codepoints, the presence of those codepoints in shipped names, and the green baseline are CONFIRMED; the exact '2 of 5 red' is PLAUSIBLE — settle by running `mutation-sweep.sh` plant 72 in a scratch worktree (it reverts with `git checkout --`, so never in a live dock)."
+  },
+  {
+   "row": "DESK CAR 1 — receipt-deskwiring.md:109-130 (JUDGMENT 1: the rungs by LEGIBILITY and R-DST-A)",
+   "call": "DS-ECO-1 SENTENCE, DS-ECO-8 GLANCE, DS-ECO-2 GLANCE at both tiles, DS-ECO-9 SENTENCE; DS-ECO-8's sentence position deferred to another page",
+   "claim": "Rung choices, vetoable",
+   "method": "git show 4233031ba:src/domain/display/stateProse/dossierMounts.js",
+   "evidence": "DOSSIER_MOUNTS rows: `economics.prosperityHeader … blockId: 'DS-ECO-1', rung: 'sentence'`, `economics.economyTile … 'DS-ECO-8', rung: 'glance'`, `economics.foodTile … 'DS-ECO-2', rung: 'glance'`, `economics.seasonTile … 'DS-ECO-2', rung: 'glance'`, `economics.foodSecurity … 'DS-ECO-9', rung: 'sentence'`. drawnAtMount (:66-71) nulls `sentence` and `provenance` on a GLANCE row.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The C3 collision (one block, two positions) is real on the table's own shape and the glance choice resolves it; deferral written at receipt:313-315."
+  },
+  {
+   "row": "DESK CAR 1 — receipt-deskwiring.md:132-140 (JUDGMENT 2: the seed is the settlement's identity)",
+   "call": "`String(s?._seed ?? s?.id ?? '')`, no timestamp; imported settlements fall to `id` (accountImport sets `_seed: undefined`)",
+   "claim": "Determinism preserved across all three lifecycle paths",
+   "method": "git show 4233031ba:src/components/new/tabs/EconomicsTab.jsx; src/lib/accountImport.js",
+   "evidence": "`EconomicsTab.jsx:319 const deskProse = economyStateProse(s, { foodBalance: fbal, granaryOutlook: granary }, { seed: String(s?._seed ?? s?.id ?? '') });` `accountImport.js:~622 _seed: undefined,` inside the imported-settlement spread.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "No clock read on the path; the import fallback is exactly as the lane traced."
+  },
+  {
+   "row": "DESK CAR 1 — receipt-deskwiring.md:142-147,160-163 (JUDGMENT 3: the ceiling bought by decomposition)",
+   "call": "EconomicsTab.jsx 600→580 effective lines by lifting the glance surface into EconomicsGlance.jsx (53→50); .size-baseline.json untouched",
+   "claim": "Room made without raising a number",
+   "method": "approximate count (non-blank, non-comment-led lines) at ca651d54b vs 4233031ba; git diff-tree a59e66e5a",
+   "evidence": "EconomicsTab.jsx ≈600 → ≈581; EconomicsGlance.jsx ≈50; dossierMounts.js ≈63. a59e66e5a: `A src/components/new/tabs/EconomicsGlance.jsx`; scripts/.size-baseline.json not in ca651d54b..4233031ba's register diff.",
+   "verdict": "RATIFY",
+   "confidence": "PLAUSIBLE",
+   "note": "Direction and magnitude confirmed by approximation; the eslint-exact figure would settle with `npx eslint --no-eslintrc --rule '{\"max-lines\":[\"error\",{\"max\":600,\"skipBlankLines\":true,\"skipComments\":true}]}' src/components/new/tabs/EconomicsTab.jsx` at a dock."
+  },
+  {
+   "row": "DESK CAR 1 — receipt-deskwiring.md:279-283 (the four mounts of 68: predicted `.dossier-mounts-baseline.json` 68→64)",
+   "call": "Four blocks mounted; the shrink-only bank to 64 is the landing's act that BANKS the win",
+   "claim": "Register movement handed to the landing",
+   "method": "git show {ca651d54b,4233031ba,15c6368a6}:tests/lint/.dossier-mounts-baseline.json; count of UNMOUNTED_BLOCKS at 4233031ba; vitest at the dock",
+   "evidence": "UNMOUNTED_BLOCKS at 4233031ba lists 64 ids (11 DEF + 11 economy/SUP + 23 POP/GEN/REL/HK + 7 POW + 3 STR/CND + 9 WAR/FTH). The baseline reads `{\"UNMOUNTED_BLOCKS\":{\"blocks\":68}}` at ca651d54b, at 4233031ba AND at 15c6368a6. `npx vitest run tests/lint/dossierMountRegistry.walker.test.js` at the dock: 16 passed, exit 0 (the `<=` arm is green at 68).",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "The lane's prediction is right and the register is NOT taken: §891's 'all six register acts taken' and reg-7's 'seventh and last' both omit the dossier-mounts bank the lane named. Not a red — but an unbanked shrink-only ratchet lets a later regression to 68 pass silently. The landing owes the write to 64."
+  },
+  {
+   "row": "DESK CAR 1 — receipt-deskwiring.md:208-219 (the observed-shape conviction `sentence on foodSecurity` cured at cause)",
+   "call": "The desk's returned key `foodSecurity` bound the ENGINE container; renamed to `foodSecurityRung`; OSR baseline untouched, 1993 exact",
+   "claim": "Cure at the seam, not a baseline edit",
+   "method": "git show 4233031ba:src/domain/display/stateProse/economyStateProse.js; EconomicsTab.jsx; OSR diff at 2445bb3c5",
+   "evidence": "economyStateProse.js `:254 The last key is \\`foodSecurityRung\\`, NOT \\`foodSecurity\\`` … `:330 foodSecurityRung: securityKey`; EconomicsTab.jsx `:320 drawnAtMount('economics.foodSecurity', deskProse.foodSecurityRung)`. OSR register act at the composed tip: `total 1993 -> 1993`, inventory and identities byte-same.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The resolver reasoning is corroborated by the composed OSR act carrying zero new findings."
+  },
+  {
+   "row": "DESK CAR 1 correction — receipt-deskwiring.md:321-330 (the PHANTOM WIN in prose numerics)",
+   "call": "Hoisting the tile array took two frozen prose-numeric rows out of the scanner's reach (225→224, a debt fall nobody paid); reverted; 225→225 with two rows relocating EconomicsTab.jsx→EconomicsGlance.jsx",
+   "claim": "A false-report-family defect self-caught before banking",
+   "method": "python parse of tests/lint/.prose-numerics-baseline.json at both ends; EconomicsGlance.jsx",
+   "evidence": "Rows 225 at ca651d54b and 225 at 4233031ba; `EconomicsGlance.jsx` mentions 0→2, `EconomicsTab.jsx` 24→22. EconomicsGlance.jsx:99 keeps `sub:ecoScore?\\`Output score: ${ecoScore}/100\\`:undefined` inside the JSX array literal.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The chair's reg-3/6 'debt SHAPE byte-identical' is consistent with this measurement."
+  },
+  {
+   "row": "DESK CAR 1 correction — receipt-deskwiring.md:332-336 (the title census: assertions FOLDED into an existing test)",
+   "call": "The new `test(...)` moved the exact title census 22,841→22,842; its assertions were folded into `sentenceMountForBlock is fail-closed`, census flat",
+   "claim": "Coverage kept at zero title cost",
+   "method": "git show a9e0121bc -- tests/lint/dossierMountRegistry.walker.test.js; vitest at the dock",
+   "evidence": "Diff removes `- test('THE ROUTER READ: drawnAtMount hands a position the depth its ROW names', () => {` and its body and adds `+ // ── THE ROUTER READ, the other runtime accessor, folded into this test rather than given a title of its own`. Dock run: 16 passed (the lane's pre-fold count was 17).",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Fold present; the assertions survive inside the host test (dock run green)."
+  },
+  {
+   "row": "DESK CAR 1 — receipt-deskwiring.md:220-225 (EconomicsGlance classified FROZEN_DEFERRED on the SupplyChainsPanel precedent)",
+   "call": "Child of a covered surface; the host tab's EconomyFreshnessNote already caveats; corpus prose carries no figure",
+   "claim": "Classification, not exemption",
+   "method": "git show 4233031ba:tests/lint/economyReadModelCoverage.walker.test.js",
+   "evidence": "`:176 'src/components/new/tabs/EconomicsGlance.jsx':` `:177 'Child of a covered surface, on the SupplyChainsPanel.jsx standing directly above: … EconomicsTab still renders <EconomyFreshnessNote variant=\"tallies\"> ABOVE it in the same return …'`",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Written reason present at the classification site."
+  },
+  {
+   "row": "DESK CAR 1 — the §885.2 O2 operating default `publicDossier ⇒ no state prose` (ledger 32383; restated §885.3 at 32384)",
+   "call": "Was the default implemented — does EconomicsTab/EconomicsGlance gate the desk prose on publicDossier, and does OutputContainer render the economics tab for public dossiers?",
+   "claim": "The chair 'operates under the conservative default'",
+   "method": "git show 4233031ba:src/components/OutputContainer.jsx, EconomicsTab.jsx, EconomicsGlance.jsx, src/domain/display/publicSafe.js, PublicDossierView.jsx; grep of brief-REGISTRY.md and receipt-deskwiring.md",
+   "evidence": "OutputContainer.jsx `:446 const publicDossier = readOnly && !saveId;` `:703 case 'economics':  return <EconomicsTab settlement={s} narrativeNote={null} saveId={saveId} />;` (no publicDossier prop) while `:724 <WarTab … publicDossier={publicDossier} />`, `:725 FaithTab`, `:729 RumorsTab`, `:741-742 RelationshipsTab` all receive it; `:98 systems: { … tabs: ['services', 'economics', …] }`; the public filter at :487-503 removes only dm_notes/ai_notes. EconomicsTab.jsx: zero hits for publicDossier/readOnly/playerView. publicSafe.js:54 keeps 'economicState' in PUBLIC_TOPLEVEL_KEYS. PublicDossierView.jsx:115 `<OutputContainer settlement={settlement} readOnly playerView={!shareDm} …/>`. brief-REGISTRY.md: 0 hits for publicDossier; receipt-deskwiring.md: 0 hits for publicDossier as a gate.",
+   "verdict": "REVERSE",
+   "confidence": "CONFIRMED",
+   "note": "The default was declared twice in the ledger and never carried into the desk-wiring brief, the lane's design, or the landing check: as composed, the train lights the state-prose corpus on gallery and anonymous dossiers. Either pass `publicDossier={publicDossier}` to EconomicsTab and gate `deskProse` on it before the train lands, or record explicitly that O2's default is NOT applied and route the exposure to the owner. This is the chair's error, not the lane's."
+  },
+  {
+   "row": "DESK CAR 1 — receipt-deskwiring.md:253-256,338-341 (seals and the train cars)",
+   "call": "f6fb66720 + eb0a5762b sealed at refs/preserve/deskwiring-2026-09-03; train cars a59e66e5a / a9e0121bc are their rebases",
+   "claim": "Identity",
+   "method": "git for-each-ref; git patch-id --stable",
+   "evidence": "`eb0a5762b… refs/preserve/deskwiring-2026-09-03`; `f6fb66720 == a59e66e5a SAME patch-id 1e331b82eda0`; `eb0a5762b == a9e0121bc SAME patch-id 79e6f36afcd2`.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Byte-identical rebases."
+  },
+  {
+   "row": "READERREVIEW Car 2 — receipt-readerreview2.md:219-223 (JUDGMENT 1: Car 1's declared GAP built inside Car 2)",
+   "call": "The composer half of readerCorpus.mjs is built in this car; Car 1's two commits untouched",
+   "claim": "Scope widening forced by the dependency",
+   "method": "git diff-tree --name-status ac427cc5c",
+   "evidence": "`A scripts/review/readerCorpus.mjs` (999 lines), `A scripts/review/reader-corpus.mjs`, `A scripts/review/readerStoreStub.mjs`, `A scripts/review/reader-backlog.mjs`, `M tests/scripts/readerCorpusManifest.test.js`; no change to scripts/lib/golden-corpus-key.mjs or readerRubric.mjs.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Car 1's files are not in the car."
+  },
+  {
+   "row": "READERREVIEW Car 2 — receipt-readerreview2.md:224-228 (JUDGMENT 2: `liveness` is foldDecades's WHOLE return)",
+   "call": "`{rows, partialTailYears}` stored, not the bare array; a consumer must read `liveness.rows`",
+   "claim": "Flagged reshape, vetoable",
+   "method": "git show 4233031ba:scripts/review/readerCorpus.mjs; scripts/audit/soakInvariants.mjs",
+   "evidence": "readerCorpus.mjs `:68 import { foldDecades } from '../audit/soakInvariants.mjs';` `:1019 * The liveness fold, BY IMPORT of the soak's own \\`foldDecades\\`` `:1025 return foldDecades({`. soakInvariants.mjs `:157 @returns {{rows: Array<object>, partialTailYears: number}}` `:203 return { rows, partialTailYears: years - (fullDecades * span) };` `:211 @param {{rows…}|Array<object>} folded` `:216 const partialTailYears = Array.isArray(folded) ? 0 : …`.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The named consumer accepts both shapes, as the lane said."
+  },
+  {
+   "row": "READERREVIEW Car 2 — receipt-readerreview2.md:229-232 (JUDGMENT 3: tab surfaces by INJECTED renderer)",
+   "call": "A run without the CLI's stubbed store RECORDS the absence (`tabs.notRendered`) instead of shipping a corpus three surfaces short",
+   "claim": "Fail-closed instrument shape",
+   "method": "git show 4233031ba:scripts/review/readerCorpus.mjs",
+   "evidence": "`:565 * … means a run with no tab renderer RECORDS the absence rather than silently` `:791 notRendered: true,` `:810 if (doc.notRendered) receipt.notRendered = true;`",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Absence is recorded, not hidden."
+  },
+  {
+   "row": "READERREVIEW Car 2 — receipt-readerreview2.md:233-235 (JUDGMENT 4: PREVIEW_OVERLAY stays four-key; no `errandSpineEnabled`)",
+   "call": "The espionage member is dead on arrival (three-part conjunction) — an OPEN owner row, not a literal to edit",
+   "claim": "Owner row opened, not decided",
+   "method": "git show 4233031ba:scripts/review/readerCorpus.mjs",
+   "evidence": "`:106 * \\`errandSpineEnabled === true\\` AND \\`espionageEnabled === true\\`. This overlay therefore` `:109 * adding \\`errandSpineEnabled\\` here would answer the owner's question by editing a literal.` `:116 export const PREVIEW_OVERLAY = Object.freeze({`",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Correctly routed as OUT-OF-SCOPE for the lane; the row still needs a home on the owner's desk."
+  },
+  {
+   "row": "READERREVIEW Car 2 — receipt-readerreview2.md:236-237,140-144 (JUDGMENT 5: both World Books at faithUnlocked:true, varying by mode alone)",
+   "call": "A deviation reverted so one axis is asked at a time",
+   "claim": "Reverted deviation",
+   "method": "git show 4233031ba:scripts/review/readerCorpus.mjs",
+   "evidence": "`:681 collectWorldBook(campaign, saves, { mode: 'dm', faithUnlocked: true })` `:690 collectWorldBook(campaign, saves, { mode: 'player', faithUnlocked: true })` `:694 collectRealmSummary(campaign, saves, { faithUnlocked: true })`",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Both books carry the same entitlement; only `mode` varies."
+  },
+  {
+   "row": "READERREVIEW Car 2 — receipt-readerreview2.md:238-241 (JUDGMENT 6: the two advance refusals exported as pure functions)",
+   "call": "The orchestrator tolerates a null rules object, so the pause branch had no on-demand plant; refusals extracted so they can be exercised",
+   "claim": "Guard made testable",
+   "method": "git show 4233031ba:scripts/review/readerCorpus.mjs; test file",
+   "evidence": "`:324 export function refuseAdvanceResult({ result, campaignId, year }) {` `:335 export function refuseNonFiniteWorld({ composite, campaignId, year }) {`; test `:295 it('a paused year and a non-finite world are both refused, and each refusal names the campaign'`.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Exported and exercised by name."
+  },
+  {
+   "row": "READERREVIEW Car 2 — receipt-readerreview2.md:242-243,294-300 (JUDGMENT 7 + register prediction: 8 arms added, no new file; titles +8 MEASURED, credited +8)",
+   "call": "No new test file; one describe reused; `.lighting-census` titles +8 measured, suiteTitles +0, credited +8",
+   "claim": "Prediction",
+   "method": "git diff-tree per RR car; `it(` count at 4233031ba; lighting baseline both ends",
+   "evidence": "All four RR cars: `M tests/scripts/readerCorpusManifest.test.js` only under tests/. 16 `it(` heads under one `describe` at 4233031ba (was 8). Composed credited 2140→2144 (+4), fully accounted for by CAPACITY's 2 and CHARSET's 2 new credited files.",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "'credited +8' in the receipt is wrong: `credited` is a FILE count (credited 2144 + parked 371 = files 2515 per the reg-1 body); RR added no file, so its credited delta is 0. titles +8 stands."
+  },
+  {
+   "row": "READERREVIEW Car 2 cure 1 — receipt-readerreview2.md:126-138 (the chronicle captured at 3 of 30 years; the byte floor)",
+   "call": "`chronicleAtYear` captured every year via a lazily loaded read model; `worldStateAtYear` stays decade-only; a per-document byte floor reds any silently-empty producer",
+   "claim": "Cure plus structural guard",
+   "method": "git show 4233031ba:scripts/review/readerCorpus.mjs",
+   "evidence": "`:413 // producer read \\`worldStateAtYear\\`, which is deliberately null except at years 10/20/30` `:417 chronicleAtYear: latestChronicleOf(result.worldState),` `:418 worldStateAtYear: WORLD_DUMP_YEARS.includes(year) ? result.worldState : null,` `:623 chronicle: capture.chronicleAtYear ?? null,`. The 30-of-30 result is the lane's executed render evidence (receipt:191).",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The two captures are split as described. The '<32 B' floor constant was not located by my grep (searched 'floor|length <'); PLAUSIBLE — settle with `grep -n 'silently-empty\\|32' scripts/review/readerCorpus.mjs`."
+  },
+  {
+   "row": "READERREVIEW Car 2 cure 2 — receipt-readerreview2.md:150-161 (the manifest reads the tuning register; `signed` never invented)",
+   "call": "state `draft` at signature version 0; `unregistered` when no register/declaredSha256 or on throw; `signed` only from the register's own version",
+   "claim": "Fail-closed both ways",
+   "method": "git show 4233031ba:scripts/review/readerCorpus.mjs 1000-1014",
+   "evidence": "`export function readerTuningBlock(root…) { try { const fingerprint = tuningRegisterFingerprint(root); if (!fingerprint?.declaredSha256) { return { state: 'unregistered', … }; } const version = Number(fingerprint.signatureVersion ?? 0); return { state: version > 0 ? 'signed' : 'draft', signatureVersion: version, fingerprint }; } catch { … return { state: 'unregistered', signatureVersion: 0, fingerprint: null };`",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The block cannot say `signed` unless the register's signatureVersion is > 0, which only the owner's signing act moves."
+  },
+  {
+   "row": "READERREVIEW Car 2 cure 3 — receipt-readerreview2.md:284-287 (the run-id exclusion gets a liveness anchor)",
+   "call": "`expect(JSON.stringify(campaigns)).not.toContain(runId)` passes on `[]`; replaced by `expectAbsentWithAnchor`; not banked (census 10/10)",
+   "claim": "Cured at cause",
+   "method": "git show 4233031ba:tests/scripts/readerCorpusManifest.test.js",
+   "evidence": "`:56 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';` `:278 expectAbsentWithAnchor(` inside `:229 it('the whole document set renders twice with identical hashes, and the run id is not inside one'`.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The anchored form is in the tree; no new known failure was banked (the test-ratchet baseline is not in ca651d54b..4233031ba's register diff)."
+  },
+  {
+   "row": "READERREVIEW Car 2 — receipt-readerreview2.md:47-84 (the two volatile fields convicted: campaign id reaches the world; PDF CreationDate)",
+   "call": "`campaign.id` is an INPUT to the world (control carries `engineCampaignId: 'whole-world-soak'`); the dossier PDF carried a wall-clock CreationDate, cured by passing the pinned instant; the PROMISE row opened not decided",
+   "claim": "Instrument convictions cured; owner row opened",
+   "method": "git show 4233031ba:scripts/review/readerCorpus.mjs",
+   "evidence": "`:155 { campaignId: 'rr-control-w0', engineCampaignId: 'whole-world-soak', engineCampaignName: 'Whole-World Soak Realm', …}` `:267 // measured, not surmised. \\`engineCampaignId\\` therefore exists so the control can wear the` `:269 id: row.engineCampaignId ?? row.campaignId,` `:870 creationDate: READER_NOW,`.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Both cures are in source. The hash measurements (2409ea4e… reproduced; 43/47 then 47/47) are the lane's executed evidence — PLAUSIBLE here; settle with `node scripts/audit/whole-world-soak.mjs --years 1 --json` against the composer in a scratch worktree. The (seed, campaignId) determinism question is correctly OUT-OF-SCOPE for the lane and still needs an owner-desk row."
+  },
+  {
+   "row": "READERREVIEW Car 2 — receipt-readerreview2.md:3-8 (seal and the four train cars)",
+   "call": "Tip 9885cfb97 sealed as refs/preserve/readerreview2-2026-09-03; train cars ac427cc5c/7b10224fd/c84437766/3d3ad217b are its rebases",
+   "claim": "Identity",
+   "method": "git for-each-ref; git patch-id --stable",
+   "evidence": "`9885cfb97… refs/preserve/readerreview2-2026-09-03`; SAME patch-ids: fff554758==ac427cc5c b27e59004783, cce6d2773==7b10224fd a2eb7dcc9921, 59ff5ef10==c84437766 3d6570869240, 9885cfb97==3d3ad217b 6c3341bd9bd6.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Byte-identical rebases."
+  },
+  {
+   "row": "HERALD cure car — bf1464952 / 7733e064e (the sovereignty_registry allowlist cure named in §889.1, landed in §890, never enrolled)",
+   "call": "The persistence rebuilder `normalizeEntry` admitted three registries; the router honours four; `sovereignty_registry` added; an arm holds the two hand-spelled lists equal rather than a cross-layer import (236 B engine margin)",
+   "claim": "Cure + habitat arm",
+   "method": "git show 30c1667bc / ca651d54b :src/domain/region/wizardNews.js; git show bf1464952; heraldRouting.walker.test.js@ca651d54b; patch-id",
+   "evidence": "Pre-cure @30c1667bc `:705 ...((entry.sectionAuthority === 'war_rulings_registry' || … 'war_coalition_registry' || … 'envoy_registry')`; post-cure @ca651d54b `:722-725 … || entry.sectionAuthority === 'sovereignty_registry')`. Car diff: 2 files (+68/−1): the allowlist line + comment block, and `tests/lint/heraldRouting.walker.test.js` `:395 expect(router.set.has('sovereignty_registry'), 'the anchor the drift was found on').toBe(true); :396 expect(rebuilder.set.has('sovereignty_registry'), 'the rebuilder must persist the…`. `bf1464952 == 7733e064e SAME patch-id fb2098e94f6e`; 7733e064e IS an ancestor of ca651d54b; bf1464952 (refs/preserve/herald-authority-drift-2026-09-03) is not (pre-rebase seal).",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Correct cure at cause with a non-vacuous arm; landed in the §890 train. The §890/§891 rows carry no judgment entry for it — enrol these three HERALD entries at §892."
+  },
+  {
+   "row": "HERALD cure car — §889.1's probe-with-control (ledger 32403) reproduced at ca651d54b",
+   "call": "Append a sovereignty entry: authority SURVIVES now? envoy_registry survives (control); bogus_registry DROPPED (negative control)",
+   "claim": "The cure is proved by execution, three ways",
+   "method": "Read-only node probe $W/S20/herald-probe.mjs importing appendWizardNewsEntries from lanePREGATE-tree @9a95d6799 (src/domain/region byte-identical to ca651d54b: `git diff --stat ca651d54b 9a95d6799 -- src/domain/region` empty)",
+   "evidence": "Output: `a authority= sovereignty_registry section= adjudication` / `b authority= envoy_registry section= adjudication` / `c authority= DROPPED section= adjudication`; PROBE_EXIT=0; lanePREGATE-tree porcelain 0 before and after.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "§889.1's DROPPED→survives is reproduced with both controls at the §890 tip's code."
+  },
+  {
+   "row": "§891 (FRQ 3154-3176; ledger 32417) — 'seventeen cars, base ca651d54b, all the lanes' seals'",
+   "call": "Every train car is the byte-identical rebase of its lane seal; CAPACITY cars are the originals",
+   "claim": "Composition identity",
+   "method": "git log ca651d54b..4233031ba; git patch-id for 9 pairs; parent of ec6b0a132",
+   "evidence": "17 commits listed; ec6b0a132's parent is ca651d54b; all nine seal/car pairs report SAME patch-id (herald, charset, desk×2, readerreview×4, nownull).",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "No car diverges from its seal."
+  },
+  {
+   "row": "§891 register 1/2 — 250d4e464 (the lighting census: 'four lanes summed +75, measured +78 ⇒ THE SUM OF INDEPENDENTLY-MEASURED DELTAS IS NOT THE COMPOSED DELTA')",
+   "call": "Three titles appear that no lane's own measurement contains",
+   "claim": "A law minted from the miss",
+   "method": "git log -1 250d4e464; git show 3a6f0d761 -- tests/ | grep title lines; lighting baseline both ends",
+   "evidence": "Commit body: `charset +40, capacity +27, readerreview +8, desk +0 … Sum: +75. MEASURED at the composed tip: +78.` But the train carries FIVE lanes (the body's own note: 'Five lanes batched'), and the fifth — the now-null car 3a6f0d761 — adds plain titles the sum never included: `+describe('\\`now: null\\` means NO STAMP, never a silent wall clock'` with 7 `+  it(` lines in tests/domain/regionalNowThreading.test.js, plus in tests/lint/worldGenerationClockSeam.walker.test.js 2 renamed `test(` (−1/+1 each) and `+  test('no undefined→null flattening on a \\`now\\` path inside src/domain/region'`, `+  test('LIVENESS: the flattening rule convicts each spelling and spares the cured form'`. files 2515 = 2510 + CAPACITY 2 + CHARSET 3; suiteTitles +10 = 4 + 6; credited +4 = 2 + 2; parked +1 — every non-title figure is a plain sum.",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "The residual is not shown to be a composition effect: one lane made no title measurement and adds titles. 'Measured, not summed' was the right practice, but the LAW as stated ('the sum of independently-measured deltas is not the composed delta') was minted on a sum with an omitted summand. Restate as: 'a four-lane sum omitted the fifth lane; the register is measured because a sum is only as complete as its roster'. Exact per-car attribution is PLAUSIBLE — settle by applying the walker's `classify()` (sovereigntyLightingContract.walker.test.js:1617) to each car's before/after test files."
+  },
+  {
+   "row": "§891 register 2/6 — 79d45d274 (tuning inventory: 'both figures predicted exact')",
+   "call": "225 tables and 2,099 keys, predicted by the CAPACITY lane and verified independently by the chair",
+   "claim": "Register act on an exact prediction",
+   "method": "tuning-inventory parse at both ends; commit note",
+   "evidence": "`tables 225→225`, `keys 2094→2099`, EXACT. Note: `HERALD_TUNING gains five leaves and RESPONSE_TUNING gains demographicsHerald.js as a dependent` — the register ALSO adds `src/domain/display/demographicReading.js` to RESPONSE_TUNING.dependents.",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "The two headline figures are exact; the note under-describes the act by one dependent (C2's leaf). Wording only."
+  },
+  {
+   "row": "§891 register 3/6 — fbcfbaeac (prose numerics 225→225, debt SHAPE byte-identical)",
+   "call": "Two rows relocate path, zero rows added/removed/paid",
+   "claim": "Register act",
+   "method": "prose-numerics baseline parse at both ends",
+   "evidence": "225 rows both ends; EconomicsGlance.jsx 0→2 mentions, EconomicsTab.jsx 24→22.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Matches the DESK correction's own measurement."
+  },
+  {
+   "row": "§891 register 5/6 — 2445bb3c5 (OSR: 'the instrument names exactly one generated input; the twelve collapse to one at the composed tip'; stratum HIGH item)",
+   "call": "At the composed tip those seven foreign entries are in the base, so the lane's twelve collapse to one",
+   "claim": "The landing's vantage makes the absorb legitimate",
+   "method": "python diff of scripts/.observed-shape-readers-baseline.json 2445bb3c5^ vs 2445bb3c5; commit body",
+   "evidence": "frozenAtSha `019829e99…` → `ffe0dbb81…` — the baseline at the composed base was STILL frozen at §889's register 1/3, i.e. §890 never absorbed the seven. The write changed 81 manifest entries and added 14 (32 distinct paths: 5 new leaves; the seven foreign files FounderTile.jsx, wizardNews.js, faithTuningSurface.js, simulationRules.js, useFounderTileEligible.js, useReaderAudience.js, flagRegistry.js; and 20 more train paths). `total 1993 -> 1993`, inventory and identities byte-same; scanStats files 2149→2153. Commit body: `What moved is the execution-input fingerprint for exactly one path … at the COMPOSED tip those seven are in the base, so the twelve collapse to one.`",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "The act is still legitimate at the landing (findings unchanged; the seven files are the chair's own §890 cars, so a landing absorbing their provenance launders nothing foreign) — but the row's factual sentence is false: 'one' is the number of GENERATED INPUTS the instrument NAMES red, 'twelve' was the number of manifest entries the write MOVES; at the composed tip the write moved 95 entries / 32 paths including all seven the lane refused. Restate the row so the two counts are not compared as if commensurable. The stratum's HIGH re-derivation item is therefore refuted as written."
+  },
+  {
+   "row": "§891 register 6/6 — 4233031ba (edge bundles rebuilt over committed inputs)",
+   "call": "The supabase bundles rebuild by the proved sequence",
+   "claim": "Register act",
+   "method": "git show --stat 4233031ba",
+   "evidence": "7 files under supabase/functions/_shared (aiCharterBundle.js +59, aiOutputSchemaBundle.js +59, five .meta.json).",
+   "verdict": "OUT-OF-SCOPE",
+   "confidence": "PLAUSIBLE",
+   "note": "Not in this slice's re-derive list and not examined beyond the stat; the materialise→build→restore-symlinks law from memory applies. Settle: `git -C laneKERNELMARK-tree ls -la node_modules/immer node_modules/seedrandom` shows symlinks restored."
+  },
+  {
+   "row": "§891 (ledger 32417) — 'One bill remains: writerReach's frozen register still calls an identity dark that DESK CAR 1 made reach the web display'",
+   "call": "The direction of the writerReach drift",
+   "claim": "A register, not a defect",
+   "method": "git log -1 15c6368a6; git show 15c6368a6 -- scripts/.writer-reach-baseline.json; dock HEAD",
+   "evidence": "Reg 7/7 (15c6368a, refs/preserve/train891-reg7-2026-09-03) body: `THE DIRECTION THE HANDOFF GAVE WAS BACKWARDS … \"expected 'web-display=R' to be 'web-display=N'\" means the REGISTER said R and the TREE measured N.` Diff line 110: `-  \"situationDesc on economicState\": \"dossier-pdf=R web-display=R web-transitive=R\",`. The extraction into a prop-bound leaf DARKENED the grade; `_seed on settlement` moved N→R. laneKERNELMARK-tree HEAD is now 15c6368a65…, porcelain 0 (the brief's 'dirty .writer-reach-baseline.json' has been committed).",
+   "verdict": "REVERSE",
+   "confidence": "CONFIRMED",
+   "note": "The §891 row inverted the drift's direction; the successor's reg-7 corrected it and absorbed rather than cured (docketed for the lighting wave: desk-extraction cars darken web-display grades). The row's premise 'made it reach the web display' is false; the product still renders the string but the scanner can no longer GROUND the read."
+  },
+  {
+   "row": "§891 (ledger 32417) — 'THE SURVIVAL AUDIT CAUGHT THE LIVE TRAIN ITSELF … sealed before anything else'",
+   "call": "The train was reachable from no ref at handoff and is now sealed",
+   "claim": "Survival law payout",
+   "method": "git for-each-ref refs/preserve | grep train891",
+   "evidence": "`3d3ad217b… train891-composed`, `250d4e464… train891-reg1`, `4233031ba… train891-registers`, `15c6368a6… train891-reg7` (all 2026-09-03).",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Four seals cover the composed tip, the first register, the six-register tip and the seventh."
+  },
+  {
+   "row": "§891 (ledger 32417) — 'THE OWNER'S DESK IS UNCHANGED' (five items listed)",
+   "call": "Nothing owner-gated moved; every listed item releases finished work",
+   "claim": "Desk roster",
+   "method": "This walk's findings D9, D4, C11, C9",
+   "evidence": "Missing from the roster: (1) the state-prose corpus now renders on gallery/anonymous dossiers against the chair's own §885.2/§885.3 default — a paid/public-surface exposure the owner has not ruled on; (2) the dossier-mounts bank 68→64 is unbanked; (3) the H-1 bound-allowance reshape was dropped between the SOAK receipt and the CAPACITY brief and is still owed; (4) tripwires.mjs/tripwireRegistry.test.js carry a false claim that the soak writes no `motion` block.",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "The five listed items hold; the roster is short by the four above, the first of which is owner-gated by the chair's own classification."
+  }
+ ],
+ "beyond": [
+  "B1 DOCK DRIFT: laneKERNELMARK-tree is at 15c6368a65 (refs/preserve/train891-reg7-2026-09-03), one commit PAST the brief's 4233031ba, porcelain 0 — the successor already took the seventh register (writerReach) and sealed it; the brief's 'dirty scripts/.writer-reach-baseline.json' no longer exists. All 4233031ba reads here were via `git show`, not the dock.",
+  "B2 O2 NOT IMPLEMENTED (chair error): OutputContainer.jsx:703 renders EconomicsTab with no `publicDossier` prop (its siblings WarTab/FaithTab/RumorsTab/RelationshipsTab at :724-742 all receive it), EconomicsTab.jsx has no gate, publicSafe.js keeps `economicState`, so DESK CAR 1 lights the corpus on gallery/anonymous dossiers — contrary to the default the chair declared in §885.2 and restated in §885.3. brief-REGISTRY.md never mentions publicDossier.",
+  "B3 UNBANKED SHRINK-ONLY REGISTER: tests/lint/.dossier-mounts-baseline.json reads 68 at ca651d54b, 4233031ba AND 15c6368a while UNMOUNTED_BLOCKS holds 64 ids; the lane named the 68→64 bank as the landing's act (receipt-deskwiring.md:280-283); neither the six register acts nor reg-7 took it.",
+  "B4 DROPPED HANDOVER: the SOAK lane's H-1 reshape (population(y) ≤ 1.5 × max(bound(y), bound(y−1))), routed by brief-INSTR-SOAK.md:7 to 'CAPACITY's author', appears in no CAPACITY brief (brief-KERNELMARK.md has 0 hits for CAPACITY/H-1/bound), no CAPACITY receipt line, and no tripwire row at 4233031ba.",
+  "B5 FALSE CITATION WRITTEN INTO THE TREE: tripwires.mjs:224-232 and tripwireRegistry.test.js:63-66 assert the soak's yearly observation carries 'no `motion` block at all'; behavioral-observation.mjs:1016-1024 at ca651d54b returns `motion: { populationTransitions, populationMoved, … }` (since 37459391a, 2026-07-28) and buildBehavioralObservation passes `yearly` through whole. The refused fourth tripwire row is buildable and no schema change is owed.",
+  "B6 THE §891 OSR SENTENCE IS FALSE: the composed `--write` (2445bb3c5) moved 95 manifest entries over 32 paths, including all seven foreign files the charset lane refused, because frozenAtSha at the composed base was still 019829e99 (§889) — §890 never absorbed them. 'One' counts generated inputs the instrument NAMES; 'twelve' counted entries the write MOVES. The landing absorb remains legitimate (findings 1993/1409/388 unchanged; the seven are the chair's own §890 cars).",
+  "B7 THE LIGHTING LAW WAS MINTED ON AN OMITTED SUMMAND: the reg-1 body sums four lanes (+75) while the train carries five; the now-null car 3a6f0d761 adds 7 plain `it(` and 2 plain `test(` titles (and renames two) that no measurement included. Every non-title census figure reconciles as a plain sum.",
+  "B8 RESPONSE_TUNING gained TWO dependents (demographicReading.js from C2 and demographicsHerald.js from C1); both the CAPACITY final-tip prediction (receipt:337) and the chair's reg-2 note name only one.",
+  "B9 receipt-readerreview2.md:297 'credited +8' is wrong — `credited` is a file count (credited 2144 + parked 371 = files 2515); RR's credited delta is 0.",
+  "B10 THE §891 ROW INVERTED THE writerReach DRIFT: the register said web-display=R for `situationDesc on economicState` and the tree measured N (the extraction darkened the grade); corrected only by the successor's reg-7 body, not by the row.",
+  "B11 The herald cure car (bf1464952 == 7733e064e, landed in §890 under ca651d54b) has no judgment enrolment in §890 or §891; the three HERALD entries above supply it, with §889.1's probe-with-control reproduced (survives / survives / DROPPED) at the §890 tip's code.",
+  "B12 The DESK lane's uncredited count: dossierMountRegistry.walker runs 16 tests at the composed tip (the receipt's 17 predates the fold), which is consistent, not a defect."
+ ],
+ "chair_errors": [
+  "E1 §885.2/§885.3 declared `publicDossier ⇒ no state prose` as the operating default and the chair then briefed, accepted and composed DESK CAR 1 without it: the corpus renders on public/anonymous dossiers at 4233031ba (OutputContainer.jsx:703 vs :724-742).",
+  "E2 §891 'all six register acts taken' omits the dossier-mounts bank (68→64) the DESK lane explicitly handed to the landing; still 68 at reg-7.",
+  "E3 The H-1 handover row (SOAK → CAPACITY's author) was dropped at brief-authoring: absent from brief-KERNELMARK.md and from the CAPACITY design volume; still owed.",
+  "E4 §891 reg-5/6 states 'at the COMPOSED tip those seven are in the base, so the twelve collapse to one' — false; frozenAtSha was still 019829e99 and the write absorbed all seven foreign entries (plus 25 more paths). The stratum's HIGH re-derive item rests on this false sentence.",
+  "E5 §891 reg-1/2 minted 'THE SUM OF INDEPENDENTLY-MEASURED DELTAS IS NOT THE COMPOSED DELTA' from a four-lane sum over a five-lane train; the now-null car's titles were never in the sum.",
+  "E6 §891 inverted the writerReach drift direction (register R, tree N), self-corrected only in reg-7 by the successor.",
+  "E7 (accepted lane error the chair did not catch) CAPACITY C3's refusal premise — 'no `motion` block is written' — is false at the lane's own base and is now cited in two tree files; the chair's landing check did not re-derive it.",
+  "E8 (minor) reg-2/6 note names one new RESPONSE_TUNING dependent where the register carries two."
+ ],
+ "commands": [
+  "sed -n '1209,1231p' stratum/full.md; sed -n '32417p;32403p;32383p;32384p' docs/OWNER_DECISION_QUEUE.md",
+  "cat receipt-capacity.md receipt-charset1.md receipt-deskwiring.md receipt-readerreview2.md (SP)",
+  "git -C REPO log --oneline ca651d54b..4233031ba; git for-each-ref refs/preserve | grep 2026-09-0; git log --oneline 4233031ba..15c6368a65; git merge-base --is-ancestor …",
+  "git -C laneKERNELMARK-tree rev-parse HEAD; status --porcelain (0 at arrival, 0 after two single-file vitest runs); git -C laneENC-tree status --porcelain | wc -l (13 at arrival, 13 at exit); git -C lanePREGATE-tree status --porcelain (0 before and after the node probe)",
+  "git show --stat bf1464952 7733e064e ec6b0a132 6bddd6183 d02c5acde 250d4e464 79d45d274 fbcfbaeac ffe0dbb81 2445bb3c5 4233031ba 15c6368a6; git diff-tree --no-commit-id --name-status -r <each train car>",
+  "bash: git show <sha> | git patch-id --stable for 9 seal/car pairs",
+  "python3: parse tests/lint/.tuning-inventory.json, .lighting-census-baseline.json, .dossier-mounts-baseline.json, .prose-numerics-baseline.json at ca651d54b/4233031ba/15c6368a6; diff scripts/.observed-shape-readers-baseline.json 2445bb3c5^..2445bb3c5; diff scripts/mutation-coverage-manifest.json ffe0dbb81^..ffe0dbb81",
+  "git show 4233031ba:<path> greps for heraldRouting.js, demographicsHerald.js, demographicsRates.js, migration.js, tripwires.mjs, behavioral-observation.mjs (also @ca651d54b, and git log -S'motion: {'), demographicsEnvelope.test.js, demographicReading.js, simulationRules.js, customContentCharset.js/.generated.js, generate-custom-content-manifest.mjs, dossierMounts.js, EconomicsGlance.jsx, EconomicsTab.jsx, OutputContainer.jsx, PublicDossierView.jsx, publicSafe.js, economyStateProse.js, accountImport.js, economyReadModelCoverage.walker.test.js, readerCorpus.mjs, readerCorpusManifest.test.js, soakInvariants.mjs, wizardNews.js @30c1667bc/@ca651d54b, heraldRouting.walker.test.js @ca651d54b, sovereigntyLightingContract.walker.test.js (function index)",
+  "git grep CONGEST_DECAY / customContentCharset / PublicDossierView / accented codepoints at 4233031ba; grep H-1 over SP/briefs, SP2/laneINSTRSOAK-receipt.md, DESIGN_HORIZON.md (both copies), receipt-capacity.md",
+  "wc -l / grep '^diff --git' c2-HELD-outlook-surface.patch",
+  "node walk/S20/herald-probe.mjs <lanePREGATE-tree> (read-only import of appendWizardNewsEntries; output survives/survives/DROPPED; exit 0)",
+  "cd laneKERNELMARK-tree && npx vitest run tests/data/namingDataCharset.test.js --no-file-parallelism (exit 0, 5/5) && npx vitest run tests/lint/dossierMountRegistry.walker.test.js --no-file-parallelism (exit 0, 16/16); logs under walk/S20/"
+ ],
+ "porcelain_unchanged": true,
+ "summary": "S20 enrols the judgment calls of the five §891 builds (CAPACITY C1/C2/C3, CHARSET Car 1, DESK CAR 1 + correction, READERREVIEW Car 2 + three cures, the herald cure car) plus the §891 register rows: 54 entries — 42 RATIFY, 7 AMEND, 3 REVERSE, 1 EVIDENCE-THIN, 1 OUT-OF-SCOPE. Every train car is the byte-identical rebase of its lane seal (nine patch-id pairs) and the herald cure is reproduced with controls at the §890 tip. Three findings need action before the train lands: (1) DESK CAR 1 lights state prose on public/anonymous dossiers against the chair's own §885.2/§885.3 default (OutputContainer.jsx:703 passes no publicDossier prop) — owner-gated by the chair's classification; (2) CAPACITY C3's refusal of the fourth tripwire row rests on a false measurement ('no motion block') now cited in two tree files — behavioral-observation.mjs writes `motion.populationMoved/populationTransitions` since 2026-07-28; (3) the §891 OSR sentence 'the twelve collapse to one' is false (the composed write absorbed all seven foreign entries; the act is still legitimate as a landing). Also: the dossier-mounts bank 68→64 is unbanked through reg-7; the SOAK lane's H-1 reshape was dropped between receipt and brief; the lighting 'sum ≠ composed' law was minted with the fifth (now-null) lane omitted from the sum; §891 inverted the writerReach drift direction (corrected by the successor's reg-7 at 15c6368a, where laneKERNELMARK-tree now sits, clean). Docks touched read-only; porcelain unchanged (KERNELMARK 0→0, PREGATE 0→0, ENC 13→13)."
+}

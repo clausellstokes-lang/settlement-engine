@@ -1,0 +1,33 @@
+OPUS-AUTHORED
+LEAF        blocks pools variants
+defense        11   126      383
+economy        15   105      329
+general        23   193      634
+power           7    79      256
+stressors       3    67      246
+warFaith        9   138      418
+TOTAL          68   708     2266
+
+--- economy per-block (the 4 mounted vs the 11 dark) ---
+DS-ECO-1   pools   5 variants  15 MOUNTED
+DS-ECO-2   pools   7 variants  21 MOUNTED
+DS-ECO-3   pools   5 variants  18 dark
+DS-ECO-4   pools   4 variants  16 dark
+DS-ECO-5   pools   7 variants  21 dark
+DS-SUP-1   pools   6 variants  18 dark
+DS-ECO-6   pools   3 variants  12 dark
+DS-ECO-7   pools   2 variants   8 dark
+DS-ECO-8   pools   7 variants  21 MOUNTED
+DS-ECO-9   pools   8 variants  24 MOUNTED
+DS-SUP-2   pools   7 variants  21 dark
+DS-ECO-10  pools  10 variants  30 dark
+DS-ECO-11  pools  17 variants  53 dark
+DS-ECO-12  pools  10 variants  30 dark
+DS-SUP-3   pools   7 variants  21 dark
+
+--- pools carried by the 64 DARK blocks ---
+dark blocks 64 pools 681 variants 2185
+DIMENSION-BEARING BLOCKS: 3 of 68
+  general    DS-GEN-1   severity
+  general    DS-GEN-6   deficit
+  general    DS-GEN-9   anchor

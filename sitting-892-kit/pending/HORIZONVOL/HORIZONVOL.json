@@ -1,0 +1,100 @@
+{
+  "source": "HORIZONVOL",
+  "status": "COMPLETE",
+  "header": "OPUS-AUTHORED — read-only survey of docs/DESIGN_HORIZON.md §10/§11/§18/§19 at ledger HEAD 04f6b255e, checked against product tip ca651d54b and the unlanded §891 train 15c6368a6.",
+  "items": [
+    {
+      "id": "HV-1",
+      "name": "WRWALKER Car 4 — the triage of the unreviewed-dark cohort (~301 identities)",
+      "klass": "chair-class",
+      "landed": "NO",
+      "confidence": "CONFIRMED",
+      "why": "The volume's Car 4 partitions every writer-with-no-reader identity into pending-surface / engine-internal / cure. The §884 landing minted a DIFFERENT car under the same number (clauses W and S reason-aware + the two dial rows), and the HORIZON-DARK car list marks that sha as 'WRWALKER Car 4' and therefore omits the real one from every remaining list."
+    },
+    {
+      "id": "HV-2",
+      "name": "CAP-6 — the 'Room to Grow' block on the DOSSIER PDF",
+      "klass": "owner-gated",
+      "landed": "NO",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "HV-3",
+      "name": "WORKER Car 4 — cancel + live progress (WK-4/WK-5)",
+      "klass": "owner-gated",
+      "landed": "NO",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "HV-4",
+      "name": "RR-10's execution — errandSpineEnabled into PREVIEW_OVERLAY",
+      "klass": "chair-class",
+      "landed": "NO",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "HV-5",
+      "name": "The three deferred --via worker riders (§13 C12)",
+      "klass": "machinery-debt",
+      "landed": "NO",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "HV-6",
+      "name": "The globalSetup observed-corpus cache",
+      "klass": "machinery-debt",
+      "landed": "NO",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "HV-7",
+      "name": "E41 — read check-tests' CI wall-clock",
+      "klass": "machinery-debt",
+      "landed": "UNKNOWN",
+      "confidence": "PLAUSIBLE"
+    },
+    {
+      "id": "HV-8",
+      "name": "E37 / S3.1 — the regen clone-census extension",
+      "klass": "machinery-debt",
+      "landed": "NO",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "HV-9",
+      "name": "E44 — the interim research-lit-4s 300y x 4s manual run",
+      "klass": "chair-class",
+      "landed": "NO",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "HV-10",
+      "name": "WRW-6b — manifest characterDriftEnabled as a virtual flag",
+      "klass": "owner-gated",
+      "landed": "NO",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "HV-11",
+      "name": "WRW-1 — wire the deferred json-export control",
+      "klass": "owner-gated",
+      "landed": "NO",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "HV-12",
+      "name": "CS-9 — the RESTORE-vs-authoring-wall ruling (BLOCKING for CS-2)",
+      "klass": "owner-gated",
+      "landed": "NO",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "HV-13",
+      "name": "WK-11 — bank the -6,366 B or keep the margin (§19 owner row)",
+      "klass": "owner-gated",
+      "landed": "NO",
+      "confidence": "CONFIRMED"
+    }
+  ],
+  "full_detail": "See the StructuredOutput return of this session for the full per-item evidence, sizes and blockers."
+}

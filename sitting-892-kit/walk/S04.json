@@ -1,0 +1,217 @@
+{
+ "slice": "S04",
+ "status": "COMPLETE",
+ "calls": [
+  {
+   "row": "§882.12 (1)",
+   "call": "L1 — the lane MEASURED the century on three seeds rather than extrapolating a 10-year median; per-year cost rises 435.5 → 474.5 → 523.5 ms at 10/30/100 y",
+   "claim": "SHIPPED 100 y 53.44 s, LIT 100 y 105.27 s, 300/300 distinct hashes, extrapolation wrong in sign",
+   "method": "Read laneG0SOAK-receipt.md §3 whole; re-derived the LIT century from soak-car0-c-lit100.json (detail[0]); counted the nine time logs and their exit lines",
+   "evidence": "receipt §3: 'century-a SHIPPED 100 y … 53.44 s real … 523.5 | LIT 100 y … 105.27 s real … 1,117.5 | … 30 y + replay … 474.5 | 10 y × 3 … 435.5'; JSON: seed century-a years 100 lit True finalTick 5200 totalMs 104900, distinct hashes 100 of 100; nine logs each end 'TRUE_EXIT=0' (30y4s, a-shipped10x3, b-lit30, b-shipped30, c-lit100, c-shipped100, c-shipped100-century-b, c-shipped100-century-c, smoke)",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "LIT figures re-derived from the primary JSON; SHIPPED 53.44 s and the 300/300 rest on the receipt plus the nine exit-0 logs (the SHIPPED JSONs were not re-parsed — `python3 -c` over soak-car0-c-shipped100.json would close that)."
+  },
+  {
+   "row": "§882.12 (2)",
+   "call": "L2 — the LIT bound allowance REFUSED (max 3.5741×, eight of 100 years > 1.5; densityCeilingOf 720 → 108 on a tier demotion while population fell); the re-shape `population(y) ≤ 1.5 × max(bound(y), bound(y−1))` routed to CAPACITY, 'which admits all 100 years'",
+   "claim": "the rule admits no value; the recommended replacement admits every LIT year; the law belongs to CAPACITY's author",
+   "method": "Re-derived every year × settlement ratio from soak-car0-c-lit100.json yearlyPopulations/yearlyBounds; tested the y−1 re-shape, trailing windows 2–10, and K_food-alone against the same series",
+   "evidence": "MAX ratio 3.5741 at leg-c year 15; years >1.5: [12,14,15,16,17,18,19,20] count 8; leg-c y11→y12: pop 277→221, bound 394→108, density 720→108, binding granary→walls. RE-SHAPE `1.5 × max(bound(y), bound(y−1))` VIOLATIONS: [(15,'leg-c',386,108,108),(16,393,117,108),(17,332,117,117),(18,277,117,117),(19,230,117,117),(20,193,125,117)] = 6 years; trailing window 2:6 3:5 4:4 5:3 10:0 violations; K_food-alone 1.5× violations: []. Receipt §5 rec 1's own support: 'the y15 ratio against y11's bound of 394 is 0.98×' (y−4, not y−1).",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "The REFUSAL holds and the routing is right. But the parenthetical carried into ledger §882.12, §883.4, soakInvariants.mjs:58, centuryLegSoak.test.js:42 and H-1 ('admits ALL 100 LIT years') is FALSE for the stated formula: it admits 94 of 100. What admits all 100 is a ≥10-year trailing max of the bound, or K_food (`foodCapacityOf(...).mouths`) alone. The chair's own instruction that Fable re-derive (2) was the right instinct; the re-derivation refutes the figure."
+  },
+  {
+   "row": "§882.12 (3)",
+   "call": "L3 — E12 left PLAUSIBLE deliberately (0.51 s vs 3.5 vs 9.1 per settlement-year; two 30-year figures disagreeing 17.8× make a 300-year extrapolation unsound)",
+   "claim": "E12 stays owed to the first scheduled run; still unsettled at ca651d54b",
+   "method": "Read receipt §8 E12 row; checked the volume's E12 row at ledger HEAD; grepped ODQ lines >32361 for E12; traced the 9.1 datum's provenance; read INSTRSOAK S10",
+   "evidence": "receipt: '0.51 s/settlement-year (61,249 ms / 120 settlement-years) … 17.8× cheaper than the LEDGER's own 30y×12s datum (3,276 s / 360 = 9.1 …)'; 61249/120 = 510 ms ✓, 3276/360 = 9.1 ✓; volume :1185 '| E12 | research-lit-4s fits a 360-min hosted job … | the FIRST scheduled run; S4-b pauses the schedule |'; ODQ after 32361: no E12 mention; INSTRSOAK S10 'Left §14 E12 owed'; the 3,276 s figure lives in docs/architected-volumes-pending-fold/DIAGNOSTIC_SOAK_DESIGN.md (2 matches at ledger HEAD; recon :128 cites its :66-76 'release-30y-12s-seed1 ✅ 3,276/3,324 s'), not in an ODQ row.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Still deliberately unsettled at ca651d54b — no later act, row or register closed it. Wording nit: 'the ledger's own 9.1' is a ledger-BRANCH doc figure, not an ODQ ruling; harmless but should be cited by path so the next reader does not hunt the ODQ for it."
+  },
+  {
+   "row": "§882.12 (4)",
+   "call": "L4 — SEEDS = TWO, the third's cost measured (1 seed 45.2 % · 2 seeds 61.8 % · 3 seeds 77.8 % of 360 s), vetoable",
+   "claim": "composition measured not guessed; two seeds leave 1.62× margin against three's 1.29×",
+   "method": "Read receipt §7 LITERAL 1 table; checked the arithmetic; read the literal in Car 3's source at 2ed4483a1",
+   "evidence": "receipt §7: '1 seed … 162.7 s | 45.2 % | 2.21× · 2 seeds … 222.5 s | 61.8 % | 1.62× · 3 seeds … 279.9 s | 77.8 % | 1.29×'; 162.7/360=0.452, 222.5/360=0.618, 279.9/360=0.7775, 360/222.5=1.618, 360/279.9=1.286 ✓; century-b 60.50 s, century-c 58.02 s each TRUE_EXIT 0; centuryLegSoak.test.js:84 `const SEEDS = ['century-a', 'century-b'];`",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The call is a CI-budget judgment (§4.5 binds the count to the hosted job, cumulative with two sibling lanes); the figures and the vetoable form are exactly as the row states."
+  },
+  {
+   "row": "§882.12 (5)",
+   "call": "L5 — the lane reported TWO findings beyond its charter rather than filing them silently",
+   "claim": "two beyond-charter findings: the dead LIT major stream; the §4.1 JUDGMENT's non-transferring ground",
+   "method": "Read receipt §8 amendments 1–5 and retro rows R6/R7; verified R7 from the LIT JSON",
+   "evidence": "receipt R6 'Reported the LIT major-stream death'; R7 'Left century-c's year-23 zero-population-then-18 remnant unruled … leg-c reaches 0 at y23 WITH a died flag … repopulates to 18 at y24 … an owner-adjacent world question'; JSON leg-c y22-25 pop/died: [(22,144,False),(23,0,True),(24,18,False),(25,19,False)]; amendment 5: 'peakHeapUsedBytes 418 MB vs process RSS 1.085 GB … a 2.6× gap'. Ledger §882.12 names two and '(five such amendments in the receipt's §8)'; neither the ledger row nor the stratum mentions R7.",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "Count is at least THREE beyond-charter findings: R7 (a died settlement repopulating — a remnant-law / owner-adjacent question) is recorded only in the receipt and is not routed anywhere. The receipt also mislabels it 'century-c' — it is settlement leg-c of the century-a LIT run (soak-car0-c-lit100.json)."
+  },
+  {
+   "row": "§882.12 chair miss",
+   "call": "At the §882.11 commit the handoff edit matched no anchor and silently did not land — three files, not four; the LIVE STATE line still listed the G0 fold as running; cured at §882.12; the cure is structural",
+   "claim": "82c073af9 carries three files; the stale text; cured at 3a0b39c0d; anchor-assert-first + handoff read-back",
+   "method": "git show --stat 82c073af9; git diff --word-diff 82c073af9 3a0b39c0d -- docs/HANDOFF_CURRENT.md; read kit-883/collect-883.sh :30-78 and card-883.py",
+   "evidence": "82c073af9 stat: 'docs/DESIGN_HORIZON.md | 431 … docs/FABLE_RETROVALIDATION_QUEUE.md | 12 + … docs/OWNER_DECISION_QUEUE.md | 1 + … 3 files changed'; word-diff 82c073af9→3a0b39c0d removed '[-(four of four, all Opus):**-] … [-**G0 FOLD** (resumes `$SP/DESIGN_HORIZON.md` from ⟦G0-32⟧ of ~52 …-]', added '{+→ `docs/DESIGN_HORIZON.md` COMMITTED amended (§882.11 …+}'; 3a0b39c0d stat 'docs/HANDOFF_CURRENT.md | 2 +-'. kit-883: card-883.py:32 `print('REFUSED: line %d does not start with %r …'); sys.exit(1)`; collect-883.sh:66 `card-883.py … || { echo \"WRITER FAILED\"; exit 1; }` before :76 chair-commit.sh; :78 read-back `git show HEAD:docs/HANDOFF_CURRENT.md | grep -c '^## ⭐⭐⭐⭐ PICKUP AT §883'`.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The miss is real and self-reported accurately. The stratum records the lesson as a rule; it does not say the cure was implemented — it WAS, in kit-883 (writer refuses on a prefix mismatch and aborts before the commit; the read-back greps the card in HEAD's handoff). Mark it done rather than owed."
+  },
+  {
+   "row": "§882.12 receipts",
+   "call": "384 lines; nine runs, nine TRUE_EXIT=0; dock at C′ with two untracked probes and zero tracked edits; package-lock md5 1a76dc26… both sides; last measurement ended 10:24:02, sibling vitest ~10:26 — no figure under contention",
+   "claim": "the receipt's provenance block",
+   "method": "wc -l; ls + grep of the nine time logs; git -C laneG0SOAK-tree rev-parse/status; md5 of package-lock at 9a0584f0f and in the dock; stat of the last artifacts",
+   "evidence": "wc: 384 laneG0SOAK-receipt.md; nine non-fold logs, each 'TRUE_EXIT=0'; dock HEAD 9a0584f0fdbf74f30bcf910f53fe429fb1dbdc4a, porcelain '?? soakCar0.probe.mjs / ?? soakCar0Fold.probe.mjs'; md5 1a76dc26fb008c7629e3facdbaa9938a at 9a0584f0f:package-lock.json and in the dock; mtimes: soak-car0-c-shipped100-century-c.log 10:24:01, fold-bc100.log 10:24:08 (a fold, not a measurement).",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The ~10:26 sibling appearance is the lane's own board observation and is not independently reproducible now; every figure it brackets is consistent with the artifact mtimes."
+  },
+  {
+   "row": "§883.7 S1",
+   "call": "Cut at the LANDED tip 7f974e855, not the brief's 9a0584f0f; consequence stated: its cars board DIRECTLY with NO pick while the two siblings owe one — 'the order's composition section must carry two boarding shapes in one consist'. RULED correct.",
+   "claim": "base choice and its two-boarding-shapes consequence",
+   "method": "git -C laneINSTRSOAK-tree rev-parse/log; for-each-ref landing-T13; merge-base --is-ancestor for the three consist tips; read INSTR-LANDING-ORDER.md §1; git log 7f974e855..f5a6c3bbf",
+   "evidence": "dock HEAD 2ed4483a1, five commits over 7f974e855; refs/preserve/landing-T13-2026-09-02 = 7f974e855; is-ancestor 7f974e855→e2967f2a1: 1 (no), →f3d33e4b9: 1 (no), →2ed4483a1: 0 (yes); INSTR-LANDING-ORDER.md:114 'This order picks all nineteen in chain order, from the object store, as PLAIN cherry-picks … the two C″-based consists are base == ours by construction … INSTR-SOAK is picks 15–19 — LAST'; f5a6c3bbf history: 'f5fffe43c SOAKCHAIN Car 0 … 72b513b85 SOAKCHAIN Car 4' (new shas); ledger §884 'NINETEEN plain cherry-picks from four sealed docks (… INSTR-SOAK 5)'.",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "The two-BASE fact holds and the lane stated it honestly. But the ruling's operative sentence did not survive: the landing order chose ONE boarding shape — nineteen plain picks, SOAK's five as base==ours picks placed last — so 'boards DIRECTLY with NO pick' and 'must carry two boarding shapes' were superseded and the stratum does not mark it. Label slips: the receipt's last RESUME POINT says 'HOLDING AT C′' (the dock is C″-based) and 'T13 LANDED 12:33 ET' against ledger §883's '~12:28 ET'."
+  },
+  {
+   "row": "§883.7 S2",
+   "call": "LITERAL 3 REFUSED OUTRIGHT — soakInvariants.mjs contains no bound-allowance constant by design; Car 3 carries no 1.5× bound assertion; the second reason is the full census",
+   "claim": "no such constant exists; the measurement admits none",
+   "method": "Read scripts/audit/soakInvariants.mjs at 2ed4483a1 whole (419 lines); grepped it and centuryLegSoak.test.js for 1.5/bound/assertion matchers; diffed the module's grep signature at ca651d54b and 4233031ba",
+   "evidence": "module exports: POPULATION_ENVELOPE {min:0.05,max:20}, YEARLY_BYTES_PER_SETTLEMENT_CEILING 900_000, WALL_TIME_TREND, LIVENESS_FLOOR, LIVENESS_FAILURE_KINDS, LIVENESS_CHECK_TITLE + five functions — no bound/allowance constant; the only '1.5' hits are docblock :52 and :58; :61 'No bound-allowance constant exists in this module by design.'; centuryLegSoak.test.js: '1.5' only in header :33-42, `toBeLessThan|toBeGreaterThan` no hits; :84 SEEDS; module grep lines identical at 2ed4483a1, ca651d54b, 4233031ba (:51,:52,:58,:61,:70,:73,:308).",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The refusal is exactly as described and is byte-stable through the §891 train. The docblock's own :58 re-shape claim is the false figure amended under §882.12 (2); the 'second, harder reason' (the census) is amended under the census row below."
+  },
+  {
+   "row": "§883.7 S3",
+   "call": "The major-stream gap is REPORTED, not pre-empted: no fourth LivenessFailureKind (§4.1 pins three), a minMajorsPerDecade band would red the weekly watchdog on the LIT world; fold MEASURES, verdict REPORTS, soak PRINTS, test PINS 7 silent LIT decades vs SHIPPED 0. RULED: expose, not judge.",
+   "claim": "the pin exists as an executed test; the kind enum is three; the weekly job is the lit profile",
+   "method": "Read module :117-118 and reportedFiguresOf :302-312; volume §4.1 :342; test :102 and :320-339; EXECUTED `npx vitest run tests/soak-harness/soakInvariants.test.js` in laneINSTRSOAK-tree @2ed4483a1; re-derived the decade majors from the LIT JSON; read soak-research.yml",
+   "evidence": "module :118 `LIVENESS_FAILURE_KINDS = Object.freeze(['silent', 'monoculture', 'frozen'])`; :308-310 minMajorsPerDecade / majorSilentDecades / majorSilentDecadeNumbers; volume :342 (under '### §4.1 The mechanism' at :319) '`LivenessFailureKind` (3)'; test :102 `toEqual(['silent','monoculture','frozen'])`, :320 test('⛔ THE GAP, EXECUTED …'), :332-334 majorSilentDecades 7 / [4..10] / minMajorsPerDecade 0, :338-339 SHIPPED 0 / 20; RUN: 'Test Files 1 passed (1) · Tests 16 passed (16)' exit 0, porcelain empty before and after; JSON majors per decade [168,27,1,0,0,0,0,0,0,0] → 7 silent; soak-research.yml: cron '0 2 * * 6', default profile research-lit-4s.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Figure to amend everywhere it is carried (ledger §882.12, §883.4, module :64, H-2, both stratum sections): the LIT century has ZERO majors in 87 of 100 years (y13–y100 minus y23), not 78. The decade pin (7) is correct."
+  },
+  {
+   "row": "§883.7 census",
+   "call": "tests/lint+copy+docs WHOLE at the tip = 161 files, 2,118 tests, 11 reds; 10 are RED AT BASE and are exactly the ten entries of scripts/.test-ratchet-baseline.json; the census is 10/10 with ZERO HEADROOM, so an eleventh red cannot be banked",
+   "claim": "the count, the attribution, and the zero-headroom consequence",
+   "method": "Parsed the baseline JSON at 7f974e855, 2ed4483a1, ca651d54b, 4233031ba; read instrsoak-lint-tip.log and -base.log summaries and failing titles; checked the base-control dock; read tests/lint/testRatchet.test.js at all four tips",
+   "evidence": "baseline 7f974e855: entries=10 totalTests=30788 totalFiles=2445 (4 voiceMechanics · enforcement-claims · clampPrimitiveBaseline · 3 warCostKindPools · warRulingKindPools); unchanged at 2ed4483a1; still 10 at ca651d54b/4233031ba. tip log 'Test Files 6 failed | 155 passed (161) / Tests 11 failed | 2107 passed (2118) / TRUE_EXIT=1'; base log '5 failed | 1 passed (6) / 10 failed | 145 passed (155)'; 11th title 'THE CENSUS IS AN ASSERTION, NOT A SENTENCE'; laneINSTRSOAK-base HEAD 7f974e855 porcelain empty. testRatchet.test.js:182 `const CEILING = 17;` :268 `entries.length … toBeLessThanOrEqual(CEILING)` at all four tips; baseline _doc: 'adding one is a deliberate, attributed hand edit'.",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "The measurement and the one-for-one attribution are exact. But 'ZERO HEADROOM / cannot be banked' is a POLICY ceiling — §4.1's JUDGMENT text ('10/10 with no headroom') — not a mechanical one: the ratchet test's own ceiling is 17 and the file accepts an attributed hand edit. The stratum, ledger §883.4 and the memory row 't13-landing-2026-09-02' state it as an absolute; it should read 'the arc's rule forbids banking an eleventh; the instrument would admit up to 17'. The refusal of S2 stands on the data alone and does not need this crutch."
+  },
+  {
+   "row": "§883.7 receipts block",
+   "call": "lighting 2497/370/2127/22491/6078 → 2501/370/2131/22535/6083 measured; ratchet → 30832/2449 (arithmetic); typecheck 173/1121; OSR 1993; zero src/ bytes; Car 1's anti-vacuity (30 hashes element-wise equal, same finalHash, same ticksAdvanced); wall-time defect cured; Car 3 reproduces Car 0 (3.5741 leg-c y15, 0.8049, ×0.27, 21, 20, 253.9 s)",
+   "claim": "the measured register and world figures",
+   "method": "git diff --stat 7f974e855..2ed4483a1 (whole and -- src/); parsed both baselines in the dock; compared soak-car0-30y4s-receipt.json to soak-instr-car1-30y4s.json myself; read instrsoak-car3-verbose.log, typecheck/OSR logs; read module :354-368",
+   "evidence": "consist diff: 18 files, +3415/−73, `-- src/` EMPTY; ci.yml '8 insertions(+)'; dock lighting baseline unchanged 2497/370/2127/22491/6078 (2501… is measured, not banked); 16+1+10+9+8=44, 30788+44=30832, 2445+4=2449; car1 vs car0 (my comparison): 'element-wise equal to car0: True finalHash equal: True ticks: 3380', finalHash 3e6307c77d3f…; soak-instr-car0-1y.json yearlyHashes[0]=2409ea4ec9a9f788…; car3 verbose :9 'file total 253.9s', :13 '3940 -> 1069 (x0.27) … min distinct types 21, min hash moves 10, majors min 20', :16 'max 3.5741 at leg-c year 15 (binding: walls); endpoint max 0.8049 at leg-b'; typecheck '173 error(s)' / '1121 errors, ceiling 1121'; OSR '1993 finding(s), exactly matching'.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "Every figure I could re-derive or read from a primary log matched. The 3-year cured run and the base-tuple lighting probe were not re-executed (settle: `node scripts/audit/whole-world-soak.mjs --years 3 --settlements 4` in the dock; `node $SP/chair-tools/lighting-tuple-probe.mjs <dock>`)."
+  },
+  {
+   "row": "§883.7 H-1",
+   "call": "H-1 to CAPACITY's author — E11 refuted and reproduced; the re-shape named, NOT banked and NOT written; Car 3 measures the 400-sample series so the arm is one edit away once the shape is ruled",
+   "claim": "the handover is correctly routed and correctly stated",
+   "method": "Read §4.7 R3 in the volume; module :57-61; grepped receipt-capacity.md, HORIZON-DESIGN-CAPACITY.md, the §891 ledger row and ODQ >32361 for the handover; read tripwires.mjs at d02c5acde; re-derived the re-shape (see §882.12 (2))",
+   "evidence": "volume :384 'R3 the LIT leg violates the envelope or 1.5× on a whole-pulse world — low-medium; a CAPACITY finding, and a good one; never bank'; H-1 text 'measured, that admits ALL 100 LIT years'; receipt-capacity.md (354 lines): zero hits for bound(y|H-1|E11|3.5741|allowance|densityCeiling; HORIZON-DESIGN-CAPACITY.md (355 lines, architected at 60255ca8e): zero hits; ODQ after 32361: zero 'bound(y' hits; d02c5acde tripwires.mjs adds capacity_plateau / capacity_floor_thaw / capacity_realm_load only; module docblock byte-stable at ca651d54b and 4233031ba; my re-derivation: 6 violations of the y−1 shape, 0 for a 10-year trailing max, 0 for K_food alone.",
+   "verdict": "AMEND",
+   "confidence": "CONFIRMED",
+   "note": "Routing right, content wrong, delivery missing. (a) The recommended shape does not do what the row says — see §882.12 (2). (b) The CAPACITY lane (§891, ec6b0a132/6bddd6183/d02c5acde) built from a design that predates the finding and its receipt neither took nor refused H-1 — the handover is DANGLING at ca651d54b/4233031ba. The row should be re-issued with the corrected shape (≥10-year trailing max, or K_food alone) to whoever now owns CAPACITY's tuning register."
+  },
+  {
+   "row": "§883.7 H-2…H-6",
+   "call": "H-2 = S3; H-3 five volume amendments (four confirmed by the build); H-4 §18.3's missing Car-1 titles delta and ci.yml '+4' measured +8; H-5 the landing ratchet run ~4–5 min longer; H-6 the 10/10 census",
+   "claim": "the remaining handover rows",
+   "method": "Read receipt §9 H-2…H-6; git diff --stat for ci.yml; Car 3 timings from the verbose log; the landing order's ground for SOAK-last",
+   "evidence": "ci.yml: '1 file changed, 8 insertions(+)' (receipt erratum: commit 0df1524b5's body says +9); car3 verbose 'Duration 259.10s … tests 253.91s', unit run '288.73 s'; INSTR-LANDING-ORDER.md:114 '(b) ⭐ It is the only consist that lengthens the gate — Car 3's century leg adds ~254–289 s'; H-3 amendments (1)–(5) match G0SOAK §8 items 1–5 verbatim in substance.",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "H-2 inherits the 87-not-78 figure amendment; H-6 inherits the policy-vs-mechanism amendment. Whether the four 'confirmed' volume amendments were FOLDED into DESIGN_HORIZON.md after §884 was not checked (settle: `git log --format=%h -S'139.39' -- docs/DESIGN_HORIZON.md`)."
+  },
+  {
+   "row": "§883.7 dock/process",
+   "call": "Dock @2ed4483a1, FIVE commits, porcelain EMPTY (-uall), each trailer read back, no --amend, sealed instr-soak-2026-09-02; never met the CURE-PORCELAIN defect because it ran no refreeze",
+   "claim": "the lane's process claims",
+   "method": "git -C laneINSTRSOAK-tree rev-parse/status -uall/log; for-each-ref; git log trailers; compared both baselines at 7f974e855 and 2ed4483a1",
+   "evidence": "HEAD 2ed4483a1f94d69288033cdcf2fb73684a6ed298; `status --porcelain -uall` empty (before and after my single-file run); five commits c09e1ccfc 572230b66 0df1524b5 15f82a820 2ed4483a1; `%(trailers:key=Seat,valueonly)` = 'Opus 5 (lane INSTR-SOAK)' on all five; refs/preserve/instr-soak-2026-09-02 = 2ed4483a1; .lighting-census-baseline.json and .test-ratchet-baseline.json byte-equal between 7f974e855 and 2ed4483a1 (files 2497 / entries 10, 30788/2445).",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "'no --amend' is not directly provable after the fact; intact trailers on all five commits are the available proxy."
+  },
+  {
+   "row": "§883.7 S4–S10",
+   "call": "S4 wall-clock reported never asserted; S5 two seeds kept; S6 evaluateReceipt annotation derived, behavioralPropertiesPassing absent by default; S7 four exports beyond §1.6; S8 absolute shape windows; S9 no refreeze; S10 E12 owed",
+   "claim": "the lane's remaining self-flagged calls",
+   "method": "Read receipt §8 rows S4–S10; grepped Car 3 for duration assertions; module read for S7's two exports; baselines for S9; E12 as above",
+   "evidence": "centuryLegSoak.test.js: no `toBeLessThan|toBeGreaterThan` hits; `const SEEDS = ['century-a', 'century-b']`; module :390 `yearlyBytesVerdict` and :419 `LIVENESS_CHECK_TITLE` exist; both baselines unchanged in the dock; E12 row unchanged at ledger HEAD.",
+   "verdict": "RATIFY",
+   "confidence": "PLAUSIBLE",
+   "note": "S4, S5, S9, S10 and the module half of S7 are CONFIRMED as above. S6, S8 and the CLI half of S7 rest on the receipt only — settle with `git show 2ed4483a1:scripts/soak/evaluate.mjs | grep -n fullInstrument\\|behavioralPropertiesPassing`, `git show 2ed4483a1:scripts/soak/register.mjs | grep -n settlementShapeOf -A20`, and `git show 2ed4483a1:scripts/soak/soak-register.mjs | grep -n -- '--repo\\|--aggregate'`."
+  },
+  {
+   "row": "§883.7 chair ruling",
+   "call": "RULED: 'an instrument that would convict a world the owner has not yet ruled on must EXPOSE, not JUDGE' (the S3 ruling), and the base-cut ruling 'correct, and it is why the order's fold re-reads every dock's tip rather than trusting the brief'",
+   "claim": "the two chair rulings on this lane",
+   "method": "Evaluated against the S3 and S1 evidence above and the landing order's §0/§1",
+   "evidence": "See §883.7 S3 (kinds pinned at three; weekly cron on the lit profile; the pin executed 16/16) and §883.7 S1 (is-ancestor results; INSTR-LANDING-ORDER.md:114 'The ground for that shape is measured, not assumed: every whole-stack dry run onto C″ has ZERO conflict markers').",
+   "verdict": "RATIFY",
+   "confidence": "CONFIRMED",
+   "note": "The expose-not-judge ruling is sound and its consequence (the pin is the specification for a chair-added band) is in the tree. The base-cut ruling's factual half holds; its 'two boarding shapes' half was superseded by the order (see S1)."
+  }
+ ],
+ "beyond": [
+  "(a) THE H-1 RE-SHAPE IS INADMISSIBLE AS STATED: `population(y) ≤ 1.5 × max(bound(y), bound(y−1))` admits 94 of the 100 LIT years, not all — six leg-c violations at y15–y20 (386 vs 1.5×108; 393 vs 1.5×117; …). The receipt's supporting arithmetic used y11's bound (y−4). Only a ≥10-year trailing max of the bound, or K_food (`foodCapacityOf(...).mouths`) alone, admits every year (0 violations each, re-derived from soak-car0-c-lit100.json). The false 'admits all 100 years' is carried in ledger §882.12, ledger §883.4, soakInvariants.mjs:58, centuryLegSoak.test.js:42, receipt H-1, and both stratum sections.",
+  "(b) FIGURE: the LIT century's major stream is ZERO for 87 of 100 years (y13–y100 minus y23), not 78 — re-derived from yearlyMajorCounts (zero-major years: 87 of 100). Carried wrongly in ledger §882.12, §883.4, soakInvariants.mjs:64, H-2 and the stratum. The test's decade pin (7 silent decades, [4..10]) is correct.",
+  "(c) H-1 IS DANGLING: the CAPACITY lane (§891, commits ec6b0a132 / 6bddd6183 / d02c5acde) built from HORIZON-DESIGN-CAPACITY.md (architected at 60255ca8e, before the §882.12 finding); its receipt has no mention of H-1, E11, 3.5741, bound(y or allowance; no ODQ row after 32361 rules on the re-shape; the module docblock is unchanged at ca651d54b and 4233031ba. The handover was neither taken nor refused.",
+  "(d) SUPERSEDED RULING NOT MARKED: §883.7's 'the order's composition section must carry two boarding shapes in one consist' was overtaken by INSTR-LANDING-ORDER.md:114 — nineteen PLAIN cherry-picks including SOAK's five (landed as new shas f5fffe43c…72b513b85 in f5a6c3bbf), SOAK placed LAST as the base==ours consist. The two-BASE fact was used (ordering ground), the two-SHAPE consequence was not.",
+  "(e) 'ZERO HEADROOM' IS POLICY, NOT MECHANISM: tests/lint/testRatchet.test.js:182 `const CEILING = 17` with :268 `entries.length ≤ CEILING`, identical at 7f974e855, 2ed4483a1, ca651d54b, 4233031ba; the baseline _doc allows a 'deliberate, attributed hand edit'. The absolute 'an eleventh red CANNOT be banked' in the stratum, ledger §883.4 and the memory row t13-landing-2026-09-02 should be re-worded as the §4.1 JUDGMENT's rule.",
+  "(f) UNROUTED OWNER-ADJACENT FINDING: G0SOAK R7 — leg-c (century-a LIT) dies at y23 (pop 0, died=True) and repopulates to 18 at y24, 19 at y25 (confirmed from the JSON) — 'whether a died settlement may repopulate is the remnant law's business'. Recorded only in the receipt; the ledger's 'TWO findings beyond the charter' omits it; the receipt mislabels it 'century-c'.",
+  "(g) LABEL SLIPS in the receipts (not the ledger): INSTRSOAK's final RESUME POINT 'LANE COMPLETE, HOLDING AT C′' (the dock is C″-based); 'T13 LANDED 12:33 ET' vs ledger §883 '~12:28 ET' (7f974e855 itself was committed 11:37:44); G0SOAK's 'the LEDGER's own 30y×12s datum' is docs/architected-volumes-pending-fold/DIAGNOSTIC_SOAK_DESIGN.md (ledger branch), not an ODQ row.",
+  "(h) THE STRUCTURAL CURE FOR THE HANDOFF MISS WAS IMPLEMENTED in kit-883 (card-883.py:32 refuses on a prefix mismatch and exits 1; collect-883.sh:66 aborts 'WRITER FAILED' before chair-commit.sh at :76; :78 reads the card back from HEAD's handoff) — the stratum records the lesson as owed, not as done.",
+  "(i) The lighting figures 2501/370/2131/22535/6083 are MEASURED-only: the dock's .lighting-census-baseline.json still reads 2497/370/2127/22491/6078 at 2ed4483a1 (consistent with S9), so any reader taking the row's '→' as a banked value would be wrong."
+ ],
+ "chair_errors": [
+  "Self-reported and CONFIRMED: the §882.11 handoff edit matched no anchor; 82c073af9 carries three files and its handoff still listed 'G0 FOLD (resumes … from ⟦G0-32⟧ of ~52 …)' among the running lanes; cured at 3a0b39c0d.",
+  "Propagated an unverified figure into two ledger rows: 'ZERO for 78 of its 100 years' (§882.12, §883.4) — the primary JSON gives 87.",
+  "Carried the lane's re-shape claim ('admits all 100 years') as fact into §882.12 and §883.4 while simultaneously ruling that Fable must re-derive it; the re-derivation refutes it (6 violations).",
+  "Stated the 10/10 census as an absolute mechanical cap ('an eleventh red CANNOT be banked') in §883.4 and the memory index, when the ratchet test's ceiling is 17 and the figure is §4.1's policy rule.",
+  "Did not mark the §883.7 'two boarding shapes' ruling as superseded once the landing order chose nineteen uniform plain picks (§884).",
+  "Ruled H-1 'CAPACITY's author's to take' (§882.12, §883.4) and then dispatched/collected the §891 CAPACITY lane without the row — the handover was lost between the ruling and the brief."
+ ],
+ "commands": [
+  "sed -n '57,68p;221,238p' stratum/full.md",
+  "sed -n '32360p;32361p;32369p;32365p;32374p;32417p' docs/OWNER_DECISION_QUEUE.md (ledger rows §882.11, §882.12, §883.4, §883, §884, §891)",
+  "git show --stat --format='%H%n%s%n%ad' 82c073af9; git diff --word-diff=plain 82c073af9 3a0b39c0d -- docs/HANDOFF_CURRENT.md; git log --oneline --reverse 82c073af9..review-fixes-2026-07-08 | head -3",
+  "git for-each-ref refs/preserve | grep 2026-09-0; git for-each-ref refs/preserve/landing-T13-2026-09-02",
+  "git -C $SP2/laneINSTRSOAK-tree rev-parse HEAD; status --porcelain -uall; log --oneline 7f974e855..HEAD; git log --format='%h %(trailers:key=Seat,valueonly)' 7f974e855..2ed4483a1",
+  "git -C $SP2/laneG0SOAK-tree rev-parse HEAD; status --porcelain -uall; git -C $SP2/laneINSTRSOAK-base rev-parse HEAD; status --porcelain -uall",
+  "git show <sha>:scripts/.test-ratchet-baseline.json and <sha>:tests/lint/.lighting-census-baseline.json for 7f974e855 2ed4483a1 ca651d54b 4233031ba → parsed with python3 (entries/totalTests/totalFiles; files/parked/credited/titles/suiteTitles)",
+  "git show 2ed4483a1:scripts/audit/soakInvariants.mjs | cat -n (whole); git show 2ed4483a1:tests/soak-harness/soakInvariants.test.js | grep -n …; git show 2ed4483a1:tests/simulation/centuryLegSoak.test.js | grep -n 'SEEDS\\|1\\.5\\|toBeLessThan'; git show <tip>:scripts/audit/soakInvariants.mjs | grep -n … for ca651d54b 4233031ba",
+  "git diff --stat 7f974e855..2ed4483a1 [-- src/ | -- .github/workflows/ci.yml]; git log --format='%h %s' 7f974e855..f5a6c3bbf | grep SOAKCHAIN; git merge-base --is-ancestor 7f974e855|9a0584f0f {e2967f2a1,f3d33e4b9,2ed4483a1}",
+  "git show HEAD:docs/DESIGN_HORIZON.md | grep -n 'LivenessFailureKind\\|E12\\|R3' (+ awk for the §4.1 heading at :319 and §4.7 at :384); git show HEAD:docs/architected-volumes-pending-fold/DIAGNOSTIC_SOAK_DESIGN.md | grep -c '3,276\\|3276'",
+  "git show 2ed4483a1:.github/workflows/soak-research.yml | grep -n -i 'cron\\|profile'; git show 7f974e855:tests/lint/testRatchet.test.js | sed -n '175,190p' (+ grep CEILING at four tips)",
+  "git show 7f974e855:scripts/.test-ratchet-baseline.json (+ counts at 2ed4483a1/ca651d54b/4233031ba); git show 9a0584f0f:package-lock.json | md5; md5 -q $SP2/laneG0SOAK-tree/package-lock.json",
+  "sed -n '1,180p;181,358p' $SP2/laneINSTRSOAK-receipt.md; sed -n '1,200p;201,384p' $SP2/laneG0SOAK-receipt.md; wc -l both + $SP/receipt-capacity.md",
+  "grep -n … $SP/receipt-capacity.md, $SP2/HORIZON-DESIGN-CAPACITY.md, $SP2/INSTR-LANDING-ORDER.md (:112-120), $SP/kit-883/collect-883.sh (:30-78), $SP/kit-883/card-883.py, $SP/chair-tools/chair-commit.sh, $SP2/HORIZON-RECON-SOAKCHAIN.md; grep -rl 'bound(y' over $SP and $SP2",
+  "python3 over $SP2/soak-car0-c-lit100.json: max pop/bound, years >1.5 and >1.05, the y−1 re-shape and trailing windows 2/3/4/5/10, K_food-alone, leg-c y11–16 and y22–25, majors per decade, distinct hashes",
+  "python3 over $SP2/soak-car0-30y4s-receipt.json vs $SP2/soak-instr-car1-30y4s.json (element-wise yearlyHashes, finalHash, ticksAdvanced); $SP2/soak-instr-car0-1y.json yearlyHashes[0]",
+  "grep over $SP2/instrsoak-lint-tip.log, instrsoak-lint-base.log, instrsoak-car3-verbose.log, instrsoak-typecheck-ratchet.log, instrsoak-typecheck-domain.log, instrsoak-osr.log; grep TRUE_EXIT in the nine $SP2/soak-car0-*.log; stat -f '%Sm %N' on the last G0SOAK artifacts",
+  "EXECUTED (allowed single-file): cd $SP2/laneINSTRSOAK-tree && npx vitest run tests/soak-harness/soakInvariants.test.js --maxWorkers=1 → 'Test Files 1 passed (1) · Tests 16 passed (16)', pipestatus 0; porcelain -uall captured empty before and after"
+ ],
+ "porcelain_unchanged": true,
+ "summary": "S04 walked 17 calls across §882.12 (SOAKCHAIN Car 0 measurement + the chair miss) and §883.7 (INSTR-SOAK S1–S10, H-1…H-6). RATIFY 12 · AMEND 5 · REVERSE 0. The load-bearing calls hold on primary evidence: the LIT bound allowance genuinely admits no value (max 3.5741 at leg-c y15, eight years >1.5 — re-derived from the JSON); the module carries no bound constant and pins the failure kinds at three; the LIT-series pin is an executed test (16/16 at the dock, porcelain unchanged); the ten baseline entries are exactly the ten base reds; Car 1's 30 hashes are element-wise equal to Car 0's (my own comparison); Car 3 reproduces Car 0's five figures; the chair's handoff miss is exactly as self-reported and its structural cure was implemented in kit-883. Five amendments, four of them substantive and carried into the ledger: (1) the recommended re-shape max(bound(y),bound(y−1)) does NOT admit all 100 years — six violations; only a ≥10-year trailing max or K_food-alone does; (2) the dead-major count is 87 years, not 78; (3) 'ZERO HEADROOM / cannot be banked' is §4.1's policy, not a mechanism — the ratchet test's ceiling is 17; (4) H-1 is DANGLING — the §891 CAPACITY lane neither took nor refused it; (5) the 'two boarding shapes' ruling was superseded by the landing order's uniform nineteen plain picks and is unmarked. E12 remains deliberately unsettled at ca651d54b. Every dock touched (laneINSTRSOAK-tree, laneINSTRSOAK-base, laneG0SOAK-tree) has unchanged porcelain; the ledger repo and every dock were read-only throughout; only walk/S04/ was written."
+}

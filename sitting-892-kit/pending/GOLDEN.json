@@ -1,0 +1,13 @@
+{"source":"GOLDEN","status":"COMPLETE","_header":"OPUS-AUTHORED","note":"See the structured output for the full item list; this file mirrors it.","items_count":14,
+"verified":{
+ "golden_tip":"ba08939d718b43702bcf1dd5ca37b650370b55d6 (refs/preserve/golden-build-2026-09-02), 7 cars over 8b07ce45f",
+ "behind":{"8b07ce45f..ca651d54b":197,"8b07ce45f..15c6368a6":215},
+ "landed_on_ca651d54b":"NONE — register/door/walker/comparator/shift-records all ABSENT; recordGolden importers 0 (45 at ba08939d7)",
+ "landed_on_15c6368a6":"NONE — identical",
+ "rebase_price":{"migrated_files_drifted":"1 of 43 (tests/property/generatorGoldenMaster.test.js, +108/-0, a docblock at line 18; migration sites are lines 653 and 764 — no overlap)","register_row_paths_moved":"2 of 48 (tests/fixtures/momentum-dormancy-golden.json 1 line at 66c9abaac; tests/property/espionageDormancyFence.test.js +37/-4 header, constant 72acacd8… UNCHANGED)"},
+ "new_env_spelling":"UPDATE_MOUNT_BASELINE at tests/lint/dossierMountRegistry.walker.test.js:74 (commit 0fdbc53a0) — 11 spellings at base, 12 at ca651d54b and at the train",
+ "roster_stable":"*DormancyGolden 32, dormancy fixtures 27, *DormancyFence 18, 64-hex sites 23/3 files, UPDATE_GOLDEN 40 — all identical at 8b07ce45f, ca651d54b, 15c6368a6",
+ "lit_coverage":"mechanism-lit-coverage-baseline.json = 23 mechanisms + 1 flag at all three tips; tests/property/litArmGolden.test.js ABSENT",
+ "createdAt_leak":"CURED ONLY IN THE TRAIN — 6 nowIso() fallback sites at ca651d54b:src/domain/region/wizardNews.js (627,821,868,888,928,976); at 15c6368a6 they are one resolveStamp() helper, commit 3a6f0d761",
+ "commitTrailerRefusal":"exported at goldenRecordDoor.js:210, imported ONLY by the walker test (lines 74,769,773) — no caller, no hook"
+}}

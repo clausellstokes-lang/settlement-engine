@@ -1,0 +1,71 @@
+O2GATE: the economy desk's state prose stays off the PUBLIC dossier — the §885.3 paid-surface default implemented, not merely stated
+
+THE FINDING. §885.2/§885.3 ruled that the chair operates under the conservative
+paid-surface default `publicDossier ⇒ no state prose`. DESK CAR 1 (a59e66e5a) did not
+implement it. OutputContainer computed `publicDossier = readOnly && !saveId` at :446 and
+never handed it to the tab (:703), and EconomicsTab drew the desk unconditionally at
+:319 — so the anonymous gallery dossier (PublicDossierView mounts OutputContainer
+readOnly with NO saveId) rendered the corpus sentences for free. That crossed an owner
+carve-out BY OMISSION.
+
+A CORRECTION TO THE CARD. The finding located the leak at the food line alone. There are
+TWO sentence mounts, not one: economics.prosperityHeader (DS-ECO-1, dossierMounts.js:122,
+drawn in EconomicsGlance) and economics.foodSecurity (DS-ECO-9, :134, drawn in the tab).
+EconomicsGlance's own docblock — "All three positions in this file are GLANCE rungs" — is
+stale on both the count and the rung. Gating the food line alone would have left the
+header speaking on the public dossier, so the gate goes at the single DRAW that feeds
+both.
+
+THE SHAPE, AND WHY NOT THE DESK OPTION. The card asked me to prefer an existing
+audience/public option on economyStateProse if one yields the same silence. It does not,
+and I checked rather than assumed: stateProseKernel's audience axis is DM-vs-PLAYER
+covertness only (AUDIENCE_DM/AUDIENCE_PLAYER, variantIsAudible strips `dm-only`), so the
+player audience still speaks every non-covert variant — exactly the two sentences at
+issue. Using it would be a FALSE GATE that silences nothing, and a third audience is a
+kernel change (a declared stop). So: thread the already-computed condition into the tab
+and, when public, bind deskProse to a frozen all-null shape. drawnAtMount returns null on
+a null rung, so no corpus sentence renders at any of the five mounts. Verified by reading
+that this removes ONLY sentences: EconomicsGlance consults the rungs solely via
+`?.sentence`, and situationDesc, the tiles and every sub-line datum come from
+eco/fb/granary/treasury, never from the desk.
+
+BOTH SOURCE EDITS ARE PHYSICAL-LINE-NEUTRAL, and that is load-bearing rather than tidy.
+OutputContainer.jsx sits at EXACTLY 600 effective lines against the 600 src/components
+ceiling — zero headroom — and .prose-numerics-baseline.json freezes debt by exact path
+AND line AND snippet, with rows at EconomicsTab:190-643 and OutputContainer:979. One
+inserted line, comment included, would have reddened two more registers. So the rationale
+is written by rewriting the existing 6-line block at :313-318 at identical line count.
+git diff --stat: 8 insertions, 8 deletions. Effective lines re-measured with eslint's own
+Linter after the edit: 580 / 600, unchanged.
+
+THE TWO-DIRECTION PROOF. tests/ui/economicsTabFlow.test.js gains one describe and three
+arms (no new test FILE — that reds three censuses). Each arm asserts both directions on
+the SAME settlement so it cannot pass vacuously; the fixture uses a ladder prosperity and
+a real food deficit, because the file's existing M6d fixture (`prosperity: 'modest'`) is
+OFF-ladder, ranks -1 and draws nothing, which is precisely why nothing caught this.
+Positive: exit 0, 7 passed. Negative control 1, gate deleted at the draw: exit 1, and the
+received DOM is the finding itself — both sentences on a public dossier. Negative control
+2, router thread cut: exit 1. Both plants restored byte-exactly, verified by sha256 (no
+git checkout), and the suite re-run green at exit 0.
+
+REGISTERS, PREDICTED IN WRITING BEFORE THE RUNS. Lighting census titles +3: predicted
+22919 -> 22922, measured `expected 22922 to be 22919`. Exact. suiteTitles +1 is owed but
+was NOT asserted — that arm throws on the first mismatch and short-circuits, so the
+refreeze must carry both figures. Green and unmoved, as predicted: prose-numerics (29),
+sizeBaseline (3), dossierMountRegistry (16), writerReach (56, executed rather than merely
+reasoned). Consumers green: malformedFlows, tabs.smoke, plotHookSeam, freshnessNote,
+screenParitySource, economyReadModelCoverage. eslint on all three files exit 0; full
+typecheck exit 0 (173 errors, ceiling 173).
+
+REPORTED, NOT FIXED: tests/copy/voiceMechanics.test.js is ALREADY RED at this parent.
+My contribution is provably zero — the repo's own extractJsxProseStrings gives
+em:0/bang:0 and identical string counts on the COMMITTED blob and my working copy for
+both files. The drift is pre-existing: 17 JSX rows including the mirror pair
+EconomicsTab em:3->0 / EconomicsGlance em:0->3 (DESK CAR 1's extraction moved three
+em-dashes and the baseline was never refrozen), a total-JSX-debt arm reading
+`expected 40 to be less than or equal to 6`, and ~65 src/data+src/domain rows this car
+does not touch. It is owed a disposition before the §891 CAS; refreezing is a register
+door and not this lane's hand.
+
+Seat: Opus 5 — Fable-unvalidated
+Lane: O2GATE

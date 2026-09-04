@@ -1,0 +1,13 @@
+{"source":"SYNTH","_header":"OPUS-AUTHORED","status":"COMPLETE",
+"sources_read":["DESK","ENCOUNTERS","FAULTDEBT","GOLDEN","HORIZONDARK","HORIZONVOL","LIGHTING","REVIEW","WARMS"],
+"detail_gaps":["HORIZONDARK deferred 22 rows HD-01..HD-22 to its StructuredOutput; recovered from the primary carlist instead","REVIEW deferred 27 rows to its StructuredOutput; recovered the review-phase shape from DESIGN_HORIZON primaries","GOLDEN/WARMS gave names+classes only"],
+"tree_verified_by_synth":{
+ "train_is_19_cars":"git rev-list --count ca651d54b..450f7dbb7 = 19 (refs/preserve/train891-o2gate-2026-09-04); 15c6368a6 = 18",
+ "golden_not_ancestor":"merge-base --is-ancestor ba08939d7 ca651d54b = NO; 8b07ce45f..ba08939d7 = 7 cars, 8b07ce45f..ca651d54b = 197",
+ "srcprose_base":"8f4d5c648 parent = 30c1667bc; 30c1667bc..15c6368a6 = 26",
+ "horizondark_placement":"RR Car 1a 33c9f530c + 1b 116df0a3f = ancestors of ca651d54b (LANDED); C1 ec6b0a132, C2 6bddd6183, C3 d02c5acde, CHARSET1 4ae140102, RR2 ac427cc5c = in-train, not-landed",
+ "driftdoor_unminted":"characterDriftEnabled has hits only in subsystemRowsLives.js and characterDrift.js at BOTH ca651d54b and 15c6368a6 - no manifest/schema home",
+ "rr10_conflict":"15c6368a6:scripts/review/readerCorpus.mjs docblock says 'That is an OPEN OWNER ROW, not a lane's to decide'; PREVIEW_OVERLAY is the four-key form with no errandSpineEnabled",
+ "enc5_stale_comment":"15c6368a6:npcLadderState.js BOND_KINDS = loyalty/gratitude/friendship (no respect), mintBond coerces to friendship; envoyChanceMeetingLedger.js says grudge 'UNREACHABLE until the owner rules the rivalry word' - stale against the 882.13 row-3 YES"
+},
+"note":"Full ordered stages, owner list, contradictions and totals are in this session's StructuredOutput return."}
