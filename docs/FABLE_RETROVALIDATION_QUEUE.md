@@ -3490,3 +3490,27 @@ fixture that detonated with six units of headroom. Register-neutral, measured: `
 COUNT. ⛔ `warCoalitionKindPools.walker.test.js:83` carries the same shape and is **currently TRUE**
 (39 passed); changing an accurate title is not a cure, so it is docketed as latent, not swept.
 **What Fable re-derives.** The scope boundary. **Priority: LOW-MEDIUM.**
+## §893.2 / §893.3 / §894 — THREE LANDINGS, ONE COLLECTION (2026-09-04; SEAT: Opus 5 — Fable-unvalidated)
+
+⛔ **The collection itself is the first row: the ledger fell two landings behind.** All three tips were sealed and CASed correctly; only the RECORD was missing. A Fable pass should check whether the three rows above match what the seals actually contain, because they were written from the commits rather than alongside them.
+
+### R20 ⛔ THE LEDGER FELL THREE LANDINGS BEHIND ITS OWN PRODUCT BRANCH
+§893.2, §893.3 and §894 were sealed, gated, chair-verified and CASed while the ledger tip stayed at §893.1. **Why it matters:** every recovery instrument in this program reads the ledger first; a successor resuming during that window would have found a product branch 34 cars ahead of its own record and no way to tell which of those cars were sanctioned. **The cause was sequencing, not oversight** — the chair batched collections to keep four lanes fed, which is the correct instinct applied to the wrong artifact. **Ruling to validate:** the CAS and the collection are ONE act.
+
+### R21 THE FLAG-ON LIT TEST, AND WHY DORMANCY FENCES CANNOT SEE THIS CLASS
+The encounters stage's per-subject cap read no subject id, so one meeting locked out the world. **A dormancy fence could never have caught it**: with the flag off, a correct implementation and this one emit byte-identical output. **Ruling to validate:** every flag-gated feature owes a flag-ON test that asserts the mechanism can produce its own output at least once — dormancy proves OFF, only a lit test proves CAPABLE.
+
+### R22 A BLOCKER OBEYED FOR FOUR LANDINGS WAS A PHANTOM
+`respect`/`rivalry` were deferred "to the owner" in a landed leaf. No owner row ever existed. **Ruling to validate:** a blocker is a claim and decays like one; a stale figure is refused by a gate, a stale blocker is obeyed in silence, so blockers need re-derivation dates.
+
+### R23 ⛔ THE CHAIR TOOK REGISTER ACTS MID-CONSIST THREE TIMES, COSTING TWO GATE CYCLES
+Later cars moved figures the registers had already frozen. ~40 minutes of gate time burned. **Ruling to validate:** the totals re-freeze is the last car before the gate. §894 applied it and went green first run on both the gate and chair-verify — the first consist of the arc to do so.
+
+### R24 THE PLANNED CURE WAS WRONG AND THE MEASUREMENT SAID SO
+The charset docket called for widening a sanitiser by 27 codepoints. All 27 were already drawable in the shipped face; the real defect was the book renderer's font registration. **Ruling to validate:** this is the fourth instance of *charter the permission, measure the mechanism* — the owner's grant made the repair takeable, the measurement decided what to take. A Fable pass should check whether the chair is now measuring BEFORE docketing rather than after.
+
+### R25 A RECEIPT READ FROM THE ARTIFACT, NOT FROM THE WRITER
+The embed's proof extracts glyphs back out of the generated document, so the arm fails if bytes are embedded but not painted. **Ruling to validate:** this is the correct shape for every "did it actually ship" claim, and it should be applied to the remaining paid-surface arms.
+
+### R26 ⚠ THE CHAIR'S OWN ERRORS IN THIS SPAN, FOR THE RECORD
+(a) Compared a dock's `node_modules` against the main repo instead of a gating dock — 37 packages exist only in docks — which broke a collection until repaired. (b) Piped a refreeze to `/dev/null` twice, so dirty-tree refusals were invisible and silence read as success. (c) Passed a 1-hour timeout to a foreground Bash call capped at 10 minutes, killing a job mid-flight while it held the test mutex. (d) Read vitest's ACTUAL/EXPECTED order backwards after having folded the memory warning of that exact inversion four hours earlier. **All four are process faults, not code faults**, and none reached the product; they are recorded because the next Opus seat will be tempted by each.

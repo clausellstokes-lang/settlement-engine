@@ -8,7 +8,26 @@ program's decisions; SPEC fold labels §§277–§286 are design sections, not m
 The repo is authoritative; trust executed evidence over any summary including
 this one.**
 
-## ⭐⭐⭐⭐⭐ PICKUP AT §893.1 — ⚠⚠ **THE CENSUS IS 6, NOT 10, AND IT WAS NEVER FULL.** Product `6c49ecbbf`, 31 cars landed since `ca651d54b`. THE SEAT IS OPUS 5. Read this, then `$SC/RULINGS-893*.md` (eight files).
+## ⭐⭐⭐⭐⭐ PICKUP AT §894 — ⚠⚠ **THREE LANDINGS WERE COLLECTED IN ONE ACT BECAUSE THE LEDGER FELL TWO BEHIND. Product `43d49a3a0`, 65 cars landed since `ca651d54b`. THE SEAT IS OPUS 5.** Read this, then `$SC/RULINGS-893*.md`.
+
+`$SC` = `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad` · `$SP` = `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/58f0a8e2-2c4f-4073-8635-ecc7cf5010f6/scratchpad`. ⛔ OWNER CAP FOUR agents of any kind. ⛔ Every act: `Seat: Opus 5 — Fable-unvalidated` + a CHANGED `docs/FABLE_RETROVALIDATION_QUEUE.md` blob in the SAME commit; build the queue from `git show HEAD:…`, never the worktree copy.
+
+### ⭐⭐ THE FIVE LANDINGS OF 2026-09-04, ALL SEALED, ALL CASed
+`ca651d54b` → **§891** 27 cars `f537ce47e` → **§893.1** 4 cars `6c49ecbbf` → **§893.2** 18 cars `2e563a63b` → **§893.3** 11 cars `1d50822b8` → **§894** 5 cars `43d49a3a0`. Census **10 → 6** with both totals tightened; ceiling still 17.
+
+### ⛔ THE LEDGER DEBT THIS CARD CLOSES — AND THE LAW IT LEAVES
+Landings §893.2, §893.3 and §894 were sealed in git and **unwritten on the ledger for three landings**. Nothing was lost (every tip is under `refs/preserve/*`), but a successor reading the ledger would not have known they happened. ⭐⭐ **THE LAW: a landing is not landed until its row exists. Collect at the CAS, not at the end of the session** — the CAS and the collection are one act, and the gap between them is the only window in which the record can lie.
+
+### ⭐ THE ORDERING LAW, PAID FOR TWICE, THEN PROVED
+**The totals re-freeze is the LAST car before the gate.** Taking registers mid-consist cost two full gate cycles at §893.3; applying the law at §894 produced the arc's first gate-green-and-chair-verify-green-first-run consist.
+
+### NEXT, IN ORDER
+**DESK1's 14 cars are sealed at `refs/preserve/train-desk1-2026-09-04` (`6603f4a9d`) but sit on `1d50822b8` — 5 product commits behind, ZERO file overlap with §894, so the replay is clean.** Then: desk remainder (`defense` 2 of 11 done, then `economy`/`warFaith`/`general`) · SEAT-7a (`ce9910469`, 29 commits behind) · SEAT-7/8 Car 2 · the lighting wave (6 cars + 16 prerequisite builds) · W-ARMS (14) · HORIZON-DARK remainder (5) · ENCOUNTERS remainder (ENC-5's words are the owner's; ENC-7 deferred) · ⛔ the owner's WALK + one regen · the exhaustive review · its fix cars · ⛔ FULL STOP before the terminal soak.
+
+### ⛔ PERMANENTLY THE OWNER'S
+Every `git push` and the deploy · the WALK · the tuning SIGNATURE (declined by the chair on its own judgment — a promise made to players is not the owner's to hand over in passing). Everything else was taken under the 09-04 carve-out amendment and is marked for Fable retrovalidation.
+
+## (superseded) PICKUP AT §893.1 — ⚠⚠ **THE CENSUS IS 6, NOT 10, AND IT WAS NEVER FULL.** Product `6c49ecbbf`, 31 cars landed since `ca651d54b`. THE SEAT IS OPUS 5. Read this, then `$SC/RULINGS-893*.md` (eight files).
 
 ⛔ **EVERYTHING of this session is sealed at `refs/preserve/session-kit-893-2026-09-04` and `…-893b-…` — the scratch dirs die with the account, and TWO artifacts (the lighting inventory, the 55,812 B W-ARMS volume) had no git home at all.**
 
