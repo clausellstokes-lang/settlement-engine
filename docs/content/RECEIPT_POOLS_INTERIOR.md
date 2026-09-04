@@ -1066,8 +1066,9 @@ ALSO POOLED: the R1 subject-phrase pool for this kind lives in `RECEIPT_POOLS_LE
   are not co-owned pools — they are one kind on TWO AXES, which is exactly what
   *upgrade of a lit kind* means. This file pools their **R2 Herald receipt sentence**;
   the legacy annex pools their **R1 subject phrase** (`whatPhrase()` — a lowercase noun
-  phrase, no terminal stop, no slots), and for four of the seven that R1 variant 1 is a
-  MUTILATED computed fallback the legacy annex has logged as its own defect. Both
+  phrase, no terminal stop, no slots). For four of the seven that R1 variant 1 WAS a
+  mutilated computed fallback the legacy annex logged as its own defect; all four were
+  de-slugged at §894 and now carry an authored canonical (DEFECT-2, repaired). Both
   render, on one entry, in different fields. Merging them would put
   *"{faction} moves to capture an institution of {settlement}."* inside *"Travellers
   bring word of …"* — a register violation, not a de-duplication. Each of the seven
