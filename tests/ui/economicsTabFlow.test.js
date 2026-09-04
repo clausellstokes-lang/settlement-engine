@@ -18,6 +18,7 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { EconomicsTab } from '../../src/components/new/tabs/EconomicsTab.jsx';
+import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 import { useStore } from '../../src/store/index.js';
 
 const e = React.createElement;
@@ -125,15 +126,20 @@ const FOOD_SENTENCE = 'Forge Town cannot feed itself';
 describe('THE PUBLIC GATE — the economy desk stays silent on a public dossier', () => {
   test('a PUBLIC dossier draws ZERO state-prose sentences, and the SAME town drawn non-public draws BOTH', () => {
     useStore.setState({ campaigns: [] });
-    // Direction 1 — the private dossier SPEAKS. Without this half the arm is vacuous.
+    // Direction 1 — the private dossier SPEAKS. Captured BEFORE cleanup: the container's
+    // textContent empties when the tree unmounts, so reading it later would make the
+    // liveness anchor below assert against an empty string.
     const priv = render(e(EconomicsTab, { settlement: SPEAKING, saveId: 'forge_town', publicDossier: false }));
-    expect(priv.container.textContent).toContain(HEADER_SENTENCE);
-    expect(priv.container.textContent).toContain(FOOD_SENTENCE);
+    const privText = priv.container.textContent;
     cleanup();
     // Direction 2 — the SAME town on a public dossier says NOTHING from the corpus.
     const pub = render(e(EconomicsTab, { settlement: SPEAKING, saveId: null, publicDossier: true }));
-    expect(pub.container.textContent).not.toContain(HEADER_SENTENCE);
-    expect(pub.container.textContent).not.toContain(FOOD_SENTENCE);
+    const pubText = pub.container.textContent;
+    // Each sentence is proved PRESENT privately and ABSENT publicly in ONE anchored act. A
+    // public render that silently produced nothing now reds on the liveness anchor instead
+    // of passing a bare exclusion (tests/helpers/anchoredNegatives.js).
+    expectPresentThenAbsent(privText, pubText, HEADER_SENTENCE, 'public dossier gate: the DS-ECO-1 header sentence');
+    expectPresentThenAbsent(privText, pubText, FOOD_SENTENCE, 'public dossier gate: the DS-ECO-9 food-security sentence');
   });
 
   test('the gate removes ONLY the corpus sentences — the header prose and every datum tile survive', () => {
