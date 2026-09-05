@@ -1,7 +1,7 @@
 {
  "name": "tolkien",
  "runId": "wf_9b91b240-c98",
- "exportedAt": "2026-09-05T22:59:57.643Z",
+ "exportedAt": "2026-09-05T23:05:00.603Z",
  "claims": [
   {
    "feature": "register modulation",
@@ -5841,6 +5841,96 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "lower the tone towards that of a more childish fairy-tale",
    "note": "Verbatim, in \"'Old scamp!' This is a good example of the general tendency that I find in Z to reduce and lower the tone towards that of a more childish fairy-tale.\" The Gandalf half is also on the page: \"Gandalf, please, should not 'splutter'... he is a person of high and noble authority, and great dignity.\" (The archive renders curly quotes as '?')."
+  },
+  "225": {
+   "index": 225,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "miles are miles, days are days, and weather is weather",
+   "note": "Raw page text: \"The Lord of the Rings may be a 'fairy-story', but it takes place in the Northern hemisphere of this earth: miles are miles, days are days, and weather is weather.\" Context confirms the claim's framing — the preceding sentence says the autumn-to-spring passage \"is basic to the purport and tone of the tale\", and Tolkien repeats \"miles are miles\" later in the same letter re lembas."
+  },
+  "226": {
+   "index": 226,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the air of timeless Elvish enchantment",
+   "note": "Fimi quotes Letter 131 verbatim: \"I make the perilous and difficult attempt to catch at close quarters the air of timeless Elvish enchantment\", explicitly at the point where the Fellowship reaches Lothlorien. The Frodo half is also on the page, quoted from LotR: \"A light was upon it for which his language had no name\" (page gloss: \"Frodo cannot find the words to describe the light he sees in Lothlorien\"). Minor nuance: the text says his language had no name for the light, and that he made \"names new and wonderful\" for known colours."
+  },
+  "227": {
+   "index": 227,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "leave many only placed in the scheme, and sketched",
+   "note": "Page quotes Tolkien verbatim: \"I would draw some of the great tales in fullness, and leave many only placed in the scheme, and sketched. The cycles should be linked to a majestic whole, and yet leave scope for other minds and hands...\" Claim's paraphrase matches."
+  },
+  "228": {
+   "index": 228,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "history, true or feigned, with its varied applicability",
+   "note": "Page quotes the Foreword verbatim: \"I much prefer history, true or feigned, with its varied applicability to the thought and experience of readers... the one resides in the freedom of the reader, and the other in the purposed domination of the author.\" Claim's \"allegory's authorial domination\" tracks \"the purposed domination of the author\"."
+  },
+  "229": {
+   "index": 229,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "translated as far as possible into terms of our own times",
+   "note": "Live host serves a bot challenge to curl; retrieved the real page (title \"Appendix F - Part 4: On Translation | TheOneRing.net Forums\") after following the challenge cookie flow. Page quotes Appendix F verbatim: \"the whole of the linguistic setting has been translated as far as possible into terms of our own times\" and \"only the languages alien to the Common Speech have been left in their original form\". Caveat: the word \"Westron\" never appears on this page; the English-for-Common-Speech half is worded \"the Common Speech as Modern English\"."
+  },
+  "230": {
+   "index": 230,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "including the Lord Denethor himself",
+   "note": "Rateliff quotes the Appendix F footnote verbatim: \"Peregrin Took, for instance, in his first few days in Minas Tirith used the familiar for people of all ranks, including the Lord Denethor himself. This may have amused the aged Steward, but it must have astonished his servants.\" One precision point: the page says the deferential forms \"had gone out of colloquial use\" in Shire-usage and \"lingered only among the villagers\" as endearments — not that the distinction was wholly lost — and it is Denethor's servants, not Gondor generally, who are astonished."
+  },
+  "231": {
+   "index": 231,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "more degraded and filthy than I have shown it",
+   "note": "The claimed string \"more filthy than I have shown it\" does NOT appear word for word. Raw page: \"Orcs and Trolls [who] spoke as they would [....]; and their language was actually more degraded and filthy than I have shown it I do not suppose that any will wish for a closer rendering\". The Elves half is verbatim: \"the Eldar, being above all skilled in words, had the command of many styles.\" Substance of the claim holds; the quotation as given is a truncation."
+  },
+  "232": {
+   "index": 232,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "represented in this history by English",
+   "note": "Wikipedia 'Westron' quotes Appendix F: \"The language represented in this history by English was the Westron or 'Common Speech' of the West-lands of Middle-earth in the Third Age.\" The Rohirric half is also verbatim on the page: \"Rohirric, the language of Rohan (related to Westron) by the Mercian dialect of Old English\"."
+  },
+  "233": {
+   "index": 233,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a euphonious name of familiar English style",
+   "note": "PDF extracted locally (23 pp, pypdf). Text: \"has taken pains to produce a Common Speech name that is both a translation and also (to English ears) a euphonious name of familiar English style, even if it does not actually occur in England. Rivendell is a successful example, as a translation of Grey-elven Imladris 'Glen of the Cleft'.\" Claim matches, including the Rivendell/Imladris example."
+  },
+  "234": {
+   "index": 234,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "obsolete or dialectal, or are worn-down and obscured in form",
+   "note": "PDF text: \"Names (of places and persons) occur, especially in the Shire, which are not 'meaningless', but are English in form... containing elements that are in the current language obsolete or dialectal, or are worn-down and obscured in form. (See Appendix F.)\" The space in \"worn -down\" in my extraction is a pypdf artifact, not the source. \"Antiquarian texture\" is the claimant's gloss, not Tolkien's word."
+  },
+  "235": {
+   "index": 235,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "an archaic form of 'elephant' used as a 'rusticism'",
+   "note": "PDF text: \"Oliphaunt. Retain this. It is an archaic form of 'elephant' used as a 'rusticism', on the supposition that rumour of the Southern beast would have reached the Shire long ago in the form of legend.\" Note: the entry does not lament loss of archaic colouring in translation — it offers a workaround (substituting O for initial E) and says the meaning would remain obvious; the 'lamenting' half of the claim is the claimant's overlay."
+  },
+  "236": {
+   "index": 236,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "less damaging than the 'pretty' literary fancies",
+   "note": "PDF text: \"I find these debased rustic associations less damaging than the 'pretty' literary fancies.\" Context is the German rendering of 'elf' and the Drayton / Midsummer Night's Dream \"pretty, fanciful reduction of 'elf' to a butterfly-like creature\". Claim's substance holds, though the passage is about a name's associations rather than register generally."
+  },
+  "237": {
+   "index": 237,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Modernized form of Rohan greg-hama",
+   "note": "PDF text: \"Greyhame. Modernized form of Rohan grēg-hama 'greycoat'. By-name in Rohan of Gandalf.\" Shadowfax entry corroborates the second name: \"This is an anglicized form of Rohan (that is Old English) Sceadu-faex 'having shadow-grey mane (and coat)'.\" (Gamling entry likewise: Shadowfax and Wormtongue \"slightly anglicized and modernized\".)"
+  },
+  "238": {
+   "index": 238,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "poetical, archaic, artificial",
+   "note": "Wikipedia quotes Tolkien: \"If you wish to translate, not rewrite Beowulf, your language must be literary and traditional: not because it is now a long while since the poem was made... but because the diction of Beowulf was poetical, archaic, artificial (if you will), in the day that the poem was made.\" Both halves of the claim are on the page verbatim."
+  },
+  "239": {
+   "index": 239,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "colloquialism and false modernity",
+   "note": "Wikipedia: Tolkien's insistence that prose Beowulf translations \"should be 'harmonious' and should avoid 'colloquialism and false modernity'\", and \"He advises the translator to prefer 'striking' and 'smiting', and to avoid 'hitting' and 'whacking'.\" Note the page also records the counterweight: he criticises Morris's \"dead and unintelligible 'leeds'\", so the preference is not archaism without limit."
   }
  }
 }

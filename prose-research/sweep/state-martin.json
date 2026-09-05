@@ -1,7 +1,7 @@
 {
  "name": "martin",
  "runId": "wf_e25da3f7-7fb",
- "exportedAt": "2026-09-05T22:59:57.653Z",
+ "exportedAt": "2026-09-05T23:05:00.615Z",
  "claims": [
   {
    "feature": "Anglo-Saxon diction",
@@ -5599,6 +5599,96 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "but I actually hate the omniscient viewpoint",
    "note": "Exact string match. The perceptual grounding the claim asserts is in the following sentences: 'None of us have an omniscient viewpoint; we are alone in the universe... If a plane crashes behind you I would see it but you wouldn't. That's the way we perceive the world.'"
+  },
+  "285": {
+   "index": 285,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The best fantasy is written in the language of dreams.",
+   "note": "Opening line of the essay, exact. Colour and taste are explicit in the following paragraph (\"silver and scarlet, indigo and azure\"; \"Fantasy tastes of habaneros and honey\"); \"texture\" is the analyst's inference from the material imagery (\"obsidian veined with gold\", \"plywood and plastic\"), not Martin's word."
+  },
+  "286": {
+   "index": 286,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "We read fantasy to find the colors again, I think.",
+   "note": "Exact (US spelling \"colors\" on the page). The reader-motive half is fully supported, and food/taste is present (\"To taste strong spices\"). The clause \"underwrites his heraldic ... description\" is the analyst's application; heraldry appears nowhere in the essay."
+  },
+  "287": {
+   "index": 287,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "playing with the syntax and sentence rhythms a bit to convey a flavor",
+   "note": "Exact, in the \"Klaatu Barada Nicto...\" post of 2010-04-12. Surrounding text confirms the contrast the claim draws: \"I suck at foreign languages\", \"for the most part I was content just to say, 'They were speaking Dothraki'\", with David J. Peterson brought in only for the HBO series."
+  },
+  "288": {
+   "index": 288,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "richly textured and full of sensory detail, books that make me feel as if I am experiencing a story, not just reading it",
+   "note": "Exact, quote 16 on the page (headed \"George R.R. Martin's 20 Quotes on Writing\", July 3, 2013). The claim's \"experiences rather than reads\" tracks the source clause directly. The page is a quote compilation, not a primary interview."
+  },
+  "289": {
+   "index": 289,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I can actually write, \"'Yes you can trust me,' he lied.\"",
+   "note": "Exact, quote 9. Context supports the prose-vs-film framing: \"unless you're doing a voiceover, which is tremendously clumsy, you can't hear the ideas of characters.\" The compiler inserts a bracketed gloss \"[But it's better to get inside the characters' heads.]\" after it."
+  },
+  "290": {
+   "index": 290,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "go through the script trimming and tightening line by line and word by word",
+   "note": "Exact, inside a Martin quotation on the page (byline \"By: Ginger on November 4, 2022\", matching the citation). The carry-into-prose half is explicit: \"I've done the same with all my books since leaving LA.\""
+  },
+  "291": {
+   "index": 291,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a tense or revelational moment, a twist or a cliffhanger, similar to a TV act break",
+   "note": "Exact. The TV-habit attribution is on the page too: \"Influenced by his television and film scripting background\". Note the article says a smaller portion of characters is left with clear-cut cliffhangers, so \"each chapter\" applies to the tense/revelatory beat, not to full cliffhangers."
+  },
+  "292": {
+   "index": 292,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "The viewpoint characters, who serve as unreliable narrators",
+   "note": "No quotation was supplied, so verbatim does not apply. The article states it directly and adds the reader-weighing consequence: \"what the readers believe to be true may not necessarily be true.\""
+  },
+  "293": {
+   "index": 293,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "in, like, three days it just came right out of me, almost in the form you've read",
+   "note": "Exact on the Longreads excerpt page (Mikal Gilmore, Rolling Stone, April 23, 2014; posted April 24, 2014). \"Vividly\" is Martin's own word: \"It just came to me so strongly and vividly that I knew I had to write it.\" The page carries only the excerpt, not the full interview."
+  },
+  "294": {
+   "index": 294,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "such descriptive names as \"The Iron Captain,\" \"The Princess in the Tower\"",
+   "note": "Word-for-word; only the quotation-mark glyphs differ (page uses double quotes, the claim single). The A Feast for Crows framing is explicit: \"Before A Feast for Crows... But since the fourth novel\". Source is an admitted satire piece."
+  },
+  "295": {
+   "index": 295,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Start In The Middle of the Action",
+   "note": "No quotation supplied. Step 2 lists \"a) eating b) excreting c) fucking d) fighting or e) in the middle of a conversation\". Slight overreach: the page scopes this to a character's first appearance and \"within two pages\", not to every chapter opening, and omits two of its five items."
+  },
+  "296": {
+   "index": 296,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "someone in every chapter should find a way to exclaim that something \"isn't worth a mummer's fart\"",
+   "note": "Quotation exact, but it sits in Step 4 (word choice), while the italics-and-padding point is Step 3: \"recurring ideas or phrases they can't get out of their head... smashing through that word count\". The claim fuses two separate steps; both halves are on the page, the linkage is the analyst's."
+  },
+  "297": {
+   "index": 297,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The morning had dawned clear and cold, with a crispness that hinted at the end of summer.",
+   "note": "Exact, and the against-advice framing is the post's own: \"The common writing advice trope of never opening with a description of the weather\". The following sentence is the multi-clause beheading line. Page is dated August 22, 2017, consistent with the 2017 citation."
+  },
+  "298": {
+   "index": 298,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It was the ninth year of summer, and the seventh of Bran's life.",
+   "note": "Quotation exact. Support for the craft claim is indirect: the post reacts with a joke (\"apparently the ninth year of summer on whatever crazy planet\") rather than naming embedded worldbuilding; the nearest explicit statement is about Ice - \"a good detail that G.R.R.M. tucks in here when readers won't be able to grasp its significance.\""
+  },
+  "299": {
+   "index": 299,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The blade was Valyrian steel, spell-forged and dark as smoke.",
+   "note": "Exact. The later-payoff half is stated on the page: \"as the story unfolds, that metal becomes all the more important, and it's a good detail that G.R.R.M. tucks in here\"."
   }
  }
 }
