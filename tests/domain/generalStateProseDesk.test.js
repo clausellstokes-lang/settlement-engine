@@ -240,12 +240,28 @@ describe('the general desk — guard the guard', () => {
     // against a copy of it, so the mirror cannot become a fork — and the desk owns no
     // literal fill table.
     const shapes = mergedShapes();
-    expect(Object.keys(SLOT_FILL_SHAPES).sort())
-      .toEqual(['calamity', 'event', 'faction', 'faction2', 'govFaction', 'governing',
-        'issue', 'settlement', 'stakes', 'timeband_age', 'timeband_since']);
+    // ⛔ THE ROSTER IS DERIVED, NOT HAND-LISTED, AND THE CHANGE IS THE FINDING. This arm
+    // named its eleven slots literally, so it convicted the DESK for the crime of lighting
+    // another block: DESK-GEN3 added seven mirror rows (`institution`, `resource`, `good`,
+    // `steading`, `ruin`, `counterpart`, `npc`) and the list — not the mirror — was what
+    // went stale. A roster keyed on exactly what a later car MINTS is a control that reds
+    // on correct work, which is the third instance of this shape in this subsystem (the
+    // walker's `mountsForTab('history')` pin was the second). What the mirror OWES is that
+    // every row agrees with the annex and that it declares no slot the desk cannot fill —
+    // both asserted below, neither of which a literal list adds anything to.
+    expect(Object.keys(SLOT_FILL_SHAPES).length, 'the mirror is empty — the arm is vacuous')
+      .toBeGreaterThan(10);
     for (const [slot, shape] of Object.entries(SLOT_FILL_SHAPES)) {
       expect(shape, `{${slot}} shape`).toBe(shapes.shapeOf(slot));
     }
+    // ⛔ AND IT MAY DECLARE NO SHAPE FOR A RESERVED SLOT. §0c refuses a fill table for
+    // `{band}` outright, and four DS-GEN-8 variants name it; a mirror row would be the desk
+    // claiming a shape the register says cannot exist.
+    for (const [slot, shape] of Object.entries(SLOT_FILL_SHAPES)) {
+      expect(shape, `{${slot}} is RESERVED and cannot carry a declared fill`).not.toBe('RESERVED');
+    }
+    expect(shapes.shapeOf('band'), 'the RESERVED anchor moved').toBe('RESERVED');
+    expect(SLOT_FILL_SHAPES.band, 'the desk declared a shape for a RESERVED slot').toBeUndefined();
     expect(SLOT_FILL_TABLES).toEqual({});
     // WHICH BLOCKS PARTITION THEMSELVES BY A DEMOTED STATE DIMENSION, derived from the
     // kernel's own reader so this file cannot hold a second opinion about what a dimension
@@ -1381,7 +1397,7 @@ describe('DS-GEN-18 — why these workshops, and the blocker that was in the wro
     expect(drawCraft(withheld), 'a plural house drew a singular sentence').toBeNull();
     // Every fill this desk offers passes the ANNEX'S OWN shape checker, not a local twin.
     const shapes = mergedShapes();
-    expect(fillShapeViolation(shapes.institution, craftInstitutionFill(['Smelter']))).toBe('');
+    expect(fillShapeViolation(shapes.shapeOf('institution'), craftInstitutionFill(['Smelter']))).toBe('');
   });
 
   it('⛔ {resource} IS NOT OFFERED ON STALLED — the feed that failed has no honest producer', () => {
@@ -1397,7 +1413,7 @@ describe('DS-GEN-18 — why these workshops, and the blocker that was in the wro
     // The variant naming the slot is dropped and the `ledger` variant carries the pool.
     expect(line).toContain('a supply that has failed upstream');
     // The token itself must never reach a reader through any seam of this block.
-    expect(fillShapeViolation(mergedShapes().resource, 'warehouse_logistics')).toBe('ENGINE-TOKEN-IN-FILL');
+    expect(fillShapeViolation(mergedShapes().shapeOf('resource'), 'warehouse_logistics')).toBe('ENGINE-TOKEN-IN-FILL');
   });
 
   it('⛔ {good} REFUSES THE ENGINE\'S PARENTHETICAL BOOKKEEPING', () => {
@@ -1584,8 +1600,8 @@ describe('DS-GEN-8 — the remnant, the fallen city and the steadings (a lawful 
     // `fillShapeViolation` refuses a fill for it outright. So the steading HEAD COUNT never
     // reaches a reader through this desk, which is also §0d's own answer to a raw number.
     const shapes = mergedShapes();
-    expect(shapes.band).toBe('RESERVED');
-    expect(fillShapeViolation(shapes.band, 'a few souls')).toBe('RESERVED-SLOT-HAS-NO-DECLARABLE-FILL');
+    expect(shapes.shapeOf('band')).toBe('RESERVED');
+    expect(fillShapeViolation(shapes.shapeOf('band'), 'a few souls')).toBe('RESERVED-SLOT-HAS-NO-DECLARABLE-FILL');
     expect(SLOT_FILL_SHAPES.band, 'the desk declared a shape for a RESERVED slot').toBeUndefined();
     // Four variants of this block name it. Each of their POOLS still speaks through a
     // variant that does not — which is the whole reason the block is mountable at all.
