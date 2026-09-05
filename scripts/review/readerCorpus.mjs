@@ -25,15 +25,15 @@
  *
  * WHAT IS COPIED, TERM FOR TERM, FROM THE SOAK (addresses measured at this tip, not
  * transcribed from the design — three of the design's own addresses had drifted):
- *   - `REGION_ARCHETYPES` and `SEQ_IDS`            `whole-world-soak.mjs:204-210`
- *   - the four historical edges and three channels `whole-world-soak.mjs:275-292`
+ *   - `REGION_ARCHETYPES` and `SEQ_IDS`            `whole-world-soak.mjs:232-238`
+ *   - the four historical edges and three channels `whole-world-soak.mjs:303-320`
  *   - `ensureRegionalGraph({edges, channels}, {now})` and `wizardNews {currentTick:0, entries:[]}`
- *   - `composeSoakRules({ preset, seasons: 'preset', overlay })`  `soakRules.mjs:115`
+ *   - `composeSoakRules({ preset, seasons: 'preset', overlay })`  `soakRules.mjs:159`
  *   - the yearly advance, its `advanceEpoch` term, its threading and its fold of
- *     `settlementUpdates`                          `whole-world-soak.mjs:383-455`
+ *     `settlementUpdates`                          `whole-world-soak.mjs:413-485`
  *   - the composite `sha256(JSON.stringify({worldState, regionalGraph, settlements}))` in
- *     THAT key order                               `whole-world-soak.mjs:450-454`
- *   - `NOW = '2026-07-12T00:00:00.000Z'`           `whole-world-soak.mjs:156`
+ *     THAT key order                               `whole-world-soak.mjs:480-484`
+ *   - `NOW = '2026-07-12T00:00:00.000Z'`           `whole-world-soak.mjs:172`
  *
  * WHAT IS DELIBERATELY NOT COPIED: the soak's spatial canon. `buildWholeWorldSoakSpatialCanon`
  * is imported rather than re-spelled, because it is an exported pure function and a
