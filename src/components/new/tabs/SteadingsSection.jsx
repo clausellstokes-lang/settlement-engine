@@ -41,7 +41,7 @@ export default function SteadingsSection({ settlement, publicDossier = false, pl
   // renders those three things. The steadings come from the ledger resolved above, because
   // only this component holds it. Silent on a free dossier and silent where the record has
   // nothing to say (R-DST-K).
-  const desk = generalDeskLines(settlement, { publicDossier, playerView, steadings, lifecycleStatus: grade }).steadings;
+  const desk = generalDeskLines(settlement, { publicDossier, playerView, steadings, lifecycleStatus: grade, ancientRuin: ancient }).steadings;
 
   return (
     <div style={{ marginTop: 14 }}>
