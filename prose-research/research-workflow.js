@@ -7,7 +7,7 @@ export const meta = {
     { title: 'Synthesize', detail: 'one dossier section per exemplar + the failure catalogue + a completeness critic' },
   ],
 }
-// Owner's cap: FOUR running agents of any kind. SEAT LAW (owner 09-05): Opus VERIFIES — every verify chunk, the synthesis and the critic run as Opus; the finders keep the seat default so their cached research replays. batched() runs at most `cap` thunks at once.
+// Owner's cap: FOUR running agents of any kind. SEAT LAW (owner 09-05, twice): Opus VERIFIES (every verify chunk is `model: 'opus'`); SYNTHESIS IS FABLE (the synth and critic stages inherit the seat model, the chair's); the finders keep the seat default so their cached research replays. batched() runs at most `cap` thunks at once.
 const CAP = (args && args.cap) || 4
 const OUT = (args && args.outDir) || '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/prose-research/sweep'
 async function batched(items, fn) {
@@ -73,6 +73,6 @@ const groups = {}; for (const e of EX) groups[e.key] = []; if (!SKIP_AI) groups.
 for (const x of kept) { const idx = x.batch; const key = idx < findJobs.length ? findJobs[idx].ex.key : 'ai'; (groups[key] ||= []).push(x) }
 const sections = await batched(Object.entries(groups), ([key, xs]) => agent(
   `Write the dossier section for "${key}" from these VERIFIED claims only (JSON follows). Structure: numbered concrete features, each with the critics/sources that support it (count them), the true wording of any quotation (under twelve words), and the reconstruction rule it implies for a settlement dossier written as a calm archivist (present tense, concrete civic nouns, no digits, no em dash). Mark disagreements between sources explicitly. End with a coverage table: sources read per angle. Write it to ${OUT}/section-${key}.md and return the markdown.\n\nCLAIMS:\n${JSON.stringify(xs).slice(0, 180000)}`,
-  { label: `synth:${key}`, phase: 'Synthesize', model: 'opus' }))
-const critic = await agent(`You are the completeness critic for the subset ${Object.keys(groups).join(', ')}. Read ${OUT}/section-*.md and the find-*.md notes. List what is MISSING: an angle not run, a well-known critic or study absent (name them), a claim that rests on one source, a copyright risk (a quotation over twelve words), and any feature the sections contradict each other on. Return a markdown list with a recommended next round of searches. Write it to ${OUT}/critic.md.`, { label: 'critic', phase: 'Synthesize', model: 'opus' })
+  { label: `synth:${key}`, phase: 'Synthesize' }))
+const critic = await agent(`You are the completeness critic for the subset ${Object.keys(groups).join(', ')}. Read ${OUT}/section-*.md and the find-*.md notes. List what is MISSING: an angle not run, a well-known critic or study absent (name them), a claim that rests on one source, a copyright risk (a quotation over twelve words), and any feature the sections contradict each other on. Return a markdown list with a recommended next round of searches. Write it to ${OUT}/critic.md.`, { label: 'critic', phase: 'Synthesize' })
 return { claimsFound: allClaims.length, claimsDeduped: claims.length, claimsVerified: kept.length, sections: Object.keys(groups), critic }
