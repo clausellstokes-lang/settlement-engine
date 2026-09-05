@@ -119,4 +119,57 @@ export const OPS_SUBSYSTEM_ROWS = Object.freeze([
     // built, dark, caller-less lane whose flags exist for the module that reads them.
     soakEvidence: 'unobserved',
   }),
+  Object.freeze({
+    rule: 'missionDispatcherEnabled',
+    title: 'The mission dispatcher — which of a principal\'s needs become capped, seeded operation candidates',
+    module: 'src/domain/worldPulse/operations/missionDispatcher.js,src/domain/worldPulse/espionage/espionageGate.js',
+    aliveness: Object.freeze({
+      // ⛔ DELIBERATELY EMPTY, AND THE ONLY HONEST VALUE — but for a DIFFERENT reason than
+      // its sibling row above, and the difference is recorded rather than smoothed. This
+      // leaf DOES compose a `candidateType`, as a TEMPLATE family (`operation_${...}`),
+      // and `applyWorldPulse.js` carries NO arm that matches it — pinned by the leaf's own
+      // suite. A candidate no applier mints never reaches a receipt, so an eventTypes
+      // entry here would be a channel the instrument can never fill. The trace in
+      // tests/domain/subsystemRowsVirtual.test.js records the template lane by name so the
+      // waiver is reviewable and self-invalidating.
+      eventTypes: Object.freeze([]),
+      // DELIBERATELY EMPTY: this car mints ZERO news kinds. The mission beats are W-OPS
+      // car 7's, the voice car, and grading this row ALIVE off a beat no lane has minted
+      // is the recorded moverFamily hazard.
+      moverFamilies: Object.freeze([]),
+      // DELIBERATELY EMPTY: the leaf writes nothing. It is a pure ranking function over
+      // injected needs and returns frozen candidate descriptors to a caller that does not
+      // exist; no `setSpatialLedger` call, no persisted key, on any path.
+      stateKeys: Object.freeze([]),
+      other: 'THE VOLUME DIRECTIVE (DESIGN_W_OPS §6, the FIRST of the two doors that section charters by name, and §3.12 for the grammar it ranks): a principal — a court, a faction, a patron, a cult — accumulates NEEDS, and the dispatcher decides which of them are worth an operation this tick. WHAT THE FLAG LIGHTS, EXACTLY ONE THING AT THIS CAR: nothing yet, stated plainly rather than modestly. The leaf has an EMPTY src importer set, pinned by its own suite through an IMPORT-SPECIFIER census over a live tree walk, so lighting the key moves no world byte on any path. WHAT THE MINT BUYS: CENSUS VISIBILITY, which is the whole of CR-WR10-C\'s purpose — a subsystem could be built, gated and shipped while the totality walker that demands its certification row could not see the key at all, and this leaf was invisible in a THIRD way, built and dark and UNGATED, so it was not even on the measured backlog. WHERE THE GATE LIVES AND WHY NOT IN THE LEAF: the dispatcher is PURE and INJECTED by charter — it takes the needs, the per-principal cap and the frequency as ARGUMENTS and never reaches for a world — so it has no receiver to gate on, and its own header asks for exactly this mint by name. ⛔ AND THERE IS A SECOND, SHARPER REASON THE LEAF MAY NOT HOLD IT: this file is the ONE admitted importer of the espionage set, and the espionage dormancy fence\'s reachability-chain arm asserts that it names neither the family door module nor the layer flag — the chain terminates because the admitted caller takes only the doctrine vocabulary and the deliberation read. A gate written into the leaf would have broken that chain argument and reddened a fence that is working perfectly. THE GATE IS A CONJUNCTION AND IT IS MEANT: W-OPS §2 says everything in that volume sits behind espionageActive / errandSpineActive / its own doors, and a dispatcher casting covert operations into a world with no espionage layer would be minting work nothing can run. THE CAP IS AN ARGUMENT WITH A DEFAULT, NOT AN AUTHORED KNOB, and the default MIRRORS the errand family\'s MAX_CONCURRENT_ENVOYS rather than importing it, parity-pinned test-side against the live constant so a retune reds instead of drifting. DETERMINISM: survivors are sorted by codepoint on a rename-stable demand id and only then ranked by a keyed hash over (principalId, tick, demandId) — same world, same order, same cut, on every device and in every locale. WHAT NOTHING CAN SEE, DECLARED: no receipt channel can grade this row and no soak year can either. The soak builds its rules from the full_simulation spread, which declares no virtual key, so ruleState resolves to unknown and the schema grades UNOBSERVED at its fourth branch; `unobserved` is therefore the row\'s evidence rather than `indirect`, because there is no dispositive channel for a later soak to fill. THE OBSERVATION THAT WOULD CLOSE THE GAP: a per-principal per-tick census of dispatched candidates, which needs a CONSUMER, and the consumer is the wiring car\'s. WHAT THIS CAR DELIBERATELY DOES NOT DO: it wires nothing, it puts the key in NO preset, and it mints no applier arm — the candidate type word deliberately matches none, so the layer is inert even if a future car miswires it. The lane is pinned at tests/domain/missionDispatcher.test.js.',
+    }),
+    // Need-driven and capped per principal per tick: even a lit world with a consumer
+    // produces operations only when a principal's needs clear the doors, which the leaf's
+    // own four-door walk makes uncommon rather than steady.
+    expectedTempo: 'rare',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'dark_is_zero_keys_written',
+        description: 'THE PROMISE, in the volume\'s own words (§6): dark ⇒ zero keys written ⇒ byte-identical. The leaf is a pure function returning frozen descriptors, and with the door shut nothing calls it at all.',
+        check: 'Expressible from source and from state, and asserted both ways in tests/domain/missionDispatcher.test.js: the import-specifier census proves no src caller exists, and the door arm drives missionDispatcherActive through the four truthy-refusal spellings.',
+      }),
+      Object.freeze({
+        name: 'the_flag_has_exactly_one_gate_read',
+        description: 'The key is read by name, strictly against `true`, at exactly ONE site in src/: missionDispatcherActive in the espionage family door module. There is no loose-truthiness read anywhere, the key appears in simulationRules.js ONLY as its manifest member, and it is in no preset spread and not in DEFAULT_SIMULATION_RULES.',
+        check: 'Expressible from source and asserted that way in tests/domain/missionDispatcher.test.js, the polarity census, which counts COMPARISONS rather than names so the manifest member and this row\'s own `rule` field are never miscounted as uses.',
+      }),
+      Object.freeze({
+        name: 'the_reachability_chain_still_terminates',
+        description: 'The leaf remains the ONE admitted importer of the espionage set, and it still names neither the family door module nor the layer flag — so no engine entry point reaches the espionage layer through it, and the mint did not buy visibility at the price of reachability.',
+        check: 'Expressible from source and asserted that way in tests/property/espionageDormancyFence.test.js, whose reachability-chain arm already carries both negatives and was executed unchanged across this mint.',
+      }),
+      Object.freeze({
+        name: 'no_applier_arm_matches_the_candidate_word',
+        description: 'The candidate type the dispatcher composes matches no arm in applyWorldPulse.js, so the layer is inert even if a future car miswires it — the type word is a dead letter until an applier is written on purpose.',
+        check: 'Expressible from source and asserted that way in tests/domain/missionDispatcher.test.js, which extracts the applier\'s own arm list from its source and asserts the dispatcher\'s type is not among them, with a non-vacuity guard that the arm list is non-empty.',
+      }),
+    ]),
+    // No channel at all, so the row can never be ALIVE and says so honestly.
+    soakEvidence: 'unobserved',
+  }),
 ]);

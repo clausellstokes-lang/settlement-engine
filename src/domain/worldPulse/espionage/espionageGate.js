@@ -115,3 +115,34 @@ export function infiltrationDepthActive(worldState) {
   if (!rules || typeof rules !== 'object') return false;
   return rules.infiltrationDepthEnabled === true;
 }
+
+/**
+ * ── W-OPS DOOR 2 · THE MISSION DISPATCHER (DESIGN_W_OPS §6) ───────────────────
+ *
+ * `missionDispatcherEnabled` is the other door DESIGN_W_OPS §6 charters by name, and it
+ * lands here for door 1's reason one step further along: the dispatcher leaf is PURE and
+ * INJECTED — it takes needs, a cap and a frequency as arguments and never reaches for a
+ * world — so it has no receiver to gate on. Its own header names the seam and asks for
+ * exactly this mint. ⛔ THAT LEAF IS ALSO THE ONE ADMITTED IMPORTER OF THE ESPIONAGE SET,
+ * and `tests/property/espionageDormancyFence.test.js`'s reachability-chain arm asserts it
+ * names neither this module nor the layer flag — so the door may live HERE and never
+ * there, and this paragraph is the record of why the obvious home is the wrong one.
+ *
+ * ⛔ THE CONJUNCTION IS MEANT. W-OPS §2: everything in that volume sits behind
+ * `espionageActive` / `errandSpineActive` / its own doors. A dispatcher casting covert
+ * operations into a world with no espionage layer would be minting work nothing can run.
+ *
+ * ⚠ NO PRODUCTION CONSUMER AT THIS CAR, DECLARED: the dispatcher's suite pins an empty
+ * src importer set by an IMPORT-SPECIFIER census, and this predicate does not change that
+ * — it names the key, never the file. The mint buys CENSUS VISIBILITY, which is the whole
+ * of CR-WR10-C's purpose for a built-and-dark subsystem.
+ *
+ * @param {unknown} worldState
+ * @returns {boolean}
+ */
+export function missionDispatcherActive(worldState) {
+  if (!espionageActive(worldState)) return false;
+  const rules = /** @type {{ simulationRules?: Record<string, unknown> }} */ (worldState)?.simulationRules;
+  if (!rules || typeof rules !== 'object') return false;
+  return rules.missionDispatcherEnabled === true;
+}

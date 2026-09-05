@@ -220,6 +220,11 @@ const CHANCE_ENCOUNTERS = 'chanceEncountersEnabled';
 // and carrying ZERO new test titles here. The gate is in the family DOOR module rather
 // than in the leaf because the leaf's exports take `lit` as an ARGUMENT by charter.
 const INFILTRATION_DEPTH = 'infiltrationDepthEnabled';
+// LGT-P5-WOPS, one commit later. The W-OPS mission dispatcher, on the same shape: manifest
+// entry, row in `subsystemRowsOps.js`, and ONE by-name gate read in the espionage family
+// door module — never in the leaf, which is the espionage set's one admitted importer and
+// must keep naming neither that module nor the layer flag.
+const MISSION_DISPATCHER = 'missionDispatcherEnabled';
 // AUTHORING ORDER, not alphabetical: the assertion below is an exact ordered equality
 // against VIRTUAL_SUBSYSTEM_ROWS, so this list mirrors the file's own section order.
 const VIRTUAL_RULES = Object.freeze([
@@ -233,6 +238,8 @@ const VIRTUAL_RULES = Object.freeze([
   TREASURY,
   FOREIGN_SEAT, LEGITIMACY_UPHEAVAL, IRREGULAR_FORCE, WAR_MEMORY,
   INFILTRATION_DEPTH,
+  FOREIGN_SEAT, LEGITIMACY_UPHEAVAL, WAR_MEMORY,
+  INFILTRATION_DEPTH, MISSION_DISPATCHER,
   CHANCE_ENCOUNTERS,
 ]);
 
@@ -425,6 +432,40 @@ const LANE_LEAVES = Object.freeze({
     'src/domain/worldPulse/espionage/espionageGate.js',
     'src/domain/worldPulse/espionage/infiltrationDepth.js',
   ],
+  [MISSION_DISPATCHER]: [
+    'src/domain/worldPulse/espionage/espionageGate.js',
+    'src/domain/worldPulse/operations/missionDispatcher.js',
+  ],
+});
+
+/**
+ * ⛔ THE TEMPLATE-LITERAL BLIND SPOT, RECORDED RATHER THAN WAIVED (LGT-P5-WOPS).
+ *
+ * The zero-candidate guard below asks `file.src.includes('candidateType')` and reds on any
+ * spelling, while `MINT_RE` — the thing that decides what a row may DECLARE — only matches
+ * the SINGLE-QUOTED form. Ten src files compose a `candidateType` as a TEMPLATE
+ * (`npc_${actionFamily}`, `strategy_${move}`, `${pressure.kind}_pressure`, …), and until
+ * this car no lane leaf was one of them, so the asymmetry never surfaced.
+ *
+ * A templated family is not a literal a row can declare: `evaluateSubsystemCertification`
+ * matches `eventTypes` against the event types a RECEIPT carries, and the expansion is a
+ * per-call string. So the honest disposition is neither "declare it" nor "pretend it is
+ * not there" but THIS: name the lane and its leaf, state why the family is undeclarable,
+ * and assert BOTH halves — that the spelling really is templated, and that `MINT_RE` finds
+ * nothing there — so a later single-quoted mint in the same leaf reds instead of riding
+ * the waiver. The entry is per-LEAF, never per-lane, so a second leaf in the same lane is
+ * still measured normally.
+ */
+const TEMPLATED_CANDIDATE_LANES = Object.freeze({
+  [MISSION_DISPATCHER]: Object.freeze({
+    leaf: 'src/domain/worldPulse/operations/missionDispatcher.js',
+    reason: 'The dispatcher composes `operation_${demand.kind}` over the dispatchable mission'
+      + ' kinds, and applyWorldPulse.js carries NO arm matching it — the leaf\'s own suite'
+      + ' extracts the applier\'s arm list from source and asserts the type is absent, with a'
+      + ' non-vacuity guard that the list is non-empty. A candidate no applier mints never'
+      + ' reaches a receipt, so an eventTypes entry would be a channel the instrument can'
+      + ' never fill; the empty set is the measured truth rather than modesty.',
+  }),
 });
 
 /**
@@ -748,11 +789,28 @@ describe('engine-gated virtual rows — TRACE against live source', () => {
         // or, if the literal turns out to be shared, a written reason in
         // SHARED_CANDIDATE_LITERALS. The evidence law runs in this direction too:
         // under-claiming rots exactly like over-claiming, it just reads as modesty.
-        if (isZeroCandidateLane) {
+        const templated = TEMPLATED_CANDIDATE_LANES[rule];
+        if (isZeroCandidateLane && !(templated && templated.leaf === leaf)) {
           expect(
             file.src.includes('candidateType'),
-            `${rule}: ${leaf} now names candidateType — declare the literal in the row's eventTypes, or record why it is shared in SHARED_CANDIDATE_LITERALS`,
+            `${rule}: ${leaf} now names candidateType — declare the literal in the row's eventTypes, record why it is shared in SHARED_CANDIDATE_LITERALS, or record the templated family in TEMPLATED_CANDIDATE_LANES`,
           ).toBe(false);
+        } else if (templated && templated.leaf === leaf) {
+          // BOTH HALVES, so the waiver cannot outlive its reason: the spelling really is
+          // templated, and MINT_RE really finds nothing — a later single-quoted mint in
+          // this same leaf reds here rather than riding the entry.
+          expect(
+            /candidateType:\s*`/.test(file.src),
+            `${rule}: ${leaf} is recorded as a TEMPLATED candidate lane but no template mint is there — delete the stale entry`,
+          ).toBe(true);
+          expect(
+            [...file.src.matchAll(MINT_RE)].map((hit) => hit[1]),
+            `${rule}: ${leaf} now mints a single-quoted candidateType — the templated waiver does not cover it`,
+          ).toEqual([]);
+          expect(
+            templated.reason.length,
+            `${rule}: the templated-lane reason is too thin to review`,
+          ).toBeGreaterThan(120);
         }
       }
       // DECLARED == SEPARABLE. For every lane, the row must declare exactly those
