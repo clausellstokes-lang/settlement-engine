@@ -25,6 +25,7 @@ import {
   granaryPoolKey,
   incomeMixPoolKey,
   leadingGoodNoun,
+  shadowEconomyPoolKey,
   prosperityHeaderPoolKey,
   tradeProfilePoolKey,
 } from '../../src/domain/display/stateProse/economyStateProse.js';
@@ -618,5 +619,91 @@ describe('DS-ECO-12 — every pool is reached by a MEASURED value', () => {
     // anchored: the line below asserts this same sentence is non-empty, so the negative is measured over a real drawn sentence and never over an absent one
     expect(bad.tradeProfile?.sentence ?? '').not.toMatch(/\{good\}/);
     expect(bad.tradeProfile?.sentence, 'the pool went dark instead of degrading').toBeTruthy();
+  });
+});
+
+// ── DS-ECO-6: THE SHADOW ECONOMY ─────────────────────────────────────────────────────
+
+describe('DS-ECO-6 — the capture tiers, and the live string this block is a copy of', () => {
+  const underworld = (blackMarketCapture) => town({ economicState: { safetyProfile: { blackMarketCapture } } });
+
+  it('reaches all three pools on the DM page, each by a measured capture figure', () => {
+    const reached = new Set();
+    for (const capture of [3, 10, 14, 15, 20, 29, 30, 55, 100]) {
+      for (let i = 0; i < 12; i++) {
+        const rung = economyStateProse(underworld(capture), {}, { seed: `shadow-${capture}-${i}`, audience: AUDIENCE_DM }).shadowEconomy;
+        if (rung?.sentence) reached.add(rung.provenance.poolKey);
+      }
+    }
+    expect([...reached].sort(), 'a capture tier is mounted and unreachable')
+      .toEqual(Object.keys(DOSSIER_STATE_PROSE_ECONOMY['DS-ECO-6'].pools).sort());
+  });
+
+  it('transcribes the annex tiers faithfully across the whole 0..100 range', () => {
+    const pools = DOSSIER_STATE_PROSE_ECONOMY['DS-ECO-6'].pools;
+    const wrong = [];
+    for (let capture = 0; capture <= 100; capture += 1) {
+      const key = shadowEconomyPoolKey({ blackMarketCapture: capture });
+      if (key === null) { if (capture >= 3) wrong.push(`${capture} → null`); continue; }
+      if (!pools[key]) { wrong.push(`${capture} → ${key} (no such pool)`); continue; }
+      const floor = Number(key.match(/≥(\d+)/)[1]);
+      const ceiling = { 30: Infinity, 15: 30, 3: 15 }[floor];
+      if (capture < floor || capture >= ceiling) wrong.push(`${capture} landed in ${key}`);
+    }
+    expect(wrong).toEqual([]);
+  });
+
+  it('is silent below the surface floor, and silent again where nothing was measured', () => {
+    // Under 3 % capture EconomicsTab renders no Shadow Economy section at all, and R-DST-K
+    // says the absence of a surface is the absence of a sentence.
+    for (const capture of [0, 1, 2]) expect(shadowEconomyPoolKey({ blackMarketCapture: capture }), `${capture}`).toBeNull();
+    // UNMEASURED IS NOT CLEAN. A settlement with no safety profile has not been measured as
+    // having no shadow economy, and a `|| 0` here would silently make those two the same.
+    expect(shadowEconomyPoolKey(null)).toBeNull();
+    expect(shadowEconomyPoolKey({})).toBeNull();
+    expect(shadowEconomyPoolKey({ blackMarketCapture: 'lots' })).toBeNull();
+    // anchored: the 0..100 arm above proves this same selector returns real pool keys, so
+    // these nulls are the refusals under test and never a dead accessor
+    expect(shadowEconomyPoolKey({ blackMarketCapture: 3 })).toBe('TIER: minor shadow activity (≥3)');
+  });
+
+  it('gives the top tier to the DM alone, because the corpus wrote it covert', () => {
+    const reach = (audience) => {
+      const seen = new Set();
+      for (let i = 0; i < 12; i++) {
+        const rung = economyStateProse(underworld(55), {}, { seed: `top-${i}`, audience }).shadowEconomy;
+        if (rung?.sentence) seen.add(rung.provenance.poolKey);
+      }
+      return seen;
+    };
+    expect(reach(AUDIENCE_DM).size, 'the DM cannot read the top tier').toBe(1);
+    // anchored: the DM read on the line above proves the tier is live and correctly keyed,
+    // so this empty set is the player projection truncating to silence and not a dead pool
+    expect(reach('player').size).toBe(0);
+    // DECLARED, NOT A DEFECT: all four variants of the ≥30 pool are `dm-only` in the corpus,
+    // so a player's page falls back to the tab's own standing scaleNote there. Pinned as a
+    // fact about the CORPUS, so a later un-marking of one variant reds and gets read.
+    const top = DOSSIER_STATE_PROSE_ECONOMY['DS-ECO-6'].pools['TIER: a large share off the books (≥30)'];
+    expect(top.every((v) => (v.marks || []).includes('dm-only'))).toBe(true);
+    expect(top.length).toBe(4);
+  });
+
+  it('holds the two `canonical` variants byte-identical to the live string they copy', () => {
+    // THE SECOND-HOME PIN. The whole 68-block corpus carries seven `canonical`-angle
+    // variants, all seven in this leaf, and each is the live engine string its surface
+    // already prints. DS-ECO-6's two are hand copies of EconomicsTab's own `scaleNote`
+    // branches — the generator's LIVE_STRING_BINDINGS cure was applied to DS-ECO-7's pair
+    // and not to these. Until it is, this arm is what stops the two homes drifting apart
+    // in silence, which is exactly what has already happened to DS-ECO-3's three (the
+    // corpus spells a period where tradeFlowEconomics.js has an em dash).
+    const tab = readFileSync(resolve(import.meta.dirname, '../../src/components/new/tabs/EconomicsTab.jsx'), 'utf8');
+    const pools = DOSSIER_STATE_PROSE_ECONOMY['DS-ECO-6'].pools;
+    const canonical = Object.values(pools).flat().filter((v) => v.angle === 'canonical');
+    expect(canonical, 'the canonical rows this pin is about left the corpus').toHaveLength(2);
+    for (const variant of canonical) {
+      expect(tab.includes(variant.text), `EconomicsTab no longer carries: ${variant.text}`).toBe(true);
+    }
+    // And the substitution the tab performs is real: the mount id is drawn there exactly once.
+    expect(tab.split("'economics.shadowEconomy'").length - 1).toBe(1);
   });
 });
