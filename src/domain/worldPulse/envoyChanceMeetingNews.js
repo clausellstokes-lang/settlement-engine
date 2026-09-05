@@ -327,6 +327,20 @@ export const CHANCE_MEETING_NEWS_TUNING = Object.freeze({
 });
 /** The name the writers and the walker read; the table above is the register's. */
 export const CHANCE_MEETING_PRESENTATION = CHANCE_MEETING_NEWS_TUNING;
+/**
+ * The presentation for a registry row's significance — the two bands the table carries, and NULL
+ * for every other value of the family (`routine`, `n/a`), which the writers already treat as
+ * "withhold the line". Typed so the strict checker sees the narrowing the runtime always had:
+ * indexing the two-key table with the four-value union was TS7053 twice (ENC-4c's bill, paid at
+ * the §900 composition by the Fable chair); the behaviour is byte-identical.
+ * @param {'notable'|'routine'|'major'|'n/a'} significance
+ * @returns {Readonly<{severity:number, score:number}>|null}
+ */
+export function presentationFor(significance) {
+  if (significance === 'notable') return CHANCE_MEETING_PRESENTATION.notable;
+  if (significance === 'major') return CHANCE_MEETING_PRESENTATION.major;
+  return null;
+}
 
 /**
  * Which case each row draws when a caller names none. It is derived from the registry rather than
@@ -502,7 +516,7 @@ export function chanceMeetingEntry({ seed, now = null } = {}) {
   if (!picked) return null;
   // A class with no landed presentation pair is a class this file cannot present; the walker pins
   // the table's key set EQUAL to the registry's own significances, so this is a belt on a proof.
-  const presentation = CHANCE_MEETING_PRESENTATION[row.significance];
+  const presentation = presentationFor(row.significance);
   if (!presentation) return null;
 
   // SENTENCE CASE AT THE RENDER, and it is GR-0's recorded reason applied to the reason limb:
@@ -652,7 +666,7 @@ export function chanceMeetingExposedEntry({ seed, now = null } = {}) {
   const meetingId = text(source.id);
   const picked = chanceMeetingLine(row.kind, `${row.kind}::${meetingId}`, interp, caseToken);
   if (!picked) return null;
-  const presentation = CHANCE_MEETING_PRESENTATION[row.significance];
+  const presentation = presentationFor(row.significance);
   if (!presentation) return null;
 
   const reason = CHANCE_MEETING_EXPOSED_REASON.charAt(0).toUpperCase() + CHANCE_MEETING_EXPOSED_REASON.slice(1);
