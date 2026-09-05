@@ -1,7 +1,7 @@
 {
  "name": "martin",
  "runId": "wf_e25da3f7-7fb",
- "exportedAt": "2026-09-05T22:29:47.199Z",
+ "exportedAt": "2026-09-05T22:34:48.134Z",
  "claims": [
   {
    "feature": "Anglo-Saxon diction",
@@ -4789,6 +4789,96 @@
    "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "An author doesn't need big, fancy words to make his/her point",
    "note": "Both halves present; clothing half near-verbatim ('the author uses a whole paragraph to explain the intricate clothing of a certain lord or lady'). Minor slippage: the page frames the diction point as a generalized lesson about 'an author', not a statement about Martin specifically. Author and date (Cinthia Koeksal, February 22, 2013) confirmed."
+  },
+  "150": {
+   "index": 150,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I've always written from a tight third-person point of view",
+   "note": "Exact match. Continues: 'because I think that's the way we perceive things. None of us are omniscient. We don't know what other people are thinking; we just can see the events around us from our own eyes, and the only thoughts we hear are our own thoughts.' Both halves of the claim (the practice and the perception rationale) are directly supported. Byline and date on page confirm Amy Gentry, August 29, 2013."
+  },
+  "151": {
+   "index": 151,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a limited but very tight third person point of view",
+   "note": "Exact match within: 'I'm a strong believer in telling stories through a limited but very tight third person point of view.' The omniscient half is also supported verbatim: 'I actually hate the omniscient viewpoint. None of us have an omniscient viewpoint; we are alone in the universe.' Recovered as raw HTML by curl and grepped directly."
+  },
+  "152": {
+   "index": 152,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I switch voices every time I switch chapters.",
+   "note": "Exact match within: 'When I'm doing Winds, I switch voices every time I switch chapters.' The per-POV style half is supported by the next sentence: 'Each has their own style and voice and have their own cast of supporting characters in different places in the world.' Page confirms it is quoting James Hibberd's Entertainment Weekly interview, matching the stated attribution."
+  },
+  "153": {
+   "index": 153,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it's a whole different voice",
+   "note": "Exact match within: 'When I switch gears and I go from writing some Tyrion chapters to writing some Jon Snow chapters, it's a whole different voice, he's in a whole different part of the world.' The recovery-cost half is supported separately: 'I usually struggle for a few days trying to get back the voice of the character I'm just returning to after some hiatus.'"
+  },
+  "154": {
+   "index": 154,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "write consecutively two, three or four chapters",
+   "note": "Exact match within: 'It's difficult for me to shift from one to another, so I use to write consecutively two, three or four chapters of the same character.' The reading-order half is supported verbatim on the same page: 'I do not write the chapters in the order you read them.'"
+  },
+  "155": {
+   "index": 155,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Having multiple viewpoints is crucial to the grayness of the characters.",
+   "note": "Exact match, sentence for sentence. Both-sides and cartoon-Dark-Lord halves also verbatim: 'You have to be able to see the struggle from both sides because real human beings in a war have all these processes of self-justification' and 'Nobody except in a cartoon says, I'm the Dark Lord, and now I'm going out to do Evil Things.' WebFetch got 403; recovered by direct curl of the live Locus page."
+  },
+  "156": {
+   "index": 156,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the point of view structure and the unreliable narrator",
+   "note": "Exact match within: 'There are other so-called mistakes in the book that are not mistakes - they're very intentional because I'm trying to get at something having to do with the point of view structure and the unreliable narrator.' Next sentence supports the rest: 'Two different characters may remember an event in two different ways - well that's not a mistake, that's deliberate.' Live theatlantic.com blocked; verified on the 2013-09-01 Wayback snapshot."
+  },
+  "157": {
+   "index": 157,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "seeing everything through the eyes only of the viewpoint characters",
+   "note": "Exact match within: 'since I'm following a very strict structure of seeing everything through the eyes only of the viewpoint characters.' CAVEAT: the television link is a separate passage, not the same sentence - 'the structure of Song of Ice and Fire with [its] viewpoint... and cutting between the viewpoints... is a structure I learned in television.' Page is an auto-generated transcript with visible errors elsewhere (Oregon for Arya, Tyrian for Tyrion), though the quoted phrase is clean; page states the source was a TIFF master class."
+  },
+  "158": {
+   "index": 158,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Bran is the first viewpoint character.",
+   "note": "Exact match. Decoy-hero half verbatim in the next sentences: 'In the back of their heads, people are thinking Bran is the hero of the story. He's young King Arthur.' The window push is in the interviewer's question and the not-the-familiar-story signal in Martin's answer: 'Well, this is just not the same story I read a million times before.' Live URL 307-redirects to a tollbit paywall returning 402; verified on the 2026-08-29 Wayback snapshot."
+  },
+  "159": {
+   "index": 159,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Sometimes I employ the private's viewpoint",
+   "note": "Exact match within: 'Sometimes I employ the private's viewpoint, very up close and personal, dropping the reader right into the middle of the carnage.' The general's-altitude half is verbatim in the next sentence: 'Sometimes I go with the general's point of view instead, looking down from on high, seeing lines and flanks and reserves.' Note the page is Martin interviewing Cornwell, so these are Martin's words in a question he poses."
+  },
+  "160": {
+   "index": 160,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "sort of like a Robert Altman film in prose",
+   "note": "Exact match within: 'Many of the Wild Cards books are mosaic novels, where each of my writers tells the story of his or her own character, and I braid the tales together to make a whole, sort of like a Robert Altman film in prose.' The Wild Cards derivation is stated directly: 'The actual structure of the Ice and Fire books, with their multiple POVs and interwoven storylines, was inspired by the Wild Cards shared world books.' Interviewer is named Jay on the page, matching the attribution."
+  },
+  "161": {
+   "index": 161,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Tolkien begins very small, in the Shire",
+   "note": "Exact match within: 'With the general construction of the books, in some ways I took the Lord of the Rings as my model. Tolkien begins very small, in the Shire with Bilbo's birthday party, and from there, the characters all accumulate.' The scatter half follows: 'But then at a certain point, they begin to go separate ways.' Live theatlantic.com blocked; verified on the 2013-09-01 Wayback snapshot."
+  },
+  "162": {
+   "index": 162,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "modern prose, but omitting all pop culture references",
+   "note": "Exact match within: 'The best way is to compromise by using modern prose, but omitting all pop culture references, and occasionally using archaic words/phrases. He compared it to adding a bit of salt to soup to enhance the flavour.' Fine-line and salt-in-soup elements both present. CAVEAT: this So Spake Martin entry is a third-person con report summarizing Martin's remarks, so the quoted words are the reporter's paraphrase, not transcribed Martin speech. Westeros blocked WebFetch and curl (Cloudflare); verified on the 2025-04-16 Wayback snapshot."
+  },
+  "163": {
+   "index": 163,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "he feared a \"forsooth\" would follow shortly",
+   "note": "Exact match. Full passage: 'His editor did not like the use of the word because he feared a forsooth would follow shortly. GRRM compromised by keeping the use of mayhaps for older characters, such as Aemon, but replaced it with perhaps and maybe for younger ones like Bran.' Every element of the claim - editor, Aemon, Bran, perhaps and maybe - is present. Same third-person-report caveat as 162."
+  },
+  "164": {
+   "index": 164,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "to understand the syntax and words",
+   "note": "Exact match within: 'For the latter [Fevre Dream], he read several novels, such as those by Mark Twain, from the period to understand the syntax and words.' The page contrasts this directly with the Ice and Fire approach in the following sentences, supporting the different-strategy half. Claim says 'vocabulary' where the page says 'words' - synonymous, and the quoted string itself is exact. Same third-person-report caveat as 162."
   }
  }
 }

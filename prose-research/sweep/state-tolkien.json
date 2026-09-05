@@ -1,7 +1,7 @@
 {
  "name": "tolkien",
  "runId": "wf_9b91b240-c98",
- "exportedAt": "2026-09-05T22:29:47.191Z",
+ "exportedAt": "2026-09-05T22:34:48.129Z",
  "claims": [
   {
    "feature": "register modulation",
@@ -5301,6 +5301,96 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "Sam | Colloquial, rustic, working class",
    "note": "Exact match in the 'Speech styles of the Fellowship of the Ring, after Kullmann and Siepmann' table (capitalised as a cell opener). Other rows confirm the rest: Aragorn 'Archaic, literary' (and 'archaic and literary' in the body text), Gandalf 'Plain, flexible', Merry 'Direct statements', Pippin 'Questions, exclamations' -- the body text adding 'Merry makes direct statements, while Pippin characteristically asks questions'."
+  },
+  "135": {
+   "index": 135,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "like a melodrama villain, or a public-school bully",
+   "note": "Exact on the page. Rosebury 2003 pp.81-83 is correctly cited for \"at least three types of Orc-dialogue for different ranks and tribes\" and for the Grishnakh quote. Caveat: the Gorbag/\"minor officials in a murderous bureaucracy\" element is Vaninskaya 2020 p.363 on the same page, NOT Rosebury; the claim blends two scholars under one name."
+  },
+  "136": {
+   "index": 136,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the clipped language of army dispatches",
+   "note": "Exact, cited to Vaninskaya 2020 p.363. The page also carries the dispatch verbatim: \"A message came: Nazgul uneasy. Spies feared on Stairs.\" and supports the wider reading - Tolkien gives the Orcs \"the speech of the twentieth century, whether as soldiers, functionaries in party or government\"."
+  },
+  "137": {
+   "index": 137,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "\"obsessive repetition\", \"undeveloped syntax and unstable sense of grammatical person\"",
+   "note": "Substance fully supported but the quotation is not word-for-word: the page has two separate quoted fragments, and reads \"unstable sense of grammatical person\" (the claim drops \"sense of\"). Page adds \"sufficient to imply dissociative mental illness\"; \"most memorable success\" is Rosebury on Tolkien's portrayal of Gollum, with an \"extraordinary idiolect\"."
+  },
+  "138": {
+   "index": 138,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "plural nouns were most likely to be injected with extra sibilants",
+   "note": "Exact. Every element checks out: \"With self-referent “we” subject pronoun\" is listed under Non-Standard Conjugations, the example \"we doesn't answer\" appears, Gollum is \"the more likely speaker to reduplicate sibilants\", and \"the closer Smeagol is to redemption and rehabilitation, the closer he adheres to standard language rules\" (page says \"correctly uses personal pronouns\" rather than naming \"I\"). Byline confirmed: Vannessa L. Milom, J. Linguistics and Literature 5(1) 2022, 1-5."
+  },
+  "139": {
+   "index": 139,
+   "verdict": "CONTRADICTED",
+   "trueWording": "Walker: \"Anglo-Saxon syntactic patterns\"; diction \"stirring, alliteratively stately, [and] stern\"",
+   "note": "Misattributed. The quoted phrase and the eored/dwimmerlaik/mearas list are cited to Steve Walker 2009 (pp.143, 152-153), not Shippey 2005 - whose citations on this page are pp.55-58, 134-138, 202, 203, 259, none on Rohirrim diction (Shippey 2001 is cited only for Rohirrim names). The descriptors \"blunt\" and \"clear-sighted\" appear nowhere in the article; Walker's are \"stirring, alliteratively stately, [and] stern\". The underlying substance (Rohirrim given Anglo-Saxon syntax and revived Old English words) is supported - only the attribution and the characterisation fail."
+  },
+  "140": {
+   "index": 140,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "mediate between the modern reader",
+   "note": "Exact, cited to Shippey 2005 p.259: \"This allowed him to use the Hobbits to mediate between the modern reader and the heroic and archaic realm of fantasy.\" The register list is Shippey 2005 pp.134-138; the page names \"Dwarves, Elves, and Riders of Rohan\" where the claim says Elves, Dwarves and Rohirrim."
+  },
+  "141": {
+   "index": 141,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "O Wise People!",
+   "note": "Exact, and the surrounding sentence supports the whole claim: Pippin \"attempts a formal register\" with these words on meeting the High Elf Gildor, cited to Turner 2020 pp.389-403, framed as how \"such mediation is effected early\". Note the claim's own feature label (\"failed formal register as comedy\") goes beyond the page, which says nothing about comedy."
+  },
+  "142": {
+   "index": 142,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "alliteration of the stressed syllables",
+   "note": "Exact: \"alliteration of the stressed syllables of the first major words in each half-line is its most obvious characteristic\", immediately followed by \"The same principle applies in 'Beowulf mathelode / --on him byrne scan'\". The home-region point is also explicit: \"in another of Tolkien's scholarly jokes, the Riders of Rohan speak the Old English dialect of the place where Tolkien himself grew up\" (West Midlands)."
+  },
+  "143": {
+   "index": 143,
+   "verdict": "CONTRADICTED",
+   "trueWording": "But Tolkien did not reproduce it",
+   "note": "The quoted phrase is exact (\"the layering of differing noun- or verb-phrases, each denoting the same thing from a different perspective\") and \"Beowulf leaves much more unsaid than The Lord of the Rings\" is supported. But the claim's core - that Tolkien ABSORBED this Beowulfian habit - is directly denied: after describing it Hall writes \"This is the subtle, complex world of the Riders of Rohan. Tolkien loved it... But Tolkien did not reproduce it\", pointing instead to Sir Gawain and the Green Knight as the main literary root."
+  },
+  "144": {
+   "index": 144,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "They seem vaguely familiar and evoke images of ages past",
+   "note": "Exact. Wilton lists mathom and smial as resurrected Old English words, and quotes Tolkien: \"the language of Rohan I have accordingly made to resemble ancient English\". Two minor slips: barrow is classed not as revived but as a word \"not lost, but perhaps a bit archaic\", and the \"vaguely familiar\" sentence is about Tolkien's Old English usages generally, not Rohan's language specifically."
+  },
+  "145": {
+   "index": 145,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the thrumming current of Old English history and language",
+   "note": "Exact. The post opens by juxtaposing The Wanderer's ubi sunt lines (Liuzza translation) with \"Where now the horse and the rider?\" from The Two Towers. Nuance: the phrase appears in the negative and autobiographically - she \"did not perceive the thrumming current... that coursed beneath it\" until she studied pre-Conquest England."
+  },
+  "146": {
+   "index": 146,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "relies on the repetition of a single phrase: 'Where is'",
+   "note": "Exact (page: \"very strongly relies on the repetition of a single phrase\"), followed by \"With each occurrence of this phrase Tolkien conjures up an image belonging to the Rohirrim\". The nostalgia-through-rhetorical-question point is present but is Rosemary Woolf quoted on The Wanderer - the erotema \"confers a deep nostalgic value upon them\" - not the blogger's own claim about Tolkien's lament."
+  },
+  "147": {
+   "index": 147,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "deep time and history behind what can be seen",
+   "note": "Exact, cited to Walker 2009 p.85: the ubi sunt theme is revisited \"usually with incidental casualness\" to \"create an elegiac tone and a feeling of deep time and history behind what can be seen\", illustrated by Pippin's first sight of Minas Tirith."
+  },
+  "148": {
+   "index": 148,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a repeated stress and release pattern",
+   "note": "Exact, inside the full quotation attributed to Drout 2004 pp.137-163: \"the craftsmanship of The Lord of the Rings is consistent at all levels of construction, from the individual sentence to the macro structure of the journey, a repeated stress and release pattern\". Framing nuance: the page presents Drout as characterising Le Guin's 2001 argument."
+  },
+  "149": {
+   "index": 149,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Stress, release. Inbreath, outbreath. A heartbeat.",
+   "note": "Exact, in the Le Guin passage quoted by kate_nepveu (post dated June 4 2006): \"as simple as a rhythm can be: two beats. Stress, release. Inbreath, outbreath. A heartbeat. A walking gait—but on so vast a scale...\". The human-gait element is doubly supported: \"we walk from the Shire to the Mountain of Doom with Frodo and Sam. One, two, left, right, on foot, all the way.\""
   }
  }
 }

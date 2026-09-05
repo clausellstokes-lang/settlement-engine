@@ -1,7 +1,7 @@
 {
  "name": "ai",
  "runId": "wf_60f0a1e1-39c",
- "exportedAt": "2026-09-05T22:29:47.205Z",
+ "exportedAt": "2026-09-05T22:34:48.138Z",
  "claims": [
   {
    "feature": "theme over-explanation",
@@ -1609,6 +1609,270 @@
    "source": "Outlook Respawn on Shrine's Legacy, 2025-12-15",
    "url": "https://respawn.outlookindia.com/gaming/gaming-news/shrines-legacy-devs-deny-ai-slop-chatgpt-rumors",
    "quote": "the story felt artificial"
+  },
+  {
+   "feature": "em dash",
+   "claim": "There is no hard evidence that chatbots use more em dashes than professional human writers; their prevalence in AI output reflects training on human prose.",
+   "source": "The Ringer — Brian Phillips, 2025-08-20",
+   "url": "https://www.theringer.com/2025/08/20/pop-culture/em-dash-use-ai-artificial-intelligence-chatgpt-google-gemini",
+   "page": "Stop AI-Shaming Our Precious, Kindly Em Dashes—Please",
+   "quote": "how reliant the AI companies are on the human writers"
+  },
+  {
+   "feature": "em dash",
+   "claim": "The em dash was Emily Dickinson's signature mark, restored by later editors after publishers stripped it; treating it as an AI tell confuses the tool with the intent behind it.",
+   "source": "Focus Lab — Nadine Kavanaugh, 2026-02-09",
+   "url": "https://www.focuslab.agency/blog/the-em-dash-is-not-an-ai-tell",
+   "page": "The Em Dash Is Not an AI Tell",
+   "quote": "Machines use it because great writers always have."
+  },
+  {
+   "feature": "em dash",
+   "claim": "Google Books Ngram data show em dash frequency in published books has stayed high for centuries, so ChatGPT is mirroring professional convention rather than exhibiting a machine signature.",
+   "source": "SALT.agency — Sarah Mitchell, 2026-01-29",
+   "url": "https://salt.agency/blog/in-defence-of-the-em-dash-what-the-ai-writing-debate-gets-wrong/",
+   "page": "In Defence of the em dash",
+   "quote": "There is no simple formula for detecting AI writing."
+  },
+  {
+   "feature": "em dash",
+   "claim": "An AP Stylebook editor confirms em dashes are ubiquitous in professional journalism and predate AI; avoiding them to dodge suspicion lets machines dictate human style in a feedback loop.",
+   "source": "Writer's Guide (Substack) — Robert Roy Britt, 2026-07-28",
+   "url": "https://writersguide.substack.com/p/dont-let-ai-ban-the-em-dash",
+   "page": "AI's Assault on the Em Dash Should Worry All Writers",
+   "quote": "Em dashes aren't the problem."
+  },
+  {
+   "feature": "em dash",
+   "claim": "Measured human em dash density (mean 3.23, range 0.33–17.12 per 1,000 words) envelops the LLM range (0.0–10.62 across twelve models), and the rate is a provider-specific fine-tuning artifact, with Llama's RLHF suppressing it to zero.",
+   "source": "arXiv 2603.27006 — E. M. Freeburg, The Last Fingerprint",
+   "url": "https://arxiv.org/html/2603.27006v1",
+   "page": "How Markdown Training Shapes LLM Prose",
+   "quote": "a diagnostic signature of how a model was fine-tuned"
+  },
+  {
+   "feature": "em dash",
+   "claim": "Readers who relied on em dashes to spot ChatGPT text performed only marginally better than chance, and no single lexical or punctuation feature is definitive.",
+   "source": "The Conversation — Roger J. Kreuz, 2025-07-30",
+   "url": "https://theconversation.com/too-many-em-dashes-weird-words-like-delves-spotting-text-written-by-chatgpt-is-still-more-art-than-science-259629",
+   "page": "Spotting text written by ChatGPT is still more art than science",
+   "quote": "only marginally better than chance"
+  },
+  {
+   "feature": "em dash",
+   "claim": "Heavy em dash use in contemporary fiction has been taught by New York editors since the 1990s, and the tells cited against Shy Girl (flat voice, improbable similes, em dashes) equally fit unedited, neurodivergent or ESL human writing.",
+   "source": "Anne R. Allen, 2026-03-28",
+   "url": "https://annerallen.com/2026/03/does-the-shy-girl-ai-accusation-mean-writers-should-stop-using-the-em-dash/",
+   "page": "Does the Shy Girl Mess Mean We Give Up the Em Dash?",
+   "quote": "also be attributed to amateurish or unedited writing"
+  },
+  {
+   "feature": "em dash; triads; Oxford comma",
+   "claim": "Em dashes, serial commas and the rule of three are basic tenets of fiction that a human author can deploy in a single self-written sentence, so their presence is not evidence of generation.",
+   "source": "Sarah Goehrke (Substack), 2026-08-21",
+   "url": "https://sarahgoehrke.substack.com/p/ai-em-dashes-and-witch-hunts",
+   "page": "AI, Em-Dashes, and Witch Hunts",
+   "quote": "touted as being 'clear indicators of AI usage'"
+  },
+  {
+   "feature": "triads / rule of three",
+   "claim": "The tricolon is a canonical human device — Caesar, Lincoln, Churchill, King, fairy tales, Aristotle's beginning-middle-end — because three is the smallest count that makes a pattern.",
+   "source": "Wikipedia — Rule of three (writing)",
+   "url": "https://en.wikipedia.org/wiki/Rule_of_three_(writing)",
+   "page": "Rule of three (writing)",
+   "quote": "combines both brevity and rhythm"
+  },
+  {
+   "feature": "triads / rule of three",
+   "claim": "Craft guidance for novelists teaches deliberate use of triads (omne trium perfectum, Dickens' three spirits, three-act structure), with the only caution being restraint.",
+   "source": "Jericho Writers — Amy de la Force, 2022",
+   "url": "https://jerichowriters.com/the-rule-of-three-in-writing/",
+   "page": "The Rule Of Three In Writing: Our Guide",
+   "quote": "Don't overdo it."
+  },
+  {
+   "feature": "triads / rule of three",
+   "claim": "A detector vendor concedes that LLM triads are a reflection of effective communication strategies in human training data and that professional writing employs the rule of three for clarity.",
+   "source": "GPTZero blog — Faizan Mehdi, 2024-03-04",
+   "url": "https://gptzero.me/news/the-rule-of-three/",
+   "page": "How to Break Free from GPT's Rule of Three in Writing",
+   "quote": "a reflection of effective communication strategies embedded within their training data"
+  },
+  {
+   "feature": "antithesis / not X but Y",
+   "claim": "Even a writer who calls 'It's not X; it's Y' the biggest ChatGPT tell concedes contrastive antithesis is concise, was stylish before saturation, and is failing as a fashion cycle rather than as a device.",
+   "source": "Hardly Working (Substack) — Harjas Sandhu, 2026-01-11",
+   "url": "https://hardlyworking1.substack.com/p/how-to-avoid-sounding-like-a-stupid",
+   "page": "Some alternatives to \"It's not X; it's Y\"",
+   "quote": "contrastive antithesis is part of ChatGPT's lexicon for a reason."
+  },
+  {
+   "feature": "parallel constructions / antithesis",
+   "claim": "Wikipedia's own AI-cleanup guide states parallel constructions are common among human writers (myth-busting listicles), that none of its signs prove AI authorship, and that human writing is converging on LLM style.",
+   "source": "Wikipedia:Signs of AI writing",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "page": "Signs of AI writing",
+   "quote": "Not all text featuring these indicators is AI-generated"
+  },
+  {
+   "feature": "detection heuristics",
+   "claim": "Wikipedia's guide warns that automated detectors have non-trivial error rates and cites a 2025 study finding human discrimination of LLM text no better than chance.",
+   "source": "Wikipedia:Signs of AI writing",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "page": "Signs of AI writing",
+   "quote": "Human speech and writing is being influenced by LLMs"
+  },
+  {
+   "feature": "vocabulary (delve)",
+   "claim": "Nigerian and other British-colonial-educated English speakers use 'delve' as an ordinary word from school onward, so a single-word tell convicts entire human dialects.",
+   "source": "Vanguard (Nigeria), 2024-04",
+   "url": "https://www.vanguardngr.com/2024/04/nigerians-tackle-american-author-for-claiming-delve-is-only-used-by-chatgpt/",
+   "page": "Nigerians tackle American author for claiming 'delve' is only used by ChatGPT",
+   "quote": "no one used basic words like 'delve'"
+  },
+  {
+   "feature": "vocabulary (delve) — counter-counter",
+   "claim": "Corpus analysis finds the 21 LLM focal words (delve, intricate, underscore, realm...) are probably not overrepresented in training data and not especially prevalent in any human English variety, undercutting the 'it's Nigerian English' defence while confirming the base-rate shift in LLM output is real and likely post-training.",
+   "source": "arXiv 2412.11385 — Juzek & Ward, Why Does ChatGPT 'Delve' So Much? (COLING 2025)",
+   "url": "https://arxiv.org/html/2412.11385v1",
+   "page": "Sources of Lexical Overrepresentation in LLMs",
+   "quote": "probably not overrepresented in the training data"
+  },
+  {
+   "feature": "machine detectors (perplexity)",
+   "claim": "Seven commercial detectors flagged 61.22% of 91 human-written TOEFL essays as AI (19.78% unanimously, 97.80% by at least one) while scoring near-perfectly on US 8th-grade essays, because they punish low-perplexity plain prose.",
+   "source": "arXiv 2304.02819 — Liang, Yuksekgonul, Mao, Wu, Zou, 2023",
+   "url": "https://arxiv.org/abs/2304.02819",
+   "page": "GPT detectors are biased against non-native English writers",
+   "quote": "average false positive rate: 61.22%"
+  },
+  {
+   "feature": "machine detectors (evasion)",
+   "claim": "A single 'employ literary language' self-edit prompt dropped detection of ChatGPT essays from up to 100% to up to 13% and of abstracts from 68% to 28%, so ornate prose evades detectors — the inverse of the folk tells.",
+   "source": "arXiv 2304.02819 — Liang et al., 2023",
+   "url": "https://arxiv.org/abs/2304.02819",
+   "page": "GPT detectors are biased against non-native English writers",
+   "quote": "detection rates dropping from up to 100% to up to 13%"
+  },
+  {
+   "feature": "machine detectors (bias)",
+   "claim": "Detectors learn that predictable word choice and simple sentences mean AI, so non-native writers' restricted vocabulary is misread as machine output.",
+   "source": "The Markup — Tara García Mathewson, 2023-08-14",
+   "url": "https://themarkup.org/machine-learning/2023/08/14/ai-detection-tools-falsely-accuse-international-students-of-cheating",
+   "page": "AI Detection Tools Falsely Accuse International Students of Cheating",
+   "quote": "inherently discriminates against non-native authors"
+  },
+  {
+   "feature": "machine detectors (vendor rebuttal)",
+   "claim": "A detector vendor's rebuttal disputes the Stanford sample (91 forum essays, 8th-grade comparison, old detector version) but still reports a 5.04% false-positive rate on 1,500+ IELTS essays — roughly one wrongful accusation in twenty (vendor with a stake).",
+   "source": "Originality.AI, 2025-12-11",
+   "url": "https://originality.ai/blog/are-ai-checker-biased-against-non-native-english-speakers",
+   "page": "Are AI Checkers Biased Against Non-Native English Speakers?",
+   "quote": ""
+  },
+  {
+   "feature": "machine detectors",
+   "claim": "OpenAI withdrew its own AI-text classifier within six months for low accuracy after stating at launch that reliable detection of all AI-written text is impossible.",
+   "source": "Search Engine Land — Danny Goodwin, 2023-07-26",
+   "url": "https://searchengineland.com/openai-ai-classifier-no-longer-available-429912",
+   "page": "OpenAI's AI Text Classifier no longer available",
+   "quote": "It is impossible to reliably detect all AI-written text"
+  },
+  {
+   "feature": "machine detectors (false positives on canonical prose)",
+   "claim": "GPTZero flagged a section of the US Constitution and selections from the Bible as AI-generated because heavily trained-on human texts are exactly what models reproduce.",
+   "source": "Sensei Enterprises — Sharon D. Nelson, 2023-07-18",
+   "url": "https://senseient.com/ride-the-lightning/ai-detector-believes-the-u-s-constitution-was-written-by-ai/",
+   "page": "AI Detector Believes the U.S. Constitution Was Written by AI",
+   "quote": "Selections from The Bible also show up as AI-generated"
+  },
+  {
+   "feature": "machine detectors (institutional)",
+   "claim": "Vanderbilt disabled Turnitin's detector: even the vendor's claimed 1% false-positive rate implies about 750 wrongly flagged papers per 75,000, with extra risk to non-native writers, and reliable detection may not be possible at all.",
+   "source": "Vanderbilt University Brightspace, 2023-08-16",
+   "url": "https://www.vanderbilt.edu/brightspace/2023/08/16/guidance-on-ai-detection-and-why-were-disabling-turnitins-ai-detector/",
+   "page": "Guidance on AI Detection and Why We're Disabling Turnitin's AI Detector",
+   "quote": "if it is even possible"
+  },
+  {
+   "feature": "machine detectors (theory)",
+   "claim": "Recursive paraphrasing breaks watermark, neural, zero-shot and retrieval detectors, and the best achievable detector degrades toward random as LLM text distributions approach human ones; spoofing can also make human text read as AI.",
+   "source": "arXiv 2303.11156 — Sadasivan et al., Can AI-Generated Text be Reliably Detected?",
+   "url": "https://arxiv.org/abs/2303.11156",
+   "page": "Can AI-Generated Text be Reliably Detected?",
+   "quote": "our recursive paraphrasing method can significantly reduce detection rates"
+  },
+  {
+   "feature": "human detection in the wild",
+   "claim": "Unmodified GPT-4 answers submitted to five real university psychology modules went 94% undetected by markers and scored about half a grade boundary above real students.",
+   "source": "PLOS ONE — Scarfe et al., 2024",
+   "url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0305354",
+   "page": "A real-world test of artificial intelligence infiltration of a university examinations system",
+   "quote": "94% of our AI submissions were undetected"
+  },
+  {
+   "feature": "human heuristics",
+   "claim": "Across six experiments (N = 4,600) people could not detect AI self-presentations and leaned on wrong cues — first-person pronouns, contractions, family topics — which AI can exploit to read as more human than humans.",
+   "source": "PNAS 2023 / arXiv 2206.07271 — Jakesch, Hancock, Naaman",
+   "url": "https://arxiv.org/abs/2206.07271",
+   "page": "Human heuristics for AI-generated language are flawed",
+   "quote": "more human than human"
+  },
+  {
+   "feature": "human heuristics",
+   "claim": "Untrained evaluators distinguished GPT-3 stories, news and recipes from human text at chance; training lifted accuracy only to 55%, and evaluators gave contradictory reasons for their calls.",
+   "source": "ACL 2021 / arXiv 2107.00061 — Clark et al.",
+   "url": "https://arxiv.org/abs/2107.00061",
+   "page": "All That's 'Human' Is Not Gold",
+   "quote": "often contradictory reasons evaluators gave for their judgments"
+  },
+  {
+   "feature": "human heuristics (overconfidence)",
+   "claim": "254 Czech readers scored 55.4% without feedback, wrongly expecting AI text to be rigid and administrative and readable text to be human, and made the most errors when most confident (below chance at peak confidence).",
+   "source": "arXiv 2505.01877 — Milička, Marklová, Drobil, Pospíšilová, 2025",
+   "url": "https://arxiv.org/html/2505.01877",
+   "page": "Humans can learn to detect AI-generated texts, or at least learn when they can't",
+   "quote": "make the most errors precisely when they feel most confident"
+  },
+  {
+   "feature": "expert detection (contrast case)",
+   "claim": "Five heavy ChatGPT users' majority vote misclassified only 1 of 300 articles even under paraphrase and humanization, but they relied on AI vocabulary plus holistic judgments of formality, originality and clarity — not punctuation counts.",
+   "source": "ACL 2025 / arXiv 2501.15654 — Russell, Karpinska, Iyyer",
+   "url": "https://arxiv.org/abs/2501.15654",
+   "page": "People who frequently use ChatGPT for writing tasks are accurate and robust detectors of AI-generated text",
+   "quote": "misclassifies only 1 of 300 articles"
+  },
+  {
+   "feature": "reader preference (poetry)",
+   "claim": "696 non-expert readers judged AI imitations of ten canonical poets more human and slightly better than the originals, because the imitations strip the ambiguity and complexity that inexperienced readers read as 'not making sense'.",
+   "source": "The Conversation — Jon Stone, 2024-11-15 (on Porter & Machery, Sci. Reports 2024)",
+   "url": "https://theconversation.com/people-cant-tell-the-difference-between-human-and-ai-generated-poetry-new-study-243750",
+   "page": "People can't tell the difference between human and AI-generated poetry",
+   "quote": "slightly preferring the imitation to the real thing"
+  },
+  {
+   "feature": "reader preference (critique)",
+   "claim": "The poetry-indistinguishability result collapses under expert reading: the AI poems separate at 87.8% on formal metrics alone, paid-per-task raters were scoring comprehensibility, and imitation of known styles cannot test the innovation human poets are judged on.",
+   "source": "The Luddite — Nature's Folly",
+   "url": "https://theluddite.org/post/ai-poetry.html",
+   "page": "A Response to 'AI-generated poetry is indistinguishable...'",
+   "quote": "human poets are expected to innovate on style"
+  },
+  {
+   "feature": "homogenization",
+   "claim": "AI-idea assistance made weaker writers' stories up to 26.6% better written and 22.6% more enjoyable, yet made stories 10.7% more similar to each other — the real failure is collective sameness, invisible in any single text's surface features.",
+   "source": "ScienceDaily on Doshi & Hauser, Science Advances, 2024-07-12",
+   "url": "https://www.sciencedaily.com/releases/2024/07/240712222127.htm",
+   "page": "AI found to boost individual creativity -- at the expense of less varied content",
+   "quote": "up to 26.6% better written"
+  },
+  {
+   "feature": "originality (where the gap actually sits)",
+   "claim": "Ten professional writers applying a 14-test Torrance creative-writing rubric found LLM stories pass 3–10x fewer tests than professionals', with the deficit in originality and elaboration rather than fluency or structure; LLM judges did not correlate with the experts.",
+   "source": "CHI 2024 / arXiv 2309.14556 — Chakrabarty et al.",
+   "url": "https://arxiv.org/abs/2309.14556",
+   "page": "Art or Artifice? Large Language Models and the False Promise of Creativity",
+   "quote": "pass 3-10X less TTCW tests"
   }
  ],
  "sources": [
@@ -2408,6 +2672,258 @@
    "title": "Why Can't LLMs Do a Normal Metaphor? (Eleanor Stern, 2026-06-11)",
    "url": "https://wickedtongue.substack.com/p/why-cant-llms-do-a-normal-metaphor",
    "kind": "craft essay (paywalled; only preview read)",
+   "substantive": false
+  },
+  {
+   "title": "Stop AI-Shaming Our Precious, Kindly Em Dashes—Please (Brian Phillips, The Ringer, 2025-08-20)",
+   "url": "https://www.theringer.com/2025/08/20/pop-culture/em-dash-use-ai-artificial-intelligence-chatgpt-google-gemini",
+   "kind": "journalism / essay",
+   "substantive": true
+  },
+  {
+   "title": "The Em Dash Is Not an AI Tell (Nadine Kavanaugh, Focus Lab, 2026-02-09)",
+   "url": "https://www.focuslab.agency/blog/the-em-dash-is-not-an-ai-tell",
+   "kind": "agency blog / essay",
+   "substantive": true
+  },
+  {
+   "title": "In Defence of the em dash: What the AI writing debate gets wrong (Sarah Mitchell, SALT.agency, 2026-01-29)",
+   "url": "https://salt.agency/blog/in-defence-of-the-em-dash-what-the-ai-writing-debate-gets-wrong/",
+   "kind": "agency blog with Ngram data",
+   "substantive": true
+  },
+  {
+   "title": "AI's Assault on the Em Dash Should Worry All Writers (Robert Roy Britt, Writer's Guide Substack, 2026-07-28)",
+   "url": "https://writersguide.substack.com/p/dont-let-ai-ban-the-em-dash",
+   "kind": "newsletter essay",
+   "substantive": true
+  },
+  {
+   "title": "The Last Fingerprint: How Markdown Training Shapes LLM Prose (E. M. Freeburg, arXiv 2603.27006)",
+   "url": "https://arxiv.org/html/2603.27006v1",
+   "kind": "preprint, measured corpus",
+   "substantive": true
+  },
+  {
+   "title": "Too many em dashes? Weird words like 'delves'? Spotting text written by ChatGPT is still more art than science (Roger J. Kreuz, The Conversation, 2025-07-30)",
+   "url": "https://theconversation.com/too-many-em-dashes-weird-words-like-delves-spotting-text-written-by-chatgpt-is-still-more-art-than-science-259629",
+   "kind": "academic explainer",
+   "substantive": true
+  },
+  {
+   "title": "Does the Shy Girl Mess Mean We Give Up the Em Dash? (Anne R. Allen, 2026-03-28)",
+   "url": "https://annerallen.com/2026/03/does-the-shy-girl-ai-accusation-mean-writers-should-stop-using-the-em-dash/",
+   "kind": "author blog",
+   "substantive": true
+  },
+  {
+   "title": "AI, Em-Dashes, and Witch Hunts (Sarah Goehrke, Substack, 2026-08-21)",
+   "url": "https://sarahgoehrke.substack.com/p/ai-em-dashes-and-witch-hunts",
+   "kind": "author newsletter",
+   "substantive": true
+  },
+  {
+   "title": "Rule of three (writing) — Wikipedia",
+   "url": "https://en.wikipedia.org/wiki/Rule_of_three_(writing)",
+   "kind": "encyclopedia",
+   "substantive": true
+  },
+  {
+   "title": "The Rule Of Three In Writing: Our Guide (Amy de la Force, Jericho Writers, 2022)",
+   "url": "https://jerichowriters.com/the-rule-of-three-in-writing/",
+   "kind": "craft guide",
+   "substantive": true
+  },
+  {
+   "title": "How to Break Free from GPT's Rule of Three in Writing (Faizan Mehdi, GPTZero, 2024-03-04)",
+   "url": "https://gptzero.me/news/the-rule-of-three/",
+   "kind": "detector-vendor blog",
+   "substantive": true
+  },
+  {
+   "title": "Some alternatives to \"It's not X; it's Y\" (Harjas Sandhu, Hardly Working Substack, 2026-01-11)",
+   "url": "https://hardlyworking1.substack.com/p/how-to-avoid-sounding-like-a-stupid",
+   "kind": "newsletter essay",
+   "substantive": true
+  },
+  {
+   "title": "Wikipedia:Signs of AI writing",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "kind": "Wikipedia project essay",
+   "substantive": true
+  },
+  {
+   "title": "Nigerians tackle American author for claiming 'delve' is only used by ChatGPT (Vanguard, 2024-04)",
+   "url": "https://www.vanguardngr.com/2024/04/nigerians-tackle-american-author-for-claiming-delve-is-only-used-by-chatgpt/",
+   "kind": "journalism",
+   "substantive": true
+  },
+  {
+   "title": "Why Does ChatGPT 'Delve' So Much? Exploring the Sources of Lexical Overrepresentation in LLMs (Juzek & Ward, arXiv 2412.11385 / COLING 2025)",
+   "url": "https://arxiv.org/html/2412.11385v1",
+   "kind": "peer-reviewed paper (preprint HTML)",
+   "substantive": true
+  },
+  {
+   "title": "GPT detectors are biased against non-native English writers (Liang et al., arXiv 2304.02819, 2023) — abstract, PDF text via pypdf, and ar5iv HTML",
+   "url": "https://arxiv.org/abs/2304.02819",
+   "kind": "peer-reviewed paper (Patterns 2023)",
+   "substantive": true
+  },
+  {
+   "title": "AI Detection Tools Falsely Accuse International Students of Cheating (Tara García Mathewson, The Markup, 2023-08-14)",
+   "url": "https://themarkup.org/machine-learning/2023/08/14/ai-detection-tools-falsely-accuse-international-students-of-cheating",
+   "kind": "journalism",
+   "substantive": true
+  },
+  {
+   "title": "Are AI Checkers Biased Against Non-Native English Speakers? A Response to a Flawed Stanford Study (Originality.AI, 2025-12-11)",
+   "url": "https://originality.ai/blog/are-ai-checker-biased-against-non-native-english-speakers",
+   "kind": "detector-vendor rebuttal (stake)",
+   "substantive": true
+  },
+  {
+   "title": "OpenAI's AI Text Classifier no longer available due to 'low rate of accuracy' (Danny Goodwin, Search Engine Land, 2023-07-26)",
+   "url": "https://searchengineland.com/openai-ai-classifier-no-longer-available-429912",
+   "kind": "trade journalism",
+   "substantive": true
+  },
+  {
+   "title": "AI Detector Believes the U.S. Constitution Was Written by AI (Sharon D. Nelson, Sensei Enterprises, 2023-07-18)",
+   "url": "https://senseient.com/ride-the-lightning/ai-detector-believes-the-u-s-constitution-was-written-by-ai/",
+   "kind": "legal-tech blog citing Ars Technica",
+   "substantive": true
+  },
+  {
+   "title": "Guidance on AI Detection and Why We're Disabling Turnitin's AI Detector (Vanderbilt University, 2023-08-16)",
+   "url": "https://www.vanderbilt.edu/brightspace/2023/08/16/guidance-on-ai-detection-and-why-were-disabling-turnitins-ai-detector/",
+   "kind": "institutional policy statement",
+   "substantive": true
+  },
+  {
+   "title": "Can AI-Generated Text be Reliably Detected? (Sadasivan et al., arXiv 2303.11156)",
+   "url": "https://arxiv.org/abs/2303.11156",
+   "kind": "preprint (abstract)",
+   "substantive": true
+  },
+  {
+   "title": "A real-world test of artificial intelligence infiltration of a university examinations system (Scarfe et al., PLOS ONE 2024)",
+   "url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0305354",
+   "kind": "peer-reviewed paper",
+   "substantive": true
+  },
+  {
+   "title": "Human heuristics for AI-generated language are flawed (Jakesch, Hancock, Naaman, PNAS 2023 via arXiv 2206.07271)",
+   "url": "https://arxiv.org/abs/2206.07271",
+   "kind": "peer-reviewed paper (abstract)",
+   "substantive": true
+  },
+  {
+   "title": "All That's 'Human' Is Not Gold: Evaluating Human Evaluation of Generated Text (Clark et al., ACL 2021, arXiv 2107.00061)",
+   "url": "https://arxiv.org/abs/2107.00061",
+   "kind": "peer-reviewed paper (abstract)",
+   "substantive": true
+  },
+  {
+   "title": "Humans can learn to detect AI-generated texts, or at least learn when they can't (Milička et al., arXiv 2505.01877, 2025)",
+   "url": "https://arxiv.org/html/2505.01877",
+   "kind": "preprint (full HTML)",
+   "substantive": true
+  },
+  {
+   "title": "People who frequently use ChatGPT for writing tasks are accurate and robust detectors of AI-generated text (Russell, Karpinska, Iyyer, ACL 2025, arXiv 2501.15654)",
+   "url": "https://arxiv.org/abs/2501.15654",
+   "kind": "peer-reviewed paper (abstract)",
+   "substantive": true
+  },
+  {
+   "title": "People can't tell the difference between human and AI-generated poetry – new study (Jon Stone, The Conversation, 2024-11-15)",
+   "url": "https://theconversation.com/people-cant-tell-the-difference-between-human-and-ai-generated-poetry-new-study-243750",
+   "kind": "academic explainer on Porter & Machery 2024",
+   "substantive": true
+  },
+  {
+   "title": "Nature's Folly: A Response to 'AI-generated poetry is indistinguishable...' (The Luddite)",
+   "url": "https://theluddite.org/post/ai-poetry.html",
+   "kind": "critical essay citing Ernest Davis",
+   "substantive": true
+  },
+  {
+   "title": "AI found to boost individual creativity -- at the expense of less varied content (ScienceDaily on Doshi & Hauser, Science Advances 2024-07-12)",
+   "url": "https://www.sciencedaily.com/releases/2024/07/240712222127.htm",
+   "kind": "press summary of peer-reviewed paper",
+   "substantive": true
+  },
+  {
+   "title": "Art or Artifice? Large Language Models and the False Promise of Creativity (Chakrabarty et al., CHI 2024, arXiv 2309.14556)",
+   "url": "https://arxiv.org/abs/2309.14556",
+   "kind": "peer-reviewed paper (abstract)",
+   "substantive": true
+  },
+  {
+   "title": "Contra generative AI detection in higher education assessments (arXiv 2312.05241)",
+   "url": "https://arxiv.org/abs/2312.05241",
+   "kind": "preprint (abstract only; too thin to cite)",
+   "substantive": false
+  },
+  {
+   "title": "Human heuristics for AI-generated language are flawed — PNAS direct page (HTTP 403; used arXiv mirror)",
+   "url": "https://www.pnas.org/doi/10.1073/pnas.2208839120",
+   "kind": "fetch failed",
+   "substantive": false
+  },
+  {
+   "title": "AI-generated poetry is indistinguishable from human-written poetry and is rated more favorably — Nature Sci. Reports (redirected to IdP login; not read directly)",
+   "url": "https://www.nature.com/articles/s41598-024-76900-1",
+   "kind": "fetch failed",
+   "substantive": false
+  },
+  {
+   "title": "Online uproar over Nigerian English flagged as ChatGPT-ish — BusinessDay NG (HTTP 403)",
+   "url": "https://businessday.ng/technology/article/online-uproar-over-nigerian-english-flagged-as-chatgpt-ish/",
+   "kind": "fetch failed",
+   "substantive": false
+  },
+  {
+   "title": "New AI classifier for indicating AI-written text — OpenAI (HTTP 403; used Search Engine Land)",
+   "url": "https://openai.com/index/new-ai-classifier-for-indicating-ai-written-text/",
+   "kind": "fetch failed",
+   "substantive": false
+  },
+  {
+   "title": "A novelist was accused of using AI — CBC News on Shy Girl (HTTP 403)",
+   "url": "https://www.cbc.ca/news/business/publishing-industry-ai-shy-girl-fallout-9.7155292",
+   "kind": "fetch failed",
+   "substantive": false
+  },
+  {
+   "title": "'ChatGPT Hyphen': Are Em Dashes a Giveaway of AI Writing? — Rolling Stone (HTTP 402 tollbit)",
+   "url": "https://www.rollingstone.com/culture/culture-features/chatgpt-hypen-em-dash-ai-writing-1235314945/",
+   "kind": "fetch failed",
+   "substantive": false
+  },
+  {
+   "title": "Is the Em Dash an AI Tell? We Measured Dash Density — SlopDetector (ECONNREFUSED twice)",
+   "url": "https://slopdetector.org/blog/em-dash-ai-tell-data",
+   "kind": "fetch failed",
+   "substantive": false
+  },
+  {
+   "title": "Can linguists distinguish between ChatGPT/AI and human writing? — Casal & Kessler 2023, ScienceDirect (HTTP 403; cited only via Kreuz)",
+   "url": "https://www.sciencedirect.com/science/article/pii/S2772766123000289",
+   "kind": "fetch failed",
+   "substantive": false
+  },
+  {
+   "title": "The Paul Graham vs Nigerian Twitter Saga — Medium (HTTP 403)",
+   "url": "https://medium.com/@moyosoreale/the-paul-graham-vs-nigerian-twitter-saga-lexical-racism-and-language-bias-masked-as-chatgpt-53ee9f6459aa",
+   "kind": "fetch failed",
+   "substantive": false
+  },
+  {
+   "title": "AI in Writing: The Literary Witch Hunt — C. M. Quarterman, Medium (HTTP 403)",
+   "url": "https://medium.com/@cmquarterman/ai-in-writing-the-literary-witch-hunt-f12b024f1bfd",
+   "kind": "fetch failed",
    "substantive": false
   }
  ],
