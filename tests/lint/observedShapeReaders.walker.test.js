@@ -838,7 +838,12 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
         'toSid on grievance',
         REAL.identity,
       ]);
-      expect(live.virtualDormantWriters.cleared).toBe(4);
+      // 4 → 5 READS at the §900 composition (Fable chair): ENC-4b's `approacherNidOf` is a FIFTH read of
+      // `grievance.toSid` — an identity the door already clears — so the read count moves and the
+      // enumerated identity list above does NOT (still four). Attributed by ENC-4c's receipt and by the
+      // walker green at every dock but ENC-4b's; a read of a cleared identity is exactly what this door
+      // exists to clear, and the list is what makes a fifth IDENTITY impossible to absorb silently.
+      expect(live.virtualDormantWriters.cleared).toBe(5);
       // …and the cleared read is really GONE from the post-filter findings, while the
       // raw scan still holds it — the door narrows the verdict, it does not blind the
       // detector.
@@ -861,7 +866,7 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
     });
 
     test('the notice names the door in both states', () => {
-      expect(virtualDormantWriterNotice(live.virtualDormantWriters)).toMatch(/cleared 4 read/);
+      expect(virtualDormantWriterNotice(live.virtualDormantWriters)).toMatch(/cleared 5 read/); // five reads across four identities (ENC-4b's fifth read of grievance.toSid)
       expect(virtualDormantWriterNotice({ applied: false })).toMatch(/NOT APPLIED/);
     });
   });
