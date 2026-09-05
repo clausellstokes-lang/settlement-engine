@@ -23,6 +23,7 @@ Updated 2026-09-05 by the Fable chair (after §898: product 5e28d5c83, ledger 6c
 ## ⛔ VITEST HOLD in force (09-05 ~09:50): the four running lanes hold all vitest until the chair sends RESUME after the §899 gate. SEND RESUME.
 
 ## QUEUED — next slot takes the top row
+23. ~~DOCKET-3~~ DISPATCHED 09-05 (`briefs/brief-DOCKET-3.md`; dock laneDOCKET2 on top of a6f01d757; the chair's six band words verbatim + the safetyProfile:218 repair RULED; on VITEST HOLD).
 22. ~~DESK-TIMEBAND~~ DISPATCHED 09-05 (`briefs/brief-DESK-TIMEBAND.md`; dock laneTIMEBAND @ a2af55cde, the desk consist tip; GEN2's findings 4 (fill) and 5 (measure only); on VITEST HOLD).
 21. ~~PANTHEON-ROSTER~~ DISPATCHED 09-05 (`briefs/brief-PANTHEON-ROSTER.md`; dock laneROSTER @ ec1b5e3e9, the §899 composed tip; the six registration freezes lifted into ONE literal roster fixture — RULED; on VITEST HOLD).
 20. ~~DESK-GEN3~~ DISPATCHED 09-05 (`briefs/brief-DESK-GEN3.md`; dock laneGEN2 on top of a4ce9f80f; the seven dormant-at-birth blocks + DS-GEN-18 with the chair's `{institution}` mechanism to TEST; on VITEST HOLD until RESUME).
