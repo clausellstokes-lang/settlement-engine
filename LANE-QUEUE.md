@@ -28,6 +28,8 @@ Updated 2026-09-05 by the Fable chair (after §897: product fd8b6df00, ledger c8
 
 11. **ENC-4** — BRIEFED (`briefs/brief-ENC-4.md`, dock laneENC4 @ fd8b6df00): the chance meeting's Herald line under ROAD B; the words are sealed at `refs/preserve/enc5-words-2026-09-04`.
 
+12. **DOCKET** — BRIEFED (`briefs/brief-DOCKET.md`; item 1: the undeclared `pg` import → dynamic + typed skip; more items appended as recovered).
+
 ## CHAIR-OWNED, NOT LANES
 ~~ANCHORS → §897~~ LANDED · replay + land the desk consist after
 OSR-SCHEMA17 · every register act · every ceiling ruling (clamp: ONCE, at the final wave) · the words of DESK-7 and ENC-5.
