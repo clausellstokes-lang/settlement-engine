@@ -5,14 +5,16 @@ Updated 2026-09-05 by the Fable chair (after §897: product fd8b6df00, ledger c8
 | lane | kind | dock / base | brief | started |
 |---|---|---|---|---|
 | ~~LIGHT-PLAN~~ DONE → refs/preserve/light-plan-2026-09-05 | | | | |
-| PROSE-REBASE | build (lighting POSITION 0) | lanePROSE @ df7cdd37e → replay onto fd8b6df00 | briefs/brief-PROSE-REBASE.md | 09-05 |
+| ~~PROSE-REBASE~~ DONE → 3 cars sealed `prose-train-2026-09-05`, replayed to lanePROSE2 @ fd8b6df00 = 4efce2e95; registers + gate NOW (chair) | | | | |
 | ~~WARMS-CAR0~~ DONE → refs/preserve/warms-car0-2026-09-05; volume landed §896.2 | | | | |
 | CLAMP-W2 | build (6 files) | laneCLAMPW2 @ df7cdd37e → replay onto fd8b6df00 | briefs/brief-CLAMP-W2.md | 09-05 |
-| DESK-WARFAITH | build | laneWARFAITH @ 940d161ca | briefs/brief-DESK-WARFAITH.md | 09-05 |
+| ~~DESK-WARFAITH~~ DONE → 7dba5508b sealed `desk-warfaith-2026-09-05` (6/9 mounted; 3 dark measured; the PUBLIC/SHARED pool is OWNER-gated §885.3) | | | | |
+| PDFDRIFT | build (repair) | lanePDF @ df7cdd37e → replay | briefs/brief-PDFDRIFT.md | 09-05 |
+| DESK-DEF2 | build | laneDEF2 @ 940d161ca | briefs/brief-DESK-DEF2.md | 09-05 |
 | DESK-GEN2 | build (3–5 cars) | laneGEN2 @ 940d161ca | briefs/brief-DESK-GEN2.md | 09-05 |
 
 ## QUEUED — next slot takes the top row
-1. **OSR-SCHEMA17** — build; dock laneINTEG-tree @ 940d161ca; briefs/brief-OSR-SCHEMA17.md. ⛔ Dispatch only when NO chair
+1. **OSR-SCHEMA17** — NEXT after the PROSE gate (its corpus scan is heavy) — build; dock laneINTEG-tree @ 940d161ca; briefs/brief-OSR-SCHEMA17.md. ⛔ Dispatch only when NO chair
    gate is running (its proofs run vitest and the corpus scan is heavy). Frees the 23-car desk consist.
 2. **PDFDRIFT** — BRIEFED (`briefs/brief-PDFDRIFT.md`, dock lanePDF @ df7cdd37e): route the two campaign-less export sites through `resolveExportSeam`; DECLARED paid-surface change.
 3. **DESK-ECON2** — BRIEFED (`briefs/brief-DESK-ECON2.md`, dock laneECON2 @ 940d161ca): 8 dark blocks + DESK-7 (the chair's eleven words are AUTHORED and sealed `refs/preserve/desk7-words-2026-09-05`) + DESK-10 + DESK-11.
