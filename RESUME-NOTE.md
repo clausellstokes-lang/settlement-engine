@@ -26,3 +26,10 @@ Kit: `git archive refs/preserve/chair-tools-2026-09-05 | tar -x -C $SC` (SC = th
 - zsh: an unquoted `$VAR` holding several paths is ONE word — vitest saw "No test files found" for four real files; run through `sh -c` or `${=VAR}`.
 - The register-row unit map is per TABLE: copying a sibling's map onto a two-leaf table lists every orphan on the all-or-none arm.
 - The main tree's package.json is a FOREIGN old variant (memory: the-main-trees-package-json-is-a-foreign-old-variant).
+
+## §900 ORDER OF ACTS FROM HERE (each proved before the next)
+1. Wait for DESK-900-CARS (in laneDESKINT). Then replay the late three onto its tip: `sh replay-cars.sh laneDESKINT 38474a59e laneTIMEBAND:a2af55cde laneGEN2:940d161ca laneHOLDSAFE:5e28d5c83` (GEN2/HOLDSAFE only after their lanes report; conflicts: registry via the resolver, anything else by hand; the tool skips applied cars).
+2. `sh build-900-chair.sh` (the edge re-mint ritual + the full build); write the WORKER_BUNDLE_CEILING_BYTES arm as a chair car from the printed bytes; diff listing-900.txt by filename against HORIZON-B1's receipt.
+3. The WHOLE suite at the final composed tip (`npx vitest run`, no filter, in a clean proof dock — `laneDESKPROOF` re-cut at the tip); fix cars for every red that is not a register lag; attribute at base.
+4. Registers, LAST, in DESK-LANDING-PLAN.md §3 order (a–g + f2 wizard re-sign); doors that refuse a dirty tree go FIRST or between commits; then run-ratchet (kit stamped by `mk-landing-kit.py 900 laneDESKINT 38474a59e… landing-desk-2026-09-05 <cars>`), commit-totals, the owed-ledger car if rows retire, the gate, after-cas, collect from `texts-900.draft.md` (fill EVERY `__X__` — the guard is `__[A-Z0-9_]+__`, read what it finds).
+5. The L-PROBE full battery's receipt (`lprobe-out-899-full/`) feeds L-HOMES (car 1 running in laneLH1); cars 2–9 dispatch as slots free.
