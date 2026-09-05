@@ -14,7 +14,7 @@ s=io.open(SC+'/after-cas-897.sh',encoding='utf-8').read()
 s=s.replace('after-cas-897.sh — ONE command from a green ANCHORS gate log to the §897 ledger act.','after-cas-%s.sh — ONE command from a green gate log to the §%s ledger act (stamped by mk-landing-kit.py).'%(n,n))
 s=s.replace('D=$SC/laneANCH2','D=$SC/'+a.dock).replace('BASE=df7cdd37e11bde8365c0322f0c882f61988865d5; LOG=$SC/gate-anch.log','BASE=%s; LOG=$SC/gate-%s.log'%(a.base,n))
 s=s.replace("grep -q '^GATE_CARS=4$'","grep -q '^GATE_CARS=%s$'"%a.cars).replace('did not run over 4 cars','did not run over %s cars'%a.cars).replace('"$LOG" 4 >','"$LOG" %s >'%a.cars)
-s=s.replace('chair-verify-897','chair-verify-'+n).replace('landing-anchors-2026-09-05',a.seal).replace('cas-897','cas-'+n).replace('payload-897','payload-'+n).replace('collect-897','collect-'+n).replace("'^§897:'","'^§%s:'"%n)
+s=s.replace('§897 did not land','§%s did not land'%n).replace('chair-verify-897','chair-verify-'+n).replace('landing-anchors-2026-09-05',a.seal).replace('cas-897','cas-'+n).replace('payload-897','payload-'+n).replace('collect-897','collect-'+n).replace("'^§897:'","'^§%s:'"%n)
 assert '897' not in s.replace('mk-landing-kit','') or n=='897', [l for l in s.split('\n') if '897' in l]
 io.open(os.path.join(out,'after-cas-%s.sh'%n),'w',encoding='utf-8').write(s)
 # --- collect
