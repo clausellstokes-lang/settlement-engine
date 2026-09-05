@@ -234,6 +234,7 @@ export const createCustomContentRuntimeActions = (set, get) => {
    *   definitionId?:string|null,
    *   environment?:object|null,
    *   expectedActiveEnvironmentRevisionId?:string|null,
+   *   charsetTable?:unknown,
    * }} request
    */
   applyCustomContentCommand: async (request = {}) => {
