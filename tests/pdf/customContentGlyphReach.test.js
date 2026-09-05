@@ -192,10 +192,12 @@ function sentinelPack() {
  * (metropolis/mediterranean/coastal/port at `charset-reach-a` and
  * city/norse/river/crossroads at `charset-reach-b`), which agreed exactly. Each
  * row DECLARES `dossier-pdf` in schema/custom-content.manifest.json and reached
- * NEITHER rendered dossier. Ten of the fifteen dossier-declaring fields are here;
- * the five that DID arrive are institutions.name, institutions.category,
- * institutions.description, resources.name and factions-side rows the dossier
- * prints directly.
+ * NEITHER rendered dossier. FOURTEEN fields declare `dossier-pdf`; ten are here,
+ * and the FOUR that did arrive are institutions.name, institutions.category,
+ * institutions.description and resources.name. (An earlier cut of this docblock
+ * and of the commit body that landed it said "ten of fifteen" and named five
+ * arrivals; the declared set is fourteen and the arrivals are four -- counted,
+ * not remembered.)
  *
  * WHAT THIS LIST IS NOT. It is not a proof of over-declaration. This instrument
  * cannot separate "the manifest claims a reach the dossier does not have" from
