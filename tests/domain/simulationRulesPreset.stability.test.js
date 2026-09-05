@@ -7,9 +7,15 @@ import {
   DEFAULT_SIMULATION_RULES,
   DEFAULT_SIMULATION_PRESET_ID,
   CUSTOM_SIMULATION_PRESET_ID,
+  NEW_CAMPAIGN_SIMULATION_PRESET_ID,
   SIMULATION_RULE_PRESETS,
+  newCampaignSimulationRules,
   normalizeSimulationRules,
 } from '../../src/domain/worldPulse/simulationRules.js';
+import {
+  createNewCampaignWorldState,
+  ensureWorldState,
+} from '../../src/domain/worldPulse/worldState.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 // F0 structural tripwire (guards the RULE_COMPARISON_KEYS churn trap): preset
@@ -487,5 +493,145 @@ describe('simulation rules preset — stability under future-flag churn', () => 
     // Anti-vacuity contrast: the UNmutated base still matches its own preset,
     // so the 'custom' verdict above is caused by the flip, not by the fixture.
     expect(normalizeSimulationRules(base).presetId).toBe('dramatic_campaign');
+  });
+});
+
+// ── THE BIRTH SEAM (LIGHTING row O-1 / CH-5 — car LGT-P1-BIRTH) ──────────────
+// WHY THIS BLOCK EXISTS. Until this car, "which preset does a BRAND-NEW campaign
+// start in?" had no address at all: a fresh campaign was minted by an argument-less
+// `normalizeSimulationRules()` three modules away from the preset table, so lighting
+// the table would have lit nothing for the only cohort a customer can create. The
+// seam is one constant (NEW_CAMPAIGN_SIMULATION_PRESET_ID), one resolver
+// (newCampaignSimulationRules), one door (createNewCampaignWorldState).
+//
+// It lands DARK: the successor id is null, so every assertion below is measured
+// against the world the tree births today. Two of these tests are deliberate
+// TRIPWIRES on the day L-DEFAULT names a successor — the byte-identity pin and the
+// virtual-profile pin BOTH red, and that red is the DECLARED SHIFT being announced,
+// never a re-record. The measured price of that day, taken here rather than
+// discovered there: +7 persisted rule keys per new campaign (30 -> 37 at
+// realistic_regional), because every preset spreads DEFAULT_SIMULATION_RULES, which
+// carries PROFILE_DEFAULTS, so the normalizer's materialize branch fires.
+//
+// ⛔ THE SOURCE SCANS BELOW READ EXECUTABLE TEXT, NOT RAW TEXT, AND THAT IS NOT A
+// STYLE CHOICE. Both negatives reddened on their first run because the seam's own
+// PROSE names the thing the negative forbids — `createNewCampaignWorldState`'s
+// JSDoc says `newCampaignSimulationRules()`, and buildNewCampaign's comment quotes
+// the `ensureWorldState(null, …)` call it replaced so the change can be read rather
+// than discovered. A scanner that cannot tell a mention from a call convicts good
+// prose and, far worse, would be satisfied by a comment on the day the call really
+// came back.
+const executable = source => source
+  .replace(/\/\*[\s\S]*?\*\//g, '')
+  .replace(/^\s*\/\/.*$/gm, '');
+const BIRTH_SOURCES = {
+  worldState: executable(readFileSync(join(ROOT, 'src/domain/worldPulse/worldState.js'), 'utf8')),
+  creation: executable(readFileSync(join(ROOT, 'src/store/campaignImportedCreation.js'), 'utf8')),
+};
+
+describe('new-campaign birth seam — one address, dark today, proven live', () => {
+  const BIRTH_CAMPAIGN = Object.freeze({ id: 'birth-seam-pin', name: 'Birth Seam Pin' });
+
+  test('the successor is null, and null means TODAY\u2019S rules to the byte', () => {
+    expect(NEW_CAMPAIGN_SIMULATION_PRESET_ID).toBe(null);
+    // JSON, not toEqual: KEY ORDER is what the persisted envelope is made of and
+    // deep equality is blind to it.
+    expect(JSON.stringify(newCampaignSimulationRules()))
+      .toBe(JSON.stringify(normalizeSimulationRules()));
+  });
+
+  test('a dark birth keeps the profile VIRTUAL (the CL-0 constitutional law)', () => {
+    const born = newCampaignSimulationRules();
+    // Anti-vacuity first: the rules object is real and carries the ordinary bank,
+    // so the absences below are absences from a live object.
+    expect(born.presetId).toBe(DEFAULT_SIMULATION_PRESET_ID);
+    expect(Object.keys(born).length).toBeGreaterThan(20);
+    for (const key of ['worldProgression', 'politicalAutonomy', 'spatialMode', 'travelMode', 'infoMode', 'profileVersion', 'narrativeTempo']) {
+      expect(key in born, `${key} must stay virtual at a dark birth`).toBe(false);
+    }
+    // ... and the SAME seven are exactly what a named preset would materialize.
+    // This is the price of naming a successor, asserted rather than remembered.
+    const lit = newCampaignSimulationRules(DEFAULT_SIMULATION_PRESET_ID);
+    expect(Object.keys(lit).length - Object.keys(born).length).toBe(7);
+  });
+
+  test('FORCED DOOR: naming a preset makes the resolver return THAT preset', () => {
+    // The mechanism is exercised BEFORE any successor exists — otherwise the seam
+    // ships unproven and its first proof would be the flip itself.
+    for (const id of PRESET_IDS) {
+      const resolved = newCampaignSimulationRules(id);
+      expect(resolved.presetId, `${id} must round-trip through the birth resolver`).toBe(id);
+    }
+    const fat = newCampaignSimulationRules('full_simulation');
+    expect(fat.warLayerEnabled).toBe(true);
+    expect(Object.keys(fat).length).toBeGreaterThan(Object.keys(newCampaignSimulationRules()).length);
+  });
+
+  test('the resolver FAILS CLOSED on an id no catalog entry answers', () => {
+    // A birth is not a place to throw: a customer who cannot create a campaign has
+    // lost more than a preset. A miss births today's world, and it is loud HERE.
+    expect(JSON.stringify(newCampaignSimulationRules('no_such_preset')))
+      .toBe(JSON.stringify(normalizeSimulationRules()));
+    expect(JSON.stringify(newCampaignSimulationRules(undefined)))
+      .toBe(JSON.stringify(newCampaignSimulationRules()));
+  });
+
+  test('the birth DOOR is byte-identical to the birth it replaces (dark-inert)', () => {
+    // `ensureWorldState(null, campaign)` IS the pre-car birth expression, kept here
+    // as the control. TRIPWIRE: this reds the day a successor is named, and that
+    // red is the declared shift.
+    const before = ensureWorldState(null, BIRTH_CAMPAIGN);
+    const after = createNewCampaignWorldState(BIRTH_CAMPAIGN);
+    expect(JSON.stringify(after)).toBe(JSON.stringify(before));
+    // Non-vacuity: the control is a real world, not an empty object.
+    expect(before.rngSeed).toBe(`world-pulse:${BIRTH_CAMPAIGN.id}`);
+    // The door carries the forced preset all the way into the world.
+    const forcedWorld = createNewCampaignWorldState(BIRTH_CAMPAIGN, 'full_simulation');
+    expect(forcedWorld.simulationRules.presetId).toBe('full_simulation');
+    expect(JSON.stringify(forcedWorld)).not.toBe(JSON.stringify(before));
+  });
+
+  test('LOADING never re-decides a world: ensureWorldState keeps plain normalize', () => {
+    // ⛔ THE PROMISE. A seed is a starting world forever. If birth resolution ever
+    // migrates into ensureWorldState, an INSTALLED campaign acquires virtual keys
+    // it was never created with, silently, at its next load.
+    //
+    // The behavioural half is vacuous while the successor is null (both paths
+    // resolve the same rules), so the live wire is the SOURCE of the shared
+    // materializer: it must read the raw and nothing else.
+    const materializer = BIRTH_SOURCES.worldState.slice(
+      BIRTH_SOURCES.worldState.indexOf('export function ensureWorldStateWithEnvoyNormalizer'),
+      BIRTH_SOURCES.worldState.indexOf('export function createNewCampaignWorldState'),
+    );
+    // Liveness anchor: the slice is the real function body, not an empty string.
+    expect(materializer.length).toBeGreaterThan(500);
+    expect(materializer.includes('const simulationRules = normalizeSimulationRules(raw?.simulationRules);')).toBe(true);
+    // anchored: the positive above proves this slice is the live materializer body
+    expect(materializer.includes('newCampaignSimulationRules'), 'the load path must never resolve a BIRTH preset').toBe(false);
+
+    // The behavioural half, kept because it is what the source claim MEANS: a
+    // legacy world with no rules key at all loads to the plain default and gains
+    // no profile keys.
+    const loaded = ensureWorldState({ tick: 3 }, BIRTH_CAMPAIGN);
+    expect(loaded.simulationRules.presetId).toBe(DEFAULT_SIMULATION_PRESET_ID);
+    expect(JSON.stringify(Object.keys(loaded.simulationRules)))
+      .toBe(JSON.stringify(Object.keys(normalizeSimulationRules())));
+  });
+
+  test('the store births THROUGH the door — the seam is wired, not merely built', () => {
+    // A behavioural pin here would be vacuous today (both expressions resolve the
+    // same world while the successor is null), so the wiring is asserted where it
+    // can actually fail: the creation module's source.
+    const creation = BIRTH_SOURCES.creation;
+    expect(creation.includes('createNewCampaignWorldState({ id, name: campaignName })')).toBe(true);
+    // anchored: the positive above proves this source is the live creation module
+    expect(creation.includes('ensureWorldState(null'), 'buildNewCampaign must not re-open the old birth path').toBe(false);
+    // Detector liveness, both halves. (i) the scan finds the old CALL when the old
+    // call is present, so the negative above measures absence and not a rotted
+    // search; (ii) the stripper really removes comments, so the negative cannot be
+    // satisfied by commenting the call out.
+    expect(`${creation}\nworldState: ensureWorldState(null, {}),`.includes('ensureWorldState(null')).toBe(true);
+    expect(executable('// worldState: ensureWorldState(null, {}),').includes('ensureWorldState(null')).toBe(false);
+    expect(executable('worldState: ensureWorldState(null, {}),').includes('ensureWorldState(null')).toBe(true);
   });
 });
