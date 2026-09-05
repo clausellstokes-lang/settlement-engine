@@ -30,7 +30,12 @@ echo "REGISTER_HEAD=$(git rev-parse HEAD)"
 quiet; sh scripts/gate-mutex.sh --run -- env UPDATE_VOICE_BASELINE=1 npx vitest run tests/copy/voiceMechanics.test.js tests/copy/proseLeak.test.js > "$D/../registers-prose-voice.log" 2>&1; E1=$?; echo "VOICE_EXIT=$E1 changed=$(git status --porcelain -uall | wc -l | tr -d ' ')"; git status --porcelain -uall | head -4
 # 2. writer-reach — plain --write, NEVER --genesis
 node scripts/check-writer-reach.mjs --write > "$D/../registers-prose-wr.log" 2>&1; E2=$?; echo "WRITER_REACH_EXIT=$E2"; tail -3 "$D/../registers-prose-wr.log" | cut -c1-140
-# 3. the census totals — the ratchet runner stamped for this landing does this (run-ratchet-<N>.sh); not repeated here
+# 3. organic samples — the design goldens (UPDATE_ORGANIC_SAMPLES=1; enrolled in the golden-freeze register, which is UNFROZEN)
+quiet; sh scripts/gate-mutex.sh --run -- env UPDATE_ORGANIC_SAMPLES=1 npx vitest run tests/design/organicSamples.test.js > "$D/../registers-prose-organic.log" 2>&1; E3=$?; echo "ORGANIC_EXIT=$E3 changed=$(git status --porcelain -uall | wc -l | tr -d ' ')"
+# 4. prose-numerics + wizard-news: NO in-tree regenerator and NO env door — both are exact, location-bound, shrink-only
+#    ledgers relocated by ADDRESS (path:line[:column]) with the snippet/signature as the identity. Use $SC/relocate-ledger-rows.mjs
+#    (chair tool) in --dry mode first; a row whose identity vanished is a WIN to delete after review, never a row to re-add.
+# 5. the census totals — the ratchet runner stamped for this landing does this (run-ratchet-<N>.sh); not repeated here
 echo "REGISTER_PORCELAIN=[$(git status --porcelain -uall | wc -l | tr -d ' ')]"; git status --porcelain -uall
 echo "NEXT: review each changed register against the PREDICTIONS line; commit the register car(s) as the LAST cars (Seat: Fable 5.1 — validated); then run-ratchet-<N>.sh, then run-gate-<N>.sh"
 exit 0
