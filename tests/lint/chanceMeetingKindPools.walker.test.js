@@ -9,7 +9,7 @@
  * ENC-5 to the chair in chat ("Also for ENC-5.. you write it") and the authored file was sealed
  * at `refs/preserve/enc5-words-2026-09-04` before any wiring existed.
  * docs/content/RECEIPT_POOLS_CHANCE_MEETING.md is a byte-identical copy of that seal, and
- * `chanceMeetingReceiptPools.js` is its transcription. This walker re-derives the whole pool, the
+ * `envoyChanceMeetingReceiptPools.js` is its transcription. This walker re-derives the whole pool, the
  * `{outcome_phrase}` band table AND the reason from the DOCUMENT on every run, so the
  * transcription cannot fork from the corpus in either direction. ⛔ A corpus defect is a chair
  * annex act; a word that cannot be wired is a finding back to the chair with the slot that
@@ -75,16 +75,16 @@ import {
   CHANCE_MEETING_REASON,
   chanceMeetingEntry,
   chanceMeetingLine,
-} from '../../src/domain/worldPulse/chanceMeetingNews.js';
+} from '../../src/domain/worldPulse/envoyChanceMeetingNews.js';
 // ⛔ THE CORPUS MODULE IS IMPORTED DIRECTLY AND THE IMPORT IS LOAD-BEARING TWICE OVER, on the
 // FAITH walker's recorded reasoning. It lets the census below pin the registry's pool IDENTICAL
 // to the corpus module's own export, so a registry that had inlined its sentences would red here
 // rather than passing on a pool that merely renders the same; and it is what gives
-// chanceMeetingReceiptPools.js AUTO lit coverage in tests/property/mechanismLitCoverage.test.js.
+// envoyChanceMeetingReceiptPools.js AUTO lit coverage in tests/property/mechanismLitCoverage.test.js.
 import {
   CHANCE_MEETING_OUTCOME_PHRASES,
   CHANCE_MEETING_RECEIPTS,
-} from '../../src/domain/worldPulse/chanceMeetingReceiptPools.js';
+} from '../../src/domain/worldPulse/envoyChanceMeetingReceiptPools.js';
 
 /** kind, significance, audience, desk, authored depth. */
 const EXPECTED = Object.freeze([

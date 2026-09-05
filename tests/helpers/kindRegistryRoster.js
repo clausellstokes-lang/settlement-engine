@@ -26,7 +26,7 @@ import {
   WAR_LINEAGE_KIND_REGISTRY,
   WAR_RULING_KIND_REGISTRY,
 } from '../../src/domain/worldPulse/eventProse.js';
-import { CHANCE_MEETING_KIND_REGISTRY } from '../../src/domain/worldPulse/chanceMeetingNews.js';
+import { CHANCE_MEETING_KIND_REGISTRY } from '../../src/domain/worldPulse/envoyChanceMeetingNews.js';
 import { COMMERCIAL_KIND_REGISTRY } from '../../src/domain/worldPulse/commercialReasonsNews.js';
 import { GRAMMAR_KIND_REGISTRY } from '../../src/domain/worldPulse/grammarNews.js';
 import { FAITH_KIND_REGISTRY } from '../../src/domain/worldPulse/faithNews.js';
