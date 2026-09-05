@@ -16,19 +16,21 @@ const baseText = new Map();
 function baseLines(p) { if (!baseText.has(p)) { try { baseText.set(p, execFileSync('git', ['show', `${base}:${p}`], { cwd: tree, encoding: 'utf8', maxBuffer: 64 << 20 }).split('\n')); } catch { baseText.set(p, null); } } return baseText.get(p); }
 const tipText = new Map();
 function tipLines(p) { if (!tipText.has(p)) { const f = join(tree, p); tipText.set(p, existsSync(f) ? readFileSync(f, 'utf8').split('\n') : null); } return tipText.get(p); }
-const out = { unchanged: 0, relocated: [], vanished: [], ambiguous: [], missingFile: [] };
+const out = { unchanged: 0, repunctuated: [], relocated: [], vanished: [], ambiguous: [], missingFile: [] };
 for (const r of rows) {
   const b = baseLines(r.path), t = tipLines(r.path);
   if (!b || !t) { out.missingFile.push(`${r.path}:${r.line}`); continue; }
   const ident = b[r.line - 1]; if (ident == null) { out.vanished.push(`${r.path}:${r.line} (base line absent)`); continue; }
-  const snippetOk = (ln) => (r.snippet ? ln.includes(r.snippet) : true);
-  if (t[r.line - 1] === ident && snippetOk(ident)) { out.unchanged++; continue; }
-  const hits = []; t.forEach((ln, i) => { if (ln === ident && snippetOk(ln)) hits.push(i + 1); });
+  // IDENTITY: a prose-numerics row is path+category+SNIPPET (the walker's own identity) — the surrounding sentence may be
+  // re-punctuated without the row moving; a wizard-news row (no snippet) is the base line's text.
+  const has = r.snippet ? (ln) => ln.includes(r.snippet) : (ln) => ln === ident;
+  if (has(t[r.line - 1] ?? '')) { out.unchanged++; if (r.snippet && t[r.line - 1] !== ident) out.repunctuated.push(`${r.path}:${r.line}`); continue; }
+  const hits = []; t.forEach((ln, i) => { if (has(ln)) hits.push(i + 1); });
   if (hits.length === 1) { out.relocated.push(`${r.path}:${r.line}→${hits[0]}`); if (WRITE) r.line = hits[0]; }
-  else if (hits.length === 0) out.vanished.push(`${r.path}:${r.line} :: ${ident.trim().slice(0, 70)}`);
+  else if (hits.length === 0) out.vanished.push(`${r.path}:${r.line} :: ${(r.snippet || ident).trim().slice(0, 70)}`);
   else out.ambiguous.push(`${r.path}:${r.line} → ${hits.join(',')}`);
 }
-console.log(`${ledger}: rows=${rows.length} unchanged=${out.unchanged} relocated=${out.relocated.length} vanished=${out.vanished.length} ambiguous=${out.ambiguous.length} missingFile=${out.missingFile.length}`);
-for (const k of ['relocated', 'vanished', 'ambiguous', 'missingFile']) if (out[k].length) console.log(`  ${k}:\n    ` + out[k].slice(0, 40).join('\n    ') + (out[k].length > 40 ? `\n    … +${out[k].length - 40}` : ''));
+console.log(`${ledger}: rows=${rows.length} unchanged=${out.unchanged} (of which re-punctuated on the same line, snippet intact: ${out.repunctuated.length}) relocated=${out.relocated.length} vanished=${out.vanished.length} ambiguous=${out.ambiguous.length} missingFile=${out.missingFile.length}`);
+for (const k of ['repunctuated', 'relocated', 'vanished', 'ambiguous', 'missingFile']) if (out[k].length) console.log(`  ${k}:\n    ` + out[k].slice(0, 40).join('\n    ') + (out[k].length > 40 ? `\n    … +${out[k].length - 40}` : ''));
 if (WRITE) { if (out.ambiguous.length) { console.error('REFUSED --write: ambiguous rows'); process.exit(1); } writeFileSync(join(tree, ledger), JSON.stringify(doc, null, 2) + (raw.endsWith('\n') ? '\n' : ''), 'utf8'); console.log('  written (relocated addresses only; vanished rows untouched — review and delete by hand)'); }
 process.exit(out.ambiguous.length ? 1 : 0);
