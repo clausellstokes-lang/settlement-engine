@@ -7,6 +7,7 @@ Updated 2026-09-05 by the Fable chair (after §898: product 5e28d5c83, ledger 6c
 | ~~LIGHT-PLAN~~ DONE → refs/preserve/light-plan-2026-09-05 | | | | |
 | ~~PROSE~~ LANDED §898 (10 cars; the golden banked owner-gated) | | | | |
 | ~~ENC-4b~~ DONE → 4 cars 9d9686c12 sealed `enc4b-2026-09-05` (§B ships; the brief's approacher-by-traveller rule MEASURED FALSE — the lead is by compromise chance, resident led 23/23 one arm, traveller 23/23 mirrored; `approacherNid` = the party whose homeSid is the grievance toSid; variant 1's `{counterpart} of {settlement}` is true only for the traveller-offered CASE so the writer ships the case and WITHHOLDS the other half — its words are a CHAIR annex act; ENC-4's pantheon A5 was RED at its own tip (cured test-only in car 4, which the chair takes into §899 as a fix car); DEFER_CEILING 36→35 REFUSED with measurement; vitest OWED — the quiet window never opened) | | | | |
+| ~~SEAT-78~~ DONE → 3 cars 027cf668d sealed `seat-78-2026-09-05` (SEAT-7a replayed with its unpaid tests/lint bill cured 4-of-7 at cause; a per-key dormancy fence; SEAT-7b REFUSED — a new persisted shape the brief forbids; SEAT-8 REFUSED — the brief mis-identified D11 and Q-S3's third leg. ⛔ THE SEALED SEAT-7a CAR HAD A FALSE RECEIPT IN FIVE PLACES (never ran tests/lint; stale typecheck/lighting/tuning figures; claimed two verdict callers wired, fenced one). ONE RED HANDED UP: `couplingInclusion.walker` needs a registry row for deploymentReturn.js → irregularForce.js (INTERIOR→WAR) — a CHAIR act at §900. Register deltas measured: tuning tables 232→233, keys 2108→2109, bare decimals unchanged; lighting files +2 (+1 suite/+6 titles); writer-reach thinKeys 9143→9144 (`simulationRules` gains `irregularForceEnabled`). ⚠ observed-shape-corpus builds with EVERY flag lit, so the force ratio is live in the OSR corpus the day the gate read lands. vitest OWED-UNTIL-RESUME.) | | | | |
 | OSR-SCHEMA17 | build (heavy) | laneINTEG-tree @ 940d161ca | briefs/brief-OSR-SCHEMA17.md | 09-05 |
 | ~~WARMS-CAR0~~ DONE → refs/preserve/warms-car0-2026-09-05; volume landed §896.2 | | | | |
 | ~~CLAMP-W2~~ DONE → 3 cars b0cba0dca sealed `clamp-w2-2026-09-05` (3 migrated, 3 refused; census 69 vs 62; edge-shared re-mint owed at its landing) | briefs/brief-CLAMP-W2.md | 09-05 |
@@ -22,6 +23,7 @@ Updated 2026-09-05 by the Fable chair (after §898: product 5e28d5c83, ledger 6c
 ## ⛔ VITEST HOLD in force (09-05 ~09:50): the four running lanes hold all vitest until the chair sends RESUME after the §899 gate. SEND RESUME.
 
 ## QUEUED — next slot takes the top row
+19. ~~DOCKET-2~~ DISPATCHED 09-05 (`briefs/brief-DOCKET.md` items 3, 4, 8; dock laneDOCKET2 @ 5e28d5c83; on VITEST HOLD until RESUME).
 1. ~~OSR-SCHEMA17~~ DISPATCHED — build; dock laneINTEG-tree @ 940d161ca; briefs/brief-OSR-SCHEMA17.md. ⛔ Dispatch only when NO chair
    gate is running (its proofs run vitest and the corpus scan is heavy). Frees the 23-car desk consist.
 2. ~~PDFDRIFT~~ WITHDRAWN (`briefs/brief-PDFDRIFT.md`, dock lanePDF @ df7cdd37e): route the two campaign-less export sites through `resolveExportSeam`; DECLARED paid-surface change.
