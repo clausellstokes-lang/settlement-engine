@@ -33,6 +33,7 @@ import {
   WR7_ENVOY_COUPLINGS,
   WF_FAITH_WAR_COUPLINGS,
   WMEM_CONCLUDED_WAR_COUPLINGS,
+  WSEAT_D10_IRREGULAR_FORCE_COUPLINGS,
 } from './couplingRegistryWar.js';
 // The first non-WAR leaf (FP wave TR-1). One sibling per volume, as CW-0w slice 1 built
 // this family to accept.
@@ -141,6 +142,8 @@ export {
   WMEM_TREATY_AT_SEAL_COUPLING,
   WMEM_SEAL_GRACE_WINDOW_COUPLING,
   WMEM_CONCLUDED_WAR_COUPLINGS,
+  WSEAT_D10_RETURN_FORCE_RATIO_COUPLING,
+  WSEAT_D10_IRREGULAR_FORCE_COUPLINGS,
 } from './couplingRegistryWar.js';
 
 export const COUPLING_REGISTRY = Object.freeze([
@@ -197,6 +200,18 @@ export const COUPLING_REGISTRY = Object.freeze([
   // composed well ahead of here — checked rather than assumed, because the tiebreak is a
   // legacy resolution rule and a landing act does not move one to tidy an ordinal.
   ...WMEM_CONCLUDED_WAR_COUPLINGS,
+  // W-SEAT D10 (2026-09-05, chair declaration at the §900 desk landing): the returning
+  // host's coup verdict reading INTERIOR's irregular-force share. Lane SEAT-78 measured the
+  // pair, argued the layer home, and REFUSED to mint the licence itself — a registry row
+  // declares a coupling's direction, desk, flags and receipt address, which the walker's own
+  // REACH_OWED note reserves to the chair. `WR-6e` is the next free war-side wave letter, on
+  // the WR-6b / WR-6c / WR-6d precedent.
+  // ⛔ APPENDED LAST, ON THE SAME TIEBREAK ARGUMENT WR-6c AND W-MEM BOTH MAKE, AND CHECKED
+  // RATHER THAN ASSUMED: this row's pair and direction is CPL-6 / INTERIOR→WAR, whose legacy
+  // first-row seat is held by WR4_INSTITUTION_HOME_FRONT_COUPLING, composed far above. A
+  // landing act does not move a legacy tiebreak to tidy an ordinal, so appending here costs
+  // nothing and disturbs no single-row caller.
+  ...WSEAT_D10_IRREGULAR_FORCE_COUPLINGS,
 ]);
 
 /** @type {ReadonlyArray<Readonly<CouplingRegistryRow>>} */

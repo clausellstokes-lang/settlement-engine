@@ -32,6 +32,8 @@ import {
   WMEM_CONCLUDED_WAR_COUPLINGS,
   WMEM_TREATY_AT_SEAL_COUPLING,
   WMEM_SEAL_GRACE_WINDOW_COUPLING,
+  WSEAT_D10_IRREGULAR_FORCE_COUPLINGS,
+  WSEAT_D10_RETURN_FORCE_RATIO_COUPLING,
   WR7_ENVOY_COUPLINGS,
   WR7_CARRIED_SHEET_COUPLING,
   WR7_ENCOUNTER_COUPLING,
@@ -195,7 +197,36 @@ describe('CW-0 coupling registry', () => {
       // These two can take no first-row seat in any case — CPL-5 / GRAMMAR→WAR is already
       // held by WR7_HOME_DELIVERY_COUPLING, which the assertion further down re-proves.
       ...WMEM_CONCLUDED_WAR_COUPLINGS,
+      // W-SEAT D10 (2026-09-05, chair declaration at the §900 desk landing): the returning
+      // host's coup verdict reading INTERIOR's irregular-force share, the licence lane
+      // SEAT-78 measured and rightly refused to mint for itself. Appended last on the same
+      // tiebreak argument WR-6c and W-MEM both make: CPL-6 / INTERIOR→WAR's legacy first-row
+      // seat belongs to WR4_INSTITUTION_HOME_FRONT_COUPLING, re-proved further down, so this
+      // append moves nothing a single-row caller resolves.
+      ...WSEAT_D10_IRREGULAR_FORCE_COUPLINGS,
     ]);
+    // The W-SEAT D10 row spelled out, on the WR-3 precedent above: a composition assertion
+    // proves ORDER, never CONTENT, and this is the estate's first `irregularForceEnabled`
+    // registry row. Pinned in this existing title rather than a new one — a new test title
+    // moves the lighting census, which is a landing-owned register.
+    expect(WSEAT_D10_IRREGULAR_FORCE_COUPLINGS).toEqual([WSEAT_D10_RETURN_FORCE_RATIO_COUPLING]);
+    expect(WSEAT_D10_RETURN_FORCE_RATIO_COUPLING).toEqual({
+      couplingId: 'CPL-6.INTERIOR_TO_WAR.WR-6e.irregular_force_return_verdict',
+      pairId: 'CPL-6',
+      direction: 'INTERIOR→WAR',
+      read: 'src/domain/worldPulse/deploymentReturn.js#deploymentReturnOutcomes.irregularShareFactor',
+      receiptField: 'pulseRecord.autoApplied[ruleId=deployment_return_coup].{candidateType,ruleId,severity,reasons,powerTransfer.cause}',
+      counterforce: 'src/domain/worldPulse/deploymentReturn.js#deploymentReturnOutcomes.irregularShareFactor',
+      flags: ['irregularForceEnabled'],
+      owningVolume: 'WAR',
+      owningWave: 'WR-6e',
+      intendedDesk: 'war',
+    });
+    // The licensing join the couplingInclusion walker performs is on the READ's module half
+    // and the direction; both are asserted above, so the walker's licence and this row's
+    // identity cannot drift apart silently.
+    expect(WSEAT_D10_RETURN_FORCE_RATIO_COUPLING.read.split('#')[0])
+      .toBe('src/domain/worldPulse/deploymentReturn.js');
     expect(WR3_LINEAGE_COUPLING).toEqual({
       couplingId: 'CPL-3.POP_TO_WAR.WR-3.lineage',
       pairId: 'CPL-3',

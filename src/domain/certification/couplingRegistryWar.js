@@ -739,3 +739,59 @@ export const WMEM_CONCLUDED_WAR_COUPLINGS = Object.freeze([
   WMEM_TREATY_AT_SEAL_COUPLING,
   WMEM_SEAL_GRACE_WINDOW_COUPLING,
 ]);
+
+/**
+ * W-SEAT D10 (chair declaration, §900 desk landing; lane SEAT-78 measured it and rightly
+ * REFUSED to mint it — `$SC/receipt-seat-78.md` R4 and this walker's own REACH_OWED note:
+ * "minting a registry row declares a coupling's direction, desk, flags and receipt address.
+ * That is a chair declaration, not a walker repair").
+ *
+ * THE COUPLING. `irregularForce.js` is INTERIOR by chair ruling (SEAT-78 R3): its subject is
+ * whether a settlement's own people would rise against their seat and what that mass is worth,
+ * which is domestic politics, not war. `deploymentReturn.js` is WAR by the layer table's own
+ * regex. The returning-host coup verdict therefore reads INTERIOR evidence from a WAR writer,
+ * and F4 makes `participation01` the single politics↔force bridge — so this pair is D10's design
+ * showing through, not an artefact of the home chosen. SEAT-78 measured every alternative home:
+ * INTERIOR mints exactly this pair, WAR mints `irregularForce → commonsVoiceKernel`, any third
+ * family mints TWO, and unlayered mints none only by making the bridge invisible, which this
+ * registry's whole purpose refuses. One row is the floor, and this is it.
+ *
+ * ⛔ WHY IT RIDES `WR-6e` AND NOT A FOURTEENTH VOLUME PREFIX. W-SEAT is not a chartered volume
+ * and admitting one is a DOCUMENT act (`CHARTERED_VOLUME_PREFIXES` in tests/domain/couplingRegistry.test.js
+ * says a new prefix must amend both that list and DESIGN_FP_ARCHITECTURE.md §9 seam row 32).
+ * W-SEAT's OWN precedent already settles it: SEAT-4's anticipated-reaction row took `WR-6c` under
+ * `owningVolume: 'WAR'`, exactly as W-COIN took 6b and W-MEM took 6d. The next free letter is `e`.
+ *
+ * ⛔ THE RECEIPT ADDRESS IS EMITTED-RECORD ROOTED, AND IT WAS CHOSEN BY MEASUREMENT RATHER THAN
+ * BY CONVENIENCE. D10's certification row commits this car to "no persisted state of any kind",
+ * so the factor itself leaves no trace to address — and a receiptField whose EVERY address is a
+ * returned read raises the frozen still-unsampled count in tests/domain/couplingReceiptSample.js's
+ * seam SC-9 arm, which that arm exists to red. The honest address is therefore the OUTCOME the
+ * factor decides: `applyWorldPulse` pushes every applied outcome onto its emitted `autoApplied`
+ * record (the proposal branch returns first and this outcome is `applyMode: 'auto'` with no
+ * authority routing to a proposal), so a returning-host coup is reviewable there by its own
+ * `ruleId`, with the grip band the factor moved carried in `reasons`.
+ *
+ * THE COUNTERFORCE IS THE SAME READ, on the W-MEM precedent two blocks above: the factor is ONE
+ * number that already nets the rising side against the loyal side inside `irregularShareFactor`
+ * (`rising = manpower × participation`, `loyal = institutions + manpower × (1 − participation)`),
+ * so there is no second call to name. Dark ⇒ the read returns exactly `1` and the verdict is
+ * byte-identical, which is what `irregularForceDormancy.byteIdentity.test.js` pins.
+ */
+export const WSEAT_D10_RETURN_FORCE_RATIO_COUPLING = couplingRow({
+  couplingId: 'CPL-6.INTERIOR_TO_WAR.WR-6e.irregular_force_return_verdict',
+  pairId: 'CPL-6',
+  direction: 'INTERIOR→WAR',
+  read: 'src/domain/worldPulse/deploymentReturn.js#deploymentReturnOutcomes.irregularShareFactor',
+  receiptField: 'pulseRecord.autoApplied[ruleId=deployment_return_coup].{candidateType,ruleId,severity,reasons,powerTransfer.cause}',
+  counterforce: 'src/domain/worldPulse/deploymentReturn.js#deploymentReturnOutcomes.irregularShareFactor',
+  flags: ['irregularForceEnabled'],
+  owningVolume: 'WAR',
+  owningWave: 'WR-6e',
+  intendedDesk: 'war',
+});
+
+/** The INTERIOR×WAR coupling the W-SEAT D10 car lands against the war volume. */
+export const WSEAT_D10_IRREGULAR_FORCE_COUPLINGS = Object.freeze([
+  WSEAT_D10_RETURN_FORCE_RATIO_COUPLING,
+]);
