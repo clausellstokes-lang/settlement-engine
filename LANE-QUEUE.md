@@ -6,6 +6,7 @@ Updated 2026-09-05 by the Fable chair (after §898: product 5e28d5c83, ledger 6c
 |---|---|---|---|---|
 | ~~LIGHT-PLAN~~ DONE → refs/preserve/light-plan-2026-09-05 | | | | |
 | ~~PROSE~~ LANDED §898 (10 cars; the golden banked owner-gated) | | | | |
+| ~~ENC-4b~~ DONE → 4 cars 9d9686c12 sealed `enc4b-2026-09-05` (§B ships; the brief's approacher-by-traveller rule MEASURED FALSE — the lead is by compromise chance, resident led 23/23 one arm, traveller 23/23 mirrored; `approacherNid` = the party whose homeSid is the grievance toSid; variant 1's `{counterpart} of {settlement}` is true only for the traveller-offered CASE so the writer ships the case and WITHHOLDS the other half — its words are a CHAIR annex act; ENC-4's pantheon A5 was RED at its own tip (cured test-only in car 4, which the chair takes into §899 as a fix car); DEFER_CEILING 36→35 REFUSED with measurement; vitest OWED — the quiet window never opened) | | | | |
 | OSR-SCHEMA17 | build (heavy) | laneINTEG-tree @ 940d161ca | briefs/brief-OSR-SCHEMA17.md | 09-05 |
 | ~~WARMS-CAR0~~ DONE → refs/preserve/warms-car0-2026-09-05; volume landed §896.2 | | | | |
 | ~~CLAMP-W2~~ DONE → 3 cars b0cba0dca sealed `clamp-w2-2026-09-05` (3 migrated, 3 refused; census 69 vs 62; edge-shared re-mint owed at its landing) | briefs/brief-CLAMP-W2.md | 09-05 |
