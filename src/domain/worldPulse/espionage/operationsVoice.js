@@ -602,7 +602,7 @@ export function goingNativeArcBeat({ level, verdict, cadences, npcId, npcName, h
 export const OPERATIONS_VOICE_PROVENANCE = Object.freeze({
   status: 'CANDIDATE, OWNER-UNSIGNED (every sentence in this file is voice-taste awaiting the pen; the vocabularies are closed, the lines are candidates)',
   signedBy: null,
-  door: 'operationsVoiceEnabled: NAMED, NOT MINTED (the one-commit mint is a register edit this packet did not order); beneath it every surface inherits the doors of the subsystem whose receipts it voices',
+  door: 'operationsVoiceEnabled: MINTED 2026-09-05 by the lighting wave car LGT-P5-WOPS, and the READ IS NOT HERE. The key is a manifest member with an authored certification row, and its one by-name strict gate lives in the espionage family door module, AND-composed with the layer: beneath it every surface inherits the doors of the subsystem whose receipts it voices. This leaf stays gate-free by its own contract, which its suite pins on the logic rather than on the prose',
   ownerRows: Object.freeze([
     'every line and reason here is the pen\'s: the words are candidates, and none is signed',
     'the going-native reversal line is DELIBERATELY UNWRITTEN. Writing it is a ruling on the unsigned reversal fork, never a prose edit',
