@@ -247,7 +247,7 @@ const deriveBaselineStability = ({
   neighbourRelationship,
 }) => {
   if (stressFlags.stateCrime) return 'Enforced Order (authoritarian)';
-  if (stressFlags.crimeIsGovt) return 'Unstable: criminal governance';
+  if (stressFlags.crimeIsGovt) return 'Unstable — criminal governance';
   if (stressFlags.crusaderSynthesis) return 'Rigid (militant theocracy)';
   if (stressFlags.merchantArmy) return 'Fragile (private security, no public law)';
 
@@ -292,19 +292,19 @@ const applyStressStability = (baselineStability, hasStress) => {
     return 'Suppressed (under occupation: resistance simmers)';
   }
   if (hasStress('politically_fractured')) {
-    return 'Fractured: no stable governing authority';
+    return 'Fractured — no stable governing authority';
   }
   if (hasStress('recently_betrayed')) {
-    return 'Shaken: institutional trust collapsed';
+    return 'Shaken — institutional trust collapsed';
   }
   if (hasStress('famine')) {
-    return 'Desperate: hunger is eroding order';
+    return 'Desperate — hunger is eroding order';
   }
   if (hasStress('plague_onset')) {
-    return 'Anxious. Disease is overriding normal authority';
+    return 'Anxious — disease is overriding normal authority';
   }
   if (hasStress('succession_void')) {
-    return 'Volatile: power is available to whoever moves first';
+    return 'Volatile — power is available to whoever moves first';
   }
   if (hasStress('infiltrated')) return baselineStability;
   if (hasStress('indebted')) {

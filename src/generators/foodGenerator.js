@@ -339,7 +339,7 @@ export function generateFoodSecurity(tier, institutions, config) {
   // ── Food security label ───────────────────────────────────────────────────
   let label, color, bg;
   if (stressFamine) {
-    label = 'Deficit: Active Famine';
+    label = 'Deficit — Active Famine';
     color = '#8b1a1a'; bg = '#fdf4f4';
   } else if (deficitPct > 40) {
     label = 'Deficit';
