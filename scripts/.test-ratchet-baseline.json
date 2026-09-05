@@ -1,7 +1,7 @@
 {
   "_doc": "PER-TEST failure census for the source phase (all tests except tests/build/**). SHRINK-ONLY. A failing test ABSENT from `entries` is a REGRESSION and reds the gate. Every entry MUST carry a full attribution — subsystem, cause, introducedAt, class — or tests/lint/testRatchet.test.js refuses it. Every entry MUST also carry a `magnitude` array: a banked row freezes its EXISTENCE, and the magnitude is what freezes its SIZE, so the population behind a permitted red cannot grow invisibly (ODQ 854, TE-RATCHET-MAG). `--update` can only REMOVE entries and LOWER magnitude ceilings; adding one is a deliberate, attributed hand edit. See scripts/check-test-ratchet.mjs.",
-  "measuredAtSha": "afde4f9f30408d6a79d15c5d04b2d1a6bd0b2346",
-  "totalTests": 31483,
+  "measuredAtSha": "0a73708f380ec7ec666a70dec7df3d102f59fad3",
+  "totalTests": 31489,
   "totalFiles": 2468,
   "skippedCeiling": 1,
   "uncollectedSuites": {},
@@ -134,7 +134,7 @@
           "name": "population",
           "kind": "capture",
           "pattern": "expected \\[ …\\(62\\) \\] to deeply equal \\[ …\\((\\d+)\\) \\]",
-          "ceiling": 78,
+          "ceiling": 72,
           "unit": "files defining a local clamp/clamp01 against a frozen baseline of 62",
           "attribution": "RAISED 76 to 78 at the INSTRUMENTS consist landing, 2026-09-01, by lane INSTR-land. THIS BANKS MEASURED DEBT, NOT MOVEMENT. The decisive control: the measure is IDENTICAL at the landing BASE 8b07ce45f and at the landing TIP - base=78 tip=78, computed by running the gate s own magnitudeReportOf and identityOf over the base s report and the tip s. ATTRIBUTION: the SUBSTRATE landing s two clamp01 definitions, in src/domain/npc/characterConsumers.js and src/domain/npc/knownCharacter.js - pre-attributed EXACTLY (+2 / -0) by the pre-board s closed-era table before the dock existed, and named in the 16-file diff. Ruled work sealed on-branch. RMAG froze the old ceiling at its own base 689bf2cc6, before this population was ever measured, and the magnitude machinery ARMS for the first time at this landing - the base baseline carries magnitude blocks on 0 of 10 rows and RMAG s on 10 of 10 - so this is a FIRST TRUE MEASUREMENT, never a growth bank. A ceiling is raised only by a deliberate attributed hand edit: --update can only LOWER, and it HOLDS a breach rather than raising it."
         }
