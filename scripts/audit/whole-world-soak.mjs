@@ -602,7 +602,11 @@ const notExecutable = (name, reason) => {
   notExecutables.push({ name, reason: String(reason || '') });
 };
 
-console.log(`# whole-world soak — ${YEARS} years × ${REGION.length} settlements, seed "${SEED}", full_simulation preset (seasons ${SEASONS}), now pinned ${NOW}\n`);
+// ⛔ THE BANNER NAMES THE PRESET THE RUN COMPOSED, NEVER A LITERAL. It read
+// `full_simulation` unconditionally until 2026-09-05, so every `--preset <id>` run printed a
+// FALSE configuration line beside a correct JSON receipt (L-OVERLAY measured it verbatim). `SOAK_PRESET.id`
+// is `full_simulation` when the flag is absent, so the no-flag run's output is BYTE-IDENTICAL.
+console.log(`# whole-world soak — ${YEARS} years × ${REGION.length} settlements, seed "${SEED}", ${SOAK_PRESET.id} preset (seasons ${SEASONS}), now pinned ${NOW}\n`);
 
 // ── THE RESTORE PROBE (§141.2), STRUCTURALLY FIX-LOOP-ONLY ───────────────────
 // A restored run may NEVER compute an official verdict (§141's refused-by-name list,
