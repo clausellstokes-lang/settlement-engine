@@ -146,3 +146,33 @@ export function missionDispatcherActive(worldState) {
   if (!rules || typeof rules !== 'object') return false;
   return rules.missionDispatcherEnabled === true;
 }
+
+/**
+ * ── W-OPS DOOR 3 · THE OPERATIONS VOICE (the leaf's own provenance row) ───────
+ *
+ * `operationsVoiceEnabled` is not one of §6's two chartered doors; it is the door the
+ * VOICE leaf names for itself, and its own provenance states the shape this predicate
+ * implements verbatim: *"beneath it every surface inherits the doors of the subsystem
+ * whose receipts it voices"*. That is why the conjunction is with `espionageActive` and
+ * not with something narrower — the leaf voices espionage receipts, so it can have no
+ * more life than the layer whose receipts it reads.
+ *
+ * ⛔ IT MAY NOT LIVE IN THE LEAF. That module's suite pins that its LOGIC — its source
+ * with comments stripped and string literals blanked — carries no `Enabled` token at all,
+ * anchored on its provenance constant so an unreadable leaf reds instead of certifying.
+ * The door is deliberately "an address for the flag car, not a gate this leaf opens", and
+ * the flag car keeps it that way.
+ *
+ * ⚠ NO PRODUCTION CONSUMER AT THIS CAR: the leaf's `consumers` field says NONE by design,
+ * and the feed envelope and desk registration belong to the wiring car. This predicate is
+ * REGRESSION-grade until that lands. What the mint buys is CENSUS VISIBILITY.
+ *
+ * @param {unknown} worldState
+ * @returns {boolean}
+ */
+export function operationsVoiceActive(worldState) {
+  if (!espionageActive(worldState)) return false;
+  const rules = /** @type {{ simulationRules?: Record<string, unknown> }} */ (worldState)?.simulationRules;
+  if (!rules || typeof rules !== 'object') return false;
+  return rules.operationsVoiceEnabled === true;
+}

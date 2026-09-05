@@ -79,6 +79,15 @@ import {
 import { RANSOM_WORTH_BANDS } from '../../src/domain/worldPulse/ransomClaim.js';
 import { compareCodepoint } from '../../src/domain/deterministicSort.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+// LGT-P5-WOPS: the door this leaf's flag was minted onto. The read lives in the espionage
+// family's one door module because this leaf's LOGIC is pinned to carry no flag token at
+// all — the door is an address here and a gate only there.
+import { operationsVoiceActive } from '../../src/domain/worldPulse/espionage/espionageGate.js';
+import {
+  DEFAULT_SIMULATION_RULES,
+  ENGINE_GATED_VIRTUAL_RULE_KEYS,
+  SIMULATION_RULE_PRESETS,
+} from '../../src/domain/worldPulse/simulationRules.js';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, '..', '..');
@@ -628,11 +637,31 @@ describe('every spoken sentence survives the reader guard', () => {
 
 describe('the leaf is dark, injected, and pure', () => {
   test('no module under src names this leaf, and the census is executed over the tree', () => {
+    // ⏱ RE-CUT 2026-09-05 BY LGT-P5-WOPS, ON THE VOLUME'S OWN RULING. The arm's CLAIM is
+    // that no module under src/ CALLS this leaf; its first spelling measured MENTIONS of
+    // the string `operationsVoice`, which the CR-WR10-C mint necessarily adds in three
+    // bookkeeping places — the manifest member, the certification row's module path, and
+    // the family door. The sibling car in this same volume already ruled the instrument
+    // verbatim: "An IMPORT SPECIFIER census, not a mention census … a header is not a
+    // caller." So the caller claim is now an import-specifier census, which is STRICTLY
+    // STRONGER for the property named (a mention scan is satisfied by a renamed import),
+    // and the mention census SURVIVES beside it as an EXACT roster rather than an empty
+    // one — so a fourth namer still reds, and a mint surface that vanishes reds too.
+    const callers = srcFiles(join(ROOT, 'src'))
+      .filter((file) => relative(ROOT, file).split('\\').join('/') !== LEAF_REL)
+      .filter((file) => /from\s+'[^']*operationsVoice\.js'/.test(readFileSync(file, 'utf8')))
+      .map((file) => relative(ROOT, file).split('\\').join('/'));
+    expect(callers).toEqual([]);
     const namers = srcFiles(join(ROOT, 'src'))
       .filter((file) => relative(ROOT, file).split('\\').join('/') !== LEAF_REL)
       .filter((file) => /operationsVoice/.test(readFileSync(file, 'utf8')))
-      .map((file) => relative(ROOT, file));
-    expect(namers).toEqual([]);
+      .map((file) => relative(ROOT, file).split('\\').join('/'))
+      .sort();
+    expect(namers).toEqual([
+      'src/domain/certification/subsystemRowsOps.js',
+      'src/domain/worldPulse/espionage/espionageGate.js',
+      'src/domain/worldPulse/simulationRules.js',
+    ]);
   });
 
   test('the leaf imports nothing at all, so no sibling darkness arm can be reddened by it', () => {
@@ -669,6 +698,10 @@ describe('the leaf is dark, injected, and pure', () => {
       'the door is an address for the flag car, not a gate this leaf opens',
     );
     expect(OPERATIONS_VOICE_PROVENANCE.consumers).toMatch(/NONE/);
+    // ⏱ THE DOOR IS MINTED NOW, AND THE ARM ABOVE IS UNCHANGED ON PURPOSE: the mint put
+    // the READ in the family door module and left this leaf's logic exactly as gate-free
+    // as it was, which is the contract this arm holds.
+    expect(OPERATIONS_VOICE_PROVENANCE.door).toMatch(/MINTED 2026-09-05/);
   });
 
   test('the one magic gate cannot be grazed by a term this leaf does not carry', () => {
@@ -773,5 +806,84 @@ describe('the fog and the desk boundaries', () => {
       takenBeat({ npcName: 'Agent 47' }).refusal,
     ]);
     expect([...reached].sort(compareCodepoint)).toEqual([...VOICE_REFUSALS].sort(compareCodepoint));
+  });
+});
+
+// ── THE DOOR, MINTED 2026-09-05 BY LGT-P5-WOPS ───────────────────────────────────
+
+describe('W-OPS O4 — the CR-WR10-C door, and the polarity census that keeps it single', () => {
+  /** ES-0's real precondition, measured from the gate's own source: a positive canon
+   * marker and a non-omniscient info mode (`beliefsActive`), the errand spine, the layer
+   * flag — then this key. */
+  const litWorld = (extra = {}) => ({
+    spatialCanonVersion: 1,
+    simulationRules: {
+      infoMode: 'full',
+      errandSpineEnabled: true,
+      espionageEnabled: true,
+      operationsVoiceEnabled: true,
+      ...extra,
+    },
+  });
+
+  test('⭐ THE ONE GATE READ IS LIT, AND IT IS THE FAMILY DOOR — not this leaf', () => {
+    expect(operationsVoiceActive(litWorld())).toBe(true);
+    expect(operationsVoiceActive(litWorld({ operationsVoiceEnabled: false }))).toBe(false);
+    expect(operationsVoiceActive({ simulationRules: {} })).toBe(false);
+    expect(operationsVoiceActive(null)).toBe(false);
+    expect(operationsVoiceActive(undefined)).toBe(false);
+  });
+
+  test('⛔ STRICT, NOT TRUTHY: every truthy non-true spelling reads exactly like absent', () => {
+    const absent = operationsVoiceActive(litWorld({ operationsVoiceEnabled: undefined }));
+    expect(absent).toBe(false);
+    for (const truthy of [1, 'true', {}, []]) {
+      expect(
+        operationsVoiceActive(litWorld({ operationsVoiceEnabled: truthy })),
+        `a truthy non-true ${JSON.stringify(truthy)} must read exactly like absent`,
+      ).toBe(absent);
+    }
+  });
+
+  test('⛔ THE VOICE NEVER OUTLIVES THE RECEIPTS IT READS: each ES-0 door dropped alone', () => {
+    expect(operationsVoiceActive({ simulationRules: litWorld().simulationRules })).toBe(false);
+    expect(operationsVoiceActive(litWorld({ errandSpineEnabled: false }))).toBe(false);
+    expect(operationsVoiceActive(litWorld({ espionageEnabled: false }))).toBe(false);
+    expect(operationsVoiceActive(litWorld())).toBe(true);
+  });
+
+  test('⛔ THE POLARITY CENSUS: exactly ONE by-name read in src/, and it is strict', () => {
+    // A READ, NOT A MENTION: this leaf's own provenance NAMES the key in a string and
+    // gates nothing, and so do the manifest member and the row's `rule` field.
+    const KEY = 'operationsVoiceEnabled';
+    const READ_RE = new RegExp(`\\b${KEY}\\s*(?:===|!==|==|!=)`);
+    const readers = srcFiles(join(ROOT, 'src'))
+      .map((file) => ({
+        rel: relative(ROOT, file).split('\\').join('/'),
+        code: readFileSync(file, 'utf8').replace(/\/\*[\s\S]*?\*\//g, ' ').replace(/^\s*\/\/.*$/gm, ' '),
+      }))
+      .filter((entry) => READ_RE.test(entry.code))
+      .map((entry) => entry.rel)
+      .sort();
+    expect(readers).toEqual(['src/domain/worldPulse/espionage/espionageGate.js']);
+    expect(READ_RE.test('rules.operationsVoiceEnabled === true')).toBe(true);
+    expect(READ_RE.test("door: 'operationsVoiceEnabled: MINTED'")).toBe(false);
+  });
+
+  test('⛔ THE KEY IS VIRTUAL: absent from the defaults and from every preset spread', () => {
+    expect(Object.prototype.hasOwnProperty.call(DEFAULT_SIMULATION_RULES, 'operationsVoiceEnabled')).toBe(false);
+    for (const [id, preset] of Object.entries(SIMULATION_RULE_PRESETS)) {
+      expect(
+        Object.prototype.hasOwnProperty.call(preset.rules, 'operationsVoiceEnabled'),
+        `${id} declares the key — a virtual key must be false everywhere by ABSENCE`,
+      ).toBe(false);
+    }
+    expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toContain('operationsVoiceEnabled');
+  });
+
+  test('⭐ MINTING THE DOOR SIGNED NOTHING — every line here is still the pen\'s', () => {
+    expect(OPERATIONS_VOICE_PROVENANCE.signedBy).toBe(null);
+    expect(OPERATIONS_VOICE_PROVENANCE.status).toMatch(/OWNER-UNSIGNED/);
+    expect(OPERATIONS_VOICE_PROVENANCE.ownerRows.length).toBe(5);
   });
 });

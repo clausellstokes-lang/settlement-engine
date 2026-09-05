@@ -213,6 +213,10 @@ const INFILTRATION_DEPTH = 'infiltrationDepthEnabled';
 // door module — never in the leaf, which is the espionage set's one admitted importer and
 // must keep naming neither that module nor the layer flag.
 const MISSION_DISPATCHER = 'missionDispatcherEnabled';
+// LGT-P5-WOPS, one commit later again. NOT one of DESIGN_W_OPS §6's two chartered doors:
+// this is the one the VOICE leaf declares in its own provenance row, and the difference is
+// recorded on the row itself rather than smoothed away.
+const OPERATIONS_VOICE = 'operationsVoiceEnabled';
 // AUTHORING ORDER, not alphabetical: the assertion below is an exact ordered equality
 // against VIRTUAL_SUBSYSTEM_ROWS, so this list mirrors the file's own section order.
 const VIRTUAL_RULES = Object.freeze([
@@ -225,7 +229,7 @@ const VIRTUAL_RULES = Object.freeze([
   UNDERCITY_HIGH_WATER,
   TREASURY,
   FOREIGN_SEAT, LEGITIMACY_UPHEAVAL, WAR_MEMORY,
-  INFILTRATION_DEPTH, MISSION_DISPATCHER,
+  INFILTRATION_DEPTH, MISSION_DISPATCHER, OPERATIONS_VOICE,
   CHANCE_ENCOUNTERS,
 ]);
 
@@ -412,6 +416,10 @@ const LANE_LEAVES = Object.freeze({
   [MISSION_DISPATCHER]: [
     'src/domain/worldPulse/espionage/espionageGate.js',
     'src/domain/worldPulse/operations/missionDispatcher.js',
+  ],
+  [OPERATIONS_VOICE]: [
+    'src/domain/worldPulse/espionage/espionageGate.js',
+    'src/domain/worldPulse/espionage/operationsVoice.js',
   ],
 });
 
