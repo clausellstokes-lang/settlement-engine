@@ -31,4 +31,19 @@ io.open(os.path.join(out,'payload-%s.template.json'%n),'w',encoding='utf-8').wri
 # --- msg
 m='§%s: __SUBJECT__\n\n__BODY__\n\nEnrols: __ENROLS__\n\nSeat: Fable 5.1 — validated\n\nCo-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>\n'%n
 io.open(os.path.join(out,'msg-%s.txt'%n),'w',encoding='utf-8').write(m)
+
+# --- the two runners (quiet-window law; last line `exit $TRUE_EXIT`), from the ANCHORS pair
+g=io.open(SC+'/run-gate-anch.sh',encoding='utf-8').read()
+g=g.replace('run-gate-anch.sh — the ANCHORS consist\'s bare gate (npm run check) on laneANCH-tree,','run-gate-%s.sh — the §%s consist\'s bare gate (npm run check), stamped by mk-landing-kit.py;'%(n,n))
+g=g.replace('/laneANCH2','/'+a.dock)
+g=re.sub(r'BASE=[0-9a-f]{7,40}[^\n]*', 'BASE=%s   # the declared base; the guards below refuse to run unless the product tip IS this sha'%a.base, g, count=1)
+g=g.replace('git rev-parse df7cdd37e','git rev-parse %s'%a.base).replace('is not the clamp tip df7cdd37e — CAS §896 first','is not the declared base %s — land the previous consist first'%a.base[:9])
+g=g.replace('[ "$CARS" = "4" ]','[ "$CARS" = "%s" ]'%a.cars).replace('expected 4 cars over $BASE (3 replayed + the register car)','expected %s cars over $BASE'%a.cars)
+assert 'laneANCH' not in g and 'df7cdd37e' not in g.replace(a.base,'') , 'gate runner residue'
+io.open(os.path.join(out,'run-gate-%s.sh'%n),'w',encoding='utf-8').write(g)
+r=io.open(SC+'/run-ratchet-anch.sh',encoding='utf-8').read().replace('/laneANCH2','/'+a.dock).replace('run-ratchet-anch.sh — census totals at the ANCHORS consist tip.','run-ratchet-%s.sh — census totals at the §%s consist tip (stamped).'%(n,n))
+r=re.sub(r'echo "PREDICTED[^\n]*', 'echo "PREDICTED: __PREDICTION__ (derive EVERY figure before this runs — E4; totalTests is REFUSED in advance, this run is the derivation)"', r, count=1)
+assert 'laneANCH' not in r and '__PREDICTION__' in r
+io.open(os.path.join(out,'run-ratchet-%s.sh'%n),'w',encoding='utf-8').write(r)
+print('  + run-gate-%s.sh run-ratchet-%s.sh (fill __PREDICTION__)'%(n,n))
 print('kit §%s stamped in %s: after-cas-%s.sh collect-%s.sh payload-%s.template.json msg-%s.txt · dock=%s base=%s seal=%s cars=%s · fill __ROW__/__ROW_BODY__/__CARD__/__CARD_BODY__/__TAIL__/__TAIL_BODY__/__SUBJECT__/__BODY__/__ENROLS__'%(n,out,n,n,n,n,a.dock,a.base[:9],a.seal,a.cars))
