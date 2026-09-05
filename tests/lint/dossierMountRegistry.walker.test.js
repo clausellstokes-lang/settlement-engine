@@ -46,7 +46,7 @@
  */
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { dirname, join, relative } from 'node:path';
+import { basename, dirname, join, relative } from 'node:path';
 import { describe, expect, test } from 'vitest';
 
 import { codeOnly } from '../helpers/codeOnlySource.js';
@@ -688,6 +688,41 @@ describe('C3 the room — one fact, one sentence', () => {
  * reads the flag and ignores it. It CAN catch the defect that actually shipped twice: a desk
  * wired on a tab whose component never received the flag. A guard that overstated itself
  * would be worse than one that says where it stops.
+ *
+ * ── ARM 3, AND THE HOP THAT HAD NO ARM ───────────────────────────────────────────────
+ * ARMS 1 AND 2 GUARD THE TWO ENDS OF A CHAIN AND NOT ITS MIDDLE. The router computes the
+ * flag; ARM 1 proves it reaches a mounted TAB; ARM 2 proves the desk call is a gated
+ * expression. Between them sits a hop neither one reads, and it opened the day a desk stopped
+ * being called by its own tab: `warFaith` spans two tabs and `general` spans seven, ARM 2
+ * admits EXACTLY ONE caller per desk, so both had to move their gate into a shared READ
+ * MODULE that the tabs call. The flag is then a PARAMETER of that module — and a parameter
+ * has a default. `generalDeskLines`'s reads `options.publicDossier === true`, so a tab that
+ * calls it with no flag gets the SPEAKING path, silently, on a free viewer's dossier. ARM 1
+ * stays green (the router still hands the tab the prop), ARM 2 stays green (the gate
+ * expression is intact and the flag is right there beside the call), and the leak ships.
+ *
+ * SO ARM 3 ASKS WHERE THE FLAG CAME FROM, AND WHAT ELSE IT WAS OWED. Three clauses, all
+ * derived from O2GATE's own shape rather than invented. (a) The name a gate reads must
+ * ARRIVE — be a parameter of the function that holds the gate, or be read off a parameter
+ * object it receives. (b) Every component that reaches a desk through a shared reader must
+ * HAND it that flag and hold one itself. (c) EVERY name a component imports from a mounted
+ * desk's corpus leaf must be gated in the statement of each of its calls, not just the entry
+ * point ARM 2 reads: `defenseStateProse.js` hands DefenseTab six further producers,
+ * `powerStateProse.js` hands PowerTab `powerLadderRung` and `stressorsStateProse.js` hands
+ * OverviewTab `crisisBannerRung` — NINE corpus reads beside the five ARM 2 knows about, every
+ * one gated today by hand with nothing asking.
+ *
+ * CLAUSE (a) ALSO CLOSES A HOLE IN ARM 2'S PROXIMITY WINDOW that predates the read modules:
+ * `const publicDossier = false;` written one line above the desk call satisfies a
+ * 400-character lookback exactly, gates nothing, and would ship the whole corpus to an
+ * anonymous viewer. A flag a file writes for itself is a constant wearing a flag's name.
+ *
+ * ⚠ WHERE ARM 3 STOPS, said plainly. It reads `function` DECLARATIONS for signatures. A gate
+ * moved into an arrow expression has no signature this reader can find and REDS rather than
+ * passes — the fail-closed direction — which is why the limit is stated rather than cured.
+ * And like ARM 2 it is a structural claim, not a dataflow proof: it cannot catch a consumer
+ * that passes `publicDossier: false` on purpose. It catches the omission, which is the shape
+ * that has actually shipped, twice by hand and once more the moment a default appeared.
  */
 describe('THE PUBLIC-DOSSIER GUARD — a mounted desk never draws for a free viewer', () => {
   const ROUTER_RAW = readFileSync(join(ROOT, ROUTER), 'utf8');
@@ -735,6 +770,177 @@ describe('THE PUBLIC-DOSSIER GUARD — a mounted desk never draws for a free vie
       const raw = readFileSync(path, 'utf8');
       return raw.includes(`stateProse/${fn}.js`) && codeOnly(raw).includes(`${fn}(`);
     });
+  }
+
+  // ── ARM 3's readers. Each is pure and takes its source, so the controls below drive the
+  //    same functions the shipped arm does. ─────────────────────────────────────────────
+
+  /**
+   * The contents of the balanced-paren span opening at `open`. Read from STRIPPED source, so
+   * a parenthesis inside a comment or a quoted literal cannot unbalance it.
+   * @param {string} code @param {number} open the offset of the `(` @returns {string}
+   */
+  function parenSpan(code, open) {
+    let depth = 0;
+    for (let i = open; i < code.length; i += 1) {
+      if (code[i] === '(') depth += 1;
+      else if (code[i] === ')') { depth -= 1; if (depth === 0) return code.slice(open + 1, i); }
+    }
+    return '';
+  }
+
+  /** Every declared function's PARAMETER span. @param {string} code @returns {string[]} */
+  function signatureSpans(code) {
+    return [...code.matchAll(/\bfunction\s+[A-Za-z0-9_$]+\s*\(/g)]
+      .map((match) => parenSpan(code, match.index + match[0].length - 1));
+  }
+
+  /**
+   * Does this file obtain `publicDossier` from OUTSIDE itself? Either the name is a parameter
+   * of some function it declares (`EconomicsTab({ …, publicDossier })`), or it is read off a
+   * parameter object one of them receives (`generalDeskLines(s, options)` reading
+   * `options.publicDossier`). A `const publicDossier = …` the file writes for itself is not a
+   * flag, and this is the whole distinction ARM 2's proximity window cannot draw.
+   * @param {string} code @returns {boolean}
+   */
+  function flagArrivesAsParameter(code) {
+    const spans = signatureSpans(code);
+    if (spans.some((span) => /\bpublicDossier\b/.test(span))) return true;
+    const names = new Set(spans.flatMap(
+      (span) => [...span.matchAll(/[A-Za-z_$][A-Za-z0-9_$]*/g)].map((match) => match[0]),
+    ));
+    return [...names].some((name) => new RegExp(`\\b${name}\\.publicDossier\\b`).test(code));
+  }
+
+  /**
+   * The ARGUMENTS of every call to `fn`, its own declaration excluded and a method of the
+   * same name (`x.fn(`) excluded with it.
+   * @param {string} code @param {string} fn @returns {string[]}
+   */
+  function callArgumentSpans(code, fn) {
+    const out = [];
+    for (const match of code.matchAll(new RegExp(`(^|[^A-Za-z0-9_$.])(${fn})(\\s*)\\(`, 'g'))) {
+      const idStart = match.index + match[1].length;
+      const open = idStart + fn.length + match[3].length;
+      if (/\bfunction\s+$/.test(code.slice(Math.max(0, idStart - 20), idStart))) continue;
+      out.push(parenSpan(code, open));
+    }
+    return out;
+  }
+
+  /**
+   * The STATEMENT a call sits in, read backwards from its own `(`. Nesting is walked THROUGH
+   * rather than stopped at — a corpus read is very often an argument to `drawnAtMount(...)`,
+   * and a reader that stopped at the first enclosing paren would grade the ternary that gates
+   * it as absent. Only a `;` at group depth zero ends a statement.
+   * @param {string} code @param {number} at the offset of the call's `(` @returns {string}
+   */
+  function enclosingStatement(code, at) {
+    let depth = 0;
+    let i = at - 1;
+    for (; i >= 0; i -= 1) {
+      const c = code[i];
+      if (c === '}' || c === ')' || c === ']') depth += 1;
+      else if (c === '{' || c === '(' || c === '[') { if (depth > 0) depth -= 1; }
+      else if (c === ';' && depth === 0) break;
+    }
+    return code.slice(i + 1, at);
+  }
+
+  /**
+   * ⛔ THE THIRD CLAUSE, AND IT GUARDS NINE SITES ARM 2 NEVER LOOKS AT. ARM 2 reads exactly
+   * one name per desk — `<desk>StateProse(` — and a corpus leaf exports MORE than its entry
+   * point. `defenseStateProse.js` hands DefenseTab six further producers, `powerStateProse.js`
+   * hands PowerTab `powerLadderRung`, `stressorsStateProse.js` hands OverviewTab
+   * `crisisBannerRung`; every one of them builds corpus rungs and every one is gated TODAY BY
+   * HAND, with nothing asking. So: every name a component imports from a mounted desk's leaf
+   * must have `publicDossier` in the STATEMENT of each of its calls.
+   * @param {readonly string[]} desks
+   * @param {(path: string) => string} read
+   * @param {readonly string[]} tree
+   * @returns {string[]}
+   */
+  function ungatedCorpusReads(desks, read, tree) {
+    const bad = [];
+    const leaves = new Set(desks.map((desk) => `stateProse/${desk}StateProse.js`));
+    for (const file of tree) {
+      const raw = read(file);
+      const imports = [...raw.matchAll(
+        /import\s*\{([^}]*)\}\s*from\s*'([^']*stateProse\/[A-Za-z0-9_]+StateProse)\.js'/g,
+      )].filter((match) => [...leaves].some((leaf) => `${match[2]}.js`.endsWith(leaf)));
+      if (imports.length === 0) continue;
+      const code = codeOnly(raw);
+      for (const match of imports) {
+        const names = match[1].split(',')
+          .map((piece) => piece.trim().split(/\s+as\s+/).pop())
+          .filter((name) => /^[A-Za-z_$][A-Za-z0-9_$]*$/.test(name || ''));
+        for (const name of names) {
+          for (const call of code.matchAll(new RegExp(`(^|[^A-Za-z0-9_$.])${name}\\s*\\(`, 'g'))) {
+            const open = call.index + call[0].length - 1;
+            if (/\bfunction\s+$/.test(code.slice(Math.max(0, open - 30), open - name.length))) continue;
+            if (!/\bpublicDossier\b/.test(enclosingStatement(code, open))) {
+              bad.push(`${relative(ROOT, file).replace(/\\/g, '/')}: ${name}() reads the corpus`
+                + ' in a statement that never mentions publicDossier, so a free anonymous'
+                + ' viewer draws it');
+            }
+          }
+        }
+      }
+    }
+    return bad;
+  }
+
+  /**
+   * ARM 3's whole rule, as offences. TOTAL over the desks passed in, with the desk→gate
+   * resolver, the source reader and the component tree all injectable, so the shipped table
+   * and the planted controls are judged by one function.
+   * @param {readonly string[]} desks
+   * @param {(desk: string) => string[]} [sites]
+   * @param {(path: string) => string} [read]
+   * @param {readonly string[]} [tree]
+   * @returns {string[]}
+   */
+  function threadingFaults(desks, sites = deskCallSites, read = (p) => readFileSync(p, 'utf8'),
+    tree = COMPONENT_FILES) {
+    const bad = [];
+    const label = (path) => relative(ROOT, path).replace(/\\/g, '/');
+    for (const desk of desks) {
+      const gates = sites(desk);
+      if (gates.length !== 1) { bad.push(`${desk}: ${gates.length} gate sites, so there is no single gate to trace`); continue; }
+      const gateFile = gates[0];
+      const gateCode = codeOnly(read(gateFile));
+      const at = gateCode.indexOf(`${desk}StateProse(`);
+      if (at < 0) { bad.push(`${desk}: ${label(gateFile)} no longer calls ${desk}StateProse`); continue; }
+      const heads = [...gateCode.slice(0, at)
+        .matchAll(/\bexport\s+(?:default\s+)?function\s+([A-Za-z0-9_$]+)\s*\(/g)];
+      if (heads.length === 0) {
+        bad.push(`${desk}: the desk call in ${label(gateFile)} sits inside no exported function,`
+          + ' so there is nothing a caller could hand a flag to');
+        continue;
+      }
+      const reader = heads[heads.length - 1][1];
+      if (!flagArrivesAsParameter(gateCode)) {
+        bad.push(`${desk}: ${reader} in ${label(gateFile)} does not RECEIVE publicDossier — the`
+          + ' name its gate reads is written by that file itself, and a flag a file writes for'
+          + ' itself gates nothing');
+      }
+      for (const file of tree) {
+        if (file === gateFile) continue;
+        const raw = read(file);
+        if (!raw.includes(basename(gateFile))) continue;
+        const code = codeOnly(raw);
+        for (const args of callArgumentSpans(code, reader)) {
+          if (!/\bpublicDossier\b/.test(args)) {
+            bad.push(`${desk}: ${label(file)} reads the desk through ${reader}() and hands it no`
+              + ' publicDossier, so the shared reader falls back to its own default');
+          } else if (!flagArrivesAsParameter(code)) {
+            bad.push(`${desk}: ${label(file)} hands ${reader}() a publicDossier it does not`
+              + ' itself receive');
+          }
+        }
+      }
+    }
+    return [...new Set([...bad, ...ungatedCorpusReads(desks, read, tree)])].sort();
   }
 
   test('guard the guard: the case reader takes a real branch and skips prose and literals', () => {
@@ -811,5 +1017,140 @@ describe('THE PUBLIC-DOSSIER GUARD — a mounted desk never draws for a free vie
     expect(ungatedCaller.slice(Math.max(0, at - 400), at)).not.toContain('publicDossier');
     // The SHIPPED tree is the positive control standing beside both negatives.
     expect(routerCaseBlock('power')).toContain('publicDossier');
+  });
+
+  test('guard the guard: the span reader takes one call and its own arguments, and a received flag is told from a self-written one', () => {
+    // A span stops at ITS OWN close paren, so two calls on one line are two argument lists.
+    const pair = codeOnly('const a = f({ publicDossier }); const b = g({ playerView });');
+    expect(callArgumentSpans(pair, 'f')).toEqual(['{ publicDossier }']);
+    expect(callArgumentSpans(pair, 'g')).toEqual(['{ playerView }']);
+    // A nested call inside the arguments does not close the span early — the defect that
+    // would make every multi-argument gate read as flagless.
+    expect(callArgumentSpans(codeOnly('h(map(x), publicDossier);'), 'h'))
+      .toEqual(['map(x), publicDossier']);
+    // The DECLARATION is not a call site, or every shared reader would convict itself; the
+    // recursive call beside it still is.
+    expect(callArgumentSpans(codeOnly('function h(publicDossier) { return h(publicDossier); }'), 'h'))
+      .toEqual(['publicDossier']);
+    // A method of the same name on some other object is not this reader.
+    expect(callArgumentSpans(codeOnly('desk.h(nothing);'), 'h')).toEqual([]);
+    // THE PROVENANCE RULE, all four directions. A named parameter is a flag…
+    expect(flagArrivesAsParameter(codeOnly(
+      'export function Tab({ settlement, publicDossier = false }) { return publicDossier; }',
+    ))).toBe(true);
+    // …so is one read off a parameter OBJECT, which is the shared-read-module shape…
+    expect(flagArrivesAsParameter(codeOnly(
+      'export function read(s, options = {}) { const publicDossier = options.publicDossier === true; return publicDossier; }',
+    ))).toBe(true);
+    // …a constant the file writes for itself is NOT, and this is precisely the shape ARM 2's
+    // 400-character lookback passes: the gate expression is intact and gates nothing…
+    expect(flagArrivesAsParameter(codeOnly(
+      'const publicDossier = false;\nexport function Tab({ settlement }) { return publicDossier; }',
+    ))).toBe(false);
+    // …and neither is a file with no function for a flag to arrive on at all.
+    expect(flagArrivesAsParameter(codeOnly('const publicDossier = true;'))).toBe(false);
+    // THE STATEMENT READER walks THROUGH nesting, because a corpus read is usually an
+    // argument to drawnAtMount(…) and a reader that stopped at the first enclosing paren
+    // would grade the ternary gating it as absent — a false red on shipped code.
+    const nested = codeOnly('const a = 1;\nconst drawn = publicDossier ? null : draw(M, rung(s));');
+    expect(enclosingStatement(nested, nested.indexOf('rung(') + 4)).toContain('publicDossier');
+    // And it does not reach BACK past the previous statement, or every gate in a file would
+    // launder every read after it.
+    const after = codeOnly('const gate = publicDossier ? 1 : 2;\nconst drawn = draw(M, rung(s));');
+    expect(enclosingStatement(after, after.indexOf('rung(') + 4)).toBe('\nconst drawn = draw(M, rung');
+  });
+
+  test('ARM 3: every corpus read is gated, and the flag it is gated on ARRIVED from outside the file that reads it', () => {
+    expect(MOUNTED_DESKS.length, 'no desk is mounted, so this arm walked nothing')
+      .toBeGreaterThan(0);
+    expect(
+      threadingFaults(MOUNTED_DESKS),
+      'A CORPUS READ IS UNGATED, or the publicDossier it is gated on never ARRIVED. ARM 1'
+      + ' proves the ROUTER passes the flag to a mounted tab and ARM 2 proves ONE name per'
+      + ' desk is a gated expression; this arm covers what sits between and beside them.'
+      + ' (a) A shared read module has a parameter DEFAULT, so a tab that omits the flag does'
+      + ' not error — it silently takes the SPEAKING path on a free anonymous dossier.'
+      + ' (b) A corpus leaf exports more than its entry point, and every one of those'
+      + ' producers builds rungs ARM 2 never looks at. (c) A `const publicDossier = false`'
+      + ' the file writes for itself satisfies a proximity window and gates nothing.'
+      + ' Thread it: pass publicDossier at the call, receive it as a prop in the component'
+      + ' that passes it, and gate every corpus read in its own statement.',
+    ).toEqual([]);
+  });
+
+  test('NON-VACUITY: a self-written flag, a consumer that hands none, one threading a name it lacks and an ungated second producer are each convicted', () => {
+    const GATE = join(ROOT, 'src/components/new/probeDeskRead.js');
+    const CONSUMER = join(ROOT, 'src/components/new/tabs/ProbeTab.jsx');
+    const TREE = [GATE, CONSUMER];
+    const sites = () => [GATE];
+    /** The lawful shape, written as the two landed shared readers actually write it — with
+     *  the SECOND producer beside the entry point, which is DefenseTab's real shape. */
+    const CLEAN_FILES = Object.freeze({
+      [GATE]: [
+        "import { probeStateProse, probeBannerRung } from '../../domain/display/stateProse/probeStateProse.js';",
+        'export function probeDeskLines(settlement, options = {}) {',
+        '  const publicDossier = options.publicDossier === true;',
+        '  const banner = publicDossier ? null : probeBannerRung(settlement);',
+        '  return publicDossier ? SILENT : probeStateProse(settlement, { banner });',
+        '}',
+      ].join('\n'),
+      [CONSUMER]: [
+        "import { probeDeskLines } from '../probeDeskRead.js';",
+        'export function ProbeTab({ settlement, publicDossier = false }) {',
+        '  return probeDeskLines(settlement, { publicDossier });',
+        '}',
+      ].join('\n'),
+    });
+    // The control table is clean, or every conviction below is free.
+    expect(threadingFaults(['probe'], sites, (p) => CLEAN_FILES[p], TREE)).toEqual([]);
+
+    // PLANT 1 — the flag becomes a constant the gate file writes for itself. ARM 2's window
+    // still sees `publicDossier` beside the call; ARM 3 sees that nothing can set it.
+    const selfWritten = {
+      ...CLEAN_FILES,
+      [GATE]: CLEAN_FILES[GATE].replace(
+        'const publicDossier = options.publicDossier === true;', 'const publicDossier = false;',
+      ),
+    };
+    const one = threadingFaults(['probe'], sites, (p) => selfWritten[p], TREE);
+    expect(one, 'the self-written flag did not plant').toHaveLength(1);
+    expect(one[0]).toContain('does not RECEIVE publicDossier');
+
+    // PLANT 2 — the consumer stops handing the flag over. This is the hop that had no arm,
+    // and the shared reader's own default then chooses the SPEAKING path.
+    const handsNone = {
+      ...CLEAN_FILES,
+      [CONSUMER]: CLEAN_FILES[CONSUMER].replace('settlement, { publicDossier }', 'settlement, {}'),
+    };
+    const two = threadingFaults(['probe'], sites, (p) => handsNone[p], TREE);
+    expect(two, 'the flagless call did not plant').toHaveLength(1);
+    expect(two[0]).toContain('hands it no publicDossier');
+
+    // PLANT 3 — the consumer threads a name it does not itself receive, which is the same
+    // omission one component further up the chain.
+    const notHeld = {
+      ...CLEAN_FILES,
+      [CONSUMER]: CLEAN_FILES[CONSUMER].replace('{ settlement, publicDossier = false }', '{ settlement }'),
+    };
+    const three = threadingFaults(['probe'], sites, (p) => notHeld[p], TREE);
+    expect(three, 'the unheld flag did not plant').toHaveLength(1);
+    expect(three[0]).toContain('a publicDossier it does not itself receive');
+
+    // PLANT 4 — the leaf's SECOND producer loses its gate while the entry point keeps its
+    // own. ARM 2 reads one name per desk and would never look here.
+    const secondProducer = {
+      ...CLEAN_FILES,
+      [GATE]: CLEAN_FILES[GATE].replace(
+        'const banner = publicDossier ? null : probeBannerRung(settlement);',
+        'const banner = probeBannerRung(settlement);',
+      ),
+    };
+    const four = threadingFaults(['probe'], sites, (p) => secondProducer[p], TREE);
+    expect(four, 'the ungated second producer did not plant').toHaveLength(1);
+    expect(four[0]).toContain('probeBannerRung() reads the corpus');
+
+    // And a desk with no single gate at all is convicted before any of the above is read.
+    expect(threadingFaults(['probe'], () => [], (p) => CLEAN_FILES[p], TREE))
+      .toEqual(['probe: 0 gate sites, so there is no single gate to trace']);
   });
 });
