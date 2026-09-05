@@ -60,6 +60,7 @@
  */
 
 import { hash01 } from '../region/contestMath.js';
+import { fnv1a32 } from './eventProse.js';
 import {
   CHANCE_MEETING_OUTCOME_PHRASES,
   CHANCE_MEETING_RECEIPTS,
@@ -184,6 +185,32 @@ function text(value) {
 }
 
 /**
+ * ⛔⛔ THE PUBLIC REFERENCE, AND IT CURES TWO MEASURED DEFECTS RATHER THAN ONE. This is
+ * `envoyNews.js#publicSourceRef`'s idiom, taken for both of the reasons that file states and one
+ * this lane MEASURED at the dock:
+ *
+ *   1. THE LEAK. A meeting key is built from the ERRAND ID — a live example reads
+ *      `chance_meeting:68:envoy_errand:17:ashford::irontown|…`. Slugging it into a public news id
+ *      publishes an internal errand handle on a reader surface. envoyNews hides the same handle
+ *      for the same reason: "Hide errand/offer ids while retaining exact-once public identity."
+ *   2. THE COLLISION, and it is not theoretical. `stablePart` caps at EIGHTY characters, and a
+ *      meeting key is routinely longer: two DIFFERENT meetings at the same tick between towns
+ *      with long names slug to the SAME eighty characters (executed at the dock:
+ *      `…northharrowfield_southharrowfield_7_northharro` for both). `appendWizardNewsEntries`
+ *      DEDUPES BY ID, so the second line would be swallowed in silence — the estate's own
+ *      recorded hazard, written into `momentum.js:1152` and `supplyWebWarfare.js:892` in so many
+ *      words. A digest is fixed-width and reads every byte of the key.
+ *
+ * @param {string} meetingId @returns {string}
+ */
+function publicMeetingRef(meetingId) {
+  return [
+    fnv1a32(`chance-meeting-public-a\u0000${meetingId}`),
+    fnv1a32(`chance-meeting-public-b\u0000${meetingId}`),
+  ].map((part) => part.toString(16).padStart(8, '0')).join('');
+}
+
+/**
  * Resolve one authored CHANCE_MEETING sentence. Variants whose named evidence is absent are
  * ineligible. Null when nothing in the pool qualifies or the kind is unknown — silence, never
  * generic prose.
@@ -232,10 +259,14 @@ export function chanceMeetingLine(kind, seed, interp = {}) {
  * docblock reserves ("ENC-4 owns those: it exports a single builder on the `faithReceipt(...)`
  * model and this stage calls it once per seed through `heraldEntryFor`").
  *
- * ⛔ EVERY NAME ARRIVES AS AN ARGUMENT. This file resolves no id against any world and imports no
- * roster reader: the caller holds the pulse's own pre-mutation snapshot and is the only honest
- * place to turn a settlement id into a settlement name. That keeps this module PURE and keeps the
- * ENCOUNTERS registry from growing a second opinion about who anybody is.
+ * ⛔ EVERY NAME ARRIVES ON THE SEED. This file resolves no id against any world and imports no
+ * roster reader: the STAGE holds the pulse's own pre-mutation cut and the seats the census
+ * already resolved, so it is the only honest place to turn an id into a name — and ENC-4 measured
+ * that its seed had never carried the names its own contract promised. Completing the seed there
+ * rather than resolving here keeps this module PURE, keeps the ENCOUNTERS registry from growing a
+ * second opinion about who anybody is, and removes an id round-trip that would have been WRONG:
+ * `envoyCasting.js#rosterPersonById` matches a durable H1 id or a bare roster id, never
+ * `npcAgency.js#npcId`'s `sid:rosterId` composite, which is the spelling the stage's nids carry.
  *
  * ⛔ IT FAILS CLOSED, AND THE FAILURE IS SILENCE. A seed for any beat but the meeting, an outcome
  * with no authored band fill, or a single unresolved name yields NULL — the estate's posture for
@@ -250,15 +281,10 @@ export function chanceMeetingLine(kind, seed, interp = {}) {
  *   • NAMES    — `settlementNames` beside `settlementIds`, and both people inside the sentence.
  *   • REASON   — the annex's own, riding every variant.
  *
- * @param {{seed?: Record<string, unknown>,
- *   npcNames?: ReadonlyArray<string>,
- *   settlementNames?: Readonly<Record<string, string>>,
- *   now?: string|null}} [args]
+ * @param {{seed?: Record<string, unknown>, now?: string|null}} [args]
  * @returns {Record<string, unknown>|null}
  */
-export function chanceMeetingEntry({
-  seed, npcNames, settlementNames, now = null,
-} = {}) {
+export function chanceMeetingEntry({ seed, now = null } = {}) {
   const source = /** @type {Record<string, unknown>} */ (seed && typeof seed === 'object' ? seed : {});
   // THE BEAT GATE. ENC-3 mints `'meeting'` for the three visible mark bands and
   // `'approach_exposed'` for the refusal that travelled; only the first is this row's.
@@ -269,9 +295,11 @@ export function chanceMeetingEntry({
   const row = CHANCE_MEETING_KIND_REGISTRY[0];
   const npcIds = Array.isArray(source.npcIds) ? source.npcIds.map(text) : [];
   const homeSids = Array.isArray(source.settlementIds) ? source.settlementIds.map(text) : [];
-  const names = Array.isArray(npcNames) ? npcNames.map(text) : [];
+  const names = Array.isArray(source.npcNames) ? source.npcNames.map(text) : [];
   const places = /** @type {Record<string, string>} */ (
-    settlementNames && typeof settlementNames === 'object' ? settlementNames : {});
+    source.settlementNames && typeof source.settlementNames === 'object'
+      ? source.settlementNames
+      : {});
   const hostSid = text(source.hostId);
   // ⛔ PARTY ORDER IS THE CENSUS'S, NOT A CONVENTION THIS FILE INVENTS: both selection rules in
   // `envoyChanceMeeting.js#censusChanceMeetingCandidates` put the TRAVELLER at index 0, so
@@ -298,8 +326,9 @@ export function chanceMeetingEntry({
   const tick = Number.isFinite(Number(source.tick)) ? Number(source.tick) : 0;
   const settlementIds = [...new Set([hostSid, ...homeSids].filter(Boolean))];
   const venueIds = Array.isArray(source.venueIds) ? source.venueIds.map(text).filter(Boolean) : [];
+  const publicRef = publicMeetingRef(meetingId);
   return {
-    id: `wizard_news.${tick}.${stablePart(row.kind)}.${stablePart(meetingId)}`,
+    id: `wizard_news.${tick}.${stablePart(row.kind)}.${publicRef}`,
     tick,
     createdAt: now,
     scope: 'regional',
@@ -317,7 +346,7 @@ export function chanceMeetingEntry({
     ...(venueIds.length ? { venueIds } : {}),
     impactIds: [],
     channelIds: [],
-    sourceEventId: meetingId,
+    sourceEventId: `chance_meeting_receipt.${stablePart(row.kind)}.${publicRef}`,
     tags: ['world_pulse', 'encounters', String(row.section)],
     reasons: [reason],
     familyId: picked.familyId,
