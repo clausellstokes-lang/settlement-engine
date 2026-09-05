@@ -948,12 +948,28 @@ describe('DS-POW-4 — the hold lens needs no new reader, and the lineage needs 
     // stating the number here is what stops a later reader assuming all nine were wired.
     expect(reached.size, `unreached: ${Object.keys(POW4_POOLS).filter((k) => !reached.has(k))}`).toBe(7);
     expect(Object.keys(POW4_POOLS)).toHaveLength(9);
-    // {timeband_age} is named by ONE variant of 29 and has no duration former anywhere in
-    // the tree. It stays unfilled, anchored liveness drops that single variant, and the
-    // count above proves no POOL is lost by it. Measured, not assumed.
-    const named = Object.values(POW4_POOLS).flat()
-      .filter((v) => (v.slots || []).includes('timeband_age'));
+    // {timeband_age} is named by ONE variant of 29. It stays unfilled, anchored liveness
+    // drops that single variant, and the count above proves no POOL is lost by it.
+    //
+    // ⛔ THE REASON THIS COMMENT USED TO GIVE — "no duration former anywhere in the tree" —
+    // IS FALSE. `heraldCausalGrammar.js`'s timeBandOf/timeBandWord IS that former: a
+    // zero-import display leaf whose six-band × four-position table matches §0d cell for
+    // cell in both annexes (24 of 24 cells, measured 2026-09-05 by DESK-TIMEBAND). The slot
+    // stays unfilled for a STRONGER reason, and the two arms below PIN it rather than
+    // restating it: the one variant lives in a LINEAGE pool, and the arm above proves this
+    // desk reads neither lineage pool — so a fill would change no rendered byte.
+    // If a corpus regeneration ever moves this variant into a pool the desk DOES reach,
+    // these red, and the refusal has to be decided again instead of silently inherited.
+    const named = Object.entries(POW4_POOLS)
+      .flatMap(([poolKey, variants]) => variants.map((v) => ({ poolKey, v })))
+      .filter(({ v }) => (v.slots || []).includes('timeband_age'));
     expect(named).toHaveLength(1);
+    expect(named[0].poolKey).toBe('previousGovernments present with a recorded cause');
+    // `reached` is pinned at exactly 7 above, so this cannot go vacuous by an empty set.
+    expect(
+      reached.has(named[0].poolKey),
+      'the desk must not reach the pool that holds the {timeband_age} variant',
+    ).toBe(false);
   });
 
   it('DS-POW-4 carries no covert variant, so the player and the DM read the same lines', () => {
