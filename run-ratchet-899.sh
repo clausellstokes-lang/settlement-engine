@@ -9,14 +9,14 @@ while [ $STREAK -lt 3 ]; do
   V=$(ps -ax -o command | grep -c '[v]itest/dist/workers')
   OK=$(awk -v l="$L" 'BEGIN{print (l<6.0)?1:0}')
   if [ "$OK" = "1" ] && [ "$V" -eq 0 ]; then STREAK=$((STREAK+1)); else STREAK=0; fi
-  echo "  probe(threshold 6.0 on a 8-core host; JUDGMENT 09-05, the 4.0 constant re-asked — the totals guard catches a false red): load=$L workers=$V streak=$STREAK waited=${WAITED}s"
+  echo "  probe: load=$L workers=$V streak=$STREAK waited=${WAITED}s"
   [ $STREAK -lt 3 ] && sleep 60 && WAITED=$((WAITED+60))
   [ $WAITED -gt 3600 ] && { echo "GAVE UP"; exit 8; }
 done
 echo "QUIET CONFIRMED after ${WAITED}s"
 echo "RATCHET_HEAD=$(git rev-parse HEAD)"
 echo "RATCHET_PORCELAIN_PRE=[$(git status --porcelain -uall | wc -l | tr -d ' ')]"
-echo "PREDICTED: entries 5 -> 2 (clampPrimitiveBaseline retires on the 62 -> 69 ceiling car; the two Tier-3 JSX voice rows retire on VOICE-JSX; enforcement-claims and the owner-gated golden-master STAY) · totalFiles 2468 -> 2470 (ENC-4's chanceMeetingKindPools walker + DOCKET's frozenExportRightsFloor suite) · totalTests: the instrument derives it, the chair refuses to name a figure that needs the suite to run · skippedCeiling 1 (the pg test's honest skip) (derive EVERY figure before this runs — E4; totalTests is REFUSED in advance, this run is the derivation)"
+echo "PREDICTED: entries 5 -> 2 (clampPrimitiveBaseline retires on the 62 -> 69 ceiling car; the two Tier-3 JSX voice rows retire on VOICE-JSX; enforcement-claims and the owner-gated golden-master STAY) · totalFiles 2468 -> 2470 (ENC-4's chanceMeetingKindPools walker + DOCKET's frozenExportRightsFloor suite) · totalTests: the instrument derives it · skippedCeiling 1 · the FIRST run refused on IA-1 (SK-0's retired literal), cured by chair car 6 (derive EVERY figure before this runs — E4; totalTests is REFUSED in advance, this run is the derivation)"
 sh scripts/gate-mutex.sh --run -- node scripts/check-test-ratchet.mjs --update
 TRUE_EXIT=$?
 echo "TRUE_EXIT=$TRUE_EXIT"
