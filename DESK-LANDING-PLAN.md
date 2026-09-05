@@ -40,7 +40,7 @@ NEW schema rung (17); the desk consist's OSR baseline is then re-frozen at the c
 - A residue row for the chair/owner: the chance-meeting approach direction ties on `codepoint(target.nid)` — town-name spelling decides who offered on a tie (ENC-4c measured 89/89); a seeded tie-break is generation-side.
 - `{founder}`: the annex re-declared to the producer's phrase class (`rulings/RULING-FOUNDER-SLOT.md`); the name producer is an OWNER row.
 - SEAT-78's coupling row: deploymentReturn.js → irregularForce.js (INTERIOR→WAR) in the couplingInclusion registry.
-- ENC-4b car 4's pantheon conflict: resolve to 115/381 by hand.
+- ENC-4b car 4's pantheon conflict: PANTHEON-ROSTER (laneROSTER:ec1b5e3e9, 3 cars) made A5 read `tests/helpers/kindRegistryRoster.js`; resolve the conflict by putting the two-kind figures (registries 12, allRows 115, routedTokens 381, unvoiced 274, difference 8, small families + CHANCE_MEETING) INTO THE ROSTER, and the walker's four bound numerals follow by its executed equality; run `tests/scripts/baseStateCapsule.test.js` — the capsule parses the walker's source.
 - The OWED vitest of OSR-SCHEMA17, ENC-4b, SEAT-78 (and whatever ENC-4c/HORIZON-B2/DOCKET-2 leave owed): run the WHOLE tests/domain + tests/lint + tests/copy + tests/property at the composed tip, not the named suites.
 ARM 2 of the public-dossier guard: re-key "exactly one caller per desk" to the importer list (two components draw the defense leaf; ARM 3 already keys on importers) — the auditability rule follows the safety rule. One file, one car, `Seat: Fable 5.1 — validated`.
 
