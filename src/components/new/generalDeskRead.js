@@ -65,6 +65,9 @@ const FRAMING_MOUNT = 'plot_hooks.framing';
 /** The ECONOMICS position — DS-GEN-18, beside the supply-chain rows it explains. */
 const CRAFT_REASON_MOUNT = 'economics.craftReason';
 
+/** The STEADINGS position — DS-GEN-8, at the section that already renders those three facts. */
+const STEADINGS_MOUNT = 'overview.steadings';
+
 /** The shape every consumer gets, silent. Frozen so a caller cannot fill it in. */
 const SILENT_OVERVIEW = Object.freeze({
   healthLines: Object.freeze([]),
@@ -88,6 +91,10 @@ const SILENT_VIABILITY = Object.freeze({ verdictLines: Object.freeze([]) });
 const SILENT_HOOKS = Object.freeze({ framingLines: Object.freeze([]) });
 /** The same, for the craft-reason line. */
 const SILENT_ECONOMICS = Object.freeze({ craftReasonLine: null });
+/** The same, for the remnant banner, the ancient-ruin banner and the steading cards. */
+const SILENT_STEADINGS = Object.freeze({
+  remnantLine: null, ruinLine: null, steadingLines: Object.freeze([]),
+});
 
 /**
  * ⚠ THIS IS THE READER'S RETURN CONTRACT, exactly as `GENERAL_STATE_PROSE_SILENT` is the
@@ -95,7 +102,7 @@ const SILENT_ECONOMICS = Object.freeze({ craftReasonLine: null });
  * missing here is a position this reader is not allowed to hand back.
  * @type {Readonly<{overview: typeof SILENT_OVERVIEW, history: typeof SILENT_HISTORY,
  *   viability: typeof SILENT_VIABILITY, hooks: typeof SILENT_HOOKS,
- *   economics: typeof SILENT_ECONOMICS}>}
+ *   economics: typeof SILENT_ECONOMICS, steadings: typeof SILENT_STEADINGS}>}
  */
 export const GENERAL_DESK_SILENT = Object.freeze({
   overview: SILENT_OVERVIEW,
@@ -103,6 +110,7 @@ export const GENERAL_DESK_SILENT = Object.freeze({
   viability: SILENT_VIABILITY,
   hooks: SILENT_HOOKS,
   economics: SILENT_ECONOMICS,
+  steadings: SILENT_STEADINGS,
 });
 
 /**
@@ -122,7 +130,9 @@ function line(mount, rung) {
  * @param {{publicDossier?: boolean, playerView?: boolean,
  *   stresses?: ReadonlyArray<{type?: unknown}|null>,
  *   hookCategories?: ReadonlyArray<unknown>|null,
- *   clockIds?: ReadonlyArray<unknown>|null}} [options]
+ *   clockIds?: ReadonlyArray<unknown>|null,
+ *   steadings?: ReadonlyArray<unknown>|null,
+ *   lifecycleStatus?: unknown}} [options]
  *   `stresses` is the caller's OWN normalized stress list — DS-GEN-5 suppresses itself where
  *   a primary stress resolves, and it must key on the SAME ladder the arrival scene above it
  *   keys on or the page prints an ordinary market day underneath a siege banner.
@@ -190,6 +200,23 @@ export function generalDeskLines(settlement, options = {}) {
       activeChains: eco.activeChains,
       exploitation: r.resourceAnalysis?.exploitation,
       primaryImports: eco.primaryImports,
+      // ⛔ DS-GEN-8's GRADE IS PASSED IN, AND THE REASON IS A MEASURED RATCHET RED RATHER
+      // THAN TASTE. Spelling the read here (`r.lifecycleStatus || r.config?.lifecycleStatus`)
+      // put TWO NEW identities into `check-observed-shape-readers.mjs` against this file —
+      // `lifecycleStatus on settlement` and `lifecycleStatus on config` — because the
+      // scanner's corpus is generated worlds and this field is written by a WORLDPULSE
+      // kernel during a played one. The scan is right that no generated town carries it and
+      // wrong that nothing writes it, which is the observation ratchet's known shape; the
+      // cure is not to widen a baseline but to read the field where the estate has already
+      // accepted the read. `SteadingsSection.jsx` carries frozen rows for both identities
+      // and already spells this exact fallback at its own line 35.
+      lifecycleStatus: options.lifecycleStatus,
+      // ⛔ THE STEADINGS ARE PASSED IN RATHER THAN REACHED FOR, on the `hookCategories`
+      // reasoning: they live in the CAMPAIGN's `spatialLedgers.satellites` ledger, not on the
+      // settlement, and only the section that already resolves that ledger from the store
+      // can hand them over. A reader that resolved the store itself would be a second
+      // opinion about which campaign owns this town.
+      steadings: options.steadings,
     },
     { seed: String(r?._seed ?? r?.id ?? ''), audience: options.playerView ? 'player' : 'dm' },
   );
@@ -241,6 +268,13 @@ export function generalDeskLines(settlement, options = {}) {
     }),
     economics: Object.freeze({
       craftReasonLine: line(CRAFT_REASON_MOUNT, prose.economics.craftReason),
+    }),
+    steadings: Object.freeze({
+      remnantLine: line(STEADINGS_MOUNT, prose.steadings.remnant),
+      ruinLine: line(STEADINGS_MOUNT, prose.steadings.ruin),
+      // INDEX-PAIRED with the caller's own cards: a null stays in place.
+      steadingLines: Object.freeze(prose.steadings.rows
+        .map((rung) => line(STEADINGS_MOUNT, rung))),
     }),
   });
 }

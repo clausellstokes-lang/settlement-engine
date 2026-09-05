@@ -214,7 +214,9 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
 
       {/* ── W-LIFECYCLE: remnant / ancient-ruin banners + the steadings orbit
             (renders NOTHING for a world without lifecycle state). ─────────── */}
-      <SteadingsSection settlement={r} />
+      {/* DS-GEN-8 draws inside this section, which owns the steadings ledger read.
+          The paid-surface flag is threaded to it rather than assumed there. */}
+      <SteadingsSection settlement={r} publicDossier={publicDossier} playerView={playerView} />
 
       {/* ── IDENTITY + KEY FACTS STRIP ───────────────────────────────────── */}
       <div style={{background:'linear-gradient(to right,#f5ede0,#ede3cc)',border:'1px solid #c8b89a',padding:'12px 16px',marginBottom:14}}>

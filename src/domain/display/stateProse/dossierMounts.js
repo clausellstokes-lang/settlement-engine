@@ -296,6 +296,9 @@ export const DOSSIER_MOUNTS = Object.freeze([
   Object.freeze({
     mount: 'economics.craftReason', tab: 'economics', desk: 'general', blockId: 'DS-GEN-18', rung: 'sentence',
   }),
+  Object.freeze({
+    mount: 'overview.steadings', tab: 'overview', desk: 'general', blockId: 'DS-GEN-8', rung: 'sentence',
+  }),
 ]);
 
 /**
@@ -320,7 +323,6 @@ export const UNMOUNTED_BLOCKS = Object.freeze([
   'DS-POP-1',
   'DS-POP-2',
   'DS-GEN-1',
-  'DS-GEN-8',
   'DS-REL-1',
   'DS-GEN-10',
   'DS-POP-3',

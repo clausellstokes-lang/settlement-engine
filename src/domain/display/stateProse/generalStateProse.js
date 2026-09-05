@@ -119,6 +119,16 @@ export const SLOT_FILL_SHAPES = Object.freeze({
   institution: 'proper',
   resource: 'bare-common',
   good: 'bare-common',
+  // DS-GEN-8. `{steading}` and `{ruin}` are §0c-2 proper nouns — a satellite and a fallen
+  // city, each by its own generated name.
+  // ⛔ `{band}` IS NOT LISTED AND MUST NOT BE. §0c declares it RESERVED — one name for six
+  // incompatible roles — and `fillShapeViolation` REFUSES a fill for it outright
+  // (`RESERVED-SLOT-HAS-NO-DECLARABLE-FILL`). Four DS-GEN-8 variants name it and are dropped
+  // by anchored liveness; every pool of the block keeps at least one variant that does not,
+  // which the desk test asserts pool by pool. The steading head count therefore never
+  // reaches a reader through this desk, which is also §0d's own answer.
+  steading: 'proper',
+  ruin: 'proper',
 });
 
 /**
@@ -1366,6 +1376,71 @@ function boughtGood(imports) {
   return undefined;
 }
 
+// ── DS-GEN-8 · Overview › Steadings, remnant and ancient ruin (lifecycle) ────────────
+
+/**
+ * DS-GEN-8's REMNANT pool — the town's own lifecycle grade.
+ *
+ * ⭐ A LAWFUL DARK MOUNT, ON THE DS-STR-2 PRECEDENT. `lifecycleStatus` is 0 of 48 on a
+ * freshly generated settlement and its writer is real: `settlementLifecycleFirstClass.js:619`
+ * stamps the grade when a town dies during a played world. A block whose producer exists but
+ * runs off the generation path is DORMANT, and dormant is a true statement rather than a
+ * fallback — the mount registry's own general test.
+ *
+ * ⛔ THE VALUE IS PASSED IN, NEVER REACHED FOR, and the reason is layering rather than taste:
+ * the canonical reader is `lifecycleStatusOf` in a WORLDPULSE kernel, and importing it into a
+ * display leaf would drag the lifecycle engine into every tab chunk that draws this desk. The
+ * caller already holds the record and already spells the same fallback
+ * (`SteadingsSection.jsx:35`), so the reading crosses the boundary and the engine does not.
+ * @param {unknown} lifecycleStatus @returns {string|null}
+ */
+export function remnantPoolKey(lifecycleStatus) {
+  const grade = text(lifecycleStatus);
+  if (!grade) return null;
+  const key = `lifecycleStatus: ${grade}`;
+  return CORPUS['DS-GEN-8'].pools[key] ? key : null;
+}
+
+/**
+ * DS-GEN-8's ANCIENT-RUIN pool. STRICTLY OPT-IN, and the opt-in is the measurement:
+ * `historyGenerator.js` writes `history.ancientRuin` only under `config.ancientRuinsEnabled`,
+ * measured 2 of 48 with the flag on and 0 of 48 without. A town without one is a town with no
+ * fallen city beside it, which is a true statement, so the absence renders nothing.
+ * @param {{name?: unknown, yearsAgo?: unknown}|null|undefined} ancientRuin @returns {string|null}
+ */
+export function ancientRuinPoolKey(ancientRuin) {
+  if (!properFill(text(ancientRuin?.name))) return null;
+  const key = 'history.ancientRuin present';
+  return CORPUS['DS-GEN-8'].pools[key] ? key : null;
+}
+
+/**
+ * DS-GEN-8's PER-STEADING pool, resolved IN THE ANNEX'S OWN WRITTEN ORDER — `provenance ===
+ * 'forced'`, then `charterPending`, then the organic else-arm.
+ *
+ * ⚠ THE ORDER IS A RULING AND IT IS RECORDED. A steading can be BOTH founded by decree and
+ * awaiting a charter, and the two pools say different things about it. `forced` wins because
+ * it is a fact about the steading's ORIGIN, which is permanent and which the other two arms
+ * cannot state; `charterPending` is a fact about its present standing, which the record will
+ * itself resolve at the charter (`settlementLifecycleKernel.js:876`). A permanent fact
+ * outranks a transient one where one sentence must carry both.
+ *
+ * ⛔ `provenance` IS A CLOSED FOUR-WORD VOCABULARY — `growth` · `resource_strike` ·
+ * `resettlement` · `forced` (`satellitesLedger.js`'s own `SatelliteRecord` typedef) — and the
+ * corpus writes a pool for exactly ONE of them. The other three fold to the organic arm,
+ * which is what that pool's own prose says: a place close enough to be counted and far enough
+ * to be its own. The desk test asserts the fold total over the four.
+ * @param {{provenance?: unknown, charterPending?: unknown}|null|undefined} steading
+ * @returns {string|null}
+ */
+export function steadingPoolKey(steading) {
+  if (!steading || typeof steading !== 'object') return null;
+  const key = text(steading.provenance) === 'forced' ? "steading row: provenance: 'forced'"
+    : steading.charterPending === true ? 'steading row: charterPending'
+      : 'steading row: organic';
+  return CORPUS['DS-GEN-8'].pools[key] ? key : null;
+}
+
 // ── THE DESK ────────────────────────────────────────────────────────────────────────
 
 /**
@@ -1403,6 +1478,10 @@ function boughtGood(imports) {
  *   framing: ReadonlyArray<LegibilityRung|null>,
  * }>, economics: Readonly<{
  *   craftReason: LegibilityRung|null,
+ * }>, steadings: Readonly<{
+ *   remnant: LegibilityRung|null,
+ *   ruin: LegibilityRung|null,
+ *   rows: ReadonlyArray<LegibilityRung|null>,
  * }>}>}
  */
 export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
@@ -1425,6 +1504,7 @@ export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
   viability: Object.freeze({ verdict: Object.freeze([]) }),
   hooks: Object.freeze({ framing: Object.freeze([]) }),
   economics: Object.freeze({ craftReason: null }),
+  steadings: Object.freeze({ remnant: null, ruin: null, rows: Object.freeze([]) }),
 });
 
 /**
@@ -1452,9 +1532,11 @@ export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
  *   hookCategories?: ReadonlyArray<unknown>|null,
  *   clockIds?: ReadonlyArray<unknown>|null, governingName?: unknown,
  *   activeChains?: unknown, primaryImports?: unknown,
+ *   lifecycleStatus?: unknown, steadings?: ReadonlyArray<unknown>|null,
  *   exploitation?: {fullyExploited?: unknown, partiallyExploited?: unknown,
  *     unexploited?: unknown}|null,
  *   history?: {age?: unknown, historicalCharacter?: unknown,
+ *     ancientRuin?: {name?: unknown, yearsAgo?: unknown}|null,
  *     founding?: {foundedBy?: unknown, initialChallenge?: unknown}|null,
  *     historicalEvents?: Array<{type?: unknown, name?: unknown, yearsAgo?: unknown,
  *       anchored?: unknown, lastingEffects?: unknown}|null>|null}|null}} [readings]
@@ -1629,7 +1711,47 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
     }), [])
     : null;
 
+  // ── DS-GEN-8 ───────────────────────────────────────────────────────────────────────
+  // THE REMNANT, THE ANCIENT RUIN, THEN ONE LINE PER STEADING — the order
+  // `SteadingsSection.jsx` already renders those three things in, so each sentence meets the
+  // reader beside the banner or the card it is about. Every one of them is DORMANT on a
+  // freshly generated town and every one has a real writer off the generation path.
+  const ruin = hist.ancientRuin && typeof hist.ancientRuin === 'object' ? hist.ancientRuin : null;
+  const ruinSlots = ruin ? {
+    ...slots,
+    ruin: properFill(text(ruin.name)),
+    timeband_since: timebandSinceFill(ruin.yearsAgo),
+    timeband_age: timebandAgeFill(ruin.yearsAgo),
+  } : slots;
+  const ruinKey = ruin ? ancientRuinPoolKey(ruin) : null;
+  // ⚠ ONE LINE PER STEADING, INDEX-PAIRED with the caller's own cards, and a steading this
+  // desk cannot key on or cannot NAME keeps a `null` IN PLACE rather than shortening the
+  // list — the DS-GEN-2 conflict-row rule, for the same reason: the caller renders each
+  // sentence inside the card it is about, and a shortened list slips the pairing by one.
+  const steadingRows = Object.freeze((Array.isArray(readings.steadings) ? readings.steadings : [])
+    .map((row) => {
+      const key = steadingPoolKey(row);
+      if (!key) return null;
+      const line = legibilityRung('', readStateProse(CORPUS, 'DS-GEN-8', key, {
+        ...options,
+        slots: { ...slots, steading: properFill(text(/** @type {{name?: unknown}} */ (row)?.name)) },
+      }), []);
+      return line && line.sentence ? line : null;
+    }));
+  const remnantLine = rung('DS-GEN-8', remnantPoolKey(readings.lifecycleStatus), '');
+  const ruinLine = ruinKey
+    ? legibilityRung('', readStateProse(CORPUS, 'DS-GEN-8', ruinKey, { ...options, slots: ruinSlots }), [])
+    : null;
+
   return Object.freeze({
+    // DS-GEN-8's three surfaces, kept APART rather than folded into one list: the remnant
+    // banner, the ancient-ruin banner and the steading cards are three places on the page,
+    // and a caller handed one flat list would have to guess which line belongs where.
+    steadings: Object.freeze({
+      remnant: remnantLine && remnantLine.sentence ? remnantLine : null,
+      ruin: ruinLine && ruinLine.sentence ? ruinLine : null,
+      rows: steadingRows,
+    }),
     overview: Object.freeze({
       conflicts,
       situation: rung('DS-GEN-5', situationPoolKey(readings), ''),

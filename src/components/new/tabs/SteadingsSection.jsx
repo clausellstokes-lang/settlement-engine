@@ -13,13 +13,14 @@ import { useMemo } from 'react';
 import { useStore } from '../../../store/index.js';
 import { FS, swatch, MUTED } from '../../theme.js';
 import { formatCount } from '../../../domain/formatNumber.js';
+import { generalDeskLines } from '../generalDeskRead.js'; // DS-GEN-8 · the general desk's ONE caller
 
 const GRADE_LABEL = {
   relic_ruin: 'Relic ruin',
   abandoned_site: 'Abandoned site',
 };
 
-export default function SteadingsSection({ settlement }) {
+export default function SteadingsSection({ settlement, publicDossier = false, playerView = false }) {
   const sid = settlement?.id != null ? String(settlement.id) : null;
   const campaigns = useStore(s => s.campaigns);
 
@@ -35,6 +36,12 @@ export default function SteadingsSection({ settlement }) {
   const grade = settlement?.lifecycleStatus || settlement?.config?.lifecycleStatus || '';
   const ancient = settlement?.history?.ancientRuin || null;
   if (!steadings.length && !grade && !ancient) return null;
+  // DS-GEN-8 (`overview.steadings`) — the town's own account of its remnant grade, the
+  // fallen city beside it and each steading it seeded, in the order this section already
+  // renders those three things. The steadings come from the ledger resolved above, because
+  // only this component holds it. Silent on a free dossier and silent where the record has
+  // nothing to say (R-DST-K).
+  const desk = generalDeskLines(settlement, { publicDossier, playerView, steadings, lifecycleStatus: grade }).steadings;
 
   return (
     <div style={{ marginTop: 14 }}>
@@ -43,6 +50,7 @@ export default function SteadingsSection({ settlement }) {
           <div style={{ fontSize: FS.micro, fontWeight: 700, color: swatch.danger, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
             {GRADE_LABEL[grade] || 'Remnant'}
           </div>
+          {desk.remnantLine && <div style={{ fontSize: FS.sm, color: swatch.inkMag2, lineHeight: 1.45, fontStyle: 'italic', marginBottom: 4 }}>{desk.remnantLine}</div>}
           <div style={{ fontSize: FS.sm, color: swatch.inkMag, lineHeight: 1.4 }}>
             {grade === 'relic_ruin'
               ? 'This settlement has died; its stones stand as a relic ruin. The last residents left with the wagons, their fates unresolved. The interior is yours.'
@@ -59,6 +67,7 @@ export default function SteadingsSection({ settlement }) {
           <div style={{ fontSize: FS.sm, color: swatch.inkMag, lineHeight: 1.4 }}>
             The relic ruin of {ancient.name} stands nearby, a city fallen {formatCount(ancient.yearsAgo)} years ago, superstition-attracting. Its interior is yours.
           </div>
+          {desk.ruinLine && <div style={{ fontSize: FS.sm, color: swatch.inkMag2, lineHeight: 1.45, fontStyle: 'italic', marginTop: 4 }}>{desk.ruinLine}</div>}
         </div>
       ) : null}
 
@@ -68,7 +77,7 @@ export default function SteadingsSection({ settlement }) {
             Steadings ({steadings.length})
           </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-            {steadings.map(rec => (
+            {steadings.map((rec, i) => (
               <div key={rec.id} style={{ flex: '1 1 180px', minWidth: 0, background: swatch['#FAF8F4'], border: `1px solid ${swatch['#E0D0B0']}`, padding: '7px 10px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 6 }}>
                   <span style={{ fontSize: FS.sm, fontWeight: 700, color: swatch.inkMag }}>{rec.name}</span>
@@ -80,6 +89,8 @@ export default function SteadingsSection({ settlement }) {
                   {rec.provenance === 'forced' ? ' · founded by decree' : ''}
                   {rec.charterPending ? ' · a charter awaits' : ''}
                 </div>
+                {/* INDEX-PAIRED with the desk's own list, which keeps a null in place. */}
+                {desk.steadingLines[i] && <div style={{ fontSize: FS.xs, color: swatch.inkMag2, lineHeight: 1.45, fontStyle: 'italic', marginTop: 4 }}>{desk.steadingLines[i]}</div>}
               </div>
             ))}
           </div>

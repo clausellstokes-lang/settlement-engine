@@ -33,6 +33,7 @@ import { HistoryTab } from '../../src/components/new/tabs/HistoryTab.jsx';
 import { ViabilityTab } from '../../src/components/new/tabs/ViabilityTab.jsx';
 import PlotHooksTab from '../../src/components/new/tabs/PlotHooksTab.jsx';
 import { EconomicsTab } from '../../src/components/new/tabs/EconomicsTab.jsx';
+import SteadingsSection from '../../src/components/new/tabs/SteadingsSection.jsx';
 import { useStore } from '../../src/store/index.js';
 import { generalDeskLines } from '../../src/components/new/generalDeskRead.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
@@ -473,5 +474,93 @@ describe('DS-GEN-18 DRAWS ON THE ECONOMICS TAB — and is silent for a free view
     const line = router.split('\n').find((l) => l.includes("case 'economics':"));
     expect(line).toBeTruthy();
     expect(line).toContain('publicDossier={publicDossier}');
+  });
+});
+
+/**
+ * DS-GEN-8 at `overview.steadings`, drawn inside `SteadingsSection` — the ONE component that
+ * resolves the campaign's `spatialLedgers.satellites` ledger, which is why the steading rows
+ * are handed to the reader rather than reached for.
+ *
+ * ⭐ A LAWFUL DARK MOUNT. Every field below is 0 of 48 on a freshly generated town; each has a
+ * real writer off the generation path (`settlementLifecycleFirstClass.js` for the grade, the
+ * lifecycle kernel for the steadings, `historyGenerator.js` under `ancientRuinsEnabled` for
+ * the ruin). The fixture is shaped like `satellitesLedger.js`'s own `SatelliteRecord`.
+ */
+const FALLEN = Object.freeze({
+  id: 'ashfall', name: 'Ashfall', _seed: 'ashfall',
+  lifecycleStatus: 'relic_ruin',
+  history: { ancientRuin: { name: 'Ecserys', yearsAgo: 12 } },
+});
+const LEDGER = Object.freeze([{
+  id: 'c-ashfall', settlementIds: ['ashfall'],
+  worldState: {
+    spatialLedgers: {
+      satellites: {
+        ashfall: {
+          steadings: {
+            'steading.a.1': {
+              id: 'steading.a.1', name: 'Brackenfold', parentId: 'ashfall', tier: 'thorp',
+              population: 40, foundedTick: 12, provenance: 'forced', orbit: 0,
+              inflow: 0, backing01: 0.4, history: [],
+            },
+          },
+        },
+      },
+    },
+  },
+}]);
+
+const REMNANT = 'The rolls close on a departure and not on a disaster';  // DS-GEN-8 relic_ruin
+const RUIN = 'Ashfall has grown up in its shadow';                        // DS-GEN-8 ancient ruin
+const STEADING = 'Brackenfold exists because Ashfall decided it should';  // DS-GEN-8 forced
+
+describe('DS-GEN-8 DRAWS IN THE STEADINGS SECTION — and is silent for a free viewer', () => {
+  const campaignsBefore = useStore.getState().campaigns;
+  afterEach(() => { useStore.setState({ campaigns: campaignsBefore }); });
+
+  /** @param {boolean} publicDossier */
+  const renderSteadings = (publicDossier) => {
+    useStore.setState({ campaigns: LEDGER });
+    return render(e(SteadingsSection, { settlement: FALLEN, publicDossier, playerView: false }))
+      .container.textContent;
+  };
+
+  test('all three surfaces reach the DOM privately and none reaches a public dossier', () => {
+    const priv = renderSteadings(false);
+    cleanup();
+    const pub = renderSteadings(true);
+    for (const [sentence, label] of [
+      [REMNANT, 'the remnant grade'],
+      [RUIN, 'the ancient ruin'],
+      [STEADING, 'the forced steading'],
+    ]) expectPresentThenAbsent(priv, pub, sentence, `DS-GEN-8 ${label} (overview.steadings)`);
+    // ⛔ THE PRESERVE-VERBATIM CLAUSES SURVIVE. The annex marks two phrases as the
+    // never-resolve-a-fate law and the DM's invitation rendered as prose; no variant may
+    // drop either, and the section's own authored banner carries them too.
+    expect(priv).toContain('fates unresolved');
+    expect(priv).toContain('interior is yours');
+    // The DATUM survives the gate: the banner, the ruin line and the steading card all keep
+    // their own words; only the corpus sentences go.
+    expect(pub).toContain('Relic ruin');
+    expect(pub).toContain('Ancient ruin nearby');
+    expect(pub).toContain('Brackenfold');
+    expect(pub).toContain('founded by decree');
+  });
+
+  test('a LIVING town with no ledger draws nothing at all — dormancy, not a default', () => {
+    useStore.setState({ campaigns: [] });
+    const living = { id: 'ashfall', name: 'Ashfall', _seed: 'ashfall', history: {} };
+    const { container } = render(e(SteadingsSection, { settlement: living, publicDossier: false }));
+    // The section itself renders NOTHING for a world without lifecycle state, which is the
+    // component's own contract — so the block cannot draw a default over a living town.
+    expect(container.textContent).toBe('');
+  });
+
+  test('the OVERVIEW tab hands the section the paid-surface flag', () => {
+    const tab = readFileSync(join(HERE, '../../src/components/new/tabs/OverviewTab.jsx'), 'utf8');
+    const line = tab.split('\n').find((l) => l.includes('<SteadingsSection'));
+    expect(line).toBeTruthy();
+    expect(line, 'the section was left to assume the flag').toContain('publicDossier={publicDossier}');
   });
 });
