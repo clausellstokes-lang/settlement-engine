@@ -28,8 +28,14 @@ cars=int(git('rev-list','--count',base+'..'+tip) or 0)
 chk(cars==want,'car count',cars)
 par=[len(git('rev-list','--parents','-n','1',c).split())-1 for c in git('rev-list',base+'..'+tip).split()]
 chk(all(p==1 for p in par),'every car single-parent',par)
-seats=[git('log','-1','--format=%B',c).count('Seat: Opus 5 — Fable-unvalidated') for c in git('rev-list',base+'..'+tip).split()]
-chk(all(s==1 for s in seats),'exactly one strict Seat trailer per car',seats)
+import re as _re
+_SEAT=_re.compile(r'^Seat: (Opus 5 — Fable-unvalidated|Fable 5\.1 — validated)$', _re.M)
+_cars=git('rev-list',base+'..'+tip).split()
+_bodies=[git('log','-1','--format=%B',c) for c in _cars]
+seats=[len(_SEAT.findall(b)) for b in _bodies]
+chk(all(s==1 for s in seats),'exactly one strict Seat trailer per car (Opus-unvalidated or Fable-validated)',seats)
+_bad=[c[:9] for c,b in zip(_cars,_bodies) if 'Seat: Fable 5.1 — validated' in b and _re.search(r'^Lane:',b,_re.M)]
+chk(not _bad,'a Fable-validated car is a CHAIR act — carries no Lane: trailer',_bad)
 
 REGS={'tests/lint/.lighting-census-baseline.json':'measuredAtSha',
       'scripts/.test-ratchet-baseline.json':'measuredAtSha',

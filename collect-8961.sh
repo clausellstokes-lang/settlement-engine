@@ -20,12 +20,12 @@ python3 "$SC/apply-892.py" "$SC/payload-8961.json"
 echo "--- C0 scan ---"; LC_ALL=C grep -c $'[\x01-\x08\x0b\x0c\x0e-\x1f]' docs/OWNER_DECISION_QUEUE.md docs/HANDOFF_CURRENT.md "$SC/queue-8961.md" || true
 # rulings are INSERTIONS inside existing blocks; the queue must GROW and lose nothing
 D=$(git diff --no-index --numstat "$SC/frq.head.8961" "$SC/queue-8961.md" | awk '{print $2}'); [ "$D" = "0" ] || { echo "ABORT: queue deletions=$D"; exit 1; }
-echo "  RULED lines in queue-8961.md: $(grep -c '\*RULED (§892.x, Fable 5.1):\*' $SC/queue-8961.md)  (expect 28)"
-[ "$(grep -c '\*RULED (§892.x, Fable 5.1):\*' $SC/queue-8961.md)" = "28" ] || { echo "ABORT: expected 28 rulings"; exit 1; }
+echo "  RULED lines in queue-8961.md: $(grep -c '^\*RULED (§892.x, Fable 5.1):\*' $SC/queue-8961.md)  (expect 28)"
+[ "$(grep -c '^\*RULED (§892.x, Fable 5.1):\*' $SC/queue-8961.md)" = "28" ] || { echo "ABORT: expected 28 rulings"; exit 1; }
 SP="$SC" sh "$SC/chair-tools/chair-commit.sh" "$TIP" "$SC/msg-8961.txt" docs/HANDOFF_CURRENT.md:docs/HANDOFF_CURRENT.md "$SC/queue-8961.md:docs/FABLE_RETROVALIDATION_QUEUE.md"
 NEW=$(git rev-parse --short HEAD)
 echo "--- READ-BACK AT $NEW ---"; git show --stat --format='%h %s' HEAD | head -6
-echo "  RULED (§892.x) lines at tip: $(git show HEAD:docs/FABLE_RETROVALIDATION_QUEUE.md | grep -c '\*RULED (§892.x, Fable 5.1):\*')"
+echo "  RULED (§892.x) lines at tip: $(git show HEAD:docs/FABLE_RETROVALIDATION_QUEUE.md | grep -c '^\*RULED (§892.x, Fable 5.1):\*')"
 echo "  ODQ §896.1 rows: $(git show HEAD:docs/OWNER_DECISION_QUEUE.md | grep -c '^§896.1 ')"
 echo "  seat trailer Fable: $(git log -1 --format=%B | grep -c '^Seat: Fable 5.1 — validated$')"
 cp "$SC/queue-8961.md" docs/FABLE_RETROVALIDATION_QUEUE.md

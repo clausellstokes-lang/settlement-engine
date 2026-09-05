@@ -2,9 +2,11 @@
 # run-gate-anch.sh — the ANCHORS consist's bare gate (npm run check) on laneANCH-tree,
 # base 90702c3e9. Quiet-window law. ⚠ THE LAST LINE IS `exit $TRUE_EXIT` AND NOTHING MAY FOLLOW IT:
 # a background task reports its LAST command's exit, and a trailing printf once reported 0 over a red gate.
-D=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/laneANCH-tree
-BASE=__CLAMP_TIP__   # rewritten after the §896 CAS — the anchors consist is REPLAYED onto the clamp tip first
+D=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/laneANCH2
+BASE=df7cdd37e   # the gated clamp head; the guard below refuses to run unless the product tip IS this sha
 cd $D || exit 9
+[ "$(git rev-parse claude/composite-r4)" = "$(git rev-parse df7cdd37e)" ] || { echo "REFUSED: product tip $(git rev-parse --short claude/composite-r4) is not the clamp tip df7cdd37e — CAS §896 first"; exit 7; }
+[ "$(git merge-base HEAD claude/composite-r4)" = "$(git rev-parse claude/composite-r4)" ] || { echo "REFUSED: dock HEAD does not descend from the product tip"; exit 7; }
 STREAK=0; WAITED=0
 while [ $STREAK -lt 3 ]; do
   L=$(uptime | sed 's/.*averages: //' | awk '{print $1}')

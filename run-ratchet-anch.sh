@@ -1,7 +1,7 @@
 #!/bin/sh
 # run-ratchet-anch.sh — census totals at the ANCHORS consist tip. Quiet-window law; exits captured.
 # ⚠ THE LAST LINE IS `exit $TRUE_EXIT` AND NOTHING MAY FOLLOW IT.
-D=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/laneANCH-tree
+D=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/laneANCH2
 cd $D || exit 9
 STREAK=0; WAITED=0
 while [ $STREAK -lt 3 ]; do
@@ -16,7 +16,7 @@ done
 echo "QUIET CONFIRMED after ${WAITED}s"
 echo "RATCHET_HEAD=$(git rev-parse HEAD)"
 echo "RATCHET_PORCELAIN_PRE=[$(git status --porcelain -uall | wc -l | tr -d ' ')]"
-echo "PREDICTED: totalFiles UNCHANGED (no new test file). totalTests +2 per the lane's own vitest count, REFUSED IN ADVANCE as a figure — this run IS the derivation. entries 6 -> 6. Lighting: ALL FIVE +0 (probe-derived; the changed test file is PARKED on describe.each so its +2 tests are census-invisible) — NO lighting act is owed."
+echo "PREDICTED (derived 2026-09-05 at the composed tip 272dbd2da = clamp 14 cars + ANCHORS 3 cars): totalFiles 2468 UNCHANGED (0 test files added, git diff --diff-filter=A). totalTests: baseline 31489; the lane counted 588 -> 590 in tests/domain/rumorFallbackPhrasePools.test.js, so +2 is the EXPECTATION and the figure is REFUSED IN ADVANCE — this run IS the derivation. entries 6 -> 6. Lighting: the dock register (measured ff9b7a53c) reads 2521/371/2150/23184/6214 and the probe at 272dbd2da reads 2521/371/2150/23184/6214 — ALL FIVE +0, NO lighting act is owed (the +2 tests sit under describe.each and are census-invisible)."
 sh scripts/gate-mutex.sh --run -- node scripts/check-test-ratchet.mjs --update
 TRUE_EXIT=$?
 echo "TRUE_EXIT=$TRUE_EXIT"
