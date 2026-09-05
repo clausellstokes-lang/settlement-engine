@@ -25,7 +25,7 @@ c=re.sub(r'\(R37 = .*?\)\"', '(new R-rows: $(git show HEAD:docs/FABLE_RETROVALID
 io.open(os.path.join(out,'collect-%s.sh'%n),'w',encoding='utf-8').write(c)
 # --- payload
 prev=a.prev_pickup or ('PICKUP AT §%d'%(int(float(n))-1) if n.isdigit() else '__PREV_PICKUP__')
-p={'odq_marker':'\n§%s '%n,'odq_rows':['§%s · __ROW__ `%s` -> `__CAS_SHA__`, sealed `refs/preserve/%s`; gate green (`TRUE_EXIT=0`, __TESTS__ tests). __ROW_BODY__'%(n,a.base[:9],a.seal)],
+p={'odq_marker':'\n§%s '%n,'odq_rows':['§%s · __ROW__ `%s` -> `__CAS_SHA__`, sealed `refs/preserve/%s`; gate green (`TRUE_EXIT=0`, __TESTS__ tests). __ROW_BODY__\n'%(n,a.base[:9],a.seal)],
    'card_top_heading_prefix':'## ⭐⭐⭐⭐⭐ '+prev,'card_demote_from':'## ⭐⭐⭐⭐⭐ '+prev+' — ','card_demote_to':'## (superseded) '+prev+' — ',
    'card_new_block':'## ⭐⭐⭐⭐⭐ PICKUP AT §%s — **__CARD__** (`%s` -> `__CAS_SHA__`).\n\n__CARD_BODY__'%(n,a.base[:9]),
    'frq_in':SC+'/frq.head.%s'%n,'frq_tail':'## §%s — __TAIL__ (SEAT: Fable 5.1 — validated)\n\n__TAIL_BODY__'%n,'frq_out':SC+'/queue-%s.md'%n}
