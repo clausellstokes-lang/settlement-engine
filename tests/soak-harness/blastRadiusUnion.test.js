@@ -30,7 +30,8 @@ const arms = (over = {}) => ({
 
 describe('the differential re-soak scope', () => {
   it('the coupling registry is SEVEN files, and every one of them exists', () => {
-    expect(COUPLING_REGISTRY_FILES.length).toBe(7);
+    // 7 → 8 at the §900 composition: couplingRegistryEncounters.js (imported by couplingRegistry.js) had never been on the roster.
+    expect(COUPLING_REGISTRY_FILES.length).toBe(8);
     const missing = COUPLING_REGISTRY_FILES.filter((path) => !existsSync(join(ROOT, path)));
     // A registry file list that has drifted would silently narrow arm 2 — the arm would
     // still "run", over fewer rows, and report a smaller radius with no error.

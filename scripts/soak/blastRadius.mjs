@@ -32,6 +32,7 @@ export const COUPLING_REGISTRY_FILES = Object.freeze([
   'src/domain/certification/couplingRegistrySchema.js',
   'src/domain/certification/couplingRegistryTrade.js',
   'src/domain/certification/couplingRegistryWar.js',
+  'src/domain/certification/couplingRegistryEncounters.js', // ENC (the encounters volume; imported by couplingRegistry.js:50-57) — omitted from this roster until the §900 composition (DESK-900-CARS measured it)
 ]);
 
 /**
