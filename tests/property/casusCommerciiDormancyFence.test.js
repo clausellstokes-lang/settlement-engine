@@ -211,8 +211,12 @@ describe('TR-1 fence 4 — gate polarity and purity, censused over the real tree
   });
 
   test('the flag is virtual: it is absent from the rules DEFAULTS and every preset', async () => {
-    const { DEFAULT_SIMULATION_RULES, SIMULATION_RULE_PRESETS, ENGINE_GATED_VIRTUAL_RULE_KEYS } =
-      await import('../../src/domain/worldPulse/simulationRules.js');
+    const {
+      DEFAULT_SIMULATION_RULES,
+      ENGINE_GATED_DORMANT_RULE_KEYS,
+      ENGINE_GATED_VIRTUAL_RULE_KEYS,
+      SIMULATION_RULE_PRESETS,
+    } = await import('../../src/domain/worldPulse/simulationRules.js');
     expect(FLAG in DEFAULT_SIMULATION_RULES).toBe(false);
     // SIMULATION_RULE_PRESETS is a preset-id-keyed RECORD, not an array — measured, not
     // assumed, after the first draft of this pin tried to iterate it and threw.
@@ -226,9 +230,14 @@ describe('TR-1 fence 4 — gate polarity and purity, censused over the real tree
       expect(Object.keys(preset.rules || {}).length, `${preset.id} carries no rules`)
         .toBeGreaterThan(0);
     }
-    // …and it IS declared, so the census that demands its certification can see it. This
+    // …and it IS REGISTERED, so the census that demands its certification can see it. This
     // is the CQ5 one-commit law's other half, asserted from the dormancy side.
     expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toContain(FLAG);
+    // …and the estate's own DERIVED answer to the virtuality question agrees with the
+    // measurement above (LGT-P2-MANIFEST, 2026-09-05: a lit key leaves this list and keeps
+    // its register row, so the two questions stop sharing one answer).
+    expect(ENGINE_GATED_DORMANT_RULE_KEYS, `${FLAG} is registered but a preset has lit it`)
+      .toContain(FLAG);
   });
 
   test('the TR-1 family is PRNG-free and clock-free', () => {

@@ -101,8 +101,12 @@ vi.mock('../../src/kernel/prng.js', async (importOriginal) => {
 const { simulateCampaignWorldPulse } = await import('../../src/domain/worldPulse/pulseKernel.js');
 const { simulateCampaignWorldInterval } = await import('../../src/domain/worldPulse/advanceInterval.js');
 const { ensureRegionalGraph } = await import('../../src/domain/region/index.js');
-const { DEFAULT_SIMULATION_RULES, SIMULATION_RULE_PRESETS, ENGINE_GATED_VIRTUAL_RULE_KEYS } =
-  await import('../../src/domain/worldPulse/simulationRules.js');
+const {
+  DEFAULT_SIMULATION_RULES,
+  ENGINE_GATED_DORMANT_RULE_KEYS,
+  ENGINE_GATED_VIRTUAL_RULE_KEYS,
+  SIMULATION_RULE_PRESETS,
+} = await import('../../src/domain/worldPulse/simulationRules.js');
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const FLAG = 'advanceEpochEnabled';
@@ -394,8 +398,24 @@ describe('EP-1 fence 4 — the gate-polarity census over the real source tree', 
     // iterate nothing and pass vacuously.
     const presetNames = Object.keys(SIMULATION_RULE_PRESETS);
     expect(presetNames.length).toBeGreaterThan(0);
-    const declaring = presetNames.filter((name) => Object.keys(SIMULATION_RULE_PRESETS[name] || {}).includes(FLAG));
+    // ⛔ THE MEMBER, THEN ITS `rules`. This read was `Object.keys(SIMULATION_RULE_PRESETS[name])`
+    // until 2026-09-05 (LGT-P2-MANIFEST), which enumerates the CATALOG ENTRY — `id`, `label`,
+    // `rules` — and never the rules object a preset actually declares. No flag can appear in
+    // that list, so the filter returned [] for every possible tree and the arm was vacuous:
+    // it would have stayed green through the very preset light it exists to catch. The
+    // non-vacuity floor below is what keeps the fixed read honest.
+    const declaring = presetNames.filter(
+      (name) => Object.keys(SIMULATION_RULE_PRESETS[name]?.rules || {}).includes(FLAG),
+    );
     expect(declaring).toEqual([]);
+    expect(
+      Object.keys(SIMULATION_RULE_PRESETS[presetNames[0]]?.rules || {}).length,
+      'the presets carry no rule keys — the absence above would be a lookup into nothing',
+    ).toBeGreaterThan(0);
+    // …and the estate's own derived answer agrees. THE REGISTER records the gate; THIS list
+    // records that no preset has lit it yet, and the key leaves it the day one does.
+    expect(ENGINE_GATED_DORMANT_RULE_KEYS, `${FLAG} is registered but a preset has lit it`)
+      .toContain(FLAG);
   });
 
   test('MANIFEST MEMBERSHIP: the key is engine-gated and censusable', () => {

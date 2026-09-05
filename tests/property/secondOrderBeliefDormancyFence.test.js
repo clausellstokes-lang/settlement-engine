@@ -298,8 +298,12 @@ describe('FENCE 4 — the gate-polarity census over the real source tree', () =>
   });
 
   test('the key is VIRTUAL: absent from the rules DEFAULTS and every preset', async () => {
-    const { DEFAULT_SIMULATION_RULES, SIMULATION_RULE_PRESETS, ENGINE_GATED_VIRTUAL_RULE_KEYS } =
-      await import('../../src/domain/worldPulse/simulationRules.js');
+    const {
+      DEFAULT_SIMULATION_RULES,
+      ENGINE_GATED_DORMANT_RULE_KEYS,
+      ENGINE_GATED_VIRTUAL_RULE_KEYS,
+      SIMULATION_RULE_PRESETS,
+    } = await import('../../src/domain/worldPulse/simulationRules.js');
     const presets = Object.values(SIMULATION_RULE_PRESETS);
     expect(presets.length, 'the preset catalog emptied — this absence claim would be vacuous')
       .toBeGreaterThanOrEqual(5);
@@ -310,8 +314,12 @@ describe('FENCE 4 — the gate-polarity census over the real source tree', () =>
       // rather than a lookup into an empty object.
       expect(Object.keys(preset.rules || {}).length, `${preset.id} carries no rules`).toBeGreaterThan(0);
     }
-    // …and it IS declared, so the census that demands its certification can see it.
+    // …and it IS REGISTERED, so the census that demands its certification can see it.
     expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toContain(FLAG);
+    // …and the estate's own DERIVED virtuality answer agrees (LGT-P2-MANIFEST, 2026-09-05:
+    // a lit key leaves this list and keeps its register row).
+    expect(ENGINE_GATED_DORMANT_RULE_KEYS, `${FLAG} is registered but a preset has lit it`)
+      .toContain(FLAG);
   });
 });
 

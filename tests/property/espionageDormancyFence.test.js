@@ -116,7 +116,8 @@ vi.mock('../../src/domain/worldPulse/espionage/espionageMath.js', async (importO
 const { espionageActive } = await import('../../src/domain/worldPulse/espionage/espionageGate.js');
 const { readEspionageDoctrine } = await import('../../src/domain/worldPulse/espionage/espionageDoctrine.js');
 const { catchChance01 } = await import('../../src/domain/worldPulse/espionage/espionageMath.js');
-const { ENGINE_GATED_VIRTUAL_RULE_KEYS } = await import('../../src/domain/worldPulse/simulationRules.js');
+const { ENGINE_GATED_DORMANT_RULE_KEYS, ENGINE_GATED_VIRTUAL_RULE_KEYS } =
+  await import('../../src/domain/worldPulse/simulationRules.js');
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const FLAG = 'espionageEnabled';
@@ -444,6 +445,11 @@ describe('FENCE 4 — gate-polarity census over the real source tree', () => {
     const { DEFAULT_SIMULATION_RULES, SIMULATION_RULE_PRESETS } =
       await import('../../src/domain/worldPulse/simulationRules.js');
     expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toContain(FLAG);
+    // …and the estate's own DERIVED virtuality answer agrees with the two measurements
+    // below (LGT-P2-MANIFEST, 2026-09-05: the register records the gate, this list records
+    // that no preset has lit it yet, and a lit key leaves only the second).
+    expect(ENGINE_GATED_DORMANT_RULE_KEYS, `${FLAG} is registered but a preset has lit it`)
+      .toContain(FLAG);
     // anchored: DEFAULT_SIMULATION_RULES is asserted non-empty on the next line, so an
     // emptied defaults object reds here instead of certifying the flag virtual.
     expect(Object.keys(DEFAULT_SIMULATION_RULES).length).toBeGreaterThan(10);
