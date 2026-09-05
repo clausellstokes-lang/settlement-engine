@@ -1,11 +1,12 @@
 # LANE-QUEUE — the owner's cap is FOUR running agents of any kind (read-only and workflow agents count)
-Updated 2026-09-05 by the Fable chair (after §897: product fd8b6df00, ledger c84edceb4). Dispatch strictly in this order as slots free; every dispatch is `model: "opus"`.
+Updated 2026-09-05 by the Fable chair (after §898: product 5e28d5c83, ledger 6cab7c69a). Dispatch strictly in this order as slots free; every dispatch is `model: "opus"`.
 
 ## RUNNING (4/4)
 | lane | kind | dock / base | brief | started |
 |---|---|---|---|---|
 | ~~LIGHT-PLAN~~ DONE → refs/preserve/light-plan-2026-09-05 | | | | |
-| ~~PROSE-REBASE~~ DONE → 3 cars sealed `prose-train-2026-09-05`, replayed to lanePROSE2 @ fd8b6df00 = 4efce2e95; registers + gate NOW (chair) | | | | |
+| ~~PROSE~~ LANDED §898 (10 cars; the golden banked owner-gated) | | | | |
+| OSR-SCHEMA17 | build (heavy) | laneINTEG-tree @ 940d161ca | briefs/brief-OSR-SCHEMA17.md | 09-05 |
 | ~~WARMS-CAR0~~ DONE → refs/preserve/warms-car0-2026-09-05; volume landed §896.2 | | | | |
 | ~~CLAMP-W2~~ DONE → 3 cars b0cba0dca sealed `clamp-w2-2026-09-05` (3 migrated, 3 refused; census 69 vs 62; edge-shared re-mint owed at its landing) | briefs/brief-CLAMP-W2.md | 09-05 |
 | ~~DESK-WARFAITH~~ DONE → 7dba5508b sealed `desk-warfaith-2026-09-05` (6/9 mounted; 3 dark measured; the PUBLIC/SHARED pool is OWNER-gated §885.3) | | | | |
@@ -18,7 +19,7 @@ Updated 2026-09-05 by the Fable chair (after §897: product fd8b6df00, ledger c8
 | ~~ENC-4~~ BUILT → 9 cars 7be568047 sealed `enc4-2026-09-05`; ⚠ VITEST PROOF OWED at its landing (no quiet window opened); RULED (`rulings/RULING-ENC4-R1-R2-R9.md`): R1 one row now, §B deferred to ENC-4b (approacher only where known); R2 ratified; R9 ratified. Proofs at its landing. | | | | |
 
 ## QUEUED — next slot takes the top row
-1. **OSR-SCHEMA17** — NEXT after the PROSE gate (its corpus scan is heavy) — build; dock laneINTEG-tree @ 940d161ca; briefs/brief-OSR-SCHEMA17.md. ⛔ Dispatch only when NO chair
+1. ~~OSR-SCHEMA17~~ DISPATCHED — build; dock laneINTEG-tree @ 940d161ca; briefs/brief-OSR-SCHEMA17.md. ⛔ Dispatch only when NO chair
    gate is running (its proofs run vitest and the corpus scan is heavy). Frees the 23-car desk consist.
 2. ~~PDFDRIFT~~ WITHDRAWN (`briefs/brief-PDFDRIFT.md`, dock lanePDF @ df7cdd37e): route the two campaign-less export sites through `resolveExportSeam`; DECLARED paid-surface change.
 3. ~~DESK-ECON2~~ DISPATCHED (`briefs/brief-DESK-ECON2.md`, dock laneECON2 @ 940d161ca): 8 dark blocks + DESK-7 (the chair's eleven words are AUTHORED and sealed `refs/preserve/desk7-words-2026-09-05`) + DESK-10 + DESK-11.
@@ -41,7 +42,7 @@ Updated 2026-09-05 by the Fable chair (after §897: product fd8b6df00, ledger c8
 14. **VOICE-JSX** — BRIEFED (`briefs/brief-VOICE-JSX.md`): the 34 mainline em dashes in 15 components; makes the Tier-3 voice refreeze a FALL and retires two census rows.
 
 
-15. **CLAMP-W3** — RULED + BRIEFED (`rulings/RULING-CLAMP-FINAL.md`, `briefs/brief-CLAMP-W3.md`): the ceiling car 62 → 69 with seven recorded reasons; dock at the tip after the wave-2 cars land; retires the clampPrimitiveBaseline census row.
+15. ~~CLAMP-W3~~ TAKEN AS A CHAIR CAR in laneCLAMP3 (the ceiling 62 → 69; proof green) — RULED + BRIEFED (`rulings/RULING-CLAMP-FINAL.md`, `briefs/brief-CLAMP-W3.md`): the ceiling car 62 → 69 with seven recorded reasons; dock at the tip after the wave-2 cars land; retires the clampPrimitiveBaseline census row.
 16. ~~DESK-9~~ DONE → 2 cars 0b3703f64 sealed `desk-9-2026-09-05` (ARM 3 keyed on IMPORTERS — any component carrying the leaf's import path; six plants; green on four desk tips). ⚠ RULING OWED at the desk landing: ARM 2's "exactly one caller per desk" is FALSE at DEF2's tip (two importers) and blind to it — RULE: re-key ARM 2 to importers and allow N callers while ARM 3 holds; the auditability claim moves to the importer list (a small chair car or DESK-9c).
 
 17. **SOAK-PRESET (DOCKET item 7)** — a `--preset` flag on `scripts/audit/whole-world-soak.mjs` (hardwired to `full_simulation`) so L-PROBE can certify per preset; prerequisite of L-PROBE output (b).

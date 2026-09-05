@@ -9,7 +9,7 @@ echo "$BASE" | grep -qE '^[0-9a-f]{40}$' || { echo "usage: <base-sha-full>"; exi
 [ "$(git -C $REPO rev-parse claude/composite-r4)" = "$BASE" ] || { echo "⛔ the product tip is not $BASE — land the previous consist first"; exit 1; }
 sh $SC/mkdock.sh laneCLAMP3 "$BASE" | tail -1
 sh $SC/replay-cars.sh $SC/laneCLAMP3 "$BASE" $SC/laneCLAMPW2:df7cdd37e $SC/laneVOICE:fd8b6df00 $SC/laneENC4:fd8b6df00 | tail -8
-[ -d $SC/laneDOCKET ] && sh $SC/replay-cars.sh $SC/laneCLAMP3 "$BASE" $SC/laneDOCKET:fd8b6df00 | tail -4 || echo "(no DOCKET dock yet)"
+echo "(DOCKET, ENC-4b and HORIZON-B1 are replayed LATER with a second replay-cars.sh run once their lanes report — never replay a dock mid-work)"
 for f in src/domain/worldPulse/dispositionLedger.js src/domain/townCartography/cartographyBuildings.js src/domain/townCartography/cartographyMultiplicity.js; do (cd $SC/laneCLAMP3 && node -e "import('./$f').then(()=>console.log('  eval ok $f')).catch(e=>{console.log('  EVAL FAIL $f',e.message);process.exit(1)})"); done
 echo "== edge-shared re-mint ritual"; sh $SC/edge-shared-ritual.sh $SC/laneCLAMP3
 echo "== ENC-4's OWED vitest proofs at the composed tip (quiet window + mutex): the walker, kindPoolFloors, chooserTotality — the chair runs these before the registers; see rulings/RULING-ENC4-R1-R2-R9.md"
