@@ -26,6 +26,8 @@ Updated 2026-09-05 by the Fable chair (after §897: product fd8b6df00, ledger c8
 9. **HORIZON-B2 / WORKER Car 1** — BRIEFED (`briefs/brief-HORIZON-B2.md`; dock at dispatch): ~15 files, dark, unblocks `L-DOORS (ii)`.
 10. **HORIZON-B6 / the CAPACITY evidence** — BRIEFED (`briefs/brief-HORIZON-B6.md`): a ~2.3 h soak, ONLY when no gate runs; unblocks `demographicsEnabled` inside L-DEFAULT.
 
+11. **ENC-4** — BRIEFED (`briefs/brief-ENC-4.md`, dock laneENC4 @ fd8b6df00): the chance meeting's Herald line under ROAD B; the words are sealed at `refs/preserve/enc5-words-2026-09-04`.
+
 ## CHAIR-OWNED, NOT LANES
 ~~ANCHORS → §897~~ LANDED · replay + land the desk consist after
 OSR-SCHEMA17 · every register act · every ceiling ruling (clamp: ONCE, at the final wave) · the words of DESK-7 and ENC-5.
