@@ -104,8 +104,24 @@ const LEAF_CODE = LEAF_SOURCE.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/
  * that is how the flag car finds its address — so a scan that only stripped comments
  * would refuse the leaf for doing the very thing it is supposed to do. What must be
  * absent is a READ, and a read cannot hide inside a quoted string.
+ *
+ * ⭐ THE PASS ORDER AND THE NEWLINE BOUND ARE BOTH LOAD-BEARING (car STRIPPER-UNIFY), and
+ * this is a NAMED function rather than an inline chain so the fixtures below can ask it.
+ * TEMPLATES FIRST: this estate writes apostrophes inside backticks constantly, and a
+ * single-quote pass that runs first reads each one as an opening quote and eats every
+ * line to the next apostrophe — every `absent` arm below would then be asserting on text
+ * the scan cannot see, which is vacuous green in the exact direction that passes.
+ * NEWLINE-BOUNDED QUOTE CLASS: an apostrophe inside a DOUBLE-quoted string opens the same
+ * span even after the reorder, and this chain has no double-quote pass to close it first.
+ * Measured over src/ at this base: the landed spelling hid 1,960,194 characters of live
+ * code in 376 of 2,174 files; the reorder alone still hid 1,571,427 in 266.
+ * @param {string} text
  */
-const LEAF_LOGIC = LEAF_CODE.replace(/'(?:[^'\\]|\\.)*'/g, "''").replace(/`(?:[^`\\]|\\.)*`/g, '``');
+const codeWithoutCitations = (text) => text
+  .replace(/`(?:[^`\\]|\\.)*`/g, '``')
+  .replace(/'(?:[^'\\\n]|\\.)*'/g, "''");
+
+const LEAF_LOGIC = codeWithoutCitations(LEAF_CODE);
 
 /** Every binding the leaf declares in real code — the collection the injection arms scan. */
 const LEAF_DECLARED = [...LEAF_CODE.matchAll(/(?:^|\s)(?:const|let|function)\s+([A-Za-z_][A-Za-z0-9_]*)/g)]
@@ -715,6 +731,29 @@ describe('the leaf is dark, injected, and has no opinion of its own about the dr
       LEAF_LOGIC, 'decayBand', 'DEPTH_PRICING_LAW',
       'the half-life band is car L3 choice and this leaf never names one',
     );
+    // ⭐⭐ AND THE STRIPPER BEHIND EVERY `LEAF_LOGIC` ARM IS PINNED (car STRIPPER-UNIFY).
+    // Each fixture is a LITERAL built on these lines, and each goes FALSE under exactly one
+    // unsound spelling that was landed on this file's base: the first under a single-quote
+    // pass that runs BEFORE the template pass (an apostrophe inside backticks opens a
+    // spurious span that eats the code between the two templates), the second under a quote
+    // class that does NOT stop at a newline (the same apostrophe inside a double-quoted
+    // string does it even after the reorder, and this chain has no double-quote pass to
+    // close it first). Under either, every `absent` arm here asserts on text the scan
+    // cannot see, which is vacuous green in the direction that passes.
+    // ⚠ THE TWO JOINS DIFFER ON PURPOSE. The first fixture is ONE LINE, so a
+    // newline-bounded quote class cannot mask the ordering defect; the second spans
+    // LINES, so only the newline bound can save it. Joined the other way round, each
+    // mutant survives its own fixture — measured, not reasoned (plant-out M1/M2).
+    expect(codeWithoutCitations([
+      "const a = `the mayor's seat`;",
+      'const r = decayTowardNeutral(1, 0, t, band);',
+      "const b = `the guild's hall`;",
+    ].join(' '))).toContain('decayTowardNeutral(');
+    expect(codeWithoutCitations([
+      'const a = "the baron\'s men";',
+      'const r = decayTowardNeutral(1, 0, t, band);',
+      'const b = "the guild\'s hall";',
+    ].join('\n'))).toContain('decayTowardNeutral(');
   });
 
   test('the leaf opens no transcendental site, so the same seed replays the same on any engine', () => {

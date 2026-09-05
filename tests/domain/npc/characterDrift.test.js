@@ -466,9 +466,18 @@ const stripComments = (text) => text.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(
  * @param {string} text
  */
 const codeWithoutCitations = (text) => stripComments(text)
-  .replace(/'(?:[^'\\]|\\.)*'/g, "''")
-  .replace(/"(?:[^"\\]|\\.)*"/g, '""')
-  .replace(/`(?:[^`\\]|\\.)*`/g, '``');
+  // ⭐ THE PASS ORDER AND THE NEWLINE BOUND ARE BOTH LOAD-BEARING (car STRIPPER-UNIFY).
+  // TEMPLATES FIRST: this estate writes apostrophes inside backticks constantly, and a
+  // single-quote pass that runs first reads each one as an opening quote and eats every
+  // line to the next apostrophe. NEWLINE-BOUNDED QUOTE CLASSES: a quoted string never
+  // spans a newline in this estate's source, but an apostrophe inside a DOUBLE-quoted
+  // string opens the same spurious span, which the reorder alone does not close.
+  // Measured over src/ at this base: the landed spelling hid 1,649,119 characters of
+  // live code in 377 of 2,174 files; the reorder alone still hid 1,269,249 in 266.
+  // Both halves are pinned by fixtures in this file's anti-vacuity test.
+  .replace(/`(?:[^`\\]|\\.)*`/g, '``')
+  .replace(/'(?:[^'\\\n]|\\.)*'/g, "''")
+  .replace(/"(?:[^"\\\n]|\\.)*"/g, '""');
 
 describe('DARK BY CONSTRUCTION — two independent darknesses', () => {
 
@@ -739,6 +748,29 @@ const dependsOn = (text, moduleRe, symbols) => (
     expect(dependsOn('// characterDrift lives elsewhere\nconst a = 1;', /from\s+'[^']*\/characterDrift\.js'/, DRIFT_SYMBOLS)).toBe(false);
     // ⛔ AND THE STRING-LITERAL CITATION — a receipt or seam name held as data.
     expect(dependsOn("const receipt = 'characterDrift.js:writeAxisDrift (the sealed writer)';", /from\s+'[^']*\/characterDrift\.js'/, DRIFT_SYMBOLS)).toBe(false);
+    // ⭐⭐ AND THE STRIPPER'S TWO ORDERING HAZARDS ARE PINNED HERE (car STRIPPER-UNIFY).
+    // Each fixture is a LITERAL built on these lines, and each goes FALSE under exactly one
+    // unsound spelling that was landed on this file's base: the first under a single-quote
+    // pass that runs BEFORE the template pass (an apostrophe inside backticks opens a
+    // spurious span that eats the code between the two templates), the second under a quote
+    // class that does NOT stop at a newline (the same apostrophe inside a double-quoted
+    // string does it even after the reorder). A stripper failing either one makes every
+    // dereference arm above assert on text it cannot see — vacuous green, in the direction
+    // that passes.
+    // ⚠ THE TWO JOINS DIFFER ON PURPOSE. The first fixture is ONE LINE, so a
+    // newline-bounded quote class cannot mask the ordering defect; the second spans
+    // LINES, so only the newline bound can save it. Joined the other way round, each
+    // mutant survives its own fixture — measured, not reasoned (plant-out M1/M2).
+    expect(dependsOn([
+      "const a = `the mayor's seat`;",
+      'const w = writeAxisDrift(state);',
+      "const b = `the guild's hall`;",
+    ].join(' '), /from\s+'[^']*\/characterDrift\.js'/, DRIFT_SYMBOLS)).toBe(true);
+    expect(dependsOn([
+      'const a = "the baron\'s men";',
+      'const w = writeAxisDrift(state);',
+      'const b = "the guild\'s hall";',
+    ].join('\n'), /from\s+'[^']*\/characterDrift\.js'/, DRIFT_SYMBOLS)).toBe(true);
     // …and the stripper itself is pinned live in both directions.
     expect(stripComments("import { x } from './characterDrift.js';")).toContain('characterDrift');
     // anchored: the subject is a LITERAL built on this very line so it cannot drift away, and the line above proves the same stripper KEEPS a name it must keep
