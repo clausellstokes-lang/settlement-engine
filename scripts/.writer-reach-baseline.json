@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "269af950f6299bc714e2156755382f478e068ce3",
+ "frozenAtSha": "ea80290bee797584ad9d817c0bbbe5d5781ad18e",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -24,7 +24,7 @@
  },
  "shapesDigest": "8f634f2750f0a0d12b533a6cfeb4340b9597ee2b9c19dc4457a5a5856e066738",
  "detectorDigest": "27bc8b87c4e4edc3bb3209b5685c1a5eeba697c3822fb1fa41a9ecb87c789f06",
- "verdictDigest": "02174a3b9b09b974f0d9ec0bf6655365ce57a9c29be68143833e0d6d44112e87",
+ "verdictDigest": "5854571b8364cfc8ceb366422c8f95f474d5182e6d00c4de87af36c96ca4a500",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -72,8 +72,8 @@
   "json-export"
  ],
  "closureSizes": {
-  "web-display": 689,
-  "web-transitive": 892,
+  "web-display": 690,
+  "web-transitive": 893,
   "dossier-pdf": 374,
   "campaign-pdf": 75,
   "world-book": 81,
@@ -83,27 +83,27 @@
  },
  "population": {
   "judged": 6520,
-  "lit": 550,
-  "litName": 4644,
-  "dark": 1326,
+  "lit": 553,
+  "litName": 4643,
+  "dark": 1324,
   "thinKeys": 9143,
   "thinShapes": 962,
   "knownShapes": 337
  },
  "scanStats": {
-  "files": 1582,
-  "sites": 37815,
-  "propRead": 35774,
+  "files": 1584,
+  "sites": 37973,
+  "propRead": 35930,
   "elemRead": 0,
-  "destructure": 2030,
+  "destructure": 2032,
   "inOp": 11,
-  "rGrades": 5717,
-  "nGrades": 873872,
-  "resolvedReceivers": 6495
+  "rGrades": 5787,
+  "nGrades": 875670,
+  "resolvedReceivers": 6562
  },
  "registerDigest": "ac4734954adbaee04755427934180b8f129c0b0df21072ec00f49b7e797bd1b0",
  "pendingSurfaceCeiling": 3,
- "reviewableDarkCount": 526,
+ "reviewableDarkCount": 524,
  "darkUnregistered": [
   {
    "identity": "Bulk grain and flour on reasons",
@@ -2422,12 +2422,6 @@
    "rows": 832
   },
   {
-   "identity": "hasMilitaryInst on inst",
-   "key": "hasMilitaryInst",
-   "shape": "inst",
-   "rows": 832
-  },
-  {
    "identity": "hasMilitia on inst",
    "key": "hasMilitia",
    "shape": "inst",
@@ -2460,12 +2454,6 @@
   {
    "identity": "hasWarehouse on inst",
    "key": "hasWarehouse",
-   "shape": "inst",
-   "rows": 832
-  },
-  {
-   "identity": "hasWatch on inst",
-   "key": "hasWatch",
    "shape": "inst",
    "rows": 832
   },
@@ -8492,7 +8480,7 @@
   "stressType on config": "campaign-pdf=R dossier-pdf=R web-transitive=R world-book=R",
   "stressTypes on config": "campaign-pdf=R dossier-pdf=R web-display=N web-transitive=R world-book=R",
   "terrainOverride on config": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
-  "terrainType on config": "campaign-pdf=R dossier-pdf=R foundry=R web-transitive=R world-book=R",
+  "terrainType on config": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "tier on config": "campaign-pdf=N dossier-pdf=R foundry=R json-export=N news=R web-display=R web-transitive=R world-book=N",
   "tradeRouteAccess on config": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "deterministic on conflictResolution": "",
@@ -8663,7 +8651,7 @@
   "disaster on economicGates": "dossier-pdf=R foundry=R web-display=N web-transitive=R",
   "economic on economicGates": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "internal on economicGates": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
-  "military on economicGates": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
+  "military on economicGates": "campaign-pdf=N dossier-pdf=N foundry=N web-display=R web-transitive=N world-book=N",
   "monster on economicGates": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "activeChains on economicState": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "compound on economicState": "campaign-pdf=N dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=N",
@@ -9094,7 +9082,7 @@
   "hasMarket on inst": "web-transitive=N",
   "hasMercenary on inst": "",
   "hasMerchantGuild on inst": "",
-  "hasMilitaryInst on inst": "",
+  "hasMilitaryInst on inst": "web-display=R",
   "hasMilitia on inst": "",
   "hasMonastery on inst": "",
   "hasNavy on inst": "dossier-pdf=R foundry=R web-display=R",
@@ -9104,7 +9092,7 @@
   "hasThievesGuild on inst": "",
   "hasWalls on inst": "campaign-pdf=N dossier-pdf=N foundry=N web-transitive=N world-book=N",
   "hasWarehouse on inst": "",
-  "hasWatch on inst": "",
+  "hasWatch on inst": "web-display=R",
   "hasWizardTower on inst": "",
   "names on inst": "web-display=N web-transitive=N",
   "color on institutionalServices": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
@@ -13805,7 +13793,7 @@
   "border on readiness": "dossier-pdf=N web-display=R",
   "color on readiness": "dossier-pdf=N foundry=N web-display=R web-transitive=N",
   "label on readiness": "campaign-pdf=R dossier-pdf=R foundry=R json-export=N news=N web-display=R web-transitive=R world-book=R",
-  "score on readiness": "campaign-pdf=R dossier-pdf=R foundry=R json-export=N news=N web-display=N web-transitive=R world-book=R",
+  "score on readiness": "campaign-pdf=R dossier-pdf=R foundry=R json-export=N news=N web-display=R web-transitive=R world-book=R",
   "Bulk grain and flour on reasons": "",
   "Charcoal and fuel on reasons": "",
   "Preserved provisions for winter on reasons": "",
