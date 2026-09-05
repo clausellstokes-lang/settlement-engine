@@ -84,6 +84,18 @@ names the preset it certified; refuse `--rules-json` + `--preset` together. Prov
 equal the preset table (zero leaked keys, measured the way the kit measured them); the default (no flag) stays `full_simulation`
 byte-identical (no receipt moves). Scripts only; no product bytes; one car.
 
+
+## ITEM 8 — the bare-common CASING class: three slots no producer can fill (DESK-ECON2's finding)
+`{chain}`, `{resource}`, `{good}` are declared `bare-common` in the annex; every producer writes Title-Case labels
+(`activeChains[]` conformant 0/318, 0/123, 0/314; `leadingGoodNoun` 0/48; all 99 export labels capitalised), so 38 variants
+ride a slot that is dark on EVERY generated world. RULED: give the producers a `noun` (bare-common) field beside the label —
+a TOTAL map from the closed label vocabularies (the 99 export labels, the chain labels, the resource labels) to lowercase
+noun phrases, asserted both directions like `COMPLEXITY_NOUN`; the nouns are commodity/chain common nouns (no proper nouns,
+no figures) — draft them from the labels mechanically, list every one in the receipt for the chair to read, and refuse any
+label that is not a common noun (a proper name stays out with its site named). Then `bareCommonFill` reads the noun. Prove:
+conformance N/N per producer, the four blocks' eligibility after, the desks' tests, zero visible change where the slot was
+already dark. Separately: `POSTURE: import_dependent` has no producer (declare it dark in the annex or find its writer).
+
 ## PROOF (per item)
 The file's own run (skipped, reason printed) · `npx vitest run tests/security/` · `npx vitest run tests/lint/` WHOLE ·
 `node scripts/check-test-ratchet.mjs` in read-only form if it has one (no `--update`) · eslint. Quiet-window law + mutex.
