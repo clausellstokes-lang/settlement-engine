@@ -111,6 +111,7 @@
 import { DOSSIER_STATE_PROSE_WAR_FAITH } from '../../../data/dossierStateProse/warFaith.generated.js';
 import { readStateProse } from './stateProseKernel.js';
 import { legibilityRung } from './legibilityRung.js';
+import { documentSideOf } from '../../worldPulse/treatyOrientation.js';
 
 /**
  * The desk's corpus, typed at the import boundary — the generated leaves stay pure data
@@ -401,8 +402,27 @@ export function treatyFrayingPoolKey(term) {
 
 /**
  * The DOCUMENT lens — which side of the instrument this town stands on, or that the whole
- * thing lapses within the year. The role read is the ledger's own orientation
- * (`victorId` / `loserId`), which is what WarTab's role word already reads.
+ * thing lapses within the year.
+ *
+ * THE SIDE IS ASKED OF `treatyOrientation.js`, NOT SPELLED HERE (CR-WR10-G). `doc` is a
+ * `peaceTermsDocument.treatyDocument` read-model, never a ledger row: its `victorId` /
+ * `loserId` are ALREADY `treatyOrientationOf(treaty).receiverId` / `.giverId`, resolved at
+ * the producer. Reading those two field names in a display leaf is indistinguishable from
+ * resolving a treaty's parties by hand, and CR-WR10-G's consumer census convicted this file
+ * for exactly that — its `\.treaties\b` probe reads `war.treaties`, an array of DOCUMENTS,
+ * as a ledger read. `documentSideOf` is the same lookup at the address that owns the
+ * vocabulary, and it is byte-identical on every input including a slot-missing one.
+ *
+ * ⛔ AND IT IS NOT `treatyOrientationOf(doc)`: a document carries no `sellerId`/`buyerId`,
+ * so that reader would fall through to its war arm and answer `wartime` for a purchase.
+ *
+ * ⛔ THE TWO POOL KEYS STILL SAY VICTOR AND LOSER, AND ON A SALE THAT IS WRONG. The
+ * producer fills the receiver slot with the BUYER and the giver slot with the SELLER, so a
+ * town that BOUGHT a holding is told it is the victor side and one that sold it is told it
+ * is the loser side. The corpus has no seller/buyer pool for DS-WAR-2, so the cure is a
+ * corpus authoring act and not a display edit; gating these keys on `orientationKind`
+ * instead would silence a sale's document entirely, which is a reader losing a sentence
+ * rather than gaining a true one. DECLARED, and handed to the chair.
  *
  * THE EXPIRY OUTRANKS THE ROLE: a treaty ending this year is news, and the side a town
  * took is standing background. The remaining life is the MINIMUM over the clauses, because
@@ -420,9 +440,9 @@ export function treatyDocumentPoolKey(doc, settlementId) {
   if (lives.length > 0 && Math.max(...lives) <= 1) {
     return 'document-level: the treaty runs out within the year';
   }
-  const id = settlementId == null ? '' : String(settlementId);
-  if (id && String(doc.victorId) === id) return 'document-level: the town is the VICTOR side';
-  if (id && String(doc.loserId) === id) return 'document-level: the town is the LOSER side';
+  const side = documentSideOf(doc, settlementId);
+  if (side === 'receiver') return 'document-level: the town is the VICTOR side';
+  if (side === 'giver') return 'document-level: the town is the LOSER side';
   return null;
 }
 

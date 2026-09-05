@@ -161,6 +161,51 @@ export function treatyOrientationOf(treaty) {
   return unresolvedOrientation();
 }
 
+/** The two sides of a RESOLVED treaty DOCUMENT, in this module's own role words rather
+ *  than history's. Returned by `documentSideOf`; `null` is the third answer. */
+export const TREATY_DOCUMENT_SIDES = Object.freeze(['receiver', 'giver']);
+
+/**
+ * WHICH SIDE OF A RESOLVED DOCUMENT A PARTY STANDS ON.
+ *
+ * `peaceTermsDocument.treatyDocument` publishes its two parties in the HISTORIC slots
+ * `victorId` / `loserId`, and it fills them FROM THIS MODULE: `victorId` is
+ * `treatyOrientationOf(treaty).receiverId` and `loserId` is `.giverId`, on a WR-10 sale
+ * exactly as on a war settlement, which is why that read-model's own typedef says the two
+ * fields carry "the buyer and the seller on a WR-10 sale". A display holding such a
+ * document therefore has NO orientation left to resolve. It has a lookup.
+ *
+ * ⛔ AND THE LOOKUP MAY NOT LIVE IN THE DISPLAY LEAF. Spelling `doc.victorId` there is
+ * indistinguishable — to a reader and to CR-WR10-G's consumer census alike — from
+ * resolving a ledger row's parties by hand, which is the whole defect this ruling exists
+ * to forbid. `src/domain/display/stateProse/warFaithStateProse.js` was convicted by that
+ * census for exactly this: it holds `TreatyDocument`s, never the ledger, and the census's
+ * `\.treaties\b` probe cannot tell a document array apart from a ledger read. So the
+ * lookup lives here, with the vocabulary it belongs to — ONE reader, many consumers.
+ *
+ * ⚠ IT IS NOT `treatyOrientationOf` APPLIED TO A DOCUMENT, and that distinction is
+ * load-bearing. A document carries no `sellerId`/`buyerId` pair, so passing one to that
+ * reader would fall through to the war arm and report `kind: 'wartime'` for a purchase —
+ * re-introducing the lie, one layer up. This reads the slots for what they are: already
+ * resolved.
+ *
+ * NEVER A GUESS. A document missing the slot, or carrying a non-string in it, matches
+ * nothing: `text()` refuses, so no party is ever compared against the four-character
+ * string `"undefined"`.
+ *
+ * @param {Record<string, unknown> | null | undefined} doc a peaceTermsDocument TreatyDocument
+ * @param {unknown} partyId
+ * @returns {'receiver' | 'giver' | null}
+ */
+export function documentSideOf(doc, partyId) {
+  const row = recordOf(doc);
+  const id = text(partyId);
+  if (!id) return null;
+  if (id === text(row.victorId)) return 'receiver';
+  if (id === text(row.loserId)) return 'giver';
+  return null;
+}
+
 /** THE PER-TERM OBLIGATION VOCABULARY (chair ruling CR-GR3B-3-R1). A SUPERSET of
  *  TREATY_ORIENTATION_KINDS by exactly one member: the three instrument kinds pass
  *  through from the delegation arm below, and `negotiated` is the only kind this reader
