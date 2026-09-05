@@ -26,14 +26,14 @@ BYTES are not. THE PROMISE is kept: a saved world's lived history is immutable; 
 ## Goldens / driven-corpus constants re-recorded — every one named, with its cause
 | file | assertions | before | after | cause |
 |---|---|---|---|---|
-| `tests/property/espionageDormancyFence.test.js:262` `PRE_COUPLING_CORPUS_SHA` | 1 | `72acacd8…` | __FENCE1_AFTER__ | the cured emitted text of the corpus (anti-vacuity arms hold: rows 360, distinct 360, errors 0) — __FENCE1_STATUS__ |
+| `tests/property/espionageDormancyFence.test.js:262` `PRE_COUPLING_CORPUS_SHA` | 1 | `72acacd8…` | `cda5ec877…` | the cured emitted text of the corpus (anti-vacuity arms hold: rows 360, distinct 360, errors 0) — TAKEN as car `3ab6fd9d3` at residue zero |
 Register state: `tests/fixtures/.golden-freeze-register.json` is UNFROZEN (`frozenAt` null); no shift-record file is
 therefore signed for this act — the ledger row + this entry are the form (LIGHT-PLAN §4). Fingerprinted fixtures touched:
 none — the 15 prose-side test files are not register surfaces; the fence-1 pin is a corpus sha, not a fixture (expected: none).
 
 ## Non-golden registers moved at the landing (chair acts, at the composed tip)
-- voice magnitudes (`UPDATE_VOICE_BASELINE=1`): 102 entries / em 770 (budget 670, a standing RED) / bang 10 → __VOICE_AFTER__ (at 83c7b6b66: 55 entries / em 311 / bang 8; re-measured at the fixed tip) (a FALL — shrink-only, banked)
-- writer-reach: plain `--write`, __WR_DELTA__ (never `--genesis`)
+- voice magnitudes (`UPDATE_VOICE_BASELINE=1`): 102 entries / em 770 (budget 670, a standing RED) / bang 10 → 55 entries / em 311 / bang 8 (unchanged by the fix car: the voice scanner reads `src/data` + `src/domain` only) (a FALL — shrink-only, banked)
+- writer-reach: plain `--write`, no act (exit 0 at the fixed tip) (never `--genesis`)
 - test ratchet: totalTests 31491 → __TT_AFTER__, totalFiles unchanged, entries 6
 - prose-numerics: 10 re-keyed snippets at 5 addresses (activeConditions.js:983, moralDrift.js:315, stressConfirmPass.js:126/:127), 0 fell, 0 new relocations, net zero rows
 - lighting census: +0 (probe == register at the fixed tip: __LIGHTING_TUPLE__) (no new test file; expected +0)
@@ -43,5 +43,5 @@ L-PROBE (POSITION 1) measures its dark-arm control AFTER this landing, so this c
 to lighting. Any later same-seed text movement on these 94 paths needs its own declaration.
 
 ## The DECLARED-SHIFT sentence owed to LGT-REG-DECL (cause (0), verbatim into the eleven-declarations record)
-> "1,001 reader sentences across 200 paths were cured; emitted text moves on 94 engine-side paths; no rules
+> "1,001 reader sentences across 200 paths were cured; emitted text moves on 133 engine-side paths (94 src/domain outside display + 39 src/generators); no rules
 > value, no preset and no flag moved."
