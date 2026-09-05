@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-09-05T12:54:24.612Z",
+  "generatedAt": "2026-09-05T16:38:21.237Z",
   "entry": "src/domain/aiOutputSchema.js",
-  "sourceHash": "9dce7874ccea8257",
+  "sourceHash": "2245c69482556cbd",
   "inputs": [
     "node_modules/immer/dist/immer.mjs",
     "node_modules/seedrandom/index.js",
@@ -32,6 +32,8 @@
     "src/domain/construct/configVocabulary.js",
     "src/domain/content/customContentAdmission.generated.js",
     "src/domain/content/customContentAdmission.js",
+    "src/domain/content/customContentCharset.generated.js",
+    "src/domain/content/customContentCharset.js",
     "src/domain/content/customContentManifest.generated.js",
     "src/domain/content/customContentManifest.js",
     "src/domain/content/customContentSemanticAuthority.js",
