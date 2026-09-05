@@ -1,7 +1,7 @@
 {
  "name": "ai",
  "runId": "wf_60f0a1e1-39c",
- "exportedAt": "2026-09-05T22:39:49.156Z",
+ "exportedAt": "2026-09-05T22:44:52.343Z",
  "claims": [
   {
    "feature": "theme over-explanation",
@@ -3017,6 +3017,96 @@
    "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "Originality in Form 63.9 vs 0.0-8.3; Theme & Content 75.0 vs 0-19.4",
    "note": "Not present on the abs page at the cited URL in any form — the abstract does not break results out by test. Verified in the same paper's full text, Table 5, where the figures match exactly: Originality in Form GPT3.5 2.8 / GPT4 8.3 / Claude 0.0 / New Yorker 63.9; Originality in Theme & Content GPT3.5 0 / GPT4 19.4 / Claude 11.1 / New Yorker 75.0. Judged against the abs page alone this would be NOT_FOUND; judged against the cited paper it is exactly right."
+  },
+  "15": {
+   "index": 15,
+   "verdict": "NOT_FOUND",
+   "trueWording": "LLM-generated stories pass 3-10X less TTCW tests than professionals",
+   "note": "The URL resolves to an abstract-only arXiv landing page (~5KB); the full paper is not at this URL. Exact-string search found the quote absent, and a targeted search for every cited percentage (2.8, 11.1, 88.9) and for the terms 'rhetorical', 'figurative', 'literary device' returned zero hits. The abstract supports only an aggregate '3-10X less' pass rate with no per-dimension breakdown."
+  },
+  "16": {
+   "index": 16,
+   "verdict": "NOT_FOUND",
+   "trueWording": "",
+   "note": "Quote 'Subtlety and restraint seem lacking' does not appear; 'subtlety' returns zero hits on the page. The abstract-only page contains no expert commentary on figurative language. Cannot be verified at this URL."
+  },
+  "17": {
+   "index": 17,
+   "verdict": "NOT_FOUND",
+   "trueWording": "",
+   "note": "Quote absent by exact match. None of the cited rates (8.3, 33.3, 91.7) appear, and 'ending' returns zero hits. The abstract describes the TTCW instrument and the 3-10X aggregate only; no endings dimension is discussed at this URL."
+  },
+  "18": {
+   "index": 18,
+   "verdict": "NOT_FOUND",
+   "trueWording": "",
+   "note": "Quote absent by exact match. Terms 'scene' and 'summary' return zero hits, as do the rates 8.3, 58.3 and 91.7. Not supported by the abstract-only page."
+  },
+  "19": {
+   "index": 19,
+   "verdict": "NOT_FOUND",
+   "trueWording": "",
+   "note": "No quote was supplied, so this is a substance-only check. None of the six cited figures (8.3, 16.7, 61.1, 8.3, 19.4, 72.2) appear on the page, and 'character develop' and 'voice' return zero hits. The abstract gives only the aggregate 3-10X figure."
+  },
+  "20": {
+   "index": 20,
+   "verdict": "NOT_FOUND",
+   "trueWording": "",
+   "note": "Quote 'its ideas and themes are hackneyed' absent; 'hackneyed' returns zero hits. The abstract contains no per-story expert commentary and never mentions Claude. Unverifiable at this URL."
+  },
+  "21": {
+   "index": 21,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "none of the LLMs positively correlate with the expert assessments",
+   "note": "Exact match in the abstract, differing only in sentence-position capitalisation of 'none'. Full context: 'we explore the use of LLMs as assessors to automate the TTCW evaluation, revealing that none of the LLMs positively correlate with the expert assessments.' The claim's restatement is faithful."
+  },
+  "22": {
+   "index": 22,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "tend to fall short in terms of novelty, surprise and diversity",
+   "note": "Quote matches word for word. The abstract also confirms the design (60 LLMs, 60 people, five-sentence cue-word task) and the comparison class ('average human writers'). Caveat: the p-value range (p<0.05 to p<0.0001) does not appear anywhere on this abstract-only page, and 'diversity' is not broken out into lexical vs semantic."
+  },
+  "23": {
+   "index": 23,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "LLMs generate stylistically complex stories, but tend to fall short",
+   "note": "The quoted wording is not on the page. The core proposition — more complex yet less creative — is supported: the abstract says LLMs 'generate stylistically complex stories, but tend to fall short in terms of novelty, surprise and diversity,' and lists linguistic complexity among the measured dimensions. The specific verbosity evidence (unique words, dependency path length, noun and adjective counts) is absent; searches for 'verbos', 'unique words', 'dependency', 'noun', 'adjective' returned zero hits."
+  },
+  "24": {
+   "index": 24,
+   "verdict": "NOT_FOUND",
+   "trueWording": "LLMs and non-experts rate LLM stories more creative than human",
+   "note": "Quote absent by exact match. The qualitative direction is supported — experts coincide with automated metrics while 'LLMs and non-experts rate LLM stories to be more creative than human-generated stories' — but every load-bearing specific fails: the deltas 1.25, 1.19 and 1.85 return zero hits, as does 'word count'. The attributed causal mechanism is not on this page."
+  },
+  "25": {
+   "index": 25,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "collectively a narrower scope of novel content is produced",
+   "note": "Quote matches word for word, and the page is confirmed as Doshi & Hauser (Science Advances, GPT-4 ideas). Concentration of individual gains among low-creativity writers is supported ('especially among less creative writers'). IMPORTANT CORRECTION: 10.7% is misdescribed. The paper says the similarity increase 'represents 10.7% and 8.9% of the total range' of similarity scores (an 8.10-point range) — not that stories were 10.7% more similar to one another. Separately, 5.2% more similar to the AI ideas is the ONE-idea condition; the five-idea condition is 5.0%. A different 10.7% elsewhere on the page refers to novelty gains for low-DAT writers, which may be the source of the conflation."
+  },
+  "26": {
+   "index": 26,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "intuitive but flawed heuristics",
+   "note": "Quote matches word for word, and authorship (Jakesch, Hancock, Naaman) is confirmed on the page. Every element of the claim is supported by the abstract: participants (N=4,600) 'were unable to detect self-presentations generated by state-of-the-art AI'; the named cues are 'first-person pronouns, use of contractions, or family topics'; and exploitability is stated as producing text perceived as 'more human than human.'"
+  },
+  "27": {
+   "index": 27,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "display a higher degree of stylistic uniformity, clustering tightly by model",
+   "note": "Quote matches word for word. Full attribution confirmed on the page: James O'Sullivan, Humanities and Social Sciences Communications vol. 12, article 1708, published 11 November 2025. Method confirmed (Burrows' Delta over most frequent words), as is the human contrast ('broader, more heterogeneous clusters') and the GPT-4 point: 'GPT-4 demonstrates greater internal consistency than GPT-3.5.'"
+  },
+  "28": {
+   "index": 28,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Real-world conflicts are sanitised, romance is almost absent",
+   "note": "Quote matches word for word. All specifics confirmed in the abstract: 11,800 stories, 50 each for 236 countries, gpt-4o-mini, and the single plot template ('a protagonist lives in or returns home to a small town and resolves a minor conflict by reconnecting with tradition and organising community events'). Minor wording drift: the page says 236 countries (the prompt used a demonym), not 236 nationalities."
+  },
+  "29": {
+   "index": 29,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "prioritises stability above change and tradition above growth",
+   "note": "Quote matches word for word. The framing is also confirmed: tension is 'downplayed in favour of nostalgia and reconciliation,' and the paper explicitly positions this as 'a narrative standardisation that should be acknowledged alongside the more familiar representational bias.'"
   }
  }
 }

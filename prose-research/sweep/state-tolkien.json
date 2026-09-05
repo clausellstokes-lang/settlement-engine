@@ -1,7 +1,7 @@
 {
  "name": "tolkien",
  "runId": "wf_9b91b240-c98",
- "exportedAt": "2026-09-05T22:39:49.137Z",
+ "exportedAt": "2026-09-05T22:44:52.324Z",
  "claims": [
   {
    "feature": "register modulation",
@@ -5481,6 +5481,96 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "more than 50% of the novel",
    "note": "Verbatim inside \"Without doing tedious tabulation, I would venture to argue that something more than 50% of the novel is devoted to landscape description.\" The second half is explicit: \"I wonder if Tolkien could have been just as effective with fewer words.\" Note Drout hedges heavily (\"without doing tedious tabulation... I would venture\"), so \"estimates\" is the right verb, as the claim has it."
+  },
+  "165": {
+   "index": 165,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"thrawn\" seems to me merely an ornamental archaism",
+   "note": "Wormtalk (HTTP 200) carries the quote word for word, and both halves of the claim. Drout declines to credit 'thrawn' with 'an important technical description the way that eyot, laving, louver, dwimmerlaik, etc., do'; of 'grey falling curtains' he writes he is 'a little hesitant' to call it a cliche 'because the recurrent image of the rain as a curtain is significant elsewhere' and gives 'the kind of layering through repetition which creates the \"myth\" feel of the book.'"
+  },
+  "166": {
+   "index": 166,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Speeding along with little hope of stopping or turning\" is particularly good",
+   "note": "Quote appears word for word as Drout's own citation of the phrase. Two wording caveats: he spells the device 'apo koinu' (not 'apo koinou'), and the effect he names is 'such tiny re-constructions of sentence meaning', not 're-readings' — and he offers it as something that 'can be read as' the construction, adding 'others disagree'."
+  },
+  "167": {
+   "index": 167,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "a moment of confusion in the reader's mind (as in Frodo's)",
+   "note": "No quote was supplied, and the page supports the substance in its own words: Tolkien aims 'to produce a moment of confusion in the reader's mind (as there is in Frodo's) when it is not clear if the giant, pillar-shaped things are really carved by men or are natural formations (pinnacles).' Note the framing: in the body this is one of Drout's 'two critiques' ('I also question \"pinnacles or pillars of stone\"') with a concession following; but the bracketed update at the head of the post does defend it — 'I am coming around to the idea that \"pinnacles or pillars\" is actually effective rather than flabby.' So 'defends' holds on the update, not on the original body."
+  },
+  "168": {
+   "index": 168,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a bad style, as if one were talking to children",
+   "note": "Literariness quotes Tolkien's 1967 interview verbatim ('There's nothing my children loathed more', qtd. in Annotated Hobbit 76). The rest is on the page too: 'the narrator of The Hobbit is an intrusive voice', 'The narrator's tone, however, is avuncular', 'very much like an older adult telling a story to small children', with the rhetorical-question example 'And what would you do, if an uninvited dwarf came and hung his things up in your hall...'. The page never uses the word 'rhetorical', but supplies the questions."
+  },
+  "169": {
+   "index": 169,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "still have a somewhat patronising quality",
+   "note": "GRIN excerpt for Litschko's 2006 term paper carries the quote verbatim. Every other element is present: 'an intrusive authorial narrator who frequently comments on and judges the characters as well as the unfolding events'; 'how they function to guide the reader'; 'theories of Franz K. Stanzel and Wayne C. Booth'; and section 2.4 'Changes in the Narrative Voice' on 'shifts in narrative tone and structure within the final chapters', written after a three-year break."
+  },
+  "170": {
+   "index": 170,
+   "verdict": "CONTRADICTED",
+   "trueWording": "The Hobbit (published in 1937), begins like a fairy tale",
+   "note": "The phrase 'like a fairy tale' is on the page, but the book is wrong. Bratman applies it to The Hobbit, not The Lord of the Rings: 'The Hobbit (published in 1937), begins like a fairy tale with a hobbit ... sitting at his doorstep smoking his pipe. But the hobbit travels from his doorstep into a world of Germanic dwarves and dragons, epic heroes, mighty deeds, and immense history.' The page then treats LOTR as the later book The Hobbit's popularity encouraged. Only one instance of 'begins' and zero of 'domestic'/'opening' in the text, so no second passage rescues the attribution."
+  },
+  "171": {
+   "index": 171,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "deliberate attempts to set the mood for different parts of the story",
+   "note": "Rogers' post carries the quote word for word, and the framing matches: 'Kirk makes the enlightening point that this \"Hobbit style\" was deliberate and crucial to Tolkien's world creation. \"Hobbit style\" refers to the fairy-tale-esque quality with which Tolkien narrates the Hobbit-focused areas of the story.' The mood sentence is about 'these stylistic changes that throw many critics off'."
+  },
+  "172": {
+   "index": 172,
+   "verdict": "CONTRADICTED",
+   "trueWording": "Bratman has named these as \"Annalistic\", \"Antique\" and \"Appendical\"",
+   "note": "The page names THREE modes, not four: 'David Bratman has named these as \"Annalistic\", \"Antique\" and \"Appendical\".' There is no 'Philosophical' mode — the single occurrence of 'philosophical' on the page is unrelated (Tolkien in the late 1950s 'working mostly with the theological and philosophical underpinnings'). The second half is also off: the page attributes the distance from the novels to all three styles collectively — 'far from the approachable novelistic styles of The Hobbit and The Lord of the Rings, lacking a single narrative thread, and without the benefit of Hobbits as guides' — not to a 'compressed annal-like style'; the word 'compressed' does not appear."
+  },
+  "173": {
+   "index": 173,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the multiple styles in which the various texts are written, as if by different hands",
+   "note": "Quote verbatim, and the four factors all cite ref [5] = Drout, Hitotsubashi & Scavera 2014, 'Tolkien's Creation of the Impression of Depth', Tolkien Studies 11(1):167-211. Minor conflation in the claim: 'as if by different hands' attaches to the multiple STYLES (factor 4); the inconsistent accounts are factor 3, 'the multiple accounts, containing gaps and inconsistencies, as if it were a real body of historical documents'. Factor 2 is 'the apparently casual and incomplete mentions of this background'."
+  },
+  "174": {
+   "index": 174,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "glimpses of a large history in the background",
+   "note": "Verbatim, and the letter number checks out: the ref is named 'Letter 247' in the page markup and resolves to 'Carpenter 2023, Letter #247 to Colonel Worskett, 20 September 1963'. Full sentence: 'Part of the attraction of the L.R. is, I think, due to the glimpses of a large history in the background: an attraction like that of viewing far off an unvisited island, or seeing the towers of a distant city gleaming in a sunlit mist.'"
+  },
+  "175": {
+   "index": 175,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "details the various copies, redactions, and translations",
+   "note": "No quote supplied. The page supports the first two-thirds: 'Scholars such as Peri Sipahi note that the use of multiple accounts is introduced in the Prologue to The Lord of the Rings, where the narrator explains that \"many of their traditions, up to that time still mainly oral, were collected and written down\", and then details the various copies, redactions, and translations that were made of the fictive Red Book of Westmarch.' The concluding inference — that the narrator's voice is therefore 'that of a translator-editor of old documents' — is NOT on the page and is not attributed to Sipahi there; 'translator' appears zero times in the body, and 'Editorial framing'/'Pseudotranslation' occur only as sidebar navigation links."
+  },
+  "176": {
+   "index": 176,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "tolkien's style is training wheels for our imagination",
+   "note": "Walker interview carries the quote verbatim, along with the rest of the claim: 'tolkien's essential stylistic tactic is to lure us into filling in the blanks'; 'tolkien's writing, too, sounds vividly detailed ... but he's actually giving us an open-ended outline ... that invites us to picture for ourselves what Frodo looks like.' The word 'invitational' also appears earlier ('Its invitational quality')."
+  },
+  "177": {
+   "index": 177,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "semantic ambiguities tending to widen potential meaning",
+   "note": "Verbatim inside a block quotation the page closes with the attribution 'Steve Walker, The Power of Tolkien's Prose, 2009 [22]', introduced as 'Walker comments that Tolkien uses language to expand his readers' imaginations'. 'Strikingly invitational' is also verbatim earlier: 'Tolkien's writing is \"strikingly invitational\", relying on suggestion to elicit a vivid and individual response from each reader.'"
+  },
+  "178": {
+   "index": 178,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "an amazing gift for naming and a wonderfully exact eye for description",
+   "note": "Verbatim on the Eighth Day Institute reprint of 'The Hero Is a Hobbit: A Review of The Fellowship of the Ring', footnoted as originally in The New York Times Book Review, 31 October 1954 — matching the claim's date. The Malory comparison is in the immediately preceding sentence: 'the standard of realism demanded today is much stricter than in the time, say, of Malory.'"
+  },
+  "179": {
+   "index": 179,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "this is light comedy and light comedy is not Mr. Tolkien's forte",
+   "note": "Quote verbatim (page uses a curly apostrophe in 'Tolkien's'). The credible clause is verbatim too and sits in the same 1956 review, 'At the End of the Quest, Victory': 'the reader's sense of the credible is never violated.' One misattribution: the 'shy-making' remark is not from the 1956 review but from the 1954 Fellowship review reprinted above it on the same page, and it is singular — 'some readers may find the opening chapter a little shy-making' — not 'the opening chapters'."
   }
  }
 }

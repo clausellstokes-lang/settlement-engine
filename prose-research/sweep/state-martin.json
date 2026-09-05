@@ -1,7 +1,7 @@
 {
  "name": "martin",
  "runId": "wf_e25da3f7-7fb",
- "exportedAt": "2026-09-05T22:39:49.147Z",
+ "exportedAt": "2026-09-05T22:44:52.334Z",
  "claims": [
   {
    "feature": "Anglo-Saxon diction",
@@ -5059,6 +5059,186 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "who was the king before him?",
    "note": "Same PDF; the quoted string is Martin's, verbatim: of Dunsany, \"And once upon a time there was a king and you know, he had a beautiful daughter and then an elf came in, but you don't get the sense of, 'Okay, what was the name of the dynasty this king was, who was the king before him? How did this dynasty come to power?'\" ATTRIBUTION CAVEAT: the claim's second half — placing Martin's own work with Tolkien, closer to historical fiction — is spoken in the transcript by the interviewer Mary Anne Mohanraj (\"Whereas what you're doing is closer, and Tolkien is closer, to historical fiction\"), not by Martin, and no assent from Martin is recorded before the session wraps. Martin does independently support the substance elsewhere in the same transcript (Tolkien's 'immense construct underneath', \"now I have a fair amount of ice under the surface\", and wanting to meld epic fantasy with historical fiction), so the claim is defensible — but as worded it credits Martin with the interviewer's formulation."
+  },
+  "195": {
+   "index": 195,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "for doing fantasy, is you have to root it in reality",
+   "note": "Transcript at maximumfun.org: \"That's the general process for doing fantasy, is you have to root it in reality. Then you play with it a little; then you add the imaginative element, then you make it largely bigger.\" The claim's substance — root in reality, then play, then add the imaginative element — is supported in exact order, but the quoted sentence \"In fantasy, you have to root it in reality.\" is a paraphrase and does not appear on the page. Fix the quote wording, keep the claim."
+  },
+  "196": {
+   "index": 196,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The best fantasy is written in the language of dreams.",
+   "note": "Opening sentence of 'On Fantasy'. The rest of the claim is also carried: \"We read fantasy to find the colors again... To taste strong spices\", against \"Reality is plywood and plastic, done up in mud brown and olive drab.\""
+  },
+  "197": {
+   "index": 197,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Fantasy is silver and scarlet, indigo and azure, obsidian veined with gold and lapis lazuli.",
+   "note": "Quote is verbatim. The colors/spices-vs-drab-real opposition is explicit, including the strip mall: \"Reality is the strip malls of Burbank, the smokestacks of Cleveland, a parking garage in Newark.\" The trailing gloss 'implying a prose that reaches for vivid sensory nouns' is the claimant's inference about prose technique, not something the essay states."
+  },
+  "198": {
+   "index": 198,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I have learned this technique from Stephen King and I like it very much.",
+   "note": "Fully supported end to end. Martin: \"There are certain sentences, like 'A Lannister always pays his debts'... I do it intentionally. I also like that Jaime remembers every day the sentence Tyrion said to him about Cersei.\" Page metadata confirms the cited date (October 8 2012)."
+  },
+  "199": {
+   "index": 199,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It's like a little salt in a stew, I think.",
+   "note": "Quote verbatim, and the mechanism is stated: \"You put in a little salt, the stew tastes a lot better. You put in too much salt and ruin the stew.\" Caveat: the claim's second half ('elsewhere he says explicit magic ceases to be magical') is NOT on this page — searches for 'ceases to be magic' and 'explicit' returned nothing. The claim flags it as 'elsewhere', so it is uncited rather than miscited, but it currently rests on no source and needs one. Byline confirmed: Amy Gentry, LoneStarCon 3."
+  },
+  "200": {
+   "index": 200,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The only thing worth writing about is the human heart in conflict with itself.",
+   "note": "Verbatim, and Martin explicitly frames it as his credo: \"My credo as a writer has always been Faulkner's Nobel Prize acceptance speech where he said...\" One overreach: 'which drives his interior POV' is the claimant's inference — on this page Martin invokes Faulkner to argue that magic must never be the solution to the problem, not to explain viewpoint."
+  },
+  "201": {
+   "index": 201,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The hero of one side is the villain of the other side.",
+   "note": "Verbatim, and the Iliad attribution is explicit: \"I've been always very impressed by Homer and his Iliad, especially the scene of the fight between Achilles and Hector. Who is the hero and who is the villain?\" Caveat: 'shaping his multi-sided viewpoint scheme' is inference — this answer is about grey characters, and Martin's POV-technique answer is a separate question earlier in the same interview."
+  },
+  "202": {
+   "index": 202,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "something that was big and rich and grand in scale",
+   "note": "westeros.org returned HTTP 403 to direct fetch; recovered via Wayback. Verbatim in context: \"writing teleplays that had to fit into 46 minutes... After a decade of that, I desperately wanted to do something that gave me more breathing room, something that was big and rich and grand in scale.\" Every element of the claim, including the 46-minute figure, is on the page. Citation confirmed by the page's own note: \"It remains © Ottakars. The precise date, beyond September 2000, is unknown.\""
+  },
+  "203": {
+   "index": 203,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "cutting and trimming and making scripts into a very tight fit",
+   "note": "Verbatim: \"for ten years I had been in the habit of cutting and trimming and making scripts into a very tight fit. After a decade of that, I was really in the mood to do something more expansive.\" Both the ten years and the expansiveness contrast are on the page."
+  },
+  "204": {
+   "index": 204,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "You're the director, you're the special effects coordinator, you're the costume department",
+   "note": "The quoted words appear verbatim as the opening of a longer list. Surrounding text supports the whole claim: \"When I returned to prose... Everything you can't do in television and film, of course you can do in prose because you're everything there... and you don't have to worry about a budget.\" NYT ArtsBeat page identity confirmed by headline."
+  },
+  "205": {
+   "index": 205,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "every word comes with a few drops of blood",
+   "note": "Quote verbatim. Note it comes from Martin's answer about daily writing routine, while the claim's substance comes from a different answer on the same page, which does support it: \"I have a general idea, but I don't have a detailed outline... that's where the writing comes in, as much as choosing words--determining the actual events and how they're going to unfold.\" Both halves are on the page, so the pairing holds."
+  },
+  "206": {
+   "index": 206,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "in, like, three days it just came right out of me, almost in the form you've read",
+   "note": "Verbatim, and the three-day figure and 'first chapter' framing are both explicit: the scene \"would ultimately be the first chapter of A Game of Thrones... It's from Bran's viewpoint.\""
+  },
+  "207": {
+   "index": 207,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "that was the hardest scene I ever had to write",
+   "note": "Verbatim run present; the transcript reads \"That was the-- number one, that was the hardest scene I ever had to write.\" Out-of-order composition confirmed: \"when I got to that chapter, I skipped over it. And I wrote all of the post-Red Wedding stuff. And then when the entire book was finished, I went back and wrote the Red Wedding.\""
+  },
+  "208": {
+   "index": 208,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "So I try to make you feel the deaths",
+   "note": "Verbatim, and both halves of the claim are on the page: the statistics contrast (\"It's a statistic... 30 billion people just died. And then we're on to the next act\") and unexpectedness (\"And the other thing is, I try to make them unexpected\")."
+  },
+  "209": {
+   "index": 209,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I can describe an axe entering a human skull in great explicit detail",
+   "note": "Verbatim, and the asymmetry the claim describes is stated directly: \"I provide a similar description, just as detailed, of a penis entering a vagina, and I get letters about it and people swearing off.\" The page's own attribution matches the claim's caveat — it credits \"(via BoingBoing)\" and names no original outlet, so The Mary Sue is a second-hand repost, not a primary source."
+  },
+  "210": {
+   "index": 210,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"And the history book, I only have one voice to do.\"",
+   "note": "winteriscoming.net quotes Martin (via James Hibberd/Entertainment Weekly) verbatim. Full support for the rest of the claim in the same paragraph: the voice is \"the Archmaester Gyldayn who has his own particular voice\", contrasted with \"When I'm doing Winds, I switch voices every time I switch chapters.\" Note the page adds a caveat the claim omits: Fire & Blood does contain some voice-switching via invented primary sources."
+  },
+  "211": {
+   "index": 211,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"To my mind, it's the execution that is all-important.\"",
+   "note": "Rolling Stone page (April 23, 2014; May 8 2014 issue) carries the whole claim in one paragraph: \"Ideas are cheap... it's the execution that is all-important... I take stuff from the Wars of the Roses and other fantasy things... somehow they jell into what I hope is uniquely my own.\" All three elements confirmed."
+  },
+  "212": {
+   "index": 212,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Sometimes the difference is just the furniture.\"",
+   "note": "Locus, November 2005 issue. Surrounding context confirms the interchangeability reading: \"If you're a writer you're a writer: you can tell a story. Sometimes the difference is just the furniture. Aliens or elves, they're the Other, symbolically, metaphorically.\""
+  },
+  "213": {
+   "index": 213,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Tolkien is the most influential writer in my life.\"",
+   "note": "Popverse, published Wed Nov 05 2025, reporting Martin's New York Comic Con spotlight panel with Joe Hill — date and venue in the claim both check out. The feud-dispute element is also verbatim supported: Martin complains about stories saying he \"blasts/attacks/bombs\" Tolkien, adding \"that's not an attack on Tolkien... That's a discussion of a literary decision.\""
+  },
+  "214": {
+   "index": 214,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"I don't discount the importance of style and plot and the other ingredients of fiction\"",
+   "note": "SFFWorld, Dag R., May 17 2006. Answer opens \"GRRM: Characters.\" One framing caveat: the question was \"What do you feel is your strength as a writer/storyteller?\", not what matters most — though he goes on to say \"for me, the people will always be the heart of the matter\", which carries the claim's sense."
+  },
+  "215": {
+   "index": 215,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"he consistently chooses words of Anglo-Saxon origin and generally avoids Latinate\"",
+   "note": "astrofella (Books & Boots) 2014 essay. The cumulative-antiquity element is in the same sentence: \"thus giving his prose a cumulative feeling of woodiness, antiquity, pithiness.\" Claim fully supported."
+  },
+  "216": {
+   "index": 216,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"The default setting of Martin's style is lucid and functional\"",
+   "note": "Same essay. Both remaining elements confirmed: \"purely functional modern thriller prose\" (opening paragraph) and, under heading '2. Poetry', \"GRRM's limpid style can have a powerfully simple beauty.\""
+  },
+  "217": {
+   "index": 217,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"prose larded with fake medievalisms\"",
+   "note": "Same essay, and every listed specimen is on the page: the style \"veers\" (the claim's 'unpredictable veering' matches \"is unstable... it veers from\"), with \"'ofts' and 'elsewises' from the 15th century and then things being 'divvied up'... as if in modern New York\"; 'much and more' appears under heading '9. Cod medievalism' as an invented cod-medieval phrase."
+  },
+  "218": {
+   "index": 218,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Confrontations between opposing characters are done though terse, charged dialogue\"",
+   "note": "Same essay, heading '4 Dramatic dialogue' ('though' is the page's own typo for 'through'). Shock-of-recognition element supported verbatim: \"you experience a real dramatic shock when you realise, along with one character, the implications of another one's words.\""
+  },
+  "219": {
+   "index": 219,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"a systematic exclusion from his vocabulary of almost all words derived from Latin, Greek, French\"",
+   "note": "astrofella 2013 affixes essay. Every specific in the claim checks out on the page: 'un-'/'be-' prefixes and \"the archaic prefix 'a-'\" (atop, abed, ahorse); -craft, -dom, -hood, -ship each given their own Old English entry; ironborn, sellsword and weirwood all appear in the coinages list. The learned/religious reservation is explicit in the conclusion: Latinate forms \"only deployed for effect in the context of legal or religious or courtly matters.\""
+  },
+  "220": {
+   "index": 220,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"the greater the sense of moving into his otherworld\"",
+   "note": "Same 2013 essay, from the density argument: \"The more there are, the more frequently you encounter them on each page, the greater the sense of moving into his otherworld.\" The 'not prithee' contrast is the essay's conclusion: the effect \"derives not from a handful of obvious stock phrases\" but from systematic Anglo-Saxon vocabulary, with 'prithee' named among the cod-medievalisms most writers would reach for."
+  },
+  "221": {
+   "index": 221,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"ASOIAF has an almost hypnotic readability\"",
+   "note": "At Sea Journal, 'George R.R. Martin, The American Homer'. Homeric-epithet framing is the essay's spine (rosy-fingered Dawn, wine-dark sea, Dr. Cattley's stock-phrase hypothesis), and the pace-over-polish trade is explicit: stock phrases \"come easily off the pen. Very important for maintaining momentum.\" One wording caveat: of the three formulae listed, 'black as night' and 'faces still as masks' are verbatim, but 'corded with muscle' is not — the page reads \"all those men corded or thick with muscle.\""
+  },
+  "222": {
+   "index": 222,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"The con: The sentences aren't beautiful.\"",
+   "note": "Same essay. Rhythm-over-polish confirmed (\"When he describes his writing process, he stresses rhythm\"; \"a steady flow of low-density sentences\"), as is the description/dialogue split: \"it's no surprise that dialogue would shine brightest. But the prose that constitutes the other 60% of the text is forgettable.\""
+  },
+  "223": {
+   "index": 223,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"He has words and phrases he rides like a hobbyhorse\"",
+   "note": "The Erstwhile Philistine, Asher Gelzer-Govatos, posted March 21, 2012. 'jape' and 'mummer's farce' are the reviewer's first two numbered examples. Caveat on the claim's second half: the word 'serviceable' does not appear anywhere on the page (checked against raw HTML). The equivalent judgement is delivered through joke-coinages on 'adequate' — \"If in most other areas Martin's prose acheives a level of adequatulence\" — so 'at best serviceable' is the claimant's paraphrase, not the source's wording."
+  },
+  "224": {
+   "index": 224,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"They usually involve someone being drunk with desire for the other person\"",
+   "note": "Same post, section 'And the Worst Thing Ever, the Sex Scenes'. The continuation reinforces the cliché reading: \"their head swimming with the wine of lust or some such nonsense\" and \"the obligatory mention of naughty body parts.\" Minor caveat: the reviewer's own words are \"clunky to the extreme\" rather than 'clichés' — the term 'cliches' about the sex scenes appears only in a reader comment below the line."
   }
  }
 }
