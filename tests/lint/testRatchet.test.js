@@ -836,10 +836,13 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
     // which is the only refreeze that door accepts). A remove-only --update retired both census rows; these two
     // ledger entries leave with them and OWED_CEILING drops by exactly two. The two Tier-3 JSX rows stay: the
     // 34 mainline JSX dashes are VOICE-JSX's, and their refreeze would be a RISE the door refuses.
-    'tests/copy/voiceMechanics.test.js :: E-E voiceMechanics JSX extension — src/**/*.jsx component ratchet (shrink-only) total JSX debt never grows past its committed budget':
-      'NOT FREED — 40 JSX em dashes against a hardcoded budget of 6, MEASURED at `3f9201e39` by the ENGINE-HYGIENE landing (the line said 21, true when VOICE-1b wrote it; the blocker before that recorded a stale 18 — same read-not-run failure as the Tier-2 row above). The P-1/P-3 burn did not touch this arm and cannot: the drift here is component copy. Same STRIP prescription: rewrite the component strings per docs/VOICE_AND_TONE.md §6; never raise the six.',
-    'tests/copy/voiceMechanics.test.js :: E-E voiceMechanics JSX extension — src/**/*.jsx component ratchet (shrink-only) per-file JSX debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win)':
-      'NOT FREED — the per-file JSX arm of the same ratchet; same STRIP prescription, same wave. FIFTEEN components carry 34 em dashes against a baseline of zero for each, MEASURED at `bf902c59f` (the INSTRUMENTS consist tip) by this landing; the line said nine, true when it was written and kept here as history. All fifteen are files the JSX baseline never listed — its three rows (SummaryTab, EconomicsTab, OverviewTab, 6 em between them) still match EXACTLY — so every byte of this arm\'s mismatch is growth on top of the frozen three.',
+    // ⭐⭐ 2026-09-05, THE COMPOSED LANDING (§899) — THREE ROWS FREED, NOT FORGIVEN. VOICE-JSX cured all 34 mainline
+    // JSX em dashes (Tier-3 GREEN with no refreeze: 0 against a budget of 6, 0 against a per-file baseline of zero), and
+    // CLAMP-W3 lifted the clamp census ceiling 62 → 69 to match the tree after CLAMP-W2 migrated three writers (the
+    // absorbed copies are documented in the ceiling car; the census row's cause string had said 78, the tree measured
+    // 72 at DOCKET and 69 at the composed tip). A remove-only --update retired all three census rows; these three ledger
+    // entries leave with them and OWED_CEILING drops by exactly three. enforcement-claims and the golden-master
+    // (owner-gated, waiting for the freeze act) stay.
     'tests/docs/enforcement-claims.test.js :: enforcement-claims meta-pin (A+ P1.1) every completeness claim carries an @enforced-by tag with ≥1 target':
       'NOT FREED — SIX naked completeness claims, not one, MEASURED at `bf902c59f` (the INSTRUMENTS consist tip) by this landing: four in docs/FABLE_VALIDATION_QUEUE.md (179, 3017, 3886 and 5663), one in docs/GOLDEN_SHIFT_LEDGER.md (2128) and one in docs/implementation/packets/foreign-policy/IN-0C.md (484). The line named only the R-BLD-10 row at FABLE_VALIDATION_QUEUE.md:179 — true when it was written, kept here as history. For that one the cure is still a chair ruling about the row rather than a ratchet edit; the other five are ordinary prose repairs. ⭐ The growth from one to six was never invisible: the FROZEN_NAKED pin in the same test freezes all six PER CLAIM as file plus matched vocabulary, and it PASSES at this tip.',
     // ⭐⭐ 2026-08-30, TE-RESIDUE-1 — THE metronome ROW LEFT, AND IT LEFT THE RIGHT WAY.
@@ -867,8 +870,6 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
     // (ODQ §881.4: the freeze records the LIT world), or sooner by the owner's own sentence in a shift record.
     'tests/property/generatorGoldenMaster.test.js :: generator golden master (cross-build output stability) every config produces byte-identical output to the golden master':
       'NOT FREED — the committed manifest moves on 525 of 525 rows under the DECLARED prose text shift, MEASURED at `73a6f0c22` (the PROSE landing tip) by the Fable chair with chair-tools/golden-count.mjs (control 0/525 at 272dbd2da); the fixture CANNOT be re-recorded before the freeze act (goldenRecordDoor [NO_SIGNATURE]; goldenFreeze.walker:358 forbids recorded register values while frozenAt is null). Blocker: the owner-signed GENESIS (§881.4) — or the owner\'s sentence in docs/shift-records/ ("one word charters it sooner"). Class owner-gated; magnitude ceiling 525; the arm is not switched off by a lane, it is waiting for the owner.',
-    'tests/lint/clampPrimitiveBaseline.test.js :: clamp primitive baseline ratchet (code-quality-4) baseline exactly matches the files that still define a local clamp/clamp01':
-      'NOT FREED — 78 local clamp definitions against a baseline of 62, MEASURED at `bf902c59f` (the INSTRUMENTS consist tip) by this landing; the line said 73 against 62 with 11 forks, true when it was written and kept here as history. Re-freezing banks 16 forks of a shared primitive — and it would breach a SECOND arm that is green today, since BASELINE_CEILING in that test is 62 and the committed baseline sits EXACTLY at it. The cure is to route the sixteen to the kernel primitive at src/kernel/math.js, which is its own sweep.',
     // ⭐⭐ 2026-08-15, da-c — THE proseNumerics ROW LEFT, AND IT LEFT THE RIGHT WAY.
     // It was OWED ("a regeneration must review every removed row, which is a wave, not a
     // step"), and da-a's DA-A1 I2 plus da-c's I1 between them did exactly that wave: two
@@ -904,7 +905,9 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
   // census entry, this ledger entry and this ceiling move together, in one act.
   // 7 → 5 on 2026-09-05 (§898): the two Tier-2 voice rows FREED by the prose landing's refreeze — the golden-master
   // row had entered at 7 the same day (owner-gated, waiting for the freeze act), so the two burned leave five.
-  const OWED_CEILING = 5;
+  // 5 → 2 on 2026-09-05 (§899): the two Tier-3 JSX voice rows and the clamp-primitive row FREED by the composed
+  // landing (VOICE-JSX + the CLAMP-W3 ceiling car); enforcement-claims and the owner-gated golden-master remain.
+  const OWED_CEILING = 2;
 
   test('⛔ NO ENFORCEMENT-WALKER ROW SITS IN THE CENSUS UNLESS IT IS LEDGERED', () => {
     // THE PIN THIS WHOLE BLOCK EXISTS FOR. Add a walker row to the census — any walker,
