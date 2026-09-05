@@ -375,6 +375,34 @@ describe('DS-GEN-12 / DS-GEN-13 / DS-GEN-17 — three total partitions', () => {
     }
   });
 
+  it('⛔ THE MARKET READ IS RUIN-FILTERED — a burnt bazaar is not a market (DESKCURE-2)', () => {
+    // THE CURE THIS PINS, and the behaviour shift it carries. `marketPoolKey` read the raw
+    // roster, so a calamity-flattened bazaar still credited the town with a market and the
+    // block printed MARKET-OPEN over a heap of ash — a confident falsehood, not a missing
+    // sentence. It now routes through `liveInstitutions()`, the estate's single writer of the
+    // ruin question, and the ruin-filter walker sees it as COMPLIANT rather than exempt.
+    //
+    // ⚠ THIS ARM IS THE FALSIFIER, so it is written in the two directions that a bare
+    // "ruined reads NO-MARKET" cannot distinguish: the SAME row reads MARKET-OPEN while it
+    // stands and NO-MARKET once stamped. A one-sided assertion here would pass just as
+    // happily if `marketPoolKey` had been broken into always answering NO-MARKET.
+    const bazaar = (extra) => [{ name: 'Grand bazaar', ...extra }];
+    expect(marketPoolKey({ institutions: bazaar({}), tradeRouteAccess: 'road' }))
+      .toBe('MARKET-OPEN');
+    // Both ruin spellings the estate stamps, each against that same standing reading.
+    expect(marketPoolKey({ institutions: bazaar({ status: 'ruined' }), tradeRouteAccess: 'road' }))
+      .toBe('NO-MARKET');
+    expect(marketPoolKey({ institutions: bazaar({ _worldPulseInactive: true }), tradeRouteAccess: 'road' }))
+      .toBe('NO-MARKET');
+    // A ruined market does not become an entrepôt either: NO-MARKET is tested first, so the
+    // ruin verdict survives the key that would otherwise outrank it.
+    expect(marketPoolKey({ institutions: bazaar({ status: 'ruined' }), isEntrepot: true, tradeRouteAccess: 'road' }))
+      .toBe('NO-MARKET');
+    // A live row alongside a ruined one still carries the town — the filter is per ROW.
+    expect(marketPoolKey({ institutions: [...bazaar({ status: 'ruined' }), { name: 'Weekly market' }], tradeRouteAccess: 'road' }))
+      .toBe('MARKET-OPEN');
+  });
+
   it('THE MARKET: four pools, and the evaluation order is driven rather than described', () => {
     const stalls = [{ name: 'Weekly market' }];
     // NO-MARKET first — a town with no market-class row is not an entrepôt of its own stalls.

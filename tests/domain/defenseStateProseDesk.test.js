@@ -822,10 +822,18 @@ describe('DS-DEF-4 — two vocabularies that are EXACT 1:1s, and a covertness ga
     // the slot; the other two say "the hall" in their own words, so the pool degrades.
     expect(SLOT_FILL_SHAPES.seat).toBe('proper');
     expect(SHAPES.shapeOf('seat')).toBe('proper');
+    // ⚠ THE ANCHOR IS A FILLED SLOT, WHICH IS THE MECHANISM UNDER TEST. "No brace survived"
+    // is true of a sentence that was never drawn, so each negative is paired with a fill that
+    // travels the SAME kernel path: the seat's own generated name where one exists, and the
+    // settlement name — `{settlement}`, filled in every variant — where the seat is missing
+    // and the naming variant is the one that drops. If the fill pipeline broke, the anchor is
+    // absent BEFORE the brace question is asked.
     const named = defenseCriminalProse(underworld({ government: 'Grand Merchant Oligarchy', criminalCaptureState: 'capture' }), null, { seed: 'seat-a', audience: 'dm' });
-    expect(named.capture.sentence).not.toMatch(/[{}]/);
+    expectAbsentWithAnchor(named.capture.sentence, '{', 'Grand Merchant Oligarchy', 'named seat: open brace');
+    expectAbsentWithAnchor(named.capture.sentence, '}', 'Grand Merchant Oligarchy', 'named seat: close brace');
     const unnamed = defenseCriminalProse(underworld({ government: undefined, criminalCaptureState: 'capture' }), null, { seed: 'seat-a', audience: 'dm' });
-    expect(unnamed.capture?.sentence ?? '').not.toMatch(/[{}]/);
+    expectAbsentWithAnchor(unnamed.capture?.sentence ?? '', '{', 'Thornwall', 'unnamed seat: open brace');
+    expectAbsentWithAnchor(unnamed.capture?.sentence ?? '', '}', 'Thornwall', 'unnamed seat: close brace');
     // The generator's own field is where the name comes from.
     expect(rulingStructureNamesTheSeat()).toBe(true);
   });
@@ -1040,8 +1048,15 @@ describe('DS-DEF-8 — the military-status override, and the pool that must NOT 
     expect(DEF8_UNREACHABLE_POOLS).toEqual(['multiple stresses, one posture shown']);
     expect(DEF8_POOLS[DEF8_UNREACHABLE_POOLS[0]], 'the declared-dark pool left the corpus').toBeTruthy();
     for (const type of Object.keys(STRESS_TYPE_MAP)) {
-      expect(Object.keys(STRESS_TYPE_MAP[type]), `${type} gained a severity field`)
-        .not.toContain('severity');
+      // ⚠ `probability` IS THE ANCHOR BECAUSE IT IS THE ARGUMENT. The claim above is not
+      // "severity is absent" but "the entry carries RARITY and no rank", so a key set that
+      // still holds `probability` proves the map is live and correctly keyed — and severity's
+      // absence from THAT set is a measurement. Bare, this negative would read identically
+      // against a STRESS_TYPE_MAP that had been emptied or re-shaped out from under it.
+      expectAbsentWithAnchor(
+        Object.keys(STRESS_TYPE_MAP[type]), 'severity', 'probability',
+        `${type} gained a severity field`,
+      );
     }
     // The claim it would make is false of the pick the banner actually performs: with two
     // stresses the FIRST is shown, whatever its weight.

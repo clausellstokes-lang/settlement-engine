@@ -58,10 +58,12 @@
  * falls back to a neighbouring pool: a wrong sentence about a town is worse than no sentence,
  * and every dead arm this subsystem has shipped was a default wearing a reading's clothes.
  *
- * ── THE ONE IMPORT IS FREE, AND IT IS THE CANONICAL LADDER ───────────────────────────
+ * ── THE TWO DOMAIN IMPORTS ARE FREE, AND BOTH ARE CANONICAL LADDERS ──────────────────
  * `defenseScoreBands.js` is a pure zero-import leaf already reached by three dossier chunks,
  * so `scoreBand` — the one 65/40/20 cut the PDF and the Defense tab already print — costs
- * nothing here. `prosperityRank.js` is deliberately NOT imported: this desk needs its
+ * nothing here. `institutionRoster.js` is the estate's single writer of the ruin question and
+ * is reached by the whole roster-reading population already; `marketPoolKey` routes through
+ * it for the reason written at that function. `prosperityRank.js` is deliberately NOT imported: this desk needs its
  * VOCABULARY, not its arithmetic, and the desk test asserts PROSPERITY_POOL_OF total against
  * `PROSPERITY_RANK` where a test import costs no production bytes.
  *
@@ -69,6 +71,7 @@
  */
 import { DOSSIER_STATE_PROSE_GENERAL } from '../../../data/dossierStateProse/general.generated.js';
 import { scoreBand } from '../defenseScoreBands.js';
+import { liveInstitutions } from '../../institutions/institutionRoster.js';
 import { readStateProse } from './stateProseKernel.js';
 import { legibilityRung } from './legibilityRung.js';
 
@@ -676,12 +679,23 @@ const MARKET_NAME = /\b(market|bazaar|exchange|shambles|stalls)\b/i;
  *
  * ⚠ `institutions` IS THE CALLER'S READING and is passed in rather than reached for: the
  * roster is on the settlement the caller already holds, and a desk that re-derived it would
- * be a second opinion about which rows count.
+ * be a second opinion about WHICH ROWS the caller meant.
+ *
+ * ⛔ THAT IS NOT THE SAME QUESTION AS WHICH ROWS STILL STAND, and the two were fused here.
+ * The roster arrives as the caller chose it, and this desk then asks the ONLY question it is
+ * entitled to ask of it: `liveInstitutions()`, the estate's single writer of the ruin
+ * question. Filtering the roster it was handed is not a second opinion about the roster — the
+ * caller still chooses it — and `hasMarket` is a CREDITING read: it decides whether the town
+ * is described as having a market at all. A calamity-flattened bazaar hosts no trade, and
+ * "the stalls are busy" about a burnt row is a confident falsehood rather than a missing
+ * sentence, which is the difference this whole desk exists to hold.
+ * (Same defect class, same cure, as `standingDefenseForces` in
+ * src/domain/institutions/defenseInstitutionBuckets.js.)
  * @param {{institutions?: unknown, tradeRouteAccess?: unknown, isEntrepot?: unknown}} state
  * @returns {string|null}
  */
 export function marketPoolKey(state) {
-  const rows = Array.isArray(state?.institutions) ? state.institutions : [];
+  const rows = liveInstitutions(state);
   const hasMarket = rows.some((row) => MARKET_NAME.test(text(row?.name)));
   const key = !hasMarket
     ? 'NO-MARKET'
