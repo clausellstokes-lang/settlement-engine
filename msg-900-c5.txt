@@ -1,0 +1,7 @@
+Desk composition (chair car): the observed-shape door counts five reads across its four cleared identities — ENC-4b's fifth read of grievance.toSid
+
+The M13 door enumerates the identities it clears (four since §893.3) and separately counts the reads it removes from the verdict. ENC-4b's approacherNidOf reads grievance.toSid — an identity already on the list — so the read count moved 4 -> 5 while the identity list did not; the pin and the notice regex move with attribution (ENC-4c's receipt named it; the walker is green at every dock except ENC-4b's). A fifth IDENTITY would still be impossible to absorb silently, which is the door's point. Proof: 44/44 under the mutex; eslint 0.
+
+Seat: Fable 5.1 — validated
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>
