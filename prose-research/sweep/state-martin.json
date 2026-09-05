@@ -1,7 +1,7 @@
 {
  "name": "martin",
  "runId": "wf_e25da3f7-7fb",
- "exportedAt": "2026-09-05T22:24:46.057Z",
+ "exportedAt": "2026-09-05T22:29:47.199Z",
  "claims": [
   {
    "feature": "Anglo-Saxon diction",
@@ -4699,6 +4699,96 @@
    "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "It's not the destination that matters to me, it's the journey",
    "note": "Martin's foreword, quoted: \"It's not the destination that matters to me, it's the journey,\" given directly as his answer to why the heraldry, the sex scenes and \"the feasts, oh those feasts\" are not cut — i.e. the dense description the claim names. One wrinkle: ComicBook's own paraphrase softens it to \"the journey is as important as the destination,\" while Martin's quoted words say the journey matters and the destination does not. The claim tracks Martin, not the paraphrase."
+  },
+  "135": {
+   "index": 135,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "I want them to live my story, not just read it",
+   "note": "Both halves land. Martin's foreword asks whether it was necessary to mention the knight who 'bore seven golden hedgehogs on a field of dark green' — the claim's 'on dark green' drops 'on a field of', so not verbatim. 'Nothing is gratuitous, as I see it' appears exactly."
+  },
+  "136": {
+   "index": 136,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "more often than not, they serve a narrative purpose",
+   "note": "First half exact: Walder Frey 'is purposefully serving the King in the North a ho-hum dinner ... as a small act of discourtesy'. The POV-emotion half is the weaker leg: supported by instances ('flavored with fear'; 'the calves' brains turned Catelyn's stomach') but the page never states it as a general principle."
+  },
+  "137": {
+   "index": 137,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "warm bread, fresh from the kitchens",
+   "note": "Vocabulary half exact: 'I routinely come across food terms I've never seen before. Capon. Trencher. Lamprey pie' plus 'expanding my vocabulary'. Recurrence half: 'One of Martin's most repeated phrases is...' — the claim's 'warm bread from the kitchens' omits 'fresh', so not verbatim."
+  },
+  "138": {
+   "index": 138,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Being there improved my sense of structure and dialogue",
+   "note": "Both halves are direct Martin quotes on the page. Worldbuilding: 'I don't build the world first, then write in it. I just write the story, and then put it together.' Correctly sourced to the Rolling Stone / Mikal Gilmore interview as digested by Woodward."
+  },
+  "139": {
+   "index": 139,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "I took actual names we still use today, like 'Robert'",
+   "note": "Both halves present. Martin also disparages invented names ('A lot of fantasy names are too much'), and on the second half: 'If I can't find the right name I don't know who the character is and I can't proceed.'"
+  },
+  "140": {
+   "index": 140,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "run into a Tyrion problem, I can write with Arya",
+   "note": "Appears under the heading 'On overcoming blocks': 'Thankfully, I have a lot of characters. So if I run into a Tyrion problem, I can write with Arya for a while.'"
+  },
+  "141": {
+   "index": 141,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The best fantasy is written in the language of dreams",
+   "note": "Exact word-for-word match on Wikiquote, and the attribution line beneath the passage reads 'The Faces of Fantasy (1996)' as claimed. The 'sensory and emotional vividness' clause is a fair paraphrase of the following catalogue (silver and scarlet; tastes of habaneros and honey)."
+  },
+  "142": {
+   "index": 142,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "perspectives of mysterious people (like Varys or Petyr Baelish)",
+   "note": "All three parts hold: 'we kind of see it through that character's biases'; POV withheld from schemers 'because that would ruin the mystery'; and the prologue's Will 'never shows up again'. The page names Petyr Baelish rather than 'Littlefinger'."
+  },
+  "143": {
+   "index": 143,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Each chapter is named after its POV character",
+   "note": "Both halves explicit; 'while never breaking the rule within a chapter' appears word for word, though the claim's surrounding phrasing is a paraphrase. Byline and date confirmed: Faye Lennox, Mar 14, 2026."
+  },
+  "144": {
+   "index": 144,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "simile was the most predominant figurative language used",
+   "note": "All three parts hold. Personification section: 'the winter is a living beast that devours anyone not ready for it'; tonal shifts traced across fear, looming danger, agitation, fright. Byline 'written by Joshua Ehiosun' confirmed."
+  },
+  "145": {
+   "index": 145,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Suddenly, it becomes cold; swords clash, a sound like a scream",
+   "note": "Both sensory details are on the page essentially verbatim and both sit against the Others' appearance. Caveat: this is LitCharts' summary column; the visible analysis reads the prologue for leadership and climate change, not as 'sensory signals of the supernatural' — that gloss is the claimant's inference, and the adjacent analysis panes are paywalled placeholder text."
+  },
+  "146": {
+   "index": 146,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "sets the stage for the immediate bleak scene of execution",
+   "note": "Content verified both halves: first line quoted with 'a crispness that hinted at the end of summer', and the child POV 'allows George R.R. Martin the space to explain a few things'. Attribution is off: page metadata gives the author as 'fantasyreviews' (not Tommy E. Turner) and the site as 'The Fantasy Review'; datePublished 2023-10-19 matches."
+  },
+  "147": {
+   "index": 147,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "1,736,054 words, 344 chapters; 5,047 words per chapter",
+   "note": "Verified via Wayback (2026-02-10) — the live host returned HTTP 454 browser challenge. Table matches exactly: 73/70/82/46/73, summing to 344, and 'more than 1.7 million words' is verbatim. Arithmetic checks: 1,736,054/344 = 5,046.7, so 'roughly 5,000' is sound and is correctly flagged as the claimant's own derivation. Byline Danny McLoughlin and original date Oct 19, 2021 confirmed; the snapshot shows an update of July 8, 2025, so the claimed 2026-03-27 update postdates my capture and is unconfirmed."
+  },
+  "148": {
+   "index": 148,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "combines archaic expressions with modern language",
+   "note": "Exact match: 'Martin skillfully combines archaic expressions with modern language.' The coinages clause paraphrases 'Martin introduces specific terms like \"warg\" and \"pyromancer\"'. Byline Jack Zhang and date 2025-01-15 both confirmed."
+  },
+  "149": {
+   "index": 149,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "An author doesn't need big, fancy words to make his/her point",
+   "note": "Both halves present; clothing half near-verbatim ('the author uses a whole paragraph to explain the intricate clothing of a certain lord or lady'). Minor slippage: the page frames the diction point as a generalized lesson about 'an author', not a statement about Martin specifically. Author and date (Cinthia Koeksal, February 22, 2013) confirmed."
   }
  }
 }

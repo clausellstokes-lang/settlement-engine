@@ -1,7 +1,7 @@
 {
  "name": "tolkien",
  "runId": "wf_9b91b240-c98",
- "exportedAt": "2026-09-05T22:24:46.053Z",
+ "exportedAt": "2026-09-05T22:29:47.191Z",
  "claims": [
   {
    "feature": "register modulation",
@@ -5211,6 +5211,96 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "it is the language of men of character",
    "note": "Verbatim within Ostadan's quotation of Le Guin: \"a less extraordinary English; or rather an English extraordinary for its simple timelessness...it is the language of men of character.\" The contrast is also on the page: young fantasy writers \"fumbling with 'thee' and 'thou' and overusing words like 'mayhap'\". Byline and date confirmed: \"September 26th, 2022 by Ostadan\". Nuance: the phrase is Le Guin's, quoted by Ostadan, and the thee/thou/mayhap charge is Le Guin's against young fantasy writers generally."
+  },
+  "120": {
+   "index": 120,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "pop up at random in the midst of more timeless speech",
+   "note": "Exact match on the Ostadan piece (byline confirmed, title 'From The Rings of Power to Poughkeepsie'). The surrounding paragraph lists the exact modernisms cited: hobbits saying 'Okay,' and 'It means, like, what we do,' and 'Elves who say \"conflicted\"'. The break-the-world framing is also explicit: 'The spell has broken, and the art has failed: we are back in Poughkeepsie.'"
+  },
+  "121": {
+   "index": 121,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "fantastic creation should reach to the very words and grammar",
+   "note": "Exact match. The same sentence names Dunsany, Eddison, Kenneth Morris, Tolkien, Cabell, Walton and Vance as successful examples, so 'naming Tolkien among the writers who achieve it' is correct. 'And every word counts' also appears verbatim in the preceding paragraph, quoted from Le Guin."
+  },
+  "122": {
+   "index": 122,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Tolkien is trying for one effect and instead achieving another",
+   "note": "Exact match; post signed '--John R.' on Sacnoth's Scriptorium, dated Saturday, April 6, 2019. Substance confirmed: the post sets out the two usages (dominant formal/remote KJV sense, forgotten intimate sense), says the intimate sense 'add[s] an extra layer to Eowyn's laying bare her feelings', and cites the Appendix F 'On Translation' footnote for the familiar/deferential distinction."
+  },
+  "123": {
+   "index": 123,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "used the familiar for people of all ranks, including the Lord Denethor himself",
+   "note": "Exact match inside the Appendix F footnote that Rateliff block-quotes: 'Peregrin Took, for instance, in his first few days in Minas Tirith used the familiar for people of all ranks, including the Lord Denethor himself.' The comic reading is supported by the next sentence: 'This may have amused the aged Steward, but it must have astonished his servants.'"
+  },
+  "124": {
+   "index": 124,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Aragorn's language deceptively modern, even easy-going on occasion",
+   "note": "'slightly wooden magniloquence' is exact, inside the fuller Shippey quotation: 'Aragorn's language deceptively modern, even easy-going on occasion, but with greater range than Boromir's slightly wooden magniloquence.' The page frames it as Aragorn having greater range and 'joust[ing] verbally' with Boromir while asserting his heirship, which supports the claim's 'rank the two men' gloss, though that phrasing is the claim's own, not the page's."
+  },
+  "125": {
+   "index": 125,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "many words and few to the point",
+   "note": "Exact match, of Gaffer Gamgee inside Gandalf's monologue. The baseline reading is directly supported by the next sentence: Gaffer Gamgee 'functions as a kind of base-line of normality - and, concomitantly, of emptiness'."
+  },
+  "126": {
+   "index": 126,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "talks like a politician, using empty words like 'real change'",
+   "note": "The quotation is exact. Two embellishments do not survive: the page gives only 'real change' as the empty-word example -- 'ultimate' and 'deploring' appear nowhere on the page (grepped) -- and 'the one modern register in the chapter' is contradicted, since the same page calls Aragorn's language 'deceptively modern, even easy-going on occasion'. Trim the parenthetical and the exclusivity claim."
+  },
+  "127": {
+   "index": 127,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "twelve of them present, and another seven quoted in Gandalf's speech",
+   "note": "No quotation was supplied, so verbatim status is not assessable; every element checks out. Page: 'twelve of them present in the meeting, and another seven quoted in the longest speech, Gandalf's, which, Shippey notes, takes up half the chapter'; 'in it nothing happens: it consists entirely of people talking'; and the success is attributed to Tolkien's 'unusual ability to suggest cultural variation by differences in mode of speech'."
+  },
+  "128": {
+   "index": 128,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a style that is only subtly archaized",
+   "note": "Exact match; post signed '--Marguerite Meyer'. The word pairing is exact too: 'Phrases like \"nigh,\" \"learned also,\" and \"mattered little\" are clearly archaic and rather formal, but those like \"for one thing\" and \"already guessed\" sound much more modern.'"
+  },
+  "129": {
+   "index": 129,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "versatility and by the ability to hear and replicate other styles",
+   "note": "Exact match (the phrase spans a line wrap in the source; joined text reads 'Gandalf's style is marked most, then, by versatility and by the ability to hear and replicate other styles of speech'). 'Ass! Fool! Thrice worthy and beloved Barliman!' is quoted on the page, and the seven figure is supported: Gandalf's speech 'takes up close on half the total, contains direct quotation from seven more'."
+  },
+  "130": {
+   "index": 130,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "whose style is consistently archaic and formal (Shippey 70)",
+   "note": "Exact match; post signed '--David Jaffe'. Aragorn's range is confirmed ('easy fluctuation between Aragorn's high and dignified style ... and Strider's low, common style'), and 'no range downward' is precisely the page's point about Boromir: 'relatively Elrondian...' but '...shows no sign of knowing anyone of Butterbur's social status'."
+  },
+  "131": {
+   "index": 131,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Gloin ... short, broken sentences and apposition; Boromir 'relatively Elrondian'",
+   "note": "No quotation supplied. All four items are on the page: Gloin 'is curt ... short, broken sentences and apposition (Shippey, 71)'; 'Aragorn slips easily between speaking like Elendil's heir and Strider, and Boromir adopts a lofty \"relatively Elrondian\" pattern of speech'. One refinement: the 'quick exclamations' belong specifically to Bilbo and Frodo (alongside simple rhymes), not hobbits generally, and the passage is running prose, not a table."
+  },
+  "132": {
+   "index": 132,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "His style (flexible, clear, simple) feels so effortless",
+   "note": "Exact match, as a parenthetical in the opening paragraph. The contrast is supported: the early prose 'uses \"a sustained archaism\" that harked back to William Morris (Rosebury, 95)', and the mature prose is 'no longer weighed down by impossibly heavy archaism'."
+  },
+  "133": {
+   "index": 133,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Feel ready for the great council?",
+   "note": "Exact match, both in the block-quoted passage and in the analysis. All three sub-points hold: 'If archaism in speech were desired, another greeting, such as \"hail\" or \"greetings\", would be used'; 'It is a sentence fragment, omitting the implied \"do you\" to start the question'; and Frodo's 'should like' 'displays a slight sense of formality that contrasts with Bilbo's casual and colloquial speech'."
+  },
+  "134": {
+   "index": 134,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Sam | Colloquial, rustic, working class",
+   "note": "Exact match in the 'Speech styles of the Fellowship of the Ring, after Kullmann and Siepmann' table (capitalised as a cell opener). Other rows confirm the rest: Aragorn 'Archaic, literary' (and 'archaic and literary' in the body text), Gandalf 'Plain, flexible', Merry 'Direct statements', Pippin 'Questions, exclamations' -- the body text adding 'Merry makes direct statements, while Pippin characteristically asks questions'."
   }
  }
 }
