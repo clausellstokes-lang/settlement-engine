@@ -33,6 +33,7 @@
  * @enforced-by tests/domain/townCartographyDeterminism.test.js
  */
 
+import { clamp01 } from '../../kernel/math.js';
 import { sceneDigest } from '../townScene/stableScene.js';
 import { premise, record } from './cartographyPlan.js';
 import {
@@ -57,11 +58,6 @@ const PROSPERITY_RANK = M.PROSPERITY_RANK;
  * @typedef {{ min: number, max: number }} CatalogRange
  * @typedef {{ min: number, max: number, resolved: number }} InstitutionMultiplicity
  */
-
-/** @param {number} value @returns {number} */
-function clamp01(value) {
-  return value < 0 ? 0 : value > 1 ? 1 : value;
-}
 
 /**
  * The tier's authored population span. Shaped like `cartographyBand`, because the
