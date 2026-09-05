@@ -65,6 +65,15 @@ Build the arm: a test that renders the frozen card's export path with an active-
 carries no live world, no campaign resolution, `faithUnlocked: false`; and the anonymous purchase page likewise. A new
 test file is allowed — name it. Do not change product behaviour.
 
+
+## ITEM 6 — the clamp detector's blind spot, and a floor with no ceiling (CLAMP-W2's two traps)
+`cartographyMorphology.js:62` defines a passthrough `clamp01` under the name `unit` — invisible to `clampPrimitiveBaseline`'s `DEF_RE`
+(`(function|const|let|var)\s+clamp(01)?\b`) and load-bearing for the cartographyBuildings migration proof. RULED: it is NOT a copy to
+migrate; it IS a detector reach to state — extend `DEF_RE`'s docblock (not the regex) with the named exception and add an arm that
+pins `unit` at that address as a KNOWN passthrough, so a future rename cannot mint an invisible copy. Separately `planUnitCm` has a
+validated FLOOR and NO CEILING (the `storageCapacityMonths` sibling from wave 1) — add the ceiling pin the producer's own range implies,
+or STOP with the range if no producer states one. Zero behaviour change.
+
 ## PROOF (per item)
 The file's own run (skipped, reason printed) · `npx vitest run tests/security/` · `npx vitest run tests/lint/` WHOLE ·
 `node scripts/check-test-ratchet.mjs` in read-only form if it has one (no `--update`) · eslint. Quiet-window law + mutex.

@@ -7,7 +7,7 @@ Updated 2026-09-05 by the Fable chair (after §897: product fd8b6df00, ledger c8
 | ~~LIGHT-PLAN~~ DONE → refs/preserve/light-plan-2026-09-05 | | | | |
 | ~~PROSE-REBASE~~ DONE → 3 cars sealed `prose-train-2026-09-05`, replayed to lanePROSE2 @ fd8b6df00 = 4efce2e95; registers + gate NOW (chair) | | | | |
 | ~~WARMS-CAR0~~ DONE → refs/preserve/warms-car0-2026-09-05; volume landed §896.2 | | | | |
-| CLAMP-W2 | build (6 files) | laneCLAMPW2 @ df7cdd37e → replay onto fd8b6df00 | briefs/brief-CLAMP-W2.md | 09-05 |
+| ~~CLAMP-W2~~ DONE → 3 cars b0cba0dca sealed `clamp-w2-2026-09-05` (3 migrated, 3 refused; census 69 vs 62; edge-shared re-mint owed at its landing) | briefs/brief-CLAMP-W2.md | 09-05 |
 | ~~DESK-WARFAITH~~ DONE → 7dba5508b sealed `desk-warfaith-2026-09-05` (6/9 mounted; 3 dark measured; the PUBLIC/SHARED pool is OWNER-gated §885.3) | | | | |
 | ~~PDFDRIFT~~ REFUSED with measurement → ruling WITHDRAWN (`rulings/RULING-PDFDRIFT-WITHDRAWN.md`); residue: an OWNER row (the paid-rights floor and the arms) + DOCKET item 5 (AUDIT-2.2 as machinery) | | | | |
 | L-PROBE-KIT | tooling | lanePROSE2 (read-only) | briefs/brief-L-PROBE-KIT.md | 09-05 |
@@ -38,6 +38,9 @@ Updated 2026-09-05 by the Fable chair (after §897: product fd8b6df00, ledger c8
 
 14. **VOICE-JSX** — BRIEFED (`briefs/brief-VOICE-JSX.md`): the 34 mainline em dashes in 15 components; makes the Tier-3 voice refreeze a FALL and retires two census rows.
 
+
+15. **CLAMP-W3** — RULED + BRIEFED (`rulings/RULING-CLAMP-FINAL.md`, `briefs/brief-CLAMP-W3.md`): the ceiling car 62 → 69 with seven recorded reasons; dock at the tip after the wave-2 cars land; retires the clampPrimitiveBaseline census row.
+16. **DESK-9** — DISPATCHED (laneDESK9 @ 940d161ca).
 
 ## RESIDUE FOR THE DESK LANDING ROW (from the desk lanes' receipts)
 - OWNER rows to open: DS-GEN-1 (tension `severity` is an ARRAY on 48/48 — a property of the tension TYPE; the cure is generation-side ⇒ owner-signed) · DS-FTH-2's PUBLIC/SHARED DOSSIER pool (authored for the reader §885.3 forbids).
