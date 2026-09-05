@@ -1,0 +1,3 @@
+eager-probe  VERDICT: LAZY — clear
+  source closure = 237 modules; catalog present = false
+  dist arm: dist/ absent — the dist arm did not run. This does NOT weake...

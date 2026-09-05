@@ -1,0 +1,3 @@
+env-shim: injecting an EMPTY import.meta.env (the product's unconfigured arm).
+  realistic_regional     lit= 12 dark= 13 keys=37 roundTrip=yes hash=46919e4d4c53
+birth-fixtures OK  presets=1 refusals=0 digest=600935bf1dd9 -> /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/smoke/birth-one.json

@@ -1,0 +1,209 @@
+L-PROBE dark-arm battery
+  tree    /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2
+  outdir  /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout
+  HEAD    83c05bf4e47d9d932140072b14338aa25bf9e5db
+  dirty   0 entr(ies)
+  mode    DRY
+
+── DRY step eager_stop: node /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/eager-probe.mjs --tree /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2 --out /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/stop-eager.json --dry
+{
+  "dry": true,
+  "tree": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2",
+  "out": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/stop-eager.json",
+  "reads": [
+    "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2/tests/build/campaignRuntimeLazy.test.js"
+  ],
+  "sourceArm": "sourceStaticClosure('src/main.jsx') contains src/domain/worldPulse/simulationRules.js?  -> the VERDICT",
+  "distArm": "entryChunkClosure() + chunksContaining(<label>) — INFORMATIONAL only; skipped when dist/ is absent",
+  "stop": "EAGER (the catalog IS in the entry's source closure) => the wave STOPs",
+  "writes": [
+    "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/stop-eager.json"
+  ]
+}
+DRY_TRUE_EXIT_eager_stop=0
+── DRY step c_presence: node /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/presence-dump.mjs --tree /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2 --out /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/c-presence-dump.json --dry
+{
+  "dry": true,
+  "mode": "exported",
+  "tree": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2",
+  "out": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/c-presence-dump.json",
+  "wouldImport": [
+    "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2/scripts/lib/observed-shape-corpus.mjs",
+    "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2/scripts/lib/observed-shape-baseline.mjs"
+  ],
+  "wouldCall": [
+    "buildObservedCorpus({ quiet: true })"
+  ],
+  "wouldNeverCall": [
+    "check-observed-shape-readers.mjs (any flag)",
+    "migrate-observed-shape-readers.mjs",
+    "--write / --update / --genesis / --rebank"
+  ],
+  "writes": [
+    "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/c-presence-dump.json"
+  ]
+}
+DRY_TRUE_EXIT_c_presence=0
+── DRY step d_census: node /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/census-probe.mjs --tree /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2 --out /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/d-lighting-census.json --dry
+{
+  "dry": true,
+  "tree": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2",
+  "out": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/d-lighting-census.json",
+  "reads": [
+    "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2/tests/lint/sovereigntyLightingContract.walker.test.js",
+    "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2/tests/lint/.lighting-census-baseline.json"
+  ],
+  "method": "pure-region extraction + vitest stub, executed inside a farm (tests/ copied, everything else symlinked)",
+  "refusesWhen": [
+    "no column-0 describe( in the walker",
+    "parked + credited !== files",
+    "the farm cannot be removed"
+  ],
+  "neverSets": [
+    "LIGHTING_CENSUS_REFREEZE",
+    "LIGHTING_CENSUS_NOTE"
+  ],
+  "writes": [
+    "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/d-lighting-census.json"
+  ]
+}
+DRY_TRUE_EXIT_d_census=0
+── DRY step e_rosters: node /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/rosters.mjs --tree /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2 --out /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/e-stability-rosters.json --dry
+{
+  "dry": true,
+  "tree": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2",
+  "out": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/e-stability-rosters.json",
+  "reads": [
+    "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2/tests/domain/simulationRulesPreset.stability.test.js",
+    "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2/src/domain/worldPulse/simulationRules.js"
+  ],
+  "rosters": [
+    "WAR_DEPTH_FLAGS",
+    "ENGINE_WAVE_FLAGS",
+    "ONE_REGEN_FLAGS",
+    "LEGACY_PRESET_IDS",
+    "CL0_PRESET_IDS",
+    "WORLD_ALIVE_PRESET_IDS",
+    "WAVE_DARK_PRESET_IDS"
+  ],
+  "refusesWhen": [
+    "a roster name matches 0 or >1 times",
+    "an array literal holds anything but single-quoted strings"
+  ],
+  "writes": [
+    "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/e-stability-rosters.json"
+  ]
+}
+DRY_TRUE_EXIT_e_rosters=0
+── DRY step f_birth: node --import /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/env-shim.mjs /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/birth-fixtures.mjs --tree /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2 --out /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/f-birth-fixtures.json --dry
+env-shim: injecting an EMPTY import.meta.env (the product's unconfigured arm).
+{
+  "dry": true,
+  "tree": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2",
+  "out": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/f-birth-fixtures.json",
+  "preset": "(every id in SIMULATION_RULE_PRESETS)",
+  "pinnedNow": "2026-07-12T00:00:00.000Z",
+  "volatileBirthFieldsExcludedFromHash": [
+    "id",
+    "createdAt",
+    "updatedAt"
+  ],
+  "wouldImport": [
+    "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2/src/store/campaignImportedCreation.js",
+    "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2/src/domain/worldPulse/simulationRules.js",
+    "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2/src/domain/worldPulse/simulationProfile.js"
+  ],
+  "path": [
+    "buildNewCampaign(state, name)",
+    "prepareRulesUpdate(worldState, preset.rules, wizardNews, PINNED_NOW)"
+  ],
+  "writes": [
+    "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/f-birth-fixtures.json"
+  ]
+}
+DRY_TRUE_EXIT_f_birth=0
+── DRY step g_pulse: node --import /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/env-shim.mjs /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/pulse-hashes.mjs --tree /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2 --out /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/g-pulse-hashes.json --settlements 4 --dry
+env-shim: injecting an EMPTY import.meta.env (the product's unconfigured arm).
+{
+  "dry": true,
+  "tree": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2",
+  "out": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/g-pulse-hashes.json",
+  "preset": "(every id in SIMULATION_RULE_PRESETS)",
+  "settlements": 4,
+  "seed": "lprobe-pulse",
+  "pinnedNow": "2026-07-12T00:00:00.000Z",
+  "expectedTicks": 52,
+  "drives": "simulateCampaignWorldInterval({ interval: 'one_year', commit: true, autoResolve: true, now: PINNED, advanceEpoch: soakAdvanceEpoch(...) })",
+  "refusesWhen": "the counted ticks != 52, or the interval returns status 'paused'",
+  "writes": [
+    "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/g-pulse-hashes.json"
+  ]
+}
+DRY_TRUE_EXIT_g_pulse=0
+── DRY step a_golden: sh /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/golden-control.sh /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout --dry
+DRY golden-control.sh
+  tree   /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2
+  base   <none — the tip arm only>
+  1) quiet window: 3 consecutive probes, load-1 < 4.0, zero vitest/worker processes
+  2) sh /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2/scripts/gate-mutex.sh --run -- npx vitest run tests/property/generatorGoldenMaster.test.js
+       -> /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/a-goldenMaster.log    expect 3 passed, 0 of 525 rows moved
+  3) node /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2/scripts/dormancy-bit-compare.mjs --tree /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2 --arm generation
+       -> /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/a-dormancy.tip.tsv (600 rows)   summary -> /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/a-dormancy.tip.summary.txt
+  ⛔ never over an out/ tree; never a self-comparison; UNFLOORED is not a pass
+DRY_TRUE_EXIT_a_golden=0
+── DRY step b_certify: sh /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/certify.sh /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout --years 5 --settlements 4 --dry
+DRY certify.sh
+  tree        /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2
+  outdir      /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout
+  years       5   settlements 4   preset <all>
+  1) node preset-overlay.mjs --fixtures /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/f-birth-fixtures.json --tree /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2 --outdir /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/overlays
+  2) for each ZERO-LEAK preset:
+       node /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2/scripts/audit/whole-world-soak.mjs --years 5 --settlements 4 \
+            --seed lprobe-<id> --rules-json /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/overlays/overlay.<id>.json \
+            --receipt /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/b-receipt.<id>.json --json
+       node /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2/scripts/audit/certify-subsystems.mjs /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/b-receipt.<id>.json --json \
+            > /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/b-certification.<id>.json
+  3) STOP with the refusal roster for every preset that leaks.
+  reads  /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/f-birth-fixtures.json (produced by run.sh step f — certify.sh does NOT birth its own)
+DRY_TRUE_EXIT_b_certify=0
+── DRY step h_listing_base: sh /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/listing.sh /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout --ref 4efce2e95 --dry
+DRY listing.sh
+  tree        /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2
+  ref         4efce2e95          label base
+  scratch     /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/scratch-build.base      (built here; the tree is NEVER built in)
+  1) git -C /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2 rev-parse 4efce2e95                      -> the measured sha
+  2) git -C /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2 status --porcelain                  -> REFUSE if dirty (unless --allow-dirty)
+  3) mkdir /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/scratch-build.base && git -C /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2 archive 4efce2e95 | tar -x -C /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/scratch-build.base
+  4) ln -s /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2/node_modules /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/scratch-build.base/node_modules   ⛔ SYMLINK, never materialise
+  5) (cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/scratch-build.base && npm run build)                   -> prebuild + vite build + postbuild
+  6) node closure-measure.mjs --dist /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/scratch-build.base/dist --tree /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/scratch-build.base --out /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/h-listing.base.json
+  7) rm -rf /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/scratch-build.base                                  (unless --keep)
+  STOP when closureDelta > (base marginBytes - 100)
+DRY_TRUE_EXIT_h_listing_base=0
+── DRY step h_listing_tip: sh /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/listing.sh /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout --ref HEAD --against /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/h-listing.base.json --dry
+DRY listing.sh
+  tree        /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2
+  ref         HEAD          label tip
+  scratch     /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/scratch-build.tip      (built here; the tree is NEVER built in)
+  1) git -C /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2 rev-parse HEAD                      -> the measured sha
+  2) git -C /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2 status --porcelain                  -> REFUSE if dirty (unless --allow-dirty)
+  3) mkdir /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/scratch-build.tip && git -C /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2 archive HEAD | tar -x -C /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/scratch-build.tip
+  4) ln -s /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2/node_modules /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/scratch-build.tip/node_modules   ⛔ SYMLINK, never materialise
+  5) (cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/scratch-build.tip && npm run build)                   -> prebuild + vite build + postbuild
+  6) node closure-measure.mjs --dist /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/scratch-build.tip/dist --tree /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/scratch-build.tip --out /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/h-listing.tip.json --against /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/h-listing.base.json
+  7) rm -rf /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/dryout/scratch-build.tip                                  (unless --keep)
+  STOP when closureDelta > (base marginBytes - 100)
+DRY_TRUE_EXIT_h_listing_tip=0
+
+── every captured exit ──
+DRY_TRUE_EXIT_eager_stop=0
+DRY_TRUE_EXIT_c_presence=0
+DRY_TRUE_EXIT_d_census=0
+DRY_TRUE_EXIT_e_rosters=0
+DRY_TRUE_EXIT_f_birth=0
+DRY_TRUE_EXIT_g_pulse=0
+DRY_TRUE_EXIT_a_golden=0
+DRY_TRUE_EXIT_b_certify=0
+DRY_TRUE_EXIT_h_listing_base=0
+DRY_TRUE_EXIT_h_listing_tip=0
+TRUE_EXIT=0

@@ -1,0 +1,11 @@
+  WAR_DEPTH_FLAGS          8
+  ENGINE_WAVE_FLAGS        9
+  ONE_REGEN_FLAGS          9
+  LEGACY_PRESET_IDS        3
+  CL0_PRESET_IDS           4
+  WORLD_ALIVE_PRESET_IDS   3
+  WAVE_DARK_PRESET_IDS     4
+  WAR_DEPTH_FLAGS          litSomewhere=8/8 darkEverywhere=0
+  ENGINE_WAVE_FLAGS        litSomewhere=9/9 darkEverywhere=0
+  ONE_REGEN_FLAGS          litSomewhere=9/9 darkEverywhere=0
+rosters OK  presets=7 digest=324c877763cb -> /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/smoke/rosters.json

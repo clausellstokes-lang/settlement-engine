@@ -1,0 +1,3 @@
+env-shim: injecting an EMPTY import.meta.env (the product's unconfigured arm).
+  quiet_local            ticks=52 epoch=dark weeks=52 1083ms hash=c6a0be732f3f
+pulse-hashes OK  presets=1 distinct=1 / 1 refusals=0 digest=7196f572a106 -> /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/smoke/pulse-quiet.json

@@ -1,0 +1,5 @@
+LOAD AT START: 11.63 13.52 17.38  busy=13
+presence-dump: driving buildObservedCorpus() — 4 seeds x 4 configs + 12 pulse intervals.
+presence-dump: corpus built in 22s
+presence-dump OK  parents=8558 shapes=1299 atOrAbove(MIN_ROWS=40)=337 below=962 digest=1746a60667f5 -> /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/smoke/presence.json
+TRUE_EXIT_smoke_presence=0

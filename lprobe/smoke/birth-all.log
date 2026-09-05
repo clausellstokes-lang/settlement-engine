@@ -1,0 +1,9 @@
+env-shim: injecting an EMPTY import.meta.env (the product's unconfigured arm).
+  quiet_local            lit=  9 dark= 16 keys=37 roundTrip=yes hash=ab4d30ce2cd9
+  realistic_regional     lit= 12 dark= 13 keys=37 roundTrip=yes hash=46919e4d4c53
+  dramatic_campaign      lit= 35 dark=  9 keys=56 roundTrip=yes hash=75cfeb96d587
+  static_campaign        lit=  1 dark= 24 keys=36 roundTrip=yes hash=2a81857ca062
+  narrative_campaign     lit= 11 dark= 14 keys=37 roundTrip=yes hash=b1cff1c935db
+  living_realm           lit= 31 dark= 12 keys=55 roundTrip=yes hash=b97fc24dcf25
+  full_simulation        lit= 45 dark= 12 keys=70 roundTrip=yes hash=32728f513ff3
+birth-fixtures OK  presets=7 refusals=0 digest=9a96fababf75 -> /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lprobe/smoke/birth-all.json

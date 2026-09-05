@@ -1,0 +1,31 @@
+{
+  "instrument": "lprobe/pulse-hashes.mjs",
+  "output": "(g) the 52-tick pulse hashes, one per preset",
+  "tree": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2",
+  "takenAt": "2026-09-05T10:39:19.491Z",
+  "seed": "lprobe-pulse",
+  "settlements": 2,
+  "pinnedNow": "2026-07-12T00:00:00.000Z",
+  "expectedTicks": 52,
+  "intervalWeeksOneYear": 52,
+  "distinctResultHashes": "1 / 1",
+  "refusals": [],
+  "rows": [
+    {
+      "presetId": "quiet_local",
+      "observedTicks": 52,
+      "ticksAreFiftyTwo": true,
+      "advanceEpoch": null,
+      "epochLit": false,
+      "status": "complete",
+      "ms": 1083,
+      "resultHash": "c6a0be732f3f6e1a7c82ecdb013edd6599cb081c95559aeb390d4eb220ed7189",
+      "worldStateHash": "8377f9b7f9265891ec9b08cf7b961e5eb91046f4217bdcb51547fca5844b0b4f",
+      "regionalGraphHash": "218595827ac224870487c29bce811dcf47ec1181d1c8100e2f62c2d6202e881c",
+      "wizardNewsHash": "3ee53f1fe10d577c6e50abc90cd839faa1fd7de5403c611674b56c294fca3f10",
+      "endTick": 53,
+      "endWeeks": 52
+    }
+  ],
+  "digest": "7196f572a1066eafd9b67552f7bc6d56cb7bb3aa161c586917eeb69bb512df81"
+}

@@ -1,0 +1,11 @@
+06:50:57 reset: load1=39.22 busy=9
+06:51:57 reset: load1=38.08 busy=9
+06:52:57 reset: load1=32.80 busy=9
+06:53:57 reset: load1=16.58 busy=0
+06:54:58 reset: load1=7.51 busy=0
+06:55:58 reset: load1=4.82 busy=0
+06:56:58 quiet probe 1/3: load1=2.92 busy=0 OK
+06:57:58 reset: load1=2.32 busy=1
+06:58:58 reset: load1=5.90 busy=13
+06:59:58 reset: load1=19.51 busy=13
+07:00:58 reset: load1=11.09 busy=1
