@@ -8,7 +8,7 @@ import {NarrativeNote} from '../NarrativeNote';
 import { criminalOpNote, deriveCriminalStructure, deriveDefenseReadiness, deriveSupportingCapabilities, deriveGuardAssessment, deriveDefenseVulnerabilities, DEFENSE_STRESS_STATUS } from '../../../domain/display/defenseDisplay.js';
 import { safetySeverityOf } from '../../../domain/display/safetySeverity.js';
 import { scoreBand, scoreColor } from '../../../domain/display/defenseScoreBands.js';
-import { defenseForcesProse, defenseMilitaryStatusProse, defensePostureProse, defenseStateProse, defenseThreatProse } from '../../../domain/display/stateProse/defenseStateProse.js';
+import { defenseForcesProse, defenseMilitaryStatusProse, defensePostureProse, defenseStateProse, defenseThreatProse, defenseWallRationaleProse } from '../../../domain/display/stateProse/defenseStateProse.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
 import { truncateAtWord } from '../../../lib/text.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
@@ -46,6 +46,13 @@ const POSTURE_MOUNT = 'defense.postureHeader';
  * fourth pool is declared dark in the desk, with the reason and the one act that lights it.
  */
 const MILITARY_STATUS_MOUNT = 'defense.militaryStatus';
+
+/**
+ * The wall-rationale position: why this town keeps a circuit, or why it does not. ⚠ Its
+ * perimeter read is the STANDING roster, so a town whose walls have been thrown down is
+ * described by the unwalled pools rather than asked why it keeps a wall it no longer has.
+ */
+const WALL_RATIONALE_MOUNT = 'defense.wallRationale';
 
 export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false, playerView = false}) {
   const [expandedThreat, setExpandedThreat] = useState(null);
@@ -124,6 +131,14 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
     });
   const statusLines = ['override', 'viability']
     .map((k) => drawnAtMount(MILITARY_STATUS_MOUNT, statusProse[k])?.sentence).filter(Boolean);
+  // DS-DEF-11, why the wall and why not. Same public gate; no DM-editable field, plain rung.
+  const wallProse = publicDossier
+    ? Object.freeze({ rationale: null })
+    : defenseWallRationaleProse(r, {
+      seed: String(r?._seed ?? r?.id ?? ''),
+      audience: playerView ? 'player' : 'dm',
+    });
+  const wallLine = drawnAtMount(WALL_RATIONALE_MOUNT, wallProse.rationale)?.sentence || null;
   const stresses = (Array.isArray(r.stress)?r.stress:r.stress?[r.stress]:[]).filter(Boolean);
   const stressTypes = stresses.map(s=>s?.type).filter(Boolean);
   const crimCapture = r.powerStructure?.criminalCaptureState || 'none';
@@ -428,6 +443,8 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
           {!hasAnyFort&&<div style={{background:swatch['#FDF8F0'],border:'1px solid #e8d0b0',borderLeft:'3px solid #8a5010',padding:'10px 13px',marginBottom:10,fontSize:FS.md,color:swatch.inkMag3}}>
             <strong style={{color:swatch['#8A5010']}}>Unfortified.</strong> No perimeter walls. Defenders cannot control entry points or create chokepoints.
           </div>}
+          {/* DS-DEF-11: why the wall, or why not — beside the works themselves. */}
+          {wallLine&&<p style={{fontSize:FS.sm,color:swatch.inkMag3,lineHeight:1.55,margin:'0 0 10px',fontStyle:'italic'}}>{wallLine}</p>}
           {mainForces.length>0&&<div style={{marginBottom:10}}>
             <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.danger,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:6}}>Standing Forces</div>
             {[...new Map(mainForces.map(m=>[m.name,m])).values()].map((w,i)=><ForceCard key={i} inst={w} accent="#8b1a1a"/>)}

@@ -22,6 +22,7 @@ import {
   measuredMonsterFamily, posturePoolKey, publicOrderPoolKey, strategicPrizePoolKey,
   terrainDefencePoolKey, activeDefenceStress, defenseMilitaryStatusProse,
   militaryOverridePoolKey, viabilityUnderStressPoolKey, DEF8_UNREACHABLE_POOLS,
+  defenseWallRationaleProse, defworkFill, wallRationalePoolKey,
   TERRAIN_DEFENCE_NAMES, TERRAIN_PRIZE_NAMES,
 } from '../../src/domain/display/stateProse/defenseStateProse.js';
 import {
@@ -37,6 +38,7 @@ import { deriveDefensePosture } from '../../src/domain/display/dossierViewModel.
 import { DM_FIELD_FRAMED_BY_BLOCK, isDmEditableProsePath } from '../../src/domain/display/stateProse/dmFieldProjection.js';
 import { DEFENSE_STRESS_STATUS, deriveGuardAssessment } from '../../src/domain/display/defenseDisplay.js';
 import { STRESS_TYPE_MAP } from '../../src/data/stressTypes.js';
+import { SMALL_TIERS, TIER_ORDER, TOWN_PLUS_TIERS } from '../../src/data/constants.js';
 import { DOSSIER_STATE_PROSE_DEFENSE } from '../../src/data/dossierStateProse/defense.generated.js';
 import { DOSSIER_MOUNTS, UNMOUNTED_BLOCKS, sentenceMountForBlock } from '../../src/domain/display/stateProse/dossierMounts.js';
 import { parseSlotShapes, mergeSlotShapes } from '../../scripts/lib/dossier-slot-shapes.mjs';
@@ -722,6 +724,121 @@ describe('DS-DEF-1 — the posture header, and a BLOCKER that had decayed', () =
     const noPen = defensePostureProse(sited('Mountain', 80), { seed: 'pen' });
     expect(noPen.posture.hasField).toBe(false);
     expect(noPen.posture.beside).toBeTruthy();
+  });
+});
+
+/** DS-DEF-11 — why the wall, and why not. */
+const DEF11 = 'DS-DEF-11';
+const DEF11_POOLS = DOSSIER_STATE_PROSE_DEFENSE[DEF11].pools;
+
+/** A settlement with a named wall (or none), a country, a tier and an upkeep gate. */
+function circuit({ wall = null, monsterThreat = 'frontier', tier = 'town', military } = {}) {
+  return {
+    name: 'Thornwall', _seed: 'seed-def11', tier,
+    institutions: wall ? [{ name: wall }] : [],
+    config: { monsterThreat },
+    defenseProfile: { economicGates: military === undefined ? {} : { military } },
+  };
+}
+
+describe('DS-DEF-11 — the wall rationale, and the slot that refuses a name', () => {
+  it('⭐ the small/large cut is the ESTATE\'S OWN partition, not an invented one', () => {
+    // SMALL_TIERS and TOWN_PLUS_TIERS are an EXACT closed partition of TIER_ORDER, so the
+    // unwalled split is measured. Both directions, so a tier added to one and not the other
+    // reds here instead of falling silently into neither pool.
+    expect([...SMALL_TIERS, ...TOWN_PLUS_TIERS].sort()).toEqual([...TIER_ORDER].sort());
+    expect(SMALL_TIERS.filter((t) => TOWN_PLUS_TIERS.includes(t))).toEqual([]);
+    for (const tier of SMALL_TIERS) {
+      expect(wallRationalePoolKey(false, 'frontier', undefined, tier), tier).toBe('UNWALLED-SMALL');
+    }
+    for (const tier of TOWN_PLUS_TIERS) {
+      expect(wallRationalePoolKey(false, 'frontier', undefined, tier), tier).toBe('UNWALLED-LARGE');
+    }
+    // A tier in neither is silence, not a guess about which side of the line it sits on.
+    expect(wallRationalePoolKey(false, 'frontier', undefined, 'bogus')).toBeNull();
+    expect(wallRationalePoolKey(false, 'frontier', undefined, undefined)).toBeNull();
+  });
+
+  it('the walled branch ranks STRAINED over THREATENED over QUIET', () => {
+    // JUDGMENT, recorded in the desk: a frontier town whose muster is underfunded satisfies
+    // both of the first two, and STRAINED is the more specific and the more urgent.
+    expect(wallRationalePoolKey(true, 'frontier', 0.6, 'town')).toBe('WALLED-STRAINED');
+    expect(wallRationalePoolKey(true, 'heartland', 0.6, 'town')).toBe('WALLED-STRAINED');
+    expect(wallRationalePoolKey(true, 'frontier', 1, 'town')).toBe('WALLED-THREATENED');
+    expect(wallRationalePoolKey(true, 'plagued', undefined, 'town')).toBe('WALLED-THREATENED');
+    expect(wallRationalePoolKey(true, 'heartland', 1, 'town')).toBe('WALLED-QUIET');
+    // A gate at or above 1 is funded, not strained; a non-numeric gate is not a reading.
+    expect(wallRationalePoolKey(true, 'heartland', 1.4, 'town')).toBe('WALLED-QUIET');
+    expect(wallRationalePoolKey(true, 'heartland', '0.6', 'town')).toBe('WALLED-QUIET');
+    // …and an unmeasured country leaves the walled branch silent rather than guessing.
+    expect(wallRationalePoolKey(true, undefined, undefined, 'town')).toBeNull();
+  });
+
+  it('⛔ `{defwork}` is the town\'s RECORDED wall name, and a name outside the vocabulary is REFUSED', () => {
+    // The annex: "the roster row matched (wall · citadel · palisade · earthwork); NEVER a
+    // baked or invented noun". `bare-common` forbids a determiner and needs a lowercase
+    // initial, so a Capitalised catalogue row lowercases — safe for a common noun and
+    // DESTRUCTIVE for a proper one, which is why anything outside the vocabulary is refused
+    // and the kernel drops the variants that need the slot.
+    const fill = (name) => defworkFill(standingDefenseForces({ institutions: [{ name }] }));
+    expect(fill('Massive Walls')).toBe('massive walls');
+    expect(fill('Inner Citadel')).toBe('inner citadel');
+    expect(fill('Palisade')).toBe('palisade');
+    expect(fill('Earthworks')).toBe('earthworks');
+    expect(fill('Vaelthorn Bastion')).toBeUndefined();
+    expect(fill('The Old Wall')).toBeUndefined();
+    expect(defworkFill(standingDefenseForces({ institutions: [] }))).toBeUndefined();
+    // The declared shape is the annex register's, and the desk still owns no fill TABLE —
+    // the fill comes off the roster, so there is no literal map to drift.
+    expect(SLOT_FILL_SHAPES.defwork).toBe('bare-common');
+    expect(SHAPES.shapeOf('defwork')).toBe('bare-common');
+    expect(SLOT_FILL_TABLES).toEqual({});
+  });
+
+  it('⛔ A RUINED WALL IS DESCRIBED AS AN ABSENCE, not asked why the town keeps it', () => {
+    const standing = defenseWallRationaleProse(circuit({ wall: 'Massive Walls', tier: 'city' }), { seed: 'w' });
+    const rubble = defenseWallRationaleProse({
+      ...circuit({ wall: 'Massive Walls', tier: 'city' }),
+      institutions: [{ name: 'Massive Walls', status: 'ruined', _worldPulseInactive: true }],
+    }, { seed: 'w' });
+    expect(standing.rationale.provenance.poolKey).toBe('WALLED-THREATENED');
+    expect(rubble.rationale.provenance.poolKey).toBe('UNWALLED-LARGE');
+  });
+
+  it('all FIVE pools speak, with no unfilled slot anywhere in the sweep', () => {
+    const reached = new Set();
+    for (const wall of ['Massive Walls', 'Inner Citadel', 'Palisade', 'Earthworks', 'Vaelthorn Bastion', null]) {
+      for (const monsterThreat of [...MONSTER_THREAT_TIERS, undefined]) {
+        for (const military of [0.6, 1, undefined]) {
+          for (const tier of [...TIER_ORDER, 'bogus']) {
+            const drawn = defenseWallRationaleProse(
+              circuit({ wall, monsterThreat, tier, military }), { seed: 'sweep11' },
+            );
+            const rung = drawn.rationale;
+            if (!rung?.sentence) continue;
+            reached.add(rung.provenance.poolKey);
+            expect(rung.provenance.blockId).toBe(DEF11);
+            // anchored: `reached.size` is pinned at the corpus pool count below
+            expect(rung.sentence).not.toMatch(/[{}]/);
+          }
+        }
+      }
+    }
+    expect(reached.size, `unreached: ${Object.keys(DEF11_POOLS).filter((k) => !reached.has(k))}`)
+      .toBe(Object.keys(DEF11_POOLS).length);
+    expect(Object.keys(DEF11_POOLS)).toHaveLength(5);
+  });
+
+  it('the registry mounts DS-DEF-11 once, as a sentence, on the defense tab', () => {
+    const rows = DOSSIER_MOUNTS.filter((row) => row.blockId === DEF11);
+    expect(rows).toHaveLength(1);
+    expect(rows[0]).toMatchObject({ mount: 'defense.wallRationale', tab: 'defense', desk: 'defense', rung: 'sentence' });
+    expect(sentenceMountForBlock(DEF11)?.mount).toBe('defense.wallRationale');
+    expectAbsentWithAnchor(
+      UNMOUNTED_BLOCKS, DEF11, A_DARK_SIBLING,
+      'DS-DEF-11 carries a mount row, so the dark half must not name it',
+    );
+    expect(DM_FIELD_FRAMED_BY_BLOCK[DEF11]).toBeUndefined();
   });
 });
 

@@ -13,6 +13,8 @@
  *   DS-DEF-8  Defense › Active military status — `stress[].type → DEFENSE_STRESS_STATUS`
  *             × `economicViability.viable`. ONE of its four pools is DECLARED DARK; the
  *             reason and the single act that lights it are stated at the block below.
+ *   DS-DEF-11 Defense › Why the wall, and why not — the perimeter × the country × the tier
+ *             × `defenseProfile.economicGates.military`. The leaf's one second slot.
  *
  * ── ⭐⭐ DS-DEF-1'S BLOCKER DECAYED, AND NOBODY NOTICED — the paragraph it replaced ───
  *
@@ -75,6 +77,7 @@
  */
 import { MONSTER_THREAT_TIERS, normalizeMonsterThreat } from '../../../data/monsterThreat.js';
 import { standingDefenseForces } from '../../institutions/defenseInstitutionBuckets.js';
+import { SMALL_TIERS, TOWN_PLUS_TIERS } from '../../../data/constants.js';
 import { scoreBand } from '../defenseScoreBands.js';
 import { DEFENSE_STRESS_STATUS } from '../defenseDisplay.js';
 import { DOSSIER_STATE_PROSE_DEFENSE } from '../../../data/dossierStateProse/defense.generated.js';
@@ -97,7 +100,7 @@ const CORPUS = /** @type {import('./stateProseKernel.js').StateProseCorpus} */ (
  * variants name `{settlement}` and nothing else — measured, all seven pools.
  * @type {Readonly<Record<string, string>>}
  */
-export const SLOT_FILL_SHAPES = Object.freeze({ settlement: 'proper' });
+export const SLOT_FILL_SHAPES = Object.freeze({ settlement: 'proper', defwork: 'bare-common' });
 
 /**
  * This desk owns NO literal fill table, and says so rather than omitting the field — the
@@ -541,6 +544,128 @@ export function defensePostureProse(settlement, options = {}) {
     posture: projected(posturePoolKey(settlement?.defenseProfile?.readiness?.score)),
     terrain: projected(terrainDefencePoolKey(terrain)),
     prize: projected(strategicPrizePoolKey(terrain)),
+  });
+}
+
+/**
+ * ── DS-DEF-11 · WHY THE WALL, AND WHY NOT ────────────────────────────────────────────
+ *
+ * Five pools over the perimeter, the country, the tier and the upkeep gate. The one block
+ * on this leaf that needs a SECOND slot, and the slot is the interesting part.
+ *
+ * ── ⭐ `{defwork}`: THE TOWN'S OWN WALL BY ITS RECORDED NAME ─────────────────────────
+ * The annex is explicit — "the roster row `institutions.walls` matched (wall · citadel ·
+ * palisade · earthwork); NEVER a baked or invented noun, and never offered to a settlement
+ * whose wall-class list is empty" — and its shape is `bare-common`, which forbids a leading
+ * determiner (the seam supplies one) and requires a lowercase initial.
+ *
+ * Catalogue rows are Capitalised ("Massive Walls", "Inner Citadel"), so the fill lowercases.
+ * ⚠ AND IT REFUSES ANY NAME THAT IS NOT WALL-CLASS VOCABULARY. Lowercasing is safe for a
+ * common noun and destructive for a proper one: "Vaelthorn Bastion" would become "the
+ * vaelthorn bastion", which is a name the town does not use. So the fill is offered only
+ * when the recorded name actually contains one of the four wall words the annex names, and
+ * otherwise returns undefined — at which point the kernel's anchored liveness drops the
+ * variants that need the slot and the pool degrades to the ones that never did (R-DST-K).
+ * Refusing a fill is the designed behaviour; forcing one is how a page starts calling a
+ * place by a name nobody there uses.
+ * @type {ReadonlyArray<string>}
+ */
+const DEFWORK_WORDS = Object.freeze(['wall', 'citadel', 'palisade', 'earthwork']);
+
+/**
+ * A `bare-common` fill, or `undefined` — mirroring `fillShapeViolation`'s BARE_COMMON
+ * branch, the same half-of-the-contract `economyStateProse` keeps for `{access}`.
+ * @param {string} value @returns {string|undefined}
+ */
+function bareCommonFill(value) {
+  if (!value) return undefined;
+  if (/^(?:the|a|an|its|his|her|their|our|this|that|these|those)\b/i.test(value)) return undefined;
+  if (/[—–]/.test(value)) return undefined;
+  if (/[.!?]\s|[.!?]$/.test(value)) return undefined;
+  if (/[0-9]/.test(value)) return undefined;
+  if (/[a-z]+_[a-z]+/.test(value)) return undefined;
+  return /^[a-z]/.test(value) ? value : undefined;
+}
+
+/**
+ * The `{defwork}` fill for a settlement: its first STANDING wall-class work, lowercased,
+ * and only when the recorded name is wall-class vocabulary. See the note above for why a
+ * name outside that vocabulary is refused rather than lowercased.
+ * @param {Readonly<Record<string, {names: ReadonlyArray<string>}>>} forces
+ * @returns {string|undefined}
+ */
+export function defworkFill(forces) {
+  for (const name of forces.walls.names) {
+    const lowered = text(name).toLowerCase();
+    if (!DEFWORK_WORDS.some((word) => lowered.includes(word))) continue;
+    const fill = bareCommonFill(lowered);
+    if (fill) return fill;
+  }
+  return undefined;
+}
+
+/**
+ * DS-DEF-11's pool key.
+ *
+ * JUDGMENT (vetoable): among the three WALLED pools, STRAINED OUTRANKS THREATENED OUTRANKS
+ * QUIET. A frontier town whose muster is underfunded satisfies both of the first two, and
+ * the corpus's STRAINED prose is the more specific and the more urgent of them — "the
+ * {defwork} around {settlement} is sound and the muster behind it is thinning, which is the
+ * kind of arithmetic a town notices late". Saying the country presses instead would print
+ * the less alarming half of a true pair. Say "veto" to reorder.
+ *
+ * ⚠ THE UNWALLED CUT IS NOT INVENTED. `SMALL_TIERS` and `TOWN_PLUS_TIERS` in
+ * src/data/constants.js are an EXACT closed partition of `TIER_ORDER`, so the small/large
+ * split is the estate's own and the desk suite binds it both ways. An unrecognised tier is
+ * in neither, and renders silence rather than guessing which side of the line a town is on.
+ *
+ * @param {boolean} walls @param {unknown} monsterThreat @param {unknown} militaryGate
+ * @param {unknown} tier @returns {string|null}
+ */
+export function wallRationalePoolKey(walls, monsterThreat, militaryGate, tier) {
+  if (walls) {
+    if (typeof militaryGate === 'number' && Number.isFinite(militaryGate) && militaryGate < 1) {
+      return 'WALLED-STRAINED';
+    }
+    const family = measuredMonsterFamily(monsterThreat);
+    if (!family) return null;
+    return family === 'settled' ? 'WALLED-QUIET' : 'WALLED-THREATENED';
+  }
+  const size = text(tier).toLowerCase();
+  if (SMALL_TIERS.includes(size)) return 'UNWALLED-SMALL';
+  return TOWN_PLUS_TIERS.includes(size) ? 'UNWALLED-LARGE' : null;
+}
+
+/**
+ * THE WALL-RATIONALE DESK — DS-DEF-11's one lens.
+ *
+ * ⚠ The perimeter read is `standingDefenseForces`, so a town whose walls have been thrown
+ * down is described by the UNWALLED pools, not asked why it keeps a wall it no longer has.
+ * DS-DEF-11 frames no DM-editable field, so this is a plain rung.
+ *
+ * @param {{name?: string, tier?: unknown, institutions?: unknown,
+ *   config?: {monsterThreat?: unknown}|null,
+ *   defenseProfile?: {economicGates?: {military?: unknown}|null}|null}|null|undefined} settlement
+ * @param {{seed?: string, audience?: string}} [options]
+ * @returns {Readonly<{rationale: object|null}>}
+ */
+export function defenseWallRationaleProse(settlement, options = {}) {
+  const forces = standingDefenseForces(settlement);
+  const slots = {
+    settlement: properFill(text(settlement?.name)),
+    defwork: defworkFill(forces),
+  };
+  const poolKey = wallRationalePoolKey(
+    forces.walls.present,
+    settlement?.config?.monsterThreat,
+    settlement?.defenseProfile?.economicGates?.military,
+    settlement?.tier,
+  );
+
+  return Object.freeze({
+    rationale: poolKey
+      ? legibilityRung('', readStateProse(CORPUS, 'DS-DEF-11', poolKey, { ...options, slots }), [])
+      : null,
   });
 }
 
