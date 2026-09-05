@@ -45,7 +45,7 @@ Populations: dossier-state 2,264 variants / 2,914 sentences · dossier-causal 46
 
 WHAT WE ALREADY DO RIGHT (measured):
 - Lexical AI tells are essentially absent: delve, tapestry, testament, intricate, pivotal, underscore, showcase, beacon, nestled, vibrant, meticulous: ZERO in 2,734 dossier variants. "realm" 8 (all the product's own noun). Em dashes ZERO in the projected corpus. Questions ZERO. Digits ZERO.
-- Sentence length is genuinely varied in the state corpus: mean 16.7 words, sd 7.2, p10 7, p90 26; 13% of sentences under eight words. That is burstiness the studies say models lack.
+- Sentence length varies in the state corpus (mean 16.7, sd 7.2, p10 7, p90 26; 13% under eight words) — but CORRECTED by the primary-text fingerprints (`receipt-primary-samples.md`): against Martin, Tolkien's letters and the D&D Basic Rules our neighbour-to-neighbour variation is the LOWEST of eight columns (0.399 vs 0.50–0.73), our sd the smallest, our share of long sentences the smallest (2% over thirty words vs 9–34%), and our type-token ratio the narrowest (0.211 vs 0.24–0.35). We are burstier than model text and flatter than every exemplar.
 - Concrete civic nouns carry the meaning (the granary, the outward column, the departure rolls, the licence register); present tense; the angle palette gives seven standpoints.
 
 WHERE WE HAVE OUR OWN TICS (measured; these are the "pet words that repeat" of Chakrabarty's expert panel, in the house's costume):
