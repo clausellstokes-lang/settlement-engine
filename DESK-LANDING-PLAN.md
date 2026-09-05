@@ -2,7 +2,7 @@
 ## What lands
 | dock | base | cars | sealed |
 |---|---|---|---|
-| laneINTEG-tree | 90702c3e9 | 23 (the desk consist) + OSR-SCHEMA17's cars (to come) | `train-desk-integrated-2026-09-04` = 940d161ca |
+| laneINTEG-tree | 90702c3e9 | 23 (the desk consist) + 3 (OSR-SCHEMA17: corpus pass, rung 17, genesis re-freeze) = 26 | `osr-schema17-2026-09-05` = a2af55cde (over `train-desk-integrated-2026-09-04` = 940d161ca) |
 | laneWARFAITH | 940d161ca | 1 | `desk-warfaith-2026-09-05` = 7dba5508b |
 | laneGEN2 | 940d161ca | 4 | `desk-gen2-2026-09-05` = a4ce9f80f |
 | laneDEF2 | 940d161ca | 4 | `desk-def2-2026-09-05` = 468663f56 |
@@ -34,7 +34,11 @@ NEW schema rung (17); the desk consist's OSR baseline is then re-frozen at the c
 4. Gate → chair-verify (car count = 34 + OSR cars + register cars) → CAS → seal `landing-desk-2026-09-05` → collect, with the
    RESIDUE block from `LANE-QUEUE.md` in the row (owner rows: DS-GEN-1, DS-FTH-2's public pool; docket items 3–8; the stopped
    blocks; the lanes' corrections).
-## A chair car at the composed tip (before the registers)
+## Chair cars at the composed tip (before the registers)
+- OSR-SCHEMA17's ruling: retire the ninth exemption (declared 9 → 8 with banked 8) — `rulings/RULING-OSR-SCHEMA17-DECISIONS.md`; the `_doc` cure rides step 3e's `--write`.
+- SEAT-78's coupling row: deploymentReturn.js → irregularForce.js (INTERIOR→WAR) in the couplingInclusion registry.
+- ENC-4b car 4's pantheon conflict: resolve to 115/381 by hand.
+- The OWED vitest of OSR-SCHEMA17, ENC-4b, SEAT-78 (and whatever ENC-4c/HORIZON-B2/DOCKET-2 leave owed): run the WHOLE tests/domain + tests/lint + tests/copy + tests/property at the composed tip, not the named suites.
 ARM 2 of the public-dossier guard: re-key "exactly one caller per desk" to the importer list (two components draw the defense leaf; ARM 3 already keys on importers) — the auditability rule follows the safety rule. One file, one car, `Seat: Fable 5.1 — validated`.
 
 ## STOPs
