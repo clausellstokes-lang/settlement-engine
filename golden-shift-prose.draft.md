@@ -21,6 +21,7 @@ BYTES are not. THE PROMISE is kept: a saved world's lived history is immutable; 
 | `src/domain/worldPulse/npcLadderKernel.js` | +6/−6 | +6/−5 | both kept; disjoint (12 · 11 · eval OK) |
 | `src/domain/worldPulse/warReceiptPools.js` | +5/−5 | +13/−0 | both kept; the mainline adds rows, the cure moves five (10 · 13 · eval OK) |
 | `docs/content/RECEIPT_POOLS_LEGACY.md` | +1/−1 | +81/−35 at the ANCHORS tip | the de-slugging kept wholesale, the one annex row re-applied at the replay |
+| **fix #2 `4e2e0eecc` / fix #3 `24735fcf3`** | the band pin in `governanceNarrative.test.js` follows the restored source; the wizard-news row re-signed; the chip title in `stateSlicers.js` first RESTORED (a mis-cut — the V-26a pin was its only consumer) then CURED on both sides (`<Town>: <Section>`, pin moved with it) | — | contracts move on both sides in one car; a restoration after a register re-opens that register — the totals were re-taken after fix #3 |
 | **the fix car `dac3b15a8`** | 13 structural `"<Band> — <Condition>"` separators RESTORED (prosperity 10, governanceNarrative 12, safetyProfile 2, foodGenerator 2 lines) | — | a field separator is a contract, not prose: three tiles parse it (186/360 broke) and two labels feed the persisted `economyInputFingerprint` (22/360 moved) — both at 0/360 after the fix |
 
 ## Goldens / driven-corpus constants re-recorded — every one named, with its cause
