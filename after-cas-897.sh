@@ -22,7 +22,7 @@ git update-ref refs/preserve/landing-anchors-2026-09-05 "$NEW"
 SHORT=$(git rev-parse --short "$NEW"); printf '%s' "$SHORT" > $SC/cas-897.sha
 echo "CAS OK: product=$SHORT · sealed landing-anchors-2026-09-05 · cars since ca651d54b=$(git rev-list --count ca651d54b..claude/composite-r4)"
 sed -e "s/__CAS_SHA__/$SHORT/g" -e "s/__TESTS__/$TESTS/g" $SC/payload-897.template.json > $SC/payload-897.json
-if grep -q '__' $SC/payload-897.json; then echo "⛔ unfilled placeholder in payload-897"; exit 1; fi
+if grep -qE '__[A-Z0-9_]+__' $SC/payload-897.json; then echo "⛔ unfilled placeholder in payload-897"; exit 1; fi
 sh $SC/collect-897.sh > $SC/collect-897.out 2>&1 || { tail -15 $SC/collect-897.out; echo "⛔ collect-897 failed — stop"; exit 1; }
 tail -8 $SC/collect-897.out
 git -C "$REPO" log -1 --format=%s review-fixes-2026-07-08 | grep -q '^§897:' || { echo "⛔ §897 did not land"; exit 1; }
