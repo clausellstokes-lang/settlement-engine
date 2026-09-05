@@ -32,6 +32,8 @@ import { OverviewTab } from '../../src/components/new/tabs/OverviewTab.jsx';
 import { HistoryTab } from '../../src/components/new/tabs/HistoryTab.jsx';
 import { ViabilityTab } from '../../src/components/new/tabs/ViabilityTab.jsx';
 import PlotHooksTab from '../../src/components/new/tabs/PlotHooksTab.jsx';
+import { EconomicsTab } from '../../src/components/new/tabs/EconomicsTab.jsx';
+import { useStore } from '../../src/store/index.js';
 import { generalDeskLines } from '../../src/components/new/generalDeskRead.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
@@ -388,6 +390,87 @@ describe('THE HOOK FRAMING DRAWS — and is silent for a free viewer', () => {
   test('the ROUTER threads publicDossier to the plot-hooks tab', () => {
     const router = readFileSync(join(HERE, '../../src/components/OutputContainer.jsx'), 'utf8');
     const line = router.split('\n').find((l) => l.includes("case 'plot_hooks':"));
+    expect(line).toBeTruthy();
+    expect(line).toContain('publicDossier={publicDossier}');
+  });
+});
+
+/**
+ * DS-GEN-18 on the ECONOMICS page — the fifth tab this desk reaches, and the first that
+ * already had a desk of its own. The economy desk keeps its own gate at its own call; this
+ * block comes through the GENERAL desk's one caller and carries that reader's gate, which
+ * is what ARM 2's one-caller rule buys.
+ *
+ * ⛔ THE FIXTURE'S STALLED CHAIN IS SHAPED LIKE `computeActiveChains`'s OWN OUTPUT: an
+ * `upstreamMissing[]` of CHAIN IDS (never resource names — that is the whole reason
+ * `{resource}` is not offered on this key) and a `processingInstitutions[]` that is the
+ * MATCHED subset, which is what the generator writes there.
+ */
+const FORGE = Object.freeze({
+  id: 'forge_town', name: 'Forge Town', _seed: 'forge_town',
+  economicState: Object.freeze({
+    prosperity: 'Modest', isEntrepot: false, primaryImports: [], incomeSources: [],
+    activeChains: [{
+      chainId: 'smelting', label: 'Smelting', resource: 'Iron ore deposits',
+      resourceActive: true, upstreamMissing: ['fuel'],
+      processingInstitutions: ['Smelter'], outputs: ['Ingots'],
+    }],
+  }),
+  resourceAnalysis: { exploitation: { fullyExploited: [], partiallyExploited: [], unexploited: [] } },
+  history: {},
+});
+
+const CRAFT = 'keeps Smelter on a supply that has failed upstream'; // DS-GEN-18 STALLED
+
+describe('DS-GEN-18 DRAWS ON THE ECONOMICS TAB — and is silent for a free viewer', () => {
+  // The tab reads the owning campaign's worldState for its live-flow section. The store is
+  // module-global, so what this describe sets it to is RESTORED rather than left behind for
+  // whichever file vitest runs next in the same worker.
+  const campaignsBefore = useStore.getState().campaigns;
+  afterEach(() => { useStore.setState({ campaigns: campaignsBefore }); });
+
+  test('the craft-reason line reaches the DOM privately and never reaches a public dossier', () => {
+    useStore.setState({ campaigns: [] });
+    const priv = render(e(EconomicsTab, {
+      economicState: FORGE.economicState, settlement: FORGE, narrativeNote: null,
+      saveId: 'forge_town', publicDossier: false, playerView: false,
+    })).container.textContent;
+    cleanup();
+    const pub = render(e(EconomicsTab, {
+      economicState: FORGE.economicState, settlement: FORGE, narrativeNote: null,
+      saveId: 'forge_town', publicDossier: true, playerView: false,
+    })).container.textContent;
+    expectPresentThenAbsent(priv, pub, CRAFT, 'DS-GEN-18 the craft reason (economics.craftReason)');
+    // ⛔ THE ENGINE TOKEN NEVER REACHES THE READER. `upstreamMissing[]` holds chain ids and
+    // the block names none of them; this is that refusal as a rendered-output assertion.
+    expect(priv, 'a raw chain id reached the page').not.toContain('fuel —');
+    expect(priv, 'an unfilled seam reached the reader').not.toMatch(/\{[a-z_]+\}/i); // anchored: expectPresentThenAbsent above proves this render carries the corpus sentence
+    // The DATUM survives the gate: the supply-chain section keeps its own heading and rows.
+    expect(pub).toContain('Supply Chains');
+    expect(pub).toContain('Smelting');
+  });
+
+  test('a town with nothing to explain draws NOTHING — the stated silence, in the DOM', () => {
+    useStore.setState({ campaigns: [] });
+    // No chain row, no exploitation ledger, no entrepôt flag, no imports ⇒ no antecedent
+    // holds ⇒ R-DST-K. The tab still renders; only the sentence is absent.
+    const bare = {
+      ...FORGE,
+      economicState: { ...FORGE.economicState, activeChains: [] },
+      resourceAnalysis: { exploitation: { fullyExploited: [], partiallyExploited: [], unexploited: [] } },
+    };
+    const out = render(e(EconomicsTab, {
+      economicState: bare.economicState, settlement: bare, narrativeNote: null,
+      saveId: 'forge_town', publicDossier: false, playerView: false,
+    })).container.textContent;
+    expect(out, 'a default sentence was drawn over an empty record').not.toContain(CRAFT);
+    // NON-VACUITY: the tab really rendered.
+    expect(out).toContain('Modest');
+  });
+
+  test('the ROUTER threads publicDossier to the economics tab', () => {
+    const router = readFileSync(join(HERE, '../../src/components/OutputContainer.jsx'), 'utf8');
+    const line = router.split('\n').find((l) => l.includes("case 'economics':"));
     expect(line).toBeTruthy();
     expect(line).toContain('publicDossier={publicDossier}');
   });

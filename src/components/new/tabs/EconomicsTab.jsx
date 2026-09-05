@@ -23,6 +23,7 @@ import MarketPricesSection from './MarketPricesSection.jsx';
 import EconomicsGlance, { DeskLines } from './EconomicsGlance.jsx'; // the tab's glance surface + its mount positions
 import { economyStateProse } from '../../../domain/display/stateProse/economyStateProse.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
+import { generalDeskLines } from '../generalDeskRead.js'; // DS-GEN-18 · the general desk's ONE caller
 import Button from '../../primitives/Button.jsx';
 
 // M6d FLOW-DERIVED ECONOMICS — the live trade-flow band → colour. Qualitative only
@@ -329,6 +330,10 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
   const audience = playerView ? 'player' : 'dm';
   const deskProse = publicDossier ? Object.freeze({ prosperityHeader: null, prosperityRung: null, foodTile: null, granaryTile: null, foodSecurityRung: null, incomeMix: null, criminalLine: null, tradeProfile: null, shadowEconomy: null, tradeFlow: null }) : economyStateProse(s, { foodBalance: fbal, granaryOutlook: granary, flowDrift }, { seed: String(s?._seed ?? s?.id ?? ''), audience });
   const drawnFoodLine = drawnAtMount('economics.foodSecurity', deskProse.foodSecurityRung);
+  // DS-GEN-18 (`economics.craftReason`) — a GENERAL-desk block on this page, so it comes
+  // through the general desk's one caller and carries that reader's own gate, not this
+  // tab's. The reader is passed the flag it must not assume.
+  const craftReasonLine = generalDeskLines(s, { publicDossier, playerView }).economics.craftReasonLine;
 
   return (
     <div style={{...sans}}>
@@ -528,6 +533,10 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
       {/* ── SUPPLY CHAINS ─────────────────────────────────────────────────────── */}
       {(eco?.activeChains?.length > 0) && (
         <Section title={`Supply Chains (${eco.activeChains.length})`} collapsible defaultOpen={false}>
+          {/* DS-GEN-18: why these workshops — the town's own account of what its crafts run
+              on, ABOVE the node graph the reading is about. Silent on a free dossier and
+              silent where no antecedent holds (R-DST-K). */}
+          {craftReasonLine && <p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.55,margin:'0 0 10px',fontStyle:'italic'}}>{craftReasonLine}</p>}
           <SupplyChainsPanel settlement={s} eco={eco} />
         </Section>
       )}

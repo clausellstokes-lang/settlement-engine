@@ -62,6 +62,9 @@ const RECORD_MOUNT = 'history.record';
 const VERDICT_MOUNT = 'viability.verdict';
 const FRAMING_MOUNT = 'plot_hooks.framing';
 
+/** The ECONOMICS position — DS-GEN-18, beside the supply-chain rows it explains. */
+const CRAFT_REASON_MOUNT = 'economics.craftReason';
+
 /** The shape every consumer gets, silent. Frozen so a caller cannot fill it in. */
 const SILENT_OVERVIEW = Object.freeze({
   healthLines: Object.freeze([]),
@@ -83,19 +86,23 @@ const SILENT_HISTORY = Object.freeze({
 /** The same, for the viability verdict and the plot-hook framing. */
 const SILENT_VIABILITY = Object.freeze({ verdictLines: Object.freeze([]) });
 const SILENT_HOOKS = Object.freeze({ framingLines: Object.freeze([]) });
+/** The same, for the craft-reason line. */
+const SILENT_ECONOMICS = Object.freeze({ craftReasonLine: null });
 
 /**
  * ⚠ THIS IS THE READER'S RETURN CONTRACT, exactly as `GENERAL_STATE_PROSE_SILENT` is the
  * desk's: `generalDeskLines` declares `@returns {typeof GENERAL_DESK_SILENT}`, so a position
  * missing here is a position this reader is not allowed to hand back.
  * @type {Readonly<{overview: typeof SILENT_OVERVIEW, history: typeof SILENT_HISTORY,
- *   viability: typeof SILENT_VIABILITY, hooks: typeof SILENT_HOOKS}>}
+ *   viability: typeof SILENT_VIABILITY, hooks: typeof SILENT_HOOKS,
+ *   economics: typeof SILENT_ECONOMICS}>}
  */
 export const GENERAL_DESK_SILENT = Object.freeze({
   overview: SILENT_OVERVIEW,
   history: SILENT_HISTORY,
   viability: SILENT_VIABILITY,
   hooks: SILENT_HOOKS,
+  economics: SILENT_ECONOMICS,
 });
 
 /**
@@ -177,6 +184,12 @@ export function generalDeskLines(settlement, options = {}) {
       hookCategories: options.hookCategories,
       clockIds: options.clockIds,
       governingName: r.powerStructure?.governingName,
+      // DS-GEN-18's four antecedents, all read off the record the tab already holds. The
+      // exploitation ledger is `resourceAnalysis`'s, NOT `economicState`'s — the two carry
+      // different resource vocabularies and this desk keys the join on the canonical token.
+      activeChains: eco.activeChains,
+      exploitation: r.resourceAnalysis?.exploitation,
+      primaryImports: eco.primaryImports,
     },
     { seed: String(r?._seed ?? r?.id ?? ''), audience: options.playerView ? 'player' : 'dm' },
   );
@@ -225,6 +238,9 @@ export function generalDeskLines(settlement, options = {}) {
     hooks: Object.freeze({
       framingLines: Object.freeze(prose.hooks.framing
         .map((rung) => line(FRAMING_MOUNT, rung)).filter(Boolean)),
+    }),
+    economics: Object.freeze({
+      craftReasonLine: line(CRAFT_REASON_MOUNT, prose.economics.craftReason),
     }),
   });
 }

@@ -293,6 +293,9 @@ export const DOSSIER_MOUNTS = Object.freeze([
   Object.freeze({
     mount: 'overview.notableConnection', tab: 'overview', desk: 'general', blockId: 'DS-REL-2', rung: 'sentence',
   }),
+  Object.freeze({
+    mount: 'economics.craftReason', tab: 'economics', desk: 'general', blockId: 'DS-GEN-18', rung: 'sentence',
+  }),
 ]);
 
 /**
@@ -322,7 +325,6 @@ export const UNMOUNTED_BLOCKS = Object.freeze([
   'DS-GEN-10',
   'DS-POP-3',
   'DS-GEN-15',
-  'DS-GEN-18',
   'DS-WAR-1', 'DS-WAR-2', 'DS-WAR-3', 'DS-WAR-4',
   'DS-WAR-5', 'DS-FTH-1', 'DS-FTH-2', 'DS-FTH-3',
   'DS-FTH-4',
