@@ -28,12 +28,37 @@
  * declaration keyword. Those residuals are covered by code review + the eslint
  * import convention, not this guard.
  *
+ * ⚠⚠ THE NAMED EXCEPTION — a live instance of the first gap, found by lane CLAMP-W2
+ * (receipt §6.3) one module from its own migration work:
+ *
+ *     src/domain/townCartography/cartographyMorphology.js:62
+ *     function unit(value) { return value < 0 ? 0 : value > 1 ? 1 : value; }
+ *
+ * That is a passthrough `clamp01` wearing the name `unit`. `DEF_RE` cannot see it, so
+ * it is not one of the files this baseline counts, and it must NOT be added as a row —
+ * the row set is defined by what the regex matches, and hand-adding one would make the
+ * exact-equality arm above unmaintainable.
+ *
+ * ⛔ IT IS ALSO NOT SOMETHING TO MIGRATE. It is what bounds `fabricAccumulation01`
+ * (`cartographyMorphology.js:137` returns `unit(sum/n)`), and the wave-2 byte-neutrality
+ * proof for `cartographyBuildings` depends on its `+Infinity ⇒ 1` reading — the kernel
+ * primitive reads `+Infinity` as the LOW bound instead. Migrating it would change a
+ * number the migration proof rests on.
+ *
+ * ⭐ SO THE DETECTOR'S REACH IS STATED HERE AND PINNED BELOW (third arm). The pin is
+ * what makes the exception safe: a future rename of `unit` back to `clamp01`, or a
+ * rewrite of its body, reds — so the gap cannot silently mint an INVISIBLE copy, which
+ * is the only way a documented gap turns into a real one. ⚠ Extending `DEF_RE` itself
+ * is deliberately NOT the cure: the regex defines the row set, so widening it would
+ * move the baseline, the ceiling and the census row all at once.
+ *
  * @enforced-by this test
  */
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, relative } from 'node:path';
 import { describe, expect, test } from 'vitest';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const KERNEL_HOME = 'src/kernel/math.js'; // the sanctioned definition site — exempt
@@ -79,6 +104,21 @@ const baseline = JSON.parse(
   readFileSync(join(ROOT, 'scripts/.clamp-primitive-baseline.json'), 'utf8'),
 ).sort();
 
+/**
+ * THE DETECTOR'S REACH, STATED. Clamps this scan structurally CANNOT see, pinned at
+ * their address so the documented gap can never quietly become an invisible copy.
+ * `$` in `body` stands for whatever the parameter is named, so a rename of the
+ * PARAMETER is not a false red while a rewrite of the EXPRESSION is a real one.
+ * ⛔ These are NOT baseline rows and must never be added as such — the row set is
+ * exactly what `DEF_RE` matches. See the header for why neither the regex nor the
+ * definition itself may be changed to close this.
+ */
+const KNOWN_ALIAS_CLAMPS = Object.freeze([Object.freeze({
+  file: 'src/domain/townCartography/cartographyMorphology.js',
+  name: 'unit',
+  body: 'return $ < 0 ? 0 : $ > 1 ? 1 : $;',
+})]);
+
 describe('clamp primitive baseline ratchet (code-quality-4)', () => {
   test('baseline exactly matches the files that still define a local clamp/clamp01', () => {
     // A NEW definition missing from the baseline, or a STALE entry whose copy was
@@ -88,5 +128,35 @@ describe('clamp primitive baseline ratchet (code-quality-4)', () => {
 
   test('baseline never grows past its committed ceiling', () => {
     expect(baseline.length).toBeLessThanOrEqual(BASELINE_CEILING);
+  });
+
+  test('the NAMED CANNOT-CATCH alias is still at its address, with its passthrough body', () => {
+    for (const alias of KNOWN_ALIAS_CLAMPS) {
+      const aliasSource = readFileSync(join(ROOT, alias.file), 'utf8');
+      // LIVENESS FIRST: a renamed or emptied file must red here, not pass the checks below.
+      expect(aliasSource.length, `${alias.file} read empty`).toBeGreaterThan(0);
+      const found = new RegExp(
+        `function\\s+${alias.name}\\s*\\(\\s*([A-Za-z_$][\\w$]*)\\s*\\)\\s*\\{([^}]*)\\}`,
+      ).exec(aliasSource);
+      expect(
+        found,
+        `${alias.file}: the aliased clamp \`${alias.name}\` is gone from its address. If it `
+        + 'was RENAMED to clamp/clamp01 it is now a baseline row and this entry must go; if it '
+        + 'was migrated to the kernel primitive, delete this entry AND re-check the '
+        + 'cartographyBuildings byte-neutrality proof, which rests on its +Infinity ⇒ 1 reading.',
+      ).toBeTruthy();
+      expect(found[2].trim().replace(/\s+/g, ' '), `${alias.file}: \`${alias.name}\` body moved`)
+        .toBe(alias.body.replaceAll('$', found[1]));
+      // AND IT IS STILL INVISIBLE TO THE DETECTOR — the whole reason this arm exists.
+      // Anchored on a file the detector DOES see and that can never leave its output:
+      // razing.js is pinned at zero imports by tests/domain/razingWr8.test.js, so it can
+      // never migrate to the kernel primitive (CLAMP-W2 refusal 1, executed pin).
+      expectAbsentWithAnchor(
+        currentDefFiles,
+        alias.file,
+        'src/domain/worldPulse/razing.js',
+        `DEF_RE cannot see the aliased clamp \`${alias.name}\``,
+      );
+    }
   });
 });
