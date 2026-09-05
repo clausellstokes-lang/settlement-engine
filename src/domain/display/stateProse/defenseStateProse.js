@@ -9,7 +9,7 @@
  *             `defenseProfile.scores.economic` + `config.monsterThreat` +
  *             `economicState.compound.inst{...}`
  *   DS-DEF-5  Defense › Armed forces & fortifications — the five force lenses:
- *             `standingDefenseForces(settlement)` × `config.{monsterThreat, magicExists}`
+ *             `standingDefenseForces(settlement)` × `config.monsterThreat` × `magicWorksAt`
  *   DS-DEF-8  Defense › Active military status — `stress[].type → DEFENSE_STRESS_STATUS`
  *             × `economicViability.viable`. ONE of its four pools is DECLARED DARK; the
  *             reason and the single act that lights it are stated at the block below.
@@ -79,6 +79,7 @@
  */
 import { MONSTER_THREAT_TIERS, normalizeMonsterThreat } from '../../../data/monsterThreat.js';
 import { standingDefenseForces } from '../../institutions/defenseInstitutionBuckets.js';
+import { magicWorksAt } from '../../worldPulse/magicWorksAt.js';
 import { SMALL_TIERS, TOWN_PLUS_TIERS } from '../../../data/constants.js';
 import { scoreBand } from '../defenseScoreBands.js';
 import { DEFENSE_STRESS_STATUS } from '../defenseDisplay.js';
@@ -967,16 +968,23 @@ export function charterPoolKey(forces, monsterThreat) {
  * DS-DEF-5 lens 5 — ARCANE PROVISION. Total over a world where magic exists, and SILENT
  * where it does not.
  *
- * ⭐ That gate is a measurement, not a hedge. `config.magicExists === false` is a world
- * setting the generator already reads (`defenseGenerator`'s readiness call), and in such a
+ * ⭐ That gate is a measurement, not a hedge. A dead-magic world is a world setting the
+ * generator already reads (`defenseGenerator`'s readiness call at :631), and in such a
  * world "what arrives unseen here goes undetected and therefore unanswered" is not a
  * shortfall — it is a category that does not exist. Printing it would be the machine
  * improvising a lack out of a setting.
- * @param {Readonly<Record<string, {present: boolean}>>} forces @param {unknown} magicExists
+ *
+ * ⚠ THE ANSWER ARRIVES ALREADY DECIDED, AND THIS FUNCTION NEVER SPELLS THE DIAL ITSELF.
+ * The caller passes `magicWorksAt(settlement)`; see `defenseForcesProse` below for why the
+ * raw `config.magicExists` poke that used to sit there is gone. `false` here means the
+ * settlement carries a magic axis that says magic does not function — never "no axis was
+ * recorded", which says nothing and must not silence the lens.
+ * @param {Readonly<Record<string, {present: boolean}>>} forces
+ * @param {unknown} magicWorks the `magicWorksAt` verdict; only an exact `false` gates
  * @returns {string|null}
  */
-export function arcaneDefensePoolKey(forces, magicExists) {
-  if (magicExists === false) return null;
+export function arcaneDefensePoolKey(forces, magicWorks) {
+  if (magicWorks === false) return null;
   return forces.magicDef.present ? 'arcane defense PRESENT' : 'arcane defense ABSENT';
 }
 
@@ -987,8 +995,40 @@ export function arcaneDefensePoolKey(forces, magicExists) {
  * on the same reasoning DS-DEF-2 states: a projection where no DM field exists is ceremony,
  * and it would tell a later reader that a field is at risk when none is.
  *
+ * ⚠⚠ THE MAGIC AXIS IS ASKED OF `magicWorksAt`, NOT POKED OUT OF `config`, AND THE
+ * OBSERVED-SHAPE RATCHET IS WHY — the `faithField.magicGate01` precedent exactly. This
+ * function used to read `config.magicExists` itself, which minted this file its OWN read of
+ * a key the generation corpus never observes, and `check-observed-shape-readers` refused it
+ * as a NEW row against a new file's ceiling of 0. Calling the estate's one accessor keeps
+ * that read in `magicLedger.js`, where the frozen row for it already lives, and leaves
+ * exactly one module in the tree that knows how a magic dial is spelled.
+ *
+ * ⭐ THE READ WAS LIVE, AND THE REPLACEMENT IS BEHAVIOUR-IDENTICAL — MEASURED, NOT ASSUMED.
+ * The corpus never observes `magicExists` on `config` because none of its four configs sets
+ * it, not because nothing writes it: driven through `generateSettlementPipeline`, a config
+ * carrying `magicExists:false` arrives on `settlement.config` intact, and the lens went
+ * correctly silent both before and after this change. All four worlds agree — dead-magic
+ * with the dial its writers pair it with, dead-magic with the flag alone (the pipeline
+ * fills `priorityMagic:0` / `magicLevel:'none'` itself, so `ledger.present` is true either
+ * way), live magic, and no magic axis at all.
+ *
+ * `magicWorksAt` adds the guard the raw read never had: `present === true &&`, so a record
+ * that has said NOTHING about magic can no longer be mistaken for one that has said magic
+ * is dead. Dormant is a true statement, not a fallback.
+ *
+ * ⛔ THE ARGUMENT IS WRAPPED AS `{ settlement }` ON PURPOSE — DO NOT "SIMPLIFY" IT TO THE
+ * BARE SETTLEMENT. `magicWorksAt` accepts either shape by design, and both are correct at
+ * runtime (proved: identical rungs on all four worlds above). But the observed-shape scanner
+ * grounds that function's `item?.settlement` read from the shapes its CALL SITES pass, and a
+ * bare settlement re-grounds `item` onto the settlement record — which carries no
+ * `settlement` key — minting a NEW ceiling-0 row in `magicWorksAt.js`, a file this desk does
+ * not own and did not change. MEASURED both ways on this branch: bare argument ⇒
+ * `magicWorksAt.js:50 settlement on settlement` NEW; `{ settlement }` ⇒ clean. Passing the
+ * worldSnapshot item shape is what every other caller passes, so this call site stops being
+ * the odd one out. A cure that plants a red in a shared module is not a cure.
+ *
  * @param {{name?: string, institutions?: unknown,
- *   config?: {monsterThreat?: unknown, magicExists?: unknown}|null}|null|undefined} settlement
+ *   config?: {monsterThreat?: unknown}|null}|null|undefined} settlement
  * @param {{seed?: string, audience?: string}} [options]
  * @returns {Readonly<{fortification: object|null, force: object|null, contracted: object|null,
  *   charter: object|null, arcane: object|null}>}
@@ -1008,7 +1048,7 @@ export function defenseForcesProse(settlement, options = {}) {
     force: rung(forceCorePoolKey(forces)),
     contracted: rung(contractedForcePoolKey(forces)),
     charter: rung(charterPoolKey(forces, config.monsterThreat)),
-    arcane: rung(arcaneDefensePoolKey(forces, config.magicExists)),
+    arcane: rung(arcaneDefensePoolKey(forces, magicWorksAt({ settlement }))),
   });
 }
 
