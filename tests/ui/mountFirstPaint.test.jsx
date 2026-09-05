@@ -34,7 +34,7 @@
  */
 import React from 'react';
 import { describe, test, expect, beforeAll, afterEach } from 'vitest';
-import { render, cleanup } from '@testing-library/react';
+import { render, cleanup, fireEvent } from '@testing-library/react';
 import { DefenseTab } from '../../src/components/new/tabs/DefenseTab.jsx';
 import { EconomicsTab } from '../../src/components/new/tabs/EconomicsTab.jsx';
 import { OverviewTab } from '../../src/components/new/tabs/OverviewTab.jsx';
@@ -76,50 +76,88 @@ function foldOf(container, title) {
 }
 
 /**
- * Render one tab over each generated town and return the first render whose position node
- * is present, with its town. The caller asserts a town was FOUND — that is the liveness
- * anchor, and without it a position that had gone dark everywhere would pass in silence.
+ * One town's whole answer for one position, read from TWO renders: the private dossier
+ * (what a paying reader sees on first paint) and the public one (what the §885.3 gate
+ * leaves). Both are captured BEFORE cleanup, because a container's textContent empties
+ * when its tree unmounts.
  */
-function firstTownDrawing(Tab, selector, props = () => ({})) {
-  for (const town of TOWNS) {
-    const view = render(e(Tab, { settlement: town, publicDossier: false, ...props(town) }));
-    const node = view.container.querySelector(selector);
-    if (node) return { town, container: view.container, node };
-    cleanup();
-  }
-  return null;
-}
-
-/** The three directions, run over one position. */
-function provePosition({ Tab, selector, foldTitle, label, props = () => ({}) }) {
-  const found = firstTownDrawing(Tab, selector, props);
-  expect(found, `${label}: no generated town draws this position at all, so the arm is vacuous`).toBeTruthy();
-  const { town, container, node } = found;
-
-  // 1. FIRST PAINT — present, with text, before anything is clicked.
-  expect(node.textContent.trim().length, `${label}: the node rendered empty`).toBeGreaterThan(0);
-  const firstPaintText = node.textContent;
-
-  // 2. OUTSIDE THE FOLD — the collapsible that used to hold it is still there, and the node
-  //    is not one of its descendants. Reported with the fold's own aria state, so a reader
-  //    of a failure can tell "hoisted" from "left open".
-  const fold = foldOf(container, foldTitle);
-  expect(fold, `${label}: the fold titled "${foldTitle}" is gone — the collapsible must not be deleted`).toBeTruthy();
-  expect(fold.host.querySelector(selector),
-    `${label}: the position is still INSIDE the fold "${foldTitle}" (aria-expanded=${fold.open})`).toBeNull();
+function readPosition(Tab, town, selector, foldTitle, props) {
+  const priv = render(e(Tab, { settlement: town, publicDossier: false, ...props(town) }));
+  const node = priv.container.querySelector(selector);
+  const fold = foldOf(priv.container, foldTitle);
+  const record = {
+    town,
+    text: node ? node.textContent : null,
+    foldPresent: !!fold,
+    foldOpen: fold ? fold.open : null,
+    insideFold: !!(fold && fold.host.querySelector(selector)),
+  };
   cleanup();
-
-  // 3. STILL GATED — the same town, drawn for a free anonymous viewer, says something else
-  //    or says nothing. Hoisting a position above a fold must not hoist it out of §885.3.
   const pub = render(e(Tab, { settlement: town, publicDossier: true, ...props(town) }));
   const publicNode = pub.container.querySelector(selector);
-  const publicText = publicNode ? publicNode.textContent : null;
-  expect(publicText, `${label}: the public dossier drew the SAME text — the paid gate did not survive the hoist`)
-    .not.toBe(firstPaintText);
-  return { town, firstPaintText, publicText };
+  record.publicText = publicNode ? publicNode.textContent : null;
+  cleanup();
+  return record;
+}
+
+/**
+ * The three directions, run over the first generated town that actually DRAWS the position.
+ *
+ * ⚠ "DRAWS" IS `the private text differs from the public one`, NOT `the node exists`, AND
+ * THE FIRST DRAFT OF THIS FILE GOT IT WRONG. `economics.shadowEconomy` keeps a fallback: its
+ * node renders the tab's own `scaleNote` when the corpus is silent, so a node-presence test
+ * selected a town where nothing corpus-side had drawn and then asserted the gate against it.
+ * The gate is what REMOVES the corpus line, so a difference between the two renders is the
+ * only evidence available that a corpus line was there — which is why, for that one position,
+ * the selection and the gate proof are the same act and are stated to be.
+ */
+function provePosition({ Tab, selector, foldTitle, label, props = () => ({}) }) {
+  const seen = TOWNS.map((town) => readPosition(Tab, town, selector, foldTitle, props));
+  const drawn = seen.find((r) => r.text && r.text.trim() && r.publicText !== r.text);
+  expect(drawn,
+    `${label}: no generated town draws this position, so the arm would be vacuous`
+    + ` (${seen.filter((r) => r.text).length}/${seen.length} towns rendered the node at all)`).toBeTruthy();
+
+  // 1. FIRST PAINT — present, with text, before anything is clicked.
+  expect(drawn.text.trim().length, `${label}: the node rendered empty`).toBeGreaterThan(0);
+
+  // 2. OUTSIDE THE FOLD — the collapsible that used to hold it is still there, and the node
+  //    is not one of its descendants. Reported with the fold's own aria state, so a reader of
+  //    a failure can tell "hoisted" from "left open by luck".
+  expect(drawn.foldPresent,
+    `${label}: the fold titled "${foldTitle}" is gone — the collapsible must not be deleted`).toBe(true);
+  expect(drawn.insideFold,
+    `${label}: the position is still INSIDE the fold "${foldTitle}" (aria-expanded=${drawn.foldOpen})`).toBe(false);
+
+  return drawn;
 }
 
 describe('THE FIRST-PAINT LAW — the four cured positions reach a reader with no click', () => {
+  test('guard the guard: the fold reader addresses the fold\'s OWN container, and a shut fold really holds nothing', () => {
+    // ⛔ WITHOUT THIS ARM THE CONTAINMENT CHECK ABOVE COULD PASS VACUOUSLY. `foldOf` walks
+    // from the header button to `closest('div')`; if that resolved to some inner wrapper
+    // that could never hold the fold's children, every "not inside the fold" assertion in
+    // this file would be true for the wrong reason. So: the container is proved to be the
+    // one that GAINS the fold's children when the header is clicked.
+    const { container } = render(e(DefenseTab, { settlement: TOWNS[0], narrativeNote: null, publicDossier: false }));
+    const shut = foldOf(container, 'Supporting Capabilities');
+    expect(shut, 'the Supporting Capabilities fold is gone').toBeTruthy();
+    expect(shut.open, 'the fold is not shut on first paint, so this arm proves nothing').toBe(false);
+    const before = shut.host.textContent;
+    // anchored: `after` below is asserted to contain a string absent here, on the same node
+    expect(before).not.toContain('Economic Backing');
+    fireEvent.click(shut.button);
+    const opened = foldOf(container, 'Supporting Capabilities');
+    const after = opened.host.textContent;
+    expect(opened.open, 'the click did not open the fold').toBe(true);
+    expect(after.length, 'the container did not gain the fold\'s children, so it is the wrong node')
+      .toBeGreaterThan(before.length);
+    expect(after).toContain('Economic Backing');
+    // …and the cured position is STILL outside it, in BOTH fold states.
+    expect(opened.host.querySelector('[data-testid="defense-supporting-lines"]')).toBeNull();
+    expect(container.querySelector('[data-testid="defense-supporting-lines"]')).toBeTruthy();
+  });
+
   test('defense.supportingCapabilities (DS-DEF-6) draws above the Supporting Capabilities fold', () => {
     const { publicText } = provePosition({
       Tab: DefenseTab,
@@ -160,7 +198,7 @@ describe('THE FIRST-PAINT LAW — the four cured positions reach a reader with n
     // absence: the corpus line REPLACES the tab's own `scaleNote`, so an anonymous viewer
     // still reads the scale note in the same node. Both halves are asserted non-empty, which
     // is what makes the difference a gate rather than a blank.
-    const { firstPaintText, publicText } = provePosition({
+    const { text, publicText } = provePosition({
       Tab: EconomicsTab,
       selector: '[data-testid="economics-shadow-economy-line"]',
       foldTitle: 'Shadow Economy',
@@ -169,6 +207,9 @@ describe('THE FIRST-PAINT LAW — the four cured positions reach a reader with n
     });
     expect(publicText, 'the anonymous viewer lost the scale note as well as the corpus line').toBeTruthy();
     expect(publicText.trim().length).toBeGreaterThan(0);
-    expect(firstPaintText).not.toBe(publicText);
+    // The gate proof for THIS position is the difference `provePosition` selected on, stated
+    // rather than asserted twice: the corpus line replaces `scaleNote`, so an anonymous
+    // viewer still reads a sentence in the same node and only its WORDS change.
+    expect(text).not.toBe(publicText);
   });
 });
