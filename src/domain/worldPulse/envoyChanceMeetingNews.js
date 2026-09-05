@@ -70,9 +70,15 @@ import { stablePart } from './stablePart.js';
 /** @typedef {import('./eventProse.js').ProseVariant} ProseVariant */
 
 /**
+ * @typedef {{poolKey:string, pool:readonly ProseVariant[],
+ *   requiredSlots:ReadonlyArray<readonly string[]>}} ChanceMeetingCase
+ */
+
+/**
  * @typedef {{kind:string, significance:'notable'|'routine'|'major'|'n/a',
  *   audience:'public'|'dm-only', section:string|null,
- *   pool:readonly ProseVariant[], requiredSlots:ReadonlyArray<readonly string[]>}}
+ *   pool:readonly ProseVariant[], requiredSlots:ReadonlyArray<readonly string[]>,
+ *   cases:Readonly<Record<string, Readonly<ChanceMeetingCase>>>}}
  *   ChanceMeetingRegistryEntry
  */
 
@@ -81,26 +87,71 @@ import { stablePart } from './stablePart.js';
  * `(kind, significance, audience, section, requiredSlots, …)`. A family that re-orders its row
  * constructor is a family whose rows cannot be read across the estate by eye.
  *
- * ⚠ POSITION SIX — GR-0's `contexts` axis — IS DELIBERATELY UNOCCUPIED rather than accepted and
- * ignored, on IN-1c-a's and WF-8a's recorded reasoning: this corpus authors no split across a
- * fact the seed carries, so taking the parameter and never consulting it would be a dead arm.
+ * ⭐⭐ POSITION SIX IS NOW OCCUPIED, AND NOT BY GR-0's `contexts`. ENC-4 left it empty on IN-1c-a's
+ * and WF-8a's recorded reasoning — "this corpus authors no split across a fact the seed carries,
+ * so taking the parameter and never consulting it would be a dead arm". ENC-4c authors exactly
+ * such a split, so the reasoning now points the other way and the axis arrives.
+ *
+ * ⛔ IT IS `cases`, NOT `contexts`, AND THE DIVERGENCE IS MEASURED RATHER THAN STYLISTIC. GR-0's
+ * axis is a per-VARIANT token filter INSIDE one pool; this split is a whole SECOND authored
+ * corpus with its own governed annex block, and folding the ten sentences into one pool would
+ * fork the sealed §B block's own five-and-five split — which is the proof that the seal's
+ * sentences are untouched. Reusing the sibling's NAME for a different type and a different
+ * semantics would be worse than a new one, so the name is new and the reason is written here.
+ *
+ * ⚠ THE ROW'S OWN `pool` AND `requiredSlots` REMAIN THE DEFAULT CASE'S, and that is deliberate:
+ * `tests/helpers/kindPoolWalker.js` measures a row's DEPTH from `row.pool` and its slot arity
+ * from `row.requiredSlots`, so a row that moved them under a case key would measure zero and
+ * land on `['starved']`. The default case is also present in `cases` under its own key, so the
+ * table is total rather than "the others"; the walker pins the two views equal.
  *
  * @param {string} kind
  * @param {'notable'|'routine'|'major'|'n/a'} significance
  * @param {'public'|'dm-only'} audience
  * @param {string|null} section
- * @param {ReadonlyArray<readonly string[]>} requiredSlots
+ * @param {ReadonlyArray<readonly string[]>} requiredSlots the DEFAULT case's, parallel to its pool
+ * @param {Readonly<Record<string, readonly [string, ReadonlyArray<readonly string[]>]>>} [cases]
+ *   every case this kind is authored for, as `caseToken -> [poolKey, requiredSlots]`. The default
+ *   case's poolKey is the kind itself; a kind with one case declares none and gets one.
+ * @param {string} [defaultCase]
  * @returns {Readonly<ChanceMeetingRegistryEntry>}
  */
-function chanceMeetingKindRow(kind, significance, audience, section, requiredSlots) {
+function chanceMeetingKindRow(kind, significance, audience, section, requiredSlots,
+  cases, defaultCase = 'sole') {
   const pool = /** @type {readonly ProseVariant[]} */ (CHANCE_MEETING_RECEIPTS[kind]);
+  const frozenSlots = Object.freeze(requiredSlots.map((slots) => Object.freeze([...slots])));
+  const declared = cases || { [defaultCase]: [kind, requiredSlots] };
+  /** @type {Record<string, Readonly<ChanceMeetingCase>>} */
+  const built = {};
+  for (const [token, [poolKey, slots]] of Object.entries(declared)) {
+    const casePool = /** @type {readonly ProseVariant[]} */ (CHANCE_MEETING_RECEIPTS[poolKey]);
+    // ⛔ FAIL LOUD AT MODULE LOAD, not silently at a live pulse. A case naming a corpus the leaf
+    // does not carry, or one whose declaration is not parallel to its own sentences, is a wiring
+    // defect that must never reach a reader as a hole or an undefined variant.
+    if (!Array.isArray(casePool) || casePool.length === 0) {
+      throw new Error(`chanceMeetingKindRow: ${kind}/${token}: no corpus named ${poolKey}`);
+    }
+    if (casePool.length !== slots.length) {
+      throw new Error(`chanceMeetingKindRow: ${kind}/${token}: ${poolKey} has ${casePool.length}`
+        + ` variants against ${slots.length} slot declarations`);
+    }
+    built[token] = Object.freeze({
+      poolKey,
+      pool: casePool,
+      requiredSlots: Object.freeze(slots.map((one) => Object.freeze([...one]))),
+    });
+  }
+  if (!built[defaultCase]) {
+    throw new Error(`chanceMeetingKindRow: ${kind}: no case named ${defaultCase} to default to`);
+  }
   return Object.freeze({
     kind,
     significance,
     audience,
     section,
     pool,
-    requiredSlots: Object.freeze(requiredSlots.map((slots) => Object.freeze([...slots]))),
+    requiredSlots: frozenSlots,
+    cases: Object.freeze(built),
   });
 }
 
@@ -148,13 +199,41 @@ export const CHANCE_MEETING_KIND_REGISTRY = Object.freeze([
   // §B — THE REFUSAL THAT TRAVELLED. `major`, and five authored variants clear the derived major
   // floor of four by margin rather than by equality. The order below is the annex's own
   // `**Per-variant required slots:**` declaration order, in sentence order, never re-sorted here.
+  //
+  // ⭐⭐ AND IT IS THE FIRST ROW IN THE ESTATE TO CARRY TWO AUTHORED CASES. ENC-4b shipped this
+  // kind's §B corpus and WITHHELD the line whenever the host court's own notable made the offer,
+  // because §B's variant 1 asserts the refuser is of the host town. ENC-4c's §B2 block carries
+  // that case, so the kind now speaks for both and withholds for neither.
+  //
+  // ⛔ THE CASE TOKENS NAME THE FACT, NOT THE BLOCK. `guest_offered` and `host_offered` are read
+  // off the seed's own parallel address — which court the approacher belongs to — and the pools
+  // are keyed to them rather than to §B and §B2, so a renamed annex block cannot silently
+  // re-point a corpus at the case it is false about.
   chanceMeetingKindRow('chance_meeting_exposed', 'major', 'public', 'events', [
     ['counterpart', 'settlement', 'npc', 'home'],
     ['settlement', 'counterpart', 'npc', 'home'],
     ['npc', 'home', 'settlement', 'counterpart'],
     ['settlement', 'counterpart', 'npc', 'home'],
     ['settlement', 'counterpart', 'npc', 'home'],
-  ]),
+  ], {
+    // §B — the one PASSING THROUGH offered, so the refuser is of the host town.
+    guest_offered: ['chance_meeting_exposed', [
+      ['counterpart', 'settlement', 'npc', 'home'],
+      ['settlement', 'counterpart', 'npc', 'home'],
+      ['npc', 'home', 'settlement', 'counterpart'],
+      ['settlement', 'counterpart', 'npc', 'home'],
+      ['settlement', 'counterpart', 'npc', 'home'],
+    ]],
+    // §B2 — the HOST COURT'S OWN offered, so the refuser is the guest. The order below is that
+    // block's own declaration order, in sentence order, never re-sorted here.
+    host_offered: ['chance_meeting_exposed_host_offered', [
+      ['npc', 'settlement', 'counterpart', 'home'],
+      ['settlement', 'counterpart', 'home', 'npc'],
+      ['npc', 'settlement', 'counterpart', 'home'],
+      ['settlement', 'counterpart', 'home', 'npc'],
+      ['settlement', 'counterpart', 'home', 'npc'],
+    ]],
+  }, 'guest_offered'),
 ]);
 
 /** The exact governed pool set. */
@@ -216,6 +295,19 @@ export const CHANCE_MEETING_PRESENTATION = Object.freeze({
   major: Object.freeze({ severity: 0.76, score: 78 }),
 });
 
+/**
+ * Which case each row draws when a caller names none. It is derived from the registry rather than
+ * re-declared: the row whose `cases` holds exactly one entry defaults to it, and a multi-case row
+ * declares its own. ⛔ A row that grew a second case without saying which is default would resolve
+ * to nothing here and go SILENT, which is the honest failure — a default guessed from key order
+ * would pick a corpus by accident of source layout.
+ * @type {ReadonlyMap<string, string>}
+ */
+const DEFAULT_CASE_OF = new Map([
+  ['chance_meeting_recorded', 'sole'],
+  ['chance_meeting_exposed', 'guest_offered'],
+]);
+
 /** @type {ReadonlyMap<string, Readonly<ChanceMeetingRegistryEntry>>} */
 const KIND_BY_ID = new Map(
   /** @type {Array<[string, Readonly<ChanceMeetingRegistryEntry>]>} */ (
@@ -259,18 +351,33 @@ function publicMeetingRef(meetingId) {
  * ineligible. Null when nothing in the pool qualifies or the kind is unknown — silence, never
  * generic prose.
  *
+ * ⭐ THE CASE SELECTS THE CORPUS, and an unknown case is SILENCE rather than a fallback to the
+ * default one. A case this kind has no words for is precisely the state ENC-4b was in for the
+ * host-offered half, and answering it with the other case's sentences would be the wrong-ROLE
+ * defect wearing a default.
+ *
+ * ⛔ THE FAMILY ID IS THE CORPUS'S, NOT THE KIND'S. Two cases of one kind are two genuinely
+ * different families of sentence, and a shared namespace would let a variety reader treat
+ * `chance_meeting_exposed.4` as one family when it is two. The default case's poolKey IS the
+ * kind, so every kind authored for one case spells its family exactly as it always has.
+ *
  * @param {string} kind
  * @param {string} seed  the namespaced pick key; the seam always supplies one
  * @param {Record<string, unknown>} [interp]
+ * @param {string|null} [caseToken] which authored case; the row's default when absent
  * @returns {{kind:string, line:string, familyId:string, templateIndex:number,
  *   significance:string, audience:string, section:string|null} | null}
  */
-export function chanceMeetingLine(kind, seed, interp = {}) {
+export function chanceMeetingLine(kind, seed, interp = {}, caseToken = null) {
   const row = KIND_BY_ID.get(String(kind));
   if (!row) return null;
-  const eligible = row.pool
+  const authored = caseToken == null
+    ? row.cases[DEFAULT_CASE_OF.get(row.kind) || '']
+    : row.cases[String(caseToken)];
+  if (!authored) return null;
+  const eligible = authored.pool
     .map((_, templateIndex) => templateIndex)
-    .filter((templateIndex) => row.requiredSlots[templateIndex].every((slot) => (
+    .filter((templateIndex) => authored.requiredSlots[templateIndex].every((slot) => (
       typeof interp[slot] === 'string' && String(interp[slot]).trim().length > 0
     )));
   if (eligible.length === 0) return null;
@@ -280,7 +387,7 @@ export function chanceMeetingLine(kind, seed, interp = {}) {
   const templateIndex = eligible[
     Math.min(eligible.length - 1, Math.floor(hash01(String(seed)) * eligible.length))
   ];
-  const variant = row.pool[templateIndex];
+  const variant = authored.pool[templateIndex];
   const raw = typeof variant === 'function' ? String(variant(interp)) : String(variant);
   return {
     kind: row.kind,
@@ -290,7 +397,7 @@ export function chanceMeetingLine(kind, seed, interp = {}) {
     // is right and the fill is right, so the CASING is the renderer's business and is normalized
     // here rather than by editing an annex-verbatim pool.
     line: raw.charAt(0).toUpperCase() + raw.slice(1),
-    familyId: `${row.kind}.${templateIndex + 1}`,
+    familyId: `${authored.poolKey}.${templateIndex + 1}`,
     templateIndex,
     significance: row.significance,
     audience: row.audience,
@@ -426,25 +533,30 @@ export function chanceMeetingEntry({ seed, now = null } = {}) {
  * directions, on real minted worlds — `envoyChanceMeeting.js` leads with whichever direction has
  * the higher compromise chance ON THE TARGET, and that chance never reads who travelled.
  *
- * ── ⛔ THE GATE IS VARIANT 1'S OWN CLAUSE, AND IT IS WHY NO WORD NEEDED CHANGING ──
+ * ── ⭐⭐ VARIANT 1'S OWN CLAUSE WAS THE GATE, AND ENC-4c MADE IT A CHOICE ──────────
  *
- * Variant 1 reads "{counterpart} of {settlement} refused …". `{settlement}` is the town the
+ * §B's variant 1 reads "{counterpart} of {settlement} refused …". `{settlement}` is the town the
  * refusal became known in — the HOST — so that clause asserts the refuser is of the host town.
  * True when the person passing through made the offer; FALSE when the host's own notable did.
- * Both happen. So this builder withholds the entire line unless the counterpart's own court IS
- * the host, and the two arms of that condition are read from the seed's parallel address rather
- * than assumed from a kind. A sentence that is fluent and wrong about where a man is from is the
- * wrong-ROLE defect this family has already been bitten by once; silence is the estate's answer.
+ * Both happen. ENC-4b therefore WITHHELD the entire line for the second arrangement rather than
+ * ship a sentence that is fluent and wrong about where a man is from.
  *
- * ⚠ THAT IS A NARROWING INSIDE the R1 authorization, never outside it: the ruling authorized §B
- * for the traveller x resident kind believing the kind and the traveller-approaches case were the
- * same set. They are not, and the case is the smaller of the two. The half this refuses — an
- * exposed offer made BY the host's own notable — is real news with no authored words, and giving
- * it words is a chair annex act.
+ * ⛔ THE CHAIR AUTHORED THE MISSING HALF (`## §B2 ENC-4c`), so the same fact that used to be a
+ * withhold is now a CASE SELECTION: `host_offered` draws §B2's five sentences and `guest_offered`
+ * draws §B's. Nothing about the kind, the desk, the audience, the significance or the reason limb
+ * changes, and no sealed word was touched. The kind withholds for neither arrangement.
  *
- * ⛔ IT FAILS CLOSED, AND THE FAILURE IS SILENCE, exactly as the §A builder does: a seed for
- * another beat, an unknown approacher, a party count that is not two, a counterpart who is not of
- * the host, or a single unresolved name yields NULL.
+ * ⚠ AND THE PREMISE FOR AUTHORING IT WAS MEASURED, NOT ASSUMED. ENC-4b called the withheld half
+ * "the smaller of the two"; it is not. `envoyChanceMeeting.js` picks the approach direction by the
+ * compromise chance ON THE TARGET and breaks ties on the target's nid, so on every tie the
+ * approacher is whichever party's HOME ID SORTS LATER — a fact about town-name spelling that knows
+ * nothing about who is the host. Holding the host role fixed and flipping only the id ordering
+ * flips the case 89 receipts out of 89.
+ *
+ * ⛔ IT STILL FAILS CLOSED, AND THE FAILURE IS SILENCE, exactly as the §A builder does: a seed for
+ * another beat, an unknown approacher, a party count that is not two, an address where both or
+ * neither party is of the host town, a case the kind has no words for, or a single unresolved name
+ * yields NULL.
  *
  * @param {{seed?: Record<string, unknown>, now?: string|null}} [args]
  * @returns {Record<string, unknown>|null}
@@ -476,19 +588,36 @@ export function chanceMeetingExposedEntry({ seed, now = null } = {}) {
   // whose ids are real, and the guard below is the one that reads it as the refusal it is.
   if (approacher < 0) return null;
   const counterpart = 1 - approacher;
-  // VARIANT 1'S CLAUSE, ENFORCED: the one who refused must really be of the town that heard it.
-  if (homeSids[counterpart] !== hostSid) return null;
-
+  // ⛔⛔ EXACTLY ONE PARTY IS OF THE HOST TOWN, ASSERTED RATHER THAN ASSUMED. Every sentence in
+  // both corpora attaches one party to `{settlement}` and the other to `{home}`, so a seed where
+  // BOTH courts are the host, or NEITHER is, has no honest fill for either slot. Neither shape is
+  // reachable from ENC-3's stage today — a traveller is never at his own home, the resident's
+  // home IS the host node, and two travellers never share a home — but the builder refuses them
+  // here rather than resting on three guarantees it does not own.
+  const approacherAtHome = homeSids[approacher] === hostSid;
+  if (approacherAtHome === (homeSids[counterpart] === hostSid)) return null;
+  // ⭐⭐ THE CASE, AND IT IS THE ONE FACT THAT DECIDES WHICH SENTENCES ARE HONEST. §B says
+  // "{counterpart} of {settlement}"; §B2 says "{npc} of {settlement}". Both are true of exactly
+  // one arrangement of the same two people, so the corpus is chosen by which court the APPROACHER
+  // belongs to. ENC-4b had words for one arrangement and withheld the other; both now have words,
+  // and this builder withholds for neither.
+  const caseToken = approacherAtHome ? 'host_offered' : 'guest_offered';
+  // ⚠⚠ `{home}` IS THE GUEST'S COURT IN BOTH CORPORA, NEVER "THE APPROACHER'S". ENC-4b could read
+  // it off the approacher only because its withhold guaranteed the approacher was the guest; under
+  // the host-offered case that same read would render "{counterpart} of {home}" as the guest being
+  // of the host town — fluent, compiling, and wrong about where a man is from, which is the exact
+  // defect the whole ROLE law exists to prevent. It is derived from the HOST instead.
+  const guest = approacherAtHome ? counterpart : approacher;
   const interp = {
     npc: names[approacher] || '',
     counterpart: names[counterpart] || '',
-    home: places[homeSids[approacher]] || '',
+    home: places[homeSids[guest]] || '',
     settlement: places[hostSid] || '',
   };
   if (Object.values(interp).some((value) => !value)) return null;
 
   const meetingId = text(source.id);
-  const picked = chanceMeetingLine(row.kind, `${row.kind}::${meetingId}`, interp);
+  const picked = chanceMeetingLine(row.kind, `${row.kind}::${meetingId}`, interp, caseToken);
   if (!picked) return null;
   const presentation = CHANCE_MEETING_PRESENTATION[row.significance];
   if (!presentation) return null;

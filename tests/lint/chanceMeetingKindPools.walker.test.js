@@ -746,15 +746,123 @@ describe('ENC-4 phrased-kind registry — the meeting neither court arranged', (
     // anchored: headline asserted truthy and naming both people above; the positive clause is live.
     expect(entry.headline).not.toContain('Aldo Rell of Kesthorne');
 
-    // ⭐ THE MIRROR. One field flipped: the HOST's own notable is now the approacher. Every §B
-    // variant would then have to call the guest "of {settlement}" — the host town he is not from
-    // — so the builder withholds the whole line. Silence, never a sentence that is fluent and
-    // wrong about where a man is from.
+    // ⭐⭐ THE MIRROR, AND ENC-4c INVERTED IT WITH ATTRIBUTION. One field is flipped: the HOST's
+    // own notable is now the approacher. ENC-4b asserted NULL here, because every §B variant would
+    // then have to call the guest "of {settlement}" — the host town he is not from — and silence
+    // was the only honest answer while that half had no words. The chair authored `## §B2 ENC-4c`
+    // for exactly this case, so the mirror now BUILDS, out of the OTHER corpus, and the arm that
+    // was a withhold is the arm that proves the case selection works.
     const mirror = exposedEntryOf({ approacherNid: 'npc:bramwell:4' });
-    expect(mirror).toBeNull();
-    // …and the mirror is only a mirror if the flip is the ONLY difference: the same seed with the
-    // original approacher still builds, so the null above is the role gate and not a broken seed.
-    expect(exposedEntryOf({ approacherNid: 'npc:kesthorne:1' })).toBeTruthy();
+    expect(mirror).toBeTruthy();
+    // ⛔ IT IS THE SAME KIND AT THE SAME DESK AND THE SAME WEIGHT — a second CORPUS, never a
+    // second registration. If this ever diverged, the pantheon A5 freezes would owe a move.
+    expect(mirror.kind).toBe('chance_meeting_exposed');
+    expect(mirror.impactKind).toBe('chance_meeting_exposed');
+    expect(mirror.significance).toBe(entry.significance);
+    expect(mirror.section).toBe(entry.section);
+    expect([mirror.severity, mirror.score]).toEqual([entry.severity, entry.score]);
+    // …and it draws from the OTHER family namespace, which is how a variety reader can tell two
+    // genuinely different families of sentence apart.
+    expect(String(mirror.familyId)).toMatch(/^chance_meeting_exposed_host_offered\.[1-5]$/);
+    expect(String(entry.familyId)).toMatch(/^chance_meeting_exposed\.[1-5]$/);
+    // ⛔⛔ THE ROLE LAW ON THE MIRROR'S OWN WORDS, AND IT IS THE INVERSE OF THE ARM ABOVE. The
+    // host's own notable offered, so the OFFERER is now the one with no "of {home}" join and the
+    // REFUSER is the guest. A sentence that put Aldo Rell in Kesthorne, or Sera Vane in Bramwell,
+    // would be the fluent-and-false defect this whole family exists to refuse.
+    expect(mirror.headline).toContain('Sera Vane of Kesthorne');
+    // The positive clause one line up proves the "of {home}" join really renders on this sentence.
+    // anchored: the mirror is asserted truthy and its offerer clause is asserted present above.
+    expect(mirror.headline).not.toContain('Sera Vane of Bramwell');
+    // anchored: same populated mirror headline — the host's own is never given the guest's court.
+    expect(mirror.headline).not.toContain('Aldo Rell of Kesthorne');
+    // anchored: same populated mirror headline — nor is he given his own town as a guest's court.
+    expect(mirror.headline).not.toContain('Aldo Rell of Bramwell');
+    // …and the two cases really do render DIFFERENT sentences from the same meeting id, so the
+    // selection is a selection and not one corpus answering both.
+    expect(mirror.headline).not.toBe(entry.headline);
+    // ⛔ THE FENCE THE INVERSION MUST NOT BREACH: an approach the stage will not name is still
+    // silence. That is every traveller x traveller receipt and every meeting beat, and it is the
+    // R1 fence enforced by absence rather than by a list.
+    expect(exposedEntryOf({ approacherNid: '' })).toBeNull();
+    expect(exposedEntryOf({ approacherNid: 'npc:elsewhere:9' })).toBeNull();
+  });
+
+  test('§B2 — the kind speaks for BOTH cases and withholds for NEITHER, on the seed\'s own address', () => {
+    // ⭐⭐ THE LANE'S WHOLE CLAIM, AS A VALUE. ENC-4b's writer withheld the line whenever the
+    // host's own notable made the offer. After ENC-4c both arrangements of the same two people
+    // have authored words, and the corpus is chosen by which court the APPROACHER belongs to.
+    const guest = exposedEntryOf({ approacherNid: 'npc:kesthorne:1' });
+    const host = exposedEntryOf({ approacherNid: 'npc:bramwell:4' });
+    expect([guest, host].filter(Boolean), 'a case is still withheld').toHaveLength(2);
+    expect(String(guest.familyId).split('.')[0]).toBe('chance_meeting_exposed');
+    expect(String(host.familyId).split('.')[0]).toBe('chance_meeting_exposed_host_offered');
+    // ⛔ THE ADDRESS CHAIN IS IDENTICAL ACROSS THE TWO CASES: the same meeting, the same two
+    // courts, the same two people. Only the SENTENCE differs, which is what a case is.
+    expect(host.settlementIds).toEqual(guest.settlementIds);
+    expect(host.settlementNames).toEqual(guest.settlementNames);
+    expect(host.npcIds).toEqual(guest.npcIds);
+    expect(host.summary).toBe(guest.summary);
+    expect(host.reasons).toEqual(guest.reasons);
+    // ⛔⛔ `{home}` IS THE GUEST'S COURT IN BOTH CORPORA, NOT THE APPROACHER'S — the defect that
+    // would have shipped had the host-offered case kept ENC-4b's read. Kesthorne is the guest's
+    // court in both, and Bramwell is the host in both, whichever way the approach ran.
+    expect(guest.headline).toContain('Kesthorne');
+    expect(host.headline).toContain('Kesthorne');
+    expect(host.headline).toContain('Bramwell');
+    // …and NEITHER case ever attaches a person to the court he is not of.
+    for (const built of [guest, host]) {
+      // anchored: both entries are asserted built, and both headlines name Kesthorne, above.
+      expect(String(built.headline)).not.toContain('Sera Vane of Bramwell');
+      // anchored: same two populated headlines — the mirror of the same law.
+      expect(String(built.headline)).not.toContain('Aldo Rell of Kesthorne');
+    }
+    // ⛔ AND THE ADDRESS ARM THE CASE SELECTION RESTS ON: exactly one party must be of the host
+    // town, asserted rather than assumed. Both-host and neither-host are refused, because no
+    // sentence in either corpus has an honest fill for `{settlement}` and `{home}` then.
+    expect(exposedEntryOf({ hostId: 'a_town_neither_party_is_from' })).toBeNull();
+    expect(exposedEntryOf({ settlementIds: ['bramwell', 'bramwell'] })).toBeNull();
+    // The positive control for those two nulls: the untouched seed still builds.
+    expect(exposedEntryOf()).toBeTruthy();
+  });
+
+  test('§B2 — the case axis is total, and an unauthored case is SILENCE rather than a fallback', () => {
+    // ⛔⛔ A CASE WITH NO WORDS MUST NOT BORROW THE OTHER CASE'S. That borrowing IS the wrong-ROLE
+    // defect wearing a default, and it is the one failure mode a case-keyed corpus adds.
+    const interp = { npc: 'Sera Vane', counterpart: 'Aldo Rell', settlement: 'Bramwell', home: 'Kesthorne' };
+    expect(chanceMeetingLine('chance_meeting_exposed', 'seed', interp, 'a_case_nobody_authored')).toBeNull();
+    // Read against calls known to ANSWER, so the null is a closed door and not a picker that
+    // returns nothing for everything.
+    expect(chanceMeetingLine('chance_meeting_exposed', 'seed', interp, 'guest_offered')).toBeTruthy();
+    expect(chanceMeetingLine('chance_meeting_exposed', 'seed', interp, 'host_offered')).toBeTruthy();
+    // ⭐ THE REGISTRY'S OWN VIEW: every row's `cases` table is total over the corpora it names,
+    // each case is parallel to its own pool, and each clears its kind's derived floor.
+    for (const row of CHANCE_MEETING_KIND_REGISTRY) {
+      const tokens = Object.keys(row.cases);
+      expect(tokens.length, `${row.kind}: no authored case`).toBeGreaterThanOrEqual(1);
+      for (const token of tokens) {
+        const authored = row.cases[token];
+        expect(authored.pool, `${row.kind}/${token}: not the corpus module's own array`)
+          .toBe(CHANCE_MEETING_RECEIPTS[authored.poolKey]);
+        expect(authored.requiredSlots).toHaveLength(authored.pool.length);
+        expect(authored.pool.length).toBeGreaterThanOrEqual(FREQUENCY_FLOORS[row.significance]);
+        expect(Object.isFrozen(authored)).toBe(true);
+        // Every case's declaration is its own annex block's, re-derived from the document.
+        expect(authored.requiredSlots.map((slots) => [...slots]),
+          `${row.kind}/${token}: declaration is not ${authored.poolKey}'s annex block`)
+          .toEqual(annexBlocks(ANNEX_SOURCE, authored.poolKey).declared);
+      }
+    }
+    // ⛔ THE ROW'S OWN `pool` AND `requiredSlots` STAY THE DEFAULT CASE'S, and that is load-bearing
+    // rather than cosmetic: `kindPoolWalker` measures a row's DEPTH from `row.pool`, so a row that
+    // moved its corpus under a case key would measure zero and land on `['starved']`.
+    const exposed = CHANCE_MEETING_KIND_REGISTRY[1];
+    expect(exposed.pool).toBe(exposed.cases.guest_offered.pool);
+    expect(exposed.requiredSlots.map((s) => [...s]))
+      .toEqual(exposed.cases.guest_offered.requiredSlots.map((s) => [...s]));
+    expect(floorReasons(exposed)).toEqual([]);
+    // …and the one-case row declares exactly one, so a second corpus cannot arrive there unread.
+    expect(Object.keys(CHANCE_MEETING_KIND_REGISTRY[0].cases)).toEqual(['sole']);
+    expect(Object.keys(exposed.cases).sort()).toEqual(['guest_offered', 'host_offered']);
   });
 
   test('§B — the writer carries the whole address chain, the major pair, and the §C reason', () => {
