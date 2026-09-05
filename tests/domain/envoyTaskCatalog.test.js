@@ -616,7 +616,13 @@ describe('W-OPS O4 — the CR-WR10-C door, and the polarity census that keeps it
     // ...and with NO espionage flag anywhere in the world it stays LIT, which is the half
     // that would silently invert if a later car folded this key under the covert layer.
     expect(envoyTaskCatalogActive(litWorld())).toBe(true);
-    expect(Object.keys(litWorld().simulationRules)).not.toContain('espionageEnabled');
+    // THE FIXTURE ITSELF CARRIES NO COVERT FLAG, and the claim is anchored rather than
+    // bare: a `not.toContain` over a key list passes just as happily when the LIST drifted
+    // away, so the anchor asserts the key that IS there in the same breath.
+    expectAbsentWithAnchor(
+      Object.keys(litWorld().simulationRules), 'espionageEnabled', 'envoyTaskCatalogEnabled',
+      'the lit fixture is spine-only, so the arm above proves a spine door and not a covert one',
+    );
   });
 
   test('⛔ THE POLARITY CENSUS: exactly ONE by-name read in src/, and it is strict', () => {
