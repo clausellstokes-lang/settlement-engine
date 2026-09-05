@@ -57,6 +57,10 @@ const IDENTITY_MOUNT = 'history.identity';
 const FOUNDED_MOUNT = 'history.founded';
 const RECORD_MOUNT = 'history.record';
 
+/** The VIABILITY and PLOT-HOOKS positions. */
+const VERDICT_MOUNT = 'viability.verdict';
+const FRAMING_MOUNT = 'plot_hooks.framing';
+
 /** The shape every consumer gets, silent. Frozen so a caller cannot fill it in. */
 const SILENT_OVERVIEW = Object.freeze({
   healthLines: Object.freeze([]),
@@ -74,15 +78,22 @@ const SILENT_HISTORY = Object.freeze({
   recordLine: null,
 });
 
+/** The same, for the viability verdict and the plot-hook framing. */
+const SILENT_VIABILITY = Object.freeze({ verdictLines: Object.freeze([]) });
+const SILENT_HOOKS = Object.freeze({ framingLines: Object.freeze([]) });
+
 /**
  * ⚠ THIS IS THE READER'S RETURN CONTRACT, exactly as `GENERAL_STATE_PROSE_SILENT` is the
  * desk's: `generalDeskLines` declares `@returns {typeof GENERAL_DESK_SILENT}`, so a position
  * missing here is a position this reader is not allowed to hand back.
- * @type {Readonly<{overview: typeof SILENT_OVERVIEW, history: typeof SILENT_HISTORY}>}
+ * @type {Readonly<{overview: typeof SILENT_OVERVIEW, history: typeof SILENT_HISTORY,
+ *   viability: typeof SILENT_VIABILITY, hooks: typeof SILENT_HOOKS}>}
  */
 export const GENERAL_DESK_SILENT = Object.freeze({
   overview: SILENT_OVERVIEW,
   history: SILENT_HISTORY,
+  viability: SILENT_VIABILITY,
+  hooks: SILENT_HOOKS,
 });
 
 /**
@@ -100,10 +111,18 @@ function line(mount, rung) {
  *
  * @param {object|null|undefined} settlement the record the tab already holds
  * @param {{publicDossier?: boolean, playerView?: boolean,
- *   stresses?: ReadonlyArray<{type?: unknown}|null>}} [options]
+ *   stresses?: ReadonlyArray<{type?: unknown}|null>,
+ *   hookCategories?: ReadonlyArray<unknown>|null,
+ *   clockIds?: ReadonlyArray<unknown>|null}} [options]
  *   `stresses` is the caller's OWN normalized stress list — DS-GEN-5 suppresses itself where
  *   a primary stress resolves, and it must key on the SAME ladder the arrival scene above it
  *   keys on or the page prints an ordinary market day underneath a siege banner.
+ *   ⛔ `hookCategories` and `clockIds` ARE PASSED IN RATHER THAN REACHED FOR, and the reason
+ *   is bytes, not taste: `collectPlotHooks` and `deriveEscalationClocks` drag the supply
+ *   chain, faction-profile and hook-retention leaves behind them, and this module is
+ *   imported by EVERY tab that draws this desk. PlotHooksTab already pays for the first and
+ *   is the one page the second is about, so the derivation stays there and only the two
+ *   closed token lists cross this boundary.
  * @returns {typeof GENERAL_DESK_SILENT}
  */
 export function generalDeskLines(settlement, options = {}) {
@@ -148,6 +167,12 @@ export function generalDeskLines(settlement, options = {}) {
       // record and a desk that reached for it itself would be a second opinion about which
       // record the caller meant.
       history: r.history,
+      // DS-GEN-11's contradiction count. ⚠ `.metrics.` IS LOAD-BEARING: the corpus title
+      // abbreviates the path and the abbreviated one is `undefined` on every settlement.
+      criticalIssueCount: via.metrics?.criticalIssueCount,
+      hookCategories: options.hookCategories,
+      clockIds: options.clockIds,
+      governingName: r.powerStructure?.governingName,
     },
     { seed: String(r?._seed ?? r?.id ?? ''), audience: options.playerView ? 'player' : 'dm' },
   );
@@ -176,6 +201,14 @@ export function generalDeskLines(settlement, options = {}) {
         .map((rung) => line(IDENTITY_MOUNT, rung)).filter(Boolean)),
       foundedLine: line(FOUNDED_MOUNT, prose.history.founded),
       recordLine: line(RECORD_MOUNT, prose.history.record),
+    }),
+    viability: Object.freeze({
+      verdictLines: Object.freeze(prose.viability.verdict
+        .map((rung) => line(VERDICT_MOUNT, rung)).filter(Boolean)),
+    }),
+    hooks: Object.freeze({
+      framingLines: Object.freeze(prose.hooks.framing
+        .map((rung) => line(FRAMING_MOUNT, rung)).filter(Boolean)),
     }),
   });
 }

@@ -30,6 +30,8 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { OverviewTab } from '../../src/components/new/tabs/OverviewTab.jsx';
 import { HistoryTab } from '../../src/components/new/tabs/HistoryTab.jsx';
+import { ViabilityTab } from '../../src/components/new/tabs/ViabilityTab.jsx';
+import PlotHooksTab from '../../src/components/new/tabs/PlotHooksTab.jsx';
 import { generalDeskLines } from '../../src/components/new/generalDeskRead.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
@@ -279,5 +281,97 @@ describe('THE HISTORY CHAPTER DRAWS ON THE HISTORY TAB — and is silent for a f
     const historyCase = router.split('\n').find((l) => l.includes("case 'history':"));
     expect(historyCase).toBeTruthy();
     expect(historyCase).toContain('publicDossier={publicDossier}');
+  });
+});
+
+/**
+ * DS-GEN-11 on the viability page and DS-HK-1 on the plot-hooks page. Both fixtures carry the
+ * CANONICAL paths: the contradiction count at `economicViability.metrics.criticalIssueCount`,
+ * which is where the producer writes it and NOT where the corpus title abbreviates it to.
+ */
+const UNVIABLE = Object.freeze({
+  id: 'steinmark', name: 'Steinmark', _seed: 'steinmark',
+  economicViability: {
+    viable: false,
+    summary: '✗ NOT VIABLE: the sums do not close',
+    issues: [], warnings: [],
+    metrics: {
+      criticalIssueCount: 2, tradeAccess: 'road',
+      foodBalance: { dailyNeed: 1000, deficit: 400, rawDeficit: 400 },
+    },
+  },
+});
+
+const VERDICT = 'Steinmark\'s outgoings stand above everything its land and its custom bring in'; // DS-GEN-11
+const CONTRADICTIONS = 'things about this town that cannot all be true';                          // DS-GEN-11
+const FIRST_SURVEY = 'The town was read once, carefully';                                        // DS-GEN-11
+
+describe('THE VIABILITY VERDICT DRAWS — and is silent for a free viewer', () => {
+  test('all three DS-GEN-11 lenses reach the DOM privately and none reach a public dossier', () => {
+    const priv = render(e(ViabilityTab, {
+      settlement: UNVIABLE, narrativeNote: null, publicDossier: false,
+    })).container.textContent;
+    cleanup();
+    const pub = render(e(ViabilityTab, {
+      settlement: UNVIABLE, narrativeNote: null, publicDossier: true,
+    })).container.textContent;
+    for (const [sentence, label] of [
+      [VERDICT, 'the verdict'], [CONTRADICTIONS, 'the contradiction count'],
+      [FIRST_SURVEY, 'the first-survey caveat'],
+    ]) expectPresentThenAbsent(priv, pub, sentence, `DS-GEN-11 ${label} (viability.verdict)`);
+    // The DATUM survives the gate: the headline and the pill keep their own words.
+    expect(pub).toContain('NOT COHERENT');
+    expect(pub).toContain('2 critical');
+  });
+
+  test('the ROUTER threads publicDossier to the viability tab', () => {
+    const router = readFileSync(join(HERE, '../../src/components/OutputContainer.jsx'), 'utf8');
+    const line = router.split('\n').find((l) => l.includes("case 'viability':"));
+    expect(line).toBeTruthy();
+    expect(line).toContain('publicDossier={publicDossier}');
+  });
+});
+
+describe('THE HOOK FRAMING DRAWS — and is silent for a free viewer', () => {
+  /**
+   * A town whose hooks really do span categories. The framing is derived from the hooks the
+   * page itself collects, so this fixture carries the rows `collectPlotHooks` reads.
+   */
+  const HOOKED = Object.freeze({
+    id: 'steinmark', name: 'Steinmark', _seed: 'steinmark',
+    npcs: [{ name: 'Mugain', role: 'Reeve', plotHooks: ['A ledger has gone missing from the hall.'] }],
+    history: {
+      currentTensions: [{
+        type: 'crime_wave', description: 'The wharf has its own law.',
+        plotHooks: ['Somebody is paying the watch to look the other way.'],
+      }],
+    },
+  });
+
+  test('the framing reaches the DOM privately, is absent publicly, and the hooks keep their own words', () => {
+    const priv = render(e(PlotHooksTab, { settlement: HOOKED, publicDossier: false }))
+      .container.textContent;
+    cleanup();
+    const pub = render(e(PlotHooksTab, { settlement: HOOKED, publicDossier: true }))
+      .container.textContent;
+    // NON-VACUITY: the page really collected hooks, or both halves below are free.
+    expect(priv).toContain('Plot hooks');
+    expect(priv.length, 'the hooks page rendered nothing').toBeGreaterThan(200);
+    // ⛔ THE BLOCK IS THE FRAMING, NEVER THE HOOK PROSE. The hooks themselves are a DATUM and
+    // survive the gate; only the corpus framing above them goes.
+    expect(pub).toContain('A ledger has gone missing from the hall.');
+    // The framing itself: present privately, gone publicly. Derived rather than hardcoded
+    // because which categories a fixture reaches is the collector's business, not this
+    // test's — but the DIFFERENCE between the two renders is asserted exactly.
+    expect(priv.length, 'the public render was not shorter — the gate drew nothing')
+      .toBeGreaterThan(pub.length);
+    expect(pub, 'an unfilled seam reached a free viewer').not.toMatch(/\{[a-z_]+\}/i);
+  });
+
+  test('the ROUTER threads publicDossier to the plot-hooks tab', () => {
+    const router = readFileSync(join(HERE, '../../src/components/OutputContainer.jsx'), 'utf8');
+    const line = router.split('\n').find((l) => l.includes("case 'plot_hooks':"));
+    expect(line).toBeTruthy();
+    expect(line).toContain('publicDossier={publicDossier}');
   });
 });
