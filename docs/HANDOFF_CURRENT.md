@@ -8,7 +8,18 @@ program's decisions; SPEC fold labels §§277–§286 are design sections, not m
 The repo is authoritative; trust executed evidence over any summary including
 this one.**
 
-## ⭐⭐⭐⭐⭐ PICKUP AT §898 — **THE PROSE CONSIST IS DOWN — lighting POSITION 0 lands; the L-PROBE dark arm (chair) measures next, on this tree** (`fd8b6df00` -> `5e28d5c83`).
+## ⭐⭐⭐⭐⭐ PICKUP AT §899 — **THE COMPOSED CONSIST IS DOWN; the clamp program is CLOSED; OSR-SCHEMA17 has landed in the desk dock (rung 17); next is the DESK consist (§900) with nine late docks behind it.** (`5e28d5c83` -> `38474a59e`).
+
+**Product** `38474a59e`, sealed `refs/preserve/landing-composed-2026-09-05`. Kit `refs/preserve/chair-tools-2026-09-05`; resume note `refs/preserve/resume-note-2026-09-05`.
+### ⭐ NEXT, IN ORDER
+1. **RESUME** the held lanes first (DESK-GEN3, DESK-TIMEBAND, DOCKET-3 — ids in the resume note; `RESUME-MESSAGE.txt` in the kit); they hold vitest for the gate.
+2. **THE DESK CONSIST (§900)** per `DESK-LANDING-PLAN.md` + its addendum: `land-desk-prep.sh <cas>` replays the 26 desk cars (23 + OSR-SCHEMA17's 3, sealed `osr-schema17-2026-09-05`) and the late docks — ENC-4b+4c (6, `enc4c-2026-09-05`), HORIZON-B1 (7), HORIZON-B2 (2), SEAT-78 (3), DOCKET-2 (+DOCKET-3), PANTHEON-ROSTER (3, over the §899 tip), DESK-TIMEBAND and DESK-GEN3 when they report. Two known replay STOPs: pantheon A5 (ENC-4b's literals vs the roster — the two-kind figures go INTO the roster) and any `dossierMounts.js` row the resolver cannot settle. Then lane **DESK-900-CARS** (`briefs/brief-DESK-900-CARS.md`: the voice row, the coupling row, OSR exemption 9 → 8, the roster figures, `{founder}`, item 8 re-scoped), then the chair's own cars (the six complexity band words if DOCKET-3 has not landed them; the edge-shared re-mint ritual for HORIZON-B1; the build + `WORKER_BUNDLE_CEILING_BYTES` arm for HORIZON-B2), then **the whole suite** at the composed tip (no path filter — the late docks' vitest is OWED: five of them never got a window), then the registers in plan §3 order, the gate, the CAS, the row with the RESIDUE block.
+3. **L-PROBE** — `lprobe-cheap-899.sh` on the landed tree (steps c–g + the eager STOP; minutes), then the full battery (needs the gate's build; the golden control, the per-preset certification via `--preset`, the listing diff) → **L-HOMES** (9 cars) → L-DEFAULT → L-UI-MAT → the eleven declarations.
+4. HORIZON-B6 (the ~2.3 h CAPACITY soak) only in a window with no gate for 2.5 h. Owner rows opened this landing: a founder-name producer; the chance-meeting tie-break by town spelling; DS-GEN-1; the paid-rights floor vs the arms.
+5. Then the owner's WALK + one regen → the exhaustive review → fix cars → FULL STOP before the soak.
+### 🟠 OWNER'S DESK (unchanged from §898 unless struck): the prose window's golden fixture (the genesis signing, or your sentence) · the paid-rights floor and the arms · DS-GEN-1 · DS-FTH-2's public pool.
+
+## (superseded) PICKUP AT §898 — **THE PROSE CONSIST IS DOWN — lighting POSITION 0 lands; the L-PROBE dark arm (chair) measures next, on this tree** (`fd8b6df00` -> `5e28d5c83`).
 
 **Product** `5e28d5c83`, sealed `refs/preserve/landing-prose-2026-09-05`. The declared same-seed text shift (133 engine-side paths) is entered in `docs/GOLDEN_SHIFT_LEDGER.md`.
 

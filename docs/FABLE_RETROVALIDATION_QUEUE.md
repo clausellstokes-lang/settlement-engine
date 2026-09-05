@@ -3657,3 +3657,11 @@ The rulings themselves are inline, one `*RULED (§892.x, Fable 5.1):*` paragraph
 ### R40 — lane PROSE-REBASE (Opus 5; cars `83c7b6b66` the rebase, `dac3b15a8` the fix car, `3ab6fd9d3` the fence-1 re-record)
 **Enrolled at §898.** What the walk must re-derive: the 7 resolutions (both directions, module evaluation); N = 94 (domain) / 133 (with generators) with the `simulationRules.js` empty-diff proof; the 360-settlement drive (five consumer sites at 0/360; the fingerprint at 0/360 after the fix); the voice magnitudes by direction; the prose-numerics re-key pairing (10 rows, 0 fell, 0 new); the golden probe (525/525 at the tip, 0/525 at the base). The chair's rulings on the separators and on the closed door is a Fable ruling on an Opus measurement; the measurement is what is owed.
 **Status:** OWED — enrolled, not ruled.
+## §899 — THE COMPOSED CONSIST (SEAT: Fable 5.1 — validated)
+
+### R41 — lane CLAMP-W2 (three migrations, three refusals; receipt `clamp-w2-receipt-2026-09-05`) — OWED
+### R42 — lane VOICE-JSX (car `9d6e47dde`; receipt `voice-jsx-receipt-2026-09-05`) — OWED (HIGH: the `EMPTY_VALUE` routing; the re-punctuated owner-adopted `LockControls` sentence)
+### R43 — lane ENC-4 (nine cars; receipt `enc4-receipt-2026-09-05`; ten judgments, R1/R2/R9 ruled by the chair) — OWED
+### R44 — lane CLAMP-W3 (the ceiling car) — OWED
+### R45 — lane DOCKET (items 7, 6, 5 landed as four cars; items 1 and 2 stopped with measurement) — OWED
+**Status:** enrolled, not ruled.
