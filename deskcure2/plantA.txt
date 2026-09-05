@@ -1,0 +1,125 @@
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/laneINTEG-tree
+
+ ❯ tests/lint/domainAnyCastBaseline.test.js (19 tests | 4 failed) 332ms
+     × no file exceeds its baseline (new files get 0) — fix the types, do not widen 8ms
+     × baseline exactly matches the tree (airtight against any drift mode) 10ms
+     × ⛔ no UNDECLARED file exceeds its baseline (the ledger is the only widening path) 1ms
+     × ⛔ every LIVE declared row is refused against the LIVE register 7ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/domainAnyCastBaseline.test.js > domain any-cast ratchet — frozen baseline governance > no file exceeds its baseline (new files get 0) — fix the types, do not widen
+AssertionError: any-cast debt grew — replace the any/* / ts-ignore with a real type. ⛔ Widening the baseline is not the cure and neither is adding a DECLARED_OVERRUN row: both ledger ceilings are MONOTONE-DOWN literals, so a new row (or a raised count on an existing one) only moves the red from this arm to the ceiling arm:
+  src/domain/institutions/defenseInstitutionBuckets.js: 1 any-holes (allowance 0): expected [ Array(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "src/domain/institutions/defenseInstitutionBuckets.js: 1 any-holes (allowance 0)",
++ ]
+
+ ❯ tests/lint/domainAnyCastBaseline.test.js:393:7
+    391|       + ' ceilings are MONOTONE-DOWN literals, so a new row (or a rais…
+    392|       + ' one) only moves the red from this arm to the ceiling arm:\n …
+    393|     ).toEqual([]);
+       |       ^
+    394|   });
+    395|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  tests/lint/domainAnyCastBaseline.test.js > domain any-cast ratchet — frozen baseline governance > baseline exactly matches the tree (airtight against any drift mode)
+AssertionError: expected { …(170) } to deeply equal { …(169) }
+
+- Expected
++ Received
+
+@@ -197,10 +197,14 @@
+    },
+    "src/domain/inferSupplyChains.js": {
+      "any": 0,
+      "suppress": 3,
+    },
++   "src/domain/institutions/defenseInstitutionBuckets.js": {
++     "any": 1,
++     "suppress": 0,
++   },
+    "src/domain/institutions/institutionRoster.js": {
+      "any": 1,
+      "suppress": 0,
+    },
+    "src/domain/magicLedger.js": {
+
+ ❯ tests/lint/domainAnyCastBaseline.test.js:435:27
+    433|     // src/domain under an exact-equality check — the declared three s…
+    434|     // different, attributed, capped expected value.
+    435|     expect(current.files).toEqual(expectedFiles());
+       |                           ^
+    436|     const declaredExcess = Object.entries(DECLARED_OVERRUNS).reduce((a…
+    437|     expect(current.total).toBe(baseline.total + declaredExcess);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  tests/lint/domainAnyCastBaseline.test.js > domain any-cast ratchet — the declared-overrun ledger is honest > ⛔ no UNDECLARED file exceeds its baseline (the ledger is the only widening path)
+AssertionError: undeclared overruns:
+  src/domain/institutions/defenseInstitutionBuckets.js: 1 any / 0 suppress against baseline 0/0: expected [ Array(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "src/domain/institutions/defenseInstitutionBuckets.js: 1 any / 0 suppress against baseline 0/0",
++ ]
+
+ ❯ tests/lint/domainAnyCastBaseline.test.js:564:78
+    562|       }
+    563|     }
+    564|     expect(undeclared, `undeclared overruns:\n  ${undeclared.join('\n …
+       |                                                                              ^
+    565|   });
+    566|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  tests/lint/domainAnyCastBaseline.test.js > domain any-cast ratchet — `--update` refuses to bank a declared overrun > ⛔ every LIVE declared row is refused against the LIVE register
+AssertionError: a clean-tip --update would still move the committed register: expected { …(168) } to deeply equal { …(167) }
+
+- Expected
++ Received
+
+@@ -197,10 +197,14 @@
+    },
+    "src/domain/inferSupplyChains.js": {
+      "any": 0,
+      "suppress": 3,
+    },
++   "src/domain/institutions/defenseInstitutionBuckets.js": {
++     "any": 1,
++     "suppress": 0,
++   },
+    "src/domain/institutions/institutionRoster.js": {
+      "any": 1,
+      "suppress": 0,
+    },
+    "src/domain/magicLedger.js": {
+
+ ❯ tests/lint/domainAnyCastBaseline.test.js:694:88
+    692|     // …and what it WOULD write is exactly the register that is commit…
+    693|     // `--update` on a clean tip today is a no-op rather than a 12-ins…
+    694|     expect(next.files, 'a clean-tip --update would still move the comm…
+       |                                                                                        ^
+    695|     expect(next.total).toBe(baseline.total);
+    696|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  4 failed | 15 passed (19)
+   Start at  00:11:49
+   Duration  1.19s (transform 55ms, setup 43ms, import 630ms, tests 332ms, environment 0ms)
+

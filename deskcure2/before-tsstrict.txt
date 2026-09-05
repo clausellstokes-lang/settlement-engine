@@ -1,0 +1,5 @@
+[domain-strict] strict-type regressions in the domain kernel (fix or annotate; do not widen the baseline):
+  src/domain/display/stateProse/defenseStateProse.js: 1 strict errors (baseline 0) — +1
+  src/domain/display/stateProse/generalStateProse.js: 14 strict errors (baseline 0) — +14
+
+Domain strict-error ceiling is 1121. New/worsened files must be strict-clean.

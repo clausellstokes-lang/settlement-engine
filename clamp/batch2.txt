@@ -1,0 +1,15 @@
+tests/domain/npc/paradigmAxisCatalog.test.js
+tests/domain/operationGrammar.test.js
+tests/domain/operationsVoice.test.js
+tests/domain/razingDeterrenceWr8.test.js
+tests/domain/razingExecutionWr8.test.js
+tests/domain/razingWitnessWr8.test.js
+tests/domain/sendTwoDivergenceWr7d.test.js
+tests/domain/sovereigntyIntentWr10.test.js
+tests/domain/subsystemRowsVirtual.test.js
+tests/domain/subsystemRowsWar.test.js
+tests/domain/vengeanceLicenseWr8.test.js
+tests/domain/warAllianceRisk.test.js
+tests/domain/warCoalitionNews.test.js
+tests/domain/warCoalitionRuntimeEvidenceWr6.test.js
+tests/store/warCoalitionProposalLifecycleWr6.test.js

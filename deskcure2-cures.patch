@@ -1,0 +1,200 @@
+diff --git a/src/domain/display/stateProse/defenseStateProse.js b/src/domain/display/stateProse/defenseStateProse.js
+index 112b404f2..330050d9c 100644
+--- a/src/domain/display/stateProse/defenseStateProse.js
++++ b/src/domain/display/stateProse/defenseStateProse.js
+@@ -792,10 +792,21 @@ const DEF8_DECLARED_DARK_POOL = 'multiple stresses, one posture shown';
+ /** The pool declared dark above, exported so the desk suite pins the claim. */
+ export const DEF8_UNREACHABLE_POOLS = Object.freeze([DEF8_DECLARED_DARK_POOL]);
+ 
++/**
++ * A stress entry as this desk reads it.
++ *
++ * ⚠ THE SHAPE NAMES ONE FIELD BECAUSE THIS DESK READS ONE FIELD. `settlement.stress` is
++ * generator-authored and its payload differs by stress type, so `type` — which goes through
++ * `text()` before it indexes anything — is the only field any branch below consults. A wider
++ * shape would assert fields nothing here reads; `any` asserted something worse, that EVERY
++ * field is present and correctly typed, on a value the saves disagree about the shape of.
++ * @typedef {{ type?: unknown }} StressEntry
++ */
++
+ /**
+  * Every stress on a settlement, as an array. Mirrors `DefenseTab`'s own normalisation —
+  * the field is a single object on some saves and an array on others.
+- * @param {unknown} stress @returns {any[]}
++ * @param {unknown} stress @returns {StressEntry[]}
+  */
+ function stressList(stress) {
+   if (Array.isArray(stress)) return stress.filter(Boolean);
+@@ -805,7 +816,7 @@ function stressList(stress) {
+ /**
+  * Is a defence-posture override active, and which stress carries it? Returns the stress
+  * entry the banner would show, or null.
+- * @param {unknown} stress @returns {any|null}
++ * @param {unknown} stress @returns {StressEntry|null}
+  */
+ export function activeDefenceStress(stress) {
+   return stressList(stress).find((entry) => DEFENSE_STRESS_STATUS[text(entry?.type)]) || null;
+diff --git a/src/domain/display/stateProse/generalStateProse.js b/src/domain/display/stateProse/generalStateProse.js
+index 8266ac881..ff5da2be7 100644
+--- a/src/domain/display/stateProse/generalStateProse.js
++++ b/src/domain/display/stateProse/generalStateProse.js
+@@ -58,10 +58,12 @@
+  * falls back to a neighbouring pool: a wrong sentence about a town is worse than no sentence,
+  * and every dead arm this subsystem has shipped was a default wearing a reading's clothes.
+  *
+- * ── THE ONE IMPORT IS FREE, AND IT IS THE CANONICAL LADDER ───────────────────────────
++ * ── THE TWO DOMAIN IMPORTS ARE FREE, AND BOTH ARE CANONICAL LADDERS ──────────────────
+  * `defenseScoreBands.js` is a pure zero-import leaf already reached by three dossier chunks,
+  * so `scoreBand` — the one 65/40/20 cut the PDF and the Defense tab already print — costs
+- * nothing here. `prosperityRank.js` is deliberately NOT imported: this desk needs its
++ * nothing here. `institutionRoster.js` is the estate's single writer of the ruin question and
++ * is reached by the whole roster-reading population already; `marketPoolKey` routes through
++ * it for the reason written at that function. `prosperityRank.js` is deliberately NOT imported: this desk needs its
+  * VOCABULARY, not its arithmetic, and the desk test asserts PROSPERITY_POOL_OF total against
+  * `PROSPERITY_RANK` where a test import costs no production bytes.
+  *
+@@ -69,6 +71,7 @@
+  */
+ import { DOSSIER_STATE_PROSE_GENERAL } from '../../../data/dossierStateProse/general.generated.js';
+ import { scoreBand } from '../defenseScoreBands.js';
++import { liveInstitutions } from '../../institutions/institutionRoster.js';
+ import { readStateProse } from './stateProseKernel.js';
+ import { legibilityRung } from './legibilityRung.js';
+ 
+@@ -676,12 +679,23 @@ const MARKET_NAME = /\b(market|bazaar|exchange|shambles|stalls)\b/i;
+  *
+  * ⚠ `institutions` IS THE CALLER'S READING and is passed in rather than reached for: the
+  * roster is on the settlement the caller already holds, and a desk that re-derived it would
+- * be a second opinion about which rows count.
++ * be a second opinion about WHICH ROWS the caller meant.
++ *
++ * ⛔ THAT IS NOT THE SAME QUESTION AS WHICH ROWS STILL STAND, and the two were fused here.
++ * The roster arrives as the caller chose it, and this desk then asks the ONLY question it is
++ * entitled to ask of it: `liveInstitutions()`, the estate's single writer of the ruin
++ * question. Filtering the roster it was handed is not a second opinion about the roster — the
++ * caller still chooses it — and `hasMarket` is a CREDITING read: it decides whether the town
++ * is described as having a market at all. A calamity-flattened bazaar hosts no trade, and
++ * "the stalls are busy" about a burnt row is a confident falsehood rather than a missing
++ * sentence, which is the difference this whole desk exists to hold.
++ * (Same defect class, same cure, as `standingDefenseForces` in
++ * src/domain/institutions/defenseInstitutionBuckets.js.)
+  * @param {{institutions?: unknown, tradeRouteAccess?: unknown, isEntrepot?: unknown}} state
+  * @returns {string|null}
+  */
+ export function marketPoolKey(state) {
+-  const rows = Array.isArray(state?.institutions) ? state.institutions : [];
++  const rows = liveInstitutions(state);
+   const hasMarket = rows.some((row) => MARKET_NAME.test(text(row?.name)));
+   const key = !hasMarket
+     ? 'NO-MARKET'
+diff --git a/src/domain/institutions/defenseInstitutionBuckets.js b/src/domain/institutions/defenseInstitutionBuckets.js
+index 7f1d2142c..cea71534f 100644
+--- a/src/domain/institutions/defenseInstitutionBuckets.js
++++ b/src/domain/institutions/defenseInstitutionBuckets.js
+@@ -121,15 +121,22 @@ export const DEFENSE_BUCKET_KEYS = Object.freeze(Object.keys(DEFENSE_BUCKET_KEYW
+  * stand. The caller chooses the roster, and that is the honest split — the generator wants
+  * the roster as built, the desk wants the roster as it stands today.
+  *
++ * ⚠ THE MEMBER TYPE IS `unknown` ON PURPOSE, and it is the accurate width rather than a
++ * placeholder. This module asks an institution exactly ONE question — `nativeSemanticName`,
++ * which itself takes `unknown` — so there is nothing narrower to honestly claim. `any[]` said
++ * the opposite: it told every caller that any field it cared to name was there and correctly
++ * typed, which is how a bucket member gets read for a property nothing writes. Under
++ * `unknown` a caller must prove a field before reading it, which is the whole point.
++ *
+  * @param {unknown} institutions the roster to classify
+- * @returns {Record<string, any[]>} one array per bucket, in DEFENSE_BUCKET_KEYS order
++ * @returns {Record<string, unknown[]>} one array per bucket, in DEFENSE_BUCKET_KEYS order
+  */
+ export function partitionDefenseInstitutions(institutions) {
+   const list = Array.isArray(institutions) ? institutions : [];
+   /** @param {unknown} inst @param {ReadonlyArray<string>} keywords */
+   const matches = (inst, keywords) =>
+     keywords.some((kw) => nativeSemanticName(inst).toLowerCase().includes(kw));
+-  /** @type {Record<string, any[]>} */
++  /** @type {Record<string, unknown[]>} */
+   const buckets = {};
+   for (const bucket of DEFENSE_BUCKET_KEYS) {
+     buckets[bucket] = list.filter((inst) => matches(inst, DEFENSE_BUCKET_KEYWORDS[bucket]));
+diff --git a/tests/domain/defenseStateProseDesk.test.js b/tests/domain/defenseStateProseDesk.test.js
+index 077457973..175fd3fbf 100644
+--- a/tests/domain/defenseStateProseDesk.test.js
++++ b/tests/domain/defenseStateProseDesk.test.js
+@@ -822,10 +822,18 @@ describe('DS-DEF-4 — two vocabularies that are EXACT 1:1s, and a covertness ga
+     // the slot; the other two say "the hall" in their own words, so the pool degrades.
+     expect(SLOT_FILL_SHAPES.seat).toBe('proper');
+     expect(SHAPES.shapeOf('seat')).toBe('proper');
++    // ⚠ THE ANCHOR IS A FILLED SLOT, WHICH IS THE MECHANISM UNDER TEST. "No brace survived"
++    // is true of a sentence that was never drawn, so each negative is paired with a fill that
++    // travels the SAME kernel path: the seat's own generated name where one exists, and the
++    // settlement name — `{settlement}`, filled in every variant — where the seat is missing
++    // and the naming variant is the one that drops. If the fill pipeline broke, the anchor is
++    // absent BEFORE the brace question is asked.
+     const named = defenseCriminalProse(underworld({ government: 'Grand Merchant Oligarchy', criminalCaptureState: 'capture' }), null, { seed: 'seat-a', audience: 'dm' });
+-    expect(named.capture.sentence).not.toMatch(/[{}]/);
++    expectAbsentWithAnchor(named.capture.sentence, '{', 'Grand Merchant Oligarchy', 'named seat: open brace');
++    expectAbsentWithAnchor(named.capture.sentence, '}', 'Grand Merchant Oligarchy', 'named seat: close brace');
+     const unnamed = defenseCriminalProse(underworld({ government: undefined, criminalCaptureState: 'capture' }), null, { seed: 'seat-a', audience: 'dm' });
+-    expect(unnamed.capture?.sentence ?? '').not.toMatch(/[{}]/);
++    expectAbsentWithAnchor(unnamed.capture?.sentence ?? '', '{', 'Thornwall', 'unnamed seat: open brace');
++    expectAbsentWithAnchor(unnamed.capture?.sentence ?? '', '}', 'Thornwall', 'unnamed seat: close brace');
+     // The generator's own field is where the name comes from.
+     expect(rulingStructureNamesTheSeat()).toBe(true);
+   });
+@@ -1040,8 +1048,15 @@ describe('DS-DEF-8 — the military-status override, and the pool that must NOT
+     expect(DEF8_UNREACHABLE_POOLS).toEqual(['multiple stresses, one posture shown']);
+     expect(DEF8_POOLS[DEF8_UNREACHABLE_POOLS[0]], 'the declared-dark pool left the corpus').toBeTruthy();
+     for (const type of Object.keys(STRESS_TYPE_MAP)) {
+-      expect(Object.keys(STRESS_TYPE_MAP[type]), `${type} gained a severity field`)
+-        .not.toContain('severity');
++      // ⚠ `probability` IS THE ANCHOR BECAUSE IT IS THE ARGUMENT. The claim above is not
++      // "severity is absent" but "the entry carries RARITY and no rank", so a key set that
++      // still holds `probability` proves the map is live and correctly keyed — and severity's
++      // absence from THAT set is a measurement. Bare, this negative would read identically
++      // against a STRESS_TYPE_MAP that had been emptied or re-shaped out from under it.
++      expectAbsentWithAnchor(
++        Object.keys(STRESS_TYPE_MAP[type]), 'severity', 'probability',
++        `${type} gained a severity field`,
++      );
+     }
+     // The claim it would make is false of the pick the banner actually performs: with two
+     // stresses the FIRST is shown, whatever its weight.
+diff --git a/tests/domain/generalStateProseDesk.test.js b/tests/domain/generalStateProseDesk.test.js
+index 7be3c2003..0d35bc61a 100644
+--- a/tests/domain/generalStateProseDesk.test.js
++++ b/tests/domain/generalStateProseDesk.test.js
+@@ -375,6 +375,34 @@ describe('DS-GEN-12 / DS-GEN-13 / DS-GEN-17 — three total partitions', () => {
+     }
+   });
+ 
++  it('⛔ THE MARKET READ IS RUIN-FILTERED — a burnt bazaar is not a market (DESKCURE-2)', () => {
++    // THE CURE THIS PINS, and the behaviour shift it carries. `marketPoolKey` read the raw
++    // roster, so a calamity-flattened bazaar still credited the town with a market and the
++    // block printed MARKET-OPEN over a heap of ash — a confident falsehood, not a missing
++    // sentence. It now routes through `liveInstitutions()`, the estate's single writer of the
++    // ruin question, and the ruin-filter walker sees it as COMPLIANT rather than exempt.
++    //
++    // ⚠ THIS ARM IS THE FALSIFIER, so it is written in the two directions that a bare
++    // "ruined reads NO-MARKET" cannot distinguish: the SAME row reads MARKET-OPEN while it
++    // stands and NO-MARKET once stamped. A one-sided assertion here would pass just as
++    // happily if `marketPoolKey` had been broken into always answering NO-MARKET.
++    const bazaar = (extra) => [{ name: 'Grand bazaar', ...extra }];
++    expect(marketPoolKey({ institutions: bazaar({}), tradeRouteAccess: 'road' }))
++      .toBe('MARKET-OPEN');
++    // Both ruin spellings the estate stamps, each against that same standing reading.
++    expect(marketPoolKey({ institutions: bazaar({ status: 'ruined' }), tradeRouteAccess: 'road' }))
++      .toBe('NO-MARKET');
++    expect(marketPoolKey({ institutions: bazaar({ _worldPulseInactive: true }), tradeRouteAccess: 'road' }))
++      .toBe('NO-MARKET');
++    // A ruined market does not become an entrepôt either: NO-MARKET is tested first, so the
++    // ruin verdict survives the key that would otherwise outrank it.
++    expect(marketPoolKey({ institutions: bazaar({ status: 'ruined' }), isEntrepot: true, tradeRouteAccess: 'road' }))
++      .toBe('NO-MARKET');
++    // A live row alongside a ruined one still carries the town — the filter is per ROW.
++    expect(marketPoolKey({ institutions: [...bazaar({ status: 'ruined' }), { name: 'Weekly market' }], tradeRouteAccess: 'road' }))
++      .toBe('MARKET-OPEN');
++  });
++
+   it('THE MARKET: four pools, and the evaluation order is driven rather than described', () => {
+     const stalls = [{ name: 'Weekly market' }];
+     // NO-MARKET first — a town with no market-class row is not an entrepôt of its own stalls.

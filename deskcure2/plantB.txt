@@ -1,0 +1,35 @@
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/laneINTEG-tree
+
+ ❯ tests/lint/negativeAssertionAnchor.walker.test.js (9 tests | 1 failed) 13ms
+     × no NEW un-anchored negative assertion anywhere in the test corpus 8ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/negativeAssertionAnchor.walker.test.js > negative-assertion anchor walker (habitat removal) > no NEW un-anchored negative assertion anywhere in the test corpus
+AssertionError: expected [ Array(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "tests/domain/defenseStateProseDesk.test.js: 1 un-anchored negative assertion(s) at line(s) 1057 (frozen ceiling 0). A bare not.toContain/not.toMatch/not.toHaveProperty passes just as happily when the COLLECTION drifted away as when the member was correctly excluded — it outlives the regression it was written to catch. Pair it with a liveness anchor: expectPresentThenAbsent(before, after, member) for a removal, expectAbsentWithAnchor(collection, member, anchor) for a selection (tests/helpers/anchoredNegatives.js). If the anchor is genuinely structural, say why on the line: // anchored: <reason>.",
++ ]
+
+ ❯ tests/lint/negativeAssertionAnchor.walker.test.js:827:24
+    825|       }
+    826|     }
+    827|     expect(violations).toEqual([]);
+       |                        ^
+    828|   });
+    829|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 8 passed (9)
+   Start at  00:12:00
+   Duration  533ms (transform 22ms, setup 21ms, import 411ms, tests 13ms, environment 0ms)
+

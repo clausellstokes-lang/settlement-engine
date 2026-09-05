@@ -1,0 +1,80 @@
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/laneCLAMP-tree
+
+ ❯ tests/lint/clampPrimitiveBaseline.test.js (2 tests | 1 failed) 8ms
+     × baseline exactly matches the files that still define a local clamp/clamp01 7ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/clampPrimitiveBaseline.test.js > clamp primitive baseline ratchet (code-quality-4) > baseline exactly matches the files that still define a local clamp/clamp01
+AssertionError: expected [ …(62) ] to deeply equal [ …(72) ]
+
+- Expected
++ Received
+
+@@ -23,26 +23,20 @@
+    "src/domain/spatial/moralDrift.js",
+    "src/domain/spatial/pestilence.js",
+    "src/domain/spatial/smuggle.js",
+    "src/domain/spatial/supplyShipments.js",
+    "src/domain/state/bands.js",
+-   "src/domain/townCartography/cartographyBuildings.js",
+-   "src/domain/townCartography/cartographyMultiplicity.js",
+    "src/domain/worldPulse/armyTransitKernel.js",
+    "src/domain/worldPulse/attrition.js",
+    "src/domain/worldPulse/beliefMap.js",
+    "src/domain/worldPulse/causeLifecycle.js",
+    "src/domain/worldPulse/clergyTraitPlane.js",
+-   "src/domain/worldPulse/conquestExecution.js",
+-   "src/domain/worldPulse/conquestFeasibility.js",
+    "src/domain/worldPulse/conquestFeeds.js",
+-   "src/domain/worldPulse/conquestIntent.js",
+    "src/domain/worldPulse/coup.js",
+    "src/domain/worldPulse/deityStance.js",
+    "src/domain/worldPulse/deityStanceLane.js",
+    "src/domain/worldPulse/deploymentReturn.js",
+-   "src/domain/worldPulse/dispositionLedger.js",
+    "src/domain/worldPulse/fidelityNoise.js",
+    "src/domain/worldPulse/flows.js",
+    "src/domain/worldPulse/institutionLifecycle.js",
+    "src/domain/worldPulse/institutionTolerance.js",
+    "src/domain/worldPulse/martialReadiness.js",
+@@ -54,21 +48,17 @@
+    "src/domain/worldPulse/moralInstitutionPressure.js",
+    "src/domain/worldPulse/partyImpact.js",
+    "src/domain/worldPulse/pestilenceKernel.js",
+    "src/domain/worldPulse/piety.js",
+    "src/domain/worldPulse/populationDynamics.js",
+-   "src/domain/worldPulse/razing.js",
+-   "src/domain/worldPulse/razingExecution.js",
+-   "src/domain/worldPulse/razingWitness.js",
+    "src/domain/worldPulse/reinforcement.js",
+    "src/domain/worldPulse/relationshipHierarchy.js",
+    "src/domain/worldPulse/relationshipMemory.js",
+    "src/domain/worldPulse/relationshipState.js",
+    "src/domain/worldPulse/religionLegitimacy.js",
+    "src/domain/worldPulse/sovereigntyAppraisal.js",
+    "src/domain/worldPulse/supplyCompleteness.js",
+    "src/domain/worldPulse/supplyQuality.js",
+    "src/domain/worldPulse/tradeSalience.js",
+-   "src/domain/worldPulse/warAllianceRisk.js",
+    "src/generators/helpers.js",
+    "src/lib/relationshipGraph.js",
+  ]
+
+ ❯ tests/lint/clampPrimitiveBaseline.test.js:86:22
+     84|     // A NEW definition missing from the baseline, or a STALE entry wh…
+     85|     // migrated to the kernel import — either direction fails here.
+     86|     expect(baseline).toEqual(currentDefFiles);
+       |                      ^
+     87|   });
+     88|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 2 passed (3)
+      Tests  1 failed | 22 passed (23)
+   Start at  00:09:46
+   Duration  487ms (transform 54ms, setup 70ms, import 379ms, tests 34ms, environment 0ms)
+

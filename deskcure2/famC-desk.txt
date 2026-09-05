@@ -1,0 +1,9 @@
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/laneINTEG-tree
+
+
+ Test Files  1 passed (1)
+      Tests  30 passed (30)
+   Start at  00:06:41
+   Duration  2.74s (transform 673ms, setup 25ms, import 918ms, tests 1.70s, environment 0ms)
+

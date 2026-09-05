@@ -1,0 +1,40 @@
+FAIL  tests/lint/clampPrimitiveBaseline.test.js > clamp primitive baseline ratchet (code-quality-4) > baseline exactly matches the files that still define a local clamp/clamp01
+FAIL  tests/lint/domainAnyCastBaseline.test.js > domain any-cast ratchet — `--update` refuses to bank a declared overrun > ⛔ every LIVE declared row is refused against the LIVE register
+FAIL  tests/lint/domainAnyCastBaseline.test.js > domain any-cast ratchet — frozen baseline governance > baseline exactly matches the tree (airtight against any drift mode)
+FAIL  tests/lint/domainAnyCastBaseline.test.js > domain any-cast ratchet — frozen baseline governance > no file exceeds its baseline (new files get 0) — fix the types, do not widen
+FAIL  tests/lint/domainAnyCastBaseline.test.js > domain any-cast ratchet — the declared-overrun ledger is honest > ⛔ no UNDECLARED file exceeds its baseline (the ledger is the only widening path)
+FAIL  tests/lint/negativeAssertionAnchor.walker.test.js > negative-assertion anchor walker (habitat removal) > no NEW un-anchored negative assertion anywhere in the test corpus
+FAIL  tests/lint/observedShapeReaders.walker.test.js > reader-with-no-writer ratchet: the live scan > A1/A7: schema-7 filters narrow ordinary noise while explained writers stay banked live
+FAIL  tests/lint/observedShapeReaders.walker.test.js > reader-with-no-writer ratchet: the live scan > SHRINK-ONLY: no file exceeds its frozen ceiling, and no row has vanished
+FAIL  tests/lint/proseNumerics.test.js > prose numerics live-tree ratchet (exact legacy identity, shrink-only) > path + line + category + snippet debt exactly matches the committed baseline
+FAIL  tests/lint/proseNumerics.test.js > prose numerics live-tree ratchet (exact legacy identity, shrink-only) > the baseline itself has exact, unique, source-verifiable identities
+FAIL  tests/lint/ruinFilterRoster.walker.test.js > ruin-filter roster ratchet (structural-prevention Pattern 2) > every `.institutions` reader is COMPLIANT or EXEMPT
+FAIL  tests/lint/ruinFilterRoster.walker.test.js > ruin-filter roster ratchet (structural-prevention Pattern 2) > the scan reads CODE — a `.institutions` in a comment or a quoted string never enrols
+FAIL  tests/lint/sovereigntyLightingContract.walker.test.js > the sovereignty lighting condition — a marker is EVIDENCE only in a live title > THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed
+FAIL  tests/lint/tuningRegister.walker.test.js > tuning register — the inventory is frozen and honest > no file carries more bare decimals than the inventory banked
+FAIL  tests/lint/tuningRegister.walker.test.js > tuning register — the inventory is frozen and honest > no file carries more unregistered named constants than the inventory banked
+FAIL  tests/lint/tuningRegister.walker.test.js > tuning register — the inventory is frozen and honest > the six ceilings never rise
+FAIL  tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the MUTANTS > THE GROWTH LAW IS EXECUTED: a live-derived register is green and ONE planted dark identity reds
+FAIL  tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the MUTANTS > THE SWAP MUTANT: a new dark identity at constant count reds with its identity named
+FAIL  tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the frozen register > the surfaceReach grammar round-trips: parse(format(reach)) equals reach for every LIT identity
+FAIL  tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the live judgment > the banked cohort is exact — a member now LIT or no longer written is stale, never silently spent
+× tests/lint/clampPrimitiveBaseline.test.js > clamp primitive baseline ratchet (code-quality-4) > baseline exactly matches the files that still define a local clamp/clamp01 9ms
+× tests/lint/domainAnyCastBaseline.test.js > domain any-cast ratchet — `--update` refuses to bank a declared overrun > ⛔ every LIVE declared row is refused against the LIVE register 7ms
+× tests/lint/domainAnyCastBaseline.test.js > domain any-cast ratchet — frozen baseline governance > baseline exactly matches the tree (airtight against any drift mode) 12ms
+× tests/lint/domainAnyCastBaseline.test.js > domain any-cast ratchet — frozen baseline governance > no file exceeds its baseline (new files get 0) — fix the types, do not widen 9ms
+× tests/lint/domainAnyCastBaseline.test.js > domain any-cast ratchet — the declared-overrun ledger is honest > ⛔ no UNDECLARED file exceeds its baseline (the ledger is the only widening path) 1ms
+× tests/lint/negativeAssertionAnchor.walker.test.js > negative-assertion anchor walker (habitat removal) > no NEW un-anchored negative assertion anywhere in the test corpus 12ms
+× tests/lint/observedShapeReaders.walker.test.js > reader-with-no-writer ratchet: the live scan > A1/A7: schema-7 filters narrow ordinary noise while explained writers stay banked live 2ms
+× tests/lint/observedShapeReaders.walker.test.js > reader-with-no-writer ratchet: the live scan > SHRINK-ONLY: no file exceeds its frozen ceiling, and no row has vanished 41ms
+× tests/lint/proseNumerics.test.js > prose numerics live-tree ratchet (exact legacy identity, shrink-only) > path + line + category + snippet debt exactly matches the committed baseline 60ms
+× tests/lint/proseNumerics.test.js > prose numerics live-tree ratchet (exact legacy identity, shrink-only) > the baseline itself has exact, unique, source-verifiable identities 69ms
+× tests/lint/ruinFilterRoster.walker.test.js > ruin-filter roster ratchet (structural-prevention Pattern 2) > every `.institutions` reader is COMPLIANT or EXEMPT 9ms
+× tests/lint/ruinFilterRoster.walker.test.js > ruin-filter roster ratchet (structural-prevention Pattern 2) > the scan reads CODE — a `.institutions` in a comment or a quoted string never enrols 1ms
+× tests/lint/sovereigntyLightingContract.walker.test.js > the sovereignty lighting condition — a marker is EVIDENCE only in a live title > THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed 54ms
+× tests/lint/tuningRegister.walker.test.js > tuning register — the inventory is frozen and honest > no file carries more bare decimals than the inventory banked 9ms
+× tests/lint/tuningRegister.walker.test.js > tuning register — the inventory is frozen and honest > no file carries more unregistered named constants than the inventory banked 2ms
+× tests/lint/tuningRegister.walker.test.js > tuning register — the inventory is frozen and honest > the six ceilings never rise 1ms
+× tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the MUTANTS > THE GROWTH LAW IS EXECUTED: a live-derived register is green and ONE planted dark identity reds 412ms
+× tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the MUTANTS > THE SWAP MUTANT: a new dark identity at constant count reds with its identity named 245ms
+× tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the frozen register > the surfaceReach grammar round-trips: parse(format(reach)) equals reach for every LIT identity 44ms
+× tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the live judgment > the banked cohort is exact — a member now LIT or no longer written is stale, never silently spent 6ms

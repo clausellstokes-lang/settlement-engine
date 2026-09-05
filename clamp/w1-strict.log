@@ -1,0 +1,1 @@
+[domain-strict] ✓ no regressions — and 1 fewer errors than baseline (1120 < 1121). Run `npm run typecheck:domain:strict:update` to tighten the ratchet.

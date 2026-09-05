@@ -1,0 +1,13 @@
+FAIL  tests/lint/clampPrimitiveBaseline.test.js > clamp primitive baseline ratchet (code-quality-4) > baseline exactly matches the files that still define a local clamp/clamp01
+FAIL  tests/lint/observedShapeReaders.walker.test.js > reader-with-no-writer ratchet: the live scan > A1/A7: schema-7 filters narrow ordinary noise while explained writers stay banked live
+FAIL  tests/lint/observedShapeReaders.walker.test.js > reader-with-no-writer ratchet: the live scan > SHRINK-ONLY: no file exceeds its frozen ceiling, and no row has vanished
+FAIL  tests/lint/proseNumerics.test.js > prose numerics live-tree ratchet (exact legacy identity, shrink-only) > path + line + category + snippet debt exactly matches the committed baseline
+FAIL  tests/lint/proseNumerics.test.js > prose numerics live-tree ratchet (exact legacy identity, shrink-only) > the baseline itself has exact, unique, source-verifiable identities
+FAIL  tests/lint/sovereigntyLightingContract.walker.test.js > the sovereignty lighting condition — a marker is EVIDENCE only in a live title > THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed
+FAIL  tests/lint/tuningRegister.walker.test.js > tuning register — the inventory is frozen and honest > no file carries more bare decimals than the inventory banked
+FAIL  tests/lint/tuningRegister.walker.test.js > tuning register — the inventory is frozen and honest > no file carries more unregistered named constants than the inventory banked
+FAIL  tests/lint/tuningRegister.walker.test.js > tuning register — the inventory is frozen and honest > the six ceilings never rise
+FAIL  tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the MUTANTS > THE GROWTH LAW IS EXECUTED: a live-derived register is green and ONE planted dark identity reds
+FAIL  tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the MUTANTS > THE SWAP MUTANT: a new dark identity at constant count reds with its identity named
+FAIL  tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the frozen register > the surfaceReach grammar round-trips: parse(format(reach)) equals reach for every LIT identity
+FAIL  tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the live judgment > the banked cohort is exact — a member now LIT or no longer written is stale, never silently spent

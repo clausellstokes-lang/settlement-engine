@@ -1,0 +1,35 @@
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/laneCLAMP-tree
+
+ ❯ tests/domain/dispositionChannels.test.js (16 tests | 1 failed) 70ms
+     × has no graph, relationship, candidate, or target-selector import surface 8ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/domain/dispositionChannels.test.js > WR-2 disposition profile — bounded bars and ratified deity domains > has no graph, relationship, candidate, or target-selector import surface
+AssertionError: expected [ '../../kernel/math.js', …(1) ] to deeply equal [ './dispositionLedger.js' ]
+
+- Expected
++ Received
+
+  [
++   "../../kernel/math.js",
+    "./dispositionLedger.js",
+  ]
+
+ ❯ tests/domain/dispositionChannels.test.js:187:21
+    185|     const source = readFileSync(resolve(process.cwd(), 'src/domain/wor…
+    186|     const imports = [...source.matchAll(/from\s+['"]([^'"]+)['"]/g)].m…
+    187|     expect(imports).toEqual(['./dispositionLedger.js']);
+       |                     ^
+    188|     expect(imports.some((path) => /graph|relationship|candidate|target…
+    189|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 21 passed (22)
+      Tests  1 failed | 690 passed (691)
+   Start at  00:12:07
+   Duration  23.14s (transform 2.92s, setup 515ms, import 16.52s, tests 34.71s, environment 1ms)
+

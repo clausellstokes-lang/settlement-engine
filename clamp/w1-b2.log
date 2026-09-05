@@ -1,0 +1,9 @@
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/laneCLAMP-tree
+
+
+ Test Files  15 passed (15)
+      Tests  348 passed (348)
+   Start at  00:13:16
+   Duration  23.86s (transform 10.06s, setup 558ms, import 25.66s, tests 37.06s, environment 1ms)
+

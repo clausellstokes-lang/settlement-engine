@@ -1,0 +1,51 @@
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/laneINTEG-tree
+
+ ❯ tests/lint/ruinFilterRoster.walker.test.js (12 tests | 1 failed) 15ms
+     × the scan reads CODE — a `.institutions` in a comment or a quoted string never enrols 6ms
+ ❯ tests/domain/generalStateProseDesk.test.js (31 tests | 1 failed) 2479ms
+     × ⛔ THE MARKET READ IS RUIN-FILTERED — a burnt bazaar is not a market (DESKCURE-2) 9ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/domain/generalStateProseDesk.test.js > DS-GEN-12 / DS-GEN-13 / DS-GEN-17 — three total partitions > ⛔ THE MARKET READ IS RUIN-FILTERED — a burnt bazaar is not a market (DESKCURE-2)
+AssertionError: expected 'MARKET-OPEN' to be 'NO-MARKET' // Object.is equality
+
+Expected: "NO-MARKET"
+Received: "MARKET-OPEN"
+
+ ❯ tests/domain/generalStateProseDesk.test.js:394:8
+    392|     // Both ruin spellings the estate stamps, each against that same s…
+    393|     expect(marketPoolKey({ institutions: bazaar({ status: 'ruined' }),…
+    394|       .toBe('NO-MARKET');
+       |        ^
+    395|     expect(marketPoolKey({ institutions: bazaar({ _worldPulseInactive:…
+    396|       .toBe('NO-MARKET');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/lint/ruinFilterRoster.walker.test.js > ruin-filter roster ratchet (structural-prevention Pattern 2) > the scan reads CODE — a `.institutions` in a comment or a quoted string never enrols
+AssertionError: expected 93 to be 92 // Object.is equality
+
+- Expected
++ Received
+
+- 92
++ 93
+
+ ❯ tests/lint/ruinFilterRoster.walker.test.js:416:28
+    414|     // used to answer "what can this town field today".
+    415|     // Read from this arm's own failure message ("expected 92 to be 93…
+    416|     expect(readers.length).toBe(92);
+       |                            ^
+    417|   });
+    418|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  2 failed | 41 passed (43)
+   Start at  00:11:26
+   Duration  4.79s (transform 1.79s, setup 69ms, import 5.39s, tests 2.49s, environment 0ms)
+
