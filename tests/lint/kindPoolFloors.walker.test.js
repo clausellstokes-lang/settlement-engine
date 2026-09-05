@@ -151,7 +151,11 @@ const LEGACY_UNVOICED_TOKENS = 274;
 // routed difference below untouched at 8 — the opposite road from IN-1c-a's dossier line. The
 // `faith_` family prefix would have routed the token free; the EXACT_SECTION row is what keeps
 // this census honest about a kind that genuinely files a desk.
-const ROUTED_TOKENS = 379;
+// +1 at ENC-4: `chance_meeting_recorded`, the meeting neither court arranged. A desk-BEARING row
+// on ROAD B, so it moves this figure and REGISTERED_KIND_COUNT TOGETHER and leaves the
+// registered-minus-routed difference below untouched at 8 — WF-8a's road, not IN-1c-a's. The
+// prefix `chance_meeting_` was NOT minted: the exact row is the refusal of the cheap door.
+const ROUTED_TOKENS = 380;
 // +1 at IN-0C: the eighth GR-0 lifecycle pool (`treaty_disclosure_opened`).
 // +1 at GR-4b: the ninth (`disavowed_by_succession`), the registry's first `major` row.
 // +1 at GR-4b-iii-a: the tenth (`succession_question_opened`), a `notable` row.
@@ -175,7 +179,10 @@ const ROUTED_TOKENS = 379;
 // +1 at WF-8a: `faith_last_altar_dark`, the whole of the estate's SIXTH registry family (FAITH)
 // and its first row. Unlike `mirror_standing_line` above it this row CARRIES a desk, so
 // ROUTED_TOKENS moves with it and the divergence below stays at 8.
-const REGISTERED_KIND_COUNT = 113;
+// +1 at ENC-4: `chance_meeting_recorded`, the whole of the estate's SEVENTH registry family
+// (CHANCE_MEETING) and its first row. Like `faith_last_altar_dark` above it this row CARRIES a
+// desk, so ROUTED_TOKENS moves with it and the divergence below stays at 8.
+const REGISTERED_KIND_COUNT = 114;
 
 const violations = floorViolations(ALL_ROWS, { declaredExceptions: DECLARED_EXCEPTIONS });
 const unvoiced = Object.keys(EXACT_SECTION).filter((token) => !REGISTERED_KINDS.has(token));
@@ -184,7 +191,7 @@ describe('SP-E frequency-scaled floors — anti-vacuity anchors', () => {
   test('every registry is live and the denominator is real', () => {
     // Nothing below means anything if a registry emptied or an import went stale: a violation
     // list is trivially short when there is nothing to violate.
-    expect(REGISTRIES).toHaveLength(11);
+    expect(REGISTRIES).toHaveLength(12);
     for (const [name, rows] of REGISTRIES) {
       expect(rows.length, `${name}: registry is empty`).toBeGreaterThanOrEqual(1);
     }
@@ -206,7 +213,16 @@ describe('SP-E frequency-scaled floors — anti-vacuity anchors', () => {
     // ⛔ THE SHRINK-BACK IS A RECORDED OBLIGATION of the next WF-8 member that takes FAITH to
     // five rows or more: strike FAITH from this list in that same commit. It is deferred and
     // written down here rather than dropped.
-      .toEqual(['INFORMATION', 'FAITH']);
+    // ⭐ THE THIRD SMALL FAMILY, AND ITS ADMISSION IS AGAIN THE REVIEWED ACT THIS LIST EXISTS TO
+    // FORCE. ENC-4 mints CHANCE_MEETING as a ONE-ROW family because the annex's second authored
+    // kind (`chance_meeting_exposed`) cannot be wired from the stage's typed seed: that seed
+    // carries no approach DIRECTION, so `{npc}` (who offered) and `{counterpart}` (who refused)
+    // have no honest assignment. Registering it anyway would be a chartered orphan of exactly the
+    // kind IN-1c-a refused. The ORDER below is the registry declaration order and was taken from
+    // this arm's own output, never predicted.
+    // ⛔ THE SHRINK-BACK IS A RECORDED OBLIGATION of the member that takes CHANCE_MEETING to five
+    // rows or more: strike it from this list in that same commit.
+      .toEqual(['INFORMATION', 'FAITH', 'CHANCE_MEETING']);
     expect(ALL_ROWS).toHaveLength(REGISTERED_KIND_COUNT);
     expect(REGISTERED_KINDS.size, 'two registries claim the same kind').toBe(REGISTERED_KIND_COUNT);
     expect(Object.keys(EXACT_SECTION)).toHaveLength(ROUTED_TOKENS);
