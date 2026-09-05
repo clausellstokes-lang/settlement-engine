@@ -8,7 +8,22 @@ program's decisions; SPEC fold labels §§277–§286 are design sections, not m
 The repo is authoritative; trust executed evidence over any summary including
 this one.**
 
-## ⭐⭐⭐⭐⭐ PICKUP AT §897 — **THE ANCHORS CONSIST IS DOWN (4 cars, `df7cdd37e` -> `fd8b6df00`).** The seat is Fable 5.1 (chairs, architects, validates); every lane is Opus (`model: "opus"`), implements and verifies.
+## ⭐⭐⭐⭐⭐ PICKUP AT §898 — **THE PROSE CONSIST IS DOWN — lighting POSITION 0 lands; the L-PROBE dark arm (chair) measures next, on this tree** (`fd8b6df00` -> `5e28d5c83`).
+
+**Product** `5e28d5c83`, sealed `refs/preserve/landing-prose-2026-09-05`. The declared same-seed text shift (133 engine-side paths) is entered in `docs/GOLDEN_SHIFT_LEDGER.md`.
+
+### ⭐ NEXT, IN ORDER
+1. **L-PROBE** — the chair runs the dark-arm battery (`$SC/lprobe/run.sh` from L-PROBE-KIT) on THIS tree: golden master 3/3 + 0/525, per-preset certification, the OSR presence dump before any regeneration, the lighting tuple, the stability rosters, REAL-birth fixtures per preset, 52-tick hashes, the hashed-chunk listing diff (a build). STOP: eager catalog or a listing diff over (margin − 100 B).
+2. **L-HOMES** (9 cars, `briefs/brief-L-HOMES.md`, CAR 1 first) · **SEAT-78** beside it · then L-DEFAULT → L-UI-MAT → the eleven declarations + registers.
+3. The queue (`LANE-QUEUE.md`): OSR-SCHEMA17 → the desk consist → DESK-ECON2 (PDFDRIFT is WITHDRAWN; its residue is an OWNER row on the paid-rights floor) → DESK-DEF2 → HORIZON-B1 → DESK-9 → B2 → B6 → ENC-4 → DOCKET.
+### 🟠 OWNER'S DESK (new rows this landing; nothing built on them until the word)
+- **The PROSE window's golden fixture waits for your genesis signing** (the freeze act, §881.4) — or, if you prefer it sooner, your sentence in `docs/shift-records/_TEMPLATE.json`'s form ("one word charters it sooner"): the chair executes the door the same day. Until then the arm is banked, owner-gated, declared.
+- **Does the paid-rights FLOOR include the W-ARMS arms?** A frozen (plan-lapsed) save may still export a PDF (AUDIT-2.2); once arms ship, that export is un-quartered while a live export is quartered — reachable only across time. Product scope: the owner's. Until ruled, the arms ride the LIVE surfaces only.
+- **DS-GEN-1** (tension `severity` is an ARRAY on 48/48 — a property of the tension TYPE, not a reading of the town): the cure is generation-side and moves generated output — owner-signed.
+- **DS-FTH-2's PUBLIC / SHARED DOSSIER pool** is authored for the one reader §885.3 forbids; lighting it is the owner's.
+4. Then the owner's WALK + one regen → the exhaustive review → fix cars → FULL STOP before the soak.
+
+## (superseded) PICKUP AT §897 — **THE ANCHORS CONSIST IS DOWN (4 cars, `df7cdd37e` -> `fd8b6df00`).** The seat is Fable 5.1 (chairs, architects, validates); every lane is Opus (`model: "opus"`), implements and verifies.
 
 **Product** `claude/composite-r4` = `fd8b6df00`, sealed `refs/preserve/landing-anchors-2026-09-05`. **Ledger** = this act. The chair kit is sealed at `refs/preserve/chair-tools-2026-09-05` (restore: `git archive <ref> | tar -x -C $SC`); the resume note at `refs/preserve/resume-note-2026-09-05`.
 
