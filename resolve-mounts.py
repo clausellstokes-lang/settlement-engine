@@ -93,3 +93,15 @@ if fail:
     print('  REFUSED — nothing written'); sys.exit(1)
 io.open(path, 'w', encoding='utf-8').write(out)
 print('  ✅ law holds; written')
+
+# POST-WRITE PARSE CHECK (added 09-05 after a text merge dropped a `}),` closer between two mount rows and the script
+# still reported "law holds; written" — the law was checked on the in-memory model, not the file).
+import subprocess as _sp, sys as _sys
+try:
+    _mp = _sys.argv[1]
+    _r = _sp.run(["node", "--check", _mp], capture_output=True, text=True)
+    if _r.returncode != 0:
+        print("  ⛔ POST-WRITE: the written registry does not parse:\n" + _r.stderr[:600]); _sys.exit(4)
+    print("  post-write: node --check OK")
+except FileNotFoundError:
+    print("  ⚠ post-write check skipped: node not found"); _sys.exit(4)
