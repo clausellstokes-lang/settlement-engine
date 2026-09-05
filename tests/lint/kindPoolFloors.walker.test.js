@@ -71,7 +71,23 @@ import { EXACT_SECTION } from '../../src/domain/realm/heraldRouting.js';
 // THE ONE ROSTER (ODQ §356.2): this list used to be transcribed here AND, by hand, inside
 // tests/domain/pantheon.test.js's A5. Both now read the same frozen source, so a registry
 // that joins or leaves breaks both consumers identically instead of drifting one of them.
-import { KIND_REGISTRIES } from '../helpers/kindRegistryRoster.js';
+// ⭐⭐ AND THE SIX FIGURES FOLLOWED THE LIST, 2026-09-05, because leaving them literal in EACH
+// consumer forked them TWICE (WF-8a, then ENC-4, whose miss landed four RED arms in A5 unseen).
+// They are still LITERAL — a freeze derived from the tree is an assertion that cannot fail —
+// but they are literal in ONE place now, and this file is a READER of that place.
+// ⚠⚠ FOUR OF THEM ARE STILL SPELLED BELOW, AND THAT DUPLICATION IS DELIBERATE AND LOAD-BEARING.
+// scripts/base-state-capsule.mjs PARSES THIS FILE'S SOURCE for `REGISTERED_KIND_COUNT` (:384),
+// `LEGACY_UNVOICED_TOKENS` (:387), the `expect(REGISTRIES).toHaveLength(n)` identity (:388) and
+// the `routedAndRegistered` `.toBe(n)` identity (:385) — `constNumber`/`assertionNumber` FAIL
+// CLOSED on anything that is not a bare numeric literal — and tests/scripts/baseStateCapsule
+// .test.js (:155-:159) re-reads the same four by REGEX with a second engine. Replacing those
+// four numerals with roster reads would break the capsule generator AND its battery, and would
+// falsify the capsule's own provenance sentence ("every PINNED row parsed out of the test that
+// asserts it"). ⛔ So each of the four is BOUND to the roster by an executed equality instead:
+// roster == this file == the live tree, all three asserted, so a registering commit that moves
+// one side alone REDS. The equalities are NOT vacuous — the two literals live in two files and
+// diverging is exactly what they did, twice.
+import { KIND_REGISTRIES, KIND_REGISTRATION_FREEZES } from '../helpers/kindRegistryRoster.js';
 
 /**
  * The estate-wide denominator, now DERIVED rather than transcribed.
@@ -155,7 +171,10 @@ const LEGACY_UNVOICED_TOKENS = 274;
 // on ROAD B, so it moves this figure and REGISTERED_KIND_COUNT TOGETHER and leaves the
 // registered-minus-routed difference below untouched at 8 — WF-8a's road, not IN-1c-a's. The
 // prefix `chance_meeting_` was NOT minted: the exact row is the refusal of the cheap door.
-const ROUTED_TOKENS = 380;
+// ⭐ ROSTER-ONLY. Unlike the four below, no source scanner reads this constant: the capsule
+// takes `routedTokens` MEASURED from src/domain/realm/heraldRouting.js (:95/:383), never from
+// here. So the literal lives in the roster and nowhere else.
+const ROUTED_TOKENS = KIND_REGISTRATION_FREEZES.routedTokens;
 // +1 at IN-0C: the eighth GR-0 lifecycle pool (`treaty_disclosure_opened`).
 // +1 at GR-4b: the ninth (`disavowed_by_succession`), the registry's first `major` row.
 // +1 at GR-4b-iii-a: the tenth (`succession_question_opened`), a `notable` row.
@@ -191,7 +210,16 @@ describe('SP-E frequency-scaled floors — anti-vacuity anchors', () => {
   test('every registry is live and the denominator is real', () => {
     // Nothing below means anything if a registry emptied or an import went stale: a violation
     // list is trivially short when there is nothing to violate.
+    // ⛔ THE `12` IS PARSED OUT OF THIS LINE by scripts/base-state-capsule.mjs (:388) and
+    // re-read by regex in tests/scripts/baseStateCapsule.test.js (:157). It must stay a bare
+    // numeric literal in this exact spelling; the roster equality on the next line is what
+    // keeps it from forking away from tests/domain/pantheon.test.js.
     expect(REGISTRIES).toHaveLength(12);
+    expect(
+      KIND_REGISTRATION_FREEZES.registries,
+      'the roster and this walker disagree on the registry count — move BOTH in the registering'
+      + ' commit (tests/helpers/kindRegistryRoster.js is the roster of record)',
+    ).toBe(REGISTRIES.length);
     for (const [name, rows] of REGISTRIES) {
       expect(rows.length, `${name}: registry is empty`).toBeGreaterThanOrEqual(1);
     }
@@ -222,9 +250,15 @@ describe('SP-E frequency-scaled floors — anti-vacuity anchors', () => {
     // this arm's own output, never predicted.
     // ⛔ THE SHRINK-BACK IS A RECORDED OBLIGATION of the member that takes CHANCE_MEETING to five
     // rows or more: strike it from this list in that same commit.
-      .toEqual(['INFORMATION', 'FAITH', 'CHANCE_MEETING']);
+    // ⭐ ROSTER-ONLY, like ROUTED_TOKENS: no scanner reads this list out of this file, so the
+    // reviewed act of admitting a small family is recorded in the roster of record instead.
+      .toEqual([...KIND_REGISTRATION_FREEZES.smallFamilies]);
     expect(ALL_ROWS).toHaveLength(REGISTERED_KIND_COUNT);
     expect(REGISTERED_KINDS.size, 'two registries claim the same kind').toBe(REGISTERED_KIND_COUNT);
+    expect(
+      KIND_REGISTRATION_FREEZES.registeredKinds,
+      'the roster and this walker disagree on the registered-kind census — move BOTH',
+    ).toBe(REGISTERED_KIND_COUNT);
     expect(Object.keys(EXACT_SECTION)).toHaveLength(ROUTED_TOKENS);
   });
 
@@ -356,6 +390,10 @@ describe('SP-E frequency-scaled floors — the unvoiced-token backlog', () => {
     // Proven live: the set is genuinely large today, so the ceiling measures a real inventory.
     expect(unvoiced.length).toBeGreaterThanOrEqual(1);
     expect(unvoiced.length).toBe(LEGACY_UNVOICED_TOKENS);
+    expect(
+      KIND_REGISTRATION_FREEZES.unvoicedTokens,
+      'the roster and this walker disagree on the unvoiced ceiling — move BOTH',
+    ).toBe(LEGACY_UNVOICED_TOKENS);
   });
 
   test('the census arithmetic closes — no token is counted twice or lost', () => {
@@ -366,6 +404,13 @@ describe('SP-E frequency-scaled floors — the unvoiced-token backlog', () => {
     // rows that file no desk; +1 at GR-4b-iii-b, +1 at IN-1c-a's `mirror_standing_line`).
     // Stated as a measurement so a kind that quietly LOST its routing is visible rather than
     // absorbed.
+    // ⛔ THE `8` IS PARSED OUT OF THIS LINE by scripts/base-state-capsule.mjs (:385) and
+    // re-read by regex in tests/scripts/baseStateCapsule.test.js (:158). Bare literal, this
+    // exact spelling; the roster equality below binds it.
     expect(REGISTERED_KIND_COUNT - routedAndRegistered.length).toBe(8);
+    expect(
+      KIND_REGISTRATION_FREEZES.registeredMinusRouted,
+      'the roster and this walker disagree on the registered-minus-routed divergence — move BOTH',
+    ).toBe(REGISTERED_KIND_COUNT - routedAndRegistered.length);
   });
 });
