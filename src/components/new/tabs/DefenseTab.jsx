@@ -515,15 +515,24 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
       </div>
 
       {/* ── SUPPORTING CAPABILITIES ──────────────────────────────────────── */}
+      {/* DS-DEF-6 at defense.supportingCapabilities: how supply reaches this town and who
+          holds its water, in its own voice. Two lenses of one block at one position; the
+          capability rows below are untouched.
+          ⛔ IT SITS ABOVE THE FOLD, AND THAT PLACEMENT IS THE POINT. The section beneath is
+          `collapsible defaultOpen={false}` and `Primitives.jsx:114` renders `{open &&
+          children}`, so a child of it produces NO BYTES for a reader until the header is
+          clicked. Drawn inside, this position was a sentence the registry called lit and no
+          reader ever saw — the walker's reachability arm, the public-dossier guard and the
+          registry law were all green over it, and only a render told the truth. The line is
+          now the FRAMING of the fold rather than a thing inside it (the DS-HK-1
+          arrangement), and the visibility arm in dossierMountRegistry.walker.test.js is what
+          keeps it there. */}
+      {supportingLines.length>0&&<div data-testid="defense-supporting-lines" style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #1a3a6a',padding:'9px 13px',marginBottom:10}}>
+        {supportingLines.map((line,i)=>(
+          <p key={i} style={{fontSize:i===0?FS.sm:FS.xs,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.55,margin:i===0?0:'5px 0 0',fontStyle:'italic'}}>{line}</p>
+        ))}
+      </div>}
       <Section title="Supporting Capabilities" collapsible defaultOpen={false}>
-        {/* DS-DEF-6: how supply reaches this town and who holds its water, in its own
-            voice. Two lenses of one block at one position; the capability rows below are
-            untouched. */}
-        {supportingLines.length>0&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #1a3a6a',padding:'9px 13px',marginBottom:10}}>
-          {supportingLines.map((line,i)=>(
-            <p key={i} style={{fontSize:i===0?FS.sm:FS.xs,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.55,margin:i===0?0:'5px 0 0',fontStyle:'italic'}}>{line}</p>
-          ))}
-        </div>}
         <div style={{display:'flex',flexDirection:'column',gap:6}}>
           {caps.map((cap,i)=>(
             <div key={i} style={{display:'flex',gap:12,alignItems:'flex-start',background:swatch['#FAF8F4'],border:'1px solid #e0d0b0',borderLeft:`3px solid ${cap.color}`,padding:'8px 12px'}}>

@@ -459,6 +459,20 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
       {/* ── CRITICAL IMPORTS ──────────────────────────────────────────────── */}
 
 
+      {/* ── DS-ECO-9 at economics.foodSecurity — the town's own account of how it eats ──
+          ADDITIVE beside the arithmetic in the fold below, never instead of it. Silent when
+          the corpus has nothing to say (R-DST-K), and silent when the registry mounts this
+          position at a glance.
+          ⛔ IT SITS ABOVE THE FOLD, AND THAT PLACEMENT IS THE POINT. The section below opens
+          only `defaultOpen={!!fb.deficit}` and `Primitives.jsx:114` renders `{open &&
+          children}`, so drawn inside, this sentence reached NO READER ON ANY TOWN THAT FEEDS
+          ITSELF — the majority case, and the one the block's surplus pools were authored
+          for. `tests/ui/economicsTabFlow.test.js` had already answered that by choosing a
+          fixture with a real deficit, which keeps the arm green and leaves the reader dark.
+          The line is now the FRAMING of the fold (the DS-HK-1 arrangement) and the
+          visibility arm in dossierMountRegistry.walker.test.js keeps it there. */}
+      {drawnFoodLine?.sentence&&<p data-testid="economics-food-security-line" style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.55,margin:'0 0 10px',fontStyle:'italic'}}>{drawnFoodLine.sentence}</p>}
+
       {/* ── FOOD SECURITY ──────────────────────────────────────────────────── */}
       {fb&&<Section title="Food Security" collapsible defaultOpen={!!fb.deficit} accent={foodColor}>
         {/* Balance bar */}
@@ -489,10 +503,6 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
             : `Agricultural surplus of ${Math.round((fb.surplus/Math.max(1,fb.dailyNeed))*100)}% above daily needs.`
           }
         </div>
-        {/* The town's own account of the same reading — ADDITIVE beside the arithmetic
-            above, never instead of it. Silent when the corpus has nothing to say
-            (R-DST-K), and silent when the registry mounts this position at a glance. */}
-        {drawnFoodLine?.sentence&&<p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.55,margin:'8px 0 0',fontStyle:'italic'}}>{drawnFoodLine.sentence}</p>}
       </Section>}
 
       {/* ── ECONOMIC FLOWS (unified production chains + dependencies) ──────── */}
@@ -646,7 +656,20 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
                         ct.type?.toLowerCase().includes('black market'))
           .slice(0, 2);
 
-        return <Section title={`Shadow Economy: ${bmc}% capture`} collapsible defaultOpen={bmc>=15}>
+        return <>
+        {/* DS-ECO-6 at economics.shadowEconomy. The corpus line REPLACES scaleNote rather than
+            joining it: two of this block's variants are byte-identical copies of scaleNote itself,
+            so printing both is the page saying one thing twice. Undrawn (public dossier, or the
+            corpus silent) ⇒ scaleNote stands and the surface is byte-identical.
+            ⛔ IT SITS ABOVE THE FOLD, AND THE FIGURE IS WHY. The section below opens only
+            `defaultOpen={bmc>=15}` and `Primitives.jsx:114` renders `{open && children}`;
+            measured over 60 generated towns (5 tiers x 4 cultures x 3 seeds) that cut is
+            true on 1 of 60, so drawn inside, DS-ECO-6's
+            ONE speaking position reached a first-paint reader on under two percent of the
+            worlds this generator builds. The scale note travels WITH it, so nothing is
+            doubled and the fold's own reader loses nothing. */}
+        <p data-testid="economics-shadow-economy-line" style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.5,margin:'0 0 8px'}}>{drawnAtMount('economics.shadowEconomy',deskProse.shadowEconomy)?.sentence||scaleNote}</p>
+        <Section title={`Shadow Economy: ${bmc}% capture`} collapsible defaultOpen={bmc>=15}>
           <div style={{display:'flex',flexDirection:'column',gap:10}}>
 
             {/* Capture rate + scale context */}
@@ -656,11 +679,6 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
                 <div style={{fontSize:FS.micro,fontWeight:700,color:sevColor,textTransform:'uppercase',letterSpacing:'0.05em',marginTop:2}}>Off-book</div>
               </div>
               <div style={{flex:1}}>
-                {/* DS-ECO-6 at economics.shadowEconomy. The corpus line REPLACES scaleNote rather than
-                    joining it: two of this block's variants are byte-identical copies of scaleNote itself,
-                    so printing both is the page saying one thing twice. Undrawn (public dossier, or the
-                    corpus silent) ⇒ scaleNote stands and the surface is byte-identical. */}
-                <p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.5,margin:'0 0 4px'}}>{drawnAtMount('economics.shadowEconomy',deskProse.shadowEconomy)?.sentence||scaleNote}</p>
                 {dragDesc&&<p style={{fontSize: FS['11.5'],color:swatch.inkMag3,fontStyle:'italic',margin:0,lineHeight:1.4}}>{dragDesc}</p>}
               </div>
             </div>
@@ -699,7 +717,8 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
             </div>
 
           </div>
-        </Section>;
+        </Section>
+        </>;
       })()}
 
     </div>
