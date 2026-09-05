@@ -36,6 +36,26 @@ name them), so that identical inputs produce identical bytes and the reproducibi
 reader and STOP; do not silently change what it reads. Prove: two consecutive builds byte-identical; the
 reproducibility test green; `validate:edge` verbatim; the byte budget (`sizeBaseline`) unmoved.
 
+
+## ITEM 3 — five display consumers PARSE band labels by splitting on an em dash (structural prevention)
+Found by PROSE-REBASE (receipt sealed `refs/preserve/prose-rebase-receipt-2026-09-05`, §"THE FINDING"): `SummaryTab.jsx:212`
+and `:213`, `OverviewTab.jsx:301`, `safetyProfile.js:218` (the producer parsing its own labels) and `dailyLifeLogic.js:74`
+all derive a BAND from a `"<Band> — <Condition>"` display string with `split('—')`. A wording change anywhere upstream
+silently breaks them (measured: 186/360). RULED (Fable 5.1): give band and condition a TYPED shape at the producer
+(`{ band, condition, label }` or the estate's existing band vocabulary — read `src/domain/state/bands.js` first) and make
+every consumer read the field, never the string; the label stays exactly as it is for readers. Zero visible change;
+prove with the 360-settlement drive (`$SC/prose-rebase-scratch/parse-coupled.mjs` is the instrument — re-derive it) at
+0/360 before and after, plus each consumer's own tests. ⛔ Do not touch the fingerprint (item 4) in this car.
+
+## ITEM 4 — `economyInputFingerprint` hashes two DISPLAY LABELS into persisted state (a persisted-shape change; measure first)
+`economyReconciliation.js:88–110` builds `[version, tier, prosperity, safetyLabel, foodLabel]` → `powerStructure.economyInputFingerprint`,
+persisted; `assertPowerEconomyFreshness` throws on a mismatch. A wording change is therefore a migration. This is a
+persisted-shape act — chair-class under the 09-04 line but HEAVY: it needs the typed inputs from item 3, a `version`
+bump, a tolerant recompute for stored fingerprints of the old shape (never a throw on a saved world — THE PROMISE), and
+the OSR consequences measured. **First car = MEASURE ONLY**: enumerate every reader of the fingerprint, the saved-world
+paths that carry it (create/read/persist/regen/undo/clone/import), and what a version bump costs; report to the chair;
+build nothing until the chair rules on the shape.
+
 ## PROOF (per item)
 The file's own run (skipped, reason printed) · `npx vitest run tests/security/` · `npx vitest run tests/lint/` WHOLE ·
 `node scripts/check-test-ratchet.mjs` in read-only form if it has one (no `--update`) · eslint. Quiet-window law + mutex.
