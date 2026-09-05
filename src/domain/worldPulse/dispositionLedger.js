@@ -48,6 +48,7 @@
  * a loss moves the stock down exactly as a win moves it up, so a stock can cross neutral
  * in both directions. THE REVERSAL PIN is what proves it.
  */
+import { clamp } from '../../kernel/math.js';
 import { decayTowardNeutral, bandCrossingReceipt, halfLifeFactor } from './bandedStock.js';
 
 // Multiplier shape: ±MULTIPLIER_SPAN at full saturation, reached as |score| → SCORE_SAT.
@@ -159,8 +160,6 @@ const APPETITE_LESSON_OF = /** @type {Readonly<Record<string, string>>} */ (Obje
   ),
 ));
 
-/** @param {number} value @param {number} lo @param {number} hi */
-const clamp = (value, lo, hi) => (value < lo ? lo : value > hi ? hi : value);
 /** @param {number} value */
 const round6 = (value) => Math.round(value * 1_000_000) / 1_000_000;
 /** @param {number} value */
