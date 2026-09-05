@@ -7,9 +7,9 @@ STREAK=0; WAITED=0
 while [ $STREAK -lt 3 ]; do
   L=$(uptime | sed 's/.*averages: //' | awk '{print $1}')
   V=$(ps -ax -o command | grep -c '[v]itest/dist/workers')
-  OK=$(awk -v l="$L" 'BEGIN{print (l<4.0)?1:0}')
+  OK=$(awk -v l="$L" 'BEGIN{print (l<6.0)?1:0}')
   if [ "$OK" = "1" ] && [ "$V" -eq 0 ]; then STREAK=$((STREAK+1)); else STREAK=0; fi
-  echo "  probe: load=$L workers=$V streak=$STREAK waited=${WAITED}s"
+  echo "  probe(threshold 6.0 on a 8-core host; JUDGMENT 09-05, the 4.0 constant re-asked — the totals guard catches a false red): load=$L workers=$V streak=$STREAK waited=${WAITED}s"
   [ $STREAK -lt 3 ] && sleep 60 && WAITED=$((WAITED+60))
   [ $WAITED -gt 3600 ] && { echo "GAVE UP"; exit 8; }
 done
