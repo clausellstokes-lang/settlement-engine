@@ -220,4 +220,50 @@ export const OPS_SUBSYSTEM_ROWS = Object.freeze([
     // No channel at all, so the row can never be ALIVE and says so honestly.
     soakEvidence: 'unobserved',
   }),
+  Object.freeze({
+    rule: 'envoyTaskCatalogEnabled',
+    title: 'The envoy task catalog — what a court may send somebody to do, and how they may ask',
+    module: 'src/domain/worldPulse/envoyTaskCatalog.js,src/domain/worldPulse/errandMint.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY: a vocabulary-and-fit table mints no candidate, and the trace
+      // over its leaves finds no `candidateType` in either.
+      eventTypes: Object.freeze([]),
+      // DELIBERATELY EMPTY: this car mints ZERO news kinds. The negotiation beats belong
+      // to the wiring car, and grading this row ALIVE off a beat no lane has minted is the
+      // recorded moverFamily hazard.
+      moverFamilies: Object.freeze([]),
+      // DELIBERATELY EMPTY: the leaf writes nothing and imports exactly one sibling
+      // vocabulary module. Every quantity it needs — the counterpart nerve, the envoy
+      // chart — arrives as an argument, pinned by its own suite.
+      stateKeys: Object.freeze([]),
+      other: 'THE LEAF\'S OWN PROVENANCE ROW, and the volume\'s §8 car 4 ("envoy task catalog + negotiation method menus"). WHAT IT IS: the closed vocabulary of what a court may send a named person to DO — eight candidate task rows, four admitted — together with the four negotiation METHODS and how each fits a counterpart\'s nerve. WHAT THE FLAG LIGHTS, EXACTLY ONE THING AT THIS CAR: nothing. No src module imports the leaf; its `consumers` field says NONE, and the darkness is pinned by a real planted importer in the battery rather than by a grep that could pass by finding nothing. WHAT THE MINT BUYS: CENSUS VISIBILITY — the leaf was built, dark AND ungated, so it was invisible to the totality walker that demands its certification row and was not even on the measured backlog. WHERE THE GATE LIVES AND WHY NOT IN THE LEAF: an arm of the leaf\'s own suite asserts it contains no strict comparison on this key at all, because the catalog is a pure table whose exports take their inputs as ARGUMENTS; the module that resolves the key from a world is the ERRAND family\'s door home, beside the spine\'s own gate. ⛔ AND THE CONJUNCTION IS THE SPINE, NOT THE ESPIONAGE LAYER — a deliberate divergence from this leaf\'s three sibling rows. The catalog\'s tasks and methods are things a NAMED PERSON ON THE ROAD does, so they ride SP-D\'s generalized errand row exactly as every other purposeful-travel surface does; an errand is not a covert mission, and gating a diplomatic menu on espionage would have made half a court\'s business hostage to a layer it has nothing to do with. WHAT IS UNSIGNED, AND IT IS MOST OF THE TABLE: the status is CANDIDATE, OWNER-UNSIGNED. Four rows are receipt-verified rather than taste, but WHICH of them a court may charter, and at what cadence, is the pen\'s. ⛔ AND THE PARKED ROWS ARE DELIBERATELY NOT NAMED IN THIS FILE. Two of the four carry src-wide ABSENCE censuses in the catalog\'s own suite — one asserts its ceremony word appears nowhere else under src/, another the same for its threat word — so spelling either token in a certification row would enrol this leaf in a fence that is working perfectly and red it, which is the string-presence hazard this leaf\'s header records and which this row hit on its first run. The dispositions are therefore cited by SHAPE: the ceremony row is parked for want of any receipt family, and the fork the owner actually holds there is mint-a-standing-family versus cut-the-row; the tribute row is the same fork one place along; and the swap row asks whether a swap deserves a close reason of its own or is honestly two releases. The words themselves live in the catalog\'s provenance, which is their one home. The four method words and their nerve fits are derived from the volume\'s own sentence about threatening cowardly courts; a signed table is the pen\'s. MINTING THE DOOR SIGNS NONE OF IT. WHAT NOTHING CAN SEE, DECLARED: no receipt channel grades this row and no soak year can. The soak\'s rules come from the full_simulation spread, which declares no virtual key, so ruleState resolves to unknown and the schema grades UNOBSERVED; `unobserved` is the honest evidence rather than `indirect`, because there is no dispositive channel for a later soak to fill. THE OBSERVATION THAT WOULD CLOSE THE GAP: a census of errand rows carrying a catalog task kind, which needs a MINT SITE, and the mint site is the wiring car\'s. The lane is pinned at tests/domain/envoyTaskCatalog.test.js.',
+    }),
+    // A court sends somebody when it has business, not on a schedule: the catalog is
+    // consulted at a decision, so `reactive` is its shape even before it has a caller.
+    expectedTempo: 'reactive',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'dark_is_zero_keys_written',
+        description: 'THE PROMISE. With the door shut nothing calls the catalog, no errand row gains a task kind, and no byte is written — the leaf has no writer of any kind on any path.',
+        check: 'Expressible from source and from state, and asserted both ways in tests/domain/envoyTaskCatalog.test.js: the import-specifier census proves no src caller exists, and the door arm drives envoyTaskCatalogActive through the four truthy-refusal spellings.',
+      }),
+      Object.freeze({
+        name: 'the_flag_has_exactly_one_gate_read',
+        description: 'The key is read by name, strictly against `true`, at exactly ONE site in src/: envoyTaskCatalogActive in the errand family door home. The catalog itself carries no such comparison, which is the contract its own no-fork arm holds and which this mint deliberately left standing.',
+        check: 'Expressible from source and asserted that way in tests/domain/envoyTaskCatalog.test.js, the polarity census, which counts COMPARISONS rather than names so the manifest member and this row\'s own `rule` field are never miscounted as uses.',
+      }),
+      Object.freeze({
+        name: 'the_door_is_the_spine_and_never_the_espionage_layer',
+        description: 'A menu of diplomatic business is gated on the road that carries people to it, not on the covert layer. Lighting the catalog with the spine dark leaves it dark; lighting it with the espionage layer dark does NOT, and that asymmetry is the design rather than an oversight.',
+        check: 'Expressible from state and asserted that way in tests/domain/envoyTaskCatalog.test.js: the door is driven with the spine dropped (false) and with the espionage layer absent entirely, and the two arms disagree on purpose.',
+      }),
+      Object.freeze({
+        name: 'minting_the_door_signed_nothing',
+        description: 'THE PEN\'S, NOT THE LANE\'S. The provenance carries `signedBy: null` and five owner rows — the ceremony row parked for want of a receipt family, the tribute row\'s twin fork, whether the swap row is a task kind at all, the four method words and their nerve fits, and which rows a court may charter at what cadence. ⛔ CITED BY SHAPE RATHER THAN BY WORD, for the absence-census reason recorded on the aliveness note above. A door is not a signature.',
+        check: 'Expressible from source and asserted that way in tests/domain/envoyTaskCatalog.test.js, which reads the provenance constant and holds both the null signature and the owner-row roster.',
+      }),
+    ]),
+    // No channel at all, so the row can never be ALIVE and says so honestly.
+    soakEvidence: 'unobserved',
+  }),
 ]);

@@ -77,6 +77,38 @@ export function errandSpineActive(worldState) {
 }
 
 /**
+ * ── THE W-OPS ENVOY TASK CATALOG'S DOOR (LGT-P5-WOPS, 2026-09-05) ─────────────
+ *
+ * `envoyTaskCatalogEnabled` is the door `worldPulse/envoyTaskCatalog.js` names in its own
+ * provenance row, and it lands HERE rather than in that leaf for the reason the leaf's own
+ * suite pins: an arm asserts that the catalog contains no `envoyTaskCatalogEnabled === true`
+ * comparison at all, because the catalog is a pure vocabulary-and-fit table whose exports
+ * take a counterpart nerve and an envoy chart as ARGUMENTS and never reach for a world.
+ * The module that resolves the key from a world is therefore the ERRAND family's own door
+ * home — this file, which already owns the spine's one gate.
+ *
+ * ⛔ THE CONJUNCTION IS MEANT, AND IT IS THE SPINE RATHER THAN THE LAYER. The catalog's
+ * task kinds and negotiation methods are things a NAMED PERSON ON THE ROAD does, so they
+ * ride SP-D's generalized errand row exactly as every other purposeful-travel surface
+ * does; a lit catalog over a dark spine would be a menu of business nobody can be sent on.
+ * It is deliberately NOT gated on the espionage layer: an errand is not a covert mission,
+ * and the volume's own §5 puts the catalog on the diplomatic side of the seam.
+ *
+ * ⚠ NO PRODUCTION CONSUMER AT THIS CAR: the catalog's `consumers` field says NONE and its
+ * suite pins an empty importer set. This predicate is REGRESSION-grade until the wiring
+ * car lands a caller; what the mint buys is CENSUS VISIBILITY, which is the whole of
+ * CR-WR10-C's purpose for a subsystem that is built, dark AND ungated.
+ *
+ * @param {unknown} worldState
+ * @returns {boolean}
+ */
+export function envoyTaskCatalogActive(worldState) {
+  if (!errandSpineActive(worldState)) return false;
+  const rules = asObject(asObject(worldState).simulationRules);
+  return rules.envoyTaskCatalogEnabled === true;
+}
+
+/**
  * The validated conditional field block for one mint, or `null` when the caller's class
  * cargo is not lawful.
  *
