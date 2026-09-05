@@ -34,9 +34,12 @@ const ANGLES = [
   { key: 'voice', prompt: 'the author\'s or designers\' OWN words: interviews, forewords, letters, blog posts, talks, panels' },
   { key: 'close', prompt: 'close readings and line-level analyses on forums, blogs, video essays (transcripts), reading groups — the kind that quote a sentence and explain it' },
 ]
+const ONLY = (args && args.only) || null   // e.g. ['tolkien'] — a subset run under a tight agent cap
+const SKIP_AI = !!(args && args.skipAI)
+const EX = ONLY ? EXEMPLARS.filter(e => ONLY.includes(e.key)) : EXEMPLARS
 phase('Find')
 const findJobs = []
-for (const ex of EXEMPLARS) for (const an of ANGLES) findJobs.push({ ex, an })
+for (const ex of EX) for (const an of ANGLES) findJobs.push({ ex, an })
 const found = await batched(findJobs, ({ ex, an }, i) => agent(
   `You are a research finder. Subject: the prose STYLE of ${ex.name} (${ex.notes}). Angle: ${an.prompt}. Use WebSearch and WebFetch; READ every source you cite (fetch it), never rely on a search snippet. Find as many substantive sources as this angle yields (aim for 10–20; stop when two consecutive searches return nothing new). For each source list it (title, url, kind, substantive true/false). Extract CLAIMS about concrete prose features: each claim names the feature (e.g. 'register modulation', 'Anglo-Saxon diction', 'two-sentence boxed text'), states it in one sentence, names the source and url, and carries at most one verbatim quotation under twelve words (or an empty string). Never reproduce copyrighted passages beyond twelve words. Write your raw notes to ${OUT}/find-${ex.key}-${an.key}.md and return the structured result.`,
   { label: `find:${ex.key}:${an.key}`, phase: 'Find', schema: FINDINGS }))
@@ -46,10 +49,10 @@ const AI_ANGLES = [
   { key: 'industry', prompt: 'publishing and games industry: magazine editors on AI slush, DMs Guild / RPG publishers on AI submissions, style-guide bans, what readers report noticing' },
   { key: 'counter', prompt: 'the case AGAINST the common tells: sources arguing em dashes, triads and antithesis are legitimate devices, that detection heuristics fail, that human prose shares the features — the disconfirming evidence' },
 ]
-const foundAI = await batched(AI_ANGLES, (an) => agent(
+const foundAI = SKIP_AI ? [] : await batched(AI_ANGLES, (an) => agent(
   `You are a research finder. Subject: where generated (LLM) prose FAILS against skilled human fiction and game writing. Angle: ${an.prompt}. Use WebSearch and WebFetch; READ every source you cite; aim for 10–20 substantive sources, stop after two consecutive dry searches. For each source list it; extract CLAIMS as concrete failure modes (feature, one-sentence claim, source, url, one verbatim quotation under twelve words or empty). Write raw notes to ${OUT}/find-ai-${an.key}.md and return the structured result.`,
   { label: `find:ai:${an.key}`, phase: 'Find', schema: FINDINGS }))
-const allClaims = [...found, ...foundAI].filter(Boolean).flatMap((r, i) => r.claims.map(c => ({ ...c, batch: i })))
+const allClaims = [...found, ...foundAI].flatMap((r, i) => (r && r.claims ? r.claims : []).map(c => ({ ...c, batch: i })))
 const seen = new Set(); const claims = []
 for (const c of allClaims) { const k = (c.source + '|' + c.feature + '|' + c.claim.slice(0, 60)).toLowerCase(); if (!seen.has(k)) { seen.add(k); claims.push(c) } }
 log(`found ${allClaims.length} claims, ${claims.length} after dedupe, from ${[...found, ...foundAI].filter(Boolean).reduce((n, r) => n + r.sourcesRead.length, 0)} sources read`)
@@ -60,10 +63,10 @@ const verified = await batched(claims, (c) => agent(
 const kept = verified.filter(Boolean).filter(x => x.verdict && (x.verdict.verdict === 'VERIFIED_VERBATIM' || x.verdict.verdict === 'VERIFIED_SUBSTANCE'))
 log(`verified: ${kept.length} of ${verified.length} claims survive`)
 phase('Synthesize')
-const groups = { tolkien: [], martin: [], dnd: [], ai: [] }
-for (const x of kept) { const src = [...found, ...foundAI].filter(Boolean)[x.batch]; const idx = x.batch; const key = idx < findJobs.length ? findJobs[idx].ex.key : 'ai'; groups[key].push(x) }
+const groups = {}; for (const e of EX) groups[e.key] = []; if (!SKIP_AI) groups.ai = []
+for (const x of kept) { const idx = x.batch; const key = idx < findJobs.length ? findJobs[idx].ex.key : 'ai'; (groups[key] ||= []).push(x) }
 const sections = await batched(Object.entries(groups), ([key, xs]) => agent(
   `Write the dossier section for "${key}" from these VERIFIED claims only (JSON follows). Structure: numbered concrete features, each with the critics/sources that support it (count them), the true wording of any quotation (under twelve words), and the reconstruction rule it implies for a settlement dossier written as a calm archivist (present tense, concrete civic nouns, no digits, no em dash). Mark disagreements between sources explicitly. End with a coverage table: sources read per angle. Write it to ${OUT}/section-${key}.md and return the markdown.\n\nCLAIMS:\n${JSON.stringify(xs).slice(0, 180000)}`,
   { label: `synth:${key}`, phase: 'Synthesize' }))
-const critic = await agent(`You are the completeness critic. Read ${OUT}/section-*.md and the find-*.md notes. List what is MISSING: an angle not run, a well-known critic or study absent (name them), a claim that rests on one source, a copyright risk (a quotation over twelve words), and any feature the sections contradict each other on. Return a markdown list with a recommended next round of searches. Write it to ${OUT}/critic.md.`, { label: 'critic', phase: 'Synthesize' })
+const critic = await agent(`You are the completeness critic for the subset ${Object.keys(groups).join(', ')}. Read ${OUT}/section-*.md and the find-*.md notes. List what is MISSING: an angle not run, a well-known critic or study absent (name them), a claim that rests on one source, a copyright risk (a quotation over twelve words), and any feature the sections contradict each other on. Return a markdown list with a recommended next round of searches. Write it to ${OUT}/critic.md.`, { label: 'critic', phase: 'Synthesize' })
 return { claimsFound: allClaims.length, claimsDeduped: claims.length, claimsVerified: kept.length, sections: Object.keys(groups), critic }
