@@ -30,7 +30,10 @@
   "src/domain/worldPulse/beliefMap.js",
   "src/domain/worldPulse/causeLifecycle.js",
   "src/domain/worldPulse/clergyTraitPlane.js",
+  "src/domain/worldPulse/conquestExecution.js",
+  "src/domain/worldPulse/conquestFeasibility.js",
   "src/domain/worldPulse/conquestFeeds.js",
+  "src/domain/worldPulse/conquestIntent.js",
   "src/domain/worldPulse/coup.js",
   "src/domain/worldPulse/deityStance.js",
   "src/domain/worldPulse/deityStanceLane.js",
@@ -50,6 +53,9 @@
   "src/domain/worldPulse/pestilenceKernel.js",
   "src/domain/worldPulse/piety.js",
   "src/domain/worldPulse/populationDynamics.js",
+  "src/domain/worldPulse/razing.js",
+  "src/domain/worldPulse/razingExecution.js",
+  "src/domain/worldPulse/razingWitness.js",
   "src/domain/worldPulse/reinforcement.js",
   "src/domain/worldPulse/relationshipHierarchy.js",
   "src/domain/worldPulse/relationshipMemory.js",
@@ -59,6 +65,7 @@
   "src/domain/worldPulse/supplyCompleteness.js",
   "src/domain/worldPulse/supplyQuality.js",
   "src/domain/worldPulse/tradeSalience.js",
+  "src/domain/worldPulse/warAllianceRisk.js",
   "src/generators/helpers.js",
   "src/lib/relationshipGraph.js"
 ]

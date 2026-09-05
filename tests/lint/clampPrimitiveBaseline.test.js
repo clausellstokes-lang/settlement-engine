@@ -47,7 +47,21 @@ const KERNEL_HOME = 'src/kernel/math.js'; // the sanctioned definition site — 
 // a row — so the wave's net effect on this ratchet is ONE justified, documented row.
 // The shrink-only rule is otherwise untouched: lower this as copies migrate, and never
 // raise it again without a ruling of the same kind recorded in the file that needs it.
-const BASELINE_CEILING = 62; // committed max — lower it as copies migrate; never raise it
+// ⭐⭐ THE SECOND RAISE THIS CEILING HAS EVER TAKEN, 62 → 69 on 2026-09-05 (chair ruling RULING-CLAMP-FINAL, Fable 5.1;
+// refs/preserve/chair-tools-2026-09-05) — by EXACTLY the measured residual, after three waves migrated nine copies onto
+// src/kernel/math.js and the mechanical work was exhausted. The seven that enter each carry a recorded doctrinal reason:
+//   warAllianceRisk.js, conquestFeasibility.js — excluded by name at wave 0 (clamp-wave0-ruling-2026-09-04, fence 3);
+//   conquestIntent.js — an import pin (envoyK3BeliefSeam.test.js:356 pins [] imports): a belief pin outranks this ratchet;
+//   conquestExecution.js — a "NO IMPORTS AT ALL" header that warSeatBooksPartition.test.js:313 rules WINS (wave 1);
+//   razing.js, razingWitness.js — the same header AND executed pins (razingWr8:616, razingWitnessWr8:494) (wave 2);
+//   razingExecution.js — wave-0 FENCE 1: its local clamp01 IS the num()-style screen at nine unknown-typed reads, and
+//     typecheck:domain:strict (+9) refuted a migration that had passed a 1,155-row value differential (a differential
+//     proves VALUES, not TYPES).
+// A file can be provably safe and still not free to move. ⚠ cartographyMorphology.js:62 defines a passthrough clamp01
+// under the name `unit`, invisible to DEF_RE and load-bearing for the cartographyBuildings proof — NOT a copy to migrate
+// and NOT a baseline row (DOCKET item 6). MONOTONE DOWN from here: lower it as copies migrate; never raise it again
+// without a ruling of this kind, named file by file.
+const BASELINE_CEILING = 69; // committed max — lower it as copies migrate; never raise it without a named ruling
 
 // A local clamp/clamp01 DEFINITION: a declaration keyword immediately followed by
 // the name `clamp` or `clamp01` (word-bounded, so `clampedValue` / `clamp01Helper`
