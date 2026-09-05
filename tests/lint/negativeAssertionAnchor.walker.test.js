@@ -16,8 +16,24 @@
  *   1. the assertion goes through tests/helpers/anchoredNegatives.js
  *      (`expectPresentThenAbsent` / `expectAbsentWithAnchor` on the same line), or
  *   2. the site carries `// anchored: <why this cannot go vacuous>` on the assertion
- *      line or the line immediately above it.
+ *      line or the ONE line immediately above it.
  * Surviving un-anchored sites are frozen below, SHRINK-ONLY, and swept by wave EP-2.
+ *
+ * ── ⛔ THE MARKER RULE, STATED BECAUSE IT HAS BITTEN ─────────────────────────────
+ * The scan reads EXACTLY TWO LINES for a marker: the assertion's own line, and the
+ * single line above it (the two ANNOTATION_RE tests in `scanUnanchoredNegatives`).
+ * Nothing else is consulted. Two consequences that are not obvious from the outside:
+ *
+ *   • A MARKER WRAPPED ACROSS TWO COMMENT LINES IS UN-ANCHORED. The line abutting the
+ *     assertion is then the CONTINUATION, which carries no `anchored:` of its own, and
+ *     the line that does carry it has become two lines up — exactly the distance the
+ *     "an annotation two lines above does NOT exempt" arm below deliberately refuses.
+ *     It reads perfectly to a human and counts as a violation. It cost one lane two
+ *     attempts on a single site (docket §899, finding 3).
+ *     ⇒ KEEP THE MARKER ON ONE LINE, or put `anchored:` on the LAST line of the comment.
+ *   • The lookback is not widened to fix this, and that is deliberate: a longer reach
+ *     would let one unrelated comment mute a whole block of assertions below it. The
+ *     tight rule is the feature; this note is the missing half of it.
  *
  * SCOPE (2026-07-30): the walk covered four generation-facing trees, and the class lived
  * on unguarded in the other twenty — 1,332 un-anchored sites across 454 files, two
@@ -47,6 +63,9 @@
  *     subject is a COLLECTION that can vanish.
  *   - The helper-call exemption is a same-line source match, so a helper invoked
  *     through an alias or a wrapper is not recognised. Call them by name.
+ *   - A WRAPPED `// anchored:` marker does not anchor anything — see THE MARKER RULE
+ *     above. This is the edge most likely to red a change that looks correct, because
+ *     the wrap is what a long, honest reason naturally does to itself.
  *
  * REGENERATION: `UPDATE_EPISTEMIC_ALLOWLIST=1 npx vitest run tests/lint/negativeAssertionAnchor.walker.test.js`
  * PRINTS a fresh literal and FAILS with instructions. It never writes a file — the
@@ -160,8 +179,9 @@ function renderLiteral(found) {
  * tests/domain/warCosts (16), tests/edgeFunctions/surveyorByok (15).
  *
  * To bank a win: anchor the site (prefer expectPresentThenAbsent /
- * expectAbsentWithAnchor; use `// anchored: <reason>` only where the anchor is genuinely
- * structural), then LOWER this file's number — delete the row at 0. Never raise a number;
+ * expectAbsentWithAnchor; use `// anchored: <reason>` — ON ONE LINE, see THE MARKER RULE —
+ * only where the anchor is genuinely structural), then LOWER this file's number — delete
+ * the row at 0. Never raise a number;
  * never add a file. A new file needing a row means a new un-anchored negative was
  * authored, which is the thing this gate exists to stop. Regenerate with
  * UPDATE_EPISTEMIC_ALLOWLIST=1 (it prints, never writes), then split the generation-facing
@@ -820,7 +840,12 @@ describe('negative-assertion anchor walker (habitat removal)', () => {
           + ` with a liveness anchor: expectPresentThenAbsent(before, after, member) for a`
           + ` removal, expectAbsentWithAnchor(collection, member, anchor) for a selection`
           + ` (tests/helpers/anchoredNegatives.js). If the anchor is genuinely structural, say`
-          + ` why on the line: // anchored: <reason>.`,
+          + ` why with an "// anchored: <reason>" marker — AND MIND THE RULE, which has cost a`
+          + ` lane two attempts: the marker is read ONLY on the assertion's own line or the ONE`
+          + ` line immediately above it. A marker WRAPPED across two comment lines does NOT`
+          + ` count, because the line abutting the assertion is then the continuation rather`
+          + ` than the marker. Keep it on one line, or put "anchored:" on the comment's LAST`
+          + ` line.`,
         );
       }
     }
