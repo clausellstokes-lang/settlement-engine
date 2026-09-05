@@ -68,6 +68,10 @@ import {
   remnantPoolKey,
   ancientRuinPoolKey,
   steadingPoolKey,
+  neighbourTiePoolKey,
+  crossSettlementNpcPoolKey,
+  crossEngagementPoolKey,
+  populationDirectionPoolKey,
 } from '../../src/domain/display/stateProse/generalStateProse.js';
 import { DOSSIER_STATE_PROSE_GENERAL } from '../../src/data/dossierStateProse/general.generated.js';
 import {
@@ -83,6 +87,7 @@ import { resolvePrimaryStress } from '../../src/generators/stressPriority.js';
 import { EVENT_TYPE_NAMES, HISTORICAL_EVENTS_DATA } from '../../src/data/historyData.js';
 import { PLOT_HOOK_CATEGORIES, collectPlotHooks } from '../../src/domain/dossier/plotHooks.js';
 import { deriveEscalationClocks } from '../../src/domain/hookEscalation.js';
+import { populationTrendBand } from '../../src/domain/display/trendLens.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { mustExtract } from '../helpers/sourceContract.js';
 import { fillShapeViolation, mergeSlotShapes, parseSlotShapes } from '../../scripts/lib/dossier-slot-shapes.mjs';
@@ -112,6 +117,8 @@ const BLOCK_POOLS = Object.freeze({
   'DS-GEN-18': 4,
   // The steadings, the remnant and the fallen city (DESK-GEN3 car 2).
   'DS-GEN-8': 6,
+  // The neighbour network and the direction of the roll (DESK-GEN3 car 3).
+  'DS-REL-1': 10, 'DS-POP-3': 5,
 });
 
 /**
@@ -618,6 +625,9 @@ describe('the general desk — the mount registry', () => {
       'DS-GEN-18': 'economics.craftReason',
       // DESK-GEN3 car 2 — a lawful DARK mount, on the DS-STR-2 precedent.
       'DS-GEN-8': 'overview.steadings',
+      // DESK-GEN3 car 3.
+      'DS-REL-1': 'relationships.network',
+      'DS-POP-3': 'overview.populationDirection',
     };
     for (const [blockId, mount] of Object.entries(expected)) {
       const row = sentenceMountForBlock(blockId);
@@ -1671,5 +1681,187 @@ describe('⛔ DS-GEN-15 stays dark — the fabric split needs a threshold nobody
     // ⚠ `calamity_scar` is the UNCLASSIFIED default and has no honest common noun: calling
     // it "calamity" would print the classifier's own failure as a fact about the town.
     expect(kinds).toContain('calamity_scar');
+  });
+});
+
+describe('DS-REL-1 — the neighbour network, and the arm that prints the wrong town\'s standing', () => {
+  const link = (over) => ({ neighbourName: 'Thornmere', ...over });
+  const drawNet = (neighbours) => generalStateProse(TOWN, { neighbours }, { seed: 'rel1', audience: 'dm' })
+    .relationships.network.flat().filter(Boolean).map((l) => l.sentence);
+
+  it('ALL TEN POOLS FIRE — eight standings, the named people, and the houses', () => {
+    const byType = ['trade_partner', 'allied', 'rival', 'cold_war', 'hostile', 'neutral'];
+    for (const t of byType) {
+      expect(neighbourTiePoolKey(link({ relationshipType: t })), t).toBe(t);
+      expectSentence(drawNet([link({ relationshipType: t })])[0], t);
+    }
+    // The two asymmetric ends, each resolved from the LOCAL role.
+    expect(neighbourTiePoolKey(link({ relationshipType: 'patron', localRelationshipRole: 'patron' }))).toBe('patron');
+    expect(neighbourTiePoolKey(link({ relationshipType: 'patron', localRelationshipRole: 'client' }))).toBe('client');
+    // The two cross-settlement pools.
+    expect(crossSettlementNpcPoolKey(link({ npcConnections: [{ primaryNPCName: 'Mugain' }] })))
+      .toBe('cross-settlement NPC contacts');
+    expect(crossEngagementPoolKey({ type: 'faction_engagement' })).toBe('cross-settlement engagements');
+    const all = [...byType, 'patron', 'client', 'cross-settlement NPC contacts', 'cross-settlement engagements'];
+    expect(all.sort()).toEqual(poolsOf('DS-REL-1').sort());
+  });
+
+  it('⛔⛔ THE ARM: the two ends of one asymmetric tie are DIFFERENT SENTENCES', () => {
+    // "{counterpart} looks to {settlement}" against "{settlement}'s decisions are made with
+    // {counterpart} in the room". Both read perfectly fluent; only one is true of this town.
+    const asPatron = drawNet([link({ relationshipType: 'patron', localRelationshipRole: 'patron' })])[0];
+    const asClient = drawNet([link({ relationshipType: 'patron', localRelationshipRole: 'client' })])[0];
+    expectSentence(asPatron, 'this town is the patron');
+    expectSentence(asClient, 'this town is the client');
+    expect(asPatron, 'the two ends drew the same sentence').not.toBe(asClient);
+    // …and the direction really is read from the field the estate's own consumer reads.
+    const canonical = src('src/domain/relationships/canonicalRelationship.js');
+    mustExtract(canonical, 'export function directionalRelationshipLabel', 'the directional label reader');
+    mustExtract(canonical, 'link?.localRelationshipRole || link?.displayRelationshipType',
+      'the per-side role read this desk mirrors');
+    expect(neighbourTiePoolKey(link({ relationshipType: 'patron', displayRelationshipType: 'client' })))
+      .toBe('client');
+  });
+
+  it('⛔ A TIE WITH NO STATED END IS WITHHELD, never guessed', () => {
+    // A legacy row carrying only `relationshipType: 'patron'` does not say which end this
+    // town is. Picking one would decide a town's standing by array position.
+    expect(neighbourTiePoolKey(link({ relationshipType: 'patron' }))).toBeNull();
+    expect(neighbourTiePoolKey(link({ relationshipType: 'client' }))).toBeNull();
+    expect(drawNet([link({ relationshipType: 'patron' })])).toEqual([]);
+    // …and a SYMMETRIC tie is unaffected, because it has no end to get wrong.
+    expectSentence(drawNet([link({ relationshipType: 'rival' })])[0], 'the symmetric arm');
+    // MEASURED RESIDUE: two real roles reach no pool and render nothing rather than folding.
+    for (const role of ['overlord', 'vassal']) {
+      expect(neighbourTiePoolKey(link({ relationshipType: 'vassal', localRelationshipRole: role })), role).toBeNull();
+    }
+    expect(poolsOf('DS-REL-1')).not.toContain('vassal');
+    expect(poolsOf('DS-REL-1')).not.toContain('overlord');
+  });
+
+  it('⛔ THE NPC NAMED IS THE ONE ON THIS TOWN\'S SIDE', () => {
+    // The seam is "{npc} in {settlement} keeps a standing tie in {counterpart}", so naming
+    // the neighbour's person would put a stranger inside this town's walls.
+    const drawn = drawNet([link({
+      relationshipType: 'allied',
+      npcConnections: [{ primaryNPCName: 'Mugain', neighbourNPCName: 'Felix' }],
+    })]);
+    expect(drawn).toHaveLength(2);
+    for (const line of drawn) expect(line, 'the far end\'s person was named').not.toContain('Felix');
+    // NON-VACUITY: the fixture really carries the far end's name.
+    expect(link({ npcConnections: [{ neighbourNPCName: 'Felix' }] }).npcConnections[0].neighbourNPCName).toBe('Felix');
+    // A tie with no npc rows has not been asked the question.
+    expect(crossSettlementNpcPoolKey(link({ npcConnections: [] }))).toBeNull();
+    expect(crossSettlementNpcPoolKey(link({}))).toBeNull();
+  });
+
+  it('the ENGAGEMENT pool takes faction rows only, and a nameless counterpart is silent', () => {
+    // `RelationshipsTab.jsx` merges `conflict` and `faction_engagement` into one list; only
+    // the second is what these variants describe (a quarrel between named HOUSES).
+    expect(crossEngagementPoolKey({ type: 'conflict' })).toBeNull();
+    expect(crossEngagementPoolKey({})).toBeNull();
+    const eng = generalStateProse(TOWN, {
+      crossEngagements: [
+        { type: 'faction_engagement', factionName: 'The Guild', partnerSettlement: 'Thornmere' },
+        { type: 'conflict', npcName: 'Mugain', partnerSettlement: 'Thornmere' },
+      ],
+    }, { seed: 'rel1', audience: 'dm' }).relationships.engagements;
+    expect(eng).toHaveLength(2);
+    expectSentence(eng[0]?.sentence, 'the faction engagement');
+    expect(eng[1], 'a plain conflict drew an engagement sentence').toBeNull();
+    // A link whose counterpart has no name fills nothing and drops every variant.
+    expect(drawNet([{ relationshipType: 'allied' }])).toEqual([]);
+  });
+});
+
+describe('DS-POP-3 — the direction of the roll, and the default it would have been', () => {
+  const drawPop = (trend, access) => generalStateProse(TOWN,
+    { populationTrend: trend, tradeRouteAccess: access }, { seed: 'pop3', audience: 'dm' })
+    .overview.populationDirection?.sentence ?? null;
+
+  it('ALL FIVE POOLS FIRE — the band\'s sign by the approach\'s width', () => {
+    const cases = [
+      ['RISING-OPEN', { band: 1, window: 5 }, 'road'],
+      ['RISING-NARROW', { band: 2, window: 5 }, 'isolated'],
+      ['LEVEL', { band: 0, window: 5 }, 'road'],
+      ['FALLING-OPEN', { band: -1, window: 5 }, 'crossroads'],
+      ['FALLING-NARROW', { band: -2, window: 5 }, 'mountain_pass'],
+    ];
+    for (const [key, trend, access] of cases) {
+      expect(populationDirectionPoolKey(trend, access), key).toBe(key);
+      expectSentence(drawPop(trend, access), key);
+    }
+    expect(cases.map(([k]) => k).sort()).toEqual(poolsOf('DS-POP-3').sort());
+    // NARROW is DS-GEN-13's convention unchanged, driven on all three of its members.
+    for (const narrow of ['isolated', 'mountain_pass', 'mountain_road']) {
+      expect(populationDirectionPoolKey({ band: 1, window: 5 }, narrow), narrow).toBe('RISING-NARROW');
+    }
+    expect(populationDirectionPoolKey({ band: 1, window: 5 }, 'desert_road')).toBe('RISING-OPEN');
+  });
+
+  it('⛔⛔ THE WINDOW GATE — fewer than two readings is SILENCE, not LEVEL', () => {
+    // `populationTrendBand` returns `{band: 0, window: 0}` for an EMPTY ring, and
+    // `populationHistory` is 0 of 48 on a freshly generated town. Keyed on the sign alone,
+    // LEVEL would print "the roll holds where it is" over EVERY town in EVERY world.
+    const empty = populationTrendBand(undefined);
+    expect(empty).toEqual({ band: 0, net: 0, window: 0 });
+    expect(populationDirectionPoolKey(empty, 'road'), 'an unread ring resolved LEVEL').toBeNull();
+    expect(drawPop(empty, 'road')).toBeNull();
+    expect(populationDirectionPoolKey({ band: 0, window: 1 }, 'road')).toBeNull();
+    // …and it DOES speak the moment the ring carries two readings.
+    const two = populationTrendBand([100, 100]);
+    expect(two.window).toBe(2);
+    expectSentence(drawPop(two, 'road'), 'a two-reading ring');
+    // A generated settlement really does carry no ring, which is what makes the gate live.
+    const real = generateSettlementPipeline(
+      { settType: 'town', culture: 'germanic', terrainOverride: 'mountain', tradeRouteAccess: 'road' },
+      null, { seed: 'sf-test-2026-04', customContent: {} },
+    );
+    expect(populationTrendBand(real.populationHistory).window,
+      'a generated town now carries a trend ring — re-derive the gate').toBeLessThan(2);
+    expect(real.name, 'the generator produced no settlement').toBeTruthy();
+  });
+
+  it('the band comes from the ANNEX\'S OWN READER and this desk computes none of it', () => {
+    // "THIS IS DS-POP-2's READER, DELIBERATELY… keying this block on the same one keeps the
+    // two POP blocks reading one band rather than two."
+    const desk = src('src/domain/display/stateProse/generalStateProse.js');
+    expect(desk, 'the desk reached for the trend reader instead of being handed its result')
+      .not.toContain('trendLens');
+    expect(desk).not.toContain('AXIS_TUNING');
+    // The reader's thresholds are its own and are exercised through it, not transcribed.
+    expect(populationTrendBand([100, 60]).band).toBeLessThan(0);
+    expect(populationTrendBand([100, 160]).band).toBeGreaterThan(0);
+    expect(populationTrendBand([100, 101]).band).toBe(0);
+  });
+});
+
+/**
+ * ⛔ DS-POP-1 AND DS-POP-2 ARE NOT MOUNTED, and both refusals are measured rather than tired.
+ * DS-POP-2 carries an explicit corpus fence — "NO SURFACE — DO NOT WIRE A SELECTOR UNTIL A
+ * DOSSIER POPULATION-TREND SURFACE EXISTS" — and that fence is still TRUE at this tip.
+ * DS-POP-1 keys on a migration ledger that reaches no dossier tab at all.
+ */
+describe('⛔ DS-POP-1 and DS-POP-2 stay dark — a written fence and a ledger with no surface', () => {
+  it('DS-POP-2\'s NO-SURFACE fence is current, not stale', () => {
+    const annex = src('docs/content/RECEIPT_POOLS_DOSSIER_STATE.md');
+    mustExtract(annex, 'NO SURFACE — DO NOT WIRE A SELECTOR UNTIL A DOSSIER POPULATION-TREND',
+      'DS-POP-2\'s own fence');
+    // The fence's premise: `buildTrendLenses` is consumed ONLY by WhatChangedPanel, which is
+    // not a dossier tab. Measured here so the day a trend surface lands, this reds.
+    expect(src('src/components/settlement/WhatChangedPanel.jsx')).toContain('buildTrendLenses');
+    expect(UNMOUNTED_BLOCKS).toContain('DS-POP-2');
+    expect(sentenceMountForBlock('DS-POP-2')).toBeNull();
+  });
+
+  it('DS-POP-1\'s migration ledger reaches no dossier tab', () => {
+    // Its STATE-KEY is `spatialLedgers.migration` × demographic receipts × QUANTITY_BANDS ×
+    // the BELIEVED band. `QUANTITY_BANDS` lives in a worldPulse herald, the receipts live in
+    // the demographics kernels, and the block carries NO `sectionTarget` at all — so there
+    // is no position on any tab that renders its evidence.
+    expect(DOSSIER_STATE_PROSE_GENERAL['DS-POP-1'].sectionTarget).toBeUndefined();
+    expect(src('src/domain/worldPulse/demographicsHerald.js')).toContain('export const QUANTITY_BANDS');
+    expect(UNMOUNTED_BLOCKS).toContain('DS-POP-1');
+    expect(sentenceMountForBlock('DS-POP-1')).toBeNull();
   });
 });
