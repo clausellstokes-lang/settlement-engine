@@ -4601,6 +4601,96 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "professorial amateurishness",
    "note": "Verbatim, in 'Prose and verse are on the same level of professorial amateurishness', attributed on the page to Edmund Wilson. The Pyle half is also verbatim: 'The characters talk a story-book language that might have come out of Howard Pyle.'"
+  },
+  "285": {
+   "index": 285,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Stimpson's charges, rebutted by Patrick Curry",
+   "note": "Quote verbatim: Shippey \"replies to Colin Manlove's attack on Tolkien's 'overworked cadences' and 'monotonous pitch'\". Stimpson's charge \"Tolkien's language betrays 'class snobbery'\" is also verbatim, in a table captioned \"Criticisms of Tolkien by Catherine R. Stimpson, rebutted by Patrick Curry\". Downgraded because the page names CURRY, not Rosebury, as the rebutter; Rosebury appears only as one who \"began to consider why Tolkien had attracted such hostility\" and re-evaluated the work. Shippey-as-rebutter is correct."
+  },
+  "286": {
+   "index": 286,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the avoidance of words associated with the modern world",
+   "note": "p.2: \"the impression of archaicity ... is partly due to three simple lexical causes: the 'overuse' of words borrowed from nineteenth-century fiction, the avoidance of words associated with the modern world, and the comparatively dense use of new coinages, unusual grammatical patterns, rare or obsolescent words.\" Two minor softenings in the claim: the source says \"partly due\", and the third cause also covers new coinages and unusual grammatical patterns, not just rare/obsolescent words. Page cite p.2 correct."
+  },
+  "287": {
+   "index": 287,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "obsolete or obsolescent at the time of writing",
+   "note": "p.2 lists exactly four lexical sets: \"(1) landscape description; (2) position or direction; (3) warfare and the struggle between good and evil; (4) other descriptive verbs and adjectives.\" whither, thither, yonder and afar all appear in the cited key-word list. Quote verbatim: \"so many of the keywords used to describe its settings were obsolete or obsolescent at the time of writing\". Page cite p.2 correct."
+  },
+  "288": {
+   "index": 288,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "borrows a host of words from his translation of Beowulf",
+   "note": "p.2: \"Tolkien borrows a host of words from his translation of Beowulf (e.g. valour, valiant, corslet), stretching them creatively to cover a wider range of uses than was possible in Old or Middle English (e.g. Branched lightning smote down upon the eastward hills.)\" All three example words confirmed. Minor: the passage sits wholly on p.2, not p.2-3 as cited."
+  },
+  "289": {
+   "index": 289,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "use many of these words in nineteenth-century patterns",
+   "note": "p.2: \"Tolkien tends to use many of these words in nineteenth-century patterns\", with smoke as the example -- \"a black smoke swirled in the air\" -- \"a use that is notably infrequent in modern fiction\". Descriptive verbs defined as carrying \"an additional semantic feature that assumes the function of a manner adverb\"; gleam, loom, plod and stride all appear in the key-verb list. Minor: passage is on p.2, not p.3 as cited."
+  },
+  "290": {
+   "index": 290,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "About half of The Lord of the Rings consists of dialogue",
+   "note": "Rendered page: \"About half of The Lord of the Rings consists of dialogue, poetry and song, or stories told by a character. Thomas Kullmann and Dirk Siepmann liken this to the epic poetry of Homer and Virgil...\" and \"narrative, which frequently takes the point of view of one of the characters, most often - 85% of the time - one of the four Hobbit protagonists\". Both figures and the Kullmann/Siepmann attribution confirmed. (Exact-string test in raw wikitext fails only on the '' italic markup around the title.)"
+  },
+  "291": {
+   "index": 291,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "epic style, marking out characters as old-style heroes",
+   "note": "First half verbatim: \"Kullmann and Siepmann observe that characters such as Sam Gamgee and Gollum are marked out by their non-standard speech.\" Second half downgraded: the page says \"Other omniscient narrator passages are in epic style, marking out characters as old-style heroes\" -- it names NO character there. Aragorn is discussed elsewhere on the page only as having \"Archaic, literary\" speech; tying him to the old-style-hero sentence is the claimant's inference, not the source's wording."
+  },
+  "292": {
+   "index": 292,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The Narrative Syntax of The Lord of the Rings",
+   "note": "Confirmed in the raw Google Books HTML (not just via summarizer). Chapter listing: \"Tolkien as a Stylist Key Words and Key Collocations in The Lord of the Rings\" (39), \"The Narrative Syntax of The Lord of the Rings\" (70), \"Points of View\" (89), \"Landscape Descriptions\" (128), \"Speeches and Declarations\" (159), \"Storytelling\" (193), \"Poems and Songs\" (227), \"Language and Character\" (259). Every topic in the claim maps to a separate chapter; \"separate stylistic systems\" is the claimant's gloss but the structure supports it."
+  },
+  "293": {
+   "index": 293,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the various prose styles of English used in writing",
+   "note": "Confirmed in raw CEEOL HTML. Abstract: \"His views in phonology and phonaesthetics were applied directly to his invented languages, to his mythology of Middle-earth, and to the various prose styles of English used in writing Lord of the Rings.\" Author Susan Robbins, Zmogus ir zodis 15/2013, pp.183-191. The claim's \"not only to invented languages\" is fair: prose styles are a third item in the source's own list."
+  },
+  "294": {
+   "index": 294,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "like an historian, or a nature writer, or an epic poet",
+   "note": "Verbatim: \"the narrative voice will sound like an historian, or a nature writer, or an epic poet, or an antiquarian in turn, depending on the moment.\" Setting-dependence is explicit -- \"the style of any given narrative moment depends upon its environment\" -- and the cheerful Shire register is there too: \"close to the cheerful travelling companion that we find in The Hobbit\". The claim omits the fourth item (\"antiquarian\") from the list but does not misstate it."
+  },
+  "295": {
+   "index": 295,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "paratactic movement from clause to clause",
+   "note": "Verbatim: \"Note the paratactic movement from clause to clause and the introduction of unfamiliar proper nouns\" -- of Gandalf's telling of Isildur and the Ring in \"The Shadow of the Past\". Antiquarian reading also confirmed: of the Prologue subtitle \"Concerning Hobbits\", Halbrooks writes \"This places the text in the stylistic mode of a certain strain of nineteenth-century English antiquarianism\"."
+  },
+  "296": {
+   "index": 296,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a combination of both vocabulary and grammar",
+   "note": "Verbatim: \"As Shippey notes, Elrond's style of archaism is achieved with a combination of both vocabulary and grammar\", with \"tidings\" plus \"the inversion of the subject and verb\" as the two mechanisms. Strider half confirmed: \"Around the hobbits, Strider is able to relate with their manner of speech and can talk very colloquially\"; \"when presented with a formal situation, Aragorn can quickly switch to a more appropriate style of speech ... speaking directly to Boromir\"."
+  },
+  "297": {
+   "index": 297,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "we've lost 'poetic diction'",
+   "note": "Verbatim: \"over the course of the last century we've lost 'poetic diction', despite Owen Barfield's best efforts on its behalf.\" Intimacy reading confirmed: the second usage \"was for intimate use: this is how you refer to people you are close to ... an extra layer to Eowyn's laying bare her feelings\". The misread-as-formality element is the post's own framing -- \"Why, I wondered, did she suddenly switch to formal, archaic English (Bible-speak)\" and \"Tolkien is trying for one effect and instead achieving another.\""
+  },
+  "298": {
+   "index": 298,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "inside quotation marks",
+   "note": "Verbatim and correctly attributed: the Red Book frame \"effectively puts the whole of The Hobbit, including the troublesome closure, 'inside quotation marks', as Bowman puts it\". Two scope notes: the page says it encloses The Hobbit specifically, not \"the tale\" at large; and the translator-not-author framing (\"the claim that he had translated it into English from the original Westron rather than written it himself\") sits in the adjoining section cited to Turner, Flieger, Brljak and Kullmann, with Bowman among the cites for the found-manuscript conceit."
+  },
+  "299": {
+   "index": 299,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the narration is 'high' or 'epic' ... far more down to earth",
+   "note": "Verbatim, in a post signed \"-- Troels Forchhammer\": \"Occasionally the narration is 'high' or 'epic' while at other times it is far more down to earth. This creates different moods, and should be included.\" It is item 4) Style in his four-dimension scheme, and the chronicler frame is his own layer -- \"as if the chronicler (another of my layers) were paraphrasing the witness\". Caveat on weight: this is an unrefereed Usenet post outlining work in progress, not a published analysis."
   }
  }
 }
