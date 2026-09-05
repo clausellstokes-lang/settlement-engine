@@ -897,9 +897,28 @@ export function powerStateProse(settlement, readings = {}, options = {}) {
     })
     : null);
   // DS-POW-4 uses {seat} as the OFFICE ("the seat could fall"), the same role DS-POW-1
-  // gives it, so governingName fills it here too. {timeband_age} is deliberately absent:
-  // it is named by ONE variant of 29 and there is no duration former, so anchored liveness
-  // drops that single variant and all nine pools still speak. MEASURED, not assumed.
+  // gives it, so governingName fills it here too. {timeband_age} is deliberately absent —
+  // it is named by ONE variant of 29, anchored liveness drops that single variant, and all
+  // nine pools still speak.
+  //
+  // ⛔ THE REASON THIS COMMENT USED TO GIVE — "there is no duration former" — IS FALSE, AND
+  // IT WAS THE WRONG GROUND EVEN WHEN IT WAS TRUE-SOUNDING. The former is
+  // `heraldCausalGrammar.js`'s timeBandOf/timeBandWord: a zero-import display leaf whose
+  // six-band × four-position table is IDENTICAL cell for cell to §0d's in BOTH annexes
+  // (24 of 24 cells, measured 2026-09-05). Two better reasons stand in its place, either
+  // of which alone refuses the fill:
+  //   1. THE FILL WOULD BE A NO-OP. The only {timeband_age} variant in this block is #3 of
+  //      the pool `previousGovernments present with a recorded cause`, and this desk reads
+  //      NEITHER lineage pool — see THE LINEAGE LENS IS NOT WIRED above, whose cure is an
+  //      M8/M9 explained-writer bank row and therefore the chair's act, not a lane's.
+  //      `line4` is called with the risk and the hold keys alone, so no variant it can
+  //      reach names the slot. Measured: previousGovernments absent on 48 of 48 generated
+  //      towns, which is the same measurement that block already records.
+  //   2. NO DURATION EXISTS HERE EVEN IF THE LENS WERE WIRED. A seat's age is
+  //      `now - previousGovernments[last].tick`, and that tick is a WORLD tick. This desk
+  //      holds no clock and is handed none; inventing an interval to band it would be
+  //      coining exactly the mapping §0d exists to forbid.
+  // MEASURED, not assumed — DESK-TIMEBAND 2026-09-05.
   /** @param {string|null} poolKey */
   const line4 = (poolKey) => (poolKey
     ? readStateProse(CORPUS, 'DS-POW-4', poolKey, {
