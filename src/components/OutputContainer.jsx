@@ -691,7 +691,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
             : <SummaryTab settlement={s} />}
         </>
       );
-      case 'plot_hooks': return <PlotHooksTab settlement={s} />;
+      case 'plot_hooks': return <PlotHooksTab settlement={s} publicDossier={publicDossier} playerView={playerView} />;
       case 'chronicle':  return <ChronicleTab entries={chronicle} />;
       case 'versions':   return <VersionsTab save={liveSaveEntry} />;
       case 'daily_life': return <DailyLifeTab settlement={s} aiSettlement={aiSettlement} saveId={saveId} onRequestDailyLife={() => requestAiAction('dailyLife')} publicDossier={publicDossier} playerView={playerView} />;
