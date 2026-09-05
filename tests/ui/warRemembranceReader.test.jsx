@@ -29,6 +29,8 @@
 import { describe, test, expect, afterEach, vi } from 'vitest';
 import { cleanup, render } from '@testing-library/react';
 
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+
 afterEach(cleanup);
 
 // ── Store mock (a single mutable object behind every selector) ───────────────
@@ -129,7 +131,9 @@ describe('RR-2 — a dark world is silent, and the silence is structural', () =>
     // every GM on the day a dormant flag shipped.
     const dark = render(<HeraldRemembrance campaign={campaignOf(baseWorld())} saves={SAVES} />);
     const darkHtml = dark.container.innerHTML;
-    expect(darkHtml).not.toContain('The wars that ended');
+    // The graveyard heading is the anchor: it travels the SAME render, so a door that
+    // failed to mount at all reds on the anchor instead of passing this exclusion.
+    expectAbsentWithAnchor(darkHtml, 'The wars that ended', 'What the realm has lost', 'the dark door');
     expect(dark.queryByTestId('herald-war-remembrance')).toBeNull();
     cleanup();
     const emptied = render(
@@ -204,8 +208,10 @@ describe("RR-2 — the door FORCED, driven through W-MEM's real writer", () => {
     const [row] = concludedWarRows({ worldState: world, nameFor: namesFromSaves });
     expect(row.endingKey).toBe('conquest');
     expect(row.endingLine).toContain('Ashford');
-    expect(row.endingLine).not.toContain('{victor}');
-    expect(row.endingLine).not.toContain('ashford');
+    // The victor's NAME is the anchor for both exclusions: an unfilled mold and a raw id
+    // are the two ways this telling can go wrong, and neither survives a live name.
+    expectAbsentWithAnchor(row.endingLine, '{victor}', 'Ashford', 'the conquest mold is filled');
+    expectAbsentWithAnchor(row.endingLine, 'ashford', 'Ashford', 'a name, never an id');
   });
 });
 
@@ -233,9 +239,10 @@ describe('RR-2 — one resolver owns the ending, and every key it can return is 
     };
     const [row] = concludedWarRows({ worldState: world, nameFor: namesFromSaves });
     expect(row.endingKey).toBe('annihilation');
-    expect(row.endingLine).toContain('seat');
     for (const word of ['died', 'killed', 'slain', 'death', 'executed', 'murdered']) {
-      expect(row.endingLine.toLowerCase()).not.toContain(word);
+      // anchored: the annihilation telling is anchored on the SAME string by 'seat', which
+      // travels this exact branch, so an absent or empty telling cannot pass silently.
+      expectAbsentWithAnchor(row.endingLine.toLowerCase(), word, 'seat', 'STATE, NEVER FATE');
     }
   });
 });
@@ -256,10 +263,14 @@ describe('RR-2 — the legibility law', () => {
     const sentences = allSentences(row);
     expect(sentences.length).toBeGreaterThan(4);
     for (const sentence of sentences) {
-      expect(sentence, `digit in "${sentence}"`).not.toMatch(/[0-9]/);
-      expect(sentence, `em dash in "${sentence}"`).not.toContain('—');
-      expect(sentence, `exclamation in "${sentence}"`).not.toContain('!');
-      expect(sentence, `engine token in "${sentence}"`).not.toMatch(/[a-z]_[a-z]/);
+      // anchored: `sentences` is filtered non-empty and its LENGTH is asserted above, and
+      // each sentence is proven to carry real words by the positive match on this line, so
+      // a collection that drifted away or emptied reds before any exclusion is reached.
+      expect(sentence, `not a sentence: "${sentence}"`).toMatch(/[a-zA-Z]{3}/);
+      expect(sentence, `digit in "${sentence}"`).not.toMatch(/[0-9]/); // anchored: the positive match one line above proves this string is live prose
+      expect(sentence, `em dash in "${sentence}"`).not.toContain('—'); // anchored: same live-prose anchor
+      expect(sentence, `exclamation in "${sentence}"`).not.toContain('!'); // anchored: same live-prose anchor
+      expect(sentence, `engine token in "${sentence}"`).not.toMatch(/[a-z]_[a-z]/); // anchored: same live-prose anchor
     }
   });
 
@@ -288,8 +299,9 @@ describe('RR-2 — the legibility law', () => {
       },
     };
     const [row] = concludedWarRows({ worldState: world, nameFor: namesFromSaves });
+    // Exact, not an exclusion: the KNOWN-band assertion above is the liveness anchor, and
+    // an empty string cannot smuggle an unknown token past a `toBe`.
     expect(row.costLine).toBe('');
-    expect(row.costLine).not.toContain('future');
   });
 });
 
@@ -338,8 +350,9 @@ describe('RR-2 — a name outlives the record, and an id never reaches the page'
       worldState: world,
       nameFor: (id) => (String(id) === 'kelby' ? '' : namesFromSaves(id)),
     });
-    expect(row.line).toContain('Kelby of the Fens');
-    expect(row.line).not.toContain('kelby');
+    // The recorded label is the anchor: if the fallback stopped firing there would be no
+    // label in the line at all, and the exclusion below could not tell that from success.
+    expectAbsentWithAnchor(row.line, 'kelby', 'Kelby of the Fens', 'a recorded label, never an id');
   });
 });
 
@@ -370,7 +383,7 @@ describe('RR-2 — the World Book chapter', () => {
     expect(player.sections.warsEnded).toBe(true);
     expect(player.warsEnded[0]).toContain('Ashford');
     for (const line of player.warsEnded) {
-      expect(line).not.toContain('war.ashford.kelby');
+      expectAbsentWithAnchor(line, 'war.ashford.kelby', 'Ashford', 'the player face carries no ledger key');
     }
   });
 
