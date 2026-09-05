@@ -3,10 +3,11 @@ Kit: `git archive refs/preserve/chair-tools-2026-09-05 | tar -x -C $SC` (SC = th
 
 ## STATE
 - Ledger `review-fixes-2026-07-08` = §898 (6cab7c69a). Product `claude/composite-r4` = 5e28d5c83 (sealed `landing-prose-2026-09-05`).
-- §899 COMPOSED CONSIST in `$SC/laneCLAMP3` = **22 cars over 5e28d5c83, tip c8e2916d3**, sealed `refs/preserve/train-composed-2026-09-05`:
+- §899 COMPOSED CONSIST in `$SC/laneCLAMP3` = **23 cars over 5e28d5c83, tip c6026a7a1** (car 4 = the pantheon A5 pins moved by ENC-4's attribution: ENC-4's train was RED at its own tip, found by ENC-4b), sealed `refs/preserve/train-composed-2026-09-05`:
   CLAMP-W2 (3) · edge re-mint · CLAMP-W3 ceiling 62→69 · VOICE-JSX (1, replayed) · ENC-4 (9) · chair cars 1–3 (hash01 pin 17→18; CHANCE_MEETING_NEWS_TUNING registered — the bare 0.56; manifest rationale row) · DOCKET (4, replayed; proved 42/42 at the composed tip).
-- RUNNING NOW: `run-registers-899.sh laneCLAMP3` (bg; log `$SC/registers-899.run.log`): tuning-inventory refreeze → writer-reach `--write` → lighting refreeze. Doors exit NON-ZERO on success; receipts are the plain re-runs in the log.
-- Lanes running (cap 4): OSR-SCHEMA17 (laneINTEG-tree @940d161ca), HORIZON-B1 (laneCHARSET2), ENC-4b (laneENC4B), HORIZON-B2 (laneHOR2 @5e28d5c83, dispatched 09-05).
+- RUNNING NOW: the OWED proof (tests/domain + lint + copy whole at c6026a7a1; log `$SC/owed-proof-899.log`) and then `run-registers-899.sh laneCLAMP3` (bg; log `$SC/registers-899.run.log`): tuning-inventory refreeze → writer-reach `--write` → lighting refreeze. Doors exit NON-ZERO on success; receipts are the plain re-runs in the log.
+- Lanes running (cap 4): OSR-SCHEMA17 (laneINTEG-tree @940d161ca), HORIZON-B1 (laneCHARSET2), HORIZON-B2 (laneHOR2 @5e28d5c83), SEAT-78 (laneSEAT78 @5e28d5c83). DONE, unlanded: ENC-4b (4 cars 9d9686c12, sealed `enc4b-2026-09-05`; §900). QUEUED: ENC-4c (`briefs/brief-ENC-4c.md`, the chair's words sealed in the kit).
+- Kit STAMPED for §899 at 26 cars (23 + register car + totals + owed-ledger); re-stamp with `mk-landing-kit.py` if the count moves.
 
 ## NEXT, IN ORDER (each proved before the next)
 1. Review the three register diffs against the PREDICTIONS line in the log; commit ONE register car (`Seat: Fable 5.1 — validated`, no Lane).

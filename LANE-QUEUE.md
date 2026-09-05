@@ -48,6 +48,8 @@ Updated 2026-09-05 by the Fable chair (after §898: product 5e28d5c83, ledger 6c
 
 17. **SOAK-PRESET (DOCKET item 7)** — a `--preset` flag on `scripts/audit/whole-world-soak.mjs` (hardwired to `full_simulation`) so L-PROBE can certify per preset; prerequisite of L-PROBE output (b).
 
+18. **ENC-4c** — BRIEFED (`briefs/brief-ENC-4c.md`, dock laneENC4B on top of 9d9686c12): the chair's five sentences (`enc4c-host-words.md`, sealed) for the host-offered half of §B, wired as a second pool keyed on the case; pantheon's six freezes must NOT move. Dispatch when a slot frees.
+
 ## RESIDUE FOR THE DESK LANDING ROW (from the desk lanes' receipts)
 - OWNER rows to open: DS-GEN-1 (tension `severity` is an ARRAY on 48/48 — a property of the tension TYPE; the cure is generation-side ⇒ owner-signed) · DS-FTH-2's PUBLIC/SHARED DOSSIER pool (authored for the reader §885.3 forbids).
 - Chair-class producer cures (DOCKET candidates): `{institution}`'s only producer writes `"Merchant guilds (3-8)"` (the digit ban refuses it; blocks DS-GEN-18) · the annex declares `{founder}` `proper` while its producer writes a lowercase phrase (one must move) · `templeWealth` has NO engine writer (DS-FTH-4; `DESIGN_FP_ARCH_WF.md` V27) · DS-WAR-4's five keys belong to a module-private PDF function · `{timeband_age}` declination by two desks is STALE (`heraldCausalGrammar.js` has the duration former).
