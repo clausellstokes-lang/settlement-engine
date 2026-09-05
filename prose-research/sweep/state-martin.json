@@ -1,7 +1,7 @@
 {
  "name": "martin",
  "runId": "wf_e25da3f7-7fb",
- "exportedAt": "2026-09-05T22:34:48.134Z",
+ "exportedAt": "2026-09-05T22:39:49.147Z",
  "claims": [
   {
    "feature": "Anglo-Saxon diction",
@@ -4879,6 +4879,186 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "to understand the syntax and words",
    "note": "Exact match within: 'For the latter [Fevre Dream], he read several novels, such as those by Mark Twain, from the period to understand the syntax and words.' The page contrasts this directly with the Ice and Fire approach in the following sentences, supporting the different-strategy half. Claim says 'vocabulary' where the page says 'words' - synonymous, and the quoted string itself is exact. Same third-person-report caveat as 162."
+  },
+  "165": {
+   "index": 165,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "He invented entire languages, I just fake it.",
+   "note": "winteriscoming.net fetched directly (HTTP 200). Quote appears word for word in Martin's IGN remarks. The 'eight words' detail is also on the page: 'I invented like eight words', said in the Dothraki/HBO context."
+  },
+  "166": {
+   "index": 166,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "variants of real names -- Eddard for Edward",
+   "note": "westeros.org returned 403 to direct fetch; verified via Wayback snapshot 20250416171115. Full line: 'In many cases, they are variants of real names -- Eddard for Edward, for example. They have to have the right \"sound,\" though.' Caveat: the 'a name evokes a character better than a whole page' formulation is the FAN's (Bale Dayne), not Martin's; Martin's reply is 'I agree.' and later 'You want the names to be evocative, yes.'"
+  },
+  "167": {
+   "index": 167,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "You should read some Jack Vance. He's marvelous with names. Tolkien was very good as well.",
+   "note": "Same Wayback snapshot of SSM Entry 1235 (April 01, 2003). Quote 'He's marvelous with names.' is verbatim and refers to Jack Vance; Tolkien is named in the next sentence, so the Vance-and-Tolkien framing holds."
+  },
+  "168": {
+   "index": 168,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Vance has his voice and I have mine.",
+   "note": "infinityplus.co.uk fetched directly (HTTP 200). Surrounding text confirms every element: 'I don't think A Song of Ice and Fire is particularly Vancean... I couldn't write like Vance even if I tried... and I did try, once' ('A Beast for Norn'), '...only Jack Vance can write like Jack Vance.' Minor unsourced embellishment: the page never characterizes Martin's own voice as 'plainer'."
+  },
+  "169": {
+   "index": 169,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "His style. His imagination. His world building. His ear for names, for language.",
+   "note": "nekoplz.com fetched directly (HTTP 200). Answer to 'What is it about Vance that separates him from others': the four-item list matches the claim exactly, closing 'No one else writes like Jack Vance. He's unique.'"
+  },
+  "170": {
+   "index": 170,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "if one adjective was good, three were better",
+   "note": "bulletproofscreenwriting.tv fetched directly (HTTP 200). Full passage: 'my style at the time was let us say purple... I would just pile on the the adjectives and I mistook that kind of verbose prose for rich and textured and poetic prose and Journalism School cured me of that... as the professor's kept drawing lines through all my wonderful adjectives.' Every element of the claim is present. (Page is titled a TIFF master class but carries no June 2012 date; the date in the attribution is not confirmable from the page.)"
+  },
+  "171": {
+   "index": 171,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "much shorter back and forth kind of, kind of dialogue",
+   "note": "Not verbatim: the transcript contains a stutter ('kind of, kind of dialogue') that the quotation silently smooths out. Substance fully supported: 'it helps your dialogue when working in television, and you're actually hearing actors speaking your lines... I look at my earliest scripts, and I would have people giving long speeches... that take up a substantial chunk of the page.'"
+  },
+  "172": {
+   "index": 172,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I think working in Hollywood sharpened my dialog.",
+   "note": "januarymagazine.com fetched directly (HTTP 200). Byline and date on page confirm Linda L. Richards, January 2001. Quote is verbatim (note the American spelling 'dialog'), followed by 'That's something you spend a lot of time with in Hollywood: polishing your dialog.'"
+  },
+  "173": {
+   "index": 173,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It's all structure, structure and dialogue.",
+   "note": "rollingstone.com fetched directly (HTTP 200). Verbatim apart from a curly apostrophe. Context confirms both halves of the claim: 'it's much easier than writing a novel or any kind of prose. William Goldman said everything that needed to be said about it in Adventures in the Screen Trade... Being there improved my sense of structure and dialogue.'"
+  },
+  "174": {
+   "index": 174,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it can be just a twist point or a new revelation or a piece of information",
+   "note": "Same Bulletproof Screenwriting transcript. Context: 'working for network television, you have to have act breaks... it can be a cliffhanger, that's a good [act] break. It doesn't have to be...' and 'it's a good way to end a chapter or an act.' Slight overstatement in the claim's 'each should close on': Martin presents these as options, not a requirement."
+  },
+  "175": {
+   "index": 175,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a movement of the symphony has wrapped up",
+   "note": "locusmag.com fetched directly (HTTP 200), November 2005 issue excerpts. Full sentence: 'Of course this is all part of a huge megaseries so there is not a complete resolution yet in any of the volumes, but I try to give a certain sense of completion at the end of each volume -- that a movement of the symphony has wrapped up, so to speak.' Both halves of the claim are supported."
+  },
+  "176": {
+   "index": 176,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I'm a very visual writer. And when I describe a scene, I see it in my head much as a director would see a shot.",
+   "note": "Same January Magazine page. Verbatim, and continues 'I see how the light is falling and where the characters are standing -- \"blocking\" they call it in Hollywood.'"
+  },
+  "177": {
+   "index": 177,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "They find the direwolf pups in the summer snows.",
+   "note": "cbsnews.com 60 Minutes Overtime transcript fetched directly (HTTP 200), dated April 14, 2019. Verbatim. Supporting text: 'the first chapter of \"Game of Thrones\" came to me... I knew they were the summer snows. So this was a place where it snowed even in summer.' One wording gap: the page says 'the world building grew parallel to the story', not that the world grew outward from the sentence."
+  },
+  "178": {
+   "index": 178,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I don't build the world first, then write in it.",
+   "note": "Same Rolling Stone page. Verbatim apart from a curly apostrophe. The half-hour detail is present as 'Drawing a map took me, I don't know, a half-hour', and the parallelism as 'It all occurs at the same time with me.'"
+  },
+  "179": {
+   "index": 179,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "detail is necessary, showing not telling is necessary, and nothing is gratuitous",
+   "note": "theatlantic.com fetched directly (HTTP 200); byline Rachael Brown, July 11, 2011. Verbatim. The feasts/clothes/heraldry defense is on the page: 'gratuitous feasting, and gratuitous description of clothes, and gratuitous heraldry... A novel for me is an immersive experience.'"
+  },
+  "180": {
+   "index": 180,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "gratuitous feasting, and gratuitous description of clothes",
+   "note": "Atlantic (Rachael Brown, July 11 2011) fetched directly, HTTP 200, full interview text present. Exact string found: \"then I'm also guilty of having gratuitous violence, and gratuitous feasting, and gratuitous description of clothes, and gratuitous heraldry, because very little of this is necessary to advance the plot. But my philosophy is that plot advancement is not what the experience of reading fiction is about. If all we care about is advancing the plot, why read novels?\" Every element of the claim (sex, violence, feasting, clothes, heraldry; little advances plot; plot is not why one reads novels) is present."
+  },
+  "181": {
+   "index": 181,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I want them to taste the food.",
+   "note": "ComicBook.com (Nicole Drum, May 4 2024) fetched directly, HTTP 200. Article quotes the cookbook foreword: Martin wants readers to \"live with my story, not just read it. When they sit down at my table, I want them to taste the food.\" Both halves of the claim — live with rather than read, and taste the food at his table — are verbatim."
+  },
+  "182": {
+   "index": 182,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Fiction is about emotion. The heart, not the head.",
+   "note": "Same ComicBook.com page. Verbatim: \"Fiction is about emotion. The heart, not the head. Fiction gives us vicarious experience.\" The 'sensory detail over dialogue' element is also supported earlier in the quoted foreword: \"surely the only thing that mattered was what the characters were saying, not the honey-roasted duck they were eating as they said it? Well, no. Not for me.\""
+  },
+  "183": {
+   "index": 183,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I enjoy the heraldry just for its own sake",
+   "note": "westeros.org returned HTTP 403 to direct fetch; recovered via Wayback (snapshot 20260314201218) as permitted. Verbatim: \"Well, I have to admit I enjoy the heraldry just for its own sake, although I have played fast and loose with some of the real world heraldic conventions.\" Both clauses of the claim are present."
+  },
+  "184": {
+   "index": 184,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Besides, I like the heraldry.",
+   "note": "infinityplus.co.uk fetched directly, HTTP 200. The answer runs: the sword's romance and symbolic value, then the Middle Ages' contrasts (chivalry beside brutality, castles over hovels), then \"The dramatic possibilities are so rich. Besides, I like the heraldry.\" The claim's description of the list-then-aside structure is accurate."
+  },
+  "185": {
+   "index": 185,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "room for both plagues and pageantry",
+   "note": "Westeros SSM 1427 via Wayback. Verbatim: \"A lot of bad Fantasy takes place in a sort of Disney Middle Ages, and that had no appeal to me, but I did not want to write thousands of pages about mud and lice and plague either... The real Middle Ages had room for both plagues and pageantry, and I wanted both sides in my books as well -- heightened somewhat, since this is Fantasy.\" The claim's 'heightened' element is explicit in the source."
+  },
+  "186": {
+   "index": 186,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a brown and grey world of dung, dirt, and plague",
+   "note": "Infinity Plus, direct fetch. Verbatim: \"the ideal of chivalry existed cheek by jowl with the awful brutality of war, great castles loomed over miserable hovels, serfs and princes rode the same roads, and the colorful pageantry of tournaments rose out of a brown and grey world of dung, dirt, and plague.\" All three paired contrasts in the claim match the source."
+  },
+  "187": {
+   "index": 187,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "to undermine that annoying convention",
+   "note": "Westeros SSM 1427 via Wayback. Verbatim: \"his minions are slavering subhumans dressed all in black (I dressed my Night's Watch, who are basically good guys, all in black in part to undermine that annoying convention)\". The claim's hedge 'partly' matches the source's 'in part'."
+  },
+  "188": {
+   "index": 188,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the wonder and image of Tolkien fantasy",
+   "note": "tolkiensociety.org fetched directly, HTTP 200. Verbatim: \"I wanted to combine the wonder and image of Tolkien fantasy with the gloom of historical fiction.\" Note the source reads 'image' (singular), not 'imagery' — the claim's paraphrase says 'wonder and imagery', but the supplied quote string itself is exact."
+  },
+  "189": {
+   "index": 189,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "writing it from a 20th-century point of view",
+   "note": "Same Tolkien Society page. Verbatim: \"Writers would take the structure of medieval times - castles, princesses, etc - but writing it from a 20th-century point of view.\" Context confirms the target is Tolkien's modern imitators, as the claim states ('replying to Tolkien, but even more to his modern imitators')."
+  },
+  "190": {
+   "index": 190,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "blend the wonder of epic fantasy with the grittiness",
+   "note": "georgerrmartin.com 'Here There Be Dragons', dated July 11 2024, fetched directly, HTTP 200. Verbatim: \"In A SONG OF ICE & FIRE, I set out to blend the wonder of epic fantasy with the grittiness of the best historical fiction. There is magic in my world, yes... but much less of it than one gets in most fantasy.\" The claim's magic clause is also verbatim-supported."
+  },
+  "191": {
+   "index": 191,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "grittier, harder-edged, more realistic",
+   "note": "SLF Dublin 2019 PDF fetched directly (HTTP 200, PDF 1.5), text extracted with pdfminer. Verbatim: \"I was also reading a lot of historical fiction, which is, you know, grittier, harder-edged, more realistic. And I wanted to meld epic fantasy tradition with the tradition of historical fiction.\" Minor nuance: the comparative's referent ('than epic fantasy') is implied by the surrounding Tolkien discussion rather than stated."
+  },
+  "192": {
+   "index": 192,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "fantasy always has to be a little bigger and brighter",
+   "note": "Same PDF. Verbatim: \"the thing about historical fiction, why I don't write it, is because you're locked in by the history... So by using this as inspiration, but mixing and matching, taking a bit of this, a bit of that, and turning it up to eleven. I mean, fantasy always has to be a little bigger and brighter and more colorful than real life. So I can be inspired by Hadrian's Wall but Hadrian's Wall was like ten feet tall and my wall was like seven hundred feet tall, and made of ice.\" The 'turn it up to eleven' feature label and the Hadrian's Wall detail are both verbatim."
+  },
+  "193": {
+   "index": 193,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it's gonna change the pork industry",
+   "note": "Same PDF. Verbatim: \"if you're gonna make pigs fly, you know, it's gonna change the pork industry... So think through everything where you depart from real life... whether it's, you know, medieval armies, or armor and weaponry, or care and feeding of horses, or whatever it is, try to get it right. Because if you get it wrong, somebody will notice and write you letters about it.\" Armor, armies, horses and the reader letters are all present as claimed."
+  },
+  "194": {
+   "index": 194,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "who was the king before him?",
+   "note": "Same PDF; the quoted string is Martin's, verbatim: of Dunsany, \"And once upon a time there was a king and you know, he had a beautiful daughter and then an elf came in, but you don't get the sense of, 'Okay, what was the name of the dynasty this king was, who was the king before him? How did this dynasty come to power?'\" ATTRIBUTION CAVEAT: the claim's second half — placing Martin's own work with Tolkien, closer to historical fiction — is spoken in the transcript by the interviewer Mary Anne Mohanraj (\"Whereas what you're doing is closer, and Tolkien is closer, to historical fiction\"), not by Martin, and no assent from Martin is recorded before the session wraps. Martin does independently support the substance elsewhere in the same transcript (Tolkien's 'immense construct underneath', \"now I have a fair amount of ice under the surface\", and wanting to meld epic fantasy with historical fiction), so the claim is defensible — but as worded it credits Martin with the interviewer's formulation."
   }
  }
 }

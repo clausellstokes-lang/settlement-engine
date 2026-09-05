@@ -1,7 +1,7 @@
 {
  "name": "ai",
  "runId": "wf_60f0a1e1-39c",
- "exportedAt": "2026-09-05T22:34:48.138Z",
+ "exportedAt": "2026-09-05T22:39:49.156Z",
  "claims": [
   {
    "feature": "theme over-explanation",
@@ -2927,5 +2927,96 @@
    "substantive": false
   }
  ],
- "verdicts": {}
+ "verdicts": {
+  "0": {
+   "index": 0,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "AI stories over-explain themes and favor tidy, single-track plots",
+   "note": "Quote appears word-for-word in the abstract. §4.1 gives the figures exactly: 'Narrators explicitly explain the story's theme 77% of the time, versus 52% for humans.'"
+  },
+  "1": {
+   "index": 1,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "far fewer subplots (79% 'no subplots' vs. 57%)",
+   "note": "No quote supplied. §4.1 'Human authors subvert linearity' states the 79%/57% split exactly, and characterizes AI as favoring 'single-track narratives with fewer loose ends'."
+  },
+  "2": {
+   "index": 2,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "conveys emotion through physical sensations and bodily metaphors (81% vs. 38%)",
+   "note": "§4.1 'AI over-writes the body and senses' matches both figures; the same passage adds humans use explicit emotion labels 29% vs 8% for AI."
+  },
+  "3": {
+   "index": 3,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "deploys more smell-based imagery (82% vs. 57%)",
+   "note": "Exact figures in §4.1, same sentence family as the embodied-emotion finding."
+  },
+  "4": {
+   "index": 4,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "more protagonist-driven resolutions (69% vs. 46%); humans comfortable with ambiguous endings",
+   "note": "§4.1 matches both figures and states 'humans are more comfortable with ambiguous endings'; AI resolutions favor internal understanding/acceptance (47% vs 27%)."
+  },
+  "5": {
+   "index": 5,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "frame protagonist' choices as more morally ambiguous",
+   "note": "Quote is verbatim in the abstract (the paper prints a curly apostrophe in the same typo, 'protagonist’ choices'). §4.1 supplies the numbers as 'present morally ambivalent protagonists more often (59% vs. 38%)' — human 59%, AI 38%, as claimed."
+  },
+  "6": {
+   "index": 6,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "fourth wall (67% vs. 39%); reader directly (28% vs. 7%); specific texts (47% vs. 24%)",
+   "note": "All three pairs appear exactly in §4.1 ('Human authors engage the outside world'), and 'Humans use more time jumps, flashbacks and flash-forwards, and nonlinear structure' covers chronological discontinuity. Note the three cited percentages are intertextuality/fourth-wall features, not temporal ones, despite the claim's 'temporal complexity' label."
+  },
+  "7": {
+   "index": 7,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "occupy a rarer, more dispersed region of narrative space",
+   "note": "Quote verbatim in the Conclusion. §5 confirms both figures: 'mean human-AI centroid distance is 1.6× the mean AI-AI centroid distance (6.6 vs. 4.3)' and '24.7% of all human stories fall in the top 10% rarest stories corpus-wide, compared to just 7.1% of AI stories'."
+  },
+  "8": {
+   "index": 8,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "far harder to \"humanize\"",
+   "note": "Quote verbatim in the Introduction (with 'humanize' in scare quotes). §4.2 confirms 93.9% macro-F1 on style-edited stories vs 95.5% unedited, a 1.6-point drop. One precision caveat: the rewriting is LAMP span-level artifact removal performed by Gemini itself using 25 few-shot examples from professional writers on 278 Gemini stories — not rewriting by professionals, so 'professional-style rewriting' is a loose gloss."
+  },
+  "9": {
+   "index": 9,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Claude produces notably flat event escalation",
+   "note": "Quote verbatim in the abstract. All three fingerprints check out: §5 'Claude keeps it cool' ('event intensity escalates less than in any other source'); 'GPT likes to gossip' (gossip/rumor 64% vs 44-55%) plus the abstract's 'GPT over-indexes on dream sequences'; and 'Gemini produces the tidiest endings, extended denouements, and the bleakest settings'."
+  },
+  "10": {
+   "index": 10,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "delves (r=28.0), showcasing (r=10.2), underscores (r=10.9); 66% verbs, 16% adjectives",
+   "note": "No quote supplied. Kobak et al. give delves r=28.0 and showcasing r=10.2 exactly, and 'hundreds of words have abruptly increased their frequency after ChatGPT became available'. The POS split is real but narrower than stated: 'Out of all 319 excess style words in 2024, 66% were verbs and 16% were adjectives' — style words, not all excess words. 'intricate' is the paper's own example of a style word; 'pivotal', 'realm' and 'meticulously' appear in the paper only as words identified by cited work (Liang et al. 2024b; Gray 2024) and in illustrative AI-style sentences, not in Kobak's own headline excess list."
+  },
+  "11": {
+   "index": 11,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "lexical overrepresentation remains a feature of current iterations of ChatGPT",
+   "note": "Quote verbatim in §7 (sentence-internal, so lowercase 'lexical'). Appendix A's table of 21 focal words contains every word named in the claim: delve/delves/delved/delving, showcasing, underscores, intricate, garnered, boasts, groundbreaking, realm, aligns. §4 and Appendix B confirm the words are not overrepresented in pre-LLM corpora (arXiv, LCC, PubMed, Wikipedia). One hedge: the paper reports 'mixed evidence' for RLHF — 'the model testing is consistent with RLHF playing a role', not a demonstrated source."
+  },
+  "12": {
+   "index": 12,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "wary of the word \"delve\"",
+   "note": "Verbatim in the Introduction ('participants became wary of the word \"delve\" in the first sentence of an abstract') and echoed in §6 as 'Wariness about the word \"delve\"'. Caveat on the second half: the paper's line about judging on words rather than content is a speculation about rushed, underpaid RLHF evaluators — 'Rushed human evaluators might base their evaluations on the presence of particular words rather than on content' — not a finding about readers generally."
+  },
+  "13": {
+   "index": 13,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "pass 3-10X less TTCW tests than stories written by professionals",
+   "note": "The given URL is the arXiv abs page, which carries only the abstract: it supports 14 binary tests, professional authors vs LLMs, and '3-10X less', but not the pass rates. Fetching the same paper's full text (arxiv.org/html/2309.14556v3) confirms every figure exactly — '12 expert-written stories pass an average of 84.7% of the tests... from 9% for ChatGPT-generated stories, up to 30% for Claude-generated stories', and the claim's quotation is verbatim there: 'LLM-generated stories are three to ten times less likely to pass individual TTCW tests'. Not marked VERBATIM because the quote is absent from the URL actually cited. 'New Yorker' is likewise confirmed only in the full text (Table 5 column 'NewYorker')."
+  },
+  "14": {
+   "index": 14,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Originality in Form 63.9 vs 0.0-8.3; Theme & Content 75.0 vs 0-19.4",
+   "note": "Not present on the abs page at the cited URL in any form — the abstract does not break results out by test. Verified in the same paper's full text, Table 5, where the figures match exactly: Originality in Form GPT3.5 2.8 / GPT4 8.3 / Claude 0.0 / New Yorker 63.9; Originality in Theme & Content GPT3.5 0 / GPT4 19.4 / Claude 11.1 / New Yorker 75.0. Judged against the abs page alone this would be NOT_FOUND; judged against the cited paper it is exactly right."
+  }
+ }
 }

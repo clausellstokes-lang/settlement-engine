@@ -1,7 +1,7 @@
 {
  "name": "tolkien",
  "runId": "wf_9b91b240-c98",
- "exportedAt": "2026-09-05T22:34:48.129Z",
+ "exportedAt": "2026-09-05T22:39:49.137Z",
  "claims": [
   {
    "feature": "register modulation",
@@ -5391,6 +5391,96 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "Stress, release. Inbreath, outbreath. A heartbeat.",
    "note": "Exact, in the Le Guin passage quoted by kate_nepveu (post dated June 4 2006): \"as simple as a rhythm can be: two beats. Stress, release. Inbreath, outbreath. A heartbeat. A walking gait—but on so vast a scale...\". The human-gait element is doubly supported: \"we walk from the Shire to the Mountain of Doom with Frodo and Sam. One, two, left, right, on foot, all the way.\""
+  },
+  "150": {
+   "index": 150,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "irreducible simplicity of the trochaic beat, stress/unstress",
+   "note": "Quote appears word for word in Le Guin's concluding sentence as quoted by Nepveu: \"Relying on the irreducible simplicity of the trochaic beat, stress/unstress, Tolkien constructs an inexhaustibly complex, stable rhythmic pattern...\" The reversal pairs are on the page too, from Le Guin's close reading of Fellowship ch. 8 (page spells it \"Fog on the Barrow Downs\", unhyphenated): \"darkness/daylight,\" \"confusion of thought/clarity,\" and \"imprisonment or a trap/freedom\"."
+  },
+  "151": {
+   "index": 151,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "repetition, semirepetition, suggestion, foreshadowing, recollection, echo, and reversal",
+   "note": "Word-for-word, same quoted paragraph as 150. Page wording of what is built: \"The tremendous landscape of Middle Earth, the psychological and moral universe of The Lord of the Rings, is built up by...\" — so \"moral and physical world\" is the claim's compression, accurate in substance."
+  },
+  "152": {
+   "index": 152,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the cadences are graceful and inevitable",
+   "note": "Verbatim in the Le Guin block quote Fisher opens with (footnoted to \"Rhythmic Pattern in The Lord of the Rings,\" Meditations on Middle-earth, 101-2): \"Even when the sentences are long, their flow is perfectly clear, and follows the breath; punctuation comes just where you need to pause; the cadences are graceful and inevitable.\" The \"must be read aloud\" element is supported by the passage's close, \"it wants the living voice to speak it\", rather than by an explicit imperative."
+  },
+  "153": {
+   "index": 153,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Tolkien must have heard what he wrote",
+   "note": "Verbatim: \"Like Charles Dickens and Virginia Woolf, Tolkien must have heard what he wrote. The narrative prose of such novelists is like poetry in that it wants the living voice to speak it...\" Dickens/Woolf pairing and the living-voice point are both on the page; \"infers from the cadences\" is the claim's connective, since Le Guin juxtaposes rather than states the inference."
+  },
+  "154": {
+   "index": 154,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Short rhythms repeated form long rhythms",
+   "note": "Verbatim in the Goodreads Kindle highlight from Conversations on Writing: \"Short rhythms repeated form long rhythms; there's a cyclical repetition in his work which I think is part of why it totally enchants so many of us.\" One caution: Le Guin says \"part of why it totally enchants so many of us\", so the claim's \"is why the book enchants\" hardens a hedge."
+  },
+  "155": {
+   "index": 155,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "like a drumbeat, marking the relentless forward drive",
+   "note": "Verbatim within \"The iambic is sometimes like a drumbeat, marking the relentless forward drive of the action.\" Both halves of the claim hold: iambic pentameter is shown scanned in the Cirith Ungol passage, and the elevated Rohirrim/Pelennor passages are identified as \"the alliterative meter of Anglo-Saxon poetry... four main stressed syllables, of which at least three are alliterated\". Minor: the drumbeat sentence is about the Cirith Ungol passage, not a battle scene."
+  },
+  "156": {
+   "index": 156,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "elevated, incantatory, almost trance-like",
+   "note": "Mixed. The quote is verbatim (\"the style then changes into something elevated, incantatory, almost trance-like\"), and the mode-switching half is supported: \"This double-meter is how Tolkien effects an effortless, organic transition from one mode to the other.\" But the repetition clause is NOT on the page: \"repetition\"/\"repeat\" occurs zero times in the article, no comment is made about emotional intensification, and \"All is lost. All is lost\" appears only inside the quoted Tolkien passage in the earlier IAMBIC (Cirith Ungol) section — not in the alliterative sections the claim assigns it to. That clause must be dropped."
+  },
+  "157": {
+   "index": 157,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "breathless excitement",
+   "note": "Verbatim: parataxis defined as \"short, simple sentences joined by coordinating conjunctions (e.g., 'and')\", and \"As John Garth observes, the technique 'became a hallmark of Tolkien's writing,' using it to achieve a sense of 'breathless excitement'... (Tolkien and the Great War, 271).\" The two examples are indeed from \"The Ride of the Rohirrim\" and \"The Battle of Pelennor Fields\"."
+  },
+  "158": {
+   "index": 158,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "stylistically marked",
+   "note": "Verbatim: \"Turner notes that the paratactic style here, with the repeated use of 'and' in the manner of the New Testament, is 'stylistically marked', indicating something out of the ordinary.\" The exalted-register half follows on the same line: readers experience the shift as \"an impression of exalted register\" because of the biblical association, \"even though Tolkien uses few unusual or archaic words in the passage.\" Citation resolves to Turner 2020, pp. 389-403."
+  },
+  "159": {
+   "index": 159,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "loose semantic fit",
+   "note": "Verbatim: \"The Tolkien scholar Tom Shippey calls such deliberate use of the conjunction, avoiding explicit logical connection, 'loose semantic fit'.\" The inline citation metadata resolves to Shippey 2005, p. 203 (The Road to Middle-Earth), confirming the attribution; the biblical evocation comes from the immediately preceding \"in the manner of the New Testament\"."
+  },
+  "160": {
+   "index": 160,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Mourn not overmuch! Mighty was the fallen, meet was his ending",
+   "note": "Verbatim (page continues \"When his mound is raised, women then shall weep. War now calls us!\"). Both halves supported, but the attribution needs care: the \"midway between\" phrase is Shippey's, quoted by Shelton — \"Shelton notes that Shippey rightly called this \"'midway between' a lament and a battle-cry\"\" — and the closing \"elegiac lay\" in which \"Tolkien has a scop of Rohan imitate his beloved Beowulf\" is Mahon's observation, not Shelton's."
+  },
+  "161": {
+   "index": 161,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "tinged with the elegiac",
+   "note": "Verbatim: \"Robert Lee Mahon states in CEA Critic that Tolkien's account of the battle is tinged with the elegiac, so that whatever the outcome, much will be lost.\" The mourn-while-rejoicing half is also explicit: \"Mahon comments that the reader mourns even while rejoicing, in his view 'the essence of great fantasy'.\" Reference is Mahon, CEA Critic 40(2), January 1978, 33-36."
+  },
+  "162": {
+   "index": 162,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "essentially all in a poetic metre",
+   "note": "Substance holds; the quotation is one word off. Page: \"Tom Bombadil's speech, too, is essentially all in a poetic metre\" — the claim's quote drops the article \"a\". Citation metadata on that sentence resolves to Forest-Hill 2015 (pp. 91-107), Dettmann 2014 (pp. 207-209) and Le Guin 2001, confirming the named scholars. Treebeard is Walker 2009 (pp. 140-141): the lament \"in its rhythmic sensitivity... is obviously poetic\"."
+  },
+  "163": {
+   "index": 163,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a failure of tone",
+   "note": "Verbatim: \"I think this is a failure of tone (moving us back towards the intrusive narrator of The Hobbit) and jarring to the readers\", about the fox's thoughts in Fellowship ch. 3. The contrast is on the page too: \"'Sam was content, if logs can be said to be contented' works much better as narrative lightening without jarring the reader\"."
+  },
+  "164": {
+   "index": 164,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "more than 50% of the novel",
+   "note": "Verbatim inside \"Without doing tedious tabulation, I would venture to argue that something more than 50% of the novel is devoted to landscape description.\" The second half is explicit: \"I wonder if Tolkien could have been just as effective with fewer words.\" Note Drout hedges heavily (\"without doing tedious tabulation... I would venture\"), so \"estimates\" is the right verb, as the claim has it."
   }
  }
 }
