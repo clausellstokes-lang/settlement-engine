@@ -2137,6 +2137,16 @@
       },
       "band": null,
       "note": "DS-GEN-6's food-deficit cut. PROPOSED = 0.05, the value shipping today; giving it a name moved nothing. EVIDENCE: `gap / need >= DEFICIT_FRACTION_FROM` in foodDeficitDimension, where the gap is the larger of a pre-import rawDeficit and a post-import residual and `need` is daily need — a ratio of two food quantities, dimensionless and 0..1, so fraction01. ⭐ THIS VALUE IS NOT THIS DESK'S ALONE, AND THE SITTING SHOULD KNOW IT BEFORE SIGNING: it MIRRORS the producer's own inline cut `gap / need >= 0.05` in generateSettlementReason (src/generators/narrativeGenerator.js), which computes hasFoodDeficit and persists nothing, so the desk has no canonical field to read and must re-derive. tests/domain/generalStateProseDesk.test.js pins the PRODUCER's literal through mustExtract and drives both sides of the boundary (4/100 reads 'no deficit', 5/100 reads 'deficit'), so the two cannot drift in silence — but they remain TWO literals in two trees, and only this one now has a register row. Signing this row alone would sign half of one value. The honest signature covers both sites, or the producer's literal earns a name and a row of its own first. DRAFT — registering is not signing."
+    },
+    "src/domain/worldPulse/irregularForce.js#IRREGULAR_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "SHARE_WEIGHT": "share"
+      },
+      "band": null,
+      "note": "W-SEAT D10 (SEAT-7a replayed by SEAT-78 at §899→§900): the irregular-force leaf's one dial, SHARE_WEIGHT — the share of the incumbent's political standing a maximal rising takes off the table (the factor spans [1 − SHARE_WEIGHT, 1]); unit `share` from the leaf's own doc block. DRAFT — registered by the Fable chair at the §900 composition because the walker's totality arm convicted the table as unnamed; the lane's receipt predicted this row. Nothing here is signed."
     }
   },
   "roles": {
