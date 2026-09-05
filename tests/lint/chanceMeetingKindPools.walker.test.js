@@ -69,11 +69,14 @@ import { WHAT_PHRASES } from '../../src/domain/display/settlementRumors.js';
 import { KIND_SECTION } from '../../src/domain/display/chroniclersLetter.js';
 import { SECTION_OF, isExplicitlyRouted } from '../../src/domain/realm/heraldRouting.js';
 import {
+  CHANCE_MEETING_EXPOSED_REASON,
   CHANCE_MEETING_KINDS,
   CHANCE_MEETING_KIND_REGISTRY,
   CHANCE_MEETING_PRESENTATION,
   CHANCE_MEETING_REASON,
   chanceMeetingEntry,
+  chanceMeetingExposedEntry,
+  chanceMeetingHeraldEntry,
   chanceMeetingLine,
 } from '../../src/domain/worldPulse/envoyChanceMeetingNews.js';
 // ⛔ THE CORPUS MODULE IS IMPORTED DIRECTLY AND THE IMPORT IS LOAD-BEARING TWICE OVER, on the
@@ -89,29 +92,54 @@ import {
 /** kind, significance, audience, desk, authored depth. */
 const EXPECTED = Object.freeze([
   ['chance_meeting_recorded', 'notable', 'public', 'events', 6],
+  ['chance_meeting_exposed', 'major', 'public', 'events', 5],
 ]);
 
-/** The annex heading for this pool. ⭐ Unlike the FAITH volume's descriptive placeholder, the
- *  sealed file heads the block with the CANONICAL spelling already, so the two-spelling join the
- *  FAITH walker carries has no work to do here — asserted below rather than assumed. */
-const ANNEX_KIND = 'chance_meeting_recorded';
-/** The wave's own slice anchors inside the CHANCE_MEETING volume. */
-const SECTION = '## §A ENC-4';
-const UNTIL = '## §B ENC-4';
 const ANNEX_URL = new URL('../../docs/content/RECEIPT_POOLS_CHANCE_MEETING.md', import.meta.url);
 const ANNEX_SOURCE = readFileSync(ANNEX_URL, 'utf8');
 
-/** The line that separates the authored POOL from the annex's own slot DECLARATION. */
-const SLOTS_MARKER = '**Per-variant required slots**';
+/**
+ * ⭐ ONE DOCUMENT, TWO GOVERNED BLOCKS, AND EACH KIND CARRIES ITS OWN ANCHORS. ENC-4 read a single
+ * block and hard-coded its three anchors; ENC-4b registers the volume's second kind, so the
+ * anchors become a per-kind table rather than a second copy of the reader. ⛔ THE SLOT MARKERS
+ * ARE NOT THE SAME STRING: §A writes `**Per-variant required slots**` and §B writes
+ * `**Per-variant required slots:**`. Inheriting §A's marker would have made the §B split silently
+ * fail to find its declaration block — which is exactly what the fail-closed reader below throws
+ * on, and the MUTANT arm proves it does.
+ *
+ * ⭐ Unlike the FAITH volume's descriptive placeholders, the sealed file heads BOTH blocks with
+ * the canonical kind spelling, so the two-spelling join the FAITH walker carries has no work to
+ * do here — asserted below rather than assumed.
+ */
+const ANNEX_BLOCKS = Object.freeze({
+  chance_meeting_recorded: Object.freeze({
+    section: '## §A ENC-4', until: '## §B ENC-4', slotsMarker: '**Per-variant required slots**',
+  }),
+  chance_meeting_exposed: Object.freeze({
+    section: '## §B ENC-4', until: '## §C HOLE 3', slotsMarker: '**Per-variant required slots:**',
+  }),
+});
+
+/** The §A anchors, still named because three arms below are §A's alone (the band table, the
+ *  reason clause, and the section-heading mutant). */
+const SECTION = ANNEX_BLOCKS.chance_meeting_recorded.section;
+const UNTIL = ANNEX_BLOCKS.chance_meeting_recorded.until;
+const SLOTS_MARKER = ANNEX_BLOCKS.chance_meeting_recorded.slotsMarker;
 /** A numbered row in either list. */
 const NUMBERED_ROW_RE = /^\d+\. (.+)$/gm;
 
-/** Every slot the §A block declares, in a fixed order the sentinel witness reads back in. */
-const ALL_SLOTS = Object.freeze(['npc', 'counterpart', 'settlement', 'home', 'outcome_phrase']);
+/** Every slot each block declares, in a fixed order the sentinel witness reads back in. ⛔ §B
+ *  declares FOUR: it takes no `{outcome_phrase}`, because a refusal is not a mark band. */
+const ALL_SLOTS = Object.freeze({
+  chance_meeting_recorded: Object.freeze(['npc', 'counterpart', 'settlement', 'home', 'outcome_phrase']),
+  chance_meeting_exposed: Object.freeze(['npc', 'counterpart', 'settlement', 'home']),
+});
 /** Markers no authored sentence contains, so a surviving one names the slot that placed it. */
-const SENTINEL = Object.freeze(Object.fromEntries(ALL_SLOTS.map((slot) => [slot, `<<${slot}>>`])));
+const SENTINEL = Object.freeze(Object.fromEntries(
+  ALL_SLOTS.chance_meeting_recorded.map((slot) => [slot, `<<${slot}>>`]),
+));
 
-/** The production interpolation: every slot the writer resolves, all five supplied. */
+/** The production interpolation per kind: every slot the writer resolves, all of them supplied. */
 const SUPPLIABLE = Object.freeze({
   npc: 'Sera Vane',
   counterpart: 'Aldo Rell',
@@ -122,43 +150,66 @@ const SUPPLIABLE = Object.freeze({
 /** The same with the guest's home withheld — the second arm of the eligibility control. */
 const WITHOUT_HOME = Object.freeze({ ...SUPPLIABLE, home: '' });
 /**
- * The variants that name `{home}`, by ZERO-BASED index, taken from the annex's own declaration
- * rather than counted. Variant two (index 1) is the only one that does not.
+ * The variants that name `{home}`, by ZERO-BASED index, taken from each annex block's own
+ * declaration rather than counted. In §A variant two (index 1) is the only one that does not; in
+ * §B every variant names it, so withholding `{home}` there leaves NOTHING eligible — a sharper
+ * second arm than §A's, not a weaker one.
  */
-const HOME_LESS_INDEXES = Object.freeze([1]);
+const HOME_LESS_INDEXES = Object.freeze({
+  chance_meeting_recorded: Object.freeze([1]),
+  chance_meeting_exposed: Object.freeze([]),
+});
 
 /**
- * THE BLOCK SPLIT, fail-closed. Slices the §A wave block with the SHARED reader's anchors, finds
- * the kind heading with the shared reader's exactly-once guard, then cuts the body at the
- * declaration marker so the pool rows and the declared slot rows are read from disjoint text.
- * Throws on every absence — an extractor that returns `[]` is the bug this shape refuses.
- * @param {string} source @returns {{rows: string[], declared: string[][]}}
+ * THE BLOCK SPLIT, fail-closed and PER KIND. Slices the named wave block with the SHARED reader's
+ * anchors, finds the kind heading with the shared reader's exactly-once guard, then cuts the body
+ * at that block's own declaration marker so the pool rows and the declared slot rows are read
+ * from disjoint text. Throws on every absence — an extractor that returns `[]` is the bug this
+ * shape refuses, and three MUTANT arms below prove each throw fires.
+ * @param {string} source @param {string} kind @returns {{rows: string[], declared: string[][]}}
  */
-function annexBlocks(source) {
-  const scope = sectionSlice(source, SECTION, UNTIL);
+function annexBlocks(source, kind = 'chance_meeting_recorded') {
+  const anchors = ANNEX_BLOCKS[kind];
+  if (!anchors) throw new Error(`chanceMeetingAnnex: ${kind}: no declared annex anchors`);
+  const scope = sectionSlice(source, anchors.section, anchors.until);
   const heading = anchoredOnce(
-    scope, new RegExp(`^### ${ANNEX_KIND}(?= )`, 'gm'), `${ANNEX_KIND}: heading in ${SECTION}`,
+    scope, new RegExp(`^### ${kind}(?= )`, 'gm'), `${kind}: heading in ${anchors.section}`,
   );
   const afterHeading = scope.indexOf('\n', heading.index);
-  if (afterHeading < 0) throw new Error(`chanceMeetingAnnex: ${ANNEX_KIND}: heading has no body`);
+  if (afterHeading < 0) throw new Error(`chanceMeetingAnnex: ${kind}: heading has no body`);
   const body = scope.slice(afterHeading + 1);
-  const marker = body.indexOf(SLOTS_MARKER);
+  const marker = body.indexOf(anchors.slotsMarker);
   if (marker < 0) {
-    throw new Error(`chanceMeetingAnnex: ${ANNEX_KIND}: no "${SLOTS_MARKER}" block — the pool and`
+    throw new Error(`chanceMeetingAnnex: ${kind}: no "${anchors.slotsMarker}" block — the pool and`
       + ' its slot declaration cannot be told apart');
   }
   const rows = [...body.slice(0, marker).matchAll(NUMBERED_ROW_RE)].map((hit) => hit[1]);
   const declaredRows = [...body.slice(marker).matchAll(NUMBERED_ROW_RE)].map((hit) => hit[1]);
-  if (rows.length === 0) throw new Error(`chanceMeetingAnnex: ${ANNEX_KIND}: no authored rows`);
-  if (declaredRows.length === 0) throw new Error(`chanceMeetingAnnex: ${ANNEX_KIND}: no declared slot rows`);
+  if (rows.length === 0) throw new Error(`chanceMeetingAnnex: ${kind}: no authored rows`);
+  if (declaredRows.length === 0) throw new Error(`chanceMeetingAnnex: ${kind}: no declared slot rows`);
   const declared = declaredRows.map((row) => [...row.matchAll(/\{(\w+)\}/g)].map((hit) => hit[1]));
   return { rows, declared };
 }
 
-/** The annex's six sentences under one interpolation. @param {Record<string,string>} interp */
-function annexLines(interp) {
-  return annexBlocks(ANNEX_SOURCE).rows
+/** One block's authored sentences under one interpolation.
+ *  @param {Record<string,string>} interp @param {string} [kind] */
+function annexLines(interp, kind = 'chance_meeting_recorded') {
+  return annexBlocks(ANNEX_SOURCE, kind).rows
     .map((row) => row.replace(/\{(\w+)\}/g, (_, slot) => String(interp[slot])));
+}
+
+/**
+ * THE §C ROW FOR ONE KIND, read out of the annex's own two-row table. §B authors no
+ * "REASON, riding every variant" clause the way §A does, so the writer's reason limb is filled
+ * from the chair's §C noun phrase for the same kind — and this is the join that makes that a
+ * CITATION rather than a mint.
+ * @param {string} kind @returns {string}
+ */
+function annexWhatPhrase(kind) {
+  const scope = sectionSlice(ANNEX_SOURCE, '## §C HOLE 3', '**Why the first was amended.**');
+  const hit = new RegExp(`^\\| \`${kind}\` \\| \`(.+?)\` \\|`, 'm').exec(scope);
+  if (!hit) throw new Error(`chanceMeetingAnnex: ${kind}: no §C row`);
+  return hit[1];
 }
 
 /** The annex's own `{outcome_phrase}` table, band -> fill. @returns {Record<string,string>} */
@@ -215,10 +266,41 @@ function entryOf(extra = {}) {
   return chanceMeetingEntry({ seed: seedOf(extra), now: '2026-01-01T00:00:00.000Z' });
 }
 
+/**
+ * ⭐⭐ THE §B SEED, AND ITS SHAPE IS THE WHOLE POINT OF ENC-4b. `approacherNid` is the limb ENC-4
+ * reported missing and named the breaking slot for; the stage now DERIVES it from the receipt's
+ * own exposure grievance. Here the approacher is `npc:kesthorne:1` — the person whose court is
+ * NOT the host — so the one who refused is of Bramwell, which is exactly what §B variant 1 says
+ * out loud. The MIRROR below flips only that one field.
+ * @param {Record<string,unknown>} [extra]
+ */
+function exposedSeedOf(extra = {}) {
+  return {
+    beat: 'approach_exposed',
+    id: 'chance_meeting:err-9|kesthorne|bramwell',
+    tick: 41,
+    outcome: 'exposed',
+    venue: 'host_settlement',
+    settlementIds: ['kesthorne', 'bramwell'],
+    npcIds: ['npc:kesthorne:1', 'npc:bramwell:4'],
+    approacherNid: 'npc:kesthorne:1',
+    venueIds: [],
+    hostId: 'bramwell',
+    npcNames: ['Sera Vane', 'Aldo Rell'],
+    settlementNames: { kesthorne: 'Kesthorne', bramwell: 'Bramwell' },
+    ...extra,
+  };
+}
+
+/** @param {Record<string,unknown>} [extra] */
+function exposedEntryOf(extra = {}) {
+  return chanceMeetingExposedEntry({ seed: exposedSeedOf(extra), now: '2026-01-01T00:00:00.000Z' });
+}
+
 describe('ENC-4 phrased-kind registry — the meeting neither court arranged', () => {
-  test('the one-kind census and every reader join are exact', () => {
+  test('the two-kind census and every reader join are exact', () => {
     expect(CHANCE_MEETING_KINDS).toEqual(EXPECTED.map(([kind]) => kind));
-    expect(CHANCE_MEETING_KIND_REGISTRY).toHaveLength(1);
+    expect(CHANCE_MEETING_KIND_REGISTRY).toHaveLength(2);
     for (const [kind, significance, audience, section, depth] of EXPECTED) {
       const row = CHANCE_MEETING_KIND_REGISTRY.find((candidate) => candidate.kind === kind);
       expect(row).toMatchObject({ kind, significance, audience, section });
@@ -226,11 +308,13 @@ describe('ENC-4 phrased-kind registry — the meeting neither court arranged', (
       expect(row.requiredSlots).toHaveLength(depth);
       expect(Object.isFrozen(row)).toBe(true);
       expect(Object.isFrozen(row.requiredSlots)).toBe(true);
-      // Six authored variants clear the derived `notable` floor of six by EQUALITY rather than by
-      // margin, asserted against the derived table rather than a re-typed number. ⛔ A single
-      // variant leaving this pool takes the family under its floor on the day it goes.
+      // Every pool clears the derived floor for its OWN class, asserted against the derived table
+      // rather than a re-typed number. §A's six clear `notable`'s six by EQUALITY, so a single
+      // variant leaving that pool takes the family under its floor on the day it goes; §B's five
+      // clear `major`'s four by margin. Both are pinned, and the EQUALITY is named as the fragile
+      // one rather than left for a reader to notice.
       expect(row.pool.length).toBeGreaterThanOrEqual(FREQUENCY_FLOORS[significance]);
-      expect(row.pool.length).toBe(FREQUENCY_FLOORS.notable);
+      expect(row.pool.length).toBe(depth);
       // ⛔ THE REGISTRY READS THE CORPUS MODULE, it does not carry its own copy. Without this the
       // annex equality below would still pass over an inlined array that happened to render the
       // same sentences, and the corpus module would have no consumer at all.
@@ -248,18 +332,55 @@ describe('ENC-4 phrased-kind registry — the meeting neither court arranged', (
     // SECOND row arriving covert reds here instead of slipping past a loop written for one kind.
     expect(CHANCE_MEETING_KIND_REGISTRY.filter((row) => row.audience !== 'public')).toEqual([]);
     expect(chanceMeetingLine('chance_meeting_unknown_kind', 'seed', SUPPLIABLE)).toBeNull();
-    // Read against a call known to ANSWER, so the null above is a closed door rather than a
-    // picker that returns nothing for everything.
+    // Read against calls known to ANSWER, so the null above is a closed door rather than a picker
+    // that returns nothing for everything. BOTH rows answer, which is also the arm that would
+    // catch a second row registered against a pool the corpus module never gained.
     expect(chanceMeetingLine('chance_meeting_recorded', 'seed', SUPPLIABLE)).toBeTruthy();
+    expect(chanceMeetingLine('chance_meeting_exposed', 'seed', SUPPLIABLE)).toBeTruthy();
+    // ⭐ THE §A EQUALITY, NAMED. Six is `notable`'s floor exactly, and this is the arm that says
+    // so in a value rather than in the comment above.
+    expect(EXPECTED[0][4]).toBe(FREQUENCY_FLOORS.notable);
+    expect(EXPECTED[1][4]).toBeGreaterThan(FREQUENCY_FLOORS.major);
+    // ⛔ THE PRESENTATION TABLE MAY NOT OUTLIVE ITS ROWS. Its key set is pinned EQUAL to the
+    // significances the registry actually registers, so a class whose row left, or a row whose
+    // class has no landed pair, reds here instead of reaching a live pulse as `undefined`.
+    expect(Object.keys(CHANCE_MEETING_PRESENTATION).sort())
+      .toEqual([...new Set(CHANCE_MEETING_KIND_REGISTRY.map((r) => r.significance))].sort());
   });
 
-  test('the pool is the annex\'s, verbatim and in order, and the annex decides the arity', () => {
+  test('every pool is the annex\'s, verbatim and in order, and the annex decides the arity', () => {
+    for (const [kind] of EXPECTED) {
+      const row = CHANCE_MEETING_KIND_REGISTRY.find((candidate) => candidate.kind === kind);
+      const lines = row.pool.map((variant) => (
+        typeof variant === 'function' ? String(variant(SUPPLIABLE)) : String(variant)
+      ));
+      // ⭐ EACH BLOCK IS READ THROUGH ITS OWN ANCHORS, INCLUDING ITS OWN SLOT MARKER. §B spells
+      // that marker with a colon; a reader that inherited §A's would throw rather than pass.
+      expect(lines, `${kind}: pool is not the annex's`).toEqual(annexLines(SUPPLIABLE, kind));
+      expect(new Set(lines).size, `${kind}: a duplicated sentence`).toBe(row.pool.length);
+      expect(row.requiredSlots.map((slots) => [...slots]))
+        .toEqual(annexBlocks(ANNEX_SOURCE, kind).declared);
+      for (const line of lines) {
+        expect(line).toBe(line.trim());
+        expect(line.length).toBeGreaterThan(0);
+        // anchored: each block's lines are annex-equal and per-line non-empty two lines above.
+        expect(line).not.toMatch(/\d|%|×|_|\$\{|[{}]|\bundefined\b|\bNaN\b/);
+        // anchored: same liveness — the lines are annex-equal and non-empty above.
+        expect(line).not.toMatch(/[—!]/);
+        // anchored: same liveness — these are the block's annex-equal sentences.
+        expect(line).not.toMatch(/chance\W+meeting|meeting\W+chance/i);
+        // anchored: same liveness — the sentences name both people, asserted below.
+        expect(line).not.toMatch(/\b(?:died|dead|killed|slain|executed|exiled|wed|married|replaced|deposed)\b/i);
+      }
+      // THE POSITIVE CONTROL FOR ALL FOUR NEGATIVES: every sentence in both blocks really does
+      // name both people, so the absences are read against prose that could have carried them.
+      expect(lines.filter((line) => line.includes('Sera Vane'))).toHaveLength(row.pool.length);
+      expect(lines.filter((line) => line.includes('Aldo Rell'))).toHaveLength(row.pool.length);
+    }
     const row = CHANCE_MEETING_KIND_REGISTRY[0];
     const rendered = row.pool.map((variant) => (
       typeof variant === 'function' ? String(variant(SUPPLIABLE)) : String(variant)
     ));
-    expect(rendered).toEqual(annexLines(SUPPLIABLE));
-    expect(new Set(rendered).size).toBe(row.pool.length);
     // ⭐ WITNESS ONE — THE ANNEX'S OWN DECLARATION, in the annex's own sentence order. This volume
     // publishes `requiredSlots` per variant, so the registry's parallel array is pinned against
     // the document rather than merely against itself.
@@ -268,10 +389,11 @@ describe('ENC-4 phrased-kind registry — the meeting neither court arranged', (
     // sentence contains, read back which survived, and pin the SET against the same array. Witness
     // one would still pass if the annex's declaration had drifted from the annex's own sentences;
     // this one cannot, because it reads the sentences.
+    const slotOrder = ALL_SLOTS.chance_meeting_recorded;
     const fromSentences = annexLines(SENTINEL)
-      .map((line) => ALL_SLOTS.filter((slot) => line.includes(SENTINEL[slot])));
+      .map((line) => slotOrder.filter((slot) => line.includes(SENTINEL[slot])));
     expect(fromSentences).toEqual(
-      row.requiredSlots.map((slots) => ALL_SLOTS.filter((slot) => slots.includes(slot))),
+      row.requiredSlots.map((slots) => slotOrder.filter((slot) => slots.includes(slot))),
     );
     // …and the witness is only a witness if it can DISAGREE: the sentinel render must really
     // differ from the plain one, or every arity above would read as the empty array.
@@ -327,12 +449,18 @@ describe('ENC-4 phrased-kind registry — the meeting neither court arranged', (
     // here, and the mutants below prove the guard fires rather than decorating.
     expect(() => anchoredOnce(ANNEX_SOURCE, /^## §A ENC-4(?=[ \n])/gm, 'ENC-4 §A section')).not.toThrow();
     expect(() => anchoredOnce(ANNEX_SOURCE, /^## §B ENC-4(?=[ \n])/gm, 'terminator')).not.toThrow();
-    const hits = [...ANNEX_SOURCE.matchAll(new RegExp(`^### ${ANNEX_KIND}(?= )`, 'gm'))];
-    expect(hits, `${ANNEX_KIND}: annex heading count`).toHaveLength(1);
-    // ⭐ AND THE KIND ID IS THE ANNEX'S OWN. The FAITH volume heads its pools with descriptive
-    // placeholders and needs a two-spelling join; this sealed file already carries the canonical
-    // spelling, so the join is an EQUALITY and is asserted rather than assumed.
-    expect(ANNEX_KIND).toBe(CHANCE_MEETING_KINDS[0]);
+    expect(() => anchoredOnce(ANNEX_SOURCE, /^## §C HOLE 3(?=[ \n])/gm, '§B terminator')).not.toThrow();
+    // ⭐ EVERY ANCHOR OF EVERY BLOCK, not just §A's. ENC-4b rides four slice anchors and two kind
+    // headings; each is asserted single here, because a second matching heading retargets a
+    // substring pin in silence and this volume now has two blocks for one to land between.
+    for (const [kind] of EXPECTED) {
+      const hits = [...ANNEX_SOURCE.matchAll(new RegExp(`^### ${kind}(?= )`, 'gm'))];
+      expect(hits, `${kind}: annex heading count`).toHaveLength(1);
+      // ⭐ AND THE KIND ID IS THE ANNEX'S OWN. The FAITH volume heads its pools with descriptive
+      // placeholders and needs a two-spelling join; this sealed file already carries the canonical
+      // spelling in BOTH blocks, so the join is an EQUALITY and is asserted rather than assumed.
+      expect(CHANCE_MEETING_KINDS).toContain(kind);
+    }
   });
 
   test('MUTANT — a duplicated section heading throws instead of retargeting the slice', () => {
@@ -341,7 +469,7 @@ describe('ENC-4 phrased-kind registry — the meeting neither court arranged', (
   });
 
   test('MUTANT — a rotted kind heading throws instead of returning an empty pool', () => {
-    const doctored = ANNEX_SOURCE.replace(`### ${ANNEX_KIND} (ENC-4)`, `### ${ANNEX_KIND}X (ENC-4)`);
+    const doctored = ANNEX_SOURCE.replace('### chance_meeting_recorded (ENC-4)', '### chance_meeting_recordedX (ENC-4)');
     // anchored by execution: the UNdoctored source resolves this exact kind to six lines one line
     // below, so a reader that had stopped resolving anything would fail there rather than let
     // this throw-pin pass for the wrong reason.
@@ -360,62 +488,77 @@ describe('ENC-4 phrased-kind registry — the meeting neither court arranged', (
     expect([live.rows.length, live.declared.length]).toEqual([6, 6]);
   });
 
-  test('the desk-bearing row files one desk, carries one phrase, and mints no letter row', () => {
-    const row = CHANCE_MEETING_KIND_REGISTRY[0];
+  test('every desk-bearing row files one desk, carries one phrase, and mints no letter row', () => {
     // THE POSITIVE CONTROLS COME FIRST, because every claim below is only a measurement if the
     // readers it is read against are alive and populated on this run.
     expect(Object.keys(WHAT_PHRASES).length).toBeGreaterThan(1);
     expect(Object.keys(KIND_SECTION).length).toBeGreaterThan(1);
-    expect(SECTION_OF(row.kind)).toBe('events');
-    expect(row.section).toBe('events');
+    for (const row of CHANCE_MEETING_KIND_REGISTRY) {
+      expect(SECTION_OF(row.kind)).toBe('events');
+      expect(row.section).toBe('events');
+      // ⛔ EXPLICITLY ROUTED, NOT MERELY CATCH-ALL-ROUTED — ROAD B for the second row too. The
+      // exact row is the refusal of the free `chance_meeting_` prefix, for both kinds.
+      expect(isExplicitlyRouted(row.kind), `${row.kind}: not explicitly routed`).toBe(true);
+      // ⛔ NO CHRONICLE FILING IS CLAIMED BY EITHER ROW.
+      // anchored: the populated-map control above proves KIND_SECTION is alive on this run.
+      expect(KIND_SECTION).not.toHaveProperty(row.kind);
+      // The reader phrase is real prose from the annex's own §C table, not the de-underscored
+      // engine token the fallback returns — and it is joined to the DOCUMENT, not transcribed.
+      expect(WHAT_PHRASES[row.kind]).toBe(annexWhatPhrase(row.kind));
+    }
+    const row = CHANCE_MEETING_KIND_REGISTRY[0];
     // ⛔ EXPLICITLY ROUTED, NOT MERELY CATCH-ALL-ROUTED, AND THIS IS ROAD B'S WHOLE POINT. The
     // events desk is the Herald's explicit catch-all, so `SECTION_OF` answers 'events' for a
     // token nobody filed — the desk answer alone cannot tell a registered kind from an unfiled
     // one. This is the arm that separates them, and it is the refusal of the free prefix.
-    expect(isExplicitlyRouted(row.kind)).toBe(true);
-    // The control that gives the line above its teeth: an unfiled token gets the same desk and
+    // The control that gives the loop above its teeth: an unfiled token gets the same desk and
     // fails the same arm.
     expect(SECTION_OF('a_kind_that_will_never_exist_zzz')).toBe('events');
     expect(isExplicitlyRouted('a_kind_that_will_never_exist_zzz')).toBe(false);
     // The reader phrase is real prose, the chair's AMENDED §C noun phrase, not the de-underscored
     // engine token the fallback returns.
     expect(WHAT_PHRASES[row.kind]).toBe('a meeting no court arranged');
-    // ⛔ NO CHRONICLE FILING IS CLAIMED. The annex files a Herald desk and names no letter
-    // section; the routing walker asserts KIND_SECTION → routed and never the reverse, so a row
-    // here would claim a filing the corpus never made.
-    // anchored: the populated-map control above proves KIND_SECTION is alive on this run.
-    expect(KIND_SECTION).not.toHaveProperty(row.kind);
+    expect(WHAT_PHRASES.chance_meeting_exposed).toBe('a refusal that did not stay private');
+    // ⛔ AND THE §C JOIN IS A CITATION, PROVEN IN THE FALSE DIRECTION: the reader that produced
+    // the two equalities above really can fail, so they are a document join and not a tautology.
+    expect(() => annexWhatPhrase('a_kind_the_annex_never_filed')).toThrow(/no §C row/);
   });
 
-  test('the eligible set is exactly six with every slot supplied and five without a home', () => {
-    const [[kind]] = EXPECTED;
-    const whole = reachableIndexes(kind, SUPPLIABLE);
-    // ⛔ BOTH ARMS OR NOTHING. Asserting only that six are reachable would pass just as happily
-    // against a filter that had STOPPED filtering; the second arm is what proves the eligibility
-    // axis is live, and this corpus has no slot without a supplier to prove it with, so the
-    // control WITHHOLDS one.
-    expect(whole).toEqual([0, 1, 2, 3, 4, 5]);
-    const withoutHome = reachableIndexes(kind, WITHOUT_HOME);
-    expect(withoutHome).toEqual([...HOME_LESS_INDEXES]);
-    // The withheld slot is named BY INDEX rather than by count, so a corpus edit that moved
-    // `{home}` into a different variant reds instead of counting to one again.
-    const row = CHANCE_MEETING_KIND_REGISTRY[0];
-    expect(row.requiredSlots
-      .map((slots, index) => (slots.includes('home') ? -1 : index))
-      .filter((index) => index >= 0)).toEqual([...HOME_LESS_INDEXES]);
+  test('each eligible set is the whole authored pool supplied, and a named shortfall without a home', () => {
+    // ⛔ BOTH ARMS OR NOTHING, FOR BOTH KINDS. Asserting only that the whole pool is reachable
+    // would pass just as happily against a filter that had STOPPED filtering; the second arm is
+    // what proves the eligibility axis is live, and neither corpus has a slot without a supplier
+    // to prove it with, so the control WITHHOLDS one.
+    for (const [kind, , , , depth] of EXPECTED) {
+      const whole = reachableIndexes(kind, SUPPLIABLE);
+      expect(whole, `${kind}: not every authored variant is reachable`)
+        .toEqual([...Array(depth).keys()]);
+      const withoutHome = reachableIndexes(kind, WITHOUT_HOME);
+      // ⭐ §B's shortfall is the EMPTY SET, and that is a sharper arm than §A's, not a weaker
+      // one: every §B variant names `{home}`, so withholding it silences the kind entirely.
+      expect(withoutHome, `${kind}: the home-withheld arm`).toEqual([...HOME_LESS_INDEXES[kind]]);
+      // The withheld slot is named BY INDEX rather than by count, so a corpus edit that moved
+      // `{home}` into a different variant reds instead of counting to one again.
+      const row = CHANCE_MEETING_KIND_REGISTRY.find((candidate) => candidate.kind === kind);
+      expect(row.requiredSlots
+        .map((slots, index) => (slots.includes('home') ? -1 : index))
+        .filter((index) => index >= 0)).toEqual([...HOME_LESS_INDEXES[kind]]);
+    }
   });
 
-  test('the keyed pick is deterministic and the pool genuinely spreads', () => {
-    const [[kind]] = EXPECTED;
-    // Same key, same sentence — forever. THE PROMISE, asserted on the registry's own picker.
-    expect(chanceMeetingLine(kind, 'k::a::b', SUPPLIABLE)).toEqual(chanceMeetingLine(kind, 'k::a::b', SUPPLIABLE));
-    // …and DIFFERENT keys really do reach different variants, or the determinism above would be
-    // the determinism of a picker that answers one sentence to everything.
-    const spread = new Set(reachableIndexes(kind, SUPPLIABLE));
-    expect(spread.size).toBeGreaterThanOrEqual(2);
-    // THE CURED SPELLING IS OBSERVABLE, not merely commented: an `fnv % length` pick aliases onto
-    // a parity class, so all six eligible indexes would not be reachable. All six are.
-    expect(spread.size).toBe(6);
+  test('the keyed pick is deterministic and every pool genuinely spreads', () => {
+    for (const [kind, , , , depth] of EXPECTED) {
+      // Same key, same sentence — forever. THE PROMISE, asserted on the registry's own picker.
+      expect(chanceMeetingLine(kind, 'k::a::b', SUPPLIABLE))
+        .toEqual(chanceMeetingLine(kind, 'k::a::b', SUPPLIABLE));
+      // …and DIFFERENT keys really do reach different variants, or the determinism above would be
+      // the determinism of a picker that answers one sentence to everything.
+      const spread = new Set(reachableIndexes(kind, SUPPLIABLE));
+      expect(spread.size).toBeGreaterThanOrEqual(2);
+      // THE CURED SPELLING IS OBSERVABLE, not merely commented: an `fnv % length` pick aliases
+      // onto a parity class, so the whole eligible set would not be reachable. It is.
+      expect(spread.size, `${kind}: the pick does not reach every eligible variant`).toBe(depth);
+    }
   });
 
   test('the writer carries the NEWS ADDRESS LAW\'s whole chain, and the presentation pair is the landed one', () => {
@@ -444,9 +587,9 @@ describe('ENC-4 phrased-kind registry — the meeting neither court arranged', (
     expect(entry.familyId).toMatch(/^chance_meeting_recorded\.[1-6]$/);
     // THE PRESENTATION PAIR is `envoyNews.js`'s `notable` row, transcribed under GR-4B §6.2's
     // ruling and asserted BESIDE the row's class so the constant cannot outlive it.
-    expect(CHANCE_MEETING_PRESENTATION).toEqual({ severity: 0.56, score: 58 });
-    expect(entry.severity).toBe(CHANCE_MEETING_PRESENTATION.severity);
-    expect(entry.score).toBe(CHANCE_MEETING_PRESENTATION.score);
+    expect(CHANCE_MEETING_PRESENTATION.notable).toEqual({ severity: 0.56, score: 58 });
+    expect(entry.severity).toBe(CHANCE_MEETING_PRESENTATION.notable.severity);
+    expect(entry.score).toBe(CHANCE_MEETING_PRESENTATION.notable.score);
     // THE WIZARD-NEWS AUTHORING WALL's three required fields, asserted at the value level here as
     // well as structurally there.
     expect(String(entry.id)).toMatch(/^wizard_news\.41\.chance_meeting_recorded\.[0-9a-f]{16}$/);
@@ -486,8 +629,9 @@ describe('ENC-4 phrased-kind registry — the meeting neither court arranged', (
     expect(entryOf({ outcome: 'nothing' })).toBeNull();
     expect(entryOf({ outcome: 'compromised' })).toBeNull();
     expect(entryOf({ outcome: 'rejected' })).toBeNull();
-    // ⛔ THE ANNEX'S §B KIND IS NOT THIS ROW'S, and the beat gate says so in values rather than
-    // in a comment: the refusal that travelled has its own authored pool and no wiring today.
+    // ⛔ THE ANNEX'S §B KIND IS NOT THIS ROW'S, and the beat gate says so in values rather than in
+    // a comment: the refusal that travelled has its own pool, its own class and its own builder,
+    // and THIS builder must still refuse its beat — a dispatcher is not a merge.
     expect(entryOf({ beat: 'approach_exposed' })).toBeNull();
     expect(entryOf({ beat: '' })).toBeNull();
     // ⛔ A HOLE IS WORSE THAN A SILENCE. One unresolved name and the whole line is withheld. The
@@ -525,5 +669,145 @@ describe('ENC-4 phrased-kind registry — the meeting neither court arranged', (
     expect(entry).not.toHaveProperty('proposalPayload');
     // anchored: same populated entry — no deltas, the stage already wrote every ledger it owns.
     expect(entry).not.toHaveProperty('deltas');
+  });
+
+  test('§B — the roles are the APPROACH\'s, and the mirror proves the sentence names them right', () => {
+    // ⭐⭐ THE WRONG-ROLE LAW, EXECUTED. Every §B variant reads "{counterpart} … refused what {npc}
+    // … offered", so `{npc}` is the person who MADE the offer. ENC-4 reported this kind unwireable
+    // for exactly that reason: the seed carried parties in census order and no direction at all.
+    // The fixture and its MIRROR differ in ONE FIELD — which party the stage names as the
+    // approacher — and the sentence must follow that field rather than the array order.
+    const entry = exposedEntryOf();
+    expect(entry).toBeTruthy();
+    // THE FIXTURE: Sera Vane (of Kesthorne, the guest) approached; Aldo Rell (of Bramwell, the
+    // host's own) refused. The sentence must put Sera Vane in the OFFERER's clause.
+    expect(entry.headline).toContain('Sera Vane');
+    expect(entry.headline).toContain('Aldo Rell');
+    // ⛔ THE ROLE ARM ITSELF, and it is read on the WORDS rather than on a field: the offerer is
+    // the one the sentence attaches "of {home}" to, and the home is the approacher's own court.
+    expect(entry.headline).toContain('Sera Vane of Kesthorne');
+    // The positive clause one line up proves the "of {home}" join really renders on this sentence.
+    // anchored: headline asserted truthy and naming both people above; the positive clause is live.
+    expect(entry.headline).not.toContain('Aldo Rell of Kesthorne');
+
+    // ⭐ THE MIRROR. One field flipped: the HOST's own notable is now the approacher. Every §B
+    // variant would then have to call the guest "of {settlement}" — the host town he is not from
+    // — so the builder withholds the whole line. Silence, never a sentence that is fluent and
+    // wrong about where a man is from.
+    const mirror = exposedEntryOf({ approacherNid: 'npc:bramwell:4' });
+    expect(mirror).toBeNull();
+    // …and the mirror is only a mirror if the flip is the ONLY difference: the same seed with the
+    // original approacher still builds, so the null above is the role gate and not a broken seed.
+    expect(exposedEntryOf({ approacherNid: 'npc:kesthorne:1' })).toBeTruthy();
+  });
+
+  test('§B — the writer carries the whole address chain, the major pair, and the §C reason', () => {
+    const entry = exposedEntryOf();
+    // ADDRESS — the host and BOTH courts, deduped, plus both people.
+    expect(entry.settlementIds).toEqual(['bramwell', 'kesthorne']);
+    expect(entry.settlementNames).toEqual(['Bramwell', 'Kesthorne']);
+    expect(entry.npcIds).toEqual(['npc:kesthorne:1', 'npc:bramwell:4']);
+    // TYPED ACTION — the registered token, spelled as a literal so a raw-text walker can see it.
+    expect(entry.impactKind).toBe('chance_meeting_exposed');
+    expect(entry.kind).toBe(CHANCE_MEETING_KINDS[1]);
+    expect(isExplicitlyRouted(String(entry.impactKind))).toBe(true);
+    // THE GOVERNED METADATA rides the registry row rather than a second opinion.
+    expect(entry.significance).toBe('major');
+    expect(entry.section).toBe('events');
+    expect(entry.audience).toBe('public');
+    expect(entry.familyId).toMatch(/^chance_meeting_exposed\.[1-5]$/);
+    // THE PRESENTATION PAIR is `envoyNews.js`'s `major` row, asserted BESIDE the row's class.
+    expect(CHANCE_MEETING_PRESENTATION.major).toEqual({ severity: 0.76, score: 78 });
+    expect(entry.severity).toBe(CHANCE_MEETING_PRESENTATION.major.severity);
+    expect(entry.score).toBe(CHANCE_MEETING_PRESENTATION.major.score);
+    // ⛔ REASON — §B AUTHORS NO "REASON, RIDING EVERY VARIANT" CLAUSE and §A does. The limb is
+    // filled from the chair's own §C row for this exact kind, joined to the DOCUMENT here so it
+    // is a citation rather than a mint, and sentence-cased at the render exactly as §A's is.
+    expect(CHANCE_MEETING_EXPOSED_REASON).toBe(`${annexWhatPhrase('chance_meeting_exposed')}.`);
+    expect(entry.reasons).toEqual([`${CHANCE_MEETING_EXPOSED_REASON.charAt(0).toUpperCase()}${CHANCE_MEETING_EXPOSED_REASON.slice(1)}`]);
+    expect(entry.summary).toBe(entry.reasons[0]);
+    // The ids carry the kind and hide the errand handle, on the §A row's own cured idiom.
+    expect(String(entry.id)).toMatch(/^wizard_news\.41\.chance_meeting_exposed\.[0-9a-f]{16}$/);
+    expect(String(entry.sourceEventId)).toMatch(/^chance_meeting_receipt\.chance_meeting_exposed\.[0-9a-f]{16}$/);
+    // Same meeting, same world, same sentence — forever. THE PROMISE at the second writer too.
+    expect(exposedEntryOf()).toEqual(entry);
+  });
+
+  test('§B — the writer FAILS CLOSED on every seed whose approach it cannot honestly name', () => {
+    // The positive control first, so each null below is a closed door rather than a builder that
+    // answers nothing to everything.
+    expect(exposedEntryOf()).toBeTruthy();
+    // ⛔ THE LIMB ENC-4 DID NOT HAVE. Without an approacher there is no offerer, and §B may not
+    // guess one: this is the exact refusal that kept the kind unregistered for a whole car.
+    expect(exposedEntryOf({ approacherNid: '' })).toBeNull();
+    expect(exposedEntryOf({ approacherNid: 'npc:elsewhere:9' })).toBeNull();
+    // ⛔ AND THAT IS THE SHAPE A traveller x traveller SEED ARRIVES IN. The stage writes the empty
+    // string for every kind whose direction it will not claim, so the whole kind stays silent here
+    // without this file naming it — the R1 fence, enforced by absence rather than by a list.
+    expect(exposedEntryOf({ approacherNid: '', hostId: 'bramwell' })).toBeNull();
+    // A party count this builder did not expect would pair a name with the wrong id.
+    expect(exposedEntryOf({ npcIds: ['npc:kesthorne:1'] })).toBeNull();
+    expect(exposedEntryOf({ npcNames: ['Sera Vane'] })).toBeNull();
+    expect(exposedEntryOf({ settlementIds: ['kesthorne'] })).toBeNull();
+    // A hole is worse than a silence: one unresolved name and the whole line is withheld.
+    expect(exposedEntryOf({ npcNames: ['Sera Vane', ''] })).toBeNull();
+    expect(exposedEntryOf({ settlementNames: { kesthorne: 'Kesthorne', bramwell: '' } })).toBeNull();
+    expect(exposedEntryOf({ hostId: '' })).toBeNull();
+    // The other beat is not this row's, and the builder survives being called with nothing at all.
+    expect(exposedEntryOf({ beat: 'meeting' })).toBeNull();
+    expect(chanceMeetingExposedEntry()).toBeNull();
+    expect(chanceMeetingExposedEntry({})).toBeNull();
+  });
+
+  test('§B — the one door the pulse calls routes each beat to its own row and nothing else', () => {
+    // ⛔ THE DISPATCH IS THE FAMILY'S, NOT THE PULSE'S. `envoyPulse.js` hands every seed to one
+    // callback, so a builder added without a dispatch row would be a mint no producer can reach.
+    const now = '2026-01-01T00:00:00.000Z';
+    const recorded = chanceMeetingHeraldEntry({ seed: seedOf(), now });
+    const exposed = chanceMeetingHeraldEntry({ seed: exposedSeedOf(), now });
+    expect(recorded.impactKind).toBe('chance_meeting_recorded');
+    expect(exposed.impactKind).toBe('chance_meeting_exposed');
+    // Each door builds exactly what its own builder builds — the dispatcher adds no opinion.
+    expect(recorded).toEqual(chanceMeetingEntry({ seed: seedOf(), now }));
+    expect(exposed).toEqual(chanceMeetingExposedEntry({ seed: exposedSeedOf(), now }));
+    // …and a beat neither row claims is silence rather than a throw into a live pulse.
+    expect(chanceMeetingHeraldEntry({ seed: seedOf({ beat: 'a_beat_no_row_claims' }), now })).toBeNull();
+    expect(chanceMeetingHeraldEntry()).toBeNull();
+  });
+
+  test('§B — MUTANT: the two blocks spell their slot marker DIFFERENTLY, and inheriting one throws', () => {
+    // ⛔ THE TRAP THIS TABLE EXISTS FOR. §A writes `**Per-variant required slots**`; §B writes
+    // `**Per-variant required slots:**`. A reader that carried §A's marker into §B would not find
+    // it, and the fail-closed split throws instead of returning a merged twelve-row list.
+    expect(ANNEX_BLOCKS.chance_meeting_exposed.slotsMarker)
+      .not.toBe(ANNEX_BLOCKS.chance_meeting_recorded.slotsMarker);
+    const doctored = ANNEX_SOURCE.replace(ANNEX_BLOCKS.chance_meeting_exposed.slotsMarker, '**Slot notes**');
+    expect(() => annexBlocks(doctored, 'chance_meeting_exposed')).toThrow(/no "\*\*Per-variant required slots:\*\*" block/);
+    // The control: the undoctored source really does split §B into five and five.
+    const live = annexBlocks(ANNEX_SOURCE, 'chance_meeting_exposed');
+    expect([live.rows.length, live.declared.length]).toEqual([5, 5]);
+    // …and a kind with no declared anchors is refused rather than silently read against §A's.
+    expect(() => annexBlocks(ANNEX_SOURCE, 'chance_meeting_never_authored')).toThrow(/no declared annex anchors/);
+  });
+
+  test('§B — the sentinel witness reads the same four slots the annex declares', () => {
+    // ⭐ WITNESS TWO for §B, orthogonal and derived by EXECUTION: render the block under markers
+    // no sentence contains, read back which survived, and pin the SET against the registry's
+    // parallel array. The declaration join alone would still pass if the annex's declaration had
+    // drifted from the annex's own sentences; this one reads the sentences.
+    const slotOrder = ALL_SLOTS.chance_meeting_exposed;
+    const sentinel = Object.fromEntries(slotOrder.map((slot) => [slot, `<<${slot}>>`]));
+    const row = CHANCE_MEETING_KIND_REGISTRY[1];
+    const fromSentences = annexLines(sentinel, 'chance_meeting_exposed')
+      .map((line) => slotOrder.filter((slot) => line.includes(sentinel[slot])));
+    expect(fromSentences).toEqual(
+      row.requiredSlots.map((slots) => slotOrder.filter((slot) => slots.includes(slot))),
+    );
+    // …and the witness is only a witness if it can DISAGREE: all five sentences must really carry
+    // markers, or every arity above would read as the empty array and agree vacuously.
+    expect(fromSentences.filter((slots) => slots.length > 0)).toHaveLength(5);
+    // ⛔ §B TAKES NO `{outcome_phrase}`: a refusal is not a mark band, and the band table has no
+    // anchored: the five-non-empty arm one line up proves this array holds real slot names.
+    expect(fromSentences.flat()).not.toContain('outcome_phrase');
   });
 });

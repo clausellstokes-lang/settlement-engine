@@ -453,6 +453,9 @@ export const WHAT_PHRASES = Object.freeze({
   // ⛔ NOTE THE WORD ORDER: "chance" and "meeting" are never adjacent in any reader string of
   // this family (§886), so no raw engine identifier reaches a townsperson's mouth.
   chance_meeting_recorded: 'a meeting no court arranged',
+  // ENC-4b — the §C row the chair marked KEPT as drafted. It says the thing the kind is about:
+  // not that a refusal happened, but that it did not stay private. Same §886 word order fence.
+  chance_meeting_exposed: 'a refusal that did not stay private',
   npc_arrival: 'a new arrival',
   npc_assignment: 'a post newly filled',
   npc_death: 'a funeral bell',

@@ -105,14 +105,19 @@ function chanceMeetingKindRow(kind, significance, audience, section, requiredSlo
 }
 
 /**
- * The governed rows. ONE today, and the singular is a SEQUENCING fact rather than a stage of
- * construction: the annex's §B kind (`chance_meeting_exposed`) has its own authored pool and its
- * own producer in the stage's seam, but the seed that seam emits does not carry the APPROACH
- * DIRECTION, so `{npc}` (who offered) and `{counterpart}` (who refused) cannot be assigned from
- * it honestly. That is a finding back to the chair with the slot that breaks, NOT a word edit and
- * NOT a guess — and it is why this member registers one row rather than two.
+ * The governed rows. TWO, and the second one arrived only once the SLOT THAT BREAKS was cured at
+ * its source. ENC-4 registered `chance_meeting_recorded` alone and reported §B unwireable: every
+ * §B variant reads `{counterpart} … refused what {npc} … offered`, so `{npc}` is the APPROACHER,
+ * and the stage's typed seed carried parties in census order and nothing else. ENC-4b's car 1 put
+ * `approacherNid` on that seed, DERIVED FROM THE RECEIPT'S OWN EXPOSURE GRIEVANCE
+ * (`grievance.toSid` is `lead.approacher.homeSid`, and a home id names a person because the two
+ * parties' homes can never coincide) — never from party order, and never from the "the traveller
+ * approaches" rule the R1 ruling proposed, which this lane MEASURED FALSE in both directions.
  *
- * ⚠ THIS IS THE ESTATE'S THIRD ONE-ROW FAMILY, AND THAT IS A REVIEWED ACT.
+ * ⚠ CHANCE_MEETING IS STILL A SMALL FAMILY at two rows, so it stays on `kindPoolFloors`'s exact
+ * small-family exception list and the shrink-back obligation recorded there still stands.
+ *
+ * ⚠ THE THIRD SMALL FAMILY'S ADMISSION WAS A REVIEWED ACT.
  * `kindPoolFloors.walker.test.js` keeps the old blanket width floor of five as an EXACT exception
  * list precisely so a small family is a visible decision rather than a number that quietly
  * slipped. CHANCE_MEETING joins INFORMATION and FAITH on that list, and the SHRINK-BACK IS A
@@ -140,6 +145,16 @@ export const CHANCE_MEETING_KIND_REGISTRY = Object.freeze([
     ['home', 'settlement', 'npc', 'counterpart', 'outcome_phrase'],
     ['settlement', 'npc', 'home', 'counterpart', 'outcome_phrase'],
   ]),
+  // §B — THE REFUSAL THAT TRAVELLED. `major`, and five authored variants clear the derived major
+  // floor of four by margin rather than by equality. The order below is the annex's own
+  // `**Per-variant required slots:**` declaration order, in sentence order, never re-sorted here.
+  chanceMeetingKindRow('chance_meeting_exposed', 'major', 'public', 'events', [
+    ['counterpart', 'settlement', 'npc', 'home'],
+    ['settlement', 'counterpart', 'npc', 'home'],
+    ['npc', 'home', 'settlement', 'counterpart'],
+    ['settlement', 'counterpart', 'npc', 'home'],
+    ['settlement', 'counterpart', 'npc', 'home'],
+  ]),
 ]);
 
 /** The exact governed pool set. */
@@ -153,6 +168,22 @@ export const CHANCE_MEETING_KINDS = Object.freeze(CHANCE_MEETING_KIND_REGISTRY.m
 export const CHANCE_MEETING_REASON = 'a guest and a notable met by chance; what passed between them is now a tie across two courts, and it will fade as ties do.';
 
 /**
+ * ⛔⛔ §B AUTHORS NO "REASON, RIDING EVERY VARIANT" CLAUSE, AND THAT IS A MEASURED ABSENCE RATHER
+ * THAN AN OVERSIGHT OF THIS FILE. The sealed §A block carries one; the sealed §B block does not.
+ * The NEWS ADDRESS LAW still owes a reason limb, and this lane may not author reader prose — the
+ * owner handed the words to the chair.
+ *
+ * ⭐ SO THE LIMB IS FILLED FROM THE ANNEX'S OWN §C ROW FOR THIS EXACT KIND, which the chair
+ * authored and marked KEPT: `a refusal that did not stay private`. It is a citation, not a mint —
+ * the walker re-derives it from the §C table on every run and pins it EQUAL to
+ * `WHAT_PHRASES['chance_meeting_exposed']`, so the two surfaces cannot drift and neither can fork
+ * from the document. ⚠ RETROVALIDATION: re-purposing the §C noun phrase (authored as the R1 rumor
+ * phrase) into the reason limb is this lane's judgment. If §B should carry a reason clause of its
+ * own, that is a chair annex act and this constant becomes its transcription.
+ */
+export const CHANCE_MEETING_EXPOSED_REASON = 'a refusal that did not stay private.';
+
+/**
  * THE PRESENTATION WEIGHT, TRANSCRIBED RATHER THAN INVENTED, AND DELIBERATELY NOT A SEVENTH
  * `presentationWeight` FUNCTION.
  *
@@ -162,15 +193,28 @@ export const CHANCE_MEETING_REASON = 'a guest and a notable met by chance; what 
  * than accidental: `docs/implementation/packets/foreign-policy/GR-4B.md` §6.2 instructs a new
  * voice leaf to carry "its OWN `presentationWeight` carrying `envoyNews.js`'s values". This file
  * honours the ruling's VALUES while refusing its FORM, and the refusal is the estate's own
- * dead-arm law: the registry holds exactly one row and that row is `notable`, so a three-branch
- * table here would ship two branches no producer can reach. The pair below is `envoyNews.js`'s
- * `notable` row and nothing else, and the walker pins the row's significance beside it so the
- * constant cannot outlive the class it was transcribed for.
+ * dead-arm law: a three-branch function would ship a branch no producer can reach.
  *
- * ⛔ NOT A TUNING DIAL. Nothing here scales, compares or thresholds; it is the landed
- * presentation pair the Herald already gives every notable receipt.
+ * ⭐ ENC-4b WIDENS IT BY EXACTLY ONE CLASS, AND NOT BY ONE MORE. ENC-4 carried a single frozen
+ * pair because the registry held a single `notable` row. §B is `major`, so the table now holds
+ * the two classes the registry actually registers and still refuses `routine`, which no row
+ * claims. The walker pins this key set against the registry's OWN significances, so a class that
+ * outlives its row reds instead of sitting here forever.
+ *
+ * ⛔ NOT A TUNING DIAL. Nothing here scales, compares or thresholds; these are the landed
+ * presentation pairs the Herald already gives every notable and every major receipt.
+ *
+ * ⚠ THE ANNOTATION IS DELIBERATE AND IT IS WHY THE READERS BELOW CARRY A GUARD. A row's
+ * `significance` is typed as the WHOLE family (`notable | routine | major | n/a`), so the strict
+ * ratchet convicted an unguarded lookup into a two-key literal — correctly: a future `routine`
+ * row would have read `undefined.severity` inside a live pulse. The widening names the real key
+ * space and each builder refuses a class this table has no pair for, rather than throwing.
+ * @type {Readonly<Record<string, Readonly<{severity: number, score: number}>>>}
  */
-export const CHANCE_MEETING_PRESENTATION = Object.freeze({ severity: 0.56, score: 58 });
+export const CHANCE_MEETING_PRESENTATION = Object.freeze({
+  notable: Object.freeze({ severity: 0.56, score: 58 }),
+  major: Object.freeze({ severity: 0.76, score: 78 }),
+});
 
 /** @type {ReadonlyMap<string, Readonly<ChanceMeetingRegistryEntry>>} */
 const KIND_BY_ID = new Map(
@@ -316,6 +360,10 @@ export function chanceMeetingEntry({ seed, now = null } = {}) {
   const meetingId = text(source.id);
   const picked = chanceMeetingLine(row.kind, `${row.kind}::${meetingId}`, interp);
   if (!picked) return null;
+  // A class with no landed presentation pair is a class this file cannot present; the walker pins
+  // the table's key set EQUAL to the registry's own significances, so this is a belt on a proof.
+  const presentation = CHANCE_MEETING_PRESENTATION[row.significance];
+  if (!presentation) return null;
 
   // SENTENCE CASE AT THE RENDER, and it is GR-0's recorded reason applied to the reason limb:
   // the annex authors this clause lower-case because it reads as a clause, and rendering it raw
@@ -333,8 +381,8 @@ export function chanceMeetingEntry({ seed, now = null } = {}) {
     createdAt: now,
     scope: 'regional',
     significance: row.significance,
-    severity: CHANCE_MEETING_PRESENTATION.severity,
-    score: CHANCE_MEETING_PRESENTATION.score,
+    severity: presentation.severity,
+    score: presentation.score,
     headline: picked.line,
     summary: reason,
     kind: 'chance_meeting_recorded',
@@ -361,4 +409,136 @@ export function chanceMeetingEntry({ seed, now = null } = {}) {
     section: row.section,
     sectionAuthority: 'chance_meeting_registry',
   };
+}
+
+/**
+ * THE §B HERALD ENTRY — THE REFUSAL THAT TRAVELLED, AND IT SPEAKS ONLY WHERE THE APPROACH IS
+ * KNOWN. ENC-4 reported this kind unwireable and named the exact slot that broke; ENC-4b cured
+ * that slot at its source rather than by editing a word, and this is the consumer of the cure.
+ *
+ * ── ⛔⛔ THE TWO ROLES, AND WHERE EACH ONE COMES FROM ────────────────────────────
+ *
+ * `{npc}` is the APPROACHER and `{counterpart}` is the one who refused — that is what all five
+ * authored sentences say, and it is the whole reason ENC-4 refused to register the kind. The
+ * approacher is read off `seed.approacherNid`, which the stage DERIVES FROM THE RECEIPT'S OWN
+ * EXPOSURE GRIEVANCE. ⛔ IT IS NOT PARTY ORDER AND IT IS NOT THE TRAVELLER: the R1 ruling's
+ * "the traveller approaches the resident's venue" was MEASURED FALSE at ENC-4b's dock, in both
+ * directions, on real minted worlds — `envoyChanceMeeting.js` leads with whichever direction has
+ * the higher compromise chance ON THE TARGET, and that chance never reads who travelled.
+ *
+ * ── ⛔ THE GATE IS VARIANT 1'S OWN CLAUSE, AND IT IS WHY NO WORD NEEDED CHANGING ──
+ *
+ * Variant 1 reads "{counterpart} of {settlement} refused …". `{settlement}` is the town the
+ * refusal became known in — the HOST — so that clause asserts the refuser is of the host town.
+ * True when the person passing through made the offer; FALSE when the host's own notable did.
+ * Both happen. So this builder withholds the entire line unless the counterpart's own court IS
+ * the host, and the two arms of that condition are read from the seed's parallel address rather
+ * than assumed from a kind. A sentence that is fluent and wrong about where a man is from is the
+ * wrong-ROLE defect this family has already been bitten by once; silence is the estate's answer.
+ *
+ * ⚠ THAT IS A NARROWING INSIDE the R1 authorization, never outside it: the ruling authorized §B
+ * for the traveller x resident kind believing the kind and the traveller-approaches case were the
+ * same set. They are not, and the case is the smaller of the two. The half this refuses — an
+ * exposed offer made BY the host's own notable — is real news with no authored words, and giving
+ * it words is a chair annex act.
+ *
+ * ⛔ IT FAILS CLOSED, AND THE FAILURE IS SILENCE, exactly as the §A builder does: a seed for
+ * another beat, an unknown approacher, a party count that is not two, a counterpart who is not of
+ * the host, or a single unresolved name yields NULL.
+ *
+ * @param {{seed?: Record<string, unknown>, now?: string|null}} [args]
+ * @returns {Record<string, unknown>|null}
+ */
+export function chanceMeetingExposedEntry({ seed, now = null } = {}) {
+  const source = /** @type {Record<string, unknown>} */ (seed && typeof seed === 'object' ? seed : {});
+  // THE BEAT GATE. ENC-3 mints `'approach_exposed'` for the refusal that travelled and
+  // `'meeting'` for the three visible mark bands; only the first is this row's.
+  if (text(source.beat) !== 'approach_exposed') return null;
+  const row = KIND_BY_ID.get('chance_meeting_exposed');
+  if (!row) return null;
+
+  const npcIds = Array.isArray(source.npcIds) ? source.npcIds.map(text) : [];
+  const homeSids = Array.isArray(source.settlementIds) ? source.settlementIds.map(text) : [];
+  const names = Array.isArray(source.npcNames) ? source.npcNames.map(text) : [];
+  const places = /** @type {Record<string, string>} */ (
+    source.settlementNames && typeof source.settlementNames === 'object'
+      ? source.settlementNames
+      : {});
+  const hostSid = text(source.hostId);
+  if (!hostSid) return null;
+  // THE PARTY COUNT IS ASSERTED RATHER THAN ASSUMED, because both roles below are INDEXES into
+  // these three parallel arrays and an arity this builder did not expect would silently pair a
+  // name with the wrong id.
+  if (npcIds.length !== 2 || homeSids.length !== 2 || names.length !== 2) return null;
+  const approacher = npcIds.indexOf(text(source.approacherNid));
+  // ⛔ AN EMPTY `approacherNid` IS THE STAGE SAYING "THE APPROACH IS NOT KNOWN HERE", which is
+  // every meeting beat and every traveller x traveller receipt. `indexOf('')` is -1 on a seed
+  // whose ids are real, and the guard below is the one that reads it as the refusal it is.
+  if (approacher < 0) return null;
+  const counterpart = 1 - approacher;
+  // VARIANT 1'S CLAUSE, ENFORCED: the one who refused must really be of the town that heard it.
+  if (homeSids[counterpart] !== hostSid) return null;
+
+  const interp = {
+    npc: names[approacher] || '',
+    counterpart: names[counterpart] || '',
+    home: places[homeSids[approacher]] || '',
+    settlement: places[hostSid] || '',
+  };
+  if (Object.values(interp).some((value) => !value)) return null;
+
+  const meetingId = text(source.id);
+  const picked = chanceMeetingLine(row.kind, `${row.kind}::${meetingId}`, interp);
+  if (!picked) return null;
+  const presentation = CHANCE_MEETING_PRESENTATION[row.significance];
+  if (!presentation) return null;
+
+  const reason = CHANCE_MEETING_EXPOSED_REASON.charAt(0).toUpperCase() + CHANCE_MEETING_EXPOSED_REASON.slice(1);
+  const tick = Number.isFinite(Number(source.tick)) ? Number(source.tick) : 0;
+  const settlementIds = [...new Set([hostSid, ...homeSids].filter(Boolean))];
+  const venueIds = Array.isArray(source.venueIds) ? source.venueIds.map(text).filter(Boolean) : [];
+  const publicRef = publicMeetingRef(meetingId);
+  return {
+    id: `wizard_news.${tick}.${stablePart(row.kind)}.${publicRef}`,
+    tick,
+    createdAt: now,
+    scope: 'regional',
+    significance: row.significance,
+    severity: presentation.severity,
+    score: presentation.score,
+    headline: picked.line,
+    summary: reason,
+    kind: 'chance_meeting_exposed',
+    impactKind: 'chance_meeting_exposed',
+    channelType: null,
+    settlementIds,
+    settlementNames: settlementIds.map((sid) => places[sid] || ''),
+    npcIds: npcIds.filter(Boolean),
+    ...(venueIds.length ? { venueIds } : {}),
+    impactIds: [],
+    channelIds: [],
+    sourceEventId: `chance_meeting_receipt.${stablePart(row.kind)}.${publicRef}`,
+    tags: ['world_pulse', 'encounters', String(row.section)],
+    reasons: [reason],
+    familyId: picked.familyId,
+    audience: row.audience,
+    section: row.section,
+    sectionAuthority: 'chance_meeting_registry',
+  };
+}
+
+/**
+ * THE ONE DOOR THE PULSE CALLS. `envoyPulse.js` hands every seed the stage emits to a single
+ * callback, so the beat dispatch lives HERE beside the rows rather than in the pulse: the pulse
+ * has no business knowing which beats this registry voices, and a builder added without a
+ * dispatch row would be a mint no producer could reach.
+ *
+ * ⛔ TOTAL AND SILENT. A beat neither row claims yields null, which is what an unbuilt seed
+ * already meant to the stage.
+ *
+ * @param {{seed?: Record<string, unknown>, now?: string|null}} [args]
+ * @returns {Record<string, unknown>|null}
+ */
+export function chanceMeetingHeraldEntry({ seed, now = null } = {}) {
+  return chanceMeetingEntry({ seed, now }) ?? chanceMeetingExposedEntry({ seed, now });
 }
