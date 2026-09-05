@@ -36,6 +36,8 @@ NEW schema rung (17); the desk consist's OSR baseline is then re-frozen at the c
    blocks; the lanes' corrections).
 ## Chair cars at the composed tip (before the registers)
 - OSR-SCHEMA17's ruling: retire the ninth exemption (declared 9 → 8 with banked 8) — `rulings/RULING-OSR-SCHEMA17-DECISIONS.md`; the `_doc` cure rides step 3e's `--write`.
+- EXPECTED_VOICE: `chance_meeting_exposed: null` (ENC-4b's kind; same decision as §899's car 5).
+- A residue row for the chair/owner: the chance-meeting approach direction ties on `codepoint(target.nid)` — town-name spelling decides who offered on a tie (ENC-4c measured 89/89); a seeded tie-break is generation-side.
 - SEAT-78's coupling row: deploymentReturn.js → irregularForce.js (INTERIOR→WAR) in the couplingInclusion registry.
 - ENC-4b car 4's pantheon conflict: resolve to 115/381 by hand.
 - The OWED vitest of OSR-SCHEMA17, ENC-4b, SEAT-78 (and whatever ENC-4c/HORIZON-B2/DOCKET-2 leave owed): run the WHOLE tests/domain + tests/lint + tests/copy + tests/property at the composed tip, not the named suites.
@@ -48,7 +50,7 @@ shrink-only door · an OSR identity added by anything but OSR-SCHEMA17 · a size
 ## ADDENDUM 2026-09-05 (after §899 composed): THE LATE DOCKS JOIN THE §900 CONSIST, after the desk docks and before the registers
 | dock | base | cars | sealed | owed CHAIR acts at the composed tip |
 |---|---|---|---|---|
-| laneENC4B | 7be568047 (ENC-4's tip; ENC-4 lands in §899, so replay `laneENC4B:7be568047` onto the §900 dock) | 4 (+ ENC-4c's, dispatched 09-05 on top) | `enc4b-2026-09-05` = 9d9686c12 | ⚠ car 4 CONFLICTS with §899's chair car 4 on pantheon A5 (115/381 vs 114/380): resolve by hand to the two-kind figures 115/381; lighting titles +7 (23198→23205 per the lane; re-derive) |
+| laneENC4B | 7be568047 (ENC-4's tip; ENC-4 lands in §899, so replay `laneENC4B:7be568047` onto the §900 dock) | 6 (ENC-4b 4 + ENC-4c 2) | `enc4c-2026-09-05` = 74a5cbeca | ⚠ car 4 CONFLICTS with §899's chair car 4 on pantheon A5 (115/381 vs 114/380): resolve by hand to the two-kind figures 115/381; lighting titles +7 (23198→23205 per the lane; re-derive) |
 | laneCHARSET2 | df7cdd37e | 7 | `horizon-b1-2026-09-05` = 3cd85c62c | the EDGE-SHARED RE-MINT by the ritual (materialise immer+seedrandom → `npm run build:edge-shared` → commit → RESTORE the symlinks; three suites red until then); a build for the eight closure chunks + `__vite__mapDeps`; lighting files +3 (+24 titles / +8 suites derived); the edge `validValue` charset branch is DEFERRED (recorded) |
 | laneHOR2 | 5e28d5c83 | 2 | `horizon-b2-2026-09-05` = 6d4a00039 | CHAIR: a BUILD at the composed tip (the eight closure chunks + the WORKER bundle) and the `WORKER_BUNDLE_CEILING_BYTES` arm written from that build's receipt; its OWED vitest (tests/lint whole mandatory); sizeBaseline row 976 → 824; lighting +3 files (+1 parked: the build test parks whole) |
 | laneSEAT78 | 5e28d5c83 | 3 | `seat-78-2026-09-05` = 027cf668d | CHAIR: mint the couplingInclusion registry row (deploymentReturn.js → irregularForce.js, INTERIOR→WAR, D10's politics↔force bridge); run its two suites + tests/property/ under vitest (OWED-UNTIL-RESUME); tuning inventory refreeze (+1 table), lighting (+2 files), writer-reach (thinKeys +1) — all re-derived at the composed tip |
