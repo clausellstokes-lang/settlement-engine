@@ -26,7 +26,15 @@ const VERDICT = { type: 'object', required: ['verdict', 'trueWording', 'note'], 
 const EXEMPLARS = [
   { key: 'tolkien', name: 'J. R. R. Tolkien', notes: 'prose style of The Lord of the Rings and The Hobbit: register modulation, archaism, per-speaker register, cadence, deep time, the annalist voice; critics Shippey, Rosebury, Walker, Turner, Flieger, Le Guin, Lewis, Auden; corpus/stylometric studies' },
   { key: 'martin', name: 'George R. R. Martin', notes: 'A Song of Ice and Fire prose: tight third person, sensory concrete nouns, Anglo-Saxon diction, compounds, chapter openings, sentence rhythm, repetition, dialogue; both praise and criticism; interviews in his own words' },
+  // OWNER 09-05 18:55 (queued for the next account; run with only:['kay'] / ['leguin']): the two full-sweep additions from the five-author proposal
+  { key: 'kay', name: 'Guy Gavriel Kay', notes: 'historical-fantasy prose (Tigana, The Lions of Al-Rassan, Under Heaven, the Sarantine Mosaic): restrained lyrical historical atmosphere; history as residue on ordinary people; competing memories of one event; melancholy and consequence without ornament; his own essays and interviews on writing history-shaped fantasy; critics on his register' },
+  { key: 'leguin', name: 'Ursula K. Le Guin', notes: 'the prose of Earthsea and the essays on style (From Elfland to Poughkeepsie; Steering the Craft; The Language of the Night): economy, rhythm, ordinary vocabulary carrying worldbuilding weight; distance without costume; her own stated rules on sentence sound, adjectives, and the plain noble style; critics and stylometric studies' },
   { key: 'dnd', name: 'D&D official content', notes: 'Wizards of the Coast adventure and sourcebook prose: read-aloud/boxed text form, DM-facing text, terminology consistency, the 2014 vs 2024 house style, Adventurers League and DMs Guild guidance, designers (Perkins, Crawford, Decker, Noonan) on writing, community analyses; no published style guide — say so where sources agree' },
+]
+// TECHNIQUE PROBES (owner 09-05): one finder each on ONE device, not a four-angle author sweep — run with args.probes (e.g. ['wolfe','hobb']); verified and synthesised like claims
+const PROBES = [
+  { key: 'wolfe', name: 'Gene Wolfe', device: 'prose that lets the reader infer the gap between public belief, institutional record and physical evidence, without the narrator announcing it (unreliable or limited narration; incidental detail as evidence; omission as information) — find critics and Wolfe\'s own statements on this device only' },
+  { key: 'hobb', name: 'Robin Hobb', device: 'converting a state change into a lived consequence for a person or household (who lost something, what they kept, what it meant) — find critics and Hobb\'s own statements on this device only' },
 ]
 const ANGLES = [
   { key: 'academic', prompt: 'academic and scholarly criticism (journals, monographs, Wikipedia syntheses with their cited critics, conference papers, stylometric or corpus studies)' },
@@ -53,10 +61,14 @@ const AI_ANGLES = [
   { key: 'industry', prompt: 'publishing and games industry: magazine editors on AI slush, DMs Guild / RPG publishers on AI submissions, style-guide bans, what readers report noticing' },
   { key: 'counter', prompt: 'the case AGAINST the common tells: sources arguing em dashes, triads and antithesis are legitimate devices, that detection heuristics fail, that human prose shares the features — the disconfirming evidence' },
 ]
+const PROBE_KEYS = (args && args.probes) || []
+const foundProbes = STATE ? [] : await batched(PROBES.filter(p => PROBE_KEYS.includes(p.key)), (pr) => agent(
+  `You are a research finder for ONE craft device. Author: ${pr.name}. Device: ${pr.device}. Use WebSearch and WebFetch; READ every source you cite; aim for 8–15 substantive sources on this device specifically (critics, interviews, close readings); stop after two consecutive dry searches. Extract CLAIMS about the device as concrete prose features (feature, one-sentence claim, source, url, one verbatim quotation under twelve words or empty). Write raw notes to ${OUT}/find-probe-${pr.key}.md and return the structured result.`,
+  { label: `find:probe:${pr.key}`, phase: 'Find', schema: FINDINGS }))
 const foundAI = (SKIP_AI || STATE) ? [] : await batched(AI_ANGLES, (an) => agent(
   `You are a research finder. Subject: where generated (LLM) prose FAILS against skilled human fiction and game writing. Angle: ${an.prompt}. Use WebSearch and WebFetch; READ every source you cite; aim for 10–20 substantive sources, stop after two consecutive dry searches. For each source list it; extract CLAIMS as concrete failure modes (feature, one-sentence claim, source, url, one verbatim quotation under twelve words or empty). Write raw notes to ${OUT}/find-ai-${an.key}.md and return the structured result.`,
   { label: `find:ai:${an.key}`, phase: 'Find', schema: FINDINGS }))
-const allClaims = STATE ? STATE.claims.map((c, i) => ({ ...c, batch: c.batch ?? 0 })) : [...found, ...foundAI].flatMap((r, i) => (r && r.claims ? r.claims : []).map(c => ({ ...c, batch: i })))
+const allClaims = STATE ? STATE.claims.map((c, i) => ({ ...c, batch: c.batch ?? 0 })) : [...found, ...foundProbes, ...foundAI].flatMap((r, i) => (r && r.claims ? r.claims : []).map(c => ({ ...c, batch: i })))
 const seen = new Set(); const claims = []
 for (const c of allClaims) { const k = (c.source + '|' + c.feature + '|' + c.claim.slice(0, 60)).toLowerCase(); if (!seen.has(k)) { seen.add(k); claims.push(c) } }
 log(`found ${allClaims.length} claims, ${claims.length} after dedupe, from ${[...found, ...foundAI].filter(Boolean).reduce((n, r) => n + r.sourcesRead.length, 0)} sources read`)
@@ -78,7 +90,7 @@ const kept = verified.filter(x => x.verdict && (x.verdict.verdict === 'VERIFIED_
 log(`verified: ${kept.length} of ${verified.length} claims survive (${verifiedChunks.filter(Boolean).length} of ${chunks.length} verifier chunks returned)`)
 phase('Synthesize')
 const groups = {}; for (const e of EX) groups[e.key] = []; if (!SKIP_AI) groups.ai = []
-for (const x of kept) { const idx = x.batch; const key = idx < findJobs.length ? findJobs[idx].ex.key : 'ai'; (groups[key] ||= []).push(x) }
+for (const x of kept) { const idx = x.batch; const key = idx < findJobs.length ? findJobs[idx].ex.key : (idx < findJobs.length + foundProbes.length ? 'probe-' + PROBES.filter(p => PROBE_KEYS.includes(p.key))[idx - findJobs.length].key : 'ai'); (groups[key] ||= []).push(x) }
 const sections = await batched(Object.entries(groups), ([key, xs]) => agent(
   `Write the dossier section for "${key}" from these VERIFIED claims only (JSON follows). Structure: numbered concrete features, each with the critics/sources that support it (count them), the true wording of any quotation (under twelve words), and the reconstruction rule it implies for a settlement dossier written as a calm archivist (present tense, concrete civic nouns, no digits, no em dash). Mark disagreements between sources explicitly. End with a coverage table: sources read per angle. Write it to ${OUT}/section-${key}.md and return the markdown.\n\nCLAIMS:\n${JSON.stringify(xs).slice(0, 180000)}`,
   { label: `synth:${key}`, phase: 'Synthesize' }))

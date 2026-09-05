@@ -1,7 +1,7 @@
 {
  "name": "tolkien",
  "runId": "wf_9b91b240-c98",
- "exportedAt": "2026-09-05T22:54:56.494Z",
+ "exportedAt": "2026-09-05T22:59:57.643Z",
  "claims": [
   {
    "feature": "register modulation",
@@ -5751,6 +5751,96 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "\"You can't have everything absolutely strange at the outright\"",
    "note": "Exact string present in the ORA PDF. The 'laden with sense' half is verbatim too: \"it's desirable if you can, necessary if you can, to use words that are already in existence - which have a certain sense and are laden with a certain sense. And therefore I use 'Dwarves', and 'Middle-earth', and 'Elves' and so on.\" All three named words appear as the claim states. Fully supported."
+  },
+  "210": {
+   "index": 210,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It's a hideous language, it's meant to be hideous",
+   "note": "Present word for word in the Lee reconstruction PDF (p.41), split only by a PDF line break between 'a' and 'hideous'. The claim's second half is also supported: Tolkien says \"'l' is on the whole a pleasant sound\" and that sounds become less appealing \"the further they move back in the throat\" (citing 'ach'), plus \"those words are ugly... what I find ugly\". The page never uses the phrase 'place of articulation', but the pleasant/ugly-by-articulation ranking is explicit."
+  },
+  "211": {
+   "index": 211,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "They hated asides",
+   "note": "Verbatim in the transcript, immediately followed by \"They loathed anything that made it sound as if you were talking to a, an actual audience\" and his statement that his children \"criticised very severely all those things which, owing to bad models, I thought was suitable to put into a children's story\" — supporting the 'taught him to drop that manner' half. Minor caveat: the transcript on this page interleaves a BBC presenter (Razia Iqbal) and so reproduces the 1968 audio inside a later broadcast, not a raw 1968 transcript."
+  },
+  "212": {
+   "index": 212,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I am a natural niggler, fascinated by detail",
+   "note": "Verbatim. Immediately preceded on the page by \"I love [revision].\" (bracketed editorial insertion), in the context of revising the next edition of The Lord of the Rings, supporting the 'loves revision' half."
+  },
+  "213": {
+   "index": 213,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "praise of those who like my books for my names",
+   "note": "Verbatim, in the full sentence \"Nothing has given me more pleasure than the praise of those who like my books for my names, whether of English form, or Elvish, or other tongues.\" The derision half is also on the page: \"When they invent names and words, these are apt to take on a quite childish level. The names are absolutely appalling in many cases\" — context confirmed as SF writers by the following \"But this is not peculiar to sf.\""
+  },
+  "214": {
+   "index": 214,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "sillinesses of manner caught unthinkingly",
+   "note": "Verbatim, in \"it has some of the sillinesses of manner caught unthinkingly from the kind of stuff I had had served to me, as Chaucer may catch a minstrel tag. I deeply regret them.\" Context is explicitly The Hobbit written 'as a children's story'; 'the kind of stuff I had had served to me' is the page's wording for the children's-book convention."
+  },
+  "215": {
+   "index": 215,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "languages and names are for me inextricable from the stories",
+   "note": "Verbatim on the Tolkien Estate page for Letter 163 to W.H. Auden, in \"All this only as background to the stories, though languages and names are for me inextricable from the stories.\""
+  },
+  "216": {
+   "index": 216,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "acute aesthetic pleasure derived from a language for its own sake",
+   "note": "Verbatim, in \"the study of a language out of mere love: I mean for the acute aesthetic pleasure derived from a language for its own sake, not only free from being useful but free even from being the 'vehicle of a literature'.\" Dated on the page to his school discovery of philology, supporting the 'dates his craft to' framing."
+  },
+  "217": {
+   "index": 217,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "some differentiation of style to represent dialectal differences",
+   "note": "Verbatim, in \"equate the Westron or wide-spread Common Speech of the Third Age with English; and translate everything... with some differentiation of style to represent dialectal differences.\" The Gondor half is also on the page: Westron spread \"especially from Gondor, where it remains spoken in nobler and rather more antique style.\""
+  },
+  "218": {
+   "index": 218,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "even in a mythical Age there must be some enigmas",
+   "note": "Verbatim, preceded by \"I think it is good that there should be a lot of things unexplained (especially if an explanation actually exists)\" — supporting the first half. The claim's causal 'because' is a mild interpretive link; the page places the two statements adjacently rather than asserting the causation."
+  },
+  "219": {
+   "index": 219,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "To me a name comes first and the story follows",
+   "note": "Verbatim on the Lingwë post, quoting Letter 165. The claim's paraphrase is also verbatim on the page: \"the invention of languages is the foundation. The 'stories' were made rather to provide a world for the languages than the reverse.\""
+  },
+  "220": {
+   "index": 220,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a consistency of linguistic style, and an illusion of historicity",
+   "note": "Verbatim, in \"This gives a certain character (a cohesion, a consistency of linguistic style, and an illusion of historicity) to the nomenclature\" — the 'cohesion' element of the claim is present in the same parenthesis. The page cites it to pages 143-144 of the Letters."
+  },
+  "221": {
+   "index": 221,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'legends' depend on the language to which they belong",
+   "note": "All words match; the page differs only typographically, writing 'legends' in scare quotes and lowercase. Full sentence: \"I made the discovery that 'legends' depend on the language to which they belong; but a living language depends equally on the 'legends' which it conveys by tradition.\" Attributed on the page to No. 180: To a Mr. Thompson (1956), matching the claim. The invented-tongue half is supported by the adjacent Esperanto/Volapük remark: they are dead \"because their authors never invented any Esperanto legends.\""
+  },
+  "222": {
+   "index": 222,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "glimpses of a large history in the background",
+   "note": "Verbatim, in \"Part of the attraction of the L.R. is, I think, due to the glimpses of a large history in the background: an attraction like that of viewing far off an unvisited island, or seeing the towers of a distant city gleaming in a sunlit mist.\" The island/misty-city half is verbatim too, and the page's reference list confirms the attribution to Letter #247 to Colonel Worskett, 20 September 1963."
+  },
+  "223": {
+   "index": 223,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "in style and sentiment",
+   "note": "Verbatim, in \"I do earnestly hope that in the assignment of actual speeches to the characters they will be represented as I have presented them: in style and sentiment.\" The comparative half is the next sentence: \"I should resent perversion of the characters... even more than the spoiling of the plot and scenery.\""
+  },
+  "224": {
+   "index": 224,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "lower the tone towards that of a more childish fairy-tale",
+   "note": "Verbatim, in \"'Old scamp!' This is a good example of the general tendency that I find in Z to reduce and lower the tone towards that of a more childish fairy-tale.\" The Gandalf half is also on the page: \"Gandalf, please, should not 'splutter'... he is a person of high and noble authority, and great dignity.\" (The archive renders curly quotes as '?')."
   }
  }
 }

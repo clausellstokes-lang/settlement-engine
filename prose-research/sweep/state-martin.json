@@ -1,7 +1,7 @@
 {
  "name": "martin",
  "runId": "wf_e25da3f7-7fb",
- "exportedAt": "2026-09-05T22:54:56.498Z",
+ "exportedAt": "2026-09-05T22:59:57.653Z",
  "claims": [
   {
    "feature": "Anglo-Saxon diction",
@@ -5419,6 +5419,186 @@
    "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "Is a 6 percent increase that big a deal?",
    "note": "No quote supplied. The figure is on the page: 'You might shrug at those proportions. Is a 6 percent increase that big a deal? Absolutely.' Growth across the series is supported by 'there's more of it with every book' and an embedded chart (img alt='italics over time'). The weakness half is near-exact: 'those italicized bits are Martin at his kludgiest. He uses them to jog the reader's memory, wedge in a pile of backstory, or point out the obvious.' One caveat: the 6 percent refers to proportions displayed in the chart image, which the page's text never itself tabulates, and the author flags a measurement disclaimer (he assumes italics are a consistent proxy for interior monologue)."
+  },
+  "255": {
+   "index": 255,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Martin cycles through every possible nomination for Ned",
+   "note": "No quotation was supplied, so verbatim status cannot be granted. The psychic_distance essay introduces the excerpt as 'For another good example of shifting psychic distance, here's a scene in which Martin cycles through every possible nomination for Ned,' and the quoted passage contains all four namings the claim lists: 'Her father had been fighting with the council again', 'when Ned Stark strode into the Small Hall', 'said when Father entered', and 'Be seated, Eddard Stark said.' The essay's gloss is 'in Sansa/Arya chapters Ned goes by \"her father\" or \"Father\". It's distracting to see it every other way.' Elsewhere it also states that 'Eddard Stark' is 'a marker of narrative distance.' Minor internal wrinkle in the source, not in the claim: the essay calls it 'a Sansa chapter' though the excerpt narrates from Arya."
+  },
+  "256": {
+   "index": 256,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Even is being used as an intensifier",
+   "note": "No quotation was supplied. The essay's numbered point 3 is exactly this: 'Even. If you take that from the third sentence, we're not sure if Sansa notices the noticing. But even assures us she does... Even is being used as an intensifier, like very and really, and objective narrators rarely use those... one more way for writers to mark psychic distance and create subjective voice.' The 'without an explicit thought tag' half is directly supported: the essay praises Martin for inflecting 'the narrative with Sansa's perspective without ever lapsing into those annoying italic monologues.' The example sentence is narration ('Even Septa Mordane noted her composure and nodded in approval'). One hedge the claim drops: the essay denies intensifiers are a hard rule, calling it 'just a useful convention.'"
+  },
+  "257": {
+   "index": 257,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a few linguistic relics to give a historical veneer",
+   "note": "Quotation appears word for word: 'Most fantasists settle for a few linguistic relics to give a historical veneer.' All three named relics are confirmed in the next sentence: 'Martin has a few of these, like the much-teased \"must needs\". There's also \"soon or late\", \"pretend to surprise\", and \"near as\" for \"nearly as\".' Note the quoted sentence is a generalization about fantasists, with Martin then given as an instance; the essay also allows a second option (period-unspecific formal diction) that the claim omits."
+  },
+  "258": {
+   "index": 258,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Martin shows you the seams of his work",
+   "note": "Quotation appears word for word, in the snark passage: 'by using it in the exact same context, Martin shows you the seams of his work.' All six items check out: pug ('are there pugs in Westeros?', 'She was pug-nosed and bouncy'); 'Longshoreman came into English in 1811, according to Etymonline.com' (1811 exact); condone tied to 'the Matrimonial Causes Act, an 1857 piece of legislation' (1857 exact); yen 'is in fact about a hundred years old'; burp 'Only a few decades older than Martin' (charted 1932). Two precision notes: 1857 is the Act's date, the essay's explanation for the word taking hold in English, not an etymological first-use date; and snark is presented as a Lewis Carroll coinage rather than as modern English generally."
+  },
+  "259": {
+   "index": 259,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "modular sentences that can snap together like LEGO",
+   "note": "Quotation appears word for word. The figures are exact: 'Those seven paragraphs, totalling 427 words, are actually built from the first sentences of 26 different paragraphs, totalling 1,897 words.' Deletability is the essay's opening thesis: 'you can pull out quite a few sentences before they start getting wobbly.' Two directional notes: the essay assembled 427 words out of 1,897 rather than compressing a continuous passage, and the LEGO line is one of several speculative explanations ('Maybe... Or this is an epiphenomenon... Maybe it's...'), not an asserted finding."
+  },
+  "260": {
+   "index": 260,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "(Martin has a fair number of one-lines.)",
+   "note": "Quotation appears word for word, parenthetically. The momentum link is present but weaker than the claim states: the essay is hunting 'something beyond the plot that's contributing to the series' propulsiveness,' then offers 'Or this is an epiphenomenon, and the real driver is a short average paragraph. (Martin has a fair number of one-lines.)' So one-line paragraphs are floated as a possible driver among alternatives, and 'a fair number' is a softer quantity than the claim's 'Frequent'."
+  },
+  "261": {
+   "index": 261,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Jon told his uncle in a low, quiet voice.",
+   "note": "Quotation appears word for word in the redundancy list. All three components confirmed. Tempo: 'melting away like snow whenever the knights rode out,' glossed 'Snows melt slowly, over weeks and months. Mist evaporates quickly, or smoke.' Verb-modifier logic: 'He glowered at Arya through his thick beard,' glossed 'Glowering is a verb for watching, suggesting that his beard is covering his face.' Redundant pairs: 'I extend this imprecision to his occasional redundancies,' followed by 'low, quiet voice', 'careful, measuring look', 'low, hushed voices', 'slow, endless clanging'."
+  },
+  "262": {
+   "index": 262,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "I need about 50% less about the cold here",
+   "note": "No quotation was supplied, so verbatim status cannot be granted, but the page states the claim almost exactly. The imprecision essay interposes the line 'I need about 50% less about the cold here.' immediately before two Castle Black paragraphs stacked with cold sentences ('Jon found himself shivering. The chill was always with him here... So cold, he thought... the walls were cold here, and the people colder'), and continues the run with 'Anger is sometimes cold too. Except when it is flaring hot.' 'About half' matches 'about 50%' precisely."
+  },
+  "263": {
+   "index": 263,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The day was warm and cloudless, the sky a deep blue.",
+   "note": "Quotation appears word for word. Both figures are exact and in one sentence: 'But Martin's written a lot of sentences for ASOIAF - 148,130 by my count - and when I checked for this structure I found ~250 examples of it.' The subject ranking is explicit: 'Those sky sentences represent a good portion of the total, but the most common subject is the human body.' The claim's 'roughly' and 'around' correctly mirror the essay's own '~250' and 'by my count', and the essay discloses its method ('My net caught any sentences with commas whose first word was repeated after the first comma')."
+  },
+  "264": {
+   "index": 264,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "These tags, when strategically placed, can serve as extra punctuation",
+   "note": "Quotation appears word for word as a substring of 'These tags, when strategically placed, can serve as extra punctuation.' Timing control follows immediately: 'It lets you play with the timing of a line,' illustrated by three mid-speech interruptions ('These dead were all strong men,' said Roger Ryswell, 'and none of them were stabbed.'). Action beats are covered by 'the speaker can make a quick gesture beforehand' and 'Or just after'. The untagged ideal is present but framed as opinion: 'I have the feeling, and I don't know if you agree, that the ideal dialogue exchange is untagged, back and forth.'"
+  },
+  "265": {
+   "index": 265,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Seems like he's gotten the semicolon figured out by now",
+   "note": "Quotation appears word for word. Opening sentence: 'In AGOT, Martin uses semicolons and colons interchangeably.' The page count is exact: 'Incredibly, there are three examples of this on one page, 239 in my edition of AGOT.' One softening the claim drops: the ADWD verdict is hedged and evidentially weak in the source, 'Seems like he's gotten the semicolon figured out by now, though, ADWD didn't pop any for me' - an absence of noticed instances by one reader, not a demonstrated correction."
+  },
+  "266": {
+   "index": 266,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In ASOIAF, the tone can be very casual and very purple",
+   "note": "Quotation appears word for word. The green/red framing is explicit: 'Here I'd like to point out Martin's reasons for using it: as an ecstatic response to nature and violence' and 'It's about the green and the red, for Martin.' Ornate diction is identified in the wilderness passage: 'Martin shifts into antiquated diction: \"tangle of root and thorn and grasping limb\"; \"Knew not\"; \"small wonder\".' Minor overstatement in the claim: the essay gives nature and violence as Martin's reasons for the high register, not as an exclusive reservation, and adds a second function - the register can 'capture the experience or distance the reader from it.'"
+  },
+  "267": {
+   "index": 267,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It might have been minutes or it might have been hours; time slept when swords woke",
+   "note": "Quotation appears word for word. Time distortion is directly supported by that sentence and its lead-in, 'Jaime could not have said how long he pressed the attack.' Weapon animation is present in the combat material the essay quotes: 'the longsword alive in his hands', 'The swords kissed and sprang apart and kissed again', and 'the gilded sword that had sipped the blood of the last of the Dragonkings'. One attribution note: 'personify' is the claimant's analytic label, not the essayist's word; the essay makes its explicit self-animation point about axes in the wilderness passage ('He doesn't tell us who is swinging these few axes, they seem to swing themselves, as though enchanted')."
+  },
+  "268": {
+   "index": 268,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It is a flashback dressed up as a monologue",
+   "note": "Quotation appears word for word, following Ned's roughly 650-word remembrance to Robert. All four mechanisms are confirmed. Trait assignment: 'Telling Catelyn stuff she already knows is Rodrik's thing... It's just a character trait!' and Hal Mollen, 'He had a penchant for loudly announcing the obvious.' Lampshading: 'Winking at the audience while doing something gauche (hanging a lampshade, as TvTropes would have it).' Summary over quotation: 'Sam Tarly's backstory feels better in comparison to the above, because Martin reports it instead of quoting directly.' One wording note: the claim inverts the essay's phrase - the source says flashback dressed up as a monologue, not monologue dressed as dialogue."
+  },
+  "269": {
+   "index": 269,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The narrative cycles between these types of scene.",
+   "note": "Quotation appears word for word. Six of the seven types map directly to the essay's numbered list: coercion (1), 'Discussions/arguments about what to do/bargaining' (2), 'Action sequence' (3), 'Travelling sequence' (4), 'A predicament is sketched out' (6), 'Present information is disclosed' (7). The shoehorning half is explicit: 'Every chapter is like this. There is some central action to the scene, but Martin takes the opportunity to shoehorn in some other information.' One relabel to flag: the claim's 'revelation' stands for type 5, which the essay words as 'An enigma is laid out or an action is promised' - closer to a mystery posed or a promise made than to a revelation delivered."
+  },
+  "270": {
+   "index": 270,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "past perfect melds into the simple past tense",
+   "note": "Exact string match. Essay quotes Reddit user Bookshelfstud describing the pattern (chapter opens 'in media res' on 'usually a small crisis', drops back for background, then 'the scene picks up again and resolves'), then illustrates with Tyrion's fifth chapter in the sky cell: 'Notice how the past perfect melds into the simple past tense.' Claim's full three-part structure is supported."
+  },
+  "271": {
+   "index": 271,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Only with temporal distance will he permit himself some narrative distance",
+   "note": "Word-for-word match; the page capitalizes 'Only' because it begins a sentence, the only difference from the submitted fragment. Context supports the claim exactly: 'His storytelling moment-to-moment is exactly that. Only with temporal distance will he permit himself some narrative distance.'"
+  },
+  "272": {
+   "index": 272,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Gregor Clegane: 17 lines",
+   "note": "Exact string match, as a section heading in 'Making a Memorable Character'. Supporting elements all present: Walder Frey 'has a nickname (the Late Lord Frey), a catchphrase (heh)'; 'Hodor is memorable through repetition'; the essay's list of devices includes 'nicknames, monikers, AKAs' and 'catchphrases and speech patterns'. Minor nuance: Gregor is offered as the best example of establishing a character through something other than pagetime and dialogue (physical note, being talked about, nickname), not via catchphrase."
+  },
+  "273": {
+   "index": 273,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "They passed beneath the gatehouse, over the drawbridge, through the outer walls",
+   "note": "Exact string match. The essay names the device: 'I always notice this sentence structure. I even have a name for it: the moving sentence,' and pairs the Martin line with Katherine Mansfield's 'Away she skimmed, over the lawn, up the path...'. Claim's characterization as chained prepositional phrases carrying the reader through space is supported."
+  },
+  "274": {
+   "index": 274,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A little free indirect!",
+   "note": "Exact string match. It is the essay's one-line gloss immediately following the Catelyn passage 'She had begged Ned not to go, not now, not after what had happened; everything had changed now, couldn't he see that?' — narration in the character's own idiom, as the claim states."
+  },
+  "275": {
+   "index": 275,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "cruel iron rams lapping at the water",
+   "note": "Exact string match. The essay's gloss confirms the claim's substance: 'that's an arresting conflation of the meaning of the siege implement and the bovid. What a neat way to exploit a homonym.' The double meaning sits on 'rams', triggered by 'lapping', exactly as the claim describes."
+  },
+  "276": {
+   "index": 276,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Stannis is mentioned 98 times before he appears… in the second book!",
+   "note": "Exact string match for the quoted fragment; the page continues '… in the second book!'. Essay's thesis matches the claim: 'briefing the reader on a character before you meet them', with Stannis and Tywin 'constantly discussed by others before we hear them say a word' and gaining 'status by repetition alone'."
+  },
+  "277": {
+   "index": 277,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Martin's dialogue does a great job of revealing social dynamics.",
+   "note": "Exact string match, opening the Figural-Implicit-Verbal section. The bodily-shorthand half is equally supported in Figural-Implicit-Nonverbal: 'Petyr's slight build is no accident, but a shorthand. This Machiavelli has a Napoleon complex!' Hierarchy is explicit via the quoted Jahn passage on altero-characterization influenced by 'social hierarchies'."
+  },
+  "278": {
+   "index": 278,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "part of him wanted to call out, to tell him that it wasn't true",
+   "note": "Exact string match within the quoted Tyrion passage. The essay frames it as the claim does — continuous-tone gray that is 'the result of black and white mixing within the character... the gray of ambivalence, conflicting impulses' — and the paragraph holds both impulses ('part of him wanted to call out... But then he thought of Tysha, and he held his silence')."
+  },
+  "279": {
+   "index": 279,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "we just can see the events around us from our own eyes",
+   "note": "Exact string match for the quoted fragment. Full context supports the claim: 'I've always written from a tight third-person point of view, because I think that's the way we perceive things. None of us are omniscient.' Byline and date attribution check out (Amy Gentry, Aug. 2013, LoneStarCon 3 / Worldcon San Antonio)."
+  },
+  "280": {
+   "index": 280,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I get into a character's voice",
+   "note": "Exact string match. Both halves of the claim are stated in the same answer: 'I usually struggle for a few days trying to get back the voice of the character I'm just returning to after some hiatus. But once I get into it, I tend to write not just one chapter by that character, but three or four.'"
+  },
+  "281": {
+   "index": 281,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "if it's hard to write, it'll be hard to read, too",
+   "note": "Word-for-word match; the page has lowercase 'if' because the sentence runs 'But you know, hopefully, if it's hard to write...' — the only difference from the submitted quote. Claim's substance is stated in the next sentence: 'It'll affect the reader emotionally,' given in the context of writing the Red Wedding."
+  },
+  "282": {
+   "index": 282,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "some of my readers get annoyed for that, but I do it intentionally",
+   "note": "Exact string match. Reader annoyance and intent are in the same sentence; the King attribution follows two sentences later: 'I have learned this technique from Stephen King and I like it very much.' Minor nuance: 'this technique' sits closest to the example of Jaime recalling Tyrion's line, though the whole answer is about repeated sayings ('A Lannister always pays his debts'). Provenance confirmed: posted by wheezy_wazlib in ohnotheydidnt, October 8 2012."
+  },
+  "283": {
+   "index": 283,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Each of the point of view characters has its own voice and vocabulary",
+   "note": "Exact string match. The exhaustion half is explicit in the same answer: 'It's difficult for me to shift from one to another' and 'changing from a Tyrion chapter to a Daenerys one, to put an example, is very exhausting. It demands a lot from me.'"
+  },
+  "284": {
+   "index": 284,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "but I actually hate the omniscient viewpoint",
+   "note": "Exact string match. The perceptual grounding the claim asserts is in the following sentences: 'None of us have an omniscient viewpoint; we are alone in the universe... If a plane crashes behind you I would see it but you wouldn't. That's the way we perceive the world.'"
   }
  }
 }
