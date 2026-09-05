@@ -3672,3 +3672,9 @@ The rulings themselves are inline, one `*RULED (§892.x, Fable 5.1):*` paragraph
 ### R48 — lanes ENC-4b (4) + ENC-4c (2) + PANTHEON-ROSTER (3) — OWED (HIGH: the roster's capsule coupling; the approacher rule; the tie-break)
 ### R49 — lanes HORIZON-B1 (7) + HORIZON-B2 (2) + SEAT-78 (3) — OWED (HIGH: the restore split; the WORKER ceiling arm; the SEAT-7a false receipt)
 ### R50 — lanes DOCKET-2 (1) + DOCKET-3 (2) + RATCHET-HOLDSAFE (4: `--dry` and `--from-log` for the test-ratchet instrument; all four of its modes had spawned the whole suite) + DESK-900-CARS (5: the `chance_meeting_exposed` voice row, the D10 coupling licence and its bucket, `{founder}` re-declared `phrase` (measured 26/26), DOCKET item 8 as a measurement record; the ninth OSR exemption's retirement REFUSED — it needs schema rung 18 with a migration bundle) — OWED
+
+### R51 — lane DESK-900-REDS (6 cars e803a485a; receipt `receipt-desk-900-reds`; 15 red arms → 3; the brief's "seeded draw moved" alarm had no referent) — OWED
+### R52 — lane DESK-900-TAIL (4 cars 7e1273490; receipt `receipt-desk-900-tail`; all three ruled voice mechanisms REFUTED; no treaty shift existed; two public-dossier leaks closed) — OWED
+### R53 — lane DESK-VISIBILITY (4 cars b4bb29f07; receipt `receipt-desk-visibility`; 46 rows classified twice; six offenders measured over 60 towns; the first-paint arm + the registry escape) — OWED
+### R54 — lane VIS-RESOLVER (1 car fa45a079f, replayed 7ef501df9; receipt `receipt-vis-resolver`; all 18 general-desk mounts OPEN; HIGH: the brief counted 2 unknown rows, there were 18) — OWED
+**Status (§900.1):** enrolled, not ruled — the four lanes the grouped §900 rows missed.
