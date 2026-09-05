@@ -8,7 +8,16 @@ program's decisions; SPEC fold labels §§277–§286 are design sections, not m
 The repo is authoritative; trust executed evidence over any summary including
 this one.**
 
-## ⭐⭐⭐⭐⭐ PICKUP AT §899 — **THE COMPOSED CONSIST IS DOWN; the clamp program is CLOSED; OSR-SCHEMA17 has landed in the desk dock (rung 17); next is the DESK consist (§900) with nine late docks behind it.** (`5e28d5c83` -> `38474a59e`).
+## ⭐⭐⭐⭐⭐ PICKUP AT §900 — **THE DESK CONSIST IS DOWN; thirteen docks landed on one tip; next is the LIGHTING wave (L-HOMES ×9 → L-DEFAULT → L-UI-MAT) on the L-PROBE receipts, then HORIZON-B6, then the WALK.** (`38474a59e` -> `04bb92d19`).
+
+**Product** `04bb92d19`, sealed `refs/preserve/landing-desk-2026-09-05`. Kit `refs/preserve/chair-tools-2026-09-05`; resume note `refs/preserve/resume-note-2026-09-05`.
+### ⭐ NEXT, IN ORDER
+1. **L-HOMES** (9 cars, `briefs/brief-L-HOMES.md`) on the L-PROBE receipts (`lprobe-out-899/` cheap 6/6; the full battery ran at the §899 tip: the cheap steps 6/6 again, `full_simulation` certified (5 y × 4 settlements), the golden control OWED on a quiet machine (its window gave up under four lanes), the overlay STOP on six presets re-framed by L-OVERLAY as a seam question) → **L-DEFAULT** → **L-UI-MAT** → the eleven declarations (`lightingwave/PLAN.md` + `CORRECTIONS.md`).
+2. **HORIZON-B6** (the ~2.3 h CAPACITY soak) in a window with no gate for 2.5 h; the edge `validValue` charset branch (deferred by HORIZON-B1) and the `WORKER_BUNDLE_CEILING_BYTES` arm written from the chair's build (the generation worker bundle 1,404,242 B, monotone-down); HORIZON-B1's closure: the charset leaf ships as its own hashed chunk (`custom-charset-*.js`, 11,762 B) and is NOT in the entry's `__vite__mapDeps` — lazy, as designed.
+3. Then the owner's WALK + one regen → the exhaustive review → fix cars → FULL STOP before the soak.
+### 🟠 OWNER'S DESK: the prose window's golden fixture (the genesis signing, or your sentence) · the paid-rights floor and the arms · DS-GEN-1 · DS-FTH-2's public pool · a founder-name producer · the chance-meeting tie-break · `anchored` at generation.
+
+## (superseded) PICKUP AT §899 — **THE COMPOSED CONSIST IS DOWN; the clamp program is CLOSED; OSR-SCHEMA17 has landed in the desk dock (rung 17); next is the DESK consist (§900) with nine late docks behind it.** (`5e28d5c83` -> `38474a59e`).
 
 **Product** `38474a59e`, sealed `refs/preserve/landing-composed-2026-09-05`. Kit `refs/preserve/chair-tools-2026-09-05`; resume note `refs/preserve/resume-note-2026-09-05`.
 ### ⭐ NEXT, IN ORDER
