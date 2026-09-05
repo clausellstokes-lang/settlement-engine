@@ -172,4 +172,52 @@ export const OPS_SUBSYSTEM_ROWS = Object.freeze([
     // No channel at all, so the row can never be ALIVE and says so honestly.
     soakEvidence: 'unobserved',
   }),
+  Object.freeze({
+    rule: 'operationsVoiceEnabled',
+    title: 'The operations voice — the sentences a covert receipt is allowed to become',
+    module: 'src/domain/worldPulse/espionage/operationsVoice.js,src/domain/worldPulse/espionage/espionageGate.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY: a voice leaf mints no candidate. It composes lines from
+      // receipts other subsystems already produced, and the trace over its leaves finds
+      // no `candidateType` at all.
+      eventTypes: Object.freeze([]),
+      // ⛔ DELIBERATELY EMPTY, AND THIS IS THE ROW WHERE THE TEMPTATION IS REAL. A VOICE
+      // lane looks like it should declare a mover family, and it must not: the leaf is
+      // routed NOWHERE — the feed envelope and desk registration belong to the wiring car
+      // — so declaring a family would grade this row ALIVE off another lane's beats. That
+      // is the recorded moverFamily hazard in its purest form.
+      moverFamilies: Object.freeze([]),
+      // DELIBERATELY EMPTY: the leaf writes nothing and reaches nothing. Every quantity it
+      // needs arrives as an argument, pinned by its own suite over the leaf's logic.
+      stateKeys: Object.freeze([]),
+      other: 'THE LEAF\'S OWN PROVENANCE ROW, which is what charters this key rather than DESIGN_W_OPS §6 — and the difference is recorded rather than smoothed: §6 names TWO doors by name, the ladder and the dispatcher, and this is a THIRD that the voice leaf declares for itself. WHAT THE FLAG LIGHTS, EXACTLY ONE THING AT THIS CAR: nothing. The leaf\'s own `consumers` field says NONE by design, and no src module names it; the feed envelope and the desk registration belong to the wiring car, and until that lands nothing here is routed anywhere. WHAT THE MINT BUYS: CENSUS VISIBILITY — a built, dark, UNGATED voice surface was invisible to the totality walker that demands its certification row, and was not even on the measured backlog because it was not gated either. WHERE THE GATE LIVES AND WHY NOT IN THE LEAF: the leaf\'s suite pins that its LOGIC — its source with comments stripped and string literals blanked — carries no `Enabled` token at all, anchored on its provenance constant so an unreadable leaf reds rather than certifying. The door is deliberately an ADDRESS there and a GATE only in the espionage family door module. THE CONJUNCTION IS THE LEAF\'S OWN SENTENCE, quoted from its provenance: beneath this door every surface inherits the doors of the subsystem whose receipts it voices. So the gate AND-composes with the espionage layer rather than standing alone — a voice with more life than the receipts it reads would be speaking about missions that never ran. WHAT IS UNSIGNED, AND IT IS THE MAJORITY OF THE LEAF: every line and every reason in it is CANDIDATE, OWNER-UNSIGNED. The going-native reversal line is deliberately UNWRITTEN, and writing it is a ruling on the unsigned reversal fork rather than a prose edit. The audience split — mission beats and the long watch to the principal, exposure moments to the town — is a recorded vetoable judgment. The four storied refusals are voiced and the three machine refusals are not, and whether a malformed or unpriced operation ever deserves a sentence is the pen\'s call. FAITH IS CULTURE AND NEVER THEOLOGY, and no named person\'s fate is written here: the leaf voices STATE. WHAT NOTHING CAN SEE, DECLARED: no receipt channel grades this row and no soak year can. The soak\'s rules come from the full_simulation spread, which declares no virtual key, so ruleState resolves to unknown and the schema grades UNOBSERVED; `unobserved` is the honest evidence rather than `indirect`, because there is no dispositive channel for a later soak to fill. THE OBSERVATION THAT WOULD CLOSE THE GAP: a census of routed lines per mission outcome, which needs a FEED, and the feed is the wiring car\'s. The lane is pinned at tests/domain/operationsVoice.test.js.',
+    }),
+    // A voice speaks when a receipt occurs, and no receipt occurs: reactive is the shape
+    // the leaf has even before it has a caller.
+    expectedTempo: 'reactive',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'dark_is_silence_and_zero_keys',
+        description: 'THE PROMISE. With the door shut the leaf is not called, composes no line, and writes nothing — it has no writer of any kind, so darkness costs a campaign not one byte and speaks not one sentence.',
+        check: 'Expressible from source and from state, and asserted both ways in tests/domain/operationsVoice.test.js: the namer census proves no src caller exists, and the door arm drives operationsVoiceActive through the four truthy-refusal spellings.',
+      }),
+      Object.freeze({
+        name: 'the_flag_has_exactly_one_gate_read',
+        description: 'The key is read by name, strictly against `true`, at exactly ONE site in src/: operationsVoiceActive in the espionage family door module. The leaf itself names the key in a provenance STRING and never in code, which is the distinction its own logic-scan arm exists to hold.',
+        check: 'Expressible from source and asserted that way in tests/domain/operationsVoice.test.js, the polarity census, which counts COMPARISONS rather than names so the provenance string and the manifest member are never miscounted as uses.',
+      }),
+      Object.freeze({
+        name: 'the_voice_never_outlives_the_receipts_it_reads',
+        description: 'The door AND-composes with the espionage layer, so a config that lit the voice alone leaves it silent rather than speaking about missions that never ran — the leaf\'s own inheritance sentence, made executable.',
+        check: 'Expressible from state and asserted that way in tests/domain/operationsVoice.test.js: the door is driven with the voice key lit and the espionage conjunction broken at each of its three doors in turn, and reads false every time, against a non-vacuity control where all three are open.',
+      }),
+      Object.freeze({
+        name: 'every_line_is_unsigned_and_says_so',
+        description: 'THE PEN\'S, NOT THE LANE\'S. The provenance carries `signedBy: null` and five owner rows naming exactly what is still the pen\'s — the words, the deliberately unwritten reversal line, the audience split, the span words, and whether the machine refusals deserve a sentence at all. Minting the door signs nothing.',
+        check: 'Expressible from source and asserted that way in tests/domain/operationsVoice.test.js, which reads the provenance constant and holds both the null signature and the owner-row roster.',
+      }),
+    ]),
+    // No channel at all, so the row can never be ALIVE and says so honestly.
+    soakEvidence: 'unobserved',
+  }),
 ]);

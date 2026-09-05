@@ -574,6 +574,14 @@ export const ENGINE_GATED_VIRTUAL_RULE_KEYS = Object.freeze([
   // of its own to gate on. ⛔ SPELLED ONLY HERE IN THIS FILE, for the denominator reason
   // recorded above.
   'missionDispatcherEnabled',
+  // Joined 2026-09-05 by the same car. Unlike the two above this key is not one of the
+  // W-OPS volume §6 doors: it is the one the VOICE leaf names in its own provenance row,
+  // and its gate AND-composes with the espionage layer because that leaf voices espionage
+  // receipts and can have no more life than the receipts it reads. The read is in the same
+  // family door module; the leaf's own suite pins that its logic carries no flag token at
+  // all, so the door is an address there and a gate only here.
+  // ⛔ SPELLED ONLY HERE IN THIS FILE, for the denominator reason recorded above.
+  'operationsVoiceEnabled',
 ]);
 
 /**
