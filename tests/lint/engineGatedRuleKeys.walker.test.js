@@ -97,8 +97,10 @@ import { dirname, join, relative } from 'node:path';
 import { describe, expect, test } from 'vitest';
 import {
   DEFAULT_SIMULATION_RULES,
+  ENGINE_GATED_DORMANT_RULE_KEYS,
   ENGINE_GATED_VIRTUAL_RULE_KEYS,
   SIMULATION_RULE_PRESETS,
+  deriveDormantRuleKeys,
 } from '../../src/domain/worldPulse/simulationRules.js';
 import {
   SUBSYSTEM_CERTIFICATION_PENDING_KEYS,
@@ -261,6 +263,9 @@ const PENDING_MANIFEST_KEYS = Object.freeze([]);
  * act (each one's title tuple would move), and this car does not own that bill.
  */
 import { codeOnly } from '../helpers/codeOnlySource.js';
+// The anchored-negative helper. Carries no describe/test, so it costs this file's twelve
+// re-registering importers nothing (see the note above).
+import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 
 export { codeOnly };
 
@@ -738,7 +743,45 @@ describe('engine-gated rule keys (the census-invisible subsystem class)', () => 
     }
   });
 
-  test('the manifest is VIRTUAL keys only, and every member reached the census', () => {
+  test('every REGISTER member reached the census, and the register is a set', () => {
+    // ⭐ RE-CUT 2026-09-05 (lane LGT-P2-MANIFEST). This arm was titled "the manifest is
+    // VIRTUAL keys only" and DEMANDED that a key declared by any preset be DELETED from
+    // ENGINE_GATED_VIRTUAL_RULE_KEYS. That demand is the reason the estate's two lighting
+    // contracts INVERT the moment a class-F key lights: both read BUILD STATE off this
+    // list, so a deleted-because-lit key reads back as UNBUILT (tradeConvergenceContract's
+    // R6 join) and its evidenced row reads back as FABRICATED. Registration is a fact about
+    // `src/` and lighting does not change it, so ⛔ A KEY MAY NOW BE LIT WITHOUT BEING
+    // DELETED, keeping its certification row; the dark question moved to
+    // ENGINE_GATED_DORMANT_RULE_KEYS, which the split arm below measures.
+    //
+    // ⛔ AND THE DELETION DEMAND IS NOT MERELY GONE — ITS ABSENCE IS ASSERTED. If some
+    // later lane restores it, the split arm's synthetic LIT polarity still passes (it
+    // measures the derivation, not this list), so the guard against a re-collapse is the
+    // containment there plus the census read here: a registered key stays censusable, and
+    // that is exactly what a deletion would break.
+    const census = simulationRuleKeys();
+    for (const key of ENGINE_GATED_VIRTUAL_RULE_KEYS) {
+      expect(census, `${key} is registered but did not reach the census`).toContain(key);
+    }
+    expect(ENGINE_GATED_VIRTUAL_RULE_KEYS.length).toBeGreaterThan(0);
+    expect(new Set(ENGINE_GATED_VIRTUAL_RULE_KEYS).size).toBe(ENGINE_GATED_VIRTUAL_RULE_KEYS.length);
+
+    // ── THE SPLIT — darkness is DERIVED, and lighting never deletes a register row ──
+    // ⛔ THIS RIDES THE EXISTING TITLE RATHER THAN A NEW ONE, AND THE REASON IS MEASURED,
+    // not stylistic. A `test()` added to THIS file does not cost one title: twelve other
+    // suites `import { codeOnly }` from it, which re-evaluates this module and RE-REGISTERS
+    // every suite inside each of theirs, so one new title here is THIRTEEN runtime titles
+    // on the lighting census and the ratchet's totalTests. Measured on this car: a
+    // 13-file battery moved 264 → 269 tests for a single added title, the +5 being this
+    // file plus the four importers in that battery. (The docblock beside the `codeOnly`
+    // re-export says TEN importers; the tree carries TWELVE — re-measured here.) A car
+    // whose whole promise is a zero-footprint landing does not spend thirteen census rows
+    // on a title, so the two claims share one. Assertions run in order, so a failure below
+    // still names itself.
+    // TWO ENGINES ON PURPOSE. `declared` is rebuilt here from the two rules surfaces with
+    // this file's own loops rather than by calling the module's derivation, so the module
+    // and the walker can only agree by both being right. Driving the module's own rule
+    // against the module's own tables would agree with itself for free.
     const declared = new Set(
       Object.entries(DEFAULT_SIMULATION_RULES)
         .filter(([, value]) => typeof value === 'boolean')
@@ -749,20 +792,46 @@ describe('engine-gated rule keys (the census-invisible subsystem class)', () => 
         if (typeof value === 'boolean') declared.add(key);
       }
     }
-    const census = simulationRuleKeys();
-    for (const key of ENGINE_GATED_VIRTUAL_RULE_KEYS) {
-      // A key that earned a preset declaration must LEAVE the manifest: carrying it
-      // in both places would make the census's two sources disagree about which
-      // surface owns it, and the +32-byte arm the ruling rejected would be paid
-      // silently alongside the arm it chose.
-      expect(
-        declared.has(key),
-        `${key} is declared in DEFAULT_SIMULATION_RULES or a preset spread, so it is no longer VIRTUAL — delete it from ENGINE_GATED_VIRTUAL_RULE_KEYS and move its row to the subject lane`,
-      ).toBe(false);
-      expect(census, `${key} is manifested but did not reach the census`).toContain(key);
+    const expectedDormant = ENGINE_GATED_VIRTUAL_RULE_KEYS.filter((key) => !declared.has(key));
+    expect(
+      [...ENGINE_GATED_DORMANT_RULE_KEYS],
+      'the published dormant list disagrees with the surfaces it claims to be derived from',
+    ).toEqual(expectedDormant);
+    // THE INVARIANT, AS A CONTAINMENT: dormant ⊆ register, never the reverse.
+    for (const key of ENGINE_GATED_DORMANT_RULE_KEYS) {
+      expect(ENGINE_GATED_VIRTUAL_RULE_KEYS, `${key} is dormant but not registered`).toContain(key);
     }
-    expect(ENGINE_GATED_VIRTUAL_RULE_KEYS.length).toBeGreaterThan(0);
-    expect(new Set(ENGINE_GATED_VIRTUAL_RULE_KEYS).size).toBe(ENGINE_GATED_VIRTUAL_RULE_KEYS.length);
+    // NON-VACUITY, both sides. A derivation over an empty register, or over surfaces that
+    // declare nothing, would satisfy every line above without measuring anything.
+    expect(declared.size, 'no rules surface declares a boolean key').toBeGreaterThan(0);
+    expect(ENGINE_GATED_DORMANT_RULE_KEYS.length, 'the dormant list is empty').toBeGreaterThan(0);
+
+    // ⭐ GUARD THE GUARD, BOTH POLARITIES, ON SYNTHETIC SURFACES — the whole reason the
+    // derivation takes its inputs. The register member below is DRIVEN into a preset and
+    // must leave the dormant list; the same key declared non-boolean must stay. Neither
+    // polarity is a literal, so the arm cannot rot into agreement with itself.
+    const subject = ENGINE_GATED_VIRTUAL_RULE_KEYS[0];
+    const darkArm = deriveDormantRuleKeys(
+      ENGINE_GATED_VIRTUAL_RULE_KEYS,
+      DEFAULT_SIMULATION_RULES,
+      { synthetic: { rules: { [subject]: 'not a boolean' } } },
+    );
+    const litArm = deriveDormantRuleKeys(
+      ENGINE_GATED_VIRTUAL_RULE_KEYS,
+      DEFAULT_SIMULATION_RULES,
+      { synthetic: { rules: { [subject]: true } } },
+    );
+    expect(darkArm, 'a non-boolean declaration is not a light').toContain(subject);
+    // ANCHORED, and the anchor is the arm above rather than a comment: the two arms differ
+    // ONLY in the planted value, so a derivation that returned [] for everything would red
+    // on the dark arm instead of passing this absence for the wrong reason.
+    expectPresentThenAbsent(darkArm, litArm, subject, 'a preset light leaves the dormant set');
+    expect(litArm.length).toBe(darkArm.length - 1);
+    // …and THE INVARIANT ITSELF, executed rather than asserted in prose: the REGISTER is
+    // untouched by either arm. The lighting contracts read the register, so a lit key must
+    // not vanish from it and must stay censusable.
+    expect(ENGINE_GATED_VIRTUAL_RULE_KEYS, 'the derivation mutated the register').toContain(subject);
+    expect(simulationRuleKeys(), 'a registered key must stay censusable').toContain(subject);
   });
 
   test('every exemption carries a rationale, and the backlog is exact and shrink-only', () => {
