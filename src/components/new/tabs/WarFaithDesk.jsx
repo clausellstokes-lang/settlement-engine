@@ -230,7 +230,7 @@ export function FaithNicheGlance({ desk }) {
       textTransform: 'uppercase', letterSpacing: '0.06em',
     }}>
       {`The patron's standing · ${drawn.glance}`}
-      {drawn.sentence && <span style={{ color: BODY, fontWeight: 400, textTransform: 'none' }}>{` — ${drawn.sentence}`}</span>}
+      {drawn.sentence && <span style={{ color: BODY, fontWeight: 400, textTransform: 'none' }}>{`: ${drawn.sentence}`}</span>}
     </div>
   );
 }

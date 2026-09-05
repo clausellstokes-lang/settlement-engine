@@ -77,6 +77,7 @@ import { compareCodepoint } from '../../deterministicSort.js';
 import { DOSSIER_STATE_PROSE_ECONOMY } from '../../../data/dossierStateProse/economy.generated.js';
 import { readStateProse } from './stateProseKernel.js';
 import { legibilityRung } from './legibilityRung.js';
+import { COMPLEXITY_LABEL } from '../labelBands.js';
 
 /**
  * The desk's corpus, typed at the import boundary. The generated leaves stay PURE DATA
@@ -187,7 +188,13 @@ export const ACCESS_NOUN = Object.freeze({
  * splitting at the em dash yields adjectives (*highly diversified*, *concentrated*) that no
  * seam can take. So the vocabulary is AUTHORED, and this is its one home.
  *
- * KEYED ON THE PRODUCER'S OWN STRING, which is this file's own label-trap rule applied to
+ * KEYED ON THE PRODUCER'S OWN STRING, TAKEN FROM `labelBands.js`'s `COMPLEXITY_LABEL`
+ * RATHER THAN TRANSCRIBED A SECOND TIME. That leaf already had to name all eleven for
+ * `COMPLEXITY_BAND_BY_LABEL`, and two independent transcriptions of eleven authored strings
+ * are the duplicated-constant hazard in its exact shape: a re-wording of one producer label
+ * desynchronises them silently, each side still passing its own totality arm. It stays a
+ * DOMAIN leaf read and not a generator read, for this file's own reason recorded below.
+ * The key rule itself is unchanged, and is this file's own label-trap rule applied to
  * the one case where the producer HAS no token: `economicState.economicComplexity` is the
  * display string and there is no coarser enum behind it, so the string IS the canonical
  * value. The desk test imports `deriveEconomicComplexity`, exhausts its input space, and
@@ -202,17 +209,17 @@ export const ACCESS_NOUN = Object.freeze({
  * @type {Readonly<Record<string, string>>}
  */
 export const COMPLEXITY_NOUN = Object.freeze({
-  'Highly diversified — multiple major revenue streams': 'spread of trades',
-  'Diversified — broad institutional economic base': 'broad base of trades',
-  'Concentrated — fewer revenue streams than scale suggests': 'handful of trades',
-  'Diversified market economy': 'market trade',
-  'Specialized production and trade': 'specialist trade',
-  'Limited — narrow economic base for this scale': 'narrow trade',
-  'Mixed subsistence and market': 'mix of field and market',
-  'Agricultural surplus with trade links': 'surplus farm trade',
-  'Subsistence with minor surplus': 'small farm surplus',
-  'Subsistence with surplus': 'farm surplus',
-  'Subsistence — survival economy': 'subsistence living',
+  [COMPLEXITY_LABEL.HIGHLY_DIVERSIFIED]: 'spread of trades',
+  [COMPLEXITY_LABEL.DIVERSIFIED]: 'broad base of trades',
+  [COMPLEXITY_LABEL.CONCENTRATED]: 'handful of trades',
+  [COMPLEXITY_LABEL.MARKET_ECONOMY]: 'market trade',
+  [COMPLEXITY_LABEL.SPECIALIZED]: 'specialist trade',
+  [COMPLEXITY_LABEL.LIMITED]: 'narrow trade',
+  [COMPLEXITY_LABEL.MIXED]: 'mix of field and market',
+  [COMPLEXITY_LABEL.AGRICULTURAL]: 'surplus farm trade',
+  [COMPLEXITY_LABEL.MINOR_SURPLUS]: 'small farm surplus',
+  [COMPLEXITY_LABEL.SURPLUS]: 'farm surplus',
+  [COMPLEXITY_LABEL.SUBSISTENCE]: 'subsistence living',
 });
 
 /**
