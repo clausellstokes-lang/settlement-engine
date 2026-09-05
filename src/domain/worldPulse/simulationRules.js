@@ -566,6 +566,14 @@ export const ENGINE_GATED_VIRTUAL_RULE_KEYS = Object.freeze([
   // /\b[a-zA-Z][a-zA-Z0-9]*Enabled\b/ WITHOUT blanking comments, so a second spelling
   // anywhere here, a comment included, mints a phantom into the flag denominator.
   'infiltrationDepthEnabled',
+  // Joined 2026-09-05 by the same car, one commit later: the second of the two doors the
+  // W-OPS volume §6 charters by name. Its gate read is the sibling of the one above, in
+  // the same espionage family door module, and its certification row is in the same
+  // reserved leaf. The dispatcher leaf is pure and injected — it takes its needs, its cap
+  // and its frequency as arguments and never reaches for a world — so it has no receiver
+  // of its own to gate on. ⛔ SPELLED ONLY HERE IN THIS FILE, for the denominator reason
+  // recorded above.
+  'missionDispatcherEnabled',
 ]);
 
 /**

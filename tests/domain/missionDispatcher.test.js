@@ -20,6 +20,16 @@ import { describe, expect, test } from 'vitest';
 import { DOCTRINE_TARGETINGS } from '../../src/domain/worldPulse/espionage/espionageDoctrine.js';
 import { DELIBERATION_VERDICTS } from '../../src/domain/worldPulse/espionage/espionageMath.js';
 import { MAX_CONCURRENT_ENVOYS } from '../../src/domain/worldPulse/envoyErrandVocabulary.js';
+// LGT-P5-WOPS: the door this leaf's flag was minted onto. The read lives in the espionage
+// family's one door module by necessity — this leaf is pure and injected and has no
+// receiver to gate on, and it is also the espionage set's ONE admitted importer, which the
+// reachability-chain fence requires to name neither that module nor the layer flag.
+import { missionDispatcherActive } from '../../src/domain/worldPulse/espionage/espionageGate.js';
+import {
+  DEFAULT_SIMULATION_RULES,
+  ENGINE_GATED_VIRTUAL_RULE_KEYS,
+  SIMULATION_RULE_PRESETS,
+} from '../../src/domain/worldPulse/simulationRules.js';
 import {
   DISPATCH_CAP_PER_PRINCIPAL_PER_TICK,
   DISPATCH_REFUSALS,
@@ -385,5 +395,84 @@ describe('W-OPS O1 — DARK: no production caller, and no applier arm to fall in
     const body = source.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
     expect(/worldState/.test(body)).toBe(false);
     expect(/Math\.random|Date\.now|new Date\(/.test(body)).toBe(false);
+  });
+});
+
+// ── THE DOOR, MINTED 2026-09-05 BY LGT-P5-WOPS ───────────────────────────────────
+
+describe('W-OPS O1 — the CR-WR10-C door, and the polarity census that keeps it single', () => {
+  /** The world shape ES-0 actually demands: a positive canon marker and a non-omniscient
+   * info mode (`beliefsActive`), the errand spine, and the layer flag. Measured from the
+   * gate's own source rather than assumed, so a fixture that could never satisfy the
+   * conjunction cannot make these arms pass by accident. */
+  const litWorld = (extra = {}) => ({
+    spatialCanonVersion: 1,
+    simulationRules: {
+      infoMode: 'full',
+      errandSpineEnabled: true,
+      espionageEnabled: true,
+      missionDispatcherEnabled: true,
+      ...extra,
+    },
+  });
+
+  test('⭐ THE ONE GATE READ IS LIT, AND IT IS THE FAMILY DOOR — not this leaf', () => {
+    expect(missionDispatcherActive(litWorld())).toBe(true);
+    expect(missionDispatcherActive(litWorld({ missionDispatcherEnabled: false }))).toBe(false);
+    expect(missionDispatcherActive({ simulationRules: {} })).toBe(false);
+    expect(missionDispatcherActive(null)).toBe(false);
+    expect(missionDispatcherActive(undefined)).toBe(false);
+  });
+
+  test('⛔ STRICT, NOT TRUTHY: every truthy non-true spelling reads exactly like absent', () => {
+    const absent = missionDispatcherActive(litWorld({ missionDispatcherEnabled: undefined }));
+    expect(absent).toBe(false);
+    for (const truthy of [1, 'true', {}, []]) {
+      expect(
+        missionDispatcherActive(litWorld({ missionDispatcherEnabled: truthy })),
+        `a truthy non-true ${JSON.stringify(truthy)} must read exactly like absent`,
+      ).toBe(absent);
+    }
+  });
+
+  test('⛔ THE CONJUNCTION: a lit dispatcher over a dark espionage layer stays dark', () => {
+    // Each of ES-0's three doors dropped ALONE — a test that proves only the last has
+    // proven nothing about the first two.
+    expect(missionDispatcherActive({ simulationRules: litWorld().simulationRules })).toBe(false);
+    expect(missionDispatcherActive(litWorld({ errandSpineEnabled: false }))).toBe(false);
+    expect(missionDispatcherActive(litWorld({ espionageEnabled: false }))).toBe(false);
+    // NON-VACUITY: all three open is TRUE, so the refusals above are refusals.
+    expect(missionDispatcherActive(litWorld())).toBe(true);
+  });
+
+  test('⛔ THE POLARITY CENSUS: exactly ONE by-name read in src/, and it is strict', () => {
+    // A READ, NOT A MENTION: the manifest member, the certification row's `rule` field and
+    // this leaf's own header all NAME the key and gate nothing, so the scan looks for the
+    // COMPARISON — the only shape engineGatedRuleKeys counts as a gate.
+    const KEY = 'missionDispatcherEnabled';
+    const READ_RE = new RegExp(`\\b${KEY}\\s*(?:===|!==|==|!=)`);
+    const readers = srcFiles()
+      .map((file) => ({
+        rel: relative(ROOT, file).split('\\').join('/'),
+        code: readFileSync(file, 'utf8').replace(/\/\*[\s\S]*?\*\//g, ' ').replace(/^\s*\/\/.*$/gm, ' '),
+      }))
+      .filter((entry) => READ_RE.test(entry.code))
+      .map((entry) => entry.rel)
+      .sort();
+    expect(readers).toEqual(['src/domain/worldPulse/espionage/espionageGate.js']);
+    // NON-VACUITY, and the negative control that proves the scan discriminates.
+    expect(READ_RE.test('rules.missionDispatcherEnabled === true')).toBe(true);
+    expect(READ_RE.test('the door is `missionDispatcherEnabled`')).toBe(false);
+  });
+
+  test('⛔ THE KEY IS VIRTUAL: absent from the defaults and from every preset spread', () => {
+    expect(Object.prototype.hasOwnProperty.call(DEFAULT_SIMULATION_RULES, 'missionDispatcherEnabled')).toBe(false);
+    for (const [id, preset] of Object.entries(SIMULATION_RULE_PRESETS)) {
+      expect(
+        Object.prototype.hasOwnProperty.call(preset.rules, 'missionDispatcherEnabled'),
+        `${id} declares the key — a virtual key must be false everywhere by ABSENCE`,
+      ).toBe(false);
+    }
+    expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toContain('missionDispatcherEnabled');
   });
 });
