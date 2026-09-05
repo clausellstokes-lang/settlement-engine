@@ -3,7 +3,10 @@
 set -e
 SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad
 D=$SC/lanePROSE2; BASE=fd8b6df0013b749e24435450931618fbe78a3f13
-grep -q 'LAND-898-B OK' $SC/land-898-b.log || { echo "⛔ land-898-b did not finish OK"; exit 1; }
+# the totals car is the precondition (land-898-b stopped at its step 4 once; the totals were re-taken after fix car #3)
+echo "== 0. the totals car (entries predicted 5, totalFiles 2468) — commit from the re-taken ratchet log"
+git -C $D log -1 --format=%s | grep -q 'census totals re-freeze' || sh $SC/commit-totals.sh $D $SC/ratchet-898.log 5 2468 train-prose-2026-09-05 $BASE
+git -C $D log -1 --format=%s | grep -q 'census totals re-freeze' || { echo "⛔ no totals car at the tip"; exit 1; }
 echo "== 1. the owed-ledger retirement car"; sh $SC/retire-owed-898.sh
 N=$(git -C $D rev-list --count $BASE..HEAD); echo "== 2. the gate scripts take the true count ($N)"; sh $SC/set-cars-898.sh $N
 echo "== 3. lighting re-check after the ledger edit (a test-file edit; titles must be unmoved)"
