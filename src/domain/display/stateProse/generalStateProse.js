@@ -86,7 +86,13 @@ const CORPUS = /** @type {import('./stateProseKernel.js').StateProseCorpus} */ (
  * register, so a drift reds rather than rendering.
  * @type {Readonly<Record<string, string>>}
  */
-export const SLOT_FILL_SHAPES = Object.freeze({ settlement: 'proper' });
+export const SLOT_FILL_SHAPES = Object.freeze({
+  settlement: 'proper',
+  faction: 'proper',
+  faction2: 'proper',
+  issue: 'phrase',
+  stakes: 'phrase',
+});
 
 /**
  * This desk owns NO literal fill table, and the empty object is the honest declaration.
@@ -305,6 +311,89 @@ export function readinessPoolKey(label) {
 export function foodSecurityPoolKey(label) {
   const key = FOOD_POOL_OF[text(label)];
   return key && CORPUS['DS-GEN-3'].pools[key] ? key : null;
+}
+
+/**
+ * A `phrase` fill, or `undefined`. The adverbial/predicative shape: it supplies its own
+ * everything, so it MAY carry a determiner, and it lands mid-sentence, so it must read
+ * lowercase there.
+ *
+ * ⭐ IT DECAPITALISES AND IT REFUSES, AND THE SPLIT MATTERS. `conflicts.js` writes its
+ * issues and stakes as sentence-case labels — `Control of the market licensing process`,
+ * `Labor control` — and dropping them verbatim into "…disagree about {issue}" puts a
+ * capital in the middle of a sentence, which `fillShapeViolation` convicts as
+ * COMMON-FILL-IS-CAPITALISED. A leading `Xy` is therefore lowered, which is the ordinary
+ * grammar of a mid-sentence noun phrase and nothing more.
+ *
+ * ⛔ ANYTHING ELSE IS REFUSED RATHER THAN REPAIRED — an acronym, an all-caps token, a
+ * value starting with a digit or punctuation. Lowering `MP` to `mP` would be this desk
+ * inventing a spelling, and anchored liveness dropping one variant is strictly better than
+ * a mangled word in front of a reader. The desk test drives EVERY issue and stakes literal
+ * the producer table carries through this function, so a future row that cannot conform is
+ * a red here rather than a silent variant loss.
+ * @param {string} value @returns {string|undefined}
+ */
+function phraseFill(value) {
+  const v = text(value);
+  if (!v) return undefined;
+  if (/[—–]/.test(v)) return undefined;
+  if (/[.!?]\s|[.!?]$/.test(v)) return undefined;
+  if (/[0-9]/.test(v)) return undefined;
+  if (/[a-z]+_[a-z]+/.test(v)) return undefined;
+  if (/^[A-Z][a-z]/.test(v)) return v[0].toLowerCase() + v.slice(1);
+  return /^[a-z]/.test(v) ? v : undefined;
+}
+
+/**
+ * ⛔ DS-GEN-1 IS LEFT DARK, AND THE REASON IS THAT ITS DIMENSION HAS NO PRODUCER.
+ *
+ * DS-GEN-1 (`history.currentTensions[]`) is the richest unlit block in this leaf — ten
+ * tension types, fifty variants — and it sits one field away from speaking. It is not
+ * mounted, deliberately, and this is the written reason so the next reader does not have to
+ * re-derive it.
+ *
+ * THE MEASUREMENT. The projection demotes the block's `severity` into the kernel's law-5
+ * dimension, whose vocabulary is one of `minor` / `major` / `catastrophic`. What the record
+ * carries is an ARRAY — `["minor","major"]` — on 100 percent of tensions across 48 generated
+ * settlements (8 seeds × 6 tiers, 90 tensions, 3 distinct shapes, 0 scalars).
+ * `buildHistoricalEvent` spreads `{ ...tmpl }` out of `HISTORICAL_EVENTS_DATA` and never
+ * collapses it, so the value is a property of the tension TYPE — the range that type may
+ * take — identical on every settlement that carries it, and never a reading of this town.
+ *
+ * ⇒ ANY CHOICE HERE WOULD BE A DEFAULT WEARING A READING'S CLOTHES. `severity[0]` makes
+ * every crime wave in every world MINOR and darkens three of the five variants in each of
+ * the ten pools permanently; `severity[severity.length - 1]` does the same at the other end;
+ * a seeded pick would be this desk inventing a fact about a town's crisis. And the kernel is
+ * already right about this: it fails closed on an unanswered dimension, so the block stays
+ * silent rather than half-true. Dormant is a true statement.
+ *
+ * THE ONE ACT THAT LIGHTS IT, and it is NOT a desk act. The producer must collapse the
+ * template range to one value per settlement at generation, which the same file already does
+ * twice — `generateEventNarrative` picks with `pick(eventTemplate.severity)`, and the
+ * resource path collapses an array outright. It is one line. ⛔ BUT A GENERATION-SIDE
+ * COLLAPSE MOVES SAME-SEED OUTPUT, and a seed is a starting world forever: that is the
+ * owner's to sign, not a lane's and not a chair's.
+ *
+ * AND THERE IS A SECOND, INDEPENDENT GAP behind it, so the collapse alone is not the whole
+ * cure: `HISTORICAL_EVENTS_DATA` can write more than twenty tension types and the corpus
+ * writes ten pools, so fourteen of them would still reach no pool. Both halves are pinned in
+ * the desk suite, so neither figure can decay unnoticed.
+ */
+
+// ── DS-GEN-2 · Overview/Power › Active conflicts ────────────────────────────────────
+
+/**
+ * DS-GEN-2's pool — the intensity of ONE standing quarrel. `generateConflicts` writes
+ * `low` / `moderate` / `high` and nothing else, and all three are reached in a measured
+ * sample; an unrecognised intensity renders nothing rather than picking a neighbour, because
+ * how close two factions are to violence is not a thing to guess at.
+ * @param {{intensity?: unknown}|null|undefined} conflict @returns {string|null}
+ */
+export function conflictIntensityPoolKey(conflict) {
+  const intensity = text(conflict?.intensity);
+  if (!intensity) return null;
+  const key = `intensity: ${intensity}`;
+  return CORPUS['DS-GEN-2'].pools[key] ? key : null;
 }
 
 // ── DS-GEN-5 · Overview › Situation (the live companion to the frozen scene) ────────
@@ -569,6 +658,7 @@ export function institutionsPoolKey(inst) {
  */
 export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
   overview: Object.freeze({
+    conflicts: Object.freeze([]),
     situation: null,
     origin: Object.freeze([]),
     systemsHealth: Object.freeze([]),
@@ -633,8 +723,30 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
     originLine(originTierPoolKey(readings.tier)),
   ].filter((line) => line && line.sentence);
 
+  // DS-GEN-2, ONE LINE PER CONFLICT, in the caller's own order so a component can render
+  // each beside the row it is about. Still ONE position on the page-set — the crisis-banner
+  // precedent — and a conflict this desk cannot key on yields `null` in place rather than
+  // shortening the list, so the index pairing a caller relies on cannot slip.
+  const conflicts = Object.freeze((Array.isArray(readings.conflicts) ? readings.conflicts : [])
+    .map((conflict) => {
+      const key = conflictIntensityPoolKey(conflict);
+      if (!key) return null;
+      const parties = Array.isArray(conflict?.parties) ? conflict.parties : [];
+      return legibilityRung('', readStateProse(CORPUS, 'DS-GEN-2', key, {
+        ...options,
+        slots: {
+          ...slots,
+          faction: properFill(text(parties[0])),
+          faction2: properFill(text(parties[1])),
+          issue: phraseFill(conflict?.issue),
+          stakes: phraseFill(conflict?.stakes),
+        },
+      }), []);
+    }));
+
   return Object.freeze({
     overview: Object.freeze({
+      conflicts,
       situation: rung('DS-GEN-5', situationPoolKey(readings), ''),
       origin: Object.freeze(origin),
       systemsHealth: Object.freeze(health),
