@@ -336,10 +336,19 @@ export const CHANCE_MEETING_PRESENTATION = CHANCE_MEETING_NEWS_TUNING;
  * @param {'notable'|'routine'|'major'|'n/a'} significance
  * @returns {Readonly<{severity:number, score:number}>|null}
  */
+/**
+ * The two bands the table carries, keyed by the registry's own significance word — a LOOKUP,
+ * never a comparison: `significanceMigration.census` counts every `significance === '…'` as ad-hoc
+ * scale debt (class A), and this leaf must not join the debtors. Typed as a partial record so the
+ * strict checker sees `undefined` for `routine` / `n/a` (the withhold the writers already guard).
+ * @type {Readonly<Partial<Record<'notable'|'routine'|'major'|'n/a', Readonly<{severity:number, score:number}>>>>}
+ */
+const PRESENTATION_BY_SIGNIFICANCE = Object.freeze({
+  notable: CHANCE_MEETING_PRESENTATION.notable,
+  major: CHANCE_MEETING_PRESENTATION.major,
+});
 export function presentationFor(significance) {
-  if (significance === 'notable') return CHANCE_MEETING_PRESENTATION.notable;
-  if (significance === 'major') return CHANCE_MEETING_PRESENTATION.major;
-  return null;
+  return PRESENTATION_BY_SIGNIFICANCE[significance] ?? null;
 }
 
 /**
