@@ -113,20 +113,51 @@ export const STABILITY_BANDS = Object.freeze([
  * declared: a band is a CLASS, not an identifier. The tile shows the band; the full
  * label keeps the gloss that separates them. Do not "resolve" the collision by
  * inventing a word — that would be authoring, and authoring is the chair's.
+ * ⛔ THE ELEVEN STRINGS ARE NAMED ONCE, HERE, AND EVERY KEYED MAP IN src/domain IS BUILT
+ * FROM THESE CONSTANTS. `economyStateProse.js`'s `{complexity}` fill table keyed on the same
+ * eleven strings by a second transcription; a re-wording of one producer label would have
+ * desynchronised the two silently, each still passing its own totality arm.
+ *
+ * ⛔ AND THEY ARE STILL NOT READ FROM THEIR AUTHOR. `src/generators/economy/prosperity.js`
+ * writes them, and importing them from there would drag the economy generator and its
+ * transitive graph into the eager first-paint chunk (the ZERO IMPORTS law above) and into
+ * every tab chunk that draws (economyStateProse.js's own recorded reason). The estate ruled
+ * this direction once already: `priorityToCategory` was re-homed OUT of that generator and
+ * INTO a dependency-free domain leaf so presentation could read the same vocabulary without
+ * the graph. A vocabulary moves TOWARDS this leaf, never away from it.
+ * @type {Readonly<Record<string, string>>}
+ */
+export const COMPLEXITY_LABEL = Object.freeze({
+  HIGHLY_DIVERSIFIED: 'Highly diversified — multiple major revenue streams',
+  DIVERSIFIED: 'Diversified — broad institutional economic base',
+  CONCENTRATED: 'Concentrated — fewer revenue streams than scale suggests',
+  LIMITED: 'Limited — narrow economic base for this scale',
+  SUBSISTENCE: 'Subsistence — survival economy',
+  MARKET_ECONOMY: 'Diversified market economy',
+  SPECIALIZED: 'Specialized production and trade',
+  MIXED: 'Mixed subsistence and market',
+  AGRICULTURAL: 'Agricultural surplus with trade links',
+  MINOR_SURPLUS: 'Subsistence with minor surplus',
+  SURPLUS: 'Subsistence with surplus',
+});
+
+/**
+ * The band a producer label opens with, keyed through the constants above rather than
+ * through a second transcription of the same eleven strings.
  * @type {Readonly<Record<string, string>>}
  */
 export const COMPLEXITY_BAND_BY_LABEL = Object.freeze({
-  'Highly diversified — multiple major revenue streams': 'Highly diversified',
-  'Diversified — broad institutional economic base': 'Diversified',
-  'Concentrated — fewer revenue streams than scale suggests': 'Concentrated',
-  'Limited — narrow economic base for this scale': 'Limited',
-  'Subsistence — survival economy': 'Subsistence',
-  'Diversified market economy': 'Diversified',
-  'Specialized production and trade': 'Specialized',
-  'Mixed subsistence and market': 'Mixed',
-  'Agricultural surplus with trade links': 'Agricultural',
-  'Subsistence with minor surplus': 'Subsistence',
-  'Subsistence with surplus': 'Subsistence',
+  [COMPLEXITY_LABEL.HIGHLY_DIVERSIFIED]: 'Highly diversified',
+  [COMPLEXITY_LABEL.DIVERSIFIED]: 'Diversified',
+  [COMPLEXITY_LABEL.CONCENTRATED]: 'Concentrated',
+  [COMPLEXITY_LABEL.LIMITED]: 'Limited',
+  [COMPLEXITY_LABEL.SUBSISTENCE]: 'Subsistence',
+  [COMPLEXITY_LABEL.MARKET_ECONOMY]: 'Diversified',
+  [COMPLEXITY_LABEL.SPECIALIZED]: 'Specialized',
+  [COMPLEXITY_LABEL.MIXED]: 'Mixed',
+  [COMPLEXITY_LABEL.AGRICULTURAL]: 'Agricultural',
+  [COMPLEXITY_LABEL.MINOR_SURPLUS]: 'Subsistence',
+  [COMPLEXITY_LABEL.SURPLUS]: 'Subsistence',
 });
 
 /**
