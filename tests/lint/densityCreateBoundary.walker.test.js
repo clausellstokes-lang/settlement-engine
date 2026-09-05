@@ -116,7 +116,18 @@ describe('density create-boundary walker (which generation is a BIRTH)', () => {
   });
 
   it('the manifest names no module that has stopped reaching the pipeline', () => {
-    const stale = Object.keys(PIPELINE_REACHERS).filter(rel => !reachers.includes(rel));
+    // A row reaches the pipeline itself, or THROUGH the executor it declares.
+    // The generation transport split the mint from the call: the store's lane
+    // mints the law and posts a plain-data request, and a module under
+    // src/workers is what invokes the pipeline with it. `reachesVia` is how a
+    // BIRTH row stays held to the tree in that shape rather than reading as
+    // stale, and the named executor must itself be a live reacher, so a
+    // dangling pointer is a red exactly like a dangling row.
+    const stale = Object.keys(PIPELINE_REACHERS).filter((rel) => {
+      if (reachers.includes(rel)) return false;
+      const via = PIPELINE_REACHERS[rel].reachesVia;
+      return !(via && reachers.includes(via));
+    });
     expect(
       stale,
       `classified modules that no longer reach the pipeline: ${stale.join(', ')}`,

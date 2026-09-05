@@ -27,7 +27,11 @@ import { persistCampaignState, persistSaveUpdate } from './campaignSliceShared.j
 // campaignSyncError (the CampaignSyncBanner) instead of silently console.warn-ing
 // and drifting from Supabase. There must be exactly ONE persistSaveUpdate definition.
 export { persistSaveUpdate } from './campaignSliceShared.js';
-export { loadSettlementContentRuntimeOptions } from './settlementContentRuntime.js';
+// `loadSettlementContentRuntimeOptions` is NOT re-exported here any more. This
+// leaf is EAGER, so a re-export kept settlementContentRuntime.js statically
+// reachable from the entry chunk no matter which lazy module actually used it.
+// Its one consumer is the generation lane, which now imports it directly, and
+// the module leaves first paint with the lane.
 // The LOCKS ENGINE read side (domain/locksPreservation.js), re-exported through this
 // leaf so settlementSlice keeps its single helper import home and gains no new static
 // import of its own — the eager-closure rule the lock leaf's header explains.

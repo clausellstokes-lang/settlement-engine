@@ -83,6 +83,7 @@ export const FLAG_DEFAULTS = Object.freeze({
   advanceMultiTick: true,
   simAdvanceWorker: true,
   advanceWorkerParanoia: false,
+  generationWorker: false,
   handbookVoice: false,
   warEconomySurfacing: false,
   sessionMode: true,

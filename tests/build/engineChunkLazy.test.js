@@ -28,7 +28,8 @@
 import { describe, it, expect } from 'vitest';
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { resolve, join, dirname, relative } from 'node:path';
-import viteConfig, { ENGINE_SHARED_DOMAIN_EXCISIONS } from '../../vite.config.js';
+import viteConfig, { ENGINE_SHARED_DOMAIN_EXCISIONS, EAGER_FIRST_PAINT_MODULES } from '../../vite.config.js';
+import { codeOnly } from '../helpers/codeOnlySource.js';
 
 const distDir = resolve(process.cwd(), 'dist');
 const assetsDir = join(distDir, 'assets');
@@ -263,11 +264,52 @@ describe('engine chunk — source uses dynamic import for the heavy generators',
     expect(src).not.toMatch(/^import\s.*from\s+['"][^'"]*generators\/generateSettlementPipeline[^'"]*['"]/m);
   });
 
-  it('settlementSlice loads pipeline metadata on generation, never through its eager imports', () => {
-    const src = readFileSync(resolve(process.cwd(), 'src/store/settlementSlice.js'), 'utf-8');
-    expect(src).toMatch(/import\(['"][^'"]*steps\/stepMetadata\.js['"]\)/);
-    expect(src).not.toMatch(/^import\s.*from\s+['"][^'"]*steps\/stepMetadata\.js['"]/m);
-    expect(src).toMatch(/metaForStep:\s+metadata\.metaForStep/);
-    expect(src).toMatch(/eng\.metaForStep\(name\)/);
+  // ⭐ RE-ANCHORED, NOT PATCHED. This arm used to pin four regexes on the SLICE:
+  // that it dynamic-imported `steps/stepMetadata.js` and read
+  // `eng.metaForStep(name)`. After the generation lane moved out of the slice
+  // the slice has no use for step metadata at all, so those regexes would have
+  // reddened on a CORRECT tree. Keeping a dead `import()` alive to satisfy a
+  // regex would have been a phantom enforcer — an assertion about a line that
+  // exists only to be asserted about. So the CLAIM is re-anchored onto where
+  // the work now happens: the generation core mints each step's summary where
+  // the pipeline context lives, and the metadata leaf must be reachable only
+  // from there.
+  //
+  // ⚠ THE ABSENCE CLAIM READS `codeOnly(source)`, NOT RAW TEXT. The slice's
+  // rewritten header DESCRIBES the metadata path it no longer imports, and a
+  // raw-text detector would convict that prose — the class that has already
+  // convicted eight registries for describing what they classify.
+  //
+  // ⚠ AND THE PRESENCE CLAIM DELIBERATELY DOES NOT. `codeOnly` blanks string
+  // TEXT, and an import SPECIFIER is string text, so routing a specifier match
+  // through it would assert against a run of blanks and red on a correct tree.
+  // The presence regex is therefore anchored at `^import` on the RAW source,
+  // where a docblock line (which begins ` * `) cannot satisfy it.
+  it('pipeline metadata is loaded by the generation core, never through an eager import — the slice reaches it only via the lazy lane', () => {
+    const sliceRaw = readFileSync(resolve(process.cwd(), 'src/store/settlementSlice.js'), 'utf-8');
+    const coreRaw = readFileSync(resolve(process.cwd(), 'src/workers/generationRequest.js'), 'utf-8');
+    const slice = codeOnly(sliceRaw);
+    const core = codeOnly(coreRaw);
+
+    // The core is the one module that names the metadata leaf, statically, and
+    // calls it. Both halves are positive claims, so neither can go vacuous.
+    expect(coreRaw).toMatch(/^import\s.*metaForStep.*from\s+['"]\.\.\/generators\/steps\/stepMetadata\.js['"]/m);
+    expect(core).toMatch(/metaForStep\(name\)/);
+
+    // The slice reaches the lane, and the lane reaches the core.
+    expect(slice).toMatch(/import\(['"]\.\/settlementGenerateAction\.js['"]\)/);
+    // anchored: the two positive core assertions and the positive slice assertion above prove both files were read and parsed, so this absence cannot be true merely because the subject vanished.
+    expect(slice).not.toMatch(/steps\/stepMetadata\.js/);
+
+    // NEGATIVE CONTROL for the codeOnly routing: a docblock that NAMES the leaf
+    // must not convict. If this ever reds, the strip stopped stripping and the
+    // arm above has become a prose detector.
+    const withDocblockMention = `/** mentions src/generators/steps/stepMetadata.js in prose */\n${sliceRaw}`;
+    expect(codeOnly(withDocblockMention)).not.toMatch(/steps\/stepMetadata\.js/); // anchored: the same assertion on the unmodified slice above is the paired positive, and this line differs from it only by a planted comment, so a stripper that stopped working reds one of the two.
+
+    // And vite's own eager derivation must not carry the metadata leaf.
+    const eager = new Set([...EAGER_FIRST_PAINT_MODULES].map(abs => relative(process.cwd(), abs)));
+    expect(eager.size).toBeGreaterThan(50);
+    expect(eager.has('src/generators/steps/stepMetadata.js')).toBe(false);
   });
 });
