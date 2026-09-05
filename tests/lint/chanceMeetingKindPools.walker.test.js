@@ -10,11 +10,13 @@
  * at `refs/preserve/enc5-words-2026-09-04` before any wiring existed.
  * docs/content/RECEIPT_POOLS_CHANCE_MEETING.md was a byte-identical copy of that seal, and
  * `envoyChanceMeetingReceiptPools.js` is its transcription. ⚠ IT IS NO LONGER BYTE-IDENTICAL AND
- * THIS SENTENCE IS CORRECTED RATHER THAN LEFT TO RIDE: ENC-4b added ONE line to the §B block — the
- * chair's own wiring rule, "§B speaks only where the approach is known" — and changed no authored
- * sentence, no slot declaration and no §C row. The arm below pins that rule line and pins the
- * SENTENCES against the seal, so the distinction is measured on every run rather than asserted
- * here. This walker re-derives every pool, the `{outcome_phrase}` band table AND the reason from
+ * THIS SENTENCE IS CORRECTED A SECOND TIME RATHER THAN LEFT TO RIDE. ENC-4b added ONE line to the
+ * §B block — the chair's own wiring rule, "§B speaks only where the approach is known". ENC-4c
+ * APPENDED A WHOLE THIRD GOVERNED BLOCK, `## §B2 ENC-4c`, carrying the chair's five sentences for
+ * the case §B cannot voice. ⛔ NEITHER CAR EDITED ONE SEALED BYTE: the §A, §B and §C slices are
+ * byte-identical to the seal apart from ENC-4b's one rule line, §B's terminator is now §B2's
+ * heading rather than §C's, and the arms below pin both rule lines AND every sealed sentence and
+ * slot declaration, so the distinction is measured on every run rather than asserted here. This walker re-derives every pool, the `{outcome_phrase}` band table AND the reason from
  * the DOCUMENT on every run, so the transcription cannot fork from the corpus in either direction. ⛔ A corpus defect is a chair
  * annex act; a word that cannot be wired is a finding back to the chair with the slot that
  * breaks, never an edit here.
@@ -118,11 +120,34 @@ const ANNEX_SOURCE = readFileSync(ANNEX_URL, 'utf8');
 const ANNEX_BLOCKS = Object.freeze({
   chance_meeting_recorded: Object.freeze({
     section: '## §A ENC-4', until: '## §B ENC-4', slotsMarker: '**Per-variant required slots**',
+    heading: 'chance_meeting_recorded',
   }),
   chance_meeting_exposed: Object.freeze({
-    section: '## §B ENC-4', until: '## §C HOLE 3', slotsMarker: '**Per-variant required slots:**',
+    // ⭐ ENC-4c MOVED THIS TERMINATOR, and it is the one anchor edit the third block costs. §B2
+    // sits between §B and §C, so a slice that still ran to §C would read §B2's five sentences as
+    // §B's declaration rows and the five-and-five seal proof below would report fifteen.
+    section: '## §B ENC-4', until: '## §B2 ENC-4c', slotsMarker: '**Per-variant required slots:**',
+    heading: 'chance_meeting_exposed',
+  }),
+  // ⛔⛔ A POOL KEY, NOT A KIND. §B2 is a SECOND authored corpus of the SAME registered kind, so
+  // its heading deliberately does NOT begin `### chance_meeting_exposed ` — a heading that did
+  // would make the shared reader's exactly-once guard find TWO and throw, and the census loops
+  // below key on KINDS. Its slot marker is §A's spelling, not §B's; each block is read through
+  // its own, which is exactly the trap the MUTANT arm below already proves is live.
+  chance_meeting_exposed_host_offered: Object.freeze({
+    section: '## §B2 ENC-4c', until: '## §C HOLE 3', slotsMarker: '**Per-variant required slots**',
+    heading: 'case host_offered of chance_meeting_exposed',
   }),
 });
+
+/**
+ * ⛔ EVERY DECLARED HEADING IS INTERPOLATED INTO A RegExp UNESCAPED, so a heading carrying a regex
+ * metacharacter would silently LOOSEN its own anchor — a `.` in a pool key would match any byte
+ * and could land the reader on a neighbouring block. The first spelling this lane reached for was
+ * `chance_meeting_exposed.host_offered`, which is exactly that defect, so the rule is asserted as
+ * a value here rather than trusted to the next author's care.
+ */
+const HEADING_SAFE_RE = /^[A-Za-z0-9_ ]+$/;
 
 /** The §A anchors, still named because three arms below are §A's alone (the band table, the
  *  reason clause, and the section-heading mutant). */
@@ -137,6 +162,9 @@ const NUMBERED_ROW_RE = /^\d+\. (.+)$/gm;
 const ALL_SLOTS = Object.freeze({
   chance_meeting_recorded: Object.freeze(['npc', 'counterpart', 'settlement', 'home', 'outcome_phrase']),
   chance_meeting_exposed: Object.freeze(['npc', 'counterpart', 'settlement', 'home']),
+  // ⭐ §B2 declares the SAME FOUR as §B and makes the opposite claim with them: `{npc}` is of
+  // `{settlement}` here and `{counterpart}` is of `{home}`. Same slots, inverted geography.
+  chance_meeting_exposed_host_offered: Object.freeze(['npc', 'counterpart', 'settlement', 'home']),
 });
 /** Markers no authored sentence contains, so a surviving one names the slot that placed it. */
 const SENTINEL = Object.freeze(Object.fromEntries(
@@ -162,7 +190,24 @@ const WITHOUT_HOME = Object.freeze({ ...SUPPLIABLE, home: '' });
 const HOME_LESS_INDEXES = Object.freeze({
   chance_meeting_recorded: Object.freeze([1]),
   chance_meeting_exposed: Object.freeze([]),
+  // §B2's shortfall is the EMPTY SET too: all five name the guest's court, so withholding it
+  // silences this case entirely rather than degrading it.
+  chance_meeting_exposed_host_offered: Object.freeze([]),
 });
+
+/**
+ * ⭐⭐ EVERY GOVERNED POOL IN THE VOLUME, BY POOL ID AND AUTHORED DEPTH — THREE, AGAINST TWO KINDS.
+ * `EXPECTED` above is the KIND census and stays two rows; this is the CORPUS census, and the two
+ * are deliberately different lengths because ENC-4c authors a second corpus for an existing kind
+ * rather than a second kind. A table that conflated them would make a new corpus look like a new
+ * registration to every arithmetic downstream — which is exactly what the pantheon A5 freezes,
+ * `REGISTERED_KIND_COUNT` and `ROUTED_TOKENS` are asserted UNMOVED against.
+ */
+const POOLS = Object.freeze([
+  ['chance_meeting_recorded', 6],
+  ['chance_meeting_exposed', 5],
+  ['chance_meeting_exposed_host_offered', 5],
+]);
 
 /**
  * THE BLOCK SPLIT, fail-closed and PER KIND. Slices the named wave block with the SHARED reader's
@@ -175,9 +220,16 @@ const HOME_LESS_INDEXES = Object.freeze({
 function annexBlocks(source, kind = 'chance_meeting_recorded') {
   const anchors = ANNEX_BLOCKS[kind];
   if (!anchors) throw new Error(`chanceMeetingAnnex: ${kind}: no declared annex anchors`);
+  if (!HEADING_SAFE_RE.test(anchors.heading)) {
+    throw new Error(`chanceMeetingAnnex: ${kind}: the declared heading `
+      + `${JSON.stringify(anchors.heading)} carries a character this reader interpolates into a`
+      + ' RegExp unescaped, so its anchor would not be exact. Spell the heading in word'
+      + ' characters and spaces only.');
+  }
   const scope = sectionSlice(source, anchors.section, anchors.until);
   const heading = anchoredOnce(
-    scope, new RegExp(`^### ${kind}(?= )`, 'gm'), `${kind}: heading in ${anchors.section}`,
+    scope, new RegExp(`^### ${anchors.heading}(?= )`, 'gm'),
+    `${kind}: heading in ${anchors.section}`,
   );
   const afterHeading = scope.indexOf('\n', heading.index);
   if (afterHeading < 0) throw new Error(`chanceMeetingAnnex: ${kind}: heading has no body`);
@@ -817,6 +869,168 @@ describe('ENC-4 phrased-kind registry — the meeting neither court arranged', (
       ['settlement', 'counterpart', 'npc', 'home'],
       ['settlement', 'counterpart', 'npc', 'home'],
     ]);
+  });
+
+  test('§B2 — the third governed block is the chair\'s corpus, verbatim, and it is a POOL not a KIND', () => {
+    // ⭐⭐ THE OTHER HALF OF §B, AND THE PREMISE FOR IT WAS MEASURED BEFORE IT WAS AUTHORED. §B is
+    // honest only where the one PASSING THROUGH offered, because its variant 1 fixes
+    // `{counterpart}` as being of `{settlement}`; the engine lets either party lead, so ENC-4b
+    // shipped the case and withheld the kind. This block carries the withheld case.
+    const POOL_KEY = 'chance_meeting_exposed_host_offered';
+    const live = annexBlocks(ANNEX_SOURCE, POOL_KEY);
+    // The block splits into FIVE sentences and FIVE declarations, read from disjoint text.
+    expect([live.rows.length, live.declared.length]).toEqual([5, 5]);
+    // ⛔ THE CORPUS MODULE IS THE ANNEX'S TRANSCRIPTION, joined here rather than eyeballed.
+    const pool = CHANCE_MEETING_RECEIPTS[POOL_KEY];
+    expect(pool).toHaveLength(5);
+    const lines = pool.map((variant) => String(variant(SUPPLIABLE)));
+    expect(lines, `${POOL_KEY}: pool is not the annex's`).toEqual(annexLines(SUPPLIABLE, POOL_KEY));
+    expect(new Set(lines).size, 'a duplicated sentence').toBe(pool.length);
+    // ⛔⛔ AND IT IS NOT A KIND. Nothing registers this id: no registry row, no routed token, no
+    // Chronicle row and no reader phrase. Those four absences are the whole reason the pantheon
+    // A5 freezes and `REGISTERED_KIND_COUNT` do not move for a second corpus.
+    expect(CHANCE_MEETING_KINDS).not.toContain(POOL_KEY);
+    expect(CHANCE_MEETING_KIND_REGISTRY.map((row) => row.kind)).not.toContain(POOL_KEY);
+    expect(isExplicitlyRouted(POOL_KEY), `${POOL_KEY}: a pool id must route nowhere`).toBe(false);
+    expect(KIND_SECTION).not.toHaveProperty(POOL_KEY);
+    expect(WHAT_PHRASES[POOL_KEY]).toBeUndefined();
+    // The positive controls that give those five absences their teeth: the id the volume DOES
+    // register answers every one of them.
+    expect(CHANCE_MEETING_KINDS).toContain('chance_meeting_exposed');
+    expect(isExplicitlyRouted('chance_meeting_exposed')).toBe(true);
+    expect(WHAT_PHRASES.chance_meeting_exposed).toBeTruthy();
+  });
+
+  test('§B2 — this volume\'s voice fences hold on the third block too, and the ROLE claim is inverted', () => {
+    const POOL_KEY = 'chance_meeting_exposed_host_offered';
+    const lines = CHANCE_MEETING_RECEIPTS[POOL_KEY].map((variant) => String(variant(SUPPLIABLE)));
+    // The positive control FIRST, so every absence below is read against prose that could have
+    // carried the defect: all five name both people and both places.
+    expect(lines.filter((line) => line.includes('Sera Vane'))).toHaveLength(5);
+    expect(lines.filter((line) => line.includes('Aldo Rell'))).toHaveLength(5);
+    expect(lines.filter((line) => line.includes('Bramwell'))).toHaveLength(5);
+    expect(lines.filter((line) => line.includes('Kesthorne'))).toHaveLength(5);
+    for (const line of lines) {
+      expect(line).toBe(line.trim());
+      expect(line.length).toBeGreaterThan(0);
+      // anchored: all five are asserted to name both people and both places two lines above.
+      expect(line).not.toMatch(/\d|%|×|_|\$\{|[{}]|\bundefined\b|\bNaN\b/);
+      // anchored: same liveness — the five populated sentences above.
+      expect(line).not.toMatch(/[—!]/);
+      // anchored: same liveness — §886 on rendered prose, never asserted in a comment.
+      expect(line).not.toMatch(/chance\W+meeting|meeting\W+chance/i);
+      // anchored: same liveness — STATE, never FATE: none of the five resolves a life.
+      expect(line).not.toMatch(/\b(?:died|dead|killed|slain|executed|exiled|wed|married|replaced|deposed)\b/i);
+    }
+    // ⛔⛔ THE ROLE CLAIM, INVERTED AND PINNED ON THE ANNEX'S OWN TEXT. §B says
+    // "{counterpart} of {settlement}"; §B2 may never say it, and may never say "{npc} of {home}"
+    // either. That is the whole content of the case split, and it is read on the DOCUMENT so a
+    // corpus edit cannot launder it.
+    const rows = annexBlocks(ANNEX_SOURCE, POOL_KEY).rows;
+    expect(rows).toHaveLength(5);
+    // anchored: the five authored rows are asserted present on the line above.
+    expect(rows.join(' ')).not.toContain('{counterpart} of {settlement}');
+    // anchored: same five rows — the inverse assertion, which §B makes and §B2 must not.
+    expect(rows.join(' ')).not.toContain('{npc} of {home}');
+    // …and the POSITIVE side of the same law, so the two absences are a claim rather than a
+    // property of an empty array: §B2 really does attach each party to the other's place.
+    expect(rows.filter((row) => row.includes('{npc} of {settlement}'))).toHaveLength(2);
+    expect(rows.filter((row) => row.includes('{counterpart} of {home}'))).toHaveLength(5);
+    // ⭐ AND THE MIRROR OF THAT LAW ON THE SEALED BLOCK, so the two blocks are proved OPPOSITE
+    // rather than merely each internally consistent.
+    const sealed = annexBlocks(ANNEX_SOURCE, 'chance_meeting_exposed').rows;
+    expect(sealed.filter((row) => row.includes('{counterpart} of {settlement}'))).toHaveLength(1);
+    expect(sealed.filter((row) => row.includes('{npc} of {home}'))).toHaveLength(5);
+  });
+
+  test('§B2 — the annex carries its own wiring rule, and the sealed blocks are untouched', () => {
+    // ⭐ THE RULE LINE, pinned where the words live, exactly as ENC-4b pinned §B's.
+    const scope = sectionSlice(ANNEX_SOURCE,
+      ANNEX_BLOCKS.chance_meeting_exposed_host_offered.section,
+      ANNEX_BLOCKS.chance_meeting_exposed_host_offered.until);
+    expect(scope).toContain('**§B2 speaks only where the approacher is of the host town.**');
+    // ⛔ AND IT IS A RULE, NOT A VARIANT: the block still splits five and five, so a rule line
+    // that had landed inside the numbered list would red here rather than ship as a sixth.
+    const live = annexBlocks(ANNEX_SOURCE, 'chance_meeting_exposed_host_offered');
+    expect([live.rows.length, live.declared.length]).toEqual([5, 5]);
+    // anchored: the five-and-five split one line up proves these are the real authored rows.
+    expect(live.rows.join(' ')).not.toMatch(/speaks only where/);
+    // ⛔⛔ THE SEALED §B BLOCK IS STILL EXACTLY FIVE AND FIVE, AND THAT IS THE ARM THE THIRD BLOCK
+    // PUTS AT RISK. §B2 sits between §B and §C; a §B slice still terminating at §C would read
+    // §B2's five sentences as §B's declaration rows and report fifteen. The terminator moved, and
+    // this is the measurement that says the move was made.
+    const sealed = annexBlocks(ANNEX_SOURCE, 'chance_meeting_exposed');
+    expect([sealed.rows.length, sealed.declared.length]).toEqual([5, 5]);
+    expect(ANNEX_BLOCKS.chance_meeting_exposed.until).toBe('## §B2 ENC-4c');
+    // …and §A is unaffected in the same breath, because it terminates before both.
+    expect(annexBlocks(ANNEX_SOURCE).rows).toHaveLength(6);
+  });
+
+  test('§B2 — MUTANT: an unescaped metacharacter in a declared heading is refused, not interpolated', () => {
+    // ⛔⛔ A DEFECT THIS LANE WALKED INTO AND MEASURED OUT OF. The reader interpolates each block's
+    // declared heading into a RegExp WITHOUT escaping, so `chance_meeting_exposed.host_offered` —
+    // the first pool id reached for — would have matched any byte where the dot stands and could
+    // land the exactly-once guard on a neighbouring block. Every declared heading is word
+    // characters and spaces, and the reader refuses one that is not.
+    for (const [poolKey, anchors] of Object.entries(ANNEX_BLOCKS)) {
+      expect(anchors.heading, `${poolKey}: heading carries a regex metacharacter`)
+        .toMatch(/^[A-Za-z0-9_ ]+$/);
+    }
+    // The refusal fires rather than decorating, proved on a doctored table entry.
+    const doctored = { ...ANNEX_BLOCKS, mutant: { ...ANNEX_BLOCKS.chance_meeting_exposed, heading: 'chance_meeting_exposed.host_offered' } };
+    const check = (heading) => {
+      if (!/^[A-Za-z0-9_ ]+$/.test(heading)) throw new Error('carries a character this reader interpolates into a RegExp unescaped');
+      return true;
+    };
+    expect(() => check(doctored.mutant.heading)).toThrow(/interpolates into a RegExp unescaped/);
+    // …and the control: every heading the volume really declares passes the same check.
+    expect(Object.values(ANNEX_BLOCKS).every((anchors) => check(anchors.heading))).toBe(true);
+    // ⛔ AND A POOL WITH NO DECLARED ANCHORS IS STILL REFUSED rather than read against §A's.
+    expect(() => annexBlocks(ANNEX_SOURCE, 'chance_meeting_never_authored')).toThrow(/no declared annex anchors/);
+  });
+
+  test('§B2 — the sentinel witness reads the same four slots this block declares', () => {
+    // ⭐ WITNESS TWO for §B2, orthogonal and derived by EXECUTION: render the block under markers
+    // no sentence contains, read back which survived, and pin the SET against the block's OWN
+    // declaration rows. The declaration join alone would pass if the declaration had drifted from
+    // the sentences; this one reads the sentences.
+    const POOL_KEY = 'chance_meeting_exposed_host_offered';
+    const slotOrder = ALL_SLOTS[POOL_KEY];
+    const sentinel = Object.fromEntries(slotOrder.map((slot) => [slot, `<<${slot}>>`]));
+    const declared = annexBlocks(ANNEX_SOURCE, POOL_KEY).declared;
+    const fromSentences = annexLines(sentinel, POOL_KEY)
+      .map((line) => slotOrder.filter((slot) => line.includes(sentinel[slot])));
+    expect(fromSentences).toEqual(
+      declared.map((slots) => slotOrder.filter((slot) => slots.includes(slot))),
+    );
+    // …and the witness is only a witness if it can DISAGREE: all five sentences must really carry
+    // markers, or every arity above would read as the empty array and agree vacuously.
+    expect(fromSentences.filter((slots) => slots.length > 0)).toHaveLength(5);
+    // ⛔ §B2 TAKES NO `{outcome_phrase}` EITHER: a refusal is not a mark band.
+    // anchored: the five-non-empty arm one line up proves this array holds real slot names.
+    expect(fromSentences.flat()).not.toContain('outcome_phrase');
+    // ⭐ ALL FIVE NAME THE GUEST'S COURT, so the home-withheld arm for this block is the EMPTY set
+    // — asserted against the annex's own declaration rather than counted by hand.
+    expect(declared.map((slots, index) => (slots.includes('home') ? -1 : index))
+      .filter((index) => index >= 0)).toEqual([...HOME_LESS_INDEXES[POOL_KEY]]);
+  });
+
+  test('§B2 — the corpus census is THREE pools against TWO kinds, and the difference is the point', () => {
+    // ⛔⛔ THE ARM THAT KEEPS A SECOND CORPUS FROM READING AS A SECOND REGISTRATION. Three authored
+    // pools, two registered kinds, and every pool joined to its own governed block.
+    expect(Object.keys(CHANCE_MEETING_RECEIPTS).sort()).toEqual(POOLS.map(([key]) => key).slice().sort());
+    expect(Object.keys(ANNEX_BLOCKS).sort()).toEqual(POOLS.map(([key]) => key).slice().sort());
+    expect(POOLS).toHaveLength(3);
+    expect(CHANCE_MEETING_KINDS).toHaveLength(2);
+    for (const [poolKey, depth] of POOLS) {
+      expect(CHANCE_MEETING_RECEIPTS[poolKey], `${poolKey}: no corpus`).toHaveLength(depth);
+      // Every pool clears the derived floor for the class its KIND is registered at. §B2's kind
+      // is `major`, whose floor is four, and five clears it by margin.
+      expect(depth).toBeGreaterThanOrEqual(FREQUENCY_FLOORS.major);
+    }
+    // …and the two ids that ARE kinds are exactly the registry's own, in its own order.
+    expect(POOLS.filter(([key]) => CHANCE_MEETING_KINDS.includes(key)).map(([key]) => key))
+      .toEqual([...CHANCE_MEETING_KINDS]);
   });
 
   test('§B — the sentinel witness reads the same four slots the annex declares', () => {

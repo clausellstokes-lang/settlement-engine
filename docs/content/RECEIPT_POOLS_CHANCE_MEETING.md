@@ -78,6 +78,47 @@ what the court learned and no more.
 
 ---
 
+## §B2 ENC-4c — THE OTHER HALF OF §B: THE HOST COURT'S OWN NOTABLE OFFERED
+
+⭐ **THE WORDS ARE THE CHAIR'S**, authored 2026-09-05 under the owner's standing *"you write it"*
+(ENC-5). §B is honest only where the one PASSING THROUGH made the offer, because its variant 1
+fixes `{counterpart}` as being OF `{settlement}`. The engine lets either party lead, so the other
+half of the kind was real news with no authored sentence and the writer withheld it. These five
+carry that case, and after them the kind withholds nothing.
+
+⛔ **ROLES, UNCHANGED FROM §B.** `{npc}` is the APPROACHER and `{counterpart}` is the one who
+REFUSED. What differs is only where each is from: here `{npc}` is of `{settlement}` (the host
+town) and `{counterpart}` is of `{home}` (a guest passing through). No variant below says
+"counterpart of settlement", and none says "npc of home".
+
+### case host_offered of chance_meeting_exposed (ENC-4c) — Herald `events` — significance: major
+SLOTS: {npc} {counterpart} {settlement} {home}
+AUDIENCE: public
+⛔ **§B2 speaks only where the approacher is of the host town.**
+1. {npc} of {settlement} made an offer to {counterpart} of {home}, a guest that season, and the guest's refusal was spoken of.
+2. In {settlement}, {counterpart} of {home} said no to {npc}, one of the town's own, and said it where it could be heard.
+3. {npc} of {settlement} made an approach while {counterpart} of {home} was within the walls; {counterpart} declined it, and the declining did not stay between the two of them.
+4. {settlement} knows that {counterpart} of {home}, passing through, turned {npc} away. It does not know what was offered, and it has not stopped guessing.
+5. Neither court announced it, and {settlement} has it anyway: {counterpart} of {home} refused {npc}, the town's own.
+
+**Per-variant required slots** (the walker pins `requiredSlots.length === pool.length`):
+1. `{npc} {settlement} {counterpart} {home}`
+2. `{settlement} {counterpart} {home} {npc}`
+3. `{npc} {settlement} {counterpart} {home}`
+4. `{settlement} {counterpart} {home} {npc}`
+5. `{settlement} {counterpart} {home} {npc}`
+
+**Voice**: no em dash, no digit, one semicolon (variant 3, mirroring §B's third).
+
+⛔ **STATE, NEVER FATE — how each line holds it.** Every variant reports that an offer was made and
+that a refusal became known. **None adjudicates**: none names what was offered, none says what
+follows for either person, and variant 4 carries the law explicitly ("It does not know what was
+offered").
+
+⛔ **§B2 TAKES NO SECOND `EXACT_SECTION` ROW AND MINTS NO SECOND KIND.** It is a second authored
+CORPUS of the SAME registered kind, chosen by which court the approacher belongs to. The desk, the
+audience, the significance and the `{outcome_phrase}`-lessness are §B's, unchanged.
+
 ## §C HOLE 3 — THE TWO R1 NOUN PHRASES (`WHAT_PHRASES`, `settlementRumors.js`)
 
 | token | phrase | disposition |
