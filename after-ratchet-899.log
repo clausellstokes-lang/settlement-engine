@@ -1,0 +1,18 @@
+TRUE_EXIT=0
+MEASURED: totalTests=31511 totalFiles=2470 entries=2
+--- totals car:
+PREDICTED: entries 5 -> 2 (clampPrimitiveBaseline retires on the 62 -> 69 ceiling car; the two Tier-3 JSX voice rows retire on VOICE-JSX; enforcement-claims and the owner-gated golden-master STAY) · 
+MEASURED: totalTests=31511 totalFiles=2470 entries=2
+totals: totalTests 31491 -> 31511 · totalFiles 2470 · entries 2 · measuredAt ec1b5e3e9
+TOTALS CAR d73067af6 committed; cars over 5e28d5c83=28; sealed train-composed-2026-09-05
+TOTALS_EXIT=0
+--- owed-ledger retirement car:
+ledger: removed 3 entries; OWED_CEILING 5 -> 2
+META_EXIT=0
+ Test Files  1 passed (1)
+      Tests  90 passed (90)
+LEDGER CAR 38474a59e; cars over 5e28d5c83=29
+RETIRE_EXIT=0
+CARS=29 (the stamped gate expects 29) · HEAD=38474a59e · porcelain=[]
+SEALED train-composed = 38474a59e
+NEXT: launch run-gate-899.sh in the background (quiet law; ~20 min; NO lane vitest meanwhile), then after-cas-899.sh.
