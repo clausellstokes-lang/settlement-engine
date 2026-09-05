@@ -123,14 +123,31 @@ export const LIVING_CONTENT_BUCKETS = Object.freeze([
  * boundary can call this unconditionally and write not one byte, and the flip
  * needs no second edit at the call site.
  *
- * ⚠ LIKE `newSettlementDensityLaw()`, THIS HAS NO CALLER YET, and for the same
- * measured reason: the store's generate action is BOTH a birth and a
- * regeneration, so minting there would stamp the new law onto worlds that
- * already exist the first time they were regenerated after a flip. The
- * create-boundary car that establishes which store path is a BIRTH is owed
- * before the dial can be reached from the product; until then a v2 world can
- * only be produced by passing `_livingContentLawVersion: 2` in a config
- * explicitly, which is how this lane's fixtures drive it.
+ * ⚠ THIS HAS NO CALLER YET — AND THE REASON RECORDED HERE UNTIL NOW WAS THE
+ * WRONG ONE, WHICH IS WORSE THAN NONE. It said the create-boundary car was owed
+ * because "the store's generate action is BOTH a birth and a regeneration". That
+ * car LANDED (ODQ §822): `src/domain/density/densityCreateBoundary.js` classifies
+ * every module that can reach the settlement pipeline as BIRTH / DERIVED /
+ * PREVIEW, `birthConfig` is its one mint, both birth callers are wired through
+ * it, and `tests/lint/densityCreateBoundary.walker.test.js` holds the manifest to
+ * the tree. The generate action is a BIRTH; re-derivation goes through
+ * `regenSection`, which reads `settlement.config` FIRST and so replays the law
+ * the world was born under.
+ *
+ * ⛔⛔ THE REAL BLOCKER IS BYTES, AND IT IS EXECUTABLE RATHER THAN ARGUED.
+ * `densityCreateBoundary.js` is EAGER — one of the 237 modules in `src/main.jsx`'s
+ * static closure — while this module and the leaf behind it are deliberately
+ * outside it, the leaf excised and UNPINNED in `vite.config.js`'s
+ * `ENGINE_SHARED_DOMAIN_EXCISIONS` on the stated ground that no first-paint
+ * module reaches it. A static import from the boundary to here puts both modules
+ * into first paint, and `tests/build/engineChunkLazy.test.js`'s orphan-excision
+ * arm convicts an unpinned excision the moment first paint reaches it — no build
+ * needed to see the red. The mint therefore belongs on the LAZY engine side that
+ * the birth caller already awaits, together with an excision row for this file;
+ * `GENERATION_LAWS` in the boundary module carries that instruction as the row
+ * a wiring car has to flip. Until then a v2 world can only be produced by
+ * passing `_livingContentLawVersion: 2` in a config explicitly, which is how
+ * this file's own fixtures drive it.
  *
  * @returns {Record<string, number>}
  */

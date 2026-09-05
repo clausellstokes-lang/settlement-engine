@@ -139,3 +139,118 @@ export const PIPELINE_REACHERS = Object.freeze({
 export function birthConfig(config) {
   return /** @type {C} */ ({ ...(config || {}), ...newSettlementDensityLaw() });
 }
+
+/**
+ * The wiring states a versioned GENERATION law can be in at this boundary.
+ *
+ *   WIRED   - its mint is spread by `birthConfig`, so every BIRTH caller mints
+ *             it and no other caller can.
+ *   UNWIRED - the law exists and its dial is dormant, but no BIRTH reaches it
+ *             yet. A world can only be born under it by an explicit config key,
+ *             which is how its own tests drive it.
+ *
+ * ⚠ THERE IS NO "OUT OF SCOPE" MEMBER, AND ITS ABSENCE IS LOAD-BEARING. One
+ * `NEW_SETTLEMENT_…` dial in the estate is NOT a generation law — it is a READ
+ * law stamped at the save chokepoints, for the reason this module's header
+ * gives — and the obvious move is a third state excusing it here. That row was
+ * WRITTEN AND WITHDRAWN: naming its module and its mint put a retired
+ * capability's vocabulary into `src/`, which `tests/lint/`'s terminal
+ * settlement-surface census convicts as an owner-gated question (ODQ §725), and
+ * it convicted this file on the first run. The exclusion is therefore declared
+ * in the walker, which that census deliberately does not scan, with its reason
+ * beside it. A law that is off this boundary is named where naming it is free.
+ *
+ * @type {ReadonlyArray<string>}
+ */
+export const LAW_WIRING_STATES = Object.freeze(['WIRED', 'UNWIRED']);
+
+/**
+ * ⭐ THE GENERATION-LAW REGISTER — WHICH VERSIONED LAWS THIS BOUNDARY CARRIES,
+ * WHICH ONE IT DELIBERATELY DOES NOT, AND WHY (LGT-P8-MATBOUND).
+ *
+ * ════════════════════════════════════════════════════════════════════════════
+ * WHY A SECOND TABLE, WHEN THE FIRST ONE ALREADY WORKS
+ * ════════════════════════════════════════════════════════════════════════════
+ *
+ * `PIPELINE_REACHERS` above answers "which CALLER is a birth". It says nothing
+ * about "which LAW a birth mints", because when it was written there was only
+ * one. There are two now, and the second one is NOT here:
+ *
+ *   density        `newSettlementDensityLaw()`        spread by `birthConfig`
+ *   living content `newSettlementLivingContentLaw()`  NO CALLER ANYWHERE
+ *
+ * ⛔ AND THE WALKER COULD NOT SEE THE DIFFERENCE. Its `MINT_SYMBOLS` names the
+ * density pair only, so every one of its mint arms — "every BIRTH mints", "no
+ * non-BIRTH mints", "the mint is not named outside its homes" — was blind to
+ * the living-content mint. A future car could have wired that mint into a
+ * PREVIEW module and the walker would have said nothing. The register closes
+ * that by making the LAW SET the denominator, exactly as the caller set already
+ * is: a `newSettlement…` mint or a `NEW_SETTLEMENT_…` dial that is named
+ * neither here nor in the walker's off-boundary roster REDS, and an UNWIRED law
+ * that acquires a generation-side caller REDS until somebody changes its row to
+ * WIRED and states what the edge costs.
+ *
+ * ════════════════════════════════════════════════════════════════════════════
+ * ⛔⛔ WHY THE LIVING-CONTENT LAW IS UNWIRED, AND IT IS A MEASUREMENT
+ * ════════════════════════════════════════════════════════════════════════════
+ *
+ * NOT because the create boundary is missing — that is the stale reading this
+ * car retired, and `livingContentLaw.js` carried it in prose until this commit.
+ * The boundary is here, it is wired, and it is walked. The reason is BYTES, and
+ * it is executable rather than argued:
+ *
+ *   1. THIS MODULE IS EAGER. `src/main.jsx`'s static closure is 237 modules and
+ *      this file is one of them (store/index -> settlementSlice ->
+ *      settlementSliceHelpers -> here). Its density import is free because
+ *      `densityLaw.js` is already in that closure.
+ *   2. THE LIVING-CONTENT LAW IS NOT, ON PURPOSE. `livingContentLaw.js` and the
+ *      leaf behind it, `livingContentLawVersion.js`, are BOTH outside the
+ *      237-module closure, and `vite.config.js` lists the leaf in
+ *      `ENGINE_SHARED_DOMAIN_EXCISIONS` — excised and deliberately UNPINNED —
+ *      on the stated ground that "no first-paint module reaches it either, so
+ *      that would be first-paint bytes paid for nothing". The excision's own
+ *      note measures the alternative at engine-core +214 B with 112 chunks
+ *      re-hashed.
+ *   3. SO A STATIC IMPORT FROM HERE IS A HARD RED, WITH NO BUILD REQUIRED.
+ *      Adding it puts exactly those two modules into the first-paint closure,
+ *      and `tests/build/engineChunkLazy.test.js`'s orphan-excision arm — "every
+ *      excised module the first paint reaches is PLACED by manualChunks" —
+ *      convicts an unpinned excision the moment first paint reaches it.
+ *
+ * ⭐ WHAT THE WIRING CAR THEREFORE HAS TO DO, SO IT IS NOT REDISCOVERED. The
+ * mint has to happen on the LAZY side of a boundary the birth caller already
+ * crosses. The store's generation lane already awaits `loadEngine()` before it
+ * hands the config to the pipeline, so the engine surface is the one place a
+ * birth can mint this law without touching first paint — and that move needs
+ * `livingContentLaw.js` added to `ENGINE_SHARED_DOMAIN_EXCISIONS` beside the
+ * leaf, plus the hashed-chunk listing diff to prove it free. That is a build,
+ * which is why this car declares the gap instead of taking it.
+ *
+ * Keys are the MINT export's name — the one symbol a caller would actually
+ * write, so a row cannot drift away from the thing it governs.
+ *
+ * @type {Readonly<Record<string, {module: string, dial: string, configKey: string, wiring: string, why: string}>>}
+ */
+export const GENERATION_LAWS = Object.freeze({
+  newSettlementDensityLaw: Object.freeze({
+    module: 'src/domain/density/densityLaw.js',
+    dial: 'NEW_SETTLEMENT_DENSITY_LAW_VERSION',
+    configKey: '_densityLawVersion',
+    wiring: 'WIRED',
+    why: 'the write law this boundary was built for: birthConfig spreads its mint, so every '
+      + 'classified BIRTH mints it and no PREVIEW or re-derivation can. Its module is already '
+      + 'inside the first-paint closure, so the edge costs nothing.',
+  }),
+  newSettlementLivingContentLaw: Object.freeze({
+    module: 'src/domain/content/livingContentLaw.js',
+    dial: 'NEW_SETTLEMENT_LIVING_CONTENT_LAW_VERSION',
+    configKey: '_livingContentLawVersion',
+    wiring: 'UNWIRED',
+    why: 'a real generation law with a dormant dial and no birth caller. It stays unwired for a '
+      + 'MEASURED reason and not a missing one: this module is eager and both living-content '
+      + 'modules are deliberately outside the first-paint closure, with the leaf excised and '
+      + 'unpinned in vite.config.js, so a static import from here makes an unpinned excision '
+      + 'first-paint reachable and engineChunkLazy convicts it. The mint belongs on the lazy '
+      + 'engine side the birth caller already awaits; see this module header.',
+  }),
+});
