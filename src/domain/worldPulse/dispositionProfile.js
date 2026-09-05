@@ -10,6 +10,7 @@
  * writer of worldState.dispositionStats.
  */
 
+import { clamp } from '../../kernel/math.js';
 import {
   DISPOSITION_CHANNELS,
   DISPOSITION_CHANNEL_TUNING,
@@ -24,8 +25,6 @@ export const DEITY_DOMAIN_PRESSURE = Object.freeze({
   harvest: -1,
 });
 
-/** @param {number} value @param {number} lo @param {number} hi */
-const clamp = (value, lo, hi) => (value < lo ? lo : value > hi ? hi : value);
 /** @param {number} value */
 const round6 = (value) => Math.round(value * 1_000_000) / 1_000_000;
 

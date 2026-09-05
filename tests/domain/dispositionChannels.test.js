@@ -184,7 +184,18 @@ describe('WR-2 disposition profile — bounded bars and ratified deity domains',
   it('has no graph, relationship, candidate, or target-selector import surface', () => {
     const source = readFileSync(resolve(process.cwd(), 'src/domain/worldPulse/dispositionProfile.js'), 'utf8');
     const imports = [...source.matchAll(/from\s+['"]([^'"]+)['"]/g)].map((match) => match[1]);
-    expect(imports).toEqual(['./dispositionLedger.js']);
+    // ⚠ WIDENED ONCE, BY ONE ROW, AND ONLY FOR THE DETERMINISM PRIMITIVE (lane CLAMP-W1,
+    // 2026-09-05). The set was `['./dispositionLedger.js']`; the clamp-primitive migration
+    // added `../../kernel/math.js`, which is the kernel `clamp`/`clamp01` — numbers in,
+    // numbers out, no engine state of any kind, the same shelf `prng`/`rngContext` sit on.
+    // The estate already admits that module inside a reviewed exact import set by name:
+    // see `sovereigntyIntentWr10.test.js` ("the leaf's import list is a reviewed exact
+    // set"), whose pinned list opens with the identical specifier, and the reasoning block
+    // in `envoyK3BeliefSeam.test.js` that licenses it against the zero-import leaves.
+    // ⛔ THE REACH ASSERTION BELOW IS THE POINT OF THIS TEST AND IS UNCHANGED — the widening
+    // buys exactly one determinism primitive and buys nothing else. Any further row is a
+    // reviewed event, not a refactor detail.
+    expect(imports).toEqual(['../../kernel/math.js', './dispositionLedger.js']);
     expect(imports.some((path) => /graph|relationship|candidate|target|selector/i.test(path))).toBe(false);
   });
 });
