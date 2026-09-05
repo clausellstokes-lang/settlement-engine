@@ -11,7 +11,7 @@ Updated 2026-09-05 by the Fable chair (after §897: product fd8b6df00, ledger c8
 | ~~DESK-WARFAITH~~ DONE → 7dba5508b sealed `desk-warfaith-2026-09-05` (6/9 mounted; 3 dark measured; the PUBLIC/SHARED pool is OWNER-gated §885.3) | | | | |
 | ~~PDFDRIFT~~ REFUSED with measurement → ruling WITHDRAWN (`rulings/RULING-PDFDRIFT-WITHDRAWN.md`); residue: an OWNER row (the paid-rights floor and the arms) + DOCKET item 5 (AUDIT-2.2 as machinery) | | | | |
 | ~~L-PROBE-KIT~~ DONE → `refs/preserve/lprobe-kit-2026-09-05` (the battery; 6/9 outputs executed; certification per preset is a STOP until DOCKET item 7) | | | | |
-| DESK-DEF2 | build | laneDEF2 @ 940d161ca | briefs/brief-DESK-DEF2.md | 09-05 |
+| ~~DESK-DEF2~~ DONE → 4 cars 468663f56 sealed `desk-def2-2026-09-05` (DS-DEF-6, 9 lit; 7, 10 dark measured; DefenseTab 419 effective — the chair's 545 was wc -l) | | | | |
 | ~~DESK-GEN2~~ DONE → 4 cars, a4ce9f80f sealed `desk-gen2-2026-09-05` (6/15 lit; 7 stopped with residue; DS-GEN-1 OWNER-signed; DS-GEN-10 unmountable) | | | | |
 | DESK-ECON2 | build | laneECON2 @ 940d161ca | briefs/brief-DESK-ECON2.md | 09-05 |
 
@@ -48,6 +48,7 @@ Updated 2026-09-05 by the Fable chair (after §897: product fd8b6df00, ledger c8
 - OWNER rows to open: DS-GEN-1 (tension `severity` is an ARRAY on 48/48 — a property of the tension TYPE; the cure is generation-side ⇒ owner-signed) · DS-FTH-2's PUBLIC/SHARED DOSSIER pool (authored for the reader §885.3 forbids).
 - Chair-class producer cures (DOCKET candidates): `{institution}`'s only producer writes `"Merchant guilds (3-8)"` (the digit ban refuses it; blocks DS-GEN-18) · the annex declares `{founder}` `proper` while its producer writes a lowercase phrase (one must move) · `templeWealth` has NO engine writer (DS-FTH-4; `DESIGN_FP_ARCH_WF.md` V27) · DS-WAR-4's five keys belong to a module-private PDF function · `{timeband_age}` declination by two desks is STALE (`heraldCausalGrammar.js` has the duration former).
 - Still-mountable, stopped with measured producer status: DS-GEN-8, 15, 18 · DS-POP-1/2/3 · DS-REL-1 (GEN2 receipt) — a DESK-GEN3 car.
+- ⚠ THE CHAIR CONFLATED `wc -l` WITH EFFECTIVE LINES THREE TIMES (OverviewTab 673→500, DefenseTab 545→419, WarTab/FaithTab): every size figure in a brief must be the eslint Linter count or say "wc -l, re-measure".
 - Corrections re-derived by lanes: the router has 25 tabs (`plot_hooks`, `daily_life`, `dm_compass`, `dm_notes`, `ai_notes` were missing from the chair's list); OverviewTab is 500/600 EFFECTIVE (673 was `wc -l`); OutputContainer 600/1050; the mounts baseline is 36 → 30 after WARFAITH (its message said 37 → 31).
 
 ## CHAIR-OWNED, NOT LANES
