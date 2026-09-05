@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "fc8ecd2feab1d66530af5abe0d16a9ec9a4b1144",
+  "measuredAtSha": "9fc010ff249b134c2375eee5e0e7d0bd85c20d69",
   "measuredBy": "CLAMP-REPAIR (Opus 5)",
   "date": "2026-09-05",
-  "note": "five regression pins added to two existing test files by CLAMP-REPAIR cars 1-2 (the non-finite population/fabric guards and the falsy-screen repair); no test FILE added",
+  "note": "one regression pin added to an existing test file by CLAMP-REPAIR car 3 (the plan-unit divisor floor); no test FILE added",
   "files": 2521,
   "parked": 371,
   "credited": 2150,
-  "titles": 23183,
+  "titles": 23184,
   "suiteTitles": 6214
 }
