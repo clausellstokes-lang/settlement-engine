@@ -293,16 +293,16 @@ export const computeBaseProsperity = (tier, tradeRoute, institutions, config, _i
 export const deriveEconomicComplexity = (tier, incomeSourceCount, exportCount, hasMarketInst) =>
   tier === 'metropolis' || tier === 'city'
           ? incomeSourceCount >= 9
-            ? 'Highly diversified: multiple major revenue streams'
+            ? 'Highly diversified — multiple major revenue streams'
             : incomeSourceCount >= 6
-              ? 'Diversified: broad institutional economic base'
-              : 'Concentrated: fewer revenue streams than scale suggests'
+              ? 'Diversified — broad institutional economic base'
+              : 'Concentrated — fewer revenue streams than scale suggests'
           : tier === 'town'
             ? hasMarketInst && incomeSourceCount >= 6
               ? 'Diversified market economy'
               : incomeSourceCount >= 4
                 ? 'Specialized production and trade'
-                : 'Limited: narrow economic base for this scale'
+                : 'Limited — narrow economic base for this scale'
             : tier === 'village'
               ? hasMarketInst
                 ? 'Mixed subsistence and market'
@@ -311,4 +311,4 @@ export const deriveEconomicComplexity = (tier, incomeSourceCount, exportCount, h
                   : 'Subsistence with minor surplus'
               : exportCount >= 3
                 ? 'Subsistence with surplus'
-                : 'Subsistence: survival economy';
+                : 'Subsistence — survival economy';

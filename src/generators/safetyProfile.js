@@ -116,7 +116,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
   }
 
   if (hasStress('plague_onset')) {
-    const strainLabel = safetyRatio >= 2 ? 'Quarantined' : safetyRatio >= 1 ? 'Restricted' : 'Dangerous: Plague Unrest';
+    const strainLabel = safetyRatio >= 2 ? 'Quarantined' : safetyRatio >= 1 ? 'Restricted' : 'Dangerous — Plague Unrest';
     const quarRef = inst.hasGarrison ? 'The garrison enforces quarantine zones'
                   : inst.hasWatch    ? 'The watch manages quarantine compliance'
                   :                    'Informal community enforcement maintains quarantine';
