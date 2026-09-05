@@ -87,7 +87,7 @@
  * `not.toContain` — comments are not stripped — so spelling the door module's filename in
  * this very paragraph REDS it. Executed: naming the path here failed the reachability arm
  * on the run before this wording, and the run after it is green again. The estate already
- * had the idiom for exactly this — `espionage/operationsVoice.js`'s own door prose says "its
+ * had the idiom for exactly this — the operations voice leaf's own door prose says "its
  * one by-name strict gate lives in the espionage family door module" and names no file —
  * so this header follows it rather than inventing a second way to say the same thing.
  *
