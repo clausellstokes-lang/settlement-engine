@@ -1479,14 +1479,190 @@ describe('THE FIRST-PAINT LAW — a sentence behind a shut fold reaches no reade
     }));
   }
 
+  /** The index of the `)` closing the `(` at `open`, or -1 when the file is unbalanced. */
+  function closingParen(code, open) {
+    let depth = 0;
+    for (let i = open; i < code.length; i += 1) {
+      const c = code[i];
+      if (c === '(' || c === '[' || c === '{') depth += 1;
+      else if (c === ')' || c === ']' || c === '}') { depth -= 1; if (depth === 0) return i; }
+    }
+    return -1;
+  }
+
+  /**
+   * The `.a.b.c` property chain standing at `at`, and the offset just past it.
+   * @returns {{names: string[], end: number}}
+   */
+  function propertyChain(code, at) {
+    const names = [];
+    let i = at;
+    for (;;) {
+      const m = /^\s*\.\s*([A-Za-z_$][A-Za-z0-9_$]*)/.exec(code.slice(i, i + 120));
+      if (!m) return { names, end: i };
+      names.push(m[1]);
+      i += m[0].length;
+    }
+  }
+
+  /** Is the `{` at `i` an object LITERAL rather than a block or a destructuring pattern? */
+  function isObjectOpen(code, i) {
+    let j = i - 1;
+    while (j >= 0 && /\s/.test(code[j])) j -= 1;
+    if (j < 0) return false;
+    if ('(,=:['.includes(code[j])) return true;
+    return /\breturn$/.test(code.slice(Math.max(0, j - 6), j + 1));
+  }
+
+  /**
+   * ⭐ THE GENERAL DESK'S FIELD INDIRECTION, READ OFF THE READER'S OWN SOURCE.
+   *
+   * A tab that draws a general-desk position NEVER NAMES THE MOUNT — and that is deliberate,
+   * not an oversight: the reachability arm counts string LITERALS under `src/components` and
+   * refuses a position named twice, so an id that speaks on seven tabs has to be spelled
+   * once. `generalDeskRead.js` spells it, binding `<group>: {<field>: … line(<X>_MOUNT, …)}`
+   * over `const <X>_MOUNT = '<id>'`, and a tab reads `generalDeskLines(s, …).<group>.<field>`.
+   * The FIELD NAME is the whole of what the tab carries, so an arm that follows only `mount=`
+   * props and `drawnAtMount(…)` calls can follow no draw site for any of them.
+   *
+   * ⛔ IT IS BUILT FROM THE FILES THIS ARM WAS HANDED, NEVER FROM THE REPO BEHIND THEIR BACK.
+   * A first draft that read `src/components/new/generalDeskRead.js` off disk injected the
+   * shipped desk into every synthetic control below, so the controls stopped judging the
+   * function the shipped table is judged by. Passing the tree through means a control can
+   * carry its own three-line reader and prove the door both ways.
+   *
+   * The scan is a brace stack over `codeOnly` source — string CONTENTS blanked, so a field
+   * name written inside a sentence is not a binding — and it tells an object LITERAL from a
+   * block by the token before its `{`, which is what stops a function body, a `catch` block
+   * or a `const {a, b} =` pattern from contributing a key.
+   * @param {{rel:string, raw:string, spans:{name:string,from:number,to:number}[]}[]} index
+   * @param {Set<string>} ids the mount ids the registry names — the index answers about
+   *   those and no other literal, so an unrelated `flex: …(SOME_CONST)` mints nothing
+   * @returns {Map<string, {reader: string, path: string}[]>} mount id → the readers and the
+   *   dotted field paths that draw it
+   */
+  function deskFieldIndex(index, ids) {
+    const table = new Map();
+    for (const file of index) {
+      const consts = stringConsts(file.raw);
+      if (consts.size === 0) continue;
+      const code = codeOnly(file.raw);
+      const frames = [];
+      let pending = null;
+      for (let i = 0; i < code.length; i += 1) {
+        const c = code[i];
+        if (c === '{') { frames.push({ obj: isObjectOpen(code, i), key: pending }); pending = null; continue; }
+        if (c === '(' || c === '[') { frames.push({ obj: false, key: null }); continue; }
+        if (c === '}') { frames.pop(); pending = null; continue; }
+        if (c === ')' || c === ']') { frames.pop(); continue; }
+        if (c === ';') { pending = null; continue; }
+        if (!/[A-Za-z_$]/.test(c)) continue;
+        let j = i + 1;
+        while (j < code.length && /[A-Za-z0-9_$]/.test(code[j])) j += 1;
+        const word = code.slice(i, j);
+        i = j - 1;
+        if (word === 'return') { pending = null; continue; }
+        let k = j;
+        while (k < code.length && /\s/.test(code[k])) k += 1;
+        if (code[k] === ':') { pending = word; continue; }
+        const id = consts.get(word);
+        if (!id || !ids.has(id) || pending === null) continue;
+        // ⚠ THE CONST MUST BE AN ARGUMENT INSIDE THE FIELD'S VALUE, not the value itself.
+        // Without this, every `flex: SOME_LAYOUT_CONST` in the estate minted a binding —
+        // measured, 16 of them, none a mount but all of them noise a later reader would
+        // have to disprove. A drawn position always reads `<field>: … line(<X>_MOUNT, …)`,
+        // so a call or array frame stands between the field's `{` and the id.
+        const lastObject = frames.reduce((last, f, at) => (f.obj ? at : last), -1);
+        if (lastObject < 0 || lastObject === frames.length - 1) continue;
+        const reader = (file.spans.find((s) => i >= s.from && i < s.to) || {}).name;
+        if (!reader) continue;
+        const path = [...frames.filter((f) => f.obj && f.key).map((f) => f.key), pending].join('.');
+        if (!table.has(id)) table.set(id, []);
+        const rows = table.get(id);
+        if (!rows.some((r) => r.reader === reader && r.path === path)) rows.push({ reader, path });
+      }
+    }
+    return table;
+  }
+
+  /** Do two dotted paths agree over the length they share? */
+  function pathsFit(a, b) {
+    const n = Math.min(a.length, b.length);
+    return a.slice(0, n).join('.') === b.slice(0, n).join('.');
+  }
+
+  /**
+   * Every offset in ONE file that draws a mount THROUGH a desk reader's field, and the
+   * carriers it followed. A tab binds the read four ways and all four are followed here:
+   * the whole path at once (`const craftReasonLine = ….economics.craftReasonLine`), a
+   * destructured group (`const {identityLines, foundedLine, recordLine} = ….history`), a
+   * group held whole and completed at each use (`const desk = ….steadings`, then
+   * `desk.remnantLine`), and the same inside a `useMemo` (`useMemo(() => ….hooks, […])`).
+   *
+   * ⚠ A PARTIAL CARRIER USED WITHOUT COMPLETING ITS PATH — `desk` handed to a child — is
+   * counted as a draw site, not passed over. Over-collecting sites can only ADD hosts, so
+   * that direction fails toward a red, and a red is what this arm exists to produce.
+   * @param {{code: string, spans: {name:string,from:number,to:number}[]}} file
+   * @param {string} reader the exported function a tab calls
+   * @param {string} path the dotted field path that carries the mount
+   * @returns {{sites: number[], carriers: {name: string, at: number}[]}}
+   */
+  function deskDrawSites(file, reader, path) {
+    const { code, spans } = file;
+    const want = path.split('.');
+    const sites = [];
+    const carriers = [];
+    for (const m of code.matchAll(new RegExp(`\\b${reader}\\s*\\(`, 'g'))) {
+      if (/\bfunction\s+$/.test(code.slice(Math.max(0, m.index - 24), m.index))) continue;   // its own declaration
+      const open = m.index + m[0].length - 1;
+      const close = closingParen(code, open);
+      if (close < 0) continue;
+      const read = propertyChain(code, close + 1);
+      const chain = read.names;
+      const statement = enclosingStatement(code, m.index);
+      const from = m.index - statement.length;
+      const single = /^\s*(?:const|let|var)\s+([A-Za-z_$][A-Za-z0-9_$]*)\s*=/.exec(statement);
+      const pattern = /^\s*(?:const|let|var)\s*\{([^}]*)\}\s*=/.exec(statement);
+      const bound = [];
+      if (single) bound.push({ name: single[1], path: chain });
+      else if (pattern) {
+        for (const part of pattern[1].split(',')) {
+          const nm = /^\s*([A-Za-z_$][A-Za-z0-9_$]*)\s*(?::\s*([A-Za-z_$][A-Za-z0-9_$]*))?\s*$/.exec(part);
+          if (nm) bound.push({ name: nm[2] || nm[1], path: [...chain, nm[1]] });
+        }
+      } else if (pathsFit(chain, want) && chain.length >= want.length) {
+        sites.push(open);                                     // read and rendered in one breath
+        continue;
+      }
+      for (const b of bound) {
+        if (!pathsFit(b.path, want)) continue;
+        const span = spans.find((s) => from >= s.from && from < s.to) || { from: 0, to: code.length };
+        const region = code.slice(span.from, span.to);
+        for (const u of region.matchAll(new RegExp(`\\b${b.name}\\b`, 'g'))) {
+          const at = span.from + u.index;
+          if (at >= from && at < read.end) continue;           // its own declaration is not a use
+          const full = [...b.path, ...propertyChain(code, at + b.name.length).names];
+          if (!pathsFit(full, want)) continue;
+          const stmt = enclosingStatement(code, at);
+          const decl = /^\s*(?:const|let|var)\s+([A-Za-z_$][A-Za-z0-9_$]*)\s*=/.exec(stmt);
+          if (decl) carriers.push({ name: decl[1], at: at - stmt.length });
+          else sites.push(at);
+        }
+      }
+    }
+    return { sites, carriers };
+  }
+
   /**
    * Every offset in ONE file that draws `mountId`, and the carriers it followed to get
    * there. Null when this file draws the mount nowhere.
    * @param {{raw: string, code: string, spans: {name:string,from:number,to:number}[]}} file
    * @param {string} mountId
+   * @param {{reader: string, path: string}[]} [deskBindings] the desk fields that carry this
+   *   mount, from `deskFieldIndex`; empty for a mount no reader binds
    * @returns {{sites: number[], carriers: string[]}|null}
    */
-  function drawSitesIn(file, mountId) {
+  function drawSitesIn(file, mountId, deskBindings = []) {
     const { raw, code, spans } = file;
     const consts = stringConsts(raw);
     const sites = [];
@@ -1503,6 +1679,12 @@ describe('THE FIRST-PAINT LAW — a sentence behind a shut fold reaches no reade
       const declared = /^\s*(?:const|let|var)\s+([A-Za-z_$][A-Za-z0-9_$]*)\s*=/.exec(statement);
       if (declared) carriers.push({ name: declared[1], at: open - statement.length });
       else sites.push(open);                                  // drawn inline, where it is called
+    }
+    // …and THE THIRD DOOR: a desk reader's field, where the tab never spells the id at all.
+    for (const { reader, path } of deskBindings) {
+      const drawn = deskDrawSites(file, reader, path);
+      sites.push(...drawn.sites);
+      carriers.push(...drawn.carriers);
     }
     if (sites.length === 0 && carriers.length === 0) return null;
     const byScope = new Map();
@@ -1523,6 +1705,11 @@ describe('THE FIRST-PAINT LAW — a sentence behind a shut fold reaches no reade
       for (const name of names) {
         for (const m of region.matchAll(new RegExp(`\\b${name}\\b`, 'g'))) {
           if (/\b(?:const|let|var)\s+$/.test(region.slice(Math.max(0, m.index - 40), m.index))) continue;
+          // ⚠ `desk.foundedLine` IS NOT A USE OF A VARIABLE CALLED `foundedLine`. Without
+          // this, a carrier whose name matches its own source field counted its own
+          // declaration line as a draw site — harmless, because an extra OPEN site can
+          // never mask a shut host, but it made the arm's own report read wrong.
+          if (/\.\s*$/.test(region.slice(Math.max(0, m.index - 40), m.index))) continue;
           sites.push(span.from + m.index);
         }
       }
@@ -1534,13 +1721,16 @@ describe('THE FIRST-PAINT LAW — a sentence behind a shut fold reaches no reade
   }
 
   /**
-   * THE RULE, total over a registry and a component tree passed in, so the controls below
-   * and the shipped table are judged by one function.
+   * THE VERDICT FOR EVERY SENTENCE ROW, AS DATA — the sites this arm followed, the hosts
+   * that enclose them and the openness that follows. `foldedSentenceMounts` grades exactly
+   * this and re-derives nothing, so a per-mount table read out of here and the assertion
+   * below cannot disagree about what the tree says.
    * @param {readonly object[]} mounts
    * @param {{rel: string, raw: string}[]} files
-   * @returns {string[]}
+   * @returns {{row: object, sites: string[], hosts: {where:string,attrs:string,open:string}[],
+   *   verdict: 'open'|'closed'|'conditional'|'unresolved'}[]}
    */
-  function foldedSentenceMounts(mounts, files) {
+  function visibilityOf(mounts, files) {
     const index = files.map((f) => {
       const code = blankComments(f.raw);
       return { rel: f.rel, raw: f.raw, code, frames: hostFrames(code, f.rel), spans: declarationSpans(code) };
@@ -1575,24 +1765,47 @@ describe('THE FIRST-PAINT LAW — a sentence behind a shut fold reaches no reade
       return here;
     };
 
-    const bad = [];
+    const desk = deskFieldIndex(index, new Set(mounts.map((row) => row?.mount)));
+    const out = [];
     for (const row of mounts) {
       if (row?.rung !== MOUNT_RUNGS.SENTENCE) continue;
       const found = [];
       for (const file of index) {
-        const drawn = drawSitesIn(file, row.mount);
+        const drawn = drawSitesIn(file, row.mount, desk.get(row.mount) || []);
         if (drawn) for (const pos of drawn.sites) found.push({ file, pos });
       }
-      const declared = row.visibility === 'closed-section';
-      if (found.length === 0) {
-        bad.push(`${row.mount}: this arm can follow no draw site for it, so its visibility is unknown`);
-        continue;
-      }
+      if (found.length === 0) { out.push({ row, sites: [], hosts: [], verdict: 'unresolved' }); continue; }
       const hosts = new Map();
       for (const site of found) {
         for (const host of hostsOf(site.file, site.pos, new Set(), 0)) hosts.set(host.where, host);
       }
       const shut = [...hosts.values()].filter((h) => h.open !== 'open');
+      out.push({
+        row,
+        sites: found.map((s) => `${s.file.rel}:${lineAt(s.file, s.pos)}`),
+        hosts: [...hosts.values()],
+        verdict: shut.length === 0 ? 'open' : shut[0].open,
+      });
+    }
+    return out;
+  }
+
+  /**
+   * THE RULE, total over a registry and a component tree passed in, so the controls below
+   * and the shipped table are judged by one function.
+   * @param {readonly object[]} mounts
+   * @param {{rel: string, raw: string}[]} files
+   * @returns {string[]}
+   */
+  function foldedSentenceMounts(mounts, files) {
+    const bad = [];
+    for (const { row, hosts, verdict } of visibilityOf(mounts, files)) {
+      const declared = row.visibility === 'closed-section';
+      if (verdict === 'unresolved') {
+        bad.push(`${row.mount}: this arm can follow no draw site for it, so its visibility is unknown`);
+        continue;
+      }
+      const shut = hosts.filter((h) => h.open !== 'open');
       if (shut.length > 0 && !declared) {
         const worst = shut[0];
         bad.push(`${row.mount} (${row.blockId}) draws inside ${worst.where} ${worst.attrs.slice(0, 90)}`
@@ -1683,6 +1896,115 @@ describe('THE FIRST-PAINT LAW — a sentence behind a shut fold reaches no reade
     // …and a mount id MENTIONED IN PROSE draws nothing: the reader takes code, not comments.
     const prose = ['// economics.probe is discussed here', 'export function Nothing() { return null; }'].join('\n');
     expect(drawSitesIn({ raw: prose, code: blankComments(prose), spans: declarationSpans(blankComments(prose)) }, 'economics.probe')).toBeNull();
+  });
+
+  test('guard the guard: a desk reader\'s FIELD is followed to the tab that renders it, and a field it does not bind stays unknown', () => {
+    // THE GENERAL DESK'S SHAPE IN TEN LINES: ids spelled ONCE in a reader, bound to fields
+    // of a frozen return value, and a tab that names no id at all. ⛔ The tree is passed in
+    // rather than read off disk, which is the whole reason this control can exist: a first
+    // draft that opened `generalDeskRead.js` itself injected the shipped desk here and this
+    // arm stopped judging the function the shipped table is judged by.
+    const reader = {
+      rel: 'src/components/new/probeDeskRead.js',
+      raw: [
+        "import { drawnAtMount } from '../../domain/display/stateProse/dossierMounts.js';",
+        "const PROBE_MOUNT = 'economics.probe';",
+        "const OTHER_MOUNT = 'economics.other';",
+        'function line(mount, rung) { return drawnAtMount(mount, rung)?.sentence ?? null; }',
+        'export function probeDeskLines(settlement) {',
+        '  return Object.freeze({',
+        '    economics: Object.freeze({ probeLine: line(PROBE_MOUNT, settlement.rung) }),',
+        '    aside: Object.freeze({ otherLine: line(OTHER_MOUNT, settlement.rung) }),',
+        '  });',
+        '}',
+      ].join('\n'),
+    };
+    const deskTab = (read, expr, inside) => ({
+      rel: 'src/components/new/tabs/DeskProbeTab.jsx',
+      raw: [
+        "import { probeDeskLines } from '../probeDeskRead.js';",
+        'export function DeskProbeTab({ settlement }) {',
+        `  ${read}`,
+        '  return (',
+        '    <div>',
+        inside ? '' : `      <p>{${expr}}</p>`,
+        '      <Section title="Deep" collapsible defaultOpen={false}>',
+        inside ? `        <p>{${expr}}</p>` : '',
+        '        <div>the rows</div>',
+        '      </Section>',
+        '    </div>',
+        '  );',
+        '}',
+      ].filter(Boolean).join('\n'),
+    });
+    const PROBE = Object.freeze([Object.freeze({
+      mount: 'economics.probe', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-1', rung: MOUNT_RUNGS.SENTENCE,
+    })]);
+
+    // FOUR BINDINGS, which is every shape the landed tabs use: the whole path at once, a
+    // destructured group, a group held whole and completed at the use, and the same inside
+    // a `useMemo`. Each is planted inside the fold and then hoisted above it.
+    for (const [what, read, expr] of [
+      ['the whole path at once', 'const probeLine = probeDeskLines(settlement).economics.probeLine;', 'probeLine'],
+      ['a destructured group', 'const { probeLine } = probeDeskLines(settlement).economics;', 'probeLine'],
+      ['a group held whole', 'const desk = probeDeskLines(settlement).economics;', 'desk.probeLine'],
+      ['a useMemo', 'const { probeLine } = useMemo(() => probeDeskLines(settlement).economics, [settlement]);', 'probeLine'],
+    ]) {
+      const shut = foldedSentenceMounts(PROBE, [reader, deskTab(read, expr, true)]);
+      expect(shut, `${what}: the shut fold did not plant`).toHaveLength(1);
+      expect(shut[0], what).toContain('economics.probe (DS-ECO-1) draws inside');
+      expect(shut[0], what).toContain('closed on first paint');
+      expect(foldedSentenceMounts(PROBE, [reader, deskTab(read, expr, false)]), what).toEqual([]);
+    }
+
+    // ⭐ THE FIELD IS THE UNIT, NOT THE READER. A table that mapped a whole reader to one
+    // place would pass a tab that draws one field above the fold and the other inside it.
+    const twoFields = {
+      rel: 'src/components/new/tabs/DeskProbeTab.jsx',
+      raw: [
+        "import { probeDeskLines } from '../probeDeskRead.js';",
+        'export function DeskProbeTab({ settlement }) {',
+        '  const desk = probeDeskLines(settlement);',
+        '  return (',
+        '    <div>',
+        '      <p>{desk.economics.probeLine}</p>',
+        '      <Section title="Deep" collapsible defaultOpen={false}>',
+        '        <p>{desk.aside.otherLine}</p>',
+        '      </Section>',
+        '    </div>',
+        '  );',
+        '}',
+      ].join('\n'),
+    };
+    const both = [PROBE[0], { ...PROBE[0], mount: 'economics.other', blockId: 'DS-ECO-2' }];
+    const split = foldedSentenceMounts(both, [reader, twoFields]);
+    expect(split, 'the two-field split did not plant').toHaveLength(1);
+    expect(split[0]).toContain('economics.other (DS-ECO-2) draws inside');
+
+    // A mount the reader binds NO FIELD for is still UNKNOWN, so this door cannot quietly
+    // answer for a position nobody draws — the blindness has to stay loud.
+    expect(foldedSentenceMounts([{ ...PROBE[0], mount: 'economics.unbound' }],
+      [reader, deskTab('const probeLine = probeDeskLines(settlement).economics.probeLine;', 'probeLine', false)]))
+      .toEqual(['economics.unbound: this arm can follow no draw site for it, so its visibility is unknown']);
+
+    // ⚠ DECLARED CONSERVATISM: a carrier handed on without completing its path — `desk` given
+    // to a child — is counted for EVERY field under it. Over-collecting can only add hosts,
+    // so that direction fails toward a red, which is the failure this arm is for.
+    const handedOn = {
+      rel: 'src/components/new/tabs/DeskProbeTab.jsx',
+      raw: [
+        "import { probeDeskLines } from '../probeDeskRead.js';",
+        'export function DeskProbeTab({ settlement }) {',
+        '  const desk = probeDeskLines(settlement);',
+        '  return (',
+        '    <Section title="Deep" collapsible defaultOpen={false}>',
+        '      <Child desk={desk} />',
+        '    </Section>',
+        '  );',
+        '}',
+      ].join('\n'),
+    };
+    expect(foldedSentenceMounts(both, [reader, handedOn]).map((b) => b.split(' ')[0])).toEqual(['economics.other', 'economics.probe']);
   });
 
   test('NON-VACUITY: a sentence drawn inside a shut fold is convicted, and the same draw hoisted above it is not', () => {
