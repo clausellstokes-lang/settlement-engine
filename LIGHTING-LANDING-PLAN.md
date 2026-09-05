@@ -3,11 +3,11 @@ Base: the §900 CAS (the desk landing) — every L-HOMES dock is cut at 38474a59
 | car | id | dock | status | sealed |
 |---|---|---|---|---|
 | 1 | LGT-P1-BIRTH | laneLH1 @ 38474a59e | DONE 408d2e2b1 (successor `null`; +7-key cost tripwired for L-DEFAULT; CAR 9 fixtures in `lh1/birth-fixtures-p1.json`) | `lgt-p1-birth-2026-09-05` |
-| 2 | LGT-P2-MANIFEST | laneLH2 @ 38474a59e | RUNNING | — |
+| 2 | LGT-P2-MANIFEST | laneLH2 @ 38474a59e | DONE 4a2e1110c (the register keeps its identifier; `ENGINE_GATED_DORMANT_RULE_KEYS` published; the rename rides rung 18) | `lgt-p2-manifest-2026-09-05` |
 | 3 | LGT-P13-FENCES | laneLH3 @ 38474a59e | RUNNING | — |
 | 4 | LGT-P5-WOPS | to cut | queued | — |
 | 5 | LGT-P6-ESPWIRE | to cut | queued | — |
-| 6 | LGT-P4-READER | to cut | queued (O-5 RULED BUILD at §882.13) | — |
+| 6 | LGT-P4-READER | laneLH6 @ 38474a59e | RUNNING (O-5 RULED BUILD at §882.13) | — |
 | 7 | LGT-P7-DRIFTDOOR | to cut | queued | — |
 | 8 | LGT-P8-MATBOUND | to cut | queued | — |
 | 9 | LGT-P14-WITNESS | to cut AFTER CAR 1 (consumes its fixtures; reads the birth delta as +7, not +1) | queued | — |
