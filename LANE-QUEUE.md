@@ -19,7 +19,8 @@ Updated 2026-09-05 by the Fable chair. Dispatch strictly in this order as slots 
 4. **DESK-DEF2** — BRIEFED (`briefs/brief-DESK-DEF2.md`, dock laneDEF2 @ 940d161ca): DS-DEF-6, 7, 9, 10.
 5. **HORIZON-B1 / CHARSET Car 2** — BRIEFED (`briefs/brief-HORIZON-B1.md`, dock laneCHARSET2 @ df7cdd37e): Car 1 is LANDED (leaf, table, twin, hoist, compiler, manifest, chunk, test); Car 2 = wiring + typed rejection + restore split + reachability, DARK at `report`.
 6. **DESK-9** — BRIEFED (`briefs/brief-DESK-9.md`, dock laneDESK9 @ 940d161ca): the walker arm that makes the public-dossier gate a DUTY of every mount.
-7. LIGHTING per refs/preserve/light-plan-2026-09-05: L-PROBE (CHAIR act, zero bytes — after PROSE lands) → L-HOMES → L-DEFAULT → flips → L-PROBE-2 + declarations + registers; SEAT-7/8 beside it; LGT-P14-WITNESS owes a golden-freeze register row · W-ARMS Car 1–3 per WARMS-CAR0's receipt · HORIZON-DARK B1/B2/B6 ·
+7. LIGHTING per refs/preserve/light-plan-2026-09-05 — ALL BRIEFED: after PROSE lands → L-PROBE (CHAIR act, zero bytes, needs a build) → **L-HOMES** (9 cars, `briefs/brief-L-HOMES.md`, one section per lane, CAR 1 first, CAR 9 after CAR 1) → **L-DEFAULT** (`briefs/brief-L-DEFAULT.md`, six hunks, the centre of mass) → **L-UI-MAT** (`briefs/brief-L-UI-MAT.md`) → L-PROBE-2 + the eleven declarations + the registers (chair). **SEAT-78** (`briefs/brief-SEAT-78.md`, ≈4 cars, its OWN consist) starts the moment a slot frees after PROSE lands — it is the longest pole.
+8. The PROSE landing's declared-shift entry: `golden-shift-prose.template.md` (fill from the PROSE-REBASE receipt); every later landing: `python3 mk-landing-kit.py <N> <dock> <base> <seal> <cars>`. · W-ARMS Car 1–3 per WARMS-CAR0's receipt · HORIZON-DARK B1/B2/B6 ·
    ENC-4 (sealed ENC-5 words at refs/preserve/enc5-words-2026-09-04) · SEAT-7a · srcprose rebase · docket.
 
 ## CHAIR-OWNED, NOT LANES
