@@ -57,11 +57,17 @@ const seen = new Set(); const claims = []
 for (const c of allClaims) { const k = (c.source + '|' + c.feature + '|' + c.claim.slice(0, 60)).toLowerCase(); if (!seen.has(k)) { seen.add(k); claims.push(c) } }
 log(`found ${allClaims.length} claims, ${claims.length} after dedupe, from ${[...found, ...foundAI].filter(Boolean).reduce((n, r) => n + r.sourcesRead.length, 0)} sources read`)
 phase('Verify')
-const verified = await batched(claims, (c) => agent(
-  `Adversarially verify ONE attributed claim by fetching its source as RAW text (WebFetch the url; if the host blocks, try the Wayback Machine once, else BLOCKED). Claim: "${c.claim}" — feature "${c.feature}" — source "${c.source}" — url ${c.url} — quotation "${c.quote}". Report VERIFIED_VERBATIM only if the quotation appears on the page word for word; VERIFIED_SUBSTANCE if the page supports the claim in other words (give the true wording, under twelve words); NOT_FOUND if the page does not support it; CONTRADICTED if it says otherwise. Default to NOT_FOUND when uncertain.`,
-  { label: `verify:${c.feature.slice(0, 24)}`, phase: 'Verify', schema: VERDICT, effort: 'low' }).then(v => ({ ...c, verdict: v })))
-const kept = verified.filter(Boolean).filter(x => x.verdict && (x.verdict.verdict === 'VERIFIED_VERBATIM' || x.verdict.verdict === 'VERIFIED_SUBSTANCE'))
-log(`verified: ${kept.length} of ${verified.length} claims survive`)
+const VERDICTS = { type: 'object', required: ['verdicts'], properties: { verdicts: { type: 'array', items: { type: 'object', required: ['index', 'verdict', 'trueWording', 'note'], properties: { index: { type: 'integer' }, verdict: { type: 'string', enum: ['VERIFIED_VERBATIM', 'VERIFIED_SUBSTANCE', 'NOT_FOUND', 'CONTRADICTED', 'BLOCKED'] }, trueWording: { type: 'string' }, note: { type: 'string' } } } } } }
+const CHUNK = (args && args.chunk) || 15
+const chunks = []
+for (let i = 0; i < claims.length; i += CHUNK) chunks.push(claims.slice(i, i + CHUNK).map((c, j) => ({ ...c, index: i + j })))
+const verifiedChunks = await batched(chunks, (chunk, ci) => agent(
+  `Adversarially verify EACH of the following ${chunk.length} attributed claims by fetching its source as RAW text (WebFetch the url; group the claims by url and fetch each url ONCE; if a host blocks, try the Wayback Machine once, else BLOCKED). For each claim report its index and: VERIFIED_VERBATIM only if the quotation appears on the page word for word; VERIFIED_SUBSTANCE if the page supports the claim in other words (give the true wording, under twelve words); NOT_FOUND if the page does not support it; CONTRADICTED if it says otherwise. Default to NOT_FOUND when uncertain. Return one verdict per index, all ${chunk.length}.\n\nCLAIMS:\n${JSON.stringify(chunk.map(c => ({ index: c.index, feature: c.feature, claim: c.claim, source: c.source, url: c.url, quote: c.quote })))}`,
+  { label: `verify:chunk${ci}`, phase: 'Verify', schema: VERDICTS }).then(v => ({ chunk, v })))
+const verified = []
+for (const r of verifiedChunks.filter(Boolean)) { const byIndex = new Map((r.v.verdicts || []).map(x => [x.index, x])); for (const c of r.chunk) verified.push({ ...c, verdict: byIndex.get(c.index) || { verdict: 'NOT_FOUND', trueWording: '', note: 'no verdict returned for this index' } }) }
+const kept = verified.filter(x => x.verdict && (x.verdict.verdict === 'VERIFIED_VERBATIM' || x.verdict.verdict === 'VERIFIED_SUBSTANCE'))
+log(`verified: ${kept.length} of ${verified.length} claims survive (${verifiedChunks.filter(Boolean).length} of ${chunks.length} verifier chunks returned)`)
 phase('Synthesize')
 const groups = {}; for (const e of EX) groups[e.key] = []; if (!SKIP_AI) groups.ai = []
 for (const x of kept) { const idx = x.batch; const key = idx < findJobs.length ? findJobs[idx].ex.key : 'ai'; (groups[key] ||= []).push(x) }

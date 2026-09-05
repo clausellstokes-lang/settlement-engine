@@ -16,7 +16,7 @@ done
 echo "QUIET CONFIRMED after ${WAITED}s"
 echo "RATCHET_HEAD=$(git rev-parse HEAD)"
 echo "RATCHET_PORCELAIN_PRE=[$(git status --porcelain -uall | wc -l | tr -d ' ')]"
-echo "PREDICTED (re-run after fix cars A+B): entries 3 -> 5 (the two writer-reach ↔ OSR one-flag rows enter as declared debt with a capture magnitude; the three older rows STAY: enforcement-claims debt; the owner-gated generator golden master; the Tier-2 voice per-file row, banked as debt with files-over-baseline ceiling 2 and measured at 2 files) · totalFiles 2470 -> about 2484 BY ANALOGY ONLY (the lighting census moved +14, 2523 -> 2537, and the ratchet's file count differs from the census by a fixed convention: 2470 vs 2523 at §899) · totalTests REFUSED IN ADVANCE (the 102-car proof collected 32,331 incl. 111 skipped; the ratchet's own convention decides) · no new known failure expected: the 102-car whole-suite proof's 22 reds were all register-class (now re-taken), banked, or a load timeout re-run green (derive EVERY figure before this runs — E4; totalTests is REFUSED in advance, this run is the derivation)"
+echo "PREDICTED: __PREDICTION__ (derive EVERY figure before this runs — E4; totalTests is REFUSED in advance, this run is the derivation)"
 sh scripts/gate-mutex.sh --run -- node scripts/check-test-ratchet.mjs --update
 TRUE_EXIT=$?
 echo "TRUE_EXIT=$TRUE_EXIT"
