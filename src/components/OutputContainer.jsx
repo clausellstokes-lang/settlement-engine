@@ -732,7 +732,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
         onRerollNPCs={npcAuthoringAllowed && onRegenerate ? () => onRegenerate('npcs') : null} pinnedIds={pinnedIds}
         onTogglePin={onTogglePin} canAuthorNpc={npcAuthoringAllowed}
         saveId={saveId} playerView={playerView} publicDossier={publicDossier} />;
-      case 'history':    return <HistoryTab settlement={s} narrativeNote={null} recentEvents={recentEvents} onReroll={onRegenerate ? () => onRegenerate('history') : null} />;
+      case 'history':    return <HistoryTab settlement={s} narrativeNote={null} recentEvents={recentEvents} onReroll={onRegenerate ? () => onRegenerate('history') : null} publicDossier={publicDossier} playerView={playerView} />;
       case 'resources':  return <ResourcesTab settlement={s} narrativeNote={null} />;
       case 'viability':  return <ViabilityTab settlement={s} narrativeNote={null} />;
       case 'dm_compass': return <DMCompassTab settlement={compassSource || s} />;

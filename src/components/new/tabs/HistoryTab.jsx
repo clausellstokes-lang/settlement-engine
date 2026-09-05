@@ -6,6 +6,10 @@ import useIsMobile from '../../../hooks/useIsMobile.js';
 
 import {NarrativeNote} from '../NarrativeNote';
 import LockControls from '../../dossier/LockControls.jsx';
+// THE GENERAL DESK IS REACHED THROUGH ITS ONE CALLER (the mount registry's ARM 2), which
+// also owns the §885.3 public gate: corpus prose is a PAID surface and this tab is not
+// filtered off a free gallery dossier.
+import { generalDeskLines } from '../generalDeskRead.js';
 
 // Party-attribution accent (matches EventComposer): a heraldic crimson distinct
 // from the gold brand accent and the purple AI tint.
@@ -23,11 +27,14 @@ function formatRecentDate(value) {
   return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 }
 
-export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onReroll}) {
+export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onReroll, publicDossier = false, playerView = false}) {
   const [expandedEvent, setExpandedEvent] = useState(null);
   const mobile = useIsMobile(); // hook must precede the early return (rules-of-hooks)
   if (!r?.history) return <Empty message="No historical data available."/>;
   const h = r.history;
+  // DS-GEN-9 (who this town is, and the one event it is still explained by), DS-GEN-14
+  // (founded once, grown since) and DS-GEN-16 (what the record still carries forward).
+  const {identityLines, foundedLine, recordLine} = generalDeskLines(r, {publicDossier, playerView}).history;
   const {founding, historicalEvents=[], currentTensions=[], historicalCharacter, age, eventsTimeline=[]} = h;
 
   // Extended event type colors (EVENT_COLORS only covers 5 types)
@@ -84,7 +91,30 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
           <LockControls scope="history" onReroll={onReroll} style={{marginLeft:'auto',flexShrink:0}} />
         </div>
         {historicalCharacter&&<p style={{...serif,fontSize: FS['13.5'],color:swatch['#4A3020'],lineHeight:1.65,margin:0,fontStyle:'italic'}}>"{historicalCharacter}"</p>}
+        {/* ── DS-GEN-14 (history.founded) and DS-GEN-16 (history.record) ─────
+            One sentence each, beside the age they band: how the town began, and
+            whether the record still carries its blows forward. The DATUM above —
+            the age, the counts, the generator's own character line — is
+            untouched; these band what having them MEANS. */}
+        {(foundedLine||recordLine)&&<div style={{borderTop:'1px solid #c8b89a',marginTop:10,paddingTop:8}}>
+          {foundedLine&&<p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}>{foundedLine}</p>}
+          {recordLine&&<p style={{fontSize:FS.sm,color:swatch.inkMag3,lineHeight:1.6,margin:foundedLine?'6px 0 0':0,fontStyle:'italic'}}>{recordLine}</p>}
+        </div>}
       </div>
+
+      {/* ── DS-GEN-9 (history.identity) ────────────────────────────────────
+          The town's own account of itself: how it began, what it is like, the
+          one event it is still explained by, and how far back that event sits.
+          FOUR POOLS OF ONE BLOCK AT ONE POSITION — the DS-GEN-6 precedent — and
+          never one sentence per event: the record's per-event verdict belongs to
+          DS-GEN-16 above, and two blocks narrating each row in turn is the page
+          repeating itself about one fact. */}
+      {identityLines.length>0&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #6b5340',padding:'10px 14px',marginBottom:14}}>
+        <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>What the years have made of it</div>
+        {identityLines.map((line,i)=>(
+          <p key={i} style={{fontSize:i===0?FS.md:FS.sm,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.6,margin:i===0?0:'6px 0 0',fontStyle:'italic'}}>{line}</p>
+        ))}
+      </div>}
 
       {/* ── RECENT EVENTS (glance) ───────────────────────────────────────────
           A short recent slice of the feed, source-tagged. The full living-history
