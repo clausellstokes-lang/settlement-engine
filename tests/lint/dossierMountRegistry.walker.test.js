@@ -590,13 +590,29 @@ describe('C3 the room — one fact, one sentence', () => {
     const speaking = CLEAN.filter((row) => row.rung === MOUNT_RUNGS.SENTENCE);
     expect(speaking.map((row) => row.mount))
       .toEqual(['economics.prosperityHeader', 'history.tensions']);
-    // And the accessor's own contract, exercised through the shipped module on the empty
-    // table: no position, no fact, no answer.
+    // And the accessor's own contract, exercised through the SHIPPED module: no position,
+    // no fact, no answer.
+    // ⚠ THE EMPTY-ANSWER PROBES ARE DERIVED, NOT HARDCODED, AND THIS FILE HAS NOW LEARNED
+    // THAT LESSON THREE TIMES. `mountsForTab('history')` was pinned to `[]` when the shipped
+    // table was empty, and the general desk's history car mounted three positions on that
+    // very tab — so the control reddened because the thing it controls changed, exactly as
+    // the hardcoded `DS-CND-1` and `doubled` plants did before it. The cure is the same one:
+    // take a tab that is still unmounted BY CONSTRUCTION, so no desk car can invalidate the
+    // probe by doing its job. `DS-GEN-1` stays a valid dark probe for the same reason the
+    // dark list's own first member does: the registry says it is unmounted.
+    const unmountedTab = [...TAB_VOCABULARY]
+      .find((tab) => !DOSSIER_MOUNTS.some((row) => row.tab === tab));
+    expect(unmountedTab, 'every router tab now carries a mount — pick a new empty probe')
+      .toBeTruthy();
+    expect(UNMOUNTED_BLOCKS, 'DS-GEN-1 is no longer dark').toContain('DS-GEN-1');
     expect(sentenceMountForBlock('DS-GEN-1')).toBeNull();
     expect(sentenceMountForBlock('')).toBeNull();
     expect(sentenceMountForBlock(/** @type {never} */ (undefined))).toBeNull();
-    expect(mountById('history.tensions')).toBeNull();
-    expect(mountsForTab('history')).toEqual([]);
+    expect(mountById(`${unmountedTab}.tensions`)).toBeNull();
+    expect(mountsForTab(unmountedTab)).toEqual([]);
+    // NON-VACUITY: the same accessor DOES answer for a tab the table really carries, so the
+    // emptiness above is the accessor discriminating rather than an accessor that stopped.
+    expect(mountsForTab(DOSSIER_MOUNTS[0].tab).length).toBeGreaterThan(0);
     // THE FAIL-CLOSED RULE, proven by construction rather than by reading the source: a
     // block with two speaking rows must answer with NOTHING, because picking the first
     // would choose a winner by array order and that is the silent wrong answer this whole

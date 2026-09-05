@@ -77,7 +77,7 @@ import { liveInstitutions } from '../../institutions/institutionRoster.js';
 // `{timeband_age}` FOR WANT OF A "duration former in the tree" (powerStateProse.js:900,
 // stressorsStateProse.js:78) — `timeBandOf`/`timeBandWord` ARE that former, and the
 // declination is stale at this tip rather than wrong when it was written. Measured here,
-// not assumed: see TIMEBAND_YEARS_PER_TICK.
+// not assumed: see `yearBand` below.
 import { timeBandOf, timeBandWord } from '../heraldCausalGrammar.js';
 import { readStateProse } from './stateProseKernel.js';
 import { legibilityRung } from './legibilityRung.js';
@@ -407,13 +407,24 @@ function phraseFill(value) {
 // ── THE HISTORY CHAPTER · DS-GEN-9, DS-GEN-14, DS-GEN-16 ────────────────────────────
 
 /**
- * How many weeks one YEAR of recorded history is, handed to `timeBandOf` as its tick
- * length. The function takes elapsed TICKS and a tick length in weeks, which is exactly the
- * parameterisation a year needs; nothing here re-derives the band boundaries.
+ * The duration band for a span given in YEARS.
+ *
+ * `timeBandOf` takes elapsed TICKS and a tick length in weeks, which is exactly the
+ * parameterisation a year needs — the estate's temporal constitution fixes a year at 52
+ * weeks (`worldState.js`: "tick = 1 week and year = 52 weeks"). Nothing here re-derives the
+ * band boundaries.
+ *
+ * ⚠ THE CONVERSION IS A CALL ARGUMENT AND NOT A NAMED CONSTANT THIS LEAF OWNS, deliberately:
+ * a year in weeks is a CALENDAR FACT rather than a tuning knob, and a named one would enter
+ * the tuning register as unregistered debt — raising that ceiling is the chair's act, not a
+ * lane's, and it is the wrong shape of movement for a value nobody may tune.
  *
  * ⚠ THE LADDER TOPS OUT WELL BELOW THIS CHAPTER'S SUBJECT, AND THAT IS THE FINDING BELOW.
+ * @param {number} years @returns {ReturnType<typeof timeBandOf>}
  */
-const TIMEBAND_YEARS_PER_TICK = 52;
+function yearBand(years) {
+  return timeBandOf(years, 52);
+}
 
 /**
  * `{timeband_since}` — the ADVERBIAL column ("the fire came {timeband_since}").
@@ -432,7 +443,7 @@ const TIMEBAND_YEARS_PER_TICK = 52;
  */
 function timebandSinceFill(years) {
   if (typeof years !== 'number' || !Number.isFinite(years)) return undefined;
-  return timeBandWord(timeBandOf(years, TIMEBAND_YEARS_PER_TICK), 'since') || undefined;
+  return timeBandWord(yearBand(years), 'since') || undefined;
 }
 
 /**
@@ -443,7 +454,7 @@ function timebandSinceFill(years) {
  */
 function timebandAgeFill(years) {
   if (typeof years !== 'number' || !Number.isFinite(years)) return undefined;
-  return timeBandWord(timeBandOf(years, TIMEBAND_YEARS_PER_TICK), 'predicate') || undefined;
+  return timeBandWord(yearBand(years), 'predicate') || undefined;
 }
 
 /**
@@ -488,17 +499,45 @@ export function calamityFill(eventName) {
  * ANCHORED event (the record's own word for "this still bears on the town"), and failing
  * that the most recent event at all. Ties go to the earlier array position, which is the
  * producer's own order.
- * @param {unknown} events @returns {object|null}
+ * @param {unknown} events @returns {HistoricalEventRow|null}
  */
 export function significantEvent(events) {
-  const rows = (Array.isArray(events) ? events : []).filter((e) => e && typeof e === 'object');
+  const rows = eventRows(events);
   if (rows.length === 0) return null;
-  const nearest = (list) => list.reduce(
-    (best, row) => (best === null || (typeof row.yearsAgo === 'number' && typeof best.yearsAgo === 'number'
-      && row.yearsAgo < best.yearsAgo) ? row : best),
-    /** @type {any} */ (null),
+  return nearestEvent(rows.filter((e) => e.anchored === true)) || nearestEvent(rows);
+}
+
+/**
+ * One row of `history.historicalEvents[]`, as the producer writes it.
+ * @typedef {{type?: unknown, name?: unknown, yearsAgo?: unknown, anchored?: unknown,
+ *   lastingEffects?: unknown}} HistoricalEventRow
+ */
+
+/**
+ * The record's event rows, object-shaped ones only.
+ * @param {unknown} events @returns {ReadonlyArray<HistoricalEventRow>}
+ */
+function eventRows(events) {
+  return /** @type {ReadonlyArray<HistoricalEventRow>} */ (
+    (Array.isArray(events) ? events : []).filter((e) => e && typeof e === 'object')
   );
-  return nearest(rows.filter((e) => e.anchored === true)) || nearest(rows);
+}
+
+/**
+ * The nearest row by `yearsAgo`, ties to the producer's own array order. Written as a loop
+ * rather than a `reduce`, because a reduce over a possibly-empty list needs a seed and the
+ * only honest seed is `null` — which is a type the accumulator has to carry explicitly.
+ * @param {ReadonlyArray<HistoricalEventRow>} list @returns {HistoricalEventRow|null}
+ */
+function nearestEvent(list) {
+  /** @type {HistoricalEventRow|null} */
+  let best = null;
+  for (const row of list) {
+    if (best === null) { best = row; continue; }
+    if (typeof row.yearsAgo === 'number' && typeof best.yearsAgo === 'number'
+      && row.yearsAgo < best.yearsAgo) best = row;
+  }
+  return best;
 }
 
 /**
@@ -562,7 +601,7 @@ export function foundedPoolKey(history) {
   if (!history || typeof history !== 'object') return null;
   const key = !history.founding ? 'GROWN-UNRECORDED'
     : (typeof history.age === 'number' && Number.isFinite(history.age)
-      && timeBandOf(history.age, TIMEBAND_YEARS_PER_TICK).id !== 'older_than_bearers')
+      && yearBand(history.age).id !== 'older_than_bearers')
       ? 'FOUNDED-YOUNG' : 'FOUNDED-OLD';
   return CORPUS['DS-GEN-14'].pools[key] ? key : null;
 }
@@ -579,14 +618,14 @@ export function foundedPoolKey(history) {
  * @param {unknown} events @returns {string|null}
  */
 export function eventRecordPoolKey(events) {
-  const rows = (Array.isArray(events) ? events : []).filter((e) => e && typeof e === 'object');
+  const rows = eventRows(events);
   const anchored = rows.filter((e) => e.anchored === true
     && Array.isArray(e.lastingEffects) && e.lastingEffects.length > 0);
   const recorded = rows.filter((e) => e.anchored === false
     && Array.isArray(e.lastingEffects) && e.lastingEffects.length > 0);
   const key = anchored.length > 1 ? 'LAYERED-ANCHORED'
     : anchored.length === 1
-      ? (timeBandOf(Number(anchored[0].yearsAgo) || 0, TIMEBAND_YEARS_PER_TICK).id === 'older_than_bearers'
+      ? (yearBand(Number(anchored[0].yearsAgo) || 0).id === 'older_than_bearers'
         ? 'ANCHORED-OLD' : 'ANCHORED-RECENT')
       : recorded.length > 0 ? 'RECORDED-UNANCHORED' : 'UNMARKED';
   return CORPUS['DS-GEN-16'].pools[key] ? key : null;
@@ -596,13 +635,14 @@ export function eventRecordPoolKey(events) {
  * The event DS-GEN-16's `{calamity}` names — the one the pool key was decided by, so the
  * sentence and the word inside it describe the same blow. Null where the key is about an
  * absence, which is exactly where no variant names the slot.
- * @param {unknown} events @returns {object|null}
+ * @param {unknown} events @returns {HistoricalEventRow|null}
  */
 function recordCalamityEvent(events) {
-  const rows = (Array.isArray(events) ? events : []).filter((e) => e && typeof e === 'object'
-    && Array.isArray(e.lastingEffects) && e.lastingEffects.length > 0);
-  return significantEvent(rows.filter((e) => e.anchored === true))
-    || significantEvent(rows.filter((e) => e.anchored === false));
+  const rows = eventRows(events).filter(
+    (e) => Array.isArray(e.lastingEffects) && e.lastingEffects.length > 0,
+  );
+  return nearestEvent(rows.filter((e) => e.anchored === true))
+    || nearestEvent(rows.filter((e) => e.anchored === false));
 }
 
 // ── DS-GEN-11 · Viability › The coherence verdict ───────────────────────────────────
