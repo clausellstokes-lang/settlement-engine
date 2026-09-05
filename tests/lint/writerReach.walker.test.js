@@ -87,6 +87,11 @@ const osrBaseline = JSON.parse(read('scripts/.observed-shape-readers-baseline.js
  * measured write spellings). Until that chair-signed widening lands, THIS is the
  * ratchet: an exact frozen roster, so a new dial-gated key reds BY NAME rather than
  * waiting for a law that cannot yet be stated.
+ * ⭐ 2026-09-05, THE DESK LANDING (§900): `source on stressors` LEFT the dial-gated set by measurement — the
+ * walker's own diff at 460a63bca (expected 31, received 30; confounded 55 → 54; `both controls` 31 → 30). The
+ * composed tip's corpus configs now carry `stressTypes` (writer-reach's register froze `stressTypes on _config` as
+ * a new LIT identity at register car 2), so `resolveStress.js:65` stamps `source: 'forced'` in the CONTROL world
+ * too, and the key is ordinary rather than dial-gated. A shrink, taken as the walker measured it; no row rowed.
  */
 const FROZEN_DIAL_GATED = Object.freeze([
   'affects on stressors',
@@ -118,7 +123,6 @@ const FROZEN_DIAL_GATED = Object.freeze([
   'name on stressors',
   'scale on factions',
   'source on factions',
-  'source on stressors',
   'source on traditions',
 ]);
 
@@ -904,7 +908,7 @@ describe('writer-with-no-reader ratchet: the register doors convict what they ca
     expect(message).toContain('not an acquittal');
     // The doors carry the measurement themselves, which is why the live run passes.
     expect(live.dialGated, 'measure() must build the dial corpora for the doors').toBeInstanceOf(Set);
-    expect(live.dialGated.size).toBe(31);
+    expect(live.dialGated.size).toBe(30);
   });
 
   test('a second --genesis over an existing baseline is refused', async () => {
@@ -1180,15 +1184,16 @@ describe('writer-with-no-reader ratchet: the lit-dial arm', () => {
     // §7.1 compares the lit corpus against the WALKER'S corpus, which moves two
     // variables at once and misses a third. Every reading is asserted TOGETHER so
     // the corrections are measured quantities rather than an argument.
-    expect(confounded.size, 'lit vs the walker corpus: the pack counted as a dial').toBe(55);
+    expect(confounded.size, 'lit vs the walker corpus: the pack counted as a dial').toBe(54);
     expect(packControlOnly.size, 'pack held constant, producer set still asymmetric').toBe(34);
-    expect(gated.size, 'both controls applied').toBe(31);
-    expect(confounded.size - packControlOnly.size, '24 pack-attributable, less 3 the pack control also gains')
-      .toBe(21);
-    // The three the DARK-corpus control removes are keys a shipped world does write,
-    // through producers the 16-generation producer-1 control never runs.
+    expect(gated.size, 'both controls applied').toBe(30);
+    expect(confounded.size - packControlOnly.size, '23 pack-attributable, less 3 the pack control also gains (was 24/21 before source on stressors turned ordinary at §900)')
+      .toBe(20);
+    // The four the DARK-corpus control removes are keys a shipped world does write,
+    // through producers the 16-generation producer-1 control never runs (three since Car 3;
+    // `source on stressors` joined them at §900 when the corpus configs took `stressTypes`).
     expect([...packControlOnly].filter((identity) => !gated.has(identity)).sort()).toEqual([
-      'description on factions', 'name on traditions', 'severity on stressors',
+      'description on factions', 'name on traditions', 'severity on stressors', 'source on stressors',
     ]);
     expect(gated.size, 'STOP: |dialGated| > 40 — classify per dial before rowing').toBeLessThanOrEqual(40);
     expect(confounded.size, 'the uncontrolled reading WOULD fire the STOP, which is why it is not the rule')
@@ -1200,7 +1205,7 @@ describe('writer-with-no-reader ratchet: the lit-dial arm', () => {
 
   test('every dial-gated identity is in the frozen roster and every frozen entry is still dial-gated — a new dial-gated key reds by name', () => {
     expect([...gated].sort()).toEqual([...FROZEN_DIAL_GATED]);
-    expect(FROZEN_DIAL_GATED.length).toBe(31);
+    expect(FROZEN_DIAL_GATED.length).toBe(30);
     expect(new Set(FROZEN_DIAL_GATED).size).toBe(FROZEN_DIAL_GATED.length);
     for (const identity of FROZEN_DIAL_GATED) {
       expect(identity).toMatch(/^\S+ on \S+$/);
