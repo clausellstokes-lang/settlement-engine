@@ -40,3 +40,12 @@ ARM 2 of the public-dossier guard: re-key "exactly one caller per desk" to the i
 ## STOPs
 A non-registry replay conflict · a duplicate sentence mount per page-set after the merge · a register that would RISE under a
 shrink-only door · an OSR identity added by anything but OSR-SCHEMA17 · a size-baseline (eslint max-lines) red on any tab.
+
+## ADDENDUM 2026-09-05 (after §899 composed): THE LATE DOCKS JOIN THE §900 CONSIST, after the desk docks and before the registers
+| dock | base | cars | sealed | owed CHAIR acts at the composed tip |
+|---|---|---|---|---|
+| laneENC4B | 7be568047 (ENC-4's tip; ENC-4 lands in §899, so replay `laneENC4B:7be568047` onto the §900 dock) | 4 (+ ENC-4c's, dispatched 09-05 on top) | `enc4b-2026-09-05` = 9d9686c12 | ⚠ car 4 CONFLICTS with §899's chair car 4 on pantheon A5 (115/381 vs 114/380): resolve by hand to the two-kind figures 115/381; lighting titles +7 (23198→23205 per the lane; re-derive) |
+| laneCHARSET2 | df7cdd37e | 7 | `horizon-b1-2026-09-05` = 3cd85c62c | the EDGE-SHARED RE-MINT by the ritual (materialise immer+seedrandom → `npm run build:edge-shared` → commit → RESTORE the symlinks; three suites red until then); a build for the eight closure chunks + `__vite__mapDeps`; lighting files +3 (+24 titles / +8 suites derived); the edge `validValue` charset branch is DEFERRED (recorded) |
+| laneHOR2 | 5e28d5c83 | (HORIZON-B2, running) | — | per its receipt |
+| laneSEAT78 | 5e28d5c83 | (SEAT-78, running) | — | per its receipt |
+Owner/chair rows from HORIZON-B1's R7: ten of fourteen `dossier-pdf` declarers reach neither rendered dossier (deities.domain/name, institutions.tags, resources.description, services.description/name, tradeGoods.description/name, traditions.epithet/name) — the census is PINNED, the manifest untouched; separating over-declaration from a reference entry never adopted is a chair/owner call, not an instrument's. Also carried from §899: the pantheon six-freeze roster helper (structural cure, chair act), the `chance_meeting` voice row.
