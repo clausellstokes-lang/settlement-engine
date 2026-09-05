@@ -90,6 +90,7 @@
  * @enforced-by tests/domain/townCartographyDeterminism.test.js
  */
 
+import { clamp } from '../../kernel/math.js';
 import { scenePointInPolygon, scenePolygonArea } from '../townScene/sceneCompilePrimitives.js';
 import { sceneDigest, stableSceneStringify } from '../townScene/stableScene.js';
 import { slugify } from '../townMap/anchors.js';
@@ -129,11 +130,6 @@ const FORM_ASPECT = 'form';
  * @typedef {{ heightPermille: number, styleToken: string, institutionRef?: string,
  *   landmark?: boolean }} RowDress the role-specific half of a row
  */
-
-/** @param {number} value @param {number} low @param {number} high @returns {number} */
-function clamp(value, low, high) {
-  return value < low ? low : value > high ? high : value;
-}
 
 /** A profile coefficient that may be absent reads zero, never NaN.
  *  @param {unknown} value @returns {number} */
