@@ -508,8 +508,19 @@ export function compileTownBuildingLayers(input) {
       const row = dressRow(parcel, subcell, T.FOOTPRINT_SHRINK_PERMILLE[grade],
         `carto:building:${slugify(binding.anchorKey).slice(0, 90)}:i${String(k).padStart(2, '0')}`,
         binding.anchorKey, k, record(canonical.conditionProfile), {
+          // ⛔ THE DIVISOR FLOOR IS `Math.max`, NEVER `|| 1`, and the difference is the
+          // whole guard: `|| 1` is a FALSY screen, so it substitutes 1 for the values
+          // `coefficient` has ALREADY mapped to 0 and lets every tiny POSITIVE unit
+          // through untouched. A denormal `planUnitCm` therefore divided rather than
+          // floored, and the quotient was +Infinity — absent from the `>= 0`/`<= 1000`
+          // reading below because a comparison against a non-finite is simply FALSE, so
+          // the clamp stopped clamping and the ceiling was reached by saturation rather
+          // than by measurement. `sceneBuildingFabric.js` owns the same quantity one
+          // module along and already spells it `/ Math.max(1, planUnitCm)`; this line is
+          // now the same intent in the same words. Same shape as `coefficient` and the
+          // population guard above — this file's own already-correct spellings.
           heightPermille: clamp(Math.round((1000 * (coefficient(canonical.heightCm)
-            / (coefficient(canonical.planUnitCm) || 1))) / T.HEIGHT_PLAN_CEILING), 0, 1000),
+            / Math.max(1, coefficient(canonical.planUnitCm)))) / T.HEIGHT_PLAN_CEILING), 0, 1000),
           styleToken: `${slugify(canonical.shapeFamily)}.${slugify(canonical.skinId)}`,
           institutionRef: binding.institutionRef,
           landmark: k === 1 && area >= bands.large,

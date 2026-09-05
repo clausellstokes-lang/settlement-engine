@@ -722,6 +722,35 @@ describe('TC-4 C5 — the dress derives from existing typed facts', () => {
     expect(half.heightPermille).toBe(500);
   });
 
+  it('the plan-unit divisor FLOORS at 1, so no sub-unit scale escapes the ceiling', () => {
+    // ⛔ THE NEGATIVE CONTROL FOR `|| 1`. A falsy screen substitutes 1 only for what
+    // `coefficient` has ALREADY mapped to 0, and lets every tiny POSITIVE unit divide:
+    // a denormal `planUnitCm` drove the quotient to +Infinity, which the `0..1000`
+    // clamp cannot catch because a comparison against a non-finite is FALSE.
+    //
+    // ⚠ `heightCm` IS 30, NOT THE FIXTURE'S 750, AND THE CHOICE IS LOAD-BEARING. At 750
+    // every row below reads 1000 in BOTH build states — the un-floored quotient
+    // saturates the ceiling and the repair is invisible. At 30 the floored quotient
+    // sits under the ceiling, so each assertion actually discriminates. Measured
+    // against the un-repaired source: 0.5, 0.001, 5e-324, 1e-320 and -1 ALL FAIL there
+    // (1000 and 0 against an expected 500); the remaining units pass there too, and
+    // they are here to pin TOTALITY rather than to carry the repair.
+    const at = (planUnitCm) => packInto([[100, 100], [400, 100], [100, 400]], {
+      canonical: { heightCm: 30, planUnitCm },
+    }).buildings[0].heightPermille;
+    // THE HEALTHY ANCHOR FIRST: a leaf that had simply stopped reading `planUnitCm`
+    // would satisfy every equality below, so the floored value must be a real
+    // measurement — 30cm over a 1cm unit, against a ceiling of 60, is half height.
+    const floored = at(1);
+    expect(floored).toBe(500);
+    for (const unit of [0.5, 0.001, 5e-324, 1e-320, 0, -1, -Infinity, NaN, Infinity]) {
+      expect(at(unit), `planUnitCm=${String(unit)}`).toBe(floored);
+    }
+    // AND THE FLOOR IS A FLOOR, NEVER A CONSTANT: a unit ABOVE 1 still divides.
+    expect(at(2)).toBe(250);
+    expect(at(50)).toBe(10);
+  });
+
   it('every emitted row carries a SAFE_TOKEN style and integer permilles in range', () => {
     const SAFE_TOKEN = /^[a-z0-9][a-z0-9_:.-]{0,119}$/;
     const { input } = leafInputFor(SUBJECT);
