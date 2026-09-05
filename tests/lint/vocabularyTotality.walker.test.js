@@ -44,7 +44,7 @@ import { safetySeverityOf } from '../../src/domain/display/safetySeverity.js';
 import { RECOGNISED_MONSTER_TIERS } from '../../src/domain/display/stateProse/defenseStateProse.js';
 import { deriveEconomicComplexity } from '../../src/generators/economy/prosperity.js';
 import {
-  COMPLEXITY_BAND_BY_LABEL, SAFETY_BANDS, STABILITY_BANDS, bandOf,
+  COMPLEXITY_BAND_BY_LABEL, SAFETY_BANDS, STABILITY_BANDS, bandOf, complexityBandOf,
 } from '../../src/domain/display/labelBands.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
@@ -356,26 +356,54 @@ describe('vocabularyTotality — band-word recovery (DOCKET-2 item 3)', () => {
     expect(setDiff(emitted, declared), 'unmapped complexity label(s): emitted, never declared').toEqual([]);
   });
 
-  it('the six band-less complexity labels are DECLARED absent, not silently sliced', () => {
-    // The finding, pinned. These six have no band word because the producer never
-    // authored one; giving them one is a reader-facing content act (the §0c-3 class,
-    // the chair's). Until then the map says `null` and the tile falls back to the full
-    // label — which is byte-for-byte what it rendered before labelBands.js existed.
-    const absent = Object.entries(COMPLEXITY_BAND_BY_LABEL)
-      .filter(([, band]) => band === null).map(([label]) => label).sort();
-    expect(absent).toEqual([
-      'Agricultural surplus with trade links',
-      'Diversified market economy',
-      'Mixed subsistence and market',
-      'Specialized production and trade',
-      'Subsistence with minor surplus',
-      'Subsistence with surplus',
-    ]);
-    // And every DECLARED band must really open its own label, or the map is fiction.
+  it('every complexity label carries a band word — 11 of 11, the chair\'s six included', () => {
+    // ⭐ THIS ARM MOVED 5 → 11 ON 2026-09-05, and the six new rows are AN ATTRIBUTED ACT.
+    // Until then the map declared `null` for the six labels the producer emits with no
+    // band word, and SummaryTab fell back to the whole phrase on 174 of 360 driven
+    // settlements. Giving those six a band is authoring reader-facing words — the §0c-3
+    // class — so the words are the FABLE 5.1 CHAIR'S, authored 2026-09-05 and replayed
+    // verbatim into labelBands.js by lane DOCKET-3, which measured them but did not
+    // write them. The chair's stated rule: the band is the label's OWN HEAD WORD, so no
+    // word reaches the reader that the label did not already carry. That rule is what
+    // the `startsWith` assertion below is able to check; a word chosen any other way
+    // would have needed a human to re-read the tile instead.
+    //
+    // TO CHANGE ONE OF THESE SIX: ask the chair. They are content, not derivation.
+    const withoutBand = Object.entries(COMPLEXITY_BAND_BY_LABEL)
+      .filter(([, band]) => typeof band !== 'string' || band.length === 0)
+      .map(([label]) => label).sort();
+    expect(withoutBand, 'complexity label(s) with no band word — the 174/360 defect, returning')
+      .toEqual([]);
+    expect(Object.keys(COMPLEXITY_BAND_BY_LABEL).length, 'the map emptied — this arm would be vacuous')
+      .toBe(11);
+
+    // Every band must really open its own label, or the map is fiction. With no `null`
+    // rows left this now covers 11 of 11 rather than 5 of 11.
     for (const [label, band] of Object.entries(COMPLEXITY_BAND_BY_LABEL)) {
-      if (band === null) continue;
       expect(label.startsWith(band), `${label} does not open with its declared band`).toBe(true);
     }
+
+    // The chair's six, pinned literally and read back through the accessor, so a silent
+    // re-wording by a later lane reddens here rather than changing a tile in the dark.
+    expect(complexityBandOf('Diversified market economy')).toBe('Diversified');
+    expect(complexityBandOf('Specialized production and trade')).toBe('Specialized');
+    expect(complexityBandOf('Mixed subsistence and market')).toBe('Mixed');
+    expect(complexityBandOf('Agricultural surplus with trade links')).toBe('Agricultural');
+    expect(complexityBandOf('Subsistence with minor surplus')).toBe('Subsistence');
+    expect(complexityBandOf('Subsistence with surplus')).toBe('Subsistence');
+    // A band is a CLASS, not an identifier: three labels share `Subsistence` and two
+    // share `Diversified`. Declared here so a later reader does not "fix" the collision.
+    expect(Object.values(COMPLEXITY_BAND_BY_LABEL).filter((b) => b === 'Subsistence')).toHaveLength(3);
+    expect(Object.values(COMPLEXITY_BAND_BY_LABEL).filter((b) => b === 'Diversified')).toHaveLength(2);
+
+    // ⚠ AND THE REFUSAL IS STILL A REFUSAL. The map is a bare object literal, so it
+    // inherits Object.prototype; a `?? null` read returned the CONSTRUCTOR FUNCTION for
+    // 'constructor'/'toString'/'valueOf'/'hasOwnProperty' — a function handed to a React
+    // child. Unreachable from the producer, wrong all the same, and fixed by hasOwn.
+    expect(complexityBandOf('constructor')).toBe(null);
+    expect(complexityBandOf('toString')).toBe(null);
+    expect(complexityBandOf('__proto__')).toBe(null);
+    expect(complexityBandOf('Placid market economy')).toBe(null);
   });
 
   it('SAFETY_BANDS is bound to safetyProfile.js, and resolves every label it composes', () => {

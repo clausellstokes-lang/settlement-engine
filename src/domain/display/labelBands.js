@@ -16,13 +16,15 @@
  * A delimiter offset is not a field accessor. It is a guess about where a word
  * ends, and it fails in two directions:
  *
- *  1. ⛔ IT IS ALREADY WRONG, TODAY, ON 174 OF 360 DRIVEN SETTLEMENTS.
+ *  1. ⛔ IT WAS ALREADY WRONG ON 174 OF 360 DRIVEN SETTLEMENTS.
  *     `deriveEconomicComplexity` emits ELEVEN strings and only FIVE carry an em
  *     dash — the separator was never a field separator in that vocabulary. On the
- *     other six `split('—')[0]` returns the WHOLE STRING, so a tile whose entire
- *     purpose is the band word prints "Subsistence with minor surplus" and
+ *     other six `split('—')[0]` returned the WHOLE STRING, so a tile whose entire
+ *     purpose is the band word printed "Subsistence with minor surplus" and
  *     "Agricultural surplus with trade links". Measured over the 360-settlement
- *     corpus at 5e28d5c83: 174 of 360 (48%).
+ *     corpus at 5e28d5c83: 174 of 360 (48%). Closed 2026-09-05, when the chair
+ *     authored the six missing band words — see COMPLEXITY_BAND_BY_LABEL. The
+ *     same census now reports 0 of 360.
  *
  *  2. ⚠ AND IT BREAKS ON ANY RE-WORDING. `powerStructure.stability` alone uses
  *     THREE separator conventions in one producer (` — `, ` (…)`, `; `), which is
@@ -91,14 +93,27 @@ export const STABILITY_BANDS = Object.freeze([
  * band with a gloss. Exhausted over (tier × incomeSources 0..14 × exports 0..14 ×
  * hasMarketInst): exactly these eleven, no more.
  *
- * ⛔ THE SIX `null` ROWS ARE THE FINDING, DECLARED. Those six labels have NO band
- * word — the producer never authored one — so there is nothing to recover and
- * `complexityBandOf` says so instead of returning a silent slice of the phrase.
- * They ride 174 of 360 driven settlements. Giving them a band is authoring
- * reader-facing words (the §0c-3 class: chair's, not a lane's); until that is
- * ruled, the caller falls back to the full label, which is byte-for-byte what
- * this surface already renders today.
- * @type {Readonly<Record<string, string|null>>}
+ * ⭐ ELEVEN OF ELEVEN CARRY A BAND, and six of them did not until 2026-09-05.
+ * Five producer labels spell their band before a gloss (`"<Band> — <gloss>"`); the
+ * other six are whole phrases the producer never gave a band word at all, and they
+ * rode 174 of 360 driven settlements printing themselves in full into a tile whose
+ * entire purpose is the band word.
+ *
+ * ⛔ THE SIX BAND WORDS BELOW ARE THE CHAIR'S, authored by the Fable 5.1 chair on
+ * 2026-09-05 as a §0c-3 reader-facing-words act and replayed here VERBATIM. They
+ * are not this file's, not a lane's, and not derivable — a later reader who wants
+ * to change one asks the chair, exactly as one would for the gloss text itself.
+ *
+ * THE RULE THE CHAIR FOLLOWED, so the map can be extended the same way: the band
+ * word is the label's OWN HEAD WORD, exactly as the five dashed labels already do.
+ * No word enters the reader's page that the label did not already carry — which is
+ * why the totality walker can assert `label.startsWith(band)` on all eleven rows.
+ *
+ * ⚠ `Subsistence` names THREE labels and `Diversified` TWO. That is deliberate and
+ * declared: a band is a CLASS, not an identifier. The tile shows the band; the full
+ * label keeps the gloss that separates them. Do not "resolve" the collision by
+ * inventing a word — that would be authoring, and authoring is the chair's.
+ * @type {Readonly<Record<string, string>>}
  */
 export const COMPLEXITY_BAND_BY_LABEL = Object.freeze({
   'Highly diversified — multiple major revenue streams': 'Highly diversified',
@@ -106,12 +121,12 @@ export const COMPLEXITY_BAND_BY_LABEL = Object.freeze({
   'Concentrated — fewer revenue streams than scale suggests': 'Concentrated',
   'Limited — narrow economic base for this scale': 'Limited',
   'Subsistence — survival economy': 'Subsistence',
-  'Diversified market economy': null,
-  'Specialized production and trade': null,
-  'Mixed subsistence and market': null,
-  'Agricultural surplus with trade links': null,
-  'Subsistence with minor surplus': null,
-  'Subsistence with surplus': null,
+  'Diversified market economy': 'Diversified',
+  'Specialized production and trade': 'Specialized',
+  'Mixed subsistence and market': 'Mixed',
+  'Agricultural surplus with trade links': 'Agricultural',
+  'Subsistence with minor surplus': 'Subsistence',
+  'Subsistence with surplus': 'Subsistence',
 });
 
 /**
@@ -151,13 +166,24 @@ export function stabilityBandOf(label) {
 }
 
 /**
- * The complexity band, or `null` for the six labels that have none.
- * An unrecognised label is `null` too — never a slice of itself.
+ * The complexity band of a producer label.
+ *
+ * The map is TOTAL over `deriveEconomicComplexity`, so `null` now means one thing
+ * only: this string did not come from that producer. An unrecognised label is
+ * refused — never returned as a slice of itself.
+ *
+ * ⚠ `Object.hasOwn` before the read, not `?? null` after it. A bare object literal
+ * inherits `Object.prototype`, so `COMPLEXITY_BAND_BY_LABEL['constructor']` is a
+ * FUNCTION and `??` passes it straight through — this function's declared
+ * `string|null` was false for `constructor`, `toString`, `valueOf`,
+ * `hasOwnProperty`, `isPrototypeOf` and `__proto__`, and its caller renders the
+ * result into a React child. Unreachable from the producer; wrong all the same.
+ *
  * @param {string|null|undefined} label
  * @returns {string|null}
  */
 export function complexityBandOf(label) {
   const text = typeof label === 'string' ? label.trim() : '';
   if (!text) return null;
-  return COMPLEXITY_BAND_BY_LABEL[text] ?? null;
+  return Object.hasOwn(COMPLEXITY_BAND_BY_LABEL, text) ? COMPLEXITY_BAND_BY_LABEL[text] : null;
 }
