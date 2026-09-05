@@ -25,3 +25,18 @@ Register-class (the chair's doors cure these at the final tip — NOT yours; rea
 
 ## FENCES
 No register act (no `--update`, `--write`, `UPDATE_*`, refreeze doors). No cure of a register-class red. A cure that would change same-seed rendered output STOPS for the chair (THE PROMISE). One car per cause, `Seat: Opus 5 — Fable-unvalidated`, `Lane: DESK-900-REDS`, `Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>`. Receipt `$SC/receipt-desk-900-reds.md`, PARTIAL header first, an ATTRIBUTION TABLE (file → dock → cause → cure/handed-up), RETROVALIDATION ROW last, tip sha last.
+
+## THE ASSERTION TEXTS (from `whole-900a.log`, verbatim first lines — attribute from these, then confirm by running at the docks)
+- treatyOrientationWr10g: `the raw spelling survives only where the fields are WRITTEN: expected [ …(3) ] to deeply equal [ 'worldPulse/concludedWars.js', …(1) ]` — a THIRD writer of the raw spelling appeared (SEAT-78's `irregularForce.js`? ENC-4b's writer?).
+- engineChunkLazy: `expected '…' to match /imp…settlementGenerateAction\.js['"]\)/` — HORIZON-B2's lazy-lane import anchor; may need the chair's build (say so).
+- settlementSlice: `expected [ …(3) ] to have a length of 4 but got 3` — HORIZON-B2's generate action snapshots three bags, the test expects four.
+- toggleSlice.scope: `settlementSlice must stamp _institutionToggles into fullConfig: expected false to be true` — HORIZON-B2 moved the stamping.
+- contributionLedgerShape: `expected [ 'advanceEpochEnabled', …(30) ] to have a length of 30 but got 31` — SEAT-78's `irregularForceEnabled` (+1): the manifest join needs its row, or the pin moves with attribution.
+- subsystemRowsVirtual: `[ …(30) ] to deeply equal [ …(29) ]` — the same flag; the registry enumeration vs a hand list.
+- coveringArrayCoverage: `expected 31 to be 30` — the same flag (the soak's covering array counts flags).
+- militaryStrength: `unexpected importers: src/domain/worldPulse/irregularForce.js` — SEAT-78's leaf imports the model; the arm's allow-list (B1/B2/B4 + F1) needs the ruled exemption or the import routed.
+- economyStateProseDesk: `expected [ …(3) ] to not deeply equal [ …(3) ]` — a fill table equals its slot's declared shape where the arm expects a difference (ECON2 vs DOCKET-2 item 8; read DESK-900-CARS's receipt before curing).
+- dossierStateProseProjection.contract: `{ violations: [], …(2) } to deeply equal { violations: [], …(2) }` — a canonical variant vs a live headline (diff the two objects).
+- enforcedByExists / voiceMechanics: read the log (`whole-900a.reds.txt`) for the row; voiceMechanics per-file: GREW ⇒ your fix, FELL ⇒ the chair banks.
+- negativeAssertionAnchor: `expected [ Array(1) ] to deeply equal []` — ONE new un-anchored negative; find it, anchor it (marker on the line immediately above).
+- dossierMountRegistry: `A CORPUS READ IS UNGATED, or the publicDossier it is gated on never ARRIVED … this arm covers what sits between` — a desk mount whose corpus read is not gated on the arriving `publicDossier` (WARFAITH/DEF2/ECON2's mounts on tabs that did not receive the prop until the composition — `OutputContainer` keep-both was resolved by the chair; check every tab that mounts a desk receives `publicDossier`/`playerView`).
