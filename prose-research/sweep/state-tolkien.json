@@ -1,7 +1,7 @@
 {
  "name": "tolkien",
  "runId": "wf_9b91b240-c98",
- "exportedAt": "2026-09-05T23:05:00.603Z",
+ "exportedAt": "2026-09-05T23:06:57.460Z",
  "claims": [
   {
    "feature": "register modulation",
@@ -5931,6 +5931,96 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "colloquialism and false modernity",
    "note": "Wikipedia: Tolkien's insistence that prose Beowulf translations \"should be 'harmonious' and should avoid 'colloquialism and false modernity'\", and \"He advises the translator to prefer 'striking' and 'smiting', and to avoid 'hitting' and 'whacking'.\" Note the page also records the counterweight: he criticises Morris's \"dead and unintelligible 'leeds'\", so the preference is not archaism without limit."
+  },
+  "240": {
+   "index": 240,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "intentionally antiquated but not intentionally arcane",
+   "note": "DBU page (Mitchell): \"Tolkien argues that the language of Beowulf for its time was intentionally antiquated but not intentionally arcane; therefore, a good modern translation should avoid both the colloquial and the obscure.\" Both halves of the claim are on the page. Minor framing caveat: the page states this as advice for translating Beowulf, not as a general rule for 'heroic diction'; it is Mitchell's summary of Tolkien's essay, not Tolkien's own sentence."
+  },
+  "241": {
+   "index": 241,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "is of fundamental importance... more immediate than the enjoyment of literature",
+   "note": "Wikiquote, under the section 'English and Welsh (1955)': \"The basic pleasure in the phonetic elements of a language and in the style of their patterns, and then in a higher dimension, pleasure in the association of these word-forms with meanings, is of fundamental importance... It is simpler, deeper-rooted, and yet more immediate than the enjoyment of literature.\" The 'prior to literary enjoyment' gloss is supported. 'Cellar door' is supported by the immediately following bullet from the same lecture: \"Most English-speaking people... will admit that cellar door is 'beautiful'\" — adjacent, not inside the quoted sentence."
+  },
+  "242": {
+   "index": 242,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "and from that a character, a situation begins to grow",
+   "note": "Anna Smol quotes a 1966 Tolkien interview (via the Zaleskis' The Fellowship, p. 25): \"supposing you say some quite ordinary words to me — 'cellar door,' say. From that, I might think of a name, 'Selador,' and from that a character, a situation begins to grow.\" The sound-to-name-to-character progression in the claim is exactly the source's."
+  },
+  "243": {
+   "index": 243,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "telling of things already old and weighted with regret",
+   "note": "tolkienestate.com, Christopher Tolkien on The Silmarillion: \"whereas the entire action of the story of The Lord of the Rings takes place within a span of twenty years and possesses great narrative urgency — the pressure and fear of the immediate and unknown event — The Silmarillion traverses long ages; and its elegiac air and tone might be described in my father's own words about the Old English poem Beowulf, when he wrote that 'its maker was telling of things already old and weighted with regret...'\" Caveat: the quoted phrase is J.R.R. Tolkien's, about Beowulf, quoted by Christopher and applied by him to The Silmarillion."
+  },
+  "244": {
+   "index": 244,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It ranges easily from the commonplace to the stately",
+   "note": "Le Guin PDF (8pp, text layer extracted): \"Tolkien writes a plain, clear English. Its outstanding virtue is its flexibility, its variety. It ranges easily from the commonplace to the stately, and can slide into metrical poetry, as in the Tom Bombadil episode, without the careless readers even noticing.\" Every element of the claim, including the unnoticed slide into verse, is present."
+  },
+  "245": {
+   "index": 245,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "an English extraordinary for its simple timelessness",
+   "note": "Le Guin PDF: \"In the third passage, the speakers are quieter, and use a less extraordinary English; or rather an English extraordinary for its simple timelessness... It has sobriety, wit, and force.\" Caveat: Le Guin never names 'the Council of Elrond'; her third passage is footnoted to The Fellowship of the Ring (Ballantine 1965, p. 351) and its speakers are Aragorn, Boromir and Elrond — i.e. the Council of Elrond, an accurate but inferred label."
+  },
+  "246": {
+   "index": 246,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Speech expresses character.",
+   "note": "Le Guin PDF: \"Speech expresses character. It does so whether the speaker or the author knows it or not.\" The name-substitution test is on the page: she rewrites the Kurtz passage \"by changing four words\" (council lords→committee chairmen, Bran Coris→Brian Corliss, Cardosa→Poughkeepsie, garden→White House garden), then says of the Eddison/Morris/Tolkien passages, \"You could not pull the trick on them that I pulled on Morgan and Nigel.\" Boromir: \"the very slight whine in Boromir's tone is significant also.\""
+  },
+  "247": {
+   "index": 247,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "he has no ichor; everything is direct, concrete, and simple",
+   "note": "Le Guin PDF: \"Tolkien's vocabulary is not striking; he has no ichor; everything is direct, concrete, and simple.\" The claim's 'not striking' and 'direct, concrete and simple' are both the source's own words. 'Ichor' is her term for the fake-archaic register she attacks (\"ichor... out of severed tentacles\")."
+  },
+  "248": {
+   "index": 248,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It's a high wire: one slip spoils all.",
+   "note": "Le Guin PDF: \"The archaic manner is indeed a perfect distancer, but you have to do it perfectly. It's a high wire: one slip spoils all.\" The second half of the claim is also supported, in a separate passage on Leiber and Zelazny: \"they alternate the two styles... colloquial American English, or even slang, and at earnest moments they revert to old formal usages... the characters lose coherence in my mind, and I lose confidence in them.\""
+  },
+  "249": {
+   "index": 249,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The style, of course, is the book.",
+   "note": "Le Guin PDF: \"Many readers, many critics, and most editors speak of style as if it were an ingredient of a book, like the sugar in a cake... The style, of course, is the book... This is partly true of history; largely true of fiction; and absolutely true of fantasy.\" The 'every word counts / speech is creation' rationale is also on the page: \"where the act of speech is the act of creation... And every word counts.\""
+  },
+  "250": {
+   "index": 250,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Stress, release. Inbreath, outbreath. A heartbeat. A walking gait",
+   "note": "Kate Nepveu's post quotes Le Guin's thesis: \"the rhythm that shapes and directs his narrative... is very strong and very simple, as simple as a rhythm can be: two beats. Stress, release. Inbreath, outbreath. A heartbeat. A walking gait — but on so vast a scale... that it carries the whole enormous narrative straight through from beginning to end.\" Breath, gait and whole-narrative carriage are all in the claim and all in the source."
+  },
+  "251": {
+   "index": 251,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "each yang contains its yin, each yin contains its yang",
+   "note": "Nepveu: Le Guin \"closely reads chapter 8 of Fellowship, 'Fog on the Barrow Downs'\" and lists \"darkness/daylight,\" \"confusion of thought/clarity,\" \"imprisonment or a trap/freedom\"; the quoted sentence appears in full. The post also reaches the chapter's close — \"These are the final sentences:\" followed by the Bree-hill passage. Only cosmetic difference: the post spells the chapter \"Fog on the Barrow Downs\" (no hyphen)."
+  },
+  "252": {
+   "index": 252,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "occurs more than once in the chapter, some three or four times",
+   "note": "communicator's LiveJournal post (17 Oct 2005, 'Le Guin on plot rhythm in Tolkein') quotes Le Guin: \"examples of the stress/release pulse that I think is fundamental to the structure of the book. Each such reversal or pulsation occurs more than once in the chapter, some three or four times.\" The claim's 'structural rather than incidental' is carried by the source's own word 'fundamental to the structure'."
+  },
+  "253": {
+   "index": 253,
+   "verdict": "CONTRADICTED",
+   "trueWording": "Walker: diction \"stirring, alliteratively stately, [and] stern\"",
+   "note": "MISATTRIBUTION. The quoted phrase is verbatim on the page, but Wikipedia credits it to Steve Walker (The Power of Tolkien's Prose), not Shippey: \"Tolkien goes furthest with the Riders of Rohan, giving them 'Anglo-Saxon syntactic patterns' [sfn Walker 2009 p.143] and diction which is 'stirring, alliteratively stately, [and] stern' [sfn Walker 2009 p.143]. He gives Rohan speakers words 'rescued from total obscurity' [sfn Walker 2009 pp.152-153] like 'éored'.\" All three quoted elements the claim assigns to Shippey are footnoted to Walker. Shippey (2001, pp.90-97, 111-119) is cited only for the NEXT sentence, on Rohirric horse-element names (éothéod, éored, eorlingas). Fix by renaming the scholar; the stylistic substance itself is sound."
+  },
+  "254": {
+   "index": 254,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "loose semantic fit",
+   "note": "Wikipedia: \"The Tolkien scholar Tom Shippey calls such deliberate use of the conjunction, avoiding explicit logical connection, 'loose semantic fit'.\" [sfn Shippey 2005 p.203] Attribution to Shippey, the paratactic 'and', and 'avoiding explicit logical connection' are all the article's own wording — the claim tracks it almost word for word. Context is Turner's reading of the Pelennor Fields standard passage as \"stylistically marked\" New Testament parataxis."
   }
  }
 }
