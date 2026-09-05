@@ -42,7 +42,7 @@ import {
   runnerCommandOf, SOURCE_TEST_EXCLUDE, uncollectedOf, SCOPE_FLOOR_RATIO,
   classifyFailure, failureEvidenceOf, globalTestTimeoutOf, timeoutLiteralsOf,
   FAILURE_CLASSES, VITEST_DEFAULT_TEST_TIMEOUT,
-  MAGNITUDE_KINDS, measureMagnitude, magnitudeReportOf,
+  MAGNITUDE_KINDS, measureMagnitude, magnitudeReportOf, parseReadOnlyArgs,
 } from '../../scripts/check-test-ratchet.mjs';
 // DERIVED, never restated: the discharge below asserts that the rehearsal train still
 // reaches the migration whose cure retired the owner-gated rows. A literal here would go
@@ -1309,11 +1309,127 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
       ...r,
       out: `${r.stdout}${r.stderr}`,
       baselineFile: env.TEST_RATCHET_BASELINE,
+      // The report the fake runner was told to deliver. Exposed so the --from-log pin can
+      // hand the SAME BYTES to both paths; without it the two runs would judge two files
+      // that merely happen to serialise alike, which proves less than it looks.
+      reportFile: src === '-' ? null : src,
       capture: captureFile && existsSync(captureFile)
         ? JSON.parse(readFileSync(captureFile, 'utf8'))
         : null,
     };
   }
+
+  // ── ⛔ THE READ-ONLY MODES — the gate's own hold-safety, EXECUTED ───────────
+  // WHY THIS EXISTS: every one of the four modes above shells out to `npx vitest run`,
+  // and the absence of a write flag reads as "read-only" to anyone who meets this script
+  // for the first time. A receipt told the next lane exactly that. `--dry` and
+  // `--from-log` are the two invocations that genuinely spawn nothing, and a mode nobody
+  // executes is a mode that quietly regains a spawn.
+  //
+  // The spawn tripwire is the harness's OWN `captureRunner` seam: the fake runner writes
+  // the capture file, so `capture !== null` means a child really ran. Every arm below
+  // carries the positive control beside the negative, because "nothing spawned" and
+  // "the test drove nothing" look identical from here.
+  const SUITES = [{ file: REAL, tests: [T('a'), T('b', 'passed')] }];
+  const ENTRIES = { [identityOf(REAL, 'a')]: {} };
+  // Provenance lines name WHERE the report came from and WHICH machine read it, which is
+  // the one thing the two paths may legitimately disagree about. Everything else — every
+  // verdict, ceiling, identity and evidence line — must match byte for byte.
+  const verdictOnly = (out) => out.split('\n').filter((l) => !l.startsWith('  full runner report:')
+    && !l.startsWith('  stable copy of it:')
+    && !l.startsWith('  (supplied by --from-log')
+    && !l.startsWith('  machine at this run:')
+    && !l.startsWith('  machine READING this report:')).join('\n');
+
+  test('--dry exits 0 having spawned nothing — and the same call without it DOES spawn', () => {
+    const dry = run({
+      entries: ENTRIES, suites: SUITES, args: ['--dry'], captureRunner: true,
+    });
+    expect(dry.status, dry.out).toBe(0);
+    expect(dry.capture, '--dry spawned a runner').toBe(null);
+    expect(dry.out).toContain('NOTHING WAS RUN, NOTHING WAS WRITTEN');
+    // ⚠ IT REPORTS THE COMMAND IT WOULD ACTUALLY SPAWN, not a hard-coded sentence. This
+    // harness injects TEST_RATCHET_RUN_CMD, so under it the honest answer is the SEAM —
+    // and an early draft of this pin asserted the real vitest argv here and reddened,
+    // which is the script being right and the test being wrong.
+    expect(dry.out).toContain('TEST_RATCHET_RUN_CMD (the injected testability seam)');
+    expect(dry.out).toContain('fake-runner.mjs');
+
+    // So the un-injected spelling is driven SEPARATELY, against the committed census —
+    // read-only, and the only place the whole-suite argv can honestly be asserted.
+    const bare = { ...process.env };
+    delete bare.TEST_RATCHET_RUN_CMD;
+    delete bare.TEST_RATCHET_BASELINE;
+    const unseamed = spawnSync('node', [SCRIPT, '--dry'], { cwd: ROOT, encoding: 'utf8', env: bare });
+    expect(unseamed.status, `${unseamed.stdout}${unseamed.stderr}`).toBe(0);
+    expect(unseamed.stdout).toContain('npx vitest run --exclude="tests/build/**" --reporter=json');
+    expect(unseamed.stdout).toContain('THE WHOLE VITEST SUITE');
+    expect(unseamed.stdout).toContain(`frozen census:   ${Object.keys(baseline.entries).length} failing test(s)`);
+
+    // ⛔ THE POSITIVE CONTROL. Without it, a harness that silently stopped driving the
+    // script at all would pass the assertion above forever.
+    const wet = run({ entries: ENTRIES, suites: SUITES, captureRunner: true });
+    expect(wet.capture, 'the control did NOT spawn — the tripwire proves nothing').not.toBe(null);
+  });
+
+  test('--dry is a PURE REPORTER: every mode, always exit 0, and --update writes nothing', () => {
+    for (const args of [[], ['--verify-dist'], ['--bootstrap'], ['--update']]) {
+      const dry = run({
+        entries: ENTRIES, suites: SUITES, args: [...args, '--dry'], captureRunner: true,
+      });
+      expect(dry.status, `${args.join(' ') || 'default'} --dry: ${dry.out}`).toBe(0);
+      expect(dry.capture, `${args.join(' ') || 'default'} --dry spawned a runner`).toBe(null);
+    }
+    // The census a `--update --dry` was pointed at must come back BYTE-IDENTICAL: --dry
+    // returns before the write, so the re-freeze never happens.
+    const before = run({ entries: ENTRIES, suites: SUITES, args: ['--dry'] });
+    const frozen = readFileSync(before.baselineFile, 'utf8');
+    const upd = run({ entries: ENTRIES, suites: SUITES, args: ['--update', '--dry'] });
+    expect(readFileSync(upd.baselineFile, 'utf8')).toBe(frozen);
+  });
+
+  test('--from-log reproduces the spawned-runner verdict EXACTLY, without spawning', () => {
+    // Both directions of the verdict, so this cannot pass by always-green or always-red.
+    for (const [label, spec] of [
+      ['a regression outside the census', { entries: {}, suites: SUITES }],
+      ['the failure is banked and within ceiling', { entries: ENTRIES, suites: SUITES }],
+      ['everything passes', { entries: {}, suites: [{ file: REAL, tests: [T('a', 'passed')] }] }],
+    ]) {
+      const live = run({ ...spec, captureRunner: true });
+      expect(live.capture, `${label}: the control did not spawn`).not.toBe(null);
+
+      const log = run({
+        ...spec, captureRunner: true, args: ['--from-log', live.reportFile],
+      });
+      expect(log.capture, `${label}: --from-log SPAWNED a runner`).toBe(null);
+      expect(log.status, `${label}: exit differs — ${log.out}`).toBe(live.status);
+      expect(verdictOnly(log.out), `${label}: the verdict text differs`).toBe(verdictOnly(live.out));
+    }
+  });
+
+  test('--from-log fails closed on a missing report and NEVER feeds a freeze', () => {
+    const absent = run({
+      entries: ENTRIES, suites: SUITES, args: ['--from-log', join(TMP, 'no-such-report.json')],
+    });
+    expect(absent.status, absent.out).not.toBe(0);
+    expect(absent.out).toContain('does not exist — failing closed');
+
+    // ⛔ A census frozen from a report the CALLER supplies is not one this gate observed.
+    for (const mode of ['--update', '--bootstrap']) {
+      const live = run({ entries: ENTRIES, suites: SUITES });
+      const refused = run({
+        entries: ENTRIES, suites: SUITES, args: [mode, '--from-log', live.reportFile], noBaseline: mode === '--bootstrap',
+      });
+      expect(refused.status, `${mode}: ${refused.out}`).not.toBe(0);
+      expect(refused.out).toContain('--from-log is REFUSED');
+    }
+
+    // A value-less flag is an ERROR, never a silent fall-back to spawning the suite.
+    const bare = run({ entries: ENTRIES, suites: SUITES, args: ['--from-log'], captureRunner: true });
+    expect(bare.status, bare.out).not.toBe(0);
+    expect(bare.out).toContain('needs a report path');
+    expect(bare.capture, 'a malformed --from-log fell back to SPAWNING the suite').toBe(null);
+  });
 
   // ── anti-vacuity: "the suite actually ran" ────────────────────────────────
   describe('anti-vacuity sentinel — a runner that did not run is not "0 failures"', () => {
