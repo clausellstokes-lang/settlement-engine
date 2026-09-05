@@ -1,7 +1,52 @@
-Composed landing (chair car): the hash01 caller record re-runs at 18 — ENC-4's Herald writer is a declared arrival
+SEAT-78 car 1: the sealed SEAT-7a car is replayed onto the post-PROSE tip, and the one collision was two flags reaching for the same last line
 
-The entropy-root census pins the CODE-ONLY caller count of hash01; ENC-4's writer (envoyChanceMeetingNews.js) keys its variant pick on the cured root, so the record moves 17 -> 18 as a declared arrival, dark at this commit. Re-run, not transcribed: 18 measured at the composed tip; the mention population stays larger.
+REPLAY of the sealed car `ce9910469` (`refs/preserve/seat7a-newstrain-2026-09-04`, one car over
+`6c49ecbbf`) onto the product tip `5e28d5c83`. Its own message and design record stand; this
+message records ONLY what the replay had to decide, because a replay that silently re-authors a
+sealed car is the failure the chair's replay discipline exists to prevent.
 
-Seat: Fable 5.1 — validated
+PREMISE RE-DERIVED BEFORE REPLAYING, not taken from the brief. `irregularForce` · `participation01`
+· `commonsGrievance01` all read ZERO hits across `src/` and `tests/` at `5e28d5c83`, so the mint is
+still a mint and not a re-mint. `civilContests` reads 4 hits and `forceRatio` 4 — every one of them
+a FORWARD REFERENCE in a comment (treasury.js :490/:1036 and its walker naming SEAT-8's future
+widening; rulingPowerCoup.js :183, seatIntervention.js :28 and foreignSeatCoupAdj.test.js :146
+naming the sixth adj slot) and not a line of built mechanism. The car's own "0 hits at 6c49ecbbf"
+claim survives the move to the new base.
 
-Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>
+THE ONE CONFLICT, AND WHY BOTH SIDES HAD TO SURVIVE. `ENGINE_GATED_VIRTUAL_RULE_KEYS` in
+`simulationRules.js` took two independent appends at its tail: the mainline's `chanceEncountersEnabled`
+(ENCOUNTERS car ENC-3, 2026-09-03) and this car's `irregularForceEnabled` (2026-09-04). Neither
+touches the other's key and neither is a rewrite of the list — it is an append collision and nothing
+more, so the resolution is BOTH, mainline first in landing order. The list now closes on four seat/
+encounter keys and A1.2.12's three-key topology is spent as the car's comment says it is.
+
+THE OTHER FOUR OVERLAPS AUTO-MERGED AND WERE READ RATHER THAN TRUSTED. `rulingPowerCoup.js` took
++49/-2 on the mainline since `6c49ecbbf` — the `COUP_RISK_LABELS` / `coupRiskLabel` ladder lifted out
+of `EngineSections.jsx`, plus two PROSE em-dash cures inside `reason` strings — all of it disjoint
+from this car's `forceRatioFactor` parameter, budget block and pHold line, which survive verbatim.
+`commonsVoiceKernel.js` and `deploymentReturn.js` took PROSE cures only (an em-dash to parentheses,
+two to colons). ⭐ The new suites were checked for coupling to those exact strings BEFORE the merge
+was accepted, because a prose cure landing under a golden-adjacent suite is the recorded
+delimiter-cure hazard: `grep` finds no `reason`/`plot collapses`/`re-entered the field` assertion in
+either new file, so the cures cannot reach them.
+
+WHAT THIS CAR DOES NOT DO, verified rather than assumed: it takes NO register act (the two register
+cars the sealed message names are still the chair's), mints no persisted shape, moves no tuning
+value, and leaves the sixth ADDITIVE adj slot OPEN and unclaimed exactly as the sealed car left it.
+
+RECEIPTS EXECUTED AT THIS COMMIT: `eslint` over all nine touched files EXIT=0 with zero output ·
+module evaluation of the merged tree under node, which is the load-bearing proof that the append
+collision resolved to live code rather than to a file that merely parses — `irregularForce.js`
+exports `IRREGULAR_TUNING,irregularShareFactor,participation01` and `rulingPowerCoup.js` exports
+`COUP_COERCION,COUP_RISK_LABELS,coupContenders,coupRiskLabel,resolveCoupVerdict`, so BOTH sides of
+the conflict are present in one loaded module graph · the dark factor returns the literal `1` and
+garbage worlds return `1` rather than NaN.
+⚠ THE VITEST PROOFS ARE OWED AT THIS COMMIT AND ARE NOT CLAIMED: a chair gate
+(`npx vitest run tests/domain tests/lint tests/copy`, atomic lock PID 89333) held the machine mutex
+from 09:21, and this lane's law forbids a vitest run beside one. The run is queued through
+`sh scripts/gate-mutex.sh --run --` and its exits land in the lane receipt.
+
+Seat: Opus 5 — Fable-unvalidated
+Lane: SEAT-78
+
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>

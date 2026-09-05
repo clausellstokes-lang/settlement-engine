@@ -19,7 +19,8 @@ while [ $STREAK -lt 3 ]; do
 done
 echo "QUIET CONFIRMED after ${WAITED}s"
 echo "GATE_HEAD=$(git rev-parse HEAD)"
-echo "GATE_CARS=$(git rev-list --count $BASE..HEAD)"
+CARS=$(git rev-list --count $BASE..HEAD); echo "GATE_CARS=$CARS"
+[ "$CARS" = "4" ] || { echo "REFUSED: expected 4 cars over $BASE (3 replayed + the register car), found $CARS"; exit 7; }
 echo "GATE_PORCELAIN_PRE=[$(git status --porcelain -uall | wc -l | tr -d ' ')]"
 echo "GATE_LOAD_PRE=$(uptime | sed 's/.*averages: //')"
 echo "GATE_START=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
