@@ -161,6 +161,8 @@ const FROZEN_DEFERRED = {
     'DESK-3 authored comparisons: counts of settlements grouped BY heraldRegister\'s own banded prosperity word (prosperityRank orders the bars) — denominator facts over the register rows, never an economicState read of its own and never a per-settlement freshness claim. Same realm-roster standing as HeraldGazetteer.jsx above.',
   'src/components/OutputContainer.jsx':
     'Routing only: hands s.availableServices to ServicesTab as a prop. The covered child owns the note; a second one here would double it.',
+  'src/components/new/generalDeskRead.js':
+    'The general desk\'s ONE CALLER (the mount registry\'s ARM 2). It RENDERS NOTHING: it reads economicState / prosperity / economicViability only to assemble pool keys and hands back drawn corpus SENTENCES, which the owning tabs place. A freshness note is a rendered claim and this module has no surface to place one on; the tabs that render its lines carry their own standing. Same routing-only standing as OutputContainer.jsx above, one layer down.',
   'src/components/ShareToGallery.jsx':
     'Writes a gallery FACET (facetProsperity) onto a published record. Not a reader-facing economy display, and the published snapshot is a snapshot by definition.',
   'src/components/dossier/EngineSections.jsx':

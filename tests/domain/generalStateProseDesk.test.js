@@ -220,8 +220,8 @@ describe('the general desk — guard the guard', () => {
     // literal fill table.
     const shapes = mergedShapes();
     expect(Object.keys(SLOT_FILL_SHAPES).sort())
-      .toEqual(['calamity', 'event', 'faction', 'faction2', 'govFaction', 'issue',
-        'governing', 'settlement', 'stakes', 'timeband_age', 'timeband_since']);
+      .toEqual(['calamity', 'event', 'faction', 'faction2', 'govFaction', 'governing',
+        'issue', 'settlement', 'stakes', 'timeband_age', 'timeband_since']);
     for (const [slot, shape] of Object.entries(SLOT_FILL_SHAPES)) {
       expect(shape, `{${slot}} shape`).toBe(shapes.shapeOf(slot));
     }
@@ -998,7 +998,7 @@ describe('the history chapter', () => {
     for (const name of values) {
       const word = calamityFill(name);
       expect(word, `${name} yields no calamity word`).toBeTruthy();
-      expect(word, `${name}: the article survived`).not.toMatch(/^the /i);
+      expect(word, `${name}: the article survived`).not.toMatch(/^the /i); // anchored: the toBeTruthy on the line above proves a word came back, so this absence is the strip working
       expect(word, `${name}: not bare-common`).toBe(String(word).toLowerCase());
     }
     // DIRECTION 2 — a name carrying an embedded proper noun is REFUSED, not lowercased. The

@@ -177,6 +177,16 @@ export function generalDeskLines(settlement, options = {}) {
     { seed: String(r?._seed ?? r?.id ?? ''), audience: options.playerView ? 'player' : 'dm' },
   );
 
+  // ⚠ THE HISTORY GROUP IS DESTRUCTURED RATHER THAN CHAINED, and the reason is a measured
+  // FALSE POSITIVE rather than style. `check-observed-shape-readers.mjs` grounds an
+  // ungrounded receiver by the SINGLE-HOME rule, and `history` has exactly one home in the
+  // corpus — the settlement history container. So `prose.history.identity` was read as
+  // "a key no writer produces on the settlement's history", when `prose` is this desk's own
+  // frozen return value and `generalStateProse` is demonstrably its writer. It is the same
+  // defect that scan already documents for `window.history.replaceState`, with `prose` in
+  // the receiver slot; the exclusion there is a host-global list this name cannot join, and
+  // the baseline refuses to absorb a NEW identity, so the cure is at the read.
+  const { identity, founded, record } = prose.history;
   return Object.freeze({
     overview: Object.freeze({
       healthLines: Object.freeze(prose.overview.systemsHealth
@@ -197,10 +207,10 @@ export function generalDeskLines(settlement, options = {}) {
       situationLine: line(SITUATION_MOUNT, prose.overview.situation),
     }),
     history: Object.freeze({
-      identityLines: Object.freeze(prose.history.identity
+      identityLines: Object.freeze(identity
         .map((rung) => line(IDENTITY_MOUNT, rung)).filter(Boolean)),
-      foundedLine: line(FOUNDED_MOUNT, prose.history.founded),
-      recordLine: line(RECORD_MOUNT, prose.history.record),
+      foundedLine: line(FOUNDED_MOUNT, founded),
+      recordLine: line(RECORD_MOUNT, record),
     }),
     viability: Object.freeze({
       verdictLines: Object.freeze(prose.viability.verdict

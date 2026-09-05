@@ -268,12 +268,12 @@ describe('THE HISTORY CHAPTER DRAWS ON THE HISTORY TAB — and is silent for a f
     // Filling {calamity} with the event name verbatim printed "The The Economic Divide".
     // This is that defect as a rendered-output assertion rather than a note.
     const priv = renderHistory(false);
-    expect(priv, 'a doubled article reached the page').not.toMatch(/\bThe The\b/);
+    expect(priv, 'a doubled article reached the page').not.toMatch(/\bThe The\b/); // anchored: the toContain(RECORD) below proves this same render drew a calamity sentence
     // ANCHORED: the same render really did draw a calamity sentence, so the absence above
     // is the fix holding rather than the block having fallen silent.
     expect(priv).toContain(RECORD);
     // And no unfilled seam survived into the page.
-    expect(priv, 'an unfilled slot reached the reader').not.toMatch(/\{[a-z_]+\}/i);
+    expect(priv, 'an unfilled slot reached the reader').not.toMatch(/\{[a-z_]+\}/i); // anchored: the toContain(RECORD) two lines up proves the page carries corpus prose at all
   });
 
   test('the ROUTER threads publicDossier to the history tab', () => {
@@ -365,7 +365,7 @@ describe('THE HOOK FRAMING DRAWS — and is silent for a free viewer', () => {
     // test's — but the DIFFERENCE between the two renders is asserted exactly.
     expect(priv.length, 'the public render was not shorter — the gate drew nothing')
       .toBeGreaterThan(pub.length);
-    expect(pub, 'an unfilled seam reached a free viewer').not.toMatch(/\{[a-z_]+\}/i);
+    expect(pub, 'an unfilled seam reached a free viewer').not.toMatch(/\{[a-z_]+\}/i); // anchored: the toContain hook-prose assertion above proves the public render is non-empty
   });
 
   test('the ROUTER threads publicDossier to the plot-hooks tab', () => {
