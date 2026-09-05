@@ -19,6 +19,8 @@ Updated 2026-09-05 by the Fable chair (after §898: product 5e28d5c83, ledger 6c
 | ~~VOICE-JSX~~ DONE → 9d6e47dde sealed `voice-jsx-2026-09-05` (34/34 cured; Tier-3 GREEN with no refreeze; after PROSE + this land, all four voice rows retire) | | | | |
 | ~~ENC-4~~ BUILT → 9 cars 7be568047 sealed `enc4-2026-09-05`; ⚠ VITEST PROOF OWED at its landing (no quiet window opened); RULED (`rulings/RULING-ENC4-R1-R2-R9.md`): R1 one row now, §B deferred to ENC-4b (approacher only where known); R2 ratified; R9 ratified. Proofs at its landing. | | | | |
 
+## ⛔ VITEST HOLD in force (09-05 ~09:50): the four running lanes hold all vitest until the chair sends RESUME after the §899 gate. SEND RESUME.
+
 ## QUEUED — next slot takes the top row
 1. ~~OSR-SCHEMA17~~ DISPATCHED — build; dock laneINTEG-tree @ 940d161ca; briefs/brief-OSR-SCHEMA17.md. ⛔ Dispatch only when NO chair
    gate is running (its proofs run vitest and the corpus scan is heavy). Frees the 23-car desk consist.
