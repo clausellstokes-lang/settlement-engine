@@ -28,22 +28,46 @@
  * this file is the thing standing between the registry and a table full of citations that
  * cite nothing.
  *
- * ── WHAT IS DELIBERATELY NOT DRAWN HERE ──────────────────────────────────────────────
- * All three positions in this file are GLANCE rungs, so none of them prints a corpus
- * sentence today. That is R-DST-A held, not a shortfall: DS-ECO-1 already speaks in the
- * header about prosperity, and a second prosperity sentence in a 120px tile would be the
- * page contradicting itself about one fact. A tile is a glance surface by construction —
- * a label, a value, one sub-line — and the sub-line keeps its DATUM (`Output score:
- * n/100`, the lbs/day pair, the season gloss). Lighting a dark door adds; it never
- * displaces a number the reader already had.
+ * ── THE FOUR POSITIONS, AND WHICH OF THEM SPEAKS ─────────────────────────────────────
+ * ⚠ CORRECTED 2026-09-05 (DESK-11). This paragraph read "all three positions in this file
+ * are GLANCE rungs, so none of them prints a corpus sentence today". It was wrong on both
+ * counts and had been since the file landed, which is why it is corrected here rather than
+ * quietly reworded: a docblock that undercounts its own draws is the false-report shape,
+ * and the next reader would have looked for a fourth position that the docblock said did
+ * not exist. The file carries FOUR positions and ONE of them SPEAKS:
  *
- * ── THE SECOND EXPORT: `DeskLines` ───────────────────────────────────────────────────
- * A position whose rungs are PARAGRAPHS rather than tiles. It lives here rather than in
- * a file of its own for the reason this file exists at all — EconomicsTab.jsx has ~20
- * effective lines under its 600-line layer ceiling, and a new leaf would owe the economy
- * read-model census a fresh classification row for nothing. It reads no economy
- * read-model itself: it is handed rungs and a mount id and asks the registry what it may
- * show, exactly as the tiles above do.
+ *   `economics.prosperityHeader`  DS-ECO-1   **sentence** — printed at the header, below
+ *                                            `situationDesc` (the `header?.sentence` line)
+ *   `economics.economyTile`       DS-ECO-8   glance
+ *   `economics.foodTile`          DS-ECO-2   glance
+ *   `economics.seasonTile`        DS-ECO-2   glance
+ *
+ * THE THREE TILES ARE GLANCE RUNGS and that is R-DST-A held, not a shortfall: DS-ECO-1
+ * already speaks in the header about prosperity, and a second prosperity sentence in a
+ * 120px tile would be the page contradicting itself about one fact. A tile is a glance
+ * surface by construction — a label, a value, one sub-line — and the sub-line keeps its
+ * DATUM (`Output score: n/100`, the lbs/day pair, the season gloss). Lighting a dark door
+ * adds; it never displaces a number the reader already had.
+ *
+ * The tiles nevertheless read `drawn?.sentence` in their map body. That is not dead code
+ * and must not be "cleaned up": the depth is the REGISTRY's to decide, so flipping
+ * `economics.foodTile` to `sentence` in dossierMounts.js must start that tile speaking
+ * with no edit here. Removing the read would put the depth decision back in the component,
+ * which is the thing this whole layer exists to take away from it.
+ *
+ * ── THE SECOND EXPORT: `DeskLines`, NOW THE SHARED POSITION RENDERER ─────────────────
+ * A position whose rungs are PARAGRAPHS rather than tiles. It reads no economy read-model
+ * itself: it is handed rungs and a mount id and asks the registry what it may show, exactly
+ * as the tiles above do.
+ *
+ * ⚠ ITS HOME IS HISTORICAL AND ITS USE IS NO LONGER LOCAL (2026-09-05, DESK-ECON2). It was
+ * put in this file because EconomicsTab had ~20 effective lines under its 600-line layer
+ * ceiling and a new leaf would have owed the economy read-model census a classification row
+ * for nothing. Since the economy desk grew positions on `resources` and `services`, THOSE
+ * TABS IMPORT IT FROM HERE. That is a deliberate call, and the alternative was a second new
+ * `src/` file (a second lighting-census move and a second classification row) for a
+ * twelve-line generic renderer. Nothing about the component is economics-specific; if a
+ * later car wants it in a neutral leaf, moving it is a rename and three import lines.
  *
  * IT TAKES A LIST because one position may draw several LENSES of one block — the C3 law
  * is one sentence RUNG per block per page-set, and `power.criminalUnderside` already

@@ -9,8 +9,20 @@ import {computeChainSets, computeChainDepthMap} from '../tabHelpers';
 import EconomyFreshnessNote from '../EconomyFreshnessNote.jsx';
 import {ServiceItem} from '../serviceComponents';
 import {NarrativeNote} from '../NarrativeNote';
+import { economyDeskRead } from '../economyDeskRead.js';
+import { DeskLines } from './EconomicsGlance.jsx'; // the shared position renderer (see its docblock)
+import { compareCodepoint } from '../../../domain/deterministicSort.js';
 
-export function ServicesTab({ services, settlement, narrativeNote}) {
+/**
+ * @param {object} props
+ * @param {object} props.services
+ * @param {object} props.settlement
+ * @param {object} [props.narrativeNote]
+ * @param {boolean} [props.publicDossier] §885.3 — a free, anonymous gallery viewer draws no
+ *   corpus prose. Threaded from OutputContainer and answered inside economyDeskRead.
+ * @param {boolean} [props.playerView] the desk audience, the PowerTab term exactly.
+ */
+export function ServicesTab({ services, settlement, narrativeNote, publicDossier = false, playerView = false}) {
   const [search, setSearch] = useState('');
   const [openCats, setOpenCats] = useState({});
   const tier = settlement?.tier || 'town';
@@ -69,10 +81,23 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
 
   const totalImpaired = Object.values(catStats).reduce((s,c) => s+c.imp, 0);
   const totalDegraded = Object.values(catStats).reduce((s,c) => s+c.deg, 0);
+
   const _catsWithIssues = Object.entries(catStats).filter(([,c]) => c.imp>0||c.deg>0).length;
 
   // Category display order: strictly alphabetical — impairment is shown on each card
   const catOrder = Object.keys(services||{}).filter(k => services[k]?.length).sort((a,b) => a.localeCompare(b));
+  // THE ONE IMPAIRED HOUSE THE DESK MAY NAME (DS-SUP-3's second lens). Taken from THIS
+  // tab's own impairment sets rather than re-derived in the desk: the chips above and the
+  // sentence below must never disagree about which house is short. A CATEGORY THAT IS
+  // PRESENT is the pool's own condition, so the search runs over the rendered categories;
+  // the order is by CODEPOINT (never localeCompare — THE PROMISE is cross-device stability)
+  // so the same settlement names the same house on every machine.
+  const impairedInstitution = catOrder
+    .filter(cat => (catStats[cat]?.imp || 0) > 0)
+    .flatMap(cat => (services[cat] || []).map(svc => (typeof svc === 'object' ? svc.institution || '' : '')))
+    .filter(inst => inst && impaired.has(inst))
+    .sort(compareCodepoint)[0] || null;
+  const deskProse = economyDeskRead(settlement, { publicDossier, playerView, impairedInstitution });
 
   const toggleCat = (cat) => setOpenCats(prev => ({...prev, [cat]: prev[cat] !== false ? false : true}));
   const isOpen = (cat) => openCats[cat] !== false; // default open
@@ -87,6 +112,14 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
           absent trail ⇒ byte-identical tab. 'catalog' is the services wording of
           the one shared sentence pair (domain/display/economyFreshness.js). */}
       <EconomyFreshnessNote settlement={settlement} variant="catalog" />
+
+      {/* ── THE CATALOG AND ITS ABSENCES (DS-SUP-3 at services.catalogStanding) ──
+          TWO LENSES AT ONE POSITION: where the town stands against what a place its rung is
+          expected to keep, and the one house that is open and short of what it works with.
+          Additive — the counts strip, the category grid and the absence chips below are the
+          DATUM and are untouched. Silent on a settlement with no catalog at all, because the
+          tab itself returns early there (R-DST-K). */}
+      <DeskLines mount="services.catalogStanding" rungs={[deskProse.catalogStanding, deskProse.impairedService]} />
 
       {/* ── HEADER STRIP ────────────────────────────────────────────────── */}
       <div style={{background:'linear-gradient(to right,#f5ede0,#ede3cc)',border:'1px solid #c8b89a',padding:'10px 14px',marginBottom:14,display:'flex',alignItems:'center',gap:10,flexWrap:'wrap'}}>

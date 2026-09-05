@@ -21,7 +21,7 @@ import {
 import { tradeLabelOwnership } from '../../../domain/content/customTradeLabelOwnership.js';
 import MarketPricesSection from './MarketPricesSection.jsx';
 import EconomicsGlance, { DeskLines } from './EconomicsGlance.jsx'; // the tab's glance surface + its mount positions
-import { economyStateProse } from '../../../domain/display/stateProse/economyStateProse.js';
+import { economyDeskRead } from '../economyDeskRead.js'; // the desk's ONE caller + the §885.3 gate (walker ARM 2)
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
 import Button from '../../primitives/Button.jsx';
 
@@ -314,20 +314,12 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
   // EXACTLY on its frozen 600-line ceiling (measured — 605 with the colour written here),
   // which is why the band's accent is returned by the derivation instead.
   const granaryColor = granary.available ? (granary.band === 'nearly empty' ? '#8b1a1a' : granary.band === 'thin' ? '#a0762a' : '#1a5a28') : '#a0762a'; const treasury = deriveTreasuryGlance(s);
-  // THE ECONOMY DESK, read ONCE per render and routed by the mount registry below. The
-  // seed is the settlement's own stable identity, so THE PROMISE holds: same seed + same
-  // state ⇒ same sentence, forever. THE PUBLIC GATE (§885.3): a public gallery dossier is
-  // a PAID-SURFACE carve-out, so the desk is NOT DRAWN there and every rung is null ⇒
-  // drawnAtMount answers null at all five mounts ⇒ no corpus sentence renders anywhere.
-  // Datum is untouched: situationDesc, the tiles and their sub-lines never read the desk.
-  // THE AUDIENCE, the PowerTab term exactly (`playerView ? 'player' : 'dm'`): DS-ECO-12's
-  // criminal lens is `dm-only` on all five variants, so a desk called without one could
-  // never draw it and the block would ship mounted over a lens no world could reach. The
-  // default matches PowerTab's rather than inventing a second one — two tabs disagreeing
-  // about who is reading would be the real defect — and `publicDossier` still nulls
-  // everything below before the audience ever matters.
-  const audience = playerView ? 'player' : 'dm';
-  const deskProse = publicDossier ? Object.freeze({ prosperityHeader: null, prosperityRung: null, foodTile: null, granaryTile: null, foodSecurityRung: null, incomeMix: null, criminalLine: null, tradeProfile: null, shadowEconomy: null, tradeFlow: null }) : economyStateProse(s, { foodBalance: fbal, granaryOutlook: granary, flowDrift }, { seed: String(s?._seed ?? s?.id ?? ''), audience });
+  // THE ECONOMY DESK, read ONCE per render through its ONE CALLER and routed by the mount
+  // registry below. The seed, the audience and the §885.3 public gate all live in
+  // economyDeskRead.js now — four tabs draw this desk and the walker's ARM 2 admits exactly
+  // one file that calls it, so the call cannot live in a tab any more. Datum is untouched:
+  // situationDesc, the tiles and their sub-lines never read the desk.
+  const deskProse = economyDeskRead(s, { publicDossier, playerView, foodBalance: fbal, granaryOutlook: granary, flowDrift });
   const drawnFoodLine = drawnAtMount('economics.foodSecurity', deskProse.foodSecurityRung);
 
   return (
@@ -375,6 +367,12 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
 
       {/* ── TRADE PROFILE (exports + imports unified) ───────────────────── */}
       {(eco.primaryExports?.length>0||eco.primaryImports?.length>0||eco.localProduction?.length>0)&&<Section title="Trade Profile" collapsible defaultOpen>
+        {/* DS-ECO-10 at economics.exportPosture — the export POSTURE as a sentence, framing
+            the chips below. ADDITIVE: the "No significant exports." column empty-state is a
+            LABEL and stays; this is the town's own account of the same reading. The section
+            itself is the surface, so a town with no trade rosters at all renders neither
+            (R-DST-K). */}
+        <DeskLines mount="economics.exportPosture" rungs={[deskProse.exportPosture]} />
         <div style={{display:'grid',gridTemplateColumns:mobile?'1fr':'1fr 1fr',gap:12,marginBottom:eco.localProduction?.length>0?12:0}}>
           {/* Exports */}
           <div>

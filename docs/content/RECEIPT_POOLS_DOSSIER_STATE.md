@@ -176,7 +176,7 @@ values, never assumed correct because it was written down first.
 | `{chain}` | bare-common | the supply chain by its own label |
 | `{route}` | proper | the named road, lane, crossing or pass |
 | `{access}` | bare-common | the trade-access word as a BARE noun: *road · river · port · crossroads · pass*. All eight seams supply their own determiner (*"off its {access}"*, *"a working {access}"*, *"by the {access}"*), so a fill that carries one doubles it (`isolated` has no `{access}` fill — a variant needing one is not offered on an isolated town) |
-| `{complexity}` | bare-common | the economy's complexity as a bare common-noun phrase. **NOT the generator's `economicComplexity` display string**, which this row asserted for a month and which has never been a noun phrase: its eleven values are title-cased and five carry an em-dashed gloss (`Highly diversified — multiple major revenue streams`), so all five seams rendered *"the Highly diversified — multiple major revenue streams keeps more hands busy"*. The desk refuses a non-conforming fill and the five variants that name this slot go silent under anchored liveness until §0c-3 is ruled |
+| `{complexity}` | bare-common | the economy's complexity as a bare common-noun phrase. **NOT the generator's `economicComplexity` display string**, which this row asserted for a month and which has never been a noun phrase: its eleven values are title-cased and five carry an em-dashed gloss (`Highly diversified — multiple major revenue streams`), so all five seams rendered *"the Highly diversified — multiple major revenue streams keeps more hands busy"*. The desk therefore keeps the display string on its Economy DATUM row and fills the SEAM from `COMPLEXITY_NOUN`, the authored eleven-phrase vocabulary §0c-3 rules (CLOSED 2026-09-05); a spelling that table has not been told about contributes no fill and the variants naming this slot go silent under anchored liveness |
 | `{season}` | bare-common | the stockpile record's own season word |
 | `{band}` | RESERVED | a band word from a closed vocabulary — never a figure |
 | `{reason}` | bare-common | the RECORDED reason, typed, from the field's own reason slot |
@@ -216,28 +216,68 @@ block's SLOTS line; a slot declared need not be used.* A selector may therefore
 read a SLOTS line as the fill contract for the block, and a walker may check the
 first half of that rule and not the second.
 
-### §0c-3 THE COMPLEXITY BAND — **OPEN, THE CHAIR'S** (2026-09-02)
+### §0c-3 THE COMPLEXITY BAND — **CLOSED** (ruled by the chair 2026-09-05; owner veto open by name)
 
-`{complexity}` has a producer and the producer emits nothing this slot can take.
+`{complexity}` had a producer and the producer emitted nothing this slot could take.
 `deriveEconomicComplexity` (`src/generators/economy/prosperity.js`) returns eleven
 title-cased strings, five of them em-dashed clauses. Measured against `bare-common`:
-**11 of 11 are refused**, so today every variant naming `{complexity}` is ineligible and
-the DS-ECO-1 pools degrade under anchored liveness. **THIS IS DELIBERATELY DEFERRED AND
-DOCUMENTED, NOT A COVERAGE HOLE** — silence is correct under R-DST-K where the alternative
-is *"the Highly diversified — multiple major revenue streams keeps more hands busy"*.
+**11 of 11 are refused**, so every variant naming `{complexity}` was ineligible and the
+DS-ECO-1 pools degraded under anchored liveness. That silence was correct under R-DST-K
+while it lasted — the alternative was *"the Highly diversified — multiple major revenue
+streams keeps more hands busy"* — and it is now closed rather than still deferred.
 
-THE MEASURED COST, so the row can be ruled rather than guessed at. Eligible variants per
-DS-ECO-1 pool while the slot stays dark: C1 **1 of 3** · C2 2 of 3 · C3 2 of 3 · C4 3 of 3
-· C5 2 of 3. C1 at one variant means every high-rung, working-approach settlement in a
-world prints the SAME sentence, which is the one outcome the corpus exists to prevent.
+WHAT CLOSED IT: an AUTHORED closed vocabulary of eleven bare common-noun phrases and a
+total map from the eleven producer values onto it, wired as `COMPLEXITY_NOUN` in
+`economyStateProse.js` (the `ACCESS_NOUN` pattern) and declared in that module's
+`SLOT_FILL_TABLES`. The words are the CHAIR'S, not the wiring lane's, for the reason this
+row was opened: they are reader-facing words in the dossier's own register.
 
-WHAT WOULD CLOSE IT: a closed vocabulary of bare common-noun phrases and a total map from
-the eleven producer values onto it. Two shapes were tried and REFUSED on evidence rather
-than taste. Lower-casing the display string yields *"a agricultural surplus with trade
-links"* and *"the specialized production and trade keeps"*; splitting at the em dash yields
-adjectives (*highly diversified*, *concentrated*, *limited*) that no seam can take. The
-values are reader-facing words in the dossier's own register, so they are the chair's to
-read and veto, and this lane has deliberately NOT chosen them.
+| `deriveEconomicComplexity` value | `{complexity}` fill | reads as |
+|---|---|---|
+| `Highly diversified — multiple major revenue streams` | spread of trades | *the spread of trades keeps more hands busy* |
+| `Diversified — broad institutional economic base` | broad base of trades | *the broad base of trades keeps…* |
+| `Concentrated — fewer revenue streams than scale suggests` | handful of trades | *the handful of trades keeps…* |
+| `Diversified market economy` | market trade | *the market trade keeps…* |
+| `Specialized production and trade` | specialist trade | *the specialist trade keeps…* |
+| `Limited — narrow economic base for this scale` | narrow trade | *the narrow trade keeps…* |
+| `Mixed subsistence and market` | mix of field and market | *the mix of field and market keeps…* |
+| `Agricultural surplus with trade links` | surplus farm trade | *the surplus farm trade keeps…* |
+| `Subsistence with minor surplus` | small farm surplus | *the small farm surplus keeps…* |
+| `Subsistence with surplus` | farm surplus | *the farm surplus keeps…* |
+| `Subsistence — survival economy` | subsistence living | *the subsistence living keeps…* |
+
+Two mechanical shapes were tried and REFUSED on evidence rather than taste, and they stay
+refused: lower-casing the display string yields *"a agricultural surplus with trade links"*
+and *"the specialized production and trade keeps"*; splitting at the em dash yields
+adjectives (*highly diversified*, *concentrated*, *limited*) that no seam can take. Every
+phrase above begins with a consonant (the seams say both *"a {complexity}"* and *"the
+{complexity}"*), carries a singular head noun, and names no place, people or creed. The map
+is INJECTIVE — no two producer values share a phrase — and SURJECTIVE — no phrase is
+unreachable — so a reader can tell the eleven rungs apart and no authored word is dead.
+
+**THE MEASURED COST, BEFORE AND AFTER.** Eligible variants per DS-ECO-1 pool on a WORKING
+approach, measured through the shipped kernel rather than reasoned:
+
+| pool | dark (before) | filled (after) |
+|---|---|---|
+| C1 a high rung on a working approach | **1 of 3** | **3 of 3** |
+| C2 a high rung on a narrow approach | 2 of 3 | 3 of 3 |
+| C3 the middle rungs | 2 of 3 | 3 of 3 |
+| C4 a low rung on a working approach | 3 of 3 | 3 of 3 |
+| C5 a low rung on a narrow approach | 2 of 3 | 3 of 3 |
+| **block total** | **10 of 15** | **15 of 15** |
+
+C1 at one variant meant every high-rung, working-approach settlement in a world printed the
+SAME sentence, which is the one outcome the corpus exists to prevent; it now draws from
+three. C4 was already whole and is unmoved — it is the one combination whose three variants
+never named the slot.
+
+⚠ THE ROW IS TOTAL, NOT TOLERANT. An `economicComplexity` spelling this table has not been
+told about contributes NO fill, so the variants naming the slot go silent under anchored
+liveness rather than falling into a neighbouring phrase. A branch added to
+`deriveEconomicComplexity` therefore reds `economyStateProseDesk.test.js` (which exhausts
+the producer's input space and asserts the map total in BOTH directions) instead of
+shipping a settlement described by the wrong words.
 
 ### §0c-4 THE SHAPE RESIDUE — recorded, deliberately deferred, with its cure named
 

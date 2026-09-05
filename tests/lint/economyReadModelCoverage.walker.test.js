@@ -179,6 +179,10 @@ const FROZEN_DEFERRED = {
     'Derived-prose selection only: reads prosperity band + activeChains to CHOOSE descriptive paragraphs for DailyLifeTab, never to print a tally or a count.',
   'src/components/new/tabHelpers.js':
     'Pure helper (computeChainSets / computeChainDepthMap) with no render surface of its own; its callers are classified.',
+  'src/components/new/economyDeskRead.js':
+    'THE ECONOMY DESK\'S ONE CALLER (DESK-ECON2), and it RENDERS NOTHING: it reads the desk, answers the §885.3 public gate, and returns rungs. It enters this census on `settlement.availableServices`, which it hands to the canonical `deriveNotableAbsences` and never prints. A module with no surface owns no freshness claim; its four hosts (EconomicsTab, ServicesTab, ResourcesTab, DailyLifeTab) are classified in their own right, and two of them are COVERED. The corpus sentences it routes carry no figure at all — §0d bans digits from dossier-state prose and the kernel rejects a numeric fill outright — so nothing it returns is a tally.',
+  'src/components/new/tabs/DailyLifeTab.jsx':
+    'ANCHOR FACTS AND PROSE, NEVER A TALLY. The tab prints banded WORDS (Economy: Comfortable, Safety, Food) and an AI narrative, and since DESK-ECON2 it draws DS-ECO-8 — the prosperity ladder — at daily_life.standingOfLiving. Every one of those is a band or a sentence and none is a count, so the tallies note would caveat a figure the tab does not show. Same standing as EconomicsGlance.jsx above. ⚠ IT ENTERS THIS CENSUS ON A COMMENT, which is this file\'s own documented blind spot ("the scan is textual, so a COMMENT naming a read-model classifies its file"): the `prosperity:` mention is in the DS-ECO-8 draw-site note. Its real reach into the economy read-models is through two helpers it imports, new/dailyLifeLogic.js and new/economyDeskRead.js, both classified above. Classified rather than dodged — rewording a comment to leave a census is gaming the instrument.',
 };
 
 // ── The census ───────────────────────────────────────────────────────────────
