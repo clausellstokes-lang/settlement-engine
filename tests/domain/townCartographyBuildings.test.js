@@ -617,6 +617,48 @@ describe('TC-4 C4 — dwelling fill is population-led, identity-free and total',
     expect(new Set(ids).size).toBe(ids.length);
   });
 
+  it('a NON-FINITE population cannot unbind the ward dwelling cap (the fail-open repair)', () => {
+    const { input } = leafInputFor(SUBJECT);
+    const at = (population) => compileLeaves({
+      ...input, settlement: { ...input.settlement, population },
+    }).receipts.dwellingCount;
+    // The guard's declared fallback: a population that is not a FINITE number reads the
+    // tier's band floor, so all three non-finite classes land on one another and on that
+    // floor rather than each inventing a different town.
+    const floor = at(M.POPULATION_SPAN[input.tier][0]);
+    for (const poison of [NaN, Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY]) {
+      expect(at(poison), String(poison)).toBe(floor);
+    }
+    // ⛔ THE ANTI-VACUITY ARM, and it is the whole pin. `typeof NaN === 'number'` is
+    // TRUE, so before the repair a NaN population made `popWithin01` NaN, the dwelling
+    // `target` NaN, and `emitted >= target` FALSE for every value of `emitted` — the
+    // per-ward cap FAILED OPEN, emitting 193 dwellings on this row where the floor
+    // emits 118. A healthy mid-band population must therefore still out-emit the
+    // floor, or the equality above would pass on a leaf drawing nothing at all.
+    expect(at(M.POPULATION_SPAN[input.tier][1])).toBeGreaterThan(floor);
+  }, 120_000);
+
+  it('a NON-FINITE fabric reading grades as ABSENT evidence and never emits a non-finite', () => {
+    const { input } = leafInputFor(SUBJECT);
+    const rowsFor = (fabricAccumulation01) => compileLeaves({ ...input, fabricAccumulation01 })
+      .buildings.map((row) => `${row.id}|${row.agePermille}|${row.condition}`);
+    // A dark fabric layer contributes NO term (the fabricRead law). NaN and ±Infinity
+    // are not evidence of an ancient town, so they must read exactly as absence does.
+    const absent = rowsFor(null);
+    expect(absent.length).toBeGreaterThan(0);
+    for (const poison of [NaN, Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY]) {
+      expect(rowsFor(poison), String(poison)).toEqual(absent);
+    }
+    // Anti-vacuity: a REAL fabric reading must still move the grade, and no emitted
+    // age may be non-finite (`Object.is`, because `!==` reports a false match on NaN).
+    const lit = rowsFor(0.4);
+    expect(lit).not.toEqual(absent); // anchored: `absent` is asserted non-empty above
+    for (const row of compileLeaves({ ...input, fabricAccumulation01: NaN }).buildings) {
+      expect(Number.isFinite(row.agePermille), row.id).toBe(true);
+      expect(Object.is(row.agePermille, NaN), row.id).toBe(false);
+    }
+  }, 120_000);
+
   it('a ZERO-PARCEL compile emits nothing and does not throw', () => {
     const empty = compileTownBuildingLayers({
       buildings: [],
