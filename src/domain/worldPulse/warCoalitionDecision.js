@@ -1,5 +1,6 @@
 /** WR-6 alliance-call census and bounded join/refusal decision. */
 
+import { clamp01 } from '../../kernel/math.js';
 import { thresholdFactorOf } from './dispositionProfile.js';
 import { readWarSeatBooks } from './warSeatBooks.js';
 import { readAllianceWebRisk } from './warAllianceRisk.js';
@@ -28,7 +29,24 @@ import { treatyEligibleWarTargets } from './warIntent.js';
 // chooser's arm uses; see conquestDoctrineStage.conquestMarchAdvisedFor.
 import { conquestJoinLift01 } from './conquestDoctrineStage.js';
 
-const clamp01 = (value) => Math.max(0, Math.min(1, Number(value) || 0));
+// ⛔ WHY THE KERNEL CLAMP IS BYTE-NEUTRAL HERE, AND WHAT THAT DEPENDS ON. This file
+// used to roll its own COERCE clamp01 (`Math.max(0, Math.min(1, Number(value) || 0))`),
+// which the kernel parity test names as a NEGATIVE CONTROL: on a numeric string,
+// a boolean, a one-element array or +Infinity the two DISAGREE. It migrated anyway,
+// under the call-site-neutrality bar, because every argument below is already a
+// finite number by the time it arrives — NOT because the two expressions agree:
+//   · `relation.*` is never raw persisted state. `warCoalitionGraph.js` routes every
+//     edge through `ensureRelationshipState` first, and `relationshipState.js` clamps
+//     `trust` / `dependency` / `pactStrength` with its OWN coerce clamp on the way
+//     through, so a hand-edited save holding `"0.5"` is absorbed one module upstream.
+//   · `books.continueBias01` is computed fresh inside `readWarSeatBooks` off the
+//     kernel clamp, never passed through from world state.
+//   · the two outer sums add `(1 - risk.risk01)` and `conquestJoinLift01`, which are
+//     respectively a clamped [0,1] risk and either a frozen constant or 0.
+// ⚠ THE COUPLING IS IMPLICIT: this stays byte-neutral only while `relationshipState.js`
+// keeps COERCE semantics. It is frozen in the clamp-primitive ratchet baseline today;
+// if it is ever migrated, a persisted string would start reading 0 here with NO edit
+// to this file. Re-prove this call site before migrating that one.
 function codepoint(a, b) { return a < b ? -1 : a > b ? 1 : 0; }
 function asObject(value) {
   return value && typeof value === 'object' && !Array.isArray(value) ? value : {};
