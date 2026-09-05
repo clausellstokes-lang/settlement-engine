@@ -8,7 +8,7 @@ import {NarrativeNote} from '../NarrativeNote';
 import { criminalOpNote, deriveCriminalStructure, deriveDefenseReadiness, deriveSupportingCapabilities, deriveGuardAssessment, deriveDefenseVulnerabilities, DEFENSE_STRESS_STATUS } from '../../../domain/display/defenseDisplay.js';
 import { safetySeverityOf } from '../../../domain/display/safetySeverity.js';
 import { scoreBand, scoreColor } from '../../../domain/display/defenseScoreBands.js';
-import { defenseForcesProse, defenseMilitaryStatusProse, defensePostureProse, defenseStateProse, defenseThreatProse, defenseWallRationaleProse } from '../../../domain/display/stateProse/defenseStateProse.js';
+import { defenseCriminalProse, defenseForcesProse, defenseMilitaryStatusProse, defensePostureProse, defenseStateProse, defenseThreatProse, defenseWallRationaleProse } from '../../../domain/display/stateProse/defenseStateProse.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
 import { truncateAtWord } from '../../../lib/text.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
@@ -53,6 +53,14 @@ const MILITARY_STATUS_MOUNT = 'defense.militaryStatus';
  * described by the unwalled pools rather than asked why it keeps a wall it no longer has.
  */
 const WALL_RATIONALE_MOUNT = 'defense.wallRationale';
+
+/**
+ * The criminal-architecture position. TWO lenses of DS-DEF-4 at ONE position. ⚠ Two of its
+ * capture pools are DM-ONLY by the kernel's covertness gate — a player-facing dossier is not
+ * told the hall has been bought — so the `audience` this tab passes is load-bearing here in
+ * a way it is not for the other mounts.
+ */
+const CRIMINAL_MOUNT = 'defense.criminalStructure';
 
 export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false, playerView = false}) {
   const [expandedThreat, setExpandedThreat] = useState(null);
@@ -188,6 +196,17 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
   // Criminal structure classification (shared with the PDF viewModel)
   const csd = deriveCriminalStructure(r);
   const crimStructure = csd?.key || null;
+  // DS-DEF-4, the criminal architecture. Same public gate as every other mount on this tab;
+  // the desk is handed the SAME structure key the card below renders from, so the sentence
+  // and the classification beneath it cannot be about two different readings.
+  const criminalProse = publicDossier
+    ? Object.freeze({ structure: null, capture: null })
+    : defenseCriminalProse(r, crimStructure, {
+      seed: String(r?._seed ?? r?.id ?? ''),
+      audience: playerView ? 'player' : 'dm',
+    });
+  const criminalLines = ['structure', 'capture']
+    .map((k) => drawnAtMount(CRIMINAL_MOUNT, criminalProse[k])?.sentence).filter(Boolean);
 
   // Safety severity for UI theming — via the shared safetySeverity chokepoint
   // (M2), TOTAL over the producer's label vocabulary. 'Strained' (the middle
@@ -353,6 +372,14 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
 
           {!crimStructure&&<div style={{background:swatch['#F0FAF4'],border:'1px solid #a8d8b0',borderLeft:'3px solid #2d7a44',padding:'8px 13px',fontSize:FS.sm,color:swatch.success}}>
             No organized criminal infrastructure detected. Crime exists at a petty, individual level.
+          </div>}
+
+          {/* DS-DEF-4: the shape of the crime and how far it has reached, in the town's own
+              voice. Two lenses of one block at one position. */}
+          {criminalLines.length>0&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #8b1a1a',padding:'9px 13px'}}>
+            {criminalLines.map((line,i)=>(
+              <p key={i} style={{fontSize:i===0?FS.sm:FS.xs,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.55,margin:i===0?0:'5px 0 0',fontStyle:'italic'}}>{line}</p>
+            ))}
           </div>}
 
           {/* Criminal institutions as power structures */}
