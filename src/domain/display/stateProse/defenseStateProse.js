@@ -1394,10 +1394,25 @@ export function magicDependencyPoolKey(magicDependency, namedChain) {
  * DS-DEF-9 frames no DM-editable field (`ViabilityTab`'s magic-dependency paragraph is a
  * hard-coded component string, not a generator or DM field), so this is a plain rung.
  *
+ * ⛔⛔ THE RETURN KEY IS `arcaneReliance` AND NOT `dependency`, AND THE NAME IS THE POINT.
+ * A first cut called it `dependency`, which reads naturally and is WRONG in this estate:
+ * `dependency` is already the supply-chain vocabulary's own word — `activeChains[].dependency`,
+ * `magicSubstitution.js`'s `substitution.dependency.band`, `EconomicsTrade.jsx`'s
+ * `c.dependency`. Reusing it for a prose rung puts two unrelated meanings on one identifier
+ * in a tree where the first is load-bearing.
+ * ⭐ AND THE ESTATE SAID SO BEFORE A READER DID. `check-observed-shape-readers` convicted
+ * `magicProse.dependency` with `sentence on dependency — a key no writer produces`. Its
+ * DIAGNOSIS was wrong — the rung genuinely carries a `sentence`, written by `legibilityRung`
+ * two modules away, so the read was never dead. What it had actually found is the COLLISION:
+ * it grounds a receiver by name, and the corpus's `dependency` is a supply-chain record with
+ * no `sentence` on it. A false positive about the behaviour and a true one about the name,
+ * which is worth more than the arm it was written for. The cure is the rename, not a
+ * contortion to dodge the scanner.
+ *
  * @param {{name?: string, defenseProfile?: {magicDependency?: unknown}|null,
  *   economicState?: {activeChains?: unknown}|null}|null|undefined} settlement
  * @param {{seed?: string, audience?: string}} [options]
- * @returns {Readonly<{dependency: object|null}>}
+ * @returns {Readonly<{arcaneReliance: object|null}>}
  */
 export function defenseMagicDependencyProse(settlement, options = {}) {
   const chains = settlement?.economicState?.activeChains;
@@ -1410,7 +1425,7 @@ export function defenseMagicDependencyProse(settlement, options = {}) {
   );
 
   return Object.freeze({
-    dependency: poolKey
+    arcaneReliance: poolKey
       ? legibilityRung('', readStateProse(CORPUS, 'DS-DEF-9', poolKey, { ...options, slots }), [])
       : null,
   });
@@ -1496,9 +1511,15 @@ export const DEF7_DARK_POOLS = Object.freeze([
  * on the same tab already speaks. This is a C3 finding, not a producer finding.
  *
  *   THE FIFTEEN POSTURES ⇄ `defense.militaryStatus` (DS-DEF-8). `MILITARY_POSTURE` is an
- *     exact 1:1 with the fifteen pools (the corpus even carries the producer's own stress
- *     token in parentheses where its word differs — `INTERNAL PRESSURE (famine)`), so the
- *     route would be trivial. But DS-DEF-8 already speaks about the SAME active stress at
+ *     exact 1:1 with the fifteen pools, and the corpus even names the producer's own stress
+ *     type in parentheses where its word differs — `INTERNAL PRESSURE (famine)`,
+ *     `COMMAND SPLIT (politically fractured)` — so the route would be cheap.
+ *     ⚠ THOUGH NOT FREE, AND THE ARM THAT PINS THIS CORRECTED THE CLAIM BY REDDING: the
+ *     parenthetical is the token with its UNDERSCORES SPELLED AS SPACES, not the token.
+ *     Six pools carry one; keying on it verbatim reaches exactly THREE (`famine`,
+ *     `indebted`, `wartime` — the single-word tokens, which have no underscore to lose) and
+ *     drops the other three in silence. The label-trap rule one notch smaller than the three
+ *     instances above it, and measured rather than assumed. But DS-DEF-8 already speaks about the SAME active stress at
  *     the SAME banner, and the two sentences finish with the same clause:
  *       DS-DEF-8   "…there is a crisis on it, and the arrangements have been rebuilt
  *                   around the crisis."
