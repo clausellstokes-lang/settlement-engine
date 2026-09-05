@@ -66,8 +66,8 @@ describe('selectSlices — campaign-wide scope (V-26a)', () => {
     // every id is unique (no cross-member collision that would confuse resolution)
     expect(new Set(ids).size).toBe(ids.length);
     // titles carry the settlement name so a receipt chip reads legibly
-    expect(slices.some((s) => /^Rivermeet — /.test(s.title))).toBe(true);
-    expect(slices.some((s) => /^Thornwall — /.test(s.title))).toBe(true);
+    expect(slices.some((s) => /^Rivermeet: /.test(s.title))).toBe(true);
+    expect(slices.some((s) => /^Thornwall: /.test(s.title))).toBe(true);
   });
 
   it('realm-scoped briefs compose ONCE for the whole campaign (never namespaced)', () => {
