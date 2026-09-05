@@ -587,10 +587,27 @@ describe('pantheon — realm arcs (Ascendancy / Twilight / the last altar)', () 
     // and holds at its measured value, and the registered-minus-routed difference holds at
     // eight — which is exactly what a kind that carries a desk is supposed to do, and the
     // opposite of what WF-1c's prefix-routed kind would have done.
-    expect(registries.length).toBe(11);
-    expect(registries.filter(([, rows]) => rows.length < 5).map(([name]) => name)).toEqual(['INFORMATION', 'FAITH']);
-    expect(allRows.length).toBe(113);
-    expect(routedTokens.length).toBe(379);
+    // ⛔⛔ THE FORK BIT AGAIN, ONE WAVE LATER, AND IT LANDED RED AND UNSEEN. ENC-4 registered the
+    // estate's SEVENTH family and moved the four figures in kindPoolFloors.walker.test.js; it did
+    // NOT move these, and no vitest ran in that lane, so four arms of this test were RED at its
+    // tip. ENC-4b measured it (4 of 6 arms red at `7be568047`, before this lane touched anything)
+    // and moves them here. ⚠ The structural repair above removed the duplicated LIST and left the
+    // FREEZES literal by ruling, so a hand move in the registering commit is still the contract —
+    // and it has now been missed twice, at WF-8a and at ENC-4. That the same paragraph warns
+    // about the same failure it then suffered is the strongest argument on record for lifting
+    // these six into the shared roster helper beside KIND_REGISTRIES; that is a chair act, and it
+    // is recorded here rather than taken.
+    //
+    // THE ATTRIBUTION, SPLIT: `registries` 11 -> 12 and the small-family list are ENC-4's alone
+    // (a whole new family, CHANCE_MEETING). `allRows` 113 -> 115 and `routedTokens` 379 -> 381
+    // are ONE EACH: ENC-4's `chance_meeting_recorded` and ENC-4b's `chance_meeting_exposed`.
+    // The two load-bearing figures did NOT move and that is the point: `unvoiced` is a
+    // shrink-only ceiling and holds, and the registered-minus-routed difference holds at eight,
+    // which is exactly what two kinds that carry a desk are supposed to do.
+    expect(registries.length).toBe(12);
+    expect(registries.filter(([, rows]) => rows.length < 5).map(([name]) => name)).toEqual(['INFORMATION', 'FAITH', 'CHANCE_MEETING']);
+    expect(allRows.length).toBe(115);
+    expect(routedTokens.length).toBe(381);
     expect(unvoiced.length).toBe(274);
     expect(allRows.length - routedTokens.filter(t => registered.has(t)).length).toBe(8);
   });
