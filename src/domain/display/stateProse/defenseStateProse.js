@@ -15,6 +15,8 @@
  *             reason and the single act that lights it are stated at the block below.
  *   DS-DEF-11 Defense › Why the wall, and why not — the perimeter × the country × the tier
  *             × `defenseProfile.economicGates.military`. The leaf's one second slot.
+ *   DS-DEF-4  Defense › Criminal structure + capture consequence — `deriveCriminalStructure`
+ *             × `powerStructure.criminalCaptureState`, two exact 1:1 vocabularies.
  *
  * ── ⭐⭐ DS-DEF-1'S BLOCKER DECAYED, AND NOBODY NOTICED — the paragraph it replaced ───
  *
@@ -100,7 +102,9 @@ const CORPUS = /** @type {import('./stateProseKernel.js').StateProseCorpus} */ (
  * variants name `{settlement}` and nothing else — measured, all seven pools.
  * @type {Readonly<Record<string, string>>}
  */
-export const SLOT_FILL_SHAPES = Object.freeze({ settlement: 'proper', defwork: 'bare-common' });
+export const SLOT_FILL_SHAPES = Object.freeze({
+  settlement: 'proper', defwork: 'bare-common', seat: 'proper',
+});
 
 /**
  * This desk owns NO literal fill table, and says so rather than omitting the field — the
@@ -544,6 +548,99 @@ export function defensePostureProse(settlement, options = {}) {
     posture: projected(posturePoolKey(settlement?.defenseProfile?.readiness?.score)),
     terrain: projected(terrainDefencePoolKey(terrain)),
     prize: projected(strategicPrizePoolKey(terrain)),
+  });
+}
+
+/**
+ * ── DS-DEF-4 · CRIMINAL STRUCTURE + CAPTURE CONSEQUENCE ──────────────────────────────
+ *
+ * Two lenses, and BOTH of their vocabularies are exact 1:1s with a producer — which is why
+ * this block needs no judgment about where to cut a band. `deriveCriminalStructure` returns
+ * one of `organized · semi-organized · diffuse` or null, and the corpus wrote exactly four
+ * `structure …` pools including the null one. `computeCriminalCaptureState` is typed
+ * `'none'|'adversarial'|'equilibrium'|'corrupted'|'capture'` and the corpus wrote exactly
+ * those five `capture …` pools. Both are asserted TOTAL in both directions by the desk
+ * suite, the label-trap rule applied to two more vocabularies.
+ *
+ * ⚠ AN ABSENT CAPTURE STATE IS NOT `none`. `DefenseTab` reads
+ * `powerStructure?.criminalCaptureState || 'none'` for its own styling, and that `|| 'none'`
+ * is right for a colour and wrong for a sentence: "Nothing criminal has reached the hall" is
+ * a claim, and a settlement with no power structure has not been measured for it. The desk
+ * accepts only a value the producer's own vocabulary contains and is otherwise silent.
+ *
+ * ⚠ `{seat}` IS THE GOVERNING BODY'S OWN GENERATED NAME — `powerStructure.government`,
+ * which `rulingStructure` sets from the governing faction entry (*Town Council*, *Headman's
+ * Authority*, *Grand Merchant Oligarchy*). The annex bans a baked noun here in terms: "prose
+ * that hard-codes *the council* is wrong on most settlements in the realm". Where the name
+ * is missing the fill is refused and the kernel drops the variants that need it — one of the
+ * three variants in each capture pool; the other two say "the hall" in their own words.
+ */
+
+/** The four `structure …` pool keys, by the producer's own key. `null` is a reading. */
+const CRIMINAL_STRUCTURE_POOL = Object.freeze({
+  organized: 'structure organized',
+  'semi-organized': 'structure semi-organized',
+  diffuse: 'structure diffuse',
+});
+
+/** The producer's five capture states, exported so the suite can bind them both ways. */
+export const CRIMINAL_CAPTURE_STATES = Object.freeze([
+  'none', 'adversarial', 'equilibrium', 'corrupted', 'capture',
+]);
+
+/** Every structure key this desk recognises, exported for the same both-ways binding. */
+export const RECOGNISED_CRIMINAL_STRUCTURES = Object.freeze(Object.keys(CRIMINAL_STRUCTURE_POOL));
+
+/**
+ * DS-DEF-4 lens 1 — WHAT SHAPE THE CRIME HAS. `null` from the producer is the fourth
+ * reading, not an absence: "no criminal infrastructure has been identified" is a finding.
+ * @param {unknown} structureKey the `key` of `deriveCriminalStructure`, or null
+ * @returns {string|null}
+ */
+export function criminalStructurePoolKey(structureKey) {
+  const key = text(structureKey);
+  if (!key) return 'structure null (nothing organized recognized)';
+  return CRIMINAL_STRUCTURE_POOL[key] || null;
+}
+
+/**
+ * DS-DEF-4 lens 2 — HOW FAR IT HAS REACHED INTO THE HALL. Total over the producer's typed
+ * vocabulary; anything else is silence rather than `none`.
+ * @param {unknown} captureState @returns {string|null}
+ */
+export function criminalCapturePoolKey(captureState) {
+  const state = text(captureState);
+  return CRIMINAL_CAPTURE_STATES.includes(state) ? `capture ${state}` : null;
+}
+
+/**
+ * THE CRIMINAL-ARCHITECTURE DESK — DS-DEF-4's two lenses at one position.
+ *
+ * ⚠ It takes the structure KEY rather than deriving it, so the tab hands over the value it
+ * is already rendering from (`deriveCriminalStructure(r)`) and the sentence and the card
+ * beneath it cannot be about two different classifications.
+ *
+ * @param {{name?: string, powerStructure?: {government?: unknown,
+ *   criminalCaptureState?: unknown}|null}|null|undefined} settlement
+ * @param {unknown} structureKey
+ * @param {{seed?: string, audience?: string}} [options]
+ * @returns {Readonly<{structure: object|null, capture: object|null}>}
+ */
+export function defenseCriminalProse(settlement, structureKey, options = {}) {
+  const power = settlement?.powerStructure || {};
+  const slots = {
+    settlement: properFill(text(settlement?.name)),
+    seat: properFill(text(power.government)),
+  };
+
+  /** @param {string|null} poolKey */
+  const rung = (poolKey) => (poolKey
+    ? legibilityRung('', readStateProse(CORPUS, 'DS-DEF-4', poolKey, { ...options, slots }), [])
+    : null);
+
+  return Object.freeze({
+    structure: rung(criminalStructurePoolKey(structureKey)),
+    capture: rung(criminalCapturePoolKey(power.criminalCaptureState)),
   });
 }
 
