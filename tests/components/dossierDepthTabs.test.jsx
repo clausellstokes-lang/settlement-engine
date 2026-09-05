@@ -15,6 +15,7 @@
  */
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen, cleanup } from '@testing-library/react';
+import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 
 // Mock the store: WarFaithTab reads campaigns/savedSettlements/auth, and its
 // composed FaithSection reads auth.tier/isElevated/the upsell seam.
@@ -41,6 +42,9 @@ import WarTab from '../../src/components/new/tabs/WarTab.jsx';
 import FaithTab from '../../src/components/new/tabs/FaithTab.jsx';
 import SubstrateTab from '../../src/components/new/tabs/SubstrateTab.jsx';
 import MagicTab from '../../src/components/new/tabs/MagicTab.jsx';
+// DESK-4: the arms below assert the RENDERED DOM against the corpus itself rather than
+// against transcribed prose, so a re-authored variant moves the pin with it.
+import { DOSSIER_STATE_PROSE_WAR_FAITH as WAR_FAITH } from '../../src/data/dossierStateProse/warFaith.generated.js';
 
 // A distinctive latent-deity name — if it ever appears in a free War & Faith
 // render, the constitutional privacy gate has failed.
@@ -289,6 +293,136 @@ describe('WarTab — believed units, staleness bands, and the DM-truth divergenc
     expect(screen.getByTestId('war-tab')).toBeTruthy();
     expect(screen.queryByTestId('war-units')).toBeNull();
     expect(container.textContent).toMatch(/outside any live campaign/i);
+  });
+});
+
+/**
+ * ── DESK CAR 4: THE WAR & FAITH DESK, DRAWN (the CITATION LAW's own arm) ─────────────
+ *
+ * The mount walker's reachability arm can only see that a mount id appears once as a
+ * string literal under src/components — it cannot tell a real draw from a decorative
+ * literal, so planting bare literals PASSES THE GATE AND LIES. A mount is real only if the
+ * RENDERED DOM carries the corpus sentence or band. These arms are that proof, for both
+ * host tabs of the first corpus leaf to span two.
+ *
+ * Each public-dossier arm asserts BOTH DIRECTIONS on the SAME settlement through
+ * `expectPresentThenAbsent`, so it cannot pass vacuously: a render that simply produced
+ * nothing fails the liveness half instead of passing a bare exclusion.
+ */
+describe('WarTab — the war half of the warFaith desk (DESK-4)', () => {
+  const asWarOwner = () => useStore.__set({
+    auth: { tier: 'premium' }, campaigns: [warCampaign()], savedSettlements: WAR_SAVES,
+  });
+
+  it('draws the DS-WAR-1 standing sentence — a REAL draw, not a planted literal', () => {
+    asWarOwner();
+    render(<WarTab settlement={homeTown()} saveId="home" />);
+    const standing = screen.getByTestId('war-desk-standing');
+    // Homestead has an army abroad besieging Foehold ⇒ the `On campaign` pool. The expected
+    // text is READ OUT OF THE CORPUS rather than transcribed, so a re-authored variant moves
+    // this pin with it instead of reddening on prose churn.
+    const authored = WAR_FAITH['DS-WAR-1'].pools['statusLabel: On campaign']
+      .map((v) => v.text.replace(/\{settlement\}/g, 'Homestead').replace(/\{counterpart\}/g, 'Foehold'));
+    expect(authored.some((line) => standing.textContent.includes(line))).toBe(true);
+  });
+
+  it('THE PUBLIC GATE: the same town draws the sentence privately and NOTHING publicly', () => {
+    asWarOwner();
+    const priv = render(<WarTab settlement={homeTown()} saveId="home" />);
+    const privText = priv.container.textContent;
+    cleanup();
+    asWarOwner();
+    const pub = render(<WarTab settlement={homeTown()} saveId="home" publicDossier />);
+    const pubText = pub.container.textContent;
+    const line = WAR_FAITH['DS-WAR-1'].pools['statusLabel: On campaign']
+      .map((v) => v.text.replace(/\{settlement\}/g, 'Homestead').replace(/\{counterpart\}/g, 'Foehold'))
+      .find((t) => privText.includes(t));
+    expect(line, 'the private render drew no DS-WAR-1 sentence to test the gate with').toBeTruthy();
+    expectPresentThenAbsent(privText, pubText, line, 'the public gate: DS-WAR-1 on the war tab');
+    // The DATUM is untouched by the gate — the war block's own rows still render.
+    expect(pubText).toMatch(/Deployed\./);
+  });
+
+  it('the DORMANT NOTE replaces the plain line only when the whole PAGE-SET is at rest', () => {
+    // A campaign settlement with no war beat, no treaty and no patron: DS-WAR-3's exact
+    // condition, and the only block on this leaf whose condition spans both tabs.
+    useStore.__set({
+      auth: { tier: 'premium' },
+      campaigns: [{ id: 'c-quiet', settlementIds: ['quiet'], worldState: { tick: 3, canonizedAt: '2026-01-01T00:00:00.000Z' } }],
+      savedSettlements: [{ id: 'quiet', settlement: { name: 'Stillwater' } }],
+    });
+    const { container } = render(<WarTab settlement={{ id: 'quiet', name: 'Stillwater', config: {} }} saveId="quiet" />);
+    const authored = WAR_FAITH['DS-WAR-3'].pools['*']
+      .map((v) => v.text.replace(/\{settlement\}/g, 'Stillwater'));
+    expect(authored.some((line) => container.textContent.includes(line))).toBe(true);
+    // It REPLACES the plain sentence rather than standing under it — both say the town is
+    // at peace, and printing them an inch apart is the page saying one thing twice.
+    // anchored: the corpus line is asserted PRESENT in this same textContent on the line above, so an emptied render cannot pass this absence
+    expect(container.textContent).not.toContain('no host abroad, no siege at the walls');
+  });
+});
+
+describe('FaithTab — the faith half of the warFaith desk (DESK-4)', () => {
+  it('draws the DS-FTH-1 seat sentences and the DS-FTH-3 creed sentences', () => {
+    useStore.__set({ auth: { tier: 'anon' } });
+    render(<FaithTab settlement={liveFaithTown()} />);
+    expect(screen.getByTestId('faith-desk-seat').textContent).toContain('Sunlord Aurelian');
+    // DS-FTH-3 speaks at `faith.creedStanding`: the patron's standing is `ascendant`.
+    const creed = screen.getByTestId('faith-desk-creed');
+    const authored = WAR_FAITH['DS-FTH-3'].pools['STANDING: ascendant']
+      .map((v) => v.text.replace(/\{creed\}/g, 'Sunlord Aurelian').replace(/\{settlement\}/g, 'Sunhold'));
+    expect(authored.some((line) => creed.textContent.includes(line))).toBe(true);
+  });
+
+  it('⭐ THE ONE GLANCE ROW: the niche row keeps the band word and does NOT speak', () => {
+    useStore.__set({ auth: { tier: 'anon' } });
+    render(<FaithTab settlement={liveFaithTown()} />);
+    const glance = screen.getByTestId('faith-desk-niche-glance');
+    // The band word the row already carries survives...
+    expect(glance.textContent).toMatch(/ascendant/);
+    // ...and the corpus sentence does NOT, because the registry says `glance` here. This is
+    // C3 held across a real page: DS-FTH-3 speaks ONCE, at faith.creedStanding above.
+    const spoken = screen.getByTestId('faith-desk-creed').textContent;
+    // anchored: the SAME sentence is asserted present in `spoken` on the line below, so this absence is the rung being stripped rather than the corpus being silent
+    expect(glance.textContent).not.toContain(spoken.slice(0, 40));
+    expect(spoken.length).toBeGreaterThan(40);
+  });
+
+  it('THE PUBLIC GATE: the same town speaks privately and says NOTHING publicly', () => {
+    useStore.__set({ auth: { tier: 'anon' } });
+    const priv = render(<FaithTab settlement={liveFaithTown()} />);
+    const privText = priv.container.textContent;
+    cleanup();
+    useStore.__set({ auth: { tier: 'anon' } });
+    const pub = render(<FaithTab settlement={liveFaithTown()} publicDossier />);
+    const pubText = pub.container.textContent;
+    const line = WAR_FAITH['DS-FTH-3'].pools['STANDING: ascendant']
+      .map((v) => v.text.replace(/\{creed\}/g, 'Sunlord Aurelian').replace(/\{settlement\}/g, 'Sunhold'))
+      .find((t) => privText.includes(t));
+    expect(line, 'the private render drew no DS-FTH-3 sentence to test the gate with').toBeTruthy();
+    expectPresentThenAbsent(privText, pubText, line, 'the public gate: DS-FTH-3 on the faith tab');
+    // The DATUM survives: the patron seat, its band and the niche rows are all untouched.
+    expect(pubText).toContain('Sunlord Aurelian holds the seat');
+    expect(pubText).toMatch(/ascendant/);
+  });
+
+  it('⭐ THE PATRON-LESS TOWN speaks DS-FTH-2, and names no creed', () => {
+    // A premium viewer of a deity-free town: FaithSection renders NOTHING (its HIDDEN
+    // mode), which is the only branch where DS-FTH-2 can draw without doubling — its
+    // `[street]` variant is a byte-identical copy of FaithSection's own teaser body.
+    useStore.__set({ auth: { tier: 'premium' } });
+    const { container } = render(<FaithTab settlement={{ id: 'quiet', name: 'Quietford', config: {} }} />);
+    const teaser = screen.getByTestId('faith-desk-teaser');
+    const authored = WAR_FAITH['DS-FTH-2'].pools['PRIVATE DOSSIER']
+      .map((v) => v.text.replace(/\{settlement\}/g, 'Quietford'));
+    expect(authored.some((line) => teaser.textContent.includes(line))).toBe(true);
+    // The standing message keeps its call to action beside it — product furniture, not a
+    // fact about the town, so the two are not twins the way the war note and its fallback are.
+    expect(container.textContent).toMatch(/Assign a patron deity/);
+    // And the honest-absence guarantee holds: the seat, the niches and the creed lines are
+    // all absent, because there is no creed to name.
+    expect(screen.queryByTestId('faith-desk-seat')).toBeNull();
+    expect(screen.queryByTestId('faith-desk-niche-glance')).toBeNull();
   });
 });
 

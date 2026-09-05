@@ -275,6 +275,54 @@ export const DOSSIER_MOUNTS = Object.freeze([
   Object.freeze({
     mount: 'defense.criminalStructure', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-4', rung: 'sentence',
   }),
+  // ── DESK CAR 4: THE WAR & FAITH DESK, AND THE FIRST LEAF TO SPAN TWO TABS ───────────
+  // Until now every desk lived on one tab, so C3's "one sentence rung per block per
+  // PAGE-SET" cost nothing to obey. `warFaith` splits across the war tab and the faith
+  // tab, which are two tabs of ONE page-set, so the law is load-bearing here for the
+  // first time. THE SPLIT, per block, and the reason each way:
+  //   • DS-WAR-1 / DS-WAR-2 speak on WAR. Their producers (warStatus, mobilizationStatus,
+  //     occupationStatus, treatyDocument) are read by WarTab and by nothing on FaithTab.
+  //   • DS-WAR-3 is the CROSS-TAB block — "no war beat AND no treaty AND faith HIDDEN" —
+  //     and it speaks on WAR because the war tab is the only one that can EVALUATE it.
+  //     The faith half is the absence of `config.primaryDeitySnapshot`, readable off the
+  //     settlement anywhere; the war half needs the campaign's worldState, which FaithTab
+  //     holds none of by §805's own constitution. A tab that can answer half a condition
+  //     cannot host the sentence. ⛔ AND IT DOES NOT GLANCE ON FAITH: a glance row whose
+  //     rung is null in every world is a position the registry names and the tree can
+  //     never fill — the citation shape the reachability arm exists to refuse. Silence on
+  //     the second tab is R-DST-K, and it is the true answer rather than a shortfall.
+  //   • DS-FTH-1 / DS-FTH-2 / DS-FTH-3 speak on FAITH, off faithPanelModel.
+  //   • `faith.nicheRow` is the leaf's ONE glance, and the only honest one: the niche row
+  //     ALREADY PRINTS the standing word DS-FTH-3's STANDING pools are keyed on, so the
+  //     record appears there and must not speak there. No CROSS-tab glance is honest —
+  //     a glance draws a band the surface already carries, and neither tab carries the
+  //     other's band.
+  // ⭐ NO ROW BELOW DECLARES `dimensions`, and that is MEASURED rather than forgotten: the
+  // only `marks` value anywhere in the 138 warFaith pools is `dm-only` (the audience mark),
+  // so `poolDimensions` is empty for every one of them and the honesty arm is satisfied by
+  // omission. This is the first leaf for which that was checked before positions were
+  // chosen rather than after.
+  Object.freeze({
+    mount: 'war.standing', tab: 'war', desk: 'warFaith', blockId: 'DS-WAR-1', rung: 'sentence',
+  }),
+  Object.freeze({
+    mount: 'war.treaties', tab: 'war', desk: 'warFaith', blockId: 'DS-WAR-2', rung: 'sentence',
+  }),
+  Object.freeze({
+    mount: 'war.dormantNote', tab: 'war', desk: 'warFaith', blockId: 'DS-WAR-3', rung: 'sentence',
+  }),
+  Object.freeze({
+    mount: 'faith.patronSeat', tab: 'faith', desk: 'warFaith', blockId: 'DS-FTH-1', rung: 'sentence',
+  }),
+  Object.freeze({
+    mount: 'faith.teaser', tab: 'faith', desk: 'warFaith', blockId: 'DS-FTH-2', rung: 'sentence',
+  }),
+  Object.freeze({
+    mount: 'faith.creedStanding', tab: 'faith', desk: 'warFaith', blockId: 'DS-FTH-3', rung: 'sentence',
+  }),
+  Object.freeze({
+    mount: 'faith.nicheRow', tab: 'faith', desk: 'warFaith', blockId: 'DS-FTH-3', rung: 'glance',
+  }),
 ]);
 
 /**
@@ -301,8 +349,27 @@ export const UNMOUNTED_BLOCKS = Object.freeze([
   'DS-GEN-10', 'DS-HK-1', 'DS-GEN-11',
   'DS-GEN-14', 'DS-POP-3', 'DS-GEN-15',
   'DS-GEN-16', 'DS-GEN-18',
-  'DS-WAR-1', 'DS-WAR-2', 'DS-WAR-3', 'DS-WAR-4',
-  'DS-WAR-5', 'DS-FTH-1', 'DS-FTH-2', 'DS-FTH-3',
+  // ── warFaith, after DESK CAR 4 ─────────────────────────────────────────────────────
+  // Six of the nine mounted above. These three are dark by MEASUREMENT, and each names the
+  // one act that would light it (warFaithStateProse.js carries the full derivation):
+  //   DS-WAR-4 — its five keys are the vocabulary of `aggressionPosture`, a module-PRIVATE
+  //     function in src/pdf/lib/liveWorld.js. The one EXPORTED band reader
+  //     (`aggressionChip`) spells two of the five differently and returns null for a
+  //     third, so the block has no exported canonical producer and a desk-side ladder
+  //     would be its THIRD spelling. Lit by hoisting one posture ladder both read.
+  //   DS-WAR-5 — its occupation pools restate DS-WAR-1's from the same `state` datum; its
+  //     resistance pools exist only as PHRASES with no token (the label trap); its
+  //     aftermath, blockade and treaty-burden pools need activeConditions/spatialLedgers
+  //     reads the war tab does not perform. Lit by a token-returning resistance ladder and
+  //     an aftermath reader on the tab.
+  //   DS-FTH-4 — ⛔ `templeWealth` HAS NO WRITER IN THE ENGINE (a WF-7 design-doc future;
+  //     the estate's own DESIGN_FP_ARCH_WF.md V27 row records `grep templeWealth in
+  //     src/domain: 0` as VERIFIED), and `tenure` is not among the seven fields
+  //     `projectReligionStateOntoSettlement` puts on `config.faithProfile.deities[]`. Its
+  //     one remaining pool (CONTESTED) is the fact DS-FTH-1 already speaks on that tab.
+  //     Lit by the banded temple stock plus `tenure` in the projection.
+  'DS-WAR-4',
+  'DS-WAR-5',
   'DS-FTH-4',
 ]);
 

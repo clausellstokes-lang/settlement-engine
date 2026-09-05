@@ -27,8 +27,15 @@
 
 import { Suspense, lazy, useMemo } from 'react';
 import FaithSection from '../../settlement/FaithSection.jsx';
-import { faithPanelModel, shareBandLabel } from '../../settlement/faithPanelModel.js';
+import { FALL_SENTENCE, faithPanelModel, shareBandLabel } from '../../settlement/faithPanelModel.js';
 import { hasPantheon } from '../../map/PantheonPanel.jsx';
+// THE WAR & FAITH DESK, drawn through its one gated call site (WarFaithDesk.jsx). This tab
+// does NOT call the desk itself — `warFaith` is one corpus leaf spanning this tab and the
+// war tab, and the mount walker admits exactly one caller per desk so the public-dossier
+// gate lives in one place for both.
+import {
+  FaithCreedLines, FaithNicheGlance, FaithSeatLines, FaithTeaserLines, warFaithDeskRungs,
+} from './WarFaithDesk.jsx';
 import { useStore } from '../../../store/index.js';
 import { BODY, BORDER, CARD, FS, GOLD, GREEN, INK, MUTED, RED, SECOND, sans } from '../../theme.js';
 
@@ -105,12 +112,18 @@ function DepthRows({ depth }) {
 /** Who occupies which niche of the pantheon. One row per creed — carrying the
  *  W-FAITH F7c deepening rows (top-3 character, boon & bane) for any deity
  *  that authored them; a creed with nothing authored keeps its one-line row. */
-function NicheOccupancyBlock({ ranks, depth }) {
+function NicheOccupancyBlock({ ranks, depth, desk }) {
   return (
     <div data-testid="faith-niches" style={{ marginBottom: 14 }}>
       <div style={{ fontSize: FS.xxs, fontWeight: 800, color: SECOND, textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 8 }}>
         Niche occupancy
       </div>
+      {/* ── faith.nicheRow (DS-FTH-3, GLANCE) — the leaf's one glance position. These rows
+          ALREADY print the standing word DS-FTH-3's STANDING pools are keyed on, so the
+          record appears here and must not speak here: the registry says `glance`, and
+          `drawnAtMount` strips the sentence and the provenance. DS-FTH-3 speaks once, at
+          `faith.creedStanding` below. ── */}
+      <FaithNicheGlance desk={desk} />
       {ranks.map((d) => {
         // TWO WORDS, BOTH NAMED AS WORDS. `standing` is already a finite typed
         // token out of religionState ('ascendant' / 'cult' / …) — it only read
@@ -198,10 +211,46 @@ export default function FaithTab({ settlement, saveId = null, playerView = false
   // premium/elevated AND the settlement carries no embed (its HIDDEN mode).
   const faithWillRender = !!model.hasEmbed || !isPremium;
 
+  // THE DESK, read ONCE per render through its single gated call site and routed by the
+  // mount registry below. The model is the ONLY reading handed over — this tab holds no
+  // worldState by §805's constitution, so the war half of the leaf is simply absent and
+  // every war rung comes back null, which is R-DST-K rather than a gap.
+  const deskProse = warFaithDeskRungs({
+    settlement,
+    publicDossier,
+    playerView,
+    readings: {
+      faith: model,
+      // The panel model's own answer for "does this town keep a named faith at all".
+      hasPatron: !!model.hasEmbed,
+      // The TYPED CAUSE of a seat that changed hands. The model exposes the finished
+      // SENTENCE and not the token, and a desk must key on the token — so the token is
+      // recovered by inverting the producer's OWN exported map, whose keys are exactly
+      // `PATRON_FALL_CAUSES` (faithPanelModel's acceptance battery asserts that equality,
+      // so a fifth cause reds there rather than going silently unmapped here).
+      //
+      // ⚠ WHY NOT READ `config.faithProfile.patronFall.cause` DIRECTLY, which is shorter:
+      // the reader-with-no-writer walker convicts that read as "a key no writer produces".
+      // The verdict is false about the code — `projectReligionStateOntoSettlement` writes
+      // it — and true about the walker's OBSERVATION CORPUS, which is deity-free, so no
+      // observed settlement carries the key. Inverting an exported map adds no observed
+      // read at all, and it keeps the token's vocabulary owned by the producer.
+      patronFallCause: model.patronFallSentence
+        ? Object.keys(FALL_SENTENCE).find((c) => FALL_SENTENCE[c] === model.patronFallSentence)
+        : undefined,
+    },
+  });
+
   return (
     <div data-testid="faith-tab" style={{ padding: '12px 14px', fontFamily: sans }}>
       {patronRank && <PatronSeatBlock patron={patronRank} contested={!!model.contested} />}
-      {model.hasEmbed && model.ranks.length > 0 && <NicheOccupancyBlock ranks={model.ranks} depth={deepening.byName} />}
+      {/* ── faith.patronSeat (DS-FTH-1) — rank, cults, devotion, the arc, standings,
+          the sink and the mandate, in the town's own voice ── */}
+      <FaithSeatLines desk={deskProse} />
+      {model.hasEmbed && model.ranks.length > 0 && <NicheOccupancyBlock ranks={model.ranks} depth={deepening.byName} desk={deskProse} />}
+      {/* ── faith.creedStanding (DS-FTH-3) — standing, legitimacy, the niche contest and
+          the patron fall, beside the rows those words already appear in ── */}
+      <FaithCreedLines desk={deskProse} />
       {/* W-FAITH F7c — the cumulative field, band words only; absent when the
           projection is (dark world, nothing authored, or a dead-magic dial). */}
       {model.hasEmbed && deepening.fieldRows.length > 0 && <FieldBlock rows={deepening.fieldRows} />}
@@ -220,6 +269,27 @@ export default function FaithTab({ settlement, saveId = null, playerView = false
       {!faithWillRender && (
         <div style={{ padding: 24, textAlign: 'center', color: MUTED, fontFamily: sans, fontSize: FS.sm, lineHeight: 1.6 }}>
           This settlement keeps no named faith. Assign a patron deity to awaken its pantheon.
+          {/* ── faith.teaser (DS-FTH-2) — ⭐ THE PATRON-LESS TOWN'S OWN VOICE, and the
+              position that matters most on the corpus this product actually ships against:
+              a settlement with no `primaryDeitySnapshot` is the COMMON case, not the edge
+              (the whole review corpus is deity-free today). The four authored variants name
+              no creed and no god, because the block was written for exactly this town.
+
+              ⚠ IT SITS HERE, INSIDE THE HONEST-ABSENCE BRANCH, AND THAT PLACEMENT IS THE
+              FINDING RATHER THAN THE LAYOUT. DS-FTH-2's `[street]` variant is a
+              BYTE-IDENTICAL copy of FaithSection's own teaser body ("The people keep their
+              own quiet observances. No single creed holds sway, and the shrines answer to
+              no named god.") — the same `canonical`-angle hazard the economy desk records
+              for `shadowEconomy` and `tradeFlow`, where a corpus line and its live twin an
+              inch apart is the page saying one thing twice. This branch is exactly where
+              FaithSection renders NOTHING (its HIDDEN mode: a premium viewer, no embed), so
+              the two can never appear together. Every other viewer keeps the live teaser,
+              which carries the same sentence — so nothing is lost, and nothing is doubled.
+
+              The call to action above is product furniture rather than a fact about the
+              town, so the corpus line sits UNDER it instead of replacing it — unlike the
+              war tab's dormant note, whose fallback IS a fact and is therefore replaced. ── */}
+          <FaithTeaserLines desk={deskProse} />
         </div>
       )}
     </div>

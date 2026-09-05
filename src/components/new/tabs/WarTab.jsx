@@ -46,6 +46,20 @@ import { deployedArmyStatus } from '../../../domain/display/armyStrength.js';
 import { settlementBeliefs, hasBeliefMaps, beliefStalenessBand } from '../../../domain/display/settlementBeliefs.js';
 import { armyTransitLedger, stepArmyPosition, currentRegion, ARMY_ROLES } from '../../../domain/spatial/armyTransit.js';
 import { hasMartialRecord, readinessOf, experienceOf, rustOf } from '../../../domain/worldPulse/martialReadiness.js';
+// DS-WAR-3's faith half, through the CANONICAL reader rather than a second config read.
+// `faithPanelModel` answers `{ hasEmbed: false }` for a town that keeps no named faith, and
+// it is the same reader the faith tab uses — so the two halves of the page-set cannot
+// disagree about whether this town has a patron. Only that BOOLEAN is taken: no deity name,
+// no axis, no rank reaches this file, so the header's claim above still holds exactly.
+import { faithPanelModel } from '../../settlement/faithPanelModel.js';
+// THE WAR & FAITH DESK, drawn through its one gated call site (WarFaithDesk.jsx). This tab
+// does NOT call the desk itself: `warFaith` is one corpus leaf spanning two tabs, and the
+// mount walker admits exactly one caller per desk so the public-dossier gate stays in one
+// place. Faith is still the FAITH tab's job — nothing below reads deity data beyond the
+// ABSENCE test DS-WAR-3's own condition names.
+import {
+  WarDormantNote, WarStandingLines, WarTreatyLines, warFaithDeskRungs,
+} from './WarFaithDesk.jsx';
 import {
   FS, MUTED, BODY, BORDER, BORDER2, CARD, CARD_ALT, INK, RED, GOLD, GREEN, SECOND, sans,
 } from '../../theme.js';
@@ -421,6 +435,37 @@ export default function WarTab({ settlement, saveId = null, playerView = false, 
       ? settlementBeliefs({ worldState, observerId: sid, includeGroundTruth: true, nameFor })
       : [];
 
+    // THE DESK'S TWO EXTRA READINGS, and both are deliberate rather than convenient.
+    //
+    // `postureState` is the RAW ledger token. `settlementMobilization` converts it to a
+    // PHRASE and the desk cannot key on a phrase (the label trap), but the sharper reason
+    // is that `ticksToDeploy` returns 0 at BOTH ends of the ramp — for `mobilized` and for
+    // `demobilizing` alike — so a desk without the token would print the muster complete
+    // over a town standing down. The token is the producer's own datum, not a re-derivation.
+    //
+    // `counterpart` is the ONE opposing town resolved to a NAME here, with this tab's own
+    // roster, because the ids in `status` are save ids and the desk never turns an id into
+    // a name. A COALITION HAS NO COUNTERPART: the corpus's `{counterpart}` seams are
+    // singular, so two besiegers leave it empty and anchored liveness drops those variants
+    // rather than the page naming an enemy by array order.
+    const posture = worldState.warPosture && typeof worldState.warPosture === 'object'
+      ? worldState.warPosture[sid] : null;
+    const lone = (ids) => (Array.isArray(ids) && ids.length === 1 ? nameFor(ids[0]) : '');
+
+    // ⛔ THE OCCUPIER'S WIDER POSITION, TAKEN FOR THE OCCUPIER AND NOT FOR US. The corpus
+    // pools named `occupierHoldings.*` are written from the OCCUPIED town's chair —
+    // "{counterpart} holds more than it can garrison properly, and {settlement} is one of
+    // the places where the thinness shows" — while `occupierHoldings()` is the reading for
+    // the HOLDER's own dossier. Handing it our own holdings would print "the garrison at
+    // <us> is stronger for the occupier's other successes" about the town that owns the
+    // garrison: fluent, confident and false. So the reading is taken for the power holding
+    // US. The occupier's ID comes off the ledger record because `settlementOccupation`
+    // returns its NAME and not its id.
+    const occupationRecord = worldState.occupations && typeof worldState.occupations === 'object'
+      ? worldState.occupations[sid] : null;
+    const occupierId = occupationRecord && occupationRecord.occupierId != null
+      ? occupationRecord.occupierId : null;
+
     return {
       status,
       exhaustionRaw,
@@ -429,6 +474,11 @@ export default function WarTab({ settlement, saveId = null, playerView = false, 
       occupied: settlementOccupation({ settlementId: sid, worldState, nameFor }),
       holdings: occupierHoldings({ settlementId: sid, worldState, nameFor }),
       treaties: renderTreatiesForSettlement(worldState, sid),
+      postureState: posture && typeof posture === 'object' ? String(posture.state || '') : '',
+      counterpart: lone(status?.besiegedBy) || lone(status?.besiegingTargets),
+      occupierPosition: occupierId != null
+        ? occupierHoldings({ settlementId: occupierId, worldState, nameFor })
+        : null,
       unit, musterLine, armyStatus, martial, wars, beliefs,
     };
   }, [sid, campaigns, nameFor, settlement, includeGroundTruth]);
@@ -445,9 +495,42 @@ export default function WarTab({ settlement, saveId = null, playerView = false, 
   const hasMuster = !!war && (war.musterLine || war.armyStatus || war.martial);
   const anything = !!war && (hasWar || hasTreaties || hasMuster || war.unit || war.wars.length > 0 || war.beliefs.length > 0);
 
+  // THE DESK, read ONCE per render through its single gated call site and routed by the
+  // mount registry below. `warBeat` is this tab's own reading of "anything martial is
+  // happening", which DS-WAR-1's residue pool and DS-WAR-3's dormant condition both need;
+  // it is the martial half only, so the treaty half stays a separate term the way the
+  // block's own condition spells it.
+  const deskProse = warFaithDeskRungs({
+    settlement,
+    publicDossier,
+    playerView,
+    readings: war
+      ? {
+          settlementId: sid,
+          // DS-WAR-3's FAITH half: the canonical reader's own ABSENCE answer, and the
+          // only deity-adjacent value on this tab. The desk takes it as a reading because
+          // a desk reads no settlement record of its own.
+          hasPatron: !!faithPanelModel(settlement).hasEmbed,
+          war: {
+            status: war.status,
+            exhaustionBand: war.exhaustionBand,
+            mobilization: war.mobilization,
+            postureState: war.postureState,
+            occupation: war.occupied,
+            occupierPosition: war.occupierPosition,
+            treaties: war.treaties,
+            counterpart: war.counterpart,
+            warBeat: !!(hasWar || war.unit || war.wars.length > 0),
+          },
+        }
+      : {},
+  });
+
   return (
     <div data-testid="war-tab" style={{ padding: '12px 14px', fontFamily: sans }}>
       {hasWar && <WarBlock war={war} nameFor={nameFor} />}
+      {/* ── war.standing (DS-WAR-1) — the martial record in the town's own voice ── */}
+      <WarStandingLines desk={deskProse} />
       {war && war.wars.length > 0 && <WarsBlock wars={war.wars} sid={sid} nameFor={nameFor} />}
       {hasMuster && <MusterBlock musterLine={war.musterLine} armyStatus={war.armyStatus} martial={war.martial} />}
       {war && war.unit && (
@@ -458,12 +541,17 @@ export default function WarTab({ settlement, saveId = null, playerView = false, 
       )}
       {war && war.beliefs.length > 0 && <BeliefsBlock beliefs={war.beliefs} />}
       {hasTreaties && <TreatyBlock treaties={war.treaties} sid={sid} />}
+      {/* ── war.treaties (DS-WAR-2) — the clause that is under the most strain ── */}
+      {hasTreaties && <WarTreatyLines desk={deskProse} />}
       {!anything && (
-        <div style={{ padding: 24, textAlign: 'center', color: MUTED, fontFamily: sans, fontSize: FS.sm, lineHeight: 1.6 }}>
-          {war
-            ? 'This settlement is at peace: no host abroad, no siege at the walls, no treaty binding it.'
-            : 'War is a campaign story. This settlement stands outside any live campaign, so there is no war picture to tell.'}
-        </div>
+        // ── war.dormantNote (DS-WAR-3) — the WHOLE PAGE-SET at rest. The corpus line
+        // REPLACES the plain sentence rather than standing under it: both say the town is
+        // at peace, and printing them an inch apart is the page saying one thing twice.
+        // The plain sentence stays the standing text for every reader the desk does not
+        // draw for — a public dossier, or a town whose faith is not hidden.
+        <WarDormantNote desk={deskProse} fallback={war
+          ? 'This settlement is at peace: no host abroad, no siege at the walls, no treaty binding it.'
+          : 'War is a campaign story. This settlement stands outside any live campaign, so there is no war picture to tell.'} />
       )}
     </div>
   );
