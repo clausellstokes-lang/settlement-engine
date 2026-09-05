@@ -513,6 +513,51 @@ export function advanceChanceMeetings({
 }
 
 /**
+ * ⛔⛔ WHO APPROACHED WHOM, AND IT IS **NOT** WHAT PARTY ORDER OR TRAVELLER-NESS SAYS.
+ *
+ * ENC-4b's brief and the R1 ruling both derived this as "the traveller approaches the resident's
+ * venue". MEASURED AT THE DOCK, over 4000 real `resolveChanceMeeting` calls per arm: THAT IS
+ * FALSE. `envoyChanceMeeting.js` picks the direction by the COMPROMISE CHANCE ON THE TARGET
+ * (`directions.sort((x, y) => (y.chance - x.chance) || codepoint(...))`), and `compromiseChance`
+ * reads the TARGET's corruptibility and ambition — never which party travelled. With the
+ * traveller as the softer target the RESIDENT led 23 of 23 exposed receipts; with the resident as
+ * the softer target the TRAVELLER led 23 of 23. Assigning `{npc}` (who offered) from party role
+ * would have named the refuser as the offerer on one of those two arms — the wrong-ROLE defect
+ * the whole R1 ruling exists to prevent.
+ *
+ * ⭐ THE RECEIPT ALREADY CARRIES THE ANSWER, and the exposed branch is the branch that writes it:
+ * `receipt.grievance = { fromSid: lead.target.homeSid, toSid: lead.approacher.homeSid }`. A home
+ * settlement id names a PERSON here because the two parties' homes can never coincide, and that
+ * is guaranteed three times over at the census rather than hoped for:
+ *
+ *   • a traveller is never at his own home  — `projectTravellers`: `if (… nodeId === homeSid) continue;`
+ *   • the resident's home IS the host node  — `envoyChanceMeeting.js` rule 4: `homeSid: nodeId`
+ *   • two travellers never share a home     — rule 5: `if (a.homeSid === b.homeSid) continue;`
+ *
+ * ⛔ IT IS STILL RESTRICTED TO `traveller_resident`, ON THE RULING'S FENCE. The third guarantee
+ * means the derivation would answer for `traveller_traveller` too — that is a MEASURED finding
+ * back to the chair, because the ruling's stated reason for excluding that kind ("symmetric", not
+ * determinable) is wrong. The exclusion itself stands on the annex's own PROSE ground, which is
+ * the chair's to rule: §B's variant 1 says "{counterpart} of {settlement}", and in a
+ * traveller x traveller meeting neither party is of the host town.
+ *
+ * ⛔ THE EMPTY STRING, NEVER AN ABSENT KEY — the seam's own recorded posture for an unresolved
+ * address limb, so a consumer that fails closed on a hole sees the hole instead of guessing.
+ *
+ * @param {Record<string, unknown>} receipt @param {Record<string, unknown>[]} parties
+ * @returns {string}
+ */
+function approacherNidOf(receipt, parties) {
+  if (text(receipt.kind) !== 'traveller_resident') return '';
+  const toSid = text(asObject(receipt.grievance).toSid);
+  if (!toSid) return '';
+  const approachers = parties.filter((party) => text(party.homeSid) === toSid);
+  // Exactly one, or nothing: a sid that names both parties names neither, and a guess here is
+  // the defect this whole function exists to refuse.
+  return approachers.length === 1 ? text(approachers[0].nid) : '';
+}
+
+/**
  * ⛔ THE HERALD SEAM, AND IT IS DELIBERATELY A SEAM RATHER THAN A MINT.
  *
  * A visible outcome becomes ONE typed seed carrying the NEWS ADDRESS LAW's whole chain —
@@ -536,6 +581,12 @@ export function advanceChanceMeetings({
  * from a variable rather than an inline governed literal breaks that relation the day it
  * lands. A mint that cannot fire is not worth redding an exact census for; ENC-4 places it
  * in the commit that gives it something to say.
+ *
+ * ⭐ THE APPROACH DIRECTION IS ADDRESS TOO, AND IT IS CARRIED ONLY WHERE THE RECEIPT KNOWS IT.
+ * `approacherNid` names the party who made the offer, for the `traveller_resident` kind alone and
+ * only on a receipt whose exposure branch recorded a direction; everywhere else it is the EMPTY
+ * STRING. It is DERIVED FROM THE RECEIPT, never from party order — see `approacherNidOf`, which
+ * carries the measurement that refuted the obvious rule.
  *
  * ⭐ THE NAMES ARE PART OF THE ADDRESS AND THEY ARRIVE HERE RESOLVED. `npcNames` is parallel to
  * `npcIds`; `settlementNames` is keyed by settlement id and covers the host and both courts. A
@@ -572,6 +623,7 @@ function heraldSeedsOf(receipts, heraldEntryFor, names = {}) {
       npcIds: Object.freeze(parties.map((party) => text(party.nid))),
       venueIds: Object.freeze(text(receipt.venue) === 'field_node' ? [text(receipt.nodeId)] : []),
       hostId: text(receipt.nodeId),
+      approacherNid: approacherNidOf(receipt, parties),
       npcNames: Object.freeze(parties.map((party) => npcNameByNid.get(text(party.nid)) || '')),
       settlementNames: Object.freeze(Object.fromEntries(
         [...new Set([text(receipt.nodeId), ...parties.map((party) => text(party.homeSid))])]
