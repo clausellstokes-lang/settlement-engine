@@ -29,6 +29,7 @@ NEW schema rung (17); the desk consist's OSR baseline is then re-frozen at the c
    f. lighting census — `LIGHTING_CENSUS_REFREEZE=<seat> LIGHTING_CENSUS_NOTE=…` (predict from the FARMED probe: three new test
       files — warFaithStateProseDesk, generalDeskTabFlow, defenseTabFlow — titles per lane: +33 DEF2, +3 DESK-9, +25 ECON2,
       GEN2/WARFAITH per their receipts; re-derive at the composed tip, never sum the lanes).
+   f2. wizard-news — SEAT-78 car 2 carried a re-signed `tests/lint/.wizard-news-authoring-baseline.json` (a lane-taken register): hand re-sign at the composed tip via `wizard-resign.py <log> <json> --write`.
    g. the census totals — `run-ratchet-<N>.sh` (totalFiles +3 predicted; entries: the observedShape row must NOT need banking
       once OSR-SCHEMA17 has landed; totalTests refused).
 4. Gate → chair-verify (car count = 34 + OSR cars + register cars) → CAS → seal `landing-desk-2026-09-05` → collect, with the
