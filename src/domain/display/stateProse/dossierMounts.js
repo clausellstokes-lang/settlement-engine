@@ -284,6 +284,12 @@ export const DOSSIER_MOUNTS = Object.freeze([
   Object.freeze({
     mount: 'history.record', tab: 'history', desk: 'general', blockId: 'DS-GEN-16', rung: 'sentence',
   }),
+  Object.freeze({
+    mount: 'viability.verdict', tab: 'viability', desk: 'general', blockId: 'DS-GEN-11', rung: 'sentence',
+  }),
+  Object.freeze({
+    mount: 'plot_hooks.framing', tab: 'plot_hooks', desk: 'general', blockId: 'DS-HK-1', rung: 'sentence',
+  }),
 ]);
 
 /**
@@ -312,8 +318,6 @@ export const UNMOUNTED_BLOCKS = Object.freeze([
   'DS-REL-1',
   'DS-REL-2',
   'DS-GEN-10',
-  'DS-HK-1',
-  'DS-GEN-11',
   'DS-POP-3',
   'DS-GEN-15',
   'DS-GEN-18',

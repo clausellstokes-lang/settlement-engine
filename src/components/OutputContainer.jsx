@@ -691,7 +691,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
             : <SummaryTab settlement={s} />}
         </>
       );
-      case 'plot_hooks': return <PlotHooksTab settlement={s} />;
+      case 'plot_hooks': return <PlotHooksTab settlement={s} publicDossier={publicDossier} playerView={playerView} />;
       case 'chronicle':  return <ChronicleTab entries={chronicle} />;
       case 'versions':   return <VersionsTab save={liveSaveEntry} />;
       case 'daily_life': return <DailyLifeTab settlement={s} aiSettlement={aiSettlement} saveId={saveId} onRequestDailyLife={() => requestAiAction('dailyLife')} />;
@@ -734,7 +734,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
         saveId={saveId} playerView={playerView} publicDossier={publicDossier} />;
       case 'history':    return <HistoryTab settlement={s} narrativeNote={null} recentEvents={recentEvents} onReroll={onRegenerate ? () => onRegenerate('history') : null} publicDossier={publicDossier} playerView={playerView} />;
       case 'resources':  return <ResourcesTab settlement={s} narrativeNote={null} />;
-      case 'viability':  return <ViabilityTab settlement={s} narrativeNote={null} />;
+      case 'viability':  return <ViabilityTab settlement={s} narrativeNote={null} publicDossier={publicDossier} playerView={playerView} />;
       case 'dm_compass': return <DMCompassTab settlement={compassSource || s} />;
       case 'dm_notes':   return <NotesTab saveId={saveId} notes={dossierNotes} section="dm" />;
       case 'ai_notes':   return <NotesTab saveId={saveId} notes={dossierNotes} section="ai" />;

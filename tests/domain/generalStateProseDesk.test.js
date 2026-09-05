@@ -40,6 +40,10 @@ import {
   originRoutePoolKey,
   originTierPoolKey,
   calamityFill,
+  criticalIssuePoolKey,
+  escalationClockPoolKey,
+  hookCategoryPoolKey,
+  viabilityVerdictPoolKey,
   eventAnchorDimension,
   eventRecordPoolKey,
   eventTypePoolKey,
@@ -70,6 +74,8 @@ import { ROUTE_TO_SCENE } from '../../src/generators/narrativeGenerator.js';
 import { ORIGIN_ARMS, originArmKey } from '../../src/generators/narrative/settlementOriginProse.js';
 import { resolvePrimaryStress } from '../../src/generators/stressPriority.js';
 import { EVENT_TYPE_NAMES, HISTORICAL_EVENTS_DATA } from '../../src/data/historyData.js';
+import { PLOT_HOOK_CATEGORIES, collectPlotHooks } from '../../src/domain/dossier/plotHooks.js';
+import { deriveEscalationClocks } from '../../src/domain/hookEscalation.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { mustExtract } from '../helpers/sourceContract.js';
 import { fillShapeViolation, mergeSlotShapes, parseSlotShapes } from '../../scripts/lib/dossier-slot-shapes.mjs';
@@ -90,6 +96,8 @@ const BLOCK_POOLS = Object.freeze({
   'DS-GEN-7': 8, 'DS-GEN-17': 5,
   // The history chapter (DESK-GEN2 car 1).
   'DS-GEN-9': 15, 'DS-GEN-14': 3, 'DS-GEN-16': 5,
+  // The viability verdict and the plot-hook framing (DESK-GEN2 car 2).
+  'DS-GEN-11': 6, 'DS-HK-1': 11,
 });
 
 /**
@@ -213,7 +221,7 @@ describe('the general desk — guard the guard', () => {
     const shapes = mergedShapes();
     expect(Object.keys(SLOT_FILL_SHAPES).sort())
       .toEqual(['calamity', 'event', 'faction', 'faction2', 'govFaction', 'issue',
-        'settlement', 'stakes', 'timeband_age', 'timeband_since']);
+        'governing', 'settlement', 'stakes', 'timeband_age', 'timeband_since']);
     for (const [slot, shape] of Object.entries(SLOT_FILL_SHAPES)) {
       expect(shape, `{${slot}} shape`).toBe(shapes.shapeOf(slot));
     }
@@ -1076,5 +1084,109 @@ describe('the history chapter', () => {
       unslotted.every((v) => (v.marks || []).includes('not anchored')),
       'a duration-free ANCHORED variant appeared — the religious silence below is cured',
     ).toBe(true);
+  });
+});
+
+/**
+ * ── THE VIABILITY VERDICT AND THE PLOT-HOOK FRAMING (DESK-GEN2 car 2) ───────────────
+ * DS-GEN-11 at `viability.verdict`, DS-HK-1 at `plot_hooks.framing`.
+ */
+describe('the viability verdict and the hook framing', () => {
+  it('DS-GEN-11 is TOTAL over the three states `viable` can be in, and MARGINAL is one of them', () => {
+    // ⚠ AN ABSENT VERDICT IS THE MARGINAL ARM, NOT SILENCE. ViabilityTab renders exactly this
+    // three-way split as its own headline, and a desk that read `undefined` as "nothing to
+    // say" would fall dumb on the one verdict the page prints in amber.
+    expect(viabilityVerdictPoolKey(true)).toBe('viable: true: the arithmetic closes');
+    expect(viabilityVerdictPoolKey(false)).toBe('viable: false: the arithmetic does not close');
+    expect(viabilityVerdictPoolKey(undefined)).toBe('the MARGINAL arm: neither verdict returned');
+    expect(viabilityVerdictPoolKey(null)).toBe('the MARGINAL arm: neither verdict returned');
+    // The tab's own three-way headline is the mirror this totality is FOR.
+    mustExtract(
+      src('src/components/new/tabs/ViabilityTab.jsx'),
+      "viable===false ? '✗ NOT COHERENT' : viable===true ? '✓ COHERENT' : 'MARGINAL COHERENCE'",
+      'the three-way verdict headline in ViabilityTab.jsx',
+    );
+    // The contradiction count: two pools, and a non-number is NOT a zero.
+    expect(criticalIssuePoolKey(2)).toBe('criticalIssueCount: critical contradictions on the record');
+    expect(criticalIssuePoolKey(0)).toBe('criticalIssueCount zero');
+    expect(criticalIssuePoolKey(undefined), 'an unmeasured record read as zero').toBeNull();
+    expect(criticalIssuePoolKey('2')).toBeNull();
+    // TOTAL the other way: the six pools are claimed by these three lenses and no other.
+    expect([...new Set([
+      viabilityVerdictPoolKey(true), viabilityVerdictPoolKey(false), viabilityVerdictPoolKey(undefined),
+      criticalIssuePoolKey(1), criticalIssuePoolKey(0), 'THE FIRST-SURVEY QUALIFICATION',
+    ])].sort()).toEqual(poolsOf('DS-GEN-11').sort());
+  });
+
+  it('⚠ the contradiction count is at metrics.criticalIssueCount — the abbreviated path is dark', () => {
+    // The corpus title spells the path `criticalIssueCount`; the producer writes it one level
+    // down. This lane's FIRST probe read the abbreviation and measured the field 0/24 present
+    // when it is 48/48 — the same trap DS-GEN-17's `compound.inst` note records. Both
+    // directions are driven so the finding cannot decay into a shrug.
+    mustExtract(
+      src('src/generators/economy/viability.js'),
+      'criticalIssueCount: criticalIssues.length',
+      'the criticalIssueCount writer in viability.js',
+    );
+    let atMetrics = 0; let atRoot = 0; let towns = 0;
+    for (const seed of ['sf-test-2026-04', 'gen2-a']) {
+      for (const settType of ['hamlet', 'town', 'city', 'metropolis']) {
+        const s = generateSettlementPipeline(
+          { settType, culture: 'germanic', tradeRouteAccess: 'road' }, null, { seed, customContent: {} },
+        );
+        towns += 1;
+        if (typeof s.economicViability?.metrics?.criticalIssueCount === 'number') atMetrics += 1;
+        if (typeof (/** @type {any} */ (s.economicViability)?.criticalIssueCount) === 'number') atRoot += 1;
+      }
+    }
+    expect(towns).toBeGreaterThan(0);
+    expect(atMetrics, 'the canonical path stopped carrying the count').toBe(towns);
+    expect(atRoot, 'the abbreviated path started carrying the count — the trap is cured').toBe(0);
+  });
+
+  it('DS-HK-1 is a 7-for-7 and 4-for-4 identity with the two closed producer vocabularies', () => {
+    // DIRECTION 1 — every category the registry declares reaches a pool.
+    const categories = Object.keys(PLOT_HOOK_CATEGORIES);
+    expect(categories.length, 'the hook category registry moved').toBe(7);
+    for (const c of categories) {
+      expect(hookCategoryPoolKey(c), `no pool claims the '${c}' category`).toBeTruthy();
+    }
+    // DIRECTION 2 — every `category ` pool is claimed by a registry member.
+    const categoryPools = poolsOf('DS-HK-1').filter((k) => k.startsWith('category '));
+    expect(categoryPools.length).toBe(7);
+    expect(new Set(categories.map((c) => hookCategoryPoolKey(c))).size).toBe(7);
+    // And the vocabulary is CLOSED: an unknown category renders nothing.
+    expect(hookCategoryPoolKey('weather')).toBeNull();
+    expect(hookCategoryPoolKey('')).toBeNull();
+
+    // THE CLOCKS, keyed on the TOKEN inside the id and never on the label.
+    const clockPools = poolsOf('DS-HK-1').filter((k) => k.startsWith('clock '));
+    expect(clockPools.length).toBe(4);
+    for (const pool of clockPools) {
+      expect(escalationClockPoolKey(`clock.${pool.slice('clock '.length)}.whatever`)).toBe(pool);
+    }
+    // ⚠ THE LABEL IS NOT A KEY. 'Bread Riot Clock' is a display string.
+    expect(escalationClockPoolKey('Bread Riot Clock')).toBeNull();
+    expect(escalationClockPoolKey('clock.nonesuch.x')).toBeNull();
+    expect(escalationClockPoolKey('notaclock.bread_riot.x')).toBeNull();
+
+    // THE PRODUCERS REALLY WRITE THESE TOKENS — measured, not transcribed, over real worlds.
+    const seenCategories = new Set(); const seenClocks = new Set();
+    for (const seed of ['sf-test-2026-04', 'gen2-a', 'gen2-b']) {
+      for (const settType of ['hamlet', 'town', 'city', 'metropolis']) {
+        const s = generateSettlementPipeline(
+          { settType, culture: 'germanic', tradeRouteAccess: 'road' }, null, { seed, customContent: {} },
+        );
+        for (const h of collectPlotHooks(s)) if (h?.category) seenCategories.add(h.category);
+        for (const c of deriveEscalationClocks(s)) seenClocks.add(String(c.id).split('.')[1]);
+      }
+    }
+    expect(seenCategories.size, 'the generator wrote no hook categories').toBeGreaterThan(0);
+    // Every category the generator writes is one the registry declares — no stranger.
+    for (const c of seenCategories) expect(categories, `'${c}' is not a declared category`).toContain(c);
+    // Every clock the generator raises reaches a pool.
+    for (const k of seenClocks) {
+      expect(escalationClockPoolKey(`clock.${k}.x`), `the clock '${k}' reaches no pool`).toBeTruthy();
+    }
   });
 });

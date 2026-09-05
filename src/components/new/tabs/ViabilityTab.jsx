@@ -7,11 +7,17 @@ import { deriveViability } from '../../../domain/display/dossierViewModel.js';
 import { isViabilityItem } from '../../../domain/display/viabilityFilter.js';
 
 import {NarrativeNote} from '../NarrativeNote';
+// THE GENERAL DESK THROUGH ITS ONE CALLER (the registry's ARM 2), which also owns the
+// §885.3 paid-surface gate — corpus prose never draws for a free gallery viewer.
+import { generalDeskLines } from '../generalDeskRead.js';
 
-export function ViabilityTab({settlement:s, narrativeNote}) {
+export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false, playerView = false}) {
   if (!s?.economicViability) return <Empty message="No coherence data available. Generate a settlement first."/>;
   const v = s.economicViability;
   const metrics = v.metrics || {};
+  // DS-GEN-11: the verdict, the contradiction count and the first-survey caveat, banded in
+  // the town's own voice beside the three data the panel already prints.
+  const {verdictLines} = generalDeskLines(s, {publicDossier, playerView}).viability;
 
   // Strip the verdict prefix from the summary. Behind canonicalViewModel, use
   // the reconciled verdict from the display model (§1f) — its body only, since
@@ -108,6 +114,16 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
               A viable settlement can have unexploited resources and unsatisfied demand; what matters is whether the
               pieces fit together plausibly.
             </p>
+            {/* ── DS-GEN-11 (viability.verdict) ─────────────────────────────
+                Three lenses over one verdict at ONE position, in the order the
+                panel above prints them: the verdict, the contradiction count,
+                and when the reading was taken. The DATUM is untouched — the
+                headline, the summary and the pills all keep their own words. */}
+            {verdictLines.length>0&&<div style={{borderTop:'1px solid #d8c090',marginTop:10,paddingTop:8}}>
+              {verdictLines.map((line,i)=>(
+                <p key={i} style={{fontSize:i===0?FS.md:FS.sm,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.6,margin:i===0?0:'6px 0 0',fontStyle:'italic'}}>{line}</p>
+              ))}
+            </div>}
           </div>
           {/* Quick metric pills */}
           <div style={{display:'flex',gap:6,flexWrap:'wrap',flexShrink:0}}>

@@ -109,6 +109,7 @@ export const SLOT_FILL_SHAPES = Object.freeze({
   // the seams supply their own article — and the two duration slots are `phrase` because
   // they land mid-sentence and must read lowercase there.
   event: 'proper',
+  governing: 'proper',
   calamity: 'bare-common',
   timeband_since: 'phrase',
   timeband_age: 'phrase',
@@ -604,6 +605,81 @@ function recordCalamityEvent(events) {
     || significantEvent(rows.filter((e) => e.anchored === false));
 }
 
+// ── DS-GEN-11 · Viability › The coherence verdict ───────────────────────────────────
+
+/**
+ * DS-GEN-11's verdict pool. TOTAL BY CONSTRUCTION over the three states
+ * `economicViability.viable` can be in, and the third is the point: an ABSENT verdict is the
+ * MARGINAL arm, not a missing reading. `ViabilityTab.jsx` prints exactly the same three-way
+ * split as its own headline ("✗ NOT COHERENT" / "✓ COHERENT" / "MARGINAL COHERENCE"), so a
+ * desk that treated `undefined` as silence would fall dumb on the one verdict the page
+ * renders in amber.
+ * @param {unknown} viable @returns {string|null}
+ */
+export function viabilityVerdictPoolKey(viable) {
+  const key = viable === true ? 'viable: true: the arithmetic closes'
+    : viable === false ? 'viable: false: the arithmetic does not close'
+      : 'the MARGINAL arm: neither verdict returned';
+  return CORPUS['DS-GEN-11'].pools[key] ? key : null;
+}
+
+/**
+ * DS-GEN-11's critical-contradiction pool.
+ *
+ * ⚠ THE COUNT LIVES AT `economicViability.metrics.criticalIssueCount`, NOT at
+ * `economicViability.criticalIssueCount`. The corpus title abbreviates the path to
+ * `criticalIssueCount` and a desk that believed the abbreviation would read `undefined` on
+ * every settlement ever generated and fall silent on both pools — the same trap DS-GEN-17's
+ * `economicState.compound.inst` note records, and it cost this lane a first pass that
+ * measured the field 0/24 present when it is 48/48. A non-number renders nothing: an absent
+ * count is a record that was not asked, and reading it as zero would print "nothing here
+ * contradicts anything" over a town nobody checked.
+ * @param {unknown} count @returns {string|null}
+ */
+export function criticalIssuePoolKey(count) {
+  if (typeof count !== 'number' || !Number.isFinite(count)) return null;
+  const key = count > 0
+    ? 'criticalIssueCount: critical contradictions on the record'
+    : 'criticalIssueCount zero';
+  return CORPUS['DS-GEN-11'].pools[key] ? key : null;
+}
+
+// ── DS-HK-1 · Plot hooks › The state a hook is framed FROM ──────────────────────────
+
+/**
+ * DS-HK-1's CATEGORY pool. A 7-for-7 identity with `PLOT_HOOK_CATEGORIES` — the estate's own
+ * closed hook vocabulary — measured over 48 settlements carrying 18 to 68 hooks each, in
+ * which every one of the seven categories appeared and nothing else did. Asserted total in
+ * both directions by the desk test against the imported registry, so neither side can grow a
+ * member the other does not have.
+ *
+ * ⛔ THIS IS THE FRAMING, NEVER THE HOOK. The corpus block's own title says so: "the state a
+ * hook is framed FROM (never the hook prose itself)". The hooks keep their own words on the
+ * page; this bands what having a page of them MEANS.
+ * @param {unknown} category @returns {string|null}
+ */
+export function hookCategoryPoolKey(category) {
+  const found = Object.keys(CORPUS['DS-HK-1'].pools)
+    .find((key) => key.startsWith(`category ${text(category)}:`));
+  return found || null;
+}
+
+/**
+ * DS-HK-1's CLOCK pool, keyed on the CANONICAL TOKEN inside the clock's own id.
+ *
+ * ⚠ KEYED ON THE ID SEGMENT, NEVER THE LABEL, and this leaf's standing label trap is why.
+ * `deriveEscalationClocks` writes `id: 'clock.bread_riot.<trigger>'` and `label: 'Bread Riot
+ * Clock'`; the corpus pool is `clock bread_riot`. The id carries the producer's token and the
+ * label carries a display string, and only one of those is a join key.
+ * @param {unknown} clockId @returns {string|null}
+ */
+export function escalationClockPoolKey(clockId) {
+  const parts = text(clockId).split('.');
+  if (parts.length < 2 || parts[0] !== 'clock') return null;
+  const key = `clock ${parts[1]}`;
+  return CORPUS['DS-HK-1'].pools[key] ? key : null;
+}
+
 // ── DS-GEN-2 · Overview/Power › Active conflicts ────────────────────────────────────
 
 /**
@@ -1027,6 +1103,10 @@ export function institutionsPoolKey(inst) {
  *   identity: ReadonlyArray<LegibilityRung|null>,
  *   founded: LegibilityRung|null,
  *   record: LegibilityRung|null,
+ * }>, viability: Readonly<{
+ *   verdict: ReadonlyArray<LegibilityRung|null>,
+ * }>, hooks: Readonly<{
+ *   framing: ReadonlyArray<LegibilityRung|null>,
  * }>}>}
  */
 export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
@@ -1045,6 +1125,8 @@ export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
     founded: null,
     record: null,
   }),
+  viability: Object.freeze({ verdict: Object.freeze([]) }),
+  hooks: Object.freeze({ framing: Object.freeze([]) }),
 });
 
 /**
@@ -1067,6 +1149,8 @@ export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
  *     stakes?: unknown}|null>|null,
  *   govFaction?: unknown, structuralViolations?: unknown, structuralSuggestions?: unknown,
  *   coherenceNotes?: Array<{type?: unknown, tab?: unknown}|null>|null,
+ *   criticalIssueCount?: unknown, hookCategories?: ReadonlyArray<unknown>|null,
+ *   clockIds?: ReadonlyArray<unknown>|null, governingName?: unknown,
  *   history?: {age?: unknown, historicalCharacter?: unknown,
  *     founding?: {foundedBy?: unknown, initialChallenge?: unknown}|null,
  *     historicalEvents?: Array<{type?: unknown, name?: unknown, yearsAgo?: unknown,
@@ -1215,6 +1299,33 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
       ground: rung('DS-GEN-12', groundPoolKey(readings.terrainType), ''),
       market: rung('DS-GEN-13', marketPoolKey(readings), ''),
       institutions: rung('DS-GEN-17', institutionsPoolKey(readings.inst), ''),
+    }),
+    // DS-GEN-11's three lenses over one verdict, in the order ViabilityTab already prints
+    // them: the verdict, the contradiction count, and the caveat about WHEN the reading was
+    // taken — which the tab states as a datum in its own words directly beneath the headline.
+    viability: Object.freeze({
+      verdict: Object.freeze([
+        rung('DS-GEN-11', viabilityVerdictPoolKey(readings.viable), ''),
+        rung('DS-GEN-11', criticalIssuePoolKey(readings.criticalIssueCount), ''),
+        rung('DS-GEN-11', 'THE FIRST-SURVEY QUALIFICATION', ''),
+      ].filter((line) => line && line.sentence)),
+    }),
+    // DS-HK-1. ONE line per category the page actually carries hooks for, then one per live
+    // escalation clock — the framing the hooks are read FROM, never the hook prose, which
+    // keeps its own words on the rows below.
+    hooks: Object.freeze({
+      framing: Object.freeze([
+        ...[...new Set((Array.isArray(readings.hookCategories) ? readings.hookCategories : [])
+          .map((c) => hookCategoryPoolKey(c)).filter(Boolean))]
+          .map((key) => rung('DS-HK-1', key, '')),
+        ...[...new Set((Array.isArray(readings.clockIds) ? readings.clockIds : [])
+          .map((id) => escalationClockPoolKey(id)).filter(Boolean))]
+          .map((key) => (key
+            ? legibilityRung('', readStateProse(CORPUS, 'DS-HK-1', key, {
+              ...options, slots: { ...slots, governing: properFill(text(readings.governingName)) },
+            }), [])
+            : null)),
+      ].filter((line) => line && line.sentence)),
     }),
     history: Object.freeze({
       identity,
