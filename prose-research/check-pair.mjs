@@ -14,8 +14,10 @@ for (const f of readdirSync(gdir).filter(f => f.endsWith('.generated.js'))) {
   walk(table, 'CAUSAL'); }
 const slots = s => new Set([...s.matchAll(/\{([a-z_0-9]+)\}/g)].map(m => m[1]));
 const words = s => s.trim().split(/\s+/).filter(Boolean).length;
-const DURATION = /\b(year|years|season|seasons|winter|winters|generation|generations|lifetime|decade|decades|month|months|week|weeks|day|days|ago|since|every|always|never|long|recent|lately|now|yet|still|already)\b/gi;
-const COUNT = /\b(nobody|no one|a few|a dozen|dozens|hundreds|a hundred|scores|most|half|all|none|many|several|some|souls|people|households|families|hands|mouths|heads)\b/gi;
+// §0d's six-band vocabulary + the general time words: any of these ADDED by a rewrite is a duration claim the pool key may not license (T5)
+const DURATION = /\b(this season|within the year|years on|years old|a decade|a generation|older than its bearers|year|years|season|seasons|winter|winters|generation|generations|lifetime|decade|decades|month|months|week|weeks|day|days|ago|since|every|always|never|long|recent|lately|now|yet|still|already)\b/gi;
+// §0d QUANTITY_BANDS + the authored magnitude words + the count NOUNS (a moved noun moves the band: souls → households)
+const COUNT = /\b(nobody|no one|a few souls|a few|a dozen or so|a dozen|dozens|a hundred or so|a hundred|several hundred|many hundreds|hundreds|thousands|a handful|a score|scores|most|all but|half|all|none|many|several|some|souls|people|households|families|hands|mouths|heads)\b/gi;
 const lower = s => s.toLowerCase();
 const setOf = (s, re) => new Set((lower(s).match(re) || []).map(x => x.toLowerCase()));
 const pairs = JSON.parse(readFileSync(PAIRS, 'utf8')); let fails = 0;
@@ -25,7 +27,7 @@ for (const p of pairs) {
   if (h && h.marks.length) r.push('MARKS ' + JSON.stringify(h.marks) + (h.marks.includes('dm-only') ? ' — dm-only: the AFTER inherits the mark and the audience law' : ''));
   const sb = slots(p.before), sa = slots(p.after);
   if ([...sb].some(x => !sa.has(x)) || [...sa].some(x => !sb.has(x))) r.push(`SLOTS differ: before {${[...sb]}} after {${[...sa]}}`);
-  if (/\d/.test(p.after)) r.push('DIGIT in AFTER'); if (/—/.test(p.after)) r.push('EM DASH in AFTER'); if (/!/.test(p.after)) r.push('EXCLAMATION in AFTER');
+  if (/\d/.test(p.after)) r.push('DIGIT in AFTER'); if (/\d+\s*%|percent/i.test(p.after)) r.push('PERCENT in AFTER (§0d: proportions in words)'); if (/—/.test(p.after)) r.push('EM DASH in AFTER'); if (/!/.test(p.after)) r.push('EXCLAMATION in AFTER');
   if (words(p.after) > words(p.before)) r.push(`LONGER: ${words(p.before)} → ${words(p.after)} words`);
   const dB = setOf(p.before, DURATION), dA = setOf(p.after, DURATION); const addedDur = [...dA].filter(w => !dB.has(w)); if (addedDur.length) r.push('DURATION/TIME words ADDED: ' + addedDur.join(', '));
   const cB = setOf(p.before, COUNT), cA = setOf(p.after, COUNT); const addedC = [...cA].filter(w => !cB.has(w)), lostC = [...cB].filter(w => !cA.has(w));
