@@ -15,7 +15,13 @@ NS_ODQ=$(git diff HEAD --numstat -- docs/OWNER_DECISION_QUEUE.md | awk '{print $
 [ "$(grep -c '^## ⭐⭐⭐⭐⭐ PICKUP AT §896\.1 ' docs/HANDOFF_CURRENT.md)" = "1" ] || { echo "ABORT: §896.1 card != 1"; exit 1; }
 [ "$(grep -c '^## (superseded) PICKUP AT §896 ' docs/HANDOFF_CURRENT.md)" = "1" ] || { echo "ABORT: §896 card not demoted exactly once"; exit 1; }
 [ "$(grep -c '^## ⭐⭐⭐⭐⭐ PICKUP AT' docs/HANDOFF_CURRENT.md)" = "1" ] || { echo "ABORT: more than one starred pickup"; exit 1; }
-DEL_H=$(git diff HEAD --numstat -- docs/HANDOFF_CURRENT.md | awk '{print $2}'); [ "$DEL_H" = "1" ] || { echo "ABORT: HANDOFF deletions=$DEL_H (only the demoted heading may change)"; exit 1; }
+# ⚠ HANDOFF/FRQ are `D ` (staged-deleted) + `??` (untracked) in this worktree: `git diff HEAD -- path` compares HEAD to NOTHING
+# and reports the whole file deleted. Compare the untracked copy against the HEAD blob with --no-index instead.
+git show HEAD:docs/HANDOFF_CURRENT.md > "$SC/hand.head.8961"
+NS_H=$(git diff --no-index --numstat "$SC/hand.head.8961" docs/HANDOFF_CURRENT.md | awk '{print $1"/"$2}'); ADD_H=${NS_H%/*}; DEL_H=${NS_H#*/}
+[ "$DEL_H" = "1" ] || { echo "ABORT: HANDOFF deletions=$DEL_H (only the demoted heading may change)"; exit 1; }
+[ "$ADD_H" -ge 2 ] || { echo "ABORT: HANDOFF additions=$ADD_H (the card block is missing)"; exit 1; }
+echo "  HANDOFF vs HEAD: +$ADD_H/-$DEL_H (card inserted, one heading demoted)"
 [ "$(md5 -q docs/FABLE_RETROVALIDATION_QUEUE.md)" = "$(git show HEAD:docs/FABLE_RETROVALIDATION_QUEUE.md | md5 -q)" ] || { echo "ABORT: worktree FRQ differs from HEAD"; exit 1; }
 [ -s "$SC/queue-8961.md" ] && [ -s "$SC/frq.head.8961" ] || { echo "ABORT: queue-8961.md / frq.head.8961 missing"; exit 1; }
 [ "$(md5 -q $SC/frq.head.8961)" = "$(git show HEAD:docs/FABLE_RETROVALIDATION_QUEUE.md | md5 -q)" ] || { echo "ABORT: frq.head.8961 is not HEAD's FRQ"; exit 1; }
