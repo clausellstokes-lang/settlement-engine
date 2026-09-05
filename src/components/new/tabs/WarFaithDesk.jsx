@@ -27,8 +27,20 @@
  * ⛔ THE GATE DEFAULTS CLOSED. `publicDossier = true` is the parameter default, so a future
  * caller that forgets the prop draws NOTHING rather than leaking. That is the kernel's own
  * law 2 reasoning one layer up — the restrictive read is the safe one when the caller is
- * wrong — and the UI flow tests are what keep the default from being a silent dark: both
- * tabs are proved to SPEAK with the prop passed and to fall silent without it.
+ * wrong.
+ *
+ * ⛔ AND THE OTHER HALF OF THAT DEFAULT IS UNPROVED, SAID HERE RATHER THAN CLAIMED AWAY.
+ * A default-closed gate has two failure directions: it can LEAK (the prop is forgotten and
+ * the desk draws for a free viewer) and it can go SILENTLY DARK (the prop is forgotten and
+ * a paying reader is shown nothing, which no red anywhere would report). This header used
+ * to say "the UI flow tests are what keep the default from being a silent dark: both tabs
+ * are proved to SPEAK with the prop passed and to fall silent without it", and named
+ * `tests/ui/warTabFlow.test.js` and `tests/ui/faithTabFlow.test.js` as its enforcers.
+ * NEITHER FILE HAS EVER EXISTED, and no test in the estate names this component at all —
+ * measured, not inferred. `tests/domain/warFaithStateProseDesk.test.js` proves the CORPUS
+ * and the pools; it carries no `publicDossier` read. So the leak direction is covered by
+ * the registry walker below, and the silent-dark direction is covered by nothing. The
+ * claim is withdrawn rather than repointed at a test that does not make it.
  *
  * ── THE ROUTER READ, AND WHY EVERY POSITION HERE IS A REAL DRAW ──────────────────────
  * Every position asks `drawnAtMount(id, rung)` what it may show. THE COMPONENT DOES NOT
@@ -39,7 +51,7 @@
  * of citations that cite nothing.
  *
  * @enforced-by tests/lint/dossierMountRegistry.walker.test.js
- * @enforced-by tests/ui/warTabFlow.test.js + tests/ui/faithTabFlow.test.js
+ * @enforced-by tests/domain/warFaithStateProseDesk.test.js
  */
 import { warFaithStateProse } from '../../../domain/display/stateProse/warFaithStateProse.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
