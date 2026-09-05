@@ -194,9 +194,17 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
   'src/domain/display/defenseDisplay.js': 'display — defenseProfile.institutions force buckets, not the roster',
   'src/domain/display/institutionProfile.js': 'display — defenseProfile.institutions buckets',
   'src/domain/display/threatAssessment.js': 'display — defenseProfile.institutions buckets',
-  // THE DESK CONSIST (2026-09-04) added a FOURTH reader of the same facet. Same shape, same
-  // disposition — and see the count arm below for where the ruin question actually lives.
-  'src/domain/display/stateProse/defenseStateProse.js': 'display — defenseProfile.institutions buckets (the DS-DEF-2 perimeter/force rows), not the settlement roster',
+  // ⭐ THE DESK'S EXEMPT ROW IS DELETED, AND THE WIN IS BANKED (lane DESK-DEFENSE,
+  // 2026-09-04). It was added hours earlier as "a fourth instance of a settled shape", and
+  // the shape was settled — but the READ underneath it was not a display read at all. The
+  // DS-DEF-2 perimeter/force rows are a CREDITING read: they tell a reader whether the town
+  // can hold a wall. `src/domain/display/stateProse/defenseStateProse.js` no longer reads
+  // `.institutions` in any form; it takes the typed `standingDefenseForces` projection from
+  // src/domain/institutions/defenseInstitutionBuckets.js, which routes the roster through
+  // liveInstitutions() — so it drops out of the discovery set entirely, which is the
+  // documented shape of a fully-routed file, and the honesty arm below is what required
+  // this row's deletion rather than its rewording.
+  // ⚠ Do NOT re-add it: an exempt entry for a non-reader is the stale state that arm forbids.
   'src/domain/display/dossierViewModel.js': 'display — roster count for the dossier overview',
   'src/domain/dossier/powerSupport.js': 'display/list — lists institutions aligned to each power for the Power-tab support web (a relationship/alignment display keyed on category + factionSource, NOT a live-provider capacity aggregate); each row is an InstitutionLink that surfaces the institution\'s actual state, so a ruin is shown, never credited with function',
   // ── canon-path string literal: RETIRED 2026-08-14, THE READ WAS NEVER A READ ────
@@ -383,15 +391,29 @@ describe('ruin-filter roster ratchet (structural-prevention Pattern 2)', () => {
     // judgment: defenseDisplay.js, institutionProfile.js and threatAssessment.js are all
     // exempted above for reading the SAME facet, so this is the fourth instance of a settled
     // shape rather than a new exception.
-    // ⚠ WHERE THE RUIN QUESTION ACTUALLY LIVES, written down rather than laundered into this
-    // exemption: the buckets are built by `getDefenseInstitutions` in
-    // src/generators/defenseGenerator.js, which partitions the roster by NAME KEYWORD ONLY and
-    // consults no ruin status — so a flattened citadel still lands in the `walls` bucket. That
-    // producer sits in src/generators/, OUTSIDE this walker's src/domain scan root, so no arm
-    // here can reach it. Exempting the desk is the right layer; the producer is a separate act
-    // and is reported, not silently absorbed.
-    // Read from this arm's own failure message ("expected 93 to be 92"), never computed.
-    expect(readers.length).toBe(93);
+    // RE-MEASURED 2026-09-04 BY LANE DESK-DEFENSE: 93 → 92, A SHRINK, and the paragraph above
+    // is the reason it was possible. That lane went and measured the producer this walker
+    // could not reach, and the answer was worse than "ruin-blind":
+    //   • The desk's grader was `v === true || (typeof v === 'number' && v > 0)` while the
+    //     producer writes ARRAYS, so a walled, garrisoned town and an empty field produced
+    //     byte-identical prose. The read was DEAD, which is the only reason the ruin-blindness
+    //     underneath it had never surfaced.
+    //   • And the buckets could not have been filtered anyway. `generateDefenseProfile` has one
+    //     caller (steps/assembleSettlement.js), so `defenseProfile.institutions` is a
+    //     generation-time SNAPSHOT, and every ruin path REPLACES its roster row immutably
+    //     (`{ ...inst, status: 'ruined', _worldPulseInactive: true }`) — the buckets keep the
+    //     pre-ruin objects by reference and the stamp never reaches them.
+    // ⇒ The cure was not a filter in the producer but a live re-derivation at the crediting
+    // read: src/domain/institutions/defenseInstitutionBuckets.js now owns the ONE keyword
+    // table (the generator delegates to it, byte-identical output) and exposes
+    // `standingDefenseForces`, which partitions `liveInstitutions(settlement)`. The desk reads
+    // that, drops out of this discovery set, and its exempt row is deleted above.
+    // ⚠ The three OTHER bucket readers (defenseDisplay, institutionProfile, threatAssessment)
+    // stay exempt AND stay on the stale snapshot. That is correct for a display of what the
+    // town built, and it is a REPORTED gap rather than an absorbed one: none of them may be
+    // used to answer "what can this town field today".
+    // Read from this arm's own failure message ("expected 92 to be 93"), never computed.
+    expect(readers.length).toBe(92);
   });
 
   test('exempt honesty: every exempt entry still reads .institutions and is not already compliant', () => {
