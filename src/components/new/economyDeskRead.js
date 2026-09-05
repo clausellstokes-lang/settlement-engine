@@ -92,8 +92,13 @@ export const SILENT_ECONOMY_DESK = Object.freeze({
  * @returns {Readonly<Record<string, object|null>>}
  */
 export function economyDeskRead(settlement, options = {}) {
-  if (options.publicDossier || !settlement) return SILENT_ECONOMY_DESK;
-  return economyStateProse(
+  if (!settlement) return SILENT_ECONOMY_DESK;
+  // ⛔ THE GATE IS IN THE READ'S OWN STATEMENT, not a guard clause above it — the
+  // `warFaithDeskRungs` idiom verbatim. A preceding `if` gates correctly and is INVISIBLE to
+  // the mount registry's ARM 3, which reads the statement the corpus call sits in: a gate a
+  // walker cannot see is a gate the next edit can delete without anything reddening. Same
+  // truth table, one statement.
+  return options.publicDossier ? SILENT_ECONOMY_DESK : economyStateProse(
     settlement,
     {
       foodBalance: options.foodBalance ?? null,
