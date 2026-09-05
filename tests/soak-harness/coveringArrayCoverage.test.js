@@ -215,12 +215,32 @@ describe('the covering array and its constraint manifest', () => {
     // composition by a landing lane. ⚠ AND ONLY ONE OF THE FOUR FIGURES BELOW WAS EVER
     // REPORTED RED, because the first assertion in this test blinds the three after it —
     // which is exactly why the out-of-band measurement is not optional here.
-    expect(census.virtual.length).toBe(31);
+    // ⭐ AND 31 → 35 AT THE LIGHTING LANDING (§901), where LGT-P5-WOPS (six cars, replayed from
+    // `427b85c63`) mints `infiltrationDepthEnabled`, `missionDispatcherEnabled`,
+    // `operationsVoiceEnabled` and `envoyTaskCatalogEnabled` — the manifest members, their
+    // certification rows, and their by-name reads at the family doors (three in the espionage
+    // gate, one at the errand door; the L-CHAIR-901 receipt's table). THE CLOSURE IS THE
+    // PROOF, exactly as at every mint above, and it was MEASURED OUT OF BAND at the composed
+    // tip d75e807a6 BEFORE these literals moved, by calling `flagDomainCensus` with this
+    // suite's own arguments: `union` moves 88 → 92 in lockstep while `governed` (25) and
+    // `ungoverned` (32) do NOT move — affirmative evidence all four keys are genuinely
+    // VIRTUAL, and both checked directly rather than inferred from the arithmetic (absent from
+    // DEFAULT_SIMULATION_RULES, and absent from all seven preset spreads). `union − governed`
+    // rises by construction (63 → 67); `nonBoolean` (13) does not move, because all four are
+    // booleans; `overlap` stays empty.
+    // ⛔ THE MINTING LANE DID NOT PAY THIS SURFACE EITHER — the seventh sighting of the
+    // habitat. LGT-P5-WOPS paid the manifest, the rows and the doors, and its
+    // contributionLedgerShape pair was settled against SEAT-78's mint at the trial
+    // composition; this census was met at the composed-tip proof by the landing chair, one
+    // landing after SEAT-78's was met the same way. The registry the mint site can enumerate
+    // (TE-GUARDS-1) is still the cure.
+    expect(census.virtual.length).toBe(35);
     expect(census.overlap).toEqual([]);
     // 85 -> 86 at the WAR landing (§876): the same coupled-union key, same re-measure.
     // 86 -> 87 at ENC-3 (§893): the virtual mint above, moving in lockstep.
     // 87 -> 88 at SEAT-78 (§900): the virtual mint above, moving in lockstep.
-    expect(census.union.length).toBe(88);
+    // 88 -> 92 at the LIGHTING landing (§901): the four virtual mints above, moving in lockstep.
+    expect(census.union.length).toBe(92);
     expect(census.governed.length + census.ungoverned.length + census.virtual.length).toBe(census.union.length);
     // 57 of 82 sit outside the normalizer's fail-closed coercion — the measured content of
     // "the normalizer is NOT the oracle", and the reason the manifest had to be minted. It
@@ -228,7 +248,8 @@ describe('the covering array and its constraint manifest', () => {
     // 60 -> 61 at the WAR landing (§876): the coupled key is virtual, not governed.
     // 61 -> 62 at ENC-3 (§893): likewise virtual, so it lands outside the normalizer.
     // 62 -> 63 at SEAT-78 (§900): likewise virtual, so it lands outside the normalizer.
-    expect(census.union.length - census.governed.length).toBe(63);
+    // 63 -> 67 at the LIGHTING landing (§901): four virtual keys, all outside the normalizer.
+    expect(census.union.length - census.governed.length).toBe(67);
     expect(census.nonBoolean.length).toBe(13);
   });
 
