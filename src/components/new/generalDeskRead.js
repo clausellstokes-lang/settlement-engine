@@ -52,6 +52,7 @@ const GROUND_MOUNT = 'overview.ground';
 const MARKET_MOUNT = 'overview.market';
 const INSTITUTIONS_MOUNT = 'overview.institutions';
 const CONNECTION_MOUNT = 'overview.notableConnection';
+const POPULATION_MOUNT = 'overview.populationDirection';
 
 /** The general desk's HISTORY positions. */
 const IDENTITY_MOUNT = 'history.identity';
@@ -68,6 +69,14 @@ const CRAFT_REASON_MOUNT = 'economics.craftReason';
 /** The STEADINGS position — DS-GEN-8, at the section that already renders those three facts. */
 const STEADINGS_MOUNT = 'overview.steadings';
 
+/**
+ * The NEIGHBOUR-NETWORK position — DS-REL-1.
+ * ⚠ `relationships` and `neighbours` are TWO router cases rendering ONE component, so this
+ * single row draws on both. That is still ONE position on the page-set: the registry says
+ * where a fact speaks, not how many routes reach it — the `power.factionLadder` precedent.
+ */
+const NETWORK_MOUNT = 'relationships.network';
+
 /** The shape every consumer gets, silent. Frozen so a caller cannot fill it in. */
 const SILENT_OVERVIEW = Object.freeze({
   healthLines: Object.freeze([]),
@@ -77,6 +86,7 @@ const SILENT_OVERVIEW = Object.freeze({
   siteLines: Object.freeze([]),
   situationLine: null,
   connectionLines: Object.freeze([]),
+  populationLine: null,
 });
 
 /** The same, for the history chapter. */
@@ -91,6 +101,10 @@ const SILENT_VIABILITY = Object.freeze({ verdictLines: Object.freeze([]) });
 const SILENT_HOOKS = Object.freeze({ framingLines: Object.freeze([]) });
 /** The same, for the craft-reason line. */
 const SILENT_ECONOMICS = Object.freeze({ craftReasonLine: null });
+/** The same, for the neighbour cards and the cross-settlement engagements. */
+const SILENT_RELATIONSHIPS = Object.freeze({
+  networkLines: Object.freeze([]), engagementLines: Object.freeze([]),
+});
 /** The same, for the remnant banner, the ancient-ruin banner and the steading cards. */
 const SILENT_STEADINGS = Object.freeze({
   remnantLine: null, ruinLine: null, steadingLines: Object.freeze([]),
@@ -102,7 +116,8 @@ const SILENT_STEADINGS = Object.freeze({
  * missing here is a position this reader is not allowed to hand back.
  * @type {Readonly<{overview: typeof SILENT_OVERVIEW, history: typeof SILENT_HISTORY,
  *   viability: typeof SILENT_VIABILITY, hooks: typeof SILENT_HOOKS,
- *   economics: typeof SILENT_ECONOMICS, steadings: typeof SILENT_STEADINGS}>}
+ *   economics: typeof SILENT_ECONOMICS, steadings: typeof SILENT_STEADINGS,
+ *   relationships: typeof SILENT_RELATIONSHIPS}>}
  */
 export const GENERAL_DESK_SILENT = Object.freeze({
   overview: SILENT_OVERVIEW,
@@ -111,6 +126,7 @@ export const GENERAL_DESK_SILENT = Object.freeze({
   hooks: SILENT_HOOKS,
   economics: SILENT_ECONOMICS,
   steadings: SILENT_STEADINGS,
+  relationships: SILENT_RELATIONSHIPS,
 });
 
 /**
@@ -132,7 +148,10 @@ function line(mount, rung) {
  *   hookCategories?: ReadonlyArray<unknown>|null,
  *   clockIds?: ReadonlyArray<unknown>|null,
  *   steadings?: ReadonlyArray<unknown>|null,
- *   lifecycleStatus?: unknown}} [options]
+ *   lifecycleStatus?: unknown,
+ *   neighbours?: ReadonlyArray<unknown>|null,
+ *   crossEngagements?: ReadonlyArray<unknown>|null,
+ *   populationTrend?: {band?: unknown, window?: unknown}|null}} [options]
  *   `stresses` is the caller's OWN normalized stress list — DS-GEN-5 suppresses itself where
  *   a primary stress resolves, and it must key on the SAME ladder the arrival scene above it
  *   keys on or the page prints an ordinary market day underneath a siege banner.
@@ -217,6 +236,19 @@ export function generalDeskLines(settlement, options = {}) {
       // can hand them over. A reader that resolved the store itself would be a second
       // opinion about which campaign owns this town.
       steadings: options.steadings,
+      // DS-REL-1. The links and the typed engagement rows are the tab's OWN assembled lists
+      // — it merges `neighbourNetwork`, the live `neighborRelationship` and two conflict
+      // ledgers before it renders a card — so the desk reads what the page actually shows
+      // rather than re-deriving a second, quietly different list.
+      neighbours: options.neighbours,
+      crossEngagements: options.crossEngagements,
+      // ⛔ DS-POP-3's BAND IS HANDED OVER WHOLE, never recomputed and never reached for.
+      // `populationTrendBand` (domain/display/trendLens.js) is the annex's named reader and
+      // the sibling POP block's, and it imports `AXIS_TUNING` out of a WORLDPULSE module —
+      // reaching for it here would drag the belief-axis chain into every tab chunk that
+      // draws this desk. Passing `{band, window}` whole also makes it impossible for a
+      // caller to supply a band without the window the gate depends on.
+      populationTrend: options.populationTrend,
     },
     { seed: String(r?._seed ?? r?.id ?? ''), audience: options.playerView ? 'player' : 'dm' },
   );
@@ -251,6 +283,7 @@ export function generalDeskLines(settlement, options = {}) {
       situationLine: line(SITUATION_MOUNT, prose.overview.situation),
       connectionLines: Object.freeze(prose.overview.notableConnection
         .map((rung) => line(CONNECTION_MOUNT, rung)).filter(Boolean)),
+      populationLine: line(POPULATION_MOUNT, prose.overview.populationDirection),
     }),
     history: Object.freeze({
       identityLines: Object.freeze(identity
@@ -268,6 +301,14 @@ export function generalDeskLines(settlement, options = {}) {
     }),
     economics: Object.freeze({
       craftReasonLine: line(CRAFT_REASON_MOUNT, prose.economics.craftReason),
+    }),
+    relationships: Object.freeze({
+      // One inner pair per link — the standing, then the named-people line — index-paired
+      // with the caller's own neighbour cards, nulls kept in place.
+      networkLines: Object.freeze(prose.relationships.network
+        .map((pair) => Object.freeze(pair.map((rung) => line(NETWORK_MOUNT, rung))))),
+      engagementLines: Object.freeze(prose.relationships.engagements
+        .map((rung) => line(NETWORK_MOUNT, rung))),
     }),
     steadings: Object.freeze({
       remnantLine: line(STEADINGS_MOUNT, prose.steadings.remnant),

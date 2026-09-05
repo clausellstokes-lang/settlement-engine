@@ -4,6 +4,7 @@ import { stressorsStateProse, crisisBannerRung } from '../../../domain/display/s
 // on seven tabs and the registry's ARM 2 admits exactly one call site per desk. The reader
 // owns the §885.3 public gate and the desk's own primary-stress read.
 import { generalDeskLines } from '../generalDeskRead.js';
+import { populationTrendBand } from '../../../domain/display/trendLens.js'; // DS-POP-3 · the annex's own named reader
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
 import { deriveAllActiveConditions } from '../../../domain/activeConditions.js';
 // FREE: `stressorsCore.js` is already in the first-paint closure, so reaching its canonical
@@ -193,8 +194,13 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
   // seven tabs and the registry admits one call site per desk.
   const {
     healthLines, conflictLines, warningLines, originLines, siteLines, situationLine,
-    connectionLines,
-  } = generalDeskLines(r, { publicDossier, playerView, stresses }).overview;
+    connectionLines, populationLine,
+    // DS-POP-3's band is READ HERE and handed over whole: `populationTrendBand` is the
+    // annex's own named reader and it imports out of a worldPulse module, so the cost
+    // belongs in this lazy tab chunk rather than in a leaf six tabs share.
+  } = generalDeskLines(r, {
+    publicDossier, playerView, stresses, populationTrend: populationTrendBand(r.populationHistory),
+  }).overview;
 
   // Institution layout — guard `r.institutions` because sparse saves
   // (mid-migration, partial gen) can land here without an institutions
@@ -229,6 +235,10 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
           {r.config?.tradeRouteAccess&&<><span style={{fontSize:FS.sm,color:MUTED}}>·</span><span style={{fontSize:FS.sm,color:swatch.inkMag3,textTransform:'capitalize'}}>{r.config.tradeRouteAccess.replace(/_/g,' ')}</span></>}
           {hist.age&&<><span style={{fontSize:FS.sm,color:MUTED}}>·</span><span style={{fontSize:FS.sm,color:swatch.inkMag3}}>{hist.age} years old</span></>}
         </div>
+        {/* DS-POP-3 at `overview.populationDirection` — the direction of the roll read
+            against the approach, beside the head count and the access word above. Silent
+            until the ring carries two readings, which is what the ring honestly is. */}
+        {populationLine&&<p style={{fontSize:FS.sm,color:swatch.inkMag2,fontStyle:'italic',margin:'0 0 6px',lineHeight:1.5}}>{populationLine}</p>}
         {/* Row 2: character + spatial */}
         <div style={{display:'flex',gap:16,flexWrap:'wrap'}}>
           {hist.historicalCharacter&&<p style={{fontSize:FS.sm,color:swatch['#5A3A1A'],fontStyle:'italic',margin:0,flex:'2 1 200px',lineHeight:1.5}}>"{hist.historicalCharacter}"</p>}

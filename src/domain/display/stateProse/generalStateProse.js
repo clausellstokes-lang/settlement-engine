@@ -129,6 +129,11 @@ export const SLOT_FILL_SHAPES = Object.freeze({
   // reaches a reader through this desk, which is also §0d's own answer.
   steading: 'proper',
   ruin: 'proper',
+  // DS-REL-1. `{counterpart}` is the other end of a directed relation and `{npc}` is a cast
+  // person named on a member receipt — both §0c `proper` rows, both filled from the link's
+  // own record and never minted.
+  counterpart: 'proper',
+  npc: 'proper',
 });
 
 /**
@@ -1441,6 +1446,145 @@ export function steadingPoolKey(steading) {
   return CORPUS['DS-GEN-8'].pools[key] ? key : null;
 }
 
+// ── DS-REL-1 · Relationships › The neighbour network ────────────────────────────────
+
+/**
+ * DS-REL-1's per-tie pool — the standing between this town and ONE neighbour.
+ *
+ * ⛔⛔ THE ARM IS THE WHOLE DIFFICULTY, AND THE ANNEX SAYS SO IN ITS OWN WORDS: "`patron`
+ * and `client` are the two ends of one asymmetric tie and are DIFFERENT SENTENCES. A
+ * selector that ignores the arm prints the wrong town's standing." The two pools say
+ * opposite things about which hall decides — `{counterpart} looks to {settlement}` against
+ * `{settlement}'s decisions are made with {counterpart} in the room` — and both read
+ * perfectly fluent while being false about this town.
+ *
+ * ⇒ THE DIRECTION IS READ FROM `localRelationshipRole`, WHICH IS THE ONE FIELD THAT CARRIES
+ * IT. `canonicalRelationship.js` stamps that per-side role from the canonical
+ * `sourceRole`/`targetRole` at link time, and `directionalRelationshipLabel` — the estate's
+ * own consumer of the same fact — reads exactly this field with `displayRelationshipType` as
+ * its legacy fallback. This mirrors that read rather than inventing a second one.
+ *
+ * ⛔ AND A LINK WITH NO ROLE IS WITHHELD RATHER THAN GUESSED. A legacy row carrying only
+ * `relationshipType: 'patron'` does not say WHICH END this town is; picking one would be
+ * this desk deciding a town's standing by array position. Both asymmetric pools go silent on
+ * such a row and the symmetric ones are unaffected, because a symmetric tie has no end to
+ * get wrong.
+ *
+ * ⚠ MEASURED RESIDUE: `overlord` and `vassal` are real `localRelationshipRole` values and
+ * the corpus writes NO pool for either. They render nothing rather than folding into
+ * `patron`/`client` — a fold would be this desk ruling that a vassal and a client are the
+ * same standing, which is a vocabulary decision and belongs to whoever owns the words. The
+ * desk test pins the residue in both directions.
+ * @param {{relationshipType?: unknown, localRelationshipRole?: unknown,
+ *   displayRelationshipType?: unknown}|null|undefined} link
+ * @returns {string|null}
+ */
+export function neighbourTiePoolKey(link) {
+  if (!link || typeof link !== 'object') return null;
+  const role = text(link.localRelationshipRole || link.displayRelationshipType).toLowerCase();
+  const type = text(link.relationshipType).toLowerCase();
+  // An ASYMMETRIC type is readable only through the role. A role that names one of the two
+  // ends answers it outright; anything else on an asymmetric type is unanswered, and an
+  // unanswered end is silence.
+  const key = (role === 'patron' || role === 'client') ? role
+    : (type === 'patron' || type === 'client' || type === 'vassal') ? ''
+      : type;
+  return key && CORPUS['DS-REL-1'].pools[key] ? key : null;
+}
+
+/**
+ * DS-REL-1's CROSS-SETTLEMENT NPC pool — that some of what passes between the two towns
+ * passes between named individuals. Keyed on the tie's own `npcConnections[]`, which is the
+ * only record of it; a link with none has not been asked the question and renders nothing.
+ * @param {{npcConnections?: unknown}|null|undefined} link @returns {string|null}
+ */
+export function crossSettlementNpcPoolKey(link) {
+  const rows = Array.isArray(link?.npcConnections) ? link.npcConnections : [];
+  if (rows.length === 0) return null;
+  const key = 'cross-settlement NPC contacts';
+  return CORPUS['DS-REL-1'].pools[key] ? key : null;
+}
+
+/**
+ * DS-REL-1's CROSS-SETTLEMENT ENGAGEMENT pool — a quarrel running between named houses
+ * rather than between the towns. `RelationshipsTab.jsx` already separates `faction_engagement`
+ * from `conflict` in the same list, and only the first is what this pool is about: the two
+ * variants that speak generally say "between named parties and no quarrel between the towns",
+ * which is precisely the faction reading and not the NPC one.
+ * @param {{type?: unknown}|null|undefined} row @returns {string|null}
+ */
+export function crossEngagementPoolKey(row) {
+  if (text(row?.type) !== 'faction_engagement') return null;
+  const key = 'cross-settlement engagements';
+  return CORPUS['DS-REL-1'].pools[key] ? key : null;
+}
+
+/**
+ * The NPC this desk names on a cross-settlement tie — THE ONE ON THIS TOWN'S SIDE.
+ *
+ * ⛔ THE SIDE IS PART OF THE SENTENCE, not a detail of it: the seam is "{npc} in {settlement}
+ * keeps a standing tie in {counterpart}", so naming the NEIGHBOUR's person there would put a
+ * stranger inside this town's walls. `npcConnections[]` rows carry both ends by name
+ * (`primaryNPCName` is this settlement's, `neighbourNPCName` is theirs —
+ * `RelationshipsTab.jsx`'s own npc→settlement map is built from exactly that split), so the
+ * local end is read and the far end is never offered.
+ * @param {{npcConnections?: unknown}|null|undefined} link @returns {string|undefined}
+ */
+function localNpcFill(link) {
+  for (const row of (Array.isArray(link?.npcConnections) ? link.npcConnections : [])) {
+    const name = properFill(text(/** @type {{primaryNPCName?: unknown}|null} */ (row)?.primaryNPCName));
+    if (name) return name;
+  }
+  return undefined;
+}
+
+// ── DS-POP-3 · Overview › The direction of the roll, read against the approach ───────
+
+/**
+ * DS-POP-3's pool — the trend band's SIGN by the approach's width.
+ *
+ * ⛔⛔ THE WINDOW GATE IS THE WHOLE DIFFERENCE BETWEEN A READING AND A DEFAULT, and without
+ * it this block would be the loudest dead arm in the leaf. `populationTrendBand` returns
+ * `{band: 0, net: 0, window: 0}` for an EMPTY ring — its own docblock says "fewer than two
+ * readings ⇒ band 0, window < 2 (nothing to trend)" — and `populationHistory` is 0 of 48 on
+ * a freshly generated settlement. Keyed on the sign alone, `LEVEL` would fire on EVERY town
+ * in EVERY world and print "{settlement}'s roll holds where it is" over a town whose roll
+ * has never been read twice. That is a fail-soft default dressed as a reading, which is the
+ * `economicBase: mixed` shape the registry's own general test refuses.
+ *
+ * ⇒ FEWER THAN TWO READINGS IS SILENCE. `DS-POP-2` owns the corpus's only honest sentence
+ * about that state (`WINDOW under two readings`) and `DS-POP-2` is marked NO SURFACE, so
+ * there is nowhere to say it and R-DST-K governs.
+ *
+ * ⚠ THE BAND IS PASSED IN, NEVER COMPUTED HERE, AND THE ANNEX REQUIRES IT: "THIS IS
+ * `DS-POP-2`'s READER, DELIBERATELY… keying this block on the same one keeps the two POP
+ * blocks reading one band rather than two." The canonical reader is
+ * `populationTrendBand` in `domain/display/trendLens.js`, which imports `AXIS_TUNING` out of
+ * a WORLDPULSE module; reaching for it here would drag the belief-axis chain into every tab
+ * chunk that draws this desk, so the caller reads it and hands over the result — the
+ * `hookCategories` arrangement, for the same reason.
+ *
+ * ⚠ THE BELIEVED `populationTrendBand` FIELD ON A BELIEF RECORD IS A DIFFERENT THING THAT
+ * SHARES THE NAME and is never this block's source: a believed band is not engine truth.
+ *
+ * NARROW is `DS-GEN-13`'s convention unchanged — `isolated` · `mountain_pass` ·
+ * `mountain_road` — read from the same frozen list one screen up rather than re-spelled.
+ * @param {{band?: unknown, window?: unknown}|null|undefined} trend the canonical reader's
+ *   own return value, handed over whole so a caller cannot pass a band without its window
+ * @param {unknown} tradeRouteAccess
+ * @returns {string|null}
+ */
+export function populationDirectionPoolKey(trend, tradeRouteAccess) {
+  const window = typeof trend?.window === 'number' ? trend.window : 0;
+  const band = typeof trend?.band === 'number' ? trend.band : null;
+  if (window < 2 || band === null || !Number.isFinite(band)) return null;
+  const narrow = NARROW_ACCESS.includes(text(tradeRouteAccess));
+  const key = band > 0 ? (narrow ? 'RISING-NARROW' : 'RISING-OPEN')
+    : band < 0 ? (narrow ? 'FALLING-NARROW' : 'FALLING-OPEN')
+      : 'LEVEL';
+  return CORPUS['DS-POP-3'].pools[key] ? key : null;
+}
+
 // ── THE DESK ────────────────────────────────────────────────────────────────────────
 
 /**
@@ -1468,6 +1612,7 @@ export function steadingPoolKey(steading) {
  *   market: LegibilityRung|null,
  *   institutions: LegibilityRung|null,
  *   notableConnection: ReadonlyArray<LegibilityRung|null>,
+ *   populationDirection: LegibilityRung|null,
  * }>, history: Readonly<{
  *   identity: ReadonlyArray<LegibilityRung|null>,
  *   founded: LegibilityRung|null,
@@ -1478,6 +1623,9 @@ export function steadingPoolKey(steading) {
  *   framing: ReadonlyArray<LegibilityRung|null>,
  * }>, economics: Readonly<{
  *   craftReason: LegibilityRung|null,
+ * }>, relationships: Readonly<{
+ *   network: ReadonlyArray<ReadonlyArray<LegibilityRung|null>>,
+ *   engagements: ReadonlyArray<LegibilityRung|null>,
  * }>, steadings: Readonly<{
  *   remnant: LegibilityRung|null,
  *   ruin: LegibilityRung|null,
@@ -1495,6 +1643,7 @@ export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
     market: null,
     institutions: null,
     notableConnection: Object.freeze([]),
+    populationDirection: null,
   }),
   history: Object.freeze({
     identity: Object.freeze([]),
@@ -1505,6 +1654,7 @@ export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
   hooks: Object.freeze({ framing: Object.freeze([]) }),
   economics: Object.freeze({ craftReason: null }),
   steadings: Object.freeze({ remnant: null, ruin: null, rows: Object.freeze([]) }),
+  relationships: Object.freeze({ network: Object.freeze([]), engagements: Object.freeze([]) }),
 });
 
 /**
@@ -1533,6 +1683,8 @@ export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
  *   clockIds?: ReadonlyArray<unknown>|null, governingName?: unknown,
  *   activeChains?: unknown, primaryImports?: unknown,
  *   lifecycleStatus?: unknown, steadings?: ReadonlyArray<unknown>|null,
+ *   neighbours?: ReadonlyArray<unknown>|null, crossEngagements?: ReadonlyArray<unknown>|null,
+ *   populationTrend?: {band?: unknown, window?: unknown}|null,
  *   exploitation?: {fullyExploited?: unknown, partiallyExploited?: unknown,
  *     unexploited?: unknown}|null,
  *   history?: {age?: unknown, historicalCharacter?: unknown,
@@ -1739,11 +1891,48 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
       return line && line.sentence ? line : null;
     }));
   const remnantLine = rung('DS-GEN-8', remnantPoolKey(readings.lifecycleStatus), '');
+
+  // ── DS-REL-1 ───────────────────────────────────────────────────────────────────────
+  // ONE LINE PER NEIGHBOUR LINK, INDEX-PAIRED with the caller's own cards. Two lenses meet
+  // at each tie — the standing, and whether the tie runs through named people — and the
+  // standing leads because the card prints its badge directly above.
+  /** @param {string|null} key @param {Record<string, unknown>} slotBag */
+  const relLine = (key, slotBag) => (key
+    ? legibilityRung('', readStateProse(CORPUS, 'DS-REL-1', key, { ...options, slots: slotBag }), [])
+    : null);
+  // ⚠ ONE INNER GROUP PER LINK, never a flattened list: the caller renders each pair inside
+  // the card it is about, and a flat array of two-per-link makes the pairing an arithmetic
+  // the caller has to get right. The group is the guard, exactly as it is for the desk's
+  // page-level positions.
+  const network = Object.freeze((Array.isArray(readings.neighbours) ? readings.neighbours : [])
+    .map((link) => {
+      const bag = {
+        ...slots,
+        counterpart: properFill(text(/** @type {{neighbourName?: unknown}} */ (link)?.neighbourName)),
+        npc: localNpcFill(link),
+      };
+      return Object.freeze([
+        relLine(neighbourTiePoolKey(link), bag),
+        relLine(crossSettlementNpcPoolKey(link), bag),
+      ].map((l) => (l && l.sentence ? l : null)));
+    }));
+  const engagements = Object.freeze((Array.isArray(readings.crossEngagements) ? readings.crossEngagements : [])
+    .map((row) => {
+      const line = relLine(crossEngagementPoolKey(row), {
+        ...slots,
+        counterpart: properFill(text(/** @type {{partnerSettlement?: unknown}} */ (row)?.partnerSettlement)),
+        faction: properFill(text(/** @type {{factionName?: unknown}} */ (row)?.factionName)),
+      });
+      return line && line.sentence ? line : null;
+    }));
   const ruinLine = ruinKey
     ? legibilityRung('', readStateProse(CORPUS, 'DS-GEN-8', ruinKey, { ...options, slots: ruinSlots }), [])
     : null;
 
   return Object.freeze({
+    // DS-REL-1 at ONE position: the neighbour network, two lines per tie, plus the
+    // cross-settlement engagements the same tab prints below them.
+    relationships: Object.freeze({ network, engagements }),
     // DS-GEN-8's three surfaces, kept APART rather than folded into one list: the remnant
     // banner, the ancient-ruin banner and the steading cards are three places on the page,
     // and a caller handed one flat list would have to guess which line belongs where.
@@ -1764,6 +1953,10 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
       // DS-REL-2's two lenses at ONE position: the tie the town names first, then how much
       // of its roll this town's own conditions made. The connection line leads because the
       // page prints its datum directly beneath.
+      // DS-POP-3 beside the population figure the identity strip already prints — the only
+      // place in the dossier that head count reaches a reader.
+      populationDirection: rung('DS-POP-3',
+        populationDirectionPoolKey(readings.populationTrend, readings.tradeRouteAccess), ''),
       notableConnection: Object.freeze([
         rung('DS-REL-2', notableConnectionPoolKey(readings.prominentRelationship), ''),
         rung('DS-REL-2', flagDrivenPoolKey(readings.relationships), ''),

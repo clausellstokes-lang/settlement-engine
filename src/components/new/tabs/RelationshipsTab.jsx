@@ -9,6 +9,7 @@ import {NPCRelCard2, ConflictCard} from '../npcComponents';
 import {NeighbourLinkCard} from '../neighbourComponents';
 import { useStore } from '../../../store/index.js';
 import { NEIGHBOUR_MIRROR_HEADING, neighbourMirrorLines } from '../../../domain/display/neighbourMirror.js';
+import { generalDeskLines } from '../generalDeskRead.js'; // DS-REL-1 · the general desk's ONE caller
 
 export function RelationshipsTab({ settlement:r, neighboursOnly=false, saveId=null, viewerIsPremium=false, playerView=false, publicDossier=false }) {
   const [typeFilter,setTypeFilter]=useState('all');
@@ -98,6 +99,11 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false, saveId=nu
     : [];
   const neighbours = [..._net, ..._liveEntry];
   const flagDriven=rels.filter(rel=>rel.flagDriven);
+  // DS-REL-1 (`relationships.network`) — the town's own account of each standing it keeps
+  // and of the engagements running between named houses. The lists are the ones this tab
+  // ALREADY assembled above, so the prose and the cards cannot describe two different sets.
+  // Silent on a free dossier and silent where a tie's end is unstated (R-DST-K).
+  const relDesk = generalDeskLines(r, { publicDossier, playerView, neighbours, crossEngagements: crossConflicts }).relationships;
 
   // Settlement names for "From" filter
   const settlementName=r.name||'';
@@ -156,7 +162,13 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false, saveId=nu
       {/* Neighbour Network */}
       {neighbours.length>0&&<Section title={`Neighbour Network (${neighbours.length})`} collapsible defaultOpen>
         <div style={{display:'flex',flexDirection:'column',gap:12}}>
-          {neighbours.map((link,i)=><NeighbourLinkCard key={link.id||i} link={link} settlement={r} styleFor={styleFor}/>)}
+          {neighbours.map((link,i)=><React.Fragment key={link.id||i}>
+            <NeighbourLinkCard link={link} settlement={r} styleFor={styleFor}/>
+            {/* INDEX-PAIRED with the desk's own per-link group, nulls kept in place. */}
+            {(relDesk.networkLines[i]||[]).filter(Boolean).map((t,j)=>(
+              <p key={j} style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.55,margin:'-6px 0 0',fontStyle:'italic'}}>{t}</p>
+            ))}
+          </React.Fragment>)}
         </div>
       </Section>}
 
@@ -217,6 +229,7 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false, saveId=nu
                 </span>
               </div>
               {c.description&&<div style={{fontSize:FS.xs,color:swatch.inkMag2,lineHeight:1.5}}>{c.description}</div>}
+              {relDesk.engagementLines[i]&&<div style={{fontSize:FS.xs,color:swatch.inkMag2,lineHeight:1.5,fontStyle:'italic',marginTop:4}}>{relDesk.engagementLines[i]}</div>}
             </div>;
           })}
         </div>

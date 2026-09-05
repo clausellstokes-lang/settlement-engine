@@ -34,6 +34,7 @@ import { ViabilityTab } from '../../src/components/new/tabs/ViabilityTab.jsx';
 import PlotHooksTab from '../../src/components/new/tabs/PlotHooksTab.jsx';
 import { EconomicsTab } from '../../src/components/new/tabs/EconomicsTab.jsx';
 import SteadingsSection from '../../src/components/new/tabs/SteadingsSection.jsx';
+import { RelationshipsTab } from '../../src/components/new/tabs/RelationshipsTab.jsx';
 import { useStore } from '../../src/store/index.js';
 import { generalDeskLines } from '../../src/components/new/generalDeskRead.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
@@ -562,5 +563,111 @@ describe('DS-GEN-8 DRAWS IN THE STEADINGS SECTION — and is silent for a free v
     const line = tab.split('\n').find((l) => l.includes('<SteadingsSection'));
     expect(line).toBeTruthy();
     expect(line, 'the section was left to assume the flag').toContain('publicDossier={publicDossier}');
+  });
+});
+
+/**
+ * DS-REL-1 on the RELATIONSHIPS page and DS-POP-3 on the OVERVIEW identity strip.
+ *
+ * ⛔ THE REL-1 FIXTURE CARRIES BOTH ENDS OF THE ASYMMETRIC TIE. `relationshipType: 'patron'`
+ * with `localRelationshipRole: 'client'` is the shape `canonicalRelationship.js` stamps when
+ * THIS town is the client, and the two pools say opposite things about which hall decides —
+ * so a render that drew the patron line here would be fluent and false.
+ */
+const LINKED = Object.freeze({
+  id: 'steinmark', name: 'Steinmark', _seed: 'steinmark', history: {},
+  neighbourNetwork: [{
+    id: 'n1', name: 'Thornmere', neighbourName: 'Thornmere', neighbourTier: 'town',
+    relationshipType: 'patron', localRelationshipRole: 'client',
+    description: 'A standing arrangement.',
+    npcConnections: [{ primaryNPCName: 'Mugain', neighbourNPCName: 'Felix' }],
+  }],
+  interSettlementRelationships: [{
+    type: 'faction_engagement', factionName: 'The Guild', partnerFactionName: 'The Wardens',
+    partnerSettlement: 'Thornmere', relType: 'rival', description: 'Two houses, one quarrel.',
+  }],
+});
+
+const TIE = 'Ask in Steinmark who decides a thing';                       // DS-REL-1 client
+const PATRON_LINE = 'Thornmere looks to Steinmark';                        // DS-REL-1 patron (must NOT appear)
+const CONTACTS = 'Mugain in Steinmark keeps a standing tie in Thornmere';  // DS-REL-1 npc contacts
+const ENGAGEMENT = 'it belongs to a few people on each side';              // DS-REL-1 engagements
+
+describe('DS-REL-1 DRAWS ON THE RELATIONSHIPS TAB — and is silent for a free viewer', () => {
+  const campaignsBefore = useStore.getState().campaigns;
+  afterEach(() => { useStore.setState({ campaigns: campaignsBefore }); });
+
+  /** @param {boolean} publicDossier */
+  const renderRels = (publicDossier) => {
+    useStore.setState({ campaigns: [] });
+    return render(e(RelationshipsTab, {
+      settlement: LINKED, narrativeNote: null, saveId: 'steinmark',
+      viewerIsPremium: false, playerView: false, publicDossier,
+    })).container.textContent;
+  };
+
+  test('both tie lenses and the engagement reach the DOM privately and none reaches a public dossier', () => {
+    const priv = renderRels(false);
+    cleanup();
+    const pub = renderRels(true);
+    for (const [sentence, label] of [
+      [TIE, 'the standing (this town is the CLIENT)'],
+      [CONTACTS, 'the named people'],
+      [ENGAGEMENT, 'the cross-settlement engagement'],
+    ]) expectPresentThenAbsent(priv, pub, sentence, `DS-REL-1 ${label} (relationships.network)`);
+    // ⛔⛔ THE ARM, DRIVEN IN THE DOM: the OTHER end's sentence must not appear on this page.
+    expect(priv, 'the wrong town\'s standing reached the reader').not.toContain(PATRON_LINE);
+    // ⛔ AND THE FAR END'S PERSON IS NEVER NAMED INSIDE THIS TOWN'S WALLS by the corpus line.
+    expect(priv.slice(priv.indexOf(CONTACTS), priv.indexOf(CONTACTS) + CONTACTS.length + 90))
+      .not.toContain('Felix');
+    // The DATUM survives the gate: the card, the badge and the engagement row keep their own
+    // words; only the corpus sentences go.
+    expect(pub).toContain('Thornmere');
+    expect(pub).toContain('The Guild');
+    expect(pub).toContain('Two houses, one quarrel.');
+  });
+
+  test('the ROUTER threads publicDossier to BOTH tabs this component serves', () => {
+    const router = readFileSync(join(HERE, '../../src/components/OutputContainer.jsx'), 'utf8');
+    for (const tab of ['relationships', 'neighbours']) {
+      const line = router.split('\n').find((l) => l.includes(`case '${tab}':`));
+      expect(line, `no router case for '${tab}'`).toBeTruthy();
+      expect(line, `'${tab}' does not receive the flag`).toContain('publicDossier={publicDossier}');
+    }
+  });
+});
+
+/** A town whose ring really carries four readings — the only state DS-POP-3 may speak over. */
+const COUNTED = Object.freeze({
+  ...SPEAKING,
+  populationHistory: [820, 900, 960, 1010],
+});
+const DIRECTION = 'there are more people here than the older rolls describe'; // DS-POP-3 RISING-OPEN
+
+describe('DS-POP-3 DRAWS ON THE OVERVIEW TAB — and is silent for a free viewer and an unread ring', () => {
+  /** @param {object} settlement @param {boolean} publicDossier */
+  const renderPop = (settlement, publicDossier) => render(e(OverviewTab, {
+    settlement, narrativeNote: null, onNavigateTab: () => {},
+    publicDossier, playerView: false, worldState: null,
+  })).container.textContent;
+
+  test('the direction reaches the DOM privately and never reaches a public dossier', () => {
+    const priv = renderPop(COUNTED, false);
+    cleanup();
+    const pub = renderPop(COUNTED, true);
+    expectPresentThenAbsent(priv, pub, DIRECTION, 'DS-POP-3 (overview.populationDirection)');
+    // The DATUM survives: the head count and the access word above it keep their own words.
+    expect(pub).toContain('pop.');
+    expect(pub).toContain('road');
+  });
+
+  test('⛔ AN UNREAD RING DRAWS NOTHING — the default this block would otherwise have been', () => {
+    // SPEAKING carries no `populationHistory`, which is every freshly generated town. Keyed
+    // on the band's sign alone, LEVEL would fire here and print "the roll holds where it is".
+    const out = renderPop(SPEAKING, false);
+    expect(out, 'an unread ring drew a direction').not.toContain(DIRECTION);
+    expect(out, 'the LEVEL default reached the page').not.toContain('roll holds where it is');
+    // NON-VACUITY: the rest of the desk drew on this very render.
+    expect(out).toContain(GROUND);
   });
 });
