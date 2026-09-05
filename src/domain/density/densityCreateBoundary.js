@@ -68,17 +68,27 @@ import { newSettlementDensityLaw } from './densityLaw.js';
 /**
  * How a module that can reach `generateSettlementPipeline` is classified.
  *
- *   BIRTH   — mints a genuinely new world; MUST spread `birthConfig`.
- *   DERIVED — re-derives an EXISTING world; must never mint (the world's own
- *             persisted config already carries its law, or its markerless
- *             absence IS its law).
- *   PREVIEW — generates a throwaway for comparison/diagnostics that is never
- *             persisted as a world; must never mint, because a preview that
- *             minted would make previews and reality disagree.
+ *   BIRTH    — mints a genuinely new world; MUST spread `birthConfig`.
+ *   DERIVED  — re-derives an EXISTING world; must never mint (the world's own
+ *              persisted config already carries its law, or its markerless
+ *              absence IS its law).
+ *   PREVIEW  — generates a throwaway for comparison/diagnostics that is never
+ *              persisted as a world; must never mint, because a preview that
+ *              minted would make previews and reality disagree.
+ *   EXECUTOR — runs a request whose law was ALREADY minted by a classified
+ *              BIRTH caller on the main thread, and must never mint one of its
+ *              own. This class exists because the generation transport split
+ *              the mint from the reach: the store's generation lane mints the
+ *              law and hands a plain-data request across a worker boundary,
+ *              and the core on the far side is the module that actually calls
+ *              the pipeline. Without EXECUTOR the walker's premise (the module
+ *              that mints IS the module that reaches) would force the executor
+ *              to be miscalled a BIRTH, which would then demand that it mint
+ *              a SECOND law over a request that already carries one.
  *
  * @type {ReadonlyArray<string>}
  */
-export const BOUNDARY_CLASSES = Object.freeze(['BIRTH', 'DERIVED', 'PREVIEW']);
+export const BOUNDARY_CLASSES = Object.freeze(['BIRTH', 'DERIVED', 'PREVIEW', 'EXECUTOR']);
 
 /**
  * ⭐ THE MANIFEST — every module in `src/` that can reach the settlement
@@ -90,15 +100,29 @@ export const BOUNDARY_CLASSES = Object.freeze(['BIRTH', 'DERIVED', 'PREVIEW']);
  *
  * Keys are repo-relative POSIX paths.
  *
- * @type {Readonly<Record<string, {class: string, why: string}>>}
+ * `reachesVia` is optional and names the module a row reaches the pipeline
+ * THROUGH when the mint and the call live in two files. A row that carries it
+ * is held to the tree by its executor's reach, not its own.
+ *
+ * @type {Readonly<Record<string, {class: string, why: string, reachesVia?: string}>>}
  */
 export const PIPELINE_REACHERS = Object.freeze({
-  'src/store/settlementSlice.js': Object.freeze({
+  'src/store/settlementGenerateAction.js': Object.freeze({
     class: 'BIRTH',
-    why: 'generateSettlement mints a brand-new town from the wizard form config on every '
+    why: 'the generation lane mints a brand-new town from the wizard form config on every '
       + 'call; a reroll REPLACES the town rather than re-deriving it, and with a save on '
       + 'screen it explicitly mints a new identity. state.config is never hydrated from a '
-      + 'saved settlement, so fullConfig cannot carry an existing world\'s law.',
+      + 'saved settlement, so fullConfig cannot carry an existing world\'s law. It mints '
+      + 'the law here on the main thread and sends it as request data; the executor named '
+      + 'below is what actually calls the pipeline.',
+    reachesVia: 'src/workers/generationRequest.js',
+  }),
+  'src/workers/generationRequest.js': Object.freeze({
+    class: 'EXECUTOR',
+    why: 'the generation core runs a request whose density law was already minted by the '
+      + 'BIRTH caller that built it; minting again here would stamp a second law over a '
+      + 'config that already carries one, and it would do so for every transport including '
+      + 'the previews and re-derivations that must never mint at all.',
   }),
   'src/lib/instantWorld/composeInstantWorld.js': Object.freeze({
     class: 'BIRTH',
