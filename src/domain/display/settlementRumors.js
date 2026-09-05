@@ -447,6 +447,12 @@ export const WHAT_PHRASES = Object.freeze({
   brokerage_intercept: 'a message the brokerage intercepted',
   brokerage_plant: 'a rumour planted through the brokerage',
   envoy_dispatched: 'an envoy sent out',
+  // ENC-4 — the meeting neither court arranged. The noun phrase is the chair's own, AMENDED
+  // from the §893 draft (`a meeting neither party arranged`): "no court" is the world's own
+  // noun, the design speaks of two courts throughout, and it reads better in all six R1 frames.
+  // ⛔ NOTE THE WORD ORDER: "chance" and "meeting" are never adjacent in any reader string of
+  // this family (§886), so no raw engine identifier reaches a townsperson's mouth.
+  chance_meeting_recorded: 'a meeting no court arranged',
   npc_arrival: 'a new arrival',
   npc_assignment: 'a post newly filled',
   npc_death: 'a funeral bell',

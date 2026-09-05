@@ -322,6 +322,13 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   terms_signed_for_a_fallen_town: 'events', parlay_at_an_occupied_venue: 'events',
   interceptor_parlays_own_edge: 'events', parlay_terms_neither_court_drafted: 'events',
   envoy_dispatched: 'events',
+  // ENC-4 — ROAD B. The meeting neither court arranged. It files the events desk BY ITS OWN
+  // TOKEN and takes no `chance_meeting_` family prefix, on `faithNews.js:26-29`'s recorded
+  // verdict: the prefix is "the cheap door and the trap", and a kind that genuinely files a desk
+  // takes the exact row. A chance meeting files a desk across TWO courts, so it is exactly the
+  // case that rule was written for — and the pairing keeps the estate-wide registered-minus-
+  // routed difference at 8 rather than inflating the deskless count by one.
+  chance_meeting_recorded: 'events',
   // traditions / custom / values (KIND_SECTION `traditions` custom-half → events)
   tradition: 'events', tradition_change: 'events', moral_reckoning: 'events', cause_lifecycle: 'events',
   // mercy (KIND_SECTION `mercy` → events)

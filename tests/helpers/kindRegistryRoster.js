@@ -26,6 +26,7 @@ import {
   WAR_LINEAGE_KIND_REGISTRY,
   WAR_RULING_KIND_REGISTRY,
 } from '../../src/domain/worldPulse/eventProse.js';
+import { CHANCE_MEETING_KIND_REGISTRY } from '../../src/domain/worldPulse/chanceMeetingNews.js';
 import { COMMERCIAL_KIND_REGISTRY } from '../../src/domain/worldPulse/commercialReasonsNews.js';
 import { GRAMMAR_KIND_REGISTRY } from '../../src/domain/worldPulse/grammarNews.js';
 import { FAITH_KIND_REGISTRY } from '../../src/domain/worldPulse/faithNews.js';
@@ -56,4 +57,9 @@ export const KIND_REGISTRIES = Object.freeze([
   // unlike INFORMATION's dossier line it moves ROUTED_TOKENS and REGISTERED_KIND_COUNT
   // together and leaves the registered-minus-routed difference exactly where it was.
   ['FAITH', FAITH_KIND_REGISTRY],
+  // ENC-4: the SEVENTH FP registry family, and the estate's THIRD deliberately one-row one. Its
+  // single kind is the meeting neither court arranged, which DOES carry a Herald desk — so like
+  // FAITH's obituary and unlike INFORMATION's dossier line it moves ROUTED_TOKENS and
+  // REGISTERED_KIND_COUNT together and leaves the registered-minus-routed difference where it was.
+  ['CHANCE_MEETING', CHANCE_MEETING_KIND_REGISTRY],
 ]);
