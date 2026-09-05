@@ -152,6 +152,11 @@ export const createCustomContentSlice = (set, get) => {
     customContent: loadAll('anon'),
     customContentLoading: false,
     customContentError: null,
+    // TRANSIENT, and deliberately so. The charset findings of the last authoring
+    // command. Never persisted, never mirrored to local storage, and cleared
+    // wherever `customContentError` clears so a stale list cannot outlive the
+    // error it arrived with.
+    customContentCharsetRejections: [],
     customContentSyncedAt: null,
     customContentLastCommandReceipt: null,
     customContentArchived: emptyContent(),
@@ -236,6 +241,7 @@ export const createCustomContentSlice = (set, get) => {
         state.customContentLoading = false;
         state.customContentSyncedAt = null;
         state.customContentError = null;
+        state.customContentCharsetRejections = [];
         state.customContentArchived = emptyContent();
         state.customContentRevisionHistory = {};
         state.activeContentEnvironment = VANILLA_CONTENT_ENVIRONMENT;

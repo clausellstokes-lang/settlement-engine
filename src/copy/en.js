@@ -1040,6 +1040,29 @@ export const en = Object.freeze({
     customContentRevisionRestoreUnconfirmed: 'The forward revision was not confirmed.',
     customContentHistoryRefreshFail: 'The new revision is confirmed, but the refreshed history could not be loaded.',
     customContentRevisionRestoreFail: 'The forward revision could not be created.',
+    // CHARSET (HORIZON): what the paid surfaces can actually DRAW. Every hint is
+    // a copy key the wall names, never prose the wall composes, and every one
+    // speaks the product noun for the surface rather than its class token. The
+    // author is told what cannot be printed and where; nothing is ever stripped,
+    // folded or rewritten without a click.
+    customContentCharset: {
+      uncovered_codepoint: '{surfaceName} cannot print {char} (character {position}).',
+      control_character: 'Character {position} is a control code and cannot be saved in this field.',
+      bidi_override: 'Character {position} reverses reading direction and cannot be saved in this field.',
+      invisible_format: 'Character {position} is invisible and would vanish when printed. Remove it, or use a plain space.',
+      malformed_encoding: 'This text carries an incomplete character and cannot be saved. Retype the affected word.',
+      length: 'This field holds {actual} characters. The limit is {max}.',
+      normalise: 'Normalise',
+      asciiPreview: 'Use ASCII preview',
+      surface: {
+        'web-display': 'The page',
+        'dossier-pdf': 'The dossier PDF',
+        'campaign-pdf': 'The campaign book',
+        'world-book': 'The World Book',
+        foundry: 'The Foundry export',
+        'json-export': 'The JSON export',
+      },
+    },
   },
 
   // ── Command palette (V-H R-20; SB5 routed its strings off inline literals) ──

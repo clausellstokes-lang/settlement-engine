@@ -54,7 +54,14 @@ import {
  * @typedef {{
  *   allowSystemFields?:boolean,
  *   requireRequired?:boolean,
+ *   charset?:CustomContentCharsetWall|null,
  * }} ContentAdmissionOptions
+ * @typedef {{
+ *   validate:(bucket:string, definition:Record<string, unknown>) =>
+ *     {rejections:Array<Record<string, unknown>>, marks:Array<Record<string, unknown>>},
+ *   enforcement:'report'|'refuse',
+ *   table:Record<string, unknown>,
+ * }} CustomContentCharsetWall
  */
 
 const CONTENT_CATEGORIES = /** @type {readonly ContentCategorySpec[]} */ (
@@ -326,10 +333,140 @@ export function admitCustomContentDefinition(bucket, value, options = {}) {
     fieldLabels.push({ field, ...classification });
   }
 
-  return {
+  const labelled = { ...admission, fieldLabels };
+  if (!options.charset) return labelled;
+  return withCharsetVerdict(labelled, options.charset, category.key, valueRecord);
+}
+
+// -- THE CHARSET WALL AT THE AUTHORING CHOKEPOINTS ---------------------------
+// Shape and length admission above answers "is this a legal value". It never
+// asks "can this product DRAW it", so a name carrying a codepoint no registered
+// face covers passes every wall and then prints as a substitute glyph in a paid
+// dossier. The charset leaf answers that question from a derived table.
+//
+// TWO LAWS SHAPE THE WIRING BELOW, and both are structural rather than advisory.
+//
+// 1. THE LEAF IS NEVER STATICALLY IMPORTED. It lives in its own `custom-charset`
+//    chunk. Fourteen modules statically import this file, and this file sits in
+//    the static closure of an entry-owned dynamic import, so a static edge from
+//    here would list the new chunk's filename in the ENTRY's own
+//    `__vite__mapDeps` array and cost first-paint bytes for a leaf first paint
+//    never runs. `loadCustomContentCharsetWall` below is the only edge, and it
+//    is dynamic. Pinned by tests/lint/customContentCharsetWiring.test.js.
+// 2. THE WALL IS A VALUE, NOT AN AMBIENT. Callers hand an admitted wall in
+//    through `options.charset`. That is what lets the RESTORE lanes be blind by
+//    construction rather than by remembering to pass a flag: a lane that never
+//    loads a wall cannot consult one, and the account-import lane never loads
+//    one. See `isAuthoringContentSource`.
+
+/**
+ * Command source types that are RESTORE rather than authoring.
+ *
+ * An import of a user's own account export replays content the product already
+ * accepted. Refusing it would delete a paying user's library, so the wall never
+ * runs on this lane whatever the policy says. Ruled by the owner at CS-9.
+ */
+export const RESTORE_CONTENT_SOURCE_TYPES = Object.freeze(['account-export']);
+
+/**
+ * Does this command source author new content, or restore existing content.
+ *
+ * @param {{type?:string}|null|undefined} source the command's source envelope
+ * @returns {boolean} true when the lane is authoring
+ */
+export function isAuthoringContentSource(source) {
+  const type = typeof source?.type === 'string' ? source.type : 'manual';
+  return !RESTORE_CONTENT_SOURCE_TYPES.includes(type);
+}
+
+/**
+ * Load the charset wall. THE ONLY EDGE from this module to the charset leaf,
+ * and it is dynamic so the leaf's chunk stays out of the entry's dep map.
+ *
+ * The optional table argument exists for tests that must prove the `refuse`
+ * behaviour without lighting the manifest door.
+ *
+ * @param {unknown} [table] a table to use instead of the generated one
+ * @returns {Promise<CustomContentCharsetWall>} the wall
+ */
+export async function loadCustomContentCharsetWall(table) {
+  const leaf = await import('./customContentCharset.js');
+  const resolved = table === undefined
+    ? leaf.CUSTOM_CONTENT_CHARSET
+    : /** @type {typeof leaf.CUSTOM_CONTENT_CHARSET} */ (table);
+  const policy = resolved.policy || { enforcement: 'report' };
+  return Object.freeze({
+    /**
+     * @param {string} bucket the bucket
+     * @param {Record<string, unknown>} definition the definition
+     */
+    validate: (bucket, definition) => (
+      leaf.validateCustomContentCharset(bucket, definition, resolved)
+    ),
+    enforcement: /** @type {'report'|'refuse'} */ (
+      policy.enforcement === 'refuse' ? 'refuse' : 'report'
+    ),
+    table: resolved,
+  });
+}
+
+/**
+ * Admit one definition through shape admission AND the charset wall.
+ *
+ * Under `report` the verdict is byte-identical to `admitCustomContentDefinition`
+ * and the findings ride beside it on `charset`. Under `refuse` a non-empty
+ * findings list makes `ok` false and appends one house-shaped error per finding.
+ *
+ * @param {unknown} bucket the content bucket
+ * @param {unknown} value the authored definition
+ * @param {ContentAdmissionOptions} [options] admission options
+ * @returns {Promise<ReturnType<typeof admitCustomContentDefinition>>} the admission
+ */
+export async function admitAuthoredCustomContentDefinition(bucket, value, options = {}) {
+  const charset = options.charset || await loadCustomContentCharsetWall();
+  return admitCustomContentDefinition(bucket, value, { ...options, charset });
+}
+
+/**
+ * Fold a charset verdict into an admission result.
+ *
+ * The return is declared as the admission's OWN type rather than a widened
+ * record, because every consumer of `admitCustomContentDefinition` reads the
+ * shape admission's fields and none of them should lose those types to a wall
+ * that only ever ADDS keys beside them.
+ *
+ * @template {Record<string, unknown>} T
+ * @param {T} admission the shape admission
+ * @param {CustomContentCharsetWall} wall the loaded wall
+ * @param {unknown} bucket the bucket
+ * @param {unknown} value the definition
+ * @returns {T} the admission with its charset verdict
+ */
+function withCharsetVerdict(admission, wall, bucket, value) {
+  const verdict = wall.validate(
+    String(bucket),
+    /** @type {Record<string, unknown>} */ (value),
+  );
+  const rejections = Object.freeze(verdict.rejections.slice());
+  const marks = Object.freeze(verdict.marks.slice());
+  if (wall.enforcement !== 'refuse' || rejections.length === 0) {
+    return /** @type {T} */ ({ ...admission, charset: rejections, charsetMarks: marks });
+  }
+  const errors = Array.isArray(admission.errors) ? admission.errors.slice() : [];
+  for (const rejection of rejections) {
+    errors.push({
+      code: rejection.code,
+      bucket: String(bucket),
+      field: rejection.field,
+    });
+  }
+  return /** @type {T} */ ({
     ...admission,
-    fieldLabels,
-  };
+    ok: false,
+    errors,
+    charset: rejections,
+    charsetMarks: marks,
+  });
 }
 
 /**
