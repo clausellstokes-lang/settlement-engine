@@ -75,7 +75,7 @@ export const SLOT_FILL_SHAPES = Object.freeze({ settlement: 'proper' });
  * liveness drops those variants and no POOL is lost — measured, not assumed:
  *   `{season}` (FAMINE, 1 of 6) · `{band}` (MASS MIGRATION, 1 of 6, and RESERVED so it
  *   cannot be filled at all) · `{reason}` (PROVENANCE, bare-common with no producer) ·
- *   `{timeband_age}` (PROVENANCE, no duration former in the tree).
+ *   `{timeband_age}` (PROVENANCE — the former EXISTS; the refusal is measured below).
  * @type {Readonly<Record<string, Readonly<Record<string, string>>>>}
  */
 export const SLOT_FILL_TABLES = Object.freeze({});
@@ -291,6 +291,47 @@ export function conditionDurationPoolKey(condition) {
  * silent — which is the honest state, and it costs nothing later: rule a `{reason}` fill
  * vocabulary and the pool lights with NO desk change at all. The untraced pool beside it
  * has `{settlement}`-only variants and speaks today.
+ */
+
+/**
+ * ⛔ `{timeband_age}` STAYS UNFILLED — AND THE REASON THIS DESK FIRST GAVE WAS WRONG.
+ *
+ * The head of this file declined the slot "for want of a duration former in the tree".
+ * THERE IS ONE: `heraldCausalGrammar.js`'s `timeBandOf`/`timeBandWord`, a zero-import
+ * display leaf whose six-band × four-position table is IDENTICAL cell for cell to §0d's in
+ * BOTH annexes (24 of 24 cells, measured). The stale reason is CORRECTED here rather than
+ * deleted, because the reason a slot is refused is the thing the next lane re-derives —
+ * and this one already sent a lane to fill a slot that must not be filled.
+ *
+ * THREE MEASUREMENTS REFUSE THE FILL, any one of them sufficient:
+ *
+ *  1. THE SLOT HAS EXACTLY ONE VARIANT AND ITS GRAMMAR CLAIMS DEEP ANTIQUITY. It is the
+ *     `elder` #2 of `PROVENANCE: no causes[] and no sourceEventType`, and its second
+ *     sentence is "Whatever caused it did so before anyone was writing things down."
+ *  2. A CONDITION CAN NEVER BE OLD. All 46 `CONDITION_ARCHETYPE_TEMPLATES` carry a NUMERIC
+ *     `defaultExpiresAtTicks` (5..18) — not one is null — and `withExpiredConditionsRemoved`
+ *     drops a condition the tick it reaches its cap. So the oldest condition this estate can
+ *     hold is EIGHTEEN ticks, and a tick here is about a month (`INTERVAL_TICK_INCREMENTS`:
+ *     a per-week advance adds 0.25). EVERY band this slot could ever render therefore
+ *     contradicts the sentence it sits in — "It is here and it is of this season. Whatever
+ *     caused it did so before anyone was writing things down." A wrong sentence is worse
+ *     than no sentence, which is the kernel's own law 5 reasoning.
+ *  3. THERE IS NO HONEST WEEK CONVERSION TO BAND WITH. `timeBandOf(sinceTicks,
+ *     intervalWeeks)` bands `sinceTicks * intervalWeeks` WEEKS. A condition tick is
+ *     scale-weighted rather than calendar (one_week 0.25 · one_month 1.00 · one_season 2.25
+ *     · one_year 6.00 — four seasons and one year disagree BY DESIGN), so no `intervalWeeks`
+ *     is true of it and choosing one would coin the mapping §0d exists to forbid.
+ *
+ * ⚠ AND THE POOL IS NOT REACHED AT BIRTH ANYWAY. Over 48 generated towns (6 seeds × 8
+ * configs) 14 carried a condition and all 14 routed to the TRACED pool; the untraced pool
+ * was reached ZERO times, and every condition measured sat at `elapsedTicks: 0`. It is a
+ * played-world surface, the DS-STR-2 class — so the note above that it "speaks today" is
+ * true of its VARIANTS and not of its ROUTING.
+ *
+ * ⇒ THE CURE IS A CORPUS ACT AND THE WORDS ARE THE CHAIR'S: either an untraced-provenance
+ * variant whose duration claim a sub-two-year condition can honour, or the removal of the
+ * duration clause from that one sentence. A desk cannot repair a sentence by filling it.
+ * — DESK-TIMEBAND 2026-09-05.
  */
 
 /**
