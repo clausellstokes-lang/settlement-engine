@@ -37,7 +37,7 @@ const SIGN_IN_HREF = `/signin?next=${encodeURIComponent('/founders')}`;
 /** Why a band-failed answer was refused, said plainly and without moralizing. */
 function refusal(reason) {
   if (reason === 'empty') return 'Please answer both prompts.';
-  if (reason === 'short') return 'A line or two more, please — this is a letter.';
+  if (reason === 'short') return 'A line or two more, please. This is a letter.';
   if (reason === 'long') return `Please keep this under ${HALL_LETTER_MAX} characters.`;
   if (reason === 'blocked') return 'That wording can’t be used here. Think this is wrong? Feedback & support.';
   return null;
@@ -102,7 +102,7 @@ export default function RequestChairLetter({ auth, onSubmit, onLoadStanding, civ
 
       {sent ? (
         <p style={{ ...covenantProseStyle, color: HALL.ink }}>
-          Your letter is in. There is nothing to track and nothing more to do &mdash; if a
+          Your letter is in. There is nothing to track and nothing more to do. If a
           chair is ever offered, it will come to you.
         </p>
       ) : !userId ? (

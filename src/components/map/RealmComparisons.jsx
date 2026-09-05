@@ -101,7 +101,7 @@ export default function RealmComparisons({ rows = [], worldState = null, nameFor
 
   return (
     <div data-testid="realm-comparisons" style={{ display: 'grid', gap: SP.sm }}>
-      <Question heading="The realm by tier — and who is at peace">
+      <Question heading="The realm by tier, and who is at peace">
         {byTier.map(([tier, tierRows]) => {
           const segments = WAR_SEGMENTS.map(seg => ({ ...seg, count: tierRows.filter(r => r.war === seg.clause).length }));
           const parts = segments.filter(s => s.count > 0).map(s => `${s.count} ${s.word}`);
@@ -109,7 +109,7 @@ export default function RealmComparisons({ rows = [], worldState = null, nameFor
           // deriver built population at all (a proven owner session).
           const pop = hasPopulation ? tierRows.reduce((sum, r) => sum + (r.population || 0), 0) : null;
           const plural = tierRows.length === 1 ? tier : `${tier}s`;
-          const sentence = `${tierRows.length} ${plural} — ${parts.join(', ')}${pop != null ? ` · ${pop} folk` : ''}.`;
+          const sentence = `${tierRows.length} ${plural}: ${parts.join(', ')}${pop != null ? ` · ${pop} folk` : ''}.`;
           return <BarRow key={tier} testid="comparison-tier-row" label={tier} sentence={sentence} segments={segments} total={tierRows.length} />;
         })}
       </Question>

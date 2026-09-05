@@ -405,7 +405,7 @@ describe('DESK-3 — one question, one picture, from the register rows', () => {
     expect(tierRows.length).toBe(2); // town + city
     // The sentence IS the label: count + war split + the DM population total
     // (the rows carry population — a proven owner session).
-    expect(tierRows[0].getAttribute('aria-label')).toMatch(/1 town — 1 at peace · 1200 folk\./);
+    expect(tierRows[0].getAttribute('aria-label')).toMatch(/1 town: 1 at peace · 1200 folk\./);
     // Prosperity + exhaustion questions render from the same rows/ledgers.
     expect(screen.getAllByTestId('comparison-prosperity-row').length).toBe(2);
     expect(screen.getAllByTestId('comparison-exhaustion-row')[0].getAttribute('aria-label')).toMatch(/Ashford stands war-weary\./);

@@ -231,7 +231,7 @@ describe('THE PRESENCE LAW (§5b) — both arms, one ledger fixture', () => {
 
   test('held == thirty ⇒ the Request control is ABSENT (not disabled) and the full-hall line stands in its place', async () => {
     await renderHall(fill(30));
-    expect(screen.getByText(/The Hall is full — 30 chairs, 30 names\./)).toBeTruthy();
+    expect(screen.getByText(/The Hall is full: 30 chairs, 30 names\./)).toBeTruthy();
     expect(screen.queryByRole('heading', { name: 'Request a chair' })).toBeNull();
     // ABSENT, not disabled: there is no control to be found in any state.
     const controls = screen.queryAllByRole('button', { name: /Request a chair|Sign in to write/ });

@@ -96,7 +96,7 @@ const WORLD_LOCKS = [
   // Note these speak about a COUP rather than "a new roll", because that is what
   // the lock actually governs — the other two rows guard the dice, this one
   // guards the seat.
-  { key: 'factions', nameKeyed: true, locked: 'Locked. The ruling faction keeps the seat — a coup needs your approval first.', open: 'A coup can take the seat from the ruling faction.', lockCta: 'Keep them in power', unlockCta: 'Allow a coup' },
+  { key: 'factions', nameKeyed: true, locked: 'Locked. The ruling faction keeps the seat. A coup needs your approval first.', open: 'A coup can take the seat from the ruling faction.', lockCta: 'Keep them in power', unlockCta: 'Allow a coup' },
 ];
 
 // `sans` is a font-family STRING, not a style object — spreading it would scatter

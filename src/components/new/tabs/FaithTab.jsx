@@ -57,7 +57,7 @@ function PatronSeatBlock({ patron, contested }) {
       </div>
       <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.5, marginTop: 6 }}>
         <strong style={{ color: INK }}>{patron.name}</strong>
-        {' holds the seat — its claim is '}
+        {' holds the seat. Its claim is '}
         <strong style={{ color: BAND_TONE[patron.band.tone] || BODY }}>{patron.band.label}</strong>
         {/* THE PARENTHETICAL PERCENTAGE IS GONE, not relocated. It read
             "(rightful claim 62%)" one space after the band word that already
@@ -125,7 +125,7 @@ function NicheOccupancyBlock({ ranks, depth }) {
               {d.niche ? nicheWords(d.niche) : 'niche unrecorded'}
             </span>
             <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs }}>
-              {' — '}{d.name}{d.isPatron ? ' (patron)' : ''} · {standingWord} · {followingWord}
+              {': '}{d.name}{d.isPatron ? ' (patron)' : ''} · {standingWord} · {followingWord}
             </span>
             {depth[d.name] && <DepthRows depth={depth[d.name]} />}
           </div>

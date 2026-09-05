@@ -83,7 +83,7 @@ const GEOGRAPHY_HELP = 'Map geography freezes this realm’s territories, routes
 // terrain undo–redo path never send at all. So it neither proves an edit happened
 // nor proves one did not, and the copy must not claim otherwise. Offering the
 // refreeze is always safe; asserting the canon is stale would not be.
-const DIVERGENCE_NOTE = 'Terrain tools were used — geography may have changed since this realm was mapped. Re-map to refreeze.';
+const DIVERGENCE_NOTE = 'Terrain tools were used. Geography may have changed since this realm was mapped. Re-map to refreeze.';
 // W-SEAM SEAM-5 (S5) — the OWED-RE-CANONIZE signal.
 //
 // A canonize freezes the realm around the settlements that existed at that moment.
@@ -186,7 +186,7 @@ function SpatialCanonGate({ campaign, canWrite }) {
         busy={busy}
         aria-label={
           showDivergence
-            ? `Geography may have changed since spatial canon v${version} — re-map to refreeze`
+            ? `Geography may have changed since spatial canon v${version}. Re-map to refreeze`
             : showFoundings
               ? `${foundings.phrase} Spatial canon v${version}`
               : mapped ? `Geography mapped, spatial canon v${version}` : 'Map geography'
