@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { stressorsStateProse, crisisBannerRung } from '../../../domain/display/stateProse/stressorsStateProse.js';
+import { generalStateProse, GENERAL_STATE_PROSE_SILENT } from '../../../domain/display/stateProse/generalStateProse.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
 import { deriveAllActiveConditions } from '../../../domain/activeConditions.js';
 // FREE: `stressorsCore.js` is already in the first-paint closure, so reaching its canonical
@@ -110,6 +111,16 @@ const CONDITIONS_MOUNT = 'overview.activeConditions';
 const STRESSOR_MOUNT = 'overview.stressorLifecycle';
 
 /**
+ * The GENERAL desk's four Overview positions. This tab is that desk's ONE caller (the mount
+ * registry's ARM 2), which is why the reads below are assembled here rather than inside the
+ * desk: every one of them is a field this component already holds for the section it draws.
+ */
+const HEALTH_MOUNT = 'overview.systemsHealth';
+const GROUND_MOUNT = 'overview.ground';
+const MARKET_MOUNT = 'overview.market';
+const INSTITUTIONS_MOUNT = 'overview.institutions';
+
+/**
  * The world stressor this settlement is inside, normalized — or null in a world that has
  * not been played. A world stressor names its settlements in `affectedSettlementIds`, so
  * this is a membership SELECTION, not a derivation; the FIRST match is the one the block's
@@ -184,6 +195,37 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
     drawnAtMount(CONDITIONS_MOUNT, stressorProse.conditionDuration),
   ].map((d) => d?.sentence).filter(Boolean);
 
+  // THE GENERAL DESK, read ONCE per render. Same public gate as the stressor desk above and
+  // for the same reason (§885.3: corpus prose is a PAID surface, and `overview` is not
+  // filtered off a free gallery dossier). The readings are this component's OWN reads of
+  // fields it already renders — the institution booleans in particular live at
+  // `economicState.compound.inst`, NOT at `settlement.compound.inst`, which the corpus title
+  // abbreviates and which would read undefined on every settlement ever generated.
+  const generalProse = publicDossier ? GENERAL_STATE_PROSE_SILENT : generalStateProse(
+    r,
+    {
+      scores,
+      prosperity: eco.prosperity,
+      safetyLabel: sp.safetyLabel,
+      viable: via.viable,
+      readinessLabel: dp.readiness?.label,
+      foodSecurityLabel: eco.foodSecurity?.label,
+      terrainType: r.config?.terrainType,
+      institutions: r.institutions,
+      tradeRouteAccess: r.config?.tradeRouteAccess,
+      isEntrepot: eco.isEntrepot,
+      inst: eco.compound?.inst,
+    },
+    { seed: deskSeed, audience: deskAudience },
+  );
+  const healthLines = generalProse.overview.systemsHealth
+    .map((rung) => drawnAtMount(HEALTH_MOUNT, rung)?.sentence).filter(Boolean);
+  const siteLines = [
+    drawnAtMount(GROUND_MOUNT, generalProse.overview.ground),
+    drawnAtMount(MARKET_MOUNT, generalProse.overview.market),
+    drawnAtMount(INSTITUTIONS_MOUNT, generalProse.overview.institutions),
+  ].map((d) => d?.sentence).filter(Boolean);
+
   // Institution layout — guard `r.institutions` because sparse saves
   // (mid-migration, partial gen) can land here without an institutions
   // array. The smoke test in tests/ui/tabs.smoke.test.js caught this.
@@ -224,6 +266,22 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
           </div>
         </div>
       </div>
+
+      {/* ── THE SITE, THE EXCHANGE AND THE ROSTER ─────────────────────────
+            DS-GEN-12 (how the ground disposes the town), DS-GEN-13 (why the
+            town's exchange has the shape it has) and DS-GEN-17 (what keeping a
+            court, a garrison or nothing at all says about the place). Three
+            blocks, three positions, one paragraph: they answer the same
+            question — what kind of place is this — at three scales, and the
+            page reads them as one thought. */}
+      {siteLines.length>0&&(
+        <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #6b5340',padding:'10px 14px',marginBottom:14}}>
+          <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>The ground and the company it keeps</div>
+          {siteLines.map((line,i)=>(
+            <p key={i} style={{fontSize:i===0?FS.md:FS.sm,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.6,margin:i===0?0:'6px 0 0',fontStyle:'italic'}}>{line}</p>
+          ))}
+        </div>
+      )}
 
       {/* ── ACTIVE CRISIS (compact if present) ───────────────────────────── */}
       {stresses.length>0&&<div style={{display:'flex',flexDirection:'column',gap:8,marginBottom:14}}>
@@ -340,6 +398,21 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
         {/* Owner order (2026-07-22): the standalone Food Deficit callout is
             removed — Food Security (above) now carries that signal, so the deficit
             line was a duplicate. */}
+
+        {/* ── DS-GEN-3, the dashboard in the town's own voice ────────────────
+            Ten lenses over one block at ONE position: prosperity, safety,
+            viability and defence readiness (the four status tags), the five
+            score bars, and the live food band — in the order the rows above
+            already print them, so each sentence follows the row it is about.
+            The DATUM is untouched: every tag, bar and band still carries its own
+            word, and the prose bands the same fact rather than restating it. */}
+        {healthLines.length>0&&(
+          <div style={{borderTop:'1px solid #e0d0b0',marginTop:12,paddingTop:10}}>
+            {healthLines.map((line,i)=>(
+              <p key={i} style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.6,margin:i===0?0:'6px 0 0',fontStyle:'italic'}}>{line}</p>
+            ))}
+          </div>
+        )}
       </Section>
 
       {/* ── CURRENT TENSIONS & CONFLICTS ─────────────────────────────────── */}
