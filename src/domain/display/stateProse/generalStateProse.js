@@ -500,9 +500,23 @@ const TIER_OVERLAY_OF = Object.freeze({
 });
 
 /**
+ * The share of daily need at or above which a food gap counts as a deficit.
+ *
+ * ⚠ NOT AUTHORED HERE, AND THAT IS THE WHOLE POINT. This is the producer's own cut,
+ * `gap / need >= 0.05` at src/generators/narrativeGenerator.js, given a name on this side so
+ * the re-derivation below reads as a mirror rather than as a second opinion. The desk test
+ * pins the producer's literal through `mustExtract` and drives both sides of the boundary
+ * (4/100 ⇒ no deficit, 5/100 ⇒ deficit), so the day the producer's threshold moves, this
+ * file reds instead of quietly disagreeing with the sentence the page above it already
+ * printed. Naming it changes no value: 0.05 is what shipped before this constant existed.
+ */
+const DEFICIT_FRACTION_FROM = 0.05;
+
+/**
  * THE DEMOTED `deficit` DIMENSION, derived exactly as `generateSettlementReason` derives it:
  * the gap is the LARGER of the pre-import `rawDeficit` and the post-import residual
- * `deficit`, and it counts when it is positive and at or above five percent of daily need.
+ * `deficit`, and it counts when it is positive and at or above `DEFICIT_FRACTION_FROM` of
+ * daily need — five percent, the producer's own figure, named above rather than inlined.
  *
  * ⚠ THIS IS A RE-DERIVATION AND IT IS DECLARED AS ONE. The producer computes
  * `hasFoodDeficit` inline and persists nothing, so there is no canonical field to read; the
@@ -522,7 +536,7 @@ export function foodDeficitDimension(foodBalance) {
   const num = (v) => (typeof v === 'number' && Number.isFinite(v) ? v : 0);
   const gap = Math.max(num(foodBalance.rawDeficit), num(foodBalance.deficit));
   const need = num(foodBalance.dailyNeed) || num(foodBalance.need);
-  return (gap > 0 && (need <= 0 || gap / need >= 0.05)) ? 'deficit' : 'no deficit';
+  return (gap > 0 && (need <= 0 || gap / need >= DEFICIT_FRACTION_FROM)) ? 'deficit' : 'no deficit';
 }
 
 /**
