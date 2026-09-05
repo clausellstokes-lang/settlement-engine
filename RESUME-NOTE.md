@@ -2,6 +2,8 @@
 Kit: `git archive refs/preserve/chair-tools-2026-09-05 | tar -x -C $SC` (SC = this session's scratchpad). Read `$SC/LANE-QUEUE.md`, `$SC/texts-899.draft.md`, `$SC/run-registers-899.sh`, `$SC/retire-owed-899.sh`.
 
 ## STATE
+
+## ⛔⛔ LANES ARE ON VITEST HOLD (sent 09-05 ~09:50 by the chair): OSR-SCHEMA17, HORIZON-B2, SEAT-78, ENC-4c were told to run NO vitest until the chair sends RESUME. **A successor MUST send RESUME to all four (SendMessage to each lane) as soon as the §899 gate has finished** — otherwise their proofs stay OWED-UNTIL-RESUME forever. Agent ids: OSR-SCHEMA17 aff62cc0d0a80dbee · HORIZON-B2 a50ed09781539c2dd · SEAT-78 a61b65bc71ac14593 · ENC-4c a915b86574037b618.
 - Ledger `review-fixes-2026-07-08` = §898 (6cab7c69a). Product `claude/composite-r4` = 5e28d5c83 (sealed `landing-prose-2026-09-05`).
 - §899 COMPOSED CONSIST in `$SC/laneCLAMP3` = **26 cars over 5e28d5c83, tip 84c1598ed** (register cars 1–2 TAKEN: tuning inventory + writer-reach at 35b027458, lighting at 84c1598ed; (car 5 = ENC-4's impactKind takes its null voice row in EXPECTED_VOICE; car 4 = the pantheon A5 pins moved by ENC-4's attribution: ENC-4's train was RED at its own tip, found by ENC-4b), sealed `refs/preserve/train-composed-2026-09-05`:
   CLAMP-W2 (3) · edge re-mint · CLAMP-W3 ceiling 62→69 · VOICE-JSX (1, replayed) · ENC-4 (9) · chair cars 1–3 (hash01 pin 17→18; CHANCE_MEETING_NEWS_TUNING registered — the bare 0.56; manifest rationale row) · DOCKET (4, replayed; proved 42/42 at the composed tip).
