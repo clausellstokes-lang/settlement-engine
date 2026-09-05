@@ -32,14 +32,18 @@ import {
   GENERAL_STATE_PROSE_SILENT,
   SLOT_FILL_SHAPES,
   SLOT_FILL_TABLES,
+  foodDeficitDimension,
   foodSecurityPoolKey,
   generalStateProse,
+  originRoutePoolKey,
+  originTierPoolKey,
   groundPoolKey,
   institutionsPoolKey,
   marketPoolKey,
   prosperityPoolKey,
   readinessPoolKey,
   safetyPoolKey,
+  situationPoolKey,
   systemsHealthScorePoolKey,
   viabilityPoolKey,
 } from '../../src/domain/display/stateProse/generalStateProse.js';
@@ -51,6 +55,9 @@ import { poolDimensions } from '../../src/domain/display/stateProse/stateProseKe
 import { scoreBand } from '../../src/domain/display/defenseScoreBands.js';
 import { PROSPERITY_LABELS, PROSPERITY_RANK } from '../../src/domain/prosperityRank.js';
 import { getTerrainType } from '../../src/generators/terrainHelpers.js';
+import { ROUTE_TO_SCENE } from '../../src/generators/narrativeGenerator.js';
+import { ORIGIN_ARMS, originArmKey } from '../../src/generators/narrative/settlementOriginProse.js';
+import { resolvePrimaryStress } from '../../src/generators/stressPriority.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { mustExtract } from '../helpers/sourceContract.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
@@ -58,10 +65,17 @@ import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 const ROOT = resolve(import.meta.dirname, '../..');
 const src = (rel) => readFileSync(resolve(ROOT, rel), 'utf8');
 
-/** The four blocks this car lights, and the pool counts the shipped leaf carries. */
+/** Every block this desk lights, and the pool counts the shipped leaf carries. */
 const BLOCK_POOLS = Object.freeze({
-  'DS-GEN-3': 42, 'DS-GEN-12': 5, 'DS-GEN-13': 4, 'DS-GEN-17': 5,
+  'DS-GEN-3': 42, 'DS-GEN-5': 5, 'DS-GEN-6': 9, 'DS-GEN-12': 5, 'DS-GEN-13': 4, 'DS-GEN-17': 5,
 });
+
+/**
+ * The ONE block of the set that partitions itself by a demoted STATE dimension. Named here
+ * so the arm below can hold every OTHER block to `[]` and this one to its dimension, rather
+ * than exempting it — an exemption is how a block quietly grows a dimension nobody answers.
+ */
+const DIMENSIONED = Object.freeze({ 'DS-GEN-6': 'deficit' });
 
 /** @param {string} id @returns {string[]} */
 const poolsOf = (id) => Object.keys(DOSSIER_STATE_PROSE_GENERAL[id].pools);
@@ -99,6 +113,8 @@ function expectSentence(line, where) {
 function draw(readings) {
   const prose = generalStateProse(TOWN, readings, { seed: 'aliveness', audience: 'dm' });
   return {
+    situation: prose.overview.situation?.sentence ?? null,
+    origin: prose.overview.origin.map((rung) => rung.sentence).filter(Boolean),
     health: prose.overview.systemsHealth.map((rung) => rung.sentence).filter(Boolean),
     ground: prose.overview.ground?.sentence ?? null,
     market: prose.overview.market?.sentence ?? null,
@@ -170,13 +186,17 @@ describe('the general desk — guard the guard', () => {
     // The slot mirror is the annex's, and the desk owns no literal fill table.
     expect(SLOT_FILL_SHAPES).toEqual({ settlement: 'proper' });
     expect(SLOT_FILL_TABLES).toEqual({});
-    // NONE of the four blocks partitions itself by a demoted STATE dimension, which is why
-    // the four mount rows declare none. Derived from the kernel's own reader, so this file
-    // cannot hold a second opinion about what a dimension is.
+    // WHICH BLOCKS PARTITION THEMSELVES BY A DEMOTED STATE DIMENSION, derived from the
+    // kernel's own reader so this file cannot hold a second opinion about what a dimension
+    // is. Every block but DS-GEN-6 must be free of one — that is why their mount rows
+    // declare none — and DS-GEN-6 must carry exactly `deficit`, which is what its row
+    // declares and what the kernel fails closed on when the caller does not answer it.
     for (const id of Object.keys(BLOCK_POOLS)) {
+      const found = new Set();
       for (const pool of Object.values(DOSSIER_STATE_PROSE_GENERAL[id].pools)) {
-        expect(poolDimensions(pool), `${id} grew a demoted dimension`).toEqual([]);
+        for (const dimension of poolDimensions(pool)) found.add(dimension);
       }
+      expect([...found], `${id} dimensions`).toEqual(DIMENSIONED[id] ? [DIMENSIONED[id]] : []);
     }
   });
 
@@ -419,6 +439,9 @@ describe('the general desk over the real generator', () => {
     tradeRouteAccess: s.config?.tradeRouteAccess,
     isEntrepot: s.economicState?.isEntrepot,
     inst: s.economicState?.compound?.inst,
+    tier: s.tier,
+    primaryStress: resolvePrimaryStress(((Array.isArray(s.stress) ? s.stress : [s.stress]).filter(Boolean)).map((v) => v.type)),
+    foodBalance: s.economicViability?.metrics?.foodBalance,
   });
 
   it('MEASUREMENT, NOT DEFAULT: every reading the desk uses is written by the generator', () => {
@@ -452,13 +475,16 @@ describe('the general desk over the real generator', () => {
       const s = gen(config);
       const drawn = generalStateProse(s, readingsOf(s), { seed: String(s.id), audience: 'dm' });
       const lines = [
+        drawn.overview.situation?.sentence, ...drawn.overview.origin.map((rung) => rung.sentence),
         ...drawn.overview.systemsHealth.map((rung) => rung.sentence),
         drawn.overview.ground?.sentence, drawn.overview.market?.sentence, drawn.overview.institutions?.sentence,
       ].filter(Boolean);
-      // Nine of the ten health lenses plus the three site blocks. The tenth health lens is
-      // safety, which is silent whenever the town's head word is one of the six the corpus
-      // does not name — so the floor is stated as a floor rather than as an exact count.
-      expect(lines.length, `${name} drew ${lines.length} lines`).toBeGreaterThanOrEqual(11);
+      // Nine of the ten health lenses, the two origin lines and the three site blocks. Two
+      // lenses are deliberately conditional and so the count is a FLOOR rather than an exact
+      // number: safety is silent whenever the town's head word is one of the six the corpus
+      // does not name, and DS-GEN-5 SUPPRESSES itself under a resolved primary stress —
+      // which every one of these fixtures carries.
+      expect(lines.length, `${name} drew ${lines.length} lines`).toBeGreaterThanOrEqual(13);
       for (const line of lines) {
         expect(line, `${name}: an unfilled slot reached the reader`).not.toMatch(/\{[a-z_]+\}/i); // anchored: the same lines are asserted to contain the town's own name below
         expect(line, `${name}: §0d bans digits from dossier prose`).not.toMatch(/[0-9]/); // anchored: the same lines are asserted non-empty and named above
@@ -513,5 +539,122 @@ describe('the general desk — the mount registry', () => {
       const rung = { glance: 'x', sentence: 'y', detail: [], provenance: { blockId, poolKey: 'p', angle: 'a' } };
       expect(drawnAtMount(mount, rung)).toBe(rung);
     }
+  });
+});
+
+describe('DS-GEN-5 — the live companion, and the suppression that is not optional', () => {
+  it('the scene mirror is IDENTICAL to the producer\'s exported ROUTE_TO_SCENE', () => {
+    // Not "compatible with" — identical. The desk keeps a five-entry mirror instead of
+    // importing a generator module into a display leaf, and this is the arm that keeps the
+    // mirror from becoming a fork.
+    for (const [route, scene] of Object.entries(ROUTE_TO_SCENE)) {
+      const expected = { market: 'market (route crossroads)', port: 'port', river: 'river', smoke: 'smoke (route isolated / mountain_pass)' }[scene];
+      expect(situationPoolKey({ tradeRouteAccess: route }), route).toBe(expected);
+    }
+    expect(Object.keys(ROUTE_TO_SCENE).sort()).toEqual(['crossroads', 'isolated', 'mountain_pass', 'port', 'river']);
+  });
+
+  it('all five pools fire, and three of the five keys are NOT the scene word', () => {
+    const reached = new Set([
+      ...Object.keys(ROUTE_TO_SCENE).map((route) => situationPoolKey({ tradeRouteAccess: route })),
+      situationPoolKey({ tradeRouteAccess: 'road' }),
+    ]);
+    expect([...reached].sort()).toEqual(poolsOf('DS-GEN-5').sort());
+    for (const route of [...Object.keys(ROUTE_TO_SCENE), 'road', 'mountain_road', 'desert_road', '']) {
+      expectSentence(draw({ tradeRouteAccess: route }).situation, route || '(no route)');
+    }
+    // THE GLOSS TRAP: three pool keys carry a parenthetical, so the scene word alone is not
+    // a key. Anchored on `port`, which IS both.
+    for (const bare of ['market', 'smoke', 'ordinary']) {
+      expectAbsentWithAnchor(poolsOf('DS-GEN-5'), bare, 'port', `${bare} was assumed to be its own pool key`);
+    }
+  });
+
+  it('an inland river port reads as a river and not as a seaport', () => {
+    expect(situationPoolKey({ tradeRouteAccess: 'port', terrainType: 'riverside' })).toBe('river');
+    expect(situationPoolKey({ tradeRouteAccess: 'port', terrainType: 'coastal' })).toBe('port');
+    expect(situationPoolKey({ tradeRouteAccess: 'port' })).toBe('port');
+  });
+
+  it('THE STRESS ARM: a resolved primary stress suppresses the companion entirely', () => {
+    // The page must not describe an ordinary market day underneath a siege banner. Asserted
+    // positively as null, and paired with the same reading minus the stress so the arm
+    // cannot pass because the route stopped routing.
+    expect(situationPoolKey({ tradeRouteAccess: 'crossroads' })).toBe('market (route crossroads)');
+    expect(situationPoolKey({ tradeRouteAccess: 'crossroads', primaryStress: 'under_siege' })).toBeNull();
+    expect(draw({ tradeRouteAccess: 'crossroads', primaryStress: 'famine' }).situation).toBeNull();
+    expectSentence(draw({ tradeRouteAccess: 'crossroads' }).situation, 'no stress');
+  });
+});
+
+describe('DS-GEN-6 — the route, the tier overlay, and the demoted deficit dimension', () => {
+  const NO_DEFICIT = { dailyNeed: 100, dailyProduction: 100, deficit: 0, rawDeficit: 0 };
+  const DEFICIT = { dailyNeed: 100, dailyProduction: 20, deficit: 10, rawDeficit: 80 };
+
+  it('THE FOLD: eight producer arms onto five route pools, total in both directions', () => {
+    // The producer sub-splits `port` by terrain and `isolated` by deficit; the corpus keeps
+    // five route pools and demotes the deficit split into its own dimension. This arm proves
+    // the fold covers every arm the producer can resolve and claims every pool the corpus
+    // carries — the join, driven, rather than the join described.
+    const routePools = poolsOf('DS-GEN-6').filter((k) => !k.startsWith('tier overlay'));
+    expect(routePools.length).toBe(5);
+    const armToPool = new Map();
+    for (const route of ['crossroads', 'river', 'port', 'isolated', 'road', 'mountain_pass', 'mountain_road', 'desert_road', '']) {
+      for (const terrainType of [null, 'riverside', 'coastal']) {
+        for (const hasFoodDeficit of [true, false]) {
+          const arm = originArmKey({ route, terrainType, hasFoodDeficit });
+          armToPool.set(arm, originRoutePoolKey(route));
+        }
+      }
+    }
+    expect([...armToPool.keys()].sort()).toEqual([...ORIGIN_ARMS].sort());
+    expect([...new Set(armToPool.values())].sort()).toEqual(routePools.sort());
+    // Each producer arm folds to the pool its own prefix names.
+    for (const [arm, pool] of armToPool) expect(pool, arm).toBe(arm.split('.')[0]);
+  });
+
+  it('THE DEFICIT DIMENSION: both values fire, and an unmeasured town is neither', () => {
+    // The threshold is the producer's own, and it is PINNED to the producer's source rather
+    // than to this file's belief about it.
+    const body = src('src/generators/narrativeGenerator.js');
+    mustExtract(body, 'gap / need >= 0.05', 'the hasFoodDeficit cut in generateSettlementReason');
+    expect(foodDeficitDimension(DEFICIT)).toBe('deficit');
+    expect(foodDeficitDimension(NO_DEFICIT)).toBe('no deficit');
+    // Rounding noise below five percent must not flip the founding narrative.
+    expect(foodDeficitDimension({ dailyNeed: 100, rawDeficit: 4, deficit: 0 })).toBe('no deficit');
+    expect(foodDeficitDimension({ dailyNeed: 100, rawDeficit: 5, deficit: 0 })).toBe('deficit');
+    // The residual and the pre-import gap are BOTH signals; the larger wins, as it does in
+    // the producer.
+    expect(foodDeficitDimension({ dailyNeed: 100, rawDeficit: 0, deficit: 40 })).toBe('deficit');
+    // ⛔ NO ARITHMETIC ON THE RECORD IS NOT "NO DEFICIT". It is unmeasured, the kernel fails
+    // closed on the unanswered dimension, and the block renders nothing.
+    expect(foodDeficitDimension(null)).toBeNull();
+    expect(foodDeficitDimension(undefined)).toBeNull();
+    expect(draw({ tradeRouteAccess: 'road', tier: 'town' }).origin).toEqual([]);
+  });
+
+  it('all nine pools fire — five routes by both deficit values, and four tier overlays', () => {
+    const seen = new Set();
+    for (const route of ['crossroads', 'river', 'port', 'isolated', 'road']) {
+      for (const foodBalance of [DEFICIT, NO_DEFICIT]) {
+        const lines = draw({ tradeRouteAccess: route, tier: 'town', foodBalance }).origin;
+        expect(lines.length, `${route} ${foodBalance === DEFICIT ? 'deficit' : 'fed'}`).toBe(2);
+        for (const line of lines) expectSentence(line, route);
+        seen.add(originRoutePoolKey(route));
+      }
+    }
+    for (const tier of ['metropolis', 'city', 'thorp', 'hamlet', 'town', 'village', '']) {
+      const key = originTierPoolKey(tier);
+      expect(key, `${tier} routed nowhere`).not.toBeNull(); // anchored: the overlay pool set is compared to the corpus two lines below
+      seen.add(key);
+      expect(draw({ tradeRouteAccess: 'road', tier, foodBalance: DEFICIT }).origin, tier).toHaveLength(2);
+    }
+    expect([...seen].sort()).toEqual(poolsOf('DS-GEN-6').sort());
+    // THE TIER OVERLAY IS TOTAL: `other tiers` is a real else-arm, not a gap. `town` and
+    // `village` are the tiers the producer writes no tier line for at all.
+    expect(originTierPoolKey('town')).toBe('tier overlay: other tiers');
+    expect(originTierPoolKey('village')).toBe('tier overlay: other tiers');
+    expect(originTierPoolKey('thorp')).toBe('tier overlay: thorp / hamlet');
+    expect(originTierPoolKey('hamlet')).toBe('tier overlay: thorp / hamlet');
   });
 });

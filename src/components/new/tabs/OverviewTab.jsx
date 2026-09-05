@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { stressorsStateProse, crisisBannerRung } from '../../../domain/display/stateProse/stressorsStateProse.js';
 import { generalStateProse, GENERAL_STATE_PROSE_SILENT } from '../../../domain/display/stateProse/generalStateProse.js';
+// FREE: a 37-line zero-import leaf. The desk's DS-GEN-5 suppression must key on the SAME
+// primary-stress ladder the arrival scene above it keys on, or the page could print an
+// ordinary market day underneath a siege banner.
+import { resolvePrimaryStress } from '../../../generators/stressPriority.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
 import { deriveAllActiveConditions } from '../../../domain/activeConditions.js';
 // FREE: `stressorsCore.js` is already in the first-paint closure, so reaching its canonical
@@ -115,6 +119,8 @@ const STRESSOR_MOUNT = 'overview.stressorLifecycle';
  * registry's ARM 2), which is why the reads below are assembled here rather than inside the
  * desk: every one of them is a field this component already holds for the section it draws.
  */
+const SITUATION_MOUNT = 'overview.situation';
+const ORIGIN_MOUNT = 'overview.origin';
 const HEALTH_MOUNT = 'overview.systemsHealth';
 const GROUND_MOUNT = 'overview.ground';
 const MARKET_MOUNT = 'overview.market';
@@ -215,11 +221,19 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
       tradeRouteAccess: r.config?.tradeRouteAccess,
       isEntrepot: eco.isEntrepot,
       inst: eco.compound?.inst,
+      tier: r.tier,
+      primaryStress: resolvePrimaryStress(stresses.map((v) => v.type).filter(Boolean)),
+      // The food arithmetic DS-GEN-6's demoted `deficit` dimension is derived from. It
+      // lives under economicViability.METRICS — ViabilityTab reads the same record — and
+      // an absent one reads as an unmeasured town rather than a fed one.
+      foodBalance: via.metrics?.foodBalance,
     },
     { seed: deskSeed, audience: deskAudience },
   );
   const healthLines = generalProse.overview.systemsHealth
     .map((rung) => drawnAtMount(HEALTH_MOUNT, rung)?.sentence).filter(Boolean);
+  const originLines = generalProse.overview.origin
+    .map((rung) => drawnAtMount(ORIGIN_MOUNT, rung)?.sentence).filter(Boolean);
   const siteLines = [
     drawnAtMount(GROUND_MOUNT, generalProse.overview.ground),
     drawnAtMount(MARKET_MOUNT, generalProse.overview.market),
@@ -447,6 +461,23 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
         {r.arrivalScene&&<p className="oc-dropcap-prose" style={{...serif,fontSize:FS.md,color:swatch['#F0E8D8'],lineHeight:1.7,margin:0,fontStyle:'italic','--oc-dropcap-ink':'var(--oc-field-entry)'}}>{r.arrivalScene}</p>}
         {r.arrivalScene&&r.pressureSentence&&<hr style={{border:'none',borderTop:'1px solid #3a2a10',margin:'8px 0'}}/>}
         {r.pressureSentence&&<p style={{fontSize:FS.sm,color:swatch['#D4C4A0'],lineHeight:1.55,margin:0,fontStyle:'italic'}}>{r.pressureSentence}</p>}
+        {/* ── DS-GEN-5, the LIVE COMPANION to the frozen scene above ─────────
+            R-DST-W4-g: `arrivalScene` is a first-impression artifact composed
+            once at generation and never touched here; this is what the approach
+            looks like given current standing state, sitting beneath it exactly
+            as Food Security sits beneath the frozen bars. Two sentences, two
+            lifetimes — overwriting one with the other breaks THE PROMISE. It
+            SUPPRESSES itself where a primary stress resolves, because the crisis
+            banner's own visitor line is the right companion there. */}
+        {(() => {
+          const drawn = drawnAtMount(SITUATION_MOUNT, generalProse.overview.situation);
+          return drawn?.sentence ? (
+            <>
+              <hr style={{border:'none',borderTop:'1px solid #3a2a10',margin:'8px 0'}}/>
+              <p style={{fontSize:FS.sm,color:swatch['#D4C4A0'],lineHeight:1.55,margin:0,fontStyle:'italic'}}>{drawn.sentence}</p>
+            </>
+          ) : null;
+        })()}
       </div>}
 
       {/* ── SETTLEMENT ORIGIN ─────────────────────────────────────────────── */}
@@ -456,6 +487,13 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
             ?r.settlementReason.map((line,i)=><p key={i} style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:'0 0 4px',fontStyle:'italic'}}>{line}</p>)
             :<p style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}>{Ti(r.settlementReason?.primary||r.settlementReason)}</p>
           }
+          {/* ── DS-GEN-6, the route line and the tier overlay ────────────────
+              TWO POOLS of one block at ONE position, which is the registry's one
+              written exception to the one-fact-one-sentence law: the overlay is
+              composed AFTER the route line and never instead of it. */}
+          {originLines.length>0&&originLines.map((line,i)=>(
+            <p key={`o${i}`} style={{fontSize:i===0?FS.md:FS.sm,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.6,margin:'8px 0 0',fontStyle:'italic'}}>{line}</p>
+          ))}
         </div>
       </Section>}
 
