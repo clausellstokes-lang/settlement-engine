@@ -400,6 +400,9 @@ export const DOSSIER_MOUNTS = Object.freeze([
   Object.freeze({
     mount: 'economics.craftReason', tab: 'economics', desk: 'general', blockId: 'DS-GEN-18', rung: 'sentence',
   }),
+  Object.freeze({
+    mount: 'overview.steadings', tab: 'overview', desk: 'general', blockId: 'DS-GEN-8', rung: 'sentence',
+  }),
 ]);
 
 /**
@@ -421,7 +424,7 @@ export const UNMOUNTED_BLOCKS = Object.freeze([
   'DS-ECO-5', 'DS-SUP-1', 'DS-ECO-7',
   'DS-SUP-2',
   'DS-POP-1', 'DS-POP-2', 'DS-GEN-1',
-  'DS-GEN-8', 'DS-REL-1', 'DS-GEN-10', 'DS-POP-3', 'DS-GEN-15',
+  'DS-REL-1', 'DS-GEN-10', 'DS-POP-3', 'DS-GEN-15',
   // ── warFaith, after DESK CAR 4 ─────────────────────────────────────────────────────
   // Six of the nine mounted above. These three are dark by MEASUREMENT, and each names the
   // one act that would light it (warFaithStateProse.js carries the full derivation):

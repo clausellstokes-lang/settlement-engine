@@ -65,6 +65,9 @@ import {
   viabilityPoolKey,
   craftReasonPoolKey,
   craftInstitutionFill,
+  remnantPoolKey,
+  ancientRuinPoolKey,
+  steadingPoolKey,
 } from '../../src/domain/display/stateProse/generalStateProse.js';
 import { DOSSIER_STATE_PROSE_GENERAL } from '../../src/data/dossierStateProse/general.generated.js';
 import {
@@ -107,6 +110,8 @@ const BLOCK_POOLS = Object.freeze({
   'DS-REL-2': 3,
   // Why these workshops (DESK-GEN3 car 1).
   'DS-GEN-18': 4,
+  // The steadings, the remnant and the fallen city (DESK-GEN3 car 2).
+  'DS-GEN-8': 6,
 });
 
 /**
@@ -611,6 +616,8 @@ describe('the general desk — the mount registry', () => {
       'DS-GEN-17': 'overview.institutions',
       // DESK-GEN3 car 1 — the general desk's first position off the overview/history pages.
       'DS-GEN-18': 'economics.craftReason',
+      // DESK-GEN3 car 2 — a lawful DARK mount, on the DS-STR-2 precedent.
+      'DS-GEN-8': 'overview.steadings',
     };
     for (const [blockId, mount] of Object.entries(expected)) {
       const row = sentenceMountForBlock(blockId);
@@ -1488,5 +1495,181 @@ describe('DS-GEN-18 over the real generator — the route, measured', () => {
     // and the ones that offer none fall SILENT. A floor rather than a ratio: the generator
     // owns which rosters a seed produces.
     expect(named, 'not one stalled town could name a house').toBeGreaterThan(0);
+  });
+});
+
+describe('DS-GEN-8 — the remnant, the fallen city and the steadings (a lawful DARK mount)', () => {
+  const drawSteadings = (readings) => {
+    const g = generalStateProse(TOWN, readings, { seed: 'gen8', audience: 'dm' }).steadings;
+    return { remnant: g.remnant?.sentence ?? null, ruin: g.ruin?.sentence ?? null, rows: g.rows.map((r) => r?.sentence ?? null) };
+  };
+
+  it('ALL SIX POOLS FIRE — two grades, the ruin, and the three steading arms', () => {
+    const keys = [
+      ['lifecycleStatus: relic_ruin', remnantPoolKey('relic_ruin')],
+      ['lifecycleStatus: abandoned_site', remnantPoolKey('abandoned_site')],
+      ['history.ancientRuin present', ancientRuinPoolKey({ name: 'Ecserys', yearsAgo: 12 })],
+      ["steading row: provenance: 'forced'", steadingPoolKey({ provenance: 'forced' })],
+      ['steading row: charterPending', steadingPoolKey({ provenance: 'growth', charterPending: true })],
+      ['steading row: organic', steadingPoolKey({ provenance: 'growth' })],
+    ];
+    for (const [expected, actual] of keys) expect(actual, expected).toBe(expected);
+    expect(keys.map(([k]) => k).sort()).toEqual(poolsOf('DS-GEN-8').sort());
+    // …and each of them really draws a sentence.
+    expectSentence(drawSteadings({ lifecycleStatus: 'relic_ruin' }).remnant, 'relic_ruin');
+    expectSentence(drawSteadings({ lifecycleStatus: 'abandoned_site' }).remnant, 'abandoned_site');
+    expectSentence(drawSteadings({ history: { ancientRuin: { name: 'Ecserys', yearsAgo: 12 } } }).ruin, 'the ruin');
+    for (const row of [{ provenance: 'forced' }, { provenance: 'growth', charterPending: true }, { provenance: 'growth' }]) {
+      expectSentence(drawSteadings({ steadings: [{ ...row, name: 'Brackenfold' }] }).rows[0], JSON.stringify(row));
+    }
+  });
+
+  it('⛔ DORMANT AT BIRTH, AND DORMANT IS A TRUE STATEMENT — nothing defaults', () => {
+    // Every one of the three antecedents is ABSENT on a freshly generated settlement, and
+    // the block renders NOTHING rather than an else-arm. This is the DS-STR-2 precedent: a
+    // real writer off the generation path is a lawful dark mount.
+    const dark = drawSteadings({});
+    expect(dark.remnant).toBeNull();
+    expect(dark.ruin).toBeNull();
+    expect(dark.rows).toEqual([]);
+    expect(remnantPoolKey(''), 'a living town resolved a remnant grade').toBeNull();
+    expect(remnantPoolKey('thriving'), 'an unknown grade fell into a pool').toBeNull();
+    expect(ancientRuinPoolKey(null)).toBeNull();
+    expect(steadingPoolKey(null)).toBeNull();
+    // …and the producers are real, which is what makes the silence dormancy and not death.
+    const real = generateSettlementPipeline(
+      { settType: 'city', culture: 'celtic', terrainOverride: 'hills', tradeRouteAccess: 'river', ancientRuinsEnabled: true },
+      null, { seed: 'sf-test-2026-04', customContent: {} },
+    );
+    expect(real.history?.ancientRuin, 'the opt-in ancient ruin no longer writes').toBeTruthy();
+    expect(typeof real.history.ancientRuin.name).toBe('string');
+    expect(typeof real.history.ancientRuin.yearsAgo).toBe('number');
+    // …and it is STRICTLY opt-in: the same generator with the flag off writes none.
+    const off = generateSettlementPipeline(
+      { settType: 'city', culture: 'celtic', terrainOverride: 'hills', tradeRouteAccess: 'river' },
+      null, { seed: 'sf-test-2026-04', customContent: {} },
+    );
+    expect(off.history?.ancientRuin, 'the ruin arrived without its config flag').toBeFalsy();
+  });
+
+  it('THE PROVENANCE FOLD IS TOTAL over the ledger\'s own closed four-word vocabulary', () => {
+    // `satellitesLedger.js`'s SatelliteRecord typedef is the authority, and it is read from
+    // the source rather than transcribed, so a fifth word reds here instead of folding.
+    const ledger = src('src/domain/worldPulse/satellitesLedger.js');
+    mustExtract(ledger, "@property {'growth'|'resource_strike'|'resettlement'|'forced'} provenance",
+      'the SatelliteRecord provenance vocabulary');
+    for (const word of ['growth', 'resource_strike', 'resettlement']) {
+      expect(steadingPoolKey({ provenance: word }), word).toBe('steading row: organic');
+    }
+    expect(steadingPoolKey({ provenance: 'forced' })).toBe("steading row: provenance: 'forced'");
+    // ⚠ THE ORDER IS A RULING: a steading that is BOTH forced and charter-pending speaks
+    // about its origin, which is permanent, rather than its standing, which the record will
+    // itself resolve at the charter.
+    expect(steadingPoolKey({ provenance: 'forced', charterPending: true }))
+      .toBe("steading row: provenance: 'forced'");
+  });
+
+  it('⛔ `{band}` IS RESERVED AND IS NEVER FILLED — four variants drop and every pool survives', () => {
+    // §0c declares `{band}` RESERVED — one name for six incompatible roles — and
+    // `fillShapeViolation` refuses a fill for it outright. So the steading HEAD COUNT never
+    // reaches a reader through this desk, which is also §0d's own answer to a raw number.
+    const shapes = mergedShapes();
+    expect(shapes.band).toBe('RESERVED');
+    expect(fillShapeViolation(shapes.band, 'a few souls')).toBe('RESERVED-SLOT-HAS-NO-DECLARABLE-FILL');
+    expect(SLOT_FILL_SHAPES.band, 'the desk declared a shape for a RESERVED slot').toBeUndefined();
+    // Four variants of this block name it. Each of their POOLS still speaks through a
+    // variant that does not — which is the whole reason the block is mountable at all.
+    const named = Object.entries(DOSSIER_STATE_PROSE_GENERAL['DS-GEN-8'].pools)
+      .flatMap(([key, variants]) => variants.filter((v) => (v.slots || []).includes('band')).map(() => key));
+    expect(named.length, 'the number of {band} variants moved').toBe(4);
+    for (const key of new Set(named)) {
+      const survivors = DOSSIER_STATE_PROSE_GENERAL['DS-GEN-8'].pools[key]
+        .filter((v) => !(v.slots || []).includes('band'));
+      expect(survivors.length, `${key} has no variant that avoids {band}`).toBeGreaterThan(0);
+    }
+    // And no drawn line ever carries a digit.
+    const drawn = drawSteadings({
+      lifecycleStatus: 'relic_ruin',
+      history: { ancientRuin: { name: 'Ecserys', yearsAgo: 12 } },
+      steadings: [{ name: 'Brackenfold', provenance: 'growth', population: 40 }],
+    });
+    for (const line of [drawn.remnant, drawn.ruin, ...drawn.rows].filter(Boolean)) {
+      expect(line, '§0d bans digits from dossier prose').not.toMatch(/[0-9]/); // anchored: expectSentence in the first arm proves these same draws are real sentences
+    }
+  });
+
+  it('THE ROWS ARE INDEX-PAIRED — an unkeyable steading keeps its place', () => {
+    // The caller renders each sentence inside the card it is about, so a shortened list
+    // would slip the pairing by one. The DS-GEN-2 conflict rule, for the same reason.
+    const rows = drawSteadings({
+      steadings: [
+        { name: 'Brackenfold', provenance: 'forced' },
+        { provenance: 'growth' },                       // no name ⇒ no fill ⇒ null IN PLACE
+        { name: 'Thornmere', provenance: 'growth', charterPending: true },
+      ],
+    }).rows;
+    expect(rows).toHaveLength(3);
+    expect(rows[1], 'a nameless steading shortened the list').toBeNull();
+    expectSentence(rows[0], 'the forced steading');
+    expectSentence(rows[2], 'the charter-pending steading');
+  });
+
+  it('⛔ `{timeband_since}` GOES DARK ON AN OLD RUIN and the pool still speaks', () => {
+    // §0d's sixth band is PREDICATE-ONLY, so the adverbial column is null beyond a
+    // generation — and the measured ancient ruin is 619 years old. Two of the four variants
+    // name the slot and drop; the other two carry the pool.
+    const old = drawSteadings({ history: { ancientRuin: { name: 'Ecserys', yearsAgo: 619 } } });
+    expectSentence(old.ruin, 'a 619-year-old ruin');
+    const recent = drawSteadings({ history: { ancientRuin: { name: 'Ecserys', yearsAgo: 12 } } });
+    expectSentence(recent.ruin, 'a 12-year-old ruin');
+    // A ruin whose name cannot be a `proper` fill is WITHHELD rather than repaired.
+    expect(ancientRuinPoolKey({ name: 'ecserys', yearsAgo: 12 }), 'a lowercase name filled a proper slot').toBeNull();
+    expect(ancientRuinPoolKey({ yearsAgo: 12 })).toBeNull();
+  });
+});
+
+/**
+ * ⛔ DS-GEN-15 IS NOT MOUNTED, AND THIS IS THE MEASURED REASON PINNED SO IT CANNOT DECAY.
+ *
+ * The block's STATE-KEY needs two 0..1 THRESHOLDS the annex does not author and the estate
+ * does not publish: `SCARRED-FRESH` is "a scar carried at high severity", `SCARRED-FADING` is
+ * "decayed low", and `ENCROACHED` is "drift high". Three of its five pools are unreachable
+ * without them. A lane may not mint the cut — a new named constant enters the tuning register
+ * as unregistered debt and raising that ceiling is the chair's act — and borrowing
+ * `scoreBand`'s 65/40/20 defence ladder would be this desk ruling that a masonry scar reads
+ * on a defence scale, which is a VOCABULARY decision and belongs to whoever owns the words.
+ */
+describe('⛔ DS-GEN-15 stays dark — the fabric split needs a threshold nobody has authored', () => {
+  it('the reader is real and the two threshold-free keys are identified', () => {
+    // The block is NOT a reader-with-no-writer: `fabricRead.js` is a live, pure, zero-import
+    // API and `urbanFabricKernel.js` writes the mirror it reads. What is missing is the CUT.
+    const reader = src('src/domain/townMap/fabricRead.js');
+    mustExtract(reader, 'export function fabricScarsOf', 'the fabric scar reader');
+    mustExtract(reader, 'export function fabricDriftOf', 'the fabric drift reader');
+    mustExtract(reader, 'export function hasFabric', 'the fabric presence check');
+    // The two keys that need NO threshold, so the chair's ruling is one line rather than a
+    // re-derivation: a rebirth row on record, and a present mirror with neither scar nor
+    // rebirth. The other three need the cut.
+    expect(poolsOf('DS-GEN-15').sort())
+      .toEqual(['ENCROACHED', 'REBUILT', 'SCARRED-FADING', 'SCARRED-FRESH', 'WORN-PLAIN']);
+    // …and it is still declared dark, so nothing can quietly half-mount it.
+    expect(UNMOUNTED_BLOCKS).toContain('DS-GEN-15');
+    expect(sentenceMountForBlock('DS-GEN-15')).toBeNull();
+  });
+
+  it('the scar KIND vocabulary is closed at eight, which is what the fill table will need', () => {
+    // Measured now so the day the chair rules the threshold, the kind-to-word table the
+    // annex calls "wiring work" is written against a vocabulary that has not moved.
+    const kernel = src('src/domain/worldPulse/urbanFabricKernel.js');
+    mustExtract(kernel, 'export const SCAR_HALF_LIFE_WEEKS', 'the scar kind registry');
+    const window = kernel.slice(kernel.indexOf('export const SCAR_HALF_LIFE_WEEKS'));
+    const kinds = [...window.slice(0, 700).matchAll(/^\s{2}([a-z_]+):\s*\d+,/gm)].map((m) => m[1]);
+    expect(kinds.sort()).toEqual([
+      'burn_lots', 'calamity_scar', 'flood_line', 'lean_years',
+      'occupation_marks', 'plague_quarter', 'rubble_field', 'siege_repairs',
+    ]);
+    // ⚠ `calamity_scar` is the UNCLASSIFIED default and has no honest common noun: calling
+    // it "calamity" would print the classifier's own failure as a fact about the town.
+    expect(kinds).toContain('calamity_scar');
   });
 });
