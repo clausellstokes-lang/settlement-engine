@@ -2100,11 +2100,13 @@
       "status": "draft",
       "signedAt": null,
       "unit": {
-        "severity": "fraction01",
-        "score": "score100"
+        "notable.severity": "fraction01",
+        "notable.score": "score100",
+        "major.severity": "fraction01",
+        "major.score": "score100"
       },
       "band": null,
-      "note": "ENC-4 (ROAD B): the Herald presentation of a recorded meeting — severity (the notable band's weight) and score; registered by the Fable chair at the §899 composed landing when the walker convicted the bare decimal in a new file. Candidate, owner-unsigned, like its stage sibling."
+      "note": "ENC-4 (ROAD B): the Herald presentation of a recorded meeting — severity (the notable band's weight) and score; registered by the Fable chair at the §899 composed landing when the walker convicted the bare decimal in a new file. Candidate, owner-unsigned, like its stage sibling. §900: the major band (ENC-4b's exposed refusal) joins as a second leaf pair; units per leaf, all-or-none."
     },
     "src/domain/display/stateProse/economyStateProse.js#SOLE_EARNER_FROM": {
       "role": null,
