@@ -16,6 +16,9 @@ Base: the §900 CAS (the desk landing) — every L-HOMES dock is cut at 38474a59
 - LH8's `densityCreateBoundary.js` vs HORIZON-B2's EXECUTOR class did NOT conflict (both applied clean) — still check B2's row against LH8's arm 5 at the proof.
 - If the §900 CAS lands on edef0b219, `laneLIGHTTRIAL` IS the §901 composition (rename or use as laneLIGHTINT; `land-light-prep.sh` is then unnecessary). Then: L-CHAIR-901 (brief ready) → the BUILD + listing diff STOP → the whole suite (no filter) + `typecheck:ratchet` → registers LAST → kit → gate → CAS → §901.
 
+## ⭐ THE LISTING DIFF STOP — CLEARED 09-05 18:59 (`listing-900.txt` vs `listing-901.txt`, by filename, hashes stripped)
+642 chunks vs 638: FOUR NEW lazy chunks (`treatyOrientation.js`, `warConvergenceContract.js`, `warEndingClassifier.js`, `warRemembrance.js` — LH6's Remembrance reader and its splits); 69 chunks moved, total +17,871 B, ALL lazy; the entry/index chunks did NOT move (eager bytes 0 — every car's prediction held); `generation.worker` 1,404,242 B = the landed ceiling exactly; the two big workers +1.2 KB each (advanceInterval, pdfRender — the shared domain leaves grew). Largest single move: `HeraldRemembrance.js` +2,337 B (LH6's door). No STOP fires. The freshness arms 78/78 after the re-mint car (d75e807a6, message amended to the measured cause).
+
 ## Order of acts (chair)
 1. Compose: a fresh dock at the §900 CAS; `replay-cars.sh` each L-HOMES dock `:38474a59e`; the STOP: any hashed-chunk listing diff over `(margin − 100 B)` — the chair builds and reads it (eager bytes predicted 0 by every car).
 2. The whole suite at the composed tip (no filter); fix cars; the golden-freeze register: every golden-adjacent test file enrolled or excluded (`goldenFreeze.walker` runs on every gate).
