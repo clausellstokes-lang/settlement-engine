@@ -844,11 +844,25 @@ describe('DS-ECO-3 — driven through the real producer, not a transcribed enum'
   });
 
   it('holds the three `canonical` variants against the live headlines they copy', () => {
-    // The second-home pin again, and the one that shows the class is not hypothetical:
-    // these three have ALREADY drifted. The corpus spells a period where BAND_COPY has an
-    // em dash, so the pin is on the drifted-apart PREFIX rather than on equality, and it
-    // names the cure — bind the row through the generator's LIVE_STRING_BINDINGS, the way
-    // DS-ECO-7's pair is bound.
+    // The second-home pin again — and the drift it was written to record is GONE, so the
+    // pin now holds the two homes to EQUALITY rather than to a shared prefix.
+    //
+    // ⭐ THE HISTORY MATTERS, because this arm reddened without either of its subjects
+    // moving. DESK-ECONFAITH C3 (`4dc34e9ae`) authored it on a base where the corpus spelt
+    // a period and BAND_COPY spelt an em dash, and pinned the INEQUALITY as a measured
+    // fact. The em-dash sweep `e3f6029b2` (2026-09-03, "the em dashes leave the src/ reader
+    // prose, both sides of the byte-twins move together") had already closed that gap
+    // BELOW the composition's base, so when C3's sealed car was replayed onto the
+    // post-sweep tip the two homes were byte-identical and an assertion that they differ
+    // could not hold. Measured at the composition: `tradeFlowEconomics.js` and
+    // `economy.generated.js` are both unchanged across all 54 cars — neither side moved,
+    // the GROUND under the pin did.
+    //
+    // Equality is the stronger pin and the one the old note was reaching for when it named
+    // the cure (bind the row through the generator's LIVE_STRING_BINDINGS, the way
+    // DS-ECO-7's pair is bound). That binding is still the right end state and is still
+    // unbuilt; until it lands, this arm reds if EITHER home drifts, in either direction,
+    // instead of quietly tolerating a gap of any size.
     const canonical = Object.values(DOSSIER_STATE_PROSE_ECONOMY['DS-ECO-3'].pools).flat()
       .filter((v) => v.angle === 'canonical');
     expect(canonical, 'the canonical rows this pin is about left the corpus').toHaveLength(3);
@@ -861,9 +875,9 @@ describe('DS-ECO-3 — driven through the real producer, not a transcribed enum'
     // The two homes are NOT byte-identical today, which is the drift this pin records.
     const headlines = [...live.matchAll(/headline: '([^']+)'/g)].map((m) => m[1]);
     expect(headlines, 'BAND_COPY no longer carries three headlines').toHaveLength(3);
-    // anchored: the loop above proved every canonical head appears in that same file, so
-    // this inequality is the measured punctuation drift and not two empty lists compared
-    expect(canonical.map((v) => v.text).sort()).not.toEqual(headlines.sort());
+    // The two lengths are pinned at 3 above, so this is three strings against three, never
+    // two empty lists agreeing.
+    expect(canonical.map((v) => v.text).sort()).toEqual(headlines.sort());
   });
 });
 
