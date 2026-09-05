@@ -1264,3 +1264,502 @@ describe('THE PUBLIC-DOSSIER GUARD — a mounted desk never draws for a free vie
         + ' desk draws from nowhere this arm can see']);
   });
 });
+
+/**
+ * ⛔⛔ THE FIRST-PAINT LAW — a lit sentence a reader cannot see is dark.
+ *
+ * `Primitives.jsx:114` (and `Collapsible` at :83) render a shut section as
+ * `{open && <div>{children}</div>}`: a collapsed host emits NO BYTES AT ALL, not hidden
+ * ones. So a SENTENCE row whose draw sits inside a host that is not open on first paint is
+ * lit in the registry and dark on the page — and every instrument this file already owns
+ * is green over it. The reachability arm sees the literal; the public-dossier guard sees
+ * the gate; the desk builds the rung; the DOM carries nothing.
+ *
+ * IT WAS NOT UNNOTICED — IT WAS WORKED AROUND, TWICE, IN WRITING, BY TWO LANDED LANES.
+ * `tests/ui/defenseTabFlow.test.js`'s docblock names the fold and answers it with an
+ * `openSection()` click helper; `tests/ui/economicsTabFlow.test.js` names it and answers it
+ * by choosing a fixture with a real food deficit so the fold opens. Both suites went green
+ * and both readers stayed dark. That is why this belongs in the walker: a cure that lives
+ * in a test fixture is not a cure, and the next position will meet the same fold.
+ *
+ * ── WHAT THE ARM HAS TO DO THAT THE REACHABILITY ARM CANNOT ──────────────────────────
+ * The reachability arm counts a STRING LITERAL. The literal is nowhere near the draw:
+ * `DefenseTab.jsx` names `defense.supportingCapabilities` in a module-scope const at line
+ * 72 and renders it at 522, and `WarFaithDesk.jsx` names `war.standing` in a const that a
+ * component in ANOTHER FILE renders. So this arm follows the mount:
+ *   1. from its id — a `mount="…"` JSX prop, or the first argument of `drawnAtMount(…)`,
+ *      spelled literally or through a module-scope const;
+ *   2. through the CARRIER variables the call's value flows into, closed transitively over
+ *      `const X = …carrier…` and SCOPED to the top-level declaration that owns them (two
+ *      components in one file both naming a local `drawn` are two different values, and a
+ *      file-wide reader hands each mount the other's draw sites — measured on
+ *      `war.dormantNote` and `faith.nicheRow`, which share `WarFaithDesk.jsx`);
+ *   3. OUT of the drawing component to every place that component is itself rendered,
+ *      recursively, stopping at `OutputContainer.jsx` — the dossier root, and the frame a
+ *      tab's own first paint happens inside.
+ * Then every `<Section>`/`<Collapsible>` enclosing any of those sites is graded.
+ *
+ * ⚠ A HOST IS OPEN ONLY WHEN IT IS STATICALLY OPEN. `defaultOpen={false}` is shut for
+ * every reader on every world; a DATA-DEPENDENT `defaultOpen={<expr>}` is shut for every
+ * world on the wrong side of the cut, which is the same defect on those towns and not a
+ * smaller one. Measured before this arm was written: `economics.shadowEconomy` sat behind
+ * `defaultOpen={bmc>=15}`, true on 1 of 60 generated towns, so DS-ECO-6's one speaking
+ * position was reaching under two percent of the worlds the generator builds.
+ *
+ * The escape is a REGISTRY DECLARATION, `visibility: 'closed-section'` plus a
+ * `visibilityReason` the arm holds to a length, and it is TWO-SIDED: a row that declares
+ * the exemption while its host is actually open is convicted too, so a declaration cannot
+ * outlive the layout that earned it.
+ */
+describe('THE FIRST-PAINT LAW — a sentence behind a shut fold reaches no reader', () => {
+  const HOST_TAGS = Object.freeze(['Section', 'Collapsible']);
+  const DOSSIER_ROOT = 'src/components/OutputContainer.jsx';
+  /** A declaration has to argue; this is the floor that stops a token buying an exemption. */
+  const REASON_FLOOR = 120;
+
+  /**
+   * Comments blanked to spaces, OFFSETS AND NEWLINES PRESERVED and string literals left
+   * alone. The shared `codeOnly` blanks literal CONTENTS, which is the opposite of what a
+   * reader that must recover a mount id out of `drawnAtMount('economics.foodSecurity', …)`
+   * needs, and this arm reports line numbers, so the length must not move.
+   * @param {string} src @returns {string}
+   */
+  function blankComments(src) {
+    const out = src.split('');
+    let i = 0;
+    const n = src.length;
+    while (i < n) {
+      const c = src[i];
+      if (c === '/' && src[i + 1] === '/') { while (i < n && src[i] !== '\n') { out[i] = ' '; i += 1; } continue; }
+      if (c === '/' && src[i + 1] === '*') {
+        out[i] = ' '; out[i + 1] = ' ';
+        i += 2;
+        while (i < n && !(src[i] === '*' && src[i + 1] === '/')) { if (src[i] !== '\n') out[i] = ' '; i += 1; }
+        if (i < n) { out[i] = ' '; out[i + 1] = ' '; i += 2; }
+        continue;
+      }
+      if (c === "'" || c === '"' || c === '`') {
+        i += 1;
+        while (i < n && src[i] !== c) { if (src[i] === '\\') i += 1; i += 1; }
+        i += 1;
+        continue;
+      }
+      i += 1;
+    }
+    return out.join('');
+  }
+
+  /**
+   * Every `<Section …>` / `<Collapsible …>` SPAN in a file, as `{from, to, tag, attrs}`.
+   * FAIL-CLOSED: an unbalanced tree throws rather than answering, because a reader that
+   * silently mis-paired one tag would grade a shut host as open.
+   * @param {string} code @param {string} where @returns {{from:number,to:number,tag:string,attrs:string}[]}
+   */
+  function hostFrames(code, where) {
+    const events = [];
+    for (const tag of HOST_TAGS) {
+      for (const m of code.matchAll(new RegExp(`<${tag}(?=[\\s>/])`, 'g'))) {
+        let i = m.index + tag.length + 1;
+        let depth = 0;
+        let selfClose = false;
+        for (; i < code.length; i += 1) {
+          const c = code[i];
+          if (c === '{') depth += 1;
+          else if (c === '}') depth -= 1;
+          else if (c === '>' && depth === 0) { selfClose = code[i - 1] === '/'; break; }
+        }
+        if (selfClose) continue;                        // no children, so nothing to hide
+        events.push({ pos: m.index, kind: 'open', tag, attrs: code.slice(m.index, i + 1).replace(/\s+/g, ' ') });
+      }
+      for (const m of code.matchAll(new RegExp(`</${tag}\\s*>`, 'g'))) events.push({ pos: m.index, kind: 'close', tag });
+    }
+    events.sort((a, b) => a.pos - b.pos);
+    const frames = [];
+    const stack = [];
+    for (const e of events) {
+      if (e.kind === 'open') { stack.push(e); continue; }
+      const top = stack.pop();
+      if (!top || top.tag !== e.tag) throw new Error(`unbalanced <${e.tag}> at offset ${e.pos} in ${where}`);
+      frames.push({ from: top.pos, to: e.pos, tag: top.tag, attrs: top.attrs });
+    }
+    if (stack.length !== 0) throw new Error(`${stack.length} unclosed host tag(s) in ${where}`);
+    return frames;
+  }
+
+  /**
+   * Is this host OPEN on first paint?
+   *
+   * ⚠ THE TAG DECIDES WHETHER THERE IS A FOLD AT ALL, AND A GUARD-THE-GUARD ARM CAUGHT
+   * THIS FILE GETTING IT WRONG. `Section` is a plain header UNLESS it is passed
+   * `collapsible`; `Collapsible` IS the fold and takes no such prop. Keying on the
+   * attribute alone graded every `<Collapsible defaultOpen={false}>` as OPEN — there are
+   * three in the tree today (`HistoryTab.jsx:230`/`:252`, `NPCsTab.jsx:162`) and the first
+   * mount to land inside one would have passed this arm in silence.
+   *
+   * A fold is open only when `defaultOpen` is STATICALLY true — bare, `{true}`, or absent
+   * (both primitives default the parameter to `true`).
+   * @param {string} attrs the opening tag, `<Section …>` or `<Collapsible …>`
+   * @returns {'open'|'closed'|'conditional'}
+   */
+  function hostOpenness(attrs) {
+    const folds = attrs.startsWith('<Collapsible') || /\bcollapsible\b/.test(attrs);
+    if (!folds) return 'open';
+    const m = attrs.match(/\bdefaultOpen\s*(=\s*(\{[^]*?\}|"[^"]*"|'[^']*'))?/);
+    if (!m || !m[2]) return 'open';
+    const value = m[2].replace(/^\{|\}$/g, '').trim();
+    if (value === 'true') return 'open';
+    if (value === 'false') return 'closed';
+    return 'conditional';
+  }
+
+  /** Module-scope `const NAME = 'literal';` bindings — how every tab spells its own mounts. */
+  function stringConsts(raw) {
+    const map = new Map();
+    for (const m of raw.matchAll(/\bconst\s+([A-Za-z_$][A-Za-z0-9_$]*)\s*=\s*(['"])([^'"\n]*)\2\s*;/g)) map.set(m[1], m[3]);
+    return map;
+  }
+
+  /**
+   * The STATEMENT a call sits in, read backwards from its own `(` — ARM 3's reader, brace
+   * stop included: a depth-zero `{` reached backwards is a block opener and never an object
+   * literal we are inside, because that literal's `}` would have raised the depth first.
+   * @param {string} code @param {number} at @returns {string}
+   */
+  function enclosingStatement(code, at) {
+    let depth = 0;
+    let i = at - 1;
+    for (; i >= 0; i -= 1) {
+      const c = code[i];
+      if (c === '}' || c === ')' || c === ']') depth += 1;
+      else if (c === '(' || c === '[') { if (depth > 0) depth -= 1; }
+      else if (c === '{') { if (depth === 0) break; depth -= 1; }
+      else if (c === ';' && depth === 0) break;
+    }
+    return code.slice(i + 1, at);
+  }
+
+  /** The first argument of the call whose `(` sits at `open`. @returns {string} */
+  function firstArgument(raw, open) {
+    let depth = 0;
+    for (let i = open; i < raw.length; i += 1) {
+      const c = raw[i];
+      if (c === '(' || c === '[' || c === '{') depth += 1;
+      else if (c === ')' || c === ']' || c === '}') { depth -= 1; if (depth === 0) return raw.slice(open + 1, i); }
+      else if (c === ',' && depth === 1) return raw.slice(open + 1, i);
+    }
+    return '';
+  }
+
+  /**
+   * The TOP-LEVEL declarations of a module, each running to the next. A carrier is
+   * function-scoped in the language and is read that way here.
+   */
+  function declarationSpans(code) {
+    const marks = [];
+    const re = /^(?:export\s+)?(?:default\s+)?(?:function\s+([A-Za-z_$][A-Za-z0-9_$]*)\s*\(|const\s+([A-Za-z_$][A-Za-z0-9_$]*)\s*=)/gm;
+    for (const m of code.matchAll(re)) marks.push({ name: m[1] || m[2], from: m.index });
+    return marks.map((mark, i) => ({
+      name: mark.name, from: mark.from, to: i + 1 < marks.length ? marks[i + 1].from : code.length,
+    }));
+  }
+
+  /**
+   * Every offset in ONE file that draws `mountId`, and the carriers it followed to get
+   * there. Null when this file draws the mount nowhere.
+   * @param {{raw: string, code: string, spans: {name:string,from:number,to:number}[]}} file
+   * @param {string} mountId
+   * @returns {{sites: number[], carriers: string[]}|null}
+   */
+  function drawSitesIn(file, mountId) {
+    const { raw, code, spans } = file;
+    const consts = stringConsts(raw);
+    const sites = [];
+    const carriers = [];
+    for (const m of raw.matchAll(/\bmount\s*=\s*(?:(['"])([^'"]*)\1|\{\s*([A-Za-z_$][A-Za-z0-9_$]*)\s*\})/g)) {
+      if ((m[2] !== undefined ? m[2] : consts.get(m[3])) === mountId) sites.push(m.index);
+    }
+    for (const m of code.matchAll(/\bdrawnAtMount\s*\(/g)) {
+      const open = m.index + m[0].length - 1;
+      const argument = firstArgument(raw, open).trim();
+      const literal = /^(['"])(.*)\1$/.exec(argument);
+      if ((literal ? literal[2] : consts.get(argument)) !== mountId) continue;
+      const statement = enclosingStatement(code, open);
+      const declared = /^\s*(?:const|let|var)\s+([A-Za-z_$][A-Za-z0-9_$]*)\s*=/.exec(statement);
+      if (declared) carriers.push({ name: declared[1], at: open - statement.length });
+      else sites.push(open);                                  // drawn inline, where it is called
+    }
+    if (sites.length === 0 && carriers.length === 0) return null;
+    const byScope = new Map();
+    for (const { name, at } of carriers) {
+      const span = spans.find((s) => at >= s.from && at < s.to) || { from: 0, to: code.length };
+      if (!byScope.has(span.from)) byScope.set(span.from, { span, names: new Set() });
+      byScope.get(span.from).names.add(name);
+    }
+    for (const { span, names } of byScope.values()) {
+      const region = code.slice(span.from, span.to);
+      for (let grew = true; grew;) {
+        grew = false;
+        for (const m of region.matchAll(/\b(?:const|let|var)\s+([A-Za-z_$][A-Za-z0-9_$]*)\s*=([^;]*);/g)) {
+          if (names.has(m[1])) continue;
+          if ([...names].some((c) => new RegExp(`\\b${c}\\b`).test(m[2]))) { names.add(m[1]); grew = true; }
+        }
+      }
+      for (const name of names) {
+        for (const m of region.matchAll(new RegExp(`\\b${name}\\b`, 'g'))) {
+          if (/\b(?:const|let|var)\s+$/.test(region.slice(Math.max(0, m.index - 40), m.index))) continue;
+          sites.push(span.from + m.index);
+        }
+      }
+    }
+    return {
+      sites: [...new Set(sites)].sort((a, b) => a - b),
+      carriers: [...new Set([...byScope.values()].flatMap((v) => [...v.names]))],
+    };
+  }
+
+  /**
+   * THE RULE, total over a registry and a component tree passed in, so the controls below
+   * and the shipped table are judged by one function.
+   * @param {readonly object[]} mounts
+   * @param {{rel: string, raw: string}[]} files
+   * @returns {string[]}
+   */
+  function foldedSentenceMounts(mounts, files) {
+    const index = files.map((f) => {
+      const code = blankComments(f.raw);
+      return { rel: f.rel, raw: f.raw, code, frames: hostFrames(code, f.rel), spans: declarationSpans(code) };
+    });
+    const lineAt = (file, pos) => file.code.slice(0, pos).split('\n').length;
+    const rendered = new Map();
+    const renderSites = (name) => {
+      if (!rendered.has(name)) {
+        const out = [];
+        for (const file of index) {
+          for (const m of file.code.matchAll(new RegExp(`<${name}(?=[\\s>/])`, 'g'))) out.push({ file, pos: m.index });
+        }
+        rendered.set(name, out);
+      }
+      return rendered.get(name);
+    };
+    const hostsOf = (file, pos, seen, depth) => {
+      const here = file.frames
+        .filter((f) => pos > f.from && pos < f.to)
+        .map((f) => ({ where: `${file.rel}:${lineAt(file, f.from)}`, attrs: f.attrs, open: hostOpenness(f.attrs) }));
+      if (file.rel === DOSSIER_ROOT) return here;             // the frame first paint happens in
+      if (depth > 8) return [...here, { where: `${file.rel}:${lineAt(file, pos)}`, attrs: '(the walk ran past its depth cap)', open: 'unresolved' }];
+      const owner = (file.spans.find((s) => pos >= s.from && pos < s.to) || {}).name;
+      if (!owner) return here;
+      const key = `${file.rel}::${owner}`;
+      if (seen.has(key)) return here;
+      seen.add(key);
+      for (const up of renderSites(owner)) {
+        if (up.file === file && up.pos === pos) continue;
+        here.push(...hostsOf(up.file, up.pos, seen, depth + 1));
+      }
+      return here;
+    };
+
+    const bad = [];
+    for (const row of mounts) {
+      if (row?.rung !== MOUNT_RUNGS.SENTENCE) continue;
+      const found = [];
+      for (const file of index) {
+        const drawn = drawSitesIn(file, row.mount);
+        if (drawn) for (const pos of drawn.sites) found.push({ file, pos });
+      }
+      const declared = row.visibility === 'closed-section';
+      if (found.length === 0) {
+        bad.push(`${row.mount}: this arm can follow no draw site for it, so its visibility is unknown`);
+        continue;
+      }
+      const hosts = new Map();
+      for (const site of found) {
+        for (const host of hostsOf(site.file, site.pos, new Set(), 0)) hosts.set(host.where, host);
+      }
+      const shut = [...hosts.values()].filter((h) => h.open !== 'open');
+      if (shut.length > 0 && !declared) {
+        const worst = shut[0];
+        bad.push(`${row.mount} (${row.blockId}) draws inside ${worst.where} ${worst.attrs.slice(0, 90)}`
+          + `, which is ${worst.open} on first paint, and the row declares no visibility`);
+      }
+      if (shut.length === 0 && declared) {
+        bad.push(`${row.mount}: the row declares visibility 'closed-section' and every host that`
+          + ' encloses it is open on first paint — a stale exemption');
+      }
+      if (shut.length > 0 && declared && String(row.visibilityReason || '').length < REASON_FLOOR) {
+        bad.push(`${row.mount}: visibility 'closed-section' is declared with a ${String(row.visibilityReason || '').length}-character reason`
+          + `, and this exemption is only bought with an argument (${REASON_FLOOR} characters)`);
+      }
+    }
+    return bad.sort();
+  }
+
+  // ── THE CONTROLS. A synthetic tab drawn four ways, so the rule is proved ARMED before
+  //    the shipped table is judged by it. ──────────────────────────────────────────────
+  const PROBE_ROW = Object.freeze([Object.freeze({
+    mount: 'economics.probe', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-1', rung: 'sentence',
+  })]);
+  /** The mount is drawn through a CARRIER, the way every landed tab draws one. */
+  const probeTab = (hostAttrs, inside) => [
+    "import { drawnAtMount } from '../../domain/display/stateProse/dossierMounts.js';",
+    "const PROBE_MOUNT = 'economics.probe';",
+    'export function ProbeTab({ settlement, publicDossier = false }) {',
+    '  const drawn = drawnAtMount(PROBE_MOUNT, settlement.rung);',
+    '  const probeLines = [drawn].map((d) => d?.sentence).filter(Boolean);',
+    '  return (',
+    '    <div>',
+    inside ? '' : '      {probeLines.length > 0 && <p>{probeLines[0]}</p>}',
+    `      <${hostAttrs}>`,
+    inside ? '        {probeLines.length > 0 && <p>{probeLines[0]}</p>}' : '',
+    '        <div>the rows</div>',
+    `      </${hostAttrs.split(' ')[0]}>`,
+    '    </div>',
+    '  );',
+    '}',
+  ].filter(Boolean).join('\n');
+  const tree = (raw, rel = 'src/components/new/tabs/ProbeTab.jsx') => [{ rel, raw }];
+
+  test('guard the guard: the openness reader tells a bare defaultOpen from {false} and from an expression', () => {
+    // A plain header is not a fold at all.
+    expect(hostOpenness('<Section title="X">')).toBe('open');
+    // Both primitives default the parameter to true, so `collapsible` alone is open…
+    expect(hostOpenness('<Section title="X" collapsible>')).toBe('open');
+    expect(hostOpenness('<Section title="X" collapsible defaultOpen>')).toBe('open');
+    expect(hostOpenness('<Section title="X" collapsible defaultOpen={true}>')).toBe('open');
+    // …and only these two hide a child on some world or on every one.
+    expect(hostOpenness('<Section title="X" collapsible defaultOpen={false}>')).toBe('closed');
+    expect(hostOpenness('<Section title="X" collapsible defaultOpen={!!fb.deficit}>')).toBe('conditional');
+    expect(hostOpenness('<Collapsible title="X" defaultOpen={false}>')).toBe('closed');
+    // An UNBALANCED tree is refused rather than answered: a reader that mis-paired one tag
+    // would grade a shut host as open, which is the exact failure this arm exists to catch.
+    expect(() => hostFrames('<Section title="a"><div/>', 'probe')).toThrow(/unclosed/);
+    expect(() => hostFrames('<div/></Section>', 'probe')).toThrow(/unbalanced/);
+    // A SELF-CLOSING host has no children and encloses nothing (RegenerationDeltaCard.jsx
+    // renders seven of them; counting their `>` as an opener unbalanced the first draft).
+    expect(hostFrames('<Section title="a" items={x} />\n<div/>', 'probe')).toEqual([]);
+  });
+
+  test('guard the guard: a carrier is read in the scope that declares it, and a comment is not code', () => {
+    const twoComponents = [
+      "import { drawnAtMount } from '../../domain/display/stateProse/dossierMounts.js';",
+      "const A_MOUNT = 'economics.probe';",
+      "const B_MOUNT = 'economics.other';",
+      'export function DrawA({ s }) {',
+      '  const drawn = drawnAtMount(A_MOUNT, s.a);',
+      '  return <div>{drawn?.sentence}</div>;',
+      '}',
+      'export function DrawB({ s }) {',
+      '  const drawn = drawnAtMount(B_MOUNT, s.b);',
+      '  return <Section title="B" collapsible defaultOpen={false}><p>{drawn?.sentence}</p></Section>;',
+      '}',
+    ].join('\n');
+    const code = blankComments(twoComponents);
+    const file = { raw: twoComponents, code, spans: declarationSpans(code) };
+    const a = drawSitesIn(file, 'economics.probe');
+    const b = drawSitesIn(file, 'economics.other');
+    // Both components name their local `drawn`. A file-wide carrier reader would hand A the
+    // sites inside B's shut fold and report a defect that is not there.
+    expect(a.carriers).toEqual(['drawn']);
+    expect(b.carriers).toEqual(['drawn']);
+    const lineOf = (pos) => code.slice(0, pos).split('\n').length;
+    expect(a.sites.map(lineOf)).toEqual([6]);
+    expect(b.sites.map(lineOf)).toEqual([10]);
+    // …and a mount id MENTIONED IN PROSE draws nothing: the reader takes code, not comments.
+    const prose = ['// economics.probe is discussed here', 'export function Nothing() { return null; }'].join('\n');
+    expect(drawSitesIn({ raw: prose, code: blankComments(prose), spans: declarationSpans(blankComments(prose)) }, 'economics.probe')).toBeNull();
+  });
+
+  test('NON-VACUITY: a sentence drawn inside a shut fold is convicted, and the same draw hoisted above it is not', () => {
+    const shut = foldedSentenceMounts(PROBE_ROW, tree(probeTab('Section title="Deep" collapsible defaultOpen={false}', true)));
+    expect(shut, 'the shut fold did not plant').toHaveLength(1);
+    expect(shut[0]).toContain('economics.probe (DS-ECO-1) draws inside');
+    expect(shut[0]).toContain('closed on first paint');
+    // THE CURE THIS LANE APPLIED, driven rather than described: the same fold, the same
+    // draw, hoisted to frame it instead of sitting inside it.
+    expect(foldedSentenceMounts(PROBE_ROW, tree(probeTab('Section title="Deep" collapsible defaultOpen={false}', false)))).toEqual([]);
+    // A DATA-DEPENDENT default is the same defect on the towns that fall the wrong side.
+    const conditional = foldedSentenceMounts(PROBE_ROW, tree(probeTab('Section title="Deep" collapsible defaultOpen={bmc>=15}', true)));
+    expect(conditional, 'the conditional fold did not plant').toHaveLength(1);
+    expect(conditional[0]).toContain('conditional on first paint');
+    // …while a fold that is statically open hides nothing and must stay silent.
+    expect(foldedSentenceMounts(PROBE_ROW, tree(probeTab('Section title="Deep" collapsible defaultOpen', true)))).toEqual([]);
+    // ⭐ THE CROSS-FILE HOP, which is where `war.standing` and every DeskLines position live:
+    // the draw is at the top level of ITS OWN file and shut by the tab that renders it.
+    const leaf = [
+      "import { drawnAtMount } from '../../domain/display/stateProse/dossierMounts.js';",
+      "const PROBE_MOUNT = 'economics.probe';",
+      'export function ProbeLines({ desk }) {',
+      '  const drawn = drawnAtMount(PROBE_MOUNT, desk.rung);',
+      '  return <p>{drawn?.sentence}</p>;',
+      '}',
+    ].join('\n');
+    const host = [
+      "import { ProbeLines } from './ProbeLines.jsx';",
+      'export function ProbeTab({ desk }) {',
+      '  return <Section title="Deep" collapsible defaultOpen={false}><ProbeLines desk={desk} /></Section>;',
+      '}',
+    ].join('\n');
+    const across = foldedSentenceMounts(PROBE_ROW, [
+      { rel: 'src/components/new/tabs/ProbeLines.jsx', raw: leaf },
+      { rel: 'src/components/new/tabs/ProbeTab.jsx', raw: host },
+    ]);
+    expect(across, 'the cross-file hop did not plant').toHaveLength(1);
+    expect(across[0]).toContain('ProbeTab.jsx:3');
+    // …and the same two files with the draw hoisted out of the fold are clean, so the hop
+    // is reading the HOST and not merely the second file's existence.
+    expect(foldedSentenceMounts(PROBE_ROW, [
+      { rel: 'src/components/new/tabs/ProbeLines.jsx', raw: leaf },
+      { rel: 'src/components/new/tabs/ProbeTab.jsx', raw: host.replace('<Section title="Deep" collapsible defaultOpen={false}><ProbeLines desk={desk} /></Section>', '<div><ProbeLines desk={desk} /><Section title="Deep" collapsible defaultOpen={false}><i/></Section></div>') },
+    ])).toEqual([]);
+    // A mount NO file draws is convicted rather than passed over — this arm's own blindness
+    // has to be loud, or a rename would quietly retire the guard.
+    expect(foldedSentenceMounts(PROBE_ROW, tree('export function Empty() { return null; }')))
+      .toEqual(['economics.probe: this arm can follow no draw site for it, so its visibility is unknown']);
+  });
+
+  test('NON-VACUITY: the exemption must be earned — a stale declaration and a token reason are both convicted', () => {
+    const shutHost = probeTab('Section title="Deep" collapsible defaultOpen={false}', true);
+    const openHost = probeTab('Section title="Deep" collapsible defaultOpen', true);
+    const declare = (reason) => Object.freeze([Object.freeze({ ...PROBE_ROW[0], visibility: 'closed-section', visibilityReason: reason })]);
+    const ARGUED = 'The datum this sentence stands beside is inside the same fold, so the page never'
+      + ' prints a fact and hides the sentence about it, and the header names the topic either way.';
+    expect(ARGUED.length).toBeGreaterThanOrEqual(REASON_FLOOR);
+    // A declared row over a genuinely shut host is the ONE lawful way to stay inside a fold.
+    expect(foldedSentenceMounts(declare(ARGUED), tree(shutHost))).toEqual([]);
+    // TWO-SIDED: the same declaration over an OPEN host is a stale exemption and is convicted,
+    // so a row cannot keep an escape the layout stopped needing.
+    const stale = foldedSentenceMounts(declare(ARGUED), tree(openHost));
+    expect(stale, 'the stale declaration did not plant').toHaveLength(1);
+    expect(stale[0]).toContain('a stale exemption');
+    // …and a token reason buys nothing: the floor is what stops `visibility` becoming a word
+    // a lane types to make an arm quiet.
+    const token = foldedSentenceMounts(declare('layout'), tree(shutHost));
+    expect(token, 'the token reason did not plant').toHaveLength(1);
+    expect(token[0]).toContain('only bought with an argument');
+    // A GLANCE row is out of scope by law, not by accident: a glance draws no sentence, so
+    // there is no sentence for a fold to hide.
+    expect(foldedSentenceMounts([{ ...PROBE_ROW[0], rung: MOUNT_RUNGS.GLANCE }], tree(shutHost))).toEqual([]);
+  });
+
+  test('THE SHIPPED TABLE: every sentence mount is visible on first paint, or declares why not', () => {
+    const files = walkSources(COMPONENTS).map((absolute) => ({
+      rel: relative(ROOT, absolute).replace(/\\/g, '/'),
+      raw: readFileSync(absolute, 'utf8'),
+    }));
+    expect(files.length, 'the component tree walked nothing').toBeGreaterThan(20);
+    expect(DOSSIER_MOUNTS.filter((row) => row.rung === MOUNT_RUNGS.SENTENCE).length,
+      'no sentence row is mounted, so this arm judged nothing').toBeGreaterThan(0);
+    expect(
+      foldedSentenceMounts(DOSSIER_MOUNTS, files),
+      'A SENTENCE IS MOUNTED WHERE NO READER CAN SEE IT. `Primitives.jsx:114` renders a shut'
+      + ' section as `{open && children}`, so a collapsed host emits NO BYTES and the position'
+      + ' is lit in the registry and dark on the page — with the reachability arm, the'
+      + ' public-dossier guard and the desk itself all green over it. Hoist the line ABOVE the'
+      + ' fold so it FRAMES what follows (the DS-HK-1 arrangement), re-host it beside the datum'
+      + ' it explains, or — if the datum it stands beside is inside the SAME fold, so the page'
+      + ' never prints a fact and hides the sentence about it — declare'
+      + " `visibility: 'closed-section'` on the row with the argument in `visibilityReason`."
+      + ' Never by deleting the collapsible.',
+    ).toEqual([]);
+  });
+});

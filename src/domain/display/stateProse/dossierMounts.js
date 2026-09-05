@@ -87,6 +87,29 @@
  * pool is a FINDING (declare it, pin it, name the one act that lights it); a read of a key
  * no writer produces is a DEFECT (remove it). They get different treatment.
  *
+ * ── ⛔⛔ THE FIRST-PAINT LAW: A LIT SENTENCE A READER CANNOT SEE IS DARK ──────────────
+ * A mount is not a position until a reader reaches it. `Primitives.jsx:114` (and
+ * `Collapsible` at :83) render a closed section as `{open && <div>{children}</div>}` — a
+ * collapsed host emits NO BYTES AT ALL, not hidden ones. So a SENTENCE row drawn inside a
+ * `collapsible` host that is not open on first paint is lit in this table and dark on the
+ * page, and every instrument this subsystem owns is green over it: the reachability arm
+ * sees the literal, the public-dossier guard sees the gate, the desk builds the rung and
+ * the DOM carries nothing.
+ *
+ * IT IS NOT HYPOTHETICAL AND IT WAS NOT NOTICED — IT WAS WORKED AROUND, TWICE, IN WRITING.
+ * `tests/ui/defenseTabFlow.test.js`'s own docblock records the fold and answers it with an
+ * `openSection()` click helper; `tests/ui/economicsTabFlow.test.js` records it and answers
+ * it by choosing a fixture that carries a real deficit so the fold opens. Both arms went
+ * green; both readers stayed dark. A cure that lives in the test fixture is not a cure.
+ *
+ * THE LAW. Every `sentence` row draws where a reader can see it on first paint, or the row
+ * says `visibility: 'closed-section'` and carries the argument for it. `defaultOpen={false}`
+ * is shut for everybody; a DATA-DEPENDENT `defaultOpen={<expr>}` is shut for every world on
+ * the wrong side of the cut, which is the same defect on those towns — measured, DS-ECO-6
+ * was reaching 1 town in 60 that way. Enforced by the VISIBILITY arm in the walker, which
+ * follows each mount from its id through its carrier variables to every JSX site that draws
+ * it and out of that component to everywhere the component is rendered.
+ *
  * ── THE DENOMINATOR ──────────────────────────────────────────────────────────────────
  * `UNMOUNTED_BLOCKS` is the dark half, written down. Before this file the corpus's
  * darkness was a silence; here it is a number a gate can see, and it is SHRINK-ONLY, so
@@ -126,6 +149,18 @@ export const MOUNT_RUNGS = Object.freeze({
  *   knows. This is a DECLARATION OF INTENT the walker cross-checks against the corpus, so
  *   a mount over a dimension-bearing block that names no dimension reds at build time
  *   instead of going silently prose-less in front of a reader.
+ * @property {'closed-section'} [visibility] ⛔ THE WRITTEN EXEMPTION FROM THE FIRST-PAINT
+ *   LAW BELOW, and the only one. A SENTENCE row whose draw sits inside a `collapsible`
+ *   host that is not open on first paint reds the visibility arm — because
+ *   `Primitives.jsx:114` renders `{open && children}`, so a collapsed host produces NO
+ *   BYTES and the position is lit in the registry and dark to every reader. A row may say
+ *   `visibility: 'closed-section'` instead of moving, and then it OWES a
+ *   `visibilityReason`. The arm is TWO-SIDED: a row declaring this whose host is actually
+ *   open reds too, so the exemption cannot outlive the layout that earned it.
+ * @property {string} [visibilityReason] why this position is allowed to sit inside a fold.
+ *   It must be a real argument, not a token — the arm holds it to a length — and the only
+ *   argument that has passed is that the DATUM the sentence stands beside is inside the
+ *   SAME fold, so the page never prints a fact and hides the sentence about it.
  */
 
 /**
@@ -270,6 +305,15 @@ export const DOSSIER_MOUNTS = Object.freeze([
   }),
   Object.freeze({
     mount: 'defense.publicOrder', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-3', rung: 'sentence',
+    visibility: 'closed-section',
+    visibilityReason: 'DefenseTab\'s "Criminal Architecture & Public Order" is collapsible '
+      + 'defaultOpen={orderElevated||crimStructure===\'organized\'}, open on 43 of 60 generated '
+      + 'towns (5 tiers x 4 cultures x 3 seeds). The rung arrives already PROJECTED BESIDE the '
+      + 'DM\'s own safetyDesc field, and that field, the Internal Security headline, the order '
+      + 'badge and the safety band word are ALL inside the same fold: on the 17 towns that fold '
+      + 'shut, the page prints no public-order fact anywhere and hides no sentence about one. '
+      + 'Hoisting the line out would orphan it from the field it is a projection of. Whether a '
+      + 'calm town should open that fold is a LAYOUT ruling for the chair, not a lane\'s.',
   }),
   Object.freeze({
     mount: 'defense.threatAssessment', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-2', rung: 'sentence',
@@ -312,6 +356,13 @@ export const DOSSIER_MOUNTS = Object.freeze([
   }),
   Object.freeze({
     mount: 'defense.criminalStructure', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-4', rung: 'sentence',
+    visibility: 'closed-section',
+    visibilityReason: 'The same DefenseTab fold as defense.publicOrder above, and the same '
+      + 'argument: the criminal-structure CARD the desk was handed the key of (csd.label and '
+      + 'csd.note) sits three inches above the sentence INSIDE that fold, so a reader who is '
+      + 'shown the classification is shown the sentence with it, and a reader shown neither is '
+      + 'told there is a topic by the header. Measured open on 43 of 60 generated towns. The '
+      + 'fold default itself is the chair\'s ruling.',
   }),
   // ── DESK CAR 4: THE WAR & FAITH DESK, AND THE FIRST LEAF TO SPAN TWO TABS ───────────
   // Until now every desk lived on one tab, so C3's "one sentence rung per block per
