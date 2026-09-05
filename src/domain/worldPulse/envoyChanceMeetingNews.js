@@ -170,7 +170,29 @@ export const CHANCE_MEETING_REASON = 'a guest and a notable met by chance; what 
  * ⛔ NOT A TUNING DIAL. Nothing here scales, compares or thresholds; it is the landed
  * presentation pair the Herald already gives every notable receipt.
  */
-export const CHANCE_MEETING_PRESENTATION = Object.freeze({ severity: 0.56, score: 58 });
+/**
+ * The Herald presentation of a recorded meeting — a TUNING table, so the tuning walker sees its one
+ * decimal as a registered dial (P1) and never as a bare literal (P3). Registered 2026-09-05 at the
+ * §899 composed landing (Fable chair) when the walker convicted the bare `0.56` in a new file.
+ * ⚠ No `@type` annotation, for the reason CHANCE_MEETING_TUNING states: the inferred frozen-literal
+ * type keeps the leaves numbers.
+ */
+export const CHANCE_MEETING_NEWS_TUNING_PROVENANCE = Object.freeze({
+  status: 'CANDIDATE, OWNER-UNSIGNED (ROAD B; enrolled in the tuning register at the §899 landing)',
+  signedBy: null,
+  ownerRows: Object.freeze([
+    'the recorded meeting\'s Herald severity, the notable band\'s own weight',
+    'the recorded meeting\'s Herald score, an integer the feed sorts by',
+  ]),
+});
+export const CHANCE_MEETING_NEWS_TUNING = Object.freeze({
+  /** the notable band's severity weight on the Herald feed */
+  severity: 0.56,
+  /** the feed's integer sort score for a recorded meeting */
+  score: 58,
+});
+/** The name the writer and the walker read; the table above is the register's. */
+export const CHANCE_MEETING_PRESENTATION = CHANCE_MEETING_NEWS_TUNING;
 
 /** @type {ReadonlyMap<string, Readonly<ChanceMeetingRegistryEntry>>} */
 const KIND_BY_ID = new Map(
