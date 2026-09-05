@@ -39,7 +39,7 @@ import {
   HALL_CHAIR_COUNT, buildHallRoll, hallCount, showsRequestControl,
   chairNumeral, seatedLabel,
 } from '../../lib/foundersHall.js';
-import { PAGE_MAX, SP, FS, sans, serif_ } from '../theme.js';
+import { PAGE_MAX, SP, FS, sans, serif_, EMPTY_VALUE } from '../theme.js';
 
 /** The glance line. Held and open come from ONE count object — they cannot drift. */
 function HallCounter({ count }) {
@@ -83,7 +83,7 @@ function HallTable({ roll }) {
             <tr key={c.chair}>
               <th scope="row" style={{ ...cell, color: HALL.gold, fontWeight: 700 }}>{chairNumeral(c.chair)}</th>
               <td style={cell}>{c.displayName || 'Held'}</td>
-              <td style={cell}>{seatedLabel(c.seatedAt) || '—'}</td>
+              <td style={cell}>{seatedLabel(c.seatedAt) || EMPTY_VALUE}</td>
             </tr>
           ))}
         </tbody>
@@ -180,7 +180,7 @@ export default function FoundersHallPage({ onNavigate: _onNavigate }) {
             <RequestChairLetter auth={auth} onSubmit={submitLetter} onLoadStanding={loadStanding} />
           ) : (
             <p style={{ ...covenantProseStyle, color: HALL.ink }}>
-              The Hall is full &mdash; {HALL_CHAIR_COUNT} chairs, {HALL_CHAIR_COUNT} names.
+              The Hall is full: {HALL_CHAIR_COUNT} chairs, {HALL_CHAIR_COUNT} names.
             </p>
           )}
         </div>

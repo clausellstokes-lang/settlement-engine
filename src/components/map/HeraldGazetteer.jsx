@@ -36,7 +36,7 @@ import RealmComparisons from './RealmComparisons.jsx';
 import { Pill, Section } from './WorldPulsePrimitives.jsx';
 import RealmEntityLink from '../primitives/RealmEntityLink.jsx';
 import Button from '../primitives/Button.jsx';
-import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, INK, SP, sans } from '../theme.js';
+import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, INK, SP, sans, EMPTY_VALUE } from '../theme.js';
 
 /** The register's calm nothing-here state. A realm with no places is not broken. */
 function EmptyRegister() {
@@ -167,10 +167,10 @@ function GazetteerTable({ rows, seesSecrets }) {
                 <RealmEntityLink settlementSaveId={row.id} label={row.name} style={{ color: INK, fontWeight: 800, fontSize: FS.xs }} />
               </td>
               <td style={td}>{row.tier}</td>
-              <td style={td}>{row.prosperity || '—'}</td>
+              <td style={td}>{row.prosperity || EMPTY_VALUE}</td>
               <td style={td}>{row.war}</td>
-              {seesSecrets && <td style={td}>{row.threat || '—'}</td>}
-              {seesSecrets && <td style={{ ...td, textAlign: 'right', fontVariantNumeric: 'tabular-nums' }}>{row.population ?? '—'}</td>}
+              {seesSecrets && <td style={td}>{row.threat || EMPTY_VALUE}</td>}
+              {seesSecrets && <td style={{ ...td, textAlign: 'right', fontVariantNumeric: 'tabular-nums' }}>{row.population ?? EMPTY_VALUE}</td>}
             </tr>
           ))}
         </tbody>

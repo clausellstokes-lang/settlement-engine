@@ -45,8 +45,8 @@ export default function HallCovenant() {
       </p>
       <p style={{ ...quietLineStyle, color: HALL.faint }}>
         Chairs are offered by invitation. They cannot be bought, traded, inherited,
-        or transferred, and a founder is shown by the name they chose to be shown by
-        &mdash; never by their account.
+        or transferred, and a founder is shown by the name they chose to be shown by,
+        never by their account.
       </p>
     </section>
   );

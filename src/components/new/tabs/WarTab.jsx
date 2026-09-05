@@ -194,7 +194,7 @@ function MusterBlock({ musterLine, armyStatus, martial }) {
       {martial && (
         <Line strong="The town under arms.">
           {`This settlement stands ${martial.readinessWord}; its soldiery is ${martial.experience.word}`}
-          <span style={{ color: MUTED }}>{` — ${martial.experience.note}.`}</span>
+          <span style={{ color: MUTED }}>{`: ${martial.experience.note}.`}</span>
         </Line>
       )}
     </div>
@@ -229,8 +229,8 @@ function UnitEntry({ unit, includeGroundTruth }) {
       </div>
       <div style={{ color: SECOND, fontSize: FS.pico, fontWeight: 700, marginTop: 3 }}>
         {staleness > 0
-          ? `Last credible word, ${tickDurationLabel(staleness)} old — the courier line home is cut.`
-          : 'Fresh word — the courier line home holds.'}
+          ? `Last credible word, ${tickDurationLabel(staleness)} old. The courier line home is cut.`
+          : 'Fresh word. The courier line home holds.'}
       </div>
       {includeGroundTruth && (
         <details style={{ marginTop: 8, border: `1px solid ${BORDER2}`, background: CARD_ALT, overflow: 'hidden' }}>
@@ -275,7 +275,7 @@ function BeliefsBlock({ beliefs }) {
         return (
           <div key={b.subjectId} style={{ border: `1px solid ${BORDER}`, background: CARD, padding: '8px 10px', marginBottom: 6 }}>
             <span style={{ color: INK, fontSize: FS.xxs, fontWeight: 800 }}>{b.subjectName}</span>
-            <span style={{ color: BODY, fontSize: FS.xxs }}>{` — believed ${b.believed.strengthWord}, ${b.believed.readinessWord}`}</span>
+            <span style={{ color: BODY, fontSize: FS.xxs }}>{`: believed ${b.believed.strengthWord}, ${b.believed.readinessWord}`}</span>
             <span style={{ color: MUTED, fontSize: FS.pico, fontWeight: 700 }}>
               {` · ${confidenceWord} · ${stalenessWord}${b.agoTicks > 0 ? `, heard ${tickDurationLabel(b.agoTicks)} ago` : ''}`}
             </span>

@@ -260,11 +260,11 @@ function RealmMagicStance({ draft }) {
       </div>
       <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 750, lineHeight: 1.4 }}>
         {mundane
-          ? 'No working magic anywhere in this realm. Gods and temples remain — belief is not a spell.'
+          ? 'No working magic anywhere in this realm. Gods and temples remain. Belief is not a spell.'
           : 'Mages, arcane orders, and enchanted trade belong in this realm.'}
       </div>
       <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800, lineHeight: 1.4, fontStyle: 'italic' }}>
-        Chosen at creation — new settlements follow it; regenerate the realm to change it.
+        Chosen at creation. New settlements follow it; regenerate the realm to change it.
       </div>
     </div>
   );

@@ -96,7 +96,7 @@ function RulingChainBlock({ settlement }) {
       {chain.power && (
         <ChainRow label="The power">
           <strong>{chain.power.name}</strong>
-          {chain.power.powerLabel ? ` — ${chain.power.powerLabel.toLowerCase()}` : ''}
+          {chain.power.powerLabel ? ` (${chain.power.powerLabel.toLowerCase()})` : ''}
           {governmentWord && governmentWord !== chain.power.name
             ? <span style={{color:MUTED}}>{` · rule is carried by ${governmentWord}`}</span> : ''}
         </ChainRow>
@@ -105,13 +105,13 @@ function RulingChainBlock({ settlement }) {
         <ChainRow label="The faction">
           <strong>{chain.faction.name}</strong>
           {` holds the governing seat`}
-          {chain.faction.vacant && <span style={{color:swatch['#8B1A1A'],fontWeight:700}}>{' — the seat itself stands vacant'}</span>}.
+          {chain.faction.vacant && <span style={{color:swatch['#8B1A1A'],fontWeight:700}}>{', but the seat itself stands vacant'}</span>}.
         </ChainRow>
       )}
       {chain.npc && (
         <ChainRow label="The seat">
           <strong data-testid="ruling-chain-npc">{chain.npc.name}</strong>
-          <span style={{color:MUTED}}>{` — ${chain.npc.role}`}</span>
+          <span style={{color:MUTED}}>{`, ${chain.npc.role}`}</span>
         </ChainRow>
       )}
       {chain.absence && (

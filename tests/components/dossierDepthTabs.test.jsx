@@ -137,8 +137,8 @@ describe('FaithTab — the §805 layout (patron seat + niche occupancy + realm p
     render(<FaithTab settlement={liveFaithTown()} />);
     const rows = screen.getAllByTestId('faith-niche-row');
     expect(rows).toHaveLength(2);
-    expect(rows[0].textContent).toMatch(/peacelike · good — Sunlord Aurelian \(patron\)/);
-    expect(rows[1].textContent).toMatch(/warlike · evil — The Gloam/);
+    expect(rows[0].textContent).toMatch(/peacelike · good: Sunlord Aurelian \(patron\)/);
+    expect(rows[1].textContent).toMatch(/warlike · evil: The Gloam/);
     // THE FOLLOWING IS IN WORDS, and the two rungs are pinned APART so a band
     // table that collapsed to one word could not pass: share 60 and share 25 are
     // deliberately either side of the 50 cut. The standing token is the engine's
@@ -263,7 +263,7 @@ describe('WarTab — believed units, staleness bands, and the DM-truth divergenc
   it('the DM belief band renders for the premium owner and NEVER for anon / playerView', () => {
     asWarOwner();
     const first = render(<WarTab settlement={homeTown()} saveId="home" />);
-    expect(screen.getByTestId('war-beliefs').textContent).toMatch(/Foehold — believed slight, in the field/);
+    expect(screen.getByTestId('war-beliefs').textContent).toMatch(/Foehold: believed slight, in the field/);
     first.unmount();
 
     // Fail-closed: an anon viewer keeps the believed unit picture (the player

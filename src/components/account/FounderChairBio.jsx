@@ -34,7 +34,7 @@ import { MUTED, SECOND, INK, BORDER, CARD, SP, FS, sans, serif_ } from '../theme
 
 /** Why a band-failed bio was refused — plainly, without moralizing or echoing. */
 function refusal(reason) {
-  if (reason === 'short') return `A little more, please — at least ${HALL_BIO_MIN} characters.`;
+  if (reason === 'short') return `A little more, please: at least ${HALL_BIO_MIN} characters.`;
   if (reason === 'long') return `A plate is not a blog: keep this under ${HALL_BIO_MAX} characters.`;
   if (reason === 'blocked') return 'That wording can’t be used here. Think this is wrong? Feedback & support.';
   return null;

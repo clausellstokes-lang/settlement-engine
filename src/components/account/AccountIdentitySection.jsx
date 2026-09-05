@@ -280,7 +280,7 @@ export default function AccountIdentitySection() {
             the humanized sentence carries the same requirement in plainer words. The
             number still comes off AVATAR_RUNGS so it cannot drift from the ladder. */}
         PNG, JPEG, or WebP, at least {AVATAR_RUNGS.standard} pixels square.
-        You’ll crop it to a circle. Cropping happens on your device — the original
+        You’ll crop it to a circle. Cropping happens on your device. The original
         file, and anything your camera recorded in it, never leaves this browser.
       </span>
 
@@ -317,7 +317,7 @@ export default function AccountIdentitySection() {
           </label>
           <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans, paddingLeft: 24 }}>
             Your name and image appear on your published settlements, maps, and
-            campaigns, and — if you hold a chair — the Founders’ Hall. Turn this
+            campaigns, and (if you hold a chair) the Founders’ Hall. Turn this
             off and both disappear from every public page at once; your image
             stays in your account.
           </span>

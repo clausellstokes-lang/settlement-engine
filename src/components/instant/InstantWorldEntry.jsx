@@ -177,7 +177,7 @@ export default function InstantWorldEntry({ isMobile, onNavigate }) {
             </select>
           </Knob>
 
-          <Knob label="Seed" hint="Surprise me rerolls the seed and every unpinned knob — kept knobs hold. Same seed always rebuilds the same realm.">
+          <Knob label="Seed" hint="Surprise me rerolls the seed and every unpinned knob. Kept knobs hold. Same seed always rebuilds the same realm.">
             <div style={{ display: 'flex', gap: SP.sm, alignItems: 'center', flexWrap: 'wrap' }}>
               <input
                 aria-label="Seed"
@@ -240,7 +240,7 @@ export default function InstantWorldEntry({ isMobile, onNavigate }) {
         open={askMagic}
         tone="default"
         title="Does magic exist in these lands?"
-        body="This shapes every settlement in the realm: its mages and arcane orders, its magical events, its enchanted trade. Gods and temples remain either way — belief is not a spell."
+        body="This shapes every settlement in the realm: its mages and arcane orders, its magical events, its enchanted trade. Gods and temples remain either way. Belief is not a spell."
         choices={MAGIC_OPTIONS}
         defaultChoiceId={rememberedMagic}
         cancelLabel="Not yet"

@@ -29,10 +29,10 @@ import { settlementBeliefs, hasBeliefMaps } from '../../domain/display/settlemen
 import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, INK, MUTED, SECOND, SP, sans } from '../theme.js';
 
 const TERM_HELP = Object.freeze({
-  siege: 'A live siege from the war ledgers — a public fact of the realm.',
+  siege: 'A live siege from the war ledgers: a public fact of the realm.',
   coalition: 'March-mates in the same named war, read from the war edges.',
   treaty: 'A standing treaty document; the role word is the ledger\'s own.',
-  belief: 'What this settlement privately believes — its own scouts and rumors, not necessarily the truth. DM knowledge.',
+  belief: 'What this settlement privately believes: its own scouts and rumors, not necessarily the truth. DM knowledge.',
 });
 
 function Line({ kind, children }) {
@@ -90,7 +90,7 @@ export default function PerspectiveStandings({ campaign, nameById }) {
       const role = String(doc.victorId) === String(observerId)
         ? (doc.receiverRole || 'victor')
         : (doc.giverRole || 'the bound party');
-      out.push({ key: `treaty:${doc.pairKey}`, kind: 'treaty', text: `is bound to ${nameFor(otherId)} by ${doc.title} — as ${role}, ${doc.complianceState}.` });
+      out.push({ key: `treaty:${doc.pairKey}`, kind: 'treaty', text: `is bound to ${nameFor(otherId)} by ${doc.title} (as ${role}), ${doc.complianceState}.` });
     }
 
     // The BELIEVED half — DM only, fail-closed at the read-model itself.
@@ -129,7 +129,7 @@ export default function PerspectiveStandings({ campaign, nameById }) {
       </div>
       {rows.length === 0 ? (
         <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontStyle: 'italic', lineHeight: 1.5 }}>
-          {nameFor(observerId)} records no standing toward another settlement — no siege, no treaty{includeGroundTruth ? ', no modelled belief' : ''}.
+          {nameFor(observerId)} records no standing toward another settlement: no siege, no treaty{includeGroundTruth ? ', no modelled belief' : ''}.
         </div>
       ) : (
         <div style={{ display: 'grid', gap: 4 }}>
