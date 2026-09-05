@@ -278,9 +278,15 @@ export function advanceEnvoyDiplomacyPulse({
   // Collected here and APPENDED BELOW, because `feed` is not declared until after the errand
   // advance. The entries are already built: the builder is pure and the seed is a frozen address
   // record, so holding them across the advance cannot change what they say.
-  const meetingNews = meetings.heraldSeeds
-    .map((seed) => asObject(seed).entry)
-    .filter((entry) => entry && typeof entry === 'object');
+  // ⛔ THE CAST IS TAKEN FROM THE SINK'S OWN SIGNATURE, never re-typed:
+  // `wizardNews.js:1131` uses the same `Parameters<typeof …>` spelling for the same reason —
+  // a hand-written entry type here would be a second opinion about the feed's shape, and the
+  // domain strict ratchet convicted the un-annotated form (`unknown[]`) at this exact line.
+  const meetingNews = /** @type {NonNullable<Parameters<typeof appendWizardNewsEntries>[1]>} */ (
+    meetings.heraldSeeds
+      .map((seed) => asObject(seed).entry)
+      .filter((entry) => entry !== null && typeof entry === 'object')
+  );
 
   const beforeAdvance = state;
   const reservedSilenceTargets = new Set();
