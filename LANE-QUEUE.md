@@ -23,6 +23,9 @@ Updated 2026-09-05 by the Fable chair. Dispatch strictly in this order as slots 
 8. The PROSE landing's declared-shift entry: `golden-shift-prose.template.md` (fill from the PROSE-REBASE receipt); every later landing: `python3 mk-landing-kit.py <N> <dock> <base> <seal> <cars>`. · W-ARMS Car 1–3 per WARMS-CAR0's receipt · HORIZON-DARK B1/B2/B6 ·
    ENC-4 (sealed ENC-5 words at refs/preserve/enc5-words-2026-09-04) · SEAT-7a · srcprose rebase · docket.
 
+9. **HORIZON-B2 / WORKER Car 1** — BRIEFED (`briefs/brief-HORIZON-B2.md`; dock at dispatch): ~15 files, dark, unblocks `L-DOORS (ii)`.
+10. **HORIZON-B6 / the CAPACITY evidence** — BRIEFED (`briefs/brief-HORIZON-B6.md`): a ~2.3 h soak, ONLY when no gate runs; unblocks `demographicsEnabled` inside L-DEFAULT.
+
 ## CHAIR-OWNED, NOT LANES
 ANCHORS register car → gate → chair-verify → CAS → §897 (kit pre-built) · replay + land the desk consist after
 OSR-SCHEMA17 · every register act · every ceiling ruling (clamp: ONCE, at the final wave) · the words of DESK-7 and ENC-5.
