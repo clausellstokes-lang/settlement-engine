@@ -1483,10 +1483,12 @@ describe('DS-DEF-6 — the two lenses that may speak, bound to their producer', 
     const pulsed = { ...port,
       economicState: { ...port.economicState,
         foodSecurity: { ...port.economicState.foodSecurity, stockpile: { blockaded: true, blockadeBypass: 'teleport' } } } };
+    // ⚠ THE NAME IS FIXED AND THE SEED VARIES, because `properFill` REFUSES a name
+    // carrying a digit — a `Town0` fixture would unfill every {settlement} slot, drop
+    // every variant in the pool and leave this arm asserting against nothing.
     const seen = new Set();
     for (let i = 0; i < 40; i++) {
-      const line = defenseSupportingProse({ ...pulsed, name: `Town${i}` }, { seed: `s${i}`, audience: 'player' }).naval.sentence;
-      seen.add(line.replace(/Town\d+/g, '{settlement}'));
+      seen.add(defenseSupportingProse(pulsed, { seed: `s${i}`, audience: 'player' }).naval.sentence);
     }
     // ANCHOR: forty player draws reached more than one variant, so the covert text's absence
     // is the gate discriminating and not the draw having collapsed onto one index.
@@ -1495,7 +1497,7 @@ describe('DS-DEF-6 — the two lenses that may speak, bound to their producer', 
     // …and the DM audience CAN reach it, which is the positive control for the same gate.
     const dmSeen = new Set();
     for (let i = 0; i < 60; i++) {
-      dmSeen.add(defenseSupportingProse({ ...pulsed, name: `Town${i}` }, { seed: `d${i}`, audience: 'dm' }).naval.sentence);
+      dmSeen.add(defenseSupportingProse(pulsed, { seed: `d${i}`, audience: 'dm' }).naval.sentence);
     }
     expect([...dmSeen].join(' ⟡ ')).toContain('magical channel');
   });
@@ -1644,9 +1646,20 @@ describe('DS-DEF-9 — magic dependency, and the slot filled from the right ROLE
       .filter((v) => !(v.slots || []).includes('good'));
     expect(slotless, 'the pool has no slotless variant left to degrade to').toHaveLength(1);
     expect(drawn.dependency.sentence).toBe(slotless[0].text.replace('{settlement}', 'Silbergate'));
-    // …and a clean fill reaches a variant that NAMES the good.
-    const clean = defenseMagicDependencyProse(chained('Arcane fabrication', ['Preserved foods']), { seed: 'c' });
-    expect(clean.dependency.sentence).toContain('preserved foods');
+    // …and with a CLEAN fill the pool's {good}-bearing variants come back into play.
+    // ⚠ Asserted OVER SEEDS, not on one: the draw is deterministic on the seed, and two
+    // of this pool's three variants name the slot — so a single seed proves only which
+    // index that seed lands on. Pinning one seed here would be a test asserting the
+    // avalanche rather than the fill.
+    const withGood = new Set();
+    for (const seed of ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']) {
+      withGood.add(defenseMagicDependencyProse(chained('Arcane fabrication', ['Preserved foods']), { seed })
+        .dependency.sentence);
+    }
+    expect(withGood.size, 'the draw collapsed to one variant, so the next arm proves little')
+      .toBeGreaterThan(1);
+    expect([...withGood].some((line) => line.includes('preserved foods')),
+      'no seed reached a variant that names the good').toBe(true);
   });
 
   it('ROUTING IS ON THE STATE, not on whether the fill survived the annex punctuation', () => {
