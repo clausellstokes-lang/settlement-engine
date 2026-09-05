@@ -97,3 +97,20 @@ Updated 2026-09-05 by the Fable chair (after §898: product 5e28d5c83, ledger 6c
 ## CHAIR-OWNED, NOT LANES
 ~~ANCHORS → §897~~ LANDED · replay + land the desk consist after
 OSR-SCHEMA17 · every register act · every ceiling ruling (clamp: ONCE, at the final wave) · the words of DESK-7 and ENC-5.
+
+## THE SWEEP QUEUE (09-05 evening, after the reboot; owner: "a full research workflow, the same as Martin and Tolkien", for every pending author)
+Cap: FOUR running agents of any kind (each sweep runs at cap 1 = one agent); at most TWO while a full-suite run (proof / ratchet / gate) is in flight — a running sweep is STOPPED and resumed from its verdict files, never left to keep a quiet window shut.
+| # | run | mode | status |
+|---|---|---|---|
+| S1 | tolkien | resume (118 of 373 unverified → 8 chunks) | RUNNING `wf_d9292937-340` |
+| S2 | martin | resume (30 of 330 → 2 chunks) | RUNNING `wf_e31bf7e0-3c5` |
+| S3 | dnd | resume (49 of 49 → 4 chunks) | RUNNING `wf_c125a904-b11` |
+| S4 | ai | resume (179 of 254 → 12 chunks) | RUNNING `wf_014422dc-e75` |
+| S5 | kay | FULL fresh (4 angles → verify → synth → critic) | queued — next free slot |
+| S6 | leguin | FULL fresh | queued |
+| S7 | wolfe | FULL fresh (promoted from a one-device probe; the device is in the brief) | queued |
+| S8 | hobb | FULL fresh (likewise) | queued |
+| S9 | dnd TOP-UP | all four angles' finders re-run, NEW claims deduped against the 49 and appended from index 49 (`findAngles`, `existingKeys`, `baseIndex`) — the 49 came from ONE finder before the cutoff | queued, after S3 |
+| S10 | FIVE-AUTHOR ESSAY (row 47) | every attribution in `prose-research/OWNER-PROPOSAL-2026-09-05-five-authors.md` refuted against raw source text before any of it becomes a rule | queued, after S5–S8 |
+| S11 | PROBE-ALL-REFUTE (row 46) | Opus refutation of PROBE_ALL's corpus figures | queued |
+Then the chair: RULES-V2 Part B from the verified sections + critics; a new taste sample through `check-pair.mjs` and an Opus refuter; the AIM line on the owner's word.

@@ -2323,6 +2323,96 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "repeat higher-order n-grams more frequently",
    "note": "Quote appears as a section heading, 'Essays written with InstructGPT repeat higher-order n-grams more frequently' (the HTML doubles the italic math 'n'). Figures confirmed: 'corpus homogenization scores ... at the key point level using Rouge-L are 0.1536 for Solo, 0.1578 for GPT3 and 0.1660 for InstructGPT', significant at p<0.05. Attribution confirmed: 'The reduction in diversity ... is attributed more to text contributed directly by the InstructGPT model' and 'the users' lexical choice and argument generation is not affected when writing with model assistance.'"
+  },
+  "75": {
+   "index": 75,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "less semantically distinct ideas with ChatGPT",
+   "note": "arXiv abstract carries the quote word for word, plus 'felt less responsible for the ideas they generated' and the 36-participant comparative study. Both halves of the claim hold."
+  },
+  "76": {
+   "index": 76,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "much more similar to other LLM responses",
+   "note": "academic.oup.com returned HTTP 403 (Cloudflare); verified on the Wayback snapshot 20260819202540 of the same article. Quote exact. Table: AUT mu(V) LLM 0.459 vs human 0.699; DAT 0.632 vs 0.791; n=102 humans, n=22 LLMs - all exact. 'Switching models' half supported by 'it is likely the use of LLMs in general, rather than the use of a specific LLM, that homogenizes creative outputs' and the Llama-family analysis."
+  },
+  "77": {
+   "index": 77,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "702 (61%) state a preference for human-written dialogue",
+   "note": "The ACL landing page holds only the abstract; verified in the authoritative PDF (aclanthology.org/2023.findings-emnlp.151.pdf), where the quote appears word for word. Every figure checks out: 'H: 64% vs G: 23%; rest ties', 'H: 66% vs G: 23%', logical consistency 'H: 61% vs G: 28%', flow 'H: 67% vs G: 21%'. Note the claim's 28 players and Disco Elysium framing also match."
+  },
+  "78": {
+   "index": 78,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "illogical in hindsight",
+   "note": "Quote is a verbatim annotation tag in the paper PDF. Body: 'as 32% of generations rated by at least one player are deemed illogical upon reading the next utterance' - the claim's '32% of GPT-4 game lines' drops the 'rated by at least one player' qualifier, a mild overstatement. Faction example confirmed: generation 'does not conform to the game's notion of an ultra-liberal character'."
+  },
+  "79": {
+   "index": 79,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "on the nose, pun names",
+   "note": "arxiv.org/abs page shows only the abstract; verified in the full paper via ar5iv render of the same arXiv ID 2209.14958. Section 5.3.1 is titled 'The system outputs are too literal and predictable' and contains 'relationships so tight and prescriptive', 'a noble endeavour, it will be stated in the dialogue', and 'silly' and 'on the nose, pun names'. Participants = 15 theatre and film industry professionals."
+  },
+  "80": {
+   "index": 80,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Show, not tell: here we are just telling",
+   "note": "Verbatim in section 5.5.3 ('Lack of nuance and subtext') of the full paper via ar5iv. Supporting: 'A lot of information, a bit too verbalised, there should be more subtext' (p6); stageability from 5.5.2 'The system doesn't have an awareness of what is stageable and not stageable'; motivation from 5.5.4."
+  },
+  "81": {
+   "index": 81,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Where is the emotional motivation",
+   "note": "Verbatim in section 5.5.4 ('Lack of a motivation for the characters'), preceded by 'The stories do not finish. The character journeys are not complete.' Logic gaps: 'participants noticed logical gaps in storytelling, lack of common sense, nuance and subtext'. Generation loops are section 5.4. Reached via ar5iv full text; abs page has abstract only."
+  },
+  "82": {
+   "index": 82,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "preliminary end-to-end experiments revealed these shortcomings, say the authors",
+   "note": "MISATTRIBUTION. The quoted string is verbatim on the page, but it describes the AUTHORS' OWN preliminary experiments: 'Our preliminary experiments with this end-to-end approach revealed suboptimal results. The generated screenplays often suffer from a lack of thematic focus, out-of-character dialogue, and insufficient character development.' The blind evaluation by 'over 20 experienced screenwriters' (professional Chinese television drama screenwriters) produced the Expert Score / 75% win rate, not this defect list. 'Mimicking screenplay style without conciseness or visual language' is also the authors' intro framing: 'outputs that superficially mimic screenplay style but lack the conciseness, visual language, and structural integrity'."
+  },
+  "83": {
+   "index": 83,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "some studies identifying trends toward overly positive or uninspired endings",
+   "note": "MISATTRIBUTION. Quote is verbatim but is the authors citing prior literature in the introduction ('with some studies identifying trends toward overly positive or uninspired endings [13]'), not something the expert panel recorded. 'Unconvincing, repetitive, or misaligned with the desired tone or character development' is likewise the authors' framing in the introduction. Only the genre element is genuinely a panel finding: 'experts raised concerns about the degree to which the story aligns with, subverts, or engages with genre conventions'."
+  },
+  "84": {
+   "index": 84,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the story seems to end, then it ends again",
+   "note": "Quote verbatim. Post by Jill Walker Rettberg, August 25 2026, reporting Jessica Witte's preprint - correctly flagged as not peer-reviewed. Confirmed: gpt-4o-mini stories vs pre-2022 human r/WritingPrompts stories; 'all 200 human and 200 AI stories'; 'human stories have quite a sharp upturn in the last 10% of the story, the LLM's stories start getting happier much earlier, from around the 70% mark'."
+  },
+  "85": {
+   "index": 85,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "The craft was polished ... but the humanity was difficult to find",
+   "note": "No quote was supplied, so verbatim cannot apply. Mary Kole's guest post (August 13 2026) supports the substance: 'At first glance, both looked very polished'; 'The craft was polished ... but the humanity was difficult to find'; 'Instead of having an [author's intention to serve]'. Two attribution caveats: 'soulless' is Josh Bernoff quoted inside Kole's post ('They are also soulless'), and 'no subtext, no psychological reasoning behind it' is a reader comment by Sarah Chauncey that Kole endorses in reply ('No subtext is a great call')."
+  },
+  "86": {
+   "index": 86,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "there's no human on the other end",
+   "note": "Verbatim apart from a curly apostrophe and mid-sentence lowercase: 'When I read an AI-generated text, there's no human on the other end. That makes editing much harder.' Intent half supported: 'I'm in communication with the author and their ideas and intent... It's a human-to-human job.' Harder-not-easier supported: 'it's harder than that because of the psychology of editing'. Post dated February 5 2026."
+  },
+  "87": {
+   "index": 87,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "They are boring. They are flat",
+   "note": "Verbatim: 'AI stories are bad in ways that no human has been bad before. They are boring. They are flat.' The 'no subtext or layers' element appears in the other pass at the same quote. Secondhand framing is accurate - Vollmer cites Post Alley 2024 and NPR 2023 for Clarke, not Clarke's own post."
+  },
+  "88": {
+   "index": 88,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "No one has verbal tics, dialect, or pattern of evasion",
+   "note": "No quote supplied. Page: 'Dialogue flattening: characters sound alike; no distinct idiolect. No one has verbal tics, dialect, or pattern of evasion' and 'As-you-know-Bob exposition: the model's default is to resolve mysteries with explanatory speech rather than action.' The clause 'everyone says what they mean' is the claimant's gloss - it is not stated on the page."
+  },
+  "89": {
+   "index": 89,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "AI dialogue serves philosophical debate more often (59% vs. 34%)",
+   "note": "No quote supplied. The abs page carries the abstract only; the figures are in the full text of the same paper (arxiv.org/html/2604.03136v6): section 4.1 'AI dialogue serves philosophical debate more often (59% vs. 34%)' and Table 16 'Dialogue Function -> philosophical debate 34% [human] 59% [AI]'. Numbers exact. The claim's word 'expository' is a gloss; the paper's feature is 'philosophical debate' as a dialogue function."
   }
  }
 }

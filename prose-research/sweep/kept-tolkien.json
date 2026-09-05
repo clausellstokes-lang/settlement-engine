@@ -4200,5 +4200,455 @@
    "trueWording": "the narration is 'high' or 'epic' ... far more down to earth",
    "note": "Verbatim, in a post signed \"-- Troels Forchhammer\": \"Occasionally the narration is 'high' or 'epic' while at other times it is far more down to earth. This creates different moods, and should be included.\" It is item 4) Style in his four-dimension scheme, and the chronicler frame is his own layer -- \"as if the chronicler (another of my layers) were paraphrasing the witness\". Caveat on weight: this is an unrefereed Usenet post outlining work in progress, not a published analysis."
   }
+ },
+ {
+  "index": 300,
+  "feature": "Shippey on delivered archaism and metre",
+  "claim": "Shippey remarks that Tolkien's lines are archaic though persuasive when delivered with conviction, and that Tolkien became very strict about metre.",
+  "source": "Writers Write, 'Talking LOTR With Tolkien Expert Professor Thomas Shippey'; Tolkien Library Shippey chat",
+  "url": "https://www.writerswrite.com/journal/thomas-shippey-3021",
+  "quote": "archaic though they often are",
+  "page": "",
+  "verdict": {
+   "index": 300,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "His actors put across their lines, archaic though they often are",
+   "note": "Quote exact, but it is Shippey's Times review of Peter Jackson's FILM: 'His actors put across their lines, archaic though they often are, with total and persuasive conviction.' The second half of the claim -- that Tolkien became very strict about metre -- appears nowhere on this page (no occurrence of metre/meter/verse re Tolkien); it must come from the unlinked 'Tolkien Library Shippey chat', which was not fetchable from the single URL given. Do not cite this page for the metre point."
+  }
+ },
+ {
+  "index": 301,
+  "feature": "register modulation (narrator)",
+  "claim": "The LotR narrator's voice shifts with circumstance and with which characters are present, from the comic fox aside in the Shire to darker, unsettling prose once the hobbits leave it.",
+  "source": "John Halbrooks, Tolkienian Style (Substack, 2024-03-13)",
+  "url": "https://johnhalbrooks.substack.com/p/tolkienian-style",
+  "page": "Tolkienian Style",
+  "quote": "A fox passing through the wood on business of his own",
+  "verdict": {
+   "index": 301,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A fox passing through the wood on business of his own",
+   "note": "Quote word-for-word. Claim fully supported: 'the style of any given narrative moment depends upon its environment, both natural and characterological'; 'The voice of the narrator changes as well'; and of the post-Shire Old Forest passage, 'The tone is much darker, more unsettling, less jovial.'"
+  }
+ },
+ {
+  "index": 302,
+  "feature": "paratactic chronicle register",
+  "claim": "Gandalf's telling of Isildur's death uses paratactic clause structure and unfamiliar proper nouns to sound sombre and chronicle-like.",
+  "source": "John Halbrooks, Tolkienian Style",
+  "url": "https://johnhalbrooks.substack.com/p/tolkienian-style",
+  "page": "Tolkienian Style",
+  "quote": "He leaped into the waters, but the Ring slipped",
+  "verdict": {
+   "index": 302,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "He leaped into the waters, but the Ring slipped from his finger",
+   "note": "Quote word-for-word, and the analysis is explicit: 'Note the paratactic movement from clause to clause and the introduction of unfamiliar proper nouns.' It is Gandalf's telling at Bag End. One nuance: the page's own adjectives are 'somber and sober, not antiquated but dignified' -- 'chronicle-like' is the claim's gloss, not the page's word."
+  }
+ },
+ {
+  "index": 303,
+  "feature": "antiquarian register (Prologue)",
+  "claim": "The Prologue's subtitle 'Concerning Hobbits' adopts a nineteenth-century antiquarian register, and the early chapters carry more place-names than The Hobbit to signal expansion.",
+  "source": "John Halbrooks, Tolkienian Style",
+  "url": "https://johnhalbrooks.substack.com/p/tolkienian-style",
+  "page": "Tolkienian Style",
+  "quote": "Concerning Hobbits",
+  "verdict": {
+   "index": 303,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Concerning Hobbits",
+   "note": "Subtitle quoted verbatim and glossed as 'the stylistic mode of a certain strain of nineteenth-century English antiquarianism'. Second half also supported, via Shippey: 'there are a lot more names -- names of towns, surnames, names of regions, inns, rivers, bridges', whose effect is 'a wider, deeper, more complex world'. Minor drift: the page says names generally, not only place-names."
+  }
+ },
+ {
+  "index": 304,
+  "feature": "register shift Book IV to Book V",
+  "claim": "The prose rises from hobbit-colloquial in Book Four to a heroic register in the Pelennor chapters of Book Five.",
+  "source": "John Halbrooks, Heroic Language in The Lord of the Rings (Substack, 2026-08-12)",
+  "url": "https://johnhalbrooks.substack.com/p/heroic-language-in-the-lord-of-the-93f",
+  "page": "Heroic Language in The Lord of the Rings",
+  "quote": "the hosts of Mordor wailed, and terror took them",
+  "verdict": {
+   "index": 304,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the hosts of Mordor wailed, and terror took them",
+   "note": "Quote word-for-word. Claim supported: 'There is a stylistic shift as we move from Book Four to Book Five'; Book Four's language 'has been mostly hobbit-colloquial'. Small precision: the cited passage (838) is Book Five ch.5 'The Ride of the Rohirrim', which the essay says carries on 'through much of the prose describing the following battle' -- i.e. into, not from, the Pelennor chapter."
+  }
+ },
+ {
+  "index": 305,
+  "feature": "alliterative Old English prose",
+  "claim": "After Théoden's four-stress alliterative verse, the narration itself takes on the alliterating prose rhythm of Old English writers like Ælfric and Wulfstan, resonating with the preceding verse.",
+  "source": "John Halbrooks, Heroic Language in The Lord of the Rings",
+  "url": "https://johnhalbrooks.substack.com/p/heroic-language-in-the-lord-of-the-93f",
+  "page": "Heroic Language in The Lord of the Rings",
+  "quote": "Fey he seemed, or the battle-fury of his fathers",
+  "verdict": {
+   "index": 305,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Fey he seemed, or the battle-fury of his fathers",
+   "note": "Quote word-for-word and the claim is near-quotation of the page: Theoden's verse alliterates 'in a four-stress metrical pattern', and 'the third-person narration incorporates the related style of Old English prose, modeled by medieval writers like AElfric and Wulfstan: a prose pattern that incorporates alliteration, which resonates with the preceding verse.' Strongest-supported claim in the chunk."
+  }
+ },
+ {
+  "index": 306,
+  "feature": "per-speaker register (Council of Elrond)",
+  "claim": "No speaker at the Council answers in the same manner of speech as the previous one; Elrond stays consistently archaic and formal while Aragorn code-switches between Strider's plain style and his high style.",
+  "source": "Jaffe, The Style of the Elf-Friend (Tolkien: Medieval and Modern, 2014)",
+  "url": "http://tolkienmedievalandmodern.blogspot.com/2014/04/the-style-of-elf-friend.html",
+  "page": "The Style of the Elf-Friend",
+  "quote": "whose style is consistently archaic and formal",
+  "verdict": {
+   "index": 306,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "whose style is consistently archaic and formal",
+   "note": "Quote word-for-word (of Elrond, citing Shippey 70). Both other limbs supported: 'a dialogue in which no one responds in the same manner of speech as the previous speaker', and 'The easy fluctuation between Aragorn's high and dignified style (matching Boromir) and Strider's low, common style'. Post signed '--David Jaffe', April 18 2014 -- attribution correct."
+  }
+ },
+ {
+  "index": 307,
+  "feature": "per-speaker syntax",
+  "claim": "Glóin is characterised as curt through short, broken sentences, and each people's syntax marks its culture; alliterative verse and heroic-style prose become interchangeable when matched in register.",
+  "source": "MCS, Tolkien's Use of Poetry and Prose (Tolkien: Medieval and Modern, 2014-04-18)",
+  "url": "http://tolkienmedievalandmodern.blogspot.com/2014/04/tolkiens-use-of-poetry-and-prose.html",
+  "page": "Tolkien's Use of Poetry and Prose",
+  "quote": "short, broken sentences",
+  "verdict": {
+   "index": 307,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "short, broken sentences",
+   "note": "Quote word-for-word: 'Gloin (and by extension dwarves) is curt, which readers in our primary reality know by his use of short, broken sentences and apposition (Shippey, 71).' Interchangeability limb is near-verbatim too: 'The alliterative verse and the heroic-style prose that follows it are interchangeable' and 'this interchangeability works as long as both are written in corresponding styles.' Post signed '-mcs'."
+  }
+ },
+ {
+  "index": 308,
+  "feature": "iambic base shifting to alliterative metre",
+  "claim": "Tolkien's martial prose runs on an iambic foundation and shifts into Old English alliterative metre at the ecstatic climax of the Rohirrim's charge; the horn passage scans in both metres at once.",
+  "source": "Krishnan Venkatesh, Rhythm: A Writing Lesson from Tolkien (2017-01-13)",
+  "url": "https://kappatsupatchi.wordpress.com/2017/01/13/rhythm-a-writing-lesson-from-tolkien/",
+  "page": "Rhythm: A Writing Lesson from Tolkien",
+  "quote": "With that he seized a great horn from Guthláf",
+  "verdict": {
+   "index": 308,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "With that he seized a great horn from Guthláf his banner-bearer",
+   "note": "Quote word-for-word. Every limb holds: Tolkien 'makes iambic the dominant rhythm of his martial style'; the Book Five shift is 'from straightforwardly martial to ecstatically martial'; 'This new rhythm is in fact the alliterative meter of Anglo-Saxon poetry.' The dual-scansion limb is explicit -- the horn paragraph is set out first as iambic then as alliterative, and named: 'This double-meter is how Tolkien effects an effortless, organic transition.'"
+  }
+ },
+ {
+  "index": 309,
+  "feature": "alliteration in prose",
+  "claim": "The horn-blast passage and the Rohan songs follow Anglo-Saxon alliterative patterns, so that Rohan's prose emulates Beowulf.",
+  "source": "David Brauer, Alliteration in The Return of the King (Gleaming Arch, 2014-09-07)",
+  "url": "http://gleaming-arch.blogspot.com/2014/09/alliteration-in-return-of-king.html",
+  "page": "Alliteration in The Return of the King",
+  "quote": "With that he seized a great horn",
+  "verdict": {
+   "index": 309,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "With that he [Théoden] seized a great horn from Guthláf",
+   "note": "NOT contiguous verbatim: the blogger inserts an editorial gloss, and the page bolds each alliterating letter so the words are broken up in the source markup. Substance holds fully -- 'that alliterative element also makes its way into Tolkien's prose here', the Rohan songs are laid out with alliteration marked, and the post's thesis is that 'Tolkien's writing style emulates that of Anglo-Saxon poems', naming Beowulf (and Meduseld/Herot). Beowulf is one of two exemplars, alongside Sir Gawain."
+  }
+ },
+ {
+  "index": 310,
+  "feature": "monosyllabic native diction",
+  "claim": "Tolkien's prose is almost entirely one-syllable native English words, preferring English coinages such as 'unlooked-for' to Latinate 'unexpectedly'.",
+  "source": "Mark, Goodreads discussion: Tolkien's prose, what makes it so vigorous?",
+  "url": "https://www.goodreads.com/topic/show/18862123-tolkien-s-prose-what-makes-it-so-vigorous",
+  "page": "Tolkien's prose: what makes it so vigorous?",
+  "quote": "unlooked-for instead of unexpectedly",
+  "verdict": {
+   "index": 310,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"unlooked-for\" instead of \"unexpectedly.\"",
+   "note": "Words identical and in order; the source carries internal quotation marks the claim drops. Full support in the same post: 'Tolkien's prose consists almost entirely of words of one syllable. Furthermore, he uses almost entirely native English words', and 'he uses English words, including words he himself coined, in place of more familiar foreign words'. Source is a 2017 forum post by 'Mark' -- an amateur reader's observation, not scholarship; weight it accordingly."
+  }
+ },
+ {
+  "index": 311,
+  "feature": "tempo and seamless register change",
+  "claim": "Tolkien's tempo is slow but never plodding, he changes mode and register seamlessly, and fast epic passages are deliberately limited so they contrast with the surrounding prose.",
+  "source": "Alun Ephraim, cellar door (Substack, 2023-09-03)",
+  "url": "https://alunephraim.substack.com/p/cellar-door",
+  "page": "cellar door",
+  "quote": "His tempo was typically slow, but never plodding.",
+  "verdict": {
+   "index": 311,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "His tempo was typically slow, but never plodding",
+   "note": "Words identical; the claim's terminal full stop is added -- the source sentence runs on: '...but never plodding and his command of the language was sufficient that he was able to change the mode and register of his writing seamlessly'. Third limb also supported: 'passages with a fast tempo are more effective if limited and consciously contrasted with the rest of the work'."
+  }
+ },
+ {
+  "index": 312,
+  "feature": "sentence length as movement",
+  "claim": "A long sentence tracks difficult movement and short sentences then supply details; the Barrow-downs and Dead Marshes rely on word-sound, alliteration and understated rhyme.",
+  "source": "Alun Ephraim, cellar door",
+  "url": "https://alunephraim.substack.com/p/cellar-door",
+  "page": "cellar door",
+  "quote": "alliteration, an understated bit of rhyme",
+  "verdict": {
+   "index": 312,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "alliteration, an understated bit of rhyme",
+   "note": "Quote word-for-word. Both limbs on the page: 'the use of a long sentence to track the movement of characters over difficult terrain... and then a series of short sentences to describe details'. Attribution nuance: the long/short-sentence point and 'the sounds of particular words' belong to the Barrow Downs passage; 'alliteration, an understated bit of rhyme' is said of the Dead Marshes passage. The claim merges the two."
+  }
+ },
+ {
+  "index": 313,
+  "feature": "Silmarillion multiple styles",
+  "claim": "The Silmarillion mixes distinct Annalistic, Antique and Appendical styles with alliterating words and rhythmical prose (citing Nagy).",
+  "source": "Galin, Planet Tolkien forum: Writing style/turns of phrase",
+  "url": "https://www.planet-tolkien.com/board/3/3742/0/writing-style/turns-of-phrase.html",
+  "page": "Writing style/turns of phrase",
+  "quote": "Annalistic, Antique, and the Appendical",
+  "verdict": {
+   "index": 313,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the Annalistic, Antique, and the Appendical",
+   "note": "Quote word-for-word inside Galin's long quotation of Gergely Nagy's essay (signed 'G. Nagy'). Alliterating-words and rhythmical-prose limbs both present: 'Nearly all the alliterating words, together with the alliteration pattern itself, doubtless derive from the poem', and Old English 'rhythmical prose'. Important nuance: within Nagy's text the three-style taxonomy is credited to David Bratman -- 'which David Bratman distinguishes as' -- so 'citing Nagy' is right for the passage but Bratman owns the taxonomy."
+  }
+ },
+ {
+  "index": 314,
+  "feature": "plain flexible English",
+  "claim": "Tolkien writes plain, clear English whose outstanding virtue is flexibility, ranging from the commonplace to the stately and sliding into metre in the Bombadil episode unnoticed; his vocabulary is not striking and has no ichor.",
+  "source": "Ursula K. Le Guin, From Elfland to Poughkeepsie (1973)",
+  "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+  "page": "From Elfland to Poughkeepsie",
+  "quote": "ranges easily from the commonplace to the stately",
+  "verdict": {
+   "index": 314,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It ranges easily from the commonplace to the stately",
+   "note": "Quote word-for-word, and every limb of the claim is in one consecutive passage: 'Tolkien writes a plain, clear English. Its outstanding virtue is its flexibility, its variety. It ranges easily from the commonplace to the stately, and can slide into metrical poetry, as in the Tom Bombadil episode, without the careless readers even noticing. Tolkien's vocabulary is not striking; he has no ichor; everything is direct, concrete, and simple.' Fetched as a PDF transcription of the 1973 essay."
+  }
+ },
+ {
+  "index": 315,
+  "feature": "Elfland dialogue test",
+  "claim": "The Aragorn/Boromir/Elrond exchange is an English extraordinary for its simple timelessness that could not be mistaken for Capitol Hill, and Boromir's slight whine is characterising.",
+  "source": "Ursula K. Le Guin, From Elfland to Poughkeepsie (1973)",
+  "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+  "page": "From Elfland to Poughkeepsie",
+  "quote": "an English extraordinary for its simple timelessness",
+  "verdict": {
+   "index": 315,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "an English extraordinary for its simple timelessness",
+   "note": "Le Guin PDF p.4-5, exact. Adjacent support: 'You could not possibly mistake them for anyone on Capitol Hill' (of all three passages) and 'the very slight whine in Boromir's tone is significant also... the flaw is envy'. Caveat: she also writes 'Such language is rare on Capitol Hill, but it has occurred there', so the Capitol Hill point is 'not mistakable for', not 'impossible there'."
+  }
+ },
+ {
+  "index": 316,
+  "feature": "plain style (Le Guin relayed)",
+  "claim": "Le Guin's judgement that Tolkien's plain English is direct, concrete and simple is quoted and endorsed by a language blogger.",
+  "source": "Stan Carey, Sentence first (2024-10-16)",
+  "url": "https://stancarey.wordpress.com/2024/10/16/how-to-see-ones-own-world-ursula-k-le-guin-on-writing-style/",
+  "page": "'How to see one's own world': Ursula K. Le Guin on writing style",
+  "quote": "no ichor; everything is direct, concrete and simple",
+  "verdict": {
+   "index": 316,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "he has no ichor; everything is direct, concrete and simple",
+   "note": "Exact inside Stan Carey's block quote of Le Guin's 'From Elfland to Poughkeepsie' (post dated 16 Oct 2024). 'Endorsed' is only implicit: Carey quotes approvingly and follows with his own plain-style paragraph, but never explicitly endorses the Tolkien judgement."
+  }
+ },
+ {
+  "index": 317,
+  "feature": "naming and descriptive exactness",
+  "claim": "Auden credits Tolkien with an amazing gift for naming and an exact eye for description that make the reader know the world like their own childhood.",
+  "source": "W. H. Auden, 1954 review (LitHub reprint)",
+  "url": "https://lithub.com/read-w-h-audens-1954-review-of-the-fellowship-of-the-ring/",
+  "page": "W. H. Auden's 1954 review of The Fellowship of the Ring",
+  "quote": "a wonderfully exact eye for description",
+  "verdict": {
+   "index": 317,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "an amazing gift for naming and a wonderfully exact eye for description",
+   "note": "Exact on the LitHub reprint of Auden's 1954 review; the childhood clause follows verbatim: 'one knows the histories of Hobbits, Elves, Dwarves and the landscape they inhabit as well as one knows one's own childhood.'"
+  }
+ },
+ {
+  "index": 318,
+  "feature": "names as prose beauty; historical density",
+  "claim": "Lewis calls the names a feast embodying piercing elvish beauty and says one cannot set foot anywhere without stirring the dust of history.",
+  "source": "C. S. Lewis, The Gods Return to Earth (TheOneRing reprint)",
+  "url": "https://www.theonering.com/the-gods-return-to-earth-c-s-lewis-review-of-the-fellowship-of-the-ring/",
+  "page": "The Gods Return to Earth",
+  "quote": "The names alone are a feast",
+  "verdict": {
+   "index": 318,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The names alone are a feast",
+   "note": "Exact, continuing '... when they embody that piercing, high, elvish beauty of which no other prose writer has captured so much.' The second half of the claim is paraphrase: Lewis writes 'you can hardly put your foot down anywhere from Esgaroth to Forlindon... without stirring the dust of history' — 'set foot' is not his wording."
+  }
+ },
+ {
+  "index": 319,
+  "feature": "register by people",
+  "claim": "Tolkien selects registers to suit peoples: simple and modern for hobbits, more archaic for Dwarves, Elves and Rohirrim, with hobbits mediating for the modern reader (Turner).",
+  "source": "Wikipedia, Tolkien's prose style",
+  "url": "https://en.wikipedia.org/wiki/Tolkien's_prose_style",
+  "page": "Tolkien's prose style",
+  "quote": "simple and modern for Hobbits",
+  "verdict": {
+   "index": 319,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "simple and modern for Hobbits",
+   "note": "Exact in the lead. Attribution nuance: the lead says 'Commentators have noted'; the body section 'Hobbits as mediators with the heroic' does attribute the register contrast to Turner ('Turner states... Tolkien intentionally creates a contrast between the simple modern style of the Hobbits and more archaizing language for the Dwarves, Elves, and Riders of Rohan'), but the mediation point is footnoted to Shippey 2005 p.259, not Turner."
+  }
+ },
+ {
+  "index": 320,
+  "feature": "archaic inversion (Elrond)",
+  "claim": "Shippey shows Elrond speaking with antique words and old-fashioned syntactic inversions while the hobbits speak modern English.",
+  "source": "Wikipedia, Tolkien's prose style (Shippey)",
+  "url": "https://en.wikipedia.org/wiki/Tolkien's_prose_style",
+  "page": "Tolkien's prose style",
+  "quote": "Now, therefore, things shall be openly spoken",
+  "verdict": {
+   "index": 320,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Now, therefore, things shall be openly spoken",
+   "note": "Exact; article gives the full sentence and attributes to Shippey 2005 pp.134-138: Elrond 'uses antique words like \"esquire\", \"shards\"... along with \"old-fashioned inversions of syntax\"'. The modern-hobbit contrast is supported in the same section (Gaffer/Sam) and the lead."
+  }
+ },
+ {
+  "index": 321,
+  "feature": "Saruman's hollow modern speech",
+  "claim": "Shippey reads Saruman's vocabulary as empty politician-speak built on words like 'real' and 'ultimate'.",
+  "source": "Wikipedia, Tolkien's prose style (Shippey)",
+  "url": "https://en.wikipedia.org/wiki/Tolkien's_prose_style",
+  "page": "Tolkien's prose style",
+  "quote": "we can bide our time, we can keep",
+  "verdict": {
+   "index": 321,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "we can bide our time, we can keep",
+   "note": "Quote exact inside the Saruman block quote. Shippey's gloss is verified: 'no other character in the book uses words so empty of meaning as \"real\", \"deploring\", and \"ultimate\"'. But 'politician-speak' is the claim-writer's gloss — the word 'politic-' appears nowhere in the article; it says 'several modern evils'."
+  }
+ },
+ {
+  "index": 322,
+  "feature": "few true archaisms",
+  "claim": "Walker finds only a handful of genuinely archaic words, used rarely, yet the diction seems in essence nostalgic; the Riders of Rohan get Anglo-Saxon syntactic patterns and stately alliterative diction.",
+  "source": "Wikipedia, Tolkien's prose style (Walker)",
+  "url": "https://en.wikipedia.org/wiki/Tolkien's_prose_style",
+  "page": "Tolkien's prose style",
+  "quote": "stirring, alliteratively stately",
+  "verdict": {
+   "index": 322,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "stirring, alliteratively stately",
+   "note": "Exact (Walker 2009 p.143), as is the rest: 'only a few actually archaic words, and... Tolkien uses them only rarely'; the diction 'manages to seem in its essence nostalgic, maybe even archaic'; Rohan given 'Anglo-Saxon syntactic patterns'."
+  }
+ },
+ {
+  "index": 323,
+  "feature": "parataxis as biblical marker",
+  "claim": "The repeated 'and' in the New Testament manner is stylistically marked, signalling something extraordinary (Turner/Shippey).",
+  "source": "Wikipedia, Tolkien's prose style",
+  "url": "https://en.wikipedia.org/wiki/Tolkien's_prose_style",
+  "page": "Tolkien's prose style",
+  "quote": "And then wonder took him",
+  "verdict": {
+   "index": 323,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "And then wonder took him",
+   "note": "Exact in the Pelennor block quote. The observation is Turner's: paratactic 'and' 'in the manner of the New Testament' is 'stylistically marked', 'indicating something out of the ordinary'; Shippey is cited separately for 'loose semantic fit', so the Turner/Shippey joint attribution is loose but not wrong."
+  }
+ },
+ {
+  "index": 324,
+  "feature": "plain-to-elevated modulation (Hemingway)",
+  "claim": "Rosebury answers Stimpson by showing that even her chosen example is as plain as Hemingway, and that the Merry/Witch-king passage begins plainly then modulates to a higher register for ancient history.",
+  "source": "Wikipedia, Tolkien's prose style (Rosebury)",
+  "url": "https://en.wikipedia.org/wiki/Tolkien's_prose_style",
+  "page": "Tolkien's prose style",
+  "quote": "And still Meriadoc stood there blinking",
+  "verdict": {
+   "index": 324,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "And still Meriadoc stood there blinking",
+   "note": "Exact. Lead confirms both halves: 'Where Stimpson called Tolkien's diction needlessly complex, Rosebury argues that even in the example she chose, Tolkien was as plain and simple as Ernest Hemingway... Tolkien begins this in plain language, modulating into a higher register to deal with the echoes of ancient and magical history.'"
+  }
+ },
+ {
+  "index": 325,
+  "feature": "stress-release at every level",
+  "claim": "Drout holds that the craftsmanship is consistent from the individual sentence to the macro-structure of the journey as a repeated stress-and-release pattern.",
+  "source": "Wikipedia, Tolkien's prose style (Drout)",
+  "url": "https://en.wikipedia.org/wiki/Tolkien's_prose_style",
+  "page": "Tolkien's prose style",
+  "quote": "repeated stress and release pattern",
+  "verdict": {
+   "index": 325,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a repeated stress and release pattern",
+   "note": "Exact, but the framing is layered: the article says Le Guin argued this 'as Michael Drout writes', i.e. Drout is characterising Le Guin's 2001 account. 'Drout holds' is defensible only as Drout's own summary; the article's phrase is 'consistent at all levels of construction, from the individual sentence to the macro structure of the journey'."
+  }
+ },
+ {
+  "index": 326,
+  "feature": "invitational ambiguity",
+  "claim": "Walker's book argues the prose is strikingly invitational, taut with semantic ambiguity that widens meaning and draws the reader into sub-creation.",
+  "source": "Wikipedia, Tolkien's prose style (Walker)",
+  "url": "https://en.wikipedia.org/wiki/Tolkien's_prose_style",
+  "page": "Tolkien's prose style",
+  "quote": "strikingly invitational",
+  "verdict": {
+   "index": 326,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "strikingly invitational",
+   "note": "Exact. Walker's own block quote supports the rest: 'His prose is taut with semantic ambiguities tending to widen potential meaning' and 'an open invitation to subcreation' (unhyphenated). Minor: the 'strikingly invitational' sentence is footnoted to West 2011, a review of Walker's book, not to Walker directly."
+  }
+ },
+ {
+  "index": 327,
+  "feature": "ubi sunt and deep time",
+  "claim": "The ubi sunt theme gives elegiac tone and historical depth, as when Pippin guesses at great men and kindreds from the ruins.",
+  "source": "Wikipedia, Tolkien's prose style (Walker)",
+  "url": "https://en.wikipedia.org/wiki/Tolkien's_prose_style",
+  "page": "Tolkien's prose style",
+  "quote": "Pippin guessed of great men and kindreds",
+  "verdict": {
+   "index": 327,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Pippin guessed of great men and kindreds",
+   "note": "Exact, in the Minas Tirith quotation. Walker 2009 p.85 is cited for the ubi sunt theme revisited 'usually with incidental casualness' 'to create an elegiac tone and a feeling of deep time and history behind what can be seen'."
+  }
+ },
+ {
+  "index": 328,
+  "feature": "casual incomplete mention (deep time)",
+  "claim": "The impression of depth is built from offhand, incomplete references to the past, multiple inconsistent accounts as in real history, and different texts written in different styles.",
+  "source": "Wikipedia, Impression of depth in The Lord of the Rings",
+  "url": "https://en.wikipedia.org/wiki/Impression_of_depth_in_The_Lord_of_the_Rings",
+  "page": "Impression of depth in The Lord of the Rings",
+  "quote": "from the Hoard of Scatha the Worm",
+  "verdict": {
+   "index": 328,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "from the Hoard of Scatha the Worm",
+   "note": "Exact. The four factors are listed verbatim: 'the apparently casual and incomplete mentions of this background'; 'multiple inconsistent accounts, as in real history'; 'writing different texts in varying styles' (body: 'as if by different hands'), all sourced to Drout, Hitotsubashi & Scavera 2014."
+  }
+ },
+ {
+  "index": 329,
+  "feature": "object fronting",
+  "claim": "Turner notes archaising object-fronting such as 'Weapons they have laid at your doors', which German can keep but French cannot render.",
+  "source": "Wikipedia, Translating The Lord of the Rings (Turner)",
+  "url": "https://en.wikipedia.org/wiki/Translating_The_Lord_of_the_Rings",
+  "page": "Translating The Lord of the Rings",
+  "quote": "Weapons they have laid at your doors",
+  "verdict": {
+   "index": 329,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Weapons they have laid at your doors",
+   "note": "Exact. Article: 'Allan Turner gives the example of fronting, where Tolkien puts the object at the start of a sentence rather than after the verb... Turner points out that this cannot be done in French, while in German it remains a common construction and doesn't give an archaic effect.'"
+  }
  }
 ]

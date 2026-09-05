@@ -12,13 +12,13 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 const HERE = dirname(fileURLToPath(import.meta.url));
 const OUT = process.env.SWEEP_OUT || join(HERE, 'sweep');
-const NAMES = ['tolkien', 'martin', 'dnd', 'ai', 'kay', 'leguin', 'probe-wolfe', 'probe-hobb'];
+const NAMES = ['tolkien', 'martin', 'dnd', 'ai', 'kay', 'leguin', 'wolfe', 'hobb'];
 function load(p) { return JSON.parse(readFileSync(p, 'utf8')); }
 function merge(name, update) {
   const sp = join(OUT, `state-${name}.json`);
   const state = existsSync(sp) ? load(sp) : { name, claims: [], sources: [], verdicts: {} };
   const claims = state.claims.slice(); const verdicts = { ...(state.verdicts || {}) };
-  const files = readdirSync(OUT).filter(f => f.startsWith(`verdicts-${name}-chunk-`) && f.endsWith('.json')).sort();
+  const files = readdirSync(OUT).filter(f => f.startsWith(`verdicts-${name}-`) && f.endsWith('.json')).sort();   // chunk-NN (the first resumed runs) and iA-B (index-range, every run after)
   let fromFiles = 0;
   for (const f of files) {
     let d; try { d = load(join(OUT, f)); } catch (e) { console.error(`SKIP ${f}: ${e.message}`); continue; }
@@ -35,5 +35,5 @@ function merge(name, update) {
 }
 const [cmd, name, flag] = process.argv.slice(2);
 if (cmd === 'merge') { console.log(JSON.stringify(merge(name, flag === '--update-state'))); }
-else if (cmd === 'summary') { const o = {}; for (const n of NAMES) { if (existsSync(join(OUT, `state-${n}.json`)) || readdirSync(OUT).some(f => f.startsWith(`verdicts-${n}-chunk-`))) { const s = merge(n, true); o[n] = { claims: s.claims, verdicts: s.verdicts, kept: s.kept }; } } console.log(JSON.stringify(o)); }
+else if (cmd === 'summary') { const o = {}; for (const n of NAMES) { if (existsSync(join(OUT, `state-${n}.json`)) || readdirSync(OUT).some(f => f.startsWith(`verdicts-${n}-`))) { const s = merge(n, true); o[n] = { claims: s.claims, verdicts: s.verdicts, kept: s.kept }; } } console.log(JSON.stringify(o)); }
 else { console.error('usage: merge <name> [--update-state] | summary'); process.exit(2); }
