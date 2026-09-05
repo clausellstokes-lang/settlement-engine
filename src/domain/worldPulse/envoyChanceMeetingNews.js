@@ -341,6 +341,13 @@ export function chanceMeetingEntry({ seed, now = null } = {}) {
     impactKind: 'chance_meeting_recorded',
     channelType: null,
     settlementIds,
+    // ⚠ PARALLEL BY CONSTRUCTION, AND AN UNRESOLVED NAME IS THE EMPTY STRING RATHER THAN A
+    // DROPPED ELEMENT. Only the COUNTERPART's home can be nameless here — the host and the
+    // guest's home are both pool slots and the interpolation guard above already refused a blank
+    // for either — and that court appears in no sentence, so withholding the whole line for it
+    // would suppress a perfectly renderable receipt. ⛔ NOT `envoyNews.js`'s `uniqueText` shape:
+    // filtering the names would let `settlementNames` and `settlementIds` diverge in LENGTH, and
+    // a names array that no longer indexes its ids is worse than a named gap.
     settlementNames: settlementIds.map((sid) => places[sid] || ''),
     npcIds: npcIds.filter(Boolean),
     ...(venueIds.length ? { venueIds } : {}),
