@@ -855,13 +855,13 @@
     "path": "src/domain/activeConditions.js",
     "line": 983,
     "category": "floatInterpolation",
-    "snippet": "`${c.label} — ${c.severityBand}, ${c.status} (elapsed ${c.duration.elapsedTicks.toFixed(2)} of ${c.duration.expiresAtTicks ?? '∞'})`"
+    "snippet": "`${c.label}: ${c.severityBand}, ${c.status} (elapsed ${c.duration.elapsedTicks.toFixed(2)} of ${c.duration.expiresAtTicks ?? '∞'})`"
   },
   {
     "path": "src/domain/activeConditions.js",
     "line": 983,
     "category": "twoDecimalScore",
-    "snippet": "`${c.label} — ${c.severityBand}, ${c.status} (elapsed ${c.duration.elapsedTicks.toFixed(2)} of ${c.duration.expiresAtTicks ?? '∞'})`"
+    "snippet": "`${c.label}: ${c.severityBand}, ${c.status} (elapsed ${c.duration.elapsedTicks.toFixed(2)} of ${c.duration.expiresAtTicks ?? '∞'})`"
   },
   {
     "path": "src/domain/autonomy/autonomousRun.js",
@@ -939,13 +939,13 @@
     "path": "src/domain/spatial/moralDrift.js",
     "line": 315,
     "category": "floatInterpolation",
-    "snippet": "`The reckoning: its derived alignment drifts (malice ${r.malice.toFixed(2)}, lawlessness ${r.lawlessness.toFixed(2)}) — sharpest for a lawful-good aggressor.`"
+    "snippet": "`The reckoning: its derived alignment drifts (malice ${r.malice.toFixed(2)}, lawlessness ${r.lawlessness.toFixed(2)}), sharpest for a lawful-good aggressor.`"
   },
   {
     "path": "src/domain/spatial/moralDrift.js",
     "line": 315,
     "category": "twoDecimalScore",
-    "snippet": "`The reckoning: its derived alignment drifts (malice ${r.malice.toFixed(2)}, lawlessness ${r.lawlessness.toFixed(2)}) — sharpest for a lawful-good aggressor.`"
+    "snippet": "`The reckoning: its derived alignment drifts (malice ${r.malice.toFixed(2)}, lawlessness ${r.lawlessness.toFixed(2)}), sharpest for a lawful-good aggressor.`"
   },
   {
     "path": "src/domain/timeProgression.js",
@@ -1095,37 +1095,37 @@
     "path": "src/generators/steps/stressConfirmPass.js",
     "line": 126,
     "category": "floatInterpolation",
-    "snippet": "`${suppressors.join(', ')} reduce${suppressors.length === 1 ? 's' : ''} the odds of \"${type}\" (×${ratio.toFixed(2)} vs the roster-blind roll) — the re-weighted roll dropped it.`"
+    "snippet": "`${suppressors.join(', ')} reduce${suppressors.length === 1 ? 's' : ''} the odds of \"${type}\" (×${ratio.toFixed(2)} vs the roster-blind roll): the re-weighted roll dropped it.`"
   },
   {
     "path": "src/generators/steps/stressConfirmPass.js",
     "line": 126,
     "category": "multiplier",
-    "snippet": "`${suppressors.join(', ')} reduce${suppressors.length === 1 ? 's' : ''} the odds of \"${type}\" (×${ratio.toFixed(2)} vs the roster-blind roll) — the re-weighted roll dropped it.`"
+    "snippet": "`${suppressors.join(', ')} reduce${suppressors.length === 1 ? 's' : ''} the odds of \"${type}\" (×${ratio.toFixed(2)} vs the roster-blind roll): the re-weighted roll dropped it.`"
   },
   {
     "path": "src/generators/steps/stressConfirmPass.js",
     "line": 126,
     "category": "twoDecimalScore",
-    "snippet": "`${suppressors.join(', ')} reduce${suppressors.length === 1 ? 's' : ''} the odds of \"${type}\" (×${ratio.toFixed(2)} vs the roster-blind roll) — the re-weighted roll dropped it.`"
+    "snippet": "`${suppressors.join(', ')} reduce${suppressors.length === 1 ? 's' : ''} the odds of \"${type}\" (×${ratio.toFixed(2)} vs the roster-blind roll): the re-weighted roll dropped it.`"
   },
   {
     "path": "src/generators/steps/stressConfirmPass.js",
     "line": 127,
     "category": "floatInterpolation",
-    "snippet": "`The settlement's institutions reduce the odds of \"${type}\" (×${ratio.toFixed(2)} vs the roster-blind roll) — the re-weighted roll dropped it.`"
+    "snippet": "`The settlement's institutions reduce the odds of \"${type}\" (×${ratio.toFixed(2)} vs the roster-blind roll): the re-weighted roll dropped it.`"
   },
   {
     "path": "src/generators/steps/stressConfirmPass.js",
     "line": 127,
     "category": "multiplier",
-    "snippet": "`The settlement's institutions reduce the odds of \"${type}\" (×${ratio.toFixed(2)} vs the roster-blind roll) — the re-weighted roll dropped it.`"
+    "snippet": "`The settlement's institutions reduce the odds of \"${type}\" (×${ratio.toFixed(2)} vs the roster-blind roll): the re-weighted roll dropped it.`"
   },
   {
     "path": "src/generators/steps/stressConfirmPass.js",
     "line": 127,
     "category": "twoDecimalScore",
-    "snippet": "`The settlement's institutions reduce the odds of \"${type}\" (×${ratio.toFixed(2)} vs the roster-blind roll) — the re-weighted roll dropped it.`"
+    "snippet": "`The settlement's institutions reduce the odds of \"${type}\" (×${ratio.toFixed(2)} vs the roster-blind roll): the re-weighted roll dropped it.`"
   },
   {
     "path": "src/generators/structuralValidator.js",
