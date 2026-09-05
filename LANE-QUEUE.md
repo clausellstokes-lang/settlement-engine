@@ -13,6 +13,7 @@ Updated 2026-09-05 by the Fable chair (after §898: product 5e28d5c83, ledger 6c
 | ~~CLAMP-W2~~ DONE → 3 cars b0cba0dca sealed `clamp-w2-2026-09-05` (3 migrated, 3 refused; census 69 vs 62; edge-shared re-mint owed at its landing) | briefs/brief-CLAMP-W2.md | 09-05 |
 | ~~DESK-WARFAITH~~ DONE → 7dba5508b sealed `desk-warfaith-2026-09-05` (6/9 mounted; 3 dark measured; the PUBLIC/SHARED pool is OWNER-gated §885.3) | | | | |
 | ~~PDFDRIFT~~ REFUSED with measurement → ruling WITHDRAWN (`rulings/RULING-PDFDRIFT-WITHDRAWN.md`); residue: an OWNER row (the paid-rights floor and the arms) + DOCKET item 5 (AUDIT-2.2 as machinery) | | | | |
+| ~~L-PROBE CHEAP~~ DONE 09-05 at the §899 CAS 38474a59e: eager STOP LAZY-clear, presence dump (8558 parents / 1299 shapes / 337 at-or-above MIN_ROWS), census, rosters 7 presets, births 7/7 no refusal, pulse hashes 7/7 distinct — all TRUE_EXIT 0 (`lprobe-out-899/`); the FULL battery (golden control, certification per preset, listing) running in the background | | | | |
 | ~~L-PROBE-KIT~~ DONE → `refs/preserve/lprobe-kit-2026-09-05` (the battery; 6/9 outputs executed; certification per preset is a STOP until DOCKET item 7) | | | | |
 | ~~DESK-DEF2~~ DONE → 4 cars 468663f56 sealed `desk-def2-2026-09-05` (DS-DEF-6, 9 lit; 7, 10 dark measured; DefenseTab 419 effective — the chair's 545 was wc -l) | | | | |
 | ~~DESK-GEN2~~ DONE → 4 cars, a4ce9f80f sealed `desk-gen2-2026-09-05` (6/15 lit; 7 stopped with residue; DS-GEN-1 OWNER-signed; DS-GEN-10 unmountable) | | | | |
