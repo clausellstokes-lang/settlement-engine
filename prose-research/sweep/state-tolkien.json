@@ -1,7 +1,7 @@
 {
  "name": "tolkien",
  "runId": "wf_9b91b240-c98",
- "exportedAt": "2026-09-05T22:19:44.998Z",
+ "exportedAt": "2026-09-05T22:24:46.053Z",
  "claims": [
   {
    "feature": "register modulation",
@@ -5031,6 +5031,186 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "\"the prose of the nursery-room … a lullaby; it is meant to soothe and console\"",
    "note": "Verbatim and correctly attributed: \"The fantasy author Michael Moorcock, in his 1978 essay, 'Epic Pooh', compared Tolkien's work to Winnie-the-Pooh. He asserted, citing the third chapter of The Lord of the Rings, that its 'predominant tone' was 'the prose of the nursery-room … a lullaby; it is meant to soothe and console.'\" The word 'predominant tone' in the claim is also the page's quoted wording."
+  },
+  "90": {
+   "index": 90,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "prose and verse are on the same level of professorial amateurishness",
+   "note": "Bookmarks page carries the Wilson excerpt attributed to The Nation, April 14, 1956. Both elements verbatim: 'Prose and verse are on the same level of professorial amateurishness' and 'The characters talk a story-book language that might have come out of Howard Pyle.'"
+  },
+  "91": {
+   "index": 91,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "an amazing gift for naming and a wonderfully exact eye for description",
+   "note": "LitHub page is titled 'W. H. Auden's 1954 review of The Fellowship of the Ring' and the sentence appears in full: 'Mr. Tolkien is fortunate in possessing an amazing gift for naming and a wonderfully exact eye for description.' Both halves of the claim confirmed."
+  },
+  "92": {
+   "index": 92,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "he greatly admires splitting of the Fellowship into parallel books",
+   "note": "The quoted phrase 'very high architectural quality' does NOT appear anywhere on the page (checked against raw HTML, not just extracted text; LiveJournal buries the post body, so I re-extracted it directly). The page does confirm: the essay 'originally appeared in 1955'; Lewis 'talks about the structure of the work' and admires the parallel books of volumes two and three (discussing books 3 & 5 and 4 & 6, i.e. the six-book design); and verbatim, 'no individual, and no species, seems to exist only for the sake of the plot.' Two of three elements hold; the headline quotation is not on the cited page."
+  },
+  "93": {
+   "index": 93,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a v. careful stylist who deliberately weighed the effect of each word",
+   "note": "Fully supported. Rateliff writes Tolkien 'is a v. careful stylist who deliberately weighed the effect of each word' (the source abbreviates 'very' as 'v.'; the quoted fragment itself is exact). Detractors confirmed: 'Stephen Medcalf, whom I saw giving a major presentation in which he kept reading out loud individual sentences from LotR and saying how bad they were', and 'Burton Raffel in his essay in Isaacs & Zimbardo... in which he pillories Tolkien's prose'."
+  },
+  "94": {
+   "index": 94,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "three important influences: the Edwardian adventure story, comparative languages, Christian theology",
+   "note": "The quoted phrase 'the Edwardian adventure story' is verbatim on the page, but only inside jacket copy and the table of contents ('An adventure story in the Edwardian mode'). The claim's specifics are NOT on this record at all: King Solomon's Mines, The Lost World, and The Hobbit appear nowhere, and the record never says 'architecture and narrative style'. This is an Internet Archive catalog record (blurb + TOC), not the book text, so it can support only the bare Edwardian-influence thesis for LOTR."
+  },
+  "95": {
+   "index": 95,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "begins in plain language, modulating into a higher register",
+   "note": "No quotation was supplied, so verbatim status is not assessable; the claim's wording nonetheless tracks the page almost exactly. Lead section: 'He analyses a passage where Merry has just helped to kill the Witch-King. Tolkien begins this in plain language, modulating into a higher register to deal with the echoes of ancient and magical history.' Body confirms Rosebury writes the passage 'begins with \"essentially plain syntax\"'."
+  },
+  "96": {
+   "index": 96,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the following 'But glad would he have been', with effective use of inversion",
+   "note": "Both devices confirmed in the 'Justified grandeur' section: the inversion is quoted exactly, and the page states the passage 'ends with a powerfully musical sentence with assonances between \"blade\", \"wield\", \"dealt\" and so on', attributed to Rosebury."
+  },
+  "97": {
+   "index": 97,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The story begins in a jolly Edwardian style",
+   "note": "All three movements confirmed. Opening: 'The story begins in a jolly Edwardian style that hostile reviewers compared to the Boys Own Paper.' Rising seriousness: 'As the road to Rivendell grows more perilous... the narrative style becomes still more serious and uncompromising.' Rohan: 'the Rohan chapters stiffen into definite and formal archaism.'"
+  },
+  "98": {
+   "index": 98,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it is archaic in tone and diction, but he carefully refrains from using archaic words",
+   "note": "Exact: 'We might call it Tolkien's neo-archaic style: it is archaic in tone and diction, but he carefully refrains (at this point) from using archaic words. Aragorn is the first major character to employ it in dialogue.' Every element of the claim, including the name 'neo-archaic' and Aragorn's primacy, is on the page."
+  },
+  "99": {
+   "index": 99,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the sentence structure begins to approximate an older diction",
+   "note": "Confirmed in context immediately after Aragorn's entrance: 'Once he enters the story, the narrative tone becomes more formal, the prose more cadenced. It is not yet archaic in the strict sense: the words are all familiar to us... But the sentence structure begins to approximate an older diction.' The vocabulary-versus-syntax contrast the claim makes is explicit."
+  },
+  "100": {
+   "index": 100,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Change Ask not to Don't ask, and the sentence loses force and rhythm",
+   "note": "Exact, and the framing matches: Simon cites Kennedy's inaugural ('Ask not what your country can do for you') and adds that changing it to 'Do not ask' is 'even worse'. Used to defend the archaism level found through most of LOTR."
+  },
+  "101": {
+   "index": 101,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "an insincerity of thought, a disunion of word and meaning",
+   "note": "Verbatim, and correctly situated: the passage concerns Theoden's 'I myself will go to war, to fall in the front of the battle... Thus shall I sleep better', set against a modernised paraphrase. One attribution nuance worth noting: Simon marks the phrase as Tolkien's own ('It would be, as he calls it, ...'), quoting Tolkien's reply to Hugh Brogan; Simon endorses and elaborates the argument rather than coining the phrase."
+  },
+  "102": {
+   "index": 102,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the effect is one of sustained phantasmagoria",
+   "note": "All three parts confirmed. 'In the chapters from \"The Old Forest\" to \"Fog on the Barrow-downs\", the effect is one of sustained phantasmagoria'; Bombadil 'speaks in verse - a slightly looser version of the rough metre of his signature song'; and Amon Hen 'serves as a kind of caesura, emphatically separating a comparatively safe and comfortable part of the story from the sharply increased perils and higher tone that come after'."
+  },
+  "103": {
+   "index": 103,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "This is what is meant by the expression 'bouncing one out of the story'",
+   "note": "Quotation verbatim, and the lesson is on the page: 'Our grave danger as writers, then, is that we will do something to wrench the reader's attention away from the story and back to the text... we need to keep their minds on the story as much as possible, which generally means keeping it off the text.' One nuance: Simon does not counsel plain invisibility - he explicitly rejects flat prose as 'too flat to engage the emotions' and argues for a broad emotional range, so 'never call attention to themselves' should be read as 'never wrench attention from story to text'."
+  },
+  "104": {
+   "index": 104,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "coupling archaic syntax with deliberately ordinary vocabulary",
+   "note": "Exact, in the 2007 Children of Hurin review: 'Tolkien produced many of his best effects by coupling archaic syntax with deliberately ordinary vocabulary.' Context is his discussion of 'haply' as an unusually archaic word for the book, which he treats as the exception to this signature technique."
+  },
+  "105": {
+   "index": 105,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Real archaic English is far more terse than modern",
+   "note": "Appears verbatim, continuing \"; also many of the things said could not be said in our slack and often frivolous idiom.\" Simon explicitly frames it as Tolkien's own defence: \"The best answer is the one he gave to Hugh Brogan\". The haply illustration is present too: \"That takes twelve words to Tolkien's seven\" and \"Morwen's almost parenthetical use of haply expresses all the fatality of her decision and the fatalism of her outlook\". (My first fixed-width grep falsely reported this absent; the line is short and standalone.)"
+  },
+  "106": {
+   "index": 106,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The cold and august style of Tolkien's last years",
+   "note": "Full sentence: \"The cold and august style of Tolkien's last years had great poetic beauty, but it could not easily descend to everyday incidents and emotions. Like Treebeard, it was 'not very, hm, bendable'.\" The Lost Tales contrast is also verbatim: that style is \"quite different: occasionally twee ... but vivid and immediate\". Both halves of the claim hold."
+  },
+  "107": {
+   "index": 107,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a point of contact between the legendarium and the modern reader",
+   "note": "Verbatim, preceded by \"What they lack is a landfall,\". The hobbit-mediation half is explicit elsewhere in the same post: \"it was Hobbits that made it possible for The Lord of the Rings to succeed\", and deriving the legends from Bilbo's Translations \"would at least have allowed him to introduce the legends in a familiar Hobbit-voice, and given us a firm imaginative vantage-point\"."
+  },
+  "108": {
+   "index": 108,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "antiquity comes not from Old English but more familiar words",
+   "note": "No quotation was supplied with this claim, so verbatim status is not applicable; both halves are supported. Page: \"He notes that there are only a few actually archaic words, and that Tolkien uses them only rarely, such as 'alas', 'thou', and 'whither'\" and \"Walker comments, however, that much of the impression of antiquity comes not from Old English but from more recent, more familiar words such as 'deem', 'moot', and 'wight'\". Attributed on-page to Steve Walker, The Power of Tolkien's Prose."
+  },
+  "109": {
+   "index": 109,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the avoidance of words associated with the modern world",
+   "note": "Verbatim within: \"the impression of archaicity which any reader will experience on reading Lord of the Rings is partly due to three simple lexical causes: the 'overuse' of words borrowed from nineteenth-century fiction, the avoidance of words associated with the modern world, and the comparatively dense use of new coinages, unusual grammatical patterns, rare or obsolescent words.\" Minor hedge dropped by the claim: the source says \"partly due\", not simply attributes."
+  },
+  "110": {
+   "index": 110,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "obsolete or obsolescent at the time of writing",
+   "note": "Verbatim. Source names four lexical sets: landscape description; position or direction; warfare and the struggle between good and evil; other descriptive verbs and adjectives. All four cited direction words appear (whither, thither, yonder, afar). Scope nuance: the obsolescence remark is made specifically of \"the keywords used to describe its settings\", slightly narrower than the claim's blanket application to all four sets."
+  },
+  "111": {
+   "index": 111,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "borrows a host of words from his translation of Beowulf",
+   "note": "Verbatim, with the same three examples (valour, valiant, corslet), \"stretching them creatively to cover a wider range of uses than was possible in Old or Middle English\". The smote example is given exactly as \"Branched lightning smote down upon the eastward hills.\""
+  },
+  "112": {
+   "index": 112,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a black smoke swirled in the air",
+   "note": "Verbatim (source prints it after an ellipsis: \"… a black smoke swirled in the air.\"). Surrounding text supports the framing: modern key words \"are usually part of the core vocabulary of present-day English\" but \"Tolkien tends to use many of these words in nineteenth-century patterns\", smoke \"commonly preceded by the indefinite article\"."
+  },
+  "113": {
+   "index": 113,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "abundant use of descriptive verbs",
+   "note": "Verbatim within \"One area in which Tolkien tends to follow modernist tendencies is his abundant use of descriptive verbs\", glossed as verbs containing \"an additional semantic feature that assumes the function of a manner adverb\". All eight verbs cited in the claim (clutch, cower, flicker, gleam, loom, peer, plod, stride) appear in the source's key-verb list."
+  },
+  "114": {
+   "index": 114,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "an atmosphere of medievalism or otherworldliness",
+   "note": "Verbatim, within \"although not archaic, work together to create an atmosphere of medievalism or otherworldliness\". Every category and example in the claim matches the source's list of LotR-exclusive key words. One small slip: the source's final category is \"certain prepositions and adverbs (along, among, outwards)\" — the claim calls it prepositions, though outwards is an adverb."
+  },
+  "115": {
+   "index": 115,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a marked preference for the most homely collocations available",
+   "note": "Verbatim. The great pairings match the source's three meaning groups (abstract nouns, concrete objects, natural phenomena including weather), introduced by \"Tolkien also uses everyday adjectives in what would have been considered unusual collocations even in his day\". One inaccuracy: the hyperbole hypothesis rests on \"the last five domains\" — speed, entire/maximum, sound:loud, temperature:hot/on fire, long/tall/wide. 'weight: heavy' is listed as a descriptivity source but falls outside those five, so the claim's inclusion of \"heavy\" among the hyperbole domains is slightly off."
+  },
+  "116": {
+   "index": 116,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "he is a linguistic postmodernist",
+   "note": "Verbatim in the conclusion: \"far from being 'amateurish', Tolkien's prose effectively employs several centuries' worth of linguistic developments, putting old words to new uses and vice versa. In a much less obvious sense than in the case of James Joyce or Virginia Woolf, he is a linguistic postmodernist.\" The claim's \"quiet\" fairly renders \"In a much less obvious sense\"."
+  },
+  "117": {
+   "index": 117,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "word orders that are terser, more vivid",
+   "note": "Verbatim: \"Archaic English provides word orders that are terser, more vivid, and sometimes nobler than modern English.\" The word-order-not-vocabulary framing is explicit: \"The words are all familiar to us... What is archaic about the passage has to do with the structure of the sentences.\" Both contrasted passages appear, the modern one exactly as \"'Not at all my dear G. You don't know your own skill as a doctor...'\". Attribution nuance: this passage is Gordon summarising Tolkien's own letter, not advancing an argument of his own."
+  },
+  "118": {
+   "index": 118,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "would not have had those thoughts",
+   "note": "Verbatim: \"But, Tolkien states, a King who spoke in that modern fashion would not have had those thoughts!\" followed by \"There is an incongruity between modern English and Theoden's way of thinking\", supporting the register-encodes-character reading. Correctly framed as Gordon relaying Tolkien."
+  },
+  "119": {
+   "index": 119,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it is the language of men of character",
+   "note": "Verbatim within Ostadan's quotation of Le Guin: \"a less extraordinary English; or rather an English extraordinary for its simple timelessness...it is the language of men of character.\" The contrast is also on the page: young fantasy writers \"fumbling with 'thee' and 'thou' and overusing words like 'mayhap'\". Byline and date confirmed: \"September 26th, 2022 by Ostadan\". Nuance: the phrase is Le Guin's, quoted by Ostadan, and the thee/thou/mayhap charge is Le Guin's against young fantasy writers generally."
   }
  }
 }

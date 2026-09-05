@@ -1,7 +1,7 @@
 {
  "name": "martin",
  "runId": "wf_e25da3f7-7fb",
- "exportedAt": "2026-09-05T22:19:45.003Z",
+ "exportedAt": "2026-09-05T22:24:46.057Z",
  "claims": [
   {
    "feature": "Anglo-Saxon diction",
@@ -4609,6 +4609,96 @@
    "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "each with its own rhythm, written in its own voice",
    "note": "Supported, from the count of storylines: '11 major story lines, as well as assorted minor ones, each with its own rhythm, written in its own voice, and each playing off all the others.' The claim drops 'its own rhythm'. Same fetch caveat as 118 — direct fetch 406, text via two agreeing WebFetch passes."
+  },
+  "120": {
+   "index": 120,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "forgoing the great pleasure of Martin's deft prose",
+   "note": "Grossman (byline Lev Grossman, Jul 7 2011) writes: \"If you're watching A Game of Thrones on HBO, you're forgoing the great pleasure of Martin's deft prose.\" That treats the prose as a distinct pleasure the plot-bearing adaptation cannot supply, which is the claim's substance. Caveat on evidence quality: time.com refused direct fetch (HTTP 406) and the only Wayback capture of this URL is a 403, so the page was read through a summarizing fetch; the sentence was independently corroborated by a Slate review roundup quoting it. No word-for-word check of the whole article was possible."
+  },
+  "121": {
+   "index": 121,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "men and women slugging it out in the muck",
+   "note": "Full sentence: \"It's men and women slugging it out in the muck, for money and power and lust and love,\" preceded by \"A Feast for Crows isn't pretty elves against gnarly orcs.\" The muck phrase and the grounded/realist register are exact. The Tolkien contrast is real but framed as moral complexity, not register: \"Tolkien's work has enormous imaginative force, but you have to go elsewhere for moral complexity.\" The words \"elevated romance\" are the claim's gloss, not Grossman's."
+  },
+  "122": {
+   "index": 122,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "epic sweep and tiny, touching human drama simultaneously",
+   "note": "Source: \"Martin has an astonishing ability to focus on epic sweep and tiny, touching human drama simultaneously.\" Attributed to Martin's ability generally rather than to \"the prose\" specifically, and the sentence sits beside praise of him as \"a tense, surging, insomnia-inflicting plotter and a deft and inexhaustible sketcher of personalities.\" Substance holds; the word \"prose\" is the claim's."
+  },
+  "123": {
+   "index": 123,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "The supernatural plays a role, but only rarely.",
+   "note": "First half is essentially verbatim — the sentence appears exactly as \"The supernatural plays a role, but only rarely.\" The second half is not in this source: Grossman never says the restraint keeps the texture close to historical fiction, and the words \"historical fiction\" do not appear in the article at all. If the historical-fiction link is needed, cite Fiction Advocate instead, which says Martin \"uses fantastic elements sparingly... he initially conceived of the books as historical fiction.\""
+  },
+  "124": {
+   "index": 124,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "advice trope of never opening with weather... applies here though",
+   "note": "Both factual halves check out: the post quotes the opening line \"The morning had dawned clear and cold, with a crispness that hinted at the end of summer\" and calls it \"A boring description of the weather?\" But the polarity is the opposite of what \"defying\" implies. Auerbach writes that the advice \"stands applies here though, so I've taken the liberty of excising it,\" then quotes the paragraph without the weather line and says \"Much better.\" He treats it as a flaw Martin got away with, not a rule successfully broken. Do not cite this as endorsement of a weather opening."
+  },
+  "125": {
+   "index": 125,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "a seven-year old boy going to his first beheading",
+   "note": "The core is directly supported: \"We've got a seven-year old boy going to his first beheading,\" and the quoted passage gives \"This was the first time he had been deemed old enough to go with his lord father...\" The craft rationale is NOT in the source — Auerbach never discusses point of view, never says the child POV licenses adult explanation, and never connects the narrator's age to exposition. His nearest statement is only \"this chapter actually accomplishes a lot. We learn a bit about the world and its history.\" The \"so adult explanation arrives naturally\" clause is the claim's own inference."
+  },
+  "126": {
+   "index": 126,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "amazing how many hints G.R.R.M. dropped in one paragraph",
+   "note": "Both halves supported. Time-stamps: the post quotes \"It was the ninth year of summer, and the seventh of Bran's life\" and comments \"it's apparently the ninth year of summer.\" Endgame hints in a single paragraph: of the Old Nan paragraph he writes \"it's amazing how many hints G.R.R.M. dropped in one paragraph\" — Mance Rayder, the wildlings, and \"the Others (the White Walkers) and the Long Night, which are incredibly important to the endgame of the entire series.\""
+  },
+  "127": {
+   "index": 127,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "pairing the exposition with the dramatic",
+   "note": "Two supporting sentences: \"the plot points allow for exposition to happen seamlessly, without losing the reader's interest\" and \"By pairing the exposition with the dramatic, you reduce the chances of losing the reader.\" Oliver's framing is \"multiple small sources of tension\" (Others, Bran's fall, Khal Drogo; and the Nabokov Pnin parallel), which matches the claim's \"small dramatic tension.\""
+  },
+  "128": {
+   "index": 128,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "his extreme (over)use of meaningful nicknames",
+   "note": "Source: \"Since Martin has a large cast, he has to use additional tools, such as his emphasis on the importance of names and his extreme (over)use of meaningful nicknames.\" The parenthetical \"(over)use of meaningful nicknames\" is verbatim, and the large-cast/exposition framing is explicit in the same sentence."
+  },
+  "129": {
+   "index": 129,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "obvious foreshadowing with a direwolf who's been killed by a stag",
+   "note": "Both halves near-verbatim. Early and open: \"then some obvious foreshadowing with a direwolf who's been killed by a stag\" (repeated later as \"the aforementioned obvious foreshadowing of the direwolf killed by a stag\"). Retroactive recontextualising: \"events retroactively reshape characters, they contextualize miniscule asides, and they illuminate the reader's understanding.\" Note the author's point is that the obviousness \"doesn't matter\" because the work does not rely on surprise."
+  },
+  "130": {
+   "index": 130,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "combines some of the best traits of contemporary fantasy",
+   "note": "Martin's own answer, near-verbatim: \"One of the things I wanted to do was to write a book that combines some of the best traits of contemporary fantasy with some of the traits of the historical novel.\" He continues that historical fiction \"had an excitement to it and a grittiness and a realness to it that the fantasy novels lacked\" and that he wanted \"to almost write a historical novel about history that never happened.\" Only softening: the source says \"some of the traits of the historical novel,\" not \"the best traits\" of both."
+  },
+  "131": {
+   "index": 131,
+   "verdict": "NOT_FOUND",
+   "trueWording": "interviewer: books written from limited third person narrators",
+   "note": "MISATTRIBUTION. The statement is the interviewer's premise, not Martin's words. Verbatim: \"NJM: Since the books are written from the perspective of limited third person narrators, we get a lot interactions in the television series that would be impossible in the books. Which one was your favorite?\" Martin's answer never mentions point of view, narrators, or the constraint; he only names favourite invented scenes (Robert and Cersei, the Hound and Bronn, Varys and Littlefinger). The claim is true of the article's text but false as \"Martin states\" / own words."
+  },
+  "132": {
+   "index": 132,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "not the stuff that advances the plot, but... character parts",
+   "note": "SPLIT — one half is misattributed. \"Loves describing food\" is the interviewer's premise (\"NJM: ...we know from your writing that you love describing food\"); Martin's reply is about missing Bayonne pizza and bar pies, and he never says he loves describing food. The second half IS Martin's own words: on cut scenes he says \"it's a character scene, and mostly that's what has been cut, not the stuff that advances the plot, but the little character parts,\" and wishes for more episodes so \"we could get in a lot more of these small character scenes.\" Cite only the character-scene half to Martin."
+  },
+  "133": {
+   "index": 133,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I want them to taste the food.",
+   "note": "Supplied quote appears word for word, as the close of \"When they sit down at my table, I want them to taste the food.\" All three sub-claims check out in the quoted foreword: \"'gratuitous' usually translates to 'more than I wanted' or 'did not advance the plot'\"; \"Fiction is about emotion. The heart, not the head.\" Note the wording is \"more than I wanted\" (the critic's want), which the claim renders as \"more than a given reader wanted\" — a fair reading, but not the literal phrase. The article quotes the foreword via Polygon, so this is second-hand from the primary text."
+  },
+  "134": {
+   "index": 134,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "It's not the destination that matters to me, it's the journey",
+   "note": "Martin's foreword, quoted: \"It's not the destination that matters to me, it's the journey,\" given directly as his answer to why the heraldry, the sex scenes and \"the feasts, oh those feasts\" are not cut — i.e. the dense description the claim names. One wrinkle: ComicBook's own paraphrase softens it to \"the journey is as important as the destination,\" while Martin's quoted words say the journey matters and the destination does not. The claim tracks Martin, not the paraphrase."
   }
  }
 }

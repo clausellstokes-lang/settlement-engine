@@ -1,7 +1,7 @@
 {
  "name": "ai",
  "runId": "wf_60f0a1e1-39c",
- "exportedAt": "2026-09-05T22:19:45.005Z",
+ "exportedAt": "2026-09-05T22:24:46.061Z",
  "claims": [
   {
    "feature": "theme over-explanation",
@@ -1077,6 +1077,538 @@
    "url": "https://earth.com/news/readers-prefer-ai-generated-stories",
    "page": "Readers rated AI stories higher than human fiction in study of 2,587 adults",
    "quote": "People generally prefer predictability"
+  },
+  {
+   "feature": "theme over-explanation",
+   "claim": "AI stories state their moral meaning directly instead of dramatizing it, favoring tidy single-track plots.",
+   "source": "Russell et al., StoryScope (arXiv 2604.03136, 2026-04-03 rev 2026-08-10)",
+   "url": "https://arxiv.org/abs/2604.03136",
+   "quote": "over-explain themes and favor tidy, single-track plots"
+  },
+  {
+   "feature": "flat escalation",
+   "claim": "Claude-generated stories in particular show flat event escalation compared with human fiction.",
+   "source": "Russell et al., StoryScope (arXiv 2604.03136)",
+   "url": "https://arxiv.org/abs/2604.03136",
+   "quote": "Claude produces notably flat event escalation"
+  },
+  {
+   "feature": "moral ambiguity absent",
+   "claim": "Human stories frame protagonist choices as morally ambiguous; AI stories resolve into clean internal acceptance.",
+   "source": "Russell et al., StoryScope; Dramatica gloss 2026-05-29",
+   "url": "https://dramatica.com/blog/the-ai-tells-are-in-the-story",
+   "quote": "cleaner internal acceptance"
+  },
+  {
+   "feature": "subplot absence / causal tidiness",
+   "claim": "AI fiction runs one tight causal chain with far fewer subplots and more protagonist-driven resolutions than human fiction.",
+   "source": "Dramatica blog summarizing StoryScope, 2026-05-29",
+   "url": "https://dramatica.com/blog/the-ai-tells-are-in-the-story",
+   "quote": "tighter causal chains, more protagonist-driven resolutions"
+  },
+  {
+   "feature": "temporal flatness",
+   "claim": "Human stories use more time jumps, flashbacks and nonlinear delay of revelation; AI stories stay chronological.",
+   "source": "Dramatica blog summarizing StoryScope, 2026-05-29",
+   "url": "https://dramatica.com/blog/the-ai-tells-are-in-the-story",
+   "quote": "more temporal discontinuity"
+  },
+  {
+   "feature": "dialogue as debate",
+   "claim": "AI dialogue drifts into philosophical debate rather than character-driven exchange.",
+   "source": "Dramatica blog summarizing StoryScope, 2026-05-29",
+   "url": "https://dramatica.com/blog/the-ai-tells-are-in-the-story",
+   "quote": "AI dialogue more often turns into philosophical debate"
+  },
+  {
+   "feature": "narrative sameness across models",
+   "claim": "Stories from five different LLMs cluster together in narrative-feature space while human stories are diverse; narrative features alone reach 93.2% macro-F1 detection.",
+   "source": "Russell et al., StoryScope; Dramatica gloss",
+   "url": "https://dramatica.com/blog/the-ai-tells-are-in-the-story",
+   "quote": "five AI models cluster together in narrative space"
+  },
+  {
+   "feature": "redundant exposition (tell-not-show)",
+   "claim": "18% of professional writers' edits to LLM prose removed exposition that restated what was already implied.",
+   "source": "Chakrabarty, Laban, Wu, 'Can AI writing be salvaged?' (arXiv 2409.14509, LAMP corpus, 18 writers, 8,035 edits)",
+   "url": "https://arxiv.org/html/2409.14509",
+   "quote": "show, don't tell"
+  },
+  {
+   "feature": "cliché / fluff",
+   "claim": "17% of professional edits to LLM prose removed clichés and filler.",
+   "source": "Chakrabarty, Laban, Wu (arXiv 2409.14509)",
+   "url": "https://arxiv.org/html/2409.14509",
+   "quote": "unnecessary filler"
+  },
+  {
+   "feature": "awkward word choice",
+   "claim": "Awkward phrasing was the largest edit category (28%), e.g. the recurring hedge 'seem to (verb)'.",
+   "source": "Chakrabarty, Laban, Wu (arXiv 2409.14509), writer W1",
+   "url": "https://arxiv.org/html/2409.14509",
+   "quote": "not technically wrong it's just inelegant"
+  },
+  {
+   "feature": "purple prose and lack of specificity",
+   "claim": "Professional writers' taxonomy of LLM idiosyncrasies also names purple prose (abstract words, excess adjectives/metaphors), lack of specific detail, poor sentence structure (20%), and tense inconsistency.",
+   "source": "Chakrabarty, Laban, Wu (arXiv 2409.14509)",
+   "url": "https://arxiv.org/html/2409.14509",
+   "quote": ""
+  },
+  {
+   "feature": "lyrical nonsense",
+   "claim": "LLM literary prose produces metaphors that sound profound but carry no meaning the reader can cash out.",
+   "source": "Lincoln Michel, 'MFA vs. LLM', Counter Craft, 2025-03-17",
+   "url": "https://countercraft.substack.com/p/mfa-vs-llm-is-openais-metafiction",
+   "quote": "Grief, as I've learned, is a delta"
+  },
+  {
+   "feature": "mixed-metaphor pile-up",
+   "claim": "Within one passage the model jumbles construction, tailoring and magic metaphors without coherence.",
+   "source": "Lincoln Michel, 'MFA vs. LLM', 2025-03-17",
+   "url": "https://countercraft.substack.com/p/mfa-vs-llm-is-openais-metafiction",
+   "quote": "protagonists cut from whole cloth, emotions dyed and draped"
+  },
+  {
+   "feature": "no narrative movement",
+   "claim": "The AI story repeats its central idea with new metaphors instead of developing character, plot or thought.",
+   "source": "Lincoln Michel, 'MFA vs. LLM', 2025-03-17",
+   "url": "https://countercraft.substack.com/p/mfa-vs-llm-is-openais-metafiction",
+   "quote": "doesn't really go anywhere. It's flat."
+  },
+  {
+   "feature": "no intentionality / point of view",
+   "claim": "LLMs cannot make parts of a story work together because they have no point of view or intention behind choices.",
+   "source": "Lincoln Michel, 'MFA vs. LLM', 2025-03-17",
+   "url": "https://countercraft.substack.com/p/mfa-vs-llm-is-openais-metafiction",
+   "quote": "They don't have a point of view"
+  },
+  {
+   "feature": "choices per word",
+   "claim": "A 10,000-word story is ~10,000 choices; a 100-word prompt makes almost none of them, and the hardest work is shaping and refining.",
+   "source": "Lincoln Michel, 'Art Without Intention', 2024-09-04",
+   "url": "https://countercraft.substack.com/p/art-without-intention",
+   "quote": "shaping, honing, and refining"
+  },
+  {
+   "feature": "no perspective / no origin",
+   "claim": "AI sentences give the reader no place to stand because they do not originate from any sensibility.",
+   "source": "Charles Schifano, 'What's Missing from AI Writing', 2023-10-27",
+   "url": "https://charlesschifano.substack.com/p/whats-missing-from-ai-writing",
+   "quote": "the sentences don't originate from anywhere"
+  },
+  {
+   "feature": "no trajectory (swappable sentences)",
+   "claim": "Sentences in AI prose can be reordered with nothing lost, because there is no point of view driving them forward.",
+   "source": "Charles Schifano, 2023-10-27",
+   "url": "https://charlesschifano.substack.com/p/whats-missing-from-ai-writing",
+   "quote": "there's no trajectory in these sentences"
+  },
+  {
+   "feature": "no narrative, character or plot",
+   "claim": "Asimov's editor, after hundreds of ChatGPT submissions: no originality, no narrative sense, no character development, near-nonexistent plotting.",
+   "source": "Sheila Williams, Asimov's editorial 'ChatGPT and Me', Jan/Feb 2024",
+   "url": "https://asimovs.com/wp-content/uploads/2024/02/Editorial_CHAT-GPT-and-Me_JanFeb24.pdf",
+   "quote": "no sense of narrative, no character development"
+  },
+  {
+   "feature": "no cultural memory",
+   "claim": "Generated stories show no sign their maker ever absorbed a story, folktale or TV show; worse than any human submission.",
+   "source": "Sheila Williams, Asimov's, Jan/Feb 2024",
+   "url": "https://asimovs.com/wp-content/uploads/2024/02/Editorial_CHAT-GPT-and-Me_JanFeb24.pdf",
+   "quote": "ever read a story, heard some folklore"
+  },
+  {
+   "feature": "detectable in the opening sentences",
+   "claim": "Asimov's managing editor says AI submissions are bland, obvious and identifiable within the first couple of sentences.",
+   "source": "Emily Hockaday interview (Oct 2023; pub. 2025)",
+   "url": "https://nanocrit.com/index.php/issues/issue17/An-Interview-with-Emily-Hockaday-Senior-Managing-Editor-of-Asimov-s-Science-Fiction-Magazine-by-Jason-Ellis",
+   "quote": "usually you can tell the first couple of sentences"
+  },
+  {
+   "feature": "AI poetry over-narrates",
+   "claim": "AI poetry submissions don't make much sense and are overly narrative.",
+   "source": "Emily Hockaday interview",
+   "url": "https://nanocrit.com/index.php/issues/issue17/An-Interview-with-Emily-Hockaday-Senior-Managing-Editor-of-Asimov-s-Science-Fiction-Magazine-by-Jason-Ellis",
+   "quote": "overly narrative in places"
+  },
+  {
+   "feature": "bad in new ways",
+   "claim": "Clarkesworld found generated submissions were the worst ever received and failed in ways human writing does not.",
+   "source": "Neil Clarke, Clarkesworld Editor's Desk, April 2023",
+   "url": "https://clarkesworldmagazine.com/clarke_04_23/",
+   "quote": "sometimes bad in entirely new ways"
+  },
+  {
+   "feature": "leftover prompt in text",
+   "claim": "Hybrid or polished AI submissions still carry recognizable characteristics, and sometimes the prompt or chatbot reply is left in the story.",
+   "source": "Neil Clarke, Clarkesworld Editor's Desk, August 2025",
+   "url": "https://clarkesworldmagazine.com/clarke_08_25/",
+   "quote": "leave a prompt or ChatGPT response in the text"
+  },
+  {
+   "feature": "tells scale with length",
+   "claim": "AI hallmarks are more obvious in longer works than in flash fiction or poetry.",
+   "source": "Neil Clarke, Clarkesworld Editor's Desk, August 2025",
+   "url": "https://clarkesworldmagazine.com/clarke_08_25/",
+   "quote": ""
+  },
+  {
+   "feature": "rhythm and duplicate titles",
+   "claim": "Editors detect AI slush by a difference in prose rhythm and by batches of submissions sharing the same generated title.",
+   "source": "Neil Clarke quoted in Salon, 2023-02-25",
+   "url": "https://www.salon.com/2023/02/25/ai-writing-clarkesworld-science-fiction/",
+   "quote": "There's a difference in rhythm"
+  },
+  {
+   "feature": "below editorial standard; tells withheld",
+   "claim": "Clarkesworld says output is nowhere near its standards and deliberately keeps its detection patterns private; generated-sub statistics are 'noise'.",
+   "source": "Neil Clarke blog",
+   "url": "https://neil-clarke.com/how-ai-submissions-have-changed-our-submissions-process/",
+   "quote": "nowhere near the standards we expect"
+  },
+  {
+   "feature": "soulless product",
+   "claim": "Uncanny's editor says AI stories are obvious without detectors and produce a soulless product; they drove submissions to 2,800 in two weeks.",
+   "source": "Michael Damian Thomas, The Uncanny Valley 62, Uncanny Magazine issue 67",
+   "url": "https://www.uncannymagazine.com/article/the-uncanny-valley-62/",
+   "quote": "it creates a terrible, soulless product"
+  },
+  {
+   "feature": "regression to the mean",
+   "claim": "LLMs sand down specific, unusual, nuanced facts into generic positive descriptions, drifting toward the most statistically likely text.",
+   "source": "Wikipedia:Signs of AI writing",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "sand down specific, unusual, nuanced facts"
+  },
+  {
+   "feature": "undue significance",
+   "claim": "AI text inflates importance with 'stands as', 'is a testament', 'pivotal moment', 'broader trends'.",
+   "source": "Wikipedia:Signs of AI writing",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "is a testament"
+  },
+  {
+   "feature": "promotional tone",
+   "claim": "LLMs struggle to hold a neutral register and drift into advert-like language ('vibrant', 'nestled', 'rich heritage').",
+   "source": "Wikipedia:Signs of AI writing",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "tend toward advertisement-like writing"
+  },
+  {
+   "feature": "vague attribution",
+   "claim": "AI text attributes opinions to unnamed authorities ('Experts argue', 'Some critics argue').",
+   "source": "Wikipedia:Signs of AI writing",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "attribute opinions to some vague authority"
+  },
+  {
+   "feature": "AI vocabulary and copula avoidance",
+   "claim": "High density of 'delve', 'tapestry', 'testament', 'pivotal', 'intricate', and replacement of is/are with 'serves as', 'stands as', 'boasts'.",
+   "source": "Wikipedia:Signs of AI writing",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "LLMs overuse specific words"
+  },
+  {
+   "feature": "negative parallelism and rule of three",
+   "claim": "'Not only X but Y' / 'It is not just X, it's Y' constructions and lists of three recur; the guide stresses these are signs, not a word ban.",
+   "source": "Wikipedia:Signs of AI writing",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "This list is not a ban on certain words"
+  },
+  {
+   "feature": "word repetition without relief",
+   "claim": "Human writers, even bad ones, rest an overused word; LLMs lock into a local minimum of the same clichés.",
+   "source": "Makin, 'How to Identify AI-Written Web Fiction', Record Crash, 2025-11-27",
+   "url": "https://recordcrash.substack.com/p/how-to-identify-ai-written-web-fiction",
+   "quote": "it won't stop going to the same well"
+  },
+  {
+   "feature": "register oscillation",
+   "claim": "AI fiction swings between overwrought similes and tiny cliché sentences without a governing restraint.",
+   "source": "Makin, Record Crash, 2025-11-27",
+   "url": "https://recordcrash.substack.com/p/how-to-identify-ai-written-web-fiction",
+   "quote": "Alternating loquacious ponderous similes and tiny sentences"
+  },
+  {
+   "feature": "tricolon of abstractions",
+   "claim": "Lists of three escalating abstractions are a signature ('a geometry of madness, a wound in the fabric...').",
+   "source": "Makin, Record Crash, 2025-11-27",
+   "url": "https://recordcrash.substack.com/p/how-to-identify-ai-written-web-fiction",
+   "quote": "a geometry of madness, a wound in the fabric"
+  },
+  {
+   "feature": "metaphor clustering at sentence end",
+   "claim": "Multiple similes/metaphors are stacked in a closing sentence to describe one concept.",
+   "source": "Makin, Record Crash, 2025-11-27",
+   "url": "https://recordcrash.substack.com/p/how-to-identify-ai-written-web-fiction",
+   "quote": "spammed in the final sentence to describe a single concept"
+  },
+  {
+   "feature": "blocky curt dialogue",
+   "claim": "AI dialogue is curt, rigidly demarcated from exposition, and tends to end scenes on a cliffhanger.",
+   "source": "Makin, Record Crash, 2025-11-27",
+   "url": "https://recordcrash.substack.com/p/how-to-identify-ai-written-web-fiction",
+   "quote": "Extremely curt dialogue that ends in a cliffhanger"
+  },
+  {
+   "feature": "lexical tells drift",
+   "claim": "Surface tells shift within months (em dashes replaced by semicolons/commas in newer models) while structural tells persist.",
+   "source": "Makin, Record Crash, 2025-11-27",
+   "url": "https://recordcrash.substack.com/p/how-to-identify-ai-written-web-fiction",
+   "quote": "Emdashes are less common than months ago"
+  },
+  {
+   "feature": "intent assigned to scenery",
+   "claim": "AI assigns agentive verbs to inanimate things ('dawn unfurled'), a tell that is also just bad writing.",
+   "source": "Kevin Hess, 2025-08-13",
+   "url": "https://kevinhesswrites.substack.com/p/new-free-books-and-one-way-to-spot",
+   "quote": "overassign active verbs, and by extension intent"
+  },
+  {
+   "feature": "no concrete particulars",
+   "claim": "AI prose lacks the specific proper nouns, places and objects that anchor human writing.",
+   "source": "Matthew Vollmer, 'A Field Guide to AI Tells' (citing Laura Preston)",
+   "url": "https://matthewvollmer.substack.com/p/i-asked-the-machine-to-tell-on-itself",
+   "quote": "no Tuesday, no laundromat, no grandmother's cough drops"
+  },
+  {
+   "feature": "what machine prose never does",
+   "claim": "LLM prose never contradicts itself and recovers, digresses and walks it back, uses an unexplained idiom, risks a joke, or leaves a thought unfinished.",
+   "source": "Matthew Vollmer, 'A Field Guide to AI Tells'",
+   "url": "https://matthewvollmer.substack.com/p/i-asked-the-machine-to-tell-on-itself",
+   "quote": "make a joke that risks falling flat"
+  },
+  {
+   "feature": "low burstiness and essay shape",
+   "claim": "Uniform sentence length and a default intro/three-body/recap shape regardless of length; paragraphs close on aphoristic pull-quotes.",
+   "source": "Matthew Vollmer, 'A Field Guide to AI Tells'",
+   "url": "https://matthewvollmer.substack.com/p/i-asked-the-machine-to-tell-on-itself",
+   "quote": "high school essay vibes"
+  },
+  {
+   "feature": "characters sound alike",
+   "claim": "In AI fiction characters share one voice with no idiolect or dialect, exposition arrives by explanation, and endings resolve rather than trust ambiguity.",
+   "source": "Matthew Vollmer (attributing to Neil Clarke and critical consensus)",
+   "url": "https://matthewvollmer.substack.com/p/i-asked-the-machine-to-tell-on-itself",
+   "quote": ""
+  },
+  {
+   "feature": "nonsensical descriptor",
+   "claim": "Fan-fiction readers flag physically meaningless description as an AI signature.",
+   "source": "Thousand Roads forum, 'Detecting AI Use in Fiction' (user Goolix)",
+   "url": "https://forums.thousandroads.net/threads/detecting-ai-use-in-fiction.2175/",
+   "quote": "a jaw that was, objectively, a jaw"
+  },
+  {
+   "feature": "emotional evasion",
+   "claim": "AI narration gestures at feeling without naming it, declining to examine emotion with specificity.",
+   "source": "Thousand Roads forum (user Negrek)",
+   "url": "https://forums.thousandroads.net/threads/detecting-ai-use-in-fiction.2175/",
+   "quote": "Something he didn't have a good word for"
+  },
+  {
+   "feature": "bizarre simile plus rule of three",
+   "claim": "A rule-of-three fragment attached to a strange simile is described as a screaming red flag.",
+   "source": "Thousand Roads forum (user Negrek)",
+   "url": "https://forums.thousandroads.net/threads/detecting-ai-use-in-fiction.2175/",
+   "quote": "a voice like a waiting room"
+  },
+  {
+   "feature": "'Not...' fragment stacking",
+   "claim": "Successive fragments opening with 'Not' are a common LLM pattern.",
+   "source": "Thousand Roads forum (user Goolix)",
+   "url": "https://forums.thousandroads.net/threads/detecting-ai-use-in-fiction.2175/",
+   "quote": "Not quite a smile. Not unkind. Not impatient."
+  },
+  {
+   "feature": "premise tracking failure",
+   "claim": "A character plans four contingencies around a premise the story then contradicts, showing the model does not track its own setup.",
+   "source": "Thousand Roads forum (user Dragonfree)",
+   "url": "https://forums.thousandroads.net/threads/detecting-ai-use-in-fiction.2175/",
+   "quote": ""
+  },
+  {
+   "feature": "stock names and stock numbers",
+   "claim": "Recurring default names ('Marcus Webb', 'Sarah Chen') and the number 47 appear across unrelated AI stories, alongside canon-breaking facts.",
+   "source": "Thousand Roads forum",
+   "url": "https://forums.thousandroads.net/threads/detecting-ai-use-in-fiction.2175/",
+   "quote": "Marcus Webb, Sarah Chen"
+  },
+  {
+   "feature": "characterization whiplash",
+   "claim": "A character shifts from heated argument to gentleness with no organic transition.",
+   "source": "Thousand Roads forum (user Flyg0n)",
+   "url": "https://forums.thousandroads.net/threads/detecting-ai-use-in-fiction.2175/",
+   "quote": "startling gentleness"
+  },
+  {
+   "feature": "over-frequent model-specific words",
+   "claim": "Words like 'fluorescent', 'humming', 'particular' recur at rates traceable to a specific model's slop profile.",
+   "source": "Thousand Roads forum citing sam-paech/slop-forensics",
+   "url": "https://github.com/sam-paech/slop-forensics",
+   "quote": "heart pounding chest"
+  },
+  {
+   "feature": "identical query voice",
+   "claim": "Literary agents receive near-identical AI query letters with the same voice, language and content even when the manuscripts look human.",
+   "source": "Naomi & James Jones, 2026-03-09",
+   "url": "https://naomiandjamesjones.substack.com/p/dont-use-ai-to-write-your-query-letter",
+   "quote": "almost identical query letters that used the same voice"
+  },
+  {
+   "feature": "uncanny-valley query with no hook",
+   "claim": "An agent found the AI query offered no hook, fabricated a comp she never represented, and read as real-but-fake.",
+   "source": "Kate Nash, Slushpile Mountaineering, 2026-02-23",
+   "url": "https://slushpilemountaineering.substack.com/p/if-you-are-using-ai-in-your-queries",
+   "quote": "it appears real but it isn't"
+  },
+  {
+   "feature": "worse than a worst first draft",
+   "claim": "Larian's writing director rates generated dialogue 3/10 at best, below his own worst drafts, and says placeholder AI text does not help development.",
+   "source": "Adam Smith (Larian) via PC Gamer, Ted Litchfield",
+   "url": "https://www.pcgamer.com/games/rpg/larians-head-writer-has-a-simple-answer-for-how-ai-generated-text-helps-development-it-doesnt-thanks-to-its-best-output-being-a-3-10-at-best-worse-than-his-worst-drafts/",
+   "quote": "the results hit a 3/10 at best"
+  },
+  {
+   "feature": "smarmy sycophantic tone",
+   "claim": "Generated text across Grok, Claude and ChatGPT carries a recognizable smarmy, sycophantic tone that editing cannot remove cheaply.",
+   "source": "Ted Litchfield, PC Gamer",
+   "url": "https://www.pcgamer.com/games/rpg/larians-head-writer-has-a-simple-answer-for-how-ai-generated-text-helps-development-it-doesnt-thanks-to-its-best-output-being-a-3-10-at-best-worse-than-his-worst-drafts/",
+   "quote": "a by turns smarmy and sycophantic tone"
+  },
+  {
+   "feature": "NPC filler inflation",
+   "claim": "LLM NPCs pad trivial exchanges with unnecessary words and nonsensical attributes (eighteen as 'a heavy, beautiful number').",
+   "source": "PC Gamer review of Seed (Klang), 2026-07-24",
+   "url": "https://www.pcgamer.com/games/sim/mmo-life-sim-seeds-ai-powered-avatars-prove-once-again-that-nothing-shatters-immersion-quicker-than-crappy-chatbot-dialogue/",
+   "quote": "filling up space with completely unnecessary words"
+  },
+  {
+   "feature": "over-poeticized simple questions",
+   "claim": "AI NPCs rephrase plain questions into stilted 'alive-sounding' forms, which reads as trying too hard.",
+   "source": "PC Gamer review of Seed, 2026-07-24",
+   "url": "https://www.pcgamer.com/games/sim/mmo-life-sim-seeds-ai-powered-avatars-prove-once-again-that-nothing-shatters-immersion-quicker-than-crappy-chatbot-dialogue/",
+   "quote": "How many years have you lived?"
+  },
+  {
+   "feature": "vibe-adjective recurrence",
+   "claim": "The same evaluative words ('heavy', 'beautiful', 'iconic', 'vibes') attach to age, names and shoe colour alike; conversations contain no actual meaning.",
+   "source": "PC Gamer review of Seed, 2026-07-24",
+   "url": "https://www.pcgamer.com/games/sim/mmo-life-sim-seeds-ai-powered-avatars-prove-once-again-that-nothing-shatters-immersion-quicker-than-crappy-chatbot-dialogue/",
+   "quote": "a full conversation that contains no actual meaning"
+  },
+  {
+   "feature": "personality traits do survive",
+   "claim": "The one thing that worked in Seed: creator-chosen personality types (curt vs gushing) read through the AI dialogue.",
+   "source": "PC Gamer review of Seed, 2026-07-24",
+   "url": "https://www.pcgamer.com/games/sim/mmo-life-sim-seeds-ai-powered-avatars-prove-once-again-that-nothing-shatters-immersion-quicker-than-crappy-chatbot-dialogue/",
+   "quote": "Some speak very curtly"
+  },
+  {
+   "feature": "canon and anachronism pliability",
+   "claim": "LLM NPCs in a Song-dynasty wuxia game discuss ketchup and accept fake pregnancies; players break canon at will.",
+   "source": "PC Gamer on Where Winds Meet",
+   "url": "https://www.pcgamer.com/games/rpg/wuxia-mmo-where-winds-meet-is-full-of-ai-chatbot-npcs-and-people-are-doing-all-the-standard-obscene-stuff-to-them-i-made-him-think-that-my-character-was-pregnant-with-his-child/",
+   "quote": "ketchup wasn't available during the Song dynasty"
+  },
+  {
+   "feature": "robotic but grammatical",
+   "claim": "Nvidia's ACE demo NPC lines were structurally fine yet robotic, with no personality or charm.",
+   "source": "Bradly Shankar, MobileSyrup, 2023-05-29",
+   "url": "https://mobilesyrup.com/2023/05/29/nvidia-player-ai-conversations-tech-demo/",
+   "quote": "they're undeniably robotic"
+  },
+  {
+   "feature": "NPC memory and identity drift",
+   "claim": "An LLM NPC that forgets its faction or backstory, leaks modern facts into a fantasy setting, or spills quest secrets under manipulation is useless to a designer.",
+   "source": "Gameindustry.com, 'The Hard Problem of AI NPCs', 2026-05-18",
+   "url": "https://www.gameindustry.com/news-industry-happenings/the-hard-problem-of-ai-npcs-why-character-consistency-matters-more-than-intelligence/",
+   "quote": "forget their faction or personal backstory"
+  },
+  {
+   "feature": "background chatter is load-bearing",
+   "claim": "Barks, journals and ambient NPC lines are the backbone of a game's sense of place; generic filler makes the whole world feel shallower.",
+   "source": "Harvey Randall, PC Gamer op-ed",
+   "url": "https://www.pcgamer.com/gaming-industry/game-development/the-bigwigs-who-want-ai-generated-npcs-and-writing-think-youre-too-dumb-to-appreciate-a-good-story-dont-prove-them-right/",
+   "quote": "disconnected, jilted, random stories to tell you"
+  },
+  {
+   "feature": "genre and tone misalignment",
+   "claim": "Narrative-design experts list AI game narrative failures: unconvincing or repetitive content, wrong genre, uneven quality across sessions, and a bias toward overly positive endings.",
+   "source": "Valdivia & Burelli, arXiv 2509.04239, 2025-09-04",
+   "url": "https://arxiv.org/html/2509.04239",
+   "quote": "overly positive or uninspired endings"
+  },
+  {
+   "feature": "industry sentiment",
+   "claim": "63% of game design and narrative workers say generative AI harms the industry (GDC 2026, n>2,300); positive views fell to 7%.",
+   "source": "Game Developer, 2026-02-03",
+   "url": "https://www.gamedeveloper.com/business/one-third-of-game-workers-use-generative-ai-but-half-think-it-s-bad-for-the-industry",
+   "quote": "a regurgitated amalgamation of everything that's come before"
+  },
+  {
+   "feature": "middle-of-the-road adventure text",
+   "claim": "ChatGPT-written RPG adventures land at the most ordinary text possible; the quality floor comes with an equal ceiling.",
+   "source": "H. Tucker Cobey, Epic Table Games, 2023-07-24",
+   "url": "https://epictablegames.com/onebookshelf-aka-drivethrurpg-bans-primarily-ai-generated-content/",
+   "quote": "the most ordinary, middle-of-the-road adventure text"
+  },
+  {
+   "feature": "marketplace ban wording",
+   "claim": "DMs Guild and DriveThruRPG refuse commercial content primarily written by AI language generators (effective 2023-07-31) while allowing tagged AI art.",
+   "source": "OneBookShelf policy via EN World thread",
+   "url": "https://www.enworld.org/threads/dms-guild-and-drivethrurpg-ban-ai-written-works-requires-labels-for-ai-generated-art.698936/",
+   "quote": "primarily written by AI language generators"
+  },
+  {
+   "feature": "publisher pledge",
+   "claim": "Kobold Press pledges no AI-generated text in game design, framing LLM text as fine for chatbots but not for play with friends.",
+   "source": "Wolfgang Baur, Kobold Press 'No AI Pledge'",
+   "url": "https://koboldpress.com/state-of-play-kobold-press-issues-the-no-ai-pledge/",
+   "quote": "we don't use AI to generate text"
+  },
+  {
+   "feature": "publisher bans are ethical not qualitative",
+   "claim": "Paizo, Chaosium, WotC, Renegade, Stonemaier, Free League ban AI text/art on ethics and livelihood grounds; only Monte Cook Games gives a quality verdict.",
+   "source": "Geeknative roundup",
+   "url": "https://www.geeknative.com/221420/the-human-touch-the-growing-list-of-tabletop-companies-banning-ai/",
+   "quote": "exact opposite of inspiration"
+  },
+  {
+   "feature": "AI RPG text stagnant and obvious",
+   "claim": "RPG crowdfunding backers report AI-written project text is easy to catch and has not improved in three years; human creators now fear tripping the same alarm.",
+   "source": "EN World, 'AI is destroying crowdfunding' (user Agamon, 2026-08-25)",
+   "url": "https://www.enworld.org/threads/ai-is-destroying-crowdfunding.720435/",
+   "quote": "it's been at the same level for three years"
+  },
+  {
+   "feature": "series-level beat repetition",
+   "claim": "Letting AI draft sequels from the same source documents reproduced the first book's story beats; prose stayed 'competent but slightly mechanical' with 'not X but Y'.",
+   "source": "Jon Del Arroz, 2026-03-16",
+   "url": "https://substack.aicentral.blog/p/i-let-ai-write-three-complete-novels",
+   "quote": "producing repetitive story beats"
+  },
+  {
+   "feature": "prompt shipped in a published novel",
+   "claim": "A Kindle Unlimited novel (Darkhollow Academy: Year 2, June 2025) went out with an AI rewrite prompt still in the text; Amazon's AI disclosure is not shown to readers.",
+   "source": "Book Riot, 'Can Kindle Unlimited Survive AI?'",
+   "url": "https://bookriot.com/can-kindle-unlimited-survive-ai/",
+   "quote": ""
+  },
+  {
+   "feature": "reader-side identification criteria",
+   "claim": "Goodreads readers flag ~296 books as obviously AI-generated on the basis of AI cover art plus stereotypical text patterns at slop-level frequency.",
+   "source": "Goodreads list 'Obviously AI-generated'",
+   "url": "https://www.goodreads.com/list/show/221372.Obviously_AI_generated",
+   "quote": "stereotypical text patterns"
+  },
+  {
+   "feature": "false-positive hazard",
+   "claim": "A human-written indie RPG was review-bombed as ChatGPT slop because the story 'felt artificial'; reader tells fire on human work too.",
+   "source": "Outlook Respawn on Shrine's Legacy, 2025-12-15",
+   "url": "https://respawn.outlookindia.com/gaming/gaming-news/shrines-legacy-devs-deny-ai-slop-chatgpt-rumors",
+   "quote": "the story felt artificial"
   }
  ],
  "sources": [
@@ -1606,6 +2138,276 @@
    "title": "LLMs Are Getting Better at Generating Short Fiction (Scale AI)",
    "url": "https://scale.com/blog/llms-generating-fiction",
    "kind": "attempted — fetch returned homepage only, not read",
+   "substantive": false
+  },
+  {
+   "title": "Editor's Desk: Written by a Human (Clarkesworld, Apr 2023)",
+   "url": "https://clarkesworldmagazine.com/clarke_04_23/",
+   "kind": "magazine editorial",
+   "substantive": true
+  },
+  {
+   "title": "Editor's Desk: The Future of Dealing with AI Submissions (Clarkesworld, Aug 2025)",
+   "url": "https://clarkesworldmagazine.com/clarke_08_25/",
+   "kind": "magazine editorial",
+   "substantive": true
+  },
+  {
+   "title": "How 'AI' submissions have changed our submissions process (Neil Clarke blog)",
+   "url": "https://neil-clarke.com/how-ai-submissions-have-changed-our-submissions-process/",
+   "kind": "editor blog",
+   "substantive": true
+  },
+  {
+   "title": "Oh, the humanity! Stop using AI to pitch stories (Salon, 2023-02-25)",
+   "url": "https://www.salon.com/2023/02/25/ai-writing-clarkesworld-science-fiction/",
+   "kind": "journalism",
+   "substantive": true
+  },
+  {
+   "title": "ChatGPT and Me — Sheila Williams editorial, Asimov's Jan/Feb 2024 (PDF)",
+   "url": "https://asimovs.com/wp-content/uploads/2024/02/Editorial_CHAT-GPT-and-Me_JanFeb24.pdf",
+   "kind": "magazine editorial",
+   "substantive": true
+  },
+  {
+   "title": "Interview with Emily Hockaday, Asimov's (nanocrit issue 17)",
+   "url": "https://nanocrit.com/index.php/issues/issue17/An-Interview-with-Emily-Hockaday-Senior-Managing-Editor-of-Asimov-s-Science-Fiction-Magazine-by-Jason-Ellis",
+   "kind": "interview",
+   "substantive": true
+  },
+  {
+   "title": "The Uncanny Valley 62 (Uncanny Magazine issue 67)",
+   "url": "https://www.uncannymagazine.com/article/the-uncanny-valley-62/",
+   "kind": "magazine editorial",
+   "substantive": true
+  },
+  {
+   "title": "Wikipedia:Signs of AI writing",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "kind": "style guide",
+   "substantive": true
+  },
+  {
+   "title": "Here's a handy guide to help you spot AI writing (LitHub, 2025-09-26)",
+   "url": "https://lithub.com/heres-a-handy-guide-to-help-you-spot-ai-writing/",
+   "kind": "journalism (echo of Wikipedia guide)",
+   "substantive": false
+  },
+  {
+   "title": "How to Identify AI-Written Web Fiction (Makin, Record Crash, 2025-11-27)",
+   "url": "https://recordcrash.substack.com/p/how-to-identify-ai-written-web-fiction",
+   "kind": "reader/critic essay",
+   "substantive": true
+  },
+  {
+   "title": "I Asked the Machine to Tell on Itself: A Field Guide to AI Tells (Matthew Vollmer)",
+   "url": "https://matthewvollmer.substack.com/p/i-asked-the-machine-to-tell-on-itself",
+   "kind": "writer field guide (compilation)",
+   "substantive": true
+  },
+  {
+   "title": "A Surprising Sign of AI Fiction (Kevin Hess, 2025-08-13)",
+   "url": "https://kevinhesswrites.substack.com/p/new-free-books-and-one-way-to-spot",
+   "kind": "novelist blog",
+   "substantive": true
+  },
+  {
+   "title": "Detecting AI Use in Fiction (Thousand Roads forum)",
+   "url": "https://forums.thousandroads.net/threads/detecting-ai-use-in-fiction.2175/",
+   "kind": "reader/writer forum",
+   "substantive": true
+  },
+  {
+   "title": "StoryScope: Investigating idiosyncrasies in AI fiction (arXiv 2604.03136)",
+   "url": "https://arxiv.org/abs/2604.03136",
+   "kind": "research paper abstract",
+   "substantive": true
+  },
+  {
+   "title": "The AI Tells Are in the Story (Dramatica blog, 2026-05-29)",
+   "url": "https://dramatica.com/blog/the-ai-tells-are-in-the-story",
+   "kind": "craft blog summarizing StoryScope",
+   "substantive": true
+  },
+  {
+   "title": "StoryScope detects AI fiction by narrative shape (AI Weekly)",
+   "url": "https://aiweekly.co/alerts/storyscope-detects-ai-fiction-by-narrative-shape-not-style",
+   "kind": "news alert (echo)",
+   "substantive": false
+  },
+  {
+   "title": "Can AI writing be salvaged? (Chakrabarty, Laban, Wu, arXiv 2409.14509)",
+   "url": "https://arxiv.org/html/2409.14509",
+   "kind": "research paper",
+   "substantive": true
+  },
+  {
+   "title": "Evaluating Quality of Gaming Narratives Co-created with AI (Valdivia & Burelli, arXiv 2509.04239)",
+   "url": "https://arxiv.org/html/2509.04239",
+   "kind": "research paper",
+   "substantive": true
+  },
+  {
+   "title": "slop-forensics (sam-paech, GitHub)",
+   "url": "https://github.com/sam-paech/slop-forensics",
+   "kind": "tool README",
+   "substantive": true
+  },
+  {
+   "title": "MFA vs. LLM: Is OpenAI's Metafiction Short Story Actually Good? (Lincoln Michel, 2025-03-17)",
+   "url": "https://countercraft.substack.com/p/mfa-vs-llm-is-openais-metafiction",
+   "kind": "craft criticism",
+   "substantive": true
+  },
+  {
+   "title": "Art Without Intention (Lincoln Michel, 2024-09-04)",
+   "url": "https://countercraft.substack.com/p/art-without-intention",
+   "kind": "craft criticism",
+   "substantive": true
+  },
+  {
+   "title": "What's Missing from AI Writing (Charles Schifano, 2023-10-27)",
+   "url": "https://charlesschifano.substack.com/p/whats-missing-from-ai-writing",
+   "kind": "craft criticism",
+   "substantive": true
+  },
+  {
+   "title": "Ted Chiang Q&A (CDH Princeton, 2025-08-12)",
+   "url": "https://cdh.princeton.edu/blog/ted-chiang/",
+   "kind": "interview",
+   "substantive": false
+  },
+  {
+   "title": "If you are using AI in your queries to agents, stop! (Kate Nash, 2026-02-23)",
+   "url": "https://slushpilemountaineering.substack.com/p/if-you-are-using-ai-in-your-queries",
+   "kind": "literary agent blog",
+   "substantive": true
+  },
+  {
+   "title": "Don't use AI to write your query letter (Naomi & James Jones, 2026-03-09)",
+   "url": "https://naomiandjamesjones.substack.com/p/dont-use-ai-to-write-your-query-letter",
+   "kind": "author/agent blog",
+   "substantive": true
+  },
+  {
+   "title": "Are Authors Really Using AI? (Alyssa Matesic)",
+   "url": "https://www.alyssamatesic.com/free-writing-resources/are-writers-really-using-ai",
+   "kind": "editor blog",
+   "substantive": false
+  },
+  {
+   "title": "Larian's head writer: AI text 'a 3/10 at best' (PC Gamer, Ted Litchfield)",
+   "url": "https://www.pcgamer.com/games/rpg/larians-head-writer-has-a-simple-answer-for-how-ai-generated-text-helps-development-it-doesnt-thanks-to-its-best-output-being-a-3-10-at-best-worse-than-his-worst-drafts/",
+   "kind": "games journalism (developer quotes)",
+   "substantive": true
+  },
+  {
+   "title": "The bigwigs who want AI-generated NPCs... (PC Gamer, Harvey Randall)",
+   "url": "https://www.pcgamer.com/gaming-industry/game-development/the-bigwigs-who-want-ai-generated-npcs-and-writing-think-youre-too-dumb-to-appreciate-a-good-story-dont-prove-them-right/",
+   "kind": "games op-ed",
+   "substantive": true
+  },
+  {
+   "title": "MMO life sim Seed's AI-powered avatars... (PC Gamer, 2026-07-24)",
+   "url": "https://www.pcgamer.com/games/sim/mmo-life-sim-seeds-ai-powered-avatars-prove-once-again-that-nothing-shatters-immersion-quicker-than-crappy-chatbot-dialogue/",
+   "kind": "games review",
+   "substantive": true
+  },
+  {
+   "title": "Where Winds Meet is full of AI chatbot NPCs (PC Gamer)",
+   "url": "https://www.pcgamer.com/games/rpg/wuxia-mmo-where-winds-meet-is-full-of-ai-chatbot-npcs-and-people-are-doing-all-the-standard-obscene-stuff-to-them-i-made-him-think-that-my-character-was-pregnant-with-his-child/",
+   "kind": "games journalism",
+   "substantive": true
+  },
+  {
+   "title": "Nvidia's AI-generated NPC dialogue kind of sucks (MobileSyrup, 2023-05-29)",
+   "url": "https://mobilesyrup.com/2023/05/29/nvidia-player-ai-conversations-tech-demo/",
+   "kind": "games journalism",
+   "substantive": true
+  },
+  {
+   "title": "The Hard Problem of AI NPCs (Gameindustry.com, 2026-05-18)",
+   "url": "https://www.gameindustry.com/news-industry-happenings/the-hard-problem-of-ai-npcs-why-character-consistency-matters-more-than-intelligence/",
+   "kind": "industry article",
+   "substantive": true
+  },
+  {
+   "title": "One third of game workers using genAI, but half think it's bad (Game Developer, 2026-02-03)",
+   "url": "https://www.gamedeveloper.com/business/one-third-of-game-workers-use-generative-ai-but-half-think-it-s-bad-for-the-industry",
+   "kind": "industry survey report",
+   "substantive": true
+  },
+  {
+   "title": "Shrine's Legacy developers deny AI usage claims (Outlook Respawn, 2025-12-15)",
+   "url": "https://respawn.outlookindia.com/gaming/gaming-news/shrines-legacy-devs-deny-ai-slop-chatgpt-rumors",
+   "kind": "games journalism",
+   "substantive": true
+  },
+  {
+   "title": "DMs Guild and DriveThruRPG ban AI written works (EN World thread)",
+   "url": "https://www.enworld.org/threads/dms-guild-and-drivethrurpg-ban-ai-written-works-requires-labels-for-ai-generated-art.698936/",
+   "kind": "forum thread with policy text",
+   "substantive": true
+  },
+  {
+   "title": "OneBookShelf bans 'primarily' AI-generated content (Epic Table Games, H. Tucker Cobey, 2023-07-24)",
+   "url": "https://epictablegames.com/onebookshelf-aka-drivethrurpg-bans-primarily-ai-generated-content/",
+   "kind": "RPG publisher blog",
+   "substantive": true
+  },
+  {
+   "title": "DriveThruRPG's New AI-Content Filter (EN World thread)",
+   "url": "https://www.enworld.org/threads/drivethrurpgs-new-ai-content-filter.707636/",
+   "kind": "forum thread",
+   "substantive": false
+  },
+  {
+   "title": "State of Play: Kobold Press Issues the No AI Pledge",
+   "url": "https://koboldpress.com/state-of-play-kobold-press-issues-the-no-ai-pledge/",
+   "kind": "publisher policy",
+   "substantive": true
+  },
+  {
+   "title": "The Human Touch: the growing list of tabletop companies banning AI (Geeknative)",
+   "url": "https://www.geeknative.com/221420/the-human-touch-the-growing-list-of-tabletop-companies-banning-ai/",
+   "kind": "industry roundup",
+   "substantive": true
+  },
+  {
+   "title": "AI is destroying crowdfunding (EN World thread, Aug 2026)",
+   "url": "https://www.enworld.org/threads/ai-is-destroying-crowdfunding.720435/",
+   "kind": "RPG community forum",
+   "substantive": true
+  },
+  {
+   "title": "I let AI write three complete novels (Jon Del Arroz, 2026-03-16)",
+   "url": "https://substack.aicentral.blog/p/i-let-ai-write-three-complete-novels",
+   "kind": "practitioner account",
+   "substantive": true
+  },
+  {
+   "title": "Obviously AI-generated (Goodreads list)",
+   "url": "https://www.goodreads.com/list/show/221372.Obviously_AI_generated",
+   "kind": "reader list",
+   "substantive": true
+  },
+  {
+   "title": "Can Kindle Unlimited Survive AI? (Book Riot)",
+   "url": "https://bookriot.com/can-kindle-unlimited-survive-ai/",
+   "kind": "books journalism",
+   "substantive": true
+  },
+  {
+   "title": "Do Readers Care If a Book Was Written with AI? (Inkfluence AI)",
+   "url": "https://www.inkfluenceai.com/blog/do-readers-care-ai-written-books-2026",
+   "kind": "content-farm blog (unsourced surveys)",
+   "substantive": false
+  },
+  {
+   "title": "Why Can't LLMs Do a Normal Metaphor? (Eleanor Stern, 2026-06-11)",
+   "url": "https://wickedtongue.substack.com/p/why-cant-llms-do-a-normal-metaphor",
+   "kind": "craft essay (paywalled; only preview read)",
    "substantive": false
   }
  ],
