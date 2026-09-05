@@ -53,6 +53,7 @@ than a hedge. Churning them would cost the design and buy nothing.
 ### chance_meeting_exposed (ENC-4) — Herald `events` — significance: major
 SLOTS: {npc} {counterpart} {settlement} {home}
 AUDIENCE: public
+⛔ **§B speaks only where the approach is known.**
 1. {counterpart} of {settlement} refused what {npc} of {home} offered, and the refusal was spoken of.
 2. In {settlement}, {counterpart} said no to {npc} of {home}, and said it where it could be heard.
 3. {npc} of {home} made an approach at {settlement}; {counterpart} declined it, and the declining did not stay between the two of them.

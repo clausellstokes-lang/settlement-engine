@@ -8,10 +8,14 @@
  * ⭐⭐ THE WORDS ARE THE CHAIR'S, AND THAT IS THE FINDING THIS FILE ENFORCES. The owner handed
  * ENC-5 to the chair in chat ("Also for ENC-5.. you write it") and the authored file was sealed
  * at `refs/preserve/enc5-words-2026-09-04` before any wiring existed.
- * docs/content/RECEIPT_POOLS_CHANCE_MEETING.md is a byte-identical copy of that seal, and
- * `envoyChanceMeetingReceiptPools.js` is its transcription. This walker re-derives the whole pool, the
- * `{outcome_phrase}` band table AND the reason from the DOCUMENT on every run, so the
- * transcription cannot fork from the corpus in either direction. ⛔ A corpus defect is a chair
+ * docs/content/RECEIPT_POOLS_CHANCE_MEETING.md was a byte-identical copy of that seal, and
+ * `envoyChanceMeetingReceiptPools.js` is its transcription. ⚠ IT IS NO LONGER BYTE-IDENTICAL AND
+ * THIS SENTENCE IS CORRECTED RATHER THAN LEFT TO RIDE: ENC-4b added ONE line to the §B block — the
+ * chair's own wiring rule, "§B speaks only where the approach is known" — and changed no authored
+ * sentence, no slot declaration and no §C row. The arm below pins that rule line and pins the
+ * SENTENCES against the seal, so the distinction is measured on every run rather than asserted
+ * here. This walker re-derives every pool, the `{outcome_phrase}` band table AND the reason from
+ * the DOCUMENT on every run, so the transcription cannot fork from the corpus in either direction. ⛔ A corpus defect is a chair
  * annex act; a word that cannot be wired is a finding back to the chair with the slot that
  * breaks, never an edit here.
  *
@@ -788,6 +792,31 @@ describe('ENC-4 phrased-kind registry — the meeting neither court arranged', (
     expect([live.rows.length, live.declared.length]).toEqual([5, 5]);
     // …and a kind with no declared anchors is refused rather than silently read against §A's.
     expect(() => annexBlocks(ANNEX_SOURCE, 'chance_meeting_never_authored')).toThrow(/no declared annex anchors/);
+  });
+
+  test('§B — the annex carries the wiring rule, and the authored sentences are still the seal\'s', () => {
+    // ⭐ THE ONE LINE ENC-4b ADDED TO A SEALED DOCUMENT, pinned so it cannot be dropped in
+    // silence. The kind ships only where the receipt recorded a direction; the writer enforces
+    // that in values, and this is the rule stated where the words live.
+    const scope = sectionSlice(ANNEX_SOURCE, ANNEX_BLOCKS.chance_meeting_exposed.section,
+      ANNEX_BLOCKS.chance_meeting_exposed.until);
+    expect(scope).toContain('**§B speaks only where the approach is known.**');
+    // ⛔ AND IT IS A RULE, NOT A VARIANT. It sits before the numbered pool and must never be read
+    // as one: the block still splits into five sentences and five declarations, so an added line
+    // that had landed inside the list would red here rather than ship as a sixth variant.
+    const live = annexBlocks(ANNEX_SOURCE, 'chance_meeting_exposed');
+    expect([live.rows.length, live.declared.length]).toEqual([5, 5]);
+    // anchored: the five-and-five split one line up proves these are the real authored rows.
+    expect(live.rows.join(' ')).not.toMatch(/speaks only where/);
+    // ⛔ THE AUTHORED SENTENCES THEMSELVES ARE UNTOUCHED. Every §B slot declaration is exactly the
+    // four the seal declares, in the seal's own order, so the added rule changed prose nowhere.
+    expect(live.declared).toEqual([
+      ['counterpart', 'settlement', 'npc', 'home'],
+      ['settlement', 'counterpart', 'npc', 'home'],
+      ['npc', 'home', 'settlement', 'counterpart'],
+      ['settlement', 'counterpart', 'npc', 'home'],
+      ['settlement', 'counterpart', 'npc', 'home'],
+    ]);
   });
 
   test('§B — the sentinel witness reads the same four slots the annex declares', () => {
