@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { stressorsStateProse, crisisBannerRung } from '../../../domain/display/stateProse/stressorsStateProse.js';
-import { generalStateProse, GENERAL_STATE_PROSE_SILENT } from '../../../domain/display/stateProse/generalStateProse.js';
-// FREE: a 37-line zero-import leaf. The desk's DS-GEN-5 suppression must key on the SAME
-// primary-stress ladder the arrival scene above it keys on, or the page could print an
-// ordinary market day underneath a siege banner.
-import { resolvePrimaryStress } from '../../../generators/stressPriority.js';
+// THE GENERAL DESK IS REACHED THROUGH ITS ONE CALLER, never imported here: its blocks live
+// on seven tabs and the registry's ARM 2 admits exactly one call site per desk. The reader
+// owns the §885.3 public gate and the desk's own primary-stress read.
+import { generalDeskLines } from '../generalDeskRead.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
 import { deriveAllActiveConditions } from '../../../domain/activeConditions.js';
 // FREE: `stressorsCore.js` is already in the first-paint closure, so reaching its canonical
@@ -116,20 +115,6 @@ const CONDITIONS_MOUNT = 'overview.activeConditions';
 const STRESSOR_MOUNT = 'overview.stressorLifecycle';
 
 /**
- * The GENERAL desk's four Overview positions. This tab is that desk's ONE caller (the mount
- * registry's ARM 2), which is why the reads below are assembled here rather than inside the
- * desk: every one of them is a field this component already holds for the section it draws.
- */
-const CONFLICTS_MOUNT = 'overview.conflicts';
-const WARNINGS_MOUNT = 'overview.warnings';
-const SITUATION_MOUNT = 'overview.situation';
-const ORIGIN_MOUNT = 'overview.origin';
-const HEALTH_MOUNT = 'overview.systemsHealth';
-const GROUND_MOUNT = 'overview.ground';
-const MARKET_MOUNT = 'overview.market';
-const INSTITUTIONS_MOUNT = 'overview.institutions';
-
-/**
  * The world stressor this settlement is inside, normalized — or null in a world that has
  * not been played. A world stressor names its settlements in `affectedSettlementIds`, so
  * this is a membership SELECTION, not a derivation; the FIRST match is the one the block's
@@ -157,7 +142,6 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
   const scores = dp.scores || {};
   const via = r.economicViability || {};
   const sp = eco.safetyProfile || {};
-  const _ps = r.powerStructure || {};
   const hist = r.history || {};
   const ra = r.resourceAnalysis || {};
   const stresses = (Array.isArray(r.stress) ? r.stress : r.stress ? [r.stress] : []).filter(Boolean);
@@ -204,55 +188,12 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
     drawnAtMount(CONDITIONS_MOUNT, stressorProse.conditionDuration),
   ].map((d) => d?.sentence).filter(Boolean);
 
-  // THE GENERAL DESK, read ONCE per render. Same public gate as the stressor desk above and
-  // for the same reason (§885.3: corpus prose is a PAID surface, and `overview` is not
-  // filtered off a free gallery dossier). The readings are this component's OWN reads of
-  // fields it already renders — the institution booleans in particular live at
-  // `economicState.compound.inst`, NOT at `settlement.compound.inst`, which the corpus title
-  // abbreviates and which would read undefined on every settlement ever generated.
-  const generalProse = publicDossier ? GENERAL_STATE_PROSE_SILENT : generalStateProse(
-    r,
-    {
-      scores,
-      prosperity: eco.prosperity,
-      safetyLabel: sp.safetyLabel,
-      viable: via.viable,
-      readinessLabel: dp.readiness?.label,
-      foodSecurityLabel: eco.foodSecurity?.label,
-      terrainType: r.config?.terrainType,
-      institutions: r.institutions,
-      tradeRouteAccess: r.config?.tradeRouteAccess,
-      isEntrepot: eco.isEntrepot,
-      inst: eco.compound?.inst,
-      conflicts: r.conflicts,
-      structuralViolations: r.structuralViolations,
-      structuralSuggestions: r.structuralSuggestions,
-      coherenceNotes: r.coherenceNotes,
-      govFaction: (_ps.factions || []).find((f) => f.isGoverning)?.faction,
-      tier: r.tier,
-      primaryStress: resolvePrimaryStress(stresses.map((v) => v.type).filter(Boolean)),
-      // The food arithmetic DS-GEN-6's demoted `deficit` dimension is derived from. It
-      // lives under economicViability.METRICS — ViabilityTab reads the same record — and
-      // an absent one reads as an unmeasured town rather than a fed one.
-      foodBalance: via.metrics?.foodBalance,
-    },
-    { seed: deskSeed, audience: deskAudience },
-  );
-  const healthLines = generalProse.overview.systemsHealth
-    .map((rung) => drawnAtMount(HEALTH_MOUNT, rung)?.sentence).filter(Boolean);
-  // One line per conflict, index-paired with `r.conflicts` — the desk keeps a null in place
-  // for a conflict it cannot key on, so the pairing cannot slip.
-  const conflictLines = generalProse.overview.conflicts
-    .map((rung) => drawnAtMount(CONFLICTS_MOUNT, rung)?.sentence ?? null);
-  const warningLines = generalProse.overview.warnings
-    .map((rung) => drawnAtMount(WARNINGS_MOUNT, rung)?.sentence).filter(Boolean);
-  const originLines = generalProse.overview.origin
-    .map((rung) => drawnAtMount(ORIGIN_MOUNT, rung)?.sentence).filter(Boolean);
-  const siteLines = [
-    drawnAtMount(GROUND_MOUNT, generalProse.overview.ground),
-    drawnAtMount(MARKET_MOUNT, generalProse.overview.market),
-    drawnAtMount(INSTITUTIONS_MOUNT, generalProse.overview.institutions),
-  ].map((d) => d?.sentence).filter(Boolean);
+  // THE GENERAL DESK, read ONCE per render THROUGH ITS ONE CALLER. The reader holds the
+  // §885.3 public gate and every reading the desk needs, because that leaf's blocks land on
+  // seven tabs and the registry admits one call site per desk.
+  const {
+    healthLines, conflictLines, warningLines, originLines, siteLines, situationLine,
+  } = generalDeskLines(r, { publicDossier, playerView, stresses }).overview;
 
   // Institution layout — guard `r.institutions` because sparse saves
   // (mid-migration, partial gen) can land here without an institutions
@@ -487,15 +428,12 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
             lifetimes — overwriting one with the other breaks THE PROMISE. It
             SUPPRESSES itself where a primary stress resolves, because the crisis
             banner's own visitor line is the right companion there. */}
-        {(() => {
-          const drawn = drawnAtMount(SITUATION_MOUNT, generalProse.overview.situation);
-          return drawn?.sentence ? (
-            <>
-              <hr style={{border:'none',borderTop:'1px solid #3a2a10',margin:'8px 0'}}/>
-              <p style={{fontSize:FS.sm,color:swatch['#D4C4A0'],lineHeight:1.55,margin:0,fontStyle:'italic'}}>{drawn.sentence}</p>
-            </>
-          ) : null;
-        })()}
+        {situationLine ? (
+          <>
+            <hr style={{border:'none',borderTop:'1px solid #3a2a10',margin:'8px 0'}}/>
+            <p style={{fontSize:FS.sm,color:swatch['#D4C4A0'],lineHeight:1.55,margin:0,fontStyle:'italic'}}>{situationLine}</p>
+          </>
+        ) : null}
       </div>}
 
       {/* ── SETTLEMENT ORIGIN ─────────────────────────────────────────────── */}

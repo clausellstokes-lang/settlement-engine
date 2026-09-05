@@ -39,6 +39,13 @@ import {
   generalStateProse,
   originRoutePoolKey,
   originTierPoolKey,
+  calamityFill,
+  eventAnchorDimension,
+  eventRecordPoolKey,
+  eventTypePoolKey,
+  foundedPoolKey,
+  recencyFramingPoolKey,
+  significantEvent,
   groundPoolKey,
   institutionsPoolKey,
   marketPoolKey,
@@ -62,7 +69,7 @@ import { getTerrainType } from '../../src/generators/terrainHelpers.js';
 import { ROUTE_TO_SCENE } from '../../src/generators/narrativeGenerator.js';
 import { ORIGIN_ARMS, originArmKey } from '../../src/generators/narrative/settlementOriginProse.js';
 import { resolvePrimaryStress } from '../../src/generators/stressPriority.js';
-import { HISTORICAL_EVENTS_DATA } from '../../src/data/historyData.js';
+import { EVENT_TYPE_NAMES, HISTORICAL_EVENTS_DATA } from '../../src/data/historyData.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { mustExtract } from '../helpers/sourceContract.js';
 import { fillShapeViolation, mergeSlotShapes, parseSlotShapes } from '../../scripts/lib/dossier-slot-shapes.mjs';
@@ -81,6 +88,8 @@ const mergedShapes = () => mergeSlotShapes([
 const BLOCK_POOLS = Object.freeze({
   'DS-GEN-2': 3, 'DS-GEN-3': 42, 'DS-GEN-5': 5, 'DS-GEN-6': 9, 'DS-GEN-12': 5, 'DS-GEN-13': 4,
   'DS-GEN-7': 8, 'DS-GEN-17': 5,
+  // The history chapter (DESK-GEN2 car 1).
+  'DS-GEN-9': 15, 'DS-GEN-14': 3, 'DS-GEN-16': 5,
 });
 
 /**
@@ -88,7 +97,7 @@ const BLOCK_POOLS = Object.freeze({
  * so the arm below can hold every OTHER block to `[]` and this one to its dimension, rather
  * than exempting it — an exemption is how a block quietly grows a dimension nobody answers.
  */
-const DIMENSIONED = Object.freeze({ 'DS-GEN-6': 'deficit' });
+const DIMENSIONED = Object.freeze({ 'DS-GEN-6': 'deficit', 'DS-GEN-9': 'anchor' });
 
 /** @param {string} id @returns {string[]} */
 const poolsOf = (id) => Object.keys(DOSSIER_STATE_PROSE_GENERAL[id].pools);
@@ -203,7 +212,8 @@ describe('the general desk — guard the guard', () => {
     // literal fill table.
     const shapes = mergedShapes();
     expect(Object.keys(SLOT_FILL_SHAPES).sort())
-      .toEqual(['faction', 'faction2', 'govFaction', 'issue', 'settlement', 'stakes']);
+      .toEqual(['calamity', 'event', 'faction', 'faction2', 'govFaction', 'issue',
+        'settlement', 'stakes', 'timeband_age', 'timeband_since']);
     for (const [slot, shape] of Object.entries(SLOT_FILL_SHAPES)) {
       expect(shape, `{${slot}} shape`).toBe(shapes.shapeOf(slot));
     }
@@ -908,5 +918,163 @@ describe('DS-GEN-7 — the record disagreeing with itself, and five pools the pr
     // half of the same `&&` matches often — which is what makes it half-live and silent.
     expect(boomNamed, 'an event named Boom / Trade Route Opened appeared').toBe(0);
     expect(collapseNamed, 'the collapse half of the predicate also stopped matching').toBeGreaterThan(0);
+  });
+});
+
+/**
+ * ── THE HISTORY CHAPTER (DESK-GEN2) ─────────────────────────────────────────────────
+ * DS-GEN-9 at `history.identity`, DS-GEN-14 at `history.founded`, DS-GEN-16 at
+ * `history.record`. Every map below is asserted TOTAL IN BOTH DIRECTIONS — every producer
+ * token reaches a pool or is named as measured residue, and every pool of the block is
+ * claimed by a token or is named as unreachable — which is this leaf's standing discipline.
+ */
+describe('the history chapter', () => {
+  /** The eight coarse event types the generator writes, measured rather than transcribed. */
+  const generatedEventTypes = () => {
+    const types = new Set();
+    for (const seed of ['sf-test-2026-04', 'gen2-a', 'gen2-b']) {
+      for (const settType of ['hamlet', 'town', 'city', 'metropolis']) {
+        const s = generateSettlementPipeline(
+          { settType, culture: 'germanic', tradeRouteAccess: 'road' }, null, { seed, customContent: {} },
+        );
+        for (const e of (s.history?.historicalEvents || [])) types.add(e.type);
+      }
+    }
+    return types;
+  };
+
+  it('DS-GEN-9 event types: the corpus pools and the producer vocabulary are the SAME EIGHT', () => {
+    const poolTypes = poolsOf('DS-GEN-9')
+      .filter((k) => k.startsWith('event type: ')).map((k) => k.slice('event type: '.length)).sort();
+    expect(poolTypes.length, 'the corpus event-type pool set moved').toBe(8);
+    const written = [...generatedEventTypes()].sort();
+    // NON-VACUITY: the sweep really produced events before either direction is asserted.
+    expect(written.length, 'the generator wrote no event types').toBeGreaterThan(0);
+    // DIRECTION 1 — every type the generator writes reaches a pool.
+    for (const type of written) {
+      expect(eventTypePoolKey(type), `the generator writes '${type}' and no pool claims it`)
+        .toBe(`event type: ${type}`);
+    }
+    // DIRECTION 2 — every pool is claimed by a type the generator writes.
+    expect(written).toEqual(poolTypes);
+    // A type outside the vocabulary renders NOTHING rather than the nearest neighbour.
+    expect(eventTypePoolKey('cheese_incident')).toBeNull();
+    expect(eventTypePoolKey(undefined)).toBeNull();
+  });
+
+  it('the recency ladder is HistoryTab\'s OWN ladder, and both sides of every cut are driven', () => {
+    // The mirror is asserted against the component's literal, so the desk cannot band a year
+    // differently from the label the tab prints beside the same event row.
+    const body = src('src/components/new/tabs/HistoryTab.jsx');
+    mustExtract(
+      body,
+      "yrs<=10?'Recent':yrs<=30?'Living memory':yrs<=80?'Last century':yrs<=200?'Ancient':'Deep history'",
+      'the recency ladder in HistoryTab.jsx',
+    );
+    for (const [years, label] of /** @type {ReadonlyArray<[number, string]>} */ ([
+      [0, 'Recent'], [10, 'Recent'], [11, 'Living memory'], [30, 'Living memory'],
+      [31, 'Last century'], [80, 'Last century'], [81, 'Ancient'], [200, 'Ancient'],
+      [201, 'Deep history'], [9999, 'Deep history'],
+    ])) expect(recencyFramingPoolKey(years), `${years} years ago`).toBe(`recency framing: ${label}`);
+    // TOTAL the other way: the five pools are exactly the five labels.
+    expect(poolsOf('DS-GEN-9').filter((k) => k.startsWith('recency framing: ')).length).toBe(5);
+    // A non-number is not a year: it renders nothing rather than banding zero.
+    expect(recencyFramingPoolKey('recent')).toBeNull();
+    expect(recencyFramingPoolKey(Number.NaN)).toBeNull();
+  });
+
+  it('{calamity} is BARE-COMMON and invents nothing: total over EVENT_TYPE_NAMES, refusing the rest', () => {
+    // DIRECTION 1 — the estate's whole authored vocabulary yields a word.
+    const values = Object.values(EVENT_TYPE_NAMES);
+    expect(values.length, 'the event-name table collapsed').toBeGreaterThan(25);
+    for (const name of values) {
+      const word = calamityFill(name);
+      expect(word, `${name} yields no calamity word`).toBeTruthy();
+      expect(word, `${name}: the article survived`).not.toMatch(/^the /i);
+      expect(word, `${name}: not bare-common`).toBe(String(word).toLowerCase());
+    }
+    // DIRECTION 2 — a name carrying an embedded proper noun is REFUSED, not lowercased. The
+    // opt-in ancient-ruin event is named this way and "the fall of ecserys" is the defect.
+    expect(calamityFill('The Fall of Ecserys')).toBeUndefined();
+    expect(calamityFill('Steinmark')).toBeUndefined();
+    expect(calamityFill(null)).toBeUndefined();
+    // ⛔ THE DEFECT THIS FUNCTION EXISTS FOR, driven rather than described: the seam supplies
+    // its own article, so the raw name would print a doubled one.
+    expect(`The ${calamityFill('The Economic Divide')}`).toBe('The economic divide');
+  });
+
+  it('DS-GEN-14 and DS-GEN-16 are total over their own pools, and strict about `anchored`', () => {
+    // DS-GEN-14 — three pools, three antecedents, no fourth state.
+    expect(foundedPoolKey({ founding: null, age: 40 })).toBe('GROWN-UNRECORDED');
+    expect(foundedPoolKey({ founding: {}, age: 40 })).toBe('FOUNDED-YOUNG');
+    expect(foundedPoolKey({ founding: {}, age: 400 })).toBe('FOUNDED-OLD');
+    expect(new Set([
+      foundedPoolKey({ founding: null, age: 40 }),
+      foundedPoolKey({ founding: {}, age: 40 }),
+      foundedPoolKey({ founding: {}, age: 400 }),
+    ]).size).toBe(3);
+    expect([...new Set([
+      foundedPoolKey({ founding: null, age: 1 }), foundedPoolKey({ founding: {}, age: 1 }),
+      foundedPoolKey({ founding: {}, age: 900 }),
+    ])].sort()).toEqual(poolsOf('DS-GEN-14').sort());
+    expect(foundedPoolKey(null)).toBeNull();
+
+    // DS-GEN-16 — five pools over the whole record.
+    const blow = (anchored, yearsAgo) => ({ anchored, yearsAgo, lastingEffects: ['x'] });
+    expect(eventRecordPoolKey([])).toBe('UNMARKED');
+    expect(eventRecordPoolKey([{ anchored: true, yearsAgo: 5, lastingEffects: [] }])).toBe('UNMARKED');
+    expect(eventRecordPoolKey([blow(true, 5)])).toBe('ANCHORED-RECENT');
+    expect(eventRecordPoolKey([blow(true, 500)])).toBe('ANCHORED-OLD');
+    expect(eventRecordPoolKey([blow(true, 5), blow(true, 9)])).toBe('LAYERED-ANCHORED');
+    expect(eventRecordPoolKey([blow(false, 5)])).toBe('RECORDED-UNANCHORED');
+    expect([...new Set([
+      eventRecordPoolKey([]), eventRecordPoolKey([blow(true, 5)]), eventRecordPoolKey([blow(true, 500)]),
+      eventRecordPoolKey([blow(true, 5), blow(true, 9)]), eventRecordPoolKey([blow(false, 5)]),
+    ])].sort()).toEqual(poolsOf('DS-GEN-16').sort());
+    // ⚠ AN ABSENT `anchored` IS NOT A `false`. A record that has not been asked the question
+    // reads UNMARKED, and counting it as unanchored would state something the record does not.
+    expect(eventRecordPoolKey([{ yearsAgo: 5, lastingEffects: ['x'] }])).toBe('UNMARKED');
+    expect(eventAnchorDimension(undefined)).toBeNull();
+    expect(eventAnchorDimension(true)).toBe('anchored');
+    expect(eventAnchorDimension(false)).toBe('not anchored');
+    // The marker SELECTION is stated, not left to array order: the nearest ANCHORED row wins.
+    expect(significantEvent([blow(false, 1), blow(true, 90), blow(true, 20)]).yearsAgo).toBe(20);
+    expect(significantEvent([blow(false, 8), blow(false, 3)]).yearsAgo).toBe(3);
+    expect(significantEvent([])).toBeNull();
+  });
+
+  it('MEASURED RESIDUE: the duration ladder tops out below this chapter\'s subject', () => {
+    // ⛔ THE FINDING, PINNED SO IT CANNOT DECAY. `{timeband_since}` is the ADVERBIAL column
+    // and the sixth band (`older_than_bearers`) is PREDICATE-ONLY, so the slot is unfillable
+    // beyond a generation — while generated history is mostly centuries old. Both halves are
+    // counted here: the day either the ladder or the generator moves, this arm moves with it.
+    let events = 0; let beyond = 0; let anchoredReligious = 0;
+    for (const seed of ['sf-test-2026-04', 'gen2-a', 'gen2-b']) {
+      for (const settType of ['hamlet', 'town', 'city', 'metropolis']) {
+        const s = generateSettlementPipeline(
+          { settType, culture: 'germanic', tradeRouteAccess: 'road' }, null, { seed, customContent: {} },
+        );
+        for (const e of (s.history?.historicalEvents || [])) {
+          events += 1;
+          if ((e.yearsAgo || 0) > 60) beyond += 1;
+          if (e.type === 'religious' && e.anchored === true) anchoredReligious += 1;
+        }
+      }
+    }
+    expect(events, 'the sweep generated no events').toBeGreaterThan(80);
+    // The MAJORITY of the record sits past the ladder's last adverbial band.
+    expect(beyond / events, 'the record stopped being mostly ancient').toBeGreaterThan(0.6);
+    // ⛔ AND ONE POOL FALLS SILENT BECAUSE OF IT. `event type: religious` carries four
+    // variants; the two that name no duration are marked for the OTHER side of the anchor
+    // dimension, so an anchored religious event older than a generation has nothing eligible
+    // to say. The cure is a corpus or ladder act, not a desk act.
+    expect(anchoredReligious, 'no anchored religious event was generated').toBeGreaterThan(0);
+    const religious = DOSSIER_STATE_PROSE_GENERAL['DS-GEN-9'].pools['event type: religious'];
+    const unslotted = religious.filter((v) => !(v.slots || []).includes('timeband_since'));
+    expect(unslotted.length, 'the religious pool changed shape').toBeGreaterThan(0);
+    expect(
+      unslotted.every((v) => (v.marks || []).includes('not anchored')),
+      'a duration-free ANCHORED variant appeared — the religious silence below is cured',
+    ).toBe(true);
   });
 });

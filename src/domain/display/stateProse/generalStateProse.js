@@ -72,6 +72,13 @@
 import { DOSSIER_STATE_PROSE_GENERAL } from '../../../data/dossierStateProse/general.generated.js';
 import { scoreBand } from '../defenseScoreBands.js';
 import { liveInstitutions } from '../../institutions/institutionRoster.js';
+// FREE: `heraldCausalGrammar.js` is a ZERO-IMPORT display leaf, and it holds §0d's own
+// six-band duration table in its four print positions. ⚠ TWO SIBLING DESKS DECLINED
+// `{timeband_age}` FOR WANT OF A "duration former in the tree" (powerStateProse.js:900,
+// stressorsStateProse.js:78) — `timeBandOf`/`timeBandWord` ARE that former, and the
+// declination is stale at this tip rather than wrong when it was written. Measured here,
+// not assumed: see TIMEBAND_YEARS_PER_TICK.
+import { timeBandOf, timeBandWord } from '../heraldCausalGrammar.js';
 import { readStateProse } from './stateProseKernel.js';
 import { legibilityRung } from './legibilityRung.js';
 
@@ -98,6 +105,13 @@ export const SLOT_FILL_SHAPES = Object.freeze({
   faction2: 'proper',
   issue: 'phrase',
   stakes: 'phrase',
+  // The history chapter. `{calamity}` is the annex's one `bare-common` fill in this leaf —
+  // the seams supply their own article — and the two duration slots are `phrase` because
+  // they land mid-sentence and must read lowercase there.
+  event: 'proper',
+  calamity: 'bare-common',
+  timeband_since: 'phrase',
+  timeband_age: 'phrase',
 });
 
 /**
@@ -388,6 +402,207 @@ function phraseFill(value) {
  * writes ten pools, so fourteen of them would still reach no pool. Both halves are pinned in
  * the desk suite, so neither figure can decay unnoticed.
  */
+
+// ── THE HISTORY CHAPTER · DS-GEN-9, DS-GEN-14, DS-GEN-16 ────────────────────────────
+
+/**
+ * How many weeks one YEAR of recorded history is, handed to `timeBandOf` as its tick
+ * length. The function takes elapsed TICKS and a tick length in weeks, which is exactly the
+ * parameterisation a year needs; nothing here re-derives the band boundaries.
+ *
+ * ⚠ THE LADDER TOPS OUT WELL BELOW THIS CHAPTER'S SUBJECT, AND THAT IS THE FINDING BELOW.
+ */
+const TIMEBAND_YEARS_PER_TICK = 52;
+
+/**
+ * `{timeband_since}` — the ADVERBIAL column ("the fire came {timeband_since}").
+ *
+ * ⛔ IT IS NULL BEYOND A GENERATION, BY DESIGN, AND THAT DARKENS REAL PROSE. The sixth band
+ * (`older_than_bearers`) is PREDICATE-ONLY: its attributive, span and since columns are all
+ * `null`, because "older than its bearers" cannot follow a preposition. MEASURED over 108
+ * generated historical events: 89 of them (82 percent) are more than sixty years old, so
+ * this returns `undefined` for most of the record and anchored liveness drops every variant
+ * naming the slot. The pools still speak through their variants that do not name it —
+ * except `event type: religious`, whose only unslotted variants are marked for the other
+ * side of the anchor dimension, and which therefore falls silent on an anchored religious
+ * event. Declared and pinned rather than papered over: the cure is a corpus or ladder act
+ * (a seventh band, or event prose that does not lean on the adverbial), not a desk act.
+ * @param {unknown} years @returns {string|undefined}
+ */
+function timebandSinceFill(years) {
+  if (typeof years !== 'number' || !Number.isFinite(years)) return undefined;
+  return timeBandWord(timeBandOf(years, TIMEBAND_YEARS_PER_TICK), 'since') || undefined;
+}
+
+/**
+ * `{timeband_age}` — the PREDICATE column ("{settlement} is {timeband_age}"). Total over the
+ * whole ladder: the sixth band exists precisely to fill this position, so unlike the
+ * adverbial this never darkens on an old town.
+ * @param {unknown} years @returns {string|undefined}
+ */
+function timebandAgeFill(years) {
+  if (typeof years !== 'number' || !Number.isFinite(years)) return undefined;
+  return timeBandWord(timeBandOf(years, TIMEBAND_YEARS_PER_TICK), 'predicate') || undefined;
+}
+
+/**
+ * `{calamity}` — a BARE-COMMON fill: the recorded blow by its own word, with the article
+ * stripped, because every seam supplies its own ("The {calamity} is {timeband_age} now").
+ *
+ * ⛔ THE DEFECT THIS REPLACES WAS MEASURED IN RENDERED PROSE, not reasoned about: filling
+ * the slot with the event's name verbatim printed **"The The Economic Divide is older than
+ * its bearers now"**. A doubled article in front of a reader is the label trap one layer
+ * down from the pool.
+ *
+ * ⭐ AND IT INVENTS NOTHING, which the annex requires in the same breath as it forbids "a
+ * baked or invented noun". The annex routes this slot from a `historicalEvents[]` row's
+ * `type`; at this tip that field is the COARSE eight-value category (`disaster`,
+ * `political`, `economic`, …), and every one of those is an ADJECTIVE that cannot be a bare
+ * common noun without someone inventing the head noun for it. The row's `name` is the
+ * estate's own type-to-word table one layer finer — `historyGenerator.js:291` writes
+ * `EVENT_TYPE_NAMES[type]` into it — so the word is authored, not minted here. ⚠ THE
+ * DEVIATION FROM THE ANNEX IS THEREFORE DELIBERATE AND IS RAISED FOR THE CHAIR, with the
+ * alternative costed: routing the coarse `type` instead needs eight head nouns nobody has
+ * authored, which is precisely the invention the same sentence forbids.
+ *
+ * REFUSED RATHER THAN REPAIRED where the name carries an embedded proper noun: the
+ * opt-in ancient-ruin event is named "The Fall of <Ruin>", and lowercasing that would print
+ * "the fall of ecserys". A name that is not article-plus-Title-Case yields `undefined` and
+ * anchored liveness drops the variant. The desk test drives ALL THIRTY `EVENT_TYPE_NAMES`
+ * values through this function and asserts a word comes back for every one.
+ * @param {unknown} eventName @returns {string|undefined}
+ */
+export function calamityFill(eventName) {
+  const match = /^The\s+(.+)$/i.exec(text(eventName));
+  if (!match) return undefined;
+  const rest = match[1];
+  return /^[A-Z][a-z]+(?: [A-Z][a-z]+)*$/.test(rest) ? rest.toLowerCase() : undefined;
+}
+
+/**
+ * THE EVENT THIS CHAPTER SPEAKS ABOUT — a SELECTION, not a derivation, and the distinction
+ * is the same one `worldStressorFor` draws on the Overview tab. The record holds several
+ * events and the corpus writes ONE sentence per lens, so somebody must choose which row the
+ * lens is about. The choice is stated rather than left to array order: the most recent
+ * ANCHORED event (the record's own word for "this still bears on the town"), and failing
+ * that the most recent event at all. Ties go to the earlier array position, which is the
+ * producer's own order.
+ * @param {unknown} events @returns {object|null}
+ */
+export function significantEvent(events) {
+  const rows = (Array.isArray(events) ? events : []).filter((e) => e && typeof e === 'object');
+  if (rows.length === 0) return null;
+  const nearest = (list) => list.reduce(
+    (best, row) => (best === null || (typeof row.yearsAgo === 'number' && typeof best.yearsAgo === 'number'
+      && row.yearsAgo < best.yearsAgo) ? row : best),
+    /** @type {any} */ (null),
+  );
+  return nearest(rows.filter((e) => e.anchored === true)) || nearest(rows);
+}
+
+/**
+ * DS-GEN-9's demoted `anchor` dimension (kernel law 5). STRICTLY BOOLEAN, and `undefined` is
+ * NOT "not anchored": measured over 202 generated events the field is a real boolean on most
+ * rows and simply absent on others, and an absent flag is a record that has not answered the
+ * question rather than one that answered no. An unanswered dimension reads as silence.
+ * @param {unknown} anchored @returns {string|null} a value of STATE_MARK_DIMENSIONS.anchor
+ */
+export function eventAnchorDimension(anchored) {
+  if (anchored === true) return 'anchored';
+  if (anchored === false) return 'not anchored';
+  return null;
+}
+
+/**
+ * DS-GEN-9's per-event pool, keyed on the CANONICAL coarse `type` token. CLOSED over the
+ * eight types the corpus writes a pool for, which are exactly the eight
+ * `historicalEvents[].type` values measured across 202 events on 48 settlements — a rare
+ * total identity, asserted in both directions by the desk test.
+ * @param {unknown} type @returns {string|null}
+ */
+export function eventTypePoolKey(type) {
+  const key = `event type: ${text(type)}`;
+  return CORPUS['DS-GEN-9'].pools[key] ? key : null;
+}
+
+/**
+ * The five recency labels DS-GEN-9 frames the record with.
+ *
+ * ⚠ THIS IS A MIRROR OF `HistoryTab.jsx`'s OWN LADDER, not a second opinion, and the desk
+ * test extracts the component's literal through `mustExtract` and drives both sides of every
+ * cut. The tab prints the label beside each event already; a desk that banded the same years
+ * differently would put a sentence about "living memory" next to a row labelled "Ancient".
+ * @param {unknown} yearsAgo @returns {string|null}
+ */
+export function recencyFramingPoolKey(yearsAgo) {
+  if (typeof yearsAgo !== 'number' || !Number.isFinite(yearsAgo)) return null;
+  const label = yearsAgo <= 10 ? 'Recent'
+    : yearsAgo <= 30 ? 'Living memory'
+      : yearsAgo <= 80 ? 'Last century'
+        : yearsAgo <= 200 ? 'Ancient' : 'Deep history';
+  const key = `recency framing: ${label}`;
+  return CORPUS['DS-GEN-9'].pools[key] ? key : null;
+}
+
+/**
+ * DS-GEN-14's pool — founded once, grown since. The cut between YOUNG and OLD is the time
+ * band's own `a_generation` ceiling rather than a number invented here, so the sentence and
+ * the `{timeband_age}` word inside it can never disagree about which side of a generation
+ * the town sits on.
+ *
+ * ⛔ `GROWN-UNRECORDED` IS REACHABLE AND UNREACHED, and the distinction matters: it needs a
+ * record with NO `history.founding`, and the generator wrote one on 48 of 48 settlements. It
+ * lights on a stored or hand-authored record that lacks the block, which is a real shape the
+ * estate can hold, so it is a FINDING rather than a defect. `FOUNDED-YOUNG` is the same
+ * shape at the other end: the youngest town measured was 81 years old.
+ * @param {{founding?: unknown, age?: unknown}|null|undefined} history @returns {string|null}
+ */
+export function foundedPoolKey(history) {
+  if (!history || typeof history !== 'object') return null;
+  const key = !history.founding ? 'GROWN-UNRECORDED'
+    : (typeof history.age === 'number' && Number.isFinite(history.age)
+      && timeBandOf(history.age, TIMEBAND_YEARS_PER_TICK).id !== 'older_than_bearers')
+      ? 'FOUNDED-YOUNG' : 'FOUNDED-OLD';
+  return CORPUS['DS-GEN-14'].pools[key] ? key : null;
+}
+
+/**
+ * DS-GEN-16's pool — what the years left standing, read over the WHOLE record rather than
+ * one row. The order is most-constrained first and the order is the argument: LAYERED is a
+ * statement about the record having several anchored blows and cannot be told from a single
+ * row; UNMARKED is the pure absence and must be tested before anything that assumes a blow.
+ *
+ * ⚠ `anchored` IS READ STRICTLY. An absent flag is not a `false`: it counts toward neither
+ * the anchored nor the unanchored arm, so a record of unanswered rows reads UNMARKED, which
+ * is the honest statement about a record that has not been asked the question.
+ * @param {unknown} events @returns {string|null}
+ */
+export function eventRecordPoolKey(events) {
+  const rows = (Array.isArray(events) ? events : []).filter((e) => e && typeof e === 'object');
+  const anchored = rows.filter((e) => e.anchored === true
+    && Array.isArray(e.lastingEffects) && e.lastingEffects.length > 0);
+  const recorded = rows.filter((e) => e.anchored === false
+    && Array.isArray(e.lastingEffects) && e.lastingEffects.length > 0);
+  const key = anchored.length > 1 ? 'LAYERED-ANCHORED'
+    : anchored.length === 1
+      ? (timeBandOf(Number(anchored[0].yearsAgo) || 0, TIMEBAND_YEARS_PER_TICK).id === 'older_than_bearers'
+        ? 'ANCHORED-OLD' : 'ANCHORED-RECENT')
+      : recorded.length > 0 ? 'RECORDED-UNANCHORED' : 'UNMARKED';
+  return CORPUS['DS-GEN-16'].pools[key] ? key : null;
+}
+
+/**
+ * The event DS-GEN-16's `{calamity}` names — the one the pool key was decided by, so the
+ * sentence and the word inside it describe the same blow. Null where the key is about an
+ * absence, which is exactly where no variant names the slot.
+ * @param {unknown} events @returns {object|null}
+ */
+function recordCalamityEvent(events) {
+  const rows = (Array.isArray(events) ? events : []).filter((e) => e && typeof e === 'object'
+    && Array.isArray(e.lastingEffects) && e.lastingEffects.length > 0);
+  return significantEvent(rows.filter((e) => e.anchored === true))
+    || significantEvent(rows.filter((e) => e.anchored === false));
+}
 
 // ── DS-GEN-2 · Overview/Power › Active conflicts ────────────────────────────────────
 
@@ -808,6 +1023,10 @@ export function institutionsPoolKey(inst) {
  *   ground: LegibilityRung|null,
  *   market: LegibilityRung|null,
  *   institutions: LegibilityRung|null,
+ * }>, history: Readonly<{
+ *   identity: ReadonlyArray<LegibilityRung|null>,
+ *   founded: LegibilityRung|null,
+ *   record: LegibilityRung|null,
  * }>}>}
  */
 export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
@@ -820,6 +1039,11 @@ export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
     ground: null,
     market: null,
     institutions: null,
+  }),
+  history: Object.freeze({
+    identity: Object.freeze([]),
+    founded: null,
+    record: null,
   }),
 });
 
@@ -842,7 +1066,11 @@ export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
  *   conflicts?: Array<{intensity?: unknown, parties?: unknown, issue?: unknown,
  *     stakes?: unknown}|null>|null,
  *   govFaction?: unknown, structuralViolations?: unknown, structuralSuggestions?: unknown,
- *   coherenceNotes?: Array<{type?: unknown, tab?: unknown}|null>|null}} [readings]
+ *   coherenceNotes?: Array<{type?: unknown, tab?: unknown}|null>|null,
+ *   history?: {age?: unknown, historicalCharacter?: unknown,
+ *     founding?: {foundedBy?: unknown, initialChallenge?: unknown}|null,
+ *     historicalEvents?: Array<{type?: unknown, name?: unknown, yearsAgo?: unknown,
+ *       anchored?: unknown, lastingEffects?: unknown}|null>|null}|null}} [readings]
  *   the caller's own reads off the settlement it
  *   already holds; see institutionsPoolKey for why `inst` is passed and not reached for.
  *   ⚠ THE LAST FIVE ARE THE DS-GEN-2 AND DS-GEN-7 READS AND THEY WERE UNDECLARED. The body
@@ -925,6 +1153,58 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
       .map((note) => warningLine(coherencePoolKey(note))),
   ].filter((line) => line && line.sentence));
 
+  // ── THE HISTORY CHAPTER ────────────────────────────────────────────────────────────
+  // DS-GEN-9 speaks about the TOWN and about the one event it selects; DS-GEN-16 speaks
+  // about the RECORD as a whole. Two blocks, two questions, two positions — the C3 law
+  // forbids one BLOCK speaking twice, not two blocks reading one record, which the page
+  // already does with `history.currentTensions` on three tabs.
+  const hist = readings.history && typeof readings.history === 'object' ? readings.history : {};
+  const events = Array.isArray(hist.historicalEvents) ? hist.historicalEvents : [];
+  const marker = significantEvent(events);
+  const anchor = eventAnchorDimension(marker?.anchored);
+  // ⛔ THREE OF DS-GEN-9's SLOTS ARE DELIBERATELY UNFILLED, each for a MEASURED reason, and
+  // together they cost ONE variant of the `founding` pool's five. The pool still speaks —
+  // two of its variants name only `{settlement}` — which is the powerStateProse precedent
+  // for `{timeband_age}` and is measured here rather than assumed.
+  //   • `{founder}` — the annex declares it `proper` (A NAME). Its only producer,
+  //     `history.founding.foundedBy`, writes a lowercase DESCRIPTIVE PHRASE: "a miller who
+  //     built a mill and found customers before they found customers". Filling it would mean
+  //     this desk declaring one shape and supplying another, which is the shape contract
+  //     lying rather than holding. ⚠ RAISED FOR THE CHAIR: the annex's shape and the only
+  //     writer of the field disagree, and only one of them can move.
+  //   • `{challenge}` — `phrase` and fillable, but it is named by the SAME single variant
+  //     `{founder}` is, so filling it alone buys nothing.
+  //   • `{reason}` — this is the wiring-time decision the annex explicitly left open ("it
+  //     has no producer, so this is decidable at wiring and not before"). DECIDED: the only
+  //     candidate, `history.founding.reason`, is a PREDICATE CLAUSE — "was founded by
+  //     foresters managing the woodland under charter" — and every seam wants a bare noun
+  //     ("out by the {reason} that followed"). It is the wrong grammatical category, and a
+  //     verb phrase in a noun's seam is a broken sentence in front of a reader.
+  const identitySlots = {
+    ...slots,
+    timeband_age: timebandAgeFill(hist.age),
+  };
+  /** @param {string|null} poolKey @param {Record<string, unknown>} [extra] */
+  const identityLine = (poolKey, extra = {}) => (poolKey
+    ? legibilityRung('', readStateProse(CORPUS, 'DS-GEN-9', poolKey, {
+      ...options, slots: { ...identitySlots, ...extra }, ...(anchor ? { dimensions: { anchor } } : {}),
+    }), [])
+    : null);
+  const markerSlots = marker ? {
+    event: properFill(text(marker.name)),
+    timeband_since: timebandSinceFill(marker.yearsAgo),
+    timeband_age: timebandAgeFill(marker.yearsAgo),
+  } : {};
+  const identity = Object.freeze([
+    identityLine(hist.founding ? 'founding' : null),
+    identityLine(text(hist.historicalCharacter) ? 'historicalCharacter' : null),
+    identityLine(marker ? eventTypePoolKey(marker.type) : null, markerSlots),
+    identityLine(marker ? recencyFramingPoolKey(marker.yearsAgo) : null, markerSlots),
+  ].filter((l) => l && l.sentence));
+
+  const calamityRow = recordCalamityEvent(events);
+  const recordKey = events.length > 0 ? eventRecordPoolKey(events) : null;
+
   return Object.freeze({
     overview: Object.freeze({
       conflicts,
@@ -935,6 +1215,20 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
       ground: rung('DS-GEN-12', groundPoolKey(readings.terrainType), ''),
       market: rung('DS-GEN-13', marketPoolKey(readings), ''),
       institutions: rung('DS-GEN-17', institutionsPoolKey(readings.inst), ''),
+    }),
+    history: Object.freeze({
+      identity,
+      founded: rung('DS-GEN-14', foundedPoolKey(hist), ''),
+      record: recordKey
+        ? legibilityRung('', readStateProse(CORPUS, 'DS-GEN-16', recordKey, {
+          ...options,
+          slots: {
+            ...slots,
+            calamity: calamityFill(calamityRow?.name),
+            timeband_age: timebandAgeFill(calamityRow?.yearsAgo),
+          },
+        }), [])
+        : null,
     }),
   });
 }

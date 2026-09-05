@@ -379,6 +379,15 @@ export const DOSSIER_MOUNTS = Object.freeze([
   Object.freeze({
     mount: 'daily_life.standingOfLiving', tab: 'daily_life', desk: 'economy', blockId: 'DS-ECO-8', rung: 'sentence',
   }),
+  Object.freeze({
+    mount: 'history.identity', tab: 'history', desk: 'general', blockId: 'DS-GEN-9', rung: 'sentence', dimensions: ['anchor'],
+  }),
+  Object.freeze({
+    mount: 'history.founded', tab: 'history', desk: 'general', blockId: 'DS-GEN-14', rung: 'sentence',
+  }),
+  Object.freeze({
+    mount: 'history.record', tab: 'history', desk: 'general', blockId: 'DS-GEN-16', rung: 'sentence',
+  }),
 ]);
 
 /**
@@ -400,10 +409,9 @@ export const UNMOUNTED_BLOCKS = Object.freeze([
   'DS-ECO-5', 'DS-SUP-1', 'DS-ECO-7',
   'DS-SUP-2',
   'DS-POP-1', 'DS-POP-2', 'DS-GEN-1',
-  'DS-GEN-8', 'DS-REL-1', 'DS-REL-2', 'DS-GEN-9',
-  'DS-GEN-10', 'DS-HK-1', 'DS-GEN-11',
-  'DS-GEN-14', 'DS-POP-3', 'DS-GEN-15',
-  'DS-GEN-16', 'DS-GEN-18',
+  'DS-GEN-8', 'DS-REL-1', 'DS-REL-2', 'DS-GEN-10', 'DS-HK-1', 'DS-GEN-11',
+  'DS-POP-3', 'DS-GEN-15',
+  'DS-GEN-18',
   // ── warFaith, after DESK CAR 4 ─────────────────────────────────────────────────────
   // Six of the nine mounted above. These three are dark by MEASUREMENT, and each names the
   // one act that would light it (warFaithStateProse.js carries the full derivation):
