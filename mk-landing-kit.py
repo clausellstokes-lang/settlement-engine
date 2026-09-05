@@ -10,7 +10,7 @@ ap.add_argument('--prev-pickup', default=None); ap.add_argument('--out', default
 assert re.fullmatch(r'[0-9a-f]{40}', a.base), 'base must be the FULL sha'; assert a.cars.isdigit()
 n=a.n; out=a.out; os.makedirs(out, exist_ok=True)
 # --- after-cas
-s=io.open(SC+'/after-cas-897.sh',encoding='utf-8').read()
+s=io.open(SC+'/after-cas-897.sh',encoding='utf-8').read(); assert SC in s
 s=s.replace('after-cas-897.sh — ONE command from a green ANCHORS gate log to the §897 ledger act.','after-cas-%s.sh — ONE command from a green gate log to the §%s ledger act (stamped by mk-landing-kit.py).'%(n,n))
 s=s.replace('D=$SC/laneANCH2','D=$SC/'+a.dock).replace('BASE=df7cdd37e11bde8365c0322f0c882f61988865d5; LOG=$SC/gate-anch.log','BASE=%s; LOG=$SC/gate-%s.log'%(a.base,n))
 s=s.replace("grep -q '^GATE_CARS=4$'","grep -q '^GATE_CARS=%s$'"%a.cars).replace('did not run over 4 cars','did not run over %s cars'%a.cars).replace('"$LOG" 4 >','"$LOG" %s >'%a.cars)
@@ -18,7 +18,9 @@ s=s.replace('§897 did not land','§%s did not land'%n).replace('chair-verify-89
 assert '897' not in s.replace('mk-landing-kit','') or n=='897', [l for l in s.split('\n') if '897' in l]
 io.open(os.path.join(out,'after-cas-%s.sh'%n),'w',encoding='utf-8').write(s)
 # --- collect
-c=io.open(SC+'/collect-897.sh',encoding='utf-8').read().replace('897',n).replace('landing-anchors-2026-09-05',a.seal).replace('ANCHORS landing collection','landing collection')
+c=io.open(SC+'/collect-897.sh',encoding='utf-8').read()
+c=c.replace(SC,'__SC__').replace('897',n).replace('__SC__',SC).replace('landing-anchors-2026-09-05',a.seal).replace('ANCHORS landing collection','landing collection')  # the session id contains digits: shield the path
+assert SC in c and c.count(SC)>=1
 c=re.sub(r'\(R37 = .*?\)\"', '(new R-rows: $(git show HEAD:docs/FABLE_RETROVALIDATION_QUEUE.md | grep -cE \'^### R[0-9]+ \'))"', c)
 io.open(os.path.join(out,'collect-%s.sh'%n),'w',encoding='utf-8').write(c)
 # --- payload
