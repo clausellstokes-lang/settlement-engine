@@ -8,7 +8,7 @@ import {NarrativeNote} from '../NarrativeNote';
 import { criminalOpNote, deriveCriminalStructure, deriveDefenseReadiness, deriveSupportingCapabilities, deriveGuardAssessment, deriveDefenseVulnerabilities, DEFENSE_STRESS_STATUS } from '../../../domain/display/defenseDisplay.js';
 import { safetySeverityOf } from '../../../domain/display/safetySeverity.js';
 import { scoreBand, scoreColor } from '../../../domain/display/defenseScoreBands.js';
-import { defenseForcesProse, defenseStateProse, defenseThreatProse } from '../../../domain/display/stateProse/defenseStateProse.js';
+import { defenseForcesProse, defensePostureProse, defenseStateProse, defenseThreatProse } from '../../../domain/display/stateProse/defenseStateProse.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
 import { truncateAtWord } from '../../../lib/text.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
@@ -33,6 +33,13 @@ const THREAT_MOUNT = 'defense.threatAssessment';
  * shown, correctly), while these sentences say what the town can field TODAY.
  */
 const FORCES_MOUNT = 'defense.armedForces';
+
+/**
+ * The defensive-posture header position. THREE lenses of DS-DEF-1 at ONE position. ⚠ Its
+ * readiness lens bands `readiness.score` — the SAME number the `readiness.label` badge
+ * rendered beside it is computed from — so the badge and the sentence cannot disagree.
+ */
+const POSTURE_MOUNT = 'defense.postureHeader';
 
 export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false, playerView = false}) {
   const [expandedThreat, setExpandedThreat] = useState(null);
@@ -85,6 +92,22 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
     });
   const forceLines = ['fortification', 'force', 'contracted', 'charter', 'arcane']
     .map((k) => drawnAtMount(FORCES_MOUNT, forcesProse[k])?.sentence).filter(Boolean);
+  // DS-DEF-1, the posture header. Same public gate; it frames no DM-editable field either
+  // (`guardEffectivenessDesc` is not a DM path), so these are plain rungs that sit BESIDE
+  // the Guard Assessment paragraph rather than over it.
+  const postureProse = publicDossier
+    ? Object.freeze({ posture: null, terrain: null, prize: null })
+    : defensePostureProse(r, {
+      seed: String(r?._seed ?? r?.id ?? ''),
+      audience: playerView ? 'player' : 'dm',
+    });
+  // ⚠ Like the public-order banner, these arrive already PROJECTED BESIDE the DM's field —
+  // `guardEffectivenessDesc`, which `deriveGuardAssessment` returns verbatim just above. The
+  // `beside` line is only taken when the registry lets that rung SPEAK, so flipping the row
+  // to `glance` silences the machine lines and leaves the DM's paragraph untouched.
+  const postureLines = ['posture', 'terrain', 'prize']
+    .map((k) => (drawnAtMount(POSTURE_MOUNT, postureProse[k]?.rung)?.sentence
+      ? postureProse[k].beside : null)).filter(Boolean);
   const stresses = (Array.isArray(r.stress)?r.stress:r.stress?[r.stress]:[]).filter(Boolean);
   const stressTypes = stresses.map(s=>s?.type).filter(Boolean);
   const crimCapture = r.powerStructure?.criminalCaptureState || 'none';
@@ -189,6 +212,13 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
             <p style={{fontSize: FS['12.5'],color:swatch.inkMag2,lineHeight:1.6,margin:0}}>{guardAssessment}</p>
           </div>}
         </div>
+        {/* DS-DEF-1: the posture, the ground and the prize, in the town's own voice. Three
+            lenses of one block at one position, BESIDE the badge and the DM's assessment. */}
+        {postureLines.length>0&&<div style={{marginTop:10,paddingTop:10,borderTop:`1px solid ${readiness.border}`}}>
+          {postureLines.map((line,i)=>(
+            <p key={i} style={{fontSize:i===0?FS.sm:FS.xs,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.55,margin:i===0?0:'5px 0 0',fontStyle:'italic'}}>{line}</p>
+          ))}
+        </div>}
       </div>
 
       {/* ── ACTIVE MILITARY STATUS (stress override) ─────────────────────── */}

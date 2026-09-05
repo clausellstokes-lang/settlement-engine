@@ -11,23 +11,28 @@
  *   DS-DEF-5  Defense › Armed forces & fortifications — the five force lenses:
  *             `standingDefenseForces(settlement)` × `config.{monsterThreat, magicExists}`
  *
- * ── WHY THIS BLOCK ALONE, AND WHY DS-DEF-1 IS NOT HERE ───────────────────────────────
+ * ── ⭐⭐ DS-DEF-1'S BLOCKER DECAYED, AND NOBODY NOTICED — the paragraph it replaced ───
  *
- * DS-DEF-3 and DS-DEF-1 are the leaf's two DM-PEN blocks and were planned as one car,
- * because they share ONE new risk: the DM's-pen projection has never run in production.
- * DS-DEF-1 turned out to carry a SECOND, unrelated risk, so it was split out rather than
- * bundled — two independent risks under one green prove neither.
+ * This header used to say DS-DEF-1 "waits on a SMALL LIFT of `avgScore` into a cheap leaf",
+ * because the overall defence mean was stranded in two modules costing ~280 KB each against
+ * the first-paint closure and a third hand-rolled copy is what `parityContract.js`'s
+ * `defense.scoreAvg` pin exists to prevent. **THAT LIFT HAS SINCE LANDED.** `avgScore` now
+ * lives in `defenseScoreBands.js` at 3,617 B, both former homes delegate, and the suite that
+ * guards it sits in this desk's own test file. The blocker was true when written and false
+ * by the time anybody re-read it.
  *
- * DS-DEF-1's readiness lens keys on `STRONG · ADEQUATE · WEAK · CRITICAL`, which is exactly
- * `defenseScoreBands.scoreBand(n)` — free, already on this tab, an exact 1:1. But it needs
- * the OVERALL defence score, and that mean (`avgScore`) is a four-line pure function
- * stranded in two heavy modules: `pdf/lib/viewModelPrimitives.js` drags 293,079 B and
- * `domain/display/dossierViewModel.js` drags 278,633 B (measured transitively against the
- * first-paint closure). A third hand-rolled copy is precisely what
- * `parityContract.js`'s `defense.scoreAvg` pin exists to prevent. So DS-DEF-1 waits on a
- * SMALL LIFT of `avgScore` into a cheap leaf — `defenseScoreBands.js` is its natural home,
- * being the defence-score band module and already free here — which is its own act because
- * it touches the PDF call sites and the parity contract.
+ * ⭐ A BLOCKER IS A CLAIM, AND A CLAIM DECAYS. A stale figure gets refused by a gate; a
+ * stale BLOCKER is obeyed in silence, and this one kept an authored block dark after the
+ * thing blocking it was gone. Re-derive a constraint before obeying it.
+ *
+ * ⚠ AND THE LIFT TURNED OUT NOT TO BE WHAT DS-DEF-1 NEEDED. The readiness lens keys on
+ * `defenseProfile.readiness.score`, NOT on `avgScore`, and the reason is COHERENCE WITH THE
+ * BADGE BESIDE IT: `DefenseTab` prints `readiness.label` in the same header, and that label
+ * is computed from `readiness.score` (the mean PLUS a tier bonus MINUS a threat penalty).
+ * Banding the bare mean would let the page print "Fortress" beside a sentence calling the
+ * town effectively undefended. Two numbers, one header, one reader. The lift is still the
+ * right act — it is what makes `avgScore` reachable for the consumers that want the mean —
+ * but it was never this block's gate.
  *
  * ── THE DM'S PEN, AND WHY THIS DESK CANNOT OVERWRITE IT ──────────────────────────────
  *
@@ -69,7 +74,9 @@ import { MONSTER_THREAT_TIERS, normalizeMonsterThreat } from '../../../data/mons
 import { standingDefenseForces } from '../../institutions/defenseInstitutionBuckets.js';
 import { scoreBand } from '../defenseScoreBands.js';
 import { DOSSIER_STATE_PROSE_DEFENSE } from '../../../data/dossierStateProse/defense.generated.js';
-import { projectBesideDmField } from './dmFieldProjection.js';
+import {
+  DM_FIELD_FRAMED_BY_BLOCK, projectBesideDmField, readProsePath,
+} from './dmFieldProjection.js';
 import { readStateProse } from './stateProseKernel.js';
 import { legibilityRung } from './legibilityRung.js';
 
@@ -389,6 +396,149 @@ export function defenseThreatProse(settlement, options = {}) {
  * @type {ReadonlyArray<string>}
  */
 export const RECOGNISED_MONSTER_TIERS = Object.freeze(Object.keys(MONSTER_FAMILY_OF));
+
+/**
+ * ── ⭐ THE TERRAIN MAP — a closed vocabulary of seven, bound to its producer BOTH WAYS ──
+ *
+ * DS-DEF-1 asks whether the ground helps the defender. The estate has no typed answer:
+ * `resourceAnalysis.terrain` is `TERRAIN_DATA[k].name`, a display word, and the only
+ * defensive statement in the data is English inside `strategicValue`
+ * ("defensible position", "difficult to besiege", "exposed to raids"). Parsing that prose
+ * at runtime is the config-key-walker defect in miniature, so the classification is a MAP —
+ * the same shape as `MONSTER_FAMILY_OF`, held total against `TERRAIN_DATA` in both
+ * directions by the desk suite, so a terrain added or renamed reds instead of silently
+ * dropping out.
+ *
+ * ⚠ TWO TERRAINS ARE DELIBERATELY IN NEITHER POOL, and that is a reading rather than a gap.
+ * The corpus wrote FAVOURABLE ("the approach is narrow… has to come the long way and in the
+ * open") and EXPOSED ("no hill and no narrows"). A coastal or riverside town has a water
+ * flank: it is not narrows, and it is not nothing. Both pools would be false of it, so the
+ * lens is SILENT there. Dormant is a true statement, not a fallback.
+ * @type {Readonly<Record<string, string>>}
+ */
+const TERRAIN_DEFENCE_OF = Object.freeze({
+  // The three whose own strategicValue text states a defensive property.
+  Mountain: 'terrain FAVOURABLE to the defender',
+  Hills: 'terrain FAVOURABLE to the defender',
+  Forest: 'terrain FAVOURABLE to the defender',
+  // Open ground. Plains' own entry says "exposed to raids".
+  Plains: 'terrain EXPOSED',
+  'Desert/Arid': 'terrain EXPOSED',
+  // Coastal and Riverside are absent ON PURPOSE — see the note above.
+});
+
+/**
+ * ── THE PRIZE MAP — is this town worth an army's season? ─────────────────────────────
+ *
+ * Keyed on the terrain for the same reason: `strategicValue` is a prose string
+ * ("High - controls sea routes and naval access") derived from the same terrain record, so
+ * keying on the record avoids parsing the sentence while reading exactly the same fact. The
+ * desk suite binds each entry to the "High - " / "Low-" prefix its terrain actually carries,
+ * so the map cannot drift from the data it claims to summarise.
+ *
+ * ⚠ `Medium` and `Medium-High` are in NEITHER pool. The corpus wrote HIGH ("holds something
+ * worth taking") and LOW ("not a prize") and no middle, and Hills' Medium-High value is
+ * DEFENSIVE ("defensible terrain, good visibility") rather than a prize — routing it to HIGH
+ * would print a claim its own data does not make.
+ * @type {Readonly<Record<string, string>>}
+ */
+const TERRAIN_PRIZE_OF = Object.freeze({
+  Coastal: 'strategic value HIGH',
+  Mountain: 'strategic value HIGH',
+  Forest: 'strategic value LOW',
+});
+
+/** Every terrain name this desk classifies, exported for the both-ways binding. */
+export const TERRAIN_DEFENCE_NAMES = Object.freeze(Object.keys(TERRAIN_DEFENCE_OF));
+/** Every terrain name this desk reads a prize value for. */
+export const TERRAIN_PRIZE_NAMES = Object.freeze(Object.keys(TERRAIN_PRIZE_OF));
+
+/**
+ * DS-DEF-1 lens 1 — THE READINESS BAND.
+ *
+ * ⭐ Reads `defenseProfile.readiness.score`, NOT `avgScore(scores)`. See the header: the
+ * badge printed in the same page header is computed from this exact number, so banding any
+ * other quantity would let the page contradict itself in one glance. An absent or
+ * non-numeric score is SILENCE — a settlement with no readiness reading is not a CRITICAL
+ * one, and `scoreBand` would happily call it that.
+ * @param {unknown} readinessScore @returns {string|null}
+ */
+export function posturePoolKey(readinessScore) {
+  if (typeof readinessScore !== 'number' || !Number.isFinite(readinessScore)) return null;
+  const key = `readiness ${scoreBand(readinessScore)}`;
+  return CORPUS['DS-DEF-1'].pools[key] ? key : null;
+}
+
+/**
+ * DS-DEF-1 lens 2 — DOES THE GROUND HELP? Silent for a terrain the map does not classify,
+ * and for a settlement with no terrain reading at all.
+ * @param {unknown} terrain @returns {string|null}
+ */
+export function terrainDefencePoolKey(terrain) {
+  return TERRAIN_DEFENCE_OF[text(terrain)] || null;
+}
+
+/**
+ * DS-DEF-1 lens 3 — IS THE TOWN A PRIZE? Silent for the middle of the range, which the
+ * corpus did not write.
+ * @param {unknown} terrain @returns {string|null}
+ */
+export function strategicPrizePoolKey(terrain) {
+  return TERRAIN_PRIZE_OF[text(terrain)] || null;
+}
+
+/**
+ * THE DEFENSIVE-POSTURE DESK — DS-DEF-1's three lenses at the header position.
+ *
+ * ⛔⛔ THE SECOND DM'S-PEN BLOCK, AND IT NEARLY SHIPPED AS PLAIN RUNGS. A first cut of this
+ * function returned bare rungs on the reasoning that `guardEffectivenessDesc` is "not a DM
+ * path, so there is nothing to protect". THE REGISTRY SAYS OTHERWISE, and an arm below
+ * asked it rather than believing the reasoning:
+ *
+ *     DM_FIELD_FRAMED_BY_BLOCK['DS-DEF-1'] === 'economicState.safetyProfile.guardEffectivenessDesc'
+ *     isDmEditableProsePath(that path)     === true
+ *
+ * DS-DEF-1 is the leaf's OTHER DM-pen block — `deriveGuardAssessment` returns that exact
+ * field verbatim, and the tab prints it as the Guard Assessment paragraph these lenses sit
+ * next to. So every rung here goes back through `projectBesideDmField`, which has nowhere
+ * to put a write: it returns the DM's string BY IDENTITY and offers the machine line as a
+ * separate adjacent field. A caller that receives this shape CANNOT render a machine
+ * sentence into the position the DM's own sentence occupies.
+ *
+ * ⭐ The lesson is the desk's own, one layer up: a claim about a REGISTRY is checked
+ * against the registry. Reasoning about which fields "feel" DM-editable is how the
+ * overwrite gets written.
+ *
+ * @param {{name?: string, defenseProfile?: {readiness?: {score?: unknown}|null}|null,
+ *   resourceAnalysis?: {terrain?: unknown}|null,
+ *   economicState?: {safetyProfile?: {guardEffectivenessDesc?: unknown}|null}|null
+ *   }|null|undefined} settlement
+ * @param {{seed?: string, audience?: string}} [options]
+ * @returns {Readonly<{posture: object|null, terrain: object|null, prize: object|null}>}
+ */
+export function defensePostureProse(settlement, options = {}) {
+  const slots = { settlement: properFill(text(settlement?.name)) };
+  const terrain = settlement?.resourceAnalysis?.terrain;
+  // THE DM'S FIELD ALL THREE LENSES SIT BESIDE. Read through the projection's own path
+  // reader so this desk cannot spell the path differently from the registry that declares it.
+  const dmField = readProsePath(settlement, DM_FIELD_FRAMED_BY_BLOCK['DS-DEF-1']);
+
+  /** @param {string|null} poolKey */
+  const projected = (poolKey) => {
+    if (!poolKey) return null;
+    const line = readStateProse(CORPUS, 'DS-DEF-1', poolKey, { ...options, slots });
+    return Object.freeze({
+      ...projectBesideDmField(dmField, line?.text ?? null),
+      rung: legibilityRung('', line, []),
+    });
+  };
+
+  return Object.freeze({
+    posture: projected(posturePoolKey(settlement?.defenseProfile?.readiness?.score)),
+    terrain: projected(terrainDefencePoolKey(terrain)),
+    prize: projected(strategicPrizePoolKey(terrain)),
+  });
+}
 
 /**
  * ── DS-DEF-5 · ARMED FORCES & FORTIFICATIONS — five lenses over the STANDING roster ──
