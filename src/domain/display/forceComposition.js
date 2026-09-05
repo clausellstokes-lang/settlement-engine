@@ -75,15 +75,21 @@
  * Strict-clean (typecheck:domain:strict). No React/Zustand imports.
  */
 
+import { clamp01 } from '../../kernel/math.js';
 import { deriveMagicProfile, magicRoleBands } from '../magicProfile.js';
 import { numberWord } from './numberWords.js';
 
 /** @param {unknown} a @param {unknown} b @returns {number} */
 const codepoint = (a, b) => (String(a) < String(b) ? -1 : String(a) > String(b) ? 1 : 0);
+// ⛔ `num()` IS NOT REDUNDANT NOW THAT THE KERNEL CLAMP IS IMPORTED — DO NOT DELETE IT
+// AS TIDY-UP. The local clamp01 this replaced carried `num()` INSIDE itself, so it
+// coerced a numeric string (`'0.5'` → 0.5); the kernel's `Number.isFinite` guard sends
+// the same string to 0 instead. What makes the swap byte-neutral is that every call
+// site already wraps its raw record read in `num(record.x, default)` FIRST, so the
+// kernel clamp only ever sees a finite number. Remove one of those wrappers and that
+// field silently starts reading 0 on any non-number the record happens to hold.
 /** @param {unknown} v @param {number} [d] @returns {number} */
 const num = (v, d = 0) => (Number.isFinite(Number(v)) ? Number(v) : d);
-/** @param {unknown} v @returns {number} */
-const clamp01 = (v) => Math.max(0, Math.min(1, num(v)));
 
 /**
  * THE CLOSED UNIT-TYPE VOCABULARY — minted here, spelled exactly once, ordered by
