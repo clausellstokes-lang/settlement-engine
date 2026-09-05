@@ -394,8 +394,12 @@ describe('SP-B fence 4 — gate polarity and purity, censused over the real tree
   });
 
   test('the three flags are virtual: absent from the rules DEFAULTS and every preset', async () => {
-    const { DEFAULT_SIMULATION_RULES, SIMULATION_RULE_PRESETS, ENGINE_GATED_VIRTUAL_RULE_KEYS } =
-      await import('../../src/domain/worldPulse/simulationRules.js');
+    const {
+      DEFAULT_SIMULATION_RULES,
+      ENGINE_GATED_DORMANT_RULE_KEYS,
+      ENGINE_GATED_VIRTUAL_RULE_KEYS,
+      SIMULATION_RULE_PRESETS,
+    } = await import('../../src/domain/worldPulse/simulationRules.js');
     const presets = Object.values(SIMULATION_RULE_PRESETS);
     expect(presets.length, 'the preset catalog emptied — this absence claim would be vacuous')
       .toBeGreaterThanOrEqual(5);
@@ -407,9 +411,14 @@ describe('SP-B fence 4 — gate polarity and purity, censused over the real tree
         // rather than a lookup into an empty object.
         expect(Object.keys(preset.rules || {}).length, `${preset.id} carries no rules`).toBeGreaterThan(0);
       }
-      // …and each IS declared, so the census that demands its certification can see it.
+      // …and each IS REGISTERED, so the census that demands its certification can see it.
       // This is the CQ5 one-commit law's other half, asserted from the dormancy side.
       expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toContain(flag);
+      // …and the estate's own DERIVED answer to the virtuality question agrees with the
+      // measurement above (LGT-P2-MANIFEST, 2026-09-05: registration and virtuality are two
+      // surfaces now, and a lit key leaves this one while keeping its register row).
+      expect(ENGINE_GATED_DORMANT_RULE_KEYS, `${flag} is registered but a preset has lit it`)
+        .toContain(flag);
     }
   });
 

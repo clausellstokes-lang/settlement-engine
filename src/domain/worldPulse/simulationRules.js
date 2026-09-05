@@ -155,7 +155,7 @@ export const DEFAULT_SIMULATION_RULES = Object.freeze({
 });
 
 /**
- * ENGINE-GATED VIRTUAL RULE KEYS (chair ruling CR-WR10-C, 2026-08-04).
+ * THE ENGINE-GATED RULE-KEY REGISTER (chair ruling CR-WR10-C, 2026-08-04).
  *
  * A VIRTUAL key is one the engine strictly gates on (`rules.<key> === true`) while
  * appearing in NEITHER `DEFAULT_SIMULATION_RULES` NOR any preset override spread —
@@ -163,6 +163,25 @@ export const DEFAULT_SIMULATION_RULES = Object.freeze({
  * campaign zero persisted bytes. The certification census
  * (`subsystemCertification.simulationRuleKeys`) reads exactly those two surfaces,
  * so a virtual key was invisible to it and its subsystem could never be certified.
+ *
+ * ⭐ RE-CUT 2026-09-05 (lane LGT-P2-MANIFEST): THIS LIST IS THE **REGISTER**, AND THE
+ * REGISTER IS NOT THE VIRTUAL SET. Until that day one list answered two questions —
+ * "does the engine gate this key?" (a fact about `src/`) and "is it still dark on every
+ * path a customer receives?" (a fact about the two rules surfaces) — and the two stop
+ * agreeing the moment a preset lights a member. This one answers the FIRST question
+ * only. ⛔ **A KEY MAY BE LIT WITHOUT BEING DELETED FROM THIS REGISTER**, and it keeps
+ * its certification row when it is. The second question moved to the DERIVED list
+ * published beside the preset catalog below, `ENGINE_GATED_DORMANT_RULE_KEYS`, which a
+ * lit key leaves on its own without anybody editing anything.
+ *
+ * ⛔ WHY THAT MATTERS BEFORE THE FIRST FLAG LIGHTS. Two lighting contracts read BUILD
+ * STATE off this list — `tests/lint/tradeConvergenceContract.walker.test.js`'s R6 join
+ * and `tests/lint/sovereigntyLightingContract.walker.test.js`'s FLAG_MANIFEST measure —
+ * and both INVERT if a lit key is deleted from it: a landed flag reads back as unbuilt
+ * and its evidenced row reads back as fabricated. The five dormancy fences and the
+ * observed-shape scanner's clause 3 read it the same way, for the same reason. The
+ * deletion they all feared was demanded by `engineGatedRuleKeys.walker`, and that demand
+ * is what this re-cut removed.
  *
  * The WR-9a fork offered two cures: declare each key `false` in the
  * `full_simulation` spread (+32 serialized bytes per key on every NEW campaign, a
@@ -173,9 +192,10 @@ export const DEFAULT_SIMULATION_RULES = Object.freeze({
  * key here moves no world byte in any campaign, installed or new.
  *
  * MEMBERSHIP IS NOT A JUDGMENT CALL: a key belongs here when `src/` gates on it
- * with the strict idiom and neither surface above declares it.
+ * with the strict idiom. (Before the re-cut this sentence also required that neither
+ * rules surface declared the key; that half is the DERIVED list's business now.)
  * `tests/lint/engineGatedRuleKeys.walker.test.js` source-scans the tree and proves
- * the list BOTH ways — every member is really gated, and every gated-but-undeclared
+ * the list BOTH ways — every member is really gated, and every gated-but-unregistered
  * key is really accounted for — so this cannot drift into fiction in either
  * direction. A member also owes a certification row (or a declared pending entry);
  * the totality walker demands it the moment the census grows.
@@ -944,6 +964,74 @@ export const SIMULATION_RULE_PRESETS = Object.freeze({
     ...ONE_REGEN,
   }),
 });
+
+/**
+ * THE DERIVATION, PURE AND DRIVABLE (lane LGT-P2-MANIFEST, 2026-09-05).
+ *
+ * A registered key is DORMANT exactly while no rules surface DECLARES it — absent from
+ * the defaults and from every preset's resolved rules. That is a property of the two
+ * surfaces, never of the register, so it is computed rather than hand-kept. Boolean-only,
+ * matching the certification census's own read of the same two surfaces, so the two
+ * cannot disagree about what "declared" means.
+ *
+ * It takes its inputs rather than closing over them so `tests/lint/engineGatedRuleKeys.walker.test.js`
+ * can drive it with synthetic surfaces in BOTH polarities: a rule this file's own tables
+ * satisfy today would agree with itself for free, which is no measurement at all.
+ *
+ * @param {ReadonlyArray<string>} register
+ * @param {Record<string, unknown>} defaults
+ * @param {Record<string, unknown>} presets
+ * @returns {string[]} the register's members that no surface declares, in register order
+ */
+export function deriveDormantRuleKeys(register, defaults, presets) {
+  /** @type {Set<string>} */
+  const declared = new Set();
+  for (const [key, value] of Object.entries(defaults || {})) {
+    if (typeof value === 'boolean') declared.add(key);
+  }
+  for (const entry of Object.values(presets || {})) {
+    const rules = /** @type {Record<string, unknown>} */ (
+      (/** @type {{ rules?: unknown }} */ (entry) || {}).rules || {}
+    );
+    for (const [key, value] of Object.entries(rules)) {
+      if (typeof value === 'boolean') declared.add(key);
+    }
+  }
+  return register.filter((key) => !declared.has(key));
+}
+
+/**
+ * THE STILL-DARK SUBSET OF THE REGISTER — DERIVED, NEVER AUTHORED.
+ *
+ * ⭐ THE OTHER HALF OF THE 2026-09-05 SPLIT. The register above answers "does the engine
+ * gate this key"; THIS answers "and is it still dark on every path a customer can
+ * receive". A key leaves this list the day a preset declares it, with nobody editing
+ * anything, and ⛔ that departure must NOT be read as the key leaving the estate's build
+ * record — the register keeps it, and keeps its certification row with it.
+ *
+ * ⛔ THE REGISTER KEEPS ITS NAME AND ITS POSITION, AND THAT IS MEASURED RATHER THAN
+ * TASTE. `scripts/check-observed-shape-readers.mjs` is a GOVERNED DETECTOR SOURCE: it
+ * finds the register by scanning this file's raw text for the literal
+ * `ENGINE_GATED_VIRTUAL_RULE_KEYS = Object.freeze([` (clause 3) and slices its defaults
+ * window at the same token (clause 4a), and ANY byte changed in that scanner refuses the
+ * whole gate with "an ordinary gate/write cannot migrate the instrument" until a governed
+ * migration bundle is built and reviewed. So the split had to be spelled with the
+ * register's identifier untouched. Its docblock carries the meaning the name no longer
+ * carries alone.
+ *
+ * ⛔ IT IS NOT THE CENSUS SOURCE. `subsystemCertification.simulationRuleKeys` unions the
+ * REGISTER, so a key stays censusable — and keeps its row — from the moment a preset
+ * declares it. Its live readers are the five dormancy fences, each asserting this claim
+ * about its own key, and the walker that proves the derivation.
+ *
+ * Today every registered key is still dark, so this equals the register exactly, in
+ * register order. That equality is a MEASUREMENT of the tree, not a property of the code.
+ *
+ * @type {ReadonlyArray<string>}
+ */
+export const ENGINE_GATED_DORMANT_RULE_KEYS = Object.freeze(
+  deriveDormantRuleKeys(ENGINE_GATED_VIRTUAL_RULE_KEYS, DEFAULT_SIMULATION_RULES, SIMULATION_RULE_PRESETS),
+);
 
 /**
  * @typedef {Partial<typeof DEFAULT_SIMULATION_RULES> & Record<string, unknown>} SimulationRulesInput
