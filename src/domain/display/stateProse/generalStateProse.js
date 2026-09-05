@@ -307,6 +307,143 @@ export function foodSecurityPoolKey(label) {
   return key && CORPUS['DS-GEN-3'].pools[key] ? key : null;
 }
 
+// ── DS-GEN-5 · Overview › Situation (the live companion to the frozen scene) ────────
+
+/**
+ * `config.tradeRouteAccess` → the arrival SCENE key. A five-entry mirror of
+ * `narrativeGenerator.js`'s exported `ROUTE_TO_SCENE`, asserted IDENTICAL to it in the desk
+ * test rather than imported: `narrativeGenerator.js` is a generator module and this is a
+ * display leaf, and the identity is free where a test can assert it.
+ * @type {Readonly<Record<string, string>>}
+ */
+const SCENE_OF_ROUTE = Object.freeze({
+  crossroads: 'market',
+  port: 'port',
+  river: 'river',
+  isolated: 'smoke',
+  mountain_pass: 'smoke',
+});
+
+/**
+ * scene key → its DS-GEN-5 pool. THREE OF THE FIVE POOL KEYS CARRY A PARENTHETICAL GLOSS
+ * (`market (route crossroads)`), so the scene key is not the pool key and a route that used
+ * one as the other would darken three of five arms. The gloss is the corpus documenting its
+ * own state-key inside the key, which is a spelling this desk must translate rather than
+ * a fact it may re-derive.
+ * @type {Readonly<Record<string, string>>}
+ */
+const SITUATION_POOL_OF_SCENE = Object.freeze({
+  market: 'market (route crossroads)',
+  port: 'port',
+  river: 'river',
+  smoke: 'smoke (route isolated / mountain_pass)',
+  ordinary: 'ordinary (route road and the default)',
+});
+
+/**
+ * DS-GEN-5's pool — the LIVE companion to the frozen `arrivalScene`, never a replacement
+ * for it. Two sentences with two lifetimes: the persisted scene is a first-impression
+ * artifact composed once at generation, and overwriting one with the other breaks THE
+ * PROMISE. This desk composes only the companion; nothing here touches `arrivalScene`.
+ *
+ * ⛔ THE STRESS ARM IS A SUPPRESSION AND IT IS NOT OPTIONAL. Where a primary stress
+ * resolves, the annex rules the stressor shape's `[visitor]` variant the correct companion
+ * and these are suppressed: the page must not describe an ordinary market day underneath a
+ * siege banner. The caller passes the answer from the canonical `resolvePrimaryStress`, so
+ * the priority ladder cannot fork.
+ *
+ * ⚠ `port` ON RIVERSIDE TERRAIN RESOLVES TO `river`, which is `generateArrivalScene`'s own
+ * `riverPort` branch and not an embellishment: an inland river port is not a seaport, and
+ * the corpus's `river` pool says so in its own gloss.
+ * @param {{tradeRouteAccess?: unknown, terrainType?: unknown, primaryStress?: unknown}} state
+ * @returns {string|null}
+ */
+export function situationPoolKey(state) {
+  if (typeof state?.primaryStress === 'string' && state.primaryStress !== '') return null;
+  const route = text(state?.tradeRouteAccess);
+  const riverPort = route === 'port' && text(state?.terrainType) === 'riverside';
+  const scene = riverPort ? 'river' : (SCENE_OF_ROUTE[route] || 'ordinary');
+  const key = SITUATION_POOL_OF_SCENE[scene];
+  return key && CORPUS['DS-GEN-5'].pools[key] ? key : null;
+}
+
+// ── DS-GEN-6 · Overview › Settlement origin (why the town exists) ───────────────────
+
+/**
+ * `config.tradeRouteAccess` → DS-GEN-6's ROUTE pool. The four named routes, and everything
+ * else — `road`, `mountain_pass`, `mountain_road`, `desert_road`, an absent value — founds
+ * on the road arm, which is exactly what `originArmKey`'s trailing `return 'road'` does.
+ *
+ * ⭐ THE PRODUCER SPLITS FINER THAN THE CORPUS AND THAT IS THE JOIN. `ORIGIN_ARMS` carries
+ * EIGHT arms because it sub-splits `port` by terrain and `isolated` by deficit; the corpus
+ * carries five route pools and demotes the deficit split into the `deficit` DIMENSION, which
+ * is the kernel's law-5 channel. So `port.generic`/`port.riverside`/`port.coastal` all fold
+ * to `port` and `isolated.sustained`/`isolated.deficit` both fold to `isolated`, with the
+ * split preserved where the corpus actually put it. The desk test asserts the fold is total
+ * over `ORIGIN_ARMS` in both directions.
+ * @type {Readonly<Record<string, string>>}
+ */
+const ORIGIN_POOL_OF_ROUTE = Object.freeze({
+  crossroads: 'crossroads',
+  river: 'river',
+  port: 'port',
+  isolated: 'isolated',
+});
+
+/** tier → DS-GEN-6's tier-overlay pool. TOTAL: every tier resolves, including the others. */
+const TIER_OVERLAY_OF = Object.freeze({
+  metropolis: 'tier overlay: metropolis',
+  city: 'tier overlay: city',
+  thorp: 'tier overlay: thorp / hamlet',
+  hamlet: 'tier overlay: thorp / hamlet',
+});
+
+/**
+ * THE DEMOTED `deficit` DIMENSION, derived exactly as `generateSettlementReason` derives it:
+ * the gap is the LARGER of the pre-import `rawDeficit` and the post-import residual
+ * `deficit`, and it counts when it is positive and at or above five percent of daily need.
+ *
+ * ⚠ THIS IS A RE-DERIVATION AND IT IS DECLARED AS ONE. The producer computes
+ * `hasFoodDeficit` inline and persists nothing, so there is no canonical field to read; the
+ * desk test extracts the five-percent literal from the producer's own source through
+ * `mustExtract` and drives both sides of the cut, so the day the threshold moves this file
+ * reds instead of quietly disagreeing with the sentence the page above it already printed.
+ *
+ * NO foodBalance ⇒ `no deficit` is NOT the answer — `null` is. A settlement with no food
+ * arithmetic on the record has not been measured as feeding itself; the kernel's law 5 then
+ * fails closed and the block renders nothing, which is the honest state.
+ * @param {{dailyNeed?: unknown, need?: unknown, deficit?: unknown, rawDeficit?: unknown}|null|undefined} foodBalance
+ * @returns {string|null} a value of STATE_MARK_DIMENSIONS.deficit, or null
+ */
+export function foodDeficitDimension(foodBalance) {
+  if (!foodBalance || typeof foodBalance !== 'object') return null;
+  const num = (v) => (typeof v === 'number' && Number.isFinite(v) ? v : 0);
+  const gap = Math.max(num(foodBalance.rawDeficit), num(foodBalance.deficit));
+  const need = num(foodBalance.dailyNeed) || num(foodBalance.need);
+  return (gap > 0 && (need <= 0 || gap / need >= 0.05)) ? 'deficit' : 'no deficit';
+}
+
+/**
+ * DS-GEN-6's ROUTE pool — why the town is where it is.
+ * @param {unknown} tradeRouteAccess @returns {string|null}
+ */
+export function originRoutePoolKey(tradeRouteAccess) {
+  const key = ORIGIN_POOL_OF_ROUTE[text(tradeRouteAccess)] || 'road';
+  return CORPUS['DS-GEN-6'].pools[key] ? key : null;
+}
+
+/**
+ * DS-GEN-6's TIER OVERLAY pool — the second sentence, composed AFTER the route line and
+ * never instead of it. This is the registry's one written exception to the one-fact-one-
+ * sentence law: one mount renders two sentences from two POOLS of one block, which is one
+ * fact reading at one position at one depth.
+ * @param {unknown} tier @returns {string|null}
+ */
+export function originTierPoolKey(tier) {
+  const key = TIER_OVERLAY_OF[text(tier)] || 'tier overlay: other tiers';
+  return CORPUS['DS-GEN-6'].pools[key] ? key : null;
+}
+
 // ── DS-GEN-12 · Overview › The ground and the approaches ────────────────────────────
 
 /**
@@ -432,6 +569,8 @@ export function institutionsPoolKey(inst) {
  */
 export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
   overview: Object.freeze({
+    situation: null,
+    origin: Object.freeze([]),
     systemsHealth: Object.freeze([]),
     ground: null,
     market: null,
@@ -453,9 +592,9 @@ export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
  * @param {{scores?: Record<string, unknown>|null, prosperity?: unknown, safetyLabel?: unknown,
  *   viable?: unknown, readinessLabel?: unknown, foodSecurityLabel?: unknown,
  *   terrainType?: unknown, institutions?: unknown, tradeRouteAccess?: unknown,
- *   isEntrepot?: unknown, inst?: object|null}} [readings] the caller's own reads off the
- *   settlement it already holds; see institutionsPoolKey for why `inst` is passed and not
- *   reached for
+ *   isEntrepot?: unknown, inst?: object|null, tier?: unknown, primaryStress?: unknown,
+ *   foodBalance?: object|null}} [readings] the caller's own reads off the settlement it
+ *   already holds; see institutionsPoolKey for why `inst` is passed and not reached for
  * @param {{seed?: string, audience?: string}} [options]
  * @returns {typeof GENERAL_STATE_PROSE_SILENT}
  */
@@ -480,8 +619,24 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
     rung('DS-GEN-3', foodSecurityPoolKey(readings.foodSecurityLabel), text(readings.foodSecurityLabel)),
   ].filter((line) => line && line.sentence);
 
+  // DS-GEN-6's demoted STATE dimension (kernel law 5). An unanswered dimension reads as
+  // silence, so the block renders nothing on a settlement with no food arithmetic — which
+  // is what an unmeasured town honestly is, not a town that feeds itself.
+  const deficit = foodDeficitDimension(readings.foodBalance);
+  const originLine = (poolKey) => (poolKey && deficit
+    ? legibilityRung('', readStateProse(CORPUS, 'DS-GEN-6', poolKey, {
+      ...options, slots, dimensions: { deficit },
+    }), [])
+    : null);
+  const origin = [
+    originLine(originRoutePoolKey(readings.tradeRouteAccess)),
+    originLine(originTierPoolKey(readings.tier)),
+  ].filter((line) => line && line.sentence);
+
   return Object.freeze({
     overview: Object.freeze({
+      situation: rung('DS-GEN-5', situationPoolKey(readings), ''),
+      origin: Object.freeze(origin),
       systemsHealth: Object.freeze(health),
       ground: rung('DS-GEN-12', groundPoolKey(readings.terrainType), ''),
       market: rung('DS-GEN-13', marketPoolKey(readings), ''),
