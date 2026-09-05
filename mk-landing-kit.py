@@ -39,7 +39,10 @@ g=g.replace('/laneANCH2','/'+a.dock)
 g=re.sub(r'BASE=[0-9a-f]{7,40}[^\n]*', 'BASE=%s   # the declared base; the guards below refuse to run unless the product tip IS this sha'%a.base, g, count=1)
 g=g.replace('git rev-parse df7cdd37e','git rev-parse %s'%a.base).replace('is not the clamp tip df7cdd37e — CAS §896 first','is not the declared base %s — land the previous consist first'%a.base[:9])
 g=g.replace('[ "$CARS" = "4" ]','[ "$CARS" = "%s" ]'%a.cars).replace('expected 4 cars over $BASE (3 replayed + the register car)','expected %s cars over $BASE'%a.cars)
-assert 'laneANCH' not in g and 'df7cdd37e' not in g.replace(a.base,'') , 'gate runner residue'
+g=re.sub(r'base 90702c3e9\. Quiet-window law', 'base %s. Quiet-window law'%a.base[:9], g)
+g=g.replace('df7cdd37e', a.base[:9])  # any remaining short-form mention of the old base becomes the new base
+_res=[l for l in g.split('\n') if 'laneANCH' in l or '90702c3e9' in l]
+assert not _res, ('gate runner residue', _res)
 io.open(os.path.join(out,'run-gate-%s.sh'%n),'w',encoding='utf-8').write(g)
 r=io.open(SC+'/run-ratchet-anch.sh',encoding='utf-8').read().replace('/laneANCH2','/'+a.dock).replace('run-ratchet-anch.sh — census totals at the ANCHORS consist tip.','run-ratchet-%s.sh — census totals at the §%s consist tip (stamped).'%(n,n))
 r=re.sub(r'echo "PREDICTED[^\n]*', 'echo "PREDICTED: __PREDICTION__ (derive EVERY figure before this runs — E4; totalTests is REFUSED in advance, this run is the derivation)"', r, count=1)
