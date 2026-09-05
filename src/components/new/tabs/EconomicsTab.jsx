@@ -323,7 +323,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
   // about who is reading would be the real defect — and `publicDossier` still nulls
   // everything below before the audience ever matters.
   const audience = playerView ? 'player' : 'dm';
-  const deskProse = publicDossier ? Object.freeze({ prosperityHeader: null, prosperityRung: null, foodTile: null, granaryTile: null, foodSecurityRung: null, incomeMix: null, criminalLine: null, tradeProfile: null }) : economyStateProse(s, { foodBalance: fbal, granaryOutlook: granary }, { seed: String(s?._seed ?? s?.id ?? ''), audience });
+  const deskProse = publicDossier ? Object.freeze({ prosperityHeader: null, prosperityRung: null, foodTile: null, granaryTile: null, foodSecurityRung: null, incomeMix: null, criminalLine: null, tradeProfile: null, shadowEconomy: null }) : economyStateProse(s, { foodBalance: fbal, granaryOutlook: granary }, { seed: String(s?._seed ?? s?.id ?? ''), audience });
   const drawnFoodLine = drawnAtMount('economics.foodSecurity', deskProse.foodSecurityRung);
 
   return (
@@ -654,7 +654,11 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
                 <div style={{fontSize:FS.micro,fontWeight:700,color:sevColor,textTransform:'uppercase',letterSpacing:'0.05em',marginTop:2}}>Off-book</div>
               </div>
               <div style={{flex:1}}>
-                <p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.5,margin:'0 0 4px'}}>{scaleNote}</p>
+                {/* DS-ECO-6 at economics.shadowEconomy. The corpus line REPLACES scaleNote rather than
+                    joining it: two of this block's variants are byte-identical copies of scaleNote itself,
+                    so printing both is the page saying one thing twice. Undrawn (public dossier, or the
+                    corpus silent) ⇒ scaleNote stands and the surface is byte-identical. */}
+                <p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.5,margin:'0 0 4px'}}>{drawnAtMount('economics.shadowEconomy',deskProse.shadowEconomy)?.sentence||scaleNote}</p>
                 {dragDesc&&<p style={{fontSize: FS['11.5'],color:swatch.inkMag3,fontStyle:'italic',margin:0,lineHeight:1.4}}>{dragDesc}</p>}
               </div>
             </div>

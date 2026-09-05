@@ -9,6 +9,7 @@
  *   DS-ECO-2  Economics › the food and season tiles
  *   DS-ECO-9  LADDER › the food-security rung, and the two blockade states
  *   DS-ECO-12 Economics › the commercial profile — how the town earns, and what it trades
+ *   DS-ECO-6  Economics › the shadow economy, by capture tier
  *
  * ── DS-ECO-12: THREE LENSES AT ONE POSITION (the DS-POW-1 shape, not an exception) ────
  * DS-ECO-12 is one block over one record — `economicState`'s commercial identity — read
@@ -91,6 +92,7 @@ const CORPUS = /** @type {import('./stateProseKernel.js').StateProseCorpus} */ (
  * @property {ReadonlyArray<unknown>} [primaryImports]
  * @property {ReadonlyArray<unknown>} [localProduction]
  * @property {unknown} [isEntrepot]
+ * @property {{blackMarketCapture?: unknown}|null} [safetyProfile]
  */
 /**
  * @typedef {object} EconomyDeskSettlement
@@ -383,6 +385,33 @@ export function tradeProfilePoolKey(eco) {
 }
 
 /**
+ * DS-ECO-6's capture tiers. THE NUMBERS ARE THE ANNEX'S OWN, spelled in the pool keys
+ * themselves (`≥30`, `≥15`, `≥3`), so there is no implementer's cut to veto here — only a
+ * transcription, and the desk test walks 0..100 against the corpus to prove it is faithful.
+ *
+ * BELOW THREE IS NOT A TIER, IT IS NO SURFACE. `EconomicsTab` renders no Shadow Economy
+ * section under 3 % capture, and R-DST-K says the absence of a surface is the absence of a
+ * sentence — so this returns null there rather than reaching for the minor pool.
+ *
+ * A MISSING `blackMarketCapture` IS ALSO NULL, and that is the sharper of the two. A
+ * settlement with no safety profile has not been measured as having no shadow economy; it
+ * has not been measured. `Number(undefined)` is NaN and every comparison against it is
+ * false, so a bare ladder would have fallen through to null by luck rather than by
+ * decision — this says it out loud so a later `|| 0` cannot quietly turn "unmeasured" into
+ * "clean".
+ * @param {{blackMarketCapture?: unknown}|null|undefined} safetyProfile
+ * @returns {string|null}
+ */
+export function shadowEconomyPoolKey(safetyProfile) {
+  const capture = Number(safetyProfile?.blackMarketCapture);
+  if (!Number.isFinite(capture)) return null;
+  if (capture >= 30) return 'TIER: a large share off the books (≥30)';
+  if (capture >= 15) return 'TIER: significant off-book activity (≥15)';
+  if (capture >= 3) return 'TIER: minor shadow activity (≥3)';
+  return null;
+}
+
+/**
  * One DS-ECO-12 lens as a rung, or NOTHING.
  *
  * A sentence-less rung is NULL here, and that is a departure from the file's other four
@@ -439,7 +468,7 @@ export function leadingGoodNoun(exports_) {
  * promised a record it is not, and the first consumer to read `.sentence` off it was
  * convicted for it. A key that lies about its own shape is a defect at the seam, not at
  * the call site.
- * @returns {Readonly<{prosperityHeader: object|null, prosperityRung: object|null, foodTile: object|null, granaryTile: object|null, foodSecurityRung: object|null, incomeMix: object|null, criminalLine: object|null, tradeProfile: object|null}>}
+ * @returns {Readonly<{prosperityHeader: object|null, prosperityRung: object|null, foodTile: object|null, granaryTile: object|null, foodSecurityRung: object|null, incomeMix: object|null, criminalLine: object|null, tradeProfile: object|null, shadowEconomy: object|null}>}
  */
 export function economyStateProse(settlement, readings = {}, options = {}) {
   const eco = settlement?.economicState || {};
@@ -505,6 +534,7 @@ export function economyStateProse(settlement, readings = {}, options = {}) {
   const mixKey = incomeMixPoolKey(eco.incomeSources);
   const crimeKey = criminalIncomePoolKey(eco.incomeSources);
   const tradeKey = tradeProfilePoolKey(eco);
+  const shadowKey = shadowEconomyPoolKey(eco.safetyProfile);
 
   return Object.freeze({
     prosperityHeader: headerKey
@@ -534,5 +564,16 @@ export function economyStateProse(settlement, readings = {}, options = {}) {
     incomeMix: commercialRung(line('DS-ECO-12', mixKey)),
     criminalLine: commercialRung(line('DS-ECO-12', crimeKey)),
     tradeProfile: commercialRung(line('DS-ECO-12', tradeKey)),
+    // THE SHADOW ECONOMY. Same shape as the three above and for the same reason: the
+    // position is a paragraph inside a section that already prints the capture figure and
+    // its band, so the rung has no glance and no detail of its own to stand on.
+    //
+    // ⚠ THE `canonical` ANGLE IS THE LIVE STRING. Two of this block's variants are
+    // byte-identical hand copies of EconomicsTab's own `scaleNote`, which is why the tab
+    // draws this sentence INSTEAD OF that one rather than under it — a corpus line and its
+    // own twin an inch apart is the page saying one thing twice. The tab keeps `scaleNote`
+    // as the standing text for every reader this desk does not draw for, so the public
+    // dossier is byte-identical.
+    shadowEconomy: commercialRung(line('DS-ECO-6', shadowKey)),
   });
 }
