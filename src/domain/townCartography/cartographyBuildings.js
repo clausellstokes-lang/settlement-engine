@@ -334,9 +334,29 @@ export function compileTownBuildingLayers(input) {
   const bindings = input.institutionBindings;
   const settlement = record(input.settlement);
   const span = /** @type {Readonly<Record<string, ReadonlyArray<number>>>} */ (T.MULTIPLICITY.POPULATION_SPAN)[CARTOGRAPHY_TIERS[cartographyTierIndex(tier)]];
-  const population = typeof settlement.population === 'number' ? settlement.population : span[0];
+  // ⛔ THE GUARD IS `Number.isFinite`, NEVER `typeof` ALONE, and the conjunct is
+  // load-bearing rather than belt-and-braces: `typeof NaN === 'number'` is TRUE, so a
+  // bare typeof test admits NaN and ±Infinity as populations. A NaN population makes
+  // `popWithin01` NaN, which makes the dwelling `target` below NaN, which makes
+  // `emitted >= target` FALSE for EVERY value of `emitted` — so the per-ward dwelling
+  // cap FAILED OPEN rather than binding. Measured on a thorp (span 8..60, tone 500,
+  // eight free parcels): population 34 emits 3 dwellings and NaN emitted 8, while
+  // +Infinity read as the band ceiling (4) and −Infinity as the band floor (2). The
+  // estate already refuses a non-finite population at the corpus door
+  // (`refuseNonFiniteWorld`, scripts/review/readerCorpus.mjs); this leaf now agrees
+  // with that reading instead of quietly drawing a town out of one. Same shape as
+  // `coefficient` above, which is this file's own already-correct spelling.
+  const population = typeof settlement.population === 'number' && Number.isFinite(settlement.population)
+    ? settlement.population : span[0];
   const popWithin01 = clamp((population - span[0]) / (span[1] - span[0]), 0, 1);
-  const fabric01 = typeof input.fabricAccumulation01 === 'number' ? input.fabricAccumulation01 : null;
+  // The same guard one field along, because a non-finite fabric reading is ABSENT
+  // evidence and not evidence of an ancient town: `null` here routes to the fabricRead
+  // law's honest fallback, exactly as a dark fabric layer does. +Infinity used to drive
+  // `agePermille` to the 1000 ceiling (every building 'worn'), and NaN did not merely
+  // mis-grade — it reached `stableSceneStringify`'s finite check at the byte measure and
+  // THREW, taking the whole cartography compile down with it.
+  const fabric01 = typeof input.fabricAccumulation01 === 'number' && Number.isFinite(input.fabricAccumulation01)
+    ? input.fabricAccumulation01 : null;
 
   /** @type {Map<string, Record<string, unknown>>} */
   const canonicalById = new Map();
