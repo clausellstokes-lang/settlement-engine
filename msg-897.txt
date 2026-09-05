@@ -5,7 +5,7 @@ Three Opus cars replayed onto the clamp landing with zero file overlap, plus the
 register as the last car before the gate. The gate runner refused to start unless the product tip
 equalled the declared base, so a stale premise was refused rather than obeyed.
 
-Enrols: R37 — lane ANCHORS (three Opus-authored cars); R38 — lane WARMS-CAR0 (read-only, opened at §896.2); the register car is a Fable chair act.
+Enrols: R37 — lane ANCHORS (three Opus-authored cars); R38 — lane WARMS-CAR0 (read-only, opened at §896.2); R39 — lane LIGHT-PLAN (read-only); the register car is a Fable chair act.
 
 Seat: Fable 5.1 — validated
 
