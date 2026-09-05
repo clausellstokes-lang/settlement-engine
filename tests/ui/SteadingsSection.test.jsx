@@ -33,7 +33,9 @@ describe('SteadingsSection — render gates', () => {
   test('a generation-seeded ancient shows the nearby-ruin banner', () => {
     render(<SteadingsSection settlement={baseSettlement({ history: { ancientRuin: { name: 'Vaelakar', yearsAgo: 320 } } })} />);
     expect(screen.getByText('Ancient ruin nearby')).toBeTruthy();
-    expect(screen.getByText(/Vaelakar/)).toBeTruthy();
+    // GEN3's DS-GEN-8 steadings sentence names the ruin beside the banner, so the name appears twice on
+    // purpose (the banner's datum and the corpus sentence that reads it); one match is the banner's.
+    expect(screen.getAllByText(/Vaelakar/).length).toBeGreaterThanOrEqual(1);
   });
 
   test('satellite steadings render as cards from the campaign ledger (charter-pending visible)', () => {
