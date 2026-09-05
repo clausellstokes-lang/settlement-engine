@@ -28,6 +28,7 @@ Kit: `git archive refs/preserve/chair-tools-2026-09-05 | tar -x -C $SC` (SC = th
 - The main tree's package.json is a FOREIGN old variant (memory: the-main-trees-package-json-is-a-foreign-old-variant).
 
 ## §900 ORDER OF ACTS FROM HERE (each proved before the next)
+- ⭐ THE COMPOSITION'S RED SET is measured (whole suite at 8b9031f4c: 49 arms / 26 files; `whole-900a.reds.txt`): register-class reds go to the doors; ~14 lane-class reds are briefed in `briefs/brief-DESK-900-REDS.md` (dock laneDESKPROOF @ 8b9031f4c) — DISPATCH IT at the next free slot, BEFORE the final whole suite.
 1. Wait for DESK-900-CARS (in laneDESKINT). Then replay the late three onto its tip: `sh replay-cars.sh laneDESKINT 38474a59e laneTIMEBAND:a2af55cde laneGEN2:940d161ca laneHOLDSAFE:5e28d5c83` (GEN2/HOLDSAFE only after their lanes report; conflicts: registry via the resolver, anything else by hand; the tool skips applied cars).
 2. `sh build-900-chair.sh` (the edge re-mint ritual + the full build); write the WORKER_BUNDLE_CEILING_BYTES arm as a chair car from the printed bytes; diff listing-900.txt by filename against HORIZON-B1's receipt.
 3. The WHOLE suite at the final composed tip (`npx vitest run`, no filter, in a clean proof dock — `laneDESKPROOF` re-cut at the tip); fix cars for every red that is not a register lag; attribute at base.
