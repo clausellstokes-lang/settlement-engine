@@ -7,7 +7,7 @@ export const meta = {
     { title: 'Synthesize', detail: 'one dossier section per exemplar + the failure catalogue + a completeness critic' },
   ],
 }
-// Owner's cap: FOUR running agents of any kind. batched() runs at most `cap` thunks at once.
+// Owner's cap: FOUR running agents of any kind. SEAT LAW (owner 09-05): Opus VERIFIES — every verify chunk, the synthesis and the critic run as Opus; the finders keep the seat default so their cached research replays. batched() runs at most `cap` thunks at once.
 const CAP = (args && args.cap) || 4
 const OUT = (args && args.outDir) || '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/prose-research/sweep'
 async function batched(items, fn) {
@@ -63,7 +63,7 @@ const chunks = []
 for (let i = 0; i < claims.length; i += CHUNK) chunks.push(claims.slice(i, i + CHUNK).map((c, j) => ({ ...c, index: i + j })))
 const verifiedChunks = await batched(chunks, (chunk, ci) => agent(
   `Adversarially verify EACH of the following ${chunk.length} attributed claims by fetching its source as RAW text (WebFetch the url; group the claims by url and fetch each url ONCE; if a host blocks, try the Wayback Machine once, else BLOCKED). For each claim report its index and: VERIFIED_VERBATIM only if the quotation appears on the page word for word; VERIFIED_SUBSTANCE if the page supports the claim in other words (give the true wording, under twelve words); NOT_FOUND if the page does not support it; CONTRADICTED if it says otherwise. Default to NOT_FOUND when uncertain. Return one verdict per index, all ${chunk.length}.\n\nCLAIMS:\n${JSON.stringify(chunk.map(c => ({ index: c.index, feature: c.feature, claim: c.claim, source: c.source, url: c.url, quote: c.quote })))}`,
-  { label: `verify:chunk${ci}`, phase: 'Verify', schema: VERDICTS }).then(v => ({ chunk, v })))
+  { label: `verify:chunk${ci}`, phase: 'Verify', schema: VERDICTS, model: 'opus' }).then(v => ({ chunk, v })))
 const verified = []
 for (const r of verifiedChunks.filter(Boolean)) { const byIndex = new Map((r.v.verdicts || []).map(x => [x.index, x])); for (const c of r.chunk) verified.push({ ...c, verdict: byIndex.get(c.index) || { verdict: 'NOT_FOUND', trueWording: '', note: 'no verdict returned for this index' } }) }
 const kept = verified.filter(x => x.verdict && (x.verdict.verdict === 'VERIFIED_VERBATIM' || x.verdict.verdict === 'VERIFIED_SUBSTANCE'))
@@ -73,6 +73,6 @@ const groups = {}; for (const e of EX) groups[e.key] = []; if (!SKIP_AI) groups.
 for (const x of kept) { const idx = x.batch; const key = idx < findJobs.length ? findJobs[idx].ex.key : 'ai'; (groups[key] ||= []).push(x) }
 const sections = await batched(Object.entries(groups), ([key, xs]) => agent(
   `Write the dossier section for "${key}" from these VERIFIED claims only (JSON follows). Structure: numbered concrete features, each with the critics/sources that support it (count them), the true wording of any quotation (under twelve words), and the reconstruction rule it implies for a settlement dossier written as a calm archivist (present tense, concrete civic nouns, no digits, no em dash). Mark disagreements between sources explicitly. End with a coverage table: sources read per angle. Write it to ${OUT}/section-${key}.md and return the markdown.\n\nCLAIMS:\n${JSON.stringify(xs).slice(0, 180000)}`,
-  { label: `synth:${key}`, phase: 'Synthesize' }))
-const critic = await agent(`You are the completeness critic for the subset ${Object.keys(groups).join(', ')}. Read ${OUT}/section-*.md and the find-*.md notes. List what is MISSING: an angle not run, a well-known critic or study absent (name them), a claim that rests on one source, a copyright risk (a quotation over twelve words), and any feature the sections contradict each other on. Return a markdown list with a recommended next round of searches. Write it to ${OUT}/critic.md.`, { label: 'critic', phase: 'Synthesize' })
+  { label: `synth:${key}`, phase: 'Synthesize', model: 'opus' }))
+const critic = await agent(`You are the completeness critic for the subset ${Object.keys(groups).join(', ')}. Read ${OUT}/section-*.md and the find-*.md notes. List what is MISSING: an angle not run, a well-known critic or study absent (name them), a claim that rests on one source, a copyright risk (a quotation over twelve words), and any feature the sections contradict each other on. Return a markdown list with a recommended next round of searches. Write it to ${OUT}/critic.md.`, { label: 'critic', phase: 'Synthesize', model: 'opus' })
 return { claimsFound: allClaims.length, claimsDeduped: claims.length, claimsVerified: kept.length, sections: Object.keys(groups), critic }
