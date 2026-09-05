@@ -204,10 +204,57 @@ per-block declarations of WRITER-4). Nothing is minted here.*
 | `{steading}` | proper | a satellite steading by its own name | WRITER-4 |
 | `{ruin}` | proper | the ancient ruin by its own name | WRITER-4 |
 | `{event}` | proper | a historical event by its recorded name | WRITER-4 |
-| `{founder}` | proper | `founding.foundedBy` | WRITER-4 |
+| `{founder}` | phrase | `founding.foundedBy` — a lowercase descriptive phrase that carries its OWN determiner (*"a miller who built a mill and found customers before they found customers"*), never a name. **RE-DECLARED 2026-09-05, see §0c-4** | WRITER-4 |
 | `{challenge}` | phrase | `founding.initialChallenge` | WRITER-4 |
 | `{defwork}` | bare-common | the settlement's own wall-class work **by its recorded name** — the roster row `defenseProfile.institutions.walls` matched (wall · citadel · palisade · earthwork); never a baked or invented noun, and never offered to a settlement whose wall-class list is empty | CT-1a |
 | `{calamity}` | bare-common | the recorded blow **by its own typed word** — from a fabric scar's `kind` where the mirror is the source (`DS-GEN-15`) or from a `historicalEvents[]` row's `type` where the record is (`DS-GEN-16`); never a baked or invented noun, and never offered to a settlement whose scar list or event record is empty. The kind-to-word and type-to-word tables are WIRING work and are raised at CT-0 R-3, so a composer that has not built them must not draw a pool that uses this slot | CT-2 |
+
+### §0c-4 THE FOUNDER SLOT — RE-DECLARED `proper` → `phrase` (ruled by the chair 2026-09-05; owner row opened)
+
+`{founder}` was declared `proper` — *a generated or authored NAME, capitalised, carrying no
+article of its own* — and its ONLY producer has never written one. `narrativeGenerator.js`'s
+`FOUNDERS_BY_TIER` writes `history.founding.foundedBy` from twenty-six authored strings, every
+one of them a lowercase descriptive phrase carrying its own determiner: *"a single extended
+family who came and never left"*, *"the slow accretion of three smaller settlements that
+eventually merged under a single administration"*. Lane GEN2 found the disagreement, refused to
+fill one shape from another, and raised it (`receipt-desk-gen2.md` finding 2). The chair ruled
+that **the annex moves**: the words bend to the tree, and a producer that minted founder NAMES
+would be a new persisted field on `history.founding` — an OWNER row under THE PROMISE's
+immutable-history clause, never a chair's.
+
+WHICH CLASS, MEASURED RATHER THAN CHOSEN (`fillShapeViolation` over all twenty-six values):
+
+| declared shape | values REFUSED | the rule that refuses them |
+|---|---|---|
+| `proper` | **26 of 26** | `PROPER-FILL-IS-NOT-CAPITALISED` |
+| `bare-common` | **18 of 26** | `DETERMINER-IN-FILL` — the fill brings its own article |
+| `phrase` | **0 of 26** | — every value conforms |
+
+⛔ **`phrase`, NOT the bare-common family the ruling's draft named.** `bare-common` refuses any
+leading determiner because its whole content is that the SENTENCE supplies one, and eighteen of
+the twenty-six producer values open with *a* / *an* / *the*. `phrase` is also the class its
+sibling on the same record already carries: `{challenge}` fills from `founding.initialChallenge`
+and is `phrase`. One record, one shape family.
+
+⛔ **AND THE SLOT STAYS UNFILLED AT THIS TIP, FOR A GRAMMAR REASON RATHER THAN A SHAPE ONE.**
+Exactly one variant in the whole corpus names it — DS-GEN-9's *"{founder} put {settlement} here,
+and the first trial the place met was {challenge}; that it was met is why there is a town to
+describe."* — and the slot is **SENTENCE-INITIAL**. `fillSlots` (`stateProseKernel.js`) performs
+no capitalisation of any kind, so a conforming lowercase `phrase` fill would render *"a miller
+who built a mill … put Thornwall here"* with a lowercase sentence opening. NO VARIANT NEEDS A
+NAME (measured: one variant, and what it needs is a capital), so the ruling's name-only
+withholding provision has an empty subject; what is withheld is the FILL, and the two ways to
+release it are both the chair's, not a lane's:
+
+1. AUTHOR a variant that names `{founder}` non-initially (*"{settlement} was put here by
+   {founder}, and …"*) — the corpus words are the chair's, and a sealed sentence is not a
+   lane's to re-cut; or
+2. RULE a sentence-initial capitalisation step for `phrase` fills, which is a change to the
+   shared kernel's fill contract and therefore reaches every `phrase` slot at once.
+
+Until one of those lands, the DS-GEN-9 variant naming `{founder}` stays ineligible under
+anchored liveness — the same correct silence §0c-3 describes, now for a recorded grammar
+reason rather than for a false shape declaration.
 
 **THE SLOTS-LINE CONVENTION, RECONCILED (§0h V1-h).** WRITER-2 declares each
 block's **permitted palette**; the other three declare the **used set**. The
