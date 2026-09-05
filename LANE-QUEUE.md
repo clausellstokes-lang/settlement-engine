@@ -15,7 +15,7 @@ Updated 2026-09-05 by the Fable chair (after §897: product fd8b6df00, ledger c8
 | ~~DESK-GEN2~~ DONE → 4 cars, a4ce9f80f sealed `desk-gen2-2026-09-05` (6/15 lit; 7 stopped with residue; DS-GEN-1 OWNER-signed; DS-GEN-10 unmountable) | | | | |
 | ~~DESK-ECON2~~ DONE → 333b1a83c sealed `desk-econ2-2026-09-05` (§0c-3 CLOSED; 4 mounts; 5 dark on the casing class) · THE DESK CONSIST IS COMPLETE except OSR-SCHEMA17 | | | | |
 | VOICE-JSX | build | laneVOICE @ fd8b6df00 | briefs/brief-VOICE-JSX.md | 09-05 |
-| ~~ENC-4~~ BUILT → 9 cars 7be568047 sealed `enc4-2026-09-05`; ⚠ VITEST PROOF OWED at its landing (no quiet window opened); the chair reviews R1 (one row, `chance_meeting_exposed` unwirable — the seed lacks an approach direction: one-line `approacherNid` cure or a ruling), R2 (a seed edit to a landed ENC-3 file), R9 (`DEFER_CEILING` 35 → 36) before it lands | | | | |
+| ~~ENC-4~~ BUILT → 9 cars 7be568047 sealed `enc4-2026-09-05`; ⚠ VITEST PROOF OWED at its landing (no quiet window opened); RULED (`rulings/RULING-ENC4-R1-R2-R9.md`): R1 one row now, §B deferred to ENC-4b (approacher only where known); R2 ratified; R9 ratified. Proofs at its landing. | | | | |
 
 ## QUEUED — next slot takes the top row
 1. **OSR-SCHEMA17** — NEXT after the PROSE gate (its corpus scan is heavy) — build; dock laneINTEG-tree @ 940d161ca; briefs/brief-OSR-SCHEMA17.md. ⛔ Dispatch only when NO chair
