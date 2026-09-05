@@ -10,6 +10,7 @@
  *   DS-ECO-9  LADDER › the food-security rung, and the two blockade states
  *   DS-ECO-12 Economics › the commercial profile — how the town earns, and what it trades
  *   DS-ECO-6  Economics › the shadow economy, by capture tier
+ *   DS-ECO-3  Economics › the LIVE trade-flow drift, read against trade dependency
  *
  * ── DS-ECO-12: THREE LENSES AT ONE POSITION (the DS-POW-1 shape, not an exception) ────
  * DS-ECO-12 is one block over one record — `economicState`'s commercial identity — read
@@ -412,6 +413,53 @@ export function shadowEconomyPoolKey(safetyProfile) {
 }
 
 /**
+ * DS-ECO-3's pool key, from the canonical live-flow reading.
+ *
+ * A DRIFT IS A MEASUREMENT OR IT IS NOTHING. `flowDerivedDependency` returns null on
+ * every world with no measured throughput — dormant, isolated, decayed away, or below the
+ * kernel's own epsilon — and this returns null with it. There is deliberately no "assume
+ * adequate" arm: a town whose roads were never measured has not been measured as busy,
+ * and "Caravans keep to their rounds" over an unmeasured world is a default wearing a
+ * reading's clothes. `LiveTradeFlowSection` does not render there either, so R-DST-K makes
+ * the same answer twice.
+ *
+ * KEYED ON THE PRODUCER'S OWN BAND TOKEN, never on its `label` ("Trade choked", "Trade
+ * steady", "Trade brisk"), which is the display word and not the datum — the label trap.
+ * An unrecognised band is null rather than a fall into `ADEQUATE`, on the same reasoning
+ * `prosperityHeaderPoolKey` refuses an unknown rung.
+ *
+ * ⛔ ONE OF THE FIVE POOLS IS UNREACHABLE IN EVERY WORLD THE ENGINE CAN BUILD, and this
+ * is a FINDING declared here rather than a hole papered over. `throughputBand`'s
+ * non-dependent branch is `throughput > ABUNDANT_CEIL ? SURPLUS : ADEQUATE` — it has no
+ * shortage arm at all — so `SHORTAGE × not trade-dependent` can never be keyed. MEASURED
+ * by exhaustion over the producer: of 361 (inflow, outflow) points, 63 reach a shortage
+ * band WITH dependency and 0 reach one without.
+ *
+ * THE CORPUS IS NOT WRONG, AND NEITHER IS THE PRODUCER — they disagree about one word.
+ * The corpus wrote for empty roads on a town that does not need them ("in a town that
+ * lives off its own fields, quiet roads are a matter of company rather than supply"); the
+ * producer folds that state into `ADEQUATE` alongside ordinary traffic. THE ONE ACT THAT
+ * LIGHTS IT is a shortage arm on the non-dependent branch of `throughputBand`, which
+ * moves a shipped band distribution and is a tuning call, not a desk's. It is pinned in
+ * the desk test as an EXPOSURE of the producer's shape, so the day that arm lands the pin
+ * reds and someone reads this paragraph instead of rediscovering it.
+ *
+ * ONLY THE TWO EXTREME BANDS SPLIT BY DEPENDENCY. That is the corpus's shape, not a
+ * simplification: a town's dependency changes what quiet roads MEAN and does not change
+ * what ordinary ones mean, so `ADEQUATE` is one pool and the other two are two each.
+ * @param {{band?: unknown, tradeDependent?: unknown}|null|undefined} drift
+ * @returns {string|null}
+ */
+export function tradeFlowPoolKey(drift) {
+  const band = text(drift?.band);
+  if (band === 'adequate') return 'ADEQUATE';
+  if (band !== 'shortage' && band !== 'surplus') return null;
+  return drift?.tradeDependent
+    ? `${band.toUpperCase()} \u00d7 trade-dependent`
+    : `${band.toUpperCase()} \u00d7 not trade-dependent`;
+}
+
+/**
  * One DS-ECO-12 lens as a rung, or NOTHING.
  *
  * A sentence-less rung is NULL here, and that is a departure from the file's other four
@@ -457,7 +505,9 @@ export function leadingGoodNoun(exports_) {
  * does not render.
  *
  * @param {EconomyDeskSettlement|null|undefined} settlement
- * @param {{foodBalance?: FoodBalanceView|null, granaryOutlook?: GranaryOutlookView|null}} [readings]
+ * @param {{foodBalance?: FoodBalanceView|null, granaryOutlook?: GranaryOutlookView|null,
+ *   flowDrift?: {band?: unknown, tradeDependent?: unknown}|null}} [readings] the canonical
+ *   derived readings, as their own owners return them — this desk derives none of them.
  * @param {{seed?: string, audience?: string}} [options]
  * The last key is `foodSecurityRung`, NOT `foodSecurity`, and the difference is load
  * bearing rather than cosmetic. Every other key here names a SURFACE or a RUNG; that one
@@ -468,7 +518,7 @@ export function leadingGoodNoun(exports_) {
  * promised a record it is not, and the first consumer to read `.sentence` off it was
  * convicted for it. A key that lies about its own shape is a defect at the seam, not at
  * the call site.
- * @returns {Readonly<{prosperityHeader: object|null, prosperityRung: object|null, foodTile: object|null, granaryTile: object|null, foodSecurityRung: object|null, incomeMix: object|null, criminalLine: object|null, tradeProfile: object|null, shadowEconomy: object|null}>}
+ * @returns {Readonly<{prosperityHeader: object|null, prosperityRung: object|null, foodTile: object|null, granaryTile: object|null, foodSecurityRung: object|null, incomeMix: object|null, criminalLine: object|null, tradeProfile: object|null, shadowEconomy: object|null, tradeFlow: object|null}>}
  */
 export function economyStateProse(settlement, readings = {}, options = {}) {
   const eco = settlement?.economicState || {};
@@ -535,6 +585,7 @@ export function economyStateProse(settlement, readings = {}, options = {}) {
   const crimeKey = criminalIncomePoolKey(eco.incomeSources);
   const tradeKey = tradeProfilePoolKey(eco);
   const shadowKey = shadowEconomyPoolKey(eco.safetyProfile);
+  const flowKey = tradeFlowPoolKey(readings.flowDrift);
 
   return Object.freeze({
     prosperityHeader: headerKey
@@ -575,5 +626,10 @@ export function economyStateProse(settlement, readings = {}, options = {}) {
     // as the standing text for every reader this desk does not draw for, so the public
     // dossier is byte-identical.
     shadowEconomy: commercialRung(line('DS-ECO-6', shadowKey)),
+    // THE LIVE FLOW. Same `canonical`-angle hazard as the shadow economy above: three of
+    // this block's variants are copies of tradeFlowEconomics.js's own BAND_COPY headlines,
+    // and they have ALREADY drifted (the corpus spells a period where the live string has
+    // an em dash). The section draws this line instead of that one, never under it.
+    tradeFlow: commercialRung(line('DS-ECO-3', flowKey)),
   });
 }
