@@ -8,7 +8,7 @@ import {NarrativeNote} from '../NarrativeNote';
 import { criminalOpNote, deriveCriminalStructure, deriveDefenseReadiness, deriveSupportingCapabilities, deriveGuardAssessment, deriveDefenseVulnerabilities, DEFENSE_STRESS_STATUS } from '../../../domain/display/defenseDisplay.js';
 import { safetySeverityOf } from '../../../domain/display/safetySeverity.js';
 import { scoreBand, scoreColor } from '../../../domain/display/defenseScoreBands.js';
-import { defenseCriminalProse, defenseForcesProse, defenseMilitaryStatusProse, defensePostureProse, defenseStateProse, defenseThreatProse, defenseWallRationaleProse } from '../../../domain/display/stateProse/defenseStateProse.js';
+import { defenseCriminalProse, defenseForcesProse, defenseMilitaryStatusProse, defensePostureProse, defenseStateProse, defenseSupportingProse, defenseThreatProse, defenseWallRationaleProse } from '../../../domain/display/stateProse/defenseStateProse.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
 import { truncateAtWord } from '../../../lib/text.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
@@ -61,6 +61,15 @@ const WALL_RATIONALE_MOUNT = 'defense.wallRationale';
  * a way it is not for the other mounts.
  */
 const CRIMINAL_MOUNT = 'defense.criminalStructure';
+
+/**
+ * The supporting-capabilities position. TWO lenses of DS-DEF-6 at ONE position, and the
+ * block's other FOUR lenses are declared dark in the desk rather than drawn: each of them
+ * states a fact one of the positions above already speaks, in near-verbatim prose. The
+ * two that survive — the supply route and the sea approaches — are the only readings on
+ * this tab that nothing else here can see.
+ */
+const SUPPORTING_MOUNT = 'defense.supportingCapabilities';
 
 export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false, playerView = false}) {
   const [expandedThreat, setExpandedThreat] = useState(null);
@@ -147,6 +156,17 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
       audience: playerView ? 'player' : 'dm',
     });
   const wallLine = drawnAtMount(WALL_RATIONALE_MOUNT, wallProse.rationale)?.sentence || null;
+  // DS-DEF-6, the supporting capabilities. Same public gate as every other mount on this
+  // tab; no DM-editable field, so plain rungs. Only the logistics and naval lenses are
+  // read — the desk states, and the suite pins, why the other four must stay silent.
+  const supportingProse = publicDossier
+    ? Object.freeze({ logistics: null, naval: null })
+    : defenseSupportingProse(r, {
+      seed: String(r?._seed ?? r?.id ?? ''),
+      audience: playerView ? 'player' : 'dm',
+    });
+  const supportingLines = ['logistics', 'naval']
+    .map((k) => drawnAtMount(SUPPORTING_MOUNT, supportingProse[k])?.sentence).filter(Boolean);
   const stresses = (Array.isArray(r.stress)?r.stress:r.stress?[r.stress]:[]).filter(Boolean);
   const stressTypes = stresses.map(s=>s?.type).filter(Boolean);
   const crimCapture = r.powerStructure?.criminalCaptureState || 'none';
@@ -496,6 +516,14 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
 
       {/* ── SUPPORTING CAPABILITIES ──────────────────────────────────────── */}
       <Section title="Supporting Capabilities" collapsible defaultOpen={false}>
+        {/* DS-DEF-6: how supply reaches this town and who holds its water, in its own
+            voice. Two lenses of one block at one position; the capability rows below are
+            untouched. */}
+        {supportingLines.length>0&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #1a3a6a',padding:'9px 13px',marginBottom:10}}>
+          {supportingLines.map((line,i)=>(
+            <p key={i} style={{fontSize:i===0?FS.sm:FS.xs,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.55,margin:i===0?0:'5px 0 0',fontStyle:'italic'}}>{line}</p>
+          ))}
+        </div>}
         <div style={{display:'flex',flexDirection:'column',gap:6}}>
           {caps.map((cap,i)=>(
             <div key={i} style={{display:'flex',gap:12,alignItems:'flex-start',background:swatch['#FAF8F4'],border:'1px solid #e0d0b0',borderLeft:`3px solid ${cap.color}`,padding:'8px 12px'}}>

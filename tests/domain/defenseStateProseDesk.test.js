@@ -26,6 +26,11 @@ import {
   criminalCapturePoolKey, criminalStructurePoolKey, defenseCriminalProse,
   CRIMINAL_CAPTURE_STATES, RECOGNISED_CRIMINAL_STRUCTURES,
   TERRAIN_DEFENCE_NAMES, TERRAIN_PRIZE_NAMES,
+  DEF6_C3_BLOCKED_POOLS, DEF6_FACT_SPOKEN_AT, defenseSupportingProse,
+  navalDefensePoolKey, supplyLogisticsPoolKey,
+  DEF7_DARK_POOLS, DEF10_DARK_POOLS, DEF10_FACT_SPOKEN_AT,
+  defenseMagicDependencyProse, hasNamedMagicChain, magicDependencyPoolKey,
+  namedMagicChainGood,
 } from '../../src/domain/display/stateProse/defenseStateProse.js';
 import {
   DEFENSE_BUCKET_KEYS, standingDefenseForces,
@@ -38,7 +43,9 @@ import { avgScore, scoreBand } from '../../src/domain/display/defenseScoreBands.
 import { avgScore as avgScoreViaPdf } from '../../src/pdf/lib/viewModelPrimitives.js';
 import { deriveDefensePosture } from '../../src/domain/display/dossierViewModel.js';
 import { DM_FIELD_FRAMED_BY_BLOCK, isDmEditableProsePath } from '../../src/domain/display/stateProse/dmFieldProjection.js';
-import { DEFENSE_STRESS_STATUS, deriveCriminalStructure, deriveGuardAssessment } from '../../src/domain/display/defenseDisplay.js';
+import { DEFENSE_STRESS_STATUS, deriveCriminalStructure, deriveGuardAssessment, deriveSupportingCapabilities } from '../../src/domain/display/defenseDisplay.js';
+import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { codeOnly } from '../helpers/codeOnlySource.js';
 import { STRESS_TYPE_MAP } from '../../src/data/stressTypes.js';
 import { SMALL_TIERS, TIER_ORDER, TOWN_PLUS_TIERS } from '../../src/data/constants.js';
 import { DOSSIER_STATE_PROSE_DEFENSE } from '../../src/data/dossierStateProse/defense.generated.js';
@@ -1315,5 +1322,554 @@ describe('the avgScore lift — ONE implementation, reachable cheaply', () => {
     expect(scoreBand(0)).toBe('CRITICAL');
     // …and the desk's economic row is silent rather than CRITICAL on an absent score.
     expect(economicRowPoolKey(avgScore({}))).toBeNull();
+  });
+});
+
+/**
+ * ── DS-DEF-6 · SUPPORTING CAPABILITIES ──────────────────────────────────────────────
+ *
+ * The fixtures below are DERIVED FROM GENERATED SETTLEMENTS rather than hand-shaped, because
+ * this block's whole risk is a desk that agrees with its own expectations and disagrees with
+ * the producer six pixels away on the screen. Every pool-key claim is checked against
+ * `deriveSupportingCapabilities`'s own `status`/`note` on the same settlement.
+ */
+const DEF6_POOLS = DOSSIER_STATE_PROSE_DEFENSE['DS-DEF-6'].pools;
+
+/** Four generated worlds chosen to reach four of the five logistics branches. */
+const WORLDS = [
+  ['village-road', { settType: 'village', culture: 'germanic', terrain: 'grassland', tradeRouteAccess: 'road' }, 'seed-A'],
+  ['metro-port', { settType: 'metropolis', culture: 'mediterranean', terrain: 'coastal', tradeRouteAccess: 'port' }, 'seed-B'],
+  ['city-isolated', { settType: 'city', culture: 'norse', terrain: 'mountain', tradeRouteAccess: 'isolated' }, 'seed-C'],
+  ['town-road', { settType: 'town', culture: 'celtic', terrain: 'forest', tradeRouteAccess: 'road', monsterThreat: 'plagued' }, 'seed-D'],
+].map(([label, config, seed]) => ({
+  label, settlement: generateSettlementPipeline(config, null, { seed, customContent: {} }),
+}));
+
+describe('DS-DEF-6 — the two lenses that may speak, bound to their producer', () => {
+  it('the logistics key is TOTAL over the corpus five, and mirrors the producer branch for branch', () => {
+    // Both directions. Every key the desk can emit is a pool; every `Logistics & Supply`
+    // pool is reachable from some (granary, port, access) triple the producer can present.
+    const emitted = new Set();
+    for (const granary of [true, false]) {
+      for (const port of [true, false]) {
+        for (const access of ['road', 'port', 'isolated', 'river']) {
+          const key = supplyLogisticsPoolKey(granary, port, access);
+          expect(DEF6_POOLS[key], `desk emitted a key the corpus has no pool for: ${key}`).toBeTruthy();
+          emitted.add(key);
+        }
+      }
+    }
+    const corpusKeys = Object.keys(DEF6_POOLS).filter((k) => k.startsWith('Logistics & Supply: '));
+    expect([...emitted].sort()).toEqual([...corpusKeys].sort());
+    expect(corpusKeys).toHaveLength(5);
+  });
+
+  it('AN ABSENT TRADE ACCESS IS SILENCE, and the producer default is the thing declined', () => {
+    // The producer reads `r.config?.tradeRouteAccess || 'road'`, so an unmeasured approach
+    // becomes a road. Routing that through the desk would let the page tell a settlement
+    // whose approaches nobody recorded that cutting its roads cuts its supply.
+    expect(supplyLogisticsPoolKey(true, false, undefined)).toBeNull();
+    expect(supplyLogisticsPoolKey(true, false, '')).toBeNull();
+    expect(supplyLogisticsPoolKey(false, false, null)).toBeNull();
+    // ANCHOR: the same call with the value PRESENT does route, so the nulls above are the
+    // presence check discriminating rather than the function having stopped working.
+    expect(supplyLogisticsPoolKey(true, false, 'road')).toBe('Logistics & Supply: Granary with road supply');
+    // …and no GENERATED settlement is ever silent here: resolveConfig writes the field.
+    for (const { label, settlement } of WORLDS) {
+      expect(typeof settlement.config?.tradeRouteAccess, `${label} carries no tradeRouteAccess`).toBe('string');
+    }
+  });
+
+  it('the naval key is TOTAL, silent without water, and lets the LIVE blockade outrank', () => {
+    expect(navalDefensePoolKey(false, false, false)).toBeNull();
+    expect(navalDefensePoolKey(false, false, true)).toBeNull();
+    expect(navalDefensePoolKey(true, false, false)).toBe('Naval Defense: Naval force');
+    expect(navalDefensePoolKey(false, true, false)).toBe('Naval Defense: Port only');
+    expect(navalDefensePoolKey(true, true, false)).toBe('Naval Defense: Naval force');
+    expect(navalDefensePoolKey(true, true, true)).toBe('Naval Defense: Under blockade');
+    expect(navalDefensePoolKey(false, true, true)).toBe('Naval Defense: Under blockade');
+    const corpusKeys = Object.keys(DEF6_POOLS).filter((k) => k.startsWith('Naval Defense: '));
+    expect(corpusKeys).toHaveLength(3);
+    for (const key of corpusKeys) expect(DEF6_POOLS[key].length).toBeGreaterThan(0);
+  });
+
+  it('THE MIRROR HOLDS ON GENERATED WORLDS: the desk key and the producer row agree', () => {
+    // The arm that would have caught a desk describing one supply posture beside a note
+    // describing another. The producer's own asymmetry (institution `hasPort` on the granary
+    // side, config `=== 'port'` on the other) is what makes this worth executing rather
+    // than reasoning about.
+    const seenLogistics = new Set();
+    for (const { label, settlement } of WORLDS) {
+      const caps = deriveSupportingCapabilities(settlement);
+      const inst = settlement.economicState?.compound?.inst || {};
+      const key = supplyLogisticsPoolKey(
+        inst.hasGranary === true, inst.hasPort === true, settlement.config?.tradeRouteAccess,
+      );
+      seenLogistics.add(key);
+      const note = caps.find((c) => c.label === 'Logistics & Supply')?.note || '';
+      // The corpus suffix and the producer's note are two spellings of one branch; the
+      // branch identity is what is asserted, via the producer's own status + note pairing.
+      const granaryNote = /^Granary/.test(note);
+      expect(granaryNote, `${label}: producer note ${JSON.stringify(note)} vs key ${key}`)
+        .toBe(key.includes(': Granary'));
+      if (key === 'Logistics & Supply: Granary + port') expect(note).toContain('sea access');
+      if (key === 'Logistics & Supply: Granary in isolation') expect(note).toContain('isolation');
+      if (key === 'Logistics & Supply: Granary with road supply') expect(note).toContain('road supply');
+      if (key === 'Logistics & Supply: No reserves, port open') expect(note).toContain('sea supply');
+      if (key === 'Logistics & Supply: No reserves, landlocked') expect(note).toContain('No food buffer');
+      // The naval row exists exactly when the desk has a naval key, both ways.
+      const navalRow = caps.find((c) => c.label === 'Naval Defense') || null;
+      const navalKey = navalDefensePoolKey(inst.hasNavy === true, inst.hasPort === true, false);
+      expect(Boolean(navalRow), `${label}: naval row presence`).toBe(navalKey !== null);
+      if (navalRow) expect(navalKey).toBe(`Naval Defense: ${navalRow.status}`);
+    }
+    // Non-vacuity: the four worlds must have reached more than one logistics branch, or the
+    // agreement above is one branch asserted four times.
+    expect(seenLogistics.size).toBeGreaterThan(2);
+  });
+
+  it('the desk RENDERS on every generated world, and the sentence carries no slot marker', () => {
+    for (const { label, settlement } of WORLDS) {
+      const drawn = defenseSupportingProse(settlement, { seed: 'def6', audience: 'dm' });
+      expect(drawn.logistics, `${label} drew no logistics rung`).toBeTruthy();
+      expect(typeof drawn.logistics.sentence, `${label} logistics sentence`).toBe('string');
+      expect(drawn.logistics.sentence).not.toContain('{');
+      expect(drawn.logistics.provenance.blockId).toBe('DS-DEF-6');
+      if (drawn.naval) {
+        expect(drawn.naval.sentence).not.toContain('{');
+        expect(drawn.naval.provenance.blockId).toBe('DS-DEF-6');
+      }
+    }
+  });
+
+  it('THE BLOCKADE POOL ROUTES — dormant at generation, live in a pulsed world', () => {
+    // `stockpile.blockaded` is written by worldPulse/foodStockpile.js and NEVER at
+    // generation, so a corpus census over generated worlds would call this pool dead. It is
+    // not dead; it is dormant. The fixture carries the field in the SHAPE that writer emits.
+    const port = WORLDS.find((w) => w.label === 'metro-port').settlement;
+    expect(port.economicState?.foodSecurity?.stockpile ?? null, 'generation now writes a stockpile').toBeNull();
+    const pulsed = {
+      ...port,
+      economicState: {
+        ...port.economicState,
+        foodSecurity: {
+          ...port.economicState.foodSecurity,
+          stockpile: { blockaded: true, blockadeBypass: 'teleport', famished: false, lastTick: 12 },
+        },
+      },
+    };
+    const drawn = defenseSupportingProse(pulsed, { seed: 'blk', audience: 'dm' });
+    expect(drawn.naval.provenance.poolKey).toBe('Naval Defense: Under blockade');
+    // ⚠ A stockpile that says nothing about a blockade is NOT a blockade: the strict read.
+    const quiet = { ...pulsed,
+      economicState: { ...pulsed.economicState,
+        foodSecurity: { ...pulsed.economicState.foodSecurity, stockpile: { lastTick: 12 } } } };
+    expect(defenseSupportingProse(quiet, { seed: 'blk' }).naval.provenance.poolKey)
+      .toBe('Naval Defense: Port only');
+  });
+
+  it('THE COVERTNESS GATE holds on the blockade pool — the player is not told about the channel', () => {
+    // One variant of `Under blockade` is dm-only: it discloses that a magical channel is
+    // still running the line. A player-facing dossier must be byte-identical to one over a
+    // town with no such channel, so the variant must be UNREACHABLE at the player audience.
+    const covert = DEF6_POOLS['Naval Defense: Under blockade']
+      .filter((v) => (v.marks || []).includes('dm-only'));
+    expect(covert, 'the covert variant left the pool, so this arm proves nothing').toHaveLength(1);
+    const port = WORLDS.find((w) => w.label === 'metro-port').settlement;
+    const pulsed = { ...port,
+      economicState: { ...port.economicState,
+        foodSecurity: { ...port.economicState.foodSecurity, stockpile: { blockaded: true, blockadeBypass: 'teleport' } } } };
+    const seen = new Set();
+    for (let i = 0; i < 40; i++) {
+      const line = defenseSupportingProse({ ...pulsed, name: `Town${i}` }, { seed: `s${i}`, audience: 'player' }).naval.sentence;
+      seen.add(line.replace(/Town\d+/g, '{settlement}'));
+    }
+    // ANCHOR: forty player draws reached more than one variant, so the covert text's absence
+    // is the gate discriminating and not the draw having collapsed onto one index.
+    expect(seen.size, 'the player draw collapsed to a single variant').toBeGreaterThan(1);
+    expect([...seen].join(' ⟡ ')).not.toContain('magical channel'); // anchored: the line above proves the draw reached several variants
+    // …and the DM audience CAN reach it, which is the positive control for the same gate.
+    const dmSeen = new Set();
+    for (let i = 0; i < 60; i++) {
+      dmSeen.add(defenseSupportingProse({ ...pulsed, name: `Town${i}` }, { seed: `d${i}`, audience: 'dm' }).naval.sentence);
+    }
+    expect([...dmSeen].join(' ⟡ ')).toContain('magical channel');
+  });
+});
+
+describe('DS-DEF-6 — the FOUR lenses that must NOT speak, and why', () => {
+  it('the declared-blocked set is exactly the corpus minus the two speaking lenses', () => {
+    const live = Object.keys(DEF6_POOLS)
+      .filter((k) => k.startsWith('Logistics & Supply: ') || k.startsWith('Naval Defense: '));
+    const blocked = Object.keys(DEF6_POOLS).filter((k) => !live.includes(k));
+    expect([...DEF6_C3_BLOCKED_POOLS].sort()).toEqual([...blocked].sort());
+    expect(DEF6_C3_BLOCKED_POOLS).toHaveLength(13);
+    expect(live).toHaveLength(8);
+    // Every declared-blocked key is a REAL pool: a typo here would silently shrink the claim.
+    for (const key of DEF6_C3_BLOCKED_POOLS) expect(DEF6_POOLS[key], key).toBeTruthy();
+  });
+
+  it('every blocked lens names a LIVE mount row that already speaks its fact', () => {
+    // Pinned against the registry rather than a comment: if one of those positions is
+    // re-cut or its rung flipped to glance, this arm reds and the declaration is re-opened
+    // instead of quietly describing a page that has changed.
+    for (const [lens, mount] of Object.entries(DEF6_FACT_SPOKEN_AT)) {
+      const row = DOSSIER_MOUNTS.find((r) => r.mount === mount);
+      expect(row, `${lens} claims to be covered by ${mount}, which is not in the registry`).toBeTruthy();
+      expect(row.rung, `${mount} no longer SPEAKS, so ${lens} is no longer covered`).toBe('sentence');
+      expect(row.tab).toBe('defense');
+      // Every blocked pool belongs to a named lens, and every named lens has blocked pools.
+      expect(DEF6_C3_BLOCKED_POOLS.some((k) => k.startsWith(`${lens}: `)), lens).toBe(true);
+    }
+    for (const key of DEF6_C3_BLOCKED_POOLS) {
+      const lens = key.slice(0, key.indexOf(':'));
+      expect(Object.keys(DEF6_FACT_SPOKEN_AT), `${key} names no covering position`).toContain(lens);
+    }
+  });
+
+  it('the desk NEVER emits a blocked pool key, over the producer\'s whole input space', () => {
+    // The structural half of the declaration: it is not enough that the desk chooses not to
+    // read those lenses today — no reachable input may route to one.
+    const emitted = new Set();
+    for (const granary of [true, false]) {
+      for (const port of [true, false]) {
+        for (const navy of [true, false]) {
+          for (const blockaded of [true, false]) {
+            for (const access of ['road', 'port', 'isolated', 'river', '']) {
+              const a = supplyLogisticsPoolKey(granary, port, access);
+              const b = navalDefensePoolKey(navy, port, blockaded);
+              if (a) emitted.add(a);
+              if (b) emitted.add(b);
+            }
+          }
+        }
+      }
+    }
+    expect(emitted.size, 'the sweep emitted nothing, so the negative below is vacuous').toBe(8);
+    for (const key of DEF6_C3_BLOCKED_POOLS) {
+      // anchored: the line above proves the sweep emitted all eight live keys
+      expect([...emitted], `the desk can still reach the blocked pool ${key}`).not.toContain(key);
+    }
+  });
+
+  it('DS-DEF-6 speaks at exactly ONE position and has left the dark list', () => {
+    const row = sentenceMountForBlock('DS-DEF-6');
+    expect(row).toBeTruthy();
+    expect(row.mount).toBe('defense.supportingCapabilities');
+    expect(row.desk).toBe('defense');
+    expect(row.tab).toBe('defense');
+    // anchored: A_DARK_SIBLING is an id that genuinely carries no mount row, so the dark
+    // list is populated and still correctly keyed against the registry.
+    expectAbsentWithAnchor(UNMOUNTED_BLOCKS, 'DS-DEF-6', A_DARK_SIBLING, 'DS-DEF-6 is mounted');
+  });
+});
+
+/**
+ * ── DS-DEF-9 · MAGIC DEPENDENCY — the leaf's one block that speaks off the defense tab ──
+ */
+const DEF9_POOLS = DOSSIER_STATE_PROSE_DEFENSE['DS-DEF-9'].pools;
+const chained = (magicNote, outputs) => ({
+  defenseProfile: { magicDependency: true }, name: 'Silbergate', _seed: 'd9',
+  economicState: { activeChains: [{ label: 'Bowyer & fletcher', magicNote, outputs }] },
+});
+
+describe('DS-DEF-9 — magic dependency, and the slot filled from the right ROLE', () => {
+  it('the pool key is TOTAL over the producer boolean and SILENT when it is absent', () => {
+    expect(magicDependencyPoolKey(true, false)).toBe('magicDependency true');
+    expect(magicDependencyPoolKey(true, true)).toBe('magicDependency true, with a NAMED dependent chain');
+    expect(magicDependencyPoolKey(false, false)).toBe('magicDependency false');
+    expect(magicDependencyPoolKey(false, true)).toBe('magicDependency false');
+    // An unmeasured town is not an independent one. `defenseGenerator.js:639` writes the
+    // flag into every profile it builds, so an absent value is a fixture or a bad import.
+    expect(magicDependencyPoolKey(undefined, false)).toBeNull();
+    expect(magicDependencyPoolKey(null, true)).toBeNull();
+    expect(magicDependencyPoolKey('true', false)).toBeNull();
+    // Both directions: the three keys the desk can emit are exactly the corpus's three.
+    const emitted = new Set(['magicDependency true', 'magicDependency true, with a NAMED dependent chain', 'magicDependency false']);
+    expect([...emitted].sort()).toEqual(Object.keys(DEF9_POOLS).sort());
+  });
+
+  it('THE FILL COMES FROM `outputs[0]` AND NEVER FROM `label` — the role, not the field', () => {
+    // The chain's label names the TRADE ("Bowyer & fletcher"); the corpus slot is {good} and
+    // its sentence is "The {good} that {settlement} lives on". A trade name there reads
+    // perfectly fluent and states something the record does not.
+    expect(namedMagicChainGood([{ magicNote: 'n', outputs: ['Bows and crossbows'] }]))
+      .toBe('bows and crossbows');
+    // The label is present in that same fixture and is NOT what came back.
+    // anchored: the line above proves the reader returns a fill from this shape
+    expect(namedMagicChainGood([{ magicNote: 'n', label: 'Bowyer & fletcher', outputs: ['Preserved foods'] }]))
+      .not.toBe('bowyer & fletcher');
+    expect(namedMagicChainGood([{ magicNote: 'n', label: 'Bowyer & fletcher', outputs: ['Preserved foods'] }]))
+      .toBe('preserved foods');
+    // A chain with no magicNote is not a dependent chain, and is skipped for the fill.
+    expect(namedMagicChainGood([{ outputs: ['Herbal remedies'] }])).toBeUndefined();
+    expect(namedMagicChainGood(null)).toBeUndefined();
+    expect(namedMagicChainGood([])).toBeUndefined();
+  });
+
+  it('the fill REFUSES rather than lowercases what is not a bare common noun', () => {
+    // Lowercasing is safe for a common noun and destructive for a proper one: a custom
+    // content good called "Vaelthorn Steel" must not become "the vaelthorn steel".
+    expect(namedMagicChainGood([{ magicNote: 'n', outputs: ['Vaelthorn Steel'] }])).toBeUndefined();
+    // A parenthetical is a catalogue measure, not the shape `bare-common` names.
+    expect(namedMagicChainGood([{ magicNote: 'n', outputs: ['Ale (barrel)'] }])).toBeUndefined();
+    expect(namedMagicChainGood([{ magicNote: 'n', outputs: ['Iron ingots 40'] }])).toBeUndefined();
+    expect(namedMagicChainGood([{ magicNote: 'n', outputs: [''] }])).toBeUndefined();
+    // ANCHOR: the same reader on a clean value DOES fill, so the refusals above are the
+    // shape guard discriminating rather than the reader having stopped working.
+    expect(namedMagicChainGood([{ magicNote: 'n', outputs: ['Refined iron ingots'] }]))
+      .toBe('refined iron ingots');
+    // …and it walks past a refused chain to a later one that qualifies.
+    expect(namedMagicChainGood([
+      { magicNote: 'n', outputs: ['Ale (barrel)'] }, { magicNote: 'n', outputs: ['Game meat'] },
+    ])).toBe('game meat');
+  });
+
+  it('A REFUSED FILL DEGRADES THE POOL, it never blanks the position (R-DST-K)', () => {
+    // The NAMED-chain pool holds three variants, two of which name {good}. When the fill is
+    // refused the kernel drops those two and the third — which never named it — speaks.
+    const refused = chained('Arcane fabrication', ['Vaelthorn Steel']);
+    expect(hasNamedMagicChain(refused.economicState.activeChains)).toBe(true);
+    const drawn = defenseMagicDependencyProse(refused, { seed: 'r', audience: 'dm' });
+    expect(drawn.dependency, 'a refused fill blanked the position').toBeTruthy();
+    expect(drawn.dependency.provenance.poolKey).toBe('magicDependency true, with a NAMED dependent chain');
+    expect(drawn.dependency.sentence).not.toContain('{');
+    const slotless = DEF9_POOLS['magicDependency true, with a NAMED dependent chain']
+      .filter((v) => !(v.slots || []).includes('good'));
+    expect(slotless, 'the pool has no slotless variant left to degrade to').toHaveLength(1);
+    expect(drawn.dependency.sentence).toBe(slotless[0].text.replace('{settlement}', 'Silbergate'));
+    // …and a clean fill reaches a variant that NAMES the good.
+    const clean = defenseMagicDependencyProse(chained('Arcane fabrication', ['Preserved foods']), { seed: 'c' });
+    expect(clean.dependency.sentence).toContain('preserved foods');
+  });
+
+  it('ROUTING IS ON THE STATE, not on whether the fill survived the annex punctuation', () => {
+    // The pool key is a claim about the town ("there is a named dependent chain"), and the
+    // chain is named in the record whether or not its first output happens to pass the
+    // shape guard. Routing on the fill would make the sentence a function of the annex.
+    expect(hasNamedMagicChain([{ magicNote: 'x' }])).toBe(true);
+    expect(hasNamedMagicChain([{ magicNote: '   ' }])).toBe(false);
+    expect(hasNamedMagicChain([{ label: 'x' }])).toBe(false);
+    expect(hasNamedMagicChain(undefined)).toBe(false);
+    expect(defenseMagicDependencyProse(chained('n', ['Vaelthorn Steel']), { seed: 'q' })
+      .dependency.provenance.poolKey).toBe('magicDependency true, with a NAMED dependent chain');
+  });
+
+  it('REACHABILITY, MEASURED OVER GENERATED WORLDS rather than assumed', () => {
+    // The false pool is what every default world reads, and the desk renders it as a
+    // finding rather than as a silence.
+    for (const { label, settlement } of WORLDS) {
+      expect(typeof settlement.defenseProfile?.magicDependency, `${label}`).toBe('boolean');
+      const drawn = defenseMagicDependencyProse(settlement, { seed: 'm', audience: 'dm' });
+      expect(drawn.dependency, `${label} drew nothing`).toBeTruthy();
+      expect(drawn.dependency.sentence).not.toContain('{');
+      expect(drawn.dependency.provenance.blockId).toBe('DS-DEF-9');
+    }
+    // And the TRUE flag is reachable — gated entirely by stress incidence, not by magic.
+    // A magic-forced sweep is what makes the state appear; the sweep is small on purpose
+    // (the claim is reachability, and the wide census is recorded in the desk docblock).
+    let trueSeen = 0;
+    let namedSeen = 0;
+    for (let i = 0; i < 40; i++) {
+      const s = generateSettlementPipeline({
+        settType: ['village', 'town', 'city', 'metropolis'][i % 4],
+        culture: ['germanic', 'mediterranean', 'norse', 'celtic'][i % 4],
+        terrain: ['grassland', 'coastal', 'mountain', 'forest'][i % 4],
+        tradeRouteAccess: 'road', priorityMagic: 85, priorityReligion: 80,
+      }, null, { seed: `mx-${i}`, customContent: {} });
+      if (s.defenseProfile?.magicDependency !== true) continue;
+      trueSeen++;
+      const drawn = defenseMagicDependencyProse(s, { seed: `mx-${i}`, audience: 'dm' });
+      expect(drawn.dependency.provenance.poolKey).not.toBe('magicDependency false');
+      if (drawn.dependency.provenance.poolKey.includes('NAMED')) namedSeen++;
+    }
+    expect(trueSeen, 'no magic-dependent world was generated, so the arm proves nothing')
+      .toBeGreaterThan(0);
+    expect(namedSeen).toBeGreaterThan(0);
+  });
+
+  it('DS-DEF-9 speaks at exactly ONE position, on `viability`, and has left the dark list', () => {
+    const row = sentenceMountForBlock('DS-DEF-9');
+    expect(row).toBeTruthy();
+    expect(row.mount).toBe('viability.magicDependency');
+    expect(row.tab).toBe('viability');
+    // ⚠ The `desk` column names the CORPUS LEAF, not the tab — this is the registry's first
+    // cross-tab row and the column is doing what it is specified to do.
+    expect(row.desk).toBe('defense');
+    expect(row.tab).not.toBe(row.desk);
+    expectAbsentWithAnchor(UNMOUNTED_BLOCKS, 'DS-DEF-9', A_DARK_SIBLING, 'DS-DEF-9 is mounted');
+    // The slot the block needs is declared, and at the shape the annex registers.
+    expect(SLOT_FILL_SHAPES.good).toBe('bare-common');
+    expect(SHAPES.shapeOf('good')).toBe('bare-common');
+  });
+});
+
+/**
+ * ── ⛔ THE TWO DECLARED-DARK BLOCKS — pinned so neither can be quietly forgotten OR lit ──
+ */
+describe('DS-DEF-7 and DS-DEF-10 — dark by measurement, and the pin on both declarations', () => {
+  it('each declaration covers its block\'s WHOLE pool set, exactly', () => {
+    // A declaration that listed some of a block's pools would leave the rest looking like
+    // an oversight. Both directions, both blocks.
+    for (const [id, declared] of [['DS-DEF-7', DEF7_DARK_POOLS], ['DS-DEF-10', DEF10_DARK_POOLS]]) {
+      const pools = Object.keys(DOSSIER_STATE_PROSE_DEFENSE[id].pools);
+      expect([...declared].sort(), `${id} declaration drifted from the corpus`).toEqual([...pools].sort());
+      for (const key of declared) {
+        expect(DOSSIER_STATE_PROSE_DEFENSE[id].pools[key].length, `${id} :: ${key}`).toBeGreaterThan(0);
+      }
+    }
+    expect(DEF7_DARK_POOLS).toHaveLength(11);
+    expect(DEF10_DARK_POOLS).toHaveLength(21);
+  });
+
+  it('both blocks are in the dark half and NEITHER is mounted anywhere', () => {
+    for (const id of ['DS-DEF-7', 'DS-DEF-10']) {
+      expect(UNMOUNTED_BLOCKS, id).toContain(id);
+      expect(sentenceMountForBlock(id), `${id} gained a speaking position`).toBeNull();
+      expect(DOSSIER_MOUNTS.filter((r) => r.blockId === id), `${id} gained a mount row`).toHaveLength(0);
+    }
+  });
+
+  it('DS-DEF-10: every lens family names a LIVE position that already speaks its fact', () => {
+    // The C3 claim, pinned against the registry rather than left in a docblock. If any of
+    // those three positions is re-cut or stepped down to a glance, this arm reds and the
+    // declaration is re-opened — which is exactly the act that would light this block.
+    for (const [family, mount] of Object.entries(DEF10_FACT_SPOKEN_AT)) {
+      const row = DOSSIER_MOUNTS.find((r) => r.mount === mount);
+      expect(row, `${family} claims cover from ${mount}, which is not in the registry`).toBeTruthy();
+      expect(row.rung, `${mount} no longer SPEAKS, so ${family} is no longer covered`).toBe('sentence');
+      expect(DEF10_DARK_POOLS.some((k) => k.startsWith(`${family} `)), family).toBe(true);
+    }
+    // Every dark pool belongs to one of the three named families — no fourth family has
+    // appeared in the corpus without a covering position being named for it.
+    for (const key of DEF10_DARK_POOLS) {
+      const family = key.split(' ')[0];
+      expect(Object.keys(DEF10_FACT_SPOKEN_AT), `${key} names no covering position`).toContain(family);
+    }
+  });
+
+  it('DS-DEF-10\'s posture vocabulary IS an exact 1:1 with the producer — the block is not broken', () => {
+    // The point of this arm is that the block is dark for a LAYOUT reason and not a
+    // producer one: the route would be trivial, which is what makes the C3 finding worth
+    // writing down instead of leaving as a silence.
+    const postures = new Set(Object.values(DEFENSE_STRESS_STATUS).map((s) => s.posture));
+    const declared = DEF10_DARK_POOLS.filter((k) => k.startsWith('posture '))
+      .map((k) => k.replace(/^posture /, '').replace(/ \([^)]*\)$/, ''));
+    expect([...declared].sort()).toEqual([...postures].sort());
+    expect(declared).toHaveLength(15);
+    // …and where the corpus word differs from the producer's token, the corpus carries the
+    // token in parentheses — the label-trap rule, already solved by the author.
+    const parenthesised = DEF10_DARK_POOLS
+      .filter((k) => /^posture .* \(.*\)$/.test(k)).map((k) => /\(([^)]*)\)$/.exec(k)[1]);
+    expect(parenthesised.length).toBeGreaterThan(0);
+    for (const token of parenthesised) {
+      expect(Object.keys(DEFENSE_STRESS_STATUS), `${token} is not a stress type`).toContain(token);
+    }
+  });
+
+  it('DS-DEF-7 reason 3: NO contributor reason can fill the `bare-common` slot the pools name', () => {
+    // MEASURED, not reasoned: `causalState.js` writes `reason` as a finished SENTENCE, and
+    // every one fails `bare-common` on a leading capital and a terminal period at least.
+    // The desk's own `{good}` fill is the reader used, because it applies the same shape.
+    const REAL_REASONS = [
+      'Defense readiness score: 21.', 'Defensive walls in place.',
+      'Wartime pressure taxes defense readiness.',
+    ];
+    for (const reason of REAL_REASONS) {
+      expect(namedMagicChainGood([{ magicNote: 'n', outputs: [reason] }]), reason).toBeUndefined();
+    }
+    // ANCHOR: the same reader fills from a value that IS a bare common noun, so the three
+    // refusals above are the shape guard discriminating and not the reader being broken.
+    expect(namedMagicChainGood([{ magicNote: 'n', outputs: ['Preserved foods'] }])).toBe('preserved foods');
+    // And the pools that need the slot are the two the declaration names as needing it.
+    const needSlot = DEF7_DARK_POOLS.filter((k) => DOSSIER_STATE_PROSE_DEFENSE['DS-DEF-7'].pools[k]
+      .some((v) => (v.slots || []).includes('reason')));
+    expect([...needSlot].sort()).toEqual([
+      'a contributor with a RECORDED reason, adverse',
+      'a contributor with a RECORDED reason, favourable',
+    ]);
+  });
+
+  it('DS-DEF-7 reason 1: the host component that was built for this block has no product caller', () => {
+    // `DefenseWarFrontSection` computes the live band, the contributors AND the war front,
+    // and nothing renders it. Mounting into it would satisfy the walker's reachability arm
+    // and lie to every reader of the registry.
+    const HOST = 'src/components/dossier/EngineSections.jsx';
+    expect(readFileSync(resolve(SRC, '../', HOST), 'utf8'))
+      .toContain('export function DefenseWarFrontSection');
+    /** @param {string} dir @returns {string[]} */
+    const walk = (dir) => readdirSync(dir).flatMap((entry) => {
+      const path = resolve(dir, entry);
+      if (statSync(path).isDirectory()) return walk(path);
+      return /\.jsx?$/.test(path) ? [path] : [];
+    });
+    const callers = walk(resolve(SRC, 'components')).filter((path) => {
+      if (path.endsWith('EngineSections.jsx')) return false;
+      return codeOnly(readFileSync(path, 'utf8')).includes('DefenseWarFrontSection');
+    });
+    // ANCHOR: the same walk over the same sources finds plenty of callers of a component
+    // that IS wired, so an empty list is a measurement rather than a broken walk.
+    const wired = walk(resolve(SRC, 'components')).filter((path) => {
+      if (path.endsWith('DefenseTab.jsx')) return false;
+      return codeOnly(readFileSync(path, 'utf8')).includes('DefenseTab');
+    });
+    expect(wired.length, 'the source walk found no caller of a component that IS wired').toBeGreaterThan(0);
+    // anchored: the line above proves the same walk finds callers of a wired component
+    expect(callers.map((p) => p.replace(SRC, 'src')), 'DS-DEF-7\'s host gained a caller — re-open the declaration').toHaveLength(0);
+  });
+});
+
+/**
+ * ── THE PAID SURFACE, OVER THE IMPORT PATH RATHER THAN ONE FUNCTION NAME ────────────
+ *
+ * `dossierMountRegistry.walker.test.js`'s ARM 2 finds a desk's callers by looking for the
+ * literal `<desk>StateProse(` — the name of ONE of the leaf's exports. This leaf now draws
+ * from TWO components (`DefenseTab` calls `defenseStateProse`; `ViabilityTab` calls
+ * `defenseMagicDependencyProse` for DS-DEF-9's cross-tab row), and the second is INVISIBLE
+ * to that reader because its call spells a different export. The arm stays green and stops
+ * covering the tree. Reported to the chair for DESK-9, whose file that is; meanwhile this
+ * arm holds the invariant the walker intends, computed over the IMPORT PATH so a caller
+ * cannot hide behind an export name.
+ */
+describe('the defense desk\'s paid-surface gate — every caller, found by import path', () => {
+  it('every component importing this desk gates its draw on publicDossier', () => {
+    /** @param {string} dir @returns {string[]} */
+    const walk = (dir) => readdirSync(dir).flatMap((entry) => {
+      const path = resolve(dir, entry);
+      if (statSync(path).isDirectory()) return walk(path);
+      return /\.jsx?$/.test(path) ? [path] : [];
+    });
+    const importers = walk(resolve(SRC, 'components')).filter(
+      (path) => readFileSync(path, 'utf8').includes('stateProse/defenseStateProse.js'),
+    );
+    // Two callers today, and the count is asserted so a THIRD arrives as a red rather than
+    // as a silent third place to forget the gate.
+    expect(importers.map((p) => p.replace(`${SRC}/`, '')).sort())
+      .toEqual(['components/new/tabs/DefenseTab.jsx', 'components/new/tabs/ViabilityTab.jsx']);
+    for (const path of importers) {
+      const code = codeOnly(readFileSync(path, 'utf8'));
+      // Every call into the desk must have a publicDossier read within the same expression.
+      const calls = [...code.matchAll(/\bdefense[A-Za-z]*Prose\(/g)].map((m) => m.index);
+      expect(calls.length, `${path} imports the desk and never calls it`).toBeGreaterThan(0);
+      for (const at of calls) {
+        expect(
+          code.slice(Math.max(0, at - 400), at),
+          `${path.replace(`${SRC}/`, '')} calls the defense desk with no publicDossier read`
+          + ' in the same expression. A public gallery dossier is a FREE, ANONYMOUS viewer'
+          + ' and §885.3 rules corpus prose a PAID surface.',
+        ).toContain('publicDossier');
+      }
+    }
+  });
+
+  it('NON-VACUITY: an ungated caller of the same shape is convicted by the same reader', () => {
+    const ungated = codeOnly([
+      "import { defenseSupportingProse } from '../../../domain/display/stateProse/defenseStateProse.js';",
+      'const drawn = defenseSupportingProse(s, { seed });',
+    ].join('\n'));
+    const at = ungated.indexOf('defenseSupportingProse(');
+    expect(at, 'the fixture no longer contains the call the slice is taken around').toBeGreaterThan(-1);
+    // anchored: `at` is pinned to a real offset on the line above, so the slice is non-empty
+    expect(ungated.slice(Math.max(0, at - 400), at)).not.toContain('publicDossier');
   });
 });

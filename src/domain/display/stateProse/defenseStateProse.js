@@ -17,6 +17,21 @@
  *             × `defenseProfile.economicGates.military`. The leaf's one second slot.
  *   DS-DEF-4  Defense › Criminal structure + capture consequence — `deriveCriminalStructure`
  *             × `powerStructure.criminalCaptureState`, two exact 1:1 vocabularies.
+ *   DS-DEF-6  Defense › Supporting capabilities — `deriveSupportingCapabilities`. TWO of its
+ *             six lenses speak; the other FOUR are declared dark under the C3 law because a
+ *             LANDED sentence position on the same tab already states their fact, in prose
+ *             that is near-verbatim identical. See DEF6_C3_BLOCKED_POOLS.
+ *   DS-DEF-9  Viability › Magic dependency — `defenseProfile.magicDependency` ×
+ *             `economicState.activeChains[].magicNote`. The leaf's ONE block that speaks
+ *             off the `defense` tab, and the reason its host needed the paid gate threaded.
+ *
+ * ── ⛔⛔ TWO BLOCKS ARE DECLARED DARK BY MEASUREMENT, NOT BY OMISSION ─────────────────
+ * DS-DEF-7 and DS-DEF-10 are the leaf's remaining unmounted blocks and each is dark for a
+ * MEASURED reason, stated at its own declaration below with the one act that lights it:
+ * DS-DEF-7 (`DEF7_DARK_POOLS`) on a chunk cost and an unwired host; DS-DEF-10
+ * (`DEF10_DARK_POOLS`) on the C3 law, every lens family of it. Neither is a missing
+ * producer — both blocks' producers are present, exact and reachable, which is precisely
+ * what makes the two findings worth writing down rather than leaving as a silence.
  *
  * ── ⭐⭐ DS-DEF-1'S BLOCKER DECAYED, AND NOBODY NOTICED — the paragraph it replaced ───
  *
@@ -104,7 +119,7 @@ const CORPUS = /** @type {import('./stateProseKernel.js').StateProseCorpus} */ (
  * @type {Readonly<Record<string, string>>}
  */
 export const SLOT_FILL_SHAPES = Object.freeze({
-  settlement: 'proper', defwork: 'bare-common', seat: 'proper',
+  settlement: 'proper', defwork: 'bare-common', seat: 'proper', good: 'bare-common',
 });
 
 /**
@@ -1098,3 +1113,441 @@ export function defenseStateProse(settlement, options = {}) {
       : null,
   });
 }
+
+/**
+ * ── DS-DEF-6 · SUPPORTING CAPABILITIES — SIX LENSES, AND ONLY TWO MAY SPEAK ──────────
+ *
+ * `deriveSupportingCapabilities` (defenseDisplay.js:206) is the producer, and it is an
+ * unusually clean one: five of its six rows carry a `status` string that is an EXACT 1:1
+ * with a corpus pool suffix, and the sixth (Naval Defense) is pushed only when the town has
+ * a navy or a port — the same guard the corpus's three naval pools imply.
+ *
+ * ── ⛔⛔ AND FOUR OF THE SIX MUST NOT SPEAK, BY MEASUREMENT ──────────────────────────
+ *
+ * The C3 law is a law about FACTS, not about block ids — that is what its own worked
+ * example says (DS-ECO-1 speaks prosperity in the header, so DS-ECO-8 GLANCES on its tile,
+ * and those are two different blocks). Four of DS-DEF-6's lenses read the same producer
+ * values as a LANDED sentence position on the same tab, and the corpus wrote them in prose
+ * that is near-verbatim identical. Read side by side, they are not two facts:
+ *
+ *   LEGAL INFRASTRUCTURE ⇄ `defense.threatAssessment` (DS-DEF-2 row 3, internalRowPoolKey).
+ *     Same two producer flags (`compound.inst.hasCourtSystem` × `hasPrison`), same four-way
+ *     partition, and the prose collides on the nose:
+ *       DS-DEF-6 `None`  "There is no legal machinery at {settlement}. Deterrence extends
+ *                         exactly as far as force does and stops there."
+ *       DS-DEF-2 `none`  "There is no legal machinery at {settlement}; order here rests on
+ *                         force alone, and force alone deters only while it is present."
+ *   MAGICAL CAPABILITY  ⇄ `defense.armedForces` (DS-DEF-5 lens 5, arcaneDefensePoolKey).
+ *       DS-DEF-6 `None`  "{settlement}'s defense is entirely conventional. Anything that
+ *                         arrives invisible arrives unopposed…"
+ *       DS-DEF-5 `ABSENT` "{settlement}'s defense is conventional throughout. What arrives
+ *                         unseen here goes undetected and therefore unanswered."
+ *   ECONOMIC BACKING    ⇄ `defense.threatAssessment` (DS-DEF-2 row 4, economicRowPoolKey).
+ *     Both band `defenseProfile.scores.economic`; DS-DEF-2's own STRONG line already says
+ *     "the garrison can be kept paid while they last", which is this lens's whole subject.
+ *   MEDICAL READINESS   ⇄ `defense.threatAssessment` (DS-DEF-2 row 5, disasterRowPoolKey).
+ *     DS-DEF-2's row reads `hasGranary` × `hasHospital` × `hasChurch` and speaks BOTH the
+ *     reserve and the medical halves ("holds food against a bad year and has somewhere to
+ *     put the sick"); this lens is the second half of that sentence on its own.
+ *
+ * ⭐ THE TWO THAT SURVIVE ARE THE TWO WITH A DIMENSION NOTHING ELSE ON THE TAB HAS.
+ * LOGISTICS & SUPPLY is not the granary again — it is the granary against the SUPPLY ROUTE
+ * (port, isolation, road), and no other block on this leaf can see `config.tradeRouteAccess`
+ * or `compound.inst.hasPort` at all. NAVAL DEFENSE is the sea approaches, and nothing else
+ * anywhere in the page-set says a word about them. Both are new facts; the other four are
+ * the page saying one thing twice.
+ *
+ * THE ACT THAT LIGHTS THE OTHER FOUR: re-cut the tab so DS-DEF-6 owns the supporting-
+ * capability readings and DS-DEF-2's rows 3/4/5 and DS-DEF-5's lens 5 step down to a glance.
+ * That is a re-cut of TWO LANDED CARS' speaking positions, so it is a chair act and not a
+ * desk one, and it is a genuine choice rather than a repair: the DS-DEF-2 rows read as a
+ * THREAT assessment and these read as a CAPABILITY inventory, and which framing should own
+ * the fact is a product judgment nobody has made yet.
+ * @type {ReadonlyArray<string>}
+ */
+export const DEF6_C3_BLOCKED_POOLS = Object.freeze([
+  'Economic Backing: Well-funded', 'Economic Backing: Adequate',
+  'Economic Backing: Underfunded', 'Economic Backing: Critical',
+  'Magical Capability: Arcane support', 'Magical Capability: None',
+  'Legal Infrastructure: Court + Prison', 'Legal Infrastructure: Court only',
+  'Legal Infrastructure: Prison only', 'Legal Infrastructure: None',
+  'Medical Readiness: Hospital present', 'Medical Readiness: Clergy care',
+  'Medical Readiness: None',
+]);
+
+/**
+ * Which LANDED position already speaks each blocked lens's fact. Exported so the suite pins
+ * the claim to the registry rather than to this comment: a mount row that moved would red
+ * the arm instead of leaving a docblock quietly describing a page that no longer exists.
+ * @type {Readonly<Record<string, string>>}
+ */
+export const DEF6_FACT_SPOKEN_AT = Object.freeze({
+  'Economic Backing': 'defense.threatAssessment',
+  'Magical Capability': 'defense.armedForces',
+  'Legal Infrastructure': 'defense.threatAssessment',
+  'Medical Readiness': 'defense.threatAssessment',
+});
+
+/**
+ * DS-DEF-6 lens 5 — LOGISTICS & SUPPLY: the reserve read against the way supply arrives.
+ *
+ * ⚠ THE PRODUCER'S ASYMMETRY IS MIRRORED, NOT TIDIED. `deriveSupportingCapabilities`
+ * branches its granary half on the INSTITUTION flag `hasPort` and its no-granary half on the
+ * CONFIG value `tradeRouteAccess === 'port'`. Those are two different questions and a tidier
+ * desk would pick one — but the note this sentence sits beside is built from that exact
+ * shape, and a sentence that disagreed with the note six pixels below it is worse than an
+ * inelegant branch. The desk suite binds all five keys to the producer's own five note
+ * branches so the mirror cannot drift.
+ *
+ * ⚠ AN ABSENT TRADE ACCESS IS SILENCE, NOT `road`. The producer defaults
+ * `r.config?.tradeRouteAccess || 'road'`, which is the default-wearing-a-reading's-clothes
+ * shape one layer up — it would let the page tell a settlement whose approaches nobody
+ * recorded that cutting its roads cuts its supply. This desk requires the raw value PRESENT,
+ * on `measuredMonsterFamily`'s reasoning, and is otherwise silent. Not a change to any
+ * shipped world: `steps/resolveConfig.js` writes `tradeRouteAccess` into every effective
+ * config, so a GENERATED settlement always carries one. RAISED, NOT CURED at the producer.
+ *
+ * @param {boolean} granary @param {boolean} port @param {unknown} tradeAccess
+ * @returns {string|null}
+ */
+export function supplyLogisticsPoolKey(granary, port, tradeAccess) {
+  const access = text(tradeAccess);
+  if (!access) return null;
+  /** @param {string} tail */
+  const key = (tail) => `Logistics & Supply: ${tail}`;
+  if (granary) {
+    if (port) return key('Granary + port');
+    return access === 'isolated' ? key('Granary in isolation') : key('Granary with road supply');
+  }
+  return access === 'port' ? key('No reserves, port open') : key('No reserves, landlocked');
+}
+
+/**
+ * DS-DEF-6 lens 6 — NAVAL DEFENSE: who holds the sea approaches.
+ *
+ * `null` when the town has neither a navy nor a port, which is not a hedge: the producer
+ * pushes no Naval Defense row at all for a landlocked town, and the corpus wrote no
+ * "no sea approaches" pool. A town with no water has nothing to say about the water.
+ *
+ * ⭐ `Under blockade` OUTRANKS BOTH, because it is the live reading and the other two are
+ * the standing arrangement — the producer's own precedence, mirrored. The blockade flag is
+ * written by `worldPulse/foodStockpile.js` at :417 and NEVER at generation, so the pool is
+ * DORMANT over a generated-only corpus and LIVE in a campaign world. Measured, not inferred:
+ * `economicState.foodSecurity.stockpile` is `null` on every settlement the pipeline builds,
+ * and the walker that would call this pool "a key no writer produces" would be reporting its
+ * corpus's reach rather than the code's truth. The desk suite proves the route with a
+ * fixture carrying the field in the SHAPE that writer emits.
+ *
+ * @param {boolean} navy @param {boolean} port @param {boolean} blockaded
+ * @returns {string|null}
+ */
+export function navalDefensePoolKey(navy, port, blockaded) {
+  if (!navy && !port) return null;
+  if (blockaded) return 'Naval Defense: Under blockade';
+  return navy ? 'Naval Defense: Naval force' : 'Naval Defense: Port only';
+}
+
+/**
+ * THE SUPPORTING-CAPABILITIES DESK — DS-DEF-6's two speaking lenses at ONE position.
+ *
+ * DS-DEF-6 frames no DM-editable field, so these are plain rungs, on DS-DEF-2's reasoning.
+ *
+ * ⚠ The `{route}` slot named by one variant of `Granary with road supply` gets NO fill and
+ * that is a measurement: the estate has no PROPER-shaped route name anywhere on a settlement
+ * (`economicState.tradeRoutes` does not exist; `tradeAccess` is the common noun `road` /
+ * `port` / `isolated`, and the annex shape for `{route}` is `proper`). The kernel's anchored
+ * liveness drops that one variant and the pool speaks through the two that never named it.
+ * Refusing a fill is the designed behaviour — the `{defwork}` precedent, one block over.
+ *
+ * @param {{name?: string, config?: {tradeRouteAccess?: unknown}|null,
+ *   economicState?: {compound?: {inst?: Record<string, unknown>}|null,
+ *   foodSecurity?: {stockpile?: {blockaded?: unknown}|null}|null}|null}|null|undefined} settlement
+ * @param {{seed?: string, audience?: string}} [options]
+ * @returns {Readonly<{logistics: object|null, naval: object|null}>}
+ */
+export function defenseSupportingProse(settlement, options = {}) {
+  const compound = settlement?.economicState?.compound?.inst || {};
+  const stockpile = settlement?.economicState?.foodSecurity?.stockpile || null;
+  const slots = { settlement: properFill(text(settlement?.name)) };
+
+  /** @param {string|null} poolKey */
+  const rung = (poolKey) => (poolKey
+    ? legibilityRung('', readStateProse(CORPUS, 'DS-DEF-6', poolKey, { ...options, slots }), [])
+    : null);
+
+  return Object.freeze({
+    logistics: rung(supplyLogisticsPoolKey(
+      civicFlag(compound.hasGranary), civicFlag(compound.hasPort),
+      settlement?.config?.tradeRouteAccess,
+    )),
+    naval: rung(navalDefensePoolKey(
+      civicFlag(compound.hasNavy), civicFlag(compound.hasPort),
+      stockpile ? stockpile.blockaded === true : false,
+    )),
+  });
+}
+
+/**
+ * ── DS-DEF-9 · MAGIC DEPENDENCY — the leaf's one block that speaks OFF the defense tab ──
+ *
+ * `sectionTarget: ['viability','overview']`, and for once the discovery field agrees with
+ * the page: the fact is not "does the town have arcane defenses" (that is DS-DEF-5 lens 5,
+ * already speaking at `defense.armedForces`) but "would this town still work if the
+ * practitioners left". `ViabilityTab` already renders exactly that block, and this desk
+ * gives the paragraph the town's own voice beside the generator's.
+ *
+ * ── ⭐ REACHABILITY, MEASURED OVER GENERATED WORLDS RATHER THAN ASSUMED ─────────────
+ * `defenseProfile.magicDependency` is written by `defenseGenerator.js:449` as
+ * `magicOn && ((under_siege && (arcane||druid||divine)) || (famine && (druid||divine)) ||
+ * (plague_onset && (divine||alchemy)) || (arcaneGuild && (under_siege||famine)))`, and the
+ * binding term is the STRESS, not the magic. Measured over generated worlds:
+ *   • 200 worlds across 4 tiers × 6 cultures × 6 terrains at default priorities: TRUE on 0.
+ *   • 600 worlds with `priorityMagic: 85`: every one had a tradition, 24 carried one of the
+ *     three qualifying stresses, and all 24 of those read TRUE. The flag is gated ENTIRELY
+ *     by stress incidence.
+ *   • The conjunction this block's third pool needs — the flag TRUE *and* an
+ *     `activeChains[]` entry carrying a `magicNote` — reached **10 of those 600**.
+ * So all three pools are reachable, and the rarest is rare because the STATE is rare, which
+ * is the honest reason for a pool to be seldom drawn. A four-world census would have called
+ * this block dead; it is not.
+ *
+ * ⚠ AN ABSENT FLAG IS SILENCE, NOT `false`. `defenseGenerator.js:639` writes
+ * `magicDependency: finalScores.magicDependency || false` into every profile it builds, so a
+ * generated settlement always carries a boolean; an absent one is a hand-built fixture or a
+ * malformed import, and "nothing structural here depends on arcane work" is a claim about a
+ * town nobody measured.
+ */
+
+/**
+ * The `{good}` fill for the NAMED-dependent-chain pool: the first output of the first
+ * magically-sustained chain, lowercased.
+ *
+ * ⭐⭐ THE ROLE IS THE WHOLE POINT, AND THE OBVIOUS FIELD IS THE WRONG ONE. The chain
+ * carries a `label` ("Herbalism & Remedies", "Bowyer & fletcher") and an array of `outputs`
+ * ("Herbal remedies", "Bows and crossbows"). The label names the TRADE; the corpus's slot is
+ * `{good}` and its sentence is "The {good} that {settlement} lives on cannot be made here" —
+ * a COMMODITY. Filling a commodity slot from a trade name reads perfectly fluent and states
+ * something the record does not: a sibling desk lost a car to exactly that shape. So the
+ * fill is `outputs[0]` and never `label`.
+ *
+ * ⚠ AND IT REFUSES RATHER THAN LOWERCASES WHEN THE VALUE IS NOT A BARE COMMON NOUN.
+ * Lowercasing is safe for a common noun and destructive for a proper one, so a value with an
+ * interior capital (a named good from custom content) is refused outright rather than
+ * flattened. A parenthetical unit is refused too — "Ale (barrel)" is a catalogue row with a
+ * measure attached, not the shape `bare-common` names, and "the ale (barrel) that the town
+ * lives on" is the machine reading its own spreadsheet aloud. Measured over 250 generated
+ * worlds: 15 distinct `outputs[0]` values on magically-sustained chains, none carrying an
+ * interior capital, a digit or a dash, and exactly one carrying a parenthetical.
+ * A refused fill drops the two variants that name the slot and the pool speaks through the
+ * third, which never did. R-DST-K, and the `{defwork}` precedent two blocks over.
+ *
+ * @param {unknown} activeChains @returns {string|undefined}
+ */
+export function namedMagicChainGood(activeChains) {
+  if (!Array.isArray(activeChains)) return undefined;
+  for (const chain of activeChains) {
+    if (!text(chain?.magicNote)) continue;
+    const raw = text(Array.isArray(chain?.outputs) ? chain.outputs[0] : '');
+    if (!raw) continue;
+    if (/\s[A-Z]/.test(raw)) continue;
+    if (/[()]/.test(raw)) continue;
+    const fill = bareCommonFill(raw.toLowerCase());
+    if (fill) return fill;
+  }
+  return undefined;
+}
+
+/**
+ * Does this settlement have a magically-sustained chain at all? Read separately from the
+ * FILL above, and deliberately: the pool key is a claim about the STATE ("there is a named
+ * dependent chain"), and the chain is named in the record whether or not its first output
+ * happens to survive the `bare-common` shape. Routing on the fill would make the sentence a
+ * function of the annex's punctuation rules instead of the town's condition.
+ * @param {unknown} activeChains @returns {boolean}
+ */
+export function hasNamedMagicChain(activeChains) {
+  return Array.isArray(activeChains) && activeChains.some((c) => text(c?.magicNote) !== '');
+}
+
+/**
+ * DS-DEF-9's pool key. Total over the producer's boolean; silent when it is absent.
+ * @param {unknown} magicDependency @param {boolean} namedChain @returns {string|null}
+ */
+export function magicDependencyPoolKey(magicDependency, namedChain) {
+  if (magicDependency === true) {
+    return namedChain
+      ? 'magicDependency true, with a NAMED dependent chain'
+      : 'magicDependency true';
+  }
+  return magicDependency === false ? 'magicDependency false' : null;
+}
+
+/**
+ * THE MAGIC-DEPENDENCY DESK — DS-DEF-9's one lens at the viability position.
+ *
+ * ⚠ ONE POOL KEY, NOT TWO. The NAMED-chain pool is a MORE SPECIFIC reading of the same
+ * `magicDependency true` state rather than a second fact about it, so the two are a lens
+ * LADDER and the desk picks one rung — the specific where the record supports it. Drawing
+ * both would put two sentences about one dependency in one box, which is the shape the
+ * one-fact-one-sentence law exists to refuse, inside a single block.
+ *
+ * DS-DEF-9 frames no DM-editable field (`ViabilityTab`'s magic-dependency paragraph is a
+ * hard-coded component string, not a generator or DM field), so this is a plain rung.
+ *
+ * @param {{name?: string, defenseProfile?: {magicDependency?: unknown}|null,
+ *   economicState?: {activeChains?: unknown}|null}|null|undefined} settlement
+ * @param {{seed?: string, audience?: string}} [options]
+ * @returns {Readonly<{dependency: object|null}>}
+ */
+export function defenseMagicDependencyProse(settlement, options = {}) {
+  const chains = settlement?.economicState?.activeChains;
+  const slots = {
+    settlement: properFill(text(settlement?.name)),
+    good: namedMagicChainGood(chains),
+  };
+  const poolKey = magicDependencyPoolKey(
+    settlement?.defenseProfile?.magicDependency, hasNamedMagicChain(chains),
+  );
+
+  return Object.freeze({
+    dependency: poolKey
+      ? legibilityRung('', readStateProse(CORPUS, 'DS-DEF-9', poolKey, { ...options, slots }), [])
+      : null,
+  });
+}
+
+/**
+ * ── ⛔⛔ DS-DEF-7 · LIVE DEFENSE READINESS + WAR FRONT — DECLARED DARK, FOUR MEASUREMENTS ─
+ *
+ * This is the sharpest of the leaf's dark blocks because NOTHING about it is missing. Its
+ * producers exist, they are exact, and its host component is already written.
+ *
+ * WHAT IS PRESENT (all measured on generated worlds, all four configs):
+ *   • `deriveCausalState(s).variables.defense_readiness` returns `{score, band, contributors}`
+ *     on every settlement, and `causalBand`'s vocabulary is `surplus · adequate · strained ·
+ *     critical · collapsed` — an EXACT 1:1 with the five `band …` pools, five for five.
+ *   • The live band and the frozen `defenseProfile.readiness.score` genuinely differ, which
+ *     is what the two comparison pools are about: a village read frozen 21 (`scoreBand`
+ *     CRITICAL) and live `strained`; a metropolis read frozen 76 (STRONG) and live `adequate`.
+ *   • `components/dossier/EngineSections.jsx`'s `DefenseWarFrontSection` already computes
+ *     the band, the contributors AND the war front, and takes `warStatus` as a prop.
+ *
+ * WHY IT IS DARK ANYWAY — the four reasons, in the order they bind:
+ *
+ *  1. ⛔ THE HOST HAS NO PRODUCTION CALL SITE. Measured across all of `src/`:
+ *     `DefenseWarFrontSection` — and its three siblings in the same file — are referenced
+ *     ONLY by `tests/components/engineSections.test.jsx` and by three prose comments. No tab
+ *     renders them. Mounting a block into a component nothing renders would satisfy the
+ *     walker's reachability arm (the id would appear once under `src/components`) and lie to
+ *     every reader of the registry, which is exactly the citation trap the mount docblock
+ *     names. A mount is real when the SHIPPED page carries the sentence.
+ *
+ *  2. ⛔ THE OBVIOUS ALTERNATIVE HOST COSTS HALF A MEGABYTE. `DefenseTab` could compute the
+ *     band itself, and `causalState` is not persisted on the settlement (measured: the
+ *     pipeline's 38 top-level keys contain no `causalState`), so it would have to import
+ *     `deriveCausalState`. Transitive closure, measured by walking the relative-import graph
+ *     and summing file bytes: DefenseTab's own closure is 25 files / 487,487 B; adding
+ *     causalState.js pulls in 28 further files / **546,887 B**, more than doubling the tab's
+ *     chunk — led by institutionalCatalog.js (103,260 B), causalState.js (77,750 B) and
+ *     settlement.schema.js (77,413 B). `defenseScoreBands.js` exists because a 293,079 B
+ *     version of this same import was refused; this one is nearly twice that.
+ *
+ *  3. ⛔ THE TWO CONTRIBUTOR POOLS HAVE NO FILL FOR THE SLOT THEY TURN ON. Both name
+ *     `{reason}`, whose annex shape is `bare-common`. `causalState.js`'s `push()` writes
+ *     `reason` as a finished SENTENCE — "Defense readiness score: 21.", "Defensive walls in
+ *     place.", "Wartime pressure taxes defense readiness." Every one of them fails
+ *     `bare-common` three ways over: leading capital, terminal period, and (for the first)
+ *     digits. There is no noun-phrase cause anywhere on a contributor; `effect` is a tag
+ *     (`measured`, `walled`, `strained`) and not a cause. Parsing the sentence at runtime to
+ *     extract one is the config-key-walker defect in miniature and this desk refuses it.
+ *
+ *  4. ⛔ THE TWO WAR-FRONT POOLS NEED A WORLD, NOT A SETTLEMENT. `besiegedBy` and
+ *     `besiegingTargets` come from `settlementWarStatus({settlementId, worldState,
+ *     regionalGraph})`; nothing of the sort is on the settlement record (measured: no
+ *     `warStatus` key on any generated settlement). `DefenseTab` is handed the settlement
+ *     alone.
+ *
+ * ⭐ THE ONE ACT THAT LIGHTS SEVEN OF THE ELEVEN POOLS: wire `DefenseWarFrontSection` into
+ * the defense tab. It pays reason 2's cost ONCE, inside the component that already imports
+ * `deriveCausalState`, and it carries the `warStatus` prop reason 4 needs — the same
+ * store-selector thread `EconomicsTab` already runs for its live trade flow. That is a new
+ * dossier SURFACE rather than a desk wiring, so it is the chair's act and not this lane's.
+ * The remaining two (the contributor pools) additionally need reason 3 cured at the
+ * producer: a noun-phrase `cause` beside `reason` on `CausalContributor`, which is a change
+ * to a shape twelve derivers write and owes its own proof.
+ *
+ * Pinned so the block cannot be quietly forgotten OR quietly lit.
+ * @type {ReadonlyArray<string>}
+ */
+export const DEF7_DARK_POOLS = Object.freeze([
+  'band surplus', 'band adequate', 'band strained', 'band critical', 'band collapsed',
+  'live band FALLS SHORT of the built profile', 'live band EXCEEDS the built profile',
+  'a contributor with a RECORDED reason, adverse',
+  'a contributor with a RECORDED reason, favourable',
+  'besiegedBy present', 'besiegingTargets present (the army is abroad)',
+]);
+
+/**
+ * ── ⛔⛔ DS-DEF-10 · THE WHOLE-TAB BLOCK, SUPERSEDED BY THE FINER ONES THAT LANDED ────
+ *
+ * DS-DEF-10 is titled for the entire defense screen — "the five arms, readiness badges, and
+ * military posture" — and its producers are all present and all exact. Its 21 pools fall
+ * into three families, and EVERY ONE of the three states a fact a LANDED sentence position
+ * on the same tab already speaks. This is a C3 finding, not a producer finding.
+ *
+ *   THE FIFTEEN POSTURES ⇄ `defense.militaryStatus` (DS-DEF-8). `MILITARY_POSTURE` is an
+ *     exact 1:1 with the fifteen pools (the corpus even carries the producer's own stress
+ *     token in parentheses where its word differs — `INTERNAL PRESSURE (famine)`), so the
+ *     route would be trivial. But DS-DEF-8 already speaks about the SAME active stress at
+ *     the SAME banner, and the two sentences finish with the same clause:
+ *       DS-DEF-8   "…there is a crisis on it, and the arrangements have been rebuilt
+ *                   around the crisis."
+ *       DS-DEF-10  "An army sits outside {settlement} and the town's defensive arrangements
+ *                   have been reorganized around holding rather than deterring."
+ *     The banner ALSO already prints the posture word itself as its badge and the
+ *     generator's own `stress.summary` beneath it. A third statement of one fact is the
+ *     machine improvising in front of the reader, which is the whole subject of the law.
+ *   THE FOUR BADGE BANDS ⇄ `defense.threatAssessment` (DS-DEF-2). DS-DEF-2 speaks one
+ *     sentence per arm at that position and the tab prints `scoreBand` as the badge beside
+ *     each bar; "badge WEAK (any arm)" is a second sentence about the arm just spoken for.
+ *   THE TWO OVERALL READINGS ⇄ `defense.postureHeader` (DS-DEF-1). DS-DEF-1's readiness
+ *     lens is the overall defensive reading, and its CRITICAL line opens "{settlement} is
+ *     effectively undefended" against DS-DEF-10's "has no serious answer to any of the five
+ *     pressures on it" — one town, one verdict, twice.
+ *
+ * ⚠ AND MOVING IT TO ANOTHER TAB DOES NOT ESCAPE THE LAW. C3 is per PAGE-SET, not per tab
+ * ("a settlement has ONE story about its crime wave"), so mounting the overall reading on
+ * `summary` would still be the page-set stating the town's defensive verdict twice. There is
+ * no position anywhere that this block can speak from while DS-DEF-1, DS-DEF-2 and DS-DEF-8
+ * speak where they do.
+ *
+ * ⭐ THE ONE ACT THAT LIGHTS IT: re-cut the defense tab so DS-DEF-10 owns the whole-tab
+ * reading and DS-DEF-1, DS-DEF-2 and DS-DEF-8 step down to glance rungs. That is a
+ * three-landed-car reversal and a real product choice — a page that speaks once about the
+ * town as a whole reads very differently from a page that speaks once per arm — so it is
+ * owner-facing rather than a desk decision. Nothing here is broken; the corpus wrote two
+ * grains of the same page and the finer grain landed first.
+ * @type {ReadonlyArray<string>}
+ */
+export const DEF10_DARK_POOLS = Object.freeze([
+  'badge STRONG (any arm)', 'badge ADEQUATE (any arm)', 'badge WEAK (any arm)',
+  'badge CRITICAL (any arm)', 'overall reading well defended', 'overall reading undefended',
+  'posture ACTIVE SIEGE', 'posture INTERNAL PRESSURE (famine)', 'posture UNDER OCCUPATION',
+  'posture COMMAND SPLIT (politically fractured)', 'posture UNDER TRIBUTE (indebted)',
+  'posture SECURITY COMPROMISED (recently betrayed)', 'posture INFILTRATION ACTIVE',
+  'posture QUARANTINE ACTIVE (plague onset)', 'posture SUCCESSION CONTESTED',
+  'posture BEAST PRESSURE', 'posture INSURGENCY ACTIVE', 'posture RELIGIOUS UPHEAVAL',
+  'posture REVOLT ACTIVE', 'posture WAR FOOTING (wartime)', 'posture MIGRATION SURGE',
+]);
+
+/**
+ * Which LANDED position speaks each DS-DEF-10 family's fact. Exported for the same reason
+ * DEF6_FACT_SPOKEN_AT is: the suite pins the claim against the live registry, so a mount
+ * that moved reds an arm rather than leaving a docblock describing a page that has changed.
+ * @type {Readonly<Record<string, string>>}
+ */
+export const DEF10_FACT_SPOKEN_AT = Object.freeze({
+  posture: 'defense.militaryStatus',
+  badge: 'defense.threatAssessment',
+  overall: 'defense.postureHeader',
+});

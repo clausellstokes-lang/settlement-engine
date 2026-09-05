@@ -173,6 +173,31 @@ export const MOUNT_RUNGS = Object.freeze({
  *     DS-ECO-2 (the at-a-glance tiles) therefore glances at BOTH of its positions — which
  *     car C3 would require in any case, since one block may draw its sentence rung at one
  *     position and the food tile and the season tile are two.
+ *
+ * ── THE DEFENSE DESK, AND THE FIRST ROW THAT LEAVES THE TAB ITS LEAF IS NAMED FOR ────
+ * `defenseStateProse.js` carries eleven blocks. Nine now speak: seven on `defense` from the
+ * landed cars, plus `defense.supportingCapabilities` (DS-DEF-6) and — the registry's first
+ * cross-tab row — `viability.magicDependency` (DS-DEF-9). The `desk` column names the CORPUS
+ * LEAF, not the tab, so a `defense`-leaf block speaking on `viability` is the column working
+ * as specified rather than an inconsistency: DS-DEF-9's fact is whether the town would still
+ * function without its practitioners, which is a viability question that happens to have
+ * been authored into the defense leaf.
+ *
+ * ⚠ THAT ROW MADE `ViabilityTab` THE FIFTH TAB TO NEED `publicDossier` FROM THE ROUTER, and
+ * it did not have it — `OutputContainer.jsx:737` passed the tab only `settlement` and
+ * `narrativeNote`. The public-dossier guard's ARM 1 is what says so, derived from this table,
+ * exactly as designed: adding the row is what made the omission measurable.
+ *
+ * ── ⛔ WHY DS-DEF-7 AND DS-DEF-10 ARE STILL DARK, AND IT IS NOT A MISSING PRODUCER ───
+ * Both blocks' producers are present, exact and reachable. DS-DEF-10 is dark under the C3
+ * law: all three of its lens families (fifteen postures, four badge bands, two overall
+ * readings) state a fact that DS-DEF-8, DS-DEF-2 and DS-DEF-1 respectively already speak on
+ * the same tab, and because C3 is per PAGE-SET there is no other tab it could speak from
+ * either. DS-DEF-7 is dark on a measured chunk cost (546,887 B of transitive imports to give
+ * `DefenseTab` the live causal band) plus a host component that exists and has no production
+ * call site. Both declarations, with the one act that lights each, are in
+ * `defenseStateProse.js` at `DEF7_DARK_POOLS` and `DEF10_DARK_POOLS`, pinned by desk arms so
+ * neither can be quietly forgotten or quietly lit.
  * @type {ReadonlyArray<DossierMount>}
  */
 export const DOSSIER_MOUNTS = Object.freeze([
@@ -323,6 +348,12 @@ export const DOSSIER_MOUNTS = Object.freeze([
   Object.freeze({
     mount: 'faith.nicheRow', tab: 'faith', desk: 'warFaith', blockId: 'DS-FTH-3', rung: 'glance',
   }),
+  Object.freeze({
+    mount: 'defense.supportingCapabilities', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-6', rung: 'sentence',
+  }),
+  Object.freeze({
+    mount: 'viability.magicDependency', tab: 'viability', desk: 'defense', blockId: 'DS-DEF-9', rung: 'sentence',
+  }),
 ]);
 
 /**
@@ -338,8 +369,8 @@ export const DOSSIER_MOUNTS = Object.freeze([
  * @type {ReadonlyArray<string>}
  */
 export const UNMOUNTED_BLOCKS = Object.freeze([
-  'DS-DEF-6', 'DS-DEF-7',
-  'DS-DEF-9', 'DS-DEF-10',
+  'DS-DEF-7',
+  'DS-DEF-10',
   'DS-ECO-4',
   'DS-ECO-5', 'DS-SUP-1', 'DS-ECO-7',
   'DS-SUP-2', 'DS-ECO-10',

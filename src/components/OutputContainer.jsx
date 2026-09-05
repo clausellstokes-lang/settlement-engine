@@ -734,7 +734,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
         saveId={saveId} playerView={playerView} publicDossier={publicDossier} />;
       case 'history':    return <HistoryTab settlement={s} narrativeNote={null} recentEvents={recentEvents} onReroll={onRegenerate ? () => onRegenerate('history') : null} />;
       case 'resources':  return <ResourcesTab settlement={s} narrativeNote={null} />;
-      case 'viability':  return <ViabilityTab settlement={s} narrativeNote={null} />;
+      case 'viability':  return <ViabilityTab settlement={s} narrativeNote={null} publicDossier={publicDossier} playerView={playerView} />;
       case 'dm_compass': return <DMCompassTab settlement={compassSource || s} />;
       case 'dm_notes':   return <NotesTab saveId={saveId} notes={dossierNotes} section="dm" />;
       case 'ai_notes':   return <NotesTab saveId={saveId} notes={dossierNotes} section="ai" />;
