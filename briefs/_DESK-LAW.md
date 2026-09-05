@@ -35,9 +35,10 @@ FINDING to declare, a read of a key no writer produces is a DEFECT to remove; on
 A desk car moves four registers, all landing-owned, taken by the chair at the composed tip: the mounts baseline
 (`tests/lint/.dossier-mounts-baseline.json`, shrink-only, banked at landing) · prose-numerics (path-and-line addressed,
 so ANY edit to a file carrying frozen rows RELOCATES rows — net zero, record the file) · the lighting census (a title
-count asserted EXACTLY: a new test file reds THREE censuses — test-ratchet totalFiles, lighting census, the
-known-failure file list — so prefer adding cases to an existing desk test unless the brief says otherwise, and NAME every
-new test file) · writer-reach (a read moved behind a JSX prop grades N — a FALSE DARK; the chair absorbs it with plain
+count asserted EXACTLY: a NEW test file moves it and it reds until the chair re-takes it at the landing — the ONE census
+that binds; the test-ratchet totals are 90% COLLAPSE FLOORS that a new file RAISES and cannot breach, and the known-failure
+list is untouched unless the file is parked — measured by WARMS-CAR0 2026-09-05, correcting this law's first draft. So a
+new test file is ALLOWED where it is the honest home; NAME every new test file in the receipt so the chair re-takes the census) · writer-reach (a read moved behind a JSX prop grades N — a FALSE DARK; the chair absorbs it with plain
 `--write`; ⛔ never "cure" the component to appease the scanner). Write the predicted deltas in the receipt.
 
 ## Proof — every exit captured in-shell, every figure quoted
