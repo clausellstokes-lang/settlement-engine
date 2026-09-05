@@ -21,6 +21,8 @@ for pair in "$@"; do
     S=$(git -C "$D" log -1 --format=%s "$c" | cut -c1-80)
     # ALREADY APPLIED? (09-05: a re-run over a partially replayed dock re-picked an applied car as an EMPTY pick and stopped)
     if git -C "$INT" cherry HEAD "$c^" "$c" 2>/dev/null | grep -q "^- "; then echo "  skip $(echo $c | cut -c1-9)  (already in HEAD by patch-id)  $S"; continue; fi
+    # ALREADY APPLIED WITH A HAND-MERGE? (its patch-id differs; its SUBJECT survives — a `-x` pick keeps the subject line verbatim)
+    FS=$(git -C "$D" log -1 --format=%s "$c"); if git -C "$INT" log --format=%s "$PBASE..HEAD" | grep -Fxq -- "$FS"; then echo "  skip $(echo $c | cut -c1-9)  (already in HEAD by subject — hand-merged)  $S"; continue; fi
     if git -C "$INT" cherry-pick -x --no-edit "$c" >/dev/null 2>&1; then echo "  ok   $(git -C "$INT" rev-parse --short HEAD)  $S"; continue; fi
     CONF=$(git -C "$INT" diff --name-only --diff-filter=U)
     if [ "$CONF" != "$MOUNTS" ]; then echo "  ⛔ STOP: conflict outside the registry on $c:"; printf '%s\n' "$CONF" | sed 's/^/       /'; echo "     dock left mid-cherry-pick for the chair; resolve by hand or 'git -C $INT cherry-pick --abort'"; exit 1; fi
