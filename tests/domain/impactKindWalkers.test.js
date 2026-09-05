@@ -174,6 +174,14 @@ const EXPECTED_VOICE = {
   // No crier register fits a transparency clause, so it stays deliberately unvoiced,
   // which is what newsVoiceCategory already returns (JUDGMENT, vetoable).
   treaty_disclosure_opened: null,
+  // ENC-4 (ROAD B, the chance meeting's Herald line, §899): the recorded meeting carries the
+  // chair's own authored sentences (the sealed §A pool) and its own significance; it borrows
+  // no generic crier category, exactly as the treaty and disposition receipts above do not.
+  // The classifier's set-but-unclassified guard already returns null for it; this row makes
+  // that the DECISION rather than the accident the guard exists to prevent. ⚠ THE FORK: ENC-4
+  // minted the kind and moved neither this roster nor pantheon A5's freezes, and no vitest ran
+  // in that lane — both were red at its tip and are moved by the Fable chair at the landing.
+  chance_meeting_recorded: null,
   // GR-4b's succession disavowal (treatySuccessionVoice.js) is the same cohort and the same
   // shape again: an AUTHORED headline naming both courts over a pact-grammar summary that
   // names the hand which swore, with its own recorded reason read back off the instrument.
