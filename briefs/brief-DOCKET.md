@@ -56,6 +56,15 @@ the OSR consequences measured. **First car = MEASURE ONLY**: enumerate every rea
 paths that carry it (create/read/persist/regen/undo/clone/import), and what a version bump costs; report to the chair;
 build nothing until the chair rules on the shape.
 
+
+## ITEM 5 — the AUDIT-2.2 paid-rights floor is a docblock, not machinery (PDFDRIFT's finding)
+`SettlementCard.jsx:97-101` forbids the frozen (plan-inactive) card's PDF export from receiving the live store, `worldState`,
+sibling settlements, or the faith chapter — and nothing enforces it: exactly one test observes `generateSettlementPDF`'s
+options and it mounts only `SettlementDetail`. A chair ruled the forbidden change and the suite would have stayed green.
+Build the arm: a test that renders the frozen card's export path with an active-looking store and asserts the payload
+carries no live world, no campaign resolution, `faithUnlocked: false`; and the anonymous purchase page likewise. A new
+test file is allowed — name it. Do not change product behaviour.
+
 ## PROOF (per item)
 The file's own run (skipped, reason printed) · `npx vitest run tests/security/` · `npx vitest run tests/lint/` WHOLE ·
 `node scripts/check-test-ratchet.mjs` in read-only form if it has one (no `--update`) · eslint. Quiet-window law + mutex.

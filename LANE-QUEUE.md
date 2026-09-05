@@ -9,7 +9,8 @@ Updated 2026-09-05 by the Fable chair (after §897: product fd8b6df00, ledger c8
 | ~~WARMS-CAR0~~ DONE → refs/preserve/warms-car0-2026-09-05; volume landed §896.2 | | | | |
 | CLAMP-W2 | build (6 files) | laneCLAMPW2 @ df7cdd37e → replay onto fd8b6df00 | briefs/brief-CLAMP-W2.md | 09-05 |
 | ~~DESK-WARFAITH~~ DONE → 7dba5508b sealed `desk-warfaith-2026-09-05` (6/9 mounted; 3 dark measured; the PUBLIC/SHARED pool is OWNER-gated §885.3) | | | | |
-| PDFDRIFT | build (repair) | lanePDF @ df7cdd37e → replay | briefs/brief-PDFDRIFT.md | 09-05 |
+| ~~PDFDRIFT~~ REFUSED with measurement → ruling WITHDRAWN (`rulings/RULING-PDFDRIFT-WITHDRAWN.md`); residue: an OWNER row (the paid-rights floor and the arms) + DOCKET item 5 (AUDIT-2.2 as machinery) | | | | |
+| L-PROBE-KIT | tooling | lanePROSE2 (read-only) | briefs/brief-L-PROBE-KIT.md | 09-05 |
 | DESK-DEF2 | build | laneDEF2 @ 940d161ca | briefs/brief-DESK-DEF2.md | 09-05 |
 | ~~DESK-GEN2~~ DONE → 4 cars, a4ce9f80f sealed `desk-gen2-2026-09-05` (6/15 lit; 7 stopped with residue; DS-GEN-1 OWNER-signed; DS-GEN-10 unmountable) | | | | |
 | DESK-ECON2 | build | laneECON2 @ 940d161ca | briefs/brief-DESK-ECON2.md | 09-05 |
@@ -17,7 +18,7 @@ Updated 2026-09-05 by the Fable chair (after §897: product fd8b6df00, ledger c8
 ## QUEUED — next slot takes the top row
 1. **OSR-SCHEMA17** — NEXT after the PROSE gate (its corpus scan is heavy) — build; dock laneINTEG-tree @ 940d161ca; briefs/brief-OSR-SCHEMA17.md. ⛔ Dispatch only when NO chair
    gate is running (its proofs run vitest and the corpus scan is heavy). Frees the 23-car desk consist.
-2. **PDFDRIFT** — BRIEFED (`briefs/brief-PDFDRIFT.md`, dock lanePDF @ df7cdd37e): route the two campaign-less export sites through `resolveExportSeam`; DECLARED paid-surface change.
+2. ~~PDFDRIFT~~ WITHDRAWN (`briefs/brief-PDFDRIFT.md`, dock lanePDF @ df7cdd37e): route the two campaign-less export sites through `resolveExportSeam`; DECLARED paid-surface change.
 3. ~~DESK-ECON2~~ DISPATCHED (`briefs/brief-DESK-ECON2.md`, dock laneECON2 @ 940d161ca): 8 dark blocks + DESK-7 (the chair's eleven words are AUTHORED and sealed `refs/preserve/desk7-words-2026-09-05`) + DESK-10 + DESK-11.
 4. **DESK-DEF2** — BRIEFED (`briefs/brief-DESK-DEF2.md`, dock laneDEF2 @ 940d161ca): DS-DEF-6, 7, 9, 10.
 5. **HORIZON-B1 / CHARSET Car 2** — BRIEFED (`briefs/brief-HORIZON-B1.md`, dock laneCHARSET2 @ df7cdd37e): Car 1 is LANDED (leaf, table, twin, hoist, compiler, manifest, chunk, test); Car 2 = wiring + typed rejection + restore split + reachability, DARK at `report`.
@@ -33,7 +34,7 @@ Updated 2026-09-05 by the Fable chair (after §897: product fd8b6df00, ledger c8
 
 12. **DOCKET** — BRIEFED (`briefs/brief-DOCKET.md`; item 1: the undeclared `pg` import → dynamic + typed skip; more items appended as recovered).
 
-13. **L-PROBE-KIT** — BRIEFED (`briefs/brief-L-PROBE-KIT.md`): a tooling lane that WRITES the dark-arm battery under `$SC/lprobe/`; the chair RUNS it after PROSE lands. Dispatch in the first free slot after OSR-SCHEMA17.
+13. ~~L-PROBE-KIT~~ DISPATCHED (`briefs/brief-L-PROBE-KIT.md`): a tooling lane that WRITES the dark-arm battery under `$SC/lprobe/`; the chair RUNS it after PROSE lands. Dispatch in the first free slot after OSR-SCHEMA17.
 
 14. **VOICE-JSX** — BRIEFED (`briefs/brief-VOICE-JSX.md`): the 34 mainline em dashes in 15 components; makes the Tier-3 voice refreeze a FALL and retires two census rows.
 
