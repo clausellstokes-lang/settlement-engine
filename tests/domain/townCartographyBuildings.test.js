@@ -751,6 +751,72 @@ describe('TC-4 C5 — the dress derives from existing typed facts', () => {
     expect(at(50)).toBe(10);
   });
 
+  it('the plan unit has a CEILING too, and it is the producer\'s own closed table', () => {
+    // ⛔ THE SIBLING OF THE `storageCapacityMonths` TRAP (clamp wave 1), found by CLAMP-W2
+    // §6.2 and left unpinned. `heightCm = heightPlan * planUnitCm`. `heightPlan` is hard
+    // clamped to [5,60] by the producer (pinned two arms above), but `planUnitCm` is
+    // validated in manifestContract.js:216 only as *a positive integer* — a FLOOR with NO
+    // CEILING. At `planUnitCm ≳ 1.7e303` the product overflows to +Infinity,
+    // `Math.round(+Infinity)` stays +Infinity, and a comparison against a non-finite is
+    // FALSE, so the `0..1000` clamp stops clamping — the same shape as the `|| 1` divisor
+    // defect the arm above cures, one factor along.
+    //
+    // The margin is ~300 orders of magnitude and nothing stated it. THIS ARM STATES IT, at
+    // the only place that can: the producer's own CLOSED TABLE. `PLAN_UNIT_CM_BY_TIER`
+    // (compileTownSceneManifest.js) is module-private, so it is read from source — and the
+    // read is made non-vacuous by asserting the tier set BOTH WAYS against the estate's
+    // frozen vocabulary, so a silent extractor cannot pass this on an empty match.
+    const source = readFileSync(
+      join(ROOT, 'src/domain/townScene/compileTownSceneManifest.js'),
+      'utf8',
+    );
+    const block = /const PLAN_UNIT_CM_BY_TIER\b[\s\S]*?Object\.freeze\(\{([\s\S]*?)\}\)/.exec(source);
+    expect(block, 'PLAN_UNIT_CM_BY_TIER was not found — the extractor went dark').toBeTruthy();
+    const table = Object.fromEntries(
+      [...block[1].matchAll(/([A-Za-z_$][\w$]*)\s*:\s*(\d+)\s*,/g)].map(([, k, v]) => [k, Number(v)]),
+    );
+    // BOTH DIRECTIONS. A table that gained a tier and a vocabulary that lost one both red.
+    expect(Object.keys(table).sort()).toEqual([...CARTOGRAPHY_TIERS].sort());
+    expect(Object.keys(table).length).toBe(6);
+
+    // Every value the producer can emit is a positive integer inside the declared band.
+    // The MAXIMUM is an exact pin, not a `<=`: widening the table toward the overflow is
+    // exactly the drift this arm exists to see, and it must be a decision somebody makes
+    // rather than a number that quietly grows.
+    const values = Object.values(table);
+    for (const [tier, value] of Object.entries(table)) {
+      expect(Number.isInteger(value), `${tier} plan unit is not an integer`).toBe(true);
+      expect(value, `${tier} plan unit floor`).toBeGreaterThan(0);
+    }
+    expect(Math.min(...values)).toBe(10);
+    expect(Math.max(...values)).toBe(80);
+
+    // THE UNKNOWN-TIER PATH LANDS INSIDE THE TABLE TOO, so "the producer's range" is the
+    // whole range: `PLAN_UNIT_CM_BY_TIER[tier] || PLAN_UNIT_CM_BY_TIER.town`.
+    const fallback = /PLAN_UNIT_CM_BY_TIER\[tier\]\s*\|\|\s*PLAN_UNIT_CM_BY_TIER\.([A-Za-z_$][\w$]*)/
+      .exec(source);
+    expect(fallback, 'the plan-unit resolver was not found').toBeTruthy();
+    expect(Object.prototype.hasOwnProperty.call(table, fallback[1])).toBe(true);
+
+    // THE CONSEQUENCE, stated as arithmetic rather than as prose: the largest heightCm the
+    // producers can mint is the ceiling times the largest plan unit, and it is ~300 orders
+    // of magnitude below the overflow that would make the clamp stop clamping.
+    const maxHeightCm = T.HEIGHT_PLAN_CEILING * Math.max(...values);
+    expect(maxHeightCm).toBe(4800);
+    expect(Number.isFinite(maxHeightCm)).toBe(true);
+
+    // AND IT IS LIVE, not arithmetic about a dead number: the leaf still reads a full and a
+    // half height at the table's own maximum unit.
+    const full = packInto([[100, 100], [400, 100], [100, 400]], {
+      canonical: { heightCm: maxHeightCm, planUnitCm: Math.max(...values) },
+    }).buildings[0];
+    const half = packInto([[100, 100], [400, 100], [100, 400]], {
+      canonical: { heightCm: maxHeightCm / 2, planUnitCm: Math.max(...values) },
+    }).buildings[0];
+    expect(full.heightPermille).toBe(1000);
+    expect(half.heightPermille).toBe(500);
+  });
+
   it('every emitted row carries a SAFE_TOKEN style and integer permilles in range', () => {
     const SAFE_TOKEN = /^[a-z0-9][a-z0-9_:.-]{0,119}$/;
     const { input } = leafInputFor(SUBJECT);
