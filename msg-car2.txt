@@ -1,0 +1,9 @@
+Composed landing (chair car): the chance meeting's Herald presentation dial enters the tuning register as CHANCE_MEETING_NEWS_TUNING
+
+The tuning walker convicted one bare decimal (severity 0.56) in ENC-4's new writer: P3 is shrink-only with new files at zero, and a raise of BARE_DECIMAL_CEILING is not a lane's or a chair's act. The cure is the estate's own form — a *_TUNING table with its provenance sibling (candidate, owner-unsigned, like CHANCE_MEETING_TUNING) and a register row with both leaves united (severity fraction01, score score100). The old name stays as an alias; no value moved.
+
+Proofs under the mutex: ENC-4's walker and the writer's suite green; eslint 0; the tuning walker green on every arm but 'the measured tree matches the committed inventory exactly', which is the governed sequence — the inventory refreeze is a register act and follows as the register car (a first attempt copied the sibling's 42-key unit map onto this two-leaf table; the all-or-none arm listed the 42 orphans and the row was re-cut before this commit).
+
+Seat: Fable 5.1 — validated
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>

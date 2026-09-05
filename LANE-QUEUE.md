@@ -30,12 +30,12 @@ Updated 2026-09-05 by the Fable chair (after §898: product 5e28d5c83, ledger 6c
 8. The PROSE landing's declared-shift entry: `golden-shift-prose.template.md` (fill from the PROSE-REBASE receipt); every later landing: `python3 mk-landing-kit.py <N> <dock> <base> <seal> <cars>`. · W-ARMS Car 1–3 per WARMS-CAR0's receipt · HORIZON-DARK B1/B2/B6 ·
    ENC-4 (sealed ENC-5 words at refs/preserve/enc5-words-2026-09-04) · SEAT-7a · srcprose rebase · docket.
 
-9. **HORIZON-B2 / WORKER Car 1** — BRIEFED (`briefs/brief-HORIZON-B2.md`; dock at dispatch): ~15 files, dark, unblocks `L-DOORS (ii)`.
+9. ~~HORIZON-B2~~ DISPATCHED 09-05 (`briefs/brief-HORIZON-B2.md`; dock laneHOR2 @ 5e28d5c83): ~15 files, dark, unblocks `L-DOORS (ii)`.
 10. **HORIZON-B6 / the CAPACITY evidence** — BRIEFED (`briefs/brief-HORIZON-B6.md`): a ~2.3 h soak, ONLY when no gate runs; unblocks `demographicsEnabled` inside L-DEFAULT.
 
 11. **ENC-4** — BRIEFED (`briefs/brief-ENC-4.md`, dock laneENC4 @ fd8b6df00): the chance meeting's Herald line under ROAD B; the words are sealed at `refs/preserve/enc5-words-2026-09-04`.
 
-12. **DOCKET** — BRIEFED (`briefs/brief-DOCKET.md`; item 1: the undeclared `pg` import → dynamic + typed skip; more items appended as recovered).
+12. ~~DOCKET~~ DONE → 4 cars a216df08a sealed `desk-docket-2026-09-05`, REPLAYED into the §899 consist (items 7, 6, 5 landed; item 1 STOPPED — premise refuted, `pg` IS declared at the tip, the main tree's package.json is a FOREIGN old variant; item 2 STOPPED at the fence — CR-EB-2 (b); items 3/4/8 still open).
 
 13. ~~L-PROBE-KIT~~ DISPATCHED (`briefs/brief-L-PROBE-KIT.md`): a tooling lane that WRITES the dark-arm battery under `$SC/lprobe/`; the chair RUNS it after PROSE lands. Dispatch in the first free slot after OSR-SCHEMA17.
 
