@@ -4421,6 +4421,96 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "loose semantic fit",
    "note": "Wikipedia: \"The Tolkien scholar Tom Shippey calls such deliberate use of the conjunction, avoiding explicit logical connection, 'loose semantic fit'.\" [sfn Shippey 2005 p.203] Attribution to Shippey, the paratactic 'and', and 'avoiding explicit logical connection' are all the article's own wording — the claim tracks it almost word for word. Context is Turner's reading of the Pelennor Fields standard passage as \"stylistically marked\" New Testament parataxis."
+  },
+  "255": {
+   "index": 255,
+   "verdict": "CONTRADICTED",
+   "trueWording": "Bratman, not Shippey: 'briefly documented as if in annals'",
+   "note": "Wording is verbatim on the page, but the sentence is cited to Bratman 2000 (ref 50). The very next sentence gives Shippey a DIFFERENT point (Silmarillion reads as more distant and mythic). Attribution to Shippey is wrong."
+  },
+  "256": {
+   "index": 256,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Boromir speaks sort of Elrondian",
+   "note": "Exact. Page continues: 'and that Aragorn speaks this way to Boromir to impress him' - both halves of the claim confirmed, attributed to Shippey."
+  },
+  "257": {
+   "index": 257,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "phrases like 'of course' and 'as you probably know'",
+   "note": "Exact. Page: used 'to make it clear that he is speaking of things that should be obvious to his readers' - matches the 'treat the strange as obvious' gloss."
+  },
+  "258": {
+   "index": 258,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "short, broken sentences and apposition",
+   "note": "Exact, cited (Shippey, 71) for Gloin; hobbits' 'simple rhymes' and 'quick exclamations' appear in the same sentence. Gimli named later on the same page as speaking 'in the same taciturn, appositive way as his father'."
+  },
+  "259": {
+   "index": 259,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "slips easily between speaking like Elendil's heir and Strider",
+   "note": "Exact, cited (Shippey, 72); the adjacent clause gives Boromir a 'relatively Elrondian' pattern."
+  },
+  "260": {
+   "index": 260,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "impossibly heavy archaism",
+   "note": "Exact (Rosebury, 117). The Morris half is also on the page: 'a sustained archaism' that 'harked back to William Morris' (Rosebury, 95)."
+  },
+  "261": {
+   "index": 261,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Hobbits serve as mediators between the ordinary modern world",
+   "note": "Exact on the rendered page (raw wikitext splits it across a wikilink pipe). Cited to Shippey 2005 p.259; 'making ... readily accessible' confirms the accessibility clause."
+  },
+  "262": {
+   "index": 262,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "most certainly distinguishes Tolkien from his many imitators",
+   "note": "Exact, inside Shippey's quoted phrase 'the one literary quality, to say no more, which ...' (Shippey 2005, pp.364-365)."
+  },
+  "263": {
+   "index": 263,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "multiple styles ... as if by different hands",
+   "note": "Substance right, quote is not. Page: 'the multiple styles in which the various texts are written, as if by different hands.' Four factors, cited Drout/Hitotsubashi/Scavera 2014; the casual-incomplete-mentions and gaps-and-inconsistencies items are also verbatim."
+  },
+  "264": {
+   "index": 264,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the striking impression of the depth of time",
+   "note": "Exact, inside the Ferdynus 2016 block quote, which also has 'they constantly refer to legends, they sing or recite old ballads and poems'."
+  },
+  "265": {
+   "index": 265,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "familiar phrasal verbs 'have on' and 'get off'",
+   "note": "Exact, continuing '.. to the slightly more literary \"wear\" and \"dismount\"'. Reported by Turner 2013 as Rosebury's point, rejecting 'archaising' and 'wrenched syntax'."
+  },
+  "266": {
+   "index": 266,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a certain sensuous precision, distinctive of Tolkien",
+   "note": "Exact. It is Rosebury's characterisation of 'Tolkien's descriptive gifts', quoted approvingly by a Mythlore reviewer."
+  },
+  "267": {
+   "index": 267,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "essentially plain syntax",
+   "note": "Exact, attributed to Rosebury, with 'woven into the clauses' subtle syntactic clues ('heed' not 'notice') sustaining the 'heroic tonality'."
+  },
+  "268": {
+   "index": 268,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The circumstantial expansiveness of Middle-earth itself is central",
+   "note": "Exact; full sentence ends 'to the work's aesthetic power'. Subject of 'He states' is Rosebury, named in the preceding sentence."
+  },
+  "269": {
+   "index": 269,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "tolkien's style is training wheels for our imagination",
+   "note": "Exact (site lowercases 'tolkien'). Walker also says 'Its invitational quality' and 'lure us into filling in the blanks, like Genesis', supporting every clause."
   }
  }
 }

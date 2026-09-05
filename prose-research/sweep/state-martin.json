@@ -5689,6 +5689,96 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "The blade was Valyrian steel, spell-forged and dark as smoke.",
    "note": "Exact. The later-payoff half is stated on the page: \"as the story unfolds, that metal becomes all the more important, and it's a good detail that G.R.R.M. tucks in here\"."
+  },
+  "300": {
+   "index": 300,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "that was the hardest scene I ever had to write.",
+   "note": "Quote exact in CBS transcript. Out-of-order composition confirmed: 'when I got to that chapter, I skipped over it. And I wrote all of the post-Red Wedding stuff. And then when the entire book was finished, I went back and wrote the Red Wedding.'"
+  },
+  "301": {
+   "index": 301,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "So I try to make you feel the deaths.",
+   "note": "Exact. Both halves of the claim confirmed: 'And the other thing is, I try to make them unexpected'; the statistic contrast is Martin's own opening ('It's a statistic... 30 billion people just died')."
+  },
+  "302": {
+   "index": 302,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I can describe an axe entering a human skull in great explicit detail",
+   "note": "Exact. Continues 'a similar description, just as detailed, of a penis entering a vagina, and I get letters about it and people swearing off' vs 'no one will blink twice' at the axe. Page dated Jul 27th, 2012, credited '(via BoingBoing)' as the claim's source note says."
+  },
+  "303": {
+   "index": 303,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "And the history book, I only have one voice to do.",
+   "note": "Exact. Gyldayn named ('It's supposedly by the Archmaester Gyldayn'), and the contrast is explicit: 'When I'm doing Winds, I switch voices every time I switch chapters.' Caveat: the one-voice reason is the second of two Martin gives; the first is 'Partly because it's linear.'"
+  },
+  "304": {
+   "index": 304,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "To my mind, it's the execution that is all-important.",
+   "note": "Exact. Preceded by 'Ideas are cheap' and followed by 'I take stuff from the Wars of the Roses and other fantasy things... somehow they jell into what I hope is uniquely my own.' All three limbs of the claim confirmed."
+  },
+  "305": {
+   "index": 305,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Sometimes the difference is just the furniture.",
+   "note": "Exact. Context confirms the interchangeability reading: 'If you're a writer you're a writer: you can tell a story. Sometimes the difference is just the furniture. Aliens or elves, they're the Other.' Locus, November 2005 issue."
+  },
+  "306": {
+   "index": 306,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Tolkien is the most influential writer in my life.",
+   "note": "Exact. NYCC spotlight panel with Joe Hill, Popverse dated Wed Nov 05 2025; the feud dispute is Martin's own: 'The internet is constantly running these... stories, George R.R. Martin blasts Tolkien...' and 'that's not an attack on Tolkien.'"
+  },
+  "307": {
+   "index": 307,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Mind you, I don't discount the importance of style and plot",
+   "note": "Exact. Answer to 'What do you feel is your strength as a writer/storyteller?' -- 'Characters.' Minor drift: the question asks about his strength, not 'what matters most', though 'the people will always be the heart of the matter' carries that sense. SFFWorld, Dag R., May 17, 2006."
+  },
+  "308": {
+   "index": 308,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "he consistently chooses words of Anglo-Saxon origin",
+   "note": "Exact. Full sentence adds 'and generally avoids Latinate and neoclassical vocabulary, thus giving his prose a cumulative feeling of woodiness, antiquity, pithiness' -- the antiquity limb confirmed."
+  },
+  "309": {
+   "index": 309,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The default setting of Martin's style is lucid and functional",
+   "note": "Exact. Modern-thriller limb: 'it veers from purely functional modern thriller prose'. Beauty limb: 'GRRM's limpid style can have a powerfully simple beauty.'"
+  },
+  "310": {
+   "index": 310,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "prose larded with fake medievalisms",
+   "note": "Exact. Instability is the essay's opening thesis ('prose style... is unstable'), with 'ofts' and 'elsewises' against 'divvied up' on the same page; 'He invents some cod medieval phrases such as much and more' appears separately."
+  },
+  "311": {
+   "index": 311,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Confrontations between opposing characters are done though terse, charged dialogue.",
+   "note": "Exact (the page's 'though' is a typo for 'through'). Recognition shock confirmed: 'you experience a real dramatic shock when you realise, along with one character, the implications of another one's words.'"
+  },
+  "312": {
+   "index": 312,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a systematic exclusion from his vocabulary of almost all words derived from Latin, Greek, French",
+   "note": "Exact. un-/be- ('Common examples are un- and be- forms'), a- ('archaic prefix a- to denote position: atop, abed, ahorse'), and -craft/-dom/-hood/-ship all under 'Notably common in his lexicon'; ironborn, sellsword, weirwood all in the coinage list; reservation confirmed: 'only deployed for effect in the context of legal or religious or courtly matters.'"
+  },
+  "313": {
+   "index": 313,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the greater the sense of moving into his otherworld",
+   "note": "Exact, and density is the stated mechanism ('The more there are, the more frequently you encounter them on each page'). The prithee contrast is the essay's conclusion: the sense 'derives not from a handful of obvious stock phrases' like 'prithee' and 'Zounds'."
+  },
+  "314": {
+   "index": 314,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "ASOIAF has an almost hypnotic readability",
+   "note": "Exact. Homeric epithet frame is the essay's thesis; 'black as night' and 'those faces still as masks' appear verbatim; the third is 'all those men corded or thick with muscle', not 'corded with muscle' as a fixed phrase. Cost limb confirmed: 'The con: The sentences aren't beautiful' and 'the prose... is forgettable.' Page carries no date, as the claim says."
   }
  },
  "mergedAt": "see autosave.log"

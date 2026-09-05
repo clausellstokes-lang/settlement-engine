@@ -18,3 +18,10 @@ Not implemented: HTMLCanvasElement's toDataURL() method: without installing the 
      × every completeness claim carries an @enforced-by tag with ≥1 target 9ms
  ❯ tests/copy/voiceMechanics.test.js (19 tests | 1 failed) 5283ms
      × per-file debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win) 27ms
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+ ❯ tests/soak-harness/coveringArrayCoverage.test.js (6 tests | 1 failed) 8301ms
+     × the flag domain is ENUMERATED FROM THE REGISTRY, and its arithmetic closes 11ms
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+Not implemented: navigation to another Document
+Not implemented: navigation to another Document
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
