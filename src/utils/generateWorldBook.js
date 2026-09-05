@@ -37,6 +37,7 @@ import { tickCalendarLabel } from '../domain/display/humanizeEngineTokens.js';
 import { collectRealmSummary, durationBand } from './generateCampaignPDF.js';
 import { track, EVENTS } from '../lib/analytics.js';
 import { collectPlotHooks } from '../domain/dossier/plotHooks.js';
+import { concludedWarRows, warRemembranceChapterLines } from '../domain/display/warRemembrance.js';
 import { slugify } from '../kernel/slugify.js';
 
 // ── Page geometry + palette (mirrors the campaign PDF) ───────────────────────────
@@ -239,6 +240,27 @@ export function collectWorldBook(campaign, allSaves = [], opts = {}) {
   // the Realm" while the player Chronicle drops it (the two chapters must agree).
   const map = buildMapModel(members);
   const receipts = buildReceipts(members);
+  // ── THE WARS THAT ENDED (RR-2, the Remembrance READER) ──────────────────────
+  // W-MEM's concluded-war ledger, read through the ONE reader that turns it into
+  // sentences (domain/display/warRemembrance.js). The realm chapter is its home
+  // because a war that ended is realm state, not a settlement's dossier entry.
+  //
+  // The player face gets the WARS and not the RECEIPTS: a war two courts fought is
+  // the world's own history and belongs in a handout, while the ledger key, the
+  // mechanical close road and the evidence channel are the keeper's record. That is
+  // the same seam the Herald's Remembrance door draws, drawn once more here rather
+  // than left to the painter, so the collected model is honest on its own.
+  //
+  // ⛔ EMPTY IS THE DEFAULT AND IS BYTE-NEUTRAL. `warMemoryEnabled` is dark, so the
+  // ledger key is absent, the roster is [], `sections.warsEnded` is false and
+  // buildRealmChapter paints nothing. Every book bound today is unchanged.
+  const warsEnded = warRemembranceChapterLines(concludedWarRows({
+    worldState: campaign.worldState,
+    nameFor: (id) => String(
+      members.find((s) => String(s.id) === String(id))?.settlement?.name || '',
+    ),
+    seesSecrets: !player,
+  }));
   const realmCampaign = player
     ? { ...campaign, wizardNews: { ...(campaign.wizardNews || {}), entries: rawEntries.filter(e => !isCovertEntry(e)) } }
     : campaign;
@@ -255,12 +277,14 @@ export function collectWorldBook(campaign, allSaves = [], opts = {}) {
     map,
     receipts,
     realm,
+    warsEnded,
     sections: {
       chronicle: chronicle.length > 0,
       dossiers: dossiers.length > 0,
       map: map.nodes.length > 0,
       receipts: receipts.length > 0,
       realm: !!realm?.present,
+      warsEnded: warsEnded.length > 0,
     },
   };
 }
@@ -445,7 +469,10 @@ export function realmChapterRows(realm) {
 
 function buildRealmChapter(d, book, pageN) {
   const realm = book.realm;
-  if (!realm?.present) return pageN;
+  const wars = Array.isArray(book.warsEnded) ? book.warsEnded : [];
+  // The chapter opens for a realm summary OR for a remembered war: a campaign can
+  // have written a war down before its realm summary has anything to say.
+  if (!realm?.present && !wars.length) return pageN;
   let sp = chapterHeading(d, 'State of the Realm', pageN); let y = sp.y; pageN = sp.pageN;
   const section = (label, rows) => {
     if (!rows || !rows.length) return;
@@ -461,6 +488,7 @@ function buildRealmChapter(d, book, pageN) {
   section('Major headlines', rows.majors);
   section('Under siege', rows.sieges);
   section('War-weary', rows.weary);
+  section('Wars that ended', wars);
   footer(d, book.title, pageN);
   return pageN;
 }
