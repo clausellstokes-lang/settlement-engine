@@ -14,7 +14,7 @@ Updated 2026-09-05 by the Fable chair (after §897: product fd8b6df00, ledger c8
 | ~~DESK-DEF2~~ DONE → 4 cars 468663f56 sealed `desk-def2-2026-09-05` (DS-DEF-6, 9 lit; 7, 10 dark measured; DefenseTab 419 effective — the chair's 545 was wc -l) | | | | |
 | ~~DESK-GEN2~~ DONE → 4 cars, a4ce9f80f sealed `desk-gen2-2026-09-05` (6/15 lit; 7 stopped with residue; DS-GEN-1 OWNER-signed; DS-GEN-10 unmountable) | | | | |
 | ~~DESK-ECON2~~ DONE → 333b1a83c sealed `desk-econ2-2026-09-05` (§0c-3 CLOSED; 4 mounts; 5 dark on the casing class) · THE DESK CONSIST IS COMPLETE except OSR-SCHEMA17 | | | | |
-| VOICE-JSX | build | laneVOICE @ fd8b6df00 | briefs/brief-VOICE-JSX.md | 09-05 |
+| ~~VOICE-JSX~~ DONE → 9d6e47dde sealed `voice-jsx-2026-09-05` (34/34 cured; Tier-3 GREEN with no refreeze; after PROSE + this land, all four voice rows retire) | | | | |
 | ~~ENC-4~~ BUILT → 9 cars 7be568047 sealed `enc4-2026-09-05`; ⚠ VITEST PROOF OWED at its landing (no quiet window opened); RULED (`rulings/RULING-ENC4-R1-R2-R9.md`): R1 one row now, §B deferred to ENC-4b (approacher only where known); R2 ratified; R9 ratified. Proofs at its landing. | | | | |
 
 ## QUEUED — next slot takes the top row
@@ -53,6 +53,8 @@ Updated 2026-09-05 by the Fable chair (after §897: product fd8b6df00, ledger c8
 - Still-mountable, stopped with measured producer status: DS-GEN-8, 15, 18 · DS-POP-1/2/3 · DS-REL-1 (GEN2 receipt) — a DESK-GEN3 car.
 - ⚠ THE CHAIR CONFLATED `wc -l` WITH EFFECTIVE LINES THREE TIMES (OverviewTab 673→500, DefenseTab 545→419, WarTab/FaithTab): every size figure in a brief must be the eslint Linter count or say "wc -l, re-measure".
 - Corrections re-derived by lanes: the router has 25 tabs (`plot_hooks`, `daily_life`, `dm_compass`, `dm_notes`, `ai_notes` were missing from the chair's list); OverviewTab is 500/600 EFFECTIVE (673 was `wc -l`); OutputContainer 600/1050; the mounts baseline is 36 → 30 after WARFAITH (its message said 37 → 31).
+
+## THE COMPOSED CONSIST AFTER §898 (§899): CLAMP-W2 (3) + the edge re-mint + CLAMP-W3 (the ceiling car) + VOICE-JSX (1) + ENC-4 (9; its OWED vitest proofs run at the composed tip before the registers) + DOCKET's cars — one gate; then OSR-SCHEMA17 + the desk consist (§900). `land-899-prep.sh <cas>` replays all of them.
 
 ## CHAIR-OWNED, NOT LANES
 ~~ANCHORS → §897~~ LANDED · replay + land the desk consist after
