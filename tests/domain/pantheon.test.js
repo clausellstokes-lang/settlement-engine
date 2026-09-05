@@ -22,10 +22,10 @@ import { ensureWorldState, CONDITIONAL_LEDGER_KEYS } from '../../src/domain/worl
 import { buildWorldSnapshot } from '../../src/domain/worldPulse/worldSnapshot.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 import { normalizeForDormancy } from '../helpers/dormancyOracle.js';
-// WF-1c's registration-totality battery (A5) and authoring join (A7). The registry list is
-// IMPORTED, not re-typed: A5 and kindPoolFloors.walker.test.js share the ONE roster, so the
-// six figures A5 freezes are re-derived from the LIVE sources through the same denominator
-// the walker uses (ODQ §356.2 R-6).
+// WF-1c's registration-totality battery (A5) and authoring join (A7). The registry list AND
+// the six frozen figures are IMPORTED, not re-typed: A5 and kindPoolFloors.walker.test.js
+// share the ONE roster, so the figures A5 asserts are the same literals the walker asserts,
+// measured against the same live denominator (ODQ §356.2 R-6; the figures lifted 2026-09-05).
 import { EXACT_SECTION, SECTION_OF, isExplicitlyRouted } from '../../src/domain/realm/heraldRouting.js';
 import { newsVoiceCategory } from '../../src/domain/display/newsVoice.js';
 // WF-1f's agreement arm: the estate's ONE shared deity-name floor, read here so A1 asserts
@@ -33,7 +33,7 @@ import { newsVoiceCategory } from '../../src/domain/display/newsVoice.js';
 import { deityDisplayNameFromRef } from '../../src/domain/display/deityNames.js';
 import { WHAT_PHRASES } from '../../src/domain/display/settlementRumors.js';
 import { KIND_SECTION } from '../../src/domain/display/chroniclersLetter.js';
-import { KIND_REGISTRIES } from '../helpers/kindRegistryRoster.js';
+import { KIND_REGISTRIES, KIND_REGISTRATION_FREEZES } from '../helpers/kindRegistryRoster.js';
 import { censusNewsAuthoringSites, debtLedgerRows } from '../lint/newsAuthoringCensus.shared.mjs';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -572,45 +572,46 @@ describe('pantheon — realm arcs (Ascendancy / Twilight / the last altar)', () 
     // this pin, which no packet had named, because a hand-copied denominator drifts the moment
     // the original moves. The structural repair is DONE (ODQ §356.2 R-6, TE-HOUSE H5) — both
     // this pin and the walker now read the ONE roster, so a registry that joins or leaves
-    // breaks both identically. The six figures below stay literal: they are deliberate freezes,
-    // and the repair removed the duplicated LIST, never the freezes.
+    // breaks both identically.
+    // ⭐⭐ AND THE FIGURES FOLLOWED THE LIST, 2026-09-05. The first repair left them literal in
+    // EACH consumer, and the fork it left open bit a SECOND time at ENC-4 — four arms of this
+    // very test landed RED and unseen, in the same paragraph that warned about the failure. The
+    // freezes are still LITERAL (a freeze derived from the tree is an assertion that cannot
+    // fail) but they are now literal in ONE place, and this is a READER of that place.
+    // ⛔ NOTHING BELOW MAY BE RE-TYPED AS A NUMBER. A registering commit moves
+    // tests/helpers/kindRegistryRoster.js, whose docblock carries the attribution rule.
     const registries = KIND_REGISTRIES;
     const allRows = registries.flatMap(([, rows]) => [...rows]);
     const registered = new Set(allRows.map(r => String(r.kind)));
     const routedTokens = Object.keys(EXACT_SECTION);
     const unvoiced = routedTokens.filter(t => !registered.has(t));
-    // ⛔ A DECLARED RE-RECORD OF FOUR FIGURES (WF-8a, ODQ §309.3 / §321.2a / §347.1(2) / §350).
-    // WF-1c's claim that its OWN kind takes the prefix door and files no exact row is UNTOUCHED
-    // and is asserted three lines above; what moved is the ambient census around it, because
-    // WF-8a registers a desk-BEARING kind with a chair-authorized EXACT_SECTION row. The two
-    // figures that DID NOT move are the load-bearing ones: `unvoiced` is a shrink-only ceiling
-    // and holds at its measured value, and the registered-minus-routed difference holds at
-    // eight — which is exactly what a kind that carries a desk is supposed to do, and the
-    // opposite of what WF-1c's prefix-routed kind would have done.
-    // ⛔⛔ THE FORK BIT AGAIN, ONE WAVE LATER, AND IT LANDED RED AND UNSEEN. ENC-4 registered the
-    // estate's SEVENTH family and moved the four figures in kindPoolFloors.walker.test.js; it did
-    // NOT move these, and no vitest ran in that lane, so four arms of this test were RED at its
-    // tip. ENC-4b measured it (4 of 6 arms red at `7be568047`, before that lane touched anything)
-    // and the Fable chair moves them here at the §899 composed landing, where ENC-4 lands WITHOUT
-    // ENC-4b. ⚠ The structural repair above removed the duplicated LIST and left the FREEZES
-    // literal by ruling, so a hand move in the registering commit is still the contract — and it
-    // has now been missed twice, at WF-8a and at ENC-4. That the same paragraph warns about the
-    // same failure it then suffered is the strongest argument on record for lifting these six
-    // into the shared roster helper beside KIND_REGISTRIES; that is a chair act, recorded here
-    // rather than taken.
+    // ⛔ THE RE-RECORD HISTORY, KEPT because it is the evidence for the repair above. WF-1c's
+    // claim that its OWN kind takes the prefix door and files no exact row is UNTOUCHED and is
+    // asserted three lines above; what moved around it was the ambient census, twice, because
+    // WF-8a and then ENC-4 each registered a desk-BEARING kind with a chair-authorized
+    // EXACT_SECTION row. The two figures that did NOT move either time are the load-bearing
+    // ones: `unvoiced` is a shrink-only ceiling and holds at its measured value, and the
+    // registered-minus-routed difference holds at eight — exactly what a kind that carries a
+    // desk is supposed to do, and the opposite of what WF-1c's prefix-routed kind would do.
+    // ⛔⛔ THE FORK BIT AGAIN AT ENC-4, ONE WAVE LATER, AND IT LANDED RED AND UNSEEN: ENC-4 moved
+    // the four figures in kindPoolFloors.walker.test.js and NOT these, and no vitest ran in that
+    // lane, so four arms of this test were RED at its tip. ENC-4b measured it (4 of 6 arms red at
+    // `7be568047`, before that lane touched anything). That the paragraph warning about the
+    // failure then suffered it is what carried the argument, and the roster below is the cure.
     //
-    // THE ATTRIBUTION: `registries` 11 -> 12 and the small-family list are ENC-4's (a whole new
-    // family, CHANCE_MEETING). `allRows` 113 -> 114 and `routedTokens` 379 -> 380 are ONE EACH for
+    // THE ATTRIBUTION, kept as the worked example of the rule the roster's docblock states:
+    // `registries` 11 -> 12 and the small-family list were ENC-4's (a whole new family,
+    // CHANCE_MEETING). `allRows` 113 -> 114 and `routedTokens` 379 -> 380 were ONE EACH for
     // ENC-4's `chance_meeting_recorded`; ENC-4b's `chance_meeting_exposed` adds one more of each
-    // when it lands. The two load-bearing figures do NOT move and that is the point: `unvoiced`
-    // is a shrink-only ceiling and holds, and the registered-minus-routed difference holds at
-    // eight, which is exactly what a kind that carries a desk is supposed to do.
-    expect(registries.length).toBe(12);
-    expect(registries.filter(([, rows]) => rows.length < 5).map(([name]) => name)).toEqual(['INFORMATION', 'FAITH', 'CHANCE_MEETING']);
-    expect(allRows.length).toBe(114);
-    expect(routedTokens.length).toBe(380);
-    expect(unvoiced.length).toBe(274);
-    expect(allRows.length - routedTokens.filter(t => registered.has(t)).length).toBe(8);
+    // when it lands.
+    expect(registries.length).toBe(KIND_REGISTRATION_FREEZES.registries);
+    expect(registries.filter(([, rows]) => rows.length < 5).map(([name]) => name))
+      .toEqual([...KIND_REGISTRATION_FREEZES.smallFamilies]);
+    expect(allRows.length).toBe(KIND_REGISTRATION_FREEZES.registeredKinds);
+    expect(routedTokens.length).toBe(KIND_REGISTRATION_FREEZES.routedTokens);
+    expect(unvoiced.length).toBe(KIND_REGISTRATION_FREEZES.unvoicedTokens);
+    expect(allRows.length - routedTokens.filter(t => registered.has(t)).length)
+      .toBe(KIND_REGISTRATION_FREEZES.registeredMinusRouted);
   });
 
   test('A6 nothing persists: the ledger keeps its five keys, gains no top-level key, and round-trips the remnant', () => {
