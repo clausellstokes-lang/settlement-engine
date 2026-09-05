@@ -791,6 +791,53 @@ export async function buildObservedCorpus({
     }
   }
 
+  // ── Producer 1b: the STRESS-LOADED topology pass. TOPOLOGY ONLY. ──
+  //
+  // ⭐ THESE SETTLEMENTS ENTER `roots` AND DELIBERATELY NOT `generated`.
+  //
+  // WHY THEY EXIST. A legitimately CONDITIONAL writer is invisible to a corpus that
+  // never satisfies its condition, and the scanner then reports every reader of that
+  // key as "a key no writer produces" — a false positive of the corpus's REACH rather
+  // than a defect in the read. That is this file's own stated remedy: more keys
+  // observed, fewer false findings. The measured instance: `economicState.js` writes
+  // `isCriminal` onto an `incomeSources` row only inside
+  // `if (safetyProfile.blackMarketCapture > 10)`, and `safetyProfile.js` computes that
+  // capture as `baseShadowPercent + stressShadowBonus` where the bonus is exactly ZERO
+  // with no stress flag set — so the four unstressed configs above can never observe
+  // the key, and three shipped readers of it were reported dead.
+  //
+  // ⛔ WHY NOT `generated`, AND WHY NOT A FIFTH `CONFIGS` ROW — THE PULSE IS THE BLAST
+  // RADIUS, NOT THE GENERATION. `generated` is producer 2's save list. Anything added
+  // to it re-rolls the ENTIRE world pulse, and a larger pulse pushes thin shapes across
+  // `MIN_ROWS` into being judgeable, which MINTS findings instead of clearing them
+  // (lane OSRCORPUS measured a fifth config at baseline grade: 33 rows cleared but 20
+  // brand-new ones minted across 15 files, and six of nine `corpusMeta` fields moved).
+  // Widening the corpus's TOPOLOGY without widening its PULSE is a pure shrink: the
+  // pulse, its saves, its steadings and `generations` are all byte-for-byte untouched.
+  //
+  // ⚠ `meta.generations` BELOW STAYS AT `generated.length` AND THEREFORE DOES NOT COUNT
+  // THESE FOUR. That is deliberate, not an oversight: `seeds`, `configs`, `generations`
+  // and `pulseIntervals` are the migration's EXECUTION-IDENTITY keys, which a governed
+  // rung requires to MATCH its predecessor exactly — they name the pulse experiment, and
+  // this pass is not part of it. A reader counting settlements should read this loop, not
+  // that field.
+  //
+  // ⚠ ONE config × the four seeds is deliberate, not laziness: this pass exists to make
+  // a conditional branch OBSERVABLE, and every extra generation is extra topology that
+  // could move a thin shape over the threshold above. Widen it only with the same
+  // before/after row reconciliation, and never through `generated`.
+  const STRESS_TOPOLOGY_TYPES = Object.freeze(['insurgency', 'famine']);
+  for (const seed of SEEDS) {
+    roots.push({
+      name: 'settlement',
+      value: generateSettlementPipeline(
+        { ...CONFIGS[0], stressTypes: [...STRESS_TOPOLOGY_TYPES] },
+        null,
+        { seed, customContent: {} },
+      ),
+    });
+  }
+
   // ── Producer 2: the campaign world pulse over those REAL saves. ──
   const ids = generated.map((_, i) => `osr${String(i).padStart(3, '0')}`);
   const saves = generated.map((settlement, i) => ({
