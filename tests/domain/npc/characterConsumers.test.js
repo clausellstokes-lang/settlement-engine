@@ -741,10 +741,18 @@ describe('F10 — THE ALIGNMENT CENSUS, and the cache declared with its reconcil
     const dependsOnSlicer = (/** @type {string} */ text) => (
       /from\s+'[^']*\/personaSlicer\.js'/.test(stripComments(text))
         || /\b(buildPersonaSlice|sliceManifestKeys|sliceCoversManifest)\s*[([.]/.test(
+          // ⭐ THE PASS ORDER AND THE NEWLINE BOUND ARE BOTH LOAD-BEARING (car STRIPPER-UNIFY).
+          // TEMPLATES FIRST, because an apostrophe inside backticks otherwise opens a
+          // spurious single-quote span that eats every line to the next apostrophe; and
+          // NEWLINE-BOUNDED quote classes, because the same apostrophe inside a
+          // DOUBLE-quoted string opens that span even after the reorder. Measured over
+          // src/ at this base: the landed spelling hid 1,649,119 characters of live code
+          // in 377 of 2,174 files, the reorder alone still hid 1,269,249 in 266. Both
+          // halves are pinned by fixtures in the anti-vacuity test below.
           stripComments(text)
-            .replace(/'(?:[^'\\]|\\.)*'/g, "''")
-            .replace(/"(?:[^"\\]|\\.)*"/g, '""')
-            .replace(/`(?:[^`\\]|\\.)*`/g, '``'),
+            .replace(/`(?:[^`\\]|\\.)*`/g, '``')
+            .replace(/'(?:[^'\\\n]|\\.)*'/g, "''")
+            .replace(/"(?:[^"\\\n]|\\.)*"/g, '""'),
         )
     );
     const importers = jsFilesUnder(SRC)
@@ -758,6 +766,29 @@ describe('F10 — THE ALIGNMENT CENSUS, and the cache declared with its reconcil
     expect(dependsOnSlicer('const f = buildPersonaSlice({ npc });')).toBe(true);
     expect(dependsOnSlicer('// personaSlicer is a dead reader\nconst a = 1;')).toBe(false);
     expect(dependsOnSlicer("const note = 'personaSlicer.js:buildPersonaSlice (unreachable)';")).toBe(false);
+    // ⭐⭐ AND THE STRIPPER'S TWO ORDERING HAZARDS ARE PINNED HERE (car STRIPPER-UNIFY).
+    // Each fixture is a LITERAL built on these lines, and each goes FALSE under exactly one
+    // unsound spelling that was landed on this file's base: the first under a single-quote
+    // pass that runs BEFORE the template pass (an apostrophe inside backticks opens a
+    // spurious span that eats the code between the two templates), the second under a quote
+    // class that does NOT stop at a newline (the same apostrophe inside a double-quoted
+    // string does it even after the reorder). A stripper failing either one makes every
+    // dereference arm above assert on text it cannot see — vacuous green, in the direction
+    // that passes.
+    // ⚠ THE TWO JOINS DIFFER ON PURPOSE. The first fixture is ONE LINE, so a
+    // newline-bounded quote class cannot mask the ordering defect; the second spans
+    // LINES, so only the newline bound can save it. Joined the other way round, each
+    // mutant survives its own fixture — measured, not reasoned (plant-out M1/M2).
+    expect(dependsOnSlicer([
+      "const a = `the mayor's seat`;",
+      'const f = buildPersonaSlice({ npc });',
+      "const b = `the guild's hall`;",
+    ].join(' '))).toBe(true);
+    expect(dependsOnSlicer([
+      'const a = "the baron\'s men";',
+      'const f = buildPersonaSlice({ npc });',
+      'const b = "the guild\'s hall";',
+    ].join('\n'))).toBe(true);
     // anchored: the subject really is on the tree, so the empty list is a fact about
     // its reachability rather than about a filename that matches nothing.
     expect(jsFilesUnder(SRC).some((file) => file.endsWith('personaSlicer.js'))).toBe(true);

@@ -57,10 +57,16 @@ function withoutComments(source) {
 
 /** Strip comments AND string bodies so a source scan reads CODE, not prose. */
 function codeOnly(source) {
+  // ⭐ TEMPLATES FIRST, AND THE ORDER IS LOAD-BEARING (car STRIPPER-UNIFY). This estate
+  // writes apostrophes inside backticks constantly; a single-quote pass that runs first
+  // reads each one as an opening quote and eats the code after it. The quote classes here
+  // already stop at a newline, so the reorder is the whole cure: measured over src/ at
+  // this base, the landed spelling mis-stripped 7 of 2,174 files (10,230 characters) and
+  // the reorder takes that to 0. Pinned by a fixture in the vacuity test below.
   return withoutComments(source)
+    .replace(/`(?:[^`\\]|\\.)*`/g, '``')
     .replace(/'(?:[^'\\\n]|\\.)*'/g, "''")
-    .replace(/"(?:[^"\\\n]|\\.)*"/g, '""')
-    .replace(/`(?:[^`\\]|\\.)*`/g, '``');
+    .replace(/"(?:[^"\\\n]|\\.)*"/g, '""');
 }
 
 describe('TC-2 determinism: the seed family is total', () => {
@@ -210,6 +216,22 @@ describe('TC-2 determinism: the draw ledger', () => {
     // anchored: same live source text, same sceneDigest positive below
     expect(code).not.toMatch(/\.fork\s*\(/);
     expect(code).toMatch(/\bsceneDigest\s*\(/);
+    // ⭐⭐ AND THE STRIPPER BEHIND EVERY SCAN IN THIS FILE IS PINNED (car STRIPPER-UNIFY).
+    // The fixture is a LITERAL built on these lines and goes FALSE under the spelling that
+    // was landed on this file's base — a single-quote pass running BEFORE the template
+    // pass, where an apostrophe inside backticks opens a spurious span that eats the code
+    // between the two templates. Under it, every `not.toMatch` arm above asserts on text
+    // the scan cannot see: vacuous green in the direction that passes. (The quote classes
+    // here already stop at a newline, so the order is the whole cure; measured over src/
+    // at this base, the landed spelling mis-stripped 7 of 2,174 files.)
+    // ⚠ THE FIXTURE IS ONE LINE ON PURPOSE: this stripper's quote classes already stop
+    // at a newline, so a multi-line fixture would survive the unsound order and pin
+    // nothing — measured, not reasoned (plant-out M1).
+    expect(codeOnly([
+      "const a = `the mayor's seat`;",
+      'const d = sceneDigest(anchor);',
+      "const b = `the guild's hall`;",
+    ].join(' '))).toMatch(/\bsceneDigest\s*\(/);
   });
 
   test('TC-4 adds ONE label per leaf — digest DOMAINS, not forks — and roots no stream', () => {

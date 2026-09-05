@@ -489,9 +489,16 @@ function codeResidue(line) {
   if (trimmed.startsWith('*') || trimmed.startsWith('//') || trimmed.startsWith('/*')) return '';
   return line
     .replace(/\/\*[\s\S]*?\*\//g, ' ')
-    .replace(/'(?:[^'\\]|\\.)*'/g, "''")
-    .replace(/"(?:[^"\\]|\\.)*"/g, '""')
+    // ⭐ TEMPLATES FIRST, AND THE ORDER IS LOAD-BEARING (car STRIPPER-UNIFY). An
+    // apostrophe inside backticks otherwise opens a spurious quote span that eats the
+    // rest of the line, so a real `FLAG === true` gate behind one is invisible and this
+    // census undercounts in the direction that passes. Measured over src/ at this base:
+    // 6 of 2,174 files mis-stripped (226 characters), 0 after. The newline bound is a
+    // no-op on this per-LINE input and is written for shape parity with the estate's
+    // other strippers. Both halves are pinned by a fixture in the control test below.
     .replace(/`(?:[^`\\]|\\.)*`/g, '``')
+    .replace(/'(?:[^'\\\n]|\\.)*'/g, "''")
+    .replace(/"(?:[^"\\\n]|\\.)*"/g, '""')
     .replace(/\/\/.*$/, '');
 }
 
@@ -622,5 +629,16 @@ describe('WR-2 disposition channels — dormancy fence (re-scoped, LANE DG)', ()
       .includes(FLAG)).toBe(false);
     // The real gate on the very next line still counts.
     expect(STRICT_READ.test(codeResidue(`  return rules.${FLAG} === true;`))).toBe(true);
+    // ⭐⭐ AND THE STRIPPER'S PASS ORDER IS PINNED (car STRIPPER-UNIFY). The fixture is a
+    // LITERAL built on this line and goes FALSE under the spelling that was landed on this
+    // file's base — a single-quote pass running BEFORE the template pass, where an
+    // apostrophe inside backticks opens a spurious span that eats the rest of the line. A
+    // real gate behind one is then invisible, so this census undercounts in the direction
+    // that passes. Measured over src/ at this base: 6 of 2,174 files mis-stripped, 0 after.
+    // (The newline bound added with the reorder cannot be shown here: this stripper is
+    // asked one LINE at a time, so it is a measured no-op and carried for shape parity.)
+    expect(STRICT_READ.test(codeResidue(
+      `  const note = \`the mayor's writ\`; return rules.${FLAG} === true; const w = \`the guild's hall\`;`,
+    ))).toBe(true);
   });
 });
