@@ -259,7 +259,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = '72acacd8583f70f6b0a5a551ad067f32eb35060e5e08cf8589e8e2135a5c4f6d';
+const PRE_COUPLING_CORPUS_SHA = 'cda5ec87790ba9fb06e68e9dfe064bb9059d07ede47edbf74855f02f76a3684f';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);
