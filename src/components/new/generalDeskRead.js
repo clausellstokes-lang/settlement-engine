@@ -51,6 +51,7 @@ const HEALTH_MOUNT = 'overview.systemsHealth';
 const GROUND_MOUNT = 'overview.ground';
 const MARKET_MOUNT = 'overview.market';
 const INSTITUTIONS_MOUNT = 'overview.institutions';
+const CONNECTION_MOUNT = 'overview.notableConnection';
 
 /** The general desk's HISTORY positions. */
 const IDENTITY_MOUNT = 'history.identity';
@@ -69,6 +70,7 @@ const SILENT_OVERVIEW = Object.freeze({
   originLines: Object.freeze([]),
   siteLines: Object.freeze([]),
   situationLine: null,
+  connectionLines: Object.freeze([]),
 });
 
 /** The same, for the history chapter. */
@@ -167,6 +169,8 @@ export function generalDeskLines(settlement, options = {}) {
       // record and a desk that reached for it itself would be a second opinion about which
       // record the caller meant.
       history: r.history,
+      prominentRelationship: r.prominentRelationship,
+      relationships: r.relationships,
       // DS-GEN-11's contradiction count. ⚠ `.metrics.` IS LOAD-BEARING: the corpus title
       // abbreviates the path and the abbreviated one is `undefined` on every settlement.
       criticalIssueCount: via.metrics?.criticalIssueCount,
@@ -205,6 +209,8 @@ export function generalDeskLines(settlement, options = {}) {
         line(INSTITUTIONS_MOUNT, prose.overview.institutions),
       ].filter(Boolean)),
       situationLine: line(SITUATION_MOUNT, prose.overview.situation),
+      connectionLines: Object.freeze(prose.overview.notableConnection
+        .map((rung) => line(CONNECTION_MOUNT, rung)).filter(Boolean)),
     }),
     history: Object.freeze({
       identityLines: Object.freeze(identity

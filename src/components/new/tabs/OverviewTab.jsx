@@ -192,6 +192,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
   // seven tabs and the registry admits one call site per desk.
   const {
     healthLines, conflictLines, warningLines, originLines, siteLines, situationLine,
+    connectionLines,
   } = generalDeskLines(r, { publicDossier, playerView, stresses }).overview;
 
   // Institution layout — guard `r.institutions` because sparse saves
@@ -455,6 +456,14 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
       {/* ── NOTABLE CONNECTION ────────────────────────────────────────────── */}
       {r.prominentRelationship?.phrasing&&<div style={{background:swatch['#F7F0E4'],border:'1px solid #d8c090',borderLeft:'3px solid #6b5340',padding:'9px 13px',marginBottom:14}}>
         <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:4}}>Notable Connection</div>
+        {/* ── DS-REL-2 (overview.notableConnection) ───────────────────────────
+            TWO LENSES AT ONE POSITION: the tie the town names first, and how
+            much of its roll this town's own conditions made. The phrasing below
+            is the DATUM and keeps its own words; these band what having it
+            means. See notableConnectionPoolKey / flagDrivenPoolKey. */}
+        {connectionLines.map((line,i)=>(
+          <p key={`c${i}`} style={{fontSize:FS.sm,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.6,margin:'0 0 5px',fontStyle:'italic'}}>{line}</p>
+        ))}
         <p style={{fontSize: FS['12.5'],...serif,color:swatch['#3A2A10'],lineHeight:1.6,margin:0,fontStyle:'italic'}}>{r.prominentRelationship.phrasing}</p>
         {/* Actionable cross-tab jump — restored from the composite's static text
             reference per THE BASE RECONCILIATION MAP SURFACE 1 (master's real

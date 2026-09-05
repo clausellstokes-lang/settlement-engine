@@ -49,6 +49,11 @@ afterEach(cleanup);
  */
 const SPEAKING = Object.freeze({
   id: 'steinmark', name: 'Steinmark', _seed: 'steinmark', tier: 'town',
+  prominentRelationship: {
+    npc1: 'Mugain', npc2: 'Felix', type: 'Outstanding Debt',
+    phrasing: 'Mugain and Felix are connected by something neither discusses openly.',
+  },
+  relationships: [{ flagDriven: false }, { flagDriven: false }],
   config: { terrainType: 'mountain', tradeRouteAccess: 'road' },
   institutions: [{ name: 'The Stone Market', category: 'economy' }],
   economicState: {
@@ -90,6 +95,7 @@ const INSTITUTIONS = 'Steinmark is administered, visibly';          // DS-GEN-17
 const HEALTH = 'The arithmetic of Steinmark does not close';        // DS-GEN-3
 const CONFLICT = "Steinmark's clerks have stopped filing anything"; // DS-GEN-2
 const WARNING = 'that a town of this shape should not be able to keep'; // DS-GEN-7
+const CONNECTION = 'has one tie that matters more than the others';          // DS-REL-2
 
 /** @param {boolean} publicDossier */
 const renderTab = (publicDossier) => render(e(OverviewTab, {
@@ -111,6 +117,7 @@ describe('THE GENERAL DESK DRAWS ON THE OVERVIEW TAB — and is silent for a fre
       [HEALTH, 'DS-GEN-3 systems health (overview.systemsHealth)'],
       [CONFLICT, 'DS-GEN-2 the conflict line (overview.conflicts)'],
       [WARNING, 'DS-GEN-7 the coherence warning (overview.warnings)'],
+      [CONNECTION, 'DS-REL-2 the notable connection (overview.notableConnection)'],
     ]) expectPresentThenAbsent(priv, pub, sentence, `the general desk at ${label}`);
   });
 
@@ -122,6 +129,8 @@ describe('THE GENERAL DESK DRAWS ON THE OVERVIEW TAB — and is silent for a fre
     expect(pub).toContain('The Council');
     expect(pub).toContain('Labor control');
     expect(pub).toContain('HIGH');
+    // The Notable Connection DATUM survives too — only the banded sentence above it goes.
+    expect(pub).toContain('Mugain and Felix are connected by something neither discusses openly.');
   });
 });
 
@@ -136,6 +145,13 @@ describe('THE ONE CALLER — the reader, not the tabs, holds the desk and the ga
     expect(drawn.warningLines.length, 'DS-GEN-7').toBeGreaterThan(0);
     expect(drawn.conflictLines.filter(Boolean).length, 'DS-GEN-2').toBe(1);
     expect(drawn.situationLine, 'DS-GEN-5').toBeTruthy();
+    expect(drawn.connectionLines.length, 'DS-REL-2 both lenses').toBe(2);
+    // ⛔ AND IT DRAWS ONLY WHERE THE DATUM IS. A town with no prominent relationship is a
+    // town whose ties are level, and the position renders nothing rather than a default.
+    const level = { ...SPEAKING, prominentRelationship: null, relationships: undefined };
+    expect(generalDeskLines(level, { stresses: [] }).overview.connectionLines).toEqual([]);
+    expect(generalDeskLines(level, { stresses: [] }).overview.siteLines.length,
+      'the rest of the desk went dark with it').toBe(3);
 
     const silent = generalDeskLines(SPEAKING, { publicDossier: true, stresses: [] }).overview;
     expect(silent.siteLines).toEqual([]);
@@ -144,6 +160,7 @@ describe('THE ONE CALLER — the reader, not the tabs, holds the desk and the ga
     expect(silent.warningLines).toEqual([]);
     expect(silent.conflictLines.filter(Boolean)).toEqual([]);
     expect(silent.situationLine).toBeNull();
+    expect(silent.connectionLines).toEqual([]);
   });
 
   test('DS-GEN-6 fails CLOSED on a town with no food arithmetic (kernel law 5)', () => {

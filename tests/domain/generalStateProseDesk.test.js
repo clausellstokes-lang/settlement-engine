@@ -43,6 +43,8 @@ import {
   criticalIssuePoolKey,
   escalationClockPoolKey,
   hookCategoryPoolKey,
+  flagDrivenPoolKey,
+  notableConnectionPoolKey,
   viabilityVerdictPoolKey,
   eventAnchorDimension,
   eventRecordPoolKey,
@@ -84,6 +86,7 @@ import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 const ROOT = resolve(import.meta.dirname, '../..');
 const src = (rel) => readFileSync(resolve(ROOT, rel), 'utf8');
 
+
 /** The two annexes' slot register, merged — the authority on what a fill shape means. */
 const mergedShapes = () => mergeSlotShapes([
   parseSlotShapes(src('docs/content/RECEIPT_POOLS_DOSSIER_STATE.md'), 'state annex'),
@@ -98,6 +101,8 @@ const BLOCK_POOLS = Object.freeze({
   'DS-GEN-9': 15, 'DS-GEN-14': 3, 'DS-GEN-16': 5,
   // The viability verdict and the plot-hook framing (DESK-GEN2 car 2).
   'DS-GEN-11': 6, 'DS-HK-1': 11,
+  // The notable connection (DESK-GEN2 car 4).
+  'DS-REL-2': 3,
 });
 
 /**
@@ -1188,5 +1193,96 @@ describe('the viability verdict and the hook framing', () => {
     for (const k of seenClocks) {
       expect(escalationClockPoolKey(`clock.${k}.x`), `the clock '${k}' reaches no pool`).toBeTruthy();
     }
+  });
+});
+
+/**
+ * ── DS-REL-2 AT `overview.notableConnection` (DESK-GEN2 car 4) ──────────────────────
+ * One lens DRAWN and one DROPPED, which is the registry's MEASUREMENT-OR-DEFAULT test
+ * resolving both ways inside a single block.
+ */
+describe('the notable connection', () => {
+  it('draws ONLY where the record really carries a prominent relationship', () => {
+    expect(notableConnectionPoolKey({ phrasing: 'Two people, one debt.' }))
+      .toBe('prominentRelationship present');
+    // An absence is a town whose ties are level — a true statement, not a missing reading.
+    expect(notableConnectionPoolKey(null)).toBeNull();
+    expect(notableConnectionPoolKey({})).toBeNull();
+    expect(notableConnectionPoolKey({ phrasing: '   ' })).toBeNull();
+    expect(notableConnectionPoolKey({ phrasing: 42 })).toBeNull();
+  });
+
+  it('⛔ flagDriven HAS a writer — the count is a MEASUREMENT, and the one-line grep lied', () => {
+    // ⛔⛔ THIS ARM EXISTS BECAUSE THIS LANE GOT IT WRONG FIRST. A one-line grep for
+    // `flagDriven\s*[:=]` found exactly ONE site — a READ in RelationshipsTab.jsx — and the
+    // lens was ruled dead on the `economicBase: mixed` precedent. It is not dead:
+    // npcGenerator.js writes the flag on EVERY relationship row, and the grep missed it only
+    // because the value is a multi-line boolean and the key sits alone on its line. A count
+    // of zero over a field a producer WRITES is a measurement; over a field nothing writes it
+    // is a default in a reading's clothes. This one is the first.
+    mustExtract(src('src/generators/npcGenerator.js'), 'flagDriven:', 'the flagDriven writer in npcGenerator.js');
+    // BOTH pools are routed, and the third state — no roll at all — is neither.
+    expect(flagDrivenPoolKey([{ flagDriven: true }, { flagDriven: false }])).toBe('flagDriven count > 0');
+    expect(flagDrivenPoolKey([{ flagDriven: false }])).toBe('flagDriven count zero');
+    expect(flagDrivenPoolKey([{}])).toBe('flagDriven count zero');
+    // ⚠ AN ABSENT ROLL IS NOT AN EMPTY ONE: a settlement with no `relationships` array has
+    // not been asked the question, and neither pool is a true answer.
+    expect(flagDrivenPoolKey(undefined)).toBeNull();
+    expect(flagDrivenPoolKey([])).toBeNull();
+    // TOTAL over the block: the three pools are exactly the three this desk routes.
+    expect([...new Set([
+      notableConnectionPoolKey({ phrasing: 'x' }),
+      flagDrivenPoolKey([{ flagDriven: true }]),
+      flagDrivenPoolKey([{ flagDriven: false }]),
+    ])].sort()).toEqual(poolsOf('DS-REL-2').sort());
+  });
+
+  it('MEASURED RESIDUE: the flag is written on every row and TRUE on none of them yet', () => {
+    // The finding, pinned so it cannot decay into "the lens is dead". The flag is
+    // `stressFlags.anyActive && archetype ∈ {six stress-economic effects}`, so `count > 0`
+    // is reached only in a stressed world. Both halves are counted: rows carrying the field,
+    // and rows where it is true.
+    let rows = 0; let carried = 0; let driven = 0;
+    for (const seed of ['sf-test-2026-04', 'gen2-a', 'gen2-b']) {
+      for (const settType of ['hamlet', 'town', 'city', 'metropolis']) {
+        const s = generateSettlementPipeline(
+          { settType, culture: 'germanic', tradeRouteAccess: 'road' }, null, { seed, customContent: {} },
+        );
+        for (const rel of (s.relationships || [])) {
+          rows += 1;
+          if (Object.prototype.hasOwnProperty.call(rel, 'flagDriven')) carried += 1;
+          if (rel.flagDriven === true) driven += 1;
+        }
+      }
+    }
+    expect(rows, 'no relationships were generated').toBeGreaterThan(20);
+    // THE WRITER REACHES EVERY ROW — this is what makes the zero a reading.
+    expect(carried, 'the writer stopped stamping the field').toBe(rows);
+    // AND IT IS TRUE ON NONE OF THEM in an unstressed sweep, which is the residue.
+    expect(driven, 'a flag-driven relationship appeared — re-measure the residue').toBe(0);
+  });
+
+  it('the producer really writes prominentRelationship, on some towns and not others', () => {
+    // BOTH directions over real worlds: a lens that fired on every town would be a default,
+    // and one that fired on none would be dark. It is a genuine, conditional reading.
+    mustExtract(
+      src('src/generators/narrativeGenerator.js'),
+      'const prominentRelationship',
+      'the prominentRelationship writer in narrativeGenerator.js',
+    );
+    let towns = 0; let carried = 0;
+    for (const seed of ['sf-test-2026-04', 'gen2-a', 'gen2-b']) {
+      for (const settType of ['hamlet', 'town', 'city', 'metropolis']) {
+        const s = generateSettlementPipeline(
+          { settType, culture: 'germanic', tradeRouteAccess: 'road' }, null, { seed, customContent: {} },
+        );
+        towns += 1;
+        if (s.prominentRelationship?.phrasing) carried += 1;
+      }
+    }
+    expect(towns).toBeGreaterThan(0);
+    expect(carried, 'no generated town carried a prominent relationship').toBeGreaterThan(0);
+    expect(carried, 'every town carried one — the lens is a default, not a reading')
+      .toBeLessThan(towns);
   });
 });

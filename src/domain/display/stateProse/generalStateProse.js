@@ -720,6 +720,56 @@ export function escalationClockPoolKey(clockId) {
   return CORPUS['DS-HK-1'].pools[key] ? key : null;
 }
 
+// ── DS-REL-2 · Overview › The connection the town names first ───────────────────────
+
+/**
+ * DS-REL-2's CONNECTION pool — the one tie the town names before it names a list.
+ *
+ * `narrativeGenerator.js` really writes `prominentRelationship` (measured on 16 of 48
+ * generated settlements, carrying `npc1`, `npc2`, `type`, `phrasing`, `full` and `tension`),
+ * and OverviewTab already prints its `phrasing` as the Notable Connection datum. A town
+ * without one is a town whose ties are level — a true statement rather than a missing
+ * reading — so the absence renders nothing.
+ * @param {unknown} prominentRelationship @returns {string|null}
+ */
+export function notableConnectionPoolKey(prominentRelationship) {
+  const phrasing = text(/** @type {{phrasing?: unknown}|null} */ (prominentRelationship)?.phrasing);
+  if (!phrasing) return null;
+  const key = 'prominentRelationship present';
+  return CORPUS['DS-REL-2'].pools[key] ? key : null;
+}
+
+/**
+ * DS-REL-2's EMERGENT-CONDITIONS pool — how much of the roll exists because of THIS town.
+ *
+ * ⛔⛔ THIS LANE FIRST RULED THIS LENS DEAD AND WAS WRONG, and the correction is recorded
+ * because the mistake is the instructive part. A one-line grep for `flagDriven\s*[:=]`
+ * found exactly ONE site — a READ in RelationshipsTab.jsx — so the lens looked like the
+ * `economicBase: mixed` shape: a count that is always zero because nothing ever sets the
+ * flag. It is not. `npcGenerator.js:1694` writes `flagDriven` on EVERY relationship row; the
+ * grep missed it only because the value is a multi-line boolean expression and the key sits
+ * alone on its line. What is true is narrower and is a FINDING rather than a defect: the
+ * flag is `stressFlags.anyActive && archetype ∈ {six stress-economic effects}`, and across
+ * 48 generated settlements it was `false` every time. So `count > 0` is REACHED ONLY IN A
+ * STRESSED WORLD, and `count zero` is a real reading of a real field.
+ *
+ * ⇒ THE DISTINCTION THAT DECIDED IT, and it is the registry's own: a count of zero over a
+ * field a producer WRITES is a MEASUREMENT; a count of zero over a field nothing writes is a
+ * DEFAULT WEARING A READING'S CLOTHES. This is the first.
+ *
+ * NO ROLL AT ALL renders nothing, which is neither pool: a settlement carrying no
+ * `relationships` array has not been asked the question.
+ * @param {unknown} relationships @returns {string|null}
+ */
+export function flagDrivenPoolKey(relationships) {
+  if (!Array.isArray(relationships) || relationships.length === 0) return null;
+  const driven = relationships.filter(
+    (row) => row && typeof row === 'object' && row.flagDriven === true,
+  ).length;
+  const key = driven > 0 ? 'flagDriven count > 0' : 'flagDriven count zero';
+  return CORPUS['DS-REL-2'].pools[key] ? key : null;
+}
+
 // ── DS-GEN-2 · Overview/Power › Active conflicts ────────────────────────────────────
 
 /**
@@ -1139,6 +1189,7 @@ export function institutionsPoolKey(inst) {
  *   ground: LegibilityRung|null,
  *   market: LegibilityRung|null,
  *   institutions: LegibilityRung|null,
+ *   notableConnection: ReadonlyArray<LegibilityRung|null>,
  * }>, history: Readonly<{
  *   identity: ReadonlyArray<LegibilityRung|null>,
  *   founded: LegibilityRung|null,
@@ -1159,6 +1210,7 @@ export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
     ground: null,
     market: null,
     institutions: null,
+    notableConnection: Object.freeze([]),
   }),
   history: Object.freeze({
     identity: Object.freeze([]),
@@ -1189,7 +1241,9 @@ export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
  *     stakes?: unknown}|null>|null,
  *   govFaction?: unknown, structuralViolations?: unknown, structuralSuggestions?: unknown,
  *   coherenceNotes?: Array<{type?: unknown, tab?: unknown}|null>|null,
- *   criticalIssueCount?: unknown, hookCategories?: ReadonlyArray<unknown>|null,
+ *   criticalIssueCount?: unknown, prominentRelationship?: unknown,
+ *   relationships?: ReadonlyArray<{flagDriven?: unknown}|null>|null,
+ *   hookCategories?: ReadonlyArray<unknown>|null,
  *   clockIds?: ReadonlyArray<unknown>|null, governingName?: unknown,
  *   history?: {age?: unknown, historicalCharacter?: unknown,
  *     founding?: {foundedBy?: unknown, initialChallenge?: unknown}|null,
@@ -1339,6 +1393,13 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
       ground: rung('DS-GEN-12', groundPoolKey(readings.terrainType), ''),
       market: rung('DS-GEN-13', marketPoolKey(readings), ''),
       institutions: rung('DS-GEN-17', institutionsPoolKey(readings.inst), ''),
+      // DS-REL-2's two lenses at ONE position: the tie the town names first, then how much
+      // of its roll this town's own conditions made. The connection line leads because the
+      // page prints its datum directly beneath.
+      notableConnection: Object.freeze([
+        rung('DS-REL-2', notableConnectionPoolKey(readings.prominentRelationship), ''),
+        rung('DS-REL-2', flagDrivenPoolKey(readings.relationships), ''),
+      ].filter((l) => l && l.sentence)),
     }),
     // DS-GEN-11's three lenses over one verdict, in the order ViabilityTab already prints
     // them: the verdict, the contradiction count, and the caveat about WHEN the reading was
