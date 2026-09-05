@@ -5,7 +5,7 @@ Base: the §900 CAS (the desk landing) — every L-HOMES dock is cut at 38474a59
 | 1 | LGT-P1-BIRTH | laneLH1 @ 38474a59e | DONE 408d2e2b1 (successor `null`; +7-key cost tripwired for L-DEFAULT; CAR 9 fixtures in `lh1/birth-fixtures-p1.json`) | `lgt-p1-birth-2026-09-05` |
 | 2 | LGT-P2-MANIFEST | laneLH2 @ 38474a59e | DONE 4a2e1110c (the register keeps its identifier; `ENGINE_GATED_DORMANT_RULE_KEYS` published; the rename rides rung 18) | `lgt-p2-manifest-2026-09-05` |
 | 3 | LGT-P13-FENCES | laneLH3 @ 38474a59e | DONE 1506d657d (four files, five keys; the docket's twelve was wrong four ways) | `lgt-p13-fences-2026-09-05` |
-| 4 | LGT-P5-WOPS | to cut | queued | — |
+| 4 | LGT-P5-WOPS | laneLH4 @ 38474a59e | DONE 427b85c63 (four doors in the family gates; manifest 30 → 34) | `lgt-p5-wops-2026-09-05` |
 | 5 | LGT-P6-ESPWIRE | laneLH5 (unmoved) | REFUSED WITH MEASUREMENT — zero bytes; the layer lights SILENT by design (exposure is its only voice and exposure needs owner-gated custody); POSITION 3 is FREED of the false dependency; an OWNER ROW opens (sign the espionage sentences; the custody schema) | — |
 | 6 | LGT-P4-READER | laneLH6 @ 38474a59e | DONE 35aaeb4ba (the Remembrance reader, two lazy surfaces, dark-inert by innerHTML identity) | `lgt-p4-reader-2026-09-05` |
 | 7 | LGT-P7-DRIFTDOOR | laneLH7 (unmoved) | REFUSED WITH MEASUREMENT — zero bytes: the flag home is RESERVED by ruling (§893 §2, §890.1) and OWNER-GATED; the door lights nothing today; an OWNER ROW (charter the home; receipt §7 prices it) | — |
@@ -17,6 +17,8 @@ Base: the §900 CAS (the desk landing) — every L-HOMES dock is cut at 38474a59
 3. Registers LAST in the landing lineage: lighting census (+7 titles/+1 suite from CAR 1 alone; re-derive), ratchet totals, voice, size, writer-reach, the four censuses per new src/domain leaf, the golden-freeze register; doors that refuse a dirty tree first or between commits.
 4. Kit → gate → chair-verify → CAS → seal `landing-lighting-2026-09-05` → the §901 row (the eleven declarations quote ONLY the L-PROBE receipts: `lprobe-out-899/` cheap, `lprobe-out-899-full/` when the battery completes on a quiet machine).
 ## Chair cars at the lighting composition
+- CAR 3's fence derivation was against 30 register keys; the composition has 34 (CAR 4) — re-derive the no-fence set and prove CAR 4's four carry their source-level fence arms.
+- `missionDispatcher.js`'s header 'NO FLAG IS MINTED HERE' is now false; correcting it risks `espionageDormancyFence`'s reachability arm — a chair prose car proved against that arm.
 - `engineGatedRuleKeys.walker.test.js`: the 'zero live instances' claim for the computed-access class is STALE (`characterDrift.js:273`) — re-state it with the measured instance (L-HOMES-7).
 - `scripts/review/readerCorpus.mjs:113` ('no gate anywhere reads it') is FALSE at this base — a prose correction in the OWNER'S WALK corpus before the walk.
 - `tests/domain/characterDrift.test.js:791`'s over-broad `not.toContain` over the whole file — narrow to the entry's own claim.
