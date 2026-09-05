@@ -527,7 +527,22 @@ const DEFICIT_FRACTION_FROM = 0.05;
  * NO foodBalance ⇒ `no deficit` is NOT the answer — `null` is. A settlement with no food
  * arithmetic on the record has not been measured as feeding itself; the kernel's law 5 then
  * fails closed and the block renders nothing, which is the honest state.
- * @param {{dailyNeed?: unknown, need?: unknown, deficit?: unknown, rawDeficit?: unknown}|null|undefined} foodBalance
+ *
+ * ⚠⚠ THE MIRROR IS OF THE PRODUCER'S ARITHMETIC, NOT OF ITS DEAD FALLBACK. This function
+ * used to read `num(dailyNeed) || num(need)`, copying `generateSettlementReason`'s own
+ * `foodBalance?.dailyNeed ?? foodBalance?.need ?? 0`. The `need` half is dead on both
+ * sides: the single writer of this record — `deriveFoodBalanceAnalysis` at
+ * src/generators/economy/foodBalance.js — returns a CLOSED object literal whose daily
+ * figure is spelled `dailyNeed`, and nothing in the estate has ever written `need` onto it.
+ * MEASURED, not reasoned: over 540 settlements generated across the whole settType × route
+ * × terrain × seed spread, `dailyNeed` was present 540/540 and `need` 0/540. The producer's
+ * own `?? need` is the legacy spelling `pdf/lib/viewModelPrimitives.js` also still carries
+ * ("the engine emits dailyProduction/dailyNeed; the old .production/.need reads"), and both
+ * are frozen rows in the reader-with-no-writer inventory. Copying a dead arm to keep a
+ * mirror byte-exact is how a default gets to wear a reading's clothes, so the mirror keeps
+ * the producer's CUT (five percent, pinned through `mustExtract`) and drops its fallback.
+ * The two cannot disagree on any record this engine can build.
+ * @param {{dailyNeed?: unknown, deficit?: unknown, rawDeficit?: unknown}|null|undefined} foodBalance
  * @returns {string|null} a value of STATE_MARK_DIMENSIONS.deficit, or null
  */
 export function foodDeficitDimension(foodBalance) {
@@ -535,7 +550,7 @@ export function foodDeficitDimension(foodBalance) {
   /** @param {unknown} v @returns {number} */
   const num = (v) => (typeof v === 'number' && Number.isFinite(v) ? v : 0);
   const gap = Math.max(num(foodBalance.rawDeficit), num(foodBalance.deficit));
-  const need = num(foodBalance.dailyNeed) || num(foodBalance.need);
+  const need = num(foodBalance.dailyNeed);
   return (gap > 0 && (need <= 0 || gap / need >= DEFICIT_FRACTION_FROM)) ? 'deficit' : 'no deficit';
 }
 
