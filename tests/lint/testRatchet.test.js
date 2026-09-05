@@ -818,6 +818,12 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
   // The discharge itself is recorded in OWNER_GATED_DISCHARGE at the top of this file,
   // where the pin that used to refuse it now checks the cure is still in the tree.
   const WALKER_ROWS_OWED = Object.freeze({
+    // ⭐ 2026-09-05, THE DESK LANDING (§900) — the Tier-2 voice per-file arm RE-ENTERS as OWED, declared: two src/domain
+    // files spell a producer's authored dashed vocabulary (a total map's keys and two parsed delimiters); the shrink-only door
+    // refuses the 311 → 319 rise and the generator import is forbidden in writing. Structural cure: an authored-vocabulary
+    // exemption class in the voice scanner (§901). Banking keeps the guard visible; OWED_CEILING moves 2 → 3 with it.
+    'tests/copy/voiceMechanics.test.js :: E2 voiceMechanics — src/data + src/domain string-literal ratchet (shrink-only) per-file debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win)':
+      'NOT FREED — banked at §900 with attribution in the census entry; the scanner exemption class is the cure (§901).',
     // ⭐⭐ 2026-08-31, VOICE-1b (ODQ §854) — THE FOUR VOICE BLOCKERS WERE STALE IN BOTH
     // FIGURES AND PRESCRIPTION, AND THE PRESCRIPTION WAS THE FORBIDDEN CURE. Each of the
     // four lines below used to say the cure was "a re-freeze of the voice ratchet fixture
@@ -907,7 +913,8 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
   // row had entered at 7 the same day (owner-gated, waiting for the freeze act), so the two burned leave five.
   // 5 → 2 on 2026-09-05 (§899): the two Tier-3 JSX voice rows and the clamp-primitive row FREED by the composed
   // landing (VOICE-JSX + the CLAMP-W3 ceiling car); enforcement-claims and the owner-gated golden-master remain.
-  const OWED_CEILING = 2;
+  // 2 → 3 on 2026-09-05 (§900): the Tier-2 voice per-file row re-enters OWED (declared, attributed) — see WALKER_ROWS_OWED.
+  const OWED_CEILING = 3;
 
   test('⛔ NO ENFORCEMENT-WALKER ROW SITS IN THE CENSUS UNLESS IT IS LEDGERED', () => {
     // THE PIN THIS WHOLE BLOCK EXISTS FOR. Add a walker row to the census — any walker,
