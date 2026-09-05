@@ -435,6 +435,24 @@ describe('the slot SHAPE contract — a fill obeys the grammar its seam assumes'
       'dossierMounts.js::MOUNT_RUNGS':
         'the two legibility depths a mount may draw at, consumed only by dossierMounts.js '
         + 'as the router\u2019s rung vocabulary; no value of it ever reaches a {slot}',
+      // DESK-DEFENSE car 7 (`13dd5bfcf`) exported these two and classified neither, which
+      // is the arrival this mechanism exists to refuse — and it refused it, exactly as the
+      // `ACCESS_PROSE` note above predicts. Both are MOUNT-ID maps of the
+      // DM_FIELD_FRAMED_BY_BLOCK kind, not fill tables: their values are dossier mount ids
+      // (`defense.threatAssessment`, `defense.militaryStatus`, `defense.postureHeader`),
+      // and their only consumer is tests/domain/defenseStateProseDesk.test.js, which joins
+      // each blocked lens to the LANDED position that already speaks its fact. Verified by
+      // reading both maps and their consumer, not by the shape of their names: no value of
+      // either is ever substituted into a {slot}, so declaring them against a slot would be
+      // the false classification rather than the missing one.
+      'defenseStateProse.js::DEF6_FACT_SPOKEN_AT':
+        'DS-DEF-6 blocked lens \u2192 the dossier mount id of the landed position that '
+        + 'already speaks its fact; consumed only by the desk suite to pin that coverage '
+        + 'claim against the live registry. No value of it ever reaches a {slot}',
+      'defenseStateProse.js::DEF10_FACT_SPOKEN_AT':
+        'DS-DEF-10 family \u2192 the dossier mount id of the landed position that speaks '
+        + 'its fact, exported for the same reason and read by the same suite. No value of '
+        + 'it ever reaches a {slot}',
     });
     const violations = [];
     const undeclaredTables = [];
