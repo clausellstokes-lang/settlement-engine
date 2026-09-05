@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "ba8561ff7cd5e00d366329532faa2183ada247f3",
-  "measuredBy": "Fable 5.1 chair — §899 composed landing",
+  "measuredAtSha": "21fe864fa475f929bcf9dc3e3728e256ce3c6d7f",
+  "measuredBy": "Fable 5.1 chair — §900 desk landing",
   "date": "2026-09-05",
-  "note": "ENC-4 Herald writer: its presentation dial registered as CHANCE_MEETING_NEWS_TUNING (P3 1 -> 0 for the file; a new P1 table); no ceiling rises",
+  "note": "IRREGULAR_TUNING (SEAT-78, a draft row), the two-band CHANCE_MEETING_NEWS_TUNING (ENC-4b), TUNEREG-2 three tables (the desk consist): no ceiling rises; P3 per file shrink-only; taken on the clean tree after register car 2",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -723,6 +723,48 @@
       "namedDependents": [
         "src/generators/density/successionGrammar.js"
       ]
+    },
+    "src/domain/display/stateProse/economyStateProse.js#SOLE_EARNER_FROM": {
+      "exported": false,
+      "idiom": "literal",
+      "keys": 1,
+      "line": 437,
+      "spanDigest": "3812788e098c702a89d72a5b51c0007f969391069da9b98b2fdd4f2e789ff838",
+      "leaves": {
+        "value": 50
+      },
+      "dependents": [
+        "src/components/new/economyDeskRead.js"
+      ],
+      "namedDependents": []
+    },
+    "src/domain/display/stateProse/economyStateProse.js#LEADER_FROM": {
+      "exported": false,
+      "idiom": "literal",
+      "keys": 1,
+      "line": 438,
+      "spanDigest": "a6b1340215d65b0c4945f4b657854f6756ff2217a648606b9e467ee5ac00bbda",
+      "leaves": {
+        "value": 20
+      },
+      "dependents": [
+        "src/components/new/economyDeskRead.js"
+      ],
+      "namedDependents": []
+    },
+    "src/domain/display/stateProse/generalStateProse.js#DEFICIT_FRACTION_FROM": {
+      "exported": false,
+      "idiom": "literal",
+      "keys": 1,
+      "line": 915,
+      "spanDigest": "d8ad20f683ec92a4a0b123ebd6748169b8712e96577f567cd56d3cdd08f76113",
+      "leaves": {
+        "value": 0.05
+      },
+      "dependents": [
+        "src/components/new/generalDeskRead.js"
+      ],
+      "namedDependents": []
     },
     "src/domain/display/stateProse/powerStateProse.js#NARROW_MARGIN": {
       "exported": false,
@@ -3565,11 +3607,13 @@
       "exported": true,
       "idiom": "literal",
       "keys": 2,
-      "line": 188,
-      "spanDigest": "fb1fe7af97e13f3183b3856274bb9c5487452238baec42fc70b725718ea96f39",
+      "line": 312,
+      "spanDigest": "a8205b592e5aacf3e501f072e129b2056e899cc30a2a54e47044271896a0ab7a",
       "leaves": {
-        "severity": 0.56,
-        "score": 58
+        "notable.severity": 0.56,
+        "notable.score": 58,
+        "major.severity": 0.76,
+        "major.score": 78
       },
       "dependents": [
         "src/domain/worldPulse/envoyPulse.js"
@@ -4486,6 +4530,21 @@
         "src/domain/worldPulse/vengeanceLicense.js",
         "src/domain/worldPulse/worldState.js"
       ]
+    },
+    "src/domain/worldPulse/irregularForce.js#IRREGULAR_TUNING": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 1,
+      "line": 71,
+      "spanDigest": "c180163735272710beeb32f203ca63012fef17551e85316f5087c68c0f084fea",
+      "leaves": {
+        "SHARE_WEIGHT": 0.3
+      },
+      "dependents": [
+        "src/domain/worldPulse/coup.js",
+        "src/domain/worldPulse/deploymentReturn.js"
+      ],
+      "namedDependents": []
     },
     "src/domain/worldPulse/lineageClaim.js#LINEAGE_CLAIM_TUNING": {
       "exported": true,
@@ -7917,11 +7976,11 @@
   },
   "unclosed": [],
   "totals": {
-    "tables": 233,
-    "keys": 2110,
+    "tables": 237,
+    "keys": 2114,
     "unregisteredNamed": 535,
     "bareDecimals": 6985,
     "zeroDependentTables": 8,
-    "zeroNamedDependentTables": 147
+    "zeroNamedDependentTables": 151
   }
 }
