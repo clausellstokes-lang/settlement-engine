@@ -201,7 +201,8 @@ function renderContentVocabulary() {
     '',
     'CONFIDENCE labels: required | inferred | optional | uncertain',
     'UNSUPPORTED reasons: unregistered_bucket | unregistered_field | invalid_value'
-    + ' | missing_required_field',
+    + ' | missing_required_field | uncovered_codepoint | control_character'
+    + ' | bidi_override | invisible_format | malformed_encoding | length',
   );
   return lines.join('\n');
 }

@@ -155,11 +155,21 @@ export const DISPLAY_KINDS = Object.freeze([
 ] as const);
 export type DisplayKind = (typeof DISPLAY_KINDS)[number];
 
+// The four shape reasons, then the six the CHARSET wall speaks. One vocabulary
+// across the client schema, the charter's rendered line and this compiler, pinned
+// EQUAL in customContentCompile.test.js. The charset codes are DORMANT while the
+// manifest's charsetPolicy.enforcement reads `report`: nothing here emits one yet.
 export const CONTENT_UNSUPPORTED_REASONS = Object.freeze([
   'unregistered_bucket',
   'unregistered_field',
   'invalid_value',
   'missing_required_field',
+  'uncovered_codepoint',
+  'control_character',
+  'bidi_override',
+  'invisible_format',
+  'malformed_encoding',
+  'length',
 ] as const);
 type ContentUnsupportedReason = (typeof CONTENT_UNSUPPORTED_REASONS)[number];
 
@@ -431,6 +441,10 @@ export function contentRepairViolations(draft: ContentDraft): RepairViolation[] 
  *  ledger. */
 const CONTENT_REPAIRABLE_REASONS: ReadonlySet<string> = new Set([
   'invalid_value', 'unregistered_field', 'missing_required_field',
+  // Every charset verdict is FIELD-level and every one of them is repairable by
+  // re-emitting the field without the codepoint the surface cannot draw.
+  'uncovered_codepoint', 'control_character', 'bidi_override', 'invisible_format',
+  'malformed_encoding', 'length',
 ]);
 
 /** A draft entry's identity across rounds: its bucket plus its name. A repair that
@@ -587,7 +601,7 @@ ${HOUSE}
 CONTENT MANIFEST ${CUSTOM_CONTENT_MANIFEST_VERSION} — category-specific and server-owned.
 ${categoryLines}
 
-OUTPUT CONTRACT — return ONLY JSON of the form {"entries":[{"bucket":"<registered bucket>","fields":{"name":"...","<field>":"<value>"},"label":"<required|inferred|optional|uncertain>","rationale":"<one short phrase>","sourced":<true if the request states it>}],"unsupported":[{"requested":"<bucket, field, or mechanic>","reason":"<unregistered_bucket|unregistered_field|invalid_value|missing_required_field>"}],"musings":[{"text":"<a suggestion or clarifying question>"}],"rider":{"intent":"<${intents}>","themes":["<zero or more of: ${themes}>"],"refusalReason":"<${refusals}>","actionDrafted":true}}. No preamble, no markdown.`, { tail: coachingBlock });
+OUTPUT CONTRACT — return ONLY JSON of the form {"entries":[{"bucket":"<registered bucket>","fields":{"name":"...","<field>":"<value>"},"label":"<required|inferred|optional|uncertain>","rationale":"<one short phrase>","sourced":<true if the request states it>}],"unsupported":[{"requested":"<bucket, field, or mechanic>","reason":"<unregistered_bucket|unregistered_field|invalid_value|missing_required_field|uncovered_codepoint|control_character|bidi_override|invisible_format|malformed_encoding|length>"}],"musings":[{"text":"<a suggestion or clarifying question>"}],"rider":{"intent":"<${intents}>","themes":["<zero or more of: ${themes}>"],"refusalReason":"<${refusals}>","actionDrafted":true}}. No preamble, no markdown.`, { tail: coachingBlock });
 }
 
 export function buildContentPrompt(
