@@ -228,7 +228,10 @@ describe('AUDIT-2.2 — the frozen card export is a floor, not a doorway', () =>
         <tbody>
           <SettlementCard
             s={save}
-            allModifiers={{}}
+            /* A MAP, not a bare object: `getAllModifiers` returns one and the card calls
+               `allModifiers.get(s.id)` at two sites. A `{}` throws inside the render, which
+               is how this fixture first reported — the mount is a real mount. */
+            allModifiers={new Map()}
             onView={() => {}}
             deleteId={null}
             setDeleteId={() => {}}
