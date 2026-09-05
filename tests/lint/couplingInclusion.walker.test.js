@@ -376,6 +376,24 @@ const LAYER_PATTERNS = Object.freeze({
     // ⛔ AN EXACT-PATH REGEX, NOT A `settlementStrategy[A-Z]` PREFIX: the standing rule above —
     // a prefix would claim files nobody has designed and silently widen a frozen family.
     /^src\/domain\/worldPulse\/settlementStrategyReads\.js$/,
+    // W-SEAT D10, car SEAT-7a/SEAT-78: THE IRREGULAR-FORCE LEAF. Its subject is whether a
+    // settlement's own people would rise against their seat and what that mass is worth — a
+    // DOMESTIC-POLITICS quantity composed from three INTERIOR readings (the legitimacy
+    // deficit, the commons grievance blend, the faction roster's challenger weight) and
+    // handed to the coup verdict, which INTERIOR's own first regex already claims by the
+    // `rulingPower` spelling. That is INTERIOR's subject verbatim, on the reading that gave
+    // strategicPosture.js and settlementStrategyReads.js their homes: the distinction is
+    // SUBJECT, not program. It is NOT an ARGUED_UNLAYERED case — that roster is for modules
+    // owning no subject and spoken by every port, and this leaf speaks ONE.
+    // ⚠ THE MILITARY-CAPACITY READ DOES NOT MAKE IT WAR, and the distinction is the one F1's
+    // UNIT LAW draws: the leaf consumes `deriveMilitaryCapacity`'s precomputed 0..100 FACETS
+    // as scalars and touches no army, no deployment, no transit and no headcount — the same
+    // facet-scalar reading for which attrition.js and warDeployment.js are exempted from the
+    // ruin-filter roster. militaryStrength.js is itself unlayered, so that import mints no
+    // pair in either direction — measured, not asserted.
+    // ⛔ AN EXACT-PATH REGEX, NOT AN `irregular[A-Z]` PREFIX: the standing rule above — a
+    // prefix would claim files nobody has designed and silently widen a frozen family.
+    /^src\/domain\/worldPulse\/irregularForce\.js$/,
   ],
 });
 

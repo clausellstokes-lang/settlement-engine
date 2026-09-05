@@ -54,6 +54,8 @@ import { coupContenders } from '../rulingPowerCoup.js';
 import { commonsGrievance01 } from './commonsVoiceKernel.js';
 import { deriveMilitaryCapacity } from './militaryStrength.js';
 
+/** @typedef {import('../rulingPower.js').RulingPowerSettlement} RulingPowerSettlement */
+
 /**
  * The ONE dial this car mints. Every decimal in this leaf lives inside this span on
  * purpose: `scripts/lib/tuning-inventory.mjs` measures bare decimals per file SHRINK-ONLY
@@ -127,7 +129,13 @@ export function participation01(settlement, worldState, settlementId) {
   const s = asObject(settlement);
   const resistance = occupiedResistance01(worldState, settlementId);
   const cause = resistance == null ? commonsGrievance01(s) : resistance;
-  const { challengers, incumbent } = coupContenders(/** @type {any} */ (s));
+  // ⛔ CAST THROUGH `unknown`, NEVER THROUGH `any` — `tests/lint/domainAnyCastBaseline.test.js`
+  // allows a NEW src/domain file exactly ZERO any-holes and refuses both a baseline row and a
+  // DECLARED_OVERRUN as the cure. The two-step cast is the verdict file's own idiom, live at
+  // `rulingPowerCoup.js`'s `ladderEffectivePowerFactor` call.
+  const { challengers, incumbent } = coupContenders(
+    /** @type {RulingPowerSettlement} */ (/** @type {unknown} */ (s)),
+  );
   const challengerWeight = challengers.reduce((sum, c) => sum + (Number(c.weight) || 0), 0);
   const incumbentWeight = Number(incumbent.amplifiedWeight) || 0;
   const total = challengerWeight + incumbentWeight;
@@ -162,7 +170,7 @@ export function irregularShareFactor(worldState, snapshot, settlementId) {
   if (!lit) return 1;
 
   const entry = asObject(asObject(asObject(snapshot).byId).get instanceof Function
-    ? /** @type {Map<string, unknown>} */ (/** @type {any} */ (asObject(snapshot).byId)).get(settlementId)
+    ? /** @type {Map<string, unknown>} */ (/** @type {unknown} */ (asObject(snapshot).byId)).get(settlementId)
     : null);
   const settlement = asObject(entry.settlement);
   if (!settlement.powerStructure) return 1;

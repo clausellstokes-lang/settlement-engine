@@ -131,6 +131,14 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
   // ── facet-scalar: reads a precomputed number, not the roster ─────────────────────
   'src/domain/worldPulse/attrition.js': 'facet-scalar — reads precomputed facets.institutions, not the roster',
   'src/domain/worldPulse/warDeployment.js': 'facet-scalar — reads precomputed facets.institutions (commandQuality)',
+  // W-SEAT D10, car SEAT-7a/SEAT-78. The one `.institutions` the regex finds is
+  // `facets.institutions` off `deriveMilitaryCapacity`'s return — the precomputed 0..100
+  // institutional facet standing in for the loyal side's garrison, watch and walls in the
+  // force ratio — and never `settlement.institutions`. NOT a fresh judgment: attrition.js
+  // and warDeployment.js directly above are exempted for reading the SAME facet, so this is
+  // the third instance of a settled shape. The leaf credits no institution with function
+  // and cannot: it never sees a roster row, a name or an id.
+  'src/domain/worldPulse/irregularForce.js': 'facet-scalar — reads precomputed facets.institutions off deriveMilitaryCapacity (the loyal side of the force ratio), not the roster',
   // W-K3 THE DISASTER BUFFER, model half. The single `.institutions` the regex finds is
   // `loss?.institutions` inside convertStrike — the StrikeLoss COUNT of how many buildings
   // one calamity strike would fell ("@property {number} institutions"), not a roster. The
@@ -390,8 +398,13 @@ describe('ruin-filter roster ratchet (structural-prevention Pattern 2)', () => {
     // producer sits in src/generators/, OUTSIDE this walker's src/domain scan root, so no arm
     // here can reach it. Exempting the desk is the right layer; the producer is a separate act
     // and is reported, not silently absorbed.
-    // Read from this arm's own failure message ("expected 93 to be 92"), never computed.
-    expect(readers.length).toBe(93);
+    // Read from this arm's own failure message ("expected 94 to be 93"), never computed.
+    // ⭐ 93 → 94 with W-SEAT D10's `irregularForce.js`, exempted above on the facet-scalar
+    // shape attrition.js and warDeployment.js already hold. The census GROWS because the
+    // discovery set is every `.institutions` reader in src/domain, exempt ones included —
+    // that is the arm's purpose (a reader that vanished from the set is as much a finding as
+    // one that arrived), so this is a re-measurement and not a ceiling raise.
+    expect(readers.length).toBe(94);
   });
 
   test('exempt honesty: every exempt entry still reads .institutions and is not already compliant', () => {
