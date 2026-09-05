@@ -42,6 +42,10 @@ import { STRESS_TYPE_MAP } from '../../src/data/stressTypes.js';
 import { DEFENSE_STRESS_STATUS } from '../../src/domain/display/defenseDisplay.js';
 import { safetySeverityOf } from '../../src/domain/display/safetySeverity.js';
 import { RECOGNISED_MONSTER_TIERS } from '../../src/domain/display/stateProse/defenseStateProse.js';
+import { deriveEconomicComplexity } from '../../src/generators/economy/prosperity.js';
+import {
+  COMPLEXITY_BAND_BY_LABEL, SAFETY_BANDS, STABILITY_BANDS, bandOf,
+} from '../../src/domain/display/labelBands.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const read = (rel) => readFileSync(join(ROOT, rel), 'utf8');
@@ -313,5 +317,93 @@ describe('RN-C — relationship admission sets: every member reachable or declar
     for (const f of readers) {
       expect(read(f).includes("'defensive_pact'"), `${f} dropped the chartered orphan`).toBe(true);
     }
+  });
+});
+// ═══════════════════════════════════════════════════════════════════════════
+// BAND-WORD RECOVERY (DOCKET-2 item 3). Three compact display surfaces used to
+// recover a band word by splitting a generated label on a punctuation mark and
+// taking [0]. src/domain/display/labelBands.js replaced that guess with the
+// producer's own declared vocabulary; these arms are what make the vocabulary a
+// CONTRACT rather than a copy that drifts.
+//
+// ⛔ WHY THIS MATTERS MORE THAN IT LOOKS: the em dash was never a field separator
+// in the complexity vocabulary. Six of the producer's eleven labels carry no dash
+// at all, so `split('—')[0]` returned the WHOLE STRING on 174 of 360 driven
+// settlements — a live defect at 5e28d5c83, not a latent one.
+// ═══════════════════════════════════════════════════════════════════════════
+describe('vocabularyTotality — band-word recovery (DOCKET-2 item 3)', () => {
+  /** Every string deriveEconomicComplexity can return, exhausted over its own inputs. */
+  const emittedComplexity = () => {
+    const out = new Set();
+    for (const tier of ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']) {
+      for (let income = 0; income <= 14; income++) {
+        for (let exports = 0; exports <= 14; exports++) {
+          for (const hasMarket of [true, false]) {
+            out.add(deriveEconomicComplexity(tier, income, exports, hasMarket));
+          }
+        }
+      }
+    }
+    return [...out].sort();
+  };
+
+  it('COMPLEXITY_BAND_BY_LABEL covers deriveEconomicComplexity EXACTLY, both ways', () => {
+    const emitted = emittedComplexity();
+    const declared = Object.keys(COMPLEXITY_BAND_BY_LABEL).sort();
+    expect(emitted.length, 'the producer vocabulary vanished — this arm would be vacuous')
+      .toBeGreaterThan(1);
+    expect(setDiff(declared, emitted), 'dead complexity row(s): declared, never emitted').toEqual([]);
+    expect(setDiff(emitted, declared), 'unmapped complexity label(s): emitted, never declared').toEqual([]);
+  });
+
+  it('the six band-less complexity labels are DECLARED absent, not silently sliced', () => {
+    // The finding, pinned. These six have no band word because the producer never
+    // authored one; giving them one is a reader-facing content act (the §0c-3 class,
+    // the chair's). Until then the map says `null` and the tile falls back to the full
+    // label — which is byte-for-byte what it rendered before labelBands.js existed.
+    const absent = Object.entries(COMPLEXITY_BAND_BY_LABEL)
+      .filter(([, band]) => band === null).map(([label]) => label).sort();
+    expect(absent).toEqual([
+      'Agricultural surplus with trade links',
+      'Diversified market economy',
+      'Mixed subsistence and market',
+      'Specialized production and trade',
+      'Subsistence with minor surplus',
+      'Subsistence with surplus',
+    ]);
+    // And every DECLARED band must really open its own label, or the map is fiction.
+    for (const [label, band] of Object.entries(COMPLEXITY_BAND_BY_LABEL)) {
+      if (band === null) continue;
+      expect(label.startsWith(band), `${label} does not open with its declared band`).toBe(true);
+    }
+  });
+
+  it('SAFETY_BANDS is bound to safetyProfile.js, and resolves every label it composes', () => {
+    const profile = read('src/generators/safetyProfile.js');
+    const absent = SAFETY_BANDS.filter((b) => !profile.includes(`'${b}`));
+    expect(absent, 'safety band(s) no longer present in safetyProfile.js').toEqual([]);
+    // Both ways with the curated token list the M2 contract above already binds.
+    const curated = PRODUCER_SAFETY_TOKENS.map((t) => t.replace(/\b\w/g, (c) => c.toUpperCase())).sort();
+    expect(setDiff([...SAFETY_BANDS].sort(), curated), 'band with no curated token').toEqual([]);
+    expect(setDiff(curated, [...SAFETY_BANDS].sort()), 'curated token with no band').toEqual([]);
+    // A composed label — including the two-dash plague form — resolves to its band.
+    expect(bandOf('Dangerous — Plague Unrest — Plague Conditions', SAFETY_BANDS)).toBe('Dangerous');
+    expect(bandOf('Controlled — Occupation Curfew', SAFETY_BANDS)).toBe('Controlled');
+    expect(bandOf('Moderate', SAFETY_BANDS)).toBe('Moderate');
+    // The LOUD refusal: an unknown label yields null, never a slice of itself.
+    expect(bandOf('Placid — nothing is happening', SAFETY_BANDS)).toBe(null);
+  });
+
+  it('STABILITY_BANDS is bound to governanceNarrative.js across all three of its separator conventions', () => {
+    const gov = read('src/generators/power/governanceNarrative.js');
+    const absent = STABILITY_BANDS.filter((b) => !gov.includes(`'${b}`));
+    expect(absent, 'stability band(s) no longer present in governanceNarrative.js').toEqual([]);
+    // The producer uses ' — ', ' (…)' and '; …' — one vocabulary must cover all three.
+    expect(bandOf('Fractured — no stable governing authority', STABILITY_BANDS)).toBe('Fractured');
+    expect(bandOf('Critical (active siege — survival priority)', STABILITY_BANDS)).toBe('Critical');
+    expect(bandOf('Stable; monster threat active', STABILITY_BANDS)).toBe('Stable');
+    // Longest-first: 'Unstable' must not resolve to 'Stable', nor 'Enforced Order' to 'Ordered'.
+    expect(bandOf('Unstable — criminal governance', STABILITY_BANDS)).toBe('Unstable');
+    expect(bandOf('Enforced Order (authoritarian)', STABILITY_BANDS)).toBe('Enforced Order');
   });
 });

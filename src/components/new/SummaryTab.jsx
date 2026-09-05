@@ -7,6 +7,7 @@ import { BODY, FACTION_COLORS } from './tabConstants.js';
 import { entityAnchor, normalizeNpcTraits } from '../../domain/dossier/entityLinks.js';
 import { deriveFoodBalance } from '../../domain/display/dossierViewModel.js';
 import { scoreBand, scoreColor } from '../../domain/display/defenseScoreBands.js';
+import { stabilityBandOf, complexityBandOf } from '../../domain/display/labelBands.js';
 import EconomyFreshnessNote from './EconomyFreshnessNote.jsx'; // R-4: the ONE stale-window note leaf; taxonomy in domain/display/economyFreshness.js
 import { collectPlotHooks, countPlotHookCategories, PLOT_HOOK_CATEGORIES } from '../../domain/dossier/plotHooks.js';
 import Button from '../primitives/Button.jsx';
@@ -209,8 +210,8 @@ function SummaryTab({ settlement:r }) {
 
       {/* ── SITUATION ROW (3 scannable tiles) ───────────────────────────── */}
       <div style={{display:'flex',gap:8,marginBottom:14,flexWrap:'wrap'}}>
-        <SitTile label="Power" value={powStab.split(';')[0].split('(')[0].split('—')[0].trim()} color={powColor} sub={allFactions[0]?.faction}/>
-        <SitTile label="Economy" value={eco.prosperity||EMPTY_VALUE} color={ecoTileColor} sub={ecoSub||eco.economicComplexity?.split('—')[0].trim()}/>
+        <SitTile label="Power" value={stabilityBandOf(powStab) ?? powStab.trim()} color={powColor} sub={allFactions[0]?.faction}/>
+        <SitTile label="Economy" value={eco.prosperity||EMPTY_VALUE} color={ecoTileColor} sub={ecoSub||(complexityBandOf(eco.economicComplexity) ?? eco.economicComplexity)}/>
         <SitTile label="Defense" value={dp.readiness?.label||EMPTY_VALUE} color={defColor} sub={defScore?`Systems average: ${scoreBand(defScore)}`:undefined}/>
       </div>
 

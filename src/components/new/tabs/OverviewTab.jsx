@@ -19,6 +19,7 @@ import useIsMobile from '../../../hooks/useIsMobile.js';
 // Wave-2 M2: safety severity delegated to the total chokepoint. deriveFoodBalance
 // is NOT re-imported — the walk-lane fold removed the Food Deficit line that used it.
 import { safetySeverityOf } from '../../../domain/display/safetySeverity.js';
+import { safetyBandOf } from '../../../domain/display/labelBands.js';
 import { scoreBand, scoreColor } from '../../../domain/display/defenseScoreBands.js';
 import { institutionProvenanceOf } from '../../../domain/provenance/rosterProvenance.js';
 
@@ -383,7 +384,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
         {/* Status tags row */}
         <div style={{display:'flex',gap:8,flexWrap:'wrap',marginBottom:14}}>
           <StatusTag label="Prosperity" value={eco.prosperity} accent={PROSPERITY_COLORS[eco.prosperity]}/>
-          <StatusTag label="Safety" value={sp.safetyLabel?.split('—')[0].trim()} accent={safetySeverityOf(sp.safetyLabel).color}/>
+          <StatusTag label="Safety" value={safetyBandOf(sp.safetyLabel) ?? sp.safetyLabel} accent={safetySeverityOf(sp.safetyLabel).color}/>
           <StatusTag label="Viability" value={via.viable===false?'Not Viable':via.viable===true?'Viable':EMPTY_VALUE} accent={via.viable===false?'#8b1a1a':via.viable===true?'#1a5a28':undefined}/>
           <StatusTag label="Defense" value={dp.readiness?.label} accent={dp.readiness?.color}/>
         </div>
