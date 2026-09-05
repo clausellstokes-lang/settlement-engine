@@ -35,6 +35,7 @@ import { computeWarSentiment } from './disposition.js';
 // 0 when the intervention layer is dark ⇒ byte-identical (the warSentimentAdj precedent).
 import { interventionAdjFor } from './convergence.js';
 import { foreignSeatCoupAdj } from '../rulingPowerSeat.js';
+import { irregularShareFactor } from './irregularForce.js';
 // M10a — a coup is an ACTOR-INITIATED campaign-altering major; its applyMode routes
 // through the shared authority policy so the seat-change joins the approval queue
 // under the forcing modes AND under routine-with-major-approval (byte-identical
@@ -140,6 +141,13 @@ export function coupVerdictOutcomes({ resolved = [], snapshot, rng, tick = 0, wa
     // so this term's live population is VASSALAGE rather than occupation — consistent (force
     // at spearpoint suppresses the plot before it forms) but not the obvious reading.
     const foreignSeatAdj = foreignSeatCoupAdj(worldState, snapshot, saveId);
+    // W-SEAT D10 (irregularForceEnabled, a VIRTUAL flag): how much of the town would rise,
+    // and what that mass is worth against the loyal side, as a factor on the incumbent's
+    // political share. EXACTLY 1 when the flag is dark ⇒ byte-identical. It is a FACTOR and
+    // not a sixth adj because the declared adj budget has five thousandths of headroom and
+    // its own instrument reserves a raise to the owner's tuning signature; the reasoning is
+    // written out at rulingPowerCoup.js's budget block and in the leaf's header.
+    const forceRatioFactor = irregularShareFactor(worldState, snapshot, saveId);
     const verdict = /** @type {any} */ (resolveCoupVerdict({
       settlement: entry.settlement,
       rng,
@@ -149,6 +157,7 @@ export function coupVerdictOutcomes({ resolved = [], snapshot, rng, tick = 0, wa
       interventionAdj,
       economicAdj,
       foreignSeatAdj,
+      forceRatioFactor,
     }));
     const settlementName = entry.name || entry.settlement?.name || saveId;
     const incumbentName = verdict.incumbent?.name || 'the ruling power';
