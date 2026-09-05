@@ -1,3 +1,6 @@
+# ⛔ WITHDRAWN 2026-09-05 (evening) — FAILED ADVERSARIAL VERIFICATION. See `taste-sample-refutation.md`.
+Of 31 changed items 27 FAIL and 4 pass weakly; of 9 KEEPs 4 are sound. The preamble below is FALSE in four places (two variants are `dm-only`; 9 KEEP not 11; #14 and #25 got longer; #40 is `warReceiptPools.js:553`, the Herald's register). The rules R1–R12 are UNSAFE as written (R4 inverted three times; R1 contradicts §0b; R11 breached; R-DST-B — "most state carries no provenance" — is in no rule and breached four times; "quarrel" is Old French). Kept as the record of what a confident first pass looks like. Nothing below may be used for any reconstruction.
+
 # TASTE SAMPLE — forty real variants from the §900 corpus, reconstructed under R1–R12
 Chair-authored (Fable 5.1, 2026-09-05). Every BEFORE is a real variant at 6e8692b36 (pool named). Every AFTER keeps the same slots, the same claims, the same band, the same angle; nothing is added to the world. The rule applied is named. Where the chair judged the original already right, it says KEEP and why. This is for the owner's eye; nothing is changed in the corpus.
 
