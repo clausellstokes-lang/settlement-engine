@@ -37,6 +37,19 @@
  * n/100`, the lbs/day pair, the season gloss). Lighting a dark door adds; it never
  * displaces a number the reader already had.
  *
+ * ── THE SECOND EXPORT: `DeskLines` ───────────────────────────────────────────────────
+ * A position whose rungs are PARAGRAPHS rather than tiles. It lives here rather than in
+ * a file of its own for the reason this file exists at all — EconomicsTab.jsx has ~20
+ * effective lines under its 600-line layer ceiling, and a new leaf would owe the economy
+ * read-model census a fresh classification row for nothing. It reads no economy
+ * read-model itself: it is handed rungs and a mount id and asks the registry what it may
+ * show, exactly as the tiles above do.
+ *
+ * IT TAKES A LIST because one position may draw several LENSES of one block — the C3 law
+ * is one sentence RUNG per block per page-set, and `power.criminalUnderside` already
+ * draws three lenses at one position. Every lens goes through `drawnAtMount` separately,
+ * so flipping the row to `glance` silences all of them together rather than some.
+ *
  * @enforced-by tests/lint/dossierMountRegistry.walker.test.js (reachability + the rungs)
  */
 import { FS, swatch, MUTED } from '../../theme.js';
@@ -109,5 +122,27 @@ export default function EconomicsGlance({
         ))}
       </div>
     </>
+  );
+}
+
+/**
+ * One mounted position drawn as prose: every lens the desk built for it, in order, each
+ * routed through the registry. Renders NOTHING when the registry says glance, when the
+ * corpus was silent, or when the desk was not called at all — which is R-DST-K, and is
+ * why there is no empty-state branch here.
+ *
+ * @param {object} props
+ * @param {string} props.mount the position id, as the registry spells it
+ * @param {ReadonlyArray<object|null>} props.rungs the lenses, in reading order
+ */
+export function DeskLines({ mount, rungs }) {
+  const lines = (rungs || []).map((rung) => drawnAtMount(mount, rung)?.sentence).filter(Boolean);
+  if (lines.length === 0) return null;
+  return (
+    <div style={{margin:'0 0 12px'}}>
+      {lines.map((line) => (
+        <p key={line} style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.65,margin:'0 0 6px',fontStyle:'italic'}}>{line}</p>
+      ))}
+    </div>
   );
 }

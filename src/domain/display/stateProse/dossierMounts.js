@@ -192,6 +192,9 @@ export const DOSSIER_MOUNTS = Object.freeze([
     mount: 'economics.foodSecurity', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-9', rung: 'sentence',
   }),
   Object.freeze({
+    mount: 'economics.commercialProfile', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-12', rung: 'sentence',
+  }),
+  Object.freeze({
     mount: 'power.legitimacyBanner', tab: 'power', desk: 'power', blockId: 'DS-POW-1', rung: 'sentence',
   }),
   Object.freeze({
@@ -284,7 +287,7 @@ export const UNMOUNTED_BLOCKS = Object.freeze([
   'DS-ECO-3', 'DS-ECO-4',
   'DS-ECO-5', 'DS-SUP-1', 'DS-ECO-6', 'DS-ECO-7',
   'DS-SUP-2', 'DS-ECO-10',
-  'DS-ECO-11', 'DS-ECO-12', 'DS-SUP-3',
+  'DS-ECO-11', 'DS-SUP-3',
   'DS-POP-1', 'DS-POP-2', 'DS-GEN-1',
   'DS-GEN-8', 'DS-REL-1', 'DS-REL-2', 'DS-GEN-9',
   'DS-GEN-10', 'DS-HK-1', 'DS-GEN-11',
