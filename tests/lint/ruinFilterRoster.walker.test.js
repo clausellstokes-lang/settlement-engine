@@ -131,6 +131,14 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
   // ── facet-scalar: reads a precomputed number, not the roster ─────────────────────
   'src/domain/worldPulse/attrition.js': 'facet-scalar — reads precomputed facets.institutions, not the roster',
   'src/domain/worldPulse/warDeployment.js': 'facet-scalar — reads precomputed facets.institutions (commandQuality)',
+  // W-SEAT D10, car SEAT-7a/SEAT-78. The one `.institutions` the regex finds is
+  // `facets.institutions` off `deriveMilitaryCapacity`'s return — the precomputed 0..100
+  // institutional facet standing in for the loyal side's garrison, watch and walls in the
+  // force ratio — and never `settlement.institutions`. NOT a fresh judgment: attrition.js
+  // and warDeployment.js directly above are exempted for reading the SAME facet, so this is
+  // the third instance of a settled shape. The leaf credits no institution with function
+  // and cannot: it never sees a roster row, a name or an id.
+  'src/domain/worldPulse/irregularForce.js': 'facet-scalar — reads precomputed facets.institutions off deriveMilitaryCapacity (the loyal side of the force ratio), not the roster',
   // W-K3 THE DISASTER BUFFER, model half. The single `.institutions` the regex finds is
   // `loss?.institutions` inside convertStrike — the StrikeLoss COUNT of how many buildings
   // one calamity strike would fell ("@property {number} institutions"), not a roster. The
@@ -413,7 +421,22 @@ describe('ruin-filter roster ratchet (structural-prevention Pattern 2)', () => {
     // town built, and it is a REPORTED gap rather than an absorbed one: none of them may be
     // used to answer "what can this town field today".
     // Read from this arm's own failure message ("expected 92 to be 93"), never computed.
-    expect(readers.length).toBe(92);
+    // ⚠ WHERE THE RUIN QUESTION ACTUALLY LIVES, written down rather than laundered into this
+    // exemption: the buckets are built by `getDefenseInstitutions` in
+    // src/generators/defenseGenerator.js, which partitions the roster by NAME KEYWORD ONLY and
+    // consults no ruin status — so a flattened citadel still lands in the `walls` bucket. That
+    // producer sits in src/generators/, OUTSIDE this walker's src/domain scan root, so no arm
+    // here can reach it. Exempting the desk is the right layer; the producer is a separate act
+    // and is reported, not silently absorbed.
+    // ⭐ 93 → 94 with W-SEAT D10's `irregularForce.js`, exempted above on the facet-scalar
+    // shape attrition.js and warDeployment.js already hold. The census GROWS because the
+    // discovery set is every `.institutions` reader in src/domain, exempt ones included —
+    // that is the arm's purpose (a reader that vanished from the set is as much a finding as
+    // one that arrived), so this is a re-measurement and not a ceiling raise.
+    // ⭐ COMPOSED AT §900 (Fable chair): DESK-DEFENSE's 93 → 92 (the desk left the discovery set) and
+    // SEAT-78's 93 → 94 (+1 irregularForce.js, exempted above) meet here: 92 + 1 = 93, and the arm was RUN at the
+    // composed tip to read the figure from its own failure message rather than trust the arithmetic.
+    expect(readers.length).toBe(93);
   });
 
   test('exempt honesty: every exempt entry still reads .institutions and is not already compliant', () => {
