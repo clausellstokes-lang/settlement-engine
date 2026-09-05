@@ -43,6 +43,7 @@ import { DEFENSE_STRESS_STATUS } from '../../src/domain/display/defenseDisplay.j
 import { safetySeverityOf } from '../../src/domain/display/safetySeverity.js';
 import { RECOGNISED_MONSTER_TIERS } from '../../src/domain/display/stateProse/defenseStateProse.js';
 import { deriveEconomicComplexity } from '../../src/generators/economy/prosperity.js';
+import { generateSafetyProfile } from '../../src/generators/safetyProfile.js';
 import {
   COMPLEXITY_BAND_BY_LABEL, SAFETY_BANDS, STABILITY_BANDS, bandOf, complexityBandOf,
 } from '../../src/domain/display/labelBands.js';
@@ -433,5 +434,73 @@ describe('vocabularyTotality — band-word recovery (DOCKET-2 item 3)', () => {
     // Longest-first: 'Unstable' must not resolve to 'Stable', nor 'Enforced Order' to 'Ordered'.
     expect(bandOf('Unstable — criminal governance', STABILITY_BANDS)).toBe('Unstable');
     expect(bandOf('Enforced Order (authoritarian)', STABILITY_BANDS)).toBe('Enforced Order');
+  });
+
+  // ── THE INVERSE OF THE ARMS ABOVE, and the reason it belongs beside them ──────
+  // Those arms stop a CONSUMER from recovering a band by splitting a producer's
+  // label. This one stops the PRODUCER from recovering a condition by splitting its
+  // own. safetyProfile.js composed `"<strain> — <condition>"`, then rebuilt the
+  // composite by re-parsing `l.split(' — ')[1]` — and one of its own strain values
+  // is `'Dangerous — Plague Unrest'`, so that leaf emits a label with TWO em dashes
+  // and `[1]` recovered the STRAIN'S TAIL, not the condition. Repaired 2026-09-05 by
+  // keeping the parts typed. Unreachable in the 360-world corpus (0/360 composites),
+  // which is exactly why it needs a pin: nothing else in the tree would notice its
+  // return, and the habitat — a producer parsing its own output — invites it back.
+  it('safetyProfile composes its label from typed parts, never by re-parsing its own output', () => {
+    // The producer's complete condition vocabulary, bound to the source both ways.
+    const CONDITIONS = [
+      'Occupation Curfew', 'Active Siege', 'Famine Conditions', 'Plague Conditions',
+      'Insurgency', 'Slave Revolt', 'Wartime', 'Political Fracture', 'Succession Crisis',
+      'Aftermath of Betrayal', 'Monster Threat', 'Debt Crisis', 'Mass Migration',
+      'Religious Upheaval',
+    ];
+    const src = read('src/generators/safetyProfile.js');
+    expect(CONDITIONS.filter((c) => !src.includes(`'${c}'`)), 'condition(s) no longer in the producer')
+      .toEqual([]);
+
+    // THE HABITAT: no split of a composed safety label back into its parts.
+    // ⚠ THE SCAN MUST STRIP COMMENTS FIRST. The producer's own docblock QUOTES the
+    // expression it stopped using, to explain why — and a naive negative scan matched
+    // that explanation and reddened on a correct file. An anchored-negative walker is
+    // a two-sided trap: it must not fire on prose, and it must still see real code.
+    const code = src.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|[^:])\/\/.*$/gm, '$1');
+    expect(code.includes("safetyStrains.push"), 'the comment stripper ate the code too')
+      .toBe(true);
+    expect(code.includes("split(' — ')"), 'safetyProfile re-parses its own composed label again')
+      .toBe(false);
+    // And the stripper really does remove the docblock that quotes the old expression.
+    expect(src.includes("split(' — ')"), 'the explanatory docblock vanished — the scan is now vacuous')
+      .toBe(true);
+
+    // THE INSTANCE: the two-em-dash plague strain, in a NON-FIRST position. A low
+    // safetyRatio (no military priority, no garrison) selects it.
+    const cfg = { priorityMilitary: 0, priorityCriminal: 100, stressTypes: ['occupied', 'plague_onset'] };
+    const label = generateSafetyProfile(cfg, 'town', []).safetyLabel;
+    expect(label, 'the fixture must actually FORM a composite, or this arm is vacuous')
+      .toContain(' + ');
+    expect(label).toBe('Controlled — Occupation Curfew + Plague Conditions');
+    // ⚠ THE MARKER MUST BE THE LINE IMMEDIATELY ABOVE THE ASSERTION — negativeAssertionAnchor
+    // reads that one line, not the paragraph. A wrapped `// anchored:` reads as un-anchored
+    // and moves this file's frozen row from 1 to 2, which is an exact-equality red.
+    // anchored: the `toContain(' + ')` above asserts this same `label` IS a composite, so this negative cannot pass by the subject having vanished.
+    expect(label, 'the strain tail leaked into the composite again').not.toContain('+ Plague Unrest');
+
+    // THE CLASS: every appended segment, across every multi-primary combination, must
+    // be a declared CONDITION — never a fragment of some strain.
+    const PRIMARY = ['occupied', 'under_siege', 'famine', 'plague_onset'];
+    const subsets = PRIMARY.reduce((acc, x) => acc.concat(acc.map((a) => [...a, x])), [[]])
+      .filter((a) => a.length > 1);
+    expect(subsets.length, 'the combination sweep emptied').toBe(11);
+    let composites = 0;
+    for (const stressTypes of subsets) {
+      const l = generateSafetyProfile({ ...cfg, stressTypes }, 'town', []).safetyLabel;
+      const appended = l.split(' + ').slice(1);
+      expect(appended.length, `${stressTypes.join('+')} formed no composite`).toBeGreaterThan(0);
+      composites += appended.length;
+      for (const seg of appended) {
+        expect(CONDITIONS, `${stressTypes.join('+')} appended a non-condition: ${seg}`).toContain(seg);
+      }
+    }
+    expect(composites, 'no appended segment was ever examined').toBeGreaterThan(10);
   });
 });

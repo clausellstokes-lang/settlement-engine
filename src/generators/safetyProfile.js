@@ -76,7 +76,23 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
   // ── Safety label and description ─────────────────────────────────────────
   // Stress conditions override the base label with crisis-specific ones.
 
-  const safetyLabels   = [];
+  /**
+   * The active stress strains, TYPED — band and condition kept SEPARATE.
+   *
+   * ⛔ WHY NOT AN ARRAY OF RENDERED LABELS, which is what this was until
+   * 2026-09-05: the composite below needs each further strain's CONDITION back,
+   * and it recovered it by re-parsing the label it had just composed
+   * (`l.split(' — ')[1]`). That is a producer parsing its own output, and it was
+   * WRONG: `'Dangerous — Plague Unrest'` is itself one of the strain values below,
+   * so the plague leaf emits `'Dangerous — Plague Unrest — Plague Conditions'` and
+   * `[1]` recovers `'Plague Unrest'` — the strain's own tail — instead of
+   * `'Plague Conditions'`. Keeping the parts means never having to guess.
+   *
+   * Local to this function, so it costs zero persisted bytes: only the composed
+   * `safetyLabel` string leaves here, exactly as before.
+   * @type {Array<{strain: string, condition: string}>}
+   */
+  const safetyStrains  = [];
   const safetyDescs    = [];
 
   // Priority stress: these override everything else
@@ -84,7 +100,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     const curfewAuthority = inst.hasGarrison
       ? 'The garrison, now under occupier command, enforces'
       : 'Occupation authorities enforce';
-    safetyLabels.push('Controlled — Occupation Curfew');
+    safetyStrains.push({ strain: 'Controlled', condition: 'Occupation Curfew' });
     safetyDescs.push(
       `Movement is restricted and monitored. ${curfewAuthority} curfew and checkpoint protocols. ` +
       `Common crime is suppressed by authoritarian presence. Residents face little risk from thieves ` +
@@ -95,7 +111,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
   if (hasStress('under_siege')) {
     const strainLabel = safetyRatio >= 2 ? 'Tense' : safetyRatio >= 1 ? 'Strained' : 'Desperate';
     const milRef = inst.hasGarrison ? 'The garrison maintains order' : 'Military command has assumed civil authority';
-    safetyLabels.push(`${strainLabel} — Active Siege`);
+    safetyStrains.push({ strain: strainLabel, condition: 'Active Siege' });
     safetyDescs.push(
       `Siege conditions have transformed the settlement's social character. ${milRef} with increasing severity ` +
       `as supplies run low. Rationing disputes, black market food trading, and desperation theft are rising.`
@@ -107,7 +123,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     const foodRef = inst.hasGarrison
       ? 'The garrison focuses on food distribution enforcement'
       : 'Authority is increasingly exercised around food access';
-    safetyLabels.push(`${strainLabel} — Famine Conditions`);
+    safetyStrains.push({ strain: strainLabel, condition: 'Famine Conditions' });
     safetyDescs.push(
       `Hunger has destabilised the normal social order. ${foodRef}. ` +
       `Desperation theft is rampant and difficult to distinguish from survival. ` +
@@ -120,7 +136,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     const quarRef = inst.hasGarrison ? 'The garrison enforces quarantine zones'
                   : inst.hasWatch    ? 'The watch manages quarantine compliance'
                   :                    'Informal community enforcement maintains quarantine';
-    safetyLabels.push(`${strainLabel} — Plague Conditions`);
+    safetyStrains.push({ strain: strainLabel, condition: 'Plague Conditions' });
     safetyDescs.push(
       `Disease has reorganised daily life around containment and fear. ${quarRef}, with mixed compliance. ` +
       `Violence against the sick is a genuine risk. Price gouging on medicines and burial services is widespread.`
@@ -131,7 +147,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
   if (!hasStress('occupied') && !hasStress('under_siege') && !hasStress('famine') && !hasStress('plague_onset')) {
     if (hasStress('insurgency')) {
       const strainLabel = safetyRatio >= 2 ? 'Tense' : safetyRatio >= 1 ? 'Strained' : 'Dangerous';
-      safetyLabels.push(`${strainLabel} — Insurgency`);
+      safetyStrains.push({ strain: strainLabel, condition: 'Insurgency' });
       safetyDescs.push(
         'The settlement is experiencing organised resistance. Patrol patterns have changed. ' +
         'Movement between districts may be restricted. Loyalties are unclear.'
@@ -139,7 +155,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     }
     if (hasStress('slave_revolt')) {
       const strainLabel = safetyRatio >= 2 ? 'Tense' : safetyRatio >= 1 ? 'Dangerous' : 'Critical';
-      safetyLabels.push(`${strainLabel} — Slave Revolt`);
+      safetyStrains.push({ strain: strainLabel, condition: 'Slave Revolt' });
       safetyDescs.push(
         'Active armed conflict between revolt participants and security forces in contested districts. ' +
         'Civilians are avoiding specific streets. Normal patrol patterns have been abandoned.'
@@ -147,7 +163,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     }
     if (hasStress('wartime')) {
       const strainLabel = safetyRatio >= 2 ? 'Strained' : 'Tense';
-      safetyLabels.push(`${strainLabel} — Wartime`);
+      safetyStrains.push({ strain: strainLabel, condition: 'Wartime' });
       safetyDescs.push(
         'War has reorganised daily life. Strangers are viewed with heightened suspicion. ' +
         'Price controls and curfews are sporadically enforced.'
@@ -155,28 +171,28 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     }
     if (hasStress('politically_fractured')) {
       const strainLabel = safetyRatio >= 2 ? 'Tense' : safetyRatio >= 1 ? 'Strained' : 'Volatile';
-      safetyLabels.push(`${strainLabel} — Political Fracture`);
+      safetyStrains.push({ strain: strainLabel, condition: 'Political Fracture' });
       safetyDescs.push(
         'No stable governing authority. Enforcement is inconsistent; which faction controls a district determines what rules apply.'
       );
     }
     if (hasStress('succession_void')) {
       const strainLabel = safetyRatio >= 2 ? 'Tense' : safetyRatio >= 1 ? 'Strained' : 'Volatile';
-      safetyLabels.push(`${strainLabel} — Succession Crisis`);
+      safetyStrains.push({ strain: strainLabel, condition: 'Succession Crisis' });
       safetyDescs.push(
         "Authority is contested. The watch is uncertain whose orders to follow. Opportunistic crime is rising in the gap."
       );
     }
     if (hasStress('recently_betrayed')) {
       const strainLabel = safetyRatio >= 2 ? 'Tense' : safetyRatio >= 1 ? 'Strained' : 'Suspicious';
-      safetyLabels.push(`${strainLabel} — Aftermath of Betrayal`);
+      safetyStrains.push({ strain: strainLabel, condition: 'Aftermath of Betrayal' });
       safetyDescs.push(
         'The settlement is processing a betrayal. Strangers are viewed with heightened suspicion. Informal loyalty checks are common.'
       );
     }
     if (hasStress('monster_pressure')) {
       const strainLabel = safetyRatio >= 2 ? 'Tense' : safetyRatio >= 1 ? 'Strained' : 'Dangerous';
-      safetyLabels.push(`${strainLabel} — Monster Threat`);
+      safetyStrains.push({ strain: strainLabel, condition: 'Monster Threat' });
       safetyDescs.push(
         'Monster pressure from the surrounding region has changed how the settlement operates after dark. ' +
         'Outlying areas are avoided. Night movement is restricted.'
@@ -184,14 +200,14 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     }
     if (hasStress('indebted')) {
       const strainLabel = safetyRatio >= 2 ? 'Strained' : 'Tense';
-      safetyLabels.push(`${strainLabel} — Debt Crisis`);
+      safetyStrains.push({ strain: strainLabel, condition: 'Debt Crisis' });
       safetyDescs.push(
         'Debt service obligations shape every civic decision. The creditor representative has effective veto power over enforcement priorities.'
       );
     }
     if (hasStress('mass_migration')) {
       const strainLabel = safetyRatio >= 2 ? 'Strained' : 'Tense';
-      safetyLabels.push(`${strainLabel} — Mass Migration`);
+      safetyStrains.push({ strain: strainLabel, condition: 'Mass Migration' });
       safetyDescs.push(
         "The settlement is absorbing more people than its infrastructure was built for. " +
         "Friction between established residents and newcomers is visible. The watch is overwhelmed by unfamiliar faces."
@@ -199,7 +215,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     }
     if (hasStress('religious_conversion')) {
       const strainLabel = safetyRatio >= 2 ? 'Tense' : safetyRatio >= 1 ? 'Strained' : 'Suspicious';
-      safetyLabels.push(`${strainLabel} — Religious Upheaval`);
+      safetyStrains.push({ strain: strainLabel, condition: 'Religious Upheaval' });
       safetyDescs.push(
         'The religious shift has divided the settlement. Each faction suspects the other of reporting to the relevant authority. ' +
         'Enforcement of the new order is inconsistent.'
@@ -211,11 +227,14 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
   let safetyLabel;
   let safetyDesc;
 
-  if (safetyLabels.length > 0) {
-    // Combine stress labels into one composite string
-    safetyLabel = safetyLabels[0];
-    if (safetyLabels.length > 1) {
-      safetyLabel += ` + ${safetyLabels.slice(1).map(l => l.split(' — ')[1] || l).join(' + ')}`;
+  if (safetyStrains.length > 0) {
+    // Combine the stress strains into one composite string: the leading strain in
+    // full, then each further strain's CONDITION — read off the typed entry, never
+    // parsed back out of a rendered label. See the safetyStrains docblock for the
+    // two-em-dash plague strain that made the old parse wrong.
+    safetyLabel = `${safetyStrains[0].strain} — ${safetyStrains[0].condition}`;
+    if (safetyStrains.length > 1) {
+      safetyLabel += ` + ${safetyStrains.slice(1).map(e => e.condition).join(' + ')}`;
     }
     safetyDesc = safetyDescs.join(' ');
   } else if (stress.stateCrime) {
