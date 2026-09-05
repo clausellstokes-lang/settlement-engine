@@ -34,6 +34,7 @@
 
 import { resolveCoupVerdict } from '../rulingPowerCoup.js';
 import { foreignSeatCoupAdj } from '../rulingPowerSeat.js';
+import { irregularShareFactor } from './irregularForce.js';
 import { occupationLiftTransfer } from './occupation.js';
 import {
   relationshipKeyFromEdge,
@@ -561,6 +562,12 @@ export function deploymentReturnOutcomes({ resolvedDeployments = [], snapshot, g
         severity: clamp(0.45, 0.85, 0.4 + ratio * 0.5),
         rulingAuthorityScore: item.causal?.scores?.ruling_authority ?? null,
         foreignSeatAdj: foreignSeatCoupAdj(worldState, snapshot, homeId),
+        // W-SEAT D10 joins by the SAME rule the seat term joined by, stated one comment
+        // above: it is derivable from exactly the arguments this function already takes.
+        // Wiring only coup.js would be a silent PARTIAL lighting — one of two verdict
+        // callers moving while the other did not — which is the recorded failure the seat
+        // family cured by putting its gate inside the producer rather than at each consumer.
+        forceRatioFactor: irregularShareFactor(worldState, snapshot, homeId),
       });
       if (verdict.holds || !verdict.winner) continue; // order held — generic clear (no residual)
       const winner = /** @type {{ name: string, archetype: string }} */ (verdict.winner);
