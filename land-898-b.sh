@@ -4,7 +4,7 @@
 set -e
 SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad
 D=$SC/lanePROSE2; BASE=fd8b6df0013b749e24435450931618fbe78a3f13
-echo "== 1. the golden car"; sh $SC/commit-golden-898.sh
+echo "== 1. the golden arm is BANKED (owner-gated at the fixture) — assert the banked car is in the dock"; git -C $D log --format=%h --grep='movement is BANKED until the freeze act' -1 | grep -q . || { echo "⛔ the banked car is missing — run bank-golden-898.sh"; exit 1; }
 N=$(git -C $D rev-list --count $BASE..HEAD); EXPECT=$((N+1)); echo "cars now $N; after the totals car: $EXPECT"
 echo "== 2. the landing scripts take the true count ($EXPECT)"
 python3 - "$EXPECT" <<'PY'
@@ -18,9 +18,9 @@ for f,pats in (('after-cas-898.sh',[(r"grep -q '\^GATE_CARS=\d+\$'","grep -q '^G
     io.open(p,'w',encoding='utf-8').write(s); print('  ',f,'-> cars',n)
 PY
 sh -n $SC/after-cas-898.sh && sh -n $SC/run-gate-898.sh
-echo "== 3. the census totals (quiet window + mutex; predicted entries 4, totalFiles 2468)"; sh $SC/run-ratchet-898.sh > $SC/ratchet-898.log 2>&1 || true
+echo "== 3. the census totals (quiet window + mutex; predicted entries 5 (6 - the two Tier-2 voice rows + the banked golden row), totalFiles 2468)"; sh $SC/run-ratchet-898.sh > $SC/ratchet-898.log 2>&1 || true
 grep -E '^TRUE_EXIT=|^MEASURED:|REFUSED|regression' $SC/ratchet-898.log | head -6
-echo "== 4. the totals car"; sh $SC/commit-totals.sh $D $SC/ratchet-898.log 4 2468 train-prose-2026-09-05 $BASE
+echo "== 4. the totals car"; sh $SC/commit-totals.sh $D $SC/ratchet-898.log 5 2468 train-prose-2026-09-05 $BASE
 echo "== 5. lighting: farmed probe vs the register at the tip"
 PR=$(PROBE_FARM_ROOT=$SC/.farms node $SC/chair-tools/lighting-probe.mjs $D 2>/dev/null | tail -1)
 RG=$(python3 -c "import json;d=json.load(open('$D/tests/lint/.lighting-census-baseline.json'));print(json.dumps({k:d[k] for k in ('files','parked','credited','titles','suiteTitles')}))")

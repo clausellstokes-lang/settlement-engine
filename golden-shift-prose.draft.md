@@ -26,11 +26,12 @@ BYTES are not. THE PROMISE is kept: a saved world's lived history is immutable; 
 ## Goldens / driven-corpus constants re-recorded — every one named, with its cause
 | file | assertions | before | after | cause |
 |---|---|---|---|---|
-| `tests/fixtures/generator-golden-master.json` (525 rows, both arms) | 525 | the base golden | __GOLDEN_ROWS__ rows moved, __GOLDEN_UNMOVED__ unmoved | the declared shift's OWN fixture: every moved row is cured emitted text; re-recorded through the unfrozen register's env door (`UPDATE_GOLDEN=1`), car __GOLDEN_CAR__ |
+| `tests/fixtures/generator-golden-master.json` (525 rows) | 525 | the base golden | **NOT re-recorded** — __GOLDEN_ROWS__ rows move (__GOLDEN_UNMOVED__ unmoved), measured by `golden-count.mjs` | the declared shift's OWN fixture; the door is closed before the freeze act (`[NO_SIGNATURE]`; walker arm 1 :358), so the arm is BANKED owner-gated with magnitude ceiling 525 until the genesis signing — car __GOLDEN_CAR__ (`RULING-GOLDEN-PRE-FREEZE.md`) |
 | the edge-shared bundles (`aiCharter`, `aiGrounding`, `aiOutputSchema`) | 3 hashes | the base metas | re-minted | three bundle inputs carry cured reader text; the ritual re-mint, car `73a6f0c22` |
 | `tests/property/espionageDormancyFence.test.js:262` `PRE_COUPLING_CORPUS_SHA` | 1 | `72acacd8…` | `cda5ec877…` | the cured emitted text of the corpus (anti-vacuity arms hold: rows 360, distinct 360, errors 0) — TAKEN as car `3ab6fd9d3` at residue zero |
-Register state: `tests/fixtures/.golden-freeze-register.json` is UNFROZEN (`frozenAt` null); no shift-record file is
-therefore signed for this act — the ledger row + this entry are the form (LIGHT-PLAN §4). Fingerprinted fixtures touched:
+Register state: `tests/fixtures/.golden-freeze-register.json` is UNFROZEN (`frozenAt` null); the door is CLOSED
+before the freeze act for every registered surface (measured; CORRECTIONS.md row 7) — the ledger row + this entry are the
+declaration, and the fixture regenerates at the genesis. Fingerprinted fixtures touched:
 none — the 15 prose-side test files are not register surfaces; the fence-1 pin is a corpus sha, not a fixture (expected: none).
 
 ## Non-golden registers moved at the landing (chair acts, at the composed tip)

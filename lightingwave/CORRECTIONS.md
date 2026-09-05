@@ -12,3 +12,9 @@
    rows of the floor, two within two (`factionPatch` 38, `resolutionContext` 38) — PLAN §9 item 1 is no longer undeterminable.
 6. The store layer cannot be imported by plain node (`import.meta.env` undefined at `src/lib/supabase.js:17`); the battery's
    (b)/(f)/(g) ride `lprobe/env-shim.mjs`, which injects an empty env and drives the product's documented unconfigured arm.
+7. **§4 / §6 POSITION 0 — the door is CLOSED before the freeze act for EVERY registered surface, and the PROSE car trips it.**
+   `goldenRecordDoor.recordGolden` writes `sha256`/`rows`/`ownerRow` on the register row; walker arm 1 (`:358`) reds any recorded
+   value while `frozenAt` is null. The prose car moves `generator-golden-master` on **525 of 525 rows** (measured by
+   `chair-tools/golden-count.mjs`, control 0/525 at the base). RULED (`rulings/RULING-GOLDEN-PRE-FREEZE.md`): no chair-signed
+   record, no door amendment; the arm is BANKED with attribution (class `owner-gated`) until the genesis signing; the wave's
+   golden STOP becomes "a move BEYOND the prose delta", measured tree-vs-tree with the same probe.
