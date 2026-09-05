@@ -694,14 +694,14 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       case 'plot_hooks': return <PlotHooksTab settlement={s} />;
       case 'chronicle':  return <ChronicleTab entries={chronicle} />;
       case 'versions':   return <VersionsTab save={liveSaveEntry} />;
-      case 'daily_life': return <DailyLifeTab settlement={s} aiSettlement={aiSettlement} saveId={saveId} onRequestDailyLife={() => requestAiAction('dailyLife')} />;
+      case 'daily_life': return <DailyLifeTab settlement={s} aiSettlement={aiSettlement} saveId={saveId} onRequestDailyLife={() => requestAiAction('dailyLife')} publicDossier={publicDossier} playerView={playerView} />;
       // Traditions — the founding-traditions register (THE TRADITIONS wave, T-1).
       // Preview mode (view-time deriveFoundingTraditions) until the T-2 mover writes
       // the settlement.traditions mirror; then this same tab renders the live state.
       case 'traditions': return <TraditionsTab settlement={s} saveId={saveId} />;
       case 'overview':   return <OverviewTab settlement={s} narrativeNote={null} onNavigateTab={setActiveTab} publicDossier={publicDossier} playerView={playerView} worldState={owningWorldState} />;
       case 'economics':  return <EconomicsTab settlement={s} narrativeNote={null} saveId={saveId} publicDossier={publicDossier} playerView={playerView} />;
-      case 'services':   return <ServicesTab services={s.availableServices} settlement={s} narrativeNote={null} />;
+      case 'services':   return <ServicesTab services={s.availableServices} settlement={s} narrativeNote={null} publicDossier={publicDossier} playerView={playerView} />;
       case 'power':      return (
         <>
           <PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} publicDossier={publicDossier} playerView={playerView} worldState={owningWorldState} />
@@ -733,7 +733,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
         onTogglePin={onTogglePin} canAuthorNpc={npcAuthoringAllowed}
         saveId={saveId} playerView={playerView} publicDossier={publicDossier} />;
       case 'history':    return <HistoryTab settlement={s} narrativeNote={null} recentEvents={recentEvents} onReroll={onRegenerate ? () => onRegenerate('history') : null} />;
-      case 'resources':  return <ResourcesTab settlement={s} narrativeNote={null} />;
+      case 'resources':  return <ResourcesTab settlement={s} narrativeNote={null} publicDossier={publicDossier} playerView={playerView} />;
       case 'viability':  return <ViabilityTab settlement={s} narrativeNote={null} publicDossier={publicDossier} playerView={playerView} />;
       case 'dm_compass': return <DMCompassTab settlement={compassSource || s} />;
       case 'dm_notes':   return <NotesTab saveId={saveId} notes={dossierNotes} section="dm" />;

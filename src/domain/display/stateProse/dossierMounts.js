@@ -167,8 +167,12 @@ export const MOUNT_RUNGS = Object.freeze({
  *   • PROSPERITY. DS-ECO-1 (the rung read against the approach) speaks in the header,
  *     which has paragraph room. DS-ECO-8 (the rung alone) therefore GLANCES on its tile;
  *     a second prosperity sentence a few inches below the first is the page contradicting
- *     itself about one fact. DS-ECO-8's speaking position is owed to another page-set
- *     position, not to this tab.
+ *     itself about one fact. DS-ECO-8's speaking position was owed to another page-set
+ *     position and is PAID at `daily_life.standingOfLiving` (DESK-ECON2). Not `overview`:
+ *     DS-GEN-3 already speaks about the prosperity rung there through five `prosperity: *`
+ *     pools at `overview.systemsHealth`, so that tab is the one place a second prosperity
+ *     sentence WOULD be the page contradicting itself. `daily_life` prints the band word as
+ *     its Economy anchor fact and carries no prosperity sentence of any kind.
  *   • FOOD. DS-ECO-9 (the food-security ladder) speaks in the Food Security section.
  *     DS-ECO-2 (the at-a-glance tiles) therefore glances at BOTH of its positions — which
  *     car C3 would require in any case, since one block may draw its sentence rung at one
@@ -198,6 +202,15 @@ export const MOUNT_RUNGS = Object.freeze({
  * call site. Both declarations, with the one act that lights each, are in
  * `defenseStateProse.js` at `DEF7_DARK_POOLS` and `DEF10_DARK_POOLS`, pinned by desk arms so
  * neither can be quietly forgotten or quietly lit.
+ * ── DESK-ECON2: THE ECONOMY DESK LEAVES ITS OWN TAB ──────────────────────────────────
+ * `economics.exportPosture` (DS-ECO-10), `resources.groundAndWorkings` (DS-ECO-11) and
+ * `services.catalogStanding` (DS-SUP-3). The economy LEAF was never an economics-TAB leaf:
+ * DS-ECO-11 is the terrain, the strengths and the exploitation ladder (the resources page)
+ * and DS-SUP-3 is the tier-expected service catalog (the services page). The desk's call
+ * therefore moved out of `EconomicsTab.jsx` into `components/new/economyDeskRead.js`,
+ * because ARM 2 of the walker admits exactly ONE component file per desk and three tabs
+ * cannot each call one. Five economy-leaf blocks stay dark and every one of them has a
+ * MEASURED reason written in `economyStateProse.js`'s header rather than a silence.
  * @type {ReadonlyArray<DossierMount>}
  */
 export const DOSSIER_MOUNTS = Object.freeze([
@@ -354,6 +367,18 @@ export const DOSSIER_MOUNTS = Object.freeze([
   Object.freeze({
     mount: 'viability.magicDependency', tab: 'viability', desk: 'defense', blockId: 'DS-DEF-9', rung: 'sentence',
   }),
+  Object.freeze({
+    mount: 'economics.exportPosture', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-10', rung: 'sentence',
+  }),
+  Object.freeze({
+    mount: 'resources.groundAndWorkings', tab: 'resources', desk: 'economy', blockId: 'DS-ECO-11', rung: 'sentence',
+  }),
+  Object.freeze({
+    mount: 'services.catalogStanding', tab: 'services', desk: 'economy', blockId: 'DS-SUP-3', rung: 'sentence',
+  }),
+  Object.freeze({
+    mount: 'daily_life.standingOfLiving', tab: 'daily_life', desk: 'economy', blockId: 'DS-ECO-8', rung: 'sentence',
+  }),
 ]);
 
 /**
@@ -373,8 +398,7 @@ export const UNMOUNTED_BLOCKS = Object.freeze([
   'DS-DEF-10',
   'DS-ECO-4',
   'DS-ECO-5', 'DS-SUP-1', 'DS-ECO-7',
-  'DS-SUP-2', 'DS-ECO-10',
-  'DS-ECO-11', 'DS-SUP-3',
+  'DS-SUP-2',
   'DS-POP-1', 'DS-POP-2', 'DS-GEN-1',
   'DS-GEN-8', 'DS-REL-1', 'DS-REL-2', 'DS-GEN-9',
   'DS-GEN-10', 'DS-HK-1', 'DS-GEN-11',

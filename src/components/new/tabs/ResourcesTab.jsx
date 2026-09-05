@@ -3,11 +3,23 @@ import { FS, swatch, MUTED, GOLD_TINT, GOLD_DEEP } from '../../theme.js';
 import { sans, Section, Empty } from '../Primitives';
 
 import {NarrativeNote} from '../NarrativeNote';
+import { economyDeskRead } from '../economyDeskRead.js';
+import { DeskLines } from './EconomicsGlance.jsx'; // the shared position renderer (see its docblock)
 
-export function ResourcesTab({settlement:r, narrativeNote}) {
+/**
+ * @param {object} props
+ * @param {object} props.settlement
+ * @param {object} [props.narrativeNote]
+ * @param {boolean} [props.publicDossier] §885.3 — a free, anonymous gallery viewer draws no
+ *   corpus prose. Threaded from OutputContainer and answered inside economyDeskRead.
+ * @param {boolean} [props.playerView] the desk audience, the PowerTab term exactly.
+ */
+export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false, playerView = false}) {
   const res = r?.resourceAnalysis;
   if (!res) return <Empty message="No resource data available."/>;
   const _config = r?.config || {};
+  // THE ECONOMY DESK, through its one caller. DS-ECO-11 renders here and nowhere else.
+  const deskProse = economyDeskRead(r, { publicDossier, playerView });
 
   // Imports: object {critical:[], recommended:[], reasons:{}}
 
@@ -49,6 +61,15 @@ export function ResourcesTab({settlement:r, narrativeNote}) {
           </div>}
         </div>
       </div>
+
+      {/* ── THE GROUND AND ITS WORKINGS (DS-ECO-11 at resources.groundAndWorkings) ──
+          FOUR LENSES OVER ONE RECORD AT ONE POSITION, in the order the header above prints
+          their data: what the country is (`terrain`), what the town is good at
+          (`economicStrengths`), what the ground is worth to somebody else (`strategicValue`),
+          and the ONE resource line the reader meets first in the section below. The DS-ECO-12
+          shape, not a new one. Additive: the terrain word, the strengths chips and the
+          generator's own strategic-value line all stay exactly where they are. */}
+      <DeskLines mount="resources.groundAndWorkings" rungs={[deskProse.terrainIdentity, deskProse.economicStrengths, deskProse.strategicValue, deskProse.exploitation]} />
 
       {/* ── CRITICAL IMPORTS (what they can't produce) ───────────────────── */}
       {(unexploited.length>0||partExploited.length>0||fullExploited.length>0)&&<Section title="Resource Exploitation" collapsible defaultOpen>

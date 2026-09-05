@@ -9,6 +9,8 @@ import { useStore } from '../../../store/index.js';
 import { isConfigured } from '../../../lib/supabase.js';
 import Button from '../../primitives/Button.jsx';
 import { useLiveAiCostResolver } from '../../../hooks/useLivePricing.js';
+import { economyDeskRead } from '../economyDeskRead.js';
+import { DeskLines } from './EconomicsGlance.jsx'; // the shared position renderer (see its docblock)
 
 const INK = swatch['#1C1409'], MUTED = swatch['#9C8068'], SECOND = swatch['#6B5340'],
       BORDER = swatch['#E0D0B0'], GOLD = swatch['#A0762A'], PARCH = swatch['#FDF8F0'], _CARD = swatch['#FFFBF5'];
@@ -42,7 +44,7 @@ const STRESS_LABELS = {
 
 // ── Main component ────────────────────────────────────────────────────────────
 
-export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRequestDailyLife = null }) {
+export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRequestDailyLife = null, publicDossier = false, playerView = false }) {
   const [narrative, setNarrative]   = useState(null);
   const [localLoading, setLocalLoading] = useState(false);
   const [localError, setLocalError]     = useState(null);
@@ -65,6 +67,9 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
   const dailyLifeEnabled = isConfigured ? !!saveId : true;
 
   const ctx = extractSettlementContext(r);
+  // THE ECONOMY DESK, through its one caller. DS-ECO-8 — the prosperity rung read ON ITS
+  // OWN — speaks HERE, and this is the only page-set position where it does.
+  const deskProse = economyDeskRead(r, { publicDossier, playerView });
 
   const loading = isConfigured ? storeAiLoading : localLoading;
   const regenerating = isConfigured ? storeAiRegenerating : false;
@@ -180,6 +185,16 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
           />
         )}
       </div>
+
+      {/* ── THE STANDING OF LIVING (DS-ECO-8 at daily_life.standingOfLiving) ──
+          THE LADDER BLOCK'S ONE SPEAKING POSITION. The prosperity band word is already the
+          "Economy" anchor fact three lines above, which is exactly the shape a LADDER block
+          wants: the reader has the band, and this is the town's own account of what living
+          at that band is like. It does NOT speak on economics (DS-ECO-1 has the header
+          there, R-DST-A) and it does NOT speak on overview (DS-GEN-3's five `prosperity:`
+          pools already speak about the rung at overview.systemsHealth — measured, not
+          assumed). Additive: every anchor fact and the AI narrative below are untouched. */}
+      <DeskLines mount="daily_life.standingOfLiving" rungs={[deskProse.prosperityRung]} />
 
       {/* ── GENERATE / REGENERATE BUTTON ──────────────────────────────────── */}
       {/* Unsaved settlements (Create page) get a slim inline hint instead of

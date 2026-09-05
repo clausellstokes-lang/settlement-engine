@@ -167,3 +167,200 @@ describe('THE PUBLIC GATE — the economy desk stays silent on a public dossier'
     expect(economicsCase).toContain('publicDossier={publicDossier}');
   });
 });
+
+/**
+ * ── DESK-ECON2: THE ECONOMY DESK ON ITS THREE OTHER TABS ─────────────────────────────
+ *
+ * ⚠ THIS FILE IS NOW THE ECONOMY DESK'S UI HOME, NOT THE ECONOMICS TAB'S. The desk's leaf
+ * was never an economics-TAB leaf: DS-ECO-11 is the resources page, DS-SUP-3 the services
+ * page, and DS-ECO-8's one speaking position is on daily life. The arms live here rather
+ * than in three new files on purpose — a new test file moves the lighting census and two
+ * ratchet floors, and one desk's rendered proof is one subject.
+ *
+ * WHAT THESE ARMS ARE FOR, restated because the walker cannot do it: the reachability arm
+ * in dossierMountRegistry.walker.test.js only checks that a mount id appears as a string
+ * literal at exactly ONE site under src/components. It cannot tell a real draw from a
+ * decorative literal. A mount is real only if the rendered DOM carries the corpus sentence,
+ * and that is what every arm below asserts — in both directions, on the SAME settlement,
+ * so a fixture that simply had nothing to say fails the liveness half.
+ */
+import { ResourcesTab } from '../../src/components/new/tabs/ResourcesTab.jsx';
+import { ServicesTab } from '../../src/components/new/tabs/ServicesTab.jsx';
+import { DailyLifeTab } from '../../src/components/new/tabs/DailyLifeTab.jsx';
+import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+
+/**
+ * THE FIXTURE CARRIES NO `_seed` AND NO `id`, so every draw is CANONICAL-AT-ZERO (kernel law
+ * 4): the desk reads index 0 of each pool's eligible list and the expected sentences below
+ * are literal rather than seed-dependent. Its FIELD SHAPES are pinned against a really
+ * generated settlement by the SHAPE PIN arm at the end, which is trap 4 of the desk-car law:
+ * a fixture that is the only writer of the shape it grades is a desk green on nothing.
+ */
+const GROUND = {
+  name: 'Thornwall',
+  tier: 'village',
+  config: { terrainType: 'plains' },
+  economicState: {
+    prosperity: 'Comfortable',
+    tradeAccess: 'road',
+    primaryExports: ['Timber', 'Wool'],
+    activeChains: [],
+    incomeSources: [],
+    institutionalServices: [],
+  },
+  resourceAnalysis: {
+    terrain: 'Plains',
+    strategicValue: 'Medium - agricultural heartland, but exposed to raids',
+    economicStrengths: ['Grain production', 'Livestock'],
+    exploitation: {
+      unexploited: [{
+        rawResource: 'timber',
+        exportValue: 'very high',
+        processingInstitutions: ['Sawmill'],
+        intermediateGoods: ['sawn planks'],
+        finalProducts: ['furniture'],
+      }],
+      partiallyExploited: [],
+      fullyExploited: [],
+    },
+  },
+  availableServices: {
+    food: [{ name: 'Inn', desc: 'A bed and a meal', institution: 'The Broken Wheel' }],
+    equipment: [{ name: 'Smithy', desc: 'Ironwork', institution: 'Blacksmith' }],
+  },
+};
+
+/** The canonical-at-zero sentence each mounted position draws over GROUND. */
+const GROUND_LINES = Object.freeze({
+  terrain: 'Thornwall sits on ground that grows things without argument',
+  strengths: 'Thornwall has more than one thing it is good at',
+  worth: 'What Thornwall is worth to anybody else is a separate question',
+  workings: "There is timber in Thornwall's country worth real money",
+  catalog: 'Thornwall keeps no house of healing at a size where one is assumed',
+  posture: 'Thornwall sells several things outward and depends on none of them alone',
+  standing: 'Thornwall runs a reliable surplus',
+});
+
+describe('DESK-ECON2 — the mounted positions are DRAWS, not citations', () => {
+  test('resources.groundAndWorkings: four lenses render, and a public dossier renders none', () => {
+    const priv = render(e(ResourcesTab, { settlement: GROUND, publicDossier: false }));
+    const privText = priv.container.textContent;
+    cleanup();
+    const pub = render(e(ResourcesTab, { settlement: GROUND, publicDossier: true }));
+    const pubText = pub.container.textContent;
+    for (const [lens, line] of Object.entries({
+      terrain: GROUND_LINES.terrain,
+      strengths: GROUND_LINES.strengths,
+      worth: GROUND_LINES.worth,
+      workings: GROUND_LINES.workings,
+    })) {
+      expectPresentThenAbsent(privText, pubText, line, `resources.groundAndWorkings :: ${lens}`);
+    }
+    // The DATUM is untouched by the gate — the terrain word, the strengths chips and the
+    // generator's own strategic-value line are the page's and are not corpus prose.
+    expect(pubText).toContain('Plains');
+    expect(pubText).toContain('Grain production');
+    expect(pubText).toContain('agricultural heartland');
+  });
+
+  test('services.catalogStanding: the gap sentence renders, and a public dossier renders none', () => {
+    const priv = render(e(ServicesTab, {
+      services: GROUND.availableServices, settlement: GROUND, publicDossier: false,
+    }));
+    const privText = priv.container.textContent;
+    cleanup();
+    const pub = render(e(ServicesTab, {
+      services: GROUND.availableServices, settlement: GROUND, publicDossier: true,
+    }));
+    expectPresentThenAbsent(privText, pub.container.textContent, GROUND_LINES.catalog,
+      'services.catalogStanding');
+    // The village tier expects food, healing and equipment; this town keeps two of the
+    // three, so the DATUM the sentence bands is on the page beside it.
+    expect(pub.container.textContent).toContain('1 missing');
+  });
+
+  test('economics.exportPosture: the posture sentence renders, and a public dossier renders none', () => {
+    useStore.setState({ campaigns: [] });
+    const priv = render(e(EconomicsTab, { settlement: GROUND, saveId: null, publicDossier: false }));
+    const privText = priv.container.textContent;
+    cleanup();
+    const pub = render(e(EconomicsTab, { settlement: GROUND, saveId: null, publicDossier: true }));
+    const pubText = pub.container.textContent;
+    expectPresentThenAbsent(privText, pubText, GROUND_LINES.posture, 'economics.exportPosture');
+    // The Trade Profile section itself is the surface and survives the gate.
+    expect(pubText).toContain('Timber');
+    expect(pubText).toContain('Exports');
+  });
+
+  test('daily_life.standingOfLiving: DS-ECO-8 speaks HERE, and nowhere else on the page-set', () => {
+    useStore.setState({ campaigns: [] });
+    const priv = render(e(DailyLifeTab, { settlement: GROUND, publicDossier: false }));
+    const privText = priv.container.textContent;
+    cleanup();
+    const pub = render(e(DailyLifeTab, { settlement: GROUND, publicDossier: true }));
+    const pubText = pub.container.textContent;
+    expectPresentThenAbsent(privText, pubText, GROUND_LINES.standing, 'daily_life.standingOfLiving');
+    // The band word is the page's own anchor fact and is NOT corpus prose.
+    expect(pubText).toContain('Comfortable');
+    cleanup();
+    // ⭐ THE ONE-FACT-ONE-SENTENCE LAW, DRIVEN RATHER THAN ASSERTED FROM THE TABLE: the same
+    // rung is mounted at `economics.economyTile` as a GLANCE, so the economics page must NOT
+    // carry this sentence even though the desk built the rung for it.
+    const econ = render(e(EconomicsTab, { settlement: GROUND, saveId: null, publicDossier: false }));
+    // The daily-life render above proved this exact string is drawable from this exact
+    // fixture, so its absence here is the GLANCE rung and not an empty page.
+    // anchored: the same string was asserted PRESENT on daily_life from this same fixture
+    expect(econ.container.textContent).not.toContain(GROUND_LINES.standing);
+    expect(econ.container.textContent, 'the economics page did not render at all')
+      .toContain('Comfortable');
+  });
+
+  test('the ROUTER threads the public condition to all three new tabs', () => {
+    const router = readFileSync(ROUTER_SRC, 'utf8');
+    for (const tab of ['resources', 'services', 'daily_life']) {
+      const line = router.split('\n').find((l) => l.includes(`case '${tab}':`));
+      expect(line, `the router has no ${tab} case`).toBeTruthy();
+      expect(line, `case '${tab}' does not receive publicDossier`).toContain('publicDossier={publicDossier}');
+    }
+  });
+
+  /**
+   * ⛔ TRAP 4 OF THE DESK-CAR LAW: a fixture can be the only writer of the FIELD or the
+   * SHAPE it grades. Every field GROUND carries is checked against a really generated
+   * settlement — same key, same JS shape — so a desk green on this fixture is a desk that
+   * would be green on a real world.
+   */
+  test('SHAPE PIN: every field the fixture carries has the shape the real generator writes', () => {
+    const real = generateSettlementPipeline(
+      { settType: 'village', culture: 'germanic', terrainOverride: 'plains', tradeRouteAccess: 'road' },
+      null, { seed: 'econ2-shape-pin', customContent: {} },
+    );
+    const shape = (v) => (Array.isArray(v) ? 'array' : v === null ? 'null' : typeof v);
+    expect(shape(real.config?.terrainType)).toBe(shape(GROUND.config.terrainType));
+    expect(shape(real.tier)).toBe(shape(GROUND.tier));
+    expect(shape(real.resourceAnalysis?.terrain)).toBe(shape(GROUND.resourceAnalysis.terrain));
+    expect(shape(real.resourceAnalysis?.strategicValue)).toBe(shape(GROUND.resourceAnalysis.strategicValue));
+    expect(shape(real.resourceAnalysis?.economicStrengths)).toBe('array');
+    expect(shape(real.resourceAnalysis?.exploitation)).toBe('object');
+    for (const bucket of ['unexploited', 'partiallyExploited', 'fullyExploited']) {
+      expect(shape(real.resourceAnalysis?.exploitation?.[bucket]), bucket).toBe('array');
+    }
+    // availableServices is an OBJECT of arrays, not an array — the shape the desk's absence
+    // reader depends on, and the one a hand fixture most easily gets wrong.
+    expect(shape(real.availableServices)).toBe('object');
+    for (const list of Object.values(real.availableServices || {})) expect(shape(list)).toBe('array');
+    expect(shape(real.economicState?.primaryExports)).toBe('array');
+    // And the exploitation ROW shape, taken from a settlement that has one.
+    const anyRow = ['unexploited', 'partiallyExploited', 'fullyExploited']
+      .flatMap((b) => real.resourceAnalysis?.exploitation?.[b] || [])[0];
+    if (anyRow) {
+      expect(shape(anyRow.rawResource)).toBe('string');
+      expect(shape(anyRow.processingInstitutions)).toBe('array');
+      expect(shape(anyRow.finalProducts)).toBe('array');
+    }
+    // The terrain TOKEN and the terrain NAME are different strings on a real settlement —
+    // the label trap, pinned in the UI suite as well as the desk suite.
+    expect(real.config.terrainType).toBe('plains');
+    expect(real.resourceAnalysis.terrain).toBe('Plains');
+  });
+});
