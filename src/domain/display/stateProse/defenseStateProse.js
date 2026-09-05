@@ -793,9 +793,20 @@ const DEF8_DECLARED_DARK_POOL = 'multiple stresses, one posture shown';
 export const DEF8_UNREACHABLE_POOLS = Object.freeze([DEF8_DECLARED_DARK_POOL]);
 
 /**
+ * A stress entry as this desk reads it.
+ *
+ * ⚠ THE SHAPE NAMES ONE FIELD BECAUSE THIS DESK READS ONE FIELD. `settlement.stress` is
+ * generator-authored and its payload differs by stress type, so `type` — which goes through
+ * `text()` before it indexes anything — is the only field any branch below consults. A wider
+ * shape would assert fields nothing here reads; `any` asserted something worse, that EVERY
+ * field is present and correctly typed, on a value the saves disagree about the shape of.
+ * @typedef {{ type?: unknown }} StressEntry
+ */
+
+/**
  * Every stress on a settlement, as an array. Mirrors `DefenseTab`'s own normalisation —
  * the field is a single object on some saves and an array on others.
- * @param {unknown} stress @returns {any[]}
+ * @param {unknown} stress @returns {StressEntry[]}
  */
 function stressList(stress) {
   if (Array.isArray(stress)) return stress.filter(Boolean);
@@ -805,7 +816,7 @@ function stressList(stress) {
 /**
  * Is a defence-posture override active, and which stress carries it? Returns the stress
  * entry the banner would show, or null.
- * @param {unknown} stress @returns {any|null}
+ * @param {unknown} stress @returns {StressEntry|null}
  */
 export function activeDefenceStress(stress) {
   return stressList(stress).find((entry) => DEFENSE_STRESS_STATUS[text(entry?.type)]) || null;

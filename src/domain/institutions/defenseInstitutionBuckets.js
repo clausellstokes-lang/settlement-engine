@@ -121,15 +121,22 @@ export const DEFENSE_BUCKET_KEYS = Object.freeze(Object.keys(DEFENSE_BUCKET_KEYW
  * stand. The caller chooses the roster, and that is the honest split — the generator wants
  * the roster as built, the desk wants the roster as it stands today.
  *
+ * ⚠ THE MEMBER TYPE IS `unknown` ON PURPOSE, and it is the accurate width rather than a
+ * placeholder. This module asks an institution exactly ONE question — `nativeSemanticName`,
+ * which itself takes `unknown` — so there is nothing narrower to honestly claim. `any[]` said
+ * the opposite: it told every caller that any field it cared to name was there and correctly
+ * typed, which is how a bucket member gets read for a property nothing writes. Under
+ * `unknown` a caller must prove a field before reading it, which is the whole point.
+ *
  * @param {unknown} institutions the roster to classify
- * @returns {Record<string, any[]>} one array per bucket, in DEFENSE_BUCKET_KEYS order
+ * @returns {Record<string, unknown[]>} one array per bucket, in DEFENSE_BUCKET_KEYS order
  */
 export function partitionDefenseInstitutions(institutions) {
   const list = Array.isArray(institutions) ? institutions : [];
   /** @param {unknown} inst @param {ReadonlyArray<string>} keywords */
   const matches = (inst, keywords) =>
     keywords.some((kw) => nativeSemanticName(inst).toLowerCase().includes(kw));
-  /** @type {Record<string, any[]>} */
+  /** @type {Record<string, unknown[]>} */
   const buckets = {};
   for (const bucket of DEFENSE_BUCKET_KEYS) {
     buckets[bucket] = list.filter((inst) => matches(inst, DEFENSE_BUCKET_KEYWORDS[bucket]));
