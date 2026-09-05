@@ -32,6 +32,7 @@ import {
   GENERAL_STATE_PROSE_SILENT,
   SLOT_FILL_SHAPES,
   SLOT_FILL_TABLES,
+  conflictIntensityPoolKey,
   foodDeficitDimension,
   foodSecurityPoolKey,
   generalStateProse,
@@ -58,16 +59,25 @@ import { getTerrainType } from '../../src/generators/terrainHelpers.js';
 import { ROUTE_TO_SCENE } from '../../src/generators/narrativeGenerator.js';
 import { ORIGIN_ARMS, originArmKey } from '../../src/generators/narrative/settlementOriginProse.js';
 import { resolvePrimaryStress } from '../../src/generators/stressPriority.js';
+import { HISTORICAL_EVENTS_DATA } from '../../src/data/historyData.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { mustExtract } from '../helpers/sourceContract.js';
+import { fillShapeViolation, mergeSlotShapes, parseSlotShapes } from '../../scripts/lib/dossier-slot-shapes.mjs';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const ROOT = resolve(import.meta.dirname, '../..');
 const src = (rel) => readFileSync(resolve(ROOT, rel), 'utf8');
 
+/** The two annexes' slot register, merged — the authority on what a fill shape means. */
+const mergedShapes = () => mergeSlotShapes([
+  parseSlotShapes(src('docs/content/RECEIPT_POOLS_DOSSIER_STATE.md'), 'state annex'),
+  parseSlotShapes(src('docs/content/RECEIPT_POOLS_CAUSAL_DOSSIER.md'), 'causal annex'),
+]);
+
 /** Every block this desk lights, and the pool counts the shipped leaf carries. */
 const BLOCK_POOLS = Object.freeze({
-  'DS-GEN-3': 42, 'DS-GEN-5': 5, 'DS-GEN-6': 9, 'DS-GEN-12': 5, 'DS-GEN-13': 4, 'DS-GEN-17': 5,
+  'DS-GEN-2': 3, 'DS-GEN-3': 42, 'DS-GEN-5': 5, 'DS-GEN-6': 9, 'DS-GEN-12': 5, 'DS-GEN-13': 4,
+  'DS-GEN-17': 5,
 });
 
 /**
@@ -113,6 +123,7 @@ function expectSentence(line, where) {
 function draw(readings) {
   const prose = generalStateProse(TOWN, readings, { seed: 'aliveness', audience: 'dm' });
   return {
+    conflicts: prose.overview.conflicts.map((rung) => rung?.sentence ?? null),
     situation: prose.overview.situation?.sentence ?? null,
     origin: prose.overview.origin.map((rung) => rung.sentence).filter(Boolean),
     health: prose.overview.systemsHealth.map((rung) => rung.sentence).filter(Boolean),
@@ -183,8 +194,15 @@ describe('the general desk — guard the guard', () => {
     for (const [id, count] of Object.entries(BLOCK_POOLS)) {
       expect(poolsOf(id).length, `${id} pool count moved`).toBe(count);
     }
-    // The slot mirror is the annex's, and the desk owns no literal fill table.
-    expect(SLOT_FILL_SHAPES).toEqual({ settlement: 'proper' });
+    // The slot mirror is the annex's — asserted against the PARSED register rather than
+    // against a copy of it, so the mirror cannot become a fork — and the desk owns no
+    // literal fill table.
+    const shapes = mergedShapes();
+    expect(Object.keys(SLOT_FILL_SHAPES).sort())
+      .toEqual(['faction', 'faction2', 'issue', 'settlement', 'stakes']);
+    for (const [slot, shape] of Object.entries(SLOT_FILL_SHAPES)) {
+      expect(shape, `{${slot}} shape`).toBe(shapes.shapeOf(slot));
+    }
     expect(SLOT_FILL_TABLES).toEqual({});
     // WHICH BLOCKS PARTITION THEMSELVES BY A DEMOTED STATE DIMENSION, derived from the
     // kernel's own reader so this file cannot hold a second opinion about what a dimension
@@ -439,6 +457,7 @@ describe('the general desk over the real generator', () => {
     tradeRouteAccess: s.config?.tradeRouteAccess,
     isEntrepot: s.economicState?.isEntrepot,
     inst: s.economicState?.compound?.inst,
+    conflicts: s.conflicts,
     tier: s.tier,
     primaryStress: resolvePrimaryStress(((Array.isArray(s.stress) ? s.stress : [s.stress]).filter(Boolean)).map((v) => v.type)),
     foodBalance: s.economicViability?.metrics?.foodBalance,
@@ -656,5 +675,121 @@ describe('DS-GEN-6 — the route, the tier overlay, and the demoted deficit dime
     expect(originTierPoolKey('village')).toBe('tier overlay: other tiers');
     expect(originTierPoolKey('thorp')).toBe('tier overlay: thorp / hamlet');
     expect(originTierPoolKey('hamlet')).toBe('tier overlay: thorp / hamlet');
+  });
+});
+
+describe('DS-GEN-2 — one line per standing quarrel', () => {
+  const conflict = (intensity) => ({
+    parties: ['The Grey Council', 'The Independent Bloc'],
+    issue: 'Military conscription of guild apprentices',
+    stakes: 'Labor control',
+    intensity,
+  });
+
+  it('all three intensities fire, and an unknown one renders nothing', () => {
+    const lines = draw({ conflicts: ['low', 'moderate', 'high'].map(conflict) }).conflicts;
+    expect(lines).toHaveLength(3);
+    for (const line of lines) expectSentence(line, 'conflict');
+    expect(new Set(['low', 'moderate', 'high'].map((i) => conflictIntensityPoolKey({ intensity: i }))).size).toBe(3);
+    expect([...new Set(['low', 'moderate', 'high'].map((i) => conflictIntensityPoolKey({ intensity: i })))].sort())
+      .toEqual(poolsOf('DS-GEN-2').sort());
+    // How close two factions are to violence is not a thing to guess at.
+    expect(conflictIntensityPoolKey({ intensity: 'simmering' })).toBeNull();
+    expect(conflictIntensityPoolKey({})).toBeNull();
+    // A conflict the desk cannot key on holds its PLACE, so the caller's index pairing
+    // cannot slip onto the wrong row.
+    const mixed = draw({ conflicts: [conflict('low'), { intensity: 'simmering' }, conflict('high')] }).conflicts;
+    expect(mixed).toHaveLength(3);
+    expect(mixed[1]).toBeNull();
+    expectSentence(mixed[0], 'first');
+    expectSentence(mixed[2], 'third');
+  });
+
+  it('THE WHOLE PRODUCER TABLE CONFORMS: every authored issue and stakes fills a phrase seam', () => {
+    // The closed vocabulary, extracted from the producer rather than sampled from a run:
+    // a value that cannot conform must red HERE, not lose a variant in silence.
+    const body = src('src/generators/power/conflicts.js');
+    mustExtract(body, 'export const generateConflicts', 'the conflict table in conflicts.js');
+    const values = [...body.matchAll(/^\s*(?:issue|stakes): (?:'([^']+)'|"([^"]+)")/gm)]
+      .map((m) => m[1] ?? m[2]);
+    expect(values.length, 'the conflict table extractor found nothing').toBeGreaterThan(30);
+    const shapes = mergedShapes();
+    for (const value of values) {
+      const filled = draw({ conflicts: [{ ...conflict('low'), issue: value, stakes: value }] }).conflicts[0];
+      expectSentence(filled, value);
+      // The fill really landed: the seam's own word is in the line, lowercased where the
+      // table wrote it sentence-case.
+      const expected = /^[A-Z][a-z]/.test(value) ? value[0].toLowerCase() + value.slice(1) : value;
+      expect(fillShapeViolation(shapes.shapeOf('issue'), expected), `${value} violates its shape`).toBe('');
+    }
+  });
+
+  it('the parties fill faction and faction2, and a nameless party drops its variant', () => {
+    const named = draw({ conflicts: [conflict('high')] }).conflicts[0];
+    expect(named).toContain('The Grey Council');
+    expect(named).toContain('The Independent Bloc');
+    // EVERY DS-GEN-2 variant names both factions, so a conflict with no parties has no
+    // eligible variant at all and the pool falls silent — anchored liveness, not a stub.
+    expect(draw({ conflicts: [{ intensity: 'high' }] }).conflicts[0]).toBeNull();
+  });
+});
+
+describe('⛔ DS-GEN-1 STAYS DARK — the severity dimension has no measured producer', () => {
+  const SEED_SET = ['sf-test-2026-04', 'alpha', 'beta', 'gamma'];
+  const TIERS = [
+    { settType: 'hamlet', culture: 'celtic', terrainOverride: 'forest', tradeRouteAccess: 'isolated' },
+    { settType: 'town', culture: 'germanic', terrainOverride: 'mountain', tradeRouteAccess: 'road' },
+    { settType: 'metropolis', culture: 'mediterranean', terrainOverride: 'riverside', tradeRouteAccess: 'port' },
+  ];
+
+  it('every generated tension carries the TEMPLATE range, never a per-settlement value', () => {
+    // THE FINDING. DS-GEN-1's ten pools are each partitioned by the kernel's `severity`
+    // dimension, whose vocabulary is one of {minor, major, catastrophic}. `buildHistoricalEvent`
+    // spreads `{ ...tmpl }` out of HISTORICAL_EVENTS_DATA and never collapses `severity`, so
+    // what reaches the record is the template's RANGE — a property of the tension TYPE,
+    // identical on every settlement that carries it, and not a measurement of this town.
+    let seen = 0;
+    const shapes = new Set();
+    for (const seed of SEED_SET) {
+      for (const config of TIERS) {
+        const s = generateSettlementPipeline(config, null, { seed, customContent: {} });
+        for (const tension of (s.history?.currentTensions || [])) {
+          seen += 1;
+          shapes.add(Array.isArray(tension.severity) ? 'ARRAY' : `SCALAR:${typeof tension.severity}`);
+        }
+      }
+    }
+    expect(seen, 'no tension was generated, so this arm proves nothing').toBeGreaterThan(15);
+    expect([...shapes], 'a per-settlement severity appeared, and DS-GEN-1 may now be lit').toEqual(['ARRAY']);
+    // Picking an element would be a DEFAULT WEARING A READING'S CLOTHES: `severity[0]` makes
+    // every crime wave in every world minor and darkens three of five variants in each of
+    // the ten pools forever. The cure is one line in the producer and it already has two
+    // precedents in the same file — generateEventNarrative collapses with
+    // `pick(eventTemplate.severity)` and the resource path collapses arrays outright — but a
+    // generation-side collapse MOVES SAME-SEED OUTPUT, which is constitutionally the owner's.
+    const templateRanges = new Set(HISTORICAL_EVENTS_DATA.map((e) => JSON.stringify(e.severity)));
+    expect(templateRanges.size, 'the templates stopped carrying ranges').toBeGreaterThan(1);
+  });
+
+  it('and the corpus writes ten pools against a producer vocabulary of more than twenty', () => {
+    // The SECOND, independent reason: even with a severity, fourteen of the tension types
+    // the generator can write have no pool at all.
+    const pools = poolsOf('DS-GEN-1');
+    expect(pools).toHaveLength(10);
+    const producerTypes = new Set(HISTORICAL_EVENTS_DATA.map((e) => e.type));
+    expect(producerTypes.size, 'the tension template roster collapsed').toBeGreaterThan(20);
+    const unpooled = [...producerTypes].filter((t) => !pools.includes(t)).sort();
+    expect(unpooled.length, 'the producer roster is now inside the corpus').toBeGreaterThan(10);
+    // Both directions: every pool the corpus DOES write is a real producer type, so the ten
+    // are not themselves stale. Anchored on `crime_wave`, which both sides carry.
+    for (const pool of pools) expect([...producerTypes], `${pool} is not a producer type`).toContain(pool);
+    expectAbsentWithAnchor(
+      pools, 'legitimacy_crisis', 'crime_wave',
+      'a producer tension type the corpus writes no pool for',
+    );
+    // It is still DARK in the shipped registry, and it must stay that way until the owner
+    // rules on the collapse.
+    expect(UNMOUNTED_BLOCKS).toContain('DS-GEN-1');
+    expect(sentenceMountForBlock('DS-GEN-1')).toBeNull();
   });
 });

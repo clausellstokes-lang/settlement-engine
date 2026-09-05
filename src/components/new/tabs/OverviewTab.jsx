@@ -119,6 +119,7 @@ const STRESSOR_MOUNT = 'overview.stressorLifecycle';
  * registry's ARM 2), which is why the reads below are assembled here rather than inside the
  * desk: every one of them is a field this component already holds for the section it draws.
  */
+const CONFLICTS_MOUNT = 'overview.conflicts';
 const SITUATION_MOUNT = 'overview.situation';
 const ORIGIN_MOUNT = 'overview.origin';
 const HEALTH_MOUNT = 'overview.systemsHealth';
@@ -221,6 +222,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
       tradeRouteAccess: r.config?.tradeRouteAccess,
       isEntrepot: eco.isEntrepot,
       inst: eco.compound?.inst,
+      conflicts: r.conflicts,
       tier: r.tier,
       primaryStress: resolvePrimaryStress(stresses.map((v) => v.type).filter(Boolean)),
       // The food arithmetic DS-GEN-6's demoted `deficit` dimension is derived from. It
@@ -232,6 +234,10 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
   );
   const healthLines = generalProse.overview.systemsHealth
     .map((rung) => drawnAtMount(HEALTH_MOUNT, rung)?.sentence).filter(Boolean);
+  // One line per conflict, index-paired with `r.conflicts` — the desk keeps a null in place
+  // for a conflict it cannot key on, so the pairing cannot slip.
+  const conflictLines = generalProse.overview.conflicts
+    .map((rung) => drawnAtMount(CONFLICTS_MOUNT, rung)?.sentence ?? null);
   const originLines = generalProse.overview.origin
     .map((rung) => drawnAtMount(ORIGIN_MOUNT, rung)?.sentence).filter(Boolean);
   const siteLines = [
@@ -451,6 +457,10 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
                 <span style={{fontSize:FS.micro,fontWeight:800,color:iHigh?'#8b1a1a':'#a0762a',background:iHigh?'#fdf0f0':'#faf0dc',border:`1px solid ${iHigh?'#e8c0c0':'#d8c080'}`,padding:'0 4px'}}>{iHigh?'HIGH':'MODERATE'}</span>
               </div>
               {c.issue&&<p style={{fontSize:FS.xs,color:swatch.inkMag3,margin:'2px 0 0',lineHeight:1.3}}>{c.issue}</p>}
+              {/* DS-GEN-2, one line per conflict. The DATUM above is untouched — parties,
+                  badge and issue all still carry their own words; this bands the same
+                  quarrel in the town's voice beside them. */}
+              {conflictLines[i]&&<p style={{fontSize: FS['12.5'],color:swatch.inkMag2,lineHeight:1.5,margin:'4px 0 0',fontStyle:'italic'}}>{conflictLines[i]}</p>}
             </div>
           </div>;
         })}
