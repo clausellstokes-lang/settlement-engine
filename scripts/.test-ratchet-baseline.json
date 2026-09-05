@@ -17,9 +17,9 @@
         {
           "name": "files-over-baseline",
           "kind": "count",
-          "pattern": "^\\+\\s+\"?src/domain/",
+          "pattern": "^src/domain/\\S+: baseline em:\\d+ bang:\\d+ .* current em:\\d+ bang:\\d+$",
           "ceiling": 2,
-          "unit": "src/domain files whose Tier-2 em-dash count sits ABOVE the frozen per-file baseline (labelBands.js +5, generalStateProse.js +3 — a producer's authored dashed vocabulary as map keys and parsed delimiters); the shrink-only door cannot raise the baseline and the generator import is forbidden in writing"
+          "unit": "src/domain files whose Tier-2 em-dash count sits ABOVE the frozen per-file baseline (labelBands.js +5, generalStateProse.js +3 — a producer's authored dashed vocabulary as map keys and parsed delimiters); the shrink-only door cannot raise the baseline and the generator import is forbidden in writing — PATTERN RE-DERIVED 2026-09-05 (§900 gate run 2) against the JSON reporter's failureMessages[0], which carries the arm's custom message lines and NOT the terminal diff block the first pattern was cut against; ceiling unchanged at 2"
         }
       ]
     },
