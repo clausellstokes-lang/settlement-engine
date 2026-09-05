@@ -8,7 +8,23 @@ program's decisions; SPEC fold labels §§277–§286 are design sections, not m
 The repo is authoritative; trust executed evidence over any summary including
 this one.**
 
-## ⭐⭐⭐⭐⭐ PICKUP AT §895 — **THE DESK CONSIST IS DOWN. Product `90702c3e9`, 90 cars across SIX landings. THE SEAT IS OPUS 5.** Read this, then `$SC/clamp/CLAMP-MIGRATION-PLAN.md` before touching any clamp.
+## ⭐⭐⭐⭐⭐ PICKUP AT §896 — **THE CLAMP CONSIST IS DOWN. THE SEAT IS FABLE 5.1 — Fable chairs and architects, Opus implements and verifies (owner, 2026-09-05).** Product `df7cdd37e`, SEVEN landings. Read this, then `$SC/RESUME-NOTE.md` (sealed at `refs/preserve/resume-note-2026-09-05`).
+
+`$SC` = `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad`. ⛔ OWNER CAP FOUR agents of any kind. ⛔ Chair acts: `Seat: Fable 5.1 — validated` + a CHANGED `docs/FABLE_RETROVALIDATION_QUEUE.md` blob when the row enrols anything; **every lane dispatched `model: "opus"`**, its commits `Seat: Opus 5 — Fable-unvalidated` + `Lane: <name>`. ⛔ The seat change validates NOTHING retroactively.
+
+### ⭐ IMMEDIATELY NEXT, IN ORDER
+1. **§896.1 — the Fable seat's 28 rulings** (`$SC/rulings-892x.json`, dry-run clean; `collect-8961.sh`).
+2. **ANCHORS** — replay `a2a0d2320` (3 cars) onto `df7cdd37e`; lighting is **+0 on all five** (its test file is parked on `describe.each`); owes only the census totals (`run-ratchet-anch.sh`), then gate (`run-gate-anch.sh`, fill `BASE`).
+3. **OSR-SCHEMA17** — `brief-OSR-SCHEMA17.md`, `model: "opus"`, dock `laneINTEG-tree` @ `940d161ca`: the topology-only corpus cure + the schema-17 mint that three lanes' refusals converged on. It frees the **23-car desk consist**.
+4. The desk remainder (23 dark blocks; `warFaith` 5 of 5), clamp waves 2–4 (10 over the ceiling, 4 with a reason not to move → ONE ruling at the end), the lighting wave (**31 items, not 22**; its charter's schema-16 rung is SPENT), W-ARMS (14; Car 0a landed the volume), HORIZON-DARK (**6, not 5**) → ⛔ the owner's WALK → the exhaustive review → ⛔ FULL STOP before the soak.
+
+### ⛔ THREE LAWS THIS LANDING PAID FOR
+A register taken in ANOTHER dock is a register taken mid-consist · an empty file passes `sh -n`, so a lost script reports green — gate on `[ -s f ]` and the command's presence · `pg` is undeclared and a symlinked dock lacks it — the sentinel's `TRUE_EXIT=1` with zero refusals means the gate could not RUN what it was frozen to run.
+
+### ⛔ THE OWNER'S DESK
+The WALK + one regen (⚠ NOT READY — the review corpus is deity-free, 0 of 44) · every `git push` and the deploy · the tuning SIGNATURE · **new row:** `SOLE_EARNER_FROM = 50` prints the monopoly sentence for a perfect 50/50 split (the cut reads the leader alone, never the roster's length); `HIGH_INSTABILITY_FROM = 0.35` is byte-equal to `LADDER_TUNING.CHURN_BUMP`. Neither value moved.
+
+## (superseded) PICKUP AT §895 — **THE DESK CONSIST IS DOWN. Product `90702c3e9`, 90 cars across SIX landings. THE SEAT IS OPUS 5.** Read this, then `$SC/clamp/CLAMP-MIGRATION-PLAN.md` before touching any clamp.
 
 `$SC` = `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad` · `$SP` = `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/58f0a8e2-2c4f-4073-8635-ecc7cf5010f6/scratchpad`. ⛔ OWNER CAP FOUR agents of any kind. ⛔ Every act: `Seat: Opus 5 — Fable-unvalidated` + a CHANGED `docs/FABLE_RETROVALIDATION_QUEUE.md` blob in the SAME commit; build the queue from `git show HEAD:…`, never the worktree copy.
 

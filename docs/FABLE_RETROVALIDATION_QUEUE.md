@@ -3561,3 +3561,18 @@ call-site-level proven byte-neutrality. ⛔ Two sites must NOT migrate — `warA
 fail-safe to fail-open on an atrocity path) and `conquestFeasibility` ARM 2 (the kernel cannot
 produce the `null` its doctrine requires). ⭐ Three real latent bugs found upstream, the sharpest a
 per-ward dwelling cap that FAILS OPEN on a NaN population (8 emitted rows vs 2).
+## §896 — THE CLAMP LANDING, THE FIRST UNDER THE FABLE CHAIR (2026-09-05; SEAT: Fable 5.1 — validated)
+
+⭐ These four rows were built by OPUS lanes and are enrolled here by the FABLE chair, which verified the consist at its composed tip (chair-verify green) before it landed. **That verification is what the Fable trailer on this act certifies — not a re-derivation of each lane's judgment calls**, which stay listed here for the walk.
+
+### R33 SIX MIGRATED, TWO REFUSED ON LANDED PINS — a file can be provably safe and still not free to move
+`conquestIntent` is pinned at `[]` imports by `envoyK3BeliefSeam.test.js:356`; `conquestExecution`'s header declares NO IMPORTS and `warSeatBooksPartition.test.js:313` rules a header declaration "an older constraint that wins". The lane proved `1 - months/capacity` cannot be `-0` (IEEE) and refused anyway. **To re-derive:** whether the belief pin and the header doctrine still hold at the current tree, and whether the ceiling ruling owed at the final wave should bank both as `sovereigntyAppraisal` was banked (CR-WR10-A(b)).
+
+### R34 ⛔⛔ `|| 0` IS A FALSY SCREEN — Infinity reached PERSISTED state and JSON wrote it as null
+Seven sites, four writers; `{wins:Infinity}` read `stock01 = 1` (dominant) and `migrateDispositionStats` wrote `score: Infinity` to the save, serialised as `null`, ratcheted permanent. Healthy rows `{wins:3,losses:1}` → `0.583333333333` byte-identical. **To re-derive:** that no shipped save can already carry a `null` score from this path, and what a reader does if one does.
+
+### R35 THE DWELLING CAP FAILED OPEN — 193 rows against a floor of 118, and a NaN fabric THROWS
+`typeof NaN === 'number'` admitted NaN; `target` went NaN; `emitted >= target` was false for every value. The fabric half throws out of `stableSceneStringify` rather than misgrading. Same-seed map geometry moves ONLY for non-finite inputs; six goldens green. **To re-derive:** the corpus-city figure, and whether any generated world reaches the NaN branch.
+
+### R36 THE `pg` TRAP AND THE `npm install` THE CHAIR RAN WITHOUT A SNAPSHOT
+`pg` is undeclared and imported unguarded by a CI-only test; a symlinked dock lacks it; the sentinel reports `TRUE_EXIT=1` with zero refusals. The chair's fix reconciled 162 packages in the shared tree and verified the byte budget AFTER the fact. **To re-derive:** that the first-paint closure is unchanged (sizeBaseline 3/3 was the receipt), and which of the docketed cures — declare the dependency, or make the import dynamic — the estate should take.
