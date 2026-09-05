@@ -195,6 +195,18 @@ const WAR_MEMORY = 'warMemoryEnabled';
 // (stressorGates.upheavalLit) in a single commit — the §49-ruling-3 cost above, paid in the
 // same three module-scope edits and carrying ZERO new test titles here.
 const LEGITIMACY_UPHEAVAL = 'legitimacyUpheavalEnabled';
+// SEAT-78 (SEAT-7a, replayed at `bc3002c55`). D10's irregular-force law, below-threshold
+// half, minted with its manifest entry, its certification row in `subsystemRowsSeat.js`
+// and its ONE by-name gate read (`irregularForce.irregularShareFactor`, spelled positively
+// on the optional-chain receiver so the engine-gated census can discover it) in a single
+// commit — the §49-ruling-3 cost above. ⛔ THE THREE MODULE-SCOPE EDITS WERE *NOT* PAID BY
+// THE MINTING LANE, and this file is where that came due: SEAT-78 paid the manifest, the
+// row and the gate, and met neither this const, nor the VIRTUAL_RULES member, nor the
+// LANE_LEAVES entry. That is the SIXTH recorded sighting of the habitat the
+// contributionLedgerShape note enumerates — the flag-mint bill spread across suites nobody
+// can enumerate from the mint site — and the first where a landing lane, not the minting
+// lane, paid all four surfaces at once.
+const IRREGULAR_FORCE = 'irregularForceEnabled';
 // ENC-3. The chance-meeting stage, minted with its manifest entry, its certification row in
 // the new `subsystemRowsEncounters.js` leaf and its ONE by-name gate read
 // (`envoyChanceMeetingStage.chanceEncountersActive`) in a single commit — the §49-ruling-3
@@ -212,7 +224,7 @@ const VIRTUAL_RULES = Object.freeze([
   FAITH_UNSEATING,
   UNDERCITY_HIGH_WATER,
   TREASURY,
-  FOREIGN_SEAT, LEGITIMACY_UPHEAVAL, WAR_MEMORY,
+  FOREIGN_SEAT, LEGITIMACY_UPHEAVAL, IRREGULAR_FORCE, WAR_MEMORY,
   CHANCE_ENCOUNTERS,
 ]);
 
@@ -280,6 +292,15 @@ const LANE_LEAVES = Object.freeze({
   // lane's zero-candidate claim through them would measure the whole political layer.
   [WAR_MEMORY]: ['src/domain/worldPulse/concludedWars.js'],
   [LEGITIMACY_UPHEAVAL]: ['src/domain/worldPulse/stressorGates.js'],
+  // SEAT-78. THE GATE LEAF ALONE, and the lane really is one file: the flag read, the
+  // participation bridge and the force-ratio fold all live in irregularForce.js. The row's
+  // wider `module` list names rulingPowerCoup.js, coup.js, deploymentReturn.js and
+  // commonsVoiceKernel.js because a reader needs the two verdict callers and the extracted
+  // grievance blend, and all four are deliberately absent here: they are the political
+  // layer's own files, and tracing this lane's zero-candidate claim through them would
+  // measure the coup vocabulary rather than this one's. The zero-candidate claim is honest
+  // by measurement, not by assertion — `candidateType` is grep-zero in the leaf.
+  [IRREGULAR_FORCE]: ['src/domain/worldPulse/irregularForce.js'],
   [AXES]: ['src/domain/worldPulse/beliefAxes.js'],
   // All three subject families share ONE gate door (beliefAxes.subjectAxesActive) and ONE
   // derivation leaf, so all three name the same pair. That is the honest scope: the leaf

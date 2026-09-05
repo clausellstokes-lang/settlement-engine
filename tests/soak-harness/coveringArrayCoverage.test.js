@@ -199,18 +199,36 @@ describe('the covering array and its constraint manifest', () => {
     // the FIRST one here and a red at an early assertion blinds every later one in the same
     // test — so "governed and ungoverned did not move" could not have been read off this
     // suite's own failure. It was measured by calling `flagDomainCensus` directly.
-    expect(census.virtual.length).toBe(30);
+    // ⭐ AND 30 → 31 AT SEAT-78 (§900, `bc3002c55`), which mints `irregularForceEnabled`
+    // with its certification row in one commit. THE CLOSURE IS THE PROOF, exactly as at
+    // EP-1, WF-1a, W-COIN-1a, SEAT-1, SEAT-2b and ENC-3, and it was again MEASURED OUT OF
+    // BAND BEFORE THE LITERALS MOVED, for the reason the paragraph directly above records:
+    // `union` moves 87 → 88 in lockstep while `governed` (25) and `ungoverned` (32) do NOT
+    // move at all — affirmative evidence the key is genuinely VIRTUAL, and both checked
+    // directly rather than inferred from the arithmetic (absent from DEFAULT_SIMULATION_RULES,
+    // and absent from all seven preset spreads). `union − governed` rises with it by
+    // construction (62 → 63): a virtual key is never normalizer-governed. `nonBoolean` (13)
+    // does not move, because the key is a boolean.
+    // ⛔ THE MINTING LANE DID NOT PAY THIS SURFACE. SEAT-78 paid the manifest, the row and
+    // the gate; this census, contributionLedgerShape's pair, subsystemRowsVirtual's three
+    // module-scope edits and militaryStrength's importer allowlist were all met at the
+    // composition by a landing lane. ⚠ AND ONLY ONE OF THE FOUR FIGURES BELOW WAS EVER
+    // REPORTED RED, because the first assertion in this test blinds the three after it —
+    // which is exactly why the out-of-band measurement is not optional here.
+    expect(census.virtual.length).toBe(31);
     expect(census.overlap).toEqual([]);
     // 85 -> 86 at the WAR landing (§876): the same coupled-union key, same re-measure.
     // 86 -> 87 at ENC-3 (§893): the virtual mint above, moving in lockstep.
-    expect(census.union.length).toBe(87);
+    // 87 -> 88 at SEAT-78 (§900): the virtual mint above, moving in lockstep.
+    expect(census.union.length).toBe(88);
     expect(census.governed.length + census.ungoverned.length + census.virtual.length).toBe(census.union.length);
     // 57 of 82 sit outside the normalizer's fail-closed coercion — the measured content of
     // "the normalizer is NOT the oracle", and the reason the manifest had to be minted. It
     // rises with the virtual arm by construction: a virtual key is never governed.
     // 60 -> 61 at the WAR landing (§876): the coupled key is virtual, not governed.
     // 61 -> 62 at ENC-3 (§893): likewise virtual, so it lands outside the normalizer.
-    expect(census.union.length - census.governed.length).toBe(62);
+    // 62 -> 63 at SEAT-78 (§900): likewise virtual, so it lands outside the normalizer.
+    expect(census.union.length - census.governed.length).toBe(63);
     expect(census.nonBoolean.length).toBe(13);
   });
 
