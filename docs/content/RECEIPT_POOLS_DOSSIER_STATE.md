@@ -256,6 +256,68 @@ Until one of those lands, the DS-GEN-9 variant naming `{founder}` stays ineligib
 anchored liveness — the same correct silence §0c-3 describes, now for a recorded grammar
 reason rather than for a false shape declaration.
 
+### §0c-5 `{good}` AND `{chain}` — THE CASING CLASS, MEASURED (DOCKET item 8, re-scoped; both mechanisms REFUTED)
+
+DOCKET item 8 found `{chain}`, `{resource}` and `{good}` declared `bare-common` while every
+producer writes Title-Case DISPLAY labels, so the variants naming them are dark on every
+generated world. `{resource}` and `{complexity}` are closed (§0c-3 and `singularBareCommonFill`).
+These two are not, and the §900 desk landing measured both before building anything. **NEITHER
+IS WIRED HERE, and in both cases the reason is a measurement rather than a scruple.**
+
+#### `{good}` — the denominator is **248**, not 197, and the transform is honest for **240** of them
+
+The closed vocabulary that can reach `{good}` through `primaryExports` is the UNION of the
+resource trade-goods labels and the supply-chain outputs: **80 ∪ 197, overlapping in 29 = 248**.
+The figure 197 is the chain-outputs half ALONE and omits the 51 trade-goods labels that are not
+also chain outputs. Measured against `bare-common` by `fillShapeViolation`:
+
+| | refused |
+|---|---|
+| as shipped | **248 of 248** |
+| after a per-word lowercase | **0 of 248** |
+
+So the mechanical predicate is total — and the predicate is not the whole of honesty. **EIGHT
+values carry a UNIT-OR-QUALIFIER PARENTHETICAL**, which the predicate does not ban and a reader
+should never meet in a sentence (*"the town sends ale (barrel) out"*):
+
+`Ale (barrel)` · `Arrows (sheaf)` · `Beer (barrel)` · `Education (basic)` ·
+`Healing waters (bottled)` · `Medical care (basic)` · `Spellcasting (greater)` ·
+`Spellcasting (minor)`
+
+⭐ Two facts that make the rest of the transform safe, both measured: **ZERO of the 248 carry an
+interior capital**, so a per-word lowercase destroys no proper noun; and the 11 casing collisions
+it creates are all a Title-Case label meeting its own already-lowercase twin (`Charcoal`/`charcoal`),
+which the transform MERGES rather than confuses. **240 of 248 is therefore the honest total**, and
+what lands the remaining eight is a chair call of exactly two shapes: screen the parenthetical at
+the fill (the `singularBareCommonFill` precedent — refusal is silence under anchored liveness, and
+silence is the safe direction), or re-author the eight labels. **Not 248 of 248 ⇒ not wired.**
+
+#### `{chain}` — a HEADING CLASS IS REFUSED BY THE CORPUS'S OWN GRAMMAR: **38 of 38 seams supply a determiner**
+
+The producer writes **75 distinct chain labels, 75 of 75 Title-Case, 52 of 75 carrying an
+ampersand** (`Grain & Bread`, `Raw Materials & Fuel`, `Salt & Preservation`). They are CATEGORY
+HEADINGS off a UI panel, not noun phrases, and transforming them is rightly refused: *"the town's
+raw materials & fuel keeps more hands busy"* is not a sentence.
+
+The proposed cure was to declare a fifth shape — a heading class, Title-Case admitted — and route
+the slot through it. **Measured over every variant that names `{chain}`: 38 of 38 seams supply
+their own determiner** — 35 an article or demonstrative immediately before the slot (*"The {chain}
+is running below what it should"*, *"Nobody talks about the {chain}"*, *"see nothing wrong with
+this {chain}"*) and the other 3 a possessive (*"{settlement}'s {chain} produces less…"*). A
+heading class admitted into those seams renders *"The Raw Materials & Fuel is running below what
+it should"* — a definite article in front of a Title-Case category heading, with an ampersand in
+the reader's sentence. That is §0c-3's *"the Highly diversified — multiple major revenue streams"*
+defect wearing a smaller hat, and the seams are not wrong: they are authored **correctly** for
+`bare-common`, whose whole content is that the SENTENCE supplies the article.
+
+**So the shape stays `bare-common` and the cure is on the TABLE side, exactly where §0c-3 put
+`{complexity}`'s**: an authored `CHAIN_NOUN` map from the 75 producer labels onto bare common-noun
+phrases (*Grain & Bread → grain line*, *Raw Materials & Fuel → fuel and raw-material line*),
+declared in `economyStateProse.js`'s `SLOT_FILL_TABLES` and total over the closed vocabulary.
+⛔ **THOSE WORDS ARE THE CHAIR'S, NOT A WIRING LANE'S** — the same reason §0c-3 gives for its own
+eleven — so the map is opened here and not filled here. Until it lands the 38 variants stay
+silent under anchored liveness, which is the correct behaviour under R-DST-K and not a defect.
+
 **THE SLOTS-LINE CONVENTION, RECONCILED (§0h V1-h).** WRITER-2 declares each
 block's **permitted palette**; the other three declare the **used set**. The
 merged rule is the permissive one: *a slot used in a variant MUST appear on its
