@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "e8cd3dae460452ce8437288af59876249546e161",
-  "measuredBy": "Opus 5 chair — DESK1 replay consist",
-  "date": "2026-09-04",
-  "note": "three desk-leaf test files added (power, stressors, defense) and one duplicate-import park cleared at car 15",
+  "measuredAtSha": "fc8ecd2feab1d66530af5abe0d16a9ec9a4b1144",
+  "measuredBy": "CLAMP-REPAIR (Opus 5)",
+  "date": "2026-09-05",
+  "note": "five regression pins added to two existing test files by CLAMP-REPAIR cars 1-2 (the non-finite population/fabric guards and the falsy-screen repair); no test FILE added",
   "files": 2521,
   "parked": 371,
   "credited": 2150,
-  "titles": 23178,
-  "suiteTitles": 6213
+  "titles": 23183,
+  "suiteTitles": 6214
 }
