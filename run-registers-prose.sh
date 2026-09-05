@@ -32,9 +32,14 @@ quiet; sh scripts/gate-mutex.sh --run -- env UPDATE_VOICE_BASELINE=1 npx vitest 
 node scripts/check-writer-reach.mjs --write > "$D/../registers-prose-wr.log" 2>&1; E2=$?; echo "WRITER_REACH_EXIT=$E2"; tail -3 "$D/../registers-prose-wr.log" | cut -c1-140
 # 3. organic samples — the design goldens (UPDATE_ORGANIC_SAMPLES=1; enrolled in the golden-freeze register, which is UNFROZEN)
 quiet; sh scripts/gate-mutex.sh --run -- env UPDATE_ORGANIC_SAMPLES=1 npx vitest run tests/design/organicSamples.test.js > "$D/../registers-prose-organic.log" 2>&1; E3=$?; echo "ORGANIC_EXIT=$E3 changed=$(git status --porcelain -uall | wc -l | tr -d ' ')"
-# 4. prose-numerics + wizard-news: NO in-tree regenerator and NO env door — both are exact, location-bound, shrink-only
-#    ledgers relocated by ADDRESS (path:line[:column]) with the snippet/signature as the identity. Use $SC/relocate-ledger-rows.mjs
-#    (chair tool) in --dry mode first; a row whose identity vanished is a WIN to delete after review, never a row to re-add.
+# 4. prose-numerics — NO env door; the ledger is exact (path+line+category+snippet). $SC/prose-numerics-rekey.mjs uses the
+#    walker's OWN scanner: dry run first (must show FELL=0 NEW=0 or STOP and review), then --write re-keys/moves paired rows only.
+#    DERIVED at dac3b15a8 (the fix-car tip): exact 215 · RE-KEYED 10 (activeConditions.js:983 ×2, moralDrift.js:315 ×2,
+#    stressConfirmPass.js:126 ×3, :127 ×3 — em dash → colon inside the snippet) · relocated 0 · FELL 0 · NEW 0.
+echo "--- prose-numerics dry run:"; (cd "$D" && node "$SC/prose-numerics-rekey.mjs" "$D") > "$D/../registers-prose-pn-dry.log" 2>&1; E4=$?; head -1 "$D/../registers-prose-pn-dry.log"
+[ "$E4" = "0" ] && grep -q 'FELL=0 NEW=0' "$D/../registers-prose-pn-dry.log" && (cd "$D" && node "$SC/prose-numerics-rekey.mjs" "$D" --write) | tail -1 || echo "  ⛔ prose-numerics: FELL or NEW rows — chair review before any write"
+#    wizard-news (.wizard-news-authoring-baseline.json, 19 rows, keyed path:line:column+signature): DERIVED 19/19 unchanged at the
+#    prose tip (relocate-ledger-rows.mjs dry run) — no act expected; the walker confirms.
 # 5. the census totals — the ratchet runner stamped for this landing does this (run-ratchet-<N>.sh); not repeated here
 echo "REGISTER_PORCELAIN=[$(git status --porcelain -uall | wc -l | tr -d ' ')]"; git status --porcelain -uall
 echo "NEXT: review each changed register against the PREDICTIONS line; commit the register car(s) as the LAST cars (Seat: Fable 5.1 — validated); then run-ratchet-<N>.sh, then run-gate-<N>.sh"
