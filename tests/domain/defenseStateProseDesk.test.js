@@ -17,9 +17,10 @@ import {
   RECOGNISED_MONSTER_TIERS, SLOT_FILL_SHAPES, SLOT_FILL_TABLES, arcaneDefensePoolKey,
   beastsRowPoolKey, charterPoolKey, contractedForcePoolKey, countryWarrantsCharter,
   defenseForcesProse, defenseStateProse, defenseThreatProse, disasterRowPoolKey,
-  economicRowPoolKey, firstSurveyPoolKey, forceCorePoolKey, fortificationPoolKey,
-  internalRowPoolKey, invasionRowPoolKey, isCompoundSafetyLabel, measuredMonsterFamily,
-  publicOrderPoolKey,
+  defensePostureProse, economicRowPoolKey, firstSurveyPoolKey, forceCorePoolKey,
+  fortificationPoolKey, internalRowPoolKey, invasionRowPoolKey, isCompoundSafetyLabel,
+  measuredMonsterFamily, posturePoolKey, publicOrderPoolKey, strategicPrizePoolKey,
+  terrainDefencePoolKey, TERRAIN_DEFENCE_NAMES, TERRAIN_PRIZE_NAMES,
 } from '../../src/domain/display/stateProse/defenseStateProse.js';
 import {
   DEFENSE_BUCKET_KEYS, standingDefenseForces,
@@ -27,10 +28,12 @@ import {
 import { generateDefenseProfile } from '../../src/generators/defenseGenerator.js';
 import { getInstFlags } from '../../src/generators/priorityHelpers.js';
 import { MONSTER_THREAT_TIERS, normalizeMonsterThreat } from '../../src/data/monsterThreat.js';
+import { TERRAIN_DATA } from '../../src/data/geographyData.js';
 import { avgScore, scoreBand } from '../../src/domain/display/defenseScoreBands.js';
 import { avgScore as avgScoreViaPdf } from '../../src/pdf/lib/viewModelPrimitives.js';
 import { deriveDefensePosture } from '../../src/domain/display/dossierViewModel.js';
 import { DM_FIELD_FRAMED_BY_BLOCK, isDmEditableProsePath } from '../../src/domain/display/stateProse/dmFieldProjection.js';
+import { deriveGuardAssessment } from '../../src/domain/display/defenseDisplay.js';
 import { DOSSIER_STATE_PROSE_DEFENSE } from '../../src/data/dossierStateProse/defense.generated.js';
 import { DOSSIER_MOUNTS, UNMOUNTED_BLOCKS, sentenceMountForBlock } from '../../src/domain/display/stateProse/dossierMounts.js';
 import { parseSlotShapes, mergeSlotShapes } from '../../scripts/lib/dossier-slot-shapes.mjs';
@@ -550,6 +553,172 @@ describe('DS-DEF-2 — ALIVENESS over every combination the generator can build'
     expect(rows).toHaveLength(1);
     expect(rows[0]).toMatchObject({ mount: 'defense.threatAssessment', tab: 'defense', desk: 'defense', rung: 'sentence' });
     expect(sentenceMountForBlock(DEF2)?.mount).toBe('defense.threatAssessment');
+  });
+});
+
+/** DS-DEF-1 — the defensive-posture header, the three lenses. */
+const DEF1 = 'DS-DEF-1';
+/** A DM's own sentence in the field DS-DEF-1 frames. */
+const DM_GUARD_LINE = 'The gate guards know every carter by name and half of them by debt.';
+const DEF1_POOLS = DOSSIER_STATE_PROSE_DEFENSE[DEF1].pools;
+/** Every terrain NAME the producer can write into `resourceAnalysis.terrain`. */
+const TERRAIN_NAMES = Object.values(TERRAIN_DATA).map((t) => t.name);
+
+/** @param {string|undefined} terrain @param {number|undefined} score */
+function sited(terrain, score = 50) {
+  return {
+    name: 'Thornwall', _seed: 'seed-def1',
+    resourceAnalysis: { terrain },
+    defenseProfile: { readiness: { score } },
+  };
+}
+
+describe('DS-DEF-1 — the posture header, and a BLOCKER that had decayed', () => {
+  it('⭐ the readiness lens bands the SAME number the badge beside it shows', () => {
+    // Not `avgScore`. `DefenseTab` prints `readiness.label`, which computeDefenseReadiness
+    // derives from `readiness.score` — the mean PLUS a tier bonus MINUS a threat penalty.
+    // Banding any other quantity would let the page print "Fortress" beside a sentence
+    // calling the town effectively undefended.
+    for (const n of [90, 65, 64, 30, 19, 0]) {
+      expect(posturePoolKey(n)).toBe(`readiness ${scoreBand(n)}`);
+    }
+    expect(posturePoolKey(80)).toBe('readiness STRONG');
+    expect(posturePoolKey(45)).toBe('readiness ADEQUATE');
+    expect(posturePoolKey(25)).toBe('readiness WEAK');
+    expect(posturePoolKey(5)).toBe('readiness CRITICAL');
+    // …and the generator really does write that field, on a real profile.
+    const built = generateDefenseProfile(fort({ walls: true, garrison: true }));
+    expect(typeof built.readiness.score).toBe('number');
+    expect(posturePoolKey(built.readiness.score)).toBe(`readiness ${scoreBand(built.readiness.score)}`);
+  });
+
+  it('an absent readiness score is SILENCE, not CRITICAL', () => {
+    // `scoreBand` would happily call an absent reading CRITICAL, which is a false statement
+    // rather than a missing one — the same distinction the economic row makes.
+    expect(scoreBand(0)).toBe('CRITICAL');
+    expect(posturePoolKey(undefined)).toBeNull();
+    expect(posturePoolKey(null)).toBeNull();
+    expect(posturePoolKey('50')).toBeNull();
+    expect(posturePoolKey(Number.NaN)).toBeNull();
+    expect(defensePostureProse({ name: 'Thornwall' }, { seed: 'z1' }).posture).toBeNull();
+  });
+
+  it('⭐ the terrain maps are TOTAL against TERRAIN_DATA in BOTH directions', () => {
+    // The label-trap discipline applied to a display-name vocabulary: every key is a name
+    // the producer actually writes, and a terrain added or renamed reds here rather than
+    // dropping silently out of the lens.
+    for (const name of TERRAIN_DEFENCE_NAMES) {
+      expect(TERRAIN_NAMES, `${name} is not a terrain the producer writes`).toContain(name);
+    }
+    for (const name of TERRAIN_PRIZE_NAMES) {
+      expect(TERRAIN_NAMES, `${name} is not a terrain the producer writes`).toContain(name);
+    }
+    // …and the two terrains left out of the defence map are left out ON PURPOSE.
+    const unclassified = TERRAIN_NAMES.filter((n) => !TERRAIN_DEFENCE_NAMES.includes(n));
+    expect(unclassified.sort()).toEqual(['Coastal', 'Riverside']);
+  });
+
+  it('⭐ each map entry AGREES with the strategicValue its own terrain carries', () => {
+    // The runtime never parses that prose — that is the config-key-walker defect in
+    // miniature — but the map claims to summarise it, so the claim is checked HERE against
+    // the data rather than believed.
+    const svOf = (name) => Object.values(TERRAIN_DATA).find((t) => t.name === name).strategicValue;
+    for (const name of TERRAIN_DEFENCE_NAMES) {
+      const favourable = terrainDefencePoolKey(name) === 'terrain FAVOURABLE to the defender';
+      const sv = svOf(name);
+      if (favourable) expect(sv, `${name}: ${sv}`).toMatch(/defensible|difficult to besiege/i);
+      else expect(sv, `${name}: ${sv}`).toMatch(/exposed|caravan/i);
+    }
+    expect(svOf('Coastal')).toMatch(/^High - /);
+    expect(svOf('Mountain')).toMatch(/^High - /);
+    expect(svOf('Forest')).toMatch(/^Low-/);
+    // The middle of the range is in NEITHER prize pool, because the corpus wrote no middle
+    // and Hills' Medium-High value is DEFENSIVE rather than a prize.
+    for (const name of ['Riverside', 'Plains', 'Desert/Arid', 'Hills']) {
+      expect(strategicPrizePoolKey(name), name).toBeNull();
+      expect(svOf(name)).toMatch(/^Medium/);
+    }
+  });
+
+  it('the ground lens speaks only where the corpus has a reading for it', () => {
+    expect(terrainDefencePoolKey('Mountain')).toBe('terrain FAVOURABLE to the defender');
+    expect(terrainDefencePoolKey('Hills')).toBe('terrain FAVOURABLE to the defender');
+    expect(terrainDefencePoolKey('Forest')).toBe('terrain FAVOURABLE to the defender');
+    expect(terrainDefencePoolKey('Plains')).toBe('terrain EXPOSED');
+    expect(terrainDefencePoolKey('Desert/Arid')).toBe('terrain EXPOSED');
+    // A water flank is neither narrows nor open ground: both pools would be false of it.
+    expect(terrainDefencePoolKey('Coastal')).toBeNull();
+    expect(terrainDefencePoolKey('Riverside')).toBeNull();
+    expect(terrainDefencePoolKey(undefined)).toBeNull();
+    expect(terrainDefencePoolKey('Tundra')).toBeNull();
+  });
+
+  it('all EIGHT pools speak, over every terrain the producer writes × the band ladder', () => {
+    const reached = new Set();
+    for (const terrain of [...TERRAIN_NAMES, undefined]) {
+      for (const score of [90, 76, 65, 64, 55, 40, 24, 20, 19, 12, 0, undefined]) {
+        const drawn = defensePostureProse(sited(terrain, score), { seed: 'sweep1' });
+        for (const lens of ['posture', 'terrain', 'prize']) {
+          // The projection carries its rung; a bare `drawn[lens].sentence` is exactly the
+          // read a caller must not be able to make, so the sweep goes through `.rung` too.
+          const rung = drawn[lens]?.rung;
+          if (!rung?.sentence) continue;
+          reached.add(rung.provenance.poolKey);
+          expect(rung.provenance.blockId).toBe(DEF1);
+          // anchored: `reached.size` is pinned at the corpus pool count below
+          expect(rung.sentence).not.toMatch(/[{}]/);
+        }
+      }
+    }
+    expect(reached.size, `unreached: ${Object.keys(DEF1_POOLS).filter((k) => !reached.has(k))}`)
+      .toBe(Object.keys(DEF1_POOLS).length);
+    expect(Object.keys(DEF1_POOLS)).toHaveLength(8);
+  });
+
+  it('the registry mounts DS-DEF-1 once, as a sentence, on the defense tab', () => {
+    const rows = DOSSIER_MOUNTS.filter((row) => row.blockId === DEF1);
+    expect(rows).toHaveLength(1);
+    expect(rows[0]).toMatchObject({ mount: 'defense.postureHeader', tab: 'defense', desk: 'defense', rung: 'sentence' });
+    expect(sentenceMountForBlock(DEF1)?.mount).toBe('defense.postureHeader');
+    expectAbsentWithAnchor(
+      UNMOUNTED_BLOCKS, DEF1, A_DARK_SIBLING,
+      'DS-DEF-1 carries a mount row, so the dark half must not name it',
+    );
+  });
+
+  it('⛔⛔ DS-DEF-1 IS A DM\'S-PEN BLOCK — the registry says so, and the desk obeys it', () => {
+    // This arm caught a real defect while it was being written. A first cut of the desk
+    // returned BARE RUNGS, reasoning that `guardEffectivenessDesc` was not a DM path. The
+    // registry disagrees, and it is the authority: DS-DEF-1 is the leaf's OTHER DM-pen
+    // block, and `deriveGuardAssessment` returns that exact field verbatim into the header
+    // these lenses sit beside. A claim about a registry is checked against the registry.
+    expect(DM_FIELD_FRAMED_BY_BLOCK[DEF1]).toBe('economicState.safetyProfile.guardEffectivenessDesc');
+    expect(isDmEditableProsePath(DM_FIELD_FRAMED_BY_BLOCK[DEF1])).toBe(true);
+    expect(deriveGuardAssessment({
+      economicState: { safetyProfile: { guardEffectivenessDesc: DM_GUARD_LINE } },
+    })).toBe(DM_GUARD_LINE);
+
+    // THE PROJECTION SHAPE, on every lens: `{field, beside, hasField, rung}` and never a
+    // bare rung, so a composer cannot put the machine line where the DM's sentence lives.
+    const withPen = defensePostureProse({
+      ...sited('Mountain', 80),
+      economicState: { safetyProfile: { guardEffectivenessDesc: DM_GUARD_LINE } },
+    }, { seed: 'pen' });
+    for (const lens of ['posture', 'terrain', 'prize']) {
+      expect(Object.keys(withPen[lens]).sort()).toEqual(['beside', 'field', 'hasField', 'rung']);
+      // THE PIN THAT MATTERS: the DM's string comes back BY IDENTITY, not a copy.
+      expect(withPen[lens].field).toBe(DM_GUARD_LINE);
+      expect(withPen[lens].hasField).toBe(true);
+      expect(withPen[lens].beside).toBeTruthy();
+    }
+    // …and the wired field's bytes equal the dark field's bytes.
+    const dark = { economicState: { safetyProfile: { guardEffectivenessDesc: DM_GUARD_LINE } } };
+    expect(withPen.posture.field).toBe(dark.economicState.safetyProfile.guardEffectivenessDesc);
+    // With no DM sentence, the field stays absent and the machine line is still offered
+    // beside it rather than promoted into its place.
+    const noPen = defensePostureProse(sited('Mountain', 80), { seed: 'pen' });
+    expect(noPen.posture.hasField).toBe(false);
+    expect(noPen.posture.beside).toBeTruthy();
   });
 });
 
