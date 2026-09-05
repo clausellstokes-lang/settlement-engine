@@ -1,0 +1,12 @@
+§897: the anchors consist lands at 4 cars — twelve mutilated anchors de-slugged, a failure message that stopped instructing a revert, and the register taken in the lineage that lands
+
+Product df7cdd37e -> the CAS sha recorded in the row, sealed refs/preserve/landing-anchors-2026-09-05.
+Three Opus cars replayed onto the clamp landing with zero file overlap, plus the chair's totals
+register as the last car before the gate. The gate runner refused to start unless the product tip
+equalled the declared base, so a stale premise was refused rather than obeyed.
+
+Enrols: R37 — lane ANCHORS (three Opus-authored cars); the register car is a Fable chair act.
+
+Seat: Fable 5.1 — validated
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>
