@@ -26,10 +26,13 @@ import {
   incomeMixPoolKey,
   leadingGoodNoun,
   shadowEconomyPoolKey,
+  tradeFlowPoolKey,
   prosperityHeaderPoolKey,
   tradeProfilePoolKey,
 } from '../../src/domain/display/stateProse/economyStateProse.js';
 import { deriveEconomicComplexity } from '../../src/generators/economy/prosperity.js';
+import { flowDerivedDependency } from '../../src/domain/display/tradeFlowEconomics.js';
+import { throughputBand } from '../../src/domain/spatial/tradeFlow.js';
 import {
   parseSlotShapes, mergeSlotShapes, fillShapeViolation,
 } from '../../scripts/lib/dossier-slot-shapes.mjs';
@@ -705,5 +708,124 @@ describe('DS-ECO-6 — the capture tiers, and the live string this block is a co
     }
     // And the substitution the tab performs is real: the mount id is drawn there exactly once.
     expect(tab.split("'economics.shadowEconomy'").length - 1).toBe(1);
+  });
+});
+
+// ── DS-ECO-3: THE LIVE TRADE-FLOW DRIFT ──────────────────────────────────────────────
+
+describe('DS-ECO-3 — driven through the real producer, not a transcribed enum', () => {
+  const FLOWS = [0, 0.01, 0.04, 0.05, 0.06, 0.1, 0.25, 0.5, 0.75, 1, 1.5, 2, 3, 5, 10, 50, 500, 1e6];
+  const DEPENDENT = { primaryImports: ['iron'], primaryExports: ['wool'] };
+  const ledger = (inn, out) => ({ spatialLedgers: { tradeFlow: { s1: { in: inn, out } } } });
+
+  /** Every pool key the SHIPPED producer can hand this desk, swept exhaustively. */
+  function producerKeys() {
+    const keys = new Set();
+    for (const inn of FLOWS) {
+      for (const out of FLOWS) {
+        for (const economicState of [DEPENDENT, {}]) {
+          const key = tradeFlowPoolKey(flowDerivedDependency({
+            worldState: ledger(inn, out), economicState, settlementId: 's1',
+          }));
+          if (key) keys.add(key);
+        }
+      }
+    }
+    return keys;
+  }
+
+  it('produces only keys the corpus carries, over the whole swept flow space', () => {
+    const pools = DOSSIER_STATE_PROSE_ECONOMY['DS-ECO-3'].pools;
+    const stranger = [...producerKeys()].filter((key) => !pools[key]);
+    expect(stranger, 'the desk keyed a pool the corpus does not carry').toEqual([]);
+    expect(producerKeys().size, 'the sweep stopped producing keys at all').toBeGreaterThan(0);
+  });
+
+  it('⛔ FINDING: `SHORTAGE × not trade-dependent` is unreachable in every buildable world', () => {
+    // AN EXPOSURE, NOT A JUDGMENT. `throughputBand`'s non-dependent branch has no shortage
+    // arm — `throughput > ABUNDANT_CEIL ? SURPLUS : ADEQUATE` — so the corpus authored
+    // three variants for a state the engine cannot reach. The corpus is not wrong and
+    // neither is the producer; they disagree about whether empty roads on a self-
+    // sufficient town are ADEQUATE. The one act that lights it is a shortage arm on that
+    // branch, which moves a shipped band distribution and is a tuning call.
+    //
+    // This arm therefore MEASURES the producer's shape and reds the day it changes, so the
+    // finding is read rather than rediscovered. It does not assert that the shape is right.
+    let withDependency = 0;
+    let withoutDependency = 0;
+    for (const inn of FLOWS) {
+      for (const out of FLOWS) {
+        if (throughputBand(inn, out, true) === 'shortage') withDependency += 1;
+        if (throughputBand(inn, out, false) === 'shortage') withoutDependency += 1;
+      }
+    }
+    expect(withDependency, 'the shortage band stopped being reachable at all — this arm has'
+      + ' gone vacuous and the count below proves nothing').toBeGreaterThan(0);
+    expect(
+      withoutDependency,
+      'THE PRODUCER CHANGED: a non-trade-dependent town can now reach a shortage band, so'
+      + ' DS-ECO-3\'s fifth pool is live. Delete this arm, extend the reach test below to'
+      + ' five pools, and strike the finding from economyStateProse.js\'s docblock.',
+    ).toBe(0);
+    expect(producerKeys().has('SHORTAGE × not trade-dependent')).toBe(false);
+  });
+
+  it('lights the other FOUR pools, each from a measured ledger reading', () => {
+    const lit = new Set();
+    for (const inn of FLOWS) {
+      for (const out of FLOWS) {
+        for (const economicState of [DEPENDENT, {}]) {
+          const drift = flowDerivedDependency({ worldState: ledger(inn, out), economicState, settlementId: 's1' });
+          const rung = economyStateProse(town({}), { flowDrift: drift }, { seed: `flow-${inn}-${out}` }).tradeFlow;
+          if (rung?.sentence) lit.add(rung.provenance.poolKey);
+        }
+      }
+    }
+    expect([...lit].sort()).toEqual([
+      'ADEQUATE',
+      'SHORTAGE × trade-dependent',
+      'SURPLUS × not trade-dependent',
+      'SURPLUS × trade-dependent',
+    ]);
+  });
+
+  it('says nothing at all where no flow was measured', () => {
+    // A DRIFT IS A MEASUREMENT OR IT IS NOTHING. Dormant, isolated, decayed below the
+    // kernel epsilon, or no ledger at all — every one of them is silence, never a fall
+    // into ADEQUATE, and LiveTradeFlowSection does not render there either.
+    for (const worldState of [null, {}, { spatialLedgers: {} }, ledger(0, 0), ledger(0.01, 0.01)]) {
+      const drift = flowDerivedDependency({ worldState, economicState: DEPENDENT, settlementId: 's1' });
+      expect(tradeFlowPoolKey(drift), JSON.stringify(worldState)).toBeNull();
+    }
+    // anchored: a throughput just above the epsilon on the same ledger shape DOES key a
+    // pool, so the nulls above are the epsilon and the missing ledger, not a dead selector
+    expect(tradeFlowPoolKey(flowDerivedDependency({ worldState: ledger(0.2, 0.2), economicState: DEPENDENT, settlementId: 's1' })))
+      .toBe('SHORTAGE × trade-dependent');
+    // And an unrecognised band is a refusal, not a fall into the middle rung.
+    expect(tradeFlowPoolKey({ band: 'choked', tradeDependent: true })).toBeNull();
+    expect(tradeFlowPoolKey({ band: 'Trade choked', tradeDependent: true })).toBeNull();
+  });
+
+  it('holds the three `canonical` variants against the live headlines they copy', () => {
+    // The second-home pin again, and the one that shows the class is not hypothetical:
+    // these three have ALREADY drifted. The corpus spells a period where BAND_COPY has an
+    // em dash, so the pin is on the drifted-apart PREFIX rather than on equality, and it
+    // names the cure — bind the row through the generator's LIVE_STRING_BINDINGS, the way
+    // DS-ECO-7's pair is bound.
+    const canonical = Object.values(DOSSIER_STATE_PROSE_ECONOMY['DS-ECO-3'].pools).flat()
+      .filter((v) => v.angle === 'canonical');
+    expect(canonical, 'the canonical rows this pin is about left the corpus').toHaveLength(3);
+    const live = readFileSync(resolve(import.meta.dirname, '../../src/domain/display/tradeFlowEconomics.js'), 'utf8');
+    for (const variant of canonical) {
+      const head = variant.text.split(/[.—]/)[0].trim();
+      expect(head.length, `${variant.text} has no comparable head`).toBeGreaterThan(12);
+      expect(live.includes(head), `tradeFlowEconomics.js no longer carries: ${head}`).toBe(true);
+    }
+    // The two homes are NOT byte-identical today, which is the drift this pin records.
+    const headlines = [...live.matchAll(/headline: '([^']+)'/g)].map((m) => m[1]);
+    expect(headlines, 'BAND_COPY no longer carries three headlines').toHaveLength(3);
+    // anchored: the loop above proved every canonical head appears in that same file, so
+    // this inequality is the measured punctuation drift and not two empty lists compared
+    expect(canonical.map((v) => v.text).sort()).not.toEqual(headlines.sort());
   });
 });

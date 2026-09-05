@@ -198,6 +198,9 @@ export const DOSSIER_MOUNTS = Object.freeze([
     mount: 'economics.shadowEconomy', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-6', rung: 'sentence',
   }),
   Object.freeze({
+    mount: 'economics.tradeFlow', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-3', rung: 'sentence',
+  }),
+  Object.freeze({
     mount: 'power.legitimacyBanner', tab: 'power', desk: 'power', blockId: 'DS-POW-1', rung: 'sentence',
   }),
   Object.freeze({
@@ -287,7 +290,7 @@ export const DOSSIER_MOUNTS = Object.freeze([
 export const UNMOUNTED_BLOCKS = Object.freeze([
   'DS-DEF-6', 'DS-DEF-7',
   'DS-DEF-9', 'DS-DEF-10',
-  'DS-ECO-3', 'DS-ECO-4',
+  'DS-ECO-4',
   'DS-ECO-5', 'DS-SUP-1', 'DS-ECO-7',
   'DS-SUP-2', 'DS-ECO-10',
   'DS-ECO-11', 'DS-SUP-3',

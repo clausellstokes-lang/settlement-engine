@@ -35,7 +35,7 @@ const FLOW_BAND_COLOR = { shortage: '#8b1a1a', adequate: '#a0762a', surplus: '#1
  * surfaced as a qualitative dependency drift. Renders ONLY when `drift` is present
  * (marker + commodity-flow on + measured flow); absent ⇒ nothing ⇒ byte-identical tab.
  */
-function LiveTradeFlowSection({ drift }) {
+function LiveTradeFlowSection({ drift, rung = null }) {
   const color = FLOW_BAND_COLOR[drift.band] || FLOW_BAND_COLOR.adequate;
   return (
     <Section title="Live Trade Flow" collapsible defaultOpen accent={color}>
@@ -44,7 +44,11 @@ function LiveTradeFlowSection({ drift }) {
           <span style={{fontSize:FS.md,fontWeight:800,color,textTransform:'none'}}>{drift.label}</span>
           <span style={{fontSize:FS.micro,fontWeight:700,color:MUTED,textTransform:'uppercase',letterSpacing:'0.05em',marginLeft:'auto'}}>measured now</span>
         </div>
-        <p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.55,margin:'0 0 8px'}}>{drift.headline}</p>
+        {/* DS-ECO-3 at economics.tradeFlow. Three of this block's variants are copies of
+            BAND_COPY's own headlines and have already drifted from them (period vs em dash),
+            so the corpus line REPLACES the headline rather than standing beside its twin.
+            Undrawn (public dossier, or the corpus silent) ⇒ the headline stands. */}
+        <p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.55,margin:'0 0 8px'}}>{drawnAtMount('economics.tradeFlow',rung)?.sentence||drift.headline}</p>
         <div style={{display:'flex',gap:14,flexWrap:'wrap',fontSize:FS.xs,color:swatch.inkMag3}}>
           <span><span style={{color:MUTED,marginRight:4}}>Inbound:</span><strong style={{textTransform:'capitalize',color:swatch.inkMag}}>{drift.inbound}</strong></span>
           <span><span style={{color:MUTED,marginRight:4}}>Outbound:</span><strong style={{textTransform:'capitalize',color:swatch.inkMag}}>{drift.outbound}</strong></span>
@@ -323,7 +327,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
   // about who is reading would be the real defect — and `publicDossier` still nulls
   // everything below before the audience ever matters.
   const audience = playerView ? 'player' : 'dm';
-  const deskProse = publicDossier ? Object.freeze({ prosperityHeader: null, prosperityRung: null, foodTile: null, granaryTile: null, foodSecurityRung: null, incomeMix: null, criminalLine: null, tradeProfile: null, shadowEconomy: null }) : economyStateProse(s, { foodBalance: fbal, granaryOutlook: granary }, { seed: String(s?._seed ?? s?.id ?? ''), audience });
+  const deskProse = publicDossier ? Object.freeze({ prosperityHeader: null, prosperityRung: null, foodTile: null, granaryTile: null, foodSecurityRung: null, incomeMix: null, criminalLine: null, tradeProfile: null, shadowEconomy: null, tradeFlow: null }) : economyStateProse(s, { foodBalance: fbal, granaryOutlook: granary, flowDrift }, { seed: String(s?._seed ?? s?.id ?? ''), audience });
   const drawnFoodLine = drawnAtMount('economics.foodSecurity', deskProse.foodSecurityRung);
 
   return (
@@ -449,7 +453,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
       </Section>}
 
       {/* ── LIVE TRADE FLOW (M6d — measured throughput drift, additive) ────── */}
-      {flowDrift && <LiveTradeFlowSection drift={flowDrift} />}
+      {flowDrift && <LiveTradeFlowSection drift={flowDrift} rung={deskProse.tradeFlow} />}
 
       {/* ── MARKET PRICES (Wave 7 — movement vs the usual, §776, band-derived) ── */}
       {marketPrices?.present && <MarketPricesSection prices={marketPrices} />}
