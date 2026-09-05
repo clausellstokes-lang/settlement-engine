@@ -18,11 +18,15 @@ import { describe, expect, it } from 'vitest';
 import {
   ACCESS_NOUN,
   SLOT_FILL_SHAPES,
+  criminalIncomePoolKey,
   economyStateProse,
   foodSecurityPoolKey,
   foodTilePoolKey,
   granaryPoolKey,
+  incomeMixPoolKey,
+  leadingGoodNoun,
   prosperityHeaderPoolKey,
+  tradeProfilePoolKey,
 } from '../../src/domain/display/stateProse/economyStateProse.js';
 import { deriveEconomicComplexity } from '../../src/generators/economy/prosperity.js';
 import {
@@ -413,5 +417,206 @@ describe('THE PROMISE, at the desk grain', () => {
     const before = JSON.stringify(subject);
     economyStateProse(subject, {}, { seed: 's', audience: AUDIENCE_DM });
     expect(JSON.stringify(subject)).toBe(before);
+  });
+});
+
+// ── DS-ECO-12: THE COMMERCIAL PROFILE ────────────────────────────────────────────────
+// Three lenses at one position. The pins below are about the two failures a reader can
+// never report: a lens that draws a sentence off an ABSENT field, and a pool that is
+// mounted and unreachable. Both are measured here rather than reasoned about.
+
+/** @param {Array<[number, boolean?]>} rows */
+const income = (rows) => rows.map(([percentage, isCriminal]) => ({
+  source: isCriminal ? 'Black Market Revenue' : 'Wool Trade', percentage, isCriminal: !!isCriminal,
+}));
+
+/** A settlement whose commercial record is fully present, so a null is never ambiguous. */
+const trader = (over = {}) => town({
+  economicState: {
+    incomeSources: income([[60], [40]]),
+    primaryExports: ['wool'], primaryImports: ['iron'], localProduction: [], isEntrepot: false,
+    ...over,
+  },
+});
+
+/** Every commercial state the three lenses partition, named by the pool each must reach. */
+const COMMERCIAL_STATES = [
+  ['INCOME MIX: one source carries the town', { incomeSources: income([[70], [30]]) }],
+  ['INCOME MIX: two or three sources between them', { incomeSources: income([[30], [25], [25], [20]]) }],
+  ['INCOME MIX: a broad spread, no leader', { incomeSources: income([[10], [10], [10], [10], [10], [10], [10], [10], [10], [10]]) }],
+  ['INCOME MIX: a criminal line is present', { incomeSources: income([[60], [20, true]]) }],
+  ['INCOME MIX: the criminal line leads', { incomeSources: income([[25], [45, true]]) }],
+  ['TRADE PROFILE: exports and imports both present', {}],
+  ['TRADE PROFILE: no significant exports', { primaryExports: [], primaryImports: [] }],
+  ['TRADE PROFILE: imports only, nothing outward', { primaryExports: [] }],
+  ['TRADE PROFILE: local production listed', { primaryImports: [], localProduction: ['cloth'] }],
+  ['TRADE PROFILE: isEntrepot, transit goods marked among the exports',
+    { isEntrepot: true, primaryExports: ['salt (transit)', 'wool'] }],
+];
+
+describe('DS-ECO-12 — every pool is reached by a MEASURED value', () => {
+  it('lights all ten pools, each with a filled sentence and no unfilled slot left behind', () => {
+    // SURJECTIVITY, the arm that separates a mounted block from a lit one. A block whose
+    // selector can only ever produce three of ten keys is mounted and still dark in seven
+    // states, and nothing else in this file would notice.
+    const lit = new Map();
+    for (const [expected, over] of COMMERCIAL_STATES) {
+      const rungs = economyStateProse(trader(over), {}, { seed: `eco12-${expected}`, audience: AUDIENCE_DM });
+      for (const key of ['incomeMix', 'criminalLine', 'tradeProfile']) {
+        const rung = rungs[key];
+        if (rung?.sentence) lit.set(rung.provenance.poolKey, rung.sentence);
+      }
+      const drew = [rungs.incomeMix, rungs.criminalLine, rungs.tradeProfile]
+        .filter(Boolean).map((r) => r.provenance.poolKey);
+      expect(drew, `state "${expected}" did not draw its own pool`).toContain(expected);
+    }
+    expect([...lit.keys()].sort(), 'a pool of DS-ECO-12 is mounted and unreachable')
+      .toEqual(Object.keys(DOSSIER_STATE_PROSE_ECONOMY['DS-ECO-12'].pools).sort());
+    // A drawn sentence is a FILLED sentence: an unsubstituted slot would render `{good}`
+    // to a reader, and `fillSlots` is supposed to have refused the variant instead.
+    // anchored: the equality above pins `lit` to all ten corpus pool keys, so this loop has a measured length of ten and cannot go vacuous by the map emptying
+    for (const [key, sentence] of lit) expect(sentence, key).not.toMatch(/\{[a-z_]+\}/);
+  });
+
+  it('produces only keys the corpus carries, over the whole producer cross', () => {
+    const pools = DOSSIER_STATE_PROSE_ECONOMY['DS-ECO-12'].pools;
+    const missing = [];
+    for (let leader = 0; leader <= 100; leader += 1) {
+      for (const criminal of [false, true]) {
+        const rows = income(criminal ? [[leader, true], [100 - leader]] : [[leader], [100 - leader]]);
+        for (const key of [incomeMixPoolKey(rows), criminalIncomePoolKey(rows)]) {
+          if (key && !pools[key]) missing.push(`leader ${leader}/criminal ${criminal} → ${key}`);
+        }
+      }
+    }
+    for (const exports_ of [[], ['wool'], ['salt (transit)']]) {
+      for (const imports_ of [[], ['iron']]) {
+        for (const local of [[], ['cloth']]) {
+          for (const isEntrepot of [false, true]) {
+            const key = tradeProfilePoolKey({
+              primaryExports: exports_, primaryImports: imports_, localProduction: local, isEntrepot,
+            });
+            if (key && !pools[key]) missing.push(`${exports_}/${imports_}/${local}/${isEntrepot} → ${key}`);
+          }
+        }
+      }
+    }
+    expect(missing).toEqual([]);
+  });
+
+  it('is silent where the record is ABSENT, and speaks where it is EMPTY', () => {
+    // THE GENERAL TEST, at this desk's sharpest edge. An empty export roster is a
+    // measurement — the town sends nothing out. A MISSING roster is not a measurement of
+    // anything, and a sentence drawn off it would be a fail-soft default wearing a
+    // reading's clothes. The two must not produce the same page.
+    const measuredEmpty = economyStateProse(
+      trader({ primaryExports: [], primaryImports: [], localProduction: [] }),
+      {}, { seed: 'eco12-empty', audience: AUDIENCE_DM },
+    );
+    expect(measuredEmpty.tradeProfile?.provenance?.poolKey).toBe('TRADE PROFILE: no significant exports');
+    const noRecord = economyStateProse(
+      town({ economicState: { incomeSources: income([[60], [40]]) } }),
+      {}, { seed: 'eco12-empty', audience: AUDIENCE_DM },
+    );
+    // anchored: the same seed and desk one line above drew a real pool key from the EMPTY
+    // rosters, so this null is the missing record being refused, not the desk being dead.
+    expect(noRecord.tradeProfile).toBeNull();
+    // And the income lens holds the same line: no roster is silence, not "a broad spread".
+    expect(economyStateProse(town({}), {}, { seed: 'eco12-none' }).incomeMix).toBeNull();
+    expect(incomeMixPoolKey([])).toBeNull();
+    expect(incomeMixPoolKey(undefined)).toBeNull();
+  });
+
+  it('declares its one hole rather than routing it into a neighbouring pool', () => {
+    // Exports present, imports absent, nothing produced locally. The corpus authored five
+    // trade states and this is the sixth; "local production listed" would print "a good
+    // portion of what the town consumes is made inside its own walls" over a settlement
+    // with no recorded local production. Silence is the true statement.
+    expect(tradeProfilePoolKey({ primaryExports: ['wool'], primaryImports: [], localProduction: [] }))
+      .toBeNull();
+    // anchored: the SAME shape with one good added to localProduction does produce a key,
+    // so the null above is the hole and not a dead selector.
+    expect(tradeProfilePoolKey({ primaryExports: ['wool'], primaryImports: [], localProduction: ['cloth'] }))
+      .toBe('TRADE PROFILE: local production listed');
+  });
+
+  it('keeps the criminal lens off a player page and gives it to the DM', () => {
+    const state = { incomeSources: income([[25], [45, true]]) };
+    const dm = economyStateProse(trader(state), {}, { seed: 'eco12-crime', audience: AUDIENCE_DM });
+    const player = economyStateProse(trader(state), {}, { seed: 'eco12-crime', audience: 'player' });
+    expect(dm.criminalLine?.sentence, 'the DM must be able to read the covert lens').toBeTruthy();
+    // anchored: the DM read one line above proves the lens is live and correctly keyed;
+    // this null is the player projection truncating to silence, never to a hint.
+    expect(player.criminalLine).toBeNull();
+    // FAIL-CLOSED ON A WRONG CALLER, and on no caller at all — both read as the player's.
+    expect(economyStateProse(trader(state), {}, { seed: 'eco12-crime' }).criminalLine).toBeNull();
+    expect(economyStateProse(trader(state), {}, { seed: 'eco12-crime', audience: 'gm' }).criminalLine).toBeNull();
+    // The page over a town WITH an underworld and the page over one without must be
+    // byte-identical for a player: the lawful lenses are untouched by the covert one.
+    const clean = economyStateProse(trader({ incomeSources: income([[25], [45]]) }),
+      {}, { seed: 'eco12-crime', audience: 'player' });
+    expect(player.tradeProfile?.sentence).toBe(clean.tradeProfile?.sentence);
+  });
+
+  it('keys the criminal line on the RECORD flag, never on the generator label', () => {
+    // The label trap, one layer up. The generator spells this line five ways, so a route
+    // that read `source` would drop four of five without an error anywhere.
+    const LABELS = ['Criminal Syndicate Revenue', "Thieves' Guild Revenue",
+      'Smuggling Network Revenue', 'Shadow Economy (untaxed)', 'Black Market Revenue'];
+    for (const source of LABELS) {
+      expect(criminalIncomePoolKey([{ source, percentage: 45, isCriminal: true }, { source: 'Wool Trade', percentage: 55 }]),
+        source).toBe('INCOME MIX: a criminal line is present');
+    }
+    // The flag is the whole reading: the same LABELS with the flag off are lawful income.
+    for (const source of LABELS) {
+      expect(criminalIncomePoolKey([{ source, percentage: 45 }]), source).toBeNull();
+    }
+    // A tie is not a lead — the strict comparison, stated as a pin so a later `>=` reds.
+    expect(criminalIncomePoolKey(income([[50], [50, true]]))).toBe('INCOME MIX: a criminal line is present');
+    expect(criminalIncomePoolKey(income([[49], [51, true]]))).toBe('INCOME MIX: the criminal line leads');
+  });
+
+  it('drops the one variant whose {faction} has no producer, and keeps its pool alive', () => {
+    // The `counterforce` variant of the criminal pool names {faction}. The raw settlement
+    // roster carries no archetype (it is derived by deriveFactionProfile), so this desk
+    // supplies no fill and anchored liveness drops that variant. MEASURED, not assumed:
+    // the pool must keep its other two and go on speaking.
+    const pool = DOSSIER_STATE_PROSE_ECONOMY['DS-ECO-12'].pools['INCOME MIX: a criminal line is present'];
+    const all = pool.map((v) => v.text);
+    const drawn = new Set();
+    for (let i = 0; i < 40; i++) {
+      const rung = economyStateProse(trader({ incomeSources: income([[60], [20, true]]) }),
+        {}, { seed: `faction-${i}`, audience: AUDIENCE_DM }).criminalLine;
+      if (rung?.sentence) drawn.add(rung.sentence);
+    }
+    const withFaction = all.filter((t) => t.includes('{faction}'));
+    expect(withFaction, 'the corpus no longer carries the {faction} variant this pin is about')
+      .toHaveLength(1);
+    expectPresentThenAbsent(
+      all.map((t) => t.replace('{settlement}', 'Thornwall')),
+      [...drawn],
+      withFaction[0].replace('{settlement}', 'Thornwall'),
+      'no {faction} producer at this desk',
+    );
+    expect(drawn.size, 'the pool went dark instead of degrading').toBe(all.length - 1);
+  });
+
+  it('fills {good} with the town own export as a bare noun, and refuses the rest', () => {
+    expect(leadingGoodNoun(['wool', 'iron'])).toBe('wool');
+    // The transit good is NOT the town's own trade, and the seam says "sends {good} out".
+    expect(leadingGoodNoun(['salt (transit)', 'wool'])).toBe('wool');
+    // anchored: the two reads above prove the accessor finds a good in a populated list,
+    // so these are the bare-common refusal and the empty roster, not a dead accessor.
+    expect(leadingGoodNoun(['Wool'])).toBeUndefined();
+    expect(leadingGoodNoun(['iron_ore'])).toBeUndefined();
+    expect(leadingGoodNoun([])).toBeUndefined();
+    expect(leadingGoodNoun(null)).toBeUndefined();
+    // And the whole-desk consequence: a refused fill drops the one variant naming the
+    // slot rather than rendering `{good}` at a reader.
+    const bad = economyStateProse(trader({ primaryExports: ['Wool'] }),
+      {}, { seed: 'eco12-good', audience: AUDIENCE_DM });
+    // anchored: the line below asserts this same sentence is non-empty, so the negative is measured over a real drawn sentence and never over an absent one
+    expect(bad.tradeProfile?.sentence ?? '').not.toMatch(/\{good\}/);
+    expect(bad.tradeProfile?.sentence, 'the pool went dark instead of degrading').toBeTruthy();
   });
 });

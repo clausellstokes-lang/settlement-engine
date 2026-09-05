@@ -20,7 +20,7 @@ import {
 } from '../../../domain/content/customSupplyChainPresentation.js';
 import { tradeLabelOwnership } from '../../../domain/content/customTradeLabelOwnership.js';
 import MarketPricesSection from './MarketPricesSection.jsx';
-import EconomicsGlance from './EconomicsGlance.jsx'; // the tab's glance surface + its four mount positions
+import EconomicsGlance, { DeskLines } from './EconomicsGlance.jsx'; // the tab's glance surface + its mount positions
 import { economyStateProse } from '../../../domain/display/stateProse/economyStateProse.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
 import Button from '../../primitives/Button.jsx';
@@ -234,7 +234,7 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
   );
 }
 
-export function EconomicsTab({economicState, settlement, narrativeNote, saveId = null, publicDossier = false}) {
+export function EconomicsTab({economicState, settlement, narrativeNote, saveId = null, publicDossier = false, playerView = false}) {
   const s = settlement;
   const mobile = useIsMobile();
   // M6d FLOW-DERIVED ECONOMICS — thread worldState the RumorsTab way: read the owning
@@ -316,7 +316,14 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
   // a PAID-SURFACE carve-out, so the desk is NOT DRAWN there and every rung is null ⇒
   // drawnAtMount answers null at all five mounts ⇒ no corpus sentence renders anywhere.
   // Datum is untouched: situationDesc, the tiles and their sub-lines never read the desk.
-  const deskProse = publicDossier ? Object.freeze({ prosperityHeader: null, prosperityRung: null, foodTile: null, granaryTile: null, foodSecurityRung: null }) : economyStateProse(s, { foodBalance: fbal, granaryOutlook: granary }, { seed: String(s?._seed ?? s?.id ?? '') });
+  // THE AUDIENCE, the PowerTab term exactly (`playerView ? 'player' : 'dm'`): DS-ECO-12's
+  // criminal lens is `dm-only` on all five variants, so a desk called without one could
+  // never draw it and the block would ship mounted over a lens no world could reach. The
+  // default matches PowerTab's rather than inventing a second one — two tabs disagreeing
+  // about who is reading would be the real defect — and `publicDossier` still nulls
+  // everything below before the audience ever matters.
+  const audience = playerView ? 'player' : 'dm';
+  const deskProse = publicDossier ? Object.freeze({ prosperityHeader: null, prosperityRung: null, foodTile: null, granaryTile: null, foodSecurityRung: null, incomeMix: null, criminalLine: null, tradeProfile: null }) : economyStateProse(s, { foodBalance: fbal, granaryOutlook: granary }, { seed: String(s?._seed ?? s?.id ?? ''), audience });
   const drawnFoodLine = drawnAtMount('economics.foodSecurity', deskProse.foodSecurityRung);
 
   return (
@@ -331,6 +338,9 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
         granary={granary} granaryColor={granaryColor} treasury={treasury}
         headerRung={deskProse.prosperityHeader} economyRung={deskProse.prosperityRung}
         foodRung={deskProse.foodTile} seasonRung={deskProse.granaryTile} />
+
+      {/* ── THE COMMERCIAL PROFILE (DS-ECO-12: concentration, the criminal line, trade) ── */}
+      <DeskLines mount="economics.commercialProfile" rungs={[deskProse.incomeMix, deskProse.criminalLine, deskProse.tradeProfile]} />
 
       {/* ── INCOME SOURCES ──────────────────────────────────────────────── */}
       {eco.incomeSources?.length>0&&<Section title="Income Sources" collapsible defaultOpen>
