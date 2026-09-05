@@ -10,7 +10,7 @@ Updated 2026-09-05 by the Fable chair (after §897: product fd8b6df00, ledger c8
 | ~~CLAMP-W2~~ DONE → 3 cars b0cba0dca sealed `clamp-w2-2026-09-05` (3 migrated, 3 refused; census 69 vs 62; edge-shared re-mint owed at its landing) | briefs/brief-CLAMP-W2.md | 09-05 |
 | ~~DESK-WARFAITH~~ DONE → 7dba5508b sealed `desk-warfaith-2026-09-05` (6/9 mounted; 3 dark measured; the PUBLIC/SHARED pool is OWNER-gated §885.3) | | | | |
 | ~~PDFDRIFT~~ REFUSED with measurement → ruling WITHDRAWN (`rulings/RULING-PDFDRIFT-WITHDRAWN.md`); residue: an OWNER row (the paid-rights floor and the arms) + DOCKET item 5 (AUDIT-2.2 as machinery) | | | | |
-| L-PROBE-KIT | tooling | lanePROSE2 (read-only) | briefs/brief-L-PROBE-KIT.md | 09-05 |
+| ~~L-PROBE-KIT~~ DONE → `refs/preserve/lprobe-kit-2026-09-05` (the battery; 6/9 outputs executed; certification per preset is a STOP until DOCKET item 7) | | | | |
 | DESK-DEF2 | build | laneDEF2 @ 940d161ca | briefs/brief-DESK-DEF2.md | 09-05 |
 | ~~DESK-GEN2~~ DONE → 4 cars, a4ce9f80f sealed `desk-gen2-2026-09-05` (6/15 lit; 7 stopped with residue; DS-GEN-1 OWNER-signed; DS-GEN-10 unmountable) | | | | |
 | DESK-ECON2 | build | laneECON2 @ 940d161ca | briefs/brief-DESK-ECON2.md | 09-05 |
@@ -41,6 +41,8 @@ Updated 2026-09-05 by the Fable chair (after §897: product fd8b6df00, ledger c8
 
 15. **CLAMP-W3** — RULED + BRIEFED (`rulings/RULING-CLAMP-FINAL.md`, `briefs/brief-CLAMP-W3.md`): the ceiling car 62 → 69 with seven recorded reasons; dock at the tip after the wave-2 cars land; retires the clampPrimitiveBaseline census row.
 16. **DESK-9** — DISPATCHED (laneDESK9 @ 940d161ca).
+
+17. **SOAK-PRESET (DOCKET item 7)** — a `--preset` flag on `scripts/audit/whole-world-soak.mjs` (hardwired to `full_simulation`) so L-PROBE can certify per preset; prerequisite of L-PROBE output (b).
 
 ## RESIDUE FOR THE DESK LANDING ROW (from the desk lanes' receipts)
 - OWNER rows to open: DS-GEN-1 (tension `severity` is an ARRAY on 48/48 — a property of the tension TYPE; the cure is generation-side ⇒ owner-signed) · DS-FTH-2's PUBLIC/SHARED DOSSIER pool (authored for the reader §885.3 forbids).

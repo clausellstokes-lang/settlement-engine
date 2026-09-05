@@ -74,6 +74,16 @@ pins `unit` at that address as a KNOWN passthrough, so a future rename cannot mi
 validated FLOOR and NO CEILING (the `storageCapacityMonths` sibling from wave 1) — add the ceiling pin the producer's own range implies,
 or STOP with the range if no producer states one. Zero behaviour change.
 
+
+## ITEM 7 — the whole-world soak is hardwired to `full_simulation`; L-PROBE cannot certify per preset (L-PROBE-KIT's STOP)
+`scripts/audit/whole-world-soak.mjs:299` runs `full_simulation`; `realm-scale-certification.mjs` spawns it; the only seam, `--rules-json`,
+LEAKS every `full_simulation` opt-in key the target preset does not name (measured: quiet_local 33, realistic_regional 33,
+narrative_campaign 33, static_campaign 34, living_realm 15, dramatic_campaign 14). RULED: add `--preset <id>` that composes the
+rules from `SIMULATION_RULE_PRESETS[id]` through `composeSoakRules({ preset, seasons, overlay })` (the existing seam), so a receipt
+names the preset it certified; refuse `--rules-json` + `--preset` together. Prove: for each of the seven presets the composed rules
+equal the preset table (zero leaked keys, measured the way the kit measured them); the default (no flag) stays `full_simulation`
+byte-identical (no receipt moves). Scripts only; no product bytes; one car.
+
 ## PROOF (per item)
 The file's own run (skipped, reason printed) · `npx vitest run tests/security/` · `npx vitest run tests/lint/` WHOLE ·
 `node scripts/check-test-ratchet.mjs` in read-only form if it has one (no `--update`) · eslint. Quiet-window law + mutex.
