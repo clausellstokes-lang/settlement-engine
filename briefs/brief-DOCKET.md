@@ -23,6 +23,19 @@ parked-shape census does not count as PARKED (check `check-test-ratchet.mjs`'s p
 chose and why); if every honest shape counts as parked, STOP and report — the known-failure census has seven free slots
 but a parked file is a census row, and that is the chair's call.
 
+
+## ITEM 2 — `generatedAt` churn: an edge-shared rebuild on an UNCHANGED tree is not byte-identical
+The ledger records (§88x, the edge-bundle window `3aa9f1a66`) that the four sibling metas of `build:edge-shared` move
+ONLY `generatedAt` on every re-mint, so a rebuild on an unchanged tree dirties the tree and `edgeSharedBundleReproducibility`
+reds if the mint is taken on a dirty tree (CHARSET R6). Re-derive: run the edge-shared build twice on a clean dock (the
+ritual: materialise ONLY `immer` + `seedrandom`, build, then RESTORE the symlinks — never leave node_modules materialised)
+and diff the outputs. RULED (Fable 5.1): the honest shape is a DETERMINISTIC meta — derive the stamp from the content
+hash of the inputs (or omit the wall-clock field where nothing reads it; grep every reader of `generatedAt` first and
+name them), so that identical inputs produce identical bytes and the reproducibility test becomes a real pin.
+⛔ If any reader depends on `generatedAt` being a wall-clock time (a freshness check), that is a FINDING — report the
+reader and STOP; do not silently change what it reads. Prove: two consecutive builds byte-identical; the
+reproducibility test green; `validate:edge` verbatim; the byte budget (`sizeBaseline`) unmoved.
+
 ## PROOF (per item)
 The file's own run (skipped, reason printed) · `npx vitest run tests/security/` · `npx vitest run tests/lint/` WHOLE ·
 `node scripts/check-test-ratchet.mjs` in read-only form if it has one (no `--update`) · eslint. Quiet-window law + mutex.

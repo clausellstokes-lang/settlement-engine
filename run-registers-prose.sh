@@ -1,0 +1,19 @@
+#!/bin/sh
+# run-registers-prose.sh <dock> — the CHAIR's register acts for the PROSE landing, at the COMPOSED tip, in order,
+# each under the quiet-window law and the gate mutex. Predictions are written by the chair BEFORE running (E4).
+# ⚠ Fill __PREDICTIONS__ from the PROSE-REBASE receipt first; the script refuses to run with the placeholder in place.
+D=$1; [ -d "$D" ] || { echo "usage: <dock>"; exit 9; }
+grep -q '__PREDICTIONS__' "$0" && { echo "REFUSED: predictions not written (E4) — edit this script first"; exit 8; }
+cd "$D" || exit 9
+[ -z "$(git status --porcelain -uall)" ] || { echo "REFUSED: dock dirty"; exit 8; }
+quiet() { STREAK=0; WAITED=0; while [ $STREAK -lt 3 ]; do L=$(uptime | sed 's/.*averages: //' | awk '{print $1}'); V=$(ps -ax -o command | grep -c '[v]itest/dist/workers'); OK=$(awk -v l="$L" 'BEGIN{print (l<4.0)?1:0}'); if [ "$OK" = "1" ] && [ "$V" -eq 0 ]; then STREAK=$((STREAK+1)); else STREAK=0; fi; echo "  probe: load=$L workers=$V streak=$STREAK"; [ $STREAK -lt 3 ] && sleep 60 && WAITED=$((WAITED+60)); [ $WAITED -gt 3600 ] && { echo "GAVE UP"; exit 8; }; done; echo "QUIET CONFIRMED after ${WAITED}s"; }
+echo "PREDICTIONS: __PREDICTIONS__"
+echo "REGISTER_HEAD=$(git rev-parse HEAD)"
+# 1. voice magnitudes — a FALL is expected (shrink-only); the instrument banks it
+quiet; sh scripts/gate-mutex.sh --run -- env UPDATE_VOICE_BASELINE=1 npx vitest run tests/copy/voiceMechanics.test.js tests/copy/proseLeak.test.js > "$D/../registers-prose-voice.log" 2>&1; E1=$?; echo "VOICE_EXIT=$E1 changed=$(git status --porcelain -uall | wc -l | tr -d ' ')"; git status --porcelain -uall | head -4
+# 2. writer-reach — plain --write, NEVER --genesis
+node scripts/check-writer-reach.mjs --write > "$D/../registers-prose-wr.log" 2>&1; E2=$?; echo "WRITER_REACH_EXIT=$E2"; tail -3 "$D/../registers-prose-wr.log" | cut -c1-140
+# 3. the census totals — the ratchet runner stamped for this landing does this (run-ratchet-<N>.sh); not repeated here
+echo "REGISTER_PORCELAIN=[$(git status --porcelain -uall | wc -l | tr -d ' ')]"; git status --porcelain -uall
+echo "NEXT: review each changed register against the PREDICTIONS line; commit the register car(s) as the LAST cars (Seat: Fable 5.1 — validated); then run-ratchet-<N>.sh, then run-gate-<N>.sh"
+exit 0
