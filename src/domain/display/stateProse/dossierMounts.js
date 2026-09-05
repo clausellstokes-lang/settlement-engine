@@ -259,6 +259,8 @@ export const DOSSIER_MOUNTS = Object.freeze([
   }),
   Object.freeze({
     mount: 'overview.institutions', tab: 'overview', desk: 'general', blockId: 'DS-GEN-17', rung: 'sentence',
+  }),
+  Object.freeze({
     mount: 'defense.armedForces', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-5', rung: 'sentence',
   }),
   Object.freeze({
