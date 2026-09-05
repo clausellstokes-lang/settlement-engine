@@ -155,8 +155,14 @@ const SEVERITY_MAX = 1;
 // aiCharter.js renders in prose. The test pins each one against the charter's rendered line,
 // so the two src-side statements can never drift apart silently.
 const CONFIDENCE_LABELS = ['required', 'inferred', 'optional', 'uncertain'];
+// The four shape reasons, then the six the CHARSET wall speaks. One vocabulary:
+// the clerk can name what the wall refused, so the repair loop acts on a typed
+// fact rather than guessing from prose. Mirrored in aiCharter.js's rendered line
+// and in customContentCore.ts, pinned EQUAL in customContentCompile.test.js.
 const CONTENT_UNSUPPORTED_REASONS = [
   'unregistered_bucket', 'unregistered_field', 'invalid_value', 'missing_required_field',
+  'uncovered_codepoint', 'control_character', 'bidi_override', 'invisible_format',
+  'malformed_encoding', 'length',
 ];
 const INTERPRET_UNSUPPORTED_REASONS = ['no_primitive', 'unregistered_type', 'wrong_family'];
 const AUTONOMY_UNSUPPORTED_REASONS = [

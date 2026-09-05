@@ -44,6 +44,9 @@ import {
   isRegisteredBucket,
 } from '../../src/domain/content/contentVocabulary.js';
 import {
+  CHARSET_REJECTION_CODES,
+} from '../../src/domain/content/customContentCharset.js';
+import {
   CONTENT_REVIEW_ACTIONS,
   mechanicalMappingRate,
   reviewContentDraft,
@@ -238,7 +241,16 @@ describe('category-aware effect and activation truth', () => {
       'unregistered_field',
       'invalid_value',
       'missing_required_field',
+      'uncovered_codepoint',
+      'control_character',
+      'bidi_override',
+      'invisible_format',
+      'malformed_encoding',
+      'length',
     ]);
+    // ONE VOCABULARY. The wall's own closed list is the tail of the compiler's,
+    // in order, so a code minted on one side cannot go unnamed on the other.
+    expect(CONTENT_UNSUPPORTED_REASONS.slice(4)).toEqual([...CHARSET_REJECTION_CODES]);
   });
 });
 
