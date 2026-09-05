@@ -872,7 +872,14 @@ describe('EP-0 · the closure record, re-run rather than transcribed', () => {
     // lands with the stage that supplies the seed. The caller is DARK at this commit (zero importers
     // under src/, its only driver being tests/domain/envoyChanceMeeting.test.js), so the arrival is a
     // source fact and not yet a behaviour — the W-OPS O1 disposition verbatim, one family over.
-    expect(callers).toHaveLength(17);
+    // ⭐ RE-RECORDED 2026-09-05 BY ENCOUNTERS ENC-4 (the §899 composed landing, Fable chair): 17 -> 18, a DECLARED
+    // arrival. `src/domain/worldPulse/envoyChanceMeetingNews.js` is the chance meeting's Herald writer (ROAD B); it
+    // keys its variant pick on the CURED root for the reason the leaf beneath it did — a raw `fnv % n` would alias
+    // pool variants onto a parity class of meeting keys. It composes no root and reads no world: the seed arrives
+    // with the receipt the stage hands it. The caller is DARK at this commit (`chanceEncountersEnabled` is off in
+    // every preset), so the arrival is a source fact and not yet a behaviour. MEASURED code-only over the live
+    // tree at the composed tip: 18 callers; the mention population stays strictly larger.
+    expect(callers).toHaveLength(18);
     // ⭐ AND THE TWO POPULATIONS NOW DIFFER IN KIND RATHER THAN BY LUCK. `mentions` stays a
     // RAW scan deliberately — it is the mention population, and the contrast is the claim.
     const mentions = ALL_FILES.filter((f) => read(f).includes('hash01'));
