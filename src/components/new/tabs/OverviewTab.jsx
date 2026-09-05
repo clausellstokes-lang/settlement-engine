@@ -120,6 +120,7 @@ const STRESSOR_MOUNT = 'overview.stressorLifecycle';
  * desk: every one of them is a field this component already holds for the section it draws.
  */
 const CONFLICTS_MOUNT = 'overview.conflicts';
+const WARNINGS_MOUNT = 'overview.warnings';
 const SITUATION_MOUNT = 'overview.situation';
 const ORIGIN_MOUNT = 'overview.origin';
 const HEALTH_MOUNT = 'overview.systemsHealth';
@@ -223,6 +224,10 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
       isEntrepot: eco.isEntrepot,
       inst: eco.compound?.inst,
       conflicts: r.conflicts,
+      structuralViolations: r.structuralViolations,
+      structuralSuggestions: r.structuralSuggestions,
+      coherenceNotes: r.coherenceNotes,
+      govFaction: (_ps.factions || []).find((f) => f.isGoverning)?.faction,
       tier: r.tier,
       primaryStress: resolvePrimaryStress(stresses.map((v) => v.type).filter(Boolean)),
       // The food arithmetic DS-GEN-6's demoted `deficit` dimension is derived from. It
@@ -238,6 +243,8 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
   // for a conflict it cannot key on, so the pairing cannot slip.
   const conflictLines = generalProse.overview.conflicts
     .map((rung) => drawnAtMount(CONFLICTS_MOUNT, rung)?.sentence ?? null);
+  const warningLines = generalProse.overview.warnings
+    .map((rung) => drawnAtMount(WARNINGS_MOUNT, rung)?.sentence).filter(Boolean);
   const originLines = generalProse.overview.origin
     .map((rung) => drawnAtMount(ORIGIN_MOUNT, rung)?.sentence).filter(Boolean);
   const siteLines = [
@@ -577,6 +584,17 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
             <span style={{fontSize: FS['12.5'],color:swatch.inkMag2,lineHeight:1.5}}>{note.note||Ti(note)}</span>
           </div>
         ))}
+        {/* ── DS-GEN-7, the record disagreeing with itself, in the town's voice ──
+            One position, several pools: the violation list, the suggestion list,
+            and one line per coherence note. The rows above and below keep their
+            own words; this bands what having them MEANS. */}
+        {warningLines.length>0&&(
+          <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'3px solid #6b5340',padding:'10px 14px',marginBottom:8}}>
+            {warningLines.map((line,i)=>(
+              <p key={i} style={{fontSize:i===0?FS.md:FS.sm,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.6,margin:i===0?0:'6px 0 0',fontStyle:'italic'}}>{line}</p>
+            ))}
+          </div>
+        )}
         {r.structuralSuggestions?.length>0&&<div style={{background:swatch['#F4F6FD'],border:'1px solid #c0cce8',borderLeft:'3px solid #2a3a7a',padding:'10px 14px'}}>
           <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.info,marginBottom:4}}>Suggestions · First Survey</div>
           {/* The suggestion reads as two sentences: the reason (period-normalized —

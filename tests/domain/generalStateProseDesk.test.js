@@ -32,6 +32,7 @@ import {
   GENERAL_STATE_PROSE_SILENT,
   SLOT_FILL_SHAPES,
   SLOT_FILL_TABLES,
+  coherencePoolKey,
   conflictIntensityPoolKey,
   foodDeficitDimension,
   foodSecurityPoolKey,
@@ -45,6 +46,8 @@ import {
   readinessPoolKey,
   safetyPoolKey,
   situationPoolKey,
+  structuralSuggestionsPoolKey,
+  structuralViolationsPoolKey,
   systemsHealthScorePoolKey,
   viabilityPoolKey,
 } from '../../src/domain/display/stateProse/generalStateProse.js';
@@ -77,7 +80,7 @@ const mergedShapes = () => mergeSlotShapes([
 /** Every block this desk lights, and the pool counts the shipped leaf carries. */
 const BLOCK_POOLS = Object.freeze({
   'DS-GEN-2': 3, 'DS-GEN-3': 42, 'DS-GEN-5': 5, 'DS-GEN-6': 9, 'DS-GEN-12': 5, 'DS-GEN-13': 4,
-  'DS-GEN-17': 5,
+  'DS-GEN-7': 8, 'DS-GEN-17': 5,
 });
 
 /**
@@ -124,6 +127,7 @@ function draw(readings) {
   const prose = generalStateProse(TOWN, readings, { seed: 'aliveness', audience: 'dm' });
   return {
     conflicts: prose.overview.conflicts.map((rung) => rung?.sentence ?? null),
+    warnings: prose.overview.warnings.map((rung) => rung.sentence).filter(Boolean),
     situation: prose.overview.situation?.sentence ?? null,
     origin: prose.overview.origin.map((rung) => rung.sentence).filter(Boolean),
     health: prose.overview.systemsHealth.map((rung) => rung.sentence).filter(Boolean),
@@ -199,7 +203,7 @@ describe('the general desk — guard the guard', () => {
     // literal fill table.
     const shapes = mergedShapes();
     expect(Object.keys(SLOT_FILL_SHAPES).sort())
-      .toEqual(['faction', 'faction2', 'issue', 'settlement', 'stakes']);
+      .toEqual(['faction', 'faction2', 'govFaction', 'issue', 'settlement', 'stakes']);
     for (const [slot, shape] of Object.entries(SLOT_FILL_SHAPES)) {
       expect(shape, `{${slot}} shape`).toBe(shapes.shapeOf(slot));
     }
@@ -458,6 +462,10 @@ describe('the general desk over the real generator', () => {
     isEntrepot: s.economicState?.isEntrepot,
     inst: s.economicState?.compound?.inst,
     conflicts: s.conflicts,
+    structuralViolations: s.structuralViolations,
+    structuralSuggestions: s.structuralSuggestions,
+    coherenceNotes: s.coherenceNotes,
+    govFaction: (s.powerStructure?.factions || []).find((f) => f.isGoverning)?.faction,
     tier: s.tier,
     primaryStress: resolvePrimaryStress(((Array.isArray(s.stress) ? s.stress : [s.stress]).filter(Boolean)).map((v) => v.type)),
     foodBalance: s.economicViability?.metrics?.foodBalance,
@@ -791,5 +799,86 @@ describe('⛔ DS-GEN-1 STAYS DARK — the severity dimension has no measured pro
     // rules on the collapse.
     expect(UNMOUNTED_BLOCKS).toContain('DS-GEN-1');
     expect(sentenceMountForBlock('DS-GEN-1')).toBeNull();
+  });
+});
+
+describe('DS-GEN-7 — the record disagreeing with itself, and five pools the producer cannot reach', () => {
+  const NOTE = (type, tab) => ({ type, tab, severity: 'notable', note: 'x' });
+
+  it('ALL EIGHT POOLS FIRE, and the coherence key is the type-and-tab PAIR', () => {
+    const pairs = [
+      ['power_economic', 'economics'], ['power_economic', 'power'], ['power_economic', 'overview'],
+      ['stress_economic', 'economics'], ['power_stress', 'power'], ['historical_economic', 'history'],
+    ];
+    const reached = new Set(pairs.map(([t, tab]) => coherencePoolKey(NOTE(t, tab))));
+    expect([...reached].filter((k) => k === null), 'a coherence pair routed nowhere').toEqual([]);
+    expect(reached.size, 'two pairs collapsed onto one pool').toBe(6);
+    // THE PAIR IS THE KEY. Three notes share `type: 'power_economic'` and differ only by tab;
+    // a type-only route would print the criminal-transit-hub line over a church-run economy.
+    expect(new Set(pairs.filter(([t]) => t === 'power_economic').map(([, tab]) => tab)).size).toBe(3);
+    expect(new Set(pairs.filter(([t]) => t === 'power_economic')
+      .map(([t, tab]) => coherencePoolKey(NOTE(t, tab)))).size).toBe(3);
+    // An unrecognised pair renders nothing rather than guessing which contradiction it meant.
+    expect(coherencePoolKey(NOTE('power_economic', 'history'))).toBeNull();
+    expect(coherencePoolKey(NOTE('nonesuch', 'overview'))).toBeNull();
+    expect(coherencePoolKey(null)).toBeNull();
+    // Every pool, including the two list pools, draws a real sentence.
+    for (const [t, tab] of pairs) {
+      const lines = draw({ coherenceNotes: [NOTE(t, tab)], govFaction: 'The Town Council' }).warnings;
+      expect(lines, `${t}|${tab}`).toHaveLength(1);
+      expectSentence(lines[0], `${t}|${tab}`);
+    }
+    expect(structuralViolationsPoolKey([{ reason: 'x' }])).toBe('structuralViolations[]');
+    expect(structuralSuggestionsPoolKey([{ reason: 'x' }])).toBe('structuralSuggestions[]');
+    expect(structuralViolationsPoolKey([])).toBeNull();
+    expect(structuralSuggestionsPoolKey([])).toBeNull();
+    expect(structuralViolationsPoolKey(undefined)).toBeNull();
+    const both = draw({ structuralViolations: [{ reason: 'x' }], structuralSuggestions: [{ reason: 'y' }] }).warnings;
+    expect(both).toHaveLength(2);
+    for (const line of both) expectSentence(line, 'list pool');
+    // The union of everything this desk can emit IS the block's pool set.
+    const all = new Set([
+      ...pairs.map(([t, tab]) => coherencePoolKey(NOTE(t, tab))),
+      structuralViolationsPoolKey([{}]), structuralSuggestionsPoolKey([{}]),
+    ]);
+    expect([...all].sort()).toEqual(poolsOf('DS-GEN-7').sort());
+  });
+
+  it('⛔ THE PRODUCER MEASUREMENT: two coherence notes are dead by threshold, one by name', () => {
+    // These are the numbers the docblock cites, re-derived here every run so neither the
+    // finding nor its cure can decay into a comment nobody re-checks.
+    const configs = [];
+    for (const t of ['village', 'town', 'city', 'metropolis']) {
+      for (const r of ['port', 'road', 'crossroads', 'river']) configs.push({ settType: t, culture: 'germanic', tradeRouteAccess: r });
+    }
+    const crimePowers = [];
+    let factions = 0; let events = 0; let boomNamed = 0; let collapseNamed = 0;
+    const eventNames = new Set();
+    for (const seed of ['a', 'b', 'c']) {
+      for (const config of configs) {
+        const s = generateSettlementPipeline(config, null, { seed, customContent: {} });
+        for (const f of (s.powerStructure?.factions || [])) {
+          factions += 1;
+          if (/thieve|criminal|underworld/i.test(f.faction || '')) crimePowers.push(f.power);
+        }
+        for (const e of (s.history?.historicalEvents || [])) {
+          events += 1;
+          eventNames.add(e.name);
+          if (/Boom|Trade Route Opened/.test(e.name || '')) boomNamed += 1;
+          if (/Collapse|Famine/.test(e.name || '')) collapseNamed += 1;
+        }
+      }
+    }
+    // NON-VACUITY FIRST: the sweep really generated worlds with crime factions and events.
+    expect(factions, 'no factions were generated').toBeGreaterThan(100);
+    expect(crimePowers.length, 'no crime-named faction was generated').toBeGreaterThan(10);
+    expect(events, 'no historical events were generated').toBeGreaterThan(300);
+    expect(eventNames.size, 'the event name space collapsed').toBeGreaterThan(10);
+    // ⛔ DEAD BY THRESHOLD. `genCoherence` needs `power > 20` and `power > 35`.
+    expect(Math.max(...crimePowers), 'a crime faction reached the transit-hub threshold').toBeLessThan(20);
+    // ⛔ DEAD BY NAME. The predicate reads an event name no writer writes, while the OTHER
+    // half of the same `&&` matches often — which is what makes it half-live and silent.
+    expect(boomNamed, 'an event named Boom / Trade Route Opened appeared').toBe(0);
+    expect(collapseNamed, 'the collapse half of the predicate also stopped matching').toBeGreaterThan(0);
   });
 });

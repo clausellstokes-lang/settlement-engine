@@ -88,6 +88,7 @@ const CORPUS = /** @type {import('./stateProseKernel.js').StateProseCorpus} */ (
  */
 export const SLOT_FILL_SHAPES = Object.freeze({
   settlement: 'proper',
+  govFaction: 'proper',
   faction: 'proper',
   faction2: 'proper',
   issue: 'phrase',
@@ -533,6 +534,89 @@ export function originTierPoolKey(tier) {
   return CORPUS['DS-GEN-6'].pools[key] ? key : null;
 }
 
+// ── DS-GEN-7 · Overview › Warnings and coherence notes ──────────────────────────────
+
+/**
+ * `${type}|${tab}` → DS-GEN-7's coherence pool. THE PAIR IS THE KEY AND THE TYPE ALONE IS
+ * NOT: `genCoherence` writes THREE distinct notes under `type: 'power_economic'` — the
+ * transit hub, the temple economy and the prosperous underworld — and they differ only by
+ * the `tab` each routes to. A type-only route would collapse three pools into one and print
+ * a sentence about a criminal transit hub over a note about a church-run economy.
+ * @type {Readonly<Record<string, string>>}
+ */
+const COHERENCE_POOL_OF = Object.freeze({
+  'power_economic|economics': 'power_economic: criminal faction in a transit hub',
+  'power_economic|power': 'power_economic: temple economy under a secular seat',
+  'power_economic|overview': 'power_economic: powerful criminal faction in a prosperous settlement',
+  'stress_economic|economics': 'stress_economic: siege against trade income',
+  'power_stress|power': 'power_stress: occupation against stated stability',
+  'historical_economic|history': 'historical_economic: the recovery narrative',
+});
+
+/**
+ * ⛔ FIVE OF THE SIX COHERENCE POOLS ARE ROUTED AND UNREACHED, AND THE CAUSE IS UPSTREAM.
+ *
+ * The routing above is total and correct. What is not correct is `genCoherence` itself, and
+ * the numbers below are measured over generated settlements rather than reasoned about:
+ *
+ *   • THE TWO CRIMINAL NOTES ARE DEAD BY THRESHOLD. They require a crime-named faction with
+ *     `power > 20` and `power > 35`. Across 291 factions on 48 settlements the generator
+ *     wrote 48 crime-named factions and their power took exactly three values — 5, 6 and 7.
+ *     The ceiling is a third of the lower threshold. Neither note can fire.
+ *   • THE RECOVERY NARRATIVE IS DEAD BY NAME. It requires an event whose `name` contains
+ *     `Boom` or `Trade Route Opened`. Across 708 generated historical events with 28
+ *     distinct names, ZERO carry either string — the two spellings exist in the tree only
+ *     inside `npcGenerator.js`'s related-event lookup, which never names an event on this
+ *     record. The `Collapse`/`Famine` half of the same predicate matches 17 times, so the
+ *     note is half-live and can never complete. This is a filter reading a key no writer
+ *     writes, one layer up from the pool.
+ *   • THE OCCUPATION NOTE never fired on 96 settlements carrying the `occupied` stress,
+ *     because it additionally requires the stability text NOT to mention occupation.
+ *   • THE TEMPLE-ECONOMY NOTE is the one of the five that is merely RARE rather than
+ *     unreachable: `prosperity.js` really does write "The church controls most economic
+ *     activity" into `situationDesc`, and none of the 384 sampled configs reached it.
+ *
+ * Only `stress_economic` fires in the wild — 79 instances in a 1,440-settlement sweep.
+ *
+ * ⇒ THE BLOCK IS STILL MOUNTED, and that is the right call rather than a compromise: its
+ * other two pools (`structuralViolations[]` and `structuralSuggestions[]`) are written at
+ * generation on ordinary settlements and are measured live, and the siege note is live. The
+ * five unreached pools are a FINDING about the producer, declared and pinned, not a defect
+ * in this desk — and every cure for them is a generation-side change to thresholds or to a
+ * name predicate, which moves same-seed output and is not a display lane's to take.
+ */
+
+/**
+ * DS-GEN-7's pool for ONE coherence note. An unknown `type`/`tab` pair renders nothing: a
+ * note this desk does not recognise is a producer change, and guessing which contradiction
+ * it meant is how a page states something false about a town.
+ * @param {{type?: unknown, tab?: unknown}|null|undefined} note @returns {string|null}
+ */
+export function coherencePoolKey(note) {
+  const key = COHERENCE_POOL_OF[`${text(note?.type)}|${text(note?.tab)}`];
+  return key && CORPUS['DS-GEN-7'].pools[key] ? key : null;
+}
+
+/**
+ * DS-GEN-7's pool for the structural-violation list AS A LIST. It speaks when the settlement
+ * carries at least one violation — the corpus writes one sentence about the fact that the
+ * record disagrees with itself, not one per row, and the rows themselves are already on the
+ * page carrying their own words.
+ * @param {unknown} violations @returns {string|null}
+ */
+export function structuralViolationsPoolKey(violations) {
+  return Array.isArray(violations) && violations.length > 0 ? 'structuralViolations[]' : null;
+}
+
+/**
+ * DS-GEN-7's pool for the structural-suggestion list. Same shape, opposite temper: a
+ * suggestion is what the record says is MISSING rather than what it says is wrong.
+ * @param {unknown} suggestions @returns {string|null}
+ */
+export function structuralSuggestionsPoolKey(suggestions) {
+  return Array.isArray(suggestions) && suggestions.length > 0 ? 'structuralSuggestions[]' : null;
+}
+
 // ── DS-GEN-12 · Overview › The ground and the approaches ────────────────────────────
 
 /**
@@ -662,6 +746,7 @@ export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
     situation: null,
     origin: Object.freeze([]),
     systemsHealth: Object.freeze([]),
+    warnings: Object.freeze([]),
     ground: null,
     market: null,
     institutions: null,
@@ -744,12 +829,26 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
       }), []);
     }));
 
+  // DS-GEN-7. The two list pools first — they are the ones an ordinary settlement carries —
+  // then one line per coherence note in the record's own order.
+  const warningSlots = { ...slots, govFaction: properFill(text(readings.govFaction)) };
+  const warningLine = (poolKey) => (poolKey
+    ? legibilityRung('', readStateProse(CORPUS, 'DS-GEN-7', poolKey, { ...options, slots: warningSlots }), [])
+    : null);
+  const warnings = Object.freeze([
+    warningLine(structuralViolationsPoolKey(readings.structuralViolations)),
+    warningLine(structuralSuggestionsPoolKey(readings.structuralSuggestions)),
+    ...(Array.isArray(readings.coherenceNotes) ? readings.coherenceNotes : [])
+      .map((note) => warningLine(coherencePoolKey(note))),
+  ].filter((line) => line && line.sentence));
+
   return Object.freeze({
     overview: Object.freeze({
       conflicts,
       situation: rung('DS-GEN-5', situationPoolKey(readings), ''),
       origin: Object.freeze(origin),
       systemsHealth: Object.freeze(health),
+      warnings,
       ground: rung('DS-GEN-12', groundPoolKey(readings.terrainType), ''),
       market: rung('DS-GEN-13', marketPoolKey(readings), ''),
       institutions: rung('DS-GEN-17', institutionsPoolKey(readings.inst), ''),
