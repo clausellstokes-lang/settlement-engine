@@ -524,10 +524,21 @@ describe('the slot SHAPE contract — a fill obeys the grammar its seam assumes'
 // page would state something false about the town. DS-GEN-6 (`hasFoodDeficit`) and
 // DS-GEN-9 (`anchored`) carry the same shape.
 //
-// These four arms live HERE, beside the corpus, because the defect is a disagreement
+// These five arms live HERE, beside the corpus, because the defect is a disagreement
 // between the corpus's key and the reader's key and neither half proves it alone. They
 // need no desk, no mount and no component, which is why they could have caught this on
-// the day the projection landed.
+// the day the projection landed. The fifth (T5) governs the one channel with NO kernel
+// behind it — duration, which is carried by slots rather than by marks.
+
+/**
+ * An explicit PAST-DURATION claim in free prose: a sentence asserting how long ago its
+ * subject was, rather than leaving that to a `{timeband_*}` slot. Deliberately WIDE — it
+ * over-fires on distance ("smoke a long time before") and on state-licensed antiquity, and
+ * both are named in T5's closed roster rather than narrowed away, so the roster stays the
+ * place an author's judgment is recorded. NO `g` flag: `.test()` on a global regex is
+ * stateful and would skip every other hit.
+ */
+const DURATION_CLAIM = /\blong ago\b|\ba long while\b|\blong since\b|\bgenerations ago\b|\ball gone now\b|\blifetimes? ago\b|\bcenturies ago\b|\bages ago\b|\byears back\b|\ba long time\b/i;
 
 /** Every slot any variant of a pool names, filled with a conformant, non-empty value. */
 function bagFor(pool) {
@@ -681,5 +692,61 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
       pool, { slots: bagFor(pool), audience: AUDIENCE_DM, dimensions: { [dimension]: value } },
     ).length === 0);
     expect(silent).toEqual([]);
+  });
+
+  it('states no duration its pool key does not license — the channel with NO kernel', () => {
+    // ⛔ T5 — THE THIRD CHANNEL, and the only one the kernel cannot enforce. T1–T4 govern
+    // `marks`, which the kernel reads. DURATION has no mark word and no dimension: it is
+    // carried by the `{timeband_*}` SLOTS, and `eligibleVariants` gates a variant on
+    // whether its slots are SUPPLIED, never on what band was supplied. So a variant that
+    // names no timeband slot is BAND-BLIND — eligible at every age of its subject, from
+    // nine years to seven hundred — and any duration it asserts in free prose is asserted
+    // about all of them.
+    //
+    // ⭐ WHY THIS ARM EXISTS AND WHAT IT COST. A chair words act (2026-09-05) proposed four
+    // duration-free variants for DS-GEN-9's four silent `event type:` arms, three of them
+    // carrying an explicit antiquity clause ("a long while back", "long ago", "all gone
+    // now"). Measured over 48 generated towns before the act landed: eight marker draws
+    // would have printed one of those clauses about an event 9 to 20 years old, on the
+    // same HistoryTab that prints `{yearsAgo}y ago` at :286. The corpus's own convention
+    // already forbade it and nothing in the tree said so — 2,619 band-blind variants
+    // across both registers and exactly THREE carry a duration phrase, each recorded
+    // below. This arm is what makes that convention a claim rather than a habit.
+    //
+    // THE RULE, stated so a later author can satisfy it: a duration is licensed when the
+    // POOL KEY is what asserts it (DS-POW-3's key is `low instability, long-held order`);
+    // it is unlicensed when the key names only a type and an arm, as every `event type:`
+    // pool does. The cure for a sixth-band silence is a variant whose sentence is TRUE at
+    // every band, or a new pool key that carries the band — never a duration in free prose.
+    const claims = [];
+    let bandBlind = 0;
+    for (const [id, block] of allBlocks) {
+      for (const [key, pool] of Object.entries(block.pools)) {
+        for (const variant of pool) {
+          if (/\{timeband/.test(variant.text)) continue;
+          bandBlind += 1;
+          if (DURATION_CLAIM.test(variant.text)) claims.push(`${id} :: ${key} :: [${variant.angle}]`);
+        }
+      }
+    }
+    // CLOSED ROSTER, not a floor: a fourth row means an author put a duration into a
+    // band-blind sentence, and the arm's job is to make that a conversation.
+    //   · DS-GEN-5 — "smoke a long time before you see" is DISTANCE, not the subject's age.
+    //   · DS-POW-3 — the pool KEY is `low instability, long-held order`; the state licenses it.
+    //   · JF-CPL-6b — ⚠ NOT licensed by its key, and RECORDED AS A FINDING rather than cured
+    //     here: it is a causal family with no dated subject and no `{yearsAgo}` printed
+    //     beside it, so it cannot be contradicted by a digit the way a DS-GEN-9 draw can.
+    //     Whether it stays is the chair's line, not this arm's.
+    expect(claims.sort()).toEqual([
+      'DS-GEN-5 :: smoke (route isolated / mountain_pass) :: [visitor]',
+      'DS-POW-3 :: low instability, long-held order :: [elder]',
+      'JF-CPL-6b :: * :: [street]',
+    ]);
+    // NON-VACUITY, both ways. The denominator is MEASURED (2,619 band-blind of 2,734) and
+    // only rises, and the detector is proven able to see: a synthetic band-blind sentence
+    // in the refused shape must convict, and the same sentence without the clause must not.
+    expect(bandBlind).toBeGreaterThanOrEqual(2619);
+    expect(DURATION_CLAIM.test('The town stopped calling it new a long while back.')).toBe(true);
+    expect(DURATION_CLAIM.test('The town stopped calling it new.')).toBe(false);
   });
 });
