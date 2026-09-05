@@ -17,7 +17,7 @@ Updated 2026-09-05 by the Fable chair. Dispatch strictly in this order as slots 
 2. **PDFDRIFT** — BRIEFED (`briefs/brief-PDFDRIFT.md`, dock lanePDF @ df7cdd37e): route the two campaign-less export sites through `resolveExportSeam`; DECLARED paid-surface change.
 3. **DESK-ECON2** — BRIEFED (`briefs/brief-DESK-ECON2.md`, dock laneECON2 @ 940d161ca): 8 dark blocks + DESK-7 (the chair's eleven words are AUTHORED and sealed `refs/preserve/desk7-words-2026-09-05`) + DESK-10 + DESK-11.
 4. **DESK-DEF2** — BRIEFED (`briefs/brief-DESK-DEF2.md`, dock laneDEF2 @ 940d161ca): DS-DEF-6, 7, 9, 10.
-5. **HORIZON-B1 / CHARSET Car 2** — unblocked by the CS-9 ruling (§897); brief to be written from DESIGN_HORIZON.md's CHARSET section.
+5. **HORIZON-B1 / CHARSET Car 2** — BRIEFED (`briefs/brief-HORIZON-B1.md`, dock laneCHARSET2 @ df7cdd37e): Car 1 is LANDED (leaf, table, twin, hoist, compiler, manifest, chunk, test); Car 2 = wiring + typed rejection + restore split + reachability, DARK at `report`.
 6. **DESK-9** — the walker arm that makes the public-dossier gate a DUTY (before more desk cars land if possible).
 7. LIGHTING per refs/preserve/light-plan-2026-09-05: L-PROBE (CHAIR act, zero bytes — after PROSE lands) → L-HOMES → L-DEFAULT → flips → L-PROBE-2 + declarations + registers; SEAT-7/8 beside it; LGT-P14-WITNESS owes a golden-freeze register row · W-ARMS Car 1–3 per WARMS-CAR0's receipt · HORIZON-DARK B1/B2/B6 ·
    ENC-4 (sealed ENC-5 words at refs/preserve/enc5-words-2026-09-04) · SEAT-7a · srcprose rebase · docket.
