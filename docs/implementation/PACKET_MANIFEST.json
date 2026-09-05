@@ -12919,7 +12919,8 @@
       "requiredSymbols": [
         {
           "path": "scripts/audit/whole-world-soak.mjs",
-          "symbol": "SIMULATION_RULE_PRESETS.full_simulation.rules"
+          "symbol": "SIMULATION_RULE_PRESETS.full_simulation.rules",
+          "retiredBy": "§899 — DOCKET item 7 (car 2200db6f3 in the composed consist): the whole-world soak takes --preset, so its composition base is whichever shipped SIMULATION_RULE_PRESETS table the run names; the full_simulation literal was the hard-wired default that item 7 retired, and the presets table is now pinned in its place"
         },
         {
           "path": "scripts/audit/realm-scale-certification.mjs",
@@ -12972,6 +12973,10 @@
         {
           "path": "scripts/audit/whole-world-soak.mjs",
           "symbol": "finalDiedFlags"
+        },
+        {
+          "path": "scripts/audit/whole-world-soak.mjs",
+          "symbol": "presets: SIMULATION_RULE_PRESETS"
         }
       ],
       "acceptanceCases": [
