@@ -95,8 +95,16 @@ export default function ContentPackBar() {
       });
       return;
     }
+    // A shared pack from someone else is AUTHORING: its entries are entering
+    // this library for the first time, so the importer is told what the paid
+    // surfaces cannot draw rather than finding out in a rendered book.
+    const { loadCustomContentCharsetWall } = await import(
+      '../../domain/content/customContentManifest.js'
+    );
     const prepared = prepareImport(parsed.pack, {
       existingByPackEntry: installedState.entries,
+      authoring: true,
+      charset: await loadCustomContentCharsetWall(),
     });
     if (prepared.rejected.length) {
       const missing = prepared.diagnostics.missingDependencies.length;

@@ -244,8 +244,13 @@ export const createAccountImportSlice = (set, get) => ({
           if (!isSessionCurrent()) {
             return accountChangedImportResult();
           }
+          // ⭐ CS-9: an account export is the user's OWN library coming home.
+          // This is a RESTORE, never an authoring act, so no charset wall is
+          // built for it and none can be consulted downstream. THE PROMISE: a
+          // saved world stays restorable, whatever law arrived after it.
           const preparedPack = prepareContentPackImport(parsedPack.pack, {
             existingByPackEntry: installedState.entries,
+            authoring: false,
           });
           if (
             preparedPack.rejected.length > 0
