@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "536d2e1dc2f44566c425c2bed798d697b2c72a68",
-  "measuredBy": "Opus 5 chair — DESK consist landing",
-  "date": "2026-09-04",
-  "note": "six power/stressors prose dials registered as scalar-roster homes (zero src change), and QUADRANT_TUNING gained the PowerTab.jsx dependent from a consist car — the exactness arm was already red before the register edit",
+  "measuredAtSha": "ba8561ff7cd5e00d366329532faa2183ada247f3",
+  "measuredBy": "Fable 5.1 chair — §899 composed landing",
+  "date": "2026-09-05",
+  "note": "ENC-4 Herald writer: its presentation dial registered as CHANCE_MEETING_NEWS_TUNING (P3 1 -> 0 for the file; a new P1 table); no ceiling rises",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -2682,7 +2682,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 1,
-      "line": 640,
+      "line": 636,
       "spanDigest": "f58b3f7b10cfb43c14015b555af18f65f9ee03d54eb631a35d23714a386f755c",
       "leaves": {
         "COALITION_JOIN_LIFT01": 0.08
@@ -3374,7 +3374,7 @@
       "exported": true,
       "idiom": "aggregator",
       "keys": 3,
-      "line": 773,
+      "line": 794,
       "spanDigest": "7fa889a70e692224bd7c6a33e2cf8aa4fc2ae2d14798eb81b439262fcf166aa5",
       "leaves": {
         "MULTIPLIER_SPAN": {
@@ -3407,7 +3407,7 @@
       "exported": true,
       "idiom": "aggregator",
       "keys": 6,
-      "line": 774,
+      "line": 795,
       "spanDigest": "2c110252471e3a13403355fb41ce24d87863f0fbedd94273cffcf09bca395fc9",
       "leaves": {
         "NEUTRAL_STOCK01": {
@@ -3452,7 +3452,7 @@
       "exported": true,
       "idiom": "aggregator",
       "keys": 7,
-      "line": 787,
+      "line": 808,
       "spanDigest": "a896b382d8658ba73f357309da921f3ab9018dd692dd3a873c510536d6cecf63",
       "leaves": {
         "NEUTRAL_STOCK01": {
@@ -3560,6 +3560,21 @@
       "namedDependents": [
         "src/domain/worldPulse/envoyChanceMeetingStage.js"
       ]
+    },
+    "src/domain/worldPulse/envoyChanceMeetingNews.js#CHANCE_MEETING_NEWS_TUNING": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 2,
+      "line": 188,
+      "spanDigest": "fb1fe7af97e13f3183b3856274bb9c5487452238baec42fc70b725718ea96f39",
+      "leaves": {
+        "severity": 0.56,
+        "score": 58
+      },
+      "dependents": [
+        "src/domain/worldPulse/envoyPulse.js"
+      ],
+      "namedDependents": []
     },
     "src/domain/worldPulse/envoyChanceMeetingStage.js#CHANCE_MEETING_STAGE_TUNING": {
       "exported": true,
@@ -7902,11 +7917,11 @@
   },
   "unclosed": [],
   "totals": {
-    "tables": 232,
-    "keys": 2108,
+    "tables": 233,
+    "keys": 2110,
     "unregisteredNamed": 535,
     "bareDecimals": 6985,
     "zeroDependentTables": 8,
-    "zeroNamedDependentTables": 146
+    "zeroNamedDependentTables": 147
   }
 }

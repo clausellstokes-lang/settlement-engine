@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "4efce2e95ffb9d36b7f1e3819592fc38515e10f5",
+ "frozenAtSha": "ba8561ff7cd5e00d366329532faa2183ada247f3",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -24,7 +24,7 @@
  },
  "shapesDigest": "8f634f2750f0a0d12b533a6cfeb4340b9597ee2b9c19dc4457a5a5856e066738",
  "detectorDigest": "27bc8b87c4e4edc3bb3209b5685c1a5eeba697c3822fb1fa41a9ecb87c789f06",
- "verdictDigest": "02174a3b9b09b974f0d9ec0bf6655365ce57a9c29be68143833e0d6d44112e87",
+ "verdictDigest": "59e37fbab98f7fbd7d199828d5544abad52f5dbf828a69f48db97987cf8038fb",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -73,13 +73,13 @@
  ],
  "closureSizes": {
   "web-display": 689,
-  "web-transitive": 892,
+  "web-transitive": 894,
   "dossier-pdf": 374,
   "campaign-pdf": 75,
   "world-book": 81,
   "foundry": 322,
   "json-export": 8,
-  "news": 28
+  "news": 29
  },
  "population": {
   "judged": 6520,
@@ -91,14 +91,14 @@
   "knownShapes": 337
  },
  "scanStats": {
-  "files": 1582,
-  "sites": 37815,
-  "propRead": 35774,
+  "files": 1584,
+  "sites": 37856,
+  "propRead": 35814,
   "elemRead": 0,
-  "destructure": 2030,
+  "destructure": 2031,
   "inOp": 11,
   "rGrades": 5717,
-  "nGrades": 873872,
+  "nGrades": 874486,
   "resolvedReceivers": 6495
  },
  "registerDigest": "ac4734954adbaee04755427934180b8f129c0b0df21072ec00f49b7e797bd1b0",
@@ -8989,7 +8989,7 @@
   "cultureProfile on generationCoherenceReceipt": "dossier-pdf=R foundry=R web-display=R",
   "judgments on generationCoherenceReceipt": "dossier-pdf=R foundry=R web-display=R",
   "repairs on generationCoherenceReceipt": "dossier-pdf=R foundry=R web-display=R",
-  "seed on generationCoherenceReceipt": "campaign-pdf=N dossier-pdf=R foundry=R json-export=N web-display=R web-transitive=N world-book=N",
+  "seed on generationCoherenceReceipt": "campaign-pdf=N dossier-pdf=R foundry=R json-export=N news=N web-display=R web-transitive=N world-book=N",
   "status on generationCoherenceReceipt": "campaign-pdf=N dossier-pdf=R foundry=R json-export=N news=N web-display=R web-transitive=N world-book=N",
   "version on generationCoherenceReceipt": "dossier-pdf=R foundry=R news=N web-display=R web-transitive=N",
   "worldLawVersion on generationCoherenceReceipt": "dossier-pdf=R foundry=R web-display=R",
