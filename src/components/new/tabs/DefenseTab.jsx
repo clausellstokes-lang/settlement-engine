@@ -8,7 +8,7 @@ import {NarrativeNote} from '../NarrativeNote';
 import { criminalOpNote, deriveCriminalStructure, deriveDefenseReadiness, deriveSupportingCapabilities, deriveGuardAssessment, deriveDefenseVulnerabilities, DEFENSE_STRESS_STATUS } from '../../../domain/display/defenseDisplay.js';
 import { safetySeverityOf } from '../../../domain/display/safetySeverity.js';
 import { scoreBand, scoreColor } from '../../../domain/display/defenseScoreBands.js';
-import { defenseForcesProse, defensePostureProse, defenseStateProse, defenseThreatProse } from '../../../domain/display/stateProse/defenseStateProse.js';
+import { defenseForcesProse, defenseMilitaryStatusProse, defensePostureProse, defenseStateProse, defenseThreatProse } from '../../../domain/display/stateProse/defenseStateProse.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
 import { truncateAtWord } from '../../../lib/text.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
@@ -40,6 +40,12 @@ const FORCES_MOUNT = 'defense.armedForces';
  * rendered beside it is computed from — so the badge and the sentence cannot disagree.
  */
 const POSTURE_MOUNT = 'defense.postureHeader';
+
+/**
+ * The active-military-status position. TWO live lenses of DS-DEF-8 at ONE position; its
+ * fourth pool is declared dark in the desk, with the reason and the one act that lights it.
+ */
+const MILITARY_STATUS_MOUNT = 'defense.militaryStatus';
 
 export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false, playerView = false}) {
   const [expandedThreat, setExpandedThreat] = useState(null);
@@ -108,6 +114,16 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
   const postureLines = ['posture', 'terrain', 'prize']
     .map((k) => (drawnAtMount(POSTURE_MOUNT, postureProse[k]?.rung)?.sentence
       ? postureProse[k].beside : null)).filter(Boolean);
+  // DS-DEF-8, the military-status banner. Same public gate; it frames no DM-editable field
+  // (the banner renders generator-authored `summary` / `viabilityNote`), so plain rungs.
+  const statusProse = publicDossier
+    ? Object.freeze({ override: null, viability: null })
+    : defenseMilitaryStatusProse(r, {
+      seed: String(r?._seed ?? r?.id ?? ''),
+      audience: playerView ? 'player' : 'dm',
+    });
+  const statusLines = ['override', 'viability']
+    .map((k) => drawnAtMount(MILITARY_STATUS_MOUNT, statusProse[k])?.sentence).filter(Boolean);
   const stresses = (Array.isArray(r.stress)?r.stress:r.stress?[r.stress]:[]).filter(Boolean);
   const stressTypes = stresses.map(s=>s?.type).filter(Boolean);
   const crimCapture = r.powerStructure?.criminalCaptureState || 'none';
@@ -230,6 +246,10 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
         <div style={{flex:1,borderLeft:`1px solid ${stressStatus.colour}40`,paddingLeft:12}}>
           {stressObj?.summary&&<p style={{fontSize: FS['12.5'],color:swatch['#3A2A10'],lineHeight:1.5,margin:'0 0 4px'}}>{stressObj.summary}</p>}
           {stressObj?.viabilityNote&&<p style={{fontSize: FS['11.5'],color:swatch['#5A3A10'],fontStyle:'italic',margin:0,lineHeight:1.4}}>{stressObj.viabilityNote}</p>}
+          {/* DS-DEF-8: what the override means for this town, in its own voice. */}
+          {statusLines.map((line,i)=>(
+            <p key={i} style={{fontSize:FS.xs,color:swatch['#3A2A10'],lineHeight:1.5,margin:'6px 0 0',fontStyle:'italic'}}>{line}</p>
+          ))}
         </div>
       </div>}
 
