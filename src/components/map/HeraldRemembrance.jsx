@@ -37,6 +37,21 @@
  * owner session (viewerSeesDmSecrets, fail closed), and the row says so rather
  * than pretending the record is empty.
  *
+ * ── THE WAR SECTION (RR-2, the Remembrance READER) ─────────────────────────────
+ * A realm loses places, and it also loses WARS. W-MEM writes a typed, prose-free
+ * record of every war that ended (`worldState.concludedWars`) and until this
+ * section nothing could read one: the flag lit a writer whose output no surface
+ * showed. The reader lives in `domain/display/warRemembrance.js` and authors every
+ * sentence at render time; this file only lays them out.
+ *
+ * ⛔ IT RENDERS NOTHING WHEN THERE IS NOTHING TO REMEMBER, and that is load-bearing
+ * rather than tidy. `warMemoryEnabled` is DARK by default, so the ledger key is
+ * simply absent and the roster is empty for every campaign alive today. An empty
+ * section with a "no wars yet" note would have changed this LIVE door for every
+ * existing GM on the day a dormant flag shipped. The graveyard's own empty state is
+ * different and stays: a realm that has buried no one is news; a realm whose engine
+ * was never asked to remember a war is not.
+ *
  * A LAZY LEAF. HeraldBody mounts it through lazy(), so a GM who never opens this
  * door pays nothing for it. @enforced-by tests/build/heraldRegisterDoorsLazy.test.js
  */
@@ -45,6 +60,7 @@ import { useMemo } from 'react';
 
 import { useStore } from '../../store/index.js';
 import { viewerSeesDmSecrets } from '../../domain/display/viewerSecrets.js';
+import { concludedWarRows } from '../../domain/display/warRemembrance.js';
 import { remembranceRows } from './heraldRegister.js';
 import { Pill, Section } from './WorldPulsePrimitives.jsx';
 import RealmEntityLink from '../primitives/RealmEntityLink.jsx';
@@ -110,6 +126,81 @@ function RemembranceRow({ row }) {
   );
 }
 
+/** One line of a war's account. Kept out of the row so the layout reads as prose. */
+function WarClause({ children }) {
+  return (
+    <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.45, overflowWrap: 'anywhere' }}>
+      {children}
+    </div>
+  );
+}
+
+/** One war the realm wrote down: what it was called, how it ended, and what it cost. */
+function ConcludedWarRow({ row }) {
+  return (
+    <div
+      data-testid="concluded-war-row"
+      style={{
+        display: 'grid', gap: 4,
+        padding: '8px 10px',
+        border: `1px solid ${BORDER2}`,
+        borderLeft: `3px solid ${MUTED}`,
+        background: CARD,
+      }}
+    >
+      <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
+        <span style={{ color: INK, fontWeight: 900, fontSize: FS.sm }}>{row.name}</span>
+        {row.staged && <Pill>Still being written</Pill>}
+      </div>
+      <WarClause>{row.line}</WarClause>
+      <WarClause>{row.endingLine}</WarClause>
+      {row.costLine && <WarClause>{row.costLine}</WarClause>}
+      {row.allies.length > 0 && (
+        <WarClause>{`Fought beside them: ${row.allies.join(', ')}.`}</WarClause>
+      )}
+      {row.territory.map(line => <WarClause key={line}>{line}</WarClause>)}
+      {row.engagements.length > 0 && (
+        <WarClause>{`Remembered from the field: ${row.engagements.join(' ')}`}</WarClause>
+      )}
+      <div style={{ color: SECOND, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800 }}>
+        {`${row.whenLabel} ${row.ranLabel}`}
+      </div>
+      {row.stagedNote && (
+        <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontStyle: 'italic' }}>
+          {row.stagedNote}
+        </div>
+      )}
+      {row.receipts.length > 0 && (
+        <dl style={{ margin: 0, display: 'grid', gap: 2 }}>
+          {row.receipts.map(receipt => (
+            <div key={receipt.id} style={{ display: 'flex', gap: 5, flexWrap: 'wrap' }}>
+              <dt style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                {receipt.label}
+              </dt>
+              <dd style={{ margin: 0, color: BODY, fontFamily: sans, fontSize: FS.xxs, overflowWrap: 'anywhere' }}>
+                {receipt.detail}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      )}
+    </div>
+  );
+}
+
+/** The live name of every seat the library still holds, for the war reader's
+ *  name resolver. A belligerent the library no longer holds falls back to the
+ *  name the record itself carried at the war's conclusion. */
+function liveNameMap(saves) {
+  const map = new Map();
+  for (const save of Array.isArray(saves) ? saves : []) {
+    const id = String(save?.id ?? save?.settlement?.id ?? '');
+    const name = String(save?.settlement?.name || save?.name || '').trim();
+    if (id && name) map.set(id, name);
+  }
+  return map;
+}
+
 /**
  * @param {Object} props
  * @param {any} props.campaign
@@ -121,6 +212,17 @@ export default function HeraldRemembrance({ campaign, saves = [] }) {
   const seesSecrets = viewerSeesDmSecrets({ isOwner: !!auth?.user, authenticated: !!auth?.user });
   const rows = useMemo(
     () => remembranceRows({ campaign, saves, seesSecrets }),
+    [campaign, saves, seesSecrets],
+  );
+  const wars = useMemo(
+    () => {
+      const names = liveNameMap(saves);
+      return concludedWarRows({
+        worldState: campaign?.worldState,
+        nameFor: (id) => names.get(String(id)) || '',
+        seesSecrets,
+      });
+    },
     [campaign, saves, seesSecrets],
   );
 
@@ -135,6 +237,14 @@ export default function HeraldRemembrance({ campaign, saves = [] }) {
           </div>
         )}
       </Section>
+      {/* Absent, not empty, when the realm has remembered no war. See the header. */}
+      {wars.length > 0 && (
+        <Section heading="The wars that ended" count={wars.length}>
+          <div data-testid="herald-war-remembrance" style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+            {wars.map(row => <ConcludedWarRow key={row.id} row={row} />)}
+          </div>
+        </Section>
+      )}
     </div>
   );
 }
