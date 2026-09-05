@@ -64,6 +64,7 @@
  * @enforced-by tests/domain/npc/knownCharacter.test.js
  */
 
+import { clamp01 } from '../../kernel/math.js';
 import { compareCodepoint } from '../deterministicSort.js';
 import { npcCredibilityWeightOf } from '../worldPulse/npcCredibility.js';
 import {
@@ -118,15 +119,15 @@ function str(v) {
   return v == null ? '' : String(v);
 }
 
+// ⛔ `num()` IS LOAD-BEARING AND STAYS. The bare local clamp01 this replaced
+// (`Math.max(0, Math.min(1, v))`) rode NaN straight through; the kernel's
+// `Number.isFinite` guard sends it to 0. Both call sites are byte-neutral only
+// because their arguments are already finite — `positionValue` is total over
+// garbage and returns a finite band position, and `credibility` is `num()`-wrapped.
 /** @param {unknown} v @returns {number} */
 function num(v) {
   const n = Number(v);
   return Number.isFinite(n) ? n : 0;
-}
-
-/** @param {number} v @returns {number} */
-function clamp01(v) {
-  return Math.max(0, Math.min(1, v));
 }
 
 /**

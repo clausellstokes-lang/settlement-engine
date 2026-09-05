@@ -75,6 +75,7 @@
  * @enforced-by tests/domain/npc/characterConsumers.test.js
  */
 
+import { clamp01 } from '../../kernel/math.js';
 import { compareCodepoint } from '../deterministicSort.js';
 import { riskAppetiteOf, traitsOf } from '../worldPulse/npcLadderGoals.js';
 import {
@@ -209,15 +210,16 @@ function asObject(v) {
   return v && typeof v === 'object' && !Array.isArray(v) ? /** @type {Record<string, unknown>} */ (v) : {};
 }
 
+// ⛔ `num()` IS LOAD-BEARING AT EVERY `clamp01(num(x))` SITE BELOW — DO NOT COLLAPSE THE
+// PAIR. The bare local clamp01 this replaced (`Math.max(0, Math.min(1, v))`) let NaN and
+// a coercible string ride through; the kernel's `Number.isFinite` guard does not. The
+// swap is byte-neutral ONLY because `num()` has already turned every raw read into a
+// finite number, so the guard never fires. Deleting a `num()` as newly-redundant would
+// change what a malformed axis value reads as.
 /** @param {unknown} v @returns {number} a finite number, or 0 */
 function num(v) {
   const n = Number(v);
   return Number.isFinite(n) ? n : 0;
-}
-
-/** @param {number} v @returns {number} */
-function clamp01(v) {
-  return Math.max(0, Math.min(1, v));
 }
 
 /**
