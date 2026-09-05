@@ -852,6 +852,19 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
     // a ledger corpse silently lowers the effective ceiling and lets the next real walker row
     // slip in under a cap a dead entry was holding up. It was NOT removed to make anything
     // green: the guard it names is now enforcing, not forgiven.
+    // ⭐⭐ 2026-09-05, THE PROSE LANDING (§898, Fable chair) — A DECLARED SAME-SEED TEXT SHIFT MEETS THE CLOSED DOOR.
+    // The src/ prose car (1,001 cured reader sentences; emitted text moves on 133 engine-side paths;
+    // no rules value, preset or flag moved) changes every settlement's output text, so the committed
+    // generator-golden-master manifest moves on 525 of 525 rows (chair probe chair-tools/golden-count.mjs;
+    // CONTROL 0/525 at the base 272dbd2da). The guard is DISABLED until the freeze act BY CONSTRUCTION:
+    // tests/helpers/goldenRecordDoor.js refuses an env var ([NO_SIGNATURE]), and a signed record writes
+    // register-row values that tests/lint/goldenFreeze.walker.test.js:358 forbids while frozenAt is null.
+    // The chair signed NO record with the owner's standing words and amended NO door (RULING-GOLDEN-PRE-FREEZE.md
+    // in refs/preserve/chair-tools-2026-09-05); the shift is declared in docs/GOLDEN_SHIFT_LEDGER.md and the
+    // §898 row; every golden control until the freeze is tree-vs-tree. FREED by the owner-signed genesis
+    // (ODQ §881.4: the freeze records the LIT world), or sooner by the owner's own sentence in a shift record.
+    'tests/property/generatorGoldenMaster.test.js :: generator golden master (cross-build output stability) every config produces byte-identical output to the golden master':
+      'NOT FREED — the committed manifest moves on 525 of 525 rows under the DECLARED prose text shift, MEASURED at `73a6f0c22` (the PROSE landing tip) by the Fable chair with chair-tools/golden-count.mjs (control 0/525 at 272dbd2da); the fixture CANNOT be re-recorded before the freeze act (goldenRecordDoor [NO_SIGNATURE]; goldenFreeze.walker:358 forbids recorded register values while frozenAt is null). Blocker: the owner-signed GENESIS (§881.4) — or the owner\'s sentence in docs/shift-records/ ("one word charters it sooner"). Class owner-gated; magnitude ceiling 525; the arm is not switched off by a lane, it is waiting for the owner.',
     'tests/lint/clampPrimitiveBaseline.test.js :: clamp primitive baseline ratchet (code-quality-4) baseline exactly matches the files that still define a local clamp/clamp01':
       'NOT FREED — 78 local clamp definitions against a baseline of 62, MEASURED at `bf902c59f` (the INSTRUMENTS consist tip) by this landing; the line said 73 against 62 with 11 forks, true when it was written and kept here as history. Re-freezing banks 16 forks of a shared primitive — and it would breach a SECOND arm that is green today, since BASELINE_CEILING in that test is 62 and the committed baseline sits EXACTLY at it. The cure is to route the sixteen to the kernel primitive at src/kernel/math.js, which is its own sweep.',
     // ⭐⭐ 2026-08-15, da-c — THE proseNumerics ROW LEFT, AND IT LEFT THE RIGHT WAY.
