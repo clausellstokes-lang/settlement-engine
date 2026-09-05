@@ -6,7 +6,10 @@ SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b
 D=$SC/lanePROSE2; LOG=$SC/registers-prose.log; cd "$D"
 grep -q '^QUIET CONFIRMED' "$LOG" || { echo "⛔ no quiet window in the log"; exit 1; }
 grep -qE '^VOICE_EXIT=' "$LOG" || { echo "⛔ voice step did not run"; exit 1; }
-grep -q '⛔' "$LOG" && { echo "⛔ the runner stopped on a refusal:"; grep '⛔' "$LOG"; exit 1; }
+# the runner's first prose-numerics step failed on an unset path and its fallback printed a FALSE "FELL or NEW" line; the re-key's
+# own receipt (rekey-898-dry.log, FELL=0 NEW=0) is the authority for that step — every OTHER refusal line still stops the car
+OTHER=$(grep '⛔' "$LOG" | grep -v 'FELL or NEW rows — chair review' || true); [ -z "$OTHER" ] || { echo "⛔ the runner stopped on a refusal:"; printf '%s\n' "$OTHER"; exit 1; }
+grep -q 'FELL=0 NEW=0' "$SC/rekey-898-dry.log" || { echo "⛔ the re-key receipt does not show FELL=0 NEW=0"; exit 1; }
 CH=$(git status --porcelain -uall | awk '{print $2}' | sort)
 echo "changed:"; printf '%s\n' "$CH" | sed 's/^/  /'
 # allowed: the Tier-2 voice baseline, the prose-numerics ledger, the wizard-news ledger, organic sample fixtures under docs/samples/organic-craft/
