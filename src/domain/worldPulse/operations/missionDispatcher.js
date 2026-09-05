@@ -60,20 +60,49 @@
  * and only then ranked by a keyed hash over `(principalId, tick, demandId)`. Same world,
  * same order, same cut, on every device and in every locale.
  *
- * ── DARK: NO PRODUCTION CALLER, NO FLAG, AND BOTH ARE PINNED ───────────────────────────
+ * ── DARK: NO PRODUCTION CALLER — AND THE FLAG IS MINTED, JUST NOT HERE ─────────────────
  * Nothing under src/ imports this module; tests/domain/missionDispatcher.test.js walks the
- * src tree and asserts the empty importer set. NO FLAG IS MINTED HERE and the seam is
- * named so the flag car can find it: the door is `missionDispatcherEnabled`
- * (DESIGN_W_OPS §6), and lighting it is the CR-WR10-C VIRTUAL-FLAG MINT — one by-name
- * `rules.missionDispatcherEnabled === true` read, a manifest entry in
- * `ENGINE_GATED_VIRTUAL_RULE_KEYS`, an AUTHORED row in `VIRTUAL_SUBSYSTEM_ROWS`, and a
- * dormancy fence, ALL IN ONE COMMIT. ⭐ THE WALL THIS HEADER NAMED IS GONE: it read
- * "BLOCKED — `subsystemRowsVirtual.js` sits at 800/800 effective lines, so the authored
- * row cannot be added until that file is decomposed", and TE-VIRT-1's decomposition car
- * did exactly that at the ENGINE-HYGIENE landing — the file is 282/800 and the W-OPS
- * family has its own reserved leaf, `certification/subsystemRowsOps.js`, to author into.
- * Naming the CURED wall here is still how the flag car meets a known cost instead of
- * discovering one: the cost is now the four-part mint above, and nothing else.
+ * src tree and asserts the empty importer set. That half stands.
+ *
+ * ⛔ THE OTHER HALF WAS "NO FLAG IS MINTED HERE", AND IT WENT FALSE AT CAR LGT-P5-WOPS 2/4
+ * — CORRECTED 2026-09-05 BY LANE L-CHAIR-901. It described a mint that had not happened
+ * yet and a cost the flag car would meet. The flag car HAS run: `missionDispatcherEnabled`
+ * is a live member of `ENGINE_GATED_VIRTUAL_RULE_KEYS` (35 members at this tip) with its
+ * AUTHORED row in `certification/subsystemRowsOps.js`, and a header that still promises the
+ * mint sends the next reader looking for work that is done.
+ *
+ * ⭐ AND THE SENTENCE IS NOT SIMPLY DELETED, BECAUSE ITS LITERAL CLAIM IS STILL TRUE AND
+ * LOAD-BEARING: NO GATE READ LIVES IN THIS LEAF. The door was deliberately NOT put here.
+ * Its one by-name strict read is `missionDispatcherActive`, and it lives in THE ESPIONAGE
+ * FAMILY DOOR MODULE, AND-composed with that layer's own predicate, so a lit dispatcher over
+ * a dark espionage layer stays dark. The reason the obvious home is the wrong one is
+ * recorded beside that predicate: this leaf is INJECTED — every input arrives as an argument
+ * and it never reads a world — so it has no receiver to gate on; and it is the espionage
+ * set's ONE ADMITTED IMPORTER, whose reachability-chain arm in
+ * tests/property/espionageDormancyFence.test.js asserts that this file names neither that
+ * module nor the layer flag.
+ *
+ * ⛔⛔ WHICH IS WHY THE ADDRESS ABOVE IS WRITTEN IN WORDS AND NOT AS A PATH, AND THAT IS A
+ * MEASURED CONSTRAINT RATHER THAN A STYLE. The fence's negative is a RAW-SOURCE
+ * `not.toContain` — comments are not stripped — so spelling the door module's filename in
+ * this very paragraph REDS it. Executed: naming the path here failed the reachability arm
+ * on the run before this wording, and the run after it is green again. The estate already
+ * had the idiom for exactly this — `espionage/operationsVoice.js`'s own door prose says "its
+ * one by-name strict gate lives in the espionage family door module" and names no file —
+ * so this header follows it rather than inventing a second way to say the same thing.
+ *
+ * ⚠ SO WHAT THIS HEADER OWES A READER IS AN ADDRESS, NOT A PLAN: the door is
+ * `missionDispatcherEnabled` (DESIGN_W_OPS §6); its read is at the family door named above;
+ * its manifest entry and its certification row are landed; its dark proof is this module's
+ * own suite, driving the key false against a lit world with the lit control and the
+ * conjunction beside it, which is why no `tests/property/*DormancyFence.test.js` file exists
+ * for the key (the disposition is written into
+ * tests/lint/engineGatedRuleKeys.walker.test.js's no-fence roster). ⭐ THE WALL THIS HEADER
+ * ONCE NAMED IS ALSO GONE: it read "BLOCKED —
+ * `subsystemRowsVirtual.js` sits at 800/800 effective lines, so the authored row cannot be
+ * added until that file is decomposed", and TE-VIRT-1's decomposition car did exactly that
+ * at the ENGINE-HYGIENE landing, giving the W-OPS family its own reserved leaf to author
+ * into. Both the wall and the mint are now history rather than cost.
  *
  * PURE: no Date, no Math.random, no store, no I/O, no mutation, no world read. Every input
  * arrives as an argument.

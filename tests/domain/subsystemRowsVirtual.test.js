@@ -235,6 +235,23 @@ const OPERATIONS_VOICE = 'operationsVoiceEnabled';
 const ENVOY_TASK_CATALOG = 'envoyTaskCatalogEnabled';
 // AUTHORING ORDER, not alphabetical: the assertion below is an exact ordered equality
 // against VIRTUAL_SUBSYSTEM_ROWS, so this list mirrors the file's own section order.
+//
+// ⛔⛔ RESOLVED 2026-09-05 BY LANE L-CHAIR-901: THIS LITERAL WAS CONCATENATED WHERE THE
+// MANIFEST BESIDE IT WAS SET-MERGED, AND THE COMPOSITION LANDED RED. The §901 composition
+// put LGT-P5-WOPS's four W-OPS keys beside DESK-900 car 2's SEAT-78 flag mint. Both sides
+// edit THIS ONE literal and both re-state the shared prefix `FOREIGN_SEAT,
+// LEGITIMACY_UPHEAVAL, …, WAR_MEMORY, INFILTRATION_DEPTH`. The resolver set-merged
+// `ENGINE_GATED_VIRTUAL_RULE_KEYS` correctly (30 -> 35, no duplicate) and CONCATENATED
+// here, so the list carried 39 members with FOUR duplicates — FOREIGN_SEAT,
+// LEGITIMACY_UPHEAVAL, WAR_MEMORY and INFILTRATION_DEPTH each twice — against 35 authored
+// rows, and `every lane rule is authored here` reported `…(38)` versus `…(34)`. Measured at
+// the composition tip 871c61468, BEFORE this lane touched anything.
+//
+// ⚠ WHY THE DE-DUPLICATION IS MECHANICAL AND NOT A CHOICE: the equality below is ORDERED
+// against VIRTUAL_SUBSYSTEM_ROWS, whose authored order is read out of the module itself —
+// rows 27..35 are foreignSeat, legitimacyUpheaval, irregularForce, warMemory,
+// infiltrationDepth, missionDispatcher, operationsVoice, envoyTaskCatalog, chanceEncounters.
+// Exactly one ordering of the union satisfies it, so there was nothing to decide.
 const VIRTUAL_RULES = Object.freeze([
   AXES, ESPIONAGE, SCARCITY, CONDITIONS, DEVOTION, MIRROR, POSTURE, SPINE,
   CONQUEST, HABIT, STATECRAFT, RUMORS, OATH, PACTS, SOVEREIGNTY, LIFECYCLE_VOICE, CASUS,
@@ -245,8 +262,6 @@ const VIRTUAL_RULES = Object.freeze([
   UNDERCITY_HIGH_WATER,
   TREASURY,
   FOREIGN_SEAT, LEGITIMACY_UPHEAVAL, IRREGULAR_FORCE, WAR_MEMORY,
-  INFILTRATION_DEPTH,
-  FOREIGN_SEAT, LEGITIMACY_UPHEAVAL, WAR_MEMORY,
   INFILTRATION_DEPTH, MISSION_DISPATCHER, OPERATIONS_VOICE, ENVOY_TASK_CATALOG,
   CHANCE_ENCOUNTERS,
 ]);
@@ -616,6 +631,18 @@ function litRules(overrides = {}) {
 
 describe('engine-gated virtual rows — shape and partition', () => {
   test('every lane rule is authored here, in the census, and manifested', () => {
+    // ⛔ THE DUPLICATE GUARD, AND IT IS THE ARM THE §901 COMPOSITION NEEDED (lane
+    // L-CHAIR-901). This roster is edited by every flag car, and two cars that both
+    // re-state a shared prefix produce a CONCATENATION whose failure message is an
+    // unreadable `…(38)` versus `…(34)`. Asserted FIRST and by name, so the next resolver
+    // that concatenates is told what it did instead of being handed an elided array diff.
+    // The ordered equality below cannot serve as this guard: it reds on a duplicate too,
+    // but it reds identically on a re-ordering and on a genuinely missing row.
+    const duplicated = VIRTUAL_RULES.filter((rule, i) => VIRTUAL_RULES.indexOf(rule) !== i);
+    expect(duplicated,
+      'a rule is listed twice — a merge concatenated two edits of this literal instead of'
+      + ' set-merging them; de-duplicate against the AUTHORED row order, never by sorting')
+      .toEqual([]);
     expect(VIRTUAL_SUBSYSTEM_ROWS.map((row) => row.rule)).toEqual(VIRTUAL_RULES);
     expect(VIRTUAL_PENDING_RULE_KEYS).toEqual([]);
     // The manifest is WHY these keys are censusable at all: neither

@@ -110,8 +110,24 @@ export const LAUNCH_POSTURE_PRESETS = Object.freeze([
  * The key stays, the gap is named, and Q-OPS-1/Q-OPS-2 score `dark_by_flag` on BOTH postures
  * until the owner rules.
  *
- * `characterDriftEnabled` is deliberately ABSENT: no gate anywhere reads it, so setting it is
- * a no-op that reads as intent.
+ * ⛔ `characterDriftEnabled` IS DELIBERATELY ABSENT, AND THE REASON WRITTEN HERE WAS FALSE —
+ * CORRECTED 2026-09-05 BY LANE L-CHAIR-901. It read "no gate anywhere reads it, so setting
+ * it is a no-op that reads as intent." A gate DOES read it. Measured at this tip:
+ * `characterDriftActive` in `src/domain/npc/characterDrift.js` reads
+ * `simulationRules[CHARACTER_DRIFT_FLAG_KEY] === true` strictly, and it is CALLED at four
+ * live src sites — `characterDrift.js` (`applyAxisDrift`, `applyGraduatedAxisDrift`) and
+ * `npc/livedExperienceFunnel.js` twice. This matters here more than anywhere: this is the
+ * OWNER'S WALK corpus, and a reason a reader can check against the tree in ten seconds is
+ * the only kind this file may carry.
+ *
+ * ⭐ THE KEY STILL STAYS OUT, FOR THE TRUE REASON, WHICH IS ONE LAYER FURTHER IN. The drift
+ * layer is dark by having NO PRODUCTION ENTRY POINT, not by having no gate: nothing in a
+ * pulse or a store path reaches those four sites, which the estate already records at
+ * `npc/characterReadModel.js` — "Today no caller runs foldLivedExperience". So setting the
+ * key really would change nothing in this corpus, and it would still read as intent — but
+ * the day a caller lands, the key becomes live and this paragraph must be re-derived rather
+ * than trusted. That is a dependency on a MEASUREMENT, which the old sentence hid by
+ * claiming a fact about the gate that was never true.
  */
 export const PREVIEW_OVERLAY = Object.freeze({
   warMemoryEnabled: true,

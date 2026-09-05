@@ -74,9 +74,30 @@ function stripCommentsAndStrings(code) {
     // ways, 0 reacher flips and 0 mint flips — so the denominator was intact by
     // luck, not by construction, and a scan that is right by luck is the
     // false-green class this file exists to refuse.
+    // ⛔ AND THE SECOND HALF, LANDED 2026-09-05 BY LANE L-CHAIR-901: THE QUOTE CLASSES STOP
+    // AT A NEWLINE. Reordering alone was never the whole cure. An apostrophe inside a
+    // DOUBLE-quoted string — `other: "the mine-founds-itself pattern, applied to crime"` and
+    // the certification prose beside it — opens the same unterminated span the reorder was
+    // meant to close, because the SINGLE-quote pass still runs before the double-quote one
+    // and reaches it first. Excluding `\n` from both negated classes bounds the damage to
+    // one line: an apostrophe with no partner on its own line now matches NOTHING, so the
+    // double-quote pass that follows blanks the whole string correctly instead of inheriting
+    // a span that already ate it.
+    //
+    // ⭐ THIS IS THE THIRTEENTH INSTRUMENT OF STRIPPER-UNIFY'S CENSUS, AND THAT CAR
+    // DELIBERATELY DID NOT TOUCH IT ("The thirteenth is densityCreateBoundary.walker.test.js,
+    // which L-HOMES-8 cured in its own dock"). L-HOMES-8 cured the ORDER half only; the
+    // newline half stayed open here while its twelve siblings got both. The spelling below is
+    // the estate's, character for character, so the family has ONE shape.
+    //
+    // MEASURED over all 2,188 src files at this tip: 271 files mis-stripped at the base and
+    // 1,322,927 characters of live code recovered, with ZERO verdict flips across 4,382
+    // verdicts (reach and mint on every file, plus the re-derivation arm's six probes) — and
+    // every one of those verdicts also agrees with the estate's own character scanner
+    // (`codeOnly`) on all 2,188 files. The denominator was intact by luck, not construction.
     .replace(/`(?:\\.|[^`\\])*`/g, '``')
-    .replace(/'(?:\\.|[^'\\])*'/g, "''")
-    .replace(/"(?:\\.|[^"\\])*"/g, '""');
+    .replace(/'(?:\\.|[^'\\\n])*'/g, "''")
+    .replace(/"(?:\\.|[^"\\\n])*"/g, '""');
 }
 
 /** Every .js/.jsx file under src/, as repo-relative POSIX paths. */
@@ -113,6 +134,54 @@ describe('density create-boundary walker (which generation is a BIRTH)', () => {
     // that passes is worse than no scan.
     expect(reachers.length).toBeGreaterThanOrEqual(4);
     expect(Object.keys(PIPELINE_REACHERS).length).toBeGreaterThanOrEqual(4);
+
+    // ⭐⭐ AND THE DENOMINATOR'S SOUNDNESS IS PINNED BY TWO MUTANTS, ONE PER HALF OF THE
+    // STRIPPER DEFECT (lane L-CHAIR-901). A count that is merely large is not a count that
+    // is right: every file this stripper mis-strips falls OUT of `reachers` silently, and
+    // the collapse this arm watches for is the one shape the bug never produces. So the two
+    // defects are planted here as literals, and the fixtures are SHAPED SO NEITHER CURE CAN
+    // RESCUE THE OTHER — STRIPPER-UNIFY's first cut got that wrong and its plant went green
+    // for the wrong reason.
+    //
+    //   F1 — the ORDERING half. The apostrophes sit inside BACKTICKS and both live on ONE
+    //   LINE, so a newline-bounded class cannot mask it: under a single-quote pass running
+    //   first, `settlement's` opens a span that closes at `guild's` and eats the call
+    //   between them. Only blanking template literals FIRST saves it.
+    //
+    //   F2 — the NEWLINE half. The apostrophes sit inside DOUBLE-quoted strings on
+    //   DIFFERENT LINES, so the reorder cannot mask it: no backtick is involved at all, and
+    //   the single-quote pass still reaches `settlement's` before the double-quote pass
+    //   blanks the string holding it. Only a class that stops at `\n` saves it.
+    const F1 = "const note = `the settlement's cap`; generateSettlementPipeline();"
+      + " const w = `the guild's hall`;";
+    const F2 = [
+      'const a = "the settlement\'s cap";',
+      'generateSettlementPipeline();',
+      'const b = "the guild\'s hall";',
+    ].join('\n');
+    expect(stripCommentsAndStrings(F1).includes('generateSettlementPipeline'),
+      'the ordering half has regressed: an apostrophe inside a template literal is opening a'
+      + ' quote span again, and every file behind one drops out of this denominator').toBe(true);
+    expect(stripCommentsAndStrings(F2).includes('generateSettlementPipeline'),
+      'the newline half has regressed: an apostrophe inside a DOUBLE-quoted string is opening'
+      + ' a single-quoted span that runs across lines, and the code between vanishes').toBe(true);
+
+    // ⛔ GUARD THE GUARD — the two fixtures are proven ABLE TO DIE. The landed-defective
+    // spellings are rebuilt here as locals (the cured stripper is never mutated), and each
+    // must LOSE the symbol its own fixture carries. Without this pair, a fixture that had
+    // stopped discriminating would report the cure working on every gate for ever.
+    const strip = (code, quoteClass) => code
+      .replace(/\/\*[\s\S]*?\*\//g, '')
+      .replace(/^\s*\/\/.*$/gm, '')
+      .replace(new RegExp(`'(?:\\\\.|[^'\\\\${quoteClass}])*'`, 'g'), "''")
+      .replace(new RegExp(`"(?:\\\\.|[^"\\\\${quoteClass}])*"`, 'g'), '""')
+      .replace(/`(?:\\.|[^`\\])*`/g, '``');
+    expect(strip(F1, '\\n').includes('generateSettlementPipeline'),
+      'F1 no longer dies under the quotes-before-templates order — it has stopped'
+      + ' discriminating and proves nothing').toBe(false);
+    expect(strip(F2, '').includes('generateSettlementPipeline'),
+      'F2 no longer dies under the unbounded quote classes — it has stopped discriminating'
+      + ' and proves nothing').toBe(false);
   });
 
   it('every module that reaches the pipeline is classified', () => {
@@ -432,11 +501,41 @@ describe('generation-law register (which LAW a birth mints)', () => {
       `${rel} reads the store's form config BEFORE the world's own — the wizard's `
       + `config would then decide an existing world's law on its next regeneration`,
     ).toBe(false);
-    const mintCalls = (code.match(/\bbirthConfig\(/g) || []).length;
+    // ⛔⛔ THE MINT COUNT IS TAKEN AT THE BIRTH ACTION'S REAL HOME, AND THAT IS A CURE
+    // (lane L-CHAIR-901, 2026-09-05). This assertion used to count `birthConfig(` inside
+    // `settlementSlice.js` and demand exactly one. MEASURED: that file has called it ZERO
+    // times at every commit this arm has ever existed at — 0 at the arm's own landing
+    // (af17639a8, LGT-P8-MATBOUND) and 0 at the §901 composition base (04bb92d19). The
+    // generation lane LEFT THE SLICE at c9611da70 ("WORKER Car 1: the generation lane
+    // leaves the slice and runs behind one core, dark"), taking the mint with it, and the
+    // arm was authored against the pre-move shape. So it was never green, and the §901
+    // composition is where it finally ran: this is a car that shipped a red, not merge
+    // damage.
+    //
+    // ⭐ THE CLAIM IS KEPT AT FULL STRENGTH AND ONLY ITS ADDRESS MOVES. "Exactly one mint
+    // call, and a second one is a re-derivation or a preview minting a law" is the law; the
+    // file that holds the birth action is `settlementGenerateAction.js`, measured, with one
+    // call at its own `geographyLockedConfig(state.locks, state.settlement, birthConfig({…`.
+    // The two assertions ABOVE stay on `settlementSlice.js` because the re-derivation half
+    // really does still live there — the two halves of this `it` now name two files, which
+    // is what the decomposition made true.
+    //
+    // ⚠ AND THE SLICE'S SILENCE IS ASSERTED RATHER THAN ASSUMED. If the mint ever returns to
+    // the slice, `mintCalls` there goes to 1 and this arm reds — so the pair below cannot
+    // rot into a green about a file nobody generates from any more.
+    const MINT_HOME = 'src/store/settlementGenerateAction.js';
+    const mintCode = stripCommentsAndStrings(readFileSync(join(process.cwd(), MINT_HOME), 'utf-8'));
+    const mintCalls = (mintCode.match(/\bbirthConfig\(/g) || []).length;
     expect(
       mintCalls,
-      `${rel} calls birthConfig ${mintCalls} times; exactly one call is the birth `
+      `${MINT_HOME} calls birthConfig ${mintCalls} times; exactly one call is the birth `
       + `action, and a second one is a re-derivation or a preview minting a law`,
     ).toBe(1);
+    expect(
+      (code.match(/\bbirthConfig\(/g) || []).length,
+      `${rel} mints a birth law; the birth action lives in ${MINT_HOME} and the slice holds `
+      + `regenSection, so a mint here is a regeneration stamping a law onto a world that `
+      + `already exists`,
+    ).toBe(0);
   });
 });

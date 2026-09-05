@@ -192,8 +192,15 @@ describe('the reader corpus is composed from the golden key', () => {
     expect(posture.carriesDefault).toBe(true);
     // NEGATIVE CONTROL: a table missing a named preset must be reported, not shrugged off.
     expect(launchPostureIsDark({ [DEFAULT_SIMULATION_PRESET_ID]: {} }).unknown.length).toBe(3);
-    // The preview overlay is the FOUR-key form, and `characterDriftEnabled` stays OUT: no
-    // gate anywhere reads it, so setting it would be a no-op that reads as intent.
+    // The preview overlay is the FOUR-key form, and `characterDriftEnabled` stays OUT.
+    // ⛔ THE REASON HERE WAS THE SAME FALSE SENTENCE THE MODULE CARRIED, WORD FOR WORD, AND
+    // IT IS CORRECTED WITH IT (lane L-CHAIR-901, 2026-09-05). It read "no gate anywhere
+    // reads it". A gate does: `characterDriftActive` reads the key strictly in
+    // src/domain/npc/characterDrift.js and is called at four live src sites. The key stays
+    // out because the drift layer has no PRODUCTION ENTRY POINT — nothing reaches those four
+    // sites — which is a fact about callers, not about gates. Both copies are corrected
+    // together on purpose: a duplicated reason that is fixed in one place is a reason the
+    // next reader finds twice and believes the wrong half of.
     expect(Object.keys(PREVIEW_OVERLAY).sort()).toEqual([
       'demographicsEnabled', 'espionageEnabled', 'neutralNeighborsEnabled', 'warMemoryEnabled',
     ]);

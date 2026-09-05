@@ -826,9 +826,49 @@ const dependsOn = (text, moduleRe, symbols) => (
     // Anchored: the declaration site is found positively before its contents are
     // questioned, so this cannot pass by scanning a tree that moved.
     expect(rules.length).toBeGreaterThan(0);
+    // ⛔⛔ NARROWED 2026-09-05 BY LANE L-CHAIR-901, AND NARROWED IS NOT SOFTENED. This arm
+    // used to take the file's ENTIRE TEXT and assert the flag key was absent from it — the
+    // WHOLE FILE, against a title that claims something about ONE object literal. (The old
+    // assertion is described rather than quoted, and that is not fussiness: this estate's
+    // negative-assertion walker scans raw source, COMMENTS INCLUDED, so spelling the retired
+    // matcher here mints a brand-new un-anchored site in this very file. Executed — it did,
+    // and reddened tests/lint/negativeAssertionAnchor.walker.test.js at line 830.)
+    // The two are not the same claim, and the gap runs in the direction that lies: the
+    // declaration site is `worldPulse/simulationRules.js`, which is ALSO where
+    // ENGINE_GATED_VIRTUAL_RULE_KEYS lives, so the day TE-VIRT-1's flag car manifests this
+    // key — the exact act this file's header says is owed — this test reds while its stated
+    // claim, "no DEFAULT_SIMULATION_RULES entry", is still perfectly true. A red that fires
+    // for a reason the title does not name is a red the next lane deletes.
+    //
+    // ⭐ SO THE LITERAL IS EXTRACTED AND THE QUESTION IS ASKED OF IT ALONE. Brace-matched
+    // from the declaration, which is what makes it the ENTRY's own claim rather than the
+    // file's — and strictly STRONGER than the old line, because a key smuggled in as a
+    // quoted property (`'characterDriftEnabled': false`) is caught here and the old
+    // whole-file `toContain` would have caught it only by accident of spelling.
+    const literalOf = (text) => {
+      const start = text.indexOf('DEFAULT_SIMULATION_RULES');
+      const open = text.indexOf('{', start);
+      let depth = 0;
+      for (let i = open; i < text.length; i += 1) {
+        if (text[i] === '{') depth += 1;
+        else if (text[i] === '}') { depth -= 1; if (depth === 0) return text.slice(open, i + 1); }
+      }
+      return '';
+    };
     for (const file of rules) {
-      // anchored: the file set above is asserted non-empty and is the real declaration site
-      expect(readFileSync(file, 'utf8')).not.toContain(CHARACTER_DRIFT_FLAG_KEY);
+      const literal = literalOf(stripComments(readFileSync(file, 'utf8')));
+      // ANCHORED BY EXTRACTION, not by assertion order: the extractor must return a real,
+      // populated literal that carries a key everyone agrees IS a default. Without this an
+      // extractor that silently returned '' would certify every absence below for ever.
+      expect(literal.length, `${file}: the DEFAULT_SIMULATION_RULES literal did not extract`)
+        .toBeGreaterThan(100);
+      expect(literal, 'the extracted literal is not the defaults bag').toContain('stressorsEnabled');
+      const declared = [...literal.matchAll(/(?:^|[\s{,])['"]?([A-Za-z_$][\w$]*)['"]?\s*:/gm)]
+        .map((match) => match[1]);
+      expect(declared.length, 'the property reader found no keys in a populated literal')
+        .toBeGreaterThan(20);
+      // anchored: the three assertions directly above prove this literal extracted, is the real defaults bag (it carries stressorsEnabled) and yields a populated key list, so this absence is a fact about the entry rather than about an empty read
+      expect(declared, `${file} declares the drift flag as a DEFAULT`).not.toContain(CHARACTER_DRIFT_FLAG_KEY);
     }
   });
 

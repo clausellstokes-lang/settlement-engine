@@ -176,6 +176,54 @@ export function constantsIn(src) {
   return out;
 }
 
+/**
+ * ⭐⭐ THE CONTENT KEY — every fixture path a SOURCE names, resolved against a tree.
+ *
+ * ⛔ WHY A SECOND KEY EXISTS AT ALL (car L-CHAIR-901, 2026-09-05). Arm 2's fixture sweep is
+ * closed BY NAME: it filters `/golden/i.test(rel)`, so a same-seed fixture called anything
+ * else — `…-pin.json`, `…-corpus.json`, `…-baseline.json`, all live spellings in
+ * tests/fixtures today — is not in its population at all, and its silence over one is
+ * indistinguishable from a pass. Measured at this tip: 65 files under tests/fixtures, 44
+ * claimed by a register row, and the name arm's population is EXACTLY those same 44. The
+ * arm has never once been asked about a file it could convict.
+ *
+ * ⭐ THE KEY IS THE WRITER, NOT THE FILENAME. A golden is a golden because a capture arm
+ * mints it under an enrolled spelling — so the roster is derived from what the ENROLLED
+ * CARRIERS THEMSELVES NAME, read off their syntax trees. That is name-blind by construction:
+ * rename every fixture in the estate and this arm's population does not move.
+ *
+ * The resolution is deliberately generous (repo-relative, carrier-relative, and the bare
+ * basename under tests/fixtures/) and then INTERSECTED with the tree, so a literal that
+ * resolves to nothing is silently dropped rather than becoming a false finding. `present` is
+ * a parameter rather than a closure over TREE_FILES precisely so the plant below can run
+ * this exact function against a synthetic tree.
+ */
+export function fixturePathsIn(rel, src, present) {
+  const ast = astOf(src);
+  if (!ast) return [];
+  const dir = rel.split('/').slice(0, -1).join('/');
+  const out = new Set();
+  for (const node of nodesOf(ast)) {
+    if (node.type !== 'Literal' || typeof node.value !== 'string') continue;
+    const value = node.value;
+    if (!/\.(json|ndjson|snap|txt|md)$/.test(value)) continue;
+    const candidates = [value, `tests/fixtures/${value}`];
+    if (dir) {
+      const parts = dir.split('/');
+      for (const segment of value.split('/')) {
+        if (segment === '.') continue;
+        if (segment === '..') parts.pop();
+        else parts.push(segment);
+      }
+      candidates.push(parts.join('/'));
+    }
+    for (const candidate of candidates) {
+      if (candidate.startsWith('tests/') && present.has(candidate)) out.add(candidate);
+    }
+  }
+  return [...out].sort();
+}
+
 /** Does this source route its writes through the signed door? */
 export function importsDoor(src) {
   const ast = astOf(src);
@@ -460,6 +508,9 @@ describe('arm 2 — ROSTER: every golden instrument is enrolled or affirmatively
 
   it('every golden fixture file in tests/fixtures is claimed by a register row', () => {
     const claimed = new Set(SURFACES.map((s) => s.path));
+    // ── THE NAME ARM, UNCHANGED. It is narrow and it is kept: `/golden/i` on the path is
+    // the cheapest true statement about the estate's dominant spelling, and widening it in
+    // place would trade a live arm for a bigger one nobody has measured.
     const orphans = TREE_FILES.filter((rel) => {
       if (!rel.startsWith('tests/fixtures/')) return false;
       if (rel === REGISTER_REL) return false;
@@ -467,6 +518,63 @@ describe('arm 2 — ROSTER: every golden instrument is enrolled or affirmatively
       return !claimed.has(rel);
     });
     expect(orphans, 'a golden fixture no register row claims').toEqual([]);
+
+    // ── ⭐⭐ THE CONTENT-KEYED ARM, ADDED BESIDE IT (car L-CHAIR-901). Same claim, keyed on
+    // the WRITER instead of the filename: every fixture an ENROLLED capture arm names must be
+    // claimed. See `fixturePathsIn`'s header for why the name key is not enough on its own.
+    const present = new Set(TREE_FILES);
+    const enrolledSet = new Set(ENROLLED_CARRIERS);
+    const unclaimedByContent = [];
+    for (const { rel, src } of TEST_FILES) {
+      if (!enrolledSet.has(rel)) continue;
+      for (const path of fixturePathsIn(rel, src, present)) {
+        if (path === REGISTER_REL) continue;
+        if (!claimed.has(path)) unclaimedByContent.push(`${rel} mints ${path}`);
+      }
+    }
+    expect(unclaimedByContent,
+      'an enrolled capture arm writes a fixture no register row claims. Its NAME is'
+      + ' irrelevant — this arm found it through the suite that mints it. Enroll the surface,'
+      + ' or write the exclusion; a same-seed artifact called anything at all is still one.')
+      .toEqual([]);
+    // NON-VACUITY: the sweep must actually reach the enrolled fleet, or the empty list above
+    // is a fact about a scan that ran over nothing.
+    expect(enrolledSet.size, 'no enrolled carriers were enumerated').toBeGreaterThanOrEqual(40);
+
+    // ── THE ROSTER ROTS IN BOTH DIRECTIONS, AND ONLY ONE WAS GUARDED. The excluded-spelling
+    // arm above checks that a written exclusion still names something live. Its mirror was
+    // missing: an ENROLLED spelling whose carrier has been deleted or renamed leaves a
+    // register row protecting a suite that is not there, and every arm keyed on that row
+    // then passes over an empty set.
+    const liveSpellings = new Set(ENV_CARRIERS.flatMap(({ spellings }) => spellings));
+    const rottedEnrolments = [...ENROLLED_ENVS].filter((spelling) => !liveSpellings.has(spelling));
+    expect(rottedEnrolments,
+      'an enrolled recordEnv spelling has no carrier left in the tree — retire the row'
+      + ' through the door, or the register is protecting an instrument that no longer exists')
+      .toEqual([]);
+    expect(ENROLLED_ENVS.size, 'the enrolled spelling set is empty').toBeGreaterThan(0);
+
+    // ── ⛔ THE PLANT, AND IT IS THE WHOLE POINT: A MIS-NAMED FIXTURE. Synthetic, in memory,
+    // over a synthetic tree — the repository is never touched. The fixture is called
+    // `dormancy-pin.json`, which carries no `golden` anywhere, and it is unclaimed.
+    const PLANT_TREE = new Set(['tests/fixtures/dormancy-pin.json']);
+    const PLANT_MISNAMED_ARM = [
+      "import { recordGolden } from '../helpers/goldenRecordDoor.js';",
+      "const MANIFEST = 'tests/fixtures/dormancy-pin.json';",
+      'if (process.env.UPDATE_GOLDEN) {',
+      "  recordGolden({ surface: 's', path: MANIFEST, produce: () => bytes });",
+      '}',
+    ].join('\n');
+    const planted = fixturePathsIn('tests/property/plant.test.js', PLANT_MISNAMED_ARM, PLANT_TREE);
+    expect(planted, 'the content key cannot see the fixture its own arm mints')
+      .toEqual(['tests/fixtures/dormancy-pin.json']);
+    expect(claimed.has(planted[0]), 'the planted fixture was treated as already claimed')
+      .toBe(false);
+    // …AND THE OLD ARM IS SILENT OVER THE SAME FILE, which is the discrimination that makes
+    // the new one worth its lines rather than a second copy of the first.
+    expect(/golden/i.test(planted[0]),
+      'the plant is no longer mis-named — rename it, or it stops proving the name arm blind')
+      .toBe(false);
   });
 
   it('the register and the door exclude themselves by identity', () => {

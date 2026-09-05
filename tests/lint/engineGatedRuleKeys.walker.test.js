@@ -91,7 +91,7 @@
  *     is SHRINK-ONLY and asserted EXACT; never add a row to it).
  *   - deleted a gated key → remove it from whichever list names it.
  */
-import { readdirSync, readFileSync, statSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, relative } from 'node:path';
 import { describe, expect, test } from 'vitest';
@@ -243,12 +243,47 @@ const BACKLOG_RULE_KEYS = Object.freeze({
  *       `(context.simulationRules || worldState?.simulationRules || {}).<key> === true`
  *   C — a differently-named local bound from a `.simulationRules` access.
  *
- * ⚠ THE FROZEN-LIST CONJUNCTION REMAINS OPEN AND IS DELIBERATELY NOT GUARDED. It has
- * zero live instances, so a guard for it would be a pin over an empty population — the
- * recorded vacuity class. The class is real and merely dormant, so this paragraph is
- * REWORDED rather than deleted: any future virtual key gated only through a list
- * conjunction still hides from this census, and resolving frozen-list membership stays
- * a chair decision rather than a lane one.
+ * ⛔⛔ THE FROZEN-LIST CONJUNCTION REMAINS OPEN, AND THE "ZERO LIVE INSTANCES" HALF OF
+ * THIS PARAGRAPH WAS FALSE — CORRECTED 2026-09-05 BY LANE L-CHAIR-901 AGAINST AN EXECUTED
+ * SCAN. It read "It has zero live instances, so a guard for it would be a pin over an empty
+ * population — the recorded vacuity class." That sentence sent the next reader looking for
+ * an empty set. Measured over 2,188 src files through the estate's own character scanner
+ * (`codeOnly`, so a comment or a string cannot forge a hit), the population is NOT empty
+ * and never was on this tree:
+ *
+ *   THE FROZEN-LIST CONJUNCTION ITSELF — `LIST.every((key) => rules[key] === true)` — has
+ *   FOUR live rules-gating sites: worldPulse/conquestDoctrineStage.js:139
+ *   (CONQUEST_REQUIRED_RULES), worldPulse/envoyErrandOffer.js:43 and
+ *   worldPulse/npcDmVerbAuthority.js:62 (both ENVOY_REQUIRED_RULES), and
+ *   worldPulse/sovereigntyAssets.js:85 (SOVEREIGNTY_REQUIRED_RULES, itself a spread of the
+ *   envoy list). A fifth, generationContentProfile.js:186, wears the same shape over a
+ *   content-profile receiver rather than a rules bag and is not a gate.
+ *
+ *   AND THE WIDER COMPUTED-ACCESS CLASS the conjunction belongs to — ANY `<expr>[<key>]
+ *   === true` whose key is a variable rather than a token — carries three SINGLE-key rules
+ *   gates besides: npc/characterDrift.js:273 (`characterDriftEnabled`, the instance L-HOMES-7
+ *   named), worldPulse/institutionStatusModel.js:274 (`magicEconomyEnabled`) and
+ *   townScene/cartographyContract.js:618 (`townCartographyEnabled`).
+ *
+ * ⭐ SO THE CLASS IS LIVE, AND WHAT IT HIDES IS EXACTLY WHAT THE PARAGRAPH FEARED. None of
+ * `characterDriftEnabled`, `magicEconomyEnabled`, `townCartographyEnabled`,
+ * `coalitionLedgerEnabled` or the other conjunction members is a member of
+ * ENGINE_GATED_VIRTUAL_RULE_KEYS, and each is invisible to all three receiver arms below
+ * because a computed access attributes to no key token at all. `sovereigntyTradeEnabled` is
+ * the exception that proves the mechanism: it IS a manifest member and DOES reach this
+ * census — not through the conjunction at :85, but through the separate by-name
+ * `ownFlagLit` read at :84 one line above it.
+ *
+ * ⛔ AND THE GUARD IS STILL NOT BUILT HERE, WHICH IS NOW A DECISION RATHER THAN A VACUITY.
+ * A fourth arm reaching the computed class would add keys to this census, and a key that
+ * reaches the census owes an AUTHORED CERTIFICATION ROW (CR-WR10-C item 4) in the same
+ * commit — for at least the three single-key gates above, each of which the estate has
+ * deliberately left unmanifested with its own written disposition (characterDrift awaits
+ * TE-VIRT-1's flag car; the other two carry their own). That is a REGISTER ACT and an
+ * owner/chair call, not a lane one, so this lane MEASURED the class and refused to open it.
+ * What replaces the false sentence is an executed arm, in the non-vacuity test below, that
+ * asserts the population is NON-EMPTY at named addresses — so this paragraph can rot into
+ * silence but no longer into a falsehood.
  */
 const PENDING_MANIFEST_KEYS = Object.freeze([]);
 
@@ -696,6 +731,71 @@ describe('engine-gated rule keys (the census-invisible subsystem class)', () => 
     // `const priorRules = (… .simulationRules || {}); priorRules.biomeTruthEnabled === true`
     // at src/store/campaignSpatialCanonize.js.
     expect(readKeys).toContain('biomeTruthEnabled');
+
+    // ⛔⛔ THE NEGATIVE HALF, AND IT IS WHY THIS ARM EXISTS (lane L-CHAIR-901). The header
+    // used to record the frozen-list conjunction as having ZERO live instances — "a pin over
+    // an empty population, the recorded vacuity class". That was false on this tree, and a
+    // prose paragraph is where a measurement goes to rot. So the population is COUNTED here
+    // instead, and the header now points at this arm rather than at a remembered number.
+    //
+    // ⚠ THIS ARM DELIBERATELY DOES NOT WIDEN THE CENSUS. It measures the class the three
+    // receiver arms above CANNOT see and asserts it is non-empty; it adds no key to
+    // `readKeys`. Opening a fourth arm would pull unmanifested keys into the census, and a
+    // censusable key owes an authored certification row in the same commit — a register act,
+    // and a chair call. Recorded rather than taken.
+    const computedGates = [];
+    for (const { rel, src } of sourceFiles) {
+      const code = codeOnly(src);
+      code.split('\n').forEach((line, i) => {
+        // A COMPUTED member access compared strictly to true. The key is an expression, so
+        // no single-token receiver arm can attribute it — that is the whole blind spot.
+        if (/\[\s*[A-Za-z_$][\w$.]*\s*\]\s*===\s*true/.test(line)) computedGates.push(`${rel}:${i + 1}`);
+      });
+    }
+    // The FLOOR, not a ceiling: this is a collapse detector like the ones above it. It sits
+    // under the measured population so ordinary churn cannot red it.
+    expect(computedGates.length,
+      'the computed-access class has collapsed to nothing — either the scanner broke, or the'
+      + ' class really was closed and this arm plus the header paragraph must be re-ruled'
+      + ' together, never one without the other').toBeGreaterThanOrEqual(8);
+    // ⭐ THE THREE ANCHORS ARE ADDRESSES, NOT A COUNT. L-HOMES-7 named the first; the other
+    // two were measured beside it. Each is a single-key rules gate whose key is NOT a
+    // manifest member, so each is a live key this census cannot see.
+    expect(computedGates, 'characterDrift.js:273 is the instance L-HOMES-7 named')
+      .toContain('src/domain/npc/characterDrift.js:273');
+    expect(computedGates).toContain('src/domain/worldPulse/institutionStatusModel.js:274');
+    expect(computedGates).toContain('src/domain/townScene/cartographyContract.js:618');
+    // …and the FROZEN-LIST CONJUNCTION proper, the sub-shape the header named. Four live
+    // rules-gating sites; asserted by address so a deletion re-opens the question here.
+    const conjunctions = [];
+    for (const { rel, src } of sourceFiles) {
+      const code = codeOnly(src);
+      code.split('\n').forEach((line, i) => {
+        if (/\.every\s*\(\s*\(?\s*([A-Za-z_$][\w$]*)\s*\)?\s*=>\s*[A-Za-z_$][\w$.?]*\s*\[\s*\1\s*\]\s*===\s*true/.test(line)) {
+          conjunctions.push(`${rel}:${i + 1}`);
+        }
+      });
+    }
+    expect(conjunctions,
+      'the frozen-list conjunction is the shape the header called empty; it is not')
+      .toContain('src/domain/worldPulse/conquestDoctrineStage.js:139');
+    expect(conjunctions).toContain('src/domain/worldPulse/sovereigntyAssets.js:85');
+    // ANCHORED, and the anchor is the discrimination rather than a comment: the conjunction
+    // scan is STRICTLY NARROWER than the computed-access scan it lives inside, so a regex
+    // that had degenerated into matching every line would fail here instead of passing both.
+    expect(conjunctions.length).toBeLessThan(computedGates.length);
+    // ⛔ AND THE ONE MANIFEST MEMBER AMONG THEM REACHES THE CENSUS BY ITS OTHER SPELLING.
+    // `sovereigntyTradeEnabled` is gated at :85 through the conjunction — invisible here —
+    // and at :84 by name, which is the read this census actually sees. Without this line the
+    // paragraph above would be a story; with it, the mechanism is executed.
+    expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toContain('sovereigntyTradeEnabled');
+    expect(readKeys, 'sovereigntyTradeEnabled reaches the census through its by-name read')
+      .toContain('sovereigntyTradeEnabled');
+    const driftMsg = 'characterDriftEnabled is gated ONLY through a computed access, so it'
+      + ' must NOT appear in this census — if it does, a fourth arm landed and every key it'
+      + ' newly reaches owes an authored certification row in this same commit';
+    // anchored: the two lines above prove readKeys is populated AND contains the manifest member sovereigntyTradeEnabled, so this absence is a fact about the computed-access blind spot rather than about an empty scan.
+    expect(readKeys, driftMsg).not.toContain('characterDriftEnabled');
   });
 
   test('the manifest holds against the tree in BOTH directions', () => {
@@ -832,6 +932,75 @@ describe('engine-gated rule keys (the census-invisible subsystem class)', () => 
     // not vanish from it and must stay censusable.
     expect(ENGINE_GATED_VIRTUAL_RULE_KEYS, 'the derivation mutated the register').toContain(subject);
     expect(simulationRuleKeys(), 'a registered key must stay censusable').toContain(subject);
+
+    // ── ⛔⛔ THE NO-FENCE ROSTER, DERIVED AT THE COMPOSITION (lane L-CHAIR-901) ────────────
+    // ⭐ THE RULE THIS MAKES EXECUTABLE: every register member owes a DARK PROOF — a test
+    // that constructs the dark state EXPLICITLY (a literal `false`, an absent key, or a named
+    // DARK constant, never inherited from the default), asserts a bit-level dark claim, and
+    // pairs it with a LIT CONTROL on the same fixture. Lane L-HOMES-3 (LGT-P13-FENCES) wrote
+    // that rule and applied it by hand against a register of THIRTY members. The register is
+    // now THIRTY-FIVE — SEAT-78 added `irregularForceEnabled` and LGT-P5-WOPS the four W-OPS
+    // keys — so the hand derivation expired the moment those cars composed. It is re-derived
+    // HERE, from the tree, on every gate, instead of being re-typed by the next lane.
+    //
+    // ⚠ A `tests/property/*DormancyFence.test.js` FILE IS ONE WAY TO PAY, NOT THE ONLY WAY,
+    // and pretending otherwise would demand twelve files the estate has already ruled against
+    // — `treatyRenewalEnabled` most sharply, whose chair judgment J-TC11-2
+    // (tests/domain/treatyRenewalMemory.test.js) FORBIDS giving it a tests/property/ file. So
+    // the roster below is the second, equally valid form: the key, and the ADDRESS of the
+    // instrument that already carries its dark proof. The derivation reds when the two
+    // disagree in EITHER direction.
+    const NO_FENCE_DISPOSITIONS = Object.freeze({
+      // The seven that predate the composition. Each verdict is L-HOMES-3's, re-checked here.
+      habitConditioningEnabled: 'tests/property/habitNeutralIdentity.test.js',
+      migrationRumorsEnabled: 'tests/property/migrationRumorsDormancyGolden.test.js',
+      settlementPoliticsEnabled: 'tests/property/settlementPoliticsDormancyGolden.test.js',
+      // ⛔ CHAIR-RULED, NOT MERELY UNFENCED: J-TC11-2 forbids a tests/property/ file here.
+      treatyRenewalEnabled: 'tests/domain/treatyRenewalMemory.test.js',
+      undercityHighWaterEnabled: 'tests/domain/undercityColonization.test.js',
+      foreignSeatEnabled: 'tests/domain/foreignSeatDormancy.byteIdentity.test.js',
+      legitimacyUpheavalEnabled: 'tests/domain/legitimacyUpheavalDormancy.byteIdentity.test.js',
+      // The FIVE the composition added, each measured at this tip rather than assumed.
+      // SEAT-78's key: explicit `false`, raw-byte identity, and a named LIT ANTI-VACUITY arm.
+      irregularForceEnabled: 'tests/domain/irregularForceDormancy.byteIdentity.test.js',
+      // ⭐ AND THE FOUR W-OPS KEYS ARE FENCED AT THE FAMILY GATE, WHICH IS WHERE THEIR READ
+      // LIVES. None of the four leaves holds its own gate: `infiltrationDepthEnabled`,
+      // `missionDispatcherEnabled` and `operationsVoiceEnabled` are read by name in
+      // espionage/espionageGate.js (:116, :147, :177) and `envoyTaskCatalogEnabled` in
+      // errandMint.js:108. A fence in the LEAF would therefore pin a module with no gate in
+      // it. Each suite below drives its key false against a fully lit world, asserts the dark
+      // verdict, pairs it with the lit control, AND drives the conjunction — a lit key over a
+      // dark layer stays dark — which is the arm a leaf-local fence could not have written.
+      infiltrationDepthEnabled: 'tests/domain/infiltrationDepth.test.js',
+      missionDispatcherEnabled: 'tests/domain/missionDispatcher.test.js',
+      operationsVoiceEnabled: 'tests/domain/operationsVoice.test.js',
+      envoyTaskCatalogEnabled: 'tests/domain/envoyTaskCatalog.test.js',
+    });
+    const fenceFiles = walk(join(ROOT, 'tests/property'))
+      .filter((p) => /DormancyFence\.test\.js$/.test(p))
+      .map((p) => readFileSync(p, 'utf8'));
+    // NON-VACUITY FIRST: a fence sweep that found nothing would put every key on the roster
+    // and the equality below would still be satisfiable by editing the roster to match.
+    expect(fenceFiles.length, 'the dormancy-fence sweep found no fence files at all')
+      .toBeGreaterThanOrEqual(19);
+    const derivedNoFence = ENGINE_GATED_VIRTUAL_RULE_KEYS
+      .filter((key) => !fenceFiles.some((text) => text.includes(key)));
+    expect([...derivedNoFence].sort(),
+      'the register and the no-fence roster have drifted. A key that APPEARS here gained a'
+      + ' manifest entry without a dormancy fence and without a written disposition — give it'
+      + ' a fence, or add its dark-proof address to NO_FENCE_DISPOSITIONS. A key that VANISHES'
+      + ' here gained a fence and must leave the roster, or the roster protects nothing.')
+      .toEqual(Object.keys(NO_FENCE_DISPOSITIONS).sort());
+    // EVERY ADDRESS IS LIVE AND NAMES ITS KEY. A disposition pointing at a file that no longer
+    // mentions the key is the dead-citation class: it reads as coverage and is not.
+    const rotted = Object.entries(NO_FENCE_DISPOSITIONS).filter(([key, address]) => {
+      const full = join(ROOT, address);
+      if (!existsSync(full)) return true;
+      return !readFileSync(full, 'utf8').includes(key);
+    });
+    expect(rotted.map(([key, address]) => `${key} -> ${address}`),
+      'a no-fence disposition names a file that is gone, or that has stopped naming its key')
+      .toEqual([]);
   });
 
   test('every exemption carries a rationale, and the backlog is exact and shrink-only', () => {

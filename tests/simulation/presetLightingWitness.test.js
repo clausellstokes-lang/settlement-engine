@@ -34,6 +34,32 @@
  * ⚠ THIS IS A BYTE GOLDEN OVER THE WHOLE PULSE. It moves when the pulse moves, not only
  * when a preset moves — that breadth is the point of a bit witness, and the row diff
  * names which fields moved. A move with no stated cause is the finding.
+ *
+ * ── ⛔⛔ CHAIR RULING, 2026-09-05: THIS INSTRUMENT AND THE LANE PROBE `lprobe/pulse-hashes.mjs`
+ *    ARE NOT COMPARABLE, AND THAT IS BY DESIGN ─────────────────────────────────────────────
+ * The two look like the same measurement and are not. Both hash 52 interior one-week ticks,
+ * both cut one row per simulation preset, both take their rules from the real birth path.
+ * The temptation to "unify" them, or to treat a disagreement between their digests as a
+ * finding, is therefore obvious and WRONG — so the refusal is written into both headers
+ * rather than left to be rediscovered by whoever notices the resemblance next.
+ *
+ *   THIS SUITE MEASURES A PRESET IN ISOLATION. Its realm is HAND-BUILT — two settlements
+ *   written out as plain data in presetLightingWitnessRun.js, with no generator anywhere in
+ *   the path, and that file's own header says why: "A fixture composed through
+ *   `generateSettlementPipeline` would couple this witness to the generator", so a moved row
+ *   would leave a reader unable to say whether the PRESET moved or the world it was measured
+ *   on did. One cause per move is the whole value of this surface.
+ *
+ *   THE LANE PROBE MEASURES A PRESET IN A CORPUS-SHAPED WORLD. It composes its fixture
+ *   through the real pipeline — generateSettlementPipeline, saves, the grid pack, the spatial
+ *   digest, the regional graph — because its question is what a preset does to a world the
+ *   estate would actually generate. That is a DIFFERENT question, and its answer must be
+ *   allowed to move when the generator moves.
+ *
+ * ⭐ SO: the two digests are expected to differ, always, on every preset. Neither is the
+ * other's control, neither is the other's baseline, and no arm anywhere may join them.
+ * A row here that moves is read against THIS file's discipline (a stated legitimate cause in
+ * the golden-shift ledger) and never against the probe's output.
  */
 import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
