@@ -37,10 +37,14 @@ const ANGLES = [
 const ONLY = (args && args.only) || null   // e.g. ['tolkien'] — a subset run under a tight agent cap
 const SKIP_AI = !!(args && args.skipAI)
 const EX = ONLY ? EXEMPLARS.filter(e => ONLY.includes(e.key)) : EXEMPLARS
+// SUCCESSOR PATH: a workflow run id is resumable only inside the session that made it. `args.stateFile` (an export from
+// export-sweep-state.mjs) supplies the claims already found (and the verdicts already returned) so a NEW session skips Find
+// and verifies only the indices that have no verdict. The file's `claims` are the full list; `verdicts` is keyed by index.
+const STATE = (args && args.stateFile) ? (await agent(`Read the JSON file ${args.stateFile} and return it VERBATIM as your structured output — do not summarise, do not alter a byte of any string.`, { label: 'load-state', schema: { type: 'object', required: ['claims'], properties: { claims: { type: 'array' }, verdicts: { type: 'object' } } }, effort: 'low' })) : null
 phase('Find')
 const findJobs = []
 for (const ex of EX) for (const an of ANGLES) findJobs.push({ ex, an })
-const found = await batched(findJobs, ({ ex, an }, i) => agent(
+const found = STATE ? [] : await batched(findJobs, ({ ex, an }, i) => agent(
   `You are a research finder. Subject: the prose STYLE of ${ex.name} (${ex.notes}). Angle: ${an.prompt}. Use WebSearch and WebFetch; READ every source you cite (fetch it), never rely on a search snippet. Find as many substantive sources as this angle yields (aim for 10–20; stop when two consecutive searches return nothing new). For each source list it (title, url, kind, substantive true/false). Extract CLAIMS about concrete prose features: each claim names the feature (e.g. 'register modulation', 'Anglo-Saxon diction', 'two-sentence boxed text'), states it in one sentence, names the source and url, and carries at most one verbatim quotation under twelve words (or an empty string). Never reproduce copyrighted passages beyond twelve words. Write your raw notes to ${OUT}/find-${ex.key}-${an.key}.md and return the structured result.`,
   { label: `find:${ex.key}:${an.key}`, phase: 'Find', schema: FINDINGS }))
 const AI_ANGLES = [
@@ -49,10 +53,10 @@ const AI_ANGLES = [
   { key: 'industry', prompt: 'publishing and games industry: magazine editors on AI slush, DMs Guild / RPG publishers on AI submissions, style-guide bans, what readers report noticing' },
   { key: 'counter', prompt: 'the case AGAINST the common tells: sources arguing em dashes, triads and antithesis are legitimate devices, that detection heuristics fail, that human prose shares the features — the disconfirming evidence' },
 ]
-const foundAI = SKIP_AI ? [] : await batched(AI_ANGLES, (an) => agent(
+const foundAI = (SKIP_AI || STATE) ? [] : await batched(AI_ANGLES, (an) => agent(
   `You are a research finder. Subject: where generated (LLM) prose FAILS against skilled human fiction and game writing. Angle: ${an.prompt}. Use WebSearch and WebFetch; READ every source you cite; aim for 10–20 substantive sources, stop after two consecutive dry searches. For each source list it; extract CLAIMS as concrete failure modes (feature, one-sentence claim, source, url, one verbatim quotation under twelve words or empty). Write raw notes to ${OUT}/find-ai-${an.key}.md and return the structured result.`,
   { label: `find:ai:${an.key}`, phase: 'Find', schema: FINDINGS }))
-const allClaims = [...found, ...foundAI].flatMap((r, i) => (r && r.claims ? r.claims : []).map(c => ({ ...c, batch: i })))
+const allClaims = STATE ? STATE.claims.map((c, i) => ({ ...c, batch: c.batch ?? 0 })) : [...found, ...foundAI].flatMap((r, i) => (r && r.claims ? r.claims : []).map(c => ({ ...c, batch: i })))
 const seen = new Set(); const claims = []
 for (const c of allClaims) { const k = (c.source + '|' + c.feature + '|' + c.claim.slice(0, 60)).toLowerCase(); if (!seen.has(k)) { seen.add(k); claims.push(c) } }
 log(`found ${allClaims.length} claims, ${claims.length} after dedupe, from ${[...found, ...foundAI].filter(Boolean).reduce((n, r) => n + r.sourcesRead.length, 0)} sources read`)
@@ -60,11 +64,15 @@ phase('Verify')
 const VERDICTS = { type: 'object', required: ['verdicts'], properties: { verdicts: { type: 'array', items: { type: 'object', required: ['index', 'verdict', 'trueWording', 'note'], properties: { index: { type: 'integer' }, verdict: { type: 'string', enum: ['VERIFIED_VERBATIM', 'VERIFIED_SUBSTANCE', 'NOT_FOUND', 'CONTRADICTED', 'BLOCKED'] }, trueWording: { type: 'string' }, note: { type: 'string' } } } } } }
 const CHUNK = (args && args.chunk) || 15
 const chunks = []
-for (let i = 0; i < claims.length; i += CHUNK) chunks.push(claims.slice(i, i + CHUNK).map((c, j) => ({ ...c, index: i + j })))
+const preVerdicts = (STATE && STATE.verdicts) || {}
+const indexed = claims.map((c, i) => ({ ...c, index: i }))
+const todo = indexed.filter(c => !preVerdicts[c.index])
+log(`verification: ${indexed.length} claims, ${indexed.length - todo.length} already verified in the exported state, ${todo.length} to verify`)
+for (let i = 0; i < todo.length; i += CHUNK) chunks.push(todo.slice(i, i + CHUNK))
 const verifiedChunks = await batched(chunks, (chunk, ci) => agent(
   `Adversarially verify EACH of the following ${chunk.length} attributed claims by fetching its source as RAW text (WebFetch the url; group the claims by url and fetch each url ONCE; if a host blocks, try the Wayback Machine once, else BLOCKED). For each claim report its index and: VERIFIED_VERBATIM only if the quotation appears on the page word for word; VERIFIED_SUBSTANCE if the page supports the claim in other words (give the true wording, under twelve words); NOT_FOUND if the page does not support it; CONTRADICTED if it says otherwise. Default to NOT_FOUND when uncertain. Return one verdict per index, all ${chunk.length}.\n\nCLAIMS:\n${JSON.stringify(chunk.map(c => ({ index: c.index, feature: c.feature, claim: c.claim, source: c.source, url: c.url, quote: c.quote })))}`,
   { label: `verify:chunk${ci}`, phase: 'Verify', schema: VERDICTS, model: 'opus' }).then(v => ({ chunk, v })))
-const verified = []
+const verified = indexed.filter(c => preVerdicts[c.index]).map(c => ({ ...c, verdict: preVerdicts[c.index] }))
 for (const r of verifiedChunks.filter(Boolean)) { const byIndex = new Map((r.v.verdicts || []).map(x => [x.index, x])); for (const c of r.chunk) verified.push({ ...c, verdict: byIndex.get(c.index) || { verdict: 'NOT_FOUND', trueWording: '', note: 'no verdict returned for this index' } }) }
 const kept = verified.filter(x => x.verdict && (x.verdict.verdict === 'VERIFIED_VERBATIM' || x.verdict.verdict === 'VERIFIED_SUBSTANCE'))
 log(`verified: ${kept.length} of ${verified.length} claims survive (${verifiedChunks.filter(Boolean).length} of ${chunks.length} verifier chunks returned)`)

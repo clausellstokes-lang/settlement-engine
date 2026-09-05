@@ -1,0 +1,1613 @@
+{
+ "name": "ai",
+ "runId": "wf_60f0a1e1-39c",
+ "exportedAt": "2026-09-05T22:19:45.005Z",
+ "claims": [
+  {
+   "feature": "theme over-explanation",
+   "claim": "AI stories state their themes outright far more often than human stories (explicit narrator thematic commentary 77% vs 52%).",
+   "source": "Russell, Rajendhran, Iyyer & Wieting, StoryScope (arXiv 2604.03136, Apr 2026)",
+   "url": "https://arxiv.org/html/2604.03136v3",
+   "quote": "AI stories over-explain themes and favor tidy, single-track plots"
+  },
+  {
+   "feature": "single-track plot / no subplots",
+   "claim": "AI stories run one plot line with no subplots 79% of the time versus 57% for human stories.",
+   "source": "Russell et al., StoryScope (arXiv 2604.03136)",
+   "url": "https://arxiv.org/html/2604.03136v3",
+   "quote": ""
+  },
+  {
+   "feature": "embodied emotion formula",
+   "claim": "AI stories express emotion through bodily-response description in 81% of stories versus 38% of human stories.",
+   "source": "Russell et al., StoryScope (arXiv 2604.03136)",
+   "url": "https://arxiv.org/html/2604.03136v3",
+   "quote": ""
+  },
+  {
+   "feature": "olfactory imagery reflex",
+   "claim": "AI stories reach for smell imagery in 82% of stories versus 57% of human stories.",
+   "source": "Russell et al., StoryScope (arXiv 2604.03136)",
+   "url": "https://arxiv.org/html/2604.03136v3",
+   "quote": ""
+  },
+  {
+   "feature": "protagonist-driven tidy resolution",
+   "claim": "AI stories resolve through the protagonist's own action 69% of the time versus 46% for humans, and end ambiguously less often.",
+   "source": "Russell et al., StoryScope (arXiv 2604.03136)",
+   "url": "https://arxiv.org/html/2604.03136v3",
+   "quote": ""
+  },
+  {
+   "feature": "moral ambiguity deficit",
+   "claim": "Human protagonists' choices are framed as morally ambiguous in 59% of stories versus 38% of AI stories.",
+   "source": "Russell et al., StoryScope (arXiv 2604.03136)",
+   "url": "https://arxiv.org/html/2604.03136v3",
+   "quote": "frame protagonist' choices as more morally ambiguous"
+  },
+  {
+   "feature": "temporal complexity / time jumps",
+   "claim": "Human stories use chronological discontinuity, fourth-wall breaks (67% vs 39%), direct reader address (28% vs 7%) and named intertextual references (47% vs 24%) far more than AI stories.",
+   "source": "Russell et al., StoryScope (arXiv 2604.03136)",
+   "url": "https://arxiv.org/html/2604.03136v3",
+   "quote": ""
+  },
+  {
+   "feature": "narrative-space homogeneity",
+   "claim": "AI stories cluster in a shared region of narrative-feature space (human–AI centroid distance 1.6x AI–AI; 24.7% of human stories in the rarest decile vs 7.1% of AI).",
+   "source": "Russell et al., StoryScope (arXiv 2604.03136)",
+   "url": "https://arxiv.org/html/2604.03136v3",
+   "quote": "occupy a rarer, more dispersed region of narrative space"
+  },
+  {
+   "feature": "discourse tells survive style polishing",
+   "claim": "Narrative-level features still identify AI fiction at 93.9% macro-F1 after professional-style rewriting, so surface edits do not humanize structure.",
+   "source": "Russell et al., StoryScope (arXiv 2604.03136)",
+   "url": "https://arxiv.org/html/2604.03136v3",
+   "quote": "far harder to humanize"
+  },
+  {
+   "feature": "model-specific fingerprints",
+   "claim": "Each model family has a signature: Claude's event intensity escalates less, GPT over-uses gossip and dream sequences, Gemini writes the tidiest endings.",
+   "source": "Russell et al., StoryScope (arXiv 2604.03136)",
+   "url": "https://arxiv.org/html/2604.03136v3",
+   "quote": "Claude produces notably flat event escalation"
+  },
+  {
+   "feature": "lexical overuse (style verbs/adjectives)",
+   "claim": "LLM-processed text shows abrupt excess of style words such as delves (28x), showcasing (10x), intricate, underscores, pivotal, meticulously, realm; 2024 excess words were 66% verbs and 16% adjectives.",
+   "source": "Kobak, González-Márquez, Horvát & Lause (arXiv 2406.07016; Science Advances 2025)",
+   "url": "https://arxiv.org/html/2406.07016v4",
+   "quote": ""
+  },
+  {
+   "feature": "lexical overuse not inherited from training data",
+   "claim": "Twenty-one focal words (delve, showcasing, underscores, intricate, garnered, boasts, groundbreaking, realm, aligns, etc.) are overrepresented in ChatGPT output yet not in pre-LLM corpora, consistent with RLHF as the source.",
+   "source": "Juzek & Ward, Why Does ChatGPT Delve So Much? (arXiv 2412.11385, Dec 2024)",
+   "url": "https://arxiv.org/html/2412.11385v1",
+   "quote": "Lexical overrepresentation remains a feature of current iterations of ChatGPT"
+  },
+  {
+   "feature": "reader sensitisation to tell-words",
+   "claim": "Readers become wary of signature words like delve and may judge a text on those words rather than its content.",
+   "source": "Juzek & Ward (arXiv 2412.11385)",
+   "url": "https://arxiv.org/html/2412.11385v1",
+   "quote": "wary of the word 'delve'"
+  },
+  {
+   "feature": "overall creativity gap vs professionals",
+   "claim": "Professional New Yorker stories pass 84.7% of 14 expert creativity tests; LLM stories pass 9% (GPT-3.5) to 30% (Claude 1.3).",
+   "source": "Chakrabarty, Laban, Agarwal, Muresan & Wu, Art or Artifice? (CHI 2024; arXiv 2309.14556)",
+   "url": "https://arxiv.org/abs/2309.14556",
+   "quote": "three to ten times less likely to pass individual TTCW"
+  },
+  {
+   "feature": "originality in form and theme",
+   "claim": "LLM stories almost never pass Originality in Form (0–8.3% vs 63.9%) or Originality in Theme & Content (0–19.4% vs 75%).",
+   "source": "Chakrabarty et al., Art or Artifice? (CHI 2024)",
+   "url": "https://arxiv.org/abs/2309.14556",
+   "quote": ""
+  },
+  {
+   "feature": "rhetorical complexity and literary devices",
+   "claim": "LLM stories pass Rhetorical Complexity only 2.8–11.1% of the time (humans 88.9%) and Literary Devices 5.6–36.1% (humans 88.9%).",
+   "source": "Chakrabarty et al., Art or Artifice? (CHI 2024)",
+   "url": "https://arxiv.org/abs/2309.14556",
+   "quote": "Attempts at figurative language come across as overwrought, confusing, nonsensical."
+  },
+  {
+   "feature": "subtlety and restraint",
+   "claim": "Expert writers report that LLM figurative language lacks subtlety and obscures rather than illuminates.",
+   "source": "Chakrabarty et al., Art or Artifice? (CHI 2024)",
+   "url": "https://arxiv.org/abs/2309.14556",
+   "quote": "Subtlety and restraint seem lacking"
+  },
+  {
+   "feature": "endings",
+   "claim": "LLM stories pass the Narrative Ending test 8.3–33.3% of the time versus 91.7% for professionals; experts flag moralistic, unearned and unrealistically happy resolutions.",
+   "source": "Chakrabarty et al., Art or Artifice? (CHI 2024)",
+   "url": "https://arxiv.org/abs/2309.14556",
+   "quote": "Abrupt or unearned resolutions, overly moralistic conclusions, unrealistic happy endings"
+  },
+  {
+   "feature": "scene vs summary balance",
+   "claim": "LLM stories lean on summary/exposition instead of dramatized scene (pass 8.3–58.3% vs 91.7%).",
+   "source": "Chakrabarty et al., Art or Artifice? (CHI 2024)",
+   "url": "https://arxiv.org/abs/2309.14556",
+   "quote": "Overreliance on summary leaves the narrative ungrounded"
+  },
+  {
+   "feature": "character development and voice flexibility",
+   "claim": "LLM stories pass Character Development 8.3–16.7% (humans 61.1%) and Perspective & Voice Flexibility 8.3–19.4% (humans 72.2%).",
+   "source": "Chakrabarty et al., Art or Artifice? (CHI 2024)",
+   "url": "https://arxiv.org/abs/2309.14556",
+   "quote": ""
+  },
+  {
+   "feature": "hackneyed ideas despite clean surface",
+   "claim": "A story can avoid clichéd phrasing yet still fail originality because its ideas and themes are stock.",
+   "source": "Chakrabarty et al., Art or Artifice? (CHI 2024), expert explanation on a Claude story",
+   "url": "https://arxiv.org/abs/2309.14556",
+   "quote": "its ideas and themes are hackneyed"
+  },
+  {
+   "feature": "LLM-as-judge invalid for craft",
+   "claim": "No LLM judge positively correlated with expert creativity assessments of the same stories.",
+   "source": "Chakrabarty et al., Art or Artifice? (CHI 2024)",
+   "url": "https://arxiv.org/abs/2309.14556",
+   "quote": "None of the LLMs positively correlate with the expert assessments"
+  },
+  {
+   "feature": "novelty, surprise, diversity",
+   "claim": "Across 60 LLMs vs 60 humans, human five-sentence stories are more novel, more surprising and more lexically and semantically diverse (p<0.05 to p<0.0001).",
+   "source": "Ismayilzada, Stevenson & van der Plas (ICCC 2025; arXiv 2411.02316)",
+   "url": "https://arxiv.org/abs/2411.02316",
+   "quote": "fall short in terms of novelty, surprise and diversity"
+  },
+  {
+   "feature": "verbosity mistaken for quality",
+   "claim": "LLM stories are more linguistically complex and verbose (more unique words, longer dependency paths, more nouns and adjectives) but less creative than human stories.",
+   "source": "Ismayilzada et al. (ICCC 2025)",
+   "url": "https://arxiv.org/abs/2411.02316",
+   "quote": "linguistically more complex and verbose yet less creative"
+  },
+  {
+   "feature": "expert vs non-expert divergence",
+   "claim": "Experts rate human stories 1.25 points higher than LLM stories while non-experts rate LLM stories 1.19 points higher and LLM judges 1.85 higher; lay ratings track word count.",
+   "source": "Ismayilzada et al. (ICCC 2025)",
+   "url": "https://arxiv.org/abs/2411.02316",
+   "quote": "driven by linguistic complexity of the stories"
+  },
+  {
+   "feature": "collective homogenisation via AI ideas",
+   "claim": "Writers given GPT-4 story ideas produced stories 10.7% more similar to one another and 5.2% more similar to the AI prompts, while individual ratings rose mostly for low-creativity writers.",
+   "source": "Doshi & Hauser, Science Advances 10(28), 2024",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11244532/",
+   "quote": "collectively a narrower scope of novel content is produced"
+  },
+  {
+   "feature": "lay detection heuristics are flawed",
+   "claim": "People cannot detect AI-written self-presentations and rely on cues (first person, contractions, family topics) that AI can exploit to seem more human than humans.",
+   "source": "Jakesch, Hancock & Naaman, PNAS 120(11), 2023",
+   "url": "https://arxiv.org/abs/2206.07271",
+   "quote": "intuitive but flawed heuristics"
+  },
+  {
+   "feature": "stylometric uniformity by model",
+   "claim": "Burrows' Delta on most-frequent words shows LLM stories clustering tightly by model while human stories spread widely; newer GPT-4 is tighter than GPT-3.5.",
+   "source": "O'Sullivan, Humanities & Social Sciences Communications 12 (2025-11-11)",
+   "url": "https://www.nature.com/articles/s41599-025-05986-3",
+   "quote": "display a higher degree of stylistic uniformity, clustering tightly by model"
+  },
+  {
+   "feature": "one plot template across cultures",
+   "claim": "11,800 gpt-4o-mini stories for 236 nationalities conform to a single small-town, return-to-tradition, community-event plot with conflict sanitised and tension downplayed.",
+   "source": "Rettberg & Wigers (arXiv 2507.22445, Jul 2025)",
+   "url": "https://arxiv.org/abs/2507.22445",
+   "quote": "Real-world conflicts are sanitised, romance is almost absent"
+  },
+  {
+   "feature": "stability-over-change bias",
+   "claim": "AI stories prioritise stability, nostalgia and reconciliation over change, a form of narrative standardisation distinct from representational bias.",
+   "source": "Rettberg & Wigers (arXiv 2507.22445)",
+   "url": "https://arxiv.org/abs/2507.22445",
+   "quote": "prioritises stability above change"
+  },
+  {
+   "feature": "voice flattening under revision",
+   "claim": "LLM rewriting of personal narratives removes contractions, first-person pronouns, function words and emotion words while raising word length and vocabulary diversity, shifting embedded narration toward distanced narration even under voice-preserving prompts.",
+   "source": "van Nuenen, Voice Under Revision (arXiv 2604.22142, Apr 2026)",
+   "url": "https://arxiv.org/abs/2604.22142",
+   "quote": "from embedded to distanced narration"
+  },
+  {
+   "feature": "linguistic originality / recombination",
+   "claim": "Professional authors' CREATIVITY INDEX (share of text not reconstructible from web n-grams) is 66.2% higher than LLMs', and RLHF alignment lowers LLMs' index by 30.1%.",
+   "source": "Lu, Sclar, Hallinan, Mireshghallah et al., AI as Humanity's Salieri (arXiv 2410.04265)",
+   "url": "https://arxiv.org/abs/2410.04265",
+   "quote": "on average 66.2% higher than that of LLMs"
+  },
+  {
+   "feature": "present-participial clause overuse",
+   "claim": "Instruction-tuned models use present participial clauses 2–5x the human rate (GPT-4o 5.3x, d=1.38), e.g. 'Bryan, leaning on his agility, dances around the ring'.",
+   "source": "Reinhart, Markey, Laudenbach, Pantusen, Yurko, Weinberg & Brown, PNAS 122 (2025-02-25)",
+   "url": "https://arxiv.org/html/2410.16107v2",
+   "quote": ""
+  },
+  {
+   "feature": "nominalization and noun density",
+   "claim": "Instruction-tuned LLMs use nominalizations 1.5–2x, 'that' subject clauses 2.6x and phrasal coordination 1.9x human rates, producing a noun-heavy academic style regardless of genre.",
+   "source": "Reinhart et al., PNAS 2025",
+   "url": "https://arxiv.org/html/2410.16107v2",
+   "quote": "informationally dense, noun-heavy style"
+  },
+  {
+   "feature": "signature vocabulary in fiction",
+   "claim": "GPT-4o uses camaraderie 162x, tapestry 155x, intricate 119x, underscore 107x, amidst 100x human rates; GPT-4o-mini palpable 145x; words that connote complex relations produce hollow summative sentences.",
+   "source": "Reinhart et al., PNAS 2025",
+   "url": "https://arxiv.org/html/2410.16107v2",
+   "quote": "grandiose, if hollow, summative sentences"
+  },
+  {
+   "feature": "register invariance",
+   "claim": "LLMs fail to vary style by genre or context the way humans do, so fiction-appropriate words become conspicuous elsewhere and the same style is applied everywhere.",
+   "source": "Reinhart et al., PNAS 2025",
+   "url": "https://arxiv.org/html/2410.16107v2",
+   "quote": "do not vary their linguistic output in response to contextual factors"
+  },
+  {
+   "feature": "professional edit taxonomy",
+   "claim": "Professional writers editing 1,057 LLM paragraphs spent 28% of edits on awkward word choice, 20% on poor sentence structure, 18% on unnecessary/redundant exposition and 17% on clichés, plus purple prose, lack of specificity and tense slips.",
+   "source": "Chakrabarty, Laban & Wu, Can AI writing be salvaged? (CHI 2025; arXiv 2409.14509)",
+   "url": "https://arxiv.org/html/2409.14509v4",
+   "quote": "Writer-edited > LLM-edited > LLM-generated"
+  },
+  {
+   "feature": "syntactic templates and tell-words",
+   "claim": "LLM prose repeats templates such as 'sense of', 'weight of', 'mix of', and the word 'unspoken' appears in about 15% of LLM outputs but rarely in human samples.",
+   "source": "Chakrabarty, Laban & Wu (CHI 2025)",
+   "url": "https://arxiv.org/html/2409.14509v4",
+   "quote": ""
+  },
+  {
+   "feature": "no model family is better at prose",
+   "claim": "Writers saw no significant quality difference among GPT-4o, Claude-3.5-Sonnet and Llama-3.1-70b, and fiction scored lower (4.5) than creative nonfiction (5.0–5.2).",
+   "source": "Chakrabarty, Laban & Wu (CHI 2025)",
+   "url": "https://arxiv.org/html/2409.14509v4",
+   "quote": "writers perceived no significant qualitative differences"
+  },
+  {
+   "feature": "plot echoes across generations",
+   "claim": "Idiosyncratic plot elements recur across many samples from the same prompt (50/100 continuations 'take the second left', 16/100 a bakery) and even across models, while human plot elements sit in the tail or outside the LLM distribution.",
+   "source": "Xu, Jojic, Rao, Brockett & Dolan, Echoes in AI (PNAS 2025-09-02; arXiv 2501.00273)",
+   "url": "https://arxiv.org/html/2501.00273",
+   "quote": "plot elements that are echoed across a number of generations"
+  },
+  {
+   "feature": "abrupt resolution after a peak",
+   "claim": "LLM stories show 7–9x higher 'drop ratios' than human stories, meaning a suspenseful element is resolved immediately after it peaks instead of being developed.",
+   "source": "Xu et al., Echoes in AI (PNAS 2025)",
+   "url": "https://arxiv.org/html/2501.00273",
+   "quote": ""
+  },
+  {
+   "feature": "positive-arc bias",
+   "claim": "GPT-4 stories are Man-in-a-Hole over half the time and Rags-to-Riches 13.0% (humans 4.4%), while Riches-to-Rags (1.3% vs 14.6%) and Oedipus (1.7% vs 9.3%) arcs nearly vanish.",
+   "source": "Tian, Huang, Liu, Jiang, Spangher, Chen, May & Peng (EMNLP 2024; arXiv 2407.13248)",
+   "url": "https://arxiv.org/html/2407.13248",
+   "quote": "strongly favoring positive outcomes"
+  },
+  {
+   "feature": "early climax and low suspense",
+   "claim": "Major Setback and Climax arrive about 10–15% earlier in GPT-4 narratives, and human stories sustain higher suspense with the gap widening from midpoint to end.",
+   "source": "Tian et al. (EMNLP 2024)",
+   "url": "https://arxiv.org/html/2407.13248",
+   "quote": "higher levels of suspense"
+  },
+  {
+   "feature": "ending predictability / tension",
+   "claim": "By the 100-Endings metric, professional New Yorker fiction stays unpredictable near the close (no-rate 0.607) while top LLM stories collapse to 0.215, retaining only 23% of tension peaks versus 52%.",
+   "source": "Sui, Zhu, Cheng, West, So, Long & Holtzman, Spoiler Alert (arXiv 2604.09854, Apr 2026)",
+   "url": "https://arxiv.org/html/2604.09854v1",
+   "quote": "fundamental inability to defer closure"
+  },
+  {
+   "feature": "benchmarks miss tension",
+   "claim": "EQ-Bench rubric scores rank LLM stories (81–84) above New Yorker stories (78.71) even though the LLM stories are far more predictable.",
+   "source": "Sui et al., Spoiler Alert (arXiv 2604.09854)",
+   "url": "https://arxiv.org/html/2604.09854v1",
+   "quote": ""
+  },
+  {
+   "feature": "low entropy / predictability",
+   "claim": "Across 28 LLMs, human story continuations are 2–4x more surprising (perplexity ratios 2.76–8.82x); instruction tuning widens the gap and the gap is 25–30% larger in fiction than in essays or news.",
+   "source": "Sui, LLMs Exhibit Significantly Lower Uncertainty in Creative Writing (arXiv 2602.16162, Feb 2026)",
+   "url": "https://arxiv.org/html/2602.16162",
+   "quote": "trite, repetitive, overly verbose, and cliché-ridden"
+  },
+  {
+   "feature": "post-training flattening",
+   "claim": "Moving from base to SFT to DPO to RLVR checkpoints makes thematic transitions more uniform, replaces high-intensity emotion with neutrality and shrinks stylistic diversity, most severely against professional literary fiction.",
+   "source": "Li, Zhu, Wu, Bao & Evans, Narrative Flattening (arXiv 2605.27878, May 2026)",
+   "url": "https://arxiv.org/abs/2605.27878",
+   "quote": "High-intensity emotions give way to neutrality"
+  },
+  {
+   "feature": "conflict-free social worlds",
+   "claim": "LLM story character networks are denser (0.338–0.470 vs 0.182), more positive (mean edge weight 0.236–0.659 vs −0.061) and more clustered than human science-fiction, with far less variability.",
+   "source": "Nonaka & Perry (arXiv 2510.18932, Sep 2025)",
+   "url": "https://arxiv.org/html/2510.18932v1",
+   "quote": "less conflict-driven social dynamics"
+  },
+  {
+   "feature": "fairy-tale openings and moral endings",
+   "claim": "GPT stories open 'Once upon a time' in a vague futuristic place and close with a moral lesson in stock phrases, while crowdworker stories open on tension and vary far more.",
+   "source": "Beguš, Experimental Narratives (HSSC 2024; arXiv 2310.12902)",
+   "url": "https://arxiv.org/html/2310.12902",
+   "quote": "proneness to wrapping up each story with a moral lesson"
+  },
+  {
+   "feature": "quality decays toward the end",
+   "claim": "Human evaluation of LLM fiction shows a 'high-starting, low-ending' pattern: strong openings that deteriorate.",
+   "source": "Wang, Gao, Hu & Wan, Towards a Novel Benchmark (Findings ACL 2025)",
+   "url": "https://aclanthology.org/2025.findings-acl.1114/",
+   "quote": "high-starting, low-ending"
+  },
+  {
+   "feature": "cross-model narrative sameness",
+   "claim": "Across 10 LLMs, generated narratives are consistently more similar to each other than human stories are, and negative prompting or temperature scaling do not fix it.",
+   "source": "DK & Hatzel, Do LLMs Always Tell the Same Stories? (arXiv 2606.17350)",
+   "url": "https://arxiv.org/abs/2606.17350",
+   "quote": "fail to meaningfully address this homogeneity"
+  },
+  {
+   "feature": "style prioritised over story",
+   "claim": "Under constraint-based selection, six LLMs consistently choose stylistic elements over event, character and setting content.",
+   "source": "Jung, Choi, Chae & Jung, Style over Story (ACL 2026; arXiv 2510.02025)",
+   "url": "https://arxiv.org/abs/2510.02025",
+   "quote": "models consistently prioritize Style over narrative content elements"
+  },
+  {
+   "feature": "atmosphere over action",
+   "claim": "LLMs produce mood-laden 'perceived space' at about twice the human rate (GPT-4.1 0.47 vs human 0.19) and under-produce action space, substituting atmosphere for embodied movement.",
+   "source": "Rohrbacher et al., How LLMs Build Fictional Worlds (arXiv 2609.02482, Sep 2026)",
+   "url": "https://arxiv.org/html/2609.02482v1",
+   "quote": "roughly twice the human baseline"
+  },
+  {
+   "feature": "long-form consistency bugs",
+   "claim": "In long LLM stories, consistency errors concentrate in factual and temporal dimensions, around the middle of the narrative and in high-entropy segments (no human baseline).",
+   "source": "Li, Guo, Wu, Lee, Li & Xie, Lost in Stories (arXiv 2603.05890)",
+   "url": "https://arxiv.org/abs/2603.05890",
+   "quote": "most common in factual and temporal dimensions"
+  },
+  {
+   "feature": "suspense not understood",
+   "claim": "Baseline ChatGPT stories lose to psychologically planned stories on suspense 84.9% of the time in human judgments.",
+   "source": "Xie & Riedl, Creating Suspenseful Stories (arXiv 2402.17119)",
+   "url": "https://arxiv.org/html/2402.17119",
+   "quote": "poor understanding of story suspense"
+  },
+  {
+   "feature": "LLM readers mis-track suspense",
+   "claim": "Replicating four suspense-perception studies, LMs can tell a text is meant to be suspenseful but cannot estimate relative suspense or its rise and fall like human readers.",
+   "source": "Matlin et al. (arXiv 2508.15794)",
+   "url": "https://arxiv.org/abs/2508.15794",
+   "quote": "do not process suspense in the same way as human readers"
+  },
+  {
+   "feature": "default names and settings",
+   "claim": "Across 20,000 stories from four models, Elias appears in 26.5%, Mara 16.7%, Elara 13.1% and a lighthouse in 51.2%; 88.3% contain at least one of 11 core tokens, with Elias 900x its rate in published fiction.",
+   "source": "Hamilton & Mimno, Elias in the Lighthouse, Again? (arXiv 2605.26492, May 2026)",
+   "url": "https://arxiv.org/html/2605.26492",
+   "quote": "900 times more frequent in our corpus"
+  },
+  {
+   "feature": "correlated name ensembles",
+   "claim": "Each model family defaults to fixed character-name pairs (Claude: Elena Vasquez + Marcus Chen; Gemini: Aris Thorne + Lena Petrova; GPT: Elara Voss).",
+   "source": "Brzozowski & Chung, The Ghost Couple (arXiv 2606.02184)",
+   "url": "https://arxiv.org/abs/2606.02184",
+   "quote": "co-occurrence rates far exceed chance"
+  },
+  {
+   "feature": "literalness / no subtext",
+   "claim": "LLMs show a strong bias toward literal, explicit communication, producing literal clues 60% of the time in a subtext game.",
+   "source": "Ahuja, Li & Lampinen, Beneath the Surface (arXiv 2604.05273)",
+   "url": "https://arxiv.org/abs/2604.05273",
+   "quote": "strong bias towards overly literal, explicit communication"
+  },
+  {
+   "feature": "expert-judged creativity vs a novelist",
+   "claim": "Six literary experts scored Patricio Pron's synopses 1.94 on creativity vs GPT-4's 0.97 (English) and 0.88 (Spanish), and style originality 1.70 vs 0.63/0.36.",
+   "source": "Marco, Gonzalo, Mateo-Girona & del Castillo, Pron vs Prompt (EMNLP 2024; arXiv 2407.01119)",
+   "url": "https://arxiv.org/html/2407.01119v2",
+   "quote": "GPT-4 receives predominantly scores of 0/1, while Pron receives mostly 2/3"
+  },
+  {
+   "feature": "absent authorial voice",
+   "claim": "Experts found GPT-4 texts clichéd, moralising, formulaic and indistinguishable from one another, with forced or hollow endings, and learned to recognise them with exposure.",
+   "source": "Marco et al., Pron vs Prompt (EMNLP 2024)",
+   "url": "https://arxiv.org/html/2407.01119v2",
+   "quote": ""
+  },
+  {
+   "feature": "reader-profile split",
+   "claim": "Non-expert readers reward readability and textual richness while experts weight thematic development, rhetorical variety and sentiment dynamics, explaining contradictory AI-writing evaluations.",
+   "source": "Marco, Gonzalo & Fresno, The Reader is the Metric (arXiv 2506.03310)",
+   "url": "https://arxiv.org/abs/2506.03310",
+   "quote": "thematic development, rhetorical variety, and sentiment dynamics"
+  },
+  {
+   "feature": "coherence without surprise",
+   "claim": "GPT-4o synopses contained clichés only 26.7% of the time but surprising associations in just 1.6%, versus 15% for a fine-tuned BART.",
+   "source": "Marco, Rello & Gonzalo (COLING 2025; arXiv 2409.11547)",
+   "url": "https://arxiv.org/html/2409.11547v1",
+   "quote": "more predictable and formulaic narratives"
+  },
+  {
+   "feature": "non-experts prefer accessible AI verse",
+   "claim": "1,634 non-experts identified AI poems at 46.6% (below chance), judged them more human than human poems and rated them higher on rhythm and beauty, apparently misreading human complexity as incoherence.",
+   "source": "Porter & Machery, Scientific Reports 14:26133 (2024-11-14)",
+   "url": "https://www.nature.com/articles/s41598-024-76900-1",
+   "quote": "poetry experience did not improve discrimination performance"
+  },
+  {
+   "feature": "expert detection via AI vocabulary",
+   "claim": "Five heavy ChatGPT users' majority vote misclassified 1 of 300 articles, citing 'AI vocabulary' plus formality, originality and clarity, and stayed robust to paraphrase and humanization.",
+   "source": "Russell, Karpinska & Iyyer (ACL 2025; arXiv 2501.15654)",
+   "url": "https://arxiv.org/abs/2501.15654",
+   "quote": "misclassifies only 1 of 300 articles"
+  },
+  {
+   "feature": "counter-evidence: craft mechanics",
+   "claim": "On an epic-comedy task GPT-4 outscored five human writers overall (80.2 vs 70.1) and on epic-genre habitation (8.1 vs 4.9); humans led only on originality (8.0 vs 7.6) with humor near-tied (6.4 vs 6.0).",
+   "source": "Gómez-Rodríguez & Williams, A Confederacy of Models (Findings EMNLP 2023)",
+   "url": "https://aclanthology.org/2023.findings-emnlp.966/",
+   "quote": "Humans retain an edge in creativity"
+  },
+  {
+   "feature": "humor binary",
+   "claim": "Humor splits LLMs into those that manage it comparably to humans and those that fail outright (GPT-3.5 3.3/10 vs humans 6.4).",
+   "source": "Gómez-Rodríguez & Williams (Findings EMNLP 2023)",
+   "url": "https://aclanthology.org/2023.findings-emnlp.966/",
+   "quote": ""
+  },
+  {
+   "feature": "slop definition and judge failure",
+   "claim": "Slop is fluent but generic, verbose and low-density text; relevance, density and tone best predict human slop judgments, and frontier LLM judges show near-zero agreement with human annotators.",
+   "source": "Shaib, Chakrabarty, Garcia-Olano & Wallace, Measuring AI Slop in Text (arXiv 2509.19163)",
+   "url": "https://arxiv.org/html/2509.19163v1",
+   "quote": "generic, overly verbose, inaccurate, irrelevant to its intended purpose"
+  },
+  {
+   "feature": "sentence-length burstiness (news)",
+   "claim": "LLM sentences cluster in a 10–30 token band with less length variation than human sentences, and lexical richness is lower (STTR 0.424 vs 0.491).",
+   "source": "Muñoz-Ortiz, Gómez-Rodríguez & Vilares, Artificial Intelligence Review 2024",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11422446/",
+   "quote": "less variation when compared to human-generated sentences"
+  },
+  {
+   "feature": "positivity and emotion narrowing (news)",
+   "claim": "LLM text carries more joy and positive emotion while humans show more fear and disgust; LLMs also use more pronouns and magnify male-pronoun bias.",
+   "source": "Muñoz-Ortiz et al. 2024",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11422446/",
+   "quote": ""
+  },
+  {
+   "feature": "sentence-length distribution (Portuguese news)",
+   "claim": "Human sentence lengths show a broader, flatter distribution while AI outputs cluster around the mean; AI cuts informal expressions 54–72%, raises positive emotion 114–133% and certainty 111–152%.",
+   "source": "Rodrigues, Sturm & Pinheiro, iScience (Feb 2026)",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12969083/",
+   "quote": "broader and flatter distribution"
+  },
+  {
+   "feature": "standardised sentences (political speech)",
+   "claim": "ChatGPT speeches overuse nouns, possessives and numbers, underuse verbs, pronouns and adverbs, and read as too standardised compared with real presidential addresses.",
+   "source": "Labbé, Labbé & Savoy (arXiv 2411.18382)",
+   "url": "https://arxiv.org/abs/2411.18382",
+   "quote": "too standardized sentences"
+  },
+  {
+   "feature": "style imitation fails on restraint",
+   "claim": "GPT-4o imitating Hemingway produced lexical diversity of 47.79 versus Hemingway's 34.62, and its function-word profile overlapped generic GPT output rather than the author's fingerprint.",
+   "source": "Mikros, Digital Scholarship in the Humanities 40(2), 2025",
+   "url": "https://academic.oup.com/dsh/article/40/2/587/8118784",
+   "quote": "significant overlap with generic GPT outputs"
+  },
+  {
+   "feature": "tricolon and rhetorical-device overuse",
+   "claim": "LLM argumentative prose uses tricolon 7.13 per document versus 3.73 for human experts, suppresses rhetorical questions (2.28 vs 5.55), doubles performed hesitancy and distributes devices with template-like uniformity.",
+   "source": "Bakhshi, Saying More Than They Know (arXiv 2604.19768, Mar 2026)",
+   "url": "https://arxiv.org/html/2604.19768",
+   "quote": "deployed independently of argumentative occasion"
+  },
+  {
+   "feature": "co-writing homogenises human output",
+   "claim": "Writing with InstructGPT raised corpus homogenization (0.1536 to 0.1660) and repeated higher-order n-grams, with the loss traced to model-contributed text rather than changed writer behaviour.",
+   "source": "Padmakumar & He (ICLR 2024; arXiv 2309.05196)",
+   "url": "https://arxiv.org/html/2309.05196v2",
+   "quote": "repeat higher-order n-grams more frequently"
+  },
+  {
+   "feature": "idea homogenisation across users",
+   "claim": "Users brainstorming with ChatGPT produced less semantically distinct ideas across users than with an alternative tool, while feeling less responsible for them.",
+   "source": "Anderson, Shah & Kreminski (Creativity & Cognition 2024; arXiv 2402.01536)",
+   "url": "https://arxiv.org/abs/2402.01536",
+   "quote": "less semantically distinct ideas with ChatGPT"
+  },
+  {
+   "feature": "cross-model creative homogeneity",
+   "claim": "Across 22 LLMs and 102 humans, LLM response variability is far lower (AUT 0.459 vs 0.699; DAT 0.632 vs 0.791), so switching models does not restore diversity.",
+   "source": "Wenger & Kenett, Large language models are homogeneously creative (PNAS Nexus 5(3), 2026)",
+   "url": "https://academic.oup.com/pnasnexus/article/5/3/pgag042/8529001",
+   "quote": "much more similar to other LLM responses"
+  },
+  {
+   "feature": "game dialogue: players prefer designers",
+   "claim": "Disco Elysium players preferred designer-written dialogue to GPT-4 infills 64% vs 23% (66% vs 23% after seeing the next line), citing logical consistency (61% vs 28%) and flow (67% vs 21%).",
+   "source": "Akoury, Yang & Iyyer (Findings EMNLP 2023)",
+   "url": "https://aclanthology.org/2023.findings-emnlp.151/",
+   "quote": "702 (61%) state a preference for human-written dialogue"
+  },
+  {
+   "feature": "game dialogue: grounding failures",
+   "claim": "32% of GPT-4 game lines were judged illogical once the next utterance appeared, and generations violated the game's faction logic (e.g. an 'ultra-liberal' character).",
+   "source": "Akoury, Yang & Iyyer (Findings EMNLP 2023)",
+   "url": "https://aclanthology.org/2023.findings-emnlp.151/",
+   "quote": "illogical in hindsight"
+  },
+  {
+   "feature": "script dialogue: literal and on the nose",
+   "claim": "Theatre and film professionals found LLM scripts too literal and predictable: a character's noble endeavour is stated in dialogue, names are on-the-nose puns, relationships are tight and prescriptive.",
+   "source": "Mirowski, Mathewson, Pittman & Evans, Dramatron (CHI 2023; arXiv 2209.14958)",
+   "url": "https://arxiv.org/abs/2209.14958",
+   "quote": "on the nose, pun names"
+  },
+  {
+   "feature": "script dialogue: no subtext",
+   "claim": "Professionals said LLM dialogue verbalises everything and lacks subtext, motivation and stageable realism.",
+   "source": "Mirowski et al., Dramatron (CHI 2023)",
+   "url": "https://arxiv.org/abs/2209.14958",
+   "quote": "Show, not tell: here we are just telling"
+  },
+  {
+   "feature": "script structure: incomplete character journeys",
+   "claim": "Professionals found character journeys unfinished and emotional motivation missing, with logic gaps and repetitive generation loops.",
+   "source": "Mirowski et al., Dramatron (CHI 2023)",
+   "url": "https://arxiv.org/abs/2209.14958",
+   "quote": "Where is the emotional motivation"
+  },
+  {
+   "feature": "screenplay: thematic focus and character",
+   "claim": "In blind evaluation by 20+ professional TV screenwriters, direct LLM screenwriting showed lack of thematic focus, out-of-character dialogue and thin character development, mimicking screenplay style without conciseness or visual language.",
+   "source": "Lei, Zong, Li, Zhou & Liu, Beyond Direct Generation (arXiv 2510.23163, Oct 2025)",
+   "url": "https://arxiv.org/html/2510.23163v1",
+   "quote": "lack of thematic focus, out-of-character dialogue, and insufficient character development"
+  },
+  {
+   "feature": "game narrative: tone and endings",
+   "claim": "Industry experts building a game-narrative quality framework record LLM outputs as unconvincing, repetitive or tonally misaligned, with overly positive or uninspired endings and genre-adherence failures.",
+   "source": "Valdivia & Burelli, Evaluating Quality of Gaming Narratives Co-created with AI (arXiv 2509.04239)",
+   "url": "https://arxiv.org/html/2509.04239",
+   "quote": "overly positive or uninspired endings"
+  },
+  {
+   "feature": "endings that keep ending (preliminary, blog)",
+   "claim": "In 200 gpt-4o-mini vs 200 human WritingPrompts stories, human sentiment spikes in the last tenth while AI stories climb from the 70% mark and resolve repeatedly.",
+   "source": "Rettberg blog reporting Jessica Witte (jilltxt.net, 2026-08-25; not peer-reviewed)",
+   "url": "https://jilltxt.net/ai-generated-stories-have-longer-endings-than-human-stories/",
+   "quote": "the story seems to end, then it ends again"
+  },
+  {
+   "feature": "subtext",
+   "claim": "AI-assisted manuscripts read as polished but soulless, with no psychological reasoning or subtext beneath the surface text for an editor to draw out.",
+   "source": "Mary Kole, developmental editor, on janefriedman.com (2026-08-13)",
+   "url": "https://janefriedman.com/after-editing-two-ai-assisted-manuscripts-i-rewrote-my-client-agreement/",
+   "page": "After Editing Two AI-Assisted Manuscripts, I Rewrote My Client Agreement",
+   "quote": ""
+  },
+  {
+   "feature": "subtext",
+   "claim": "With no human author behind the text there is no intent for an editor to serve, which makes AI-generated manuscripts harder, not easier, to edit.",
+   "source": "Josh Bernoff, book coach and editor (2026-02-05)",
+   "url": "https://bernoff.com/blog/how-editors-should-handle-ai-generated-manuscripts",
+   "page": "How editors should handle AI-generated manuscripts",
+   "quote": "There's no human on the other end"
+  },
+  {
+   "feature": "subtext",
+   "claim": "Clarkesworld's editor found AI submissions flat and boring with no subtext or layers (secondhand: quoted by Vollmer; Clarke's own post was not readable).",
+   "source": "Neil Clarke as quoted by Matthew Vollmer, fiction writer and professor (2026-04-24)",
+   "url": "https://matthewvollmer.substack.com/p/i-asked-the-machine-to-tell-on-itself",
+   "page": "I Asked the Machine to Tell on Itself: A Field Guide to AI Tells",
+   "quote": "They are boring. They are flat"
+  },
+  {
+   "feature": "subtext (dialogue)",
+   "claim": "AI dialogue gives no character verbal tics, dialect, or a pattern of evasion; everyone says what they mean, and mysteries get resolved by as-you-know-Bob speech rather than action.",
+   "source": "Matthew Vollmer (2026-04-24)",
+   "url": "https://matthewvollmer.substack.com/p/i-asked-the-machine-to-tell-on-itself",
+   "page": "I Asked the Machine to Tell on Itself: A Field Guide to AI Tells",
+   "quote": ""
+  },
+  {
+   "feature": "subtext (dialogue)",
+   "claim": "AI stories carry philosophical, expository dialogue 59% of the time versus 34% in human stories.",
+   "source": "Russell et al., StoryScope, arXiv 2604.03136 (2026-04-03)",
+   "url": "https://arxiv.org/abs/2604.03136",
+   "page": "StoryScope: Investigating idiosyncrasies in AI fiction",
+   "quote": ""
+  },
+  {
+   "feature": "subtext",
+   "claim": "The model states rather than earns: a later claim is not set up by the sentences before it, so weight is asserted, not built.",
+   "source": "sudo, LessWrong close reading of a Claude passage (2026-04-12)",
+   "url": "https://www.lesswrong.com/posts/nTuKjJBwMtMuuLonA/hot-take-problems-with-ai-prose",
+   "page": "[Hot take] Problems with AI prose",
+   "quote": "Claude does not use its preceding sentences to justify the claim"
+  },
+  {
+   "feature": "specificity",
+   "claim": "AI fiction has no grain: no proper nouns, specific months, brand names, or regional dialect markers.",
+   "source": "Matthew Vollmer (2026-04-24)",
+   "url": "https://matthewvollmer.substack.com/p/i-asked-the-machine-to-tell-on-itself",
+   "page": "I Asked the Machine to Tell on Itself: A Field Guide to AI Tells",
+   "quote": "No grain: no proper nouns, no specific months, no brand names."
+  },
+  {
+   "feature": "specificity",
+   "claim": "AI cannot build meaning by accumulating repeated specific observations across a manuscript, and it describes emotions rather than showing them through behavior.",
+   "source": "Richard Lowe, ghostwriter, Association of Ghostwriters (2026-04-29)",
+   "url": "https://associationofghostwriters.org/the-real-reason-not-to-use-ai-to-write-your-novel/",
+   "page": "The Real Reason Not to Use AI to Write Your Novel",
+   "quote": ""
+  },
+  {
+   "feature": "specificity",
+   "claim": "AI prose stays in shallow point of view, avoids concrete sensory detail, and delivers emotions disconnected from the trigger that should have produced them.",
+   "source": "Carrie Jones, developmental editor (2026-03-21)",
+   "url": "https://livinghappy.substack.com/p/what-makes-a-story-look-like-ai-wrote",
+   "page": "What Makes a Story \"Look\" Like AI Wrote It?",
+   "quote": "It will fail to have the emotion linked to it"
+  },
+  {
+   "feature": "specificity (averaging)",
+   "claim": "Every choice the prompter does not make, the model fills with the statistical average, and that average is the least interesting choice available.",
+   "source": "Nick Bailey, LitReactor (2026-06-18)",
+   "url": "https://litreactor.com/columns/human-editors-vs-ai-editing/",
+   "page": "Human Editors vs AI Editing: What AI Still Can't Do",
+   "quote": "that average is equivalent to the least interesting choices possible"
+  },
+  {
+   "feature": "specificity (averaging)",
+   "claim": "Fiction is roughly one deliberate choice per word; a prompt makes far fewer choices, and the unmade choices come out generic and without intention.",
+   "source": "Lincoln Michel, novelist, Counter Craft (2024-09-04)",
+   "url": "https://countercraft.substack.com/p/art-without-intention",
+   "page": "Art Without Intention",
+   "quote": "Art is something that results from making a lot of choices."
+  },
+  {
+   "feature": "specificity (range)",
+   "claim": "Five different LLMs' stories occupy one overlapping region of narrative-feature space, while human stories span more locations, more dialogue, and a broader repertoire; named intertextual references appear in 24% of AI stories versus 47% of human.",
+   "source": "Russell et al., StoryScope (2026-04-03)",
+   "url": "https://arxiv.org/abs/2604.03136",
+   "page": "StoryScope: Investigating idiosyncrasies in AI fiction",
+   "quote": "AI-generated stories cluster in a shared region of narrative space"
+  },
+  {
+   "feature": "specificity (game dialogue)",
+   "claim": "Generated game dialogue is competent and forgettable, makes a whole cast sound like one person, and misses the specific surprising line that makes a moment land (vendor source with a stake).",
+   "source": "Summer Engine blog, vendor (2026-06-06)",
+   "url": "https://www.summerengine.com/blog/ai-dialogue-generator-for-games",
+   "page": "AI Dialogue Generator for Games: What Actually Works in 2026",
+   "quote": "weak at the specific, surprising sentence that makes a moment land"
+  },
+  {
+   "feature": "rhythm",
+   "claim": "AI prose has low sentence-length variation, producing rhythmic uniformity; scenes also unfold at a constant rate with no selective summary or elision.",
+   "source": "Matthew Vollmer (2026-04-24)",
+   "url": "https://matthewvollmer.substack.com/p/i-asked-the-machine-to-tell-on-itself",
+   "page": "I Asked the Machine to Tell on Itself: A Field Guide to AI Tells",
+   "quote": "Scenes unfold at a constant rate"
+  },
+  {
+   "feature": "rhythm",
+   "claim": "Generated text has a predictable, even rhythm and no emotional valence, so it lulls rather than moves the reader.",
+   "source": "Josh Bernoff (2026-02-05)",
+   "url": "https://bernoff.com/blog/how-editors-should-handle-ai-generated-manuscripts",
+   "page": "How editors should handle AI-generated manuscripts",
+   "quote": "could lull the reader to sleep"
+  },
+  {
+   "feature": "rhythm",
+   "claim": "AI fiction reuses identical sentence shapes over and over, which even a beginning human writer would not do.",
+   "source": "Makin, Record Crash (2025-11-27)",
+   "url": "https://recordcrash.substack.com/p/how-to-identify-ai-written-web-fiction",
+   "page": "How to Identify AI-Written Web Fiction",
+   "quote": "A new writer wouldn't repeat sentence shapes again and again"
+  },
+  {
+   "feature": "rhythm",
+   "claim": "AI prose alternates mechanically between long comparisons and short stock phrases, and once it reaches a cliché it keeps drawing from the same well where a human would rest it.",
+   "source": "Makin, Record Crash (2025-11-27)",
+   "url": "https://recordcrash.substack.com/p/how-to-identify-ai-written-web-fiction",
+   "page": "How to Identify AI-Written Web Fiction",
+   "quote": "Writing keeps swinging between long comparisons, then short stock phrases"
+  },
+  {
+   "feature": "rhythm",
+   "claim": "AI plants one-sentence fragment paragraphs before scene hooks and an em-dash per paragraph, and the pattern has become recognizable to editors.",
+   "source": "Carrie Jones, developmental editor (2026-03-21)",
+   "url": "https://livinghappy.substack.com/p/what-makes-a-story-look-like-ai-wrote",
+   "page": "What Makes a Story \"Look\" Like AI Wrote It?",
+   "quote": "The rhythm is becoming recognizable as an AI pattern"
+  },
+  {
+   "feature": "rhythm",
+   "claim": "Short punchy standalone fragments are used for manufactured emphasis that does not match human speech or prose patterns.",
+   "source": "tropes.fyi AI Writing Pattern Directory (undated)",
+   "url": "https://tropes.fyi/directory",
+   "page": "Tropes - AI Writing Pattern Directory",
+   "quote": "He published this. Openly. In a book."
+  },
+  {
+   "feature": "rhythm",
+   "claim": "Vendor measurement: about 85% of GPT-4o sentences fall in the 15-28 word range and Gemini paragraphs are nearly identical in length, versus human prose ranging 4 to 55+ words with no central cluster (unreplicated vendor figures).",
+   "source": "TextSight blog, vendor (2026-06-16)",
+   "url": "https://www.textsight.ai/blog/ai-rhythm-explained/",
+   "page": "What 'AI Rhythm' Means",
+   "quote": "AI rhythm is the mechanical, metronomic quality of text"
+  },
+  {
+   "feature": "rhythm (verse)",
+   "claim": "LLM poetry has a choppy cadence built from constant objective correlatives and persistent enjambment, which makes it recognizable.",
+   "source": "The Literary Quant, poet (2026-08-14)",
+   "url": "https://new2criticism.substack.com/p/in-offense-of-llm-poetry",
+   "page": "In Offense of LLM Poetry",
+   "quote": "Constant objective correlatives and choppy cadence"
+  },
+  {
+   "feature": "tidy endings",
+   "claim": "AI resolves every scene and ties every thread, whereas real novels leave things unresolved.",
+   "source": "Richard Lowe (2026-04-29)",
+   "url": "https://associationofghostwriters.org/the-real-reason-not-to-use-ai-to-write-your-novel/",
+   "page": "The Real Reason Not to Use AI to Write Your Novel",
+   "quote": "Every scene ends properly. Everything tied up nice and tidy"
+  },
+  {
+   "feature": "tidy endings",
+   "claim": "AI stories favor single-track plots with protagonist-driven resolution (69% vs 46% human) and no subplots (79% vs 57%), while human protagonists' choices are framed as more morally ambiguous and human stories show more temporal complexity.",
+   "source": "Russell et al., StoryScope (2026-04-03)",
+   "url": "https://arxiv.org/abs/2604.03136",
+   "page": "StoryScope: Investigating idiosyncrasies in AI fiction",
+   "quote": "AI stories over-explain themes and favor tidy, single-track plots"
+  },
+  {
+   "feature": "tidy endings",
+   "claim": "The model resolves tension because it cannot tell which tension a story needs to keep active; it wants the answer legible where the story needs pressure left unresolved (commentary on StoryScope, not independent of it).",
+   "source": "Dramatica blog (2026-05-29)",
+   "url": "https://dramatica.com/blog/the-ai-tells-are-in-the-story",
+   "page": "The AI Tells Are in the Story",
+   "quote": "The machine wants to make the answer legible"
+  },
+  {
+   "feature": "tidy endings",
+   "claim": "AI endings resolve ambiguity rather than trusting the reader to hold it.",
+   "source": "Matthew Vollmer (2026-04-24)",
+   "url": "https://matthewvollmer.substack.com/p/i-asked-the-machine-to-tell-on-itself",
+   "page": "I Asked the Machine to Tell on Itself: A Field Guide to AI Tells",
+   "quote": ""
+  },
+  {
+   "feature": "tidy endings (structural root)",
+   "claim": "Fiction needs events that surprise then feel inevitable, and earlier details that get re-valued by later ones; autoregressive generation coordinates neither well over length.",
+   "source": "Katherine Elkins, The AI Fiction Paradox, arXiv 2603.13545 (2026-03-13)",
+   "url": "https://arxiv.org/abs/2603.13545",
+   "page": "The AI Fiction Paradox",
+   "quote": "fiction repeatedly requires the significance of earlier details to be reinterpreted"
+  },
+  {
+   "feature": "tidy endings (verse)",
+   "claim": "LLM poems force closure with contrived mic-drop final lines.",
+   "source": "The Literary Quant (2026-08-14)",
+   "url": "https://new2criticism.substack.com/p/in-offense-of-llm-poetry",
+   "page": "In Offense of LLM Poetry",
+   "quote": "contrived mic-drops like the last sentence"
+  },
+  {
+   "feature": "reflexive antithesis",
+   "claim": "Negative parallelism in two shapes, 'not just X but Y' and 'not X but Y', is a catalogued sign of AI writing.",
+   "source": "Wikipedia editors, Signs of AI writing",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "page": "Wikipedia:Signs of AI writing",
+   "quote": "not a mirror but a portal: not representation, but mechanism"
+  },
+  {
+   "feature": "reflexive antithesis",
+   "claim": "The construction fails cognitively: readers process the negated concept first and retain it, so the reframe lands weaker than the writer intends and compounds with repetition.",
+   "source": "Joshua Gonzales, The Conversation (2026-04-20)",
+   "url": "https://theconversation.com/slanguage-why-ais-stylistic-negation-its-not-x-its-y-is-both-annoying-and-doesnt-work-278967",
+   "page": "Slanguage: Why AI's stylistic negation is both annoying and doesn't work",
+   "quote": "Your brain doesn't skip to the alternative."
+  },
+  {
+   "feature": "reflexive antithesis",
+   "claim": "In AI fiction the 'not X; Y' construction feels obligatory rather than natural, often alongside stacked triplets of descriptors.",
+   "source": "Makin, Record Crash (2025-11-27)",
+   "url": "https://recordcrash.substack.com/p/how-to-identify-ai-written-web-fiction",
+   "page": "How to Identify AI-Written Web Fiction",
+   "quote": ""
+  },
+  {
+   "feature": "reflexive antithesis",
+   "claim": "The negation reframe borrows the sound of insight without delivering it.",
+   "source": "Blake Stockton (2025-04-16)",
+   "url": "https://www.blakestockton.com/dont-write-like-ai-1-101-negation/",
+   "page": "Don't Write Like AI (1 of 101): Negation",
+   "quote": "It tries to sound sophisticated without being sophisticated."
+  },
+  {
+   "feature": "reflexive antithesis",
+   "claim": "The 'isn't just X; it's Y' frame combined with a metaphor and a tricolon is a signature machine sentence that carries no content.",
+   "source": "Carly Ayres (2024-12-05)",
+   "url": "https://carly.substack.com/p/spotting-machine-made-prose",
+   "page": "Spotting machine-made prose",
+   "quote": "It says absolutely nothing at all."
+  },
+  {
+   "feature": "the gloss",
+   "claim": "AI narrators explicitly comment on the story's theme 77% of the time versus 52% for humans, with tighter thematic unity and more central moral questions.",
+   "source": "Russell et al., StoryScope (2026-04-03)",
+   "url": "https://arxiv.org/abs/2604.03136",
+   "page": "StoryScope: Investigating idiosyncrasies in AI fiction",
+   "quote": "AI over-explains its themes"
+  },
+  {
+   "feature": "the gloss",
+   "claim": "AI spells out meaning that human fiction leaves implied; the tell lives in the story's structure, not its word choice.",
+   "source": "Dramatica blog (2026-05-29)",
+   "url": "https://dramatica.com/blog/the-ai-tells-are-in-the-story",
+   "page": "The AI Tells Are in the Story",
+   "quote": "AI explains. Humans imply."
+  },
+  {
+   "feature": "the gloss",
+   "claim": "LLM verse refuses to state itself plainly yet re-restates its load-bearing moments, over-explaining what it has already shown.",
+   "source": "The Literary Quant (2026-08-14)",
+   "url": "https://new2criticism.substack.com/p/in-offense-of-llm-poetry",
+   "page": "In Offense of LLM Poetry",
+   "quote": "Refusal to state itself too plainly, but tendency to re-restate"
+  },
+  {
+   "feature": "the gloss",
+   "claim": "AI prose puts aphorisms where connective tissue should be and pivots to abstraction in place of concrete physical imagery.",
+   "source": "Matthew Vollmer (2026-04-24)",
+   "url": "https://matthewvollmer.substack.com/p/i-asked-the-machine-to-tell-on-itself",
+   "page": "I Asked the Machine to Tell on Itself: A Field Guide to AI Tells",
+   "quote": ""
+  },
+  {
+   "feature": "the gloss",
+   "claim": "AI-assisted manuscripts carry heavy-handed thematic messaging that the editor had to strip back.",
+   "source": "Mary Kole (2026-08-13)",
+   "url": "https://janefriedman.com/after-editing-two-ai-assisted-manuscripts-i-rewrote-my-client-agreement/",
+   "page": "After Editing Two AI-Assisted Manuscripts, I Rewrote My Client Agreement",
+   "quote": ""
+  },
+  {
+   "feature": "pet words",
+   "claim": "AI fiction accumulates a recycled mood vocabulary drawn from Instagram-poetry registers, collapsing diverse tones into one.",
+   "source": "Matthew Vollmer (2026-04-24)",
+   "url": "https://matthewvollmer.substack.com/p/i-asked-the-machine-to-tell-on-itself",
+   "page": "I Asked the Machine to Tell on Itself: A Field Guide to AI Tells",
+   "quote": "ache, hollow, tether, linger, fragile, fractured, ember, bloom"
+  },
+  {
+   "feature": "pet words",
+   "claim": "A cluster of grandeur nouns and verbs (testament, pivotal, delve, intricate, realm) co-occurs in LLM output and lends borrowed significance to flat subjects.",
+   "source": "Wikipedia editors, Signs of AI writing",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "page": "Wikipedia:Signs of AI writing",
+   "quote": "enduring testament to the influence of Italian colonial"
+  },
+  {
+   "feature": "pet words",
+   "claim": "Metaphors of symphonies, tapestries, and dances, plus delve/navigate/enhance/elevate, mark machine prose.",
+   "source": "Carly Ayres (2024-12-05)",
+   "url": "https://carly.substack.com/p/spotting-machine-made-prose",
+   "page": "Spotting machine-made prose",
+   "quote": "symphonies, tapestries, or complex dances"
+  },
+  {
+   "feature": "pet words",
+   "claim": "'Quiet/magic' adverbs (quietly, deeply, fundamentally, remarkably) are used to make mundane description feel significant.",
+   "source": "tropes.fyi AI Writing Pattern Directory",
+   "url": "https://tropes.fyi/directory",
+   "page": "Tropes - AI Writing Pattern Directory",
+   "quote": "Quietly orchestrating workflows and decisions"
+  },
+  {
+   "feature": "pet words (syntax)",
+   "claim": "AI avoids plain copulatives, replacing 'is' with 'serves as' or 'holds the distinction of being'.",
+   "source": "Wikipedia editors, Signs of AI writing",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "page": "Wikipedia:Signs of AI writing",
+   "quote": "Harian Metro holds the distinction of being the first"
+  },
+  {
+   "feature": "metaphor",
+   "claim": "AI metaphors are slightly off-target but stay in the right semantic neighborhood, and descriptions are mood-saturated pathetic fallacy such as rain mirroring grief.",
+   "source": "Matthew Vollmer (2026-04-24)",
+   "url": "https://matthewvollmer.substack.com/p/i-asked-the-machine-to-tell-on-itself",
+   "page": "I Asked the Machine to Tell on Itself: A Field Guide to AI Tells",
+   "quote": ""
+  },
+  {
+   "feature": "metaphor",
+   "claim": "AI comparisons break when followed across a second dimension; the model does not grasp real-world metaphors or keep logical coherence.",
+   "source": "sudo, LessWrong (2026-04-12)",
+   "url": "https://www.lesswrong.com/posts/nTuKjJBwMtMuuLonA/hot-take-problems-with-ai-prose",
+   "page": "[Hot take] Problems with AI prose",
+   "quote": "AIs fail to grasp: real-world metaphors, logical coherence"
+  },
+  {
+   "feature": "metaphor",
+   "claim": "AI stacks multiple comparisons onto one concept and overloads description with redundant sensory 'eyeball kicks'.",
+   "source": "Makin, Record Crash (2025-11-27)",
+   "url": "https://recordcrash.substack.com/p/how-to-identify-ai-written-web-fiction",
+   "page": "How to Identify AI-Written Web Fiction",
+   "quote": ""
+  },
+  {
+   "feature": "metaphor",
+   "claim": "Forced figurative language sounds clever but obscures rather than clarifies.",
+   "source": "tropes.fyi AI Writing Pattern Directory",
+   "url": "https://tropes.fyi/directory",
+   "page": "Tropes - AI Writing Pattern Directory",
+   "quote": "Like tracking weight loss on a rigged scale"
+  },
+  {
+   "feature": "emotion rendering",
+   "claim": "AI carries emotion through bodily sensation and somatic metaphor 81% of the time versus 38% for humans, while naming emotions explicitly less often (8% vs 29%), an inversion of the usual 'AI tells emotions' assumption.",
+   "source": "Russell et al., StoryScope (2026-04-03)",
+   "url": "https://arxiv.org/abs/2604.03136",
+   "page": "StoryScope: Investigating idiosyncrasies in AI fiction",
+   "quote": "AI overwhelmingly conveys emotion through physical sensations and bodily metaphors"
+  },
+  {
+   "feature": "reader address",
+   "claim": "AI narrators write as if no one is watching: fourth-wall breaks in 39% of AI stories versus 67% human, direct reader address 7% versus 28%.",
+   "source": "Russell et al., StoryScope (2026-04-03)",
+   "url": "https://arxiv.org/abs/2604.03136",
+   "page": "StoryScope: Investigating idiosyncrasies in AI fiction",
+   "quote": "AI writes as though no one is watching"
+  },
+  {
+   "feature": "flinching",
+   "claim": "AI retreats from difficult material: it softens violence, obscures intimacy, and explains cruelty instead of rendering it.",
+   "source": "Richard Lowe (2026-04-29)",
+   "url": "https://associationofghostwriters.org/the-real-reason-not-to-use-ai-to-write-your-novel/",
+   "page": "The Real Reason Not to Use AI to Write Your Novel",
+   "quote": "AI flinches every time"
+  },
+  {
+   "feature": "surprise",
+   "claim": "Language models optimize for predictability while good writing must surprise; AI output drifts rather than evolves with purpose.",
+   "source": "Michael O. Church, antipodes Substack (2025-05-28)",
+   "url": "https://antipodes.substack.com/p/how-to-make-ai-write-a-bestsellerand",
+   "page": "How to make AI write a bestseller—and why you can't",
+   "quote": "Good writing must be surprising. It needs to mix shit up."
+  },
+  {
+   "feature": "coherence at length",
+   "claim": "Coherence begins to fall apart within a few hundred words, and when asked for a style the model over-applies it.",
+   "source": "Michael O. Church (2025-05-28)",
+   "url": "https://antipodes.substack.com/p/how-to-make-ai-write-a-bestsellerand",
+   "page": "How to make AI write a bestseller—and why you can't",
+   "quote": "It will often overdo the style you ask for"
+  },
+  {
+   "feature": "voice flattening",
+   "claim": "AI tools flatten authorial voice, homogenise, and eradicate creative risk-taking by applying blanket rules without understanding purpose.",
+   "source": "Sophie Playle, fiction editor, Liminal Pages (2026-05-06)",
+   "url": "https://www.liminalpages.com/ai-and-fiction-editing/",
+   "page": "AI and Fiction Editing: Should You Use It, Can You Trust It and Will It Take Your Job?",
+   "quote": "They flatten voice and eradicate creative risk-taking."
+  },
+  {
+   "feature": "lyrical nonsense",
+   "claim": "The Granta AI story is lyrical nonsense with no narrative, reading like a parody of poet-turned-novelist fiction despite judges praising its 'lyrical precision'.",
+   "source": "Lincoln Michel, novelist, Substack note (2026-05-19)",
+   "url": "https://substack.com/@thelincoln/note/c-261333774",
+   "page": "Lincoln Michel note on the Granta AI story",
+   "quote": "it does not have a story. There's no narrative."
+  },
+  {
+   "feature": "rule of three",
+   "claim": "Tricolon and stacked triplets of descriptors are overused as a default rhetorical shape.",
+   "source": "tropes.fyi AI Writing Pattern Directory",
+   "url": "https://tropes.fyi/directory",
+   "page": "Tropes - AI Writing Pattern Directory",
+   "quote": "Products impress; platforms empower"
+  },
+  {
+   "feature": "repetition persistence",
+   "claim": "AI keeps repeating a shape or cliché where even a bad human writer would notice and rest it, because its instinct is to keep obeying the instruction.",
+   "source": "Makin, Record Crash (2025-11-27)",
+   "url": "https://recordcrash.substack.com/p/how-to-identify-ai-written-web-fiction",
+   "page": "How to Identify AI-Written Web Fiction",
+   "quote": "Even bad human writers give it a rest when noticing repetition"
+  },
+  {
+   "feature": "em-dashes",
+   "claim": "Em-dashes are overused, roughly one per paragraph, and used for thought continuation rather than breaks.",
+   "source": "Carrie Jones (2026-03-21)",
+   "url": "https://livinghappy.substack.com/p/what-makes-a-story-look-like-ai-wrote",
+   "page": "What Makes a Story \"Look\" Like AI Wrote It?",
+   "quote": "AI does this on a sentence level often with those em-dashes"
+  },
+  {
+   "feature": "POV / pacing",
+   "claim": "AI holds an unnaturally locked point of view across scenes and paces every scene at the same rate.",
+   "source": "Matthew Vollmer (2026-04-24)",
+   "url": "https://matthewvollmer.substack.com/p/i-asked-the-machine-to-tell-on-itself",
+   "page": "I Asked the Machine to Tell on Itself: A Field Guide to AI Tells",
+   "quote": ""
+  },
+  {
+   "feature": "game dialogue",
+   "claim": "Generated casts sound like one person and generated scenes run too long on screen, breaking pacing (vendor source with a stake in the fix).",
+   "source": "Summer Engine blog, vendor (2026-06-06)",
+   "url": "https://www.summerengine.com/blog/ai-dialogue-generator-for-games",
+   "page": "AI Dialogue Generator for Games: What Actually Works in 2026",
+   "quote": "A whole cast that sounds like one person"
+  },
+  {
+   "feature": "counter-evidence",
+   "claim": "MFA readers strongly disfavored prompted AI pastiches on stylistic fidelity (OR 0.16), but after fine-tuning on the author's corpus both MFA and general readers preferred the AI, and it was flagged as AI only 3% of the time; the tells above characterize prompted default-register output.",
+   "source": "Chakrabarty, Ginsburg, Dhillon, arXiv 2510.13939 (2025-10-15, rev 2026-03-17)",
+   "url": "https://arxiv.org/abs/2510.13939",
+   "page": "Readers Prefer Outputs of AI Trained on Copyrighted Books over Expert Human Writers",
+   "quote": "Fine-tuned outputs were rarely flagged as AI-generated (3% vs. 97%)"
+  },
+  {
+   "feature": "counter-evidence",
+   "claim": "2,587 lay readers rated ChatGPT rewrites of three published short stories higher on quality and absorption than the originals and identified authorship at chance; the researchers attribute this to AI being clearer and more predictable, which is the same property editors name as the gloss.",
+   "source": "Sears and Weisberg (Villanova) via earth.com report (2026-08-04)",
+   "url": "https://earth.com/news/readers-prefer-ai-generated-stories",
+   "page": "Readers rated AI stories higher than human fiction in study of 2,587 adults",
+   "quote": "People generally prefer predictability"
+  }
+ ],
+ "sources": [
+  {
+   "title": "StoryScope: Investigating idiosyncrasies in AI fiction (Russell, Rajendhran, Iyyer, Wieting; arXiv 2604.03136, Apr 2026)",
+   "url": "https://arxiv.org/html/2604.03136v3",
+   "kind": "arXiv preprint (full text)",
+   "substantive": true
+  },
+  {
+   "title": "Delving into ChatGPT usage in academic writing through excess vocabulary (Kobak et al.; arXiv 2406.07016 / Science Advances 2025)",
+   "url": "https://arxiv.org/html/2406.07016v4",
+   "kind": "peer-reviewed journal + arXiv (full text)",
+   "substantive": true
+  },
+  {
+   "title": "Why Does ChatGPT 'Delve' So Much? (Juzek & Ward; arXiv 2412.11385, Dec 2024)",
+   "url": "https://arxiv.org/html/2412.11385v1",
+   "kind": "arXiv preprint (full text)",
+   "substantive": true
+  },
+  {
+   "title": "Art or Artifice? Large Language Models and the False Promise of Creativity (Chakrabarty et al.; CHI 2024, arXiv 2309.14556)",
+   "url": "https://arxiv.org/abs/2309.14556",
+   "kind": "peer-reviewed conference (full PDF extracted)",
+   "substantive": true
+  },
+  {
+   "title": "Evaluating Creative Short Story Generation in Humans and LLMs (Ismayilzada, Stevenson, van der Plas; ICCC 2025, arXiv 2411.02316)",
+   "url": "https://arxiv.org/abs/2411.02316",
+   "kind": "peer-reviewed conference (full PDF extracted)",
+   "substantive": true
+  },
+  {
+   "title": "Generative AI enhances individual creativity but reduces the collective diversity of novel content (Doshi & Hauser; Science Advances 2024)",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11244532/",
+   "kind": "peer-reviewed journal (full text via PMC)",
+   "substantive": true
+  },
+  {
+   "title": "Human heuristics for AI-generated language are flawed (Jakesch, Hancock, Naaman; PNAS 2023)",
+   "url": "https://arxiv.org/abs/2206.07271",
+   "kind": "peer-reviewed journal (abstract)",
+   "substantive": true
+  },
+  {
+   "title": "Stylometric comparisons of human versus AI-generated creative writing (O'Sullivan; Humanities & Social Sciences Communications, Nov 2025)",
+   "url": "https://www.nature.com/articles/s41599-025-05986-3",
+   "kind": "peer-reviewed journal (full text)",
+   "substantive": true
+  },
+  {
+   "title": "AI-generated stories favour stability over change (Rettberg & Wigers; arXiv 2507.22445)",
+   "url": "https://arxiv.org/abs/2507.22445",
+   "kind": "arXiv preprint (abstract)",
+   "substantive": true
+  },
+  {
+   "title": "Voice Under Revision: LLMs and the Normalization of Personal Narrative (van Nuenen; arXiv 2604.22142)",
+   "url": "https://arxiv.org/abs/2604.22142",
+   "kind": "arXiv preprint (abstract)",
+   "substantive": true
+  },
+  {
+   "title": "AI as Humanity's Salieri: Quantifying Linguistic Creativity of Language Models (Lu et al.; arXiv 2410.04265)",
+   "url": "https://arxiv.org/abs/2410.04265",
+   "kind": "arXiv preprint (abstract)",
+   "substantive": true
+  },
+  {
+   "title": "Do LLMs write like humans? Variation in grammatical and rhetorical styles (Reinhart et al.; PNAS 2025)",
+   "url": "https://arxiv.org/html/2410.16107v2",
+   "kind": "peer-reviewed journal + arXiv (full text)",
+   "substantive": true
+  },
+  {
+   "title": "Can AI writing be salvaged? Mitigating Idiosyncrasies… through Edits (Chakrabarty, Laban, Wu; CHI 2025, arXiv 2409.14509)",
+   "url": "https://arxiv.org/html/2409.14509v4",
+   "kind": "peer-reviewed conference + arXiv (full text)",
+   "substantive": true
+  },
+  {
+   "title": "Echoes in AI: Quantifying Lack of Plot Diversity in LLM Outputs (Xu et al.; PNAS 2025, arXiv 2501.00273)",
+   "url": "https://arxiv.org/html/2501.00273",
+   "kind": "peer-reviewed journal + arXiv (full text)",
+   "substantive": true
+  },
+  {
+   "title": "Are Large Language Models Capable of Generating Human-Level Narratives? (Tian et al.; EMNLP 2024, arXiv 2407.13248)",
+   "url": "https://arxiv.org/html/2407.13248",
+   "kind": "peer-reviewed conference + arXiv (full text)",
+   "substantive": true
+  },
+  {
+   "title": "Pron vs Prompt: Can LLMs already Challenge a World-Class Fiction Author? (Marco et al.; EMNLP 2024, arXiv 2407.01119)",
+   "url": "https://arxiv.org/html/2407.01119v2",
+   "kind": "peer-reviewed conference + arXiv (full text)",
+   "substantive": true
+  },
+  {
+   "title": "People who frequently use ChatGPT for writing tasks are accurate and robust detectors of AI-generated text (Russell, Karpinska, Iyyer; ACL 2025)",
+   "url": "https://arxiv.org/abs/2501.15654",
+   "kind": "peer-reviewed conference (abstract)",
+   "substantive": true
+  },
+  {
+   "title": "A Framework for Exploring Player Perceptions of LLM-Generated Dialogue in Commercial Video Games (Akoury, Yang, Iyyer; Findings EMNLP 2023)",
+   "url": "https://aclanthology.org/2023.findings-emnlp.151/",
+   "kind": "peer-reviewed conference (full PDF extracted)",
+   "substantive": true
+  },
+  {
+   "title": "Evaluating Quality of Gaming Narratives Co-created with AI (Valdivia & Burelli; arXiv 2509.04239)",
+   "url": "https://arxiv.org/html/2509.04239",
+   "kind": "arXiv preprint (full text; Delphi criteria study)",
+   "substantive": true
+  },
+  {
+   "title": "Measuring AI 'Slop' in Text (Shaib, Chakrabarty, Garcia-Olano, Wallace; arXiv 2509.19163)",
+   "url": "https://arxiv.org/html/2509.19163v1",
+   "kind": "arXiv preprint (full text)",
+   "substantive": true
+  },
+  {
+   "title": "Contrasting Linguistic Patterns in Human and LLM-Generated News Text (Muñoz-Ortiz, Gómez-Rodríguez, Vilares; Artificial Intelligence Review 2024)",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11422446/",
+   "kind": "peer-reviewed journal (full text via PMC; news genre)",
+   "substantive": true
+  },
+  {
+   "title": "Does Writing with Language Models Reduce Content Diversity? (Padmakumar & He; ICLR 2024)",
+   "url": "https://arxiv.org/html/2309.05196v2",
+   "kind": "peer-reviewed conference + arXiv (full text)",
+   "substantive": true
+  },
+  {
+   "title": "We're Different, We're the Same: Creative Homogeneity Across LLMs (Wenger & Kenett; arXiv 2501.19361)",
+   "url": "https://arxiv.org/abs/2501.19361",
+   "kind": "arXiv preprint (abstract)",
+   "substantive": true
+  },
+  {
+   "title": "Large language models are homogeneously creative (Wenger & Kenett; PNAS Nexus 2026)",
+   "url": "https://academic.oup.com/pnasnexus/article/5/3/pgag042/8529001",
+   "kind": "peer-reviewed journal (full text)",
+   "substantive": true
+  },
+  {
+   "title": "Experimental Narratives: A Comparison of Human Crowdsourced Storytelling and AI Storytelling (Beguš; HSSC 2024, arXiv 2310.12902)",
+   "url": "https://arxiv.org/html/2310.12902",
+   "kind": "peer-reviewed journal + arXiv (full text)",
+   "substantive": true
+  },
+  {
+   "title": "A Confederacy of Models: a Comprehensive Evaluation of LLMs on Creative Writing (Gómez-Rodríguez & Williams; Findings EMNLP 2023)",
+   "url": "https://aclanthology.org/2023.findings-emnlp.966/",
+   "kind": "peer-reviewed conference (full PDF extracted)",
+   "substantive": true
+  },
+  {
+   "title": "AI-generated poetry is indistinguishable from human-written poetry and is rated more favorably (Porter & Machery; Scientific Reports 2024)",
+   "url": "https://www.nature.com/articles/s41598-024-76900-1",
+   "kind": "peer-reviewed journal (full text)",
+   "substantive": true
+  },
+  {
+   "title": "Co-Writing Screenplays and Theatre Scripts with Language Models: Evaluation by Industry Professionals (Mirowski et al.; CHI 2023, arXiv 2209.14958)",
+   "url": "https://arxiv.org/abs/2209.14958",
+   "kind": "peer-reviewed conference (full PDF extracted)",
+   "substantive": true
+  },
+  {
+   "title": "Homogenization Effects of Large Language Models on Human Creative Ideation (Anderson, Shah, Kreminski; C&C 2024)",
+   "url": "https://arxiv.org/abs/2402.01536",
+   "kind": "peer-reviewed conference (abstract)",
+   "substantive": true
+  },
+  {
+   "title": "The Reader is the Metric: How Textual Features and Reader Profiles Explain Conflicting Evaluations of AI Creative Writing (Marco, Gonzalo, Fresno; arXiv 2506.03310)",
+   "url": "https://arxiv.org/abs/2506.03310",
+   "kind": "arXiv preprint (abstract)",
+   "substantive": true
+  },
+  {
+   "title": "Small Language Models can Outperform Humans in Short Creative Writing (Marco, Rello, Gonzalo; COLING 2025, arXiv 2409.11547)",
+   "url": "https://arxiv.org/html/2409.11547v1",
+   "kind": "peer-reviewed conference + arXiv (full text)",
+   "substantive": true
+  },
+  {
+   "title": "Narrative Flattening: How Post-Training Compresses Thematic, Affective, and Stylistic Variation in LLM Fiction (Li et al.; arXiv 2605.27878)",
+   "url": "https://arxiv.org/abs/2605.27878",
+   "kind": "arXiv preprint (abstract)",
+   "substantive": true
+  },
+  {
+   "title": "Spoiler Alert: Narrative Forecasting as a Metric for Tension in LLM Storytelling (Sui et al.; arXiv 2604.09854)",
+   "url": "https://arxiv.org/html/2604.09854v1",
+   "kind": "arXiv preprint (full text)",
+   "substantive": true
+  },
+  {
+   "title": "Saying More Than They Know: Quantifying Epistemic-Rhetorical Miscalibration in LLMs (Bakhshi; arXiv 2604.19768)",
+   "url": "https://arxiv.org/html/2604.19768",
+   "kind": "arXiv preprint (full text; argumentative genre)",
+   "substantive": true
+  },
+  {
+   "title": "Evaluating LLM Story Generation through Large-scale Network Analysis of Social Structures (Nonaka & Perry; arXiv 2510.18932)",
+   "url": "https://arxiv.org/html/2510.18932v1",
+   "kind": "arXiv preprint (full text)",
+   "substantive": true
+  },
+  {
+   "title": "Lost in Stories: Consistency Bugs in Long Story Generation by LLMs (Li et al.; arXiv 2603.05890)",
+   "url": "https://arxiv.org/abs/2603.05890",
+   "kind": "arXiv preprint (abstract)",
+   "substantive": true
+  },
+  {
+   "title": "ChatGPT as speechwriter for the French presidents (Labbé, Labbé, Savoy; arXiv 2411.18382)",
+   "url": "https://arxiv.org/abs/2411.18382",
+   "kind": "arXiv preprint (abstract; political speech genre)",
+   "substantive": false
+  },
+  {
+   "title": "Creating Suspenseful Stories: Iterative Planning with LLMs (Xie & Riedl; arXiv 2402.17119)",
+   "url": "https://arxiv.org/html/2402.17119",
+   "kind": "arXiv preprint (full text)",
+   "substantive": true
+  },
+  {
+   "title": "AI-generated stories have longer endings than human stories (Rettberg reporting Witte; jilltxt.net, 2026-08-25)",
+   "url": "https://jilltxt.net/ai-generated-stories-have-longer-endings-than-human-stories/",
+   "kind": "researcher blog post (not peer-reviewed)",
+   "substantive": true
+  },
+  {
+   "title": "Elias in the Lighthouse, Again? Diagnosing Low Diversity in LLM Stories (Hamilton & Mimno; arXiv 2605.26492)",
+   "url": "https://arxiv.org/html/2605.26492",
+   "kind": "arXiv preprint (full text)",
+   "substantive": true
+  },
+  {
+   "title": "The Ghost Couple: Correlated LLM Name Priors (Brzozowski & Chung; arXiv 2606.02184)",
+   "url": "https://arxiv.org/abs/2606.02184",
+   "kind": "arXiv preprint (abstract)",
+   "substantive": true
+  },
+  {
+   "title": "Do Language Models Agree with Human Perceptions of Suspense in Stories? (Matlin et al.; arXiv 2508.15794)",
+   "url": "https://arxiv.org/abs/2508.15794",
+   "kind": "arXiv preprint (abstract)",
+   "substantive": true
+  },
+  {
+   "title": "Beyond Direct Generation: A Decomposed Approach to Well-Crafted Screenwriting with LLMs (Lei et al.; arXiv 2510.23163)",
+   "url": "https://arxiv.org/html/2510.23163v1",
+   "kind": "arXiv preprint (full text)",
+   "substantive": true
+  },
+  {
+   "title": "Beneath the Surface: Investigating LLMs' Capabilities for Communicating with Subtext (Ahuja, Li, Lampinen; arXiv 2604.05273)",
+   "url": "https://arxiv.org/abs/2604.05273",
+   "kind": "arXiv preprint (abstract)",
+   "substantive": true
+  },
+  {
+   "title": "Towards A 'Novel' Benchmark: Evaluating Literary Fiction with Large Language Models (Wang, Gao, Hu, Wan; Findings ACL 2025)",
+   "url": "https://aclanthology.org/2025.findings-acl.1114/",
+   "kind": "peer-reviewed conference (abstract)",
+   "substantive": true
+  },
+  {
+   "title": "Do Large Language Models Always Tell The Same Stories? (DK & Hatzel; arXiv 2606.17350)",
+   "url": "https://arxiv.org/abs/2606.17350",
+   "kind": "arXiv preprint (abstract)",
+   "substantive": true
+  },
+  {
+   "title": "Style over Story: Measuring LLM Narrative Preferences via Structured Selection (Jung et al.; ACL 2026, arXiv 2510.02025)",
+   "url": "https://arxiv.org/abs/2510.02025",
+   "kind": "peer-reviewed conference (abstract)",
+   "substantive": true
+  },
+  {
+   "title": "Beyond the surface: stylometric analysis of GPT-4o's capacity for literary style imitation (Mikros; Digital Scholarship in the Humanities 2025)",
+   "url": "https://academic.oup.com/dsh/article/40/2/587/8118784",
+   "kind": "peer-reviewed journal (full text)",
+   "substantive": true
+  },
+  {
+   "title": "A linguistic comparison between human- and AI-generated content (Rodrigues, Sturm, Pinheiro; iScience 2026)",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12969083/",
+   "kind": "peer-reviewed journal (full text via PMC; news genre)",
+   "substantive": true
+  },
+  {
+   "title": "LLMs Exhibit Significantly Lower Uncertainty in Creative Writing Than Professional Writers (Sui; arXiv 2602.16162)",
+   "url": "https://arxiv.org/html/2602.16162",
+   "kind": "arXiv preprint (full text)",
+   "substantive": true
+  },
+  {
+   "title": "CASPER in the Machine: Insights into Character Variety in LLM-Generated Stories (Brei et al.; ACL 2026, arXiv 2606.22454)",
+   "url": "https://arxiv.org/abs/2606.22454",
+   "kind": "peer-reviewed conference (abstract; no extractable findings)",
+   "substantive": false
+  },
+  {
+   "title": "How LLMs Build Fictional Worlds: Setting and Narrative Space in AI-Generated Creative Storytelling (Rohrbacher et al.; arXiv 2609.02482)",
+   "url": "https://arxiv.org/html/2609.02482v1",
+   "kind": "arXiv preprint (full text)",
+   "substantive": true
+  },
+  {
+   "title": "Benchmark of stylistic variation in LLM-generated texts (Milička, Marklová, Cvrček; arXiv 2509.10179)",
+   "url": "https://arxiv.org/abs/2509.10179",
+   "kind": "arXiv preprint (abstract; no extractable findings)",
+   "substantive": false
+  },
+  {
+   "title": "The Real Reason Not to Use AI to Write Your Novel (Richard Lowe, 2026-04-29)",
+   "url": "https://associationofghostwriters.org/the-real-reason-not-to-use-ai-to-write-your-novel/",
+   "kind": "ghostwriter essay",
+   "substantive": true
+  },
+  {
+   "title": "After Editing Two AI-Assisted Manuscripts, I Rewrote My Client Agreement (Mary Kole, 2026-08-13)",
+   "url": "https://janefriedman.com/after-editing-two-ai-assisted-manuscripts-i-rewrote-my-client-agreement/",
+   "kind": "developmental editor essay",
+   "substantive": true
+  },
+  {
+   "title": "Human Editors vs AI Editing: What AI Still Can't Do (Nick Bailey, 2026-06-18)",
+   "url": "https://litreactor.com/columns/human-editors-vs-ai-editing/",
+   "kind": "craft column with case study",
+   "substantive": true
+  },
+  {
+   "title": "How editors should handle AI-generated manuscripts (Josh Bernoff, 2026-02-05)",
+   "url": "https://bernoff.com/blog/how-editors-should-handle-ai-generated-manuscripts",
+   "kind": "editor blog",
+   "substantive": true
+  },
+  {
+   "title": "AI and Fiction Editing (Sophie Playle, 2026-05-06)",
+   "url": "https://www.liminalpages.com/ai-and-fiction-editing/",
+   "kind": "fiction editor blog",
+   "substantive": true
+  },
+  {
+   "title": "Slanguage: Why AI's stylistic negation is both annoying and doesn't work (Joshua Gonzales, 2026-04-20)",
+   "url": "https://theconversation.com/slanguage-why-ais-stylistic-negation-its-not-x-its-y-is-both-annoying-and-doesnt-work-278967",
+   "kind": "academic explainer (management, not fiction)",
+   "substantive": true
+  },
+  {
+   "title": "Don't Write Like AI (1 of 101): Negation (Blake Stockton, 2025-04-16)",
+   "url": "https://www.blakestockton.com/dont-write-like-ai-1-101-negation/",
+   "kind": "AI-writing blog, thin",
+   "substantive": true
+  },
+  {
+   "title": "I Asked the Machine to Tell on Itself: A Field Guide to AI Tells (Matthew Vollmer, 2026-04-24)",
+   "url": "https://matthewvollmer.substack.com/p/i-asked-the-machine-to-tell-on-itself",
+   "kind": "fiction writer / professor essay",
+   "substantive": true
+  },
+  {
+   "title": "Wikipedia:Signs of AI writing",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "kind": "editor catalog",
+   "substantive": true
+  },
+  {
+   "title": "How to make AI write a bestseller—and why you can't (Michael O. Church, 2025-05-28)",
+   "url": "https://antipodes.substack.com/p/how-to-make-ai-write-a-bestsellerand",
+   "kind": "essay",
+   "substantive": true
+  },
+  {
+   "title": "StoryScope: Investigating idiosyncrasies in AI fiction (Russell et al., arXiv 2604.03136, 2026-04-03)",
+   "url": "https://arxiv.org/abs/2604.03136",
+   "kind": "research paper (abs + HTML full text)",
+   "substantive": true
+  },
+  {
+   "title": "The AI Fiction Paradox (Katherine Elkins, arXiv 2603.13545, 2026-03-13)",
+   "url": "https://arxiv.org/abs/2603.13545",
+   "kind": "research paper (abstract)",
+   "substantive": true
+  },
+  {
+   "title": "How to Identify AI-Written Web Fiction (Makin, 2025-11-27)",
+   "url": "https://recordcrash.substack.com/p/how-to-identify-ai-written-web-fiction",
+   "kind": "web-fiction critic essay",
+   "substantive": true
+  },
+  {
+   "title": "The AI Tells Are in the Story (Dramatica, 2026-05-29)",
+   "url": "https://dramatica.com/blog/the-ai-tells-are-in-the-story",
+   "kind": "commentary on StoryScope (not independent)",
+   "substantive": true
+  },
+  {
+   "title": "Readers Prefer Outputs of AI Trained on Copyrighted Books over Expert Human Writers (Chakrabarty et al., arXiv 2510.13939)",
+   "url": "https://arxiv.org/abs/2510.13939",
+   "kind": "research paper (abstract) — counter-evidence",
+   "substantive": true
+  },
+  {
+   "title": "Readers rated AI stories higher than human fiction in study of 2,587 adults (earth.com on Sears & Weisberg, 2026-08-04)",
+   "url": "https://earth.com/news/readers-prefer-ai-generated-stories",
+   "kind": "journalism on research — counter-evidence",
+   "substantive": true
+  },
+  {
+   "title": "In Offense of LLM Poetry (The Literary Quant, 2026-08-14)",
+   "url": "https://new2criticism.substack.com/p/in-offense-of-llm-poetry",
+   "kind": "poet essay",
+   "substantive": true
+  },
+  {
+   "title": "What Makes a Story \"Look\" Like AI Wrote It? (Carrie Jones, 2026-03-21)",
+   "url": "https://livinghappy.substack.com/p/what-makes-a-story-look-like-ai-wrote",
+   "kind": "developmental editor essay",
+   "substantive": true
+  },
+  {
+   "title": "Spotting machine-made prose (Carly Ayres, 2024-12-05)",
+   "url": "https://carly.substack.com/p/spotting-machine-made-prose",
+   "kind": "writer/designer essay, not fiction-specific",
+   "substantive": true
+  },
+  {
+   "title": "[Hot take] Problems with AI prose (sudo, 2026-04-12)",
+   "url": "https://www.lesswrong.com/posts/nTuKjJBwMtMuuLonA/hot-take-problems-with-ai-prose",
+   "kind": "close reading",
+   "substantive": true
+  },
+  {
+   "title": "Tropes - AI Writing Pattern Directory",
+   "url": "https://tropes.fyi/directory",
+   "kind": "pattern directory",
+   "substantive": true
+  },
+  {
+   "title": "Art Without Intention (Lincoln Michel, 2024-09-04)",
+   "url": "https://countercraft.substack.com/p/art-without-intention",
+   "kind": "novelist essay",
+   "substantive": true
+  },
+  {
+   "title": "Lincoln Michel note on the Granta AI story (2026-05-19)",
+   "url": "https://substack.com/@thelincoln/note/c-261333774",
+   "kind": "novelist note",
+   "substantive": true
+  },
+  {
+   "title": "What 'AI Rhythm' Means (TextSight, 2026-06-16)",
+   "url": "https://www.textsight.ai/blog/ai-rhythm-explained/",
+   "kind": "vendor blog (detection product)",
+   "substantive": true
+  },
+  {
+   "title": "AI Dialogue Generator for Games: What Actually Works in 2026 (Summer Engine, 2026-06-06)",
+   "url": "https://www.summerengine.com/blog/ai-dialogue-generator-for-games",
+   "kind": "vendor blog (game tooling)",
+   "substantive": true
+  },
+  {
+   "title": "Surf's Up in Slop City (Lincoln Michel, 2026-02-10)",
+   "url": "https://countercraft.substack.com/p/surfs-up-in-slop-city",
+   "kind": "novelist essay — about volume, declines prose critique",
+   "substantive": false
+  },
+  {
+   "title": "A Perspective on Literary Metaphor in the Context of Generative AI (van Heerden & Bas, arXiv 2409.01053, 2024-09-02)",
+   "url": "https://arxiv.org/html/2409.01053v1",
+   "kind": "research paper — LSTM metaphor, argues the opposite",
+   "substantive": false
+  },
+  {
+   "title": "I Uploaded My Novel to ChatGPT (Rondanini Publishing, Medium)",
+   "url": "https://medium.com/rondanini-publishing/i-uploaded-my-novel-to-chatgpt-what-happened-next-tells-you-everything-about-ai-and-literature-15d7d8373ad8",
+   "kind": "attempted — HTTP 403, not read",
+   "substantive": false
+  },
+  {
+   "title": "AI texts are not exposed by dashes, but by stories that are too tidy (Mark.Media)",
+   "url": "https://markmedia.md/blog/en/ai-texts-too-tidy-stories/",
+   "kind": "attempted — HTTP 403, not read",
+   "substantive": false
+  },
+  {
+   "title": "Why Can't LLMs Do a Normal Metaphor? (Eleanor Stern)",
+   "url": "https://wickedtongue.substack.com/p/why-cant-llms-do-a-normal-metaphor",
+   "kind": "attempted — paywalled, not read",
+   "substantive": false
+  },
+  {
+   "title": "The bigwigs who want AI-generated NPCs and writing think you're too dumb (PC Gamer)",
+   "url": "https://www.pcgamer.com/gaming-industry/game-development/the-bigwigs-who-want-ai-generated-npcs-and-writing-think-youre-too-dumb-to-appreciate-a-good-story-dont-prove-them-right/",
+   "kind": "attempted — fetch returned navigation only, not read",
+   "substantive": false
+  },
+  {
+   "title": "A Concerning Trend (Neil Clarke)",
+   "url": "https://neil-clarke.com/a-concerning-trend/",
+   "kind": "attempted — HTTP 403 and archive blocked; cited only via Vollmer",
+   "substantive": false
+  },
+  {
+   "title": "Why A.I. Isn't Going to Make Art (Ted Chiang, New Yorker)",
+   "url": "https://www.newyorker.com/culture/the-weekend-essay/why-ai-isnt-going-to-make-art",
+   "kind": "attempted — host blocked, not read",
+   "substantive": false
+  },
+  {
+   "title": "Ubisoft faces major backlash after announcing AI writing tool (GamesHub)",
+   "url": "https://www.gameshub.com/news/news/ubisoft-backlash-ai-dialogue-writing-tool-ghostwriter-2610382/",
+   "kind": "attempted — HTTP 403, not read",
+   "substantive": false
+  },
+  {
+   "title": "LLMs Are Getting Better at Generating Short Fiction (Scale AI)",
+   "url": "https://scale.com/blog/llms-generating-fiction",
+   "kind": "attempted — fetch returned homepage only, not read",
+   "substantive": false
+  }
+ ],
+ "verdicts": {}
+}
