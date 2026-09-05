@@ -576,7 +576,16 @@ export function defensePostureProse(settlement, options = {}) {
  * three variants in each capture pool; the other two say "the hall" in their own words.
  */
 
-/** The four `structure …` pool keys, by the producer's own key. `null` is a reading. */
+/**
+ * The four `structure …` pool keys, by the producer's own key. `null` is a reading.
+ *
+ * Typed as an open `Record` rather than left to its literal shape because the lookup below
+ * is keyed on a PRODUCER value, not on a key this file spells: an unrecognised structure
+ * must resolve to `undefined` and fall through to `null` — the desk's own silence — rather
+ * than being a compile-time impossibility. `RECOGNISED_CRIMINAL_STRUCTURES` is the runtime
+ * both-ways binding the suite asserts totality against; the type is not that instrument.
+ * @type {Readonly<Record<string, string>>}
+ */
 const CRIMINAL_STRUCTURE_POOL = Object.freeze({
   organized: 'structure organized',
   'semi-organized': 'structure semi-organized',
