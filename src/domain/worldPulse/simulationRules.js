@@ -4,6 +4,31 @@ export const MIGRATION_MODES = Object.freeze(['roll', 'void', 'distributed', 'co
 export const SIMULATION_RULES_SCHEMA_VERSION = 1;
 export const CUSTOM_SIMULATION_PRESET_ID = 'custom';
 export const DEFAULT_SIMULATION_PRESET_ID = 'realistic_regional';
+// ── THE BIRTH SEAM (LIGHTING row O-1 / CH-5) ────────────────────────────────
+// The preset a BRAND-NEW campaign is born into — and NOTHING else. It is
+// deliberately a SECOND constant rather than a re-pointing of
+// DEFAULT_SIMULATION_PRESET_ID above, because that one is what a KEYLESS SAVE
+// INFERS and must keep inferring forever: an installed world's identity may
+// never be re-decided under it (THE PROMISE — a seed is a starting world
+// forever). Birth and inference are two questions; this constant is the first.
+//
+// `null` is the honest value TODAY: no lit successor preset exists yet, so a
+// birth resolves to the plain normalized default — byte-for-byte the world
+// every birth has received to date (proved in
+// tests/domain/simulationRulesPreset.stability.test.js, the BIRTH SEAM block).
+// The day a lit successor id joins SIMULATION_RULE_PRESETS, naming it HERE is
+// the whole act; no other module reads this constant.
+//
+// ⛔ WHAT NAMING A PRESET HERE WILL COST, MEASURED BEFORE IT IS SPENT. Every
+// entry in SIMULATION_RULE_PRESETS spreads DEFAULT_SIMULATION_RULES, which
+// carries ...PROFILE_DEFAULTS, so `normalizeSimulationRules(preset.rules)`
+// takes the normalizer's MATERIALIZE branch and the profile stops being
+// virtual. Against today's birth that is +7 persisted rule keys on every new
+// campaign (the six PROFILE_KEYS plus narrativeTempo, 30 -> 37 measured at
+// realistic_regional) and a moved new-campaign envelope. That is a DECLARED
+// behaviour shift owed to the register on the day this stops being null — a
+// cost this seam MAKES VISIBLE rather than one it hides.
+export const NEW_CAMPAIGN_SIMULATION_PRESET_ID = null;
 // ── Simulation-profile axes (Phase 5.5 CL-0, design §11) ────────────────────
 // The four §11 political-autonomy modes, all live today: dm_only /
 // recommendations force EVERY candidate to a DM proposal; routine is TODAY'S
@@ -1177,6 +1202,38 @@ export function normalizeSimulationRules(raw = {}) {
   }
   next.presetId = presetIdForRules(input, next);
   return next;
+}
+
+/**
+ * The rules a FRESH campaign is born with — the ONE reader of
+ * NEW_CAMPAIGN_SIMULATION_PRESET_ID in the whole tree.
+ *
+ * A null successor (today) resolves to the plain normalized default, so this is
+ * byte-identical to the `normalizeSimulationRules()` birth it replaces; that
+ * identity is asserted, not assumed. Naming a real preset id makes a birth
+ * resolve THAT preset's rules, which is the entire mechanism L-DEFAULT needs.
+ *
+ * FAIL CLOSED, like every other read in this module: an id naming no catalog
+ * entry births today's world rather than a half-applied preset. A birth is not
+ * a place to throw — a customer who cannot create a campaign has lost more than
+ * a preset — so the miss is silent HERE and loud in the stability pin.
+ *
+ * The `presetId` parameter is the FORCED-DOOR seam: it exists so a test can
+ * drive a real preset through this resolver while the constant above is still
+ * null, and it is passed by no production caller.
+ *
+ * ⛔ The lookup cast below is deliberately `unknown`-valued, not `any`-valued:
+ * this module's any-cast debt is a shrink-only ratchet and a new seam has no
+ * business spending it.
+ *
+ * @param {string | null} [presetId]
+ */
+export function newCampaignSimulationRules(presetId = NEW_CAMPAIGN_SIMULATION_PRESET_ID) {
+  const catalog = /** @type {Record<string, { rules: Record<string, unknown> } | undefined>} */ (
+    SIMULATION_RULE_PRESETS
+  );
+  const chosen = typeof presetId === 'string' ? catalog[presetId] : undefined;
+  return normalizeSimulationRules(chosen ? chosen.rules : undefined);
 }
 
 /**
