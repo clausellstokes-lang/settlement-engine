@@ -32,6 +32,7 @@ Base: the §900 CAS (the desk landing) — every L-HOMES dock is cut at 38474a59
 - (LH9) `advanceEpochEnabled` is undefined in all eight born worlds; `clock.js:79` throws on a lit world with no threaded epoch — the witness threads a nonce only when strictly true; the lit branch is declared and untested until L-DEFAULT lights the key. An L-DEFAULT row.
 - (wave law) NO `it.each` in any lighting car (the each-family park ceiling is at 111/112); fixtures for the freeze are `*-golden.json`; a vitest summary's file count must equal the count requested.
 
+- (CHAIN-NOUN) THE CHAIR'S WORDS ACT: the 75-row `CHAIN_NOUN` table (draft column in `receipt-chain-noun-census.md` §3; 66 need a noun rewrite; 4 plural heads must go singular; one genitive seam DS-SUP-2 · COLLAPSING · street is re-authored instead) → then lane CHAIN-NOUN-WIRE (a `SLOT_FILL_TABLES` entry + four totality arms incl. `labelsByResource`; mounts DS-ECO-5/SUP-1/SUP-2 fall 15 → 12 dark if the same car mounts them; DS-ECO-11's seam needs a producer or a re-authored variant). ⛔ Never re-word the producer headings (persisted, golden-hashed).
 ## L-DEFAULT decisions this consist surfaced (not L-HOMES's)
 - ✅ POSITION 3 hunk 6 is NOT gated on ESPWIRE (L-HOMES-5 measured the docket's claim false): a lit espionage layer with no public voice is the design.
 - OWNER ROW: `operationsVoice.js`'s sentences are CANDIDATE, OWNER-UNSIGNED with five open rows (audience split); custody (`caught_spying` holds) is owner-gated persisted schema. Until signed, espionage lights silent.
