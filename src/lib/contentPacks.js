@@ -732,13 +732,20 @@ export function parseContentPack(raw) {
   }
 }
 
-function defaultItemValidation(bucket, item) {
+function defaultItemValidation(bucket, item, charset = null) {
   // The versioning validator checks the immutable record envelope. The
   // manifest is the sole authority for category fields and admitted values.
+  //
+  // ⭐ THE AUTHORING / RESTORE SPLIT (owner ruling CS-9). `charset` is null on
+  // every restore lane, so the charset wall is not consulted there at all --
+  // not consulted and refused, not consulted and forgiven, but never asked. A
+  // library minted before the wall existed reloads whatever the policy says,
+  // because refusing a user's own export is data loss on a paid surface.
   const basic = validateVersionedContent(bucket, item);
   if (!basic.ok) return basic;
   const manifest = admitCustomContentDefinition(bucket, item, {
     allowSystemFields: true,
+    charset,
   });
   if (!manifest.ok) {
     return {
@@ -774,6 +781,10 @@ function remapDependencyValue(value, refMap, missing, context) {
  * affected entry; they are never silently removed. V2 entry identity yields a
  * stable imported localUid so a later version can update the same pack-owned
  * definition instead of cloning it.
+ *
+ * `options.authoring` is the CS-9 split. It defaults to true, which is what a
+ * foreign shared pack is. The account-import lane passes false, and with it the
+ * charset wall is never built and never asked.
  */
 export function prepareImport(pack, options = {}) {
   const content = pack?.content && isPlainContentRecord(pack.content)
@@ -782,9 +793,13 @@ export function prepareImport(pack, options = {}) {
   const dependencyFields = Array.isArray(options.dependencyFields)
     ? options.dependencyFields.filter(field => PACK_DEP_FIELDS.includes(field))
     : PACK_DEP_FIELDS;
+  // An import is AUTHORING unless the caller says otherwise. The account-import
+  // lane says otherwise; a foreign shared pack does not.
+  const authoring = options.authoring !== false;
+  const charset = authoring ? (options.charset || null) : null;
   const validateItem = typeof options.validateItem === 'function'
     ? options.validateItem
-    : defaultItemValidation;
+    : (itemBucket, item) => defaultItemValidation(itemBucket, item, charset);
   const existingByPackEntry = options.existingByPackEntry instanceof Map
     ? options.existingByPackEntry
     : new Map(Object.entries(options.existingByPackEntry || {}));
@@ -882,6 +897,9 @@ export function prepareImport(pack, options = {}) {
     missingDependencies,
     warnings: Array.isArray(pack.importWarnings) ? [...pack.importWarnings] : [],
     atomic: rejected.length === 0,
+    // Which law ran, recorded rather than inferred: a reader of a rejected
+    // entry must be able to tell whether the charset wall was even consulted.
+    authoring,
   };
   const preview = {
     packId: pack.packId,
