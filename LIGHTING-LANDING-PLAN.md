@@ -7,7 +7,7 @@ Base: the §900 CAS (the desk landing) — every L-HOMES dock is cut at 38474a59
 | 3 | LGT-P13-FENCES | laneLH3 @ 38474a59e | DONE 1506d657d (four files, five keys; the docket's twelve was wrong four ways) | `lgt-p13-fences-2026-09-05` |
 | 4 | LGT-P5-WOPS | to cut | queued | — |
 | 5 | LGT-P6-ESPWIRE | laneLH5 (unmoved) | REFUSED WITH MEASUREMENT — zero bytes; the layer lights SILENT by design (exposure is its only voice and exposure needs owner-gated custody); POSITION 3 is FREED of the false dependency; an OWNER ROW opens (sign the espionage sentences; the custody schema) | — |
-| 6 | LGT-P4-READER | laneLH6 @ 38474a59e | RUNNING (O-5 RULED BUILD at §882.13) | — |
+| 6 | LGT-P4-READER | laneLH6 @ 38474a59e | DONE 35aaeb4ba (the Remembrance reader, two lazy surfaces, dark-inert by innerHTML identity) | `lgt-p4-reader-2026-09-05` |
 | 7 | LGT-P7-DRIFTDOOR | laneLH7 (unmoved) | REFUSED WITH MEASUREMENT — zero bytes: the flag home is RESERVED by ruling (§893 §2, §890.1) and OWNER-GATED; the door lights nothing today; an OWNER ROW (charter the home; receipt §7 prices it) | — |
 | 8 | LGT-P8-MATBOUND | laneLH8 @ 38474a59e | RUNNING | — |
 | 9 | LGT-P14-WITNESS | laneLH9 @ 408d2e2b1 (CAR 1's tip) | RUNNING | — |
