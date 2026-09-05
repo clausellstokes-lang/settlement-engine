@@ -20,7 +20,9 @@ import {
   defensePostureProse, economicRowPoolKey, firstSurveyPoolKey, forceCorePoolKey,
   fortificationPoolKey, internalRowPoolKey, invasionRowPoolKey, isCompoundSafetyLabel,
   measuredMonsterFamily, posturePoolKey, publicOrderPoolKey, strategicPrizePoolKey,
-  terrainDefencePoolKey, TERRAIN_DEFENCE_NAMES, TERRAIN_PRIZE_NAMES,
+  terrainDefencePoolKey, activeDefenceStress, defenseMilitaryStatusProse,
+  militaryOverridePoolKey, viabilityUnderStressPoolKey, DEF8_UNREACHABLE_POOLS,
+  TERRAIN_DEFENCE_NAMES, TERRAIN_PRIZE_NAMES,
 } from '../../src/domain/display/stateProse/defenseStateProse.js';
 import {
   DEFENSE_BUCKET_KEYS, standingDefenseForces,
@@ -33,7 +35,8 @@ import { avgScore, scoreBand } from '../../src/domain/display/defenseScoreBands.
 import { avgScore as avgScoreViaPdf } from '../../src/pdf/lib/viewModelPrimitives.js';
 import { deriveDefensePosture } from '../../src/domain/display/dossierViewModel.js';
 import { DM_FIELD_FRAMED_BY_BLOCK, isDmEditableProsePath } from '../../src/domain/display/stateProse/dmFieldProjection.js';
-import { deriveGuardAssessment } from '../../src/domain/display/defenseDisplay.js';
+import { DEFENSE_STRESS_STATUS, deriveGuardAssessment } from '../../src/domain/display/defenseDisplay.js';
+import { STRESS_TYPE_MAP } from '../../src/data/stressTypes.js';
 import { DOSSIER_STATE_PROSE_DEFENSE } from '../../src/data/dossierStateProse/defense.generated.js';
 import { DOSSIER_MOUNTS, UNMOUNTED_BLOCKS, sentenceMountForBlock } from '../../src/domain/display/stateProse/dossierMounts.js';
 import { parseSlotShapes, mergeSlotShapes } from '../../scripts/lib/dossier-slot-shapes.mjs';
@@ -719,6 +722,110 @@ describe('DS-DEF-1 — the posture header, and a BLOCKER that had decayed', () =
     const noPen = defensePostureProse(sited('Mountain', 80), { seed: 'pen' });
     expect(noPen.posture.hasField).toBe(false);
     expect(noPen.posture.beside).toBeTruthy();
+  });
+});
+
+/** DS-DEF-8 — the active-military-status banner. */
+const DEF8 = 'DS-DEF-8';
+const DEF8_POOLS = DOSSIER_STATE_PROSE_DEFENSE[DEF8].pools;
+
+/** A settlement under the named stresses. @param {string[]} types */
+function pressed(types, { viable } = {}) {
+  return {
+    name: 'Thornwall', _seed: 'seed-def8',
+    stress: types.map((type) => ({ type, ...STRESS_TYPE_MAP[type] })),
+    ...(viable === undefined ? {} : { economicViability: { viable } }),
+  };
+}
+
+describe('DS-DEF-8 — the military-status override, and the pool that must NOT speak', () => {
+  it('the override lens asks the SAME map the banner beside it asks', () => {
+    // Not a second opinion about which stresses carry a posture: `DefenseTab` picks
+    // `stressTypes.find((t) => DEFENSE_STRESS_STATUS[t])` and so does this desk.
+    for (const type of Object.keys(DEFENSE_STRESS_STATUS)) {
+      expect(militaryOverridePoolKey(pressed([type]).stress), type)
+        .toBe('override active (generic framing)');
+      expect(activeDefenceStress(pressed([type]).stress).type).toBe(type);
+    }
+    // A stress with no defence posture leaves the banner — and this desk — silent.
+    expect(DEFENSE_STRESS_STATUS.no_such_stress).toBeUndefined();
+    expect(militaryOverridePoolKey([{ type: 'no_such_stress' }])).toBeNull();
+    expect(militaryOverridePoolKey([])).toBeNull();
+    expect(militaryOverridePoolKey(undefined)).toBeNull();
+    // The field is a bare object on some saves; both shapes normalise.
+    expect(militaryOverridePoolKey({ type: 'under_siege' })).toBe('override active (generic framing)');
+  });
+
+  it('⛔⛔ `viabilityNote` IS A CONSTANT — every one of the fifteen carries one', () => {
+    // The block's title names `stress.viabilityNote`, and splitting on its presence is the
+    // trap: it is present on ALL fifteen stress types, so `threatened` would fire for every
+    // settlement and `intact` would be unreachable. A default wearing a reading's clothes,
+    // and an unusually convincing one because the field is named for the question.
+    const withNote = Object.keys(STRESS_TYPE_MAP)
+      .filter((t) => typeof STRESS_TYPE_MAP[t].viabilityNote === 'string' && STRESS_TYPE_MAP[t].viabilityNote);
+    expect(withNote).toHaveLength(Object.keys(STRESS_TYPE_MAP).length);
+    expect(Object.keys(STRESS_TYPE_MAP)).toHaveLength(15);
+    // The desk therefore reads the MEASURED verdict instead, and is silent without one.
+    expect(viabilityUnderStressPoolKey(pressed(['famine']).stress, false)).toBe('override active, viability threatened');
+    expect(viabilityUnderStressPoolKey(pressed(['famine']).stress, true)).toBe('override active, viability intact');
+    expect(viabilityUnderStressPoolKey(pressed(['famine']).stress, undefined)).toBeNull();
+    // …and it says nothing at all when no override is on, whatever the verdict.
+    expect(viabilityUnderStressPoolKey([], false)).toBeNull();
+    expect(viabilityUnderStressPoolKey([], true)).toBeNull();
+  });
+
+  it('⛔⛔ ONE POOL IS DECLARED DARK, and this arm is the pin on that declaration', () => {
+    // `multiple stresses, one posture shown` claims in all three variants that the posture
+    // named is "the heaviest"/"the loudest" of several. MEASURED: STRESS_TYPE_MAP carries
+    // `probability` (rarity) and NO severity, and the banner picks the FIRST stress that
+    // maps — roll order, not rank. Printing it would assert a ranking nothing computes.
+    expect(DEF8_UNREACHABLE_POOLS).toEqual(['multiple stresses, one posture shown']);
+    expect(DEF8_POOLS[DEF8_UNREACHABLE_POOLS[0]], 'the declared-dark pool left the corpus').toBeTruthy();
+    for (const type of Object.keys(STRESS_TYPE_MAP)) {
+      expect(Object.keys(STRESS_TYPE_MAP[type]), `${type} gained a severity field`)
+        .not.toContain('severity');
+    }
+    // The claim it would make is false of the pick the banner actually performs: with two
+    // stresses the FIRST is shown, whatever its weight.
+    const both = pressed(['mass_migration', 'under_siege']);
+    expect(activeDefenceStress(both.stress).type).toBe('mass_migration');
+    // And a multi-stress settlement is still described — by the two live lenses.
+    const drawn = defenseMilitaryStatusProse({ ...both, economicViability: { viable: false } }, { seed: 'm' });
+    expect(drawn.override.provenance.poolKey).toBe('override active (generic framing)');
+    expect(drawn.viability.provenance.poolKey).toBe('override active, viability threatened');
+  });
+
+  it('all THREE live pools speak over every stress type × the viability verdict', () => {
+    const reached = new Set();
+    for (const type of [...Object.keys(STRESS_TYPE_MAP), 'no_such_stress']) {
+      for (const viable of [true, false, undefined]) {
+        const drawn = defenseMilitaryStatusProse(pressed([type], { viable }), { seed: 'sweep8' });
+        for (const lens of ['override', 'viability']) {
+          const rung = drawn[lens];
+          if (!rung?.sentence) continue;
+          reached.add(rung.provenance.poolKey);
+          expect(rung.provenance.blockId).toBe(DEF8);
+          // anchored: `reached` is pinned against the corpus pool set below
+          expect(rung.sentence).not.toMatch(/[{}]/);
+        }
+      }
+    }
+    const live = Object.keys(DEF8_POOLS).filter((k) => !DEF8_UNREACHABLE_POOLS.includes(k));
+    expect([...reached].sort()).toEqual([...live].sort());
+    expect(Object.keys(DEF8_POOLS)).toHaveLength(4);
+    expect(live).toHaveLength(3);
+  });
+
+  it('the registry mounts DS-DEF-8 once, as a sentence, on the defense tab', () => {
+    const rows = DOSSIER_MOUNTS.filter((row) => row.blockId === DEF8);
+    expect(rows).toHaveLength(1);
+    expect(rows[0]).toMatchObject({ mount: 'defense.militaryStatus', tab: 'defense', desk: 'defense', rung: 'sentence' });
+    expect(sentenceMountForBlock(DEF8)?.mount).toBe('defense.militaryStatus');
+    expectAbsentWithAnchor(
+      UNMOUNTED_BLOCKS, DEF8, A_DARK_SIBLING,
+      'DS-DEF-8 carries a mount row, so the dark half must not name it',
+    );
+    expect(DM_FIELD_FRAMED_BY_BLOCK[DEF8]).toBeUndefined();
   });
 });
 

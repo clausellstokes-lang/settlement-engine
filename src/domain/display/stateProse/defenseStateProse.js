@@ -10,6 +10,9 @@
  *             `economicState.compound.inst{...}`
  *   DS-DEF-5  Defense › Armed forces & fortifications — the five force lenses:
  *             `standingDefenseForces(settlement)` × `config.{monsterThreat, magicExists}`
+ *   DS-DEF-8  Defense › Active military status — `stress[].type → DEFENSE_STRESS_STATUS`
+ *             × `economicViability.viable`. ONE of its four pools is DECLARED DARK; the
+ *             reason and the single act that lights it are stated at the block below.
  *
  * ── ⭐⭐ DS-DEF-1'S BLOCKER DECAYED, AND NOBODY NOTICED — the paragraph it replaced ───
  *
@@ -73,6 +76,7 @@
 import { MONSTER_THREAT_TIERS, normalizeMonsterThreat } from '../../../data/monsterThreat.js';
 import { standingDefenseForces } from '../../institutions/defenseInstitutionBuckets.js';
 import { scoreBand } from '../defenseScoreBands.js';
+import { DEFENSE_STRESS_STATUS } from '../defenseDisplay.js';
 import { DOSSIER_STATE_PROSE_DEFENSE } from '../../../data/dossierStateProse/defense.generated.js';
 import {
   DM_FIELD_FRAMED_BY_BLOCK, projectBesideDmField, readProsePath,
@@ -537,6 +541,107 @@ export function defensePostureProse(settlement, options = {}) {
     posture: projected(posturePoolKey(settlement?.defenseProfile?.readiness?.score)),
     terrain: projected(terrainDefencePoolKey(terrain)),
     prize: projected(strategicPrizePoolKey(terrain)),
+  });
+}
+
+/**
+ * ── DS-DEF-8 · ACTIVE MILITARY STATUS — when a crisis has rewritten the posture ───────
+ *
+ * The stress override the tab already renders as a Military Status banner. `DefenseTab`
+ * picks `stressTypes.find((t) => DEFENSE_STRESS_STATUS[t])`, so the override is ACTIVE
+ * exactly when at least one of the settlement's stresses carries a defence posture; this
+ * desk asks the same question of the same map rather than keeping a second opinion.
+ *
+ * ⛔⛔ ONE POOL OF THE FOUR IS DECLARED DARK, AND IT IS A FINDING RATHER THAN AN OMISSION.
+ * `multiple stresses, one posture shown` claims, in all three of its variants, that the
+ * posture named is "the heaviest"/"the loudest" of several. MEASURED: `STRESS_TYPE_MAP`
+ * carries `probability` (rarity) and no severity at all, and the banner picks the FIRST
+ * entry of `settlement.stress` that maps — roll order, not rank. Printing that pool would
+ * make the page assert a ranking nothing computes, which is a false statement rather than a
+ * missing one, and this desk's whole subject is the difference.
+ * ⭐ THE ONE ACT THAT LIGHTS IT: give the posture pick a defined severity order, so "the
+ * heaviest" becomes true. That is a change to what the banner DISPLAYS and it needs an
+ * authored ranking over the fifteen stress types — new content, its own act, its own proof.
+ * Declared here and pinned by an arm so the pool cannot be quietly forgotten OR quietly lit.
+ * @type {string}
+ */
+const DEF8_DECLARED_DARK_POOL = 'multiple stresses, one posture shown';
+
+/** The pool declared dark above, exported so the desk suite pins the claim. */
+export const DEF8_UNREACHABLE_POOLS = Object.freeze([DEF8_DECLARED_DARK_POOL]);
+
+/**
+ * Every stress on a settlement, as an array. Mirrors `DefenseTab`'s own normalisation —
+ * the field is a single object on some saves and an array on others.
+ * @param {unknown} stress @returns {any[]}
+ */
+function stressList(stress) {
+  if (Array.isArray(stress)) return stress.filter(Boolean);
+  return stress ? [stress] : [];
+}
+
+/**
+ * Is a defence-posture override active, and which stress carries it? Returns the stress
+ * entry the banner would show, or null.
+ * @param {unknown} stress @returns {any|null}
+ */
+export function activeDefenceStress(stress) {
+  return stressList(stress).find((entry) => DEFENSE_STRESS_STATUS[text(entry?.type)]) || null;
+}
+
+/**
+ * DS-DEF-8 lens 1 — THE FRAMING. An override is on, so the ordinary reading of this town's
+ * defences does not describe it today.
+ * @param {unknown} stress @returns {string|null}
+ */
+export function militaryOverridePoolKey(stress) {
+  return activeDefenceStress(stress) ? 'override active (generic framing)' : null;
+}
+
+/**
+ * DS-DEF-8 lens 2 — IS THE TOWN'S CONTINUATION IN QUESTION?
+ *
+ * ⚠ NOT `stress.viabilityNote`, although the block's title names it. MEASURED: all fifteen
+ * entries of `STRESS_TYPE_MAP` carry a `viabilityNote`, so its presence is a CONSTANT and a
+ * split on it would put every settlement in the `threatened` pool and leave `intact`
+ * unreachable — a default wearing a reading's clothes, and an unusually convincing one
+ * because the field is named for the question.
+ *
+ * The measured verdict is `economicViability.viable`, which `economy/viability.js` derives
+ * as `criticalIssues.length === 0`. A settlement with no viability reading at all is SILENT
+ * here: an unmeasured continuation is not an intact one.
+ * @param {unknown} stress @param {unknown} viable @returns {string|null}
+ */
+export function viabilityUnderStressPoolKey(stress, viable) {
+  if (!activeDefenceStress(stress)) return null;
+  if (viable === false) return 'override active, viability threatened';
+  return viable === true ? 'override active, viability intact' : null;
+}
+
+/**
+ * THE MILITARY-STATUS DESK — DS-DEF-8's two live lenses at the banner position.
+ *
+ * DS-DEF-8 frames no DM-editable field (the banner renders `stress.summary` and
+ * `stress.viabilityNote`, both generator-authored rather than DM-editable), so these are
+ * plain rungs, on DS-DEF-2's reasoning.
+ *
+ * @param {{name?: string, stress?: unknown,
+ *   economicViability?: {viable?: unknown}|null}|null|undefined} settlement
+ * @param {{seed?: string, audience?: string}} [options]
+ * @returns {Readonly<{override: object|null, viability: object|null}>}
+ */
+export function defenseMilitaryStatusProse(settlement, options = {}) {
+  const slots = { settlement: properFill(text(settlement?.name)) };
+  const stress = settlement?.stress;
+
+  /** @param {string|null} poolKey */
+  const rung = (poolKey) => (poolKey
+    ? legibilityRung('', readStateProse(CORPUS, 'DS-DEF-8', poolKey, { ...options, slots }), [])
+    : null);
+
+  return Object.freeze({
+    override: rung(militaryOverridePoolKey(stress)),
+    viability: rung(viabilityUnderStressPoolKey(stress, settlement?.economicViability?.viable)),
   });
 }
 
