@@ -4,18 +4,21 @@ Base: the §900 CAS (the desk landing) — every L-HOMES dock is cut at 38474a59
 |---|---|---|---|---|
 | 1 | LGT-P1-BIRTH | laneLH1 @ 38474a59e | DONE 408d2e2b1 (successor `null`; +7-key cost tripwired for L-DEFAULT; CAR 9 fixtures in `lh1/birth-fixtures-p1.json`) | `lgt-p1-birth-2026-09-05` |
 | 2 | LGT-P2-MANIFEST | laneLH2 @ 38474a59e | DONE 4a2e1110c (the register keeps its identifier; `ENGINE_GATED_DORMANT_RULE_KEYS` published; the rename rides rung 18) | `lgt-p2-manifest-2026-09-05` |
-| 3 | LGT-P13-FENCES | laneLH3 @ 38474a59e | RUNNING | — |
+| 3 | LGT-P13-FENCES | laneLH3 @ 38474a59e | DONE 1506d657d (four files, five keys; the docket's twelve was wrong four ways) | `lgt-p13-fences-2026-09-05` |
 | 4 | LGT-P5-WOPS | to cut | queued | — |
 | 5 | LGT-P6-ESPWIRE | laneLH5 (unmoved) | REFUSED WITH MEASUREMENT — zero bytes; the layer lights SILENT by design (exposure is its only voice and exposure needs owner-gated custody); POSITION 3 is FREED of the false dependency; an OWNER ROW opens (sign the espionage sentences; the custody schema) | — |
 | 6 | LGT-P4-READER | laneLH6 @ 38474a59e | RUNNING (O-5 RULED BUILD at §882.13) | — |
 | 7 | LGT-P7-DRIFTDOOR | laneLH7 @ 38474a59e | RUNNING | — |
-| 8 | LGT-P8-MATBOUND | to cut | queued | — |
+| 8 | LGT-P8-MATBOUND | laneLH8 @ 38474a59e | RUNNING | — |
 | 9 | LGT-P14-WITNESS | to cut AFTER CAR 1 (consumes its fixtures; reads the birth delta as +7, not +1) | queued | — |
 ## Order of acts (chair)
 1. Compose: a fresh dock at the §900 CAS; `replay-cars.sh` each L-HOMES dock `:38474a59e`; the STOP: any hashed-chunk listing diff over `(margin − 100 B)` — the chair builds and reads it (eager bytes predicted 0 by every car).
 2. The whole suite at the composed tip (no filter); fix cars; the golden-freeze register: every golden-adjacent test file enrolled or excluded (`goldenFreeze.walker` runs on every gate).
 3. Registers LAST in the landing lineage: lighting census (+7 titles/+1 suite from CAR 1 alone; re-derive), ratchet totals, voice, size, writer-reach, the four censuses per new src/domain leaf, the golden-freeze register; doors that refuse a dirty tree first or between commits.
 4. Kit → gate → chair-verify → CAS → seal `landing-lighting-2026-09-05` → the §901 row (the eleven declarations quote ONLY the L-PROBE receipts: `lprobe-out-899/` cheap, `lprobe-out-899-full/` when the battery completes on a quiet machine).
+## Chair cars at the lighting composition
+- `subsystemRowsCompact.js:420` cites `tests/domain/institutionLifecycle.test.js` as the underways dark-vs-lit pin; that file has zero hits (L-HOMES-3 measured) — re-cite the real pin (L-HOMES-3's `underwaysOrganicFoundingDormancyFence.test.js`).
+
 ## L-DEFAULT decisions this consist surfaced (not L-HOMES's)
 - ✅ POSITION 3 hunk 6 is NOT gated on ESPWIRE (L-HOMES-5 measured the docket's claim false): a lit espionage layer with no public voice is the design.
 - OWNER ROW: `operationsVoice.js`'s sentences are CANDIDATE, OWNER-UNSIGNED with five open rows (audience split); custody (`caught_spying` holds) is owner-gated persisted schema. Until signed, espionage lights silent.
