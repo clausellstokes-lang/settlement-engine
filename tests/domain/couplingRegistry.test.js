@@ -636,6 +636,15 @@ describe('CW-0 coupling registry', () => {
       // W-COIN-3: the coffers term joins this bucket as a FOURTH row. The legacy
       // first-row result below is unchanged, which is the property this test is named for.
       WR6B_COALITION_COFFERS_COUPLING,
+      // W-SEAT D10 (2026-09-05): the returning host's coup verdict reading INTERIOR's
+      // irregular-force share joins the SAME bucket as a FIFTH row, and lands LAST because
+      // the registry composes it last. ⭐ THIS ARM IS WHY THAT ORDERING WAS CHECKED RATHER
+      // THAN ASSUMED: the row's own car predicted `couplingRowFor` would not move (it does
+      // not — the line below re-proves it) and did NOT predict this list, which is a
+      // different property on the same pair. `couplingRowsFor` returns EVERY row on the
+      // pair+direction, so a bucket-joining row moves it by construction and must say so
+      // here in its own commit.
+      WSEAT_D10_RETURN_FORCE_RATIO_COUPLING,
     ]);
     expect(Object.isFrozen(interiorWar)).toBe(true);
     expect(couplingRowFor('CPL-6', 'INTERIOR→WAR')).toBe(WR4_INSTITUTION_HOME_FRONT_COUPLING);
