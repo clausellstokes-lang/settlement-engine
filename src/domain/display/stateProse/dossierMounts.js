@@ -261,6 +261,9 @@ export const DOSSIER_MOUNTS = Object.freeze([
   Object.freeze({
     mount: 'defense.wallRationale', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-11', rung: 'sentence',
   }),
+  Object.freeze({
+    mount: 'defense.criminalStructure', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-4', rung: 'sentence',
+  }),
 ]);
 
 /**
@@ -276,7 +279,6 @@ export const DOSSIER_MOUNTS = Object.freeze([
  * @type {ReadonlyArray<string>}
  */
 export const UNMOUNTED_BLOCKS = Object.freeze([
-  'DS-DEF-4',
   'DS-DEF-6', 'DS-DEF-7',
   'DS-DEF-9', 'DS-DEF-10',
   'DS-ECO-3', 'DS-ECO-4',

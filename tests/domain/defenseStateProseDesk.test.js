@@ -23,6 +23,8 @@ import {
   terrainDefencePoolKey, activeDefenceStress, defenseMilitaryStatusProse,
   militaryOverridePoolKey, viabilityUnderStressPoolKey, DEF8_UNREACHABLE_POOLS,
   defenseWallRationaleProse, defworkFill, wallRationalePoolKey,
+  criminalCapturePoolKey, criminalStructurePoolKey, defenseCriminalProse,
+  CRIMINAL_CAPTURE_STATES, RECOGNISED_CRIMINAL_STRUCTURES,
   TERRAIN_DEFENCE_NAMES, TERRAIN_PRIZE_NAMES,
 } from '../../src/domain/display/stateProse/defenseStateProse.js';
 import {
@@ -36,7 +38,7 @@ import { avgScore, scoreBand } from '../../src/domain/display/defenseScoreBands.
 import { avgScore as avgScoreViaPdf } from '../../src/pdf/lib/viewModelPrimitives.js';
 import { deriveDefensePosture } from '../../src/domain/display/dossierViewModel.js';
 import { DM_FIELD_FRAMED_BY_BLOCK, isDmEditableProsePath } from '../../src/domain/display/stateProse/dmFieldProjection.js';
-import { DEFENSE_STRESS_STATUS, deriveGuardAssessment } from '../../src/domain/display/defenseDisplay.js';
+import { DEFENSE_STRESS_STATUS, deriveCriminalStructure, deriveGuardAssessment } from '../../src/domain/display/defenseDisplay.js';
 import { STRESS_TYPE_MAP } from '../../src/data/stressTypes.js';
 import { SMALL_TIERS, TIER_ORDER, TOWN_PLUS_TIERS } from '../../src/data/constants.js';
 import { DOSSIER_STATE_PROSE_DEFENSE } from '../../src/data/dossierStateProse/defense.generated.js';
@@ -724,6 +726,145 @@ describe('DS-DEF-1 — the posture header, and a BLOCKER that had decayed', () =
     const noPen = defensePostureProse(sited('Mountain', 80), { seed: 'pen' });
     expect(noPen.posture.hasField).toBe(false);
     expect(noPen.posture.beside).toBeTruthy();
+  });
+});
+
+/** DS-DEF-4 — criminal structure and capture consequence. */
+const DEF4 = 'DS-DEF-4';
+const DEF4_POOLS = DOSSIER_STATE_PROSE_DEFENSE[DEF4].pools;
+/** The two capture pools the kernel's covertness gate keeps off a player's dossier. */
+const DEF4_DM_ONLY = ['capture corrupted', 'capture capture'];
+
+/**
+ * Does `rulingStructure` really persist the seat's generated name under `government`? Read
+ * from its source rather than believed — the fill would silently vanish if it were renamed.
+ * @returns {boolean}
+ */
+function rulingStructureNamesTheSeat() {
+  const src = readFileSync(
+    resolve(import.meta.dirname, '../../src/generators/power/rulingStructure.js'), 'utf8',
+  );
+  return src.includes('government: (factions.find((f) => f.isGoverning) || {}).faction || null,');
+}
+
+/** A settlement with a named seat and a capture state. */
+function underworld({ government = 'Town Council', criminalCaptureState = 'none' } = {}) {
+  return {
+    name: 'Thornwall', _seed: 'seed-def4',
+    powerStructure: { government, criminalCaptureState },
+  };
+}
+
+describe('DS-DEF-4 — two vocabularies that are EXACT 1:1s, and a covertness gate', () => {
+  it('⭐ both producer vocabularies map onto the corpus pools, both ways', () => {
+    // The label-trap rule applied twice more. `computeCriminalCaptureState` is typed
+    // 'none'|'adversarial'|'equilibrium'|'corrupted'|'capture' and the corpus wrote exactly
+    // those five; `deriveCriminalStructure` returns organized|semi-organized|diffuse or null
+    // and the corpus wrote exactly those four including the null reading.
+    const capturePools = Object.keys(DEF4_POOLS).filter((k) => k.startsWith('capture '));
+    expect([...capturePools].sort())
+      .toEqual([...CRIMINAL_CAPTURE_STATES].map((s2) => `capture ${s2}`).sort());
+    for (const state of CRIMINAL_CAPTURE_STATES) {
+      expect(criminalCapturePoolKey(state)).toBe(`capture ${state}`);
+    }
+    const structurePools = Object.keys(DEF4_POOLS).filter((k) => k.startsWith('structure '));
+    expect(structurePools).toHaveLength(RECOGNISED_CRIMINAL_STRUCTURES.length + 1);
+    for (const key of RECOGNISED_CRIMINAL_STRUCTURES) {
+      expect(criminalStructurePoolKey(key)).toBe(`structure ${key}`);
+      expect(DEF4_POOLS[`structure ${key}`], `corpus has no pool for ${key}`).toBeTruthy();
+    }
+    // …and the producer really does emit those keys, asked of the producer.
+    const built = deriveCriminalStructure({ economicState: { safetyProfile: { criminalInstitutions: [] } } });
+    expect(built === null || RECOGNISED_CRIMINAL_STRUCTURES.includes(built.key)).toBe(true);
+  });
+
+  it('⚠ AN ABSENT CAPTURE STATE IS NOT `none` — the tab\'s `|| \'none\'` is for a colour', () => {
+    // "Nothing criminal has reached the hall" is a claim, and a settlement with no power
+    // structure has not been measured for it. A colour may default; a sentence may not.
+    expect(criminalCapturePoolKey(undefined)).toBeNull();
+    expect(criminalCapturePoolKey('')).toBeNull();
+    expect(criminalCapturePoolKey('bogus')).toBeNull();
+    expect(defenseCriminalProse({ name: 'Thornwall' }, 'organized', { seed: 'a', audience: 'dm' }).capture).toBeNull();
+    // The structure lens is the opposite case: producer `null` IS the fourth reading.
+    expect(criminalStructurePoolKey(null)).toBe('structure null (nothing organized recognized)');
+    expect(criminalStructurePoolKey('bogus')).toBeNull();
+  });
+
+  it('⛔⛔ THE COVERTNESS GATE IS LIVE: a player is not told the hall has been bought', () => {
+    // Measured, and it is the reason a first sweep of this block reached only 7 of 9 pools:
+    // `capture corrupted` and `capture capture` are DM-ONLY, so the `audience` this desk is
+    // handed is load-bearing here in a way it is not for the leaf's other blocks.
+    for (const state of ['corrupted', 'capture']) {
+      const dm = defenseCriminalProse(underworld({ criminalCaptureState: state }), 'organized', { seed: 'c', audience: 'dm' });
+      const player = defenseCriminalProse(underworld({ criminalCaptureState: state }), 'organized', { seed: 'c', audience: 'player' });
+      expect(dm.capture.provenance.poolKey, state).toBe(`capture ${state}`);
+      // ⚠ THE REFUSED SHAPE IS INERT, not a false trail. A pool the gate refuses still
+      // yields a rung — the desk asked for a key that exists — but `legibilityRung` with no
+      // line gives `{glance:'', sentence:null, detail:[], provenance:null}`: nothing to
+      // print and, crucially, NO PROVENANCE, so no surface can carry the trail of a
+      // sentence it did not draw. The component's `.filter(Boolean)` drops it.
+      expect(player.capture.sentence, `${state} reached a player dossier`).toBeNull();
+      expect(player.capture.provenance, `${state} left a trail for a line nobody printed`).toBeNull();
+      expect(player.capture.glance).toBe('');
+      expect(player.capture.detail).toEqual([]);
+    }
+    // The open states are shown to both, so the gate is a gate and not a dead arm.
+    for (const state of ['none', 'adversarial', 'equilibrium']) {
+      const player = defenseCriminalProse(underworld({ criminalCaptureState: state }), 'diffuse', { seed: 'c', audience: 'player' });
+      expect(player.capture?.provenance.poolKey, state).toBe(`capture ${state}`);
+    }
+    expect(DEF4_DM_ONLY.every((k) => DEF4_POOLS[k])).toBe(true);
+  });
+
+  it('⚠ `{seat}` is the seat\'s OWN generated name, and a missing one drops the variant', () => {
+    // The annex bans a baked noun in terms: "prose that hard-codes *the council* is wrong on
+    // most settlements in the realm". One of the three variants in each capture pool names
+    // the slot; the other two say "the hall" in their own words, so the pool degrades.
+    expect(SLOT_FILL_SHAPES.seat).toBe('proper');
+    expect(SHAPES.shapeOf('seat')).toBe('proper');
+    const named = defenseCriminalProse(underworld({ government: 'Grand Merchant Oligarchy', criminalCaptureState: 'capture' }), null, { seed: 'seat-a', audience: 'dm' });
+    expect(named.capture.sentence).not.toMatch(/[{}]/);
+    const unnamed = defenseCriminalProse(underworld({ government: undefined, criminalCaptureState: 'capture' }), null, { seed: 'seat-a', audience: 'dm' });
+    expect(unnamed.capture?.sentence ?? '').not.toMatch(/[{}]/);
+    // The generator's own field is where the name comes from.
+    expect(rulingStructureNamesTheSeat()).toBe(true);
+  });
+
+  it('all NINE pools speak to a DM, over every structure key × every capture state', () => {
+    const reached = new Set();
+    for (const structureKey of [...RECOGNISED_CRIMINAL_STRUCTURES, null, 'bogus']) {
+      for (const state of [...CRIMINAL_CAPTURE_STATES, undefined, 'bogus']) {
+        for (const government of ['Town Council', undefined]) {
+          const drawn = defenseCriminalProse(
+            underworld({ government, criminalCaptureState: state }), structureKey,
+            { seed: 'sweep4', audience: 'dm' },
+          );
+          for (const lens of ['structure', 'capture']) {
+            const rung = drawn[lens];
+            if (!rung?.sentence) continue;
+            reached.add(rung.provenance.poolKey);
+            expect(rung.provenance.blockId).toBe(DEF4);
+            // anchored: `reached.size` is pinned at the corpus pool count below
+            expect(rung.sentence).not.toMatch(/[{}]/);
+          }
+        }
+      }
+    }
+    expect(reached.size, `unreached: ${Object.keys(DEF4_POOLS).filter((k) => !reached.has(k))}`)
+      .toBe(Object.keys(DEF4_POOLS).length);
+    expect(Object.keys(DEF4_POOLS)).toHaveLength(9);
+  });
+
+  it('the registry mounts DS-DEF-4 once, as a sentence, on the defense tab', () => {
+    const rows = DOSSIER_MOUNTS.filter((row) => row.blockId === DEF4);
+    expect(rows).toHaveLength(1);
+    expect(rows[0]).toMatchObject({ mount: 'defense.criminalStructure', tab: 'defense', desk: 'defense', rung: 'sentence' });
+    expect(sentenceMountForBlock(DEF4)?.mount).toBe('defense.criminalStructure');
+    expectAbsentWithAnchor(
+      UNMOUNTED_BLOCKS, DEF4, A_DARK_SIBLING,
+      'DS-DEF-4 carries a mount row, so the dark half must not name it',
+    );
+    expect(DM_FIELD_FRAMED_BY_BLOCK[DEF4]).toBeUndefined();
   });
 });
 
