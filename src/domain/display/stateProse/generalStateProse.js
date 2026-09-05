@@ -75,6 +75,8 @@ import { liveInstitutions } from '../../institutions/institutionRoster.js';
 import { readStateProse } from './stateProseKernel.js';
 import { legibilityRung } from './legibilityRung.js';
 
+/** @typedef {import('./legibilityRung.js').LegibilityRung} LegibilityRung */
+
 /**
  * The desk's corpus, typed at the import boundary — the generated leaves stay PURE DATA.
  * @type {import('./stateProseKernel.js').StateProseCorpus}
@@ -335,7 +337,10 @@ export function foodSecurityPoolKey(label) {
  * a mangled word in front of a reader. The desk test drives EVERY issue and stakes literal
  * the producer table carries through this function, so a future row that cannot conform is
  * a red here rather than a silent variant loss.
- * @param {string} value @returns {string|undefined}
+ * @param {unknown} value the raw producer field, normalised through `text` before any test
+ *   — `unknown` and not `string` because both call sites read a conflict row off the
+ *   caller's own record, where the field is whatever the producer wrote
+ * @returns {string|undefined}
  */
 function phraseFill(value) {
   const v = text(value);
@@ -483,7 +488,10 @@ const ORIGIN_POOL_OF_ROUTE = Object.freeze({
   isolated: 'isolated',
 });
 
-/** tier → DS-GEN-6's tier-overlay pool. TOTAL: every tier resolves, including the others. */
+/**
+ * tier → DS-GEN-6's tier-overlay pool. TOTAL: every tier resolves, including the others.
+ * @type {Readonly<Record<string, string>>}
+ */
 const TIER_OVERLAY_OF = Object.freeze({
   metropolis: 'tier overlay: metropolis',
   city: 'tier overlay: city',
@@ -510,6 +518,7 @@ const TIER_OVERLAY_OF = Object.freeze({
  */
 export function foodDeficitDimension(foodBalance) {
   if (!foodBalance || typeof foodBalance !== 'object') return null;
+  /** @param {unknown} v @returns {number} */
   const num = (v) => (typeof v === 'number' && Number.isFinite(v) ? v : 0);
   const gap = Math.max(num(foodBalance.rawDeficit), num(foodBalance.deficit));
   const need = num(foodBalance.dailyNeed) || num(foodBalance.need);
@@ -752,7 +761,25 @@ export function institutionsPoolKey(inst) {
  * §885.3 rules dossier corpus prose a PAID surface. Exported as a value rather than left to
  * each caller to spell, so the gate at the router is ONE expression and no caller can invent
  * a half-silent shape. Frozen at every level, so a caller cannot fill it in either.
- * @type {Readonly<{overview: Readonly<{systemsHealth: ReadonlyArray<object>, ground: object|null, market: object|null, institutions: object|null}>}>}
+ * ⚠ THIS ANNOTATION IS THE DESK'S RETURN CONTRACT — `generalStateProse` declares
+ * `@returns {typeof GENERAL_STATE_PROSE_SILENT}`, so any position missing here is a
+ * position the desk is not allowed to fill. It named four of the eight and the value
+ * carried all eight; the four unnamed ones (`conflicts`, `situation`, `origin`,
+ * `warnings`) made the desk's own return unassignable to its own declared type.
+ *
+ * The list positions are `LegibilityRung|null` and not `LegibilityRung`: `conflicts`
+ * keeps a `null` IN PLACE for a quarrel this desk cannot key on, so the index a caller
+ * pairs against its own rows cannot slip, and that null is part of the contract.
+ * @type {Readonly<{overview: Readonly<{
+ *   conflicts: ReadonlyArray<LegibilityRung|null>,
+ *   situation: LegibilityRung|null,
+ *   origin: ReadonlyArray<LegibilityRung|null>,
+ *   systemsHealth: ReadonlyArray<LegibilityRung|null>,
+ *   warnings: ReadonlyArray<LegibilityRung|null>,
+ *   ground: LegibilityRung|null,
+ *   market: LegibilityRung|null,
+ *   institutions: LegibilityRung|null,
+ * }>}>}
  */
 export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
   overview: Object.freeze({
@@ -782,8 +809,19 @@ export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
  *   viable?: unknown, readinessLabel?: unknown, foodSecurityLabel?: unknown,
  *   terrainType?: unknown, institutions?: unknown, tradeRouteAccess?: unknown,
  *   isEntrepot?: unknown, inst?: object|null, tier?: unknown, primaryStress?: unknown,
- *   foodBalance?: object|null}} [readings] the caller's own reads off the settlement it
- *   already holds; see institutionsPoolKey for why `inst` is passed and not reached for
+ *   foodBalance?: object|null,
+ *   conflicts?: Array<{intensity?: unknown, parties?: unknown, issue?: unknown,
+ *     stakes?: unknown}|null>|null,
+ *   govFaction?: unknown, structuralViolations?: unknown, structuralSuggestions?: unknown,
+ *   coherenceNotes?: Array<{type?: unknown, tab?: unknown}|null>|null}} [readings]
+ *   the caller's own reads off the settlement it
+ *   already holds; see institutionsPoolKey for why `inst` is passed and not reached for.
+ *   ⚠ THE LAST FIVE ARE THE DS-GEN-2 AND DS-GEN-7 READS AND THEY WERE UNDECLARED. The body
+ *   has always reached for `conflicts`, `govFaction`, `structuralViolations`,
+ *   `structuralSuggestions` and `coherenceNotes`; leaving them off this list meant the one
+ *   caller had no typed statement of what the desk needs handed to it. Each row names only
+ *   the fields this desk actually reads off it — `intensity` for the pool cut, `parties` /
+ *   `issue` / `stakes` for the slots — so a producer change to any of them lands here
  * @param {{seed?: string, audience?: string}} [options]
  * @returns {typeof GENERAL_STATE_PROSE_SILENT}
  */
@@ -812,6 +850,7 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
   // silence, so the block renders nothing on a settlement with no food arithmetic — which
   // is what an unmeasured town honestly is, not a town that feeds itself.
   const deficit = foodDeficitDimension(readings.foodBalance);
+  /** @param {string|null} poolKey */
   const originLine = (poolKey) => (poolKey && deficit
     ? legibilityRung('', readStateProse(CORPUS, 'DS-GEN-6', poolKey, {
       ...options, slots, dimensions: { deficit },
@@ -846,6 +885,7 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
   // DS-GEN-7. The two list pools first — they are the ones an ordinary settlement carries —
   // then one line per coherence note in the record's own order.
   const warningSlots = { ...slots, govFaction: properFill(text(readings.govFaction)) };
+  /** @param {string|null} poolKey */
   const warningLine = (poolKey) => (poolKey
     ? legibilityRung('', readStateProse(CORPUS, 'DS-GEN-7', poolKey, { ...options, slots: warningSlots }), [])
     : null);
