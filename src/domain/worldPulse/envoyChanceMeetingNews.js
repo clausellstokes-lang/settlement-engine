@@ -347,6 +347,11 @@ const PRESENTATION_BY_SIGNIFICANCE = Object.freeze({
   notable: CHANCE_MEETING_PRESENTATION.notable,
   major: CHANCE_MEETING_PRESENTATION.major,
 });
+/**
+ * The presentation for a registry row's significance, or null for the bands the table does not carry.
+ * @param {'notable'|'routine'|'major'|'n/a'} significance
+ * @returns {Readonly<{severity:number, score:number}>|null}
+ */
 export function presentationFor(significance) {
   return PRESENTATION_BY_SIGNIFICANCE[significance] ?? null;
 }
