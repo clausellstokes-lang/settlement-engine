@@ -582,6 +582,13 @@ export const ENGINE_GATED_VIRTUAL_RULE_KEYS = Object.freeze([
   // all, so the door is an address there and a gate only here.
   // ⛔ SPELLED ONLY HERE IN THIS FILE, for the denominator reason recorded above.
   'operationsVoiceEnabled',
+  // Joined 2026-09-05 by the same car, its fourth and last. Like the one above it is a
+  // leaf-declared door rather than a §6-chartered one, and unlike the other three it is an
+  // ERRAND-family key: its gate lives beside the spine's own door in `errandMint.js` and
+  // AND-composes with the SPINE rather than with the espionage layer, because the catalog
+  // is a menu of business a named person on the road is sent on, not a covert mission.
+  // ⛔ SPELLED ONLY HERE IN THIS FILE, for the denominator reason recorded above.
+  'envoyTaskCatalogEnabled',
 ]);
 
 /**

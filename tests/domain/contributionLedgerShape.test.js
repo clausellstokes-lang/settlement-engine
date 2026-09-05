@@ -115,8 +115,9 @@ describe('WC-0E · the war-circulation flags, the contribution ledger shape, and
     // literals were read off the live modules (31 and 31) before this line was moved.
     // literals were read off the live modules (32 and 32) before this line was moved.
     // literals were read off the live modules (33 and 33) before this line was moved.
-    expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toHaveLength(34);
-    expect(VIRTUAL_SUBSYSTEM_ROWS).toHaveLength(34);
+    // literals were read off the live modules (34 and 34) before this line was moved.
+    expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toHaveLength(35);
+    expect(VIRTUAL_SUBSYSTEM_ROWS).toHaveLength(35);
     // ⭐ THE BIJECTION IS A TRIPLE, NOT A PAIR. The ordered-equality pin in
     // subsystemRowsVirtual.test.js couples the manifest to VIRTUAL_RULES; direction 3 of
     // engineGatedRuleKeys couples the manifest to the certification rows. A flag mint moves

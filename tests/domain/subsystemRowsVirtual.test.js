@@ -229,6 +229,10 @@ const MISSION_DISPATCHER = 'missionDispatcherEnabled';
 // this is the one the VOICE leaf declares in its own provenance row, and the difference is
 // recorded on the row itself rather than smoothed away.
 const OPERATIONS_VOICE = 'operationsVoiceEnabled';
+// LGT-P5-WOPS, the car's fourth and last. An ERRAND-family key, not an espionage one: its
+// gate lives beside the spine's own door and AND-composes with the SPINE, because the
+// catalog is a menu of business a named person on the road is sent on.
+const ENVOY_TASK_CATALOG = 'envoyTaskCatalogEnabled';
 // AUTHORING ORDER, not alphabetical: the assertion below is an exact ordered equality
 // against VIRTUAL_SUBSYSTEM_ROWS, so this list mirrors the file's own section order.
 const VIRTUAL_RULES = Object.freeze([
@@ -243,7 +247,7 @@ const VIRTUAL_RULES = Object.freeze([
   FOREIGN_SEAT, LEGITIMACY_UPHEAVAL, IRREGULAR_FORCE, WAR_MEMORY,
   INFILTRATION_DEPTH,
   FOREIGN_SEAT, LEGITIMACY_UPHEAVAL, WAR_MEMORY,
-  INFILTRATION_DEPTH, MISSION_DISPATCHER, OPERATIONS_VOICE,
+  INFILTRATION_DEPTH, MISSION_DISPATCHER, OPERATIONS_VOICE, ENVOY_TASK_CATALOG,
   CHANCE_ENCOUNTERS,
 ]);
 
@@ -443,6 +447,10 @@ const LANE_LEAVES = Object.freeze({
   [OPERATIONS_VOICE]: [
     'src/domain/worldPulse/espionage/espionageGate.js',
     'src/domain/worldPulse/espionage/operationsVoice.js',
+  ],
+  [ENVOY_TASK_CATALOG]: [
+    'src/domain/worldPulse/envoyTaskCatalog.js',
+    'src/domain/worldPulse/errandMint.js',
   ],
 });
 
