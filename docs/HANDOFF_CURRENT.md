@@ -8,7 +8,21 @@ program's decisions; SPEC fold labels §§277–§286 are design sections, not m
 The repo is authoritative; trust executed evidence over any summary including
 this one.**
 
-## ⭐⭐⭐⭐⭐ PICKUP AT §894 — ⚠⚠ **THREE LANDINGS WERE COLLECTED IN ONE ACT BECAUSE THE LEDGER FELL TWO BEHIND. Product `43d49a3a0`, 65 cars landed since `ca651d54b`. THE SEAT IS OPUS 5.** Read this, then `$SC/RULINGS-893*.md`.
+## ⭐⭐⭐⭐⭐ PICKUP AT §895 — **THE DESK CONSIST IS DOWN. Product `90702c3e9`, 90 cars across SIX landings. THE SEAT IS OPUS 5.** Read this, then `$SC/clamp/CLAMP-MIGRATION-PLAN.md` before touching any clamp.
+
+`$SC` = `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad` · `$SP` = `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/58f0a8e2-2c4f-4073-8635-ecc7cf5010f6/scratchpad`. ⛔ OWNER CAP FOUR agents of any kind. ⛔ Every act: `Seat: Opus 5 — Fable-unvalidated` + a CHANGED `docs/FABLE_RETROVALIDATION_QUEUE.md` blob in the SAME commit; build the queue from `git show HEAD:…`, never the worktree copy.
+
+### ⭐⭐ TWO LAWS THIS LANDING PAID FOR
+1. **GATE-WINDOW WORK MUST BE LOAD-BOUNDED, NOT MERELY VITEST-FREE.** A 4-agent read-only workflow beside a full-suite run drove load to 45 against a quiet threshold of 4.0 and produced a FALSE RED that convicted three pglite SECURITY suites. Proved in both directions: same commit, load 45 reds, load 1.4 green. During a full-suite run keep concurrent agents to **one or two**, and never launch a fan-out into a running gate.
+2. **A LANE'S GREEN IS A CLAIM ABOUT THE FILES IT RAN, NEVER ABOUT THE TREE.** Sixteen arms were red at the composed tip after a lane reported "all gates green". The brief was the habitat; it now requires a `tests/lint/` DIRECTORY run.
+
+### ⭐ IMMEDIATELY NEXT
+**ANCHORS — 3 cars, sealed `refs/preserve/train-anchors-2026-09-04` (`41be350f9`), zero file overlap with the desk landing, so the replay onto `90702c3e9` is clean.** It owes only its ratchet totals (`totalTests +2`, `totalFiles +0`; ⚠ its lighting `titles +2` figure was WRONG — that file is parked on `describe.each`, so titles do NOT move and no lighting act is owed). Then **DEFENSE-TRUTH** (`brief-DEFENSE-TRUTH.md`): the product tells a walled, garrisoned town it has "neither walls nor force" — `flag()` takes bool|number, the producer writes ARRAYS, proved by execution — and ⛔ **F2/F3 are COUPLED: curing the dead read ACTIVATES the ruin bug.** Then the desk remainder (`defense` 9 blocks left, then `economy`/`warFaith`/`general`), SEAT-7a's conflict, the LIGHTING WAVE, W-ARMS, HORIZON-DARK, ENCOUNTERS remainder → ⛔ the owner's WALK → the exhaustive review → ⛔ FULL STOP before the soak.
+
+### ⛔ THE OWNER'S DESK
+The WALK + one regen (⚠ NOT READY: the review corpus is deity-free) · every `git push` and the deploy · the tuning SIGNATURE (declined by the chair on its own judgment). **New row:** `HIGH_INSTABILITY_FROM = 0.35` is byte-equal to `LADDER_TUNING.CHURN_BUMP` — one undecayed contested challenge reads as "high instability". Neither value moved.
+
+## (superseded) PICKUP AT §894 — ⚠⚠ **THREE LANDINGS WERE COLLECTED IN ONE ACT BECAUSE THE LEDGER FELL TWO BEHIND. Product `43d49a3a0`, 65 cars landed since `ca651d54b`. THE SEAT IS OPUS 5.** Read this, then `$SC/RULINGS-893*.md`.
 
 `$SC` = `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad` · `$SP` = `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/58f0a8e2-2c4f-4073-8635-ecc7cf5010f6/scratchpad`. ⛔ OWNER CAP FOUR agents of any kind. ⛔ Every act: `Seat: Opus 5 — Fable-unvalidated` + a CHANGED `docs/FABLE_RETROVALIDATION_QUEUE.md` blob in the SAME commit; build the queue from `git show HEAD:…`, never the worktree copy.
 

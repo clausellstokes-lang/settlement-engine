@@ -470,10 +470,14 @@ volumes corrected @ 36862650 + fdf43790):
       triples keeping live interp keys. Per J-LEG-WIRE-12 these were deliberately
       NOT bundled into the R1 wiring; treat them as their own wave with their own
       golden plan.
-    - ⛔ **STILL OWNER-GATED (LEG-7):** DEFECT-1/2/3's de-slugging of the twelve
-      MUTILATED §4 anchors (`coup_detat` still renders "detat") and DEFECT-8's
-      digit retirement. Each REPLACES a live string rather than widening a pool.
-      The twelve are frozen by test roster; do not repair them opportunistically.
+    - ✅ **DEFECT-1/2/3's de-slugging of the twelve §4 anchors is DONE at §894**
+      (`coup_detat` now reads "a seizure of the seat"). **LEG-7 was never an owner
+      ruling** — the §892 retrovalidation walk proved it a lane-authored wiring note,
+      so there was no owner word here to protect. The repair took `FALLBACK_CANONICALS`,
+      a frozen twelve-entry map consulted BEFORE the strip, leaving pool order and
+      length untouched so every existing seed still draws the same index.
+    - ⛔ **STILL OPEN:** DEFECT-8's digit retirement. It REPLACES a live string rather
+      than widening a pool; do not repair it opportunistically.
 23a. **THE WAR AMENDMENTS: CONVENIENCE + TRIBUTE + STATECRAFT + EXPANSION**
     (DESIGN_WAR_CONVENIENCE_AND_TRIBUTE.md, final 2026-08-03 — cohesion-checked
     against all seven volumes, 128 findings folded, re-verified, residuals

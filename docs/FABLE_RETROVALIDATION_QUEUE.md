@@ -3514,3 +3514,50 @@ The embed's proof extracts glyphs back out of the generated document, so the arm
 
 ### R26 ⚠ THE CHAIR'S OWN ERRORS IN THIS SPAN, FOR THE RECORD
 (a) Compared a dock's `node_modules` against the main repo instead of a gating dock — 37 packages exist only in docks — which broke a collection until repaired. (b) Piped a refreeze to `/dev/null` twice, so dirty-tree refusals were invisible and silence read as success. (c) Passed a 1-hour timeout to a foreground Bash call capped at 10 minutes, killing a job mid-flight while it held the test mutex. (d) Read vitest's ACTUAL/EXPECTED order backwards after having folded the memory warning of that exact inversion four hours earlier. **All four are process faults, not code faults**, and none reached the product; they are recorded because the next Opus seat will be tempted by each.
+## §895 — THE DESK LANDING (2026-09-04; SEAT: Opus 5 — Fable-unvalidated)
+
+### R27 ⛔ A LANE REPORTED "ALL GATES GREEN" OVER SIXTEEN FAILURES, AND THE BRIEF IS WHY
+Sixteen arms red at the composed tip after a 16-car lane reported green from single-file runs. **The
+preamble granted only `npx vitest run <file>` and forbade full-suite runs**, while every member of
+the scanner family lives in `tests/lint/`. The lane was structurally blind, not careless. **Ruling to
+validate:** the preamble now REQUIRES a `tests/lint/` dir run before any lane reports done when its
+cars add/rename/delete under `src/` or `tests/`. Fable should check whether that is sufficient or
+whether the chair must re-run the family itself at every composed tip regardless.
+
+### R28 A DUPLICATE IMPORT PARKED A WHOLE TEST FILE AND 24 PASSING TESTS WENT CENSUS-INVISIBLE
+esbuild dedupes a doubled `import` binding; the estate's parser does not. **Ruling to validate:**
+the cure is one folded import, and the standing advice is `npx eslint <file>` whenever a test file's
+import block changes. Fable should judge whether the walker's parser-door arm ought to be moved OUT
+of the file that also carries the expected-red census arm — a real red sat behind an expected one.
+
+### R29 ⛔⛔ THE CHAIR CAUSED A FALSE RED AND ALMOST BANKED THREE SECURITY SUITES
+A 4-agent workflow alongside a full-suite run drove load to 45; the SCOPE SENTINEL convicted four
+suites, three of them pglite SECURITY suites. **Proved false in both directions** (load 45 reds,
+load 1.4 green, same commit). **Ruling to validate:** nothing was banked and no ceiling raised; the
+corrected rule is that gate-window work must be LOAD-BOUNDED, not merely vitest-free. This is the
+chair's own error and the second of its kind in one day.
+
+### R30 SIX TUNING DIALS REGISTERED WITH ZERO SOURCE CHANGE — AND ONE FLAGGED FOR THE OWNER
+The lane refused three shapes that would have gone green (moving dials out of scope, renaming off
+UPPER_SNAKE, indenting into function bodies) and named them as gaming. **Ruling to validate:**
+registering is not signing; every dial carries a PROPOSED value equal to what already ships.
+⭐ **`HIGH_INSTABILITY_FROM = 0.35` is byte-equal to `LADDER_TUNING.CHURN_BUMP`**, so the power desk
+calls a faction "high instability" on exactly one undecayed contested challenge — deliberate
+coupling or collision is the OWNER's call, and neither value was moved.
+
+### R31 THE CHAIR'S BLOCKER LIST WAS INCOMPLETE AND ITS MECHANISM IMPOSSIBLE
+The exactness arm was already red before the register edit (a sibling car gave `QUADRANT_TUNING` a
+new dependent; `resolveDependents` takes no register argument), and "walker green with no refreeze"
+was structurally impossible. The lane proved both with a positive control. **Ruling to validate:**
+the fifth instance of *charter the permission, measure the mechanism* — and its refinement, that
+naming the arms which must go green also asserts the list is COMPLETE, which is usually the weakest
+claim in the brief.
+
+### R32 THE CLAMP PROGRAM — A RULE THAT FORBIDS THE MIGRATIONS ITS OWN CEILING DEMANDS
+Not part of this landing; classified during it by a 7-agent workflow (`$SC/clamp/`). The parity test
+proves FUNCTION-level byte identity and all 16 copies are non-identical, so the stated migration
+rule forbids every migration `BASELINE_CEILING = 62` requires. **Ruling OWED, not taken:** amend to
+call-site-level proven byte-neutrality. ⛔ Two sites must NOT migrate — `warAllianceRisk` (inverts
+fail-safe to fail-open on an atrocity path) and `conquestFeasibility` ARM 2 (the kernel cannot
+produce the `null` its doctrine requires). ⭐ Three real latent bugs found upstream, the sharpest a
+per-ward dwelling cap that FAILS OPEN on a NaN population (8 emitted rows vs 2).
