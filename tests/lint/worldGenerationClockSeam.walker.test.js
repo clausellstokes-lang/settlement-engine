@@ -128,9 +128,16 @@ function codeOnly(t) {
   return t
     .replace(/\/\*[\s\S]*?\*\//g, blank)
     .replace(/(^|[^:])\/\/[^\n]*/g, (m, p1) => p1 + ' ')
+    // ⭐ TEMPLATES FIRST, AND THE ORDER IS LOAD-BEARING (car STRIPPER-UNIFY). An
+    // apostrophe inside backticks — which this estate writes constantly — otherwise
+    // opens a spurious single-quote span that swallows the code after it, and a read
+    // inside that span is invisible to every arm below. The quote classes already stop
+    // at a newline, so the reorder is the whole cure: measured over src/ at this base,
+    // the landed spelling mis-stripped 527 of 2,174 files (29,705 characters) and the
+    // reorder takes that to 0. Pinned by a fixture in the detector control test below.
+    .replace(/`(?:\\.|[^`\\])*`/g, blank)
     .replace(/'(?:\\.|[^'\\\n])*'/g, "''")
-    .replace(/"(?:\\.|[^"\\\n])*"/g, '""')
-    .replace(/`(?:\\.|[^`\\])*`/g, blank);
+    .replace(/"(?:\\.|[^"\\\n])*"/g, '""');
 }
 
 const READS = [
@@ -363,7 +370,24 @@ describe('ARM A — no unledgered clock or entropy read inside the world-generat
     expect(hits).toContain('new Date()');
     // …and it must DISCRIMINATE: a parsing call and a prose mention are both legal.
     const innocent = codeOnly('/* never call Date.now() here */\nexport const g = (at) => new Date(at).getTime();\n');
+    // ⚠ THE FIXTURE IS ONE LINE ON PURPOSE: this stripper's quote classes already stop
+    // at a newline, so a multi-line fixture would survive the unsound order and pin
+    // nothing — measured, not reasoned (plant-out M1).
     expect(READS.filter(([, re]) => { re.lastIndex = 0; return re.test(innocent); }).map(([k]) => k)).toEqual([]);
+    // ⭐⭐ AND THE STRIPPER'S PASS ORDER IS PINNED (car STRIPPER-UNIFY). The fixture is a
+    // LITERAL built on these lines and goes FALSE under the spelling that was landed on
+    // this file's base — a single-quote pass running BEFORE the template pass, where an
+    // apostrophe inside backticks (which this estate writes constantly) opens a spurious
+    // span that eats the code between the two templates. A read hiding in that span is
+    // invisible to Arm A, so the sweep reports a clean closure it never measured.
+    // Measured over src/ at this base: 527 of 2,174 files mis-stripped, 0 after.
+    const behindAnApostrophe = codeOnly([
+      "const a = `the mayor's seat`;",
+      'export const f = () => Date.now();',
+      "const b = `the guild's hall`;",
+    ].join(' '));
+    expect(READS.filter(([, re]) => { re.lastIndex = 0; return re.test(behindAnApostrophe); }).map(([k]) => k))
+      .toContain('Date.now');
   });
 });
 

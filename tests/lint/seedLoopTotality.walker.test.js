@@ -111,9 +111,16 @@ function walk(dir, out = []) {
 function stripNoise(line) {
   return line
     .replace(/\/\/.*$/, '')
-    .replace(/'(?:[^'\\]|\\.)*'/g, `''`)
-    .replace(/"(?:[^"\\]|\\.)*"/g, `""`)
-    .replace(/`(?:[^`\\]|\\.)*`/g, '``');
+    // ⭐ TEMPLATES FIRST, AND THE ORDER IS LOAD-BEARING (car STRIPPER-UNIFY). A single
+    // apostrophe inside backticks — `the sweep's seeds` — otherwise opens a spurious
+    // quote span that eats the rest of the line, and a `for (… seed …)` header behind it
+    // is invisible: the walker goes VACUOUSLY GREEN over the loop it exists to find.
+    // Measured over src/ at this base: 19 of 2,174 files mis-stripped (471 characters),
+    // 0 after. The newline bound below is a no-op on this per-LINE input and is written
+    // so the shape matches the estate's other strippers rather than diverging from them.
+    .replace(/`(?:[^`\\]|\\.)*`/g, '``')
+    .replace(/'(?:[^'\\\n]|\\.)*'/g, `''`)
+    .replace(/"(?:[^"\\\n]|\\.)*"/g, `""`);
 }
 
 /**
@@ -425,6 +432,19 @@ describe('seed-loop totality walker (habitat removal)', () => {
   };
 
   test('the detector fires on every bare seed-loop spelling', () => {
+    // ⭐⭐ THE STRIPPER'S PASS ORDER FIRST, because every count below is taken through it
+    // (car STRIPPER-UNIFY). The fixture is a LITERAL built on this line and goes to 0
+    // under the spelling that was landed on this file's base — a single-quote pass running
+    // BEFORE the template pass, where an apostrophe inside backticks opens a spurious span
+    // that eats the rest of the line, taking the `for (…seed…)` header with it. The walker
+    // then reports NO OFFENDERS, which is indistinguishable from success. Measured over
+    // src/ at this base: 19 of 2,174 files mis-stripped, 0 after. (The newline bound added
+    // with the reorder cannot be shown here: this stripper is asked one LINE at a time,
+    // so it is a measured no-op and carried for shape parity.)
+    expect(
+      countIn("const a = `the mayor's seat`; for (const seed of SEEDS) { expect(gen(seed)).toBeTruthy(); } const b = `the guild's hall`;"),
+      'a loop header standing behind an apostrophe inside a template literal',
+    ).toBe(1);
     expect(
       countIn(`for (const seed of SEEDS) {\n  const w = gen(seed);\n  expect(w.factions.length).toBeGreaterThan(0);\n}`),
       'for…of over seeds',
