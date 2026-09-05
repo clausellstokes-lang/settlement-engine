@@ -14,9 +14,11 @@ import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import {
-  RECOGNISED_MONSTER_TIERS, SLOT_FILL_SHAPES, SLOT_FILL_TABLES, beastsRowPoolKey,
-  defenseStateProse, defenseThreatProse, disasterRowPoolKey, economicRowPoolKey,
-  firstSurveyPoolKey, internalRowPoolKey, invasionRowPoolKey, isCompoundSafetyLabel,
+  RECOGNISED_MONSTER_TIERS, SLOT_FILL_SHAPES, SLOT_FILL_TABLES, arcaneDefensePoolKey,
+  beastsRowPoolKey, charterPoolKey, contractedForcePoolKey, countryWarrantsCharter,
+  defenseForcesProse, defenseStateProse, defenseThreatProse, disasterRowPoolKey,
+  economicRowPoolKey, firstSurveyPoolKey, forceCorePoolKey, fortificationPoolKey,
+  internalRowPoolKey, invasionRowPoolKey, isCompoundSafetyLabel, measuredMonsterFamily,
   publicOrderPoolKey,
 } from '../../src/domain/display/stateProse/defenseStateProse.js';
 import {
@@ -369,6 +371,30 @@ describe('DS-DEF-2 — ⭐ THE LABEL-TRAP RULE, third instance', () => {
     expect(Object.keys(DEF2_POOLS).some((k) => k.includes('heartland'))).toBe(false);
   });
 
+  it('⭐ AN ABSENT TIER IS NOT THE FRONTIER — the desk requires a MEASUREMENT', () => {
+    // The normaliser's first line is `raw || 'frontier'`, so routing an absent value through
+    // it describes the country of a settlement whose country nobody measured. Measured here
+    // rather than assumed, and the desk refuses the default at its own boundary.
+    expect(normalizeMonsterThreat(undefined)).toBe('frontier');
+    expect(normalizeMonsterThreat('')).toBe('frontier');
+    expect(measuredMonsterFamily(undefined)).toBeNull();
+    expect(measuredMonsterFamily('')).toBeNull();
+    expect(measuredMonsterFamily('   ')).toBeNull();
+    expect(measuredMonsterFamily('heartland')).toBe('settled');
+    expect(measuredMonsterFamily('low')).toBe('settled');
+    expect(measuredMonsterFamily('civilized')).toBeNull();
+    // Both consumers of the tier refuse it, so the desk cannot disagree with itself.
+    expect(beastsRowPoolKey(undefined, true, true)).toBeNull();
+    expect(countryWarrantsCharter(undefined)).toBe(false);
+    // ⚠ AND IT CHANGES NO GENERATED WORLD: steps/resolveConfig.js writes `monsterThreat`
+    // into every effective config it builds, so an absent tier means a hand-built fixture or
+    // a malformed import — never a settlement the generator produced.
+    const resolveSource = readFileSync(
+      resolve(import.meta.dirname, '../../src/generators/steps/resolveConfig.js'), 'utf8',
+    );
+    expect(resolveSource).toContain('monsterThreat: threat,');
+  });
+
   it('⚠ RAISED NOT CURED: the normaliser forwards a non-canonical tier, and the desk is silent on it', () => {
     // `normalizeMonsterThreat` passes 'civilized' through UNCHANGED although it is not a
     // canonical tier — a normaliser that forwards a non-canonical value is not normalising.
@@ -524,6 +550,160 @@ describe('DS-DEF-2 — ALIVENESS over every combination the generator can build'
     expect(rows).toHaveLength(1);
     expect(rows[0]).toMatchObject({ mount: 'defense.threatAssessment', tab: 'defense', desk: 'defense', rung: 'sentence' });
     expect(sentenceMountForBlock(DEF2)?.mount).toBe('defense.threatAssessment');
+  });
+});
+
+/** DS-DEF-5 — armed forces & fortifications, the five lenses. */
+const DEF5 = 'DS-DEF-5';
+const DEF5_POOLS = DOSSIER_STATE_PROSE_DEFENSE[DEF5].pools;
+const DEF5_LENSES = ['fortification', 'force', 'contracted', 'charter', 'arcane'];
+
+/** The catalogue name that lands in each producer bucket. Bound to the producer below. */
+const BUCKET_NAME = Object.freeze({
+  walls: 'Massive Walls', garrison: 'Garrison Barracks', militia: 'Citizen Militia',
+  watch: 'Town Watch', mercenary: 'Mercenary Company', charter: "Adventurers' Charter Hall",
+  magicDef: "Wizard's Tower",
+});
+
+/** A settlement with exactly the named buckets standing. @param {string[]} standing */
+function garrisonTown(standing, { monsterThreat = 'frontier', magicExists = true, ruined = false } = {}) {
+  const roster = standing.map((key) => ({ name: BUCKET_NAME[key] }));
+  return {
+    name: 'Thornwall', _seed: 'seed-def5',
+    config: { monsterThreat, magicExists },
+    institutions: ruined
+      ? roster.map((i) => ({ ...i, status: 'ruined', _worldPulseInactive: true }))
+      : roster,
+  };
+}
+
+describe('DS-DEF-5 — the armed-forces lenses read what still STANDS', () => {
+  it('every fixture name lands in the bucket it claims — bound to the producer', () => {
+    // Same discipline as DS-DEF-2's: the roster is the producer's own vocabulary, asserted
+    // against generateDefenseProfile rather than believed.
+    for (const [bucket, name] of Object.entries(BUCKET_NAME)) {
+      const built = generateDefenseProfile(garrisonTown([bucket]));
+      expect(built.institutions[bucket].map((i) => i.name), `${name} → ${bucket}`).toEqual([name]);
+    }
+    expect(Object.keys(BUCKET_NAME).sort()).toEqual([...DEFENSE_BUCKET_KEYS].sort());
+  });
+
+  it('the perimeter lens is TOTAL and the force lens ranks garrison > militia > watch', () => {
+    expect(fortificationPoolKey(true)).toBe('walls PRESENT');
+    expect(fortificationPoolKey(false)).toBe('walls ABSENT');
+    const forces = (standing) => standingDefenseForces(garrisonTown(standing));
+    expect(forceCorePoolKey(forces(['garrison', 'militia', 'watch']))).toBe('garrison PRESENT');
+    expect(forceCorePoolKey(forces(['militia', 'watch']))).toBe('militia PRESENT (no garrison)');
+    expect(forceCorePoolKey(forces(['watch']))).toBe('watch PRESENT');
+    expect(forceCorePoolKey(forces([]))).toBe('NO organized force at all');
+  });
+
+  it('⚠ "NO organized force at all" does not call a town with bought soldiers defenceless', () => {
+    // Its prose says "no command, no training and no way to coordinate a response", which
+    // is false of a retained company or a charter hall. Those towns are described by their
+    // own lens instead; the pool stays for the town that genuinely has nothing.
+    const forces = (standing) => standingDefenseForces(garrisonTown(standing));
+    expect(forceCorePoolKey(forces(['mercenary']))).toBeNull();
+    expect(forceCorePoolKey(forces(['charter']))).toBeNull();
+    expect(forceCorePoolKey(forces(['magicDef']))).toBeNull();
+    expect(contractedForcePoolKey(forces(['mercenary']))).toBe('mercenary / contracted forces PRESENT');
+    // …and no "hires nobody" pool is invented where the corpus wrote none.
+    expect(contractedForcePoolKey(forces([]))).toBeNull();
+    expectAbsentWithAnchor(
+      Object.keys(DEF5_POOLS), 'mercenary / contracted forces ABSENT',
+      'mercenary / contracted forces PRESENT',
+      'the corpus wrote no absent-mercenary pool, so the lens must stay silent there',
+    );
+  });
+
+  it('⭐ the charter ABSENT pool speaks only where the COUNTRY warrants one, by TOKEN', () => {
+    // The label-trap rule, fourth instance: keyed through normalizeMonsterThreat on the
+    // producer's canonical tiers, never on a display word.
+    const bare = (monsterThreat) => standingDefenseForces(garrisonTown([], { monsterThreat }));
+    expect(charterPoolKey(bare('frontier'), 'frontier')).toBe('charter hall ABSENT where the country warrants one');
+    expect(charterPoolKey(bare('plagued'), 'plagued')).toBe('charter hall ABSENT where the country warrants one');
+    // A settled heartland is not scolded for a hall it has no use for.
+    expect(charterPoolKey(bare('heartland'), 'heartland')).toBeNull();
+    // The legacy alias the normaliser DOES map still routes; a non-canonical value warrants
+    // nothing rather than defaulting into a family.
+    expect(countryWarrantsCharter('low')).toBe(false);
+    expect(countryWarrantsCharter('high')).toBe(true);
+    expect(countryWarrantsCharter('civilized')).toBe(false);
+    const held = standingDefenseForces(garrisonTown(['charter']));
+    expect(charterPoolKey(held, 'heartland')).toBe('charter hall PRESENT (specialist monster response)');
+  });
+
+  it('⭐ MEASUREMENT OR DEFAULT: the arcane lens is silent in a world with no magic', () => {
+    // `config.magicExists === false` is a world setting the generator already reads. In such
+    // a world "what arrives unseen goes undetected" is not a shortfall, it is a category
+    // that does not exist — printing it would be the machine improvising a lack.
+    const forces = (standing) => standingDefenseForces(garrisonTown(standing));
+    expect(arcaneDefensePoolKey(forces(['magicDef']), true)).toBe('arcane defense PRESENT');
+    expect(arcaneDefensePoolKey(forces([]), true)).toBe('arcane defense ABSENT');
+    expect(arcaneDefensePoolKey(forces([]), undefined)).toBe('arcane defense ABSENT');
+    expect(arcaneDefensePoolKey(forces(['magicDef']), false)).toBeNull();
+    expect(arcaneDefensePoolKey(forces([]), false)).toBeNull();
+  });
+
+  it('⛔ A RUINED GARRISON IS NOT A GARRISON — the lenses read the standing roster', () => {
+    const standing = defenseForcesProse(garrisonTown(['walls', 'garrison']), { seed: 'r' });
+    const rubble = defenseForcesProse(garrisonTown(['walls', 'garrison'], { ruined: true }), { seed: 'r' });
+    const nothing = defenseForcesProse(garrisonTown([]), { seed: 'r' });
+    expect(standing.fortification.provenance.poolKey).toBe('walls PRESENT');
+    expect(rubble.fortification.provenance.poolKey).toBe('walls ABSENT');
+    expect(rubble.force.provenance.poolKey).toBe('NO organized force at all');
+    expect(rubble.fortification.sentence).toBe(nothing.fortification.sentence);
+    expect(rubble.fortification.sentence).not.toBe(standing.fortification.sentence);
+  });
+
+  it('all ELEVEN pools speak, swept over every roster the producer can classify', () => {
+    const keys = Object.keys(BUCKET_NAME);
+    const reached = new Set();
+    for (let mask = 0; mask < (1 << keys.length); mask += 1) {
+      const standing = keys.filter((_, i) => mask & (1 << i));
+      for (const monsterThreat of MONSTER_THREAT_TIERS) {
+        for (const magicExists of [true, false]) {
+          const drawn = defenseForcesProse(
+            garrisonTown(standing, { monsterThreat, magicExists }), { seed: 'sweep5' },
+          );
+          for (const lens of DEF5_LENSES) {
+            const rung = drawn[lens];
+            if (!rung?.sentence) continue;
+            reached.add(rung.provenance.poolKey);
+            expect(rung.provenance.blockId).toBe(DEF5);
+            // anchored: `reached.size` is pinned at the corpus pool count below
+            expect(rung.sentence).not.toMatch(/[{}]/);
+          }
+        }
+      }
+    }
+    expect(reached.size, `unreached: ${Object.keys(DEF5_POOLS).filter((k) => !reached.has(k))}`)
+      .toBe(Object.keys(DEF5_POOLS).length);
+    expect(Object.keys(DEF5_POOLS)).toHaveLength(11);
+  });
+
+  it('the registry mounts DS-DEF-5 once, as a sentence, on the defense tab', () => {
+    const rows = DOSSIER_MOUNTS.filter((row) => row.blockId === DEF5);
+    expect(rows).toHaveLength(1);
+    expect(rows[0]).toMatchObject({ mount: 'defense.armedForces', tab: 'defense', desk: 'defense', rung: 'sentence' });
+    expect(sentenceMountForBlock(DEF5)?.mount).toBe('defense.armedForces');
+    expectAbsentWithAnchor(
+      UNMOUNTED_BLOCKS, DEF5, A_DARK_SIBLING,
+      'DS-DEF-5 carries a mount row, so the dark half must not name it',
+    );
+    // It frames no DM-editable field either, so plain rungs are the right shape.
+    expect(DM_FIELD_FRAMED_BY_BLOCK[DEF5]).toBeUndefined();
+  });
+
+  it('a settlement with no roster at all speaks the absences and does not crash', () => {
+    const empty = defenseForcesProse({ name: 'Thornwall' }, { seed: 'z5' });
+    expect(empty.fortification.provenance.poolKey).toBe('walls ABSENT');
+    expect(empty.force.provenance.poolKey).toBe('NO organized force at all');
+    expect(empty.contracted).toBeNull();
+    // No config means no tier: an unmeasured country warrants nothing.
+    expect(empty.charter).toBeNull();
+    expect(empty.arcane.provenance.poolKey).toBe('arcane defense ABSENT');
+    expect(defenseForcesProse(undefined).contracted).toBeNull();
   });
 });
 
