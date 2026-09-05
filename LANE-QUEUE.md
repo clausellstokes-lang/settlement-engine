@@ -30,6 +30,8 @@ Updated 2026-09-05 by the Fable chair (after §897: product fd8b6df00, ledger c8
 
 12. **DOCKET** — BRIEFED (`briefs/brief-DOCKET.md`; item 1: the undeclared `pg` import → dynamic + typed skip; more items appended as recovered).
 
+13. **L-PROBE-KIT** — BRIEFED (`briefs/brief-L-PROBE-KIT.md`): a tooling lane that WRITES the dark-arm battery under `$SC/lprobe/`; the chair RUNS it after PROSE lands. Dispatch in the first free slot after OSR-SCHEMA17.
+
 ## CHAIR-OWNED, NOT LANES
 ~~ANCHORS → §897~~ LANDED · replay + land the desk consist after
 OSR-SCHEMA17 · every register act · every ceiling ruling (clamp: ONCE, at the final wave) · the words of DESK-7 and ENC-5.
