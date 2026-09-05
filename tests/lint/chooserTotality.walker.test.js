@@ -96,9 +96,13 @@ const DECLARES_IDIOM = /(?:export\s+)?function\s+(?:hash01|softmaxWeights|stable
  * the argued-roster idiom, and it is why the constant is a COUNT rather than a list: a list
  * would restate what the registry already answers.
  */
-// 29 -> 30 at IN-1c-a (HBF-33, ODQ §85.1); 30 -> 31 at WF-8a (HBF-34, ODQ §350); 31 -> 35 at ENC-1 (HBF-36..HBF-41, ODQ §885.7) — each move a
-// chair-authorized registry mint landing its fork row, never a lane absorbing a discovery.
-const DEFER_CEILING = 35;
+// 29 -> 30 at IN-1c-a (HBF-33, ODQ §85.1); 30 -> 31 at WF-8a (HBF-34, ODQ §350); 31 -> 35 at ENC-1 (HBF-36..HBF-41, ODQ §885.7); 35 -> 36 at
+// ENC-4 (HBF-42, the ROAD B ruling) — each move a chair-authorized registry mint landing its
+// fork row, never a lane absorbing a discovery. ⭐ HBF-42 is the FOURTH member of the HBF-07 /
+// HBF-33 / HBF-34 prose-pick family: the same cured `hash01` pick, copied verbatim a fourth
+// time, taking its siblings' disposition rather than a fresh reading. Filing it STAY would rule
+// for CHANCE_MEETING alone the question all three leave open, so the four close together.
+const DEFER_CEILING = 36;
 
 /** The named-domain checklist's row count, asserted rather than read off. */
 const NAMED_DOMAIN_ROWS = 14;
