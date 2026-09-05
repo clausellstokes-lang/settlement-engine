@@ -2,6 +2,7 @@
 # run-registers-prose.sh <dock> — the CHAIR's register acts for the PROSE landing, at the COMPOSED tip, in order,
 # each under the quiet-window law and the gate mutex. Predictions are written by the chair BEFORE running (E4).
 # ⚠ Fill __PREDICTIONS__ from the PROSE-REBASE receipt first; the script refuses to run with the placeholder in place.
+SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad
 D=$1; [ -d "$D" ] || { echo "usage: <dock>"; exit 9; }
 cd "$D" || exit 9
 [ -z "$(git status --porcelain -uall)" ] || { echo "REFUSED: dock dirty"; exit 8; }
@@ -39,7 +40,7 @@ quiet; sh scripts/gate-mutex.sh --run -- env UPDATE_ORGANIC_SAMPLES=1 npx vitest
 #    DERIVED at dac3b15a8 (the fix-car tip): exact 215 · RE-KEYED 10 (activeConditions.js:983 ×2, moralDrift.js:315 ×2,
 #    stressConfirmPass.js:126 ×3, :127 ×3 — em dash → colon inside the snippet) · relocated 0 · FELL 0 · NEW 0.
 echo "--- prose-numerics dry run:"; (cd "$D" && node "$SC/prose-numerics-rekey.mjs" "$D") > "$D/../registers-prose-pn-dry.log" 2>&1; E4=$?; head -1 "$D/../registers-prose-pn-dry.log"
-[ "$E4" = "0" ] && grep -q 'FELL=0 NEW=0' "$D/../registers-prose-pn-dry.log" && (cd "$D" && node "$SC/prose-numerics-rekey.mjs" "$D" --write) | tail -1 || echo "  ⛔ prose-numerics: FELL or NEW rows — chair review before any write"
+if [ "$E4" = "0" ] && grep -q 'FELL=0 NEW=0' "$D/../registers-prose-pn-dry.log"; then (cd "$D" && node "$SC/prose-numerics-rekey.mjs" "$D" --write) | tail -1; else echo "  ⛔ prose-numerics re-key NOT written (exit=$E4) — the dry-run log follows; a fallback must never name a finding it did not measure:"; tail -5 "$D/../registers-prose-pn-dry.log"; fi
 #    wizard-news: the lane's walker run says ONE row's SIGNATURE moved at the same address (the cure re-punctuated text inside the
 #    entry literal the signature hashes; the line-text relocation tool cannot see it). Precedent in the walker ("EXACT RE-SIGN"):
 #    run the walker, copy the received signature into the row, delete nothing, raise nothing.

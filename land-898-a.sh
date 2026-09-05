@@ -5,6 +5,8 @@
 set -e
 SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad
 D=$SC/lanePROSE2; BASE=fd8b6df0013b749e24435450931618fbe78a3f13
+echo "== 0. the prose-numerics re-key (the runner's step failed on an unset path)"; sh $SC/rekey-898.sh
+echo "== 0b. wizard-news: apply the one re-sign from the walker log (dry, then write)"; python3 $SC/wizard-resign.py $SC/registers-prose-wizard.log $D/tests/lint/.wizard-news-authoring-baseline.json; python3 $SC/wizard-resign.py $SC/registers-prose-wizard.log $D/tests/lint/.wizard-news-authoring-baseline.json --write | tail -2
 echo "== 1. the register car"; sh $SC/commit-prose-registers.sh
 [ "$(git -C $D rev-list --count $BASE..HEAD)" = "4" ] || { echo "⛔ expected 4 cars after the register car"; exit 1; }
 echo "== 2. the census totals (quiet window + mutex)"; sh $SC/run-ratchet-898.sh > $SC/ratchet-898.log 2>&1 || true
