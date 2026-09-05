@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "536d2e1dc2f44566c425c2bed798d697b2c72a68",
-  "measuredBy": "Opus 5 chair — DESK consist landing",
-  "date": "2026-09-04",
-  "note": "six power/stressors prose dials registered as scalar-roster homes (zero src change), and QUADRANT_TUNING gained the PowerTab.jsx dependent from a consist car — the exactness arm was already red before the register edit",
+  "measuredAtSha": "2c6c8fda8328b077c86a6fc54048a9da8039ff1c",
+  "measuredBy": "Opus 5 chair — desk integration consist",
+  "date": "2026-09-05",
+  "note": "three desk leaves integrated (19 cars): the two economy dials and one general deficit fraction registered as scalar-roster homes with PROPOSED values equal to what already ships; no value moved, no ceiling raised",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -723,6 +723,48 @@
       "namedDependents": [
         "src/generators/density/successionGrammar.js"
       ]
+    },
+    "src/domain/display/stateProse/economyStateProse.js#SOLE_EARNER_FROM": {
+      "exported": false,
+      "idiom": "literal",
+      "keys": 1,
+      "line": 286,
+      "spanDigest": "3812788e098c702a89d72a5b51c0007f969391069da9b98b2fdd4f2e789ff838",
+      "leaves": {
+        "value": 50
+      },
+      "dependents": [
+        "src/components/new/tabs/EconomicsTab.jsx"
+      ],
+      "namedDependents": []
+    },
+    "src/domain/display/stateProse/economyStateProse.js#LEADER_FROM": {
+      "exported": false,
+      "idiom": "literal",
+      "keys": 1,
+      "line": 287,
+      "spanDigest": "a6b1340215d65b0c4945f4b657854f6756ff2217a648606b9e467ee5ac00bbda",
+      "leaves": {
+        "value": 20
+      },
+      "dependents": [
+        "src/components/new/tabs/EconomicsTab.jsx"
+      ],
+      "namedDependents": []
+    },
+    "src/domain/display/stateProse/generalStateProse.js#DEFICIT_FRACTION_FROM": {
+      "exported": false,
+      "idiom": "literal",
+      "keys": 1,
+      "line": 513,
+      "spanDigest": "d8ad20f683ec92a4a0b123ebd6748169b8712e96577f567cd56d3cdd08f76113",
+      "leaves": {
+        "value": 0.05
+      },
+      "dependents": [
+        "src/components/new/tabs/OverviewTab.jsx"
+      ],
+      "namedDependents": []
     },
     "src/domain/display/stateProse/powerStateProse.js#NARROW_MARGIN": {
       "exported": false,
@@ -7902,11 +7944,11 @@
   },
   "unclosed": [],
   "totals": {
-    "tables": 232,
-    "keys": 2108,
+    "tables": 235,
+    "keys": 2111,
     "unregisteredNamed": 535,
     "bareDecimals": 6985,
     "zeroDependentTables": 8,
-    "zeroNamedDependentTables": 146
+    "zeroNamedDependentTables": 149
   }
 }
