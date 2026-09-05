@@ -96,6 +96,33 @@
  *     refusing a review edited under its own digest. Nothing this rung adds reads that
  *     equality, and a 16 -> 17 needs the same four data rows this one added.
  *
+ *   schema 16 -> 17 (LIVE)   the same tagged numeric reconciliation, and THE FIRST RUNG
+ *     SINCE 8 WHOSE SUBJECT IS THE CORPUS BUILDER RATHER THAN THE DOOR. Two things
+ *     follow from that, and neither is a repeat of 16:
+ *       - IT MOVES ROWS, AND THAT IS THE POINT. Rungs 13, 14, 15 and 16 were
+ *         verdict-only and had to report a row delta of ZERO. This one clears TWELVE
+ *         frozen rows and adds NONE, because the corpus can now observe writers it
+ *         never could. `predecessorGone` is therefore expected to be 12 and
+ *         `predecessorNew`/`predecessorIncreased` must still be 0 — a single NEW row
+ *         means the corpus grew its judgement rather than its observation, and the mint
+ *         STOPS. (The report raises issues for `new` and `increased` only; `gone` is a
+ *         lawful shrink and needs no discharge, which is precisely why the zero on the
+ *         other two is the fence that matters.)
+ *       - THE CORPUS'S EXECUTION IDENTITY DOES NOT MOVE. `seeds`, `configs`,
+ *         `generations` and `pulseIntervals` are `corpusCompatibilityOf`'s EXECUTION
+ *         keys and must match the predecessor exactly; the three OBSERVATION keys
+ *         (`simulationFlagsLit`, `steadingsMinted`, `shapeCount`) are recorded rather
+ *         than refused, and here they do not move either. That is not luck: the stress
+ *         pass enters `roots` and NOT `generated`, so producer 2's pulse — every save,
+ *         every steading, every shape it mints — is untouched. Feeding the same
+ *         settlements through `generated` instead moves four execution keys and would
+ *         be refused by that function before any review could see it.
+ *     Its delta is FOUR instrument paths — the corpus builder as SUBJECT plus the three
+ *     bookkeeping files every rung moves — MEASURED against the predecessor's own
+ *     recorded manifest and re-measured after the set was written, because writing it
+ *     changes `migrate-observed-shape-readers.mjs`, which is itself a member. See
+ *     `STRESS_TOPOLOGY_SCANNER_DELTA_PATHS`.
+ *
  * In every family, the predecessor baseline and scan artifacts are
  * canonical, content-addressed inputs sharing one committed source, execution
  * tree, executed corpus and scan configuration. The legacy detector is the
@@ -136,6 +163,7 @@ import {
   validateSchema10Baseline,
   validateSchema14Baseline,
   validateSchema15Baseline,
+  validateSchema16Baseline,
 } from './lib/observed-shape-baseline.mjs';
 
 export const MIGRATION_REPORT_SCHEMA = 2;
@@ -316,6 +344,42 @@ export const STABLE_CORE_TARGET_SCHEMA = 15;
  *  untouched); but nothing about which reads are FOUND has changed, only which
  *  explanations are ACCEPTED. */
 export const COMPANION_GATE_TARGET_SCHEMA = 16;
+
+/* ⭐⭐ THE SCHEMA 16 → 17 RUNG — THE STRESS-TOPOLOGY CORPUS MINT (lane OSR-SCHEMA17).
+ *
+ *  WHAT MOVED, AND IT IS THE CORPUS BUILDER RATHER THAN THE DOOR — the first rung since
+ *  7 → 8 whose subject is `observed-shape-corpus.mjs`. `buildObservedCorpus` gained a
+ *  STRESS-LOADED TOPOLOGY PASS: one config × the four seeds under `insurgency` + `famine`,
+ *  pushed into `roots` and DELIBERATELY NOT into `generated`.
+ *
+ *  ⭐ WHY THE INSTRUMENT NEEDED IT. The reader-with-no-writer ratchet reports its
+ *  CORPUS'S REACH, not the code's truth. `economicState.js:349` writes `isCriminal` onto
+ *  an `incomeSources` row only inside `if (safetyProfile.blackMarketCapture > 10)`, and
+ *  that capture is `baseShadowPercent + stressShadowBonus` with the bonus EXACTLY ZERO
+ *  when no stress flag is set. The four unstressed configs could therefore never observe
+ *  the key, and three shipped readers of a working lens were all reported dead. The same
+ *  blindness hid `power/stressFactions.js`'s `modifiers`, `power/rulingStructure.js`'s
+ *  `captureState`, and the whole `issues` shape written by `economy/foodBalance.js` under
+ *  `if (stressNotes.length > 0)`.
+ *
+ *  ⛔ THIS RUNG MOVES ROWS AND MUST — the difference from 13, 14, 15 and 16, which were
+ *  verdict-only and had to report a row delta of zero. Measured before the rung was cut,
+ *  through the gate's own declared post-scan chain reproduced out of band (the gate
+ *  refuses to scan a moved detector source, so there is no in-band way to look first):
+ *
+ *      identities 1409 → 1397 · findings 1993 → 1972 · files 388 → 386
+ *      GONE 12 · NEW 0 · RAISED 0 · LOWERED 0
+ *
+ *  Five keys entering three shapes account for every cleared row with nothing left over.
+ *  A row here can only vanish by its writer becoming OBSERVABLE: the pass adds roots and
+ *  removes none, so no shape can lose rows and none can fall back under `MIN_ROWS`.
+ *
+ *  ⛔ THE ONE THING THAT WOULD FALSIFY THIS RUNG IS A SINGLE ADDED IDENTITY. Adding the
+ *  same settlements to `generated` instead was measured to clear 33 rows and MINT 20, by
+ *  re-rolling producer 2's pulse until thin shapes crossed `MIN_ROWS` into being
+ *  judgeable. Topology without pulse is a pure shrink; topology WITH pulse is a new
+ *  baseline wearing a shrink's clothes. */
+export const STRESS_TOPOLOGY_TARGET_SCHEMA = 17;
 
 /**
  * The complete, reviewed detector transition admitted by the retired 6→7 mint.
@@ -542,6 +606,39 @@ export const COMPANION_GATE_SCANNER_DELTA_PATHS = Object.freeze([
   'scripts/migrate-observed-shape-readers.mjs',
 ]);
 
+/**
+ * The schema-16 → 17 delta: FOUR paths — a SUBJECT plus the three bookkeeping files.
+ *
+ * ⛔ MEASURED, NEVER LISTED. Derived by hashing each of the ELEVEN governed detector
+ * inputs against the PREDECESSOR'S OWN RECORDED MANIFEST — not against HEAD, and not by
+ * reasoning about which files this lane touched. At the corpus car the measurement named
+ * exactly one moved path (`observed-shape-corpus.mjs`); the other three are this rung's
+ * own bookkeeping and were re-measured after the set was written, because writing it
+ * changes `migrate-observed-shape-readers.mjs`, which is itself a member. The declared
+ * set is a FIXED POINT of its own measurement. A mis-declared delta set is how rung
+ * 10 → 11 became permanently unmigratable.
+ *
+ *   - `observed-shape-corpus.mjs` — THE SUBJECT: the stress-loaded topology pass;
+ *   - `check-observed-shape-readers.mjs` — the live-validator binding moving from
+ *     `validateSchema16Baseline` to `validateSchema17Baseline`;
+ *   - `observed-shape-baseline.mjs` — the 16 → 17 bump, the retired-16 constant and its
+ *     re-bound validator;
+ *   - `migrate-observed-shape-readers.mjs` — this rung.
+ *
+ * ⛔ NO package file is in this delta and none may be: this rung changes no dependency
+ * and no script, and any `package.json` byte is itself a mint trigger. An extra path
+ * here — or one of these four remaining byte-identical — is a different migration and
+ * fails closed. This is the FIRST four-path delta since 14 → 15, and it is four rather
+ * than three because the subject is a detector input that is NOT one of the three files
+ * every rung already moves.
+ */
+export const STRESS_TOPOLOGY_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/lib/observed-shape-corpus.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
 export const BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS = Object.freeze([
   'package-lock.json',
   'package.json',
@@ -570,6 +667,8 @@ const STABLE_CORE_SCANNER_TRANSITION_POLICY =
   'schema-14-to-15-exact-scanner-transition-v1';
 const COMPANION_GATE_SCANNER_TRANSITION_POLICY =
   'schema-15-to-16-exact-scanner-transition-v1';
+const STRESS_TOPOLOGY_SCANNER_TRANSITION_POLICY =
+  'schema-16-to-17-exact-scanner-transition-v1';
 const CORPUS_COVERAGE_SCANNER_TRANSITION_POLICY =
   'schema-7-to-8-exact-scanner-transition-v1';
 const EPOCH_DARK_CORPUS_SCANNER_TRANSITION_POLICY =
@@ -604,6 +703,7 @@ export const LEAF_MIGRATION_PREDECESSOR = Object.freeze({
   [PRESET_LIGHT_TARGET_SCHEMA]: DEAD_DEPENDENCY_TARGET_SCHEMA,
   [STABLE_CORE_TARGET_SCHEMA]: PRESET_LIGHT_TARGET_SCHEMA,
   [COMPANION_GATE_TARGET_SCHEMA]: STABLE_CORE_TARGET_SCHEMA,
+  [STRESS_TOPOLOGY_TARGET_SCHEMA]: COMPANION_GATE_TARGET_SCHEMA,
 });
 
 /**
@@ -638,6 +738,10 @@ const LEAF_PREDECESSOR_VALIDATOR = Object.freeze({
   // RETIRED literal from this rung onward, so this entry keeps validating schema 15
   // as schema 15 after the live number moves past it.
   [STABLE_CORE_TARGET_SCHEMA]: validateSchema15Baseline,
+  // The schema-17 rung's own predecessor. `validateSchema16Baseline` is bound to the
+  // RETIRED literal from this rung onward, so this entry keeps validating schema 16
+  // as schema 16 after the live number moves past it.
+  [COMPANION_GATE_TARGET_SCHEMA]: validateSchema16Baseline,
 });
 
 const RETIRED_EXACT_MIGRATION_KIND = `observed-shape-schema-2-to-${RETIRED_EXACT_TARGET_SCHEMA}-migration`;
@@ -1064,6 +1168,19 @@ const SCANNER_TRANSITION_BY_TARGET = new Map([
     // under `scripts/`, which are not subject paths at all, so the digest cannot move
     // and the report's `unscannedMovement` is null. The permission is carried because
     // the class is lawful, not because this rung exercises it.
+    reviewableUnscannedMovement: true,
+  })],
+  [STRESS_TOPOLOGY_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: STRESS_TOPOLOGY_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: STRESS_TOPOLOGY_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9 — the flag is PER-TARGET and never
+    // retroactive. `unscannedInputDigestOf` is the SUBJECT tree minus the SCAN tree,
+    // and the subject tree is `src/**`; this rung touches four files under `scripts/`,
+    // which are not subject paths at all, so the digest cannot move BY THIS RUNG. The
+    // permission is carried because the class is lawful and because this rung is cut at
+    // a later tip than its predecessor's freeze — a landed generated-source re-record
+    // between the two is exactly the movement targets 9 and 10 declared reviewable.
     reviewableUnscannedMovement: true,
   })],
   [COMPANION_GATE_TARGET_SCHEMA, Object.freeze({
@@ -2130,15 +2247,16 @@ export function run(argv = process.argv.slice(2)) {
   // any mismatch into a refusal rather than a silent mode switch.
   const targetSchema = command.targetSchema
     ? Number(command.targetSchema)
-    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : COMPANION_GATE_TARGET_SCHEMA);
+    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : STRESS_TOPOLOGY_TARGET_SCHEMA);
   if (![RETIRED_EXACT_TARGET_SCHEMA, HEURISTIC_TARGET_SCHEMA, FILTERED_TARGET_SCHEMA,
     SURFACE_FILTERED_TARGET_SCHEMA, BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
     CORPUS_COVERAGE_TARGET_SCHEMA, EPOCH_DARK_CORPUS_TARGET_SCHEMA,
     PROSE_REGEN_TARGET_SCHEMA, TREASURY_ADMISSION_TARGET_SCHEMA,
     GENESIS_TIES_TARGET_SCHEMA, DEAD_DEPENDENCY_TARGET_SCHEMA,
     PRESET_LIGHT_TARGET_SCHEMA, STABLE_CORE_TARGET_SCHEMA,
-    COMPANION_GATE_TARGET_SCHEMA].includes(targetSchema)) {
-    throw new Error(`observed-shape --target-schema must be ${COMPANION_GATE_TARGET_SCHEMA} (live companion-gate leaf),`
+    COMPANION_GATE_TARGET_SCHEMA, STRESS_TOPOLOGY_TARGET_SCHEMA].includes(targetSchema)) {
+    throw new Error(`observed-shape --target-schema must be ${STRESS_TOPOLOGY_TARGET_SCHEMA} (live stress-topology leaf),`
+      + ` ${COMPANION_GATE_TARGET_SCHEMA} (retired companion-gate leaf),`
       + ` ${STABLE_CORE_TARGET_SCHEMA} (retired stable-core leaf),`
       + ` ${PRESET_LIGHT_TARGET_SCHEMA} (retired preset-light leaf),`
       + ` ${DEAD_DEPENDENCY_TARGET_SCHEMA} (retired dead-dependency leaf),`

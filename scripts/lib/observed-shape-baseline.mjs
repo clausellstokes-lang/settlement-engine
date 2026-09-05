@@ -265,7 +265,16 @@ export const RETIRED_PRESET_LIGHT_BASELINE_SCHEMA = 14;
  *  this constant exists so a schema-15 PREDECESSOR is still validated as schema 15 after
  *  the live number moves past it. */
 export const RETIRED_STABLE_CORE_BASELINE_SCHEMA = 15;
-export const BASELINE_SCHEMA = 16;
+/** The RETIRED companion-gate definition — schema 17's predecessor. Same tagged topology
+ *  envelope and the same nine-identity bank; schema 17 re-governs it to a CORPUS that can
+ *  finally observe a stress-gated writer, and it is the FIRST rung since 8 whose subject is
+ *  the corpus builder rather than the door. Unlike 13, 14, 15 and 16 it therefore DOES move
+ *  rows — twelve of them, every one a DELETION, measured before the rung was cut. Never
+ *  redefined, never deleted — a live baseline is validated against BASELINE_SCHEMA, and this
+ *  constant exists so a schema-16 PREDECESSOR is still validated as schema 16 after the live
+ *  number moves past it. */
+export const RETIRED_COMPANION_GATE_BASELINE_SCHEMA = 16;
+export const BASELINE_SCHEMA = 17;
 /** The RETIRED exact per-site definition. Never redefined, never deleted. */
 export const RETIRED_EXACT_BASELINE_SCHEMA = 3;
 /** The RETIRED UNFILTERED heuristic-leaf definition — schema 5's predecessor.
@@ -788,10 +797,23 @@ export function validateSchema15Baseline(baseline) {
   );
 }
 
+/** The RETIRED authority — schema 16's tagged envelope re-governed to the
+ *  virtual-dormant-writer door's shape-scoped clause 1 and its companion-gate clause 2.
+ *  Re-bound to its own LITERAL now that the authority has moved to 17, exactly as its
+ *  predecessors were: a retired validator that reads `BASELINE_SCHEMA` stops validating
+ *  the rung it is named after the moment the number moves. */
+export function validateSchema16Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_COMPANION_GATE_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
 /** The LIVE envelope validator. Bound to `BASELINE_SCHEMA` rather than a literal,
  *  so the retired rungs above keep validating their own numbers while this one
  *  always names the authority. */
-export function validateSchema16Baseline(baseline) {
+export function validateSchema17Baseline(baseline) {
   return validateLeafBaseline(baseline, BASELINE_SCHEMA, { tagged: true });
 }
 

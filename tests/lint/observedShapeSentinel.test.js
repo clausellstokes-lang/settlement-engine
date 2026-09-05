@@ -62,7 +62,7 @@ import {
   validateSchema13Baseline,
   validateSchema14Baseline,
   validateSchema15Baseline,
-  validateSchema16Baseline,
+  validateSchema17Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   artifactBaselineSchemaOf,
@@ -1032,10 +1032,14 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
   test('M8/M9: the explained-writer exemption is an exact declared set, and gate 4 is REFUSED as a basis', () => {
     expect(EXPLAINED_WRITER_EXEMPTIONS.map(({ identity }) => identity)).toEqual([
       // ⭐ THE NINTH, AND THE FIRST OF A FIFTH CLASS (ODQ §771.2). Every entry below it
-      // explains a writer the generation corpus never RUNS; this one explains a writer it
-      // DOES run and whose key it still never sees — a generator branch gated on conditions
-      // the corpus's seed × config matrix does not satisfy. MEASURED: 3,068 observed
-      // incomeSources rows, not one carrying `isCriminal`.
+      // explains a writer the generation corpus never RUNS; this one explained a writer it
+      // DOES run and whose key it never saw — a generator branch gated on conditions the
+      // corpus's seed × config matrix did not satisfy (3,068 observed incomeSources rows,
+      // not one carrying `isCriminal`). ⚠ THAT PREMISE EXPIRED AT THE SCHEMA-17 RUNG: the
+      // stress-loaded topology pass makes the corpus take the branch (3,107 rows, the key
+      // observed), so the entry is still DECLARED and still verified against its writer
+      // here, but it now banks nothing. The roster is the subject of this arm; whether a
+      // declaration that banks nothing should be retired is a chair call.
       'isCriminal on incomeSources',
       'factions on locks',
       'neighbourNetwork on settlement',
@@ -1125,10 +1129,14 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     const evidence = assertExplainedWriterEvidence();
     expect(evidence.map(({ identity }) => identity)).toEqual([
       // ⭐ THE NINTH, AND THE FIRST OF A FIFTH CLASS (ODQ §771.2). Every entry below it
-      // explains a writer the generation corpus never RUNS; this one explains a writer it
-      // DOES run and whose key it still never sees — a generator branch gated on conditions
-      // the corpus's seed × config matrix does not satisfy. MEASURED: 3,068 observed
-      // incomeSources rows, not one carrying `isCriminal`.
+      // explains a writer the generation corpus never RUNS; this one explained a writer it
+      // DOES run and whose key it never saw — a generator branch gated on conditions the
+      // corpus's seed × config matrix did not satisfy (3,068 observed incomeSources rows,
+      // not one carrying `isCriminal`). ⚠ THAT PREMISE EXPIRED AT THE SCHEMA-17 RUNG: the
+      // stress-loaded topology pass makes the corpus take the branch (3,107 rows, the key
+      // observed), so the entry is still DECLARED and still verified against its writer
+      // here, but it now banks nothing. The roster is the subject of this arm; whether a
+      // declaration that banks nothing should be retired is a chair call.
       'isCriminal on incomeSources',
       'factions on locks',
       'neighbourNetwork on settlement',
@@ -1334,7 +1342,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // of it and collapsed records into id-keyed maps; it now carries the whole-node
     // guarantee its two sibling branches already had. Classification-only, so the cured
     // register reproduces schema 14's row for row and the reconciliation is EMPTY.
-    expect(BASELINE_SCHEMA).toBe(16);
+    expect(BASELINE_SCHEMA).toBe(17);
     expect(RETIRED_GENESIS_TIES_BASELINE_SCHEMA).toBe(12);
     expect(RETIRED_TREASURY_ADMISSION_BASELINE_SCHEMA).toBe(11);
     expect(RETIRED_PROSE_REGEN_BASELINE_SCHEMA).toBe(10);
@@ -1349,8 +1357,9 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     const stats = leafStats();
     const live = validBaseline({ corpus, stats, frozen: [leafFindingOf()] });
     expect(live.schema).toBe(BASELINE_SCHEMA);
-    // ⭐ 15 retired at §893.4; the LIVE envelope is validated by 16 now.
-    expect(validateSchema16Baseline(live)).toBe(live);
+    // ⭐ 15 retired at §893.4, 16 at the stress-topology rung; the LIVE envelope is
+    // validated by 17 now.
+    expect(validateSchema17Baseline(live)).toBe(live);
     expect(assertExplainedWriterRowTags(live)).toBe(live);
     expect(() => validateSchema4Baseline(live)).toThrow(/noncanonical fields/);
     expect(() => validateSchema5Baseline(live)).toThrow(/noncanonical fields/);
@@ -1484,7 +1493,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // `artifactBaselineSchemaOf` exists to prevent.
     expect(artifactBaselineSchemaOf('legacy-leaf')).toBe(2);
     expect(artifactBaselineSchemaOf('exact-origin')).toBe(3);
-    expect(BASELINE_SCHEMA).toBe(16);
+    expect(BASELINE_SCHEMA).toBe(17);
     expect(() => artifactBaselineSchemaOf('heuristic')).toThrow(/scan mode is unsupported/);
   });
 
