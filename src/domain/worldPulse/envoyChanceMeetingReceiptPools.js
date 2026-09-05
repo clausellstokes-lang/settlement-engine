@@ -13,7 +13,7 @@
  * content batch never lands its neighbours in a decomposition they did not cause.
  *
  * ⛔⛔ ANNEX-VERBATIM, AND THE WORDS ARE THE CHAIR'S. Every line below is byte-identical to its
- * authored variant in the governed `## §A ENC-4` block of
+ * authored variant in the governed `## §A ENC-4` and `## §B ENC-4` blocks of
  * docs/content/RECEIPT_POOLS_CHANCE_MEETING.md, with only the `{slot}` tokens turned into
  * interpolations. tests/lint/chanceMeetingKindPools.walker.test.js re-derives the whole pool
  * AND the band table from the document on every run, so a hand edit here reds rather than
@@ -42,7 +42,8 @@
  * all five from the stage's own typed seed and the meeting receipt, so the eligible set is the
  * whole authored six under the production interpolation. The walker pins BOTH directions anyway —
  * six reachable with every slot supplied, and a named shortfall when one is withheld — so a filter
- * that had stopped filtering cannot pass as a filter that is working.
+ * that had stopped filtering cannot pass as a filter that is working. §B's four slots are likewise
+ * all supplied at its base, and its eligible set is the whole authored FIVE.
  *
  * ── THE BAND TABLE IS CORPUS, NOT TUNING ──────────────────────────────────────────
  *
@@ -73,6 +74,26 @@ export const CHANCE_MEETING_RECEIPTS = Object.freeze({
     (x) => `Neither ${x.home} nor ${x.settlement} arranged it. ${x.npc} and ${x.counterpart} met, ${x.outcome_phrase}, and the tie will keep as long as ties keep.`,
     (x) => `The register at ${x.settlement} lists ${x.npc} of ${x.home} among the season's guests; what it does not list is that ${x.counterpart} ${x.outcome_phrase} that week.`,
   ],
+  // ── §B — THE REFUSAL THAT TRAVELLED ────────────────────────────────────────────
+  // ⛔⛔ `{npc}` IS THE APPROACHER AND `{counterpart}` IS THE ONE WHO REFUSED, in every one of
+  // the five. That is the ROLE the words assign, and ENC-4 reported the kind unwireable because
+  // the stage's seed carried no direction to assign it from. ENC-4b's car 1 put the direction on
+  // the seed — DERIVED FROM THE RECEIPT'S OWN EXPOSURE GRIEVANCE, never from party order — so
+  // the roles are now read rather than guessed.
+  //
+  // ⚠ VARIANT 1 SAYS `{counterpart} of {settlement}`, AND THAT CLAUSE IS THE WRITER'S GATE.
+  // It asserts the refuser is OF THE HOST TOWN, which is true only when the approacher is the
+  // one passing through. The engine lets either party lead (measured), so the writer withholds
+  // the whole line when the host's own notable made the offer, rather than shipping a sentence
+  // that is fluent and false about where a man is from. Silence, never a hole: the estate's
+  // posture, and the reason no word here needed changing.
+  chance_meeting_exposed: [
+    (x) => `${x.counterpart} of ${x.settlement} refused what ${x.npc} of ${x.home} offered, and the refusal was spoken of.`,
+    (x) => `In ${x.settlement}, ${x.counterpart} said no to ${x.npc} of ${x.home}, and said it where it could be heard.`,
+    (x) => `${x.npc} of ${x.home} made an approach at ${x.settlement}; ${x.counterpart} declined it, and the declining did not stay between the two of them.`,
+    (x) => `${x.settlement} knows that ${x.counterpart} turned ${x.npc} of ${x.home} away. It does not know what was offered, and it has not stopped guessing.`,
+    (x) => `Neither court announced it, and ${x.settlement} has it anyway: ${x.counterpart} refused ${x.npc} of ${x.home}.`,
+  ],
 });
 
 /**
@@ -84,8 +105,8 @@ export const CHANCE_MEETING_RECEIPTS = Object.freeze({
  * compromise is a secret, a refusal nobody spoke of is not news, and the equilibrium band is not
  * an event"), so a fill for any of them would be a word no producer could reach.
  *
- * `exposed` is likewise absent HERE: it is the annex's §B kind, with its own pool and its own
- * significance, and it does not take this pool's `{outcome_phrase}` slot at all.
+ * `exposed` is likewise absent HERE: it is the annex's §B kind, wired by ENC-4b with its own pool
+ * and its own significance above, and it does not take this pool's `{outcome_phrase}` slot at all.
  *
  * @type {Readonly<Record<string, string>>}
  */

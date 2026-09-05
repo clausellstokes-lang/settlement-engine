@@ -123,9 +123,9 @@ export const KIND_REGISTRATION_FREEZES = Object.freeze({
    */
   smallFamilies: Object.freeze(['INFORMATION', 'FAITH', 'CHANCE_MEETING']),
   /** Every registry row in the estate. ENC-4 took this 113 → 114. */
-  registeredKinds: 114,
+  registeredKinds: 115, // +1 at ENC-4b (§900): `chance_meeting_exposed`, the seventh family's second desk-bearing exact row
   /** `Object.keys(EXACT_SECTION).length`. ENC-4 took this 379 → 380, WITH registeredKinds. */
-  routedTokens: 380,
+  routedTokens: 381, // +1 at ENC-4b (§900): `chance_meeting_exposed`, the seventh family's second desk-bearing exact row
   /**
    * Herald-routed tokens with no phrased pool at all. ⛔ SHRINK-ONLY: the content annexes'
    * wiring waves lower it; nothing may raise it. Unmoved since the freeze.

@@ -329,6 +329,11 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   // case that rule was written for — and the pairing keeps the estate-wide registered-minus-
   // routed difference at 8 rather than inflating the deskless count by one.
   chance_meeting_recorded: 'events',
+  // ENC-4b — the refusal that travelled, on the SAME road and for the same reason: the exact
+  // row, never the `chance_meeting_` family prefix ENC-4 refused to mint. It carries a desk, so
+  // it moves ROUTED_TOKENS and REGISTERED_KIND_COUNT together and leaves the estate-wide
+  // registered-minus-routed difference at 8.
+  chance_meeting_exposed: 'events',
   // traditions / custom / values (KIND_SECTION `traditions` custom-half → events)
   tradition: 'events', tradition_change: 'events', moral_reckoning: 'events', cause_lifecycle: 'events',
   // mercy (KIND_SECTION `mercy` → events)

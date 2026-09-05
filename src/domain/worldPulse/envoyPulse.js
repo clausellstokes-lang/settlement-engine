@@ -40,7 +40,7 @@ import {
   resolveMaturedParlays,
   resolveStartInterceptions,
 } from './envoyInterceptionStage.js';
-import { chanceMeetingEntry } from './envoyChanceMeetingNews.js';
+import { chanceMeetingHeraldEntry } from './envoyChanceMeetingNews.js';
 import { advanceChanceMeetings, dropStaleMeetingLedgers } from './envoyChanceMeetingStage.js';
 import { envoyNewsEntries } from './envoyNews.js';
 import { rosterPersonById } from './envoyCasting.js';
@@ -272,7 +272,11 @@ export function advanceEnvoyDiplomacyPulse({
     // ⛔ IT IS BELOW THE FLAG, NOT BESIDE IT. `advanceChanceMeetings` returns an empty
     // `heraldSeeds` before this callback can be reached on a world where `chanceEncountersEnabled`
     // is dark, so a dark world builds NOTHING and appends NOTHING — the absence IS the gate.
-    heraldEntryFor: (seed) => chanceMeetingEntry({ seed, now }),
+    // ⭐ ENC-4b — ONE DOOR, TWO ROWS. The registry now voices two beats and the dispatch lives
+    // beside the rows rather than here: the pulse has no business knowing which beats that
+    // family claims, and a builder wired without a dispatch row would be a mint no producer
+    // could reach.
+    heraldEntryFor: (seed) => chanceMeetingHeraldEntry({ seed, now }),
   });
   state = meetings.worldState;
   // Collected here and APPENDED BELOW, because `feed` is not declared until after the errand
