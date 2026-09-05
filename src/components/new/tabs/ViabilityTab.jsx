@@ -6,12 +6,35 @@ import { normalizePlotHook } from '../../../lib/proseSeams.js';
 import { deriveViability } from '../../../domain/display/dossierViewModel.js';
 import { isViabilityItem } from '../../../domain/display/viabilityFilter.js';
 
+import { defenseMagicDependencyProse } from '../../../domain/display/stateProse/defenseStateProse.js';
+import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
+
 import {NarrativeNote} from '../NarrativeNote';
 
-export function ViabilityTab({settlement:s, narrativeNote}) {
+/**
+ * The magic-dependency position — the registry's first CROSS-TAB row. DS-DEF-9 is authored
+ * into the `defense` corpus leaf and its fact belongs here: not "does the town have arcane
+ * defenses" (DS-DEF-5 speaks that on the defense tab) but "would this town still work if the
+ * practitioners left", which is a viability question. ONE lens at ONE position: the block's
+ * NAMED-chain pool is a more specific rung of the same reading, not a second sentence.
+ */
+const MAGIC_DEPENDENCY_MOUNT = 'viability.magicDependency';
+
+export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false, playerView = false}) {
   if (!s?.economicViability) return <Empty message="No coherence data available. Generate a settlement first."/>;
   const v = s.economicViability;
   const metrics = v.metrics || {};
+  // DS-DEF-9. THE PUBLIC GATE (§885.3): a public gallery dossier is a FREE, ANONYMOUS
+  // viewer and corpus prose is a PAID surface, so the desk is NOT DRAWN there. The audience
+  // follows kernel law 2's fail-closed default, stated rather than defaulted. This tab
+  // received neither flag before this car; `OutputContainer` now passes both.
+  const magicProse = publicDossier
+    ? Object.freeze({ dependency: null })
+    : defenseMagicDependencyProse(s, {
+      seed: String(s?._seed ?? s?.id ?? ''),
+      audience: playerView ? 'player' : 'dm',
+    });
+  const magicLine = drawnAtMount(MAGIC_DEPENDENCY_MOUNT, magicProse.dependency)?.sentence || null;
 
   // Strip the verdict prefix from the summary. Behind canonicalViewModel, use
   // the reconciled verdict from the display model (§1f) — its body only, since
@@ -187,6 +210,19 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
               {c.label}: {c.magicNote}
             </div>
           ))}
+        </div>
+      )}
+
+      {/* DS-DEF-9: what the town's dependence on its practitioners means, in its own voice.
+          Rendered OUTSIDE the warning box on purpose — the box draws only when the flag is
+          true, and the block's `magicDependency false` pool is a reading rather than an
+          absence ("losing every practitioner here would be a loss and not a collapse"). A
+          line that could only appear inside the box would leave a third of an authored
+          block permanently unreachable, which is the mounted-but-dark defect. */}
+      {magicLine&&(
+        <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #7a3a9a',
+          padding:'9px 13px',marginBottom:12}}>
+          <p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.55,margin:0,fontStyle:'italic'}}>{magicLine}</p>
         </div>
       )}
 
