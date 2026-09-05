@@ -28,7 +28,7 @@ prev=a.prev_pickup or ('PICKUP AT §%d'%(int(float(n))-1) if n.isdigit() else '_
 p={'odq_marker':'\n§%s '%n,'odq_rows':['§%s · __ROW__ `%s` -> `__CAS_SHA__`, sealed `refs/preserve/%s`; gate green (`TRUE_EXIT=0`, __TESTS__ tests). __ROW_BODY__\n'%(n,a.base[:9],a.seal)],
    'card_top_heading_prefix':'## ⭐⭐⭐⭐⭐ '+prev,'card_demote_from':'## ⭐⭐⭐⭐⭐ '+prev+' — ','card_demote_to':'## (superseded) '+prev+' — ',
    'card_new_block':'## ⭐⭐⭐⭐⭐ PICKUP AT §%s — **__CARD__** (`%s` -> `__CAS_SHA__`).\n\n__CARD_BODY__'%(n,a.base[:9]),
-   'frq_in':SC+'/frq.head.%s'%n,'frq_tail':'## §%s — __TAIL__ (SEAT: Fable 5.1 — validated)\n\n__TAIL_BODY__'%n,'frq_out':SC+'/queue-%s.md'%n}
+   'frq_in':SC+'/frq.head.%s'%n,'frq_tail':'## §%s — __TAIL__ (SEAT: Fable 5.1 — validated)\n\n__TAIL_BODY__\n'%n,'frq_out':SC+'/queue-%s.md'%n}
 io.open(os.path.join(out,'payload-%s.template.json'%n),'w',encoding='utf-8').write(json.dumps(p,ensure_ascii=False,indent=1))
 # --- msg
 m='§%s: __SUBJECT__\n\n__BODY__\n\nEnrols: __ENROLS__\n\nSeat: Fable 5.1 — validated\n\nCo-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>\n'%n
