@@ -30,6 +30,8 @@ import { join, relative, sep } from 'node:path';
 import {
   BOUNDARY_CLASSES,
   PIPELINE_REACHERS,
+  GENERATION_LAWS,
+  LAW_WIRING_STATES,
 } from '../../src/domain/density/densityCreateBoundary.js';
 
 const SRC = join(process.cwd(), 'src');
@@ -62,9 +64,19 @@ function stripCommentsAndStrings(code) {
   return code
     .replace(/\/\*[\s\S]*?\*\//g, '')
     .replace(/^\s*\/\/.*$/gm, '')
+    // ⛔ TEMPLATE LITERALS GO FIRST, AND THE ORDER IS THE WHOLE BUG. An
+    // apostrophe inside a template literal — `…the settlement's cap…`, which
+    // this estate writes constantly — opened a spurious single-quoted span that
+    // ran to the next apostrophe and swallowed every line between. MEASURED at
+    // LGT-P8-MATBOUND: 181 of 2,174 src files were mis-stripped and 521,714
+    // characters of LIVE CODE vanished from the scan, `settlementSlice.js`
+    // alone losing 32,723. No verdict of this walker flipped — measured both
+    // ways, 0 reacher flips and 0 mint flips — so the denominator was intact by
+    // luck, not by construction, and a scan that is right by luck is the
+    // false-green class this file exists to refuse.
+    .replace(/`(?:\\.|[^`\\])*`/g, '``')
     .replace(/'(?:\\.|[^'\\])*'/g, "''")
-    .replace(/"(?:\\.|[^"\\])*"/g, '""')
-    .replace(/`(?:\\.|[^`\\])*`/g, '``');
+    .replace(/"(?:\\.|[^"\\])*"/g, '""');
 }
 
 /** Every .js/.jsx file under src/, as repo-relative POSIX paths. */
@@ -182,5 +194,236 @@ describe('density create-boundary walker (which generation is a BIRTH)', () => {
       `modules naming the birth mint outside its homes and declared BIRTH callers: `
       + `${strays.join(', ')}`,
     ).toEqual([]);
+  });
+});
+
+/**
+ * ⭐ THE SECOND HALF OF THE BOUNDARY (LGT-P8-MATBOUND) — WHICH LAW A BIRTH MINTS.
+ *
+ * The suite above enforces the CALLER set: which module is a birth. It was
+ * written when there was one generation law, so it also assumed the answer to a
+ * second question it never asks — WHICH LAW. There are two laws now, and only
+ * one of them is on the boundary; the other, the living-content law, has no
+ * caller at all. Every mint arm above is spelled with `MINT_SYMBOLS`, which
+ * names the density pair, so all of them were blind to it: a car could have
+ * wired the living-content mint into a PREVIEW module and nothing here would
+ * have said a word.
+ *
+ * `GENERATION_LAWS` is therefore the same medicine as `PIPELINE_REACHERS`,
+ * applied to the other axis: the law set is a declared denominator, and the
+ * scan below holds it to the tree. The consequence that matters is the arm
+ * marked with a star — an UNWIRED law that acquires a generation-side caller
+ * REDS until its row is changed, which is what stops the materialization dial
+ * from being reachable from the product before somebody has answered the byte
+ * question the row records.
+ *
+ * ⚠ ONE LAW IS DECLARED HERE RATHER THAN IN THE REGISTER, and the reason is a
+ * red this car earned rather than a preference; see `LAWS_OFF_THE_BOUNDARY`.
+ */
+describe('generation-law register (which LAW a birth mints)', () => {
+  /**
+   * ⛔ THE LAWS THAT ARE NOT ON THIS BOUNDARY, DECLARED HERE AND NOT IN `src/`.
+   *
+   * The estate has one `NEW_SETTLEMENT_…` dial that is not a generation law at
+   * all: the layout law is a READ law applied at render time, so it is stamped
+   * at the SAVE chokepoints rather than at generation, and the boundary module's
+   * own header says why that precedent must not transfer to a write law.
+   *
+   * It is declared HERE rather than as a row in `GENERATION_LAWS` because its
+   * module and its mint spell a retired capability's vocabulary, and
+   * `tests/lint/settlementMapSurfaceAllowlist.walker.test.js` convicts that
+   * vocabulary anywhere under `src/` as an owner-gated question (ODQ §725). The
+   * row was written into the boundary module first and RED on the first
+   * whole-directory run; that census deliberately does not scan `tests/`, so
+   * this is where naming it is free. The knowledge is not lost, only relocated —
+   * and it is still machine-checked, because the denominator below counts these
+   * members and the earned-ness arm reds if one of them stops existing.
+   */
+  const LAWS_OFF_THE_BOUNDARY = Object.freeze([
+    Object.freeze({
+      mint: ['newSettlement', 'MapEdits'].join(''),
+      dial: 'NEW_SETTLEMENT_LAYOUT_LAW_VERSION',
+      why: 'a READ law, not a generation law: it is applied at render time and stamped at the '
+        + 'three save chokepoints, so it never passes through the create boundary and must not '
+        + 'be claimed by it. Spelled in two halves so this roster does not itself become a '
+        + 'literal of the vocabulary the terminal census governs.',
+    }),
+  ]);
+
+  /** Does this module NAME this symbol in executable source? */
+  function names(rel, symbol) {
+    const code = stripCommentsAndStrings(readFileSync(join(process.cwd(), rel), 'utf-8'));
+    return new RegExp(`\\b${symbol}\\b`).test(code);
+  }
+
+  /** Every `newSettlement…` mint and `NEW_SETTLEMENT_…` dial exported anywhere
+   *  under src/, as {mints, dials}. This is the denominator: it is derived from
+   *  the tree, never from the register, so a third law cannot arrive unnamed. */
+  function declaredLawSymbols() {
+    const mints = new Set();
+    const dials = new Set();
+    for (const rel of sourceFiles()) {
+      const code = stripCommentsAndStrings(readFileSync(join(process.cwd(), rel), 'utf-8'));
+      for (const m of code.matchAll(/\bexport\s+function\s+(newSettlement[A-Za-z0-9_]*)\s*\(/g)) {
+        mints.add(m[1]);
+      }
+      for (const m of code.matchAll(/\bexport\s+const\s+(NEW_SETTLEMENT_[A-Z0-9_]+)\b/g)) {
+        dials.add(m[1]);
+      }
+    }
+    return { mints: [...mints].sort(), dials: [...dials].sort() };
+  }
+
+  const { mints, dials } = declaredLawSymbols();
+
+  it('finds a real denominator (the symbol scan is not vacuous)', () => {
+    // Both halves must be non-empty or every assertion below passes on nothing.
+    // Two laws plus the layout precedent is the floor the register was written
+    // against; a scan that drops under it has broken, not shrunk.
+    expect(mints.length).toBeGreaterThanOrEqual(3);
+    expect(dials.length).toBeGreaterThanOrEqual(3);
+    expect(Object.keys(GENERATION_LAWS).length + LAWS_OFF_THE_BOUNDARY.length)
+      .toBeGreaterThanOrEqual(3);
+    expect(Object.keys(GENERATION_LAWS).length).toBeGreaterThanOrEqual(2);
+  });
+
+  it('every mint and every dial in src/ is accounted for, on the boundary or off it', () => {
+    const offMints = new Set(LAWS_OFF_THE_BOUNDARY.map(row => row.mint));
+    const offDials = new Set(LAWS_OFF_THE_BOUNDARY.map(row => row.dial));
+
+    const unregisteredMints = mints.filter(m => !(m in GENERATION_LAWS) && !offMints.has(m));
+    expect(
+      unregisteredMints,
+      `these create-boundary mints exist in src/ and nothing accounts for them: `
+      + `${unregisteredMints.join(', ')} — decide whether the law is WIRED through `
+      + `birthConfig, UNWIRED (and say what blocks it), or off the boundary entirely `
+      + `(and say what stamps it instead). An unaccounted mint is how a second law `
+      + `silently acquires a birth caller none of the arms above can see.`,
+    ).toEqual([]);
+
+    const registeredDials = new Set(Object.values(GENERATION_LAWS).map(row => row.dial));
+    const unregisteredDials = dials.filter(d => !registeredDials.has(d) && !offDials.has(d));
+    expect(
+      unregisteredDials,
+      `these NEW_SETTLEMENT_* dials exist in src/ and no row names them: `
+      + `${unregisteredDials.join(', ')}`,
+    ).toEqual([]);
+
+    // A law is on the boundary or off it, never both, and never neither.
+    const both = Object.keys(GENERATION_LAWS).filter(m => offMints.has(m));
+    expect(both, `claimed on the boundary AND off it: ${both.join(', ')}`).toEqual([]);
+  });
+
+  it('every off-boundary row is EARNED — it names a law that really exists', () => {
+    // The arm that stops this roster becoming a place to park an exemption. A
+    // row whose mint or dial has left the tree is a standing excuse for
+    // whatever lands under that spelling next.
+    for (const row of LAWS_OFF_THE_BOUNDARY) {
+      expect(mints, `off-boundary row names ${row.mint}, which src/ no longer exports`)
+        .toContain(row.mint);
+      expect(dials, `off-boundary row names ${row.dial}, which src/ no longer declares`)
+        .toContain(row.dial);
+      expect(String(row.why || '').length, `${row.mint} needs a why`).toBeGreaterThan(60);
+    }
+  });
+
+  it('every row is well-formed, and points at a law that really exists', () => {
+    const seenKeys = new Set();
+    for (const [mint, row] of Object.entries(GENERATION_LAWS)) {
+      expect(LAW_WIRING_STATES, `${mint} has wiring "${row.wiring}"`).toContain(row.wiring);
+      expect(String(row.why || '').length, `${mint} needs a why`).toBeGreaterThan(60);
+      // The row's own module must declare both the mint and the dial it names,
+      // so a row cannot drift away from the law it governs.
+      expect(names(row.module, mint), `${row.module} must export ${mint}`).toBe(true);
+      expect(names(row.module, row.dial), `${row.module} must declare ${row.dial}`).toBe(true);
+      // One config key per law. Two laws on one key is two truths about a world.
+      expect(seenKeys.has(row.configKey), `${row.configKey} is claimed twice`).toBe(false);
+      seenKeys.add(row.configKey);
+      // ⚠ The config key is NOT re-derived from the module here, deliberately.
+      // Two of the three laws declare their key in a dependency-free leaf and
+      // reach it through an import SPECIFIER, which is a string and is stripped
+      // before this scan ever sees it; the only surviving mention in the law's
+      // own file is a comment, and a comment is a citation, never a mint. The
+      // key is held instead by each law's own gate test, where it is compared
+      // against the real constant rather than against a spelling.
+      expect(String(row.configKey || '').length,
+        `${mint} needs a config key`).toBeGreaterThan(3);
+    }
+  });
+
+  it('⭐ a law that is not WIRED is named by NO module that reaches the pipeline', () => {
+    // THE ARM THAT MAKES THE MATERIALIZATION DIAL SAFE TO FLIP. While a law is
+    // UNWIRED, no generation-side module may name it — so wiring it is a visible
+    // act that reds here until somebody changes its row to WIRED and, in doing
+    // so, answers the question the row records. An OUT_OF_SCOPE law is held to
+    // the same line for the opposite reason: it is stamped somewhere else, and a
+    // generation-side mention would mean two laws had been confused for one.
+    const reachers = pipelineReachers();
+    expect(reachers.length, 'the reacher scan must not be empty').toBeGreaterThanOrEqual(4);
+    const offTheBoundary = [
+      ...Object.entries(GENERATION_LAWS)
+        .filter(([, row]) => row.wiring !== 'WIRED')
+        .map(([mint, row]) => ({ mint, dial: row.dial })),
+      ...LAWS_OFF_THE_BOUNDARY.map(row => ({ mint: row.mint, dial: row.dial })),
+    ];
+    expect(offTheBoundary.length, 'the arm has nothing to check').toBeGreaterThan(0);
+    const strays = [];
+    for (const law of offTheBoundary) {
+      for (const rel of reachers) {
+        if (names(rel, law.mint) || names(rel, law.dial)) {
+          strays.push(`${rel} names ${law.mint}`);
+        }
+      }
+    }
+    expect(
+      strays,
+      `a ${'non-WIRED'} generation law is named by a module that reaches the settlement `
+      + `pipeline: ${strays.join(', ')} — if this is the wiring car, change the law's row `
+      + `in GENERATION_LAWS to WIRED and record what the edge costs; if it is not, the `
+      + `mention is a world being born under a law nobody declared.`,
+    ).toEqual([]);
+  });
+
+  it('every WIRED law is spread by birthConfig, in the mint\'s own home', () => {
+    const home = 'src/domain/density/densityCreateBoundary.js';
+    const unspread = Object.entries(GENERATION_LAWS)
+      .filter(([mint, row]) => row.wiring === 'WIRED' && !names(home, mint))
+      .map(([mint]) => mint);
+    expect(
+      unspread,
+      `declared WIRED but ${home} never names the mint: ${unspread.join(', ')} — a law `
+      + `that claims to be on the boundary and is not is worse than one that admits it `
+      + `is off it, because the claim is what a later reader trusts.`,
+    ).toEqual([]);
+    // And at least one law really is on the boundary, or `birthConfig` is a
+    // wrapper around nothing and every BIRTH arm above proves nothing.
+    expect(Object.values(GENERATION_LAWS).some(row => row.wiring === 'WIRED')).toBe(true);
+  });
+
+  it('⭐ the re-derivation path reads the world\'s OWN config first, and mints once', () => {
+    // THE PROMISE, at the one place the module-level manifest above cannot see
+    // it. `settlementSlice.js` is classified BIRTH as a whole, but it holds
+    // BOTH the birth action and `regenSection`, and a manifest keyed on modules
+    // can never tell them apart. These three facts are what actually keep a
+    // regeneration from stamping a law onto a world that already exists, and
+    // until now all three were prose in a header rather than assertions.
+    const rel = 'src/store/settlementSlice.js';
+    const code = stripCommentsAndStrings(readFileSync(join(process.cwd(), rel), 'utf-8'));
+    expect(
+      /settlement\.config \|\| config/.test(code),
+      `${rel}'s re-derivation must read the settlement's own config FIRST — that is `
+      + `what makes a markerless v1 world regenerate as v1 after the dial flips`,
+    ).toBe(true);
+    expect(
+      /\bconfig \|\| settlement\.config/.test(code),
+      `${rel} reads the store's form config BEFORE the world's own — the wizard's `
+      + `config would then decide an existing world's law on its next regeneration`,
+    ).toBe(false);
+    const mintCalls = (code.match(/\bbirthConfig\(/g) || []).length;
+    expect(
+      mintCalls,
+      `${rel} calls birthConfig ${mintCalls} times; exactly one call is the birth `
+      + `action, and a second one is a re-derivation or a preview minting a law`,
+    ).toBe(1);
   });
 });
