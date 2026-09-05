@@ -8,7 +8,14 @@ program's decisions; SPEC fold labels §§277–§286 are design sections, not m
 The repo is authoritative; trust executed evidence over any summary including
 this one.**
 
-## ⭐⭐⭐⭐⭐ PICKUP AT §896 — **THE CLAMP CONSIST IS DOWN. THE SEAT IS FABLE 5.1 — Fable chairs and architects, Opus implements and verifies (owner, 2026-09-05).** Product `df7cdd37e`, SEVEN landings. Read this, then `$SC/RESUME-NOTE.md` (sealed at `refs/preserve/resume-note-2026-09-05`).
+## ⭐⭐⭐⭐⭐ PICKUP AT §896.1 — **THE §892 WALK IS RULED: 28 rows by the Fable seat, from the sealed evidence, no probe re-executed.** The seat is FABLE 5.1 (Fable chairs, Opus implements). Product `df7cdd37e`. Read this, then the §896 card below, then `$SC/RESUME-NOTE.md`.
+
+⛔ **What is NOT ruled and must not be read as ruled:** the 8 EVIDENCE-THIN calls (PLAUSIBLE until re-executed against the current tree) · the §892.5 critic (S99 never ran) · **R1 → R36** — every Opus-authored row from §893 to §896 is ENROLLED, not ruled; that is the next sitting. A Fable trailer on this act certifies the chair's own re-derivation, nothing else.
+
+### ⭐ NEXT, IN ORDER (unchanged from §896's card; §896.1 was the first item)
+ANCHORS replay → its census totals → its gate · **OSR-SCHEMA17** (`brief-OSR-SCHEMA17.md`, `model: "opus"`) to free the 23-car desk consist · the desk remainder · clamp waves 2–4 · the lighting wave (31) · W-ARMS (14) · HORIZON-DARK (6) → ⛔ the owner's WALK → the exhaustive review → ⛔ FULL STOP before the soak.
+
+## (superseded) PICKUP AT §896 — **THE CLAMP CONSIST IS DOWN. THE SEAT IS FABLE 5.1 — Fable chairs and architects, Opus implements and verifies (owner, 2026-09-05).** Product `df7cdd37e`, SEVEN landings. Read this, then `$SC/RESUME-NOTE.md` (sealed at `refs/preserve/resume-note-2026-09-05`).
 
 `$SC` = `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad`. ⛔ OWNER CAP FOUR agents of any kind. ⛔ Chair acts: `Seat: Fable 5.1 — validated` + a CHANGED `docs/FABLE_RETROVALIDATION_QUEUE.md` blob when the row enrols anything; **every lane dispatched `model: "opus"`**, its commits `Seat: Opus 5 — Fable-unvalidated` + `Lane: <name>`. ⛔ The seat change validates NOTHING retroactively.
 
