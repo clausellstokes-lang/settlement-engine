@@ -239,6 +239,11 @@ describe('generation-law register (which LAW a birth mints)', () => {
     }),
   ]);
 
+  /** The module that owns `birthConfig`, i.e. the one place a law is spread into
+   *  every BIRTH at once. It is not a pipeline reacher — it is what the reachers
+   *  call — so it has to be added to the scan by hand. */
+  const MINT_HOME = 'src/domain/density/densityCreateBoundary.js';
+
   /** Does this module NAME this symbol in executable source? */
   function names(rel, symbol) {
     const code = stripCommentsAndStrings(readFileSync(join(process.cwd(), rel), 'utf-8'));
@@ -280,7 +285,8 @@ describe('generation-law register (which LAW a birth mints)', () => {
     const offMints = new Set(LAWS_OFF_THE_BOUNDARY.map(row => row.mint));
     const offDials = new Set(LAWS_OFF_THE_BOUNDARY.map(row => row.dial));
 
-    const unregisteredMints = mints.filter(m => !(m in GENERATION_LAWS) && !offMints.has(m));
+    const onMints = new Set(Object.values(GENERATION_LAWS).map(row => row.mint));
+    const unregisteredMints = mints.filter(m => !onMints.has(m) && !offMints.has(m));
     expect(
       unregisteredMints,
       `these create-boundary mints exist in src/ and nothing accounts for them: `
@@ -299,7 +305,7 @@ describe('generation-law register (which LAW a birth mints)', () => {
     ).toEqual([]);
 
     // A law is on the boundary or off it, never both, and never neither.
-    const both = Object.keys(GENERATION_LAWS).filter(m => offMints.has(m));
+    const both = [...onMints].filter(m => offMints.has(m));
     expect(both, `claimed on the boundary AND off it: ${both.join(', ')}`).toEqual([]);
   });
 
@@ -318,12 +324,12 @@ describe('generation-law register (which LAW a birth mints)', () => {
 
   it('every row is well-formed, and points at a law that really exists', () => {
     const seenKeys = new Set();
-    for (const [mint, row] of Object.entries(GENERATION_LAWS)) {
-      expect(LAW_WIRING_STATES, `${mint} has wiring "${row.wiring}"`).toContain(row.wiring);
-      expect(String(row.why || '').length, `${mint} needs a why`).toBeGreaterThan(60);
+    for (const [id, row] of Object.entries(GENERATION_LAWS)) {
+      expect(LAW_WIRING_STATES, `${id} has wiring "${row.wiring}"`).toContain(row.wiring);
+      expect(String(row.why || '').length, `${id} needs a why`).toBeGreaterThan(60);
       // The row's own module must declare both the mint and the dial it names,
       // so a row cannot drift away from the law it governs.
-      expect(names(row.module, mint), `${row.module} must export ${mint}`).toBe(true);
+      expect(names(row.module, row.mint), `${row.module} must export ${row.mint}`).toBe(true);
       expect(names(row.module, row.dial), `${row.module} must declare ${row.dial}`).toBe(true);
       // One config key per law. Two laws on one key is two truths about a world.
       expect(seenKeys.has(row.configKey), `${row.configKey} is claimed twice`).toBe(false);
@@ -336,7 +342,7 @@ describe('generation-law register (which LAW a birth mints)', () => {
       // key is held instead by each law's own gate test, where it is compared
       // against the real constant rather than against a spelling.
       expect(String(row.configKey || '').length,
-        `${mint} needs a config key`).toBeGreaterThan(3);
+        `${id} needs a config key`).toBeGreaterThan(3);
     }
   });
 
@@ -350,15 +356,23 @@ describe('generation-law register (which LAW a birth mints)', () => {
     const reachers = pipelineReachers();
     expect(reachers.length, 'the reacher scan must not be empty').toBeGreaterThanOrEqual(4);
     const offTheBoundary = [
-      ...Object.entries(GENERATION_LAWS)
-        .filter(([, row]) => row.wiring !== 'WIRED')
-        .map(([mint, row]) => ({ mint, dial: row.dial })),
+      ...Object.values(GENERATION_LAWS)
+        .filter(row => row.wiring !== 'WIRED')
+        .map(row => ({ mint: row.mint, dial: row.dial })),
       ...LAWS_OFF_THE_BOUNDARY.map(row => ({ mint: row.mint, dial: row.dial })),
     ];
     expect(offTheBoundary.length, 'the arm has nothing to check').toBeGreaterThan(0);
+    // ⛔ THE MINT'S OWN HOME IS IN THE DENOMINATOR, AND A PLANT PROVED IT HAS TO
+    // BE. The obvious scan is "no pipeline REACHER names it" — and the first
+    // plant of this car's own hazard, the living-content mint spread straight
+    // into `birthConfig`, sailed past it, because the boundary module does not
+    // reach the pipeline: it is what the reachers CALL. A mint added here is
+    // minted by every BIRTH at once, which is the widest possible wiring and
+    // was the only one the arm could not see.
+    const scanned = [...reachers, MINT_HOME];
     const strays = [];
     for (const law of offTheBoundary) {
-      for (const rel of reachers) {
+      for (const rel of scanned) {
         if (names(rel, law.mint) || names(rel, law.dial)) {
           strays.push(`${rel} names ${law.mint}`);
         }
@@ -374,13 +388,12 @@ describe('generation-law register (which LAW a birth mints)', () => {
   });
 
   it('every WIRED law is spread by birthConfig, in the mint\'s own home', () => {
-    const home = 'src/domain/density/densityCreateBoundary.js';
-    const unspread = Object.entries(GENERATION_LAWS)
-      .filter(([mint, row]) => row.wiring === 'WIRED' && !names(home, mint))
-      .map(([mint]) => mint);
+    const unspread = Object.values(GENERATION_LAWS)
+      .filter(row => row.wiring === 'WIRED' && !names(MINT_HOME, row.mint))
+      .map(row => row.mint);
     expect(
       unspread,
-      `declared WIRED but ${home} never names the mint: ${unspread.join(', ')} — a law `
+      `declared WIRED but ${MINT_HOME} never names the mint: ${unspread.join(', ')} — a law `
       + `that claims to be on the boundary and is not is worse than one that admits it `
       + `is off it, because the claim is what a later reader trusts.`,
     ).toEqual([]);

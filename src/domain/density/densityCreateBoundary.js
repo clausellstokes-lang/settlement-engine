@@ -226,13 +226,19 @@ export const LAW_WIRING_STATES = Object.freeze(['WIRED', 'UNWIRED']);
  * leaf, plus the hashed-chunk listing diff to prove it free. That is a build,
  * which is why this car declares the gap instead of taking it.
  *
- * Keys are the MINT export's name — the one symbol a caller would actually
- * write, so a row cannot drift away from the thing it governs.
+ * ⛔ THE MINT'S NAME IS A STRING FIELD, NEVER THE OBJECT KEY, AND A PLANT IS WHY.
+ * Keying this table by the mint's identifier read beautifully and BROKE THE
+ * WALKER AGAINST ITSELF: an identifier used as an object key is, to a source
+ * scan, indistinguishable from a call site, so the row declaring the
+ * living-content law UNWIRED was itself convicted as this module naming that
+ * law's mint. A declaration must not be spelled the way the thing it declares
+ * is spelled. The mint lives in `mint`, as a string the scan strips.
  *
- * @type {Readonly<Record<string, {module: string, dial: string, configKey: string, wiring: string, why: string}>>}
+ * @type {Readonly<Record<string, {mint: string, module: string, dial: string, configKey: string, wiring: string, why: string}>>}
  */
 export const GENERATION_LAWS = Object.freeze({
-  newSettlementDensityLaw: Object.freeze({
+  density: Object.freeze({
+    mint: 'newSettlementDensityLaw',
     module: 'src/domain/density/densityLaw.js',
     dial: 'NEW_SETTLEMENT_DENSITY_LAW_VERSION',
     configKey: '_densityLawVersion',
@@ -241,7 +247,8 @@ export const GENERATION_LAWS = Object.freeze({
       + 'classified BIRTH mints it and no PREVIEW or re-derivation can. Its module is already '
       + 'inside the first-paint closure, so the edge costs nothing.',
   }),
-  newSettlementLivingContentLaw: Object.freeze({
+  livingContent: Object.freeze({
+    mint: 'newSettlementLivingContentLaw',
     module: 'src/domain/content/livingContentLaw.js',
     dial: 'NEW_SETTLEMENT_LIVING_CONTENT_LAW_VERSION',
     configKey: '_livingContentLawVersion',
