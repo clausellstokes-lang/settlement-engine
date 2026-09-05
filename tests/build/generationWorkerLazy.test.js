@@ -22,12 +22,12 @@
  * re-run is what makes them binding. The unconditional anti-vacuity `it` below
  * turns "VERIFY_DIST=1 with no dist" into a hard failure instead of a skip.
  *
- * ⚠ DELIBERATELY ABSENT, AND RECORDED RATHER THAN FORGOTTEN: a
- * `WORKER_BUNDLE_CEILING_BYTES` arm. A monotone-down byte ceiling must be minted
- * from a MEASURED build, and this lane took no build. Writing the ceiling from a
- * figure measured on another tip would pin a number with no receipt behind it,
- * which is the false-instrument class the estate exists to refuse. The landing
- * lane that builds owes that arm.
+ * ⭐ `WORKER_BUNDLE_CEILING_BYTES` — MINTED FROM A MEASURED BUILD at the §900 composition
+ * (Fable chair, `build-900-chair.log`, tree `f6545dcd9`): `dist/assets/generation.worker-*.js`
+ * measured 1,404,242 bytes. The ceiling is MONOTONE-DOWN: a rebuild that measures lower may
+ * lower it (with the log cited); a rise is a chair ruling with a reason, never a lane's edit.
+ * HORIZON-B2 refused to write this arm without a build — rightly (a pin with no receipt is the
+ * false-instrument class) — and the landing that built paid it.
  *
  * @enforced-by this test
  */
@@ -44,6 +44,8 @@ const ASSETS = join(DIST, 'assets');
 const DIST_EXISTS = existsSync(DIST) && existsSync(ASSETS);
 const REQUIRE_DIST = process.env.VERIFY_DIST === '1';
 const SENTINEL = 'settlementforge:generation:worker-v1';
+/** Measured 1,404,242 B at f6545dcd9 (build-900-chair.log); monotone-down — see the docblock. */
+export const WORKER_BUNDLE_CEILING_BYTES = 1404242;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
 
@@ -190,4 +192,13 @@ describe.runIf(DIST_EXISTS)('generation worker — production boundary', () => {
       `chunks outside first paint carrying the contract: ${carriers.join(', ')}`,
     ).toBeGreaterThanOrEqual(2);
   });
+  it('the generation worker bundle stays under its measured ceiling (monotone-down; WORKER_BUNDLE_CEILING_BYTES)', () => {
+    const assets = readdirSync(join(ROOT, 'dist', 'assets'));
+    const workers = assets.filter((f) => /^generation\.worker-[A-Za-z0-9_-]+\.js$/.test(f));
+    expect(workers, 'exactly one generation worker bundle in dist/assets').toHaveLength(1);
+    const bytes = readFileSync(join(ROOT, 'dist', 'assets', workers[0])).length;
+    // Read the measured figure from the failure, never compute the ceiling from the tree.
+    expect(bytes, `generation worker bundle ${workers[0]} is ${bytes} B; the ceiling is ${WORKER_BUNDLE_CEILING_BYTES} B (build-900-chair.log)`).toBeLessThanOrEqual(WORKER_BUNDLE_CEILING_BYTES);
+  });
+
 });
