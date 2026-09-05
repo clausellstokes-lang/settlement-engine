@@ -1,7 +1,7 @@
 {
  "name": "ai",
  "runId": "wf_60f0a1e1-39c",
- "exportedAt": "2026-09-05T22:44:52.343Z",
+ "exportedAt": "2026-09-05T22:49:55.544Z",
  "claims": [
   {
    "feature": "theme over-explanation",
@@ -3107,6 +3107,96 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "prioritises stability above change and tradition above growth",
    "note": "Quote matches word for word. The framing is also confirmed: tension is 'downplayed in favour of nostalgia and reconciliation,' and the paper explicitly positions this as 'a narrative standardisation that should be acknowledged alongside the more familiar representational bias.'"
+  },
+  "30": {
+   "index": 30,
+   "verdict": "CONTRADICTED",
+   "trueWording": "Emotion words INCREASE: d=+0.58, arrow up, +14.4%",
+   "note": "Quote \"from embedded to distanced narration\" IS verbatim in the abstract, and function words, contractions and first-person pronouns do decrease while vocabulary diversity and word length increase, with voice-preserving prompts reducing magnitude but not direction. But the claim's 'emotion words' element is wrong in sign: the abstract lists emotion words only as one of the 13 markers, and Table 2 of the full text (arxiv.org/html/2604.22142v1) gives Register / Emotion words d(M) = +0.58, direction up, +14.4%, with 'All markers show consistent direction across models.' Section 4.3 confirms emotion words merely show the largest shrinkage of that positive effect (~55%) under voice-preserving prompts. Everything else in the claim checks out; this one item says the opposite of the paper."
+  },
+  "31": {
+   "index": 31,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"is on average 66.2% higher than that of LLMs\"",
+   "note": "Abstract: CREATIVITY INDEX of professional human authors 'is on average 66.2% higher than that of LLMs, and that alignment reduces the CREATIVITY INDEX of LLMs by an average of 30.1%.' Both figures exact. Two small glosses, neither material: the abstract says 'alignment' where the claim says 'RLHF alignment', and the claim's parenthetical definition ('share of text not reconstructible from web n-grams') paraphrases the paper's construction of the index by reconstructing a text from web snippets via DJ SEARCH."
+  },
+  "32": {
+   "index": 32,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"present participial clauses at 2 to 5 times the rate\"",
+   "note": "The quote field is empty, but the example sentence quoted inside the claim appears word for word: 'Bryan, leaning on his agility, dances around the ring, evading Show's heavy blows.' All figures exact: 'the instruction-tuned LLMs used present participial clauses at 2 to 5 times the rate of human text' and 'GPT-4o uses present participial clauses at 5.3 times the rate of humans (paired Cohen's d = 1.38)'."
+  },
+  "33": {
+   "index": 33,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"informationally dense, noun-heavy style\"",
+   "note": "Quote appears verbatim twice. Figures confirmed: nominalizations 'at 1.5 to 2 times the rate of humans' generally, and for GPT-4o specifically ''that' clauses as subject 2.6 times as often (d=0.77), nominalizations 2.1 times as often (d=1.23), and phrasal coordination 1.9 times as often (d=0.81)'. Two glosses: the 2.6x and 1.9x figures are GPT-4o-specific, not all instruction-tuned models; and 'academic' is the claim's word, not the paper's, though the paper does attribute the style to instruction tuning across a diverse array of genres."
+  },
+  "34": {
+   "index": 34,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"grandiose, if hollow, summative sentences\"",
+   "note": "Quote verbatim. Every multiplier matches Table 1 exactly: GPT-4o column camaraderie 162, tapestry 155, intricate 119, underscore 107, amidst 100; GPT-4o Mini column palpable 145. The 'complex relations' rationale is verbatim too: 'many of these words connote some form of complex relation among objects (e.g., tapestry, intricate, camaraderie, cacophony, amidst)... may signal a preference for grandiose, if hollow, summative sentences.'"
+  },
+  "35": {
+   "index": 35,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"do not vary their linguistic output in response to contextual factors\"",
+   "note": "Quote verbatim in the discussion ('...in ways similar to humans'). The conspicuousness half is also directly supported: 'words that are unremarkable in fiction are highly conspicuous and unconventional when used other genres,' plus the finding that LLMs 'struggle to match the stylistic variation present in human communication.'"
+  },
+  "36": {
+   "index": 36,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Writer-edited>LLM-edited>LLM-generated\" (rendered without spaces)",
+   "note": "Quote appears as a LaTeX math expression, so the page renders it 'Writer-edited>LLM-edited>LLM-generated' — identical wording, spacing around '>' is a rendering artifact. Percentages exact: 'Awkward Word Choice and Phrasing (28%), Poor Sentence Structure (20%), Unnecessary/Redundant Exposition (18%), and Clichés (17%).' Corpus size exact (1,057 paragraphs, 18 professional writers, 8,035 edits), and purple prose, lack of specificity and tense inconsistency are the remaining three of the seven taxonomy categories."
+  },
+  "37": {
+   "index": 37,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "\"a word like unspoken occurs in about 15% of LLM-generated responses\"",
+   "note": "No quote supplied, but both halves are explicit in Section 5.3: 'Figure 6 shows how a word like unspoken occurs in about 15% of LLM-generated responses. Similarly phrases such as weight of, sense of, mix of occur very rarely or not at all in original seed paragraphs... while they occur frequently in LLM-generated responses.' One imprecision: the paper reserves 'syntactic templates' for its part-of-speech n-gram analysis (Table 8) and files these three phrases under recurrent awkward words/phrases; the claim merges the two."
+  },
+  "38": {
+   "index": 38,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"writers perceived no significant qualitative differences\"",
+   "note": "Quote verbatim. Scores exact: 'GPT-4o and Claude 3.5-Sonnet perform slightly better on creative non-fiction instructions (average 5.2) compared to Llama3.1-70B (5.0)... All models show a slight decrease in performance for fictional instructions, with an average IWQS of 4.5.' The abstract independently states none of the three models 'outperform each other in terms of writing quality'."
+  },
+  "39": {
+   "index": 39,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"plot elements that are echoed across a number of generations\"",
+   "note": "Quote verbatim in the abstract. Counts exact: 'in 50 out of 100 generations, the policeman gives instructions to take the second left... In 16/100 of the generations, a bakery is mentioned as a landmark.' Cross-model and tail claims both supported: elements 'echoed frequently across generations and across different LLMs,' while human-written stories 'contain plot elements that land far in the tail -- or not at all -- of LLMs' output distribution.'"
+  },
+  "40": {
+   "index": 40,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "\"LLM-generated stories lead to 7–9 higher drop ratio than human-written ones\"",
+   "note": "No quote supplied. Figure confirmed in Section 5 (the page literally reads '7–9 higher drop ratio', the multiplication sign apparently lost in the HTML build). Mechanism supported: 'a high drop ratio indicates that the Sui Generis score decreases immediately after the peak at position i, without progressively unraveling the surprising plot,' associated with 'abrupt resolutions that leave key suspenseful plot elements unresolved.' Slight tension in the claim's gloss: the paper's drop measures a surprising element being dropped or hastily closed off, sometimes left unresolved, rather than strictly 'resolved'."
+  },
+  "41": {
+   "index": 41,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"strongly favoring positive outcomes\"",
+   "note": "Quote verbatim. All four figures exact: 'Riches to Rags (gradual fall) and Oedipus (fall then rise then fall), which represent 14.6% and 9.3% of human narratives, are almost missing in GPT-4 outputs (1.3% and 1.7%). On the other hand, Rags to Riches... scarcely found among human stories (4.4%), now disproportionately accounts for 13.0% of AI-generated stories.' Man-in-a-Hole also confirmed: GPT-4 writes it 'more than half of the time.'"
+  },
+  "42": {
+   "index": 42,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "\"a substantial advancement (i.e., early occurrence) of TP4 and TP5\"",
+   "note": "The quote 'higher levels of suspense' IS verbatim ('human-written stories consistently exhibit higher levels of suspense'), as is the widening gap ('the gap begins to enlarge as the plot progresses from the midpoint (0.5 relative position) towards the end'). Downgraded from VERBATIM because the claim's magnitude is unsourced: the strings '10%' and '15%' appear nowhere in the paper, and the earlier arrival of Major Setback (TP4) and Climax (TP5) is reported only qualitatively plus a violin plot (Figure 2) with no numeric positions. The '10–15% earlier' figure appears to be eyeballed from that figure."
+  },
+  "43": {
+   "index": 43,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"a fundamental inability to defer closure\"",
+   "note": "Quote verbatim in Section 6.1 (it is italicized in the HTML, which defeated my first search — re-checked and confirmed present). Every figure matches Table 1: New Yorker late-stage no-rate 0.607 versus Top-10 LLMs 0.215 ('nearly triple'), and Retain 52% versus 23% ('New Yorker stories retain 52% of local peaks on average, while LLMs retain only 23%'). Worth noting for precision: 0.607/0.215 are late-stage no-rate at >=80% of the story, which is exactly the 'near the close' framing the claim uses."
+  },
+  "44": {
+   "index": 44,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "\"On EQ-Bench, LLMs (81–84) comfortably outscore all human datasets (44–78)\"",
+   "note": "No quote supplied. Both numbers exact: the 81–84 band is stated in those words, and Table 1 gives New Yorker (professional) 78.71 against GPT-5.2 83.80, Claude Opus 4.6 82.88, Claude Sonnet 4.6 82.04. The predictability contrast is the paper's own framing: 'New Yorker leads on all four metrics while underperforming top LLMs on the EQ-Bench rubric,' and the abstract's opening that LLM judges 'rank zero-shot AI stories above New Yorker short stories.'"
   }
  }
 }

@@ -1,7 +1,7 @@
 {
  "name": "tolkien",
  "runId": "wf_9b91b240-c98",
- "exportedAt": "2026-09-05T22:44:52.324Z",
+ "exportedAt": "2026-09-05T22:49:55.533Z",
  "claims": [
   {
    "feature": "register modulation",
@@ -5571,6 +5571,96 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "this is light comedy and light comedy is not Mr. Tolkien's forte",
    "note": "Quote verbatim (page uses a curly apostrophe in 'Tolkien's'). The credible clause is verbatim too and sits in the same 1956 review, 'At the End of the Quest, Victory': 'the reader's sense of the credible is never violated.' One misattribution: the 'shy-making' remark is not from the 1956 review but from the 1954 Fellowship review reprinted above it on the same page, and it is singular — 'some readers may find the opening chapter a little shy-making' — not 'the opening chapters'."
+  },
+  "180": {
+   "index": 180,
+   "verdict": "NOT_FOUND",
+   "trueWording": "\"The names alone are a feast … [and are] best of all …\"",
+   "note": "theonering.com reprint is abridged: the quoted fragment IS verbatim, but the clause carrying the claim's substance is cut by an ellipsis. Raw-HTML grep of the page returns ZERO hits for Michel Delving, Boromir, Elendil, Gollum, loathsome or homely — the tri-partite sorting is simply not on this page. The full sentence does exist verbatim on the OTHER cited Lewis page (epistleofdude, claim 181's URL): \"The names alone are a feast, whether redolent of quiet countryside (Michel Delving, South Farthing), tall and kingly (Boromir, Faramir, Elendil), loathsome like Smeagol, who is also Gollum…\". Fix by re-pointing the citation there; note also Lewis sorts by connotation/flavour, and the claim's \"by sound\" is the writer's gloss."
+  },
+  "181": {
+   "index": 181,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"heroic romance, gorgeous, eloquent, and unashamed, has suddenly returned\"",
+   "note": "Quote appears word for word. Second half also supported: \"the first chapter, in which the author (taking a risk) writes almost in the manner of the earlier and far lighter book. With some who will find the main body of the book deeply moving, this chapter may not be a favourite.\" Minor overstatement: Lewis says the chapter \"may not be a favourite\", not that it risks losing readers. Page carries both the 1954 and 1955 reviews as claimed."
+  },
+  "182": {
+   "index": 182,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"the Black Speech … to sound harsh\"; 63% consonants vs 52%/55%",
+   "note": "\"to sound harsh\" is verbatim in the lead. Figures match exactly: \"The Black Speech is 63% consonants, compared to the Elvish samples' 52% and 55%\", and \"Black Speech contains far more voiced plosives (/b, d, g/) than Elvish\". Two fair-use caveats: the percentages are Podhorodecka's counts on THREE SAMPLES (one Sindarin, one Quenya, one Black Speech), not whole-corpus properties; and the page's word for the Elvish design goal is \"to sound pleasant\" (the \"beautiful\" wording is Tolkien's theory that certain sounds are \"inherently beautiful\")."
+  },
+  "183": {
+   "index": 183,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"which had a good sound for the meaning\"",
+   "note": "Wolfe's reprint of Tolkien's letter, dated on the page \"7th November 1966\", reads: \"Warg is simple. It is an old word for wolf … I adopted the word, which had a good sound for the meaning, as a name for this particular brand of demonic wolf\". The orc half is also verbatim: \"Orc I derived from Anglo-Saxon, a word meaning demon\". Both elements of the claim confirmed on the cited page."
+  },
+  "184": {
+   "index": 184,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"a story-book language that might have come out of Howard Pyle\"",
+   "note": "Verbatim apart from the claim capitalising the sentence-initial S of a mid-sentence fragment; page hyphenates \"story-book\" (the claim's prose spells it \"storybook\", the quote field does not). Both further elements verbatim in the same paragraph: \"such characterizations as Dr. Tolkien is able to contrive are perfectly stereotyped\" and \"Samwise, his dog-like servant, who talks lower-class and respectful\"."
+  },
+  "185": {
+   "index": 185,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"they are feeble and rather faceless\"",
+   "note": "Verbatim: \"But these bugaboos are not magnetic; they are feeble and rather faceless; one does not feel they make any real threat.\" The other two elements are verbatim too: \"What one misses in all these terrors is any trace of concrete reality\" and \"There is never much development in the episodes; you simply go on getting more of the same.\""
+  },
+  "186": {
+   "index": 186,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"the prose of the nursery-room. It is a lullaby\"",
+   "note": "Verbatim in the Arena Two reprint PDF (14 pages, pypdf extraction): \"The sort of prose most often identified with 'high' fantasy is the prose of the nursery-room. It is a lullaby; it is meant to soothe and console. It is mouth-music. It is frequently enjoyed not for its tensions but for its lack or tensions.\" All three elements (nursery-room, lullaby, mouth-music, lack of tension) confirmed; \"lack or tensions\" is a typo/OCR artefact for \"lack of tensions\" in this reprint."
+  },
+  "187": {
+   "index": 187,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"produce prose much better than that of his Oxford contemporaries\"",
+   "note": "Verbatim, and the concession structure is intact: \"…which is doubtless why his trilogy has so many confused moments when the tension flags completely. But he could, at his best, produce prose much better than that of his Oxford contemporaries who perhaps lacked his profound respect for middle-English poetry.\" Both halves of the claim sit in one sentence pair on page 12 of the reprint."
+  },
+  "188": {
+   "index": 188,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "\"shun[s] ordinary diction, he also wrenches syntax\"",
+   "note": "No quote was supplied with this claim, so VERIFIED_VERBATIM cannot apply, but the claim's own wording tracks the page almost exactly. Page: \"Catharine R. Stimpson, a scholar of English, wrote in 1969 that Tolkien not only 'shun[s] ordinary diction, he also wrenches syntax'\" (cited Stimpson 1969, p. 29), and \"was rejected by literary figures such as Burton Raffel, partly on stylistic grounds\" (cited Raffel 1968, pp. 218–246). Both dates and both attributions correct."
+  },
+  "189": {
+   "index": 189,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"tone was that of a kindly heart aggrieved by injuries undeserved\"",
+   "note": "Verbatim. Every element checks out on the page: Saruman \"said now with gentle question\"; \"Calling Theoden a friend … is a ploy to come off as kind\"; and the section heading \"Dialogue builds tension one sentence, or word, at a time\". Byline and date on the page are \"Chris La Porte June 23, 2020\", matching the attribution."
+  },
+  "190": {
+   "index": 190,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Long-winded journeys? Of course\"; \"gives a feel of Tolkien's writing\"",
+   "note": "Quote verbatim (sentence-initial capital in source). Substance holds: \"in doing the same thing but more slowly and with less direction it gives a feel of Tolkien's writing … the length of The One Ring feels like a part of its style\", and the mechanics contrast is explicit (\"Burning Wheel … handle skill advancement … more eloquently\"; \"the mechanics in Burning Wheel and Monsterhearts cover their respective areas better\"). Page identifies him: \"Sage LaTorra is a game designer and engineering manager at Google.\" One nuance: \"long-winded journeys and discourses\" comes from the COMBAT critique, where he lists them as things he associates with Tolkien while arguing long-winded FIGHTS are un-Tolkienish — not as praise of the game's rules."
+  },
+  "191": {
+   "index": 191,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"There is a melancholic undertone to Tolkien's world\"",
+   "note": "Verbatim, in the reviewer's summary of the guide: \"the theme The Long Defeat in a Fallen World highlights that the players can't defeat the great evil … There is a melancholic undertone to Tolkien's world.\" The memoir element is also on the page: \"the Hobbit is written as a memoir, and thus subjective.\" Byline/date confirmed as \"October 23, 2017 … rasmusnord01\". Mild strengthening: the reviewer says a Loremaster \"can tone it down, but it important for creating the right 'feel'\" — not a flat instruction to keep it."
+  },
+  "192": {
+   "index": 192,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Only use Professor Tolkien's actual words. Avoid secondary interpretations.\"",
+   "note": "Verbatim, and it is genuinely FIRST in the studio's list of \"a few key values\" (the other two: honour the spirit of Middle-earth as described by text, influences and letters; reinforce and never undercut the stakes of the published works). Salo element confirmed: \"We turned to famed linguist David Salo … For Return to Moria he invented an entire lexicon and grammar for Khuzdul. He also translated much of the game's spoken dialogue.\""
+  },
+  "193": {
+   "index": 193,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"we get 95,137 tokens\" … \"come in 11,532 different types\"",
+   "note": "All four figures verbatim: \"If we do that, we get 95,137 tokens in The Hobbit\"; \"The 95,137 tokens come in 11,532 different types. Just under half (5,576) of those types consist of just a sequence of letters … Another 291 types are hyphenated words like hobbit-hole or good-bye.\" Worth carrying forward: the post's own conclusion offers 95,137 / 95,390 / 95,643 depending on em-dash handling, so the claim's hedge \"about 95,137\" is the right register — it is the whitespace-split figure, not a settled one."
+  },
+  "194": {
+   "index": 194,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"the Ring's progress from a magical to a burdensome device\"",
+   "note": "Verbatim in the abstract on the article's landing page, along with the method: \"It uses techniques of keyness and collocation analysis to trace transformations…\", \"via the evolving lexical fields within which Tolkien operationalised it\", and the corpus scope \"across The Hobbit and The Lord of the Rings\". Citation metadata on the page matches: Livesey, Journal of Tolkien Research Vol. 18, Iss. 1, Article 4 (2023). Verified from the abstract only — the article PDF itself was not opened."
   }
  }
 }
