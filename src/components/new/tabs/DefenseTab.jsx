@@ -8,7 +8,7 @@ import {NarrativeNote} from '../NarrativeNote';
 import { criminalOpNote, deriveCriminalStructure, deriveDefenseReadiness, deriveSupportingCapabilities, deriveGuardAssessment, deriveDefenseVulnerabilities, DEFENSE_STRESS_STATUS } from '../../../domain/display/defenseDisplay.js';
 import { safetySeverityOf } from '../../../domain/display/safetySeverity.js';
 import { scoreBand, scoreColor } from '../../../domain/display/defenseScoreBands.js';
-import { defenseStateProse, defenseThreatProse } from '../../../domain/display/stateProse/defenseStateProse.js';
+import { defenseForcesProse, defenseStateProse, defenseThreatProse } from '../../../domain/display/stateProse/defenseStateProse.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
 import { truncateAtWord } from '../../../lib/text.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
@@ -25,6 +25,14 @@ const PUBLIC_ORDER_MOUNT = 'defense.publicOrder';
  * C3 law is about rungs per page-set, not draws, so one position may read several pools.
  */
 const THREAT_MOUNT = 'defense.threatAssessment';
+
+/**
+ * The armed-forces position. FIVE lenses of DS-DEF-5 at ONE position, the same shape as the
+ * threat rows above. ⚠ Its readings come from the STANDING roster, not from
+ * `defenseProfile.institutions` — the force cards below list what the town BUILT (a ruin is
+ * shown, correctly), while these sentences say what the town can field TODAY.
+ */
+const FORCES_MOUNT = 'defense.armedForces';
 
 export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false, playerView = false}) {
   const [expandedThreat, setExpandedThreat] = useState(null);
@@ -67,6 +75,16 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
     });
   const threatLines = ['beasts', 'invasion', 'internal', 'economic', 'disaster']
     .map((k) => drawnAtMount(THREAT_MOUNT, threatProse[k])?.sentence).filter(Boolean);
+  // DS-DEF-5, the armed-forces lenses. Same public gate as above, stated rather than
+  // defaulted; DS-DEF-5 frames no DM-editable field, so these are plain rungs too.
+  const forcesProse = publicDossier
+    ? Object.freeze({ fortification: null, force: null, contracted: null, charter: null, arcane: null })
+    : defenseForcesProse(r, {
+      seed: String(r?._seed ?? r?.id ?? ''),
+      audience: playerView ? 'player' : 'dm',
+    });
+  const forceLines = ['fortification', 'force', 'contracted', 'charter', 'arcane']
+    .map((k) => drawnAtMount(FORCES_MOUNT, forcesProse[k])?.sentence).filter(Boolean);
   const stresses = (Array.isArray(r.stress)?r.stress:r.stress?[r.stress]:[]).filter(Boolean);
   const stressTypes = stresses.map(s=>s?.type).filter(Boolean);
   const crimCapture = r.powerStructure?.criminalCaptureState || 'none';
@@ -346,6 +364,13 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
         </Button>
 
         {showForces&&<div>
+          {/* DS-DEF-5: what the town can actually field, in its own voice. Five lenses of
+              one block at one position; the force cards below are untouched. */}
+          {forceLines.length>0&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #4a3a1a',padding:'9px 13px',marginBottom:10}}>
+            {forceLines.map((line,i)=>(
+              <p key={i} style={{fontSize:i===0?FS.sm:FS.xs,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.55,margin:i===0?0:'5px 0 0',fontStyle:'italic'}}>{line}</p>
+            ))}
+          </div>}
           {walls.length>0&&<div style={{marginBottom:10}}>
             <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch['#4A3A1A'],textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:6}}>Fortifications</div>
             {walls.map((w,i)=><ForceCard key={i} inst={w} accent="#4a3a1a"/>)}

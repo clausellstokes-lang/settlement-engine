@@ -8,6 +8,8 @@
  *             `standingDefenseForces(settlement).{walls,garrison,militia}.present` +
  *             `defenseProfile.scores.economic` + `config.monsterThreat` +
  *             `economicState.compound.inst{...}`
+ *   DS-DEF-5  Defense › Armed forces & fortifications — the five force lenses:
+ *             `standingDefenseForces(settlement)` × `config.{monsterThreat, magicExists}`
  *
  * ── WHY THIS BLOCK ALONE, AND WHY DS-DEF-1 IS NOT HERE ───────────────────────────────
  *
@@ -212,6 +214,30 @@ function civicFlag(v) {
 }
 
 /**
+ * ⭐ THE ONE THREAT-TIER READ THIS DESK PERFORMS — a MEASUREMENT, never a default.
+ *
+ * ⚠ `normalizeMonsterThreat(undefined) === 'frontier'`: the normaliser's first line is
+ * `raw || 'frontier'`, so an ABSENT tier silently becomes the frontier. Measured, not
+ * assumed. Routing an absent value through it would let the desk describe the country of a
+ * settlement whose country nobody ever measured — a default wearing a reading's clothes, and
+ * the second face of the looseness this desk already raises about `'civilized'` above.
+ *
+ * So the raw value must be PRESENT before it is normalised, and `null` is returned
+ * otherwise. This is a robustness property rather than a change to any shipped world:
+ * `steps/resolveConfig.js` writes `monsterThreat: threat` into every effective config it
+ * builds, so a GENERATED settlement always carries a tier and always reaches a family. An
+ * absent tier means a hand-built fixture or a malformed import, and about those the desk
+ * says nothing rather than something confident.
+ *
+ * @param {unknown} monsterThreat @returns {string|null} the CORPUS family word, or null
+ */
+export function measuredMonsterFamily(monsterThreat) {
+  const raw = text(monsterThreat);
+  if (!raw) return null;
+  return MONSTER_FAMILY_OF[text(normalizeMonsterThreat(raw))] || null;
+}
+
+/**
  * DS-DEF-2 row 1 — BEASTS & MONSTERS: the threat tier against a perimeter and a force.
  *
  * Each tier has its OWN branches rather than a clean cross-product, because the corpus
@@ -221,7 +247,7 @@ function civicFlag(v) {
  * @returns {string|null}
  */
 export function beastsRowPoolKey(monsterThreat, perimeter, force) {
-  const family = MONSTER_FAMILY_OF[text(normalizeMonsterThreat(text(monsterThreat)))];
+  const family = measuredMonsterFamily(monsterThreat);
   if (!family) return null;
   /** @param {string} tail */
   const key = (tail) => `Beasts & Monsters: ${family}, ${tail}`;
@@ -363,6 +389,131 @@ export function defenseThreatProse(settlement, options = {}) {
  * @type {ReadonlyArray<string>}
  */
 export const RECOGNISED_MONSTER_TIERS = Object.freeze(Object.keys(MONSTER_FAMILY_OF));
+
+/**
+ * ── DS-DEF-5 · ARMED FORCES & FORTIFICATIONS — five lenses over the STANDING roster ──
+ *
+ * The block whose title names `defenseProfile.institutions{...}`, and which this desk
+ * deliberately does NOT read there. Those buckets are the generation-time snapshot; a
+ * paragraph about what a town can field must be about what still stands, so every lens
+ * below reads `standingDefenseForces`. See defenseInstitutionBuckets.js for the
+ * measurement, and DS-DEF-2 above for the defect that made the distinction visible.
+ *
+ * ⚠ Does the country WARRANT a chartered specialist hall? Keyed on the canonical producer
+ * token through `normalizeMonsterThreat`, never on a display word — the label-trap rule,
+ * fourth instance. `frontier` and `plagued` are the two tiers whose countries produce the
+ * work a garrison is the wrong instrument for; a settled heartland does not warrant one, so
+ * the ABSENT pool stays silent there rather than scolding a quiet town for a hall it has no
+ * use for. An un-normalised tier warrants nothing and renders silence.
+ * @param {unknown} monsterThreat @returns {boolean}
+ */
+export function countryWarrantsCharter(monsterThreat) {
+  const family = measuredMonsterFamily(monsterThreat);
+  return family === 'frontier' || family === 'plagued';
+}
+
+/**
+ * DS-DEF-5 lens 1 — THE PERIMETER. Total: a town either controls its entry points or it
+ * does not, and both readings are measurements.
+ * @param {boolean} walls @returns {string}
+ */
+export function fortificationPoolKey(walls) {
+  return walls ? 'walls PRESENT' : 'walls ABSENT';
+}
+
+/**
+ * DS-DEF-5 lens 2 — WHO HOLDS IT. A standing garrison outranks a militia outranks a watch,
+ * because the corpus wrote each as a different kind of town and a town with a garrison is
+ * described by its garrison.
+ *
+ * ⚠ `NO organized force at all` is NOT "no garrison". Its prose says "no command, no
+ * training and no way to coordinate a response", which is false of a town that retains a
+ * mercenary company or a charter hall — those are commands, merely bought ones. So it fires
+ * only when NOTHING stands, which is the same reading `DefenseTab`'s own `hasAnyForce`
+ * already makes on the screen beside it; a town whose only force is contracted is described
+ * by lens 3 instead of being called defenceless.
+ * @param {Readonly<Record<string, {present: boolean}>>} forces
+ * @returns {string|null}
+ */
+export function forceCorePoolKey(forces) {
+  if (forces.garrison.present) return 'garrison PRESENT';
+  if (forces.militia.present) return 'militia PRESENT (no garrison)';
+  if (forces.watch.present) return 'watch PRESENT';
+  const anything = forces.mercenary.present || forces.charter.present || forces.magicDef.present;
+  return anything ? null : 'NO organized force at all';
+}
+
+/**
+ * DS-DEF-5 lens 3 — CONTRACTED FORCE. Present only. The corpus wrote no "hires nobody"
+ * pool, and inventing silence-as-absence prose here would be the desk improvising past its
+ * own corpus.
+ * @param {Readonly<Record<string, {present: boolean}>>} forces @returns {string|null}
+ */
+export function contractedForcePoolKey(forces) {
+  return forces.mercenary.present ? 'mercenary / contracted forces PRESENT' : null;
+}
+
+/**
+ * DS-DEF-5 lens 4 — SPECIALIST RESPONSE. Present, or ABSENT WHERE THE COUNTRY WARRANTS
+ * ONE. The second half is why this lens takes the threat tier: "retains no specialists" is
+ * only a finding about a town the country actually presses.
+ * @param {Readonly<Record<string, {present: boolean}>>} forces @param {unknown} monsterThreat
+ * @returns {string|null}
+ */
+export function charterPoolKey(forces, monsterThreat) {
+  if (forces.charter.present) return 'charter hall PRESENT (specialist monster response)';
+  return countryWarrantsCharter(monsterThreat)
+    ? 'charter hall ABSENT where the country warrants one' : null;
+}
+
+/**
+ * DS-DEF-5 lens 5 — ARCANE PROVISION. Total over a world where magic exists, and SILENT
+ * where it does not.
+ *
+ * ⭐ That gate is a measurement, not a hedge. `config.magicExists === false` is a world
+ * setting the generator already reads (`defenseGenerator`'s readiness call), and in such a
+ * world "what arrives unseen here goes undetected and therefore unanswered" is not a
+ * shortfall — it is a category that does not exist. Printing it would be the machine
+ * improvising a lack out of a setting.
+ * @param {Readonly<Record<string, {present: boolean}>>} forces @param {unknown} magicExists
+ * @returns {string|null}
+ */
+export function arcaneDefensePoolKey(forces, magicExists) {
+  if (magicExists === false) return null;
+  return forces.magicDef.present ? 'arcane defense PRESENT' : 'arcane defense ABSENT';
+}
+
+/**
+ * THE ARMED-FORCES DESK — DS-DEF-5's five lenses, each its own rung at ONE position.
+ *
+ * DS-DEF-5 frames no DM-editable field, so these are plain rungs rather than projections,
+ * on the same reasoning DS-DEF-2 states: a projection where no DM field exists is ceremony,
+ * and it would tell a later reader that a field is at risk when none is.
+ *
+ * @param {{name?: string, institutions?: unknown,
+ *   config?: {monsterThreat?: unknown, magicExists?: unknown}|null}|null|undefined} settlement
+ * @param {{seed?: string, audience?: string}} [options]
+ * @returns {Readonly<{fortification: object|null, force: object|null, contracted: object|null,
+ *   charter: object|null, arcane: object|null}>}
+ */
+export function defenseForcesProse(settlement, options = {}) {
+  const forces = standingDefenseForces(settlement);
+  const slots = { settlement: properFill(text(settlement?.name)) };
+  const config = settlement?.config || {};
+
+  /** @param {string|null} poolKey */
+  const rung = (poolKey) => (poolKey
+    ? legibilityRung('', readStateProse(CORPUS, 'DS-DEF-5', poolKey, { ...options, slots }), [])
+    : null);
+
+  return Object.freeze({
+    fortification: rung(fortificationPoolKey(forces.walls.present)),
+    force: rung(forceCorePoolKey(forces)),
+    contracted: rung(contractedForcePoolKey(forces)),
+    charter: rung(charterPoolKey(forces, config.monsterThreat)),
+    arcane: rung(arcaneDefensePoolKey(forces, config.magicExists)),
+  });
+}
 
 /**
  * THE DESK. Returns the public-order banner's two rungs, each already projected BESIDE the
