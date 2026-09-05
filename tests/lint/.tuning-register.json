@@ -128,6 +128,23 @@
         "WIND_DOWN_FRACTION"
       ],
       "note": "the condition desk's wind-down cut, one module-private scalar indexed by roster."
+    },
+    {
+      "kind": "tables",
+      "file": "src/domain/display/stateProse/economyStateProse.js",
+      "exports": [
+        "SOLE_EARNER_FROM",
+        "LEADER_FROM"
+      ],
+      "note": "the economy desk's two income-concentration cuts. Module-private scalars the _TUNING glob cannot see, indexed by roster exactly as faithChannelBindings.js#CAUSAL_SWING is. Deliberately NOT exported: a register row is never a reason to widen a module's public surface. HIGH_RUNG_FROM and LOW_RUNG_TO in the same file are equally reader-facing and are deliberately NOT here — they sit at the figure the inventory already banked, so registering them is a TIGHTENING act rather than this lane's blocker cure. Owed, not forgotten."
+    },
+    {
+      "kind": "tables",
+      "file": "src/domain/display/stateProse/generalStateProse.js",
+      "exports": [
+        "DEFICIT_FRACTION_FROM"
+      ],
+      "note": "the general desk's food-deficit cut, one module-private scalar indexed by roster. It is the only row in this register whose value MIRRORS a second, unregistered literal in the producer — see the row's own note."
     }
   ],
   "moduleSide": [
@@ -2088,6 +2105,36 @@
       },
       "band": null,
       "note": "ENC-4 (ROAD B): the Herald presentation of a recorded meeting — severity (the notable band's weight) and score; registered by the Fable chair at the §899 composed landing when the walker convicted the bare decimal in a new file. Candidate, owner-unsigned, like its stage sibling."
+    },
+    "src/domain/display/stateProse/economyStateProse.js#SOLE_EARNER_FROM": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "value": "share"
+      },
+      "band": null,
+      "note": "DS-ECO-12's sole-earner cut. PROPOSED = 50, which is the value shipping today; this row moves nothing. EVIDENCE: incomeMixPoolKey renders 'INCOME MIX: one source carries the town' when the LARGEST single `percentage` in the income roster is >= SOLE_EARNER_FROM, and `percentage` is a 0..100 PERCENT figure — src/pdf/lib/viewModelBodySlices.js#normalizeIncomeSources documents \"percentage = 0..100\", the economy generators write whole percents (65, 45, 35, 30, 28, 25, 22, 20, 18), and src/foundry/journalPages.js renders the same field with a literal '%'. ⚠ FOR THE SITTING, THE SHARPEST THING ON THIS ROW IS THE UNIT WORD, NOT THE VALUE: `share` is used elsewhere in this register on a 0..1 scale — the cap__share role groups an elite-bleed cap of 0.05 with an institution-tolerance cap of 0.5 — so this row carries a 0..100 scale under a word whose only precedent is 0..1. The fourteen-word vocabulary is CLOSED but nowhere DEFINED, and it offers no word that distinguishes the two scales (`fraction01` is wrong here, `score100` names the scale but calls a share a score). The collision is RECORDED rather than resolved: splitting or defining a finite vocabulary is not a lane's act. The source's docblock marks the cut a vetoable JUDGMENT and records that the DS-ECO-12 annex says only \"one source carries the town\" and leaves the number to the implementer, so no canonical value was overridden. READER-FACING: this dial picks which of three sentences a paying customer reads about a town's economy. ⛔ AND THE BOUNDARY IS MEASURED, NOT REASONED — THIS IS THE SHARPEST THING ON THIS DESK: because the cut is 50 and the comparison is `>=`, TWO EVEN SOURCES AT 50.0 EACH RENDER 'one source carries the town'. That is the monopoly sentence, printed for a perfectly even two-way split, and the pool's own C1 variant says the leader is \"well past half\" where 50.0 is exactly half. Driven live through incomeMixPoolKey at this commit, not inferred from the source. DRAFT — registering is not signing."
+    },
+    "src/domain/display/stateProse/economyStateProse.js#LEADER_FROM": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "value": "share"
+      },
+      "band": null,
+      "note": "DS-ECO-12's leader cut — the lower end of the same ladder SOLE_EARNER_FROM tops. PROPOSED = 20, the value shipping today. EVIDENCE: the same largest-`percentage` reading in incomeMixPoolKey; a leader at or above LEADER_FROM but below SOLE_EARNER_FROM renders 'two or three sources between them', and anything below it renders 'a broad spread, no leader'. Same 0..100 percent population as SOLE_EARNER_FROM, so the same `share` scale caveat on that row applies here unchanged. ⚠ FOR THE SITTING: the cut is read off the LEADER ALONE and never off the roster's length, and the consequence is MEASURED rather than argued — driven live through incomeMixPoolKey, four even sources at 25.0 each and five at 20.0 each BOTH render \"two or three sources between them\", and 'a broad spread, no leader' cannot fire at all until SIX even sources at 16.7 each. The pool's words promise a count the cut never reads. Whether that is intended or is the cut standing in for a count the pool's own words promise is the owner's to say; this lane neither moved the value nor bound the two cuts into a role. They are deliberately NOT roled: a role asserts ONE value, and these are two ends of one ladder by design. DRAFT — registering is not signing."
+    },
+    "src/domain/display/stateProse/generalStateProse.js#DEFICIT_FRACTION_FROM": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "value": "fraction01"
+      },
+      "band": null,
+      "note": "DS-GEN-6's food-deficit cut. PROPOSED = 0.05, the value shipping today; giving it a name moved nothing. EVIDENCE: `gap / need >= DEFICIT_FRACTION_FROM` in foodDeficitDimension, where the gap is the larger of a pre-import rawDeficit and a post-import residual and `need` is daily need — a ratio of two food quantities, dimensionless and 0..1, so fraction01. ⭐ THIS VALUE IS NOT THIS DESK'S ALONE, AND THE SITTING SHOULD KNOW IT BEFORE SIGNING: it MIRRORS the producer's own inline cut `gap / need >= 0.05` in generateSettlementReason (src/generators/narrativeGenerator.js), which computes hasFoodDeficit and persists nothing, so the desk has no canonical field to read and must re-derive. tests/domain/generalStateProseDesk.test.js pins the PRODUCER's literal through mustExtract and drives both sides of the boundary (4/100 reads 'no deficit', 5/100 reads 'deficit'), so the two cannot drift in silence — but they remain TWO literals in two trees, and only this one now has a register row. Signing this row alone would sign half of one value. The honest signature covers both sites, or the producer's literal earns a name and a row of its own first. DRAFT — registering is not signing."
     }
   },
   "roles": {
