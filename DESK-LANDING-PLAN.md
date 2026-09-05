@@ -38,6 +38,7 @@ NEW schema rung (17); the desk consist's OSR baseline is then re-frozen at the c
 - OSR-SCHEMA17's ruling: retire the ninth exemption (declared 9 → 8 with banked 8) — `rulings/RULING-OSR-SCHEMA17-DECISIONS.md`; the `_doc` cure rides step 3e's `--write`.
 - EXPECTED_VOICE: `chance_meeting_exposed: null` (ENC-4b's kind; same decision as §899's car 5).
 - A residue row for the chair/owner: the chance-meeting approach direction ties on `codepoint(target.nid)` — town-name spelling decides who offered on a tie (ENC-4c measured 89/89); a seeded tie-break is generation-side.
+- `{founder}`: the annex re-declared to the producer's phrase class (`rulings/RULING-FOUNDER-SLOT.md`); the name producer is an OWNER row.
 - SEAT-78's coupling row: deploymentReturn.js → irregularForce.js (INTERIOR→WAR) in the couplingInclusion registry.
 - ENC-4b car 4's pantheon conflict: resolve to 115/381 by hand.
 - The OWED vitest of OSR-SCHEMA17, ENC-4b, SEAT-78 (and whatever ENC-4c/HORIZON-B2/DOCKET-2 leave owed): run the WHOLE tests/domain + tests/lint + tests/copy + tests/property at the composed tip, not the named suites.
