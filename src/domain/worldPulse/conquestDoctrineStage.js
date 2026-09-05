@@ -31,6 +31,7 @@
  * stage reads and returns; it mints no ledger and stamps no order.
  */
 
+import { clamp } from '../../kernel/math.js';
 import {
   conquestMarchAdvised,
   readConquestFeasibility,
@@ -122,11 +123,6 @@ function asObject(value) {
   return value && typeof value === 'object' && !Array.isArray(value)
     ? /** @type {Record<string, unknown>} */ (value)
     : {};
-}
-
-/** @param {number} value @param {number} lo @param {number} hi @returns {number} */
-function clamp(value, lo, hi) {
-  return value < lo ? lo : value > hi ? hi : value;
 }
 
 /**
