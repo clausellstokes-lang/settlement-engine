@@ -1,7 +1,7 @@
 {
  "name": "ai",
  "runId": "wf_60f0a1e1-39c",
- "exportedAt": "2026-09-05T22:49:55.544Z",
+ "exportedAt": "2026-09-05T22:54:56.501Z",
  "claims": [
   {
    "feature": "theme over-explanation",
@@ -3197,6 +3197,96 @@
    "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "\"On EQ-Bench, LLMs (81–84) comfortably outscore all human datasets (44–78)\"",
    "note": "No quote supplied. Both numbers exact: the 81–84 band is stated in those words, and Table 1 gives New Yorker (professional) 78.71 against GPT-5.2 83.80, Claude Opus 4.6 82.88, Claude Sonnet 4.6 82.04. The predictability contrast is the paper's own framing: 'New Yorker leads on all four metrics while underperforming top LLMs on the EQ-Bench rubric,' and the abstract's opening that LLM judges 'rank zero-shot AI stories above New Yorker short stories.'"
+  },
+  "45": {
+   "index": 45,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "trite, repetitive, overly verbose, and cliché-ridden",
+   "note": "arXiv 2602.16162 (Peiqi Sui, McGill), 'LLMs Exhibit Significantly Lower Uncertainty in Creative Writing Than Professional Writers'. Quote appears verbatim in the Introduction. Every figure checks out in the raw HTML: 'controlled information-theoretic analysis of 28 LLMs'; 'median NLL ratio ranges from 2.03 to 3.9, indicating that human-written stories are on average 2–4x more \"surprising\" ... perplexity ratios amplify this gap to 2.76–8.82x'; 'instruction-tuned and reasoning models exacerbate this trend compared to their base counterparts'; 'the ΔPMI gap is 25–30% wider for creative writing (−2.15) compared to essays (−1.71) and news (−1.73)'."
+  },
+  "46": {
+   "index": 46,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "high-intensity emotions give way to neutrality",
+   "note": "arXiv 2605.27878, 'Narrative Flattening', Zehan Li, Yutong Zhu, Siyang Wu, Honglin Bao, James A. Evans. Quote is word-for-word in the abstract; only difference is sentence-internal lowercase 'high'. Abstract confirms the four OLMo 32B checkpoints (Base, SFT, DPO, RLVR), 'thematic transitions become more uniform ... stylistic diversity across stories shrinks', and 'professional literary fiction is compressed most'."
+  },
+  "47": {
+   "index": 47,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "less conflict-driven social dynamics",
+   "note": "arXiv 2510.18932v1, Nonaka & Perry. Quote verbatim. Table 1 in the raw HTML confirms density 0.338–0.470 vs human 0.182, clustering 0.623–0.766 vs 0.485, human mean edge weight −0.061 ('the only negative average edge weight'). ONE CORRECTION: the LLM edge-weight range is 0.235–0.659 (GPT-4o Mini = 0.235), not 0.236–0.659. Human corpus is confirmed science fiction (Project Gutenberg, genre-filtered, n=168). 'Far less variability' is supported by the paper's framing — 'LLMs have connectivity measure scores that cluster closely, while human-written stories are dispersed' — though per-metric SDs are mixed (human density SD 0.056 is actually lower than every model's)."
+  },
+  "48": {
+   "index": 48,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "GPT is prone to wrapping up each story with a moral lesson",
+   "note": "arXiv 2310.12902, Nina Beguš, 'Experimental narratives'. The nominalized quote ('proneness to wrapping up...') does NOT appear; 'proneness' occurs nowhere in the document. Substance is fully supported: 'Stories are taken away from the current time and space, starting with \"Once upon a time.\" They are set in a faraway, made-up futuristic place, bare of any cultural aspects'; 'Hoary clichés and meaningless platitudes ... occur in conclusions as a rule'; and on the human side, §3.5.2: 'Stories do not always begin with a simple introduction of settings and characters (as in generated texts) but open with a narrative tension of the challenge at stake.'"
+  },
+  "49": {
+   "index": 49,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "high-starting, low-ending",
+   "note": "ACL Findings 2025 paper 1114, Wang, Gao, Hu & Wan, 'Towards A \"Novel\" Benchmark'. Abstract: 'Human evaluation reveals notable disparities between LLM-generated and human-authored fictions, particularly the \"high-starting, low-ending\" pattern in LLM outputs.' Exact match, correct authors and venue."
+  },
+  "50": {
+   "index": 50,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "fail to meaningfully address this homogeneity",
+   "note": "arXiv 2606.17350, Thennal DK & Hans Ole Hatzel. Abstract carries the quote verbatim and confirms both halves of the claim: 'narrative similarity judgments across 10 representative LLMs' and 'LLM-generated narratives are consistently more similar to each other than human-written stories are', with 'negative prompting and temperature scaling' named as the failed mitigations."
+  },
+  "51": {
+   "index": 51,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "models consistently prioritize Style over narrative content elements",
+   "note": "arXiv 2510.02025, Jung, Choi, Chae & Jung, 'Style over Story'. Quote is a verbatim substring of the abstract sentence, which continues '...like Event, Character, and Setting.' Abstract confirms the constraint-selection design (200 narratology-grounded constraints) and 'six LLMs'."
+  },
+  "52": {
+   "index": 52,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "roughly twice the human baseline",
+   "note": "arXiv 2609.02482v1, Rohrbacher, Nieth, Salin, Eskofier & Mahlberg. Verbatim: 'Whereas human-authored fiction shows normalized frequencies of around 0.19 in both languages, all four models exceed this level, with GPT 4.1 reaching around 0.47 in English and 0.38 in German, roughly twice the human baseline.' CAVEAT on the second half: the action-space deficit is not universal — 'GPT 4.1 is the only model that remains close to or above the human baseline'; Gemma 3, Mistral 3.2 and LlaMA 3.3 fall below it. The abstract's own framing does support the substitution claim: humans 'predominantly employ action space ... whereas LLMs systematically overproduce perceived space, emphasizing atmosphere and affect.'"
+  },
+  "53": {
+   "index": 53,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "most common in factual and temporal dimensions",
+   "note": "arXiv 2603.05890, 'Lost in Stories', Junjie Li, Xinrui Guo, Yuhao Wu, Roy Ka-Wei Lee, Hongzhi Li, Yutao Xie. Abstract: errors 'are most common in factual and temporal dimensions, tend to appear around the middle of narratives, occur in text segments with higher token-level entropy, and certain error types tend to co-occur.' All three concentrations verified; the abstract describes no human baseline, consistent with the claim's parenthetical."
+  },
+  "54": {
+   "index": 54,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "poor understanding of story suspense",
+   "note": "arXiv 2402.17119, Xie & Riedl. Verbatim: 'General-purpose generative models such as ChatGPT exhibit a poor understanding of story suspense.' The human pairwise-comparison table gives 'Ours v.s. Baseline' on Suspense as Win 84.9%, Lose 11.8%, Tie 3.3% — so the baseline loses 84.9% of the time, as claimed. The method is planning grounded in Gerrig & Bernardo's psychological theory of suspense, so 'psychologically planned' is fair."
+  },
+  "55": {
+   "index": 55,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "do not process suspense in the same way as human readers",
+   "note": "arXiv 2508.15794, Matlin, Zhang, Barroso Loza, Popescu, Isbell, Chakraborty & Riedl. Quote verbatim in the abstract's final sentence. Abstract also confirms 'We replicate four seminal psychological studies', that LMs 'can distinguish whether a text is intended to induce suspense', but 'cannot accurately estimate the relative amount of suspense ... nor ... the rise and fall of suspense across multiple text segments.'"
+  },
+  "56": {
+   "index": 56,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "900 times more frequent in our corpus",
+   "note": "arXiv 2605.26492, Hamilton & Mimno. Every figure verified in the raw HTML: '20,000 total stories from four current models'; 'Elias is in 26.5% of all stories, Mara in 16.7%, and Elara in 13.1%'; 'lighthouse with a frequency of 51.2%'; '88.3% of these stories contain at least one of 11 tokens'; and 'Elias is 900 times more frequent in our corpus' (comparison corpus is CONLIT, 2,700 contemporary novels)."
+  },
+  "57": {
+   "index": 57,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "co-occurrence rates far exceed chance",
+   "note": "arXiv 2606.02184, Brzozowski & Chung, 'The Ghost Couple'. Abstract verbatim: 'pairs and trios whose co-occurrence rates far exceed chance and are consistent across independent generations. These priors are model-family-specific (Claude: Elena Vasquez + Marcus Chen + Amara Okafor; Gemini: Aris Thorne + Lena Petrova; GPT: Elara Voss with no fixed partner).' Claim's attributions are exact; it omits Amara Okafor from the Claude trio, which understates but does not misstate."
+  },
+  "58": {
+   "index": 58,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "strong bias towards overly literal, explicit communication",
+   "note": "arXiv 2604.05273, Ahuja, Li & Lampinen, 'Beneath the Surface'. Abstract verbatim, and the 60% figure is in the same sentence: 'even the best performing models generate literal clues 60% of times in one of our environments -- Visual Allusions.' Minor precision point: the 60% is specific to the Visual Allusions environment (a Dixit-inspired game), not the suite as a whole."
+  },
+  "59": {
+   "index": 59,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "GPT-4 receives predominantly scores of 0/1, while Pron receives mostly 2/3",
+   "note": "arXiv 2407.01119v2, Marco, Gonzalo, Mateo & Ramón del Castillo. Quote verbatim ('In all dimensions, GPT-4 receives predominantly scores of 0/1, while Pron receives mostly 2/3.'). Verified: 'We recruited six literary experts'; the task is 600-word synopses of imaginary movie titles, so 'synopses' is correct; 'Pron's creativity score is particularly high (average of 1.94)'; 'GPT-4 scores are particularly low in style originality (0.36 in Spanish and 0.63 in English), where Pron gets 1.70'. CAVEAT: the two GPT-4 creativity figures (0.97 English, 0.88 Spanish) do NOT appear anywhere in the page text — the text says only that Pron's 1.94 'roughly doubles GPT-4 creativity scores in English and Spanish'. Those values presumably sit inside Figure 1, which is an image and not machine-readable, so they are consistent with but not confirmable from the page."
   }
  }
 }

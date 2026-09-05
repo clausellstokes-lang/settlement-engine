@@ -1,7 +1,7 @@
 {
  "name": "tolkien",
  "runId": "wf_9b91b240-c98",
- "exportedAt": "2026-09-05T22:49:55.533Z",
+ "exportedAt": "2026-09-05T22:54:56.494Z",
  "claims": [
   {
    "feature": "register modulation",
@@ -5661,6 +5661,96 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "\"the Ring's progress from a magical to a burdensome device\"",
    "note": "Verbatim in the abstract on the article's landing page, along with the method: \"It uses techniques of keyness and collocation analysis to trace transformations…\", \"via the evolving lexical fields within which Tolkien operationalised it\", and the corpus scope \"across The Hobbit and The Lord of the Rings\". Citation metadata on the page matches: Livesey, Journal of Tolkien Research Vol. 18, Iss. 1, Article 4 (2023). Verified from the abstract only — the article PDF itself was not opened."
+  },
+  "195": {
+   "index": 195,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "sympathetic account (Le Guin 2001); \"stress and release pattern\" cited Drout 2004",
+   "note": "Raw wikitext: \"In 2001, the fantasy novelist Ursula Le Guin wrote a sympathetic account of Tolkien's prose style,{{sfn|Le Guin|2001}} arguing as Michael Drout writes that 'the craftsmanship ... a repeated stress and release pattern'.{{sfn|Drout|2004|pp=137-163}}\" The attribution split the claim describes is exactly right. Minor caveat on the word 'only': Le Guin 2001 is also cited twice elsewhere in the article (Tom Bombadil's metrical speech; the post-1990s favourable turn), so she is not credited solely with the sympathetic account article-wide — but the stress-and-release formulation is indeed footnoted to Drout, not her. No quote field supplied, hence SUBSTANCE not VERBATIM."
+  },
+  "196": {
+   "index": 196,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"a real archaic English is far more terse than modern\"",
+   "note": "Exact string present (fetched via LessWrong GraphQL API; plain curl returned a 59-byte stub). Full context: \"a real archaic English is far more terse than modern; also many of things said could not be said in our slack and often frivolous idiom\" — so the second half of the claim is verbatim-supported too. FLAG: the word 'tushery' does NOT appear anywhere on this page, nor does 'Brogan' or a letter number; the page introduces it only as \"a letter to a reader critiquing the archaic English spoken by the Riders of Rohan\". The tushery framing is real but belongs to the theonering.net source (claim 197's URL), which has \"Tolkien addressed 'tushery' as the 'bogus medieval stuff with … expletives, such as tush, pish, zounds, marry'\". Quote itself is clean."
+  },
+  "197": {
+   "index": 197,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"moderated or watered archaism\" vs \"a more authentically antique diction\"",
+   "note": "Exact phrase present on the theonering.net page: \"First pointing out that it is actually 'moderated or watered archaism' compared to a more authentically antique diction ('Nay, thou n'wost not thine own skill in healing,')\", in the context of Théoden's exchange with Gandalf. FLAG: 'Middle English' does not appear on the page — the contrast drawn is with 'a more authentically antique diction', not named as Middle English. Second flag: the page is an essay by Ostadan quoting Tolkien's letter directly; the claim's source line ('as quoted via Le Guin') misdescribes the chain, though the URL does carry the quote."
+  },
+  "198": {
+   "index": 198,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"an insincerity of thought, a disunion of word and meaning\"",
+   "note": "Exact string present on LessWrong. Immediately followed by \"For a King who spoke in a modern style would not really think in such terms at all\", which verbatim supports the claim's second half (register as cognition). Preceding context confirms the Théoden 'thus shall I sleep better' example. Fully supported, both halves."
+  },
+  "199": {
+   "index": 199,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Shake yourself out of this parochialism of time!\"",
+   "note": "Exact string present on the nothinghuman.substack.com page (capital S and trailing exclamation in source; wording otherwise identical). The delusion half is also verbatim-supported: \"the extraordinary 20th.C. delusion that its usages per se and simply as 'contemporary' ... have some peculiar validity, above those of all other times\". Both elements of the claim carried by the cited URL."
+  },
+  "200": {
+   "index": 200,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "\"to hear 'argent' as a sound only in a poetic context\"",
+   "note": "The claim's quote as written is NOT a contiguous span. Source reads: \"It is better, I think, at any rate to begin with, to hear 'argent' as a sound only in a poetic context, than to think 'it only means silver'.\" The claim elides 'I think, at any rate to begin with,' between 'better' and 'to hear', so it fails word-for-word. Substance is fully sound, including the 'does not simply mean silver' half: \"They think argent 'means' silver. But it does not.\" Downgraded on contiguity only."
+  },
+  "201": {
+   "index": 201,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"it is the untold stories that are most moving\"",
+   "note": "Exact string present: \"A story must be told or there'll be no story, yet it is the untold stories that are most moving.\" The vanished-past half is also on the page verbatim — \"the heart-racking sense of the vanished past (best expressed by Gandalf's words about the Palantir)\" — though note the source presents these as two distinct emotions in one passage rather than one fused claim; the claim's conjunction of them is a fair reading of the surrounding text."
+  },
+  "202": {
+   "index": 202,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"give me a name and it produces a story, not the other way about\"",
+   "note": "Exact string present at tolkienlibrary.com: \"I always in writing start with a name; give me a name and it produces a story, not the other way about normally.\" Both halves of the claim (always begins from a name; name generates story, not the reverse) are verbatim-supported. Page is headed as the 1964 BBC radio interview transcript; the interviewer is spelled 'D. Gerrolt' there, not Gueroult — a spelling variance across transcripts, not a substantive discrepancy."
+  },
+  "203": {
+   "index": 203,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Hobbits are just rustic English people, made small in size\"",
+   "note": "Exact string present on the uv.es transcript. FLAG on the claim's trailing inference: the source gives the reason for the small size as imagination, not speech — \"made small in size because it reflects (in general) the small reach of their imagination - not the small reach of their courage or latent power.\" Nothing on this page connects rusticity to a plain modern speech register; that clause is the claimant's own gloss, not Tolkien's. The quoted definition itself is exact."
+  },
+  "204": {
+   "index": 204,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"you've got these people on your hands you've got to make them different\"",
+   "note": "Exact string present: \"I didn't intend it but when you've got these people on your hands you've got to make them different haven't you.\" Note the context is the interviewer's question about races embodying principles (elves wisdom, dwarves craftsmanship), and Tolkien's answer opens by disclaiming intent — the differentiation is described as a consequence forced on the author, which is what the claim says."
+  },
+  "205": {
+   "index": 205,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Welsh has always attracted me by it's style and sound\"; Finnish \"very potent influence\"",
+   "note": "Exact string present on uv.es, including the source's own 'it's' misspelling. Finnish is likewise supported: \"But a much rarer, very potent influence on myself has been Finnish.\" One nuance: the mountain-names link is the interviewer's formulation — \"the music of Welsh comes through in the names you've chosen for mountains and for places in general\" — which Tolkien affirms with \"Very much.\" So the mountain-name specificity is endorsed rather than volunteered by Tolkien."
+  },
+  "206": {
+   "index": 206,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"complicated story you must work to a map otherwise you can never make a map afterwards\"",
+   "note": "Exact string present: \"If you're going to have a complicated story you must work to a map otherwise you can never make a map of it afterwards.\" FLAG on the rationale: the claim's 'or it cannot be kept consistent' is a paraphrase; the source's stated reason is that you could never draw the map afterwards. Adjacent context (moons and sunsets worked out to 1942 almanac) supports the consistency reading, so the gloss is defensible, but it is not the source's wording."
+  },
+  "207": {
+   "index": 207,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Then it grew... then it grew without control\"; \"all proved to be no good\"",
+   "note": "Exact string present at themisfortuneteller.com: \"Then it grew... then it grew without control\". The planning half is also verbatim-supported: \"there's no good trying to anticipate, because all the things I've tried to write ahead of time just to direct myself, all proved to be no good when you got there.\" Caveat on the source's own reliability, not the claim: the page self-labels \"NOTE: Incomplete in places\" and is a fan transcript of the YouTube audio, so it is a secondary transcription rather than an authoritative text."
+  },
+  "208": {
+   "index": 208,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"a new language to me is just like tasting a new wine\"",
+   "note": "Exact string present in the ORA PDF (88 pages, extracted with pypdf): \"because a new language to me is just like tasting a new wine or some new sweetmeat or something.\" The aesthetic/nourishing half is the next sentence verbatim: \"I find that intoxicating and aesthetic and nourishing.\" Note Lee's footnote 69 records a ~10-second audio break at this point, so the reconstruction flags the passage as spliced — the wording is Lee's attested text, but the transcript itself is a reconstruction."
+  },
+  "209": {
+   "index": 209,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"You can't have everything absolutely strange at the outright\"",
+   "note": "Exact string present in the ORA PDF. The 'laden with sense' half is verbatim too: \"it's desirable if you can, necessary if you can, to use words that are already in existence - which have a certain sense and are laden with a certain sense. And therefore I use 'Dwarves', and 'Middle-earth', and 'Elves' and so on.\" All three named words appear as the claim states. Fully supported."
   }
  }
 }

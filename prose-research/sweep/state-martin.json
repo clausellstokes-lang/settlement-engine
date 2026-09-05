@@ -1,7 +1,7 @@
 {
  "name": "martin",
  "runId": "wf_e25da3f7-7fb",
- "exportedAt": "2026-09-05T22:49:55.540Z",
+ "exportedAt": "2026-09-05T22:54:56.498Z",
  "claims": [
   {
    "feature": "Anglo-Saxon diction",
@@ -5329,6 +5329,96 @@
    "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "(ironborn, sellsword, ravencraft), to the... inspired (weirwood, greensight, skinchanger)",
    "note": "The five words all appear but NOT as the contiguous string quoted — they sit in two separate parenthetical groups, in a different order, split by \"ravencraft\". So not verbatim. The \"well over a hundred\" figure is also not stated on the page: it is supported by counting the article's own Feast For Crows list, which runs ~152 compounds (aftertaste... woodharp). \"Two-root\" matches the page's definition that compounds \"tend to combine two short, often monosyllabic, words\"."
+  },
+  "240": {
+   "index": 240,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "derives not from a handful of obvious stock phrases",
+   "note": "No quote was supplied, so verbatim status is not at issue. The 2013 post supports the cumulative-frequency argument twice: 'The more there are, the more frequently you encounter them on each page, the greater the sense of moving into his otherworld,' and the conclusion, where the medieval-fantasy sense 'derives not from a handful of obvious stock phrases, but from Martin's deep and systematic deployment of a carefully filtered... Anglo-Saxon vocabulary.' Two calibrations: the post's stated contrast is systematic Anglo-Saxon vocabulary versus stock phrases, not compounds versus 'any single coinage'; and compounds are explicitly 'just one of the verbal techniques.' The word 'cumulative' does not appear on this page (it appears in the 2014 post's conclusion)."
+  },
+  "241": {
+   "index": 241,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "veers from purely functional modern thriller prose",
+   "note": "Exact match in the opening sentence: 'it veers from purely functional modern thriller prose to prose larded with fake medievalisms.' The 'same page' half of the claim is separately supported: 'On the same page there can be \"ofts\" and \"elsewises\" from the 15th century and then things being \"divvied up\".'"
+  },
+  "242": {
+   "index": 242,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The default setting of Martin's style is lucid and functional",
+   "note": "Exact match, heading '1. Crisp'. The Arya half is supported under '2. Poetry': 'GRRM's limpid style can have a powerfully simple beauty. I particularly associate this with the character of Arya Stark once she's set sail from Westeros.' Note the page also cites a non-Arya example (the Water Palace of Dorne) as 'wonderfully evocative,' so Arya is one locus, not the only one."
+  },
+  "243": {
+   "index": 243,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "repetitions in this passage – of 'cool' and 'still'",
+   "note": "Quotation is exact (en dash and curly quotes as printed). CAVEAT ON THE CLAIM, not the quote: the source explicitly refuses to settle the purpose the claim asserts — 'I can't decide whether the repetitions in this passage... are signs of haste, or careful repetitions designed to evoke the lazy, torpid atmosphere of Lord Martell's sea retreat.' The claim's 'to build stillness and mood' states as fact one of two alternatives the author leaves open, and the source's word is 'lazy, torpid atmosphere,' not stillness. Treat the purposive reading as the citing author's inference."
+  },
+  "244": {
+   "index": 244,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Confrontations between opposing characters are done though terse, charged dialogue",
+   "note": "Exact match under heading '4 Dramatic dialogue' (the source's 'though' for 'through' is its own typo, outside the quoted span). 'Deliver the revelations' is supported: 'you experience a real dramatic shock when you realise, along with one character, the implications of another one's words.' The contrastive 'rather than by narration' is the citing author's framing; the page does not state that contrast."
+  },
+  "245": {
+   "index": 245,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the slight deformation of existing standard words or phrases",
+   "note": "Exact match under '5 Distorting English': 'Martin employs the slight deformation of existing standard words or phrases into something rich and strange.' The coinage half holds but the exemplars are mis-filed: sellsword and smallfolk appear under section 7, 'New word combinations' ('Martin uses this facility to coin scores of neologisms'), whereas section 6's 'completely new, medieval-sounding words' are sept/septon/septa, maester, wildlings, pyromancer, holdfast, warg, damphair. Both sections are coinage, so substance survives."
+  },
+  "246": {
+   "index": 246,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "would-be medievalisms which become annoying mannerisms",
+   "note": "Exact match under '9. Cod medievalism': 'there is a number of would-be medievalisms which become annoying mannerisms.' The claim's 'on repetition' is a gloss; the page's own frequency language is 'all-too-frequently' and 'The most persistent one,' listing dropped -ly adverbs, 'oft', 'elsewise', 'amongst/whilst', 'much and more'."
+  },
+  "247": {
+   "index": 247,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "stock phrases are thermals",
+   "note": "Exact match, mid-sentence and lowercase: 'Style doesn't matter so much as lift, and stock phrases are thermals.' The rest of the claim is confirmed independently: the essay opens with Homeric epithets ('Dawn is always rosy-fingered; Athena is grey-eyed'), and quotes 'black as night' from four separate passages — Ice's blade in 'waters black as night', dragon 'scales were black as night', bastards' 'hair as black as night', Mirri Maz Duur's 'eyes as black as night'. Four instances, near-identical, as claimed."
+  },
+  "248": {
+   "index": 248,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "no single sentence is that effective",
+   "note": "Exact match: 'It's shotgun writing: like buckshot, no single sentence is that effective, but a full cartridge of it gets the point across.' 'Shotgun writing' is the author's own term, as the claim states, and 'low-density sentences' is likewise his phrase ('a steady flow of low-density sentences'). 'Works by volley' is a fair paraphrase of the buckshot/full-cartridge image."
+  },
+  "249": {
+   "index": 249,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "we are cognitively lazy with the familiar",
+   "note": "Exact match, mid-sentence and lowercase: 'And that's simply because \"black as night\" is familiar to us, and we are cognitively lazy with the familiar.' Recognition-over-visualisation is supported by the preceding lines: '\"Black as night\" triggers vision only because it takes longer to read... Martin reminding us to picture the color black instead of evoking it for us.' The speed point rests on 'an almost hypnotic readability' and 'you never have to read an AGOT sentence twice.'"
+  },
+  "250": {
+   "index": 250,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it's no surprise that dialogue would shine brightest",
+   "note": "Exact match: 'In a series so focused on character and written by an author with an ear for it, it's no surprise that dialogue would shine brightest. But the prose that constitutes the other 60% of the text is forgettable.' The page grounds it in a Reddit thread on favourite passages where 'all of the top answers referred to passages of dialogue.'"
+  },
+  "251": {
+   "index": 251,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "those faces still as masks, and the faces dark with anger",
+   "note": "NOT verbatim as given. The page reads 'the real Martinian stock phrases are those faces still as masks, and the faces dark with anger' — the supplied quote deletes 'and the' and capitalises 'Faces'. The second exemplar is also loose: the page has 'all those men corded or thick with muscle,' not 'men corded with muscle'. The recurring-kit substance is fully supported (the same sentence continues with 'chins dripping with hot juices', 'muscled like a bovid', 'hair shines like spun gold')."
+  },
+  "252": {
+   "index": 252,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "only to take a big step backwards at odd times",
+   "note": "The page reads 'He's generally hovering right over his POV's shoulders... only to take a big step backwards at odd times.' The quote's '[s]' correctly marks the inflection change, and the underlying words match exactly. The second half is supported by the worked example: in the Tyrion breakfast passage, 'Pups' is Tyrion's word while 'Jaime Lannister' is not — '\"Pups\" sounds like a term Tyrion would use, but Tyrion wouldn't call his brother Jaime Lannister... that's Martin talking.'"
+  },
+  "253": {
+   "index": 253,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Stupidly, Jon argued.",
+   "note": "Exact match, quoted from AGOT: 'Stupidly, Jon argued. \"I'll be fifteen on my name day,\" he said.' CAVEAT ON THE CLAIM: the essay poses this as an open question rather than asserting fusion — its lead-in is 'In this next quote, who thinks Jon is being stupid? Jon, or the narrator?' — and files it under 'Martin does not always control psychic distance.' 'Fuses narrator judgment with the character's own' is the citing author's resolution of an ambiguity the source deliberately leaves standing."
+  },
+  "254": {
+   "index": 254,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Is a 6 percent increase that big a deal?",
+   "note": "No quote supplied. The figure is on the page: 'You might shrug at those proportions. Is a 6 percent increase that big a deal? Absolutely.' Growth across the series is supported by 'there's more of it with every book' and an embedded chart (img alt='italics over time'). The weakness half is near-exact: 'those italicized bits are Martin at his kludgiest. He uses them to jog the reader's memory, wedge in a pile of backstory, or point out the obvious.' One caveat: the 6 percent refers to proportions displayed in the chart image, which the page's text never itself tabulates, and the author flags a measurement disclaimer (he assumes italics are a consistent proxy for interior monologue)."
   }
  }
 }

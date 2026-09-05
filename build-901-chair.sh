@@ -1,12 +1,12 @@
 #!/bin/sh
 # build-901-chair.sh — (derived from build-900-chair.sh by targeted substitution; the ritual step re-mints ONLY if the edge freshness arm is red at the composed tip — check `tests/edgeFunctions` first)
-# the §901 chair BUILD acts in laneLIGHTTRIAL, run ONLY when no lane is working in the dock and porcelain is empty:
+# the §901 chair BUILD acts in laneLIGHTINT, run ONLY when no lane is working in the dock and porcelain is empty:
 #   1. the edge-shared re-mint by the ritual (materialise immer+seedrandom → build:edge-shared → commit → RESTORE symlinks)
 #   2. the full `npm run build` (the worker bundle + the eight closure chunks), the WORKER bundle's byte figure measured from dist/,
 #      and the listing of hashed chunks kept for HORIZON-B1's `__vite__mapDeps` by-filename diff
 #   Prints every figure; the WORKER_BUNDLE_CEILING_BYTES arm is written by the chair BY HAND from the printed figure (a chair car), never here.
 SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad
-D=$SC/laneLIGHTTRIAL; cd "$D" || exit 9
+D=$SC/laneLIGHTINT; cd "$D" || exit 9
 [ -z "$(git status --porcelain -uall)" ] || { echo "REFUSED: dock dirty"; exit 8; }
 echo "BUILD ACTS at $(git rev-parse --short HEAD) $(date '+%H:%M:%S') · symlinks before: $(find node_modules -maxdepth 1 -type l | wc -l | tr -d ' ')"
 echo "--- 1. edge-shared re-mint (the ritual):"; sh $SC/edge-shared-ritual.sh "$D" 2>&1 | tail -8 | cut -c1-160; echo "RITUAL_EXIT=$? · symlinks after: $(find node_modules -maxdepth 1 -type l | wc -l | tr -d ' ') (must be 453) · porcelain=[$(git status --porcelain -uall | tr '\n' ' ')]"
