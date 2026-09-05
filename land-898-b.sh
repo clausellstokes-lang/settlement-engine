@@ -24,6 +24,6 @@ echo "== 4. the totals car"; sh $SC/commit-totals.sh $D $SC/ratchet-898.log 5 24
 echo "== 5. lighting: farmed probe vs the register at the tip"
 PR=$(PROBE_FARM_ROOT=$SC/.farms node $SC/chair-tools/lighting-probe.mjs $D 2>/dev/null | tail -1)
 RG=$(python3 -c "import json;d=json.load(open('$D/tests/lint/.lighting-census-baseline.json'));print(json.dumps({k:d[k] for k in ('files','parked','credited','titles','suiteTitles')}))")
-echo "  probe   : $PR"; echo "  register: $RG"; [ "$PR" = "$RG" ] || { echo "⛔ lighting moved — re-take before the gate; STOP"; exit 1; }
+echo "  probe   : $PR"; echo "  register: $RG"; python3 -c "import json,sys;a=json.loads(sys.argv[1]);b=json.loads(sys.argv[2]);sys.exit(0 if a==b else 1)" "$PR" "$RG" || { echo "⛔ lighting moved — re-take before the gate; STOP"; exit 1; }
 echo "LAND-898-B OK: $(git -C $D rev-list --count $BASE..HEAD) cars over $(echo $BASE | cut -c1-9); HEAD=$(git -C $D rev-parse --short HEAD); porcelain=$(git -C $D status --porcelain -uall | wc -l | tr -d ' ')"
 echo "NEXT: sh $SC/run-gate-898.sh > $SC/gate-898.log 2>&1 (background), then sh $SC/after-cas-898.sh"
