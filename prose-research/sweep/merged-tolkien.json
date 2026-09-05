@@ -4871,6 +4871,96 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "Weapons they have laid at your doors",
    "note": "Exact. Article: 'Allan Turner gives the example of fronting, where Tolkien puts the object at the start of a sentence rather than after the verb... Turner points out that this cannot be done in French, while in German it remains a common construction and doesn't give an archaic effect.'"
+  },
+  "330": {
+   "index": 330,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"duplicating the subject ('Mr. Drogo, he married...')\", double negatives, altered subject-verb agreement",
+   "note": "Bayona section lists duplicated subject, double negatives, altered subject-verb agreement for Ham/Sam Gamgee etc.; Gollum section gives \"simple but ungrammatical syntax\" and \"pocketses\". Quote exact."
+  },
+  "331": {
+   "index": 331,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"The epic style is characterised by archaic diction, parataxis with clauses linked with 'and'\"",
+   "note": "Article: POV \"most often - 85% of the time - one of the four Hobbit protagonists\"; \"when Tolkien does use a single character's viewpoint, he does it to show their state of mind\"; omniscient archaic style \"highly vivid\"/\"highly mimetic\". Nuance: the 85% qualifies the character-POV portion of the narrative half, not all narrative time."
+  },
+  "332": {
+   "index": 332,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"partly due to three simple lexical causes: the 'overuse' of words borrowed from nineteenth-century fiction, the avoidance of words associated with the modern world, and the comparatively dense use of new coinages, unusual grammatical patterns, rare or obsolescent words\"",
+   "note": "Four lexical sets named exactly: landscape description; position or direction; warfare and the struggle between good and evil; other descriptive verbs and adjectives. Nuance: paper hedges \"partly due to\"; claim drops the hedge."
+  },
+  "333": {
+   "index": 333,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Tolkien borrows a host of words from his translation of Beowulf (e.g. valour, valiant, corslet)\"; \"a black smoke swirled in the air\"; modernist descriptive verbs incl. cower, flicker, loom, plod",
+   "note": "All four elements present. \"Branched lightning smote down upon the eastward hills.\" is the paper's example of stretching Beowulf words creatively; \"smoke ... commonly preceded by the indefinite article\" is the 19th-c-pattern example."
+  },
+  "334": {
+   "index": 334,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Tolkien shows a marked preference for the most homely collocations available\"",
+   "note": "Great collocates listed as peril/deed/force/power/strength; trees/stones/halls/horns/gates; clouds/storms/shadow/wind/smoke, \"derived from 19th century fiction, where they occur much less frequently\"; five semantic domains \"lending additional weight to the hypothesis that Tolkien tends to resort to hyperbole\"."
+  },
+  "335": {
+   "index": 335,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"He writes that Boromir speaks sort of Elrondian, and that Aragorn speaks this way to Boromir to impress him\"",
+   "note": "Followed by \"expressing who these characters are not only in what they say but how they say it\" - supports the \"character shows in how they say things\" element."
+  },
+  "336": {
+   "index": 336,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"the style see-saws between Bilbo's \\u201cbusiness manner,\\u201d the narrator's matter-of-fact tone, and Thorin's style\"",
+   "note": "Divergence: page says \"Thorin's style\", not \"Thorin's high style\" - \"high\" is the summarizer's addition. \"of course\"/\"as you probably know\" appear in the earlier chapter summary, said to imply \"there is more to the story than what he has written\"."
+  },
+  "337": {
+   "index": 337,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"to bring out differences in status and character (with a detailed study of the Council of Elrond)\"",
+   "note": "Yee attributes it to Shippey's \"use of language and stylistic variation\"; both books reviewed jointly."
+  },
+  "338": {
+   "index": 338,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "\"has to do with the structure of the sentences\"",
+   "note": "Quote is verbatim, and the page does say the Theoden words \"are all familiar to us, and are still in use today\" (excepting \"Nay\") and that the archaism is structural. NOT supported: the specific proposition that the FINAL CLAUSE ORDER carries a thought modern idiom cannot - the page merely leaves \"thus shall I sleep better\" untranslated inside its modern paraphrase and argues generally that a king speaking modern English \"would not have had those thoughts\". Downgraded for that unstated element."
+  },
+  "339": {
+   "index": 339,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"no more reason for not using the much terser and more vivid ancient style\"",
+   "note": "Fetched via Wayback (direct tolkiengateway.net returns a Cloudflare 403 to curl and to WebFetch). Page has all three elements: \"He rejects the charge of 'tushery'\"; \"The latter is far terser than modern English\"; \"putting this thought into modern English creates a 'disunion of word and meaning'\" because \"Theoden's thoughts are themselves archaic\"."
+  },
+  "340": {
+   "index": 340,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Tolkien's actual vocabulary is not obsolete, it's the style, the syntax and morphology, which does the trick\" (Shippey 2013); \"the Object-Subject-Verb sentence form\"",
+   "note": "Silmarillion gradient verbatim: \"In the Quenta Silmarillion, the Elves use these forms almost all the time, the noble Men use them less, and the common Men not at all.\" -eth/-est and ye/thou inflection tables are the paper's core."
+  },
+  "341": {
+   "index": 341,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Finrod uses the different inflections to connote the ... relationship between Finrod and Andreth\"",
+   "note": "Supported in detail: \"When Finrod says THOU, THEE, he was to lean in and create intimacy / When he said YOU, he was to create distance and respect\"; \"Even here, Finrod's word-choice is absolutely deliberate\". Caveat the claim omits: Alden quotes Christopher Tolkien that \"my father was in two minds as to which forms Finrod should employ\", and counts six uses of \"you\" that \"seem to be in error\"."
+  },
+  "342": {
+   "index": 342,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"an attempt has been made to hint at these distinctions by an inconsistent use of thou\"",
+   "note": "Page opens with the writer as a teenager reading Eowyn's \"wilt thou go?\" as \"formal, archaic English (Bible-speak)\" and later learning the intimate usage - \"Thus it was to add an extra layer to Eowyn's laying bare her feelings\". Appendix F footnote quoted in full, including \"it has proved impossible to represent\"."
+  },
+  "343": {
+   "index": 343,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"the use of Yea/Nay for Yes/No\"; \"it's unfortunate that the 'thee/thou' dialogue will sound more formal\"",
+   "note": "Register grading present: \"allow our First Age elves to be one step down from the Valar in their archaicism, as the text does.\" Two divergences: the page ranks Iluvatar most archaic with \"the close runner-up of the Valar\", not the Valar at the top; and \"cheap archaism\" is the summarizer's word - the page calls Yea/Nay \"another good archaicism\" that \"can appear all the time\"."
+  },
+  "344": {
+   "index": 344,
+   "verdict": "CONTRADICTED",
+   "trueWording": "\"The second example is from \\u201cThe Battle of Pelennor Fields,\\u201d involving Eomer\"",
+   "note": "The quoted \"and he was still unscathed, and he was young, and he was king\" is EOMER's, in the page's second example. \"borne up on Snowmane like a god of old\" belongs to the SEPARATE first example, Theoden in \"The Ride of the Rohirrim\". The claim fuses the two and attributes the clause chain to Theoden, which the page contradicts. Correctly reported: Garth cited for \"breathless excitement\" and \"cranking up the tension and foreboding before the denouement\"."
   }
  }
 }
