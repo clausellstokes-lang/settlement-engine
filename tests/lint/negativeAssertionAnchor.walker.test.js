@@ -213,7 +213,17 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/build/contentIdentityLazy.test.js': 2,
   'tests/build/customContentPreviewLazy.test.js': 2,
   'tests/build/customRegistryLazy.test.js': 11,
-  'tests/build/engineChunkLazy.test.js': 6,
+  // 6 -> 5 at the §900 desk composition (2026-09-05, lane DESK-900-REDS): a SECOND win
+  // banked on this row, and again by a lane that never ran this walker. WORKER Car 1
+  // (`c9611da70`) re-anchored that file's pipeline-metadata arm and wrote reasons onto
+  // the sites it kept, which lowered the file to five — but left the row standing at
+  // six, a ceiling carrying one free slot, which is precisely the disarmed state this
+  // ratchet exists to refuse. Measured at the composition tip before the row moved:
+  // five sites found, ceiling six. The row follows the measurement DOWN, the only
+  // direction it may move, exactly as at the INSTRUMENTS landing below. ⚠ The scanner
+  // still does not strip comments (that note says so), so this paragraph names no
+  // matcher at all.
+  'tests/build/engineChunkLazy.test.js': 5,
   'tests/build/firstPaintNonJs.test.js': 2,
   'tests/build/fontsAndMeta.test.js': 5,
   'tests/build/foundryLazy.test.js': 5,
