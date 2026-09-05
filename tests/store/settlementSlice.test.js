@@ -471,7 +471,17 @@ describe('settlementSlice — resetSettlementIdentity is the single writer (stru
   const readStore = (f) => readFileSync(new URL(`../../src/store/${f}`, import.meta.url), 'utf8');
   const DEFINING_MODULES = ['settlementSlice.js', 'settlementLifecycleHelpers.js'];
   const sources = DEFINING_MODULES.map(readStore);
-  const src = readStore('settlementSlice.js');            // the CALL-SITE surface
+  // ⭐ AND THE CALL-SITE SURFACE BECAME TWO FILES FOR THE SAME REASON, ONE WAVE LATER.
+  // WORKER Car 1 moved the ~290-line generation lane out of the slice into
+  // settlementGenerateAction.js, and the fourth identity swap went with it. A surface of
+  // settlementSlice.js alone measures 3 and reads a MOVE as a LEAK — the exact failure the
+  // note above predicted for the definition search, now met on the caller side. The pin's
+  // subject was never a filename: it is that every identity swap in the store routes
+  // through the one chokepoint. So the surface widens to the lane's new home and the count
+  // stays 4. Narrowing it back would let a swap hide in the action file, which is the
+  // opposite of what this pin exists to prevent.
+  const CALL_SITE_MODULES = ['settlementSlice.js', 'settlementGenerateAction.js'];
+  const src = CALL_SITE_MODULES.map(readStore).join('\n');  // the CALL-SITE surface
   const defSrc = sources.find((t) => t.includes('function resetSettlementIdentity')) || '';
 
   test('the chokepoint resets the FULL residue field list', () => {

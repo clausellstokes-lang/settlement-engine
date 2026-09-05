@@ -76,10 +76,21 @@ describe('declared scope — the registry layer', () => {
 
 describe('per-settlement capture — the generation seam', () => {
   test('generateSettlement snapshots all four live bags into the pipeline config', () => {
-    const src = read('src/store/settlementSlice.js');
+    // ⭐ READ AT THE LANE'S HOME, NOT AT THE STORE'S FRONT DOOR. WORKER Car 1 moved the
+    // generation lane out of settlementSlice.js into settlementGenerateAction.js; the
+    // store keeps only the action KEY and reaches the lane through one dynamic import
+    // (pinned in tests/build/engineChunkLazy.test.js). The stamping this arm is about
+    // moved with the lane, so reading the slice alone measures a correct tree as a
+    // regression. The surface is the PAIR rather than the new file alone: if the lane ever
+    // comes home, or a second stamp appears on the slice, this arm still sees it — the
+    // claim is that generateSettlement stamps all four bags, never that one file does.
+    const src = [
+      read('src/store/settlementSlice.js'),
+      read('src/store/settlementGenerateAction.js'),
+    ].join('\n');
     for (const bag of BAGS) {
       const probe = new RegExp(`_${bag}:\\s*${bag}`);
-      expect(probe.test(src), `settlementSlice must stamp _${bag} into fullConfig`).toBe(true);
+      expect(probe.test(src), `the generation lane must stamp _${bag} into fullConfig`).toBe(true);
     }
   });
 

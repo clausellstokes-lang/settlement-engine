@@ -297,7 +297,33 @@ describe('engine chunk — source uses dynamic import for the heavy generators',
     expect(core).toMatch(/metaForStep\(name\)/);
 
     // The slice reaches the lane, and the lane reaches the core.
-    expect(slice).toMatch(/import\(['"]\.\/settlementGenerateAction\.js['"]\)/);
+    //
+    // ⛔ THE SPECIFIER IS READ OFF THE RAW LINE, NOT OFF THE MASK, AND THIS ARM'S OWN
+    // HEADER FOUR PARAGRAPHS UP STATES THE RULE IT WAS BREAKING: `codeOnly` blanks string
+    // TEXT, and an import SPECIFIER is string text. `codeOnly(sliceRaw)` therefore carries
+    // `import('                             ')`, so a specifier regex routed through it
+    // CANNOT MATCH AT ANY ADDRESS — the green was unreachable rather than merely unearned,
+    // and the arm reddened on a CORRECT tree that carries the edge at settlementSlice.js:59.
+    //
+    // The discrimination the mask was wanted for is still paid in full, by PAIRING the two
+    // views instead of choosing one. `import(` is CODE and survives the mask; the specifier
+    // is TEXT and survives only the raw read; `codeOnly` preserves offsets and newlines, so
+    // line i of one view addresses line i of the other. A line whose MASKED counterpart
+    // still carries `import(` is executable code, and its RAW counterpart at the same index
+    // still carries the specifier the mask blanked. The `@type {?Promise<typeof
+    // import('./settlementGenerateAction.js')>}` docblock on settlementSlice.js:55 names
+    // this exact specifier in prose and is excluded by precisely that pairing — which is
+    // the property a raw-only regex would have thrown away to get its match back.
+    const rawLines = sliceRaw.split('\n');
+    const maskedLines = slice.split('\n');
+    const lazyLaneEdges = rawLines.filter(
+      (line, index) => /import\(/.test(maskedLines[index] || '')
+        && /import\(['"]\.\/settlementGenerateAction\.js['"]\)/.test(line),
+    );
+    expect(
+      lazyLaneEdges,
+      'the slice must reach the generation lane through exactly one dynamic import',
+    ).toHaveLength(1);
     // anchored: the two positive core assertions and the positive slice assertion above prove both files were read and parsed, so this absence cannot be true merely because the subject vanished.
     expect(slice).not.toMatch(/steps\/stepMetadata\.js/);
 
