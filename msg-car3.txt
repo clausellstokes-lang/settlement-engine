@@ -1,0 +1,7 @@
+Composed landing (chair car): the chance-meeting kind-pools walker gets its mutation-coverage rationale row
+
+The E-A totality contract demands every invariant test file appear in the manifest; ENC-4's walker executes its own mutants in the test body (three MUTANT arms + a sentinel-disagreement control), so a sweep plant would duplicate them — a rationale row, recorded, not an uncovered gap.
+
+Seat: Fable 5.1 — validated
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>
