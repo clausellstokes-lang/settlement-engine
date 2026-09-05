@@ -333,7 +333,13 @@ describe('reader-with-no-writer ratchet: the frozen inventory', () => {
     expect({
       reads: persistedTags.reduce((sum, row) => sum + row.count, 0),
       addresses: persistedTags.length,
-    }).toEqual({ reads: 64, addresses: 43 }); // +2/+1: genesisDiplomacy.js joins the
+    // ⭐ 64/43 → 62/41 AT THE SCHEMA-17 RUNG, and this is the literal doing exactly the
+    // job its note describes: the governed migration DELETED the two banked
+    // `isCriminal on incomeSources` addresses (EconomicsTab.jsx, treasury.js) because the
+    // stress-loaded topology pass made their writer OBSERVABLE, so the reads stopped being
+    // findings at all. A shrink of a bank is as much a governed event as a growth, and the
+    // red on this line is that event announcing itself.
+    }).toEqual({ reads: 62, addresses: 41 }); // +2/+1: genesisDiplomacy.js joins the
     // neighbourNetwork row at the schema-12 mint (ODQ §819). ⚠ +2 READS but only +1
     // ADDRESS, which is the shape a BANK-BY-RULE admission has and a new DECLARATION
     // does not: the ninth identity added two of each because it was a new identity in
@@ -357,11 +363,15 @@ describe('reader-with-no-writer ratchet: the frozen inventory', () => {
       'deltas on eventLog': { reads: 2, addresses: 1 },
       'event on eventLog': { reads: 9, addresses: 4 },
       'narrativeSummary on eventLog': { reads: 4, addresses: 3 },
-      // ⭐ THE NINTH, banked by the schema-11 re-mint (ODQ §771.2/§784.2): two reads across
-      // two addresses — the flag read in treasury.js's `isCriminalIncome` and the guard it
-      // sits behind. Its writer is a GENERATOR branch the corpus never takes, which is the
-      // fifth admission class and the reason the row exists at all.
-      'isCriminal on incomeSources': { reads: 2, addresses: 2 },
+      // ⭐ THE NINTH IS NOW UNEXERCISED, AND ZERO IS THE HONEST READING. It banked two
+      // reads across two addresses — the flag read in treasury.js's `isCriminalIncome` and
+      // the guard it sits behind — on the ground that its writer was a GENERATOR branch the
+      // corpus never took. Schema 17's stress-loaded topology pass makes the corpus take it,
+      // so the reads are no longer findings and there is nothing left to bank. ⛔ THE ENTRY
+      // IS PINNED AT 0/0 RATHER THAN REMOVED FROM THIS MAP: the map is built from
+      // EXPLAINED_WRITER_EXEMPTIONS, whose roster is still nine, and a declaration that
+      // banks nothing is precisely what this arm should be able to say out loud.
+      'isCriminal on incomeSources': { reads: 0, addresses: 0 },
     });
     // ⭐ THE SCHEMA-9 GENESIS STAMPED ONE REASON ONTO ALL FOUR NEW ROWS AND LEFT
     // THE FOUR OLDER ONES ALONE. `assertExplainedWriterTagTransition` then makes a
@@ -1033,12 +1043,16 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
     // already-declared M9 identity. The bank's DECLARED roster is untouched at nine —
     // bank-by-rule tags a row from an existing declaration, so this figure moves while
     // EXPLAINED_WRITER_EXEMPTIONS does not, and the two arms below still pin the roster.
-    expect(live.explainedWriters.banked).toBe(64);
+    expect(live.explainedWriters.banked).toBe(62);
     expect(Object.entries(corpus.shapes)
       .filter(([, shape]) => shape.keys.includes('source'))
       .map(([name]) => name)).toEqual([
+      // ⭐ `stress` and `stressors` JOIN AT THE SCHEMA-17 RUNG, and they are the corpus's
+      // own receipt that the stress-loaded topology pass actually executed: neither shape
+      // carried an observed `source` while every config ran unstressed.
       'causes', 'changes', 'charter', 'evidence', 'garrison', 'incomeSources',
-      'institutions', 'magicDef', 'mercenary', 'site', 'walls', 'watch',
+      'institutions', 'magicDef', 'mercenary', 'site', 'stress', 'stressors',
+      'walls', 'watch',
     ]);
 
     // ⭐ EACH FILTER'S FOUNDING CASE, PRESENT RAW AND ABSENT FILTERED. Without
@@ -1073,7 +1087,9 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       'deltas on eventLog',
       'event on eventLog',
       'factions on locks',
-      'isCriminal on incomeSources',
+      // ⚠ `isCriminal on incomeSources` LEFT THIS LIST AT THE SCHEMA-17 RUNG — it is still
+      // DECLARED (the roster is nine) but banks nothing, because its reads stopped being
+      // findings once the corpus could observe their writer. Banked ⊆ declared, always.
       'narrativeSummary on eventLog',
       'neighbourNetwork on settlement',
       'stresses on settlement',
@@ -1224,18 +1240,22 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       'deltas on eventLog': { reads: 2, addresses: 1 },
       'event on eventLog': { reads: 9, addresses: 4 },
       'narrativeSummary on eventLog': { reads: 4, addresses: 3 },
-      // ⭐ THE NINTH, banked by the schema-11 re-mint (ODQ §771.2/§784.2): two reads across
-      // two addresses — the flag read in treasury.js's `isCriminalIncome` and the guard it
-      // sits behind. Its writer is a GENERATOR branch the corpus never takes, which is the
-      // fifth admission class and the reason the row exists at all.
-      'isCriminal on incomeSources': { reads: 2, addresses: 2 },
+      // ⭐ THE NINTH IS NOW UNEXERCISED, AND ZERO IS THE HONEST READING. It banked two
+      // reads across two addresses — the flag read in treasury.js's `isCriminalIncome` and
+      // the guard it sits behind — on the ground that its writer was a GENERATOR branch the
+      // corpus never took. Schema 17's stress-loaded topology pass makes the corpus take it,
+      // so the reads are no longer findings and there is nothing left to bank. ⛔ THE ENTRY
+      // IS PINNED AT 0/0 RATHER THAN REMOVED FROM THIS MAP: the map is built from
+      // EXPLAINED_WRITER_EXEMPTIONS, whose roster is still nine, and a declaration that
+      // banks nothing is precisely what this arm should be able to say out loud.
+      'isCriminal on incomeSources': { reads: 0, addresses: 0 },
     });
 
     // A7 guard mutant: the retired clear-outright behavior loses exactly the
     // bank and therefore cannot satisfy the live count asserted above.
     const bankedIdentities = new Set(live.explainedWriters.bankedIdentities);
     const clearOutright = live.findings.filter((finding) => !bankedIdentities.has(identityOf(finding)));
-    expect(clearOutright).toHaveLength(live.findings.length - 64);
+    expect(clearOutright).toHaveLength(live.findings.length - 62);
     expect(inventoryOf(clearOutright)).not.toEqual(liveInventory);
   });
 

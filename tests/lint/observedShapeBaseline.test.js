@@ -19,6 +19,7 @@ import {
   RETIRED_DEAD_DEPENDENCY_BASELINE_SCHEMA,
   RETIRED_PRESET_LIGHT_BASELINE_SCHEMA,
   RETIRED_STABLE_CORE_BASELINE_SCHEMA,
+  RETIRED_COMPANION_GATE_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   validateSchema3Baseline,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
@@ -37,6 +38,7 @@ import {
   validateSchema14Baseline,
   validateSchema15Baseline,
   validateSchema16Baseline,
+  validateSchema17Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   digestOf,
@@ -285,7 +287,12 @@ describe('observed-shape schema-3 baseline envelope', () => {
     // keys landed on its own shape. The branch now states the guarantee its two sibling
     // branches already had. Classification-only, so its reconciliation is EMPTY — the
     // cured tip reproduces the schema-14 register row for row.
-    expect(BASELINE_SCHEMA).toBe(16);
+    // ⭐ SCHEMA 17 (lane OSR-SCHEMA17). Schema 16's tagged topology envelope re-governed to
+    // a CORPUS THAT CAN OBSERVE A STRESS-GATED WRITER — the first rung since 8 whose
+    // subject is the corpus builder. Unlike 13, 14, 15 and 16 its reconciliation is NOT
+    // empty: it clears twelve frozen rows and adds none, because the readers it clears were
+    // never dead, only unobserved.
+    expect(BASELINE_SCHEMA).toBe(17);
     expect(RETIRED_GENESIS_TIES_BASELINE_SCHEMA).toBe(12);
     expect(RETIRED_TREASURY_ADMISSION_BASELINE_SCHEMA).toBe(11);
     expect(RETIRED_PROSE_REGEN_BASELINE_SCHEMA).toBe(10);
@@ -476,6 +483,14 @@ function validSchema14Baseline() {
 function validSchema15Baseline_fixture() {
   const baseline = validSchema7Baseline();
   baseline.schema = RETIRED_STABLE_CORE_BASELINE_SCHEMA;
+  return baseline;
+}
+
+/** The RETIRED schema-16 envelope, pinned to its own LITERAL number for the reason the
+ *  schema-10 through schema-15 fixtures above record. */
+function validSchema16Baseline_fixture() {
+  const baseline = validSchema7Baseline();
+  baseline.schema = RETIRED_COMPANION_GATE_BASELINE_SCHEMA;
   return baseline;
 }
 
@@ -712,7 +727,11 @@ describe('observed-shape schema-7 bank-by-rule envelope', () => {
     // authority passes it. `live` belongs to 16 now.
     const stableCore = validSchema15Baseline_fixture();
     expect(validateSchema15Baseline(stableCore)).toBe(stableCore);
-    expect(validateSchema16Baseline(live)).toBe(live);
+    // ⭐ 16 IS RETIRED at the schema-17 rung and now validates its OWN literal, so it too
+    // is paired with a fixture rather than with `live`. `live` belongs to 17 now.
+    const companionGate = validSchema16Baseline_fixture();
+    expect(validateSchema16Baseline(companionGate)).toBe(companionGate);
+    expect(validateSchema17Baseline(live)).toBe(live);
     expect(() => validateSchema7Baseline(baseline)).toThrow(/is not schema 7/);
     expect(() => validateSchema8Baseline(retired)).toThrow(/is not schema 8/);
     // ⚠ EVERY ADJACENT PAIR IS PINNED IN BOTH DIRECTIONS FOR ONE REASON: FOUR

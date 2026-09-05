@@ -95,7 +95,7 @@ import {
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
-  validateSchema16Baseline,
+  validateSchema17Baseline,
 } from './lib/observed-shape-baseline.mjs';
 import {
   parseExactFlags,
@@ -1073,15 +1073,21 @@ export const EXPLAINED_WRITER_EXEMPTIONS = Object.freeze([
     mechanism: 'conditional-generator-branch',
     writer: 'src/generators/economy/economicState.js',
     ruling: 'ODQ 771.2 — the fifth class, granted on W-COIN-1b measurement',
-    why: 'MEASURED: the corpus observed 3,068 incomeSources rows across its whole seed x config'
-      + ' matrix and NOT ONE carried isCriminal (observed keys: desc, percentage, priorityNote,'
-      + ' source, weight). The generator DOES write it — the black-market push at the foot of'
-      + ' buildIncomeSources — but only down a branch those configs never take, so the key is'
-      + ' rarer than the sample rather than absent. W-COIN taxation must read it: the design'
-      + ' rules the racket is never a tax base, and dropping the read would tax a custom row'
-      + ' that marks itself criminal. The live detector is the closed CRIMINAL_INCOME_LABELS'
-      + ' set (source has 3,068 observations); this flag read is the catch for authored rows'
-      + ' wearing no known name, and is dead on generated worlds by construction, not by defect.',
+    why: 'SUPERSEDED BY MEASUREMENT AT THE SCHEMA-17 RUNG, and the correction is the point.'
+      + ' This entry used to record "the corpus observed 3,068 incomeSources rows and NOT ONE'
+      + ' carried isCriminal … dead on generated worlds by construction". The first half was'
+      + ' true and the second was the corpus speaking for the code: the generator writes the'
+      + ' flag down the black-market push at the foot of buildIncomeSources, gated on'
+      + ' safetyProfile.blackMarketCapture > 10, and stressShadowBonus is exactly zero with no'
+      + ' stress flag — so no config in the matrix could ever take that branch. Schema 17 added'
+      + ' a stress-loaded TOPOLOGY pass and the corpus now observes 3,107 rows WITH the key'
+      + ' (desc, isCriminal, percentage, priorityNote, source, weight), which cleared all three'
+      + ' readers as true shrinks; the 39-row difference is that pass exactly. This declaration'
+      + ' therefore banks NOTHING today and is KEPT rather than retired: W-COIN taxation must'
+      + ' read the flag — the design rules the racket is never a tax base, and dropping the read'
+      + ' would tax a custom row that marks itself criminal — and the entry is the standing'
+      + ' permission if the corpus ever loses that reach again. Retiring it changes the declared'
+      + ' roster and is a chair act, not a lane one.',
   }),
   Object.freeze({
     identity: 'factions on locks',
@@ -1303,7 +1309,7 @@ export function assertExplainedWriterRowTags(
   baseline,
   entries = EXPLAINED_WRITER_EXEMPTIONS,
 ) {
-  validateSchema16Baseline(baseline);
+  validateSchema17Baseline(baseline);
   assertExplainedWriterExemptions(entries);
   const declarations = new Map(entries.map((entry) => [entry.identity, entry]));
   const genesis = baseline.frozenAtSha === baseline.migrationReview.subjectSha;
@@ -2729,7 +2735,7 @@ export async function run(argv = [], overrides = {}) {
     createScanArtifact,
     validateScanArtifact,
     assertFindingSourceEvidence,
-    validateBaseline: validateSchema16Baseline,
+    validateBaseline: validateSchema17Baseline,
     assertExplainedWriterRowTags,
     validateBaselineHistory,
     committedInputManifestsFor,
