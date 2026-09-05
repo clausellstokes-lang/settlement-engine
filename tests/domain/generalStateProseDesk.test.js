@@ -63,6 +63,8 @@ import {
   structuralViolationsPoolKey,
   systemsHealthScorePoolKey,
   viabilityPoolKey,
+  craftReasonPoolKey,
+  craftInstitutionFill,
 } from '../../src/domain/display/stateProse/generalStateProse.js';
 import { DOSSIER_STATE_PROSE_GENERAL } from '../../src/data/dossierStateProse/general.generated.js';
 import {
@@ -103,6 +105,8 @@ const BLOCK_POOLS = Object.freeze({
   'DS-GEN-11': 6, 'DS-HK-1': 11,
   // The notable connection (DESK-GEN2 car 4).
   'DS-REL-2': 3,
+  // Why these workshops (DESK-GEN3 car 1).
+  'DS-GEN-18': 4,
 });
 
 /**
@@ -520,6 +524,11 @@ describe('the general desk over the real generator', () => {
     tier: s.tier,
     primaryStress: resolvePrimaryStress(((Array.isArray(s.stress) ? s.stress : [s.stress]).filter(Boolean)).map((v) => v.type)),
     foodBalance: s.economicViability?.metrics?.foodBalance,
+    // DS-GEN-18's four antecedents. ⚠ THE EXPLOITATION LEDGER IS `resourceAnalysis`'s, NOT
+    // `economicState`'s — the corpus title names both records in one line and they are two.
+    activeChains: s.economicState?.activeChains,
+    exploitation: s.resourceAnalysis?.exploitation,
+    primaryImports: s.economicState?.primaryImports,
   });
 
   it('MEASUREMENT, NOT DEFAULT: every reading the desk uses is written by the generator', () => {
@@ -600,6 +609,8 @@ describe('the general desk — the mount registry', () => {
       'DS-GEN-12': 'overview.ground',
       'DS-GEN-13': 'overview.market',
       'DS-GEN-17': 'overview.institutions',
+      // DESK-GEN3 car 1 — the general desk's first position off the overview/history pages.
+      'DS-GEN-18': 'economics.craftReason',
     };
     for (const [blockId, mount] of Object.entries(expected)) {
       const row = sentenceMountForBlock(blockId);
@@ -1284,5 +1295,198 @@ describe('the notable connection', () => {
     expect(carried, 'no generated town carried a prominent relationship').toBeGreaterThan(0);
     expect(carried, 'every town carried one — the lens is a default, not a reading')
       .toBeLessThan(towns);
+  });
+});
+
+describe('DS-GEN-18 — why these workshops, and the blocker that was in the wrong place', () => {
+  const CHAIN = (over = {}) => ({
+    resource: 'Iron ore deposits', upstreamMissing: [], processingInstitutions: ['Smelter'], ...over,
+  });
+  const drawCraft = (readings) => generalStateProse(TOWN, readings, { seed: 'craft', audience: 'dm' })
+    .economics.craftReason?.sentence ?? null;
+
+  it('ALL FOUR POOLS FIRE, and a record with nothing to explain is SILENT rather than defaulted', () => {
+    const cases = [
+      ['STALLED', { activeChains: [CHAIN({ upstreamMissing: ['warehouse_logistics'] })] }],
+      ['HOME-FED', {
+        activeChains: [CHAIN({ resource: 'Livestock' })],
+        exploitation: { partiallyExploited: [{ rawResource: 'livestock' }] },
+      }],
+      ['BOUGHT-IN', { isEntrepot: true, primaryImports: ['Wool'] }],
+      ['UNWORKED', { exploitation: { unexploited: [{ rawResource: 'wool' }] } }],
+    ];
+    for (const [key, readings] of cases) {
+      expect(craftReasonPoolKey(readings), key).toBe(key);
+      expectSentence(drawCraft(readings), key);
+    }
+    expect([...new Set(cases.map(([key]) => key))].sort()).toEqual(poolsOf('DS-GEN-18').sort());
+    // ⛔ THE STATED SILENCE IS HALF THE TOTALITY. An else-arm here would put an authored
+    // sentence on an empty record; the annex rules R-DST-K instead, so a record carrying
+    // none of the four antecedents resolves to NO KEY and draws nothing.
+    expect(craftReasonPoolKey({ activeChains: [], exploitation: {}, primaryImports: [] })).toBeNull();
+    expect(drawCraft({})).toBeNull();
+  });
+
+  it('THE ORDER IS THE ANNEX\'S OWN, and each key outranks the one below it', () => {
+    // A record satisfying EVERY antecedent at once resolves to the narrowest — the only
+    // one naming a live defect — and the ladder is walked one rung at a time from there.
+    const everything = {
+      activeChains: [CHAIN({ resource: 'Livestock', upstreamMissing: ['stone'] })],
+      exploitation: { partiallyExploited: [{ rawResource: 'livestock' }], unexploited: [{ rawResource: 'wool' }] },
+      isEntrepot: true,
+      primaryImports: ['Wool'],
+    };
+    expect(craftReasonPoolKey(everything)).toBe('STALLED');
+    expect(craftReasonPoolKey({ ...everything, activeChains: [CHAIN({ resource: 'Livestock' })] })).toBe('HOME-FED');
+    expect(craftReasonPoolKey({ ...everything, activeChains: [], exploitation: { unexploited: [{ rawResource: 'wool' }] } })).toBe('BOUGHT-IN');
+    expect(craftReasonPoolKey({
+      activeChains: [], exploitation: { unexploited: [{ rawResource: 'wool' }] }, isEntrepot: false, primaryImports: [],
+    })).toBe('UNWORKED');
+  });
+
+  it('⛔ {institution} REFUSES A PLURAL HOUSE, and the digit was never the whole blocker', () => {
+    // The seams say "outlived ITS feed" and "the building stands", so the fill must be one
+    // house. The head word carries the number; a possessive and a trailing `ss` do not.
+    expect(craftInstitutionFill(['Carriers\' guild'])).toBe('Carriers\' guild');
+    expect(craftInstitutionFill(['Waystation'])).toBe('Waystation');
+    expect(craftInstitutionFill(['Cobbler\'s guild'])).toBe('Cobbler\'s guild');
+    // …and every one of these is REFUSED rather than repaired.
+    expect(craftInstitutionFill(['Glassmakers']), 'a plural house took a singular seam').toBeUndefined();
+    expect(craftInstitutionFill(['City walls and gates'])).toBeUndefined();
+    expect(craftInstitutionFill(['Merchant guilds (3-8)']), '§0d bans digits from dossier prose').toBeUndefined();
+    expect(craftInstitutionFill([])).toBeUndefined();
+    // THE ORDER OF THE LIST IS NOT THE ORDER OF THE FILL: the first CONFORMING row wins, so
+    // a roster whose first entry is plural still names its singular house.
+    expect(craftInstitutionFill(['Glassmakers', 'Merchant guilds (3-8)', 'Smelter'])).toBe('Smelter');
+    // And where nothing conforms, both STALLED variants name the slot ⇒ the pool is SILENT.
+    const withheld = { activeChains: [CHAIN({ upstreamMissing: ['stone'], processingInstitutions: ['Glassmakers'] })] };
+    expect(craftReasonPoolKey(withheld), 'the KEY still resolves — the silence is the FILL\'s').toBe('STALLED');
+    expect(drawCraft(withheld), 'a plural house drew a singular sentence').toBeNull();
+    // Every fill this desk offers passes the ANNEX'S OWN shape checker, not a local twin.
+    const shapes = mergedShapes();
+    expect(fillShapeViolation(shapes.institution, craftInstitutionFill(['Smelter']))).toBe('');
+  });
+
+  it('⛔ {resource} IS NOT OFFERED ON STALLED — the feed that failed has no honest producer', () => {
+    // MEASURED IN RENDERED PROSE. Filling from the chain's own `resource` printed "the iron
+    // ore deposits stopped arriving" — the town's standing ground described as a delivery
+    // that failed. The only producer of what actually stopped is `upstreamMissing[]`, which
+    // holds CHAIN IDS (`warehouse_logistics`), refused outright as raw engine tokens.
+    const stalled = { activeChains: [CHAIN({ upstreamMissing: ['warehouse_logistics'] })] };
+    const line = drawCraft(stalled);
+    expectSentence(line, 'STALLED');
+    expect(line, 'the chain\'s own ground was described as a delivery that failed')
+      .not.toMatch(/iron ore deposits/i);
+    // The variant naming the slot is dropped and the `ledger` variant carries the pool.
+    expect(line).toContain('a supply that has failed upstream');
+    // The token itself must never reach a reader through any seam of this block.
+    expect(fillShapeViolation(mergedShapes().resource, 'warehouse_logistics')).toBe('ENGINE-TOKEN-IN-FILL');
+  });
+
+  it('⛔ {good} REFUSES THE ENGINE\'S PARENTHETICAL BOOKKEEPING', () => {
+    // `primaryImports[]` really writes `Bulk grain (local fields depleted)`. That is the
+    // `{complexity}` defect §0c records — a gloss reaching a reader through a slot — in its
+    // round-bracket spelling, which the shared dash test does not catch.
+    const glossed = { isEntrepot: true, primaryImports: ['Bulk grain (local fields depleted)', 'Wool'] };
+    const line = drawCraft(glossed);
+    expectSentence(line, 'BOUGHT-IN');
+    expect(line).not.toMatch(/[()]/);
+    // An entrepôt whose every import is glossed still SPEAKS: one BOUGHT-IN variant names
+    // no good at all, which is why the key resolves on the flag and not on the fill.
+    const allGlossed = { isEntrepot: true, primaryImports: ['Iron ore (local mines exhausted)'] };
+    expect(craftReasonPoolKey(allGlossed)).toBe('BOUGHT-IN');
+    expectSentence(drawCraft(allGlossed), 'BOUGHT-IN, every import glossed');
+  });
+
+  it('⛔ HOME-FED IS ALL BUT UNREACHABLE, and the route that would light it is a DEFAULT', () => {
+    // The two ledgers speak different vocabularies: the chain rows name their feed
+    // `Grazing land` / `Iron ore deposits`, the exploitation rows name theirs `livestock` /
+    // `wool` / `timber`. The desk keys the join on the canonical token anyway, because the
+    // reading is TRUE where it holds — and the tempting alternative, `resourceActive`, is
+    // true on every chain of every town and would print the home-fed sentence everywhere.
+    const disjoint = {
+      activeChains: [CHAIN({ resource: 'Grazing land' })],
+      exploitation: { partiallyExploited: [{ rawResource: 'livestock' }] },
+    };
+    expect(craftReasonPoolKey(disjoint), 'the vocabularies agreed when they should not').toBeNull();
+    expect(disjoint.activeChains[0].upstreamMissing).toHaveLength(0);
+    // …and it DOES hold where the two records really name the same thing.
+    expect(craftReasonPoolKey({
+      activeChains: [CHAIN({ resource: 'Livestock' })],
+      exploitation: { fullyExploited: [{ rawResource: 'livestock' }] },
+    })).toBe('HOME-FED');
+  });
+});
+
+describe('DS-GEN-18 over the real generator — the route, measured', () => {
+  const CONFIGS = [
+    ['hamlet_forest_isolated', { settType: 'hamlet', culture: 'celtic', terrainOverride: 'forest', tradeRouteAccess: 'isolated' }],
+    ['city_plains_crossroads', { settType: 'city', culture: 'germanic', terrainOverride: 'plains', tradeRouteAccess: 'crossroads' }],
+    ['metropolis_riverside_port', { settType: 'metropolis', culture: 'mediterranean', terrainOverride: 'riverside', tradeRouteAccess: 'port' }],
+    ['village_coastal_port', { settType: 'village', culture: 'norse', terrainOverride: 'coastal', tradeRouteAccess: 'port' }],
+  ];
+  const SEEDS = ['sf-test-2026-04', 'gen3-a', 'gen3-b'];
+
+  it('the antecedents are REAL: three of the four keys are reached over generated towns', () => {
+    /** @type {Record<string, number>} */
+    const seen = {};
+    let unfilled = 0;
+    let digits = 0;
+    for (const seed of SEEDS) {
+      for (const [, config] of CONFIGS) {
+        const s = generateSettlementPipeline(config, null, { seed, customContent: {} });
+        const readings = {
+          activeChains: s.economicState?.activeChains,
+          exploitation: s.resourceAnalysis?.exploitation,
+          isEntrepot: s.economicState?.isEntrepot,
+          primaryImports: s.economicState?.primaryImports,
+        };
+        const key = craftReasonPoolKey(readings);
+        seen[String(key)] = (seen[String(key)] || 0) + 1;
+        const line = generalStateProse(s, readings, { seed, audience: 'dm' }).economics.craftReason?.sentence;
+        if (line) {
+          if (/\{[a-z_]+\}/i.test(line)) unfilled += 1;
+          if (/[0-9]/.test(line)) digits += 1;
+        }
+      }
+    }
+    expect(unfilled, 'an unfilled seam reached the reader').toBe(0);
+    expect(digits, '§0d bans digits from dossier prose').toBe(0);
+    // ⚠ A FLOOR, NOT AN EXACT COUNT: which key a town reaches is the generator's business
+    // and the seeds may move. What is asserted is that the route is not keyed on one arm.
+    expect(Object.keys(seen).filter((k) => k !== 'null').length, `keys reached: ${JSON.stringify(seen)}`)
+      .toBeGreaterThanOrEqual(3);
+    expect(seen.STALLED, 'STALLED was never reached over the sample').toBeGreaterThan(0);
+    expect(seen.null || 0, 'a generated town reached no antecedent at all').toBe(0);
+  });
+
+  it('THE INSTITUTION FILL IS THE CHAIN ROW\'S OWN — no roster join, no generator import', () => {
+    // The annex rules the fill "a processingInstitutions[] row's own recorded name", and
+    // that list is ALREADY the matched subset: computeActiveChains returns early where no
+    // institution matches, so the chain row alone is sufficient. Resolving through the
+    // roster instead would drag a GENERATOR module into every tab chunk that draws this
+    // desk — and would clean nothing, because the roster spells the plural category the
+    // same way (`Merchant guilds (3-8)` resolves to `Merchant guilds (50-100+)`).
+    const desk = src('src/domain/display/stateProse/generalStateProse.js');
+    expect(desk, 'the desk reached for a generator module').not.toContain('computeActiveChains');
+    expect(desk).not.toContain('institutionMatchesProcessor');
+    let stalledTowns = 0;
+    let named = 0;
+    for (const seed of SEEDS) {
+      for (const [, config] of CONFIGS) {
+        const s = generateSettlementPipeline(config, null, { seed, customContent: {} });
+        const chains = (s.economicState?.activeChains || [])
+          .filter((c) => Array.isArray(c.upstreamMissing) && c.upstreamMissing.length > 0);
+        if (chains.length === 0) continue;
+        stalledTowns += 1;
+        if (chains.some((c) => craftInstitutionFill(c.processingInstitutions))) named += 1;
+      }
+    }
+    expect(stalledTowns, 'no generated town carried a stalled chain — the arm is vacuous')
+      .toBeGreaterThan(0);
+    // MEASURED at this tip: most stalled towns offer a singular house and some offer none,
+    // and the ones that offer none fall SILENT. A floor rather than a ratio: the generator
+    // owns which rosters a seed produces.
+    expect(named, 'not one stalled town could name a house').toBeGreaterThan(0);
   });
 });

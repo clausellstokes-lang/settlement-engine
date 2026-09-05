@@ -113,6 +113,12 @@ export const SLOT_FILL_SHAPES = Object.freeze({
   calamity: 'bare-common',
   timeband_since: 'phrase',
   timeband_age: 'phrase',
+  // DS-GEN-18. `{institution}` is §0c's own row (a named house on the roster) and the two
+  // supply slots are `bare-common` — the seams supply their articles ("the {resource}
+  // stopped arriving", "works {good} it cannot raise").
+  institution: 'proper',
+  resource: 'bare-common',
+  good: 'bare-common',
 });
 
 /**
@@ -1163,6 +1169,203 @@ export function institutionsPoolKey(inst) {
   return CORPUS['DS-GEN-17'].pools[key] ? key : null;
 }
 
+// ── DS-GEN-18 · Economics › Why these workshops (the crafts explained by their feed) ──
+
+/**
+ * A `bare-common` fill, or `undefined` — the desk's own half of the shape contract, mirroring
+ * `fillShapeViolation`'s BARE-COMMON branch in scripts/lib/dossier-slot-shapes.mjs: the SEAM
+ * supplies the article, so the fill must not, and it lands mid-sentence, so it reads lowercase.
+ *
+ * ⭐ IT DECAPITALISES AND IT REFUSES, on `phraseFill`'s reasoning one shape over. The producers
+ * of these two slots write TITLE-CASED labels — `Iron ore deposits`, `Wool` — and dropping one
+ * verbatim into "the {resource} stopped arriving" puts a capital mid-sentence, which
+ * `fillShapeViolation` convicts as COMMON-FILL-IS-CAPITALISED.
+ *
+ * ⛔ AND IT REFUSES A PARENTHETICAL GLOSS, which is this desk's own addition to the shared
+ * branch and is MEASURED rather than tasteful: `economicState.primaryImports[]` really writes
+ * `Bulk grain (local fields depleted)` and `Iron ore (local mines exhausted)`, and the seam
+ * "{settlement} works {good} it cannot raise" would render the engine's parenthetical
+ * bookkeeping inside an authored sentence. That is the `{complexity}` defect §0c records —
+ * an em-dashed gloss reaching a reader through a slot — in its round-bracket spelling, and
+ * the shared branch does not catch it because the shared branch tests for the dash.
+ * @param {unknown} value @returns {string|undefined}
+ */
+function bareCommonFill(value) {
+  const v = text(value);
+  if (!v) return undefined;
+  if (/[—–]/.test(v)) return undefined;
+  if (/[.!?]\s|[.!?]$/.test(v)) return undefined;
+  if (/[0-9]/.test(v)) return undefined;
+  if (/[a-z]+_[a-z]+/.test(v)) return undefined;
+  if (/[()]/.test(v)) return undefined;
+  if (/^(the|a|an|its|his|her|their|our|this|that|these|those)\b/i.test(v)) return undefined;
+  if (/^[A-Z][a-z]/.test(v)) return v[0].toLowerCase() + v.slice(1);
+  return /^[a-z]/.test(v) ? v : undefined;
+}
+
+/**
+ * `{institution}` for DS-GEN-18 — A NAMED HOUSE THE SEAM MAY SAY "ITS" ABOUT.
+ *
+ * ⛔⛔ THE BLOCKER THIS BLOCK INHERITED WAS LOCATED IN THE WRONG PLACE, AND THE MEASUREMENT IS
+ * THE FINDING. The standing account of DS-GEN-18 said `STALLED` could not light because its
+ * only producer, `activeChains[].processingInstitutions`, writes plural category labels
+ * carrying a count range — `Merchant guilds (3-8)` — which §0d's digit ban refuses. Measured
+ * over 48 generated settlements at this tip: of 835 processing rows only 103 carry a digit,
+ * and 489 of 558 distinct rows pass the `proper` shape unchanged. The digit is a MINORITY
+ * shape and the shape contract already refuses it.
+ *
+ * ⛔ AND THE CURE THAT WAS PROPOSED FOR IT DOES NOT WORK, WHICH IS WHY IT IS RECORDED HERE.
+ * Resolving the pattern through the town's own roster — matching an institution and taking
+ * ITS name — cleans NOTHING: over the same sample, 0 of 103 digit-bearing patterns resolve to
+ * a digit-free institution name, because the roster spells the same category the same way
+ * (`Merchant guilds (3-8)` resolves to `Merchant guilds (50-100+)`, which is worse). The
+ * roster join is also not free: `institutionMatchesProcessor` lives in a GENERATOR module and
+ * importing it here would drag the chain generator into every tab chunk that draws this desk.
+ * The annex already rules the fill without it — "a `processingInstitutions[]` row's own
+ * recorded name" — and that row is ALREADY the matched subset (`computeActiveChains` returns
+ * early where no institution matches), so the chain row alone is both sufficient and honest.
+ *
+ * ⛔ THE DEFECT THAT IS REAL IS NUMBER AGREEMENT, AND IT SURVIVES EVERY DIGIT CURE. Both
+ * `STALLED` seams speak of ONE house — "outlived ITS feed", "the building stands, the skill
+ * remains" — so a plural roster row renders "Glassmakers at Steinmark outlived its feed",
+ * which is a disagreement in front of a reader. The head word is therefore tested and a
+ * plural house is REFUSED rather than repaired: singularising a name would be this desk
+ * inventing a spelling, and anchored liveness dropping the pool is strictly better.
+ *
+ * MEASURED CONSEQUENCE, so the silence is not read as a bug: over 48 settlements, 25 carry a
+ * stalled chain; 25 of 25 offer a `proper`-conforming row and 20 of 25 offer a SINGULAR one.
+ * The other five are offered only `City walls and gates` and `Glassmakers`, and on those five
+ * towns `STALLED` is WITHHELD — silence, never a hole.
+ * @param {unknown} processingInstitutions the chain row's own list, whatever the record
+ *   wrote there — `unknown` because the caller reads it off a chain row it does not own
+ * @returns {string|undefined}
+ */
+export function craftInstitutionFill(processingInstitutions) {
+  const rows = Array.isArray(processingInstitutions) ? processingInstitutions : [];
+  for (const row of rows) {
+    const name = properFill(text(row));
+    // The HEAD WORD carries the number: `Carriers' guild` is a guild, `Glassmakers` are many.
+    // A trailing `ss` (`business`) and a possessive (`Cobbler's`) are not plural markers.
+    if (name && !/[^s']s$/.test(name.split(/\s+/).pop() || '')) return name;
+  }
+  return undefined;
+}
+
+/**
+ * The chain row DS-GEN-18's `STALLED` reading is about — a SELECTION, on `significantEvent`'s
+ * own reasoning: the record holds many chains and the corpus writes one sentence, so the
+ * choice is stated rather than left to array order. The first row whose `upstreamMissing[]` is
+ * non-empty AND whose processing list can name a house, so the key and the fill cannot
+ * disagree about which workshop the sentence is about.
+ * @param {unknown} chains @returns {ChainRow|null}
+ */
+function stalledChain(chains) {
+  const rows = chainRows(chains).filter(
+    (c) => Array.isArray(c.upstreamMissing) && c.upstreamMissing.length > 0,
+  );
+  return rows.find((c) => craftInstitutionFill(c.processingInstitutions)) || rows[0] || null;
+}
+
+/**
+ * One row of `economicState.activeChains[]`, as `computeActiveChains` writes it.
+ * @typedef {{resource?: unknown, upstreamMissing?: unknown,
+ *   processingInstitutions?: unknown}} ChainRow
+ */
+
+/**
+ * The record's chain rows, object-shaped ones only.
+ * @param {unknown} chains @returns {ReadonlyArray<ChainRow>}
+ */
+function chainRows(chains) {
+  return /** @type {ReadonlyArray<ChainRow>} */ (
+    (Array.isArray(chains) ? chains : []).filter((c) => c && typeof c === 'object')
+  );
+}
+
+/**
+ * DS-GEN-18's pool — the ANNEX'S OWN ORDERED RESOLUTION, evaluated in the order written and
+ * stopping at the first key whose antecedent holds, with a STATED SILENCE where none does.
+ *
+ * ⛔ THE ORDER AND THE SILENCE ARE ONE RULE AND ARE COPIED, NOT INVENTED. `STALLED` first
+ * because `upstreamMissing[]` is the narrowest antecedent and the only one naming a live
+ * defect; `HOME-FED` next because it needs TWO records to agree; `BOUGHT-IN` next because
+ * `isEntrepot` is a town-level flag true of every craft at once; `UNWORKED` last because the
+ * exploitation residue is close to universal and would swamp every reading that explains a
+ * workshop. Where none holds the block offers NO VARIANT — an else-arm here would put an
+ * authored sentence on an empty record, and R-DST-K already means silence.
+ *
+ * ⛔⛔ `HOME-FED` IS ALL BUT UNREACHABLE AT THIS TIP, AND IT IS A FINDING RATHER THAN A ROUTE
+ * DEFECT. Its antecedent is "a chain row whose `resource` appears in `fullyExploited` or
+ * `partiallyExploited`", and the two ledgers speak DIFFERENT VOCABULARIES: the chain rows are
+ * `computeActiveChains`'s need-keyed families and name their feed `Grazing land`,
+ * `Iron ore deposits`, `Managed woodland`; the exploitation rows are `resourceGenerator`'s
+ * RESOURCE_CHAINS and name theirs `livestock`, `wool`, `hides`, `timber`. MEASURED over 24
+ * settlements with the canonical `resourceKeyForLabel` join applied: the two agree on 3 of 24
+ * towns, and 0 of 24 reach the key under the annex's order because `STALLED` or `BOUGHT-IN`
+ * fires first. The desk keys it anyway and keys it on the canonical token, because the reading
+ * is TRUE where it holds and the alternative — reading `resourceActive === true`, which is
+ * 24 of 24 — is a default wearing a reading's clothes: it would print "the ground gives it,
+ * so the workshop is here" over every town in every world. ⚠ RAISED FOR THE CHAIR: lighting
+ * `HOME-FED` properly needs a resource-vocabulary join the estate does not have, which is a
+ * generation-side act and not a desk one.
+ * @param {{activeChains?: unknown, exploitation?: {fullyExploited?: unknown,
+ *   partiallyExploited?: unknown, unexploited?: unknown}|null, isEntrepot?: unknown,
+ *   primaryImports?: unknown}} readings
+ * @returns {string|null}
+ */
+export function craftReasonPoolKey(readings) {
+  const ex = readings?.exploitation && typeof readings.exploitation === 'object'
+    ? readings.exploitation : {};
+  const worked = rawResources(ex.fullyExploited).concat(rawResources(ex.partiallyExploited));
+  const key = stalledChain(readings?.activeChains) ? 'STALLED'
+    : homeFedChain(readings?.activeChains, worked) ? 'HOME-FED'
+      : (readings?.isEntrepot === true || boughtGood(readings?.primaryImports)) ? 'BOUGHT-IN'
+        : rawResources(ex.unexploited).length > 0 ? 'UNWORKED' : null;
+  return key && CORPUS['DS-GEN-18'].pools[key] ? key : null;
+}
+
+/**
+ * The `rawResource` words of one exploitation list. The engine writes a mix of prose labels
+ * (`medicinal herbs`) and raw tokens (`mountain_timber`) into the same column; both are kept
+ * here because the KEY only counts rows, and the shape contract refuses the token at the fill.
+ * @param {unknown} list @returns {ReadonlyArray<string>}
+ */
+function rawResources(list) {
+  return (Array.isArray(list) ? list : [])
+    .map((row) => text(/** @type {{rawResource?: unknown}|null} */ (row)?.rawResource))
+    .filter(Boolean);
+}
+
+/**
+ * The chain row whose feed the town's own ground is measured to work. Keyed on the canonical
+ * resource token both sides can be reduced to, never on either side's display label — the
+ * standing label-trap rule, applied across two ledgers rather than within one.
+ * @param {unknown} chains @param {ReadonlyArray<string>} worked
+ * @returns {ChainRow|null}
+ */
+function homeFedChain(chains, worked) {
+  const keys = new Set(worked.map((r) => r.toLowerCase()));
+  return chainRows(chains).find((c) => {
+    const label = text(c.resource);
+    return label !== '' && keys.has(label.toLowerCase());
+  }) || null;
+}
+
+/**
+ * The imported feedstock DS-GEN-18's `BOUGHT-IN` names — the first `primaryImports[]` row that
+ * can conform to `{good}`'s bare-common shape. An entrepôt with no conforming import still
+ * resolves the KEY (its `isEntrepot` flag is the antecedent) and speaks through the one
+ * variant that names no good.
+ * @param {unknown} imports @returns {string|undefined}
+ */
+function boughtGood(imports) {
+  for (const row of (Array.isArray(imports) ? imports : [])) {
+    const good = bareCommonFill(row);
+    if (good) return good;
+  }
+  return undefined;
+}
+
 // ── THE DESK ────────────────────────────────────────────────────────────────────────
 
 /**
@@ -1198,6 +1401,8 @@ export function institutionsPoolKey(inst) {
  *   verdict: ReadonlyArray<LegibilityRung|null>,
  * }>, hooks: Readonly<{
  *   framing: ReadonlyArray<LegibilityRung|null>,
+ * }>, economics: Readonly<{
+ *   craftReason: LegibilityRung|null,
  * }>}>}
  */
 export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
@@ -1219,6 +1424,7 @@ export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
   }),
   viability: Object.freeze({ verdict: Object.freeze([]) }),
   hooks: Object.freeze({ framing: Object.freeze([]) }),
+  economics: Object.freeze({ craftReason: null }),
 });
 
 /**
@@ -1245,6 +1451,9 @@ export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
  *   relationships?: ReadonlyArray<{flagDriven?: unknown}|null>|null,
  *   hookCategories?: ReadonlyArray<unknown>|null,
  *   clockIds?: ReadonlyArray<unknown>|null, governingName?: unknown,
+ *   activeChains?: unknown, primaryImports?: unknown,
+ *   exploitation?: {fullyExploited?: unknown, partiallyExploited?: unknown,
+ *     unexploited?: unknown}|null,
  *   history?: {age?: unknown, historicalCharacter?: unknown,
  *     founding?: {foundedBy?: unknown, initialChallenge?: unknown}|null,
  *     historicalEvents?: Array<{type?: unknown, name?: unknown, yearsAgo?: unknown,
@@ -1383,6 +1592,43 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
   const calamityRow = recordCalamityEvent(events);
   const recordKey = events.length > 0 ? eventRecordPoolKey(events) : null;
 
+  // ── DS-GEN-18 ──────────────────────────────────────────────────────────────────────
+  // The key first, then the slots FROM THE ROW THE KEY CHOSE. `{resource}` reads the chain's
+  // own feed on the two chain-keyed arms and the exploitation ledger's residue on UNWORKED,
+  // because those are the two records those keys are ABOUT; `{good}` is offered only where a
+  // conforming import exists, and `{institution}` only where a singular house does.
+  const craftKey = craftReasonPoolKey(readings);
+  const stalledRow = craftKey === 'STALLED' ? stalledChain(readings.activeChains) : null;
+  const workedRow = craftKey === 'HOME-FED'
+    ? homeFedChain(readings.activeChains, rawResources(readings.exploitation?.fullyExploited)
+      .concat(rawResources(readings.exploitation?.partiallyExploited)))
+    : null;
+  const craftRow = stalledRow || workedRow;
+  const craftSlots = {
+    ...slots,
+    institution: craftInstitutionFill(craftRow?.processingInstitutions),
+    // ⛔ `{resource}` IS NOT OFFERED ON `STALLED`, AND THE REASON WAS FOUND IN RENDERED
+    // PROSE RATHER THAN IN REASONING. The seam is "the {resource} stopped arriving", so the
+    // slot names THE FEED THAT FAILED — and the only producer of that fact is the chain's
+    // `upstreamMissing[]`, which holds CHAIN IDS (`warehouse_logistics`, `food_processing`,
+    // `precious_metals_mining`): raw engine tokens the shape contract refuses outright, and
+    // not resource names in any case. Filling from the chain's own `resource` instead
+    // printed **"the hunting grounds stopped arriving"** and **"the iron ore deposits
+    // stopped arriving"** — the town's own standing ground, described as a delivery that
+    // failed, which is false about the town and not merely awkward. The slot is left
+    // UNFILLED and anchored liveness drops the one variant naming it; the `ledger` variant
+    // names only `{settlement}` and `{institution}` and carries the pool.
+    resource: craftKey === 'UNWORKED'
+      ? bareCommonFill(rawResources(readings.exploitation?.unexploited)[0])
+      : craftKey === 'HOME-FED' ? bareCommonFill(craftRow?.resource) : undefined,
+    good: craftKey === 'BOUGHT-IN' ? boughtGood(readings.primaryImports) : undefined,
+  };
+  const craftReasonLine = craftKey
+    ? legibilityRung('', readStateProse(CORPUS, 'DS-GEN-18', craftKey, {
+      ...options, slots: craftSlots,
+    }), [])
+    : null;
+
   return Object.freeze({
     overview: Object.freeze({
       conflicts,
@@ -1428,6 +1674,10 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
             : null)),
       ].filter((line) => line && line.sentence)),
     }),
+    // DS-GEN-18 at ONE position on the economics page, beside the supply-chain rows the
+    // reading is about. The slots are drawn from the SAME chain row the key was decided by,
+    // so the sentence and the house it names cannot describe two different workshops.
+    economics: Object.freeze({ craftReason: craftReasonLine }),
     history: Object.freeze({
       identity,
       founded: rung('DS-GEN-14', foundedPoolKey(hist), ''),
