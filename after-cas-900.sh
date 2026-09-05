@@ -8,11 +8,11 @@ TE=$(grep -oE '^TRUE_EXIT=[0-9]+' "$LOG" | tail -1 | cut -d= -f2)
 [ "$TE" = "0" ] || { echo "⛔ gate TRUE_EXIT=$TE (from the LOG) — stop"; exit 1; }
 [ "$(grep -c 'SCOPE SENTINEL' "$LOG")" = "0" ] || { echo "⛔ sentinel in the log — stop"; exit 1; }
 [ "$(grep -c 'update REFUSED' "$LOG")" = "0" ] || { echo "⛔ refusal in the log — stop"; exit 1; }
-grep -q '^GATE_CARS=110$' "$LOG" || { echo "⛔ gate did not run over 110 cars: $(grep '^GATE_CARS=' "$LOG")"; exit 1; }
+grep -q '^GATE_CARS=111$' "$LOG" || { echo "⛔ gate did not run over 111 cars: $(grep '^GATE_CARS=' "$LOG")"; exit 1; }
 TESTS=$(grep -oE 'known failure\(s\) of [0-9]+' "$LOG" | tail -1 | grep -oE '[0-9]+$')
 [ -n "$TESTS" ] || { echo "⛔ could not derive totalTests from the log — stop"; exit 1; }
 echo "gate green · tests=$TESTS"
-python3 $SC/chair-verify.py "$D" "$BASE" "$LOG" 110 > $SC/chair-verify-900.out 2>&1 || { tail -6 $SC/chair-verify-900.out; echo "⛔ chair-verify RED — stop"; exit 1; }
+python3 $SC/chair-verify.py "$D" "$BASE" "$LOG" 111 > $SC/chair-verify-900.out 2>&1 || { tail -6 $SC/chair-verify-900.out; echo "⛔ chair-verify RED — stop"; exit 1; }
 tail -3 $SC/chair-verify-900.out
 cd "$REPO"; NEW=$(git -C "$D" rev-parse HEAD)
 [ "$(git rev-parse claude/composite-r4)" = "$BASE" ] || { echo "⛔ product tip is not the declared base $BASE — stop"; exit 1; }
