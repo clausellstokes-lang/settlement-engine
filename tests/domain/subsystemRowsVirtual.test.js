@@ -213,6 +213,13 @@ const IRREGULAR_FORCE = 'irregularForceEnabled';
 // cost above, paid in the same three module-scope edits and carrying ZERO new test titles
 // here.
 const CHANCE_ENCOUNTERS = 'chanceEncountersEnabled';
+// LGT-P5-WOPS (the lighting wave's L-HOMES car 4). The W-OPS infiltration ladder, minted
+// with its manifest entry, its certification row in the reserved `subsystemRowsOps.js`
+// leaf and its ONE by-name gate read (`espionageGate.infiltrationDepthActive`) in a
+// single commit — the §49-ruling-3 cost above, paid in the same three module-scope edits
+// and carrying ZERO new test titles here. The gate is in the family DOOR module rather
+// than in the leaf because the leaf's exports take `lit` as an ARGUMENT by charter.
+const INFILTRATION_DEPTH = 'infiltrationDepthEnabled';
 // AUTHORING ORDER, not alphabetical: the assertion below is an exact ordered equality
 // against VIRTUAL_SUBSYSTEM_ROWS, so this list mirrors the file's own section order.
 const VIRTUAL_RULES = Object.freeze([
@@ -225,6 +232,7 @@ const VIRTUAL_RULES = Object.freeze([
   UNDERCITY_HIGH_WATER,
   TREASURY,
   FOREIGN_SEAT, LEGITIMACY_UPHEAVAL, IRREGULAR_FORCE, WAR_MEMORY,
+  INFILTRATION_DEPTH,
   CHANCE_ENCOUNTERS,
 ]);
 
@@ -408,6 +416,14 @@ const LANE_LEAVES = Object.freeze({
     'src/domain/worldPulse/envoyChanceMeeting.js',
     'src/domain/worldPulse/envoyChanceMeetingLedger.js',
     'src/domain/worldPulse/envoyChanceMeetingStage.js',
+  ],
+  // LGT-P5-WOPS. TWO leaves, and the second is the family DOOR rather than a body: the
+  // ladder leaf is gate-free by its own charter (its exports take `lit` as an argument),
+  // so the module where a world is consulted is espionageGate.js. Both are traced,
+  // because the zero-candidate claim has to hold at the door as well as at the body.
+  [INFILTRATION_DEPTH]: [
+    'src/domain/worldPulse/espionage/espionageGate.js',
+    'src/domain/worldPulse/espionage/infiltrationDepth.js',
   ],
 });
 
