@@ -619,9 +619,11 @@ export const ENVOY_TASK_PROVENANCE = Object.freeze({
     'the four method words and their nerve fits. The fits are derived from the volume\'s own '
       + 'sentence about threatening cowardly courts; a signed table is the pen\'s',
   ]),
-  door: 'envoyTaskCatalogEnabled: NAMED, NOT MINTED. The CR-WR10-C mint is a by-name === true '
-    + 'read plus a manifest entry plus an authored VIRTUAL_SUBSYSTEM_ROWS row plus a dormancy '
-    + 'fence, ALL in one commit: a register edit this packet did not order',
+  door: 'envoyTaskCatalogEnabled: MINTED 2026-09-05 by the lighting wave car LGT-P5-WOPS, and '
+    + 'the READ IS NOT HERE. The key is a manifest member with an authored certification row, '
+    + 'and its one by-name strict gate lives in the errand family door home beside the spine\'s '
+    + 'own, AND-composed with the spine: a menu of business is only as live as the road that '
+    + 'carries people to it. This leaf stays gate-free, and the arm below still pins it',
   consumers: 'NONE. No src/ module imports this leaf; the darkness is pinned by a real planted '
     + 'importer in the battery, not by a grep that could pass by finding nothing',
   census: Object.freeze({

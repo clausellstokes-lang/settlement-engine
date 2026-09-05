@@ -64,6 +64,16 @@ import { effectiveCharacter } from '../../src/domain/npc/characterDrift.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
+// LGT-P5-WOPS: the door this leaf's flag was minted onto. The read lives in the ERRAND
+// family's door home beside the spine's own gate — never here, which the no-fork arm below
+// still pins.
+import { envoyTaskCatalogActive } from '../../src/domain/worldPulse/errandMint.js';
+import {
+  DEFAULT_SIMULATION_RULES,
+  ENGINE_GATED_VIRTUAL_RULE_KEYS,
+  SIMULATION_RULE_PRESETS,
+} from '../../src/domain/worldPulse/simulationRules.js';
+
 const LEAF = 'src/domain/worldPulse/envoyTaskCatalog.js';
 
 /** Every .js/.jsx under src/, repo-relative — the live tree, never a fixture list. */
@@ -481,16 +491,40 @@ describe('W-OPS O4 — the R3b method menu', () => {
 
 describe('W-OPS O4 — the leaf is dark and forks nothing', () => {
   test('⭐ NO src/ MODULE IMPORTS THIS LEAF — the darkness is a discovery arm', () => {
+    // ⏱ RE-CUT 2026-09-05 BY LGT-P5-WOPS, ON THIS VOLUME'S OWN RULING. The arm's TITLE is
+    // the claim — no src MODULE IMPORTS this leaf — and its first spelling measured
+    // MENTIONS of the string `envoyTaskCatalog`, which the CR-WR10-C mint necessarily adds
+    // in three bookkeeping places: the manifest member, the certification row's module
+    // path, and the errand family door. None of them is a caller. The sibling car in this
+    // same volume already ruled the instrument verbatim (missionDispatcher.test.js: "An
+    // IMPORT SPECIFIER census, not a mention census … a header is not a caller"), so the
+    // caller claim is now that census — STRICTLY STRONGER, because a mention scan is
+    // satisfied by a renamed import — and the mention census SURVIVES beside it as an
+    // EXACT roster, so a fourth namer reds and a vanished mint surface reds too.
     const importers = srcModules()
       .filter((rel) => rel !== LEAF)
-      .filter((rel) => /envoyTaskCatalog/.test(codeOf(rel)));
+      .filter((rel) => /from\s+'[^']*envoyTaskCatalog\.js'/.test(codeOf(rel)));
     expect(importers).toEqual([]);
+    const namers = srcModules()
+      .filter((rel) => rel !== LEAF)
+      .filter((rel) => /envoyTaskCatalog/.test(codeOf(rel)))
+      .sort();
+    expect(namers).toEqual([
+      'src/domain/certification/subsystemRowsOps.js',
+      'src/domain/worldPulse/errandMint.js',
+      'src/domain/worldPulse/simulationRules.js',
+    ]);
   });
 
   test('the leaf mints NO flag read — the door is named and not opened', () => {
     const code = codeOf(LEAF);
+    // ⏱ THE MINT LANDED 2026-09-05 AND THIS NEGATIVE IS UNCHANGED ON PURPOSE — it is the
+    // contract, not a countdown. The catalog is a pure table whose exports take their
+    // inputs as arguments, so the world is consulted in the errand family's door home and
+    // never here; the door's own arms are at the foot of this file.
     expect(/envoyTaskCatalogEnabled\s*\]?\s*===\s*true/.test(code)).toBe(false);
-    expect(ENVOY_TASK_PROVENANCE.door).toContain('NAMED, NOT MINTED');
+    expect(ENVOY_TASK_PROVENANCE.door).toContain('MINTED 2026-09-05');
+    expect(ENVOY_TASK_PROVENANCE.door).toContain('the READ IS NOT HERE');
   });
 
   test('⛔ THE LEAF IMPORTS NOTHING CROSS-LAYER — no coupling registry row is owed', () => {
@@ -544,5 +578,76 @@ describe('W-OPS O4 — the leaf is dark and forks nothing', () => {
   test('nothing here is signed — the catalog is the owner\'s §9 row 1', () => {
     expect(ENVOY_TASK_PROVENANCE.signedBy).toBeNull();
     for (const row of ENVOY_TASK_CATALOG) expect(row.signedBy).toBeNull();
+  });
+});
+
+// ── 9. THE DOOR, MINTED 2026-09-05 BY LGT-P5-WOPS ────────────────────────────────
+
+describe('W-OPS O4 — the CR-WR10-C door, and the polarity census that keeps it single', () => {
+  /** The spine's real precondition — `errandSpineEnabled` read strictly, by name, off the
+   * world's own rules — and then this key. Deliberately NO espionage flag: the catalog is
+   * diplomatic business, and the asymmetry is asserted below rather than assumed. */
+  const litWorld = (extra = {}) => ({
+    simulationRules: { errandSpineEnabled: true, envoyTaskCatalogEnabled: true, ...extra },
+  });
+
+  test('⭐ THE ONE GATE READ IS LIT, AND IT IS THE ERRAND DOOR — not this leaf', () => {
+    expect(envoyTaskCatalogActive(litWorld())).toBe(true);
+    expect(envoyTaskCatalogActive(litWorld({ envoyTaskCatalogEnabled: false }))).toBe(false);
+    expect(envoyTaskCatalogActive({ simulationRules: {} })).toBe(false);
+    expect(envoyTaskCatalogActive(null)).toBe(false);
+    expect(envoyTaskCatalogActive(undefined)).toBe(false);
+  });
+
+  test('⛔ STRICT, NOT TRUTHY: every truthy non-true spelling reads exactly like absent', () => {
+    const absent = envoyTaskCatalogActive(litWorld({ envoyTaskCatalogEnabled: undefined }));
+    expect(absent).toBe(false);
+    for (const truthy of [1, 'true', {}, []]) {
+      expect(
+        envoyTaskCatalogActive(litWorld({ envoyTaskCatalogEnabled: truthy })),
+        `a truthy non-true ${JSON.stringify(truthy)} must read exactly like absent`,
+      ).toBe(absent);
+    }
+  });
+
+  test('⛔ THE DOOR IS THE SPINE AND NEVER THE ESPIONAGE LAYER — the asymmetry is the design', () => {
+    // Drop the spine and the menu goes dark: a list of business nobody can be sent on.
+    expect(envoyTaskCatalogActive(litWorld({ errandSpineEnabled: false }))).toBe(false);
+    // ...and with NO espionage flag anywhere in the world it stays LIT, which is the half
+    // that would silently invert if a later car folded this key under the covert layer.
+    expect(envoyTaskCatalogActive(litWorld())).toBe(true);
+    expect(Object.keys(litWorld().simulationRules)).not.toContain('espionageEnabled');
+  });
+
+  test('⛔ THE POLARITY CENSUS: exactly ONE by-name read in src/, and it is strict', () => {
+    // A READ, NOT A MENTION: the manifest member, the certification row's `rule` field and
+    // this leaf's provenance string all NAME the key and gate nothing.
+    const KEY = 'envoyTaskCatalogEnabled';
+    const READ_RE = new RegExp(`\\b${KEY}\\s*(?:===|!==|==|!=)`);
+    const readers = srcModules()
+      .map((rel) => ({ rel, code: codeOf(rel) }))
+      .filter((entry) => READ_RE.test(entry.code))
+      .map((entry) => entry.rel)
+      .sort();
+    expect(readers).toEqual(['src/domain/worldPulse/errandMint.js']);
+    expect(READ_RE.test('rules.envoyTaskCatalogEnabled === true')).toBe(true);
+    expect(READ_RE.test("door: 'envoyTaskCatalogEnabled: MINTED'")).toBe(false);
+  });
+
+  test('⛔ THE KEY IS VIRTUAL: absent from the defaults and from every preset spread', () => {
+    expect(Object.prototype.hasOwnProperty.call(DEFAULT_SIMULATION_RULES, 'envoyTaskCatalogEnabled')).toBe(false);
+    for (const [id, preset] of Object.entries(SIMULATION_RULE_PRESETS)) {
+      expect(
+        Object.prototype.hasOwnProperty.call(preset.rules, 'envoyTaskCatalogEnabled'),
+        `${id} declares the key — a virtual key must be false everywhere by ABSENCE`,
+      ).toBe(false);
+    }
+    expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toContain('envoyTaskCatalogEnabled');
+  });
+
+  test('⭐ MINTING THE DOOR SIGNED NOTHING — the table is still the pen\'s', () => {
+    expect(ENVOY_TASK_PROVENANCE.signedBy).toBe(null);
+    expect(ENVOY_TASK_PROVENANCE.status).toMatch(/OWNER-UNSIGNED/);
+    expect(ENVOY_TASK_PROVENANCE.ownerRows.length).toBe(5);
   });
 });
