@@ -57,7 +57,7 @@ async function pinLegacyCampaignBindings(set, get, customContent, ownerId) {
 // Every category therefore receives the same admission rules without pulling
 // the vocabulary graph into first paint. Version metadata is stripped before
 // admission, and only the manifest-clean definition may proceed.
-async function admissionFor(category, item) {
+async function admissionFor(category, item, wall = null) {
   const [
     { admitCustomContentDefinitionShape },
     { authoredDataOf },
@@ -77,13 +77,29 @@ async function admissionFor(category, item) {
   const admission = admitCustomContentDefinitionShape(category, authored, {
     allowSystemFields: true,
   });
-  if (admission.ok) return { ok: true, definition: admission.definition };
+  // The charset verdict is computed only when a wall was loaded, and a wall is
+  // loaded only on an authoring lane. A restore cannot consult what it never
+  // built. Under `report` the verdict never touches `ok`; it rides beside it so
+  // the editor can show the author what the paid surfaces cannot draw.
+  const charset = wall && admission.ok
+    ? wall.validate(String(category), authored).rejections
+    : [];
+  if (admission.ok && (wall === null || wall.enforcement !== 'refuse' || charset.length === 0)) {
+    return { ok: true, definition: admission.definition, charset };
+  }
+  if (admission.ok) {
+    return {
+      ok: false,
+      charset,
+      error: charset.map(entry => `${entry.field}: ${entry.code}`).join(' '),
+    };
+  }
   const error = admission.errors.map(entry => (
     entry.field
       ? `${entry.field}: ${entry.code}`
       : entry.code
   )).join(' ');
-  return { ok: false, error };
+  return { ok: false, error, charset };
 }
 
 const LOCAL_KEY = 'sf_custom_content';
@@ -239,14 +255,28 @@ export const createCustomContentRuntimeActions = (set, get) => {
             === String(request.definitionId))
         || null
       : null;
+    // ⭐ THE AUTHORING / RESTORE SPLIT (owner ruling CS-9). `account-export` is a
+    // RESTORE of the user's own library, so no charset wall is loaded for it and
+    // the lane below is blind by construction rather than by a remembered flag.
+    const {
+      isAuthoringContentSource,
+      loadCustomContentCharsetWall,
+    } = await import('../domain/content/customContentManifest.js');
+    const charsetWall = isAuthoringContentSource(source)
+      ? await loadCustomContentCharsetWall(request.charsetTable)
+      : null;
+    /** @type {Array<Record<string, unknown>>} */
+    const charsetRejections = [];
     for (const entry of rawEntries) {
       const category = String(entry?.category || '');
       const data = entry?.data || entry?.item || {};
-      const admission = await admissionFor(category, data);
+      const admission = await admissionFor(category, data, charsetWall);
+      if (Array.isArray(admission.charset)) charsetRejections.push(...admission.charset);
       if (!admission.ok) {
         const receipt = commandFailure(admission.error);
         set(state => {
           state.customContentError = admission.error;
+          state.customContentCharsetRejections = charsetRejections;
           state.customContentLastCommandReceipt = receipt;
         });
         return receipt;
@@ -263,6 +293,7 @@ export const createCustomContentRuntimeActions = (set, get) => {
         data: admission.definition,
       });
     }
+    set(state => { state.customContentCharsetRejections = charsetRejections; });
 
     const [
       { previewCustomContentCommand },
@@ -474,6 +505,7 @@ export const createCustomContentRuntimeActions = (set, get) => {
         }
         localWrite(state.customContent, ownerIdFromState(state));
         state.customContentError = null;
+        state.customContentCharsetRejections = [];
         state.customContentLastCommandReceipt = publicReceipt;
       });
       invalidateCustomDepsIfLoaded();
@@ -628,6 +660,7 @@ export const createCustomContentRuntimeActions = (set, get) => {
     set(state => {
       state.customContentArchivedLoading = true;
       state.customContentError = null;
+      state.customContentCharsetRejections = [];
     });
     try {
       const archived = await customContentService.loadArchivedCustomContent({
@@ -696,6 +729,7 @@ export const createCustomContentRuntimeActions = (set, get) => {
       set(state => {
         state.customContent = merged;
         state.customContentError = null;
+        state.customContentCharsetRejections = [];
         state.customContentSyncedAt = new Date().toISOString();
       });
       localWrite(merged, ownerId);
@@ -704,7 +738,11 @@ export const createCustomContentRuntimeActions = (set, get) => {
       return;
     }
     const ownerId = ownerIdFromState(get());
-    set(state => { state.customContentLoading = true; state.customContentError = null; });
+    set(state => {
+      state.customContentLoading = true;
+      state.customContentError = null;
+      state.customContentCharsetRejections = [];
+    });
     try {
       const grouped = await customContentService.list();
       const merged = backfillLocalUids(
@@ -756,6 +794,7 @@ export const createCustomContentRuntimeActions = (set, get) => {
               state.customContent = merged;
               state.customContentLoading = false;
               state.customContentError = null;
+              state.customContentCharsetRejections = [];
             });
             let environmentHydrated = false;
             try {

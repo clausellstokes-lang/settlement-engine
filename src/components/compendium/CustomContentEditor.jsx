@@ -36,7 +36,10 @@ import ContentSampleReceipt from '../contentStudio/ContentSampleReceipt.jsx';
 import CustomContentCommitControls from './CustomContentCommitControls.jsx';
 import DeityEffectPreview from './DeityEffectPreview.jsx';
 import { DependenciesSection } from './Dependencies.jsx';
+import { t } from '../../copy/index.js';
 import {
+  CUSTOM_CONTENT_CHARSET_HINTS as CHARSET_HINTS,
+  CUSTOM_CONTENT_CHARSET_SURFACE_KEY as CHARSET_SURFACE_KEY,
   CUSTOM_CONTENT_FIELD_HINTS as FIELD_HINTS,
   CUSTOM_CONTENT_FIELD_LABELS as FIELD_LABELS,
 } from './customContentEditorCopy.js';
@@ -323,8 +326,52 @@ function CustomContentFieldControl({
   );
 }
 
+/**
+ * The charset findings for one field, beside that field.
+ *
+ * NEVER A SILENT STRIP. The wall reports; the author decides. The Normalise
+ * action is offered only where the leaf measured that normalising the whole
+ * string would clear its findings, and it rewrites the DRAFT alone.
+ */
+function CharsetFieldRejections({ field, rejections, draft, setDraft }) {
+  const mine = rejections.filter(entry => entry.field === field);
+  if (mine.length === 0) return null;
+  const normalisable = mine.some(entry => entry.nfcWouldPass === true);
+  const value = draft[field];
+  return (
+    <div role="alert" style={{ marginTop: 4 }}>
+      {mine.map((entry, index) => (
+        <div
+          key={`${entry.code}-${entry.index === undefined ? index : entry.index}`}
+          style={{ fontSize: FS.micro, color: SEC, lineHeight: 1.4 }}
+        >
+          {t(CHARSET_HINTS[entry.code] || CHARSET_HINTS.uncovered_codepoint, {
+            char: entry.char,
+            position: entry.position,
+            max: entry.max,
+            actual: entry.actual,
+            surfaceName: entry.surface
+              ? t(`${CHARSET_SURFACE_KEY}.${entry.surface}`)
+              : '',
+          })}
+        </div>
+      ))}
+      {normalisable && typeof value === 'string' && (
+        <Button
+          type="button"
+          variant="ghost"
+          onClick={() => setDraft(prev => ({ ...prev, [field]: value.normalize('NFC') }))}
+        >
+          {t('errors.customContentCharset.normalise')}
+        </Button>
+      )}
+    </div>
+  );
+}
+
 function EditorField({
   activeCat,
+  charsetRejections,
   customContent,
   draft,
   field,
@@ -397,6 +444,12 @@ function EditorField({
           {FIELD_HINTS[field]}
         </div>
       )}
+      <CharsetFieldRejections
+        field={field}
+        rejections={charsetRejections}
+        draft={draft}
+        setDraft={setDraft}
+      />
     </div>
   );
 }
@@ -404,6 +457,7 @@ function EditorField({
 export default function CustomContentEditor({
   activeCat,
   catDef,
+  charsetRejections = [],
   customContent,
   definitionReady,
   draft,
@@ -433,6 +487,7 @@ export default function CustomContentEditor({
     <EditorField
       key={field}
       activeCat={activeCat}
+      charsetRejections={charsetRejections}
       customContent={customContent}
       draft={draft}
       field={field}

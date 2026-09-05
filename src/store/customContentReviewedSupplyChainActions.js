@@ -232,6 +232,7 @@ export function createReviewedSupplyChainActions(dependencies) {
       }
       localWrite(state.customContent, ownerIdFromState(state));
       state.customContentError = null;
+      state.customContentCharsetRejections = [];
       state.customContentLastCommandReceipt = receipt;
     });
     invalidateCustomDepsIfLoaded();

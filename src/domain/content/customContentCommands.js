@@ -80,8 +80,37 @@ const MAX_ENTRIES = 1_000;
  *     (category:string, item:Record<string, unknown>) =>
  *       boolean|{ok:boolean, errors?:string[]}
  *   )|null,
+ *   charset?:{
+ *     validate:(bucket:string, definition:Record<string, unknown>) =>
+ *       {rejections:Array<Record<string, unknown>>, marks:Array<Record<string, unknown>>},
+ *     enforcement:'report'|'refuse',
+ *   }|null,
  * }} ContentValidationOptions
  */
+
+/**
+ * The typed refusal a charset finding becomes on the command lane.
+ *
+ * The MESSAGE is the house `entries[i].field: code` idiom and nothing more,
+ * because `customContentError` is rendered raw in the sync banner and an engine
+ * sentence has no business on a customer surface. The detail the editor needs
+ * rides on the error's own typed properties, and the copy key rides with it so
+ * the surface renders a product noun rather than a class token.
+ *
+ * @param {number} index the entry index
+ * @param {Record<string, unknown>} rejection one charset finding
+ * @returns {TypeError} the typed refusal
+ */
+function charsetRefusal(index, rejection) {
+  const error = new TypeError(`entries[${index}].${rejection.field}: ${rejection.code}`);
+  return Object.assign(error, {
+    code: rejection.code,
+    field: rejection.field,
+    char: rejection.char === undefined ? null : rejection.char,
+    surface: rejection.surface === undefined ? null : rejection.surface,
+    hint: rejection.hint,
+  });
+}
 
 /** @param {unknown} value @param {string} field @returns {string} */
 function requiredText(value, field) {
@@ -137,6 +166,14 @@ function normalizeEntry(entry, index, options) {
     throw new TypeError(`entries[${index}]: ${errors.join(' ')}`);
   }
   data = /** @type {Record<string, unknown>} */ (admission.definition);
+  // THE CHARSET WALL, and only where a wall was handed in. The command lane is
+  // shared by authoring and by the account-export RESTORE lane, so the caller
+  // decides which law applies and a restore simply never builds a wall.
+  const charset = options.charset || null;
+  if (charset && charset.enforcement === 'refuse') {
+    const { rejections } = charset.validate(category, data);
+    if (rejections.length > 0) throw charsetRefusal(index, rejections[0]);
+  }
   return {
     definitionId: entry.definitionId
       ? requiredText(entry.definitionId, `entries[${index}].definitionId`)
@@ -287,7 +324,11 @@ export function previewCustomContentCommand(input, options = {}) {
         'pack.manifest identity does not match the reviewed pack version.',
       );
     }
-    const preparedManifest = prepareContentPackImport(manifest);
+    // A SHAPE identity re-derivation, never a charset one. The entries were
+    // already admitted above under whichever law their lane carries; re-running
+    // the wall here could disagree with the lane that produced them and reject a
+    // restore whose entries were rightly admitted.
+    const preparedManifest = prepareContentPackImport(manifest, { authoring: false });
     if (
       preparedManifest.rejected.length > 0
       || preparedManifest.items.length !== entries.length

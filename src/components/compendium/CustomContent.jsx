@@ -97,6 +97,10 @@ export function CustomContentManager({ search, initialCat }) {
   const authTier = useStore(s => s.auth.tier);
   const customContentLoading = useStore(s => s.customContentLoading);
   const customContentError = useStore(s => s.customContentError);
+  // TRANSIENT: what the paid surfaces cannot draw in the last authoring command.
+  const customContentCharsetRejections = useStore(
+    s => s.customContentCharsetRejections,
+  );
   const loadCustomContentFromCloud = useStore(s => s.loadCustomContentFromCloud);
 
   // Seed the active bucket from a validated ?cat= deep-link so an "Author a X"
@@ -515,6 +519,7 @@ export function CustomContentManager({ search, initialCat }) {
         <CustomContentEditor
           activeCat={activeCat}
           catDef={catDef}
+          charsetRejections={customContentCharsetRejections}
           customContent={customContent}
           definitionReady={manualAdmission.ok}
           draft={draft}

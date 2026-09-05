@@ -45,3 +45,24 @@ export const CUSTOM_CONTENT_FIELD_LABELS = Object.freeze({
   portfolio: td('form.portfolioLabel'),
   domain: td('form.domainLabel'),
 });
+
+/**
+ * The charset wall speaks in COPY KEYS, never in prose.
+ *
+ * The leaf hands the editor a typed code and the detail that goes with it. This
+ * map is the only place a code becomes a key, so a new code is a compile-time
+ * hole rather than a blank line beside a field. The surface reaches the reader
+ * as a product noun through its own sub-map: a class token like `world-book`
+ * never appears on a customer surface.
+ */
+export const CUSTOM_CONTENT_CHARSET_HINTS = Object.freeze({
+  uncovered_codepoint: 'errors.customContentCharset.uncovered_codepoint',
+  control_character: 'errors.customContentCharset.control_character',
+  bidi_override: 'errors.customContentCharset.bidi_override',
+  invisible_format: 'errors.customContentCharset.invisible_format',
+  malformed_encoding: 'errors.customContentCharset.malformed_encoding',
+  length: 'errors.customContentCharset.length',
+});
+
+/** The copy key for a surface class token. */
+export const CUSTOM_CONTENT_CHARSET_SURFACE_KEY = 'errors.customContentCharset.surface';
