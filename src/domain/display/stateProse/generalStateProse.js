@@ -1683,12 +1683,12 @@ export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
  *   clockIds?: ReadonlyArray<unknown>|null, governingName?: unknown,
  *   activeChains?: unknown, primaryImports?: unknown,
  *   lifecycleStatus?: unknown, steadings?: ReadonlyArray<unknown>|null,
+ *   ancientRuin?: {name?: unknown, yearsAgo?: unknown}|null,
  *   neighbours?: ReadonlyArray<unknown>|null, crossEngagements?: ReadonlyArray<unknown>|null,
  *   populationTrend?: {band?: unknown, window?: unknown}|null,
  *   exploitation?: {fullyExploited?: unknown, partiallyExploited?: unknown,
  *     unexploited?: unknown}|null,
  *   history?: {age?: unknown, historicalCharacter?: unknown,
- *     ancientRuin?: {name?: unknown, yearsAgo?: unknown}|null,
  *     founding?: {foundedBy?: unknown, initialChallenge?: unknown}|null,
  *     historicalEvents?: Array<{type?: unknown, name?: unknown, yearsAgo?: unknown,
  *       anchored?: unknown, lastingEffects?: unknown}|null>|null}|null}} [readings]
@@ -1868,7 +1868,17 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
   // `SteadingsSection.jsx` already renders those three things in, so each sentence meets the
   // reader beside the banner or the card it is about. Every one of them is DORMANT on a
   // freshly generated town and every one has a real writer off the generation path.
-  const ruin = hist.ancientRuin && typeof hist.ancientRuin === 'object' ? hist.ancientRuin : null;
+  // ⛔ THE RUIN IS ITS OWN READING, NOT A REACH INTO `history`, AND A RATCHET SAID SO.
+  // Reading `hist.ancientRuin` here put a NEW identity into
+  // `check-observed-shape-readers.mjs` — "ancientRuin on history, 3 read(s)" — because the
+  // scanner's corpus never sets `config.ancientRuinsEnabled` and so has never observed the
+  // key. Measured: the field appears on 1 of 12 seeds with the flag on and 0 of 12 without,
+  // so the scan is right about its corpus and wrong about the writer. The estate has already
+  // accepted this read at `SteadingsSection.jsx`, which carries a frozen row for it and
+  // already spells it at its own line 36 — so the caller reads it and hands it over, exactly
+  // as it hands over the grade and the steadings.
+  const ruin = readings.ancientRuin && typeof readings.ancientRuin === 'object'
+    ? readings.ancientRuin : null;
   const ruinSlots = ruin ? {
     ...slots,
     ruin: properFill(text(ruin.name)),

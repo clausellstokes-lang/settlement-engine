@@ -529,12 +529,18 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
       </Section>}
 
       {/* ── SUPPLY CHAINS ─────────────────────────────────────────────────────── */}
+      {/* ⛔ DS-GEN-18 DRAWS OUTSIDE THE FOLD, AND THE REASON WAS FOUND IN THE RENDERED DOM.
+          The first placement put this line INSIDE the Supply Chains section, which is
+          `collapsible defaultOpen={false}` — and `Section` renders `{open && children}`, so
+          a collapsed section renders no children at all. The walker was green, the desk was
+          green, and the sentence reached no reader on first paint. It sits above the fold
+          now, as the FRAMING of what follows — the DS-HK-1 arrangement, where the block is
+          the state the rows are read FROM and the rows keep their own words below. Silent on
+          a free dossier and silent where no antecedent holds (R-DST-K). */}
+      {craftReasonLine && <p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.55,margin:'10px 0 6px',fontStyle:'italic'}}>{craftReasonLine}</p>}
+
       {(eco?.activeChains?.length > 0) && (
         <Section title={`Supply Chains (${eco.activeChains.length})`} collapsible defaultOpen={false}>
-          {/* DS-GEN-18: why these workshops — the town's own account of what its crafts run
-              on, ABOVE the node graph the reading is about. Silent on a free dossier and
-              silent where no antecedent holds (R-DST-K). */}
-          {craftReasonLine && <p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.55,margin:'0 0 10px',fontStyle:'italic'}}>{craftReasonLine}</p>}
           <SupplyChainsPanel settlement={s} eco={eco} />
         </Section>
       )}

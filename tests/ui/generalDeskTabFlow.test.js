@@ -445,11 +445,17 @@ describe('DS-GEN-18 DRAWS ON THE ECONOMICS TAB — and is silent for a free view
     expectPresentThenAbsent(priv, pub, CRAFT, 'DS-GEN-18 the craft reason (economics.craftReason)');
     // ⛔ THE ENGINE TOKEN NEVER REACHES THE READER. `upstreamMissing[]` holds chain ids and
     // the block names none of them; this is that refusal as a rendered-output assertion.
-    expect(priv, 'a raw chain id reached the page').not.toContain('fuel —');
+    expect(priv, 'a raw chain id reached the page').not.toContain('fuel —'); // anchored: expectPresentThenAbsent above proves this render carries the corpus sentence
     expect(priv, 'an unfilled seam reached the reader').not.toMatch(/\{[a-z_]+\}/i); // anchored: expectPresentThenAbsent above proves this render carries the corpus sentence
-    // The DATUM survives the gate: the supply-chain section keeps its own heading and rows.
+    // ⛔ AND IT IS ABOVE THE FOLD. `Section` renders `{open && children}`, so a line placed
+    // inside `Supply Chains` — which is `defaultOpen={false}` — reaches no reader on first
+    // paint while every walker stays green. This asserts the sentence renders WITHOUT the
+    // section being opened, which is the only way that defect stays fixed.
+    expect(priv, 'the corpus line is behind a fold').toContain(CRAFT);
+    expect(priv, 'the folded section rendered its own rows — the anchor is wrong')
+      .not.toContain('Ingots'); // anchored: the toContain(CRAFT) on the line above proves this same render drew the corpus line
+    // The DATUM survives the gate: the supply-chain section keeps its own heading.
     expect(pub).toContain('Supply Chains');
-    expect(pub).toContain('Smelting');
   });
 
   test('a town with nothing to explain draws NOTHING — the stated silence, in the DOM', () => {
@@ -465,7 +471,7 @@ describe('DS-GEN-18 DRAWS ON THE ECONOMICS TAB — and is silent for a free view
       economicState: bare.economicState, settlement: bare, narrativeNote: null,
       saveId: 'forge_town', publicDossier: false, playerView: false,
     })).container.textContent;
-    expect(out, 'a default sentence was drawn over an empty record').not.toContain(CRAFT);
+    expect(out, 'a default sentence was drawn over an empty record').not.toContain(CRAFT); // anchored: the toContain('Modest') below proves the tab really rendered
     // NON-VACUITY: the tab really rendered.
     expect(out).toContain('Modest');
   });
@@ -616,10 +622,10 @@ describe('DS-REL-1 DRAWS ON THE RELATIONSHIPS TAB — and is silent for a free v
       [ENGAGEMENT, 'the cross-settlement engagement'],
     ]) expectPresentThenAbsent(priv, pub, sentence, `DS-REL-1 ${label} (relationships.network)`);
     // ⛔⛔ THE ARM, DRIVEN IN THE DOM: the OTHER end's sentence must not appear on this page.
-    expect(priv, 'the wrong town\'s standing reached the reader').not.toContain(PATRON_LINE);
+    expect(priv, 'the wrong town\'s standing reached the reader').not.toContain(PATRON_LINE); // anchored: expectPresentThenAbsent above proves this render drew the CLIENT end of the same tie
     // ⛔ AND THE FAR END'S PERSON IS NEVER NAMED INSIDE THIS TOWN'S WALLS by the corpus line.
     expect(priv.slice(priv.indexOf(CONTACTS), priv.indexOf(CONTACTS) + CONTACTS.length + 90))
-      .not.toContain('Felix');
+      .not.toContain('Felix'); // anchored: the slice is taken around CONTACTS, which expectPresentThenAbsent above proves is present
     // The DATUM survives the gate: the card, the badge and the engagement row keep their own
     // words; only the corpus sentences go.
     expect(pub).toContain('Thornmere');
@@ -665,8 +671,8 @@ describe('DS-POP-3 DRAWS ON THE OVERVIEW TAB — and is silent for a free viewer
     // SPEAKING carries no `populationHistory`, which is every freshly generated town. Keyed
     // on the band's sign alone, LEVEL would fire here and print "the roll holds where it is".
     const out = renderPop(SPEAKING, false);
-    expect(out, 'an unread ring drew a direction').not.toContain(DIRECTION);
-    expect(out, 'the LEVEL default reached the page').not.toContain('roll holds where it is');
+    expect(out, 'an unread ring drew a direction').not.toContain(DIRECTION); // anchored: the toContain(GROUND) below proves the rest of the desk drew on this very render
+    expect(out, 'the LEVEL default reached the page').not.toContain('roll holds where it is'); // anchored: same render, same GROUND anchor below
     // NON-VACUITY: the rest of the desk drew on this very render.
     expect(out).toContain(GROUND);
   });

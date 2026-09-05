@@ -131,6 +131,22 @@ const DIMENSIONED = Object.freeze({ 'DS-GEN-6': 'deficit', 'DS-GEN-9': 'anchor' 
 /** @param {string} id @returns {string[]} */
 const poolsOf = (id) => Object.keys(DOSSIER_STATE_PROSE_GENERAL[id].pools);
 
+/**
+ * The modules a file really IMPORTS — its specifiers, never its prose.
+ *
+ * ⛔ THIS EXISTS BECAUSE A `not.toContain` OVER A WHOLE SOURCE FILE CONVICTS A CITATION.
+ * Two arms below assert that this desk does NOT reach for a generator module or for the
+ * trend reader, and both failed on the desk's own DOCBLOCK, which names
+ * `computeActiveChains.js:297` and `domain/display/trendLens.js` in writing precisely so a
+ * later reader knows why the value is handed in instead. The citation law, one layer over:
+ * a string is a citation or a mint BY THE CLAIM, and a coupling claim is about the import
+ * graph. Nothing in a comment can add an edge to it.
+ * @param {string} body @returns {string[]}
+ */
+function importSpecifiers(body) {
+  return [...body.matchAll(/^import[^;]*?from\s+'([^']+)';/gm)].map((m) => m[1]);
+}
+
 /** A settlement stub carrying only a name — the one slot this desk fills. */
 const TOWN = Object.freeze({ name: 'Thornwall' });
 
@@ -1409,7 +1425,7 @@ describe('DS-GEN-18 — why these workshops, and the blocker that was in the wro
     const line = drawCraft(stalled);
     expectSentence(line, 'STALLED');
     expect(line, 'the chain\'s own ground was described as a delivery that failed')
-      .not.toMatch(/iron ore deposits/i);
+      .not.toMatch(/iron ore deposits/i); // anchored: expectSentence above proves this render drew a real STALLED sentence, and the toContain on the next line proves it is the ledger variant
     // The variant naming the slot is dropped and the `ledger` variant carries the pool.
     expect(line).toContain('a supply that has failed upstream');
     // The token itself must never reach a reader through any seam of this block.
@@ -1423,7 +1439,7 @@ describe('DS-GEN-18 — why these workshops, and the blocker that was in the wro
     const glossed = { isEntrepot: true, primaryImports: ['Bulk grain (local fields depleted)', 'Wool'] };
     const line = drawCraft(glossed);
     expectSentence(line, 'BOUGHT-IN');
-    expect(line).not.toMatch(/[()]/);
+    expect(line).not.toMatch(/[()]/); // anchored: expectSentence above proves the line is a real drawn sentence over a glossed import list
     // An entrepôt whose every import is glossed still SPEAKS: one BOUGHT-IN variant names
     // no good at all, which is why the key resolves on the flag and not on the fill.
     const allGlossed = { isEntrepot: true, primaryImports: ['Iron ore (local mines exhausted)'] };
@@ -1500,9 +1516,11 @@ describe('DS-GEN-18 over the real generator — the route, measured', () => {
     // roster instead would drag a GENERATOR module into every tab chunk that draws this
     // desk — and would clean nothing, because the roster spells the plural category the
     // same way (`Merchant guilds (3-8)` resolves to `Merchant guilds (50-100+)`).
-    const desk = src('src/domain/display/stateProse/generalStateProse.js');
-    expect(desk, 'the desk reached for a generator module').not.toContain('computeActiveChains');
-    expect(desk).not.toContain('institutionMatchesProcessor');
+    const specs = importSpecifiers(src('src/domain/display/stateProse/generalStateProse.js'));
+    expect(specs.length, 'the import extractor found nothing — the arm is vacuous').toBeGreaterThan(3);
+    expect(specs.filter((x) => x.includes('generators/')), 'the desk imports a generator module')
+      .toEqual([]);
+    expect(specs.some((x) => x.includes('computeActiveChains'))).toBe(false);
     let stalledTowns = 0;
     let named = 0;
     for (const seed of SEEDS) {
@@ -1544,7 +1562,7 @@ describe('DS-GEN-8 — the remnant, the fallen city and the steadings (a lawful 
     // …and each of them really draws a sentence.
     expectSentence(drawSteadings({ lifecycleStatus: 'relic_ruin' }).remnant, 'relic_ruin');
     expectSentence(drawSteadings({ lifecycleStatus: 'abandoned_site' }).remnant, 'abandoned_site');
-    expectSentence(drawSteadings({ history: { ancientRuin: { name: 'Ecserys', yearsAgo: 12 } } }).ruin, 'the ruin');
+    expectSentence(drawSteadings({ ancientRuin: { name: 'Ecserys', yearsAgo: 12 } }).ruin, 'the ruin');
     for (const row of [{ provenance: 'forced' }, { provenance: 'growth', charterPending: true }, { provenance: 'growth' }]) {
       expectSentence(drawSteadings({ steadings: [{ ...row, name: 'Brackenfold' }] }).rows[0], JSON.stringify(row));
     }
@@ -1563,19 +1581,25 @@ describe('DS-GEN-8 — the remnant, the fallen city and the steadings (a lawful 
     expect(ancientRuinPoolKey(null)).toBeNull();
     expect(steadingPoolKey(null)).toBeNull();
     // …and the producers are real, which is what makes the silence dormancy and not death.
-    const real = generateSettlementPipeline(
-      { settType: 'city', culture: 'celtic', terrainOverride: 'hills', tradeRouteAccess: 'river', ancientRuinsEnabled: true },
-      null, { seed: 'sf-test-2026-04', customContent: {} },
-    );
-    expect(real.history?.ancientRuin, 'the opt-in ancient ruin no longer writes').toBeTruthy();
-    expect(typeof real.history.ancientRuin.name).toBe('string');
-    expect(typeof real.history.ancientRuin.yearsAgo).toBe('number');
-    // …and it is STRICTLY opt-in: the same generator with the flag off writes none.
-    const off = generateSettlementPipeline(
-      { settType: 'city', culture: 'celtic', terrainOverride: 'hills', tradeRouteAccess: 'river' },
-      null, { seed: 'sf-test-2026-04', customContent: {} },
-    );
-    expect(off.history?.ancientRuin, 'the ruin arrived without its config flag').toBeFalsy();
+    // ⚠ THE FLAG IS NECESSARY AND NOT SUFFICIENT, which this lane learned by pinning one
+    // seed and watching it come back empty. Measured over twelve seeds on one config: the
+    // ruin appears on ONE of twelve with `ancientRuinsEnabled` and on NONE of twelve
+    // without. So the seeds are scanned rather than pinned, and the flag-off control is
+    // what makes the presence a reading of the flag rather than of the seed.
+    const SEEDS = ['sf-test-2026-04', 'gen3-a', 'gen3-b', 'gen3-c', 'gen3-e', 'gen3-f',
+      'gen3-g', 'gen3-h', 'ruin-1', 'ruin-2', 'ruin-3', 'ruin-4'];
+    const site = { settType: 'city', culture: 'celtic', terrainOverride: 'hills', tradeRouteAccess: 'river' };
+    /** @param {object} config @param {string} seed */
+    const ruinOf = (config, seed) => generateSettlementPipeline(config, null, { seed, customContent: {} })
+      .history?.ancientRuin;
+    const withFlag = SEEDS.map((seed) => ruinOf({ ...site, ancientRuinsEnabled: true }, seed)).filter(Boolean);
+    const withoutFlag = SEEDS.map((seed) => ruinOf(site, seed)).filter(Boolean);
+    expect(withFlag.length, 'the opt-in ancient ruin no longer writes on any seed').toBeGreaterThan(0);
+    expect(withoutFlag, 'a ruin arrived without its config flag').toEqual([]);
+    expect(typeof withFlag[0].name).toBe('string');
+    expect(typeof withFlag[0].yearsAgo).toBe('number');
+    // …and the desk really keys on it.
+    expect(ancientRuinPoolKey(withFlag[0])).toBe('history.ancientRuin present');
   });
 
   it('THE PROVENANCE FOLD IS TOTAL over the ledger\'s own closed four-word vocabulary', () => {
@@ -1607,7 +1631,10 @@ describe('DS-GEN-8 — the remnant, the fallen city and the steadings (a lawful 
     // variant that does not — which is the whole reason the block is mountable at all.
     const named = Object.entries(DOSSIER_STATE_PROSE_GENERAL['DS-GEN-8'].pools)
       .flatMap(([key, variants]) => variants.filter((v) => (v.slots || []).includes('band')).map(() => key));
-    expect(named.length, 'the number of {band} variants moved').toBe(4);
+    // MEASURED, and this lane first wrote 4 from a hand count of the dump. vitest prints
+    // ACTUAL first: `expected 5 to be 4` said the tree carries FIVE, and it does — the
+    // `charterPending` ledger variant names the slot too.
+    expect(named.length, 'the number of {band} variants moved').toBe(5);
     for (const key of new Set(named)) {
       const survivors = DOSSIER_STATE_PROSE_GENERAL['DS-GEN-8'].pools[key]
         .filter((v) => !(v.slots || []).includes('band'));
@@ -1616,7 +1643,7 @@ describe('DS-GEN-8 — the remnant, the fallen city and the steadings (a lawful 
     // And no drawn line ever carries a digit.
     const drawn = drawSteadings({
       lifecycleStatus: 'relic_ruin',
-      history: { ancientRuin: { name: 'Ecserys', yearsAgo: 12 } },
+      ancientRuin: { name: 'Ecserys', yearsAgo: 12 },
       steadings: [{ name: 'Brackenfold', provenance: 'growth', population: 40 }],
     });
     for (const line of [drawn.remnant, drawn.ruin, ...drawn.rows].filter(Boolean)) {
@@ -1644,9 +1671,9 @@ describe('DS-GEN-8 — the remnant, the fallen city and the steadings (a lawful 
     // §0d's sixth band is PREDICATE-ONLY, so the adverbial column is null beyond a
     // generation — and the measured ancient ruin is 619 years old. Two of the four variants
     // name the slot and drop; the other two carry the pool.
-    const old = drawSteadings({ history: { ancientRuin: { name: 'Ecserys', yearsAgo: 619 } } });
+    const old = drawSteadings({ ancientRuin: { name: 'Ecserys', yearsAgo: 619 } });
     expectSentence(old.ruin, 'a 619-year-old ruin');
-    const recent = drawSteadings({ history: { ancientRuin: { name: 'Ecserys', yearsAgo: 12 } } });
+    const recent = drawSteadings({ ancientRuin: { name: 'Ecserys', yearsAgo: 12 } });
     expectSentence(recent.ruin, 'a 12-year-old ruin');
     // A ruin whose name cannot be a `proper` fill is WITHHELD rather than repaired.
     expect(ancientRuinPoolKey({ name: 'ecserys', yearsAgo: 12 }), 'a lowercase name filled a proper slot').toBeNull();
@@ -1751,8 +1778,10 @@ describe('DS-REL-1 — the neighbour network, and the arm that prints the wrong 
     for (const role of ['overlord', 'vassal']) {
       expect(neighbourTiePoolKey(link({ relationshipType: 'vassal', localRelationshipRole: role })), role).toBeNull();
     }
-    expect(poolsOf('DS-REL-1')).not.toContain('vassal');
-    expect(poolsOf('DS-REL-1')).not.toContain('overlord');
+    // The estate's own helper for a SELECTION: the anchor is a member the roster must still
+    // carry, so a collapsed corpus fails on the anchor rather than passing on the absence.
+    expectAbsentWithAnchor(poolsOf('DS-REL-1'), 'vassal', 'patron', 'a vassal pool appeared');
+    expectAbsentWithAnchor(poolsOf('DS-REL-1'), 'overlord', 'client', 'an overlord pool appeared');
   });
 
   it('⛔ THE NPC NAMED IS THE ONE ON THIS TOWN\'S SIDE', () => {
@@ -1763,7 +1792,13 @@ describe('DS-REL-1 — the neighbour network, and the arm that prints the wrong 
       npcConnections: [{ primaryNPCName: 'Mugain', neighbourNPCName: 'Felix' }],
     })]);
     expect(drawn).toHaveLength(2);
-    for (const line of drawn) expect(line, 'the far end\'s person was named').not.toContain('Felix');
+    for (const line of drawn) expect(line, 'the far end\'s person was named').not.toContain('Felix'); // anchored: `drawn` is asserted to be two real sentences on the line above, and the npc pool is asserted to have resolved below
+    // NON-VACUITY: the npc lens really fired, so the absence above is the fill choosing the
+    // local end rather than the lens being dark. ⚠ WHICH VARIANT the pool draws is the
+    // SEED's business and two of the three name no `{npc}` at all, so the arm asserts the
+    // KEY resolved rather than that a particular name appears.
+    expect(crossSettlementNpcPoolKey(link({ npcConnections: [{ primaryNPCName: 'Mugain', neighbourNPCName: 'Felix' }] })))
+      .toBe('cross-settlement NPC contacts');
     // NON-VACUITY: the fixture really carries the far end's name.
     expect(link({ npcConnections: [{ neighbourNPCName: 'Felix' }] }).npcConnections[0].neighbourNPCName).toBe('Felix');
     // A tie with no npc rows has not been asked the question.
@@ -1841,10 +1876,12 @@ describe('DS-POP-3 — the direction of the roll, and the default it would have 
   it('the band comes from the ANNEX\'S OWN READER and this desk computes none of it', () => {
     // "THIS IS DS-POP-2's READER, DELIBERATELY… keying this block on the same one keeps the
     // two POP blocks reading one band rather than two."
-    const desk = src('src/domain/display/stateProse/generalStateProse.js');
-    expect(desk, 'the desk reached for the trend reader instead of being handed its result')
-      .not.toContain('trendLens');
-    expect(desk).not.toContain('AXIS_TUNING');
+    const specs = importSpecifiers(src('src/domain/display/stateProse/generalStateProse.js'));
+    expect(specs.length, 'the import extractor found nothing — the arm is vacuous').toBeGreaterThan(3);
+    expect(specs.some((x) => x.includes('trendLens')),
+      'the desk imports the trend reader instead of being handed its result').toBe(false);
+    expect(specs.filter((x) => x.includes('worldPulse/')), 'the desk imports a worldPulse module')
+      .toEqual([]);
     // The reader's thresholds are its own and are exercised through it, not transcribed.
     expect(populationTrendBand([100, 60]).band).toBeLessThan(0);
     expect(populationTrendBand([100, 160]).band).toBeGreaterThan(0);

@@ -149,6 +149,7 @@ function line(mount, rung) {
  *   clockIds?: ReadonlyArray<unknown>|null,
  *   steadings?: ReadonlyArray<unknown>|null,
  *   lifecycleStatus?: unknown,
+ *   ancientRuin?: {name?: unknown, yearsAgo?: unknown}|null,
  *   neighbours?: ReadonlyArray<unknown>|null,
  *   crossEngagements?: ReadonlyArray<unknown>|null,
  *   populationTrend?: {band?: unknown, window?: unknown}|null}} [options]
@@ -236,6 +237,9 @@ export function generalDeskLines(settlement, options = {}) {
       // can hand them over. A reader that resolved the store itself would be a second
       // opinion about which campaign owns this town.
       steadings: options.steadings,
+      // Same reasoning as the grade above, and the same accepted site: the opt-in ancient
+      // ruin is read where a frozen row already covers it.
+      ancientRuin: options.ancientRuin,
       // DS-REL-1. The links and the typed engagement rows are the tab's OWN assembled lists
       // — it merges `neighbourNetwork`, the live `neighborRelationship` and two conflict
       // ledgers before it renders a card — so the desk reads what the page actually shows
