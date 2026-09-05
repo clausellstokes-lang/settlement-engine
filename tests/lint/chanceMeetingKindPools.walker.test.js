@@ -71,6 +71,7 @@ import {
   floorReasons,
   registrationReasons,
 } from '../helpers/kindPoolWalker.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { WHAT_PHRASES } from '../../src/domain/display/settlementRumors.js';
 import { KIND_SECTION } from '../../src/domain/display/chroniclersLetter.js';
 import { SECTION_OF, isExplicitlyRouted } from '../../src/domain/realm/heraldRouting.js';
@@ -997,13 +998,36 @@ describe('ENC-4 phrased-kind registry — the meeting neither court arranged', (
     // ⛔⛔ AND IT IS NOT A KIND. Nothing registers this id: no registry row, no routed token, no
     // Chronicle row and no reader phrase. Those four absences are the whole reason the pantheon
     // A5 freezes and `REGISTERED_KIND_COUNT` do not move for a second corpus.
-    expect(CHANCE_MEETING_KINDS).not.toContain(POOL_KEY);
-    expect(CHANCE_MEETING_KIND_REGISTRY.map((row) => row.kind)).not.toContain(POOL_KEY);
+    // ⚠ THE FIRST TWO ARE ANCHORED AT THE ASSERTION, NOT SIX LINES BELOW IT. The paragraph
+    // that follows already supplied paired positives for THREE of the five absences, and the
+    // habitat walker was right to convict all the same: a positive further down the body is
+    // a reviewer's anchor, not the assertion's, and the two collections that had no positive
+    // at all were the registry list and the Chronicle section map. Routing the pair that HAS
+    // a same-path sibling through `expectAbsentWithAnchor` makes the liveness claim execute
+    // in front of each exclusion — `chance_meeting_exposed` is the id the volume DOES
+    // register, so it travels the very path a drift would empty.
+    expectAbsentWithAnchor(
+      CHANCE_MEETING_KINDS, POOL_KEY, 'chance_meeting_exposed',
+      'a pool id is never a kind',
+    );
+    expectAbsentWithAnchor(
+      CHANCE_MEETING_KIND_REGISTRY.map((row) => row.kind), POOL_KEY, 'chance_meeting_exposed',
+      'a pool id owns no registry row',
+    );
     expect(isExplicitlyRouted(POOL_KEY), `${POOL_KEY}: a pool id must route nowhere`).toBe(false);
+    // ⛔ AND THE CHRONICLE MAP GETS A LIVENESS ASSERTION RATHER THAN A SIBLING, because it has
+    // no honest sibling to offer: `chance_meeting_exposed` is a REGISTERED kind and is itself
+    // absent from KIND_SECTION (measured — the map holds zero `chance_meeting*` keys at all),
+    // so anchoring on it would assert a presence that is false, and anchoring on an unrelated
+    // war kind would be the hardcoded-constant vacuity the helper's own header forbids. The
+    // populated-map assertion is the anchor that is actually true here.
+    expect(Object.keys(KIND_SECTION).length, 'the Chronicle section map went empty').toBeGreaterThan(50);
+    // anchored: the populated-map assertion on the line directly above is this exclusion's liveness proof — a KIND_SECTION that drifted away, emptied or was never built reds there first, so the absence below can only mean the pool id was correctly kept out
     expect(KIND_SECTION).not.toHaveProperty(POOL_KEY);
     expect(WHAT_PHRASES[POOL_KEY]).toBeUndefined();
-    // The positive controls that give those five absences their teeth: the id the volume DOES
-    // register answers every one of them.
+    // The positive controls for the two absences that keep their bare shape above: the id the
+    // volume DOES register answers both, and the kind-list positive is now redundant with the
+    // anchored call above it — kept, because it also pins the id's spelling for a reader.
     expect(CHANCE_MEETING_KINDS).toContain('chance_meeting_exposed');
     expect(isExplicitlyRouted('chance_meeting_exposed')).toBe(true);
     expect(WHAT_PHRASES.chance_meeting_exposed).toBeTruthy();
