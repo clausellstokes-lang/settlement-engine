@@ -3,7 +3,7 @@
 # dirty-tree doors FIRST (the lighting door refuses porcelain): lighting → commit → mounts baseline, prose-numerics re-key,
 # writer-reach --write, tuning-inventory refreeze, OSR --write (shrink-only), wizard-news re-sign → commit → plain re-runs as receipts.
 # Every door under the gate mutex; refreeze doors exit NON-ZERO on success by design. Prints a PREDICTIONS line first (E4).
-SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad
+SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad
 D=$1; [ -d "$D" ] || { echo "usage: <dock>"; exit 9; }; cd "$D" || exit 9
 [ -z "$(git status --porcelain -uall)" ] || { echo "REFUSED: dock dirty"; exit 8; }
 M="sh scripts/gate-mutex.sh --run --"

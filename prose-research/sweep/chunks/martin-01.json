@@ -1,0 +1,158 @@
+{
+ "name": "martin",
+ "chunk": 1,
+ "indices": [
+  315,
+  316,
+  317,
+  318,
+  319,
+  320,
+  321,
+  322,
+  323,
+  324,
+  325,
+  326,
+  327,
+  328,
+  329
+ ],
+ "claims": [
+  {
+   "index": 315,
+   "feature": "sentence craft subordinated to flow (critic)",
+   "claim": "The same essay argues Martin prioritizes rhythm and momentum over sentence polish, so description is forgettable while dialogue excels.",
+   "source": "At Sea Journal, 'George R.R. Martin, The American Homer' (undated)",
+   "url": "https://atseajournal.com/asoiaf/essays/epithets.html",
+   "quote": "sentences aren't beautiful",
+   "page": ""
+  },
+  {
+   "index": 316,
+   "feature": "pseudo-archaic tics (critic)",
+   "claim": "A hostile reviewer lists 'jape' and 'mummer's farce' among words Martin rides like a hobbyhorse, and calls the prose at best serviceable.",
+   "source": "The Erstwhile Philistine, 'The Literary Crimes of George R.R. Martin' (2012-03-21)",
+   "url": "https://theerstwhilephilistine.wordpress.com/2012/03/21/the-literary-crimes-of-george-r-r-martin/",
+   "quote": "rides like a hobbyhorse",
+   "page": ""
+  },
+  {
+   "index": 317,
+   "feature": "sex-scene clichés (critic)",
+   "claim": "The same reviewer finds the sex scenes reliant on clichés such as 'drunk with desire'.",
+   "source": "The Erstwhile Philistine, 'The Literary Crimes of George R.R. Martin' (2012-03-21)",
+   "url": "https://theerstwhilephilistine.wordpress.com/2012/03/21/the-literary-crimes-of-george-r-r-martin/",
+   "quote": "drunk with desire",
+   "page": ""
+  },
+  {
+   "index": 318,
+   "feature": "aphorism repetition: 'words are wind'",
+   "claim": "'Words are wind' appears thirteen times in A Dance with Dragons across every region and faction, which the essay reads as deliberate motif.",
+   "source": "Overthinking It, 'Words are Wind: Repetition of Language in A Dance With Dragons' (2011-08-17)",
+   "url": "https://www.overthinkingit.com/2011/08/17/dance-with-dragons/3/",
+   "quote": "no writer uses a phrase thirteen times by accident",
+   "page": ""
+  },
+  {
+   "index": 319,
+   "feature": "'much and more' / 'little and less' tics (readers)",
+   "claim": "Commenters on that essay counter that Martin has a penchant for pseudo-archaic language and, once he likes a term ('much and more', 'leal'), uses it everywhere.",
+   "source": "Overthinking It comments (2011-08)",
+   "url": "https://www.overthinkingit.com/2011/08/17/dance-with-dragons/3/",
+   "quote": "GRRM has a penchant for pseudo-archaic language",
+   "page": ""
+  },
+  {
+   "index": 320,
+   "feature": "leitmotifs praised (reader)",
+   "claim": "The same thread credits Martin with strong leitmotifs, notably Reek's rhyme refrain.",
+   "source": "Overthinking It comments (2011-08)",
+   "url": "https://www.overthinkingit.com/2011/08/17/dance-with-dragons/3/",
+   "quote": "he does do leitmotifs extremely well",
+   "page": ""
+  },
+  {
+   "index": 321,
+   "feature": "archaic lexicon with attested dates",
+   "claim": "A lexicographer notes 'ser', 'southron' and 'craven' are 15th-century forms and 'turncloak' is Martin's coinage from 'turncoat'.",
+   "source": "OUPblog, Adam Pulford, 'Words are wind' (2012-04-16)",
+   "url": "https://blog.oup.com/2012/04/words-are-wind-game-of-thrones-language/",
+   "quote": "",
+   "page": ""
+  },
+  {
+   "index": 322,
+   "feature": "proverbs as culture markers",
+   "claim": "Recurring sayings ('Dark wings, dark words', 'Words are wind', 'Seven hells') characterize cultures, and dialogue stays in English with culture-specific idiom rather than invented tongues.",
+   "source": "OUPblog, Adam Pulford, 'Words are wind' (2012-04-16)",
+   "url": "https://blog.oup.com/2012/04/words-are-wind-game-of-thrones-language/",
+   "quote": "Dark wings, dark words",
+   "page": ""
+  },
+  {
+   "index": 323,
+   "feature": "sudden reversals (praise)",
+   "claim": "Grossman characterizes Martin by sudden reversals and a plotter's tension, with narration shot from many angles by a dozen narrators.",
+   "source": "Time, Lev Grossman, 'The American Tolkien' (2005-11-13)",
+   "url": "https://content.time.com/time/subscriber/article/0,33009,1129596,00.html",
+   "quote": "fond of sudden reversals",
+   "page": ""
+  },
+  {
+   "index": 324,
+   "feature": "many-angled narration (praise)",
+   "claim": "Grossman ties the multi-narrator scheme to the gritty, many-sided politics, which he calls all real.",
+   "source": "Time, Lev Grossman, 'The American Tolkien' (2005-11-13)",
+   "url": "https://content.time.com/time/subscriber/article/0,33009,1129596,00.html",
+   "quote": "Martin shoots the action from many angles, with a dozen narrators",
+   "page": ""
+  },
+  {
+   "index": 325,
+   "feature": "epic sweep with small human drama (praise)",
+   "claim": "Grossman praises Martin's ability to hold epic sweep and tiny, touching human drama in the same frame.",
+   "source": "Time, Lev Grossman, 'The American Tolkien' (2005-11-13)",
+   "url": "https://content.time.com/time/subscriber/article/0,33009,1129596,00.html",
+   "quote": "epic sweep and tiny, touching human drama",
+   "page": ""
+  },
+  {
+   "index": 326,
+   "feature": "repetition and uniform idiom (critic)",
+   "claim": "Brown finds too much repetition, unexceptional prose, and characters who share idioms regardless of class or continent.",
+   "source": "The Atlantic, Rachael Brown (July 2011)",
+   "url": "https://www.theatlantic.com/entertainment/archive/2011/07/george-r-r-martin-on-sex-fantasy-and-a-dance-with-dragons/241738/",
+   "quote": "too much repetition, unexceptional prose",
+   "page": ""
+  },
+  {
+   "index": 327,
+   "feature": "length hurts prose (critic, via aggregator)",
+   "claim": "David Orr in the NYT argued the books' length is unnecessary and damages both prose and plot mechanics; Wasson in the CSM called the prose concise but pithy.",
+   "source": "Wikipedia, A Dance with Dragons, Reception (aggregator citing NYT 2011-08-14 and CSM 2011-07-12)",
+   "url": "https://en.wikipedia.org/wiki/A_Dance_with_Dragons",
+   "quote": "it hurts Martin's prose and his plot mechanics",
+   "page": ""
+  },
+  {
+   "index": 328,
+   "feature": "chapter-level structure praised",
+   "claim": "Hartinger calls the prose tight, clear and evocative and the individual chapter structure about as good as structure gets, faulting only scope.",
+   "source": "Goodreads blog, Brent Hartinger (2014-05-05)",
+   "url": "https://www.goodreads.com/author_blog_posts/6236674-is-george-r-r-martin-is-the-greatest-bad-writer-of-all-time-or-the-wor",
+   "quote": "about as good as structure gets",
+   "page": ""
+  },
+  {
+   "index": 329,
+   "feature": "food as character and region marker (critic)",
+   "claim": "Mikanowski reads soup descriptions as regional and moral markers, with honorable men sharing soup.",
+   "source": "Slate, Jacob Mikanowski (2017-07-05)",
+   "url": "https://slate.com/culture/2017/07/game-of-thrones-author-george-r-r-martin-is-obsessed-with-soup.html",
+   "quote": "Honorable men share their soup. Bad ones bogart it",
+   "page": ""
+  }
+ ]
+}

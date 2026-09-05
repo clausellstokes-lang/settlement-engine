@@ -1,0 +1,158 @@
+{
+ "name": "ai",
+ "chunk": 4,
+ "indices": [
+  135,
+  136,
+  137,
+  138,
+  139,
+  140,
+  141,
+  142,
+  143,
+  144,
+  145,
+  146,
+  147,
+  148,
+  149
+ ],
+ "claims": [
+  {
+   "index": 135,
+   "feature": "coherence at length",
+   "claim": "Coherence begins to fall apart within a few hundred words, and when asked for a style the model over-applies it.",
+   "source": "Michael O. Church (2025-05-28)",
+   "url": "https://antipodes.substack.com/p/how-to-make-ai-write-a-bestsellerand",
+   "quote": "It will often overdo the style you ask for",
+   "page": "How to make AI write a bestseller—and why you can't"
+  },
+  {
+   "index": 136,
+   "feature": "voice flattening",
+   "claim": "AI tools flatten authorial voice, homogenise, and eradicate creative risk-taking by applying blanket rules without understanding purpose.",
+   "source": "Sophie Playle, fiction editor, Liminal Pages (2026-05-06)",
+   "url": "https://www.liminalpages.com/ai-and-fiction-editing/",
+   "quote": "They flatten voice and eradicate creative risk-taking.",
+   "page": "AI and Fiction Editing: Should You Use It, Can You Trust It and Will It Take Your Job?"
+  },
+  {
+   "index": 137,
+   "feature": "lyrical nonsense",
+   "claim": "The Granta AI story is lyrical nonsense with no narrative, reading like a parody of poet-turned-novelist fiction despite judges praising its 'lyrical precision'.",
+   "source": "Lincoln Michel, novelist, Substack note (2026-05-19)",
+   "url": "https://substack.com/@thelincoln/note/c-261333774",
+   "quote": "it does not have a story. There's no narrative.",
+   "page": "Lincoln Michel note on the Granta AI story"
+  },
+  {
+   "index": 138,
+   "feature": "rule of three",
+   "claim": "Tricolon and stacked triplets of descriptors are overused as a default rhetorical shape.",
+   "source": "tropes.fyi AI Writing Pattern Directory",
+   "url": "https://tropes.fyi/directory",
+   "quote": "Products impress; platforms empower",
+   "page": "Tropes - AI Writing Pattern Directory"
+  },
+  {
+   "index": 139,
+   "feature": "repetition persistence",
+   "claim": "AI keeps repeating a shape or cliché where even a bad human writer would notice and rest it, because its instinct is to keep obeying the instruction.",
+   "source": "Makin, Record Crash (2025-11-27)",
+   "url": "https://recordcrash.substack.com/p/how-to-identify-ai-written-web-fiction",
+   "quote": "Even bad human writers give it a rest when noticing repetition",
+   "page": "How to Identify AI-Written Web Fiction"
+  },
+  {
+   "index": 140,
+   "feature": "em-dashes",
+   "claim": "Em-dashes are overused, roughly one per paragraph, and used for thought continuation rather than breaks.",
+   "source": "Carrie Jones (2026-03-21)",
+   "url": "https://livinghappy.substack.com/p/what-makes-a-story-look-like-ai-wrote",
+   "quote": "AI does this on a sentence level often with those em-dashes",
+   "page": "What Makes a Story \"Look\" Like AI Wrote It?"
+  },
+  {
+   "index": 141,
+   "feature": "POV / pacing",
+   "claim": "AI holds an unnaturally locked point of view across scenes and paces every scene at the same rate.",
+   "source": "Matthew Vollmer (2026-04-24)",
+   "url": "https://matthewvollmer.substack.com/p/i-asked-the-machine-to-tell-on-itself",
+   "quote": "",
+   "page": "I Asked the Machine to Tell on Itself: A Field Guide to AI Tells"
+  },
+  {
+   "index": 142,
+   "feature": "game dialogue",
+   "claim": "Generated casts sound like one person and generated scenes run too long on screen, breaking pacing (vendor source with a stake in the fix).",
+   "source": "Summer Engine blog, vendor (2026-06-06)",
+   "url": "https://www.summerengine.com/blog/ai-dialogue-generator-for-games",
+   "quote": "A whole cast that sounds like one person",
+   "page": "AI Dialogue Generator for Games: What Actually Works in 2026"
+  },
+  {
+   "index": 143,
+   "feature": "counter-evidence",
+   "claim": "MFA readers strongly disfavored prompted AI pastiches on stylistic fidelity (OR 0.16), but after fine-tuning on the author's corpus both MFA and general readers preferred the AI, and it was flagged as AI only 3% of the time; the tells above characterize prompted default-register output.",
+   "source": "Chakrabarty, Ginsburg, Dhillon, arXiv 2510.13939 (2025-10-15, rev 2026-03-17)",
+   "url": "https://arxiv.org/abs/2510.13939",
+   "quote": "Fine-tuned outputs were rarely flagged as AI-generated (3% vs. 97%)",
+   "page": "Readers Prefer Outputs of AI Trained on Copyrighted Books over Expert Human Writers"
+  },
+  {
+   "index": 144,
+   "feature": "counter-evidence",
+   "claim": "2,587 lay readers rated ChatGPT rewrites of three published short stories higher on quality and absorption than the originals and identified authorship at chance; the researchers attribute this to AI being clearer and more predictable, which is the same property editors name as the gloss.",
+   "source": "Sears and Weisberg (Villanova) via earth.com report (2026-08-04)",
+   "url": "https://earth.com/news/readers-prefer-ai-generated-stories",
+   "quote": "People generally prefer predictability",
+   "page": "Readers rated AI stories higher than human fiction in study of 2,587 adults"
+  },
+  {
+   "index": 145,
+   "feature": "theme over-explanation",
+   "claim": "AI stories state their moral meaning directly instead of dramatizing it, favoring tidy single-track plots.",
+   "source": "Russell et al., StoryScope (arXiv 2604.03136, 2026-04-03 rev 2026-08-10)",
+   "url": "https://arxiv.org/abs/2604.03136",
+   "quote": "over-explain themes and favor tidy, single-track plots",
+   "page": ""
+  },
+  {
+   "index": 146,
+   "feature": "flat escalation",
+   "claim": "Claude-generated stories in particular show flat event escalation compared with human fiction.",
+   "source": "Russell et al., StoryScope (arXiv 2604.03136)",
+   "url": "https://arxiv.org/abs/2604.03136",
+   "quote": "Claude produces notably flat event escalation",
+   "page": ""
+  },
+  {
+   "index": 147,
+   "feature": "moral ambiguity absent",
+   "claim": "Human stories frame protagonist choices as morally ambiguous; AI stories resolve into clean internal acceptance.",
+   "source": "Russell et al., StoryScope; Dramatica gloss 2026-05-29",
+   "url": "https://dramatica.com/blog/the-ai-tells-are-in-the-story",
+   "quote": "cleaner internal acceptance",
+   "page": ""
+  },
+  {
+   "index": 148,
+   "feature": "subplot absence / causal tidiness",
+   "claim": "AI fiction runs one tight causal chain with far fewer subplots and more protagonist-driven resolutions than human fiction.",
+   "source": "Dramatica blog summarizing StoryScope, 2026-05-29",
+   "url": "https://dramatica.com/blog/the-ai-tells-are-in-the-story",
+   "quote": "tighter causal chains, more protagonist-driven resolutions",
+   "page": ""
+  },
+  {
+   "index": 149,
+   "feature": "temporal flatness",
+   "claim": "Human stories use more time jumps, flashbacks and nonlinear delay of revelation; AI stories stay chronological.",
+   "source": "Dramatica blog summarizing StoryScope, 2026-05-29",
+   "url": "https://dramatica.com/blog/the-ai-tells-are-in-the-story",
+   "quote": "more temporal discontinuity",
+   "page": ""
+  }
+ ]
+}

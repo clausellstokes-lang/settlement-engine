@@ -2,7 +2,7 @@
 # build-payload-899.py — fills payload-899.template.json's ROW/CARD/TAIL placeholders and msg-899.txt from texts-899.draft.md.
 # Leaves __CAS_SHA__ and __TESTS__ for after-cas-899.sh (the CAS step). Refuses on any other surviving placeholder.
 import io,json,re
-SC='/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/'
+SC='/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/'
 d=io.open(SC+'texts-899.draft.md',encoding='utf-8').read().split('\n')
 def section(start_prefix, end_prefix):
     i=[n for n,l in enumerate(d) if l.startswith(start_prefix)]; assert len(i)==1,(start_prefix,len(i)); i=i[0]

@@ -3378,5 +3378,6 @@
    "trueWording": "repeat higher-order n-grams more frequently",
    "note": "Quote appears as a section heading, 'Essays written with InstructGPT repeat higher-order n-grams more frequently' (the HTML doubles the italic math 'n'). Figures confirmed: 'corpus homogenization scores ... at the key point level using Rouge-L are 0.1536 for Solo, 0.1578 for GPT3 and 0.1660 for InstructGPT', significant at p<0.05. Attribution confirmed: 'The reduction in diversity ... is attributed more to text contributed directly by the InstructGPT model' and 'the users' lexical choice and argument generation is not affected when writing with model assistance.'"
   }
- }
+ },
+ "mergedAt": "see autosave.log"
 }

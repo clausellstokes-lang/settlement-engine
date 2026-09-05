@@ -9,7 +9,7 @@ export const meta = {
 }
 // Owner's cap: FOUR running agents of any kind. SEAT LAW (owner 09-05, twice): Opus VERIFIES (every verify chunk is `model: 'opus'`); SYNTHESIS IS FABLE (the synth and critic stages inherit the seat model, the chair's); the finders keep the seat default so their cached research replays. batched() runs at most `cap` thunks at once.
 const CAP = (args && args.cap) || 4
-const OUT = (args && args.outDir) || '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/prose-research/sweep'
+const OUT = (args && args.outDir) || '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep'
 async function batched(items, fn) {
   const out = []
   for (let i = 0; i < items.length; i += CAP) {

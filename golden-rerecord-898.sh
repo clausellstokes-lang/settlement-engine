@@ -2,7 +2,7 @@
 # golden-rerecord-898.sh — re-record the generator golden master for the PROSE landing's DECLARED same-seed text shift.
 # Quiet window → the door (UPDATE_GOLDEN=1) under the gate mutex → count the rows that moved → NO commit (the chair commits
 # with the count in the declaration). The golden-freeze register is UNFROZEN, so the env door is the form (LIGHT-PLAN §4).
-SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad
+SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad
 D=$SC/lanePROSE2; cd "$D" || exit 9
 [ -z "$(git status --porcelain -uall)" ] || { echo "REFUSED: dock dirty"; exit 8; }
 STREAK=0; WAITED=0

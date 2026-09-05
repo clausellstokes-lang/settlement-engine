@@ -1,0 +1,158 @@
+{
+ "name": "martin",
+ "chunk": 0,
+ "indices": [
+  300,
+  301,
+  302,
+  303,
+  304,
+  305,
+  306,
+  307,
+  308,
+  309,
+  310,
+  311,
+  312,
+  313,
+  314
+ ],
+ "claims": [
+  {
+   "index": 300,
+   "feature": "hard scenes written out of order",
+   "claim": "Martin could not write the Red Wedding in sequence, wrote the rest of the book first, and calls it the hardest scene he ever wrote.",
+   "source": "CBS 60 Minutes, Anderson Cooper (2019-04-14)",
+   "url": "https://www.cbsnews.com/news/game-of-thrones-the-killing-scenes-george-rr-martin-and-the-red-wedding-60-minutes-2019-04-14/",
+   "quote": "That was the hardest scene I ever had to write.",
+   "page": ""
+  },
+  {
+   "index": 301,
+   "feature": "deaths written to be felt",
+   "claim": "Martin says he tries to make deaths unexpected and felt, in contrast to deaths that are mere statistics.",
+   "source": "CBS 60 Minutes, Anderson Cooper (2019-04-14)",
+   "url": "https://www.cbsnews.com/news/game-of-thrones-the-killing-scenes-george-rr-martin-and-the-red-wedding-60-minutes-2019-04-14/",
+   "quote": "I try to make you feel the deaths",
+   "page": ""
+  },
+  {
+   "index": 302,
+   "feature": "explicit sex described like violence",
+   "claim": "Martin says he describes sex with the same explicit detail as an axe entering a skull and that only the sex draws complaints.",
+   "source": "The Mary Sue (2012-07-27), quoting via Boing Boing; original outlet untraced",
+   "url": "https://www.themarysue.com/george-r-r-martin-sex-violence/",
+   "quote": "I can describe an axe entering a human skull",
+   "page": ""
+  },
+  {
+   "index": 303,
+   "feature": "Fire & Blood: single chronicle voice",
+   "claim": "Fire & Blood was easier because it is told in one voice, Archmaester Gyldayn's, unlike the novels' per-chapter voices.",
+   "source": "Entertainment Weekly (James Hibberd, 2018-11-19) via Winter Is Coming",
+   "url": "https://winteriscoming.net/2018/11/19/george-rr-martin-why-writing-fire-blood-easier-the-winds-of-winter/",
+   "quote": "I only have one voice to do.",
+   "page": ""
+  },
+  {
+   "index": 304,
+   "feature": "execution over ideas",
+   "claim": "Martin says ideas are cheap and execution is all-important; he borrows from the Wars of the Roses and hopes the blend becomes his own.",
+   "source": "Rolling Stone, Mikal Gilmore, The Complete Rolling Stone Interview (2014-04-23)",
+   "url": "https://www.rollingstone.com/culture/culture-news/george-r-r-martin-the-rolling-stone-interview-242487/",
+   "quote": "it's the execution that is all-important",
+   "page": ""
+  },
+  {
+   "index": 305,
+   "feature": "genre as furniture",
+   "claim": "Martin treats SF and fantasy trappings as interchangeable furniture over the same storytelling craft.",
+   "source": "Locus Online interview excerpts (Nov 2005)",
+   "url": "https://locusmag.com/2005/Issues/11Martin.html",
+   "quote": "Sometimes the difference is just the furniture.",
+   "page": ""
+  },
+  {
+   "index": 306,
+   "feature": "Tolkien as chief influence",
+   "claim": "At NYCC 2025 Martin called Tolkien the most influential writer in his life and disputed the online feud narrative.",
+   "source": "Popverse, NYCC 2025 panel report (2025-11-05)",
+   "url": "https://www.thepopverse.com/literary-fantasy-george-martin-joe-hill-jrr-tolkien",
+   "quote": "Tolkien is the most influential writer in my life.",
+   "page": ""
+  },
+  {
+   "index": 307,
+   "feature": "style not discounted",
+   "claim": "Asked what matters most Martin answers characters but says he does not discount style and plot.",
+   "source": "SFFWorld interview, Dag R. (2006-05-17)",
+   "url": "https://www.sffworld.com/2006/05/interview-with-george-r-r-martin/",
+   "quote": "I don't discount the importance of style and plot",
+   "page": ""
+  },
+  {
+   "index": 308,
+   "feature": "Anglo-Saxon diction (critic)",
+   "claim": "A critic finds Martin consistently chooses Anglo-Saxon-derived words and avoids Latinate vocabulary, producing a cumulative feel of antiquity.",
+   "source": "Books & Boots (Simon), 'Some notes on George RR Martin's prose style' (2014-03-31)",
+   "url": "https://astrofella.wordpress.com/2014/03/31/some-notes-on-george-rr-martins-prose-style/",
+   "quote": "consistently chooses words of Anglo-Saxon origin",
+   "page": ""
+  },
+  {
+   "index": 309,
+   "feature": "functional baseline register (critic)",
+   "claim": "The same critic describes Martin's default style as lucid, functional, modern-thriller prose with occasional passages of powerfully simple beauty.",
+   "source": "Books & Boots (Simon), 'Some notes on George RR Martin's prose style' (2014-03-31)",
+   "url": "https://astrofella.wordpress.com/2014/03/31/some-notes-on-george-rr-martins-prose-style/",
+   "quote": "lucid and functional",
+   "page": ""
+  },
+  {
+   "index": 310,
+   "feature": "register instability / cod-medievalism (critic)",
+   "claim": "The critic faults unpredictable veering between fake medievalisms ('oft', 'elsewise', 'much and more') and modern colloquialisms like 'divvied up'.",
+   "source": "Books & Boots (Simon), 'Some notes on George RR Martin's prose style' (2014-03-31)",
+   "url": "https://astrofella.wordpress.com/2014/03/31/some-notes-on-george-rr-martins-prose-style/",
+   "quote": "fake medievalisms",
+   "page": ""
+  },
+  {
+   "index": 311,
+   "feature": "terse charged dialogue (critic)",
+   "claim": "Confrontations are carried by terse, charged dialogue that produces sudden shocks of recognition.",
+   "source": "Books & Boots (Simon), 'Some notes on George RR Martin's prose style' (2014-03-31)",
+   "url": "https://astrofella.wordpress.com/2014/03/31/some-notes-on-george-rr-martins-prose-style/",
+   "quote": "terse, charged dialogue",
+   "page": ""
+  },
+  {
+   "index": 312,
+   "feature": "Anglo-Saxon affixes and compounds (critic)",
+   "claim": "Martin relies on un-/be-/a- prefixes and -craft/-dom/-hood/-ship suffixes and coins Anglo-Saxon compounds (ironborn, sellsword, weirwood), reserving Latin/Greek forms for learned or religious contexts.",
+   "source": "Books & Boots (Simon), 'Affixes, compound and combination words' (2013-03-08)",
+   "url": "https://astrofella.wordpress.com/2013/03/08/george-rr-martins-prose-style-affixes-compound-and-combination-words/",
+   "quote": "systematic exclusion from his vocabulary",
+   "page": ""
+  },
+  {
+   "index": 313,
+   "feature": "compounds build the otherworld (critic)",
+   "claim": "The density of invented compounds is what carries the reader into the secondary world, not stock medievalisms like 'prithee'.",
+   "source": "Books & Boots (Simon), 'Affixes, compound and combination words' (2013-03-08)",
+   "url": "https://astrofella.wordpress.com/2013/03/08/george-rr-martins-prose-style-affixes-compound-and-combination-words/",
+   "quote": "the greater the sense of moving into his otherworld",
+   "page": ""
+  },
+  {
+   "index": 314,
+   "feature": "Homeric epithets and stock phrases (critic)",
+   "claim": "An essay reads Martin's recurring formulae ('black as night', 'faces still as masks', 'corded with muscle') as Homeric epithets that keep pace at the cost of memorable sentences.",
+   "source": "At Sea Journal, 'George R.R. Martin, The American Homer' (undated)",
+   "url": "https://atseajournal.com/asoiaf/essays/epithets.html",
+   "quote": "almost hypnotic readability",
+   "page": ""
+  }
+ ]
+}

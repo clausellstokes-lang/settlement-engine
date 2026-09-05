@@ -1,0 +1,20 @@
+PROOF_HEAD=d75e807a61a6bbd34f626c37c6ab352e731e650b start 19:23:50 load=2.83 26.75 31.57
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 4697 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneLIGHTPROOF
+
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+ ❯ tests/lint/sovereigntyLightingContract.walker.test.js (34 tests | 1 failed) 4585ms
+     × THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed 43ms
+ ❯ tests/property/generatorGoldenMaster.test.js (3 tests | 1 failed) 19248ms
+     × every config produces byte-identical output to the golden master 19244ms
+ ❯ tests/domain/operationsVoice.test.js (63 tests | 1 failed) 4898ms
+     × no module under src names this leaf, and the census is executed over the tree 3131ms
+ ❯ tests/lint/writerReach.walker.test.js (56 tests | 3 failed) 74166ms
+     × the frozen corpusMeta EQUALS the observed-shape register corpusMeta — one corpus, two walkers 14ms
+     × the frozen shapesDigest EQUALS the in-process digest of corpus.shapes — two executions of one builder are one corpus by bit, not by count 6ms
+     × the surfaceReach grammar round-trips: parse(format(reach)) equals reach for every LIT identity 14ms
+ ❯ tests/docs/enforcement-claims.test.js (21 tests | 1 failed) 1213ms
+     × every completeness claim carries an @enforced-by tag with ≥1 target 9ms
+ ❯ tests/copy/voiceMechanics.test.js (19 tests | 1 failed) 5283ms
+     × per-file debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win) 27ms

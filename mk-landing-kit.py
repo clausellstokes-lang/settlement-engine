@@ -4,7 +4,7 @@ Stamps a landing kit for ledger act §N from the §897 templates: after-cas-N.sh
 (with __ROW__ / __CARD__ / __TAIL__ text placeholders for the chair, plus __CAS_SHA__ / __TESTS__ for the CAS step),
 msg-N.txt (subject placeholder). Nothing is run. The chair fills the three texts, then runs after-cas-N.sh after a green gate."""
 import sys, io, json, re, os, argparse
-SC='/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad'
+SC='/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad'
 ap=argparse.ArgumentParser(); ap.add_argument('n'); ap.add_argument('dock'); ap.add_argument('base'); ap.add_argument('seal'); ap.add_argument('cars')
 ap.add_argument('--prev-pickup', default=None); ap.add_argument('--out', default=SC); a=ap.parse_args()
 assert re.fullmatch(r'[0-9a-f]{40}', a.base), 'base must be the FULL sha'; assert a.cars.isdigit()

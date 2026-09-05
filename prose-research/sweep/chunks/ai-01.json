@@ -1,0 +1,158 @@
+{
+ "name": "ai",
+ "chunk": 1,
+ "indices": [
+  90,
+  91,
+  92,
+  93,
+  94,
+  95,
+  96,
+  97,
+  98,
+  99,
+  100,
+  101,
+  102,
+  103,
+  104
+ ],
+ "claims": [
+  {
+   "index": 90,
+   "feature": "subtext",
+   "claim": "The model states rather than earns: a later claim is not set up by the sentences before it, so weight is asserted, not built.",
+   "source": "sudo, LessWrong close reading of a Claude passage (2026-04-12)",
+   "url": "https://www.lesswrong.com/posts/nTuKjJBwMtMuuLonA/hot-take-problems-with-ai-prose",
+   "quote": "Claude does not use its preceding sentences to justify the claim",
+   "page": "[Hot take] Problems with AI prose"
+  },
+  {
+   "index": 91,
+   "feature": "specificity",
+   "claim": "AI fiction has no grain: no proper nouns, specific months, brand names, or regional dialect markers.",
+   "source": "Matthew Vollmer (2026-04-24)",
+   "url": "https://matthewvollmer.substack.com/p/i-asked-the-machine-to-tell-on-itself",
+   "quote": "No grain: no proper nouns, no specific months, no brand names.",
+   "page": "I Asked the Machine to Tell on Itself: A Field Guide to AI Tells"
+  },
+  {
+   "index": 92,
+   "feature": "specificity",
+   "claim": "AI cannot build meaning by accumulating repeated specific observations across a manuscript, and it describes emotions rather than showing them through behavior.",
+   "source": "Richard Lowe, ghostwriter, Association of Ghostwriters (2026-04-29)",
+   "url": "https://associationofghostwriters.org/the-real-reason-not-to-use-ai-to-write-your-novel/",
+   "quote": "",
+   "page": "The Real Reason Not to Use AI to Write Your Novel"
+  },
+  {
+   "index": 93,
+   "feature": "specificity",
+   "claim": "AI prose stays in shallow point of view, avoids concrete sensory detail, and delivers emotions disconnected from the trigger that should have produced them.",
+   "source": "Carrie Jones, developmental editor (2026-03-21)",
+   "url": "https://livinghappy.substack.com/p/what-makes-a-story-look-like-ai-wrote",
+   "quote": "It will fail to have the emotion linked to it",
+   "page": "What Makes a Story \"Look\" Like AI Wrote It?"
+  },
+  {
+   "index": 94,
+   "feature": "specificity (averaging)",
+   "claim": "Every choice the prompter does not make, the model fills with the statistical average, and that average is the least interesting choice available.",
+   "source": "Nick Bailey, LitReactor (2026-06-18)",
+   "url": "https://litreactor.com/columns/human-editors-vs-ai-editing/",
+   "quote": "that average is equivalent to the least interesting choices possible",
+   "page": "Human Editors vs AI Editing: What AI Still Can't Do"
+  },
+  {
+   "index": 95,
+   "feature": "specificity (averaging)",
+   "claim": "Fiction is roughly one deliberate choice per word; a prompt makes far fewer choices, and the unmade choices come out generic and without intention.",
+   "source": "Lincoln Michel, novelist, Counter Craft (2024-09-04)",
+   "url": "https://countercraft.substack.com/p/art-without-intention",
+   "quote": "Art is something that results from making a lot of choices.",
+   "page": "Art Without Intention"
+  },
+  {
+   "index": 96,
+   "feature": "specificity (range)",
+   "claim": "Five different LLMs' stories occupy one overlapping region of narrative-feature space, while human stories span more locations, more dialogue, and a broader repertoire; named intertextual references appear in 24% of AI stories versus 47% of human.",
+   "source": "Russell et al., StoryScope (2026-04-03)",
+   "url": "https://arxiv.org/abs/2604.03136",
+   "quote": "AI-generated stories cluster in a shared region of narrative space",
+   "page": "StoryScope: Investigating idiosyncrasies in AI fiction"
+  },
+  {
+   "index": 97,
+   "feature": "specificity (game dialogue)",
+   "claim": "Generated game dialogue is competent and forgettable, makes a whole cast sound like one person, and misses the specific surprising line that makes a moment land (vendor source with a stake).",
+   "source": "Summer Engine blog, vendor (2026-06-06)",
+   "url": "https://www.summerengine.com/blog/ai-dialogue-generator-for-games",
+   "quote": "weak at the specific, surprising sentence that makes a moment land",
+   "page": "AI Dialogue Generator for Games: What Actually Works in 2026"
+  },
+  {
+   "index": 98,
+   "feature": "rhythm",
+   "claim": "AI prose has low sentence-length variation, producing rhythmic uniformity; scenes also unfold at a constant rate with no selective summary or elision.",
+   "source": "Matthew Vollmer (2026-04-24)",
+   "url": "https://matthewvollmer.substack.com/p/i-asked-the-machine-to-tell-on-itself",
+   "quote": "Scenes unfold at a constant rate",
+   "page": "I Asked the Machine to Tell on Itself: A Field Guide to AI Tells"
+  },
+  {
+   "index": 99,
+   "feature": "rhythm",
+   "claim": "Generated text has a predictable, even rhythm and no emotional valence, so it lulls rather than moves the reader.",
+   "source": "Josh Bernoff (2026-02-05)",
+   "url": "https://bernoff.com/blog/how-editors-should-handle-ai-generated-manuscripts",
+   "quote": "could lull the reader to sleep",
+   "page": "How editors should handle AI-generated manuscripts"
+  },
+  {
+   "index": 100,
+   "feature": "rhythm",
+   "claim": "AI fiction reuses identical sentence shapes over and over, which even a beginning human writer would not do.",
+   "source": "Makin, Record Crash (2025-11-27)",
+   "url": "https://recordcrash.substack.com/p/how-to-identify-ai-written-web-fiction",
+   "quote": "A new writer wouldn't repeat sentence shapes again and again",
+   "page": "How to Identify AI-Written Web Fiction"
+  },
+  {
+   "index": 101,
+   "feature": "rhythm",
+   "claim": "AI prose alternates mechanically between long comparisons and short stock phrases, and once it reaches a cliché it keeps drawing from the same well where a human would rest it.",
+   "source": "Makin, Record Crash (2025-11-27)",
+   "url": "https://recordcrash.substack.com/p/how-to-identify-ai-written-web-fiction",
+   "quote": "Writing keeps swinging between long comparisons, then short stock phrases",
+   "page": "How to Identify AI-Written Web Fiction"
+  },
+  {
+   "index": 102,
+   "feature": "rhythm",
+   "claim": "AI plants one-sentence fragment paragraphs before scene hooks and an em-dash per paragraph, and the pattern has become recognizable to editors.",
+   "source": "Carrie Jones, developmental editor (2026-03-21)",
+   "url": "https://livinghappy.substack.com/p/what-makes-a-story-look-like-ai-wrote",
+   "quote": "The rhythm is becoming recognizable as an AI pattern",
+   "page": "What Makes a Story \"Look\" Like AI Wrote It?"
+  },
+  {
+   "index": 103,
+   "feature": "rhythm",
+   "claim": "Short punchy standalone fragments are used for manufactured emphasis that does not match human speech or prose patterns.",
+   "source": "tropes.fyi AI Writing Pattern Directory (undated)",
+   "url": "https://tropes.fyi/directory",
+   "quote": "He published this. Openly. In a book.",
+   "page": "Tropes - AI Writing Pattern Directory"
+  },
+  {
+   "index": 104,
+   "feature": "rhythm",
+   "claim": "Vendor measurement: about 85% of GPT-4o sentences fall in the 15-28 word range and Gemini paragraphs are nearly identical in length, versus human prose ranging 4 to 55+ words with no central cluster (unreplicated vendor figures).",
+   "source": "TextSight blog, vendor (2026-06-16)",
+   "url": "https://www.textsight.ai/blog/ai-rhythm-explained/",
+   "quote": "AI rhythm is the mechanical, metronomic quality of text",
+   "page": "What 'AI Rhythm' Means"
+  }
+ ]
+}

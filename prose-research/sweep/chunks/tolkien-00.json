@@ -1,0 +1,158 @@
+{
+ "name": "tolkien",
+ "chunk": 0,
+ "indices": [
+  255,
+  256,
+  257,
+  258,
+  259,
+  260,
+  261,
+  262,
+  263,
+  264,
+  265,
+  266,
+  267,
+  268,
+  269
+ ],
+ "claims": [
+  {
+   "index": 255,
+   "feature": "annalist voice of The Silmarillion",
+   "claim": "Shippey characterises The Silmarillion as documenting events as if in annals rather than as focused narrative.",
+   "source": "Wikipedia, 'Tolkien's prose style'",
+   "url": "https://en.wikipedia.org/wiki/Tolkien's_prose_style",
+   "quote": "documented as if in annals",
+   "page": "The Silmarillion"
+  },
+  {
+   "index": 256,
+   "feature": "per-speaker register at the Council of Elrond",
+   "claim": "Shippey shows speakers at the Council distinguished by how they speak: Boromir 'Elrondian', Aragorn shifting register to impress him.",
+   "source": "'J.R.R. Tolkien: Author of the Century, by Tom Shippey' (C.S. Lewis and J.R.R. Tolkien blog summary)",
+   "url": "https://lewistolkien.wordpress.com/j-r-r-tolkien/j-r-r-tolkien-author-of-the-century-by-tom-shippey/",
+   "quote": "Boromir speaks sort of Elrondian",
+   "page": ""
+  },
+  {
+   "index": 257,
+   "feature": "Hobbit narrator's confiding idiom",
+   "claim": "Shippey identifies The Hobbit's narrator voice in phrases like 'of course' and 'as you probably know' that treat the strange as obvious.",
+   "source": "'Author of the Century' summary, C.S. Lewis and J.R.R. Tolkien blog",
+   "url": "https://lewistolkien.wordpress.com/j-r-r-tolkien/j-r-r-tolkien-author-of-the-century-by-tom-shippey/",
+   "quote": "as you probably know",
+   "page": ""
+  },
+  {
+   "index": 258,
+   "feature": "dwarvish curtness vs hobbit rhymes",
+   "claim": "Shippey (as summarised) contrasts Glóin's and Gimli's curt, broken, appositive sentences with hobbits' simple rhymes and quick exclamations.",
+   "source": "'Tolkien's Use of Poetry and Prose', Tolkien: Medieval and Modern",
+   "url": "http://tolkienmedievalandmodern.blogspot.com/2014/04/tolkiens-use-of-poetry-and-prose.html",
+   "quote": "short, broken sentences and apposition",
+   "page": ""
+  },
+  {
+   "index": 259,
+   "feature": "Aragorn/Strider register switching",
+   "claim": "Aragorn slips between speaking as Elendil's heir and as Strider, marking rank and audience by register.",
+   "source": "'Tolkien's Use of Poetry and Prose', Tolkien: Medieval and Modern",
+   "url": "http://tolkienmedievalandmodern.blogspot.com/2014/04/tolkiens-use-of-poetry-and-prose.html",
+   "quote": "slips easily between speaking like Elendil's heir and Strider",
+   "page": ""
+  },
+  {
+   "index": 260,
+   "feature": "shedding heavy archaism over time",
+   "claim": "Rosebury traces Tolkien's early sustained Morris-like archaism giving way to prose that shed impossibly heavy archaism.",
+   "source": "'Tolkien's Use of Poetry and Prose', Tolkien: Medieval and Modern (citing Rosebury)",
+   "url": "http://tolkienmedievalandmodern.blogspot.com/2014/04/tolkiens-use-of-poetry-and-prose.html",
+   "quote": "impossibly heavy archaism",
+   "page": ""
+  },
+  {
+   "index": 261,
+   "feature": "hobbits as mediating register",
+   "claim": "Shippey explains hobbits serve as mediators between the modern reader's world and the heroic archaic realm, making the narrative accessible.",
+   "source": "Wikipedia, 'Storytelling in The Lord of the Rings'",
+   "url": "https://en.wikipedia.org/wiki/Storytelling_in_The_Lord_of_the_Rings",
+   "quote": "mediators between the ordinary modern world",
+   "page": ""
+  },
+  {
+   "index": 262,
+   "feature": "depth as distinguishing quality",
+   "claim": "Shippey calls the impression of depth the one literary quality that most distinguishes Tolkien from his imitators.",
+   "source": "Wikipedia, 'Impression of depth in The Lord of the Rings'",
+   "url": "https://en.wikipedia.org/wiki/Impression_of_depth_in_The_Lord_of_the_Rings",
+   "quote": "most certainly distinguishes Tolkien from his many imitators",
+   "page": ""
+  },
+  {
+   "index": 263,
+   "feature": "depth via varied hands and inconsistency",
+   "claim": "Drout and colleagues list four depth factors including casual incomplete mentions, inconsistent accounts, and varying textual styles as if by different hands.",
+   "source": "Wikipedia, 'Impression of depth in The Lord of the Rings'",
+   "url": "https://en.wikipedia.org/wiki/Impression_of_depth_in_The_Lord_of_the_Rings",
+   "quote": "varying textual styles as if written by different hands",
+   "page": ""
+  },
+  {
+   "index": 264,
+   "feature": "characters refer to legends",
+   "claim": "Ferdynus notes characters constantly cite legends and recite old ballads, producing the impression of the depth of time.",
+   "source": "Wikipedia, 'Impression of depth in The Lord of the Rings'",
+   "url": "https://en.wikipedia.org/wiki/Impression_of_depth_in_The_Lord_of_the_Rings",
+   "quote": "the striking impression of the depth of time",
+   "page": ""
+  },
+  {
+   "index": 265,
+   "feature": "plain phrasal verbs, not literary diction",
+   "claim": "Rosebury rebuts charges of archaising and wrenched syntax by showing Tolkien prefers 'have on' and 'get off' to 'wear' and 'dismount'.",
+   "source": "Wikipedia, 'Tolkien: A Cultural Phenomenon'",
+   "url": "https://en.wikipedia.org/wiki/Tolkien:_A_Cultural_Phenomenon",
+   "quote": "familiar phrasal verbs 'have on' and 'get off'",
+   "page": ""
+  },
+  {
+   "index": 266,
+   "feature": "sensuous precision of description",
+   "claim": "Rosebury credits Tolkien's description with a certain sensuous precision distinctive to him.",
+   "source": "Wikipedia, 'Tolkien: A Cultural Phenomenon'",
+   "url": "https://en.wikipedia.org/wiki/Tolkien:_A_Cultural_Phenomenon",
+   "quote": "a certain sensuous precision, distinctive of Tolkien",
+   "page": ""
+  },
+  {
+   "index": 267,
+   "feature": "plain syntax modulating to grandeur",
+   "claim": "Rosebury shows passages begin in essentially plain syntax and rise to a higher register through subtle syntactic clues.",
+   "source": "Wikipedia, 'Tolkien's prose style'",
+   "url": "https://en.wikipedia.org/wiki/Tolkien's_prose_style",
+   "quote": "essentially plain syntax",
+   "page": "Justified grandeur"
+  },
+  {
+   "index": 268,
+   "feature": "circumstantial expansiveness",
+   "claim": "Rosebury holds the circumstantial expansiveness of Middle-earth itself is central to the work's aesthetic power.",
+   "source": "Wikipedia, 'Literary reception of The Lord of the Rings'",
+   "url": "https://en.wikipedia.org/wiki/Literary_reception_of_The_Lord_of_the_Rings",
+   "quote": "circumstantial expansiveness of Middle-earth itself is central",
+   "page": ""
+  },
+  {
+   "index": 269,
+   "feature": "invitational suggestiveness",
+   "claim": "Walker says Tolkien's prose has an invitational quality, appearing detailed while luring readers to fill in the blanks like biblical prose.",
+   "source": "Tolkien Library, 'Interview with Steven C. Walker, author of The Power of Tolkien's Prose'",
+   "url": "https://tolkienlibrary.com/press/905-power-of-tolkien-prose.php",
+   "quote": "training wheels for our imagination",
+   "page": ""
+  }
+ ]
+}

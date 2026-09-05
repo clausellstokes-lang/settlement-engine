@@ -6,7 +6,7 @@
 # full attribution is the census's own law for a deferred debt). Adds the census entry BY HAND, the WALKER_ROWS_OWED ledger entry, and
 # OWED_CEILING +1, in ONE car, then proves with the meta-test under the mutex. Run AFTER the whole-suite proof confirms the arm and BEFORE run-ratchet.
 set -e
-SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad
+SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad
 D=$SC/laneDESKINT; cd "$D"; [ -z "$(git status --porcelain -uall)" ] || { echo "⛔ dock dirty"; exit 1; }
 KEY=$(grep -E '^ FAIL  tests/copy/voiceMechanics.test.js > .*per-file debt exactly matches the baseline' "$SC/whole-900d.log" | grep -v JSX | head -1 | sed 's/^ FAIL  //; s/ > / :: /; s/ > / /g')
 [ -n "$KEY" ] || { echo "⛔ the Tier-2 per-file arm is not red in whole-900d.log — nothing to bank"; exit 1; }

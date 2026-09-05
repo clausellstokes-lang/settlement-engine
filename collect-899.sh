@@ -2,7 +2,7 @@
 # collect-899.sh — the landing collection (§899). set -e: the guard and the consequence live together.
 # Reads the CAS sha from $SC/cas-899.sha, written by the CAS step; refuses if absent or unsealed.
 set -e
-SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad
+SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad
 REPO=/Users/cstokes/Desktop/settlement-engine
 cd "$REPO"; [ "$(git rev-parse --show-toplevel)" = "$REPO" ] || { echo "ABORT toplevel"; exit 1; }
 TIP=$(git rev-parse refs/heads/review-fixes-2026-07-08); echo "LEDGER_TIP_BEFORE=$TIP"

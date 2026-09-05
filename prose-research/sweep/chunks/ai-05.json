@@ -1,0 +1,158 @@
+{
+ "name": "ai",
+ "chunk": 5,
+ "indices": [
+  150,
+  151,
+  152,
+  153,
+  154,
+  155,
+  156,
+  157,
+  158,
+  159,
+  160,
+  161,
+  162,
+  163,
+  164
+ ],
+ "claims": [
+  {
+   "index": 150,
+   "feature": "dialogue as debate",
+   "claim": "AI dialogue drifts into philosophical debate rather than character-driven exchange.",
+   "source": "Dramatica blog summarizing StoryScope, 2026-05-29",
+   "url": "https://dramatica.com/blog/the-ai-tells-are-in-the-story",
+   "quote": "AI dialogue more often turns into philosophical debate",
+   "page": ""
+  },
+  {
+   "index": 151,
+   "feature": "narrative sameness across models",
+   "claim": "Stories from five different LLMs cluster together in narrative-feature space while human stories are diverse; narrative features alone reach 93.2% macro-F1 detection.",
+   "source": "Russell et al., StoryScope; Dramatica gloss",
+   "url": "https://dramatica.com/blog/the-ai-tells-are-in-the-story",
+   "quote": "five AI models cluster together in narrative space",
+   "page": ""
+  },
+  {
+   "index": 152,
+   "feature": "redundant exposition (tell-not-show)",
+   "claim": "18% of professional writers' edits to LLM prose removed exposition that restated what was already implied.",
+   "source": "Chakrabarty, Laban, Wu, 'Can AI writing be salvaged?' (arXiv 2409.14509, LAMP corpus, 18 writers, 8,035 edits)",
+   "url": "https://arxiv.org/html/2409.14509",
+   "quote": "show, don't tell",
+   "page": ""
+  },
+  {
+   "index": 153,
+   "feature": "cliché / fluff",
+   "claim": "17% of professional edits to LLM prose removed clichés and filler.",
+   "source": "Chakrabarty, Laban, Wu (arXiv 2409.14509)",
+   "url": "https://arxiv.org/html/2409.14509",
+   "quote": "unnecessary filler",
+   "page": ""
+  },
+  {
+   "index": 154,
+   "feature": "awkward word choice",
+   "claim": "Awkward phrasing was the largest edit category (28%), e.g. the recurring hedge 'seem to (verb)'.",
+   "source": "Chakrabarty, Laban, Wu (arXiv 2409.14509), writer W1",
+   "url": "https://arxiv.org/html/2409.14509",
+   "quote": "not technically wrong it's just inelegant",
+   "page": ""
+  },
+  {
+   "index": 155,
+   "feature": "purple prose and lack of specificity",
+   "claim": "Professional writers' taxonomy of LLM idiosyncrasies also names purple prose (abstract words, excess adjectives/metaphors), lack of specific detail, poor sentence structure (20%), and tense inconsistency.",
+   "source": "Chakrabarty, Laban, Wu (arXiv 2409.14509)",
+   "url": "https://arxiv.org/html/2409.14509",
+   "quote": "",
+   "page": ""
+  },
+  {
+   "index": 156,
+   "feature": "lyrical nonsense",
+   "claim": "LLM literary prose produces metaphors that sound profound but carry no meaning the reader can cash out.",
+   "source": "Lincoln Michel, 'MFA vs. LLM', Counter Craft, 2025-03-17",
+   "url": "https://countercraft.substack.com/p/mfa-vs-llm-is-openais-metafiction",
+   "quote": "Grief, as I've learned, is a delta",
+   "page": ""
+  },
+  {
+   "index": 157,
+   "feature": "mixed-metaphor pile-up",
+   "claim": "Within one passage the model jumbles construction, tailoring and magic metaphors without coherence.",
+   "source": "Lincoln Michel, 'MFA vs. LLM', 2025-03-17",
+   "url": "https://countercraft.substack.com/p/mfa-vs-llm-is-openais-metafiction",
+   "quote": "protagonists cut from whole cloth, emotions dyed and draped",
+   "page": ""
+  },
+  {
+   "index": 158,
+   "feature": "no narrative movement",
+   "claim": "The AI story repeats its central idea with new metaphors instead of developing character, plot or thought.",
+   "source": "Lincoln Michel, 'MFA vs. LLM', 2025-03-17",
+   "url": "https://countercraft.substack.com/p/mfa-vs-llm-is-openais-metafiction",
+   "quote": "doesn't really go anywhere. It's flat.",
+   "page": ""
+  },
+  {
+   "index": 159,
+   "feature": "no intentionality / point of view",
+   "claim": "LLMs cannot make parts of a story work together because they have no point of view or intention behind choices.",
+   "source": "Lincoln Michel, 'MFA vs. LLM', 2025-03-17",
+   "url": "https://countercraft.substack.com/p/mfa-vs-llm-is-openais-metafiction",
+   "quote": "They don't have a point of view",
+   "page": ""
+  },
+  {
+   "index": 160,
+   "feature": "choices per word",
+   "claim": "A 10,000-word story is ~10,000 choices; a 100-word prompt makes almost none of them, and the hardest work is shaping and refining.",
+   "source": "Lincoln Michel, 'Art Without Intention', 2024-09-04",
+   "url": "https://countercraft.substack.com/p/art-without-intention",
+   "quote": "shaping, honing, and refining",
+   "page": ""
+  },
+  {
+   "index": 161,
+   "feature": "no perspective / no origin",
+   "claim": "AI sentences give the reader no place to stand because they do not originate from any sensibility.",
+   "source": "Charles Schifano, 'What's Missing from AI Writing', 2023-10-27",
+   "url": "https://charlesschifano.substack.com/p/whats-missing-from-ai-writing",
+   "quote": "the sentences don't originate from anywhere",
+   "page": ""
+  },
+  {
+   "index": 162,
+   "feature": "no trajectory (swappable sentences)",
+   "claim": "Sentences in AI prose can be reordered with nothing lost, because there is no point of view driving them forward.",
+   "source": "Charles Schifano, 2023-10-27",
+   "url": "https://charlesschifano.substack.com/p/whats-missing-from-ai-writing",
+   "quote": "there's no trajectory in these sentences",
+   "page": ""
+  },
+  {
+   "index": 163,
+   "feature": "no narrative, character or plot",
+   "claim": "Asimov's editor, after hundreds of ChatGPT submissions: no originality, no narrative sense, no character development, near-nonexistent plotting.",
+   "source": "Sheila Williams, Asimov's editorial 'ChatGPT and Me', Jan/Feb 2024",
+   "url": "https://asimovs.com/wp-content/uploads/2024/02/Editorial_CHAT-GPT-and-Me_JanFeb24.pdf",
+   "quote": "no sense of narrative, no character development",
+   "page": ""
+  },
+  {
+   "index": 164,
+   "feature": "no cultural memory",
+   "claim": "Generated stories show no sign their maker ever absorbed a story, folktale or TV show; worse than any human submission.",
+   "source": "Sheila Williams, Asimov's, Jan/Feb 2024",
+   "url": "https://asimovs.com/wp-content/uploads/2024/02/Editorial_CHAT-GPT-and-Me_JanFeb24.pdf",
+   "quote": "ever read a story, heard some folklore",
+   "page": ""
+  }
+ ]
+}

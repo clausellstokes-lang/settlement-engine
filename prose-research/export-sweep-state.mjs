@@ -2,7 +2,7 @@
 // so a successor session (which cannot resume another session's workflow run id) restarts from the claims, not from zero.
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
 const WF = '/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/subagents/workflows/';
-const OUT = '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/prose-research/sweep/';
+const OUT = '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/';
 const RUNS = { tolkien: 'wf_9b91b240-c98', martin: 'wf_e25da3f7-7fb', dnd: 'wf_6051234f-d27', ai: 'wf_60f0a1e1-39c' };
 mkdirSync(OUT, { recursive: true });
 const summary = {};

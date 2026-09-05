@@ -3,7 +3,7 @@
 # ⛔ NEVER materialise packages: a dock with real copies reads a FALSE RED against the
 # first-paint byte budget (measured 8,551 B over at §890). Symlinks only.
 set -e
-SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad
+SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad
 REPO=/Users/cstokes/Desktop/settlement-engine
 D="$SC/$1"; SHA="$2"
 [ -d "$D" ] || git -C "$REPO" worktree add --detach "$D" "$SHA" >/dev/null 2>&1

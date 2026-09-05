@@ -3,7 +3,7 @@
 # delete their two WALKER_ROWS_OWED entries and lower OWED_CEILING by exactly two, in ONE car, as the file's own law demands
 # ("the census entry, this ledger entry and this ceiling all move together"). Proves with the meta-test under the mutex.
 set -e
-SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad
+SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad
 D=$SC/lanePROSE2; cd "$D"; [ -z "$(git status --porcelain -uall)" ] || { echo "⛔ dock dirty"; exit 1; }
 N=$(python3 -c "import json;d=json.load(open('scripts/.test-ratchet-baseline.json'));print(sum(1 for k in d['entries'] if 'E2 voiceMechanics' in k))")
 [ "$N" = "0" ] || { echo "⛔ the census still holds $N Tier-2 voice rows — the ratchet has not retired them; nothing to do"; exit 1; }

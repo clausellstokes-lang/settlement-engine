@@ -3,7 +3,7 @@
 # as real dirs to build. Materialise EXACTLY those two → npm run build:edge-shared → commit the re-mint (chair car) → RESTORE the symlinks
 # → assert 453 symlinks again. Guard + consequence together; refuses on a dirty dock or if anything but the bundle outputs changed.
 set -e
-SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad
+SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad
 D=$1; REPO=/Users/cstokes/Desktop/settlement-engine; MAIN=$REPO/node_modules; cd "$D" || exit 9
 [ -z "$(git status --porcelain -uall)" ] || { echo "⛔ dock dirty"; exit 1; }
 NL=$(find node_modules -maxdepth 1 -type l | wc -l | tr -d ' '); echo "symlinks before: $NL"

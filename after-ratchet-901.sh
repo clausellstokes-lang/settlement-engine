@@ -4,7 +4,7 @@
 # (`base-state-capsule.mjs --runtime-tests=<totalTests from the log>` → docs/implementation/BASE_STATE.json), then the
 # re-stamp of the kit at the FINAL car count, then the train seal. No owed-ledger car at §900 (entries stay 3). The gate is
 # launched SEPARATELY (run-gate-901.sh). Every exit captured; refuses on anything unexpected. POSIX sh.
-SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad
+SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad
 D=$SC/laneLIGHTINT; LOG=$SC/ratchet-901.run.log; BASE=04bb92d19735594718e61b271d5bdf4ddfd4a2cc; SEAL=light-int-2026-09-05
 EXP_FILES=$1; EXP_ENTRIES=$2
 [ -n "$EXP_FILES" ] && [ -n "$EXP_ENTRIES" ] || { echo "usage: <expected-totalFiles> <expected-entries> (read them off the MEASURED line first)"; exit 9; }

@@ -1,0 +1,158 @@
+{
+ "name": "ai",
+ "chunk": 9,
+ "indices": [
+  210,
+  211,
+  212,
+  213,
+  214,
+  215,
+  216,
+  217,
+  218,
+  219,
+  220,
+  221,
+  222,
+  223,
+  224
+ ],
+ "claims": [
+  {
+   "index": 210,
+   "feature": "genre and tone misalignment",
+   "claim": "Narrative-design experts list AI game narrative failures: unconvincing or repetitive content, wrong genre, uneven quality across sessions, and a bias toward overly positive endings.",
+   "source": "Valdivia & Burelli, arXiv 2509.04239, 2025-09-04",
+   "url": "https://arxiv.org/html/2509.04239",
+   "quote": "overly positive or uninspired endings",
+   "page": ""
+  },
+  {
+   "index": 211,
+   "feature": "industry sentiment",
+   "claim": "63% of game design and narrative workers say generative AI harms the industry (GDC 2026, n>2,300); positive views fell to 7%.",
+   "source": "Game Developer, 2026-02-03",
+   "url": "https://www.gamedeveloper.com/business/one-third-of-game-workers-use-generative-ai-but-half-think-it-s-bad-for-the-industry",
+   "quote": "a regurgitated amalgamation of everything that's come before",
+   "page": ""
+  },
+  {
+   "index": 212,
+   "feature": "middle-of-the-road adventure text",
+   "claim": "ChatGPT-written RPG adventures land at the most ordinary text possible; the quality floor comes with an equal ceiling.",
+   "source": "H. Tucker Cobey, Epic Table Games, 2023-07-24",
+   "url": "https://epictablegames.com/onebookshelf-aka-drivethrurpg-bans-primarily-ai-generated-content/",
+   "quote": "the most ordinary, middle-of-the-road adventure text",
+   "page": ""
+  },
+  {
+   "index": 213,
+   "feature": "marketplace ban wording",
+   "claim": "DMs Guild and DriveThruRPG refuse commercial content primarily written by AI language generators (effective 2023-07-31) while allowing tagged AI art.",
+   "source": "OneBookShelf policy via EN World thread",
+   "url": "https://www.enworld.org/threads/dms-guild-and-drivethrurpg-ban-ai-written-works-requires-labels-for-ai-generated-art.698936/",
+   "quote": "primarily written by AI language generators",
+   "page": ""
+  },
+  {
+   "index": 214,
+   "feature": "publisher pledge",
+   "claim": "Kobold Press pledges no AI-generated text in game design, framing LLM text as fine for chatbots but not for play with friends.",
+   "source": "Wolfgang Baur, Kobold Press 'No AI Pledge'",
+   "url": "https://koboldpress.com/state-of-play-kobold-press-issues-the-no-ai-pledge/",
+   "quote": "we don't use AI to generate text",
+   "page": ""
+  },
+  {
+   "index": 215,
+   "feature": "publisher bans are ethical not qualitative",
+   "claim": "Paizo, Chaosium, WotC, Renegade, Stonemaier, Free League ban AI text/art on ethics and livelihood grounds; only Monte Cook Games gives a quality verdict.",
+   "source": "Geeknative roundup",
+   "url": "https://www.geeknative.com/221420/the-human-touch-the-growing-list-of-tabletop-companies-banning-ai/",
+   "quote": "exact opposite of inspiration",
+   "page": ""
+  },
+  {
+   "index": 216,
+   "feature": "AI RPG text stagnant and obvious",
+   "claim": "RPG crowdfunding backers report AI-written project text is easy to catch and has not improved in three years; human creators now fear tripping the same alarm.",
+   "source": "EN World, 'AI is destroying crowdfunding' (user Agamon, 2026-08-25)",
+   "url": "https://www.enworld.org/threads/ai-is-destroying-crowdfunding.720435/",
+   "quote": "it's been at the same level for three years",
+   "page": ""
+  },
+  {
+   "index": 217,
+   "feature": "series-level beat repetition",
+   "claim": "Letting AI draft sequels from the same source documents reproduced the first book's story beats; prose stayed 'competent but slightly mechanical' with 'not X but Y'.",
+   "source": "Jon Del Arroz, 2026-03-16",
+   "url": "https://substack.aicentral.blog/p/i-let-ai-write-three-complete-novels",
+   "quote": "producing repetitive story beats",
+   "page": ""
+  },
+  {
+   "index": 218,
+   "feature": "prompt shipped in a published novel",
+   "claim": "A Kindle Unlimited novel (Darkhollow Academy: Year 2, June 2025) went out with an AI rewrite prompt still in the text; Amazon's AI disclosure is not shown to readers.",
+   "source": "Book Riot, 'Can Kindle Unlimited Survive AI?'",
+   "url": "https://bookriot.com/can-kindle-unlimited-survive-ai/",
+   "quote": "",
+   "page": ""
+  },
+  {
+   "index": 219,
+   "feature": "reader-side identification criteria",
+   "claim": "Goodreads readers flag ~296 books as obviously AI-generated on the basis of AI cover art plus stereotypical text patterns at slop-level frequency.",
+   "source": "Goodreads list 'Obviously AI-generated'",
+   "url": "https://www.goodreads.com/list/show/221372.Obviously_AI_generated",
+   "quote": "stereotypical text patterns",
+   "page": ""
+  },
+  {
+   "index": 220,
+   "feature": "false-positive hazard",
+   "claim": "A human-written indie RPG was review-bombed as ChatGPT slop because the story 'felt artificial'; reader tells fire on human work too.",
+   "source": "Outlook Respawn on Shrine's Legacy, 2025-12-15",
+   "url": "https://respawn.outlookindia.com/gaming/gaming-news/shrines-legacy-devs-deny-ai-slop-chatgpt-rumors",
+   "quote": "the story felt artificial",
+   "page": ""
+  },
+  {
+   "index": 221,
+   "feature": "em dash",
+   "claim": "There is no hard evidence that chatbots use more em dashes than professional human writers; their prevalence in AI output reflects training on human prose.",
+   "source": "The Ringer — Brian Phillips, 2025-08-20",
+   "url": "https://www.theringer.com/2025/08/20/pop-culture/em-dash-use-ai-artificial-intelligence-chatgpt-google-gemini",
+   "quote": "how reliant the AI companies are on the human writers",
+   "page": "Stop AI-Shaming Our Precious, Kindly Em Dashes—Please"
+  },
+  {
+   "index": 222,
+   "feature": "em dash",
+   "claim": "The em dash was Emily Dickinson's signature mark, restored by later editors after publishers stripped it; treating it as an AI tell confuses the tool with the intent behind it.",
+   "source": "Focus Lab — Nadine Kavanaugh, 2026-02-09",
+   "url": "https://www.focuslab.agency/blog/the-em-dash-is-not-an-ai-tell",
+   "quote": "Machines use it because great writers always have.",
+   "page": "The Em Dash Is Not an AI Tell"
+  },
+  {
+   "index": 223,
+   "feature": "em dash",
+   "claim": "Google Books Ngram data show em dash frequency in published books has stayed high for centuries, so ChatGPT is mirroring professional convention rather than exhibiting a machine signature.",
+   "source": "SALT.agency — Sarah Mitchell, 2026-01-29",
+   "url": "https://salt.agency/blog/in-defence-of-the-em-dash-what-the-ai-writing-debate-gets-wrong/",
+   "quote": "There is no simple formula for detecting AI writing.",
+   "page": "In Defence of the em dash"
+  },
+  {
+   "index": 224,
+   "feature": "em dash",
+   "claim": "An AP Stylebook editor confirms em dashes are ubiquitous in professional journalism and predate AI; avoiding them to dodge suspicion lets machines dictate human style in a feedback loop.",
+   "source": "Writer's Guide (Substack) — Robert Roy Britt, 2026-07-28",
+   "url": "https://writersguide.substack.com/p/dont-let-ai-ban-the-em-dash",
+   "quote": "Em dashes aren't the problem.",
+   "page": "AI's Assault on the Em Dash Should Worry All Writers"
+  }
+ ]
+}

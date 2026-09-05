@@ -4,7 +4,7 @@
 # the predicted entries/totalFiles, the measuredAtSha being the dock's HEAD at measurement, and porcelain being exactly the
 # baseline file. Seals the train. Refuses on anything else. POSIX sh.
 set -e
-SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad
+SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad
 D=$1; LOG=$2; EXP_ENTRIES=$3; EXP_FILES=$4; SEAL=$5; BASE=$6; REPO=/Users/cstokes/Desktop/settlement-engine
 [ -d "$D" ] && [ -s "$LOG" ] && [ -n "$SEAL" ] && [ -n "$BASE" ] || { echo "usage: <dock> <log> <entries> <totalFiles> <seal> <base>"; exit 9; }
 TE=$(grep -oE '^TRUE_EXIT=[0-9]+' "$LOG" | tail -1 | cut -d= -f2); [ "$TE" = "0" ] || { echo "⛔ ratchet TRUE_EXIT=$TE (from the LOG)"; exit 1; }

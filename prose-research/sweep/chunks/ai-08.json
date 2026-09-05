@@ -1,0 +1,158 @@
+{
+ "name": "ai",
+ "chunk": 8,
+ "indices": [
+  195,
+  196,
+  197,
+  198,
+  199,
+  200,
+  201,
+  202,
+  203,
+  204,
+  205,
+  206,
+  207,
+  208,
+  209
+ ],
+ "claims": [
+  {
+   "index": 195,
+   "feature": "stock names and stock numbers",
+   "claim": "Recurring default names ('Marcus Webb', 'Sarah Chen') and the number 47 appear across unrelated AI stories, alongside canon-breaking facts.",
+   "source": "Thousand Roads forum",
+   "url": "https://forums.thousandroads.net/threads/detecting-ai-use-in-fiction.2175/",
+   "quote": "Marcus Webb, Sarah Chen",
+   "page": ""
+  },
+  {
+   "index": 196,
+   "feature": "characterization whiplash",
+   "claim": "A character shifts from heated argument to gentleness with no organic transition.",
+   "source": "Thousand Roads forum (user Flyg0n)",
+   "url": "https://forums.thousandroads.net/threads/detecting-ai-use-in-fiction.2175/",
+   "quote": "startling gentleness",
+   "page": ""
+  },
+  {
+   "index": 197,
+   "feature": "over-frequent model-specific words",
+   "claim": "Words like 'fluorescent', 'humming', 'particular' recur at rates traceable to a specific model's slop profile.",
+   "source": "Thousand Roads forum citing sam-paech/slop-forensics",
+   "url": "https://github.com/sam-paech/slop-forensics",
+   "quote": "heart pounding chest",
+   "page": ""
+  },
+  {
+   "index": 198,
+   "feature": "identical query voice",
+   "claim": "Literary agents receive near-identical AI query letters with the same voice, language and content even when the manuscripts look human.",
+   "source": "Naomi & James Jones, 2026-03-09",
+   "url": "https://naomiandjamesjones.substack.com/p/dont-use-ai-to-write-your-query-letter",
+   "quote": "almost identical query letters that used the same voice",
+   "page": ""
+  },
+  {
+   "index": 199,
+   "feature": "uncanny-valley query with no hook",
+   "claim": "An agent found the AI query offered no hook, fabricated a comp she never represented, and read as real-but-fake.",
+   "source": "Kate Nash, Slushpile Mountaineering, 2026-02-23",
+   "url": "https://slushpilemountaineering.substack.com/p/if-you-are-using-ai-in-your-queries",
+   "quote": "it appears real but it isn't",
+   "page": ""
+  },
+  {
+   "index": 200,
+   "feature": "worse than a worst first draft",
+   "claim": "Larian's writing director rates generated dialogue 3/10 at best, below his own worst drafts, and says placeholder AI text does not help development.",
+   "source": "Adam Smith (Larian) via PC Gamer, Ted Litchfield",
+   "url": "https://www.pcgamer.com/games/rpg/larians-head-writer-has-a-simple-answer-for-how-ai-generated-text-helps-development-it-doesnt-thanks-to-its-best-output-being-a-3-10-at-best-worse-than-his-worst-drafts/",
+   "quote": "the results hit a 3/10 at best",
+   "page": ""
+  },
+  {
+   "index": 201,
+   "feature": "smarmy sycophantic tone",
+   "claim": "Generated text across Grok, Claude and ChatGPT carries a recognizable smarmy, sycophantic tone that editing cannot remove cheaply.",
+   "source": "Ted Litchfield, PC Gamer",
+   "url": "https://www.pcgamer.com/games/rpg/larians-head-writer-has-a-simple-answer-for-how-ai-generated-text-helps-development-it-doesnt-thanks-to-its-best-output-being-a-3-10-at-best-worse-than-his-worst-drafts/",
+   "quote": "a by turns smarmy and sycophantic tone",
+   "page": ""
+  },
+  {
+   "index": 202,
+   "feature": "NPC filler inflation",
+   "claim": "LLM NPCs pad trivial exchanges with unnecessary words and nonsensical attributes (eighteen as 'a heavy, beautiful number').",
+   "source": "PC Gamer review of Seed (Klang), 2026-07-24",
+   "url": "https://www.pcgamer.com/games/sim/mmo-life-sim-seeds-ai-powered-avatars-prove-once-again-that-nothing-shatters-immersion-quicker-than-crappy-chatbot-dialogue/",
+   "quote": "filling up space with completely unnecessary words",
+   "page": ""
+  },
+  {
+   "index": 203,
+   "feature": "over-poeticized simple questions",
+   "claim": "AI NPCs rephrase plain questions into stilted 'alive-sounding' forms, which reads as trying too hard.",
+   "source": "PC Gamer review of Seed, 2026-07-24",
+   "url": "https://www.pcgamer.com/games/sim/mmo-life-sim-seeds-ai-powered-avatars-prove-once-again-that-nothing-shatters-immersion-quicker-than-crappy-chatbot-dialogue/",
+   "quote": "How many years have you lived?",
+   "page": ""
+  },
+  {
+   "index": 204,
+   "feature": "vibe-adjective recurrence",
+   "claim": "The same evaluative words ('heavy', 'beautiful', 'iconic', 'vibes') attach to age, names and shoe colour alike; conversations contain no actual meaning.",
+   "source": "PC Gamer review of Seed, 2026-07-24",
+   "url": "https://www.pcgamer.com/games/sim/mmo-life-sim-seeds-ai-powered-avatars-prove-once-again-that-nothing-shatters-immersion-quicker-than-crappy-chatbot-dialogue/",
+   "quote": "a full conversation that contains no actual meaning",
+   "page": ""
+  },
+  {
+   "index": 205,
+   "feature": "personality traits do survive",
+   "claim": "The one thing that worked in Seed: creator-chosen personality types (curt vs gushing) read through the AI dialogue.",
+   "source": "PC Gamer review of Seed, 2026-07-24",
+   "url": "https://www.pcgamer.com/games/sim/mmo-life-sim-seeds-ai-powered-avatars-prove-once-again-that-nothing-shatters-immersion-quicker-than-crappy-chatbot-dialogue/",
+   "quote": "Some speak very curtly",
+   "page": ""
+  },
+  {
+   "index": 206,
+   "feature": "canon and anachronism pliability",
+   "claim": "LLM NPCs in a Song-dynasty wuxia game discuss ketchup and accept fake pregnancies; players break canon at will.",
+   "source": "PC Gamer on Where Winds Meet",
+   "url": "https://www.pcgamer.com/games/rpg/wuxia-mmo-where-winds-meet-is-full-of-ai-chatbot-npcs-and-people-are-doing-all-the-standard-obscene-stuff-to-them-i-made-him-think-that-my-character-was-pregnant-with-his-child/",
+   "quote": "ketchup wasn't available during the Song dynasty",
+   "page": ""
+  },
+  {
+   "index": 207,
+   "feature": "robotic but grammatical",
+   "claim": "Nvidia's ACE demo NPC lines were structurally fine yet robotic, with no personality or charm.",
+   "source": "Bradly Shankar, MobileSyrup, 2023-05-29",
+   "url": "https://mobilesyrup.com/2023/05/29/nvidia-player-ai-conversations-tech-demo/",
+   "quote": "they're undeniably robotic",
+   "page": ""
+  },
+  {
+   "index": 208,
+   "feature": "NPC memory and identity drift",
+   "claim": "An LLM NPC that forgets its faction or backstory, leaks modern facts into a fantasy setting, or spills quest secrets under manipulation is useless to a designer.",
+   "source": "Gameindustry.com, 'The Hard Problem of AI NPCs', 2026-05-18",
+   "url": "https://www.gameindustry.com/news-industry-happenings/the-hard-problem-of-ai-npcs-why-character-consistency-matters-more-than-intelligence/",
+   "quote": "forget their faction or personal backstory",
+   "page": ""
+  },
+  {
+   "index": 209,
+   "feature": "background chatter is load-bearing",
+   "claim": "Barks, journals and ambient NPC lines are the backbone of a game's sense of place; generic filler makes the whole world feel shallower.",
+   "source": "Harvey Randall, PC Gamer op-ed",
+   "url": "https://www.pcgamer.com/gaming-industry/game-development/the-bigwigs-who-want-ai-generated-npcs-and-writing-think-youre-too-dumb-to-appreciate-a-good-story-dont-prove-them-right/",
+   "quote": "disconnected, jilted, random stories to tell you",
+   "page": ""
+  }
+ ]
+}

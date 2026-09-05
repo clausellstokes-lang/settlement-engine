@@ -3,7 +3,7 @@
 # inventory refreeze (the news writer's table enters), writer-reach --write (the `news` surface on `seed on
 # generationCoherenceReceipt`), the lighting-census refreeze (ENC-4's new test file). Each door under the quiet-window law and the
 # gate mutex; the refreeze doors exit NON-ZERO on success by design and the receipt is the plain re-run that follows.
-SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad
+SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad
 D=$1; [ -d "$D" ] || { echo "usage: <dock>"; exit 9; }; cd "$D" || exit 9
 [ -z "$(git status --porcelain -uall)" ] || { echo "REFUSED: dock dirty"; exit 8; }
 quiet() { echo "  quiet window WAIVED for the register doors (JUDGMENT, Fable chair 09-05): the gate mutex serializes them against every lane vitest, and only the GATE carries DOOR 3's under-load timeout; the gate keeps the full quiet law"; }

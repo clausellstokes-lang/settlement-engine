@@ -1,0 +1,158 @@
+{
+ "name": "tolkien",
+ "chunk": 4,
+ "indices": [
+  315,
+  316,
+  317,
+  318,
+  319,
+  320,
+  321,
+  322,
+  323,
+  324,
+  325,
+  326,
+  327,
+  328,
+  329
+ ],
+ "claims": [
+  {
+   "index": 315,
+   "feature": "Elfland dialogue test",
+   "claim": "The Aragorn/Boromir/Elrond exchange is an English extraordinary for its simple timelessness that could not be mistaken for Capitol Hill, and Boromir's slight whine is characterising.",
+   "source": "Ursula K. Le Guin, From Elfland to Poughkeepsie (1973)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "an English extraordinary for its simple timelessness",
+   "page": "From Elfland to Poughkeepsie"
+  },
+  {
+   "index": 316,
+   "feature": "plain style (Le Guin relayed)",
+   "claim": "Le Guin's judgement that Tolkien's plain English is direct, concrete and simple is quoted and endorsed by a language blogger.",
+   "source": "Stan Carey, Sentence first (2024-10-16)",
+   "url": "https://stancarey.wordpress.com/2024/10/16/how-to-see-ones-own-world-ursula-k-le-guin-on-writing-style/",
+   "quote": "no ichor; everything is direct, concrete and simple",
+   "page": "'How to see one's own world': Ursula K. Le Guin on writing style"
+  },
+  {
+   "index": 317,
+   "feature": "naming and descriptive exactness",
+   "claim": "Auden credits Tolkien with an amazing gift for naming and an exact eye for description that make the reader know the world like their own childhood.",
+   "source": "W. H. Auden, 1954 review (LitHub reprint)",
+   "url": "https://lithub.com/read-w-h-audens-1954-review-of-the-fellowship-of-the-ring/",
+   "quote": "a wonderfully exact eye for description",
+   "page": "W. H. Auden's 1954 review of The Fellowship of the Ring"
+  },
+  {
+   "index": 318,
+   "feature": "names as prose beauty; historical density",
+   "claim": "Lewis calls the names a feast embodying piercing elvish beauty and says one cannot set foot anywhere without stirring the dust of history.",
+   "source": "C. S. Lewis, The Gods Return to Earth (TheOneRing reprint)",
+   "url": "https://www.theonering.com/the-gods-return-to-earth-c-s-lewis-review-of-the-fellowship-of-the-ring/",
+   "quote": "The names alone are a feast",
+   "page": "The Gods Return to Earth"
+  },
+  {
+   "index": 319,
+   "feature": "register by people",
+   "claim": "Tolkien selects registers to suit peoples: simple and modern for hobbits, more archaic for Dwarves, Elves and Rohirrim, with hobbits mediating for the modern reader (Turner).",
+   "source": "Wikipedia, Tolkien's prose style",
+   "url": "https://en.wikipedia.org/wiki/Tolkien's_prose_style",
+   "quote": "simple and modern for Hobbits",
+   "page": "Tolkien's prose style"
+  },
+  {
+   "index": 320,
+   "feature": "archaic inversion (Elrond)",
+   "claim": "Shippey shows Elrond speaking with antique words and old-fashioned syntactic inversions while the hobbits speak modern English.",
+   "source": "Wikipedia, Tolkien's prose style (Shippey)",
+   "url": "https://en.wikipedia.org/wiki/Tolkien's_prose_style",
+   "quote": "Now, therefore, things shall be openly spoken",
+   "page": "Tolkien's prose style"
+  },
+  {
+   "index": 321,
+   "feature": "Saruman's hollow modern speech",
+   "claim": "Shippey reads Saruman's vocabulary as empty politician-speak built on words like 'real' and 'ultimate'.",
+   "source": "Wikipedia, Tolkien's prose style (Shippey)",
+   "url": "https://en.wikipedia.org/wiki/Tolkien's_prose_style",
+   "quote": "we can bide our time, we can keep",
+   "page": "Tolkien's prose style"
+  },
+  {
+   "index": 322,
+   "feature": "few true archaisms",
+   "claim": "Walker finds only a handful of genuinely archaic words, used rarely, yet the diction seems in essence nostalgic; the Riders of Rohan get Anglo-Saxon syntactic patterns and stately alliterative diction.",
+   "source": "Wikipedia, Tolkien's prose style (Walker)",
+   "url": "https://en.wikipedia.org/wiki/Tolkien's_prose_style",
+   "quote": "stirring, alliteratively stately",
+   "page": "Tolkien's prose style"
+  },
+  {
+   "index": 323,
+   "feature": "parataxis as biblical marker",
+   "claim": "The repeated 'and' in the New Testament manner is stylistically marked, signalling something extraordinary (Turner/Shippey).",
+   "source": "Wikipedia, Tolkien's prose style",
+   "url": "https://en.wikipedia.org/wiki/Tolkien's_prose_style",
+   "quote": "And then wonder took him",
+   "page": "Tolkien's prose style"
+  },
+  {
+   "index": 324,
+   "feature": "plain-to-elevated modulation (Hemingway)",
+   "claim": "Rosebury answers Stimpson by showing that even her chosen example is as plain as Hemingway, and that the Merry/Witch-king passage begins plainly then modulates to a higher register for ancient history.",
+   "source": "Wikipedia, Tolkien's prose style (Rosebury)",
+   "url": "https://en.wikipedia.org/wiki/Tolkien's_prose_style",
+   "quote": "And still Meriadoc stood there blinking",
+   "page": "Tolkien's prose style"
+  },
+  {
+   "index": 325,
+   "feature": "stress-release at every level",
+   "claim": "Drout holds that the craftsmanship is consistent from the individual sentence to the macro-structure of the journey as a repeated stress-and-release pattern.",
+   "source": "Wikipedia, Tolkien's prose style (Drout)",
+   "url": "https://en.wikipedia.org/wiki/Tolkien's_prose_style",
+   "quote": "repeated stress and release pattern",
+   "page": "Tolkien's prose style"
+  },
+  {
+   "index": 326,
+   "feature": "invitational ambiguity",
+   "claim": "Walker's book argues the prose is strikingly invitational, taut with semantic ambiguity that widens meaning and draws the reader into sub-creation.",
+   "source": "Wikipedia, Tolkien's prose style (Walker)",
+   "url": "https://en.wikipedia.org/wiki/Tolkien's_prose_style",
+   "quote": "strikingly invitational",
+   "page": "Tolkien's prose style"
+  },
+  {
+   "index": 327,
+   "feature": "ubi sunt and deep time",
+   "claim": "The ubi sunt theme gives elegiac tone and historical depth, as when Pippin guesses at great men and kindreds from the ruins.",
+   "source": "Wikipedia, Tolkien's prose style (Walker)",
+   "url": "https://en.wikipedia.org/wiki/Tolkien's_prose_style",
+   "quote": "Pippin guessed of great men and kindreds",
+   "page": "Tolkien's prose style"
+  },
+  {
+   "index": 328,
+   "feature": "casual incomplete mention (deep time)",
+   "claim": "The impression of depth is built from offhand, incomplete references to the past, multiple inconsistent accounts as in real history, and different texts written in different styles.",
+   "source": "Wikipedia, Impression of depth in The Lord of the Rings",
+   "url": "https://en.wikipedia.org/wiki/Impression_of_depth_in_The_Lord_of_the_Rings",
+   "quote": "from the Hoard of Scatha the Worm",
+   "page": "Impression of depth in The Lord of the Rings"
+  },
+  {
+   "index": 329,
+   "feature": "object fronting",
+   "claim": "Turner notes archaising object-fronting such as 'Weapons they have laid at your doors', which German can keep but French cannot render.",
+   "source": "Wikipedia, Translating The Lord of the Rings (Turner)",
+   "url": "https://en.wikipedia.org/wiki/Translating_The_Lord_of_the_Rings",
+   "quote": "Weapons they have laid at your doors",
+   "page": "Translating The Lord of the Rings"
+  }
+ ]
+}

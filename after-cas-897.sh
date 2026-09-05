@@ -1,7 +1,7 @@
 #!/bin/sh
 # after-cas-897.sh — ONE command from a green ANCHORS gate log to the §897 ledger act. POSIX sh. Guard + consequence together.
 set -e
-SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad
+SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad
 D=$SC/laneANCH2; REPO=/Users/cstokes/Desktop/settlement-engine
 BASE=df7cdd37e11bde8365c0322f0c882f61988865d5; LOG=$SC/gate-anch.log
 TE=$(grep -oE '^TRUE_EXIT=[0-9]+' "$LOG" | tail -1 | cut -d= -f2)

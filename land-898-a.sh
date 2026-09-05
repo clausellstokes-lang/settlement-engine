@@ -3,7 +3,7 @@
 # totals (run-ratchet-898.sh, quiet-window + mutex) → commit the totals car (the LAST car) → seal. Then the gate is started
 # separately (run-gate-898.sh, background) and after-cas-898.sh lands it. Every step gated on the previous one's exit.
 set -e
-SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad
+SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad
 D=$SC/lanePROSE2; BASE=fd8b6df0013b749e24435450931618fbe78a3f13
 echo "== 0. the prose-numerics re-key (the runner's step failed on an unset path)"; sh $SC/rekey-898.sh
 echo "== 0b. wizard-news: apply the one re-sign from the walker log (dry, then write)"; python3 $SC/wizard-resign.py $SC/registers-prose-wizard.log $D/tests/lint/.wizard-news-authoring-baseline.json; python3 $SC/wizard-resign.py $SC/registers-prose-wizard.log $D/tests/lint/.wizard-news-authoring-baseline.json --write | tail -2

@@ -2,7 +2,7 @@
 # commit-prose-registers.sh — after run-registers-prose.sh: verify the changed registers are EXACTLY the predicted set, then
 # commit them as ONE chair car (Seat: Fable 5.1 — validated). The totals car comes after (run-ratchet-898.sh + its own commit).
 set -e
-SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad
+SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad
 D=$SC/lanePROSE2; LOG=$SC/registers-prose.log; cd "$D"
 grep -q '^QUIET CONFIRMED' "$LOG" || { echo "⛔ no quiet window in the log"; exit 1; }
 grep -qE '^VOICE_EXIT=' "$LOG" || { echo "⛔ voice step did not run"; exit 1; }

@@ -1,6 +1,6 @@
 #!/bin/sh
 # run-ratchet-clamp.sh — census totals at the clamp-integrated tip. Quiet-window law; exits captured.
-D=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/laneCLAMPINT-tree
+D=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneCLAMPINT-tree
 cd $D || exit 9
 STREAK=0; WAITED=0
 while [ $STREAK -lt 3 ]; do

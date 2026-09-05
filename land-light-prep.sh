@@ -2,7 +2,7 @@
 # land-light-prep.sh <base-sha-full = the §900 CAS> — the LIGHTING landing's dock + replay (LIGHTING-LANDING-PLAN.md, order of acts 1).
 # Refuses unless the product tip IS the base. Replays the seven built L-HOMES cars (5 and 7 were refused, zero bytes) and, if sealed, STRIPPER-UNIFY.
 set -e
-SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad
+SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad
 REPO=/Users/cstokes/Desktop/settlement-engine; BASE=$1
 echo "$BASE" | grep -qE '^[0-9a-f]{40}$' || { echo "usage: <base-sha-full>"; exit 9; }
 [ "$(git -C $REPO rev-parse claude/composite-r4)" = "$BASE" ] || { echo "⛔ the product tip is not $BASE"; exit 1; }

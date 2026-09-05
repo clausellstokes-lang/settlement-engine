@@ -1,0 +1,158 @@
+{
+ "name": "ai",
+ "chunk": 2,
+ "indices": [
+  105,
+  106,
+  107,
+  108,
+  109,
+  110,
+  111,
+  112,
+  113,
+  114,
+  115,
+  116,
+  117,
+  118,
+  119
+ ],
+ "claims": [
+  {
+   "index": 105,
+   "feature": "rhythm (verse)",
+   "claim": "LLM poetry has a choppy cadence built from constant objective correlatives and persistent enjambment, which makes it recognizable.",
+   "source": "The Literary Quant, poet (2026-08-14)",
+   "url": "https://new2criticism.substack.com/p/in-offense-of-llm-poetry",
+   "quote": "Constant objective correlatives and choppy cadence",
+   "page": "In Offense of LLM Poetry"
+  },
+  {
+   "index": 106,
+   "feature": "tidy endings",
+   "claim": "AI resolves every scene and ties every thread, whereas real novels leave things unresolved.",
+   "source": "Richard Lowe (2026-04-29)",
+   "url": "https://associationofghostwriters.org/the-real-reason-not-to-use-ai-to-write-your-novel/",
+   "quote": "Every scene ends properly. Everything tied up nice and tidy",
+   "page": "The Real Reason Not to Use AI to Write Your Novel"
+  },
+  {
+   "index": 107,
+   "feature": "tidy endings",
+   "claim": "AI stories favor single-track plots with protagonist-driven resolution (69% vs 46% human) and no subplots (79% vs 57%), while human protagonists' choices are framed as more morally ambiguous and human stories show more temporal complexity.",
+   "source": "Russell et al., StoryScope (2026-04-03)",
+   "url": "https://arxiv.org/abs/2604.03136",
+   "quote": "AI stories over-explain themes and favor tidy, single-track plots",
+   "page": "StoryScope: Investigating idiosyncrasies in AI fiction"
+  },
+  {
+   "index": 108,
+   "feature": "tidy endings",
+   "claim": "The model resolves tension because it cannot tell which tension a story needs to keep active; it wants the answer legible where the story needs pressure left unresolved (commentary on StoryScope, not independent of it).",
+   "source": "Dramatica blog (2026-05-29)",
+   "url": "https://dramatica.com/blog/the-ai-tells-are-in-the-story",
+   "quote": "The machine wants to make the answer legible",
+   "page": "The AI Tells Are in the Story"
+  },
+  {
+   "index": 109,
+   "feature": "tidy endings",
+   "claim": "AI endings resolve ambiguity rather than trusting the reader to hold it.",
+   "source": "Matthew Vollmer (2026-04-24)",
+   "url": "https://matthewvollmer.substack.com/p/i-asked-the-machine-to-tell-on-itself",
+   "quote": "",
+   "page": "I Asked the Machine to Tell on Itself: A Field Guide to AI Tells"
+  },
+  {
+   "index": 110,
+   "feature": "tidy endings (structural root)",
+   "claim": "Fiction needs events that surprise then feel inevitable, and earlier details that get re-valued by later ones; autoregressive generation coordinates neither well over length.",
+   "source": "Katherine Elkins, The AI Fiction Paradox, arXiv 2603.13545 (2026-03-13)",
+   "url": "https://arxiv.org/abs/2603.13545",
+   "quote": "fiction repeatedly requires the significance of earlier details to be reinterpreted",
+   "page": "The AI Fiction Paradox"
+  },
+  {
+   "index": 111,
+   "feature": "tidy endings (verse)",
+   "claim": "LLM poems force closure with contrived mic-drop final lines.",
+   "source": "The Literary Quant (2026-08-14)",
+   "url": "https://new2criticism.substack.com/p/in-offense-of-llm-poetry",
+   "quote": "contrived mic-drops like the last sentence",
+   "page": "In Offense of LLM Poetry"
+  },
+  {
+   "index": 112,
+   "feature": "reflexive antithesis",
+   "claim": "Negative parallelism in two shapes, 'not just X but Y' and 'not X but Y', is a catalogued sign of AI writing.",
+   "source": "Wikipedia editors, Signs of AI writing",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "not a mirror but a portal: not representation, but mechanism",
+   "page": "Wikipedia:Signs of AI writing"
+  },
+  {
+   "index": 113,
+   "feature": "reflexive antithesis",
+   "claim": "The construction fails cognitively: readers process the negated concept first and retain it, so the reframe lands weaker than the writer intends and compounds with repetition.",
+   "source": "Joshua Gonzales, The Conversation (2026-04-20)",
+   "url": "https://theconversation.com/slanguage-why-ais-stylistic-negation-its-not-x-its-y-is-both-annoying-and-doesnt-work-278967",
+   "quote": "Your brain doesn't skip to the alternative.",
+   "page": "Slanguage: Why AI's stylistic negation is both annoying and doesn't work"
+  },
+  {
+   "index": 114,
+   "feature": "reflexive antithesis",
+   "claim": "In AI fiction the 'not X; Y' construction feels obligatory rather than natural, often alongside stacked triplets of descriptors.",
+   "source": "Makin, Record Crash (2025-11-27)",
+   "url": "https://recordcrash.substack.com/p/how-to-identify-ai-written-web-fiction",
+   "quote": "",
+   "page": "How to Identify AI-Written Web Fiction"
+  },
+  {
+   "index": 115,
+   "feature": "reflexive antithesis",
+   "claim": "The negation reframe borrows the sound of insight without delivering it.",
+   "source": "Blake Stockton (2025-04-16)",
+   "url": "https://www.blakestockton.com/dont-write-like-ai-1-101-negation/",
+   "quote": "It tries to sound sophisticated without being sophisticated.",
+   "page": "Don't Write Like AI (1 of 101): Negation"
+  },
+  {
+   "index": 116,
+   "feature": "reflexive antithesis",
+   "claim": "The 'isn't just X; it's Y' frame combined with a metaphor and a tricolon is a signature machine sentence that carries no content.",
+   "source": "Carly Ayres (2024-12-05)",
+   "url": "https://carly.substack.com/p/spotting-machine-made-prose",
+   "quote": "It says absolutely nothing at all.",
+   "page": "Spotting machine-made prose"
+  },
+  {
+   "index": 117,
+   "feature": "the gloss",
+   "claim": "AI narrators explicitly comment on the story's theme 77% of the time versus 52% for humans, with tighter thematic unity and more central moral questions.",
+   "source": "Russell et al., StoryScope (2026-04-03)",
+   "url": "https://arxiv.org/abs/2604.03136",
+   "quote": "AI over-explains its themes",
+   "page": "StoryScope: Investigating idiosyncrasies in AI fiction"
+  },
+  {
+   "index": 118,
+   "feature": "the gloss",
+   "claim": "AI spells out meaning that human fiction leaves implied; the tell lives in the story's structure, not its word choice.",
+   "source": "Dramatica blog (2026-05-29)",
+   "url": "https://dramatica.com/blog/the-ai-tells-are-in-the-story",
+   "quote": "AI explains. Humans imply.",
+   "page": "The AI Tells Are in the Story"
+  },
+  {
+   "index": 119,
+   "feature": "the gloss",
+   "claim": "LLM verse refuses to state itself plainly yet re-restates its load-bearing moments, over-explaining what it has already shown.",
+   "source": "The Literary Quant (2026-08-14)",
+   "url": "https://new2criticism.substack.com/p/in-offense-of-llm-poetry",
+   "quote": "Refusal to state itself too plainly, but tendency to re-restate",
+   "page": "In Offense of LLM Poetry"
+  }
+ ]
+}

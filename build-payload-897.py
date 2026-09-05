@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import json, io
-SC='/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad'
+SC='/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad'
 row=("§897 · **THE ANCHORS CONSIST LANDS AT 4 CARS — TWELVE MUTILATED §4 ANCHORS DE-SLUGGED (`coup_detat` NO LONGER RENDERS 'detat' ON THE FLAGSHIP FICTION SURFACE), THE CORPUS-JOIN FAILURE MESSAGE STOPPED INSTRUCTING A REVERT, THE TWO PRODUCT-SIDE QUEUE-CLASS ROWS CORRECTED, AND THE TOTALS REGISTER TAKEN AT THE COMPOSED TIP.** "
 "`df7cdd37e` -> `__CAS_SHA__`, sealed `refs/preserve/landing-anchors-2026-09-05`; gate green (`TRUE_EXIT=0` read from the log, __TESTS__ tests, 6 known-failure entries of ceiling 17); chair-verify green (4 cars, single-parent, one strict seat trailer each, the totals register's `measuredAtSha` INSIDE the lineage). "
 "**What landed.** (1) `2a7550741` §894: twelve §4 subject phrases whose canonical was a strip-regex fragment now carry an AUTHORED canonical, and every pin, walker comment and corpus row that cited the old string moved in the same act (`tests/domain/rumorFallbackPhrasePools.test.js` 588 -> 590). These sat behind wiring note LEG-7, believed an owner ruling; the §892 walk proved LEG-7 lane-authored, so the repair was chair-class. "

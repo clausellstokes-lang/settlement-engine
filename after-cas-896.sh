@@ -2,7 +2,7 @@
 # after-cas-896.sh — ONE command from a green gate log to the §896 AND §896.1 ledger acts.
 # POSIX sh only (no process substitution). The guard and the consequence live together.
 set -e
-SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad
+SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad
 D=$SC/laneCLAMPINT-tree; REPO=/Users/cstokes/Desktop/settlement-engine
 BASE=90702c3e93afe7bd40f9d2aa6316777f3ca72aa3; LOG=$SC/gate-clamp2.log
 TE=$(grep -oE '^TRUE_EXIT=[0-9]+' "$LOG" | tail -1 | cut -d= -f2)

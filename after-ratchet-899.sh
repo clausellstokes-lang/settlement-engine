@@ -2,7 +2,7 @@
 # after-ratchet-899.sh — after run-ratchet-899.sh: the totals car (guarded on TRUE_EXIT, entries 2, totalFiles 2470), then the
 # owed-ledger retirement car (three rows, OWED_CEILING 5 -> 2), then the car-count check against the stamped gate (28). The gate
 # itself is launched SEPARATELY in the background (run-gate-899.sh). Every exit captured; refuses on anything unexpected.
-SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad
+SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad
 D=$SC/laneCLAMP3; LOG=$SC/ratchet-899.run.log
 [ -s "$LOG" ] && grep -q '^TRUE_EXIT=' "$LOG" || { echo "REFUSED: the ratchet log carries no TRUE_EXIT (the run has not finished)"; exit 9; }
 grep -E '^TRUE_EXIT=|^MEASURED:' "$LOG" | cut -c1-200

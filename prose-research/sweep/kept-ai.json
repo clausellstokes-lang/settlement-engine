@@ -1,0 +1,912 @@
+[
+ {
+  "index": 0,
+  "feature": "theme over-explanation",
+  "claim": "AI stories state their themes outright far more often than human stories (explicit narrator thematic commentary 77% vs 52%).",
+  "source": "Russell, Rajendhran, Iyyer & Wieting, StoryScope (arXiv 2604.03136, Apr 2026)",
+  "url": "https://arxiv.org/html/2604.03136v3",
+  "quote": "AI stories over-explain themes and favor tidy, single-track plots",
+  "verdict": {
+   "index": 0,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "AI stories over-explain themes and favor tidy, single-track plots",
+   "note": "Quote appears word-for-word in the abstract. §4.1 gives the figures exactly: 'Narrators explicitly explain the story's theme 77% of the time, versus 52% for humans.'"
+  }
+ },
+ {
+  "index": 1,
+  "feature": "single-track plot / no subplots",
+  "claim": "AI stories run one plot line with no subplots 79% of the time versus 57% for human stories.",
+  "source": "Russell et al., StoryScope (arXiv 2604.03136)",
+  "url": "https://arxiv.org/html/2604.03136v3",
+  "quote": "",
+  "verdict": {
+   "index": 1,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "far fewer subplots (79% 'no subplots' vs. 57%)",
+   "note": "No quote supplied. §4.1 'Human authors subvert linearity' states the 79%/57% split exactly, and characterizes AI as favoring 'single-track narratives with fewer loose ends'."
+  }
+ },
+ {
+  "index": 2,
+  "feature": "embodied emotion formula",
+  "claim": "AI stories express emotion through bodily-response description in 81% of stories versus 38% of human stories.",
+  "source": "Russell et al., StoryScope (arXiv 2604.03136)",
+  "url": "https://arxiv.org/html/2604.03136v3",
+  "quote": "",
+  "verdict": {
+   "index": 2,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "conveys emotion through physical sensations and bodily metaphors (81% vs. 38%)",
+   "note": "§4.1 'AI over-writes the body and senses' matches both figures; the same passage adds humans use explicit emotion labels 29% vs 8% for AI."
+  }
+ },
+ {
+  "index": 3,
+  "feature": "olfactory imagery reflex",
+  "claim": "AI stories reach for smell imagery in 82% of stories versus 57% of human stories.",
+  "source": "Russell et al., StoryScope (arXiv 2604.03136)",
+  "url": "https://arxiv.org/html/2604.03136v3",
+  "quote": "",
+  "verdict": {
+   "index": 3,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "deploys more smell-based imagery (82% vs. 57%)",
+   "note": "Exact figures in §4.1, same sentence family as the embodied-emotion finding."
+  }
+ },
+ {
+  "index": 4,
+  "feature": "protagonist-driven tidy resolution",
+  "claim": "AI stories resolve through the protagonist's own action 69% of the time versus 46% for humans, and end ambiguously less often.",
+  "source": "Russell et al., StoryScope (arXiv 2604.03136)",
+  "url": "https://arxiv.org/html/2604.03136v3",
+  "quote": "",
+  "verdict": {
+   "index": 4,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "more protagonist-driven resolutions (69% vs. 46%); humans comfortable with ambiguous endings",
+   "note": "§4.1 matches both figures and states 'humans are more comfortable with ambiguous endings'; AI resolutions favor internal understanding/acceptance (47% vs 27%)."
+  }
+ },
+ {
+  "index": 5,
+  "feature": "moral ambiguity deficit",
+  "claim": "Human protagonists' choices are framed as morally ambiguous in 59% of stories versus 38% of AI stories.",
+  "source": "Russell et al., StoryScope (arXiv 2604.03136)",
+  "url": "https://arxiv.org/html/2604.03136v3",
+  "quote": "frame protagonist' choices as more morally ambiguous",
+  "verdict": {
+   "index": 5,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "frame protagonist' choices as more morally ambiguous",
+   "note": "Quote is verbatim in the abstract (the paper prints a curly apostrophe in the same typo, 'protagonist’ choices'). §4.1 supplies the numbers as 'present morally ambivalent protagonists more often (59% vs. 38%)' — human 59%, AI 38%, as claimed."
+  }
+ },
+ {
+  "index": 6,
+  "feature": "temporal complexity / time jumps",
+  "claim": "Human stories use chronological discontinuity, fourth-wall breaks (67% vs 39%), direct reader address (28% vs 7%) and named intertextual references (47% vs 24%) far more than AI stories.",
+  "source": "Russell et al., StoryScope (arXiv 2604.03136)",
+  "url": "https://arxiv.org/html/2604.03136v3",
+  "quote": "",
+  "verdict": {
+   "index": 6,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "fourth wall (67% vs. 39%); reader directly (28% vs. 7%); specific texts (47% vs. 24%)",
+   "note": "All three pairs appear exactly in §4.1 ('Human authors engage the outside world'), and 'Humans use more time jumps, flashbacks and flash-forwards, and nonlinear structure' covers chronological discontinuity. Note the three cited percentages are intertextuality/fourth-wall features, not temporal ones, despite the claim's 'temporal complexity' label."
+  }
+ },
+ {
+  "index": 7,
+  "feature": "narrative-space homogeneity",
+  "claim": "AI stories cluster in a shared region of narrative-feature space (human–AI centroid distance 1.6x AI–AI; 24.7% of human stories in the rarest decile vs 7.1% of AI).",
+  "source": "Russell et al., StoryScope (arXiv 2604.03136)",
+  "url": "https://arxiv.org/html/2604.03136v3",
+  "quote": "occupy a rarer, more dispersed region of narrative space",
+  "verdict": {
+   "index": 7,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "occupy a rarer, more dispersed region of narrative space",
+   "note": "Quote verbatim in the Conclusion. §5 confirms both figures: 'mean human-AI centroid distance is 1.6× the mean AI-AI centroid distance (6.6 vs. 4.3)' and '24.7% of all human stories fall in the top 10% rarest stories corpus-wide, compared to just 7.1% of AI stories'."
+  }
+ },
+ {
+  "index": 8,
+  "feature": "discourse tells survive style polishing",
+  "claim": "Narrative-level features still identify AI fiction at 93.9% macro-F1 after professional-style rewriting, so surface edits do not humanize structure.",
+  "source": "Russell et al., StoryScope (arXiv 2604.03136)",
+  "url": "https://arxiv.org/html/2604.03136v3",
+  "quote": "far harder to humanize",
+  "verdict": {
+   "index": 8,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "far harder to \"humanize\"",
+   "note": "Quote verbatim in the Introduction (with 'humanize' in scare quotes). §4.2 confirms 93.9% macro-F1 on style-edited stories vs 95.5% unedited, a 1.6-point drop. One precision caveat: the rewriting is LAMP span-level artifact removal performed by Gemini itself using 25 few-shot examples from professional writers on 278 Gemini stories — not rewriting by professionals, so 'professional-style rewriting' is a loose gloss."
+  }
+ },
+ {
+  "index": 9,
+  "feature": "model-specific fingerprints",
+  "claim": "Each model family has a signature: Claude's event intensity escalates less, GPT over-uses gossip and dream sequences, Gemini writes the tidiest endings.",
+  "source": "Russell et al., StoryScope (arXiv 2604.03136)",
+  "url": "https://arxiv.org/html/2604.03136v3",
+  "quote": "Claude produces notably flat event escalation",
+  "verdict": {
+   "index": 9,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Claude produces notably flat event escalation",
+   "note": "Quote verbatim in the abstract. All three fingerprints check out: §5 'Claude keeps it cool' ('event intensity escalates less than in any other source'); 'GPT likes to gossip' (gossip/rumor 64% vs 44-55%) plus the abstract's 'GPT over-indexes on dream sequences'; and 'Gemini produces the tidiest endings, extended denouements, and the bleakest settings'."
+  }
+ },
+ {
+  "index": 10,
+  "feature": "lexical overuse (style verbs/adjectives)",
+  "claim": "LLM-processed text shows abrupt excess of style words such as delves (28x), showcasing (10x), intricate, underscores, pivotal, meticulously, realm; 2024 excess words were 66% verbs and 16% adjectives.",
+  "source": "Kobak, González-Márquez, Horvát & Lause (arXiv 2406.07016; Science Advances 2025)",
+  "url": "https://arxiv.org/html/2406.07016v4",
+  "quote": "",
+  "verdict": {
+   "index": 10,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "delves (r=28.0), showcasing (r=10.2), underscores (r=10.9); 66% verbs, 16% adjectives",
+   "note": "No quote supplied. Kobak et al. give delves r=28.0 and showcasing r=10.2 exactly, and 'hundreds of words have abruptly increased their frequency after ChatGPT became available'. The POS split is real but narrower than stated: 'Out of all 319 excess style words in 2024, 66% were verbs and 16% were adjectives' — style words, not all excess words. 'intricate' is the paper's own example of a style word; 'pivotal', 'realm' and 'meticulously' appear in the paper only as words identified by cited work (Liang et al. 2024b; Gray 2024) and in illustrative AI-style sentences, not in Kobak's own headline excess list."
+  }
+ },
+ {
+  "index": 11,
+  "feature": "lexical overuse not inherited from training data",
+  "claim": "Twenty-one focal words (delve, showcasing, underscores, intricate, garnered, boasts, groundbreaking, realm, aligns, etc.) are overrepresented in ChatGPT output yet not in pre-LLM corpora, consistent with RLHF as the source.",
+  "source": "Juzek & Ward, Why Does ChatGPT Delve So Much? (arXiv 2412.11385, Dec 2024)",
+  "url": "https://arxiv.org/html/2412.11385v1",
+  "quote": "Lexical overrepresentation remains a feature of current iterations of ChatGPT",
+  "verdict": {
+   "index": 11,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "lexical overrepresentation remains a feature of current iterations of ChatGPT",
+   "note": "Quote verbatim in §7 (sentence-internal, so lowercase 'lexical'). Appendix A's table of 21 focal words contains every word named in the claim: delve/delves/delved/delving, showcasing, underscores, intricate, garnered, boasts, groundbreaking, realm, aligns. §4 and Appendix B confirm the words are not overrepresented in pre-LLM corpora (arXiv, LCC, PubMed, Wikipedia). One hedge: the paper reports 'mixed evidence' for RLHF — 'the model testing is consistent with RLHF playing a role', not a demonstrated source."
+  }
+ },
+ {
+  "index": 12,
+  "feature": "reader sensitisation to tell-words",
+  "claim": "Readers become wary of signature words like delve and may judge a text on those words rather than its content.",
+  "source": "Juzek & Ward (arXiv 2412.11385)",
+  "url": "https://arxiv.org/html/2412.11385v1",
+  "quote": "wary of the word 'delve'",
+  "verdict": {
+   "index": 12,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "wary of the word \"delve\"",
+   "note": "Verbatim in the Introduction ('participants became wary of the word \"delve\" in the first sentence of an abstract') and echoed in §6 as 'Wariness about the word \"delve\"'. Caveat on the second half: the paper's line about judging on words rather than content is a speculation about rushed, underpaid RLHF evaluators — 'Rushed human evaluators might base their evaluations on the presence of particular words rather than on content' — not a finding about readers generally."
+  }
+ },
+ {
+  "index": 13,
+  "feature": "overall creativity gap vs professionals",
+  "claim": "Professional New Yorker stories pass 84.7% of 14 expert creativity tests; LLM stories pass 9% (GPT-3.5) to 30% (Claude 1.3).",
+  "source": "Chakrabarty, Laban, Agarwal, Muresan & Wu, Art or Artifice? (CHI 2024; arXiv 2309.14556)",
+  "url": "https://arxiv.org/abs/2309.14556",
+  "quote": "three to ten times less likely to pass individual TTCW",
+  "verdict": {
+   "index": 13,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "pass 3-10X less TTCW tests than stories written by professionals",
+   "note": "The given URL is the arXiv abs page, which carries only the abstract: it supports 14 binary tests, professional authors vs LLMs, and '3-10X less', but not the pass rates. Fetching the same paper's full text (arxiv.org/html/2309.14556v3) confirms every figure exactly — '12 expert-written stories pass an average of 84.7% of the tests... from 9% for ChatGPT-generated stories, up to 30% for Claude-generated stories', and the claim's quotation is verbatim there: 'LLM-generated stories are three to ten times less likely to pass individual TTCW tests'. Not marked VERBATIM because the quote is absent from the URL actually cited. 'New Yorker' is likewise confirmed only in the full text (Table 5 column 'NewYorker')."
+  }
+ },
+ {
+  "index": 14,
+  "feature": "originality in form and theme",
+  "claim": "LLM stories almost never pass Originality in Form (0–8.3% vs 63.9%) or Originality in Theme & Content (0–19.4% vs 75%).",
+  "source": "Chakrabarty et al., Art or Artifice? (CHI 2024)",
+  "url": "https://arxiv.org/abs/2309.14556",
+  "quote": "",
+  "verdict": {
+   "index": 14,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Originality in Form 63.9 vs 0.0-8.3; Theme & Content 75.0 vs 0-19.4",
+   "note": "Not present on the abs page at the cited URL in any form — the abstract does not break results out by test. Verified in the same paper's full text, Table 5, where the figures match exactly: Originality in Form GPT3.5 2.8 / GPT4 8.3 / Claude 0.0 / New Yorker 63.9; Originality in Theme & Content GPT3.5 0 / GPT4 19.4 / Claude 11.1 / New Yorker 75.0. Judged against the abs page alone this would be NOT_FOUND; judged against the cited paper it is exactly right."
+  }
+ },
+ {
+  "index": 21,
+  "feature": "LLM-as-judge invalid for craft",
+  "claim": "No LLM judge positively correlated with expert creativity assessments of the same stories.",
+  "source": "Chakrabarty et al., Art or Artifice? (CHI 2024)",
+  "url": "https://arxiv.org/abs/2309.14556",
+  "quote": "None of the LLMs positively correlate with the expert assessments",
+  "verdict": {
+   "index": 21,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "none of the LLMs positively correlate with the expert assessments",
+   "note": "Exact match in the abstract, differing only in sentence-position capitalisation of 'none'. Full context: 'we explore the use of LLMs as assessors to automate the TTCW evaluation, revealing that none of the LLMs positively correlate with the expert assessments.' The claim's restatement is faithful."
+  }
+ },
+ {
+  "index": 22,
+  "feature": "novelty, surprise, diversity",
+  "claim": "Across 60 LLMs vs 60 humans, human five-sentence stories are more novel, more surprising and more lexically and semantically diverse (p<0.05 to p<0.0001).",
+  "source": "Ismayilzada, Stevenson & van der Plas (ICCC 2025; arXiv 2411.02316)",
+  "url": "https://arxiv.org/abs/2411.02316",
+  "quote": "fall short in terms of novelty, surprise and diversity",
+  "verdict": {
+   "index": 22,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "tend to fall short in terms of novelty, surprise and diversity",
+   "note": "Quote matches word for word. The abstract also confirms the design (60 LLMs, 60 people, five-sentence cue-word task) and the comparison class ('average human writers'). Caveat: the p-value range (p<0.05 to p<0.0001) does not appear anywhere on this abstract-only page, and 'diversity' is not broken out into lexical vs semantic."
+  }
+ },
+ {
+  "index": 23,
+  "feature": "verbosity mistaken for quality",
+  "claim": "LLM stories are more linguistically complex and verbose (more unique words, longer dependency paths, more nouns and adjectives) but less creative than human stories.",
+  "source": "Ismayilzada et al. (ICCC 2025)",
+  "url": "https://arxiv.org/abs/2411.02316",
+  "quote": "linguistically more complex and verbose yet less creative",
+  "verdict": {
+   "index": 23,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "LLMs generate stylistically complex stories, but tend to fall short",
+   "note": "The quoted wording is not on the page. The core proposition — more complex yet less creative — is supported: the abstract says LLMs 'generate stylistically complex stories, but tend to fall short in terms of novelty, surprise and diversity,' and lists linguistic complexity among the measured dimensions. The specific verbosity evidence (unique words, dependency path length, noun and adjective counts) is absent; searches for 'verbos', 'unique words', 'dependency', 'noun', 'adjective' returned zero hits."
+  }
+ },
+ {
+  "index": 25,
+  "feature": "collective homogenisation via AI ideas",
+  "claim": "Writers given GPT-4 story ideas produced stories 10.7% more similar to one another and 5.2% more similar to the AI prompts, while individual ratings rose mostly for low-creativity writers.",
+  "source": "Doshi & Hauser, Science Advances 10(28), 2024",
+  "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11244532/",
+  "quote": "collectively a narrower scope of novel content is produced",
+  "verdict": {
+   "index": 25,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "collectively a narrower scope of novel content is produced",
+   "note": "Quote matches word for word, and the page is confirmed as Doshi & Hauser (Science Advances, GPT-4 ideas). Concentration of individual gains among low-creativity writers is supported ('especially among less creative writers'). IMPORTANT CORRECTION: 10.7% is misdescribed. The paper says the similarity increase 'represents 10.7% and 8.9% of the total range' of similarity scores (an 8.10-point range) — not that stories were 10.7% more similar to one another. Separately, 5.2% more similar to the AI ideas is the ONE-idea condition; the five-idea condition is 5.0%. A different 10.7% elsewhere on the page refers to novelty gains for low-DAT writers, which may be the source of the conflation."
+  }
+ },
+ {
+  "index": 26,
+  "feature": "lay detection heuristics are flawed",
+  "claim": "People cannot detect AI-written self-presentations and rely on cues (first person, contractions, family topics) that AI can exploit to seem more human than humans.",
+  "source": "Jakesch, Hancock & Naaman, PNAS 120(11), 2023",
+  "url": "https://arxiv.org/abs/2206.07271",
+  "quote": "intuitive but flawed heuristics",
+  "verdict": {
+   "index": 26,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "intuitive but flawed heuristics",
+   "note": "Quote matches word for word, and authorship (Jakesch, Hancock, Naaman) is confirmed on the page. Every element of the claim is supported by the abstract: participants (N=4,600) 'were unable to detect self-presentations generated by state-of-the-art AI'; the named cues are 'first-person pronouns, use of contractions, or family topics'; and exploitability is stated as producing text perceived as 'more human than human.'"
+  }
+ },
+ {
+  "index": 27,
+  "feature": "stylometric uniformity by model",
+  "claim": "Burrows' Delta on most-frequent words shows LLM stories clustering tightly by model while human stories spread widely; newer GPT-4 is tighter than GPT-3.5.",
+  "source": "O'Sullivan, Humanities & Social Sciences Communications 12 (2025-11-11)",
+  "url": "https://www.nature.com/articles/s41599-025-05986-3",
+  "quote": "display a higher degree of stylistic uniformity, clustering tightly by model",
+  "verdict": {
+   "index": 27,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "display a higher degree of stylistic uniformity, clustering tightly by model",
+   "note": "Quote matches word for word. Full attribution confirmed on the page: James O'Sullivan, Humanities and Social Sciences Communications vol. 12, article 1708, published 11 November 2025. Method confirmed (Burrows' Delta over most frequent words), as is the human contrast ('broader, more heterogeneous clusters') and the GPT-4 point: 'GPT-4 demonstrates greater internal consistency than GPT-3.5.'"
+  }
+ },
+ {
+  "index": 28,
+  "feature": "one plot template across cultures",
+  "claim": "11,800 gpt-4o-mini stories for 236 nationalities conform to a single small-town, return-to-tradition, community-event plot with conflict sanitised and tension downplayed.",
+  "source": "Rettberg & Wigers (arXiv 2507.22445, Jul 2025)",
+  "url": "https://arxiv.org/abs/2507.22445",
+  "quote": "Real-world conflicts are sanitised, romance is almost absent",
+  "verdict": {
+   "index": 28,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Real-world conflicts are sanitised, romance is almost absent",
+   "note": "Quote matches word for word. All specifics confirmed in the abstract: 11,800 stories, 50 each for 236 countries, gpt-4o-mini, and the single plot template ('a protagonist lives in or returns home to a small town and resolves a minor conflict by reconnecting with tradition and organising community events'). Minor wording drift: the page says 236 countries (the prompt used a demonym), not 236 nationalities."
+  }
+ },
+ {
+  "index": 29,
+  "feature": "stability-over-change bias",
+  "claim": "AI stories prioritise stability, nostalgia and reconciliation over change, a form of narrative standardisation distinct from representational bias.",
+  "source": "Rettberg & Wigers (arXiv 2507.22445)",
+  "url": "https://arxiv.org/abs/2507.22445",
+  "quote": "prioritises stability above change",
+  "verdict": {
+   "index": 29,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "prioritises stability above change and tradition above growth",
+   "note": "Quote matches word for word. The framing is also confirmed: tension is 'downplayed in favour of nostalgia and reconciliation,' and the paper explicitly positions this as 'a narrative standardisation that should be acknowledged alongside the more familiar representational bias.'"
+  }
+ },
+ {
+  "index": 31,
+  "feature": "linguistic originality / recombination",
+  "claim": "Professional authors' CREATIVITY INDEX (share of text not reconstructible from web n-grams) is 66.2% higher than LLMs', and RLHF alignment lowers LLMs' index by 30.1%.",
+  "source": "Lu, Sclar, Hallinan, Mireshghallah et al., AI as Humanity's Salieri (arXiv 2410.04265)",
+  "url": "https://arxiv.org/abs/2410.04265",
+  "quote": "on average 66.2% higher than that of LLMs",
+  "verdict": {
+   "index": 31,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"is on average 66.2% higher than that of LLMs\"",
+   "note": "Abstract: CREATIVITY INDEX of professional human authors 'is on average 66.2% higher than that of LLMs, and that alignment reduces the CREATIVITY INDEX of LLMs by an average of 30.1%.' Both figures exact. Two small glosses, neither material: the abstract says 'alignment' where the claim says 'RLHF alignment', and the claim's parenthetical definition ('share of text not reconstructible from web n-grams') paraphrases the paper's construction of the index by reconstructing a text from web snippets via DJ SEARCH."
+  }
+ },
+ {
+  "index": 32,
+  "feature": "present-participial clause overuse",
+  "claim": "Instruction-tuned models use present participial clauses 2–5x the human rate (GPT-4o 5.3x, d=1.38), e.g. 'Bryan, leaning on his agility, dances around the ring'.",
+  "source": "Reinhart, Markey, Laudenbach, Pantusen, Yurko, Weinberg & Brown, PNAS 122 (2025-02-25)",
+  "url": "https://arxiv.org/html/2410.16107v2",
+  "quote": "",
+  "verdict": {
+   "index": 32,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"present participial clauses at 2 to 5 times the rate\"",
+   "note": "The quote field is empty, but the example sentence quoted inside the claim appears word for word: 'Bryan, leaning on his agility, dances around the ring, evading Show's heavy blows.' All figures exact: 'the instruction-tuned LLMs used present participial clauses at 2 to 5 times the rate of human text' and 'GPT-4o uses present participial clauses at 5.3 times the rate of humans (paired Cohen's d = 1.38)'."
+  }
+ },
+ {
+  "index": 33,
+  "feature": "nominalization and noun density",
+  "claim": "Instruction-tuned LLMs use nominalizations 1.5–2x, 'that' subject clauses 2.6x and phrasal coordination 1.9x human rates, producing a noun-heavy academic style regardless of genre.",
+  "source": "Reinhart et al., PNAS 2025",
+  "url": "https://arxiv.org/html/2410.16107v2",
+  "quote": "informationally dense, noun-heavy style",
+  "verdict": {
+   "index": 33,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"informationally dense, noun-heavy style\"",
+   "note": "Quote appears verbatim twice. Figures confirmed: nominalizations 'at 1.5 to 2 times the rate of humans' generally, and for GPT-4o specifically ''that' clauses as subject 2.6 times as often (d=0.77), nominalizations 2.1 times as often (d=1.23), and phrasal coordination 1.9 times as often (d=0.81)'. Two glosses: the 2.6x and 1.9x figures are GPT-4o-specific, not all instruction-tuned models; and 'academic' is the claim's word, not the paper's, though the paper does attribute the style to instruction tuning across a diverse array of genres."
+  }
+ },
+ {
+  "index": 34,
+  "feature": "signature vocabulary in fiction",
+  "claim": "GPT-4o uses camaraderie 162x, tapestry 155x, intricate 119x, underscore 107x, amidst 100x human rates; GPT-4o-mini palpable 145x; words that connote complex relations produce hollow summative sentences.",
+  "source": "Reinhart et al., PNAS 2025",
+  "url": "https://arxiv.org/html/2410.16107v2",
+  "quote": "grandiose, if hollow, summative sentences",
+  "verdict": {
+   "index": 34,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"grandiose, if hollow, summative sentences\"",
+   "note": "Quote verbatim. Every multiplier matches Table 1 exactly: GPT-4o column camaraderie 162, tapestry 155, intricate 119, underscore 107, amidst 100; GPT-4o Mini column palpable 145. The 'complex relations' rationale is verbatim too: 'many of these words connote some form of complex relation among objects (e.g., tapestry, intricate, camaraderie, cacophony, amidst)... may signal a preference for grandiose, if hollow, summative sentences.'"
+  }
+ },
+ {
+  "index": 35,
+  "feature": "register invariance",
+  "claim": "LLMs fail to vary style by genre or context the way humans do, so fiction-appropriate words become conspicuous elsewhere and the same style is applied everywhere.",
+  "source": "Reinhart et al., PNAS 2025",
+  "url": "https://arxiv.org/html/2410.16107v2",
+  "quote": "do not vary their linguistic output in response to contextual factors",
+  "verdict": {
+   "index": 35,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"do not vary their linguistic output in response to contextual factors\"",
+   "note": "Quote verbatim in the discussion ('...in ways similar to humans'). The conspicuousness half is also directly supported: 'words that are unremarkable in fiction are highly conspicuous and unconventional when used other genres,' plus the finding that LLMs 'struggle to match the stylistic variation present in human communication.'"
+  }
+ },
+ {
+  "index": 36,
+  "feature": "professional edit taxonomy",
+  "claim": "Professional writers editing 1,057 LLM paragraphs spent 28% of edits on awkward word choice, 20% on poor sentence structure, 18% on unnecessary/redundant exposition and 17% on clichés, plus purple prose, lack of specificity and tense slips.",
+  "source": "Chakrabarty, Laban & Wu, Can AI writing be salvaged? (CHI 2025; arXiv 2409.14509)",
+  "url": "https://arxiv.org/html/2409.14509v4",
+  "quote": "Writer-edited > LLM-edited > LLM-generated",
+  "verdict": {
+   "index": 36,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Writer-edited>LLM-edited>LLM-generated\" (rendered without spaces)",
+   "note": "Quote appears as a LaTeX math expression, so the page renders it 'Writer-edited>LLM-edited>LLM-generated' — identical wording, spacing around '>' is a rendering artifact. Percentages exact: 'Awkward Word Choice and Phrasing (28%), Poor Sentence Structure (20%), Unnecessary/Redundant Exposition (18%), and Clichés (17%).' Corpus size exact (1,057 paragraphs, 18 professional writers, 8,035 edits), and purple prose, lack of specificity and tense inconsistency are the remaining three of the seven taxonomy categories."
+  }
+ },
+ {
+  "index": 37,
+  "feature": "syntactic templates and tell-words",
+  "claim": "LLM prose repeats templates such as 'sense of', 'weight of', 'mix of', and the word 'unspoken' appears in about 15% of LLM outputs but rarely in human samples.",
+  "source": "Chakrabarty, Laban & Wu (CHI 2025)",
+  "url": "https://arxiv.org/html/2409.14509v4",
+  "quote": "",
+  "verdict": {
+   "index": 37,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "\"a word like unspoken occurs in about 15% of LLM-generated responses\"",
+   "note": "No quote supplied, but both halves are explicit in Section 5.3: 'Figure 6 shows how a word like unspoken occurs in about 15% of LLM-generated responses. Similarly phrases such as weight of, sense of, mix of occur very rarely or not at all in original seed paragraphs... while they occur frequently in LLM-generated responses.' One imprecision: the paper reserves 'syntactic templates' for its part-of-speech n-gram analysis (Table 8) and files these three phrases under recurrent awkward words/phrases; the claim merges the two."
+  }
+ },
+ {
+  "index": 38,
+  "feature": "no model family is better at prose",
+  "claim": "Writers saw no significant quality difference among GPT-4o, Claude-3.5-Sonnet and Llama-3.1-70b, and fiction scored lower (4.5) than creative nonfiction (5.0–5.2).",
+  "source": "Chakrabarty, Laban & Wu (CHI 2025)",
+  "url": "https://arxiv.org/html/2409.14509v4",
+  "quote": "writers perceived no significant qualitative differences",
+  "verdict": {
+   "index": 38,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"writers perceived no significant qualitative differences\"",
+   "note": "Quote verbatim. Scores exact: 'GPT-4o and Claude 3.5-Sonnet perform slightly better on creative non-fiction instructions (average 5.2) compared to Llama3.1-70B (5.0)... All models show a slight decrease in performance for fictional instructions, with an average IWQS of 4.5.' The abstract independently states none of the three models 'outperform each other in terms of writing quality'."
+  }
+ },
+ {
+  "index": 39,
+  "feature": "plot echoes across generations",
+  "claim": "Idiosyncratic plot elements recur across many samples from the same prompt (50/100 continuations 'take the second left', 16/100 a bakery) and even across models, while human plot elements sit in the tail or outside the LLM distribution.",
+  "source": "Xu, Jojic, Rao, Brockett & Dolan, Echoes in AI (PNAS 2025-09-02; arXiv 2501.00273)",
+  "url": "https://arxiv.org/html/2501.00273",
+  "quote": "plot elements that are echoed across a number of generations",
+  "verdict": {
+   "index": 39,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"plot elements that are echoed across a number of generations\"",
+   "note": "Quote verbatim in the abstract. Counts exact: 'in 50 out of 100 generations, the policeman gives instructions to take the second left... In 16/100 of the generations, a bakery is mentioned as a landmark.' Cross-model and tail claims both supported: elements 'echoed frequently across generations and across different LLMs,' while human-written stories 'contain plot elements that land far in the tail -- or not at all -- of LLMs' output distribution.'"
+  }
+ },
+ {
+  "index": 40,
+  "feature": "abrupt resolution after a peak",
+  "claim": "LLM stories show 7–9x higher 'drop ratios' than human stories, meaning a suspenseful element is resolved immediately after it peaks instead of being developed.",
+  "source": "Xu et al., Echoes in AI (PNAS 2025)",
+  "url": "https://arxiv.org/html/2501.00273",
+  "quote": "",
+  "verdict": {
+   "index": 40,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "\"LLM-generated stories lead to 7–9 higher drop ratio than human-written ones\"",
+   "note": "No quote supplied. Figure confirmed in Section 5 (the page literally reads '7–9 higher drop ratio', the multiplication sign apparently lost in the HTML build). Mechanism supported: 'a high drop ratio indicates that the Sui Generis score decreases immediately after the peak at position i, without progressively unraveling the surprising plot,' associated with 'abrupt resolutions that leave key suspenseful plot elements unresolved.' Slight tension in the claim's gloss: the paper's drop measures a surprising element being dropped or hastily closed off, sometimes left unresolved, rather than strictly 'resolved'."
+  }
+ },
+ {
+  "index": 41,
+  "feature": "positive-arc bias",
+  "claim": "GPT-4 stories are Man-in-a-Hole over half the time and Rags-to-Riches 13.0% (humans 4.4%), while Riches-to-Rags (1.3% vs 14.6%) and Oedipus (1.7% vs 9.3%) arcs nearly vanish.",
+  "source": "Tian, Huang, Liu, Jiang, Spangher, Chen, May & Peng (EMNLP 2024; arXiv 2407.13248)",
+  "url": "https://arxiv.org/html/2407.13248",
+  "quote": "strongly favoring positive outcomes",
+  "verdict": {
+   "index": 41,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"strongly favoring positive outcomes\"",
+   "note": "Quote verbatim. All four figures exact: 'Riches to Rags (gradual fall) and Oedipus (fall then rise then fall), which represent 14.6% and 9.3% of human narratives, are almost missing in GPT-4 outputs (1.3% and 1.7%). On the other hand, Rags to Riches... scarcely found among human stories (4.4%), now disproportionately accounts for 13.0% of AI-generated stories.' Man-in-a-Hole also confirmed: GPT-4 writes it 'more than half of the time.'"
+  }
+ },
+ {
+  "index": 42,
+  "feature": "early climax and low suspense",
+  "claim": "Major Setback and Climax arrive about 10–15% earlier in GPT-4 narratives, and human stories sustain higher suspense with the gap widening from midpoint to end.",
+  "source": "Tian et al. (EMNLP 2024)",
+  "url": "https://arxiv.org/html/2407.13248",
+  "quote": "higher levels of suspense",
+  "verdict": {
+   "index": 42,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "\"a substantial advancement (i.e., early occurrence) of TP4 and TP5\"",
+   "note": "The quote 'higher levels of suspense' IS verbatim ('human-written stories consistently exhibit higher levels of suspense'), as is the widening gap ('the gap begins to enlarge as the plot progresses from the midpoint (0.5 relative position) towards the end'). Downgraded from VERBATIM because the claim's magnitude is unsourced: the strings '10%' and '15%' appear nowhere in the paper, and the earlier arrival of Major Setback (TP4) and Climax (TP5) is reported only qualitatively plus a violin plot (Figure 2) with no numeric positions. The '10–15% earlier' figure appears to be eyeballed from that figure."
+  }
+ },
+ {
+  "index": 43,
+  "feature": "ending predictability / tension",
+  "claim": "By the 100-Endings metric, professional New Yorker fiction stays unpredictable near the close (no-rate 0.607) while top LLM stories collapse to 0.215, retaining only 23% of tension peaks versus 52%.",
+  "source": "Sui, Zhu, Cheng, West, So, Long & Holtzman, Spoiler Alert (arXiv 2604.09854, Apr 2026)",
+  "url": "https://arxiv.org/html/2604.09854v1",
+  "quote": "fundamental inability to defer closure",
+  "verdict": {
+   "index": 43,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"a fundamental inability to defer closure\"",
+   "note": "Quote verbatim in Section 6.1 (it is italicized in the HTML, which defeated my first search — re-checked and confirmed present). Every figure matches Table 1: New Yorker late-stage no-rate 0.607 versus Top-10 LLMs 0.215 ('nearly triple'), and Retain 52% versus 23% ('New Yorker stories retain 52% of local peaks on average, while LLMs retain only 23%'). Worth noting for precision: 0.607/0.215 are late-stage no-rate at >=80% of the story, which is exactly the 'near the close' framing the claim uses."
+  }
+ },
+ {
+  "index": 44,
+  "feature": "benchmarks miss tension",
+  "claim": "EQ-Bench rubric scores rank LLM stories (81–84) above New Yorker stories (78.71) even though the LLM stories are far more predictable.",
+  "source": "Sui et al., Spoiler Alert (arXiv 2604.09854)",
+  "url": "https://arxiv.org/html/2604.09854v1",
+  "quote": "",
+  "verdict": {
+   "index": 44,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "\"On EQ-Bench, LLMs (81–84) comfortably outscore all human datasets (44–78)\"",
+   "note": "No quote supplied. Both numbers exact: the 81–84 band is stated in those words, and Table 1 gives New Yorker (professional) 78.71 against GPT-5.2 83.80, Claude Opus 4.6 82.88, Claude Sonnet 4.6 82.04. The predictability contrast is the paper's own framing: 'New Yorker leads on all four metrics while underperforming top LLMs on the EQ-Bench rubric,' and the abstract's opening that LLM judges 'rank zero-shot AI stories above New Yorker short stories.'"
+  }
+ },
+ {
+  "index": 45,
+  "feature": "low entropy / predictability",
+  "claim": "Across 28 LLMs, human story continuations are 2–4x more surprising (perplexity ratios 2.76–8.82x); instruction tuning widens the gap and the gap is 25–30% larger in fiction than in essays or news.",
+  "source": "Sui, LLMs Exhibit Significantly Lower Uncertainty in Creative Writing (arXiv 2602.16162, Feb 2026)",
+  "url": "https://arxiv.org/html/2602.16162",
+  "quote": "trite, repetitive, overly verbose, and cliché-ridden",
+  "verdict": {
+   "index": 45,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "trite, repetitive, overly verbose, and cliché-ridden",
+   "note": "arXiv 2602.16162 (Peiqi Sui, McGill), 'LLMs Exhibit Significantly Lower Uncertainty in Creative Writing Than Professional Writers'. Quote appears verbatim in the Introduction. Every figure checks out in the raw HTML: 'controlled information-theoretic analysis of 28 LLMs'; 'median NLL ratio ranges from 2.03 to 3.9, indicating that human-written stories are on average 2–4x more \"surprising\" ... perplexity ratios amplify this gap to 2.76–8.82x'; 'instruction-tuned and reasoning models exacerbate this trend compared to their base counterparts'; 'the ΔPMI gap is 25–30% wider for creative writing (−2.15) compared to essays (−1.71) and news (−1.73)'."
+  }
+ },
+ {
+  "index": 46,
+  "feature": "post-training flattening",
+  "claim": "Moving from base to SFT to DPO to RLVR checkpoints makes thematic transitions more uniform, replaces high-intensity emotion with neutrality and shrinks stylistic diversity, most severely against professional literary fiction.",
+  "source": "Li, Zhu, Wu, Bao & Evans, Narrative Flattening (arXiv 2605.27878, May 2026)",
+  "url": "https://arxiv.org/abs/2605.27878",
+  "quote": "High-intensity emotions give way to neutrality",
+  "verdict": {
+   "index": 46,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "high-intensity emotions give way to neutrality",
+   "note": "arXiv 2605.27878, 'Narrative Flattening', Zehan Li, Yutong Zhu, Siyang Wu, Honglin Bao, James A. Evans. Quote is word-for-word in the abstract; only difference is sentence-internal lowercase 'high'. Abstract confirms the four OLMo 32B checkpoints (Base, SFT, DPO, RLVR), 'thematic transitions become more uniform ... stylistic diversity across stories shrinks', and 'professional literary fiction is compressed most'."
+  }
+ },
+ {
+  "index": 47,
+  "feature": "conflict-free social worlds",
+  "claim": "LLM story character networks are denser (0.338–0.470 vs 0.182), more positive (mean edge weight 0.236–0.659 vs −0.061) and more clustered than human science-fiction, with far less variability.",
+  "source": "Nonaka & Perry (arXiv 2510.18932, Sep 2025)",
+  "url": "https://arxiv.org/html/2510.18932v1",
+  "quote": "less conflict-driven social dynamics",
+  "verdict": {
+   "index": 47,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "less conflict-driven social dynamics",
+   "note": "arXiv 2510.18932v1, Nonaka & Perry. Quote verbatim. Table 1 in the raw HTML confirms density 0.338–0.470 vs human 0.182, clustering 0.623–0.766 vs 0.485, human mean edge weight −0.061 ('the only negative average edge weight'). ONE CORRECTION: the LLM edge-weight range is 0.235–0.659 (GPT-4o Mini = 0.235), not 0.236–0.659. Human corpus is confirmed science fiction (Project Gutenberg, genre-filtered, n=168). 'Far less variability' is supported by the paper's framing — 'LLMs have connectivity measure scores that cluster closely, while human-written stories are dispersed' — though per-metric SDs are mixed (human density SD 0.056 is actually lower than every model's)."
+  }
+ },
+ {
+  "index": 48,
+  "feature": "fairy-tale openings and moral endings",
+  "claim": "GPT stories open 'Once upon a time' in a vague futuristic place and close with a moral lesson in stock phrases, while crowdworker stories open on tension and vary far more.",
+  "source": "Beguš, Experimental Narratives (HSSC 2024; arXiv 2310.12902)",
+  "url": "https://arxiv.org/html/2310.12902",
+  "quote": "proneness to wrapping up each story with a moral lesson",
+  "verdict": {
+   "index": 48,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "GPT is prone to wrapping up each story with a moral lesson",
+   "note": "arXiv 2310.12902, Nina Beguš, 'Experimental narratives'. The nominalized quote ('proneness to wrapping up...') does NOT appear; 'proneness' occurs nowhere in the document. Substance is fully supported: 'Stories are taken away from the current time and space, starting with \"Once upon a time.\" They are set in a faraway, made-up futuristic place, bare of any cultural aspects'; 'Hoary clichés and meaningless platitudes ... occur in conclusions as a rule'; and on the human side, §3.5.2: 'Stories do not always begin with a simple introduction of settings and characters (as in generated texts) but open with a narrative tension of the challenge at stake.'"
+  }
+ },
+ {
+  "index": 49,
+  "feature": "quality decays toward the end",
+  "claim": "Human evaluation of LLM fiction shows a 'high-starting, low-ending' pattern: strong openings that deteriorate.",
+  "source": "Wang, Gao, Hu & Wan, Towards a Novel Benchmark (Findings ACL 2025)",
+  "url": "https://aclanthology.org/2025.findings-acl.1114/",
+  "quote": "high-starting, low-ending",
+  "verdict": {
+   "index": 49,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "high-starting, low-ending",
+   "note": "ACL Findings 2025 paper 1114, Wang, Gao, Hu & Wan, 'Towards A \"Novel\" Benchmark'. Abstract: 'Human evaluation reveals notable disparities between LLM-generated and human-authored fictions, particularly the \"high-starting, low-ending\" pattern in LLM outputs.' Exact match, correct authors and venue."
+  }
+ },
+ {
+  "index": 50,
+  "feature": "cross-model narrative sameness",
+  "claim": "Across 10 LLMs, generated narratives are consistently more similar to each other than human stories are, and negative prompting or temperature scaling do not fix it.",
+  "source": "DK & Hatzel, Do LLMs Always Tell the Same Stories? (arXiv 2606.17350)",
+  "url": "https://arxiv.org/abs/2606.17350",
+  "quote": "fail to meaningfully address this homogeneity",
+  "verdict": {
+   "index": 50,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "fail to meaningfully address this homogeneity",
+   "note": "arXiv 2606.17350, Thennal DK & Hans Ole Hatzel. Abstract carries the quote verbatim and confirms both halves of the claim: 'narrative similarity judgments across 10 representative LLMs' and 'LLM-generated narratives are consistently more similar to each other than human-written stories are', with 'negative prompting and temperature scaling' named as the failed mitigations."
+  }
+ },
+ {
+  "index": 51,
+  "feature": "style prioritised over story",
+  "claim": "Under constraint-based selection, six LLMs consistently choose stylistic elements over event, character and setting content.",
+  "source": "Jung, Choi, Chae & Jung, Style over Story (ACL 2026; arXiv 2510.02025)",
+  "url": "https://arxiv.org/abs/2510.02025",
+  "quote": "models consistently prioritize Style over narrative content elements",
+  "verdict": {
+   "index": 51,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "models consistently prioritize Style over narrative content elements",
+   "note": "arXiv 2510.02025, Jung, Choi, Chae & Jung, 'Style over Story'. Quote is a verbatim substring of the abstract sentence, which continues '...like Event, Character, and Setting.' Abstract confirms the constraint-selection design (200 narratology-grounded constraints) and 'six LLMs'."
+  }
+ },
+ {
+  "index": 52,
+  "feature": "atmosphere over action",
+  "claim": "LLMs produce mood-laden 'perceived space' at about twice the human rate (GPT-4.1 0.47 vs human 0.19) and under-produce action space, substituting atmosphere for embodied movement.",
+  "source": "Rohrbacher et al., How LLMs Build Fictional Worlds (arXiv 2609.02482, Sep 2026)",
+  "url": "https://arxiv.org/html/2609.02482v1",
+  "quote": "roughly twice the human baseline",
+  "verdict": {
+   "index": 52,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "roughly twice the human baseline",
+   "note": "arXiv 2609.02482v1, Rohrbacher, Nieth, Salin, Eskofier & Mahlberg. Verbatim: 'Whereas human-authored fiction shows normalized frequencies of around 0.19 in both languages, all four models exceed this level, with GPT 4.1 reaching around 0.47 in English and 0.38 in German, roughly twice the human baseline.' CAVEAT on the second half: the action-space deficit is not universal — 'GPT 4.1 is the only model that remains close to or above the human baseline'; Gemma 3, Mistral 3.2 and LlaMA 3.3 fall below it. The abstract's own framing does support the substitution claim: humans 'predominantly employ action space ... whereas LLMs systematically overproduce perceived space, emphasizing atmosphere and affect.'"
+  }
+ },
+ {
+  "index": 53,
+  "feature": "long-form consistency bugs",
+  "claim": "In long LLM stories, consistency errors concentrate in factual and temporal dimensions, around the middle of the narrative and in high-entropy segments (no human baseline).",
+  "source": "Li, Guo, Wu, Lee, Li & Xie, Lost in Stories (arXiv 2603.05890)",
+  "url": "https://arxiv.org/abs/2603.05890",
+  "quote": "most common in factual and temporal dimensions",
+  "verdict": {
+   "index": 53,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "most common in factual and temporal dimensions",
+   "note": "arXiv 2603.05890, 'Lost in Stories', Junjie Li, Xinrui Guo, Yuhao Wu, Roy Ka-Wei Lee, Hongzhi Li, Yutao Xie. Abstract: errors 'are most common in factual and temporal dimensions, tend to appear around the middle of narratives, occur in text segments with higher token-level entropy, and certain error types tend to co-occur.' All three concentrations verified; the abstract describes no human baseline, consistent with the claim's parenthetical."
+  }
+ },
+ {
+  "index": 54,
+  "feature": "suspense not understood",
+  "claim": "Baseline ChatGPT stories lose to psychologically planned stories on suspense 84.9% of the time in human judgments.",
+  "source": "Xie & Riedl, Creating Suspenseful Stories (arXiv 2402.17119)",
+  "url": "https://arxiv.org/html/2402.17119",
+  "quote": "poor understanding of story suspense",
+  "verdict": {
+   "index": 54,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "poor understanding of story suspense",
+   "note": "arXiv 2402.17119, Xie & Riedl. Verbatim: 'General-purpose generative models such as ChatGPT exhibit a poor understanding of story suspense.' The human pairwise-comparison table gives 'Ours v.s. Baseline' on Suspense as Win 84.9%, Lose 11.8%, Tie 3.3% — so the baseline loses 84.9% of the time, as claimed. The method is planning grounded in Gerrig & Bernardo's psychological theory of suspense, so 'psychologically planned' is fair."
+  }
+ },
+ {
+  "index": 55,
+  "feature": "LLM readers mis-track suspense",
+  "claim": "Replicating four suspense-perception studies, LMs can tell a text is meant to be suspenseful but cannot estimate relative suspense or its rise and fall like human readers.",
+  "source": "Matlin et al. (arXiv 2508.15794)",
+  "url": "https://arxiv.org/abs/2508.15794",
+  "quote": "do not process suspense in the same way as human readers",
+  "verdict": {
+   "index": 55,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "do not process suspense in the same way as human readers",
+   "note": "arXiv 2508.15794, Matlin, Zhang, Barroso Loza, Popescu, Isbell, Chakraborty & Riedl. Quote verbatim in the abstract's final sentence. Abstract also confirms 'We replicate four seminal psychological studies', that LMs 'can distinguish whether a text is intended to induce suspense', but 'cannot accurately estimate the relative amount of suspense ... nor ... the rise and fall of suspense across multiple text segments.'"
+  }
+ },
+ {
+  "index": 56,
+  "feature": "default names and settings",
+  "claim": "Across 20,000 stories from four models, Elias appears in 26.5%, Mara 16.7%, Elara 13.1% and a lighthouse in 51.2%; 88.3% contain at least one of 11 core tokens, with Elias 900x its rate in published fiction.",
+  "source": "Hamilton & Mimno, Elias in the Lighthouse, Again? (arXiv 2605.26492, May 2026)",
+  "url": "https://arxiv.org/html/2605.26492",
+  "quote": "900 times more frequent in our corpus",
+  "verdict": {
+   "index": 56,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "900 times more frequent in our corpus",
+   "note": "arXiv 2605.26492, Hamilton & Mimno. Every figure verified in the raw HTML: '20,000 total stories from four current models'; 'Elias is in 26.5% of all stories, Mara in 16.7%, and Elara in 13.1%'; 'lighthouse with a frequency of 51.2%'; '88.3% of these stories contain at least one of 11 tokens'; and 'Elias is 900 times more frequent in our corpus' (comparison corpus is CONLIT, 2,700 contemporary novels)."
+  }
+ },
+ {
+  "index": 57,
+  "feature": "correlated name ensembles",
+  "claim": "Each model family defaults to fixed character-name pairs (Claude: Elena Vasquez + Marcus Chen; Gemini: Aris Thorne + Lena Petrova; GPT: Elara Voss).",
+  "source": "Brzozowski & Chung, The Ghost Couple (arXiv 2606.02184)",
+  "url": "https://arxiv.org/abs/2606.02184",
+  "quote": "co-occurrence rates far exceed chance",
+  "verdict": {
+   "index": 57,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "co-occurrence rates far exceed chance",
+   "note": "arXiv 2606.02184, Brzozowski & Chung, 'The Ghost Couple'. Abstract verbatim: 'pairs and trios whose co-occurrence rates far exceed chance and are consistent across independent generations. These priors are model-family-specific (Claude: Elena Vasquez + Marcus Chen + Amara Okafor; Gemini: Aris Thorne + Lena Petrova; GPT: Elara Voss with no fixed partner).' Claim's attributions are exact; it omits Amara Okafor from the Claude trio, which understates but does not misstate."
+  }
+ },
+ {
+  "index": 58,
+  "feature": "literalness / no subtext",
+  "claim": "LLMs show a strong bias toward literal, explicit communication, producing literal clues 60% of the time in a subtext game.",
+  "source": "Ahuja, Li & Lampinen, Beneath the Surface (arXiv 2604.05273)",
+  "url": "https://arxiv.org/abs/2604.05273",
+  "quote": "strong bias towards overly literal, explicit communication",
+  "verdict": {
+   "index": 58,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "strong bias towards overly literal, explicit communication",
+   "note": "arXiv 2604.05273, Ahuja, Li & Lampinen, 'Beneath the Surface'. Abstract verbatim, and the 60% figure is in the same sentence: 'even the best performing models generate literal clues 60% of times in one of our environments -- Visual Allusions.' Minor precision point: the 60% is specific to the Visual Allusions environment (a Dixit-inspired game), not the suite as a whole."
+  }
+ },
+ {
+  "index": 59,
+  "feature": "expert-judged creativity vs a novelist",
+  "claim": "Six literary experts scored Patricio Pron's synopses 1.94 on creativity vs GPT-4's 0.97 (English) and 0.88 (Spanish), and style originality 1.70 vs 0.63/0.36.",
+  "source": "Marco, Gonzalo, Mateo-Girona & del Castillo, Pron vs Prompt (EMNLP 2024; arXiv 2407.01119)",
+  "url": "https://arxiv.org/html/2407.01119v2",
+  "quote": "GPT-4 receives predominantly scores of 0/1, while Pron receives mostly 2/3",
+  "verdict": {
+   "index": 59,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "GPT-4 receives predominantly scores of 0/1, while Pron receives mostly 2/3",
+   "note": "arXiv 2407.01119v2, Marco, Gonzalo, Mateo & Ramón del Castillo. Quote verbatim ('In all dimensions, GPT-4 receives predominantly scores of 0/1, while Pron receives mostly 2/3.'). Verified: 'We recruited six literary experts'; the task is 600-word synopses of imaginary movie titles, so 'synopses' is correct; 'Pron's creativity score is particularly high (average of 1.94)'; 'GPT-4 scores are particularly low in style originality (0.36 in Spanish and 0.63 in English), where Pron gets 1.70'. CAVEAT: the two GPT-4 creativity figures (0.97 English, 0.88 Spanish) do NOT appear anywhere in the page text — the text says only that Pron's 1.94 'roughly doubles GPT-4 creativity scores in English and Spanish'. Those values presumably sit inside Figure 1, which is an image and not machine-readable, so they are consistent with but not confirmable from the page."
+  }
+ },
+ {
+  "index": 61,
+  "feature": "reader-profile split",
+  "claim": "Non-expert readers reward readability and textual richness while experts weight thematic development, rhetorical variety and sentiment dynamics, explaining contradictory AI-writing evaluations.",
+  "source": "Marco, Gonzalo & Fresno, The Reader is the Metric (arXiv 2506.03310)",
+  "url": "https://arxiv.org/abs/2506.03310",
+  "quote": "thematic development, rhetorical variety, and sentiment dynamics",
+  "verdict": {
+   "index": 61,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "thematic development, rhetorical variety, and sentiment dynamics",
+   "note": "Abstract, arXiv 2506.03310: reader vectors cluster into 'surface-focused readers' (mainly non-experts), who prioritize readability and textual richness, and 'holistic readers' (mainly experts), who value thematic development, rhetorical variety, and sentiment dynamics — offered explicitly to explain conflicting evaluations. Quote is word for word. Minor: now Findings of ACL 2025, not arXiv-only."
+  }
+ },
+ {
+  "index": 62,
+  "feature": "coherence without surprise",
+  "claim": "GPT-4o synopses contained clichés only 26.7% of the time but surprising associations in just 1.6%, versus 15% for a fine-tuned BART.",
+  "source": "Marco, Rello & Gonzalo (COLING 2025; arXiv 2409.11547)",
+  "url": "https://arxiv.org/html/2409.11547v1",
+  "quote": "more predictable and formulaic narratives",
+  "verdict": {
+   "index": 62,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "more predictable and formulaic narratives",
+   "note": "Quote appears word for word ('they tend to generate more predictable and formulaic narratives'). Table 3 confirms all three figures: GPT-4o 'With at least one cliché phrase' 26,7% (16); Surprising Associations BART 15,0%, GPT-3.5 3,3%, GPT-4o 1,6%. Body text: 'GPT-4o is substantially better, with just one in four synopsis having a cliché phrase (26,7%)'. Note the paper's title is 'Small Language Models can Outperform Humans in Short Creative Writing', and the 26.7% is the least-cliché result of the three models, not a low absolute."
+  }
+ },
+ {
+  "index": 63,
+  "feature": "non-experts prefer accessible AI verse",
+  "claim": "1,634 non-experts identified AI poems at 46.6% (below chance), judged them more human than human poems and rated them higher on rhythm and beauty, apparently misreading human complexity as incoherence.",
+  "source": "Porter & Machery, Scientific Reports 14:26133 (2024-11-14)",
+  "url": "https://www.nature.com/articles/s41598-024-76900-1",
+  "quote": "poetry experience did not improve discrimination performance",
+  "verdict": {
+   "index": 63,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "experience with poetry did not improve discrimination performance",
+   "note": "Claim body is fully supported by the abstract: 1,634 participants (Study 1), 46.6% accuracy below chance, AI poems more likely judged human-authored, rated more favorably on rhythm and beauty, and readers 'misinterpret the complexity of human poems as incoherence generated by AI'. The supplied quote is NOT word for word: the page reads 'experience with poetry did not improve discrimination performance unless that experience allowed them to recognize the specific poems used in the study' — note the qualifying clause the quote drops."
+  }
+ },
+ {
+  "index": 64,
+  "feature": "expert detection via AI vocabulary",
+  "claim": "Five heavy ChatGPT users' majority vote misclassified 1 of 300 articles, citing 'AI vocabulary' plus formality, originality and clarity, and stayed robust to paraphrase and humanization.",
+  "source": "Russell, Karpinska & Iyyer (ACL 2025; arXiv 2501.15654)",
+  "url": "https://arxiv.org/abs/2501.15654",
+  "quote": "misclassifies only 1 of 300 articles",
+  "verdict": {
+   "index": 64,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "misclassifies only 1 of 300 articles",
+   "note": "Abstract, arXiv 2501.15654 (v2, ACL 2025): 'the majority vote among five such \"expert\" annotators misclassifies only 1 of 300 articles', robust 'even in the presence of evasion tactics like paraphrasing and humanization', and experts rely on 'specific lexical clues (AI vocabulary)' plus 'formality, originality, clarity'. Every element checks out."
+  }
+ },
+ {
+  "index": 65,
+  "feature": "counter-evidence: craft mechanics",
+  "claim": "On an epic-comedy task GPT-4 outscored five human writers overall (80.2 vs 70.1) and on epic-genre habitation (8.1 vs 4.9); humans led only on originality (8.0 vs 7.6) with humor near-tied (6.4 vs 6.0).",
+  "source": "Gómez-Rodríguez & Williams, A Confederacy of Models (Findings EMNLP 2023)",
+  "url": "https://aclanthology.org/2023.findings-emnlp.966/",
+  "quote": "Humans retain an edge in creativity",
+  "verdict": {
+   "index": 65,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Humans retain an edge in creativity",
+   "note": "Quote is word for word in the abstract on the ACL Anthology landing page. That page carries the abstract only — none of the numbers are on it — so I additionally pulled the paper PDF (aclanthology.org/2023.findings-emnlp.966.pdf), Table 2, which confirms every figure: chatgpt-gpt4 overall 80.2±7.3 vs human 70.1±17.4; item 7 (epic-genre habitation) 8.1±1.4 vs 4.9±2.1; item 5 (creativity/originality) human 8.0±2 vs 7.6±1; item 10 (dark humor) human 6.4±3.4 vs 6.0±2.8. Human stories were by five different writers. One imprecision: humans also edged GPT-4 on humor (6.4 vs 6.0), so 'led only on originality' is not strictly true, though the claim itself calls humor near-tied."
+  }
+ },
+ {
+  "index": 66,
+  "feature": "humor binary",
+  "claim": "Humor splits LLMs into those that manage it comparably to humans and those that fail outright (GPT-3.5 3.3/10 vs humans 6.4).",
+  "source": "Gómez-Rodríguez & Williams (Findings EMNLP 2023)",
+  "url": "https://aclanthology.org/2023.findings-emnlp.966/",
+  "quote": "",
+  "verdict": {
+   "index": 66,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "humor shows a binary divide between LLMs",
+   "note": "No quotation was supplied, so VERBATIM is not available. Abstract: 'humor shows a binary divide between LLMs that can handle it comparably to humans and those that fail at it.' PDF Table 2 confirms the numbers: chatgpt-gpt35 dark-humor item 3.3±2.8 vs human 6.4±3.4, and the body notes GPT-3.5 'obtains an average humor score of 3.3'; a t-test confirms the second group is significantly worse than humans. Numbers are in the PDF, not on the landing page."
+  }
+ },
+ {
+  "index": 67,
+  "feature": "slop definition and judge failure",
+  "claim": "Slop is fluent but generic, verbose and low-density text; relevance, density and tone best predict human slop judgments, and frontier LLM judges show near-zero agreement with human annotators.",
+  "source": "Shaib, Chakrabarty, Garcia-Olano & Wallace, Measuring AI Slop in Text (arXiv 2509.19163)",
+  "url": "https://arxiv.org/html/2509.19163v1",
+  "quote": "generic, overly verbose, inaccurate, irrelevant to its intended purpose",
+  "verdict": {
+   "index": 67,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "generic, overly verbose, inaccurate, irrelevant to its intended purpose",
+   "note": "Quote appears word for word in the paper's slop guide/annotation prompt. Predictors confirmed: 'The strongest predictors are text issues like Relevance (0.06), Density (0.05), and Tone (0.05).' Judge failure confirmed in section 6.3 for GPT-5, Deepseek-V3 and o3-mini: 'Agreement with human annotators is low; kappa values are ~0' (0.01, -0.01, 0.03), 'showing LLMs do a poor job at this task'."
+  }
+ },
+ {
+  "index": 68,
+  "feature": "sentence-length burstiness (news)",
+  "claim": "LLM sentences cluster in a 10–30 token band with less length variation than human sentences, and lexical richness is lower (STTR 0.424 vs 0.491).",
+  "source": "Muñoz-Ortiz, Gómez-Rodríguez & Vilares, Artificial Intelligence Review 2024",
+  "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11422446/",
+  "quote": "less variation when compared to human-generated sentences",
+  "verdict": {
+   "index": 68,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "less variation when compared to human-generated sentences",
+   "note": "Quote is word for word. Same sentence continues: 'the models exhibit a higher frequency of sentence generation within the 10 to 30 token range compared to humans'. Caveat on the STTR pair: Table 2 gives Human 0.491 and six models at 0.452 / 0.424 / 0.460 / 0.457 / 0.461 / 0.466 — 0.424 is Falcon-7B alone, the lowest model, not an LLM-wide value; the LLM range is 0.424-0.466. Direction of the claim ('lexical richness is lower') holds for all six."
+  }
+ },
+ {
+  "index": 69,
+  "feature": "positivity and emotion narrowing (news)",
+  "claim": "LLM text carries more joy and positive emotion while humans show more fear and disgust; LLMs also use more pronouns and magnify male-pronoun bias.",
+  "source": "Muñoz-Ortiz et al. 2024",
+  "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11422446/",
+  "quote": "",
+  "verdict": {
+   "index": 69,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Humans exhibit stronger fear and disgust, less joy",
+   "note": "No quotation supplied. Conclusion states: 'Humans tend to exhibit stronger negative emotions (such as fear and disgust) and less joy compared to text generated by LLMs'; 'LLM outputs use more numbers, symbols and auxiliaries ... as well as more pronouns'; 'The sexist bias prevalent in human text is also expressed by LLMs, and even magnified in all of them but' Falcon 7B. Table 9: human male-female pronoun ratio 1.71, exceeded by every model except Falcon 7B, which reduces the bias by 7.5% — the one exception the claim's blanket 'magnify' elides."
+  }
+ },
+ {
+  "index": 70,
+  "feature": "sentence-length distribution (Portuguese news)",
+  "claim": "Human sentence lengths show a broader, flatter distribution while AI outputs cluster around the mean; AI cuts informal expressions 54–72%, raises positive emotion 114–133% and certainty 111–152%.",
+  "source": "Rodrigues, Sturm & Pinheiro, iScience (Feb 2026)",
+  "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12969083/",
+  "quote": "broader and flatter distribution",
+  "verdict": {
+   "index": 70,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a broader and flatter distribution",
+   "note": "Quote word for word: human texts 'exhibit greater variability in length, characterized by a broader and flatter distribution. In contrast, AI-generated texts ... are more uniform, clustering closely around the average.' Table 3 confirms all three ranges, but ONLY in the factual-news columns: informal -54.42/-55.99/-72.22%, posemo +114.19/+119.22/+132.96%, certain +152.49/+142.86/+111.00%. The fake-news columns are materially lower (posemo +69.96 to +78.95%, certain +21.43 to +39.11%), so the claim should be scoped to factual news. Source confirmed as Rodrigues, Sturm & Pinheiro, iScience 2026 Feb 12;29(3):114976, European Portuguese."
+  }
+ },
+ {
+  "index": 71,
+  "feature": "standardised sentences (political speech)",
+  "claim": "ChatGPT speeches overuse nouns, possessives and numbers, underuse verbs, pronouns and adverbs, and read as too standardised compared with real presidential addresses.",
+  "source": "Labbé, Labbé & Savoy (arXiv 2411.18382)",
+  "url": "https://arxiv.org/abs/2411.18382",
+  "quote": "too standardized sentences",
+  "verdict": {
+   "index": 71,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "too standardized sentences",
+   "note": "Abstract, arXiv 2411.18382: 'ChatGPT tends to overuse nouns, possessive determiners, and numbers. On the other hand, the generated speeches employ less verbs, pronouns, and adverbs and include, in mean, too standardized sentences' and 'ChatGPT style exposes distinct features compared to real presidential speeches.' Corpus is French presidents' end-of-year addresses (Chirac, Sarkozy, Hollande, Macron)."
+  }
+ },
+ {
+  "index": 73,
+  "feature": "tricolon and rhetorical-device overuse",
+  "claim": "LLM argumentative prose uses tricolon 7.13 per document versus 3.73 for human experts, suppresses rhetorical questions (2.28 vs 5.55), doubles performed hesitancy and distributes devices with template-like uniformity.",
+  "source": "Bakhshi, Saying More Than They Know (arXiv 2604.19768, Mar 2026)",
+  "url": "https://arxiv.org/html/2604.19768",
+  "quote": "deployed independently of argumentative occasion",
+  "verdict": {
+   "index": 73,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "deployed independently of argumentative occasion",
+   "note": "Quote word for word. All four components confirmed in arXiv 2604.19768v1 (Asim D. Bakhshi, stamped 27 Mar 2026): 'LLM-generated texts producing a mean of 7.13 per document versus 3.73 for human experts'; erotema 'only 2.28 per document against 5.55 (HE)'; 'Performed hesitancy markers appear at twice the human density in LLM output' (Table: 0.114 vs 0.057); 'rhetorical devices are distributed significantly more uniformly across LLM documents'. Corpus is open-ended argumentative essays (225 texts, 75 per sub-corpus)."
+  }
+ },
+ {
+  "index": 74,
+  "feature": "co-writing homogenises human output",
+  "claim": "Writing with InstructGPT raised corpus homogenization (0.1536 to 0.1660) and repeated higher-order n-grams, with the loss traced to model-contributed text rather than changed writer behaviour.",
+  "source": "Padmakumar & He (ICLR 2024; arXiv 2309.05196)",
+  "url": "https://arxiv.org/html/2309.05196v2",
+  "quote": "repeat higher-order n-grams more frequently",
+  "verdict": {
+   "index": 74,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "repeat higher-order n-grams more frequently",
+   "note": "Quote appears as a section heading, 'Essays written with InstructGPT repeat higher-order n-grams more frequently' (the HTML doubles the italic math 'n'). Figures confirmed: 'corpus homogenization scores ... at the key point level using Rouge-L are 0.1536 for Solo, 0.1578 for GPT3 and 0.1660 for InstructGPT', significant at p<0.05. Attribution confirmed: 'The reduction in diversity ... is attributed more to text contributed directly by the InstructGPT model' and 'the users' lexical choice and argument generation is not affected when writing with model assistance.'"
+  }
+ }
+]

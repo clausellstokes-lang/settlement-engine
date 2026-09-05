@@ -3,7 +3,7 @@
 # idempotent-refusing, so they must NOT be re-run). Asserts the worktree carries EXACTLY the §896.1 edits and
 # nothing else, then commits through chair-commit.sh and reads back. Guard and consequence together.
 set -e
-SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad
+SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad
 REPO=/Users/cstokes/Desktop/settlement-engine
 cd "$REPO"; [ "$(git rev-parse --show-toplevel)" = "$REPO" ] || { echo "ABORT toplevel"; exit 1; }
 TIP=$(git rev-parse refs/heads/review-fixes-2026-07-08); echo "LEDGER_TIP_BEFORE=$TIP"

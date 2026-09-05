@@ -12,7 +12,7 @@ lines) and only insertions elsewhere; the tail is a suffix; every ruling appears
 """
 import glob, hashlib, io, json, os, subprocess, sys
 
-SC = '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad'
+SC = '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad'
 REPO = '/Users/cstokes/Desktop/settlement-engine'
 out_path = sys.argv[1]
 dry = '--dry' in sys.argv

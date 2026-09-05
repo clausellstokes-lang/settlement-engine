@@ -2,7 +2,7 @@
 # bank-golden-898.sh — the ruling's act: bank the generator-golden-master arm BY HAND with full attribution (class owner-gated)
 # until the freeze act; prove the row with the census meta-test under the mutex; commit as a chair car. Guard + consequence.
 set -e
-SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad
+SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad
 D=$SC/lanePROSE2; cd "$D"; [ -z "$(git status --porcelain -uall)" ] || { echo "⛔ dock dirty"; exit 1; }
 INTRO=$(git log --format=%H --grep='the em dashes leave the src/ reader prose' -1); [ -n "$INTRO" ] || { echo "⛔ the rebased prose car not found"; exit 1; }
 python3 - "$INTRO" <<'PY'
@@ -28,7 +28,7 @@ echo "--- the meta-test that validates every entry (under the mutex):"; sh scrip
 [ "$E" = "0" ] || { echo "⛔ the meta-test refuses the row:"; grep -nE 'AssertionError|Error:|✗|×' "$SC/bank-golden-meta.log" | head -6 | cut -c1-200; git checkout -q -- scripts/.test-ratchet-baseline.json 2>/dev/null; echo "(the hand edit was reverted — it was the chair's own, one minute old)"; exit 1; }
 echo "--- the magnitude measures against the live failure message (the plain run's JSON):"; python3 - <<'PY'
 import json,re
-d=json.load(open('/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/golden-plain.json'))
+d=json.load(open('/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/golden-plain.json'))
 msg=[a['failureMessages'][0] for f in d['testResults'] for a in f['assertionResults'] if a['status']=='failed'][0]
 m=re.search(r'\((\d+)\) \] to deeply equal \[\]', msg); print('  measured movedRows =', m.group(1) if m else 'NO MATCH'); assert m and m.group(1)=='525'
 PY

@@ -2,7 +2,7 @@
 # run-gate-clamp.sh — the CLAMP consist's bare gate (npm run check) on laneCLAMPINT-tree,
 # base 90702c3e9. Quiet-window law. ⚠ THE LAST LINE IS `exit $TRUE_EXIT` AND NOTHING MAY FOLLOW IT:
 # a background task reports its LAST command's exit, and a trailing printf once reported 0 over a red gate.
-D=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/laneCLAMPINT-tree
+D=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/laneCLAMPINT-tree
 BASE=90702c3e9
 cd $D || exit 9
 STREAK=0; WAITED=0

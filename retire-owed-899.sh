@@ -4,7 +4,7 @@
 # delete their three WALKER_ROWS_OWED entries and lower OWED_CEILING by exactly three, in ONE car, as the file's own law demands
 # ("the census entry, this ledger entry and this ceiling all move together"). Proves with the meta-test under the mutex.
 set -e
-SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad
+SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad
 D=$SC/laneCLAMP3; cd "$D"; [ -z "$(git status --porcelain -uall)" ] || { echo "⛔ dock dirty"; exit 1; }
 N=$(python3 -c "import json;d=json.load(open('scripts/.test-ratchet-baseline.json'));ks=list(d['entries']);print(sum(1 for k in ks if 'clampPrimitiveBaseline' in k or 'JSX extension' in k))")
 [ "$N" = "0" ] || { echo "⛔ the census still holds $N of the three rows — the ratchet has not retired them; nothing to do"; exit 1; }

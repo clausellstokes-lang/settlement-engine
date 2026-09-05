@@ -2,7 +2,7 @@
 # run-gate-898.sh — the §898 consist's bare gate (npm run check), stamped by mk-landing-kit.py;
 # base fd8b6df00. Quiet-window law. ⚠ THE LAST LINE IS `exit $TRUE_EXIT` AND NOTHING MAY FOLLOW IT:
 # a background task reports its LAST command's exit, and a trailing printf once reported 0 over a red gate.
-D=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad/lanePROSE2
+D=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/lanePROSE2
 BASE=fd8b6df0013b749e24435450931618fbe78a3f13   # the declared base; the guards below refuse to run unless the product tip IS this sha
 cd $D || exit 9
 [ "$(git rev-parse claude/composite-r4)" = "$(git rev-parse fd8b6df0013b749e24435450931618fbe78a3f13)" ] || { echo "REFUSED: product tip $(git rev-parse --short claude/composite-r4) is not the declared base fd8b6df00 — land the previous consist first"; exit 7; }

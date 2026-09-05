@@ -7,7 +7,7 @@
 #   cwd = the integration dock and the REPO-RELATIVE path.
 # Every resolved file is proven by MODULE EVALUATION. Anything else STOPS with the state described. POSIX sh.
 set -e
-SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad
+SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad
 INT=$1; PBASE=$2; shift 2
 MOUNTS=src/domain/display/stateProse/dossierMounts.js
 [ -d "$INT/.git" ] || [ -f "$INT/.git" ] || { echo "⛔ not a dock: $INT"; exit 2; }

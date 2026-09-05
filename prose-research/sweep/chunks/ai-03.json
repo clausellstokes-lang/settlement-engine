@@ -1,0 +1,158 @@
+{
+ "name": "ai",
+ "chunk": 3,
+ "indices": [
+  120,
+  121,
+  122,
+  123,
+  124,
+  125,
+  126,
+  127,
+  128,
+  129,
+  130,
+  131,
+  132,
+  133,
+  134
+ ],
+ "claims": [
+  {
+   "index": 120,
+   "feature": "the gloss",
+   "claim": "AI prose puts aphorisms where connective tissue should be and pivots to abstraction in place of concrete physical imagery.",
+   "source": "Matthew Vollmer (2026-04-24)",
+   "url": "https://matthewvollmer.substack.com/p/i-asked-the-machine-to-tell-on-itself",
+   "quote": "",
+   "page": "I Asked the Machine to Tell on Itself: A Field Guide to AI Tells"
+  },
+  {
+   "index": 121,
+   "feature": "the gloss",
+   "claim": "AI-assisted manuscripts carry heavy-handed thematic messaging that the editor had to strip back.",
+   "source": "Mary Kole (2026-08-13)",
+   "url": "https://janefriedman.com/after-editing-two-ai-assisted-manuscripts-i-rewrote-my-client-agreement/",
+   "quote": "",
+   "page": "After Editing Two AI-Assisted Manuscripts, I Rewrote My Client Agreement"
+  },
+  {
+   "index": 122,
+   "feature": "pet words",
+   "claim": "AI fiction accumulates a recycled mood vocabulary drawn from Instagram-poetry registers, collapsing diverse tones into one.",
+   "source": "Matthew Vollmer (2026-04-24)",
+   "url": "https://matthewvollmer.substack.com/p/i-asked-the-machine-to-tell-on-itself",
+   "quote": "ache, hollow, tether, linger, fragile, fractured, ember, bloom",
+   "page": "I Asked the Machine to Tell on Itself: A Field Guide to AI Tells"
+  },
+  {
+   "index": 123,
+   "feature": "pet words",
+   "claim": "A cluster of grandeur nouns and verbs (testament, pivotal, delve, intricate, realm) co-occurs in LLM output and lends borrowed significance to flat subjects.",
+   "source": "Wikipedia editors, Signs of AI writing",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "enduring testament to the influence of Italian colonial",
+   "page": "Wikipedia:Signs of AI writing"
+  },
+  {
+   "index": 124,
+   "feature": "pet words",
+   "claim": "Metaphors of symphonies, tapestries, and dances, plus delve/navigate/enhance/elevate, mark machine prose.",
+   "source": "Carly Ayres (2024-12-05)",
+   "url": "https://carly.substack.com/p/spotting-machine-made-prose",
+   "quote": "symphonies, tapestries, or complex dances",
+   "page": "Spotting machine-made prose"
+  },
+  {
+   "index": 125,
+   "feature": "pet words",
+   "claim": "'Quiet/magic' adverbs (quietly, deeply, fundamentally, remarkably) are used to make mundane description feel significant.",
+   "source": "tropes.fyi AI Writing Pattern Directory",
+   "url": "https://tropes.fyi/directory",
+   "quote": "Quietly orchestrating workflows and decisions",
+   "page": "Tropes - AI Writing Pattern Directory"
+  },
+  {
+   "index": 126,
+   "feature": "pet words (syntax)",
+   "claim": "AI avoids plain copulatives, replacing 'is' with 'serves as' or 'holds the distinction of being'.",
+   "source": "Wikipedia editors, Signs of AI writing",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "Harian Metro holds the distinction of being the first",
+   "page": "Wikipedia:Signs of AI writing"
+  },
+  {
+   "index": 127,
+   "feature": "metaphor",
+   "claim": "AI metaphors are slightly off-target but stay in the right semantic neighborhood, and descriptions are mood-saturated pathetic fallacy such as rain mirroring grief.",
+   "source": "Matthew Vollmer (2026-04-24)",
+   "url": "https://matthewvollmer.substack.com/p/i-asked-the-machine-to-tell-on-itself",
+   "quote": "",
+   "page": "I Asked the Machine to Tell on Itself: A Field Guide to AI Tells"
+  },
+  {
+   "index": 128,
+   "feature": "metaphor",
+   "claim": "AI comparisons break when followed across a second dimension; the model does not grasp real-world metaphors or keep logical coherence.",
+   "source": "sudo, LessWrong (2026-04-12)",
+   "url": "https://www.lesswrong.com/posts/nTuKjJBwMtMuuLonA/hot-take-problems-with-ai-prose",
+   "quote": "AIs fail to grasp: real-world metaphors, logical coherence",
+   "page": "[Hot take] Problems with AI prose"
+  },
+  {
+   "index": 129,
+   "feature": "metaphor",
+   "claim": "AI stacks multiple comparisons onto one concept and overloads description with redundant sensory 'eyeball kicks'.",
+   "source": "Makin, Record Crash (2025-11-27)",
+   "url": "https://recordcrash.substack.com/p/how-to-identify-ai-written-web-fiction",
+   "quote": "",
+   "page": "How to Identify AI-Written Web Fiction"
+  },
+  {
+   "index": 130,
+   "feature": "metaphor",
+   "claim": "Forced figurative language sounds clever but obscures rather than clarifies.",
+   "source": "tropes.fyi AI Writing Pattern Directory",
+   "url": "https://tropes.fyi/directory",
+   "quote": "Like tracking weight loss on a rigged scale",
+   "page": "Tropes - AI Writing Pattern Directory"
+  },
+  {
+   "index": 131,
+   "feature": "emotion rendering",
+   "claim": "AI carries emotion through bodily sensation and somatic metaphor 81% of the time versus 38% for humans, while naming emotions explicitly less often (8% vs 29%), an inversion of the usual 'AI tells emotions' assumption.",
+   "source": "Russell et al., StoryScope (2026-04-03)",
+   "url": "https://arxiv.org/abs/2604.03136",
+   "quote": "AI overwhelmingly conveys emotion through physical sensations and bodily metaphors",
+   "page": "StoryScope: Investigating idiosyncrasies in AI fiction"
+  },
+  {
+   "index": 132,
+   "feature": "reader address",
+   "claim": "AI narrators write as if no one is watching: fourth-wall breaks in 39% of AI stories versus 67% human, direct reader address 7% versus 28%.",
+   "source": "Russell et al., StoryScope (2026-04-03)",
+   "url": "https://arxiv.org/abs/2604.03136",
+   "quote": "AI writes as though no one is watching",
+   "page": "StoryScope: Investigating idiosyncrasies in AI fiction"
+  },
+  {
+   "index": 133,
+   "feature": "flinching",
+   "claim": "AI retreats from difficult material: it softens violence, obscures intimacy, and explains cruelty instead of rendering it.",
+   "source": "Richard Lowe (2026-04-29)",
+   "url": "https://associationofghostwriters.org/the-real-reason-not-to-use-ai-to-write-your-novel/",
+   "quote": "AI flinches every time",
+   "page": "The Real Reason Not to Use AI to Write Your Novel"
+  },
+  {
+   "index": 134,
+   "feature": "surprise",
+   "claim": "Language models optimize for predictability while good writing must surprise; AI output drifts rather than evolves with purpose.",
+   "source": "Michael O. Church, antipodes Substack (2025-05-28)",
+   "url": "https://antipodes.substack.com/p/how-to-make-ai-write-a-bestsellerand",
+   "quote": "Good writing must be surprising. It needs to mix shit up.",
+   "page": "How to make AI write a bestseller—and why you can't"
+  }
+ ]
+}

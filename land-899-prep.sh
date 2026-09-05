@@ -3,7 +3,7 @@
 # wave-2 cars, run the edge-shared re-mint ritual (dispositionLedger is a bundle input), and stamp the §899 kit. CLAMP-W3 (the ceiling
 # car) is then dispatched INTO this dock by the chair; its car lands before the registers. Guard + consequence together.
 set -e
-SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad
+SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad
 REPO=/Users/cstokes/Desktop/settlement-engine; BASE=$1
 echo "$BASE" | grep -qE '^[0-9a-f]{40}$' || { echo "usage: <base-sha-full>"; exit 9; }
 [ "$(git -C $REPO rev-parse claude/composite-r4)" = "$BASE" ] || { echo "⛔ the product tip is not $BASE — land the previous consist first"; exit 1; }

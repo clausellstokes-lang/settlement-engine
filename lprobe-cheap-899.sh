@@ -2,7 +2,7 @@
 # lprobe-cheap-899.sh — the L-PROBE battery's CHEAP pass (steps c d e f g + the eager STOP: no vitest, no build, no register door)
 # on the §899 landed tree, run AFTER the gate and the CAS so it measures the tree the lighting wave lights from. Prints the
 # TRUE_EXITS file at the end; a task notification is not a receipt.
-SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad
+SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad
 TREE=$SC/laneCLAMP3; OUT=$SC/lprobe-out-899
 [ -d "$TREE" ] || { echo "REFUSED: no tree"; exit 9; }
 [ -z "$(git -C "$TREE" status --porcelain -uall)" ] || { echo "REFUSED: tree dirty — the battery must read a committed tip"; exit 8; }

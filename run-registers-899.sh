@@ -3,7 +3,7 @@
 # inventory refreeze (the news writer's table enters), writer-reach --write (the `news` surface on `seed on
 # generationCoherenceReceipt`), the lighting-census refreeze (ENC-4's new test file). Each door under the quiet-window law and the
 # gate mutex; the refreeze doors exit NON-ZERO on success by design and the receipt is the plain re-run that follows.
-SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad
+SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad
 D=$1; [ -d "$D" ] || { echo "usage: <dock>"; exit 9; }; cd "$D" || exit 9
 [ -z "$(git status --porcelain -uall)" ] || { echo "REFUSED: dock dirty"; exit 8; }
 quiet() { STREAK=0; WAITED=0; while [ $STREAK -lt 3 ]; do L=$(uptime | sed 's/.*averages: //' | awk '{print $1}'); V=$(ps -ax -o command | grep -c '[v]itest/dist/workers'); OK=$(awk -v l="$L" 'BEGIN{print (l<4.0)?1:0}'); if [ "$OK" = "1" ] && [ "$V" -eq 0 ]; then STREAK=$((STREAK+1)); else STREAK=0; fi; echo "  probe: load=$L workers=$V streak=$STREAK"; [ $STREAK -lt 3 ] && sleep 60 && WAITED=$((WAITED+60)); [ $WAITED -gt 5400 ] && { echo "GAVE UP"; exit 8; }; done; echo "QUIET CONFIRMED after ${WAITED}s"; }

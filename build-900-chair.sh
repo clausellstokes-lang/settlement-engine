@@ -4,7 +4,7 @@
 #   2. the full `npm run build` (the worker bundle + the eight closure chunks), the WORKER bundle's byte figure measured from dist/,
 #      and the listing of hashed chunks kept for HORIZON-B1's `__vite__mapDeps` by-filename diff
 #   Prints every figure; the WORKER_BUNDLE_CEILING_BYTES arm is written by the chair BY HAND from the printed figure (a chair car), never here.
-SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad
+SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad
 D=$SC/laneDESKINT; cd "$D" || exit 9
 [ -z "$(git status --porcelain -uall)" ] || { echo "REFUSED: dock dirty"; exit 8; }
 echo "BUILD ACTS at $(git rev-parse --short HEAD) $(date '+%H:%M:%S') · symlinks before: $(find node_modules -maxdepth 1 -type l | wc -l | tr -d ' ')"

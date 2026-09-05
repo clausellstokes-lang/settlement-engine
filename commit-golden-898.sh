@@ -2,7 +2,7 @@
 # commit-golden-898.sh — after golden-rerecord-898.sh: commit the re-recorded generator golden master as the DECLARED shift's
 # fixture car. Guarded on the wrapper log's TRUE_EXIT, the parsed row count, and porcelain being exactly the golden fixture(s).
 set -e
-SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad
+SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad
 D=$SC/lanePROSE2; W=$SC/golden-rerecord-898.wrapper.log; cd "$D"
 TE=$(grep -oE '^TRUE_EXIT=[0-9]+' "$W" | tail -1 | cut -d= -f2); [ "$TE" = "0" ] || { echo "⛔ golden door TRUE_EXIT=$TE — read $SC/golden-rerecord-898.log"; exit 1; }
 GR=$(grep -oE 'GOLDEN_ROWS: total=[0-9]+ moved=[0-9]+' "$W" | tail -1 | grep -oE 'moved=[0-9]+' | cut -d= -f2); GT=$(grep -oE 'GOLDEN_ROWS: total=[0-9]+' "$W" | tail -1 | grep -oE '[0-9]+$')

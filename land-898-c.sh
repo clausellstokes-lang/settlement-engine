@@ -1,7 +1,7 @@
 #!/bin/sh
 # land-898-c.sh — after land-898-b (totals car in): the owed-ledger retirement car, then the true car count for the gate.
 set -e
-SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad
+SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad
 D=$SC/lanePROSE2; BASE=fd8b6df0013b749e24435450931618fbe78a3f13
 # the totals car is the precondition (land-898-b stopped at its step 4 once; the totals were re-taken after fix car #3)
 echo "== 0. the totals car (entries predicted 5, totalFiles 2468) — commit from the re-taken ratchet log"

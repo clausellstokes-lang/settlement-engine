@@ -2,14 +2,14 @@
 # land-898-b.sh — after the golden door: commit the golden car → set the consist's true car count in the landing scripts →
 # take the census totals → commit the totals car (LAST) → lighting check. Then the chair starts run-gate-898.sh (bg).
 set -e
-SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad
+SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad
 D=$SC/lanePROSE2; BASE=fd8b6df0013b749e24435450931618fbe78a3f13
 echo "== 1. the golden arm is BANKED (owner-gated at the fixture) — assert the banked car is in the dock"; git -C $D log --format=%h --grep='movement is BANKED until the freeze act' -1 | grep -q . || { echo "⛔ the banked car is missing — run bank-golden-898.sh"; exit 1; }
 N=$(git -C $D rev-list --count $BASE..HEAD); EXPECT=$((N+1)); echo "cars now $N; after the totals car: $EXPECT"
 echo "== 2. the landing scripts take the true count ($EXPECT)"
 python3 - "$EXPECT" <<'PY'
 import io,sys,re
-SC='/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad'; n=sys.argv[1]
+SC='/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad'; n=sys.argv[1]
 for f,pats in (('after-cas-898.sh',[(r"grep -q '\^GATE_CARS=\d+\$'","grep -q '^GATE_CARS=%s$'"%n),(r'did not run over \d+ cars','did not run over %s cars'%n),(r'"\$LOG" \d+ >','"$LOG" %s >'%n)]),
                ('run-gate-898.sh',[(r'\[ "\$CARS" = "\d+" \]','[ "$CARS" = "%s" ]'%n),(r'expected \d+ cars over','expected %s cars over'%n)])):
     p=SC+'/'+f; s=io.open(p,encoding='utf-8').read()

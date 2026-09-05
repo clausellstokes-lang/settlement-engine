@@ -1,7 +1,7 @@
 #!/bin/sh
 # after-cas-900.sh — ONE command from a green gate log to the §900 ledger act (stamped by mk-landing-kit.py). POSIX sh. Guard + consequence together.
 set -e
-SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad
+SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad
 D=$SC/laneDESKINT; REPO=/Users/cstokes/Desktop/settlement-engine
 BASE=38474a59eba460f30d6596dcb65efda3a446738a; LOG=$SC/gate-900.log
 TE=$(grep -oE '^TRUE_EXIT=[0-9]+' "$LOG" | tail -1 | cut -d= -f2)

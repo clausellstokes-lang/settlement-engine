@@ -2,7 +2,7 @@
 # commit-anch-register.sh — after run-ratchet-anch.sh: commit the census-totals register car (the LAST car before the
 # gate) in laneANCH2 as a CHAIR act, and seal the train. Refuses on anything but exactly the ratchet baseline changed.
 set -e
-SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/d5b9a39f-b0b2-4d9c-a1a0-08b291896f89/scratchpad
+SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad
 D=$SC/laneANCH2; LOG=$SC/ratchet-anch.log; REPO=/Users/cstokes/Desktop/settlement-engine
 TE=$(grep -oE '^TRUE_EXIT=[0-9]+' "$LOG" | tail -1 | cut -d= -f2); [ "$TE" = "0" ] || { echo "⛔ ratchet TRUE_EXIT=$TE (from the LOG)"; exit 1; }
 grep -q '^RATCHET_HEAD=272dbd2da' "$LOG" || { echo "⛔ the ratchet ran at a different head: $(grep '^RATCHET_HEAD=' "$LOG")"; exit 1; }

@@ -1,0 +1,158 @@
+{
+ "name": "dnd",
+ "chunk": 2,
+ "indices": [
+  30,
+  31,
+  32,
+  33,
+  34,
+  35,
+  36,
+  37,
+  38,
+  39,
+  40,
+  41,
+  42,
+  43,
+  44
+ ],
+ "claims": [
+  {
+   "index": 30,
+   "feature": "Gygaxian voice (designer analysis)",
+   "claim": "Monte Cook characterises AD&D's house voice as heavy passive voice, stream-of-consciousness digressions, an advanced vocabulary and an authoritative, treatise-like tone that legitimised the hobby.",
+   "source": "Monte Cook, 'How you say it', Substack, 2021-07-27",
+   "url": "https://montecook.substack.com/p/how-you-say-it",
+   "quote": "the passive voice a lot, the occasional stream-of-consciousness digressions",
+   "page": ""
+  },
+  {
+   "index": 31,
+   "feature": "High Gygaxian diction",
+   "claim": "The community term 'High Gygaxian' (coined by Maliszewski) names Gygax's archaic, thesaurus-driven diction ('perforce', 'antithesis of weal'), long multi-clause sentences and baroque tone, fullest in the 1979 DMG and Vault of the Drow.",
+   "source": "James Maliszewski, 'High Gygaxian', Grognardia, 2009-02-19",
+   "url": "http://grognardia.blogspot.com/2009/02/high-gygaxian.html",
+   "quote": "a platinum word when one worth a copper would do",
+   "page": ""
+  },
+  {
+   "index": 32,
+   "feature": "Latinate vocabulary as prestige",
+   "claim": "Akrasia argues AD&D's Latinate vocabulary ('milieu', 'dweomer', 'phantasm', 'eldritch') made difficulty part of the appeal, and that later TSR simplification of the language reduced that cachet.",
+   "source": "Akrasia, Akratic Wizardry, 2013-03-18",
+   "url": "https://akraticwizardry.blogspot.com/2013/03/high-gygaxian-and-advanced-dungeons-and.html",
+   "quote": "you had to be smarter than average to understand it",
+   "page": ""
+  },
+  {
+   "index": 33,
+   "feature": "elevated verbs and mixed mechanics/narrative",
+   "claim": "A close reading of S1 Tomb of Horrors finds elevated verbs ('precipitated' for dropped), room text that mixes mechanics with narrative so it needs re-reading, yet short punchy details.",
+   "source": "Gus L, Dungeon of Signs, 2017-04-21",
+   "url": "http://dungeonofsigns.blogspot.com/2017/04/review-s1-tomb-of-horrors-gygax-at-his.html",
+   "quote": "Gygax was good at short punchy bits of detail",
+   "page": ""
+  },
+  {
+   "index": 34,
+   "feature": "1979 DMG idiosyncrasy (monograph via Wikipedia)",
+   "claim": "Stu Horvath (MIT Press, 2023) calls the 1979 DMG strange and deeply idiosyncratic, a singular authorial vision; Wieck (1989) says the 2e DMG became as much advice as manual; Taylor notes the 5e DMG spends 127 pages teaching a novice DM.",
+   "source": "Wikipedia, 'Dungeon Master's Guide' (citing Horvath 2023, Wieck 1989, Taylor/Black Gate)",
+   "url": "https://en.wikipedia.org/wiki/Dungeon_Master%27s_Guide",
+   "quote": "strange and deeply idiosyncratic",
+   "page": ""
+  },
+  {
+   "index": 35,
+   "feature": "coherence vs ambiguity across editions",
+   "claim": "Wikipedia's PHB synthesis records Turnbull (1978) calling OD&D 'ambiguous and muddled' against the coherent AD&D PHB, Schick (1991) on 2e spell descriptions bloating past 100 pages, Kelly (2014) on more polished writing, and Abbott (2024) on the 2014 spell chapter as a wall of text.",
+   "source": "Wikipedia, 'Player's Handbook'",
+   "url": "https://en.wikipedia.org/wiki/Player%27s_Handbook",
+   "quote": "an unrelenting wall of text",
+   "page": ""
+  },
+  {
+   "index": 36,
+   "feature": "bestiary register",
+   "claim": "Games scholar Jaroslav Švelch sees the Monster Manual as modelled on medieval bestiaries but with precise figures; Turnbull praised its explanatory text for amplifying the statistics.",
+   "source": "Wikipedia, 'Monster Manual' (citing Švelch, Turnbull)",
+   "url": "https://en.wikipedia.org/wiki/Monster_Manual",
+   "quote": "medieval bestiaries, only with more precise figures",
+   "page": ""
+  },
+  {
+   "index": 37,
+   "feature": "monster entry structure",
+   "claim": "The 1977 Monster Manual placed stat lines on the same page as descriptions, and Ed Greenwood criticised Fiend Folio entries for offering strange appearances with no depth to their listings.",
+   "source": "Wikipedia, 'Monsters in Dungeons & Dragons'",
+   "url": "https://en.wikipedia.org/wiki/Monsters_in_Dungeons_%26_Dragons",
+   "quote": "there is no depth to their listings",
+   "page": ""
+  },
+  {
+   "index": 38,
+   "feature": "first boxed text (single-sourced)",
+   "claim": "Wikipedia credits The Hidden Shrine of Tamoachan as the first D&D adventure with boxed read-aloud text, but the citation is a 2017 blog post by Merric Blackman, not a scholarly source.",
+   "source": "Wikipedia, 'The Hidden Shrine of Tamoachan'",
+   "url": "https://en.wikipedia.org/wiki/The_Hidden_Shrine_of_Tamoachan",
+   "quote": "the first D&D adventure to use boxed",
+   "page": ""
+  },
+  {
+   "index": 39,
+   "feature": "in-character narrator voice (5e sourcebooks)",
+   "claim": "Reviewers cited on Wikipedia find Xanathar's marginal quips too modern in register, sounding like a cranky Redditor rather than a fantasy crime lord.",
+   "source": "Wikipedia, 'Xanathar's Guide to Everything' (citing Charlie Hall, Polygon)",
+   "url": "https://en.wikipedia.org/wiki/Xanathar%27s_Guide_to_Everything",
+   "quote": "feels a bit too modern",
+   "page": ""
+  },
+  {
+   "index": 40,
+   "feature": "unreliable in-character narrator",
+   "claim": "Kunzelman (Paste) reads Volo's authorship as a deliberate device letting the sourcebook include rumor and error, and Furniss praises its marriage of narrative and mechanical information.",
+   "source": "Wikipedia, 'Volo's Guide to Monsters' (citing Kunzelman, Furniss)",
+   "url": "https://en.wikipedia.org/wiki/Volo%27s_Guide_to_Monsters",
+   "quote": "having Volo write the guide means that he can be wrong",
+   "page": ""
+  },
+  {
+   "index": 41,
+   "feature": "adventure-as-read-through experience",
+   "claim": "A GeekDad reviewer cited on Wikipedia says reading Curse of Strahd front to back is like reading a choose-your-own-adventure book, and Black Gate calls it a setting manual and adventure in one.",
+   "source": "Wikipedia, 'Curse of Strahd' (citing Bristol, Jones)",
+   "url": "https://en.wikipedia.org/wiki/Curse_of_Strahd",
+   "quote": "like reading a choose-your-own-adventure book front to back",
+   "page": ""
+  },
+  {
+   "index": 42,
+   "feature": "3e terminology intelligibility",
+   "claim": "Evan Torner, cited on Wikipedia, describes 3e's design intent as Eurogame-style elegance in which terminology and choices should be immediately intelligible.",
+   "source": "Wikipedia, 'Editions of Dungeons & Dragons' (citing Torner)",
+   "url": "https://en.wikipedia.org/wiki/Editions_of_Dungeons_%26_Dragons",
+   "quote": "immediately intelligible to all who might play it",
+   "page": ""
+  },
+  {
+   "index": 43,
+   "feature": "2014 vs 2024: defined-term ambiguity",
+   "claim": "Rhodes argues the 2014 PHB left DMs to guess whether words were ordinary or mechanical, and that the 2024 PHB fixes this by capitalising game mechanics and adding an A–Z Rules Glossary.",
+   "source": "Duncan Rhodes, Hipsters & Dragons, 2025-03-10",
+   "url": "https://www.hipstersanddragons.com/5e-players-handbook-2024/",
+   "quote": "just being used in their normal sense",
+   "page": ""
+  },
+  {
+   "index": 44,
+   "feature": "2024 terminology renames",
+   "claim": "The official 2024 PHB update renames race to species, 'Cast a Spell action' to 'Magic action', Inspiration to 'Heroic Inspiration', 'Use an Object' to 'Utilize action', folds shoving into Unarmed Strike, and adds glossary entries such as Ally, Enemy, Bloodied and Passive Perception.",
+   "source": "D&D Beyond staff, 'Updates in the Player's Handbook (2024)', 2024-09-03",
+   "url": "https://www.dndbeyond.com/posts/1810-updates-in-the-players-handbook-2024",
+   "quote": "Magic action",
+   "page": ""
+  }
+ ]
+}
