@@ -25,3 +25,5 @@ Not implemented: HTMLCanvasElement's toDataURL() method: without installing the 
 Not implemented: navigation to another Document
 Not implemented: navigation to another Document
 Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+Not implemented: navigation to another Document

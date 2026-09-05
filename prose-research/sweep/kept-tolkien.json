@@ -3750,5 +3750,230 @@
    "trueWording": "tolkien's style is training wheels for our imagination",
    "note": "Exact (site lowercases 'tolkien'). Walker also says 'Its invitational quality' and 'lure us into filling in the blanks, like Genesis', supporting every clause."
   }
+ },
+ {
+  "index": 270,
+  "feature": "nostalgic-archaic diction and ubi sunt",
+  "claim": "Walker finds the diction essentially nostalgic, even archaic, with the ubi sunt theme yielding an elegiac tone and feeling of deep time.",
+  "source": "Wikipedia, 'Tolkien's prose style' (citing Walker)",
+  "url": "https://en.wikipedia.org/wiki/Tolkien's_prose_style",
+  "quote": "elegiac tone and a feeling of deep time and history",
+  "page": "Ancient clashing with modern",
+  "verdict": {
+   "index": 270,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "elegiac tone and a feeling of deep time and history",
+   "note": "Verbatim on the Wikipedia page. Both halves are Walker: 'the diction ... manages to seem in its essence nostalgic, maybe even archaic' [ref 8] and 'Walker adds that the sense of time ... is created ... by his use of the ubi sunt theme' [ref 30]; reference list confirms Walker, Steve (2009), The Power of Tolkien's Prose."
+  }
+ },
+ {
+  "index": 271,
+  "feature": "semantic ambiguity widening meaning",
+  "claim": "Walker describes the prose as taut with semantic ambiguities that widen potential meaning.",
+  "source": "Wikipedia, 'Tolkien's prose style' (citing Walker)",
+  "url": "https://en.wikipedia.org/wiki/Tolkien's_prose_style",
+  "quote": "taut with semantic ambiguities tending to widen potential meaning",
+  "page": "Characterisation by style",
+  "verdict": {
+   "index": 271,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "taut with semantic ambiguities tending to widen potential meaning",
+   "note": "Verbatim, inside a block quotation introduced as 'Walker comments that Tolkien uses language to expand his readers' imaginations', attributed to Steve Walker, The Power of Tolkien's Prose, 2009."
+  }
+ },
+ {
+  "index": 272,
+  "feature": "discrete registers per people",
+  "claim": "Turner finds Tolkien creating discrete linguistic registers for different characters, peoples and cultures, simple overall yet adapted to race and standing.",
+  "source": "Wikipedia, 'Tolkien's prose style' (citing Turner)",
+  "url": "https://en.wikipedia.org/wiki/Tolkien's_prose_style",
+  "quote": "discrete linguistic registers for different characters, peoples, and cultures",
+  "page": "Hobbits as mediators",
+  "verdict": {
+   "index": 272,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "discrete linguistic registers for different characters, peoples, and cultures",
+   "note": "Verbatim, in the sentence 'Turner states that The Lord of the Rings makes use of several styles of prose, with discrete linguistic registers...'. The adaptation half is supported as a contrast between the Hobbits' simple modern style and archaizing language for Dwarves, Elves and Riders of Rohan; the page does not use the word 'race'."
+  }
+ },
+ {
+  "index": 273,
+  "feature": "embedded varied verse (Morris model)",
+  "claim": "Turner suggests embedding varied kinds of poem in prose came from William Morris, and hobbit verse echoes the rural Georgian poets.",
+  "source": "Wikipedia, 'Allan Turner'",
+  "url": "https://en.wikipedia.org/wiki/Allan_Turner",
+  "quote": "markedly English and rural in character",
+  "page": "",
+  "verdict": {
+   "index": 273,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "markedly English and rural in character",
+   "note": "Verbatim on the Allan Turner page. Both halves present in one passage: the Morris suggestion about 'embedding varied kinds of poem in a prose work', and hobbit poetry inspired by the Georgian Poetry movement."
+  }
+ },
+ {
+  "index": 274,
+  "feature": "multivalent texture",
+  "claim": "Flieger describes the work's richness and multivalent texture that lets every reader take what they need.",
+  "source": "Wikipedia, 'Tolkien's prose style' (citing Flieger); Flieger interview at Tolkienista",
+  "url": "https://tolkienista.com/2022/04/22/tolkien-between-the-darkness-and-the-splintered-lights-of-faery-an-interview-with-verlyn-flieger/",
+  "quote": "so rich, so multi-valent",
+  "page": "",
+  "verdict": {
+   "index": 274,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Tolkien's work is so rich, so multi-valent",
+   "note": "Quote verbatim at the given Tolkienista URL, but there it is advice to young researchers ('there's work to be done on every level'), not about readers. The 'every reader takes what they need' half comes from the co-named source: Wikipedia's 'Tolkien's prose style' has Flieger noting the book offers 'richness and multivalent texture', enabling every reader to take what they personally need and want. Verified across the two named sources, not on the URL alone."
+  }
+ },
+ {
+  "index": 275,
+  "feature": "words and light as agents of perception",
+  "claim": "Flieger reads Tolkien through Barfield: language creates the reality it describes, with words and light as agents of perception splintered into many hues.",
+  "source": "Mythopoeic Society review of Flieger, 'Splintered Light'",
+  "url": "https://www.mythsoc.org/reviews/splintered-light.htm",
+  "quote": "language creates the reality it describes",
+  "page": "",
+  "verdict": {
+   "index": 275,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "language creates the reality it describes",
+   "note": "Verbatim, inside Kane's quotation of Flieger on Barfield. The rest of the claim is also verbatim on the page: words and light as 'agents of perception', and 'Light splintered from the original White \"to many hues\"'."
+  }
+ },
+ {
+  "index": 276,
+  "feature": "names as feast / elvish beauty",
+  "claim": "Lewis praises the names as a feast that at moments embody a piercing, high, elvish beauty unmatched in prose.",
+  "source": "C.S. Lewis, 'The Gods Return to Earth' (Time and Tide, 1954), reproduced at TheOneRing.com",
+  "url": "https://www.theonering.com/the-gods-return-to-earth-c-s-lewis-review-of-the-fellowship-of-the-ring/",
+  "quote": "The names alone are a feast",
+  "page": "",
+  "verdict": {
+   "index": 276,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The names alone are a feast",
+   "note": "Verbatim, and continued on the page as '[and are] best of all ... when they embody that piercing, high, elvish beauty of which no other prose writer has captured so much'. Page confirms the review title and Lewis's authorship; it does not name Time and Tide or the year 1954 (it does carry the page cite 'p. 1083')."
+  }
+ },
+ {
+  "index": 277,
+  "feature": "diuturnity / dust of history",
+  "claim": "Lewis says Middle-earth is heavier with its past than our world, so one cannot step anywhere without stirring the dust of history.",
+  "source": "C.S. Lewis, 'The Gods Return to Earth' (1954)",
+  "url": "https://www.theonering.com/the-gods-return-to-earth-c-s-lewis-review-of-the-fellowship-of-the-ring/",
+  "quote": "without stirring the dust of history",
+  "page": "",
+  "verdict": {
+   "index": 277,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "without stirring the dust of history",
+   "note": "Verbatim. Surrounding text confirms both halves: 'you can hardly put your foot down anywhere ... without stirring the dust of history. Our own world ... hardly seems so heavy with its past.'"
+  }
+ },
+ {
+  "index": 278,
+  "feature": "homely fireside beside heroic",
+  "claim": "Lewis notes the book balances snug firesides and good cheer for the hobbit in each reader against great valour and anguish.",
+  "source": "C.S. Lewis, 'The Gods Return to Earth' (1954)",
+  "url": "https://www.theonering.com/the-gods-return-to-earth-c-s-lewis-review-of-the-fellowship-of-the-ring/",
+  "quote": "many a snug fireside and many an hour of good cheer",
+  "page": "",
+  "verdict": {
+   "index": 278,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "many a snug fireside and many an hour of good cheer",
+   "note": "Verbatim, in 'Despite many a snug fireside and many an hour of good cheer to gratify the Hobbit in each of us, anguish is, for me, almost the prevailing note.' 'Great valour' does appear on the page but in Lewis's closing quotation of Tolkien ('great valour, and great deeds that were not wholly vain'), not in the fireside sentence."
+  }
+ },
+ {
+  "index": 279,
+  "feature": "characterisation by kind, not delineation",
+  "claim": "Lewis observes that much characterisation is done simply by making a figure an elf, dwarf or hobbit, and that the war has the quality of the war his generation knew.",
+  "source": "C.S. Lewis, 'The Dethronement of Power' (1955), reproduced at Earth and Oak",
+  "url": "https://earthandoak.wordpress.com/2018/01/06/cs-lewis-response-to-critics-of-the-lord-of-the-rings-the-dethronement-of-power/",
+  "quote": "the very quality of the war my generation knew",
+  "page": "",
+  "verdict": {
+   "index": 279,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the very quality of the war my generation knew",
+   "note": "Verbatim. The characterisation half is also near-verbatim: 'Much that in a realistic work would be done by \"character delineation\" is here done simply by making the character an elf, a dwarf, or a hobbit.' Page confirms the essay title The Dethronement of Power."
+  }
+ },
+ {
+  "index": 280,
+  "feature": "slow time of Treebeard's speech",
+  "claim": "Lewis singles out Treebeard, whose name would take too long to pronounce and who calls 'hill' a hasty word, as deep time embodied in speech.",
+  "source": "C.S. Lewis, 'The Dethronement of Power' (1955)",
+  "url": "https://earthandoak.wordpress.com/2018/01/06/cs-lewis-response-to-critics-of-the-lord-of-the-rings-the-dethronement-of-power/",
+  "quote": "it would, by now, take too long to pronounce",
+  "page": "",
+  "verdict": {
+   "index": 280,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it would, by now, take too long to pronounce",
+   "note": "Verbatim. The 'hasty word' half is on the same page: Treebeard 'complains that this is but \"a hasty word\" (II, 69) for that which has so much history in it', alongside eyes 'filled up with ages of memory'."
+  }
+ },
+ {
+  "index": 281,
+  "feature": "gift for naming and exact description",
+  "claim": "Auden credits Tolkien with an amazing gift for naming and a wonderfully exact eye for description, in a northern saga-like landscape.",
+  "source": "W.H. Auden, 'The Hero Is a Hobbit' (NYT, 1954), reproduced at Epistle of Dude",
+  "url": "https://epistleofdude.wordpress.com/2019/05/13/auden-reviews-tolkien/",
+  "quote": "a wonderfully exact eye for description",
+  "page": "",
+  "verdict": {
+   "index": 281,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a wonderfully exact eye for description",
+   "note": "Verbatim, in 'an amazing gift for naming and a wonderfully exact eye for description'. The northern-saga half is supported verbatim elsewhere on the page: 'Landscape, climate and atmosphere are northern, reminiscent of the Icelandic sagas.' Page carries the title 'The Hero Is a Hobbit' and the year 1954."
+  }
+ },
+ {
+  "index": 282,
+  "feature": "historical and social reality within Quest",
+  "claim": "Auden says Tolkien uses the Quest's traditional properties while satisfying our sense of historical and social reality.",
+  "source": "W.H. Auden, 'At the End of the Quest, Victory' (NYT, 1956), at Anthropology of Accord",
+  "url": "https://doctorpence.blogspot.com/2016/02/friday-bookreview-wh-auden-on-lord-of.html",
+  "quote": "satisfying our sense of historical and social reality",
+  "page": "",
+  "verdict": {
+   "index": 282,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "satisfying our sense of historical and social reality",
+   "note": "Verbatim, in 'using the traditional properties of the Quest, the heroic journey, the Numinous Object, the conflict between Good and Evil while at the same time satisfying our sense of historical and social reality'. Page identifies it as Auden's 1956 NY Times review but does not print the title 'At the End of the Quest, Victory'."
+  }
+ },
+ {
+  "index": 283,
+  "feature": "light comedy a weakness (Auden)",
+  "claim": "Auden judges the opening hobbit comedy weak, saying light comedy is not Tolkien's forte.",
+  "source": "Biblioklept, 'W.H. Auden Reviews J.R.R. Tolkien'",
+  "url": "https://biblioklept.org/2011/04/13/i-rarely-remember-a-book-about-which-i-have-had-such-violent-arguments-w-h-auden-reviews-j-r-r-tolkien/",
+  "quote": "light comedy is not Mr. Tolkien's forte",
+  "page": "",
+  "verdict": {
+   "index": 283,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "light comedy is not Mr. Tolkien's forte",
+   "note": "Verbatim, in 'the first forty pages ... in which the daily life of the hobbits is described; this is light comedy and light comedy is not Mr. Tolkien's forte'. Page identifies the piece as Auden's 1956 New York Times review of The Return of the King."
+  }
+ },
+ {
+  "index": 284,
+  "feature": "hostile: story-book language",
+  "claim": "Edmund Wilson attacks the prose as professorial amateurishness with characters talking a Howard Pyle story-book language.",
+  "source": "Book Marks, 'C. S. Lewis, W. H. Auden, & Edmund Wilson on The Lord of the Rings'",
+  "url": "https://bookmarks.reviews/c-s-lewis-w-h-auden-and-edmund-wilson-on-the-lord-of-the-rings/",
+  "quote": "professorial amateurishness",
+  "page": "",
+  "verdict": {
+   "index": 284,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "professorial amateurishness",
+   "note": "Verbatim, in 'Prose and verse are on the same level of professorial amateurishness', attributed on the page to Edmund Wilson. The Pyle half is also verbatim: 'The characters talk a story-book language that might have come out of Howard Pyle.'"
+  }
  }
 ]

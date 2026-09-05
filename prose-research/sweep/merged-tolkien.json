@@ -4511,6 +4511,96 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "tolkien's style is training wheels for our imagination",
    "note": "Exact (site lowercases 'tolkien'). Walker also says 'Its invitational quality' and 'lure us into filling in the blanks, like Genesis', supporting every clause."
+  },
+  "270": {
+   "index": 270,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "elegiac tone and a feeling of deep time and history",
+   "note": "Verbatim on the Wikipedia page. Both halves are Walker: 'the diction ... manages to seem in its essence nostalgic, maybe even archaic' [ref 8] and 'Walker adds that the sense of time ... is created ... by his use of the ubi sunt theme' [ref 30]; reference list confirms Walker, Steve (2009), The Power of Tolkien's Prose."
+  },
+  "271": {
+   "index": 271,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "taut with semantic ambiguities tending to widen potential meaning",
+   "note": "Verbatim, inside a block quotation introduced as 'Walker comments that Tolkien uses language to expand his readers' imaginations', attributed to Steve Walker, The Power of Tolkien's Prose, 2009."
+  },
+  "272": {
+   "index": 272,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "discrete linguistic registers for different characters, peoples, and cultures",
+   "note": "Verbatim, in the sentence 'Turner states that The Lord of the Rings makes use of several styles of prose, with discrete linguistic registers...'. The adaptation half is supported as a contrast between the Hobbits' simple modern style and archaizing language for Dwarves, Elves and Riders of Rohan; the page does not use the word 'race'."
+  },
+  "273": {
+   "index": 273,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "markedly English and rural in character",
+   "note": "Verbatim on the Allan Turner page. Both halves present in one passage: the Morris suggestion about 'embedding varied kinds of poem in a prose work', and hobbit poetry inspired by the Georgian Poetry movement."
+  },
+  "274": {
+   "index": 274,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Tolkien's work is so rich, so multi-valent",
+   "note": "Quote verbatim at the given Tolkienista URL, but there it is advice to young researchers ('there's work to be done on every level'), not about readers. The 'every reader takes what they need' half comes from the co-named source: Wikipedia's 'Tolkien's prose style' has Flieger noting the book offers 'richness and multivalent texture', enabling every reader to take what they personally need and want. Verified across the two named sources, not on the URL alone."
+  },
+  "275": {
+   "index": 275,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "language creates the reality it describes",
+   "note": "Verbatim, inside Kane's quotation of Flieger on Barfield. The rest of the claim is also verbatim on the page: words and light as 'agents of perception', and 'Light splintered from the original White \"to many hues\"'."
+  },
+  "276": {
+   "index": 276,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The names alone are a feast",
+   "note": "Verbatim, and continued on the page as '[and are] best of all ... when they embody that piercing, high, elvish beauty of which no other prose writer has captured so much'. Page confirms the review title and Lewis's authorship; it does not name Time and Tide or the year 1954 (it does carry the page cite 'p. 1083')."
+  },
+  "277": {
+   "index": 277,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "without stirring the dust of history",
+   "note": "Verbatim. Surrounding text confirms both halves: 'you can hardly put your foot down anywhere ... without stirring the dust of history. Our own world ... hardly seems so heavy with its past.'"
+  },
+  "278": {
+   "index": 278,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "many a snug fireside and many an hour of good cheer",
+   "note": "Verbatim, in 'Despite many a snug fireside and many an hour of good cheer to gratify the Hobbit in each of us, anguish is, for me, almost the prevailing note.' 'Great valour' does appear on the page but in Lewis's closing quotation of Tolkien ('great valour, and great deeds that were not wholly vain'), not in the fireside sentence."
+  },
+  "279": {
+   "index": 279,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the very quality of the war my generation knew",
+   "note": "Verbatim. The characterisation half is also near-verbatim: 'Much that in a realistic work would be done by \"character delineation\" is here done simply by making the character an elf, a dwarf, or a hobbit.' Page confirms the essay title The Dethronement of Power."
+  },
+  "280": {
+   "index": 280,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it would, by now, take too long to pronounce",
+   "note": "Verbatim. The 'hasty word' half is on the same page: Treebeard 'complains that this is but \"a hasty word\" (II, 69) for that which has so much history in it', alongside eyes 'filled up with ages of memory'."
+  },
+  "281": {
+   "index": 281,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a wonderfully exact eye for description",
+   "note": "Verbatim, in 'an amazing gift for naming and a wonderfully exact eye for description'. The northern-saga half is supported verbatim elsewhere on the page: 'Landscape, climate and atmosphere are northern, reminiscent of the Icelandic sagas.' Page carries the title 'The Hero Is a Hobbit' and the year 1954."
+  },
+  "282": {
+   "index": 282,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "satisfying our sense of historical and social reality",
+   "note": "Verbatim, in 'using the traditional properties of the Quest, the heroic journey, the Numinous Object, the conflict between Good and Evil while at the same time satisfying our sense of historical and social reality'. Page identifies it as Auden's 1956 NY Times review but does not print the title 'At the End of the Quest, Victory'."
+  },
+  "283": {
+   "index": 283,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "light comedy is not Mr. Tolkien's forte",
+   "note": "Verbatim, in 'the first forty pages ... in which the daily life of the hobbits is described; this is light comedy and light comedy is not Mr. Tolkien's forte'. Page identifies the piece as Auden's 1956 New York Times review of The Return of the King."
+  },
+  "284": {
+   "index": 284,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "professorial amateurishness",
+   "note": "Verbatim, in 'Prose and verse are on the same level of professorial amateurishness', attributed on the page to Edmund Wilson. The Pyle half is also verbatim: 'The characters talk a story-book language that might have come out of Howard Pyle.'"
   }
  }
 }

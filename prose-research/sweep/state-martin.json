@@ -5779,6 +5779,96 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "ASOIAF has an almost hypnotic readability",
    "note": "Exact. Homeric epithet frame is the essay's thesis; 'black as night' and 'those faces still as masks' appear verbatim; the third is 'all those men corded or thick with muscle', not 'corded with muscle' as a fixed phrase. Cost limb confirmed: 'The con: The sentences aren't beautiful' and 'the prose... is forgettable.' Page carries no date, as the claim says."
+  },
+  "315": {
+   "index": 315,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The sentences aren't beautiful.",
+   "note": "Verbatim as 'The con: The sentences aren't beautiful.' Essay also supplies each supporting limb: 'he stresses rhythm'; stock phrases are 'Very important for maintaining momentum'; 'dialogue would shine brightest. But the prose that constitutes the other 60% of the text is forgettable.' Title confirmed 'George R.R. Martin, The American Homer'."
+  },
+  "316": {
+   "index": 316,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "words and phrases he rides like a hobbyhorse",
+   "note": "Quote verbatim: 'He has words and phrases he rides like a hobbyhorse'. 'jape' is item 1 and \"mummer's farce\" item 2 in the list that follows. The 'at best serviceable' limb is a light paraphrase of the page's 'Most of the time his prose borders on the servicable' (misspelled in the original); the word 'serviceable' correctly spelled does not appear."
+  },
+  "317": {
+   "index": 317,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "someone being drunk with desire for the other person",
+   "note": "Quote verbatim inside 'They usually involve someone being drunk with desire for the other person, their head swimming with the wine of lust or some such nonsense.' Caveat: 'cliche' is the summarizer's word, not the author's — he writes 'clunky to the extreme' and 'the obligatory mention of naughty body parts'; 'cliches' appears only in reader comments."
+  },
+  "318": {
+   "index": 318,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "no writer uses a phrase thirteen times by accident",
+   "note": "Quote verbatim ('Again, no writer uses a phrase thirteen times by accident.'). Count verbatim too: 'The phrase \"words are wind\" appears thirteen times in ADWD.' 'Every region and faction' is a fair compression of 'people in the North, the South and on both sides of the Narrow Sea… Everyone says it.'"
+  },
+  "319": {
+   "index": 319,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I think GRRM has a penchant for pseudo-archaic language",
+   "note": "Verbatim in the comment by 'Wenyip' (Aug 17 2011), which also names 'much and more' (and 'little and less') and cautions against reading much into 'leal'. Minor: it is one commenter, not 'commenters' plural, and the tone is a caveat rather than a counter-argument."
+  },
+  "320": {
+   "index": 320,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "On the other hand, he does do leitmotifs extremely well",
+   "note": "Verbatim in the same Wenyip comment, which continues 'My especial favourites were the two for Reek: \"Reek, Reek it rhymes with…\"', confirming the Reek-refrain detail."
+  },
+  "321": {
+   "index": 321,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "date from 1451, 1488, and 1400 respectively",
+   "note": "No quote field to check. Page: 'Ser for Sir, Southron for Southern, and craven meaning cowardly all date from 1451, 1488, and 1400 respectively, according to the Oxford English Dictionary' and 'turncloak, which is Martin's archaic-sounding amendment of turncoat'. Two drifts: craven's 1400 is 14th-, not 15th-century, so '15th-century forms' overreaches for one of the three; and Adam Pulford is described on the page as working 'in marketing for Oxford Dictionaries', not as a lexicographer."
+  },
+  "322": {
+   "index": 322,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Dark wings, dark words",
+   "note": "Quote verbatim; 'Words are wind' and 'Seven hells' both appear in the same 'The power of proverbs' section, tied to culture ('the seven kingdoms of Westeros contain many'). The invented-tongue limb is verbatim too: 'the tongue in which they are speaking is noted but rendered in English', against Tolkien-style 'fully developed fantasy languages'."
+  },
+  "323": {
+   "index": 323,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "George R.R. Martin is fond of sudden reversals",
+   "note": "Quote verbatim as the article's opening sentence. Plotter limb verbatim: 'Martin is a tense, surging, insomnia-inflicting plotter'; many-angles limb verbatim as in claim 324. Article fetched in full (not paywalled)."
+  },
+  "324": {
+   "index": 324,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Martin shoots the action from many angles, with a dozen narrators",
+   "note": "Quote verbatim, continuing '…the better to reflect its gritty, twisty, many-sided nature'. The 'all real' limb is verbatim but about politics specifically, spelled 'politik': 'Martin may write fantasy, but his politik is all real.'"
+  },
+  "325": {
+   "index": 325,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "epic sweep and tiny, touching human drama",
+   "note": "Verbatim inside 'Martin has an astonishing ability to focus on epic sweep and tiny, touching human drama simultaneously.'"
+  },
+  "326": {
+   "index": 326,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "too much repetition, unexceptional prose",
+   "note": "Verbatim in the reviewer's preamble to the interview: 'Weaknesses that have plagued Martin's previous books are also present: too much repetition, unexceptional prose, and characters who use the same idioms (and have sex in exactly the same manner) no matter their ethnicity, social class, or continent.' Byline Rachael Brown, July 11, 2011."
+  },
+  "327": {
+   "index": 327,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Such length isn't necessary, and it hurts Martin's prose and his plot mechanics",
+   "note": "Both halves verbatim on the Wikipedia reception section: Orr quoted as above, and 'Megan Wasson of The Christian Science Monitor said… Martin's prose is concise but pithy'. One date drift: the article's own citation dates Orr to August 12, 2011 ('Dragons Ascendant: George R. R. Martin and the Rise of Fantasy'), not the 2011-08-14 in the source field; the CSM date (July 12, 2011) matches."
+  },
+  "328": {
+   "index": 328,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The structure of the individual chapters is often about as good as structure gets",
+   "note": "Quote verbatim; the prose limb is verbatim too, with the original's typo: 'He prose is tight and clear and evocative'. 'Faulting only scope' is a slight narrowing — his fault is that Martin 'seems to have lost complete control of his overall story' and traded story for 'atmosphere', of which length is one symptom. Post dated May 05, 2014, itself a repost of a 2012 piece."
+  },
+  "329": {
+   "index": 329,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Honorable men share their soup. Bad ones bogart it.",
+   "note": "Quote verbatim, immediately preceded by the two markers the claim names: 'It's a marker of regional difference. It's a test of character.' By Jacob Mikanowski, July 05, 2017."
   }
  },
  "mergedAt": "see autosave.log"
