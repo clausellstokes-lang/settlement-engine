@@ -1,9 +1,9 @@
 /**
- * domain/worldPulse/chanceMeetingReceiptPools.js — THE ENCOUNTERS RECEIPT PROSE (ENC-4's slice).
+ * domain/worldPulse/envoyChanceMeetingReceiptPools.js — THE ENCOUNTERS RECEIPT PROSE (ENC-4's slice).
  *
  * A PURE DATA LEAF of the event-prose family, sibling to faithReceiptPools.js and
  * informationReceiptPools.js. It holds ONLY the authored corpus the CHANCE_MEETING picker
- * draws from; `chanceMeetingNews.js` owns the registry row, the eligibility declaration, the
+ * draws from; `envoyChanceMeetingNews.js` owns the registry row, the eligibility declaration, the
  * seeded picker and the Herald entry builder, and `envoyPulse.js` owns the one production
  * mint. Nothing here decides that two people met; it only voices a receipt ENC-1 already
  * resolved and ENC-3 already staged.

@@ -1,8 +1,8 @@
 /**
- * chanceMeetingNews.js — THE ENCOUNTERS GOVERNED KIND REGISTRY (ENC-4's slice).
+ * envoyChanceMeetingNews.js — THE ENCOUNTERS GOVERNED KIND REGISTRY (ENC-4's slice).
  *
  * The WW-C split, copied deliberately from GR-0, IN-1c-a and WF-8a:
- * `chanceMeetingReceiptPools.js` holds the annex-verbatim corpus, THIS file holds the registry
+ * `envoyChanceMeetingReceiptPools.js` holds the annex-verbatim corpus, THIS file holds the registry
  * row, the eligibility declaration, the seeded picker and the Herald entry builder, and
  * `envoyPulse.js` holds the ONE production mint. Nothing here decides that two people met, what
  * they made of each other, or what follows for either of them: it only voices a receipt ENC-1
@@ -64,7 +64,7 @@ import { fnv1a32 } from './eventProse.js';
 import {
   CHANCE_MEETING_OUTCOME_PHRASES,
   CHANCE_MEETING_RECEIPTS,
-} from './chanceMeetingReceiptPools.js';
+} from './envoyChanceMeetingReceiptPools.js';
 import { stablePart } from './stablePart.js';
 
 /** @typedef {import('./eventProse.js').ProseVariant} ProseVariant */

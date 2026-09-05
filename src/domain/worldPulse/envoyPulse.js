@@ -40,7 +40,7 @@ import {
   resolveMaturedParlays,
   resolveStartInterceptions,
 } from './envoyInterceptionStage.js';
-import { chanceMeetingEntry } from './chanceMeetingNews.js';
+import { chanceMeetingEntry } from './envoyChanceMeetingNews.js';
 import { advanceChanceMeetings, dropStaleMeetingLedgers } from './envoyChanceMeetingStage.js';
 import { envoyNewsEntries } from './envoyNews.js';
 import { rosterPersonById } from './envoyCasting.js';
