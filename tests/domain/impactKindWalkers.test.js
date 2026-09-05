@@ -182,6 +182,17 @@ const EXPECTED_VOICE = {
   // minted the kind and moved neither this roster nor pantheon A5's freezes, and no vitest ran
   // in that lane — both were red at its tip and are moved by the Fable chair at the landing.
   chance_meeting_recorded: null,
+  // ENC-4b/ENC-4c (ROAD B's second beat, §900): the EXPOSED refusal is the same cohort and the
+  // same shape as the recorded meeting above — one of the chair's own authored sentences (§B when
+  // the host offered, §B2 when the guest did) over a reason the builder reads back off the
+  // instrument itself (`CHANCE_MEETING_EXPOSED_REASON`), filed at a registry section with its own
+  // significance. It must NOT borrow a generic crier category merely because a refusal that did
+  // not stay private sounds like news: no crier register fits a private offer made public, and a
+  // market or authority line beneath it would misdescribe it exactly as the set-but-unclassified
+  // guard exists to prevent. MEASURED at this tip: `newsVoiceCategory({ impactKind:
+  // 'chance_meeting_exposed' })` already returns null through that guard, so this row DECIDES
+  // rather than changes (JUDGMENT, vetoable — the chance_meeting_recorded precedent exactly).
+  chance_meeting_exposed: null,
   // GR-4b's succession disavowal (treatySuccessionVoice.js) is the same cohort and the same
   // shape again: an AUTHORED headline naming both courts over a pact-grammar summary that
   // names the hand which swore, with its own recorded reason read back off the instrument.
