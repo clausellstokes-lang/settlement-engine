@@ -46,6 +46,7 @@
  *                                           [--seasons on|off]
  *                                           [--neighbor-control-years 30]
  *                                           [--dark-control]
+ *                                           [--preset <simulation-rule-preset-id>]
  *                                           [--rules-json <path>] [--lighting k=v,k=v]
  *                                           [--skip-divergence]
  *                                           [--checkpoint-every <years> --checkpoint-dir <dir>]
@@ -64,6 +65,18 @@
  * makes is a PURE FUNCTION in ./soakRules.mjs — this script runs on import, so a test
  * that imported it to pin a rule would execute a soak, which ODQ §145.2 forbids.
  *
+ *   --preset <id>               the COMPOSITION BASE — which shipped
+ *                               `SIMULATION_RULE_PRESETS` table the soak certifies.
+ *                               Default (flag absent) is `full_simulation`, byte-for-byte
+ *                               what this script always composed. ⛔ It is NOT an overlay:
+ *                               before it existed the only way to reach another preset was
+ *                               `--rules-json`, which spreads ON TOP of full_simulation and
+ *                               therefore leaves every full_simulation opt-in key the target
+ *                               preset does not name still LIT (measured: quiet_local 33,
+ *                               realistic_regional 33, narrative_campaign 33, static_campaign
+ *                               34, living_realm 15, dramatic_campaign 14) — so a receipt
+ *                               could not name the preset it certified. Combining --preset
+ *                               with --rules-json is REFUSED; an unknown id is REFUSED.
  *   --rules-json / --lighting   a rules overlay, spread into `fullRules` ABOVE the
  *                               `darkRules` derivation (the charter's highest-risk law).
  *   --skip-divergence           run C is skipped; `properties` is COMPUTED so
@@ -95,6 +108,7 @@ import {
   deepKeyCensus,
   parseLightingOverlay,
   replantUndefinedKeys,
+  resolveSoakPreset,
   soakAdvanceEpoch,
   soakInvocationRefusals,
   soakProperties,
@@ -164,6 +178,9 @@ const NOW = '2026-07-12T00:00:00.000Z'; // pinned — one instant for the whole 
 // test that imported it to pin a rule would execute a soak.
 const RULES_JSON = String(arg('rules-json', ''));
 const LIGHTING = String(arg('lighting', ''));
+// THE COMPOSITION BASE, not an overlay. Empty means the historical default, and
+// `resolveSoakPreset` turns that into `full_simulation` in ONE place.
+const PRESET_ID = String(arg('preset', ''));
 const SKIP_DIVERGENCE = process.argv.includes('--skip-divergence');
 const CHECKPOINT_EVERY_RAW = arg('checkpoint-every', null);
 const CHECKPOINT_DIR = String(arg('checkpoint-dir', ''));
@@ -181,6 +198,9 @@ const invocationRefusals = [
     caseId: CASE_ID,
     checkpointEvery: CHECKPOINT_EVERY_RAW,
     restoreFrom: RESTORE_FROM,
+    preset: PRESET_ID,
+    rulesJson: RULES_JSON,
+    knownPresets: Object.keys(SIMULATION_RULE_PRESETS),
   }),
   ...lighting.refusals,
 ];
@@ -188,6 +208,14 @@ if (invocationRefusals.length) {
   for (const line of invocationRefusals) console.error(line);
   process.exit(2);
 }
+
+// Resolved only AFTER the refusal gate above, so an unknown id leaves by `process.exit(2)`
+// with a named reason instead of reaching the resolver's throw. With the flag absent this
+// is `full_simulation` — the same object literal this script always composed from.
+const SOAK_PRESET = resolveSoakPreset({
+  presetId: PRESET_ID,
+  presets: SIMULATION_RULE_PRESETS,
+});
 
 const CHECKPOINT_EVERY = CHECKPOINT_EVERY_RAW == null ? 0 : Number(CHECKPOINT_EVERY_RAW);
 const RULES_OVERLAY = {
@@ -296,7 +324,7 @@ function buildFixture(seed, { variant = 'baseline' } = {}) {
   // key set is `fullRules`'s key set; an overlay applied below would leave the new
   // keys ABSENT from the dark control, and absence is not falseness.
   const { fullRules, darkRules } = composeSoakRules({
-    preset: SIMULATION_RULE_PRESETS.full_simulation.rules,
+    preset: SOAK_PRESET.rules,
     seasons: SEASONS,
     overlay: RULES_OVERLAY,
   });
@@ -315,9 +343,11 @@ function buildFixture(seed, { variant = 'baseline' } = {}) {
       // data authored through buildSpatialDigest. The explicit dark control strips
       // both marker and digest so its constitutional aspatial path remains honest.
       ...buildWholeWorldSoakSpatialCanon(saves, { enabled: variant !== 'dark' }),
-      // FULL SIMULATION — the §11 ceiling preset: war layer + strategy + faith
-      // spread + (W0-A3) the eight war-depth sub-flags. The soak exercises the
-      // deepest composed stack the control layer can turn on.
+      // FULL SIMULATION by default — the §11 ceiling preset: war layer + strategy
+      // + faith spread + (W0-A3) the eight war-depth sub-flags. The soak exercises
+      // the deepest composed stack the control layer can turn on. `--preset <id>`
+      // REPLACES that base with another shipped table (never overlays it), so the
+      // composed key set is then that preset's own key set and nothing leaks in.
       simulationRules: variant === 'dark' ? darkRules : fullRules,
       stressors: [],
     },
@@ -983,6 +1013,11 @@ const receiptBody = {
   schemaVersion: SOAK_RECEIPT_SCHEMA_VERSION,
   kind: 'whole_world_soak',
   ...(CASE_ID ? { caseId: CASE_ID } : {}),
+  // ⭐ THE RECEIPT NAMES THE PRESET IT CERTIFIED — but only when one was NAMED, exactly
+  // like `caseId` above. Emitting it unconditionally would move every default receipt's
+  // bytes for a field that says what the default already was, and the ruling requires the
+  // no-flag run to stay byte-identical.
+  ...(PRESET_ID ? { presetId: SOAK_PRESET.id } : {}),
   seed: SEED,
   years: YEARS,
   settlements: SETTLEMENTS,

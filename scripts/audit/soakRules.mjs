@@ -94,6 +94,51 @@ export function seasonsOverride(seasons) {
   return {};
 }
 
+/** The composition base a soak takes when `--preset` is absent — the historical literal. */
+export const SOAK_DEFAULT_PRESET_ID = 'full_simulation';
+
+/**
+ * ⛔⛔ THE PRESET SEAM (L-PROBE-KIT's STOP, chair ruling 2026-09-05).
+ *
+ * THE DEFECT THIS CLOSES. `whole-world-soak.mjs` composed from
+ * `SIMULATION_RULE_PRESETS.full_simulation.rules` and nothing else, so the only way to
+ * soak a DIFFERENT shipped preset was `--rules-json`, which is an OVERLAY: it is spread
+ * on top of full_simulation, so every full_simulation opt-in key the target preset does
+ * not name STAYS LIT. Measured at this base — the count of full_simulation keys absent
+ * from each preset's own table, all of which leaked:
+ *
+ *     quiet_local 33 · realistic_regional 33 · narrative_campaign 33 · static_campaign 34
+ *     living_realm 15 · dramatic_campaign 14 · full_simulation 0
+ *
+ * So an L-PROBE receipt could not name the preset it certified: it certified
+ * full_simulation wearing another preset's name. This resolver makes the preset the
+ * COMPOSITION BASE instead of an overlay, which is the only shape under which
+ * `composeSoakRules`'s output key set equals the preset's own key set.
+ *
+ * ⚠ THE REGISTRY IS PASSED IN, NEVER IMPORTED. This module is on the `scripts/audit`
+ * side of the engine/telemetry wall for the reason the header states, and its purity
+ * contract says callers do the I/O and the reads. `whole-world-soak.mjs` already imports
+ * `SIMULATION_RULE_PRESETS` legitimately; it hands the table here.
+ *
+ * ⛔ FAIL-CLOSED ON AN ABSENT REGISTRY. An unknown id must never fall through to
+ * full_simulation — that is precisely the silent substitution this seam exists to end —
+ * so a caller that supplies no usable registry is REFUSED by `soakInvocationRefusals`
+ * before this is ever reached, and this function throws rather than guessing.
+ *
+ * @param {{presetId?: string, presets: Record<string, {rules: Record<string, unknown>}>}} input
+ * @returns {{id: string, rules: Record<string, unknown>}}
+ */
+export function resolveSoakPreset({ presetId = '', presets }) {
+  const id = String(presetId || '') || SOAK_DEFAULT_PRESET_ID;
+  const entry = presets && Object.prototype.hasOwnProperty.call(presets, id)
+    ? presets[id]
+    : null;
+  if (!entry || !entry.rules || typeof entry.rules !== 'object') {
+    throw new Error(`resolveSoakPreset: "${id}" is not a preset in the supplied registry.`);
+  }
+  return { id, rules: entry.rules };
+}
+
 /**
  * ⛔⛔ THE SINGLE HIGHEST-RISK RULE IN THE HARNESS (charter §0; annex SK.M1).
  *
@@ -237,7 +282,8 @@ export function soakProperties({ failures, seedDivergenceExecuted }) {
  * some and forget others. Returns the empty array when the invocation is lawful.
  *
  * @param {{skipDivergence?: boolean, caseId?: string, checkpointEvery?: string|number|null,
- *          restoreFrom?: string}} invocation
+ *          restoreFrom?: string, preset?: string, rulesJson?: string,
+ *          knownPresets?: string[]|null}} invocation
  * @returns {string[]}
  */
 export function soakInvocationRefusals(invocation = {}) {
@@ -246,8 +292,37 @@ export function soakInvocationRefusals(invocation = {}) {
     caseId = '',
     checkpointEvery = null,
     restoreFrom = '',
+    preset = '',
+    rulesJson = '',
+    knownPresets = null,
   } = invocation;
   const refusals = [];
+
+  if (preset && rulesJson) {
+    refusals.push(
+      'REFUSED: --preset with --rules-json. --preset REPLACES the composition base; '
+      + '--rules-json is an OVERLAY spread on top of it. Accepting both would leave a '
+      + 'receipt unable to say which document decided any given key, which is the exact '
+      + 'ambiguity --preset exists to end. Pick one. (--lighting stays composable with '
+      + '--preset on purpose: it lights NAMED keys on a stated base, and the flag sweep '
+      + 'needs that.)',
+    );
+  }
+  // ⛔ FAIL-CLOSED, and this arm is why the registry is a required companion rather than
+  // an optional hint: without it the unknown-id check below could not fire at all, and a
+  // typo'd preset would silently certify whatever the resolver defaulted to.
+  if (preset && !(Array.isArray(knownPresets) && knownPresets.length > 0)) {
+    refusals.push(
+      `REFUSED: --preset ${JSON.stringify(preset)} was supplied without a preset registry `
+      + 'to check it against. A preset id that nothing can validate is a soak that cannot '
+      + 'name what it certified.',
+    );
+  } else if (preset && !knownPresets.includes(preset)) {
+    refusals.push(
+      `REFUSED: --preset ${JSON.stringify(preset)} is not a shipped simulation preset. `
+      + `Known presets: ${[...knownPresets].sort().join(', ')}.`,
+    );
+  }
 
   if (skipDivergence && caseId) {
     refusals.push(

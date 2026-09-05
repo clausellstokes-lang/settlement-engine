@@ -17,6 +17,9 @@
  *      ADVANCE-EPOCH seam, which is the same subject one turn on: what a run may CLAIM,
  *      and what it must THREAD before it is allowed to run at all
  *   7  the §180.3a address-chain instrument, and the deep key census that settles SK.U1
+ *   8  the --preset seam: the composition BASE is the preset itself, so the composed key
+ *      set is that preset's own key set and nothing leaks; the no-flag default is
+ *      full_simulation unmoved; and the two refusals fire
  */
 
 import { describe, expect, it } from 'vitest';
@@ -32,13 +35,16 @@ import {
   collectUndefinedKeyPaths,
   composeSoakRules,
   deepKeyCensus,
+  SOAK_DEFAULT_PRESET_ID,
   parseLightingOverlay,
   replantUndefinedKeys,
+  resolveSoakPreset,
   seasonsOverride,
   soakAdvanceEpoch,
   soakInvocationRefusals,
   soakProperties,
 } from '../../scripts/audit/soakRules.mjs';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { measureAddressChain } from '../../scripts/audit/behavioral-observation.mjs';
 import {
   DEFAULT_SIMULATION_RULES,
@@ -342,5 +348,104 @@ describe("the soak script's extracted seams", () => {
       if (!key.endsWith('RateMilli')) continue;
       expect(Number.isInteger(value), `${key} is not an integer`).toBe(true);
     }
+  });
+
+  it('ARM 8 — --preset is the composition BASE, so no full_simulation key leaks into another preset', () => {
+    const ids = Object.keys(SIMULATION_RULE_PRESETS);
+    // NON-VACUITY FIRST: the registry must actually hold the seven shipped presets, or
+    // every loop below would pass over an empty set and say nothing.
+    expect(ids.length).toBe(7);
+    expect([...ids].sort()).toEqual([
+      'dramatic_campaign', 'full_simulation', 'living_realm', 'narrative_campaign',
+      'quiet_local', 'realistic_regional', 'static_campaign',
+    ]);
+
+    // ⭐ THE DEFECT, RE-DERIVED RATHER THAN QUOTED. Before --preset the only seam was
+    // --rules-json, an OVERLAY on full_simulation: every full_simulation key the target
+    // preset does not name stayed lit. These are the leak counts that made an L-PROBE
+    // receipt unable to name what it certified.
+    const fullKeys = Object.keys(SIMULATION_RULE_PRESETS.full_simulation.rules);
+    const leakedUnderOverlay = Object.fromEntries(ids.map((id) => {
+      const own = new Set(Object.keys(SIMULATION_RULE_PRESETS[id].rules));
+      return [id, fullKeys.filter((key) => !own.has(key)).length];
+    }));
+    expect(leakedUnderOverlay).toEqual({
+      quiet_local: 33,
+      realistic_regional: 33,
+      narrative_campaign: 33,
+      static_campaign: 34,
+      living_realm: 15,
+      dramatic_campaign: 14,
+      full_simulation: 0,
+    });
+
+    // THE CURE: resolve, then compose FROM the resolved table. The composed key set is
+    // the preset's own key set — zero leaked keys — for every one of the seven.
+    for (const id of ids) {
+      const resolved = resolveSoakPreset({ presetId: id, presets: SIMULATION_RULE_PRESETS });
+      expect(resolved.id).toBe(id);
+      const { fullRules } = composeSoakRules({
+        preset: resolved.rules,
+        seasons: 'preset',
+        overlay: {},
+      });
+      expect(fullRules, `--preset ${id} did not compose its own table`)
+        .toEqual(SIMULATION_RULE_PRESETS[id].rules);
+      const leaked = fullKeys.filter((key) => !Object.prototype.hasOwnProperty.call(fullRules, key));
+      expect(
+        Object.keys(fullRules).filter((key) => !Object.prototype.hasOwnProperty.call(SIMULATION_RULE_PRESETS[id].rules, key)),
+        `--preset ${id} composed a key its own table does not name`,
+      ).toEqual([]);
+      // The leak the OLD seam had is exactly the set this preset does not name; under
+      // --preset those keys are ABSENT rather than inherited-lit.
+      expect(leaked.length).toBe(leakedUnderOverlay[id]);
+    }
+
+    // THE DEFAULT IS UNMOVED. No flag ⇒ full_simulation, byte-identical to the captured
+    // pre-change golden ARM 5 pins, so the no-flag receipt cannot move.
+    const byDefault = resolveSoakPreset({ presetId: '', presets: SIMULATION_RULE_PRESETS });
+    expect(byDefault.id).toBe(SOAK_DEFAULT_PRESET_ID);
+    expect(byDefault.id).toBe('full_simulation');
+    expect(byDefault.rules).toBe(PRESET);
+    expect(composeSoakRules({ preset: byDefault.rules, seasons: 'preset', overlay: {} }).fullRules)
+      .toEqual(BASELINE.seasons.preset.fullRules);
+
+    // THE REFUSALS, each by its own cause. A preset with no registry to check it against
+    // is refused too — otherwise the unknown-id arm could never fire and would be a
+    // guard that cannot fail.
+    expect(soakInvocationRefusals({ preset: 'quiet_local', knownPresets: ids })).toEqual([]);
+    const both = soakInvocationRefusals({
+      preset: 'quiet_local', rulesJson: '/tmp/rules.json', knownPresets: ids,
+    });
+    expect(both.length).toBe(1);
+    expect(both[0]).toContain('--preset with --rules-json');
+    const unknown = soakInvocationRefusals({ preset: 'quiet-local', knownPresets: ids });
+    expect(unknown.length).toBe(1);
+    expect(unknown[0]).toContain('is not a shipped simulation preset');
+    const unchecked = soakInvocationRefusals({ preset: 'quiet_local' });
+    expect(unchecked.length).toBe(1);
+    expect(unchecked[0]).toContain('without a preset registry');
+    // No --preset ⇒ none of the three arms speaks, so the historical invocation is
+    // untouched.
+    expect(soakInvocationRefusals({ rulesJson: '/tmp/rules.json' })).toEqual([]);
+
+    // The resolver itself fail-closes rather than substituting the default.
+    expect(() => resolveSoakPreset({ presetId: 'nope', presets: SIMULATION_RULE_PRESETS }))
+      .toThrow(/not a preset in the supplied registry/);
+
+    // THE SCRIPT ACTUALLY USES IT — the seam is worthless if whole-world-soak.mjs still
+    // reaches past it to the literal. Source-checked, because importing that file runs a
+    // soak (§145.2).
+    const soakSource = readFileSync(join(ROOT, 'scripts/audit/whole-world-soak.mjs'), 'utf8');
+    // ANCHORED: the composition line the seam installs is the liveness sibling, so a
+    // renamed or unreadable source reds on the anchor instead of passing the exclusion.
+    expectAbsentWithAnchor(
+      soakSource,
+      'preset: SIMULATION_RULE_PRESETS.full_simulation.rules',
+      'preset: SOAK_PRESET.rules',
+      'the soak composes from the resolved preset, never the full_simulation literal',
+    );
+    expect(soakSource).toContain("const PRESET_ID = String(arg('preset', ''));");
+    expect(soakSource).toContain('knownPresets: Object.keys(SIMULATION_RULE_PRESETS)');
   });
 });
