@@ -8,6 +8,21 @@
  *   DS-ECO-8  LADDER › the prosperity rung read on its own
  *   DS-ECO-2  Economics › the food and season tiles
  *   DS-ECO-9  LADDER › the food-security rung, and the two blockade states
+ *   DS-ECO-12 Economics › the commercial profile — how the town earns, and what it trades
+ *
+ * ── DS-ECO-12: THREE LENSES AT ONE POSITION (the DS-POW-1 shape, not an exception) ────
+ * DS-ECO-12 is one block over one record — `economicState`'s commercial identity — read
+ * through three lenses: the INCOME CONCENTRATION, the CRIMINAL LINE, and the OUTWARD /
+ * INWARD trade read. One position draws all three, because the C3 law is one SENTENCE
+ * RUNG per block per page-set and a second mount would be the same block speaking twice.
+ * `power.criminalUnderside` already draws three lenses at one position for exactly this
+ * reason; this is that shape, not a new one.
+ *
+ * ⚠ THE CRIMINAL LENS IS `dm-only` IN THE CORPUS, ALL FIVE VARIANTS. It therefore draws
+ * NOTHING on a player's page, by law 2 of the kernel, and that is the intended reading
+ * rather than a dead lens: a player's dossier must be byte-identical over a town with an
+ * underworld and a town without one. It reaches a reader through the DM's own audience,
+ * which the caller supplies — so a desk called with no audience can never draw it.
  *
  * ── WHAT A DESK IS RESPONSIBLE FOR ───────────────────────────────────────────────────
  *
@@ -61,11 +76,21 @@ const CORPUS = /** @type {import('./stateProseKernel.js').StateProseCorpus} */ (
  * @property {{blockaded?: unknown, blockadeBypass?: unknown}|null} [stockpile]
  */
 /**
+ * @typedef {object} IncomeSourceView
+ * @property {unknown} [percentage]
+ * @property {unknown} [isCriminal]
+ */
+/**
  * @typedef {object} EconomicStateView
  * @property {string|{tier?: string}} [prosperity]
  * @property {string} [tradeAccess]
  * @property {string} [economicComplexity]
  * @property {FoodSecurityView|null} [foodSecurity]
+ * @property {ReadonlyArray<IncomeSourceView>} [incomeSources]
+ * @property {ReadonlyArray<unknown>} [primaryExports]
+ * @property {ReadonlyArray<unknown>} [primaryImports]
+ * @property {ReadonlyArray<unknown>} [localProduction]
+ * @property {unknown} [isEntrepot]
  */
 /**
  * @typedef {object} EconomyDeskSettlement
@@ -121,6 +146,7 @@ export const SLOT_FILL_SHAPES = Object.freeze({
   access: 'bare-common',
   complexity: 'bare-common',
   season: 'bare-common',
+  good: 'bare-common',
 });
 
 /**
@@ -245,6 +271,159 @@ export function granaryPoolKey(granaryOutlook) {
 }
 
 /**
+ * DS-ECO-12's income-concentration bands.
+ *
+ * JUDGMENT (vetoable). The annex names the three states in words — "one source carries
+ * the town", "two or three sources between them", "a broad spread, no leader" — and
+ * leaves the cut to the implementer. The cut here reads the LEADER'S SHARE, because that
+ * is what every variant in the three pools is actually about: C1's ledger line says "well
+ * past half", C2's says "no one of them could carry the town alone", C3's says "nothing
+ * earns a real portion of the whole". Say "veto" to move either number.
+ */
+const SOLE_EARNER_FROM = 50;
+const LEADER_FROM = 20;
+
+/** @param {unknown} value @returns {number} */
+function share(value) {
+  const n = Number(value);
+  return Number.isFinite(n) ? n : 0;
+}
+
+/**
+ * DS-ECO-12 lens A — how concentrated the town's earnings are. Null on a settlement with
+ * no income roster at all: an unrecorded income mix is silence, not "a broad spread",
+ * which would be a fail-soft default wearing a reading's clothes.
+ * @param {ReadonlyArray<{percentage?: unknown, isCriminal?: unknown}>|null|undefined} incomeSources
+ * @returns {string|null}
+ */
+export function incomeMixPoolKey(incomeSources) {
+  if (!Array.isArray(incomeSources) || incomeSources.length === 0) return null;
+  const leader = incomeSources.reduce((best, row) => Math.max(best, share(row?.percentage)), 0);
+  if (leader >= SOLE_EARNER_FROM) return 'INCOME MIX: one source carries the town';
+  if (leader >= LEADER_FROM) return 'INCOME MIX: two or three sources between them';
+  return 'INCOME MIX: a broad spread, no leader';
+}
+
+/**
+ * DS-ECO-12 lens B — the criminal line, when the roster carries one.
+ *
+ * Keyed on the record's own `isCriminal` FLAG, never on the source LABEL. The generator
+ * spells that line five different ways ("Criminal Syndicate Revenue", "Thieves' Guild
+ * Revenue", "Smuggling Network Revenue", "Shadow Economy (untaxed)", "Black Market
+ * Revenue"), so a label route would drop four of five and do it without an error
+ * anywhere — the label trap, one layer up from the value.
+ *
+ * "LEADS" means the criminal line is the largest single earner, which is what the pool's
+ * own variants say ("The largest single earner at {settlement} is the one that is not
+ * written down"). A tie is NOT a lead: the strict comparison is deliberate, because a
+ * criminal line level with a lawful one is the "present" reading, not the "leads" one.
+ * @param {ReadonlyArray<{percentage?: unknown, isCriminal?: unknown}>|null|undefined} incomeSources
+ * @returns {string|null}
+ */
+export function criminalIncomePoolKey(incomeSources) {
+  if (!Array.isArray(incomeSources)) return null;
+  const criminal = incomeSources.filter((row) => row?.isCriminal);
+  if (criminal.length === 0) return null;
+  const dirtiest = criminal.reduce((best, row) => Math.max(best, share(row?.percentage)), 0);
+  const cleanest = incomeSources
+    .filter((row) => !row?.isCriminal)
+    .reduce((best, row) => Math.max(best, share(row?.percentage)), 0);
+  return dirtiest > cleanest
+    ? 'INCOME MIX: the criminal line leads'
+    : 'INCOME MIX: a criminal line is present';
+}
+
+/**
+ * DS-ECO-12 lens C — the OUTWARD / INWARD read, as a total partition of the
+ * (exports, imports) cross with the entrepôt override on top.
+ *
+ *   entrepôt with transit goods marked   → the transit pool
+ *   nothing out, something in            → imports only, nothing outward
+ *   nothing out, nothing in              → no significant exports
+ *   something out, something in          → both present
+ *   something out, nothing in            → local production listed, IF there is local
+ *                                          production to point at
+ *
+ * THE ONE HOLE, DECLARED RATHER THAN FILLED. A town that exports, imports nothing and
+ * lists no local production has NO pool in this block, and this returns null. The corpus
+ * authored five states and that is the sixth; routing it into "local production listed"
+ * would print "a good portion of what the town consumes is made inside its own walls"
+ * over a settlement with no recorded local production, which is a sentence with no
+ * evidence under it. Silence is R-DST-K and is the true statement here.
+ *
+ * The transit marker is the generator's own ` (transit)` suffix
+ * (`economicState.js` builds it), not a re-derivation of entrepôt status from the route.
+ * @param {{primaryExports?: unknown, primaryImports?: unknown, localProduction?: unknown,
+ *   isEntrepot?: unknown}|null|undefined} eco
+ * @returns {string|null}
+ */
+export function tradeProfilePoolKey(eco) {
+  // NO RECORD IS NOT AN EMPTY RECORD, and the difference is the whole of law 2. A
+  // settlement whose economicState carries none of the three trade rosters has not been
+  // measured as trading nothing — it has not been measured. Reading that as "no
+  // significant exports" would print a confident sentence about a town off the back of an
+  // absent field, which is the fail-soft default this subsystem exists to refuse. An
+  // EMPTY array is a real reading and keeps its pool.
+  if (!Array.isArray(eco?.primaryExports) && !Array.isArray(eco?.primaryImports)
+    && !Array.isArray(eco?.localProduction)) return null;
+  const exports_ = Array.isArray(eco?.primaryExports) ? eco.primaryExports : [];
+  const imports_ = Array.isArray(eco?.primaryImports) ? eco.primaryImports : [];
+  const local = Array.isArray(eco?.localProduction) ? eco.localProduction : [];
+  const transit = exports_.some((good) => typeof good === 'string' && good.includes('(transit)'));
+  if (eco?.isEntrepot && transit) {
+    return 'TRADE PROFILE: isEntrepot, transit goods marked among the exports';
+  }
+  if (exports_.length === 0) {
+    return imports_.length > 0
+      ? 'TRADE PROFILE: imports only, nothing outward'
+      : 'TRADE PROFILE: no significant exports';
+  }
+  if (imports_.length > 0) return 'TRADE PROFILE: exports and imports both present';
+  return local.length > 0 ? 'TRADE PROFILE: local production listed' : null;
+}
+
+/**
+ * One DS-ECO-12 lens as a rung, or NOTHING.
+ *
+ * A sentence-less rung is NULL here, and that is a departure from the file's other four
+ * surfaces rather than an inconsistency. `legibilityRung`'s asymmetry — "a rung with no
+ * sentence is still a rung" — is earned by the glance and the detail standing on their
+ * own, and the prosperity header has both. These three lenses have NEITHER: the position
+ * is a paragraph under a heading the page already prints, so a rung whose corpus went
+ * silent has nothing at any depth, and handing the component an object that renders
+ * nothing invites it to render an empty paragraph. Silence is R-DST-K, and `null` is how
+ * this subsystem spells it.
+ *
+ * This is also what keeps the criminal lens honest on a player's page: the pool's five
+ * variants are all `dm-only`, the kernel returns null for the player audience, and this
+ * returns null rather than a hollow rung a caller could mistake for a covert seam.
+ * @param {{blockId: string, poolKey: string, angle: string, text: string}|null} line
+ * @returns {object|null}
+ */
+function commercialRung(line) {
+  return line ? legibilityRung('', line, []) : null;
+}
+
+/**
+ * The `{good}` fill: the town's own leading export as a BARE noun.
+ *
+ * The transit suffix is stripped because a transit good is not the town's own trade, and
+ * the seam says "sends {good} out" — so the fill is taken from the first export the
+ * generator did NOT mark as passing through. Everything else is the shared bare-common
+ * refusal: an export the generator spelled with a capital, a digit, an em dash or a
+ * snake_case token is not a noun phrase, so the slot goes unfilled and anchored liveness
+ * drops the one variant that names it rather than rendering broken English.
+ * @param {unknown} exports_
+ * @returns {string|undefined}
+ */
+export function leadingGoodNoun(exports_) {
+  if (!Array.isArray(exports_)) return undefined;
+  const own = exports_.find((good) => typeof good === 'string' && good !== ''
+    && !good.includes('(transit)'));
+  return typeof own === 'string' ? bareCommonFill(own.trim()) : undefined;
+}
+
+/**
  * THE DESK. Returns one legibility rung per surface, or null where the surface itself
  * does not render.
  *
@@ -260,7 +439,7 @@ export function granaryPoolKey(granaryOutlook) {
  * promised a record it is not, and the first consumer to read `.sentence` off it was
  * convicted for it. A key that lies about its own shape is a defect at the seam, not at
  * the call site.
- * @returns {Readonly<{prosperityHeader: object|null, prosperityRung: object|null, foodTile: object|null, granaryTile: object|null, foodSecurityRung: object|null}>}
+ * @returns {Readonly<{prosperityHeader: object|null, prosperityRung: object|null, foodTile: object|null, granaryTile: object|null, foodSecurityRung: object|null, incomeMix: object|null, criminalLine: object|null, tradeProfile: object|null}>}
  */
 export function economyStateProse(settlement, readings = {}, options = {}) {
   const eco = settlement?.economicState || {};
@@ -285,6 +464,18 @@ export function economyStateProse(settlement, readings = {}, options = {}) {
     access: ACCESS_NOUN[access],
     complexity: bareCommonFill(complexityDisplay),
     season: bareCommonFill(text(granary?.season)),
+    good: leadingGoodNoun(eco.primaryExports),
+    // `{faction}` IS DELIBERATELY UNFILLED, and this is the finding rather than an
+    // omission. DS-ECO-12's one criminal `counterforce` variant names it, and the acting
+    // party there is a criminal organisation — but the raw settlement's factions carry
+    // `{faction, power, desc}` and NO archetype: `archetype` exists only on the DERIVED
+    // FactionProfile that `deriveFactionProfile` builds. A desk never derives what a
+    // canonical reader owns, and reading `.archetype` off the raw roster would be a read
+    // of a key no writer produces — the reader-with-no-writer defect, which is removed
+    // rather than shipped. Filling it from the income LABEL instead ("Thieves' Guild
+    // Revenue") would name a revenue LINE where the sentence names a HOUSE: the label
+    // trap, one layer up. So the slot stays empty, anchored liveness drops that single
+    // variant, and its pool keeps 2 of 3 — MEASURED in the desk test, not assumed.
   };
 
   /** @param {string} blockId @param {string|null} poolKey */
@@ -311,6 +502,9 @@ export function economyStateProse(settlement, readings = {}, options = {}) {
   const foodKey = foodTilePoolKey(foodBalance);
   const granaryKey = granaryPoolKey(granary);
   const securityKey = foodSecurityPoolKey(eco.foodSecurity?.label, eco.foodSecurity?.stockpile);
+  const mixKey = incomeMixPoolKey(eco.incomeSources);
+  const crimeKey = criminalIncomePoolKey(eco.incomeSources);
+  const tradeKey = tradeProfilePoolKey(eco);
 
   return Object.freeze({
     prosperityHeader: headerKey
@@ -331,5 +525,14 @@ export function economyStateProse(settlement, readings = {}, options = {}) {
       ? legibilityRung(text(eco.foodSecurity?.label) || securityKey,
         line('DS-ECO-9', securityKey), [])
       : null,
+    // THE COMMERCIAL PROFILE — three lenses over one record, drawn at ONE position. The
+    // GLANCE is empty on all three on purpose: the position is a paragraph under a
+    // section heading the page already prints, not a band tile, and `rungSpeaks` is
+    // satisfied by the sentence. The detail rows stay with the bars and the chips the
+    // section already renders; a rung that repeated them would be the page saying one
+    // fact twice at one position.
+    incomeMix: commercialRung(line('DS-ECO-12', mixKey)),
+    criminalLine: commercialRung(line('DS-ECO-12', crimeKey)),
+    tradeProfile: commercialRung(line('DS-ECO-12', tradeKey)),
   });
 }
