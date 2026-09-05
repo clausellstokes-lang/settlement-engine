@@ -1,13 +1,13 @@
 # LANE-QUEUE — the owner's cap is FOUR running agents of any kind (read-only and workflow agents count)
-Updated 2026-09-05 by the Fable chair. Dispatch strictly in this order as slots free; every dispatch is `model: "opus"`.
+Updated 2026-09-05 by the Fable chair (after §897: product fd8b6df00, ledger c84edceb4). Dispatch strictly in this order as slots free; every dispatch is `model: "opus"`.
 
 ## RUNNING (4/4)
 | lane | kind | dock / base | brief | started |
 |---|---|---|---|---|
 | ~~LIGHT-PLAN~~ DONE → refs/preserve/light-plan-2026-09-05 | | | | |
-| PROSE-REBASE | build (lighting POSITION 0) | lanePROSE @ df7cdd37e | briefs/brief-PROSE-REBASE.md | 09-05 |
+| PROSE-REBASE | build (lighting POSITION 0) | lanePROSE @ df7cdd37e → replay onto fd8b6df00 | briefs/brief-PROSE-REBASE.md | 09-05 |
 | ~~WARMS-CAR0~~ DONE → refs/preserve/warms-car0-2026-09-05; volume landed §896.2 | | | | |
-| CLAMP-W2 | build (6 files) | laneCLAMPW2 @ df7cdd37e | briefs/brief-CLAMP-W2.md | 09-05 |
+| CLAMP-W2 | build (6 files) | laneCLAMPW2 @ df7cdd37e → replay onto fd8b6df00 | briefs/brief-CLAMP-W2.md | 09-05 |
 | DESK-WARFAITH | build | laneWARFAITH @ 940d161ca | briefs/brief-DESK-WARFAITH.md | 09-05 |
 | DESK-GEN2 | build (3–5 cars) | laneGEN2 @ 940d161ca | briefs/brief-DESK-GEN2.md | 09-05 |
 
@@ -27,5 +27,5 @@ Updated 2026-09-05 by the Fable chair. Dispatch strictly in this order as slots 
 10. **HORIZON-B6 / the CAPACITY evidence** — BRIEFED (`briefs/brief-HORIZON-B6.md`): a ~2.3 h soak, ONLY when no gate runs; unblocks `demographicsEnabled` inside L-DEFAULT.
 
 ## CHAIR-OWNED, NOT LANES
-ANCHORS register car → gate → chair-verify → CAS → §897 (kit pre-built) · replay + land the desk consist after
+~~ANCHORS → §897~~ LANDED · replay + land the desk consist after
 OSR-SCHEMA17 · every register act · every ceiling ruling (clamp: ONCE, at the final wave) · the words of DESK-7 and ENC-5.
