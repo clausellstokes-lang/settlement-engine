@@ -4,7 +4,7 @@
 |---|---|---|---|
 | laneINTEG-tree | 90702c3e9 | 23 (the desk consist) + 3 (OSR-SCHEMA17: corpus pass, rung 17, genesis re-freeze) = 26 | `osr-schema17-2026-09-05` = a2af55cde (over `train-desk-integrated-2026-09-04` = 940d161ca) |
 | laneWARFAITH | 940d161ca | 1 | `desk-warfaith-2026-09-05` = 7dba5508b |
-| laneGEN2 | 940d161ca | 4 | `desk-gen2-2026-09-05` = a4ce9f80f |
+| laneGEN2 | 940d161ca | 9 (GEN2 4 + GEN3 5) | `desk-gen3-2026-09-05` = c48d24ba5 |
 | laneDEF2 | 940d161ca | 4 | `desk-def2-2026-09-05` = 468663f56 |
 | laneECON2 | 940d161ca | 1 | `desk-econ2-2026-09-05` = 333b1a83c |
 | laneDESK9 | 940d161ca | 2 | `desk-9-2026-09-05` = 0b3703f64 |
@@ -41,6 +41,8 @@ NEW schema rung (17); the desk consist's OSR baseline is then re-frozen at the c
 - A residue row for the chair/owner: the chance-meeting approach direction ties on `codepoint(target.nid)` — town-name spelling decides who offered on a tie (ENC-4c measured 89/89); a seeded tie-break is generation-side.
 - `{timeband_age}` is DS-CND-1's slot (not DS-STR-2's); no fill — DESK-TIMEBAND's refusal is pinned. Finding 5: the chair's four duration-free variants were REFUTED (DESK-TIMEBAND-2): an append re-indexes the seeded draw, three carry an unlicensed duration, two arms have no producer. RULED: a NEW POOL KEY carrying the band (post-§900; the chair rewrites two sentences for the two arms that exist); T5 landed as the instrument; the `anchored === undefined` darkness stays closed display-side and is an OWNER row producer-side; the adverbial sixth band is REFUSED (not display-local).
 - Pre-existing at a2af55cde: `check-writer-reach.mjs` exit 1 (`forcedByConfig on stress`/`stressors` dark, unregistered) — absorbed by the §900 writer-reach `--write` if honest, else a fix; the unused `STRESS_TYPE_MAP` import in `stressorsStateProse.js:51` — a fix car.
+- DS-GEN-15's two 0..1 cuts: a chair TUNING ruling (an owner-unsigned `*_TUNING` table in the estate's form, then a lane lights it) — post-§900.
+- `{institution}` for STALLED: the annex's own ruling (`processingInstitutions[]` filtered to a singular house) — LANDED by GEN3; the chair's category mechanism is withdrawn.
 - `{founder}`: the annex re-declared to the producer's phrase class (`rulings/RULING-FOUNDER-SLOT.md`); the name producer is an OWNER row.
 - SEAT-78's coupling row: deploymentReturn.js → irregularForce.js (INTERIOR→WAR) in the couplingInclusion registry.
 - ENC-4b car 4's pantheon conflict: PANTHEON-ROSTER (laneROSTER:ec1b5e3e9, 3 cars) made A5 read `tests/helpers/kindRegistryRoster.js`; resolve the conflict by putting the two-kind figures (registries 12, allRows 115, routedTokens 381, unvoiced 274, difference 8, small families + CHANCE_MEETING) INTO THE ROSTER, and the walker's four bound numerals follow by its executed equality; run `tests/scripts/baseStateCapsule.test.js` — the capsule parses the walker's source.
