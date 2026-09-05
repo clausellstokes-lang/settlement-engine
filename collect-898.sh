@@ -16,6 +16,7 @@ for f in docs/OWNER_DECISION_QUEUE.md docs/HANDOFF_CURRENT.md docs/FABLE_RETROVA
   [ "$(md5 -q $f)" = "$(git show HEAD:$f | md5 -q)" ] || { echo "ABORT: worktree $f differs from HEAD"; exit 1; }
 done
 [ -f "$SC/payload-898.json" ] || { echo "ABORT: payload-898.json missing"; exit 1; }
+[ -s "$SC/golden-shift.ledger.898.md" ] && grep -q 'THE SRC/ PROSE CAR' "$SC/golden-shift.ledger.898.md" || { echo "ABORT: the golden shift ledger file with the PROSE entry is missing"; exit 1; }
 git show HEAD:docs/FABLE_RETROVALIDATION_QUEUE.md > "$SC/frq.head.898"
 python3 "$SC/apply-892.py" "$SC/payload-898.json"
 echo "--- C0 scan ---"; LC_ALL=C grep -c $'[\x01-\x08\x0b\x0c\x0e-\x1f]' docs/OWNER_DECISION_QUEUE.md docs/HANDOFF_CURRENT.md "$SC/queue-898.md" || true
@@ -23,11 +24,12 @@ git show HEAD:docs/OWNER_DECISION_QUEUE.md > "$SC/odq.head.898"
 [ "$(git diff --no-index --numstat $SC/odq.head.898 docs/OWNER_DECISION_QUEUE.md | awk '{print $2}')" = "0" ] || { echo "ABORT: ledger deletions != 0"; exit 1; }
 [ "$(git diff --no-index --numstat $SC/frq.head.898 $SC/queue-898.md | awk '{print $2}')" = "0" ] || { echo "ABORT: queue deletions != 0"; exit 1; }
 echo "  ledger and queue are PURE APPENDS"
-SP="$SC" sh "$SC/chair-tools/chair-commit.sh" "$TIP" "$SC/msg-898.txt" docs/HANDOFF_CURRENT.md:docs/HANDOFF_CURRENT.md "$SC/queue-898.md:docs/FABLE_RETROVALIDATION_QUEUE.md"
+SP="$SC" sh "$SC/chair-tools/chair-commit.sh" "$TIP" "$SC/msg-898.txt" docs/HANDOFF_CURRENT.md:docs/HANDOFF_CURRENT.md "$SC/queue-898.md:docs/FABLE_RETROVALIDATION_QUEUE.md" "$SC/golden-shift.ledger.898.md:docs/GOLDEN_SHIFT_LEDGER.md"
 NEW=$(git rev-parse --short HEAD)
 echo "--- READ-BACK AT $NEW ---"; git show --stat --format='%h %s' HEAD | head -6
 echo "  ODQ §898 rows: $(git show HEAD:docs/OWNER_DECISION_QUEUE.md | grep -c '^§898 ')"
 echo "  FRQ R-rows: $(git show HEAD:docs/FABLE_RETROVALIDATION_QUEUE.md | grep -cE '^### R[0-9]+')  (new R-rows: $(git show HEAD:docs/FABLE_RETROVALIDATION_QUEUE.md | grep -cE '^### R[0-9]+ '))"
+echo "  GOLDEN_SHIFT_LEDGER entries at tip: $(git show HEAD:docs/GOLDEN_SHIFT_LEDGER.md | grep -c '^# GOLDEN SHIFT LEDGER') (prose entry present: $(git show HEAD:docs/GOLDEN_SHIFT_LEDGER.md | grep -c 'THE SRC/ PROSE CAR'))"
 echo "  seat trailer Fable (must be 1): $(git log -1 --format=%B | grep -c '^Seat: Fable 5.1 — validated$')"
 cp "$SC/queue-898.md" docs/FABLE_RETROVALIDATION_QUEUE.md
 echo "COLLECT_898_OK tip=$NEW"

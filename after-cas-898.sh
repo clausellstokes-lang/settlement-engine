@@ -22,6 +22,12 @@ git update-ref refs/preserve/landing-prose-2026-09-05 "$NEW"
 SHORT=$(git rev-parse --short "$NEW"); printf '%s' "$SHORT" > $SC/cas-898.sha
 echo "CAS OK: product=$SHORT · sealed landing-prose-2026-09-05 · cars since ca651d54b=$(git rev-list --count ca651d54b..claude/composite-r4)"
 sed -e "s/__CAS_SHA__/$SHORT/g" -e "s/__TESTS__/$TESTS/g" $SC/payload-898.template.json > $SC/payload-898.json
+# the declared-shift entry: fill the tip figures and append it to HEAD's GOLDEN_SHIFT_LEDGER.md (ledger branch) for the collect to map
+LT=$(python3 -c "import json;d=json.load(open('$D/tests/lint/.lighting-census-baseline.json'));print('/'.join(str(d[k]) for k in ('files','parked','credited','titles','suiteTitles')))")
+sed -e "s/__CAS_SHA__/$SHORT/g" -e "s/__TT_AFTER__/$TESTS/g" -e "s|__LIGHTING_TUPLE__|$LT|g" $SC/golden-shift-prose.draft.md > $SC/golden-shift-prose.final.md
+if grep -q '__[A-Z_]*__' $SC/golden-shift-prose.final.md; then echo "⛔ unfilled placeholder in the shift entry: $(grep -oE '__[A-Z_]+__' $SC/golden-shift-prose.final.md | sort -u | tr '\n' ' ')"; exit 1; fi
+{ git -C "$REPO" show review-fixes-2026-07-08:docs/GOLDEN_SHIFT_LEDGER.md; printf '\n\n---\n\n'; cat $SC/golden-shift-prose.final.md; } > $SC/golden-shift.ledger.898.md
+echo "golden shift ledger: $(git -C "$REPO" cat-file -s review-fixes-2026-07-08:docs/GOLDEN_SHIFT_LEDGER.md)B -> $(wc -c < $SC/golden-shift.ledger.898.md | tr -d ' ')B (the entry appended)"
 if grep -q '__' $SC/payload-898.json; then echo "⛔ unfilled placeholder in payload-898"; exit 1; fi
 sh $SC/collect-898.sh > $SC/collect-898.out 2>&1 || { tail -15 $SC/collect-898.out; echo "⛔ collect-898 failed — stop"; exit 1; }
 tail -8 $SC/collect-898.out

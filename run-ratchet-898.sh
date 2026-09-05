@@ -16,7 +16,7 @@ done
 echo "QUIET CONFIRMED after ${WAITED}s"
 echo "RATCHET_HEAD=$(git rev-parse HEAD)"
 echo "RATCHET_PORCELAIN_PRE=[$(git status --porcelain -uall | wc -l | tr -d ' ')]"
-echo "PREDICTED: __PREDICTION__ (derive EVERY figure before this runs — E4; totalTests is REFUSED in advance, this run is the derivation)"
+echo "PREDICTED: totalFiles 2468 UNCHANGED (the 3 prose cars add no test file; the register car adds none) · totalTests REFUSED as a figure — this run IS the derivation (expect a small move from the re-recorded fence and the voice arms turning green) · entries 6 -> 4 (the voiceMechanics Tier-2 TOTAL and per-file rows RETIRE after the refreeze; the two JSX rows, enforcement-claims and clampPrimitiveBaseline stay) · lighting: probe == register expected (no titles moved; the farmed probe re-checks at the tip) (derive EVERY figure before this runs — E4; totalTests is REFUSED in advance, this run is the derivation)"
 sh scripts/gate-mutex.sh --run -- node scripts/check-test-ratchet.mjs --update
 TRUE_EXIT=$?
 echo "TRUE_EXIT=$TRUE_EXIT"
