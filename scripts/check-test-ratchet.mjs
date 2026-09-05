@@ -124,6 +124,13 @@ const baselinePath = () => process.env.TEST_RATCHET_BASELINE
 export const SCOPE_FLOOR_RATIO = 0.9;
 /** The closed set of debt classes. A row outside it is not a considered decision. */
 export const DEBT_CLASSES = ['owner-gated', 'debt'];
+/**
+ * The closed set of MODE words (the default source gate is the empty argv). EXPORTED so a
+ * test claiming to cover "every mode" iterates the producer's own list instead of a hand
+ * copy that a fifth mode would silently escape — and so the allowed-modes help line below
+ * cannot drift from what the gate actually accepts.
+ */
+export const MODE_FLAGS = Object.freeze(['--update', '--bootstrap', '--verify-dist']);
 /** The statuses that mean "this test did not actually execute". */
 export const NON_RUN_STATUSES = ['pending', 'skipped', 'todo'];
 /** The source phase's one and only exclusion. */
@@ -748,13 +755,13 @@ export async function run(argv = []) {
   }
   const DRY = readOnly.dry;
   const FROM_LOG = readOnly.fromLog;
-  const allowedModes = new Set(['--update', '--bootstrap', '--verify-dist']);
+  const allowedModes = new Set(MODE_FLAGS);
   const unknown = readOnly.rest.filter((arg) => !allowedModes.has(arg));
   const selectedModes = readOnly.rest.filter((arg) => allowedModes.has(arg));
   if (unknown.length) {
     return fail([
       `[test-ratchet] unknown argument(s): ${unknown.join(', ')}`,
-      '  Allowed modes: default source gate, --update, --bootstrap, or --verify-dist.',
+      `  Allowed modes: default source gate, ${MODE_FLAGS.slice(0, -1).join(', ')}, or ${MODE_FLAGS.at(-1)}.`,
       '  Read-only flags: --dry (print what WOULD run, spawn nothing), --from-log <report.json>.',
     ]);
   }

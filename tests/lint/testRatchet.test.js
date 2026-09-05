@@ -42,7 +42,7 @@ import {
   runnerCommandOf, SOURCE_TEST_EXCLUDE, uncollectedOf, SCOPE_FLOOR_RATIO,
   classifyFailure, failureEvidenceOf, globalTestTimeoutOf, timeoutLiteralsOf,
   FAILURE_CLASSES, VITEST_DEFAULT_TEST_TIMEOUT,
-  MAGNITUDE_KINDS, measureMagnitude, magnitudeReportOf, parseReadOnlyArgs,
+  MAGNITUDE_KINDS, measureMagnitude, magnitudeReportOf, parseReadOnlyArgs, MODE_FLAGS,
 } from '../../scripts/check-test-ratchet.mjs';
 // DERIVED, never restated: the discharge below asserts that the rehearsal train still
 // reaches the migration whose cure retired the owner-gated rows. A literal here would go
@@ -1373,7 +1373,15 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
   });
 
   test('--dry is a PURE REPORTER: every mode, always exit 0, and --update writes nothing', () => {
-    for (const args of [[], ['--verify-dist'], ['--bootstrap'], ['--update']]) {
+    // ⛔ THE MODE LIST IS THE PRODUCER'S, NOT A HAND COPY. A title that says "every mode"
+    // and iterates a literal written here is exhaustive only until someone adds a fifth
+    // mode, at which point the claim silently narrows and nothing reds. MODE_FLAGS is the
+    // same array `allowedModes` is built from, so a new mode joins this loop the day it
+    // lands. (contractTestAntiVacuity Rule 2 is exactly this shape; it does not fire here
+    // only because the file is gated out for deriving from source — which is a reprieve,
+    // not a reason.)
+    expect(MODE_FLAGS.length, 'the mode roster emptied — this loop would prove nothing').toBeGreaterThan(0);
+    for (const args of [[], ...MODE_FLAGS.map((flag) => [flag])]) {
       const dry = run({
         entries: ENTRIES, suites: SUITES, args: [...args, '--dry'], captureRunner: true,
       });
@@ -1386,6 +1394,16 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
     const frozen = readFileSync(before.baselineFile, 'utf8');
     const upd = run({ entries: ENTRIES, suites: SUITES, args: ['--update', '--dry'] });
     expect(readFileSync(upd.baselineFile, 'utf8')).toBe(frozen);
+
+    // The roster is only the producer's list if the gate ACCEPTS every member of it: an
+    // entry the argv parser rejects would make the loop above drive a refusal path and
+    // still pass, since a refusal also exits non-zero... and --dry exits 0, so it would
+    // have reddened. Assert it directly rather than relying on that coincidence.
+    for (const flag of MODE_FLAGS) {
+      const accepted = run({ entries: ENTRIES, suites: SUITES, args: [flag, '--dry'] });
+      expect(accepted.status, `${flag} is in MODE_FLAGS but the gate refuses it: ${accepted.out}`).toBe(0);
+      expect(accepted.out).toContain(`mode:            ${flag}`);
+    }
   });
 
   test('--from-log reproduces the spawned-runner verdict EXACTLY, without spawning', () => {
