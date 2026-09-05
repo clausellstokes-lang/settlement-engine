@@ -70,6 +70,33 @@
  * `npm run test` stays a raw command on purpose: a burn lane needs the whole
  * failure list and the real reporter output, not the ratchet's verdict.
  *
+ * ── ⛔⛔ THE DEFAULT MODE RUNS THE WHOLE SUITE ───────────────────────────────
+ * SAY IT PLAINLY, BECAUSE THE ABSENCE OF `--update` READS AS "READ-ONLY" AND IS NOT:
+ * the bare invocation — and `--update`, `--bootstrap` and `--verify-dist` alike —
+ * SHELLS OUT TO `npx vitest run` (see `runnerCommandOf` and the `execSync` inside
+ * `run`). Not one of the four modes merely reads the census. A receipt telling the
+ * next lane this script is "read-only, no --update, therefore hold-safe" is WRONG,
+ * and one did: it would have broken a vitest hold (docket §899, finding 2).
+ *
+ * ⛔ UNDER A VITEST HOLD USE `--dry` OR `--from-log`. Both spawn NOTHING:
+ *
+ *   node scripts/check-test-ratchet.mjs --dry
+ *       Prints the exact runner argv that WOULD be spawned, the report path it would
+ *       be written to, the baseline path, and every ceiling the gate would judge
+ *       against — then exits 0 having spawned nothing and written nothing. It is a
+ *       PURE REPORTER: it combines with --update/--bootstrap/--verify-dist to show
+ *       that phase's argv, and it returns BEFORE any baseline write, so even
+ *       `--update --dry` re-freezes nothing.
+ *
+ *   node scripts/check-test-ratchet.mjs --from-log <report.json>
+ *       Computes the verdict from an ALREADY-CAPTURED `--reporter=json` report
+ *       instead of spawning a runner. Same census, same ceilings, same exit codes —
+ *       the report is the only thing that changes hands. Either spelling works:
+ *       `--from-log <path>` or `--from-log=<path>`.
+ *       ⛔ REFUSED with `--update`/`--bootstrap`. Those FREEZE a census, and the
+ *       header law above is "never freeze a census from a broken run"; a census
+ *       frozen from a file the CALLER supplies is not one this gate measured at all.
+ *
  * ⚠ THE REPORT IS ALWAYS WRITTEN OUTSIDE THE REPO, and always with the
  * `--outputFile=<path>` (equals-sign) spelling. Recorded hazard: a BARE `--json`
  * eats the NEXT POSITIONAL as its output path and silently overwrites that file
@@ -161,6 +188,62 @@ export function runnerCommandOf({ verifyDist = false, outputFile }) {
   const output = JSON.stringify(outputFile);
   if (verifyDist) return `npx vitest run tests/build/ --reporter=json --outputFile=${output}`;
   return `npx vitest run --exclude=${JSON.stringify(SOURCE_TEST_EXCLUDE)} --reporter=json --outputFile=${output}`;
+}
+
+/**
+ * Split the READ-ONLY flags out of argv, leaving the MODE words untouched.
+ *
+ * ⛔ EVERY EXISTING CALLER IS UNTOUCHED BY CONSTRUCTION, and that is the point of
+ * doing this in a separate pass rather than widening `allowedModes`: an argv carrying
+ * neither `--dry` nor `--from-log` comes back with `rest` equal to the argv that went
+ * in — same members, same order — plus `dry: false` and `fromLog: null`. So the
+ * unknown-argument refusal, the mode-exclusivity refusal and the mode selection all
+ * see exactly the bytes they saw before these flags existed. Widening `allowedModes`
+ * instead would have made `--dry --verify-dist` "two mutually exclusive modes"; these
+ * are MODIFIERS of a phase, not phases.
+ *
+ * `--from-log` takes a path in either spelling. A missing or flag-shaped value is an
+ * ERROR, never a silent default: a `--from-log` run that quietly fell back to spawning
+ * the suite would be the exact failure the flag exists to prevent.
+ *
+ * @param {string[]} argv
+ * @returns {{ dry: boolean, fromLog: string|null, rest: string[], error: string|null }}
+ */
+export function parseReadOnlyArgs(argv = []) {
+  /** @type {string[]} */
+  const rest = [];
+  let dry = false;
+  /** @type {string|null} */
+  let fromLog = null;
+  /** @type {string|null} */
+  let error = null;
+  const setLog = (value, spelling) => {
+    if (fromLog !== null) error ??= `--from-log was given twice (second: ${spelling})`;
+    else if (!value) error ??= `${spelling} needs a report path`;
+    else fromLog = value;
+  };
+  for (let i = 0; i < argv.length; i += 1) {
+    const arg = argv[i];
+    if (arg === '--dry') { dry = true; continue; }
+    if (arg === '--from-log') {
+      const next = argv[i + 1];
+      // A following flag is NOT a path. Consuming it would swallow the caller's mode
+      // word and run a phase they did not ask for.
+      if (next === undefined || next.startsWith('--')) {
+        error ??= `--from-log needs a report path (got ${next === undefined ? 'nothing' : JSON.stringify(next)})`;
+        continue;
+      }
+      setLog(next, '--from-log <path>');
+      i += 1;
+      continue;
+    }
+    if (arg.startsWith('--from-log=')) {
+      setLog(arg.slice('--from-log='.length), '--from-log=<path>');
+      continue;
+    }
+    rest.push(arg);
+  }
+  return { dry, fromLog, rest, error };
 }
 
 /**
@@ -653,13 +736,26 @@ const BOOTSTRAP_DOC = 'PER-TEST failure census for the source phase (all tests e
 export async function run(argv = []) {
   const BASELINE = baselinePath();
   const fail = (lines) => { console.error(lines.join('\n')); return 1; };
+  // The read-only flags are lifted out FIRST and are not modes; see parseReadOnlyArgs
+  // for why `rest` is byte-for-byte the old argv whenever neither flag is present.
+  const readOnly = parseReadOnlyArgs(argv);
+  if (readOnly.error) {
+    return fail([
+      `[test-ratchet] ${readOnly.error}`,
+      '  --from-log reads an ALREADY-CAPTURED `--reporter=json` report instead of spawning one:',
+      '    node scripts/check-test-ratchet.mjs --from-log /path/to/results.json',
+    ]);
+  }
+  const DRY = readOnly.dry;
+  const FROM_LOG = readOnly.fromLog;
   const allowedModes = new Set(['--update', '--bootstrap', '--verify-dist']);
-  const unknown = argv.filter((arg) => !allowedModes.has(arg));
-  const selectedModes = argv.filter((arg) => allowedModes.has(arg));
+  const unknown = readOnly.rest.filter((arg) => !allowedModes.has(arg));
+  const selectedModes = readOnly.rest.filter((arg) => allowedModes.has(arg));
   if (unknown.length) {
     return fail([
       `[test-ratchet] unknown argument(s): ${unknown.join(', ')}`,
       '  Allowed modes: default source gate, --update, --bootstrap, or --verify-dist.',
+      '  Read-only flags: --dry (print what WOULD run, spawn nothing), --from-log <report.json>.',
     ]);
   }
   if (selectedModes.length > 1) {
@@ -671,6 +767,90 @@ export async function run(argv = []) {
   const UPDATE = selectedModes[0] === '--update';
   const BOOTSTRAP = selectedModes[0] === '--bootstrap';
   const VERIFY_DIST = selectedModes[0] === '--verify-dist';
+
+  // ⛔ --from-log NEVER FEEDS A FREEZE. `--update` and `--bootstrap` WRITE the census.
+  // The header's law is that a census is never frozen from a broken run; a census frozen
+  // from a report the CALLER hands in is weaker still — this gate did not observe it, and
+  // cannot tell a stale report from a hand-edited one. The read-only flag therefore stops
+  // at the read-only surfaces, and the re-freeze keeps costing a real run.
+  if (FROM_LOG && (UPDATE || BOOTSTRAP)) {
+    return fail([
+      `[test-ratchet] --from-log is REFUSED with ${UPDATE ? '--update' : '--bootstrap'}: those FREEZE the census,`,
+      '  and a freeze is only ever taken from a run this gate observed itself.',
+      '  Use --from-log for the VERDICT; take a real run for the re-freeze.',
+    ]);
+  }
+
+  // ── --dry: say what WOULD run; spawn nothing, write nothing, ALWAYS exit 0 ──
+  // A PURE REPORTER by deliberate choice. It could have re-used the refusals below
+  // (a symlinked build-test root, a missing census) and exited non-zero on them, but a
+  // "what would this do" printer that can itself red is a printer people stop trusting
+  // and stop reaching for — and reaching for it under a hold is the whole point. Every
+  // such condition is REPORTED on its line instead, and the exit stays 0.
+  if (DRY) {
+    const outPlaceholder = path.join(os.tmpdir(), 'test-ratchet-<mkdtemp>', 'results.json');
+    const injected = process.env.TEST_RATCHET_RUN_CMD;
+    const mode = VERIFY_DIST ? '--verify-dist' : (UPDATE ? '--update' : (BOOTSTRAP ? '--bootstrap' : 'default source gate'));
+    const lines = [
+      '[test-ratchet] --dry — NOTHING WAS RUN, NOTHING WAS WRITTEN. This is what the selected mode WOULD do.',
+      `  mode:            ${mode}`,
+    ];
+    if (FROM_LOG) {
+      const resolved = path.resolve(FROM_LOG);
+      lines.push(
+        `  runner:          NONE — --from-log would read ${resolved}`,
+        `  that report:     ${fs.existsSync(resolved) ? 'present' : '⚠ ABSENT (the run would fail closed)'}`,
+      );
+    } else {
+      lines.push(
+        `  runner:          ${injected || runnerCommandOf({ verifyDist: VERIFY_DIST, outputFile: outPlaceholder })}`,
+        `  runner source:   ${injected ? 'TEST_RATCHET_RUN_CMD (the injected testability seam)' : 'runnerCommandOf() — ⛔ THE WHOLE VITEST SUITE'}`,
+        `  report path:     a fresh mkdtemp under ${os.tmpdir()}, as <dir>/results.json`,
+      );
+    }
+    if (VERIFY_DIST) {
+      let discovered;
+      try {
+        discovered = `${discoverBuildTestFiles().length} file(s) under tests/build/`;
+      } catch (error) {
+        discovered = `⚠ discovery WOULD REFUSE: ${error.message}`;
+      }
+      lines.push(`  strict corpus:   ${discovered}`);
+    }
+    lines.push(`  baseline:        ${BASELINE}`);
+    if (!fs.existsSync(BASELINE)) {
+      lines.push('  ceilings:        ⚠ NO BASELINE FILE — the run would refuse and name --bootstrap.');
+    } else {
+      let frozen = null;
+      try {
+        frozen = JSON.parse(fs.readFileSync(BASELINE, 'utf8'));
+      } catch (error) {
+        lines.push(`  ceilings:        ⚠ THE CENSUS IS UNPARSEABLE (${error.message}) — the run would throw.`);
+      }
+      if (frozen) {
+        const rows = Object.entries(frozen.entries || {});
+        const measures = rows.reduce((n, [, row]) => n + (Array.isArray(row.magnitude) ? row.magnitude.length : 0), 0);
+        const rowsWithMeasures = rows.filter(([, row]) => Array.isArray(row.magnitude) && row.magnitude.length).length;
+        lines.push(
+          `  frozen census:   ${rows.length} failing test(s), measured at ${frozen.measuredAtSha || 'unknown'}`,
+          `  totalTests:      ${frozen.totalTests ?? '(absent)'}`
+          + (frozen.totalTests ? ` — scope floor ${Math.floor(frozen.totalTests * SCOPE_FLOOR_RATIO)}; fewer reds` : ''),
+          `  totalFiles:      ${frozen.totalFiles ?? '(absent)'}`
+          + (frozen.totalFiles ? ` — scope floor ${Math.floor(frozen.totalFiles * SCOPE_FLOOR_RATIO)}; fewer reds` : ''),
+          `  skippedCeiling:  ${frozen.skippedCeiling ?? '(absent)'}`,
+          `  magnitude:       ${measures} measure(s) across ${rowsWithMeasures} banked row(s)`,
+          `  uncollected allowlist: ${Object.keys(frozen.uncollectedSuites || {}).length} suite(s)`,
+        );
+      }
+    }
+    lines.push(
+      '',
+      '  ⛔ WITHOUT --dry THIS SCRIPT SPAWNS THE RUNNER NAMED ABOVE. In every mode except',
+      '    --from-log that is the whole vitest suite, so the bare invocation is NOT hold-safe.',
+    );
+    console.log(lines.join('\n'));
+    return 0;
+  }
 
   let discoveredBuildFiles = [];
   if (VERIFY_DIST) {
@@ -694,29 +874,49 @@ export async function run(argv = []) {
   // vitest exits non-zero when tests fail; that is the NORMAL path here, so do
   // not let execSync throw us off it. The report goes to a temp dir OUTSIDE the
   // repo (see the header hazard note).
-  const TMP = fs.mkdtempSync(path.join(os.tmpdir(), 'test-ratchet-'));
-  const OUT = path.join(TMP, 'results.json');
+  //
+  // ⛔ THIS IS THE SPAWN. Everything below it is arithmetic over a report; everything
+  // above it is argv. Under `--from-log` the spawn is SKIPPED ENTIRELY — no child, no
+  // mkdtemp — and the caller's report takes the place of the one a run would have
+  // written. Nothing downstream can tell the difference, which is the whole design:
+  // one verdict implementation, two ways of obtaining the report it judges.
   let runnerExitedNonZero = false;
   let runnerOutput;
-  const runnerEnv = { ...process.env, TEST_RATCHET_OUTPUT_FILE: OUT };
-  if (VERIFY_DIST) runnerEnv.VERIFY_DIST = '1';
-  else delete runnerEnv.VERIFY_DIST;
-  try {
-    runnerOutput = execSync(
-      process.env.TEST_RATCHET_RUN_CMD
-        || runnerCommandOf({ verifyDist: VERIFY_DIST, outputFile: OUT }),
-      {
-        cwd: ROOT,
-        encoding: 'utf8',
-        stdio: ['ignore', 'pipe', 'pipe'],
-        maxBuffer: 256 * 1024 * 1024,
-        // The seam hands a fake runner the very path the real one writes.
-        env: runnerEnv,
-      },
-    );
-  } catch (e) {
-    runnerExitedNonZero = true;
-    runnerOutput = `${e.stdout || ''}${e.stderr || ''}`;
+  let OUT;
+  if (FROM_LOG) {
+    // Resolved against the CALLER's cwd, not ROOT: the path is something a human typed.
+    OUT = path.resolve(FROM_LOG);
+    if (!fs.existsSync(OUT)) {
+      return fail([
+        `[test-ratchet] --from-log names a report that does not exist — failing closed: ${OUT}`,
+        '  Capture one with `npx vitest run --reporter=json --outputFile=<path>` (equals-sign',
+        '  spelling — a BARE --json eats the next positional; see the header hazard note).',
+      ]);
+    }
+    runnerOutput = `(no runner was spawned; --from-log read ${OUT})`;
+  } else {
+    const TMP = fs.mkdtempSync(path.join(os.tmpdir(), 'test-ratchet-'));
+    OUT = path.join(TMP, 'results.json');
+    const runnerEnv = { ...process.env, TEST_RATCHET_OUTPUT_FILE: OUT };
+    if (VERIFY_DIST) runnerEnv.VERIFY_DIST = '1';
+    else delete runnerEnv.VERIFY_DIST;
+    try {
+      runnerOutput = execSync(
+        process.env.TEST_RATCHET_RUN_CMD
+          || runnerCommandOf({ verifyDist: VERIFY_DIST, outputFile: OUT }),
+        {
+          cwd: ROOT,
+          encoding: 'utf8',
+          stdio: ['ignore', 'pipe', 'pipe'],
+          maxBuffer: 256 * 1024 * 1024,
+          // The seam hands a fake runner the very path the real one writes.
+          env: runnerEnv,
+        },
+      );
+    } catch (e) {
+      runnerExitedNonZero = true;
+      runnerOutput = `${e.stdout || ''}${e.stderr || ''}`;
+    }
   }
 
   // ── Anti-vacuity sentinel — "the suite actually ran" ──────────────────────
@@ -747,6 +947,11 @@ export async function run(argv = []) {
       '  An unreadable report proves nothing ran; it is not evidence of zero failures.',
     ]);
   }
+  // A captured report does not carry the runner's exit code, and STRICT DIST asks for it.
+  // Derive it from the report's own `success`, FAIL-CLOSED: anything that is not an
+  // explicit `true` counts as a non-zero exit, so a report missing the field can never
+  // buy a strict-dist pass it did not earn.
+  if (FROM_LOG) runnerExitedNonZero = report?.success !== true;
 
   const reportedFiles = reportFilesOf(report);
   const rows = rowsOf(report);
@@ -1338,18 +1543,31 @@ export async function run(argv = []) {
     // at the moment of the red is not recoverable afterwards from anything else.
     const cores = os.cpus().length;
     lines.push('');
-    lines.push(`  machine at this run: load ${os.loadavg().map((n) => n.toFixed(2)).join('/')} over ${cores} core(s)`);
+    // Under --from-log this machine did not run the suite, so it must not be labelled as
+    // though it had. The default spelling is untouched.
+    lines.push(FROM_LOG
+      ? `  machine READING this report: load ${os.loadavg().map((n) => n.toFixed(2)).join('/')} over ${cores} core(s)`
+      + ' — NOT the machine that ran the suite'
+      : `  machine at this run: load ${os.loadavg().map((n) => n.toFixed(2)).join('/')} over ${cores} core(s)`);
     // ⚠ THE REPORT SURVIVES; IT WAS ONLY EVER NAMELESS. Printing its own path ends
     // the mtime forensics, and the stable copy ends the "which of the hundreds of
     // test-ratchet-* dirs was mine" question for the LAST red specifically.
     // ⛔ BOTH PATHS ARE OUTSIDE THE REPO — the header's law, not a preference.
     lines.push(`  full runner report: ${OUT}`);
-    const stable = path.join(os.tmpdir(), 'test-ratchet-last-red.json');
-    try {
-      fs.copyFileSync(OUT, stable);
-      lines.push(`  stable copy of it:  ${stable}`);
-    } catch (e) {
-      lines.push(`  (the stable copy at ${stable} could not be written: ${e.message})`);
+    // ⛔ NO COPY UNDER --from-log. The stable copy exists to rescue a report from a
+    // NAMELESS mkdtemp; a --from-log report is already at a path the caller chose and
+    // will find again. Worse, copying would be actively destructive in the obvious case:
+    // pass the stable path itself as the report and `copyFileSync(src, src)` truncates it.
+    if (FROM_LOG) {
+      lines.push('  (supplied by --from-log; no temp copy taken — the path above IS the stable one)');
+    } else {
+      const stable = path.join(os.tmpdir(), 'test-ratchet-last-red.json');
+      try {
+        fs.copyFileSync(OUT, stable);
+        lines.push(`  stable copy of it:  ${stable}`);
+      } catch (e) {
+        lines.push(`  (the stable copy at ${stable} could not be written: ${e.message})`);
+      }
     }
     lines.push('');
     lines.push(`Frozen census is ${Object.keys(entries).length} failing test(s), measured at ${baseline.measuredAtSha || 'unknown'}.`);
