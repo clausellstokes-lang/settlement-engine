@@ -48,6 +48,11 @@ for (const p of pairs) {
   // U7: a bare future indicative is a FATE breach; the [threshold] edge is subjunctive
   if (/\b(will|shall)\b/.test(lower(p.after)) && !/\b(will|shall)\b/.test(lower(p.before))) r.push('FUTURE INDICATIVE ADDED (STATE never FATE)');
   if (/\bwould\b/.test(lower(p.before)) && !/\bwould\b/.test(lower(p.after))) r.push('SUBJUNCTIVE "would" REMOVED — a [threshold] edge may have become a forecast');
+  // B0.3 / B0.7: an existential opener or a pronoun closer ADDED by a rewrite is a step away from every exemplar column
+  const exist = t => (t.match(/(^|[.?!]\s+)(There|It) (is|was|are|were)\b/g) || []).length;
+  if (exist(p.after) > exist(p.before)) r.push('EXISTENTIAL OPENER ADDED ("There is / It is")');
+  const lastWord = t => (t.trim().replace(/[.?!]+$/, '').split(/\s+/).pop() || '').toLowerCase();
+  if (/^(it|them|there|this|that|one)$/.test(lastWord(p.after)) && !/^(it|them|there|this|that|one)$/.test(lastWord(p.before))) r.push('PRONOUN CLOSER ADDED (land on the civic noun)');
   const ok = r.length === 0; if (!ok) fails++;
   console.log(`#${p.id} ${ok ? 'PASS(mechanical)' : 'FAIL'} ${h ? h.block + ' :: ' + h.pool + (h.angle ? ' [' + h.angle + ']' : '') : ''}`); for (const x of r) console.log('    - ' + x);
 }
