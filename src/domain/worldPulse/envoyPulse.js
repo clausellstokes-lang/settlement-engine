@@ -40,6 +40,7 @@ import {
   resolveMaturedParlays,
   resolveStartInterceptions,
 } from './envoyInterceptionStage.js';
+import { chanceMeetingEntry } from './chanceMeetingNews.js';
 import { advanceChanceMeetings, dropStaleMeetingLedgers } from './envoyChanceMeetingStage.js';
 import { envoyNewsEntries } from './envoyNews.js';
 import { rosterPersonById } from './envoyCasting.js';
@@ -262,8 +263,24 @@ export function advanceEnvoyDiplomacyPulse({
     startErrands: untouchedStartErrands,
     errands: cut.startErrands,
     tick,
+    // ENC-4 — THE ONE PRODUCTION MINT, and it is a CALLBACK rather than a mint inside the stage
+    // because the stage's seam ruling says so: "ENC-4 owns those: it exports a single builder on
+    // the `faithReceipt(...)` model and this stage calls it once per seed through
+    // `heraldEntryFor`." Absent the builder the seeds come back unbuilt and nothing is minted,
+    // which is the state ENC-3 landed in.
+    //
+    // ⛔ IT IS BELOW THE FLAG, NOT BESIDE IT. `advanceChanceMeetings` returns an empty
+    // `heraldSeeds` before this callback can be reached on a world where `chanceEncountersEnabled`
+    // is dark, so a dark world builds NOTHING and appends NOTHING — the absence IS the gate.
+    heraldEntryFor: (seed) => chanceMeetingEntry({ seed, now }),
   });
   state = meetings.worldState;
+  // Collected here and APPENDED BELOW, because `feed` is not declared until after the errand
+  // advance. The entries are already built: the builder is pure and the seed is a frozen address
+  // record, so holding them across the advance cannot change what they say.
+  const meetingNews = meetings.heraldSeeds
+    .map((seed) => asObject(seed).entry)
+    .filter((entry) => entry && typeof entry === 'object');
 
   const beforeAdvance = state;
   const reservedSilenceTargets = new Set();
@@ -326,6 +343,14 @@ export function advanceEnvoyDiplomacyPulse({
   if (transitionNews.length) {
     feed = appendWizardNewsEntries(feed, transitionNews, { now });
     newsEntries.push(...transitionNews);
+  }
+
+  // ENC-4 — the meetings the flag allowed, appended through the same door the errand transitions
+  // take. `appendWizardNewsEntries` dedupes by stable id and every entry's id carries the
+  // meeting's own key, so a re-run of the same tick lands the same rows.
+  if (meetingNews.length) {
+    feed = appendWizardNewsEntries(feed, meetingNews, { now });
+    newsEntries.push(...meetingNews);
   }
 
   // WR-7d — THE RANSOM STAGE, read from the post-custody world. It runs AFTER

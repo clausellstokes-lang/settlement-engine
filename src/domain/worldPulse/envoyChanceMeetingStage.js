@@ -443,6 +443,18 @@ export function advanceChanceMeetings({
   const lessons = [];
   /** @type {Set<string>} */
   const taughtThisPass = new Set();
+  // ⭐ THE ADDRESS NAMES, GATHERED ON THIS SAME PRE-MUTATION CUT. The seam's contract below has
+  // always said the seed carries "both courts, both names"; until ENC-4 measured it the seed
+  // carried only IDS, and a consumer would have had to round-trip a nid back through a roster
+  // reader that spells ids differently (`envoyCasting.js#rosterPersonById` matches a durable H1
+  // id or a bare roster id, never `npcAgency.js#npcId`'s `sid:rosterId` composite). Reading the
+  // names HERE, off the seats the census already resolved, removes that round-trip and its
+  // spelling hazard outright. ⛔ NAMES ARE ADDRESS, NOT PROSE: no kind, no significance and no
+  // sentence is minted here, which is the seam ruling this file records below.
+  /** @type {Map<string, string>} */
+  const npcNameByNid = new Map();
+  /** @type {Map<string, string>} */
+  const placeNameBySid = new Map();
 
   for (const raw of meetings) {
     const meeting = asObject(raw);
@@ -475,6 +487,14 @@ export function advanceChanceMeetings({
       positionValue,
     });
     receipts.push(receipt);
+    for (const seat of [left, right]) {
+      npcNameByNid.set(text(seat.nid), text(asObject(seat.npc).name));
+    }
+    for (const sid of [text(left.homeSid), text(right.homeSid), hostSid]) {
+      if (!sid || placeNameBySid.has(sid)) continue;
+      const place = placeOf(snapshot, sid);
+      placeNameBySid.set(sid, place ? text(asObject(place.settlement).name) : '');
+    }
     collectDeposits({
       receipt, left, right, markWrites, leanWrites, weaveLit, webLit, ladderLit, tick,
     });
@@ -488,7 +508,7 @@ export function advanceChanceMeetings({
     worldState: state,
     receipts: Object.freeze(receipts),
     driftRefusals: taught.driftRefusals,
-    heraldSeeds: heraldSeedsOf(receipts, heraldEntryFor),
+    heraldSeeds: heraldSeedsOf(receipts, heraldEntryFor, { npcNameByNid, placeNameBySid }),
   };
 }
 
@@ -517,11 +537,19 @@ export function advanceChanceMeetings({
  * lands. A mint that cannot fire is not worth redding an exact census for; ENC-4 places it
  * in the commit that gives it something to say.
  *
+ * ⭐ THE NAMES ARE PART OF THE ADDRESS AND THEY ARRIVE HERE RESOLVED. `npcNames` is parallel to
+ * `npcIds`; `settlementNames` is keyed by settlement id and covers the host and both courts. A
+ * name that could not be resolved is the EMPTY STRING rather than an absent key, so a consumer
+ * that fails closed on a hole (ENC-4's builder does) sees the hole instead of guessing.
+ *
  * @param {Record<string, unknown>[]} receipts
  * @param {((seed: Record<string, unknown>) => unknown)|null} heraldEntryFor
+ * @param {{npcNameByNid?: Map<string, string>, placeNameBySid?: Map<string, string>}} [names]
  * @returns {ReadonlyArray<Record<string, unknown>>}
  */
-function heraldSeedsOf(receipts, heraldEntryFor) {
+function heraldSeedsOf(receipts, heraldEntryFor, names = {}) {
+  const npcNameByNid = names.npcNameByNid instanceof Map ? names.npcNameByNid : new Map();
+  const placeNameBySid = names.placeNameBySid instanceof Map ? names.placeNameBySid : new Map();
   /** @type {Record<string, unknown>[]} */
   const seeds = [];
   for (const raw of receipts) {
@@ -544,6 +572,12 @@ function heraldSeedsOf(receipts, heraldEntryFor) {
       npcIds: Object.freeze(parties.map((party) => text(party.nid))),
       venueIds: Object.freeze(text(receipt.venue) === 'field_node' ? [text(receipt.nodeId)] : []),
       hostId: text(receipt.nodeId),
+      npcNames: Object.freeze(parties.map((party) => npcNameByNid.get(text(party.nid)) || '')),
+      settlementNames: Object.freeze(Object.fromEntries(
+        [...new Set([text(receipt.nodeId), ...parties.map((party) => text(party.homeSid))])]
+          .filter(Boolean)
+          .map((sid) => [sid, placeNameBySid.get(sid) || '']),
+      )),
     };
     seeds.push(typeof heraldEntryFor === 'function'
       ? { ...seed, entry: heraldEntryFor(seed) }
