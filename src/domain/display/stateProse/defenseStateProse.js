@@ -5,8 +5,9 @@
  *
  *   DS-DEF-3  Defense › Public order banner — `safetyProfile.{safetyLabel, safetyDesc}`
  *   DS-DEF-2  Defense › Threat assessment — the five readiness rows:
- *             `defenseProfile.{scores.economic, institutions{walls,garrison,militia}}` +
- *             `config.monsterThreat` + `economicState.compound.inst{...}`
+ *             `standingDefenseForces(settlement).{walls,garrison,militia}.present` +
+ *             `defenseProfile.scores.economic` + `config.monsterThreat` +
+ *             `economicState.compound.inst{...}`
  *
  * ── WHY THIS BLOCK ALONE, AND WHY DS-DEF-1 IS NOT HERE ───────────────────────────────
  *
@@ -63,6 +64,7 @@
  * @enforced-by tests/domain/defenseStateProseDesk.test.js
  */
 import { MONSTER_THREAT_TIERS, normalizeMonsterThreat } from '../../../data/monsterThreat.js';
+import { standingDefenseForces } from '../../institutions/defenseInstitutionBuckets.js';
 import { scoreBand } from '../defenseScoreBands.js';
 import { DOSSIER_STATE_PROSE_DEFENSE } from '../../../data/dossierStateProse/defense.generated.js';
 import { projectBesideDmField } from './dmFieldProjection.js';
@@ -182,9 +184,31 @@ const MONSTER_FAMILY_OF = Object.freeze({
   heartland: 'settled',
 });
 
-/** @param {unknown} v @returns {boolean} */
-function flag(v) {
-  return v === true || (typeof v === 'number' && v > 0);
+/**
+ * ── ⛔⛔ WHAT USED TO BE HERE, AND WHY IT IS A NAMED READ NOW ─────────────────────────
+ *
+ *     function flag(v) { return v === true || (typeof v === 'number' && v > 0); }
+ *
+ * That graded BOTH the defence buckets and the civic-facility flags, and it was wrong
+ * about the first for the whole of its shipped life: the buckets are ARRAYS, so
+ * `flag(["Massive Walls","Inner Citadel"])` was `false` and a fortified town read exactly
+ * like an empty field. The cure is not a wider predicate — a shape-agnostic truthiness
+ * test would grade `{}` and `"no"` as defended — but a read that CANNOT ask the vague
+ * question: the defence rows now take a typed `standingDefenseForces` projection, and the
+ * civic rows go through `civicFlag`, which is total about the one shape its producer
+ * emits. The full measurement is in defenseInstitutionBuckets.js's header.
+ */
+
+/**
+ * A `compound.inst` civic-facility reading. `priorityHelpers.getInstitutionNames` builds
+ * every one of these with `hasAny(...)`, which is `.some()` — a GENUINE boolean, never a
+ * roster and never a count. So this is strict rather than coercive, and the desk suite
+ * binds the claim to the producer by running it and asserting the types, which is the arm
+ * whose absence let the array/boolean mismatch above ship.
+ * @param {unknown} v @returns {boolean}
+ */
+function civicFlag(v) {
+  return v === true;
 }
 
 /**
@@ -289,9 +313,15 @@ export function disasterRowPoolKey(granary, hospital, church) {
  * projections: the DM's-pen shape is DS-DEF-3's, and handing back a projection where no
  * DM field exists would be ceremony rather than protection.
  *
- * @param {{name?: string, config?: {monsterThreat?: unknown}|null,
- *   defenseProfile?: {scores?: {economic?: unknown}|null,
- *     institutions?: {walls?: unknown, garrison?: unknown, militia?: unknown}|null}|null,
+ * ⛔ THE FORCE ROWS READ THE LIVE ROSTER, NOT `defenseProfile.institutions`. Those buckets
+ * are a generation-time snapshot with a single writer at assembly, and every ruin path
+ * replaces its roster row immutably — so a flattened citadel stays in the snapshot's
+ * `walls` bucket forever and the ruin stamp never reaches it. `standingDefenseForces`
+ * re-derives from `settlement.institutions` through the canonical live filter, which is
+ * why a ruined citadel does not read here as standing walls.
+ *
+ * @param {{name?: string, config?: {monsterThreat?: unknown}|null, institutions?: unknown,
+ *   defenseProfile?: {scores?: {economic?: unknown}|null}|null,
  *   economicState?: {compound?: {inst?: Record<string, unknown>}|null}|null}|null|undefined} settlement
  * @param {{seed?: string, audience?: string}} [options]
  * @returns {Readonly<{beasts: object|null, invasion: object|null, internal: object|null,
@@ -299,13 +329,13 @@ export function disasterRowPoolKey(granary, hospital, church) {
  */
 export function defenseThreatProse(settlement, options = {}) {
   const dp = settlement?.defenseProfile || {};
-  const inst = dp.institutions || {};
   const compound = settlement?.economicState?.compound?.inst || {};
   const slots = { settlement: properFill(text(settlement?.name)) };
 
-  const walls = flag(inst.walls);
-  const garrison = flag(inst.garrison);
-  const militia = flag(inst.militia);
+  const forces = standingDefenseForces(settlement);
+  const walls = forces.walls.present;
+  const garrison = forces.garrison.present;
+  const militia = forces.militia.present;
 
   /** @param {string|null} poolKey */
   const line = (poolKey) => (poolKey
@@ -317,10 +347,12 @@ export function defenseThreatProse(settlement, options = {}) {
   return Object.freeze({
     beasts: rung(beastsRowPoolKey(settlement?.config?.monsterThreat, walls, garrison || militia)),
     invasion: rung(invasionRowPoolKey(walls, garrison, militia)),
-    internal: rung(internalRowPoolKey(flag(compound.hasCourtSystem), flag(compound.hasPrison))),
+    internal: rung(internalRowPoolKey(
+      civicFlag(compound.hasCourtSystem), civicFlag(compound.hasPrison),
+    )),
     economic: rung(economicRowPoolKey(dp.scores?.economic)),
     disaster: rung(disasterRowPoolKey(
-      flag(compound.hasGranary), flag(compound.hasHospital), flag(compound.hasChurch),
+      civicFlag(compound.hasGranary), civicFlag(compound.hasHospital), civicFlag(compound.hasChurch),
     )),
   });
 }

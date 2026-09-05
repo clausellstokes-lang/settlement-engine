@@ -15,47 +15,37 @@ import {
   nativeSemanticName,
 } from '../domain/content/customContentSemanticAuthority.js';
 import { hasTradeRouteConnection } from '../domain/tradeRouteSemantics.js';
+import { partitionDefenseInstitutions } from '../domain/institutions/defenseInstitutionBuckets.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
 
 // ─── getDefenseInstitutions ───────────────────────────────────────────────────
 /**
  * Partition institution list into defense-relevant groups.
  *
+ * ⭐ THE KEYWORD TABLE MOVED OUT, and this is now a one-line delegation. It used to hold
+ * its own copy of the seven bucket vocabularies, in `src/generators/` — OUTSIDE the
+ * `src/domain` scan root of tests/lint/ruinFilterRoster.walker.test.js, which is how the
+ * estate's own ruin-filter ratchet came to have no arm over the one partition whose
+ * ruin-blindness mattered. The table now lives at
+ * src/domain/institutions/defenseInstitutionBuckets.js, inside that reach, with ONE writer.
+ * Output is unchanged to the byte: same vocabularies, same key order, same filter.
+ *
+ * ⚠ THE SNAPSHOT DISPOSITION, stated rather than laundered. This partition stays
+ * RUIN-BLIND, deliberately. `generateDefenseProfile` runs exactly once, from
+ * steps/assembleSettlement.js, so `defenseProfile.institutions` is a GENERATION-TIME
+ * record of what the town built — and at generation nothing has been ruined yet, so
+ * filtering here would change nothing. Nor could it help later: every ruin path replaces
+ * its roster row IMMUTABLY (`{ ...inst, status: 'ruined', _worldPulseInactive: true }`),
+ * so these buckets keep the PRE-RUIN objects by reference and the stamp never reaches
+ * them. A consumer that needs to know what the town can field TODAY must therefore
+ * re-derive from the live roster: `standingDefenseForces(settlement)` in the same module
+ * does exactly that, and the defence state-prose desk reads it rather than these buckets.
+ *
  * @param {Array} institutions
  * @returns {{ walls, garrison, militia, watch, mercenary, charter, magicDef }}
  */
-const getDefenseInstitutions = (institutions) => {
-  const matches = (inst, keywords) =>
-    keywords.some(kw => nativeSemanticName(inst).toLowerCase().includes(kw));
-
-  return {
-    walls: institutions.filter(i => matches(i, [
-      'wall', 'citadel', 'palisade', 'earthwork',
-      'inner citadel', 'massive walls',
-    ])),
-    garrison: institutions.filter(i => matches(i, [
-      'garrison', 'barracks', 'professional guard',
-      'professional city watch', 'multiple garrison',
-    ])),
-    militia: institutions.filter(i => matches(i, [
-      'citizen militia', 'militia',
-    ])),
-    watch: institutions.filter(i => matches(i, [
-      'town watch', 'city watch', 'professional city watch',
-    ])),
-    mercenary: institutions.filter(i => matches(i, [
-      'mercenary company', 'mercenary quarter', 'hired muscle',
-    ])),
-    charter: institutions.filter(i => matches(i, [
-      "adventurers' charter hall", "adventurers' guild hall",
-      "multiple adventurers'",
-    ])),
-    magicDef: institutions.filter(i => matches(i, [
-      "wizard", "mages' guild", "mage", "academy of magic",
-      "golem workforce", "alchemist",
-    ])),
-  };
-};
+const getDefenseInstitutions = (institutions) =>
+  /** @type {any} */ (partitionDefenseInstitutions(institutions));
 
 // ─── computeDefenseScores ─────────────────────────────────────────────────────
 /**

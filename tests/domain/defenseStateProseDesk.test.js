@@ -19,6 +19,11 @@ import {
   firstSurveyPoolKey, internalRowPoolKey, invasionRowPoolKey, isCompoundSafetyLabel,
   publicOrderPoolKey,
 } from '../../src/domain/display/stateProse/defenseStateProse.js';
+import {
+  DEFENSE_BUCKET_KEYS, standingDefenseForces,
+} from '../../src/domain/institutions/defenseInstitutionBuckets.js';
+import { generateDefenseProfile } from '../../src/generators/defenseGenerator.js';
+import { getInstFlags } from '../../src/generators/priorityHelpers.js';
 import { MONSTER_THREAT_TIERS, normalizeMonsterThreat } from '../../src/data/monsterThreat.js';
 import { avgScore, scoreBand } from '../../src/domain/display/defenseScoreBands.js';
 import { avgScore as avgScoreViaPdf } from '../../src/pdf/lib/viewModelPrimitives.js';
@@ -214,19 +219,136 @@ describe('the defense desk — ⭐ THE DM\'S PEN, first production use', () => {
 const DEF2 = 'DS-DEF-2';
 const DEF2_POOLS = DOSSIER_STATE_PROSE_DEFENSE[DEF2].pools;
 
-/** A settlement carrying exactly the slice DS-DEF-2 reads. */
+/**
+ * ⭐⭐ THE FIXTURE THAT LIED, AND WHAT REPLACED IT.
+ *
+ * This factory used to hand the desk `institutions: { walls: true, garrison: true }` —
+ * BOOLEANS — and 24 of 24 arms were green against it for the whole of the block's shipped
+ * life. The producer has never once returned that shape: `getDefenseInstitutions` writes
+ * ARRAYS, so the shipped grader (`v === true || typeof v === 'number' && v > 0`) was FALSE
+ * for a fortified town and false for an empty field alike, and the two produced
+ * byte-identical prose in front of a paying reader. **A fixture that hand-builds a shape
+ * the producer never returns IS the specification, and it is lying.**
+ *
+ * So the fixture now carries a REAL ROSTER of catalogue institution names, and the arm
+ * below (`the fixture's roster is the PRODUCER's own`) binds those names to
+ * `generateDefenseProfile`'s actual buckets, so a fixture that drifts out of the
+ * producer's vocabulary reds instead of quietly proving nothing.
+ * @type {Readonly<Record<string, string>>}
+ */
+const FORCE_NAME = Object.freeze({
+  walls: 'Massive Walls', garrison: 'Garrison Barracks', militia: 'Citizen Militia',
+});
+
+/** A settlement carrying exactly the slice DS-DEF-2 reads, in the producer's own shapes. */
 function fort({
   monsterThreat = 'frontier', walls = false, garrison = false, militia = false,
   hasCourtSystem = false, hasPrison = false, hasGranary = false, hasHospital = false,
-  hasChurch = false, economic = 50,
+  hasChurch = false, economic = 50, ruined = false,
 } = {}) {
+  const roster = [];
+  if (walls) roster.push({ name: FORCE_NAME.walls });
+  if (garrison) roster.push({ name: FORCE_NAME.garrison });
+  if (militia) roster.push({ name: FORCE_NAME.militia });
   return {
     name: 'Thornwall', _seed: 'seed-def2',
     config: { monsterThreat },
-    defenseProfile: { scores: { economic }, institutions: { walls, garrison, militia } },
+    // The ruin paths replace a row IMMUTABLY and stamp both fields; the fixture copies
+    // that shape rather than inventing a cheaper one.
+    institutions: ruined
+      ? roster.map((i) => ({ ...i, status: 'ruined', _worldPulseInactive: true }))
+      : roster,
+    defenseProfile: { scores: { economic } },
     economicState: { compound: { inst: { hasCourtSystem, hasPrison, hasGranary, hasHospital, hasChurch } } },
   };
 }
+
+describe('DS-DEF-2 — ⛔⛔ THE GRADER READS WHAT THE PRODUCER WRITES (F2/F3)', () => {
+  it('the fixture\'s roster is the PRODUCER\'s own — its names land in the real buckets', () => {
+    // The arm that makes every assertion below mean something. If a catalogue rename ever
+    // moved these names out of the producer's keyword vocabulary, the fixture would go on
+    // "proving" a walled town while the producer classified nothing, which is precisely the
+    // failure the boolean fixture hid. Asserted against generateDefenseProfile, not a literal.
+    const built = fort({ walls: true, garrison: true, militia: true });
+    const buckets = generateDefenseProfile(built).institutions;
+    expect(buckets.walls.map((i) => i.name)).toEqual([FORCE_NAME.walls]);
+    expect(buckets.garrison.map((i) => i.name)).toEqual([FORCE_NAME.garrison]);
+    expect(buckets.militia.map((i) => i.name)).toEqual([FORCE_NAME.militia]);
+    // …and the producer's bucket vocabulary is the module's, both ways: a bucket added to
+    // one side and not the other is the label trap wearing a different hat.
+    expect(Object.keys(buckets).sort()).toEqual([...DEFENSE_BUCKET_KEYS].sort());
+  });
+
+  it('⛔ WHAT SHIPPED: the producer writes ARRAYS, so the old boolean grader saw nothing', () => {
+    // The defect, pinned as a fact about SHAPES rather than re-enacted as a dead predicate.
+    // `flag(v) { return v === true || (typeof v === 'number' && v > 0) }` is false for every
+    // one of these, which is why a fortified town and an empty field read alike.
+    const buckets = generateDefenseProfile(fort({ walls: true, garrison: true })).institutions;
+    expect(Array.isArray(buckets.walls)).toBe(true);
+    expect(buckets.walls).not.toBe(true);
+    expect(typeof buckets.walls).not.toBe('number');
+    // The typed projection is what a caller may ask, and it is a real boolean.
+    expect(standingDefenseForces(fort({ walls: true })).walls.present).toBe(true);
+    expect(standingDefenseForces(fort({})).walls.present).toBe(false);
+  });
+
+  it('⭐ A WALLED TOWN AND AN UNDEFENDED ONE NOW SAY DIFFERENT THINGS', () => {
+    const walled = defenseThreatProse(fort({ walls: true, garrison: true }), { seed: 'f2' });
+    const bare = defenseThreatProse(fort({}), { seed: 'f2' });
+    expect(walled.invasion.provenance.poolKey).toBe('Invasion & War: walls AND professional garrison');
+    expect(bare.invasion.provenance.poolKey).toBe('Invasion & War: neither walls nor force');
+    expect(walled.invasion.sentence).not.toBe(bare.invasion.sentence);
+    // …and the Beasts row, which was silent on EVERY settlement in the product, speaks.
+    expect(walled.beasts.provenance.poolKey).toBe('Beasts & Monsters: frontier, credible deterrence');
+    expect(bare.beasts).toBeNull();
+  });
+
+  it('⛔⛔ A RUINED CITADEL DOES NOT READ AS STANDING WALLS', () => {
+    // Curing the read ACTIVATES the producer's defect, so this is the arm that had to exist
+    // before the read was widened. The rubble town and the empty field agree; the rubble
+    // town and the intact town do not.
+    const intact = defenseThreatProse(fort({ walls: true, garrison: true }), { seed: 'f3' });
+    const rubble = defenseThreatProse(fort({ walls: true, garrison: true, ruined: true }), { seed: 'f3' });
+    const bare = defenseThreatProse(fort({}), { seed: 'f3' });
+    expect(rubble.invasion.provenance.poolKey).toBe('Invasion & War: neither walls nor force');
+    expect(rubble.invasion.sentence).toBe(bare.invasion.sentence);
+    expect(rubble.invasion.sentence).not.toBe(intact.invasion.sentence);
+    expect(standingDefenseForces(fort({ walls: true, ruined: true })).walls).toEqual(
+      { present: false, count: 0, names: [] },
+    );
+  });
+
+  it('⛔ AND THE SNAPSHOT COULD NEVER HAVE BEEN FILTERED — it is unreachable by construction', () => {
+    // `generateDefenseProfile` runs once, at assembly; every ruin path REPLACES its roster
+    // row immutably, so `defenseProfile.institutions` keeps the PRE-RUIN objects for the
+    // life of the settlement. Filtering inside the producer would have been a no-op against
+    // the live hazard — this arm is the measurement that says so, in the tree.
+    const rubble = fort({ walls: true, ruined: true });
+    rubble.defenseProfile = generateDefenseProfile(rubble);
+    expect(rubble.defenseProfile.institutions.walls.map((i) => i.name)).toEqual([FORCE_NAME.walls]);
+    expect(rubble.institutions[0]._worldPulseInactive).toBe(true);
+    expect(standingDefenseForces(rubble).walls.count).toBe(0);
+  });
+
+  it('the civic rows read a producer that really does emit booleans', () => {
+    // `civicFlag` is strict `=== true`. That is only correct because
+    // priorityHelpers.getInstitutionNames builds each of these with `hasAny(...)`, i.e.
+    // `.some()`. Bound to the producer here rather than assumed, because assuming it about
+    // the SIBLING facet is the whole of F2.
+    const flags = getInstFlags({}, [
+      { name: 'Courthouse' }, { name: 'Prison' }, { name: 'Granary' },
+      { name: 'Hospital' }, { name: 'Church' },
+    ]).inst;
+    for (const key of ['hasCourtSystem', 'hasPrison', 'hasGranary', 'hasHospital', 'hasChurch']) {
+      expect(typeof flags[key], `${key} is not a boolean — the civic read must be re-cut`).toBe('boolean');
+      expect(flags[key]).toBe(true);
+    }
+    const none = getInstFlags({}, []).inst;
+    for (const key of ['hasCourtSystem', 'hasPrison', 'hasGranary', 'hasHospital', 'hasChurch']) {
+      expect(none[key]).toBe(false);
+    }
+  });
+});
 
 describe('DS-DEF-2 — ⭐ THE LABEL-TRAP RULE, third instance', () => {
   it('the desk recognises EXACTLY the canonical tiers, both ways', () => {
