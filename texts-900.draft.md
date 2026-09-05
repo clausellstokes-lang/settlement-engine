@@ -10,7 +10,7 @@
 ## ⭐⭐⭐⭐⭐ PICKUP AT §900 — **THE DESK CONSIST IS DOWN; thirteen docks landed on one tip; next is the LIGHTING wave (L-HOMES ×9 → L-DEFAULT → L-UI-MAT) on the L-PROBE receipts, then HORIZON-B6, then the WALK.**
 **Product** `__CAS_SHA__`, sealed `refs/preserve/landing-desk-2026-09-05`. Kit `refs/preserve/chair-tools-2026-09-05`; resume note `refs/preserve/resume-note-2026-09-05`.
 ### ⭐ NEXT, IN ORDER
-1. **L-HOMES** (9 cars, `briefs/brief-L-HOMES.md`) on the L-PROBE receipts (`lprobe-out-899/` cheap 6/6; the full battery __LPROBE_FULL__) → **L-DEFAULT** → **L-UI-MAT** → the eleven declarations (`lightingwave/PLAN.md` + `CORRECTIONS.md`).
+1. **L-HOMES** (9 cars, `briefs/brief-L-HOMES.md`) on the L-PROBE receipts (`lprobe-out-899/` cheap 6/6; the full battery ran at the §899 tip: the cheap steps 6/6 again, `full_simulation` certified (5 y × 4 settlements), the golden control OWED on a quiet machine (its window gave up under four lanes), the overlay STOP on six presets re-framed by L-OVERLAY as a seam question) → **L-DEFAULT** → **L-UI-MAT** → the eleven declarations (`lightingwave/PLAN.md` + `CORRECTIONS.md`).
 2. **HORIZON-B6** (the ~2.3 h CAPACITY soak) in a window with no gate for 2.5 h; the edge `validValue` charset branch (deferred by HORIZON-B1) and the `WORKER_BUNDLE_CEILING_BYTES` arm __WORKER_ARM__.
 3. Then the owner's WALK + one regen → the exhaustive review → fix cars → FULL STOP before the soak.
 ### 🟠 OWNER'S DESK: the prose window's golden fixture (the genesis signing, or your sentence) · the paid-rights floor and the arms · DS-GEN-1 · DS-FTH-2's public pool · a founder-name producer · the chance-meeting tie-break · `anchored` at generation.
