@@ -227,6 +227,18 @@ export const DOSSIER_MOUNTS = Object.freeze([
   Object.freeze({
     mount: 'defense.threatAssessment', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-2', rung: 'sentence',
   }),
+  Object.freeze({
+    mount: 'overview.systemsHealth', tab: 'overview', desk: 'general', blockId: 'DS-GEN-3', rung: 'sentence',
+  }),
+  Object.freeze({
+    mount: 'overview.ground', tab: 'overview', desk: 'general', blockId: 'DS-GEN-12', rung: 'sentence',
+  }),
+  Object.freeze({
+    mount: 'overview.market', tab: 'overview', desk: 'general', blockId: 'DS-GEN-13', rung: 'sentence',
+  }),
+  Object.freeze({
+    mount: 'overview.institutions', tab: 'overview', desk: 'general', blockId: 'DS-GEN-17', rung: 'sentence',
+  }),
 ]);
 
 /**
@@ -250,11 +262,11 @@ export const UNMOUNTED_BLOCKS = Object.freeze([
   'DS-SUP-2', 'DS-ECO-10',
   'DS-ECO-11', 'DS-ECO-12', 'DS-SUP-3',
   'DS-POP-1', 'DS-POP-2', 'DS-GEN-1', 'DS-GEN-2',
-  'DS-GEN-3', 'DS-GEN-5', 'DS-GEN-6', 'DS-GEN-7',
+  'DS-GEN-5', 'DS-GEN-6', 'DS-GEN-7',
   'DS-GEN-8', 'DS-REL-1', 'DS-REL-2', 'DS-GEN-9',
-  'DS-GEN-10', 'DS-HK-1', 'DS-GEN-11', 'DS-GEN-12',
-  'DS-GEN-13', 'DS-GEN-14', 'DS-POP-3', 'DS-GEN-15',
-  'DS-GEN-16', 'DS-GEN-17', 'DS-GEN-18',
+  'DS-GEN-10', 'DS-HK-1', 'DS-GEN-11',
+  'DS-GEN-14', 'DS-POP-3', 'DS-GEN-15',
+  'DS-GEN-16', 'DS-GEN-18',
   'DS-WAR-1', 'DS-WAR-2', 'DS-WAR-3', 'DS-WAR-4',
   'DS-WAR-5', 'DS-FTH-1', 'DS-FTH-2', 'DS-FTH-3',
   'DS-FTH-4',
