@@ -64,7 +64,7 @@ function pushKindSlices(out, kind, entry, ctx, idSuffix, titlePrefix) {
     out.push({
       id: `${kind}${idSuffix}:${sec.id}`,
       source: sec.source,
-      title: titlePrefix ? `${titlePrefix}: ${sec.title}` : sec.title,
+      title: titlePrefix ? `${titlePrefix} — ${sec.title}` : sec.title,
       data: sec.items,
     });
   }

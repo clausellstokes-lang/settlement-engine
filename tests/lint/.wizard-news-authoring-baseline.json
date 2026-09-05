@@ -204,7 +204,7 @@
       "path": "src/domain/worldPulse/narrativeTempo.js",
       "line": 500,
       "column": 11,
-      "signature": "6498a01695d46731",
+      "signature": "eeced77054e13a05",
       "issues": [
         "missing-registration:unrouted:tempo_pressure"
       ]

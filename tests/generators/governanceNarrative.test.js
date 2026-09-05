@@ -69,7 +69,7 @@ describe('governance narrative precedence', () => {
       instNames: ['council hall'],
     });
 
-    expect(result.stability).toBe('Desperate: hunger is eroding order');
+    expect(result.stability).toBe('Desperate — hunger is eroding order');
     expect(result.recentConflict).toBe(
       'Food shortages have sharpened every tension in the settlement. Those with stocks are not advertising the fact. Those without are watching those with.',
     );
