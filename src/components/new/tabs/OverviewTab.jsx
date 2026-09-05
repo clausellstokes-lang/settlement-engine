@@ -449,6 +449,26 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
         ) : null}
       </div>}
 
+      {/* ── DS-GEN-6 at overview.origin, the route line and the tier overlay ──
+          TWO POOLS of one block at ONE position, which is the registry's one written
+          exception to the one-fact-one-sentence law: the overlay is composed AFTER the
+          route line and never instead of it.
+          ⛔ IT SITS ABOVE THE FOLD, AND THAT PLACEMENT IS THE POINT. It was drawn INSIDE
+          the Settlement Origin section, which is `collapsible defaultOpen={false}`, and
+          `Primitives.jsx:114` renders `{open && children}` — so this position produced NO
+          BYTES for any reader on any world, while the reachability arm, the public-dossier
+          guard and the registry law were all green over it. The line now FRAMES the fold
+          (the DS-HK-1 arrangement) and no longer waits on `r.settlementReason`, so a town
+          the generator gave no origin paragraph still hears how it came to be there. The
+          visibility arm in dossierMountRegistry.walker.test.js is what keeps it out here. */}
+      {originLines.length>0&&(
+        <div data-testid="overview-origin-lines" style={{borderLeft:'3px solid #c8b89a',paddingLeft:12,marginBottom:14}}>
+          {originLines.map((line,i)=>(
+            <p key={`o${i}`} style={{fontSize:i===0?FS.md:FS.sm,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.6,margin:i===0?0:'8px 0 0',fontStyle:'italic'}}>{line}</p>
+          ))}
+        </div>
+      )}
+
       {/* ── SETTLEMENT ORIGIN ─────────────────────────────────────────────── */}
       {r.settlementReason&&<Section title="Settlement Origin" collapsible defaultOpen={false} accent="#6b5340">
         <div style={{borderLeft:'3px solid #c8b89a',paddingLeft:12}}>
@@ -456,13 +476,6 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
             ?r.settlementReason.map((line,i)=><p key={i} style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:'0 0 4px',fontStyle:'italic'}}>{line}</p>)
             :<p style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}>{Ti(r.settlementReason?.primary||r.settlementReason)}</p>
           }
-          {/* ── DS-GEN-6, the route line and the tier overlay ────────────────
-              TWO POOLS of one block at ONE position, which is the registry's one
-              written exception to the one-fact-one-sentence law: the overlay is
-              composed AFTER the route line and never instead of it. */}
-          {originLines.length>0&&originLines.map((line,i)=>(
-            <p key={`o${i}`} style={{fontSize:i===0?FS.md:FS.sm,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.6,margin:'8px 0 0',fontStyle:'italic'}}>{line}</p>
-          ))}
         </div>
       </Section>}
 
