@@ -1,5 +1,5 @@
 import { isDraft } from 'immer';
-import { normalizeSimulationRules } from './simulationRules.js';
+import { newCampaignSimulationRules, normalizeSimulationRules } from './simulationRules.js';
 import { wallClockNow } from '../clock.js';
 import { deepClone } from '../clone.js';
 import { stablePart } from './stablePart.js';
@@ -634,6 +634,37 @@ export function ensureWorldState(rawInput = {}, campaign = {}) {
     rawInput,
     campaign,
     cloneAdmittedEnvoyErrands,
+  );
+}
+
+/**
+ * BIRTH, and ONLY birth. The single seam through which a brand-new campaign's
+ * world is minted, so the question "which preset does a fresh campaign start
+ * in?" has exactly one address in the tree
+ * (`NEW_CAMPAIGN_SIMULATION_PRESET_ID`, read by
+ * `newCampaignSimulationRules()`) instead of being an emergent property of a
+ * no-arg normalize call at a store call site.
+ *
+ * ⛔ THE INVARIANT THIS EXISTS TO PROTECT. `ensureWorldState` above keeps its
+ * PLAIN `normalizeSimulationRules(raw?.simulationRules)` and must keep it
+ * forever: it runs on every LOAD of every INSTALLED campaign, and a birth
+ * preset resolved there would hand a lived world virtual keys it was never
+ * created with, silently, at its next load. That is THE PROMISE breaking — a
+ * seed is a starting world forever. Birth is a distinct event with a distinct
+ * door, and this is the door.
+ *
+ * Today the resolver returns the plain default, so this call is byte-identical
+ * to the `ensureWorldState(null, campaign)` it replaces — measured, not assumed
+ * (tests/domain/simulationRulesPreset.stability.test.js, the BIRTH SEAM block,
+ * pins the whole envelope byte-for-byte and drives the door forced).
+ *
+ * @param {{ id?: string, name?: string }} [campaign]  what the world is seeded from
+ * @param {string | null} [presetId]  FORCED-DOOR seam for tests only
+ */
+export function createNewCampaignWorldState(campaign = {}, presetId) {
+  return ensureWorldState(
+    { simulationRules: newCampaignSimulationRules(presetId) },
+    campaign,
   );
 }
 

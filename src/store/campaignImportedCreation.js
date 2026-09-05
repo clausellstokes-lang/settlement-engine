@@ -13,7 +13,7 @@ import {
   ensureRegionalGraph,
   ensureWizardNewsFeed,
 } from '../domain/region/index.js';
-import { ensureWorldState } from '../domain/worldPulse/worldState.js';
+import { createNewCampaignWorldState } from '../domain/worldPulse/worldState.js';
 import { campaigns as campaignService } from '../lib/campaigns.js';
 import { accountRuntimeBinding } from './campaignContentBindingModel.js';
 import {
@@ -47,7 +47,13 @@ export function buildNewCampaign(current, name, initial = {}) {
     mapState: null,
     regionalGraph: ensureRegionalGraph(undefined, { now }),
     wizardNews: ensureWizardNewsFeed(undefined, { now }),
-    worldState: ensureWorldState(null, { id, name: campaignName }),
+    // BIRTH, through the ONE birth door. This read `ensureWorldState(null, …)`,
+    // which made "which preset does a fresh campaign start in?" an emergent
+    // property of a no-arg normalize three modules away — invisible here, and
+    // unaddressable from the preset table. `createNewCampaignWorldState` is the
+    // named seam; it resolves NEW_CAMPAIGN_SIMULATION_PRESET_ID, which is null
+    // today and therefore byte-identical to the call it replaces.
+    worldState: createNewCampaignWorldState({ id, name: campaignName }),
     collapsed: false,
     accessState: 'active',
     lastReadTick: 0,
