@@ -8,7 +8,21 @@ program's decisions; SPEC fold labels §§277–§286 are design sections, not m
 The repo is authoritative; trust executed evidence over any summary including
 this one.**
 
-## ⭐⭐⭐⭐⭐ PICKUP AT §896.1 — **THE §892 WALK IS RULED: 28 rows by the Fable seat, from the sealed evidence, no probe re-executed.** The seat is FABLE 5.1 (Fable chairs, Opus implements). Product `df7cdd37e`. Read this, then the §896 card below, then `$SC/RESUME-NOTE.md`.
+## ⭐⭐⭐⭐⭐ PICKUP AT §897 — **THE ANCHORS CONSIST IS DOWN (4 cars, `df7cdd37e` -> `fd8b6df00`).** The seat is Fable 5.1 (chairs, architects, validates); every lane is Opus (`model: "opus"`), implements and verifies.
+
+**Product** `claude/composite-r4` = `fd8b6df00`, sealed `refs/preserve/landing-anchors-2026-09-05`. **Ledger** = this act. The chair kit is sealed at `refs/preserve/chair-tools-2026-09-05` (restore: `git archive <ref> | tar -x -C $SC`); the resume note at `refs/preserve/resume-note-2026-09-05`.
+
+### ⭐ NEXT, IN ORDER
+1. **OSR-SCHEMA17** — brief `briefs/brief-OSR-SCHEMA17.md` in the kit; dock `laneINTEG-tree` @ `940d161ca` (23 desk cars over `90702c3e9`); topology-only corpus change (stress settlements into `roots`, NOT `generated`) + the schema-17 mint through `migrate-observed-shape-readers.mjs`; ⛔ no CONFIG added (20-new-rows path). Then replay the desk consist onto `fd8b6df00`, registers LAST, gate, land.
+2. The desk remainder (23 dark blocks: general 9, economy 5, warFaith 5, defense 4) · clamp waves 2–4 (72 copies vs ceiling 62; ONE ceiling ruling at the final wave) · the lighting wave from `$SC/lightingwave/PLAN.md` (LIGHT-PLAN, Opus, read-only — its plan replaces the LOST `LIGHTING-INVENTORY.md`; 31 items, 0 done, the charter's schema-16 claim is SPENT) · W-ARMS from `$SC/warms/` (Car 0 probes + B3 re-measure + B2 skeptic pass) · HORIZON-DARK (6 items, 2 double-counted with lighting) · ENC-4 with the sealed ENC-5 words · the docket.
+2b. **LIGHTING, re-planned (LIGHT-PLAN, sealed `refs/preserve/light-plan-2026-09-05`, the chair adopts it):** PROSE (its own consist, FIRST — dispatched as PROSE-REBASE onto `df7cdd37e`; a DECLARED same-seed text shift) → L-PROBE (chair act, zero bytes, AFTER prose lands) → L-HOMES (nine dark-inert builds) → L-DEFAULT (six hunks) → L-UI + L-MAT + the two door residues → L-PROBE-2 + the eleven declarations + the registers; SEAT-7/8 beside it from day one. ⛔ 14th decay: the GOLDEN-freeze machinery is PRESENT and UNFROZEN — `LGT-P14-WITNESS` owes a register row or a written exclusion in the same commit. `LGT-P15-EP1` owes the 25-key re-key, NOT the EP-1 release. Rung 17 is OSR-SCHEMA17's; the wave's migration is the next free rung after it.
+2c. **CS-9 is RULED chair-class and ADOPTED (own-export import = RESTORE path; the charset wall refuses at AUTHORING only)** — HORIZON-DARK B1 / CHARSET Car 2 and `LGT-P9-CS9` are unblocked; brief them from `brief-HORIZON-B1` when written.
+2d. **Queued and BRIEFED, in order** (`LANE-QUEUE.md` in the kit): OSR-SCHEMA17 (when no gate runs) → PDFDRIFT → DESK-ECON2 (DESK-7's eleven `{complexity}` forms are AUTHORED by the chair, sealed `refs/preserve/desk7-words-2026-09-05`, owner veto open) → DESK-DEF2 → HORIZON-B1/CHARSET Car 2 → DESK-9.
+3. Then the owner's WALK + one regen (NOT READY: deity-free corpus 0/44) → the exhaustive review → fix cars → FULL STOP before the soak.
+
+⛔ **Laws that bit tonight:** a seat change is a CONTRACT change — every instrument that pattern-matches the trailer is a consumer (chair-verify false-redded the first Fable act) · a count assertion over a marker must be LINE-ANCHORED when the marker also appears in prose · `git diff HEAD -- path` on a `D `+`??` ledger file compares HEAD to NOTHING (use `--no-index` against the HEAD blob) · zsh `$C:path` is a history modifier — ALWAYS `${C}:path` · the gate runner REFUSES a stale premise (product tip must equal the declared base) rather than obeying it.
+
+## (superseded) PICKUP AT §896.1 — **THE §892 WALK IS RULED: 28 rows by the Fable seat, from the sealed evidence, no probe re-executed.** The seat is FABLE 5.1 (Fable chairs, Opus implements). Product `df7cdd37e`. Read this, then the §896 card below, then `$SC/RESUME-NOTE.md`.
 
 ⛔ **What is NOT ruled and must not be read as ruled:** the 8 EVIDENCE-THIN calls (PLAUSIBLE until re-executed against the current tree) · the §892.5 critic (S99 never ran) · **R1 → R36** — every Opus-authored row from §893 to §896 is ENROLLED, not ruled; that is the next sitting. A Fable trailer on this act certifies the chair's own re-derivation, nothing else.
 

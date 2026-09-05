@@ -3638,3 +3638,17 @@ The rulings themselves are inline, one `*RULED (§892.x, Fable 5.1):*` paragraph
 - **Method:** verdicts re-derived from `walk/S01…S20.json` (sealed at `sitting-892-kit-2026-09-04d`); AMEND / REVERSE / EVIDENCE-THIN calls named by claim and receipt; RATIFY calls held as recorded. **No probe was re-executed.**
 - ⛔ **Residue:** 8 EVIDENCE-THIN calls stay PLAUSIBLE · the §892.5 critic (S99) never ran · the 14 lane-local ids are ruled under their parents.
 - ⭐ Every anchor was dry-run against the HEAD blob and resolved exactly once before the act; the writer asserted the same at the act.
+## §897 — THE ANCHORS LANDING (2026-09-05; SEAT: Fable 5.1 — validated)
+
+### R37 — lane ANCHORS (Opus 5; three cars replayed onto `df7cdd37e`)
+**Enrolled at §897.** Cars `2a7550741` (§894: the twelve mutilated §4 anchors de-slugged, pins moved in the same act), `52fd25c25` (§894.1: the corpus-join failure message), `272dbd2da` (§894 chair car under the Opus seat: the two product-side queue-class rows). All three carry `Seat: Opus 5 — Fable-unvalidated`. The register car (`Seat: Fable 5.1 — validated`) is a chair act and is not enrolled: the Fable seat probed the lighting figures and ran the totals instrument itself.
+**What the walk must re-derive:** that the twelve authored canonicals equal what `whatPhrase` returns seedless (the invariant the failure message now names); that LEG-7 was lane-authored and never an owner ruling (the §892 walk's finding, cited by the chair car); that the two-sided roster agreement in J-LEG-WIRE-15 still stands after de-slugging.
+**Status:** OWED — enrolled, not ruled.
+
+### R38 — lane WARMS-CAR0 (Opus 5; read-only at `272dbd2da`; receipts sealed `refs/preserve/warms-car0-2026-09-05`)
+**Enrolled at §897** (opened at §896.2). Zero product bytes. What the walk must re-derive: the five Car 0 probe results and the 40-figure re-measure (`warms/CAR0.md`); the skeptic pass's three findings (`warms/SKEPTIC.md`) — N from the family's rule (`gen-organic-ornament.mjs:29-42` ⇒ ≈18–19), the first-paint claim's wrong graph (`computeEagerModuleGraph()` vs `computeEngineSharedDomain()`), and the PDF↔PDF `campaign` drift at `SettlementCard.jsx:115` / `SingleDossierSuccessPage.jsx:183`; and the census correction (only the lighting census binds a new test file).
+**Status:** OWED — enrolled, not ruled. The chair's §896.2 ruling on N is a Fable ruling on an Opus measurement; the measurement itself is what is owed.
+
+### R39 — lane LIGHT-PLAN (Opus 5; read-only at `272dbd2da`; sealed `refs/preserve/light-plan-2026-09-05`)
+**Enrolled at §897.** Zero product bytes. What the walk must re-derive: the 31-item re-class (0 DONE / 2 PARTIAL / 1 CLOSED / 3 RULED / 25 open); the nine confirmed and one disputed decays; the 13th decay (prose rebase 2 → 8 overlapping paths, merge-base `30c1667bc`); the 14th decay (the golden-freeze machinery present and unfrozen; `LGT-P14-WITNESS` owes a register row); `LGT-P15-EP1` split into the 25-key re-key (owed) and the EP-1 release (not owed; the release crosses the detector); the order PROSE → L-PROBE → L-HOMES → L-DEFAULT → flips → L-PROBE-2, with the lane's own inversion of `wave-plan.md`'s Consist 0/1 (prose before probe, flagged vetoable) — the chair ADOPTED the order at §897.
+**Status:** OWED — enrolled, not ruled.
