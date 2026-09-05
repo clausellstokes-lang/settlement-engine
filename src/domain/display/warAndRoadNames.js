@@ -282,14 +282,19 @@ export function deriveWarName({ attackerId, defenderId, reasonType, nameFor = (i
 }
 
 /**
- * The typed cause standing on ONE deployment record: the highest-scored pin, ties
- * broken by codepoint so the pick never depends on array order. Null when the
- * record carries none (the dormant default, a legacy record, or a war whose pins
+ * The typed cause standing on ONE record carrying `casusReasons`: the highest-scored
+ * pin, ties broken by codepoint so the pick never depends on array order. Null when
+ * the record carries none (the dormant default, a legacy record, or a war whose pins
  * did not survive normalization).
+ *
+ * ⭐ EXPORTED because the pins outlive the deployment they were minted on. W-MEM's
+ * concluded-war record copies `casusReasons` VERBATIM, so the Remembrance reader asks
+ * the same question of a finished war that this file asks of a live one. One home per
+ * datum: a second scoring rule would let a war change its cause the day it ended.
  * @param {unknown} record
  * @returns {string|null}
  */
-function pinnedReasonOf(record) {
+export function pinnedWarReasonOf(record) {
   const rec = /** @type {{ casusReasons?: unknown }} */ (record || {});
   const pins = Array.isArray(rec.casusReasons) ? rec.casusReasons : [];
   /** @type {{ type: string, score: number }|null} */
@@ -332,7 +337,7 @@ function originWarOf(homeId, record) {
       reasonType: types.length ? types[0] : null,
     };
   }
-  return { attackerId: String(homeId), defenderId: String(rec.targetId), reasonType: pinnedReasonOf(rec) };
+  return { attackerId: String(homeId), defenderId: String(rec.targetId), reasonType: pinnedWarReasonOf(rec) };
 }
 
 /**
@@ -343,8 +348,11 @@ function originWarOf(homeId, record) {
  *
  * ⚠ THIS IS A LIVE READ AND ONLY A LIVE READ. `warDeployment.js` deletes the
  * deployment row at war end, so a concluded war leaves this list the tick it ends.
- * A durable record of concluded wars does not exist in this engine and would be a
- * new persistence shape; it is flagged for the owner's desk, not built here.
+ * ⭐ THE RECORD THIS NOTE ONCE SAID DID NOT EXIST NOW DOES: W-MEM's
+ * `worldState.concludedWars` is that durable shape, and its reader is
+ * `display/warRemembrance.js`. The two are deliberately separate surfaces — this one
+ * names wars that are being fought, that one names wars that are over — and they
+ * share the naming deriver below so a war keeps its name across the boundary.
  *
  * @param {Object} args
  * @param {unknown} [args.worldState]
