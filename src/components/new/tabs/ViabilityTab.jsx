@@ -29,12 +29,12 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
   // follows kernel law 2's fail-closed default, stated rather than defaulted. This tab
   // received neither flag before this car; `OutputContainer` now passes both.
   const magicProse = publicDossier
-    ? Object.freeze({ dependency: null })
+    ? Object.freeze({ arcaneReliance: null })
     : defenseMagicDependencyProse(s, {
       seed: String(s?._seed ?? s?.id ?? ''),
       audience: playerView ? 'player' : 'dm',
     });
-  const magicLine = drawnAtMount(MAGIC_DEPENDENCY_MOUNT, magicProse.dependency)?.sentence || null;
+  const magicLine = drawnAtMount(MAGIC_DEPENDENCY_MOUNT, magicProse.arcaneReliance)?.sentence || null;
 
   // Strip the verdict prefix from the summary. Behind canonicalViewModel, use
   // the reconciled verdict from the display model (§1f) — its body only, since

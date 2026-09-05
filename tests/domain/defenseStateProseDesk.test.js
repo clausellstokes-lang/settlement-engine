@@ -1637,15 +1637,15 @@ describe('DS-DEF-9 — magic dependency, and the slot filled from the right ROLE
     const refused = chained('Arcane fabrication', ['Vaelthorn Steel']);
     expect(hasNamedMagicChain(refused.economicState.activeChains)).toBe(true);
     const drawn = defenseMagicDependencyProse(refused, { seed: 'r', audience: 'dm' });
-    expect(drawn.dependency, 'a refused fill blanked the position').toBeTruthy();
-    expect(drawn.dependency.provenance.poolKey).toBe('magicDependency true, with a NAMED dependent chain');
-    expect(drawn.dependency.sentence.length, 'the degraded pool drew an empty line').toBeGreaterThan(40);
+    expect(drawn.arcaneReliance, 'a refused fill blanked the position').toBeTruthy();
+    expect(drawn.arcaneReliance.provenance.poolKey).toBe('magicDependency true, with a NAMED dependent chain');
+    expect(drawn.arcaneReliance.sentence.length, 'the degraded pool drew an empty line').toBeGreaterThan(40);
     // anchored: the length arm on the line above proves the subject is a real rendered
-    expect(drawn.dependency.sentence).not.toContain('{'); // sentence and not an empty string
+    expect(drawn.arcaneReliance.sentence).not.toContain('{'); // sentence and not an empty string
     const slotless = DEF9_POOLS['magicDependency true, with a NAMED dependent chain']
       .filter((v) => !(v.slots || []).includes('good'));
     expect(slotless, 'the pool has no slotless variant left to degrade to').toHaveLength(1);
-    expect(drawn.dependency.sentence).toBe(slotless[0].text.replace('{settlement}', 'Silbergate'));
+    expect(drawn.arcaneReliance.sentence).toBe(slotless[0].text.replace('{settlement}', 'Silbergate'));
     // …and with a CLEAN fill the pool's {good}-bearing variants come back into play.
     // ⚠ Asserted OVER SEEDS, not on one: the draw is deterministic on the seed, and two
     // of this pool's three variants name the slot — so a single seed proves only which
@@ -1654,7 +1654,7 @@ describe('DS-DEF-9 — magic dependency, and the slot filled from the right ROLE
     const withGood = new Set();
     for (const seed of ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']) {
       withGood.add(defenseMagicDependencyProse(chained('Arcane fabrication', ['Preserved foods']), { seed })
-        .dependency.sentence);
+        .arcaneReliance.sentence);
     }
     expect(withGood.size, 'the draw collapsed to one variant, so the next arm proves little')
       .toBeGreaterThan(1);
@@ -1671,7 +1671,7 @@ describe('DS-DEF-9 — magic dependency, and the slot filled from the right ROLE
     expect(hasNamedMagicChain([{ label: 'x' }])).toBe(false);
     expect(hasNamedMagicChain(undefined)).toBe(false);
     expect(defenseMagicDependencyProse(chained('n', ['Vaelthorn Steel']), { seed: 'q' })
-      .dependency.provenance.poolKey).toBe('magicDependency true, with a NAMED dependent chain');
+      .arcaneReliance.provenance.poolKey).toBe('magicDependency true, with a NAMED dependent chain');
   });
 
   it('REACHABILITY, MEASURED OVER GENERATED WORLDS rather than assumed', () => {
@@ -1680,11 +1680,11 @@ describe('DS-DEF-9 — magic dependency, and the slot filled from the right ROLE
     for (const { label, settlement } of WORLDS) {
       expect(typeof settlement.defenseProfile?.magicDependency, `${label}`).toBe('boolean');
       const drawn = defenseMagicDependencyProse(settlement, { seed: 'm', audience: 'dm' });
-      expect(drawn.dependency, `${label} drew nothing`).toBeTruthy();
-      expect(drawn.dependency.sentence.length, `${label} drew an empty line`).toBeGreaterThan(40);
+      expect(drawn.arcaneReliance, `${label} drew nothing`).toBeTruthy();
+      expect(drawn.arcaneReliance.sentence.length, `${label} drew an empty line`).toBeGreaterThan(40);
       // anchored: the length arm on the line above proves the subject is a real rendered
-      expect(drawn.dependency.sentence).not.toContain('{'); // sentence and not an empty string
-      expect(drawn.dependency.provenance.blockId).toBe('DS-DEF-9');
+      expect(drawn.arcaneReliance.sentence).not.toContain('{'); // sentence and not an empty string
+      expect(drawn.arcaneReliance.provenance.blockId).toBe('DS-DEF-9');
     }
     // And the TRUE flag is reachable — gated entirely by stress incidence, not by magic.
     // A magic-forced sweep is what makes the state appear; the sweep is small on purpose
@@ -1701,8 +1701,8 @@ describe('DS-DEF-9 — magic dependency, and the slot filled from the right ROLE
       if (s.defenseProfile?.magicDependency !== true) continue;
       trueSeen++;
       const drawn = defenseMagicDependencyProse(s, { seed: `mx-${i}`, audience: 'dm' });
-      expect(drawn.dependency.provenance.poolKey).not.toBe('magicDependency false');
-      if (drawn.dependency.provenance.poolKey.includes('NAMED')) namedSeen++;
+      expect(drawn.arcaneReliance.provenance.poolKey).not.toBe('magicDependency false');
+      if (drawn.arcaneReliance.provenance.poolKey.includes('NAMED')) namedSeen++;
     }
     expect(trueSeen, 'no magic-dependent world was generated, so the arm proves nothing')
       .toBeGreaterThan(0);
@@ -1778,13 +1778,25 @@ describe('DS-DEF-7 and DS-DEF-10 — dark by measurement, and the pin on both de
       .map((k) => k.replace(/^posture /, '').replace(/ \([^)]*\)$/, ''));
     expect([...declared].sort()).toEqual([...postures].sort());
     expect(declared).toHaveLength(15);
-    // …and where the corpus word differs from the producer's token, the corpus carries the
-    // token in parentheses — the label-trap rule, already solved by the author.
+    // ⚠ AND THE PARENTHETICAL IS THE TOKEN DE-UNDERSCORED, NOT THE TOKEN. This arm asserted
+    // the token verbatim and REDDED on `politically fractured`, which corrected the claim:
+    // where the corpus word differs from the producer's, the corpus does help by naming the
+    // producer — but it spells the token's underscores as spaces. That is the label trap one
+    // notch smaller than usual, and the measured cost of missing it is exact: a route keying
+    // on the parenthetical verbatim reaches 3 of the 6 and drops the other 3.
     const parenthesised = DEF10_DARK_POOLS
       .filter((k) => /^posture .* \(.*\)$/.test(k)).map((k) => /\(([^)]*)\)$/.exec(k)[1]);
-    expect(parenthesised.length).toBeGreaterThan(0);
-    for (const token of parenthesised) {
-      expect(Object.keys(DEFENSE_STRESS_STATUS), `${token} is not a stress type`).toContain(token);
+    const tokens = Object.keys(DEFENSE_STRESS_STATUS);
+    expect(parenthesised).toHaveLength(6);
+    const verbatim = parenthesised.filter((p) => tokens.includes(p));
+    const deUnderscored = parenthesised.filter((p) => tokens.includes(p.replace(/ /g, '_')));
+    // EVERY one resolves once the underscores are restored — that is the usable route.
+    expect(deUnderscored).toHaveLength(6);
+    // …and exactly three would have resolved without it, which is the trap's size. The
+    // three that do are the single-word tokens, which have no underscore to lose.
+    expect(verbatim.sort()).toEqual(['famine', 'indebted', 'wartime']);
+    for (const p of parenthesised) {
+      expect(tokens, `${p} does not de-underscore to a stress type`).toContain(p.replace(/ /g, '_'));
     }
   });
 

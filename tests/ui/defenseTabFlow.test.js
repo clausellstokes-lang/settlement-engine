@@ -126,7 +126,7 @@ describe('DS-DEF-6 at defense.supportingCapabilities — a real draw, not a lite
 
 describe('DS-DEF-9 at viability.magicDependency — the registry\'s first cross-tab row', () => {
   test('the viability tab renders the EXACT dependency sentence the desk produced', () => {
-    const expected = defenseMagicDependencyProse(port, opts(port)).dependency.sentence;
+    const expected = defenseMagicDependencyProse(port, opts(port)).arcaneReliance.sentence;
     expect(typeof expected, 'the desk drew nothing, so the DOM assertion would be vacuous').toBe('string');
     const { container } = render(e(ViabilityTab, { settlement: port, narrativeNote: null }));
     expect(container.textContent).toContain(expected);
@@ -140,10 +140,10 @@ describe('DS-DEF-9 at viability.magicDependency — the registry\'s first cross-
     // would leave a third of an authored block permanently unreachable.
     expect(port.defenseProfile.magicDependency).toBe(false);
     const drawn = defenseMagicDependencyProse(port, opts(port));
-    expect(drawn.dependency.provenance.poolKey).toBe('magicDependency false');
+    expect(drawn.arcaneReliance.provenance.poolKey).toBe('magicDependency false');
     const { container } = render(e(ViabilityTab, { settlement: port, narrativeNote: null }));
     const text = container.textContent;
-    expect(text).toContain(drawn.dependency.sentence);
+    expect(text).toContain(drawn.arcaneReliance.sentence);
     // The box itself is correctly absent, and the corpus line is present anyway — which is
     // the whole point of rendering it outside.
     // anchored: the assertion two lines above proves `text` carries the rendered sentence,
@@ -151,7 +151,7 @@ describe('DS-DEF-9 at viability.magicDependency — the registry\'s first cross-
   });
 
   test('THE PUBLIC GATE: the viability tab stays silent for an anonymous viewer', () => {
-    const expected = defenseMagicDependencyProse(port, opts(port)).dependency.sentence;
+    const expected = defenseMagicDependencyProse(port, opts(port)).arcaneReliance.sentence;
     const priv = render(e(ViabilityTab, { settlement: port, narrativeNote: null, publicDossier: false }));
     const privText = priv.container.textContent;
     cleanup();
