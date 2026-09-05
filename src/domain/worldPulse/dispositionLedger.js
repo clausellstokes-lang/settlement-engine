@@ -185,13 +185,29 @@ export function createLedgerEntry() {
 }
 
 /**
+ * ⛔ `|| 0` IS A FALSY SCREEN, NOT A FINITENESS SCREEN, and the difference is the whole
+ * reason `finite()` appears on both terms below. It CATCHES NaN — NaN is falsy — and
+ * MISSES ±Infinity, which is truthy and rode straight through. `{wins: Infinity,
+ * losses: 0}` therefore read `stock01 = 1`, the top 'dominant' band, and drove
+ * dispositionProfile's `thresholdFactorOf` to its 0.8 floor: the lowest possible bar on
+ * the coalition-join threshold, decided by a corrupt field rather than a won contest.
+ * `{wins: Infinity, losses: Infinity}` produced NaN, which the gates below absorbed to a
+ * silent neutral 0.5. Worse than either read, both values LANDED IN PERSISTED STATE via
+ * `migrateDispositionStats` and `ratchetDisposition` — and `JSON.stringify` writes a
+ * non-finite number as `null`, so a save/load cycle mutated the ledger underneath a
+ * campaign with no event to explain it.
+ *
+ * The line above is already a finiteness screen (`Number.isFinite(entry.score)`), which
+ * is this function's own statement of intent; this line simply now agrees with it.
+ * `finite()` keeps the string coercion `Number()` was there for — `'3'` still reads 3.
+ *
  * @param {any} entry
  * @returns {number}
  */
 function entryScore(entry) {
   if (!entry) return 0;
   if (Number.isFinite(entry.score)) return entry.score;
-  return (Number(entry.wins) || 0) - (Number(entry.losses) || 0);
+  return finite(Number(entry.wins), 0) - finite(Number(entry.losses), 0);
 }
 
 /** Legacy signed score -> normalized martial stock, preserving neutral exactly. */
@@ -324,8 +340,11 @@ export function migrateDispositionStats(ledger, tick = 0) {
     for (const channel of DISPOSITION_CHANNELS) channels[channel] = readDispositionChannel(prev, channel);
     out[id] = {
       ...prev,
-      wins: Number(prev.wins) || 0,
-      losses: Number(prev.losses) || 0,
+      // The same finiteness screen as `entryScore`, for the same reason and one step
+      // more urgently: this writer's output IS the persisted ledger, and `Infinity`
+      // serializes to `null`.
+      wins: finite(Number(prev.wins), 0),
+      losses: finite(Number(prev.losses), 0),
       score: entryScore(prev),
       channels,
       updatedTick: Number.isFinite(prev.updatedTick)
@@ -391,8 +410,11 @@ export function ratchetDisposition(ledger, id, delta) {
   return {
     ...(ledger || {}),
     [key]: {
-      wins: (Number(prev.wins) || 0) + (delta.outcome === 'win' ? 1 : 0),
-      losses: (Number(prev.losses) || 0) + (delta.outcome === 'loss' ? 1 : 0),
+      // Finiteness-screened, not falsy-screened (see `entryScore`): an Infinity that
+      // rode through here was PERMANENT, because `Infinity + 1` is Infinity and no
+      // number of later outcomes could ever bring the count back.
+      wins: finite(Number(prev.wins), 0) + (delta.outcome === 'win' ? 1 : 0),
+      losses: finite(Number(prev.losses), 0) + (delta.outcome === 'loss' ? 1 : 0),
       score: nextScore,
       ...extended,
       ...preservedAppetite,
@@ -738,8 +760,8 @@ export function advanceDispositionChannels(ledger, deltas = [], options = {}) {
       : {};
     next[id] = {
       ...prev,
-      wins: (Number(prev.wins) || 0) + martialWins,
-      losses: (Number(prev.losses) || 0) + martialLosses,
+      wins: finite(Number(prev.wins), 0) + martialWins,
+      losses: finite(Number(prev.losses), 0) + martialLosses,
       score: round6((channels.martial.stock01 - NEUTRAL_STOCK01) * 2 * SCORE_MAX),
       channels,
       updatedTick: now,
