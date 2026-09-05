@@ -63,4 +63,60 @@
  * lands its key, its gate read and its row in one commit.
  * @type {ReadonlyArray<SubsystemRow>}
  */
-export const OPS_SUBSYSTEM_ROWS = Object.freeze([]);
+export const OPS_SUBSYSTEM_ROWS = Object.freeze([
+  Object.freeze({
+    rule: 'infiltrationDepthEnabled',
+    title: 'The infiltration ladder — how deep a planted operative is, and what depth costs',
+    module: 'src/domain/worldPulse/espionage/infiltrationDepth.js,src/domain/worldPulse/espionage/espionageGate.js',
+    aliveness: Object.freeze({
+      // ⛔ DELIBERATELY EMPTY, AND THE ONLY VALUE THAT CAN BE HONEST HERE.
+      // `tests/domain/subsystemRowsVirtual.test.js` traces every leaf named in
+      // `LANE_LEAVES[rule]` for `candidateType: '...'` literals and asserts
+      // DECLARED == SEPARABLE; the ladder leaf mints no candidate at all (measured:
+      // zero occurrences of the token in either module), so the empty set on BOTH
+      // sides is the only green — and it is also the truth.
+      eventTypes: Object.freeze([]),
+      // DELIBERATELY EMPTY, and a commitment rather than an omission: this car mints
+      // ZERO news kinds. The going-native arc and the exposure beats are W-OPS car 7's
+      // (the voice car, Fable seat), and declaring a mover family here would grade this
+      // row ALIVE off a beat no lane has minted — the recorded moverFamily hazard.
+      moverFamilies: Object.freeze([]),
+      // DELIBERATELY EMPTY: the leaf is PURE and writes NOTHING. Every door-bearing
+      // export takes an explicit `lit` argument and returns `null` when it is anything
+      // but `true`, so a lit world with no caller still persists not one key. A
+      // stateKey declared here would be a channel the tree cannot fill.
+      stateKeys: Object.freeze([]),
+      other: 'THE VOLUME DIRECTIVE (DESIGN_W_OPS §6, one of the TWO doors that section charters by name): the infiltration ladder prices how deep a planted operative has gone and what that depth costs him and his patron — L3/L4 placement, the cover object, and the web-seat convergence. WHAT THE FLAG LIGHTS, EXACTLY ONE THING AT THIS CAR: nothing yet, and that is the honest reading rather than a modest one. The leaf has an EMPTY src importer set, pinned by its own suite over a live tree walk, so lighting the key changes no world byte on any path. WHAT THE MINT BUYS, WHICH IS NOT NOTHING: CENSUS VISIBILITY. CR-WR10-C exists because a subsystem could be built, gated and shipped while the totality walker that demands its certification row could not see the key at all; this leaf was invisible in a THIRD way — built, dark, and UNGATED — so it was not even on the measured backlog. The manifest entry plus this row plus the one gate read end that. WHERE THE GATE LIVES AND WHY NOT IN THE LEAF: the ladder leaf is deliberately gate-free. Its own header states the design verbatim — every door-bearing export takes an explicit `lit` ARGUMENT — and three arms of its suite pin that the leaf names neither `simulationRules` nor a strict `=== true` comparison. The module that RESOLVES `lit` from a world is therefore the espionage family\'s ONE door module, espionageGate.js, which is where infiltrationDepthActive lands. That keeps the leaf pure and injected exactly as its charter says and keeps the estate\'s one-by-name-read-per-key law literal. THE GATE IS A CONJUNCTION AND IT IS MEANT: the ladder deepens ES\'s own rooted dwell (the leaf extends espionageMath#dwellRamp and espionageGauntlet#gatherOrGovernRead), so a lit ladder over a dark espionage layer would be a depth reading on missions that cannot exist. W-OPS §2 says it in terms: everything in that volume sits behind espionageActive / errandSpineActive / its own doors. WHAT NOTHING CAN SEE, DECLARED: no receipt channel can grade this row, and no soak year can either. The soak builds its rules from the full_simulation spread, which declares no virtual key, so ruleState resolves to unknown and the schema grades UNOBSERVED at its fourth branch. That is the honest verdict for a lane with no caller, and `unobserved` is therefore the row\'s evidence rather than `indirect` — there is no dispositive channel for a later soak to fill, which is precisely the distinction subsystemRowsGrowth.js records. THE OBSERVATION THAT WOULD CLOSE THE GAP: a per-tick census of placement enrollments and depth rungs, which needs a WRITER, and the writer is the wiring car\'s. Until it lands this row is REGRESSION-grade by construction, exactly the disposition SEAT-1 recorded for foreignSeatOf. WHAT THIS CAR DELIBERATELY DOES NOT DO: it wires nothing, it puts the key in NO preset, and it mints no cover-object persistence — F15 records that a standing cover really is new persisted schema and leaves it to the owner. The lane is pinned at tests/domain/infiltrationDepth.test.js.',
+    }),
+    // No caller, so no cadence: the ladder re-vets on a dwell ramp whose plateau is
+    // measured in periods, not ticks, and a lit world with a writer would still see a
+    // rung change rarely. `rare` is the tempo the ramp's own shape implies.
+    expectedTempo: 'rare',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'dark_is_zero_keys_written',
+        description: 'THE PROMISE, in the volume\'s own words (§6): dark ⇒ zero keys written ⇒ byte-identical. Every door-bearing export in the ladder leaf takes an explicit `lit` argument and returns `null` when it is anything but `true`, so absent, false and every truthy non-true value are the same world.',
+        check: 'Expressible from source and from state, and asserted both ways in tests/domain/infiltrationDepth.test.js: the leaf-purity arms drive placementEnrollment with lit false and assert a null read, and the door arm below drives infiltrationDepthActive through the four truthy-refusal spellings.',
+      }),
+      Object.freeze({
+        name: 'the_flag_has_exactly_one_gate_read',
+        description: 'The key is read by name, strictly against `true`, at exactly ONE site in src/: infiltrationDepthActive in espionage/espionageGate.js. There is no loose-truthiness read anywhere, the key appears in simulationRules.js ONLY as its manifest member, and it is in no preset spread and not in DEFAULT_SIMULATION_RULES.',
+        check: 'Expressible from source and asserted that way in tests/domain/infiltrationDepth.test.js, the polarity census, over a comment-stripped source strip so a name written in a comment or a receipt string is never miscounted as a use.',
+      }),
+      Object.freeze({
+        name: 'the_ladder_leaf_stays_gate_free',
+        description: 'The leaf itself never acquires the read. Its exports take `lit` as an argument by charter, and a gate inside a pure injected leaf would be a second place a world could be consulted — the two-truths shape the estate refuses. The door lives in the family gate module and nowhere else.',
+        check: 'Expressible from source and asserted that way in tests/domain/infiltrationDepth.test.js: the leaf carries neither the token `simulationRules` nor a strict `=== true` comparison, each anchored on a token the same scan can see so an unreadable leaf reds instead of certifying.',
+      }),
+      Object.freeze({
+        name: 'lighting_the_ladder_over_a_dark_layer_is_impossible',
+        description: 'The door AND-composes with espionageActive, so a config that lit this key alone leaves the ladder dark rather than half-running — the same safe-invalid property ES-0 gives the espionage lighting order.',
+        check: 'Expressible from state and asserted that way in tests/domain/infiltrationDepth.test.js: the door is driven with the ladder key lit and the espionage conjunction broken at each of its three doors in turn, and reads false every time.',
+      }),
+    ]),
+    // No channel at all, so the row can never be ALIVE and says so honestly — the
+    // contributionLedgerEnabled disposition, which is this row's nearest precedent: a
+    // built, dark, caller-less lane whose flags exist for the module that reads them.
+    soakEvidence: 'unobserved',
+  }),
+]);

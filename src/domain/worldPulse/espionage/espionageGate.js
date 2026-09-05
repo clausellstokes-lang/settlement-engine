@@ -80,3 +80,38 @@ export function espionageActive(worldState) {
   if (rules.errandSpineEnabled !== true) return false;
   return rules.espionageEnabled === true;
 }
+
+/**
+ * ── W-OPS DOOR 1 · THE INFILTRATION LADDER (DESIGN_W_OPS §6) ──────────────────
+ *
+ * `infiltrationDepthEnabled` is the second door DESIGN_W_OPS §6 charters, and it lives
+ * HERE rather than in `infiltrationDepth.js` for a reason that leaf states in its own
+ * header: every door-bearing export there takes an explicit `lit` ARGUMENT and returns
+ * `null` when it is anything but `true`. The leaf is deliberately gate-free — three of
+ * its suite's arms pin that it names neither `simulationRules` nor `=== true` — so the
+ * module that RESOLVES `lit` from a world is the espionage family's one door module,
+ * which is this one. That keeps the leaf pure and injected exactly as its charter says,
+ * and keeps the estate's "one by-name read per key" law literal.
+ *
+ * ⛔ THE CONJUNCTION IS MEANT. The ladder deepens ES's own rooted dwell (the leaf
+ * `extends` espionageMath#dwellRamp and espionageGauntlet#gatherOrGovernRead), so a lit
+ * ladder over a dark espionage layer would be a depth reading on missions that cannot
+ * exist. W-OPS §2 says it in terms: everything in that volume sits behind
+ * `espionageActive` / `errandSpineActive` / its own doors.
+ *
+ * ⚠ NO PRODUCTION CONSUMER AT THIS CAR, AND THAT IS DECLARED RATHER THAN HIDDEN. The
+ * ladder leaf has an empty src importer set, pinned by its own suite, so this predicate
+ * is REGRESSION-grade today and becomes discovery-grade when the wiring car lands a
+ * caller — the `foreignSeatOf` disposition at SEAT-1, verbatim. What the mint buys now
+ * is CENSUS VISIBILITY: CR-WR10-C exists because a built, dark, ungated subsystem is
+ * invisible to the totality walker that demands its certification row.
+ *
+ * @param {unknown} worldState
+ * @returns {boolean}
+ */
+export function infiltrationDepthActive(worldState) {
+  if (!espionageActive(worldState)) return false;
+  const rules = /** @type {{ simulationRules?: Record<string, unknown> }} */ (worldState)?.simulationRules;
+  if (!rules || typeof rules !== 'object') return false;
+  return rules.infiltrationDepthEnabled === true;
+}

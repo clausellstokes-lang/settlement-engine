@@ -97,8 +97,12 @@ describe('WC-0E · the war-circulation flags, the contribution ledger shape, and
     // describe, and it is unchanged — one registry the mint site can enumerate, still
     // TE-GUARDS-1's subject. The figure is RE-MEASURED here, never re-applied: both
     // literals were read off the live modules (30 and 30) before this line was written.
-    expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toHaveLength(30);
-    expect(VIRTUAL_SUBSYSTEM_ROWS).toHaveLength(30);
+    // 30 → 31 at the lighting wave's L-HOMES car 4 (LGT-P5-WOPS, 2026-09-05), which mints
+    // the first W-OPS door with its certification row in the reserved `subsystemRowsOps.js`
+    // leaf and its ONE by-name gate read in the espionage family's door module. Both
+    // literals were read off the live modules (31 and 31) before this line was moved.
+    expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toHaveLength(31);
+    expect(VIRTUAL_SUBSYSTEM_ROWS).toHaveLength(31);
     // ⭐ THE BIJECTION IS A TRIPLE, NOT A PAIR. The ordered-equality pin in
     // subsystemRowsVirtual.test.js couples the manifest to VIRTUAL_RULES; direction 3 of
     // engineGatedRuleKeys couples the manifest to the certification rows. A flag mint moves

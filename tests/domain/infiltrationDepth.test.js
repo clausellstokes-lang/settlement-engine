@@ -46,6 +46,15 @@ import {
   rampLawViolations,
 } from '../../src/domain/worldPulse/espionage/infiltrationDepth.js';
 import { ESPIONAGE_TUNING, dwellRamp } from '../../src/domain/worldPulse/espionage/espionageMath.js';
+// LGT-P5-WOPS: the door this leaf's flag was minted onto. The read lives in the family
+// gate module by charter (this leaf takes `lit` as an argument), so the battery that owns
+// the darkness claim is also the one that owns the door's arms.
+import { infiltrationDepthActive } from '../../src/domain/worldPulse/espionage/espionageGate.js';
+import {
+  DEFAULT_SIMULATION_RULES,
+  ENGINE_GATED_VIRTUAL_RULE_KEYS,
+  SIMULATION_RULE_PRESETS,
+} from '../../src/domain/worldPulse/simulationRules.js';
 import { CORRUPTION_WEB_TUNING } from '../../src/domain/worldPulse/corruptionWeb.js';
 // O6-B's reconcile pin reads the ONE dispatch registry from its own home. The LEAF still
 // does not — arm 6's `expectAbsentWithAnchor` on `MISSION_KIND_CATALOG` is what keeps the
@@ -640,15 +649,40 @@ describe('W-OPS O3 — darkness, and citations that cannot rot', () => {
   test('⭐⭐ NO PRODUCTION CALLER: nothing under src/ imports this leaf', () => {
     const modules = srcModules().filter((rel) => rel !== LEAF);
     expect(modules.length).toBeGreaterThan(200); // the scan is live, not an empty walk
-    const importers = modules.filter((rel) => /infiltrationDepth\.js/.test(codeOf(rel)));
+    // ⏱ NARROWED 2026-09-05 BY LGT-P5-WOPS, ON THIS VOLUME'S OWN RULING. The arm's CLAIM
+    // is that nothing under src/ IMPORTS this leaf, and its first spelling measured
+    // MENTIONS instead — so the leaf's own certification row, whose `module` field must
+    // name the file it certifies, reddened an arm about callers. The sibling car already
+    // ruled the instrument: `tests/domain/missionDispatcher.test.js` says verbatim "An
+    // IMPORT SPECIFIER census, not a mention census … a header is not a caller." This is
+    // that census, and it is STRICTLY STRONGER than the old one for the property named:
+    // the mention scan could be satisfied by a renamed import, and this cannot.
+    const importers = modules.filter((rel) => /from\s+'[^']*infiltrationDepth\.js'/.test(codeOf(rel)));
     expect(importers).toEqual([]);
+    // ...AND THE MENTIONS STAY CENSUSED, as an EXACT roster rather than an empty one, so a
+    // sixth namer still reds. Four are the mint's own surfaces (the manifest, the row, the
+    // door, the sibling leaf's provenance) and the fifth is this leaf itself.
+    // ⚠ THE WORD BOUNDARY IS LOAD-BEARING AND WAS MEASURED, NOT ASSUMED: `\b` after
+    // `infiltrationDepth` refuses `infiltrationDepthEnabled`, so this roster is the FILE's
+    // namers and not the KEY's. The key's own roster is the polarity census at the foot of
+    // this file, which counts comparisons rather than names.
+    const namers = srcModules().filter((rel) => /\binfiltrationDepth\b/.test(codeOf(rel))).sort();
+    expect(namers).toEqual([
+      'src/domain/certification/subsystemRowsOps.js',
+      'src/domain/worldPulse/espionage/infiltrationDepth.js',
+    ]);
   });
 
   test('⛔ NO FLAG IS MINTED HERE — the door is named, and the gate read is not written', () => {
     const leafCode = codeOf(LEAF);
-    // The CR-WR10-C mint is one by-name `rules.<key> === true` read plus a manifest entry
-    // plus an authored row, all in one commit. This car writes none of them, so the
-    // engine-gated-key census is owed nothing by this leaf.
+    // ⏱ UPDATE, 2026-09-05 (lighting wave, L-HOMES car 4 / LGT-P5-WOPS): THE MINT HAS
+    // LANDED, AND THIS ARM IS UNCHANGED ON PURPOSE. The CR-WR10-C trio — the by-name
+    // `rules.<key> === true` read, the manifest entry, the authored certification row —
+    // is now in the tree, but the READ is in the family DOOR module and never here: the
+    // leaf's own header declares that every door-bearing export takes an explicit `lit`
+    // ARGUMENT, so a gate inside this pure injected leaf would be a second place a world
+    // could be consulted. The two negatives below are therefore MORE load-bearing after
+    // the mint than before it, and the door's own arms are at the foot of this file.
     // ⭐ THE DOOR IS NAMED AND NEVER READ, and both halves are asserted through the same
     // source: `infiltrationDepthEnabled` is present, `simulationRules` is not, and the
     // `!== true` anchor proves the scan can see a strict comparison in this file at all.
@@ -708,5 +742,122 @@ describe('W-OPS O3 — darkness, and citations that cannot rot', () => {
       leafCode, "from '../corruptionWeb.js'", "from './espionageMath.js'",
       'the only import is same-family, so no graph is dragged and nothing can drift',
     );
+  });
+});
+
+// ── 9. THE DOOR, MINTED 2026-09-05 BY LGT-P5-WOPS ────────────────────────────────
+
+describe('W-OPS O3 — the CR-WR10-C door, and the polarity census that keeps it single', () => {
+  test('⭐ THE ONE GATE READ IS LIT, AND IT IS THE FAMILY DOOR — not this leaf', () => {
+    // THE LIT DRIVE. `infiltrationDepthEnabled: true` reaches the door through a real
+    // world shape, with the espionage conjunction satisfied, so the mint has a standing
+    // flag-ON proof rather than a dark-only one.
+    // ⚠ `beliefsActive` reads a positive integer `spatialCanonVersion` and an info mode
+    // that is not omniscient — NOT a `beliefsEnabled` key. The fixture is the real door's
+    // real precondition, measured from `beliefMap.beliefsActive`, so a world shape that
+    // could never satisfy ES-0 cannot make this arm pass by accident.
+    const lit = {
+      spatialCanonVersion: 1,
+      simulationRules: {
+        // ⚠ `infoModeOf` FAILS CLOSED TO 'omniscient', and `beliefsActive` refuses that
+        // mode — so an omitted infoMode is a DARK world, not a lit one. Measured from
+        // `simulationRules.infoModeOf`, never assumed.
+        infoMode: 'full',
+        errandSpineEnabled: true,
+        espionageEnabled: true,
+        infiltrationDepthEnabled: true,
+      },
+    };
+    expect(infiltrationDepthActive(lit)).toBe(true);
+    // ...and the key is what carries it: drop it alone and the door refuses.
+    expect(infiltrationDepthActive({
+      ...lit, simulationRules: { ...lit.simulationRules, infiltrationDepthEnabled: false },
+    })).toBe(false);
+    expect(infiltrationDepthActive({ simulationRules: {} })).toBe(false);
+    expect(infiltrationDepthActive(null)).toBe(false);
+    expect(infiltrationDepthActive(undefined)).toBe(false);
+  });
+
+  test('⛔ STRICT, NOT TRUTHY: every truthy non-true spelling reads exactly like absent', () => {
+    // The strict `=== true` read is what makes these identical to the absent case rather
+    // than merely close, which is the whole of the dormancy claim (§6: dark ⇒ zero keys).
+    const absent = infiltrationDepthActive({
+      spatialCanonVersion: 1,
+      simulationRules: { infoMode: 'full', errandSpineEnabled: true, espionageEnabled: true },
+    });
+    expect(absent).toBe(false);
+    for (const truthy of [1, 'true', {}, []]) {
+      expect(infiltrationDepthActive({
+        spatialCanonVersion: 1,
+        simulationRules: {
+          infoMode: 'full',
+          errandSpineEnabled: true,
+          espionageEnabled: true,
+          infiltrationDepthEnabled: truthy,
+        },
+      }), `a truthy non-true ${JSON.stringify(truthy)} must read exactly like absent`).toBe(absent);
+    }
+  });
+
+  test('⛔ THE CONJUNCTION: a lit ladder over a dark espionage layer stays dark', () => {
+    // Each of ES-0's three doors dropped ALONE, because a test that only proves the last
+    // one has proven nothing about the first two — the recorded two-guard defect.
+    const base = {
+      infoMode: 'full',
+      errandSpineEnabled: true,
+      espionageEnabled: true,
+      infiltrationDepthEnabled: true,
+    };
+    // Door 1 — beliefs live: dropped by removing the canon marker `beliefsActive` reads.
+    expect(infiltrationDepthActive({ simulationRules: base })).toBe(false);
+    // Door 2 — the errand spine, ES-0's lighting-order precondition.
+    expect(infiltrationDepthActive({
+      spatialCanonVersion: 1, simulationRules: { ...base, errandSpineEnabled: false },
+    })).toBe(false);
+    // Door 3 — the espionage flag itself, by name.
+    expect(infiltrationDepthActive({
+      spatialCanonVersion: 1, simulationRules: { ...base, espionageEnabled: false },
+    })).toBe(false);
+    // NON-VACUITY: the same fixture with all three doors open is TRUE, so the three
+    // refusals above are refusals and not a fixture that could never pass.
+    expect(infiltrationDepthActive({ spatialCanonVersion: 1, simulationRules: base })).toBe(true);
+  });
+
+  test('⛔ THE POLARITY CENSUS: exactly ONE by-name read in src/, and it is strict', () => {
+    // Over a comment-stripped strip, so a name written in a comment or a receipt string
+    // is never miscounted as a use — the shared `codeOnly` discipline in this leaf's own
+    // spelling (`codeOf`), which the arms above already drive.
+    const KEY = 'infiltrationDepthEnabled';
+    // ⛔ A READ, NOT A MENTION. The manifest member, the certification row's `rule` field
+    // and the sibling leaf's provenance string all NAME the key and gate nothing; a census
+    // that counted them would convict the mint's own bookkeeping. The scan therefore looks
+    // for the COMPARISON — the only shape `engineGatedRuleKeys` counts as a gate.
+    const READ_RE = new RegExp(`\\b${KEY}\\s*(?:===|!==|==|!=)`);
+    const readers = srcModules()
+      .map((rel) => ({ rel, code: codeOf(rel) }))
+      .filter((entry) => READ_RE.test(entry.code))
+      .map((entry) => entry.rel)
+      .sort();
+    expect(readers).toEqual(['src/domain/worldPulse/espionage/espionageGate.js']);
+    const gate = codeOf('src/domain/worldPulse/espionage/espionageGate.js');
+    expect(new RegExp(`rules\\.${KEY}\\s*===\\s*true`).test(gate)).toBe(true);
+    // No loose-truthiness spelling anywhere: a bare `rules.<key>` used as a condition, or
+    // a `!== false`, would be a second polarity to keep in step.
+    expect(new RegExp(`${KEY}\\s*!==\\s*false`).test(gate)).toBe(false);
+    // NON-VACUITY: the scan can see the token, proven by a plant rather than assumed.
+    expect(READ_RE.test('rules.infiltrationDepthEnabled === true')).toBe(true);
+    expect(READ_RE.test("door: 'infiltrationDepthEnabled'")).toBe(false);
+  });
+
+  test('⛔ THE KEY IS VIRTUAL: absent from the defaults and from every preset spread', () => {
+    expect(Object.prototype.hasOwnProperty.call(DEFAULT_SIMULATION_RULES, 'infiltrationDepthEnabled')).toBe(false);
+    for (const [id, preset] of Object.entries(SIMULATION_RULE_PRESETS)) {
+      expect(
+        Object.prototype.hasOwnProperty.call(preset.rules, 'infiltrationDepthEnabled'),
+        `${id} declares the key — a virtual key must be false everywhere by ABSENCE`,
+      ).toBe(false);
+    }
+    // ...and it IS in the manifest, which is what makes it censusable at all.
+    expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toContain('infiltrationDepthEnabled');
   });
 });

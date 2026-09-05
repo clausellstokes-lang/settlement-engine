@@ -485,6 +485,17 @@ export const ENGINE_GATED_VIRTUAL_RULE_KEYS = Object.freeze([
   // spelling anywhere in this file — a comment included — mints a phantom into the
   // denominator. The sibling note above the seat keys records the measurement.
   'chanceEncountersEnabled',
+  // Joined 2026-09-05 by the lighting wave's L-HOMES car 4 (LGT-P5-WOPS) under CR-WR10-C
+  // item 4, in the SAME COMMIT as its first and ONLY by-name strict `=== true` gate read
+  // — the W-OPS door in `worldPulse/espionage/espionageGate.js` — and its authored
+  // certification row in `subsystemRowsOps.js`, the leaf reserved for exactly this key.
+  // The ladder leaf itself stays gate-free by its own charter: its exports take an
+  // explicit `lit` argument, so the door module is where a world resolves it.
+  // ⛔ THE KEY'S LITERAL NAME MAY APPEAR IN THIS FILE ONLY ON THE LINE BELOW — the
+  // mechanism lit-coverage walker scans this file's RAW SOURCE for
+  // /\b[a-zA-Z][a-zA-Z0-9]*Enabled\b/ WITHOUT blanking comments, so a second spelling
+  // anywhere here, a comment included, mints a phantom into the flag denominator.
+  'infiltrationDepthEnabled',
 ]);
 
 /**
