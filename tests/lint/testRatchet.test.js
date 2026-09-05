@@ -830,10 +830,12 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
     // figures were stale too (1369/18 recorded; 1478/21 measured at 6770f878f). The cure is
     // now enforced rather than merely prescribed: tests/helpers/shrinkOnlyBaseline.js makes
     // the documented `UPDATE_VOICE_BASELINE=1` refreeze THROW on any total that would rise.
-    'tests/copy/voiceMechanics.test.js :: E2 voiceMechanics — src/data + src/domain string-literal ratchet (shrink-only) total debt never grows past its committed budget':
-      'NOT FREED — 1108 string-literal em dashes against a hardcoded budget of 670, MEASURED at `3f9201e39` (the WAR landing tip) by the ENGINE-HYGIENE landing. ⚠ THIS FIGURE HAD GONE STALE TWICE OVER AND THE SECOND TIME NOBODY RAN IT: the line said 1028, which was true at VOICE-1b and was still being quoted verbatim by a pre-board three landings later — the substrate, T8 and WAR corpora grew it to 1108 while the prose stood still. A blocker figure that is READ rather than RUN is how a wave mis-prices its own cure, so this row now carries the sha it was measured at; re-measure with the suite, never re-quote. (1478 before VOICE-1b burned the dark half; the blocker before that recorded a stale 1369.) CAUSE: two 2026-08-03 trains, P-1 `a277f53d3` (the six state-prose desk leaves, 635 em, 81.5% of it, named nowhere until §854) and P-3 `23d118eb2` (the causal corpus, 144 em), both through a generator that transports authored markdown byte-for-byte and validates nothing. ⛔ THE CURE IS STRIP, NOT RE-FREEZE (ODQ line 266, STRIP-never-raise): re-freezing banks the growth, turns the two per-file arms green ON it, and invites deleting these census rows. The remaining debt is dominated by the 338 READER-prose em dashes in the dossier corpora, which are the owner-signed T5-ONE-REGEN constituent — that regen is the wave that frees this row.',
-    'tests/copy/voiceMechanics.test.js :: E2 voiceMechanics — src/data + src/domain string-literal ratchet (shrink-only) per-file debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win)':
-      'NOT FREED — 76 drifted files carrying 720 em dashes and 9 exclamation marks against a frozen baseline of 102 rows totalling 455 em, MEASURED at `bf902c59f` (the INSTRUMENTS consist tip) by this landing. ⚠ THE ROW STATED NO FIGURE AT ALL UNTIL NOW, which is how a per-file arm rots quietest: there was nothing to go stale, so nothing ever looked wrong. THE SHAPE IS THE FINDING: 65 of the 76 are files the baseline never listed, 10 are listed rows that GREW, ONE is a listed row that FELL (src/domain/worldPulse/convergence.js, em 18 → 14) and ZERO reached their frozen figure — and that one win cannot be banked alone, because the documented refreeze rewrites this arm WHOLE and tests/helpers/shrinkOnlyBaseline.js throws on any total that would rise. This arm is the one that actually names the drifted files, so it is the arm that must NEVER be re-frozen: banking it is what would make the growth invisible again. Same trains, same STRIP prescription, same T5-regen wave as the total arm above.',
+    // ⭐⭐ 2026-09-05, THE PROSE LANDING (§898) — THE TWO TIER-2 VOICE ROWS ARE FREED, NOT FORGIVEN. The src/ prose
+    // car cured 1,001 reader sentences; the Tier-2 TOTAL fell 770 → 311 under a budget of 670 and the per-file
+    // arm's baseline was re-frozen through the documented shrink-only door (55 rows / em 311 / bang 8 — a FALL,
+    // which is the only refreeze that door accepts). A remove-only --update retired both census rows; these two
+    // ledger entries leave with them and OWED_CEILING drops by exactly two. The two Tier-3 JSX rows stay: the
+    // 34 mainline JSX dashes are VOICE-JSX's, and their refreeze would be a RISE the door refuses.
     'tests/copy/voiceMechanics.test.js :: E-E voiceMechanics JSX extension — src/**/*.jsx component ratchet (shrink-only) total JSX debt never grows past its committed budget':
       'NOT FREED — 40 JSX em dashes against a hardcoded budget of 6, MEASURED at `3f9201e39` by the ENGINE-HYGIENE landing (the line said 21, true when VOICE-1b wrote it; the blocker before that recorded a stale 18 — same read-not-run failure as the Tier-2 row above). The P-1/P-3 burn did not touch this arm and cannot: the drift here is component copy. Same STRIP prescription: rewrite the component strings per docs/VOICE_AND_TONE.md §6; never raise the six.',
     'tests/copy/voiceMechanics.test.js :: E-E voiceMechanics JSX extension — src/**/*.jsx component ratchet (shrink-only) per-file JSX debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win)':
@@ -900,7 +902,9 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
   // 8 → 7 on 2026-08-30: the metronome-cooldown row was FREED, not forgiven — see the note
   // in WALKER_ROWS_OWED above. Same arithmetic as the 9 → 8 and 11 → 9 retirements: the
   // census entry, this ledger entry and this ceiling move together, in one act.
-  const OWED_CEILING = 7;
+  // 7 → 5 on 2026-09-05 (§898): the two Tier-2 voice rows FREED by the prose landing's refreeze — the golden-master
+  // row had entered at 7 the same day (owner-gated, waiting for the freeze act), so the two burned leave five.
+  const OWED_CEILING = 5;
 
   test('⛔ NO ENFORCEMENT-WALKER ROW SITS IN THE CENSUS UNLESS IT IS LEDGERED', () => {
     // THE PIN THIS WHOLE BLOCK EXISTS FOR. Add a walker row to the census — any walker,
