@@ -7,7 +7,7 @@
 | laneGEN2 | 940d161ca | 4 | `desk-gen2-2026-09-05` = a4ce9f80f |
 | laneDEF2 | 940d161ca | 4 | `desk-def2-2026-09-05` = 468663f56 |
 | laneECON2 | 940d161ca | 1 | `desk-econ2-2026-09-05` = 333b1a83c |
-| laneDESK9 | 940d161ca | 1 (+1 if the ARM-2 follow-up lands) | `desk-9-2026-09-05` = 0b0906a02 |
+| laneDESK9 | 940d161ca | 2 | `desk-9-2026-09-05` = 0b3703f64 |
 ⛔ PRECONDITION: OSR-SCHEMA17 has landed its cars IN laneINTEG-tree (the `isCriminal on incomeSources` red is the consist's
 base defect; every desk lane proved it an ancestor of 940d161ca). Dispatch it into laneINTEG-tree first; it may reach a
 NEW schema rung (17); the desk consist's OSR baseline is then re-frozen at the composed tip.
@@ -34,6 +34,9 @@ NEW schema rung (17); the desk consist's OSR baseline is then re-frozen at the c
 4. Gate → chair-verify (car count = 34 + OSR cars + register cars) → CAS → seal `landing-desk-2026-09-05` → collect, with the
    RESIDUE block from `LANE-QUEUE.md` in the row (owner rows: DS-GEN-1, DS-FTH-2's public pool; docket items 3–8; the stopped
    blocks; the lanes' corrections).
+## A chair car at the composed tip (before the registers)
+ARM 2 of the public-dossier guard: re-key "exactly one caller per desk" to the importer list (two components draw the defense leaf; ARM 3 already keys on importers) — the auditability rule follows the safety rule. One file, one car, `Seat: Fable 5.1 — validated`.
+
 ## STOPs
 A non-registry replay conflict · a duplicate sentence mount per page-set after the merge · a register that would RISE under a
 shrink-only door · an OSR identity added by anything but OSR-SCHEMA17 · a size-baseline (eslint max-lines) red on any tab.

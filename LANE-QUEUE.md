@@ -42,7 +42,7 @@ Updated 2026-09-05 by the Fable chair (after §897: product fd8b6df00, ledger c8
 
 
 15. **CLAMP-W3** — RULED + BRIEFED (`rulings/RULING-CLAMP-FINAL.md`, `briefs/brief-CLAMP-W3.md`): the ceiling car 62 → 69 with seven recorded reasons; dock at the tip after the wave-2 cars land; retires the clampPrimitiveBaseline census row.
-16. ~~DESK-9~~ DONE → 0b0906a02 sealed `desk-9-2026-09-05` (ARM 3: the gate flag must ARRIVE from outside the reading file; the brief's "no instrument" premise was stale — DESK CAR 3 had landed ARMs 1–2). ⚠ ARM 2 is blind to a second export name (DEF2) — relayed to the lane; if no follow-up car arrives, it is DOCKET item 8.
+16. ~~DESK-9~~ DONE → 2 cars 0b3703f64 sealed `desk-9-2026-09-05` (ARM 3 keyed on IMPORTERS — any component carrying the leaf's import path; six plants; green on four desk tips). ⚠ RULING OWED at the desk landing: ARM 2's "exactly one caller per desk" is FALSE at DEF2's tip (two importers) and blind to it — RULE: re-key ARM 2 to importers and allow N callers while ARM 3 holds; the auditability claim moves to the importer list (a small chair car or DESK-9c).
 
 17. **SOAK-PRESET (DOCKET item 7)** — a `--preset` flag on `scripts/audit/whole-world-soak.mjs` (hardwired to `full_simulation`) so L-PROBE can certify per preset; prerequisite of L-PROBE output (b).
 
