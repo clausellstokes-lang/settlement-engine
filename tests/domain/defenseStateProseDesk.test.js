@@ -1433,9 +1433,13 @@ describe('DS-DEF-6 — the two lenses that may speak, bound to their producer', 
       const drawn = defenseSupportingProse(settlement, { seed: 'def6', audience: 'dm' });
       expect(drawn.logistics, `${label} drew no logistics rung`).toBeTruthy();
       expect(typeof drawn.logistics.sentence, `${label} logistics sentence`).toBe('string');
-      expect(drawn.logistics.sentence).not.toContain('{');
+      expect(drawn.logistics.sentence.length, `${label} drew an empty line`).toBeGreaterThan(40);
+      // anchored: the length arm on the line above proves the subject is a real rendered
+      expect(drawn.logistics.sentence).not.toContain('{'); // sentence and not an empty string
       expect(drawn.logistics.provenance.blockId).toBe('DS-DEF-6');
       if (drawn.naval) {
+        expect(drawn.naval.sentence.length, `${label} drew an empty naval line`).toBeGreaterThan(40);
+        // anchored: the length arm on the line above proves the subject is a real sentence
         expect(drawn.naval.sentence).not.toContain('{');
         expect(drawn.naval.provenance.blockId).toBe('DS-DEF-6');
       }
@@ -1633,7 +1637,9 @@ describe('DS-DEF-9 — magic dependency, and the slot filled from the right ROLE
     const drawn = defenseMagicDependencyProse(refused, { seed: 'r', audience: 'dm' });
     expect(drawn.dependency, 'a refused fill blanked the position').toBeTruthy();
     expect(drawn.dependency.provenance.poolKey).toBe('magicDependency true, with a NAMED dependent chain');
-    expect(drawn.dependency.sentence).not.toContain('{');
+    expect(drawn.dependency.sentence.length, 'the degraded pool drew an empty line').toBeGreaterThan(40);
+    // anchored: the length arm on the line above proves the subject is a real rendered
+    expect(drawn.dependency.sentence).not.toContain('{'); // sentence and not an empty string
     const slotless = DEF9_POOLS['magicDependency true, with a NAMED dependent chain']
       .filter((v) => !(v.slots || []).includes('good'));
     expect(slotless, 'the pool has no slotless variant left to degrade to').toHaveLength(1);
@@ -1662,7 +1668,9 @@ describe('DS-DEF-9 — magic dependency, and the slot filled from the right ROLE
       expect(typeof settlement.defenseProfile?.magicDependency, `${label}`).toBe('boolean');
       const drawn = defenseMagicDependencyProse(settlement, { seed: 'm', audience: 'dm' });
       expect(drawn.dependency, `${label} drew nothing`).toBeTruthy();
-      expect(drawn.dependency.sentence).not.toContain('{');
+      expect(drawn.dependency.sentence.length, `${label} drew an empty line`).toBeGreaterThan(40);
+      // anchored: the length arm on the line above proves the subject is a real rendered
+      expect(drawn.dependency.sentence).not.toContain('{'); // sentence and not an empty string
       expect(drawn.dependency.provenance.blockId).toBe('DS-DEF-9');
     }
     // And the TRUE flag is reachable — gated entirely by stress incidence, not by magic.

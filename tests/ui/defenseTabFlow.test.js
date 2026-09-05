@@ -146,7 +146,8 @@ describe('DS-DEF-9 at viability.magicDependency — the registry\'s first cross-
     expect(text).toContain(drawn.dependency.sentence);
     // The box itself is correctly absent, and the corpus line is present anyway — which is
     // the whole point of rendering it outside.
-    expect(text).not.toContain('Magic Dependency · First Survey');
+    // anchored: the assertion two lines above proves `text` carries the rendered sentence,
+    expect(text).not.toContain('Magic Dependency · First Survey'); // so the container is live
   });
 
   test('THE PUBLIC GATE: the viability tab stays silent for an anonymous viewer', () => {
