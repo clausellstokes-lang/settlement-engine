@@ -619,6 +619,97 @@
    "substantive": false
   }
  ],
- "verdicts": {},
+ "verdicts": {
+  "0": {
+   "index": 0,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "D&D Style Guide: Writing and Editing",
+   "note": "Page 1 title line reads exactly 'D&D Style Guide: Writing and Editing'; footer on every page reads 'Version 1.04a (c)2013 Wizards of the Coast'; PDF is 9 pages, matching '9 pp.'. CAVEAT: the document itself says nothing about distribution to freelancers/Adventurers League authors or later DMs Guild bundling - that provenance is unverified by the source (only circumstantial: the host is adventurersleague.wordpress.com). Also 'governs mechanics of style, not prose voice' is nearly but not wholly true: a 'High Fantasy' section gives tone guidance (see index 8)."
+  },
+  "1": {
+   "index": 1,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The Chicago Manual of Style, 16th edition",
+   "note": "Page 1: 'We have two primary resources for the house style of DUNGEONS & DRAGONS products: The Chicago Manual of Style, 16th edition / Merriam-Webster's Collegiate Dictionary, 11th edition.' Minor overstatement in the claim: the guide says it focuses on matters 'where we depart from or expand on' those works, so 'only D&D-specific departures' understates the 'expand on' half. New Oxford American Dictionary is named as a third, backup resource."
+  },
+  "2": {
+   "index": 2,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In rules text, we often achieve gender neutrality by writing in the second person.",
+   "note": "Quote is a contiguous substring of the page-2 sentence. All three sub-claims confirmed: 'Don't use \"they\" or \"their\" as singular pronouns, except in an informal context like dialogue'; 'avoid \"he/she\" and \"s/he\" altogether'; 'don't alternate between \"he\" and \"she\"'. CAVEAT: the guide hedges with 'often', so 'presents as the standard way' is slightly stronger than the source."
+  },
+  "3": {
+   "index": 3,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Contrary to past D&D usage, this subhead should be followed by terminal punctuation, not a colon.",
+   "note": "Page 2 'Inline Subheads': 'The lowest level of our heading hierarchy is the inline subhead. It functions as our heading 4.' The correct/incorrect example pair is verbatim: 'Keen Senses. You have proficiency in the Perception skill.' vs 'Keen Senses: ...'. CAVEAT: the guide permits any terminal punctuation - 'Use a period, an exclamation point, or a question mark' - so 'end in a period' is narrower than the rule."
+  },
+  "4": {
+   "index": 4,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Numerals in Rules. In rules writing, we use numerals more often.",
+   "note": "Every example in the claim is verbatim in the source: 'Anyone who touches the orb regains 3 hit points'; 'The spell lasts for 1 round'; 'The attack has a range of 30 feet'; and under 'But:' - 'The two cities are fifty miles apart' and 'After winning the fight, the characters slept for six hours.' The general rule cited is Chicago 9.2 (spell out zero to one hundred). 'always' is a shade stronger than the guide's framing but the substance holds."
+  },
+  "5": {
+   "index": 5,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "You make a saving throw, and it succeeds or fails.",
+   "note": "Page 6 'Verb Usage' list carries all of it verbatim: 'You deal damage.' / 'You take damage.' / 'You regain hit points.' / 'You make an attack (or you attack), and your attack hits or misses (it doesn't succeed or fail).' CAVEAT on 'must succeed on (not must make)': the ban is conditional - 'Don't write, \"You must make a DC 15 Strength check...\" unless that sentence is immediately followed by a description of what happens on a success or failure.' Separately, for effects imposing a save the guide actually PREFERS 'the target must make a saving throw'."
+  },
+  "6": {
+   "index": 6,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "We have abandoned that practice.",
+   "note": "The sentence appears twice, verbatim, once for each abandonment: under 'Saving Throws' ('In 4E, we used \"save\" as a synonym for \"successful saving throw.\" We have abandoned that practice.') and under '\"Result\" and Die Rolls' ('In 3E and 4E, the word \"result\" was sometimes used as a synonym for \"the number rolled on a die.\" We have abandoned that practice.'). Also confirmed: '\"magic item\" and its variants should never be \"magical item\"'; 'write, \"The spell deals 10 fire damage,\" not \"The spell deals 10 points of fire damage\"'; 'When you write about a creature's hit point maximum, avoid \"maximum hit points.\"'"
+  },
+  "7": {
+   "index": 7,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The italicized terms are treated as titles, even when they don't use title capitalization.",
+   "note": "'Terms to Capitalize' lists Ability scores, Armor Class, Artifacts, Class features, Difficulty Class, Dungeon Master, Feats, Languages, Planes of existence, Skills, Traits. 'Terms to Italicize' lists Artifacts, Magic items, Spells. The distinctness point is verbatim: 'Don't confuse one of these titles with an effect it creates... the wall of fire spell produces a wall of fire, not a wall of fire.' Note artifacts are BOTH capitalized and italicized."
+  },
+  "8": {
+   "index": 8,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "there are moments of humor with the hobbits, but ring wraiths aren't used for gags",
+   "note": "Quote is verbatim apart from the source's curly apostrophe in 'aren't'. The 'High Fantasy' section confirms epic scope ('the epic scope characteristic of that subgenre') and teamwork ('The lone knight fighting a dragon is less characteristic of D&D than an adventuring team fighting a dragon'). CAVEAT: the LotR/Game of Thrones test is framed as a 'When in doubt' heuristic, not the permission condition - the stated condition is that humor/tragedy be 'true to the facts of the brand and don't overtake the general tone'. 'The only prose-tone guidance' is the reviewer's inference, but it survives a read of all 9 pages: no other voice or register section exists."
+  },
+  "9": {
+   "index": 9,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "We require the serial comma.",
+   "note": "All six sub-claims confirmed verbatim: 'We use American style for spelling and punctuation'; the serial-comma sentence; 'We write \"Asmodeus's lair,\" not \"Asmodeus' lair\"'; 'non-elf, non-dwarf, non-orc, non-drow (but nonhuman, as in Webster's)'; 'We encourage the use of contractions formed with \"not\"'; 'introduce it with a complete sentence ended by a colon' for vertical lists."
+  },
+  "10": {
+   "index": 10,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "We avoid page references as much as possible.",
+   "note": "Continues 'They are labor-intensive (they must be added by hand during galley review), and they invite error.' Cross-reference style confirmed: 'When you refer to a chapter, use its number' and 'When you refer to a subsection, including a sidebar, use its title in quotes.' One refinement: a table title is explicitly NOT enclosed in quotes."
+  },
+  "11": {
+   "index": 11,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Read-aloud text provides a bare-bones description of the encounter area; it does not make any reference to the viewer.",
+   "note": "Verbatim on the page (page 12-13 boundary); my PDF text extractor merely dropped the space at the 'it / does' line break. Next sentence is verbatim too: 'Avoid phrases such as \"you see,\" \"as you enter the room,\" or other phrases that assume any action whatsoever on behalf of the players.' Paizo attribution confirmed by the document itself: byline 'By the DUNGEON Staff', address 'DUNGEON Magazine, Paizo Publishing, 2700 Richards Road, Suite 201, Bellevue, WA'. Era is 3.5e (cites Monster Manual II, Fiend Folio, Draconomicon, DUNGEON #114)."
+  },
+  "12": {
+   "index": 12,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Read-aloud text for an encounter should only rarely run more than a few sentences.",
+   "note": "Both halves verbatim and adjacent: 'You should also avoid including descriptions of any creatures in the room, since their activities and positions in the room often depend on multiple factors (such as if they hear the PCs coming, if it's night or day, and so on).' and 'Long sections of read-aloud text are better served as player handouts.'"
+  },
+  "13": {
+   "index": 13,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Read-aloud Text, General Description, Creature(s), Tactics, Trap(s), Treasure, Development, and Ad-Hoc XP Adjustment",
+   "note": "Quote IS verbatim ('This section generally precedes the other entries of an encounter, although part of the general description might precede it if important to the encounter.'), and the header/EL and word-count halves are confirmed verbatim: 'Each encounter should be rated with an Encounter Level (EL #) in the main encounter header'; sample header '23. Vampire's Den (EL 13)'; 'Our adventures typically range from 5,000 to 15,000 words in length'; 'we automatically reject any adventure manuscript that contains fewer than 5,000 or more than 15,000 words. The ideal manuscript size is 10,000 words.' DOWNGRADED because the claim's section order is wrong: the source order is Treasure BEFORE Development, and the claim omits Trap(s) and Ad-Hoc XP Adjustment from a list it presents as the template. Also 'mandatory Read-Aloud Text' needs care - the heading is labelled (Mandatory) in the template, but the encounters paragraph says 'Each encounter can include any or all of the following sections... Do not include sections that are unnecessary for a given encounter.'"
+  },
+  "14": {
+   "index": 14,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Regardless of how cool your backstory is, an adventure is not a short story.",
+   "note": "Quote verbatim in the query-writing tips. Continues: 'You need to condense or sacrifice background description in favor of telling us about PC involvement. It's how the adventure PLAYS that determines whether or not a proposal is something we want to pick up.' The anti-railroad half is verbatim elsewhere: 'Avoid excessively linear plots that force the story toward an inevitable conclusion or \"railroad\" the actions of the PCs. The adventure should be flexible enough for PCs to make choices and decisions that could affect the outcome of the story. Avoid rigid timelines.' The design guide adds 'The Adventure Background section should be no more than 5% of the total length of the adventure.'"
+  }
+ },
  "mergedAt": "see autosave.log"
 }
