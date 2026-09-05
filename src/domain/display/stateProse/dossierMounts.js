@@ -240,6 +240,9 @@ export const DOSSIER_MOUNTS = Object.freeze([
     mount: 'overview.systemsHealth', tab: 'overview', desk: 'general', blockId: 'DS-GEN-3', rung: 'sentence',
   }),
   Object.freeze({
+    mount: 'overview.warnings', tab: 'overview', desk: 'general', blockId: 'DS-GEN-7', rung: 'sentence',
+  }),
+  Object.freeze({
     mount: 'overview.ground', tab: 'overview', desk: 'general', blockId: 'DS-GEN-12', rung: 'sentence',
   }),
   Object.freeze({
@@ -271,7 +274,6 @@ export const UNMOUNTED_BLOCKS = Object.freeze([
   'DS-SUP-2', 'DS-ECO-10',
   'DS-ECO-11', 'DS-ECO-12', 'DS-SUP-3',
   'DS-POP-1', 'DS-POP-2', 'DS-GEN-1',
-  'DS-GEN-7',
   'DS-GEN-8', 'DS-REL-1', 'DS-REL-2', 'DS-GEN-9',
   'DS-GEN-10', 'DS-HK-1', 'DS-GEN-11',
   'DS-GEN-14', 'DS-POP-3', 'DS-GEN-15',
