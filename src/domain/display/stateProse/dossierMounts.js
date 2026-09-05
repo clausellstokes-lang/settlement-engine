@@ -149,16 +149,22 @@ export const MOUNT_RUNGS = Object.freeze({
  *   knows. This is a DECLARATION OF INTENT the walker cross-checks against the corpus, so
  *   a mount over a dimension-bearing block that names no dimension reds at build time
  *   instead of going silently prose-less in front of a reader.
- * @property {'closed-section'} [visibility] ⛔ THE WRITTEN EXEMPTION FROM THE FIRST-PAINT
- *   LAW BELOW, and the only one. A SENTENCE row whose draw sits inside a `collapsible`
- *   host that is not open on first paint reds the visibility arm — because
- *   `Primitives.jsx:114` renders `{open && children}`, so a collapsed host produces NO
- *   BYTES and the position is lit in the registry and dark to every reader. A row may say
- *   `visibility: 'closed-section'` instead of moving, and then it OWES a
+ * @property {string} [visibility] the written exemption from the FIRST-PAINT LAW above, and
+ *   the only one. Its one legal value is `'closed-section'`.
+ *
+ *   A SENTENCE row whose draw sits inside a `collapsible` host that is not open on first
+ *   paint reds the visibility arm, because `Primitives.jsx:114` renders `{open &&
+ *   children}`: a collapsed host produces NO BYTES and the position is lit in the registry
+ *   and dark to every reader. A row may declare instead of moving, and then it OWES a
  *   `visibilityReason`. The arm is TWO-SIDED: a row declaring this whose host is actually
  *   open reds too, so the exemption cannot outlive the layout that earned it.
+ *
+ *   ⚠ SPELLED AS `string` AND NOT AS THE LITERAL TYPE, DELIBERATELY. `rung` above is typed
+ *   the same way for the same reason: `Object.freeze()` on an object literal widens a
+ *   string literal to `string`, so a literal-union annotation would be unassignable. The
+ *   walker holds the vocabulary; the type does not pretend to.
  * @property {string} [visibilityReason] why this position is allowed to sit inside a fold.
- *   It must be a real argument, not a token — the arm holds it to a length — and the only
+ *   It must be a real argument, not a token (the arm holds it to a length), and the only
  *   argument that has passed is that the DATUM the sentence stands beside is inside the
  *   SAME fold, so the page never prints a fact and hides the sentence about it.
  */
