@@ -1,12 +1,12 @@
-  probe: load=3.34 workers=0 streak=1 waited=0s
-  probe: load=3.47 workers=0 streak=2 waited=60s
-  probe: load=3.77 workers=0 streak=3 waited=120s
+  probe: load=2.94 workers=0 streak=1 waited=0s
+  probe: load=2.97 workers=0 streak=2 waited=60s
+  probe: load=2.63 workers=0 streak=3 waited=120s
 QUIET CONFIRMED after 120s
 GATE_HEAD=fd36f0298b1ead15f2a80eff83dafb92114a7ea4
 GATE_CARS=8
 GATE_PORCELAIN_PRE=[0]
-GATE_LOAD_PRE=3.77 3.41 3.14
-GATE_START=2026-09-06T09:15:27Z
+GATE_LOAD_PRE=2.63 7.74 12.13
+GATE_START=2026-09-06T05:11:38Z
 
 > settlementforge@1.0.0 check
 > npm run validate:hazard-registry && npm run validate:premortem && npm run validate:packets && npm run validate:data && npm run validate:custom-content-manifest && npm run validate:migration-head && npm run validate:edge && npm run validate:map && npm run validate:tuning-bands && npm run validate:foundry-module && npm run validate:mcp-server && npm run typecheck:ratchet && npm run typecheck:domain:strict && npm run lint && npm run test:ratchet && npm run build && npm run verify:dist
@@ -397,4 +397,22 @@ React refs are values that are not needed for rendering. Refs should only be acc
 > settlementforge@1.0.0 test:ratchet
 > sh scripts/gate-mutex.sh --run -- node scripts/check-test-ratchet.mjs
 
-gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 9810 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 27294 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+[test-ratchet] SCOPE SENTINEL: the gate is no longer running what it was frozen to run — a pass here would be VACUOUS:
+  1 suite(s) FAILED WITHOUT A MEASURABLE TEST — they either produced ZERO
+    tests (a collection error) or failed as a whole while every test they enumerated was a
+    SKIP (a `beforeAll`/`afterAll` that threw). Either way every test they own left the
+    census instead of being measured, and a skip ceiling cannot see the difference:
+      tests/simulation/centuryLegSoak.test.js
+        UNCLASSIFIED · ran 0ms against a 900000ms budget (vite.config.js testTimeout; the file also declares 300000ms, 900000ms) — no timeout signal and no assertion signal — open the full report
+        msg: (the report carried no failure message)
+  skipped tests grew: 10 > ceiling 1
+    A skipped test is not debt, it is a HOLE. Run it, or burn it down — do not skip it.
+
+Check the vitest include/exclude and any collection errors above. If the change is
+deliberate, re-freeze explicitly with `npm run test:ratchet:update`.
+GATE_END=2026-09-06T05:34:40Z
+TRUE_EXIT=1
+GATE_LOAD_POST=10.91 16.33 19.30
+GATE_PORCELAIN_POST=[0]
+GATE_HEAD_POST=fd36f0298b1ead15f2a80eff83dafb92114a7ea4
