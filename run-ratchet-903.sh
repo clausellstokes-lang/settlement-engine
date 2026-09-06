@@ -16,7 +16,7 @@ done
 echo "QUIET CONFIRMED after ${WAITED}s"
 echo "RATCHET_HEAD=$(git rev-parse HEAD)"
 echo "RATCHET_PORCELAIN_PRE=[$(git status --porcelain -uall | wc -l | tr -d ' ')]"
-echo "PREDICTED: __PREDICTION__ (derive EVERY figure before this runs — E4; totalTests is REFUSED in advance, this run is the derivation)"
+echo "PREDICTED: totalFiles 2489 -> 2489 (the five cars add no test file), entries 3 -> 3 (the known-failure census: the voice per-file row, enforcement-claims, the golden master — the proof at 6ff3249b9 named exactly those beyond the register drift and the two load timeouts), totalTests 31970 -> unchanged or a small move from the renamed stability titles and the lived-experience census test (REFUSED in advance — this run is the derivation)"
 sh scripts/gate-mutex.sh --run -- node scripts/check-test-ratchet.mjs --update
 TRUE_EXIT=$?
 echo "TRUE_EXIT=$TRUE_EXIT"

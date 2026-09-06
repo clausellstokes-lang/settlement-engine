@@ -1,11 +1,11 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 12:23:24 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 12:28:48 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
 | ai | critic |  | failed | 0 | — | — | 12:30:12 |
-| ai | finder | counter-cases | result | 45 | — | 83 claims, complete=True @08:22:56 | 12:26:46 |
+| ai | finder | counter-cases | result | 45 | — | 83 claims, complete=True @12:23:29 | 12:26:46 |
 | ai | finder | critics-direct | failed | 42 | extra_a.py, extra_b.py, extra_c.py, claims_data.py | 106 claims, complete=False @08:26:12 | 12:26:52 |
-| ai | finder | steerability-mechanism | result | 46 | — | 72 claims, complete=True @08:26:06 | 12:30:07 |
+| ai | finder | steerability-mechanism | result | 46 | — | 72 claims, complete=True @12:23:29 | 12:30:07 |
 | ai | regrade | regrade-r3 | failed | 0 | — | — | 12:30:11 |
 | ai | synth |  | failed | 0 | — | — | 12:30:11 |
 | ai | verifier | i254-268 | failed | 0 | — | verdict file absent | 12:30:07 |
@@ -40,10 +40,10 @@
 | ai | verifier | i686-700 | failed | 0 | — | verdict file absent | 12:30:10 |
 | ai | verifier | i701-705 | failed | 0 | — | verdict file absent | 12:30:10 |
 | dnd | critic |  | failed | 0 | — | — | 12:30:57 |
-| dnd | finder | close | result | 51 | — | 90 claims, complete=True @08:23:18 | 12:26:47 |
-| dnd | finder | place-register | result | 52 | — | 82 claims, complete=True @08:21:33 | 12:25:37 |
+| dnd | finder | close | result | 51 | — | 90 claims, complete=True @12:23:28 | 12:26:47 |
+| dnd | finder | place-register | result | 52 | — | 82 claims, complete=True @12:23:28 | 12:25:37 |
 | dnd | finder | scholarship-history | failed | 69 | — | 72 claims, complete=False @08:26:58 | 12:26:59 |
-| dnd | finder | usability-school | result | 54 | — | 123 claims, complete=True @08:25:50 | 12:30:50 |
+| dnd | finder | usability-school | result | 54 | — | 123 claims, complete=True @12:23:28 | 12:30:50 |
 | dnd | regrade | regrade-r3 | failed | 0 | — | — | 12:30:56 |
 | dnd | synth |  | failed | 0 | — | — | 12:30:56 |
 | dnd | verifier | i109-123 | failed | 0 | — | verdict file absent | 12:30:51 |
@@ -91,15 +91,15 @@
 | dnd | verifier | i94-108 | failed | 0 | — | verdict file absent | 12:30:51 |
 | hobb | critic |  | failed | 0 | — | — | 11:27:29 |
 | hobb | critic |  | failed | 0 | — | — | 12:29:45 |
-| hobb | finder | academic | failed | 54 | — | 73 claims, complete=True @08:25:52 | 09:48:18 |
-| hobb | finder | academic | in-flight | 6 | — | 73 claims, complete=True @08:25:52 | 11:47:08 |
-| hobb | finder | academic | result | 69 | — | 73 claims, complete=True @08:25:52 | 12:29:37 |
-| hobb | finder | close | failed | 0 | — | 109 claims, complete=True @08:18:09 | 11:27:25 |
-| hobb | finder | close | in-flight | 18 | — | 109 claims, complete=True @08:18:09 | 11:47:08 |
-| hobb | finder | close | result | 68 | — | 109 claims, complete=True @08:18:09 | 12:23:29 |
-| hobb | finder | craft | failed | 50 | — | 127 claims, complete=True @08:19:51 | 11:27:24 |
-| hobb | finder | craft | in-flight | 0 | — | 127 claims, complete=True @08:19:51 | 11:47:08 |
-| hobb | finder | craft | result | 55 | — | 127 claims, complete=True @08:19:51 | 12:25:49 |
+| hobb | finder | academic | failed | 54 | — | 73 claims, complete=True @12:23:27 | 09:48:18 |
+| hobb | finder | academic | in-flight | 6 | — | 73 claims, complete=True @12:23:27 | 11:47:08 |
+| hobb | finder | academic | result | 69 | — | 73 claims, complete=True @12:23:27 | 12:29:37 |
+| hobb | finder | close | failed | 0 | — | 109 claims, complete=True @12:23:27 | 11:27:25 |
+| hobb | finder | close | in-flight | 18 | — | 109 claims, complete=True @12:23:27 | 11:47:08 |
+| hobb | finder | close | result | 68 | — | 109 claims, complete=True @12:23:27 | 12:23:29 |
+| hobb | finder | craft | failed | 50 | — | 127 claims, complete=True @12:23:27 | 11:27:24 |
+| hobb | finder | craft | in-flight | 0 | — | 127 claims, complete=True @12:23:27 | 11:47:08 |
+| hobb | finder | craft | result | 55 | — | 127 claims, complete=True @12:23:27 | 12:25:49 |
 | hobb | finder | voice | result | 45 | find-hobb-voice.md, found-hobb-voice.json | 77 claims, complete=True @07:40:23 | 09:48:24 |
 | hobb | regrade | regrade-r1 | failed | 0 | — | — | 11:27:27 |
 | hobb | regrade | regrade-r3 | failed | 0 | — | — | 12:29:44 |
@@ -139,13 +139,13 @@
 | hobb | verifier | i77-91 | failed | 0 | — | verdict file absent | 12:29:39 |
 | hobb | verifier | i92-106 | failed | 0 | — | verdict file absent | 12:29:39 |
 | kay | critic |  | failed | 0 | — | — | 12:27:27 |
-| kay | finder | academic | in-flight | 59 | — | 52 claims, complete=True @08:24:10 | 11:58:25 |
-| kay | finder | academic | result | 76 | claims.json, sources.json | 52 claims, complete=True @08:24:10 | 12:27:22 |
+| kay | finder | academic | in-flight | 59 | — | 52 claims, complete=True @12:23:25 | 11:58:25 |
+| kay | finder | academic | result | 76 | claims.json, sources.json | 52 claims, complete=True @12:23:25 | 12:27:22 |
 | kay | finder | close | failed | 91 | — | 102 claims, complete=True @08:27:06 | 12:27:07 |
 | kay | finder | craft | in-flight | 147 | — | 120 claims, complete=False @08:24:32 | 11:58:25 |
 | kay | finder | craft | failed | 76 | — | 120 claims, complete=False @08:24:32 | 12:26:47 |
-| kay | finder | voice | in-flight | 69 | — | 105 claims, complete=True @08:15:57 | 11:58:25 |
-| kay | finder | voice | result | 86 | — | 105 claims, complete=True @08:15:57 | 12:20:20 |
+| kay | finder | voice | in-flight | 69 | — | 105 claims, complete=True @12:23:25 | 11:58:25 |
+| kay | finder | voice | result | 86 | — | 105 claims, complete=True @12:23:25 | 12:20:20 |
 | kay | regrade | regrade-r3c | failed | 0 | — | — | 12:27:25 |
 | kay | synth |  | failed | 0 | — | — | 12:27:26 |
 | kay | verifier | i0-14 | failed | 0 | — | verdict file absent | 12:27:22 |
@@ -172,12 +172,12 @@
 | kay | verifier | i75-89 | failed | 0 | — | verdict file absent | 12:27:23 |
 | kay | verifier | i90-104 | failed | 0 | — | verdict file absent | 12:27:23 |
 | leguin | critic |  | failed | 0 | — | — | 12:27:10 |
-| leguin | finder | close | in-flight | 71 | — | 78 claims, complete=True @08:22:13 | 11:58:25 |
-| leguin | finder | close | result | 61 | — | 78 claims, complete=True @08:22:13 | 12:25:57 |
-| leguin | finder | craft | in-flight | 61 | — | 123 claims, complete=True @08:19:49 | 11:58:25 |
-| leguin | finder | craft | result | 36 | — | 123 claims, complete=True @08:19:49 | 12:25:23 |
-| leguin | finder | voice | in-flight | 99 | — | 83 claims, complete=True @08:20:22 | 11:58:25 |
-| leguin | finder | voice | result | 34 | — | 83 claims, complete=True @08:20:22 | 12:25:01 |
+| leguin | finder | close | in-flight | 71 | — | 78 claims, complete=True @12:23:26 | 11:58:25 |
+| leguin | finder | close | result | 61 | — | 78 claims, complete=True @12:23:26 | 12:25:57 |
+| leguin | finder | craft | in-flight | 61 | — | 123 claims, complete=True @12:23:26 | 11:58:25 |
+| leguin | finder | craft | result | 36 | — | 123 claims, complete=True @12:23:26 | 12:25:23 |
+| leguin | finder | voice | in-flight | 99 | — | 83 claims, complete=True @12:23:25 | 11:58:25 |
+| leguin | finder | voice | result | 34 | — | 83 claims, complete=True @12:23:25 | 12:25:01 |
 | leguin | regrade | regrade-r3c | failed | 0 | — | — | 12:27:09 |
 | leguin | synth |  | failed | 0 | — | — | 12:27:09 |
 | leguin | verifier | i100-114 | failed | 0 | — | verdict file absent | 12:27:06 |
@@ -205,10 +205,10 @@
 | leguin | verifier | i90-99 | failed | 8 | — | verdict file absent | 12:27:05 |
 | martin | critic |  | failed | 0 | — | — | 12:28:10 |
 | martin | finder | closereading | failed | 0 | — | — | 12:28:05 |
-| martin | finder | editorial-ownwords | result | 45 | — | 78 claims, complete=True @08:24:31 | 12:28:02 |
+| martin | finder | editorial-ownwords | result | 45 | — | 78 claims, complete=True @12:23:27 | 12:28:02 |
 | martin | finder | measurement | failed | 70 | — | 49 claims, complete=False @08:25:22 | 12:27:04 |
-| martin | finder | reception | result | 56 | — | 73 claims, complete=True @08:21:22 | 12:25:18 |
-| martin | finder | scholarship | result | 49 | — | 83 claims, complete=True @08:24:15 | 12:28:04 |
+| martin | finder | reception | result | 56 | — | 73 claims, complete=True @12:23:27 | 12:25:18 |
+| martin | finder | scholarship | result | 49 | — | 83 claims, complete=True @12:23:27 | 12:28:04 |
 | martin | regrade | regrade-r3 | failed | 0 | — | — | 12:28:08 |
 | martin | synth |  | failed | 0 | — | — | 12:28:09 |
 | martin | verifier | i330-344 | failed | 0 | — | verdict file absent | 12:28:05 |
@@ -279,15 +279,15 @@
 | tolkien | verifier | i853-867 | failed | 0 | — | verdict file absent | 12:27:13 |
 | tolkien | verifier | i868-873 | failed | 0 | — | verdict file absent | 12:27:13 |
 | wolfe | critic |  | failed | 0 | — | — | 12:30:36 |
-| wolfe | finder | academic | result | 49 | — | 112 claims, complete=True @08:25:33 | 12:30:29 |
-| wolfe | finder | academic | in-flight | 55 | — | 112 claims, complete=True @08:25:33 | 11:58:25 |
-| wolfe | finder | academic | in-flight | 8 | — | 112 claims, complete=True @08:25:33 | 11:47:08 |
+| wolfe | finder | academic | result | 49 | — | 112 claims, complete=True @12:23:26 | 12:30:29 |
+| wolfe | finder | academic | in-flight | 55 | — | 112 claims, complete=True @12:23:26 | 11:58:25 |
+| wolfe | finder | academic | in-flight | 8 | — | 112 claims, complete=True @12:23:26 | 11:47:08 |
 | wolfe | finder | close | failed | 53 | — | 111 claims, complete=True @08:26:37 | 12:26:55 |
 | wolfe | finder | close | in-flight | 14 | — | 111 claims, complete=True @08:26:37 | 11:47:08 |
 | wolfe | finder | close | in-flight | 65 | — | 111 claims, complete=True @08:26:37 | 11:58:25 |
-| wolfe | finder | craft | result | 72 | — | 89 claims, complete=True @08:20:32 | 12:24:01 |
-| wolfe | finder | craft | in-flight | 65 | — | 89 claims, complete=True @08:20:32 | 11:58:25 |
-| wolfe | finder | craft | in-flight | 19 | — | 89 claims, complete=True @08:20:32 | 11:47:08 |
+| wolfe | finder | craft | result | 72 | — | 89 claims, complete=True @12:23:26 | 12:24:01 |
+| wolfe | finder | craft | in-flight | 65 | — | 89 claims, complete=True @12:23:26 | 11:58:25 |
+| wolfe | finder | craft | in-flight | 19 | — | 89 claims, complete=True @12:23:26 | 11:47:08 |
 | wolfe | regrade | regrade-r3c | failed | 0 | — | — | 12:30:34 |
 | wolfe | synth |  | failed | 0 | — | — | 12:30:35 |
 | wolfe | verifier | i0-14 | failed | 0 | — | verdict file absent | 12:30:30 |
