@@ -19,15 +19,16 @@
   "argsFile": "args-leguin-r8.json",
   "tag": "r8",
   "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--leguin-r8.js",
-  "status": "RUNNING since 17:41 (resumed from wf_e95fca37-bb5 — 2nd research slot)",
-  "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--leguin-r8.js"
+  "status": "COMPLETE 19:04 (r8 = the r6 top-up's completion: 11 chunks / 162 verified / 151 kept; regrade-r8; section 104 KB; critic-leguin.md overwrote the 14:20 rung-4 critic). STOPPED by S-BOUND rule 4 for FIND rounds. OPEN OWNER DECISION (chair 19:05): the critic measures 378/924 SKIPPED_TRIAGE because the triage keyed on the finder's 16 labels, not the section's 29 features (hobb's critic found the same defect: 16 coarse buckets, \"civic record register\" absorbed 45 skips) — a VERIFY-ONLY completion over a corrected triage (section feature × witness) is not a FIND round under the TAG LAW; ~250–300 rows for leguin, ~60 for hobb; recommended AFTER the queue drains, within the two-lane cap; the owner says go",
+  "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--leguin-r8.js",
+  "dryCheck": "19:06: features 29 vs 24 at section-leguin.r4.md — FIVE new features (reports apparatus; the encyclopedic form; many voices; …) → NOT dry by the owner's rule; no FIND round follows (rule 4); the open decision above is verify-only"
  },
  "wolfe": {
   "runId": "wf_1326cde9-2e5",
   "argsFile": "args-wolfe-r7.json",
   "tag": "r7",
   "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--wolfe-r7.js",
-  "status": "PAUSED ~17:30 — 4th",
+  "status": "RUNNING since 19:05 (resumed from wf_1326cde9-2e5 — the slot leguin freed)",
   "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--wolfe-r7.js"
  },
  "martin": {
@@ -44,7 +45,8 @@
   "tag": "r7",
   "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--hobb-r7.js",
   "status": "COMPLETE 18:38 (r7 = THE ONE TOP-UP + regrade + synth + critic second pass; 23 verified / 17 kept; section 94 KB; critic-hobb.md 18:3x). STOPPED by S-BOUND rule 4 — no further round; the critic §6 (next round) is NOT run; its §7 text fixes ([476] witness, rule 39/11 counts, 71/72, [616], block labels, register labels, rules 3/5/27) and §4 (kept trueWording >12 words: truncate at export) go to S12 as input",
-  "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--hobb-r7.js"
+  "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--hobb-r7.js",
+  "dryCheck": "18:40: no baseline (prev null); dry-check.py counted 0 features — the hobb section is written as numbered RULES, not features; kit nit: dry-check's feature regex does not read rule headings"
  },
  "dnd": {
   "runId": "wf_3d71f708-fe3",
@@ -74,12 +76,14 @@
    "ai"
   ],
   "running": [
-   "leguin",
-   "kay"
+   "kay",
+   "wolfe"
   ],
   "resume": "keep TWO research runs alive: when one completes (its task notification), resume the next in `order` by Workflow({scriptPath: d[<next>].scriptPath, resumeFromRunId: d[<next>].runId}); set its status RUNNING here",
   "done": [
-   "hobb"
-  ]
+   "hobb",
+   "leguin"
+  ],
+  "open_decision": "TRIAGE-BY-FEATURE completion pass for leguin (~250–300) and hobb (~60): a kit change (split-chunks --triage keyed on section features × witness) + verify-only runs; owner-gated on cost under the 17:40 cap"
  }
 }
