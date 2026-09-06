@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 19:37:44 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 19:41:47 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -215,41 +215,16 @@
 | hobb | finder | dropped-and-routes | result | 68 | — | 94 claims, complete=True @17:25:57 | 19:27:00 |
 | hobb | finder | epigraph-census | result | 29 | — | 76 claims, complete=True @17:25:57 | 19:21:12 |
 | hobb | finder | translators | result | 47 | — | 74 claims, complete=True @17:25:57 | 19:25:55 |
-| hobb | regrade | regrade-r4 | result | 0 | — | — | 17:37:59 |
 | hobb | regrade | regrade-r6 | failed | 0 | — | — | 19:45:55 |
 | hobb | regrade | regrade-r7 | result | 0 | build-r7.mjs | — | 22:00:30 |
 | hobb | synth |  | failed | 0 | — | — | 19:45:56 |
 | hobb | synth |  | result | 0 | section-hobb.md | — | 18:17:47 |
-| hobb | synth |  | in-flight | 0 | — | — | 17:48:45 |
 | hobb | synth |  | result | 0 | section-hobb-body.md | — | 22:27:15 |
-| hobb | verifier | i0-14 | result | 4 | — | verdict file WRITTEN | 16:56:40 |
-| hobb | verifier | i105-119 | result | 5 | — | verdict file WRITTEN | 17:03:33 |
-| hobb | verifier | i120-134 | result | 9 | — | verdict file WRITTEN | 17:10:40 |
-| hobb | verifier | i135-149 | result | 11 | — | verdict file WRITTEN | 17:11:41 |
-| hobb | verifier | i15-29 | result | 8 | — | verdict file WRITTEN | 16:56:58 |
-| hobb | verifier | i150-164 | result | 2 | — | verdict file WRITTEN | 17:07:31 |
-| hobb | verifier | i165-179 | result | 5 | — | verdict file WRITTEN | 17:07:46 |
-| hobb | verifier | i180-194 | result | 7 | — | verdict file WRITTEN | 17:16:24 |
-| hobb | verifier | i195-209 | result | 3 | — | verdict file WRITTEN | 17:14:04 |
-| hobb | verifier | i210-224 | result | 10 | — | verdict file WRITTEN | 17:16:15 |
-| hobb | verifier | i225-239 | result | 4 | — | verdict file WRITTEN | 17:16:16 |
-| hobb | verifier | i240-254 | result | 3 | — | verdict file WRITTEN | 17:18:32 |
-| hobb | verifier | i255-269 | result | 5 | — | verdict file WRITTEN | 17:19:58 |
-| hobb | verifier | i270-284 | result | 4 | — | verdict file WRITTEN | 17:19:45 |
-| hobb | verifier | i285-299 | result | 4 | — | verdict file WRITTEN | 17:20:45 |
-| hobb | verifier | i30-44 | result | 11 | — | verdict file WRITTEN | 16:57:10 |
-| hobb | verifier | i300-314 | result | 4 | — | verdict file WRITTEN | 17:24:21 |
-| hobb | verifier | i315-329 | result | 9 | — | verdict file WRITTEN | 17:25:49 |
-| hobb | verifier | i330-344 | result | 10 | — | verdict file WRITTEN | 17:25:17 |
-| hobb | verifier | i345-359 | result | 4 | — | verdict file WRITTEN | 17:25:02 |
-| hobb | verifier | i360-374 | result | 5 | — | verdict file WRITTEN | 17:29:16 |
-| hobb | verifier | i375-385 | result | 2 | — | verdict file WRITTEN | 17:28:57 |
 | hobb | verifier | i386-400 | result | 7 | — | verdict file WRITTEN | 19:30:47 |
 | hobb | verifier | i401-415 | result | 11 | — | verdict file WRITTEN | 19:33:53 |
 | hobb | verifier | i416-430 | result | 5 | — | verdict file WRITTEN | 19:31:53 |
 | hobb | verifier | i431-445 | result | 6 | claims-in.json, verdicts-in.json | verdict file WRITTEN | 19:34:11 |
 | hobb | verifier | i446-460 | result | 14 | — | verdict file WRITTEN | 19:40:50 |
-| hobb | verifier | i45-59 | result | 8 | — | verdict file WRITTEN | 16:57:42 |
 | hobb | verifier | i461-475 | result | 2 | — | verdict file WRITTEN | 19:38:26 |
 | hobb | verifier | i476-490 | result | 8 | — | verdict file WRITTEN | 19:38:20 |
 | hobb | verifier | i491-505 | result | 3 | claims_in.json | verdict file WRITTEN | 19:39:08 |
@@ -261,7 +236,6 @@
 | hobb | verifier | i566-580 | failed | 0 | — | verdict file absent | 19:45:45 |
 | hobb | verifier | i581-595 | failed | 0 | — | verdict file absent | 19:45:45 |
 | hobb | verifier | i596-610 | failed | 0 | — | verdict file absent | 19:45:45 |
-| hobb | verifier | i60-74 | result | 9 | — | verdict file WRITTEN | 17:02:10 |
 | hobb | verifier | i611-625 | failed | 0 | — | verdict file absent | 19:45:45 |
 | hobb | verifier | i626-640 | failed | 0 | — | verdict file absent | 19:45:50 |
 | hobb | verifier | i640-693 | result | 14 | — | verdict file WRITTEN | 21:34:12 |
@@ -269,8 +243,6 @@
 | hobb | verifier | i656-670 | failed | 0 | — | verdict file absent | 19:45:45 |
 | hobb | verifier | i671-685 | failed | 0 | — | verdict file absent | 19:45:45 |
 | hobb | verifier | i686-695 | failed | 0 | — | verdict file absent | 19:45:50 |
-| hobb | verifier | i75-89 | result | 5 | — | verdict file WRITTEN | 17:02:42 |
-| hobb | verifier | i90-104 | result | 8 | — | verdict file WRITTEN | 17:05:31 |
 | kay | critic |  | result | 0 | critic-kay.md | — | 19:06:09 |
 | kay | critic |  | failed | 0 | — | — | 19:46:20 |
 | kay | critic |  | failed | 0 | — | — | 18:42:13 |
@@ -290,6 +262,8 @@
 | kay | synth |  | failed | 0 | kay-stats.mjs, section-kay.md | — | 18:42:12 |
 | kay | synth |  | failed | 0 | — | — | 17:51:50 |
 | kay | verifier | i0-14 | result | 2 | — | verdict file WRITTEN | 17:29:44 |
+| kay | verifier | i1007-1021 | in-flight | 4 | — | verdict file absent | 23:41:30 |
+| kay | verifier | i1022-1036 | in-flight | 10 | — | verdict file absent | 23:41:30 |
 | kay | verifier | i105-119 | result | 4 | — | verdict file WRITTEN | 17:32:58 |
 | kay | verifier | i120-134 | result | 8 | — | verdict file WRITTEN | 17:38:32 |
 | kay | verifier | i135-149 | result | 7 | — | verdict file WRITTEN | 17:38:11 |
@@ -327,7 +301,8 @@
 | kay | verifier | i495-509 | failed | 0 | — | verdict file absent | 17:51:48 |
 | kay | verifier | i510-524 | failed | 0 | — | verdict file absent | 17:51:48 |
 | kay | verifier | i520-563 | result | 17 | — | verdict file WRITTEN | 18:13:23 |
-| kay | verifier | i521-624 | failed | 0 | — | verdict file absent | 19:45:36 |
+| kay | verifier | i521-624 | failed | 0 | — | verdict file WRITTEN | 19:45:36 |
+| kay | verifier | i521-624 | result | 6 | — | verdict file WRITTEN | 23:41:32 |
 | kay | verifier | i525-539 | failed | 0 | — | verdict file absent | 17:51:48 |
 | kay | verifier | i540-549 | failed | 0 | — | verdict file absent | 17:51:49 |
 | kay | verifier | i550-564 | failed | 0 | — | verdict file absent | 17:51:49 |
@@ -339,7 +314,8 @@
 | kay | verifier | i610-624 | failed | 0 | — | verdict file absent | 17:51:49 |
 | kay | verifier | i625-639 | failed | 0 | — | verdict file absent | 17:51:49 |
 | kay | verifier | i625-678 | result | 7 | — | verdict file WRITTEN | 18:11:56 |
-| kay | verifier | i626-645 | failed | 0 | — | verdict file absent | 19:45:36 |
+| kay | verifier | i626-645 | failed | 0 | — | verdict file WRITTEN | 19:45:36 |
+| kay | verifier | i626-645 | result | 3 | — | verdict file WRITTEN | 23:40:33 |
 | kay | verifier | i640-654 | failed | 0 | — | verdict file absent | 17:51:49 |
 | kay | verifier | i655-669 | failed | 0 | — | verdict file absent | 17:51:49 |
 | kay | verifier | i670-684 | failed | 0 | — | verdict file absent | 17:51:49 |
@@ -365,7 +341,7 @@
 | kay | verifier | i863-877 | failed | 0 | — | verdict file absent | 19:46:18 |
 | kay | verifier | i878-892 | failed | 0 | — | verdict file absent | 19:46:18 |
 | kay | verifier | i893-907 | failed | 0 | — | verdict file absent | 19:46:18 |
-| kay | verifier | i895-919 | in-flight | 6 | — | verdict file WRITTEN | 23:37:40 |
+| kay | verifier | i895-919 | result | 6 | — | verdict file WRITTEN | 23:38:08 |
 | kay | verifier | i90-104 | result | 4 | — | verdict file WRITTEN | 17:34:44 |
 | kay | verifier | i908-922 | failed | 0 | — | verdict file absent | 19:46:18 |
 | kay | verifier | i920-969 | result | 12 | — | verdict file WRITTEN | 23:36:40 |
@@ -375,7 +351,7 @@
 | kay | verifier | i968-982 | failed | 0 | — | verdict file absent | 19:46:18 |
 | kay | verifier | i973-991 | result | 8 | — | verdict file WRITTEN | 23:36:54 |
 | kay | verifier | i983-997 | failed | 0 | — | verdict file absent | 19:46:19 |
-| kay | verifier | i992-1005 | in-flight | 13 | — | verdict file WRITTEN | 23:37:36 |
+| kay | verifier | i992-1005 | result | 13 | — | verdict file WRITTEN | 23:37:58 |
 | kay | verifier | i998-1006 | failed | 0 | — | verdict file absent | 19:46:19 |
 | leguin | critic |  | failed | 0 | — | — | 19:46:19 |
 | leguin | critic |  | result | 32 | critic-leguin.md | — | 18:21:42 |

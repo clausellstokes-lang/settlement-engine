@@ -1024,6 +1024,30 @@
   "fullSentence": true
  },
  {
+  "index": 636,
+  "feature": "annalist voice and deep time",
+  "claim": "The entry declares the region's prehistory hazy rather than narrating it.",
+  "source": "Manguel and Guadalupi, Dictionary of Imaginary Places, reprinted at BrightWeavings",
+  "url": "https://brightweavings.com/dictionary/",
+  "quote": "Fionavar’s prehistory is hazy.",
+  "page": "paragraph beginning 'Fionavar’s prehistory'",
+  "kind": "analysis",
+  "polarity": "applies",
+  "date": "",
+  "routeHint": "curl with browser user agent, live URL",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "craft",
+  "verdict": {
+   "index": 636,
+   "verdict": "PARTIAL",
+   "trueWording": "Fionavar’s prehistory is hazy.",
+   "unsupportedLimb": "'rather than narrating it' — the entry declares the prehistory hazy and then does narrate it, in the same paragraph and the two that follow",
+   "note": "Same page. The quotation is verbatim and opens its paragraph. But the declaration is not used in place of narration: the same sentence run continues 'Originally there appear to have been only two peoples… These were followed by the lios alfar and the Dwarves', then 'Many years later Men arrived on the Plain', then a full paragraph narrating the Bael Rangat with Conary's death in battle, Colan's succession, Revor's Dalrei, Rakoth's binding and the five wardstones. The hazy-prehistory limb is supported; the contrastive limb is not.",
+   "fromFile": "verdicts-kay-i626-645.json"
+  }
+ },
+ {
   "index": 717,
   "feature": "other: fantasy as a method for history",
   "claim": "Kay tells the ICFA audience that his address will connect his argument about privacy to a defence of fantasy literature as a way of writing about history.",
@@ -1213,6 +1237,29 @@
    "note": "Under Heaven tour journal, post of Thursday, February 18, 2010. The quoted words are on the page verbatim, and the Tigana / Fionavar trilogy limb is fully supported. But the post reports an email from Penguin USA that the audio book's producer WOULD LIKE Vance to read; Kay says he is 'completely onside' and that they will be going into studio soon. Vance is named only this once in the whole journal, so the page records a proposal, not a completed reading of Under Heaven.",
    "unsupportedLimb": "that Simon Vance actually read Under Heaven — the page records only the producer's request and a not-yet-started studio session",
    "fromFile": "verdicts-kay-i973-991.json"
+  }
+ },
+ {
+  "index": 1007,
+  "feature": "place and institution description",
+  "claim": "A reader who disliked Tigana overall nevertheless singles out Kay's description of settings as the book's strongest element.",
+  "source": "u/sybar142857, r/Fantasy, 'Just finished Tigana; I'm disappointed', Aug 2023",
+  "url": "https://www.reddit.com/r/Fantasy/comments/15kr5yn/just_finished_tigana_im_disappointed/",
+  "quote": "the man can describe settings really well",
+  "page": "opening post, 'Pros'",
+  "kind": "reader",
+  "polarity": "asserts",
+  "date": "2023-08",
+  "routeHint": "Wayback raw capture web.archive.org/web/<ts>id_/ of the www.reddit.com thread (every live Reddit route is walled)",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "verdict": {
+   "index": 1007,
+   "verdict": "PARTIAL",
+   "trueWording": "\"the man can describe settings really well\" — one of five Pros",
+   "note": "Raw Wayback capture 20250312113419id_ of the thread (live Reddit serves a bot interstitial). Quote is verbatim in the OP's 'Pros' block, opening sentence: 'I think GGK\\'s prose is top notch; the man can describe settings really well.' The reader's overall dislike is verbatim too ('Overall, I didn't like it. 2.5/5'). But settings description is item one of five Pros bullets, and the OP applies a stronger superlative elsewhere ('The Alberico pov was stellar').",
+   "unsupportedLimb": "singles out settings description as the book's STRONGEST element — it is one of five co-equal Pros, and 'stellar' is reserved for the Alberico POV",
+   "fromFile": "verdicts-kay-i1007-1021.json"
   }
  }
 ]

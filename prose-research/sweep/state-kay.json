@@ -13904,6 +13904,456 @@
    "registerHint": "none",
    "confidence": "medium — a preference statement that says nothing about Kay's sentences",
    "angle": "translators-and-ear"
+  },
+  {
+   "index": 1007,
+   "feature": "place and institution description",
+   "claim": "A reader who disliked Tigana overall nevertheless singles out Kay's description of settings as the book's strongest element.",
+   "source": "u/sybar142857, r/Fantasy, 'Just finished Tigana; I'm disappointed', Aug 2023",
+   "url": "https://www.reddit.com/r/Fantasy/comments/15kr5yn/just_finished_tigana_im_disappointed/",
+   "quote": "the man can describe settings really well",
+   "page": "opening post, 'Pros'",
+   "kind": "reader",
+   "polarity": "asserts",
+   "date": "2023-08",
+   "routeHint": "Wayback raw capture web.archive.org/web/<ts>id_/ of the www.reddit.com thread (every live Reddit route is walled)",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1008,
+   "feature": "other: divided reader verdict on the prose",
+   "claim": "The same reader rates the book 2.5/5 while calling the prose top notch, splitting his verdict on the prose from his verdict on the book.",
+   "source": "u/sybar142857, r/Fantasy, 'Just finished Tigana; I'm disappointed', Aug 2023",
+   "url": "https://www.reddit.com/r/Fantasy/comments/15kr5yn/just_finished_tigana_im_disappointed/",
+   "quote": "I think GGK's prose is top notch",
+   "page": "opening post, 'Pros'",
+   "kind": "reader",
+   "polarity": "asserts",
+   "date": "2023-08",
+   "routeHint": "Wayback raw capture web.archive.org/web/<ts>id_/ of the www.reddit.com thread",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1009,
+   "feature": "adjective and adverb discipline",
+   "claim": "A reader who says he normally tolerates heavy prose reports that Tigana was the first book in which he met what others call purple prose.",
+   "source": "u/god935, r/Fantasy, 'Tigana (review/rant)', Mar 2022",
+   "url": "https://www.reddit.com/r/Fantasy/comments/tizob2/tigana_reviewrant/",
+   "quote": "this was first time I encountered what others call purple prose",
+   "page": "opening post",
+   "kind": "reader",
+   "polarity": "rejects",
+   "date": "2022-03",
+   "routeHint": "Wayback raw capture web.archive.org/web/<ts>id_/ of the www.reddit.com thread",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1010,
+   "feature": "sentence length variation",
+   "claim": "The same reader names long sentences loaded with adjectives as the specific fault.",
+   "source": "u/god935, r/Fantasy, 'Tigana (review/rant)', Mar 2022",
+   "url": "https://www.reddit.com/r/Fantasy/comments/tizob2/tigana_reviewrant/",
+   "quote": "the sentences were too long and full of adjectives",
+   "page": "opening post",
+   "kind": "reader",
+   "polarity": "rejects",
+   "date": "2022-03",
+   "routeHint": "Wayback raw capture web.archive.org/web/<ts>id_/ of the www.reddit.com thread",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1011,
+   "feature": "repetition and refrain",
+   "claim": "A commenter attributes the padding to adjectives and to characters restating the same thing in synonyms.",
+   "source": "u/grembu, comment in r/Fantasy 'Tigana (review/rant)', Mar 2022",
+   "url": "https://www.reddit.com/r/Fantasy/comments/tizob2/tigana_reviewrant/",
+   "quote": "because of all the adjectives and repeating",
+   "page": "top comment",
+   "kind": "reader",
+   "polarity": "rejects",
+   "date": "2022-03",
+   "routeHint": "Wayback raw capture web.archive.org/web/<ts>id_/ of the www.reddit.com thread",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1012,
+   "feature": "other: divided reader verdict on the prose",
+   "claim": "A reviewer who ranks Tigana in his top tier states in the same sentence that Kay's prose will definitely annoy some readers.",
+   "source": "u/aroseandawritingdesk, r/Fantasy, 'Tigana - A Review', Nov 2024",
+   "url": "https://www.reddit.com/r/Fantasy/comments/1goa369/tigana_a_review/",
+   "quote": "Kay's prose is lyrical and beautiful, but will definitely annoy some",
+   "page": "review body",
+   "kind": "reader",
+   "polarity": "asserts",
+   "date": "2024-11",
+   "routeHint": "Wayback raw capture 20241207151907id_",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1013,
+   "feature": "plainness and economy",
+   "claim": "The same reviewer argues that a plainer or clipped action style would have made the novel worse, because the prose is what carries the characters' attachment to their homeland.",
+   "source": "u/aroseandawritingdesk, r/Fantasy, 'Tigana - A Review', Nov 2024",
+   "url": "https://www.reddit.com/r/Fantasy/comments/1goa369/tigana_a_review/",
+   "quote": "Simpler prose, or even a brisk, clipped, action-oriented style, however, would lessen",
+   "page": "review body",
+   "kind": "reader",
+   "polarity": "rejects",
+   "date": "2024-11",
+   "routeHint": "Wayback raw capture 20241207151907id_",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1014,
+   "feature": "concrete sensory noun",
+   "claim": "The same reviewer says the prose works by impressing small overlooked details of a homeland on the reader.",
+   "source": "u/aroseandawritingdesk, r/Fantasy, 'Tigana - A Review', Nov 2024",
+   "url": "https://www.reddit.com/r/Fantasy/comments/1goa369/tigana_a_review/",
+   "quote": "the fine and easily overlooked details that make something truly theirs",
+   "page": "review body",
+   "kind": "reader",
+   "polarity": "asserts",
+   "date": "2024-11",
+   "routeHint": "Wayback raw capture 20241207151907id_",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1015,
+   "feature": "other: divided reader verdict on the prose",
+   "claim": "A commenter in the same thread reports that readers on Reddit commonly attack Tigana when Kay comes up, and declares his own liking for the flowery prose against them.",
+   "source": "u/drossmo12, comment in r/Fantasy 'Tigana - A Review', Nov 2024",
+   "url": "https://www.reddit.com/r/Fantasy/comments/1goa369/tigana_a_review/",
+   "quote": "I love how flowery GGK's prose is",
+   "page": "comment thread",
+   "kind": "reader",
+   "polarity": "asserts",
+   "date": "2024-11",
+   "routeHint": "Wayback raw capture 20241207151907id_",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1016,
+   "feature": "other: divided reader verdict on the prose",
+   "claim": "A commenter frames the question of whether Kay's prose is beautiful or too dry as one of the arguments the book leaves open to its readers.",
+   "source": "u/wgr-aw, comment in r/Fantasy 'Tigana.. Why do people like this book?', Jun 2022",
+   "url": "https://www.reddit.com/r/Fantasy/comments/ve636z/tigana_why_do_people_like_this_book/",
+   "quote": "Is GGK prose beautiful or too dry initially",
+   "page": "comment thread",
+   "kind": "reader",
+   "polarity": "mentions",
+   "date": "2022-06",
+   "routeHint": "Wayback web/2024id_ nearest capture",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1017,
+   "feature": "withheld information and inference",
+   "claim": "A reader who abandoned Tigana twice complains that the book announces its emotion instead of enacting it.",
+   "source": "u/_____michel_____, r/Fantasy, 'Tigana.. Why do people like this book?', Jun 2022",
+   "url": "https://www.reddit.com/r/Fantasy/comments/ve636z/tigana_why_do_people_like_this_book/",
+   "quote": "The author is doing a lot of telling and very little showing",
+   "page": "opening post",
+   "kind": "reader",
+   "polarity": "rejects",
+   "date": "2022-06",
+   "routeHint": "Wayback web/2024id_ nearest capture",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1018,
+   "feature": "place and institution description",
+   "claim": "A reviewer describes Kay's handling of his invented peninsula's history as withheld and timed rather than delivered in bulk.",
+   "source": "u/joshua-bush, r/Fantasy, '[Review] Tigana: A Misguided Masterpiece?', Mar 2020",
+   "url": "https://www.reddit.com/r/Fantasy/comments/fkdpfg/review_tigana_a_misguided_masterpiece/",
+   "quote": "never bludgeons the reader with it, instead planting seeds early on",
+   "page": "review body",
+   "kind": "reader",
+   "polarity": "asserts",
+   "date": "2020-03",
+   "routeHint": "Wayback raw capture 20230608133320id_",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1019,
+   "feature": "omission as information",
+   "claim": "The same reviewer says Kay withholds most of the world he could describe and shows only the part the reader is hungry for.",
+   "source": "u/joshua-bush, r/Fantasy, '[Review] Tigana: A Misguided Masterpiece?', Mar 2020",
+   "url": "https://www.reddit.com/r/Fantasy/comments/fkdpfg/review_tigana_a_misguided_masterpiece/",
+   "quote": "he shows us only what is most interesting",
+   "page": "review body",
+   "kind": "reader",
+   "polarity": "asserts",
+   "date": "2020-03",
+   "routeHint": "Wayback raw capture 20230608133320id_",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1020,
+   "feature": "point of view and distance",
+   "claim": "The same reviewer says the novel's turning points are perceived through its humbler characters rather than its great ones.",
+   "source": "u/joshua-bush, r/Fantasy, '[Review] Tigana: A Misguided Masterpiece?', Mar 2020",
+   "url": "https://www.reddit.com/r/Fantasy/comments/fkdpfg/review_tigana_a_misguided_masterpiece/",
+   "quote": "the eyes of these more humble characters that we perceive the moments",
+   "page": "review body",
+   "kind": "reader",
+   "polarity": "asserts",
+   "date": "2020-03",
+   "routeHint": "Wayback raw capture 20230608133320id_",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "index": 1021,
+   "feature": "other: reader parody of the register",
+   "claim": "A reader forty per cent through Tigana writes a parody of the novel's lament register in block capitals to show what tires him, while granting the prose is gorgeous.",
+   "source": "u/fincoherent, r/Fantasy, 'Tigana by GGK - should I keep going?', Jan 2018",
+   "url": "https://www.reddit.com/r/Fantasy/comments/7p5ro9/tigana_by_ggk_should_i_keep_going/",
+   "quote": "the prose is gorgeous and I like the characterisation and world",
+   "page": "opening post",
+   "kind": "reader",
+   "polarity": "disputes",
+   "date": "2018-01",
+   "routeHint": "Wayback raw capture 20230607111129id_",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1022,
+   "feature": "plainness and economy",
+   "claim": "A commenter who abandoned the book calls Kay's sentences grammatically competent but not enjoyable to read.",
+   "source": "u/Assiniboia, comment in r/Fantasy 'Is Tigana a good representation of Guy Gavriel Kay?', Mar 2024",
+   "url": "https://www.reddit.com/r/Fantasy/comments/1bep250/is_tigana_a_good_representation_of_guy_gavriel_kay/",
+   "quote": "he writes grammatically competent sentences but not fun to read",
+   "page": "comment thread",
+   "kind": "reader",
+   "polarity": "rejects",
+   "date": "2024-03",
+   "routeHint": "Wayback web/2024id_ nearest capture",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1023,
+   "feature": "other: divided reader verdict on the prose",
+   "claim": "A reader who calls the writing lovely reports that the same book's treatment of its villain divides earlier threads on the subreddit.",
+   "source": "u/contrasupra, r/Fantasy, 'Some thoughts about Tigana (heavy spoilers)', Aug 2023",
+   "url": "https://www.reddit.com/r/Fantasy/comments/15u1pk0/some_thoughts_about_tigana_heavy_spoilers/",
+   "quote": "I thought the writing was lovely, the ideas intriguing",
+   "page": "opening post",
+   "kind": "reader",
+   "polarity": "asserts",
+   "date": "2023-08",
+   "routeHint": "Wayback raw capture 20230910041956id_ of a comment permalink",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1024,
+   "feature": "other: divided reader verdict on the prose",
+   "claim": "On the Goodreads Tigana page a one-star reviewer says the prose is so flowery it made his eyes bleed.",
+   "source": "Pietro, Goodreads review of Tigana, 9 Aug 2012 (431 likes)",
+   "url": "https://www.goodreads.com/book/show/104089.Tigana",
+   "quote": "the prose is so flowery it made my eyes bleed",
+   "page": "reviews list",
+   "kind": "reader",
+   "polarity": "rejects",
+   "date": "2012-08-09",
+   "routeHint": "browser user agent on the live page; review text read from the __NEXT_DATA__ apolloState Review: nodes",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1025,
+   "feature": "adjective and adverb discipline",
+   "claim": "A four-star Goodreads reviewer of Tigana praises the prose precisely for never becoming too flowery.",
+   "source": "Petrik, Goodreads review of Tigana, 31 Jul 2017 (304 likes)",
+   "url": "https://www.goodreads.com/book/show/104089.Tigana",
+   "quote": "beautiful, elegant, enchanting, and never gets too flowery to read",
+   "page": "reviews list",
+   "kind": "reader",
+   "polarity": "asserts",
+   "date": "2017-07-31",
+   "routeHint": "browser user agent; __NEXT_DATA__ apolloState Review: nodes",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1026,
+   "feature": "repetition and refrain",
+   "claim": "A two-star Goodreads reviewer names melodrama and garrulousness, saying each chapter restates the same things.",
+   "source": "Hamad, Goodreads review of Tigana, 22 Mar 2021 (41 likes)",
+   "url": "https://www.goodreads.com/book/show/104089.Tigana",
+   "quote": "it was so melodramatic and garrulous",
+   "page": "reviews list",
+   "kind": "reader",
+   "polarity": "rejects",
+   "date": "2021-03-22",
+   "routeHint": "browser user agent; __NEXT_DATA__ apolloState Review: nodes",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1027,
+   "feature": "adjective and adverb discipline",
+   "claim": "A three-star Goodreads reviewer of Tigana calls the writing too descriptive and flowery at times.",
+   "source": "Nicole, Goodreads review of Tigana, 26 Mar 2021 (129 likes)",
+   "url": "https://www.goodreads.com/book/show/104089.Tigana",
+   "quote": "The writing was too descriptive sometimes and flowery",
+   "page": "reviews list",
+   "kind": "reader",
+   "polarity": "rejects",
+   "date": "2021-03-26",
+   "routeHint": "browser user agent; __NEXT_DATA__ apolloState Review: nodes",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1028,
+   "feature": "cadence and rhythm",
+   "claim": "A five-star Goodreads reviewer locates Kay's effect in a lyrical quality carried at the level of the sentence.",
+   "source": "Choko, Goodreads review of Tigana, 6 Aug 2017 (75 likes)",
+   "url": "https://www.goodreads.com/book/show/104089.Tigana",
+   "quote": "it carries a lyrical magic which simmers in every sentence",
+   "page": "reviews list",
+   "kind": "reader",
+   "polarity": "asserts",
+   "date": "2017-08-06",
+   "routeHint": "browser user agent; __NEXT_DATA__ apolloState Review: nodes",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "index": 1029,
+   "feature": "plainness and economy",
+   "claim": "A five-star Goodreads reviewer describes Kay's language as beautiful and at the same time ascetic, stopping short of flowery baroque.",
+   "source": "Mayim de Vries, Goodreads review of Tigana, 8 Sep 2016 (119 likes)",
+   "url": "https://www.goodreads.com/book/show/104089.Tigana",
+   "quote": "beautiful and the same time ascetic without going full-fledge flowery baroque",
+   "page": "reviews list",
+   "kind": "reader",
+   "polarity": "asserts",
+   "date": "2016-09-08",
+   "routeHint": "browser user agent; __NEXT_DATA__ apolloState Review: nodes",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1030,
+   "feature": "concrete sensory noun",
+   "claim": "The same reviewer says the smallest background details in Tigana each contribute to the whole picture.",
+   "source": "Mayim de Vries, Goodreads review of Tigana, 8 Sep 2016 (119 likes)",
+   "url": "https://www.goodreads.com/book/show/104089.Tigana",
+   "quote": "even the most meaningless background details contribute to the overall picture",
+   "page": "reviews list",
+   "kind": "reader",
+   "polarity": "asserts",
+   "date": "2016-09-08",
+   "routeHint": "browser user agent; __NEXT_DATA__ apolloState Review: nodes",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1031,
+   "feature": "cadence and rhythm",
+   "claim": "A four-star Goodreads reviewer characterises Kay's writing as prose-poetical, smooth and impressionistic.",
+   "source": "Bradley, Goodreads review of Tigana, 20 Mar 2020 (50 likes)",
+   "url": "https://www.goodreads.com/book/show/104089.Tigana",
+   "quote": "His writing is often prose-poetical, smooth and impressionistic",
+   "page": "reviews list",
+   "kind": "reader",
+   "polarity": "asserts",
+   "date": "2020-03-20",
+   "routeHint": "browser user agent; __NEXT_DATA__ apolloState Review: nodes",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1032,
+   "feature": "other: divided reader verdict on the prose",
+   "claim": "A two-star Goodreads reviewer separates the prose from the story explicitly in his headline verdict.",
+   "source": "Matt's Fantasy Book Reviews, Goodreads review of Tigana, 17 Mar 2022 (151 likes)",
+   "url": "https://www.goodreads.com/book/show/104089.Tigana",
+   "quote": "Beautiful prose, but the story falls incredibly flat",
+   "page": "reviews list",
+   "kind": "reader",
+   "polarity": "disputes",
+   "date": "2022-03-17",
+   "routeHint": "browser user agent; __NEXT_DATA__ apolloState Review: nodes",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1033,
+   "feature": "place and institution description",
+   "claim": "A five-star Goodreads reviewer reports feeling the atmosphere of each individual city and tavern in the book.",
+   "source": "Ivan, Goodreads review of Tigana, 25 May 2014 (58 likes)",
+   "url": "https://www.goodreads.com/book/show/104089.Tigana",
+   "quote": "I could feel atmosphere of every city and every tavern",
+   "page": "reviews list",
+   "kind": "reader",
+   "polarity": "asserts",
+   "date": "2014-05-25",
+   "routeHint": "browser user agent; __NEXT_DATA__ apolloState Review: nodes",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1034,
+   "feature": "register modulation",
+   "claim": "A five-star Goodreads reviewer of The Lions of Al-Rassan calls the style versatile, listing lavish description, witty dialogue and poetry as separate registers within one book.",
+   "source": "Alissa, Goodreads review of The Lions of Al-Rassan, 29 Oct 2014 (41 likes)",
+   "url": "https://www.goodreads.com/book/show/104101.The_Lions_of_Al_Rassan",
+   "quote": "it offers both lavish descriptions, witty dialogues, elegant poetry",
+   "page": "reviews list",
+   "kind": "reader",
+   "polarity": "asserts",
+   "date": "2014-10-29",
+   "routeHint": "browser user agent; __NEXT_DATA__ apolloState Review: nodes",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "index": 1035,
+   "feature": "place and institution description",
+   "claim": "A two-star Goodreads reviewer of The Lions of Al-Rassan notes as a structural habit that scenes open with a view of the city or enclave the next characters occupy.",
+   "source": "Molly Ison, Goodreads review of The Lions of Al-Rassan, 15 Jul 2013 (38 likes)",
+   "url": "https://www.goodreads.com/book/show/104101.The_Lions_of_Al_Rassan",
+   "quote": "Scenes open with a view of the city or enclave",
+   "page": "reviews list",
+   "kind": "reader",
+   "polarity": "mentions",
+   "date": "2013-07-15",
+   "routeHint": "browser user agent; __NEXT_DATA__ apolloState Review: nodes",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "index": 1036,
+   "feature": "cadence and rhythm",
+   "claim": "A four-star Goodreads reviewer of The Lions of Al-Rassan calls its prose elegant with a flowing feel.",
+   "source": "mark monday, Goodreads review of The Lions of Al-Rassan, 30 Nov 2012 (133 likes)",
+   "url": "https://www.goodreads.com/book/show/104101.The_Lions_of_Al_Rassan",
+   "quote": "its prose is elegant and has such a lovely flowing feel",
+   "page": "reviews list",
+   "kind": "reader",
+   "polarity": "asserts",
+   "date": "2012-11-30",
+   "routeHint": "browser user agent; __NEXT_DATA__ apolloState Review: nodes",
+   "registerHint": "none",
+   "confidence": "high"
   }
  ],
  "sources": [
@@ -27747,17 +28197,17 @@
   },
   "521": {
    "index": 521,
-   "verdict": "SKIPPED_TRIAGE",
-   "trueWording": "",
-   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
-   "fromFile": "verdicts-kay-triage-r5.json"
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "all of that is condensed into an epilogue",
+   "note": "Raw source reached: the talk's own transcript (introduction-guy-gavriel-kaydefault.srt, linked from the writersinspire page as 'A transcript/subtitles file (.srt) is available here'). In the Under Heaven passage Olley says almost the entirety of the rebellion itself, the years of upheaval it begins, the victories, the losses, the alliances, the political manoeuvrings, all condensed into an epilogue. Every limb supported. Only naming caveat: the auto-generated transcript renders 'An Shi/An Lushan' phonetically as 'the and Xi rebellion' earlier in the talk, so the rebellion's proper name is identified by context, not spelled on the page.",
+   "fromFile": "verdicts-kay-i521-624.json"
   },
   "522": {
    "index": 522,
-   "verdict": "SKIPPED_TRIAGE",
-   "trueWording": "",
-   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
-   "fromFile": "verdicts-kay-triage-r5.json"
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "to look back with the tragic clarity of hindsight",
+   "note": "Same transcript, paragraph immediately after the Under Heaven discussion: rather than building up suspense, Kay chooses instead to encourage reflection, to look back with the tragic clarity of hindsight rather than to look forward with bated breath. Quote word for word; both limbs (suspense vs reflection; hindsight vs bated breath) present.",
+   "fromFile": "verdicts-kay-i521-624.json"
   },
   "523": {
    "index": 523,
@@ -27768,10 +28218,10 @@
   },
   "524": {
    "index": 524,
-   "verdict": "SKIPPED_TRIAGE",
-   "trueWording": "",
-   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
-   "fromFile": "verdicts-kay-triage-r5.json"
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "little interest in hitting the predictable beats of the historical period",
+   "note": "Same transcript, in the section on Kay crediting readers with historical knowledge, just before the Under Heaven example. The following sentence supplies the second limb: choosing instead to focus on the smaller, more personal moments behind the scenes which shape and motivate those larger events. Claim's 'a historical period' vs page's 'the historical period' is the only wording difference.",
+   "fromFile": "verdicts-kay-i521-624.json"
   },
   "525": {
    "index": 525,
@@ -27789,10 +28239,10 @@
   },
   "527": {
    "index": 527,
-   "verdict": "SKIPPED_TRIAGE",
-   "trueWording": "",
-   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
-   "fromFile": "verdicts-kay-triage-r5.json"
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "By allowing for a change in register",
+   "note": "Raw source reached: verse-and-prose-fantasy-literaturedefault.srt, the transcript linked from the writersinspire page. In the passage on embedding poetry at critical points, Olley says it works by allowing for a change in register, usually (as she concedes) into a more melancholic or portentous key, then illustrates with the lament for Boromir. Both limbs supported; the lecture's whole frame is prosimetrum, the alternation of verse and prose.",
+   "fromFile": "verdicts-kay-i521-624.json"
   },
   "528": {
    "index": 528,
@@ -28097,10 +28547,10 @@
   },
   "571": {
    "index": 571,
-   "verdict": "SKIPPED_TRIAGE",
-   "trueWording": "",
-   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
-   "fromFile": "verdicts-kay-triage-r5.json"
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "River of Stars is never showy",
+   "note": "Second body paragraph ('The plot is unremarkable when viewed from afar...'). Full sentence supplies both limbs: despite its ambition and length, and the clearly painstaking research behind it, River of Stars is never showy.",
+   "fromFile": "verdicts-kay-i521-624.json"
   },
   "572": {
    "index": 572,
@@ -28111,31 +28561,31 @@
   },
   "573": {
    "index": 573,
-   "verdict": "SKIPPED_TRIAGE",
-   "trueWording": "",
-   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
-   "fromFile": "verdicts-kay-triage-r5.json"
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Kay's lyrical prose retains a sense of contemplative calm",
+   "note": "Located exactly where the claim says, in the paragraph beginning 'Not only are Shan and Daiyan wonderfully drawn characters'; the sentence continues 'even in the midst of brutal, heated battles, sieges, and ambushes', supporting the battles-and-ambushes limb.",
+   "fromFile": "verdicts-kay-i521-624.json"
   },
   "574": {
    "index": 574,
-   "verdict": "SKIPPED_TRIAGE",
-   "trueWording": "",
-   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
-   "fromFile": "verdicts-kay-triage-r5.json"
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "appear for a mere scene before fading back into the narrative",
+   "note": "First body paragraph, closing sentence: Das explains Kay tells the story through an incredibly large cast of characters, some of whom do this. Both limbs (large cast; single scene then receding) supported.",
+   "fromFile": "verdicts-kay-i521-624.json"
   },
   "575": {
    "index": 575,
-   "verdict": "SKIPPED_TRIAGE",
-   "trueWording": "",
-   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
-   "fromFile": "verdicts-kay-triage-r5.json"
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the small moments that linger between the momentous ones",
+   "note": "Paragraph beginning 'Any historical period, any story of any major figure', as the claim states: Kay makes sure River of Stars always comes back to the individual people, the details, these small moments, likened to fine calligraphy under a looking glass.",
+   "fromFile": "verdicts-kay-i521-624.json"
   },
   "576": {
    "index": 576,
-   "verdict": "SKIPPED_TRIAGE",
-   "trueWording": "",
-   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
-   "fromFile": "verdicts-kay-triage-r5.json"
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Small events can be important in the unfolding",
+   "note": "The block quotation Das sets off and cites as p. 315 opens with this sentence, which continues 'like a pleated sail, of a world' and then instances an emissary's survival or drowning. The claim's characterisation of the passage's opening is exact.",
+   "fromFile": "verdicts-kay-i521-624.json"
   },
   "577": {
    "index": 577,
@@ -28419,24 +28869,24 @@
   },
   "617": {
    "index": 617,
-   "verdict": "SKIPPED_TRIAGE",
-   "trueWording": "",
-   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
-   "fromFile": "verdicts-kay-triage-r5.json"
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the last book will bleed into the next one, the diction",
+   "note": "BrightWeavings reproduction of the Halasz NYRSF interview (page states it appears courtesy of Peter Halasz, who interviewed GGK for the New York Review of Science Fiction during 2000). Answer to 'Does one form of writing inform the other?', on script writing as a bridge out of one book into the next: Kay says he is always worried, and the sentence ends '...the style, the rhythms', supporting all three of diction, style and rhythms.",
+   "fromFile": "verdicts-kay-i521-624.json"
   },
   "618": {
    "index": 618,
-   "verdict": "SKIPPED_TRIAGE",
-   "trueWording": "",
-   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
-   "fromFile": "verdicts-kay-triage-r5.json"
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the writing changes in every book",
+   "note": "Verbatim, closing his answer 'But what dies when a nation is built?' about the last poem in the Lions epilogue: 'Anyway, the point is that that the writing changes in every book.' The claim's section hint ('answer on style and tone changing between books') points one answer earlier ('I think each book is different. The style and tone changes.'); the quoted sentence sits in the next answer of the same exchange. Claim itself fully supported.",
+   "fromFile": "verdicts-kay-i521-624.json"
   },
   "619": {
    "index": 619,
-   "verdict": "SKIPPED_TRIAGE",
-   "trueWording": "",
-   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
-   "fromFile": "verdicts-kay-triage-r5.json"
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "strong \"tile\" of a charioteer, a strong \"tile\" of a senator",
+   "note": "Answer to the one-word question 'Rhythms?': Kay says the prologue of Sailing to Sarantium was written as a mosaic, built of these two tiles and 'strong contrasting tiles', and explains that in mosaic you contrast colours rather than blend them. Every limb (Sailing to Sarantium, prologue, contrasting tiles, charioteer, senator) supported.",
+   "fromFile": "verdicts-kay-i521-624.json"
   },
   "620": {
    "index": 620,
@@ -28447,17 +28897,17 @@
   },
   "621": {
    "index": 621,
-   "verdict": "SKIPPED_TRIAGE",
-   "trueWording": "",
-   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
-   "fromFile": "verdicts-kay-triage-r5.json"
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "influenced by the metaphor and the protagonist as a mosaicist",
+   "note": "Same answer on the prologue as mosaic, two sentences after the tiles: 'The style of this book, is influenced by the metaphor and the protagonist as a mosaicist.' 'This book' is Sailing to Sarantium, the book named at the start of that answer.",
+   "fromFile": "verdicts-kay-i521-624.json"
   },
   "622": {
    "index": 622,
-   "verdict": "SKIPPED_TRIAGE",
-   "trueWording": "",
-   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
-   "fromFile": "verdicts-kay-triage-r5.json"
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "brief lives of the two troubadours at the beginning and end",
+   "note": "Answer on style and tone changing between books, as the claim's section hint says: Arbonne was written as a love song, the title gives it away, and the formal brief lives of the two troubadours at the beginning and end are meant to signal that the whole book is a song. 'Frame' is supported by 'at the beginning and end'.",
+   "fromFile": "verdicts-kay-i521-624.json"
   },
   "623": {
    "index": 623,
@@ -28468,10 +28918,10 @@
   },
   "624": {
    "index": 624,
-   "verdict": "SKIPPED_TRIAGE",
-   "trueWording": "",
-   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
-   "fromFile": "verdicts-kay-triage-r5.json"
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "What details do I need? Details are critical.",
+   "note": "Answer on layering up a scene: Kay describes his painterly method of layering, looking at the written scene the next morning and asking himself 'How do I flesh this out?', 'What details do I need?', then 'Details are critical.' Both limbs supported; the drafted-scene limb is explicit in 'I'll look at the written scene and ask myself'.",
+   "fromFile": "verdicts-kay-i521-624.json"
   },
   "625": {
    "index": 625,
@@ -28482,10 +28932,10 @@
   },
   "626": {
    "index": 626,
-   "verdict": "SKIPPED_TRIAGE",
-   "trueWording": "",
-   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
-   "fromFile": "verdicts-kay-triage-r5.json"
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "There are other things, just offstage, that the reader knows will",
+   "note": "Live raw page brightweavings.com/nyrsf_halasz/ (HTTP 200, 72KB). Quote is verbatim in GGK's answer beginning 'Well, I'll tell you about the splitting' — the paragraph about Crispin's journey, immediately after 'The book describes the arc of that journey and ends at the finish of it.' Page header confirms Peter Halasz interviewed GGK for the New York Review of Science Fiction during 2000. Every limb (Kay speaking; about Sailing to Sarantium; things left offstage the reader knows will happen) is on the page.",
+   "fromFile": "verdicts-kay-i626-645.json"
   },
   "627": {
    "index": 627,
@@ -28532,52 +28982,53 @@
   },
   "633": {
    "index": 633,
-   "verdict": "SKIPPED_TRIAGE",
-   "trueWording": "",
-   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
-   "fromFile": "verdicts-kay-triage-r5.json"
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "FIONAVAR, a land of undetermined location",
+   "note": "Live raw page brightweavings.com/dictionary/ (HTTP 200, 57KB). Quote opens the entry, exactly as the claim's 'first line of the entry' says. Page states it is the entry on Fionavar in The Dictionary of Imaginary Places by Alberto Manguel and Gianni Guadalupi, reprinted with permission.",
+   "fromFile": "verdicts-kay-i626-645.json"
   },
   "634": {
    "index": 634,
-   "verdict": "SKIPPED_TRIAGE",
-   "trueWording": "",
-   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
-   "fromFile": "verdicts-kay-triage-r5.json"
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "(designed by the gifted T’Varen in the reign of Thallason)",
+   "note": "Same page. The parenthesis sits in the Cathal/Larai Rigal paragraph, attached to the walled gardens of the Summer Palace — a built work credited to a named maker (T’Varen) and a named reign (Thallason) inside a parenthesis, as claimed. Curly apostrophe in T’Varen matches the page.",
+   "fromFile": "verdicts-kay-i626-645.json"
   },
   "635": {
    "index": 635,
-   "verdict": "SKIPPED_TRIAGE",
-   "trueWording": "",
-   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
-   "fromFile": "verdicts-kay-triage-r5.json"
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Access to the Godwood and the tree is strictly controlled",
+   "note": "Same page, paragraph on the Mõrnirwood/Godwood west of Paras Derval, which houses the Summer Tree. Stated flatly as a standing condition, continuing 'and the casual traveller is unlikely in the extreme to have occasion or opportunity to go there' — no scene is narrated there, so the 'administrative fact rather than a scene' limb holds.",
+   "fromFile": "verdicts-kay-i626-645.json"
   },
   "636": {
    "index": 636,
-   "verdict": "SKIPPED_TRIAGE",
-   "trueWording": "",
-   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
-   "fromFile": "verdicts-kay-triage-r5.json"
+   "verdict": "PARTIAL",
+   "trueWording": "Fionavar’s prehistory is hazy.",
+   "unsupportedLimb": "'rather than narrating it' — the entry declares the prehistory hazy and then does narrate it, in the same paragraph and the two that follow",
+   "note": "Same page. The quotation is verbatim and opens its paragraph. But the declaration is not used in place of narration: the same sentence run continues 'Originally there appear to have been only two peoples… These were followed by the lios alfar and the Dwarves', then 'Many years later Men arrived on the Plain', then a full paragraph narrating the Bael Rangat with Conary's death in battle, Colan's succession, Revor's Dalrei, Rakoth's binding and the five wardstones. The hazy-prehistory limb is supported; the contrastive limb is not.",
+   "fromFile": "verdicts-kay-i626-645.json"
   },
   "637": {
    "index": 637,
-   "verdict": "SKIPPED_TRIAGE",
-   "trueWording": "",
-   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
-   "fromFile": "verdicts-kay-triage-r5.json"
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it is a matter of some dispute which race came first",
+   "note": "Same page, in the paragraph beginning 'Fionavar’s prehistory is hazy', of the lios alfar and the Dwarves. The entry leaves the question open and never returns to settle it, so both limbs (records the dispute; does not settle it) hold.",
+   "fromFile": "verdicts-kay-i626-645.json"
   },
   "638": {
    "index": 638,
-   "verdict": "SKIPPED_TRIAGE",
-   "trueWording": "",
-   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
-   "fromFile": "verdicts-kay-triage-r5.json"
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "neither has offered an account of what they saw there",
+   "note": "Same page, paragraph on the Dwarves of Banir Lõk and Banir Tal and Calor Diman. The page reads 'Other than the Dwarves themselves only two people — Loren Silvercloak… and Kimberly Ford… have been permitted to enter the meadow of the Crystal Lake, and neither has offered an account of what they saw there.' The 'only two' limb is the page's own wording (Dwarves excepted as residents).",
+   "fromFile": "verdicts-kay-i626-645.json"
   },
   "639": {
    "index": 639,
-   "verdict": "SKIPPED_TRIAGE",
-   "trueWording": "",
-   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
-   "fromFile": "verdicts-kay-triage-r5.json"
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "There have been reports of a lessening of this sentient forest’s",
+   "note": "Same page, paragraph on Pendaran, the Great Wood. Continues 'antipathy to intruders of all kinds, but pending confirmation of this the traveller is advised to stay well clear of what may still be a very dangerous area' — supplying both the unconfirmed-report hedge and the consequent advice.",
+   "fromFile": "verdicts-kay-i626-645.json"
   },
   "640": {
    "index": 640,
@@ -28588,10 +29039,10 @@
   },
   "641": {
    "index": 641,
-   "verdict": "SKIPPED_TRIAGE",
-   "trueWording": "",
-   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
-   "fromFile": "verdicts-kay-triage-r5.json"
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "There are sixty-five members of the Rector’s Council as of this",
+   "note": "Live raw page brightweavings.com/review-by-bill-capossere-for-fantasy-literature/ (HTTP 200, 56KB). The quotation opens the block quotation that directly follows Capossere's line 'we shift immediately into a wholly different voice and tone:', exactly the location claimed. Sentence completes 'as of this morning. There should be sixty-six, but one has recently died and not yet been replaced' — present tense, dated to that morning. Page header confirms the review is by Bill Capossere for Fantasy Literature, reproduced with permission, of Children of Earth and Sky.",
+   "fromFile": "verdicts-kay-i626-645.json"
   },
   "642": {
    "index": 642,
@@ -28616,10 +29067,10 @@
   },
   "645": {
    "index": 645,
-   "verdict": "SKIPPED_TRIAGE",
-   "trueWording": "",
-   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
-   "fromFile": "verdicts-kay-triage-r5.json"
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "often employing passive voice, as we’re informed that the Rector’s Palace",
+   "note": "Same page, the paragraph immediately following that block quotation: 'This section goes on for several pages in this same wide-casting vision, often employing passive voice, as we’re informed that the Rector’s Palace has been rebuilt twice, that a subset of the population… dislike paying their taxes…' All four limbs (several pages; passive voice; civic facts; Palace rebuilt twice) are on the page in Capossere's own voice.",
+   "fromFile": "verdicts-kay-i626-645.json"
   },
   "646": {
    "index": 646,
@@ -31155,6 +31606,217 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r8.json"
+  },
+  "1007": {
+   "index": 1007,
+   "verdict": "PARTIAL",
+   "trueWording": "\"the man can describe settings really well\" — one of five Pros",
+   "note": "Raw Wayback capture 20250312113419id_ of the thread (live Reddit serves a bot interstitial). Quote is verbatim in the OP's 'Pros' block, opening sentence: 'I think GGK\\'s prose is top notch; the man can describe settings really well.' The reader's overall dislike is verbatim too ('Overall, I didn't like it. 2.5/5'). But settings description is item one of five Pros bullets, and the OP applies a stronger superlative elsewhere ('The Alberico pov was stellar').",
+   "unsupportedLimb": "singles out settings description as the book's STRONGEST element — it is one of five co-equal Pros, and 'stellar' is reserved for the Alberico POV",
+   "fromFile": "verdicts-kay-i1007-1021.json"
+  },
+  "1008": {
+   "index": 1008,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Overall, I didn't like it. 2.5/5\"; \"GGK's prose is top notch\"",
+   "note": "Raw Wayback 20250312113419id_. Both halves verbatim: the rating stands as the OP's first line above the 'Pros' heading, the prose praise opens the 'Pros' block. The split verdict is the post's own structure (Pros/Cons under a 2.5/5).",
+   "fromFile": "verdicts-kay-i1007-1021.json"
+  },
+  "1009": {
+   "index": 1009,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"this was first time I encountered what others call purple prose\"",
+   "note": "Raw Wayback 20250321071155id_ of the tizob2 thread. Verbatim in u/god935's opening 'Review' paragraph. The tolerance limb is supported in the same sentence: he calls himself a fan of well-written books who does not have a problem with heavy prose, naming Erikson, Hobb and Bakker.",
+   "fromFile": "verdicts-kay-i1007-1021.json"
+  },
+  "1010": {
+   "index": 1010,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"the sentences were too long and full of adjectives\"",
+   "note": "Raw Wayback 20250321071155id_. Verbatim, same opening paragraph, immediately after 'It was ridiculous'. The page continues 'and weird metaphors and it was so overwritten', so the long-adjectival-sentence complaint is one of a short list of named faults, not the only one — the claim's wording ('the specific fault') reads as concreteness, which the page supports.",
+   "fromFile": "verdicts-kay-i1007-1021.json"
+  },
+  "1011": {
+   "index": 1011,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"because of all the adjectives and repeating\"",
+   "note": "Raw Wayback 20250321071155id_. Verbatim in u/grembu's top comment. Both limbs supported in the same sentence: the padding figure ('felt like i read 5 pages for half a page of actual story') and the synonym restatement ('some characters just kept repeating the same thing but with different synonyms').",
+   "fromFile": "verdicts-kay-i1007-1021.json"
+  },
+  "1012": {
+   "index": 1012,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Kay's prose is lyrical and beautiful, but will definitely annoy some\"",
+   "note": "Raw Wayback 20241211175923-era capture; I used 20250628214812id_ for 1goa369 after confirming the same body text. Verbatim as the opening clause of the review's penultimate paragraph; the praise and the warning are in one sentence, which continues 'it is also often slow and meandering'. The top-tier limb is the review's closing line: not just his favourite read of the year but a contender for an all-time favourite. Author confirmed as u/aroseandawritingdesk (OP).",
+   "fromFile": "verdicts-kay-i1007-1021.json"
+  },
+  "1013": {
+   "index": 1013,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Simpler prose... clipped, action-oriented style, however, would lessen the novel\"",
+   "note": "Raw Wayback 20250628214812id_ of 1goa369. Verbatim, the sentence directly following the 'annoy some' sentence. The causal limb is the next sentence: the story is about love and art and the prose conveys this, impressing on the reader a character's love for the fields of their homeland and the songs of their childhood.",
+   "fromFile": "verdicts-kay-i1007-1021.json"
+  },
+  "1014": {
+   "index": 1014,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"the fine and easily overlooked details that make something truly theirs\"",
+   "note": "Raw Wayback 20250628214812id_. Verbatim, closing the same sentence as 1013's causal limb. The page frames it as the prose impressing a character's love on the reader through those small details, which is what the claim asserts.",
+   "fromFile": "verdicts-kay-i1007-1021.json"
+  },
+  "1015": {
+   "index": 1015,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"I love how flowery GGK's prose is\"",
+   "note": "Raw Wayback 20250628214812id_. Verbatim in u/drossmo12's comment, author confirmed. The commonly-attacked limb opens that same comment: people seem to hate on Tigana on reddit when they discuss GGK, and he says he does not know why.",
+   "fromFile": "verdicts-kay-i1007-1021.json"
+  },
+  "1016": {
+   "index": 1016,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Is GGK prose beautiful or too dry initially\"",
+   "note": "Raw Wayback 20250731050243id_ of the ve636z thread. Verbatim in u/wgr-aw's comment, author confirmed. The framing limb is that comment's own lead-in: he says one thing he likes is that there is space in the book for arguments, then lists this among them (alongside whether Brandin can be forgiven). The page continues 'even if it ultimately rounds off in a satisfying manner'.",
+   "fromFile": "verdicts-kay-i1007-1021.json"
+  },
+  "1017": {
+   "index": 1017,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"The author is doing a lot of telling and very little showing\"",
+   "note": "Raw Wayback 20250731050243id_. Verbatim in u/_____michel_____'s opening post. The twice-abandoned limb is the post's first two paragraphs: he gave up on the audiobook a few years ago a few chapters in, soldiered through about three quarters on a second attempt, and gave up again. The announce-versus-enact limb is his own figure that the book keeps telling us 'this is emotional' while 'We're just not made to feel it.'",
+   "fromFile": "verdicts-kay-i1007-1021.json"
+  },
+  "1018": {
+   "index": 1018,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"never bludgeons the reader with it, instead planting seeds early on\"",
+   "note": "Raw Wayback 20241211175923id_ of fkdpfg — the 20230608133320 capture named in the routeHint is only a login-wall shell with no post body, so I took the next good capture from the CDX list. Verbatim in u/joshua-bush's review body. Both limbs supported in the same sentence: the Peninsula of the Palm is named as rich in history, and the timing limb is 'revealing them only at the most dramatic moment'.",
+   "fromFile": "verdicts-kay-i1007-1021.json"
+  },
+  "1019": {
+   "index": 1019,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"he shows us only what is most interesting\"",
+   "note": "Raw Wayback 20241211175923id_. Verbatim, the sentence immediately after 1018's. The withholding limb is its own first clause: there is a sense he could lecture on the details of this world for hours. The hunger limb closes the sentence, 'what we are most hungry for'.",
+   "fromFile": "verdicts-kay-i1007-1021.json"
+  },
+  "1020": {
+   "index": 1020,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"the eyes of these more humble characters that we perceive the moments\"",
+   "note": "Raw Wayback 20241211175923id_. Verbatim in the next paragraph of the same review. The turning-points limb is the rest of that sentence — the moments on which the great triumphs and tragedies turn — and the contrast with the great ones is the sentence's own closing clause about the bigger players. Note the page hedges with 'mostly', which the claim drops; the contrast itself is explicit and not overstated.",
+   "fromFile": "verdicts-kay-i1007-1021.json"
+  },
+  "1021": {
+   "index": 1021,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"the prose is gorgeous and I like the characterisation and world\"",
+   "note": "Raw Wayback 20230607111129id_ of 7p5ro9 — that capture is a login-wall shell for most of the page but does carry u/fincoherent's full opening post. Verbatim. The 40% limb is the post's first clause; the parody limb is the block-capitals passage in the next paragraph (AWFUL / IMAGINE / DESPAIR / SOARING and so on) introduced by 'I keep rolling my eyes'; the tires-him limb is 'finding it pretty slow and not enjoying how overly emotional everything is'.",
+   "fromFile": "verdicts-kay-i1007-1021.json"
+  },
+  "1022": {
+   "index": 1022,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "he writes grammatically competent sentences but not fun to read",
+   "note": "Wayback raw capture 20250321071147id_ (live reddit.com and old.reddit.com both blocked: 403 / 'Welcome to Reddit' interstitial). Comment by u/Assiniboia, t1_kuykup3, dateCreated 2024-03-15, in the JSON-LD comment list of thread t3_1bep250 (title matches). Quote appears word for word after 'But I find his prose blandly competent:'. Abandonment limb supported in the same comment: 'Didn't finish it. Too bored by 2/3rds and never picked it back up.'",
+   "fromFile": "verdicts-kay-i1022-1036.json"
+  },
+  "1023": {
+   "index": 1023,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I thought the writing was lovely, the ideas intriguing",
+   "note": "Wayback raw capture 20250304145029id_ (live host blocked). JSON-LD DiscussionForumPosting, author contrasupra (t2_elbow), datePublished 2023-08-17, headline 'Some thoughts about Tigana (heavy spoilers)'. Quote verbatim in the articleBody. Villain limb supported by the next sentences: he was reading older threads, found much discussion of Brandin and whether the book makes him sympathetic or morally gray, and calls that take reductive - i.e. a contested question across earlier threads.",
+   "fromFile": "verdicts-kay-i1022-1036.json"
+  },
+  "1024": {
+   "index": 1024,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the prose is so flowery it made my eyes bleed",
+   "note": "Live goodreads.com fetched with a desktop Chrome user agent; review parsed from the __NEXT_DATA__ apolloState Review: nodes. Node matches on every limb: creator Pietro, rating 1, createdAt 2012-08-09, likeCount 431. Quote verbatim in a list of complaints alongside pacing and characters. Only inference: 'his' eyes - the page gives the display name Pietro but never states gender; the review itself says 'my eyes'.",
+   "fromFile": "verdicts-kay-i1022-1036.json"
+  },
+  "1025": {
+   "index": 1025,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "beautiful, elegant, enchanting, and never gets too flowery to read",
+   "note": "Same live Goodreads Tigana fetch. Node: creator Petrik, rating 4, createdAt 2017-07-31, likeCount 304 - all limbs match. Quote is a contiguous substring of 'It's addictive, beautiful, elegant, enchanting, and never gets too flowery to read.' The 'praises the prose precisely' limb is supported by the preceding sentence attributing his rating mostly to Kay's prose.",
+   "fromFile": "verdicts-kay-i1022-1036.json"
+  },
+  "1026": {
+   "index": 1026,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it was so melodramatic and garrulous",
+   "note": "Same live Goodreads Tigana fetch. Node: creator Hamad, rating 2, createdAt 2021-03-22, likeCount 41 - all limbs match. Quote verbatim. The restatement limb is supported by the immediately following clause: each chapter would tell the same things again and again, ten pages where one would do.",
+   "fromFile": "verdicts-kay-i1022-1036.json"
+  },
+  "1027": {
+   "index": 1027,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The writing was too descriptive sometimes and flowery",
+   "note": "Same live Goodreads Tigana fetch. Node: creator Nicole, rating 3, createdAt 2021-03-26, likeCount 129 - all limbs match. Quote verbatim, opening the review's 'The writing' section.",
+   "fromFile": "verdicts-kay-i1022-1036.json"
+  },
+  "1028": {
+   "index": 1028,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it carries a lyrical magic which simmers in every sentence",
+   "note": "Same live Goodreads Tigana fetch. Node: creator Choko, rating 5, createdAt 2017-08-06, likeCount 75 - all limbs match. Quote verbatim. Sentence-level limb is explicit in the quote. Note the review text also self-scores '4.66' in prose, but the Goodreads rating field is 5, which is what the claim cites.",
+   "fromFile": "verdicts-kay-i1022-1036.json"
+  },
+  "1029": {
+   "index": 1029,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "beautiful and the same time ascetic without going full-fledge flowery baroque",
+   "note": "Same live Goodreads Tigana fetch. Node: creator Mayim de Vries, rating 5, createdAt 2016-09-08, likeCount 119 - all limbs match. Quote is a contiguous substring of 'The language is so beautiful and the same time ascetic without going full-fledge flowery baroque.'",
+   "fromFile": "verdicts-kay-i1022-1036.json"
+  },
+  "1030": {
+   "index": 1030,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "even the most meaningless background details contribute to the overall picture",
+   "note": "Same review node as index 1029 (Mayim de Vries, rating 5, 2016-09-08, 119 likes), so the 'same reviewer' limb holds. Quote verbatim, one sentence after the ascetic sentence. The claim renders 'most meaningless' as 'smallest', a paraphrase in the same direction; the page's own wording is preserved in trueWording.",
+   "fromFile": "verdicts-kay-i1022-1036.json"
+  },
+  "1031": {
+   "index": 1031,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "His writing is often prose-poetical, smooth and impressionistic",
+   "note": "Same live Goodreads Tigana fetch. Node: creator Bradley, rating 4, createdAt 2020-03-20, likeCount 50 - all limbs match. Quote verbatim; the page continues 'and also, at times, lush', which extends but does not contradict the claim.",
+   "fromFile": "verdicts-kay-i1022-1036.json"
+  },
+  "1032": {
+   "index": 1032,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Beautiful prose, but the story falls incredibly flat",
+   "note": "Same live Goodreads Tigana fetch. Node: creator Matt's Fantasy Book Reviews, rating 2, createdAt 2022-03-17, likeCount 151 - all limbs match. Quote verbatim and stands as the review's first line, ahead of the body beginning 'I really wanted to like this book', which supports the 'headline verdict' limb.",
+   "fromFile": "verdicts-kay-i1022-1036.json"
+  },
+  "1033": {
+   "index": 1033,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I could feel atmosphere of every city and every tavern",
+   "note": "Same live Goodreads Tigana fetch. Node: creator Ivan, rating 5, createdAt 2014-05-25, likeCount 58 - all limbs match. Quote verbatim, in the worldbuilding paragraph.",
+   "fromFile": "verdicts-kay-i1022-1036.json"
+  },
+  "1034": {
+   "index": 1034,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it offers both lavish descriptions, witty dialogues, elegant poetry",
+   "note": "Live Goodreads Lions of Al-Rassan page fetched with a desktop Chrome user agent; __NEXT_DATA__ apolloState Review: node. Creator Alissa, rating 5, createdAt 2014-10-29, likeCount 41 - all limbs match. Quote verbatim; the 'versatile' limb is explicit in the preceding clause 'the writing style is very versatile'. The page's list continues 'emotion and brutal detachment'.",
+   "fromFile": "verdicts-kay-i1022-1036.json"
+  },
+  "1035": {
+   "index": 1035,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Scenes open with a view of the city or enclave",
+   "note": "Same live Lions fetch. Node: creator Molly Ison, rating 2, createdAt 2013-07-15, likeCount 38 - all limbs match. Quote verbatim; the page continues 'that the next group of characters occupy', matching the claim's tail. The generalising present tense, in a list of recurring devices the reviewer likens to film cliches, supports 'structural habit'.",
+   "fromFile": "verdicts-kay-i1022-1036.json"
+  },
+  "1036": {
+   "index": 1036,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "its prose is elegant and has such a lovely flowing feel",
+   "note": "Same live Lions fetch. Node: creator mark monday, rating 4, createdAt 2012-11-30, likeCount 133 - all limbs match. Quote verbatim; the page continues 'to it'.",
+   "fromFile": "verdicts-kay-i1022-1036.json"
   }
  },
  "assembledFrom": [
