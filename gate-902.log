@@ -398,3 +398,21 @@ React refs are values that are not needed for rendering. Refs should only be acc
 > sh scripts/gate-mutex.sh --run -- node scripts/check-test-ratchet.mjs
 
 gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 27294 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+[test-ratchet] SCOPE SENTINEL: the gate is no longer running what it was frozen to run — a pass here would be VACUOUS:
+  1 suite(s) FAILED WITHOUT A MEASURABLE TEST — they either produced ZERO
+    tests (a collection error) or failed as a whole while every test they enumerated was a
+    SKIP (a `beforeAll`/`afterAll` that threw). Either way every test they own left the
+    census instead of being measured, and a skip ceiling cannot see the difference:
+      tests/simulation/centuryLegSoak.test.js
+        UNCLASSIFIED · ran 0ms against a 900000ms budget (vite.config.js testTimeout; the file also declares 300000ms, 900000ms) — no timeout signal and no assertion signal — open the full report
+        msg: (the report carried no failure message)
+  skipped tests grew: 10 > ceiling 1
+    A skipped test is not debt, it is a HOLE. Run it, or burn it down — do not skip it.
+
+Check the vitest include/exclude and any collection errors above. If the change is
+deliberate, re-freeze explicitly with `npm run test:ratchet:update`.
+GATE_END=2026-09-06T05:34:40Z
+TRUE_EXIT=1
+GATE_LOAD_POST=10.91 16.33 19.30
+GATE_PORCELAIN_POST=[0]
+GATE_HEAD_POST=fd36f0298b1ead15f2a80eff83dafb92114a7ea4
