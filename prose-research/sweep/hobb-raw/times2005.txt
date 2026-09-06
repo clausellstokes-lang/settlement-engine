@@ -1,0 +1,3 @@
+Verifying DeviceVerifying your device, please wait
+Verification failed. Please try again.
+Try Again
