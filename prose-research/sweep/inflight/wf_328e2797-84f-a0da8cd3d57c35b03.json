@@ -1,0 +1,21 @@
+{
+ "role": "critic",
+ "name": "wolfe",
+ "angle": null,
+ "tag": null,
+ "lines": 56,
+ "firstTs": "2026-09-06T18:23:22.484Z",
+ "lastTs": "2026-09-06T18:26:25.204Z",
+ "tools": {
+  "Bash": 13,
+  "Read": 4
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "",
+ "run": "wf_328e2797-84f",
+ "agent": "a0da8cd3d57c35b03",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/19ace14d-e63e-4584-ad77-d83bd8e2cd0f/subagents/workflows/wf_328e2797-84f/agent-a0da8cd3d57c35b03.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}

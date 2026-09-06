@@ -3,19 +3,33 @@
  "name": "ai",
  "angle": null,
  "tag": "i798-812",
- "lines": 4,
+ "lines": 96,
  "firstTs": "2026-09-06T18:20:23.826Z",
- "lastTs": "2026-09-06T18:20:23.833Z",
- "tools": {},
- "urlsFetched": [],
+ "lastTs": "2026-09-06T18:25:17.295Z",
+ "tools": {
+  "Bash": 23,
+  "ToolSearch": 1,
+  "StructuredOutput": 2
+ },
+ "urlsFetched": [
+  "https://arxiv.org/pdf/2410.12954",
+  "https://aclanthology.org/2024.wikinlp-1.12.pdf",
+  "https://arxiv.org/pdf/2403.00553",
+  "https://arxiv.org/pdf/2405.00492",
+  "https://openreview.net/pdf?id=3pDMYjpOxk",
+  "https://dramatica.com/blog/the-ai-tells-are-in-the-story",
+  "https://www.lesswrong.com/posts/t9svvNPNmFf5Qa3TA/mysteries-of-mode-collapse",
+  "https://web.archive.org/web/20260725093614id_/https://www.lesswrong.com/posts/t9svvNPNmFf5Qa3TA/mysteries-of-mode-collapse",
+  "https://web.archive.org/web/20260302103430id_/https://openreview.net/pdf?id=3pDMYjpOxk"
+ ],
  "filesWritten": [],
- "lastAssistantText": "",
+ "lastAssistantText": "ary, text-extracted with pypdf. No claim needed a BLOCKED verdict, and no verdict was formed through a summarizer.\n\nCheckpoint written to `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-ai-i798-812.json`.",
  "run": "wf_bcc0efc7-47c",
  "agent": "ac613641c3f99d9cb",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/19ace14d-e63e-4584-ad77-d83bd8e2cd0f/subagents/workflows/wf_bcc0efc7-47c/agent-ac613641c3f99d9cb.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-ai-i798-812.json",
-  "exists": false
+  "exists": true
  }
 }

@@ -592,5 +592,287 @@
    "note": "p.1, guideline 3: 'Stay experiential. Don’t attempt to use exposition to explain everything in the IP, but do inform the players about the world.' The two-word quote is exact and the experiential limb holds, but the claim drops both the 'everything' quantifier and the mandatory counter-clause, converting a calibrated instruction into a blanket prohibition the page contradicts.",
    "fromFile": "verdicts-dnd-i349-363.json"
   }
+ },
+ {
+  "index": 364,
+  "feature": "adversarial DM tone forbidden",
+  "claim": "Adventures may not foster an atmosphere of competition between DM and players.",
+  "source": "D&D Adventurers League Dungeoncraft Design Guide v1.9c (effective May 2025, updated 2025-06-23)",
+  "url": "http://theadventurerleagues.com/vault/2024/07/Dungeoncraft__CCv1.9c.pdf",
+  "quote": "atmosphere of competition between the DM and",
+  "page": "p.1",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 364,
+   "verdict": "PARTIAL",
+   "trueWording": "adventures should not foster competition between the DM and players",
+   "unsupportedLimb": "the prohibitive modality 'may not' — the guide says 'should not', and uses 'may not' two sentences earlier for a hard ban ('They may not cross over into other settings'), so the two registers are deliberately distinguished in the same paragraph",
+   "note": "Raw PDF fetched (HTTP 200, 9pp, pypdf extract). Page 1: 'While characters suffering from poor choices is certainly reasonable, adventures should not foster an atmosphere of competition between the DM and the players.*' Quote 'atmosphere of competition between the DM and' is verbatim. The trailing asterisk is the document's change-marker (see the June 2025 changelog on the last page), not a hardness marker.",
+   "fromFile": "verdicts-dnd-i364-378.json"
+  }
+ },
+ {
+  "index": 366,
+  "feature": "style-guide requirement dates to 2021",
+  "claim": "The 2021 Witchlight Dungeoncraft guide already required familiarity with the D&D Style Guide, so the requirement has been constant across versions.",
+  "source": "D&D Adventurers League Dungeoncraft Design Guide: The Wild Beyond the Witchlight v1.2 (2021)",
+  "url": "https://media.wizards.com/2021/dnd/downloads/Dungeoncraft_Wild_Beyond_the_Witchlight_v1.2.pdf",
+  "quote": "",
+  "page": "",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 366,
+   "verdict": "PARTIAL",
+   "trueWording": "You should be familiar with the D&D Style Guide (also provided)",
+   "unsupportedLimb": "'so the requirement has been constant across versions' — a cross-version inference the 2021 document does not make; also 'required' overstates the page's 'You should be familiar'",
+   "note": "Raw PDF fetched (HTTP 200, 10pp). The style-guide sentence appears twice (Option 1 and Option 2 sections); the doc also says 'you'll also want the adventure templates and style guides used for the Dungeoncraft program'. Version line: 'Effective Date: October 1, 2021. Version 1.2.' The claim carries no quote, so verbatim was not possible. Independent corroboration for the constancy limb: the v1.9c PDF fetched for claims 364/365 carries the same sentence verbatim ('You should be familiar with the D&D Style Guide (also provided) as well.') — but that is my cross-check, not this page's assertion, so the limb stays unsupported at its cited source.",
+   "fromFile": "verdicts-dnd-i364-378.json"
+  }
+ },
+ {
+  "index": 369,
+  "feature": "2024 'species' and 'Humanoid type'",
+  "claim": "The 2024 glossary speaks of creature types and species, avoiding 'race'.",
+  "source": "D&D Free Rules (2024) Rules Glossary, D&D Beyond",
+  "url": "https://www.dndbeyond.com/sources/dnd/free-rules/rules-glossary",
+  "quote": "Most player characters are of the Humanoid type.",
+  "page": "",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 369,
+   "verdict": "PARTIAL",
+   "trueWording": "Most player characters are of the Humanoid type.",
+   "unsupportedLimb": "'and species' — the word 'species' does not occur anywhere in the glossary text; its only two occurrences in the fetched page are D&D Beyond site-navigation links ('Rules Browse > Species'), which are chrome, not glossary prose",
+   "note": "Quote verbatim under the 'Creature Type' entry: 'Every creature, including every player character, has a tag in the rules that identifies the type of creature it is. Most player characters are of the Humanoid type. These are the game's creature types:' followed by Aberration/Beast/Celestial/... The 'creature types' limb and the 'avoiding race' limb both hold — a case-insensitive grep for race/races/racial over the whole 70KB extraction returns zero hits. Only the 'species' limb fails at this source.",
+   "fromFile": "verdicts-dnd-i364-378.json"
+  }
+ },
+ {
+  "index": 372,
+  "feature": "WotC's own term for read-aloud text",
+  "claim": "Crawford's 2016 poll names the device 'boxed text (aka read-aloud text)', the terminology WotC uses.",
+  "source": "Sage Advice archive: Jeremy Crawford poll (2016-11-17)",
+  "url": "https://www.sageadvice.eu/how-much-boxed-text-do-you-like-in-an-adventure-you-run/",
+  "quote": "boxed text (aka read-aloud text)",
+  "page": "",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 372,
+   "verdict": "PARTIAL",
+   "trueWording": "boxed text (aka read-aloud text)",
+   "unsupportedLimb": "'poll' — the page carries a plain question tweet with no poll options, no vote counts and no poll markup (a grep for 'poll' over the raw HTML returns zero hits); the embedded blockquote is only the question text plus #DnD #WOTCstaff",
+   "note": "Raw HTML fetched (HTTP 200). Blockquote: 'DMs, how much boxed text (aka read-aloud text) do you like in an adventure you run? #DnD #WOTCstaff — Jeremy Crawford (@JeremyECrawford) November 17, 2016' (status 799355247135076354). Quote verbatim; Crawford and 2016 hold. A Twitter poll's options are stripped from oEmbed blockquotes, so this is not CONTRADICTED — the page simply does not support 'poll'. Second, weaker soft spot worth recording: 'the terminology WotC uses' is an inference — the page shows one WotC designer using the phrase (with a #WOTCstaff tag), not a house-style statement.",
+   "fromFile": "verdicts-dnd-i364-378.json"
+  }
+ },
+ {
+  "index": 374,
+  "feature": "boxed text length ceiling (Greg Marks, AL admin)",
+  "claim": "AL administrator Greg Marks criticized boxed text that runs beyond a paragraph or so.",
+  "source": "Sage Advice archive: \"What are your thoughts on boxed text?\" thread (April 2019)",
+  "url": "https://www.sageadvice.eu/what-are-your-thoughts-on-boxed-text/",
+  "quote": "a paragraph or so",
+  "page": "",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 374,
+   "verdict": "PARTIAL",
+   "trueWording": "too long (anything over a paragraph or so)",
+   "unsupportedLimb": "'AL administrator' — the page gives Greg Marks no role, title or affiliation; it bylines him only as 'Greg Marks (@Skerrit7h3green)'. The credential is load-bearing here, because the surrounding claims lean on Adventurers League authority",
+   "note": "Same raw page as 373/375. Blockquote bylined 'Greg Marks (@Skerrit7h3green) April 15, 2019': 'However, I also think lots of boxed text is unnecessary (an empty room doesn't need boxed text), too long (anything over a paragraph or so), written poorly burying important details, pretends to be a story to be listened to by the players, preventing them from being involved.' Quote 'a paragraph or so' verbatim; the length-ceiling criticism is fully supported. Only the AL-administrator credential fails.",
+   "fromFile": "verdicts-dnd-i364-378.json"
+  }
+ },
+ {
+  "index": 380,
+  "feature": "bundle contents and provenance",
+  "claim": "The DMs Guild bundle (2018) comprises the IP guide, the adventure design guide, the style guide, and the Realms style guide, originally distributed to organized-play writers.",
+  "source": "EN World, \"DMsGuild: D&D Style-Guides give a unique insight into the game\" (2018-11-25)",
+  "url": "https://www.enworld.org/threads/dmsguild-d-d-style-guides-give-a-unique-insight-into-the-game.655198/",
+  "quote": "",
+  "page": "",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 380,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'originally distributed to organized-play writers' - no post in the three-page thread says where the guides came from",
+   "trueWording": "divided into four PDFs: IP, Adventure, Style, Forgotten Realms guides",
+   "note": "Post #1 (Remathilis, Nov 25 2018): 'Its divided into four PDFs: An IP Guide..., an Adventure Guide..., a Style Guide... and a Forgotten Realms Style Guide', and 'Its only been on the site a month or so' (supports the four components and the 2018 date). All three pages of the thread fetched and searched for 'organized', 'Adventurers League', 'RPGA', 'distributed', 'freelance' - the only adjacent remark is post #2's recollection of 'the old Dragon and Dungeon days', which is submission guidelines for the magazines, not organized play; post #9 speculates they are 'new internal guidelines'. Provenance limb unsupported here.",
+   "fromFile": "verdicts-dnd-i379-393.json"
+  }
+ },
+ {
+  "index": 382,
+  "feature": "Sigil reserved",
+  "claim": "The Realms guide's directive that characters should not travel to Sigil was read as WotC reserving Planescape for a future product.",
+  "source": "EN World, \"DMsGuild: D&D Style-Guides give a unique insight into the game\" (2018-11-25)",
+  "url": "https://www.enworld.org/threads/dmsguild-d-d-style-guides-give-a-unique-insight-into-the-game.655198/",
+  "quote": "characters should not be traveling there",
+  "page": "",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 382,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "attribution to the Realms style guide - the thread places the Sigil line in the D&D IP Guide",
+   "trueWording": "That line is in the D&D IP Guide, not FR",
+   "note": "Quote verbatim on page, post #4 (Quickleaf): 'Been looking it over the four documents and there was this odd line in the D&D IP Guide: \"Linking all planes together is the city of Sigil, characters should not be traveling there.\"' The reserving-Planescape reading is well supported - #5 'Suggests they want to keep Sigil clear for official stuff down the line'; #6 'they don't want that to backdoor open Planescape's IP as well yet'; #10 'The only reason I can think for them calling out Sigil specifically... is that they have plans to release a product dealing with Sigil.' Only the document attribution fails.",
+   "fromFile": "verdicts-dnd-i379-393.json"
+  }
+ },
+ {
+  "index": 384,
+  "feature": "where the current AL kit lives",
+  "claim": "The AL resources post (updated 2026-08-12) links the Dungeoncraft Creator Pack of 2023-12-04 on D&D Beyond's CDN while listing the Design Guide as 'coming soon'.",
+  "source": "D&D Beyond forums, \"D&D Adventurers League Resources & Links (Updated 08/12/2026)\"",
+  "url": "https://www.dndbeyond.com/forums/dungeons-dragons-discussion/d-d-organized-play/192532-d-d-adventurers-league-resources-links-updated-08",
+  "quote": "",
+  "page": "",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 384,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'listing the Design Guide as coming soon' - the Upcoming Documents are the AL Organizer Guide and the D&D Session Log; 'Design Guide' appears nowhere on the page",
+   "trueWording": "coming soon: Organizer Guide and Session Log, not Design Guide",
+   "note": "Raw page fetched. 'Last edited by LaTiaJacquise: Aug 12, 2026' matches the 2026-08-12 update. Post #1: 'Adventurers League Dungeoncraft Creator Pack... Effective December 4, 2023', whose href is https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip - D&D Beyond CDN, 2023-12-04, both confirmed. But 'Upcoming Documents' reads: 'Adventurers League Organizer Guide - coming soon! D&D Session Log - coming soon!'. grep -ci 'design guide' over the page text returns 0. (The Adventure Design Guide is in fact already inside the linked pack.)",
+   "fromFile": "verdicts-dnd-i379-393.json"
+  }
+ },
+ {
+  "index": 392,
+  "feature": "premise check: a public style guide exists, but not for boxed-text prose",
+  "claim": "The public WotC D&D Style Guide governs typography, terminology, and grammar only; WotC's only published boxed-text prose rules are the AL adventure-format document's sparing/one-or-two-sentence rule.",
+  "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019') together with DC Adventure Format v1.3.docx (Claire Hoffman / Ma'at Crook, 2023-11) in the Dungeoncraft Pack 2023-12-04",
+  "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+  "quote": "",
+  "page": "",
+  "angle": "house-style-2019",
+  "verdict": {
+   "index": 392,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "the exhaustive 'WotC's only published boxed-text prose rules' - no page establishes that universal negative (WotC also published a 2005 boxed-text article at archive.wizards.com/default.asp?x=dnd/dd/20050916a, now Wayback-only)",
+   "trueWording": "Style guide covers Chicago-based typography, terms, punctuation; no boxed text",
+   "note": "Both named documents reached raw. The PDF (11 pages, footer 'Version 1.08a (c)2018 Wizards of the Coast') is built on Chicago 17th and Merriam-Webster 11th and its sections are Using Chicago, Titles and Trademarks, Gender, Headings, Sidebars, Spelling and Punctuation, Numbers and Math, Cross-References, Style Rules for the RPG, Formatting Game Terms, Word List, Forgotten Realms Terms, Abbreviations, Trademarks - a case-insensitive grep for 'boxed', 'read-aloud'/'read aloud' returns zero hits, so the first limb holds. I also pulled the Dungeoncraft Pack zip named in the source field (media.dndbeyond.com/.../dungeoncraft-pack-2023-12dec04.zip) and extracted DC Adventure Format v1.3.docx, which reads verbatim: 'Boxed text should be used very sparingly-only when a particularly important event truly calls for it. Don't use it to describe rooms or normalcy. Additionally, it should be short and to the point, no more than one or two brief and descriptive sentences.' So the sparing/one-or-two-sentence rule is confirmed at source. Only the word 'only' is unproven.",
+   "fromFile": "verdicts-dnd-i379-393.json"
+  }
+ },
+ {
+  "index": 406,
+  "feature": "sentence length variation",
+  "claim": "Dungeon Master's Workshop advises that a boxed text containing a paragraph break is usually already twice as long as it should be.",
+  "source": "Dungeon Master's Workshop",
+  "url": "https://dmsworkshop.com/2019/09/27/dm-101-boxed-text-mastering/",
+  "quote": "already too long by half",
+  "page": "Don't Overdo It",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2019-09-27",
+  "routeHint": "direct curl with browser UA",
+  "registerHint": "dm-page",
+  "confidence": "high",
+  "angle": "close",
+  "verdict": {
+   "index": 406,
+   "verdict": "PARTIAL",
+   "trueWording": "“rare that a boxed text that includes a paragraph break isn’t already too long by half”",
+   "note": "The quotation is on the page, under the heading “Don’t Overdo It”, and the “usually” and “containing a paragraph break” limbs hold (“it’s rare that … isn’t”). But the page states an idiom, not a ratio: it never says such a boxed text is twice as long as it should be, and it also exempts introductory passages (“Aside from introductory passages”), a carve-out the claim drops. The advice is also addressed to people writing their own adventures.",
+   "unsupportedLimb": "that the text is twice as long as it should be (the page says only “already too long by half”, and exempts introductory passages)",
+   "fromFile": "verdicts-dnd-i394-408.json"
+  }
+ },
+ {
+  "index": 409,
+  "feature": "naming and forms of address",
+  "claim": "James Maliszewski praises the names of Hommlet's inhabitants as Gygax at his best and lists five of them.",
+  "source": "James Maliszewski, Grognardia",
+  "url": "http://grognardia.blogspot.com/2008/10/retrospective-village-of-hommlet.html",
+  "quote": "are Gygax at his mellifluent best",
+  "page": "Retrospective: The Village of Hommlet",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2008-10-01",
+  "routeHint": "direct curl with browser UA",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "close",
+  "verdict": {
+   "index": 409,
+   "verdict": "PARTIAL",
+   "trueWording": "\"are Gygax at his mellifluent best: Jaroo Ashstaff, Calmert, Fernok of Ferd, Ostler Gundigoot, and more.\"",
+   "note": "Quote verbatim in the post: 'The inhabitants of the village, from their names to their personalities, are Gygax at his mellifluent best: Jaroo Ashstaff, Calmert, Fernok of Ferd, Ostler Gundigoot, and more.' Confirmed against the raw HTML (grognardia.blogspot.com, 1 Oct 2008): exactly FOUR names are listed before 'and more', not five. The praise limb (names, as Gygax at his best) is supported; the count limb is not.",
+   "unsupportedLimb": "\"lists five of them\" — the post names only four inhabitants",
+   "fromFile": "verdicts-dnd-i409-423.json"
+  }
+ },
+ {
+  "index": 437,
+  "feature": "plainness and economy",
+  "claim": "Lynch's charge against Curse of Strahd's prose is a fixed inflation ratio, three sentences doing one sentence's work.",
+  "source": "Bryce Lynch, tenfootpole.org",
+  "url": "https://tenfootpole.org/ironspike/?p=2936",
+  "quote": "Three sentences are used when one will do.",
+  "page": "section 'On to the bad'",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2016-03-14",
+  "routeHint": "direct curl with browser UA",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "close",
+  "verdict": {
+   "index": 437,
+   "verdict": "PARTIAL",
+   "trueWording": "Three sentences are used when one will do. Six are used when it needed two, or three.",
+   "note": "Quote is verbatim in the “On to the bad” section and the inflation charge is real (“the text is long/meaningless… the entries are so long that the important bits are lost… This is one of the major sins of the adventure”). But the page immediately supplies a second, different ratio, so Lynch offers illustrations of bloat, not a fixed ratio.",
+   "unsupportedLimb": "that the charge is a fixed inflation ratio — the page's very next sentence gives a different one (“Six are used when it needed two, or three”)",
+   "fromFile": "verdicts-dnd-i424-438.json"
+  }
+ },
+ {
+  "index": 450,
+  "feature": "dm-facing sentence",
+  "claim": "Gus L. calls the Phandalin NPC sidebar useless because it gives a name and a note that the person has a quest and nothing else; Bryce Lynch praises the same device.",
+  "source": "Gus L., Dungeon of Signs",
+  "url": "http://dungeonofsigns.blogspot.com/2015/12/lost-mines-of-phandelver-review.html",
+  "quote": "a simple list of names with \"has a quest for party\"",
+  "page": "review, section on Phandalin",
+  "kind": "analysis",
+  "polarity": "rejects",
+  "date": "2015-12",
+  "routeHint": "direct curl with browser UA",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "close",
+  "verdict": {
+   "index": 450,
+   "verdict": "PARTIAL",
+   "trueWording": "a simple list of names with 'has a quest for party' behind them is useless",
+   "unsupportedLimb": "'Bryce Lynch praises the same device' — nothing on this page has Bryce Lynch praising the NPC sidebar or any quest-list device",
+   "note": "The Gus L. half is fully verbatim: 'A side bar lists the important NPCs about town, but provides nothing beyond an immediately forgotten fantasy name and the note that they have a quest for the party... but a simple list of names with \"has a quest for party\" behind them is useless.' Bryce Lynch does appear on the page twice, but neither instance praises this device: Gus L. praises HIM ('I have read and had my work reviewed by tenfootpole.org. Bryce is excellent when it comes to explaining what makes a good adventure'), and Lynch's own comment of April 20, 2016 attacks D&D as 'not only generic but aggressively generic' — no mention of NPC sidebars or quest lists. The praise limb needs a tenfootpole.org source it does not have here.",
+   "fromFile": "verdicts-dnd-i439-453.json"
+  }
+ },
+ {
+  "index": 464,
+  "feature": "other: information order",
+  "claim": "Alexander's ordering principle for a location entry is general to specific, tracked against how the reader will actually come by each fact.",
+  "source": "Justin Alexander, The Alexandrian",
+  "url": "https://thealexandrian.net/wordpress/35201/roleplaying-games/the-art-of-the-key-part-2-the-essential-key",
+  "quote": "move from the general to the specific",
+  "page": "Developing Significant Elements",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2014-05-21",
+  "routeHint": "direct curl with browser UA",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "close",
+  "verdict": {
+   "index": 464,
+   "verdict": "PARTIAL",
+   "trueWording": "move from the general to the specific while paying attention to how the players gain that information",
+   "unsupportedLimb": "'tracked against how the reader will actually come by each fact' - the page ties the ordering to how the PLAYERS gain the information, not the reader (the GM) of the key",
+   "note": "Raw page, section 'DEVELOPING SIGNIFICANT ELEMENTS'. Quote verbatim: 'What you want to do is to move from the general to the specific while paying particular attention to how the players are gaining that information.' The rationale paragraph is explicitly player-side: 'In interacting with a room, the players are most likely to start by asking questions about the things they've just been told about'. Alexander's separate GM-side point (bold titles making information easy to find) is about scanning, not about general-to-specific ordering. Swapping 'players' for 'reader' inverts whose acquisition of information governs the sequence, so the second limb is unsupported as written.",
+   "fromFile": "verdicts-dnd-i454-468.json"
+  }
  }
 ]

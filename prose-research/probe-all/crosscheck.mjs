@@ -7,7 +7,10 @@ const m = measure(ds);
 console.log('=== CROSS-CHECK vs the refuter / dossier §3 (n=2,734 dossier variants) ===');
 console.log('my n:', m.variants, ' (X1 raw 2734, admission dropped', 2734 - m.variants, ')');
 console.log('1-seg:', Math.round(m.oneSegment * m.variants), '(refuter 2030)  2-seg:', Math.round(m.twoSegments * m.variants), '(691)  3+:', Math.round(m.threePlusSegments * m.variants), '(11)');
-console.log('rather than:', m.pet['rather than'], '(dossier 288, 10.5%) rate', m.shapesRate.ratherThan);
+// `m.pet['rather than']` is an OCCURRENCE count; the dossier's 288 is the VARIANT count. Printing the
+// first under the second's label read as a failed reproduction (PROBE_ALL_CORRECTIONS_RECEIPT.md:171,189).
+const ratherThanVariants = ds.filter((r) => /\brather than\b/.test(String(r.text || ''))).length;
+console.log('rather than: occurrences', m.pet['rather than'], '(no published counterpart) · variants containing it', ratherThanVariants, '(dossier 288 — this is the figure §2c ruled correct) rate', m.shapesRate.ratherThan);
 console.log('abstract closers:', Math.round(m.shapesRate.abstractCloser * m.segments), '(dossier 128, 4.4%) rate', m.shapesRate.abstractCloser);
 console.log('its own:', m.pet['its own'], '(70)  whatever:', m.pet.whatever, '(49)  enough to:', m.pet['enough to / enough that'], '(97)  kind/sort of:', m.pet['kind of / sort of'], '(29)  quiet:', m.pet['quiet / quietly'], '(37)');
 console.log('nobody/no one/nothing:', m.pet['nobody / no one / nothing'], '(333)  still:', m.pet.still, '(149)  yet:', m.pet.yet, '(61)  already:', m.pet.already, '(26)');

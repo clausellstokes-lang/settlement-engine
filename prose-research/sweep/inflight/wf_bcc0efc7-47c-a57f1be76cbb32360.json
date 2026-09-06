@@ -1,0 +1,29 @@
+{
+ "role": "verifier",
+ "name": "ai",
+ "angle": null,
+ "tag": "i894-908",
+ "lines": 34,
+ "firstTs": "2026-09-06T18:25:47.907Z",
+ "lastTs": "2026-09-06T18:26:26.879Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 5
+ },
+ "urlsFetched": [
+  "https://en.wikipedia.org/wiki/Special:Export/Wikipedia:Signs_of_AI_writing",
+  "https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html",
+  "http://timetravel.mementoweb.org/timemap/link/https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "Section headings match exactly. A Wayback capture exists for the NYT piece.",
+ "run": "wf_bcc0efc7-47c",
+ "agent": "a57f1be76cbb32360",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/19ace14d-e63e-4584-ad77-d83bd8e2cd0f/subagents/workflows/wf_bcc0efc7-47c/agent-a57f1be76cbb32360.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-ai-i894-908.json",
+  "exists": false
+ }
+}

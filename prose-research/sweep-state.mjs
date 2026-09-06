@@ -38,7 +38,9 @@ function merge(name, update) {
     }
   }
   const kept = []; const partial = [];
-  for (let i = 0; i < claims.length; i++) { const v = verdicts[i]; if (!v) continue; if (v.verdict === 'VERIFIED_VERBATIM' || v.verdict === 'VERIFIED_SUBSTANCE') kept.push({ index: i, ...claims[i], verdict: v }); else if (v.verdict === 'PARTIAL') partial.push({ index: i, ...claims[i], verdict: v }); }
+  // 09-06 14:40 (H1, copyright hygiene): a trueWording over twelve words is flagged fullSentence — the synth and every DM-page builder must not copy it (quote at most twelve words; cite book/chapter/page)
+  const fullSentence = (v) => String((v && v.trueWording) || '').trim().split(/\s+/).filter(Boolean).length > 12;
+  for (let i = 0; i < claims.length; i++) { const v = verdicts[i]; if (!v) continue; if (v.verdict === 'VERIFIED_VERBATIM' || v.verdict === 'VERIFIED_SUBSTANCE') kept.push({ index: i, ...claims[i], verdict: v, ...(fullSentence(v) ? { fullSentence: true } : {}) }); else if (v.verdict === 'PARTIAL') partial.push({ index: i, ...claims[i], verdict: v, ...(fullSentence(v) ? { fullSentence: true } : {}) }); }
   writeFileSync(join(OUT, `partial-${name}.json`), JSON.stringify(partial, null, 1));
   writeFileSync(join(OUT, `merged-${name}.json`), JSON.stringify({ name, claims, verdicts }, null, 1));
   writeFileSync(join(OUT, `kept-${name}.json`), JSON.stringify(kept, null, 1));

@@ -1,0 +1,237 @@
+{
+ "name": "dnd",
+ "chunk": 15,
+ "claims": [
+  {
+   "index": 379,
+   "feature": "recollected WotC three-sentence rule (unverified)",
+   "claim": "A commenter recalls a lost WotC developer blog from the 3.5/4e era saying boxed text should never exceed three sentences; the source is gone and WotC did not follow it consistently.",
+   "source": "The Alexandrian, comment by mellonbread (2022-08-02)",
+   "url": "https://thealexandrian.net/wordpress/48312/roleplaying-games/gm-dont-list-13-boxed-text-pitfalls",
+   "quote": "should never be longer than three sentences",
+   "page": ""
+  },
+  {
+   "index": 380,
+   "feature": "bundle contents and provenance",
+   "claim": "The DMs Guild bundle (2018) comprises the IP guide, the adventure design guide, the style guide, and the Realms style guide, originally distributed to organized-play writers.",
+   "source": "EN World, \"DMsGuild: D&D Style-Guides give a unique insight into the game\" (2018-11-25)",
+   "url": "https://www.enworld.org/threads/dmsguild-d-d-style-guides-give-a-unique-insight-into-the-game.655198/",
+   "quote": "",
+   "page": ""
+  },
+  {
+   "index": 381,
+   "feature": "WotC violates its own tenday rule",
+   "claim": "EN World readers noted WotC hardcovers still use 'week' despite the guides' tenday rule, reading the guides as newly formalized standards.",
+   "source": "EN World, \"DMsGuild: D&D Style-Guides give a unique insight into the game\" (2018-11-25)",
+   "url": "https://www.enworld.org/threads/dmsguild-d-d-style-guides-give-a-unique-insight-into-the-game.655198/",
+   "quote": "",
+   "page": ""
+  },
+  {
+   "index": 382,
+   "feature": "Sigil reserved",
+   "claim": "The Realms guide's directive that characters should not travel to Sigil was read as WotC reserving Planescape for a future product.",
+   "source": "EN World, \"DMsGuild: D&D Style-Guides give a unique insight into the game\" (2018-11-25)",
+   "url": "https://www.enworld.org/threads/dmsguild-d-d-style-guides-give-a-unique-insight-into-the-game.655198/",
+   "quote": "characters should not be traveling there",
+   "page": ""
+  },
+  {
+   "index": 383,
+   "feature": "no public style guide update since 2019",
+   "claim": "As of 2025-06-13 a DMs Guild creator asked whether the style guide had been updated for the 2024 rules or Chicago 18th; the thread had no reply, confirming the public document is still the 2019 release.",
+   "source": "D&D Beyond forums, \"Is there an update to the D&D Style Guide: Writing and Editing document yet?\" (2025-06-13)",
+   "url": "https://www.dndbeyond.com/forums/dungeons-dragons-discussion/dungeon-masters-guild/224705-is-there-an-update-to-the-d-d-style-guide-writing",
+   "quote": "",
+   "page": ""
+  },
+  {
+   "index": 384,
+   "feature": "where the current AL kit lives",
+   "claim": "The AL resources post (updated 2026-08-12) links the Dungeoncraft Creator Pack of 2023-12-04 on D&D Beyond's CDN while listing the Design Guide as 'coming soon'.",
+   "source": "D&D Beyond forums, \"D&D Adventurers League Resources & Links (Updated 08/12/2026)\"",
+   "url": "https://www.dndbeyond.com/forums/dungeons-dragons-discussion/d-d-organized-play/192532-d-d-adventurers-league-resources-links-updated-08",
+   "quote": "",
+   "page": ""
+  },
+  {
+   "index": 385,
+   "feature": "Dungeoncraft compliance regime",
+   "claim": "EN World's 2023 report of the Planescape Dungeoncraft update states adventures must use official templates and comply with the D&D Style Guide and DMsGuild Content Guidelines or face removal.",
+   "source": "EN World, \"D&D Adventurers League Unveils New DungeonCraft Document with Planescape In Focus\" (2023-11)",
+   "url": "https://www.enworld.org/threads/d-d-adventurers-league-unveils-new-dungeoncraft-document-with-planescape-in-focus.700991/",
+   "quote": "",
+   "page": ""
+  },
+  {
+   "index": 386,
+   "feature": "June 2020 statement: sensitivity readers",
+   "claim": "WotC's 2020-06-18 statement committed to sensitivity readers on sourcebooks and to reviewing reprints for racially insensitive text.",
+   "source": "Gizmodo/io9, \"Dungeons & Dragons Team Announces New Plans to Address Racism in the Game\" (James Whitbrook, 2020-06-18)",
+   "url": "https://gizmodo.com/dungeons-dragons-team-announces-new-plans-to-address-1844084273",
+   "quote": "That's just not right, and it's not something we believe in.",
+   "page": ""
+  },
+  {
+   "index": 387,
+   "feature": "June 2020 statement: Vistani consultant",
+   "claim": "WotC said it worked with a Romani consultant to revise Curse of Strahd's Vistani text and named Tomb of Annihilation as needing similar updates.",
+   "source": "Gizmodo/io9, \"Dungeons & Dragons Team Announces New Plans to Address Racism in the Game\" (2020-06-18)",
+   "url": "https://gizmodo.com/dungeons-dragons-team-announces-new-plans-to-address-1844084273",
+   "quote": "",
+   "page": ""
+  },
+  {
+   "index": 388,
+   "feature": "June 2020 statement: reprint text changes",
+   "claim": "The statement said recent reprints of Tomb of Annihilation and Curse of Strahd already changed racially insensitive text, and each book would be reviewed at reprint.",
+   "source": "Wikipedia, \"Tomb of Annihilation\" (fetched 2026-09-06), quoting the 2020-06-17 WotC statement",
+   "url": "https://en.wikipedia.org/wiki/Tomb_of_Annihilation",
+   "quote": "we changed text that was racially insensitive",
+   "page": ""
+  },
+  {
+   "index": 389,
+   "feature": "Strahd Revamped: text-only revision (Winninger)",
+   "claim": "Ray Winninger said only the text of Curse of Strahd was revised; art and tarokka cards were unchanged and the revised text went free to prior D&D Beyond owners.",
+   "source": "Gizmodo/io9, \"D&D's Culturally Sensitive Strahd Revamp Is Here, But It Doesn't Go Far Enough\" (Julie Muncy, 2020-07-27)",
+   "url": "https://gizmodo.com/d-ds-culturally-sensitive-strahd-revamp-is-here-but-it-1844521228",
+   "quote": "surgical changes",
+   "page": ""
+  },
+  {
+   "index": 390,
+   "feature": "Strahd Revamped: what the prose fix targeted",
+   "claim": "The revisions removed the depiction of Vistani as uncivilized heavy drinkers and softened an ableist portrayal, while leaving curse and Evil Eye abilities intact.",
+   "source": "Gizmodo/io9, Julie Muncy (2020-07-27)",
+   "url": "https://gizmodo.com/d-ds-culturally-sensitive-strahd-revamp-is-here-but-it-1844521228",
+   "quote": "",
+   "page": ""
+  },
+  {
+   "index": 391,
+   "feature": "Strahd Revamped: publisher framing",
+   "claim": "WotC's announcement described the revamp as including the latest errata and a revised depiction of the Vistani.",
+   "source": "Wikipedia, \"Curse of Strahd\" (fetched 2026-09-06), citing PC Gamer 2020-07",
+   "url": "https://en.wikipedia.org/wiki/Curse_of_Strahd",
+   "quote": "a revised depiction of the Vistani",
+   "page": ""
+  },
+  {
+   "index": 392,
+   "feature": "premise check: a public style guide exists, but not for boxed-text prose",
+   "claim": "The public WotC D&D Style Guide governs typography, terminology, and grammar only; WotC's only published boxed-text prose rules are the AL adventure-format document's sparing/one-or-two-sentence rule.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019') together with DC Adventure Format v1.3.docx (Claire Hoffman / Ma'at Crook, 2023-11) in the Dungeoncraft Pack 2023-12-04",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "",
+   "page": ""
+  },
+  {
+   "index": 393,
+   "feature": "boxed text form",
+   "claim": "Bryce Lynch lists boxed text among the things he does not want in an adventure module.",
+   "source": "Bryce Lynch, 'Review Standards', tenfootpole.org",
+   "url": "https://tenfootpole.org/ironspike/?page_id=1201",
+   "quote": "Boxed text is usually not a good thing.",
+   "page": "Review Standards, bullet list"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 379,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "should never be longer than three sentences",
+   "note": "Live page fetched raw (HTTP 200). mellonbread's comment, dated August 2nd, 2022: 'There was a lovely article in the old Wizards devblog, from around the 3.5 or 4e days, which was lost when they nuked their archives. The basic thesis was that boxed text (or any descriptive text delivered by the GM) should never be longer than three sentences...' followed by 'I don't think Wizards actually abided by this rule in their own boxed text.' Every limb (3.5/4e era, source lost, WotC did not follow it) is on the page."
+  },
+  {
+   "index": 380,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'originally distributed to organized-play writers' - no post in the three-page thread says where the guides came from",
+   "trueWording": "divided into four PDFs: IP, Adventure, Style, Forgotten Realms guides",
+   "note": "Post #1 (Remathilis, Nov 25 2018): 'Its divided into four PDFs: An IP Guide..., an Adventure Guide..., a Style Guide... and a Forgotten Realms Style Guide', and 'Its only been on the site a month or so' (supports the four components and the 2018 date). All three pages of the thread fetched and searched for 'organized', 'Adventurers League', 'RPGA', 'distributed', 'freelance' - the only adjacent remark is post #2's recollection of 'the old Dragon and Dungeon days', which is submission guidelines for the magazines, not organized play; post #9 speculates they are 'new internal guidelines'. Provenance limb unsupported here."
+  },
+  {
+   "index": 381,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "style guide bans 'week' for 'tenday'; week appears in FR products",
+   "note": "Post #8 (pukunui): 'It's a real shame WotC doesn't bother to make sure their hardcovers follow the guidelines (e.g. The style guide says \"week\" is banned and one should use \"tenday\" instead, but \"week\" shows up in FR products all the time!)'. Post #9 (Parmandur) supplies the second limb: 'Could be these are new internal guidelines made for just that reason, that they decided to share.' Claim carried no quote string, so graded on substance."
+  },
+  {
+   "index": 382,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "attribution to the Realms style guide - the thread places the Sigil line in the D&D IP Guide",
+   "trueWording": "That line is in the D&D IP Guide, not FR",
+   "note": "Quote verbatim on page, post #4 (Quickleaf): 'Been looking it over the four documents and there was this odd line in the D&D IP Guide: \"Linking all planes together is the city of Sigil, characters should not be traveling there.\"' The reserving-Planescape reading is well supported - #5 'Suggests they want to keep Sigil clear for official stuff down the line'; #6 'they don't want that to backdoor open Planescape's IP as well yet'; #10 'The only reason I can think for them calling out Sigil specifically... is that they have plans to release a product dealing with Sigil.' Only the document attribution fails."
+  },
+  {
+   "index": 383,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "downloaded guide hasn't been updated since 2019; no reply posted",
+   "note": "Raw page fetched (HTTP 200), full thread renders server-side. Single post #1, Jun 13 2025, Saracenus (Bryan Blumklotz), Dungeon Masters Guild forum: 'I recently downloaded the D&D Style Guide from the DMs Guild website and it hasn't been updated since 2019... culminating in the 2024 core rulebooks... are you still using the 17th Edition of the Chicago Manual of Style? There is now an 18th Edition.' No reply posts exist on the page (only 'To post a comment, please login'). Caveat on the causal wording: silence does not itself 'confirm' anything - the still-2019 fact rests on the asker's own report, not on the absence of a reply."
+  },
+  {
+   "index": 384,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'listing the Design Guide as coming soon' - the Upcoming Documents are the AL Organizer Guide and the D&D Session Log; 'Design Guide' appears nowhere on the page",
+   "trueWording": "coming soon: Organizer Guide and Session Log, not Design Guide",
+   "note": "Raw page fetched. 'Last edited by LaTiaJacquise: Aug 12, 2026' matches the 2026-08-12 update. Post #1: 'Adventurers League Dungeoncraft Creator Pack... Effective December 4, 2023', whose href is https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip - D&D Beyond CDN, 2023-12-04, both confirmed. But 'Upcoming Documents' reads: 'Adventurers League Organizer Guide - coming soon! D&D Session Log - coming soon!'. grep -ci 'design guide' over the page text returns 0. (The Adventure Design Guide is in fact already inside the linked pack.)"
+  },
+  {
+   "index": 385,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "template required; Style Guide familiarity, Content Guidelines adherence; removal for noncompliance",
+   "note": "Raw article fetched. 'Technical Requirements: Creators must use a specific template provided for Dungeoncraft adventures, including the Community Created D&D Adventurers League logo. Familiarity with the D&D Style Guide and adherence to the DMsGuild Content Guidelines are also required.' 'Publication and Compliance: ...The adventures must adhere to specific coding and design standards... There are strict compliance rules, and adventures can be removed from the DMsGuild if they fail to meet these standards.' One wording gap worth flagging: the article requires 'familiarity with' the Style Guide (adherence is stated for the Content Guidelines), slightly weaker than the claim's 'comply with'."
+  },
+  {
+   "index": 386,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "That's just not right, and it's not something we believe in.",
+   "note": "Quote verbatim in the WotC statement as quoted by Gizmodo (published June 18, 2020, James Whitbrook). Both limbs on the page: 'the use of sensitivity readers on upcoming and current Dungeons & Dragons sourcebooks as part of the creative process' and 'the D&D team will also go back through material as it is being prepared for reprints, and update them to modify and remove any racially insensitive material.' Metadata drift only: the article now carries the headline 'Dungeons & Dragons Team Announces New Plans to Address Race and Inclusivity in the Game', not the '...to Address Racism in the Game' recorded in the source field."
+  },
+  {
+   "index": 387,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Wizards worked with a Romani consultant for Strahd's reprint",
+   "note": "Same article: 'The adventures Tomb of Annihilation and The Curse of Strahd were cited as particular examples' (of reprint material to be updated), and 'In the editorial process for Strahd's reprint, as well as two upcoming products, Wizards worked with a Romani consultant to present the Vistani without using reductive tropes.' Both limbs supported; claim carried no quote string."
+  },
+  {
+   "index": 388,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "we changed text that was racially insensitive",
+   "note": "Wikipedia 'Tomb of Annihilation', Publication history: 'On June 17, 2020, in the wake of the George Floyd protests, Wizards of the Coast announced: \"...In recent reprintings of Tomb of Annihilation and Curse of Strahd, for example, we changed text that was racially insensitive. Those reprints have already been printed and will be available in the months ahead. We will continue this process, reviewing each book as it comes up for a reprint and fixing such errors where they are present\".' Quote verbatim; both limbs (recent reprints already changed; review at each reprint) supported, and the 2020-06-17 date matches."
+  },
+  {
+   "index": 389,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "only text in Strahd revised; artwork and Tarokka cards unmodified",
+   "note": "Raw article fetched. Update of 7/28/2020: 'According to Ray Winninger, the executive producer of Wizards' D&D studio, only text in Strahd has received revisions... and none of the original artwork in the module or the included Tarroka Cards has been modified as part of this update. For owners of the original release... will be released for players to download for free on the D&D website in the future, and also be made available for free to players who purchased Strahd digitally in the D&D Beyond app.' All three limbs supported. Two attribution flags: the quoted phrase 'surgical changes' is on the page but is Chris Perkins speaking to IGN ('More like surgical changes to the adventure than some sort of grand sweeping change'), NOT Winninger; and the article's live headline is 'D&D's Culturally Sensitive Strahd Revamp Is Here, But It'll Cost You [Updated]', not the '...But It Doesn't Go Far Enough' recorded in the source field."
+  },
+  {
+   "index": 390,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "fixes 'uncivilized' and heavy drinkers; curse and Evil Eye remain",
+   "note": "Same article: 'amendments... sought to undo some of the harmful stereotyping of the Vistani people, along with revising the book's approach to a specific character's disability to avoid ableist stereotypes' and 'While modifications do fix things like the stereotyping of the Vistani people as \"uncivilized\" and heavy drinkers, the module still gives the Vistani abilities to curse and hypnotize players or cast spells like Evil Eye'. All three limbs supported; claim carried no quote string."
+  },
+  {
+   "index": 391,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the adventure includes the latest errata and a revised depiction",
+   "note": "Wikipedia 'Curse of Strahd', Revamped edition: 'Wizards of the Coast stated that \"the adventure includes the latest errata and a revised depiction of the Vistani\" who are based on stereotypes about the Romani people.' Quote verbatim, both limbs supported. Metadata note: the supporting footnote [9] is Macgregor, PC Gamer, dated 2020-08-03, not 2020-07 as the source field records."
+  },
+  {
+   "index": 392,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "the exhaustive 'WotC's only published boxed-text prose rules' - no page establishes that universal negative (WotC also published a 2005 boxed-text article at archive.wizards.com/default.asp?x=dnd/dd/20050916a, now Wayback-only)",
+   "trueWording": "Style guide covers Chicago-based typography, terms, punctuation; no boxed text",
+   "note": "Both named documents reached raw. The PDF (11 pages, footer 'Version 1.08a (c)2018 Wizards of the Coast') is built on Chicago 17th and Merriam-Webster 11th and its sections are Using Chicago, Titles and Trademarks, Gender, Headings, Sidebars, Spelling and Punctuation, Numbers and Math, Cross-References, Style Rules for the RPG, Formatting Game Terms, Word List, Forgotten Realms Terms, Abbreviations, Trademarks - a case-insensitive grep for 'boxed', 'read-aloud'/'read aloud' returns zero hits, so the first limb holds. I also pulled the Dungeoncraft Pack zip named in the source field (media.dndbeyond.com/.../dungeoncraft-pack-2023-12dec04.zip) and extracted DC Adventure Format v1.3.docx, which reads verbatim: 'Boxed text should be used very sparingly-only when a particularly important event truly calls for it. Don't use it to describe rooms or normalcy. Additionally, it should be short and to the point, no more than one or two brief and descriptive sentences.' So the sparing/one-or-two-sentence rule is confirmed at source. Only the word 'only' is unproven."
+  },
+  {
+   "index": 393,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Boxed text is usually not a good thing.",
+   "note": "Raw page fetched. tenfootpole.org 'Review Standards', by-line 'Bryce Lynch', opening 'What I'm looking for in an adventure module...'. The bullet 'Boxed text is usually not a good thing.' appears word for word among the standards bullets (between the tricks-and-traps and empty-rooms bullets). Two shadings worth recording: the page is one mixed list of standards rather than a separate list of unwanted things, and Lynch hedges with 'usually', which the claim drops."
+  }
+ ]
+}

@@ -32,22 +32,6 @@
   }
  },
  {
-  "index": 2,
-  "feature": "Victorian / Dunnett lineage",
-  "claim": "Randall places Kay's multi-focalized technique with the richly populated Victorian novel and the thick historical novel of Dorothy Dunnett rather than with single-focalizer fantasies like Tolkien, Donaldson or Wolfe.",
-  "source": "Neil Randall, 'Shifting Focalization and the Strategy of Delay: The Narrative Weaving of The Fionavar Tapestry', Canadian Literature 129 (Summer 1991), reprinted on Bright Weavings",
-  "url": "https://brightweavings.com/randallfionavar/",
-  "quote": "closest correlation is to the thick historical novel",
-  "angle": "academic",
-  "verdict": {
-   "index": 2,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "owes much more to the richly populated Victorian novel",
-   "note": "Raw page: 'But Kay's work owes much more to the richly populated Victorian novel than to the sparser contemporary novel; in fact, its closest correlation is to the thick historical novel of the Dorothy Dunnett tradition.' The contrast class is Tolkien/Donaldson/Wolfe/Kinsella. Precision note for re-use: Randall's wording is 'the four fantasies mentioned above are focalized through one or two central characters' - not 'single-focalizer'. Do not re-quote him as saying single.",
-   "fromFile": "verdicts-kay-i0-14.json"
-  }
- },
- {
   "index": 3,
   "feature": "four effects of shifting focalization",
   "claim": "Randall argues the shifts (1) let the reader assimilate the secondary world, (2) build knowledge of character, (3) move the story from kernel to kernel, and (4) delay the unfolding of each plot-line, all serving a rhetoric of grandeur and scope.",
@@ -144,38 +128,6 @@
   }
  },
  {
-  "index": 9,
-  "feature": "tightly-knit kernels, no off-stage surprise",
-  "claim": "Randall contrasts Kay with Tolkien's off-stage Aragorn: Kay keeps important events from surprising the reader by shifting attention among characters far more frequently.",
-  "source": "Neil Randall, 'Shifting Focalization and the Strategy of Delay: The Narrative Weaving of The Fionavar Tapestry', Canadian Literature 129 (Summer 1991), reprinted on Bright Weavings",
-  "url": "https://brightweavings.com/randallfionavar/",
-  "quote": "determined not to have important events surprise us",
-  "angle": "academic",
-  "verdict": {
-   "index": 9,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "Kay seems determined not to have important events surprise us in this way",
-   "note": "Raw page, after the Aragorn / Pelennor Fields example: 'Kay seems determined not to have important events surprise us in this way; he arranges the story's kernels in a more tightly-knit fashion than does Tolkien, mainly through a much more frequent shifting of our attention from one character to another.' Note Randall hedges with 'seems determined'; the claim states it flatly.",
-   "fromFile": "verdicts-kay-i0-14.json"
-  }
- },
- {
-  "index": 11,
-  "feature": "focalization census (Tigana)",
-  "claim": "Kleander's count: twenty-one focalizants and more than 150 focalizations in Tigana, Devin focalized forty-one times, Dianora twenty-seven, plus twenty-one separate non-focalized passages.",
-  "source": "Anya Kleander, 'Present Reality in Historical Fantasy' (Honours dissertation, University of Stirling, 2008)",
-  "url": "https://brightweavings.com/presentreality/",
-  "quote": "twenty-one separate focalizants in Tigana, and more than 150 separate focalizations",
-  "angle": "academic",
-  "verdict": {
-   "index": 11,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "twenty-one separate focalizants in Tigana, and more than 150 separate focalizations",
-   "note": "Raw page, footnote 1: 'In addition to the non-focalized narrative, there are twenty-one separate focalizants in Tigana, and more than 150 separate focalizations. Devin is focalized through forty-one times, and Dianora twenty-seven times. There are twenty-one separate occasions of non-focalized narrative, excluding short passages with zero focalization within focalized sections.' All five figures match. The 21 non-focalized occasions EXCLUDE short zero-focalized passages inside focalized sections - carry that qualifier if the figure is re-used.",
-   "fromFile": "verdicts-kay-i0-14.json"
-  }
- },
- {
   "index": 12,
   "feature": "delayed counter-focalizant",
   "claim": "Kleander shows Part One's twenty-two focalizations (twelve through Devin) uphold a simple good/evil quest before Part Two hands nine of twelve sections to Dianora and demolishes the image of Brandin as evil.",
@@ -188,22 +140,6 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "She is the focalizant of nine of the twelve sections of Part Two",
    "note": "Raw page: 'Part One, that is the first 150 pages of the novel, is made up of twenty-two separate focalizations: Devin is the focalizant for twelve of these'; 'those focalizations all uphold the uncomplicated story of a peninsula taken over by Brandin and Aberico, the malevolent tyrants, and the resistance against these' (and 'the lines between good and evil are clearly drawn'); 'She is the focalizant of nine of the twelve sections of Part Two'; 'This complex emotional response of a major focalizant demolishes the previous image of Brandin as evil'. Every limb present.",
-   "fromFile": "verdicts-kay-i0-14.json"
-  }
- },
- {
-  "index": 13,
-  "feature": "antagonist focalized once, late",
-  "claim": "Kleander notes Brandin, who originates the whole fabula, is focalized through only once, for about a page at the end of the battle, after the reader has already formed a judgment.",
-  "source": "Anya Kleander, 'Present Reality in Historical Fantasy' (Honours dissertation, University of Stirling, 2008)",
-  "url": "https://brightweavings.com/presentreality/",
-  "quote": "No more than a page long, Brandin’s focalization",
-  "angle": "academic",
-  "verdict": {
-   "index": 13,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "he is central to all the story kernels ... and the originator of the fabula",
-   "note": "Raw page: 'Returning to Brandin, he is central to all the story kernels of Tigana, and the originator of the fabula. Yet, Brandin is only focalized through at the very end of the battle ... By this point, the readers have had time to assimilate all the information given about the Sorcerer King and thus had the chance to form their own opinion about him before Kay reveals what Brandin thinks of himself. No more than a page long, Brandin's focalization is one of the most powerful sections of the story.' Kleander's wording is 'had the chance to form their own opinion', slightly weaker than 'has already formed a judgment'.",
    "fromFile": "verdicts-kay-i0-14.json"
   }
  },
@@ -268,22 +204,6 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "reveals who survived the battle of the ‘lions’ … strangely unimportant",
    "note": "Page: 'It is not until halfway through the epilogue that Kay reveals who survived the battle of the ‘lions’, but by then the outcome is strangely unimportant.' The immediately preceding sentences establish the combat as Ammar vs Rodrigo ('When Ammar and Rodrigo meet in combat … a fight to the death between two men who love each other'). Quote verbatim; 'strangely unimportant' verbatim.",
-   "fromFile": "verdicts-kay-i15-29.json"
-  }
- },
- {
-  "index": 19,
-  "feature": "parallel-structured prayer passages",
-  "claim": "Kleander sets side by side two near-identical prayer paragraphs (Asharite and Jaddite) as the clearest example of Kay using structural repetition to show how alike the religions are.",
-  "source": "Anya Kleander, 'Present Reality in Historical Fantasy' (Honours dissertation, University of Stirling, 2008)",
-  "url": "https://brightweavings.com/presentreality/",
-  "quote": "the clearest example of how alike the religions are",
-  "angle": "academic",
-  "verdict": {
-   "index": 19,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "clearest example … can be seen in the prayers of the Asharites and the Jaddites",
-   "note": "Quote verbatim. The page then prints the two prayer paragraphs consecutively (LoAR 251-252 and the Jaddite counterpart), and they are near-identical in frame ('They prayed for strength and mercy, for purity of heart and mortal body, for the fulfilment of Ashar’s starlit visions / Jad’s bright visions … to Paradise'). Kleander frames it as 'Rather than focusing on differences, Kay focuses on similarities.' She demonstrates the parallel rather than naming it 'structural repetition', but the mechanism is on the page verbatim.",
    "fromFile": "verdicts-kay-i15-29.json"
   }
  },
@@ -1088,22 +1008,6 @@
   }
  },
  {
-  "index": 71,
-  "feature": "author's dissent noted in text",
-  "claim": "Webb's essay carries an appended 'GGK NOTE' in which Kay disputes her reading of Arbonne's gender balance, a rare author–critic exchange in the record.",
-  "source": "Janeen Webb, 'Post-Romantic Romance: Guy Gavriel Kay's Tigana and A Song for Arbonne', New York Review of Science Fiction 77 (Jan 1995)",
-  "url": "https://brightweavings.com/webbarbonne/",
-  "quote": "Janeen Webb takes the unusual and generous step",
-  "angle": "academic",
-  "verdict": {
-   "index": 71,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "GGK NOTE ... the source of my dissent from her reading",
-   "note": "Live fetch (HTTP 200). Quote exact. Kay's signed note ('- GGK') disputes Webb's gender reading directly: his dissent 'lies in the degree to which the text tries to make clear that it is an anomaly and a dangerous one that a woman is reigning in Arbonne', against her reading of the Blaise/Rinette marriage as a traditional union of male and female principles; 'unusual and generous step' supports the rarity limb. Placement detail: the note is interpolated mid-essay, immediately after the passage it answers, not at the very end.",
-   "fromFile": "verdicts-kay-i60-74.json"
-  }
- },
- {
   "index": 72,
   "feature": "modernised detail",
   "claim": "Ordway shows Kay converting the Cid's beard-pulling into a whip-scar because the scarring impresses a modern reader.",
@@ -1164,22 +1068,6 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "Since one of the characters who reacts to the news of the reconquest at the end is one of the first characters that is introduced in the novel, the novel also comes full circle.",
    "note": "Raw HTML fetched live (200, browser UA) from brightweavings.com/worldbuilding/, byline 'by Holly E. Ordway / May 13, 1998'. Quote 'the novel also comes full circle' present verbatim. Both limbs hold: the reactor is named in the next sentence ('Alvar de Pellino begins the novel as a horseman in Rodrigo Belmonte's company') and the essay calls him 'one of the first characters that is introduced in the novel'; his reaction closes the discussion ('His response to the news is a painful one').",
-   "fromFile": "verdicts-kay-i75-89.json"
-  }
- },
- {
-  "index": 76,
-  "feature": "legend-frame summary",
-  "claim": "Ordway quotes the surgery passage that opens 'what happened that night... became legendary', a retrospective legend-framing of an event.",
-  "source": "Holly E. Ordway, 'The World-Building of Guy Gavriel Kay' (UMass Amherst independent study, 1998; presented at the 1998 Academic Conference on Canadian SF&F)",
-  "url": "https://brightweavings.com/worldbuilding/",
-  "quote": "became legendary",
-  "angle": "academic",
-  "verdict": {
-   "index": 76,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "what happened that night in a burning hamlet near Fezana became legendary",
-   "note": "Same raw page. The block quote Ordway sets off is the surgery passage: ben Yonannon, blind and mute, 'carved an opening in the skull of Diego Belmonte' and removed the bone fragment. Its first sentence ends 'became legendary' (quote verbatim), and the passage is explicitly retrospective/legend-framing ('In Al-Rassan, in Esperana, Ferrieres, Karch, Batiara - even, in time, in the far-off eastern homelands of the Asharites -'). Minor: the sentence opens with that place-list before reaching 'what happened that night', so 'opens' means the opening sentence, not the first words.",
    "fromFile": "verdicts-kay-i75-89.json"
   }
  },
@@ -1408,22 +1296,6 @@
   }
  },
  {
-  "index": 92,
-  "feature": "magic only as believed",
-  "claim": "Cawsey's introduction states Kay includes only supernatural elements the depicted society believed, presented from the inside-out so the setting renders these beliefs as true.",
-  "source": "Kathy Cawsey, 'Magic and Realism: An Interview with Guy Gavriel Kay', The Dalhousie Review (2021), pp. 307-317",
-  "url": "https://ojs.library.dal.ca/dalhousiereview/article/view/11332/10100",
-  "quote": "renders these beliefs as true",
-  "angle": "academic",
-  "verdict": {
-   "index": 92,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "only supernatural the societies believed; shown inside-out; setting renders beliefs true",
-   "note": "Cawsey's introduction (p.310): \"the rest of Kay's works follow this general rule: they only contain elements of the supernatural that the original societies would have believed or at least half-believed\"; \"show the beliefs and assumptions of a time period from the inside-out\"; \"Kay says in the Tolkien lecture that the setting 'renders these beliefs as true.'\" Two minor page qualifiers the claim drops but does not contradict: \"or at least half-believed\", and Ysabel (2007) is named as the exception. The quoted phrase is Kay's, from the Tolkien lecture, as reported in Cawsey's introduction. PDF fetched directly and text-extracted with pypdf.",
-   "fromFile": "verdicts-kay-i90-104.json"
-  }
- },
- {
   "index": 93,
   "feature": "magic left unexplained",
   "claim": "Cawsey reports Kay's Bagehot-derived principle of leaving the workings of magic unexplained, since characters would not analyse their beliefs.",
@@ -1452,22 +1324,6 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "death of the emperor far off means far less than the hired hand's broken leg",
    "note": "Kay's answer (p.315): \"I am profoundly interested in bringing 'great events' down to the personal level, so yes, this idea of the personal runs through much of my fiction. The death of the emperor far off means far less to a farmer than the broken leg of his hired hand at harvest time (Yeats wrote about this)...\" Quote verbatim; page says \"much of my fiction\", claim says \"his fiction\" — same substance.",
-   "fromFile": "verdicts-kay-i90-104.json"
-  }
- },
- {
-  "index": 95,
-  "feature": "unrecorded lives",
-  "claim": "Kay tells Cawsey he has become even more engaged with giving value to lives that go unrecorded, drawing on recent social history.",
-  "source": "Kathy Cawsey, 'Magic and Realism: An Interview with Guy Gavriel Kay', The Dalhousie Review (2021), pp. 307-317",
-  "url": "https://ojs.library.dal.ca/dalhousiereview/article/view/11332/10100",
-  "quote": "giving value to lives that often go unrecorded",
-  "angle": "academic",
-  "verdict": {
-   "index": 95,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "benefits from a major strand in the last generation or so of historians",
-   "note": "Kay (p.317): \"I have, in recent years and books, become even more engaged by this idea of giving value to lives that often go unrecorded. This, by the way, links up and benefits from a major strand in the last generation or so of historians, who have—sometimes brilliantly—done exactly this, and who have thus provided me with superb research materials and inspiration!\" Quote verbatim (the PDF breaks it as \"giv-\\ning\" across a line). Flag for transparency: the page never uses the term \"social history\"; \"recent social history\" is the claim's own label for that strand of historians, an accurate gloss rather than page wording.",
    "fromFile": "verdicts-kay-i90-104.json"
   }
  },
@@ -1692,38 +1548,6 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "One of the starting points of this book in my own mind was that it takes place on the borderlands in the lives of not-powerful people.",
    "note": "Quote verbatim; the emperors limb is the next sentence — the ambitions of 'emperors and empresses and sultans and dukes of powerful city-states didn’t really matter that much to the day-to-day desires... of ordinary people living on the borderlands.' Raw page, HTTP 200.",
-   "fromFile": "verdicts-kay-i105-119.json"
-  }
- },
- {
-  "index": 111,
-  "feature": "world as characters believe it",
-  "claim": "Kay says the fantastic lets him present the world as characters believe it, matter-of-factly, removing the modern reader's smugness (his definition of magic realism).",
-  "source": "Christine Fischer Guy, 'The Fantastic Worlds of Guy Gavriel Kay', Los Angeles Review of Books (2016-08-14)",
-  "url": "https://lareviewofbooks.org/article/fantastic-worlds-guy-gavriel-kay/",
-  "quote": "the world is presented as the characters believe it to be",
-  "angle": "academic",
-  "verdict": {
-   "index": 111,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "That’s one of the definitions of magic realism, by the way: the world is presented as the characters believe it to be, without any sense that the worldview is quaint.",
-   "note": "Quote verbatim; matter-of-fact limb ('You read a book that takes that matter-of-factly') and smugness limb ('it removes that smugness from the reader who’s willing to go there') both present, as is 'What the fantastic lets me do... is make the world be as my characters believe it to be.' One wording nuance recorded, not a limb failure: Kay calls it 'one of the definitions of magic realism', not uniquely his. Raw page, HTTP 200.",
-   "fromFile": "verdicts-kay-i105-119.json"
-  }
- },
- {
-  "index": 112,
-  "feature": "past as alien, against relatability",
-  "claim": "Kay calls the past staggeringly alien and criticises commercial historical writing that turns on relatability.",
-  "source": "Christine Fischer Guy, 'The Fantastic Worlds of Guy Gavriel Kay', Los Angeles Review of Books (2016-08-14)",
-  "url": "https://lareviewofbooks.org/article/fantastic-worlds-guy-gavriel-kay/",
-  "quote": "staggeringly alien",
-  "angle": "academic",
-  "verdict": {
-   "index": 112,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "The past is sometimes refreshingly different, but it’s also, for me, staggeringly alien.",
-   "note": "Quote verbatim. The relatability limb is on the same page: 'A lot of writing about the past right now is wish-fulfilment in a very particular way... The most successful commercial writing about history turns on relatability, likability.' The critique is framed as diagnosis (wish-fulfilment) set against his own view that writers should 'acknowledge and work with' the past's alienness, rather than as an explicit denunciation. Raw page, HTTP 200.",
    "fromFile": "verdicts-kay-i105-119.json"
   }
  },
@@ -1968,22 +1792,6 @@
   }
  },
  {
-  "index": 129,
-  "feature": "superlative-rich style (criticism)",
-  "claim": "Harrison finds Kay's superlative-rich style risks beauty fatigue and that its extravagance might be better expressed as poems.",
-  "source": "Niall Harrison, 'Under Heaven' (review), Vector / BSFA (2010-08-18)",
-  "url": "https://vector-bsfa.com/2010/08/18/under-heaven/",
-  "quote": "Kay’s superlative-rich style risks beauty fatigue",
-  "angle": "academic",
-  "verdict": {
-   "index": 129,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "“the extravagance of his vision might be better expressed as one of the poems”",
-   "note": "Vector raw page (HTTP 200), dated August 18, 2010. Quote “Kay’s superlative-rich style risks beauty fatigue” verbatim; the poems limb follows in the same sentence. Byline on the page reads only “Niall” (Niall Harrison, Vector’s reviewer/editor) — the surname is not printed on the page, but the review content is fully as attributed.",
-   "fromFile": "verdicts-kay-i120-134.json"
-  }
- },
- {
   "index": 130,
   "feature": "magic but little mystery",
   "claim": "Harrison describes Kay's affect as magic but little mystery, a platonic ideal of Tang China described with precision and thoroughness.",
@@ -2012,38 +1820,6 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "“whose duration and ambition would be absurd if not rendered within Kay’s stately narrative”",
    "note": "Vector raw page. Quote “rendered within Kay’s stately narrative” verbatim; the page’s ‘would be absurd if not rendered within’ is exactly the claim’s ‘credible only when rendered within’. Subject is Shen Tai’s ritual mourning, as claimed.",
-   "fromFile": "verdicts-kay-i120-134.json"
-  }
- },
- {
-  "index": 132,
-  "feature": "implied narrator becomes real narrator",
-  "claim": "Harrison notes that in the final third the implied narrator becomes a real narrator and the focus pulls back, making the novel a threnody and one telling among many.",
-  "source": "Niall Harrison, 'Under Heaven' (review), Vector / BSFA (2010-08-18)",
-  "url": "https://vector-bsfa.com/2010/08/18/under-heaven/",
-  "quote": "the implied narrator becomes a real narrator",
-  "angle": "academic",
-  "verdict": {
-   "index": 132,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "“this telling is only one among an endless series of interpretations”",
-   "note": "Vector raw page. Quote verbatim. All five elements are on the page in one passage: ‘Under Heaven’s final third’, ‘the implied narrator becomes a real narrator’, ‘the focus gradually pulls back’, ‘the novel is a threnody for a culture… choosing to diminish’, ‘only one among an endless series’. The page phrases the threnody as ‘confirmed’ in the final third alongside the narrator shift rather than caused by it; the claim’s ‘making’ is a compression, not an added fact.",
-   "fromFile": "verdicts-kay-i120-134.json"
-  }
- },
- {
-  "index": 133,
-  "feature": "set-piece events off-stage",
-  "claim": "Harrison notes the horse-gift frame keeps expected big set-piece events off-stage in favour of the feel of a moment of historical possibility.",
-  "source": "Niall Harrison, 'Under Heaven' (review), Vector / BSFA (2010-08-18)",
-  "url": "https://vector-bsfa.com/2010/08/18/under-heaven/",
-  "quote": "big set-piece events off-stage",
-  "angle": "academic",
-  "verdict": {
-   "index": 133,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "“keeps some of what might be expected to be big set-piece events off-stage”",
-   "note": "Vector raw page. Quote “big set-piece events off-stage” verbatim, of the horse-gift frame (‘it’s the existence of the horses that shapes the story… It’s an interesting frame’). Historical-possibility limb verbatim: ‘less interested in capturing those than he is in describing the feel of a moment of historical possibility’. The page qualifies with ‘some of’, which the claim drops — a softening, not a contradiction.",
    "fromFile": "verdicts-kay-i120-134.json"
   }
  },
@@ -2285,22 +2061,6 @@
    "trueWording": "This is also a trajectory away from magic—Fionavar is full of magic, Tigana has somewhat less, Arbonne has less again, and The Lions of Al-Rassan has nothing but an accurate prophecy",
    "note": "All four books named in the stated order.",
    "fromFile": "verdicts-kay-i135-149.json"
-  }
- },
- {
-  "index": 150,
-  "feature": "ninety-percent familiar base",
-  "claim": "Palmatier argues Kay's worlds are essentially ninety percent familiar, altered through everyday rituals and lore (riselka) so each change informs the whole.",
-  "source": "Joshua Palmatier, 'Altering the Familiar: Tigana by Guy Gavriel Kay', Tor.com/Reactor (2016-07-06)",
-  "url": "https://reactormag.com/altering-the-familiar-tigana-by-guy-gavriel-kay/",
-  "quote": "essentially 90 percent familiar",
-  "angle": "academic",
-  "verdict": {
-   "index": 150,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "backdrop that was essentially 90 percent familiar",
-   "note": "Reactor page, raw HTML fetched (200, 83KB) and stripped: 'it was being contrasted against a backdrop that was essentially 90 percent familiar' — verbatim. Every-day-ritual limb verbatim too: 'He alters the familiar through all aspects of life, down to arbitrary everyday rituals, including myths and legends and superstitions, such as the extremely powerful lore of the riselka in Tigana.' Informs-the-whole limb: 'Each change not only alters the world... but also informs the world... until it can only be viewed as a whole, without separate parts.' Framing note (not an unsupported limb): the 90% figure is stated as the worldbuilding lesson Palmatier drew from Tigana, applied to Kay's method throughout the essay, rather than as a numeric measurement of Kay's worlds.",
-   "fromFile": "verdicts-kay-i150-164.json"
   }
  },
  {
@@ -3153,29 +2913,6 @@
   }
  },
  {
-  "index": 195,
-  "feature": "plainness and economy",
-  "claim": "Töyrylä says Kay uses a matter-of-fact style to describe a dramatic and violent event in Tigana.",
-  "source": "Roosa Töyrylä, BA thesis, University of Helsinki (2017)",
-  "url": "http://brightweavings.com/ambiguities-and-divided-loyalties-focalization-in-guy-gavriel-kays-tigana/",
-  "quote": "Again a matter-of-fact style is used to describe a dramatic and violent event",
-  "page": "section 'Narratorial Focalization: All-seeing but Indifferent'",
-  "kind": "analysis",
-  "polarity": "asserts",
-  "date": "2017",
-  "routeHint": "live URL, raw HTML",
-  "registerHint": "chronicle-line",
-  "confidence": "high",
-  "angle": "academic",
-  "verdict": {
-   "index": 195,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "Again a matter-of-fact style is used to describe a dramatic and violent event",
-   "note": "Verbatim in the Toyryla thesis (brightweavings, bylined 'a bachelor's thesis by Roosa Toyryla, written at the University of Helsinki, Finland. 2017'), analysing the Senzio castle massacre in Tigana (Kay 722-23). The page phrases it passively ('a matter-of-fact style is used') and credits the narrator rather than naming Kay, but the text under analysis is Kay's Tigana.",
-   "fromFile": "verdicts-kay-i195-209.json"
-  }
- },
- {
   "index": 196,
   "feature": "adjective and adverb discipline",
   "claim": "Töyrylä describes that passage's narrator as merely reporting what happened without any commentary.",
@@ -3195,29 +2932,6 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "the narrator is merely reporting what happened, without any commentary",
    "note": "Verbatim; the full sentence continues 'and in the summary fashion of ambient focalization'. Same paragraph as index 195, so 'that passage's narrator' is correct.",
-   "fromFile": "verdicts-kay-i195-209.json"
-  }
- },
- {
-  "index": 197,
-  "feature": "withheld information and inference",
-  "claim": "Töyrylä reads the phrase 'according to most reports later' as the narrator restricting his omniscience to what people hear about the incident afterwards.",
-  "source": "Roosa Töyrylä, BA thesis, University of Helsinki (2017)",
-  "url": "http://brightweavings.com/ambiguities-and-divided-loyalties-focalization-in-guy-gavriel-kays-tigana/",
-  "quote": "narrating only what people hear about the incident afterwards",
-  "page": "section 'Narratorial Focalization: All-seeing but Indifferent'",
-  "kind": "analysis",
-  "polarity": "asserts",
-  "date": "2017",
-  "routeHint": "live URL, raw HTML",
-  "registerHint": "chronicle-line",
-  "confidence": "high",
-  "angle": "academic",
-  "verdict": {
-   "index": 197,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "narrating only what people hear about the incident afterwards",
-   "note": "Page: 'This is signalled by the phrase \"according to most reports later\"... The phrase also suggests that the narrator is restricting their omniscience and narrating only what people hear about the incident afterwards, not what is actually happening.' Only divergence: the thesis writes 'their omniscience', the claim writes 'his'.",
    "fromFile": "verdicts-kay-i195-209.json"
   }
  },
@@ -3475,29 +3189,6 @@
   }
  },
  {
-  "index": 209,
-  "feature": "place and institution description",
-  "claim": "Malosse argues that the Sarantine Mosaic, though deliberately unfaithful to history, evokes the Late Antique and Eastern Mediaeval world much more exactly than time-travel novels that respect history's givens.",
-  "source": "Pierre-Louis Malosse, Université Paul Valéry, Anabases 5 (2007)",
-  "url": "http://brightweavings.com/justinian-visited-and-revisited/",
-  "quote": "evokes the Late Antique and Eastern Mediaeval world much more exactly",
-  "page": "concluding section",
-  "kind": "analysis",
-  "polarity": "asserts",
-  "date": "2007",
-  "routeHint": "live URL, raw HTML (English translation hosted on BrightWeavings)",
-  "registerHint": "dossier-archivist",
-  "confidence": "high",
-  "angle": "academic",
-  "verdict": {
-   "index": 209,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "the Sarantine Mosaic, which is unfaithful to history and deliberately inverts and reconstructs historical matter, evokes the Late Antique and Eastern Mediaeval world much more exactly than the novels of de Camp and Silverberg, which endeavour to respect history's givens",
-   "note": "Verbatim in the concluding section of Morgon Mills's English translation of Pierre-Louis Malosse, 'Justinian Visited and Revisited' (Anabases 5, 2007, pp. 229-235), hosted at brightweavings. The comparanda are de Camp's Lest Darkness Fall and Silverberg's time-travel novel, both introduced earlier as time-travel narratives, so 'time-travel novels' holds. Note the source attaches 'deliberately' to 'inverts and reconstructs', not to 'unfaithful'.",
-   "fromFile": "verdicts-kay-i195-209.json"
-  }
- },
- {
   "index": 210,
   "feature": "other: competing memories of one event",
   "claim": "Malosse notes that the scene he cites to show Kay's style is presented as a senator's memory of what happened in front of him.",
@@ -3728,29 +3419,6 @@
   }
  },
  {
-  "index": 221,
-  "feature": "other: freely willed action",
-  "claim": "Webb argues that in Tigana the major events have their genesis in the emphatically freely willed actions of the protagonists.",
-  "source": "Janeen Webb, The Ringbearer: Journal of the Mythopoeic Literature Society of Australia (1991)",
-  "url": "http://brightweavings.com/webbtigana/",
-  "quote": "the major events have their genesis in the emphatically freely willed actions",
-  "page": "section on mythology and human deeds",
-  "kind": "analysis",
-  "polarity": "asserts",
-  "date": "1991",
-  "routeHint": "live URL, raw HTML",
-  "registerHint": "none",
-  "confidence": "high",
-  "angle": "academic",
-  "verdict": {
-   "index": 221,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "the major events have their genesis in the emphatically freely willed actions performed by the protagonists",
-   "note": "Raw page (brightweavings /webbtigana/, by Janeen Webb, (c) 1991, first published in The Ring Bearer: Journal of the Mythopoeic Literature Society of Australia, Spring 1991, Vol 8 No 2) fetched via curl. Quotation verbatim; the page continues 'performed by the protagonists on the relevant Ember Days', so the protagonists limb is supported and the claim merely omits the Ember Days qualifier.",
-   "fromFile": "verdicts-kay-i210-224.json"
-  }
- },
- {
   "index": 222,
   "feature": "other: memory and the erased name",
   "claim": "Doshlova argues that Tigana's central metaphors — the lost name, distorted memory and music — form a single artistic system representing the formation, loss and recovery of national identity.",
@@ -3866,29 +3534,6 @@
   }
  },
  {
-  "index": 227,
-  "feature": "place and institution description",
-  "claim": "Mather calls Kay the most transportive writer he has read, attributing it to years of study of the cultures and places written about.",
-  "source": "Andrew Mather, 'The Masters Of Prose', The Quill to Live (review blog), 2016",
-  "url": "https://thequilltolive.com/2016/01/07/the-masters-of-prose/",
-  "quote": "Kay is the most transportive writer I have ever read",
-  "page": "entry for Guy Gavriel Kay",
-  "kind": "reception",
-  "polarity": "asserts",
-  "date": "2016-01-07",
-  "routeHint": "direct curl with browser user agent",
-  "registerHint": "dossier-archivist",
-  "confidence": "medium: an uncredentialed review blog's list entry",
-  "angle": "craft",
-  "verdict": {
-   "index": 227,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "most transportive writer I have ever read; years studying cultures, places",
-   "note": "Raw HTML fetched (HTTP 200). Quote exact. Attribution limb rests on the immediately following explanatory sentence: 'He spends years studying the cultures and places he writes about so that he can get the details just right.' The page gives the study's stated purpose as getting details right and offers it as the explanation of the transportive effect; the causal link is by adjacency, not by an explicit 'because'.",
-   "fromFile": "verdicts-kay-i225-239.json"
-  }
- },
- {
   "index": 228,
   "feature": "sentence length variation",
   "claim": "Michal says The Last Light of the Sun cuts Kay's ornate style down to a rougher language full of sentence fragments.",
@@ -3908,52 +3553,6 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "ornate style cut down to rougher language rife with sentence fragments",
    "note": "Raw HTML fetched (HTTP 200). Post 'Flippant Reviews: Guy Gavriel Kay', December 12, 2011, author 'Michal' (post byline). Quote exact and sits in the section headed 'The Last Light of the Sun'; the full sentence reads 'Kay's ornate style is cut down here to a much rougher use of language rife with sentence fragments and strong images recounting the frozen north.'",
-   "fromFile": "verdicts-kay-i225-239.json"
-  }
- },
- {
-  "index": 229,
-  "feature": "closing sentence",
-  "claim": "Michal says The Last Light of the Sun has one of the most beautiful closing sentences he has encountered anywhere.",
-  "source": "Michal, 'Flippant Reviews: Guy Gavriel Kay', One Last Sketch (blog), 2011",
-  "url": "https://onelastsketch.wordpress.com/2011/12/12/flippant-reviews-guy-gavriel-kay/",
-  "quote": "one of the most beautiful closing sentences I’ve encountered anywhere",
-  "page": "entry for The Last Light of the Sun",
-  "kind": "reader",
-  "polarity": "asserts",
-  "date": "2011-12-12",
-  "routeHint": "direct curl with browser user agent",
-  "registerHint": "chronicle-line",
-  "confidence": "medium: a blog reader-critic's judgment, no analysis of the sentence given",
-  "angle": "craft",
-  "verdict": {
-   "index": 229,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "one of the most beautiful closing sentences I've encountered anywhere",
-   "note": "Raw HTML fetched (HTTP 200). Section boundaries checked by extracting the text between the 'The Last Light of the Sun' heading and the next heading 'Under Heaven': the sentence falls inside the Last Light of the Sun entry, as cited. Only nuance: the page renders it first person ('I've encountered'); the blog gives the author's name as Michal but states no pronoun, so the claim's 'he' is unverified on the page.",
-   "fromFile": "verdicts-kay-i225-239.json"
-  }
- },
- {
-  "index": 230,
-  "feature": "withheld information and inference",
-  "claim": "Michal faults Tigana for telling the reader how to feel rather than leaving the feeling to be inferred.",
-  "source": "Michal, 'Flippant Reviews: Guy Gavriel Kay', One Last Sketch (blog), 2011",
-  "url": "https://onelastsketch.wordpress.com/2011/12/12/flippant-reviews-guy-gavriel-kay/",
-  "quote": "We’re all too often told how to feel",
-  "page": "entry for Tigana",
-  "kind": "reader",
-  "polarity": "disputes",
-  "date": "2011-12-12",
-  "routeHint": "direct curl with browser user agent",
-  "registerHint": "none",
-  "confidence": "high",
-  "angle": "craft",
-  "verdict": {
-   "index": 230,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "We're all too often told how to feel... maudlin... boring",
-   "note": "Raw HTML fetched (HTTP 200). Quote exact and confirmed inside the 'Tigana' section (text extracted between the 'Tigana' and 'A Song for Arbonne' headings), and the fault framing is explicit ('It's all so very maudlin, and all so very boring'). The claim's trailing clause 'rather than leaving the feeling to be inferred' is the reviewer's implied complement, not wording on the page.",
    "fromFile": "verdicts-kay-i225-239.json"
   }
  },
@@ -4648,29 +4247,6 @@
   }
  },
  {
-  "index": 261,
-  "feature": "concrete sensory noun",
-  "claim": "Davison says Tigana's final battle gives the armies' strengths and tactics but little else, so the soldiers are numbers rather than men.",
-  "source": "Alister Davison (aspiring novelist/reviewer), 'Tigana by Guy Gavriel Kay', Fantasy-Faction Classics Corner, 2013",
-  "url": "https://fantasy-faction.com/2013/tigana-by-guy-gavriel-kay",
-  "quote": "They are numbers, not men",
-  "page": "body, paragraph beginning 'The notes about the author'",
-  "kind": "reception",
-  "polarity": "disputes",
-  "date": "2013-07-06",
-  "routeHint": "direct curl with browser user agent",
-  "registerHint": "dossier-archivist",
-  "confidence": "high",
-  "angle": "craft",
-  "verdict": {
-   "index": 261,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "We’re told their strengths and some of their tactics, but little else. They are numbers, not men",
-   "note": "Quote 'They are numbers, not men' is character-exact in the paragraph beginning 'The notes about the author', and the surrounding sentences carry the final-battle and strengths/tactics limbs. Adversarial note: the page says 'some of their tactics', slightly narrower than the claim's unqualified 'tactics' — a compression, not an unsupported limb.",
-   "fromFile": "verdicts-kay-i255-269.json"
-  }
- },
- {
   "index": 262,
   "feature": "annalist voice and deep time",
   "claim": "Davison says Tigana read to him as a dry slice of history rather than an immediate story.",
@@ -4878,29 +4454,6 @@
   }
  },
  {
-  "index": 271,
-  "feature": "point of view and distance",
-  "claim": "A tabletop-RPG forum reader says Kay's narrator commentary and foreshadowing often felt heavy-handed to him.",
-  "source": "'Uqbarian', post #19 in 'Talk to me of Guy Gavriel Kay', RPGnet forum, 2022",
-  "url": "https://forum.rpg.net/index.php?threads/talk-to-me-of-guy-gavriel-kay.898766/",
-  "quote": "his narrator commentary and foreshadowing often felt really heavy-handed to me",
-  "page": "post #19, 2022-06-26",
-  "kind": "reader",
-  "polarity": "disputes",
-  "date": "2022-06-26",
-  "routeHint": "direct curl with browser user agent",
-  "registerHint": "none",
-  "confidence": "high",
-  "angle": "craft",
-  "verdict": {
-   "index": 271,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "\"In particular, his narrator commentary and foreshadowing often felt really heavy-handed to me.\"",
-   "note": "Raw thread page fetched (HTTP 200). Found in post #19 by Uqbarian, Jun 26 2022 — post number and date match. forum.rpg.net is a tabletop-RPG forum, so that limb holds. ('him' is the researcher's pronoun; the poster writes 'to me' and states no gender.)",
-   "fromFile": "verdicts-kay-i270-284.json"
-  }
- },
- {
   "index": 272,
   "feature": "plainness and economy",
   "claim": "The same reader says Kay is a top-notch prose stylist who goes on rather more than he needs to.",
@@ -4947,29 +4500,6 @@
   }
  },
  {
-  "index": 274,
-  "feature": "naming and forms of address",
-  "claim": "Another forum reader says the renamed real cities of The Last Light of the Sun left him constantly mixing up not-Constantinople and not-Jerusalem.",
-  "source": "'Daztur', post #10 in 'Talk to me of Guy Gavriel Kay', RPGnet forum, 2022",
-  "url": "https://forum.rpg.net/index.php?threads/talk-to-me-of-guy-gavriel-kay.898766/",
-  "quote": "constantly get not-Constantinople and not-Jerusalem mixed up",
-  "page": "post #10, 2022-06-25",
-  "kind": "reader",
-  "polarity": "disputes",
-  "date": "2022-06-25",
-  "routeHint": "direct curl with browser user agent",
-  "registerHint": "dossier-archivist",
-  "confidence": "high",
-  "angle": "craft",
-  "verdict": {
-   "index": 274,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "\"...so I don't have to constantly get not-Constantinople and not-Jerusalem mixed up.\"",
-   "note": "Raw page, post #10 by Daztur, Jun 25 2022 — post number and date match. Quote verbatim; the renaming and The Last Light of the Sun limbs are in the same post ('I found The Last Light of the Sun incredibly annoying. If you're going to have Rome, Jerusalem, Constantinople... just call them...'). Poster's gender is not stated on the page.",
-   "fromFile": "verdicts-kay-i270-284.json"
-  }
- },
- {
   "index": 275,
   "feature": "register modulation",
   "claim": "A forum reader says The Lions of Al-Rassan moves between an adventure story and a people-living-through-history story.",
@@ -4989,29 +4519,6 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "\"it moves interestingly between a sort of adventure story and a people living through history story\"",
    "note": "Raw page. Written by Gavin Bennett in post #9 (Jun 25 2022) and re-quoted inside Uqbarian's post #19 (Jun 26 2022), as the source's page hint says. Subject is 'The Lions of Al-Rassan', named in the preceding sentence.",
-   "fromFile": "verdicts-kay-i270-284.json"
-  }
- },
- {
-  "index": 276,
-  "feature": "plainness and economy",
-  "claim": "A reviewer says that while he enjoys Kay's prose he often wishes there was less of it.",
-  "source": "'Brok3n Engines', review of Tigana, Brok3n Engines (Substack), 2025",
-  "url": "https://b3en.substack.com/p/ggk-in-transition",
-  "quote": "while I enjoy his prose, I often wish there was less",
-  "page": "final body paragraph",
-  "kind": "reader",
-  "polarity": "disputes",
-  "date": "2025-04-16",
-  "routeHint": "direct curl with browser user agent",
-  "registerHint": "none",
-  "confidence": "high",
-  "angle": "craft",
-  "verdict": {
-   "index": 276,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "\"But the truth is that, while I enjoy his prose, I often wish there was less of it.\"",
-   "note": "Raw page fetched (HTTP 200); full body text present, no paywall. Brok3n Engines review of Tigana, Apr 16 2025 — matches source. Quote verbatim as final-paragraph clause. The reviewer's gender is not stated on the page ('he' is the researcher's pronoun).",
    "fromFile": "verdicts-kay-i270-284.json"
   }
  },
@@ -5545,29 +5052,6 @@
   }
  },
  {
-  "index": 300,
-  "feature": "other: summary refused",
-  "claim": "Kay says a major novel can be made to sound trivial, silly or shallow if boiled down to a paragraph of sound bite.",
-  "source": "Guy Gavriel Kay, 'The Big Idea: Guy Gavriel Kay', Whatever (John Scalzi's blog), 2025",
-  "url": "https://whatever.scalzi.com/2025/05/28/the-big-idea-guy-gavriel-kay-4/",
-  "quote": "can be made to sound trivial, silly, shallow if boiled down",
-  "page": "body, paragraph beginning 'Of course you don't'",
-  "kind": "own-words",
-  "polarity": "asserts",
-  "date": "2025-05-28",
-  "routeHint": "direct curl with browser user agent",
-  "registerHint": "none",
-  "confidence": "high",
-  "angle": "craft",
-  "verdict": {
-   "index": 300,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "War and Peace, LOTR or Song of Solomon 'can be made to sound trivial, silly, shallow if boiled down to a paragraph's worth of sound bite'",
-   "note": "Raw page (whatever.scalzi.com, curl with browser UA, HTTP 200) carries the quote verbatim in Kay's signed Big Idea essay: 'Some of us (well, me?) take the considered view that War and Peace or The Lord of the Rings or Song of Solomon can be made to sound trivial, silly, shallow if boiled down to a paragraph's worth of sound bite.' 'A major novel' is the claim's generalisation of the three named novels; page says 'a paragraph's worth of sound bite' where the claim says 'a paragraph of sound bite'. All limbs supported.",
-   "fromFile": "verdicts-kay-i300-314.json"
-  }
- },
- {
   "index": 301,
   "feature": "omission as information",
   "claim": "Pembroke College reports that Kay's Tolkien Lecture discussed the vital importance of the unsaid and the unexplained in fiction.",
@@ -5890,29 +5374,6 @@
   }
  },
  {
-  "index": 315,
-  "feature": "humour",
-  "claim": "Whitehead says there is more humour in Written on the Dark than in some of Kay's previous books.",
-  "source": "Adam Whitehead, review of Written on the Dark, The Wertzone, 2025",
-  "url": "https://thewertzone.blogspot.com/2025/06/written-on-dark-by-guy-gavriel-kay.html",
-  "quote": "There is more humour in this book than perhaps some",
-  "page": "body, paragraph beginning 'The traditional strengths of Kay'",
-  "kind": "analysis",
-  "polarity": "asserts",
-  "date": "2025-06",
-  "routeHint": "direct curl with browser user agent",
-  "registerHint": "none",
-  "confidence": "high",
-  "angle": "craft",
-  "verdict": {
-   "index": 315,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "more humour in this book than perhaps some previous ones",
-   "note": "Wertzone live fetch 200 (browser UA). Byline 'Adam Whitehead', dated Sunday 29 June 2025, post title 'Written on the Dark by Guy Gavriel Kay'. Quote byte-exact in the paragraph beginning 'The traditional strengths of Kay'. Source hedges with 'perhaps', which the claim drops; substance unchanged.",
-   "fromFile": "verdicts-kay-i315-329.json"
-  }
- },
- {
   "index": 316,
   "feature": "other: flash-forward tells the outcome early",
   "claim": "Capossere says Kay takes the suspense out of dangerous scenes with a flash-forward so the reader already knows the character survives.",
@@ -6162,29 +5623,6 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "meticulously crafted in structure, pace, language, dialogue",
    "note": "Verbatim: 'The novel is meticulously crafted in structure, pace, language, dialogue.' Located in the review's last substantive paragraph, immediately before the publisher's jacket blurb — the cited page location holds.",
-   "fromFile": "verdicts-kay-i315-329.json"
-  }
- },
- {
-  "index": 327,
-  "feature": "omission as information",
-  "claim": "A reader commenting on the review says she found Tigana on the whole to be telling rather than showing.",
-  "source": "'Ilana', reader comment on Bill Capossere's Fantasy Literature review, 2022-04-19",
-  "url": "https://fantasyliterature.com/reviews/all-the-seas-of-the-world/",
-  "quote": "I found it on the whole to be telling rather than",
-  "page": "comments, 'Ilana', 2022-04-19",
-  "kind": "reader",
-  "polarity": "disputes",
-  "date": "2022-04-19",
-  "routeHint": "live URL 403; Wayback raw capture 20250803031327id_",
-  "registerHint": "none",
-  "confidence": "high",
-  "angle": "craft",
-  "verdict": {
-   "index": 327,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "'I found it on the whole to be telling rather than showing'",
-   "note": "Comment thread on the same page, preserved in the Wayback capture. Commenter 'Ilana', April 19, 2022 at 7:30 pm, about Tigana: 'I didn't enjoy it – I found the female characters to be flat and underdeveloped... and I found it on the whole to be telling rather than showing.' Author, date and referent (Tigana, named in the same comment: 'I really didn't like Tigana') all confirmed. The claim's pronoun 'she' is inferred from the name and never stated on the page — incidental, not a substantive limb.",
    "fromFile": "verdicts-kay-i315-329.json"
   }
  },
@@ -6534,29 +5972,6 @@
   }
  },
  {
-  "index": 344,
-  "feature": "point of view and distance",
-  "claim": "Kay says inventing a setting and a character modelled on a real figure demonstrates a measure of appropriate distance.",
-  "source": "Guy Gavriel Kay, 'Home and Away', BrightWeavings",
-  "url": "https://brightweavings.com/globe/",
-  "quote": "a measure of appropriate distance",
-  "page": "body, El Cid paragraph",
-  "kind": "own-words",
-  "polarity": "asserts",
-  "date": "1999",
-  "routeHint": "live URL, curl browser UA",
-  "registerHint": "dossier-archivist",
-  "confidence": "high",
-  "angle": "voice",
-  "verdict": {
-   "index": 344,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "\"by inventing the setting and inventing a man based on Rodrigo Diaz... I might also be demonstrating a measure of appropriate distance\"",
-   "note": "Raw BrightWeavings page, El Cid paragraph, verbatim. Every limb present (invented setting; man based on Rodrigo Diaz 'but clearly not him'; appropriate distance). One softening worth flagging: Kay writes the hedged 'I might also be demonstrating', not a flat 'demonstrates', and speaks of his own book rather than as a general rule.",
-   "fromFile": "verdicts-kay-i330-344.json"
-  }
- },
- {
   "index": 345,
   "feature": "other: universalising by detaching from a named context",
   "claim": "Kay claims that setting a story as fantasy detaches the tale from a narrow context.",
@@ -6622,29 +6037,6 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "Douglas Barbour described a fantasy he admired as that escape",
    "note": "Raw page, closing paragraph: 'Many years ago, the poet and critic, Douglas Barbour, described a fantasy he admired as, ‘The kind of escape that brings you home.’ I realized, reading these words, that this was how I’d always seen the potential of the genre.' Attribution to Barbour and Kay's endorsement both explicit.",
-   "fromFile": "verdicts-kay-i345-359.json"
-  }
- },
- {
-  "index": 348,
-  "feature": "other: competing versions of one story",
-  "claim": "Kay asserts that all renderings of a legend matter and that the changes between versions carry truths about the societies that made them.",
-  "source": "Guy Gavriel Kay, 'On Myth' (Chapters 'Great Writers' series newspaper insert)",
-  "url": "https://brightweavings.com/mythessay/",
-  "quote": "All renderings matter",
-  "page": "opening paragraphs",
-  "kind": "own-words",
-  "polarity": "asserts",
-  "date": "summer 1999",
-  "routeHint": "live URL, curl browser UA",
-  "registerHint": "chronicle-line",
-  "confidence": "high",
-  "angle": "voice",
-  "verdict": {
-   "index": 348,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "All renderings matter; in the changes we find truths about evolving worlds and societies",
-   "note": "Raw HTML of brightweavings.com/mythessay/ (HTTP 200). First body paragraph: 'All renderings matter, and in the changes, the shiftings, we find truths about evolving worlds and societies.' Page header confirms the source: written summer 1999 for the Chapters 'Great Writers' series, run as full-page newspaper inserts. Kay's wording is 'evolving worlds and societies' rather than the claim's 'societies that made them'; in context (renderings shifting as generations and cultures change) the limb is supported, but the claim's phrasing is a gloss, not Kay's.",
    "fromFile": "verdicts-kay-i345-359.json"
   }
  },
@@ -6899,29 +6291,6 @@
    "trueWording": "A viewpoint character observing a setting for the first time serves wonderfully as a ‘window’ for the reader",
    "note": "Raw page, the 'fish out of water' answer: the quoted sentence is followed by 'The initiation of a character becomes the reader’s initiation.', supporting the claim's second limb.",
    "fromFile": "verdicts-kay-i345-359.json"
-  }
- },
- {
-  "index": 360,
-  "feature": "edition and house style",
-  "claim": "Kay says he does not deliver a book until it is close to where he wants it and is therefore very lightly edited across his three English-language publishers.",
-  "source": "Guy Gavriel Kay, interviewed by Rodger Turner for SFSite",
-  "url": "https://brightweavings.com/sfsite/",
-  "quote": "so I’m very lightly edited",
-  "page": "answer on publishers' editing",
-  "kind": "own-words",
-  "polarity": "asserts",
-  "date": "September 2000",
-  "routeHint": "live URL, curl browser UA",
-  "registerHint": "none",
-  "confidence": "high",
-  "angle": "voice",
-  "verdict": {
-   "index": 360,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "so I’m very lightly edited",
-   "note": "Raw HTML of brightweavings.com/sfsite/ (HTTP 200, browser UA). GGK: “I’m very slow and somewhat obsessive, so have never delivered a book until I’m quite sure it is just about where I want it to be… and so I’m very lightly edited. In theory, one might have expected problems, given three editors in three countries.” The three-publisher limb: the page says “three editors in three countries” and the interviewer names them earlier — “you are one of the few who separate the Canadian, US and UK markets” — with Kay confirming he is published by a house based in each country, so the English-language limb holds from the page itself, though the phrase “English-language” is not on this page (it is Kay’s wording in the Deep Magic interview).",
-   "fromFile": "verdicts-kay-i360-382.json"
   }
  },
  {
@@ -7247,29 +6616,6 @@
   }
  },
  {
-  "index": 383,
-  "feature": "other: the past rhymes rather than repeats",
-  "claim": "Kay says the fantastic quarter-turn makes reader and author share that they are rhyming with the past, not trying to pin the present down with it precisely.",
-  "source": "Guy Gavriel Kay, 'The Big Idea', Whatever",
-  "url": "https://whatever.scalzi.com/2025/05/28/the-big-idea-guy-gavriel-kay-4/",
-  "quote": "rhyming with the past, not trying to pin the present down",
-  "page": "body",
-  "kind": "own-words",
-  "polarity": "asserts",
-  "date": "2025-05-28",
-  "routeHint": "live URL, curl browser UA",
-  "registerHint": "none",
-  "confidence": "high",
-  "angle": "voice",
-  "verdict": {
-   "index": 383,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "If I do it right, this use of the fantastic ... causes reader and author to share with each other that we are, indeed, rhyming with the past, not trying to pin the present down with it precisely.",
-   "note": "Raw page fetched (HTTP 200). Quote is a literal substring. Preceding sentence supplies the 'quarter-turn to the fantastic' referent ('What one reviewer called history with a quarter-turn to the fantastic. If I do it right, this use of the fantastic...'). Only nuance: Kay hedges the effect with 'If I do it right', which the claim drops.",
-   "fromFile": "verdicts-kay-i383-412.json"
-  }
- },
- {
   "index": 384,
   "feature": "other: no moralising or lecture",
   "claim": "Kay says he wants readers thinking about their own time but not for lessons, because he is offering a story and not giving a lecture.",
@@ -7450,29 +6796,6 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "Now, I don't believe in saying exactly what happens to characters after a novel closes - the ending of every book I've written makes this point.",
    "note": "Raw page, in the Sharra passage as hinted. Quote verbatim; both limbs in one sentence. Date detail only: the header says the afterword first appeared in the 2004 20th-anniversary edition, and Kay signs it December 2003, so the source label's '(2003)' is the signing date, not the publication date.",
-   "fromFile": "verdicts-kay-i383-412.json"
-  }
- },
- {
-  "index": 406,
-  "feature": "other: no moralising or lecture",
-  "claim": "Kay says he does not write novels inspired by history to offer easy parallels to our own time, because that can feel lazy or glib or both.",
-  "source": "Guy Gavriel Kay, 'Exile', BrightWeavings",
-  "url": "https://brightweavings.com/exile/",
-  "quote": "That can feel lazy, or glib, or both",
-  "page": "body, River of Stars section",
-  "kind": "own-words",
-  "polarity": "rejects",
-  "date": "c. 2013",
-  "routeHint": "live URL, curl browser UA",
-  "registerHint": "dossier-archivist",
-  "confidence": "high",
-  "angle": "voice",
-  "verdict": {
-   "index": 406,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "I don't write novels inspired by history to offer easy parallels to our own time. That can feel lazy, or glib, or both.",
-   "note": "Raw page (essay headed 'Exile'; the WordPress post title is 'Under Heaven Author's Letter'). Quote verbatim, in the paragraph following the River of Stars discussion, as hinted. The claim's 'because' makes explicit a link the page leaves to adjacency.",
    "fromFile": "verdicts-kay-i383-412.json"
   }
  },
@@ -7841,29 +7164,6 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "My proofreader, quite correctly, flagged every one of these as an error ... What I prefer is the change! The difference.",
    "note": "Both limbs verbatim in the Locus 'Journeying' final excerpt, adjacent sentences. Kay adds 'quite correctly' and gives the proofreader's query in full.",
-   "fromFile": "verdicts-kay-i413-439.json"
-  }
- },
- {
-  "index": 432,
-  "feature": "other: history as residue on ordinary lives",
-  "claim": "Kay says a Braudel passage showed him that the concerns of ordinary people are not those we tend to see in the overarching histories of a time, and that none of his five protagonists in Children of Earth and Sky are important people.",
-  "source": "Guy Gavriel Kay, 'Journeying', Locus interview excerpt",
-  "url": "https://locusmag.com/feature/guy-gavriel-kay-journeying/",
-  "quote": "the concerns of ordinary people are not those that we tend",
-  "page": "third excerpt, on Braudel",
-  "kind": "own-words",
-  "polarity": "asserts",
-  "date": "May 2016",
-  "routeHint": "live URL, curl browser UA",
-  "registerHint": "dossier-archivist",
-  "confidence": "high",
-  "angle": "voice",
-  "verdict": {
-   "index": 432,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "It's a wonderful passage about how the concerns of ordinary people are not those that we tend to see if we read the overarching histories of a given time ... None of these are important people.",
-   "note": "Both limbs on the Locus 'Journeying' third excerpt, which names Fernand Braudel as the source of the passage. The number five is a count of the page's own enumeration — the one caught up in the war plus an artist, a woman escaping her father's plan, a merchant and a soldier — immediately followed by 'None of these are important people'; the page does not print the word 'five' or the word 'protagonists'.",
    "fromFile": "verdicts-kay-i413-439.json"
   }
  },
@@ -8489,29 +7789,6 @@
   }
  },
  {
-  "index": 506,
-  "feature": "other: prologue as a false beginning",
-  "claim": "lepusdomesticus argues that both the Prologue and Chapter One of Tigana are false beginnings that name many characters who never reappear.",
-  "source": "lepusdomesticus (Susie), LiveJournal, 31 March 2014",
-  "url": "https://lepusdomesticus.livejournal.com/106763.html",
-  "quote": "Chapter One of the novel are false beginnings",
-  "page": "section 'PROLOGUES'",
-  "kind": "reader",
-  "polarity": "rejects",
-  "date": "2014-03-31",
-  "routeHint": "curl with a browser user agent",
-  "registerHint": "none",
-  "confidence": "high",
-  "angle": "close",
-  "verdict": {
-   "index": 506,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "Indeed, both the Prologue and Chapter One of the novel are false beginnings... we are introduced by name to a lot of characters who are never going to show up again",
-   "note": "Same raw live page, in the section headed 'PROLOGUES'. Quote exact. Both limbs supported. Minor nuance recorded, not deducted: the page hedges the never-reappearing limb with a bracketed spoiler, '[Spoiler! Until a couple of them turn out to be Not Really Dead After All!]', and the claim's 'many characters' = the page's 'a lot of characters'.",
-   "fromFile": "verdicts-kay-i486-517.json"
-  }
- },
- {
   "index": 510,
   "feature": "other: reception split",
   "claim": "The Quill to Live book club reports that half the group scored Tigana nine or above and the other half scored it below five, for an average of a solid seven.",
@@ -8531,29 +7808,6 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "half of the group had scores of nine or above and the other half of the group had scores below 5... average for the group was a solid seven",
    "note": "Raw live page (HTTP 200). Quote exact, in the opening paragraph. All three limbs — nine-or-above half, below-five half, 'a solid seven' average — are in consecutive sentences. Post by Andrew (Andrew Mather), March 17, 2016; the page also gives 'Bookclub - 7.0/10'.",
-   "fromFile": "verdicts-kay-i486-517.json"
-  }
- },
- {
-  "index": 514,
-  "feature": "other: everything is load-bearing",
-  "claim": "Erfael says Kay works in a style where everything that happens is somehow important or represented, which can come across as contrived.",
-  "source": "Erfael, SFFWorld forum, 6 December 2011",
-  "url": "https://www.sffworld.com/forum/threads/question-regarding-guy-gavriel-kays-books.32913/",
-  "quote": "everything that happens is somehow important or represented",
-  "page": "post #5",
-  "kind": "reader",
-  "polarity": "asserts",
-  "date": "2011-12-06",
-  "routeHint": "curl with a browser user agent",
-  "registerHint": "none",
-  "confidence": "high",
-  "angle": "close",
-  "verdict": {
-   "index": 514,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "Kay works in a very epic style where everything that happens is somehow important or represented. This can come across as contrived.",
-   "note": "Raw live page (HTTP 200, full thread rendered without login). Quote exact. Both limbs are consecutive sentences. Post #5 by Erfael, Dec 6, 2011, as attributed. The page qualifies the contrived limb with 'if you're looking for more traditional fantasy storytelling'.",
    "fromFile": "verdicts-kay-i486-517.json"
   }
  },
@@ -9382,29 +8636,6 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "I don't like books, as a reader, where I feel hammered on the head with the author's didactic or pedantic point",
    "note": "Verbatim (curly apostrophe matches). In Kay's answer, not the interviewer's question — the following paragraph switches to second person ('your plotting technique'). Page header confirms Jean-Louis Trudel, Solaris, 1995. The claim's 'didactic point' drops 'or pedantic', which narrows but does not misstate.",
-   "fromFile": "verdicts-kay-i625-678.json"
-  }
- },
- {
-  "index": 632,
-  "feature": "other: allusive ambience",
-  "claim": "Kay says he expected readers to miss his specific myth sources and hoped only that a mythic ambience would emerge.",
-  "source": "Guy Gavriel Kay, interviewed by Jean-Louis Trudel, Solaris 1995, reproduced at BrightWeavings",
-  "url": "https://brightweavings.com/trudel/",
-  "quote": "an ambience, a generally mythic flavour and realm would emerge",
-  "page": "answer on Tolkien and mythic sources",
-  "kind": "own-words",
-  "polarity": "asserts",
-  "date": "1995",
-  "routeHint": "curl with browser user agent, live URL",
-  "registerHint": "none",
-  "confidence": "high",
-  "angle": "craft",
-  "verdict": {
-   "index": 632,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "readers would...probably not pick up on the specific myths...but my hope was that an ambience, a generally mythic flavour and realm would emerge",
-   "note": "Verbatim, in Kay's answer within the Tolkien/mythic-sources exchange. Both limbs supported: he expected readers to miss the specific sources, and hoped for ambience. Minor nuance: the sentence continues 'so that one reader might know that the ravens...are in fact the ravens of Odin', so 'hoped only' is a shade stronger than the page — the substance still holds.",
    "fromFile": "verdicts-kay-i625-678.json"
   }
  },

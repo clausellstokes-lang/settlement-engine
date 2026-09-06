@@ -3,19 +3,27 @@
  "name": "ai",
  "angle": null,
  "tag": "i813-828",
- "lines": 4,
+ "lines": 52,
  "firstTs": "2026-09-06T18:20:23.826Z",
- "lastTs": "2026-09-06T18:20:23.833Z",
- "tools": {},
- "urlsFetched": [],
+ "lastTs": "2026-09-06T18:24:00.931Z",
+ "tools": {
+  "Read": 3,
+  "ToolSearch": 1,
+  "Bash": 7,
+  "StructuredOutput": 1
+ },
+ "urlsFetched": [
+  "https://dramatica.com/blog/the-ai-tells-are-in-the-story",
+  "https://reutersinstitute.politics.ox.ac.uk/news/how-ai-generated-prose-diverges-human-writing-and-why-it-matters"
+ ],
  "filesWritten": [],
- "lastAssistantText": "",
+ "lastAssistantText": "Both source pages were reached as raw HTML on the first route (HTTP 200, browser UA, curl — no summarizer, no search snippet), so no recovery routes or BLOCKED verdicts were needed. All 15 quotations match their pages character-for-character.",
  "run": "wf_bcc0efc7-47c",
  "agent": "ae25408cef0dca5cd",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/19ace14d-e63e-4584-ad77-d83bd8e2cd0f/subagents/workflows/wf_bcc0efc7-47c/agent-ae25408cef0dca5cd.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-ai-i813-828.json",
-  "exists": false
+  "exists": true
  }
 }

@@ -1,0 +1,31 @@
+{
+ "role": "verifier",
+ "name": "dnd",
+ "angle": null,
+ "tag": "i394-408",
+ "lines": 64,
+ "firstTs": "2026-09-06T18:23:35.812Z",
+ "lastTs": "2026-09-06T18:26:13.109Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 15
+ },
+ "urlsFetched": [
+  "https://tenfootpole.org/ironspike/?page_id=1201",
+  "https://thealexandrian.net/wordpress/48312/roleplaying-games/gm-dont-list-13-boxed-text-pitfalls",
+  "http://archive.wizards.com/default.asp?x=dnd/dd/20050916a",
+  "https://dmsworkshop.com/2019/09/27/dm-101-boxed-text-mastering/",
+  "https://web.archive.org/web/20210713073031id_/http://archive.wizards.com/default.asp?x=dnd/dd/20050916a"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "Every quote checked against raw page text. Now writing the checkpoint file.",
+ "run": "wf_a9298963-fdf",
+ "agent": "a3a685e300976dc66",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/19ace14d-e63e-4584-ad77-d83bd8e2cd0f/subagents/workflows/wf_a9298963-fdf/agent-a3a685e300976dc66.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-dnd-i394-408.json",
+  "exists": false
+ }
+}

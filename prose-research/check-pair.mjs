@@ -54,7 +54,7 @@ const bandSiblingsOf = h => { if (!h.siblings.length) return []; const a = axisO
   const same = a ? h.siblings.filter(k => axisOf(k) === a) : [];
   return same.length ? same : h.siblings; };   // tight same-axis set where the grammar gives one; else A8's letter — every band of the same block
 const CONTRAST = /\brather than\b|\bnot [^.,;]{1,40}, but\b|\bnot [^.,;]{1,40} but\b|, not [a-z][^.,;]{0,40}[.;]|\bnot [^.,;]{1,30}, (it|this|that) is\b|\bless [^.,;]{1,30} than\b/g;
-const ALT_STOP = new Set(['that','this','with','from','have','been','being','than','then','they','them','their','there','here','what','when','what','which','would','could','should','about','into','over','anything','something','nothing','everything','more','most','much','only','also','just','such','other','same','town','settlement','place','thing','things']);
+const ALT_STOP = new Set(['that','this','with','from','have','been','being','than','then','they','them','their','there','here','what','when','what','which','would','could','should','about','into','over','rather','anything','something','nothing','everything','more','most','much','only','also','just','such','other','same','town','settlement','place','thing','things']);
 const pairs = JSON.parse(readFileSync(PAIRS, 'utf8')); let fails = 0, withheldN = 0;
 for (const p of pairs) {
   const hits = corpus.filter(c => c.text === p.before); const r = []; const notes = []; const withheld = []; const h = hits[0];
@@ -95,7 +95,8 @@ for (const p of pairs) {
       const alts = []; const src = lower(p.before);
       for (const m of src.matchAll(CONTRAST)) { const tail = src.slice(m.index, m.index + m[0].length + 60); const stop = tail.search(/[.;,](?!\d)/); alts.push(stop > m[0].length ? tail.slice(0, stop) : tail); }
       const altWords = [...new Set(alts.join(' ').replace(/[^a-z ]/g, ' ').split(/\s+/))].filter(w => w.length >= 4 && !ALT_STOP.has(w) && !lower(p.after).includes(w));
-      const sibVariants = (blockIndex.get(`${h.file}::${h.block}`) || []).filter(e => bands.includes(e.pool));
+      // A8's letter is "a sibling band of the same BLOCK", so the TEXT scan takes every sibling pool, not only the tight same-axis set named in the refusal above.
+      const sibVariants = (blockIndex.get(`${h.file}::${h.block}`) || []).filter(e => h.siblings.includes(e.pool));
       const touch = []; for (const e of sibVariants) { const hit = altWords.filter(w => new RegExp('\\b' + w + '\\b').test(lower(e.text))); if (hit.length) touch.push(`"${e.pool}" [${e.angle}] shares ${hit.join(', ')}`); }
       if (touch.length) withheld.push('  R4-BAND-TEXT: the cut alternative names a word of a sibling band\'s own TEXT — ' + touch.slice(0, 3).join(' ; '));
     }

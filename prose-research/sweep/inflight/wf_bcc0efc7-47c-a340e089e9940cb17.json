@@ -1,0 +1,33 @@
+{
+ "role": "verifier",
+ "name": "ai",
+ "angle": null,
+ "tag": "i861-875",
+ "lines": 27,
+ "firstTs": "2026-09-06T18:25:47.904Z",
+ "lastTs": "2026-09-06T18:26:22.462Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 3
+ },
+ "urlsFetched": [
+  "https://countercraft.substack.com/p/criticism-in-the-age-of-ai",
+  "https://countercraft.substack.com/p/surfs-up-in-slop-city",
+  "https://www.pcgamer.com/gaming-industry/game-development/the-bigwigs-who-want-ai-generated-npcs-and-writing-think-youre-too-dumb-to-appreciate-a-good-story-dont-prove-them-right/",
+  "https://www.pcgamer.com/games/rpg/larians-head-writer-has-a-simple-answer-for-how-ai-generated-text-helps-development-it-doesnt-thanks-to-its-best-output-being-a-3-10-at-best-worse-than-his-worst-drafts/",
+  "https://www.pcgamer.com/ai-generated-story-and-dialogue-is-not-going-to-work-says-dragon-age-creator-david-gaider-a-lot-of-effort-is-going-to-be-wasted-on-this/",
+  "https://www.pcgamer.com/games/puzzle/ai-is-just-a-plagiarism-machine-that-makes-people-lose-their-jobs-in-the-eyes-of-the-talos-principle-3s-writers/",
+  "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing?action=raw"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "All seven fetched with 200. Now converting to text.",
+ "run": "wf_bcc0efc7-47c",
+ "agent": "a340e089e9940cb17",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/19ace14d-e63e-4584-ad77-d83bd8e2cd0f/subagents/workflows/wf_bcc0efc7-47c/agent-a340e089e9940cb17.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-ai-i861-875.json",
+  "exists": false
+ }
+}

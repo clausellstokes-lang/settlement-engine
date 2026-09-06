@@ -1,0 +1,233 @@
+{
+ "name": "ai",
+ "chunk": 18,
+ "claims": [
+  {
+   "index": 768,
+   "feature": "other: mechanism of mode collapse",
+   "claim": "West and Potts report that annotator-rated originality was slightly negatively correlated with human preference, with a mean Spearman rho of -0.08 across settings.",
+   "source": "West and Potts (Stanford/UBC), COLM 2025",
+   "url": "https://arxiv.org/pdf/2505.00047",
+   "quote": "",
+   "page": "Section 4.1, A split between preference and originality"
+  },
+  {
+   "index": 769,
+   "feature": "other: mechanism of mode collapse",
+   "claim": "West and Potts report that the pleasantness axis aligned with annotator preference at a mean Spearman rho of 0.34, more positively than originality did.",
+   "source": "West and Potts (Stanford/UBC), COLM 2025",
+   "url": "https://arxiv.org/pdf/2505.00047",
+   "quote": "",
+   "page": "Section 4.1, Pleasantness aligns with Preference"
+  },
+  {
+   "index": 770,
+   "feature": "other: mechanism of mode collapse",
+   "claim": "West and Potts say their findings support the idea that aligned poetry is easy to read but less likely to be impactful.",
+   "source": "West and Potts (Stanford/UBC), COLM 2025",
+   "url": "https://arxiv.org/pdf/2505.00047",
+   "quote": "aligned poetry is easy to read but less likely to",
+   "page": "Section 4, Creative Poetry Generation"
+  },
+  {
+   "index": 771,
+   "feature": "homogenisation",
+   "claim": "Padmakumar and He measured a statistically significant reduction in diversity when writers co-wrote with InstructGPT but not when they co-wrote with the base GPT3.",
+   "source": "Padmakumar and He (NYU), ICLR 2024",
+   "url": "https://arxiv.org/pdf/2309.05196",
+   "quote": "writing with InstructGPT (but not the GPT3) results in a",
+   "page": "Abstract"
+  },
+  {
+   "index": 772,
+   "feature": "other: mechanism of mode collapse",
+   "claim": "Padmakumar and He attribute the diversity loss mainly to InstructGPT contributing less diverse text to the co-written essays.",
+   "source": "Padmakumar and He (NYU), ICLR 2024",
+   "url": "https://arxiv.org/pdf/2309.05196",
+   "quote": "this effect is mainly attributable to InstructGPT",
+   "page": "Abstract"
+  },
+  {
+   "index": 773,
+   "feature": "counter-evidence",
+   "claim": "Padmakumar and He report that the user-contributed text remained unaffected by model collaboration.",
+   "source": "Padmakumar and He (NYU), ICLR 2024",
+   "url": "https://arxiv.org/pdf/2309.05196",
+   "quote": "text remains unaffected by model collaboration",
+   "page": "Abstract"
+  },
+  {
+   "index": 774,
+   "feature": "homogenisation",
+   "claim": "Lu et al. measured the Creativity Index of professional human authors at 66.2% higher on average than that of LLMs.",
+   "source": "Lu, Sclar, Hallinan, Mireshghallah, Liu, Han, Ettinger, Jiang, Chandu, Dziri and Choi (UW/AI2), arXiv 2410.04265 v2",
+   "url": "https://arxiv.org/pdf/2410.04265",
+   "quote": "human authors is on average 66.2% higher than that of LLMs",
+   "page": "Abstract"
+  },
+  {
+   "index": 775,
+   "feature": "other: mechanism of mode collapse",
+   "claim": "Lu et al. measured the Creativity Index of LLMs falling by an average of 30.1% after RLHF on verbatim matches.",
+   "source": "Lu, Sclar, Hallinan, Mireshghallah, Liu, Han, Ettinger, Jiang, Chandu, Dziri and Choi (UW/AI2), arXiv 2410.04265 v2",
+   "url": "https://arxiv.org/pdf/2410.04265",
+   "quote": "by an average of 30.1% after RLHF",
+   "page": "Section 4, What impact does RLHF have on model creativity?"
+  },
+  {
+   "index": 776,
+   "feature": "steerability",
+   "claim": "Lu et al. found the Creativity Index of ChatGPT differed only minimally across prompts written to encourage creativity, with no statistical significance.",
+   "source": "Lu, Sclar, Hallinan, Mireshghallah, Liu, Han, Ettinger, Jiang, Chandu, Dziri and Choi (UW/AI2), arXiv 2410.04265 v2",
+   "url": "https://arxiv.org/pdf/2410.04265",
+   "quote": "across different prompts is minimal, with no",
+   "page": "Section 4, ablation on prompt formats (p = 0.23; N = 600)"
+  },
+  {
+   "index": 777,
+   "feature": "steerability",
+   "claim": "Lu et al. found that varying the top-p decoding value changed the Creativity Index only minimally and not significantly.",
+   "source": "Lu, Sclar, Hallinan, Mireshghallah, Liu, Han, Ettinger, Jiang, Chandu, Dziri and Choi (UW/AI2), arXiv 2410.04265 v2",
+   "url": "https://arxiv.org/pdf/2410.04265",
+   "quote": "the difference was minimal and not statistically significant",
+   "page": "Section 4, ablation on decoding strategies (p = 0.23; N = 600)"
+  },
+  {
+   "index": 778,
+   "feature": "register measured",
+   "claim": "Lu et al. measured their human-versus-model creativity gap on novel snippets, modern poems and speech transcripts.",
+   "source": "Lu, Sclar, Hallinan, Mireshghallah, Liu, Han, Ettinger, Jiang, Chandu, Dziri and Choi (UW/AI2), arXiv 2410.04265 v2",
+   "url": "https://arxiv.org/pdf/2410.04265",
+   "quote": "modern poems, and speech transcripts",
+   "page": "Section 1, contributions"
+  },
+  {
+   "index": 779,
+   "feature": "other: mechanism of mode collapse",
+   "claim": "Lu et al. speculate that models learned certain linguistic styles preferred by humans during RLHF, decreasing surface-form diversity.",
+   "source": "Lu, Sclar, Hallinan, Mireshghallah, Liu, Han, Ettinger, Jiang, Chandu, Dziri and Choi (UW/AI2), arXiv 2410.04265 v2",
+   "url": "https://arxiv.org/pdf/2410.04265",
+   "quote": "learned certain linguistic styles preferred by humans during RLHF",
+   "page": "Section 4, What impact does RLHF have on model creativity?"
+  },
+  {
+   "index": 780,
+   "feature": "other: mechanism of mode collapse",
+   "claim": "Yun et al. attribute a diversity collapse in instruction-tuned LLMs to the structural tokens of the chat template rather than to decoding randomness.",
+   "source": "Yun, An, Wang, Peng and Shang (UC San Diego), arXiv 2505.18949 v1",
+   "url": "https://arxiv.org/pdf/2505.18949",
+   "quote": "",
+   "page": "Abstract and Section 1"
+  },
+  {
+   "index": 781,
+   "feature": "steerability",
+   "claim": "Yun et al. found that prompting for diversity inside a chat template still failed to close the gap with a minimal prompt.",
+   "source": "Yun, An, Wang, Peng and Shang (UC San Diego), arXiv 2505.18949 v1",
+   "url": "https://arxiv.org/pdf/2505.18949",
+   "quote": "still fails to close the gap with Simple",
+   "page": "Section 5.5, Explicit Prompts for Diversity Still Fall Short"
+  },
+  {
+   "index": 782,
+   "feature": "steerability",
+   "claim": "Yun et al. report that prompts using full chat templates gain substantially less diversity from temperature scaling than simple steer prompts do.",
+   "source": "Yun, An, Wang, Peng and Shang (UC San Diego), arXiv 2505.18949 v1",
+   "url": "https://arxiv.org/pdf/2505.18949",
+   "quote": "from temperature scaling are substantially smaller",
+   "page": "Section 5.4, Effect of Decoding Temperature on Diversity"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 768,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "originality is actually slightly negatively correlated with human preference (mean rho -0.08)",
+   "note": "arXiv 2505.00047 PDF (COLM 2025, West & Potts) fetched raw and text-extracted; Sec 4.2 'A split between preference and originality': 'originality is actually slightly negatively correlated with human preference (mean rho across settings is -0.08)'. Claim's quote field was empty; its own wording appears word for word on the page. Originality is one of three human-evaluated axes, so 'annotator-rated' holds; the paper names the Spearman rank correlation. Section label in the claim says 4.1; the passage is under 4.2 Results (minor locator drift, not a claim limb)."
+  },
+  {
+   "index": 769,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "pleasantness aligns more positively with annotator preference (mean rho = 0.34) than originality",
+   "note": "Same PDF, paragraph headed 'Pleasantness aligns with Preference': 'We find that the pleasantness axis aligns more positively with annotator preference in terms of rank (mean rho = 0.34) than originality does (mean rho = -0.08).' Quote field empty; every limb (0.34, Spearman rank, more positive than originality) is on the page verbatim."
+  },
+  {
+   "index": 770,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "our findings support the idea that aligned poetry is easy to read but less likely to be impactful",
+   "note": "Same PDF, Sec 4 opening: 'Overall, our findings support the idea that aligned poetry is easy to read but less likely to be impactful or artistically interesting (Kestenbaum, 2024).' The supplied quote 'aligned poetry is easy to read but less likely to' matches character for character."
+  },
+  {
+   "index": 771,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "writing with InstructGPT (but not the GPT3) results in a statistically significant reduction in diversity",
+   "note": "arXiv 2309.05196 PDF (ICLR 2024, Padmakumar & He) fetched raw; Abstract: 'we ... find that writing with InstructGPT (but not the GPT3) results in a statistically significant reduction in diversity.' Supplied quote matches verbatim; both limbs (significant reduction with InstructGPT; absent with base GPT3) supported."
+  },
+  {
+   "index": 772,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "this effect is mainly attributable to InstructGPT contributing less diverse text to co-written essays",
+   "note": "Same PDF, Abstract: 'We additionally find that this effect is mainly attributable to InstructGPT contributing less diverse text to co-written essays.' Supplied quote verbatim; attribution limb supported."
+  },
+  {
+   "index": 773,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In contrast, the user-contributed text remains unaffected by model collaboration",
+   "note": "Same PDF, Abstract: 'In contrast, the user-contributed text remains unaffected by model collaboration.' Supplied quote verbatim; 'user-contributed' limb present on the page."
+  },
+  {
+   "index": 774,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Creativity Index of professional human authors is on average 66.2% higher than that of LLMs",
+   "note": "arXiv 2410.04265 PDF (30MB) fetched raw and text-extracted over 50 pages; Abstract: 'the CREATIVITY INDEX of professional human authors is on average 66.2% higher than that of LLMs'. Supplied quote verbatim; repeated in Sec 1 contributions."
+  },
+  {
+   "index": 775,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Based on verbatim match alone, Creativity Index of LLMs reduces by an average of 30.1% after RLHF",
+   "note": "Same PDF, Sec 4 'What impact does RLHF have on model creativity?': 'Based on verbatim match alone, the CREATIVITY INDEX of LLMs reduces by an average of 30.1% after RLHF (p = 1.3 x 10^-12; N = 600).' Supplied quote verbatim, and the 'on verbatim matches' limb is explicit (the verbatim+semantic figure is 8.9%)."
+  },
+  {
+   "index": 776,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "difference in Creativity Index of ChatGPT across different prompts is minimal, with no statistical significance",
+   "note": "Same PDF, Sec 4 prompt-format ablation: 'We found that the difference in the CREATIVITY INDEX of ChatGPT across different prompts is minimal, with no statistical significance (p = 0.23; N = 600).' Prompts explicitly encouraged creativity ('be bold and creative', 'you are a creative writer'). p and N in the locator match the page."
+  },
+  {
+   "index": 777,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "varying p in top-p decoding: the difference was minimal and not statistically significant",
+   "note": "Same PDF, same paragraph: 'We also experimented with different decoding strategies by varying the p value in top-p decoding (Fig. 4 b). Although a higher p value resulted in a marginally higher CREATIVITY INDEX, the difference was minimal and not statistically significant (p = 0.23; N = 600).' Supplied quote verbatim; the identical p = 0.23; N = 600 in the locator is genuinely what the paper prints for both ablations."
+  },
+  {
+   "index": 778,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "gap consistent across domains - novel snippets, modern poems, and speech transcripts",
+   "note": "Same PDF, Sec 1 contributions: 'This creativity gap is consistent across various domains - novel snippets, modern poems, and speech transcripts - at both verbatim and semantic levels.' Supplied quote verbatim; the three registers are exactly those named (Sec 4 reports them as novel writing, poetry composition, speech drafting)."
+  },
+  {
+   "index": 779,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "models might have learned certain linguistic styles preferred by humans during RLHF",
+   "note": "Same PDF, Sec 4: 'We speculate that models might have learned certain linguistic styles preferred by humans during RLHF, leading to a decreased surface form diversity in its outputs.' Supplied quote verbatim; the claim preserves the paper's hedge by saying 'speculate', and the surface-form-diversity limb is on the page."
+  },
+  {
+   "index": 780,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "diversity primarily governed by presence or absence of structural tokens",
+   "note": "arXiv 2505.18949v1 PDF fetched raw. Quote field empty, and the claim is a paraphrase, so graded on substance. Abstract carries both limbs: 'output diversity is primarily governed by the presence or absence of structural tokens, with minimal formatting yielding the most diverse outputs', and '(1) diversity collapse persists even under high-temperature sampling, and (2) structural tokens in templates significantly constrain the model's output space' - i.e. not decoding randomness. Sec 5.4 confirms temperature raises diversity but templates mute the gain."
+  },
+  {
+   "index": 781,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "prompting for diversity ... still fails to close the gap with Simple Steer",
+   "note": "Same PDF, Sec 5.5 'Explicit Prompts for Diversity Still Fall Short': 'prompting for diversity does yield noticeable improvements over the default template in some cases ... but still fails to close the gap with Simple Steer.' Supplied quote verbatim; the paper itself calls Simple Steer a minimal prompt ('minimal prompts (e.g., Simple Steer)'), supporting the claim's 'minimal prompt' limb."
+  },
+  {
+   "index": 782,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "full chat templates: gains from temperature scaling are substantially smaller than simple steer",
+   "note": "Same PDF, Sec 5.4 'Effect of Decoding Temperature on Diversity': 'prompts using full chat templates exhibit a muted response: their gains from temperature scaling are substantially smaller than those under simple steer prompts.' Supplied quote verbatim; Figure 7 measures semantic diversity and entropy, supporting the 'diversity' limb."
+  }
+ ]
+}

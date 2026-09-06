@@ -1,13 +1,11 @@
-# LANE-STATUS — written 2026-09-06 14:21:51 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-06 14:27:21 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = dd5f13218 · ledger = eaf50fee7 §903: the lit default lands at 9 cars — the default preset takes the wave's class C+D (
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
-- **L-UI-MAT** dock `laneLUIMAT` HEAD dd5f13218 · 0 cars over dd5f13218 · porcelain 2 · last commits:
-    porcelain (uncommitted work in the dock — commit it FIRST after re-proving):
-       M src/lib/flagRegistry.js
-       M tests/components/handbookVoice.test.jsx
-    receipt `receipt-l-ui-mat.md` (mtime 09-06 14:20) head:
+- **L-UI-MAT** dock `laneLUIMAT` HEAD c2337220a · 1 cars over dd5f13218 · porcelain 0 · last commits:
+    c2337220a L-UI (LGT-C4-UI): two of O-13's three product flags light as a declared display-only shift — and the third is refused with the measurement that it has no reader
+    receipt `receipt-l-ui-mat.md` (mtime 09-06 14:25) head:
       | # RECEIPT — LANE L-UI-MAT — **PARTIAL** (in flight)
       | Seat: Opus 5 — Fable-unvalidated · Lane: L-UI-MAT · Chair: Fable 5.1
       | Dock: $SC/laneLUIMAT · cut at dd5f1321825b58fed2db54e9473440a310195eed (§903 CAS)
@@ -42,19 +40,21 @@ product claude/composite-r4 = dd5f13218 · ledger = eaf50fee7 §903: the lit def
       | | 1d | Lived-experience preset census 3 → 4 | **A second red hunk 1 CAUSED**: a literal three-preset roster for `traditionsEnabled`. | **LANDED** | `6ff3249b9` |
       | | 2 | O-1 birth form (lit successor id) | Mints a **PUBLIC, PERSISTED** preset identifier. Brief supplies neither id nor label. | ⛔ **REFUSED — owner-gated** | — |
       | | 3 | Class B into lit successors | Requires hunk 2's id. | ⛔ **REFUSED — gated on 2** | — |
-- **S12A-CHECKPAIR** (kit/read-only lane) receipt `receipt-s12a-checkpair.md` (mtime 09-06 14:12) head:
-      | # RECEIPT — lane S12A-CHECKPAIR (PARTIAL — in flight)
-      | ⟦Chair: Fable 5.1 · Lane: Opus 5 (S12A-CHECKPAIR) · kit-only, no repo change, no commit · started 2026-09-06⟧
+- **S12A-CHECKPAIR** (kit/read-only lane) receipt `receipt-s12a-checkpair.md` (mtime 09-06 14:27) head:
+      | # RECEIPT — lane S12A-CHECKPAIR (the two checker gaps + the crosscheck label)
+      | ⟦Chair: Fable 5.1 · Lane: Opus 5 (S12A-CHECKPAIR) · KIT-ONLY — no repo change, no dock change, no commit · 2026-09-06⟧
       | 
-      | STATUS: **PARTIAL** — header written before the first read, per the preamble. Updated after every proof.
+      | STATUS: **COMPLETE**, with ONE acceptance line REFUSED WITH MEASUREMENT (ill-1; §4 below) and ONE
+      | control blocked by a PRE-EXISTING arm outside my brief (ctl-6; §6 below).
       | 
-      | ## Scope taken
-      | 1. R4-BAND: the R4 arm sees sibling pool KEYS but not sibling BANDS (ill-2 passed a cut contrast).
-      | 2. A11: pool spread (sentence-count spread + openers) is unmechanised (ill-5 passed a semicolon split).
-      | 3. Item 2: `probe-all/crosscheck.mjs:10` mislabels 294 occurrences as "dossier 288".
+      | FENCES HELD (verified in-shell at the end of the lane):
+      | - dock `laneOSR18` HEAD `fd36f0298`, `git status --porcelain` = 0 lines — never edited, no vitest, no npm.
+      | - `check-pair.v1.mjs` written once and never touched again — `shasum 67921d6df92345ebf3fe06b924a38fc108058199`, identical to the pre-change `check-pair.mjs`.
+      | - `pairs-illustration-2026-09-05.json` NOT modified (mtime still Sep 5 21:40); `PROBE_ALL.md` NOT modified (mtime still Sep 6 08:26).
+      | - scratch confined to `$SC/s12a-scratch/`.
       | 
-      | ## Proofs (filled as they run)
-      | _(nothing proved yet)_
+      | FILES CHANGED (kit only): `prose-research/check-pair.mjs` (59 → 131 lines) · `prose-research/probe-all/crosscheck.mjs` (line 10)
+      | FILES ADDED (kit): `prose-research/check-pair.v1.mjs` · `prose-research/pairs-s12a-controls.json`
 - **R15-TAIL** (kit/read-only lane) receipt `receipt-r15-tail.md` (mtime 09-06 14:20) head:
       | # RECEIPT — lane R15-TAIL (PARTIAL)
       | ⟦Chair: Fable 5.1 · Lane: Opus 5 (R15-TAIL) · read-only on every tree · started 2026-09-06⟧
@@ -71,14 +71,14 @@ product claude/composite-r4 = dd5f13218 · ledger = eaf50fee7 §903: the lit def
       | ## Deliverables (paths)
       | - `$K/sweep/R15-tail-classification.json`
 - R15-TAIL checkpoint: no JSON yet
-- S12A: check-pair.v1.mjs present; check-pair.mjs mtime 09-05 19:10
+- S12A: check-pair.v1.mjs present; check-pair.mjs mtime 09-06 14:23
 
 ## RESEARCH SWEEPS (state = claims/verdicts/kept; verdict files; section/critic mtimes) — round tags in sweep/LAST-RUNS.json
 - **tolkien**: claims 874 · verdicts 874 (todo 0) · kept 641 · partial 214 · verdict files 43 (triage 0, regrade r4) · section 09-06 14:20 · critic 09-05 20:39
 - **martin**: claims 990 · verdicts 990 (todo 0) · kept 838 · partial 32 · verdict files 42 (triage 1, regrade none) · section 09-05 20:41 · critic 09-05 21:01
-- **dnd**: claims 872 · verdicts 364 (todo 508) · kept 329 · partial 33 · verdict files 25 (triage 0, regrade none) · section 09-05 20:56 · critic 09-05 21:12
-- **ai**: claims 940 · verdicts 774 (todo 166) · kept 646 · partial 101 · verdict files 48 (triage 1, regrade r1) · section 09-06 00:39 · critic 09-06 00:55
-- **kay**: claims 713 · verdicts 713 (todo 0) · kept 486 · partial 10 · verdict files 35 (triage 1, regrade none) · section absent · critic absent
+- **dnd**: claims 872 · verdicts 469 (todo 403) · kept 420 · partial 47 · verdict files 32 (triage 0, regrade none) · section 09-05 20:56 · critic 09-05 21:12
+- **ai**: claims 940 · verdicts 865 (todo 75) · kept 732 · partial 106 · verdict files 55 (triage 1, regrade r1) · section 09-06 00:39 · critic 09-06 00:55
+- **kay**: claims 713 · verdicts 713 (todo 0) · kept 448 · partial 48 · verdict files 36 (triage 1, regrade r5) · section absent · critic absent
 - **leguin**: claims 384 · verdicts 384 (todo 0) · kept 342 · partial 42 · verdict files 27 (triage 0, regrade r4) · section 09-06 13:47 · critic 09-06 14:20
 - **wolfe**: claims 468 · verdicts 468 (todo 0) · kept 402 · partial 66 · verdict files 34 (triage 0, regrade r4) · section 09-06 14:19 · critic absent
 - **hobb**: claims 386 · verdicts 386 (todo 0) · kept 346 · partial 40 · verdict files 27 (triage 0, regrade r4) · section 09-06 14:14 · critic absent
@@ -87,12 +87,12 @@ product claude/composite-r4 = dd5f13218 · ledger = eaf50fee7 §903: the lit def
 ## WORKFLOW RUNS of chair session 19ace14d-e63e-4584-ad77-d83bd8e2cd0f (journal lines; a run dies with the session — the FILES above are the checkpoint)
 - wf_06d7ffd7-48b: 3 journal lines, 2 agents
 - wf_146ba5ee-000: 2 journal lines, 1 agents
-- wf_328e2797-84f: 1 journal lines, 1 agents
-- wf_a9298963-fdf: 30 journal lines, 16 agents
-- wf_bcc0efc7-47c: 42 journal lines, 24 agents
-- wf_bf5b8fda-a24: 1 journal lines, 1 agents
+- wf_328e2797-84f: 3 journal lines, 2 agents
+- wf_a9298963-fdf: 42 journal lines, 24 agents
+- wf_bcc0efc7-47c: 55 journal lines, 30 agents
+- wf_bf5b8fda-a24: 3 journal lines, 2 agents
 - wf_ed535e1b-537: 19 journal lines, 10 agents
-- wf_f5b527e0-155: 21 journal lines, 11 agents
+- wf_f5b527e0-155: 23 journal lines, 12 agents
 
 ## PROCESSES: 38055 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 3.79 3.84 13.57
+load: 6.17 4.64 10.74

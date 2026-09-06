@@ -150,7 +150,8 @@
    "note": "Quote verbatim, and the believability limb is exact. But the page says meal detail 'takes a bit of thought and sometimes the pitfalls are not obvious'; the 'naturally fall into place in a tale' line sits in a different answer and refers to status-marking details (below/above the salt, dress, sleeping quarters), not to technology/geography/climate.",
    "unsupportedLimb": "that such technology, geography and climate details 'fall naturally into the tale'",
    "fromFile": "verdicts-hobb-i30-44.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 34,
@@ -167,7 +168,8 @@
    "note": "Quote verbatim on the page, but inside the interviewer's question quoting Fitz's observation, not in Hobb's own words. Hobb's answer supports the status limb ('inevitable that we judge the status of characters or people by if they are seated below or above the salt') while disclaiming that she plotted it ('you are giving me too much credit for thinking ahead').",
    "unsupportedLimb": "the sourcing of the kitchen/hall observation — the verifier's note says the quoted line sits inside the interviewer's question (quoting Fitz), not in Hobb's own words, and that Hobb disclaims having planned the detail ('you are giving me too much credit for thinking ahead').",
    "fromFile": "verdicts-hobb-regrade-r4.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 35,
@@ -184,7 +186,8 @@
    "note": "Verbatim, preceded by 'I know that he's still going to have a very limited menu.' The page's setting wording is 'a small subsistence farmer with a few chickens or pigs and some fish from the stream' rather than 'frontier'.",
    "unsupportedLimb": "\"a character on the frontier\" — the verifier's note says the page's setting wording is 'a small subsistence farmer with a few chickens or pigs and some fish from the stream'; 'frontier' is not on the page.",
    "fromFile": "verdicts-hobb-regrade-r4.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 54,
@@ -201,7 +204,8 @@
    "note": "robinhobb.com/blog/posts/41755 fetched HTTP 200; post is 'How to Write a Book When You Don't Have Time to Write', article:published_time 2022-11-03, so the November 2022 attribution holds. Quote 'researched diseases of sheep' is verbatim, and the chapter-headings-for-bridge-work limb is verbatim. What the page does NOT support is the framing: the log records start/stop times and word count ('Keep a writing log. Jot down when you start, how many words/pages you have at the beginning of your session, and then log when you stop writing'), and the sheep research and chapter headings are introduced precisely as what the day's 585-word count 'doesn't reflect' -- they are outside the log, not recorded in it.",
    "unsupportedLimb": "that the writing log records these tasks -- the post presents them as what the log's word count does NOT reflect",
    "fromFile": "verdicts-hobb-i45-59.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 70,
@@ -218,7 +222,8 @@
    "unsupportedLimb": "the desk - the page names no desk anywhere (grep for \"desk\" returns zero hits); the catalogue is the mantel, the two pens, and \"the Stones puzzle on the table\"",
    "note": "Also note the supplied quote is not word-for-word: the page reads \"the two pens at the ready\" (definite article dropped in the claim). The mantel/inventory-as-characterisation core is supported - Fitz cataloguing Lant's room as evidence of training that \"is still running beneath the surface constantly and automatically\".",
    "fromFile": "verdicts-hobb-i60-74.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 72,
@@ -252,7 +257,8 @@
    "unsupportedLimb": "compressed with 'After a time' - the essay never discusses that phrase as a device; \"After a time\" occurs exactly once on the page, inside a block quotation of Hobb's novel (Starling's kiss), with no analytic comment on it",
    "note": "The loss-as-absence limb is supported verbatim. Jeffrey O, \"Lies Are What A Man Needs Most\", 20 Jan 2025.",
    "fromFile": "verdicts-hobb-i60-74.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 82,
@@ -276,7 +282,8 @@
    "note": "Wayback raw PDF capture 20240707045408id_ (live dc.swosu.edu viewcontent.cgi returns 403 Cloudflare even with browser UA, referer and landing cookies); text extracted with pypdf. Verbatim on p.57, matching the cited page. Oliver hedges with 'Perhaps', which the claim drops; the feature named is otherwise identical, and the sentence continues 'instead of or before describing what is happening, a style we might think of as \"negative narration.\"'",
    "unsupportedLimb": "\"Oliver names ... its continual insistence\" as the most striking element — the verifier's note says Oliver hedges with 'Perhaps the most striking', which the claim drops, turning a conjecture into an assertion.",
    "fromFile": "verdicts-hobb-regrade-r4.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 94,
@@ -396,7 +403,8 @@
    "note": "Raw HTML of elliottrwi.com post (18 May 2026, by geoffreybelliott) fetched with a browser UA. Body text: \"In a yet later example, Bee travels up the Rain Wild River, noting animals and plants that seem to line up with North American flora and fauna.\" Quote exact; the paper is expressly on the Fitz and the Fool novels. Only softening: Elliott hedges \"seem to line up with\" where the claim says \"matching\".",
    "unsupportedLimb": "\"animals and plants MATCHING North American flora and fauna\" — the verifier's note says Elliott hedges 'animals and plants that seem to line up with', which the claim hardens into a match.",
    "fromFile": "verdicts-hobb-regrade-r4.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 136,
@@ -420,7 +428,8 @@
    "note": "Sciendo PDF fetched and text-extracted (19 pp.); title/author/journal/DOI match (Slavova, CAIT 20.2, 2020, DOI 10.2478/cait-2020-0012). p. 13: \"We designated 20 texts, each about one page long, taken from works by Leigh Bardugo, Charles Dickens, Neil Gaiman, Robin Hobb, Derek Landy, Brandon Sanderson, and J. R. R. Tolkien.\" Quote exact. Nuance worth carrying: these are the validation \"experimental texts\", not the main EmoBank-derived corpus.",
    "unsupportedLimb": "\"drew ITS TEXTS from a set of authors including Robin Hobb\" — the verifier's note says these are the study's 20 validation 'experimental texts', not the main EmoBank-derived corpus the study is built on.",
    "fromFile": "verdicts-hobb-regrade-r4.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 145,
@@ -468,7 +477,8 @@
    "note": "Quote is verbatim in the 'Beauty: 3/5' paragraph, so the 'usually unremarkable' limb is solid. But the reviewer never says where her effect IS located; the sentence continues only about imagery balanced against the horrific and the ugly. The second limb is the analyst's gloss, not the page's statement.",
    "unsupportedLimb": "locating her effect elsewhere than in sentence beauty",
    "fromFile": "verdicts-hobb-i180-194.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 209,
@@ -492,7 +502,8 @@
    "note": "Quote is verbatim, but the page says 'always ... when', not 'only ... when' — the converse. Page reserves the restrictive 'only' for description in the very next bullet ('She only delivers description when it's part of a conflict'), so the contrast is deliberate and the claim's 'only' is not on the page.",
    "unsupportedLimb": "the restrictive 'only' — the page asserts 'always serves up characterisation when it is immediately significant', which does not exclude characterisation at other moments",
    "fromFile": "verdicts-hobb-i195-209.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 215,
@@ -516,7 +527,8 @@
    "note": "Live page, raw. The quotation is verbatim, and the Alaskan-upbringing/food-preservation limbs are supported. But the passage is Hobb's answer to whether novelists should move to Alaska (about what a self-reliant location offers), not a statement about her fiction; she nowhere links putting food up to a survival economy in her work. The nearest real-life-to-work attribution on the page is geographic: 'There are a lot of things that come from real life into my written work, such as seismic activity, and lahars, and tidal waves.'",
    "unsupportedLimb": "as the source of the survival economy in her work",
    "fromFile": "verdicts-hobb-i210-224.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 219,
@@ -540,7 +552,8 @@
    "note": "Live page (robinhobb.com, 200 OK, raw). The list is verbatim, so the three named items are fully supported. But Hobb introduces the list by expressly bracketing the topic off - 'I'm not talking about world building here' - and then turns to what she does keep: 'But what I'm discussing here is the writer keeping the story straight' (time line and glossary). The page does not say she keeps records of coinage, religions or the calendar.",
    "unsupportedLimb": "that these are worldbuilding records she keeps",
    "fromFile": "verdicts-hobb-i210-224.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 229,
@@ -612,7 +625,8 @@
    "note": "Raw page reached. Quote exact. It is a parenthetical attached to the first-read sentence, so the 'on that first close read' limb holds. One qualifier the claim drops: the page prefixes it with 'Going full out', and adds that an 800-pager therefore takes 4 solid days 'if there is nothing else to do - but there is always something else to do, meaning this often stretches to a week and a half.'",
    "unsupportedLimb": "\"she averages about 25 pages an hour, or 200 pages a day\" — the verifier's note says the page prefixes it 'Going full out' and adds that the work 'often stretches to a week and a half'; the claim states a peak rate as an average.",
    "fromFile": "verdicts-hobb-regrade-r4.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 277,
@@ -636,7 +650,8 @@
    "note": "loopingworld.com post (22 September 2025, author Abalieno) fetched raw. The P.S. reads: 'the book is written in first person, but it’s not as much a close perspective as I expected. This early passage at page 21: “I leaned my forehead against his back and felt ill in the brackish iodine smell of the immense water…” I wrote a note there, because at that early point Fitz had no exposure to the world… I was expecting a much more closed perspective there.' Quote verbatim and every other limb (first person, less close than expected, brackish iodine smell, page 21, a perception Fitz could not have had) is supported. Graded PARTIAL only because the blogger never states Fitz's age; he says 'at that early point' and elsewhere 'Fitz, by being just a kid'.",
    "unsupportedLimb": "the narrator's age — 'six-year-old' is nowhere on the page; the blogger says only 'at that early point'",
    "fromFile": "verdicts-hobb-i270-284.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 297,
@@ -660,7 +675,8 @@
    "note": "Raw page reached (curl, browser UA, HTTP 200); the Mike Barker transcript is on the episode page itself, lines attributed [Robin]. Quote exact, in the answer beginning 'Well, again, it’s knowing the character’s background', which also carries the farmer / sailing-ship vocabulary limb verbatim. Full passage: 'I’m married to a sailor. In our house, we have a galley, we have a head, we have a deck. I happen to have like a kitchen and a bathroom and a floor.' Two wording nuances: Hobb says 'we have' / 'I happen to have' rather than explicitly assigning the nautical terms to her husband (the sailor attribution is entailed by 'I’m married to a sailor', not stated), and deck/floor is not a room — 'the same rooms' is the claim's compression, not the transcript's.",
    "unsupportedLimb": "\"the same rooms are galley, head and deck ... kitchen, bathroom and floor\" — the verifier's note says deck/floor is not a room, so 'the same rooms' is the claim's compression, not the transcript's; it also notes the nautical terms are not explicitly assigned to the husband.",
    "fromFile": "verdicts-hobb-regrade-r4.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 323,
@@ -732,7 +748,8 @@
    "note": "Raw page (HTTP 200). Quote verbatim inside the list that opens 'There are numerous plotlines running through the book.' Post is 'Book Review: The Liveship Traders by Robin Hobb', lexlingua, June 13 2012. Minor: the reviewer writes 'the book' in that sentence though the post reviews the whole trilogy; Malta's status as a daughter comes from an earlier paragraph, and the page says 'as debt repayment' without naming whose debt.",
    "unsupportedLimb": "\"the trilogy's plot lines\" and \"a FAMILY'S debt\" — the verifier's note says the reviewer writes 'the book' in that sentence, and that the page says 'as debt repayment' without naming whose debt.",
    "fromFile": "verdicts-hobb-regrade-r4.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 335,
@@ -756,7 +773,8 @@
    "note": "Raw page (HTTP 200). Quote verbatim in the section 'A couple of other thoughts on the chapter'. Note the page hedges the second limb as a disjunction the claim flattens: the unacknowledged bastard 'suggests either a failure on his part or a comment by Hobb about the ultimately flawed nature of chivalric constructions' - the chivalric-comment reading is one of two Elliott offers, not his sole reading.",
    "unsupportedLimb": "\"his fathering of an unacknowledged bastard as a comment on chivalric constructions\" — the verifier's note says Elliott offers this as one of two disjuncts ('either a failure on his part or a comment by Hobb'), which the claim flattens into his sole reading.",
    "fromFile": "verdicts-hobb-regrade-r4.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 350,
@@ -827,7 +845,8 @@
    "note": "Found in the raw tag-archive page (curl, browser UA), inside 'The Golden Fool, by Robin Hobb' (4 Feb 2013), in the final discussion paragraph ('Finally: on this re-read, I continue to be struck by the ambiguity of the narration...') immediately before the Adrenaline/Emotion ratings, exactly as the claim's page-locator says. Quote is word-for-word. Layered unreliability limb supported ('the Fitz of the past can't be trusted... should we really trust Fitz-the-narrator?', 'every level of the narration is imperfect'); missed-on-first-reading limb supported verbatim. Only unsupported detail is the reviewer's gender ('he'), which the page does not state — too trivial to downgrade.",
    "unsupportedLimb": "the reviewer's gender ('he') — the verifier's note states outright that this detail is unsupported and that the page does not state it, then waives it as 'too trivial to downgrade'.",
    "fromFile": "verdicts-hobb-regrade-r4.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 377,
@@ -850,6 +869,7 @@
    "unsupportedLimb": "that the reviewer 'dissents from the general praise of Hobb's prose' — the page never mentions any general or received praise of her prose, so no dissent is stated or implied; 'as is usually the case with Hobb' means 'across her books', not 'contrary to what others say'",
    "note": "Quote is verbatim and the rest of the claim is verbatim too: the Beauty 3/5 line is in the 'Dragon Keeper, by Robin Hobb' review (13 Apr 2014), a later Elderlings novel as the claim says (the page itself calls it 'essentially the tenth novel of the combined Realm of Elderlings cycle'). The dissent framing is the claim-writer's, not the page's; the nearest thing on the page runs the other way — in the Fool's Quest review he notes 'Literary afficionados will complain that it is not a prose poem'. Graded PARTIAL on that limb alone.",
    "fromFile": "verdicts-hobb-i375-385.json"
-  }
+  },
+  "fullSentence": true
  }
 ]

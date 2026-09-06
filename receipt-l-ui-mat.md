@@ -169,3 +169,118 @@ which is immune to the manifest and strictly stronger (it compares the tree agai
 6. The four HowToUse-rendering files (aboutSplit, howToInversion, howToUseLivingWorld, handbookClaimsParity)
    — GREEN expected; they render HowToUse but I have not confirmed none asserts voiced-exclusive copy. If one
    asserts plain essay text it will red and is part of the same declared shift.
+
+---
+# CAR A — ✅ LANDED at `c2337220a` (2 flips of 3; the third REFUSED with measurement)
+
+Files: `src/lib/flagRegistry.js`, `tests/components/handbookVoice.test.jsx` (+70/−11). No file added, renamed or deleted.
+
+## Every prediction above was CONFIRMED by execution
+| # | predicted | measured | verdict |
+|---|---|---|---|
+| 1 | engine aggregate unmoved, 0/525 | BASE `92ef697d…146d8d` == TIP `92ef697d…146d8d`; **0 of 525** rows moved | ✅ |
+| 2 | exactly 1 red: handbookVoice.test.jsx `:39` | `Tests 1 failed \| 66 passed (67)`, the failure named `flag OFF (default): the original handbook copy renders` | ✅ |
+| 3 | `:56` clarity clause stays green | green | ✅ |
+| 4 | warFaithSurfacing green (mocks the flag module) | green | ✅ |
+| 5 | warResolveSection green | green | ✅ |
+| 6 | the four HowToUse renderers green | green | ✅ |
+
+## Receipts, quoted
+- BASE UI arms (before the flip): `Test Files 7 passed (7)` · `Tests 67 passed (67)` · **EXIT=0**
+- After the flip, before the cure: `Test Files 1 failed | 6 passed (7)` · `Tests 1 failed | 66 passed (67)` · **EXIT=1**
+- After the cure: `Test Files 7 passed (7)` · `Tests 67 passed (67)` · **EXIT=0** — same 67, no test lost
+- Engine probe TIP: `ROWS=525` · `AGGREGATE=92ef697dbea663df6d72c9e584a36595b6fd52b0d4bad4ba3f38272c8b146d8d`
+- Negative control (planted field): aggregate → `d72c1ea762a02dad8601e4b2b090935cad7452d84305c2d36a19d8dfd180ed3d` ⇒ comparator sees
+- `npx eslint src/lib/flagRegistry.js tests/components/handbookVoice.test.jsx` → **EXIT=0**
+  (⚠ NO git hook runs in this repo or any dock — hooksPath unset, `.husky/_` absent — so this was run BY HAND
+   and no commit of mine was hook-processed. Saying so because "committed with the pre-commit hook" is a false claim here.)
+- `tests/lint/negativeAssertionAnchor.walker.test.js:303` baselines this file at **2** negative assertions;
+  after the cure it still has exactly 2 (`:57`, `:67`). Baseline NOT moved — no ratchet act owed.
+
+## The declared shift, in one line
+No golden, snapshot, fixture or freeze-register row moved. The shift is a TEST CONTRACT: `handbookVoice.test.jsx`'s
+OFF arm rendered bare and so pinned the DARK default; with the flag lit that arm would have become a second ON test
+that passes while proving nothing. Polarity is now explicit on every arm (OFF takes an override, ON asserts the
+shipped default), plus two vacuity guards so neither half can silently observe the same state twice.
+
+## What CAR A does NOT claim
+`warEconomySurfacing` opens a DOOR. I verified its data gate is unchanged (the premium/campaign gate is in
+`RealmInspector`, pinned by `warFaithSurfacing.test.jsx`'s "flag ON + no campaign ⇒ empty state, never war data"),
+so no entitlement moves. I did NOT visually verify the lit surfaces — no browser arm was in scope, and a mount
+walker proves a mount exists, not that a reader sees it. **A taste/visibility pass on both lit surfaces is OWED
+to the chair before the walk.**
+
+---
+# CAR B — ⛔ REFUSED WITH MEASUREMENT. It is not a dial flip; it is a build-gated wiring car
+#          sitting behind a SERVER-SIDE MIGRATION. Zero bytes written.
+
+A refusal is a result. Three independent measurements each defeat the car as briefed; any ONE would.
+
+## GROUND 1 — the dial flip is a NO-OP, so the car cannot deliver its own headline
+The brief's act is "turn on custom-content materialization for NEW worlds only". The dial's only reader is
+`newSettlementLivingContentLaw()` (`livingContentLaw.js:154-162`) and that mint **has no caller in `src/`**.
+`git grep newSettlementLivingContentLaw` = 6 hits: the definition, two prose mentions, the `mint:` STRING field in
+the create-boundary register, and two test references. The create boundary declares it in its own words —
+`densityCreateBoundary.js:204` "living content `newSettlementLivingContentLaw()`  NO CALLER ANYWHERE", and
+`GENERATION_LAWS.livingContent.wiring = 'UNWIRED'`.
+⇒ Setting the dial to 2 mints nothing into any config; a new world is still born markerless, still v1, still dormant.
+Flipping it would produce a commit that LOOKS like the lighting act and delivers none of it — the worst outcome
+available, because the next reader would believe it landed.
+
+## GROUND 2 — the wiring is BUILD-GATED and my brief forbids the build
+Re-derived, not quoted: (1) `densityCreateBoundary.js` is EAGER — inside `src/main.jsx`'s 237-module static closure;
+(2) `livingContentLaw.js` and its leaf `livingContentLawVersion.js` are both OUTSIDE it, and the leaf is listed in
+`vite.config.js` `ENGINE_SHARED_DOMAIN_EXCISIONS` (`:200-203`), excised and deliberately UNPINNED; (3) a static import
+boundary→law puts both into first paint and `tests/build/engineChunkLazy.test.js`'s orphan-excision arm convicts an
+unpinned excision the moment first paint reaches it. The excision's own note measures the alternative at engine-core
+**+214 B, 112 chunks re-hashed**. The cure the module names — mint on the lazy engine side, add `livingContentLaw.js`
+to the excisions — requires **a hashed-chunk listing diff to prove it free**, i.e. `npm run build`.
+My brief: "NO `npm run build` unless the brief names one." It names none.
+⚠ The brief said `P12-PRELOAD` is MOOT (residual 0) and told me not to build it. That is a DIFFERENT blocker — the
+preload cure (O-10a) addresses the ~1,047 B re-export cost, not the eager/lazy boundary above. Moot preload does not
+unblock this car; the chair should not read it as having done so.
+
+## GROUND 3 — ⛔ THE DECISIVE ONE. The three O-11 paths are ALL unprepared, and path 1 needs a SQL MIGRATION.
+O-11 (§882.13) SIGNED "the three persistence paths (publicSafe allowlist, accountImport id-resolution, provenance
+receiptHash)", and the brief is emphatic: they land in the SAME car or the car does not land. Measured:
+| path | file | names `customContentRoster` / `_livingContentLawVersion`? |
+|---|---|---|
+| publicSafe allowlist | `src/domain/display/publicSafe.js` | **0** |
+| accountImport | `src/lib/accountImport.js`, `importScrub.js`, `accountTransferContract.js` | **0** |
+| provenance receiptHash | `settlementContentProvenance.js`, `accountSettlementContentPortability.js` | **0** |
+
+The lit law writes ONE new top-level key, `settlement.customContentRoster`
+(`generateSettlementPipeline.js:185`). `publicSafe.js` gates the settlement ROOT by an explicit **fail-closed
+ALLOWLIST**, `PUBLIC_TOPLEVEL_KEYS` — 38 keys, and `customContentRoster` is not one of them; `customContent` appears
+nowhere in the file. So a lit roster is **silently dropped on every public / gallery / anonymous surface.**
+
+⛔⛔ AND ADMITTING IT IS NOT A CLIENT EDIT. That allowlist is DRIFT-PINNED to the SERVER by
+`tests/security/gallerySanitizeAllowlist.contract.test.js`, which parses the `public_toplevel constant text[]` array
+out of `supabase/migrations/123_money_and_public_projection_hardening.sql` and asserts the two are identical. The file's
+own header: the SERVER "remains the security boundary for stored public reads". Admitting the roster therefore requires
+**a new SQL migration against the gallery sanitizer** — a migration, and a security-boundary one.
+⇒ Owner-gated by nature (migrations / security posture), and not a lane act under any delegation. Even §882.13's
+"persisted shape is CHAIR-CLASS pre-launch" boundary does not reach it: that boundary rests on "reversible by a plain
+code revert and carries no migration", and this one IS the migration.
+
+## THE PROMISE — the STOP the brief set was checked and CANNOT fire today, and I say why rather than claiming safety
+The brief's STOP: `_livingContentLawVersion` stamped on an EXISTING world at regen. Traced:
+- **create** — `birthConfig` is the one mint; the living-content mint is UNWIRED, so nothing is stamped at birth either.
+- **read** — `resolveLivingContentLawVersion(config)` reads THE CONFIG AND NOTHING ELSE, deliberately, and never falls
+  back to the dial (`livingContentLawVersion.js:97-101` states the fallback would be "the exact PROMISE breach the
+  version gate exists to prevent"). A closed membership test, fail-closed.
+- **regenerate** — `regenSection` takes `settlement.config || config`, **settlement first**, so a markerless v1 world
+  regenerates as v1 (`densityCreateBoundary.js:52`, `settlementGenerateAction.js:113`).
+- **config hydration** — `config` lives in `configSlice.js` behind `updateConfig`, which validates against an admitted
+  key surface and drops unknown keys; nothing hydrates it from a saved settlement.
+- **geography carry-over** — `geographyLockedConfig` overlays ONLY geography keys, so it cannot smuggle the marker.
+⇒ THE PROMISE holds structurally today. But note the honest reading: **it holds because the law is unwired, not because
+the wiring was proven safe.** The STOP is un-fireable now and becomes live the day a caller exists. It must be
+re-proven by execution inside the wiring car, not inherited from this receipt.
+
+## WHAT I RECOMMEND THE WIRING CAR BE (named, not built)
+One car, in this order, and it is bigger than the brief assumed: (1) the lazy-side mint + the `livingContentLaw.js`
+excision row, with a hashed-chunk listing diff proving it free; (2) flip `GENERATION_LAWS.livingContent.wiring` to
+WIRED and state the edge cost, or the register reds by its own contract; (3) the three O-11 paths, publicSafe FIRST
+because it carries a SQL migration and therefore an owner word; (4) the dial; (5) THE PROMISE re-proven by execution
+across create/read/regen/undo/clone/import. Steps 1 and 3 each need an authority this lane does not hold.

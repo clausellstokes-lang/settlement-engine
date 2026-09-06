@@ -237,7 +237,8 @@
    "trueWording": "I try to avoid the language that wants ... his or her \"throbbing\" whatever",
    "note": "Exact word-for-word match; the only difference is quote-mark style (the page puts double quotes around \"throbbing\", the claim uses single). Context is romance-writing diction: 'That's not how I describe a lovely meal, so we're not writing something that's salacious.'",
    "fromFile": "verdicts-hobb-i15-29.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 19,
@@ -349,7 +350,8 @@
    "trueWording": "in a description of anything, I want to engage as many of them",
    "note": "lisipieces.com HTTP 200. Page carries it twice, in the reporter's summary and in the raw answer: 'I think it goes back to \"show don't tell.\" We have five senses, and in a description of anything, I want to engage as many of them as possible.' Exact substring; the five-senses and any-description limbs are both explicit.",
    "fromFile": "verdicts-hobb-i15-29.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 30,
@@ -365,7 +367,8 @@
    "trueWording": "A tale of three magic wishes works well; an infinite number of wishes is no story at all.",
    "note": "Quote verbatim in Hobb's answer on magic's limits; the page's framing is 'It is essential... that magic have limits in a story' rather than the word 'scarce', but the three-wishes/infinite-wishes contrast is exact.",
    "fromFile": "verdicts-hobb-i30-44.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 31,
@@ -413,7 +416,8 @@
    "trueWording": "What if magic were addictive? And what if the addiction was destructive or degenerative?",
    "note": "Verbatim; the page adds 'From there, almost everything developed', 'power or magic has to be paid for in some way' and 'physically degenerative', supporting the origin and the bodily-payment limbs.",
    "fromFile": "verdicts-hobb-i30-44.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 37,
@@ -461,7 +465,8 @@
    "trueWording": "Follow the story, wherever it goes. You can't turn back, you can't turn aside and woe betide any writer who suddenly decides, 'It was all just a dream.'",
    "note": "Verbatim and both limbs explicit, inside a spoiler block in the Fitz answer.",
    "fromFile": "verdicts-hobb-i30-44.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 40,
@@ -477,7 +482,8 @@
    "trueWording": "Your character has made a stupid decision, and you are stuck with it.",
    "note": "Verbatim, preceded by 'You can find yourself painted into a corner'; the consequence limb is supported by the report's 'People make mistakes, and they have to deal with the consequences.' Source is a convention panel report quoting Hobb, not a direct interview.",
    "fromFile": "verdicts-hobb-i30-44.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 41,
@@ -509,7 +515,8 @@
    "trueWording": "no one is bruised afterwards, there is no blood, no one limps or throws up in the corner",
    "note": "Verbatim; the concussion limb is on the page as 'you are likely to have a concussion. Having a good character does not protect you from physical damage.'",
    "fromFile": "verdicts-hobb-i30-44.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 43,
@@ -525,7 +532,8 @@
    "trueWording": "We become the product of what has been done to us. Or for us.",
    "note": "Verbatim, introduced by 'Characters are shaped by their experiences.'",
    "fromFile": "verdicts-hobb-i30-44.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 44,
@@ -573,7 +581,8 @@
    "trueWording": "I like primary documents when I can get them, diaries, journals and things of that sort.",
    "note": "fantasy-faction.com fetched HTTP 200. Quote verbatim. Full sentence: 'And then I began to read. I like primary documents when I can get them, diaries, journals and things of that sort. Then I like to find well researched and foot-noted books written on whatever topic I am covering.' The 'over histories' limb is supported as a RANKING, not a rejection: primary documents first ('when I can get them'), secondary works second ('Then I like to find...'). The page never uses the word 'histories'; its term is 'well researched and foot-noted books'.",
    "fromFile": "verdicts-hobb-i45-59.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 47,
@@ -589,7 +598,8 @@
    "trueWording": "For the Liveships, I wanted the smells and sensations of a sailing vessel, and so I booked some time on The Adventuress and the Lady Washington, two local tall ships.",
    "note": "fantasy-faction.com, same paragraph as 46. Quote verbatim; both limbs (booked time, tall ships, smells and sensations) explicit in one sentence.",
    "fromFile": "verdicts-hobb-i45-59.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 48,
@@ -637,7 +647,8 @@
    "trueWording": "I wrote Cloven Hooves entirely in First Person, Present Tense (something I will NEVER attempt again!)",
    "note": "scifinow.co.uk fetched HTTP 200. Byline matches: By Jodie Tyley, 30-05-12. Quote verbatim including the capitalised NEVER. The 'one novel' limb is named on the page: Cloven Hooves.",
    "fromFile": "verdicts-hobb-i45-59.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 51,
@@ -669,7 +680,8 @@
    "trueWording": "My dog ... will care far less about what is on television as opposed to how much butter is on the popcorn.",
    "note": "scifinow.co.uk, same interview. Quote verbatim. Self-interest limb explicit just before: 'react to what is going on from that character's self interest'; sensory limb explicit just after: 'I'm going to be writing from his sensory input as he smells the butter and popcorn.'",
    "fromFile": "verdicts-hobb-i45-59.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 53,
@@ -685,7 +697,8 @@
    "trueWording": "After I finished the Ships trilogy, Fitz's voice kept taking me over (even when I was writing e-mails!), so I went right on and picked up the story of Fitz and the Fool in The Tawny Man trilogy.",
    "note": "locusmag.com fetched HTTP 200; page is the December 2005 Locus interview excerpts. Quote verbatim. All three limbs in the one sentence; the page's 'Ships trilogy' is the Liveship Traders trilogy, which the same page's profile names.",
    "fromFile": "verdicts-hobb-i45-59.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 55,
@@ -733,7 +746,8 @@
    "trueWording": "Told in the first person -- an unusual approach in epic fantasy -- these books offer complete immersion in Fitz's complicated personality",
    "note": "lareviewofbooks.org fetched HTTP 200. Byline matches: By Ilana Teitelbaum, September 8, 2014. Quote verbatim; both limbs sit in the one sentence.",
    "fromFile": "verdicts-hobb-i45-59.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 58,
@@ -749,7 +763,8 @@
    "trueWording": "reminiscent of Laura Ingalls Wilder's Little House books, another milieu in which the objects of daily life are concrete and treasured",
    "note": "lareviewofbooks.org, same review. Quote verbatim. Objects limb verbatim: 'Writing tablets and books are luxuries, as are handkerchiefs, beeswax candles, and lace.' Withywoods is the subject of the passage: it opens 'her depiction of Withywoods reaches a new level of what Tolkien names \"the wonder of things\"' and closes 'Such a setting as Withywoods feels almost radical for epic fantasy.'",
    "fromFile": "verdicts-hobb-i45-59.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 59,
@@ -765,7 +780,8 @@
    "trueWording": "Rather than being of battle or intrigue, conversations turn to the uses of herbs, the seasons for crops, and fair treatment of servants.",
    "note": "lareviewofbooks.org, same review, sentence immediately after the Withywoods passage. Quote verbatim and every limb -- herbs, crop seasons, fair treatment of servants, rather than battle -- is in that one sentence.",
    "fromFile": "verdicts-hobb-i45-59.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 60,
@@ -829,7 +845,8 @@
    "trueWording": "magic and brutal violence are fuel for the psychological dimension, not the other way around",
    "note": "Verbatim on the LARB page including the \"not the other way around\" clause.",
    "fromFile": "verdicts-hobb-i60-74.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 64,
@@ -845,7 +862,8 @@
    "trueWording": "couched in the form of a painfully confessional memoir written and presented as a manuscript for future perusal",
    "note": "SFE entry \"Hobb, Robin\" (updated 6 Oct 2025), signed [JC] = John Clute, so the attribution holds; scoped to \"especially in the first volumes\", matching the claim's \"early Farseer volumes\".",
    "fromFile": "verdicts-hobb-i60-74.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 65,
@@ -877,7 +895,8 @@
    "trueWording": "How Fitz reacts to things is the story, is the point of the things that go on around him",
    "note": "Quote verbatim (only a sentence-initial capital differs). Second limb supported on the same page: the review opens with the \"4/5ths of the book was pointless filler\" charge it rejects, and later says \"The bulk of this book is probably my favourite and almost certainly the best of Hobb's novels\", alongside \"I'd be quite happy just reading three books of the man sitting around, hanging out, having tea with people, deciding which clothes to buy\".",
    "fromFile": "verdicts-hobb-i60-74.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 67,
@@ -893,7 +912,8 @@
    "trueWording": "even when Fitz is calm and happy, he is having to work hard at being calm and happy",
    "note": "Verbatim; the page frames it as \"There is a strong feeling that ...\", which supports the claim's \"the prose shows him working hard to stay so\".",
    "fromFile": "verdicts-hobb-i60-74.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 68,
@@ -909,7 +929,8 @@
    "trueWording": "His prose feels natural because it is intimate, but intimacy should not be mistaken for simplicity",
    "note": "Verbatim, and the next sentence supplies the second limb: \"The clarity with which he renders character, politics, landscape, memory, and moral conflict is itself evidence of extraordinary literary intelligence.\"",
    "fromFile": "verdicts-hobb-i60-74.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 69,
@@ -941,7 +962,8 @@
    "trueWording": "her characters are so real and so engaging that you can't help but to be fascinated by them, even when they are performing the most routine tasks",
    "note": "Verbatim on the Hippogriff's Aerie Fool's Assassin review; the page continues \"or having pages of conversations\".",
    "fromFile": "verdicts-hobb-i60-74.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 74,
@@ -957,7 +979,8 @@
    "trueWording": "Hobb never shies away from the exhausting reality of traveling, hunting, dealing with other people",
    "note": "Verbatim (page continues \"-- and dealing with dragons\"). Molly Templeton, Reactor, published 7 June 2019, originally May 2017; the sentence sits in the Rain Wild Chronicles section but is phrased as a general statement about Hobb.",
    "fromFile": "verdicts-hobb-i60-74.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 75,
@@ -1012,7 +1035,8 @@
    "trueWording": "Each chapter of the novel begins with a lengthy epigraph selected from a history of the kingdom, the Six Duchies",
    "note": "Wayback raw PDF capture 20240707045408id_ (live dc.swosu.edu viewcontent.cgi returns 403 Cloudflare even with browser UA, referer and landing cookies); text extracted with pypdf. Quote verbatim on journal p.45 (PDF p.4), matching the cited page. Every limb supported: 'Each chapter', 'lengthy epigraph', 'selected from a history of the kingdom, the Six Duchies, also written by Fitz' (in-world).",
    "fromFile": "verdicts-hobb-i75-89.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 78,
@@ -1058,7 +1082,8 @@
    "trueWording": "feels more authoritative and satisfying than the dry, impersonal, but objective history beginning the chapter",
    "note": "Wayback raw PDF capture 20240707045408id_ (live dc.swosu.edu viewcontent.cgi returns 403 Cloudflare even with browser UA, referer and landing cookies); text extracted with pypdf. Verbatim on p.57 (PDF p.16), matching the cited page: 'The \"marginalia\" here (that is, the main text) feels more authoritative and satisfying than the dry, impersonal, but objective history beginning the chapter, as it allows the reader to more fully imagine her.' Both limbs on the page; note Oliver adds 'but objective', and makes the assessment at the chapter-13 instance.",
    "fromFile": "verdicts-hobb-i75-89.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 80,
@@ -1127,7 +1152,8 @@
    "trueWording": "in sentences that start by telling what a character is not doing or feeling",
    "note": "Wayback raw PDF capture 20240707045408id_ (live dc.swosu.edu viewcontent.cgi returns 403 Cloudflare even with browser UA, referer and landing cookies); text extracted with pypdf. Verbatim on p.57, matching the cited page: 'a style we might think of as \"negative narration.\" This manifests not just in double negatives (of which there are many) but in sentences that start by telling what a character is not doing or feeling.' Both limbs — the label and the mechanism — on the page.",
    "fromFile": "verdicts-hobb-i75-89.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 84,
@@ -1150,7 +1176,8 @@
    "trueWording": "particularly frequent in the early chapters, where scarcely a page goes by without obvious examples",
    "note": "Wayback raw PDF capture 20240707045408id_ (live dc.swosu.edu viewcontent.cgi returns 403 Cloudflare even with browser UA, referer and landing cookies); text extracted with pypdf. Verbatim on p.57, matching the cited page, followed by quoted examples from pp.6, 7 and 9 of the novel.",
    "fromFile": "verdicts-hobb-i75-89.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 85,
@@ -1173,7 +1200,8 @@
    "trueWording": "While the frequency of such negative constructions lessens as the novel continues, it remains one of the predominant modes throughout.",
    "note": "Wayback raw PDF capture 20240707045408id_ (live dc.swosu.edu viewcontent.cgi returns 403 Cloudflare even with browser UA, referer and landing cookies); text extracted with pypdf. Verbatim on p.57, matching the cited page. Both limbs — the falling-off and the persistence — in one sentence.",
    "fromFile": "verdicts-hobb-i75-89.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 86,
@@ -1219,7 +1247,8 @@
    "trueWording": "Fitz marks his shift from a discourse of history to a discourse of fantasy with a shift in style.",
    "note": "Wayback raw PDF capture 20240707045408id_ (live dc.swosu.edu viewcontent.cgi returns 403 Cloudflare even with browser UA, referer and landing cookies); text extracted with pypdf. Verbatim on p.60 (PDF p.19), matching the cited page: 'Thus, at this key moment in Fitz's development, Fitz marks his shift from a discourse of history to a discourse of fantasy with a shift in style.'",
    "fromFile": "verdicts-hobb-i75-89.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 88,
@@ -1242,7 +1271,8 @@
    "trueWording": "the epigraphs become increasingly infected by the style of imaginative fiction in place of the style of scholarly discourse",
    "note": "Wayback raw PDF capture 20240707045408id_ (live dc.swosu.edu viewcontent.cgi returns 403 Cloudflare even with browser UA, referer and landing cookies); text extracted with pypdf. Verbatim on p.62 (PDF p.21), matching the cited page: 'This seeming shift late in the novel ... Even as the narrator starts to shift the burden of constructing events to the reader, the epigraphs become increasingly infected by the style of imaginative fiction in place of the style of scholarly discourse.' pypdf renders it 'imag inative' — a line-break extraction artifact, not the page's text; whitespace-insensitive matching confirms the run.",
    "fromFile": "verdicts-hobb-i75-89.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 89,
@@ -1311,7 +1341,8 @@
    "trueWording": "this entire lengthy section is marked by the absence of a key detail",
    "note": "Mythlore p.61. 'Thus, this entire lengthy section of narrative is marked by the absence of a key detail-Galen's tampering with Fitz's mind-a key detail that is nearly always present to the reader but never overtly stated.' The seventy-page limb is supported on the same page: 'Then Verity finally explicates what has been happening for the past 70 pages of the novel.' Both sentences refer to the same 'misted' section.",
    "fromFile": "verdicts-hobb-i90-104.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 92,
@@ -1334,7 +1365,8 @@
    "trueWording": "we are told what they are not doing, but it only leaves implied what they are doing",
    "note": "Mythlore p.61. Context: the Skill breakthrough with Verity - 'And in that moment I realized we were not speaking aloud, and sat bolt upright and looked at him' (338). Oliver: 'What is striking about this sentence is that it does not explain what the breakthrough is: we are told what they are not doing, but it only leaves implied what they are doing (speaking using the Skill).' Both men (Fitz and Verity) and the magic-returns limb are supported.",
    "fromFile": "verdicts-hobb-i90-104.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 93,
@@ -1357,7 +1389,8 @@
    "trueWording": "training the reader to see what is not there, to imagine the connections",
    "note": "Mythlore p.62. 'Thus, we could see this entire section of the novel as training the reader to see what is not there, to imagine the connections, the same mental process required of the historian constructing a narrative of the past based on evidence.' 'Supply the connections' = 'imagine the connections'.",
    "fromFile": "verdicts-hobb-i90-104.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 95,
@@ -1426,7 +1459,8 @@
    "trueWording": "Even without reading the texts of the epigraphs, it is possible to determine",
    "note": "Ekman & Taylor p.253. Cherryh 'Gate of Ivrel' example, three source lines only: 'Even without reading the texts of the epigraphs, it is possible to determine that the secondary world contains a conflict between science and tradition, suggesting that mix of genres sometimes referred to as \"science fantasy.\"' Generalized in the next sentence: 'Regardless of how the text portrays the world, the epigraph points out the generic context in which the world should be constructed for analysis.'",
    "fromFile": "verdicts-hobb-i90-104.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 99,
@@ -1449,7 +1483,8 @@
    "trueWording": "the writing suggests a philosophical treatise and thus hints at a form of society",
    "note": "Ekman & Taylor p.252, on the Bakker epigraph (Ajencis, Discourse on War). 'Through linguistic markers such as \"further argument,\" \"supposition,\" and \"discourse,\" the writing suggests a philosophical treatise and thus hints at a form of society in which such treatises are written.' All three lexical markers verbatim; 'linguistic markers' rather than 'lexical markers'.",
    "fromFile": "verdicts-hobb-i90-104.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 100,
@@ -1472,7 +1507,8 @@
    "trueWording": "The style is that of a scholarly treatise that emerges from within the fictional world",
    "note": "Ekman & Taylor p.256, 'Function Three: Adding Perspectives', on McKillip's The Bards of Bone Plain chapter-two epigraph. Continues: 'The text sets itself up as an authoritative source while at the same time suggesting that the poems, ballads, and tales by or about Nairn do not convey a true picture.' Both limbs verbatim.",
    "fromFile": "verdicts-hobb-i90-104.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 101,
@@ -1495,7 +1531,8 @@
    "trueWording": "in which the epigraph is a more objective account ... the main text is more biased",
    "note": "Ekman & Taylor p.256. 'Epigraphs can determine the reliability of the main text (or its narrator) by either implying that the epigraph is the less reliable retelling (a ballad, prophesy, or tale for instance) and the main text is a more reliable version of events; or vice versa, in which the epigraph is a more objective account (for instance a scholarly or even scientific text) and the main text is more biased.'",
    "fromFile": "verdicts-hobb-i90-104.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 102,
@@ -1518,7 +1555,8 @@
    "trueWording": "mimicking text genres that are not fiction, such as the research paper, the parliamentary debate, the historical treatise",
    "note": "Ekman & Taylor p.258. 'The epigraphs are parts of the work of fiction while mimicking text genres that are not fiction, such as the research paper, the parliamentary debate, the historical treatise. Their many voices can thus rely on both polyphony and mimicry to build a more complex world.' Sentence is scoped to McKillip's, Fforde's and Erikson's epigraphs, but the mimicry mechanism is stated generally.",
    "fromFile": "verdicts-hobb-i90-104.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 103,
@@ -1541,7 +1579,8 @@
    "trueWording": "Ship of Magic (1998) is a pure figural narrative formally similar to Martin's",
    "note": "Lagus thesis, helda.helsinki.fi PDF fetched live (200, 143pp). Printed p.125 (PDF page 127): 'By comparison, Robin Hobb's (1952-) Ship of Magic (1998) is a pure figural narrative formally similar to Martin's. Its internal focalization is immersive and often pronounced, and its strong figurality is on a par with the figurality in Martin and Donaldson.' Metadata correction only, no bearing on the claim: p.125 sits in section 4.3 ('From the 1980s to the 2000s', pp.116-131), not ch. 5 (Conclusion, p.134).",
    "fromFile": "verdicts-hobb-i90-104.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 104,
@@ -1909,7 +1948,8 @@
    "trueWording": "Twenty approximately one-page-long passages of text were selected... taken from works by Leigh Bardugo, Charles Dickens, Neil Gaiman, Robin Hobb, Derek Landy, Brandon Sanderson, and J. R. R. Tolkien.",
    "note": "Raw journal PDF galley reached from the cited article record (www.ijcrsee.com/index.php/ijcrsee/article/download/238/290/1039); quote is verbatim in section 2 MATERIALS AND METHODS, p.44. The author list contains exactly seven names and includes Robin Hobb, so the 'seven authors including Robin Hobb' limb is confirmed by count. Note: the landing page at the cited URL carries only the abstract; the methods sentence is in that record's own full-text galley.",
    "fromFile": "verdicts-hobb-i120-134.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 121,
@@ -1932,7 +1972,8 @@
    "trueWording": "...selections of the text perform particular expository and critiquing functions: establishing verisimilitude, criticizing social systems, denoting privilege and relative power, enabling and restricting intimate issues, and interrogating nations and governments.",
    "note": "Quote verbatim in the Shropshire entry. The list holds exactly five functions, confirming the 'five functions' limb; the entry also states 'In a master's thesis in geography' and 'The Importance of Geographic Realism in Genre Fiction: How Landscape in Robin Hobb's Assassin's Quest Inspires Social Criticism. 2019. Oklahoma SU, MS thesis', and the page is signed 'Geoffrey B. Elliott 18 May 2026'. 'Codes' matches the entry's methodology gloss ('selection of passages for study, and coding').",
    "fromFile": "verdicts-hobb-i120-134.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 122,
@@ -1955,7 +1996,8 @@
    "trueWording": "Crane and Fletcher address the Liveship Traders novels' figuration of their milieu as ... inverting the usual depiction of land as busy and sea as empty.",
    "note": "Quote verbatim in the Crane and Fletcher entry (the claim's quote field is a truncation of the same sentence, which continues 'as empty'). Every limb supported.",
    "fromFile": "verdicts-hobb-i120-134.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 123,
@@ -1978,7 +2020,8 @@
    "trueWording": "Hobb is presented as offering an example of the portal-quest fantasy in the Elderlings corpus.",
    "note": "Quote verbatim at the close of the Mendlesohn, Rhetorics of Fantasy (2008) entry, whose body sets out her four-category taxonomy including 'portal-quest'. Source citation matches the entry ('Middletown, CT: Wesleyan UP, 2008').",
    "fromFile": "verdicts-hobb-i120-134.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 124,
@@ -2001,7 +2044,8 @@
    "trueWording": "the onymic space of the Six Duchies is meticulously constructed upon the fundamental principle of national-cultural contrast",
    "note": "Quote verbatim in the English abstract of the PDF (p.372). Authors, affiliations, issue 5(47) 2026 and pages 372-381 all match the cited source; the PDF's running title misspells the series as 'THE WORLD OF THE ELDERING', which does not affect the claim.",
    "fromFile": "verdicts-hobb-i120-134.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 125,
@@ -2024,7 +2068,8 @@
    "trueWording": "representatives of neighboring nations ... are assigned names characterized by phonetic foreignness and an absolute lack of transparent semantics for the reader (e.g., Eyod, Rurisk, Kettricken)",
    "note": "Quote verbatim in the abstract, and the three exemplars named in the claim are the abstract's own three exemplars. Every limb supported.",
    "fromFile": "verdicts-hobb-i120-134.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 126,
@@ -2047,7 +2092,8 @@
    "trueWording": "socially significant anthroponyms represent the most dominant and structurally diverse group, which perfectly mirrors the early medieval setting ... where a person's social mask, status, and destiny are inextricably linked",
    "note": "Quote verbatim in the abstract. Disclosure on one limb: the page says 'the most dominant and structurally diverse group'; the claim renders that as 'the largest group'. In context (a classification into three functional-semantic subgroups, after Belei) 'most dominant' carries the sense of predominant/largest, so the limb is supported, but the source does not use a size word.",
    "fromFile": "verdicts-hobb-i120-134.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 127,
@@ -2070,7 +2116,8 @@
    "trueWording": "informational-evaluative charactonyms, including Shrewd, Desire, and Patience, are investigated as tools of direct psychological characterization that explicitly encapsulate the core inner nature",
    "note": "Quote verbatim in the abstract, with exactly the three names the claim lists; 'carried by the name itself' is supported by 'explicitly encapsulate the core inner nature, behavioral patterns, and moral capacities of the characters'.",
    "fromFile": "verdicts-hobb-i120-134.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 128,
@@ -2093,7 +2140,8 @@
    "trueWording": "Mother's description comes from other characters - chiefly Kennit and Paragon - and they always refer to her as Mother, never by her name",
    "note": "Quote verbatim in section 3 'Violence, Trauma, and Naming' of the PDF, exactly the section the claim cites. The second limb (her name is never given) is separately supported two sentences later: 'As Mother's name is not known, neither are her personal or other identities'.",
    "fromFile": "verdicts-hobb-i120-134.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 129,
@@ -2116,7 +2164,8 @@
    "trueWording": "the novella Words like Coins, serves as a commentary on the craft of writing, noting the perils in sloppiness of language",
    "note": "Quote verbatim in the first body paragraph of the blog post (the claim's 'para. 2' counts the students' preamble as para. 1). Both limbs - commentary on the craft of writing, and the warning against sloppiness - are in the same sentence.",
    "fromFile": "verdicts-hobb-i120-134.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 130,
@@ -2139,7 +2188,8 @@
    "trueWording": "Linguistic precision and frugality are repeatedly emphasized by the pecksie, and their lack repudiated.",
    "note": "Quote verbatim. Minor wording gap, not a limb failure: the sentence has the singular 'the pecksie' (the one bound to Mirrifen) where the claim writes 'the pecksies'; the post elsewhere generalises ('Hobb's pecksies themselves are much concerned with the effects of language, and therefore with its exactitude').",
    "fromFile": "verdicts-hobb-i120-134.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 131,
@@ -2162,7 +2212,8 @@
    "trueWording": "They are therefore at pains to ensure that their utterances are exacting, giving no more than is necessary to be clear so as to minimize the possibility of unintended consequences.",
    "note": "Quote verbatim, and every limb of the claim (utterances kept exact; no more than needed to be clear; to limit unintended consequences) sits in that one sentence.",
    "fromFile": "verdicts-hobb-i120-134.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 132,
@@ -2185,7 +2236,8 @@
    "trueWording": "How it goes is poorly, and all as a result of Mirrifen's lack of specificity.",
    "note": "Quote verbatim. Supporting limbs are in the same passage: 'The primary textual example ... is in the birth of Jami's child'; Mirrifen (named earlier as 'the protagonist') builds the warding charm from 'person' and 'small' because 'She didn't know the charm symbol for pecksie'; the delivery leaves Jami 'weakened almost to the point of death', and 'it was through her lack of specificity in language that the near-fatality of the delivery came to be'.",
    "fromFile": "verdicts-hobb-i120-134.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 133,
@@ -2208,7 +2260,8 @@
    "trueWording": "According to scholar Sylvia Borowska-Szerszun, Martin's work focuses on the brutality and violence of its realism, while Hobb's narrative focuses more on the psychological aspects of trauma, including that arising from violence and rape.",
    "note": "Quote verbatim in the Style section of the live Wikipedia article; the sentence cites Borowska-Szerszun (2019) p.11, and the Sources list gives Extrapolation 60(1): 1-22, doi 10.3828/extr.2019.2, matching the claim's citation. Wikipedia spells the forename 'Sylvia' where the journal record has 'Sylwia'.",
    "fromFile": "verdicts-hobb-i120-134.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 137,
@@ -2231,7 +2284,8 @@
    "trueWording": "The first chapter's introduction almost reads like an encyclopaedia about the Six Duchies",
    "note": "Utrecht thesis PDF fetched and extracted (45 pp.); title page confirms \"Translating Robin Hobb's Assassin's Apprentice\", BA Thesis, Utrecht University, Iris Duits, April 2012. Text: \"In the introduction of the first chapter, this is not yet a major problem, since this part almost reads like an encyclopaedia, offering factual information on the Six Duchies.\" Quote exact, all limbs supported. Locator note: the passage sits on printed p. 15 in ch. 6 (Translation criticism - Translation strategies), not ch. 3 as the claim's page field says.",
    "fromFile": "verdicts-hobb-i135-149.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 138,
@@ -2392,7 +2446,8 @@
    "trueWording": "Native-speaker utterances, among them a selection from Hobb's Royal Assassin, the only novel referenced",
    "note": "Raw HTML of elliottrwi.com/research/hobb-bibliography/ (\"The Fedwren Project: A Robin Hobb Annotated Bibliography\") fetched with a browser UA. Bruening entry cites NLLT vol. 32, no. 2, May 2014, pp. 363-422, matching the claim, and the annotation reads: \"...utterances by native speakers of English (among which is a selection from Hobb's Royal Assassin, notably the only novel referenced) do not make the distinctions that theorists posit...\" Quote exact; every limb supported.",
    "fromFile": "verdicts-hobb-i135-149.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 146,
@@ -2438,7 +2493,8 @@
    "trueWording": "Le Guin and Hobb have in later works begun to question the male/king package",
    "note": "UTS PDF (02whole.pdf) fetched and extracted (86 pp.); running head confirms \"Kings. What a good idea. Pamela Freeman\", printed p. 42: \"Other women writers have kept the whole male/king package, although some, like Ursula Le Guin and Robin Hobb, have in their later works begun to question this. (See, for example, the difference in attitudes to monarchy between Hobb's Assassin's Apprentice series, 1996-1998, and her Liveship Traders books, 1999-2001.)\" Quote exact; every limb, including the Farseer/Liveship citation, is on the page.",
    "fromFile": "verdicts-hobb-i135-149.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 148,
@@ -2461,7 +2517,8 @@
    "trueWording": "40 novels - 20 classic, 20 modern; first chapter of each manually annotated",
    "note": "peerj.com returned Cloudflare 403 to both a plain and a browser-UA request (and to the .pdf); reached the raw page through the Wayback capture https://web.archive.org/web/20260208122918id_/https://peerj.com/articles/cs-189/ , which carries the full text. \"20 classic and 20 modern novels\" appears verbatim several times, incl. contribution (4) \"an annotated gold standard dataset with entities and coreferences of 20 classic and 20 modern novels\"; \"In each of these novels, the first chapter is manually annotated with named entities and coreference relations\"; Table A2 lists Assassin's Apprentice, Robin Hobb (1995) under Modern.",
    "fromFile": "verdicts-hobb-i135-149.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 149,
@@ -2599,7 +2656,8 @@
    "trueWording": "A tiny village isn't going to have an artisan who makes his living specializing in doorknockers",
    "note": "Raw page, On writing Q12: 'A tiny village isn't going to have an artisan who makes his living specializing in doorknockers.' Quote verbatim as a prefix of that sentence; offered as an example of the foundation a writer must get under the writing.",
    "fromFile": "verdicts-hobb-i150-164.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 155,
@@ -2668,7 +2726,8 @@
    "trueWording": "Climb into a character, and suddenly even the villain is wondering what is for dinner tonight",
    "note": "Raw page, On writing Q10: quote verbatim. The 'inside a villain's skin' limb is supported twice in the same paragraph - 'Climb into a character, and suddenly even the villain is wondering...' and 'If you put on the villain's skin, you have to love him or at least understand him.'",
    "fromFile": "verdicts-hobb-i150-164.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 158,
@@ -2737,7 +2796,8 @@
    "trueWording": "To me, the first person voice is the natural voice for the story teller",
    "note": "Raw page (aidanmoher.com, HTTP 200, curl with browser UA), Q on what draws her to first person: verbatim, prefixed on the page by the hedge 'To me,'.",
    "fromFile": "verdicts-hobb-i150-164.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 161,
@@ -2783,7 +2843,8 @@
    "trueWording": "When I write as Hobb, I tend to write longer, more detailed stories",
    "note": "Raw page, Q on the two pen names: verbatim, and the page attributes it explicitly to writing as Hobb ('When I write as Hobb, ...'), followed by 'Often they are more emotionally complex as well.'",
    "fromFile": "verdicts-hobb-i150-164.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 163,
@@ -2852,7 +2913,8 @@
    "trueWording": "As the reader experiences the story, he drags that same baggage through the reading.",
    "note": "Raw page (curl, browser UA, HTTP 200) carries the quote word for word. Full context: characters 'acquire baggage' when hurt physically or emotionally, and the reader drags that same baggage through the reading. Both limbs (reader; character's accumulated baggage) supported.",
    "fromFile": "verdicts-hobb-i165-179.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 166,
@@ -2875,7 +2937,8 @@
    "trueWording": "I often had to trust that the reader would make a leap and connect events even if Fitz was not seeing the connection.",
    "note": "Quote verbatim on the raw page. The 'leap the narrator did not make' limb is explicit: 'even if Fitz was not seeing the connection' — Fitz is the first-person narrator, and the answer is the first-person-limits question.",
    "fromFile": "verdicts-hobb-i165-179.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 167,
@@ -2898,7 +2961,8 @@
    "trueWording": "In Farseer, I coped with that by having little prologues at the beginning of each chapter that gave the reader additional information.",
    "note": "Quote verbatim. Every limb supported: coping with first-person limitation ('the writer is limited to telling the reader what that character knows at that moment'), in Farseer, chapter-opening prologues, additional information.",
    "fromFile": "verdicts-hobb-i165-179.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 168,
@@ -2921,7 +2985,8 @@
    "trueWording": "There is a fairly clean dividing line between the Robin Hobb voice and the Megan Lindholm voice in my writing.",
    "note": "Quote verbatim in the first interview excerpt on the raw Locus Online page (December 2005 issue thread). Claim's 'in her writing' is the page's 'in my writing'.",
    "fromFile": "verdicts-hobb-i165-179.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 169,
@@ -2967,7 +3032,8 @@
    "trueWording": "For me, that means putting in details and incidents that may not directly move the plot forward.",
    "note": "Quote verbatim in the characterization answer; the antecedent of 'that' is 'the key to strong characterization is taking the time to develop the character', so the 'characterisation means' limb holds.",
    "fromFile": "verdicts-hobb-i165-179.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 171,
@@ -2990,7 +3056,8 @@
    "trueWording": "The pacing at the beginning of any of my books is usually a lot slower than towards the end of the book.",
    "note": "Quote verbatim; the claim's completion ('a lot slower than towards the end') is the page's own continuation of the same sentence.",
    "fromFile": "verdicts-hobb-i165-179.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 172,
@@ -3059,7 +3126,8 @@
    "trueWording": "when I propelled the reader directly into it, it lacked the impact and significance I wanted it to have",
    "note": "Quote verbatim. The 'without building up to it' limb is the preceding clause on the page: 'when I didn't slow down and construct the ramps up to that exciting scene'.",
    "fromFile": "verdicts-hobb-i165-179.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 175,
@@ -3082,7 +3150,8 @@
    "trueWording": "For me, the story is really about how the events affect the characters rather than about the events themselves.",
    "note": "Quote verbatim in answer 1 of the Pat's Fantasy Hotlist Q&A (posted Monday, July 11, 2005).",
    "fromFile": "verdicts-hobb-i165-179.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 176,
@@ -3105,7 +3174,8 @@
    "trueWording": "With every sentence, you narrow an infinite number of possibilities down to a single track.",
    "note": "Quote verbatim in answer 2; the 'down to a single track' limb is the page's own sentence ending.",
    "fromFile": "verdicts-hobb-i165-179.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 177,
@@ -3151,7 +3221,8 @@
    "trueWording": "So with your characters, it's a choice of vocabulary, it's a way of seeing things.",
    "note": "Quote verbatim, attributed to [Robin] in the same transcript, and framed as how to differentiate characters (followed by the read-your-dialogue double-check).",
    "fromFile": "verdicts-hobb-i165-179.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 179,
@@ -3174,7 +3245,8 @@
    "trueWording": "I'm married to a sailor. In our house, we have a galley, we have a head, we have a deck. I happen to have like a kitchen and a bathroom and a floor.",
    "note": "Quote verbatim. All limbs supported: her own household, occupational vocabulary (farmer vs sailing-ship background), and the same rooms under two names — the page adds 'But it's all in the same house.'",
    "fromFile": "verdicts-hobb-i165-179.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 180,
@@ -3197,7 +3269,8 @@
    "trueWording": "you should be able to tell who is talking without all the little clues like Joe said and Samantha replied",
    "note": "Robin Hobb, verbatim in the transcript: 'If you want to do a double check, read your dialogue... you should be able to tell who is talking without all the little clues like Joe said and Samantha replied. If you can't tell who's speaking, then maybe you need to do some tweaking on it.' The 'little clues like Joe said and Samantha replied' are exactly the attribution tags, and 'do a double check' is the test framing. Every limb supported.",
    "fromFile": "verdicts-hobb-i180-194.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 181,
@@ -3220,7 +3293,8 @@
    "trueWording": "if you are an assassin and you walk into the room and there's three people there, what he notices is going to be very different from the child character who runs in the room",
    "note": "Spoken by [Robin] verbatim: '...what he notices is going to be very different from the child character who runs in the room and is totally fixed on finding the toy they left there earlier and the big people standing around talking don't matter at all.' Same room, differing notice - fully supported.",
    "fromFile": "verdicts-hobb-i180-194.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 182,
@@ -3243,7 +3317,8 @@
    "trueWording": "All of these details that fill in around the character build the world at the same time",
    "note": "Spoken by [Robin] verbatim, and the enumerated details immediately preceding are biographical: 'What sort of a family did you grow up in? What did your father and your mother do for a living? Are you in a small town? ... Are you wealthy? Are you poor?' Every limb supported.",
    "fromFile": "verdicts-hobb-i180-194.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 183,
@@ -3266,7 +3341,8 @@
    "trueWording": "Its first paragraph is an excerpt from a piece being composed within the milieu, not unlike the Encyclopedia Galactica from Asimov's Foundation novels",
    "note": "Elliott, of Assassin's Apprentice: 'The text of the novel opens with a chapter titled \"The Earliest History.\" Its first paragraph is an excerpt from a piece being composed within the milieu...' Quote verbatim; 'within the milieu' = inside the story's own world.",
    "fromFile": "verdicts-hobb-i180-194.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 184,
@@ -3289,7 +3365,8 @@
    "trueWording": "I've noted before the Asimovian move of grounding chapters in in-milieu reference materials, something I appreciate",
    "note": "Verbatim in the commentary paragraph of Entry 226 (Fool's Errand, Chapter 6): 'I am taken by the reminiscence with which the chapter opens. I've noted before the Asimovian move of grounding chapters in in-milieu reference materials...' Every limb supported.",
    "fromFile": "verdicts-hobb-i180-194.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 185,
@@ -3312,7 +3389,8 @@
    "trueWording": "the opening passage is particularly compelling, the piecing-together of disparate and not always complete sources being something with which, as a medievalist, I am familiar",
    "note": "Verbatim in the same commentary paragraph, and the medievalist limb is Elliott's own words in the same sentence. The chapter opens with Fitz's 'efforts at creating a coherent history of his nation', so the passage does enact the piecing-together.",
    "fromFile": "verdicts-hobb-i180-194.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 186,
@@ -3335,7 +3413,8 @@
    "trueWording": "it takes it from the mythic realm and fleshes it out with motivations and characters and consequences until it looks like an entirely realistic plot point",
    "note": "Review body: the big moment is 'lifted straight out of the fairy tale/epic fantasy Big Book of Cliches... What it is is, in a way, a deconstruction of the myth: it takes it from the mythic realm and fleshes it out...' Cliched-plot-point, fleshing-out, and realistic-result limbs all supported.",
    "fromFile": "verdicts-hobb-i180-194.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 187,
@@ -3358,7 +3437,8 @@
    "trueWording": "it gives us a standard heroic plot, but it tells the story from an unexpected, peripheral perspective, and in the process gives us, as it were, the realistic inner workings of the myth",
    "note": "Verbatim in the review body, one sentence carrying every limb of the claim.",
    "fromFile": "verdicts-hobb-i180-194.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 188,
@@ -3381,7 +3461,8 @@
    "trueWording": "Most epic fantasy doesn't spend pages musing on the potential hurt feelings of unsympathetic former lovers or worrying about the apprentice fees for dependants",
    "note": "Verbatim in the Originality: 4/5 paragraph, exactly as the claim's page hint says. The 'most epic fantasy does not spend pages on' limb is the same sentence's subject.",
    "fromFile": "verdicts-hobb-i180-194.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 189,
@@ -3404,7 +3485,8 @@
    "trueWording": "This is the sort of book that's determined to remind us ... that motivations are personal, and that consequences will also be personal",
    "note": "Verbatim, closing the Originality: 4/5 paragraph. 'determined to remind us' carries the claim's 'insists'.",
    "fromFile": "verdicts-hobb-i180-194.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 190,
@@ -3427,7 +3509,8 @@
    "trueWording": "determined to remind us that the fantasy only matters because of the reality in its shadow",
    "note": "Verbatim in the Originality: 4/5 paragraph; 'remind us' is the reviewer's own verb, matching the claim's 'reminds the reader'.",
    "fromFile": "verdicts-hobb-i180-194.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 191,
@@ -3473,7 +3556,8 @@
    "trueWording": "As always, Hobb's prose is solid and effective and occasionally pretty, but isn't going to win awards for its beauty",
    "note": "Verbatim in the 'Beauty: 3/5' paragraph of the Fool's Fate review; both limbs (solid/effective/occasionally pretty, and not award-winning for beauty) are in the one sentence.",
    "fromFile": "verdicts-hobb-i180-194.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 194,
@@ -3496,7 +3580,8 @@
    "trueWording": "while the language does have that slightly heavy and old-fashioned tone common to the genre, that doesn't prevent it from delivering fantastic lines",
    "note": "Verbatim in the 'Overall: 7/7. BRILLIANT.' paragraph of the Fool's Quest review, exactly where the claim's page hint places it.",
    "fromFile": "verdicts-hobb-i180-194.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 195,
@@ -3519,7 +3604,8 @@
    "trueWording": "Robin Hobb has created a number of small intimate settings centred around her characters",
    "note": "Writers Write page (byline Christopher Luke Dean, posted 12 Feb 2020) carries the quote verbatim, prefaced 'Unlike Tolkien or Brandon Sanderson'; next sentence adds 'Sometimes, they are quite grand settings, but they are always intimate.'",
    "fromFile": "verdicts-hobb-i195-209.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 196,
@@ -3542,7 +3628,8 @@
    "trueWording": "Hobb manages to make her readers care for her setting as much as her characters",
    "note": "Verbatim in section 1 'What She Did', followed by the Bing Town / Badgerlock Manner illustration. Every limb supported.",
    "fromFile": "verdicts-hobb-i195-209.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 197,
@@ -3565,7 +3652,8 @@
    "trueWording": "Her characters grow or die or get worse. Nothing is stable in Hobb's world",
    "note": "Verbatim in section 5 'Who she did it for'. The 'rather than remaining stable' limb is carried by the immediately following clause 'Nothing is stable in Hobb's world'.",
    "fromFile": "verdicts-hobb-i195-209.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 198,
@@ -3634,7 +3722,8 @@
    "trueWording": "It reads as if we are reading from the same tome he actually scribed upon",
    "note": "Verbatim in the metanarrative definition paragraph; 'he' is Fitz, the first-person narrator documenting the Six Duchies history, supporting the 'the narrator scribed' limb.",
    "fromFile": "verdicts-hobb-i195-209.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 201,
@@ -3680,7 +3769,8 @@
    "trueWording": "Hobb leaves it up to the reader to do some light investigative work",
    "note": "Verbatim; the sentence opens 'Rather than waffling between present day and flashbacks', which supports the 'rather than cutting to flashback' limb.",
    "fromFile": "verdicts-hobb-i195-209.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 203,
@@ -3703,7 +3793,8 @@
    "trueWording": "details about the characters in ways that are NOT disclosed anywhere else in the book",
    "note": "Verbatim. Page says 'All these epigraphs raise very important details...' of the chapter 9, 13 and 14 epigraphs; the claim's weaker 'some epigraphs' is a subset and is supported.",
    "fromFile": "verdicts-hobb-i195-209.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 204,
@@ -3749,7 +3840,8 @@
    "trueWording": "Hobb uses an unremitting rhythm of buts at all levels of the story",
    "note": "Verbatim under the heading 'Making Lyrical Fantasy Interesting' in M Harold Page's Black Gate dissection of Fool's Assassin (9 Feb 2016), with the parenthetical '(note the single \"t\")' and the fractal-buts examples.",
    "fromFile": "verdicts-hobb-i195-209.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 206,
@@ -3887,7 +3979,8 @@
    "trueWording": "a country house Gothic from the point of view of the moody denizens",
    "note": "Live page, raw. Verbatim substring; full page sentence adds 'of the moody denizens', so 'its denizens' is supported. Said of Fool's Assassin in the opening paragraphs.",
    "fromFile": "verdicts-hobb-i210-224.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 213,
@@ -3910,7 +4003,8 @@
    "trueWording": "They are people who are at the lower echelons of the economic strata",
    "note": "Live page (lightspeedmagazine.com, 200 OK, raw). Verbatim. The question that prompts it names The Inheritance & Other Stories, 'featuring short fiction from throughout your career', so the short-fiction limb is supported by context; Hobb's own words are 'many of the characters in my stories'.",
    "fromFile": "verdicts-hobb-i210-224.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 214,
@@ -3933,7 +4027,8 @@
    "trueWording": "in the spectrum of fantasy people who actually work every day for a living and have a tight budget can seem like they're poor",
    "note": "Live page, raw. Verbatim, and every limb (fantasy, work every day, tight budget, seem poor) is in the one sentence.",
    "fromFile": "verdicts-hobb-i210-224.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 216,
@@ -3956,7 +4051,8 @@
    "trueWording": "They simply have something they want to get done, and it is more important to them than anything your protagonist wants to do",
    "note": "Live host returned 403 to curl; recovered via Wayback raw capture 20250808211906id_ (200, 46KB). Verbatim. Byline confirmed in the page's JSON-LD: \"author\":{\"@type\":\"Person\",\"name\":\"Tayan Hatch\"}; dated 2024-12-19. The 'outweighs the protagonist's aim' limb is the sentence's own second clause.",
    "fromFile": "verdicts-hobb-i210-224.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 217,
@@ -3979,7 +4075,8 @@
    "trueWording": "You have to put it on like a coat and say, 'Now I believe everything you believe.'",
    "note": "Wayback raw capture (same as 216). Verbatim. Introduced by Hatch as 'the importance of fully embodying a villain's perspective', supporting the 'a character's viewpoint' limb.",
    "fromFile": "verdicts-hobb-i210-224.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 218,
@@ -4002,7 +4099,8 @@
    "trueWording": "You could take that whole trilogy and rewrite it from his point of view, and he would be a tragic hero",
    "note": "Wayback raw capture (same as 216). Verbatim, and named to Regal of the Farseer Trilogy in the immediately preceding sentences.",
    "fromFile": "verdicts-hobb-i210-224.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 220,
@@ -4025,7 +4123,8 @@
    "trueWording": "Not with a page number or even a chapter... but the incident. As in, 'Joe is met in the tavern shortly before the disastrous river crossing.'",
    "note": "Live page, raw. Verbatim. Every limb supported in one passage: 'I needed my own glossary', 'I also found it handy to include when that character first appeared. Not with a page number or even a chapter, as those always change in the construction of a book, but the incident.'",
    "fromFile": "verdicts-hobb-i210-224.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 221,
@@ -4048,7 +4147,8 @@
    "trueWording": "Each chapter begins with an epigraph-a snippet of in-world text ranging from historical treatises and herbalist journals to fragments of folklore and political propaganda",
    "note": "Live host returned 403 to curl; recovered via Wayback raw capture 20260607133057id_ (200, 60KB). Verbatim, in section '2.2 The Epigraphs: World-Building through Fragmented History'. Note the page's list also includes herbalist journals, which the claim omits without misstating.",
    "fromFile": "verdicts-hobb-i210-224.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 222,
@@ -4071,7 +4171,8 @@
    "trueWording": "the dry, academic tone of an epigraph about the 'glory' of the Farseer line is immediately followed by a scene depicting the brutal, unglamorous reality of Fitz's life",
    "note": "Wayback raw capture (same as 221). Verbatim, under the 'Tonal Contrast' bullet in section 2.2.",
    "fromFile": "verdicts-hobb-i210-224.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 223,
@@ -4094,7 +4195,8 @@
    "trueWording": "By dedicating thousands of words to the mundane details of Fitz's daily existence... Hobb forces the reader to inhabit the protagonist's rhythm of life",
    "note": "Wayback raw capture (same as 221). Verbatim, in section 2.3 'The \"Slow Burn\" as Psychological Immersion'; the causal 'attributes the slow burn to' limb is the sentence's own structure.",
    "fromFile": "verdicts-hobb-i210-224.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 224,
@@ -4117,7 +4219,8 @@
    "trueWording": "The chapter epigraphs are excerpts from a public document, largely a formal history written in a distant, scholarly voice",
    "note": "Abstract landing page fetched live (200) but does not carry the sentence; the PDF at cgi/viewcontent.cgi?article=3044 returned 403 live, recovered via Wayback raw capture 20240707045408id_ (200, application/pdf, 21pp) and text-extracted. The sentence is verbatim on PDF page 4, whose running head is 'Mythlore 41.1, Fall/Winter 2022 45', confirming p. 45. Side note, not part of the claim sentence: the PDF runs to printed p. 62, not p. 66 as the citation's page range states.",
    "fromFile": "verdicts-hobb-i210-224.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 225,
@@ -4301,7 +4404,8 @@
    "trueWording": "a lengthy portion of the narrative given over to describing what is not there",
    "note": "p.61: 'In a way, this is a lengthy portion of the narrative given over to describing what is not there' (the 'misted' section where Galen's tampering is the absent detail). The seventy-page limb is supported two paragraphs later, pp.61-62: 'Then Verity finally explicates what has been happening for the past 70 pages of the novel' — same stretch, but the figure and the phrase are not in one sentence.",
    "fromFile": "verdicts-hobb-i225-239.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 234,
@@ -4416,7 +4520,8 @@
    "trueWording": "I try to keep in mind that every character is the hero of his own story",
    "note": "Raw HTML of sylrmartin.com (200, live, no summarizer): 'I try to keep in mind that every character is the hero of his own story, that is, he brings his own past, his problems, his attitude and his hope for the future to the story.' Attributed to ROBIN HOBB answering SRM; page datePublished 2023-05-19.",
    "fromFile": "verdicts-hobb-i225-239.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 239,
@@ -4439,7 +4544,8 @@
    "trueWording": "Each character has to be the product of the imaginary world they exist in",
    "note": "Same live page, inspiration answer: 'But I never take a person I know, change name and hair colour and insert into a book. It just wouldn't work. Each character has to be the product of the imaginary world they exist in.' Verbatim, Hobb speaking.",
    "fromFile": "verdicts-hobb-i225-239.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 240,
@@ -4462,7 +4568,8 @@
    "trueWording": "I like to use people as sources ... that will be my first choice",
    "note": "Raw page read. Verbatim: 'I like to use people as sources so if I can find a person who will tell me about bee-keeping or navigating or whatever topic I'm researching, that will be my first choice.' Both limbs (people first, bee-keeping/navigating named) on the page.",
    "fromFile": "verdicts-hobb-i240-254.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 242,
@@ -4554,7 +4661,8 @@
    "trueWording": "The things that happen to us change us ... what makes a character interesting",
    "note": "Raw page read. Verbatim: 'The things that happen to us change us.' The second limb is the same paragraph: 'I think that is actually what makes a character interesting.'",
    "fromFile": "verdicts-hobb-i240-254.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 246,
@@ -4600,7 +4708,8 @@
    "trueWording": "Characters are shaped by their experiences. We become the product of what has been done to us",
    "note": "Raw page read. Verbatim in the 'Hobb's Writing as a Whole' section, exactly as the claim's page field says; the page adds 'Or for us.'",
    "fromFile": "verdicts-hobb-i240-254.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 248,
@@ -4692,7 +4801,8 @@
    "trueWording": "the reader will perhaps be able to see what is coming even if the main character doesn't",
    "note": "Raw page read. Verbatim within that sentence. 'Main character' is the first-person narrator in this passage, so the claim's 'narrator' limb holds.",
    "fromFile": "verdicts-hobb-i240-254.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 252,
@@ -4715,7 +4825,8 @@
    "trueWording": "The writing and style in those books differs substantially from the Robin Hobb books",
    "note": "Raw page read. Verbatim. 'Those books' is fixed by the question asked - whether the Megan Lindholm books will return to print in the US.",
    "fromFile": "verdicts-hobb-i240-254.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 253,
@@ -4738,7 +4849,8 @@
    "trueWording": "I think I write for people who really like to know the characters",
    "note": "Raw page read. The quoted string appears word for word inside the page sentence, which carries a hedge ('I think I write for people...'); the claim's substance is otherwise exact.",
    "fromFile": "verdicts-hobb-i240-254.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 254,
@@ -4761,7 +4873,8 @@
    "trueWording": "you get to collect all the best bits, and then you can joggle things a bit to make them fit your world",
    "note": "Raw page read. Verbatim within: 'The thing about researching for a fantasy is that you get to collect all the best bits, and then you can joggle things a bit to make them fit your world.' The history limb follows: 'The writer isn't locked into any exact period of history...'",
    "fromFile": "verdicts-hobb-i240-254.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 255,
@@ -4876,7 +4989,8 @@
    "trueWording": "\"on my first read, I do the really close line-reading and individual sentence editing\"",
    "note": "Raw page reached (juliecrisp.co.uk, HTTP 200; live host, no archive needed). Quote exact. The descriptor limb is supported by the interviewer's intro: 'Anne Groell who is an SFF Executive editor over at Random House USA... editing George R. R. Martin through to Terry Brooks, Robin Hobb, Naomi Novik, Scott Lynch, Connie Willis' - note that framing is Crisp's, not Groell's own words.",
    "fromFile": "verdicts-hobb-i255-269.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 261,
@@ -4922,7 +5036,8 @@
    "trueWording": "\"rather than the medievalism of The Farseer trilogy, we have trade and shipping and merchants' colonies, with a distinctly seventeenth-century feel\"",
    "note": "Raw page reached. Same opening paragraph, the sentence immediately after the one quoted at index 261. All three limbs - trade/shipping/merchants' colonies, the seventeenth-century feel, and the contrast with Farseer medievalism - are in that one sentence.",
    "fromFile": "verdicts-hobb-i255-269.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 263,
@@ -4945,7 +5060,8 @@
    "trueWording": "\"Hobb's habit of repeating things, as if she didn't trust her readers to remember them\"",
    "note": "Raw page reached (strangehorizons.com, HTTP 200). Quote exact, in the fourth paragraph as the chunk states. Context worth carrying if the claim is reused: Goldstein names the habit only to say it 'is very little in evidence' in Dragon Haven - the criticism is of Hobb's general habit, not of this book.",
    "fromFile": "verdicts-hobb-i255-269.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 264,
@@ -4968,7 +5084,8 @@
    "trueWording": "\"The writing, which seemed tired and repetitious in the earlier book, is tightened here\"",
    "note": "Raw page reached. Quote exact, fourth paragraph. The claim's naming of 'Dragon Keeper' for the page's 'the earlier book' is licensed by the review's own first paragraph ('Dragon Keeper, the first book in Robin Hobb's new series') and by 'the previous novel' in the third; 'here' is Dragon Haven, the book under review.",
    "fromFile": "verdicts-hobb-i255-269.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 265,
@@ -5014,7 +5131,8 @@
    "trueWording": "\"Fan fiction closes up the space that I have engineered into the story\"",
    "note": "Wayback raw capture (web/20050630015105id_/robinhobb.com/rant.html) fetched directly, HTTP 200 - the id_ route the chunk supplies returns the unmodified 2005 page, no summarizer involved. Quote exact, in the section answering 'I should be flattered that readers like my stories enough to want to continue them.'",
    "fromFile": "verdicts-hobb-i255-269.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 267,
@@ -5037,7 +5155,8 @@
    "trueWording": "\"the reader is told what he must think rather than being allowed to observe the characters and draw his own conclusions\"",
    "note": "Same raw Wayback capture. Quote exact - it is the second half of the very sentence quoted at index 266, so both claims rest on one sentence of the rant.",
    "fromFile": "verdicts-hobb-i255-269.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 268,
@@ -5060,7 +5179,8 @@
    "trueWording": "\"If something is left nebulous, it is because the author intends for it to be nebulous.\"",
    "note": "Same raw Wayback capture. Quote exact. The page phrases the principle in the third person ('the author'), not the first; the claim's 'her text / she intends' reading is carried by the immediate context, where Hobb is defending her own work ('the space that I have engineered into the story' is the next sentence). Quote it as written to stay accurate.",
    "fromFile": "verdicts-hobb-i255-269.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 269,
@@ -5083,7 +5203,8 @@
    "trueWording": "\"A writer puts a great deal of thought into what goes into the story and what doesn't.\"",
    "note": "Same raw Wayback capture. Quote exact, and the following sentence extends it: 'If a particular scene doesn't happen on stage before the reader's eyes, there is probably a reason for it.'",
    "fromFile": "verdicts-hobb-i255-269.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 270,
@@ -5129,7 +5250,8 @@
    "trueWording": "We have five senses, and in a description of anything, I want to engage as many of them as possible",
    "note": "lisipieces.com fetched raw (byline 'By Elise Mead', datePublished 2025-10-18). Hobb, quoted in the food section and again verbatim in the Q&A: 'I think it goes back to ‘show don’t tell.’ We have five senses, and in a description of anything, I want to engage as many of them as possible.' Quote verbatim, whole claim supported.",
    "fromFile": "verdicts-hobb-i270-284.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 272,
@@ -5152,7 +5274,8 @@
    "trueWording": "She maintains geographical consistency, ensuring ingredients match what would actually grow in each region",
    "note": "Same page, Mead's own prose: 'She maintains geographical consistency, ensuring ingredients match what would actually grow in each region, though she admits to enjoying the occasional imported luxury like ginger root.' Quote verbatim; attribution to Mead paraphrasing Hobb correct (Hobb's own answer says 'I try to keep the menu to what might actually be growing and available in that type of area').",
    "fromFile": "verdicts-hobb-i270-284.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 273,
@@ -5221,7 +5344,8 @@
    "trueWording": "A tale of three magic wishes works well; an infinite number of wishes is no story at all",
    "note": "Same page, in Hobb's own interview answer on magic limits: 'It is essential, in my opinion, that magic have limits in a story. A tale of three magic wishes works well; an infinite number of wishes is no story at all.' Quote verbatim; both limbs (three wishes works, infinite is no story) present and attributed to Hobb.",
    "fromFile": "verdicts-hobb-i270-284.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 276,
@@ -5244,7 +5368,8 @@
    "trueWording": "The geography of Fitz’s world is not a backdrop … full of sight, sound, taste, and cinematic color",
    "note": "Same page, Mead's worldbuilding section: 'The geography of Fitz’s world is not a backdrop in Hobb’s work. It’s a living entity, full of sight, sound, taste, and cinematic color.' Quote verbatim; the 'not a backdrop' limb is the immediately preceding sentence.",
    "fromFile": "verdicts-hobb-i270-284.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 278,
@@ -5267,7 +5392,8 @@
    "trueWording": "You don’t see melodrama, you don’t see the character screaming in pain, or being in shock",
    "note": "Same post, paragraph on time jumps and Fitz's voice: 'when something dramatic happens, it’s like there’s no screen. You don’t see melodrama, you don’t see the character screaming in pain, or being in shock.' Quote verbatim; the 'in shock' limb of the claim is the continuation of the same sentence.",
    "fromFile": "verdicts-hobb-i270-284.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 279,
@@ -5313,7 +5439,8 @@
    "trueWording": "And it is prose first and foremost, with direct dialogue taking a backseat",
    "note": "Same post, paragraph beginning 'This was the romantic view': 'For me it was purely the prose… This is a book to enjoy because of how well it is written. And it is prose first and foremost, with direct dialogue taking a backseat.' Quote verbatim; both limbs supported.",
    "fromFile": "verdicts-hobb-i270-284.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 281,
@@ -5336,7 +5463,8 @@
    "trueWording": "some actions don’t seem to have any other consequence … As if the characters shrugged off what happened",
    "note": "Same post, paragraph beginning 'Even here it’s not all “perfect.”': 'And it’s completely baffling that some actions don’t seem to have any other consequence, without spoiling the plot. The aftermath just appears to be absurd. As if the characters shrugged off what happened, and move on just as usual.' Quote verbatim; the 'final chapters' limb is supported by the same paragraph's frame ('all plot that didn’t happen through most of the book, happens all at once at the end').",
    "fromFile": "verdicts-hobb-i270-284.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 282,
@@ -5359,7 +5487,8 @@
    "trueWording": "the slow pacing here isn’t a weak point to overcome, it’s where the whole value is",
    "note": "Same post, the paragraph immediately after the block-quoted reader review of the third book: 'But as the quote above states, the slow pacing here isn’t a weak point to overcome, it’s where the whole value is. You don’t look ahead to anticipate where the story will go, you stay in the present.' Reinforced two paragraphs later: 'To slow down, to be in the present, within the page you’re reading, rather than looking ahead.' Quote verbatim; both limbs supported.",
    "fromFile": "verdicts-hobb-i270-284.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 283,
@@ -5405,7 +5534,8 @@
    "trueWording": "unlike Kvothe, Fitz is brutally honest, and his self-deprecating narrative includes all the damning facts about himself and his own actions",
    "note": "Same final paragraph: '…brings to the fore a likeable and sympathetic main character who is in many ways the opposite of Rothfuss’s Kvothe. Like Kvothe, Fitz is conscious of telling his own story; unlike Kvothe, Fitz is brutally honest, and his self-deprecating narrative includes all the damning facts about himself and his own actions.' Quote verbatim; the contrast with Rothfuss's Kvothe, the self-deprecating narration and the damning facts about his own actions are all on the page ('rather than flattering him' is the direct sense of 'self-deprecating'/'brutally honest').",
    "fromFile": "verdicts-hobb-i270-284.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 285,
@@ -5612,7 +5742,8 @@
    "trueWording": "the further things and events are from Fitz's perspective, the less reliable they are",
    "note": "Raw page reached (curl, browser UA, HTTP 200); full review present, dated 'Sunday, 28 August 2016', 'Posted by Adam Whitehead'. Quote exact, in the paragraph beginning 'Much of your enjoyment of these books'. The page frames it as the mechanism of Fitz as 'an effectively unreliable narrator', which is exactly the reliability rule the claim states.",
    "fromFile": "verdicts-hobb-i285-299.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 294,
@@ -5635,7 +5766,8 @@
    "trueWording": "her deft hand with charaterisation and her naturalistic way of presenting the world",
    "note": "Quote exact: 'Robin Hobb’s greatest strength is her deft hand with charaterisation and her naturalistic way of presenting the world.' Both limbs (naturalistic presentation of the world, alongside characterisation, named as the greatest strength) verbatim. Page spells it 'charaterisation' (sic).",
    "fromFile": "verdicts-hobb-i285-299.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 295,
@@ -5658,7 +5790,8 @@
    "trueWording": "a tendency to meander, to have characters sitting around talking about the plot",
    "note": "Quote exact, in the same paragraph as 294: 'Her greatest weakness is a tendency to meander, to have characters sitting around talking about the plot rather than getting on with things and taking a hundred pages to do what a more concise author would do in ten.' The 'at length' limb is carried by that hundred-pages-for-ten clause.",
    "fromFile": "verdicts-hobb-i285-299.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 296,
@@ -5681,7 +5814,8 @@
    "trueWording": "Hobb is a superior prose writer and a gifted communicator of emotions and atmosphere",
    "note": "Quote exact and the claim reproduces the full sentence's substance without addition; it opens its own paragraph on the page, as the hint says.",
    "fromFile": "verdicts-hobb-i285-299.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 298,
@@ -5704,7 +5838,8 @@
    "trueWording": "you should be able to tell who is talking without all the little clues",
    "note": "Quote exact: 'If you want to do a double check, read your dialogue. Can you tell by reading, not just a single line like a three word dialogue, but if there is a piece of dialogue and you read it, you should be able to tell who is talking without all the little clues like Joe said and Samantha replied.' The page hint's cue phrase is on the page and every limb (a test, read a passage of dialogue, tell the speaker without attribution tags) is supported; the episode's own homework repeats it ('examine the dialog itself, without tags').",
    "fromFile": "verdicts-hobb-i285-299.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 299,
@@ -6095,7 +6230,8 @@
    "trueWording": "sometimes, like Keffria Vestrit, “if you do not exercise your power, it goes away”, Hobb says",
    "note": "Live newstatesman.com returned 403 to both plain and browser-UA curl; reached via Wayback raw capture https://web.archive.org/web/20260212161207id_/<url> (200, full article body). Quote exact. Both limbs on the page in the 'The Elderlings books never ignore women’s stories' paragraph: Keffria 'has married a man whom she has let control her life: “She has said: ‘I will let my husband make the decisions, it is easier.’ And so you get an imbalance”', then the power rule attributed to Hobb, and extended by her to not voting.",
    "fromFile": "verdicts-hobb-i315-329.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 316,
@@ -6118,7 +6254,8 @@
    "trueWording": "setting — “this third element which mainstream writers don’t really have to deal with”",
    "note": "Live archeddoorway.com returned 403; reached via Wayback raw capture 20240521165048id_ (200, full transcript). Quote exact. Every limb present in the answer on the genre expanding: 'you also have setting – it’s like this third element which mainstream writers don’t really have to deal with. If they say it’s a 1970s Chevrolet, that immediately comes to you with a whole lot of impact. Whereas if I want to describe that the horse and cart that they picked up is not going to get too far, I need to put in enough detail that the reader picks that up.'",
    "fromFile": "verdicts-hobb-i315-329.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 317,
@@ -6141,7 +6278,8 @@
    "trueWording": "“I really admire the fantasy writers of the generation who wrote to that length”",
    "note": "Wayback raw capture of the Arched Doorway transcript. Quote exact: '...told such amazing stories where every sentence is freighted with character development, and setting, and plot all-in-one.' 'Earlier paperback generation' is the page’s own referent — the generation writing to the 250-page paperback length described two sentences earlier — so the limb is supported, though the phrase 'paperback generation' is the claim’s wording.",
    "fromFile": "verdicts-hobb-i315-329.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 318,
@@ -6164,7 +6302,8 @@
    "trueWording": "“I was told that a paperback binding would not hold more than 250 pages”",
    "note": "Wayback raw capture. Quote exact, and the second limb follows immediately: 'no matter how much I might want to expand my story, I had to be able to tell it in that number of words and pages.' She also frames herself as 'like the Beatles’ song — a paperback writer.'",
    "fromFile": "verdicts-hobb-i315-329.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 319,
@@ -6187,7 +6326,8 @@
    "trueWording": "“The limits are, of course, that you can only tell the reader exactly what the hero knows”",
    "note": "Wayback raw capture, answer to 'how do you decide whether a story should be told in first or third-person?'. Quote exact and stated by Hobb explicitly as the limit of her preferred first person ('I always prefer the first-person, if it can be told that way').",
    "fromFile": "verdicts-hobb-i315-329.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 320,
@@ -6210,7 +6350,8 @@
    "trueWording": "“my preference is to write a very tight point-of-view... in any given scene, you will only be with one character”",
    "note": "Wayback raw capture, same first/third-person answer. Quote exact. The 'never switching mid-conversation' limb is the next sentence: 'You will not have a conversation where I suddenly switch from my point-of-view, to your point-of-view, and then back.'",
    "fromFile": "verdicts-hobb-i315-329.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 321,
@@ -6233,7 +6374,8 @@
    "trueWording": "“It is the most intimate voice” — the voice used with families in the evening",
    "note": "Wayback raw capture, same answer. Quote exact. Both similes present: 'It’s the voice we use when we talk to our families in the evening, or when your mom is telling you about what things were when she was a kid.' Claim’s 'a mother recounting her childhood' is the page’s 'your mom is telling you about what things were when she was a kid'.",
    "fromFile": "verdicts-hobb-i315-329.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 322,
@@ -6256,7 +6398,8 @@
    "trueWording": "“full of pratfalls and silliness, and humour, which is fun but it lessens the impact”",
    "note": "Wayback raw capture, answer on her influences. Quote exact, and the page carries the full 'hurt or disappointed' ending: 'it lessens the impact that you feel if the character is hurt or disappointed.'",
    "fromFile": "verdicts-hobb-i315-329.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 324,
@@ -6347,7 +6490,8 @@
    "trueWording": "“convey a great deal of historical, societal, and environmental information... without it sounding explanatory”",
    "note": "hearwritenow.com fetched live, 200. Quote exact and the whole limb chain is one sentence: 'Hobb is able to convey a great deal of historical, societal, and environmental information through various characters who know different aspects of the same events, without it sounding explanatory.' Locator drift only: it is the second paragraph of the 'The Liveship Traders' section, not the third.",
    "fromFile": "verdicts-hobb-i315-329.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 329,
@@ -6369,7 +6513,8 @@
    "trueWording": "“opens Liveship Traders up to multiple viewpoints (professionally contained to one viewpoint per scene)”",
    "note": "Live hearwritenow.com. Quote exact, in the first paragraph of the 'The Liveship Traders' section as stated. Reviewer is Elle Neal ('Review copyright © Elle Neal 2006 Updated 2017, 2021'). Note the same reviewer later complains that 'there are too many variations in viewpoint... and the scenes break far too quickly' — a criticism of frequency, not of the one-viewpoint-per-scene containment, so it does not cut against the claim.",
    "fromFile": "verdicts-hobb-i315-329.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 330,
@@ -6391,7 +6536,8 @@
    "trueWording": "The reader doesn't get to stay in one character's head long enough to form a bond with them",
    "note": "Raw page (HTTP 200, live). Quote verbatim in the paragraph 'The downside of the viewpoint shifts is that the magnificent intensity of Farseer is missing.' First-person limb supported by the section's opening line, 'Robin Hobb takes a break from the intense first person narrative of the Farseer Trilogy'. Review by Elle Neal, copyright 2006, updated 2017/2021.",
    "fromFile": "verdicts-hobb-i330-344.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 331,
@@ -6414,7 +6560,8 @@
    "trueWording": "You have to put it on like a coat and say, 'Now I believe everything you believe.'",
    "note": "Live host returned HTTP 403 (Shopify bot wall); recovered via Wayback raw capture https://web.archive.org/web/20250808211906id_/... Quote verbatim under the section heading 'Now I Believe Everything You Believe'. Byline Tayan Hatch and date Dec 19, 2024 confirmed in the page's JSON-LD; interview framed as 'At Dragonsteel Nexus'.",
    "fromFile": "verdicts-hobb-i330-344.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 332,
@@ -6437,7 +6584,8 @@
    "trueWording": "They simply have something they want to get done, and it is more important to them than anything your protagonist wants to do",
    "note": "Same Wayback raw capture as 331 (live 403). Quote verbatim in the same section, introduced by Hobb's 'They don't think of themselves as the villain.' Both limbs (the wanting, and its outranking the protagonist's want) are in the one sentence.",
    "fromFile": "verdicts-hobb-i330-344.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 334,
@@ -6460,7 +6608,8 @@
    "trueWording": "Its first paragraph is an excerpt from a piece being composed within the milieu, not unlike the Encyclopedia Galactica from Asimov's Foundation novels",
    "note": "Raw page (HTTP 200). Quote verbatim; the Asimov comparison is in the same sentence. Paragraph begins 'The text of the novel opens with a chapter titled \"The Earliest History.\"' as cited.",
    "fromFile": "verdicts-hobb-i330-344.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 336,
@@ -6483,7 +6632,8 @@
    "trueWording": "asserts that his memories begin on a day when he was some six years old, and he questions their validity and their source",
    "note": "Raw page (HTTP 200). Quote verbatim in the third body paragraph, as cited; the same sentence carries the 'some six years old' limb.",
    "fromFile": "verdicts-hobb-i330-344.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 337,
@@ -6506,7 +6656,8 @@
    "trueWording": "I've noted before the Asimovian move of grounding chapters in in-milieu reference materials, something I appreciate",
    "note": "Raw page (HTTP 200). Quote verbatim in the commentary paragraph beginning 'I am taken by the reminiscence with which the chapter opens.' 'I've noted before' supports the claim's 'recurring'.",
    "fromFile": "verdicts-hobb-i330-344.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 338,
@@ -6529,7 +6680,8 @@
    "trueWording": "the piecing-together of disparate and not always complete sources being something with which, as a medievalist, I am familiar",
    "note": "Raw page (HTTP 200). Quote verbatim in the same commentary paragraph, which also carries 'the opening passage is particularly compelling' and 'the concern about possibly perpetuating the errors of others - intended or inadvertent - is one with which I struggle', covering the errors-forward limb.",
    "fromFile": "verdicts-hobb-i330-344.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 339,
@@ -6552,7 +6704,8 @@
    "trueWording": "Too, there is the metaphor at the end: 'A child sees the acorn of his daily life, but a man looks back on the oak.'",
    "note": "Raw page (HTTP 200). Quote verbatim, opening the commentary paragraph cited. Elliott calls it a 'metaphor' rather than an aphorism, and writes 'at the end' without naming what it ends; context (the preceding paragraph is on the chapter-opening passage) supports the claim's reading.",
    "fromFile": "verdicts-hobb-i330-344.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 340,
@@ -6575,7 +6728,8 @@
    "trueWording": "Hobb is on record as affirming her continued use of the masculine as the default neutral, a practice with which I disagree",
    "note": "Raw page (HTTP 200). Quote verbatim in the paragraph beginning 'Too, there is the metaphor at the end', exactly as cited; the disagreement limb is the same clause ('and I am far from alone in it').",
    "fromFile": "verdicts-hobb-i330-344.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 341,
@@ -6598,7 +6752,8 @@
    "trueWording": "The text moves on to present a formal and informal message sent from Bingtown to Trehaug, discussing the agreement between the Traders and Tintaglia",
    "note": "Raw page (HTTP 200). Quote verbatim in the first paragraph. The faction-grouped cast is the preceding sentence ('grouping them as Keepers and Dragons, Bingtowners, the crew of the Tarman, and miscellaneous others'); 'the dragon' of the claim is Tintaglia.",
    "fromFile": "verdicts-hobb-i330-344.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 342,
@@ -6621,7 +6776,8 @@
    "trueWording": "the epistolary format adds a nice touch - not just the encyclopedic, but the personal, which helps the text start to come alive early on",
    "note": "Raw page (HTTP 200). Quote verbatim in the final commentary paragraph, prefaced by 'I note with some approval, too, the shift in the prefatory tack'. Minor: Elliott names 'the Farseer and Tawny Man novels' as the earlier tack; the claim says 'Farseer and Rain Wilds books', dropping Tawny Man, though the entry is the Dragon Keeper front matter so the Rain Wilds side is contextual.",
    "fromFile": "verdicts-hobb-i330-344.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 343,
@@ -6644,7 +6800,8 @@
    "trueWording": "I note with some approval the dramatis personae that opens the current volume; it's nice to know who's in the work",
    "note": "Raw page (HTTP 200). Quote verbatim (with the ae ligature as given) opening the final commentary paragraph. The reason limb reads 'it's nice to know who's in the work' where the claim says 'useful' - same substance, different adjective.",
    "fromFile": "verdicts-hobb-i330-344.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 344,
@@ -6667,7 +6824,8 @@
    "trueWording": "opens with a brief in-milieu commentary on the use of herbs and intoxicants in Skill training before pivoting to Fitz and the Fool",
    "note": "Raw page (HTTP 200). Quote verbatim in the first paragraph; the chapter is named 'The Betrothal', and 'before pivoting to Fitz and the Fool altering Badgerlock's clothing' supports 'before the narrative resumes'.",
    "fromFile": "verdicts-hobb-i330-344.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 345,
@@ -6966,7 +7124,8 @@
    "trueWording": "blurs the boundaries between text and paratext, public and private, official history and personal myth-making",
    "note": "The claim's own URL, the dc.swosu.edu abstract landing page, was fetched raw (HTTP 200) and carries the abstract: 'By prefacing each chapter with an epigraph from an official in-world historical text before giving a first-person personal narrative, the novel blurs the boundaries between text and paratext, public and private, official history and personal myth-making.' Quote verbatim; every limb of the claim present. Corroborated identically on the PDF's abstract page.",
    "fromFile": "verdicts-hobb-i345-359.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 360,
@@ -6989,7 +7148,8 @@
    "trueWording": "The first epigraph of the story reads exactly like how a textbook of a real world country might start",
    "note": "Raw HTML fetched live (200, browser UA). Quote exact. 'opening' = the page's 'might start'; 'first epigraph' and 'real world country' both explicit.",
    "fromFile": "verdicts-hobb-i360-374.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 361,
@@ -7035,7 +7195,8 @@
    "trueWording": "But what is this tonal shift? Why is Fitz writing about himself instead of focusing fully on the facts?",
    "note": "Quote exact; the next sentence supplies the second limb verbatim in substance. The shift is epigraph-to-main-text: the two preceding paragraphs quote the novel's opening prose and gloss it against the epigraph.",
    "fromFile": "verdicts-hobb-i360-374.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 363,
@@ -7058,7 +7219,8 @@
    "trueWording": "I loved the excerpts at the start of each chapter describing some aspect of Six Duchies history or culture",
    "note": "Quote exact. 'all sixteen books' confirmed earlier on the same page: 'as of the last day of August I have completed all 16 books set in her Realm of the Elderlings world'; writer is female (pregnancy/baby girl).",
    "fromFile": "verdicts-hobb-i360-374.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 364,
@@ -7081,7 +7243,8 @@
    "trueWording": "especially on my second read I picked up so many details that she includes on clothing, customs, politics, and architecture",
    "note": "Quote exact, same paragraph as 363, in the Farseer/Assassin's Apprentice section. All four categories and the second-reading limb explicit.",
    "fromFile": "verdicts-hobb-i360-374.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 365,
@@ -7104,7 +7267,8 @@
    "trueWording": "where it seems that Hobb is simply throwing in random details of description, always come back to have some relevance and I enjoyed looking out for those as I read",
    "note": "Quote exact, in the 'The Fitz and the Fool Trilogy' section (heading at line 256, quote at 266) as the page hint says. Both limbs — later relevance, reading watchfully — explicit.",
    "fromFile": "verdicts-hobb-i360-374.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 366,
@@ -7127,7 +7291,8 @@
    "trueWording": "There is something really appealing about the Trader way and how everything is a negotiation and a conversation",
    "note": "Quote exact, in the Liveship Traders section; the same paragraph names Bingtown and the Vestrit Traders, so 'Bingtown Traders' is supported.",
    "fromFile": "verdicts-hobb-i360-374.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 367,
@@ -7150,7 +7315,8 @@
    "trueWording": "Hobb doesn't come out and define it word for word for you. She shows it to you slowly, as if it's the most natural thing",
    "note": "Quote exact including the curly apostrophe. Both limbs — no word-for-word definition, slow showing as the most natural thing — are consecutive sentences in the magic-system paragraph.",
    "fromFile": "verdicts-hobb-i360-374.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 368,
@@ -7173,7 +7339,8 @@
    "trueWording": "if it's boring to you... Don't write it... You can have a one sentence chapter if you want",
    "note": "Quote exact, under the heading \"I don't want to write the next scene. It's boring.\" The compress-rather-than-write limb is the section's own solution: don't write it, type a one-line summary, get on with the story.",
    "fromFile": "verdicts-hobb-i360-374.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 369,
@@ -7196,7 +7363,8 @@
    "trueWording": "After four days of punishing travel, they reached a small holding near a water hole",
    "note": "Quote exact and the sentence completes as the claim says. Duration ('four days'), cost ('punishing'), arrival ('a small holding near a water hole') all present; 'cost' is a fair gloss on 'punishing'.",
    "fromFile": "verdicts-hobb-i360-374.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 370,
@@ -7219,7 +7387,8 @@
    "trueWording": "if I look for a synonym... via the word processing program... it will show me the same synonyms that every other writer is using",
    "note": "Quote exact, in the asterisked footnote that opens \"Do you have a copy of Roget's Thesaurus? If not, go buy one now. A fat paper thesaurus is a treasure.\" Paper-over-software advice and its stated ground both explicit.",
    "fromFile": "verdicts-hobb-i360-374.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 371,
@@ -7264,7 +7433,8 @@
    "trueWording": "Most epic fantasy doesn't spend pages... worrying about the apprentice fees for dependants, or worrying whether wise old friends are going a bit senile",
    "note": "Quote exact, in the Originality section of 'The Golden Fool, by Robin Hobb' (post dated February 4, 2013 on the tag page). Page says 'wise old friends' (plural, 'a bit senile') where the claim says 'an old friend is going senile' — same substance.",
    "fromFile": "verdicts-hobb-i360-374.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 373,
@@ -7286,7 +7456,8 @@
    "trueWording": "the fantasy only matters because of the reality in its shadow - that motivations are personal, and that consequences will also be personal",
    "note": "Quote exact, closing sentence of the same Originality section; the reality-in-its-shadow limb is the first half of that sentence.",
    "fromFile": "verdicts-hobb-i360-374.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 374,
@@ -7330,7 +7501,8 @@
    "trueWording": "while the language does have that slightly heavy and old-fashioned tone common to the genre, that doesn’t prevent it from delivering fantastic lines, whether melancholy ruminations on life or just witty deadpan remarks",
    "note": "Same raw page, inside the 'Fool's Quest, by Robin Hobb' review, in the 'Overall: 7/7. BRILLIANT' paragraph — the exact section the claim names. Quote word-for-word. 'Memorable lines' is the claim's paraphrase of 'fantastic lines, whether melancholy ruminations on life or just witty deadpan remarks', which the page supports directly.",
    "fromFile": "verdicts-hobb-i375-385.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 378,
@@ -7353,7 +7525,8 @@
    "trueWording": "She only delivers description when it’s part of a conflict: Here are the fashionable trousers we’re arguing about.",
    "note": "Raw Black Gate article fetched with a browser UA (HTTP 200, 158 KB). Quote word-for-word in the 'Making Lyrical Fantasy Interesting' section, and the trousers example is the sentence's own illustration. 'Novelist M Harold Page' is supported by the page's own bio line ('the sword-wielding author of works of lyrical and poetic magical realism... such as Swords vs Tanks'), and the piece is explicitly a dissection of Fool's Assassin.",
    "fromFile": "verdicts-hobb-i375-385.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 379,
@@ -7376,7 +7549,8 @@
    "trueWording": "Hobb always serves up characterisation when it is immediately significant to choices or tactics adopted by the main characters. Here’s a quirky stable hand, will he teach me to ride?",
    "note": "Quote word-for-word in the same 'Making Lyrical Fantasy Interesting' section; the choice-or-tactic limb and the stable-hand illustration are both on the page verbatim. One ordering nuance worth recording: on the page this characterisation rule is stated BEFORE the description rule of index 378, so 'a second rule' is the claim-list's numbering, not the article's.",
    "fromFile": "verdicts-hobb-i375-385.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 380,
@@ -7399,7 +7573,8 @@
    "trueWording": "Hobb uses an unremitting rhythm of buts at all levels of the story (note the single “t”). Nothing arrives without a “but”.",
    "note": "Quote word-for-word as the first bullet under 'First, the writing is just plain good' inside the 'Making Lyrical Fantasy Interesting' section — the locator is right. 'At every level of Fool's Assassin' = 'at all levels of the story'; 'nothing arrives without a qualification' = 'Nothing arrives without a “but”'. Both limbs supported.",
    "fromFile": "verdicts-hobb-i375-385.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 381,
@@ -7445,7 +7620,8 @@
    "trueWording": "She braids the plots together. For example, a death resulting from the Thriller has domestic and child-rearing implications. A death in the Period Drama sets off developments in the Thriller.",
    "note": "Quote word-for-word in the 'First Person Slow Burn Thriller' section, in the braiding bullet the claim names. The reciprocal limb is on the page as the very next sentence; the claim's 'domestic plot' for the article's 'Period Drama' is the article's own equation (the Period Drama is where the characters are 'caught up in domestic and relationship plot').",
    "fromFile": "verdicts-hobb-i375-385.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 383,
@@ -7468,7 +7644,8 @@
    "trueWording": "She uses themes like duty, friendship, love and self-determination to link both plots, not just thematically but also practically: the same duty manifests both domestically and politically.",
    "note": "Quote word-for-word in the 'First Person Slow Burn Thriller' section. Both limbs — 'practically and not only thematically' and 'the same duty manifesting in both' — are in that one sentence.",
    "fromFile": "verdicts-hobb-i375-385.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 384,
@@ -7514,6 +7691,7 @@
    "trueWording": "she’s very careful to do this only to bookend episodes, and does not break the flow of the narrative.",
    "note": "Quote word-for-word in the 'First Person Slow Burn Thriller' section. The retrospective-narrator limb is supported by the same bullet: 'She “cheats” by having the narrator editorialise. Most of it is written in First Person Old Guy, so it fits the voice to have just the occasional rueful, “If only I’d known…”'.",
    "fromFile": "verdicts-hobb-i375-385.json"
-  }
+  },
+  "fullSentence": true
  }
 ]

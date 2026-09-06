@@ -1,7 +1,5 @@
-please continue the pending work. Start from MEMORY.md's first row, then the 13:55 RESUMED block atop
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/RESUME-NOTE.md
-(sealed at refs/preserve/resume-note-2026-09-05 if the scratchpad is gone). Seat: Fable chairs; Opus finds, verifies and implements.
-State: §903 landed (product dd5f13218, ledger eaf50fee7); round 5 (= the completion of round 4) runs for all eight sweeps (ids in sweep/LAST-RUNS.json);
-lane L-UI-MAT runs in laneLUIMAT. Rules in force: four BUILD lanes max (research bursts exempt); S-BOUND (three voices settle a feature; dry-check; triage; no round 6);
-the research resumes with `CONFIRM_DEAD=1 sh $SC/resume-research.sh` ONLY once every run is dead (add --triage by hand per the 13:55 block); a lane re-dispatches "from the dock's tip";
-report the remaining-arc table only when an item completes. Push and the WALK stay the owner's.
+please continue the pending work. SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad
+Read, in order: MEMORY.md's first row → $SC/LANE-STATUS.md (every lane's live progress, auto-refreshed) → the ACCOUNT SWITCH block atop $SC/RESUME-NOTE.md → $SC/REDISPATCH.md (the exact re-dispatch prompts and the one research command).
+If the scratchpad is gone: git -C /Users/cstokes/Desktop/settlement-engine show refs/preserve/chair-tools-2026-09-05:LANE-STATUS.md (and :REDISPATCH.md, and refs/preserve/resume-note-2026-09-05:RESUME-NOTE.md).
+Seat: Fable chairs; Opus finds, verifies and implements. Rules: four BUILD lanes max (research bursts exempt); S-BOUND (three voices settle a feature; dry-check; triage from round 5; no round after the owner's last); a lane re-dispatches "from the dock's tip";
+the research resumes with `CONFIRM_DEAD=1 sh $SC/resume-research.sh` ONLY when every run is dead; report the remaining-arc table only when an item completes. Push and the WALK stay the owner's.
