@@ -3,13 +3,14 @@
  "name": "leguin",
  "angle": null,
  "tag": "i709-759",
- "lines": 65,
+ "lines": 117,
  "firstTs": "2026-09-06T21:49:35.297Z",
- "lastTs": "2026-09-06T21:51:30.844Z",
+ "lastTs": "2026-09-06T21:54:34.572Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 17
+  "Bash": 29,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://api.crossref.org/works/10.33274/2079-4835-2020-21-2-27-37",
@@ -24,13 +25,13 @@
   "https://www.ursulakleguin.com/foreword-the-birthday-of-the-world"
  ],
  "filesWritten": [],
- "lastAssistantText": "All 10 sources fetched with HTTP 200. Now examining each for the claimed content.",
+ "lastAssistantText": "nt, so no Wayback or routeHint recovery was needed and nothing is BLOCKED. Thirteen are VERIFIED_VERBATIM; two are PARTIAL because a limb is absent from the page (Paradoxa's page carries no year at all, so \"dated 2009\" is unsourced there; the Troy Press page never names \"A Description of Earthsea\").",
  "run": "wf_e95fca37-bb5",
  "agent": "a23a18b60bb3f30c2",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/cc123b6c-1961-44c5-b071-c5e5aee7ee80/subagents/workflows/wf_e95fca37-bb5/agent-a23a18b60bb3f30c2.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-leguin-i709-759.json",
-  "exists": false
+  "exists": true
  }
 }

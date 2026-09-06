@@ -17525,6 +17525,28 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "628": {
+   "index": 628,
+   "verdict": "PARTIAL",
+   "trueWording": "Salability, repeatability, expectability replace quality",
+   "note": "Le Guin's reply, mid-piece. Page frames the exchange as a conversation ('talks to', 'I have enjoyed this conversation'), never as writing/correspondence; also the page blames 'publishers, or editors, or critics', the claim only publishers. Rest verbatim: 'A literary form degenerates into a formula.'",
+   "unsupportedLimb": "that Le Guin 'wrote to' Cunningham — the page shows a conversation, not correspondence",
+   "fromFile": "verdicts-leguin-i628-708.json"
+  },
+  "629": {
+   "index": 629,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the defense of language, words, and meaning on the sentence level",
+   "note": "Naimon's paragraph beginning 'Dial it down further'. The political-engagement limb is carried by the essay's own frame (a 'politically engaged, creatively vibrant life', choices that 'reinforce a status quo'). Byline David Naimon, Literary Hub.",
+   "fromFile": "verdicts-leguin-i628-708.json"
+  },
+  "630": {
+   "index": 630,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "everything from sentence length, to choice of tense or point of view",
+   "note": "Same 'Dial it down further' paragraph; source reads 'you quickly learned when talking to her about it' (generalised second person for Naimon's own experience) and ends 'has a history'.",
+   "fromFile": "verdicts-leguin-i628-708.json"
+  },
   "631": {
    "index": 631,
    "verdict": "SKIPPED_TRIAGE",
@@ -17538,6 +17560,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
+  },
+  "633": {
+   "index": 633,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "most of all, resonant prose immediately capture the reader's",
+   "note": "Opening section, in the series 'fertile imagination, winsome characters, fabulous plots, and, most of all, resonant prose'. Byline Jason P. Vest, datePublished 2021-05-30.",
+   "fromFile": "verdicts-leguin-i628-708.json"
   },
   "634": {
    "index": 634,
@@ -17573,6 +17602,20 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
+  },
+  "639": {
+   "index": 639,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "His nouns, adjectives, and metaphors leave no room for ambivalence",
+   "note": "archive.org search-inside hit in understandingurs0000cumm (Cummins, Understanding Ursula K. Le Guin, 1990). Context: '...the person or idea or event which confronts him. His nouns... ; he essentially sees the world'. Adjacent hit 640 shows the character is Davidson.",
+   "fromFile": "verdicts-leguin-i628-708.json"
+  },
+  "640": {
+   "index": 640,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "distinguishes the Davidson chapters by his vocabulary, particularly animal metaphors",
+   "note": "Same Cummins volume; full context '...sentence fragments. She also distinguishes the Davidson chapters by his vocabulary, particularly animal metaphors and words with unpleasant...'. 'She' is Le Guin (an authorial act of style in a critic's book about her).",
+   "fromFile": "verdicts-leguin-i628-708.json"
   },
   "641": {
    "index": 641,
@@ -17644,6 +17687,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "651": {
+   "index": 651,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a flexible use of compound and complex sentences",
+   "note": "ursulakleguin00bloo (Bloom, ed., Ursula K. Le Guin, 1986). Walked left to the subject: \"Le Guin's style has evolved towards simplicity, it is still characterized by this flowing quality, a skillful use of cadence and sound patterns, and a flexible use...\". The snippet route cannot say which contributed essay holds the passage, only that it is in the volume.",
+   "fromFile": "verdicts-leguin-i628-708.json"
+  },
   "652": {
    "index": 652,
    "verdict": "SKIPPED_TRIAGE",
@@ -17658,6 +17708,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "654": {
+   "index": 654,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "her alternate realities with a precise, dialectical style",
+   "note": "Same Bloom volume; walked left to 'Le Guin guides the reader through her alternate realities with a precise, dialectical style and the storyteller's...'. Claim's 'leading the reader' = source's 'guides the reader'.",
+   "fromFile": "verdicts-leguin-i628-708.json"
+  },
   "655": {
    "index": 655,
    "verdict": "SKIPPED_TRIAGE",
@@ -17671,6 +17728,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
+  },
+  "657": {
+   "index": 657,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "put speakers on a more equal ideological footing",
+   "note": "ursulakleguinbey0000cadd (Cadden, Ursula K. Le Guin Beyond Genre, 2005). Widened hit: 'Le Guin uses free indirect discourse to help put speakers on a more equal ideological footing with other characters'. Source says 'to help put'; claim says 'to put'.",
+   "fromFile": "verdicts-leguin-i628-708.json"
   },
   "658": {
    "index": 658,
@@ -17720,6 +17784,20 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
+  },
+  "665": {
+   "index": 665,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Harold Bloom compliments Le Guin as a writer of",
+   "note": "Cadden volume; snippet runs '...Harold Bloom compliments Le Guin as a writer of “precise, dialectical style”', i.e. Cadden quoting the Bloom phrase independently confirmed at index 654.",
+   "fromFile": "verdicts-leguin-i628-708.json"
+  },
+  "666": {
+   "index": 666,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Le Guin does not seem to value dialectic, however",
+   "note": "Cadden volume, the sentence immediately after the Bloom quotation: '“precise, dialectical style.” Le Guin does not seem to value dialectic, however. There are many different...'. The 'however' carries the claim's 'disputes'.",
+   "fromFile": "verdicts-leguin-i628-708.json"
   },
   "667": {
    "index": 667,
@@ -17847,6 +17925,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "685": {
+   "index": 685,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "has given us a convenient guide to her career",
+   "note": "fantasytradition0000atte (Attebery, The Fantasy Tradition in American Literature, 1980). Full context adds a qualifier the claim omits without distorting: 'at least up to 1975, in her collection...'.",
+   "fromFile": "verdicts-leguin-i628-708.json"
+  },
   "686": {
    "index": 686,
    "verdict": "SKIPPED_TRIAGE",
@@ -17909,6 +17994,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
+  },
+  "695": {
+   "index": 695,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "some of Le Guin's most graphic and moving prose",
+   "note": "dragonsoffantasy0000pett (Petty, Dragons of Fantasy, 2004): '...on humans and kill one another. The terrifying result is rendered in some of Le Guin's most graphic and moving prose, painted in imagery that sears the mind.' The referent is 'the terrifying result' witnessed by Ged and Arren, which the claim calls 'one scene'.",
+   "fromFile": "verdicts-leguin-i628-708.json"
   },
   "696": {
    "index": 696,
@@ -17986,6 +18078,42 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
+  },
+  "707": {
+   "index": 707,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "by offering a taxonomy based primarily on D.A. Cruse (1988)",
+   "note": "Crossref record confirms author Paola Trimarco, Journal of Literary Studies 15(3-4), 407-424, Dec 1999, and the title 'An analysis of lexical opposition: Le Guin's “the ones who walk away from Omelas”', but carries no abstract. The taxonomy limb comes from the publisher abstract via the sanctioned OpenAlex route (api.openalex.org/works/doi:10.1080/02564719908530238), whose Summary says the paper offers that taxonomy and applies it to the Omelas story. Claim has no quote field, so no verbatim test.",
+   "fromFile": "verdicts-leguin-i628-708.json"
+  },
+  "708": {
+   "index": 708,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "extremely rich in means of artistic expression, among which metaphors",
+   "note": "Crossref JATS abstract, Results section: 'This novel is extremely rich in means of artistic expression, among which metaphors stand out.' The preceding sentence names 'The Left Hand of Darkness'. Authors Kuts (M. O.) and Uholkova (M. I.) confirmed on the record.",
+   "fromFile": "verdicts-leguin-i628-708.json"
+  },
+  "709": {
+   "index": 709,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Conceptual metaphors play an important role in the work",
+   "note": "Crossref JATS abstract for the Kuts/Uholkova article (Intelligence. Personality. Civilization 2(21) 2020, 27-37) carries the sentence word for word; the surrounding sentences fix the novel as The Left Hand of Darkness and repeat that the metaphors matter.",
+   "fromFile": "verdicts-leguin-i709-759.json"
+  },
+  "710": {
+   "index": 710,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "does not set goals to show the image of darkness as negative",
+   "note": "Same Crossref abstract, sentence on the distinction of the author's style; the subject is 'the author', i.e. Le Guin, named in the preceding sentences.",
+   "fromFile": "verdicts-leguin-i709-759.json"
+  },
+  "711": {
+   "index": 711,
+   "verdict": "PARTIAL",
+   "trueWording": "Always Coming Home: “Ethnography, unBible, and Utopian Satire”",
+   "note": "paradoxa.com volume-21 page shows the title, 'Edited by Sylvia Kelso', and the Erlich item at pages 137-166, verbatim. No year appears anywhere on the page (grep for 2009 over the raw HTML returns zero hits; the only years present are 1995/2000/2015/2019/2020/2024/2025), so the date limb is unsupported by this source.",
+   "unsupportedLimb": "the 2009 publication date",
+   "fromFile": "verdicts-leguin-i709-759.json"
   },
   "712": {
    "index": 712,
@@ -18078,6 +18206,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "725": {
+   "index": 725,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a note dryly explains how",
+   "note": "Strange Horizons, Mazin Saleem, 26 November 2018, section 'There and back again'. The note glosses the Pig People, whom the same sentence calls a neighbouring tribe. The page's own wording is 'a note' rather than 'an editorial note'; it is set apart from the story and from a named commentator, so the editorial-apparatus reading holds.",
+   "fromFile": "verdicts-leguin-i709-759.json"
+  },
   "726": {
    "index": 726,
    "verdict": "SKIPPED_TRIAGE",
@@ -18091,6 +18226,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
+  },
+  "728": {
+   "index": 728,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "purposefully left the accents off Kesh names until the Back",
+   "note": "Same Strange Horizons article, late section on language: introduced by 'she explained that', so it is Le Guin's explanation as Saleem reports it, and it continues 'of the Book'.",
+   "fromFile": "verdicts-leguin-i709-759.json"
   },
   "729": {
    "index": 729,
@@ -18134,6 +18276,35 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "735": {
+   "index": 735,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Tolkien's world has almost no ethnographic detail",
+   "note": "dannyreviews.com, Danny Yee, dated August 1995, opening paragraph; the same sentence completes the contrast with Le Guin's world having no history.",
+   "fromFile": "verdicts-leguin-i709-759.json"
+  },
+  "736": {
+   "index": 736,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it is a fictional ethnography rather than a novel",
+   "note": "Same opening paragraph; the subject is Always Coming Home, compared with the Silmarillion rather than The Lord of the Rings.",
+   "fromFile": "verdicts-leguin-i709-759.json"
+  },
+  "737": {
+   "index": 737,
+   "verdict": "PARTIAL",
+   "trueWording": "she ended up writing five short stories plus a descriptive essay",
+   "note": "troypress.com 'A History of Earthsea' (11 Nov 2023) carries the quoted clause verbatim in the world-building paragraph, but the string 'Description of Earthsea' never occurs on the page (zero hits over the raw HTML) and the five stories are not tied to Tales from Earthsea in that sentence.",
+   "unsupportedLimb": "the identification of that essay as 'A Description of Earthsea'",
+   "fromFile": "verdicts-leguin-i709-759.json"
+  },
+  "738": {
+   "index": 738,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "research into nonexistent history is to tell the story",
+   "note": "Same troypress.com paragraph, introduced by 'She wrote', and the sentence ends with finding out what happened. The page does not itself name the Tales from Earthsea foreword as the origin, but the claim sentence does not assert that.",
+   "fromFile": "verdicts-leguin-i709-759.json"
+  },
   "739": {
    "index": 739,
    "verdict": "SKIPPED_TRIAGE",
@@ -18154,6 +18325,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
+  },
+  "742": {
+   "index": 742,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the 8.4 month gestation period and the 6 to 8 month",
+   "note": "vector-bsfa.com, reviewed by Nick Hubble, review first appeared in The BSFA Review. The block quote is cited '(91)' and the next line identifies it as the field notes of Ong Tot Oppong, chapter 'The Question of Sex'. Both figures sit in one sentence, the decimal then the range.",
+   "fromFile": "verdicts-leguin-i709-759.json"
   },
   "743": {
    "index": 743,
@@ -18204,6 +18382,27 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "750": {
+   "index": 750,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a reference narrative covering Earthsea's peoples, languages, history, and magic",
+   "note": "en.wikipedia.org Tales from Earthsea, contents sentence: the book ends with 'A Description of Earthsea', so described.",
+   "fromFile": "verdicts-leguin-i709-759.json"
+  },
+  "751": {
+   "index": 751,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "almost thirty pages of Earthsea lore",
+   "note": "openlibrary.org search-inside results page fetched raw; the first snippet is from 'Ursula K. Le Guin beyond genre: fiction for children and adults' by Michael Cadden and reads that the book concludes with 'A Description of Earthsea', so many pages of lore.",
+   "fromFile": "verdicts-leguin-i709-759.json"
+  },
+  "752": {
+   "index": 752,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a text that is neither story nor afterword",
+   "note": "Second search-inside snippet from the same Cadden volume on the same raw results page: Tales from Earthsea ends with 'A Description of Earthsea', so classed.",
+   "fromFile": "verdicts-leguin-i709-759.json"
+  },
   "753": {
    "index": 753,
    "verdict": "SKIPPED_TRIAGE",
@@ -18225,6 +18424,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "756": {
+   "index": 756,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "with a scholar's seriousness and eye for detail",
+   "note": "bookreporter.com review of Tales from Earthsea, reviewed by Kathy Weissman; the sentence says Le Guin has constructed her alternate world in those terms and cites the appendix 'A Description of Earthsea'.",
+   "fromFile": "verdicts-leguin-i709-759.json"
+  },
   "757": {
    "index": 757,
    "verdict": "SKIPPED_TRIAGE",
@@ -18238,6 +18444,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
+  },
+  "759": {
+   "index": 759,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "who are to reports as squirrels are to nuts",
+   "note": "ursulakleguin.com Foreword: The Birthday of the World, paragraph on 'The Matter of Seggri'; the antecedent on the page is the Historians of Hain and their archives.",
+   "fromFile": "verdicts-leguin-i709-759.json"
   },
   "760": {
    "index": 760,
@@ -18260,6 +18473,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "763": {
+   "index": 763,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I drew charts, with male and female symbols, and lines",
+   "note": "Raw HTML of ursulakleguin.com foreword fetched with a browser UA (HTTP 200). Quote is verbatim in the paragraph beginning 'In the title story of the collection A Fisherman of the Inland Sea'; the sentence continues 'with arrows, very scientific.' The same paragraph supports the kinship limb: she says she spent systematic thought on the marriage and kinship customs of the people of O.",
+   "fromFile": "verdicts-leguin-i763-807.json"
+  },
   "764": {
    "index": 764,
    "verdict": "SKIPPED_TRIAGE",
@@ -18267,12 +18487,26 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "765": {
+   "index": 765,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Note for readers unfamiliar with the planet O",
+   "note": "Raw page of the Birthday of the World excerpts fetched (HTTP 200). The line sits directly under the 'Mountain Ways' heading and before the story's first narrative paragraph ('Danro is the farthest farm...'), so the 'before the story starts' limb holds.",
+   "fromFile": "verdicts-leguin-i763-807.json"
+  },
   "766": {
    "index": 766,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
+  },
+  "767": {
+   "index": 767,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The Morning woman and the Evening man (the \"Morning marriage\")",
+   "note": "Verbatim on the same excerpts page. Lead-in line reads 'The expected relationships within each sedoretu are:' followed by four separate one-line items, each ending in a parenthesised name (Morning, Evening, Day, Night marriage); a fifth line then names the forbidden pairings. The claim's word 'permitted' is the page's 'expected', the only contrast on the page being 'forbidden'.",
+   "fromFile": "verdicts-leguin-i763-807.json"
   },
   "768": {
    "index": 768,
@@ -18316,6 +18550,14 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "774": {
+   "index": 774,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'the offworld convention' - the page attributes the Year One count to 'the Orgota, the Ekumen, and most other people', and the Orgota are a Gethenian nation, not offworlders",
+   "trueWording": "They call the year of some portentous event Year One",
+   "note": "Quote is verbatim. Byline on the page confirms the Gethenian narrator (Sov Thade Tage em Ereb, of Rer, in Karhide, on Gethen), and her own count is stated in the next sentence ('Here it's always Year One'), so the narrator and ordering limbs hold; only the 'offworld' attribution overreaches, since Orgoreyn is on Gethen.",
+   "fromFile": "verdicts-leguin-i763-807.json"
+  },
   "775": {
    "index": 775,
    "verdict": "SKIPPED_TRIAGE",
@@ -18337,6 +18579,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "778": {
+   "index": 778,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Status C-Prime; the Fua entry closes Status E-Query",
+   "note": "astrofella.wordpress.com fetched raw (HTTP 200, 166 KB). The blog quotes the Pocket Guide prologue in full: entry I-A ends 'Status C-Prime.' and entry I-B ends 'Status E-Query.'; the Species II (Liuar) entry carries no status. So exactly two of the three species entries close on a two-word status code.",
+   "fromFile": "verdicts-leguin-i763-807.json"
+  },
   "779": {
    "index": 779,
    "verdict": "SKIPPED_TRIAGE",
@@ -18351,12 +18600,33 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "781": {
+   "index": 781,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Note horizontal social cleavage into 2 pseudo-races",
+   "note": "Verbatim inside the Species II (Liuar) entry on the same page, a bare imperative followed by the two named pseudo-races (Olgyior 'midmen', Angyar 'lords'). The reader-addressing limb rests on the imperative itself; the page assigns the reader no gender.",
+   "fromFile": "verdicts-leguin-i763-807.json"
+  },
   "782": {
    "index": 782,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
+  },
+  "783": {
+   "index": 783,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "(see maps 3114-a, b, c, 3115-a, b.)",
+   "note": "Verbatim in the second handbook quotation, First Geographical Survey entry, as a parenthesis inside the sentence about the major landmasses being surveyed by air.",
+   "fromFile": "verdicts-leguin-i763-807.json"
+  },
+  "784": {
+   "index": 784,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "(see description of intelligent species below)",
+   "note": "Verbatim in the same First Geographical Survey entry, closing the sentence about landings and HILF contacts on East and Northwest Continents. 'below' is the document's own forward pointer, and the entry gives no species description of its own.",
+   "fromFile": "verdicts-leguin-i763-807.json"
   },
   "785": {
    "index": 785,
@@ -18379,12 +18649,26 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "788": {
+   "index": 788,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Revolution: 800 Earthdays 8 hrs. 11 min. 42 sec.",
+   "note": "Verbatim in the physical-description block of the second handbook quotation, alongside Rotation, mean distance and obliquity. Revolution is the orbital year, given to the second.",
+   "fromFile": "verdicts-leguin-i763-807.json"
+  },
   "789": {
    "index": 789,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
+  },
+  "790": {
+   "index": 790,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "an account of Earthsea's history, people, languages, literature, and magic",
+   "note": "ursulakleguin.com/tales-from-earthsea fetched raw (HTTP 200). The book description reads 'Concluding with with an account of...' (the doubled 'with' is the page's own typo); the footer identifies the site as The Ursula K. Le Guin Foundation, supporting the attribution limb.",
+   "fromFile": "verdicts-leguin-i763-807.json"
   },
   "791": {
    "index": 791,
@@ -18442,6 +18726,27 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "799": {
+   "index": 799,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It is journalistic prose.",
+   "note": "PDF fetched (HTTP 200, 347 KB, 8 pages) and text extracted with pdftotext -layout; the phrase is on page 8, confirming the cited location. The paragraph two above it names 'the kind of writing I am attacking, the Poughkeepsie style of fantasy' and calls it flat and only apparently plain, which supports the 'flat fantasy prose she is attacking' limb.",
+   "fromFile": "verdicts-leguin-i763-807.json"
+  },
+  "800": {
+   "index": 800,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the suppression of the author's personality and sensibility is deliberate",
+   "note": "Page 8 of the PDF, immediately after 'In journalism,'; the following sentence states that the goal is an impression of objectivity, supporting that limb.",
+   "fromFile": "verdicts-leguin-i763-807.json"
+  },
+  "801": {
+   "index": 801,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "This technique is right, for a newspaper.",
+   "note": "Page 8 of the PDF. The sentence continues that it is wrong for a novel and dead wrong for a fantasy, so all three limbs of the claim are on the page.",
+   "fromFile": "verdicts-leguin-i763-807.json"
+  },
   "802": {
    "index": 802,
    "verdict": "SKIPPED_TRIAGE",
@@ -18469,6 +18774,20 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
+  },
+  "806": {
+   "index": 806,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Speech expresses character.",
+   "note": "Page 4 of the PDF, confirming the cited page. The next sentence adds that it does so whether or not the speaker or the author knows it, which is the claim's second limb.",
+   "fromFile": "verdicts-leguin-i763-807.json"
+  },
+  "807": {
+   "index": 807,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Most epics are in straightforward language, whether prose or verse.",
+   "note": "Page 8 of the PDF. The next sentence says they retain the directness of their oral forebears, supporting the claim's second limb; the paragraph goes on to Homer, Roland and the sagas.",
+   "fromFile": "verdicts-leguin-i763-807.json"
   },
   "813": {
    "index": 813,

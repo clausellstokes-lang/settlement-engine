@@ -15135,10 +15135,11 @@
   },
   "5": {
    "index": 5,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "occurring simultaneously in different places",
-   "note": "Quote exact; page: 'In the Liveship books, I had a storyline where important events were occurring simultaneously in different places. Rather than limit the story to one person's experience... I decided to use third person and write from several points-of-view.' Simultaneity is the only reason the page gives for the switch, so the claim's 'only' stands; note the page also cites a second benefit (multiple perspectives on one event) as a consequence, not a cause.",
-   "fromFile": "verdicts-hobb-i0-14.json"
+   "note": "COMPLETENESS CRITIC (r7), r4 standard applied uniformly: 'only because' is inferred from silence. Verifier's note: Quote exact; page: 'In the Liveship books, I had a storyline where important events were occurring simultaneously in different places. Rather than limit the story to one person's experience... I decided to use third person and write from several points-of-view.' Simultaneity is the only reason the page gives for the switch, so the claim's 'only' stands; note the page also cites a second benefit (multiple perspectives on one event) as a consequence, not a cause.",
+   "unsupportedLimb": "\"only because important events happened at once\" — the note derives the 'only' from the page's silence about other reasons, not from a statement.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "6": {
    "index": 6,
@@ -15158,10 +15159,11 @@
   },
   "8": {
    "index": 8,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "perceived as more harrowing or depressing",
-   "note": "Quote exact. Denial limb: 'I don't think my characters endure anything that is more harrowing than, for example, the members of the Fellowship in the Lord of the Rings' and 'I don't think that I do exceptionally cruel things to my characters.' Lived-from-inside limb: the Boromir example, 'we would perceive his torment and his torn loyalties a lot more sharply than we do when we only see his actions.' Page names the Fellowship/LOTR rather than Tolkien by name.",
-   "fromFile": "verdicts-hobb-i0-14.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb. Verifier's note: Quote exact. Denial limb: 'I don't think my characters endure anything that is more harrowing than, for example, the members of the Fellowship in the Lord of the Rings' and 'I don't think that I do exceptionally cruel things to my characters.' Lived-from-inside limb: the Boromir example, 'we would perceive his torment and his torn loyalties a lot more sharply than we do when we only see his actions.' Page names the Fellowship/LOTR rather than Tolkien by name.",
+   "unsupportedLimb": "\"crueller than Tolkien\" — the note says the page names the Fellowship of the Lord of the Rings, not Tolkien.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "9": {
    "index": 9,
@@ -15187,17 +15189,19 @@
   },
   "12": {
    "index": 12,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "may not directly move the plot forward but are very important",
-   "note": "Quote is an exact contiguous substring (page reads 'may not directly'). Purpose limb supported: '...very important to letting the reader know who the character is and thus why he makes the choices he does', introduced as 'the key to strong characterization is taking the time to develop the character. For me, that means putting in details and incidents that...'",
-   "fromFile": "verdicts-hobb-i0-14.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb. Verifier's note: Quote is an exact contiguous substring (page reads 'may not directly'). Purpose limb supported: '...very important to letting the reader know who the character is and thus why he makes the choices he does', introduced as 'the key to strong characterization is taking the time to develop the character. For me, that means putting in details and incidents that...'",
+   "unsupportedLimb": "\"details and incidents that do not move the plot\" — the page reads 'may not directly move the plot forward'; the claim drops the hedge.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "13": {
    "index": 13,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "this event is just a throwaway moment",
-   "note": "Quote exact. Full conditional on page via the Joe/Ed example: 'If I don't take the time to show you how important Ed is to Joe, and what interesting people they are, then this event is just a throwaway moment in the book.' The page's instance is a death; the claim generalises to 'the lost thing', which the surrounding argument supports.",
-   "fromFile": "verdicts-hobb-i0-14.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb. Verifier's note: Quote exact. Full conditional on page via the Joe/Ed example: 'If I don't take the time to show you how important Ed is to Joe, and what interesting people they are, then this event is just a throwaway moment in the book.' The page's instance is a death; the claim generalises to 'the lost thing', which the surrounding argument supports.",
+   "unsupportedLimb": "the generalisation to \"the lost thing\" — the note says the page's instance is a death, and the claim generalises beyond it.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "14": {
    "index": 14,
@@ -15267,10 +15271,11 @@
   },
   "23": {
    "index": 23,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "when I get a story idea I can immediately tell which voice",
-   "note": "locusmag.com HTTP 200 (the public excerpts page for the December 2005 issue). Page: 'There is a fairly clean dividing line between the Robin Hobb voice and the Megan Lindholm voice in my writing, so when I get a story idea I can immediately tell which voice is the better fit.' Exact substring; 'immediately' and the two-voices limb are both explicit. The page hedges slightly — 'fairly clean' and 'better fit' against the claim's 'unmistakably' — but the operative content (immediate, unambiguous assignment) is stated. The Inheritance preface says the same harder: 'when I get a story idea, I immediately know if it belongs to Lindholm or Hobb'.",
-   "fromFile": "verdicts-hobb-i15-29.json"
+   "note": "COMPLETENESS CRITIC (r7), r4 standard applied uniformly: 'unmistakably' vs the page's 'fairly clean … better fit'. Verifier's note: locusmag.com HTTP 200 (the public excerpts page for the December 2005 issue). Page: 'There is a fairly clean dividing line between the Robin Hobb voice and the Megan Lindholm voice in my writing, so when I get a story idea I can immediately tell which voice is the better fit.' Exact substring; 'immediately' and the two-voices limb are both explicit. The page hedges slightly — 'fairly clean' and 'better fit' against the claim's 'unmistakably' — but the operative content (immediate, unambiguous assignment) is stated. The Inheritance preface says the same harder: 'when I get a story idea, I immediately know if it belongs to Lindholm or Hobb'.",
+   "unsupportedLimb": "\"belongs immediately and unmistakably to one of the two voices\" — the page says 'a fairly clean dividing line' and 'the better fit', not 'unmistakably'.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "24": {
    "index": 24,
@@ -15289,10 +15294,11 @@
   },
   "26": {
    "index": 26,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "it's a choice of vocabulary, it's a way of seeing things",
-   "note": "writingexcuses.com HTTP 200. Quote exact (page has the article: 'it's a choice of vocabulary, it's a way of seeing things'). All four differentiators are on the page: vocabulary (Hobb's farmer/sailor galley-head-deck example), sentence structure and slang (Hobb: 'Even the choice of sentence structure... Some characters speak in longer sentences... The use of slang'), and cadence (host Dan Wells: 'the cadence of their sentences', which Hobb affirms: 'That's exactly it, and just those verbal clues to your reader'); the episode's key-points summary lists 'Attitude, sentence structure, slang, cadence'. Only nuance: 'cadence' is the host's word, ratified by Hobb, not originally hers.",
-   "fromFile": "verdicts-hobb-i15-29.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb. Verifier's note: writingexcuses.com HTTP 200. Quote exact (page has the article: 'it's a choice of vocabulary, it's a way of seeing things'). All four differentiators are on the page: vocabulary (Hobb's farmer/sailor galley-head-deck example), sentence structure and slang (Hobb: 'Even the choice of sentence structure... Some characters speak in longer sentences... The use of slang'), and cadence (host Dan Wells: 'the cadence of their sentences', which Hobb affirms: 'That's exactly it, and just those verbal clues to your reader'); the episode's key-points summary lists 'Attitude, sentence structure, slang, cadence'. Only nuance: 'cadence' is the host's word, ratified by Hobb, not originally hers.",
+   "unsupportedLimb": "\"cadence\" — the note says cadence is the host's word, ratified by Hobb, not originally hers.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "27": {
    "index": 27,
@@ -15318,10 +15324,11 @@
   },
   "30": {
    "index": 30,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "A tale of three magic wishes works well; an infinite number of wishes is no story at all.",
-   "note": "Quote verbatim in Hobb's answer on magic's limits; the page's framing is 'It is essential... that magic have limits in a story' rather than the word 'scarce', but the three-wishes/infinite-wishes contrast is exact.",
-   "fromFile": "verdicts-hobb-i30-44.json"
+   "verdict": "PARTIAL",
+   "trueWording": "A tale of three magic wishes works well; an infinite number of",
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb. Verifier's note: Quote verbatim in Hobb's answer on magic's limits; the page's framing is 'It is essential... that magic have limits in a story' rather than the word 'scarce', but the three-wishes/infinite-wishes contrast is exact. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "\"Magic must be scarce\" — the note says the page's framing is that magic must have limits; 'scarce' is not the page's word.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "31": {
    "index": 31,
@@ -15377,10 +15384,11 @@
   },
   "38": {
    "index": 38,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "I try to express how horrifying and ugly violence is",
-   "note": "Live URL returned HTTP 403 with a browser user agent; verified on the Wayback raw capture 20220630012930id_. All limbs present: the quote, 'I did not want it to be written as something lascivious or somehow exciting', and 'a traumatic, haunting experience that never fully leaves the characters it happens to' (the latter is the profile writer's description, not Hobb's quote).",
-   "fromFile": "verdicts-hobb-i30-44.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb. Verifier's note: Live URL returned HTTP 403 with a browser user agent; verified on the Wayback raw capture 20220630012930id_. All limbs present: the quote, 'I did not want it to be written as something lascivious or somehow exciting', and 'a traumatic, haunting experience that never fully leaves the characters it happens to' (the latter is the profile writer's description, not Hobb's quote).",
+   "unsupportedLimb": "\"rape as a haunting that never fully leaves\" — the note says that limb is the profile writer's description, not Hobb's quote.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "39": {
    "index": 39,
@@ -15433,10 +15441,11 @@
   },
   "46": {
    "index": 46,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "I like primary documents when I can get them, diaries, journals and things of that sort.",
-   "note": "fantasy-faction.com fetched HTTP 200. Quote verbatim. Full sentence: 'And then I began to read. I like primary documents when I can get them, diaries, journals and things of that sort. Then I like to find well researched and foot-noted books written on whatever topic I am covering.' The 'over histories' limb is supported as a RANKING, not a rejection: primary documents first ('when I can get them'), secondary works second ('Then I like to find...'). The page never uses the word 'histories'; its term is 'well researched and foot-noted books'.",
-   "fromFile": "verdicts-hobb-i45-59.json"
+   "verdict": "PARTIAL",
+   "trueWording": "I like primary documents when I can get them, diaries, journals and",
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb. Verifier's note: fantasy-faction.com fetched HTTP 200. Quote verbatim. Full sentence: 'And then I began to read. I like primary documents when I can get them, diaries, journals and things of that sort. Then I like to find well researched and foot-noted books written on whatever topic I am covering.' The 'over histories' limb is supported as a RANKING, not a rejection: primary documents first ('when I can get them'), secondary works second ('Then I like to find...'). The page never uses the word 'histories'; its term is 'well researched and foot-noted books'. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "\"over histories\" — the note says the page never uses the word 'histories' and supports a RANKING, not a rejection.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "47": {
    "index": 47,
@@ -15447,10 +15456,11 @@
   },
   "48": {
    "index": 48,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "I do not care for 'message' stories, regardless of genre.",
-   "note": "huffpost.com fetched HTTP 200 (no paywall interception). Quote verbatim. Questions limb verbatim two paragraphs on: 'I often think that I write not because I have answers, but because I have questions.' Note the page's immediate self-qualification, which does not defeat the claim: 'Wait, I take that back. I love Aesop's Fables. But that is because there is a clear contract between the reader and that ancient author.'",
-   "fromFile": "verdicts-hobb-i45-59.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb. Verifier's note: huffpost.com fetched HTTP 200 (no paywall interception). Quote verbatim. Questions limb verbatim two paragraphs on: 'I often think that I write not because I have answers, but because I have questions.' Note the page's immediate self-qualification, which does not defeat the claim: 'Wait, I take that back. I love Aesop's Fables. But that is because there is a clear contract between the reader and that ancient author.'",
+   "unsupportedLimb": "\"dislikes message stories\" — the note records the page's immediate self-qualification, 'Wait, I take that back. I love Aesop's Fables.'",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "49": {
    "index": 49,
@@ -15647,10 +15657,11 @@
   },
   "76": {
    "index": 76,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "you don't so much read them as live them",
-   "note": "Raw HTML fetched with a browser UA (curl, 200). Opening paragraph, dated 01 August 2015: 'And the trouble with Robin Hobb's books is that you don't so much read them as live them.' Quote verbatim apart from the page's curly apostrophe. The page is one reader (Jackie Morris), but the generalized second person 'you' carries the claim's plural 'Readers'.",
-   "fromFile": "verdicts-hobb-i75-89.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb. Verifier's note: Raw HTML fetched with a browser UA (curl, 200). Opening paragraph, dated 01 August 2015: 'And the trouble with Robin Hobb's books is that you don't so much read them as live them.' Quote verbatim apart from the page's curly apostrophe. The page is one reader (Jackie Morris), but the generalized second person 'you' carries the claim's plural 'Readers'.",
+   "unsupportedLimb": "\"Readers report\" — the note says the page is one reader (Jackie Morris), the plural resting on a generalized second person.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "77": {
    "index": 77,
@@ -15668,17 +15679,19 @@
   },
   "79": {
    "index": 79,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "feels more authoritative and satisfying than the dry, impersonal, but objective history beginning the chapter",
-   "note": "Wayback raw PDF capture 20240707045408id_ (live dc.swosu.edu viewcontent.cgi returns 403 Cloudflare even with browser UA, referer and landing cookies); text extracted with pypdf. Verbatim on p.57 (PDF p.16), matching the cited page: 'The \"marginalia\" here (that is, the main text) feels more authoritative and satisfying than the dry, impersonal, but objective history beginning the chapter, as it allows the reader to more fully imagine her.' Both limbs on the page; note Oliver adds 'but objective', and makes the assessment at the chapter-13 instance.",
-   "fromFile": "verdicts-hobb-i75-89.json"
+   "verdict": "PARTIAL",
+   "trueWording": "feels more authoritative and satisfying than the dry, impersonal, but objective history",
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb. Verifier's note: Wayback raw PDF capture 20240707045408id_ (live dc.swosu.edu viewcontent.cgi returns 403 Cloudflare even with browser UA, referer and landing cookies); text extracted with pypdf. Verbatim on p.57 (PDF p.16), matching the cited page: 'The \"marginalia\" here (that is, the main text) feels more authoritative and satisfying than the dry, impersonal, but objective history beginning the chapter, as it allows the reader to more fully imagine her.' Both limbs on the page; note Oliver adds 'but objective', and makes the assessment at the chapter-13 instance. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "\"calls the chapter-opening history dry and impersonal\" — the note says Oliver adds 'but objective' and makes the assessment at the chapter-13 instance.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "80": {
    "index": 80,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "This lengthy excerpt contains no hint of the author's relationship to her",
-   "note": "Wayback raw PDF capture 20240707045408id_ (live dc.swosu.edu viewcontent.cgi returns 403 Cloudflare even with browser UA, referer and landing cookies); text extracted with pypdf. Verbatim on p.56 (PDF p.15), matching the cited page: 'Chapter 13, for instance, opens with an epigraph describing his father's widow, Patience. This lengthy excerpt contains no hint of the author's relationship to her or that any information in it came from his experience of her.' Oliver's wording is 'his father's widow' rather than 'stepmother' — the same relation, entailed by the page.",
-   "fromFile": "verdicts-hobb-i75-89.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb. Verifier's note: Wayback raw PDF capture 20240707045408id_ (live dc.swosu.edu viewcontent.cgi returns 403 Cloudflare even with browser UA, referer and landing cookies); text extracted with pypdf. Verbatim on p.56 (PDF p.15), matching the cited page: 'Chapter 13, for instance, opens with an epigraph describing his father's widow, Patience. This lengthy excerpt contains no hint of the author's relationship to her or that any information in it came from his experience of her.' Oliver's wording is 'his father's widow' rather than 'stepmother' — the same relation, entailed by the page.",
+   "unsupportedLimb": "\"his stepmother Patience\" — the note says Oliver's wording is 'his father's widow'.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "81": {
    "index": 81,
@@ -15797,10 +15810,11 @@
   },
   "97": {
    "index": 97,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Naming customs, titles, and social positions, and what text genres exist",
-   "note": "Ekman & Taylor, JFA 32.2, p.253, 'Function Two: Adding Details' (Wayback raw capture of the DiVA PDF; live diva-portal.org timed out twice, curl exit 28). 'The epigraph source, as well as the epigraph itself, can provide information that indicates a way to approach a secondary world. Naming customs, titles, and social positions, and what text genres exist in the world can be determined from the sources given.' Note the page says the source AND the epigraph itself provide this; the claim's narrower 'source line' reading is still covered by 'can be determined from the sources given'.",
-   "fromFile": "verdicts-hobb-i90-104.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb. Verifier's note: Ekman & Taylor, JFA 32.2, p.253, 'Function Two: Adding Details' (Wayback raw capture of the DiVA PDF; live diva-portal.org timed out twice, curl exit 28). 'The epigraph source, as well as the epigraph itself, can provide information that indicates a way to approach a secondary world. Naming customs, titles, and social positions, and what text genres exist in the world can be determined from the sources given.' Note the page says the source AND the epigraph itself provide this; the claim's narrower 'source line' reading is still covered by 'can be determined from the sources given'.",
+   "unsupportedLimb": "\"the source line … tells the reader\" — the note says the page credits the source AND the epigraph itself.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "98": {
    "index": 98,
@@ -15811,10 +15825,11 @@
   },
   "99": {
    "index": 99,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "the writing suggests a philosophical treatise and thus hints at a form of society",
-   "note": "Ekman & Taylor p.252, on the Bakker epigraph (Ajencis, Discourse on War). 'Through linguistic markers such as \"further argument,\" \"supposition,\" and \"discourse,\" the writing suggests a philosophical treatise and thus hints at a form of society in which such treatises are written.' All three lexical markers verbatim; 'linguistic markers' rather than 'lexical markers'.",
-   "fromFile": "verdicts-hobb-i90-104.json"
+   "verdict": "PARTIAL",
+   "trueWording": "the writing suggests a philosophical treatise and thus hints at a form",
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb. Verifier's note: Ekman & Taylor p.252, on the Bakker epigraph (Ajencis, Discourse on War). 'Through linguistic markers such as \"further argument,\" \"supposition,\" and \"discourse,\" the writing suggests a philosophical treatise and thus hints at a form of society in which such treatises are written.' All three lexical markers verbatim; 'linguistic markers' rather than 'lexical markers'. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "\"lexical markers\" — the note says the page's phrase is 'linguistic markers'.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "100": {
    "index": 100,
@@ -15832,10 +15847,11 @@
   },
   "102": {
    "index": 102,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "mimicking text genres that are not fiction, such as the research paper, the parliamentary debate, the historical treatise",
-   "note": "Ekman & Taylor p.258. 'The epigraphs are parts of the work of fiction while mimicking text genres that are not fiction, such as the research paper, the parliamentary debate, the historical treatise. Their many voices can thus rely on both polyphony and mimicry to build a more complex world.' Sentence is scoped to McKillip's, Fforde's and Erikson's epigraphs, but the mimicry mechanism is stated generally.",
-   "fromFile": "verdicts-hobb-i90-104.json"
+   "verdict": "PARTIAL",
+   "trueWording": "mimicking text genres that are not fiction, such as the research paper",
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb. Verifier's note: Ekman & Taylor p.258. 'The epigraphs are parts of the work of fiction while mimicking text genres that are not fiction, such as the research paper, the parliamentary debate, the historical treatise. Their many voices can thus rely on both polyphony and mimicry to build a more complex world.' Sentence is scoped to McKillip's, Fforde's and Erikson's epigraphs, but the mimicry mechanism is stated generally. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "the general \"fictional epigraphs work by mimicking\" — the note says the sentence is scoped to McKillip's, Fforde's and Erikson's epigraphs.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "103": {
    "index": 103,
@@ -15923,10 +15939,11 @@
   },
   "115": {
    "index": 115,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "\"a multi-generational loan, secured by potential marriages, to purchase one\"",
-   "note": "Section 'The Strange Sites of Memory: The Liveships', verbatim: \"As such, they are highly prized-such that a multi-generational loan, secured by potential marriages, to purchase one is not at all uncommon-and, in some ways, are regarded as both enduring members of their owning families and the defining emblems of those same families.\" Bingtown limb supported ('Peculiar to the Bingtown Traders'), family limb supported ('owning families'). One wording nit that does not change the grade: the page says 'is not at all uncommon' (litotes), which the claim renders as 'commonly takes'.",
-   "fromFile": "verdicts-hobb-i105-119.json"
+   "verdict": "PARTIAL",
+   "trueWording": "a multi-generational loan, secured by potential marriages, to purchase one",
+   "note": "COMPLETENESS CRITIC (r7), r4 standard applied uniformly: 'commonly' for 'not at all uncommon'. Verifier's note: Section 'The Strange Sites of Memory: The Liveships', verbatim: \"As such, they are highly prized-such that a multi-generational loan, secured by potential marriages, to purchase one is not at all uncommon-and, in some ways, are regarded as both enduring members of their owning families and the defining emblems of those same families.\" Bingtown limb supported ('Peculiar to the Bingtown Traders'), family limb supported ('owning families'). One wording nit that does not change the grade: the page says 'is not at all uncommon' (litotes), which the claim renders as 'commonly takes'.",
+   "unsupportedLimb": "\"a family … commonly takes a multi-generational loan\" — the page's litotes is 'is not at all uncommon'.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "116": {
    "index": 116,
@@ -15938,10 +15955,11 @@
   },
   "117": {
    "index": 117,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "\"the forty-seven best-selling books\"",
-   "note": "Fetched the PLOS article page (224 KB HTML, 200) and stripped tags -- full text present. Verbatim in the Introduction: \"the results will be presented and discussed for the forty-seven best-selling books in terms of typical network measures\" (and Methods: 'We have arbitrarily restricted our analysis to forty-seven books'). The Hobb limb is verbatim in the same section's corpus list: \"the three 'Liveship Traders' [25-27] and four 'Rain Wild Chronicles' [28-31] books by Robin Hobb\", and the reference list carries exactly seven Hobb titles (Ship of Magic, The Mad Ship, Ship of Destiny, The Dragon Keeper, Dragon Haven, City of Dragons, Blood of Dragons). Nit: the 47 also include Les Miserables, which the paper itself calls 'one classic' rather than a best-seller.",
-   "fromFile": "verdicts-hobb-i105-119.json"
+   "verdict": "PARTIAL",
+   "trueWording": "the forty-seven best-selling books",
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb. Verifier's note: Fetched the PLOS article page (224 KB HTML, 200) and stripped tags -- full text present. Verbatim in the Introduction: \"the results will be presented and discussed for the forty-seven best-selling books in terms of typical network measures\" (and Methods: 'We have arbitrarily restricted our analysis to forty-seven books'). The Hobb limb is verbatim in the same section's corpus list: \"the three 'Liveship Traders' [25-27] and four 'Rain Wild Chronicles' [28-31] books by Robin Hobb\", and the reference list carries exactly seven Hobb titles (Ship of Magic, The Mad Ship, Ship of Destiny, The Dragon Keeper, Dragon Haven, City of Dragons, Blood of Dragons). Nit: the 47 also include Les Miserables, which the paper itself calls 'one classic' rather than a best-seller.",
+   "unsupportedLimb": "\"forty-seven best-selling novels\" — the note says the 47 include Les Misérables, which the paper calls 'one classic' rather than a best-seller.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "118": {
    "index": 118,
@@ -15952,10 +15970,11 @@
   },
   "119": {
    "index": 119,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "\"The dendrogram shows a good clustering of certain series\"",
-   "note": "Verbatim in Results, immediately after 'Fig 21. Dendrogram for the hierarchical clustering of the books using the Ward variance minimization algorithm.': \"The dendrogram shows a good clustering of certain series: 'Harry Potter', 'The Rain Wild Chronicles', 'The Lunar Chronicles' and 'The Mortal Instruments', for instance, appear to be clustered. Other series are more scattered, which can be attributed to a fluctuation of style: for instance, 'The Wheel of Time' is separated in three sub-clusters.\" Rain Wild limb explicit. The 'absence of style fluctuation' limb rests on the authors' own two-sentence contrast (scattered = fluctuation of style, Wheel of Time named) rather than on a separate positive sentence -- close enough to stand, and the paper says nothing to the contrary.",
-   "fromFile": "verdicts-hobb-i105-119.json"
+   "verdict": "PARTIAL",
+   "trueWording": "The dendrogram shows a good clustering of certain series",
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb. Verifier's note: Verbatim in Results, immediately after 'Fig 21. Dendrogram for the hierarchical clustering of the books using the Ward variance minimization algorithm.': \"The dendrogram shows a good clustering of certain series: 'Harry Potter', 'The Rain Wild Chronicles', 'The Lunar Chronicles' and 'The Mortal Instruments', for instance, appear to be clustered. Other series are more scattered, which can be attributed to a fluctuation of style: for instance, 'The Wheel of Time' is separated in three sub-clusters.\" Rain Wild limb explicit. The 'absence of style fluctuation' limb rests on the authors' own two-sentence contrast (scattered = fluctuation of style, Wheel of Time named) rather than on a separate positive sentence -- close enough to stand, and the paper says nothing to the contrary.",
+   "unsupportedLimb": "\"an absence of the style fluctuation\" — the note says the limb rests on the authors' scattered-series contrast rather than on a positive sentence.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "120": {
    "index": 120,
@@ -16001,10 +16020,11 @@
   },
   "126": {
    "index": 126,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "socially significant anthroponyms represent the most dominant and structurally diverse group, which perfectly mirrors the early medieval setting ... where a person's social mask, status, and destiny are inextricably linked",
-   "note": "Quote verbatim in the abstract. Disclosure on one limb: the page says 'the most dominant and structurally diverse group'; the claim renders that as 'the largest group'. In context (a classification into three functional-semantic subgroups, after Belei) 'most dominant' carries the sense of predominant/largest, so the limb is supported, but the source does not use a size word.",
-   "fromFile": "verdicts-hobb-i120-134.json"
+   "verdict": "PARTIAL",
+   "trueWording": "socially significant anthroponyms represent the most dominant and structurally diverse group, which",
+   "note": "COMPLETENESS CRITIC (r7), r4 standard applied uniformly: 'largest' for 'most dominant'. Verifier's note: Quote verbatim in the abstract. Disclosure on one limb: the page says 'the most dominant and structurally diverse group'; the claim renders that as 'the largest group'. In context (a classification into three functional-semantic subgroups, after Belei) 'most dominant' carries the sense of predominant/largest, so the limb is supported, but the source does not use a size word. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "\"Socially significant anthroponyms are the largest group\" — the page says 'the most dominant and structurally diverse group' and uses no size word.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "127": {
    "index": 127,
@@ -16029,10 +16049,11 @@
   },
   "130": {
    "index": 130,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "Linguistic precision and frugality are repeatedly emphasized by the pecksie, and their lack repudiated.",
-   "note": "Quote verbatim. Minor wording gap, not a limb failure: the sentence has the singular 'the pecksie' (the one bound to Mirrifen) where the claim writes 'the pecksies'; the post elsewhere generalises ('Hobb's pecksies themselves are much concerned with the effects of language, and therefore with its exactitude').",
-   "fromFile": "verdicts-hobb-i120-134.json"
+   "verdict": "PARTIAL",
+   "trueWording": "Linguistic precision and frugality are repeatedly emphasized by the pecksie, and their",
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb. Verifier's note: Quote verbatim. Minor wording gap, not a limb failure: the sentence has the singular 'the pecksie' (the one bound to Mirrifen) where the claim writes 'the pecksies'; the post elsewhere generalises ('Hobb's pecksies themselves are much concerned with the effects of language, and therefore with its exactitude'). [fullSentence: trim before any copy]",
+   "unsupportedLimb": "the plural \"pecksies\" — the note says the quoted sentence has the singular 'the pecksie'.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "131": {
    "index": 131,
@@ -16088,17 +16109,19 @@
   },
   "138": {
    "index": 138,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Even in English, the language seems a bit archaic, and long",
-   "note": "CHAIR RE-TAKE 2026-09-06 15:20 (critic-hobb §1, CONFIRMED by normalised search): the round-4 verifier wrote a paraphrase or an empty trueWording; the claim's own quote IS on the page, so trueWording := that quote (≤12 words). Grade unchanged; [146] (Spanish page), [308] (substance), [313]/[314] (gloss) are handled by the r6 regrade.",
-   "fromFile": "verdicts-hobb-retake-r6.json"
+   "note": "COMPLETENESS CRITIC (r7): #138 and #139 report TWO REGISTERS — the encyclopaedic chapter-1 opening (archaic, long, complex) versus Fitz's narrative sentence compared with its Dutch rendering (clear and to the point) — not one source disagreeing with itself. Each row must carry its register scope. Verifier's note: CHAIR RE-TAKE 2026-09-06 15:20 (critic-hobb §1, CONFIRMED by normalised search): the round-4 verifier wrote a paraphrase or an empty trueWording; the claim's own quote IS on the page, so trueWording := that quote (≤12 words). Grade unchanged; [146] (Spanish page), [308] (substance), [313]/[314] (gloss) are handled by the r6 regrade.",
+   "unsupportedLimb": "the register scope — this judgement is of the encyclopaedic chapter-1 opening only, not of Hobb's English generally.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "139": {
    "index": 139,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "The English sentence is clear and to the point",
-   "note": "CHAIR RE-TAKE 2026-09-06 15:20 (critic-hobb §1, CONFIRMED by normalised search): the round-4 verifier wrote a paraphrase or an empty trueWording; the claim's own quote IS on the page, so trueWording := that quote (≤12 words). Grade unchanged; [146] (Spanish page), [308] (substance), [313]/[314] (gloss) are handled by the r6 regrade.",
-   "fromFile": "verdicts-hobb-retake-r6.json"
+   "note": "COMPLETENESS CRITIC (r7): #138 and #139 report TWO REGISTERS — the encyclopaedic chapter-1 opening (archaic, long, complex) versus Fitz's narrative sentence compared with its Dutch rendering (clear and to the point) — not one source disagreeing with itself. Each row must carry its register scope. Verifier's note: CHAIR RE-TAKE 2026-09-06 15:20 (critic-hobb §1, CONFIRMED by normalised search): the round-4 verifier wrote a paraphrase or an empty trueWording; the claim's own quote IS on the page, so trueWording := that quote (≤12 words). Grade unchanged; [146] (Spanish page), [308] (substance), [313]/[314] (gloss) are handled by the r6 regrade.",
+   "unsupportedLimb": "the register scope — this judgement is of Fitz's narrative sentence against its Dutch rendering, not of Hobb's English generally.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "140": {
    "index": 140,
@@ -16145,10 +16168,11 @@
   },
   "146": {
    "index": 146,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "Two important data: insistence on the action and the speaker's weariness",
-   "note": "Garnes PDF, printed p. 47: the cited English expressions \"nos indican dos datos importantes para este analisis; insistencia en la accion y el hastio del hablante.\" Quote exact; 'two things at once' matches \"dos datos importantes\", and 'hastio' is weariness/tedium.",
-   "fromFile": "verdicts-hobb-i135-149.json"
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "insistencia en la accion y el hastio del hablante",
+   "note": "COMPLETENESS CRITIC (r7): the page is Spanish; the Spanish is located on printed p.47 — 'nos indican dos datos importantes para este analisis; insistencia en la accion y el hastio del hablante'. Grade drops to VERIFIED_SUBSTANCE. Verifier's note: Garnes PDF, printed p. 47: the cited English expressions \"nos indican dos datos importantes para este analisis; insistencia en la accion y el hastio del hablante.\" Quote exact; 'two things at once' matches \"dos datos importantes\", and 'hastio' is weariness/tedium.",
+   "unsupportedLimb": "verbatim English wording — the page is Spanish ('insistencia en la acción y el hastío del hablante'), so an English rendering cannot be VERIFIED_VERBATIM.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "147": {
    "index": 147,
@@ -16173,10 +16197,11 @@
   },
   "150": {
    "index": 150,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "cut out everything that does not describe the setting",
-   "note": "Raw page (ofblog.blogspot.com, HTTP 200, curl with browser UA), On writing Q2: 'In a short story, I'm the opposite. I ruthlessly edit and cut out everything that does not describe the setting, advance the plot or offer a character insight.' Quote verbatim; all three limbs present. Page says 'offer a character insight' where the claim says 'give a character insight' - synonymous paraphrase in the claim sentence, not in the quotation.",
-   "fromFile": "verdicts-hobb-i150-164.json"
+   "note": "COMPLETENESS CRITIC (r7): scoped on the page to SHORT STORIES; the same interview's 'In a novel, I sprawl' is partial row 20. Rule 18 must not generalise this row. Verifier's note: Raw page (ofblog.blogspot.com, HTTP 200, curl with browser UA), On writing Q2: 'In a short story, I'm the opposite. I ruthlessly edit and cut out everything that does not describe the setting, advance the plot or offer a character insight.' Quote verbatim; all three limbs present. Page says 'offer a character insight' where the claim says 'give a character insight' - synonymous paraphrase in the claim sentence, not in the quotation.",
+   "unsupportedLimb": "the scope limb — the page scopes the rule to short stories ('In a short story, I'm the opposite…'), so it must not be generalised.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "151": {
    "index": 151,
@@ -16201,10 +16226,11 @@
   },
   "154": {
    "index": 154,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "A tiny village isn't going to have an artisan who makes his living specializing in doorknockers",
-   "note": "Raw page, On writing Q12: 'A tiny village isn't going to have an artisan who makes his living specializing in doorknockers.' Quote verbatim as a prefix of that sentence; offered as an example of the foundation a writer must get under the writing.",
-   "fromFile": "verdicts-hobb-i150-164.json"
+   "verdict": "PARTIAL",
+   "trueWording": "A tiny village isn't going to have an artisan who makes his",
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #32; keep the earlier index. Verifier's note: Raw page, On writing Q12: 'A tiny village isn't going to have an artisan who makes his living specializing in doorknockers.' Quote verbatim as a prefix of that sentence; offered as an example of the foundation a writer must get under the writing. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "duplicate of #32 — the same source wording is already carried by the earlier row (angle voice vs craft).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "155": {
    "index": 155,
@@ -16222,10 +16248,11 @@
   },
   "157": {
    "index": 157,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "Climb into a character, and suddenly even the villain is wondering what is for dinner tonight",
-   "note": "Raw page, On writing Q10: quote verbatim. The 'inside a villain's skin' limb is supported twice in the same paragraph - 'Climb into a character, and suddenly even the villain is wondering...' and 'If you put on the villain's skin, you have to love him or at least understand him.'",
-   "fromFile": "verdicts-hobb-i150-164.json"
+   "verdict": "PARTIAL",
+   "trueWording": "Climb into a character, and suddenly even the villain is wondering what",
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #19; keep the earlier index. Verifier's note: Raw page, On writing Q10: quote verbatim. The 'inside a villain's skin' limb is supported twice in the same paragraph - 'Climb into a character, and suddenly even the villain is wondering...' and 'If you put on the villain's skin, you have to love him or at least understand him.' [fullSentence: trim before any copy]",
+   "unsupportedLimb": "duplicate of #19 — the same source wording is already carried by the earlier row (angle voice vs craft).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "158": {
    "index": 158,
@@ -16236,24 +16263,27 @@
   },
   "159": {
    "index": 159,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "I could only tell the reader what Fitz knew at that moment",
-   "note": "Raw page, Specific questions Q14: 'It was horribly inconvenient at times, because I could never say, \"Meanwhile, back at the castle, thus and so was happening.\" I could only tell the reader what Fitz knew at that moment.' Verbatim; the confinement limb is explicit in the preceding sentence.",
-   "fromFile": "verdicts-hobb-i150-164.json"
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #4; keep the earlier index. Verifier's note: Raw page, Specific questions Q14: 'It was horribly inconvenient at times, because I could never say, \"Meanwhile, back at the castle, thus and so was happening.\" I could only tell the reader what Fitz knew at that moment.' Verbatim; the confinement limb is explicit in the preceding sentence.",
+   "unsupportedLimb": "duplicate of #4 — the same source wording is already carried by the earlier row (angle voice vs craft).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "160": {
    "index": 160,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "To me, the first person voice is the natural voice for the story teller",
-   "note": "Raw page (aidanmoher.com, HTTP 200, curl with browser UA), Q on what draws her to first person: verbatim, prefixed on the page by the hedge 'To me,'.",
-   "fromFile": "verdicts-hobb-i150-164.json"
+   "verdict": "PARTIAL",
+   "trueWording": "To me, the first person voice is the natural voice for the",
+   "note": "COMPLETENESS CRITIC (r7), r4 standard applied uniformly: the claim drops the page's 'To me,'. Also a cross-angle near-duplicate of #0 (same Aidan Moher sentence) — keep the earlier index. CROSS-ANGLE DUPLICATE: also duplicate of #0 — keep the earlier index. Verifier's note: Raw page (aidanmoher.com, HTTP 200, curl with browser UA), Q on what draws her to first person: verbatim, prefixed on the page by the hedge 'To me,'. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "\"Hobb calls the first person voice the natural voice\" — the page prefixes the hedge 'To me,'; and this row repeats #0 from another angle.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "161": {
    "index": 161,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "the reader is privy to the characters innermost thoughts and feelings",
-   "note": "Raw page, same first-person answer: 'With first person, the reader gets to know the viewpoint character intimately because the reader is privy to the characters innermost thoughts and feelings.' Verbatim (the page omits the apostrophe in 'characters'); the viewpoint-character limb is in the same sentence.",
-   "fromFile": "verdicts-hobb-i150-164.json"
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #1; keep the earlier index. Verifier's note: Raw page, same first-person answer: 'With first person, the reader gets to know the viewpoint character intimately because the reader is privy to the characters innermost thoughts and feelings.' Verbatim (the page omits the apostrophe in 'characters'); the viewpoint-character limb is in the same sentence.",
+   "unsupportedLimb": "duplicate of #1 — the same source wording is already carried by the earlier row (angle voice vs craft).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "162": {
    "index": 162,
@@ -16264,10 +16294,11 @@
   },
   "163": {
    "index": 163,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "The Lindholm writing style is not as leisurely",
-   "note": "Raw page, Q on the two pen names, the sentence two after the Hobb one: verbatim. The 'than the Hobb style' comparand is not spelled out in that sentence but is the immediate antecedent ('When I write as Hobb, I tend to write longer, more detailed stories... The Lindholm writing style is not as leisurely.') in an answer whose whole subject is the difference between the two bylines.",
-   "fromFile": "verdicts-hobb-i150-164.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb. Verifier's note: Raw page, Q on the two pen names, the sentence two after the Hobb one: verbatim. The 'than the Hobb style' comparand is not spelled out in that sentence but is the immediate antecedent ('When I write as Hobb, I tend to write longer, more detailed stories... The Lindholm writing style is not as leisurely.') in an answer whose whole subject is the difference between the two bylines.",
+   "unsupportedLimb": "\"as the Hobb style\" — the note says the comparand is not spelled out in that sentence and rests on the antecedent.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "164": {
    "index": 164,
@@ -16292,31 +16323,35 @@
   },
   "167": {
    "index": 167,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "In Farseer, I coped with that by having little prologues at the beginning of each chapter that gave the reader additional information.",
-   "note": "Quote verbatim. Every limb supported: coping with first-person limitation ('the writer is limited to telling the reader what that character knows at that moment'), in Farseer, chapter-opening prologues, additional information.",
-   "fromFile": "verdicts-hobb-i165-179.json"
+   "verdict": "PARTIAL",
+   "trueWording": "In Farseer, I coped with that by having little prologues at the",
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #3; keep the earlier index. Verifier's note: Quote verbatim. Every limb supported: coping with first-person limitation ('the writer is limited to telling the reader what that character knows at that moment'), in Farseer, chapter-opening prologues, additional information. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "duplicate of #3 — the same source wording is already carried by the earlier row (angle voice vs craft).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "168": {
    "index": 168,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "There is a fairly clean dividing line between the Robin Hobb voice and the Megan Lindholm voice in my writing.",
-   "note": "Quote verbatim in the first interview excerpt on the raw Locus Online page (December 2005 issue thread). Claim's 'in her writing' is the page's 'in my writing'.",
-   "fromFile": "verdicts-hobb-i165-179.json"
+   "verdict": "PARTIAL",
+   "trueWording": "There is a fairly clean dividing line between the Robin Hobb voice",
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #23; keep the earlier index. Verifier's note: Quote verbatim in the first interview excerpt on the raw Locus Online page (December 2005 issue thread). Claim's 'in her writing' is the page's 'in my writing'. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "duplicate of #23 — the same source wording is already carried by the earlier row (angle voice vs craft).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "169": {
    "index": 169,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "I would describe my writing style as both leisurely and intimate.",
-   "note": "Quote verbatim, first Q&A of the Fantasy Book Critic interview (post dated Monday, January 7, 2008).",
-   "fromFile": "verdicts-hobb-i165-179.json"
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #9; keep the earlier index. Verifier's note: Quote verbatim, first Q&A of the Fantasy Book Critic interview (post dated Monday, January 7, 2008).",
+   "unsupportedLimb": "duplicate of #9 — the same source wording is already carried by the earlier row (angle voice vs craft).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "170": {
    "index": 170,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "For me, that means putting in details and incidents that may not directly move the plot forward.",
-   "note": "Quote verbatim in the characterization answer; the antecedent of 'that' is 'the key to strong characterization is taking the time to develop the character', so the 'characterisation means' limb holds.",
-   "fromFile": "verdicts-hobb-i165-179.json"
+   "verdict": "PARTIAL",
+   "trueWording": "For me, that means putting in details and incidents that may not",
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #12; keep the earlier index. Verifier's note: Quote verbatim in the characterization answer; the antecedent of 'that' is 'the key to strong characterization is taking the time to develop the character', so the 'characterisation means' limb holds. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "duplicate of #12 — the same source wording is already carried by the earlier row (angle voice vs craft).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "171": {
    "index": 171,
@@ -16341,17 +16376,19 @@
   },
   "174": {
    "index": 174,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "when I propelled the reader directly into it, it lacked the impact and significance I wanted it to have",
-   "note": "Quote verbatim. The 'without building up to it' limb is the preceding clause on the page: 'when I didn't slow down and construct the ramps up to that exciting scene'.",
-   "fromFile": "verdicts-hobb-i165-179.json"
+   "verdict": "PARTIAL",
+   "trueWording": "when I propelled the reader directly into it, it lacked the impact",
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #11; keep the earlier index. Verifier's note: Quote verbatim. The 'without building up to it' limb is the preceding clause on the page: 'when I didn't slow down and construct the ramps up to that exciting scene'. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "duplicate of #11 — the same source wording is already carried by the earlier row (angle voice vs craft).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "175": {
    "index": 175,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "For me, the story is really about how the events affect the characters rather than about the events themselves.",
-   "note": "Quote verbatim in answer 1 of the Pat's Fantasy Hotlist Q&A (posted Monday, July 11, 2005).",
-   "fromFile": "verdicts-hobb-i165-179.json"
+   "verdict": "PARTIAL",
+   "trueWording": "For me, the story is really about how the events affect the",
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #24; keep the earlier index. Verifier's note: Quote verbatim in answer 1 of the Pat's Fantasy Hotlist Q&A (posted Monday, July 11, 2005). [fullSentence: trim before any copy]",
+   "unsupportedLimb": "duplicate of #24 — the same source wording is already carried by the earlier row (angle voice vs craft).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "176": {
    "index": 176,
@@ -16369,10 +16406,11 @@
   },
   "178": {
    "index": 178,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "So with your characters, it's a choice of vocabulary, it's a way of seeing things.",
-   "note": "Quote verbatim, attributed to [Robin] in the same transcript, and framed as how to differentiate characters (followed by the read-your-dialogue double-check).",
-   "fromFile": "verdicts-hobb-i165-179.json"
+   "verdict": "PARTIAL",
+   "trueWording": "So with your characters, it's a choice of vocabulary, it's a way",
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #26; keep the earlier index. Verifier's note: Quote verbatim, attributed to [Robin] in the same transcript, and framed as how to differentiate characters (followed by the read-your-dialogue double-check). [fullSentence: trim before any copy]",
+   "unsupportedLimb": "duplicate of #26 — the same source wording is already carried by the earlier row (angle voice vs craft).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "179": {
    "index": 179,
@@ -16616,10 +16654,11 @@
   },
   "213": {
    "index": 213,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "They are people who are at the lower echelons of the economic strata",
-   "note": "Live page (lightspeedmagazine.com, 200 OK, raw). Verbatim. The question that prompts it names The Inheritance & Other Stories, 'featuring short fiction from throughout your career', so the short-fiction limb is supported by context; Hobb's own words are 'many of the characters in my stories'.",
-   "fromFile": "verdicts-hobb-i210-224.json"
+   "verdict": "PARTIAL",
+   "trueWording": "They are people who are at the lower echelons of the economic",
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb. Verifier's note: Live page (lightspeedmagazine.com, 200 OK, raw). Verbatim. The question that prompts it names The Inheritance & Other Stories, 'featuring short fiction from throughout your career', so the short-fiction limb is supported by context; Hobb's own words are 'many of the characters in my stories'. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "\"the characters in her short fiction\" — the note says Hobb's own words are 'many of the characters in my stories'.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "214": {
    "index": 214,
@@ -16674,31 +16713,35 @@
   },
   "221": {
    "index": 221,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "Each chapter begins with an epigraph-a snippet of in-world text ranging from historical treatises and herbalist journals to fragments of folklore and political propaganda",
-   "note": "Live host returned 403 to curl; recovered via Wayback raw capture 20260607133057id_ (200, 60KB). Verbatim, in section '2.2 The Epigraphs: World-Building through Fragmented History'. Note the page's list also includes herbalist journals, which the claim omits without misstating.",
-   "fromFile": "verdicts-hobb-i210-224.json"
+   "verdict": "NOT_FOUND",
+   "trueWording": "Each chapter begins with an epigraph-a snippet of in-world text ranging from",
+   "note": "COMPLETENESS CRITIC (r7): the state roster's own verdict on rpgstorytellers.com is substantive:false, 'reads as AI-generated' — NOT_FOUND for the section's purposes regardless of the string match. Verifier's note: Live host returned 403 to curl; recovered via Wayback raw capture 20260607133057id_ (200, 60KB). Verbatim, in section '2.2 The Epigraphs: World-Building through Fragmented History'. Note the page's list also includes herbalist journals, which the claim omits without misstating. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "the whole row — the state roster marks rpgstorytellers.com substantive:false, 'reads as AI-generated', so the page is not a source for this section's purposes.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "222": {
    "index": 222,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "the dry, academic tone of an epigraph about the 'glory' of the Farseer line is immediately followed by a scene depicting the brutal, unglamorous reality of Fitz's life",
-   "note": "Wayback raw capture (same as 221). Verbatim, under the 'Tonal Contrast' bullet in section 2.2.",
-   "fromFile": "verdicts-hobb-i210-224.json"
+   "verdict": "NOT_FOUND",
+   "trueWording": "the dry, academic tone of an epigraph about the 'glory' of the",
+   "note": "COMPLETENESS CRITIC (r7): the state roster's own verdict on rpgstorytellers.com is substantive:false, 'reads as AI-generated' — NOT_FOUND for the section's purposes regardless of the string match. Verifier's note: Wayback raw capture (same as 221). Verbatim, under the 'Tonal Contrast' bullet in section 2.2. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "the whole row — the state roster marks rpgstorytellers.com substantive:false, 'reads as AI-generated', so the page is not a source for this section's purposes.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "223": {
    "index": 223,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "By dedicating thousands of words to the mundane details of Fitz's daily existence... Hobb forces the reader to inhabit the protagonist's rhythm of life",
-   "note": "Wayback raw capture (same as 221). Verbatim, in section 2.3 'The \"Slow Burn\" as Psychological Immersion'; the causal 'attributes the slow burn to' limb is the sentence's own structure.",
-   "fromFile": "verdicts-hobb-i210-224.json"
+   "verdict": "NOT_FOUND",
+   "trueWording": "By dedicating thousands of words to the mundane details of Fitz's daily",
+   "note": "COMPLETENESS CRITIC (r7): the state roster's own verdict on rpgstorytellers.com is substantive:false, 'reads as AI-generated' — NOT_FOUND for the section's purposes regardless of the string match. Verifier's note: Wayback raw capture (same as 221). Verbatim, in section 2.3 'The \"Slow Burn\" as Psychological Immersion'; the causal 'attributes the slow burn to' limb is the sentence's own structure. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "the whole row — the state roster marks rpgstorytellers.com substantive:false, 'reads as AI-generated', so the page is not a source for this section's purposes.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "224": {
    "index": 224,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "The chapter epigraphs are excerpts from a public document, largely a formal history written in a distant, scholarly voice",
-   "note": "Abstract landing page fetched live (200) but does not carry the sentence; the PDF at cgi/viewcontent.cgi?article=3044 returned 403 live, recovered via Wayback raw capture 20240707045408id_ (200, application/pdf, 21pp) and text-extracted. The sentence is verbatim on PDF page 4, whose running head is 'Mythlore 41.1, Fall/Winter 2022 45', confirming p. 45. Side note, not part of the claim sentence: the PDF runs to printed p. 62, not p. 66 as the citation's page range states.",
-   "fromFile": "verdicts-hobb-i210-224.json"
+   "verdict": "PARTIAL",
+   "trueWording": "The chapter epigraphs are excerpts from a public document, largely a formal",
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #78; keep the earlier index. Verifier's note: Abstract landing page fetched live (200) but does not carry the sentence; the PDF at cgi/viewcontent.cgi?article=3044 returned 403 live, recovered via Wayback raw capture 20240707045408id_ (200, application/pdf, 21pp) and text-extracted. The sentence is verbatim on PDF page 4, whose running head is 'Mythlore 41.1, Fall/Winter 2022 45', confirming p. 45. Side note, not part of the claim sentence: the PDF runs to printed p. 62, not p. 66 as the citation's page range states. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "duplicate of #78 — the same source wording is already carried by the earlier row (angle academic vs craft).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "225": {
    "index": 225,
@@ -16716,17 +16759,19 @@
   },
   "227": {
    "index": 227,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Instead, he includes evidentiary quotes from her nursemaids",
-   "note": "p.56: 'Chapter 13 ... opens with an epigraph describing his father's widow, Patience. This lengthy excerpt contains no hint of the author's relationship to her or that any information in it came from his experience of her. Instead, he includes evidentiary quotes from her nursemaids and publicly available information.' All limbs supported.",
-   "fromFile": "verdicts-hobb-i225-239.json"
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #81; keep the earlier index. Verifier's note: p.56: 'Chapter 13 ... opens with an epigraph describing his father's widow, Patience. This lengthy excerpt contains no hint of the author's relationship to her or that any information in it came from his experience of her. Instead, he includes evidentiary quotes from her nursemaids and publicly available information.' All limbs supported.",
+   "unsupportedLimb": "duplicate of #81 — the same source wording is already carried by the earlier row (angle academic vs craft).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "228": {
    "index": 228,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "the main text feels more authoritative and satisfying",
-   "note": "pp.56-57: 'The \"marginalia\" here (that is, the main text) feels more authoritative and satisfying than the dry, impersonal, but objective history beginning the chapter'. Both limbs supported; Oliver's verb is 'feels', which the claim renders as 'judges'. Quote actually sits at the p.56/57 break, not p.56 alone (citation field only).",
-   "fromFile": "verdicts-hobb-i225-239.json"
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #79; keep the earlier index. The verifier also records that Oliver's verb is 'feels', which the claim renders as 'judges'. Verifier's note: pp.56-57: 'The \"marginalia\" here (that is, the main text) feels more authoritative and satisfying than the dry, impersonal, but objective history beginning the chapter'. Both limbs supported; Oliver's verb is 'feels', which the claim renders as 'judges'. Quote actually sits at the p.56/57 break, not p.56 alone (citation field only).",
+   "unsupportedLimb": "duplicate of #79 — the same source wording is already carried by the earlier row (angle academic vs craft).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "229": {
    "index": 229,
@@ -16738,10 +16783,11 @@
   },
   "230": {
    "index": 230,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "in sentences that start by telling what a character is not doing",
-   "note": "p.57: 'This manifests not just in double negatives (of which there are many) but in sentences that start by telling what a character is not doing or feeling.' Verbatim, including the 'or feeling' limb.",
-   "fromFile": "verdicts-hobb-i225-239.json"
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #83; keep the earlier index. Verifier's note: p.57: 'This manifests not just in double negatives (of which there are many) but in sentences that start by telling what a character is not doing or feeling.' Verbatim, including the 'or feeling' limb.",
+   "unsupportedLimb": "duplicate of #83 — the same source wording is already carried by the earlier row (angle academic vs craft).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "231": {
    "index": 231,
@@ -16759,31 +16805,35 @@
   },
   "233": {
    "index": 233,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "a lengthy portion of the narrative given over to describing what is not there",
-   "note": "p.61: 'In a way, this is a lengthy portion of the narrative given over to describing what is not there' (the 'misted' section where Galen's tampering is the absent detail). The seventy-page limb is supported two paragraphs later, pp.61-62: 'Then Verity finally explicates what has been happening for the past 70 pages of the novel' — same stretch, but the figure and the phrase are not in one sentence.",
-   "fromFile": "verdicts-hobb-i225-239.json"
+   "verdict": "PARTIAL",
+   "trueWording": "a lengthy portion of the narrative given over to describing what is",
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #91; keep the earlier index. The verifier also records that the seventy-page figure and the quoted phrase are not in one sentence. Verifier's note: p.61: 'In a way, this is a lengthy portion of the narrative given over to describing what is not there' (the 'misted' section where Galen's tampering is the absent detail). The seventy-page limb is supported two paragraphs later, pp.61-62: 'Then Verity finally explicates what has been happening for the past 70 pages of the novel' — same stretch, but the figure and the phrase are not in one sentence. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "duplicate of #91 — the same source wording is already carried by the earlier row (angle academic vs craft).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "234": {
    "index": 234,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "particularly extensive parataxis, elevated figurative language, and parallelism",
-   "note": "pp.59-60: 'His description employs several syntactic patterns typical of the elevated style associated with fantasy novels, particularly extensive parataxis, elevated figurative language, and parallelism', and 'Fitz marks his shift from a discourse of history to a discourse of fantasy with a shift in style.' Both limbs supported.",
-   "fromFile": "verdicts-hobb-i225-239.json"
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #86; keep the earlier index. Verifier's note: pp.59-60: 'His description employs several syntactic patterns typical of the elevated style associated with fantasy novels, particularly extensive parataxis, elevated figurative language, and parallelism', and 'Fitz marks his shift from a discourse of history to a discourse of fantasy with a shift in style.' Both limbs supported.",
+   "unsupportedLimb": "duplicate of #86 — the same source wording is already carried by the earlier row (angle academic vs craft).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "235": {
    "index": 235,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "increasingly infected by the style of imaginative fiction",
-   "note": "pp.60-61: 'the epigraphs become increasingly infected by the style of imaginative fiction in place of the style of scholarly discourse', in a passage about the novel's later movement ('Even as the narrator starts to shift the burden of constructing events to the reader'). A first literal string match missed only because pypdf breaks the word as 'imag inative' at a line end.",
-   "fromFile": "verdicts-hobb-i225-239.json"
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #88; keep the earlier index. Verifier's note: pp.60-61: 'the epigraphs become increasingly infected by the style of imaginative fiction in place of the style of scholarly discourse', in a passage about the novel's later movement ('Even as the narrator starts to shift the burden of constructing events to the reader'). A first literal string match missed only because pypdf breaks the word as 'imag inative' at a line end.",
+   "unsupportedLimb": "duplicate of #88 — the same source wording is already carried by the earlier row (angle academic vs craft).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "236": {
    "index": 236,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Two sentences use inverted syntax (the first and the last)",
-   "note": "pp.62-63, on the chapter 15 epigraph about the Skill: 'Two sentences use inverted syntax (the first and the last), in addition to the parataxis across sentence boundaries (\"And this is the thing\") and the listing of parallel phrases'. All three limbs supported.",
-   "fromFile": "verdicts-hobb-i225-239.json"
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #90; keep the earlier index. Verifier's note: pp.62-63, on the chapter 15 epigraph about the Skill: 'Two sentences use inverted syntax (the first and the last), in addition to the parataxis across sentence boundaries (\"And this is the thing\") and the listing of parallel phrases'. All three limbs supported.",
+   "unsupportedLimb": "duplicate of #90 — the same source wording is already carried by the earlier row (angle academic vs craft).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "237": {
    "index": 237,
@@ -16830,10 +16880,11 @@
   },
   "243": {
    "index": 243,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "no one is bruised afterwards, there is no blood, no one limps",
-   "note": "Raw page read. Verbatim within: 'Often, no one is bruised afterwards, there is no blood, no one limps or throws up in the corner.' The screen limb is on the page: 'I'm often annoyed by movies in which the protagonist is kicked in the head...'",
-   "fromFile": "verdicts-hobb-i240-254.json"
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #42; keep the earlier index. Verifier's note: Raw page read. Verbatim within: 'Often, no one is bruised afterwards, there is no blood, no one limps or throws up in the corner.' The screen limb is on the page: 'I'm often annoyed by movies in which the protagonist is kicked in the head...'",
+   "unsupportedLimb": "duplicate of #42 — the same source wording is already carried by the earlier row (angle voice vs craft).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "244": {
    "index": 244,
@@ -16844,10 +16895,11 @@
   },
   "245": {
    "index": 245,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "The things that happen to us change us ... what makes a character interesting",
-   "note": "Raw page read. Verbatim: 'The things that happen to us change us.' The second limb is the same paragraph: 'I think that is actually what makes a character interesting.'",
-   "fromFile": "verdicts-hobb-i240-254.json"
+   "verdict": "PARTIAL",
+   "trueWording": "The things that happen to us change us ... what makes a",
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #41; keep the earlier index. Verifier's note: Raw page read. Verbatim: 'The things that happen to us change us.' The second limb is the same paragraph: 'I think that is actually what makes a character interesting.' [fullSentence: trim before any copy]",
+   "unsupportedLimb": "duplicate of #41 — the same source wording is already carried by the earlier row (angle voice vs craft).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "246": {
    "index": 246,
@@ -16858,10 +16910,11 @@
   },
   "247": {
    "index": 247,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "Characters are shaped by their experiences. We become the product of what has been done to us",
-   "note": "Raw page read. Verbatim in the 'Hobb's Writing as a Whole' section, exactly as the claim's page field says; the page adds 'Or for us.'",
-   "fromFile": "verdicts-hobb-i240-254.json"
+   "verdict": "PARTIAL",
+   "trueWording": "Characters are shaped by their experiences. We become the product of what",
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #43; keep the earlier index. Verifier's note: Raw page read. Verbatim in the 'Hobb's Writing as a Whole' section, exactly as the claim's page field says; the page adds 'Or for us.' [fullSentence: trim before any copy]",
+   "unsupportedLimb": "duplicate of #43 — the same source wording is already carried by the earlier row (angle voice vs craft).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "248": {
    "index": 248,
@@ -16886,10 +16939,11 @@
   },
   "251": {
    "index": 251,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "the reader will perhaps be able to see what is coming even if the main character doesn't",
-   "note": "Raw page read. Verbatim within that sentence. 'Main character' is the first-person narrator in this passage, so the claim's 'narrator' limb holds.",
-   "fromFile": "verdicts-hobb-i240-254.json"
+   "verdict": "PARTIAL",
+   "trueWording": "the reader will perhaps be able to see what is coming even",
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #2; keep the earlier index. Verifier's note: Raw page read. Verbatim within that sentence. 'Main character' is the first-person narrator in this passage, so the claim's 'narrator' limb holds. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "duplicate of #2 — the same source wording is already carried by the earlier row (angle voice vs craft).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "252": {
    "index": 252,
@@ -16900,10 +16954,11 @@
   },
   "253": {
    "index": 253,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "I think I write for people who really like to know the characters",
-   "note": "Raw page read. The quoted string appears word for word inside the page sentence, which carries a hedge ('I think I write for people...'); the claim's substance is otherwise exact.",
-   "fromFile": "verdicts-hobb-i240-254.json"
+   "verdict": "PARTIAL",
+   "trueWording": "I think I write for people who really like to know the",
+   "note": "COMPLETENESS CRITIC (r7), r4 standard applied uniformly: the claim drops 'I think'. Verifier's note: Raw page read. The quoted string appears word for word inside the page sentence, which carries a hedge ('I think I write for people...'); the claim's substance is otherwise exact. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "\"Hobb says she writes for people who really like to know the characters\" — the page's sentence carries the hedge 'I think I write for people…'.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "254": {
    "index": 254,
@@ -17006,10 +17061,11 @@
   },
   "268": {
    "index": 268,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "\"If something is left nebulous, it is because the author intends for it to be nebulous.\"",
-   "note": "Same raw Wayback capture. Quote exact. The page phrases the principle in the third person ('the author'), not the first; the claim's 'her text / she intends' reading is carried by the immediate context, where Hobb is defending her own work ('the space that I have engineered into the story' is the next sentence). Quote it as written to stay accurate.",
-   "fromFile": "verdicts-hobb-i255-269.json"
+   "verdict": "PARTIAL",
+   "trueWording": "If something is left nebulous, it is because the author intends for",
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb. Verifier's note: Same raw Wayback capture. Quote exact. The page phrases the principle in the third person ('the author'), not the first; the claim's 'her text / she intends' reading is carried by the immediate context, where Hobb is defending her own work ('the space that I have engineered into the story' is the next sentence). Quote it as written to stay accurate. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "\"in her text … she intends\" — the note says the page phrases the principle in the third person ('the author') and to quote it as written.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "269": {
    "index": 269,
@@ -17027,10 +17083,11 @@
   },
   "271": {
    "index": 271,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "We have five senses, and in a description of anything, I want to engage as many of them as possible",
-   "note": "lisipieces.com fetched raw (byline 'By Elise Mead', datePublished 2025-10-18). Hobb, quoted in the food section and again verbatim in the Q&A: 'I think it goes back to ‘show don’t tell.’ We have five senses, and in a description of anything, I want to engage as many of them as possible.' Quote verbatim, whole claim supported.",
-   "fromFile": "verdicts-hobb-i270-284.json"
+   "verdict": "PARTIAL",
+   "trueWording": "We have five senses, and in a description of anything, I want",
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #29; keep the earlier index. Verifier's note: lisipieces.com fetched raw (byline 'By Elise Mead', datePublished 2025-10-18). Hobb, quoted in the food section and again verbatim in the Q&A: 'I think it goes back to ‘show don’t tell.’ We have five senses, and in a description of anything, I want to engage as many of them as possible.' Quote verbatim, whole claim supported. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "duplicate of #29 — the same source wording is already carried by the earlier row (angle voice vs craft).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "272": {
    "index": 272,
@@ -17055,10 +17112,11 @@
   },
   "275": {
    "index": 275,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "A tale of three magic wishes works well; an infinite number of wishes is no story at all",
-   "note": "Same page, in Hobb's own interview answer on magic limits: 'It is essential, in my opinion, that magic have limits in a story. A tale of three magic wishes works well; an infinite number of wishes is no story at all.' Quote verbatim; both limbs (three wishes works, infinite is no story) present and attributed to Hobb.",
-   "fromFile": "verdicts-hobb-i270-284.json"
+   "verdict": "PARTIAL",
+   "trueWording": "A tale of three magic wishes works well; an infinite number of",
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #30; keep the earlier index. Verifier's note: Same page, in Hobb's own interview answer on magic limits: 'It is essential, in my opinion, that magic have limits in a story. A tale of three magic wishes works well; an infinite number of wishes is no story at all.' Quote verbatim; both limbs (three wishes works, infinite is no story) present and attributed to Hobb. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "duplicate of #30 — the same source wording is already carried by the earlier row (angle voice vs craft).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "276": {
    "index": 276,
@@ -17133,17 +17191,19 @@
   },
   "286": {
    "index": 286,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "What’s brilliant, though, is that he does it over straw",
-   "note": "Quote exact. All limbs on the page: the Fool says 'Hair the colour of clean straw'; Fitz answers 'Her hair is light brown, not gold'; Pulley then writes 'He grew up in stables and now he’s having to work as a manservant. The Fool, however, was the King’s jester and now lives rather the high life as a wealthy nobleman. He has no business whatsoever with straw.' Only wording nuance: the page never labels the phrase a 'simile' — that word is the claim's, not Pulley's; the comparison itself is quoted verbatim on the page.",
-   "fromFile": "verdicts-hobb-i285-299.json"
+   "note": "COMPLETENESS CRITIC (r7), r4 standard applied uniformly: 'simile' is the claim's word, not Pulley's. Verifier's note: Quote exact. All limbs on the page: the Fool says 'Hair the colour of clean straw'; Fitz answers 'Her hair is light brown, not gold'; Pulley then writes 'He grew up in stables and now he’s having to work as a manservant. The Fool, however, was the King’s jester and now lives rather the high life as a wealthy nobleman. He has no business whatsoever with straw.' Only wording nuance: the page never labels the phrase a 'simile' — that word is the claim's, not Pulley's; the comparison itself is quoted verbatim on the page.",
+   "unsupportedLimb": "\"the Fool's simile 'hair the colour of clean straw'\" — 'simile' is the claim's word; the page never labels the phrase one.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "287": {
    "index": 287,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "It says volumes about both of them",
-   "note": "Quote exact and it is the last sentence of that paragraph, as the page hint says. The 'class histories' limb is carried by the page's own contrast in the immediately preceding sentences (stables → manservant vs King’s jester → wealthy nobleman), and the 'without statement' limb by 'says volumes' about an argument the page frames as being over 'this irrelevant woman'. The page does not use the word 'class'; it states the two social histories concretely.",
-   "fromFile": "verdicts-hobb-i285-299.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb. Verifier's note: Quote exact and it is the last sentence of that paragraph, as the page hint says. The 'class histories' limb is carried by the page's own contrast in the immediately preceding sentences (stables → manservant vs King’s jester → wealthy nobleman), and the 'without statement' limb by 'says volumes' about an argument the page frames as being over 'this irrelevant woman'. The page does not use the word 'class'; it states the two social histories concretely.",
+   "unsupportedLimb": "\"the class histories of both speakers\" — the note says the page does not use the word 'class'; it states the two social histories concretely.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "288": {
    "index": 288,
@@ -17154,10 +17214,11 @@
   },
   "289": {
    "index": 289,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "admired the controlled point of view, the leisurely pace",
-   "note": "Raw page reached (curl, browser UA, HTTP 200); full essay body present. Quote exact: 'Started reading, admired the controlled point of view, the leisurely pace.' First-reading limb supported by the preceding paragraph ('I’d not read Hobb before and knew nothing of her'). Byline 'By Steven Erikson', 'Published on April 27, 2016'; bio on the page confirms novelist (Malazan Book of the Fallen).",
-   "fromFile": "verdicts-hobb-i285-299.json"
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #55; keep the earlier index. Verifier's note: Raw page reached (curl, browser UA, HTTP 200); full essay body present. Quote exact: 'Started reading, admired the controlled point of view, the leisurely pace.' First-reading limb supported by the preceding paragraph ('I’d not read Hobb before and knew nothing of her'). Byline 'By Steven Erikson', 'Published on April 27, 2016'; bio on the page confirms novelist (Malazan Book of the Fallen).",
+   "unsupportedLimb": "duplicate of #55 — the same source wording is already carried by the earlier row (angle voice vs close).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "290": {
    "index": 290,
@@ -17168,17 +17229,19 @@
   },
   "291": {
    "index": 291,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "in the workshops I occasionally teach, I cite the opening chapters",
-   "note": "Quote exact: 'To this day in the workshops I occasionally teach, I cite the opening chapters of Assassin’s Apprentice as required reading when it comes to point of view.' All limbs supported. Two wording differences worth carrying if the sentence is quoted tightly: the page says 'cite ... as required reading' rather than 'sets', and 'workshops I occasionally teach' rather than an unqualified 'teaches'.",
-   "fromFile": "verdicts-hobb-i285-299.json"
+   "note": "COMPLETENESS CRITIC (r7), r4 standard applied uniformly: 'sets … teaches' for the page's 'cite … occasionally teach'. Verifier's note: Quote exact: 'To this day in the workshops I occasionally teach, I cite the opening chapters of Assassin’s Apprentice as required reading when it comes to point of view.' All limbs supported. Two wording differences worth carrying if the sentence is quoted tightly: the page says 'cite ... as required reading' rather than 'sets', and 'workshops I occasionally teach' rather than an unqualified 'teaches'.",
+   "unsupportedLimb": "\"he sets the opening chapters … as required reading in the writing workshops he teaches\" — the page reads 'I cite … in the workshops I occasionally teach'.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "292": {
    "index": 292,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Knowledge is fed piecemeal, at a child’s pace of comprehension",
-   "note": "Quote exact, in the paragraph beginning 'It’s no accident the child POV is popular in fantasy fiction'. The 'worked example is Hobb’s Fitz' limb is supported by the essay as a whole and by the very next paragraph: 'So here I bought into Fitz’s little world, bought into its seeming normality, only to have it all suddenly torn away.'",
-   "fromFile": "verdicts-hobb-i285-299.json"
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #56; keep the earlier index. Verifier's note: Quote exact, in the paragraph beginning 'It’s no accident the child POV is popular in fantasy fiction'. The 'worked example is Hobb’s Fitz' limb is supported by the essay as a whole and by the very next paragraph: 'So here I bought into Fitz’s little world, bought into its seeming normality, only to have it all suddenly torn away.'",
+   "unsupportedLimb": "duplicate of #56 — the same source wording is already carried by the earlier row (angle voice vs close).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "293": {
    "index": 293,
@@ -17218,10 +17281,11 @@
   },
   "298": {
    "index": 298,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "you should be able to tell who is talking without all the little clues",
-   "note": "Quote exact: 'If you want to do a double check, read your dialogue. Can you tell by reading, not just a single line like a three word dialogue, but if there is a piece of dialogue and you read it, you should be able to tell who is talking without all the little clues like Joe said and Samantha replied.' The page hint's cue phrase is on the page and every limb (a test, read a passage of dialogue, tell the speaker without attribution tags) is supported; the episode's own homework repeats it ('examine the dialog itself, without tags').",
-   "fromFile": "verdicts-hobb-i285-299.json"
+   "verdict": "PARTIAL",
+   "trueWording": "you should be able to tell who is talking without all the",
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #180; keep the earlier index. Verifier's note: Quote exact: 'If you want to do a double check, read your dialogue. Can you tell by reading, not just a single line like a three word dialogue, but if there is a piece of dialogue and you read it, you should be able to tell who is talking without all the little clues like Joe said and Samantha replied.' The page hint's cue phrase is on the page and every limb (a test, read a passage of dialogue, tell the speaker without attribution tags) is supported; the episode's own homework repeats it ('examine the dialog itself, without tags'). [fullSentence: trim before any copy]",
+   "unsupportedLimb": "duplicate of #180 — the same source wording is already carried by the earlier row (angle craft vs close).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "299": {
    "index": 299,
@@ -17239,10 +17303,11 @@
   },
   "301": {
    "index": 301,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "what he notices is going to be very different",
-   "note": "CHAIR RE-TAKE 2026-09-06 15:20 (critic-hobb §1, CONFIRMED by normalised search): the round-4 verifier wrote a paraphrase or an empty trueWording; the claim's own quote IS on the page, so trueWording := that quote (≤12 words). Grade unchanged; [146] (Spanish page), [308] (substance), [313]/[314] (gloss) are handled by the r6 regrade.",
-   "fromFile": "verdicts-hobb-retake-r6.json"
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #181; keep the earlier index. Verifier's note: CHAIR RE-TAKE 2026-09-06 15:20 (critic-hobb §1, CONFIRMED by normalised search): the round-4 verifier wrote a paraphrase or an empty trueWording; the claim's own quote IS on the page, so trueWording := that quote (≤12 words). Grade unchanged; [146] (Spanish page), [308] (substance), [313]/[314] (gloss) are handled by the r6 regrade.",
+   "unsupportedLimb": "duplicate of #181 — the same source wording is already carried by the earlier row (angle craft vs close).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "302": {
    "index": 302,
@@ -17253,10 +17318,11 @@
   },
   "303": {
    "index": 303,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "the character has to be generated by the world",
-   "note": "CHAIR RE-TAKE 2026-09-06 15:20 (critic-hobb §1, CONFIRMED by normalised search): the round-4 verifier wrote a paraphrase or an empty trueWording; the claim's own quote IS on the page, so trueWording := that quote (≤12 words). Grade unchanged; [146] (Spanish page), [308] (substance), [313]/[314] (gloss) are handled by the r6 regrade.",
-   "fromFile": "verdicts-hobb-retake-r6.json"
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #28; keep the earlier index. Verifier's note: CHAIR RE-TAKE 2026-09-06 15:20 (critic-hobb §1, CONFIRMED by normalised search): the round-4 verifier wrote a paraphrase or an empty trueWording; the claim's own quote IS on the page, so trueWording := that quote (≤12 words). Grade unchanged; [146] (Spanish page), [308] (substance), [313]/[314] (gloss) are handled by the r6 regrade.",
+   "unsupportedLimb": "duplicate of #28 — the same source wording is already carried by the earlier row (angle voice vs close).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "304": {
    "index": 304,
@@ -17274,10 +17340,11 @@
   },
   "306": {
    "index": 306,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "he almost never narrates his own power",
-   "note": "CHAIR RE-TAKE 2026-09-06 15:20 (critic-hobb §1, CONFIRMED by normalised search): the round-4 verifier wrote a paraphrase or an empty trueWording; the claim's own quote IS on the page, so trueWording := that quote (≤12 words). Grade unchanged; [146] (Spanish page), [308] (substance), [313]/[314] (gloss) are handled by the r6 regrade.",
-   "fromFile": "verdicts-hobb-retake-r6.json"
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #69; keep the earlier index. Verifier's note: CHAIR RE-TAKE 2026-09-06 15:20 (critic-hobb §1, CONFIRMED by normalised search): the round-4 verifier wrote a paraphrase or an empty trueWording; the claim's own quote IS on the page, so trueWording := that quote (≤12 words). Grade unchanged; [146] (Spanish page), [308] (substance), [313]/[314] (gloss) are handled by the r6 regrade.",
+   "unsupportedLimb": "duplicate of #69 — the same source wording is already carried by the earlier row (angle voice vs close).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "307": {
    "index": 307,
@@ -17288,17 +17355,19 @@
   },
   "308": {
    "index": 308,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "history is not made only in councils and battles",
-   "note": "CHAIR RE-TAKE 2026-09-06 15:20 (critic-hobb §1, CONFIRMED by normalised search): the round-4 verifier wrote a paraphrase or an empty trueWording; the claim's own quote IS on the page, so trueWording := that quote (≤12 words). Grade unchanged; [146] (Spanish page), [308] (substance), [313]/[314] (gloss) are handled by the r6 regrade.",
-   "fromFile": "verdicts-hobb-retake-r6.json"
+   "note": "COMPLETENESS CRITIC (r7): VERIFIED_SUBSTANCE-grade support — the note says the limb holds in substance, so the verbatim grade cannot stand. Verifier's note: CHAIR RE-TAKE 2026-09-06 15:20 (critic-hobb §1, CONFIRMED by normalised search): the round-4 verifier wrote a paraphrase or an empty trueWording; the claim's own quote IS on the page, so trueWording := that quote (≤12 words). Grade unchanged; [146] (Spanish page), [308] (substance), [313]/[314] (gloss) are handled by the r6 regrade.",
+   "unsupportedLimb": "\"Fitz-as-chronicler records what official chroniclers could not\" — the note supports the limb only 'in substance', not verbatim.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "309": {
    "index": 309,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "intimacy should not be mistaken for simplicity",
-   "note": "CHAIR RE-TAKE 2026-09-06 15:20 (critic-hobb §1, CONFIRMED by normalised search): the round-4 verifier wrote a paraphrase or an empty trueWording; the claim's own quote IS on the page, so trueWording := that quote (≤12 words). Grade unchanged; [146] (Spanish page), [308] (substance), [313]/[314] (gloss) are handled by the r6 regrade.",
-   "fromFile": "verdicts-hobb-retake-r6.json"
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #68; keep the earlier index. Verifier's note: CHAIR RE-TAKE 2026-09-06 15:20 (critic-hobb §1, CONFIRMED by normalised search): the round-4 verifier wrote a paraphrase or an empty trueWording; the claim's own quote IS on the page, so trueWording := that quote (≤12 words). Grade unchanged; [146] (Spanish page), [308] (substance), [313]/[314] (gloss) are handled by the r6 regrade.",
+   "unsupportedLimb": "duplicate of #68 — the same source wording is already carried by the earlier row (angle voice vs close).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "310": {
    "index": 310,
@@ -17309,10 +17378,11 @@
   },
   "311": {
    "index": 311,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "I try to express how horrifying and ugly violence is",
-   "note": "CHAIR RE-TAKE 2026-09-06 15:20 (critic-hobb §1, CONFIRMED by normalised search): the round-4 verifier wrote a paraphrase or an empty trueWording; the claim's own quote IS on the page, so trueWording := that quote (≤12 words). Grade unchanged; [146] (Spanish page), [308] (substance), [313]/[314] (gloss) are handled by the r6 regrade.",
-   "fromFile": "verdicts-hobb-retake-r6.json"
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #38; keep the earlier index. Verifier's note: CHAIR RE-TAKE 2026-09-06 15:20 (critic-hobb §1, CONFIRMED by normalised search): the round-4 verifier wrote a paraphrase or an empty trueWording; the claim's own quote IS on the page, so trueWording := that quote (≤12 words). Grade unchanged; [146] (Spanish page), [308] (substance), [313]/[314] (gloss) are handled by the r6 regrade.",
+   "unsupportedLimb": "duplicate of #38 — the same source wording is already carried by the earlier row (angle voice vs close).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "312": {
    "index": 312,
@@ -17323,17 +17393,19 @@
   },
   "313": {
    "index": 313,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "whose greediness creates endless troubles for his ship and family’s business",
-   "note": "CHAIR RE-TAKE 2026-09-06 15:20 (critic-hobb §1, CONFIRMED by normalised search): the round-4 verifier wrote a paraphrase or an empty trueWording; the claim's own quote IS on the page, so trueWording := that quote (≤12 words). Grade unchanged; [146] (Spanish page), [308] (substance), [313]/[314] (gloss) are handled by the r6 regrade.",
-   "fromFile": "verdicts-hobb-retake-r6.json"
+   "note": "COMPLETENESS CRITIC (r7), r4 standard applied uniformly: the claim's wording is a gloss. Verifier's note: CHAIR RE-TAKE 2026-09-06 15:20 (critic-hobb §1, CONFIRMED by normalised search): the round-4 verifier wrote a paraphrase or an empty trueWording; the claim's own quote IS on the page, so trueWording := that quote (≤12 words). Grade unchanged; [146] (Spanish page), [308] (substance), [313]/[314] (gloss) are handled by the r6 regrade.",
+   "unsupportedLimb": "\"a name that reflects poorly on its bearer\" — the claim's wording is a gloss on the page's phrasing.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "314": {
    "index": 314,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "the matriarchal, business-oriented Bingtown",
-   "note": "CHAIR RE-TAKE 2026-09-06 15:20 (critic-hobb §1, CONFIRMED by normalised search): the round-4 verifier wrote a paraphrase or an empty trueWording; the claim's own quote IS on the page, so trueWording := that quote (≤12 words). Grade unchanged; [146] (Spanish page), [308] (substance), [313]/[314] (gloss) are handled by the r6 regrade.",
-   "fromFile": "verdicts-hobb-retake-r6.json"
+   "note": "COMPLETENESS CRITIC (r7), r4 standard applied uniformly: 'by their institutions' is a gloss — rule 28 rests on this row. Verifier's note: CHAIR RE-TAKE 2026-09-06 15:20 (critic-hobb §1, CONFIRMED by normalised search): the round-4 verifier wrote a paraphrase or an empty trueWording; the claim's own quote IS on the page, so trueWording := that quote (≤12 words). Grade unchanged; [146] (Spanish page), [308] (substance), [313]/[314] (gloss) are handled by the r6 regrade.",
+   "unsupportedLimb": "\"characterises the Elderlings societies by their institutions in a single clause each\" — 'by their institutions' is the claim's gloss; the page gives the clauses, not the category.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "315": {
    "index": 315,
@@ -17351,10 +17423,11 @@
   },
   "317": {
    "index": 317,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "“I really admire the fantasy writers of the generation who wrote to that length”",
-   "note": "Wayback raw capture of the Arched Doorway transcript. Quote exact: '...told such amazing stories where every sentence is freighted with character development, and setting, and plot all-in-one.' 'Earlier paperback generation' is the page’s own referent — the generation writing to the 250-page paperback length described two sentences earlier — so the limb is supported, though the phrase 'paperback generation' is the claim’s wording.",
-   "fromFile": "verdicts-hobb-i315-329.json"
+   "verdict": "PARTIAL",
+   "trueWording": "I really admire the fantasy writers of the generation who wrote to",
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb. Verifier's note: Wayback raw capture of the Arched Doorway transcript. Quote exact: '...told such amazing stories where every sentence is freighted with character development, and setting, and plot all-in-one.' 'Earlier paperback generation' is the page’s own referent — the generation writing to the 250-page paperback length described two sentences earlier — so the limb is supported, though the phrase 'paperback generation' is the claim’s wording. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "\"the earlier paperback generation\" — the note says 'paperback generation' is the claim's wording, not the page's.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "318": {
    "index": 318,
@@ -17401,10 +17474,11 @@
   },
   "324": {
    "index": 324,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "“Her overreliance on adverbs often stunts the novel’s flow”",
-   "note": "fantasy-faction.com fetched live, 200, full review by Lew Kelly dated August 19, 2014. Quote exact, in the 'The opening of the novel' paragraph, which is squarely within the Ship of Magic discussion (Captain Kennit on the beach). The page hedges with 'often'; the claim drops it, which does not change the charge.",
-   "fromFile": "verdicts-hobb-i315-329.json"
+   "verdict": "PARTIAL",
+   "trueWording": "Her overreliance on adverbs often stunts the novel’s flow",
+   "note": "COMPLETENESS CRITIC (r7), r4 standard applied uniformly: the claim drops the page's 'often'. Verifier's note: fantasy-faction.com fetched live, 200, full review by Lew Kelly dated August 19, 2014. Quote exact, in the 'The opening of the novel' paragraph, which is squarely within the Ship of Magic discussion (Captain Kennit on the beach). The page hedges with 'often'; the claim drops it, which does not change the charge.",
+   "unsupportedLimb": "\"an overreliance on adverbs … stunts the novel's flow\" — the page hedges, 'often stunts'.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "325": {
    "index": 325,
@@ -17451,17 +17525,19 @@
   },
   "331": {
    "index": 331,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "You have to put it on like a coat and say, 'Now I believe everything you believe.'",
-   "note": "Live host returned HTTP 403 (Shopify bot wall); recovered via Wayback raw capture https://web.archive.org/web/20250808211906id_/... Quote verbatim under the section heading 'Now I Believe Everything You Believe'. Byline Tayan Hatch and date Dec 19, 2024 confirmed in the page's JSON-LD; interview framed as 'At Dragonsteel Nexus'.",
-   "fromFile": "verdicts-hobb-i330-344.json"
+   "verdict": "PARTIAL",
+   "trueWording": "You have to put it on like a coat and say, 'Now",
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #217; keep the earlier index. Verifier's note: Live host returned HTTP 403 (Shopify bot wall); recovered via Wayback raw capture https://web.archive.org/web/20250808211906id_/... Quote verbatim under the section heading 'Now I Believe Everything You Believe'. Byline Tayan Hatch and date Dec 19, 2024 confirmed in the page's JSON-LD; interview framed as 'At Dragonsteel Nexus'. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "duplicate of #217 — the same source wording is already carried by the earlier row (angle craft vs close).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "332": {
    "index": 332,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "They simply have something they want to get done, and it is more important to them than anything your protagonist wants to do",
-   "note": "Same Wayback raw capture as 331 (live 403). Quote verbatim in the same section, introduced by Hobb's 'They don't think of themselves as the villain.' Both limbs (the wanting, and its outranking the protagonist's want) are in the one sentence.",
-   "fromFile": "verdicts-hobb-i330-344.json"
+   "verdict": "PARTIAL",
+   "trueWording": "They simply have something they want to get done, and it is",
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #216; keep the earlier index. Verifier's note: Same Wayback raw capture as 331 (live 403). Quote verbatim in the same section, introduced by Hobb's 'They don't think of themselves as the villain.' Both limbs (the wanting, and its outranking the protagonist's want) are in the one sentence. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "duplicate of #216 — the same source wording is already carried by the earlier row (angle craft vs close).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "333": {
    "index": 333,
@@ -17473,10 +17549,11 @@
   },
   "334": {
    "index": 334,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "Its first paragraph is an excerpt from a piece being composed within the milieu, not unlike the Encyclopedia Galactica from Asimov's Foundation novels",
-   "note": "Raw page (HTTP 200). Quote verbatim; the Asimov comparison is in the same sentence. Paragraph begins 'The text of the novel opens with a chapter titled \"The Earliest History.\"' as cited.",
-   "fromFile": "verdicts-hobb-i330-344.json"
+   "verdict": "PARTIAL",
+   "trueWording": "Its first paragraph is an excerpt from a piece being composed within",
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #183; keep the earlier index. Verifier's note: Raw page (HTTP 200). Quote verbatim; the Asimov comparison is in the same sentence. Paragraph begins 'The text of the novel opens with a chapter titled \"The Earliest History.\"' as cited. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "duplicate of #183 — the same source wording is already carried by the earlier row (angle craft vs close).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "335": {
    "index": 335,
@@ -17495,24 +17572,27 @@
   },
   "337": {
    "index": 337,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "I've noted before the Asimovian move of grounding chapters in in-milieu reference materials, something I appreciate",
-   "note": "Raw page (HTTP 200). Quote verbatim in the commentary paragraph beginning 'I am taken by the reminiscence with which the chapter opens.' 'I've noted before' supports the claim's 'recurring'.",
-   "fromFile": "verdicts-hobb-i330-344.json"
+   "verdict": "PARTIAL",
+   "trueWording": "I've noted before the Asimovian move of grounding chapters in in-milieu reference",
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #184; keep the earlier index. Verifier's note: Raw page (HTTP 200). Quote verbatim in the commentary paragraph beginning 'I am taken by the reminiscence with which the chapter opens.' 'I've noted before' supports the claim's 'recurring'. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "duplicate of #184 — the same source wording is already carried by the earlier row (angle craft vs close).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "338": {
    "index": 338,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "the piecing-together of disparate and not always complete sources being something with which, as a medievalist, I am familiar",
-   "note": "Raw page (HTTP 200). Quote verbatim in the same commentary paragraph, which also carries 'the opening passage is particularly compelling' and 'the concern about possibly perpetuating the errors of others - intended or inadvertent - is one with which I struggle', covering the errors-forward limb.",
-   "fromFile": "verdicts-hobb-i330-344.json"
+   "verdict": "PARTIAL",
+   "trueWording": "the piecing-together of disparate and not always complete sources being something with",
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #185; keep the earlier index. Verifier's note: Raw page (HTTP 200). Quote verbatim in the same commentary paragraph, which also carries 'the opening passage is particularly compelling' and 'the concern about possibly perpetuating the errors of others - intended or inadvertent - is one with which I struggle', covering the errors-forward limb. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "duplicate of #185 — the same source wording is already carried by the earlier row (angle craft vs close).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "339": {
    "index": 339,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "Too, there is the metaphor at the end: 'A child sees the acorn of his daily life, but a man looks back on the oak.'",
-   "note": "Raw page (HTTP 200). Quote verbatim, opening the commentary paragraph cited. Elliott calls it a 'metaphor' rather than an aphorism, and writes 'at the end' without naming what it ends; context (the preceding paragraph is on the chapter-opening passage) supports the claim's reading.",
-   "fromFile": "verdicts-hobb-i330-344.json"
+   "verdict": "PARTIAL",
+   "trueWording": "Too, there is the metaphor at the end: 'A child sees the",
+   "note": "COMPLETENESS CRITIC (r7), r4 standard applied uniformly: Elliott says 'metaphor', not 'aphorism', and does not name what it ends — rule 27 rests on this row. Verifier's note: Raw page (HTTP 200). Quote verbatim, opening the commentary paragraph cited. Elliott calls it a 'metaphor' rather than an aphorism, and writes 'at the end' without naming what it ends; context (the preceding paragraph is on the chapter-opening passage) supports the claim's reading. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "\"the aphorism that closes that chapter-opening passage\" — Elliott calls it a 'metaphor' and writes 'at the end' without naming what it ends.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "340": {
    "index": 340,
@@ -17530,17 +17610,19 @@
   },
   "342": {
    "index": 342,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "the epistolary format adds a nice touch - not just the encyclopedic, but the personal, which helps the text start to come alive early on",
-   "note": "Raw page (HTTP 200). Quote verbatim in the final commentary paragraph, prefaced by 'I note with some approval, too, the shift in the prefatory tack'. Minor: Elliott names 'the Farseer and Tawny Man novels' as the earlier tack; the claim says 'Farseer and Rain Wilds books', dropping Tawny Man, though the entry is the Dragon Keeper front matter so the Rain Wilds side is contextual.",
-   "fromFile": "verdicts-hobb-i330-344.json"
+   "verdict": "PARTIAL",
+   "trueWording": "the epistolary format adds a nice touch - not just the encyclopedic",
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb. Verifier's note: Raw page (HTTP 200). Quote verbatim in the final commentary paragraph, prefaced by 'I note with some approval, too, the shift in the prefatory tack'. Minor: Elliott names 'the Farseer and Tawny Man novels' as the earlier tack; the claim says 'Farseer and Rain Wilds books', dropping Tawny Man, though the entry is the Dragon Keeper front matter so the Rain Wilds side is contextual. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "\"between the Farseer and Rain Wilds books\" — the note says Elliott names 'the Farseer and Tawny Man novels' as the earlier tack.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "343": {
    "index": 343,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "I note with some approval the dramatis personae that opens the current volume; it's nice to know who's in the work",
-   "note": "Raw page (HTTP 200). Quote verbatim (with the ae ligature as given) opening the final commentary paragraph. The reason limb reads 'it's nice to know who's in the work' where the claim says 'useful' - same substance, different adjective.",
-   "fromFile": "verdicts-hobb-i330-344.json"
+   "verdict": "PARTIAL",
+   "trueWording": "I note with some approval the dramatis personae that opens the current",
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb. Verifier's note: Raw page (HTTP 200). Quote verbatim (with the ae ligature as given) opening the final commentary paragraph. The reason limb reads 'it's nice to know who's in the work' where the claim says 'useful' - same substance, different adjective. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "\"because it is useful to know who is in the work\" — the note says the page's reason reads 'it's nice to know who's in the work'.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "344": {
    "index": 344,
@@ -17572,17 +17654,19 @@
   },
   "348": {
    "index": 348,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "largely a formal history written in a distant, scholarly voice",
-   "note": "Mythlore PDF fetched from the Wayback raw capture (HTTP 200, application/pdf, 21pp) and text-extracted with pypdf. p.45: 'The chapter epigraphs are excerpts from a public document, largely a formal history written in a distant, scholarly voice. The main narrative, on the other hand, is undefined, perhaps a private text or even an internal monologue, filled with Fitz's reminiscences instead of \"objective\" history.' Both limbs verbatim.",
-   "fromFile": "verdicts-hobb-i345-359.json"
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #78; keep the earlier index. Verifier's note: Mythlore PDF fetched from the Wayback raw capture (HTTP 200, application/pdf, 21pp) and text-extracted with pypdf. p.45: 'The chapter epigraphs are excerpts from a public document, largely a formal history written in a distant, scholarly voice. The main narrative, on the other hand, is undefined, perhaps a private text or even an internal monologue, filled with Fitz's reminiscences instead of \"objective\" history.' Both limbs verbatim.",
+   "unsupportedLimb": "duplicate of #78 — the same source wording is already carried by the earlier row (angle academic vs close).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "349": {
    "index": 349,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "the authoritative voice of History establishing a clear center",
-   "note": "p.53, section 'Historical Authority in Assassin's Apprentice': 'the epigraph to the first chapter opens with the authoritative voice of History establishing a clear center to its narrative: \"A history of the Six Duchies is of necessity a history of its ruling family, the Farseers\" (4).' Quote verbatim; page and section locator both correct.",
-   "fromFile": "verdicts-hobb-i345-359.json"
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #226; keep the earlier index. Verifier's note: p.53, section 'Historical Authority in Assassin's Apprentice': 'the epigraph to the first chapter opens with the authoritative voice of History establishing a clear center to its narrative: \"A history of the Six Duchies is of necessity a history of its ruling family, the Farseers\" (4).' Quote verbatim; page and section locator both correct.",
+   "unsupportedLimb": "duplicate of #226 — the same source wording is already carried by the earlier row (angle craft vs close).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "350": {
    "index": 350,
@@ -17601,38 +17685,43 @@
   },
   "352": {
    "index": 352,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "scarcely a page goes by without obvious examples",
-   "note": "p.57: 'This is particularly frequent in the early chapters, where scarcely a page goes by without obvious examples'. The second limb is the next sentence after the cited examples: 'While the frequency of such negative constructions lessens as the novel continues, it remains one of the predominant modes throughout.'",
-   "fromFile": "verdicts-hobb-i345-359.json"
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #84; keep the earlier index. Verifier's note: p.57: 'This is particularly frequent in the early chapters, where scarcely a page goes by without obvious examples'. The second limb is the next sentence after the cited examples: 'While the frequency of such negative constructions lessens as the novel continues, it remains one of the predominant modes throughout.'",
+   "unsupportedLimb": "duplicate of #84 — the same source wording is already carried by the earlier row (angle academic vs close).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "353": {
    "index": 353,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "elevated style associated with fantasy novels, particularly extensive parataxis",
-   "note": "p.59: 'His description employs several syntactic patterns typical of the elevated style associated with fantasy novels, particularly extensive parataxis, elevated figurative language, and parallelism'. Word-for-word in the publication; my pypdf extraction renders it 'fantasy nove ls', an extraction artifact, so the match is exact only after whitespace squashing. The invented-vision limb is supported on the same page: Fitz 'convinces her ... by claiming he has had a prophetic dream, \"a vision\"' and 'his vision is not real'.",
-   "fromFile": "verdicts-hobb-i345-359.json"
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #86; keep the earlier index. Verifier's note: p.59: 'His description employs several syntactic patterns typical of the elevated style associated with fantasy novels, particularly extensive parataxis, elevated figurative language, and parallelism'. Word-for-word in the publication; my pypdf extraction renders it 'fantasy nove ls', an extraction artifact, so the match is exact only after whitespace squashing. The invented-vision limb is supported on the same page: Fitz 'convinces her ... by claiming he has had a prophetic dream, \"a vision\"' and 'his vision is not real'.",
+   "unsupportedLimb": "duplicate of #86 — the same source wording is already carried by the earlier row (angle academic vs close).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "354": {
    "index": 354,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "a poetic lyricism creeps into his style in the epigraph",
-   "note": "p.62: 'whereas in the earlier epigraphs Fitz has largely kept the style of the epigraphs and the main text separate, here a poetic lyricism creeps into his style in the epigraph'. The contamination limb is stated on the facing page: 'Fitz's personal experience is leaking into the presumably scholarly description of the epigraph.'",
-   "fromFile": "verdicts-hobb-i345-359.json"
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #89; keep the earlier index. Verifier's note: p.62: 'whereas in the earlier epigraphs Fitz has largely kept the style of the epigraphs and the main text separate, here a poetic lyricism creeps into his style in the epigraph'. The contamination limb is stated on the facing page: 'Fitz's personal experience is leaking into the presumably scholarly description of the epigraph.'",
+   "unsupportedLimb": "duplicate of #89 — the same source wording is already carried by the earlier row (angle academic vs close).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "355": {
    "index": 355,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "The main text is the marginalia",
-   "note": "p.46: 'the formal, scholarly, distant history is presumably the primary one, the authoritative one, yet it is placed in the margins of the text while the personal narrative ... is primary. The main text is the marginalia—the personal secrets, the negative space—surrounding the authoritative historical text, which is instead structurally placed in the margins, inverting its priority.' Every limb verbatim, 'inverting its priority' included.",
-   "fromFile": "verdicts-hobb-i345-359.json"
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #225; keep the earlier index. Verifier's note: p.46: 'the formal, scholarly, distant history is presumably the primary one, the authoritative one, yet it is placed in the margins of the text while the personal narrative ... is primary. The main text is the marginalia—the personal secrets, the negative space—surrounding the authoritative historical text, which is instead structurally placed in the margins, inverting its priority.' Every limb verbatim, 'inverting its priority' included.",
+   "unsupportedLimb": "duplicate of #225 — the same source wording is already carried by the earlier row (angle craft vs close).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "356": {
    "index": 356,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "the dry, impersonal, but objective history beginning the chapter",
-   "note": "p.57, the paragraph immediately preceding the 'NEGATIVE NARRATION' heading: 'The \"marginalia\" here (that is, the main text) feels more authoritative and satisfying than the dry, impersonal, but objective history beginning the chapter'. The claim states the same comparison from the other side, which is equivalent. The claim's quote carries doubled spaces ('objective  history'); that is a PDF-extraction artifact, verbatim after whitespace normalisation. Scope note: Oliver writes this of the chapter under discussion, but 'Each chapter of the novel begins with a lengthy epigraph' (p.45), so the generalisation to 'each chapter' holds.",
-   "fromFile": "verdicts-hobb-i345-359.json"
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #79; keep the earlier index. Verifier's note: p.57, the paragraph immediately preceding the 'NEGATIVE NARRATION' heading: 'The \"marginalia\" here (that is, the main text) feels more authoritative and satisfying than the dry, impersonal, but objective history beginning the chapter'. The claim states the same comparison from the other side, which is equivalent. The claim's quote carries doubled spaces ('objective  history'); that is a PDF-extraction artifact, verbatim after whitespace normalisation. Scope note: Oliver writes this of the chapter under discussion, but 'Each chapter of the novel begins with a lengthy epigraph' (p.45), so the generalisation to 'each chapter' holds.",
+   "unsupportedLimb": "duplicate of #79 — the same source wording is already carried by the earlier row (angle academic vs close).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "357": {
    "index": 357,
@@ -17665,10 +17754,11 @@
   },
   "361": {
    "index": 361,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "A pretty informative, yet boring, introduction epigraph",
-   "note": "Quote exact, immediately after the block-quoted first epigraph. 'taken by itself' is carried by the very next sentence: 'However, the first paragraph of the series that follows it is what enhances the epigraph.'",
-   "fromFile": "verdicts-hobb-i360-374.json"
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #199; keep the earlier index. Verifier's note: Quote exact, immediately after the block-quoted first epigraph. 'taken by itself' is carried by the very next sentence: 'However, the first paragraph of the series that follows it is what enhances the epigraph.'",
+   "unsupportedLimb": "duplicate of #199 — the same source wording is already carried by the earlier row (angle craft vs close).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "362": {
    "index": 362,
@@ -17714,45 +17804,51 @@
   },
   "368": {
    "index": 368,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "if it's boring to you... Don't write it... You can have a one sentence chapter if you want",
-   "note": "Quote exact, under the heading \"I don't want to write the next scene. It's boring.\" The compress-rather-than-write limb is the section's own solution: don't write it, type a one-line summary, get on with the story.",
-   "fromFile": "verdicts-hobb-i360-374.json"
+   "verdict": "PARTIAL",
+   "trueWording": "if it's boring to you... Don't write it... You can have a",
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #256; keep the earlier index. Verifier's note: Quote exact, under the heading \"I don't want to write the next scene. It's boring.\" The compress-rather-than-write limb is the section's own solution: don't write it, type a one-line summary, get on with the story. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "duplicate of #256 — the same source wording is already carried by the earlier row (angle craft vs close).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "369": {
    "index": 369,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "After four days of punishing travel, they reached a small holding near a water hole",
-   "note": "Quote exact and the sentence completes as the claim says. Duration ('four days'), cost ('punishing'), arrival ('a small holding near a water hole') all present; 'cost' is a fair gloss on 'punishing'.",
-   "fromFile": "verdicts-hobb-i360-374.json"
+   "verdict": "PARTIAL",
+   "trueWording": "After four days of punishing travel, they reached a small holding near",
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #255; keep the earlier index. Verifier's note: Quote exact and the sentence completes as the claim says. Duration ('four days'), cost ('punishing'), arrival ('a small holding near a water hole') all present; 'cost' is a fair gloss on 'punishing'. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "duplicate of #255 — the same source wording is already carried by the earlier row (angle craft vs close).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "370": {
    "index": 370,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "if I look for a synonym... via the word processing program... it will show me the same synonyms that every other writer is using",
-   "note": "Quote exact, in the asterisked footnote that opens \"Do you have a copy of Roget's Thesaurus? If not, go buy one now. A fat paper thesaurus is a treasure.\" Paper-over-software advice and its stated ground both explicit.",
-   "fromFile": "verdicts-hobb-i360-374.json"
+   "verdict": "PARTIAL",
+   "trueWording": "if I look for a synonym... via the word processing program... it",
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #257; keep the earlier index. Verifier's note: Quote exact, in the asterisked footnote that opens \"Do you have a copy of Roget's Thesaurus? If not, go buy one now. A fat paper thesaurus is a treasure.\" Paper-over-software advice and its stated ground both explicit. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "duplicate of #257 — the same source wording is already carried by the earlier row (angle craft vs close).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "371": {
    "index": 371,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "The car isn't red, it's candy apple red with metal flake",
-   "note": "Quote exact, inside the section 'Nope. I'm blocked. Really blocked.', within the editor-hat pass ('Here is what almost always works for me') that the post says gets the story flowing again.",
-   "fromFile": "verdicts-hobb-i360-374.json"
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #258; keep the earlier index. Verifier's note: Quote exact, inside the section 'Nope. I'm blocked. Really blocked.', within the editor-hat pass ('Here is what almost always works for me') that the post says gets the story flowing again.",
+   "unsupportedLimb": "duplicate of #258 — the same source wording is already carried by the earlier row (angle craft vs close).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "372": {
    "index": 372,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "Most epic fantasy doesn't spend pages... worrying about the apprentice fees for dependants, or worrying whether wise old friends are going a bit senile",
-   "note": "Quote exact, in the Originality section of 'The Golden Fool, by Robin Hobb' (post dated February 4, 2013 on the tag page). Page says 'wise old friends' (plural, 'a bit senile') where the claim says 'an old friend is going senile' — same substance.",
-   "fromFile": "verdicts-hobb-i360-374.json"
+   "verdict": "PARTIAL",
+   "trueWording": "Most epic fantasy doesn't spend pages... worrying about the apprentice fees for",
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #188; keep the earlier index. The verifier also records that the page says 'wise old friends' (plural) where the claim says 'an old friend'. Verifier's note: Quote exact, in the Originality section of 'The Golden Fool, by Robin Hobb' (post dated February 4, 2013 on the tag page). Page says 'wise old friends' (plural, 'a bit senile') where the claim says 'an old friend is going senile' — same substance. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "duplicate of #188 — the same source wording is already carried by the earlier row (angle craft vs close).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "373": {
    "index": 373,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "the fantasy only matters because of the reality in its shadow - that motivations are personal, and that consequences will also be personal",
-   "note": "Quote exact, closing sentence of the same Originality section; the reality-in-its-shadow limb is the first half of that sentence.",
-   "fromFile": "verdicts-hobb-i360-374.json"
+   "verdict": "PARTIAL",
+   "trueWording": "the fantasy only matters because of the reality in its shadow",
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #189; keep the earlier index. Verifier's note: Quote exact, closing sentence of the same Originality section; the reality-in-its-shadow limb is the first half of that sentence. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "duplicate of #189 — the same source wording is already carried by the earlier row (angle craft vs close).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "374": {
    "index": 374,
@@ -17771,10 +17867,11 @@
   },
   "376": {
    "index": 376,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "while the language does have that slightly heavy and old-fashioned tone common to the genre, that doesn’t prevent it from delivering fantastic lines, whether melancholy ruminations on life or just witty deadpan remarks",
-   "note": "Same raw page, inside the 'Fool's Quest, by Robin Hobb' review, in the 'Overall: 7/7. BRILLIANT' paragraph — the exact section the claim names. Quote word-for-word. 'Memorable lines' is the claim's paraphrase of 'fantastic lines, whether melancholy ruminations on life or just witty deadpan remarks', which the page supports directly.",
-   "fromFile": "verdicts-hobb-i375-385.json"
+   "verdict": "PARTIAL",
+   "trueWording": "while the language does have that slightly heavy and old-fashioned tone common",
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #194; keep the earlier index. The verifier also records that 'memorable lines' is the claim's paraphrase of 'fantastic lines'. Verifier's note: Same raw page, inside the 'Fool's Quest, by Robin Hobb' review, in the 'Overall: 7/7. BRILLIANT' paragraph — the exact section the claim names. Quote word-for-word. 'Memorable lines' is the claim's paraphrase of 'fantastic lines, whether melancholy ruminations on life or just witty deadpan remarks', which the page supports directly. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "duplicate of #194 — the same source wording is already carried by the earlier row (angle craft vs close).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "377": {
    "index": 377,
@@ -17786,24 +17883,27 @@
   },
   "378": {
    "index": 378,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "She only delivers description when it’s part of a conflict: Here are the fashionable trousers we’re arguing about.",
-   "note": "Raw Black Gate article fetched with a browser UA (HTTP 200, 158 KB). Quote word-for-word in the 'Making Lyrical Fantasy Interesting' section, and the trousers example is the sentence's own illustration. 'Novelist M Harold Page' is supported by the page's own bio line ('the sword-wielding author of works of lyrical and poetic magical realism... such as Swords vs Tanks'), and the piece is explicitly a dissection of Fool's Assassin.",
-   "fromFile": "verdicts-hobb-i375-385.json"
+   "verdict": "PARTIAL",
+   "trueWording": "She only delivers description when it’s part of a conflict: Here are",
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #208; keep the earlier index. Verifier's note: Raw Black Gate article fetched with a browser UA (HTTP 200, 158 KB). Quote word-for-word in the 'Making Lyrical Fantasy Interesting' section, and the trousers example is the sentence's own illustration. 'Novelist M Harold Page' is supported by the page's own bio line ('the sword-wielding author of works of lyrical and poetic magical realism... such as Swords vs Tanks'), and the piece is explicitly a dissection of Fool's Assassin. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "duplicate of #208 — the same source wording is already carried by the earlier row (angle craft vs close).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "379": {
    "index": 379,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "Hobb always serves up characterisation when it is immediately significant to choices or tactics adopted by the main characters. Here’s a quirky stable hand, will he teach me to ride?",
-   "note": "Quote word-for-word in the same 'Making Lyrical Fantasy Interesting' section; the choice-or-tactic limb and the stable-hand illustration are both on the page verbatim. One ordering nuance worth recording: on the page this characterisation rule is stated BEFORE the description rule of index 378, so 'a second rule' is the claim-list's numbering, not the article's.",
-   "fromFile": "verdicts-hobb-i375-385.json"
+   "verdict": "PARTIAL",
+   "trueWording": "Hobb always serves up characterisation when it is immediately significant to choices",
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb. Verifier's note: Quote word-for-word in the same 'Making Lyrical Fantasy Interesting' section; the choice-or-tactic limb and the stable-hand illustration are both on the page verbatim. One ordering nuance worth recording: on the page this characterisation rule is stated BEFORE the description rule of index 378, so 'a second rule' is the claim-list's numbering, not the article's. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "\"a second rule\" — the note says this is the claim-list's numbering; on the page the characterisation rule is stated BEFORE the description rule.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "380": {
    "index": 380,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "Hobb uses an unremitting rhythm of buts at all levels of the story (note the single “t”). Nothing arrives without a “but”.",
-   "note": "Quote word-for-word as the first bullet under 'First, the writing is just plain good' inside the 'Making Lyrical Fantasy Interesting' section — the locator is right. 'At every level of Fool's Assassin' = 'at all levels of the story'; 'nothing arrives without a qualification' = 'Nothing arrives without a “but”'. Both limbs supported.",
-   "fromFile": "verdicts-hobb-i375-385.json"
+   "verdict": "PARTIAL",
+   "trueWording": "Hobb uses an unremitting rhythm of buts at all levels of the",
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #205; keep the earlier index. Verifier's note: Quote word-for-word as the first bullet under 'First, the writing is just plain good' inside the 'Making Lyrical Fantasy Interesting' section — the locator is right. 'At every level of Fool's Assassin' = 'at all levels of the story'; 'nothing arrives without a qualification' = 'Nothing arrives without a “but”'. Both limbs supported. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "duplicate of #205 — the same source wording is already carried by the earlier row (angle craft vs close).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "381": {
    "index": 381,
@@ -17814,24 +17914,27 @@
   },
   "382": {
    "index": 382,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "She braids the plots together. For example, a death resulting from the Thriller has domestic and child-rearing implications. A death in the Period Drama sets off developments in the Thriller.",
-   "note": "Quote word-for-word in the 'First Person Slow Burn Thriller' section, in the braiding bullet the claim names. The reciprocal limb is on the page as the very next sentence; the claim's 'domestic plot' for the article's 'Period Drama' is the article's own equation (the Period Drama is where the characters are 'caught up in domestic and relationship plot').",
-   "fromFile": "verdicts-hobb-i375-385.json"
+   "verdict": "PARTIAL",
+   "trueWording": "She braids the plots together. For example, a death resulting from the",
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #206; keep the earlier index. Verifier's note: Quote word-for-word in the 'First Person Slow Burn Thriller' section, in the braiding bullet the claim names. The reciprocal limb is on the page as the very next sentence; the claim's 'domestic plot' for the article's 'Period Drama' is the article's own equation (the Period Drama is where the characters are 'caught up in domestic and relationship plot'). [fullSentence: trim before any copy]",
+   "unsupportedLimb": "duplicate of #206 — the same source wording is already carried by the earlier row (angle craft vs close).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "383": {
    "index": 383,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "She uses themes like duty, friendship, love and self-determination to link both plots, not just thematically but also practically: the same duty manifests both domestically and politically.",
-   "note": "Quote word-for-word in the 'First Person Slow Burn Thriller' section. Both limbs — 'practically and not only thematically' and 'the same duty manifesting in both' — are in that one sentence.",
-   "fromFile": "verdicts-hobb-i375-385.json"
+   "verdict": "PARTIAL",
+   "trueWording": "She uses themes like duty, friendship, love and self-determination to link both",
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #207; keep the earlier index. Verifier's note: Quote word-for-word in the 'First Person Slow Burn Thriller' section. Both limbs — 'practically and not only thematically' and 'the same duty manifesting in both' — are in that one sentence. [fullSentence: trim before any copy]",
+   "unsupportedLimb": "duplicate of #207 — the same source wording is already carried by the earlier row (angle craft vs close).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "384": {
    "index": 384,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "She drops information on us after-the-fact but in ways that point forward.",
-   "note": "Quote word-for-word in the 'First Person Slow Burn Thriller' section. The substitute-for-a-viewpoint-shift limb is supported by the immediate context: the section opens by saying the thriller cross-cut 'You can’t do this if you are writing in first person!', and the preceding paragraph says 'We don’t need a point-of-view shift to tell us that the ninjas have arrived.'",
-   "fromFile": "verdicts-hobb-i375-385.json"
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #210; keep the earlier index. Verifier's note: Quote word-for-word in the 'First Person Slow Burn Thriller' section. The substitute-for-a-viewpoint-shift limb is supported by the immediate context: the section opens by saying the thriller cross-cut 'You can’t do this if you are writing in first person!', and the preceding paragraph says 'We don’t need a point-of-view shift to tell us that the ninjas have arrived.'",
+   "unsupportedLimb": "duplicate of #210 — the same source wording is already carried by the earlier row (angle craft vs close).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "385": {
    "index": 385,
@@ -17856,10 +17959,11 @@
   },
   "388": {
    "index": 388,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "A direct translation would be choppy, dreadful French",
-   "note": "Quote exact, same paragraph. The claim's gloss 'sentence-for-sentence' is not the page's word but is what the immediately preceding sentence about joining several English sentences establishes as the contrast.",
-   "fromFile": "verdicts-hobb-i386-400.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb. Verifier's note: Quote exact, same paragraph. The claim's gloss 'sentence-for-sentence' is not the page's word but is what the immediately preceding sentence about joining several English sentences establishes as the contrast.",
+   "unsupportedLimb": "\"a direct sentence-for-sentence translation\" — the note says 'sentence-for-sentence' is not the page's word.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "389": {
    "index": 389,
@@ -17912,10 +18016,11 @@
   },
   "396": {
    "index": 396,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "almost reads like an encyclopaedia, offering factual information on the Six Duchies",
-   "note": "PDF pulled from the DSpace REST bitstream content endpoint (the handle page is an Angular shell) and text-extracted with pypdf. Quote exact; on printed p.15, in section 6 'Translation criticism - Translation strategies', of the introduction to the first chapter.",
-   "fromFile": "verdicts-hobb-i386-400.json"
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #137; keep the earlier index. Verifier's note: PDF pulled from the DSpace REST bitstream content endpoint (the handle page is an Angular shell) and text-extracted with pypdf. Quote exact; on printed p.15, in section 6 'Translation criticism - Translation strategies', of the introduction to the first chapter.",
+   "unsupportedLimb": "duplicate of #137 — the same source wording is already carried by the earlier row (angle academic vs undefined).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "397": {
    "index": 397,
@@ -17926,10 +18031,11 @@
   },
   "398": {
    "index": 398,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Even in English, the language seems a bit archaic",
-   "note": "Exact, printed p.15, the sentence directly after the encyclopaedia remark, so the referent is the first chapter's introduction as the claim says. The page adds that long, complex sentences occur there.",
-   "fromFile": "verdicts-hobb-i386-400.json"
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #138; keep the earlier index. Verifier's note: Exact, printed p.15, the sentence directly after the encyclopaedia remark, so the referent is the first chapter's introduction as the claim says. The page adds that long, complex sentences occur there.",
+   "unsupportedLimb": "duplicate of #138 — the same source wording is already carried by the earlier row (angle academic vs undefined).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "399": {
    "index": 399,
@@ -17941,10 +18047,11 @@
   },
   "400": {
    "index": 400,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "The English sentence is clear and to the point",
-   "note": "Exact, printed p.16. It judges precisely the pair the claim names: Hobb's 'I have spoiled another leaf of the fine stuff...' against the Feberwee/Cuijpers Dutch rendering, which the same sentence calls formal and wordy.",
-   "fromFile": "verdicts-hobb-i386-400.json"
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #139; keep the earlier index. Verifier's note: Exact, printed p.16. It judges precisely the pair the claim names: Hobb's 'I have spoiled another leaf of the fine stuff...' against the Feberwee/Cuijpers Dutch rendering, which the same sentence calls formal and wordy.",
+   "unsupportedLimb": "duplicate of #139 — the same source wording is already carried by the earlier row (angle academic vs undefined).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "401": {
    "index": 401,
@@ -18005,45 +18112,51 @@
   },
   "409": {
    "index": 409,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "excerpts from a public document, largely a formal history",
-   "note": "Raw PDF via the Wayback capture named in the routeHint (21pp). Verbatim on printed p.45, of 'The chapter epigraphs'; the same page states each chapter begins with a lengthy epigraph selected from a history of the Six Duchies. Page cite correct.",
-   "fromFile": "verdicts-hobb-i401-415.json"
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #78; keep the earlier index. Verifier's note: Raw PDF via the Wayback capture named in the routeHint (21pp). Verbatim on printed p.45, of 'The chapter epigraphs'; the same page states each chapter begins with a lengthy epigraph selected from a history of the Six Duchies. Page cite correct.",
+   "unsupportedLimb": "duplicate of #78 — the same source wording is already carried by the earlier row (angle academic vs undefined).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "410": {
    "index": 410,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "written in a distant, scholarly voice",
-   "note": "Verbatim on printed p.45, the tail of the same sentence as 409, modifying the formal history the chapter epigraphs excerpt. Page cite correct. Oliver frames the voice as in-world Fitz's; attributing the epigraphs to Hobb is the outer authorial frame and does not disturb the characterisation.",
-   "fromFile": "verdicts-hobb-i401-415.json"
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #78; keep the earlier index. Verifier's note: Verbatim on printed p.45, the tail of the same sentence as 409, modifying the formal history the chapter epigraphs excerpt. Page cite correct. Oliver frames the voice as in-world Fitz's; attributing the epigraphs to Hobb is the outer authorial frame and does not disturb the characterisation.",
+   "unsupportedLimb": "duplicate of #78 — the same source wording is already carried by the earlier row (angle academic vs undefined).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "411": {
    "index": 411,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "the dry, impersonal, but objective history beginning the chapter",
-   "note": "Verbatim on printed p.57, immediately before the NEGATIVE NARRATION heading. Both limbs hold: the full sentence says the marginalia, that is, the main text, feels more authoritative and satisfying than that history. Nuance for downstream: the sentence is local to the Lady Patience chapter, and Oliver keeps 'but objective' in the descriptor, which the claim drops.",
-   "fromFile": "verdicts-hobb-i401-415.json"
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #79; keep the earlier index. The verifier also records that the claim drops Oliver's 'but objective' and that the sentence is local to the Lady Patience chapter. Verifier's note: Verbatim on printed p.57, immediately before the NEGATIVE NARRATION heading. Both limbs hold: the full sentence says the marginalia, that is, the main text, feels more authoritative and satisfying than that history. Nuance for downstream: the sentence is local to the Lady Patience chapter, and Oliver keeps 'but objective' in the descriptor, which the claim drops.",
+   "unsupportedLimb": "duplicate of #79 — the same source wording is already carried by the earlier row (angle academic vs undefined).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "412": {
    "index": 412,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "whereas in the earlier epigraphs Fitz has largely kept the style",
-   "note": "Quote verbatim on printed p.62 (twelve-word cap forces the trim; the sentence continues 'of the epigraphs and the main text separate, here a poetic lyricism creeps into his style in the epigraph'). Chapter 15 limb holds: Oliver locates the blur at the start of the 'misted' section in chapter 15. Two hedges the claim drops — Oliver says 'largely kept', and calls chapter 15 the best example of the blurring rather than its only instance, having already noted ornate style seeping into the 'vision' description.",
-   "fromFile": "verdicts-hobb-i401-415.json"
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #89; keep the earlier index. The verifier also records two hedges the claim drops: Oliver says 'largely kept', and calls chapter 15 the best example rather than the only instance. Verifier's note: Quote verbatim on printed p.62 (twelve-word cap forces the trim; the sentence continues 'of the epigraphs and the main text separate, here a poetic lyricism creeps into his style in the epigraph'). Chapter 15 limb holds: Oliver locates the blur at the start of the 'misted' section in chapter 15. Two hedges the claim drops — Oliver says 'largely kept', and calls chapter 15 the best example of the blurring rather than its only instance, having already noted ornate style seeping into the 'vision' description.",
+   "unsupportedLimb": "duplicate of #89 — the same source wording is already carried by the earlier row (angle academic vs undefined).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "413": {
    "index": 413,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "sentences that start by telling what a character is not doing",
-   "note": "Verbatim on printed p.57 under the NEGATIVE NARRATION heading; the source continues 'or feeling', and the claim's 'repeatedly' is carried by the surrounding 'continual insistence' and 'particularly frequent in the early chapters'. Oliver's own coinage for the device is 'negative narration'.",
-   "fromFile": "verdicts-hobb-i401-415.json"
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #83; keep the earlier index. Verifier's note: Verbatim on printed p.57 under the NEGATIVE NARRATION heading; the source continues 'or feeling', and the claim's 'repeatedly' is carried by the surrounding 'continual insistence' and 'particularly frequent in the early chapters'. Oliver's own coinage for the device is 'negative narration'.",
+   "unsupportedLimb": "duplicate of #83 — the same source wording is already carried by the earlier row (angle academic vs undefined).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "414": {
    "index": 414,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "scarcely a page goes by without obvious examples",
-   "note": "Verbatim on printed p.57, in the clause 'This is particularly frequent in the early chapters, where...', so the early-chapters limb holds. Oliver then lists three instances from pp.6, 7 and 9 of the novel. Note the kind field says 'measurement': this is an impressionistic frequency claim, not a count.",
-   "fromFile": "verdicts-hobb-i401-415.json"
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #84; keep the earlier index. Verifier's note: Verbatim on printed p.57, in the clause 'This is particularly frequent in the early chapters, where...', so the early-chapters limb holds. Oliver then lists three instances from pp.6, 7 and 9 of the novel. Note the kind field says 'measurement': this is an impressionistic frequency claim, not a count.",
+   "unsupportedLimb": "duplicate of #84 — the same source wording is already carried by the earlier row (angle academic vs undefined).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "415": {
    "index": 415,
@@ -18302,17 +18415,19 @@
   },
   "451": {
    "index": 451,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "con la traducción revisada de Manuel de los Reyes",
-   "note": "Verbatim in the announcement paragraph; post dated viernes, 13 de diciembre de 2024, author Daniel Garrido. Page confirms Nocturna, trilogía del Vatídico, salida 12 de mayo de 2025. 'Rather than a new one' rests on the word 'revisada' — the page never explicitly rules out a fresh translation, but calls it revised.",
-   "fromFile": "verdicts-hobb-i446-460.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb. Verifier's note: Verbatim in the announcement paragraph; post dated viernes, 13 de diciembre de 2024, author Daniel Garrido. Page confirms Nocturna, trilogía del Vatídico, salida 12 de mayo de 2025. 'Rather than a new one' rests on the word 'revisada' — the page never explicitly rules out a fresh translation, but calls it revised.",
+   "unsupportedLimb": "\"rather than a new one\" — the note says the page never explicitly rules out a fresh translation; it rests on the word 'revisada'.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "452": {
    "index": 452,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "retos sin los que no desempeñaría mi labor como lo hago",
-   "note": "Verbatim in answer 14 (interview dated julio 05, 2018). CAVEAT worth carrying: the source credits the challenges to 'las obras de ambos autores' — Hobb AND Jonathan Carroll jointly, not Hobb alone; the claim isolates Hobb without denying the pairing, and claim 453 restores it.",
-   "fromFile": "verdicts-hobb-i446-460.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb. Verifier's note: Verbatim in answer 14 (interview dated julio 05, 2018). CAVEAT worth carrying: the source credits the challenges to 'las obras de ambos autores' — Hobb AND Jonathan Carroll jointly, not Hobb alone; the claim isolates Hobb without denying the pairing, and claim 453 restores it.",
+   "unsupportedLimb": "\"the first Robin Hobb titles he translated set him challenges\" — the note says the source credits the challenges to 'las obras de ambos autores', Hobb AND Jonathan Carroll.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "453": {
    "index": 453,
@@ -18330,10 +18445,11 @@
   },
   "455": {
    "index": 455,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "have the custom to name their children after virtues or traits",
-   "note": "PDF reached via the DSpace bitstream in the routeHint; thesis title page confirms Marlies Kok, Translation Master Thesis (readers Naaijkens, Koster). Quote verbatim on printed p.27, which falls in Chapter 2 under 'Translating fantasy names and (ir)realia' (TOC: p.26) — the claim's chapter locator is right. Translation-problem limb supported: 'from a translator's point of view... decisions have to be made', 'straightforward to translate to Dutch'.",
-   "fromFile": "verdicts-hobb-i446-460.json"
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #141; keep the earlier index. Verifier's note: PDF reached via the DSpace bitstream in the routeHint; thesis title page confirms Marlies Kok, Translation Master Thesis (readers Naaijkens, Koster). Quote verbatim on printed p.27, which falls in Chapter 2 under 'Translating fantasy names and (ir)realia' (TOC: p.26) — the claim's chapter locator is right. Translation-problem limb supported: 'from a translator's point of view... decisions have to be made', 'straightforward to translate to Dutch'.",
+   "unsupportedLimb": "duplicate of #141 — the same source wording is already carried by the earlier row (angle academic vs undefined).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "456": {
    "index": 456,
@@ -18606,10 +18722,11 @@
   },
   "494": {
    "index": 494,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "I reveled in the small domestic details and patient growth",
-   "note": "Verbatim in a reader comment signed Billcap, below the review, dated '12 years ago' - a reader comment, not the reviewer's text, exactly as the routeHint states. Two things worth recording for the merger: the page credits patient growth 'in the characters and their relationships to one another', so the claim's narrowing to relationships drops the characters half; and the page nowhere states Billcap's gender, so the claim's 'he' is the claim's own supposition, not the page's.",
-   "fromFile": "verdicts-hobb-i491-505.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb. Verifier's note: Verbatim in a reader comment signed Billcap, below the review, dated '12 years ago' - a reader comment, not the reviewer's text, exactly as the routeHint states. Two things worth recording for the merger: the page credits patient growth 'in the characters and their relationships to one another', so the claim's narrowing to relationships drops the characters half; and the page nowhere states Billcap's gender, so the claim's 'he' is the claim's own supposition, not the page's.",
+   "unsupportedLimb": "\"he revelled\" and \"the relationships\" — the note says the page gives no gender for Billcap and credits patient growth 'in the characters and their relationships'.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "495": {
    "index": 495,
@@ -18662,10 +18779,11 @@
   },
   "502": {
    "index": 502,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "the outcome of the civil insurrection is summarized briefly",
-   "note": "Verbatim, and clearly framed as a fault: the same sentence follows the page's judgement that the last book may have been too condensed and too neat, and that characters are saved or killed efficiently. Two locator notes for the merger: the quote sits in the later paragraph on the end of the series, not in the earlier paragraph that introduces Ship of Destiny as the finale, so the claim's page field is a shade off; and 'rather than dramatising it' is the claim's own contrast - the page criticises the condensation without using a summarise/dramatise opposition, though the surrounding critique about no time to explore the psychological ramifications supports the sense.",
-   "fromFile": "verdicts-hobb-i491-505.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb. Verifier's note: Verbatim, and clearly framed as a fault: the same sentence follows the page's judgement that the last book may have been too condensed and too neat, and that characters are saved or killed efficiently. Two locator notes for the merger: the quote sits in the later paragraph on the end of the series, not in the earlier paragraph that introduces Ship of Destiny as the finale, so the claim's page field is a shade off; and 'rather than dramatising it' is the claim's own contrast - the page criticises the condensation without using a summarise/dramatise opposition, though the surrounding critique about no time to explore the psychological ramifications supports the sense.",
+   "unsupportedLimb": "\"rather than dramatising it\" — the note says this contrast is the claim's own; the page criticises the condensation without a summarise/dramatise opposition.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "503": {
    "index": 503,
@@ -18683,17 +18801,19 @@
   },
   "505": {
    "index": 505,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "great events that also impact the little lives very strongly",
-   "note": "Verbatim in the answer on what makes a fantasy epic, matching the claim's page field. The page frames it as her favourite books being the ones in which the protagonist may participate in such events - the modal 'may' is slightly softer than the claim's 'takes part in', but the favourite-books and little-lives limbs are both exact.",
-   "fromFile": "verdicts-hobb-i491-505.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb. Verifier's note: Verbatim in the answer on what makes a fantasy epic, matching the claim's page field. The page frames it as her favourite books being the ones in which the protagonist may participate in such events - the modal 'may' is slightly softer than the claim's 'takes part in', but the favourite-books and little-lives limbs are both exact.",
+   "unsupportedLimb": "\"a protagonist takes part in great events\" — the note says the page's modal is softer, 'the protagonist may participate'.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "506": {
    "index": 506,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "The chapters at the end are just as significant as",
-   "note": "Wayback raw capture fetched with a browser UA; HTML stripped locally, no summarizer. Answer to 'What makes a fantasy epic?': she names The Hobbit and The Lord of the Rings, then the quoted sentence, which ends 'the moment in which the Ring is tossed' - the claim's 'destroyed' is a paraphrase of 'tossed'.",
-   "fromFile": "verdicts-hobb-i506-520.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb. Verifier's note: Wayback raw capture fetched with a browser UA; HTML stripped locally, no summarizer. Answer to 'What makes a fantasy epic?': she names The Hobbit and The Lord of the Rings, then the quoted sentence, which ends 'the moment in which the Ring is tossed' - the claim's 'destroyed' is a paraphrase of 'tossed'.",
+   "unsupportedLimb": "\"the moment the Ring is destroyed\" — the note says the page's word is 'tossed'; 'destroyed' is the claim's paraphrase.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "507": {
    "index": 507,
@@ -18732,10 +18852,11 @@
   },
   "512": {
    "index": 512,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "So I live in a mostly blue-collar world",
-   "note": "Answer on quirks. The attribution limb rests on the next sentence, which is HEDGED - 'Maybe that's why a lot of my characters come from there' - so the claim's flat 'attributes' is firmer than the page; any downstream use should carry the 'Maybe'.",
-   "fromFile": "verdicts-hobb-i506-520.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb. Verifier's note: Answer on quirks. The attribution limb rests on the next sentence, which is HEDGED - 'Maybe that's why a lot of my characters come from there' - so the claim's flat 'attributes' is firmer than the page; any downstream use should carry the 'Maybe'.",
+   "unsupportedLimb": "\"attributes the origins … to her living in a mostly blue-collar world\" — the note says the attribution sentence is hedged, 'Maybe that's why a lot of my characters come from there'.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "513": {
    "index": 513,
@@ -18979,10 +19100,11 @@
   },
   "547": {
    "index": 547,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "It is, without question, a slow novel",
-   "note": "The live tor.com URL now 403s / redirects to reactormag.com; verified on the Wayback raw capture 20231113190246id_ of the tor.com URL. Sentence appears word for word in the paragraph beginning 'There's little doubt that Fool's Assassin will leave a wide variance of impressions on its readers.' Byline Justin Landon, Tue Aug 12 2014, confirmed on the same capture.",
-   "fromFile": "verdicts-hobb-i531-639.json"
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #489; keep the earlier index. Verifier's note: The live tor.com URL now 403s / redirects to reactormag.com; verified on the Wayback raw capture 20231113190246id_ of the tor.com URL. Sentence appears word for word in the paragraph beginning 'There's little doubt that Fool's Assassin will leave a wide variance of impressions on its readers.' Byline Justin Landon, Tue Aug 12 2014, confirmed on the same capture.",
+   "unsupportedLimb": "duplicate of #489 — the same source wording is already carried by the earlier row (angle undefined vs critics-absent).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "548": {
    "index": 548,
@@ -19070,10 +19192,11 @@
   },
   "560": {
    "index": 560,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "extensive parataxis, elevated figurative language, and parallelism",
-   "note": "Publisher PDF blocked (403 on dc.swosu.edu viewcontent); extracted from the Wayback raw PDF capture 20240707045408id_ via pdftotext. On p. 59: Fitz's description of the invented 'vision' he tells the duchess 'employs several syntactic patterns typical of the elevated style associated with fantasy novels, particularly extensive parataxis, elevated figurative language, and parallelism'. Invented-vision limb holds — the article states Fitz 'is pretending it happened'. Article confirmed as Matthew Oliver, Mythlore 41.1, Fall/Winter 2022.",
-   "fromFile": "verdicts-hobb-i531-639.json"
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #86; keep the earlier index. Verifier's note: Publisher PDF blocked (403 on dc.swosu.edu viewcontent); extracted from the Wayback raw PDF capture 20240707045408id_ via pdftotext. On p. 59: Fitz's description of the invented 'vision' he tells the duchess 'employs several syntactic patterns typical of the elevated style associated with fantasy novels, particularly extensive parataxis, elevated figurative language, and parallelism'. Invented-vision limb holds — the article states Fitz 'is pretending it happened'. Article confirmed as Matthew Oliver, Mythlore 41.1, Fall/Winter 2022.",
+   "unsupportedLimb": "duplicate of #86 — the same source wording is already carried by the earlier row (angle academic vs critics-absent).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "561": {
    "index": 561,
@@ -19231,10 +19354,11 @@
   },
   "583": {
    "index": 583,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Hobb gives us months – years – of not much happening",
-   "note": "Live Guardian page fetched (200). Appears word for word (en dashes as quoted) in the paragraph beginning 'Like its predecessors, Fool's Assassin isn't a quick starter'; the same sentence ends '...before events begin to spiral out of control', supporting the 'before events spiral' limb. Byline Alison Flood, Wed 10 Sep 2014.",
-   "fromFile": "verdicts-hobb-i531-639.json"
+   "note": "CROSS-ANGLE DUPLICATE (r7): duplicate of #480; keep the earlier index. Verifier's note: Live Guardian page fetched (200). Appears word for word (en dashes as quoted) in the paragraph beginning 'Like its predecessors, Fool's Assassin isn't a quick starter'; the same sentence ends '...before events begin to spiral out of control', supporting the 'before events spiral' limb. Byline Alison Flood, Wed 10 Sep 2014.",
+   "unsupportedLimb": "duplicate of #480 — the same source wording is already carried by the earlier row (angle undefined vs critics-absent).",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "584": {
    "index": 584,
@@ -19856,10 +19980,11 @@
   },
   "672": {
    "index": 672,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "the chapter-prefaces used not only in the Asimovian style",
-   "note": "Live fetch 200. Quote verbatim in the commentary paragraph opening 'I remain pleased to see...'; the sentence continues with the Asimovian style glossed as providing greater context for the world and the events, 'but also to trace ongoing outside narratives', and the same paragraph repeats the point as pointing towards events outside the main narrative. Book identity: the page title is Entry 383: Blood of Dragons, Chapter 17 and the body refers once to 'the tetralogy'; the literal string 'Rain Wild' appears nowhere on the page, so the claim's 'Rain Wilds' label rests on the page-named novel plus its uncontested series membership rather than on the page's own words.",
-   "fromFile": "verdicts-hobb-i640-693.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb. Verifier's note: Live fetch 200. Quote verbatim in the commentary paragraph opening 'I remain pleased to see...'; the sentence continues with the Asimovian style glossed as providing greater context for the world and the events, 'but also to trace ongoing outside narratives', and the same paragraph repeats the point as pointing towards events outside the main narrative. Book identity: the page title is Entry 383: Blood of Dragons, Chapter 17 and the body refers once to 'the tetralogy'; the literal string 'Rain Wild' appears nowhere on the page, so the claim's 'Rain Wilds' label rests on the page-named novel plus its uncontested series membership rather than on the page's own words.",
+   "unsupportedLimb": "\"the Rain Wilds chapter-prefaces\" — the note says the literal string 'Rain Wild' appears nowhere on the page.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "673": {
    "index": 673,
@@ -20003,10 +20128,11 @@
   },
   "693": {
    "index": 693,
-   "verdict": "VERIFIED_SUBSTANCE",
+   "verdict": "PARTIAL",
    "trueWording": "History in the Margins: Epigraphs and Negative Space",
-   "note": "Live fetch 200; full page captured (72,729 chars of entry content, ending in the comment thread, so no truncation). Case-insensitive search of the whole bibliography finds 'epigraph' three times: once in the Oliver entry title, once inside Oliver's annotation, once inside the Petrovski memoir annotation. Exactly ONE entry title names epigraphs - Oliver, Matthew, in Mythlore vol. 41 no. 1 (2022), pp. 45-66 - matching the claim. (A short-form 'History in the Margins.' also appears in the page's index list; same single entry.) Graded SUBSTANCE not VERBATIM because the claim carried an empty quote field, so there was no quotation to match word for word. Minor slippage: the Oliver title names one novel, Assassin's Apprentice, where the claim says 'Hobb's novels'.",
-   "fromFile": "verdicts-hobb-i640-693.json"
+   "note": "STRICT RE-READ (r7): the verifier's own note withholds support from one limb. Verifier's note: Live fetch 200; full page captured (72,729 chars of entry content, ending in the comment thread, so no truncation). Case-insensitive search of the whole bibliography finds 'epigraph' three times: once in the Oliver entry title, once inside Oliver's annotation, once inside the Petrovski memoir annotation. Exactly ONE entry title names epigraphs - Oliver, Matthew, in Mythlore vol. 41 no. 1 (2022), pp. 45-66 - matching the claim. (A short-form 'History in the Margins.' also appears in the page's index list; same single entry.) Graded SUBSTANCE not VERBATIM because the claim carried an empty quote field, so there was no quotation to match word for word. Minor slippage: the Oliver title names one novel, Assassin's Apprentice, where the claim says 'Hobb's novels'.",
+   "unsupportedLimb": "\"the epigraphs of Hobb's novels\" — the note says the Oliver title names one novel, Assassin's Apprentice.",
+   "fromFile": "verdicts-hobb-regrade-r7.json"
   },
   "694": {
    "index": 694,

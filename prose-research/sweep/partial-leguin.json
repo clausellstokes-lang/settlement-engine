@@ -954,5 +954,101 @@
    "unsupportedLimb": "the limb making the two-true-names rule and the mage's-limit inference Roberts's own note - both sit inside the quoted p.48 novel passage, not in his commentary",
    "fromFile": "verdicts-leguin-i531-560.json"
   }
+ },
+ {
+  "index": 628,
+  "feature": "other: formula and homogenisation",
+  "claim": "Le Guin wrote to Michael Cunningham that when the characteristics of a genre are controlled and insisted upon by publishers, salability, repeatability and expectability replace quality and a literary form degenerates into a formula.",
+  "source": "Ursula K. Le Guin, in conversation with Michael Cunningham, Electric Literature, 1 April 2016",
+  "url": "https://electricliterature.com/ursula-k-le-guin-talks-to-michael-cunningham-about-genres-gender-and-broadening-fiction/",
+  "quote": "Salability, repeatability, expectability replace quality",
+  "page": "Le Guin's reply on genre",
+  "kind": "own-words",
+  "polarity": "rejects",
+  "date": "2016-04-01",
+  "routeHint": "live URL, browser UA",
+  "registerHint": "none",
+  "confidence": "high",
+  "angle": "close",
+  "verdict": {
+   "index": 628,
+   "verdict": "PARTIAL",
+   "trueWording": "Salability, repeatability, expectability replace quality",
+   "note": "Le Guin's reply, mid-piece. Page frames the exchange as a conversation ('talks to', 'I have enjoyed this conversation'), never as writing/correspondence; also the page blames 'publishers, or editors, or critics', the claim only publishers. Rest verbatim: 'A literary form degenerates into a formula.'",
+   "unsupportedLimb": "that Le Guin 'wrote to' Cunningham — the page shows a conversation, not correspondence",
+   "fromFile": "verdicts-leguin-i628-708.json"
+  }
+ },
+ {
+  "index": 711,
+  "feature": "other: research-coverage gap",
+  "claim": "Paradoxa number 21 on Ursula K. Le Guin, edited by Sylvia Kelso, is dated 2009 and includes Richard D. Erlich on Always Coming Home as ethnography.",
+  "source": "Paradoxa, volume 21 table of contents, paradoxa.com",
+  "url": "https://paradoxa.com/volume-21-ursula-k-le-guin/",
+  "quote": "Always Coming Home: “Ethnography, unBible, and Utopian Satire”",
+  "page": "volume 21 contents listing",
+  "kind": "relay",
+  "polarity": "mentions",
+  "date": "2009",
+  "routeHint": "live fetch with a browser user agent; the individual articles are sold per-PDF and were not fetched",
+  "registerHint": "dossier-archivist",
+  "confidence": "medium (contents listing verbatim; no article body read, and the angle brief dated the issue 2008 where the publisher dates it 2009)",
+  "angle": "academic-2",
+  "verdict": {
+   "index": 711,
+   "verdict": "PARTIAL",
+   "trueWording": "Always Coming Home: “Ethnography, unBible, and Utopian Satire”",
+   "note": "paradoxa.com volume-21 page shows the title, 'Edited by Sylvia Kelso', and the Erlich item at pages 137-166, verbatim. No year appears anywhere on the page (grep for 2009 over the raw HTML returns zero hits; the only years present are 1995/2000/2015/2019/2020/2024/2025), so the date limb is unsupported by this source.",
+   "unsupportedLimb": "the 2009 publication date",
+   "fromFile": "verdicts-leguin-i709-759.json"
+  }
+ },
+ {
+  "index": 737,
+  "feature": "other: encyclopedic form",
+  "claim": "Troy Press describes 'A Description of Earthsea' as a descriptive essay written alongside the five stories of Tales from Earthsea.",
+  "source": "Troy Press, 'A History of Earthsea'",
+  "url": "https://troypress.com/a-history-of-earthsea/",
+  "quote": "she ended up writing five short stories plus a descriptive essay",
+  "page": "paragraph on world-building",
+  "kind": "reception",
+  "polarity": "asserts",
+  "date": "n.d.",
+  "routeHint": "direct curl, browser UA",
+  "registerHint": "dossier-archivist",
+  "confidence": "medium: the blogger's label for the appendix, not Le Guin's",
+  "angle": "record-register",
+  "verdict": {
+   "index": 737,
+   "verdict": "PARTIAL",
+   "trueWording": "she ended up writing five short stories plus a descriptive essay",
+   "note": "troypress.com 'A History of Earthsea' (11 Nov 2023) carries the quoted clause verbatim in the world-building paragraph, but the string 'Description of Earthsea' never occurs on the page (zero hits over the raw HTML) and the five stories are not tied to Tales from Earthsea in that sentence.",
+   "unsupportedLimb": "the identification of that essay as 'A Description of Earthsea'",
+   "fromFile": "verdicts-leguin-i709-759.json"
+  }
+ },
+ {
+  "index": 774,
+  "feature": "per-speaker register",
+  "claim": "A Gethenian narrator explains the offworld convention for numbering years before stating her own.",
+  "source": "Ursula K. Le Guin, 'Coming of Age in Karhide', excerpted on the author's official site",
+  "url": "https://www.ursulakleguin.com/the-birthday-of-the-world-1",
+  "quote": "They call the year of some portentous event Year One",
+  "page": "'Coming of Age in Karhide', opening",
+  "kind": "own-words",
+  "polarity": "applies",
+  "date": "2002 collection; page retrieved 2026-09-06",
+  "routeHint": "direct curl, browser UA",
+  "registerHint": "chronicle-line",
+  "confidence": "high",
+  "angle": "record-register",
+  "verdict": {
+   "index": 774,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'the offworld convention' - the page attributes the Year One count to 'the Orgota, the Ekumen, and most other people', and the Orgota are a Gethenian nation, not offworlders",
+   "trueWording": "They call the year of some portentous event Year One",
+   "note": "Quote is verbatim. Byline on the page confirms the Gethenian narrator (Sov Thade Tage em Ereb, of Rer, in Karhide, on Gethen), and her own count is stated in the next sentence ('Here it's always Year One'), so the narrator and ordering limbs hold; only the 'offworld' attribution overreaches, since Orgoreyn is on Gethen.",
+   "fromFile": "verdicts-leguin-i763-807.json"
+  }
  }
 ]
