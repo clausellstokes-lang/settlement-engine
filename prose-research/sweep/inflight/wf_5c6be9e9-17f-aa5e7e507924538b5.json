@@ -3,14 +3,14 @@
  "name": "wolfe",
  "angle": "counter",
  "tag": null,
- "lines": 178,
+ "lines": 240,
  "firstTs": "2026-09-06T18:56:25.553Z",
- "lastTs": "2026-09-06T19:06:11.760Z",
+ "lastTs": "2026-09-06T19:10:38.899Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 38,
-  "WebSearch": 10,
+  "Bash": 53,
+  "WebSearch": 12,
   "WebFetch": 2
  },
  "urlsFetched": [
@@ -47,7 +47,23 @@
   "https://www.waggish.org/2007/more-on-gene-wolfe/",
   "http://yolacrary.blogspot.com/2007/11/waggish-on-book-of-new-sun.html",
   "https://medium.com/adams-notebook/gene-wolfe-the-book-of-the-new-sun-1980-83-ee4cc6d18410",
-  "https://www.newyorker.com/books/page-turner/sci-fis-difficult-genius"
+  "https://www.newyorker.com/books/page-turner/sci-fis-difficult-genius",
+  "https://strangehorizons.com/wordpress/non-fiction/the-author-and-the-critic-i-christopher-priest-and-paul-kincaid/",
+  "https://old.reddit.com/r/printSF/search?q=Wolfe+overrated&restrict_sr=on&sort=relevance&t=all",
+  "https://www.reddit.com/r/printSF/search.json?q=Wolfe%20overrated&restrict_sr=1&sort=relevance&limit=25",
+  "https://www.reddit.com/r/books/search.json?q=%22Book%20of%20the%20New%20Sun%22%20unreadable&limit=25",
+  "https://innsmouthfreepress.com/review-the-very-best-of-gene-wolfe/",
+  "https://www.murrayewing.co.uk/mewsings/2010/09/11/the-secret-to-reading-gene-wolfe/",
+  "https://www.splicetoday.com/writing/you-should-read-gene-wolfe",
+  "https://app.thestorygraph.com/book_reviews/a048409c-8d13-46ff-b6af-de16b89662ce?sort=lowest_rated",
+  "https://web.archive.org/web/20241114002444id_/https://www.enotes.com/topics/gene-rodman-wolfe/criticism/algis-budrys-2",
+  "https://web.archive.org/web/20250914044440id_/https://www.enotes.com/topics/gene-rodman-wolfe/criticism/thomas-m-disch",
+  "https://web.archive.org/web/2024id_/https://www.enotes.com/topics/gene-rodman-wolfe/criticism",
+  "https://web.archive.org/web/2024id_/https://www.enotes.com/topics/gene-rodman-wolfe/criticism/$n",
+  "https://www.enotes.com/topics/gene-rodman-wolfe/criticism/thomas-m-disch",
+  "https://www.enotes.com/topics/gene-rodman-wolfe/criticism/joanna-russ",
+  "https://www.enotes.com/topics/gene-rodman-wolfe/criticism/somtow-sucharitkul",
+  "https://www.enotes.com/topics/gene-rodman-wolfe/criticism/john-clute"
  ],
  "filesWritten": [],
  "lastAssistantText": "I'll start by reading the finder method that binds this work.",
@@ -57,8 +73,8 @@
  "journal": "in-flight",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-wolfe-counter.json",
-  "claims": 51,
+  "claims": 85,
   "complete": false,
-  "mtime": "15:05:44"
+  "mtime": "15:10:38"
  }
 }

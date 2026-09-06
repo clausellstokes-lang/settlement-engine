@@ -3,14 +3,14 @@
  "name": "leguin",
  "angle": "record-register",
  "tag": null,
- "lines": 91,
+ "lines": 159,
  "firstTs": "2026-09-06T18:59:47.841Z",
- "lastTs": "2026-09-06T19:06:06.160Z",
+ "lastTs": "2026-09-06T19:10:40.438Z",
  "tools": {
   "Read": 1,
-  "Bash": 18,
+  "Bash": 31,
   "ToolSearch": 1,
-  "WebSearch": 4
+  "WebSearch": 11
  },
  "urlsFetched": [
   "https://www.coursehero.com/file/60886041/A-Description-of-Earthseapdf/",
@@ -30,7 +30,17 @@
   "https://api.archivelab.org/books/talesfromearthse0000legu/searchinside?q=drudges",
   "https://archive.org/metadata/talesfromearthse0000legu",
   "https://ia-fts.archive.org/api/v1/search/hits?q=drudges&identifier=talesfromearthse0000legu",
-  "https://$SRV/fulltext/inside.php"
+  "https://$SRV/fulltext/inside.php",
+  "https://www.litcharts.com/lit/the-left-hand-of-darkness/chapter-1",
+  "https://www.litcharts.com/lit/the-left-hand-of-darkness/themes/truth-and-storytelling",
+  "https://en.wikipedia.org/wiki/The_Matter_of_Seggri",
+  "https://feministdigitalarchiveh2.wordpress.com/2015/02/23/the-matter-of-seggri-by-ursula-k-le-guin/",
+  "http://talktoyouniverse.blogspot.com/2008/10/genly-ai-ridiculously-close-look.html",
+  "https://untraitor.livejournal.com/555.html",
+  "https://booksongif.substack.com/p/left-hand-of-darkness-ursula-le-guin",
+  "https://www.googleapis.com/books/v1/volumes",
+  "https://ray.yorksj.ac.uk/id/eprint/6566/8/14744740221126984.pdf",
+  "https://www.scielo.br/j/ha/a/H99XmCRXgwSSQmtYqmhwcMy/?format=pdf&lang=en"
  ],
  "filesWritten": [],
  "lastAssistantText": "I'll start by reading the finder method that binds this work.",
@@ -40,8 +50,8 @@
  "journal": "in-flight",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-leguin-record-register.json",
-  "claims": 26,
+  "claims": 53,
   "complete": false,
-  "mtime": "14:36:43"
+  "mtime": "15:10:16"
  }
 }

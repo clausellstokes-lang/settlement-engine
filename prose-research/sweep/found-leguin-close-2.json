@@ -1,6 +1,6 @@
 {
  "complete": false,
- "coverage": "IN PROGRESS - second checkpoint",
+ "coverage": "IN PROGRESS - successor finder, checkpoint 1 (13 new sources on top of the predecessor's 17)",
  "sourcesRead": [
   {
    "title": "David Mitchell on Earthsea: a rival to Tolkien and George RR Martin",
@@ -19,7 +19,7 @@
    "route": "live URL, browser UA"
   },
   {
-   "title": "TEHANU \u2014 Kirkus Reviews",
+   "title": "TEHANU — Kirkus Reviews",
    "url": "https://www.kirkusreviews.com/book-reviews/ursula-k-le-guin/tehanu/",
    "kind": "reception",
    "substantive": true,
@@ -27,7 +27,7 @@
    "route": "live URL, browser UA"
   },
   {
-   "title": "Fellow writers remember Ursula K. Le Guin, 1929\u20132018",
+   "title": "Fellow writers remember Ursula K. Le Guin, 1929–2018",
    "url": "https://www.loa.org/news-and-views/1375-fellow-writers-remember-ursula-k-le-guin-1929-2018/",
    "kind": "reception",
    "substantive": true,
@@ -43,7 +43,7 @@
    "route": "live URL, browser UA"
   },
   {
-   "title": "A Woman on Gont: Ursula K. Le Guin\u2019s Tehanu",
+   "title": "A Woman on Gont: Ursula K. Le Guin’s Tehanu",
    "url": "https://reactormag.com/a-woman-on-gont-ursula-k-le-guins-tehanu/",
    "kind": "analysis",
    "substantive": true,
@@ -51,7 +51,7 @@
    "route": "live URL, browser UA"
   },
   {
-   "title": "Let her be eaten: Ursula K. Le Guin\u2019s The Tombs of Atuan",
+   "title": "Let her be eaten: Ursula K. Le Guin’s The Tombs of Atuan",
    "url": "https://reactormag.com/let-her-be-eaten-ursula-k-le-guins-the-tombs-of-atuan/",
    "kind": "analysis",
    "substantive": true,
@@ -67,7 +67,7 @@
    "route": "live URL, browser UA"
   },
   {
-   "title": "Coyote\u2019s Song, ch. \"Always Coming Home: Future Ethnography\"",
+   "title": "Coyote’s Song, ch. \"Always Coming Home: Future Ethnography\"",
    "url": "https://web.archive.org/web/20151107114510id_/http://sfra.org/Coyote/alwayshome.htm",
    "kind": "analysis",
    "substantive": true,
@@ -75,7 +75,7 @@
    "route": "Wayback id_ raw capture"
   },
   {
-   "title": "Coyote\u2019s Song, ch. \"Earthsea Revisited: Tehanu\"",
+   "title": "Coyote’s Song, ch. \"Earthsea Revisited: Tehanu\"",
    "url": "https://web.archive.org/web/20151107114510id_/http://sfra.org/Coyote/earthsea.htm",
    "kind": "analysis",
    "substantive": true,
@@ -88,15 +88,15 @@
    "kind": "reception",
    "substantive": false,
    "date": "2018-01-24",
-   "route": "live URL, browser UA \u2014 read in full; a personal farewell with no line-level style observation"
+   "route": "live URL, browser UA — read in full; a personal farewell with no line-level style observation"
   },
   {
-   "title": "Coyote\u2019s Song home page / table of contents",
+   "title": "Coyote’s Song home page / table of contents",
    "url": "https://web.archive.org/web/20151107114510id_/http://sfra.org/Coyote/CoyoteHome.htm",
    "kind": "analysis",
    "substantive": false,
    "date": "2009",
-   "route": "Wayback id_ raw capture \u2014 navigation only"
+   "route": "Wayback id_ raw capture — navigation only"
   },
   {
    "title": "The Twilight of an Age of Magic (review of Tehanu)",
@@ -131,12 +131,116 @@
    "route": "free PDF from paradoxa.com, text extracted with pypdf"
   },
   {
-   "title": "Volume 21 \u2013 Ursula K. Le Guin (Paradoxa contents page)",
+   "title": "Volume 21 – Ursula K. Le Guin (Paradoxa contents page)",
    "url": "https://paradoxa.com/volume-21-ursula-k-le-guin/",
    "kind": "relay",
    "substantive": false,
    "date": "2009",
-   "route": "live URL \u2014 contents listing; only the Kelso introduction is free, the other sixteen articles are paywalled per-article PDFs"
+   "route": "live URL — contents listing; only the Kelso introduction is free, the other sixteen articles are paywalled per-article PDFs"
+  },
+  {
+   "title": "Adam Roberts, \"Ursula Le Guin, 'A Wizard of Earthsea' (1968)\", Adam's Notebook (Medium)",
+   "url": "https://medium.com/adams-notebook/ursula-le-guin-a-wizard-of-earthsea-1968-c51a9a61881f",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2023-02-05",
+   "route": "live medium.com 403 and scribe.rip 404; read via Wayback raw https://web.archive.org/web/20250908044316id_/<url>"
+  },
+  {
+   "title": "Sean Guynes, \"The Tombs of Atuan: Power, Ideology, and Becoming Uneaten\", The Ursula K. Le Guin Reread, Reactor (formerly Tor.com)",
+   "url": "https://reactormag.com/the-tombs-of-atuan-power-ideology-and-becoming-uneaten/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2020-04-29",
+   "route": "live URL, browser UA + --compressed (the /series/ index returns 403; individual article pages return 200)"
+  },
+  {
+   "title": "Sean Guynes, \"The Farthest Shore: The Return of the King\", The Ursula K. Le Guin Reread, Reactor",
+   "url": "https://reactormag.com/the-farthest-shore-the-return-of-the-king/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2020-05-06",
+   "route": "live URL, browser UA"
+  },
+  {
+   "title": "Sean Guynes, \"Very Far Away from Anywhere Else: Le Guin's Thoughtful, Mundane YA Novel...\", Reactor",
+   "url": "https://reactormag.com/very-far-away-from-anywhere-else-le-guins-thoughtful-mundane-ya-novel-of-companionship-in-an-isolating-world/",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2020-09-09",
+   "route": "live URL, browser UA; read in full, no line-level prose remark"
+  },
+  {
+   "title": "Richard D. Erlich, Coyote's Song: The Teaching Stories of Ursula K. Le Guin, ch. Conclusion (SFRA digital book, (c)2000)",
+   "url": "https://web.archive.org/web/20151107114510id_/http://sfra.org/Coyote/conclusion.htm",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2000",
+   "route": "Wayback raw 20151107114510id_ (sfra.org dead)"
+  },
+  {
+   "title": "Richard D. Erlich, Coyote's Song, ch. Explicitly Daoist Works",
+   "url": "https://web.archive.org/web/20151107114510id_/http://sfra.org/Coyote/daoistnovels.htm",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2000",
+   "route": "Wayback raw 20151107114510id_"
+  },
+  {
+   "title": "Richard D. Erlich, Coyote's Song, ch. Early Works",
+   "url": "https://web.archive.org/web/20151107114510id_/http://sfra.org/Coyote/earlyworks.htm",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2000",
+   "route": "Wayback raw 20151107114510id_"
+  },
+  {
+   "title": "Richard D. Erlich, Coyote's Song, ch. Other Lessons: Picture Books",
+   "url": "https://web.archive.org/web/20151107114510id_/http://sfra.org/Coyote/picture.htm",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2000",
+   "route": "Wayback raw 20151107114510id_"
+  },
+  {
+   "title": "Richard D. Erlich, Coyote's Song, ch. Introduction",
+   "url": "https://web.archive.org/web/20151107114510id_/http://sfra.org/Coyote/intro.htm",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2000",
+   "route": "Wayback raw 20151107114510id_"
+  },
+  {
+   "title": "Richard D. Erlich, Coyote's Song, ch. New Heroes",
+   "url": "https://web.archive.org/web/20151107114510id_/http://sfra.org/Coyote/newhero.htm",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2000",
+   "route": "Wayback raw 20151107114510id_; read, no line-level prose remark"
+  },
+  {
+   "title": "Richard D. Erlich, Coyote's Song, ch. Daoism",
+   "url": "https://web.archive.org/web/20151107114510id_/http://sfra.org/Coyote/dao.htm",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2000",
+   "route": "Wayback raw 20151107114510id_; read, no line-level prose remark"
+  },
+  {
+   "title": "Richard D. Erlich, Coyote's Song, ch. Social Construction of Reality",
+   "url": "https://web.archive.org/web/20151107114510id_/http://sfra.org/Coyote/socialreality.htm",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2000",
+   "route": "Wayback raw 20151107114510id_; read, no line-level prose remark"
+  },
+  {
+   "title": "Richard D. Erlich, Coyote's Song, ch. Violence, Utopia, Ethics, Sex",
+   "url": "https://web.archive.org/web/20151107114510id_/http://sfra.org/Coyote/violence.htm",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2000",
+   "route": "Wayback raw 20151107114510id_; read, no line-level prose remark"
   }
  ],
  "claims": [
@@ -170,7 +274,7 @@
   },
   {
    "feature": "per-speaker register",
-   "claim": "David Mitchell states that Earthsea\u2019s accents and dialects are mentioned in the narration but never written out phonetically on the page.",
+   "claim": "David Mitchell states that Earthsea’s accents and dialects are mentioned in the narration but never written out phonetically on the page.",
    "source": "David Mitchell, \"David Mitchell on Earthsea: a rival to Tolkien and George RR Martin\", The Guardian, 23 October 2015",
    "url": "https://www.theguardian.com/books/2015/oct/23/david-mitchell-wizard-of-earthsea-tolkien-george-rr-martin",
    "quote": "accents and dialects are referred to but not reproduced on",
@@ -212,7 +316,7 @@
   },
   {
    "feature": "cadence and rhythm",
-   "claim": "David Mitchell characterises the narrating voice of Ged\u2019s story as having the calm authority of an age-old Icelandic saga.",
+   "claim": "David Mitchell characterises the narrating voice of Ged’s story as having the calm authority of an age-old Icelandic saga.",
    "source": "David Mitchell, \"David Mitchell on Earthsea: a rival to Tolkien and George RR Martin\", The Guardian, 23 October 2015",
    "url": "https://www.theguardian.com/books/2015/oct/23/david-mitchell-wizard-of-earthsea-tolkien-george-rr-martin",
    "quote": "the calm authority of an age-old Icelandic saga",
@@ -226,7 +330,7 @@
   },
   {
    "feature": "annalist voice and deep time",
-   "claim": "David Mitchell states that the cumulative effect of Le Guin\u2019s stylistic restraint is that A Wizard of Earthsea reads like a tale handed down through generations of storytellers.",
+   "claim": "David Mitchell states that the cumulative effect of Le Guin’s stylistic restraint is that A Wizard of Earthsea reads like a tale handed down through generations of storytellers.",
    "source": "David Mitchell, \"David Mitchell on Earthsea: a rival to Tolkien and George RR Martin\", The Guardian, 23 October 2015",
    "url": "https://www.theguardian.com/books/2015/oct/23/david-mitchell-wizard-of-earthsea-tolkien-george-rr-martin",
    "quote": "reads like the retelling of a tale first told centuries",
@@ -240,7 +344,7 @@
   },
   {
    "feature": "place and institution description",
-   "claim": "David Mitchell states that a quoted passage describing an East Reach woman\u2019s customary greeting gesture persuades precisely because its detail seems too particular to have been invented.",
+   "claim": "David Mitchell states that a quoted passage describing an East Reach woman’s customary greeting gesture persuades precisely because its detail seems too particular to have been invented.",
    "source": "David Mitchell, \"David Mitchell on Earthsea: a rival to Tolkien and George RR Martin\", The Guardian, 23 October 2015",
    "url": "https://www.theguardian.com/books/2015/oct/23/david-mitchell-wizard-of-earthsea-tolkien-george-rr-martin",
    "quote": "Such specificity is persuasive because it sounds too detailed",
@@ -282,10 +386,10 @@
   },
   {
    "feature": "place and institution description",
-   "claim": "David Mitchell states that descriptions of people and places in A Wizard of Earthsea are frugal enough to leave the reader\u2019s imagination room to collaborate.",
+   "claim": "David Mitchell states that descriptions of people and places in A Wizard of Earthsea are frugal enough to leave the reader’s imagination room to collaborate.",
    "source": "David Mitchell, \"David Mitchell on Earthsea: a rival to Tolkien and George RR Martin\", The Guardian, 23 October 2015",
    "url": "https://www.theguardian.com/books/2015/oct/23/david-mitchell-wizard-of-earthsea-tolkien-george-rr-martin",
-   "quote": "rich enough to nourish the reader\u2019s imagination, but frugal enough",
+   "quote": "rich enough to nourish the reader’s imagination, but frugal enough",
    "page": "section on style and voice",
    "kind": "analysis",
    "polarity": "asserts",
@@ -310,7 +414,7 @@
   },
   {
    "feature": "place and institution description",
-   "claim": "David Mitchell lists trade-routes, local politics, class hierarchies, infant mortality, abuse, addiction and slavery as the mundane institutional furniture that makes Earthsea\u2019s fantastical elements feel quotidian.",
+   "claim": "David Mitchell lists trade-routes, local politics, class hierarchies, infant mortality, abuse, addiction and slavery as the mundane institutional furniture that makes Earthsea’s fantastical elements feel quotidian.",
    "source": "David Mitchell, \"David Mitchell on Earthsea: a rival to Tolkien and George RR Martin\", The Guardian, 23 October 2015",
    "url": "https://www.theguardian.com/books/2015/oct/23/david-mitchell-wizard-of-earthsea-tolkien-george-rr-martin",
    "quote": "trade-routes, local politics, class hierarchies, infant mortality, abuse, addiction and slavery",
@@ -352,7 +456,7 @@
   },
   {
    "feature": "civic record register",
-   "claim": "Margaret Atwood describes the task of Le Guin\u2019s Ekumen envoys as non-invasive, non-directive understanding and recording of the societies they visit.",
+   "claim": "Margaret Atwood describes the task of Le Guin’s Ekumen envoys as non-invasive, non-directive understanding and recording of the societies they visit.",
    "source": "Margaret Atwood, \"The Queen of Quinkdom\", The New York Review of Books, 26 September 2002 issue",
    "url": "https://www.nybooks.com/articles/2002/09/26/the-queen-of-quinkdom/",
    "quote": "non-directive understanding and recording are the functions required",
@@ -380,7 +484,7 @@
   },
   {
    "feature": "closing sentence",
-   "claim": "Margaret Atwood characterises the closing scene of The Birthday of the World as a minimalist dance and quotes it as the book\u2019s last words.",
+   "claim": "Margaret Atwood characterises the closing scene of The Birthday of the World as a minimalist dance and quotes it as the book’s last words.",
    "source": "Margaret Atwood, \"The Queen of Quinkdom\", The New York Review of Books, 26 September 2002 issue",
    "url": "https://www.nybooks.com/articles/2002/09/26/the-queen-of-quinkdom/",
    "quote": "ends with a minimalist dance, as an old woman",
@@ -408,7 +512,7 @@
   },
   {
    "feature": "plainness and economy",
-   "claim": "The unsigned Kirkus review of Tehanu calls the novel\u2019s prose flawless and poetic and says even young readers will be beguiled by it.",
+   "claim": "The unsigned Kirkus review of Tehanu calls the novel’s prose flawless and poetic and says even young readers will be beguiled by it.",
    "source": "Kirkus Reviews, unsigned review of Tehanu, 1 February 1990",
    "url": "https://www.kirkusreviews.com/book-reviews/ursula-k-le-guin/tehanu/",
    "quote": "beguiled by the flawless, poetic prose",
@@ -450,7 +554,7 @@
   },
   {
    "feature": "metaphor discipline",
-   "claim": "The unsigned Kirkus review of Tehanu says the novel\u2019s philosophy is expressed in thoughtful, potent metaphor.",
+   "claim": "The unsigned Kirkus review of Tehanu says the novel’s philosophy is expressed in thoughtful, potent metaphor.",
    "source": "Kirkus Reviews, unsigned review of Tehanu, 1 February 1990",
    "url": "https://www.kirkusreviews.com/book-reviews/ursula-k-le-guin/tehanu/",
    "quote": "the philosophy expressed in thoughtful, potent metaphor",
@@ -464,8 +568,8 @@
   },
   {
    "feature": "sentence length variation",
-   "claim": "Zadie Smith, in the Library of America tribute page, calls Le Guin\u2019s sentences as elegant and beautiful as any written in the twentieth century.",
-   "source": "Zadie Smith, in \"Fellow writers remember Ursula K. Le Guin, 1929\u20132018\", Library of America, January 2018",
+   "claim": "Zadie Smith, in the Library of America tribute page, calls Le Guin’s sentences as elegant and beautiful as any written in the twentieth century.",
+   "source": "Zadie Smith, in \"Fellow writers remember Ursula K. Le Guin, 1929–2018\", Library of America, January 2018",
    "url": "https://www.loa.org/news-and-views/1375-fellow-writers-remember-ursula-k-le-guin-1929-2018/",
    "quote": "her sentences, as elegant and beautiful as any written",
    "page": "Zadie Smith entry",
@@ -479,7 +583,7 @@
   {
    "feature": "plainness and economy",
    "claim": "Harold Bloom, in the Library of America tribute page, calls Le Guin an exquisite stylist.",
-   "source": "Harold Bloom, in \"Fellow writers remember Ursula K. Le Guin, 1929\u20132018\", Library of America, January 2018",
+   "source": "Harold Bloom, in \"Fellow writers remember Ursula K. Le Guin, 1929–2018\", Library of America, January 2018",
    "url": "https://www.loa.org/news-and-views/1375-fellow-writers-remember-ursula-k-le-guin-1929-2018/",
    "quote": "Ursula was an exquisite stylist",
    "page": "Harold Bloom entry",
@@ -493,7 +597,7 @@
   {
    "feature": "cadence and rhythm",
    "claim": "Harold Bloom, in the Library of America tribute page, states that in Le Guin every word was exactly in place and every sentence or line had resonance.",
-   "source": "Harold Bloom, in \"Fellow writers remember Ursula K. Le Guin, 1929\u20132018\", Library of America, January 2018",
+   "source": "Harold Bloom, in \"Fellow writers remember Ursula K. Le Guin, 1929–2018\", Library of America, January 2018",
    "url": "https://www.loa.org/news-and-views/1375-fellow-writers-remember-ursula-k-le-guin-1929-2018/",
    "quote": "Every word was exactly in place",
    "page": "Harold Bloom entry",
@@ -506,10 +610,10 @@
   },
   {
    "feature": "annalist voice and deep time",
-   "claim": "Amanda Craig states that Earthsea gains the mysterious depths of Tolkien\u2019s world without Tolkien\u2019s back-stories and verse.",
+   "claim": "Amanda Craig states that Earthsea gains the mysterious depths of Tolkien’s world without Tolkien’s back-stories and verse.",
    "source": "Amanda Craig, \"Classic of the month: A Wizard of Earthsea\", The Guardian, 24 September 2003",
    "url": "https://www.theguardian.com/books/2003/sep/24/buildingachildrenslibrary.booksforchildrenandteenagers",
-   "quote": "the mysterious depths of Tolkien\u2019s, but without his tiresome back-stories",
+   "quote": "the mysterious depths of Tolkien’s, but without his tiresome back-stories",
    "page": "Classic of the month column",
    "kind": "analysis",
    "polarity": "asserts",
@@ -535,7 +639,7 @@
   {
    "feature": "cadence and rhythm",
    "claim": "Jo Walton states that Tehanu reads aloud beautifully, as she found while reading it aloud to a baby.",
-   "source": "Jo Walton, \"A Woman on Gont: Ursula K. Le Guin\u2019s Tehanu\", Tor.com/Reactor, 25 October 2011",
+   "source": "Jo Walton, \"A Woman on Gont: Ursula K. Le Guin’s Tehanu\", Tor.com/Reactor, 25 October 2011",
    "url": "https://reactormag.com/a-woman-on-gont-ursula-k-le-guins-tehanu/",
    "quote": "It reads aloud beautifully",
    "page": "essay body",
@@ -549,7 +653,7 @@
   {
    "feature": "other: pacing",
    "claim": "Jo Walton calls Tehanu a restless book with very strange pacing.",
-   "source": "Jo Walton, \"A Woman on Gont: Ursula K. Le Guin\u2019s Tehanu\", Tor.com/Reactor, 25 October 2011",
+   "source": "Jo Walton, \"A Woman on Gont: Ursula K. Le Guin’s Tehanu\", Tor.com/Reactor, 25 October 2011",
    "url": "https://reactormag.com/a-woman-on-gont-ursula-k-le-guins-tehanu/",
    "quote": "This is a restless book with very strange pacing",
    "page": "essay body",
@@ -562,10 +666,10 @@
   },
   {
    "feature": "other: domestic detail",
-   "claim": "Jo Walton states that she did not believe in Tenar\u2019s life as a farmwife on Gont and that something about it rings false.",
-   "source": "Jo Walton, \"A Woman on Gont: Ursula K. Le Guin\u2019s Tehanu\", Tor.com/Reactor, 25 October 2011",
+   "claim": "Jo Walton states that she did not believe in Tenar’s life as a farmwife on Gont and that something about it rings false.",
+   "source": "Jo Walton, \"A Woman on Gont: Ursula K. Le Guin’s Tehanu\", Tor.com/Reactor, 25 October 2011",
    "url": "https://reactormag.com/a-woman-on-gont-ursula-k-le-guins-tehanu/",
-   "quote": "there\u2019s something false about it",
+   "quote": "there’s something false about it",
    "page": "essay body",
    "kind": "analysis",
    "polarity": "disputes",
@@ -577,9 +681,9 @@
   {
    "feature": "register modulation",
    "claim": "Jo Walton states that The Tombs of Atuan is beautifully written but, unlike A Wizard of Earthsea, is not told like a legend.",
-   "source": "Jo Walton, \"Let her be eaten: Ursula K. Le Guin\u2019s The Tombs of Atuan\", Tor.com/Reactor, 2011",
+   "source": "Jo Walton, \"Let her be eaten: Ursula K. Le Guin’s The Tombs of Atuan\", Tor.com/Reactor, 2011",
    "url": "https://reactormag.com/let-her-be-eaten-ursula-k-le-guins-the-tombs-of-atuan/",
-   "quote": "beautifully written, but it isn\u2019t told like a legend",
+   "quote": "beautifully written, but it isn’t told like a legend",
    "page": "essay body",
    "kind": "analysis",
    "polarity": "asserts",
@@ -590,10 +694,10 @@
   },
   {
    "feature": "point of view and distance",
-   "claim": "Jo Walton states that The Tombs of Atuan keeps the reader straightforwardly behind Tenar\u2019s shoulder for the whole book.",
-   "source": "Jo Walton, \"Let her be eaten: Ursula K. Le Guin\u2019s The Tombs of Atuan\", Tor.com/Reactor, 2011",
+   "claim": "Jo Walton states that The Tombs of Atuan keeps the reader straightforwardly behind Tenar’s shoulder for the whole book.",
+   "source": "Jo Walton, \"Let her be eaten: Ursula K. Le Guin’s The Tombs of Atuan\", Tor.com/Reactor, 2011",
    "url": "https://reactormag.com/let-her-be-eaten-ursula-k-le-guins-the-tombs-of-atuan/",
-   "quote": "straightforwardly right behind Tenar\u2019s shoulder the entire time",
+   "quote": "straightforwardly right behind Tenar’s shoulder the entire time",
    "page": "essay body",
    "kind": "analysis",
    "polarity": "asserts",
@@ -605,7 +709,7 @@
   {
    "feature": "closing sentence",
    "claim": "Jo Walton observes that A Wizard of Earthsea calls Ged a \"young wizard\" at its close while The Tombs of Atuan describes Tenar at its close as \"like a child coming home\".",
-   "source": "Jo Walton, \"Let her be eaten: Ursula K. Le Guin\u2019s The Tombs of Atuan\", Tor.com/Reactor, 2011",
+   "source": "Jo Walton, \"Let her be eaten: Ursula K. Le Guin’s The Tombs of Atuan\", Tor.com/Reactor, 2011",
    "url": "https://reactormag.com/let-her-be-eaten-ursula-k-le-guins-the-tombs-of-atuan/",
    "quote": "like a child coming home",
    "page": "essay body",
@@ -619,7 +723,7 @@
   {
    "feature": "omission as information",
    "claim": "Jo Walton states that a lesser writer would have ended The Tombs of Atuan with the earthquake and the triumphant escape, and that Le Guin instead carries on into the escape through the mountains.",
-   "source": "Jo Walton, \"Let her be eaten: Ursula K. Le Guin\u2019s The Tombs of Atuan\", Tor.com/Reactor, 2011",
+   "source": "Jo Walton, \"Let her be eaten: Ursula K. Le Guin’s The Tombs of Atuan\", Tor.com/Reactor, 2011",
    "url": "https://reactormag.com/let-her-be-eaten-ursula-k-le-guins-the-tombs-of-atuan/",
    "quote": "a lesser writer would have finished the book with the earthquake",
    "page": "essay body",
@@ -650,7 +754,7 @@
    "claim": "Le Guin, quoted by Julie Phillips, rejects the term \"pathetic fallacy\" for letting a landscape carry feeling and calls the technique art.",
    "source": "Ursula K. Le Guin, in interview with Julie Phillips, The New Yorker, 17 October 2016",
    "url": "https://www.newyorker.com/magazine/2016/10/17/the-fantastic-ursula-k-le-guin",
-   "quote": "It\u2019s not a fallacy; it\u2019s art",
+   "quote": "It’s not a fallacy; it’s art",
    "page": "section on her reading as a girl",
    "kind": "own-words",
    "polarity": "asserts",
@@ -675,8 +779,8 @@
   },
   {
    "feature": "per-speaker register",
-   "claim": "Richard D. Erlich states that Le Guin\u2019s method in Always Coming Home is a fairly exhaustive ethnography that works by having many voices speak the world of the Kesh.",
-   "source": "Richard D. Erlich, Coyote\u2019s Song: The Teaching Stories of Ursula K. Le Guin (SFRA digital book, 2009 revision), chapter \"Always Coming Home: Future Ethnography\"",
+   "claim": "Richard D. Erlich states that Le Guin’s method in Always Coming Home is a fairly exhaustive ethnography that works by having many voices speak the world of the Kesh.",
+   "source": "Richard D. Erlich, Coyote’s Song: The Teaching Stories of Ursula K. Le Guin (SFRA digital book, 2009 revision), chapter \"Always Coming Home: Future Ethnography\"",
    "url": "https://web.archive.org/web/20151107114510id_/http://sfra.org/Coyote/alwayshome.htm",
    "quote": "exhaustive ethnography: having all those voices speaking the world",
    "page": "chapter Always Coming Home, endnote 36",
@@ -690,7 +794,7 @@
   {
    "feature": "omission as information",
    "claim": "Richard D. Erlich identifies a point in Tehanu where how Therru knows Tenar has lied is hinted at but never explained, and calls it a gap left for readers to fill.",
-   "source": "Richard D. Erlich, Coyote\u2019s Song: The Teaching Stories of Ursula K. Le Guin (SFRA digital book, 2009 revision), chapter \"Earthsea Revisited: Tehanu\"",
+   "source": "Richard D. Erlich, Coyote’s Song: The Teaching Stories of Ursula K. Le Guin (SFRA digital book, 2009 revision), chapter \"Earthsea Revisited: Tehanu\"",
    "url": "https://web.archive.org/web/20151107114510id_/http://sfra.org/Coyote/earthsea.htm",
    "quote": "a significant gap to be left or filled in by readers",
    "page": "chapter Earthsea Revisited: Tehanu",
@@ -704,7 +808,7 @@
   {
    "feature": "parataxis vs hypotaxis",
    "claim": "Richard D. Erlich notes that Le Guin sets a conclusion-drawing sentence in Tehanu off in a paragraph of its own with no transition and no explanation of the phrase it turns on.",
-   "source": "Richard D. Erlich, Coyote\u2019s Song: The Teaching Stories of Ursula K. Le Guin (SFRA digital book, 2009 revision), chapter \"Earthsea Revisited: Tehanu\"",
+   "source": "Richard D. Erlich, Coyote’s Song: The Teaching Stories of Ursula K. Le Guin (SFRA digital book, 2009 revision), chapter \"Earthsea Revisited: Tehanu\"",
    "url": "https://web.archive.org/web/20151107114510id_/http://sfra.org/Coyote/earthsea.htm",
    "quote": "marked by no transition but set off in a paragraph",
    "page": "chapter Earthsea Revisited: Tehanu",
@@ -718,7 +822,7 @@
   {
    "feature": "register modulation",
    "claim": "Richard D. Erlich states that Tehanu gains a different style from the Earthsea trilogy, which he calls a welcome variation from the high-fantastic.",
-   "source": "Richard D. Erlich, Coyote\u2019s Song: The Teaching Stories of Ursula K. Le Guin (SFRA digital book, 2009 revision), chapter \"Earthsea Revisited: Tehanu\"",
+   "source": "Richard D. Erlich, Coyote’s Song: The Teaching Stories of Ursula K. Le Guin (SFRA digital book, 2009 revision), chapter \"Earthsea Revisited: Tehanu\"",
    "url": "https://web.archive.org/web/20151107114510id_/http://sfra.org/Coyote/earthsea.htm",
    "quote": "a welcomed variation from the high-fantastic",
    "page": "chapter Earthsea Revisited: Tehanu, closing section",
@@ -732,7 +836,7 @@
   {
    "feature": "opening sentence",
    "claim": "Richard D. Erlich, with a linguist colleague, describes the opening sentence of Always Coming Home as past conditional, semi-conditional and emphatic past perfect, implying futurity.",
-   "source": "Richard D. Erlich, Coyote\u2019s Song: The Teaching Stories of Ursula K. Le Guin (SFRA digital book, 2009 revision), chapter \"Always Coming Home: Future Ethnography\", endnote 29",
+   "source": "Richard D. Erlich, Coyote’s Song: The Teaching Stories of Ursula K. Le Guin (SFRA digital book, 2009 revision), chapter \"Always Coming Home: Future Ethnography\", endnote 29",
    "url": "https://web.archive.org/web/20151107114510id_/http://sfra.org/Coyote/alwayshome.htm",
    "quote": "emphatic past perfect, implying futurity",
    "page": "chapter Always Coming Home, endnote 29",
@@ -787,10 +891,10 @@
   },
   {
    "feature": "other: hostile reception",
-   "claim": "Michael Dirda reports that some critics feel Le Guin\u2019s recent writing has grown windy and soft, too feminist, too mythic, too preachy.",
+   "claim": "Michael Dirda reports that some critics feel Le Guin’s recent writing has grown windy and soft, too feminist, too mythic, too preachy.",
    "source": "Michael Dirda, \"The Twilight of an Age of Magic\" (review of Tehanu), The Washington Post, 25 February 1990",
    "url": "https://www.washingtonpost.com/archive/entertainment/books/1990/02/25/the-twilight-of-an-age-of-magic/34d58490-4114-430b-890e-dc3dc3a3680a/",
-   "quote": "Le Guin\u2019s writing has grown windy and soft, too feminist",
+   "quote": "Le Guin’s writing has grown windy and soft, too feminist",
    "page": "review body, penultimate section",
    "kind": "reception",
    "polarity": "mentions",
@@ -829,7 +933,7 @@
   },
   {
    "feature": "plainness and economy",
-   "claim": "Gerald Jonas, in the New York Times obituary, describes Le Guin\u2019s fiction as combining compelling stories and rigorous narrative logic with a lean but lyrical style.",
+   "claim": "Gerald Jonas, in the New York Times obituary, describes Le Guin’s fiction as combining compelling stories and rigorous narrative logic with a lean but lyrical style.",
    "source": "Gerald Jonas, obituary of Ursula K. Le Guin, The New York Times, 23 January 2018",
    "url": "https://www.nytimes.com/2018/01/23/obituaries/ursula-k-le-guin-acclaimed-for-her-fantasy-fiction-is-dead-at-88.html",
    "quote": "a lean but lyrical style",
@@ -843,7 +947,7 @@
   },
   {
    "feature": "register modulation",
-   "claim": "Gerald Jonas states that the first three Earthsea books, written for young adults at the publisher\u2019s request, show no trace of writing down to their audience in scale or style.",
+   "claim": "Gerald Jonas states that the first three Earthsea books, written for young adults at the publisher’s request, show no trace of writing down to their audience in scale or style.",
    "source": "Gerald Jonas, obituary of Ursula K. Le Guin, The New York Times, 23 January 2018",
    "url": "https://www.nytimes.com/2018/01/23/obituaries/ursula-k-le-guin-acclaimed-for-her-fantasy-fiction-is-dead-at-88.html",
    "quote": "elevated style betray no trace of writing down to an audience",
@@ -882,11 +986,11 @@
    "routeHint": "Wayback raw capture of the NYT obituary",
    "registerHint": "none",
    "confidence": "medium",
-   "confidenceReason": "the obituary is a relay of Bloom\u2019s earlier written judgement; the primary Bloom text was not located"
+   "confidenceReason": "the obituary is a relay of Bloom’s earlier written judgement; the primary Bloom text was not located"
   },
   {
    "feature": "register modulation",
-   "claim": "Sean Guynes states that the tone of Le Guin\u2019s writing in A Wizard of Earthsea is simpler and sparser than in The Left Hand of Darkness or The Dispossessed.",
+   "claim": "Sean Guynes states that the tone of Le Guin’s writing in A Wizard of Earthsea is simpler and sparser than in The Left Hand of Darkness or The Dispossessed.",
    "source": "Sean Guynes, \"A Wizard of Earthsea: The Unsung Song of the Shadow\", The Ursula K. Le Guin Reread, Tor.com, 8 April 2020",
    "url": "https://reactormag.com/a-wizard-of-earthsea-the-unsung-song-of-the-shadow/",
    "quote": "simpler and sparser than in The Left Hand of Darkness",
@@ -900,8 +1004,8 @@
   },
   {
    "feature": "plainness and economy",
-   "claim": "A reader commenting under Sean Guynes\u2019s reread of A Wizard of Earthsea describes the novel\u2019s language as managing to be both semi-sparse and beautiful.",
-   "source": "AeronaGreenjoy, reader comment under Sean Guynes\u2019s Le Guin Reread instalment on A Wizard of Earthsea, Tor.com, 2020",
+   "claim": "A reader commenting under Sean Guynes’s reread of A Wizard of Earthsea describes the novel’s language as managing to be both semi-sparse and beautiful.",
+   "source": "AeronaGreenjoy, reader comment under Sean Guynes’s Le Guin Reread instalment on A Wizard of Earthsea, Tor.com, 2020",
    "url": "https://reactormag.com/a-wizard-of-earthsea-the-unsung-song-of-the-shadow/",
    "quote": "both semi-sparse and beautiful",
    "page": "comment thread",
@@ -929,7 +1033,7 @@
   },
   {
    "feature": "cadence and rhythm",
-   "claim": "Sylvia Kelso analyses the opening sentence of The Lathe of Heaven as four opposing blocks \u2014 two compound adjectives and two clauses \u2014 that echo the rhythm of ocean on beach.",
+   "claim": "Sylvia Kelso analyses the opening sentence of The Lathe of Heaven as four opposing blocks — two compound adjectives and two clauses — that echo the rhythm of ocean on beach.",
    "source": "Sylvia A. Kelso, \"Boldly to Re-Venture: New Writing on the Works of Ursula K. Le Guin\", Paradoxa 21 (2009), pp. 7-22",
    "url": "https://paradoxa.com/wp-content/uploads/2020/07/1-Boldly-to-Re-Venture-New-Writing-on-the-Works-of-Ursula-K.-Le-Guin-Kelso-pp-7-22.pdf",
    "quote": "four opposing blocks, two compound adjectives, two clauses",
@@ -1041,10 +1145,10 @@
   },
   {
    "feature": "cadence and rhythm",
-   "claim": "Le Guin, quoted by Sylvia Kelso from \"Collectors, Rhymesters and Drummers\", said that if she could hold to the rhythms of the dragon\u2019s flight the story told itself.",
+   "claim": "Le Guin, quoted by Sylvia Kelso from \"Collectors, Rhymesters and Drummers\", said that if she could hold to the rhythms of the dragon’s flight the story told itself.",
    "source": "Ursula K. Le Guin, \"Collectors, Rhymesters and Drummers\" (in The Wave in the Mind, 2004), pp. 183-84, quoted by Sylvia Kelso in Paradoxa 21",
    "url": "https://paradoxa.com/wp-content/uploads/2020/07/1-Boldly-to-Re-Venture-New-Writing-on-the-Works-of-Ursula-K.-Le-Guin-Kelso-pp-7-22.pdf",
-   "quote": "If I could hold to the rhythms of the dragon\u2019s flight",
+   "quote": "If I could hold to the rhythms of the dragon’s flight",
    "page": "p. 17, quoting The Wave in the Mind pp. 183-84",
    "kind": "own-words",
    "polarity": "asserts",
@@ -1064,6 +1168,286 @@
    "polarity": "asserts",
    "date": "2009",
    "routeHint": "Wayback/live PDF: paradoxa.com hosts this one article of Paradoxa 21 as a free PDF; binary fetched with curl and text extracted with pypdf",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "place and institution description",
+   "claim": "Adam Roberts writes that the Earthsea books take care to render their world as a believable, lived-in space.",
+   "source": "Adam Roberts, \"Ursula Le Guin, 'A Wizard of Earthsea' (1968)\", Adam's Notebook (Medium), 5 February 2023",
+   "url": "https://medium.com/adams-notebook/ursula-le-guin-a-wizard-of-earthsea-1968-c51a9a61881f",
+   "quote": "a believable, lived-in space",
+   "page": "paragraph beginning 'There is a seriousness'",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2023-02-05",
+   "routeHint": "Wayback raw https://web.archive.org/web/20250908044316id_/https://medium.com/adams-notebook/ursula-le-guin-a-wizard-of-earthsea-1968-c51a9a61881f",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "feature": "point of view and distance",
+   "claim": "Adam Roberts attributes the compelling quality of Le Guin's rendering of Earthsea to a seriousness and an absolute belief in the way she renders the world.",
+   "source": "Adam Roberts, Adam's Notebook (Medium), 5 February 2023",
+   "url": "https://medium.com/adams-notebook/ursula-le-guin-a-wizard-of-earthsea-1968-c51a9a61881f",
+   "quote": "There is a seriousness, an absolute belief",
+   "page": "paragraph beginning 'There is a seriousness'",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2023-02-05",
+   "routeHint": "Wayback raw 20250908044316id_",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "feature": "place and institution description",
+   "claim": "Adam Roberts characterises the detail in Earthsea as anthropological as much as mythographic, and linguistic as much as geographical.",
+   "source": "Adam Roberts, Adam's Notebook (Medium), 5 February 2023",
+   "url": "https://medium.com/adams-notebook/ursula-le-guin-a-wizard-of-earthsea-1968-c51a9a61881f",
+   "quote": "as much anthropological",
+   "page": "paragraph beginning 'There is a seriousness'",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2023-02-05",
+   "routeHint": "Wayback raw 20250908044316id_",
+   "registerHint": "dossier-archivist",
+   "confidence": "medium — the twelve-word cap forces a short quote; the full clause is 'the attention to detail, as much anthropological ... as mythographic, as much linguistic as geographical'"
+  },
+  {
+   "feature": "other: worldbuilding consistency",
+   "claim": "Adam Roberts disputes Francis Spufford's account by arguing that Le Guin is openly inconsistent and untruthful in her worldbuilding.",
+   "source": "Adam Roberts, Adam's Notebook (Medium), 5 February 2023",
+   "url": "https://medium.com/adams-notebook/ursula-le-guin-a-wizard-of-earthsea-1968-c51a9a61881f",
+   "quote": "",
+   "page": "paragraph beginning 'I would put it slightly differently'",
+   "kind": "analysis",
+   "polarity": "disputes",
+   "date": "2023-02-05",
+   "routeHint": "Wayback raw 20250908044316id_",
+   "registerHint": "none",
+   "confidence": "high — quotation left blank because the key words carry inline italic markup that splits them in the fetched text"
+  },
+  {
+   "feature": "other: worldbuilding consistency",
+   "claim": "Francis Spufford, quoted by Adam Roberts, credits Earthsea with the deep consistency that lets an imagined world unfold from its premises.",
+   "source": "Francis Spufford, The Child That Books Built (2002), 84-85, quoted in Adam Roberts, Adam's Notebook (Medium), 5 February 2023",
+   "url": "https://medium.com/adams-notebook/ursula-le-guin-a-wizard-of-earthsea-1968-c51a9a61881f",
+   "quote": "the deep consistency that allows an imagined world to unfold",
+   "page": "block quotation from The Child That Books Built",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2002",
+   "routeHint": "Wayback raw 20250908044316id_",
+   "registerHint": "dossier-archivist",
+   "confidence": "high — a quotation of Spufford inside Roberts's essay, not Roberts's own words"
+  },
+  {
+   "feature": "concrete sensory noun",
+   "claim": "Adam Roberts observes that Le Guin has a fondness for low walls as boundaries.",
+   "source": "Adam Roberts, Adam's Notebook (Medium), 5 February 2023",
+   "url": "https://medium.com/adams-notebook/ursula-le-guin-a-wizard-of-earthsea-1968-c51a9a61881f",
+   "quote": "Le Guin has a fondness for low walls as boundaries",
+   "page": "paragraph on the realm of the dead",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2023-02-05",
+   "routeHint": "Wayback raw 20250908044316id_",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "feature": "other: allusion and gloss",
+   "claim": "Adam Roberts says Le Guin was too scrupulous in her worldbuilding to leave the ivory door unexplained, and so glossed the ivory as a dragon's tooth because Earthsea has no elephants.",
+   "source": "Adam Roberts, Adam's Notebook (Medium), 5 February 2023",
+   "url": "https://medium.com/adams-notebook/ursula-le-guin-a-wizard-of-earthsea-1968-c51a9a61881f",
+   "quote": "too scrupulous in her worldbuilding to leave this detail",
+   "page": "paragraph on the gates of horn and ivory",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2023-02-05",
+   "routeHint": "Wayback raw 20250908044316id_",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "feature": "naming and forms of address",
+   "claim": "Adam Roberts reads the hero's three names, Duny, Ged and Sparrowhawk, as covering three of the four elements, earth, water and air.",
+   "source": "Adam Roberts, Adam's Notebook (Medium), 5 February 2023",
+   "url": "https://medium.com/adams-notebook/ursula-le-guin-a-wizard-of-earthsea-1968-c51a9a61881f",
+   "quote": "three names covering three of the four elements",
+   "page": "paragraph on Dun, Ged and sparrowhawk",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2023-02-05",
+   "routeHint": "Wayback raw 20250908044316id_",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "compounds and coinages",
+   "claim": "Adam Roberts reads the True Speech words tolk and inien as an acknowledgement of Tolkien built into Le Guin's invented vocabulary.",
+   "source": "Adam Roberts, Adam's Notebook (Medium), 5 February 2023",
+   "url": "https://medium.com/adams-notebook/ursula-le-guin-a-wizard-of-earthsea-1968-c51a9a61881f",
+   "quote": "an elegant way of acknowledging her major influence",
+   "page": "paragraph following the Master Hand quotation",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2023-02-05",
+   "routeHint": "Wayback raw 20250908044316id_",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "terminology consistency",
+   "claim": "Adam Roberts notes that Le Guin's rule that no thing can have two true names forces the limit on a mage's power, quoting the novel's statement that a mage can control only what he can name exactly and wholly.",
+   "source": "Ursula K. Le Guin, A Wizard of Earthsea, p. 48, quoted in Adam Roberts, Adam's Notebook (Medium), 5 February 2023",
+   "url": "https://medium.com/adams-notebook/ursula-le-guin-a-wizard-of-earthsea-1968-c51a9a61881f",
+   "quote": "A mage can control only what is near him",
+   "page": "block quotation, [48]",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2023-02-05",
+   "routeHint": "Wayback raw 20250908044316id_",
+   "registerHint": "dm-page",
+   "confidence": "high"
+  },
+  {
+   "feature": "plainness and economy",
+   "claim": "Sean Guynes says Le Guin's language is at its finest and most artful in The Tombs of Atuan.",
+   "source": "Sean Guynes, \"The Tombs of Atuan: Power, Ideology, and Becoming Uneaten\", Reactor, 29 April 2020",
+   "url": "https://reactormag.com/the-tombs-of-atuan-power-ideology-and-becoming-uneaten/",
+   "quote": "language is at its finest, its most artful",
+   "page": "section beginning 'Le Guin wrote Tombs as a sequel'",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2020-04-29",
+   "routeHint": "live URL, browser UA with --compressed",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "concrete sensory noun",
+   "claim": "Sean Guynes locates Le Guin's finest sentences in The Tombs of Atuan in the plainclothes description of thistle and juniper and frozen reeds by a desert river in midwinter.",
+   "source": "Sean Guynes, Reactor, 29 April 2020",
+   "url": "https://reactormag.com/the-tombs-of-atuan-power-ideology-and-becoming-uneaten/",
+   "quote": "her sentences luxuriate in the plainclothes description of thistle and juniper",
+   "page": "section beginning 'Le Guin wrote Tombs as a sequel'",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2020-04-29",
+   "routeHint": "live URL, browser UA",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "feature": "other: descriptive craft",
+   "claim": "Sean Guynes calls incredible sentences, artful descriptions and expert use of setting and tone obvious staples of Le Guin's work as a writer.",
+   "source": "Sean Guynes, Reactor, 29 April 2020",
+   "url": "https://reactormag.com/the-tombs-of-atuan-power-ideology-and-becoming-uneaten/",
+   "quote": "incredible sentences, artful descriptions, and expert use of setting and tone",
+   "page": "paragraph beginning 'The dark is a powerful fictive tool'",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2020-04-29",
+   "routeHint": "live URL, browser UA",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "other: didacticism",
+   "claim": "Sean Guynes says Ged serves in The Farthest Shore as a regular mouthpiece for musings about power and responsibility, for pages at a time.",
+   "source": "Sean Guynes, \"The Farthest Shore: The Return of the King\", Reactor, 6 May 2020",
+   "url": "https://reactormag.com/the-farthest-shore-the-return-of-the-king/",
+   "quote": "with Ged as a regular mouthpiece",
+   "page": "paragraph beginning 'Of course, comparisons aren't everything'",
+   "kind": "analysis",
+   "polarity": "mentions",
+   "date": "2020-05-06",
+   "routeHint": "live URL, browser UA",
+   "registerHint": "dm-page",
+   "confidence": "high"
+  },
+  {
+   "feature": "register modulation",
+   "claim": "Richard D. Erlich judges that Le Guin's style has become more colloquial and lower-flown, comparing the language of Tehanu with that of the earlier Earthsea trilogy.",
+   "source": "Richard D. Erlich, Coyote's Song: The Teaching Stories of Ursula K. Le Guin, Conclusion (SFRA, (c)2000)",
+   "url": "https://web.archive.org/web/20151107114510id_/http://sfra.org/Coyote/conclusion.htm",
+   "quote": "Her style has gotten more colloquial, lower-flown",
+   "page": "Conclusion, section on what has changed",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2000",
+   "routeHint": "Wayback raw 20151107114510id_ (sfra.org is dead)",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
+   "feature": "cadence and rhythm",
+   "claim": "Le Guin, in her Response to the 1975 Le Guin issue of Science-Fiction Studies as quoted by Erlich, said the ideas of the Earthsea trilogy are less detachable from the sounds, rests and rhythms than those of her other work of that time.",
+   "source": "Ursula K. Le Guin, \"Response\", Science-Fiction Studies (1975), p. 45, quoted in Richard D. Erlich, Coyote's Song, Conclusion ((c)2000)",
+   "url": "https://web.archive.org/web/20151107114510id_/http://sfra.org/Coyote/conclusion.htm",
+   "quote": "less detachable from the sounds, rests, and rhythms",
+   "page": "Conclusion, opening pages",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "1975",
+   "routeHint": "Wayback raw 20151107114510id_",
+   "registerHint": "none",
+   "confidence": "medium — Le Guin's own words reached through Erlich's quotation, not the 1975 journal page itself"
+  },
+  {
+   "feature": "other: theme carried by texture not statement",
+   "claim": "Le Guin, quoted by Erlich, said that dissecting the ideas out of the Earthsea trilogy yields fortune-cookie ideas such as Don't Meddle and Keep the Balance.",
+   "source": "Ursula K. Le Guin, \"Response\", Science-Fiction Studies (1975), p. 45, quoted in Richard D. Erlich, Coyote's Song, Conclusion ((c)2000)",
+   "url": "https://web.archive.org/web/20151107114510id_/http://sfra.org/Coyote/conclusion.htm",
+   "quote": "you get things like Don't Meddle. Keep the Balance",
+   "page": "Conclusion, opening pages",
+   "kind": "own-words",
+   "polarity": "asserts",
+   "date": "1975",
+   "routeHint": "Wayback raw 20151107114510id_",
+   "registerHint": "none",
+   "confidence": "medium — relayed through Erlich"
+  },
+  {
+   "feature": "plainness and economy",
+   "claim": "Richard D. Erlich credits Le Guin's 1961 story 'An die Musik' with a genius for handling complex issues in a lucid, simple style at the very beginning of her career.",
+   "source": "Richard D. Erlich, Coyote's Song, Early Works ((c)2000)",
+   "url": "https://web.archive.org/web/20151107114510id_/http://sfra.org/Coyote/earlyworks.htm",
+   "quote": "a genius for handling complex issues in a lucid, simple style",
+   "page": "Early Works, section on 'An die Musik'",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2000",
+   "routeHint": "Wayback raw 20151107114510id_",
+   "registerHint": "dossier-archivist",
+   "confidence": "high"
+  },
+  {
+   "feature": "humour",
+   "claim": "Richard D. Erlich attributes to a sly sense of humour the fact that Le Guin's work reads as teaching rather than as Sister Ursula Explaining It All.",
+   "source": "Richard D. Erlich, Coyote's Song, Other Lessons: Picture Books ((c)2000)",
+   "url": "https://web.archive.org/web/20151107114510id_/http://sfra.org/Coyote/picture.htm",
+   "quote": "teaching works and not Sister Ursula Explaining It All",
+   "page": "section on Fish Soup",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2000",
+   "routeHint": "Wayback raw 20151107114510id_",
+   "registerHint": "none",
+   "confidence": "high"
+  },
+  {
+   "feature": "other: didacticism",
+   "claim": "Richard D. Erlich accepts Le Guin's didacticism as a given but calls it dialogic didacticism, noting that her certainties are rare and that she ordinarily debates with herself.",
+   "source": "Richard D. Erlich, Coyote's Song, Introduction ((c)2000)",
+   "url": "https://web.archive.org/web/20151107114510id_/http://sfra.org/Coyote/intro.htm",
+   "quote": "Le Guin has her certainties, but they are rare",
+   "page": "Introduction, opening pages",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2000",
+   "routeHint": "Wayback raw 20151107114510id_",
    "registerHint": "none",
    "confidence": "high"
   }

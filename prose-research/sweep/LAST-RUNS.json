@@ -7,10 +7,10 @@
   "script": "STOPPED by S-BOUND rule 4; section 14:20 + critic 14:42 stand"
  },
  "kay": {
-  "runId": "wf_6aaded2c-7c9",
-  "argsFile": "args-kay-r6.json",
-  "tag": "r6",
-  "script": "research-workflow-v3.js (v3.4) — critic only (skipSynth)"
+  "runId": "wf_b55db7cd-25f",
+  "argsFile": "args-kay-r7.json",
+  "tag": "r7",
+  "script": "research-workflow-v3.js (v3.4) — THE ONE TOP-UP (S-BOUND rule 4): 2 rescue chunks (25 triage-skipped claims) + 5 extra angles + regrade + synth + critic; existingHashes omitted at the paste (merge dedupes by content); r6 = the critic-only run wf_6aaded2c-7c9 (critic-kay.md 15:08)"
  },
  "leguin": {
   "runId": "wf_29dbbf1f-9e3",

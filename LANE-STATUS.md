@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-06 15:05:58 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-06 15:11:29 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = dd5f13218 · ledger = eaf50fee7 §903: the lit default lands at 9 cars — the default preset takes the wave's class C+D (
 
@@ -82,16 +82,17 @@ product claude/composite-r4 = dd5f13218 · ledger = eaf50fee7 §903: the lit def
 - **leguin**: claims 541 · verdicts 491 (todo 50) · kept 342 · partial 42 · verdict files 28 (triage 1, regrade r4) · section 09-06 13:47 · critic 09-06 14:20
 - **wolfe**: claims 468 · verdicts 468 (todo 0) · kept 402 · partial 66 · verdict files 34 (triage 0, regrade r4) · section 09-06 14:19 · critic 09-06 14:32
 - **hobb**: claims 386 · verdicts 386 (todo 0) · kept 346 · partial 40 · verdict files 28 (triage 0, regrade r4) · section 09-06 14:14 · critic 09-06 14:28
-- LAST-RUNS: tolkien r6-not-launched/(none — nothingToRun 14:55), kay r6/wf_6aaded2c-7c9, leguin r7/wf_29dbbf1f-9e3, wolfe r6/wf_5c6be9e9-17f, martin r6/wf_004aff7a-269, hobb r6/wf_ab3eea15-df4, dnd r6/wf_df0a321b-0f2, ai r6/wf_e04d8c44-23e
+- LAST-RUNS: tolkien r6-not-launched/(none — nothingToRun 14:55), kay r7/wf_b55db7cd-25f, leguin r7/wf_29dbbf1f-9e3, wolfe r6/wf_5c6be9e9-17f, martin r6/wf_004aff7a-269, hobb r6/wf_ab3eea15-df4, dnd r6/wf_df0a321b-0f2, ai r6/wf_e04d8c44-23e
 
 ## WORKFLOW RUNS of chair session 059d4243-f837-4b07-8096-8c9ca76b03fb (journal lines; a run dies with the session — the FILES above are the checkpoint)
 - wf_004aff7a-269: 1 journal lines, 1 agents
 - wf_29dbbf1f-9e3: 4 journal lines, 4 agents
 - wf_5c6be9e9-17f: 4 journal lines, 4 agents
-- wf_6aaded2c-7c9: 1 journal lines, 1 agents
+- wf_6aaded2c-7c9: 2 journal lines, 1 agents
 - wf_ab3eea15-df4: 4 journal lines, 4 agents
+- wf_b55db7cd-25f: 4 journal lines, 4 agents
 - wf_df0a321b-0f2: 9 journal lines, 5 agents
 - wf_e04d8c44-23e: 1 journal lines, 1 agents
 
 ## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;38055 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.09 2.40 3.12
+load: 3.01 2.72 3.04
