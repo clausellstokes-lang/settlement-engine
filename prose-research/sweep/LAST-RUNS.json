@@ -11,7 +11,7 @@
   "argsFile": "args-kay-r8.json",
   "tag": "r8",
   "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--kay-r8.js",
-  "status": "PAUSED ~17:30 — 3rd (rescue chunks kay-rescue-0/1 IN the embedded args)",
+  "status": "RUNNING since 18:40 (resumed from wf_d76e605d-6d1 — the 2nd research slot after hobb closed)",
   "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--kay-r8.js"
  },
  "leguin": {
@@ -43,7 +43,7 @@
   "argsFile": "args-hobb-r7.json",
   "tag": "r7",
   "scriptPath": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/embedded/research-workflow-v3--hobb-r7.js",
-  "status": "RUNNING since 17:29 (the one live sweep)",
+  "status": "COMPLETE 18:38 (r7 = THE ONE TOP-UP + regrade + synth + critic second pass; 23 verified / 17 kept; section 94 KB; critic-hobb.md 18:3x). STOPPED by S-BOUND rule 4 — no further round; the critic §6 (next round) is NOT run; its §7 text fixes ([476] witness, rule 39/11 counts, 71/72, [616], block labels, register labels, rules 3/5/27) and §4 (kept trueWording >12 words: truncate at export) go to S12 as input",
   "script": "research-workflow-v3.js (v3.4) embedded as research-workflow-v3--hobb-r7.js"
  },
  "dnd": {
@@ -74,9 +74,12 @@
    "ai"
   ],
   "running": [
-   "hobb",
-   "leguin"
+   "leguin",
+   "kay"
   ],
-  "resume": "keep TWO research runs alive: when one completes (its task notification), resume the next in `order` by Workflow({scriptPath: d[<next>].scriptPath, resumeFromRunId: d[<next>].runId}); set its status RUNNING here"
+  "resume": "keep TWO research runs alive: when one completes (its task notification), resume the next in `order` by Workflow({scriptPath: d[<next>].scriptPath, resumeFromRunId: d[<next>].runId}); set its status RUNNING here",
+  "done": [
+   "hobb"
+  ]
  }
 }

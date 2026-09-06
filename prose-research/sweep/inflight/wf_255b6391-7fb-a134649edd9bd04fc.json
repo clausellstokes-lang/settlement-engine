@@ -3,19 +3,22 @@
  "name": "hobb",
  "angle": null,
  "tag": null,
- "lines": 93,
+ "lines": 100,
  "firstTs": "2026-09-06T22:27:15.407Z",
- "lastTs": "2026-09-06T22:36:08.008Z",
+ "lastTs": "2026-09-06T22:39:48.952Z",
  "tools": {
   "Bash": 17,
-  "Read": 11
+  "Read": 11,
+  "Write": 1
  },
  "urlsFetched": [],
- "filesWritten": [],
- "lastAssistantText": "I'll read the sweep section, the kept file, and any finder notes for this sweep.",
+ "filesWritten": [
+  "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/critic-hobb.md"
+ ],
+ "lastAssistantText": "nd -ly rates over the public excerpts.\n7. Text fixes: [476] witness; rule 39/11 counts; 71/72; [616]; block labels; register labels; rules 3, 5, 27; reception \"two witnesses\"; the 76th census claim; [466]/[482] used.\n8. Export hygiene: truncate `trueWording`; trim the six over-length `quote` fields.",
  "run": "wf_255b6391-7fb",
  "agent": "a134649edd9bd04fc",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/cc123b6c-1961-44c5-b071-c5e5aee7ee80/subagents/workflows/wf_255b6391-7fb/agent-a134649edd9bd04fc.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": null
 }

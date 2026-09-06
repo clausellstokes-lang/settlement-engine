@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 18:36:29 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 18:42:38 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -210,7 +210,7 @@
 | dnd | verifier | i94-108 | result | 14 | — | verdict file WRITTEN | 17:42:38 |
 | hobb | critic |  | failed | 0 | — | — | 19:45:57 |
 | hobb | critic |  | result | 0 | critic-hobb.md | — | 18:29:49 |
-| hobb | critic |  | in-flight | 0 | — | — | 22:36:08 |
+| hobb | critic |  | result | 0 | critic-hobb.md | — | 22:39:48 |
 | hobb | finder | critics-absent | result | 93 | — | 67 claims, complete=True @17:25:57 | 19:27:01 |
 | hobb | finder | dropped-and-routes | result | 68 | — | 94 claims, complete=True @17:25:57 | 19:27:00 |
 | hobb | finder | epigraph-census | result | 29 | — | 76 claims, complete=True @17:25:57 | 19:21:12 |
@@ -280,6 +280,7 @@
 | kay | finder | rescue-unread | result | 113 | — | 100 claims, complete=True @17:25:52 | 19:38:12 |
 | kay | finder | silmarillion-and-verse | result | 105 | — | 113 claims, complete=True @17:25:52 | 19:34:08 |
 | kay | finder | transcripts-and-readers | failed | 22 | — | — | 19:45:35 |
+| kay | finder | transcripts-and-readers | in-flight | 2 | — | — | 22:42:11 |
 | kay | finder | transcripts-and-readers | in-flight | 1 | — | — | 21:31:03 |
 | kay | finder | translators-and-ear | result | 80 | — | 35 claims, complete=True @17:25:52 | 19:33:40 |
 | kay | regrade | regrade-r4 | failed | 0 | — | — | 17:51:50 |
@@ -387,7 +388,7 @@
 | leguin | synth |  | failed | 0 | — | — | 19:46:18 |
 | leguin | synth |  | failed | 0 | — | — | 18:42:14 |
 | leguin | synth |  | result | 0 | section-leguin.md | — | 17:50:43 |
-| leguin | synth |  | in-flight | 0 | section-leguin.md | — | 22:36:04 |
+| leguin | synth |  | in-flight | 0 | section-leguin.md | — | 22:38:17 |
 | leguin | verifier | i105-119 | result | 2 | — | verdict file WRITTEN | 17:03:23 |
 | leguin | verifier | i120-134 | result | 4 | — | verdict file WRITTEN | 17:03:37 |
 | leguin | verifier | i135-149 | result | 5 | — | verdict file WRITTEN | 17:03:44 |
