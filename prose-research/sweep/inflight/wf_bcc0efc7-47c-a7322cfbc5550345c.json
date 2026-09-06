@@ -3,25 +3,28 @@
  "name": "ai",
  "angle": null,
  "tag": "i876-893",
- "lines": 24,
+ "lines": 44,
  "firstTs": "2026-09-06T18:25:47.905Z",
- "lastTs": "2026-09-06T18:26:13.188Z",
+ "lastTs": "2026-09-06T18:29:05.942Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 3
+  "Bash": 7,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
-  "https://en.wikipedia.org/w/index.php?title=Wikipedia:Signs_of_AI_writing&action=raw"
+  "https://en.wikipedia.org/w/index.php?title=Wikipedia:Signs_of_AI_writing&action=raw",
+  "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&titles=Wikipedia:Signs%20of%20AI%20writing&rvprop=timestamp|ids&format=json",
+  "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing"
  ],
  "filesWritten": [],
- "lastAssistantText": "Raw page fetched (220 KB of wikitext). Now verifying each quote.",
+ "lastAssistantText": "n verified verbatim; one PARTIAL — index 885, where the page's GPT-5 era bullet is not closed at four words but ends \"(plus words associated with 'Canned emphasis on notability, attribution, and media coverage')\", so the claim's \"only emphasizing, enhance, highlighting and showcasing\" overstates it.",
  "run": "wf_bcc0efc7-47c",
  "agent": "a7322cfbc5550345c",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/19ace14d-e63e-4584-ad77-d83bd8e2cd0f/subagents/workflows/wf_bcc0efc7-47c/agent-a7322cfbc5550345c.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-ai-i876-893.json",
-  "exists": false
+  "exists": true
  }
 }

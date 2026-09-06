@@ -3,13 +3,14 @@
  "name": "dnd",
  "angle": null,
  "tag": "i394-408",
- "lines": 64,
+ "lines": 70,
  "firstTs": "2026-09-06T18:23:35.812Z",
- "lastTs": "2026-09-06T18:26:13.109Z",
+ "lastTs": "2026-09-06T18:27:26.187Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 15
+  "Bash": 16,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://tenfootpole.org/ironspike/?page_id=1201",
@@ -23,9 +24,9 @@
  "run": "wf_a9298963-fdf",
  "agent": "a3a685e300976dc66",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/19ace14d-e63e-4584-ad77-d83bd8e2cd0f/subagents/workflows/wf_a9298963-fdf/agent-a3a685e300976dc66.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-dnd-i394-408.json",
-  "exists": false
+  "exists": true
  }
 }

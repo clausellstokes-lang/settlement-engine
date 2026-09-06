@@ -38,6 +38,10 @@ export const FILE_RULES2 = [
   { f:'src/domain/tuning/autoTunableRegistry.js', cls:'dev', ev:'declaration', cp:'(tuning declaration)', n:'candidate-rail notes' },
 ];
 export const PATTERN_RULES2 = [
+  { test:(r)=>r.leaf==='.error'||r.leaf==='.refusal'||r.exp==='fontFamily'||r.leaf==='.sourceRef', cls:'dev', ev:'declaration', cp:'(declaration)', n:'validator/refusal code string or a CSS token, not reader prose' },
+  { test:(r)=>/successorNpc/.test(r.exp)&&r.leaf==='.short', cls:'dm-only', ev:'render-site-read', cp:'src/domain/display/publicSafe.js:170', n:"an NPC goal.short; `goal` is stripped from every public NPC projection" },
+  { test:(r)=>['INSTITUTION_CAUSE_CURES','INTERCEPT_BAND_REASONS','TAP_RECEIPTS','FAITH_UNBOUND_CHANNELS','EXPLOITATION_GATE_CONTRACT'].includes(r.exp), cls:'reader', ev:'family-inference', cp:'src/components/map/HeraldBody.jsx:121', n:'worldPulse reader phrase table joined into a status line or receipt' },
+  { test:(r)=>r.exp==='SUPPLY_CHAIN_NEEDS'||r.exp==='SPECIAL_RESOURCES', cls:'reader', ev:'family-inference', cp:'src/components/new/SupplyChainsPanel.jsx', n:'supply-chain need/resource display field on a panel-reachable table' },
   // governed reader kind-registries: the authored news/receipt pools
   { test:(r)=>/_KIND_REGISTRY$/.test(r.exp), cls:'reader', ev:'family-trace',
     cp:'src/components/map/HeraldBody.jsx:121', n:'a governed READER registry pool (the module headers name themselves "evidence-to-reader projection"); the seeded picker in the same file builds the Herald item the feed prints' },
@@ -49,12 +53,19 @@ export const PATTERN_RULES2 = [
   { test:(r)=>['.fontFamily','.owner','.banks','.unit','.min','.max','.anchor','.exportBonus'].includes(r.leaf), cls:'dev', ev:'declaration', cp:'(declaration)', n:'non-prose or dev-side field' },
   { test:(r)=>r.leaf==='.note'||r.leaf==='.access', cls:'dev', ev:'declaration', cp:'(declaration)', n:'design/tuning note beside a table row' },
 ];
-const READER_KEYS = new Set(['.desc','.description','.label','.blurb','.summary','.headline','.phrase','.term','.text','.title','.body','.hint','.teaser','.sentence','.detail','.effect','.explanation','.reason','.message','.name','.epithet','.tagline','.intro','.portfolio','.signal','.cause','.frame','.heading','.epitaph','.may','.did','.one','.many','.warStyle','.resource','.incompatibleReason','.entrepotNote','.failureConsequence','.condition','.arrival','.character','.trait','.role','.hook','.warning','.receipt','.identitySentence','.tradeAccess','.serviceLine','.cta','.noHiddenFees','.d']);
+const READER_KEYS = new Set(['.desc','.description','.label','.blurb','.summary','.headline','.phrase','.term','.text','.title','.body','.hint','.teaser','.sentence','.detail','.effect','.explanation','.reason','.message','.name','.epithet','.tagline','.intro','.portfolio','.signal','.cause','.frame','.heading','.epitaph','.may','.did','.one','.many','.warStyle','.resource','.incompatibleReason','.entrepotNote','.failureConsequence','.condition','.arrival','.character','.trait','.role','.hook','.warning','.receipt','.identitySentence','.tradeAccess','.serviceLine','.cta','.noHiddenFees','.d','.display','.what','.gloss']);
 export function DEFAULTS(r){
   if(!r.prod){
     return { cls:'ambiguous', ev:'reachability',
       cp:'(no product surface)',
       n:'authored string in a module reachable from NO product surface at fd36f0298 (dark); it is neither rendered today nor a dev note, so its consumer cannot be named' };
+  }
+  const displayHome = /^src\/(domain\/display|domain\/summary|components|domain\/state|domain\/dossier)\//.test(r.file);
+  const proseExport = /_(PHRASE|PHRASES|SENTENCE|SENTENCES|WORDS|LABEL|LABELS|TELLINGS|PROSE|CLAUSES|TEXT|CAUSES|VOCAB|NOUN|MOLDS|POOLS)$/.test(r.exp)
+    || /^(FALL_SENTENCE|ADVANCE_REFUSAL_TEXT|REACTION_LABELS|ECONOMY_FRESHNESS_SENTENCES)$/.test(r.exp);
+  if(displayHome || proseExport){
+    return { cls:'reader', ev:'family-inference', cp:r.jsxAnc||'(product-reachable display module)',
+      n:'product-reachable display/prose module whose export is a band-word or sentence map; traced to this JSX/PDF ancestor, individual render line not read' };
   }
   if(READER_KEYS.has(r.leaf) || r.leaf==='[idx]' || r.leaf==='(other)'){
     return { cls:'reader', ev:'family-inference', cp:r.jsxAnc||'(product-reachable module)',

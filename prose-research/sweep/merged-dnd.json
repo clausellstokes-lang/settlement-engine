@@ -13995,6 +13995,326 @@
    "trueWording": "Any word that is not important, is not used.",
    "note": "Same raw page, in the bullet list breaking down the notation. Quote verbatim, and it is stated as a rule of that same location notation, so both limbs hold.",
    "fromFile": "verdicts-dnd-i454-468.json"
+  },
+  "469": {
+   "index": 469,
+   "verdict": "PARTIAL",
+   "trueWording": "Dr Simon, post #8, names the Dragonlance boxed text",
+   "note": "Quote verbatim on the page: 'I think my favourite worst offender is the very first piece of boxed text that you meet in the Dragonlance series; \"The air surges fierce and sweet...\"'. But it is post #8 by Dr Simon (Jul 18, 2013), not delericho. delericho's post #7 (Jul 16, 2013) is the bullet-point-instead-of-boxed-text advice; Dr Simon's post opens by addressing 'Delericho,' which is the likely source of the mix-up. Claim sentence itself is otherwise fully supported.",
+   "unsupportedLimb": "attribution to forum member 'delericho'",
+   "fromFile": "verdicts-dnd-i469-483.json"
+  },
+  "470": {
+   "index": 470,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The Forest Oracle's 'men who are neither tarrying nor running'",
+   "note": "Dausuul, post #5, Jul 15 2013: 'Now, this isn't awful boxed text--nothing like the infamous bit from \"The Forest Oracle\" with the men who are neither tarrying nor running--but it can certainly be tightened up considerably.' Author, post number and 'infamous' framing all match.",
+   "fromFile": "verdicts-dnd-i469-483.json"
+  },
+  "471": {
+   "index": 471,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "avoid having rooms that are just one thing",
+   "note": "Alexandrian, 'Random GM Tip: Awesome Dungeon Rooms' (19 Jan 2022): 'our key tip today for making awesome dungeon rooms is to avoid having rooms that are just one thing*'. Quote verbatim; the rule is stated as the article's key tip for a keyed room.",
+   "fromFile": "verdicts-dnd-i469-483.json"
+  },
+  "472": {
+   "index": 472,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "include at least three interactive elements",
+   "note": "Same article: 'A good rule of thumb here is to include at least three interactive elements (i.e., things that require or reward the players for doing more than just looking at them).' Both limbs -- the number three and 'more than looking' -- are on the page verbatim.",
+   "fromFile": "verdicts-dnd-i469-483.json"
+  },
+  "473": {
+   "index": 473,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "one flavorful thing without a significant interaction",
+   "note": "Same article, the footnote marked by the asterisk: 'The exception are empty rooms. In my dungeons, empty rooms are rarely truly empty (in the sense of being barren and featureless). Instead, \"empty\" rooms commonly feature one flavorful thing which does not have a significant interaction. (\"Cool mural! Okay, let's go left.\")'. 'Barren and featureless' and 'footnote' both match.",
+   "fromFile": "verdicts-dnd-i469-483.json"
+  },
+  "474": {
+   "index": 474,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "note crucial details buried in the middle of a paragraph",
+   "note": "'How to Prep a Module - Part 2' (28 Jul 2021), under the heading PREPPING PUBLISHED DUNGEONS: 'I usually won't waste a lot of time bringing them up to code... I find it more effective to occasionally make note of particularly crucial details that are essential to the adventure but buried in the middle of a paragraph, to make sure they don't get missed during play.' Quote verbatim and the section heading matches. Nuance: the page's own adverb is 'occasionally', set against 'usually won't' rewrite -- i.e. this is his standing light-touch repair rather than a per-room routine.",
+   "fromFile": "verdicts-dnd-i469-483.json"
+  },
+  "475": {
+   "index": 475,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "main text and glossary define the Influence action differently",
+   "note": "'Review: Heroes of the Borderlands (D&D Starter Set 2025)' (16 Oct 2025): 'For example, in the main text the Influence action is defined as making a Charisma check to alter a creature's attitude. In the glossary, however, the Influence action is defined as making a monster do something you want and the monster's attitude is now a modifier on the check.' Quote verbatim; both definitions are located in the set's Play Guide, which the review has just called a glossary-based rulebook.",
+   "fromFile": "verdicts-dnd-i469-483.json"
+  },
+  "476": {
+   "index": 476,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "boxed text shouldn't be more than two sentences",
+   "note": "GM Lent, post #31, Apr 5 2025: 'I remember reading a suggestion somewhere that boxed text shouldn't be more than two sentences, and should focus on what a character can physically sense when entering the room (what they see, feel, hear, etc). Any monsters or creatures in the room should get a mention too.' Author, post number, date, the recall framing, the sensing limb and the creatures limb all match.",
+   "fromFile": "verdicts-dnd-i469-483.json"
+  },
+  "477": {
+   "index": 477,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "3 to 5 sentences at most",
+   "note": "el-remmen (listed as Moderator Emeritus), post #34, Apr 5 2025: 'I find it useful if written well and concisely. 3 to 5 sentences at most and then other details listed to be shared if the party looks closer/investigates/interacts.' Quote verbatim; the held-back-detail limb is the second half of the same sentence.",
+   "fromFile": "verdicts-dnd-i469-483.json"
+  },
+  "478": {
+   "index": 478,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "hates plain descriptors and boxes of unevocative keyterms",
+   "note": "Shardstone, post #32, Apr 5 2025: 'I love read aloud text in my adventures... I really hate adventures that have very plain descriptors or that have a box of simple keyterms that aren't evocative.' Quote verbatim; the pro-prose limb and the bullet-keyword alternative are both explicit.",
+   "fromFile": "verdicts-dnd-i469-483.json"
+  },
+  "479": {
+   "index": 479,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'off to the side' changes when you enter another door",
+   "note": "Shiroiken, quoted in full inside Lanefan's post #36 (Apr 5 2025): 'I personally dislike the cardinal directions because the party may not know the cardinal direction... Personally I prefer vague descriptions when dealing with relative locations. \"Off to the side\" and \"nearby\" are typically adequate.' Lanefan replies: 'To me that's exactly the problem: \"off to the side\" when coming in one door might be \"across the room\" when coming in another or \"against one wall\" if coming up through a trap door in the floor.' Both halves of the claim, and the 'quoted post' page note, check out.",
+   "fromFile": "verdicts-dnd-i469-483.json"
+  },
+  "480": {
+   "index": 480,
+   "verdict": "PARTIAL",
+   "trueWording": "basic room description first, then monsters, minor details after the fight",
+   "note": "DragonLancer, quoted inside MarkB's post #39 (Apr 5 2025): 'The author will describe the minutia in a room but never mention any monsters or at the very least, put that in last. They would rather have a basic description of a scene or room, then the monsters, and any relevant minor details after a fight or encounter.' Quote is verbatim and the deferred-minor-detail limb is exact. But the ordering limb inverts him: he wants a basic room description BEFORE the creatures, with only the minutia held back -- not the creatures named first.",
+   "unsupportedLimb": "creatures named before the furnishings",
+   "fromFile": "verdicts-dnd-i469-483.json"
+  },
+  "481": {
+   "index": 481,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "modules' language differs from his GMing voice; reading flags a clue",
+   "note": "humble minion, post #4, Jul 12 2020: 'I try not to use it, because the way modules are written is very different to my normal use of language when I'm GMing. Reading out a chunk of boxed text is basically equivalent to waving a \"this location/NPC is A Clue to the plot, pay lots of attention to it\" flag in front of my players' eyes.' Quote verbatim; both limbs present.",
+   "fromFile": "verdicts-dnd-i469-483.json"
+  },
+  "482": {
+   "index": 482,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it turns the DM into a TextToSpeech bot",
+   "note": "oriaxx77, the thread's opening post #1, Jul 12 2020: 'I am from eastern Europe where not everyone speaks English. Maybe that is why. The read aloud seems weird and it turns the DM into a TextToSpeech bot.' Opening-poster, eastern-Europe and speech-synthesiser limbs all verbatim.",
+   "fromFile": "verdicts-dnd-i469-483.json"
+  },
+  "483": {
+   "index": 483,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "divided between common information and bold text players aren't meant to know",
+   "note": "Age of Dusk, '[Review] T1 The Village of Hommlet (AD&D); Foreshadow', posted July 31 2021 by Prince: 'The village itself is helpfully divided between common information and bold text that the players are not meant to know and that can only be discovered by careful investigation.' It sits in the paragraph beginning 'There are the usual early TSR bugaboos with the module', exactly as the page field says.",
+   "fromFile": "verdicts-dnd-i469-483.json"
+  },
+  "484": {
+   "index": 484,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Room descriptions in thick, indigestible paragraphs",
+   "note": "Raw HTML fetched (200, 51KB) and tag-stripped. Body: 'These are the usual early TSR bugaboos with the module; Room descriptions in thick, indigestible paragraphs and notes on monster placement in rooms other then the one where the monster is actually placed...' Byline PrinceofNothing, dated 2021/07/31.",
+   "fromFile": "verdicts-dnd-i484-498.json"
+  },
+  "485": {
+   "index": 485,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "There are also the odd Victorian room catalogs",
+   "note": "Same paragraph: 'There are also the odd Victorian room catalogs (i.e. this room has 23 halbeards, 315 arrows and 5 casks of oil).' The parenthetical confirms the 'itemised room contents' limb.",
+   "fromFile": "verdicts-dnd-i484-498.json"
+  },
+  "486": {
+   "index": 486,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A vast catalogue of seemingly mundane NPCs are presented",
+   "note": "Verbatim in the village paragraph: 'A vast catalogue of seemingly mundane NPCs are presented, but underneath the facade of rural simplicity is a web of intrigue, espionage...'",
+   "fromFile": "verdicts-dnd-i484-498.json"
+  },
+  "487": {
+   "index": 487,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "creates the appearance of a world in flux, a continuous place, a living world",
+   "note": "Paragraph opens 'Little details in the village. Unscrupulous merchants that sell broken down nags... Stores with prices that are a few percentage points higher or lower then standard, availability, a lengthy list of drinks and meals at the inn. It affects gameplay but it also creates the appearance of a world in flux, a continuous place, a living world.' Both the commercial-detail limb and the continuous/living-world limb are on the page.",
+   "fromFile": "verdicts-dnd-i484-498.json"
+  },
+  "488": {
+   "index": 488,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "subsequent module design would be considerably sparser on their starting town details",
+   "note": "Verbatim: '...up almost half the adventure, and subsequent module design would be considerably sparser on their starting town details, but I suspect this level of detail... will come'. 'after T1' = 'subsequent'.",
+   "fromFile": "verdicts-dnd-i484-498.json"
+  },
+  "489": {
+   "index": 489,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Author Carl Sargent was a master at implying terrifying things with a few carefully chosen words",
+   "note": "Raw HTML fetched (200, 74KB). Byline 'by John Roy', Oct 21, 2024, title 'Greyhawk Returns in the 2024 Dungeon Master's Guide'. Sentence follows three paragraphs on the Greyhawk supplement 'Iuz the Evil', so the 'Greyhawk author' limb is supported; full page wording adds 'that suggested more than they described.'",
+   "fromFile": "verdicts-dnd-i484-498.json"
+  },
+  "490": {
+   "index": 490,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "descriptions of Oerth's nations in the chapter's Greyhawk Gazetteer, along with their history of conflict",
+   "note": "Verbatim, in the 'A Battle-Ready World' section, whose preceding sentence names 'The Greyhawk campaign setting in the 2024 Dungeon Master's Guide', supporting the '2024 DMG's' limb; page continues 'and what strife they're currently facing.'",
+   "fromFile": "verdicts-dnd-i484-498.json"
+  },
+  "491": {
+   "index": 491,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "He provided each nation's imports and exports and the trade routes they used to transport them",
+   "note": "Verbatim in the 'Keeping It Real' section, subject 'Gygax' established two sentences earlier ('Gygax laid out not only the current nations of Oerik...'). Section heading is 'Keeping It Real', not the claim's page hint 'wargamer's setting', but the hint is not a limb of the claim.",
+   "fromFile": "verdicts-dnd-i484-498.json"
+  },
+  "492": {
+   "index": 492,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The first part is the gazetteer proper, covering the history, politics, and society of the Grand Duchy, including descriptions of its most important locales and NPCs",
+   "note": "Raw HTML fetched (200, 23KB). Preceding sentence 'The module is divided into two sections' supports the 'half' limb; posted by James Maliszewski.",
+   "fromFile": "verdicts-dnd-i484-498.json"
+  },
+  "493": {
+   "index": 493,
+   "verdict": "PARTIAL",
+   "trueWording": "the module boasted of providing 'a complete historical, economical [sic], geographical, and sociological overview'",
+   "note": "The quotation is verbatim on the page (with a bracketed [sic] after 'economical'), and the four adjectives plus 'complete... overview' all match. But the page attributes it only to 'the module boasted of providing' — it never says the wording is the cover/back-cover copy, so that attribution limb rests on outside knowledge, not this page.",
+   "unsupportedLimb": "that the quoted boast is GAZ1's cover copy",
+   "fromFile": "verdicts-dnd-i484-498.json"
+  },
+  "494": {
+   "index": 494,
+   "verdict": "PARTIAL",
+   "trueWording": "Scattered throughout the module are numerous maps for use in play, like typical taverns and manor houses",
+   "note": "'typical taverns and manor houses' is verbatim. The page draws no contrast with named/specific taverns; the only contrast it makes is with the poster-sized map ('This is in addition to the large, poster-sized map of the Grand Duchy, its capital city of Specularum, and the frontier town of Threshold'), which is a different contrast from the one the claim asserts.",
+   "unsupportedLimb": "rather than only named ones",
+   "fromFile": "verdicts-dnd-i484-498.json"
+  },
+  "495": {
+   "index": 495,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the focus of Gaz 1 is not on all the exciting adventure locations... but rather, everything around those adventures, setting up the framework",
+   "note": "Raw HTML fetched (200, 57KB), princeofnothingblogs 2020/03/30. Both limbs (not the adventure locations / everything around them) are in the same sentence.",
+   "fromFile": "verdicts-dnd-i484-498.json"
+  },
+  "496": {
+   "index": 496,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In the hands of a lesser man, a boring encyclopedic recitation of meaningless and sometimes mutually contradictory drivel",
+   "note": "Verbatim, immediately after the sentence verified for 484-index 495; 'In the hands of a lesser man' establishes it as the form's failure mode, contrasted with 'In the hands of Aaron Allston... the whole becomes compelling'.",
+   "fromFile": "verdicts-dnd-i484-498.json"
+  },
+  "497": {
+   "index": 497,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Setting history is given in broad sweeping strokes",
+   "note": "Verbatim at the start of its paragraph, continuing 'that serve the goal of hinting at prior ages from which the GM may readibly draw inspiration for a whole flock of dungeons.'",
+   "fromFile": "verdicts-dnd-i484-498.json"
+  },
+  "498": {
+   "index": 498,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The capital city of Specularum gets an extensive treatment in terms of neighborhoods, main streets, ducal palace etc.",
+   "note": "Verbatim; the paragraph does begin 'Contrary to what you might believe there's actual content in this damn Gazzeteer as well', matching the page hint.",
+   "fromFile": "verdicts-dnd-i484-498.json"
+  },
+  "499": {
+   "index": 499,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "every little settlement fits, is intelligently placed (trade routes considered)",
+   "note": "Raw page (live URL, HTTP 200). Verbatim in the paragraph right after the Korizegy Keep sentences: 'What is probably better is that every little settlement fits, is intelligently placed (i.e. trade routes and bodies are considered), has distinguishing features and has a place within Karameikos.' Praise framing and the trade-route limb both explicit; page title '[Review] Gaz 1 The Grand Duchy of Karameikos (DnD Basic)' on Age of Dusk, byline Prince of Nothing.",
+   "fromFile": "verdicts-dnd-i499-513.json"
+  },
+  "500": {
+   "index": 500,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "boring ambassadors that add little: 'Just do a few sentences and ditch'",
+   "note": "Raw page (live URL, HTTP 200). Verbatim in the Characters-section paragraph: 'The low point is the ambassadors, some of which are boring and add little... Just do a few sentences and ditch.' The claim's 'minor NPC' is a gloss on the page's 'boring and add little' ambassadors; the prescription and the adds-little limb are both on the page.",
+   "fromFile": "verdicts-dnd-i499-513.json"
+  },
+  "501": {
+   "index": 501,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "locations have no evocative detail despite having a paragraph each",
+   "note": "Raw page (live URL, HTTP 200), section THE TOWN AND BANDITS: 'the town has a few point-crawl style locations and a sidebar of NPCs. The locations of course have no evocative detail despite having a paragraph each.' Town is Phandalin (named throughout the section); the page's wording for 'keyed' is 'point-crawl style'.",
+   "fromFile": "verdicts-dnd-i499-513.json"
+  },
+  "502": {
+   "index": 502,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The Inn for example is a 'large newly built roadhouse of field stone...'",
+   "note": "Raw page (live URL, HTTP 200), same paragraph, and the review does present it as a quotation from the module (double-quoted, followed by 'exactly like every other boring nondescript fantasy inn'). Quote appears word for word.",
+   "fromFile": "verdicts-dnd-i499-513.json"
+  },
+  "503": {
+   "index": 503,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "none of the rumors add local color or an evocative detail",
+   "note": "Raw page (live URL, HTTP 200), section THE TOWN AND BANDITS: 'Each rumor isn't a hook, so much as an explanation of who else in town might provide a quest, and none of the rumors add local color or an evocative detail.' Rumors are Phandalin's town rumors.",
+   "fromFile": "verdicts-dnd-i499-513.json"
+  },
+  "504": {
+   "index": 504,
+   "verdict": "PARTIAL",
+   "trueWording": "nothing beyond a forgotten fantasy name AND a 'has a quest' note",
+   "unsupportedLimb": "'gives nothing beyond ... a fantasy name' - the page's sentence credits the sidebar with a second element the claim drops: 'provides nothing beyond an immediately forgotten fantasy name AND the note that they have a quest for the party', reinforced later by 'a simple list of names with \"has a quest for party\" behind them is useless'.",
+   "note": "Raw page (live URL, HTTP 200). The quoted fragment is verbatim, and the sidebar/Phandalin limbs hold, but the claim truncates the reviewer's own 'nothing beyond X and Y' to 'nothing beyond X', overstating the emptiness of the sidebar.",
+   "fromFile": "verdicts-dnd-i499-513.json"
+  },
+  "505": {
+   "index": 505,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "tired of Lost Mines stupid fantasy cliches and its bloodless box text",
+   "note": "Raw page (live URL, HTTP 200). Verbatim. Location differs from the claim's page hint: the sentence sits in the Redbrand-hideout discussion (after the nothic/secret-doors paragraph), not in the closing paragraph of THE TOWN AND BANDITS; the claim itself is unaffected.",
+   "fromFile": "verdicts-dnd-i499-513.json"
+  },
+  "506": {
+   "index": 506,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Making up towns is tricky ... a tightrope of sorts",
+   "note": "Raw page (live URL, HTTP 200). Verbatim as the opening line of section THE TOWN AND BANDITS: 'Making up towns is tricky, they are instantly identifiable to players... but making them interesting without becoming the focus of the campaign is a tightrope of sorts.' 'for a designer' is implicit in a module review, not stated.",
+   "fromFile": "verdicts-dnd-i499-513.json"
+  },
+  "507": {
+   "index": 507,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "being overwritten is a signature of 5th edition module writing",
+   "note": "Raw page (live URL, HTTP 200), layout paragraph: 'while being overwritten is a signature of 5th edition module writing, it flags and highlights points of interest well'. Page is 'Bathtub Review: Lost Mine of Phandelver' on Playful Void (idlecartulary.com).",
+   "fromFile": "verdicts-dnd-i499-513.json"
+  },
+  "508": {
+   "index": 508,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "5e takes up a lot more space per key than they do",
+   "note": "Raw page (live URL, HTTP 200), 'As for the module itself' paragraph: 'compared to the two shorter starter modules I've reviewed, because 5e takes up a lot more space per key than they do, but fits a lot more gameable content into its key' (Village of Hommlet named as one). The comparison class 'earlier starter modules' is supported; the page's balancing clause about more gameable content is not contradicted by the claim.",
+   "fromFile": "verdicts-dnd-i499-513.json"
+  },
+  "509": {
+   "index": 509,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Add at least one of these fantastic features and probably no more than three",
+   "note": "Raw page (live URL, HTTP 200), section 'Identify a Fantastic Feature' of 'Running Towns in Fantasy RPGs', by Mike on 13 November 2023 at SlyFlourish.com. Full sentence adds 'enough to define the town in the eyes of the characters and your players', supporting the claim's 'defining a town'.",
+   "fromFile": "verdicts-dnd-i499-513.json"
+  },
+  "510": {
+   "index": 510,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it gave you guidelines on what to include: a town council, a merchant, a town map",
+   "note": "LIVE URL IS DEAD CONTENT: merricb.com now serves an unrelated Indonesian slot-gambling parking page (HTTP 200, title 'SULTANSLOT...'), zero occurrences of 'Saltmarsh'. Recovered via Wayback raw capture https://web.archive.org/web/20230416034304id_/https://merricb.com/2019/05/22/ghosts-of-saltmarsh-looking-at-the-town/ (HTTP 200, title 'Ghosts of Saltmarsh - Looking at the Town - Merric's Musings'). Third paragraph: 'the original adventure didn't describe the town of Saltmarsh in much detail. Instead, it gave you guidelines on what to include: a town council, a merchant, a town map, a place for the PCs to rest between adventures, and the town's places of worship.' Both limbs verbatim.",
+   "fromFile": "verdicts-dnd-i499-513.json"
+  },
+  "511": {
+   "index": 511,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Saltmarsh's roughly five thousand residents are predominantly human",
+   "note": "Same Wayback raw capture (live domain is a parked spam site). The post's block quote, attributed 'Chapter 1: Saltmarsh, \"Saltmarsh Overview\"', opens with exactly that sentence, then gives the dwarven mining contingent; population figure and predominant people are its first clause.",
+   "fromFile": "verdicts-dnd-i499-513.json"
+  },
+  "512": {
+   "index": 512,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "residents react to visitors, especially tieflings and dragonborn, with curiosity and fear",
+   "note": "Same Wayback raw capture. Block quote's last sentence: 'The residents react to other visitors, especially tieflings and dragonborn, with a mixture of curiosity and fear.' Quote fragment verbatim; both named ancestries present.",
+   "fromFile": "verdicts-dnd-i499-513.json"
+  },
+  "513": {
+   "index": 513,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I get a much better feel for the town than I did for Waterdeep in Dragon Heist",
+   "note": "Same Wayback raw capture. In the paragraph beginning 'All-in-all', exactly as the claim states, including the Dragon Heist attribution.",
+   "fromFile": "verdicts-dnd-i499-513.json"
   }
  }
 }

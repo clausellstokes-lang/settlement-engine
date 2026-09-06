@@ -31,7 +31,8 @@
    "note": "Raw page, after the Aragorn / Pelennor Fields example: 'Kay seems determined not to have important events surprise us in this way; he arranges the story's kernels in a more tightly-knit fashion than does Tolkien, mainly through a much more frequent shifting of our attention from one character to another.' Note Randall hedges with 'seems determined'; the claim states it flatly.",
    "unsupportedLimb": "the flat assertion that Kay keeps important events from surprising the reader — the note records that Randall hedges with \"seems determined\" while the claim states it flatly.",
    "fromFile": "verdicts-kay-regrade-r5.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 10,
@@ -82,7 +83,8 @@
    "note": "Raw page: 'Returning to Brandin, he is central to all the story kernels of Tigana, and the originator of the fabula. Yet, Brandin is only focalized through at the very end of the battle ... By this point, the readers have had time to assimilate all the information given about the Sorcerer King and thus had the chance to form their own opinion about him before Kay reveals what Brandin thinks of himself. No more than a page long, Brandin's focalization is one of the most powerful sections of the story.' Kleander's wording is 'had the chance to form their own opinion', slightly weaker than 'has already formed a judgment'.",
    "unsupportedLimb": "\"after the reader has already formed a judgment\" — the note says Kleander's wording is \"had the chance to form their own opinion\", \"slightly weaker\" than the claim.",
    "fromFile": "verdicts-kay-regrade-r5.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 14,
@@ -116,7 +118,8 @@
    "note": "Quote verbatim. The page then prints the two prayer paragraphs consecutively (LoAR 251-252 and the Jaddite counterpart), and they are near-identical in frame ('They prayed for strength and mercy, for purity of heart and mortal body, for the fulfilment of Ashar’s starlit visions / Jad’s bright visions … to Paradise'). Kleander frames it as 'Rather than focusing on differences, Kay focuses on similarities.' She demonstrates the parallel rather than naming it 'structural repetition', but the mechanism is on the page verbatim.",
    "unsupportedLimb": "\"structural repetition\" as Kleander's framing — the note says she demonstrates the parallel \"rather than naming it 'structural repetition'\".",
    "fromFile": "verdicts-kay-regrade-r5.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 20,
@@ -184,7 +187,8 @@
    "note": "Raw HTML fetched live (200) from brightweavings.com/denasailing/, 'by Dena Taylor', headnote 'first published as a review in TransVersions 10, Toronto: Orchid Press, 1999'. The quote 'Kay at his most historical' is on the page verbatim ('Here is Kay at his most historical'), and the idiom limb is fully supported verbatim: \"To say of a man that he was sailing to Sarantium was to say that his life was on the cusp of change\". The vision limb is supported ('what he has drawn from Yeats's vision of Byzantium'). But the page names exactly ONE Yeats poem, 'Sailing to Byzantium', never a plural set of Byzantium poems, and never states that any title DERIVES from Yeats - it attributes the title to the in-world idiom instead. (That derivation is asserted elsewhere, in Malosse's note 12, not in Taylor.) Graded PARTIAL on the plural/derivation limb.",
    "unsupportedLimb": "the Sarantine titles derive from Yeats's Byzantium poems - the page names one poem ('Sailing to Byzantium'), discusses one title, and attributes only the VISION to Yeats, never the title's derivation",
    "fromFile": "verdicts-kay-i75-89.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 92,
@@ -218,7 +222,8 @@
    "note": "Kay (p.317): \"I have, in recent years and books, become even more engaged by this idea of giving value to lives that often go unrecorded. This, by the way, links up and benefits from a major strand in the last generation or so of historians, who have—sometimes brilliantly—done exactly this, and who have thus provided me with superb research materials and inspiration!\" Quote verbatim (the PDF breaks it as \"giv-\\ning\" across a line). Flag for transparency: the page never uses the term \"social history\"; \"recent social history\" is the claim's own label for that strand of historians, an accurate gloss rather than page wording.",
    "unsupportedLimb": "\"recent social history\" — the note FLAGS that \"the page never uses the term 'social history'\"; it is the claim's own label for that strand of historians.",
    "fromFile": "verdicts-kay-regrade-r5.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 100,
@@ -252,7 +257,8 @@
    "note": "Quote verbatim; matter-of-fact limb ('You read a book that takes that matter-of-factly') and smugness limb ('it removes that smugness from the reader who’s willing to go there') both present, as is 'What the fantastic lets me do... is make the world be as my characters believe it to be.' One wording nuance recorded, not a limb failure: Kay calls it 'one of the definitions of magic realism', not uniquely his. Raw page, HTTP 200.",
    "unsupportedLimb": "\"(his definition of magic realism)\" — the note says Kay calls it \"one of the definitions of magic realism\", \"not uniquely his\".",
    "fromFile": "verdicts-kay-regrade-r5.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 112,
@@ -269,7 +275,8 @@
    "note": "Quote verbatim. The relatability limb is on the same page: 'A lot of writing about the past right now is wish-fulfilment in a very particular way... The most successful commercial writing about history turns on relatability, likability.' The critique is framed as diagnosis (wish-fulfilment) set against his own view that writers should 'acknowledge and work with' the past's alienness, rather than as an explicit denunciation. Raw page, HTTP 200.",
    "unsupportedLimb": "\"criticises commercial historical writing\" — the note says the critique is framed as diagnosis (wish-fulfilment) \"rather than as an explicit denunciation\".",
    "fromFile": "verdicts-kay-regrade-r5.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 120,
@@ -303,7 +310,8 @@
    "note": "Vector raw page (HTTP 200), dated August 18, 2010. Quote “Kay’s superlative-rich style risks beauty fatigue” verbatim; the poems limb follows in the same sentence. Byline on the page reads only “Niall” (Niall Harrison, Vector’s reviewer/editor) — the surname is not printed on the page, but the review content is fully as attributed.",
    "unsupportedLimb": "the attribution to \"Harrison\" — the note says the byline reads only \"Niall\" and \"the surname is not printed on the page\".",
    "fromFile": "verdicts-kay-regrade-r5.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 132,
@@ -337,7 +345,8 @@
    "note": "Vector raw page. Quote “big set-piece events off-stage” verbatim, of the horse-gift frame (‘it’s the existence of the horses that shapes the story… It’s an interesting frame’). Historical-possibility limb verbatim: ‘less interested in capturing those than he is in describing the feel of a moment of historical possibility’. The page qualifies with ‘some of’, which the claim drops — a softening, not a contradiction.",
    "unsupportedLimb": "\"keeps expected big set-piece events off-stage\" without qualification — the note says the page qualifies with \"some of\", \"which the claim drops\".",
    "fromFile": "verdicts-kay-regrade-r5.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 148,
@@ -354,7 +363,8 @@
    "note": "Quote is exact, but Walton's 'except' applies to characters and plot only — the same sentence-pair says 'I remembered the setting perfectly well' (lavender fields, Court of Love, troubadours), so set-pieces are not how she chiefly remembers the book.",
    "unsupportedLimb": "that she remembers Arbonne chiefly through set-pieces — she remembered the setting perfectly well; only characters and plot had vanished",
    "fromFile": "verdicts-kay-i135-149.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 150,
@@ -419,7 +429,8 @@
    "note": "Verbatim in the Toyryla thesis (brightweavings, bylined 'a bachelor's thesis by Roosa Toyryla, written at the University of Helsinki, Finland. 2017'), analysing the Senzio castle massacre in Tigana (Kay 722-23). The page phrases it passively ('a matter-of-fact style is used') and credits the narrator rather than naming Kay, but the text under analysis is Kay's Tigana.",
    "unsupportedLimb": "\"Kay uses a matter-of-fact style\" — the note says the page phrases it passively (\"a matter-of-fact style is used\") and \"credits the narrator rather than naming Kay\".",
    "fromFile": "verdicts-kay-regrade-r5.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 197,
@@ -467,7 +478,8 @@
    "note": "Verbatim in the concluding section of Morgon Mills's English translation of Pierre-Louis Malosse, 'Justinian Visited and Revisited' (Anabases 5, 2007, pp. 229-235), hosted at brightweavings. The comparanda are de Camp's Lest Darkness Fall and Silverberg's time-travel novel, both introduced earlier as time-travel narratives, so 'time-travel novels' holds. Note the source attaches 'deliberately' to 'inverts and reconstructs', not to 'unfaithful'.",
    "unsupportedLimb": "\"deliberately unfaithful to history\" — the note says the source attaches \"deliberately\" to \"inverts and reconstructs\", \"not to 'unfaithful'\".",
    "fromFile": "verdicts-kay-regrade-r5.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 218,
@@ -491,7 +503,8 @@
    "note": "Raw page (d.lib.rochester.edu Camelot Project, Raymond H. Thompson interview, Mythcon Vancouver, 30 July 1989) fetched via curl; quotation is verbatim. Date, work (the Fionavar trilogy - 'before the characters from our world cross to Fionavar'), and 'opening chapters' ('the first few chapters') all check out. The one limb the page does not carry is the flat 'would': Kay's definite 'would' attaches to paying attention to the first few chapters, while polishing the prose is explicitly hedged as 'I might'. Cure by rewording to 'said he might polish the prose'.",
    "unsupportedLimb": "the definite 'would polish' - the page says only 'I might polish the prose itself'",
    "fromFile": "verdicts-kay-i210-224.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 221,
@@ -515,7 +528,8 @@
    "note": "Raw page (brightweavings /webbtigana/, by Janeen Webb, (c) 1991, first published in The Ring Bearer: Journal of the Mythopoeic Literature Society of Australia, Spring 1991, Vol 8 No 2) fetched via curl. Quotation verbatim; the page continues 'performed by the protagonists on the relevant Ember Days', so the protagonists limb is supported and the claim merely omits the Ember Days qualifier.",
    "unsupportedLimb": "\"the freely willed actions of the protagonists\" without occasion — the note says the page reads \"on the relevant Ember Days\" and that the claim \"omits the Ember Days qualifier\".",
    "fromFile": "verdicts-kay-regrade-r5.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 227,
@@ -611,7 +625,8 @@
    "note": "Quote 'They are numbers, not men' is character-exact in the paragraph beginning 'The notes about the author', and the surrounding sentences carry the final-battle and strengths/tactics limbs. Adversarial note: the page says 'some of their tactics', slightly narrower than the claim's unqualified 'tactics' — a compression, not an unsupported limb.",
    "unsupportedLimb": "\"the armies' strengths and tactics\" unqualified — the note says the page reads \"some of their tactics\", \"slightly narrower than the claim's unqualified 'tactics'\".",
    "fromFile": "verdicts-kay-regrade-r5.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 271,
@@ -635,7 +650,8 @@
    "note": "Raw thread page fetched (HTTP 200). Found in post #19 by Uqbarian, Jun 26 2022 — post number and date match. forum.rpg.net is a tabletop-RPG forum, so that limb holds. ('him' is the researcher's pronoun; the poster writes 'to me' and states no gender.)",
    "unsupportedLimb": "the pronoun \"to him\" — the note says \"'him' is the researcher's pronoun; the poster writes 'to me' and states no gender\".",
    "fromFile": "verdicts-kay-regrade-r5.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 274,
@@ -683,7 +699,8 @@
    "note": "Raw page fetched (HTTP 200); full body text present, no paywall. Brok3n Engines review of Tigana, Apr 16 2025 — matches source. Quote verbatim as final-paragraph clause. The reviewer's gender is not stated on the page ('he' is the researcher's pronoun).",
    "unsupportedLimb": "the pronoun \"he enjoys\" — the note says \"the reviewer's gender is not stated on the page ('he' is the researcher's pronoun)\".",
    "fromFile": "verdicts-kay-regrade-r5.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 300,
@@ -707,7 +724,8 @@
    "note": "Raw page (whatever.scalzi.com, curl with browser UA, HTTP 200) carries the quote verbatim in Kay's signed Big Idea essay: 'Some of us (well, me?) take the considered view that War and Peace or The Lord of the Rings or Song of Solomon can be made to sound trivial, silly, shallow if boiled down to a paragraph's worth of sound bite.' 'A major novel' is the claim's generalisation of the three named novels; page says 'a paragraph's worth of sound bite' where the claim says 'a paragraph of sound bite'. All limbs supported.",
    "unsupportedLimb": "\"a major novel\" as a general proposition — the note says it \"is the claim's generalisation of the three named novels\" (War and Peace, LOTR, Song of Solomon).",
    "fromFile": "verdicts-kay-regrade-r5.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 315,
@@ -803,7 +821,8 @@
    "note": "Raw BrightWeavings page, El Cid paragraph, verbatim. Every limb present (invented setting; man based on Rodrigo Diaz 'but clearly not him'; appropriate distance). One softening worth flagging: Kay writes the hedged 'I might also be demonstrating', not a flat 'demonstrates', and speaks of his own book rather than as a general rule.",
    "unsupportedLimb": "\"demonstrates a measure of appropriate distance\" as a flat general rule — the note flags that \"Kay writes the hedged 'I might also be demonstrating', not a flat 'demonstrates', and speaks of his own book rather than as a general rule\".",
    "fromFile": "verdicts-kay-regrade-r5.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 348,
@@ -827,7 +846,8 @@
    "note": "Raw HTML of brightweavings.com/mythessay/ (HTTP 200). First body paragraph: 'All renderings matter, and in the changes, the shiftings, we find truths about evolving worlds and societies.' Page header confirms the source: written summer 1999 for the Chapters 'Great Writers' series, run as full-page newspaper inserts. Kay's wording is 'evolving worlds and societies' rather than the claim's 'societies that made them'; in context (renderings shifting as generations and cultures change) the limb is supported, but the claim's phrasing is a gloss, not Kay's.",
    "unsupportedLimb": "\"truths about the societies that made them\" — the note says Kay's wording is \"evolving worlds and societies\" and that \"the claim's phrasing is a gloss, not Kay's\".",
    "fromFile": "verdicts-kay-regrade-r5.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 360,
@@ -875,7 +895,8 @@
    "note": "Raw page fetched (HTTP 200). Quote is a literal substring. Preceding sentence supplies the 'quarter-turn to the fantastic' referent ('What one reviewer called history with a quarter-turn to the fantastic. If I do it right, this use of the fantastic...'). Only nuance: Kay hedges the effect with 'If I do it right', which the claim drops.",
    "unsupportedLimb": "the unconditional claim about what the quarter turn does — the note says \"Kay hedges the effect with 'If I do it right', which the claim drops\".",
    "fromFile": "verdicts-kay-regrade-r5.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 406,
@@ -899,7 +920,8 @@
    "note": "Raw page (essay headed 'Exile'; the WordPress post title is 'Under Heaven Author's Letter'). Quote verbatim, in the paragraph following the River of Stars discussion, as hinted. The claim's 'because' makes explicit a link the page leaves to adjacency.",
    "unsupportedLimb": "the \"because\" linking the two statements — the note says \"the claim's 'because' makes explicit a link the page leaves to adjacency\".",
    "fromFile": "verdicts-kay-regrade-r5.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 432,
@@ -923,7 +945,8 @@
    "note": "Both limbs on the Locus 'Journeying' third excerpt, which names Fernand Braudel as the source of the passage. The number five is a count of the page's own enumeration — the one caught up in the war plus an artist, a woman escaping her father's plan, a merchant and a soldier — immediately followed by 'None of these are important people'; the page does not print the word 'five' or the word 'protagonists'.",
    "unsupportedLimb": "\"his five protagonists\" — the note says the number is the researcher's count of an enumeration and \"the page does not print the word 'five' or the word 'protagonists'\".",
    "fromFile": "verdicts-kay-regrade-r5.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 506,
@@ -947,7 +970,8 @@
    "note": "Same raw live page, in the section headed 'PROLOGUES'. Quote exact. Both limbs supported. Minor nuance recorded, not deducted: the page hedges the never-reappearing limb with a bracketed spoiler, '[Spoiler! Until a couple of them turn out to be Not Really Dead After All!]', and the claim's 'many characters' = the page's 'a lot of characters'.",
    "unsupportedLimb": "\"characters who never reappear\" — the note records that the page hedges that limb with \"[Spoiler! Until a couple of them turn out to be Not Really Dead After All!]\".",
    "fromFile": "verdicts-kay-regrade-r5.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 514,
@@ -971,7 +995,8 @@
    "note": "Raw live page (HTTP 200, full thread rendered without login). Quote exact. Both limbs are consecutive sentences. Post #5 by Erfael, Dec 6, 2011, as attributed. The page qualifies the contrived limb with 'if you're looking for more traditional fantasy storytelling'.",
    "unsupportedLimb": "\"can come across as contrived\" without condition — the note says \"the page qualifies the contrived limb with 'if you're looking for more traditional fantasy storytelling'\".",
    "fromFile": "verdicts-kay-regrade-r5.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 632,
@@ -995,6 +1020,7 @@
    "note": "Verbatim, in Kay's answer within the Tolkien/mythic-sources exchange. Both limbs supported: he expected readers to miss the specific sources, and hoped for ambience. Minor nuance: the sentence continues 'so that one reader might know that the ravens...are in fact the ravens of Odin', so 'hoped only' is a shade stronger than the page — the substance still holds.",
    "unsupportedLimb": "\"hoped only that a mythic ambience would emerge\" — the note says the sentence continues \"so that one reader might know that the ravens... are in fact the ravens of Odin\", so \"'hoped only' is a shade stronger than the page\".",
    "fromFile": "verdicts-kay-regrade-r5.json"
-  }
+  },
+  "fullSentence": true
  }
 ]

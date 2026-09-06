@@ -59,7 +59,7 @@ const pairs = JSON.parse(readFileSync(PAIRS, 'utf8')); let fails = 0, withheldN 
 for (const p of pairs) {
   const hits = corpus.filter(c => c.text === p.before); const r = []; const notes = []; const withheld = []; const h = hits[0];
   if (!h) r.push('NOT LOCATED in the dossier corpus (state+causal)');
-  if (h && h.marks.length) r.push('MARKS ' + JSON.stringify(h.marks) + (h.marks.includes('dm-only') ? ' — dm-only: the AFTER inherits the mark and the audience law' : ''));
+  if (h && h.marks.length) notes.push('MARKS ' + JSON.stringify(h.marks) + (h.marks.includes('dm-only') ? ' — dm-only: the AFTER inherits the mark and the audience law' : ''));
   const sb = slots(p.before), sa = slots(p.after);
   if ([...sb].some(x => !sa.has(x)) || [...sa].some(x => !sb.has(x))) r.push(`SLOTS differ: before {${[...sb]}} after {${[...sa]}}`);
   if (/\d/.test(p.after)) r.push('DIGIT in AFTER'); if (/\d+\s*%|percent/i.test(p.after)) r.push('PERCENT in AFTER (§0d: proportions in words)'); if (/—/.test(p.after)) r.push('EM DASH in AFTER'); if (/!/.test(p.after)) r.push('EXCLAMATION in AFTER');

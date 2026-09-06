@@ -15,7 +15,8 @@
    "trueWording": "Free on DMsGuild, 'only been on the site a month or so', four PDFs",
    "note": "Raw thread page 1 fetched (HTTP 200). Remathilis, Nov 25 2018: 'a rather interesting little gem that is free to download: A D&D Style-guide for publishing' and 'Its only been on the site a month or so' — which puts the posting around October 2018 — and 'Its divided into four PDFs: An IP Guide… an Adventure Guide… a Style Guide… and a Forgotten Realms Style Guide'. Those limbs are solid. Greps of the whole page for 'official play', 'organized play', 'Adventurers League', 'previously' and 'only to' return nothing. The missing limb is corroborated verbatim on this chunk's index-53 source (thekindgm.com: 'They were first available only to official play writers but now they're available to the broader public of the DMs Guild') — so the fact is sound but this citation does not carry it.",
    "fromFile": "verdicts-dnd-i49-63.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 53,
@@ -33,7 +34,8 @@
    "trueWording": "'Apparently, this material is no longer available.' / 'I have updated the link'",
    "note": "Raw page fetched (HTTP 200). Post dated 'October 24, 2018 May 25, 2020'. Comment by mattwest2342, May 25 2020 5:43 am: 'Apparently, this material is no longer available.' Reply by The Kind GM, May 25 2020 12:33 pm: 'Thank you for bringing it to my attention. I have updated the link'. So the commenter report and the author's acknowledgement are exact. The inference limb is the problem: the author's response points to a working link rather than to a lapse, so this page does not establish that the public window closed around 2020. The page does support the window's opening: 'They were first available only to official play writers but now they're available to the broader public of the DMs Guild.'",
    "fromFile": "verdicts-dnd-i49-63.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 56,
@@ -69,7 +71,8 @@
    "trueWording": "We encourage the use of contractions formed with \"not,\" such as \"don't,\" \"can't,\" and \"wasn't\"",
    "note": "The first two limbs are verbatim on p.3 'Contractions', including the ambiguity warning: 'Use other contractions with care, especially any contraction that can be misread. For example, \"who's\" can be read as \"who is\" or \"who has.\"' The register gloss is the compiler's inference, not the page's. Machine-checked: 'conversational register' is absent from all 9 pages; the guide's only two uses of 'tone'/'conversational' are the High Fantasy 'general tone' passage and a separate rule allowing 'Dungeon Master' as a verb 'in an informal context, such as in a blog or a web article that has a conversational tone' — a different rule, not this one.",
    "fromFile": "verdicts-dnd-i64-78.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 84,
@@ -141,7 +144,8 @@
    "note": "The quotation IS on the page but it is not Justin Alexander's. It appears in the comment section, in the third of three responses, by a commenter named 'Andrew' dated August 2nd, 2022 - 7:13 pm, whose next sentence is 'I also tend to agree with Justin's critiques here', confirming Andrew is not Alexander. The essay body (everything above 'Filed under: Roleplaying Games Comments (3)') contains the string 'too long' zero times. The claim's other limbs ARE Alexander's own: 'what you should do is break it up into actionable chunks', 'What we've identified here is the reaction point', and the rule against letting 'the game world continue to move forward past the reaction point without letting the players react'. Related: the chunk's feature label for this claim, 'attention after three sentences', also traces to a comment - mellonbread, 11:58 am - recalling a lost WotC devblog piece, not to Alexander.",
    "unsupportedLimb": "the attribution to Justin Alexander: 'boxed text is often too long' is a reader comment by 'Andrew', not the essay",
    "fromFile": "verdicts-dnd-i94-108.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 102,
@@ -159,7 +163,8 @@
    "note": "By Gus L., Monday December 19, 2022. The designated quote is verbatim (page: 'No one wants to read a three page key to a single room, written in the style of Undermountian or a 1993 Dungeon Magazine adventure'). But the page does not set five sentences as a maximum. It reads: 'Keys longer than five or six sentences can work, with a good editor, and an attention to ordering their contents, but that's a good basic limit. Longer keys are even needed at times for complex puzzles and npcs, but basic description shouldn't really get beyond a paragraph.' So the figure is five-or-six, framed as a soft 'good basic limit' that longer keys can exceed with editing - and puzzles/NPCs are given as cases where longer is 'even needed at times', not as the sole licensed exception.",
    "unsupportedLimb": "'five sentences maximum' and 'longer only for puzzles and NPCs': page says five or six as a soft 'good basic limit' that longer keys can exceed with a good editor",
    "fromFile": "verdicts-dnd-i94-108.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 113,
@@ -213,7 +218,8 @@
    "trueWording": "What I'm looking for in an adventure module; Language 4 - Succinct and evocative",
    "note": "Raw page (curl, HTTP 200). Third limb verbatim: 'Boxed text is usually not a good thing.' Both phrases verbatim as standalone bullets: 'Evocative atmosphere.' and 'Terse writing style'. But Bryce's list is prefaced 'What I'm looking for in an adventure module may not be what you are looking for. I try to avoid giving a module a rating' — and the same list explicitly grades requirement status elsewhere ('Wandering monster tables are generally required'; an overland portion is 'nice, but not required'), so neither of these two is labelled a requirement. Separately, the Language rubric (4 - Succinct and evocative / 2 - Conversational but clear / 1 - You should have hired an English Major to edit this / 0 - Very wordy/incomprehensible) sits in a later section headed 'The Pretty Girl', a second reviewer who introduces herself as 'not the gourmand that Bryce is' and calls it 'My ratings system'. It is on tenfootpole's standards page, so 'tenfootpole grades' holds, but the claim's source attribution to Bryce Lynch does not. Note also the rubric spans 0-4 with four defined rungs (no 3), so 'four-point scale' is loose.",
    "fromFile": "verdicts-dnd-i109-123.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 127,
@@ -267,7 +273,8 @@
    "unsupportedLimb": "attribution to Courtney Campbell — the page does not credit the seven-words target to him",
    "note": "Raw page (curl, HTTP 200). In 'How can I write even shorter, punchier room descriptions?' the seven-words sentence sits in an UNATTRIBUTED <blockquote> (no cite in the HTML), and the next, separate paragraph says 'On Set Design by Courtney Campbell lays out an alternate pattern for keying rooms that is very terse' — i.e. Campbell is offered as an alternative to the quoted approach, not as its author. Also the claim's inner quotation ('everything you need to run successfully in seven words') is not word-for-word: the page reads 'everything I need to run the encounter successfully in seven words'. The 'tick room' of the blockquote is not this chapter's worked example (that is a sludge/funeral-shrine room), confirming the block is imported from elsewhere.",
    "fromFile": "verdicts-dnd-i139-153.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 145,
@@ -285,7 +292,8 @@
    "unsupportedLimb": "'never' — the post explicitly allows exceptions for exits and for Dungeon23 dimensions",
    "note": "Raw page (curl, HTTP 200). Quote verbatim: 'Maps! Use them.' is the whole line under rule 2. But the same rule says 'However, listing exits can be helpful if things are confusing, the entrance is itself important, or it holds some evocative detail like a taxidermy crow nailed to a door. I mentioned before that there's no absolutes in these rules.' and 'I also suspect there's some odd specifics with Dungeon23 that make including dimensions and exits more helpful'. The absolute 'never spend key lines on dimensions and exits' overstates a rule the author himself qualifies twice.",
    "fromFile": "verdicts-dnd-i139-153.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 151,
@@ -321,7 +329,8 @@
    "unsupportedLimb": "'read-aloud' and 'not to be recited' — Perkins describes the sample adventures themselves; the words read-aloud/aloud/recite appear nowhere in the article",
    "note": "Raw page (curl, HTTP 200), Screen Rant, datePublished 2024-10-25, headline '\"Everything In There Better Be Cracking On Topic\": D&D Designers Talk The 2024 Dungeon Master's Guide'. Perkins verbatim: 'if I had the 2024 DMG, which has sample adventures in it, which are tight and short and really sort of scripts for the DM to just to jog their memory and make sure that they're sort of remembering the pace and flow of the adventure, I could have saved myself a lot of prep time.' The quoted phrase 'tight and short' modifies the sample adventures, not their read-aloud text; a case-insensitive grep for 'aloud', 'recit' and 'verbatim' over the whole article returns nothing. Boxed text is mentioned only by Wyatt, on a different point (adventures needlessly re-explaining what boxed text is).",
    "fromFile": "verdicts-dnd-i139-153.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 176,
@@ -339,7 +348,8 @@
    "note": "Quote verbatim: 'The editors greatly dislike printing the words \"This room is empty\" in DUNGEON.' The section names and the omit-don't-fill rule are fully supported ('Do not include sections that are unnecessary for a given encounter... the area is not an encounter and should not be assigned an encounter number'). But the page never prescribes an ORDER: it says each encounter 'can include any or all of the following sections', and read-aloud only 'generally precedes the other entries of an encounter'. The enumeration is also eight items, not seven - the claim drops 'Ad-Hoc XP Adjustment'.",
    "unsupportedLimb": "fixed order - the guidelines say encounters 'can include any or all of the following sections' and never mandate an order (read-aloud merely 'generally precedes'); the list is also eight sections, the claim names seven",
    "fromFile": "verdicts-dnd-i169-183.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 195,
@@ -465,7 +475,8 @@
    "note": "Both raw texts extracted and grepped. Heading-string counts: Gender-Specific Suffixes 0/2, Headings 0/4, Sidebars 0/3, Bulleted Lists 0/1, Appendix References 0/1, Adventuring Parties 0/1 (2013/2019). v1.04a's full heading roster was enumerated and contains none of the six strings; its only 'sidebar'/'heading' mentions are passing references inside 'Subsection/Table References' and 'Inline Subheads', and it has zero occurrences of 'appendix', 'appendices', 'suffix' or 'fellowship'. So five limbs are genuinely new sections; the sixth is a rename, which the claim's word 'Sections' over-states even though its parenthetical scopes verification to heading presence. No quote field, so VERBATIM is inapplicable in any case.",
    "unsupportedLimb": "“Bulleted Lists” as a section absent from v1.04a — v1.04a has “Vertical Lists” covering the same ground (complete-sentence lead-in + colon, capitalized items, closing punctuation only for complete sentences); it is a rename, not a new section.",
    "fromFile": "verdicts-dnd-i289-303.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 305,
@@ -555,7 +566,8 @@
    "note": "The quotation is on the page verbatim, in the closing line. The comparative limb is not: the design guide never mentions a 17th edition or any other bundle document's edition, so the 'one edition behind' contrast and the 'not synchronized' inference are the verifier's, not the page's. Corroboration from a sibling file (not the cited page): 'DnD House Style Guide.docx' inside the same Dungeoncraft pack does open with 'Chicago Manual of Style, 17th edition', and 'DC Adventure Format v1.3.docx' also cites the 17th - so the substance is true, but it is sourced from other documents and the claim as written overreaches its cited page.",
    "unsupportedLimb": "that 16th is one edition behind the House Style Guide's 17th, and that this shows the bundle's documents were not synchronized - neither statement appears on the cited page",
    "fromFile": "verdicts-dnd-i334-348.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 347,
@@ -777,7 +789,8 @@
    "note": "The quotation is on the page, under the heading “Don’t Overdo It”, and the “usually” and “containing a paragraph break” limbs hold (“it’s rare that … isn’t”). But the page states an idiom, not a ratio: it never says such a boxed text is twice as long as it should be, and it also exempts introductory passages (“Aside from introductory passages”), a carve-out the claim drops. The advice is also addressed to people writing their own adventures.",
    "unsupportedLimb": "that the text is twice as long as it should be (the page says only “already too long by half”, and exempts introductory passages)",
    "fromFile": "verdicts-dnd-i394-408.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 409,
@@ -801,7 +814,8 @@
    "note": "Quote verbatim in the post: 'The inhabitants of the village, from their names to their personalities, are Gygax at his mellifluent best: Jaroo Ashstaff, Calmert, Fernok of Ferd, Ostler Gundigoot, and more.' Confirmed against the raw HTML (grognardia.blogspot.com, 1 Oct 2008): exactly FOUR names are listed before 'and more', not five. The praise limb (names, as Gygax at his best) is supported; the count limb is not.",
    "unsupportedLimb": "\"lists five of them\" — the post names only four inhabitants",
    "fromFile": "verdicts-dnd-i409-423.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 437,
@@ -825,7 +839,8 @@
    "note": "Quote is verbatim in the “On to the bad” section and the inflation charge is real (“the text is long/meaningless… the entries are so long that the important bits are lost… This is one of the major sins of the adventure”). But the page immediately supplies a second, different ratio, so Lynch offers illustrations of bloat, not a fixed ratio.",
    "unsupportedLimb": "that the charge is a fixed inflation ratio — the page's very next sentence gives a different one (“Six are used when it needed two, or three”)",
    "fromFile": "verdicts-dnd-i424-438.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 450,
@@ -849,7 +864,8 @@
    "unsupportedLimb": "'Bryce Lynch praises the same device' — nothing on this page has Bryce Lynch praising the NPC sidebar or any quest-list device",
    "note": "The Gus L. half is fully verbatim: 'A side bar lists the important NPCs about town, but provides nothing beyond an immediately forgotten fantasy name and the note that they have a quest for the party... but a simple list of names with \"has a quest for party\" behind them is useless.' Bryce Lynch does appear on the page twice, but neither instance praises this device: Gus L. praises HIM ('I have read and had my work reviewed by tenfootpole.org. Bryce is excellent when it comes to explaining what makes a good adventure'), and Lynch's own comment of April 20, 2016 attacks D&D as 'not only generic but aggressively generic' — no mention of NPC sidebars or quest lists. The praise limb needs a tenfootpole.org source it does not have here.",
    "fromFile": "verdicts-dnd-i439-453.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 464,
@@ -873,6 +889,129 @@
    "unsupportedLimb": "'tracked against how the reader will actually come by each fact' - the page ties the ordering to how the PLAYERS gain the information, not the reader (the GM) of the key",
    "note": "Raw page, section 'DEVELOPING SIGNIFICANT ELEMENTS'. Quote verbatim: 'What you want to do is to move from the general to the specific while paying particular attention to how the players are gaining that information.' The rationale paragraph is explicitly player-side: 'In interacting with a room, the players are most likely to start by asking questions about the things they've just been told about'. Alexander's separate GM-side point (bold titles making information easy to find) is about scanning, not about general-to-specific ordering. Swapping 'players' for 'reader' inverts whose acquisition of information governs the sequence, so the second limb is unsupported as written.",
    "fromFile": "verdicts-dnd-i454-468.json"
+  },
+  "fullSentence": true
+ },
+ {
+  "index": 469,
+  "feature": "other: notorious passages",
+  "claim": "A forum reader names the opening boxed text of the Dragonlance series as his favourite worst offender and quotes its first clause.",
+  "source": "forum member 'delericho', reply on EN World",
+  "url": "https://www.enworld.org/threads/what-does-it-look-like-4-steps-for-beating-the-boxed-text-blues.661997/",
+  "quote": "The air surges fierce and sweet",
+  "page": "reply thread",
+  "kind": "reader",
+  "polarity": "rejects",
+  "date": "2013-07",
+  "routeHint": "direct curl with browser UA",
+  "registerHint": "none",
+  "confidence": "medium — a reader's recollection quoted in passing, edition unnamed",
+  "angle": "close",
+  "verdict": {
+   "index": 469,
+   "verdict": "PARTIAL",
+   "trueWording": "Dr Simon, post #8, names the Dragonlance boxed text",
+   "note": "Quote verbatim on the page: 'I think my favourite worst offender is the very first piece of boxed text that you meet in the Dragonlance series; \"The air surges fierce and sweet...\"'. But it is post #8 by Dr Simon (Jul 18, 2013), not delericho. delericho's post #7 (Jul 16, 2013) is the bullet-point-instead-of-boxed-text advice; Dr Simon's post opens by addressing 'Delericho,' which is the likely source of the mix-up. Claim sentence itself is otherwise fully supported.",
+   "unsupportedLimb": "attribution to forum member 'delericho'",
+   "fromFile": "verdicts-dnd-i469-483.json"
+  }
+ },
+ {
+  "index": 480,
+  "feature": "other: information order",
+  "claim": "A poster reports his players want the creatures named before the furnishings, with minor detail held until after the encounter.",
+  "source": "EN World member 'DragonLancer', quoted at post #39",
+  "url": "https://www.enworld.org/threads/read-aloud-text-in-modules-what-are-folks-opinions-about-read-aloud-content.712737/page-4",
+  "quote": "never mention any monsters or at the very least",
+  "page": "post #39, quoted text",
+  "kind": "reader",
+  "polarity": "asserts",
+  "date": "2025-04-05",
+  "routeHint": "direct curl with browser UA",
+  "registerHint": "dm-page",
+  "confidence": "high",
+  "angle": "close",
+  "verdict": {
+   "index": 480,
+   "verdict": "PARTIAL",
+   "trueWording": "basic room description first, then monsters, minor details after the fight",
+   "note": "DragonLancer, quoted inside MarkB's post #39 (Apr 5 2025): 'The author will describe the minutia in a room but never mention any monsters or at the very least, put that in last. They would rather have a basic description of a scene or room, then the monsters, and any relevant minor details after a fight or encounter.' Quote is verbatim and the deferred-minor-detail limb is exact. But the ordering limb inverts him: he wants a basic room description BEFORE the creatures, with only the minutia held back -- not the creatures named first.",
+   "unsupportedLimb": "creatures named before the furnishings",
+   "fromFile": "verdicts-dnd-i469-483.json"
+  }
+ },
+ {
+  "index": 493,
+  "feature": "civic record register",
+  "claim": "Maliszewski quotes GAZ1's cover copy promising a complete historical, economical, geographical and sociological overview.",
+  "source": "James Maliszewski, Grognardia, 2022, quoting GAZ1's cover copy (Aaron Allston, TSR, 1987)",
+  "url": "http://grognardia.blogspot.com/2022/09/retrospective-grand-duchy-of-karameikos.html",
+  "quote": "a complete historical, economical",
+  "page": "body, second paragraph",
+  "kind": "analysis",
+  "polarity": "mentions",
+  "date": "2022-09-28",
+  "routeHint": "direct fetch with browser user agent",
+  "registerHint": "dossier-archivist",
+  "confidence": "medium — the quoted words are the 1987 product's blurb as reproduced by the critic, not the critic's own assessment",
+  "angle": "place-register",
+  "verdict": {
+   "index": 493,
+   "verdict": "PARTIAL",
+   "trueWording": "the module boasted of providing 'a complete historical, economical [sic], geographical, and sociological overview'",
+   "note": "The quotation is verbatim on the page (with a bracketed [sic] after 'economical'), and the four adjectives plus 'complete... overview' all match. But the page attributes it only to 'the module boasted of providing' — it never says the wording is the cover/back-cover copy, so that attribution limb rests on outside knowledge, not this page.",
+   "unsupportedLimb": "that the quoted boast is GAZ1's cover copy",
+   "fromFile": "verdicts-dnd-i484-498.json"
+  },
+  "fullSentence": true
+ },
+ {
+  "index": 494,
+  "feature": "place and institution description",
+  "claim": "Maliszewski notes GAZ1 supplies maps of typical taverns and manor houses rather than only named ones.",
+  "source": "James Maliszewski, Grognardia, 2022",
+  "url": "http://grognardia.blogspot.com/2022/09/retrospective-grand-duchy-of-karameikos.html",
+  "quote": "typical taverns and manor houses",
+  "page": "body, paragraph on the module's two sections",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2022-09-28",
+  "routeHint": "direct fetch with browser user agent",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "place-register",
+  "verdict": {
+   "index": 494,
+   "verdict": "PARTIAL",
+   "trueWording": "Scattered throughout the module are numerous maps for use in play, like typical taverns and manor houses",
+   "note": "'typical taverns and manor houses' is verbatim. The page draws no contrast with named/specific taverns; the only contrast it makes is with the poster-sized map ('This is in addition to the large, poster-sized map of the Grand Duchy, its capital city of Specularum, and the frontier town of Threshold'), which is a different contrast from the one the claim asserts.",
+   "unsupportedLimb": "rather than only named ones",
+   "fromFile": "verdicts-dnd-i484-498.json"
+  },
+  "fullSentence": true
+ },
+ {
+  "index": 504,
+  "feature": "naming and forms of address",
+  "claim": "Gus L says Phandalin's NPC sidebar gives nothing beyond an immediately forgotten fantasy name.",
+  "source": "Gus L, Dungeon of Signs, 2015",
+  "url": "http://dungeonofsigns.blogspot.com/2015/12/lost-mines-of-phandelver-review.html",
+  "quote": "nothing beyond an immediately forgotten fantasy name",
+  "page": "section THE TOWN AND BANDITS",
+  "kind": "analysis",
+  "polarity": "disputes",
+  "date": "2015-12",
+  "routeHint": "direct fetch with browser user agent",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "place-register",
+  "verdict": {
+   "index": 504,
+   "verdict": "PARTIAL",
+   "trueWording": "nothing beyond a forgotten fantasy name AND a 'has a quest' note",
+   "unsupportedLimb": "'gives nothing beyond ... a fantasy name' - the page's sentence credits the sidebar with a second element the claim drops: 'provides nothing beyond an immediately forgotten fantasy name AND the note that they have a quest for the party', reinforced later by 'a simple list of names with \"has a quest for party\" behind them is useless'.",
+   "note": "Raw page (live URL, HTTP 200). The quoted fragment is verbatim, and the sidebar/Phandalin limbs hold, but the claim truncates the reviewer's own 'nothing beyond X and Y' to 'nothing beyond X', overstating the emptiness of the sidebar.",
+   "fromFile": "verdicts-dnd-i499-513.json"
   }
  }
 ]

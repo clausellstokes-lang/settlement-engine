@@ -1,17 +1,17 @@
-# LANE-STATUS — written 2026-09-06 14:27:21 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-06 14:30:52 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = dd5f13218 · ledger = eaf50fee7 §903: the lit default lands at 9 cars — the default preset takes the wave's class C+D (
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
 - **L-UI-MAT** dock `laneLUIMAT` HEAD c2337220a · 1 cars over dd5f13218 · porcelain 0 · last commits:
     c2337220a L-UI (LGT-C4-UI): two of O-13's three product flags light as a declared display-only shift — and the third is refused with the measurement that it has no reader
-    receipt `receipt-l-ui-mat.md` (mtime 09-06 14:25) head:
+    receipt `receipt-l-ui-mat.md` (mtime 09-06 14:30) head:
       | # RECEIPT — LANE L-UI-MAT — **PARTIAL** (in flight)
       | Seat: Opus 5 — Fable-unvalidated · Lane: L-UI-MAT · Chair: Fable 5.1
       | Dock: $SC/laneLUIMAT · cut at dd5f1321825b58fed2db54e9473440a310195eed (§903 CAS)
       | Started: 2026-09-06 (session 19ace14d)
       | 
-      | ## STATUS: PARTIAL — nothing proven yet.
+      | ## STATUS: COMPLETE — CAR A landed (c2337220a); CAR B REFUSED with measurement. See the tail.
       | 
       | ## ARRIVAL CHECK — PASS (all three)
       | - HEAD: dd5f1321825b58fed2db54e9473440a310195eed  == brief expectation. CONFIRMED.
@@ -53,7 +53,7 @@ product claude/composite-r4 = dd5f13218 · ledger = eaf50fee7 §903: the lit def
       | - `pairs-illustration-2026-09-05.json` NOT modified (mtime still Sep 5 21:40); `PROBE_ALL.md` NOT modified (mtime still Sep 6 08:26).
       | - scratch confined to `$SC/s12a-scratch/`.
       | 
-      | FILES CHANGED (kit only): `prose-research/check-pair.mjs` (59 → 131 lines) · `prose-research/probe-all/crosscheck.mjs` (line 10)
+      | FILES CHANGED (kit only): `prose-research/check-pair.mjs` (59 → 132 lines) · `prose-research/probe-all/crosscheck.mjs` (line 10)
       | FILES ADDED (kit): `prose-research/check-pair.v1.mjs` · `prose-research/pairs-s12a-controls.json`
 - **R15-TAIL** (kit/read-only lane) receipt `receipt-r15-tail.md` (mtime 09-06 14:20) head:
       | # RECEIPT — lane R15-TAIL (PARTIAL)
@@ -70,29 +70,30 @@ product claude/composite-r4 = dd5f13218 · ledger = eaf50fee7 §903: the lit def
       | 
       | ## Deliverables (paths)
       | - `$K/sweep/R15-tail-classification.json`
-- R15-TAIL checkpoint: no JSON yet
+- R15-TAIL checkpoint: rows 3894 files 234 complete True
 - S12A: check-pair.v1.mjs present; check-pair.mjs mtime 09-06 14:23
 
 ## RESEARCH SWEEPS (state = claims/verdicts/kept; verdict files; section/critic mtimes) — round tags in sweep/LAST-RUNS.json
 - **tolkien**: claims 874 · verdicts 874 (todo 0) · kept 641 · partial 214 · verdict files 43 (triage 0, regrade r4) · section 09-06 14:20 · critic 09-05 20:39
 - **martin**: claims 990 · verdicts 990 (todo 0) · kept 838 · partial 32 · verdict files 42 (triage 1, regrade none) · section 09-05 20:41 · critic 09-05 21:01
-- **dnd**: claims 872 · verdicts 469 (todo 403) · kept 420 · partial 47 · verdict files 32 (triage 0, regrade none) · section 09-05 20:56 · critic 09-05 21:12
-- **ai**: claims 940 · verdicts 865 (todo 75) · kept 732 · partial 106 · verdict files 55 (triage 1, regrade r1) · section 09-06 00:39 · critic 09-06 00:55
+- **dnd**: claims 872 · verdicts 514 (todo 358) · kept 460 · partial 52 · verdict files 35 (triage 0, regrade none) · section 09-05 20:56 · critic 09-05 21:12
+- **ai**: claims 940 · verdicts 940 (todo 0) · kept 804 · partial 109 · verdict files 60 (triage 1, regrade r1) · section 09-06 00:39 · critic 09-06 00:55
 - **kay**: claims 713 · verdicts 713 (todo 0) · kept 448 · partial 48 · verdict files 36 (triage 1, regrade r5) · section absent · critic absent
 - **leguin**: claims 384 · verdicts 384 (todo 0) · kept 342 · partial 42 · verdict files 27 (triage 0, regrade r4) · section 09-06 13:47 · critic 09-06 14:20
 - **wolfe**: claims 468 · verdicts 468 (todo 0) · kept 402 · partial 66 · verdict files 34 (triage 0, regrade r4) · section 09-06 14:19 · critic absent
-- **hobb**: claims 386 · verdicts 386 (todo 0) · kept 346 · partial 40 · verdict files 27 (triage 0, regrade r4) · section 09-06 14:14 · critic absent
-- LAST-RUNS: tolkien r5/wf_bf5b8fda-a24, kay r5/wf_f5b527e0-155, leguin r5/wf_146ba5ee-000, wolfe r5/wf_328e2797-84f, martin r5/wf_ed535e1b-537, hobb r5/wf_06d7ffd7-48b, dnd r5/wf_a9298963-fdf, ai r5/wf_bcc0efc7-47c
+- **hobb**: claims 386 · verdicts 386 (todo 0) · kept 346 · partial 40 · verdict files 27 (triage 0, regrade r4) · section 09-06 14:14 · critic 09-06 14:28
+- LAST-RUNS: tolkien r5/wf_bf5b8fda-a24, kay r5/wf_f5b527e0-155, leguin r6/wf_2b731d5b-460, wolfe r5/wf_328e2797-84f, martin r5/wf_ed535e1b-537, hobb r5/wf_06d7ffd7-48b, dnd r5/wf_a9298963-fdf, ai r5/wf_bcc0efc7-47c
 
 ## WORKFLOW RUNS of chair session 19ace14d-e63e-4584-ad77-d83bd8e2cd0f (journal lines; a run dies with the session — the FILES above are the checkpoint)
-- wf_06d7ffd7-48b: 3 journal lines, 2 agents
+- wf_06d7ffd7-48b: 4 journal lines, 2 agents
 - wf_146ba5ee-000: 2 journal lines, 1 agents
+- wf_2b731d5b-460: 4 journal lines, 4 agents
 - wf_328e2797-84f: 3 journal lines, 2 agents
-- wf_a9298963-fdf: 42 journal lines, 24 agents
-- wf_bcc0efc7-47c: 55 journal lines, 30 agents
+- wf_a9298963-fdf: 47 journal lines, 24 agents
+- wf_bcc0efc7-47c: 61 journal lines, 31 agents
 - wf_bf5b8fda-a24: 3 journal lines, 2 agents
 - wf_ed535e1b-537: 19 journal lines, 10 agents
 - wf_f5b527e0-155: 23 journal lines, 12 agents
 
 ## PROCESSES: 38055 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 6.17 4.64 10.74
+load: 3.96 4.54 9.39

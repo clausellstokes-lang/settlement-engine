@@ -252,7 +252,8 @@
    "trueWording": "because there is no known framework for the reader's mind to rest upon",
    "note": "Raw wikitext, Style-and-mood section: 'Le Guin herself said that in fantasy it was necessary to be clear and direct with language, because there is no known framework for the reader's mind to rest upon.' Quoted fragment is word-for-word; both limbs (clear and direct; no framework for the reader) supported. Cited to Slusser 1976 pp.32-35.",
    "fromFile": "verdicts-leguin-i15-29.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 19,
@@ -269,7 +270,8 @@
    "trueWording": "gives Le Guin's world the mysterious depths of Tolkien's, but without his tiresome back-stories and versifying",
    "note": "Raw wikitext: 'a reviewer wrote that this method \"gives Le Guin's world the mysterious depths of Tolkien's, but without his tiresome back-stories and versifying\"', ref name='Craig 2003' (Amanda Craig, The Guardian, 24 Sep 2003). Quote verbatim; 'a reviewer' and the crediting of the no-exposition method both supported.",
    "fromFile": "verdicts-leguin-i15-29.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 20,
@@ -320,7 +322,8 @@
    "trueWording": "Every word was exactly in place and every sentence or line had resonance",
    "note": "Raw wikitext: 'literary critic Harold Bloom described Le Guin as an \"exquisite stylist\", saying that in her writing, \"Every word was exactly in place and every sentence or line had resonance\".' Quote verbatim; 'exquisite stylist', exact placement and resonance all present.",
    "fromFile": "verdicts-leguin-i15-29.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 24,
@@ -337,7 +340,8 @@
    "trueWording": "described her as using \"a lean but lyrical style\" to explore issues of moral relevance",
    "note": "Raw wikitext: 'The New York Times described her as using \"a lean but lyrical style\" to explore issues of moral relevance.' Quote verbatim; the moral-issues limb is supported as 'issues of moral relevance'. The page attributes the style to her writing rather than the word 'prose', a wording difference only.",
    "fromFile": "verdicts-leguin-i15-29.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 25,
@@ -354,7 +358,8 @@
    "trueWording": "Her prose, according to Zadie Smith, was \"as elegant and beautiful as any written in the twentieth century\"",
    "note": "Raw wikitext: exact sentence present, ref 'Fellow Writers' (Library of America, 26 Jan 2018). Quote verbatim; every limb supported.",
    "fromFile": "verdicts-leguin-i15-29.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 26,
@@ -728,7 +733,8 @@
    "trueWording": "hold to the rhythms of the dragon's flight, the very large, long wingbeats",
    "note": "Raw PDF, journal pp.17-18, Kelso quoting Le Guin: 'If I could hold to the rhythms of the dragon's flight, the very large, long wingbeats, then the story told itself. (Collectors, Rhymesters and Drummers, 183-84)', introduced by 'Then Le Guin describes writing Tehanu'; and on p.18 'When I lost the beat, I fell off, and had to wait ... until the dragon picked me up again. (184)'. Attribution, book and both halves confirmed.",
    "fromFile": "verdicts-leguin-i45-59.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 56,
@@ -1204,7 +1210,8 @@
    "trueWording": "It is a language always on the verge of silence and often on the verge of song",
    "note": "Same Serendip page, one fetch. The sentence continues '...It is the language spoken by all children and most women, and so I call it the mother tongue', so the mother-tongue referent in the claim is explicit on the page. Quote appears word for word.",
    "fromFile": "verdicts-leguin-i90-104.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 92,
@@ -1221,7 +1228,8 @@
    "trueWording": "This is a wedding and welding back together of the alienated consciousness... father tongue... mother tongue",
    "note": "Same Serendip page. 'wedding and welding back together' is verbatim. The other limbs are all on the page: 'The third language, my native tongue'; the unlearned language is 'any use of language when it is spoken, written, read, heard as art'; and 'the marriage of the public discourse and the private experience' supports the public-father / private-mother framing.",
    "fromFile": "verdicts-leguin-i90-104.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 93,
@@ -1238,7 +1246,8 @@
    "trueWording": "The structuralist view of language revealed in Le Guin's Earthsea Cycle informs her depiction of power and balance",
    "note": "digitalcommons.liberty.edu/masters/133/ fetched live (200, 35 KB); abstract present in the raw HTML. Page metadata confirms Daniel Newell, Master of Arts (MA), Masters Theses 133, 5-2010, Liberty University, keyword 'Structuralism'. Claim's 'underlies' = page's 'informs... and is central to understanding'; the supplied fragment is verbatim.",
    "fromFile": "verdicts-leguin-i90-104.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 95,
@@ -1255,7 +1264,8 @@
    "trueWording": "Beyond Words: The Impact of Rhythm as Narrative Technique in The Left Hand of Darkness",
    "note": "Crossref API queried live (200); top hit is the exact record: Nora Barry & Mary Prescott, Extrapolation 33(2): 154-165, DOI 10.3828/extr.1992.33.2.154, issued 1992-07, type journal-article. Every limb of the claim (1992, Extrapolation, rhythm as narrative technique, 'beyond words', Left Hand of Darkness) is verbatim in the record title/metadata.",
    "fromFile": "verdicts-leguin-i90-104.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 97,
@@ -1272,7 +1282,8 @@
    "trueWording": "reads like the retelling of a tale first told centuries ago (David Mitchell)",
    "note": "ursulakleguin.com/the-books-of-earthsea fetched live (200, 161 KB). Quote is word for word with the Mitchell attribution in parentheses. Referent note, not a demotion: on the page the phrase describes 'the timeless and beloved A Wizard of Earthsea' at its 50th anniversary, not the omnibus The Books of Earthsea on whose page it sits; the claim's unspecific 'the book' does not assert otherwise.",
    "fromFile": "verdicts-leguin-i90-104.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 98,
@@ -1289,7 +1300,8 @@
    "trueWording": "A writer who doesn't know them is like a carpenter who doesn't know a hammer from a screwdriver",
    "note": "ursulakleguin.com/steering-the-craft fetched live (200, 114 KB). The 'From the Introduction' block carries both limbs: 'You can't say what's wrong or right in a sentence without the words to describe it. A writer who doesn't know them is like a carpenter who doesn't know a hammer from a screwdriver.' preceded by 'the technical language of speech and writing, the vocabulary of grammar... these are the names of the writer's tools.' Supplied quote is verbatim.",
    "fromFile": "verdicts-leguin-i90-104.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 99,
@@ -1513,7 +1525,8 @@
    "trueWording": "in the sound of the words, the movement of the syntax, and the rhythm of the sentences",
    "note": "Exact on p.6, in the appraisal of Eddison's prose: \"musically--that is, in the sound of the words, the movement of the syntax, and the rhythm of the sentences--it is subtle and very strong.\" The \"that is\" makes it an explicit gloss, i.e. a definition.",
    "fromFile": "verdicts-leguin-i105-119.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 111,
@@ -1536,7 +1549,8 @@
    "trueWording": "The Song of Roland has four thousand lines, containing one simile and no metaphors",
    "note": "Exact on p.8, in the passage on epic plainness (\"Most epics are in straightforward language... A plain language is the noblest of all\").",
    "fromFile": "verdicts-leguin-i105-119.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 112,
@@ -1559,7 +1573,8 @@
    "trueWording": "It is a trap into which almost all very young fantasy writers walk",
    "note": "Exact on p.5; the antecedent in the preceding sentence is \"archaicizing, the archaic manner\", so the claim's subject limb is supported.",
    "fromFile": "verdicts-leguin-i105-119.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 113,
@@ -1628,7 +1643,8 @@
    "trueWording": "the characters lose coherence in my mind, and I lose confidence in them",
    "note": "Exact on p.7, on Leiber and Zelazny, who \"alternate the two styles\": colloquial American English for humor, \"old formal usages\" at earnest moments. Every limb, including the first-person reader stance, is on the page.",
    "fromFile": "verdicts-leguin-i105-119.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 116,
@@ -1720,7 +1736,8 @@
    "trueWording": "The chief duty of a narrative sentence is to lead to the next sentence",
    "note": "Lit Hub ch.1 raw page: 'The chief duty of a narrative sentence is to lead to the next sentence—to keep the story going.' Quote exact; every limb supported.",
    "fromFile": "verdicts-leguin-i120-134.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 121,
@@ -2019,7 +2036,8 @@
    "trueWording": "The Left Hand of Darkness is written in a tone even more gravely austere than A Wizard of Earthsea.",
    "note": "Raw PDF (arts.gov, HTTP 200, pypdf text). Sentence appears verbatim in the 'other works' passage of the Reader's Guide; Acknowledgments credits 'Writer: Michael Dirda'.",
    "fromFile": "verdicts-leguin-i135-149.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 136,
@@ -2042,7 +2060,8 @@
    "trueWording": "just as an anthropologist reports on an indigenous people in as much detail as possible",
    "note": "Raw PDF. Full sentence: '...so a science fiction or fantasy author will build up an elaborate picture of an alien culture and its inhabitants.' In the 'About the Author' page (p.5); Dirda is the credited writer.",
    "fromFile": "verdicts-leguin-i135-149.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 137,
@@ -2065,7 +2084,8 @@
    "trueWording": "The sentences are formal, clear, and exact, with the musical cadence of an oral storyteller or medieval bard.",
    "note": "Raw PDF (Teachers-Guide-LeGuin.pdf, HTTP 200). In the narrator / point-of-view lesson (Lesson Three, FOCUS: narrator and point of view).",
    "fromFile": "verdicts-leguin-i135-149.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 138,
@@ -2088,7 +2108,8 @@
    "trueWording": "Le Guin has stressed that heroic or high fantasy demands a slightly formal, elevated style",
    "note": "Raw PDF. Continues '...commensurate with the genre's focus on nobility of soul, heroism, and self-sacrifice.' Same point-of-view lesson; only difference is a curly vs straight apostrophe in genre's.",
    "fromFile": "verdicts-leguin-i135-149.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 139,
@@ -2111,7 +2132,8 @@
    "trueWording": "Though Le Guin occasionally uses figurative language, her writing tends to be plain, strong, and direct, without obvious flourish.",
    "note": "Raw PDF. Lesson Five, FOCUS: Figurative Language, exactly as the claim's page field states.",
    "fromFile": "verdicts-leguin-i135-149.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 140,
@@ -2157,7 +2179,8 @@
    "trueWording": "Great novels offer us not only a series of events, but a place, a landscape of the imagination which we can inhabit and return to.",
    "note": "Raw PDF. Introduced by 'Ursula K. Le Guin has written:', in Lesson Eight (FOCUS: The Plot Unfolds — plot structure and pacing).",
    "fromFile": "verdicts-leguin-i135-149.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 142,
@@ -2180,7 +2203,8 @@
    "trueWording": "she relies heavily on words with Germanic roots to convey the rawness of her windswept world",
    "note": "Raw HTML (slate.com, HTTP 200, tags stripped locally). Third body paragraph, naming 'her fantasy novel A Wizard of Earthsea'; byline Jacob Brogan, Sept 11 2015.",
    "fromFile": "verdicts-leguin-i135-149.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 143,
@@ -2203,7 +2227,8 @@
    "trueWording": "Write a paragraph of narrative ... in sentences of seven or fewer words",
    "note": "Raw HTML. Brogan quotes it as one of the exercises: 'goes one', in the paragraph on the book's plainspoken, practical exercises.",
    "fromFile": "verdicts-leguin-i135-149.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 144,
@@ -2226,7 +2251,8 @@
    "trueWording": "she finds such language difficult to get through because it's always stopping to be admired",
    "note": "Raw HTML. Preceded by 'many people admire the elaborate, ornate prose of writers such as Nabokov'; in the poetry-versus-prose paragraph.",
    "fromFile": "verdicts-leguin-i135-149.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 145,
@@ -2249,7 +2275,8 @@
    "trueWording": "every word of Le Guin's is carefully weighed before being put on the page",
    "note": "Raw HTML (theportalist.com, HTTP 200). Section 4, 'Economic prose', opening with 'Earthsea is refreshingly succinct and straightforward'; byline Chris Mahon.",
    "fromFile": "verdicts-leguin-i135-149.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 146,
@@ -2272,7 +2299,8 @@
    "trueWording": "In a genre where authors are given free rein to indulge in minutiae, Earthsea leaves a lot up to the imagination.",
    "note": "Raw HTML. Closing sentence of section 2, 'Geography That Encourages Imagination', exactly as the page field states.",
    "fromFile": "verdicts-leguin-i135-149.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 147,
@@ -2295,7 +2323,8 @@
    "trueWording": "each island the characters visit gets at least a few defining details, usually in terms of the local economy",
    "note": "Raw HTML (mythcreants.com, HTTP 200). Quoted string is verbatim; the claim elides the page's 'at least' before 'a few', which only weakens what the page asserts. In the 'Cool Islands' section under 'The Good'; byline Oren Ashkenazi.",
    "fromFile": "verdicts-leguin-i135-149.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 148,
@@ -2318,7 +2347,8 @@
    "trueWording": "how much of what I remembered as Earthsea's worldbuilding is actually due to Le Guin's wordcraft",
    "note": "Raw HTML. Opens with 'When I started my reread for this article, something that constantly surprised me is...'. Placement note: this is the first paragraph of 'The Bad', mid-article, not the closing section as the page field says; that field is metadata, not a claim limb.",
    "fromFile": "verdicts-leguin-i135-149.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 149,
@@ -2341,7 +2371,8 @@
    "trueWording": "she describes a goat-charming spell with such evocative detail that it lets the reader imagine a world where even these tiny acts of sorcery are stupendous",
    "note": "Raw HTML. The impression is of rare, treasured low-level magic, which the page rejects ('that's not the case at all') and refutes in the following 'Vague and Overpowered Magic' section. Same placement caveat as 148: it sits at the head of 'The Bad'.",
    "fromFile": "verdicts-leguin-i135-149.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 150,
@@ -2387,7 +2418,8 @@
    "trueWording": "while Ged is important to the story, he is also treated with detachment and clear-sightedness",
    "note": "Quote verbatim on the raw page. 'By the narration' is a light gloss: the page attributes the detachment to how the story/Le Guin treats Ged, not to a named narrator.",
    "fromFile": "verdicts-leguin-i150-164.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 152,
@@ -2410,7 +2442,8 @@
    "trueWording": "Le Guin also writes the story in a heightened and at the same time tightened prose style.",
    "note": "Quote verbatim; the claim's characterisation of the register matches the sentence exactly.",
    "fromFile": "verdicts-leguin-i150-164.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 153,
@@ -2433,7 +2466,8 @@
    "trueWording": "But unlike Tolkien, her prose has the sense of not a single word being used unnecessarily.",
    "note": "Quote verbatim, and the Tolkien contrast is explicit ('unlike Tolkien'). Page adds it is not meant as a dig at Tolkien.",
    "fromFile": "verdicts-leguin-i150-164.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 154,
@@ -2456,7 +2490,8 @@
    "trueWording": "It is characterised by clear syntax, precise word choice, natural emphasis, and unobtrusive grammar.",
    "note": "Raw HTML fetched with browser UA (the first WebFetch returned only a summarizer digest, so it was refetched). Carey self-identifies as a copy-editor earlier in the post, and introduces the paragraph as one he wrote himself.",
    "fromFile": "verdicts-leguin-i150-164.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 155,
@@ -2479,7 +2514,8 @@
    "trueWording": "Strunk and White's Elements of Style, corrected and supplemented by Miller and Swift's Words and Women, are my road-atlas to English, and have never led me astray.",
    "note": "Quote verbatim inside the footnote marked 'Note (1989)' appended to 'Dreams Must Explain Themselves' (1973). 'Corrected' is the page's 'corrected and supplemented'.",
    "fromFile": "verdicts-leguin-i150-164.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 157,
@@ -2525,7 +2561,8 @@
    "trueWording": "This is the only difference between prose and poetry that I have ever been certain of.",
    "note": "Under 'Regularity'. The antecedent of 'This' is the preceding pair of sentences: prose 'scrupulously avoids any noticeable regularity or pattern of stresses', and acquiring noticeable meter makes it stop being prose. Absence-of-metrical-regularity limb supported.",
    "fromFile": "verdicts-leguin-i150-164.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 159,
@@ -2548,7 +2585,8 @@
    "trueWording": "There are two elements to stress-rhythm in prose: first, actual syllabic stresses; second, syntactical phrases or word groups... These groups are what I call 'bars.'",
    "note": "Section 'Stress-Rhythms in Prose'. Le Guin frames it as a tentative proposal ('Tentatively, I propose'), matching the claim's 'proposes'.",
    "fromFile": "verdicts-leguin-i150-164.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 160,
@@ -2594,7 +2632,8 @@
    "trueWording": "good prose does have a stress-rhythm, subtle and complex and changing though it may be",
    "note": "Verbatim. The claim's 'however subtle and changing' compresses 'subtle and complex and changing though it may be'.",
    "fromFile": "verdicts-leguin-i150-164.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 162,
@@ -2617,7 +2656,8 @@
    "trueWording": "Dull prose, clunky narrative, hard-to-read textbook stuff, lacks the rhythm that catches and drives and moves the reader's body and mind and heart.",
    "note": "Verbatim, immediately after the good-prose sentence. 'Moves the reader' is the page's own final verb in the series.",
    "fromFile": "verdicts-leguin-i150-164.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 163,
@@ -2640,7 +2680,8 @@
    "trueWording": "Judson Jerome... says that poetry averages 40 to 60 stresses per 100 syllables, while prose averages about 20 to 40. My samples of prose run higher than that.",
    "note": "Both limbs verbatim: the 20-40 prose figure is attributed to Judson Jerome, 'Poetry: Premeditated Art', and the sentence follows the eight hundred-syllable samples.",
    "fromFile": "verdicts-leguin-i150-164.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 164,
@@ -2663,7 +2704,8 @@
    "trueWording": "Number of stresses, most to fewest: 'Three Bears,' Woolf: 48 / Tolkien: 47",
    "note": "Verbatim in the comparison table the claim cites. Noted as a source-internal inconsistency, not a defect in the claim: the per-sample section for 'The Three Bears' earlier reports 'Stresses: 49', against the table's 48. Le Guin's own factoid list also says Woolf and 'The Three Bears' share a stress-count.",
    "fromFile": "verdicts-leguin-i150-164.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 165,
@@ -2709,7 +2751,8 @@
    "trueWording": "The samples are far too small and the method of counting stresses too subjective for any conclusions at all to be drawn",
    "note": "Verbatim on the page immediately after the comparison tables and the 'Various interesting factoids emerge' list. The claim's 'her stress-counting' renders the page's 'the method of counting stresses'; both limbs (samples too small; counting too subjective) are on the page in one sentence.",
    "fromFile": "verdicts-leguin-i165-179.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 168,
@@ -2732,7 +2775,8 @@
    "trueWording": "that in even a readable textbook more than half the words are polysyllables",
    "note": "Verbatim, third bullet of the 'Various interesting factoids emerge' list. Corroborated by her own counts for the Craig et al. textbook sample: 'Words: 52.5 / Words of one syllable: 25', i.e. more than half polysyllabic.",
    "fromFile": "verdicts-leguin-i165-179.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 169,
@@ -2778,7 +2822,8 @@
    "trueWording": "But the power of deliberate repetition in a narrative is both great and legitimate",
    "note": "Verbatim, closing sentence of the 'Repetition of Words or Phrases' section, exactly the section the claim names.",
    "fromFile": "verdicts-leguin-i165-179.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 172,
@@ -2870,7 +2915,8 @@
    "trueWording": "textbook prose tends to hobble along clogged by a superfluity of egregiously unnecessary and understressed polysyllables",
    "note": "Verbatim in 'Rhythmic Pattern in The Lord of the Rings', in the stress-ratio passage on the essay's early pages, exactly where the claim's page hint places it. The essay's own headnote supports the 2001 attribution: it 'happily found a home in Karen Haber's anthology of writing on Tolkien, Meditations on Middle Earth, published in 2001'. The claim drops 'egregiously' from its paraphrase but the quote field carries it.",
    "fromFile": "verdicts-leguin-i165-179.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 176,
@@ -2893,7 +2939,8 @@
    "trueWording": "In poetry ... one syllable out of every two or three has a beat on it ... In narrative prose, that ratio goes down to one beat in two to four",
    "note": "Both limbs verbatim and adjacent: 'In poetry, by and large, one syllable out of every two or three has a beat on it: Tum ta Tum ta ta Tum Tum ta, and so on... . In narrative prose, that ratio goes down to one beat in two to four: ta Tum tatty Tum ta Tum tatatty, and so on... .'",
    "fromFile": "verdicts-leguin-i165-179.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 177,
@@ -2916,7 +2963,8 @@
    "trueWording": "Tolkien's prose runs to the normal narrative ratio of one stress every two to four syllables",
    "note": "Verbatim, the sentence immediately after the textbook-prose sentence of claim 175. The page continues: 'In passages of intense action and feeling the ratio may get pretty close to 50 percent, like poetry, but still, except for Tom, it is irregular, it can't be scanned' -- a qualification the claim does not contradict, since it reports the normal ratio.",
    "fromFile": "verdicts-leguin-i165-179.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 178,
@@ -2939,7 +2987,8 @@
    "trueWording": "The speech of the elves and noble folk such as Aragorn has a dignified, often stately gait, but not a regular stress-beat",
    "note": "Verbatim, in the passage on metric passages in the Trilogy the claim's page hint names ('If there are other metric passages in the Trilogy, I've missed them.'). Every limb -- elves and noble folk, Aragorn as the example, dignified/often stately gait, absence of a regular stress-beat -- is on the page.",
    "fromFile": "verdicts-leguin-i165-179.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 179,
@@ -2962,7 +3011,8 @@
    "trueWording": "The narrative moves in balanced cadences in passages of epic action ... but it remains pure prose",
    "note": "Verbatim in the same paragraph as claim 178: 'The narrative moves in balanced cadences in passages of epic action, with a majestic sweep reminiscent of epic poetry, but it remains pure prose.' Both limbs (balanced cadences in epic action; remains pure prose) supported.",
    "fromFile": "verdicts-leguin-i165-179.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 180,
@@ -3077,7 +3127,8 @@
    "trueWording": "Phrases describing the hill country, the scent of turf, the quality of the light",
    "note": "p.90 verbatim, and it is an entry in the list introduced on p.89 as 'These are the chief recurrent elements I listed', so the 'recurrent elements' limb holds.",
    "fromFile": "verdicts-leguin-i180-194.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 185,
@@ -3123,7 +3174,8 @@
    "trueWording": "I believe there is no moment when we don't know, literally, where north is",
    "note": "p.91 verbatim (curly apostrophe in 'don't'). Preceded by 'Directionality is extremely important all though the book', supporting the 'in the book' limb. Le Guin hedges with 'I believe', which the claim's 'claims' fairly reflects.",
    "fromFile": "verdicts-leguin-i180-194.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 187,
@@ -3192,7 +3244,8 @@
    "trueWording": "The tremendous landscape of Middle Earth is built up by repetition... and reversal",
    "note": "p.95 verbatim: 'The tremendous landscape of Middle Earth, the psychological and moral universe of The Lord of the Rings, is built up by repetition, semirepetition, suggestion, foreshadowing, recollection, echo, and reversal.'",
    "fromFile": "verdicts-leguin-i180-194.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 190,
@@ -3261,7 +3314,8 @@
    "trueWording": "Great novels offer us not only a series of events, but a place",
    "note": "p.94 verbatim, continuing 'a landscape of the imagination which we can inhabit and return to' - every limb of the claim is in that one sentence.",
    "fromFile": "verdicts-leguin-i180-194.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 193,
@@ -3307,7 +3361,8 @@
    "trueWording": "Le Guin's thesis is simple: ...as simple as a rhythm can be: two beats",
    "note": "Wayback raw capture of kate_nepveu's 2006-06-04 post 'LotR re-read: Le Guin, \"Rhythmic Pattern in The Lord of the Rings\"' fetched at HTTP 200. The post writes 'Le Guin's thesis is simple:' and then block-quotes the passage containing 'as simple as a rhythm can be: two beats. Stress, release.' Every limb (Nepveu, summarising the essay, quoting the thesis) is on the raw page.",
    "fromFile": "verdicts-leguin-i180-194.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 195,
@@ -3353,7 +3408,8 @@
    "trueWording": "Rather than start with the structure then fill in the gaps, her focus is on what you put in each sentence",
    "note": "Live page (HTTP 200) at the given 2026/01 URL; post dated Friday, January 30, 2026, on 'Nothing Tra La La?', 'The blog of writer and producer Simon Guerrier'. Quote exact; the 'rather than on structure' limb is carried by the same sentence's opening clause.",
    "fromFile": "verdicts-leguin-i195-209.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 198,
@@ -3376,7 +3432,8 @@
    "trueWording": "what she calls “crowding and leaping” — when to provide lots of detail and where to skip through it",
    "note": "Live page (HTTP 200). Quote exact, and it sits at the end of the sentence listing the book's chapters ('The chapters cover the sound of your writing spoken aloud, punctuation and grammar, ... and what she calls “crowding and leaping”'). All limbs hold.",
    "fromFile": "verdicts-leguin-i195-209.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 199,
@@ -3445,7 +3502,8 @@
    "trueWording": "not because it’s an especially good map but because Le Guin is so wonderful with names",
    "note": "Live page (HTTP 200). Quote exact in the opening paragraph: 'I could draw the map from memory, and the reason for this isn’t because it’s an especially good map but because Le Guin is so wonderful with names—Selidor, Iffish, Havnor...'. Both limbs (memory attributed to names, not map quality) hold.",
    "fromFile": "verdicts-leguin-i195-209.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 202,
@@ -3468,7 +3526,8 @@
    "trueWording": "It’s also one of the very few fantasy novels that succeeds in feeling like a legend.",
    "note": "Live page (HTTP 200). Quote exact, second sentence of the opening paragraph. All limbs hold.",
    "fromFile": "verdicts-leguin-i195-209.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 203,
@@ -3491,7 +3550,8 @@
    "trueWording": "since it does have an effect on the sound and rhythm of a sentence",
    "note": "Live page (HTTP 200); the wpDiscuz comment thread (26 comments) is present in the served HTML. Comment by '(still) Steve Morrison' introduces it as 'Le Guin’s FAQ agrees with you about pronunciation; this is what she says:' and quotes the FAQ, whose subject is how to pronounce a made-up name. Every limb holds.",
    "fromFile": "verdicts-leguin-i195-209.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 204,
@@ -3514,7 +3574,8 @@
    "trueWording": "I could see how beautiful the prose was, but the style left me cold.",
    "note": "Live page (HTTP 200), comment thread. Quote exact; the same comment opens 'I found that the ‘legend’ quality worked against the story for me. It took a few weeks of steady perseverance to get through.' — a clear dissent from Walton's praise. Claim limbs all hold. One source-field wrinkle worth recording: the comment is not anonymous, it carries the handle 'PamAdams'.",
    "fromFile": "verdicts-leguin-i195-209.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 205,
@@ -3560,7 +3621,8 @@
    "trueWording": "There’s got to be white space around the word, silence around the voice.",
    "note": "Live page (HTTP 200). Quote exact, in the leaping paragraph of the block quotation: 'But leaping is just as important. What you leap over is what you leave out.'",
    "fromFile": "verdicts-leguin-i195-209.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 207,
@@ -3606,7 +3668,8 @@
    "trueWording": "never to use ten vague words where two will do, always to seek the vivid phrase, the exact word",
    "note": "Live page (HTTP 200). Quote exact in the crowding paragraph; the second limb is carried by the clause that follows it, 'always to seek the vivid phrase, the exact word'.",
    "fromFile": "verdicts-leguin-i195-209.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 209,
@@ -3629,7 +3692,8 @@
    "trueWording": "By crowding, I mean keeping the story full ... keeping it interconnected with itself, rich with echoes forward and backward",
    "note": "Live page (HTTP 200). Quote exact at the close of the crowding paragraph; 'By crowding, I mean' opens the sentence, so the crowding-means limb holds.",
    "fromFile": "verdicts-leguin-i195-209.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 210,
@@ -3652,7 +3716,8 @@
    "trueWording": "Tactically speaking, I'd say go ahead and crowd in the first draft -- put everything in. Then in revising decide what counts and what tells; then cut and recombine until what's left is what counts. Leap boldly.",
    "note": "Raw page fetched (HTTP 200, browser UA). Block quote from Steering the Craft ch.10 in a Daily Kos diary by 'not a lamb'; the quoted fragment is verbatim (page uses a typographic apostrophe in \"what's\"; words identical). Both limbs -- crowd in the first draft, then cut and recombine -- are on the page in that order.",
    "fromFile": "verdicts-leguin-i210-224.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 211,
@@ -3675,7 +3740,8 @@
    "trueWording": "and then cut the word count by half, while \"keeping the narrative clear and the sensory impact vivid.\"",
    "note": "Raw page fetched. The blogger reports the ch.10 exercise: choose a past passage (~400 words) and cut the word count by half. 'Halves the word count' and the quoted proviso are both explicit and verbatim.",
    "fromFile": "verdicts-leguin-i210-224.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 212,
@@ -3698,7 +3764,8 @@
    "trueWording": "Le Guin covers many of the expected topics - how to adjust sound and syntax, how to marshal adjectives and adverbs, how to control verb tense and point of view",
    "note": "Raw page fetched. Review by Kristen Tate on thebluegarret.com (Jun 23, 2019). Quote verbatim; the full topic list in the claim (sound/syntax, adjectives/adverbs, verb tense, point of view) matches the sentence exactly.",
    "fromFile": "verdicts-leguin-i210-224.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 213,
@@ -3721,7 +3788,8 @@
    "trueWording": "hear the parallel construction of the two rhyming sets of steel and wheel and of tractor and reactor",
    "note": "Raw page fetched. Bylined 'By Matt Bell', Reactor (formerly Tor.com), Aug 24 2021. The sentence analysed is explicitly from 'her 1966 debut Rocannon's World'. Quote verbatim; 'two rhyming word-sets' = 'the two rhyming sets'.",
    "fromFile": "verdicts-leguin-i210-224.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 214,
@@ -3744,7 +3812,8 @@
    "trueWording": "What an exquisitely well-built sentence! See the two progressions expanding its scale as it goes, its scope expanding from hundred to thousands of worlds",
    "note": "Raw page fetched. Same Rocannon's World sentence as index 213 (adjacent clauses of one sentence). Quote verbatim; 'expand its scale as it goes' is the page's own wording.",
    "fromFile": "verdicts-leguin-i210-224.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 215,
@@ -3767,7 +3836,8 @@
    "trueWording": "I thrilled at how she turned thought problems into intricate cultures, working from the big picture down to the minutiae of local life",
    "note": "Raw page fetched. Quote verbatim, and the surrounding clause makes it worldbuilding method, matching the claim's framing.",
    "fromFile": "verdicts-leguin-i210-224.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 216,
@@ -3790,7 +3860,8 @@
    "trueWording": "filling books with pleasurable details like the \"common table implement\" on Gethen \"with which you crack the ice that has formed on your drink between drafts\"",
    "note": "Raw page fetched. Quote verbatim; the Gethenian ice-cracking table implement is cited immediately after, exactly as the claim says.",
    "fromFile": "verdicts-leguin-i210-224.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 217,
@@ -3813,7 +3884,8 @@
    "trueWording": "I loved Le Guin's worldbuilding, with her well-made ecologies and cultures tied to the unique geographies evoked in her hand-drawn maps",
    "note": "Raw page fetched. Quote verbatim and the 'hand-drawn maps' limb continues the same clause on the page.",
    "fromFile": "verdicts-leguin-i210-224.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 218,
@@ -3836,7 +3908,8 @@
    "trueWording": "For the most part, for me, rhythm is something that appears (and surprises me) by way of a lot of editing.",
    "note": "Raw page fetched (Substack, HTTP 200). Quote verbatim in Saunders's answer. The 'rather than by plan' limb is supported by the immediately preceding sentence: writers who 'start out with some idea about a rhythm they want to attain (a plan, or schematic vision)... but that's not true for me.'",
    "fromFile": "verdicts-leguin-i210-224.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 219,
@@ -3859,7 +3932,8 @@
    "trueWording": "But the rhythm of prose is something that not very many people have studied. The rhythms are so subtle and have to be irregular.",
    "note": "Raw page fetched. Quote verbatim, and it sits inside the reader's question, which opens 'In an interview with author Ursula Le Guin' and reports her in paraphrase -- both limbs (reader paraphrase; Le Guin interview) supported.",
    "fromFile": "verdicts-leguin-i210-224.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 220,
@@ -3882,7 +3956,8 @@
    "trueWording": "She does a fantastic job of presenting the story with this mystical air about it. The voice she uses gives it an almost biblical rhythm.",
    "note": "Raw page fetched. Spoken by Valerie in the transcript; page states 'Your Writers' Room editors are Valerie Francis... and Leslie Watts', so the 'Story Grid editor' limb is supported. Quote verbatim, about A Wizard of Earthsea.",
    "fromFile": "verdicts-leguin-i210-224.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 221,
@@ -3905,7 +3980,8 @@
    "trueWording": "I think this editorial omniscient POV is the hardest to pull off... This POV choice creates a huge emotional gap between the reader and protagonist.",
    "note": "Raw page fetched. Quote verbatim in Valerie's section; she names the POV 'editorial omniscient' two sentences earlier, so the claim's POV limb is supported.",
    "fromFile": "verdicts-leguin-i210-224.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 222,
@@ -3928,7 +4004,8 @@
    "trueWording": "3. What is the point of view / narrative device? Point of View: Editorial Omniscient",
    "note": "Raw page fetched. Article bylined 'By Leslie Watts'; the label appears verbatim in the Editor's Six Core Questions analysis, question 3, for A Wizard of Earthsea.",
    "fromFile": "verdicts-leguin-i210-224.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 223,
@@ -3951,7 +4028,8 @@
    "trueWording": "Tolkien's references to places, people, events (often of long ago) that are not part of the immediate story: these give the reader a conviction of the reality of the immediate scene",
    "note": "Raw page fetched from ursulakleguin.com. Open letter 'Plausibility in Fantasy' to Alexei Mutovkin, signed 'Ursula Le Guin 2005'. Quote verbatim; every limb (Tolkien; places/people/events; not part of the immediate story; conviction of reality) is in the one sentence.",
    "fromFile": "verdicts-leguin-i210-224.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 224,
@@ -3974,7 +4052,8 @@
    "trueWording": "because it is shown to be part of a much greater landscape, a long history, a whole world of which it is only a glimpse",
    "note": "Raw page fetched, same letter and same sentence as 223. Quote verbatim. The claim compresses the page's three-item list by dropping 'a whole world', but attaches 'of which it is only a glimpse' exactly as the page does; no limb is unsupported.",
    "fromFile": "verdicts-leguin-i210-224.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 225,
@@ -3997,7 +4076,8 @@
    "trueWording": "“in my fantasies, I have often mentioned events or places which I didn’t yet know anything about … These were, when I wrote them, merely words — ‘empty’ nouns.”",
    "note": "Raw HTML fetched live (HTTP 200), tags stripped. Quote exact. Page says 'mentioned' where the claim says 'named'; the page's own gloss '“empty” nouns' plus the named example (the later exploits of Ged in A Wizard of Earthsea) supports 'named'. Page locator confirmed.",
    "fromFile": "verdicts-leguin-i225-239.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 226,
@@ -4020,7 +4100,8 @@
    "trueWording": "“The more realistic, exact, ‘factual’ detail in a fantasy story … the more plausible the world will be. … Exact and vivid words make an exact and vivid world.”",
    "note": "Quote exact, and it is the sentence immediately following the claim sentence in the same paragraph beginning 'Then there is detail' — locator confirmed. Both limbs (exact/factual detail; greater plausibility) on the page.",
    "fromFile": "verdicts-leguin-i225-239.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 228,
@@ -4043,7 +4124,8 @@
    "trueWording": "“What constitutes plausibility in fantasy is the coherence of the story, its consistent self-reference.”",
    "note": "Quote exact and both limbs (coherence; consistent self-reference) are the one sentence, in the paragraph on fantasy's 'contract with the reader' — locator confirmed. Essay dated 2005 on the page.",
    "fromFile": "verdicts-leguin-i225-239.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 229,
@@ -4066,7 +4148,8 @@
    "trueWording": "“It may resemble mediaeval Europe in being preindustrial — but that doesn’t justify its having no economics and no social justice.”",
    "note": "Quote exact, inside Assumption 2 ('Fantasy Land is the Middle Ages') — locator confirmed. Speech header on the page confirms Children’s Literature Breakfast, BookExpo America, Chicago, 4 June 2004.",
    "fromFile": "verdicts-leguin-i225-239.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 230,
@@ -4089,7 +4172,8 @@
    "trueWording": "“Whenever I find a fantasy that is set in a genuinely imagined society and culture … I feel like setting off fireworks.”",
    "note": "Quote exact (page continues 'recycled hokum'), in Assumption 2 — locator confirmed. Both limbs (genuinely imagined society and culture; fireworks) supported.",
    "fromFile": "verdicts-leguin-i225-239.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 231,
@@ -4112,7 +4196,8 @@
    "trueWording": "“Its technology is how a society copes with physical reality: how people get and keep and cook food, how they clothe themselves, what their power sources are … what they build with and what they build, their medicine.”",
    "note": "Quote exact. Every listed item in the claim — food, clothing, power sources, what they build with and what they build, medicine — appears in that one sentence, in the paragraph the locator names.",
    "fromFile": "verdicts-leguin-i225-239.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 232,
@@ -4158,7 +4243,8 @@
    "trueWording": "“Thanks to ‘show don’t tell,’ I find writers in my workshops who think exposition is wicked. They’re afraid to describe the world they’ve invented.”",
    "note": "Quote exact (curly apostrophes match). The claim compresses two consecutive sentences; both are on the page. It is the third body paragraph, as the locator says. Page footer confirms first publication as 'When to Bend, When to Break', Los Angeles Times, 05 January 2003.",
    "fromFile": "verdicts-leguin-i225-239.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 234,
@@ -4181,7 +4267,8 @@
    "trueWording": "“the narrator’s voice (ponderously described as ‘omniscient’) distances the story — whereas it’s the most intimate voice of all”",
    "note": "Quote exact. The 'disparaged as omniscient' limb is carried by the page's 'ponderously described as “omniscient”'; the 'rather than a distancing one' limb by the page's 'whereas'. Fourth body paragraph — locator confirmed. Note the belief is attributed to the writers Le Guin is arguing against, which is how the claim reads it.",
    "fromFile": "verdicts-leguin-i225-239.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 235,
@@ -4204,7 +4291,8 @@
    "trueWording": "“The same fear of ‘distancing’ leads writers to abandon the narrative past tense … for the tight-focused, inflexible present tense. But distance lends enchantment…”",
    "note": "Quote exact; every limb (same fear of distancing; abandoning narrative past tense; tight-focused present tense; distance lends enchantment) is in those two consecutive sentences of the fourth paragraph.",
    "fromFile": "verdicts-leguin-i225-239.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 236,
@@ -4227,7 +4315,8 @@
    "trueWording": "“writing … is made of words, and words are bodily … and the rhythms of words are bodily rhythms.”",
    "note": "Quote exact, in the paragraph beginning 'I use bodily similes not mechanical ones' — locator confirmed. Both limbs (words are bodily; rhythms of words are bodily rhythms) in one sentence. Page dated c. 2007.",
    "fromFile": "verdicts-leguin-i225-239.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 237,
@@ -4250,7 +4339,8 @@
    "trueWording": "“Many contemporary writers avoid complex sentences and write what I call Macho Staccato.”",
    "note": "Quote exact and it opens Le Guin's answer to the questioner named Joe — attribution confirmed on the page. Page header: originally posted at Book View Café, 7 September 2015.",
    "fromFile": "verdicts-leguin-i225-239.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 238,
@@ -4273,7 +4363,8 @@
    "trueWording": "“The ideal is flexibility, a balance of different sentence lengths, longer and shorter sentences depending on what they do, what they’re about.”",
    "note": "Quote exact, in the answer to Michael — attribution confirmed. The claim's 'depending on what the sentences do' limb is the page's 'depending on what they do, what they’re about'.",
    "fromFile": "verdicts-leguin-i225-239.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 240,
@@ -4296,7 +4387,8 @@
    "trueWording": "Narrative written by a poet is sometimes both over-elliptic and over-written — too aware of itself, not interested enough in telling the story.",
    "note": "Raw page fetched (HTTP 200, browser UA). Quote 'over-elliptic and over-written' present word for word in the joint answer to Joseph and Deepthi; 'too aware of itself' follows verbatim.",
    "fromFile": "verdicts-leguin-i240-254.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 241,
@@ -4319,7 +4411,8 @@
    "trueWording": "Where it does belong, we ought to use it freely. It is one of the lovely versatilities of the verb.",
    "note": "Raw page. Answer to Christy explicitly quotes Steering the Craft 'On p. 56-57'; both limbs ('we ought to use it freely', 'one of the lovely versatilities of the verb') appear verbatim.",
    "fromFile": "verdicts-leguin-i240-254.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 242,
@@ -4342,7 +4435,8 @@
    "trueWording": "No matter what sacred laws the Moseses of the Iowa School of Writing handed down... stories are not shown, but told.",
    "note": "Raw page. Answer to Paige. Quote verbatim; the 'whatever writing schools teach' limb is carried by the Iowa School of Writing clause immediately preceding it.",
    "fromFile": "verdicts-leguin-i240-254.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 243,
@@ -4365,7 +4459,8 @@
    "trueWording": "Showing can be quite static, after all; but telling always involves moving on.",
    "note": "Raw page. Answer to Paige, final line. Both limbs verbatim.",
    "fromFile": "verdicts-leguin-i240-254.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 244,
@@ -4388,7 +4483,8 @@
    "trueWording": "As currently practiced, limited third person is (like the present tense) a kind of flashlight beam — it gives a brilliant, narrow, simplifying intensity of vision.",
    "note": "Raw page. Answer to Patricia. 'a kind of flashlight beam' verbatim; 'as currently practised' and 'brilliant, narrow, simplifying intensity of vision' both on the page.",
    "fromFile": "verdicts-leguin-i240-254.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 245,
@@ -4434,7 +4530,8 @@
    "trueWording": "...those resonances, hints, half-repetitions, echoes, foreshadows, reminders... A novel is a living architecture.",
    "note": "Raw page. Answer to Wm Henry opens 'Indulge, indulge! Do it!' and closes with the quoted sentence verbatim; the listed resonances appear in the same order the claim gives.",
    "fromFile": "verdicts-leguin-i240-254.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 247,
@@ -4457,7 +4554,8 @@
    "trueWording": "And description without any apparent, overt action can carry a story powerfully, irresistibly forward. ... Is this perhaps another False Dichotomy?",
    "note": "Raw page. Answer to Robby. Quote verbatim; the false-dichotomy limb is supported by 'how do you separate action from description? Is this perhaps another False Dichotomy?'. Claim compresses 'powerfully, irresistibly forward' to 'powerfully forward' — a drop, not a distortion.",
    "fromFile": "verdicts-leguin-i240-254.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 248,
@@ -4480,7 +4578,8 @@
    "trueWording": "I'm sick of historicals and pastiches set in the historical past that are utterly, arrogantly tone-deaf to the morals, the manners, the ideas, the opportunities, and above all the language of the period.",
    "note": "Raw page. Answer to Nilanjana, in parentheses. Quote verbatim; every listed limb present (claim omits 'the opportunities', an omission only).",
    "fromFile": "verdicts-leguin-i240-254.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 250,
@@ -4526,7 +4625,8 @@
    "trueWording": "Specific features or mannerisms (even absurdly specific ones!) can help fix a minor character in the reader's mind when they turn up again.",
    "note": "Raw page. Answer to Tim. Quote verbatim including 'when they turn up again'; both the 'specific features or mannerisms' and 'minor character' limbs are the page's own words.",
    "fromFile": "verdicts-leguin-i240-254.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 252,
@@ -4549,7 +4649,8 @@
    "trueWording": "All I can recommend is to read/speak your dialogue aloud. Not whispering, not muttering, OUT LOUD.",
    "note": "Raw page. Answer to Jacob, introduced as the answer to 'Convincing Dialogue'. Quote verbatim; the 'out loud rather than muttered' limb is the page's 'Not whispering, not muttering, OUT LOUD.'",
    "fromFile": "verdicts-leguin-i240-254.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 253,
@@ -4572,7 +4673,8 @@
    "trueWording": "And since this does affect the sound and rhythm of a sentence – and since names are magic in Earthsea – here are some guidelines.",
    "note": "Raw page, 'How do you pronounce the names and words in your books?' section, followed by 'In my invented names and words, usually:' and the letter-by-letter guidelines. Quote verbatim. The page gives a second co-reason ('names are magic in Earthsea'); the claim asserts only the sound-and-rhythm one, which is stated, so no limb is unsupported.",
    "fromFile": "verdicts-leguin-i240-254.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 254,
@@ -4641,7 +4743,8 @@
    "trueWording": "Pendragon Press 'in 1973 published it in a limited run of 776 copies'",
    "note": "Raw HTML of ursulakleguin.com/from-elfland-to-poughkeepsie fetched (HTTP 200). Page: 'the text of a speech Ursula gave at the Second Annual Science Fiction Writers' Workshop in 1972 ... It was the first book published by Pendragon Press (Portland), who in 1973 published it in a limited run of 776 copies.' All three limbs (1972 workshop, Pendragon 1973, 776 copies) supported; page also notes 1975 (1006) and 1978 (2000) reprints.",
    "fromFile": "verdicts-leguin-i255-269.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 257,
@@ -4710,7 +4813,8 @@
    "trueWording": "'There's got to be white space around the word, silence around the voice.'",
    "note": "Same raw djvu text. The quoted fragment appears verbatim inside that sentence; the claim's 'there has to be' renders the book's 'There's got to be' — same proposition, chapter 10.",
    "fromFile": "verdicts-leguin-i255-269.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 260,
@@ -4871,7 +4975,8 @@
    "trueWording": "'It's a myth that short-sentence prose is \"more like the way we speak.\"'",
    "note": "Same raw djvu text. Quoted fragment verbatim; the completing phrase 'more like the way we speak' appears on the page in the book's own quotation marks. Chapter 3, after the 'See Spot. See Jane.' example.",
    "fromFile": "verdicts-leguin-i255-269.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 267,
@@ -4894,7 +4999,8 @@
    "trueWording": "'In a narrative, the chief duty of a sentence is to lead to the next sentence.'",
    "note": "Same raw djvu text. Verbatim, and it is the opening sentence of chapter 3 ('3. sentence length and complex syntax'), so the 'in a narrative' limb is supported.",
    "fromFile": "verdicts-leguin-i255-269.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 269,
@@ -4917,7 +5023,8 @@
    "trueWording": "'ADJECTIVES AND ADVERBS ARE RICH AND good and nourishing ... cause obesity in prose only when used lazily or overused.'",
    "note": "Same raw djvu text. Both limbs supported. The sidebar's OCR is split across a page break: the opening runs 'ADJECTIVES AND ADVERBS ARE RICH AND good and nourishing. They ... add color, life, immediacy. They cause obesity in prose only when' (line 1695) while its tail 'used lazily or overused.' was OCR'd out of order to line 1661, just under the '5. adjectives and adverbs' chapter heading. Reassembled, the sidebar reads exactly as the claim states. Quote field matches word for word including the drop-cap capitalization.",
    "fromFile": "verdicts-leguin-i255-269.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 270,
@@ -5101,7 +5208,8 @@
    "trueWording": "The world of the story must be created and explained in the story",
    "note": "Verbatim in ch.9; the 'no way of knowing' limb is supported two sentences earlier ('information ... that the reader has no way of knowing unless told').",
    "fromFile": "verdicts-leguin-i270-284.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 278,
@@ -5285,7 +5393,8 @@
    "trueWording": "Of course, you have to leave out an enormous amount, too, and the leaving-out is half the art.",
    "note": "Public Books interview fetched raw (curl, browser UA, HTTP 200). Section I 'Names Come First with Me'. Full sentence on page: 'With an invented world, though, you have to describe more than a realist does. Of course, you have to leave out an enormous amount, too, and the leaving-out is half the art.' Quote string is character-exact; both limbs (invented world; leaving-out is half the art) supported.",
    "fromFile": "verdicts-leguin-i285-299.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 286,
@@ -5308,7 +5417,8 @@
    "trueWording": "With an invented world, though, you have to describe more than a realist does.",
    "note": "Same raw page, section I. Quote character-exact within that sentence; the claim adds nothing beyond it.",
    "fromFile": "verdicts-leguin-i285-299.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 287,
@@ -5331,7 +5441,8 @@
    "trueWording": "You know where you are, you know what the weather is, from what direction the wind's blowing.",
    "note": "Same raw page, section I. Context: 'Tolkien is really such a master there. You know where you are, you know what the weather is, from what direction the wind's blowing. He tells you what he can about it - but the rest of it's up to you.' Praise of Tolkien, the weather limb and the rest-is-up-to-the-reader limb all present.",
    "fromFile": "verdicts-leguin-i285-299.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 288,
@@ -5354,7 +5465,8 @@
    "trueWording": "Names come first with me. I can't write about a character if he or she doesn't have a name. The right name.",
    "note": "Same raw page, section I, in reply to Plotz's question about island names. Quote character-exact; the 'right name' limb is the next sentence.",
    "fromFile": "verdicts-leguin-i285-299.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 289,
@@ -5400,7 +5512,8 @@
    "trueWording": "'The Matter of Seggri' is a compendium of reports on the society of a world called Seggri written by various observers over a period of many years.",
    "note": "ursulakleguin.com foreword fetched raw (HTTP 200). Next sentence: 'These documents are from the archives of the Historians of Hain, who are to reports as squirrels are to nuts.' Every limb - various observers, many years, archives of the Historians of Hain - is on the page; quote character-exact.",
    "fromFile": "verdicts-leguin-i285-299.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 291,
@@ -5423,7 +5536,8 @@
    "trueWording": "Its Time Line is like something the kitten pulled out of the knitting basket, and its history consists largely of gaps.",
    "note": "Same raw foreword; verified it sits in body paragraph 2 by parsing the page's <p> elements, matching the cited page locator. Nuance recorded, not a deduction: on the page she reports that others call it 'the Hainish Universe' while she calls it the Ekumen - the referent of 'its' is that same invented universe, so the claim's wording is accurate.",
    "fromFile": "verdicts-leguin-i285-299.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 292,
@@ -5446,7 +5560,8 @@
    "trueWording": "a book of stories linked by place, characters, theme, and movement, so as to form, not a novel, but a whole",
    "note": "Same raw foreword, paragraph on 'Old Music and the Slave Women' / Four Ways to Forgiveness. Later in the same paragraph: 'It is a real form, and deserves a real name. Maybe we could call it a story suite? I think I will.' Both the real-form limb and the proposed name are present; quote character-exact.",
    "fromFile": "verdicts-leguin-i285-299.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 293,
@@ -5469,7 +5584,8 @@
    "trueWording": "the meaning of the story might lie in the language itself, in the movement of the story as read, in an inexpressible sense of discovery, rather than a tidy bit of advice",
    "note": "ursulakleguin.com 'A Message about Messages' fetched raw (HTTP 200); page footer confirms 'first published by CBC Magazine, 2005'. Quote character-exact. Framing nuance: Le Guin puts it as a rhetorical question to reviewers ('Does it ever occur to such reviewers that...'), which asserts the position rather than merely asking; 'may lie' in the claim tracks 'might lie' on the page, and the 'rather than a tidy bit of advice' limb is verbatim.",
    "fromFile": "verdicts-leguin-i285-299.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 294,
@@ -5492,7 +5608,8 @@
    "trueWording": "A fantastic setting requires vivid and specific description; while characters may lose touch with their reality, the storyteller can't.",
    "note": "ursulakleguin.com blog 95 fetched raw (HTTP 200), signed '- UKL 2 March 2015'. The sentence sits in body paragraph 3, matching the cited locator. Quote character-exact; both limbs are the two halves of one sentence.",
    "fromFile": "verdicts-leguin-i285-299.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 295,
@@ -5515,7 +5632,8 @@
    "trueWording": "A toneless, inexact language is incapable of creating landscape, meaningful relationship, or credible event.",
    "note": "Same raw blog 95 paragraph 3. Quote character-exact and the claim reproduces the whole sentence, including all three of landscape, meaningful relationship, credible event.",
    "fromFile": "verdicts-leguin-i285-299.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 296,
@@ -5561,7 +5679,8 @@
    "trueWording": "But so generic a landscape and such vague, elusive perceptions must be brought to life by the language of the telling. The whole thing is made out of words, after all.",
    "note": "Same raw blog 95 paragraph 3. Quote character-exact; the 'made out of words' limb is the immediately following sentence.",
    "fromFile": "verdicts-leguin-i285-299.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 298,
@@ -5584,7 +5703,8 @@
    "trueWording": "how is it that Axl never, ever, not once, forgets to address his wife as “princess”? I came to wish very much that he would.",
    "note": "Same raw blog 95 paragraph 3, in her criticism of Ishiguro's The Buried Giant. Quote character-exact including the curly quotation marks around princess; the named character is Axl, the wife Beatrice, and the wish limb is the next sentence.",
    "fromFile": "verdicts-leguin-i285-299.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 299,
@@ -5607,7 +5727,8 @@
    "trueWording": "it is outstanding... for the unlabored imaginative authority and completeness of its setting, and for the fine, vivid English it's written in",
    "note": "ursulakleguin.com blog 52 fetched raw (HTTP 200); page headed '52. Some Recent Fantasies', signed '- UKL 21 May 2012'. Both limbs of the claim are the two halves of that clause about Goblin Secrets by William Alexander; quote character-exact.",
    "fromFile": "verdicts-leguin-i285-299.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 300,
@@ -5676,7 +5797,8 @@
    "trueWording": "Homer truly doesn't take sides, and so he permits the story to be tragic",
    "note": "ursulakleguin.com/blog/31 fetched live (HTTP 200). Exact: 'But Homer truly doesn't take sides, and so he permits the story to be tragic.' Both limbs supported. Minor: the sentence sits in the sixth body paragraph, not the seventh as the page field says; that is a locator, not a claim limb.",
    "fromFile": "verdicts-leguin-i300-314.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 303,
@@ -5699,7 +5821,8 @@
    "trueWording": "His impartiality is far from dispassionate; the story is a torrent of passionate actions",
    "note": "Same page: 'His impartiality is far from dispassionate; the story is a torrent of passionate actions, generous, despicable, magnificent, trivial. But it is unprejudiced.' All three limbs (far from dispassionate, torrent of passionate actions, unprejudiced) present verbatim.",
    "fromFile": "verdicts-leguin-i300-314.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 304,
@@ -5722,7 +5845,8 @@
    "trueWording": "I had put clues into the book, without knowing it, that led me on into Ged's life",
    "note": "ursulakleguin.com/interview-karabatak fetched live (HTTP 200); header confirms 'Karabatak Magazine, 9th edition, summer issue, 2013'. Answer 6 (as the page field claims): 'I had no idea, when I wrote A Wizard of Earthsea... But I had put clues into the book, without knowing it, that led me on into Ged's life.' Quote exact, the Earthsea referent explicit.",
    "fromFile": "verdicts-leguin-i300-314.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 305,
@@ -5789,7 +5913,8 @@
    "trueWording": "It does read, to a great extent, like a writer deciding to include all her notes",
    "note": "Same page: 'It does read, to a great extent, like a writer deciding to include all her notes.' Quote exact; the 'to a great extent' hedge that the claim carries is the page's own.",
    "fromFile": "verdicts-leguin-i300-314.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 308,
@@ -5833,7 +5958,8 @@
    "trueWording": "'Pandora', a stand in for the author or the future anthropologist who is recording all this data",
    "note": "Same page: 'There are also snippets from the point of view of \"Pandora\", a stand in for the author or the future anthropologist who is recording all this data.' Quote exact; 'voice' in the claim renders the page's 'point of view'/'stand in', and 'recording the material' renders 'recording all this data'.",
    "fromFile": "verdicts-leguin-i300-314.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 311,
@@ -5877,7 +6003,8 @@
    "trueWording": "includes third person essays about their culture: how they measure time, how they draw maps",
    "note": "Same page: 'Le Guin supplies interviews with Kesh archivists/historians and includes third person essays about their culture: how they measure time, how they draw maps, what is their relationship with \"the City of Mind\"...' Quote exact; 'third-person essays', 'Kesh culture', and both named topics all present.",
    "fromFile": "verdicts-leguin-i300-314.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 313,
@@ -5899,7 +6026,8 @@
    "trueWording": "It is fiction without being storytelling, though it contains many stories within itself",
    "note": "Same page, closing stretch: 'The novel is a speculative, post-anthropocene text. It is fiction without being storytelling, though it contains many stories within itself.' Quote exact; the 'It' is Always Coming Home, named throughout the review.",
    "fromFile": "verdicts-leguin-i300-314.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 314,
@@ -5921,7 +6049,8 @@
    "trueWording": "Tolkien's world has virtually no ethnographic detail, while Le Guin's has no history",
    "note": "agreenmanreview.com fetched live (HTTP 200); byline Cat Eldridge, publisher of Green Man Review. 'This is the antithesis of Tolkien's Lord of the Rings. Tolkien's world has virtually no ethnographic detail, while Le Guin's has no history.' Quote exact (curly apostrophe matches); the contrast limb is the same sentence's second half.",
    "fromFile": "verdicts-leguin-i300-314.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 315,
@@ -5943,7 +6072,8 @@
    "trueWording": "the “back of the book” contains additional information about the Kesh in a traditional ethnographic form",
    "note": "Raw page fetched (200, live URL, browser UA). Quote is verbatim in the review body; byline 'Cat Eldridge' present on page. Every limb (back of book / further info on Kesh / traditional ethnographic form) supported.",
    "fromFile": "verdicts-leguin-i315-329.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 316,
@@ -5965,7 +6095,8 @@
    "trueWording": "it can be — and definitely should be — read in very small pieces",
    "note": "Quote verbatim. 'rather than continuously' is supported on the same page: 'It took me months to read Always Coming Home because I read a wee bit at a time in the evenings.'",
    "fromFile": "verdicts-leguin-i315-329.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 317,
@@ -5987,7 +6118,8 @@
    "trueWording": "Always Coming Home is not a single story but a collection of texts",
    "note": "Raw page fetched (200). Quote verbatim in review body; Bonnell byline and New Maps Winter 2021 / 16 Feb 2023 ed. note both present on page.",
    "fromFile": "verdicts-leguin-i315-329.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 318,
@@ -6075,7 +6207,8 @@
    "trueWording": "In the beginning Le Guin asks the reader's forbearance to “bear with some unfamiliar terms [until it] will all be made clear at last”",
    "note": "Quote verbatim. 'opens by' = 'In the beginning'; 'until they come clear' = the bracketed continuation plus 'it does come clear in a most satisfying way'.",
    "fromFile": "verdicts-leguin-i315-329.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 322,
@@ -6097,7 +6230,8 @@
    "trueWording": "the narrator is what we might call an ‘uncertain narrator’ (as distinct from an unreliable narrator)",
    "note": "Raw page fetched (200). Quote verbatim in the Analysis section; byline 'By Dr Oliver Tearle (Loughborough University)' and date 2021-02-20 confirmed on page.",
    "fromFile": "verdicts-leguin-i315-329.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 323,
@@ -6119,7 +6253,8 @@
    "trueWording": "Although the narrator confesses to lacking detailed knowledge of the laws and rules of Omelas",
    "note": "Quote verbatim, in the plot-summary section as the claim states; page continues 'they suspect there are relatively few.'",
    "fromFile": "verdicts-leguin-i315-329.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 324,
@@ -6185,7 +6320,8 @@
    "trueWording": "The breathless, long lines of the first paragraph mimic the festival parade the words describe",
    "note": "Raw page fetched (200). Quote verbatim; page states 'This analysis is contributed by Sarah Wyman, professor of English at SUNY-New Paltz.'",
    "fromFile": "verdicts-leguin-i315-329.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 327,
@@ -6229,7 +6365,8 @@
    "trueWording": "How is one to tell about joy? How to describe the citizens of Omelas?",
    "note": "Quote verbatim, quoted by Wyman under 'A jarring wake-up call': the narrator 'makes two moves that jerk us out of traditional fairy tale mode' and 'problematizes her own tale-telling goal', supporting the 'interrupting the description' limb.",
    "fromFile": "verdicts-leguin-i315-329.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 329,
@@ -6251,7 +6388,8 @@
    "trueWording": "The narrative voice's move to divest herself of authority and responsibility for defining Omelas",
    "note": "Quote verbatim; page continues 'further implicates the reader in completing the construction of this anti-utopia.'",
    "fromFile": "verdicts-leguin-i315-329.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 330,
@@ -6274,7 +6412,8 @@
    "trueWording": "She's quite the opposite and without giving exact details, allows the reader to interpret and create their version of a utopia.",
    "note": "Raw page fetched (cwi.pressbooks.pub 301s to idaho.pressbooks.pub, HTTP 200). Chapter is the Reader Response essay 'The Ones Who Choose to Stay' by Kelsey Jennings on 'The Ones Who Walk Away from Omelas'; quote appears word for word in paragraph 2. The 'student' limb is confirmed on the book's own home page: 'This book collects student essays on short stories written for English 211, Literary Analysis' (Liza Long, ed., 2021).",
    "fromFile": "verdicts-leguin-i330-344.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 332,
@@ -6296,7 +6435,8 @@
    "trueWording": "The mythic and fundamental in A Wizard of Earthsea gives way to the realistic and mundane in this novel.",
    "note": "Raw page fetched. Quote exact; 'this novel' is The Tombs of Atuan (the section heading immediately above). Ramsay's noun pair is 'the mythic and fundamental'; the claim's 'mythic register' is a gloss that does not change the sense. She adds: 'This makes The Tombs of Atuan the first narrowing of scale within the Earthsea books.'",
    "fromFile": "verdicts-leguin-i330-344.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 333,
@@ -6318,7 +6458,8 @@
    "trueWording": "This is the final sharpening of scale across the first four books of Earthsea.",
    "note": "Raw page fetched. Quote exact, opening the paragraph in the 'Tehanu (1990)' section; the essay's title is 'Earthsea: A Sharpening of Scale' and it treats exactly the first four books.",
    "fromFile": "verdicts-leguin-i330-344.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 335,
@@ -6340,7 +6481,8 @@
    "trueWording": "...hear the parallel construction of the two rhyming sets of steel and wheel and of tractor and reactor...",
    "note": "Raw page fetched (HTTP 200). Byline 'Matt Bell', datePublished 2021-08-24. The sentence under discussion is named as from 'her 1966 debut Rocannon's World': 'A hundred worlds had been trained and armed, a thousand more were being schooled in the uses of steel and wheel and tractor and reactor.' Quote exact.",
    "fromFile": "verdicts-leguin-i330-344.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 336,
@@ -6362,7 +6504,8 @@
    "trueWording": "See the two progressions expanding its scale as it goes, its scope expanding from hundred to thousands of worlds...",
    "note": "Raw page fetched. Quote exact, in the same sentence-level close reading of the Rocannon's World line as index 335 (same paragraph, clause immediately preceding the 'rhyming sets' clause).",
    "fromFile": "verdicts-leguin-i330-344.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 337,
@@ -6384,7 +6527,8 @@
    "trueWording": "I thrilled at how she turned thought problems into intricate cultures, working from the big picture down to the minutiae of local life...",
    "note": "Raw page fetched. Quote exact in the worldbuilding paragraph.",
    "fromFile": "verdicts-leguin-i330-344.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 338,
@@ -6406,7 +6550,8 @@
    "trueWording": "...filling books with pleasurable details like the 'common table implement' on Gethen 'with which you crack the ice that has formed on your drink between drafts', a necessity for drinking hot beer on a frozen planet.",
    "note": "Raw page fetched. Quote exact; Bell's own word is 'pleasurable details', and the implement is placed 'on Gethen' (Bell does not name The Left Hand of Darkness at this point, but the claim does not assert that he does).",
    "fromFile": "verdicts-leguin-i330-344.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 339,
@@ -6428,7 +6573,8 @@
    "trueWording": "All those miles and days had been across a houseless, speechless desolation: rock, ice, sky, and silence: nothing else, for eighty-one days, except each other.",
    "note": "Raw page fetched. Quote exact. Bell introduces it as the close of Genly Ai and Estraven's Gobrin ice-sheet crossing in The Left Hand of Darkness — 'it ended with this unforgettable sentence' — in the essay's opening anecdote. 'Four bare nouns' is the claim's own characterisation, but it is directly observable in the quoted line (rock, ice, sky, silence).",
    "fromFile": "verdicts-leguin-i330-344.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 340,
@@ -6450,7 +6596,8 @@
    "trueWording": "She can say more in twenty words than almost anyone I can think of.",
    "note": "Raw page fetched with the comment thread intact (5 comments). The commenter is Rachel Holmen ('Rachel E. Holmen'), 5 years ago, who also calls Le Guin's writing 'cheesecake... incredibly rich and dense'. Quote exact as a prefix of her sentence.",
    "fromFile": "verdicts-leguin-i330-344.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 341,
@@ -6473,7 +6620,8 @@
    "trueWording": "The prose was lovely - very archaic and flowed in a unique style.",
    "note": "Raw page fetched (HTTP 200). Post #1 of thread 583221, SilentRoamer, Aug 1 2022, about A Wizard of Earthsea ('I read A Wizard of Earthsea recently'). Quote exact.",
    "fromFile": "verdicts-leguin-i330-344.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 342,
@@ -6495,7 +6643,8 @@
    "trueWording": "The Left Hand of Darkness -- very different from the Earthsea books in style and tone, I'd have said...",
    "note": "Raw page fetched. Post #4, Aug 1 2022, by 'The Judge', whose user title is 'Truth. Order. Moderation.' and who is flagged 'Staff member' — the moderator limb holds. Quote exact.",
    "fromFile": "verdicts-leguin-i330-344.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 344,
@@ -6517,7 +6666,8 @@
    "trueWording": "It is also a style that is spot-on for describing unfamiliar places and cultures.",
    "note": "Raw page fetched (HTTP 200). rob-tomlinson.com, 'A good read' section, page 'The Dispossessed' (page title 'The Dispossessed | Rob Tomlinson', written in the first person on his own site). Quote exact, in the second paragraph as the claim states.",
    "fromFile": "verdicts-leguin-i330-344.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 345,
@@ -6627,7 +6777,8 @@
    "trueWording": "The opening moves from a grander, larger view toward a smaller, more intimate one",
    "note": "Exact; the sentence continues ': Sparrowhawk to Ged to Duny.' All limbs supported.",
    "fromFile": "verdicts-leguin-i345-359.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 351,
@@ -6671,7 +6822,8 @@
    "trueWording": "This entire scene is structured by the oppositions between boy and man, village and world",
    "note": "Exact. The page's list continues 'present and future', and adds 'the opposition between poetry and prose'; the claim quotes a subset, which is not a contradiction.",
    "fromFile": "verdicts-leguin-i345-359.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 353,
@@ -6825,7 +6977,8 @@
    "trueWording": "From the very first lines, it has the feel of an old legend, told and retold around hearth fires",
    "note": "Exact through 'hearth' and beyond ('hearth fires for generations'). It immediately follows the 358 sentence, matching the cited 'second point' location.",
    "fromFile": "verdicts-leguin-i345-359.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 360,
@@ -6891,7 +7044,8 @@
    "trueWording": "along the way we learn about ... its systems of trade and government",
    "note": "Page: 'and along the way we learn about Earthsea's afterlife, its systems of trade and government, how its magic functions, and its religions'. The 'along the way' limb is the page's own phrasing.",
    "fromFile": "verdicts-leguin-i360-374.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 363,
@@ -6913,7 +7067,8 @@
    "trueWording": "She doles it out so skillfully that the flow of the narrative is never interrupted",
    "note": "Page: preceding sentence is 'The detail in that large map is nothing to the detail that must be living in Le Guin's head,' so 'it' is world detail; 'is never interrupted' completes the sentence, supporting every limb.",
    "fromFile": "verdicts-leguin-i360-374.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 364,
@@ -7001,7 +7156,8 @@
    "trueWording": "I still love the spare, beautiful prose and the inevitable, mythic feel of the narrative",
    "note": "Second, distinct commenter Kim Aippersbach — so the 'another commenter' limb is confirmed, not assumed; 'of the narrative' closes the page's sentence.",
    "fromFile": "verdicts-leguin-i360-374.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 368,
@@ -7023,7 +7179,8 @@
    "trueWording": "to centre the story not on the grand and powerful, but the small, the powerless, the ordinary",
    "note": "Wet Broken Things, 'Book review - Tehanu', posted 25th May 2025. The sentence closes the first body paragraph, matching the claim's 'opening paragraphs' locator; 'the ordinary' supports the claim's 'small and ordinary'.",
    "fromFile": "verdicts-leguin-i360-374.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 369,
@@ -7111,7 +7268,8 @@
    "trueWording": "The natural laws and the mythology of the Earthsea is more hinted on than explained",
    "note": "Same page, next sentence. Every limb of the claim (natural laws, mythology, Earthsea, hinted rather than explained) is on the page.",
    "fromFile": "verdicts-leguin-i360-374.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 373,
@@ -7155,7 +7313,8 @@
    "trueWording": "detailed and plausible from its flora to its weather to the dialects and ceremonies of its inhabitants",
    "note": "Live theparisreview.org returned Cloudflare 403 even with a browser UA; verdict formed on the RAW Wayback capture https://web.archive.org/web/20191121050122id_/... (raw original bytes, not a summarizer). The capture carries the byline 'Le Guin's Subversive Imagination / By Michael Chabon / November 20, 2019'. The preceding paragraph names A Wizard of Earthsea and the next sentence says 'In Earthsea, the wielders of linguistic power were known as wizards', so the 'Earthsea world' limb holds even though the quoted sentence says 'an entire planet'.",
    "fromFile": "verdicts-leguin-i360-374.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 375,
@@ -7265,7 +7424,8 @@
    "trueWording": "her genius - that brilliant amalgam of vivid prose, straight talk and revolutionary engagement",
    "note": "Same Wayback raw capture of the Granta memoir. Sentence: 'I watched from afar as Le Guin's star rose and her genius - that brilliant amalgam of vivid prose, straight talk and revolutionary engagement - was recognized by larger and larger circles.' Quote verbatim; 'genius' and 'amalgam' both on the page.",
    "fromFile": "verdicts-leguin-i375-383.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 381,
@@ -7287,7 +7447,8 @@
    "trueWording": "very sensitive to the notion that our ideologies and values are embedded in the language and metaphors we use",
    "note": "Live fivebooks.com returned 403 to curl (browser UA); reached the RAW page via Wayback id_ capture 20210508144857. 'Interview by Cal Flyn / May 7, 2021'; speaker is Sherryl Vint. The full-form quote sits in the body of the section on The Word for World is Forest (just before book 3, The Left Hand of Darkness): '...because she's very sensitive to the notion that our ideologies and values are embedded in the language and metaphors we use.' (A pull-quote higher on the page gives the shorter 'embedded in the language we use'.) Every limb supported.",
    "fromFile": "verdicts-leguin-i375-383.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 382,
@@ -7309,7 +7470,8 @@
    "trueWording": "'He is done with doing.' ... no matter how lovely that sentence is",
    "note": "Live reactormag.com fetched raw (HTTP 200, curl); comments are server-rendered in the HTML. Commenter 'Msb' (6 years ago) on 'Introducing the Ursula K. Le Guin Reread' (Sean Guynes, 22 Jan 2020) writes: 'Le Guin was writing masterworks well after the 1970s. \"He is done with doing.\" Except he wasn't, of course, no matter how lovely that sentence is.' Quote verbatim; the line is five words (He/is/done/with/doing) and is Le Guin's (Earthsea); 'lovely' is the commenter's own word, though applied concessively.",
    "fromFile": "verdicts-leguin-i375-383.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 383,

@@ -51,7 +51,8 @@
    "note": "Quote is verbatim on the raw PW page, but the review assigns that image to the BRIEF DRAMATIC sections and explicitly contrasts them with summary: 'they only last a few pages before a return to brisk summary.' The page does not say the summary voice lands such images; it says the opposite relation.",
    "unsupportedLimb": "that the SUMMARY voice lands these concrete images - the review credits them to brief dramatic sections set against 'brisk summary'",
    "fromFile": "verdicts-martin-i345-359.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 361,
@@ -141,7 +142,8 @@
    "unsupportedLimb": "that this is the chronicler's HABIT - the page carries exactly one such line (a single entry in its Quotes section) and says nothing about a recurring pattern of closing unknowables with rhetorical questions",
    "note": "Same AWOIAF capture. The quote and its attribution to Gyldayn writing about Tessarion are verbatim on the page (Quotes section, cited to Fire & Blood, 'The Dying of the Dragons - Rhaenyra Overthrown'). The generalisation to a habit is an inference the page does not evidence, so the claim is graded PARTIAL rather than verified.",
    "fromFile": "verdicts-martin-i390-404.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 435,
@@ -209,7 +211,8 @@
    "note": "Quote verbatim, and the dioramas of mostly medieval miniatures are on the page. But the page never says this taste carries into the fiction: the only bridge it draws from the closets to the novels is population - 'Like his closets, Martin's head is crammed with people' - leading to Garcia's thousand-name census, not to pageantry or colour in the prose.",
    "unsupportedLimb": "that the pageantry-and-colour taste carries into the fiction",
    "fromFile": "verdicts-martin-i450-464.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 490,
@@ -294,7 +297,8 @@
    "unsupportedLimb": "'mostly exposition' - the page says 'the usual blend of exposition, sometimes seemingly endless, and the usual swords-and-sorcery dialogue', i.e. a blend of exposition AND dialogue, never that the book is mostly exposition",
    "note": "Kirkus raw page carries the quote word for word: 'it's vintage Martin: It's a little cynical, plenty dark, with not many laughs and, truth be told, not much action.' The cynical / dark / few laughs / not much action limbs are all supported verbatim, and 'book five' matches ('The fifth installment'). Only the 'mostly exposition' limb overstates the page, which credits exposition as one half of a blend (albeit 'sometimes seemingly endless').",
    "fromFile": "verdicts-martin-i525-539.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 544,
@@ -328,7 +332,8 @@
    "note": "Quote verbatim on the page: 'Martin has said in interviews (or at least in one convention interview I sat in on) that, like a filmmaker, he writes chapters out of order, and then sequences them later.' The page's simile is 'filmmaker', not 'film editor'; it also attributes the practice to Martin's own interview remarks rather than stating it in the reviewer's own voice.",
    "unsupportedLimb": "'like a film editor' - the page says 'like a filmmaker'",
    "fromFile": "verdicts-martin-i540-554.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 611,
@@ -352,7 +357,8 @@
    "note": "Wayback raw capture (25 mars 2020 publication date confirmed on the page); speaker confirmed as Linda. The quotation is verbatim and 'our suggestion from early on' is on the page, but the page does not say the concept was not Martin's -- it says the suggestion was theirs *inspired in part* by George's own idea of a fallible in-world guidebook narrator. The exclusive negation is the claim's addition.",
    "unsupportedLimb": "not Martin's -- the page qualifies it as 'inspired in part of George that has this idea'",
    "fromFile": "verdicts-martin-i600-614.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 620,
@@ -400,7 +406,8 @@
    "note": "Wayback raw capture (see 665). The quoted clause is verbatim. But the release draws no contrast with a Martin-supplied vocabulary: the alternative it names is other natural languages, and Peterson's own quoted words point the other way, at material Martin did supply in print - 'I wanted to remain as faithful as possible to the extant material in George R.R. Martin's series... Though there isn't a lot of data, there is evidence of a dominant word order'. The 'rather than' framing is the claimant's inference, not the page's.",
    "unsupportedLimb": "rather than on a vocabulary Martin had supplied",
    "fromFile": "verdicts-martin-i660-674.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 667,
@@ -495,7 +502,8 @@
    "note": "Raw HTML of .../snippets.html fetched live (HTTP 200), section 'Block Characterization'. The quoted list is verbatim and the five features are right, but the page says only that Martin 'has an algorithm' and names the features — it never claims a fixed sequence, and the block characterisations it then reproduces run in different orders (Tywin: age, physique, hair, eyes, no clothes; Ser Waymar: age, eyes, physique, clothes). The ordering limb is the claimant's addition.",
    "unsupportedLimb": "that the five features are hit in a fixed order",
    "fromFile": "verdicts-martin-i822-841.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 859,

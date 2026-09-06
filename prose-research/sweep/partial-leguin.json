@@ -33,7 +33,8 @@
    "note": "p.5 quotation is verbatim and the three diagnostic items are exactly on the page. The essay names the King James Bible only as a formative influence on Dunsany's OWN prose ('one of the profoundest formative influences on Dunsany's prose'; imitators are out of reach unless 'brought up from the cradle on the grand sonorities of Genesis and Ecclesiastes'); it never attributes the imitators' 'And' sentences to biblical cadence, and never frames them as costume. That reading is a defensible inference, not the page's statement.",
    "unsupportedLimb": "biblical cadence worn as costume -- the essay ties the KJV to Dunsany himself, never says imitators wear biblical cadence as costume",
    "fromFile": "verdicts-leguin-i0-14.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 17,
@@ -87,7 +88,8 @@
    "note": "Raw wikitext: 'Slusser described the Earthsea cycle as a \"work of high style and imagination\",{{sfn|Slusser|1976|pp=32-35}} and the original trilogy of books a product of \"genuine epic vision\".{{sfn|Cadden|2005|p=86}}' The quoted limb is verbatim and is Slusser 1976. The second limb is footnoted to Cadden 2005 and its object is the original trilogy, not the cycle.",
    "unsupportedLimb": "'the Earthsea cycle ... with genuine epic vision' per Slusser 1976 - the page applies 'genuine epic vision' to the original trilogy and footnotes it to Cadden 2005",
    "fromFile": "verdicts-leguin-i15-29.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 28,
@@ -123,7 +125,8 @@
    "note": "Live en.wikipedia.org/wiki/The_Tombs_of_Atuan (rendered page + Special:Export wikitext). Quote verbatim: 'making the narrator seem sympathetic to the characters' (cited Cadden 2005 p.92). Both other limbs verbatim too: 'In The Tombs of Atuan, much of the story is told from Tenar's perspective; for instance, the reader sees Tenar's fear of the undertomb through her own eyes, creating an empathy for her' (Cadden 2005 p.94). Minor scope point, not a limb of the claim: the page attributes free indirect discourse to the Earthsea trilogy generally, not to Tombs specifically.",
    "unsupportedLimb": "the free-indirect-discourse limb as a fact about The Tombs of Atuan — the verifier's note says the page attributes free indirect discourse to the Earthsea trilogy generally, not to Tombs specifically.",
    "fromFile": "verdicts-leguin-regrade-r4.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 42,
@@ -159,7 +162,8 @@
    "note": "Same page: 'A grave joyfulness pervades the trilogy, which is perhaps more maturely thoughtful (while remaining exciting) than the comparable Narnia series of C S Lewis.' Quote verbatim and every limb present. FLAG for downstream use: the claim drops SFE's hedge 'perhaps' - the source qualifies the Narnia comparison, so restore 'perhaps' if the sentence is quoted as SFE's position.",
    "unsupportedLimb": "the unhedged Narnia comparison — the verifier FLAGGED that the claim drops SFE's 'perhaps'; the source qualifies the comparison ('perhaps more maturely thoughtful').",
    "fromFile": "verdicts-leguin-regrade-r4.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 46,
@@ -231,7 +235,8 @@
    "note": "Raw PDF, journal p.16: 'Like Yeats, Le Guin does seem to move toward simplicity, or at least austerity, in both the rhythm and content of her later work'; and 'Tehanu, on the other hand, starts in farm-life, descending at times to the edge of poverty, and the austerity of a few goats, and a patch of bean vines (251-52), is where it ends.' Fidelity note: the source hedges with 'does seem to'; the claim asserts flatly.",
    "unsupportedLimb": "the flat 'Le Guin moves toward simplicity or austerity' — the note records that the source hedges with 'does seem to move'.",
    "fromFile": "verdicts-leguin-regrade-r4.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 57,
@@ -249,7 +254,8 @@
    "note": "Raw PDF, journal p.16: 'At the same time, Tehanu can show the skill of experience making less do more, rather than more do more, as in the previous quote.' The gloss 'the late style compresses' is carried by the adjacent Yeats/austerity paragraph. Fidelity note: source says 'can show'.",
    "unsupportedLimb": "the flat 'Tehanu shows' — the note records that the source says Tehanu 'can show' the skill of experience.",
    "fromFile": "verdicts-leguin-regrade-r4.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 61,
@@ -393,7 +399,8 @@
    "note": "Crossref API queried live (200); top hit score 77.3 is the exact record: Laura B. Comoletti & Michael D. C. Drout, Children's Literature 29(1): 113-141, DOI 10.1353/chl.0.0786, issued 2001, type journal-article, publisher Project MUSE. Graded SUBSTANCE not VERBATIM because the claim's inline phrase 'doing things with words' is a paraphrase of the title's 'How They Do Things with Words', and the claim carries no quote field. 'Speech-act power crossed with gender' is a fair reading of 'Language, Power, Gender'; 'peer-reviewed' is not a Crossref field but is supported in substance by the journal-article record in a scholarly journal.",
    "unsupportedLimb": "'peer-reviewed' — the note states this is not a Crossref field; it is inferred from the journal-article record, not attested by the evidence fetched.",
    "fromFile": "verdicts-leguin-regrade-r4.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 96,
@@ -411,7 +418,8 @@
    "unsupportedLimb": "'(Barry & Prescott 1992)' as what Weyant's bibliography shows - the page lists that rhythm article under 'Bary, Nora' alone: the surname is misspelled and co-author Mary Prescott is not named there (Crossref, checked at index 95, confirms Barry & Prescott is the true attribution, but this page does not show it)",
    "note": "curtisweyant.com fetched live (200, 253 KB HTML -> 30 KB text; list runs A-W in both the scholarly and the blog sections, so it is complete, not lazy-loaded). Confirmed on the page: Adams, Rebecca, 'Narrative Voice and Unimaginability of the Utopian Feminine...', Utopian Studies 2.1-2 (1991): 35-47; Jose, Jim, 'Reflections on the Politics of Le Guin's Narrative Shifts', SFS 18.2 (1991): 180-97; Castleman, Samantha, 'Narrative Organization as Cultural Training in the Left Hand of Darkness', Femspec 19.2 (2020): 10-24; Pegg, Barry, 'Down to Earth: Terrain, Territory, and the Language of Realism...', Michigan Academician 27 (1995): 481-92 ('Language of Realism' verbatim). The negative limb also holds: case-insensitive search of the whole page returns 0 hits for 'styl' (so no style/stylistic/stylometry), 0 for 'corpus', 0 for 'quantitative', 0 for 'diction', 0 for 'prose'.",
    "fromFile": "verdicts-leguin-i90-104.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 104,
@@ -435,7 +443,8 @@
    "note": "Same PDF, page 8. Supplied quote verbatim. 'Unstriking' = 'is not striking'. Minor gloss, not a demotion: the page's 'everything is direct, concrete, and simple' reads on Tolkien's writing in that sentence's sweep rather than strictly on items 'in' the vocabulary.",
    "unsupportedLimb": "'everything in it [the vocabulary] is direct, concrete and simple' — the note records that the page's 'everything is direct, concrete, and simple' reads on Tolkien's writing in that sentence's sweep, not strictly on items in the vocabulary.",
    "fromFile": "verdicts-leguin-regrade-r4.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 109,
@@ -459,7 +468,8 @@
    "note": "Exact on p.4, directly after the third dialogue sample, as cited. Wording caveat: the page says \"whether the speaker or the author KNOWS it or not\", not \"intends\"; unintended is entailed by unknown, so the limb holds, but the source's axis is knowledge, not intention.",
    "unsupportedLimb": "'whether or not the writer intends it' — the note records that the page says 'whether the speaker or the author knows it or not'; the source's axis is knowledge, not intention (the claim's wording is entailed, not stated).",
    "fromFile": "verdicts-leguin-regrade-r4.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 119,
@@ -579,7 +589,8 @@
    "note": "Verbatim, immediately following the 'far too small' sentence. Both limbs supported: the Austen/textbook near-match (tables give Austen 33, Craig 32) and the inference about quality. Nuance, not a defect: the page hedges as 'a good indication that merely counting stresses is not going to give us any SOLID indications' where the claim says 'shows ... cannot indicate' -- the hedge is carried inside the quoted words themselves.",
    "unsupportedLimb": "'shows stress-counting alone cannot indicate the quality of prose' — the note records that the page hedges as 'a good indication that merely counting stresses is not going to give us any SOLID indications'.",
    "fromFile": "verdicts-leguin-regrade-r4.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 170,
@@ -603,7 +614,8 @@
    "note": "Verbatim, fourth bullet of the 'Various interesting factoids emerge' list. The claim's 'of the eight samples' is supported: the tables enumerate exactly eight samples ('Three Bears', Woolf, Tolkien, Twain, Stein, Darwin, Austen, Craig). Source-internal tension worth flagging but not a claim defect, since the claim reports what Le Guin's counts are said to show and the page asserts it as a factoid emerging from those counts: her per-passage counts give Darwin 1 sentence in 77 words against Austen 1 sentence in 72, so within the 100-syllable window Darwin's single sentence is the longer; both samples are cut mid-sentence at the dagger.",
    "unsupportedLimb": "'Austen the longest' as something Le Guin's counts show — the verifier flagged that her own per-passage counts give Darwin 1 sentence in 77 words against Austen's 1 in 72, so within the 100-syllable window Darwin's single sentence is the longer; the page asserts the factoid, the counts do not support it.",
    "fromFile": "verdicts-leguin-regrade-r4.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 196,
@@ -627,7 +639,8 @@
    "note": "Live page (HTTP 200). Quote exact in the opening note. Blogger (William May, 'Would That I Might') is working Steering the Craft chapter five, Exercise Five 'Chastity'; his own commentary confirms the exercise forbids adjectives and adverbs ('the forbidden words', 'functions of not having adjectives and adverbs'). Blogger is a reader working the exercises, not a workshop leader, but the claim's report-limb holds.",
    "unsupportedLimb": "'a workshop blogger' — the note records that the source's author (William May) is a reader working the Steering the Craft exercises, not a workshop leader.",
    "fromFile": "verdicts-leguin-regrade-r4.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 227,
@@ -675,7 +688,8 @@
    "note": "Quote exact. 'Carries over into writing prose' is supported by the preceding sentence ('the poet’s ear … will carry over into writing prose') and the elliptical 'And so may the poet’s desire…'. Two nuances recorded, neither a downgrade: Le Guin hedges with 'may', and the answer is a single joint reply under the heading 'POETRY AND FICTION — Two questions' to Joseph and Deepthi, not to Deepthi alone.",
    "unsupportedLimb": "'carries over into writing prose' stated flatly — the note records that Le Guin hedges with 'may' ('And so may the poet's desire…').",
    "fromFile": "verdicts-leguin-regrade-r4.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 249,
@@ -699,7 +713,8 @@
    "note": "Raw page, interlineated reply to T.A. 'avoid unpronounceable names' and the because-clause are verbatim, but her stated only 'rule' is a two-part one and the claim reports only the first half.",
    "unsupportedLimb": "that her only rule is the pronounceability rule — the page's single 'rule' has a second, equally stated half: avoid sweet swoony names ending in -a",
    "fromFile": "verdicts-leguin-i240-254.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 268,
@@ -723,7 +738,8 @@
    "note": "Same raw djvu text. Every limb of the claim is supported verbatim on the page: 'A sentence isn't working as a narrative sentence if its order is so unexpected, or its adjectives and adverbs so striking, or its similes* or metaphors* so dazzling, that it stops the reader, even to say \"Ooh!\"'. CAVEAT ON THE ATTACHED QUOTE: the claim's quote field, 'the proper beauty and power of prose', is also verbatim on the page but belongs to a different, later sentence ('though every sentence should move with grace, the proper beauty and power of prose is in the work as a whole') and does not by itself evidence the claim. Graded VERIFIED_VERBATIM because both rubric conditions hold (quote word-for-word on page; every limb supported), but the citation should be re-pointed to the sentence given in trueWording. Located in the chapter-2 'Conjunctivitis' passage on killing your darlings, not chapter 3 as the page field states.",
    "unsupportedLimb": "the attached quote field — the note states that 'the proper beauty and power of prose' belongs to a different, later sentence and 'does not by itself evidence the claim'; the citation must be re-pointed to the trueWording sentence (and the passage is in chapter 2, not chapter 3 as the page field says).",
    "fromFile": "verdicts-leguin-regrade-r4.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 309,
@@ -746,7 +762,8 @@
    "note": "Same page: 'she literally does -- in the final section, some 100 pages, called \"The Back of the Book\".' Quote exact; ~100 pages, the title, and the end-of-book position all supported. Flagging the wording: Horton calls it 'the final section', never 'appendix' -- the claim's word is a paraphrase of a section of notes at the book's end, not an added fact. Locator drift: it is the fourth body paragraph, not the second.",
    "unsupportedLimb": "'appendix' — the verifier flagged the wording: Horton calls it 'the final section' and never 'appendix'.",
    "fromFile": "verdicts-leguin-regrade-r4.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 331,
@@ -769,7 +786,8 @@
    "note": "Raw page fetched (HTTP 200, full essay text present). Quote exact in the 'The Tombs of Atuan (1970)' section. 'Administrative' is the claim's gloss, not Ramsay's word, but it summarises exactly the two items she lists (guard postings, punishment of unbelievers) and matches her own framing of them as 'the realistic and mundane'.",
    "unsupportedLimb": "'the conflict is administrative' attributed to Ramsay — the note states 'administrative' is the claim's gloss, not Ramsay's word (her framing is 'the realistic and mundane').",
    "fromFile": "verdicts-leguin-regrade-r4.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 334,
@@ -792,7 +810,8 @@
    "note": "Raw page fetched. The full phrase appears word for word in the 'The Farthest Shore (1972)' section. In the HTML only 'large, soft rain of April' is wrapped in <em>, which is Ramsay's consistent convention for wording lifted from Le Guin (cf. 'girlish lad', 'golden seal', 'tired and stupid'); 'sullen and silent' sits in roman type, so the quoted-from-Le Guin span is narrower than the claim implies, though the sentence as a whole is Ramsay describing the villagers exactly this way.",
    "unsupportedLimb": "'Ramsay quotes Le Guin describing the villagers as sullen and silent in the large, soft rain of April' — the note records that only 'large, soft rain of April' is marked (in <em>) as wording lifted from Le Guin; 'sullen and silent' sits in roman type as Ramsay's own, so the quoted-from-Le Guin span is narrower than the claim implies.",
    "fromFile": "verdicts-leguin-regrade-r4.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 343,
@@ -815,7 +834,8 @@
    "note": "Raw page fetched (Public Books, datePublished 2024-02-21, Elizabeth Ferry in conversation with John Plotz). The quotation is on the page word for word and is Plotz speaking. But its grammatical subject is young adults (readers), not the books: he says the Earthsea books' commissioning as the first YA fantasy series 'rings true... in that way that young adults can tip two different registers at once'. The two-registered quality of the books themselves is supported nearby only in other words ('the dual-aspect reality that she creates. That she's telling stories for adults and for children as well'; 'the two-sidedness of what it's like to read the books'), so repeating the quoted phrase as a statement about the books misplaces its subject.",
    "unsupportedLimb": "the books (rather than young adults) as what tips two different registers at once",
    "fromFile": "verdicts-leguin-i330-344.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 349,

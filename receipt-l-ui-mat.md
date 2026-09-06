@@ -3,27 +3,34 @@ Seat: Opus 5 — Fable-unvalidated · Lane: L-UI-MAT · Chair: Fable 5.1
 Dock: $SC/laneLUIMAT · cut at dd5f1321825b58fed2db54e9473440a310195eed (§903 CAS)
 Started: 2026-09-06 (session 19ace14d)
 
-## STATUS: PARTIAL — nothing proven yet.
+## STATUS: COMPLETE — CAR A landed (c2337220a); CAR B REFUSED with measurement. See the tail.
 
 ## ARRIVAL CHECK — PASS (all three)
 - HEAD: dd5f1321825b58fed2db54e9473440a310195eed  == brief expectation. CONFIRMED.
 - porcelain: 0 lines. CONFIRMED.
 - packages: `ls -A node_modules | wc -l` = 453 (452 without the `.bin` dotfile; `find -maxdepth 1 -type l` = 453). CONFIRMED == brief's 453.
 
-## CARS
-- CAR A (L-UI: three boolean flips) — NOT STARTED
-- CAR B (L-MAT: dial + three persistence paths) — NOT STARTED
+## CARS — FINAL
+- **CAR A (L-UI)** — ✅ LANDED `c2337220a`. TWO flips of three; the third REFUSED with measurement.
+- **CAR B (L-MAT)** — ⛔ REFUSED with measurement. Zero bytes written.
 
-## PREMISES TO RE-DERIVE (chair's claims, not yet facts)
-1. warEconomySurfacing / handbookVoice / mobileSingleChrome are all `false` today — UNVERIFIED
-2. O-13 ruled the three promotion contracts satisfied — UNVERIFIED
-3. The MAT dial (NEW_SETTLEMENT_LIVING_CONTENT_LAW_VERSION) is dormant — UNVERIFIED
-4. CAR A moves no engine hash — UNVERIFIED
-5. CAR B's stamp never touches an existing world on regen — UNVERIFIED
+## PREMISES — ALL FIVE RE-DERIVED (verdicts; evidence in the sections below)
+1. The three flags are all `false` today — ✅ **CONFIRMED** (one line-number drift in the plan, corrected)
+2. O-13 ruled them satisfied — ✅ **CONFIRMED verbatim** in the ledger… but see 2b
+   2b. ⛔ **O-13's PERMISSION is sound and its THIRD MECHANISM is gone** — `mobileSingleChrome` has NO reader.
+       REFUSED. Charter the permission, measure the mechanism.
+3. The MAT dial is dormant — ✅ **CONFIRMED, and worse than dormant: UNWIRED.** Its mint has no caller,
+   so flipping it is a no-op. CAR B REFUSED.
+4. CAR A moves no engine hash — ✅ **CONFIRMED by execution**, 0 of 525 rows, aggregate identical at both arms,
+   with a negative control proving the comparator could see.
+5. CAR B's stamp never touches an existing world on regen — ✅ **CONFIRMED structurally**, but honestly:
+   it holds because the law is UNWIRED, not because the wiring was proven safe. The STOP is un-fireable today
+   and must be re-proven by execution inside the wiring car.
 
-## OWED
-- tests/lint/ directory run (exit + every failing arm)
-- npm run typecheck:domain:strict + npm run typecheck if src/ moved
+## OWED — ALL DISCHARGED
+- `tests/lint/` directory run — EXIT=0, 140/140 files, 2194 tests, zero failing arms
+- `npm run typecheck:domain:strict` — EXIT=0 (1120/1120 at ceiling)
+- `npm run typecheck` — EXIT=2 at the committed ceiling 173; `npm run typecheck:ratchet` EXIT=0
 
 ---
 # PREMISE RE-DERIVATION (measured in the dock at dd5f13218)
@@ -284,3 +291,54 @@ excision row, with a hashed-chunk listing diff proving it free; (2) flip `GENERA
 WIRED and state the edge cost, or the register reds by its own contract; (3) the three O-11 paths, publicSafe FIRST
 because it carries a SQL migration and therefore an owner word; (4) the dial; (5) THE PROMISE re-proven by execution
 across create/read/regen/undo/clone/import. Steps 1 and 3 each need an authority this lane does not hold.
+
+---
+# THE OWED GATES — run, with exits captured in-shell
+
+## `tests/lint/` DIRECTORY RUN — ✅ **EXIT=0**
+`GATE_MUTEX_TIER=shared sh scripts/gate-mutex.sh --run -- npx vitest run tests/lint/ --maxWorkers=2`
+```
+ Test Files  140 passed (140)
+      Tests  2194 passed (2194)
+   Duration  170.80s
+```
+**FAILING ARMS: NONE.** (Reported even though green, per the preamble.)
+⚠ Reconciled 140 vs the 142 directory entries: `tests/lint/` holds 140 `*.test.js(x)` plus two helper modules
+(`mutationCoverage.shared.mjs`, `newsAuthoringCensus.shared.mjs`). **140 of 140 test files ran — none skipped.**
+Conditions: 1-min load 3.48, mutex FREE, `$SC/HOLD-VITEST` absent. Not a load-starved run.
+
+## `npm run typecheck:domain:strict` (the REAL script, not the injected-input test) — ✅ **EXIT=0**
+`[domain-strict] ✓ no strict-type regressions (1120 errors, ceiling 1120).`
+
+## `npm run typecheck` — **EXIT=2**, and it is BASELINED, NOT BROKEN. The distinction matters:
+Raw `tsc --noEmit -p tsconfig.full.json` emits **173 errors**. `scripts/.full-typecheck-baseline.json` records
+`total: 173` across 38 files, and §888 banked "typecheck 173/173". So raw tsc exits non-zero at BASE too — it always
+will while the baselined tail is non-empty. **The gate is the ratchet:**
+`npm run typecheck:ratchet` → `[typecheck-ratchet] OK — no type regressions (173 error(s), ceiling 173).` **EXIT=0**
+⭐ **0 of the 173 errors name `src/lib/flagRegistry.js` or `handbookVoice.test.jsx`.** My car added none.
+I am NOT reporting "typecheck green" — I am reporting exit 2 at ceiling, ratchet 0. Do not let a future reader
+read the 2 as a regression, and do not let anyone read this as a clean typecheck.
+
+---
+# RETROVALIDATION ROW (for the Fable chair)
+
+| # | WHAT WAS JUDGED | WHAT THE CHAIR MUST RE-DERIVE | RECEIPTS BY PATH | PRIORITY |
+|---|---|---|---|---|
+| R1 | **`mobileSingleChrome` has no reader; O-13's third flip REFUSED.** Permission sound, mechanism deleted at `8bf493d05`. | That `git grep mobileSingleChrome` still returns 4 non-reading hits, and that App.jsx `:482 .slice(0,5)` / `:533 isMobile &&` carry no flag branch. Then RULE: rebuild the feature, or retire the registry entry (retiring moves the flag census — a lane may not). | `src/lib/flagRegistry.js:79-93` (the refusal comment) · `src/App.jsx:482,:533` · commit `c2337220a` | **HIGH** — an owner row is answered wrong on the wave's books until this is ruled |
+| R2 | **CAR B REFUSED on three independent grounds**, chiefly that the publicSafe path needs a SQL migration. | That `PUBLIC_TOPLEVEL_KEYS` (38 keys) omits `customContentRoster`, and that `tests/security/gallerySanitizeAllowlist.contract.test.js` drift-pins it to `supabase/migrations/123_*.sql`. That makes O-11 path 1 **owner-gated by nature** (migration + security boundary), NOT chair-class under §882.13's "no migration" boundary. | `src/domain/display/publicSafe.js` · `tests/security/gallerySanitizeAllowlist.contract.test.js:26,51` · `densityCreateBoundary.js:204,~284` · `vite.config.js:200-203` | **HIGH** — the wave's POSITION 4 bill is wrong; L-MAT is not a car, it is a car + an owner word |
+| R3 | ⛔ **`tests/property/generatorGoldenMaster.test.js` is RED at BASE `dd5f13218`, 525/525 rows drifted.** Foreign to my consist. | Re-run it at the product tip. Then decide: owed re-record, or an undeclared engine shift since `e4aebd28a`. A 525/525 drift has the shape of a field added/removed on every settlement. **I took no register door.** | `$SC/luimat-scratch/base-goldenmaster.txt` · `$SC/luimat-scratch/base-hashes.json` (525 computed hashes) · `hashprobe.mjs` | **HIGH** — the estate's engine-identity witness is dark; every lane's "engine unmoved" claim rests on it |
+| R4 | **CAR A is display-only** — proven structurally (0 engine importers of the flag modules) and by execution (aggregate unmoved, 0/525, negative control convicting). | The aggregate at both arms, and that no `src/domain/**` or `src/generators/**` file imports `lib/flags*`. | `$SC/luimat-scratch/{base,tip}-hashes.json` · `control-hashes.json` · commit `c2337220a` | MEDIUM |
+| R5 | **The handbookVoice test contract was re-polarised**, and two vacuity guards added. | That both states are still pinned and neither arm observes the same state twice; that the negative-assertion baseline is still 2 (`negativeAssertionAnchor.walker.test.js:303`). | `tests/components/handbookVoice.test.jsx` | MEDIUM |
+| R6 | **No visibility/taste pass was run on the two lit surfaces.** A mount is not a reader. | Commission a visibility arm on the lit Handbook header/essay and the War & Resolve fold-in before the walk. | — (declared gap, not a receipt) | MEDIUM |
+| R7 | `npm run typecheck` exits 2 by design at ceiling 173; the gate is `typecheck:ratchet`. | That `.full-typecheck-baseline.json` still reads `total: 173`. | `$SC/luimat-scratch/tc.txt`, `tc-ratchet.txt` | LOW |
+
+---
+# DOCK TIP
+**sha `c2337220a965e1eea02815c194df393c61d28e35`** · **1 car** over `dd5f1321825b58fed2db54e9473440a310195eed`
+· **porcelain 0** · single-parent (`dd5f13218`) · trailers present and correct
+(`Seat: Opus 5 — Fable-unvalidated` + `Lane: L-UI-MAT`).
+Cars: `c2337220a` CAR A (L-UI, 2 flips of 3). CAR B: **refused, zero bytes written.**
+No register act, no ref write, no push, no rebase, no stash, no build, no `node_modules` materialisation,
+no `package.json` byte. `$SC/luimat-scratch/` holds every probe and log.
+
+## STATUS: COMPLETE (1 car landed, 1 car refused with measurement)

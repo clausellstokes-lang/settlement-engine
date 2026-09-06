@@ -82,7 +82,8 @@
    "note": "Quote present word for word. The claim's word 'modern' is an addition: the page never calls Saruman's speech modern (the word occurs only in the blog title and course blurb).",
    "unsupportedLimb": "'modern' - the page never calls Saruman's speech modern",
    "fromFile": "verdicts-tolkien-regrade-r4.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 11,
@@ -99,7 +100,8 @@
    "note": "COMPLETENESS CRITIC: the page does not link the slower-delivery sentence to the Tiller letter — PARTIAL until Letter 193 is fetched. || [verifier note] Page: 'Tolkien even went to far as to consider the tone and cadence with which the Rohirrim would speak C.S.; it being their second language, he imagined it would be much slower and more deliberate.' A literal newline in the HTML between 'more' and 'deliberate' renders as a space. Caveat: the page does not link this sentence to the Tiller letter; the Tiller letter is quoted in a separate paragraph about 'linguistic differentiation... in diction, idiom'.",
    "unsupportedLimb": "the Tiller-letter attribution - the page does not link the slower-delivery sentence to that letter (unverified until Letter 193 is fetched)",
    "fromFile": "verdicts-tolkien-regrade-r4.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 12,
@@ -337,7 +339,8 @@
    "note": "Verbatim and correctly attributed: \"In the Tolkien scholar Richard C. West's view, Tolkien's Red Book is a pastiche of scholarship. It functions, he writes, as what scholars would call a spurious source, but the authority it imparts is by an appeal not to the old and familiar, but to the modern mystique of scholarly research.\" The found-manuscript conceit and the copies/redactions/translations are on the page. Minor: 'Note on the Shire Records' appears on this page only as a citation locator, not as discussed text (it is discussed substantively on the Impression-of-depth page).",
    "unsupportedLimb": "the 'Note on the Shire Records' - it appears on this page only as a citation locator, not as discussed text",
    "fromFile": "verdicts-tolkien-regrade-r4.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 82,
@@ -475,7 +478,8 @@
    "note": "Quotation verbatim, and the lesson is on the page: 'Our grave danger as writers, then, is that we will do something to wrench the reader's attention away from the story and back to the text... we need to keep their minds on the story as much as possible, which generally means keeping it off the text.' One nuance: Simon does not counsel plain invisibility - he explicitly rejects flat prose as 'too flat to engage the emotions' and argues for a broad emotional range, so 'never call attention to themselves' should be read as 'never wrench attention from story to text'.",
    "unsupportedLimb": "'never call attention to themselves' - Simon explicitly rejects flat prose and argues for a broad emotional range",
    "fromFile": "verdicts-tolkien-regrade-r4.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 109,
@@ -835,7 +839,8 @@
    "note": "Quote verbatim, and the four factors all cite ref [5] = Drout, Hitotsubashi & Scavera 2014, 'Tolkien's Creation of the Impression of Depth', Tolkien Studies 11(1):167-211. Minor conflation in the claim: 'as if by different hands' attaches to the multiple STYLES (factor 4); the inconsistent accounts are factor 3, 'the multiple accounts, containing gaps and inconsistencies, as if it were a real body of historical documents'. Factor 2 is 'the apparently casual and incomplete mentions of this background'.",
    "unsupportedLimb": "the conflation - 'as if by different hands' attaches to the multiple styles (factor 4); the inconsistent accounts are factor 3",
    "fromFile": "verdicts-tolkien-regrade-r4.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 175,
@@ -1033,7 +1038,8 @@
    "note": "Exact string present on uv.es, including the source's own 'it's' misspelling. Finnish is likewise supported: \"But a much rarer, very potent influence on myself has been Finnish.\" One nuance: the mountain-names link is the interviewer's formulation — \"the music of Welsh comes through in the names you've chosen for mountains and for places in general\" — which Tolkien affirms with \"Very much.\" So the mountain-name specificity is endorsed rather than volunteered by Tolkien.",
    "unsupportedLimb": "the mountain-name specificity, which is the interviewer's formulation, endorsed by Tolkien rather than volunteered",
    "fromFile": "verdicts-tolkien-regrade-r4.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 206,
@@ -1051,7 +1057,8 @@
    "note": "Exact string present: \"If you're going to have a complicated story you must work to a map otherwise you can never make a map of it afterwards.\" FLAG on the rationale: the claim's 'or it cannot be kept consistent' is a paraphrase; the source's stated reason is that you could never draw the map afterwards. Adjacent context (moons and sunsets worked out to 1942 almanac) supports the consistency reading, so the gloss is defensible, but it is not the source's wording.",
    "unsupportedLimb": "the rationale 'or it cannot be kept consistent' - the source's stated reason is that the map could never be drawn afterwards",
    "fromFile": "verdicts-tolkien-regrade-r4.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 208,
@@ -1519,7 +1526,8 @@
    "note": "Article: POV \"most often - 85% of the time - one of the four Hobbit protagonists\"; \"when Tolkien does use a single character's viewpoint, he does it to show their state of mind\"; omniscient archaic style \"highly vivid\"/\"highly mimetic\". Nuance: the 85% qualifies the character-POV portion of the narrative half, not all narrative time.",
    "unsupportedLimb": "the scope of 85%, which qualifies the character-POV portion of the narrative half, not all narrative time",
    "fromFile": "verdicts-tolkien-regrade-r4.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 332,
@@ -1537,7 +1545,8 @@
    "note": "Four lexical sets named exactly: landscape description; position or direction; warfare and the struggle between good and evil; other descriptive verbs and adjectives. Nuance: paper hedges \"partly due to\"; claim drops the hedge.",
    "unsupportedLimb": "the dropped hedge - the paper says the archaicity is 'partly due to' the three causes",
    "fromFile": "verdicts-tolkien-regrade-r4.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 336,
@@ -1555,7 +1564,8 @@
    "note": "Divergence: page says \"Thorin's style\", not \"Thorin's high style\" - \"high\" is the summarizer's addition. \"of course\"/\"as you probably know\" appear in the earlier chapter summary, said to imply \"there is more to the story than what he has written\".",
    "unsupportedLimb": "'high' - the page says 'Thorin's style', not 'Thorin's high style'",
    "fromFile": "verdicts-tolkien-regrade-r4.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 338,
@@ -1591,7 +1601,8 @@
    "note": "Supported in detail: \"When Finrod says THOU, THEE, he was to lean in and create intimacy / When he said YOU, he was to create distance and respect\"; \"Even here, Finrod's word-choice is absolutely deliberate\". Caveat the claim omits: Alden quotes Christopher Tolkien that \"my father was in two minds as to which forms Finrod should employ\", and counts six uses of \"you\" that \"seem to be in error\".",
    "unsupportedLimb": "the deliberateness, which the claim omits qualifying - Alden quotes Christopher Tolkien that 'my father was in two minds' and counts six uses of 'you' that 'seem to be in error'",
    "fromFile": "verdicts-tolkien-regrade-r4.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 349,
@@ -1681,7 +1692,8 @@
    "note": "Quote verbatim. Applied to the Rohirrim song: \"But it is of a mode that would have been easily recognized... for it is a well-known poetic form\". Greatness-past limb verbatim: \"It is a lament for the greatness of things now past, and perhaps, irrecoverable\". NOT SUPPORTED: raw text has zero occurrences of \"erotema\", \"rhetorical\" or even \"question\" - only the incipit gloss \"Where is...?\". The feature label \"ubi sunt as erotema\" is mis-sourced to this page; the erotema wording belongs to index 362's page.",
    "unsupportedLimb": "the erotema label - 'erotema', 'rhetorical' and 'question' have zero occurrences on this page; the wording belongs to claim #362's page",
    "fromFile": "verdicts-tolkien-regrade-r4.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 364,
@@ -1771,7 +1783,8 @@
    "note": "Retrieved from the Internet Archive full text (djvu.txt) of the item, pp. 90-91. Quote verbatim; 'ends by remarking' supports the closing position, and 'the whole story that Tolkien tells to account for the names of Thame and Worminghall is based on nothing, is mere fiction' supports the mock-learned derivations of both names. Shippey nowhere quotes or reports the in-tale attribution phrase.",
    "unsupportedLimb": "the attribution of the derivations to 'the learned in such matters' - that phrase appears nowhere in Shippey's text",
    "fromFile": "verdicts-tolkien-i373-387.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 383,
@@ -1843,7 +1856,8 @@
    "trueWording": "For this larger, more academic audience, he added many proper names, jokes, and allusions",
    "note": "Raw page fetched (200, live). Quote 'the family jester' is verbatim: 'In the second version of the story, the narrator is \"the family jester\"'. Supported: narrated by 'Daddy' in the first version; 'enlarging it by some fifty per cent' in January 1938 for the Lovelace Society, 'an undergraduate essay club at Oxford's Worcester College'. NOT supported: any narratorial shift to scholarly tone at that 1938 stage — the page says the 1938 additions were 'proper names, jokes, and allusions', and places the apparatus later: 'Tolkien again revised the text, and added a mock foreword' before the 1949 publication. Second minor slip: 'Daddy' narrates the first written version, not the oral original.",
    "fromFile": "verdicts-tolkien-i388-402.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 393,
@@ -1861,7 +1875,8 @@
    "note": "Raw wikitext fetched via Special:Export (200). Quote verbatim in section 'Multiple elements'; the historiography limb is verbatim too. Citation flag: the article attributes this to Kullmann 2009 (Nordic Journal of English Studies 8.2), pp. 46-47 — 'Siepmann' does not occur anywhere in the article, so the claim's source field 'Kullmann & Siepmann 2021' is wrong even though the page numbers match. Also the article writes 'Notes on Shire Records'; Tolkien's title is 'Note on the Shire Records'.",
    "unsupportedLimb": "the source field 'Kullmann & Siepmann 2021' - 'Siepmann' does not occur anywhere in the article, which attributes the passage to Kullmann 2009",
    "fromFile": "verdicts-tolkien-regrade-r4.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 400,
@@ -1879,7 +1894,8 @@
    "trueWording": "Why not say 'tobacco', since the plant is 'a variety probably of Nicotiana'? Because the word would sound wrong",
    "note": "Same raw book text, ch. 3 'The Bourgeois Burglar', around the p. 63-64 running heads. Quote 'a variety probably of Nicotiana' verbatim, and the pipe-weed-not-tobacco reason is verbatim ('Because the word would sound wrong ... It is an import from some unknown Caribbean language via Spanish'). The only defective limb is the botanical label: a binomial needs genus plus species, and neither Shippey nor the Prologue supplies one.",
    "fromFile": "verdicts-tolkien-i388-402.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 408,
@@ -2326,7 +2342,8 @@
    "note": "Shippey p.161, verbatim: '...the triple repetition of \"feel ... feel ... smell\", or the sudden change to less plain language in Galadriel's speech, with its elvish place-name'. The triple repetition is Treebeard's ('I feel it in the water, I feel it in the earth, and I smell it in the air'); Galadriel's reply carries the place-name Tasarinan and 'Farewell!'. Shippey lists the two as separate candidate irritants rather than explicitly setting one 'against' the other, but both facts are on the page.",
    "unsupportedLimb": "the 'against' relation - Shippey lists the two as separate candidate irritants rather than setting one against the other",
    "fromFile": "verdicts-tolkien-regrade-r4.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 488,
@@ -2343,7 +2360,8 @@
    "note": "Raw page reached only through a real browser (curl and WebFetch both hit Springer's JS 'Client Challenge'; no Wayback capture exists; Crossref and OpenAlex carry no abstract). Note 11 is exactly as above, so magnificence-granted and literature-denied are both supported and the p.218 cite matches the Works Cited entry (Raffel, 'The Lord of the Rings as Literature', 1968, 218-246). Two defects: the quoted words are not contiguous on the page - the page reads 'it is not [...] literature' with a bracketed elision, not 'is not literature' - and the note gives no reason at all for Raffel's verdict.",
    "unsupportedLimb": "'on grounds including style' - note 11 states Raffel's verdict without giving any grounds, stylistic or otherwise",
    "fromFile": "verdicts-tolkien-i478-492.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 490,
@@ -2360,7 +2378,8 @@
    "note": "Quote verbatim in the PDF's opening sentence, and the against-Wilson framing is supported by the 'ranging from scathing criticisms... to praise of...' construction. But the page dates Kirk 1977, not 1971, in both the in-text citation and the reference list: 'Kirk, E. (1977). I Would Rather Have Written in Elvish: Language, Fiction, and The Lord of the Rings. Novel 5, 5-18. Reprinted in M. Spilka (Ed.) (1977) Towards a Poetics of Fiction'. The year 1971 appears nowhere in the paper.",
    "unsupportedLimb": "'Kirk's 1971 essay' - the page dates the essay 1977 in both citation and reference list, and never prints 1971",
    "fromFile": "verdicts-tolkien-i478-492.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 525,
@@ -2445,7 +2464,8 @@
    "note": "Walker: 'Style isn't on our scholarly radar. Our best readers these days are mostly sociological critics... we haven't noticed much about his writing style, though that mattered a lot to Tolkien himself.' Quote exact and every limb supported; the page says 'style'/'writing style' generally, so 'sentence-level' is the claim's narrowing, neither stated nor denied there.",
    "unsupportedLimb": "'sentence-level', the claim's narrowing - the page says 'style' / 'writing style' generally, neither stating nor denying it",
    "fromFile": "verdicts-tolkien-regrade-r4.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 537,
@@ -2513,7 +2533,8 @@
    "unsupportedLimb": "words must sound like what they mean",
    "note": "PDF downloaded from gwern (HTTP 200, 957,151 B, 26 pp — the 'A Secret Vice' text as printed in The Monsters and the Critics) and text-extracted with pdfminer. Quote verbatim: 'The instinct for “linguistic invention” - the fitting of notion to oral symbol, and pleasure in contemplating the new relation established, is rational, and not perverted.' The essay locates the pleasure in the contemplated RELATION between sound and notion — 'it is the contemplation of the relation between sound and notion which is a main source of pleasure', 'a private sense of fitness', 'word-form in relation to meaning (so-called phonetic fitness)' — an invented, personal fitness, not mimicry. Nowhere does the page prescribe that words must sound like what they mean; that limb is the claim's own gloss.",
    "fromFile": "verdicts-tolkien-i538-552.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 554,
@@ -2598,7 +2619,8 @@
    "unsupportedLimb": "'of good taste' — the Tolkien Gateway page says only 'Intelligent children, he was glad to say'; the qualifier is absent from this page",
    "note": "tolkiengateway.net returns 403 behind a Cloudflare 'Just a moment...' challenge to curl with both Chrome and Safari UAs plus full navigation headers; recovered via Wayback raw capture https://web.archive.org/web/20260104191641id_/https://tolkiengateway.net/wiki/Letter_215 (200). Quote is verbatim there. The 'of good taste' limb IS in the primary text (Letters PDF, Letter 215: 'Intelligent children of good taste (of which there seem quite a number)') but not on the cited page, so the claim is sound and the citation is short of it.",
    "fromFile": "verdicts-tolkien-i568-582.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 576,
@@ -2615,7 +2637,8 @@
    "note": "Letters PDF at Letter 165 To the Houghton Mifflin Co. (PDF p.232). Quote 'in style or manner, I regret it' verbatim, and 'So do the children' immediately follows; the editorial bracket '[The Hobbit]' fixes the referent. Location caveat: the sentence sits in Carpenter's headnote to Letter 165, quoting Harvey Breit's 5 June 1955 New York Times column drawn from Tolkien's own answers, not in the body of the 30 June 1955 letter — which opens 'Please do not blame me for what Breit made of my letter!'",
    "unsupportedLimb": "the location - the sentence sits in Carpenter's headnote quoting Harvey Breit's 5 June 1955 column, not in the body of Letter 165",
    "fromFile": "verdicts-tolkien-regrade-r4.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 603,
@@ -2666,7 +2689,8 @@
    "trueWording": "\"the more learned and able among the Hobbits\" were \"quick to note and adopt the style of those whom they met\"",
    "note": "Raw wikitext fetched via Special:Export (no summarizer). The quotation is verbatim and the Appendix F attribution is carried by the article's footnote (Tolkien 1955, Appendix F, 'The Languages and Peoples of the Third Age'). But the article nowhere contains 'book-language' (or 'book language' / 'bookish'): every occurrence of 'book' in the article was inspected and none supports that limb. Appendix F itself does say the learned hobbits acquired the true 'book-language', but that is not on the cited page.",
    "fromFile": "verdicts-tolkien-i613-627.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 623,
@@ -2870,7 +2894,8 @@
    "note": "Route: Google Books search-inside on the cited volume; the sentence straddles the page break and was reconstructed from overlapping snippets returned for p.75 and p.76, matching the claim's cited span pp.75-76. Quote 'conspicuous by their absence from The Lord of the Rings' is word for word on p.76. Both limbs hold: the short copular sentences are the immediately preceding item ('copular be and a subject complement. Merely a hollow formality. / She was not an optimistic woman. / Not the usual sort. / Hardly a submissive voice!'), presented in section 3.2 - which p.72 identifies as the section that 'deals with dispreferred constructions' - and the 'by the same token' carries the absence over to the modal-would uses. Strictly, the words 'conspicuous by their absence' are attached in the text to the would-uses, and the copular sentences' absence is stated in the surrounding dispreferred-constructions framing.",
    "unsupportedLimb": "the attachment of 'conspicuous by their absence', which in the text applies to the modal-would uses, not to the short copular sentences",
    "fromFile": "verdicts-tolkien-regrade-r4.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 676,
@@ -2904,7 +2929,8 @@
    "note": "p.48 raw snippet: 'the first half of the book is generally less densely descriptive, we find fairly tight clusters of high descriptivity in the second part, culminating in three outstanding peaks in Book Four, Chapters II (The Passing of the Marshes) and VII (Journey to the Crossroads) and Book Six, Chapter III (Mount Doom)'. The first-half limb and the two Book Four chapters are verbatim right, and the quote 'three outstanding peaks in Book Four' is a verbatim substring - but it is severed mid-sentence so that it reads as though all three peaks were in Book Four; the claim silently drops the third peak.",
    "unsupportedLimb": "that the three peaks fall in Book Four - the third is Book Six, Chapter III (Mount Doom)",
    "fromFile": "verdicts-tolkien-i673-687.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 688,
@@ -2921,7 +2947,8 @@
    "note": "Raw PDF fetched live (200, 4pp, pdfminer text). Quote 'three simple lexical causes' verbatim. All three causes verbatim: 'overuse' of words borrowed from nineteenth-century fiction, avoidance of words associated with the modern world, dense use of new coinages, unusual grammatical patterns, rare or obsolescent words. yonder, journey (v) and topmost all appear in the listed 19th-century key words. Corpora verbatim: 19th-century corpus 'about 30 million words', post-war fiction 'around 160 million running words', 'a reference corpus of 94 million words' (heterogeneous/mixed). Only softening: the page says 'partly due to', the claim says 'comes from'.",
    "unsupportedLimb": "the dropped hedge - the page says 'partly due to' where the claim says 'comes from'",
    "fromFile": "verdicts-tolkien-regrade-r4.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 695,
@@ -2938,7 +2965,8 @@
    "note": "Same raw Dialnet PDF. Quote 'the narrator disappears behind the characters' verbatim. Limbs verbatim: 'It begins with a chapter that has a conversational and uninhibited tone'; 'some of the asides that also characterize the narrative voice of The Hobbit'; 'The narrator is sometimes unreliable: \"A day or two later a rumour (probably started by the knowledgeable Sam)\" (I, 47)'. Page reads 'more neutral'; claim says 'neutral'.",
    "unsupportedLimb": "the dropped comparative - the page reads 'more neutral', the claim 'neutral'",
    "fromFile": "verdicts-tolkien-regrade-r4.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 701,
@@ -2955,7 +2983,8 @@
    "trueWording": "found manuscript conceit ... he was the book's editor and translator (cited to Turner 2011a, Brljak 2010)",
    "note": "Raw Wikipedia HTML fetched (200) and de-tagged; citation numbers resolved against the article's own Secondary reference list, in which Thomson 1967 is note 9 and Turner 2011a is note 12. The rest of the claim is supported: 'The found manuscript conceit, and the claim that he had translated it into English from the original Westron rather than written it himself, put him in the frame with the story that he was the book's editor and translator'; the Red Book frame at 'Tolkien came up with a frame story for the sequel, the Red Book of Westmarch'; and the lead's 'many other elements such as genealogies and footnotes, giving the impression that Tolkien was the editor and translator of the work, forming an editorial frame'. Only the Thomson attribution fails.",
    "fromFile": "verdicts-tolkien-i688-702.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 708,
@@ -3006,7 +3035,8 @@
    "note": "Live site is behind a Cloudflare challenge (HTTP 403 with browser UA); reached via Wayback raw capture 20260820220652id_. Quote 'one long sentence, counting at 144 words' verbatim (post #10 by Ent), about the Fall of Gondolin original tale quoted in post #1. Also verbatim: 'The one he cites at 96 words is actually 97' and 'Tolkien’s (arguably) correct use of punctuation saves the sentence so it does not grind the mind into submission.' But the 111-word figure is not tied to LOTR anywhere on the page — the thread is about Tolkien's longest sentence generally and the source sentence is from The Fall of Gondolin.",
    "unsupportedLimb": "that the 111-word online claim concerns The Lord of the Rings — the page says only 'the longest sentence found', naming no work",
    "fromFile": "verdicts-tolkien-i703-717.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 713,
@@ -3023,7 +3053,8 @@
    "note": "Live host returns a WAF block (HTTP 454); reached via Wayback raw capture 20260808182141id_. Quote 'higher unique word density' verbatim, and the appendices exclusion is on the page ('neither has the appendicies to the Lord of the Rings… since they are not part of the story'). No edition is named anywhere in the capture — 'HarperCollins', '2009' and 'edition' do not occur; a 2013 capture of the same URL also lacks them.",
    "unsupportedLimb": "the 2009 HarperCollins eBook editions as the source texts — no edition is named on the page",
    "fromFile": "verdicts-tolkien-i703-717.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 715,
@@ -3167,7 +3198,8 @@
    "note": "Quote 'Schwestersohn' is on p.28, but inside a sentence whose subject is Krege alone: 'it can be said that Krege's translation falls under the translation tradition of domestication, even though some \"foreignized\" forms already existing in the ST prevail (e.g. \"Schwestersohn\" as translation of \"sister-son\" instead of using \"Neffe\")'. 'Schwestersohn'/'Neffe' occur exactly once in the whole 81-page thesis (grep-confirmed); Carroux's rendering of 'sister-son' is never stated. The only other mention (p.26) is Turner on Tolkien's own compounds.",
    "unsupportedLimb": "that BOTH translations keep 'Schwestersohn' - the page states it only of Krege",
    "fromFile": "verdicts-tolkien-i733-747.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 743,
@@ -3419,7 +3451,8 @@
    "note": "theonering.net page fetched raw. Quote verbatim: 'It starts out as a children’s book, as a continuation of “Bilbo”, with a Birthday party. Then the story progresses into a more sinister mode.' Register limb supported: 'Take the Vidstige (Strider/ P.) character, for instance, he changes all the time. Sometimes the language he uses gives a glimpse of his identity as the great king Aragorn.' The page says Strider/Vidstige, never the word 'ranger'; the page is TORn's fan translation of a Svenska Dagbladet article, not a TORn-conducted interview.",
    "unsupportedLimb": "'ranger', which the page never uses, and the interview framing - the page is TORn's fan translation of a Svenska Dagbladet article, not a TORn-conducted interview",
    "fromFile": "verdicts-tolkien-regrade-r4.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 800,
@@ -3473,7 +3506,8 @@
    "note": "Fletcher Vredenburgh, Black Gate, 2 Nov 2025: \"Last time around, I wrote Sword 'talks when it should at least be trying to sing,' and I stand by that\" (verbatim, with \"at least\"), and \"a book that talks when it should be trying to sing, a bereft of atmosphere. I think all those things hold true.\" Third limb is composite rather than a single sentence: his own words give the story side (\"a story that tracks so closely to the LotR in so many places\") and the prose side separately (\"it rarely finds any of the fantastical transcendence of Tolkien\"); the explicit story-not-prose contrast appears on the page verbatim only inside the quoted Lin Carter passage.",
    "unsupportedLimb": "the story-not-prose contrast, which appears on the page verbatim only inside the quoted Lin Carter passage",
    "fromFile": "verdicts-tolkien-regrade-r4.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 805,

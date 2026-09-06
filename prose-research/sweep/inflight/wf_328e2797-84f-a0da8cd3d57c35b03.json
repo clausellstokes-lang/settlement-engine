@@ -3,12 +3,12 @@
  "name": "wolfe",
  "angle": null,
  "tag": null,
- "lines": 56,
+ "lines": 94,
  "firstTs": "2026-09-06T18:23:22.484Z",
- "lastTs": "2026-09-06T18:26:25.204Z",
+ "lastTs": "2026-09-06T18:30:17.750Z",
  "tools": {
-  "Bash": 13,
-  "Read": 4
+  "Bash": 25,
+  "Read": 5
  },
  "urlsFetched": [],
  "filesWritten": [],

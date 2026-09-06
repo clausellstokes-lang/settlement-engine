@@ -13,10 +13,10 @@
   "script": "research-workflow-v3.js (v3.3: skipSynth; compact chunks + legacy {file,indices} for triage gaps)"
  },
  "leguin": {
-  "runId": "wf_146ba5ee-000",
-  "argsFile": "args-leguin-r5.json",
-  "tag": "r5",
-  "script": "research-workflow-v3.js (v3.3: skipSynth; compact chunks + legacy {file,indices} for triage gaps)"
+  "runId": "wf_2b731d5b-460",
+  "argsFile": "args-leguin-r6.json",
+  "tag": "r6",
+  "script": "research-workflow-v3.js (v3.4) — THE ONE CRITIC-DRIVEN TOP-UP (S-BOUND rule 4): 4 extra angles, regrade, synth, critic; existingHashes omitted from the paste (merge dedupes by content)"
  },
  "wolfe": {
   "runId": "wf_328e2797-84f",

@@ -1,0 +1,233 @@
+{
+ "name": "ai",
+ "chunk": 24,
+ "claims": [
+  {
+   "index": 861,
+   "feature": "other: fluent but incoherent",
+   "claim": "Michel characterises LLM output as probable-sounding but not necessarily accurate or even coherent.",
+   "source": "Lincoln Michel, novelist, Counter Craft, 2025",
+   "url": "https://countercraft.substack.com/p/criticism-in-the-age-of-ai",
+   "quote": "probable-sounding but not necessarily accurate or even coherent",
+   "page": "opening section, after the two numbered assumptions"
+  },
+  {
+   "index": 862,
+   "feature": "counter-evidence",
+   "claim": "Michel states that the danger of LLMs for literature remains their quantity rather than their quality, and that he has never worried much about LLMs replacing authors on quality.",
+   "source": "Lincoln Michel, novelist, Counter Craft, 2026",
+   "url": "https://countercraft.substack.com/p/surfs-up-in-slop-city",
+   "quote": "the danger of LLMs for literature remains their quantity, not their quality",
+   "page": "section 'The Slop Tsunami Could Still Drown Us Though'"
+  },
+  {
+   "index": 863,
+   "feature": "place and institution description",
+   "claim": "Harvey Randall argues that background chatter, combat barks, NPC dialogue and side-quests all matter and are the backbone on which a game's story lies.",
+   "source": "Harvey Randall, staff writer, PC Gamer, 2026",
+   "url": "https://www.pcgamer.com/gaming-industry/game-development/the-bigwigs-who-want-ai-generated-npcs-and-writing-think-youre-too-dumb-to-appreciate-a-good-story-dont-prove-them-right/",
+   "quote": "Background chatter, combat barks, NPC dialogue, side-quests, it all matters.",
+   "page": "section 'In defense of miscellany'"
+  },
+  {
+   "index": 864,
+   "feature": "place and institution description",
+   "claim": "Randall asserts that hand-written incidental lines such as combat barks characterise an enemy faction and journal entries flesh out a culture.",
+   "source": "Harvey Randall, staff writer, PC Gamer, 2026",
+   "url": "https://www.pcgamer.com/gaming-industry/game-development/the-bigwigs-who-want-ai-generated-npcs-and-writing-think-youre-too-dumb-to-appreciate-a-good-story-dont-prove-them-right/",
+   "quote": "Combat barks can characterise an enemy faction, journal entries can flesh out a culture",
+   "page": "section 'In defense of miscellany'"
+  },
+  {
+   "index": 865,
+   "feature": "homogenisation",
+   "claim": "Randall argues that Starfield's procedurally generated planets and cities feel bland with all the rough edges sanded off next to New Vegas's hand-crafted background babble.",
+   "source": "Harvey Randall, staff writer, PC Gamer, 2026",
+   "url": "https://www.pcgamer.com/gaming-industry/game-development/the-bigwigs-who-want-ai-generated-npcs-and-writing-think-youre-too-dumb-to-appreciate-a-good-story-dont-prove-them-right/",
+   "quote": "all the rough edges sanded off",
+   "page": "section 'In defense of miscellany'"
+  },
+  {
+   "index": 866,
+   "feature": "other: incidental detail builds scale and place",
+   "claim": "Randall asserts that a game's hundreds of small background lines can create a sense of scale or place rather than only conveying plot information.",
+   "source": "Harvey Randall, staff writer, PC Gamer, 2026",
+   "url": "https://www.pcgamer.com/gaming-industry/game-development/the-bigwigs-who-want-ai-generated-npcs-and-writing-think-youre-too-dumb-to-appreciate-a-good-story-dont-prove-them-right/",
+   "quote": "they can create a sense of scale or place",
+   "page": "section 'In defense of miscellany'"
+  },
+  {
+   "index": 867,
+   "feature": "register measured",
+   "claim": "Adam Smith, Larian's writing director, said in a Reddit AMA that no text generation touches the dialogues, journal entries or other writing in Divinity.",
+   "source": "Adam Smith (Larian writing director) quoted by Ted Litchfield, PC Gamer, 2026",
+   "url": "https://www.pcgamer.com/games/rpg/larians-head-writer-has-a-simple-answer-for-how-ai-generated-text-helps-development-it-doesnt-thanks-to-its-best-output-being-a-3-10-at-best-worse-than-his-worst-drafts/",
+   "quote": "We don't have any text generation touching our dialogues, journal entries",
+   "page": "body, quoting the r/Games AMA"
+  },
+  {
+   "index": 868,
+   "feature": "reader and expert judgment",
+   "claim": "Smith reported that Larian's experiments with text-generation tools produced results that hit a 3/10 at best, while his own worst first drafts are at least a 4/10.",
+   "source": "Adam Smith (Larian writing director) quoted by Ted Litchfield, PC Gamer, 2026",
+   "url": "https://www.pcgamer.com/games/rpg/larians-head-writer-has-a-simple-answer-for-how-ai-generated-text-helps-development-it-doesnt-thanks-to-its-best-output-being-a-3-10-at-best-worse-than-his-worst-drafts/",
+   "quote": "the results hit a 3/10 at best",
+   "page": "body, quoting the r/Games AMA"
+  },
+  {
+   "index": 869,
+   "feature": "other: sycophantic tone as a tell",
+   "claim": "Ted Litchfield writes that across Grok, Claude and ChatGPT people can never get the generative-AI stink off, a by turns smarmy and sycophantic tone.",
+   "source": "Ted Litchfield, PC Gamer, 2026",
+   "url": "https://www.pcgamer.com/games/rpg/larians-head-writer-has-a-simple-answer-for-how-ai-generated-text-helps-development-it-doesnt-thanks-to-its-best-output-being-a-3-10-at-best-worse-than-his-worst-drafts/",
+   "quote": "a by turns smarmy and sycophantic tone",
+   "page": "reporter's aside after the AMA quotation"
+  },
+  {
+   "index": 870,
+   "feature": "other: shaped like the thing but not the thing",
+   "claim": "David Gaider said BioWare's generated-quest experiments could make something shaped like a quest whose result was no better than a fetch quest.",
+   "source": "David Gaider (Dragon Age creator) tweeting, quoted by Robin Valentine, PC Gamer, 2023",
+   "url": "https://www.pcgamer.com/ai-generated-story-and-dialogue-is-not-going-to-work-says-dragon-age-creator-david-gaider-a-lot-of-effort-is-going-to-be-wasted-on-this/",
+   "quote": "something *shaped* like a quest",
+   "page": "body, quoting Gaider's tweet"
+  },
+  {
+   "index": 871,
+   "feature": "reader and expert judgment",
+   "claim": "Jonas Kyratzes, narrative designer on The Talos Principle 3, said in a Game Informer interview that he thinks the AI push is largely ludicrous.",
+   "source": "Jonas Kyratzes quoted from a Game Informer interview by Elie Gould, PC Gamer, 2026",
+   "url": "https://www.pcgamer.com/games/puzzle/ai-is-just-a-plagiarism-machine-that-makes-people-lose-their-jobs-in-the-eyes-of-the-talos-principle-3s-writers/",
+   "quote": "I think it's largely ludicrous.",
+   "page": "body, quoting the Game Informer interview"
+  },
+  {
+   "index": 872,
+   "feature": "homogenisation",
+   "claim": "Wikipedia's WikiProject AI Cleanup explains the tells by statistical regression to the mean, which smooths specific facts into generic statements that could equally apply to many topics.",
+   "source": "WikiProject AI Cleanup, Wikipedia:Signs of AI writing, version of 6 September 2026",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "a smoothing over of specific facts into generic statements",
+   "page": "section 'Content', introductory paragraphs"
+  },
+  {
+   "index": 873,
+   "feature": "abstraction over the concrete",
+   "claim": "The WikiProject holds that the model omits specific, unusual, nuanced facts because they are statistically rare and replaces them with generic positive descriptions.",
+   "source": "WikiProject AI Cleanup, Wikipedia:Signs of AI writing, version of 6 September 2026",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "tends to omit specific, unusual, nuanced facts",
+   "page": "section 'Content', introductory paragraphs"
+  },
+  {
+   "index": 874,
+   "feature": "other: less specific and more exaggerated at once",
+   "claim": "The WikiProject states that in AI encyclopedic writing the subject becomes simultaneously less specific and more exaggerated.",
+   "source": "WikiProject AI Cleanup, Wikipedia:Signs of AI writing, version of 6 September 2026",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "The subject becomes simultaneously less specific and more exaggerated.",
+   "page": "section 'Content', introductory paragraphs"
+  },
+  {
+   "index": 875,
+   "feature": "discourse-level tells",
+   "claim": "The WikiProject names as a tell that LLM writing puffs up the importance of the subject by adding statements about how arbitrary aspects represent or contribute to a broader topic.",
+   "source": "WikiProject AI Cleanup, Wikipedia:Signs of AI writing, version of 6 September 2026",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "LLM writing often puffs up the importance of the subject matter",
+   "page": "section 'Undue emphasis on significance, legacy, and broader trends'"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 861,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "They produce text that is probable-sounding but not necessarily accurate or even coherent.",
+   "note": "Raw page (curl, HTTP 200). Lincoln Michel, 'Criticism in the Age of AI', Counter Craft, Sep 05 2025. Sentence appears verbatim in the paragraph immediately after the two numbered points (1) LLMs are nowhere close to becoming actual intelligences, 2) LLMs aren't going away), and the phrase is re-quoted in the next sentence."
+  },
+  {
+   "index": 862,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I think the danger of LLMs for literature remains their quantity, not their quality.",
+   "note": "Raw page (curl, HTTP 200). Lincoln Michel, 'Surf's Up in Slop City', Counter Craft, Feb 10 2026. Under the heading 'The Slop Tsunami Could Still Drown Us Though' exactly as cited; the next sentence supplies the second limb verbatim: 'I have never worried much about LLMs replacing authors in terms of quality.'"
+  },
+  {
+   "index": 863,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Background chatter, combat barks, NPC dialogue, side-quests, it all matters.",
+   "note": "Raw page (curl, HTTP 200). Harvey Randall, PC Gamer, published 15 August 2026, byline confirms 'Staff Writer'. Quote appears twice in 'In defense of miscellany' (once as a pull-quote, once in body). Backbone limb is the same section: 'they're the backbone on which the rest of the story lies.'"
+  },
+  {
+   "index": 864,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Combat barks can characterise an enemy faction, journal entries can flesh out a culture, and so on.",
+   "note": "Raw page (curl, HTTP 200). Verbatim in 'In defense of miscellany'. The 'hand-written' limb is supported by the same section: New Vegas's 'locations and background babble are hand-crafted', and worlds feel big 'because of thousands of little scripts that are laboriously written out by hand'."
+  },
+  {
+   "index": 865,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "procedurally-generated planets lie next to grey and perfunctory cities with all the rough edges sanded off",
+   "note": "Raw page (curl, HTTP 200). Verbatim in 'In defense of miscellany'; full sentence: \"Starfield's setting feels bland and dull when compared to something like New Vegas not just because of its main yarn, but because in the latter, its locations and background babble are hand-crafted and designed to surprise you...\" Every limb (bland, procgen planets, cities, New Vegas hand-crafted background babble) is on the page."
+  },
+  {
+   "index": 866,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "they can do more than just hand you information about the plot, they can create a sense of scale or place",
+   "note": "Raw page (curl, HTTP 200). Verbatim in 'In defense of miscellany'; the subject is 'all of these hundreds of little opportunities' in a game with a stand-out story, matching the claim's 'hundreds of small background lines' and the 'rather than only conveying plot information' limb."
+  },
+  {
+   "index": 867,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "We don't have any text generation touching our dialogues, journal entries or other writing in Divinity",
+   "note": "Raw page (curl, HTTP 200). Ted Litchfield, PC Gamer, 10 January 2026. Quote verbatim, attributed on-page to 'writing director Adam Smith'. The Reddit-AMA limb is explicit: 'In its big Divinity AMA yesterday', an embedded 'Comment from r/Games', and the questioner named as user AmihanTheStoic."
+  },
+  {
+   "index": 868,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the results hit a 3/10 at best ... Even my worst first drafts ... are at least a 4/10",
+   "note": "Raw page (curl, HTTP 200). Verbatim: 'We had a limited group experimenting with tools to generate text, but the results hit a 3/10 at best and those tools are for research purposes, not for use in Divinity. Even my worst first drafts...are at least a 4/10.' Both numeric limbs supported."
+  },
+  {
+   "index": 869,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "people can never seem to get the genAI stink off, a by turns smarmy and sycophantic tone",
+   "note": "Raw page (curl, HTTP 200). Reporter's own aside directly after the AMA quotation: 'Whether it's Grok, Claude, or ChatGPT, people can never seem to get the genAI stink off, a by turns smarmy and sycophantic tone that I find utterly repulsive.' Quoted fragment verbatim; the claim's paraphrase drops the page's hedge 'seem to' but no limb is unsupported."
+  },
+  {
+   "index": 870,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "something *shaped* like a quest... but the end result is no better than your typical 'bring me 20 beetle heads' MMO quest",
+   "note": "Raw page (curl, HTTP 200). Robin Valentine, PC Gamer, 30 May 2023. Quote verbatim (asterisks included) in the body, from Gaider's tweet reacting to a Guardian article; the article states BioWare 'went through several iterations' of procedural dialogue 'alongside procedural quests'. Two notes: the page frames the line as the core problem of 'any such system' rather than of BioWare's build alone, and 'fetch quest' is the claim's paraphrase of the page's 'bring me 20 beetle heads' MMO quest."
+  },
+  {
+   "index": 871,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I think it's largely ludicrous.",
+   "note": "Raw page (curl, HTTP 200). Elie Gould, PC Gamer, 26 August 2026. Verbatim: \"'I'm going to talk for myself,' Jonas Kyratzes, narrative designer, says in an interview with Game Informer. 'I think it's largely ludicrous.'\" Talos Principle 3 limb supported by the preceding line ('The Talos Principle 3's writers explain why they're also cautious about AI'). 'The AI push' is the claim's gloss of the antecedent 'it', which the page leaves to context but supports: he immediately calls 'the technology itself...very impressive' and elsewhere attacks 'excessive quasi-religious claims'."
+  },
+  {
+   "index": 872,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "This statistical regression to the mean, a smoothing over of specific facts into generic statements, that could equally apply to many topics",
+   "note": "Raw wikitext via ?action=raw (HTTP 200), current revision 1373524112 timestamped 2026-09-06T13:13:42Z. Sentence closes the introductory paragraphs of the '==Content==' section, exactly as cited. Attribution limb confirmed: the page carries {{WikiProject advice|wikiproject=WikiProject AI Cleanup}}."
+  },
+  {
+   "index": 873,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the LLM tends to omit specific, unusual, nuanced facts (which are statistically rare) and replace them with more generic, positive descriptions",
+   "note": "Raw wikitext via ?action=raw (HTTP 200), revision of 2026-09-06. Verbatim in the second paragraph of '==Content==', with the statistically-rare rationale in parentheses on the page."
+  },
+  {
+   "index": 874,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The subject becomes simultaneously less specific and more exaggerated.",
+   "note": "Raw wikitext via ?action=raw (HTTP 200), revision of 2026-09-06. Verbatim sentence closing the second paragraph of '==Content==', after the portrait analogy; the 'encyclopedic writing' framing is the page's own scope ('a field guide to help detect undisclosed AI-generated content on Wikipedia')."
+  },
+  {
+   "index": 875,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "LLM writing often puffs up the importance of the subject matter by adding statements about how arbitrary aspects of the topic represent or contribute to a broader topic.",
+   "note": "Raw wikitext via ?action=raw (HTTP 200), revision of 2026-09-06. First sentence of section '===Undue emphasis on significance, legacy, and broader trends===', exactly as cited. In wikitext 'puffs up' is the piped link [[Wp:puffery|puffs up]], so the rendered page reads the quoted words verbatim."
+  }
+ ]
+}

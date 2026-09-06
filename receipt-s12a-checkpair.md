@@ -289,3 +289,12 @@ rather than: occurrences 294 (no published counterpart) · variants containing i
   "5 pass mechanically"; (2) the MARKS ruling — HIGH, it silently blocks a quarter of the corpus from ever
   passing; (3) the 313/313 policy — MEDIUM, it shapes the whole reconstruction wave's workflow;
   (4) the crosscheck label — DONE, no further act owed.
+
+---
+
+# ⏳ PARTIAL — R2 APPLIED (lane S12A-R2, in flight)
+⟦Chair: Fable 5.1 · Lane: Opus 5 (S12A-R2) · KIT-ONLY · 2026-09-06⟧
+Fence on arrival: dock `laneOSR18` HEAD `fd36f0298b1ead15f2a80eff83dafb92114a7ea4`, porcelain 0 lines.
+`check-pair.v1.mjs` sha `67921d6df92345ebf3fe06b924a38fc108058199` (unchanged). Pre-R2 `check-pair.mjs`
+sha `80d20b3c5f4aab8a40a0cd56289665d498624cbb`, backed up to `s12a-scratch/check-pair.pre-r2.bak.mjs`.
+Baselines captured BEFORE the edit: `s12a-scratch/r2base.<fixture>.{v1,v2pre}.out`, all six EXIT=0.

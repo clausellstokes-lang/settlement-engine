@@ -679,7 +679,8 @@
    "note": "Verified against raw arXiv abstract HTML, not just the fetch layer. Quote verbatim but truncated mid-parenthetical (drops 'for prompting'). OR=0.16 for MFA fidelity confirmed; 'Both groups preferred fine-tuned AI' confirmed. The trailing clause 'the tells above characterize prompted default-register output' is the analyst's own inference and is not in the paper.",
    "unsupportedLimb": "the trailing clause \"the tells above characterize prompted default-register output\" is the analyst's own inference and is not in the paper.",
    "fromFile": "verdicts-ai-regrade-r1.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 144,
@@ -714,7 +715,8 @@
    "note": "Quote verbatim (same sentence as 147). Minor drift: the claim's intensifier 'far fewer subplots' is not in the source, which says only 'fewer subplots' with no magnitude. This is a secondary source glossing StoryScope, not the paper itself.",
    "unsupportedLimb": "the intensifier \"far fewer subplots\" is not in the source, which says only \"fewer subplots\" with no magnitude.",
    "fromFile": "verdicts-ai-regrade-r1.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 149,
@@ -782,7 +784,8 @@
    "note": "Quote verbatim and is Michel's own sentence. PROVENANCE CAVEAT: the choices arithmetic is not Michel's - it is a block quotation from Ted Chiang's New Yorker piece 'Why A.I. Isn't Going to Make Art', reading 'a ten-thousand-word short story requires something on the order of ten thousand choices' and 'if you supply a hundred-word prompt, you have made on the order of a hundred choices'. Attribute the arithmetic to Chiang via Michel. Also, the page says a hundred choices, not 'almost none'.",
    "unsupportedLimb": "the ten-thousand-choices arithmetic is Ted Chiang's, block-quoted by Michel, and the page says a hundred choices, not \"almost none\".",
    "fromFile": "verdicts-ai-regrade-r1.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 166,
@@ -799,7 +802,8 @@
    "note": "Quote exact. CAVEAT ON SCOPE: the example is a poem an AI generator wrote in a friend's style, posted for a laugh - NOT a slush submission. Hockaday says separately 'the poems are still bad' and that poetry submissions exist but 'there is nothing good'. Do not cite this as being about submissions.",
    "unsupportedLimb": "scope — the poem was an AI generator's pastiche of a friend's style posted for a laugh, not a slush submission.",
    "fromFile": "verdicts-ai-regrade-r1.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 167,
@@ -816,7 +820,8 @@
    "note": "Quote exact. Precision note: Clarke wrote 'among the worst submissions we've ever received', not 'the worst ever received' - the claim slightly overstates.",
    "unsupportedLimb": "\"the worst ever received\" overstates Clarke's \"among the worst submissions we've ever received\".",
    "fromFile": "verdicts-ai-regrade-r1.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 172,
@@ -1309,7 +1314,8 @@
    "unsupportedLimb": "'stylistic signs ONLY prioritise which sentences to check' — the page presents sign-reading as the main identification method, one that 'can produce high degrees of certainty', not merely a triage step; and it calls source-checking 'often the most reliable way', not the only reliable test",
    "note": "Quote is verbatim: 'often the most reliable way to determine whether content is AI-generated is to check whether the sources support the text (WP:V, i.e. whether content has been hallucinated). It can be most efficient to prioritise checking sentences which contain AI signs.' So the prioritisation role of signs is genuinely on the page — but as an efficiency tip alongside, not instead of, their evidential role: 'The main method editors use to identify LLM-generated content is to identify stylistic or linguistic signs... While such methods can produce high degrees of certainty, they are probabilistic, meaning editors should remain wary of false positives.' Page fetched at the redirect target 'Wikipedia:WikiProject AI Cleanup/Guide and resources'.",
    "fromFile": "verdicts-ai-i269-283.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 280,
@@ -1615,7 +1621,8 @@
    "note": "Live Time Extension page fetched raw (Jack Yarwood, 24 Apr 2023 update). First limb verbatim-supported. The 2026 Steam figure is genuinely true - I fetched the Steam store page in the same pass and it reads 'Very Negative (476) - 15% of the 476 user reviews for this software are positive' - but it is not on the cited page, so this claim's source attribution is wrong for that half. Also worth flagging: the quote 'a dumber input system than Zork' is on the page only as reader comment #4 (NatiaAdamo, 25 Apr 2023), not the article's own words; citing it as Time Extension's assessment would misattribute it. The article's own line is 'the game repeating lines like \"Hmm...\", \"Maybe we should focus on the task at hand\", and \"I'm not sure what to say about that\" to anything but the most precise of inputs.'",
    "unsupportedLimb": "'as of 2026-09-06 the Steam page shows 15% positive of 476' - absent from this page (it is on the Steam store page, where I confirmed it); and the Zork quote is a reader comment, not the article",
    "fromFile": "verdicts-ai-i419-433.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 456,
@@ -1683,7 +1690,8 @@
    "note": "Quote is word-for-word on the page, under the ‘Lack of Nuance, Subtext or Symbolism’ theme, but it is one participant (MG) speaking in the first person about his OWN limited experimentation. No other participant judges figurative language, and the paper never aggregates a group verdict on similes/metaphors. Correct citation: ‘one writer judged its similes and metaphors poor, from the little he had tested’.",
    "unsupportedLimb": "‘the writers tested’ — the page shows a single participant (MG) reporting his own limited experimentation, not the writer group",
    "fromFile": "verdicts-ai-i479-493.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 501,
@@ -1717,7 +1725,8 @@
    "note": "Quote verbatim in arXiv PDF (§5, Do control codes affect detectability?); the control-code result is also verbatim: \"use of the politics control code did not significantly affect players' ability to distinguish real ... from fake text\". Both limbs are on the page, but the paper states the inference as a hedged, genre-bounded suggestion and explicitly disclaims the strong reading (\"This is not to say that control codes do not affect generation ... Further work is needed\"). Raw PDF read (arxiv.org/pdf/2212.12672, 6pp, pdfminer).",
    "unsupportedLimb": "the unhedged, unrestricted second limb \"readers' cues were not stylistic\" — the page says only \"may not be related to stylistic details, at least not within the genre of political speeches\"",
    "fromFile": "verdicts-ai-i509-523.json"
-  }
+  },
+  "fullSentence": true
  },
  {
   "index": 551,
@@ -1917,6 +1926,81 @@
    "note": "Raw arXiv HTML §3 'Data.': quote exact, and 'human-written short stories' plus 'we identify and extract stories from short story anthologies identified via running Gemini 2.5 Flash over titles and blurbs in Books3' supports the corpus limb. But the paper never characterises the corpus's register: it says nothing about 'literary fiction' (grep for 'literary fiction'/'genre' returns nothing descriptive of the human corpus, only Table 4's word-count summary), and makes no contrast with archival or record registers. That inference is the claim author's, not the page's.",
    "unsupportedLimb": "that the corpus register is published literary fiction and not an archival or record register",
    "fromFile": "verdicts-ai-i829-845.json"
+  }
+ },
+ {
+  "index": 885,
+  "feature": "model era drift",
+  "claim": "The WikiProject gives three era word-lists, assigning Additionally, boasts, delve, intricate, tapestry and testament to GPT-4 in 2023 to mid-2024, and only emphasizing, enhance, highlighting and showcasing to GPT-5 from mid-2025.",
+  "source": "WikiProject AI Cleanup, Wikipedia:Signs of AI writing, version of 6 September 2026",
+  "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+  "quote": "The words that LLMs overuse have changed over time.",
+  "page": "section 'High density of AI vocabulary words', era breakdown",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "fetched 2026-09-06",
+  "routeHint": "direct curl with browser UA",
+  "registerHint": "none",
+  "confidence": "high",
+  "modelEra": "GPT-4 2023 to mid-2024; GPT-4o mid-2024 to mid-2025; GPT-5 mid-2025 on; register measured: encyclopedic articles",
+  "angle": "critics-direct",
+  "verdict": {
+   "index": 885,
+   "verdict": "PARTIAL",
+   "trueWording": "Mid-2025 and on (GPT-5): emphasizing, enhance, highlighting, showcasing (plus words associated with 'Canned emphasis on notability...')",
+   "note": "Quote 'The words that LLMs overuse have changed over time.' is verbatim at line 332 and there are exactly three era bullets (2023 to mid-2024 / GPT-4; Mid-2024 to mid-2025 / GPT-4o; Mid-2025 and on / GPT-5). All six words named for the GPT-4 era (Additionally, boasts, delve, intricate/intricacies, tapestry, testament) are in that bullet. The failing limb is the word 'only' on the GPT-5 bullet: the page's GPT-5 line is not closed at four words — it ends with a parenthetical adding the whole word-set of the 'Canned emphasis on notability, attribution, and media coverage' section.",
+   "fromFile": "verdicts-ai-i876-893.json"
+  },
+  "fullSentence": true
+ },
+ {
+  "index": 905,
+  "feature": "lexical tells",
+  "claim": "Kriss reports that asked for science fiction the model has an uncanny habit of naming the protagonist Elara Voss, with Kael the usual male name, and that hundreds of self-published Amazon books now use those names where before 2023 there were none.",
+  "source": "Sam Kriss, The New York Times Magazine, 2025",
+  "url": "https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html",
+  "quote": "an uncanny habit of naming the protagonist Elara Voss",
+  "page": "section on overfitting and word choice",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2025-12-03",
+  "routeHint": "Wayback raw capture 20251221211413id_",
+  "registerHint": "herald-pools",
+  "confidence": "high",
+  "modelEra": "December 2025, models unnamed for the naming habit; register measured: fiction",
+  "angle": "critics-direct",
+  "verdict": {
+   "index": 905,
+   "verdict": "PARTIAL",
+   "trueWording": "hundreds of Amazon books feature Elara Voss or Elena Voss",
+   "note": "Quote is verbatim and the Elara Voss, Kael and pre-2023 limbs all hold: 'If you ask any A.I. to write a science-fiction story for you, it has an uncanny habit of naming the protagonist Elara Voss. Male characters are, more often than not, called Kael. There are now hundreds of self-published books on Amazon featuring Elara Voss or Elena Voss; before 2023, there was not a single one.' But the Amazon count is over Elara Voss OR ELENA VOSS — a female-name variant — not over Elara Voss and Kael. Kael appears nowhere in the Amazon sentence, so the claim's 'those names' overstates the page. Fix by writing 'Elara Voss or Elena Voss' for the Amazon figure and keeping Kael as a separate observation.",
+   "unsupportedLimb": "that the hundreds of Amazon books use 'those names' including Kael — the page's pair is Elara Voss or Elena Voss",
+   "fromFile": "verdicts-ai-i894-908.json"
+  }
+ },
+ {
+  "index": 910,
+  "feature": "other: too much consistency or none",
+  "claim": "Kriss argues the model cannot get the balance right: either it imposes too much consistency, making its language redundant, or too little, turning it into drivel.",
+  "source": "Sam Kriss, The New York Times Magazine, 2025",
+  "url": "https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html",
+  "quote": "it imposes too much consistency, in which case its language is redundant",
+  "page": "section on the 'an X with Y and Z' tic",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2025-12-03",
+  "routeHint": "Wayback raw capture 20251221211413id_",
+  "registerHint": "none",
+  "confidence": "high",
+  "modelEra": "ChatGPT, Grok and Claude, 2025; register measured: comic prose",
+  "angle": "critics-direct",
+  "verdict": {
+   "index": 910,
+   "verdict": "PARTIAL",
+   "trueWording": "A.I. finds it very difficult to get the balance right",
+   "note": "Quote verbatim on the page: 'Either it imposes too much consistency, in which case its language is redundant, or not enough, in which case it turns into drivel.' Both horns of the dilemma are exact. The framing limb is not: the page says the model 'finds it very difficult to get the balance right', not that it cannot.",
+   "unsupportedLimb": "'the model cannot get the balance right' — the page asserts difficulty ('A.I. finds it very difficult to get the balance right'), not impossibility",
+   "fromFile": "verdicts-ai-i909-923.json"
   }
  }
 ]
