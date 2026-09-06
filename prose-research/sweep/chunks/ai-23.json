@@ -2,157 +2,157 @@
  "name": "ai",
  "chunk": 23,
  "indices": [
-  599,
-  600,
-  601,
-  602,
-  603,
-  604,
-  605,
-  606,
-  607,
-  608,
-  609,
-  610,
-  611,
-  612,
-  613
+  846,
+  847,
+  848,
+  849,
+  850,
+  851,
+  852,
+  853,
+  854,
+  855,
+  856,
+  857,
+  858,
+  859,
+  860
  ],
  "claims": [
   {
-   "index": 599,
-   "feature": "cadence and rhythm",
-   "claim": "Rhythm showed the largest effect in Porter and Machery's ratings: AI poems were rated as having much better rhythm than the famous poets' poems.",
-   "source": "Brian Porter and Edouard Machery, Scientific Reports, 14 November 2024",
-   "url": "https://www.nature.com/articles/s41598-024-76900-1",
-   "quote": "AI-generated poems are rated as having much better rhythm than",
-   "page": "Results, Study 2"
-  },
-  {
-   "index": 600,
+   "index": 846,
    "feature": "reader and expert judgment",
-   "claim": "Every one of the five AI-generated poems in Porter and Machery's study 2 was rated higher in overall quality than every one of the five human-authored poems.",
-   "source": "Brian Porter and Edouard Machery, Scientific Reports, 14 November 2024",
-   "url": "https://www.nature.com/articles/s41598-024-76900-1",
-   "quote": "all 5 AI-generated poems are rated more highly in overall quality",
-   "page": "Results, Study 2, discussion of Fig. 2"
+   "claim": "Wendig describes AI writing as having a fakey-fakey sound with prose as plastic as a synthetic voice-over.",
+   "source": "Chuck Wendig, Terribleminds, 2024",
+   "url": "https://terribleminds.com/ramble/2024/04/01/generative-a-i-for-writers-an-unfolding-but-not-inevitable-nightmare/",
+   "quote": "fakey-fakey sound to it, the prose as plastic",
+   "page": "advice section, 'Fourth, get good at spotting it'"
   },
   {
-   "index": 601,
+   "index": 847,
+   "feature": "other: formula is the vulnerable register",
+   "claim": "Wendig asserts that AI does well with formula, so the most vulnerable writing is the kind that has a formula at its core.",
+   "source": "Chuck Wendig, Terribleminds, 2024",
+   "url": "https://terribleminds.com/ramble/2024/04/01/generative-a-i-for-writers-an-unfolding-but-not-inevitable-nightmare/",
+   "quote": "Second, AI does well with formula.",
+   "page": "advice section"
+  },
+  {
+   "index": 848,
    "feature": "abstraction over the concrete",
-   "claim": "Porter and Machery propose that readers rate AI poems higher because they find them more straightforward.",
-   "source": "Brian Porter and Edouard Machery, Scientific Reports, 14 November 2024",
-   "url": "https://www.nature.com/articles/s41598-024-76900-1",
-   "quote": "they find AI poems more straightforward",
-   "page": "Discussion"
+   "claim": "Tiffany Yates Martin, a developmental editor, found the AI editorial letters heavy on literary buzzwords and concepts but light on practical, concrete observations.",
+   "source": "Tiffany Yates Martin, Fox Print Editorial, 2025",
+   "url": "https://foxprinteditorial.com/2025/08/14/can-ai-edit-your-book/",
+   "quote": "heavy on literary buzzwords and concepts, but light on practical, concrete observations",
+   "page": "section 'What's less valuable'"
   },
   {
-   "index": 602,
-   "feature": "metaphor discipline",
-   "claim": "Porter and Machery observe that the AI-generated poems in their assessment study rarely use complex metaphors.",
-   "source": "Brian Porter and Edouard Machery, Scientific Reports, 14 November 2024",
-   "url": "https://www.nature.com/articles/s41598-024-76900-1",
-   "quote": "These poems rarely use complex metaphors",
-   "page": "Discussion"
+   "index": 849,
+   "feature": "other: what a human editor sees first",
+   "claim": "Martin found both engines' feedback heavy on critiquing style and light on addressing substance, the reverse of what she takes an editor's job to be.",
+   "source": "Tiffany Yates Martin, Fox Print Editorial, 2025",
+   "url": "https://foxprinteditorial.com/2025/08/14/can-ai-edit-your-book/",
+   "quote": "heavy on critiquing style and light on addressing substance",
+   "page": "section 'What's less valuable'"
   },
   {
-   "index": 603,
-   "feature": "reader and expert judgment",
-   "claim": "Participants used variations of the phrase 'doesn't make sense' 144 times for human-authored poems and 29 times for AI-generated poems.",
-   "source": "Brian Porter and Edouard Machery, Scientific Reports, 14 November 2024",
-   "url": "https://www.nature.com/articles/s41598-024-76900-1",
-   "quote": "144 explanations vs. 29 explanations",
-   "page": "Discussion"
+   "index": 850,
+   "feature": "other: fabricated specifics",
+   "claim": "On a repeat of the identical prompt ChatGPT hallucinated a character who was not in the book and a plot development that did not happen.",
+   "source": "Tiffany Yates Martin, Fox Print Editorial, 2025",
+   "url": "https://foxprinteditorial.com/2025/08/14/can-ai-edit-your-book/",
+   "quote": "It also hallucinated a character who wasn’t in the book",
+   "page": "section 'Honing the Prompt'"
   },
   {
-   "index": 604,
-   "feature": "detection and its failures",
-   "claim": "Self-reported experience with poetry did not improve participants' ability to tell AI poems from human ones.",
-   "source": "Brian Porter and Edouard Machery, Scientific Reports, 14 November 2024",
-   "url": "https://www.nature.com/articles/s41598-024-76900-1",
-   "quote": "experience with poetry did not improve discrimination performance",
-   "page": "Results, Study 1, exploratory model"
-  },
-  {
-   "index": 605,
-   "feature": "register measured",
-   "claim": "Porter and Machery generated their stimuli with ChatGPT 3.5, five poems in the style of each of ten poets.",
-   "source": "Brian Porter and Edouard Machery, Scientific Reports, 14 November 2024",
-   "url": "https://www.nature.com/articles/s41598-024-76900-1",
-   "quote": "Using ChatGPT 3.5, we generated 5 poems",
-   "page": "Introduction, description of stimuli"
-  },
-  {
-   "index": 606,
+   "index": 851,
    "feature": "steerability",
-   "claim": "Porter and Machery used a human-out-of-the-loop paradigm, keeping the first five poems generated with no feedback or selection.",
-   "source": "Brian Porter and Edouard Machery, Scientific Reports, 14 November 2024",
-   "url": "https://www.nature.com/articles/s41598-024-76900-1",
-   "quote": "we used the first 5 poems generated",
-   "page": "Introduction, description of stimuli"
+   "claim": "Asked to give feedback in Tiffany Yates Martin's own style, both engines produced warmer and more question-led letters that still felt frustratingly generalized to her.",
+   "source": "Tiffany Yates Martin, Fox Print Editorial, 2025",
+   "url": "https://foxprinteditorial.com/2025/08/14/can-ai-edit-your-book/",
+   "quote": "still felt frustratingly generalized",
+   "page": "section 'Honing the Prompt', after the style-transfer prompt"
   },
   {
-   "index": 607,
-   "feature": "counter-evidence",
-   "claim": "Expert MFA judges preferred human writing in 82.7% of pairwise comparisons when the AI wrote by in-context prompting.",
-   "source": "Tuhin Chakrabarty and Paramveer S. Dhillon, CHI 2026 (arXiv:2601.18353v1), 26 January 2026",
-   "url": "https://arxiv.org/html/2601.18353v1",
-   "quote": "experts preferred human writing in 82.7% of cases under the",
-   "page": "Abstract"
+   "index": 852,
+   "feature": "homogenisation",
+   "claim": "Martin asserts that AI engines try to streamline every story toward the most common denominators of the fiction in their training data.",
+   "source": "Tiffany Yates Martin, Fox Print Editorial, 2025",
+   "url": "https://foxprinteditorial.com/2025/08/14/can-ai-edit-your-book/",
+   "quote": "trying to streamline every story based on the most common denominators",
+   "page": "section 'So What's the Takeaway for Authors?'"
   },
   {
-   "index": 608,
-   "feature": "steerability",
-   "claim": "Expert preference reversed to 62% in favour of AI after GPT-4o was fine-tuned on the emulated authors' complete works.",
-   "source": "Tuhin Chakrabarty and Paramveer S. Dhillon, CHI 2026 (arXiv:2601.18353v1)",
-   "url": "https://arxiv.org/html/2601.18353v1",
-   "quote": "reversed to 62% preference for AI after fine-tuning",
-   "page": "Abstract"
+   "index": 853,
+   "feature": "other: praise register under pressure",
+   "claim": "When Martin asked Copilot for more detail its feedback became weirdly effusive without becoming more substantive.",
+   "source": "Tiffany Yates Martin, Fox Print Editorial, 2025",
+   "url": "https://foxprinteditorial.com/2025/08/14/can-ai-edit-your-book/",
+   "quote": "when I asked for more detail it became weirdly effusive",
+   "page": "section 'Honing the Prompt'"
   },
   {
-   "index": 609,
-   "feature": "reader and expert judgment",
-   "claim": "Lay judges in the Chakrabarty and Dhillon study consistently preferred AI writing.",
-   "source": "Tuhin Chakrabarty and Paramveer S. Dhillon, CHI 2026 (arXiv:2601.18353v1)",
-   "url": "https://arxiv.org/html/2601.18353v1",
-   "quote": "Lay judges, however, consistently preferred AI writing",
-   "page": "Abstract"
+   "index": 854,
+   "feature": "other: what a human editor sees first",
+   "claim": "Martin's standard for a professional edit is specificity and granularity, a reading that should feel like a forensic examination of the story.",
+   "source": "Tiffany Yates Martin, Fox Print Editorial, 2025",
+   "url": "https://foxprinteditorial.com/2025/08/14/can-ai-edit-your-book/",
+   "quote": "A good edit should feel like a forensic examination",
+   "page": "section 'What's less valuable', pull-quote"
   },
   {
-   "index": 610,
-   "feature": "steerability",
-   "claim": "Chakrabarty and Dhillon attribute the expert preference shift to fine-tuning removing the stylistic tics experts had used to tell AI from human text.",
-   "source": "Tuhin Chakrabarty and Paramveer S. Dhillon, CHI 2026 (arXiv:2601.18353v1)",
-   "url": "https://arxiv.org/html/2601.18353v1",
-   "quote": "fine-tuning eliminates the stylistic tics—clichés, awkward phrasing, overly ornamental language",
-   "page": "Section 4.1"
+   "index": 855,
+   "feature": "other: absence of communicative intention",
+   "claim": "Lincoln Michel asserts that AI does not have intention and produces automatically, so a generated metaphor is not chosen to emphasise a theme or deepen a character.",
+   "source": "Lincoln Michel, novelist, Counter Craft, 2024",
+   "url": "https://countercraft.substack.com/p/art-without-intention",
+   "quote": "It produces automatically, without intention.",
+   "page": "section following the 'happy novelist' image"
   },
   {
-   "index": 611,
-   "feature": "counter-evidence",
-   "claim": "For stylistic fidelity after fine-tuning, 81.1% of experts and 80.0% of lay evaluators preferred the AI-generated excerpt.",
-   "source": "Tuhin Chakrabarty and Paramveer S. Dhillon, CHI 2026 (arXiv:2601.18353v1)",
-   "url": "https://arxiv.org/html/2601.18353v1",
-   "quote": "both experts (81.1%) and lay evaluators (80.0%) strongly preferred AI-generated writing",
-   "page": "Figure 7 caption"
+   "index": 856,
+   "feature": "place and institution description",
+   "claim": "Michel asserts that a description of a setting is not merely something to get through but a place to reinforce themes, add atmosphere and deepen character.",
+   "source": "Lincoln Michel, novelist, Counter Craft, 2024",
+   "url": "https://countercraft.substack.com/p/art-without-intention",
+   "quote": "a place to reenforce themes, add atmosphere, deepen character",
+   "page": "section discussing the Verge self-publishing article"
   },
   {
-   "index": 612,
-   "feature": "reader and expert judgment",
-   "claim": "Lay judges in the study justified their preferences by whether a passage flowed well, was more organized, or was easier to follow.",
-   "source": "Tuhin Chakrabarty and Paramveer S. Dhillon, CHI 2026 (arXiv:2601.18353v1)",
-   "url": "https://arxiv.org/html/2601.18353v1",
-   "quote": "Lay judges disproportionately reward writing based on whether it",
-   "page": "Section 4.2"
+   "index": 857,
+   "feature": "other: surface polish with nothing underneath",
+   "claim": "Michel characterises AI-generated work as art that has nothing to say.",
+   "source": "Lincoln Michel, novelist, Counter Craft, 2024",
+   "url": "https://countercraft.substack.com/p/art-without-intention",
+   "quote": "art that has nothing to say",
+   "page": "section after 'the happy novelist'"
   },
   {
-   "index": 613,
-   "feature": "steerability",
-   "claim": "Fine-tuning in the Chakrabarty and Dhillon study required 583 times more tokens on average than in-context prompting.",
-   "source": "Tuhin Chakrabarty and Paramveer S. Dhillon, CHI 2026 (arXiv:2601.18353v1)",
-   "url": "https://arxiv.org/html/2601.18353v1",
-   "quote": "fine-tuning requires 583 times more number of tokens on average",
-   "page": "Section 3.1.3, Figure 6"
+   "index": 858,
+   "feature": "other: revision is where quality is made",
+   "claim": "Michel asserts that the hardest and most time-consuming part of writing is shaping, honing and refining the material, not producing a draft.",
+   "source": "Lincoln Michel, novelist, Counter Craft, 2024",
+   "url": "https://countercraft.substack.com/p/art-without-intention",
+   "quote": "The hardest and most time-consuming part of writing is shaping, honing, and refining",
+   "page": "section after the Verge excerpt"
+  },
+  {
+   "index": 859,
+   "feature": "homogenisation",
+   "claim": "Michel contrasts individual human sentences with what he calls the generic averaging of terabytes of training data.",
+   "source": "Lincoln Michel, novelist, Counter Craft, 2025",
+   "url": "https://countercraft.substack.com/p/criticism-in-the-age-of-ai",
+   "quote": "the generic averaging of terabytes of training data",
+   "page": "section 'The Optimistic Case', closing paragraph"
+  },
+  {
+   "index": 860,
+   "feature": "other: visible prose as the human marker",
+   "claim": "Michel proposes that criticism should celebrate very visible prose, sentences that writhe and shine and sing with the individual behind them.",
+   "source": "Lincoln Michel, novelist, Counter Craft, 2025",
+   "url": "https://countercraft.substack.com/p/criticism-in-the-age-of-ai",
+   "quote": "sentences that writhe and shine and sing with the individual behind them",
+   "page": "section 'The Optimistic Case'"
   }
  ]
 }

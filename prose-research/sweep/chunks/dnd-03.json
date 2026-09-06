@@ -2,157 +2,157 @@
  "name": "dnd",
  "chunk": 3,
  "indices": [
-  94,
-  95,
-  96,
-  97,
-  98,
-  99,
-  100,
-  101,
-  102,
-  103,
-  104,
-  105,
-  106,
-  107,
-  108
+  199,
+  200,
+  201,
+  202,
+  203,
+  204,
+  205,
+  206,
+  207,
+  208,
+  209,
+  210,
+  211,
+  212,
+  213
  ],
  "claims": [
   {
-   "index": 94,
-   "feature": "boxed-text length (two-sentence rule)",
-   "claim": "Dyson Logos, citing Decker and Noonan's 2005 GenCon table observations, holds that a DM gets two sentences before players stack dice; players missed dimensions, exits and monster counts in longer boxed text.",
-   "source": "Dyson's Dodecahedron — The Dreaded Boxed Text (Dyson Logos, 2013-09-29)",
-   "url": "https://dysonlogos.blog/2013/09/29/the-dreaded-boxed-text/",
-   "quote": "you get two sentences. Period.",
-   "page": "blog post"
+   "index": 199,
+   "feature": "embedded humor",
+   "claim": "Perkins tells adventure writers to put puns, little laughs and Easter eggs in their text, embedded naturally rather than forced.",
+   "source": "Chris Perkins on Writing your own Adventures (D&D Beyond, 2018-04-19, Todd Kenreck transcript)",
+   "url": "https://www.dndbeyond.com/posts/207-chris-perkins-on-writing-your-own-adventures",
+   "quote": "Put puns in your adventure.",
+   "page": "official interview transcript"
   },
   {
-   "index": 95,
-   "feature": "boxed-text length (Noonan/Decker via forum)",
-   "claim": "A 2025 EN World poster re-cites the 2005 Noonan/Decker WotC article: two sentences, 'DMs who didn't used boxed text had more engagement', cold reading is worse than personal phrasing, 'Ditch the boxed text and use your own words' — upstream article not fetched, single-lineage claim.",
-   "source": "EN World — Read aloud text in modules: What are folks' opinions? (thread, page 4, 2025-04-05)",
-   "url": "https://www.enworld.org/threads/read-aloud-text-in-modules-what-are-folks-opinions-about-read-aloud-content.712737/page-4",
-   "quote": "Ditch the boxed text and use your own words",
-   "page": "post by touc"
-  },
-  {
-   "index": 96,
-   "feature": "boxed-text length (community ceiling)",
-   "claim": "Thread posters set ceilings of 'no more than two sentences' (GM Lent) or '3 to 5 sentences at most' with listed details for closer investigation (el-remmen).",
-   "source": "EN World — Read aloud text in modules: What are folks' opinions? (thread, page 4, 2025-04-05)",
-   "url": "https://www.enworld.org/threads/read-aloud-text-in-modules-what-are-folks-opinions-about-read-aloud-content.712737/page-4",
-   "quote": "3 to 5 sentences at most",
-   "page": "posts by GM Lent, el-remmen"
-  },
-  {
-   "index": 97,
-   "feature": "boxed-text length (four sentences, under 100 words)",
-   "claim": "Shawn Merwin's D&D Beyond craft column: an opening should be 'Four sentences, and less than 100 words'; avoid 'paragraph after paragraph of boxed text'.",
-   "source": "D&D Beyond — Let's Design an Adventure: Boxed Text (Shawn Merwin, 2019-11-06)",
-   "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
-   "quote": "Four sentences, and less than 100 words",
-   "page": "column"
-  },
-  {
-   "index": 98,
-   "feature": "boxed-text length (three lines, never five)",
-   "claim": "A 5e designer describes evolving from verbose 5e style to bullets to boxed text that is 'typically three lines, and never longer than five' because it sped play and set a base tone per room.",
-   "source": "Revivify Games — What I Value In Adventure Design (2025-03-04)",
-   "url": "https://revivifygames.com/blogs/news/what-i-value-in-adventure-design",
-   "quote": "typically three lines, and never longer than five",
-   "page": "blog post"
-  },
-  {
-   "index": 99,
-   "feature": "boxed-text length (under 250 words, cut 25%)",
-   "claim": "Sly Flourish: a read-aloud is a tiny story told in 'less than 250 words'; if editing didn't remove 25% you didn't try; 'Keep it short and keep it powerful.'",
-   "source": "Sly Flourish — Writing Awesome Read-Aloud Text (Mike Shea, 2010-11-08)",
-   "url": "https://slyflourish.com/writing_awesome_readaloud_text.html",
-   "quote": "less than 250 words to tell it",
-   "page": "essay"
-  },
-  {
-   "index": 100,
-   "feature": "boxed-text length (paragraph break = too long)",
-   "claim": "Outside introductions, a boxed text with a paragraph break 'isn't already too long by half' is rare; villain dialogue should be broken into ~six-second (one-round) statements.",
-   "source": "Dungeon Master's Workshop — DM 101: Mastering the Boxed Text (2019-09-27)",
-   "url": "https://dmsworkshop.com/2019/09/27/dm-101-boxed-text-mastering/",
-   "quote": "isn't already too long by half",
-   "page": "essay"
-  },
-  {
-   "index": 101,
-   "feature": "boxed-text length (attention after three sentences)",
-   "claim": "Justin Alexander: 'boxed text is often too long'; break 'freeze-frame' text into actionable chunks and stop at the reaction point so players respond before the world moves on.",
-   "source": "The Alexandrian — GM Don't List #13: Boxed Text Pitfalls (Justin Alexander, 2022-08-01)",
-   "url": "https://thealexandrian.net/wordpress/48312/roleplaying-games/gm-dont-list-13-boxed-text-pitfalls",
-   "quote": "boxed text is often too long",
-   "page": "essay"
-  },
-  {
-   "index": 102,
-   "feature": "key length (five sentences)",
-   "claim": "Gus L.: a basic room key is five sentences maximum; longer only for puzzles and NPCs — 'no one wants to read a three page key'.",
-   "source": "All Dead Generations — Dungeon Design, Process and Keys (Gus L., 2022-12-19)",
-   "url": "https://alldeadgenerations.blogspot.com/2022/12/dungeon-design-process-and-keys.html",
-   "quote": "no one wants to read a three page key",
-   "page": "essay"
-  },
-  {
-   "index": 103,
-   "feature": "read-aloud length at the table (critic)",
-   "claim": "Bryce Lynch: long read-aloud at each location means 'the players are almost certainly going to be playing with their phones', even when, rarely, the prose is good.",
-   "source": "tenfootpole.org — (5e) Death in the Wood review (Bryce Lynch, 2019-02-09)",
-   "url": "https://tenfootpole.org/ironspike/?p=5395",
+   "index": 200,
+   "feature": "not a novel",
+   "claim": "Perkins warns against writing an adventure like a novel that dictates how each encounter must resolve; the text must survive unexpected choices and dice.",
+   "source": "Chris Perkins on Writing your own Adventures (D&D Beyond, 2018-04-19, Todd Kenreck transcript)",
+   "url": "https://www.dndbeyond.com/posts/207-chris-perkins-on-writing-your-own-adventures",
    "quote": "",
-   "page": "review"
+   "page": "official interview transcript"
   },
   {
-   "index": 104,
-   "feature": "third person over second person in boxed text",
-   "claim": "Merwin's core fix: 'Move from the second-person point of view to the third person' — 'The bloated corpse of a headless dragon dominates the center of this small clearing' instead of 'As you enter the clearing, you notice…' — so text cannot dictate PC actions or feelings.",
-   "source": "Critical Hits — Thinking Outside the Boxed Text (Shawn Merwin, 2010-08-27)",
-   "url": "https://critical-hits.com/blog/2010/08/27/thinking-outside-the-boxed-text/",
-   "quote": "Move from the second-person point of view to the third person",
-   "page": "essay"
+   "index": 201,
+   "feature": "economical originals",
+   "claim": "Perkins characterizes the original 1983 Ravenloft as economical in its writing yet rich in characterization, the model he expanded.",
+   "source": "Ex D&D boss Chris Perkins tells us why Strahd is the RPG's most successful villain (Wargamer, 2026-03-19)",
+   "url": "https://www.wargamer.com/dnd/chris-perkins-strahd",
+   "quote": "economical",
+   "page": "interview"
   },
   {
-   "index": 105,
-   "feature": "no dictated PC actions or emotions",
-   "claim": "Merwin's D&D Beyond rules: never 'as you approach' or 'you enter'; never 'stunned', 'terrified', 'heart pounds'; no game-mechanics terms used non-mechanically in boxed text.",
-   "source": "D&D Beyond — Let's Design an Adventure: Boxed Text (Shawn Merwin, 2019-11-06)",
-   "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
-   "quote": "",
-   "page": "column"
+   "index": 202,
+   "feature": "helpful teaching tone",
+   "claim": "Wyatt set out to recapture the welcoming, teaching tone of the 4e DMG that the 2014 DMG lacked.",
+   "source": "D&D's James Wyatt & Chris Perkins Talk 2024 DM's Guide (CBR, 2024-10-25)",
+   "url": "https://www.cbr.com/dnd-5e-2024-chris-perkins-james-wyatt-dmg-interview/",
+   "quote": "the helpful tone to ease you in",
+   "page": "interview"
   },
   {
-   "index": 106,
-   "feature": "remote-control text",
-   "claim": "Alexander names the pitfall 'remote-control text': 'You step forward', 'You smile', or declaring 'the thoughts or feelings' of PCs; show the scene, 'don't tell them how they're reacting to it'.",
-   "source": "The Alexandrian — GM Don't List #13: Boxed Text Pitfalls (Justin Alexander, 2022-08-01)",
-   "url": "https://thealexandrian.net/wordpress/48312/roleplaying-games/gm-dont-list-13-boxed-text-pitfalls",
-   "quote": "the thoughts or feelings",
-   "page": "essay"
+   "index": 203,
+   "feature": "surfacing information",
+   "claim": "Perkins found DMs did not know material existed in the 2014 DMG, so the 2024 text is organized to surface what is there.",
+   "source": "D&D's James Wyatt & Chris Perkins Talk 2024 DM's Guide (CBR, 2024-10-25)",
+   "url": "https://www.cbr.com/dnd-5e-2024-chris-perkins-james-wyatt-dmg-interview/",
+   "quote": "they didn't even know it was there",
+   "page": "interview"
   },
   {
-   "index": 107,
-   "feature": "no predicting party movement",
-   "claim": "Dyson: bad boxed text 'predicts the future for the party (upon approaching…)' or commands behavior ('you stand in shock'); cure is one or two simple sentences or a point-form list.",
-   "source": "Dyson's Dodecahedron — The Dreaded Boxed Text (Dyson Logos, 2013-09-29)",
-   "url": "https://dysonlogos.blog/2013/09/29/the-dreaded-boxed-text/",
-   "quote": "predicts the future for the party",
-   "page": "blog post"
+   "index": 204,
+   "feature": "examples of play as scripts",
+   "claim": "Wyatt wrote the 2024 DMG's examples of play as scripts of the game unfolding to show how it functions.",
+   "source": "D&D's James Wyatt & Chris Perkins Talk 2024 DM's Guide (CBR, 2024-10-25)",
+   "url": "https://www.cbr.com/dnd-5e-2024-chris-perkins-james-wyatt-dmg-interview/",
+   "quote": "presenting the scripts of that unfolding in play",
+   "page": "interview"
   },
   {
-   "index": 108,
-   "feature": "second-person subjective as engagement (dissent)",
-   "claim": "DM's Workshop argues the opposite of Merwin: shift from third-person objective ('A 200-foot waterfall cascades') to second-person subjective ('You see a majestic waterfall') so the DM addresses the players rather than 'the empty air'.",
-   "source": "Dungeon Master's Workshop — DM 101: Mastering the Boxed Text (2019-09-27)",
-   "url": "https://dmsworkshop.com/2019/09/27/dm-101-boxed-text-mastering/",
-   "quote": "the empty air",
-   "page": "essay"
+   "index": 205,
+   "feature": "front-loaded basics",
+   "claim": "The 2024 DMG front-loads basic information about DMing and moves world creation to the middle, mirroring the PHB's structure.",
+   "source": "Chris Perkins and James Wyatt Answer Burning Questions About the 2024 DMG, page 2 (EN World, 2024-10-25)",
+   "url": "https://www.enworld.org/threads/chris-perkins-and-james-wyatt-answer-burning-questions-about-the-2024-dungeon-masters-guide.707569/page-2",
+   "quote": "front-loading all of the basic information",
+   "page": "interview transcript + forum"
+  },
+  {
+   "index": 206,
+   "feature": "organization as the 2014 flaw",
+   "claim": "Wyatt names the 2014 DMG's organization as its biggest drawback and says a DMG should guide you on how to be a DM.",
+   "source": "Chris Perkins and James Wyatt Answer Burning Questions About the 2024 DMG, page 2 (EN World, 2024-10-25)",
+   "url": "https://www.enworld.org/threads/chris-perkins-and-james-wyatt-answer-burning-questions-about-the-2024-dungeon-masters-guide.707569/page-2",
+   "quote": "the organization of the 2014 DMG was its biggest drawback",
+   "page": "interview transcript + forum"
+  },
+  {
+   "index": 207,
+   "feature": "boxed-text boilerplate",
+   "claim": "Every published WotC adventure opens by explaining what boxed text is; with the 2024 DMG defining it on p. 9, Wyatt wants to drop that boilerplate.",
+   "source": "After DM's Guide Preview, Future D&D Adventures Will Drop These Two Repetitive Features (Screen Rant, 2024-10-29)",
+   "url": "https://screenrant.com/dnd-2024-dungeon-master-guide-future-campaigns/",
+   "quote": "tells you what boxed text is",
+   "page": "interview report"
+  },
+  {
+   "index": 208,
+   "feature": "door boilerplate",
+   "claim": "Perkins says re-explaining doors in every adventure bothered him for a decade; the 2024 DMG's doors page lets adventures stop repeating it.",
+   "source": "After DM's Guide Preview, Future D&D Adventures Will Drop These Two Repetitive Features (Screen Rant, 2024-10-29)",
+   "url": "https://screenrant.com/dnd-2024-dungeon-master-guide-future-campaigns/",
+   "quote": "super, super important",
+   "page": "interview report"
+  },
+  {
+   "index": 209,
+   "feature": "information reach over format",
+   "claim": "Abadia (AL admin): dropping boxed text does not remove the need to tell the DM what to convey; the test is whether information reaches the DM.",
+   "source": "The Best and Worst of Adventure Formats at Winter Fantasy 2020 (Teos Abadia, Alphastream, 2020-02-20)",
+   "url": "https://alphastream.org/index.php/2020/02/20/the-best-and-worst-of-adventure-formats-at-winter-fantasy-2020/",
+   "quote": "the DM still needs some way to understand what to convey",
+   "page": "AL admin/designer blog"
+  },
+  {
+   "index": 210,
+   "feature": "fragmented templated encounters",
+   "claim": "AL Season 8's rigid template scattered one animated door's description across Dimensions & Terrain, Door and Creatures/NPCs sections, obscuring intent.",
+   "source": "The Best and Worst of Adventure Formats at Winter Fantasy 2020 (Teos Abadia, Alphastream, 2020-02-20)",
+   "url": "https://alphastream.org/index.php/2020/02/20/the-best-and-worst-of-adventure-formats-at-winter-fantasy-2020/",
+   "quote": "You must read both places",
+   "page": "AL admin/designer blog"
+  },
+  {
+   "index": 211,
+   "feature": "ritual sidebars",
+   "claim": "The AL 'Playing the Pillars' sidebars existed to exist and added little value.",
+   "source": "The Best and Worst of Adventure Formats at Winter Fantasy 2020 (Teos Abadia, Alphastream, 2020-02-20)",
+   "url": "https://alphastream.org/index.php/2020/02/20/the-best-and-worst-of-adventure-formats-at-winter-fantasy-2020/",
+   "quote": "It exists sort of just to exist",
+   "page": "AL admin/designer blog"
+  },
+  {
+   "index": 212,
+   "feature": "2025 lore contraction",
+   "claim": "Abadia finds the 2025 Monster Manual devotes far fewer words to describing monsters and less actionable encounter information than 2014's inspiring lore.",
+   "source": "Best and Worst of the Revised Monster Manual (Teos Abadia, Alphastream, 2025-03-13)",
+   "url": "https://alphastream.org/index.php/2025/03/13/best-and-worst-of-the-revised-monster-manual/",
+   "quote": "far fewer words devoted to describing the monster",
+   "page": "AL admin/designer blog"
+  },
+  {
+   "index": 213,
+   "feature": "stat-block phrasing inconsistency",
+   "claim": "2025 Multiattack lines inconsistently include 'in any combination', and the gelatinous cube's codified wording is harder to understand than before.",
+   "source": "Best and Worst of the Revised Monster Manual (Teos Abadia, Alphastream, 2025-03-13)",
+   "url": "https://alphastream.org/index.php/2025/03/13/best-and-worst-of-the-revised-monster-manual/",
+   "quote": "a fair lack of clarity in monster stat blocks",
+   "page": "AL admin/designer blog"
   }
  ]
 }

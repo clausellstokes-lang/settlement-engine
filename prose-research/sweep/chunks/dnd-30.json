@@ -2,157 +2,157 @@
  "name": "dnd",
  "chunk": 30,
  "indices": [
-  499,
-  500,
-  501,
-  502,
-  503,
-  504,
-  505,
-  506,
-  507,
-  508,
-  509,
-  510,
-  511,
-  512,
-  513
+  604,
+  605,
+  606,
+  607,
+  608,
+  609,
+  610,
+  611,
+  612,
+  613,
+  614,
+  615,
+  616,
+  617,
+  618
  ],
  "claims": [
   {
-   "index": 499,
-   "feature": "place and institution description",
-   "claim": "Prince of Nothing praises GAZ1 for placing every little settlement intelligently with respect to trade routes.",
-   "source": "Prince of Nothing, Age of Dusk blog, 2020",
-   "url": "https://princeofnothingblogs.wordpress.com/2020/03/30/review-gaz-1-the-grand-duchy-of-karameikos-dnd-basic/",
-   "quote": "every little settlement fits, is intelligently placed",
-   "page": "body, paragraph after the Korizegy Keep discussion"
+   "index": 604,
+   "feature": "other: character sketch shorthand",
+   "claim": "DDA2 Legions of Thyatis (1990) advised characterising an NPC by picturing him as an animal while describing him.",
+   "source": "John Nephew, DDA2 Legions of Thyatis (TSR, 1990), quoted by David Hartlage, DMDavid, 2024",
+   "url": "https://dmdavid.com/tag/from-b1-to-pinebrook-every-dd-adventure-that-includes-dm-advice-and-what-they-taught/",
+   "quote": "visualize him as an animal",
+   "page": "DDA2 Legions of Thyatis (1990) — Characterizing NPCs"
   },
   {
-   "index": 500,
-   "feature": "plainness and economy",
-   "claim": "Prince of Nothing prescribes a few sentences for a minor NPC who adds little.",
-   "source": "Prince of Nothing, Age of Dusk blog, 2020",
-   "url": "https://princeofnothingblogs.wordpress.com/2020/03/30/review-gaz-1-the-grand-duchy-of-karameikos-dnd-basic/",
-   "quote": "Just do a few sentences and ditch",
-   "page": "body, paragraph on the Characters section"
+   "index": 605,
+   "feature": "omission as information",
+   "claim": "The Hidden Halls of Hazacor (2018) told new DMs to replace unimportant sequences with a short summary.",
+   "source": "Scott Fitzgerald Gray, The Hidden Halls of Hazacor (2018), quoted by David Hartlage, DMDavid, 2024",
+   "url": "https://dmdavid.com/tag/from-b1-to-pinebrook-every-dd-adventure-that-includes-dm-advice-and-what-they-taught/",
+   "quote": "you can give the players a short summary instead",
+   "page": "The Hidden Halls of Hazacor (2018) — Summarize the boring parts"
   },
   {
-   "index": 501,
-   "feature": "place and institution description",
-   "claim": "Gus L says Phandalin's keyed locations carry no evocative detail despite each having a paragraph.",
-   "source": "Gus L, Dungeon of Signs, 2015",
-   "url": "http://dungeonofsigns.blogspot.com/2015/12/lost-mines-of-phandelver-review.html",
-   "quote": "no evocative detail despite having a paragraph each",
-   "page": "section THE TOWN AND BANDITS"
-  },
-  {
-   "index": 502,
-   "feature": "place and institution description",
-   "claim": "Gus L quotes the module's inn description as a large newly built roadhouse of field stone and rough hewn timbers.",
-   "source": "Gus L, Dungeon of Signs, 2015, quoting Lost Mine of Phandelver (Wizards of the Coast, 2014)",
-   "url": "http://dungeonofsigns.blogspot.com/2015/12/lost-mines-of-phandelver-review.html",
-   "quote": "large newly built roadhouse of field stone and rough hewn timbers",
-   "page": "section THE TOWN AND BANDITS"
-  },
-  {
-   "index": 503,
-   "feature": "place and institution description",
-   "claim": "Gus L says none of Phandalin's rumors add local color or an evocative detail.",
-   "source": "Gus L, Dungeon of Signs, 2015",
-   "url": "http://dungeonofsigns.blogspot.com/2015/12/lost-mines-of-phandelver-review.html",
-   "quote": "none of the rumors add local color or an evocative detail",
-   "page": "section THE TOWN AND BANDITS"
-  },
-  {
-   "index": 504,
-   "feature": "naming and forms of address",
-   "claim": "Gus L says Phandalin's NPC sidebar gives nothing beyond an immediately forgotten fantasy name.",
-   "source": "Gus L, Dungeon of Signs, 2015",
-   "url": "http://dungeonofsigns.blogspot.com/2015/12/lost-mines-of-phandelver-review.html",
-   "quote": "nothing beyond an immediately forgotten fantasy name",
-   "page": "section THE TOWN AND BANDITS"
-  },
-  {
-   "index": 505,
+   "index": 606,
    "feature": "boxed text form",
-   "claim": "Gus L calls Lost Mine of Phandelver's boxed text bloodless.",
-   "source": "Gus L, Dungeon of Signs, 2015",
-   "url": "http://dungeonofsigns.blogspot.com/2015/12/lost-mines-of-phandelver-review.html",
-   "quote": "bloodless box text",
-   "page": "section THE TOWN AND BANDITS, closing paragraph"
+   "claim": "Hartlage notes that the 1999 introductory modules printed scripted text for the DM to read to new players.",
+   "source": "David Hartlage, DMDavid, 30 Jan 2024, on Eye of the Wyvern (1999)",
+   "url": "https://dmdavid.com/tag/from-b1-to-pinebrook-every-dd-adventure-that-includes-dm-advice-and-what-they-taught/",
+   "quote": "scripted text for the DM to read to new players",
+   "page": "Eye of the Wyvern (1999)"
   },
   {
-   "index": 506,
-   "feature": "place and institution description",
-   "claim": "Gus L says making up towns is tricky for a designer.",
-   "source": "Gus L, Dungeon of Signs, 2015",
-   "url": "http://dungeonofsigns.blogspot.com/2015/12/lost-mines-of-phandelver-review.html",
-   "quote": "Making up towns is tricky",
-   "page": "section THE TOWN AND BANDITS, opening line"
-  },
-  {
-   "index": 507,
+   "index": 607,
    "feature": "edition and house style",
-   "claim": "Idle Cartulary says being overwritten is a signature of fifth edition module writing.",
-   "source": "Idle Cartulary, Playful Void, 2025",
-   "url": "https://idlecartulary.com/2025/01/13/bathtub-review-lost-mine-of-phandelver/",
-   "quote": "being overwritten is a signature of 5th edition module writing",
-   "page": "body, paragraph on layout"
+   "claim": "Hartlage describes a fourth-edition design goal of letting a casual DM simply buy an adventure and read its boxed text.",
+   "source": "David Hartlage, DMDavid, 14 Feb 2023",
+   "url": "https://dmdavid.com/tag/fourth-edition-improved-dd-design-for-good-but-one-of-its-innovations-still-leads-to-bad-adventures/",
+   "quote": "buy an adventure, read the boxed text",
+   "page": "Skill challenges satisfied three design goals"
   },
   {
-   "index": 508,
+   "index": 608,
+   "feature": "boxed text form",
+   "claim": "McKenzie dates the first appearance of boxed read-aloud text in D&D to the 1980 module The Hidden Shrine of Tamoachan.",
+   "source": "Brian McKenzie, Analog Game Studies, 18 Dec 2023",
+   "url": "https://analoggamestudies.org/2023/12/murders-on-the-stage-tortures-woundings-and-the-like-dungeons-dragons-adventures-as-tragedy/",
+   "quote": "marks its first appearance",
+   "page": "section on descriptive text and 'at rise' descriptions"
+  },
+  {
+   "index": 609,
+   "feature": "boxed text form",
+   "claim": "McKenzie argues D&D read-aloud text is the genre analogue of the theatre's 'at rise' stage description.",
+   "source": "Brian McKenzie, Analog Game Studies, 18 Dec 2023",
+   "url": "https://analoggamestudies.org/2023/12/murders-on-the-stage-tortures-woundings-and-the-like-dungeons-dragons-adventures-as-tragedy/",
+   "quote": "Read-aloud text is analogous to",
+   "page": "descriptive text section"
+  },
+  {
+   "index": 610,
+   "feature": "withheld information and inference",
+   "claim": "The Hidden Shrine of Tamoachan's own instruction is that its read-aloud text hints at what may be done and that the DM answer questions only vaguely.",
+   "source": "Harold Johnson and Jeff R. Leason, The Hidden Shrine of Tamoachan (1980), quoted by Brian McKenzie (2023)",
+   "url": "https://analoggamestudies.org/2023/12/murders-on-the-stage-tortures-woundings-and-the-like-dungeons-dragons-adventures-as-tragedy/",
+   "quote": "the DM should only provide vague information if questioned",
+   "page": "descriptive text section, note 34"
+  },
+  {
+   "index": 611,
+   "feature": "withheld information and inference",
+   "claim": "McKenzie's summary of the function of read-aloud text is that it offers clues and frames narrative boundaries.",
+   "source": "Brian McKenzie, Analog Game Studies, 18 Dec 2023",
+   "url": "https://analoggamestudies.org/2023/12/murders-on-the-stage-tortures-woundings-and-the-like-dungeons-dragons-adventures-as-tragedy/",
+   "quote": "It offers clues and the frames narrative boundaries",
+   "page": "descriptive text section"
+  },
+  {
+   "index": 612,
+   "feature": "boxed text form",
+   "claim": "McKenzie states that Jennifer Grouling Cover's is perhaps the only academic discussion of read-aloud text in tabletop adventures.",
+   "source": "Brian McKenzie, Analog Game Studies, 18 Dec 2023",
+   "url": "https://analoggamestudies.org/2023/12/murders-on-the-stage-tortures-woundings-and-the-like-dungeons-dragons-adventures-as-tragedy/",
+   "quote": "one of the few—perhaps the only—academic discussions",
+   "page": "descriptive text section"
+  },
+  {
+   "index": 613,
+   "feature": "boxed text form",
+   "claim": "Michael Shea likens read-aloud text to the script of a Broadway show.",
+   "source": "Michael Shea, quoted by Brian McKenzie, Analog Game Studies, 2023",
+   "url": "https://analoggamestudies.org/2023/12/murders-on-the-stage-tortures-woundings-and-the-like-dungeons-dragons-adventures-as-tragedy/",
+   "quote": "our read-aloud text is part of our script",
+   "page": "descriptive text section, note 35"
+  },
+  {
+   "index": 614,
+   "feature": "boxed text form",
+   "claim": "A Twitter poll by D&D lead rules designer Jeremy Crawford drew 2,248 replies, of which 59.5% wanted occasional boxed text, 34.4% wanted lots and 6% wanted none.",
+   "source": "Jeremy Crawford's poll, reported by Brian McKenzie, Analog Game Studies, 2023",
+   "url": "https://analoggamestudies.org/2023/12/murders-on-the-stage-tortures-woundings-and-the-like-dungeons-dragons-adventures-as-tragedy/",
+   "quote": "2,248 replies",
+   "page": "descriptive text section, note 38"
+  },
+  {
+   "index": 615,
+   "feature": "boxed text form",
+   "claim": "Merwin calls boxed text as much a part of D&D's history and brand as saving throws, hit points and armor class.",
+   "source": "Shawn Merwin, 'Let's Design an Adventure: Boxed Text', D&D Beyond, 2019",
+   "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+   "quote": "as much a part of D&D's history and brand",
+   "page": "opening"
+  },
+  {
+   "index": 616,
+   "feature": "boxed text form",
+   "claim": "Merwin says the act of writing boxed text forces designers to think harder about their encounters.",
+   "source": "Shawn Merwin, 'Let's Design an Adventure: Boxed Text', D&D Beyond, 2019",
+   "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+   "quote": "to think harder about their encounters",
+   "page": "opening"
+  },
+  {
+   "index": 617,
+   "feature": "boxed text form",
+   "claim": "A scholarly case study lists read-aloud text, player handouts, DM instructions and NPC dialogue among the five textual elements that carry an adventure's ideas.",
+   "source": "Brian McKenzie, Bret Zawilski and James Beirne, International Journal of Role-Playing 17, 2026",
+   "url": "https://journals.uu.se/IJRP/article/download/679/1013",
+   "quote": "read-aloud text, player handouts, instructions to the Dungeon Master",
+   "page": "p. 145, design section"
+  },
+  {
+   "index": 618,
    "feature": "edition and house style",
-   "claim": "Idle Cartulary says fifth edition takes up a lot more space per key entry than the earlier starter modules.",
-   "source": "Idle Cartulary, Playful Void, 2025",
-   "url": "https://idlecartulary.com/2025/01/13/bathtub-review-lost-mine-of-phandelver/",
-   "quote": "5e takes up a lot more space per key",
-   "page": "body, paragraph on the module itself"
-  },
-  {
-   "index": 509,
-   "feature": "place and institution description",
-   "claim": "Mike Shea advises defining a town with at least one fantastic feature and probably no more than three.",
-   "source": "Mike Shea, Sly Flourish, 2023",
-   "url": "https://slyflourish.com/introducing_towns.html",
-   "quote": "at least one of these fantastic features",
-   "page": "section Identify a Fantastic Feature"
-  },
-  {
-   "index": 510,
-   "feature": "place and institution description",
-   "claim": "Merric Blackman says the original Sinister Secret of Saltmarsh gave guidelines on what to include rather than describing the town.",
-   "source": "Merric Blackman, Merric's Musings, 2019",
-   "url": "https://merricb.com/2019/05/22/ghosts-of-saltmarsh-looking-at-the-town/",
-   "quote": "a town council, a merchant, a town map",
-   "page": "body, third paragraph"
-  },
-  {
-   "index": 511,
-   "feature": "civic record register",
-   "claim": "The Ghosts of Saltmarsh overview passage opens by giving the town's population figure and its predominant people.",
-   "source": "Ghosts of Saltmarsh (Wizards of the Coast, 2019), chapter 1 Saltmarsh Overview, quoted at length by Merric Blackman",
-   "url": "https://merricb.com/2019/05/22/ghosts-of-saltmarsh-looking-at-the-town/",
-   "quote": "roughly five thousand residents are predominantly human",
-   "page": "Chapter 1: Saltmarsh, Saltmarsh Overview, as block-quoted in the post"
-  },
-  {
-   "index": 512,
-   "feature": "place and institution description",
-   "claim": "The quoted Saltmarsh overview states how residents react to visiting tieflings and dragonborn.",
-   "source": "Ghosts of Saltmarsh (Wizards of the Coast, 2019), chapter 1 Saltmarsh Overview, quoted by Merric Blackman",
-   "url": "https://merricb.com/2019/05/22/ghosts-of-saltmarsh-looking-at-the-town/",
-   "quote": "with a mixture of curiosity and fear",
-   "page": "Chapter 1: Saltmarsh, Saltmarsh Overview, as block-quoted in the post"
-  },
-  {
-   "index": 513,
-   "feature": "place and institution description",
-   "claim": "Merric Blackman says Ghosts of Saltmarsh gave him a better feel for its town than Dragon Heist gave him for Waterdeep.",
-   "source": "Merric Blackman, Merric's Musings, 2019",
-   "url": "https://merricb.com/2019/05/22/ghosts-of-saltmarsh-looking-at-the-town/",
-   "quote": "a much better feel for the town than I did for Waterdeep",
-   "page": "body, paragraph beginning All-in-all"
+   "claim": "Huddleston notes that many early tabletop rulebooks contain little prose or narrative, being given over to rules.",
+   "source": "Stefan Huddleston, Analog Game Studies, 18 Dec 2022",
+   "url": "https://analoggamestudies.org/2022/12/when-worlds-collaborate-the-style-of-early-tabletop-role-playing-games/",
+   "quote": "many early examples lack prose and narrative in favor of rules",
+   "page": "sources and methodology section"
   }
  ]
 }

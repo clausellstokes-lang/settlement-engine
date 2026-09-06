@@ -2,157 +2,157 @@
  "name": "dnd",
  "chunk": 27,
  "indices": [
-  454,
-  455,
-  456,
-  457,
-  458,
-  459,
-  460,
-  461,
-  462,
-  463,
-  464,
-  465,
-  466,
-  467,
-  468
+  559,
+  560,
+  561,
+  562,
+  563,
+  564,
+  565,
+  566,
+  567,
+  568,
+  569,
+  570,
+  571,
+  572,
+  573
  ],
  "claims": [
   {
-   "index": 454,
-   "feature": "adjective and adverb discipline",
-   "claim": "Hartlage names sunset colour as the type of unimportant ornament too many boxed descriptions dwell on.",
-   "source": "David Hartlage, DMDavid",
-   "url": "https://dmdavid.com/tag/picturing-the-dungeon-boxed-text/",
-   "quote": "the color of the sunset and other bits of obviously unimportant fluff",
-   "page": "Boxed text"
-  },
-  {
-   "index": 455,
-   "feature": "boxed text form",
-   "claim": "Hartlage, though he paraphrases at the table, says nothing has replaced boxed text as a way of summarising what players must learn on entering a room.",
-   "source": "David Hartlage, DMDavid",
-   "url": "https://dmdavid.com/tag/picturing-the-dungeon-boxed-text/",
-   "quote": "No one has shown a better way to summarize",
-   "page": "Boxed text"
-  },
-  {
-   "index": 456,
+   "index": 559,
    "feature": "civic record register",
-   "claim": "Justin Alexander shows the Yawning Portal's first official entry in FR1 Waterdeep and the North was a numbered cross-reference line with no description.",
-   "source": "Justin Alexander, The Alexandrian, quoting FR1 Waterdeep and the North (1987)",
+   "claim": "City of Splendors classifies the Yawning Portal as a three-story Class C building.",
+   "source": "City of Splendors boxed set (TSR, 1994), reported by Justin Alexander",
    "url": "https://thealexandrian.net/wordpress/47553/roleplaying-games/forgotten-realms-a-textual-history-of-the-yawning-portal",
-   "quote": "4. The Yawning Portal (inn) – See Durnan, p. 17",
-   "page": "The Early Days"
+   "quote": "a 3-story Class C building",
+   "page": "section THE EARLY DAYS, list of City of Splendors details"
   },
   {
-   "index": 457,
-   "feature": "omission as information",
-   "claim": "Alexander quotes Ruins of Undermountain (1991) declining to describe the inn on the stated ground of leaving DMs free rein, and calls the claim implausible given three prior books.",
-   "source": "Justin Alexander quoting TSR's Ruins of Undermountain (1991)",
-   "url": "https://thealexandrian.net/wordpress/47553/roleplaying-games/forgotten-realms-a-textual-history-of-the-yawning-portal",
-   "quote": "to allow DMs free rein in customizing this rambling, shady place",
-   "page": "The Early Days"
-  },
-  {
-   "index": 458,
+   "index": 560,
    "feature": "civic record register",
-   "claim": "Alexander records that City of Splendors (1994) fixes the inn's founding year and building class, adding registry-style facts to the accumulated description.",
-   "source": "Justin Alexander, The Alexandrian, on City of Splendors (1994)",
+   "claim": "City of Splendors dates the founding of the Yawning Portal to 1306 DR.",
+   "source": "City of Splendors boxed set (TSR, 1994), reported by Justin Alexander",
    "url": "https://thealexandrian.net/wordpress/47553/roleplaying-games/forgotten-realms-a-textual-history-of-the-yawning-portal",
-   "quote": "Durnan established the Yawning Portal in 1306 DR.",
-   "page": "The Early Days"
+   "quote": "Durnan established the Yawning Portal in 1306 DR",
+   "page": "section THE EARLY DAYS, list of City of Splendors details"
   },
   {
-   "index": 459,
-   "feature": "edition and house style",
-   "claim": "James Maliszewski characterises pre-1982 module backgrounds as thin and credits Tracy Hickman's modules with introducing NPCs given hopes, dreams and fears.",
-   "source": "James Maliszewski, Grognardia",
-   "url": "https://grognardia.blogspot.com/2008/12/scrappy-doo-and-hickman-revolution.html",
-   "quote": "the thin backgrounds of earlier adventures",
-   "page": "Scrappy-Doo and the Hickman Revolution"
+   "index": 561,
+   "feature": "other: measured detail",
+   "claim": "Ruins of Undermountain gives the taproom well a depth of 140 feet.",
+   "source": "Ruins of Undermountain (TSR, 1991), reported by Justin Alexander",
+   "url": "https://thealexandrian.net/wordpress/47553/roleplaying-games/forgotten-realms-a-textual-history-of-the-yawning-portal",
+   "quote": "The well is 140 feet deep",
+   "page": "section THE EARLY DAYS, list of Ruins of Undermountain details"
   },
   {
-   "index": 460,
-   "feature": "dm-facing sentence",
-   "claim": "Maliszewski quotes The Hidden Shrine of Tamoachan's own DM notes instructing the referee to read the module through and annotate the margins before play.",
-   "source": "James Maliszewski quoting module C1's Notes for the Dungeon Master",
-   "url": "https://grognardia.blogspot.com/2010/06/retrospective-hidden-shrine-of.html",
-   "quote": "read the module thoroughly before play starts, making notes in the margins",
-   "page": "Retrospective: The Hidden Shrine of Tamoachan"
+   "index": 562,
+   "feature": "other: in-world document form",
+   "claim": "Alexander's published chaos lorebook opens by naming the physical document before its contents.",
+   "source": "Justin Alexander, The Alexandrian, Chaos Lorebook: The Assassins of Chaos, 2026",
+   "url": "https://thealexandrian.net/wordpress/53746/roleplaying-games/chaos-lorebook-the-assassins-of-chaos",
+   "quote": "Three blood-stained scrolls have been bound together",
+   "page": "opening paragraph of the handout"
   },
   {
-   "index": 461,
+   "index": 563,
+   "feature": "withheld information and inference",
+   "claim": "Alexander's lorebook handout hedges its source's boasts as claims one can only hope are exaggerated.",
+   "source": "Justin Alexander, The Alexandrian, Chaos Lorebook: The Assassins of Chaos, 2026",
+   "url": "https://thealexandrian.net/wordpress/53746/roleplaying-games/chaos-lorebook-the-assassins-of-chaos",
+   "quote": "which one can only hope are exaggerated",
+   "page": "section UNTO THE DEATH OF WORLDS"
+  },
+  {
+   "index": 564,
    "feature": "point of view and distance",
-   "claim": "Bryce Lynch frames published adventure prose as a transfer problem: a private note is only a memory cue, and writing for a stranger must carry the image itself.",
-   "source": "Bryce Lynch, 'The Book Introduction', tenfootpole.org",
-   "url": "https://tenfootpole.org/ironspike/?page_id=9593",
-   "quote": "The words on the page are only a memory cue",
-   "page": "The Book Introduction"
+   "claim": "Alexander's lorebook handout marks its inferences with the phrase that it appears the creatures behave a certain way.",
+   "source": "Justin Alexander, The Alexandrian, Chaos Lorebook: The Assassins of Chaos, 2026",
+   "url": "https://thealexandrian.net/wordpress/53746/roleplaying-games/chaos-lorebook-the-assassins-of-chaos",
+   "quote": "It appears that the carach",
+   "page": "section UNTO THE DEATH OF WORLDS"
   },
   {
-   "index": 462,
-   "feature": "other: craft difficulty",
-   "claim": "Lynch counts at least two translations between the writer's image and the gamemaster's, and blames dry encounters on their failure.",
-   "source": "Bryce Lynch, tenfootpole.org",
-   "url": "https://tenfootpole.org/ironspike/?page_id=9593",
-   "quote": "there are at least two translations between your head and the gamemaster",
-   "page": "The Book Introduction"
+   "index": 565,
+   "feature": "edition and house style",
+   "claim": "Frank Mentzer's redline review of the Quagmire! rough draft objected that the text was padded.",
+   "source": "Jon Peterson, 'Quagmire! The Making of a 1980's D&D Module', Medium, 2014",
+   "url": "https://medium.com/@increment/quagmire-the-making-of-a-1980s-d-d-module-c30e788ea5f2",
+   "quote": "obviously padded",
+   "page": "Development Hell Level 7: Rough Draft Consultation"
   },
   {
-   "index": 463,
-   "feature": "other: information order",
-   "claim": "Alexander's key structure puts the seen-at-a-glance block first and requires it to hold everything conveyed on entering, before checks and before element-by-element detail.",
-   "source": "Justin Alexander, 'The Art of the Key – Part 2', The Alexandrian",
-   "url": "https://thealexandrian.net/wordpress/35201/roleplaying-games/the-art-of-the-key-part-2-the-essential-key",
-   "quote": "contain all of the information that should be immediately conveyed",
-   "page": "Boxed Text"
+   "index": 566,
+   "feature": "repetition and refrain",
+   "claim": "Mentzer's review of the same draft also faulted it as extremely repetitive.",
+   "source": "Jon Peterson, 'Quagmire! The Making of a 1980's D&D Module', Medium, 2014",
+   "url": "https://medium.com/@increment/quagmire-the-making-of-a-1980s-d-d-module-c30e788ea5f2",
+   "quote": "extremely repetitive",
+   "page": "Development Hell Level 7"
   },
   {
-   "index": 464,
-   "feature": "other: information order",
-   "claim": "Alexander's ordering principle for a location entry is general to specific, tracked against how the reader will actually come by each fact.",
-   "source": "Justin Alexander, The Alexandrian",
-   "url": "https://thealexandrian.net/wordpress/35201/roleplaying-games/the-art-of-the-key-part-2-the-essential-key",
-   "quote": "move from the general to the specific",
-   "page": "Developing Significant Elements"
+   "index": 567,
+   "feature": "terminology consistency",
+   "claim": "Mentzer objected to the redundant construction 'Patriarch Cleric' by likening it to 'female girl'.",
+   "source": "Jon Peterson, 'Quagmire!', Medium, 2014, reporting Mentzer's marginalia",
+   "url": "https://medium.com/@increment/quagmire-the-making-of-a-1980s-d-d-module-c30e788ea5f2",
+   "quote": "female girl",
+   "page": "Development Hell Level 7"
   },
   {
-   "index": 465,
+   "index": 568,
+   "feature": "terminology consistency",
+   "claim": "Mentzer's consultation role was to ensure BECMI modules used the game's system terms consistently.",
+   "source": "Jon Peterson, 'Quagmire!', Medium, 2014",
+   "url": "https://medium.com/@increment/quagmire-the-making-of-a-1980s-d-d-module-c30e788ea5f2",
+   "quote": "exercised the system consistently",
+   "page": "Development Hell Level 7"
+  },
+  {
+   "index": 569,
+   "feature": "edition and house style",
+   "claim": "Every TSR module of the period had a product standards sheet fixing its styles, type sizes and margins.",
+   "source": "Jon Peterson, 'Quagmire!', Medium, 2014",
+   "url": "https://medium.com/@increment/quagmire-the-making-of-a-1980s-d-d-module-c30e788ea5f2",
+   "quote": "listed all of the styles, typesizes, margins",
+   "page": "Development Hell Level 8: The Proof"
+  },
+  {
+   "index": 570,
    "feature": "plainness and economy",
-   "claim": "The Age of Dusk reviewer's writing standard is that short evocative prose conveys a place's feel and leaves blanks for the GM to fill.",
-   "source": "Prince, 'Reviewing Standards', Age of Dusk",
-   "url": "https://princeofnothingblogs.wordpress.com/reviewing-standards/",
-   "quote": "Short, evocative writing communicates the feel of a place",
-   "page": "Writing"
+   "claim": "Much of the flavor text that troubled Mentzer was cut from the published module.",
+   "source": "Jon Peterson, 'Quagmire!', Medium, 2014",
+   "url": "https://medium.com/@increment/quagmire-the-making-of-a-1980s-d-d-module-c30e788ea5f2",
+   "quote": "including the saving throw notation and the flavor text",
+   "page": "Development Hell Level 7"
   },
   {
-   "index": 466,
-   "feature": "place and institution description",
-   "claim": "The same standard lists two-page room descriptions among the things everyone dislikes in adventure writing.",
-   "source": "Prince, 'Reviewing Standards', Age of Dusk",
-   "url": "https://princeofnothingblogs.wordpress.com/reviewing-standards/",
-   "quote": "room descriptions that go on for two pages",
-   "page": "Writing"
+   "index": 571,
+   "feature": "other: text budgeting",
+   "claim": "The module's section breakdown worksheet projected each section's length in both pages and lines of the HP3000 editor.",
+   "source": "Jon Peterson, 'Quagmire!', Medium, 2014",
+   "url": "https://medium.com/@increment/quagmire-the-making-of-a-1980s-d-d-module-c30e788ea5f2",
+   "quote": "measured both by page count and by line count",
+   "page": "Development Hell Level 5: Design Crunch Time"
   },
   {
-   "index": 467,
-   "feature": "dm-facing sentence",
-   "claim": "Courtney Campbell's location notation reduces the spoken description to the bolded words alone, everything else waiting on a player's question.",
-   "source": "Courtney Campbell, 'On Set Design', Hack & Slash",
-   "url": "https://hackslashmaster.blogspot.com/2012/06/on-set-design.html",
-   "quote": "When describing things, I only use the bolded words!",
-   "page": "On Set Design"
+   "index": 572,
+   "feature": "omission as information",
+   "claim": "TSR stripped city names from the player-facing map of Quagmire!, and withheld the pointer to the Spiral City itself.",
+   "source": "Jon Peterson, 'Quagmire!', Medium, 2014",
+   "url": "https://medium.com/@increment/quagmire-the-making-of-a-1980s-d-d-module-c30e788ea5f2",
+   "quote": "is withheld from the players",
+   "page": "Development Hell Level 6: Maps and Illustrations"
   },
   {
-   "index": 468,
-   "feature": "plainness and economy",
-   "claim": "Campbell's stated rule for the same notation is that no unimportant word appears at all.",
-   "source": "Courtney Campbell, 'On Set Design', Hack & Slash",
-   "url": "https://hackslashmaster.blogspot.com/2012/06/on-set-design.html",
-   "quote": "Any word that is not important, is not used.",
-   "page": "On Set Design"
+   "index": 573,
+   "feature": "boxed text form",
+   "claim": "The front cover of a 1984 TSR module carried only a few sentences of flavor text beneath the cover illustration.",
+   "source": "Jon Peterson, 'Quagmire!', Medium, 2014",
+   "url": "https://medium.com/@increment/quagmire-the-making-of-a-1980s-d-d-module-c30e788ea5f2",
+   "quote": "a few sentences of flavor text",
+   "page": "Development Hell Level 8: The Proof"
   }
  ]
 }

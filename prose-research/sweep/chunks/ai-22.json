@@ -2,157 +2,157 @@
  "name": "ai",
  "chunk": 22,
  "indices": [
-  584,
-  585,
-  586,
-  587,
-  588,
-  589,
-  590,
-  591,
-  592,
-  593,
-  594,
-  595,
-  596,
-  597,
-  598
+  829,
+  830,
+  831,
+  833,
+  834,
+  835,
+  836,
+  837,
+  838,
+  839,
+  840,
+  841,
+  843,
+  844,
+  845
  ],
  "claims": [
   {
-   "index": 584,
-   "feature": "detection and its failures",
-   "claim": "Clarke states that machine-text detection tools are prone to both false negatives and false positives.",
-   "source": "Neil Clarke, 'A Concerning Trend', 15 February 2023",
-   "url": "https://neil-clarke.com/a-concerning-trend/",
-   "quote": "they are prone to false negatives and positives",
-   "page": "body, paragraph beginning 'Yes, there are tools'"
+   "index": 829,
+   "feature": "gloss and over-explaining",
+   "claim": "StoryScope measured narrators explicitly explaining the story's theme in 77% of AI stories versus 52% of human stories.",
+   "source": "Russell, Rajendhran, Pham, Iyyer and Wieting, StoryScope, arXiv:2604.03136v6",
+   "url": "https://arxiv.org/html/2604.03136v6",
+   "quote": "Narrators explicitly explain the story’s theme 77% of the time",
+   "page": "§4.1 'AI over-explains its themes'"
   },
   {
-   "index": 585,
-   "feature": "detection and its failures",
-   "claim": "Clarke told NPR that by the time he closed submissions Clarkesworld had received 700 legitimate submissions and 500 machine-written ones.",
-   "source": "Neil Clarke, interviewed by NPR All Things Considered, 24 February 2023",
-   "url": "https://www.npr.org/2023/02/24/1159286436/rise-of-ai-chatbot-programs-has-led-to-flood-of-fake-submissions-to-sci-fi-magazi",
-   "quote": "we had received 700 legitimate submissions and 500 machine-written ones",
-   "page": "third paragraph of the web write-up"
+   "index": 830,
+   "feature": "no subtext",
+   "claim": "StoryScope characterises the AI pattern as over-determination in which the model spells out meaning rather than trusting the reader to infer it.",
+   "source": "Russell, Rajendhran, Pham, Iyyer and Wieting, StoryScope, arXiv:2604.03136v6",
+   "url": "https://arxiv.org/html/2604.03136v6",
+   "quote": "AI spells out meaning rather than trusting the reader to infer it",
+   "page": "§4.1"
   },
   {
-   "index": 586,
-   "feature": "steerability",
-   "claim": "Alex Hern frames the generated quality of chatbot text as a default register that a concerted effort can break the systems out of.",
-   "source": "Alex Hern, TechScape newsletter, The Guardian, 16 April 2024",
-   "url": "https://www.theguardian.com/technology/2024/apr/16/techscape-ai-gadgest-humane-ai-pin-chatgpt",
-   "quote": "break the systems out of their default register",
-   "page": "opening section, second paragraph"
-  },
-  {
-   "index": 587,
-   "feature": "lexical tells",
-   "claim": "Hern reports that half a percent of articles on PubMed contain the word delve, 10 to 100 times more than a few years earlier.",
-   "source": "Alex Hern, TechScape newsletter, The Guardian, 16 April 2024",
-   "url": "https://www.theguardian.com/technology/2024/apr/16/techscape-ai-gadgest-humane-ai-pin-chatgpt",
-   "quote": "half a percent of all articles on research site PubMed",
-   "page": "section on Jeremy Nguyen's finding"
-  },
-  {
-   "index": 588,
-   "feature": "lexical tells",
-   "claim": "Hern reports that explore, tapestry, testament and leverage appear far more frequently in ChatGPT's output than on the internet at large.",
-   "source": "Alex Hern, TechScape newsletter, The Guardian, 16 April 2024",
-   "url": "https://www.theguardian.com/technology/2024/apr/16/techscape-ai-gadgest-humane-ai-pin-chatgpt",
-   "quote": "all appear far more frequently in the system’s output",
-   "page": "paragraph beginning 'According to another dataset'"
-  },
-  {
-   "index": 589,
-   "feature": "counter-evidence",
-   "claim": "Hern reports that delve is much more frequently used in Nigerian business English than in English or American English.",
-   "source": "Alex Hern, TechScape newsletter, The Guardian, 16 April 2024",
-   "url": "https://www.theguardian.com/technology/2024/apr/16/techscape-ai-gadgest-humane-ai-pin-chatgpt",
-   "quote": "is much more frequently used in business English than it",
-   "page": "paragraph beginning 'I said “delve” was overused'"
-  },
-  {
-   "index": 590,
-   "feature": "counter-evidence",
-   "claim": "Hern warns that treating AI-ese as a tell makes African English readable as AI-ese.",
-   "source": "Alex Hern, TechScape newsletter, The Guardian, 16 April 2024",
-   "url": "https://www.theguardian.com/technology/2024/apr/16/techscape-ai-gadgest-humane-ai-pin-chatgpt",
-   "quote": "If AI-ese sounds like African English, then African English sounds like AI-ese",
-   "page": "paragraph beginning 'And that’s the final indignity'"
-  },
-  {
-   "index": 591,
-   "feature": "reflexive antithesis",
-   "claim": "Hern names the tendency to offer both sides of an argument in a single response as one of the less noticeable tells of generated text.",
-   "source": "Alex Hern, TechScape newsletter, The Guardian, 16 April 2024",
-   "url": "https://www.theguardian.com/technology/2024/apr/16/techscape-ai-gadgest-humane-ai-pin-chatgpt",
-   "quote": "A tendency to offer both sides of an argument in",
-   "page": "opening section, paragraph beginning 'Other tells are less noticeable'"
-  },
-  {
-   "index": 592,
+   "index": 831,
    "feature": "discourse-level tells",
-   "claim": "Hern attributes chatbots' fawning obsequiousness to reinforcement learning with human feedback.",
-   "source": "Alex Hern, TechScape newsletter, The Guardian, 16 April 2024",
-   "url": "https://www.theguardian.com/technology/2024/apr/16/techscape-ai-gadgest-humane-ai-pin-chatgpt",
-   "quote": "The fawning obsequiousness of a wild language model hammered into",
-   "page": "opening section, paragraph beginning 'Some of the tells are obvious'"
+   "claim": "StoryScope measured AI dialogue serving philosophical debate in 59% of AI stories against 34% of human stories.",
+   "source": "Russell, Rajendhran, Pham, Iyyer and Wieting, StoryScope, arXiv:2604.03136v6",
+   "url": "https://arxiv.org/html/2604.03136v6",
+   "quote": "AI dialogue serves philosophical debate more often (59% vs. 34%)",
+   "page": "§4.1"
   },
   {
-   "index": 593,
-   "feature": "other: marketplace policy",
-   "claim": "DriveThruRPG's storefront filter defines Handcrafted purely in terms of artwork made without AI-generation programs.",
-   "source": "DriveThruRPG help centre, 'Customer Experience with AI-Generated Content Within Titles', 28 October 2024",
-   "url": "https://help.drivethrurpg.com/hc/en-us/articles/26794784634007-Customer-Experience-with-AI-Generated-Content-Within-Titles",
-   "quote": "Artwork was made by an artist practicing their craft, without",
-   "page": "section 'What do the different filters mean?'"
+   "index": 833,
+   "feature": "discourse-level tells",
+   "claim": "StoryScope measured 79% of AI stories carrying no subplots against 57% of human stories.",
+   "source": "Russell, Rajendhran, Pham, Iyyer and Wieting, StoryScope, arXiv:2604.03136v6",
+   "url": "https://arxiv.org/html/2604.03136v6",
+   "quote": "far fewer subplots (79% “no subplots” vs. 57%)",
+   "page": "§4.1"
   },
   {
-   "index": 594,
-   "feature": "other: marketplace policy",
-   "claim": "EN World, quoting Gizmodo, reports that from 31 July 2023 the DriveThru marketplaces would not allow content made primarily of AI-generated writing.",
-   "source": "Gizmodo, quoted by Whizbang Dustyboots on EN World, 25 July 2023",
-   "url": "https://www.enworld.org/threads/dms-guild-and-drivethrurpg-ban-ai-written-works-requires-labels-for-ai-generated-art.698936/",
-   "quote": "of AI-generated writing will not be allowed",
-   "page": "thread opening post, block quotation from Gizmodo"
-  },
-  {
-   "index": 595,
-   "feature": "detection and its failures",
-   "claim": "The OneBookShelf policy, as quoted by Gizmodo, acknowledged enforcement challenges and rested on partners' goodwill.",
-   "source": "OneBookShelf policy text, quoted by Gizmodo, quoted on EN World, 25 July 2023",
-   "url": "https://www.enworld.org/threads/dms-guild-and-drivethrurpg-ban-ai-written-works-requires-labels-for-ai-generated-art.698936/",
-   "quote": "trust in the goodwill of our partners to offer customers",
-   "page": "thread opening post, block quotation from Gizmodo"
-  },
-  {
-   "index": 596,
+   "index": 834,
    "feature": "counter-evidence",
-   "claim": "Porter and Machery found non-expert readers identified AI-generated poems at below-chance accuracy.",
-   "source": "Brian Porter and Edouard Machery, Scientific Reports 14, 26133, 14 November 2024",
-   "url": "https://www.nature.com/articles/s41598-024-76900-1",
-   "quote": "participants performed below chance levels in identifying AI-generated poems",
+   "claim": "StoryScope measured AI stories conveying emotion through physical sensations and bodily metaphors in 81% of cases against 38% for humans, so on this corpus the AI writing is the more bodily-concrete of the two.",
+   "source": "Russell, Rajendhran, Pham, Iyyer and Wieting, StoryScope, arXiv:2604.03136v6",
+   "url": "https://arxiv.org/html/2604.03136v6",
+   "quote": "conveys emotion through physical sensations and bodily metaphors (81% vs. 38% human)",
+   "page": "§4.1 'AI over-writes the body and senses'"
+  },
+  {
+   "index": 835,
+   "feature": "counter-evidence",
+   "claim": "StoryScope measured human authors using explicit emotion labels 29% of the time against 8% for AI.",
+   "source": "Russell, Rajendhran, Pham, Iyyer and Wieting, StoryScope, arXiv:2604.03136v6",
+   "url": "https://arxiv.org/html/2604.03136v6",
+   "quote": "Humans use explicit emotion labels 29% of the time versus just 8%",
+   "page": "§4.1"
+  },
+  {
+   "index": 836,
+   "feature": "concrete sensory noun",
+   "claim": "StoryScope measured smell-based imagery in 82% of AI stories against 57% of human stories.",
+   "source": "Russell, Rajendhran, Pham, Iyyer and Wieting, StoryScope, arXiv:2604.03136v6",
+   "url": "https://arxiv.org/html/2604.03136v6",
+   "quote": "deploys more smell-based imagery (82% vs. 57%)",
+   "page": "§4.1"
+  },
+  {
+   "index": 837,
+   "feature": "abstraction over the concrete",
+   "claim": "StoryScope measured humans referencing specific texts and authors at 47% against 24% for AI, which sticks to vague allusions and avoids naming real brands, places or works.",
+   "source": "Russell, Rajendhran, Pham, Iyyer and Wieting, StoryScope, arXiv:2604.03136v6",
+   "url": "https://arxiv.org/html/2604.03136v6",
+   "quote": "Humans reference specific texts and authors at nearly double the AI rate",
+   "page": "§4.1 'Human authors engage the outside world'"
+  },
+  {
+   "index": 838,
+   "feature": "point of view and distance",
+   "claim": "StoryScope measured direct address to the reader in 28% of human stories against 7% of AI stories.",
+   "source": "Russell, Rajendhran, Pham, Iyyer and Wieting, StoryScope, arXiv:2604.03136v6",
+   "url": "https://arxiv.org/html/2604.03136v6",
+   "quote": "address the reader directly more frequently (28% vs. 7%)",
+   "page": "§4.1"
+  },
+  {
+   "index": 839,
+   "feature": "detection and its failures",
+   "claim": "StoryScope reports that discourse-level narrative features alone reach 93.2% macro-F1 at human-versus-AI detection, without any stylistic signal.",
+   "source": "Russell, Rajendhran, Pham, Iyyer and Wieting, StoryScope, arXiv:2604.03136v6",
+   "url": "https://arxiv.org/html/2604.03136v6",
+   "quote": "Narrative features alone achieve 93.2% macro-F1",
    "page": "Abstract"
   },
   {
-   "index": 597,
-   "feature": "detection and its failures",
-   "claim": "Accuracy in Porter and Machery's discrimination study was 46.6 percent.",
-   "source": "Brian Porter and Edouard Machery, Scientific Reports, 14 November 2024",
-   "url": "https://www.nature.com/articles/s41598-024-76900-1",
-   "quote": "Observed accuracy was in fact slightly lower than chance (46.6%",
-   "page": "Results, Study 1"
+   "index": 840,
+   "feature": "steerability",
+   "claim": "After span-level rewriting that removes surface AI artifacts such as cliche and purple prose, StoryScope's narrative classifier lost only 1.6 macro-F1 points on edited Gemini stories.",
+   "source": "Russell, Rajendhran, Pham, Iyyer and Wieting, StoryScope, arXiv:2604.03136v6",
+   "url": "https://arxiv.org/html/2604.03136v6",
+   "quote": "a drop of only 1.6 points",
+   "page": "§4.2 'Surface editing barely affects narrative detection'"
   },
   {
-   "index": 598,
-   "feature": "counter-evidence",
-   "claim": "Participants were more likely to judge AI-generated poems human-authored than they were actual human-authored poems.",
-   "source": "Brian Porter and Edouard Machery, Scientific Reports, 14 November 2024",
-   "url": "https://www.nature.com/articles/s41598-024-76900-1",
-   "quote": "more likely to judge AI-generated poems as human-authored than actual",
-   "page": "Abstract"
+   "index": 841,
+   "feature": "homogenisation",
+   "claim": "StoryScope measured 24.7% of human stories falling in the corpus-wide rarest ten per cent of narrative-feature space against 7.1% of AI stories.",
+   "source": "Russell, Rajendhran, Pham, Iyyer and Wieting, StoryScope, arXiv:2604.03136v6",
+   "url": "https://arxiv.org/html/2604.03136v6",
+   "quote": "24.7% of all human",
+   "page": "rarity analysis, mean Euclidean distance to 25 nearest neighbours"
+  },
+  {
+   "index": 843,
+   "feature": "register measured",
+   "claim": "StoryScope's human comparison corpus is 10,272 short stories extracted from Books3, so its register is published literary fiction and not any archival or record register.",
+   "source": "Russell, Rajendhran, Pham, Iyyer and Wieting, StoryScope, arXiv:2604.03136v6",
+   "url": "https://arxiv.org/html/2604.03136v6",
+   "quote": "We extract 10,272 human-written stories from Books3",
+   "page": "§3, dataset construction"
+  },
+  {
+   "index": 844,
+   "feature": "other: continuity across a long text",
+   "claim": "Chuck Wendig asserts that generative AI is not good at sustaining anything with continuity, which he treats as essential to longer-form writing.",
+   "source": "Chuck Wendig, Terribleminds, 2024",
+   "url": "https://terribleminds.com/ramble/2024/04/01/generative-a-i-for-writers-an-unfolding-but-not-inevitable-nightmare/",
+   "quote": "It also isn’t good at sustaining anything with continuity.",
+   "page": "'two key problems with Gen AI in writing', problem 1"
+  },
+  {
+   "index": 845,
+   "feature": "other: surface polish with nothing underneath",
+   "claim": "Wendig asserts that generative AI is not there to get things right but to make things look right.",
+   "source": "Chuck Wendig, Terribleminds, 2024",
+   "url": "https://terribleminds.com/ramble/2024/04/01/generative-a-i-for-writers-an-unfolding-but-not-inevitable-nightmare/",
+   "quote": "it’s here to make things look right",
+   "page": "problem 1, 'It really just sucks'"
   }
  ]
 }

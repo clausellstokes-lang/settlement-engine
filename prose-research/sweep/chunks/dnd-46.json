@@ -2,157 +2,157 @@
  "name": "dnd",
  "chunk": 46,
  "indices": [
-  739,
-  740,
-  741,
-  742,
-  743,
-  744,
-  745,
-  746,
-  747,
-  748,
-  749,
-  750,
-  751,
-  752,
-  753
+  844,
+  845,
+  846,
+  847,
+  848,
+  849,
+  850,
+  851,
+  852,
+  853,
+  854,
+  855,
+  856,
+  857,
+  858
  ],
  "claims": [
   {
-   "index": 739,
-   "feature": "plainness and economy",
-   "claim": "Bryce Lynch praises treasure descriptions that stay terse while being more interesting than a plus-one sword.",
-   "source": "Bryce Lynch, review of 'The Lions of Tell Arn Part 2', tenfootpole.org, 2026",
-   "url": "https://tenfootpole.org/ironspike/?p=10550",
-   "quote": "terse but much more interesting than a Sword, +1",
-   "page": "Lions of Tell Arn Part 2 review"
+   "index": 844,
+   "feature": "other: scholarly field map",
+   "claim": "The reviewer says Dread Trident's audience appears to be literary studies scholars.",
+   "source": "Adrianna Burton, 'Book Review: Dread Trident', Analog Game Studies, 2022",
+   "url": "https://analoggamestudies.org/2022/01/book-review-dread-trident/",
+   "quote": "audience appears to be literary studies scholars",
+   "page": "paragraph on the book's audience"
   },
   {
-   "index": 740,
-   "feature": "other: key format",
-   "claim": "David Hartlage reports that Gygax's own Castle Greyhawk key usually gave each room a one-line note.",
-   "source": "David Hartlage, 'How much description should a dungeon key include?', DMDavid, 2016",
-   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
-   "quote": "he usually wrote a 1-line note for each room",
-   "page": "How much description, opening"
+   "index": 845,
+   "feature": "other: scholarly field map",
+   "claim": "Carbonell says role-playing gametexts appeared to him an overlooked area of investigation for literary scholars.",
+   "source": "Curtis D. Carbonell, interviewed on the Liverpool University Press blog, 2020",
+   "url": "https://liverpooluniversitypress.blog/2020/01/27/dread-trident-in-conversation-with-curtis-d-carbonell/",
+   "quote": "an overlooked area of investigation for literary scholars",
+   "page": "answer to the first question"
   },
   {
-   "index": 741,
-   "feature": "edition and house style",
-   "claim": "David Hartlage says Gygax's generous location descriptions in G1 set the pattern for virtually every adventure that followed.",
-   "source": "David Hartlage, 'How much description should a dungeon key include?', DMDavid, 2016",
-   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
-   "quote": "Gary’s longer descriptions set the pattern for virtually every adventure to follow.",
-   "page": "How much description, 'Gary Gygax sets the standard'"
+   "index": 846,
+   "feature": "other: close reading of game texts",
+   "claim": "Carbonell says he began close readings of the archives of published role-playing material.",
+   "source": "Curtis D. Carbonell, interviewed on the Liverpool University Press blog, 2020",
+   "url": "https://liverpooluniversitypress.blog/2020/01/27/dread-trident-in-conversation-with-curtis-d-carbonell/",
+   "quote": "I then began my close readings of the archives",
+   "page": "answer to the first question"
   },
   {
-   "index": 742,
-   "feature": "place and institution description",
-   "claim": "David Hartlage argues longer descriptions spare the DM inventing details, whose first ideas tend toward the obvious.",
-   "source": "David Hartlage, 'How much description should a dungeon key include?', DMDavid, 2016",
-   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
-   "quote": "the ideas that spring to mind first will steer toward the obvious",
-   "page": "How much description, 'Longer descriptions'"
+   "index": 847,
+   "feature": "other: scholarly field map",
+   "claim": "Carbonell disputes the view that role-playing material has been overlooked for its simplicity or lack of textual and psychological depth.",
+   "source": "Curtis D. Carbonell, interviewed on the Liverpool University Press blog, 2020",
+   "url": "https://liverpooluniversitypress.blog/2020/01/27/dread-trident-in-conversation-with-curtis-d-carbonell/",
+   "quote": "because of its simplicity or lack of textual and psychological depth",
+   "page": "answer to the second question"
   },
   {
-   "index": 743,
-   "feature": "other: padding",
-   "claim": "David Hartlage says an expanded room description pads a good middle sentence like a school paper stretched to length.",
-   "source": "David Hartlage, 'How much description should a dungeon key include?', DMDavid, 2016",
-   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
-   "quote": "pads it like a school paper stretched to an assigned length",
-   "page": "How much description, 'Longer descriptions'"
+   "index": 848,
+   "feature": "other: scholarly field map",
+   "claim": "Carbonell says forty years of published role-playing material was waiting to be mined by a literary scholar.",
+   "source": "Curtis D. Carbonell, interviewed on the Liverpool University Press blog, 2020",
+   "url": "https://liverpooluniversitypress.blog/2020/01/27/dread-trident-in-conversation-with-curtis-d-carbonell/",
+   "quote": "forty years of published material was out there, waiting to be mined",
+   "page": "answer to the second question"
   },
   {
-   "index": 744,
-   "feature": "edition and house style",
-   "claim": "David Hartlage says the custom of long descriptions makes authors write even when they have nothing to add.",
-   "source": "David Hartlage, 'How much description should a dungeon key include?', DMDavid, 2016",
-   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
-   "quote": "encourages authors to write something even when they have little",
-   "page": "How much description, 'Longer descriptions'"
+   "index": 849,
+   "feature": "other: TRPGs as literary text",
+   "claim": "Carbonell calls D&D exemplary of the middle ground where literary tropes push up against game mechanics.",
+   "source": "Curtis D. Carbonell, interviewed on the Liverpool University Press blog, 2020",
+   "url": "https://liverpooluniversitypress.blog/2020/01/27/dread-trident-in-conversation-with-curtis-d-carbonell/",
+   "quote": "where we see literary tropes push up against game mechanics",
+   "page": "answer on Dungeons & Dragons"
   },
   {
-   "index": 745,
-   "feature": "omission as information",
-   "claim": "David Hartlage says an avalanche of description buries the details that would actually reach play.",
-   "source": "David Hartlage, 'How much description should a dungeon key include?', DMDavid, 2016",
-   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
-   "quote": "An avalanche of description does more than squander page count.",
-   "page": "How much description, 'Matching description to a location's purpose'"
+   "index": 850,
+   "feature": "other: catalogue and categorisation impulse",
+   "claim": "A reviewer reports Carbonell arguing that Lovecraft's impulse to categorise in rich description is reflected in early TRPGs.",
+   "source": "Clare Wall, 'Review of Dread Trident', SFRA Review 52.1, 2022",
+   "url": "https://sfrareview.org/2022/01/10/review-of-dread-trident-tabletop-role-playing-games-and-the-modern-fantastic/",
+   "quote": "an impulse which Carbonell argues is also reflected in early TRPGs",
+   "page": "paragraph on the Lovecraft chapter"
   },
   {
-   "index": 746,
-   "feature": "place and institution description",
-   "claim": "David Hartlage says a location's description should be as long as the way players will actually engage that location.",
-   "source": "David Hartlage, 'How much description should a dungeon key include?', DMDavid, 2016",
-   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
-   "quote": "The length of descriptions should match the way players will engage",
-   "page": "How much description, 'The ideal dungeon description'"
-  },
-  {
-   "index": 747,
-   "feature": "adjective and adverb discipline",
-   "claim": "David Hartlage tells writers to keep the evocative details out from under lavish description of pallets and rubbish.",
-   "source": "David Hartlage, 'How much description should a dungeon key include?', DMDavid, 2016",
-   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
-   "quote": "Don’t bury the evocative bits in lavish descriptions",
-   "page": "How much description, 'The ideal dungeon description'"
-  },
-  {
-   "index": 748,
-   "feature": "concrete sensory noun",
-   "claim": "David Hartlage says descriptions should carry telling details and information he can use in play.",
-   "source": "David Hartlage, 'How much description should a dungeon key include?', DMDavid, 2016",
-   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
-   "quote": "Descriptions should focus on telling details and plot-critical information",
-   "page": "How much description, 'The ideal dungeon description'"
-  },
-  {
-   "index": 749,
-   "feature": "place and institution description",
-   "claim": "David Hartlage's test for cutting a description is whether it is the first thing a typical DM would imagine anyway.",
-   "source": "David Hartlage, 'How much description should a dungeon key include?', DMDavid, 2016",
-   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
-   "quote": "the first thing a typical DM would imagine at the table",
-   "page": "How much description, 'The ideal dungeon description'"
-  },
-  {
-   "index": 750,
+   "index": 851,
    "feature": "boxed text form",
-   "claim": "David Hartlage grants that the boxed descriptions in Curse of Strahd are evocative while faulting their use in every empty room.",
-   "source": "David Hartlage, 'How much description should a dungeon key include?', DMDavid, 2016",
-   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
-   "quote": "The descriptions are evocative",
-   "page": "How much description, 'Boxed, read-aloud text'"
+   "claim": "Noonan reports that a DM reading boxed text holds player attention for two sentences and no further.",
+   "source": "Jesse Decker and David Noonan, 'Design & Development: Undercover at Gen Con, Part 1', Wizards of the Coast, 2005",
+   "url": "http://www.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "If you’re the DM, you get two sentences. Period.",
+   "page": "section 'Undercover Insight #1: Boxed Text = MEGO'"
   },
   {
-   "index": 751,
+   "index": 852,
+   "feature": "boxed text form",
+   "claim": "Noonan's hypothesis was that boxed text longer than a paragraph probably is not worth reading aloud.",
+   "source": "Jesse Decker and David Noonan, 'Design & Development: Undercover at Gen Con, Part 1', Wizards of the Coast, 2005",
+   "url": "http://www.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "boxed text longer than a paragraph probably isn’t worth reading",
+   "page": "section 'Undercover Insight #1'"
+  },
+  {
+   "index": 853,
+   "feature": "boxed text form",
+   "claim": "Noonan observed players repeatedly missing the actual data inside the boxed text, such as room dimensions and exits.",
+   "source": "Jesse Decker and David Noonan, 'Design & Development: Undercover at Gen Con, Part 1', Wizards of the Coast, 2005",
+   "url": "http://www.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "players were missing the actual data in the boxed text",
+   "page": "section 'Undercover Insight #1'"
+  },
+  {
+   "index": 854,
+   "feature": "dialogue register",
+   "claim": "Noonan's mechanism for the failure is that boxed text replaces the game's conversation with oration.",
+   "source": "Jesse Decker and David Noonan, 'Design & Development: Undercover at Gen Con, Part 1', Wizards of the Coast, 2005",
+   "url": "http://www.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "Boxed text replaces that conversation with oration",
+   "page": "section 'Undercover Insight #1'"
+  },
+  {
+   "index": 855,
+   "feature": "dialogue register",
+   "claim": "Noonan holds that at its heart a D&D game is a conversation.",
+   "source": "Jesse Decker and David Noonan, 'Design & Development: Undercover at Gen Con, Part 1', Wizards of the Coast, 2005",
+   "url": "http://www.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "At its heart, a D&D game is a conversation",
+   "page": "section 'Undercover Insight #1'"
+  },
+  {
+   "index": 856,
+   "feature": "cadence and rhythm",
+   "claim": "Noonan concludes that oration is inherently harder to concentrate on than conversation.",
+   "source": "Jesse Decker and David Noonan, 'Design & Development: Undercover at Gen Con, Part 1', Wizards of the Coast, 2005",
+   "url": "http://www.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "oration is inherently harder to concentrate on than conversation",
+   "page": "section 'Undercover Insight #1', factor 2"
+  },
+  {
+   "index": 857,
+   "feature": "dm-facing sentence",
+   "claim": "Noonan notes DMs are by and large reading the boxed text cold, from a script never uttered aloud before.",
+   "source": "Jesse Decker and David Noonan, 'Design & Development: Undercover at Gen Con, Part 1', Wizards of the Coast, 2005",
+   "url": "http://www.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "DMs are, by and large, reading the boxed text cold",
+   "page": "section 'Undercover Insight #1', factor 1"
+  },
+  {
+   "index": 858,
    "feature": "edition and house style",
-   "claim": "David Hartlage quotes Bob Bledsaw in Dragon 27 saying judges regarded describing dungeons as their own domain.",
-   "source": "Bob Bledsaw in Dragon #27, quoted by David Hartlage, DMDavid, 2016",
-   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
-   "quote": "judges felt that the actual description of dungeons was their ‘domain’",
-   "page": "How much description, 'Tegel Manor and minimal descriptions'"
-  },
-  {
-   "index": 752,
-   "feature": "plainness and economy",
-   "claim": "David Hartlage quotes Michael Curtis describing the Stonehell style as the minimum information needed to run the dungeon.",
-   "source": "Michael Curtis, quoted by David Hartlage, DMDavid, 2016",
-   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
-   "quote": "the minimum amount of information needed to run the dungeon",
-   "page": "How much description, 'The influence of one-page dungeons'"
-  },
-  {
-   "index": 753,
-   "feature": "other: key format",
-   "claim": "Luke Gearing's rewrite of his own adventure consisted largely of turning its bullet points back into prose.",
-   "source": "Luke Gearing, 'Bullet Points vs Prose', lukegearing.blot.im, 2023",
-   "url": "https://lukegearing.blot.im/bullet-points-vs-prose",
-   "quote": "A lot of this involves de-bullet pointing the text.",
-   "page": "Bullet Points vs Prose, opening"
+   "claim": "Writing in 2005, the authors say boxed text in adventures used to be a lot longer than it was then.",
+   "source": "Jesse Decker and David Noonan, 'Design & Development: Undercover at Gen Con, Part 1', Wizards of the Coast, 2005",
+   "url": "http://www.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "used to be a lot longer than it is today",
+   "page": "'Tangent Alert!' comparing Sons of Gruumsh with Return to the Keep on the Borderlands"
   }
  ]
 }

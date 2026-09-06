@@ -2,157 +2,157 @@
  "name": "dnd",
  "chunk": 29,
  "indices": [
-  484,
-  485,
-  486,
-  487,
-  488,
-  489,
-  490,
-  491,
-  492,
-  493,
-  494,
-  495,
-  496,
-  497,
-  498
+  589,
+  590,
+  591,
+  592,
+  593,
+  594,
+  595,
+  596,
+  597,
+  598,
+  599,
+  600,
+  601,
+  602,
+  603
  ],
  "claims": [
   {
-   "index": 484,
+   "index": 589,
    "feature": "place and institution description",
-   "claim": "Prince of Nothing describes T1's room descriptions as thick, indigestible paragraphs.",
-   "source": "Prince of Nothing, Age of Dusk blog, 2021",
-   "url": "https://princeofnothingblogs.wordpress.com/2021/07/31/review-t1-the-village-of-hommlet-add-foreshadow/",
-   "quote": "Room descriptions in thick, indigestible paragraphs",
-   "page": "body, paragraph on early-TSR bugaboos"
+   "claim": "Merwin tells writers to ask which encounter elements are better shown on a map than described in prose.",
+   "source": "Shawn Merwin, 'Let's Design an Adventure: Outlines and Frameworks', D&D Beyond, 9 Oct 2019",
+   "url": "https://www.dndbeyond.com/posts/623-lets-design-an-adventure-outlines-and-frameworks",
+   "quote": "better represented in a map rather than strictly described in the text",
+   "page": "outline checklist"
   },
   {
-   "index": 485,
-   "feature": "other: enumerated inventory",
-   "claim": "Prince of Nothing calls T1's itemised room contents Victorian room catalogs.",
-   "source": "Prince of Nothing, Age of Dusk blog, 2021",
-   "url": "https://princeofnothingblogs.wordpress.com/2021/07/31/review-t1-the-village-of-hommlet-add-foreshadow/",
-   "quote": "the odd Victorian room catalogs",
-   "page": "body, paragraph on early-TSR bugaboos"
-  },
-  {
-   "index": 486,
+   "index": 590,
    "feature": "place and institution description",
-   "claim": "Prince of Nothing says T1 presents a vast catalogue of seemingly mundane NPCs.",
-   "source": "Prince of Nothing, Age of Dusk blog, 2021",
-   "url": "https://princeofnothingblogs.wordpress.com/2021/07/31/review-t1-the-village-of-hommlet-add-foreshadow/",
-   "quote": "A vast catalogue of seemingly mundane NPCs are presented",
-   "page": "body, paragraph on the village proper"
+   "claim": "For sandbox adventures Merwin recommends a less detailed encounter description leaning on the NPCs' resources so the DM can set it in any of several places.",
+   "source": "Shawn Merwin, 'Let's Design an Adventure: Thinking Like a Designer', D&D Beyond, 2020",
+   "url": "https://www.dndbeyond.com/posts/753-lets-design-an-adventure-thinking-like-a-designer",
+   "quote": "a less-detailed description that relies on place",
+   "page": "audience and adventure type section"
   },
   {
-   "index": 487,
-   "feature": "concrete sensory noun",
-   "claim": "Prince of Nothing credits T1's mundane commercial details with creating the appearance of a continuous, living world.",
-   "source": "Prince of Nothing, Age of Dusk blog, 2021",
-   "url": "https://princeofnothingblogs.wordpress.com/2021/07/31/review-t1-the-village-of-hommlet-add-foreshadow/",
-   "quote": "the appearance of a world in flux, a continuous place",
-   "page": "body, paragraph beginning Little details in the village"
+   "index": 591,
+   "feature": "dm-facing sentence",
+   "claim": "Merwin makes the test of an adventure's layout whether it serves the DM running it at the table.",
+   "source": "Shawn Merwin, 'Let's Design an Adventure: Thinking Like a Designer', D&D Beyond, 2020",
+   "url": "https://www.dndbeyond.com/posts/753-lets-design-an-adventure-thinking-like-a-designer",
+   "quote": "serves the DM who will be running your content",
+   "page": "layout section"
   },
   {
-   "index": 488,
+   "index": 592,
+   "feature": "place and institution description",
+   "claim": "Hartlage reports that Gygax's own Castle Greyhawk key gave most rooms a one-line note.",
+   "source": "David Hartlage, DMDavid, 21 Nov 2016",
+   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
+   "quote": "he usually wrote a 1-line note for each room",
+   "page": "opening paragraph"
+  },
+  {
+   "index": 593,
+   "feature": "plainness and economy",
+   "claim": "Judges Guild's Bob Bledsaw said referees told him they wanted only a skeletal framework of description.",
+   "source": "Bob Bledsaw, Dragon #27, quoted by David Hartlage, DMDavid, 2016",
+   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
+   "quote": "a very skeletal framework",
+   "page": "Tegel Manor and minimal descriptions"
+  },
+  {
+   "index": 594,
    "feature": "edition and house style",
-   "claim": "Prince of Nothing says module design after T1 became considerably sparser on starting-town detail.",
-   "source": "Prince of Nothing, Age of Dusk blog, 2021",
-   "url": "https://princeofnothingblogs.wordpress.com/2021/07/31/review-t1-the-village-of-hommlet-add-foreshadow/",
-   "quote": "considerably sparser on their starting town details",
-   "page": "body, paragraph on the village proper"
+   "claim": "Hartlage credits Gygax's longer location descriptions in G1 Steading of the Hill Giant Chief (1978) with setting the pattern for later adventures.",
+   "source": "David Hartlage, DMDavid, 21 Nov 2016",
+   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
+   "quote": "set the pattern for virtually every adventure to follow",
+   "page": "Gary Gygax sets the standard"
   },
   {
-   "index": 489,
-   "feature": "withheld information and inference",
-   "claim": "John Roy credits Greyhawk author Carl Sargent with implying terrifying things using few chosen words.",
-   "source": "John Roy, D&D Beyond article on the 2024 Dungeon Master's Guide, 2024",
-   "url": "https://www.dndbeyond.com/posts/1834-greyhawk-returns-in-the-2024-dungeon-masters-guide",
-   "quote": "implying terrifying things with a few carefully chosen words",
-   "page": "section on discovering Greyhawk"
+   "index": 595,
+   "feature": "plainness and economy",
+   "claim": "Hartlage identifies the padding mechanism: the convention of long descriptions makes authors stretch a good middle sentence to an assigned length.",
+   "source": "David Hartlage, DMDavid, 21 Nov 2016",
+   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
+   "quote": "pads it like a school paper stretched to an assigned length",
+   "page": "Longer descriptions"
   },
   {
-   "index": 490,
-   "feature": "civic record register",
-   "claim": "John Roy says the 2024 DMG's Greyhawk Gazetteer pairs each nation's description with its history of conflict.",
-   "source": "John Roy, D&D Beyond article on the 2024 Dungeon Master's Guide, 2024",
-   "url": "https://www.dndbeyond.com/posts/1834-greyhawk-returns-in-the-2024-dungeon-masters-guide",
-   "quote": "Greyhawk Gazetteer, along with their history of conflict",
-   "page": "section on the Gazetteer"
-  },
-  {
-   "index": 491,
-   "feature": "civic record register",
-   "claim": "John Roy says Gygax gave each Greyhawk nation its imports, exports and trade routes.",
-   "source": "John Roy, D&D Beyond article on the 2024 Dungeon Master's Guide, 2024",
-   "url": "https://www.dndbeyond.com/posts/1834-greyhawk-returns-in-the-2024-dungeon-masters-guide",
-   "quote": "imports and exports and the trade routes they used",
-   "page": "section on Greyhawk as a wargamer's setting"
-  },
-  {
-   "index": 492,
-   "feature": "civic record register",
-   "claim": "Maliszewski says GAZ1's gazetteer half covers history, politics and society plus its most important locales and NPCs.",
-   "source": "James Maliszewski, Grognardia, 2022",
-   "url": "http://grognardia.blogspot.com/2022/09/retrospective-grand-duchy-of-karameikos.html",
-   "quote": "the gazetteer proper, covering the history, politics, and society",
-   "page": "body, paragraph on the module's two sections"
-  },
-  {
-   "index": 493,
-   "feature": "civic record register",
-   "claim": "Maliszewski quotes GAZ1's cover copy promising a complete historical, economical, geographical and sociological overview.",
-   "source": "James Maliszewski, Grognardia, 2022, quoting GAZ1's cover copy (Aaron Allston, TSR, 1987)",
-   "url": "http://grognardia.blogspot.com/2022/09/retrospective-grand-duchy-of-karameikos.html",
-   "quote": "a complete historical, economical",
-   "page": "body, second paragraph"
-  },
-  {
-   "index": 494,
+   "index": 596,
    "feature": "place and institution description",
-   "claim": "Maliszewski notes GAZ1 supplies maps of typical taverns and manor houses rather than only named ones.",
-   "source": "James Maliszewski, Grognardia, 2022",
-   "url": "http://grognardia.blogspot.com/2022/09/retrospective-grand-duchy-of-karameikos.html",
-   "quote": "typical taverns and manor houses",
-   "page": "body, paragraph on the module's two sections"
+   "claim": "Hartlage argues a location's length of description should follow its purpose in play, so a sheriff's kitchen needs no inventory.",
+   "source": "David Hartlage, DMDavid, 21 Nov 2016",
+   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
+   "quote": "no one needs an item-by-item inventory of her kitchen",
+   "page": "Matching description to a location's purpose"
   },
   {
-   "index": 495,
-   "feature": "civic record register",
-   "claim": "Prince of Nothing says GAZ1's focus is everything around the adventures rather than the adventure locations.",
-   "source": "Prince of Nothing, Age of Dusk blog, 2020",
-   "url": "https://princeofnothingblogs.wordpress.com/2020/03/30/review-gaz-1-the-grand-duchy-of-karameikos-dnd-basic/",
-   "quote": "everything around those adventures, setting up the framework",
-   "page": "body, third paragraph"
+   "index": 597,
+   "feature": "omission as information",
+   "claim": "Hartlage warns that excess description buries the details that would actually enter play.",
+   "source": "David Hartlage, DMDavid, 21 Nov 2016",
+   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
+   "quote": "An avalanche of description does more than squander page count",
+   "page": "Matching description to a location's purpose"
   },
   {
-   "index": 496,
-   "feature": "civic record register",
-   "claim": "Prince of Nothing names the gazetteer form's failure mode as a boring encyclopedic recitation of contradictory drivel.",
-   "source": "Prince of Nothing, Age of Dusk blog, 2020",
-   "url": "https://princeofnothingblogs.wordpress.com/2020/03/30/review-gaz-1-the-grand-duchy-of-karameikos-dnd-basic/",
-   "quote": "boring encyclopedic recitation of meaningless and sometimes mutually contradictory drivel",
-   "page": "body, third paragraph"
+   "index": 598,
+   "feature": "boxed text form",
+   "claim": "Hartlage's defence of boxed text is that it consolidates and marks which features need describing.",
+   "source": "David Hartlage, DMDavid, 21 Nov 2016",
+   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
+   "quote": "consolidates and identifies features that require description",
+   "page": "Boxed, read-aloud text"
   },
   {
-   "index": 497,
-   "feature": "annalist voice and deep time",
-   "claim": "Prince of Nothing says GAZ1 gives its setting history in broad sweeping strokes.",
-   "source": "Prince of Nothing, Age of Dusk blog, 2020",
-   "url": "https://princeofnothingblogs.wordpress.com/2020/03/30/review-gaz-1-the-grand-duchy-of-karameikos-dnd-basic/",
-   "quote": "Setting history is given in broad sweeping strokes",
-   "page": "body, paragraph on setting history"
+   "index": 599,
+   "feature": "edition and house style",
+   "claim": "Hartlage observes that Storm King's Thunder (2016) omits almost all read-aloud text, unlike Curse of Strahd which boxes every location.",
+   "source": "David Hartlage, DMDavid, 21 Nov 2016",
+   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
+   "quote": "omits almost all read-aloud text",
+   "page": "Boxed, read-aloud text"
   },
   {
-   "index": 498,
-   "feature": "place and institution description",
-   "claim": "Prince of Nothing says GAZ1 treats the capital Specularum through neighborhoods, main streets and the ducal palace.",
-   "source": "Prince of Nothing, Age of Dusk blog, 2020",
-   "url": "https://princeofnothingblogs.wordpress.com/2020/03/30/review-gaz-1-the-grand-duchy-of-karameikos-dnd-basic/",
-   "quote": "extensive treatment in terms of neighborhoods, main streets, ducal palace",
-   "page": "body, paragraph beginning Contrary to what you might believe"
+   "index": 600,
+   "feature": "plainness and economy",
+   "claim": "Michael Curtis describes the one-page-dungeon style of Stonehell as giving the minimum information needed to run the dungeon.",
+   "source": "Michael Curtis, quoted by David Hartlage, DMDavid, 2016",
+   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
+   "quote": "the minimum amount of information needed to run the dungeon",
+   "page": "The influence of one-page dungeons"
+  },
+  {
+   "index": 601,
+   "feature": "concrete sensory noun",
+   "claim": "Hartlage's rule for a dungeon key is that descriptions carry telling details and plot-critical information.",
+   "source": "David Hartlage, DMDavid, 21 Nov 2016",
+   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
+   "quote": "focus on telling details and plot-critical information",
+   "page": "The ideal dungeon description"
+  },
+  {
+   "index": 602,
+   "feature": "concrete sensory noun",
+   "claim": "B11 King's Festival (1989) told DMs that good description goes beyond sight to noises, smells and touch.",
+   "source": "Carl Sargent, B11 King's Festival (TSR, 1989), quoted by David Hartlage, DMDavid, 2024",
+   "url": "https://dmdavid.com/tag/from-b1-to-pinebrook-every-dd-adventure-that-includes-dm-advice-and-what-they-taught/",
+   "quote": "A good DM details more than simply what PCs see",
+   "page": "B11 King's Festival (1989) — Description and the senses"
+  },
+  {
+   "index": 603,
+   "feature": "per-speaker register",
+   "claim": "Keep on the Shadowfell (2008) told DMs to distinguish NPCs with an accent or favourite saying, a signature object, or a single personality adjective.",
+   "source": "Bruce Cordell and Mike Mearls, H1 Keep on the Shadowfell (2008), paraphrased with a quoted adjective list by David Hartlage, DMDavid, 2024",
+   "url": "https://dmdavid.com/tag/from-b1-to-pinebrook-every-dd-adventure-that-includes-dm-advice-and-what-they-taught/",
+   "quote": "greedy, bored, suspicious, tired, enthusiastic",
+   "page": "H1 Keep on the Shadowfell (2008)"
   }
  ]
 }

@@ -2,157 +2,157 @@
  "name": "ai",
  "chunk": 24,
  "indices": [
-  614,
-  615,
-  616,
-  617,
-  618,
-  619,
-  620,
-  621,
-  622,
-  623,
-  624,
-  625,
-  626,
-  627,
-  628
+  861,
+  862,
+  863,
+  864,
+  865,
+  866,
+  867,
+  868,
+  869,
+  870,
+  871,
+  872,
+  873,
+  874,
+  875
  ],
  "claims": [
   {
-   "index": 614,
-   "feature": "register measured",
-   "claim": "The three models compared under in-context prompting were GPT-4o, Claude 3.5 Sonnet and Gemini 1.5 Pro.",
-   "source": "Tuhin Chakrabarty and Paramveer S. Dhillon, CHI 2026 (arXiv:2601.18353v1)",
-   "url": "https://arxiv.org/html/2601.18353v1",
-   "quote": "OpenAI’s GPT-4o, Anthropic’s Claude 3.5 Sonnet, and Google’s Gemini 1.5 Pro",
-   "page": "Section 3.1.3"
+   "index": 861,
+   "feature": "other: fluent but incoherent",
+   "claim": "Michel characterises LLM output as probable-sounding but not necessarily accurate or even coherent.",
+   "source": "Lincoln Michel, novelist, Counter Craft, 2025",
+   "url": "https://countercraft.substack.com/p/criticism-in-the-age-of-ai",
+   "quote": "probable-sounding but not necessarily accurate or even coherent",
+   "page": "opening section, after the two numbered assumptions"
   },
   {
-   "index": 615,
-   "feature": "register measured",
-   "claim": "The study's unit of comparison was an excerpt of up to 450 words, which the authors concede leaves plot, character and structure unmeasured.",
-   "source": "Tuhin Chakrabarty and Paramveer S. Dhillon, CHI 2026 (arXiv:2601.18353v1)",
-   "url": "https://arxiv.org/html/2601.18353v1",
-   "quote": "Our study examines shorter (up to 450-word) excerpts",
-   "page": "Section 3.1.4"
-  },
-  {
-   "index": 616,
-   "feature": "reader and expert judgment",
-   "claim": "Expert judges reached moderate-to-substantial inter-annotator agreement while lay judges remained inconsistent.",
-   "source": "Tuhin Chakrabarty and Paramveer S. Dhillon, CHI 2026 (arXiv:2601.18353v1)",
-   "url": "https://arxiv.org/html/2601.18353v1",
-   "quote": "whereas lay judges remained inconsistent",
-   "page": "Section 4.1"
-  },
-  {
-   "index": 617,
-   "feature": "reader and expert judgment",
-   "claim": "Debrief interviews reported that expert writers' preference for AI writing triggered an identity crisis that eroded aesthetic confidence.",
-   "source": "Tuhin Chakrabarty and Paramveer S. Dhillon, CHI 2026 (arXiv:2601.18353v1)",
-   "url": "https://arxiv.org/html/2601.18353v1",
-   "quote": "triggered an identity crisis, eroding aesthetic confidence",
-   "page": "Abstract"
-  },
-  {
-   "index": 618,
-   "feature": "detection and its failures",
-   "claim": "In the Chakrabarty, Ginsburg and Dhillon preprint, leading detectors flagged 3% of fine-tuned outputs as AI-generated against 97% of in-context prompted outputs.",
-   "source": "Tuhin Chakrabarty, Jane C. Ginsburg and Paramveer Dhillon, arXiv:2510.13939v4 (last revised 17 March 2026)",
-   "url": "https://arxiv.org/abs/2510.13939",
-   "quote": "rarely flagged as AI-generated (3% vs. 97% for prompting)",
-   "page": "Abstract"
-  },
-  {
-   "index": 619,
-   "feature": "steerability",
-   "claim": "The same preprint reports a median fine-tuning cost of $81 per author.",
-   "source": "Tuhin Chakrabarty, Jane C. Ginsburg and Paramveer Dhillon, arXiv:2510.13939v4",
-   "url": "https://arxiv.org/abs/2510.13939",
-   "quote": "median fine-tuning cost of $81 per author",
-   "page": "Abstract"
-  },
-  {
-   "index": 620,
+   "index": 862,
    "feature": "counter-evidence",
-   "claim": "In that preprint 516 college-educated general readers took part alongside 28 MFA-trained readers.",
-   "source": "Tuhin Chakrabarty, Jane C. Ginsburg and Paramveer Dhillon, arXiv:2510.13939v4",
-   "url": "https://arxiv.org/abs/2510.13939",
-   "quote": "28 MFA-trained readers and 516 college-educated general readers",
-   "page": "Abstract"
+   "claim": "Michel states that the danger of LLMs for literature remains their quantity rather than their quality, and that he has never worried much about LLMs replacing authors on quality.",
+   "source": "Lincoln Michel, novelist, Counter Craft, 2026",
+   "url": "https://countercraft.substack.com/p/surfs-up-in-slop-city",
+   "quote": "the danger of LLMs for literature remains their quantity, not their quality",
+   "page": "section 'The Slop Tsunami Could Still Drown Us Though'"
   },
   {
-   "index": 621,
-   "feature": "counter-evidence",
-   "claim": "In Farrell's blind Italian-language test the AI-written texts received slightly higher average ratings than the Moravia story.",
-   "source": "Michael Farrell, arXiv:2601.17363v3, NeTTIT 2026, 24 January 2026 (v3 3 June 2026)",
-   "url": "https://arxiv.org/abs/2601.17363v3",
-   "quote": "AI-written texts received slightly higher average ratings and were more",
-   "page": "Abstract"
+   "index": 863,
+   "feature": "place and institution description",
+   "claim": "Harvey Randall argues that background chatter, combat barks, NPC dialogue and side-quests all matter and are the backbone on which a game's story lies.",
+   "source": "Harvey Randall, staff writer, PC Gamer, 2026",
+   "url": "https://www.pcgamer.com/gaming-industry/game-development/the-bigwigs-who-want-ai-generated-npcs-and-writing-think-youre-too-dumb-to-appreciate-a-good-story-dont-prove-them-right/",
+   "quote": "Background chatter, combat barks, NPC dialogue, side-quests, it all matters.",
+   "page": "section 'In defense of miscellany'"
   },
   {
-   "index": 622,
-   "feature": "register measured",
-   "claim": "Farrell's stimuli were three stories, two made with ChatGPT-4o and one by Alberto Moravia.",
-   "source": "Michael Farrell, arXiv:2601.17363v3",
-   "url": "https://arxiv.org/abs/2601.17363v3",
-   "quote": "two created with ChatGPT-4o and one by Alberto Moravia",
-   "page": "Abstract"
+   "index": 864,
+   "feature": "place and institution description",
+   "claim": "Randall asserts that hand-written incidental lines such as combat barks characterise an enemy faction and journal entries flesh out a culture.",
+   "source": "Harvey Randall, staff writer, PC Gamer, 2026",
+   "url": "https://www.pcgamer.com/gaming-industry/game-development/the-bigwigs-who-want-ai-generated-npcs-and-writing-think-youre-too-dumb-to-appreciate-a-good-story-dont-prove-them-right/",
+   "quote": "Combat barks can characterise an enemy faction, journal entries can flesh out a culture",
+   "page": "section 'In defense of miscellany'"
   },
   {
-   "index": 623,
-   "feature": "counter-evidence",
-   "claim": "Chakrabarty and colleagues found LLM-generated stories passed 3 to 10 times fewer Torrance Test of Creative Writing tests than stories by professional authors.",
-   "source": "Tuhin Chakrabarty, Philippe Laban, Divyansh Agarwal, Smaranda Muresan and Chien-Sheng Wu, CHI 2024 (arXiv:2309.14556v3)",
-   "url": "https://arxiv.org/abs/2309.14556v3",
-   "quote": "LLM-generated stories pass 3-10X less TTCW tests than stories written by professionals",
-   "page": "Abstract"
-  },
-  {
-   "index": 624,
-   "feature": "detection and its failures",
-   "claim": "In the same study no LLM used as an assessor positively correlated with the expert assessments.",
-   "source": "Chakrabarty, Laban, Agarwal, Muresan and Wu, CHI 2024 (arXiv:2309.14556v3)",
-   "url": "https://arxiv.org/abs/2309.14556v3",
-   "quote": "none of the LLMs positively correlate with the expert assessments",
-   "page": "Abstract"
-  },
-  {
-   "index": 625,
-   "feature": "discourse-level tells",
-   "claim": "Professional writers hired to edit LLM paragraphs agreed on undesirable idiosyncrasies and the researchers formalised them into a seven-category taxonomy.",
-   "source": "Tuhin Chakrabarty, Philippe Laban and Chien-Sheng Wu, CHI 2025 (arXiv:2409.14509v5)",
-   "url": "https://arxiv.org/abs/2409.14509v5",
-   "quote": "a seven-category taxonomy (e.g. clichés, unnecessary exposition)",
-   "page": "Abstract"
-  },
-  {
-   "index": 626,
+   "index": 865,
    "feature": "homogenisation",
-   "claim": "No model in the LAMP study outperformed the others on writing quality, which the authors read as a limitation common to model families.",
-   "source": "Chakrabarty, Laban and Wu, CHI 2025 (arXiv:2409.14509v5)",
-   "url": "https://arxiv.org/abs/2409.14509v5",
-   "quote": "outperform each other in terms of writing quality",
-   "page": "Abstract"
+   "claim": "Randall argues that Starfield's procedurally generated planets and cities feel bland with all the rough edges sanded off next to New Vegas's hand-crafted background babble.",
+   "source": "Harvey Randall, staff writer, PC Gamer, 2026",
+   "url": "https://www.pcgamer.com/gaming-industry/game-development/the-bigwigs-who-want-ai-generated-npcs-and-writing-think-youre-too-dumb-to-appreciate-a-good-story-dont-prove-them-right/",
+   "quote": "all the rough edges sanded off",
+   "page": "section 'In defense of miscellany'"
   },
   {
-   "index": 627,
-   "feature": "steerability",
-   "claim": "A large-scale preference annotation in that study confirmed experts largely prefer text edited by other experts over automatically edited text.",
-   "source": "Chakrabarty, Laban and Wu, CHI 2025 (arXiv:2409.14509v5)",
-   "url": "https://arxiv.org/abs/2409.14509v5",
-   "quote": "experts largely prefer text edited by other experts",
-   "page": "Abstract"
+   "index": 866,
+   "feature": "other: incidental detail builds scale and place",
+   "claim": "Randall asserts that a game's hundreds of small background lines can create a sense of scale or place rather than only conveying plot information.",
+   "source": "Harvey Randall, staff writer, PC Gamer, 2026",
+   "url": "https://www.pcgamer.com/gaming-industry/game-development/the-bigwigs-who-want-ai-generated-npcs-and-writing-think-youre-too-dumb-to-appreciate-a-good-story-dont-prove-them-right/",
+   "quote": "they can create a sense of scale or place",
+   "page": "section 'In defense of miscellany'"
   },
   {
-   "index": 628,
-   "feature": "counter-evidence",
-   "claim": "Doshi and Hauser found that access to generative AI story ideas caused stories to be evaluated as more creative.",
-   "source": "Anil R. Doshi and Oliver P. Hauser, Science Advances 10, eadn5290, 12 July 2024",
-   "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11244532/fullTextXML",
-   "quote": "generative AI ideas causes stories to be evaluated as more",
-   "page": "Abstract"
+   "index": 867,
+   "feature": "register measured",
+   "claim": "Adam Smith, Larian's writing director, said in a Reddit AMA that no text generation touches the dialogues, journal entries or other writing in Divinity.",
+   "source": "Adam Smith (Larian writing director) quoted by Ted Litchfield, PC Gamer, 2026",
+   "url": "https://www.pcgamer.com/games/rpg/larians-head-writer-has-a-simple-answer-for-how-ai-generated-text-helps-development-it-doesnt-thanks-to-its-best-output-being-a-3-10-at-best-worse-than-his-worst-drafts/",
+   "quote": "We don't have any text generation touching our dialogues, journal entries",
+   "page": "body, quoting the r/Games AMA"
+  },
+  {
+   "index": 868,
+   "feature": "reader and expert judgment",
+   "claim": "Smith reported that Larian's experiments with text-generation tools produced results that hit a 3/10 at best, while his own worst first drafts are at least a 4/10.",
+   "source": "Adam Smith (Larian writing director) quoted by Ted Litchfield, PC Gamer, 2026",
+   "url": "https://www.pcgamer.com/games/rpg/larians-head-writer-has-a-simple-answer-for-how-ai-generated-text-helps-development-it-doesnt-thanks-to-its-best-output-being-a-3-10-at-best-worse-than-his-worst-drafts/",
+   "quote": "the results hit a 3/10 at best",
+   "page": "body, quoting the r/Games AMA"
+  },
+  {
+   "index": 869,
+   "feature": "other: sycophantic tone as a tell",
+   "claim": "Ted Litchfield writes that across Grok, Claude and ChatGPT people can never get the generative-AI stink off, a by turns smarmy and sycophantic tone.",
+   "source": "Ted Litchfield, PC Gamer, 2026",
+   "url": "https://www.pcgamer.com/games/rpg/larians-head-writer-has-a-simple-answer-for-how-ai-generated-text-helps-development-it-doesnt-thanks-to-its-best-output-being-a-3-10-at-best-worse-than-his-worst-drafts/",
+   "quote": "a by turns smarmy and sycophantic tone",
+   "page": "reporter's aside after the AMA quotation"
+  },
+  {
+   "index": 870,
+   "feature": "other: shaped like the thing but not the thing",
+   "claim": "David Gaider said BioWare's generated-quest experiments could make something shaped like a quest whose result was no better than a fetch quest.",
+   "source": "David Gaider (Dragon Age creator) tweeting, quoted by Robin Valentine, PC Gamer, 2023",
+   "url": "https://www.pcgamer.com/ai-generated-story-and-dialogue-is-not-going-to-work-says-dragon-age-creator-david-gaider-a-lot-of-effort-is-going-to-be-wasted-on-this/",
+   "quote": "something *shaped* like a quest",
+   "page": "body, quoting Gaider's tweet"
+  },
+  {
+   "index": 871,
+   "feature": "reader and expert judgment",
+   "claim": "Jonas Kyratzes, narrative designer on The Talos Principle 3, said in a Game Informer interview that he thinks the AI push is largely ludicrous.",
+   "source": "Jonas Kyratzes quoted from a Game Informer interview by Elie Gould, PC Gamer, 2026",
+   "url": "https://www.pcgamer.com/games/puzzle/ai-is-just-a-plagiarism-machine-that-makes-people-lose-their-jobs-in-the-eyes-of-the-talos-principle-3s-writers/",
+   "quote": "I think it's largely ludicrous.",
+   "page": "body, quoting the Game Informer interview"
+  },
+  {
+   "index": 872,
+   "feature": "homogenisation",
+   "claim": "Wikipedia's WikiProject AI Cleanup explains the tells by statistical regression to the mean, which smooths specific facts into generic statements that could equally apply to many topics.",
+   "source": "WikiProject AI Cleanup, Wikipedia:Signs of AI writing, version of 6 September 2026",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "a smoothing over of specific facts into generic statements",
+   "page": "section 'Content', introductory paragraphs"
+  },
+  {
+   "index": 873,
+   "feature": "abstraction over the concrete",
+   "claim": "The WikiProject holds that the model omits specific, unusual, nuanced facts because they are statistically rare and replaces them with generic positive descriptions.",
+   "source": "WikiProject AI Cleanup, Wikipedia:Signs of AI writing, version of 6 September 2026",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "tends to omit specific, unusual, nuanced facts",
+   "page": "section 'Content', introductory paragraphs"
+  },
+  {
+   "index": 874,
+   "feature": "other: less specific and more exaggerated at once",
+   "claim": "The WikiProject states that in AI encyclopedic writing the subject becomes simultaneously less specific and more exaggerated.",
+   "source": "WikiProject AI Cleanup, Wikipedia:Signs of AI writing, version of 6 September 2026",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "The subject becomes simultaneously less specific and more exaggerated.",
+   "page": "section 'Content', introductory paragraphs"
+  },
+  {
+   "index": 875,
+   "feature": "discourse-level tells",
+   "claim": "The WikiProject names as a tell that LLM writing puffs up the importance of the subject by adding statements about how arbitrary aspects represent or contribute to a broader topic.",
+   "source": "WikiProject AI Cleanup, Wikipedia:Signs of AI writing, version of 6 September 2026",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "LLM writing often puffs up the importance of the subject matter",
+   "page": "section 'Undue emphasis on significance, legacy, and broader trends'"
   }
  ]
 }

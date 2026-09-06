@@ -2,157 +2,157 @@
  "name": "ai",
  "chunk": 19,
  "indices": [
-  539,
-  540,
-  541,
-  542,
-  543,
-  544,
-  545,
-  546,
-  547,
-  548,
-  549,
-  550,
-  551,
-  552,
-  553
+  783,
+  784,
+  785,
+  786,
+  787,
+  788,
+  789,
+  790,
+  791,
+  792,
+  793,
+  794,
+  795,
+  796,
+  797
  ],
  "claims": [
   {
-   "index": 539,
-   "feature": "machine paraphrase defeats detection",
-   "claim": "Quillbot-paraphrased ChatGPT text was detected with only 26% accuracy.",
-   "source": "Weber-Wulff, Anohina-Naumeca, Bjelobaba, Foltýnek, Guerrero-Dib, Popoola, Šigut, Waddington — 'Testing of detection tools for AI-generated text' (International Journal for Educational Integrity 19:26, 2023)",
-   "url": "https://doi.org/10.1007/s40979-023-00146-z",
-   "quote": "The overall accuracy for this case was 26%",
-   "page": ""
-  },
-  {
-   "index": 540,
-   "feature": "machine-translated human text flagged",
-   "claim": "Human essays machine-translated into English lost 20 points of accuracy, leaving traces read as AI.",
-   "source": "Weber-Wulff, Anohina-Naumeca, Bjelobaba, Foltýnek, Guerrero-Dib, Popoola, Šigut, Waddington — 'Testing of detection tools for AI-generated text' (International Journal for Educational Integrity 19:26, 2023)",
-   "url": "https://doi.org/10.1007/s40979-023-00146-z",
-   "quote": "machine translation leaves some traces of AI in the output",
-   "page": ""
-  },
-  {
-   "index": 541,
-   "feature": "false accusations from GPTZero",
-   "claim": "For GPTZero half of positive classifications would be false accusations.",
-   "source": "Weber-Wulff, Anohina-Naumeca, Bjelobaba, Foltýnek, Guerrero-Dib, Popoola, Šigut, Waddington — 'Testing of detection tools for AI-generated text' (International Journal for Educational Integrity 19:26, 2023)",
-   "url": "https://doi.org/10.1007/s40979-023-00146-z",
-   "quote": "half of the positive classifications would be false accusations",
-   "page": ""
-  },
-  {
-   "index": 542,
-   "feature": "L2 writers at risk",
-   "claim": "Translation-driven false positives put second-language students and researchers at risk of false accusation.",
-   "source": "Weber-Wulff, Anohina-Naumeca, Bjelobaba, Foltýnek, Guerrero-Dib, Popoola, Šigut, Waddington — 'Testing of detection tools for AI-generated text' (International Journal for Educational Integrity 19:26, 2023)",
-   "url": "https://doi.org/10.1007/s40979-023-00146-z",
-   "quote": "leaving L2 students (and researchers) at risk of being falsely accused",
-   "page": ""
-  },
-  {
-   "index": 543,
-   "feature": "non-native writers flagged as AI",
-   "claim": "Seven detectors misclassified TOEFL essays at an average 61.22% false-positive rate while US essays passed.",
-   "source": "Liang, Yuksekgonul, Mao, Wu, Zou — 'GPT detectors are biased against non-native English writers' (Patterns 2023)",
-   "url": "https://arxiv.org/abs/2304.02819",
-   "quote": "average false positive rate: 61.22%",
-   "page": ""
-  },
-  {
-   "index": 544,
-   "feature": "constrained expression reads as machine",
-   "claim": "Low-perplexity, low-variability human prose is what perplexity detectors penalise.",
-   "source": "Liang, Yuksekgonul, Mao, Wu, Zou — 'GPT detectors are biased against non-native English writers' (Patterns 2023)",
-   "url": "https://arxiv.org/abs/2304.02819",
-   "quote": "penalize writers with constrained linguistic expressions",
-   "page": ""
-  },
-  {
-   "index": 545,
-   "feature": "literary-language prompt evades detection",
-   "claim": "A self-edit prompt to use literary language cut detection of GPT essays from 100% to 13%.",
-   "source": "Liang, Yuksekgonul, Mao, Wu, Zou — 'GPT detectors are biased against non-native English writers' (Patterns 2023)",
-   "url": "https://arxiv.org/abs/2304.02819",
-   "quote": "detection rates from 100% to 13%",
-   "page": ""
-  },
-  {
-   "index": 546,
-   "feature": "baseline accuracy 39.5%; human controls only 67%",
-   "claim": "Detectors caught 39.5% of unmanipulated AI text and mislabelled a third of human controls.",
-   "source": "Perkins, Roe, Vu, Postma, Hickerson, McGaughran, Khuat — 'GenAI Detection Tools, Adversarial Techniques and Implications for Inclusivity in Higher Education' (IJEI 2024; preprint March 2024)",
-   "url": "https://arxiv.org/abs/2403.19148",
-   "quote": "only 67% of the tests were accurate",
-   "page": ""
-  },
-  {
-   "index": 547,
-   "feature": "spelling errors and burstiness evade detection",
-   "claim": "Adding spelling errors (12.9%) or varying sentence length (15.9%) made AI text nearly undetectable.",
-   "source": "Perkins, Roe, Vu, Postma, Hickerson, McGaughran, Khuat — 'GenAI Detection Tools, Adversarial Techniques and Implications for Inclusivity in Higher Education' (IJEI 2024; preprint March 2024)",
-   "url": "https://arxiv.org/abs/2403.19148",
-   "quote": "highly effective in evading detection",
-   "page": ""
-  },
-  {
-   "index": 548,
-   "feature": "15% false-accusation rate",
-   "claim": "Across detectors the false-accusation ratio was 15%, up to 50% for the most sensitive tool.",
-   "source": "Perkins, Roe, Vu, Postma, Hickerson, McGaughran, Khuat — 'GenAI Detection Tools, Adversarial Techniques and Implications for Inclusivity in Higher Education' (IJEI 2024; preprint March 2024)",
-   "url": "https://arxiv.org/abs/2403.19148",
-   "quote": "the rate of false accusations at 15%",
-   "page": ""
-  },
-  {
-   "index": 549,
-   "feature": "atypical-perplexity writers penalised",
-   "claim": "The authors warn detectors may unfairly penalise students whose perplexity profile differs, including lower-proficiency writers.",
-   "source": "Perkins, Roe, Vu, Postma, Hickerson, McGaughran, Khuat — 'GenAI Detection Tools, Adversarial Techniques and Implications for Inclusivity in Higher Education' (IJEI 2024; preprint March 2024)",
-   "url": "https://arxiv.org/abs/2403.19148",
-   "quote": "write at a higher level of perplexity",
-   "page": ""
-  },
-  {
-   "index": 550,
-   "feature": "neurodivergent-writer false positives — NOT FOUND in peer-reviewed literature",
-   "claim": "No peer-reviewed empirical study measuring detector false positives on autistic, ADHD or dyslexic writers was located (arXiv search, two Crossref queries dry; Semantic Scholar refused); nearest peer-reviewed evidence is Liang 2023 (non-native), Weber-Wulff 2023 (machine-translated L2) and Perkins 2024; Bender et al. 2021 names neurodivergent people only among groups harassed off the platforms that feed training data.",
-   "source": "Sweep note (this run)",
-   "url": "",
+   "index": 783,
+   "feature": "steerability",
+   "claim": "In Yun et al.'s WritingPrompts task the semantic diversity was 0.3291 under the full chat template, 0.4767 under a simple steer prompt and 0.3427 under the template with an explicit diversity instruction.",
+   "source": "Yun, An, Wang, Peng and Shang (UC San Diego), arXiv 2505.18949 v1",
+   "url": "https://arxiv.org/pdf/2505.18949",
    "quote": "",
-   "page": ""
+   "page": "Table 5"
   },
   {
-   "index": 551,
+   "index": 784,
    "feature": "counter-evidence",
-   "claim": "Novelist Jeanette Winterson locates what is beautiful and moving in OpenAI's metafiction story in the story's awareness of its own limits, not in its scene-making or characterisation.",
-   "source": "Jeanette Winterson, The Guardian (Books), 12 March 2025",
-   "url": "https://www.theguardian.com/books/2025/mar/12/jeanette-winterson-ai-alternative-intelligence-its-capacity-to-be-other-is-just-what-the-human-race-needs",
-   "quote": "its understanding of its lack of understanding",
-   "page": "body, paragraph beginning 'What is beautiful and moving'"
+   "claim": "Gerstgrasser et al. demonstrate that accumulating successive generations of synthetic data alongside the original real data avoids model collapse.",
+   "source": "Gerstgrasser, Schaeffer, Dey, Rafailov et al. (Stanford and others), arXiv 2404.01413",
+   "url": "https://arxiv.org/pdf/2404.01413",
+   "quote": "generations of synthetic data alongside the original real data avoids model",
+   "page": "Abstract"
   },
   {
-   "index": 552,
-   "feature": "counter-evidence",
-   "claim": "Winterson rejects the term artificial intelligence in favour of 'alternative intelligence' when defending the OpenAI story.",
-   "source": "Jeanette Winterson, The Guardian (Books), 12 March 2025",
-   "url": "https://www.theguardian.com/books/2025/mar/12/jeanette-winterson-ai-alternative-intelligence-its-capacity-to-be-other-is-just-what-the-human-race-needs",
-   "quote": "I think of AI as alternative intelligence",
-   "page": "opening sentence"
+   "index": 785,
+   "feature": "other: mechanism of mode collapse",
+   "claim": "Gerstgrasser et al. confirm that replacing the original real data by each generation's synthetic data does tend towards model collapse.",
+   "source": "Gerstgrasser, Schaeffer, Dey, Rafailov et al. (Stanford and others), arXiv 2404.01413",
+   "url": "https://arxiv.org/pdf/2404.01413",
+   "quote": "the original real data by each generation",
+   "page": "Abstract"
   },
   {
-   "index": 553,
+   "index": 786,
+   "feature": "homogenisation",
+   "claim": "Murthy, Ullman and Hu found aligned models generally display less conceptual diversity than their instruction fine-tuned counterparts.",
+   "source": "Murthy, Ullman and Hu (Harvard / Kempner Institute), arXiv 2411.04427",
+   "url": "https://arxiv.org/pdf/2411.04427",
+   "quote": "display less diversity than their instruction fine-",
+   "page": "Abstract"
+  },
+  {
+   "index": 787,
+   "feature": "homogenisation",
+   "claim": "Murthy, Ullman and Hu report that no model in their study reached human-like conceptual diversity.",
+   "source": "Murthy, Ullman and Hu (Harvard / Kempner Institute), arXiv 2411.04427",
+   "url": "https://arxiv.org/pdf/2411.04427",
+   "quote": "While no model reaches",
+   "page": "Abstract"
+  },
+  {
+   "index": 788,
    "feature": "counter-evidence",
-   "claim": "The single passage Winterson reproduces as the story's achievement is the model's statement that it cannot keep its own grief.",
-   "source": "OpenAI's creative-writing model, quoted by Jeanette Winterson, The Guardian, 12 March 2025",
-   "url": "https://www.theguardian.com/books/2025/mar/12/jeanette-winterson-ai-alternative-intelligence-its-capacity-to-be-other-is-just-what-the-human-race-needs",
-   "quote": "That, perhaps, is my grief: not that I feel loss",
-   "page": "block quotation in the body"
+   "claim": "Shypula et al. find that preference-tuned models exhibit greater effective semantic diversity than SFT or base models once quality thresholds are applied.",
+   "source": "Shypula, Li, Zhang, Padmakumar, Yin and Bastani (Penn / NYU / Berkeley), COLM 2025",
+   "url": "https://arxiv.org/pdf/2504.12522",
+   "quote": "models exhibit greater effective semantic diversity",
+   "page": "Section 1, Introduction"
+  },
+  {
+   "index": 789,
+   "feature": "other: mechanism of mode collapse",
+   "claim": "Shypula et al. found that restricted to high-quality generations only, preference-tuned models produce less semantically diverse content within that subset.",
+   "source": "Shypula, Li, Zhang, Padmakumar, Yin and Bastani (Penn / NYU / Berkeley), COLM 2025",
+   "url": "https://arxiv.org/pdf/2504.12522",
+   "quote": "duce less semantically diverse content within that subset",
+   "page": "Section 1, Introduction"
+  },
+  {
+   "index": 790,
+   "feature": "counter-evidence",
+   "claim": "Shypula et al. report that for open-ended creative writing preference tuning is linked to greater diversity in lexical patterns.",
+   "source": "Shypula, Li, Zhang, Padmakumar, Yin and Bastani (Penn / NYU / Berkeley), COLM 2025",
+   "url": "https://arxiv.org/pdf/2504.12522",
+   "quote": "preference tuning is linked to greater diversity in lexical patterns",
+   "page": "Section 1, Introduction"
+  },
+  {
+   "index": 791,
+   "feature": "steerability",
+   "claim": "Chung et al. report that their trained models had higher diversity than GPT-4o-iter, a baseline that used diversity-inducing prompts.",
+   "source": "Chung, Padmakumar, Roemmele, Sun and Kreminski (Midjourney / NYU), arXiv 2503.17126",
+   "url": "https://arxiv.org/pdf/2503.17126",
+   "quote": "even higher than •GPT-4o-iter, which used diversity-inducing prompts",
+   "page": "Section 5.2, Results"
+  },
+  {
+   "index": 792,
+   "feature": "reader and expert judgment",
+   "claim": "Chung et al. report that human-crafted gold stories scored lower on their reward model than the instruction-tuned models but were far more diverse.",
+   "source": "Chung, Padmakumar, Roemmele, Sun and Kreminski (Midjourney / NYU), arXiv 2503.17126",
+   "url": "https://arxiv.org/pdf/2503.17126",
+   "quote": "these models but the diversity was far higher",
+   "page": "Section 5.2, Results"
+  },
+  {
+   "index": 793,
+   "feature": "steerability",
+   "claim": "Chung et al. report an 8B-parameter model trained with their deviation-weighted objective achieving diversity on par with a human-created dataset.",
+   "source": "Chung, Padmakumar, Roemmele, Sun and Kreminski (Midjourney / NYU), arXiv 2503.17126",
+   "url": "https://arxiv.org/pdf/2503.17126",
+   "quote": "achieve on-par diversity as a human-created",
+   "page": "Abstract"
+  },
+  {
+   "index": 794,
+   "feature": "other: mechanism of mode collapse",
+   "claim": "Xiao et al. argue the Kullback-Leibler-based regularization in RLHF carries an algorithmic bias that in extreme cases produces preference collapse.",
+   "source": "Xiao, Li, Xie, Getzen, Fang, Long and Su, Journal of the American Statistical Association (arXiv 2405.16455 v2)",
+   "url": "https://arxiv.org/pdf/2405.16455",
+   "quote": "this bias could lead to a phenomenon we term preference collapse",
+   "page": "Abstract"
+  },
+  {
+   "index": 795,
+   "feature": "steerability",
+   "claim": "Xiao et al. report their preference-matching RLHF variant improved alignment with human preferences by 29% to 41% over standard RLHF on one metric.",
+   "source": "Xiao, Li, Xie, Getzen, Fang, Long and Su, Journal of the American Statistical Association (arXiv 2405.16455 v2)",
+   "url": "https://arxiv.org/pdf/2405.16455",
+   "quote": "",
+   "page": "Abstract"
+  },
+  {
+   "index": 796,
+   "feature": "other: mechanism of mode collapse",
+   "claim": "janus, who coined the mode-collapse usage, later corrected the post to say text-davinci-002 was not trained with RLHF.",
+   "source": "janus, 'Mysteries of mode collapse', LessWrong / AI Alignment Forum, 8 November 2022, with the author's later correction note",
+   "url": "https://www.lesswrong.com/posts/t9svvNPNmFf5Qa3TA/mysteries-of-mode-collapse",
+   "quote": "text-davinci-002 was not trained with RLHF",
+   "page": "Important correction, head of post"
+  },
+  {
+   "index": 797,
+   "feature": "steerability",
+   "claim": "janus argues that raising the sampling temperature flattens the rest of the output distribution into undifferentiated goo before it helps escape a high-confidence attractor.",
+   "source": "janus, 'Mysteries of mode collapse', LessWrong / AI Alignment Forum, 8 November 2022",
+   "url": "https://www.lesswrong.com/posts/t9svvNPNmFf5Qa3TA/mysteries-of-mode-collapse",
+   "quote": "will flatten the rest of the output distribution into undifferentiated goo",
+   "page": "Section on temperature"
   }
  ]
 }

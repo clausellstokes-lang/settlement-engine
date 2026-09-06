@@ -8273,6 +8273,1131 @@
    "substantive": false,
    "date": "2022-12",
    "route": "curl browser UA"
+  },
+  {
+   "title": "Le Guin, 'From Elfland to Poughkeepsie' (1973) — full essay",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "kind": "primary essay (PDF, read in full)",
+   "substantive": true
+  },
+  {
+   "title": "Wikipedia: From Elfland to Poughkeepsie",
+   "url": "https://en.wikipedia.org/wiki/From_Elfland_to_Poughkeepsie",
+   "kind": "Wikipedia synthesis",
+   "substantive": true
+  },
+  {
+   "title": "Wikipedia: A Wizard of Earthsea",
+   "url": "https://en.wikipedia.org/wiki/A_Wizard_of_Earthsea",
+   "kind": "Wikipedia synthesis (cites Cadden, Slusser, Attebery, Shippey, SFE, Craig)",
+   "substantive": true
+  },
+  {
+   "title": "Wikipedia: Ursula K. Le Guin",
+   "url": "https://en.wikipedia.org/wiki/Ursula_K._Le_Guin",
+   "kind": "Wikipedia synthesis (Bloom, NYT, Smith, Cadden)",
+   "substantive": true
+  },
+  {
+   "title": "Wikipedia: The Left Hand of Darkness",
+   "url": "https://en.wikipedia.org/wiki/The_Left_Hand_of_Darkness",
+   "kind": "Wikipedia synthesis",
+   "substantive": true
+  },
+  {
+   "title": "Wikipedia: The Tombs of Atuan",
+   "url": "https://en.wikipedia.org/wiki/The_Tombs_of_Atuan",
+   "kind": "Wikipedia synthesis",
+   "substantive": true
+  },
+  {
+   "title": "Wikipedia: Tehanu",
+   "url": "https://en.wikipedia.org/wiki/Tehanu",
+   "kind": "Wikipedia synthesis",
+   "substantive": true
+  },
+  {
+   "title": "Wikipedia: The Language of the Night",
+   "url": "https://en.wikipedia.org/wiki/The_Language_of_the_Night",
+   "kind": "Wikipedia synthesis",
+   "substantive": false
+  },
+  {
+   "title": "Wikipedia: The Farthest Shore",
+   "url": "https://en.wikipedia.org/wiki/The_Farthest_Shore",
+   "kind": "Wikipedia synthesis",
+   "substantive": false
+  },
+  {
+   "title": "Wikipedia: Tales from Earthsea",
+   "url": "https://en.wikipedia.org/wiki/Tales_from_Earthsea",
+   "kind": "Wikipedia synthesis",
+   "substantive": false
+  },
+  {
+   "title": "Wikipedia: The Other Wind",
+   "url": "https://en.wikipedia.org/wiki/The_Other_Wind",
+   "kind": "Wikipedia synthesis",
+   "substantive": false
+  },
+  {
+   "title": "Wikipedia: Earthsea (universe)",
+   "url": "https://en.wikipedia.org/wiki/Earthsea_(universe)",
+   "kind": "Wikipedia synthesis",
+   "substantive": false
+  },
+  {
+   "title": "Wikipedia: Earthsea",
+   "url": "https://en.wikipedia.org/wiki/Earthsea",
+   "kind": "Wikipedia synthesis",
+   "substantive": false
+  },
+  {
+   "title": "Wikipedia: The Books of Earthsea",
+   "url": "https://en.wikipedia.org/wiki/The_Books_of_Earthsea",
+   "kind": "Wikipedia synthesis",
+   "substantive": false
+  },
+  {
+   "title": "Wikipedia: Steering the Craft",
+   "url": "https://en.wikipedia.org/wiki/Steering_the_Craft",
+   "kind": "Wikipedia stub",
+   "substantive": false
+  },
+  {
+   "title": "Wikipedia: Dancing at the Edge of the World",
+   "url": "https://en.wikipedia.org/wiki/Dancing_at_the_Edge_of_the_World",
+   "kind": "Wikipedia synthesis",
+   "substantive": false
+  },
+  {
+   "title": "NEA Big Read Reader's Guide: A Wizard of Earthsea (PDF)",
+   "url": "https://www.arts.gov/sites/default/files/Readers-Guide-WizardofEarthsea.pdf",
+   "kind": "teaching guide with Le Guin interview (PDF, text extracted)",
+   "substantive": true
+  },
+  {
+   "title": "NEA Big Read: A Wizard of Earthsea (web page)",
+   "url": "https://www.arts.gov/initiatives/nea-big-read/wizard-earthsea",
+   "kind": "teaching guide page",
+   "substantive": true
+  },
+  {
+   "title": "SFE: Le Guin, Ursula K (Encyclopedia of Science Fiction)",
+   "url": "https://sf-encyclopedia.com/entry/le_guin_ursula_k",
+   "kind": "reference encyclopedia entry",
+   "substantive": true
+  },
+  {
+   "title": "Shippey, 'The Magic Art and the Evolution of Words' (Hard Reading, LUP 2016) — chapter abstract",
+   "url": "https://academic.oup.com/liverpool-scholarship-online/book/43316/chapter/363083559",
+   "kind": "monograph chapter abstract (Liverpool Scholarship Online)",
+   "substantive": true
+  },
+  {
+   "title": "Kelso, 'Boldly to Re-Venture', Paradoxa 21 (2008) pp. 7–22",
+   "url": "https://paradoxa.com/wp-content/uploads/2020/07/1-Boldly-to-Re-Venture-New-Writing-on-the-Works-of-Ursula-K.-Le-Guin-Kelso-pp-7-22.pdf",
+   "kind": "journal introduction (PDF, read in full)",
+   "substantive": true
+  },
+  {
+   "title": "John Garth, 'Ursula Le Guin, the language of Earthsea, and Tolkien'",
+   "url": "https://johngarth.wordpress.com/2021/01/22/ursula-le-guin-the-language-of-earthsea-and-tolkien/",
+   "kind": "scholar's blog essay",
+   "substantive": true
+  },
+  {
+   "title": "Stan Carey, 'How to see one's own world': Le Guin on writing style",
+   "url": "https://stancarey.wordpress.com/2024/10/16/how-to-see-ones-own-world-ursula-k-le-guin-on-writing-style/",
+   "kind": "editor's blog essay",
+   "substantive": true
+  },
+  {
+   "title": "Margaret Mahy, 'Speculations on the Earthsea Stories' (ursulakleguin.com)",
+   "url": "https://www.ursulakleguin.com/on-earthsea-mahy",
+   "kind": "critic essay on official site",
+   "substantive": true
+  },
+  {
+   "title": "Jo Walton, 'Bright the hawk's flight in the empty sky' (Reactor, 2010)",
+   "url": "https://reactormag.com/qbright-the-hawks-flight-in-the-empty-skyq-ursula-le-guins-lemga-wizard-of-earthsealemg/",
+   "kind": "novelist-critic essay (fetched via curl)",
+   "substantive": true
+  },
+  {
+   "title": "Stephanie Burt, review of Plotz, Ursula Le Guin's Earthsea (Strange Horizons)",
+   "url": "https://strangehorizons.com/wordpress/non-fiction/ursula-le-guins-earthsea-by-john-plotz/",
+   "kind": "review of scholarly monograph",
+   "substantive": true
+  },
+  {
+   "title": "Oliver Tearle, review of Plotz (Interesting Literature)",
+   "url": "https://interestingliterature.com/2023/10/john-plotz-ursula-le-guin-earthsea-review/",
+   "kind": "review of scholarly monograph",
+   "substantive": true
+  },
+  {
+   "title": "Kate Nepveu, LotR re-read: Le Guin 'Rhythmic Pattern in The Lord of the Rings'",
+   "url": "https://kate-nepveu.livejournal.com/180011.html",
+   "kind": "reader summary of primary essay",
+   "substantive": true
+  },
+  {
+   "title": "Vermont Softworks: Le Guin 'Rhythmic Pattern in The Lord of the Rings'",
+   "url": "https://vermontsoftworks.com/post/2023/leguin-rhythmic-pattern-in-lotr/",
+   "kind": "reader summary of primary essay",
+   "substantive": true
+  },
+  {
+   "title": "Literary Hub, 'A Writing Lesson from Ursula K. Le Guin' (Steering the Craft excerpt)",
+   "url": "https://lithub.com/a-writing-lesson-from-ursula-k-leguin/",
+   "kind": "primary excerpt",
+   "substantive": true
+  },
+  {
+   "title": "Le Guin, Bryn Mawr Commencement Address 1986 (Serendip text)",
+   "url": "https://serendipstudio.org/sci_cult/leguin/",
+   "kind": "primary speech text",
+   "substantive": true
+  },
+  {
+   "title": "Newell, 'The Mother Tongue in a World of Sons' (MA thesis, Liberty 2010) — landing page/abstract",
+   "url": "https://digitalcommons.liberty.edu/masters/133/",
+   "kind": "thesis abstract",
+   "substantive": true
+  },
+  {
+   "title": "Crossref record: Comoletti & Drout, Children's Literature 29 (2001)",
+   "url": "https://api.crossref.org/works?query.bibliographic=How+They+Do+Things+with+Words+Language+Power+Gender+Priestly+Wizards+Le+Guin+Earthsea&rows=3",
+   "kind": "bibliographic record (citation only)",
+   "substantive": false
+  },
+  {
+   "title": "Crossref record: Barry & Prescott, Extrapolation 33.2 (1992)",
+   "url": "https://api.crossref.org/works?query.bibliographic=Beyond+Words+Impact+of+Rhythm+as+Narrative+Technique+Left+Hand+of+Darkness+Extrapolation+1992&rows=3",
+   "kind": "bibliographic record (citation only)",
+   "substantive": false
+  },
+  {
+   "title": "Curtis Weyant, The Left Hand of Darkness: Secondary Bibliography",
+   "url": "https://curtisweyant.com/scholarship/le-guin/secondary-bibliography-the-left-hand-of-darkness/",
+   "kind": "scholar-maintained bibliography (fetched via curl)",
+   "substantive": true
+  },
+  {
+   "title": "ursulakleguin.com: The Books of Earthsea",
+   "url": "https://www.ursulakleguin.com/the-books-of-earthsea",
+   "kind": "official site page",
+   "substantive": true
+  },
+  {
+   "title": "ursulakleguin.com: Steering the Craft",
+   "url": "https://www.ursulakleguin.com/steering-the-craft",
+   "kind": "official site page",
+   "substantive": true
+  },
+  {
+   "title": "ursulakleguin.com: From Elfland to Poughkeepsie (publication note)",
+   "url": "https://www.ursulakleguin.com/from-elfland-to-poughkeepsie",
+   "kind": "official site publication note",
+   "substantive": false
+  },
+  {
+   "title": "Sharada Bhanu, 'Tehanu: A Return to the Source' (ursulakleguin.com)",
+   "url": "https://www.ursulakleguin.com/return-to-source",
+   "kind": "critic essay on official site",
+   "substantive": true
+  },
+  {
+   "title": "Rochelle, Communities of the Heart — LSO abstract",
+   "url": "https://academic.oup.com/liverpool-scholarship-online/book/43267",
+   "kind": "monograph abstract",
+   "substantive": false
+  },
+  {
+   "title": "FAU news: Timothy S. Miller, A Wizard of Earthsea: A Critical Companion (Palgrave 2023)",
+   "url": "https://www.fau.edu/artsandletters/english/news/timothy-miller-publishes-ursula-k-leguin-a-wizard-of-earthsea-critical-companion/index.php",
+   "kind": "publication announcement",
+   "substantive": false
+  },
+  {
+   "title": "Comoletti & Drout on Project MUSE",
+   "url": "https://muse.jhu.edu/article/251728/summary",
+   "kind": "attempted — blocked/404/429, NOT read",
+   "substantive": false
+  },
+  {
+   "title": "'Draconic Diction: Truth and Lies in Le Guin's Old Speech' (academia.edu)",
+   "url": "https://www.academia.edu/50882793/Draconic_Diction_Truth_and_Lies_in_Le_Guins_Old_Speech",
+   "kind": "attempted — blocked/404/429, NOT read",
+   "substantive": false
+  },
+  {
+   "title": "Oxford Bibliographies: Ursula K. Le Guin",
+   "url": "https://oxfordbibliographies.com/display/document/obo-9780199827251/obo-9780199827251-0210.xml",
+   "kind": "attempted — blocked/404/429, NOT read",
+   "substantive": false
+  },
+  {
+   "title": "Slusser, 'Le Guin and the Future of SF Criticism' (SFS review essay)",
+   "url": "https://www.depauw.edu/sfs/review_essays/sluss53.htm",
+   "kind": "attempted — blocked/404/429, NOT read",
+   "substantive": false
+  },
+  {
+   "title": "Paris Review, Art of Fiction No. 221: Le Guin",
+   "url": "https://www.theparisreview.org/interviews/6253/the-art-of-fiction-no-221-ursula-k-le-guin",
+   "kind": "attempted — blocked/404/429, NOT read",
+   "substantive": false
+  },
+  {
+   "title": "Mythlore: 'Magic, Witchcraft, and Faërie' (SWOSU PDF)",
+   "url": "https://dc.swosu.edu/cgi/viewcontent.cgi?article=3006&context=mythlore",
+   "kind": "attempted — blocked/404/429, NOT read",
+   "substantive": false
+  },
+  {
+   "title": "Newell thesis full PDF",
+   "url": "https://digitalcommons.liberty.edu/cgi/viewcontent.cgi?article=1134&context=masters",
+   "kind": "attempted — blocked/404/429, NOT read",
+   "substantive": false
+  },
+  {
+   "title": "Springer: Miller, A Wizard of Earthsea: A Critical Companion",
+   "url": "https://link.springer.com/book/10.1007/978-3-031-24640-1",
+   "kind": "attempted — blocked/404/429, NOT read",
+   "substantive": false
+  },
+  {
+   "title": "Poetry Foundation, 'Always Beginning'",
+   "url": "https://www.poetryfoundation.org/articles/148040/always-beginning",
+   "kind": "attempted — blocked/404/429, NOT read",
+   "substantive": false
+  },
+  {
+   "title": "Barry & Prescott at Liverpool UP Online",
+   "url": "https://online.liverpooluniversitypress.co.uk/doi/10.3828/extr.1992.33.2.154",
+   "kind": "attempted — blocked/404/429, NOT read",
+   "substantive": false
+  },
+  {
+   "title": "Google Books API snippets (Cadden / Cummins)",
+   "url": "https://www.googleapis.com/books/v1/volumes?q=%22free+indirect+discourse%22+Earthsea+Cadden",
+   "kind": "attempted — blocked/404/429, NOT read",
+   "substantive": false
+  },
+  {
+   "title": "From Elfland to Poughkeepsie (1973) — full text PDF",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "1972 speech, 1973 print",
+   "route": "direct PDF fetch, pypdf extraction"
+  },
+  {
+   "title": "Ursula K. Le Guin — From Elfland to Poughkeepsie (publication page)",
+   "url": "https://www.ursulakleguin.com/from-elfland-to-poughkeepsie",
+   "kind": "vendor",
+   "substantive": false,
+   "date": "n.d.",
+   "route": "direct fetch; bibliographic only, no essay text"
+  },
+  {
+   "title": "A Writing Lesson from Ursula K. Le Guin (Steering the Craft, ch.1)",
+   "url": "https://lithub.com/a-writing-lesson-from-ursula-k-leguin/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2015-09-03",
+   "route": "direct fetch"
+  },
+  {
+   "title": "On Rules of Writing, or, Riffing on Rechy",
+   "url": "https://www.ursulakleguin.com/on-rules-of-writing",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2003-01-05",
+   "route": "direct fetch"
+  },
+  {
+   "title": "Ursula K. Le Guin: 'Rhythmic Pattern in The Lord of the Rings' (blog quoting the 2001 essay)",
+   "url": "https://vermontsoftworks.com/post/2023/leguin-rhythmic-pattern-in-lotr/",
+   "kind": "relay",
+   "substantive": true,
+   "date": "2023-09-28",
+   "route": "direct fetch"
+  },
+  {
+   "title": "NEA Big Read Reader's Guide to A Wizard of Earthsea (writer: Michael Dirda)",
+   "url": "https://www.arts.gov/sites/default/files/Readers-Guide-WizardofEarthsea.pdf",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "n.d. (Arts Midwest, CC BY-SA 4.0)",
+   "route": "direct PDF fetch, pypdf extraction"
+  },
+  {
+   "title": "NEA Big Read Teacher's Guide to A Wizard of Earthsea",
+   "url": "https://www.arts.gov/sites/default/files/Teachers-Guide-LeGuin.pdf",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "n.d. (Arts Midwest)",
+   "route": "direct PDF fetch, pypdf extraction"
+  },
+  {
+   "title": "Unlearning to Write (review of Steering the Craft)",
+   "url": "https://slate.com/culture/2015/09/ursula-le-guins-writing-guide-steering-the-craft-reviewed.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2015-09-11",
+   "route": "direct fetch"
+  },
+  {
+   "title": "5 Things Every Fantasy Writer Can Learn from Earthsea",
+   "url": "https://theportalist.com/earthsea-ursula-le-guin",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2018-03-19, upd. 2019-06-27",
+   "route": "direct fetch"
+  },
+  {
+   "title": "Building Earthsea: How Le Guin Laid a Shaky Foundation for Her World",
+   "url": "https://mythcreants.com/blog/building-earthsea-how-le-guin-laid-a-shaky-foundation-for-her-world/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2020-09-19, upd. 2025-03-06",
+   "route": "direct fetch"
+  },
+  {
+   "title": "Ursula Le Guin Reading Notes: A Wizard of Earthsea",
+   "url": "https://bysinginglight.wordpress.com/2016/03/04/ursula-le-guin-reading-notes-a-wizard-of-earthsea/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2016-03-04",
+   "route": "direct fetch"
+  },
+  {
+   "title": "'How to see one's own world': Ursula K. Le Guin on writing style (Stan Carey)",
+   "url": "https://stancarey.wordpress.com/2024/10/16/how-to-see-ones-own-world-ursula-k-le-guin-on-writing-style/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2024-10-16",
+   "route": "direct fetch"
+  },
+  {
+   "title": "Know Thyself: A Wizard of Earthsea (Ekostories)",
+   "url": "https://ekostories.com/2012/03/05/leguin-wizard-earthsea/",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2012-03-05",
+   "route": "direct fetch; thematic not stylistic, no claims taken"
+  },
+  {
+   "title": "Ursula K. Le Guin's Writing Style (David Somerfleck)",
+   "url": "https://boldly.blue/ursula-k-le-guin-writing-style/",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "n.d.",
+   "route": "direct fetch; self-published, site carries an AI policy and the piece reads as AI-assisted — used only for bibliography chasing, no claims taken"
+  },
+  {
+   "title": "The Wave in the Mind (Shambhala, 2004) — full text PDF; 'Stress-Rhythm in Poetry and Prose' and 'Rhythmic Pattern in The Lord of the Rings'",
+   "url": "https://manifesto-library.espivblogs.net/files/2018/10/Ursula-K.-Le-Guin-The-Wave-in-the-Mind_-Talks-and-Essays-on-the-Writer-the-Reader-and-the-Imagination-2004-Shambhala.pdf",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2004 (essays 1995-2002)",
+   "route": "direct PDF fetch, pypdf extraction; 253pp of the Shambhala edition"
+  },
+  {
+   "title": "LotR re-read: Le Guin, 'Rhythmic Pattern in The Lord of the Rings' (Kate Nepveu)",
+   "url": "https://web.archive.org/web/20211026151249id_/https://kate-nepveu.livejournal.com/180011.html",
+   "kind": "relay",
+   "substantive": true,
+   "date": "2006-06-04",
+   "route": "live LiveJournal page returned chrome only; read via the Wayback raw capture"
+  },
+  {
+   "title": "Writing Quotes: Ursula Le Guin on Adjectives and Adverbs (Ann Kroeker)",
+   "url": "https://annkroeker.com/2015/10/24/writing-quotes-ursula-le-guin-on-adjectives-and-adverbs/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2015-10-24",
+   "route": "direct fetch; single-quotation page"
+  },
+  {
+   "title": "Le Guin, Steering The Craft, Chapter Five: Adjectives and Adverbs (Exercise Five, Chastity)",
+   "url": "https://wouldthatimight.blogspot.com/2018/07/le-guin-steering-craft-chapter-five.html",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2018-07-16",
+   "route": "direct fetch"
+  },
+  {
+   "title": "Nothing Tra La La: Steering the Craft, by Ursula le Guin (Simon Guerrier)",
+   "url": "http://0tralala.blogspot.com/2026/01/steering-craft-by-ursula-le-guin.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2026-01",
+   "route": "direct fetch"
+  },
+  {
+   "title": "'Bright the hawk's flight in the empty sky': Ursula Le Guin's A Wizard of Earthsea (Jo Walton)",
+   "url": "https://reactormag.com/qbright-the-hawks-flight-in-the-empty-skyq-ursula-le-guins-lemga-wizard-of-earthsea2lemg/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2011-10-04",
+   "route": "direct fetch (includes comment thread)"
+  },
+  {
+   "title": "Write On! Crowding and Leaping, according to LeGuin",
+   "url": "https://www.dailykos.com/stories/2023/1/12/2146773/-Write-On-Crowding-and-Leaping-according-to-LeGuin",
+   "kind": "relay",
+   "substantive": true,
+   "date": "2023-01-12",
+   "route": "direct fetch; long verbatim quotation of Steering the Craft ch.10"
+  },
+  {
+   "title": "Steering the Craft, by Ursula K. Le Guin: Book Review (The Blue Garret)",
+   "url": "https://www.thebluegarret.com/blog/steering-the-craft-leguin-review",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2019, revised in All the Words",
+   "route": "direct fetch"
+  },
+  {
+   "title": "My Le Guin Year: Craft Lessons From a Master (Matt Bell)",
+   "url": "https://reactormag.com/my-le-guin-year-craft-lessons-from-a-master/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2021-08-24",
+   "route": "direct fetch"
+  },
+  {
+   "title": "A Question of Rhythm (Story Club with George Saunders)",
+   "url": "https://georgesaunders.substack.com/p/a-question-of-rhythm",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "undated",
+   "route": "direct fetch"
+  },
+  {
+   "title": "A Wizard of Earthsea — Editor's Six Core Questions (Leslie Watts, Story Grid)",
+   "url": "https://storygrid.com/writers-room-wizard-of-earthsea-e6cq/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "undated",
+   "route": "direct fetch"
+  },
+  {
+   "title": "'What Everyone Knows is True...': Le Guin's Tales from Earthsea (Jo Walton)",
+   "url": "https://reactormag.com/what-everyone-knows-is-true-turns-out-to-be-what-some-people-used-to-think-ursula-le-guins-tales-from-earthsea/",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2011",
+   "route": "direct fetch; thematic, no prose-craft content"
+  },
+  {
+   "title": "Only in Silence the Word: Le Guin's The Farthest Shore (Jo Walton)",
+   "url": "https://www.tor.com/2011/10/18/only-in-silence-the-word-ursula-le-guins-the-farthest-shore/",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2011-10-18",
+   "route": "BLOCKED: fetch returned 796 bytes of chrome only"
+  },
+  {
+   "title": "The Art of Fiction No. 221, Ursula K. Le Guin (Paris Review)",
+   "url": "https://www.theparisreview.org/interviews/6253/the-art-of-fiction-no-221-ursula-k-le-guin",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "2013",
+   "route": "BLOCKED: direct fetch returned a 762-byte shell; the Wayback availability API reports no capture; archive.ph returned nothing"
+  },
+  {
+   "title": "Steering The Craft, By Ursula Le Guin (Andrew Wille Writing Studio)",
+   "url": "https://wille.org/2014/09/19/steering-the-craft-by-ursula-le-guin/",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2014-09-19",
+   "route": "BLOCKED: fetch returned 140 bytes"
+  },
+  {
+   "title": "From Elfland to Poughkeepsie (book page)",
+   "url": "https://www.ursulakleguin.com/from-elfland-to-poughkeepsie",
+   "kind": "relay",
+   "substantive": false,
+   "date": "accessed 2026-09-06",
+   "route": "curl + browser UA, live site"
+  },
+  {
+   "title": "Some Assumptions about Fantasy (speech, 4 June 2004)",
+   "url": "https://www.ursulakleguin.com/some-assumptions-about-fantasy",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2004-06-04",
+   "route": "curl + browser UA, live site"
+  },
+  {
+   "title": "Plausibility in Fantasy: an open letter to Alexei Mutovkin",
+   "url": "https://www.ursulakleguin.com/plausibility-in-fantasy-an-open-letter",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2005",
+   "route": "curl + browser UA, live site"
+  },
+  {
+   "title": "Plausibility Revisited",
+   "url": "https://www.ursulakleguin.com/plausibility-revisited",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2005",
+   "route": "curl + browser UA, live site"
+  },
+  {
+   "title": "On Rules of Writing, or, Riffing on Rechy (first pub. Los Angeles Times, 5 Jan 2003, as 'When to Bend, When to Break')",
+   "url": "https://www.ursulakleguin.com/on-rules-of-writing",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2003-01-05",
+   "route": "curl + browser UA, live site"
+  },
+  {
+   "title": "What Makes a Story",
+   "url": "https://www.ursulakleguin.com/what-makes-a-story",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "c. 2007",
+   "route": "curl + browser UA, live site"
+  },
+  {
+   "title": "A Rant About 'Technology'",
+   "url": "https://www.ursulakleguin.com/a-rant-about-technology",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2005",
+   "route": "curl + browser UA, live site"
+  },
+  {
+   "title": "A Few Words to a Young Writer",
+   "url": "https://www.ursulakleguin.com/a-few-words-to-a-young-writer",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "undated",
+   "route": "curl + browser UA, live site"
+  },
+  {
+   "title": "Steering the Craft (book page, with UKL's Introduction to the 2015 revision)",
+   "url": "https://www.ursulakleguin.com/steering-the-craft",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2015 revision; accessed 2026-09-06",
+   "route": "curl + browser UA, live site"
+  },
+  {
+   "title": "Some Genres I Write In",
+   "url": "https://www.ursulakleguin.com/some-genres-i-write-in",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "2016 note on a 1996 table of contents",
+   "route": "curl + browser UA, live site"
+  },
+  {
+   "title": "Ursula on Ursula (pronunciation of invented names)",
+   "url": "https://www.ursulakleguin.com/ursula-on-ursula",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "undated",
+   "route": "curl + browser UA, live site"
+  },
+  {
+   "title": "Navigating the Ocean of Story: An Experiment (Book View Cafe, 27 July 2015)",
+   "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "2015-07-27",
+   "route": "curl + browser UA, live site"
+  },
+  {
+   "title": "Navigating the Ocean of Story - Session 1 (Book View Cafe, 10 Aug 2015)",
+   "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-1",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2015-08-10",
+   "route": "curl + browser UA, live site"
+  },
+  {
+   "title": "Navigating the Ocean of Story - Session 1 continued",
+   "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-1-continued",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2015",
+   "route": "curl + browser UA, live site"
+  },
+  {
+   "title": "Navigating the Ocean of Story - Session 1 part 3",
+   "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-1-part-3",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2015",
+   "route": "curl + browser UA, live site"
+  },
+  {
+   "title": "Dreams Must Explain Themselves (Gollancz 2018 collection book page - NOT the 1973 essay text)",
+   "url": "https://www.ursulakleguin.com/dreams-must-explain-themselves",
+   "kind": "relay",
+   "substantive": false,
+   "date": "2018",
+   "route": "curl + browser UA, live site"
+  },
+  {
+   "title": "Steering the Craft: A Twenty-First-Century Guide to Sailing the Sea of Story (Mariner/HMH, 2015) - full text",
+   "url": "https://archive.org/download/steering-the-craft-a-twenty-first-century-guide-to-sailing-the-sea-of-story-repr/steering-the-craft-a-twenty-first-century-guide-to-sailing-the-sea-of-story-reprintnbsped-9780544611610-9780544612341-0544611616_djvu.txt",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2015",
+   "route": "archive.org OCR djvu.txt via curl; OCR wraps lines so quotations are contiguous after whitespace normalisation"
+  },
+  {
+   "title": "A Writing Lesson from Ursula K. Le Guin (chapter one of the 2015 Steering the Craft)",
+   "url": "https://lithub.com/a-writing-lesson-from-ursula-k-leguin/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2015-09-03",
+   "route": "curl + browser UA, live site"
+  },
+  {
+   "title": "The Story's Where I Go: An Interview With Ursula K. Le Guin, by John Plotz, Public Books",
+   "url": "https://www.publicbooks.org/the-storys-where-i-go-an-interview-with-ursula-k-le-guin/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2015-06-15 (interview conducted in March)",
+   "route": "curl + browser UA, live site"
+  },
+  {
+   "title": "Ursula K. Le Guin on Racism, Anarchy, and Hearing Her Characters Speak, interview by Euan Monaghan, Literary Hub",
+   "url": "https://lithub.com/ursula-k-le-guin-on-racism-anarchy-and-hearing-her-characters-speak/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2016-04-01",
+   "route": "curl + browser UA, live site"
+  },
+  {
+   "title": "Foreword to The Birthday of the World",
+   "url": "https://www.ursulakleguin.com/foreword-the-birthday-of-the-world",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2002 collection; accessed 2026-09-06",
+   "route": "curl + browser UA, live site"
+  },
+  {
+   "title": "A Message About Messages (first published by CBC Magazine, 2005)",
+   "url": "https://www.ursulakleguin.com/message-about-messages",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2005",
+   "route": "curl + browser UA, live site"
+  },
+  {
+   "title": "Ursula K. Le Guin, The Art of Fiction No. 221, interview by John Wray, The Paris Review",
+   "url": "https://web.archive.org/web/20260828080341id_/https://www.theparisreview.org/interviews/6253/the-art-of-fiction-no-221-ursula-k-le-guin",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "2013-12-04",
+   "route": "live page HTTP 403; Wayback raw capture read, but the interview is truncated at a subscription wall before any discussion of style"
+  },
+  {
+   "title": "Tales from Earthsea (book page)",
+   "url": "https://www.ursulakleguin.com/tales-from-earthsea",
+   "kind": "relay",
+   "substantive": false,
+   "date": "2001 collection; accessed 2026-09-06",
+   "route": "curl + browser UA, live site"
+  },
+  {
+   "title": "Some Guidelines for Manuscript Preparation & Submission",
+   "url": "https://www.ursulakleguin.com/manuscript-preparation",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "2012",
+   "route": "curl + browser UA, live site"
+  },
+  {
+   "title": "A Conversation on Craft with Ursula K. Le Guin, AWP Writer's Chronicle",
+   "url": "https://archives.awpwriter.org/magazine_media/writers_chronicle_view/4249/a_conversation_on_craft_with_ursula_k._le_guin",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "n.d.",
+   "route": "BLOCKED - the AWP archive returns only a sign-in page"
+  },
+  {
+   "title": "Blog 95: 'Are they going to say this is fantasy?' (on Kazuo Ishiguro's The Buried Giant)",
+   "url": "https://www.ursulakleguin.com/blog/95-are-they-going-to-say-this-is-fantasy",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2015-03-02",
+   "route": "curl + browser UA, live site"
+  },
+  {
+   "title": "Blog 52: Some Recent Fantasies",
+   "url": "https://www.ursulakleguin.com/blog/52-some-recent-fantasies",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2012-05-21",
+   "route": "curl + browser UA, live site"
+  },
+  {
+   "title": "Blog 31: Papa H (on Homer)",
+   "url": "https://www.ursulakleguin.com/blog/31-papa-h",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2011-07-24",
+   "route": "curl + browser UA, live site"
+  },
+  {
+   "title": "Interview: Karabatak Magazine, 9th edition",
+   "url": "https://www.ursulakleguin.com/interview-karabatak",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2013 summer issue",
+   "route": "curl + browser UA, live site"
+  },
+  {
+   "title": "Ursula K. Le Guin: Dictators are Always Afraid of Poets (excerpt from Conversations on Writing, Tin House 2018), by David Naimon, Literary Hub",
+   "url": "https://lithub.com/ursula-k-le-guin-dictators-are-always-afraid-of-poets/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2018-04-06",
+   "route": "curl + browser UA, live site; the page's letter-spacing markup breaks many words"
+  },
+  {
+   "title": "On Serious Literature (parody of Ruth Franklin, first published in Ansible)",
+   "url": "https://www.ursulakleguin.com/on-serious-literature",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "2007",
+   "route": "curl + browser UA, live site"
+  },
+  {
+   "title": "The Books of Earthsea (book page, with 'A Note from Ursula')",
+   "url": "https://www.ursulakleguin.com/the-books-of-earthsea",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "2018",
+   "route": "curl + browser UA, live site"
+  },
+  {
+   "title": "Blog 30: Riffing Again",
+   "url": "https://www.ursulakleguin.com/blog/30-riffing-again",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "2011-07-21",
+   "route": "curl + browser UA, live site"
+  },
+  {
+   "title": "Blog 27: Exercises",
+   "url": "https://www.ursulakleguin.com/blog/27-exercises",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "2011-06-24",
+   "route": "curl + browser UA, live site"
+  },
+  {
+   "title": "National Book Foundation Medal acceptance speech",
+   "url": "https://www.ursulakleguin.com/nbf-medal",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "2014-11-19",
+   "route": "curl + browser UA, live site"
+  },
+  {
+   "title": "Always Coming Home (book page)",
+   "url": "https://www.ursulakleguin.com/always-coming-home-book",
+   "kind": "relay",
+   "substantive": false,
+   "date": "1985; LOA edition 2019; accessed 2026-09-06",
+   "route": "curl + browser UA, live site"
+  },
+  {
+   "title": "Writing Nameless Things: An Interview with Ursula K. Le Guin, by David Streitfeld, Los Angeles Review of Books",
+   "url": "https://lareviewofbooks.org/article/writing-nameless-things-an-interview-with-ursula-k-le-guin/",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "2017-11-17",
+   "route": "curl + browser UA, live site; read in full but concerns career, genre and publishing rather than prose style"
+  },
+  {
+   "title": "The Imaginative Reality of Ursula K. Le Guin (VQR, Summer 2018)",
+   "url": "https://www.vqronline.org/summer-2018/interviews-columns/imaginative-reality-ursula-k-le-guin",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "2018",
+   "route": "BLOCKED - live page and Wayback raw capture both return only the site navigation shell"
+  },
+  {
+   "title": "Sentence first (Stan Carey) — 'How to see one's own world': Le Guin on writing style",
+   "url": "https://stancarey.wordpress.com/2024/10/16/how-to-see-ones-own-world-ursula-k-le-guin-on-writing-style/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2024-10-16",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "John Pyle, 'From Elfland to Poughkeepsie' (Fairy Spell blog)",
+   "url": "https://fairyspell.wordpress.com/2012/11/23/from-elfland-to-poughkeepsie/",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2012-11-23",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "Rich Horton, Review: Always Coming Home (Strange at Ecbatan)",
+   "url": "http://rrhorton.blogspot.com/2024/04/review-always-coming-home-by-ursula-k.html",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2024-04-24",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "Scott Manley Hadley, Always Coming Home (Triumph Of The Now)",
+   "url": "https://triumphofthenow.com/2019/07/13/always-coming-home-by-ursula-le-guin/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2019-07-13",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "Cat Eldridge, Ursula K. Le Guin's Always Coming Home (A Green Man Review)",
+   "url": "https://agreenmanreview.com/books/ursula-k-le-guins-always-coming-home/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2001",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "Nathanael Bonnell, Always Coming Home: Review (New Maps, via Resilience.org)",
+   "url": "https://www.resilience.org/stories/2023-02-16/always-coming-home-review/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2023-02-16",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "Oliver Tearle, Summary and Analysis of 'The Ones Who Walk Away from Omelas' (Interesting Literature)",
+   "url": "https://interestingliterature.com/2021/02/ursula-le-guin-ones-who-walk-away-from-omelas-summary-analysis/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2021-02",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "Sarah Wyman (SUNY New Paltz), analysis of 'The Ones Who Walk Away from Omelas' (Literary Ladies Guide)",
+   "url": "https://www.literaryladiesguide.com/literary-analyses/ones-who-walk-away-from-omelas-ursula-le-guin/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2021",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "Reader Response chapter on Omelas, Beginnings and Endings: A Critical Edition (Pressbooks)",
+   "url": "https://cwi.pressbooks.pub/beginnings-and-endings-a-critical-edition/chapter/reader-response-9/",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2022-12",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "SFF Chronicles thread 583221: Is a Wizard of Earthsea indicative of Le Guin's writing style?",
+   "url": "https://www.sffchronicles.com/threads/583221/",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2022-08-01",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "Erin Ramsay, Earthsea: A Sharpening of Scale (The Lighthouse, Substack)",
+   "url": "https://erinramsay.substack.com/p/earthsea-a-sharpening-of-scale",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2024",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "Jaclyn Morken, Late to the Party: A Wizard of Earthsea (F(r)iction)",
+   "url": "https://frictionlit.org/late-to-the-party-a-wizard-of-earthsea-by-ursula-k-le-guin/",
+   "kind": "reception",
+   "substantive": false,
+   "date": "2021",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "LitCharts, A Wizard of Earthsea Chapter 1 Summary & Analysis",
+   "url": "https://www.litcharts.com/lit/a-wizard-of-earthsea/chapter-1",
+   "kind": "analysis",
+   "substantive": false,
+   "route": "curl browser UA"
+  },
+  {
+   "title": "Matt Bell, Exercise #21: How to Study Sentence Structure (Substack)",
+   "url": "https://mattbell.substack.com/p/exercise-21-how-to-study-sentence",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2021-09",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "Matt Bell, My Le Guin Year: Craft Lessons From a Master (Reactor / Tor.com)",
+   "url": "https://reactormag.com/my-le-guin-year-craft-lessons-from-a-master/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2021-08-24",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "Matt Bell, My Le Guin Year: Storytelling Lessons From a Master (Reactor) — republication of the Aug 2021 essay, same body text",
+   "url": "https://reactormag.com/my-le-guin-year-storytelling-lessons-from-a-master/",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2022-03-10",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "John Plotz on Earthsea, Anarchism, and Ursula K. Le Guin (Public Books, with Elizabeth Ferry)",
+   "url": "https://www.publicbooks.org/john-plotz-on-earthsea-anarchism-and-ursula-k-le-guin/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2024-02-21",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "Rob Tomlinson, The Dispossessed (A Good Read)",
+   "url": "https://www.rob-tomlinson.com/a-good-read/dispossessed",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2020s",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "Theodora Goss, Stonecoast: Wizard of Earthsea",
+   "url": "https://theodoragoss.com/2015/02/28/stonecoast-wizard-of-earthsea/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2015-02-28",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "The Book Nut, A Wizard of Earthsea (review + comment thread)",
+   "url": "https://thebooknut.com/2018/03/30/a-wizard-of-earthsea/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2018-03-30",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "Doug Merrill, The Dispossessed by Ursula K. Le Guin (The Frumious Consortium)",
+   "url": "https://www.thefrumiousconsortium.net/2018/03/19/the-dispossessed-by-ursula-k-le-guin/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2018-03-19",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "alannaofdoom, 'Bright the hawk's flight on the empty sky' (Cannonball Read)",
+   "url": "https://cannonballread.com/2014/02/bright-the-hawks-flight-on-the-empty-sky/",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2014-02-13",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "Wet Broken Things, Book review - Tehanu",
+   "url": "https://wetbrokenthings.wordpress.com/2025/05/25/book-review-tehanu/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2025-05-25",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "Moda od Radosti, Tehanu, a novel by Ursula K. Le Guin (book review)",
+   "url": "https://modaodaradosti.blogspot.com/2024/08/tehanu-novel-by-ursula-k-le-guin-book.html",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2024-08",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "YouTube video essay 'What is good fantasy prose?' (5lDA8VyeLx0) — BLOCKED, transcript unreachable by four routes",
+   "url": "https://www.youtube.com/watch?v=5lDA8VyeLx0",
+   "kind": "analysis",
+   "substantive": false,
+   "route": "blocked"
+  },
+  {
+   "title": "YouTube video essay 'From Elfland to Poughkeepsie ... Fantasy Essays' (bt5ypCZvivg) — BLOCKED, transcript unreachable",
+   "url": "https://www.youtube.com/watch?v=bt5ypCZvivg",
+   "kind": "analysis",
+   "substantive": false,
+   "route": "blocked"
+  },
+  {
+   "title": "Michael Chabon, Le Guin's Subversive Imagination (The Paris Review Daily)",
+   "url": "https://www.theparisreview.org/blog/2019/11/20/leguins-subversive-imagination/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2019-11-20",
+   "route": "live URL 403; Wayback raw capture (20260620070427id_)"
+  },
+  {
+   "title": "Jason P. Vest, The Re-Possessed: Ursula K. Le Guin storms the Library of America (The Common Reader)",
+   "url": "https://commonreader.wustl.edu/c/the-re-possessed/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2021-05-30",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "Alison Smith, Her Left Hand, The Darkness (Granta)",
+   "url": "https://granta.com/her-left-hand-the-darkness/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2019-01-03",
+   "route": "live URL 403; Wayback raw capture (20250903091534id_)"
+  },
+  {
+   "title": "Sherryl Vint interviewed by Cal Flyn, The Best Ursula Le Guin Books (Five Books)",
+   "url": "https://fivebooks.com/best-books/best-ursula-le-guin-books-sherryl-vint/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2021-05-07",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "Sean Guynes, Introducing the Ursula K. Le Guin Reread (Reactor) + comment thread",
+   "url": "https://reactormag.com/introducing-the-ursula-k-le-guin-reread/",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2020-06-22",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "Terry Morris, Earthsea and Tales from Earthsea, Steam Engine Time No. 11 (fanzine PDF)",
+   "url": "https://efanzines.com/SFC/SteamEngineTime/SET11.pdf",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2009-02",
+   "route": "PDF binary fetched, streams decompressed, text operators extracted"
+  },
+  {
+   "title": "Writing About Ursula and Her Work — the estate's index of critical writing (used for bibliography chasing)",
+   "url": "https://www.ursulakleguin.com/reviews",
+   "kind": "relay",
+   "substantive": false,
+   "date": "2026",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "New Criticism chapter on Omelas, Beginnings and Endings: A Critical Edition (thematic, not prose-level)",
+   "url": "https://idaho.pressbooks.pub/beginnings-and-endings-a-critical-edition/chapter/new-criticism-10/",
+   "kind": "reader",
+   "substantive": false,
+   "date": "2022-12",
+   "route": "curl browser UA"
   }
  ],
  "verdicts": {

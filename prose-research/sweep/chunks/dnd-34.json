@@ -2,157 +2,157 @@
  "name": "dnd",
  "chunk": 34,
  "indices": [
-  559,
-  560,
-  561,
-  562,
-  563,
-  564,
-  565,
-  566,
-  567,
-  568,
-  569,
-  570,
-  571,
-  572,
-  573
+  664,
+  665,
+  666,
+  667,
+  668,
+  669,
+  670,
+  671,
+  672,
+  673,
+  674,
+  675,
+  676,
+  677,
+  678
  ],
  "claims": [
   {
-   "index": 559,
-   "feature": "civic record register",
-   "claim": "City of Splendors classifies the Yawning Portal as a three-story Class C building.",
-   "source": "City of Splendors boxed set (TSR, 1994), reported by Justin Alexander",
-   "url": "https://thealexandrian.net/wordpress/47553/roleplaying-games/forgotten-realms-a-textual-history-of-the-yawning-portal",
-   "quote": "a 3-story Class C building",
-   "page": "section THE EARLY DAYS, list of City of Splendors details"
-  },
-  {
-   "index": 560,
-   "feature": "civic record register",
-   "claim": "City of Splendors dates the founding of the Yawning Portal to 1306 DR.",
-   "source": "City of Splendors boxed set (TSR, 1994), reported by Justin Alexander",
-   "url": "https://thealexandrian.net/wordpress/47553/roleplaying-games/forgotten-realms-a-textual-history-of-the-yawning-portal",
-   "quote": "Durnan established the Yawning Portal in 1306 DR",
-   "page": "section THE EARLY DAYS, list of City of Splendors details"
-  },
-  {
-   "index": 561,
-   "feature": "other: measured detail",
-   "claim": "Ruins of Undermountain gives the taproom well a depth of 140 feet.",
-   "source": "Ruins of Undermountain (TSR, 1991), reported by Justin Alexander",
-   "url": "https://thealexandrian.net/wordpress/47553/roleplaying-games/forgotten-realms-a-textual-history-of-the-yawning-portal",
-   "quote": "The well is 140 feet deep",
-   "page": "section THE EARLY DAYS, list of Ruins of Undermountain details"
-  },
-  {
-   "index": 562,
-   "feature": "other: in-world document form",
-   "claim": "Alexander's published chaos lorebook opens by naming the physical document before its contents.",
-   "source": "Justin Alexander, The Alexandrian, Chaos Lorebook: The Assassins of Chaos, 2026",
-   "url": "https://thealexandrian.net/wordpress/53746/roleplaying-games/chaos-lorebook-the-assassins-of-chaos",
-   "quote": "Three blood-stained scrolls have been bound together",
-   "page": "opening paragraph of the handout"
-  },
-  {
-   "index": 563,
-   "feature": "withheld information and inference",
-   "claim": "Alexander's lorebook handout hedges its source's boasts as claims one can only hope are exaggerated.",
-   "source": "Justin Alexander, The Alexandrian, Chaos Lorebook: The Assassins of Chaos, 2026",
-   "url": "https://thealexandrian.net/wordpress/53746/roleplaying-games/chaos-lorebook-the-assassins-of-chaos",
-   "quote": "which one can only hope are exaggerated",
-   "page": "section UNTO THE DEATH OF WORLDS"
-  },
-  {
-   "index": 564,
-   "feature": "point of view and distance",
-   "claim": "Alexander's lorebook handout marks its inferences with the phrase that it appears the creatures behave a certain way.",
-   "source": "Justin Alexander, The Alexandrian, Chaos Lorebook: The Assassins of Chaos, 2026",
-   "url": "https://thealexandrian.net/wordpress/53746/roleplaying-games/chaos-lorebook-the-assassins-of-chaos",
-   "quote": "It appears that the carach",
-   "page": "section UNTO THE DEATH OF WORLDS"
-  },
-  {
-   "index": 565,
-   "feature": "edition and house style",
-   "claim": "Frank Mentzer's redline review of the Quagmire! rough draft objected that the text was padded.",
-   "source": "Jon Peterson, 'Quagmire! The Making of a 1980's D&D Module', Medium, 2014",
-   "url": "https://medium.com/@increment/quagmire-the-making-of-a-1980s-d-d-module-c30e788ea5f2",
-   "quote": "obviously padded",
-   "page": "Development Hell Level 7: Rough Draft Consultation"
-  },
-  {
-   "index": 566,
-   "feature": "repetition and refrain",
-   "claim": "Mentzer's review of the same draft also faulted it as extremely repetitive.",
-   "source": "Jon Peterson, 'Quagmire! The Making of a 1980's D&D Module', Medium, 2014",
-   "url": "https://medium.com/@increment/quagmire-the-making-of-a-1980s-d-d-module-c30e788ea5f2",
-   "quote": "extremely repetitive",
-   "page": "Development Hell Level 7"
-  },
-  {
-   "index": 567,
-   "feature": "terminology consistency",
-   "claim": "Mentzer objected to the redundant construction 'Patriarch Cleric' by likening it to 'female girl'.",
-   "source": "Jon Peterson, 'Quagmire!', Medium, 2014, reporting Mentzer's marginalia",
-   "url": "https://medium.com/@increment/quagmire-the-making-of-a-1980s-d-d-module-c30e788ea5f2",
-   "quote": "female girl",
-   "page": "Development Hell Level 7"
-  },
-  {
-   "index": 568,
-   "feature": "terminology consistency",
-   "claim": "Mentzer's consultation role was to ensure BECMI modules used the game's system terms consistently.",
-   "source": "Jon Peterson, 'Quagmire!', Medium, 2014",
-   "url": "https://medium.com/@increment/quagmire-the-making-of-a-1980s-d-d-module-c30e788ea5f2",
-   "quote": "exercised the system consistently",
-   "page": "Development Hell Level 7"
-  },
-  {
-   "index": 569,
-   "feature": "edition and house style",
-   "claim": "Every TSR module of the period had a product standards sheet fixing its styles, type sizes and margins.",
-   "source": "Jon Peterson, 'Quagmire!', Medium, 2014",
-   "url": "https://medium.com/@increment/quagmire-the-making-of-a-1980s-d-d-module-c30e788ea5f2",
-   "quote": "listed all of the styles, typesizes, margins",
-   "page": "Development Hell Level 8: The Proof"
-  },
-  {
-   "index": 570,
-   "feature": "plainness and economy",
-   "claim": "Much of the flavor text that troubled Mentzer was cut from the published module.",
-   "source": "Jon Peterson, 'Quagmire!', Medium, 2014",
-   "url": "https://medium.com/@increment/quagmire-the-making-of-a-1980s-d-d-module-c30e788ea5f2",
-   "quote": "including the saving throw notation and the flavor text",
-   "page": "Development Hell Level 7"
-  },
-  {
-   "index": 571,
-   "feature": "other: text budgeting",
-   "claim": "The module's section breakdown worksheet projected each section's length in both pages and lines of the HP3000 editor.",
-   "source": "Jon Peterson, 'Quagmire!', Medium, 2014",
-   "url": "https://medium.com/@increment/quagmire-the-making-of-a-1980s-d-d-module-c30e788ea5f2",
-   "quote": "measured both by page count and by line count",
-   "page": "Development Hell Level 5: Design Crunch Time"
-  },
-  {
-   "index": 572,
-   "feature": "omission as information",
-   "claim": "TSR stripped city names from the player-facing map of Quagmire!, and withheld the pointer to the Spiral City itself.",
-   "source": "Jon Peterson, 'Quagmire!', Medium, 2014",
-   "url": "https://medium.com/@increment/quagmire-the-making-of-a-1980s-d-d-module-c30e788ea5f2",
-   "quote": "is withheld from the players",
-   "page": "Development Hell Level 6: Maps and Illustrations"
-  },
-  {
-   "index": 573,
+   "index": 664,
    "feature": "boxed text form",
-   "claim": "The front cover of a 1984 TSR module carried only a few sentences of flavor text beneath the cover illustration.",
-   "source": "Jon Peterson, 'Quagmire!', Medium, 2014",
-   "url": "https://medium.com/@increment/quagmire-the-making-of-a-1980s-d-d-module-c30e788ea5f2",
-   "quote": "a few sentences of flavor text",
-   "page": "Development Hell Level 8: The Proof"
+   "claim": "David Hartlage dates the introduction of boxed text descriptions read by the DM on entry to Hidden Shrine of Tamoachan in 1979.",
+   "source": "David Hartlage, 'Picturing the dungeon - boxed text', DMDavid, 2012",
+   "url": "https://dmdavid.com/tag/picturing-the-dungeon-boxed-text/",
+   "quote": "In 1979, Hidden Shrine of Tamoachan introduced boxed text descriptions",
+   "page": "Picturing the dungeon - boxed text"
+  },
+  {
+   "index": 665,
+   "feature": "boxed text form",
+   "claim": "David Hartlage attributes the original purpose of boxed text to giving every table the same play experience in tournament competition.",
+   "source": "David Hartlage, 'Picturing the dungeon - boxed text', DMDavid, 2012",
+   "url": "https://dmdavid.com/tag/picturing-the-dungeon-boxed-text/",
+   "quote": "a consistent play experience in a competitive environment",
+   "page": "Picturing the dungeon - boxed text"
+  },
+  {
+   "index": 666,
+   "feature": "omission as information",
+   "claim": "David Hartlage reports that in a tournament the significant detail was placed among less important ones in the boxed text and his team missed it.",
+   "source": "David Hartlage, 'Picturing the dungeon - boxed text', DMDavid, 2012",
+   "url": "https://dmdavid.com/tag/picturing-the-dungeon-boxed-text/",
+   "quote": "the text mentioned the runes alongside other, less important details",
+   "page": "Picturing the dungeon - boxed text"
+  },
+  {
+   "index": 667,
+   "feature": "other: read-aloud delivery",
+   "claim": "David Hartlage says a reader's voice takes a different tone and cadence from extemporaneous speech, and that monotony lets players' attention wander.",
+   "source": "David Hartlage, 'Picturing the dungeon - boxed text', DMDavid, 2012",
+   "url": "https://dmdavid.com/tag/picturing-the-dungeon-boxed-text/",
+   "quote": "their voice takes a different tone and cadence",
+   "page": "Picturing the dungeon - boxed text"
+  },
+  {
+   "index": 668,
+   "feature": "boxed text form",
+   "claim": "David Hartlage defends boxed text as still the best available summary of what players must learn on entering a room.",
+   "source": "David Hartlage, 'Picturing the dungeon - boxed text', DMDavid, 2012",
+   "url": "https://dmdavid.com/tag/picturing-the-dungeon-boxed-text/",
+   "quote": "No one has shown a better way to summarize",
+   "page": "Picturing the dungeon - boxed text"
+  },
+  {
+   "index": 669,
+   "feature": "other: read-aloud delivery",
+   "claim": "David Hartlage says that when he knows the material well he paraphrases the boxed text rather than reading it.",
+   "source": "David Hartlage, 'Picturing the dungeon - boxed text', DMDavid, 2012",
+   "url": "https://dmdavid.com/tag/picturing-the-dungeon-boxed-text/",
+   "quote": "I paraphrase boxed text",
+   "page": "Picturing the dungeon - boxed text"
+  },
+  {
+   "index": 670,
+   "feature": "boxed text form",
+   "claim": "David Noonan reports that from watching Gen Con 2005 tables a DM reading aloud holds attention for two sentences.",
+   "source": "David Noonan (with Jesse Decker), 'Undercover at Gen Con, Part 1', Wizards of the Coast Design & Development, 2005",
+   "url": "https://web.archive.org/web/20161031220137/http://archive.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "If you’re the DM, you get two sentences. Period.",
+   "page": "Undercover Insight #1: Boxed Text = MEGO"
+  },
+  {
+   "index": 671,
+   "feature": "boxed text form",
+   "claim": "The same Wizards article labels its own Gen Con observation qualitative rather than a controlled measurement.",
+   "source": "David Noonan (with Jesse Decker), 'Undercover at Gen Con, Part 1', Wizards of the Coast Design & Development, 2005",
+   "url": "https://web.archive.org/web/20161031220137/http://archive.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "this kind of “research” is pretty qualitative",
+   "page": "Here's the Plan: We're Going Undercover!"
+  },
+  {
+   "index": 672,
+   "feature": "other: read-aloud delivery",
+   "claim": "David Noonan's explanation for the attention loss is that boxed text substitutes oration for the conversation that a game normally is.",
+   "source": "David Noonan (with Jesse Decker), 'Undercover at Gen Con, Part 1', Wizards of the Coast Design & Development, 2005",
+   "url": "https://web.archive.org/web/20161031220137/http://archive.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "Boxed text replaces that conversation with oration.",
+   "page": "Undercover Insight #1: Boxed Text = MEGO"
+  },
+  {
+   "index": 673,
+   "feature": "dialogue register",
+   "claim": "David Noonan describes a D&D game as at heart a conversation between the DM and the players.",
+   "source": "David Noonan (with Jesse Decker), 'Undercover at Gen Con, Part 1', Wizards of the Coast Design & Development, 2005",
+   "url": "https://web.archive.org/web/20161031220137/http://archive.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "At its heart, a D&D game is a conversation.",
+   "page": "Undercover Insight #1: Boxed Text = MEGO"
+  },
+  {
+   "index": 674,
+   "feature": "boxed text form",
+   "claim": "David Noonan's prior hypothesis, which the watching exceeded, was that boxed text longer than a paragraph is not worth reading.",
+   "source": "David Noonan (with Jesse Decker), 'Undercover at Gen Con, Part 1', Wizards of the Coast Design & Development, 2005",
+   "url": "https://web.archive.org/web/20161031220137/http://archive.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "boxed text longer than a paragraph probably isn’t worth reading",
+   "page": "Undercover Insight #1: Boxed Text = MEGO"
+  },
+  {
+   "index": 675,
+   "feature": "boxed text form",
+   "claim": "Writing for Wizards of the Coast in 2005, David Noonan advises DMs to ditch the boxed text and describe the room in their own words.",
+   "source": "David Noonan (with Jesse Decker), 'Undercover at Gen Con, Part 1', Wizards of the Coast Design & Development, 2005",
+   "url": "https://web.archive.org/web/20161031220137/http://archive.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "ditch the boxed text and use your own words",
+   "page": "Beyond the door, you see a format change"
+  },
+  {
+   "index": 676,
+   "feature": "edition and house style",
+   "claim": "David Noonan observes that boxed text in Wizards adventures had become markedly shorter by 2005 than in earlier products.",
+   "source": "David Noonan (with Jesse Decker), 'Undercover at Gen Con, Part 1', Wizards of the Coast Design & Development, 2005",
+   "url": "https://web.archive.org/web/20161031220137/http://archive.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "Boxed text in adventures used to be a lot longer",
+   "page": "Undercover Insight #1, Tangent Alert"
+  },
+  {
+   "index": 677,
+   "feature": "diction (native vs latinate)",
+   "claim": "James Maliszewski reports that Gygax attributed his own voice to the old fashioned books he read as a boy rather than to Jack Vance.",
+   "source": "James Maliszewski relaying a private conversation with Gary Gygax, 'High Gygaxian', Grognardia, 2009",
+   "url": "http://grognardia.blogspot.com/2009/02/high-gygaxian.html",
+   "quote": "old fashioned",
+   "page": "High Gygaxian"
+  },
+  {
+   "index": 678,
+   "feature": "diction (native vs latinate)",
+   "claim": "In the same account Gygax credited a lifelong love of dictionaries and thesauruses for his vocabulary.",
+   "source": "James Maliszewski relaying a private conversation with Gary Gygax, 'High Gygaxian', Grognardia, 2009",
+   "url": "http://grognardia.blogspot.com/2009/02/high-gygaxian.html",
+   "quote": "his lifelong love of dictionaries and thesauruses",
+   "page": "High Gygaxian"
   }
  ]
 }

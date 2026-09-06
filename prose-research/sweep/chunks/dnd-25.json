@@ -2,157 +2,157 @@
  "name": "dnd",
  "chunk": 25,
  "indices": [
-  424,
-  425,
-  426,
-  427,
-  428,
-  429,
-  430,
-  431,
-  432,
-  433,
-  434,
-  435,
-  436,
-  437,
-  438
+  529,
+  530,
+  531,
+  532,
+  533,
+  534,
+  535,
+  536,
+  537,
+  538,
+  539,
+  540,
+  541,
+  542,
+  543
  ],
  "claims": [
   {
-   "index": 424,
+   "index": 529,
    "feature": "place and institution description",
-   "claim": "Hartlage says Curse of Strahd gives pages of room description to notable NPCs' homes and calls Chris Perkins's details creepy and moody while judging most of those rooms unreachable in play.",
-   "source": "David Hartlage, DMDavid",
-   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
-   "quote": "The homes of notable NPCs get pages of room descriptions.",
-   "page": "Matching description to a location's purpose"
+   "claim": "Prince of Nothing says B2 describes the Keep in terms of components that can be interacted with, leaving wider implications to the GM.",
+   "source": "Prince of Nothing, Age of Dusk blog, 2019",
+   "url": "https://princeofnothingblogs.wordpress.com/2019/01/26/review-b2-keep-on-the-borderlands-dd-basic-crucible/",
+   "quote": "described in terms of components that can be interacted with",
+   "page": "body, paragraph on the Keep's organization"
   },
   {
-   "index": 425,
-   "feature": "edition and house style",
-   "claim": "Hartlage reports that Curse of Strahd carries boxed text for every location while its successor Storm King's Thunder omits almost all read-aloud text.",
-   "source": "David Hartlage, DMDavid",
-   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
-   "quote": "omits almost all read-aloud text",
-   "page": "Boxed, read-aloud text"
-  },
-  {
-   "index": 426,
-   "feature": "dm-facing sentence",
-   "claim": "Justin Alexander's judgment on the state of the form is that published adventures' location keys are almost all bad.",
-   "source": "Justin Alexander, 'The Art of the Key', The Alexandrian",
-   "url": "https://thealexandrian.net/wordpress/35180/roleplaying-games/the-art-of-the-key",
-   "quote": "the location keys in published adventures are almost universally terrible",
-   "page": "opening"
-  },
-  {
-   "index": 427,
-   "feature": "other: format-induced padding",
-   "claim": "Alexander says a standardised section format pushes writers to fill every heading, so a Tactics section gets paragraphs even when the orcs have only swords.",
-   "source": "Justin Alexander, 'The Art of the Key', The Alexandrian",
-   "url": "https://thealexandrian.net/wordpress/35180/roleplaying-games/the-art-of-the-key",
-   "quote": "it tends to encourage writers to “fill the format”",
-   "page": "Adventure Formatting Guides"
-  },
-  {
-   "index": 428,
-   "feature": "other: information order",
-   "claim": "Alexander makes the order of a location description depend on the scene rather than a fixed template, contrasting a visible ogre with a hidden goblin.",
-   "source": "Justin Alexander, 'The Art of the Key', The Alexandrian",
-   "url": "https://thealexandrian.net/wordpress/35180/roleplaying-games/the-art-of-the-key",
-   "quote": "A room with an ogre standing in the middle of it",
-   "page": "Adventure Formatting Guides"
-  },
-  {
-   "index": 429,
-   "feature": "edition and house style",
-   "claim": "Alexander dates the arrival of boxed text to Lost Tamoachan and says the prewritten descriptions appeared between quotation marks before TSR boxed them in the 1980 reissue.",
-   "source": "Justin Alexander, 'The Art of the Key', The Alexandrian",
-   "url": "https://thealexandrian.net/wordpress/35180/roleplaying-games/the-art-of-the-key",
-   "quote": "the text was not yet boxed, instead appearing between quotation marks",
-   "page": "The Era of Boxed Text"
-  },
-  {
-   "index": 430,
-   "feature": "adjective and adverb discipline",
-   "claim": "Bryce Lynch diagnoses Lost Mine of Phandelver's generic feel as a failure of modifiers rather than of nouns and verbs.",
-   "source": "Bryce Lynch, review of Lost Mine of Phandelver, tenfootpole.org",
-   "url": "https://tenfootpole.org/ironspike/?p=2469",
-   "quote": "the adjectives and adverbs were not used very well",
-   "page": "closing section on descriptive language"
-  },
-  {
-   "index": 431,
-   "feature": "concrete sensory noun",
-   "claim": "Lynch shows the cure as a single added modifier before a role noun and lists six alternatives that would each conjure a different woman.",
-   "source": "Bryce Lynch, tenfootpole.org",
-   "url": "https://tenfootpole.org/ironspike/?p=2469",
-   "quote": "the prim farmers wife tells you",
-   "page": "closing section on descriptive language"
-  },
-  {
-   "index": 432,
+   "index": 530,
    "feature": "place and institution description",
-   "claim": "Lynch's complaint about the Phandalin section is that the town's language is thin outside its core locations.",
-   "source": "Bryce Lynch, tenfootpole.org",
-   "url": "https://tenfootpole.org/ironspike/?p=2469",
-   "quote": "quite light on descriptive and evocative language",
-   "page": "Part 2: Welcome to Adventurehookville"
+   "claim": "Prince of Nothing lists the Keep's church, merchant caravans, guilds and tavern as what makes it feel like a living place.",
+   "source": "Prince of Nothing, Age of Dusk blog, 2019",
+   "url": "https://princeofnothingblogs.wordpress.com/2019/01/26/review-b2-keep-on-the-borderlands-dd-basic-crucible/",
+   "quote": "complete with a church, merchant caravans, guilds, a tavern",
+   "page": "body, paragraph on the Keep's organization"
   },
   {
-   "index": 433,
+   "index": 531,
+   "feature": "naming and forms of address",
+   "claim": "Prince of Nothing argues B2's unnamed NPCs still have motivations and character traits.",
+   "source": "Prince of Nothing, Age of Dusk blog, 2019, replying in the post's comment-response section to Mike Mearls's review",
+   "url": "https://princeofnothingblogs.wordpress.com/2019/01/26/review-b2-keep-on-the-borderlands-dd-basic-crucible/",
+   "quote": "the NPCs have motivations and character traits",
+   "page": "comment-response section, summarising Mearls's points"
+  },
+  {
+   "index": 532,
    "feature": "place and institution description",
-   "claim": "Lynch asks for a web of stated relationships among a town's named residents so the place exists apart from the party.",
-   "source": "Bryce Lynch, tenfootpole.org",
-   "url": "https://tenfootpole.org/ironspike/?p=2469",
-   "quote": "a web of personal relationships between the various people living in town",
-   "page": "Part 2: Welcome to Adventurehookville"
+   "claim": "The Storytelling and Gaming review counts 359 pages of keyed-location information about the city in Ptolus.",
+   "source": "countzeroasl, Storytelling and Gaming, 2021",
+   "url": "https://angelscitadel.com/2021/05/21/review-ptolus-monte-cooks-city-by-the-spire/",
+   "quote": "359 pages of detailed information about keyed locations in the city",
+   "page": "section Content"
   },
   {
-   "index": 434,
-   "feature": "dm-facing sentence",
-   "claim": "Lynch calls the one-sentence-per-NPC summary of who is in town, where they are and what they want invaluable and asks for more adventures to carry one.",
-   "source": "Bryce Lynch, tenfootpole.org",
-   "url": "https://tenfootpole.org/ironspike/?p=2469",
-   "quote": "That’s done in just a sentence or so each.",
-   "page": "Part 2: Welcome to Adventurehookville"
+   "index": 533,
+   "feature": "place and institution description",
+   "claim": "The reviewer says a Ptolus section covers what the city looks like to an everyday resident.",
+   "source": "countzeroasl, Storytelling and Gaming, 2021",
+   "url": "https://angelscitadel.com/2021/05/21/review-ptolus-monte-cooks-city-by-the-spire/",
+   "quote": "what it looks like as an everyday resident",
+   "page": "section Content"
   },
   {
-   "index": 435,
-   "feature": "concrete sensory noun",
-   "claim": "Lynch says a monster entry should tell the DM what the characters sense, and offers a smell and a coat as the missing kind of detail.",
-   "source": "Bryce Lynch, tenfootpole.org",
-   "url": "https://tenfootpole.org/ironspike/?p=2469",
-   "quote": "what the PC’s EXPERIENCE when they meet them",
-   "page": "section on monsters"
+   "index": 534,
+   "feature": "place and institution description",
+   "claim": "Justin Alexander says an urbancrawl key does not hold all the information a GM might prepare about the city.",
+   "source": "Justin Alexander, The Alexandrian, urbancrawl series part 4",
+   "url": "https://thealexandrian.net/wordpress/36508/roleplaying-games/thinking-about-urbancrawls-part-4-experimental-city-hexes",
+   "quote": "represent all the information that you might prep about the city",
+   "page": "section THE KEY, opening paragraph"
   },
   {
-   "index": 436,
-   "feature": "boxed text form",
-   "claim": "Bryce Lynch calls much of Curse of Strahd's read-aloud laughable and quotes single-sentence examples from it, among them one that names nothing at all.",
-   "source": "Bryce Lynch, review of Curse of Strahd, tenfootpole.org, quoting Curse of Strahd",
+   "index": 535,
+   "feature": "place and institution description",
+   "claim": "Bryce Lynch says Curse of Strahd describes rooms in detail for the DM that has no impact on the game.",
+   "source": "Bryce Lynch, tenfootpole.org review of Curse of Strahd",
    "url": "https://tenfootpole.org/ironspike/?p=2936",
-   "quote": "You find something on the ground.",
-   "page": "section 'On to the bad'"
+   "quote": "Rooms are described in detail for the DM",
+   "page": "body, section on long/meaningless text"
   },
   {
-   "index": 437,
+   "index": 536,
    "feature": "plainness and economy",
-   "claim": "Lynch's charge against Curse of Strahd's prose is a fixed inflation ratio, three sentences doing one sentence's work.",
-   "source": "Bryce Lynch, tenfootpole.org",
+   "claim": "Bryce Lynch faults Curse of Strahd for using three sentences where one would do.",
+   "source": "Bryce Lynch, tenfootpole.org review of Curse of Strahd",
    "url": "https://tenfootpole.org/ironspike/?p=2936",
-   "quote": "Three sentences are used when one will do.",
-   "page": "section 'On to the bad'"
+   "quote": "Three sentences are used when one will do",
+   "page": "body, section on long/meaningless text"
   },
   {
-   "index": 438,
-   "feature": "place and institution description",
-   "claim": "Lynch credits Curse of Strahd with villages whose residents each have something going on, and says events attached to locations are what make the places feel alive.",
-   "source": "Bryce Lynch, tenfootpole.org",
+   "index": 537,
+   "feature": "plainness and economy",
+   "claim": "Bryce Lynch says Curse of Strahd's entries are so long that the important bits are lost.",
+   "source": "Bryce Lynch, tenfootpole.org review of Curse of Strahd",
    "url": "https://tenfootpole.org/ironspike/?p=2936",
-   "quote": "The villagers and places, in particular, seem more alive",
-   "page": "review body"
+   "quote": "The entries are so long that the important bits are lost",
+   "page": "body, section on long/meaningless text"
+  },
+  {
+   "index": 538,
+   "feature": "boxed text form",
+   "claim": "Bryce Lynch quotes a Curse of Strahd read-aloud line consisting of the sentence that something is found on the ground.",
+   "source": "Bryce Lynch, tenfootpole.org, quoting Curse of Strahd (Wizards of the Coast, 2016)",
+   "url": "https://tenfootpole.org/ironspike/?p=2936",
+   "quote": "You find something on the ground",
+   "page": "body, section on read-aloud"
+  },
+  {
+   "index": 539,
+   "feature": "place and institution description",
+   "claim": "CBR says the 2024 DMG's most valuable Greyhawk material is a gazetteer describing the city's neighborhoods and prominent locations.",
+   "source": "CBR feature on the 2024 Dungeon Master's Guide Greyhawk setting",
+   "url": "https://www.cbr.com/dnd-5e-dmg-greyhawk-world-setting/",
+   "quote": "gazetteer describing the neighborhoods and prominent locations",
+   "page": "section on the City of Greyhawk"
+  },
+  {
+   "index": 540,
+   "feature": "place and institution description",
+   "claim": "CBR says each Greyhawk location description carries flavorful NPCs and background hooks.",
+   "source": "CBR feature on the 2024 Dungeon Master's Guide Greyhawk setting",
+   "url": "https://www.cbr.com/dnd-5e-dmg-greyhawk-world-setting/",
+   "quote": "full of flavorful NPCs, background hooks",
+   "page": "section on the City of Greyhawk"
+  },
+  {
+   "index": 541,
+   "feature": "civic record register",
+   "claim": "CBR says the 2024 DMG details a Greyhawk calendar with invented month and weekday names plus festivals.",
+   "source": "CBR feature on the 2024 Dungeon Master's Guide Greyhawk setting",
+   "url": "https://www.cbr.com/dnd-5e-dmg-greyhawk-world-setting/",
+   "quote": "The calendar is detailed with fictional names for the months",
+   "page": "section on cultures and world"
+  },
+  {
+   "index": 542,
+   "feature": "civic record register",
+   "claim": "Beth Rimmels says the 2024 DMG's Greyhawk material runs from premise through core material to a gazetteer serving two purposes.",
+   "source": "Beth Rimmels, EN World in-depth review of the 2024 Dungeon Master's Guide",
+   "url": "https://www.enworld.org/threads/in-depth-review-of-the-2024-dungeon-masters-guide.707861/",
+   "quote": "to core material and a gazetteer, it serves two purposes",
+   "page": "body, section on the setting chapter"
+  },
+  {
+   "index": 543,
+   "feature": "edition and house style",
+   "claim": "Beth Rimmels says the 2014 Dungeon Master's Guide opened with a chapter about creating your own world.",
+   "source": "Beth Rimmels, EN World in-depth review of the 2024 Dungeon Master's Guide",
+   "url": "https://www.enworld.org/threads/in-depth-review-of-the-2024-dungeon-masters-guide.707861/",
+   "quote": "Chapter One was about creating your own world",
+   "page": "body, section 2014 vs. 2024"
   }
  ]
 }

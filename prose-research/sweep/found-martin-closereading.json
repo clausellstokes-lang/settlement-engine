@@ -1,6 +1,6 @@
 {
  "complete": true,
- "coverage": "Named roster: all five items fetched raw except the video transcripts. asoiaf.westeros.org topic 133760 FETCHED (browser user agent; the bare topic id redirects to the forum index, only the /topic/133760-grrms-prose/ slug resolves; both pages read). Westeros news post 13834 FETCHED via the Wayback raw id_ capture after a live 403, and the Sean T. Collins 2011 essay reached from the link inside it and FETCHED live. Leigh Butler's reread FETCHED for all three named chapters: the Prologue and Bran I (AGoT Part 1, via Wayback after a tor.com 403) and the Red Wedding (ASoS Part 30, chapters 51-52, live at reactormag), plus The Hedge Knight Part 1 for the register comparison. The five-part 'The Prose of George R R Martin' series LOCATED IN FULL (parts 3 and 4 recovered from part 5's own description) but its TRANSCRIPTS ARE BLOCKED: the caption tracks are ASR-only and every timedtext route returned zero bytes (curl with a browser user agent, fmt=json3 and fmt=srv1, an in-page fetch from the youtube.com origin, and the innertube get_transcript POST), while youtubetotranscript.com sits behind a bot-verification interstitial I did not attempt to pass; claims from that series are therefore drawn from each video's own written shortDescription read raw from the watch-page JSON, and the transcripts are OWED to a later round. Other registers covered: Dunk and Egg (Butler's Hedge Knight reread, Attewell's essay and its comments, Adam Whitehead's Mystery Knight review), Fevre Dream (Bedford at SFFWorld, on phonetic dialect and on what is left unsaid), Wild Cards (Martin's own words on the mosaic form). Substantive sources per route: 5 from the named roster, 3 by bibliography chasing (the Collins link inside news 13834, the affix study cross-linked from the 2014 Books & Boots post, and the Atlantic interview from that study's footnote), 3 primaries chased from the Wikipedia reference list for Fire & Blood (Independent, Publishers Weekly, Tor.com via Wayback), and 11 by lateral search. Not found or thin: no scholarly close reading of Martin's chapter openings surfaced; Matthew Voice's corpus study exists only as a conference abstract with no published findings; the Times, Sunday Times and GQ Fire & Blood reviews are paywalled and were read only as quotations inside a fan-site round-up, marked relay and low confidence. 27 substantive sources read raw; discovery stopped when the last two lateral searches returned only pages already read or non-substantive.",
+ "coverage": "Named roster: all five items fetched raw except the video transcripts. asoiaf.westeros.org topic 133760 FETCHED (browser user agent; the bare topic id redirects to the forum index, only the /topic/133760-grrms-prose/ slug resolves; both pages read). Westeros news post 13834 FETCHED via the Wayback raw id_ capture after a live 403, and the Sean T. Collins 2011 essay reached from the link inside it and FETCHED live. Leigh Butler's reread FETCHED for all three named chapters: the Prologue and Bran I (AGoT Part 1, via Wayback after a tor.com 403) and the Red Wedding (ASoS Part 30, chapters 51-52, live at reactormag), plus The Hedge Knight Part 1 for the register comparison. The five-part 'The Prose of George R R Martin' series LOCATED IN FULL (parts 3 and 4 recovered from part 5's own description) but its TRANSCRIPTS ARE BLOCKED: the caption tracks are ASR-only and every timedtext route returned zero bytes (curl with a browser user agent, fmt=json3 and fmt=srv1, an in-page fetch from the youtube.com origin, and the innertube get_transcript POST), while youtubetotranscript.com sits behind a bot-verification interstitial I did not attempt to pass; claims from that series are therefore drawn from each video's own written shortDescription read raw from the watch-page JSON, and the transcripts are OWED to a later round. Other registers covered: Dunk and Egg (Butler's Hedge Knight reread, Attewell's essay and its comments, Adam Whitehead's Mystery Knight review), Fevre Dream (Bedford at SFFWorld, on phonetic dialect and on what is left unsaid), Wild Cards (Martin's own words on the mosaic form). Substantive sources per route: 5 from the named roster, 3 by bibliography chasing (the Collins link inside news 13834, the affix study cross-linked from the 2014 Books & Boots post, and the Atlantic interview from that study's footnote), 3 primaries chased from the Wikipedia reference list for Fire & Blood (Independent, Publishers Weekly, Tor.com via Wayback), and 11 by lateral search. Not found or thin: no scholarly close reading of Martin's chapter openings surfaced; Matthew Voice's corpus study exists only as a conference abstract with no published findings; the Times, Sunday Times and GQ Fire & Blood reviews are paywalled and were read only as quotations inside a fan-site round-up, marked relay and low confidence. 26 substantive sources read raw; discovery stopped when the last two lateral searches returned only pages already read or non-substantive. Every one of the 88 quotations below was re-checked as a verbatim contiguous substring of the fetched text, and none exceeds twelve words.",
  "sourcesRead": [
   {
    "title": "GRRM's prose (topic 133760), A Forum of Ice and Fire",
@@ -16,7 +16,7 @@
    "kind": "reader",
    "substantive": true,
    "date": "2015-07-31",
-   "route": "live fetch with a browser user agent; the bare topic id redirects to the forum index, only the /topic/133760-grrms-prose/ slug resolves"
+   "route": "live fetch with a browser user agent"
   },
   {
    "title": "Westeros: News - Sean T. Collins on ASoIaF (Linda Antonsson)",
@@ -96,7 +96,7 @@
    "kind": "analysis",
    "substantive": true,
    "date": "2023",
-   "route": "raw watch-page HTML, shortDescription field read out of the embedded player JSON (caption tracks are ASR-only and every timedtext route returned zero bytes)"
+   "route": "raw watch-page HTML, shortDescription field"
   },
   {
    "title": "[3] The Prose of George R R Martin | Masterful Metaphors & Similes",
@@ -104,7 +104,7 @@
    "kind": "analysis",
    "substantive": true,
    "date": "2023-09-11",
-   "route": "raw watch-page HTML, shortDescription field read out of the embedded player JSON (caption tracks are ASR-only and every timedtext route returned zero bytes)"
+   "route": "raw watch-page HTML, shortDescription field"
   },
   {
    "title": "[4] The Prose of George R R Martin | Adjectives & The Rule of 3",
@@ -112,7 +112,7 @@
    "kind": "analysis",
    "substantive": true,
    "date": "2023-10-11",
-   "route": "raw watch-page HTML, shortDescription field read out of the embedded player JSON (caption tracks are ASR-only and every timedtext route returned zero bytes)"
+   "route": "raw watch-page HTML, shortDescription field"
   },
   {
    "title": "[5] The Prose of George R R Martin | How to Meld the Active & Passive Voices",
@@ -120,7 +120,7 @@
    "kind": "analysis",
    "substantive": true,
    "date": "2023",
-   "route": "raw watch-page HTML, shortDescription field read out of the embedded player JSON (caption tracks are ASR-only and every timedtext route returned zero bytes)"
+   "route": "raw watch-page HTML, shortDescription field"
   },
   {
    "title": "Dunk and Egg, Essay 1: What Worth a Hedge Knight? (Steven Attewell) and its comments",
@@ -254,7 +254,7 @@
    "kind": "reader",
    "polarity": "asserts",
    "date": "2015-07-30",
-   "routeHint": "live fetch with a browser user agent; the bare topic id redirects to the forum index, only the /topic/133760-grrms-prose/ slug resolves",
+   "routeHint": "live fetch with a browser user agent; only the /topic/133760-grrms-prose/ slug resolves",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -268,7 +268,7 @@
    "kind": "reader",
    "polarity": "asserts",
    "date": "2015-07-31",
-   "routeHint": "live fetch with a browser user agent; the bare topic id redirects to the forum index, only the /topic/133760-grrms-prose/ slug resolves",
+   "routeHint": "live fetch with a browser user agent",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -282,7 +282,7 @@
    "kind": "reader",
    "polarity": "asserts",
    "date": "2015-07-31",
-   "routeHint": "live fetch with a browser user agent; the bare topic id redirects to the forum index, only the /topic/133760-grrms-prose/ slug resolves",
+   "routeHint": "live fetch with a browser user agent",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -296,7 +296,7 @@
    "kind": "reader",
    "polarity": "asserts",
    "date": "2015-07-31",
-   "routeHint": "live fetch with a browser user agent; the bare topic id redirects to the forum index, only the /topic/133760-grrms-prose/ slug resolves",
+   "routeHint": "live fetch with a browser user agent",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -310,7 +310,7 @@
    "kind": "reader",
    "polarity": "asserts",
    "date": "2015-07-30",
-   "routeHint": "live fetch with a browser user agent; the bare topic id redirects to the forum index, only the /topic/133760-grrms-prose/ slug resolves",
+   "routeHint": "live fetch with a browser user agent",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -324,7 +324,7 @@
    "kind": "reader",
    "polarity": "rejects",
    "date": "2015-07-30",
-   "routeHint": "live fetch with a browser user agent; the bare topic id redirects to the forum index, only the /topic/133760-grrms-prose/ slug resolves",
+   "routeHint": "live fetch with a browser user agent",
    "registerHint": "herald-pools",
    "confidence": "high"
   },
@@ -338,7 +338,7 @@
    "kind": "reader",
    "polarity": "mentions",
    "date": "2015-07-30",
-   "routeHint": "live fetch with a browser user agent; the bare topic id redirects to the forum index, only the /topic/133760-grrms-prose/ slug resolves",
+   "routeHint": "live fetch with a browser user agent",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -352,7 +352,7 @@
    "kind": "reader",
    "polarity": "asserts",
    "date": "2015-07-30",
-   "routeHint": "live fetch with a browser user agent; the bare topic id redirects to the forum index, only the /topic/133760-grrms-prose/ slug resolves",
+   "routeHint": "live fetch with a browser user agent",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -362,13 +362,13 @@
    "source": "Walda, forum post in 'GRRM's prose', A Forum of Ice and Fire",
    "url": "https://asoiaf.westeros.org/index.php?/topic/133760-grrms-prose/page/2/",
    "quote": "GRRM's prose seems uninspired, clichéd, repetitive",
-   "page": "topic 133760, page 2, post of 31 July 2015 (the page spells it 'clichéd')",
+   "page": "topic 133760, page 2, post of 31 July 2015",
    "kind": "reader",
    "polarity": "rejects",
    "date": "2015-07-31",
-   "routeHint": "live fetch with a browser user agent; the bare topic id redirects to the forum index, only the /topic/133760-grrms-prose/ slug resolves",
+   "routeHint": "live fetch with a browser user agent",
    "registerHint": "none",
-   "confidence": "medium; the quotation as fetched carries the accent in 'clichéd'"
+   "confidence": "high"
   },
   {
    "feature": "translation and register",
@@ -380,7 +380,7 @@
    "kind": "reader",
    "polarity": "asserts",
    "date": "2015-07-31",
-   "routeHint": "live fetch with a browser user agent; the bare topic id redirects to the forum index, only the /topic/133760-grrms-prose/ slug resolves",
+   "routeHint": "live fetch with a browser user agent",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -394,7 +394,7 @@
    "kind": "reception",
    "polarity": "mentions",
    "date": "2011-01-18",
-   "routeHint": "live URL returned 403 behind Cloudflare; read from the Wayback raw capture web/20250424162321id_/",
+   "routeHint": "live URL 403 behind Cloudflare; read from the Wayback raw capture web/20250424162321id_/",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -408,7 +408,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2011-01-18",
-   "routeHint": "link harvested from the Wayback capture of Westeros news 13834, then fetched live (redirects to the -series-2 slug)",
+   "routeHint": "link harvested from the Wayback capture of Westeros news 13834, then live fetch",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -436,7 +436,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2011-01-18",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -450,7 +450,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2011-01-18",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -464,7 +464,7 @@
    "kind": "reader",
    "polarity": "asserts",
    "date": "2011-03-18",
-   "routeHint": "live tor.com returned 403; read from the Wayback raw capture web/20240114133050id_/",
+   "routeHint": "live tor.com 403; read from the Wayback raw capture web/20240114133050id_/",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -492,7 +492,7 @@
    "kind": "reader",
    "polarity": "mentions",
    "date": "2011-03-18",
-   "routeHint": "Wayback raw id_ capture after the live URL returned 403",
+   "routeHint": "Wayback raw id_ capture",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -534,7 +534,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2014-03-31",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -548,7 +548,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2014-03-31",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -562,7 +562,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2014-03-31",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -576,7 +576,7 @@
    "kind": "analysis",
    "polarity": "disputes",
    "date": "2014-03-31",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -590,7 +590,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2014-03-31",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -604,7 +604,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2014-03-31",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -618,7 +618,7 @@
    "kind": "analysis",
    "polarity": "rejects",
    "date": "2014-03-31",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -632,7 +632,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2014-03-31",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -660,7 +660,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2013-03-08",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -670,13 +670,13 @@
    "source": "Simon, 'Affixes, compound and combination words', Books & Boots",
    "url": "https://astrofella.wordpress.com/2013/03/08/george-rr-martins-prose-style-affixes-compound-and-combination-words/",
    "quote": "a maester, a learnèd man, and so it is in character",
-   "page": "section 3, 'Martin's use of combining forms' (the page prints 'learned' with a grave accent)",
+   "page": "section 3, 'Martin's use of combining forms'",
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2013-03-08",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "dossier-archivist",
-   "confidence": "medium; the page spells the word 'learnèd', so the quotation matches only with that accent"
+   "confidence": "high"
   },
   {
    "feature": "civic record register",
@@ -684,17 +684,17 @@
    "source": "Simon, 'Affixes, compound and combination words', Books & Boots",
    "url": "https://astrofella.wordpress.com/2013/03/08/george-rr-martins-prose-style-affixes-compound-and-combination-words/",
    "quote": "accentuate the legalistic or learnèd character of the speaker",
-   "page": "section 3, 'Martin's use of combining forms' (the page prints 'learnèd')",
+   "page": "section 3, 'Martin's use of combining forms'",
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2013-03-08",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "dossier-archivist",
-   "confidence": "medium; the page spells the word 'learnèd', so the quotation matches only with that accent"
+   "confidence": "high"
   },
   {
    "feature": "stylometry",
-   "claim": "The critic reports noticing only one really Latinate word, 'intermediate', in the 770 pages of A Feast for Crows.",
+   "claim": "The critic reports noticing only one really Latinate word in the 770 pages of A Feast for Crows.",
    "source": "Simon, 'Affixes, compound and combination words', Books & Boots",
    "url": "https://astrofella.wordpress.com/2013/03/08/george-rr-martins-prose-style-affixes-compound-and-combination-words/",
    "quote": "770 pages of Feast of Crows I noticed only one really Latinate",
@@ -702,9 +702,9 @@
    "kind": "measurement",
    "polarity": "asserts",
    "date": "2013-03-08",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "dossier-archivist",
-   "confidence": "medium; a single reader's hand count, and the same page names 'intermittent' as a standout usage earlier"
+   "confidence": "medium; a single reader's hand count, and the same page names 'intermittent' as a standout usage earlier while the conclusion names 'intermediate'"
   },
   {
    "feature": "archaism",
@@ -716,7 +716,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2013-03-08",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -730,7 +730,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2013-03-08",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -758,7 +758,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "undated; post-2011",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "chronicle-line",
    "confidence": "high"
   },
@@ -772,7 +772,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "undated; post-2011",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "chronicle-line",
    "confidence": "high"
   },
@@ -786,7 +786,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "undated; post-2011",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "chronicle-line",
    "confidence": "high"
   },
@@ -800,7 +800,7 @@
    "kind": "reader",
    "polarity": "asserts",
    "date": "undated; post-2011",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -814,7 +814,7 @@
    "kind": "measurement",
    "polarity": "rejects",
    "date": "undated; post-2011",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "none",
    "confidence": "medium; the 60% figure is the essayist's own estimate, given without method"
   },
@@ -828,7 +828,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "undated; post-2011",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "herald-pools",
    "confidence": "high"
   },
@@ -842,7 +842,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2023-07-24",
-   "routeHint": "raw watch-page HTML, shortDescription field read out of the embedded player JSON (caption tracks are ASR-only and every timedtext route returned zero bytes)",
+   "routeHint": "raw watch-page HTML, shortDescription read out of the embedded player JSON; transcripts blocked (ASR-only captions, every timedtext route returned zero bytes)",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -856,7 +856,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2023-07-24",
-   "routeHint": "raw watch-page HTML, shortDescription field read out of the embedded player JSON (caption tracks are ASR-only and every timedtext route returned zero bytes)",
+   "routeHint": "raw watch-page HTML, shortDescription field",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -870,7 +870,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2023",
-   "routeHint": "raw watch-page HTML, shortDescription field read out of the embedded player JSON (caption tracks are ASR-only and every timedtext route returned zero bytes)",
+   "routeHint": "raw watch-page HTML, shortDescription field",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -884,7 +884,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2023-09-11",
-   "routeHint": "raw watch-page HTML, shortDescription field read out of the embedded player JSON (caption tracks are ASR-only and every timedtext route returned zero bytes)",
+   "routeHint": "raw watch-page HTML, shortDescription field",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -898,7 +898,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2023-10-11",
-   "routeHint": "raw watch-page HTML, shortDescription field read out of the embedded player JSON (caption tracks are ASR-only and every timedtext route returned zero bytes)",
+   "routeHint": "raw watch-page HTML, shortDescription field",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -912,7 +912,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2023",
-   "routeHint": "raw watch-page HTML, shortDescription field read out of the embedded player JSON (caption tracks are ASR-only and every timedtext route returned zero bytes)",
+   "routeHint": "raw watch-page HTML, shortDescription field",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -926,7 +926,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2012-11-06",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -940,7 +940,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2012-11-06",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -954,7 +954,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2012-11-06",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -968,7 +968,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "undated post in a thread begun 2010",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -982,7 +982,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "undated post in a thread begun 2010",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "chronicle-line",
    "confidence": "high"
   },
@@ -996,9 +996,9 @@
    "kind": "reader",
    "polarity": "asserts",
    "date": "2020-02-03",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "none",
-   "confidence": "high; note the line is a reader comment, not Attewell's own essay text"
+   "confidence": "high; the line is a reader comment, not Attewell's own essay text"
   },
   {
    "feature": "point of view and distance",
@@ -1010,7 +1010,7 @@
    "kind": "reader",
    "polarity": "asserts",
    "date": "2020-02-03",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "none",
    "confidence": "high; a reader comment on the essay, not the essayist"
   },
@@ -1023,10 +1023,10 @@
    "page": "answer on the mosaic form",
    "kind": "own-words",
    "polarity": "asserts",
-   "date": "interview reprinted undated; the answers date it to 2007",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "date": "reprint undated; the answers place it in 2007",
+   "routeHint": "live fetch",
    "registerHint": "herald-pools",
-   "confidence": "medium; the reprint carries no date, and the internal references place it in 2007"
+   "confidence": "medium; the reprint carries no date"
   },
   {
    "feature": "civic record register",
@@ -1052,7 +1052,7 @@
    "kind": "reception",
    "polarity": "rejects",
    "date": "2018-11-20",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -1066,7 +1066,7 @@
    "kind": "reception",
    "polarity": "mentions",
    "date": "2018-11-20",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -1080,7 +1080,7 @@
    "kind": "reception",
    "polarity": "rejects",
    "date": "2018-11-19",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -1094,7 +1094,7 @@
    "kind": "reception",
    "polarity": "asserts",
    "date": "2018-11-19",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "chronicle-line",
    "confidence": "high"
   },
@@ -1108,7 +1108,7 @@
    "kind": "reception",
    "polarity": "rejects",
    "date": "2018-11-19",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -1122,7 +1122,7 @@
    "kind": "reception",
    "polarity": "asserts",
    "date": "2018-11-21",
-   "routeHint": "live tor.com URL is dead; read from the Wayback raw capture web/20181124220153id_/",
+   "routeHint": "live tor.com URL dead; read from the Wayback raw capture web/20181124220153id_/",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -1136,7 +1136,7 @@
    "kind": "reception",
    "polarity": "rejects",
    "date": "2018-11-21",
-   "routeHint": "Wayback raw id_ capture after the live URL returned 403",
+   "routeHint": "Wayback raw id_ capture",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -1150,7 +1150,7 @@
    "kind": "reception",
    "polarity": "asserts",
    "date": "2018-11-21",
-   "routeHint": "Wayback raw id_ capture after the live URL returned 403",
+   "routeHint": "Wayback raw id_ capture",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -1164,7 +1164,7 @@
    "kind": "reception",
    "polarity": "asserts",
    "date": "2018-11-21",
-   "routeHint": "Wayback raw id_ capture after the live URL returned 403",
+   "routeHint": "Wayback raw id_ capture",
    "registerHint": "chronicle-line",
    "confidence": "high"
   },
@@ -1178,7 +1178,7 @@
    "kind": "reception",
    "polarity": "asserts",
    "date": "2018-11-21",
-   "routeHint": "Wayback raw id_ capture after the live URL returned 403",
+   "routeHint": "Wayback raw id_ capture",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -1191,7 +1191,7 @@
    "page": "round-up of critics",
    "kind": "relay",
    "polarity": "asserts",
-   "date": "2018-11-23 (the round-up); the review is dated 18 November 2018",
+   "date": "2018-11-23 round-up; the review is dated 18 November 2018",
    "routeHint": "live fetch of the round-up; the Sunday Times original is paywalled and was not read",
    "registerHint": "dossier-archivist",
    "confidence": "low; read only as a quotation inside a fan-site round-up, not at the primary"
@@ -1206,7 +1206,7 @@
    "kind": "own-words",
    "polarity": "asserts",
    "date": "2018-11",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -1220,7 +1220,7 @@
    "kind": "own-words",
    "polarity": "asserts",
    "date": "2018-11",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -1234,7 +1234,7 @@
    "kind": "own-words",
    "polarity": "asserts",
    "date": "2018-11",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -1248,7 +1248,7 @@
    "kind": "own-words",
    "polarity": "asserts",
    "date": "2018-11",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -1262,7 +1262,7 @@
    "kind": "own-words",
    "polarity": "asserts",
    "date": "2018-11",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -1276,7 +1276,7 @@
    "kind": "own-words",
    "polarity": "asserts",
    "date": "2011-07-11",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "footnote chase from the Books & Boots affix study, live fetch",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -1290,7 +1290,7 @@
    "kind": "own-words",
    "polarity": "asserts",
    "date": "2011-07-11",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -1304,7 +1304,7 @@
    "kind": "own-words",
    "polarity": "asserts",
    "date": "2011-07-11",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "chronicle-line",
    "confidence": "high"
   },
@@ -1318,9 +1318,9 @@
    "kind": "reception",
    "polarity": "rejects",
    "date": "2011-07-11",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "none",
-   "confidence": "high; this is the interviewer's framing, not Martin's own words and not the counter-view held elsewhere in this sweep"
+   "confidence": "high; this is the interviewer's framing, not Martin's own words, and it contradicts the per-speaker-register claims held by other sources in this sweep"
   },
   {
    "feature": "civic record register",
@@ -1332,7 +1332,7 @@
    "kind": "reception",
    "polarity": "asserts",
    "date": "2014",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -1346,7 +1346,7 @@
    "kind": "measurement",
    "polarity": "asserts",
    "date": "2014",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -1360,7 +1360,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2023-09-10",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -1374,7 +1374,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2023-09-10",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "herald-pools",
    "confidence": "high"
   },
@@ -1388,7 +1388,7 @@
    "kind": "measurement",
    "polarity": "asserts",
    "date": "2023-09-10",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "none",
    "confidence": "medium; the figure is cited to a third-party source the page does not fully identify"
   },
@@ -1402,7 +1402,7 @@
    "kind": "measurement",
    "polarity": "asserts",
    "date": "2023-09-10",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "none",
    "confidence": "medium; the page attributes the score only to 'medium.com'"
   },
@@ -1416,7 +1416,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2023-09-10",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -1430,7 +1430,7 @@
    "kind": "measurement",
    "polarity": "mentions",
    "date": "2014-08-15",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "none",
    "confidence": "low; abstract only, no findings or figures are published on the page"
   },
@@ -1444,7 +1444,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2015-01-28",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -1458,7 +1458,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2015-01-28",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -1472,7 +1472,7 @@
    "kind": "analysis",
    "polarity": "rejects",
    "date": "2015-01-28",
-   "routeHint": "live fetch, curl with a desktop browser user agent",
+   "routeHint": "live fetch",
    "registerHint": "herald-pools",
    "confidence": "high"
   }

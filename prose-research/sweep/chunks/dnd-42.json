@@ -2,157 +2,157 @@
  "name": "dnd",
  "chunk": 42,
  "indices": [
-  679,
-  680,
-  681,
-  682,
-  683,
-  684,
-  685,
-  686,
-  687,
-  688,
-  689,
-  690,
-  691,
-  692,
-  693
+  784,
+  785,
+  786,
+  787,
+  788,
+  789,
+  790,
+  791,
+  792,
+  793,
+  794,
+  795,
+  796,
+  797,
+  798
  ],
  "claims": [
   {
-   "index": 679,
-   "feature": "other: authorial voice in rulebooks",
-   "claim": "James Maliszewski reports that Gygax demurred when told his voice was a dialect of Jack Vance's.",
-   "source": "James Maliszewski, 'High Gygaxian', Grognardia, 2009",
-   "url": "http://grognardia.blogspot.com/2009/02/high-gygaxian.html",
-   "quote": "I once told Gary my opinion on this and he demurred",
-   "page": "High Gygaxian"
+   "index": 784,
+   "feature": "omission as information",
+   "claim": "Cordell wrote that the tactical format leaves too little space for notes on exploration, lore or character story.",
+   "source": "Bruce Cordell, Design & Development column (2011), quoted by Mike Bridges, Greyhawkery",
+   "url": "https://greyhawkery.blogspot.com/2011/06/new-article-d-adventure-format.html",
+   "quote": "adventures tend to be fairly Spartan affairs, because too little space",
+   "page": "quoted block, final paragraph"
   },
   {
-   "index": 680,
-   "feature": "other: authorial voice in rulebooks",
-   "claim": "James Maliszewski contrasts Gygax's florid prose with modern game books, which he says read like technical manuals.",
-   "source": "James Maliszewski, 'High Gygaxian', Grognardia, 2009",
-   "url": "http://grognardia.blogspot.com/2009/02/high-gygaxian.html",
-   "quote": "Modern game books read like what they are: technical manuals.",
-   "page": "High Gygaxian"
+   "index": 785,
+   "feature": "edition and house style",
+   "claim": "Cordell reports reviewing 1st Edition adventures including Tomb of Horrors for models of adventure format.",
+   "source": "Bruce Cordell, Design & Development column (2011), quoted by Mike Bridges, Greyhawkery",
+   "url": "https://greyhawkery.blogspot.com/2011/06/new-article-d-adventure-format.html",
+   "quote": "1st Edition adventures I looked at included Tomb of Horrors",
+   "page": "second quoted block"
   },
   {
-   "index": 681,
+   "index": 786,
+   "feature": "other: delve format definition",
+   "claim": "Bill Slavicsek defines a Dungeon Delve as a compact series of encounters appropriate for a specific level of play.",
+   "source": "Bill Slavicsek, introduction to Dungeon Delve (2009), quoted by Justin Alexander, The Alexandrian",
+   "url": "https://thealexandrian.net/wordpress/4051/roleplaying-games/dungeon-delve-wtf",
+   "quote": "a compact series of encounters appropriate for a specific level of play",
+   "page": "quoted introduction"
+  },
+  {
+   "index": 787,
    "feature": "place and institution description",
-   "claim": "James Maliszewski holds up Gygax's description of the Vault of the Drow as more evocative than the place descriptions in contemporary adventures.",
-   "source": "James Maliszewski, 'High Gygaxian', Grognardia, 2009",
-   "url": "http://grognardia.blogspot.com/2009/02/high-gygaxian.html",
-   "quote": "you'll find few passages in contemporary adventures that are as evocative",
-   "page": "High Gygaxian"
+   "claim": "In 4th Edition adventures, locations with no encounter are compressed into single paragraphs with minimal description.",
+   "source": "Welcome to the Deathtrap (OSR blog), 'Designing Layout and Information in Adventures', 2021",
+   "url": "https://deathtrap-games.blogspot.com/2021/08/designing-layout-and-information-in.html",
+   "quote": "compressed into single paragraphs with minimal effort spent on description",
+   "page": "section 'The Evolution of Dungeons & Dragons' Information Design'"
   },
   {
-   "index": 682,
+   "index": 788,
    "feature": "boxed text form",
-   "claim": "Dyson Logos tells OSR adventure writers to get rid of boxed text.",
-   "source": "Dyson Logos, 'The Dreaded Boxed Text', Dyson's Dodecahedron, 2013",
-   "url": "https://dysonlogos.blog/2013/09/29/the-dreaded-boxed-text/",
-   "quote": "So, OSR adventure writers, get rid of the boxed text.",
-   "page": "The Dreaded Boxed Text"
+   "claim": "The blogger describes 5th Edition's Candlekeep Mysteries as a wall of text with a boxed description.",
+   "source": "Welcome to the Deathtrap (OSR blog), 2021",
+   "url": "https://deathtrap-games.blogspot.com/2021/08/designing-layout-and-information-in.html",
+   "quote": "it is a wall of text with a boxed description",
+   "page": "section 'The Evolution of Dungeons & Dragons' Information Design'"
   },
   {
-   "index": 683,
-   "feature": "dm-facing sentence",
-   "claim": "Dyson Logos proposes replacing read-aloud prose with a point-form list of the things seen in the room, so the DM can present them conversationally.",
-   "source": "Dyson Logos, 'The Dreaded Boxed Text', Dyson's Dodecahedron, 2013",
-   "url": "https://dysonlogos.blog/2013/09/29/the-dreaded-boxed-text/",
-   "quote": "replace it with a point-form list of things seen in the room",
-   "page": "The Dreaded Boxed Text"
+   "index": 789,
+   "feature": "other: typographic signposting",
+   "claim": "5th Edition still signposts traps and treasure with bold italics at the start of the appropriate paragraph.",
+   "source": "Welcome to the Deathtrap (OSR blog), 2021",
+   "url": "https://deathtrap-games.blogspot.com/2021/08/designing-layout-and-information-in.html",
+   "quote": "They still signpost traps and treasure with bold italics",
+   "page": "section 'The Evolution of Dungeons & Dragons' Information Design'"
   },
   {
-   "index": 684,
+   "index": 790,
+   "feature": "other: typographic signposting",
+   "claim": "3rd Edition signposted monsters, treasure, traps and tactics using indentation and icons in a specific order.",
+   "source": "Welcome to the Deathtrap (OSR blog), 2021",
+   "url": "https://deathtrap-games.blogspot.com/2021/08/designing-layout-and-information-in.html",
+   "quote": "clearly signposted monsters, treasure, traps, and tactics using indentation and icons",
+   "page": "section 'The Evolution of Dungeons & Dragons' Information Design'"
+  },
+  {
+   "index": 791,
    "feature": "boxed text form",
-   "claim": "Dyson Logos traces the arrival of read-aloud text in the 1e era to the tournament use of the early published adventures.",
-   "source": "Dyson Logos, 'The Dreaded Boxed Text', Dyson's Dodecahedron, 2013",
-   "url": "https://dysonlogos.blog/2013/09/29/the-dreaded-boxed-text/",
-   "quote": "I tend to blame this on the tournament usage",
-   "page": "The Dreaded Boxed Text"
+   "claim": "The Dark of Hot Springs Island replaces long box text with a handful of adjectives for the GM to improvise from.",
+   "source": "Welcome to the Deathtrap (OSR blog), 2021",
+   "url": "https://deathtrap-games.blogspot.com/2021/08/designing-layout-and-information-in.html",
+   "quote": "rather than give a long box text, Hot Springs Island provides",
+   "page": "section 'Point Form Description'"
   },
   {
-   "index": 685,
-   "feature": "other: key format",
-   "claim": "Bryce Lynch says the number one complaint about published adventures is that they are hard to run.",
-   "source": "Bryce Lynch, 'The Book Introduction', tenfootpole.org",
-   "url": "https://tenfootpole.org/ironspike/?page_id=9593",
-   "quote": "The number one complaint about published adventures",
-   "page": "The Book Introduction, opening"
-  },
-  {
-   "index": 686,
-   "feature": "dm-facing sentence",
-   "claim": "Bryce Lynch distinguishes writing for oneself, where the words are only a memory cue, from writing for a stranger.",
-   "source": "Bryce Lynch, 'The Book Introduction', tenfootpole.org",
-   "url": "https://tenfootpole.org/ironspike/?page_id=9593",
-   "quote": "The words on the page are only a memory cue",
-   "page": "The Book Introduction, third paragraph"
-  },
-  {
-   "index": 687,
+   "index": 792,
    "feature": "place and institution description",
-   "claim": "Bryce Lynch attributes dry and tedious encounters to the failed transfer of the writer's imagined scene into the reader's head.",
-   "source": "Bryce Lynch, 'The Book Introduction', tenfootpole.org",
-   "url": "https://tenfootpole.org/ironspike/?page_id=9593",
-   "quote": "leading to dry and tedious encounters",
-   "page": "The Book Introduction, fourth paragraph"
+   "claim": "Appelcline calls the Village of Hommlet Greyhawk's first described locale that was not just a dungeon or adventuring point.",
+   "source": "Shannon Appelcline, 'Designers & Dragons: The Column #24', RPGnet, 2013",
+   "url": "https://www.rpg.net/columns/designers-and-dragons/designers-and-dragons24.phtml",
+   "quote": "first described locale that wasn't just some dungeon or adventuring point",
+   "page": "section 'The Temple Adventures (1979, 1985)'"
   },
   {
-   "index": 688,
-   "feature": "other: audience",
-   "claim": "Bryce Lynch frames his book as advice on writing an adventure for publication rather than for one's own table.",
-   "source": "Bryce Lynch, 'The Book Introduction', tenfootpole.org",
-   "url": "https://tenfootpole.org/ironspike/?page_id=9593",
-   "quote": "This book is advice on how to write an adventure for publication.",
-   "page": "The Book Introduction, second paragraph"
+   "index": 793,
+   "feature": "edition and house style",
+   "claim": "Appelcline says the TSR UK Saltmarsh adventures differ markedly from the staid dungeon crawls US authors were then writing.",
+   "source": "Shannon Appelcline, 'Designers & Dragons: The Column #24', RPGnet, 2013",
+   "url": "https://www.rpg.net/columns/designers-and-dragons/designers-and-dragons24.phtml",
+   "quote": "how much they differ from the staid dungeon crawls then being",
+   "page": "section 'The (U)k Adventures (1981-1983)'"
   },
   {
-   "index": 689,
-   "feature": "plainness and economy",
-   "claim": "Courtney Campbell's key format admits no word that is not important.",
-   "source": "Courtney Campbell, 'On Set Design', Hack & Slash, 2012",
-   "url": "http://hackslashmaster.blogspot.com/2012/06/on-set-design.html",
-   "quote": "Any word that is not important, is not used.",
-   "page": "On Set Design, explanation"
+   "index": 794,
+   "feature": "opening sentence",
+   "claim": "Merwin reports being taught that a short story must hook the reader in the first half-page or go unfinished.",
+   "source": "Shawn Merwin, 'Let's Design an Adventure: Adventure Hooks and Opening Scenes', D&D Beyond, 2019",
+   "url": "https://www.dndbeyond.com/posts/624-lets-design-an-adventure-adventure-hooks-and",
+   "quote": "unless you hook the reader in the first half-page",
+   "page": "section 'You May Ask Yourself, How Did I Get Here?'"
   },
   {
-   "index": 690,
-   "feature": "dm-facing sentence",
-   "claim": "Courtney Campbell's key replaces prose with bolded nouns, and he says he describes a room using only the bolded words.",
-   "source": "Courtney Campbell, 'On Set Design', Hack & Slash, 2012",
-   "url": "http://hackslashmaster.blogspot.com/2012/06/on-set-design.html",
-   "quote": "When describing things, I only use the bolded words!",
-   "page": "On Set Design, explanation"
+   "index": 795,
+   "feature": "opening sentence",
+   "claim": "Merwin says fiction's razor-edge audience-grabbing may not be necessary in adventure writing.",
+   "source": "Shawn Merwin, 'Let's Design an Adventure: Adventure Hooks and Opening Scenes', D&D Beyond, 2019",
+   "url": "https://www.dndbeyond.com/posts/624-lets-design-an-adventure-adventure-hooks-and",
+   "quote": "might not be necessary in adventure writing",
+   "page": "section 'You May Ask Yourself, How Did I Get Here?'"
   },
   {
-   "index": 691,
-   "feature": "plainness and economy",
-   "claim": "Courtney Campbell reports that his key gives him everything needed to run the tick encounter in seven words.",
-   "source": "Courtney Campbell, 'On Set Design', Hack & Slash, 2012",
-   "url": "http://hackslashmaster.blogspot.com/2012/06/on-set-design.html",
-   "quote": "everything I need to run the encounter successfully in seven words",
-   "page": "On Set Design, explanation"
+   "index": 796,
+   "feature": "opening sentence",
+   "claim": "Merwin defines the opening scene as the answer to 'where am I' and the hook as the answer to 'why am I here'.",
+   "source": "Shawn Merwin, 'Let's Design an Adventure: Adventure Hooks and Opening Scenes', D&D Beyond, 2019",
+   "url": "https://www.dndbeyond.com/posts/624-lets-design-an-adventure-adventure-hooks-and",
+   "quote": "The “where” is the opening scene, and the “why” is the adventure hook",
+   "page": "section 'You May Ask Yourself, How Did I Get Here?'"
   },
   {
-   "index": 692,
-   "feature": "other: seen in a glance",
-   "claim": "In Courtney Campbell's format the items placed after the bar are the ones immediately visible on entering.",
-   "source": "Courtney Campbell, 'On Set Design', Hack & Slash, 2012",
-   "url": "http://hackslashmaster.blogspot.com/2012/06/on-set-design.html",
-   "quote": "After the bar are the immediately visible items!",
-   "page": "On Set Design, explanation"
+   "index": 797,
+   "feature": "edition and house style",
+   "claim": "Merwin judges the way The Village of Hommlet hands over its hook and opening not very exciting or particularly nutritious.",
+   "source": "Shawn Merwin, 'Let's Design an Adventure: Adventure Hooks and Opening Scenes', D&D Beyond, 2019",
+   "url": "https://www.dndbeyond.com/posts/624-lets-design-an-adventure-adventure-hooks-and",
+   "quote": "It’s not very exciting or particularly nutritious",
+   "page": "section 'You May Ask Yourself, How Did I Get Here?'"
   },
   {
-   "index": 693,
-   "feature": "plainness and economy",
-   "claim": "Gabor Lux credits the classic modules with terse simplicity and language that is expressive but functional.",
-   "source": "Gabor Lux (Melan), 'OSR Module O1: Against the Ultra-Minimalism', Beyond Fomalhaut, 2017",
-   "url": "http://beyondfomalhaut.blogspot.com/2017/01/blog-osr-module-o1-against-ultra.html",
-   "quote": "terse simplicity, expressive but functional language, play-oriented presentation",
-   "page": "Against the Ultra-Minimalism, 'Know your enemy'"
+   "index": 798,
+   "feature": "boxed text form",
+   "claim": "Merwin says an encounter's opening information is probably delivered in the form of boxed text.",
+   "source": "Shawn Merwin, 'Let's Design an Adventure: Encounter Basics', D&D Beyond, 2019",
+   "url": "https://www.dndbeyond.com/posts/626-lets-design-an-adventure-encounter-basics",
+   "quote": "probably in the form of boxed text or some other vehicle",
+   "page": "section 'Learned Information'"
   }
  ]
 }

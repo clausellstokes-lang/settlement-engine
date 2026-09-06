@@ -2,157 +2,157 @@
  "name": "dnd",
  "chunk": 45,
  "indices": [
-  724,
-  725,
-  726,
-  727,
-  728,
-  729,
-  730,
-  731,
-  732,
-  733,
-  734,
-  735,
-  736,
-  737,
-  738
+  829,
+  830,
+  831,
+  832,
+  833,
+  834,
+  835,
+  836,
+  837,
+  838,
+  839,
+  840,
+  841,
+  842,
+  843
  ],
  "claims": [
   {
-   "index": 724,
-   "feature": "other: detail versus specificity",
-   "claim": "Bryce Lynch distinguishes detail, which he calls trivia, from specificity, and says detail is bad.",
-   "source": "Bryce Lynch, review of 'The Swan Hollow Intrigue', tenfootpole.org, 2026",
-   "url": "https://tenfootpole.org/ironspike/?p=10575",
-   "quote": "In this context detail is bad. It is trivia.",
-   "page": "Swan Hollow Intrigue review"
-  },
-  {
-   "index": 725,
-   "feature": "plainness and economy",
-   "claim": "Bryce Lynch says one well written specific sentence is worth more than a page of details.",
-   "source": "Bryce Lynch, review of 'The Swan Hollow Intrigue', tenfootpole.org, 2026",
-   "url": "https://tenfootpole.org/ironspike/?p=10575",
-   "quote": "one well written specific sentence is worth more",
-   "page": "Swan Hollow Intrigue review"
-  },
-  {
-   "index": 726,
-   "feature": "plainness and economy",
-   "claim": "Bryce Lynch defines specificity as terse, so that it does not interrupt the DM scanning the page.",
-   "source": "Bryce Lynch, review of 'The Swan Hollow Intrigue', tenfootpole.org, 2026",
-   "url": "https://tenfootpole.org/ironspike/?p=10575",
-   "quote": "It is terse, meaning it doesn’t get in the way",
-   "page": "Swan Hollow Intrigue review"
-  },
-  {
-   "index": 727,
-   "feature": "dm-facing sentence",
-   "claim": "Bryce Lynch says the specific sentence communicates to the DM exactly the vibe to aim for.",
-   "source": "Bryce Lynch, review of 'The Swan Hollow Intrigue', tenfootpole.org, 2026",
-   "url": "https://tenfootpole.org/ironspike/?p=10575",
-   "quote": "It communicates exactly the vibe the DM should be going for.",
-   "page": "Swan Hollow Intrigue review"
-  },
-  {
-   "index": 728,
-   "feature": "adjective and adverb discipline",
-   "claim": "Bryce Lynch says a single parenthetical adjective on a random-encounter entry tells the DM a great deal.",
-   "source": "Bryce Lynch, review of 'The Swan Hollow Intrigue', tenfootpole.org, 2026",
-   "url": "https://tenfootpole.org/ironspike/?p=10575",
-   "quote": "That (dubious) in parens tells us a lot.",
-   "page": "Swan Hollow Intrigue review"
-  },
-  {
-   "index": 729,
-   "feature": "adjective and adverb discipline",
-   "claim": "Bryce Lynch says quick adjectives and adverbs describing an NPC work where a paragraph of italic read-aloud for the same NPC fails.",
-   "source": "Bryce Lynch, review of 'The Swan Hollow Intrigue', tenfootpole.org, 2026",
-   "url": "https://tenfootpole.org/ironspike/?p=10575",
-   "quote": "quick adjectives/adverbs used to describe NPCs hit so well",
-   "page": "Swan Hollow Intrigue review"
-  },
-  {
-   "index": 730,
-   "feature": "plainness and economy",
-   "claim": "Bryce Lynch's verdict on exposition in an adventure text is that more is not better.",
-   "source": "Bryce Lynch, review of 'The Swan Hollow Intrigue', tenfootpole.org, 2026",
-   "url": "https://tenfootpole.org/ironspike/?p=10575",
-   "quote": "More is not better.",
-   "page": "Swan Hollow Intrigue review"
-  },
-  {
-   "index": 731,
+   "index": 829,
    "feature": "place and institution description",
-   "claim": "Justin Alexander rejects replacing borrowed material with generic versions, saying generic lacks identity.",
-   "source": "Justin Alexander, 'Ptolus: Running the Campaign - From Table to Page', The Alexandrian, 2018",
-   "url": "https://thealexandrian.net/wordpress/39322/roleplaying-games/ptolus-running-the-campaign-from-table-to-page",
-   "quote": "“Generic” isn’t good. Generic lacks identity.",
-   "page": "From Table to Page"
+   "claim": "Baur calls the Forgotten Realms the kitchen sink approach to world building.",
+   "source": "Wolfgang Baur, Kobold Press world building seminar transcript, part 1, 2025",
+   "url": "https://koboldpress.com/world-building-design-seminar-with-wolfgang-baur-zeb-cook-and-richard-green-part-1/",
+   "quote": "The Forgotten Realms is the kitchen sink approach to world building",
+   "page": "exchange on TSR settings"
   },
   {
-   "index": 732,
-   "feature": "other: audience",
-   "claim": "Justin Alexander warns a writer adapting a home campaign against trying to recapture the campaign instead of the scenario.",
-   "source": "Justin Alexander, 'Ptolus: Running the Campaign - From Table to Page', The Alexandrian, 2018",
-   "url": "https://thealexandrian.net/wordpress/39322/roleplaying-games/ptolus-running-the-campaign-from-table-to-page",
-   "quote": "trying to recapture the campaign instead of the scenario",
-   "page": "From Table to Page"
+   "index": 830,
+   "feature": "plainness and economy",
+   "claim": "Baur describes a newer one-book model as providing the minimum viable world building.",
+   "source": "Wolfgang Baur, Kobold Press world building seminar transcript, part 1, 2025",
+   "url": "https://koboldpress.com/world-building-design-seminar-with-wolfgang-baur-zeb-cook-and-richard-green-part-1/",
+   "quote": "to provide the minimum viable world building",
+   "page": "exchange on models of world building"
   },
   {
-   "index": 733,
-   "feature": "civic record register",
-   "claim": "Gus L says a game text made entirely of fruitful voids becomes at best a prose poem shaped like an instruction manual or gazetteer.",
-   "source": "Gus L, 'Maxims of the OSR', All Dead Generations, 2023",
-   "url": "https://alldeadgenerations.blogspot.com/2023/08/maxims-of-osr.html",
-   "quote": "a mediocre at best prose poem in the form",
-   "page": "Maxims of the OSR, 'Roleplaying not Roll Playing'"
-  },
-  {
-   "index": 734,
+   "index": 831,
    "feature": "place and institution description",
-   "claim": "Bryce Lynch praises a keying pattern in which each room opens with a short vibe overview before its bulleted details.",
-   "source": "Bryce Lynch, review of 'The Lions of Tell Arn Part 2', tenfootpole.org, 2026",
-   "url": "https://tenfootpole.org/ironspike/?p=10550",
-   "quote": "The rooms start with a kind of vibe overview.",
-   "page": "Lions of Tell Arn Part 2 review"
+   "claim": "Cook says the worst world building books he has read are literally just lists of places and people.",
+   "source": "David 'Zeb' Cook, Kobold Press world building seminar transcript, part 2, 2025",
+   "url": "https://koboldpress.com/world-building-design-seminar-with-wolfgang-baur-zeb-cook-and-richard-green-part-2/",
+   "quote": "are ones that are literally just lists of places and people",
+   "page": "exchange on conflict"
   },
   {
-   "index": 735,
-   "feature": "concrete sensory noun",
-   "claim": "The room text Bryce Lynch holds up as the model is a string of verbless sensory noun phrases, quoted in his review.",
-   "source": "module text by Nikoline quoted in Bryce Lynch's review, tenfootpole.org, 2026",
-   "url": "https://tenfootpole.org/ironspike/?p=10550",
-   "quote": "Sickly stench; grease and putrescence.",
-   "page": "Lions of Tell Arn Part 2 review, quoted room 28"
+   "index": 832,
+   "feature": "other: relations between places",
+   "claim": "Cook faults such books for never saying that one town hates the town next to it.",
+   "source": "David 'Zeb' Cook, Kobold Press world building seminar transcript, part 2, 2025",
+   "url": "https://koboldpress.com/world-building-design-seminar-with-wolfgang-baur-zeb-cook-and-richard-green-part-2/",
+   "quote": "this town hates this town over here",
+   "page": "exchange on conflict"
   },
   {
-   "index": 736,
-   "feature": "place and institution description",
-   "claim": "Bryce Lynch's test of a good room description is that it reads as if the writer had lived the room and got the mental image onto paper.",
-   "source": "Bryce Lynch, review of 'The Lions of Tell Arn Part 2', tenfootpole.org, 2026",
-   "url": "https://tenfootpole.org/ironspike/?p=10550",
-   "quote": "someone called up a mental image in their head",
-   "page": "Lions of Tell Arn Part 2 review"
+   "index": 833,
+   "feature": "register modulation",
+   "claim": "Cook says a published world is not created for yourself but for other players to take and use.",
+   "source": "David 'Zeb' Cook, Kobold Press world building seminar transcript, part 2, 2025",
+   "url": "https://koboldpress.com/world-building-design-seminar-with-wolfgang-baur-zeb-cook-and-richard-green-part-2/",
+   "quote": "You are not creating a world for yourself",
+   "page": "exchange on choosing a theme"
   },
   {
-   "index": 737,
-   "feature": "other: transfer of an imagined place",
-   "claim": "Bryce Lynch states that transferring the writer's imagined room into the reading DM's head is the goal of good writing.",
-   "source": "Bryce Lynch, review of 'The Lions of Tell Arn Part 2', tenfootpole.org, 2026",
-   "url": "https://tenfootpole.org/ironspike/?p=10550",
-   "quote": "That IS the goal of good writing.",
-   "page": "Lions of Tell Arn Part 2 review"
+   "index": 834,
+   "feature": "opening sentence",
+   "claim": "Richard Green says a new setting book must make clear at once what kind of adventures take place in that world.",
+   "source": "Richard Green, Kobold Press world building seminar transcript, part 2, 2025",
+   "url": "https://koboldpress.com/world-building-design-seminar-with-wolfgang-baur-zeb-cook-and-richard-green-part-2/",
+   "quote": "needs to be super clear what kind of adventures take place",
+   "page": "exchange on themes and villains"
   },
   {
-   "index": 738,
-   "feature": "edition and house style",
-   "claim": "Bryce Lynch praises bolding and italics used sparingly to draw the eye rather than overused.",
-   "source": "Bryce Lynch, review of 'The Lions of Tell Arn Part 2', tenfootpole.org, 2026",
-   "url": "https://tenfootpole.org/ironspike/?p=10550",
-   "quote": "Bolding and italics are used to effect to draw the eye",
-   "page": "Lions of Tell Arn Part 2 review"
+   "index": 835,
+   "feature": "withheld information and inference",
+   "claim": "Baur says the expected arc of play should be stated explicitly to players rather than kept coy.",
+   "source": "Wolfgang Baur, Kobold Press world building seminar transcript, part 2, 2025",
+   "url": "https://koboldpress.com/world-building-design-seminar-with-wolfgang-baur-zeb-cook-and-richard-green-part-2/",
+   "quote": "you should be explicit about it. Don’t be coy",
+   "page": "exchange on player expectations"
+  },
+  {
+   "index": 836,
+   "feature": "other: setting-design goal",
+   "claim": "Baur's opening essay describes good campaign setting design as stacking as many boxes of dynamite as possible.",
+   "source": "Wolfgang Baur, Kobold Guide to Worldbuilding p.12, quoted in a Gnome Stew review",
+   "url": "https://gnomestew.com/review-the-kobold-guide-to-plots-and-campaigns-and-the-kobold-guide-to-worldbuilding/",
+   "quote": "to stack as many boxes of dynamite as possible",
+   "page": "review paragraph citing page 12"
+  },
+  {
+   "index": 837,
+   "feature": "omission as information",
+   "claim": "The reviewer reads the Kobold Guide as telling setting designers they need not create all the details necessary for play.",
+   "source": "Gnome Stew review of the Kobold Guide to Worldbuilding",
+   "url": "https://gnomestew.com/review-the-kobold-guide-to-plots-and-campaigns-and-the-kobold-guide-to-worldbuilding/",
+   "quote": "we don’t have to create all of the details necessary",
+   "page": "review, opening paragraph on Worldbuilding"
+  },
+  {
+   "index": 838,
+   "feature": "omission as information",
+   "claim": "The reviewer says the book advises leaving the finer mechanics to the GMs and players who pick up the work.",
+   "source": "Gnome Stew review of the Kobold Guide to Worldbuilding",
+   "url": "https://gnomestew.com/review-the-kobold-guide-to-plots-and-campaigns-and-the-kobold-guide-to-worldbuilding/",
+   "quote": "it is better to leave the finer mechanics to the GMs and players",
+   "page": "review, opening paragraph on Worldbuilding"
+  },
+  {
+   "index": 839,
+   "feature": "other: TRPGs as literary text",
+   "claim": "Mizer reports that Carbonell conceptualises tabletop role-playing games first and foremost as literary gametexts.",
+   "source": "Nicholas J. Mizer, 'The Role of the Cosmographer', International Journal of Role-playing 18, 2025",
+   "url": "https://journals.uu.se/IJRP/article/download/1197/1052/4802",
+   "quote": "conceptualizing TRPGs as, first and foremost, “literary gametexts”",
+   "page": "section 1, contextualising cosmography"
+  },
+  {
+   "index": 840,
+   "feature": "other: text versus practice",
+   "claim": "Mizer argues the role-playing game emerges as a set of practices only later codified in a gametext.",
+   "source": "Nicholas J. Mizer, 'The Role of the Cosmographer', International Journal of Role-playing 18, 2025",
+   "url": "https://journals.uu.se/IJRP/article/download/1197/1052/4802",
+   "quote": "a set of practices which are only later codified",
+   "page": "section 1, contextualising cosmography"
+  },
+  {
+   "index": 841,
+   "feature": "point of view and distance",
+   "claim": "Mizer holds that a cosmographer is not so much a worldbuilder as a world-hopper.",
+   "source": "Nicholas J. Mizer, 'The Role of the Cosmographer', International Journal of Role-playing 18, 2025",
+   "url": "https://journals.uu.se/IJRP/article/download/1197/1052/4802",
+   "quote": "so much a worldbuilder as a world-hopper",
+   "page": "section 1, contextualising cosmography"
+  },
+  {
+   "index": 842,
+   "feature": "other: TRPGs as literary text",
+   "claim": "A reviewer says Dread Trident theorises the posthuman by centering the gametexts and gametools that create gameplay.",
+   "source": "Adrianna Burton, 'Book Review: Dread Trident', Analog Game Studies, 2022",
+   "url": "https://analoggamestudies.org/2022/01/book-review-dread-trident/",
+   "quote": "centering the gametexts and gametools that create gameplay",
+   "page": "paragraph on the book's approach"
+  },
+  {
+   "index": 843,
+   "feature": "other: close reading of game texts",
+   "claim": "The reviewer says Carbonell answers his question through a series of close readings of several TRPGs.",
+   "source": "Adrianna Burton, 'Book Review: Dread Trident', Analog Game Studies, 2022",
+   "url": "https://analoggamestudies.org/2022/01/book-review-dread-trident/",
+   "quote": "through a series of close readings of several TRPGs",
+   "page": "paragraph on the book's approach"
   }
  ]
 }

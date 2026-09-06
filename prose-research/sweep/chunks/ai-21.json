@@ -2,157 +2,157 @@
  "name": "ai",
  "chunk": 21,
  "indices": [
-  569,
-  570,
-  571,
-  572,
-  573,
-  574,
-  575,
-  576,
-  577,
-  578,
-  579,
-  580,
-  581,
-  582,
-  583
+  813,
+  814,
+  815,
+  816,
+  818,
+  819,
+  820,
+  821,
+  822,
+  823,
+  824,
+  825,
+  826,
+  827,
+  828
  ],
  "claims": [
   {
-   "index": 569,
-   "feature": "counter-evidence",
-   "claim": "Sudowrite markets Muse as the first AI model built for fiction rather than general assistance.",
-   "source": "Sudowrite, Muse product page (vendor marketing copy)",
-   "url": "https://www.sudowrite.com/muse",
-   "quote": "The first AI model made for fiction",
-   "page": "hero section"
-  },
-  {
-   "index": 570,
-   "feature": "homogenisation",
-   "claim": "Sudowrite's own marketing names cliché as the characteristic defect of general-purpose models.",
-   "source": "Sudowrite, Muse product page (vendor marketing copy)",
-   "url": "https://www.sudowrite.com/muse",
-   "quote": "Basic AI spews clichés",
-   "page": "comparison section heading"
-  },
-  {
-   "index": 571,
-   "feature": "tidy endings",
-   "claim": "Sudowrite's own marketing names a preference for happy endings as a defect of general-purpose models.",
-   "source": "Sudowrite, Muse product page (vendor marketing copy)",
-   "url": "https://www.sudowrite.com/muse",
-   "quote": "Basic AI loves happy endings",
-   "page": "comparison section heading"
-  },
-  {
-   "index": 572,
-   "feature": "uniform rhythm (low burstiness)",
-   "claim": "Sudowrite lists varied sentence length among Muse's advertised craft features.",
-   "source": "Sudowrite, Muse product page (vendor marketing copy)",
-   "url": "https://www.sudowrite.com/muse",
-   "quote": "Varied Sentence Length",
-   "page": "features list under 'Peerless prose'"
-  },
-  {
-   "index": 573,
-   "feature": "gloss and over-explaining",
-   "claim": "Sudowrite annotates its own ChatGPT foil sample as containing too much exposition and being too telly.",
-   "source": "Sudowrite, Muse product page (vendor annotation of a ChatGPT sample)",
-   "url": "https://www.sudowrite.com/muse",
-   "quote": "too much exposition! way too telly",
-   "page": "comparison section, annotation on the ChatGPT sample"
-  },
-  {
-   "index": 574,
-   "feature": "abstraction over the concrete",
-   "claim": "Sudowrite annotates a second ChatGPT foil sample with the complaint that its language is flowery and nothing is happening.",
-   "source": "Sudowrite, Muse product page (vendor annotation of a ChatGPT sample)",
-   "url": "https://www.sudowrite.com/muse",
-   "quote": "flowery language, nothing is happening",
-   "page": "comparison section, annotation on the second ChatGPT sample"
-  },
-  {
-   "index": 575,
+   "index": 813,
    "feature": "steerability",
-   "claim": "Sudowrite claims Muse avoids the craft pitfalls of other models.",
-   "source": "Sudowrite, Muse product page (vendor marketing copy)",
-   "url": "https://www.sudowrite.com/muse",
-   "quote": "avoids the pitfalls of other models",
-   "page": "'Peerless prose' feature block"
+   "claim": "The Dramatica Co. asserts that asking a model for ambiguity returns ambiguity as surface texture rather than as a structural consequence of the story.",
+   "source": "The Dramatica Co., Dramatica Blog, 2026",
+   "url": "https://dramatica.com/blog/the-ai-tells-are-in-the-story",
+   "quote": "ambiguity as a texture rather than as a structural consequence",
+   "page": "section 'Put the Narrative First'"
   },
   {
-   "index": 576,
-   "feature": "reader and expert judgment",
-   "claim": "Jane Friedman says the fraudulent books published under her name read to her like ChatGPT responses she had generated herself.",
-   "source": "Jane Friedman, 'I Would Rather See My Books Get Pirated Than This', 7 August 2023",
-   "url": "https://janefriedman.com/i-would-rather-see-my-books-pirated/",
-   "quote": "it was like reading ChatGPT responses I had generated myself",
-   "page": "parenthesis beginning 'Why do I think this?'"
+   "index": 814,
+   "feature": "steerability",
+   "claim": "The Dramatica Co. asserts that prompting away AI punctuation leaves the model's narrative habits intact.",
+   "source": "The Dramatica Co., Dramatica Blog, 2026",
+   "url": "https://dramatica.com/blog/the-ai-tells-are-in-the-story",
+   "quote": "prompt away the punctuation and still leave the machine’s narrative habits intact",
+   "page": "section 'Put the Narrative First'"
   },
   {
-   "index": 577,
-   "feature": "other: platform remedy",
-   "claim": "Friedman reports Amazon asked her for trademark registration numbers in response to her complaint about books falsely credited to her.",
-   "source": "Jane Friedman, 'I Would Rather See My Books Get Pirated Than This', update of 7 August 2023",
-   "url": "https://janefriedman.com/i-would-rather-see-my-books-pirated/",
-   "quote": "Please provide us with any trademark registration numbers that relate",
-   "page": "Update (afternoon of Aug. 7)"
+   "index": 815,
+   "feature": "no subtext",
+   "claim": "Mohammad Siam, replying on X to Ethan Mollick's StoryScope post, wrote that AI explains where humans imply.",
+   "source": "Mohammad Siam, X reply, 27 May 2026, relayed verbatim by the Dramatica Blog",
+   "url": "https://dramatica.com/blog/the-ai-tells-are-in-the-story",
+   "quote": "AI explains. Humans imply.",
+   "page": "pull-quote in 'AI Likes the Clean Line'"
   },
   {
-   "index": 578,
-   "feature": "counter-evidence",
-   "claim": "The Authors Guild's May 2023 survey found 23 percent of responding writers used generative AI as part of their writing process.",
-   "source": "Authors Guild AI survey report, 15 May 2023 (more than 1,700 respondents)",
-   "url": "https://authorsguild.org/news/ai-survey-90-percent-of-writers-believe-authors-should-be-compensated-for-ai-training-use/",
-   "quote": "23 percent of writers reported using generative AI as part",
-   "page": "Survey Results, 'Use of Generative AI Technologies'"
+   "index": 816,
+   "feature": "discourse-level tells",
+   "claim": "Ethan Mollick, posting on X about the StoryScope preprint, used the phrase 'AI narrative tells' for the layer beneath stylistic tells.",
+   "source": "Ethan Mollick, X, 27 May 2026, relayed as a pull-quote by the Dramatica Blog",
+   "url": "https://dramatica.com/blog/the-ai-tells-are-in-the-story",
+   "quote": "AI narrative tells",
+   "page": "pull-quote after the 'Paper Finds Structure, Not Just Style' lead-in"
   },
   {
-   "index": 579,
-   "feature": "counter-evidence",
-   "claim": "The Authors Guild survey found only about 7 percent of the writers who use generative AI use it to generate the text of their work.",
-   "source": "Authors Guild AI survey report, 15 May 2023",
-   "url": "https://authorsguild.org/news/ai-survey-90-percent-of-writers-believe-authors-should-be-compensated-for-ai-training-use/",
-   "quote": "Only around 7 percent of writers who employ generative AI",
-   "page": "Survey Results, 'Use of Generative AI Technologies'"
+   "index": 818,
+   "feature": "other: what a human editor sees first",
+   "claim": "Alex Mahadevan, director of Poynter's MediaWise, told the Reuters Institute that most editors shown AI-generated text shake their heads because it is empty.",
+   "source": "Alex Mahadevan (Poynter/MediaWise) quoted by Marina Adami, Reuters Institute, 2025",
+   "url": "https://reutersinstitute.politics.ox.ac.uk/news/how-ai-generated-prose-diverges-human-writing-and-why-it-matters",
+   "quote": "they will shake their heads, because it is empty",
+   "page": "section 4"
   },
   {
-   "index": 580,
-   "feature": "counter-evidence",
-   "claim": "Among Authors Guild respondents who use AI to generate text, 89 percent said less than 10 percent of their final work included AI output.",
-   "source": "Authors Guild AI survey report, 15 May 2023",
-   "url": "https://authorsguild.org/news/ai-survey-90-percent-of-writers-believe-authors-should-be-compensated-for-ai-training-use/",
-   "quote": "89 percent reported that less than 10 percent of their",
-   "page": "Survey Results, 'Use of Generative AI Technologies'"
+   "index": 819,
+   "feature": "gloss and over-explaining",
+   "claim": "Mahadevan told the Reuters Institute his dead giveaway for AI writing is a lot of words that do not say anything.",
+   "source": "Alex Mahadevan (Poynter/MediaWise) quoted by Marina Adami, Reuters Institute, 2025",
+   "url": "https://reutersinstitute.politics.ox.ac.uk/news/how-ai-generated-prose-diverges-human-writing-and-why-it-matters",
+   "quote": "it's a lot of words that don't say anything",
+   "page": "section 4"
   },
   {
-   "index": 581,
-   "feature": "reader and expert judgment",
-   "claim": "The Authors Guild survey found 91 percent of responding authors believe readers should know when AI created all or part of a work.",
-   "source": "Authors Guild AI survey report, 15 May 2023",
-   "url": "https://authorsguild.org/news/ai-survey-90-percent-of-writers-believe-authors-should-be-compensated-for-ai-training-use/",
-   "quote": "91 percent of authors surveyed believe readers should know when",
-   "page": "Survey Results, 'Concerns About Authenticity, Market Dilution'"
+   "index": 820,
+   "feature": "abstraction over the concrete",
+   "claim": "Mahadevan named ChatGPT's tendency to make broad, sweeping, emotional statements as the feature of AI writing he finds most jarring in journalism.",
+   "source": "Alex Mahadevan (Poynter/MediaWise) quoted by Marina Adami, Reuters Institute, 2025",
+   "url": "https://reutersinstitute.politics.ox.ac.uk/news/how-ai-generated-prose-diverges-human-writing-and-why-it-matters",
+   "quote": "make broad, sweeping, emotional statements",
+   "page": "section 4"
   },
   {
-   "index": 582,
+   "index": 821,
+   "feature": "homogenisation",
+   "claim": "Mahadevan predicted that heavy reliance on AI writing would make every news homepage blur into the same voice.",
+   "source": "Alex Mahadevan (Poynter/MediaWise) quoted by Marina Adami, Reuters Institute, 2025",
+   "url": "https://reutersinstitute.politics.ox.ac.uk/news/how-ai-generated-prose-diverges-human-writing-and-why-it-matters",
+   "quote": "every homepage blurs into the same voice",
+   "page": "section 4"
+  },
+  {
+   "index": 822,
+   "feature": "homogenisation",
+   "claim": "Mahadevan asserted the AI default style smooths out dialects, activist language and the ways specific communities actually talk.",
+   "source": "Alex Mahadevan (Poynter/MediaWise) quoted by Marina Adami, Reuters Institute, 2025",
+   "url": "https://reutersinstitute.politics.ox.ac.uk/news/how-ai-generated-prose-diverges-human-writing-and-why-it-matters",
+   "quote": "smooth out dialects, activist language and ways specific communities actually talk",
+   "page": "section 4"
+  },
+  {
+   "index": 823,
+   "feature": "other: surface polish with nothing underneath",
+   "claim": "Dr Tom S. Juzek of Florida State University told the Reuters Institute that ChatGPT broke the link readers used to make between quality of form and quality of content.",
+   "source": "Tom S. Juzek (Florida State University) quoted by Marina Adami, Reuters Institute, 2025",
+   "url": "https://reutersinstitute.politics.ox.ac.uk/news/how-ai-generated-prose-diverges-human-writing-and-why-it-matters",
+   "quote": "quality of form and quality of content, and ChatGPT broke that",
+   "page": "section 4"
+  },
+  {
+   "index": 824,
+   "feature": "steerability",
+   "claim": "Juzek and Ward re-ran reinforcement learning from human feedback with their own recruited testers and found that those testers preferred outputs containing AI buzzwords.",
+   "source": "Marina Adami reporting Juzek and Ward's experiment, Reuters Institute, 2025",
+   "url": "https://reutersinstitute.politics.ox.ac.uk/news/how-ai-generated-prose-diverges-human-writing-and-why-it-matters",
+   "quote": "their testers did prefer outputs that contained AI buzzwords",
+   "page": "section 2"
+  },
+  {
+   "index": 825,
+   "feature": "model era drift",
+   "claim": "In Juzek and Ward's RLHF replication the participants who otherwise favoured AI buzzwords tended not to prefer texts containing 'delve' and 'nuanced'.",
+   "source": "Marina Adami reporting Juzek and Ward's experiment, Reuters Institute, 2025",
+   "url": "https://reutersinstitute.politics.ox.ac.uk/news/how-ai-generated-prose-diverges-human-writing-and-why-it-matters",
+   "quote": "tended not to prefer texts containing ‘delve’ and ‘nuanced’",
+   "page": "section 4"
+  },
+  {
+   "index": 826,
    "feature": "detection and its failures",
-   "claim": "Neil Clarke reported that submissions to Clarkesworld resulting in bans reached 38% in February 2023.",
-   "source": "Neil Clarke, 'A Concerning Trend', 15 February 2023",
-   "url": "https://neil-clarke.com/a-concerning-trend/",
-   "quote": "the number of spam submissions resulting in bans has hit 38%",
-   "page": "body, paragraph beginning 'What I can say'"
+   "claim": "Mahadevan said he is concerned that readers fixate on quick heuristics to identify AI writing.",
+   "source": "Alex Mahadevan (Poynter/MediaWise) quoted by Marina Adami, Reuters Institute, 2025",
+   "url": "https://reutersinstitute.politics.ox.ac.uk/news/how-ai-generated-prose-diverges-human-writing-and-why-it-matters",
+   "quote": "I do get concerned that we fixate on these quick heuristics",
+   "page": "section 3"
   },
   {
-   "index": 583,
-   "feature": "detection and its failures",
-   "claim": "Clarke declines to publish the patterns by which he identifies AI submissions, saying he will not help senders evade detection.",
-   "source": "Neil Clarke, 'A Concerning Trend', 15 February 2023",
-   "url": "https://neil-clarke.com/a-concerning-trend/",
-   "quote": "There are some very obvious patterns and I have no",
-   "page": "body, paragraph beginning 'I'm not going to detail'"
+   "index": 827,
+   "feature": "counter-evidence",
+   "claim": "The Reuters Institute reports that so far there is not much evidence that homogenisation of language is happening.",
+   "source": "Marina Adami, Reuters Institute, 2025",
+   "url": "https://reutersinstitute.politics.ox.ac.uk/news/how-ai-generated-prose-diverges-human-writing-and-why-it-matters",
+   "quote": "there’s not much evidence that homogenisation is happening",
+   "page": "section 3"
+  },
+  {
+   "index": 828,
+   "feature": "lexical tells",
+   "claim": "Dr Karolina Rudnicka of the University of Gdansk told the Reuters Institute that ChatGPT and Grammarly avoid slang, contractions, colloquial language and the passive voice when reviewing drafts.",
+   "source": "Karolina Rudnicka (University of Gdansk) reported by Marina Adami, Reuters Institute, 2025",
+   "url": "https://reutersinstitute.politics.ox.ac.uk/news/how-ai-generated-prose-diverges-human-writing-and-why-it-matters",
+   "quote": "They also avoid slang, contractions",
+   "page": "section 1"
   }
  ]
 }

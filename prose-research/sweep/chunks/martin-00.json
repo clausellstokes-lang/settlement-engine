@@ -2,157 +2,157 @@
  "name": "martin",
  "chunk": 0,
  "indices": [
-  330,
-  331,
-  332,
-  333,
-  334,
-  335,
-  336,
-  337,
-  338,
-  339,
-  340,
-  341,
-  342,
-  343,
-  344
+  752,
+  755,
+  756,
+  757,
+  761,
+  762,
+  766,
+  767,
+  769,
+  771,
+  773,
+  774,
+  775,
+  776,
+  777
  ],
  "claims": [
   {
-   "index": 330,
-   "feature": "deliberately dry register",
-   "claim": "Because the book masquerades as a historical document, its prose is deliberately dry and staid.",
-   "source": "Patrick Nugent, The Irish Times, 16 Feb 2019",
-   "url": "https://www.irishtimes.com/culture/books/fire-and-blood-review-don-t-expect-a-novel-1.3780666",
-   "quote": "dry and staid",
-   "page": "Fire and Blood review: Don't expect a novel"
-  },
-  {
-   "index": 331,
-   "feature": "whole lives in a paragraph",
-   "claim": "Events are relayed so densely that characters can live full lives in the space of a single paragraph.",
-   "source": "Patrick Nugent, The Irish Times, 16 Feb 2019",
-   "url": "https://www.irishtimes.com/culture/books/fire-and-blood-review-don-t-expect-a-novel-1.3780666",
-   "quote": "live full lives in the space of a single paragraph",
-   "page": "Fire and Blood review: Don't expect a novel"
-  },
-  {
-   "index": 332,
-   "feature": "unreliable-narrator distance",
-   "claim": "Gyldayn is framed as an extremely unreliable narrator, and that distance keeps readers from investing in characters who rarely stay long enough to be known.",
-   "source": "Patrick Nugent, The Irish Times, 16 Feb 2019",
-   "url": "https://www.irishtimes.com/culture/books/fire-and-blood-review-don-t-expect-a-novel-1.3780666",
-   "quote": "an extremely unreliable narrator",
-   "page": "Fire and Blood review: Don't expect a novel"
-  },
-  {
-   "index": 333,
-   "feature": "Silmarillion test",
-   "claim": "Nugent's rule of thumb: readers who enjoyed The Silmarillion will like this; others should steer clear.",
-   "source": "Patrick Nugent, The Irish Times, 16 Feb 2019",
-   "url": "https://www.irishtimes.com/culture/books/fire-and-blood-review-don-t-expect-a-novel-1.3780666",
-   "quote": "If not, steer clear.",
-   "page": "Fire and Blood review: Don't expect a novel"
-  },
-  {
-   "index": 334,
-   "feature": "set-piece chapters inside the annal",
-   "claim": "At least three chapters are packed densely enough with intrigue and set-pieces that each could sustain a series of its own.",
-   "source": "Patrick Nugent, The Irish Times, 16 Feb 2019",
-   "url": "https://www.irishtimes.com/culture/books/fire-and-blood-review-don-t-expect-a-novel-1.3780666",
-   "quote": "so packed with Machiavellian machinations",
-   "page": "Fire and Blood review: Don't expect a novel"
-  },
-  {
-   "index": 335,
-   "feature": "critical split on the dry voice",
-   "claim": "Critics divided sharply on the register: the Independent, GQ and Rifkind found the dry historical voice flat or a synopsis, while Dan Jones found the chronological telling propulsive and Lough called it the best book in the series in 18 years.",
-   "source": "Winter Is Coming critics roundup, 23 Nov 2018",
-   "url": "https://winteriscoming.net/2018/11/23/george-rr-martin-critics-fire-and-blood/",
-   "quote": "",
-   "page": "What are the critics saying about Fire & Blood?"
-  },
-  {
-   "index": 336,
-   "feature": "roundup link set",
-   "claim": "The roundup links the Independent, Publishers Weekly, GQ, The Times, the Sunday Times, Tor.com and Mental Floss; it does not link NYT, Guardian or Vox reviews, and none were found.",
-   "source": "Winter Is Coming critics roundup, 23 Nov 2018",
-   "url": "https://winteriscoming.net/2018/11/23/george-rr-martin-critics-fire-and-blood/",
-   "quote": "",
-   "page": "What are the critics saying about Fire & Blood?"
-  },
-  {
-   "index": 337,
-   "feature": "dry and clinical historical writing",
-   "claim": "Martin assumes historical writing should be dry and clinical and lets events do the talking, so even an aerial dragon duel between brothers falls flat.",
-   "source": "Roisin O'Connor, The Independent, Nov 2018",
-   "url": "https://www.independent.co.uk/arts-entertainment/books/reviews/fire-and-blood-review-george-rr-martin-game-of-thrones-targaryens-winds-of-winter-a8640791.html",
-   "quote": "historical writing should be dry and clinical",
-   "page": "Fire and Blood review"
-  },
-  {
-   "index": 338,
-   "feature": "homework effect",
-   "claim": "The dense, name-heavy history reads like a mildly interesting but tedious assigned piece of homework.",
-   "source": "Roisin O'Connor, The Independent, Nov 2018",
-   "url": "https://www.independent.co.uk/arts-entertainment/books/reviews/fire-and-blood-review-george-rr-martin-game-of-thrones-targaryens-winds-of-winter-a8640791.html",
-   "quote": "a mildly interesting, but often tedious, piece of homework",
-   "page": "Fire and Blood review"
-  },
-  {
-   "index": 339,
-   "feature": "name-repetition burden",
-   "claim": "The difficulty is complexity rather than length: at least six characters are named Aegon and the reader struggles after the first hundred pages.",
-   "source": "Roisin O'Connor, The Independent, Nov 2018",
-   "url": "https://www.independent.co.uk/arts-entertainment/books/reviews/fire-and-blood-review-george-rr-martin-game-of-thrones-targaryens-winds-of-winter-a8640791.html",
-   "quote": "at least six are called Aegon",
-   "page": "Fire and Blood review"
-  },
-  {
-   "index": 340,
-   "feature": "Gibbon comparison (publisher copy)",
-   "claim": "The publisher pitches the in-universe account as having the scope and grandeur of Gibbon's Decline and Fall.",
-   "source": "Roisin O'Connor, The Independent, Nov 2018",
-   "url": "https://www.independent.co.uk/arts-entertainment/books/reviews/fire-and-blood-review-george-rr-martin-game-of-thrones-targaryens-winds-of-winter-a8640791.html",
-   "quote": "scope and grandeur of Gibbon's",
-   "page": "Fire and Blood review"
-  },
-  {
-   "index": 341,
-   "feature": "dry, dusty historical screed",
-   "claim": "Martin is wholly committed to a dry, dusty historical screed as the book's style.",
-   "source": "David Levesley, GQ (UK), Nov 2018",
-   "url": "https://www.gq-magazine.co.uk/article/fire-and-blood-review",
-   "quote": "a dry, dusty historical screed",
-   "page": "Fire and Blood review (GQ rolling review)"
-  },
-  {
-   "index": 342,
-   "feature": "maester's voice erases women",
-   "claim": "The maester's voice compresses women's diplomatic parleys into sentences while indistinguishable men get pages of bluster, which Levesley reads as Martin's deliberate statement on how history brushes over women.",
-   "source": "David Levesley, GQ (UK), Nov 2018",
-   "url": "https://www.gq-magazine.co.uk/article/fire-and-blood-review",
-   "quote": "these fascinating situations are over in sentences",
-   "page": "Fire and Blood review (GQ rolling review)"
-  },
-  {
-   "index": 343,
-   "feature": "Homeric roll-call without tension",
-   "claim": "Like Homer, Martin relishes a pageant of near-indistinguishable names to convey the scope of combat, but unlike Homer generates little narrative tension.",
-   "source": "David Levesley, GQ (UK), Nov 2018",
-   "url": "https://www.gq-magazine.co.uk/article/fire-and-blood-review",
-   "quote": "a pageant of almost indistinguishable names",
-   "page": "Fire and Blood review (GQ rolling review)"
-  },
-  {
-   "index": 344,
-   "feature": "brisk summary with brief dramatic bursts",
-   "claim": "Dramatic passages with snatches of dialogue and detailed battles last only a few pages before the text returns to brisk summary.",
-   "source": "Publishers Weekly review, 19 Nov 2018",
+   "index": 752,
+   "feature": "register modulation",
+   "claim": "The 2018 Publishers Weekly review says Martin's evocative storytelling style and gift for gripping narrative are mostly absent from Fire & Blood.",
+   "source": "Publishers Weekly (unsigned), Fire & Blood, 19 November 2018",
    "url": "https://www.publishersweekly.com/978-1-5247-9628-0",
-   "quote": "a return to brisk summary",
-   "page": "Fire & Blood (PW review)"
+   "quote": "are mostly absent from this dry history",
+   "page": "review body, first sentence"
+  },
+  {
+   "index": 755,
+   "feature": "other: flat emphasis across entries",
+   "claim": "The 2018 Publishers Weekly review says Martin gives equal weight to each member of the Targaryen family in Fire & Blood.",
+   "source": "Publishers Weekly (unsigned), Fire & Blood, 19 November 2018",
+   "url": "https://www.publishersweekly.com/978-1-5247-9628-0",
+   "quote": "Martin gives equal weight to each member of the Targaryen",
+   "page": "review body"
+  },
+  {
+   "index": 756,
+   "feature": "register modulation",
+   "claim": "The 2018 Publishers Weekly review credits Fire & Blood with entertaining snatches of dialogue and detailed depictions of battles in its brief dramatic sections.",
+   "source": "Publishers Weekly (unsigned), Fire & Blood, 19 November 2018",
+   "url": "https://www.publishersweekly.com/978-1-5247-9628-0",
+   "quote": "entertaining snatches of dialogue and detailed depictions of battles",
+   "page": "review body"
+  },
+  {
+   "index": 757,
+   "feature": "archaism",
+   "claim": "Kirkus's 2019 review of Fire & Blood says Martin's readers are used to eldritch epochal terms such as the Doom of Valyria and the Dance of the Dragons.",
+   "source": "Kirkus Reviews (unsigned), Fire & Blood, posted online 20 January 2019",
+   "url": "https://www.kirkusreviews.com/book-reviews/george-rr-martin/fire-blood/",
+   "quote": "eldritch epochal terms such as the Doom of Valyria",
+   "page": "review body, paragraph 2"
+  },
+  {
+   "index": 761,
+   "feature": "other: genre convention use vs subversion",
+   "claim": "Palmer-Patel quotes Young's thesis that Martin is using his genre's conventions particularly well rather than abandoning them.",
+   "source": "Joseph Rex Young, quoted at p.5 in C. Palmer-Patel's review, Fafnir 9.1 (2022)",
+   "url": "https://journal.finfar.org/articles/book-review-george-r-r-martin-and-the-fantasy-form/",
+   "quote": "is actually using them particularly well",
+   "page": "review body, quoting Young p.5"
+  },
+  {
+   "index": 762,
+   "feature": "register modulation",
+   "claim": "Higgins reports that Young finds Martin using a low mimetic register in both his characters and his descriptions.",
+   "source": "Andrew Higgins, review, Journal of Tolkien Research 18.1 (2023), reporting Joseph Rex Young",
+   "url": "https://scholar.valpo.edu/journaloftolkienresearch/vol18/iss1/7/",
+   "quote": "register in both his characters and descriptions",
+   "page": "PDF p.3, on Young's Chapter 1"
+  },
+  {
+   "index": 766,
+   "feature": "omission as information",
+   "claim": "Higgins reports that Honegger applies Hemingway's literary iceberg to Martin, the idea that stories are strengthened by leaving things or events out.",
+   "source": "Andrew Higgins, review, Journal of Tolkien Research 18.1 (2023), reporting Thomas Honegger",
+   "url": "https://scholar.valpo.edu/journaloftolkienresearch/vol18/iss1/7/",
+   "quote": "stories are strengthened by leaving things or events out",
+   "page": "PDF p.5"
+  },
+  {
+   "index": 767,
+   "feature": "other: worldbuilding order",
+   "claim": "Higgins reports Honegger's finding that Martin invented his world from the top down, with the backstories invented after the main narratives.",
+   "source": "Andrew Higgins, review, Journal of Tolkien Research 18.1 (2023), reporting Thomas Honegger",
+   "url": "https://scholar.valpo.edu/journaloftolkienresearch/vol18/iss1/7/",
+   "quote": "with the backstories being invented after the main narratives",
+   "page": "PDF p.5"
+  },
+  {
+   "index": 769,
+   "feature": "diction (native vs latinate)",
+   "claim": "Higgins reproduces Martin's own statement, cited by Honegger, that he does not have a gift for languages.",
+   "source": "George R. R. Martin, interview quoted by Honegger at p.159, reproduced in Higgins's review, Journal of Tolkien Research 18.1 (2023)",
+   "url": "https://scholar.valpo.edu/journaloftolkienresearch/vol18/iss1/7/",
+   "quote": "have a gift for languages",
+   "page": "PDF p.6, quoting Honegger p.159"
+  },
+  {
+   "index": 771,
+   "feature": "stylometry",
+   "claim": "Beveridge and Shan built their A Storm of Swords character network on 107 vertices representing characters.",
+   "source": "Andrew Beveridge and Jie Shan, 'Network of Thrones', Math Horizons 23.4 (2016)",
+   "url": "https://digitaleditions.walsworthprintgroup.com/article/Network+Of+Thrones/2426397/294160/article.html",
+   "quote": "The 107 vertices represent the characters",
+   "page": "section 'The Social Network'"
+  },
+  {
+   "index": 773,
+   "feature": "other: narrative community structure",
+   "claim": "Beveridge and Shan report that the King's Landing community accounts for 37 percent of their A Storm of Swords network.",
+   "source": "Andrew Beveridge and Jie Shan, 'Network of Thrones', Math Horizons 23.4 (2016)",
+   "url": "https://digitaleditions.walsworthprintgroup.com/article/Network+Of+Thrones/2426397/294160/article.html",
+   "quote": "community accounts for 37 percent of the network",
+   "page": "section 'Community Detection'"
+  },
+  {
+   "index": 774,
+   "feature": "other: narrative community structure",
+   "claim": "Beveridge and Shan report that the network layout and colours identify seven communities in A Storm of Swords.",
+   "source": "Andrew Beveridge and Jie Shan, 'Network of Thrones', Math Horizons 23.4 (2016)",
+   "url": "https://digitaleditions.walsworthprintgroup.com/article/Network+Of+Thrones/2426397/294160/article.html",
+   "quote": "clearly identify seven communities",
+   "page": "section 'Community Detection'"
+  },
+  {
+   "index": 775,
+   "feature": "other: character prominence measurement",
+   "claim": "Beveridge and Shan report that betweenness centrality is the only one of their measures in which Tyrion does not come out on top.",
+   "source": "Andrew Beveridge and Jie Shan, 'Network of Thrones', Math Horizons 23.4 (2016)",
+   "url": "https://digitaleditions.walsworthprintgroup.com/article/Network+Of+Thrones/2426397/294160/article.html",
+   "quote": "the only measure in which Tyrion does not come out on top",
+   "page": "section 'Centrality Measures'"
+  },
+  {
+   "index": 776,
+   "feature": "stylometry",
+   "claim": "Gessey-Jones and colleagues counted characters across the five books of whom 1,806 interact with another at least once.",
+   "source": "Gessey-Jones et al., PNAS 117.46 (2020)",
+   "url": "https://www.pnas.org/doi/10.1073/pnas.2006465117",
+   "quote": "of which 1,806 interact with another at least once",
+   "page": "Results, 'Evolution of the Social Network Structure'"
+  },
+  {
+   "index": 777,
+   "feature": "other: cast size per unit of text",
+   "claim": "Gessey-Jones and colleagues found the number of characters per chapter settles at around 35 after the opening book.",
+   "source": "Gessey-Jones et al., PNAS 117.46 (2020)",
+   "url": "https://www.pnas.org/doi/10.1073/pnas.2006465117",
+   "quote": "the number of characters per chapter settles at around 35",
+   "page": "Results, 'Evolution of the Social Network Structure'"
   }
  ]
 }

@@ -2,67 +2,137 @@
  "name": "dnd",
  "chunk": 47,
  "indices": [
-  754,
-  755,
-  756,
-  757,
-  758,
-  759
+  859,
+  860,
+  861,
+  862,
+  863,
+  864,
+  865,
+  866,
+  867,
+  868,
+  869,
+  870,
+  871
  ],
  "claims": [
   {
-   "index": 754,
-   "feature": "other: key format",
-   "claim": "Luke Gearing says his own bullet points were already more prose-based than most, which worsens rather than eases his objection to them.",
-   "source": "Luke Gearing, 'Bullet Points vs Prose', lukegearing.blot.im, 2023",
-   "url": "https://lukegearing.blot.im/bullet-points-vs-prose",
-   "quote": "I find this only exacerbates my issue with them.",
-   "page": "Bullet Points vs Prose, opening"
+   "index": 859,
+   "feature": "boxed text form",
+   "claim": "The authors advise the DM to ditch boxed text and use his own words for the initial description of the room.",
+   "source": "Jesse Decker and David Noonan, 'Design & Development: Undercover at Gen Con, Part 1', Wizards of the Coast, 2005",
+   "url": "http://www.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "use your own words for the initial description of the room",
+   "page": "closing section"
   },
   {
-   "index": 755,
-   "feature": "place and institution description",
-   "claim": "Luke Gearing's model prose keys a room in the present tense from a single dominant smell or object outward.",
-   "source": "Luke Gearing's own demonstration passage, 'Bullet Points vs Prose', 2023",
-   "url": "https://lukegearing.blot.im/bullet-points-vs-prose",
-   "quote": "The smell of cold grease fills the air",
-   "page": "Bullet Points vs Prose, room 4 Kitchen, prose version"
+   "index": 860,
+   "feature": "other: evidential caveat",
+   "claim": "The authors call their own Gen Con observation pretty qualitative, which they gloss as quite possibly bogus.",
+   "source": "Jesse Decker and David Noonan, 'Design & Development: Undercover at Gen Con, Part 1', Wizards of the Coast, 2005",
+   "url": "http://www.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "this kind of “research” is pretty qualitative",
+   "page": "section 'Here's the Plan: We're Going Undercover!'"
   },
   {
-   "index": 756,
-   "feature": "opening sentence",
-   "claim": "Luke Gearing opens a room in his prose version with a one-word sentence naming the room's character before any inventory.",
-   "source": "Luke Gearing's own demonstration passage, 'Bullet Points vs Prose', 2023",
-   "url": "https://lukegearing.blot.im/bullet-points-vs-prose",
-   "quote": "Austere. Uncurtained windows let the gloomy light",
-   "page": "Bullet Points vs Prose, room 10 Study, prose version"
+   "index": 861,
+   "feature": "boxed text form",
+   "claim": "Dyson Logos dates boxed and read-aloud text to the 1e period of published adventures.",
+   "source": "Dyson Logos, 'The Dreaded Boxed Text', Dyson's Dodecahedron, 2013",
+   "url": "https://dysonlogos.blog/2013/09/29/the-dreaded-boxed-text/",
+   "quote": "During the 1e days, we saw the advent of “boxed” or “read-aloud” text",
+   "page": "paragraph 2"
   },
   {
-   "index": 757,
-   "feature": "place and institution description",
-   "claim": "Luke Gearing's method for writing a place is to close his eyes and imagine standing in it.",
-   "source": "Luke Gearing, 'Techniques to Write Adventures', lukegearing.blot.im, 2021",
-   "url": "https://lukegearing.blot.im/techniques-to-write-adventures",
-   "quote": "I often just close my eyes and imagine being there",
-   "page": "Techniques to Write Adventures, 'Mental Dig/Exploration'"
+   "index": 862,
+   "feature": "boxed text form",
+   "claim": "Dyson attributes boxed text to tournament use, whose goal was to standardize the experience for each play group.",
+   "source": "Dyson Logos, 'The Dreaded Boxed Text', Dyson's Dodecahedron, 2013",
+   "url": "https://dysonlogos.blog/2013/09/29/the-dreaded-boxed-text/",
+   "quote": "the goal being to standardize the game experience for each play group",
+   "page": "paragraph 2"
   },
   {
-   "index": 758,
-   "feature": "concrete sensory noun",
-   "claim": "Luke Gearing says that mental walk-through is for finding the touchstones that communicate a place's tone.",
-   "source": "Luke Gearing, 'Techniques to Write Adventures', lukegearing.blot.im, 2021",
-   "url": "https://lukegearing.blot.im/techniques-to-write-adventures",
-   "quote": "finding those touchstones which communicate the tone",
-   "page": "Techniques to Write Adventures, 'Mental Dig/Exploration'"
+   "index": 863,
+   "feature": "point of view and distance",
+   "claim": "Dyson faults boxed text for predicting the future for the party instead of leaving that to the players.",
+   "source": "Dyson Logos, 'The Dreaded Boxed Text', Dyson's Dodecahedron, 2013",
+   "url": "https://dysonlogos.blog/2013/09/29/the-dreaded-boxed-text/",
+   "quote": "it predicts the future for the party",
+   "page": "commentary on the sample boxed text"
   },
   {
-   "index": 759,
-   "feature": "other: composition method",
-   "claim": "Luke Gearing writes headings first as a skeleton and treats the words themselves as the meat hung on it.",
-   "source": "Luke Gearing, 'Techniques to Write Adventures', lukegearing.blot.im, 2021",
-   "url": "https://lukegearing.blot.im/techniques-to-write-adventures",
-   "quote": "Use your outline (that is, your headings) to build a skeleton",
-   "page": "Techniques to Write Adventures, 'Outline To Fuck'"
+   "index": 864,
+   "feature": "boxed text form",
+   "claim": "Dyson urges writers to replace boxed text with a point-form list of things seen in the room.",
+   "source": "Dyson Logos, 'The Dreaded Boxed Text', Dyson's Dodecahedron, 2013",
+   "url": "https://dysonlogos.blog/2013/09/29/the-dreaded-boxed-text/",
+   "quote": "replace it with a point-form list of things seen in the room",
+   "page": "closing paragraph"
+  },
+  {
+   "index": 865,
+   "feature": "other: TRPGs as literary text",
+   "claim": "Jara argues a close examination of TRPG rulebooks is central to understanding how these games build narratives.",
+   "source": "David Jara, 'Framings and Paratexts in Tabletop Role-playing Games', International Journal of Role-Playing 4, 2013",
+   "url": "https://journals.uu.se/IJRP/article/download/228/252",
+   "quote": "examination of TRPG rulebooks is central to",
+   "page": "Conclusion"
+  },
+  {
+   "index": 866,
+   "feature": "omission as information",
+   "claim": "Jara argues setting and rules frame the game because they invariably imply reductions of the imagined world.",
+   "source": "David Jara, 'Framings and Paratexts in Tabletop Role-playing Games', International Journal of Role-Playing 4, 2013",
+   "url": "https://journals.uu.se/IJRP/article/download/228/252",
+   "quote": "reductions of the imagined world",
+   "page": "Conclusion"
+  },
+  {
+   "index": 867,
+   "feature": "civic record register",
+   "claim": "Jara treats the information a game setting gives as otherwise purely factual, to which intra-textual framing devices add diegetic meaning.",
+   "source": "David Jara, 'Framings and Paratexts in Tabletop Role-playing Games', International Journal of Role-Playing 4, 2013",
+   "url": "https://journals.uu.se/IJRP/article/download/228/252",
+   "quote": "factual information given by the game setting",
+   "page": "Conclusion"
+  },
+  {
+   "index": 868,
+   "feature": "other: title as paratext",
+   "claim": "Jara says role-playing rulebook titles say less about the books as artifacts than about the stories tellable with them.",
+   "source": "David Jara, 'Framings and Paratexts in Tabletop Role-playing Games', International Journal of Role-Playing 4, 2013",
+   "url": "https://journals.uu.se/IJRP/article/download/228/252",
+   "quote": "that their titles say less about the books as artifacts",
+   "page": "section 3.3 on initial paratexts"
+  },
+  {
+   "index": 869,
+   "feature": "other: scholarly field map",
+   "claim": "A reviewer says Fifty Years of Dungeons and Dragons is divided into sections classified as Histories, Influences, Analyses and Futures.",
+   "source": "Stuart Gorman, review of Fifty Years of Dungeons and Dragons, 2024",
+   "url": "https://www.stuartellisgorman.com/blog/fifty-years-of-dungeons-and-dragons-ed-premeet-sidhu-marcus-carter-and-jos-p-zagal",
+   "quote": "roughly classified as Histories, Influences, Analyses, and Futures",
+   "page": "paragraph 2"
+  },
+  {
+   "index": 870,
+   "feature": "other: scholarly field map",
+   "claim": "The reviewer says far more scholarly attention has gone to the origins and early years of D&D than to later editions.",
+   "source": "Stuart Gorman, review of Fifty Years of Dungeons and Dragons, 2024",
+   "url": "https://www.stuartellisgorman.com/blog/fifty-years-of-dungeons-and-dragons-ed-premeet-sidhu-marcus-carter-and-jos-p-zagal",
+   "quote": "Far more attention has been paid in scholarship to the origins",
+   "page": "paragraph on the Histories section"
+  },
+  {
+   "index": 871,
+   "feature": "other: chapter content",
+   "claim": "The reviewer describes Peterson's chapter in that volume as covering the development of experience and the concept of levelling up.",
+   "source": "Stuart Gorman, review of Fifty Years of Dungeons and Dragons, 2024",
+   "url": "https://www.stuartellisgorman.com/blog/fifty-years-of-dungeons-and-dragons-ed-premeet-sidhu-marcus-carter-and-jos-p-zagal",
+   "quote": "his chapter on the development of experience and the concept of leveling",
+   "page": "paragraph on the Histories section"
   }
  ]
 }

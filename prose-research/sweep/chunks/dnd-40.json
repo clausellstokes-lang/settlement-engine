@@ -2,157 +2,157 @@
  "name": "dnd",
  "chunk": 40,
  "indices": [
-  649,
-  650,
-  651,
-  652,
-  653,
-  654,
-  655,
-  656,
-  657,
-  658,
-  659,
-  660,
-  661,
-  662,
-  663
+  754,
+  755,
+  756,
+  757,
+  758,
+  759,
+  760,
+  761,
+  762,
+  763,
+  764,
+  765,
+  766,
+  767,
+  768
  ],
  "claims": [
   {
-   "index": 649,
-   "feature": "edition and house style",
-   "claim": "Justin Alexander says the standardized 3rd Edition adventure format encourages writers to fill the format with text that is not needed.",
-   "source": "Justin Alexander, 'The Art of the Key', The Alexandrian, 2014",
-   "url": "https://thealexandrian.net/wordpress/36903/roleplaying-games/the-art-of-the-key",
-   "quote": "it tends to encourage writers to “fill the format”",
-   "page": "Art of the Key, 'Adventure Formatting Guides'"
-  },
-  {
-   "index": 650,
+   "index": 754,
    "feature": "other: key format",
-   "claim": "Justin Alexander labels the dense undifferentiated paragraph key that TSR used for most of a decade the Gygax wall of text.",
-   "source": "Justin Alexander, 'The Art of the Key', The Alexandrian, 2014",
-   "url": "https://thealexandrian.net/wordpress/36903/roleplaying-games/the-art-of-the-key",
-   "quote": "the Gygax “wall of text” key",
-   "page": "Art of the Key, 'A Brief History of the Key'"
+   "claim": "Luke Gearing says his own bullet points were already more prose-based than most, which worsens rather than eases his objection to them.",
+   "source": "Luke Gearing, 'Bullet Points vs Prose', lukegearing.blot.im, 2023",
+   "url": "https://lukegearing.blot.im/bullet-points-vs-prose",
+   "quote": "I find this only exacerbates my issue with them.",
+   "page": "Bullet Points vs Prose, opening"
   },
   {
-   "index": 651,
-   "feature": "other: seen in a glance",
-   "claim": "Justin Alexander's prescribed key opens with the information a character perceives on entering, which he calls seen in a glance.",
-   "source": "Justin Alexander, 'The Art of the Key - Part 2', The Alexandrian, 2014",
-   "url": "https://thealexandrian.net/wordpress/35201/roleplaying-games/the-art-of-the-key-part-2-the-essential-key",
-   "quote": "seen in a glance",
-   "page": "Part 2, 'Boxed Text'"
+   "index": 755,
+   "feature": "place and institution description",
+   "claim": "Luke Gearing's model prose keys a room in the present tense from a single dominant smell or object outward.",
+   "source": "Luke Gearing's own demonstration passage, 'Bullet Points vs Prose', 2023",
+   "url": "https://lukegearing.blot.im/bullet-points-vs-prose",
+   "quote": "The smell of cold grease fills the air",
+   "page": "Bullet Points vs Prose, room 4 Kitchen, prose version"
   },
   {
-   "index": 652,
-   "feature": "other: information sequencing",
-   "claim": "Justin Alexander's alternative to a fixed key format is to order the entry by the sequence in which information will be wanted at the table.",
-   "source": "Justin Alexander, 'The Art of the Key - Part 2', The Alexandrian, 2014",
-   "url": "https://thealexandrian.net/wordpress/35201/roleplaying-games/the-art-of-the-key-part-2-the-essential-key",
-   "quote": "focus on the sequencing of information",
-   "page": "Part 2, opening"
+   "index": 756,
+   "feature": "opening sentence",
+   "claim": "Luke Gearing opens a room in his prose version with a one-word sentence naming the room's character before any inventory.",
+   "source": "Luke Gearing's own demonstration passage, 'Bullet Points vs Prose', 2023",
+   "url": "https://lukegearing.blot.im/bullet-points-vs-prose",
+   "quote": "Austere. Uncurtained windows let the gloomy light",
+   "page": "Bullet Points vs Prose, room 10 Study, prose version"
   },
   {
-   "index": 653,
-   "feature": "other: information sequencing",
-   "claim": "Justin Alexander tells key writers to move from the general to the specific as the players investigate.",
-   "source": "Justin Alexander, 'The Art of the Key - Part 2', The Alexandrian, 2014",
-   "url": "https://thealexandrian.net/wordpress/35201/roleplaying-games/the-art-of-the-key-part-2-the-essential-key",
-   "quote": "move from the general to the specific",
-   "page": "Part 2, 'Developing Significant Elements'"
+   "index": 757,
+   "feature": "place and institution description",
+   "claim": "Luke Gearing's method for writing a place is to close his eyes and imagine standing in it.",
+   "source": "Luke Gearing, 'Techniques to Write Adventures', lukegearing.blot.im, 2021",
+   "url": "https://lukegearing.blot.im/techniques-to-write-adventures",
+   "quote": "I often just close my eyes and imagine being there",
+   "page": "Techniques to Write Adventures, 'Mental Dig/Exploration'"
   },
   {
-   "index": 654,
+   "index": 758,
+   "feature": "concrete sensory noun",
+   "claim": "Luke Gearing says that mental walk-through is for finding the touchstones that communicate a place's tone.",
+   "source": "Luke Gearing, 'Techniques to Write Adventures', lukegearing.blot.im, 2021",
+   "url": "https://lukegearing.blot.im/techniques-to-write-adventures",
+   "quote": "finding those touchstones which communicate the tone",
+   "page": "Techniques to Write Adventures, 'Mental Dig/Exploration'"
+  },
+  {
+   "index": 759,
+   "feature": "other: composition method",
+   "claim": "Luke Gearing writes headings first as a skeleton and treats the words themselves as the meat hung on it.",
+   "source": "Luke Gearing, 'Techniques to Write Adventures', lukegearing.blot.im, 2021",
+   "url": "https://lukegearing.blot.im/techniques-to-write-adventures",
+   "quote": "Use your outline (that is, your headings) to build a skeleton",
+   "page": "Techniques to Write Adventures, 'Outline To Fuck'"
+  },
+  {
+   "index": 760,
+   "feature": "place and institution description",
+   "claim": "Zach Howard judges the introduction to the Holmes Basic Sample Dungeon highly evocative, reading almost like weird fiction.",
+   "source": "Zach Howard (Zenopus Archives), 'Part 46: \"Zenopus Built a Tower\"', 2015",
+   "url": "https://zenopusarchives.blogspot.com/2015/02/part-46-zenopus-built-tower.html",
+   "quote": "The introduction is highly evocative, reading almost like the weird fiction",
+   "page": "section 'SAMPLE DUNGEON'"
+  },
+  {
+   "index": 761,
+   "feature": "boxed text form",
+   "claim": "J. Eric Holmes instructs the Dungeon Master to read the sample dungeon's background material aloud to the assembled players.",
+   "source": "J. Eric Holmes, D&D Basic Set (1977), quoted by Zach Howard (Zenopus Archives) 2015",
+   "url": "https://zenopusarchives.blogspot.com/2015/02/part-46-zenopus-built-tower.html",
+   "quote": "should read the background material above to the assembled players",
+   "page": "section 'SAMPLE DUNGEON', quoted rulebook text"
+  },
+  {
+   "index": 762,
+   "feature": "boxed text form",
+   "claim": "Howard reads Holmes's Portown background as material meant to be read to the players, predating boxed text.",
+   "source": "Zach Howard (Zenopus Archives), 'Part 46', 2015",
+   "url": "https://zenopusarchives.blogspot.com/2015/02/part-46-zenopus-built-tower.html",
+   "quote": "this background material is meant to be read to the players",
+   "page": "commentary on the Portown paragraph"
+  },
+  {
+   "index": 763,
+   "feature": "place and institution description",
+   "claim": "Howard calls Holmes's one-paragraph account of Portown's trade, ships and inhabitants a thumbnail sketch of a campaign setting.",
+   "source": "Zach Howard (Zenopus Archives), 'Part 46', 2015",
+   "url": "https://zenopusarchives.blogspot.com/2015/02/part-46-zenopus-built-tower.html",
+   "quote": "Here we get a thumbnail sketch of a campaign setting",
+   "page": "commentary on the Portown paragraph"
+  },
+  {
+   "index": 764,
+   "feature": "other: adventure as coherent mini-setting",
+   "claim": "Howard contrasts OD&D's Sample Level, a collection of examples, with Holmes presenting his dungeon as part of a coherent adventure.",
+   "source": "Zach Howard (Zenopus Archives), 'Part 46', 2015",
+   "url": "https://zenopusarchives.blogspot.com/2015/02/part-46-zenopus-built-tower.html",
+   "quote": "presents his dungeon ideas as part of a coherent adventure",
+   "page": "section 'SAMPLE DUNGEON'"
+  },
+  {
+   "index": 765,
+   "feature": "terminology consistency",
+   "claim": "TSR's published Basic Set changed Holmes's manuscript phrase 'one or more assistants' to 'one or more men-at-arms'.",
+   "source": "Zach Howard (Zenopus Archives), 'Part 46', 2015",
+   "url": "https://zenopusarchives.blogspot.com/2015/02/part-46-zenopus-built-tower.html",
+   "quote": "changes \"one or more assistants\" to \"one or more men-at-arms\"",
+   "page": "closing commentary on the introduction"
+  },
+  {
+   "index": 766,
    "feature": "dm-facing sentence",
-   "claim": "Justin Alexander bolds the name of each significant element in a room so the GM can find the matching information quickly.",
-   "source": "Justin Alexander, 'The Art of the Key - Part 2', The Alexandrian, 2014",
-   "url": "https://thealexandrian.net/wordpress/35201/roleplaying-games/the-art-of-the-key-part-2-the-essential-key",
-   "quote": "the bold title makes it easy to find the information",
-   "page": "Part 2, 'Significant Elements'"
+   "claim": "TSR moved a sentence of Holmes's introduction to the end of its paragraph so it sat immediately before the room descriptions.",
+   "source": "Zach Howard (Zenopus Archives), 'Part 46', 2015",
+   "url": "https://zenopusarchives.blogspot.com/2015/02/part-46-zenopus-built-tower.html",
+   "quote": "it places it right before the room descriptions",
+   "page": "closing commentary on the introduction"
   },
   {
-   "index": 655,
-   "feature": "other: background and history in a key",
-   "claim": "Justin Alexander confines a location's history and former use to a GM Background tag that must be brief and infrequently needed.",
-   "source": "Justin Alexander, 'The Art of the Key - Part 2', The Alexandrian, 2014",
-   "url": "https://thealexandrian.net/wordpress/35201/roleplaying-games/the-art-of-the-key-part-2-the-essential-key",
-   "quote": "It should be brief, to the point, and infrequently needed.",
-   "page": "Part 2, 'GM Background Tag'"
+   "index": 767,
+   "feature": "edition and house style",
+   "claim": "Howard reports that TSR made only minor changes to Holmes's sample dungeon between manuscript and published rulebook.",
+   "source": "Zach Howard (Zenopus Archives), 'Part 46', 2015",
+   "url": "https://zenopusarchives.blogspot.com/2015/02/part-46-zenopus-built-tower.html",
+   "quote": "only minor changes by TSR in the published version",
+   "page": "section 'SAMPLE DUNGEON'"
   },
   {
-   "index": 656,
-   "feature": "other: reference layout",
-   "claim": "Justin Alexander credits the delve format with the single good idea that everything the GM needs is on the page.",
-   "source": "Justin Alexander, 'The Art of the Key - Part 3', The Alexandrian, 2016",
-   "url": "https://thealexandrian.net/wordpress/38497/roleplaying-games/the-art-of-the-key-part-3-hierarchy-of-reference",
-   "quote": "Everything you need is on the page.",
-   "page": "Part 3, opening"
-  },
-  {
-   "index": 657,
+   "index": 768,
    "feature": "boxed text form",
-   "claim": "Justin Alexander grants that boxed text virtually guarantees essential information is not accidentally omitted in play.",
-   "source": "Justin Alexander, 'GM Don't List #13: Boxed Text Pitfalls', The Alexandrian, 2022",
-   "url": "https://thealexandrian.net/wordpress/48312/roleplaying-games/gm-dont-list-13-boxed-text-pitfalls",
-   "quote": "will virtually guarantee that it’s not accidentally omitted",
-   "page": "GM Don't List #13, advantages"
-  },
-  {
-   "index": 658,
-   "feature": "boxed text form",
-   "claim": "Justin Alexander counts inflexibility as an inherent cost of prewritten boxed text, since one passage must serve every approach and condition.",
-   "source": "Justin Alexander, 'GM Don't List #13: Boxed Text Pitfalls', The Alexandrian, 2022",
-   "url": "https://thealexandrian.net/wordpress/48312/roleplaying-games/gm-dont-list-13-boxed-text-pitfalls",
-   "quote": "The result is inherently less flexible.",
-   "page": "GM Don't List #13, 'So why wouldn't you use boxed text?'"
-  },
-  {
-   "index": 659,
-   "feature": "other: reaction point",
-   "claim": "Justin Alexander names freeze-frame boxed text as the failure in which the world keeps moving while the characters stand frozen.",
-   "source": "Justin Alexander, 'GM Don't List #13: Boxed Text Pitfalls', The Alexandrian, 2022",
-   "url": "https://thealexandrian.net/wordpress/48312/roleplaying-games/gm-dont-list-13-boxed-text-pitfalls",
-   "quote": "PCs are frozen in place while a bunch of stuff happens",
-   "page": "GM Don't List #13, 'Sins of the Box'"
-  },
-  {
-   "index": 660,
-   "feature": "other: reaction point",
-   "claim": "Justin Alexander names the reaction point as the place in a description past which the world must not move without the players.",
-   "source": "Justin Alexander, 'GM Don't List #13: Boxed Text Pitfalls', The Alexandrian, 2022",
-   "url": "https://thealexandrian.net/wordpress/48312/roleplaying-games/gm-dont-list-13-boxed-text-pitfalls",
-   "quote": "What we’ve identified here is the reaction point",
-   "page": "GM Don't List #13, 'Sins of the Box'"
-  },
-  {
-   "index": 661,
-   "feature": "point of view and distance",
-   "claim": "Justin Alexander condemns remote-control boxed text, which declares the thoughts, feelings or actions of the player characters.",
-   "source": "Justin Alexander, 'GM Don't List #13: Boxed Text Pitfalls', The Alexandrian, 2022",
-   "url": "https://thealexandrian.net/wordpress/48312/roleplaying-games/gm-dont-list-13-boxed-text-pitfalls",
-   "quote": "declaring the thoughts or feelings or (worse yet!) actions of the PCs",
-   "page": "GM Don't List #13, 'Remote-Control Boxed Text'"
-  },
-  {
-   "index": 662,
-   "feature": "point of view and distance",
-   "claim": "Justin Alexander's rule for read-aloud text is to show the scene and never to tell the players how they are reacting to it.",
-   "source": "Justin Alexander, 'GM Don't List #13: Boxed Text Pitfalls', The Alexandrian, 2022",
-   "url": "https://thealexandrian.net/wordpress/48312/roleplaying-games/gm-dont-list-13-boxed-text-pitfalls",
-   "quote": "Don’t tell them how they’re reacting to it.",
-   "page": "GM Don't List #13, 'Remote-Control Boxed Text'"
-  },
-  {
-   "index": 663,
-   "feature": "boxed text form",
-   "claim": "A reader commenting on the Alexandrian recalls a lost Wizards devblog article whose thesis was that GM description should never run past three sentences.",
-   "source": "Reader comment by 'mellonbread', 2 August 2022, on The Alexandrian",
-   "url": "https://thealexandrian.net/wordpress/48312/roleplaying-games/gm-dont-list-13-boxed-text-pitfalls",
-   "quote": "should never be longer than three sentences",
-   "page": "GM Don't List #13, comments, 2022-08-02"
+   "claim": "Delta dates the first boxed text in a Gygax adventure to the 1982 published Lost Caverns of Tsojcanth.",
+   "source": "Delta (Daniel R. Collins), 'Early Evolution of Encounter Text', Delta's D&D Hotspot, 2021",
+   "url": "https://deltasdnd.blogspot.com/2021/10/early-evolution-of-encounter-text.html",
+   "quote": "And hey, there's boxed text for the first time!",
+   "page": "section '1982 - Lost Caverns of Tsojcanth Publication'"
   }
  ]
 }

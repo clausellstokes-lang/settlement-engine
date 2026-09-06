@@ -1,256 +1,4 @@
 {
- "complete": true,
- "coverage": "Named roster: FETCHED AT PRIMARY - Peterson (the Game Wizards excerpt at Polygon plus two further Playing at the World posts; the predecessor had Quagmire! and the blog), Zagal and Deterding (chapter 1 accepted manuscript at White Rose eprints), Appelcline (Designers & Dragons column #24 via a Wayback raw capture, live rpg.net 403s), Merwin's sibling columns 624 and 626, and the 4e delve-format thread through Cordell's own words quoted at length on Greyhawkery, Slavicsek's introduction quoted on The Alexandrian, Decker and Noonan's 2005 Wizards column recovered from the Wayback Machine, Delta's Gygax-only encounter-text series, and the Welcome to the Deathtrap layout history; Holmes/Moldvay/Mentzer Basic as register history through Zach Howard's manuscript-versus-published series (Howard is the co-author of the blocked chapter 5) and two later essays. BLOCKED - Fifty Years of D&D chapters 3, 5, 15 and 17 (DOIs, authors and page ranges resolved through Crossref, but direct.mit.edu returns 403 to curl and to WebFetch, no Wayback capture exists, and neither OpenAlex nor Semantic Scholar holds an abstract; reached only at one remove through Stuart Gorman's review); Fine's Shared Fantasy and Mackay's Fantasy Role-Playing Game (archive.org search-inside endpoints return HTTP 000 from this host); Baur's 'How to Design a City State, Tribe, or Nation' (anyflip serves the flipbook shell only, pdfcoffee is behind Cloudflare, Google Books was quota-blocked all day; reached at one remove through a Gnome Stew review that quotes it with a page cite and through Baur's own 2025 seminar transcript). NOT FOUND at any open route - Witwer and Riggs; Garcia 2017 is confirmed CLOSED with its abstract elided, and Shank 2015 remains abstract-only (both already logged by the predecessor). Substantive sources this run: 27 - 20 by direct fetch, 2 by Wayback raw capture, 3 by PDF binary plus pypdf extraction, 2 reached only through a quoting source. Every one of the 112 quotations was re-checked as an exact substring of the page as fetched. A finding in its own right: the register of published D&D place description is essentially unstudied - Carbonell says in his own words that role-playing gametexts are 'an overlooked area of investigation for literary scholars', Deterding and Zagal's field survey files textual work under one chapter, and the sharpest measurements of how a settlement is described come not from scholarship but from designers (Cook, Baur, Decker and Noonan) and from OSR bloggers counting words.",
- "sourcesRead": [
-  {
-   "title": "Part 46: \"Zenopus Built a Tower\" (Holmes manuscript vs published Basic Set)",
-   "url": "https://zenopusarchives.blogspot.com/2015/02/part-46-zenopus-built-tower.html",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2015-02-06",
-   "route": "direct fetch"
-  },
-  {
-   "title": "Dungeon Delve - WTF? (quoting Bill Slavicsek's introduction to Dungeon Delve, 2009)",
-   "url": "https://thealexandrian.net/wordpress/4051/roleplaying-games/dungeon-delve-wtf",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2009-04-16",
-   "route": "direct fetch"
-  },
-  {
-   "title": "Designing Layout and Information in Adventures",
-   "url": "https://deathtrap-games.blogspot.com/2021/08/designing-layout-and-information-in.html",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2021-08-29",
-   "route": "direct fetch"
-  },
-  {
-   "title": "New Article: D&D Adventure Format (quoting Bruce Cordell's Design & Development column)",
-   "url": "https://greyhawkery.blogspot.com/2011/06/new-article-d-adventure-format.html",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2011-06-30",
-   "route": "direct fetch"
-  },
-  {
-   "title": "Early Evolution of Encounter Text",
-   "url": "https://deltasdnd.blogspot.com/2021/10/early-evolution-of-encounter-text.html",
-   "kind": "measurement",
-   "substantive": true,
-   "date": "2021-10-25",
-   "route": "direct fetch"
-  },
-  {
-   "title": "Tip-Offs in Tamoachan",
-   "url": "https://deltasdnd.blogspot.com/2017/10/tip-offs-in-tamoachan.html",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2017-10-02",
-   "route": "direct fetch"
-  },
-  {
-   "title": "Designers & Dragons: The Column #24: My History of Dungeons & Dragons, Part One",
-   "url": "https://www.rpg.net/columns/designers-and-dragons/designers-and-dragons24.phtml",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2013-01-23",
-   "route": "Wayback raw capture 20240224035027 (live rpg.net returns 403)"
-  },
-  {
-   "title": "Let's Design an Adventure: Adventure Hooks and Opening Scenes",
-   "url": "https://www.dndbeyond.com/posts/624-lets-design-an-adventure-adventure-hooks-and",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2019-10-23",
-   "route": "direct fetch of https://www.dndbeyond.com/posts/624"
-  },
-  {
-   "title": "Let's Design an Adventure: Encounter Basics",
-   "url": "https://www.dndbeyond.com/posts/626-lets-design-an-adventure-encounter-basics",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2019-12-04",
-   "route": "direct fetch of https://www.dndbeyond.com/posts/626"
-  },
-  {
-   "title": "From the Unknown to the Borderlands (excerpt from Jon Peterson, Game Wizards, MIT Press 2021)",
-   "url": "https://www.polygon.com/2021/10/12/22722602/dungeons-dragons-game-wizards-book-excerpt-jon-peterson-arneson-lawsuit",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2021-10-12",
-   "route": "direct fetch"
-  },
-  {
-   "title": "Dave Arneson's Origins 1977 Tournament",
-   "url": "https://playingattheworld.blogspot.com/2020/04/dave-arnesons-origins-1977-tournament.html",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2020-04",
-   "route": "direct fetch"
-  },
-  {
-   "title": "Dungeons & Dragons Gazetteer (long-form writeup of GAZ1 The Grand Duchy of Karameikos)",
-   "url": "https://writeups.letsyouandhimfight.com/rulebook-heavily/dungeonsanddragons-gazetteer/",
-   "kind": "reader",
-   "substantive": true,
-   "date": "undated writeup; GAZ1 published 1987",
-   "route": "direct fetch"
-  },
-  {
-   "title": "The Shadowed Old Gods of Game Design: Remembering Holmes, Moldvay and Mentzer",
-   "url": "https://therpggazette.wordpress.com/2025/11/11/the-shadowed-old-gods-of-game-design-remembering-holmes-moldvay-and-mentzer/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2025-11-11",
-   "route": "direct fetch"
-  },
-  {
-   "title": "The Many Faces of Role-Playing Game Studies (Deterding & Zagal, chapter 1 of Role-Playing Game Studies, Routledge 2018)",
-   "url": "https://eprints.whiterose.ac.uk/id/eprint/147044/1/Deterding_Zagal_Many_Faces_RPG_Studies.pdf",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2018-04-04",
-   "route": "White Rose eprints accepted-manuscript PDF, text extracted with pypdf"
-  },
-  {
-   "title": "Fifty Years of Dungeons & Dragons chapter pages (Peterson ch.3; Rowe & Howard ch.5; Cote & Saidel ch.15; Trammell & Garcia ch.17)",
-   "url": "https://direct.mit.edu/books/book/5778/chapter/4746687/Doctor-Holmes-I-Presume-How-a-California-Neurology",
-   "kind": "analysis",
-   "substantive": false,
-   "date": "2023",
-   "route": "BLOCKED: direct.mit.edu returns 403 to curl and WebFetch; no Wayback capture; OpenAlex and Semantic Scholar hold no abstract"
-  },
-  {
-   "title": "Shared Fantasy (Fine 1983) and The Fantasy Role-Playing Game (Mackay 2001) full-text search",
-   "url": "https://archive.org/metadata/sharedfantasyrol0000fine",
-   "kind": "analysis",
-   "substantive": false,
-   "date": "1983/2001",
-   "route": "BLOCKED: archive.org search-inside endpoints unreachable from this host (HTTP 000)"
-  },
-  {
-   "title": "Greyhawk Returns in the 2024 Dungeon Master's Guide",
-   "url": "https://www.dndbeyond.com/posts/1834-greyhawk-returns-in-the-2024-dungeon-masters-guide",
-   "kind": "vendor",
-   "substantive": true,
-   "date": "2024-10-21",
-   "route": "direct fetch"
-  },
-  {
-   "title": "In-Depth Review of the 2024 Dungeon Master's Guide",
-   "url": "https://www.enworld.org/threads/in-depth-review-of-the-2024-dungeon-masters-guide.707861/",
-   "kind": "reception",
-   "substantive": true,
-   "date": "2024-11-12",
-   "route": "direct fetch"
-  },
-  {
-   "title": "World Building design seminar with Wolfgang Baur, Zeb Cook, and Richard Green, part 1",
-   "url": "https://koboldpress.com/world-building-design-seminar-with-wolfgang-baur-zeb-cook-and-richard-green-part-1/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2025-07-14",
-   "route": "direct fetch"
-  },
-  {
-   "title": "World Building design seminar with Wolfgang Baur, Zeb Cook, and Richard Green, part 2",
-   "url": "https://koboldpress.com/world-building-design-seminar-with-wolfgang-baur-zeb-cook-and-richard-green-part-2/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2025-07-21",
-   "route": "direct fetch"
-  },
-  {
-   "title": "Review: The Kobold Guide to Plots and Campaigns and The Kobold Guide to Worldbuilding",
-   "url": "https://gnomestew.com/review-the-kobold-guide-to-plots-and-campaigns-and-the-kobold-guide-to-worldbuilding/",
-   "kind": "reception",
-   "substantive": true,
-   "date": "undated review of the 2012 book",
-   "route": "direct fetch"
-  },
-  {
-   "title": "Kobold Guide to Worldbuilding full text (Wolfgang Baur, 'How to Design a City State, Tribe, or Nation')",
-   "url": "https://online.anyflip.com/fgoih/itgk/mobile/index.html",
-   "kind": "analysis",
-   "substantive": false,
-   "date": "2012",
-   "route": "BLOCKED: anyflip serves the flipbook shell only (page files 403, no search_text index); pdfcoffee behind Cloudflare; Google Books search-inside quota-blocked. Reached instead at one remove through the Gnome Stew review's page-cited quotation and Baur's own seminar words."
-  },
-  {
-   "title": "Nicholas J. Mizer, 'The Role of the Cosmographer', International Journal of Role-playing 18 (2025)",
-   "url": "https://journals.uu.se/IJRP/article/download/1197/1052/4802",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2025",
-   "route": "OJS download URL (the /view/ PDF link returns an HTML wrapper); text extracted with pypdf"
-  },
-  {
-   "title": "Adrianna Burton, 'Book Review: Dread Trident', Analog Game Studies",
-   "url": "https://analoggamestudies.org/2022/01/book-review-dread-trident/",
-   "kind": "reception",
-   "substantive": true,
-   "date": "2022-01-09",
-   "route": "direct fetch"
-  },
-  {
-   "title": "Dread Trident - In Conversation with Curtis D. Carbonell",
-   "url": "https://liverpooluniversitypress.blog/2020/01/27/dread-trident-in-conversation-with-curtis-d-carbonell/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2020-01-27",
-   "route": "direct fetch"
-  },
-  {
-   "title": "Clare Wall, 'Review of Dread Trident', SFRA Review 52.1",
-   "url": "https://sfrareview.org/2022/01/10/review-of-dread-trident-tabletop-role-playing-games-and-the-modern-fantastic/",
-   "kind": "reception",
-   "substantive": true,
-   "date": "2022-01-10",
-   "route": "direct fetch"
-  },
-  {
-   "title": "Design & Development: Undercover at Gen Con, Part 1 (Jesse Decker and David Noonan, Wizards of the Coast)",
-   "url": "http://www.wizards.com/default.asp?x=dnd/dd/20050916a",
-   "kind": "measurement",
-   "substantive": true,
-   "date": "2005-09-16",
-   "route": "Wayback raw capture https://web.archive.org/web/20140530180347id_/http://www.wizards.com/default.asp?x=dnd/dd/20050916a (live wizards.com URL is dead)"
-  },
-  {
-   "title": "The Dreaded Boxed Text",
-   "url": "https://dysonlogos.blog/2013/09/29/the-dreaded-boxed-text/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2013-09-29",
-   "route": "direct fetch"
-  },
-  {
-   "title": "David Jara, 'A Closer Look at the (Rule-)Books: Framings and Paratexts in Tabletop Role-playing Games', International Journal of Role-Playing 4",
-   "url": "https://journals.uu.se/IJRP/article/download/228/252",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2013",
-   "route": "OJS download URL; text extracted with pypdf"
-  },
-  {
-   "title": "TSR Style Guides (pointer post naming Sine Nomine's 'A Brief Study of TSR Book Design')",
-   "url": "http://doomslakers.blogspot.com/2022/01/tsr-style-guides.html",
-   "kind": "analysis",
-   "substantive": false,
-   "date": "2022-01",
-   "route": "direct fetch; the post is only a list of links, and the Sine Nomine study itself is a paid PDF not reachable from here"
-  },
-  {
-   "title": "Stuart Gorman, review of Fifty Years of Dungeons and Dragons (MIT Press)",
-   "url": "https://www.stuartellisgorman.com/blog/fifty-years-of-dungeons-and-dragons-ed-premeet-sidhu-marcus-carter-and-jos-p-zagal",
-   "kind": "reception",
-   "substantive": true,
-   "date": "2024-08-01",
-   "route": "direct fetch; the only route reached to the contents of the blocked MIT volume"
-  }
- ],
  "claims": [
   {
    "feature": "place and institution description",
@@ -1819,6 +1567,258 @@
    "routeHint": "direct fetch",
    "registerHint": "none",
    "confidence": "high"
+  }
+ ],
+ "complete": true,
+ "coverage": "Named roster: FETCHED AT PRIMARY - Peterson (the Game Wizards excerpt at Polygon plus two further Playing at the World posts; the predecessor had Quagmire! and the blog), Zagal and Deterding (chapter 1 accepted manuscript at White Rose eprints), Appelcline (Designers & Dragons column #24 via a Wayback raw capture, live rpg.net 403s), Merwin's sibling columns 624 and 626, and the 4e delve-format thread through Cordell's own words quoted at length on Greyhawkery, Slavicsek's introduction quoted on The Alexandrian, Decker and Noonan's 2005 Wizards column recovered from the Wayback Machine, Delta's Gygax-only encounter-text series, and the Welcome to the Deathtrap layout history; Holmes/Moldvay/Mentzer Basic as register history through Zach Howard's manuscript-versus-published series (Howard is the co-author of the blocked chapter 5) and two later essays. BLOCKED - Fifty Years of D&D chapters 3, 5, 15 and 17 (DOIs, authors and page ranges resolved through Crossref, but direct.mit.edu returns 403 to curl and to WebFetch, no Wayback capture exists, and neither OpenAlex nor Semantic Scholar holds an abstract; reached only at one remove through Stuart Gorman's review); Fine's Shared Fantasy and Mackay's Fantasy Role-Playing Game (archive.org search-inside endpoints return HTTP 000 from this host); Baur's 'How to Design a City State, Tribe, or Nation' (anyflip serves the flipbook shell only, pdfcoffee is behind Cloudflare, Google Books was quota-blocked all day; reached at one remove through a Gnome Stew review that quotes it with a page cite and through Baur's own 2025 seminar transcript). NOT FOUND at any open route - Witwer and Riggs; Garcia 2017 is confirmed CLOSED with its abstract elided, and Shank 2015 remains abstract-only (both already logged by the predecessor). Substantive sources this run: 27 - 20 by direct fetch, 2 by Wayback raw capture, 3 by PDF binary plus pypdf extraction, 2 reached only through a quoting source. Every one of the 112 quotations was re-checked as an exact substring of the page as fetched. A finding in its own right: the register of published D&D place description is essentially unstudied - Carbonell says in his own words that role-playing gametexts are \"an overlooked area of investigation for literary scholars\", Deterding and Zagal's field survey files textual work under one chapter, and the sharpest measurements of how a settlement is described come not from scholarship but from designers (Cook, Baur, Decker and Noonan) and from OSR bloggers counting words.",
+ "sourcesRead": [
+  {
+   "title": "Part 46: \"Zenopus Built a Tower\" (Holmes manuscript vs published Basic Set)",
+   "url": "https://zenopusarchives.blogspot.com/2015/02/part-46-zenopus-built-tower.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2015-02-06",
+   "route": "direct fetch"
+  },
+  {
+   "title": "Dungeon Delve - WTF? (quoting Bill Slavicsek's introduction to Dungeon Delve, 2009)",
+   "url": "https://thealexandrian.net/wordpress/4051/roleplaying-games/dungeon-delve-wtf",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2009-04-16",
+   "route": "direct fetch"
+  },
+  {
+   "title": "Designing Layout and Information in Adventures",
+   "url": "https://deathtrap-games.blogspot.com/2021/08/designing-layout-and-information-in.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2021-08-29",
+   "route": "direct fetch"
+  },
+  {
+   "title": "New Article: D&D Adventure Format (quoting Bruce Cordell's Design & Development column)",
+   "url": "https://greyhawkery.blogspot.com/2011/06/new-article-d-adventure-format.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2011-06-30",
+   "route": "direct fetch"
+  },
+  {
+   "title": "Early Evolution of Encounter Text",
+   "url": "https://deltasdnd.blogspot.com/2021/10/early-evolution-of-encounter-text.html",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2021-10-25",
+   "route": "direct fetch"
+  },
+  {
+   "title": "Tip-Offs in Tamoachan",
+   "url": "https://deltasdnd.blogspot.com/2017/10/tip-offs-in-tamoachan.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2017-10-02",
+   "route": "direct fetch"
+  },
+  {
+   "title": "Designers & Dragons: The Column #24: My History of Dungeons & Dragons, Part One",
+   "url": "https://www.rpg.net/columns/designers-and-dragons/designers-and-dragons24.phtml",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2013-01-23",
+   "route": "Wayback raw capture 20240224035027 (live rpg.net returns 403)"
+  },
+  {
+   "title": "Let's Design an Adventure: Adventure Hooks and Opening Scenes",
+   "url": "https://www.dndbeyond.com/posts/624-lets-design-an-adventure-adventure-hooks-and",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2019-10-23",
+   "route": "direct fetch of https://www.dndbeyond.com/posts/624"
+  },
+  {
+   "title": "Let's Design an Adventure: Encounter Basics",
+   "url": "https://www.dndbeyond.com/posts/626-lets-design-an-adventure-encounter-basics",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2019-12-04",
+   "route": "direct fetch of https://www.dndbeyond.com/posts/626"
+  },
+  {
+   "title": "From the Unknown to the Borderlands (excerpt from Jon Peterson, Game Wizards, MIT Press 2021)",
+   "url": "https://www.polygon.com/2021/10/12/22722602/dungeons-dragons-game-wizards-book-excerpt-jon-peterson-arneson-lawsuit",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2021-10-12",
+   "route": "direct fetch"
+  },
+  {
+   "title": "Dave Arneson's Origins 1977 Tournament",
+   "url": "https://playingattheworld.blogspot.com/2020/04/dave-arnesons-origins-1977-tournament.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2020-04",
+   "route": "direct fetch"
+  },
+  {
+   "title": "Dungeons & Dragons Gazetteer (long-form writeup of GAZ1 The Grand Duchy of Karameikos)",
+   "url": "https://writeups.letsyouandhimfight.com/rulebook-heavily/dungeonsanddragons-gazetteer/",
+   "kind": "reader",
+   "substantive": true,
+   "date": "undated writeup; GAZ1 published 1987",
+   "route": "direct fetch"
+  },
+  {
+   "title": "The Shadowed Old Gods of Game Design: Remembering Holmes, Moldvay and Mentzer",
+   "url": "https://therpggazette.wordpress.com/2025/11/11/the-shadowed-old-gods-of-game-design-remembering-holmes-moldvay-and-mentzer/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2025-11-11",
+   "route": "direct fetch"
+  },
+  {
+   "title": "The Many Faces of Role-Playing Game Studies (Deterding & Zagal, chapter 1 of Role-Playing Game Studies, Routledge 2018)",
+   "url": "https://eprints.whiterose.ac.uk/id/eprint/147044/1/Deterding_Zagal_Many_Faces_RPG_Studies.pdf",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2018-04-04",
+   "route": "White Rose eprints accepted-manuscript PDF, text extracted with pypdf"
+  },
+  {
+   "title": "Fifty Years of Dungeons & Dragons chapter pages (Peterson ch.3; Rowe & Howard ch.5; Cote & Saidel ch.15; Trammell & Garcia ch.17)",
+   "url": "https://direct.mit.edu/books/book/5778/chapter/4746687/Doctor-Holmes-I-Presume-How-a-California-Neurology",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2023",
+   "route": "BLOCKED: direct.mit.edu returns 403 to curl and WebFetch; no Wayback capture; OpenAlex and Semantic Scholar hold no abstract"
+  },
+  {
+   "title": "Shared Fantasy (Fine 1983) and The Fantasy Role-Playing Game (Mackay 2001) full-text search",
+   "url": "https://archive.org/metadata/sharedfantasyrol0000fine",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "1983/2001",
+   "route": "BLOCKED: archive.org search-inside endpoints unreachable from this host (HTTP 000)"
+  },
+  {
+   "title": "Greyhawk Returns in the 2024 Dungeon Master's Guide",
+   "url": "https://www.dndbeyond.com/posts/1834-greyhawk-returns-in-the-2024-dungeon-masters-guide",
+   "kind": "vendor",
+   "substantive": true,
+   "date": "2024-10-21",
+   "route": "direct fetch"
+  },
+  {
+   "title": "In-Depth Review of the 2024 Dungeon Master's Guide",
+   "url": "https://www.enworld.org/threads/in-depth-review-of-the-2024-dungeon-masters-guide.707861/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2024-11-12",
+   "route": "direct fetch"
+  },
+  {
+   "title": "World Building design seminar with Wolfgang Baur, Zeb Cook, and Richard Green, part 1",
+   "url": "https://koboldpress.com/world-building-design-seminar-with-wolfgang-baur-zeb-cook-and-richard-green-part-1/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2025-07-14",
+   "route": "direct fetch"
+  },
+  {
+   "title": "World Building design seminar with Wolfgang Baur, Zeb Cook, and Richard Green, part 2",
+   "url": "https://koboldpress.com/world-building-design-seminar-with-wolfgang-baur-zeb-cook-and-richard-green-part-2/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2025-07-21",
+   "route": "direct fetch"
+  },
+  {
+   "title": "Review: The Kobold Guide to Plots and Campaigns and The Kobold Guide to Worldbuilding",
+   "url": "https://gnomestew.com/review-the-kobold-guide-to-plots-and-campaigns-and-the-kobold-guide-to-worldbuilding/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "undated review of the 2012 book",
+   "route": "direct fetch"
+  },
+  {
+   "title": "Kobold Guide to Worldbuilding full text (Wolfgang Baur, 'How to Design a City State, Tribe, or Nation')",
+   "url": "https://online.anyflip.com/fgoih/itgk/mobile/index.html",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2012",
+   "route": "BLOCKED: anyflip serves the flipbook shell only (page files 403, no search_text index); pdfcoffee behind Cloudflare; Google Books search-inside quota-blocked. Reached instead at one remove through the Gnome Stew review's page-cited quotation and Baur's own seminar words."
+  },
+  {
+   "title": "Nicholas J. Mizer, 'The Role of the Cosmographer', International Journal of Role-playing 18 (2025)",
+   "url": "https://journals.uu.se/IJRP/article/download/1197/1052/4802",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2025",
+   "route": "OJS download URL (the /view/ PDF link returns an HTML wrapper); text extracted with pypdf"
+  },
+  {
+   "title": "Adrianna Burton, 'Book Review: Dread Trident', Analog Game Studies",
+   "url": "https://analoggamestudies.org/2022/01/book-review-dread-trident/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2022-01-09",
+   "route": "direct fetch"
+  },
+  {
+   "title": "Dread Trident - In Conversation with Curtis D. Carbonell",
+   "url": "https://liverpooluniversitypress.blog/2020/01/27/dread-trident-in-conversation-with-curtis-d-carbonell/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2020-01-27",
+   "route": "direct fetch"
+  },
+  {
+   "title": "Clare Wall, 'Review of Dread Trident', SFRA Review 52.1",
+   "url": "https://sfrareview.org/2022/01/10/review-of-dread-trident-tabletop-role-playing-games-and-the-modern-fantastic/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2022-01-10",
+   "route": "direct fetch"
+  },
+  {
+   "title": "Design & Development: Undercover at Gen Con, Part 1 (Jesse Decker and David Noonan, Wizards of the Coast)",
+   "url": "http://www.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2005-09-16",
+   "route": "Wayback raw capture https://web.archive.org/web/20140530180347id_/http://www.wizards.com/default.asp?x=dnd/dd/20050916a (live wizards.com URL is dead)"
+  },
+  {
+   "title": "The Dreaded Boxed Text",
+   "url": "https://dysonlogos.blog/2013/09/29/the-dreaded-boxed-text/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2013-09-29",
+   "route": "direct fetch"
+  },
+  {
+   "title": "David Jara, 'A Closer Look at the (Rule-)Books: Framings and Paratexts in Tabletop Role-playing Games', International Journal of Role-Playing 4",
+   "url": "https://journals.uu.se/IJRP/article/download/228/252",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2013",
+   "route": "OJS download URL; text extracted with pypdf"
+  },
+  {
+   "title": "TSR Style Guides (pointer post naming Sine Nomine's 'A Brief Study of TSR Book Design')",
+   "url": "http://doomslakers.blogspot.com/2022/01/tsr-style-guides.html",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2022-01",
+   "route": "direct fetch; the post is only a list of links, and the Sine Nomine study itself is a paid PDF not reachable from here"
+  },
+  {
+   "title": "Stuart Gorman, review of Fifty Years of Dungeons and Dragons (MIT Press)",
+   "url": "https://www.stuartellisgorman.com/blog/fifty-years-of-dungeons-and-dragons-ed-premeet-sidhu-marcus-carter-and-jos-p-zagal",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2024-08-01",
+   "route": "direct fetch; the only route reached to the contents of the blocked MIT volume"
   }
  ]
 }

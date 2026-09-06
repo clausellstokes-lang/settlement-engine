@@ -2,157 +2,157 @@
  "name": "ai",
  "chunk": 25,
  "indices": [
-  629,
-  630,
-  631,
-  632,
-  633,
-  634,
-  635,
-  636,
-  637,
-  638,
-  639,
-  640,
-  641,
-  642,
-  643
+  876,
+  877,
+  878,
+  879,
+  880,
+  882,
+  883,
+  884,
+  885,
+  886,
+  887,
+  888,
+  889,
+  892,
+  893
  ],
  "claims": [
   {
-   "index": 629,
-   "feature": "homogenisation",
-   "claim": "Stories written with generative AI ideas were more similar to each other than stories written by humans alone.",
-   "source": "Anil R. Doshi and Oliver P. Hauser, Science Advances, 12 July 2024",
-   "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11244532/fullTextXML",
-   "quote": "stories are more similar to each other than stories by",
-   "page": "Abstract"
-  },
-  {
-   "index": 630,
-   "feature": "counter-evidence",
-   "claim": "Writers given five generative AI ideas produced stories rated 8.1% higher in novelty than writers with no AI access.",
-   "source": "Anil R. Doshi and Oliver P. Hauser, Science Advances, 12 July 2024",
-   "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11244532/fullTextXML",
-   "quote": "an increase in novelty of 8.1%",
-   "page": "Results"
-  },
-  {
-   "index": 631,
-   "feature": "counter-evidence",
-   "claim": "For the least inherently creative writers, ratings of how well the story was written rose by up to 26.6% with five AI ideas.",
-   "source": "Anil R. Doshi and Oliver P. Hauser, Science Advances, 12 July 2024",
-   "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11244532/fullTextXML",
-   "quote": "how well the story was written increase by up to 26.6%",
-   "page": "Results, marginal effects by DAT score"
-  },
-  {
-   "index": 632,
-   "feature": "counter-evidence",
-   "claim": "Among the most inherently creative writers, access to generative AI ideas had little effect on their stories' evaluations.",
-   "source": "Anil R. Doshi and Oliver P. Hauser, Science Advances, 12 July 2024",
-   "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11244532/fullTextXML",
-   "quote": "there is little effect of having access to generative AI ideas",
-   "page": "Results, marginal effects by DAT score"
-  },
-  {
-   "index": 633,
+   "index": 876,
    "feature": "register measured",
-   "claim": "The generative model in the Doshi and Hauser experiment was OpenAI's GPT-4, used only to supply a three-sentence starting idea.",
-   "source": "Anil R. Doshi and Oliver P. Hauser, Science Advances, 12 July 2024",
-   "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11244532/fullTextXML",
-   "quote": "OpenAI’s GPT-4 LLM",
-   "page": "Study design"
+   "claim": "The WikiProject records that the significance-inflating statements appear even for the most mundane subjects such as etymology or population data.",
+   "source": "WikiProject AI Cleanup, Wikipedia:Signs of AI writing, version of 6 September 2026",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "LLMs may even include these statements for even the most mundane of subjects",
+   "page": "section 'Undue emphasis on significance, legacy, and broader trends'"
   },
   {
-   "index": 634,
-   "feature": "homogenisation",
-   "claim": "Chiang argues that when an LLM fills in the choices a prompt did not make by averaging the choices other writers made, that average amounts to the least interesting choices available, which is why AI-generated text is often bland.",
-   "source": "Ted Chiang, essayist and SF writer, The New Yorker, 2024",
-   "url": "https://www.newyorker.com/culture/the-weekend-essay/why-ai-isnt-going-to-make-art",
-   "quote": "that average is equivalent to the least interesting choices possible",
-   "page": "para. beginning \"If an A.I. generates a ten-thousand-word story\""
+   "index": 877,
+   "feature": "place and institution description",
+   "claim": "An October 2024 revision to the Wikipedia article on Kumba, Cameroon, cited by the WikiProject as an example of the tell, closes a road-network sentence with the clause that it helped solidify its role as a regional hub.",
+   "source": "AI-generated Wikipedia text quoted as a demonstration example by WikiProject AI Cleanup",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "helped solidify its role as a regional hub",
+   "page": "section 'Undue emphasis on significance, legacy, and broader trends', examples"
   },
   {
-   "index": 635,
-   "feature": "steerability",
-   "claim": "Chiang argues that the alternative to averaging - instructing the program to mimic a specific writer's style - produces a highly derivative story rather than interesting art.",
-   "source": "Ted Chiang, essayist and SF writer, The New Yorker, 2024",
-   "url": "https://www.newyorker.com/culture/the-weekend-essay/why-ai-isnt-going-to-make-art",
-   "quote": "which produces a highly derivative story",
-   "page": "para. beginning \"If an A.I. generates a ten-thousand-word story\""
-  },
-  {
-   "index": 636,
-   "feature": "reader and expert judgment",
-   "claim": "Chiang states flatly that at the time of writing the fiction generated by large language models like ChatGPT is terrible.",
-   "source": "Ted Chiang, essayist and SF writer, The New Yorker, 2024",
-   "url": "https://www.newyorker.com/culture/the-weekend-essay/why-ai-isnt-going-to-make-art",
-   "quote": "the fiction generated by large language models like ChatGPT is terrible",
-   "page": "para. beginning \"Is there anything about art\""
-  },
-  {
-   "index": 637,
-   "feature": "other: sentence-level choice as the locus of quality",
-   "claim": "Chiang argues that you could not replace every sentence of a thriller with a semantically equivalent one and have the novel remain as entertaining, so its sentences and the small-scale choices they represent determine its effectiveness.",
-   "source": "Ted Chiang, essayist and SF writer, The New Yorker, 2024",
-   "url": "https://www.newyorker.com/culture/the-weekend-essay/why-ai-isnt-going-to-make-art",
-   "quote": "I doubt you could replace every sentence in a thriller",
-   "page": "para. beginning \"Believing that inspiration outweighs everything else\""
-  },
-  {
-   "index": 638,
-   "feature": "other: absence of communicative intention",
-   "claim": "Chiang argues that ChatGPT has no more intention to communicate than a phone's auto-complete, and that this lack of intention means it is not actually using language.",
-   "source": "Ted Chiang, essayist and SF writer, The New Yorker, 2024",
-   "url": "https://www.newyorker.com/culture/the-weekend-essay/why-ai-isnt-going-to-make-art",
-   "quote": "it has no more intention to communicate",
-   "page": "para. beginning \"Some have claimed that large language models are not laundering\""
-  },
-  {
-   "index": 639,
-   "feature": "steerability",
-   "claim": "Chiang argues that the selling point of generative AI - that it generates vastly more than the user puts in - is precisely what prevents these programs from being effective tools for artists.",
-   "source": "Ted Chiang, essayist and SF writer, The New Yorker, 2024",
-   "url": "https://www.newyorker.com/culture/the-weekend-essay/why-ai-isnt-going-to-make-art",
-   "quote": "that is precisely what prevents them from being effective tools for artists",
-   "page": "para. beginning \"It's harder to imagine a program\""
-  },
-  {
-   "index": 640,
-   "feature": "reader and expert judgment",
-   "claim": "Chiang reports that Google pulled its Paris Olympics Gemini commercial, in which a father uses Gemini to compose his daughter's fan letter, after widespread backlash from viewers.",
-   "source": "Ted Chiang, essayist and SF writer, The New Yorker, 2024, reporting on the Google Gemini ad",
-   "url": "https://www.newyorker.com/culture/the-weekend-essay/why-ai-isnt-going-to-make-art",
-   "quote": "Google pulled the commercial after widespread backlash from viewers",
-   "page": "para. beginning \"Recently, Google aired a commercial\""
-  },
-  {
-   "index": 641,
+   "index": 878,
    "feature": "gloss and over-explaining",
-   "claim": "Preston reports that when a prospect asked several questions at once, the Brenda chatbot strung together a composite response that collated so much information she sounded hostile.",
-   "source": "Laura Preston, former chatbot operator, n+1 Issue 44, 2022",
-   "url": "https://www.nplusonemag.com/issue-44/essays/human_fallback/",
-   "quote": "she sounded hostile",
-   "page": "section beginning \"Before my first shift\""
+   "claim": "The WikiProject names as a tell that AI chatbots insert superficial analysis of information, often about its significance, recognition or impact, typically as a trailing present-participle phrase.",
+   "source": "WikiProject AI Cleanup, Wikipedia:Signs of AI writing, version of 6 September 2026",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "insert superficial analysis of information, often in relation to its significance",
+   "page": "section 'Superficial analyses'"
   },
   {
-   "index": 642,
-   "feature": "other: what a human editor fixes first",
-   "claim": "Preston reports that her standard intervention on Brenda's over-informative replies was to soften the aggressive recitation of facts with line breaks and merry affirmations.",
-   "source": "Laura Preston, former chatbot operator, n+1 Issue 44, 2022",
-   "url": "https://www.nplusonemag.com/issue-44/essays/human_fallback/",
-   "quote": "aggressive recitation of facts with line breaks and merry affirmations",
-   "page": "section beginning \"Before my first shift\""
+   "index": 879,
+   "feature": "place and institution description",
+   "claim": "A June 2023 revision to the Wikipedia article on Douera, cited by the WikiProject as an example of superficial analysis, follows a census population figure with the clause creating a lively community within its borders.",
+   "source": "AI-generated Wikipedia text quoted as a demonstration example by WikiProject AI Cleanup",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "creating a lively community within its borders",
+   "page": "section 'Superficial analyses', examples 2023-2025"
   },
   {
-   "index": 643,
+   "index": 880,
+   "feature": "other: vague attribution and weasel wording",
+   "claim": "The WikiProject names as a tell that AI chatbots attribute opinions or claims to a vague authority and exaggerate the number of sources holding them.",
+   "source": "WikiProject AI Cleanup, Wikipedia:Signs of AI writing, version of 6 September 2026",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "AI chatbots tend to attribute opinions or claims to some vague authority",
+   "page": "section 'Vague attributions and overgeneralization of opinions'"
+  },
+  {
+   "index": 882,
    "feature": "lexical tells",
-   "claim": "Preston reports that Brenda's most common failure was errors of comprehension in which she would seize on the wrong keyword and queue up a non sequitur.",
-   "source": "Laura Preston, former chatbot operator, n+1 Issue 44, 2022",
-   "url": "https://www.nplusonemag.com/issue-44/essays/human_fallback/",
-   "quote": "She would seize on the wrong keyword and queue up a non sequitur",
-   "page": "section beginning \"Before my first shift\""
+   "claim": "The WikiProject holds that one or two AI-vocabulary words may be coincidence but a post-2022 edit introducing lots of them, lots of times, is one of the strongest tells for AI use.",
+   "source": "WikiProject AI Cleanup, Wikipedia:Signs of AI writing, version of 6 September 2026",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "an edit (post-2022) introducing lots of them, lots of times",
+   "page": "section 'High density of AI vocabulary words'"
+  },
+  {
+   "index": 883,
+   "feature": "register measured",
+   "claim": "The WikiProject notes that while most studies of AI vocabulary analysed scientific abstracts or fiction, those words are also ubiquitous in LLM-based encyclopedias such as Grokipedia.",
+   "source": "WikiProject AI Cleanup, Wikipedia:Signs of AI writing, version of 6 September 2026",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "\"AI vocabulary\" words are also ubiquitous in LLM-based encyclopedias",
+   "page": "section 'High density of AI vocabulary words'"
+  },
+  {
+   "index": 884,
+   "feature": "model era drift",
+   "claim": "The WikiProject records that delve was famously overused by ChatGPT in 2023 and early 2024, became less frequent later in 2024 and dropped off sharply in 2025.",
+   "source": "WikiProject AI Cleanup, Wikipedia:Signs of AI writing, version of 6 September 2026",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "the word delve was famously overused by ChatGPT in 2023",
+   "page": "section 'High density of AI vocabulary words'"
+  },
+  {
+   "index": 885,
+   "feature": "model era drift",
+   "claim": "The WikiProject gives three era word-lists, assigning Additionally, boasts, delve, intricate, tapestry and testament to GPT-4 in 2023 to mid-2024, and only emphasizing, enhance, highlighting and showcasing to GPT-5 from mid-2025.",
+   "source": "WikiProject AI Cleanup, Wikipedia:Signs of AI writing, version of 6 September 2026",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "The words that LLMs overuse have changed over time.",
+   "page": "section 'High density of AI vocabulary words', era breakdown"
+  },
+  {
+   "index": 886,
+   "feature": "lexical tells",
+   "claim": "The WikiProject records Grok as idiosyncratic in overusing superficially scientific words such as causal, empirical and correlate, and in still overusing underscore as of 2026.",
+   "source": "WikiProject AI Cleanup, Wikipedia:Signs of AI writing, version of 6 September 2026",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "Grok output is particularly idiosyncratic",
+   "page": "section 'High density of AI vocabulary words'"
+  },
+  {
+   "index": 887,
+   "feature": "other: copula avoidance",
+   "claim": "The WikiProject names as a tell that LLM text replaces copulas such as is or are with constructions like serves as, stands as, marks, features and offers.",
+   "source": "WikiProject AI Cleanup, Wikipedia:Signs of AI writing, version of 6 September 2026",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "replaces simple constructions that use copulas such as is or are",
+   "page": "section 'Avoidance of basic copulatives'"
+  },
+  {
+   "index": 888,
+   "feature": "other: copula avoidance",
+   "claim": "The WikiProject cites a study documenting an over 10% decrease in the usage of the words is and are in academic writing in 2023, with no major change before that.",
+   "source": "WikiProject AI Cleanup relaying a cited study, Wikipedia:Signs of AI writing",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "decrease in the usage of the words is and are",
+   "page": "section 'Avoidance of basic copulatives'"
+  },
+  {
+   "index": 889,
+   "feature": "other: vague connection instead of a stated relation",
+   "claim": "The WikiProject names as a tell that LLMs allude vaguely to two subjects being connected to or associated with each other instead of stating the relation directly.",
+   "source": "WikiProject AI Cleanup, Wikipedia:Signs of AI writing, version of 6 September 2026",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "LLMs will often allude vaguely to the two subjects being",
+   "page": "section 'Vague expression of connection or association'"
+  },
+  {
+   "index": 892,
+   "feature": "other: rule of three",
+   "claim": "The WikiProject names as a tell that LLMs overuse the rule of three, in the form adjective-adjective-adjective or three short phrases.",
+   "source": "WikiProject AI Cleanup, Wikipedia:Signs of AI writing, version of 6 September 2026",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "LLMs overuse the rule of three",
+   "page": "section 'Rule of three'"
+  },
+  {
+   "index": 893,
+   "feature": "other: rule of three",
+   "claim": "The WikiProject holds that LLMs use the rule of three to make superficial analyses appear more comprehensive.",
+   "source": "WikiProject AI Cleanup, Wikipedia:Signs of AI writing, version of 6 September 2026",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "LLMs often use this structure to make superficial analyses appear more comprehensive.",
+   "page": "section 'Rule of three'"
   }
  ]
 }

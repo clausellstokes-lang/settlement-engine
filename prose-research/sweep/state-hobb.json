@@ -7530,6 +7530,1023 @@
    "substantive": false,
    "date": "2018-03-23",
    "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "The Fedwren Project: A Robin Hobb Annotated Bibliography (Geoffrey B. Elliott)",
+   "url": "https://elliottrwi.com/research/hobb-bibliography/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2026-05-18",
+   "route": "live fetch"
+  },
+  {
+   "title": "Matthew Oliver, 'History in the Margins: Epigraphs and Negative Space in Robin Hobb's Assassin's Apprentice', Mythlore 41.1 (2022) 45-66",
+   "url": "https://dc.swosu.edu/mythlore/vol41/iss1/4/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2022-10",
+   "route": "SWOSU Digital Commons PDF (landing page 403s; PDF fetches)"
+  },
+  {
+   "title": "Stefan Ekman and Audrey Isabel Taylor, 'Between World and Narrative: Fictional Epigraphs and Critical World-Building', JFA 32.2 (2021) 244-265",
+   "url": "https://www.diva-portal.org/smash/get/diva2:1659740/FULLTEXT01.pdf",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2021",
+   "route": "Wayback raw capture 20231231145740id_ (diva-portal refuses connections here)"
+  },
+  {
+   "title": "Timo Lagus, 'Toward Figural Fantasy', MA thesis, University of Helsinki, 2006",
+   "url": "https://helda.helsinki.fi/server/api/core/bitstreams/ae370f8d-eafe-41e3-8eb9-79b245702b82/content",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2006",
+   "route": "helda DSpace bitstream PDF"
+  },
+  {
+   "title": "Emily Moon, 'I set no limits on my love': Magic, Queerness and the Disruption of Binaries in Robin Hobb's Realm of the Elderlings, MA by Research, University of Kent, 2024",
+   "url": "https://kar.kent.ac.uk/108514/1/97moon2024maresfinal.pdf",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2024",
+   "route": "kar.kent.ac.uk PDF"
+  },
+  {
+   "title": "Wikipedia, 'Farseer trilogy' (Style section, relaying Susan Mandala 2010, Clute, Langford, Mendlesohn)",
+   "url": "https://en.wikipedia.org/wiki/Farseer_trilogy",
+   "kind": "relay",
+   "substantive": true,
+   "date": "2026-09 revision",
+   "route": "live fetch"
+  },
+  {
+   "title": "Geoffrey B. Elliott, 'Sites of Memory in Robin Hobb's Realm of the Elderlings' (ICMS 2021 paper)",
+   "url": "https://elliottrwi.com/2021/05/19/sites-of-memory-in-robin-hobbs-realm-of-the-elderlings/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2021-05-19",
+   "route": "live fetch"
+  },
+  {
+   "title": "Waumans, Nicodeme and Bersini, 'Topology Analysis of Social Networks Extracted from Literature', PLoS ONE 10.6 (2015)",
+   "url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0126470",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2015-06-03",
+   "route": "live fetch"
+  },
+  {
+   "title": "Velina Slavova, 'Towards Emotion Recognition in Texts - A Sound-Symbolic Experiment', IJCRSEE 7.2 (2019) 41-51",
+   "url": "https://www.ijcrsee.com/index.php/ijcrsee/article/view/238",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2019",
+   "route": "PDF via dialnet.unirioja.es/descarga/articulo/7136787.pdf (the journal's own download link serves HTML)"
+  },
+  {
+   "title": "Polina Tkach and Maryna Volkova, \"Robin Hobb's 'The World of the Elderlings' Onomasticon: The Structural and Functional Significance of Charactonyms\", Perspectives and Innovations of Science 5(47) (2026) 372-381",
+   "url": "https://perspectives.pp.ua/index.php/vno/article/download/46053/46079",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2026",
+   "route": "open-access PDF, found via OpenAlex search"
+  },
+  {
+   "title": "Petra Srsic, 'Motherhood, Disability, and Rebellion: Constructing the Mother in Hobb's Liveship Traders Trilogy', Studia Anglica Resoviensia 22 (2025)",
+   "url": "https://journals.ur.edu.pl/SAR/article/download/11148/11875",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2025",
+   "route": "open-access PDF, found via OpenAlex search"
+  },
+  {
+   "title": "Geoffrey B. Elliott, 'Searching the Hoard in Words like Coins' (sample conference paper)",
+   "url": "http://gelliottteaching.blogspot.com/2013/07/sample-conference-length-paper.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2013-07-29",
+   "route": "live blogspot fetch"
+  },
+  {
+   "title": "Wikipedia, 'Liveship Traders' (Style section, relaying Borowska-Szerszun 2019)",
+   "url": "https://en.wikipedia.org/wiki/Liveship_Traders",
+   "kind": "relay",
+   "substantive": true,
+   "date": "2026-09 revision",
+   "route": "live fetch"
+  },
+  {
+   "title": "OpenAlex record for Borowska-Szerszun, Extrapolation 60.1 (2019) - abstract only",
+   "url": "https://api.openalex.org/works/doi:10.3828/extr.2019.2",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2019",
+   "route": "OpenAlex API (full text closed at Liverpool UP)"
+  },
+  {
+   "title": "OpenAlex record for Peter Melville, 'Queerness and Homophobia in Robin Hobb's Farseer Trilogies', Extrapolation 59.3 (2018) - abstract only, no prose-style content",
+   "url": "https://api.openalex.org/works/doi:10.3828/extr.2018.17",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2018",
+   "route": "OpenAlex API"
+  },
+  {
+   "title": "OpenAlex record for Helen Young, 'Critiques of Colonialism in Robin Hobb's Soldier Son Trilogy', Extrapolation 55.1 (2014) - abstract only, no prose-style content",
+   "url": "https://api.openalex.org/works/doi:10.3828/extr.2014.4",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2014",
+   "route": "OpenAlex API"
+  },
+  {
+   "title": "Geoffrey B. Elliott, \"Another Update to 'Moving beyond Tolkien's Medievalism'\" (2026 ICMS paper)",
+   "url": "https://elliottrwi.com/2026/05/18/another-update-to-moving-beyond-tolkiens-medievalism/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2026-05-18",
+   "route": "live fetch"
+  },
+  {
+   "title": "Velina Slavova, 'Emotional Valence Coded in the Phonemic Content', Cybernetics and Information Technologies 20.2 (2020)",
+   "url": "https://www.sciendo.com/pdf/10.2478/cait-2020-0012",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2020",
+   "route": "sciendo PDF"
+  },
+  {
+   "title": "Lepukhova and Mishchur, 'Linguostylistics of the literary translation of fantasy', Perspectives and Innovations of Science 5(47) (2026) 1238-1251 - cites Hobb only in its bibliography",
+   "url": "https://perspectives.pp.ua/index.php/vno/article/download/46118/46144",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2026",
+   "route": "open-access PDF"
+  },
+  {
+   "title": "Chandarana and Choudhary, 'Employment of the Tolkienian Tools in the Nuanced Study of Robin Hobb's The Farseer Trilogy', Towards Excellence 14.2 (2022) - abstract page only, applies Recovery/Escape/Eucatastrophe, no prose-style content",
+   "url": "https://doi.org/10.37867/te140290",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2022",
+   "route": "live fetch of the journal page"
+  },
+  {
+   "title": "Iris Duits, 'Translating Robin Hobb's Assassin's Apprentice', BA thesis, Utrecht University, 2012",
+   "url": "https://studenttheses.uu.nl/server/api/core/bitstreams/f473796a-a2a2-4791-95bd-f039a6c27af8/content",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2012",
+   "route": "Utrecht DSpace REST API (search -> bundles -> ORIGINAL bitstream); the web UI is a JS app"
+  },
+  {
+   "title": "Marlies Kok, 'The Boundaries of Imagination: Important Aspects of Fantasy Translation', MA thesis, Utrecht University, 2012",
+   "url": "https://studenttheses.uu.nl/server/api/core/bitstreams/232bf1b5-ecab-49c6-9f70-39f67fb9c119/content",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2012",
+   "route": "Utrecht DSpace REST API"
+  },
+  {
+   "title": "Pamela Freeman, Blood Ties and \"'Kings. What a good idea': Monarchy in Epic Fantasy Fiction\", DCA thesis, University of Technology Sydney, 2006",
+   "url": "https://opus.lib.uts.edu.au/bitstream/10453/20138/2/02whole.pdf",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2006",
+   "route": "UTS OPUS bitstream"
+  },
+  {
+   "title": "Inmaculada Garnes, 'Analisis pragmatico contrastivo ingles/espanol de la intensificacion verbal en textos literarios', Estudios de Traduccion 6 (2016) 39-53",
+   "url": "https://revistas.ucm.es/index.php/ESTR/article/download/53002/48655",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2016",
+   "route": "open-access PDF at revistas.ucm.es, found via OpenAlex"
+  },
+  {
+   "title": "Dekker, Kuhn and van Erp, 'Evaluating named entity recognition tools for extracting social networks from novels', PeerJ CS 5 (2019) e189",
+   "url": "https://peerj.com/articles/cs-189/",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2019-04-18",
+   "route": "Wayback raw capture 20260208122918id_ (peerj.com 403s a plain fetch)"
+  },
+  {
+   "title": "French MA thesis, 'La traduction des noms dans les romans de fantasy sur la base du roman Assassin's Apprentice de Robin Hobb' (Geneva, 2011) - landing page and abstract only, no full text retrieved",
+   "url": "https://archive-ouverte.unige.ch/unige:18417",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2011",
+   "route": "live fetch of the repository landing page"
+  },
+  {
+   "title": "McFarland page for Matthew Oliver, Magic Words, Magic Worlds: Form and Style in Epic Fantasy (2022) - publisher description and contents; its close readings are Erikson, Le Guin, Jemisin and Sanderson, not Hobb",
+   "url": "https://mcfarlandbooks.com/product/magic-words-magic-worlds/",
+   "kind": "vendor",
+   "substantive": false,
+   "date": "2022",
+   "route": "live fetch"
+  },
+  {
+   "title": "Susan Mandala, Language in Science Fiction and Fantasy: The Question of Style (Continuum, 2010) - NOT REACHED; no open copy, absent from archive.org, Google Books API quota exhausted; read only through Wikipedia's relay",
+   "url": "https://en.wikipedia.org/wiki/Farseer_trilogy",
+   "kind": "relay",
+   "substantive": false,
+   "date": "2010",
+   "route": "blocked"
+  },
+  {
+   "title": "Farah Mendlesohn, Rhetorics of Fantasy (2008) - NOT REACHED; the archive.org copy is lending-restricted (401 on _djvu.txt); read only through Oliver's verbatim quotation of p. 16",
+   "url": "https://archive.org/details/rhetoricsoffanta0000mend",
+   "kind": "relay",
+   "substantive": false,
+   "date": "2008",
+   "route": "blocked"
+  },
+  {
+   "title": "Saga Bokne, Patriarchy under Scrutiny (MA, Goteborg, 2018) - NOT REACHED; gupea.ub.gu.se sits behind an Anubis challenge and returns 500",
+   "url": "https://gupea.ub.gu.se/handle/2077/57888",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2018",
+   "route": "blocked"
+  },
+  {
+   "title": "Catherine Ann Shropshire, The Importance of Geographic Realism in Genre Fiction (MS, Oklahoma State, 2019) - NOT FOUND; absent from the SHAREOK search index under title, author and subject; read only through Elliott's annotation",
+   "url": "https://elliottrwi.com/research/hobb-bibliography/",
+   "kind": "relay",
+   "substantive": false,
+   "date": "2019",
+   "route": "not found"
+  },
+  {
+   "title": "Robin Hobb Interview (Other Fantasy / OF Blog, Larry Nolen)",
+   "url": "http://ofblog.blogspot.com/2003/04/robin-hobb-interview.html",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2003-04-28",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "Interview | Robin Hobb (A Dribble of Ink, Aidan Moher)",
+   "url": "https://aidanmoher.com/blog/2007/06/interviews/interview-robin-hobb/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2007-06-23",
+   "route": "WebFetch 403; curl browser-UA succeeded"
+  },
+  {
+   "title": "Robin Hobb: More Questions Than Answers (Locus, interview excerpts)",
+   "url": "https://www.locusmag.com/2005/Issues/12Hobb.html",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2005-12",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "Robin Hobb: Behind the Scenes (Locus, January 1998 excerpts)",
+   "url": "https://www.locusmag.com/1998/Issues/01/Hobb.html",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "1998-01",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "Interview with Robin Hobb (Fantasy Book Critic, Robert Thompson)",
+   "url": "https://fantasybookcritic.blogspot.com/2008/01/interview-with-robin-hobb.html",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2008-01",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "Robin Hobb Interview (Pat's Fantasy Hotlist, Patrick St-Denis)",
+   "url": "http://fantasyhotlist.blogspot.com/2005/07/robin-hobb-interview.html",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2005-07-11",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "Writing Excuses 11.Bonus-01: Characterization and Differentiation, With Robin Hobb (fan transcript)",
+   "url": "https://wetranscripts.livejournal.com/121439.html",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2016-10-12",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "A Robin Hobb Rereading Series-Entry 1: Assassin's Apprentice, Chapter 1 (Geoffrey B. Elliott)",
+   "url": "https://elliottrwi.com/2019/05/24/a-robin-hobb-rereading-series-entry-1-assassins-apprentice-chapter-1/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2019-05-24",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "A Robin Hobb Rereading Series: Entry 226: Fool's Errand, Chapter 6 (Geoffrey B. Elliott)",
+   "url": "https://elliottrwi.com/2021/09/10/a-robin-hobb-rereading-series-entry-226-fools-errand-chapter-6/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2021-09-10",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "The Golden Fool, by Robin Hobb (Vacuous Wastrel)",
+   "url": "https://vacuouswastrel.wordpress.com/2013/02/04/the-golden-fool-by-robin-hobb/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2013-02-04",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "Fool's Quest, by Robin Hobb (Vacuous Wastrel)",
+   "url": "https://vacuouswastrel.wordpress.com/2015/11/27/fools-quest-by-robin-hobb/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2015-11-27",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "Dragon Keeper, by Robin Hobb (Vacuous Wastrel)",
+   "url": "https://vacuouswastrel.wordpress.com/2014/04/13/dragon-keeper-by-robin-hobb/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2014-04-13",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "Fool's Fate, by Robin Hobb (Vacuous Wastrel)",
+   "url": "https://vacuouswastrel.wordpress.com/2013/11/11/fools-fate-by-robin-hobb/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2013-11-11",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "The Greatest Fictional World Builders: Robin Hobb (Writers Write, Christopher Luke Dean)",
+   "url": "https://www.writerswrite.co.za/the-greatest-fictional-world-builders-robin-hobb/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2020-02-12",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "How to Write a Book When You Don't Have Time to Write (Robin Hobb's blog)",
+   "url": "https://www.robinhobb.com/blog/posts/41755",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "2022-11-03",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "On the use of epigraphs and metanarratives in Robin Hobb's 'Assassin's Apprentice' (Jeffrey Outcalt, Substack)",
+   "url": "https://jeffreydavidoutcalt.substack.com/p/on-the-use-of-epigraphs-and-metanarratives",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2024-07-02",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "Fool's Assassin: How Robin Hobb Writes Lyrical Fantasy Without Being Boring (M Harold Page, Black Gate)",
+   "url": "https://www.blackgate.com/2016/02/09/fools-assassin-how-robin-hobb-writes-lyrical-fantasy-without-being-boring/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2016-02-09",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "Interview: Robin Hobb (Lightspeed Magazine / The Geek's Guide to the Galaxy)",
+   "url": "https://www.lightspeedmagazine.com/nonfiction/interview-robin-hobb/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2012-04",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "Robin Hobb's Writing Advice: 3 Tips for Crafting Your Villian (Tayan Hatch, Dragonsteel Books)",
+   "url": "https://www.dragonsteelbooks.com/blogs/the-cognitive-realm/robin-hobb-writing-villians",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2024-12-19",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "As You Intend To Be (Robin Hobb's Infrequent and Off Topic Blog)",
+   "url": "https://www.robinhobb.com/blog/posts/36450",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2020-05-21",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "The Assassin's Canvas: A Comprehensive Analysis of Narrative Interiority... (unsigned article, rpgstorytellers.com)",
+   "url": "https://rpgstorytellers.com/the-assassins-canvas-a-comprehensive-analysis-of-narrative-interiority-magic-systems-and-cultural-anthropology-in-robin-hobbs-farseer-trilogy/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2026-01-13",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "June Author Crush: Robin Hobb, Like Tolkien and R. R. Martin, is a Master Worldbuilder (Rachel Carter, BookTrib)",
+   "url": "https://booktrib.com/2017/06/15/june-author-crush-robin-hobb-worldbuilder/",
+   "kind": "reception",
+   "substantive": false,
+   "date": "2017-06-15",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "History in the Margins: Epigraphs and Negative Space in Robin Hobb's Assassin's Apprentice (Matthew Oliver, Mythlore 41.1)",
+   "url": "https://dc.swosu.edu/mythlore/vol41/iss1/4/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2022-10",
+   "route": "Wayback raw PDF capture (live PDF 403), pdfminer extraction"
+  },
+  {
+   "title": "The Fedwren Project: A Robin Hobb Annotated Bibliography (Geoffrey B. Elliott)",
+   "url": "https://elliottrwi.com/research/hobb-bibliography/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "accessed 2026-09-06",
+   "route": "curl browser-UA on live URL; used for bibliography chasing"
+  },
+  {
+   "title": "Interviewing Robin Hobb, Epic-Fantasy Best-Selling Author (Syl R. Martin)",
+   "url": "https://sylrmartin.com/portfolio/interviewing-robin-hobb-epic-fantasy-best-selling-author/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2023-05-19",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "An Interview with Robin Hobb: Character Writing (Madalen Erez, Paw Print)",
+   "url": "https://cscsnews.com/744/literary-arts/an-interview-with-robin-hobb-character-writing/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2020-11-19",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "My Reddit 'AMA' Q&A with Robin Hobb Is On Today! (Helen Lowe)",
+   "url": "https://helenlowe.info/blog/2012/05/17/my-reddit-ama-qa-with-robin-hobb-is-on-today/",
+   "kind": "reception",
+   "substantive": false,
+   "date": "2012-05-17",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "Interview with Robin Hobb (Rob Bedford, SFFWorld)",
+   "url": "https://www.sffworld.com/2005/09/interview-with-robin-hobb/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2005-09-01",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "What Works For Me (Robin Hobb's Infrequent and Off Topic Blog)",
+   "url": "https://www.robinhobb.com/blog/posts/40869",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2022-05-20",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "A Day in the Life of an Editor - with Anne Groell (Julie Crisp)",
+   "url": "http://www.juliecrisp.co.uk/blog-1/2016/1/4/a-day-in-the-life-of-an-editor-with-anne-groell",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2016-01-04",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "Ship of Magic (1998): Robin Hobb (The Idle Woman)",
+   "url": "https://theidlewoman.net/2013/05/05/ship-of-magic-robin-hobb/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2013-05-05",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "Dragon Haven by Robin Hobb (Lisa Goldstein, Strange Horizons)",
+   "url": "http://strangehorizons.com/non-fiction/reviews/dragon-haven-by-robin-hobb/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2010-05-10",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "The Fan Fiction Rant (Robin Hobb, robinhobb.com, captured 30 June 2005)",
+   "url": "https://web.archive.org/web/20050630015105id_/http://www.robinhobb.com/rant.html",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "captured 2005-06-30",
+   "route": "Wayback CDX lookup then raw id_ capture of a page since removed from the live site; gunzipped locally"
+  },
+  {
+   "title": "Robin Hobb Isn't Writing Back Anymore (Elise Mead, LisiPieces)",
+   "url": "https://www.lisipieces.com/robin-hobb-isnt-writing-back-anymore/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2025-10-18",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "Blogging rant (robinhobb.com/rant.html, captured 7 January 2009)",
+   "url": "https://web.archive.org/web/20090107003409id_/http://robinhobb.com/rant.html",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "captured 2009-01-07",
+   "route": "Wayback raw capture; the later occupant of the same URL, an anti-blogging piece, not craft"
+  },
+  {
+   "title": "Robin Hobb Interview – Part Two (Fantasy-Faction, 2013)",
+   "url": "https://fantasy-faction.com/2013/robin-hobb-interview-part-two",
+   "kind": "interview",
+   "substantive": true
+  },
+  {
+   "title": "Robin Hobb Interview – Part One (Fantasy-Faction, 2013)",
+   "url": "https://fantasy-faction.com/2013/robin-hobb-interview",
+   "kind": "interview",
+   "substantive": true
+  },
+  {
+   "title": "Robin Hobb on changing cultures, writing about violence... (New Statesman, Pauline Bock, 2018)",
+   "url": "https://www.newstatesman.com/long-reads/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm",
+   "kind": "profile-interview",
+   "substantive": true
+  },
+  {
+   "title": "How to Write Compelling Characters: Hobb, McClellan, Lee (Dragonsteel Nexus 2024)",
+   "url": "https://www.dragonsteelbooks.com/blogs/the-cognitive-realm/how-to-write-compelling-characters-panel-dragonsteel-nexus-2024",
+   "kind": "panel-report",
+   "substantive": true
+  },
+  {
+   "title": "A Fantasy World to Get Lost In: Interview with Robin Hobb (HuffPost, 2017)",
+   "url": "https://www.huffpost.com/entry/a-fantasy-world-to-get-lost-in-an-interview-with-robin_b_598101d5e4b0b35d274c5e7c",
+   "kind": "interview",
+   "substantive": true
+  },
+  {
+   "title": "Interview with Robin Hobb (Fantasy Book Critic, 2008)",
+   "url": "https://fantasybookcritic.blogspot.com/2008/01/interview-with-robin-hobb.html",
+   "kind": "interview",
+   "substantive": true
+  },
+  {
+   "title": "WorldCon75: Interview with author Robin Hobb (Helsinki Times, 2017)",
+   "url": "https://www.helsinkitimes.fi/culture/14974-worldcon75-interview-with-author-robin-hobb.html",
+   "kind": "interview",
+   "substantive": true
+  },
+  {
+   "title": "Writing Excuses 11.Bonus-01: Characterization and Differentiation, with Robin Hobb (transcript)",
+   "url": "https://writingexcuses.com/11-bonus-01-characterization-and-differentiation-with-robin-hobb/",
+   "kind": "podcast-transcript",
+   "substantive": true
+  },
+  {
+   "title": "Interview with Robin Hobb (SFFWorld, 2005)",
+   "url": "https://www.sffworld.com/2005/09/interview-with-robin-hobb/",
+   "kind": "interview",
+   "substantive": true
+  },
+  {
+   "title": "Interview | Robin Hobb (A Dribble of Ink, Aidan Moher, 2007)",
+   "url": "https://aidanmoher.com/blog/2007/06/interviews/interview-robin-hobb/",
+   "kind": "interview",
+   "substantive": true
+  },
+  {
+   "title": "Robin Hobb: More Questions Than Answers (Locus, December 2005, excerpts)",
+   "url": "https://www.locusmag.com/2005/Issues/12Hobb.html",
+   "kind": "interview-excerpts",
+   "substantive": true
+  },
+  {
+   "title": "Robin Hobb: Behind the Scenes (Locus, January 1998, excerpts)",
+   "url": "https://www.locusmag.com/1998/Issues/01/Hobb.html",
+   "kind": "interview-excerpts",
+   "substantive": true
+  },
+  {
+   "title": "Robin Hobb Interview (Pat's Fantasy Hotlist, 2005)",
+   "url": "http://fantasyhotlist.blogspot.com/2005/07/robin-hobb-interview.html",
+   "kind": "interview",
+   "substantive": true
+  },
+  {
+   "title": "Writing Advice From Robin Hobb: 3 Tips for Crafting Villains (Dragonsteel Books)",
+   "url": "https://www.dragonsteelbooks.com/blogs/the-cognitive-realm/robin-hobb-writing-villians",
+   "kind": "panel-report",
+   "substantive": true
+  },
+  {
+   "title": "Robin Hobb on 25 Years of Assassin's Apprentice (Reactor, NYCC 2019, Natalie Zutter)",
+   "url": "https://reactormag.com/robin-hobb-nycc-2019-highlights-assassins-apprentice-25-years/",
+   "kind": "panel-report",
+   "substantive": true
+  },
+  {
+   "title": "Interview: Robin Hobb (Lightspeed / Geek's Guide to the Galaxy)",
+   "url": "https://www.lightspeedmagazine.com/nonfiction/interview-robin-hobb/",
+   "kind": "podcast-transcript",
+   "substantive": false
+  },
+  {
+   "title": "Fool's Assassin, by Robin Hobb (Vacuous Wastrel, 2014)",
+   "url": "https://vacuouswastrel.wordpress.com/2014/08/26/fools-assassin-by-robin-hobb/",
+   "kind": "critic-review",
+   "substantive": true
+  },
+  {
+   "title": "Lies Are What A Man Needs Most: Masculinity in Assassin's Quest (Jeffrey David Outcalt, Substack)",
+   "url": "https://jeffreydavidoutcalt.substack.com/p/lies-are-what-a-man-needs-most-masculinity",
+   "kind": "close-reading",
+   "substantive": true
+  },
+  {
+   "title": "Robin Hobb interview, March 4th 2012 (Fantasy Book Review)",
+   "url": "https://www.fantasybookreview.co.uk/interview/2012/robin-hobb/",
+   "kind": "interview",
+   "substantive": false
+  },
+  {
+   "title": "Interviewing Robin Hobb, Epic-Fantasy Best-Selling Author (Syl R. Martin)",
+   "url": "https://sylrmartin.com/portfolio/interviewing-robin-hobb-epic-fantasy-best-selling-author/",
+   "kind": "interview",
+   "substantive": false
+  },
+  {
+   "title": "The Assassin's Canvas (rpgstorytellers.com) — reads as AI-generated; not cited",
+   "url": "https://rpgstorytellers.com/the-assassins-canvas-a-comprehensive-analysis-of-narrative-interiority-magic-systems-and-cultural-anthropology-in-robin-hobbs-farseer-trilogy/",
+   "kind": "analysis",
+   "substantive": false
+  },
+  {
+   "title": "Find out how Robin Hobb became two different people (Gizmodo, 2011; excerpts The Inheritance forewords)",
+   "url": "https://gizmodo.com/find-out-how-robin-hobb-became-two-different-people-5792234",
+   "kind": "foreword-excerpts",
+   "substantive": true
+  },
+  {
+   "title": "Author Robin Hobb talks Megan Lindholm and epic fantasy (SciFiNow, Jodie Tyley, 2012)",
+   "url": "https://www.scifinow.co.uk/interviews/interview-author-robin-hobb-a-k-a-megan-lindholm/",
+   "kind": "interview",
+   "substantive": true
+  },
+  {
+   "title": "The Inheritance - Robin Hobb and Megan Lindholm (Val's Random Comments, 2011)",
+   "url": "http://valsrandomcomments.blogspot.com/2011/04/inheritance-robin-hobb-and-megan.html",
+   "kind": "critic-review",
+   "substantive": true
+  },
+  {
+   "title": "How to Write a Book When You Don't Have Time to Write (Robin Hobb's blog, Nov 2022)",
+   "url": "https://www.robinhobb.com/blog/posts/41755",
+   "kind": "author-blog",
+   "substantive": false
+  },
+  {
+   "title": "How Robin Hobb Created a Legendary Hero in Fitzchivalry Farseer (The Huntress and the Wolf, Substack)",
+   "url": "https://thehuntressandthewolf.substack.com/p/how-robin-hobb-created-a-legendary",
+   "kind": "critic-essay",
+   "substantive": true
+  },
+  {
+   "title": "Book Review: Fool's Assassin (Hippogriff's Aerie, 2018)",
+   "url": "https://hippogriff.wordpress.com/2018/09/30/book-review-fools-assassin-by-robin-hobb/",
+   "kind": "critic-review",
+   "substantive": true
+  },
+  {
+   "title": "Robin Hobb Interview (The OF Blog, 2003)",
+   "url": "http://ofblog.blogspot.com/2003/04/robin-hobb-interview.html",
+   "kind": "interview",
+   "substantive": true
+  },
+  {
+   "title": "Magic Wants to Be Fed: Cooking the Books with Robin Hobb (Fran Wilde, 2014)",
+   "url": "https://franwilde.wordpress.com/2014/11/04/ctb-robin-hobb/",
+   "kind": "author-guest-post",
+   "substantive": true
+  },
+  {
+   "title": "Robin Hobb Isn't Writing Back Anymore (LisiPieces interview)",
+   "url": "https://www.lisipieces.com/robin-hobb-isnt-writing-back-anymore/",
+   "kind": "interview",
+   "substantive": true
+  },
+  {
+   "title": "Reading Robin Hobb (Jackie Morris)",
+   "url": "https://www.jackiemorris.co.uk/reading-robin-hobb/",
+   "kind": "reader-testimony",
+   "substantive": true
+  },
+  {
+   "title": "Farseer trilogy (Wikipedia) — used only to recover critic citations",
+   "url": "https://en.wikipedia.org/wiki/Farseer_trilogy",
+   "kind": "reference-index",
+   "substantive": true
+  },
+  {
+   "title": "The Liveship Traders Series by Robin Hobb (no spoilers) (Fantasy-Faction, 2014)",
+   "url": "https://fantasy-faction.com/2014/the-liveship-traders-series-by-robin-hobb-no-spoilers",
+   "kind": "critic-overview",
+   "substantive": true
+  },
+  {
+   "title": "Fool's Assassin by Robin Hobb (F.R. Jameson, Goodreads author blog)",
+   "url": "https://www.goodreads.com/author_blog_posts/18537892-fool-s-assassin-by-robin-hobb?tab=book",
+   "kind": "critic-review",
+   "substantive": false
+  },
+  {
+   "title": "Bright Home, Dark Heart (Ilana Teitelbaum, Los Angeles Review of Books, 2014)",
+   "url": "https://lareviewofbooks.org/article/bright-home-dark-heart/",
+   "kind": "critic-essay",
+   "substantive": true
+  },
+  {
+   "title": "SFX reviews 1997: Assassin's Quest (David Langford, ansible.uk)",
+   "url": "https://ansible.uk/writing/sfxrev97.html#assassin",
+   "kind": "critic-review",
+   "substantive": true
+  },
+  {
+   "title": "Hobb, Robin (SF Encyclopedia, John Clute)",
+   "url": "https://sf-encyclopedia.com/entry/hobb_robin",
+   "kind": "reference-entry",
+   "substantive": true
+  },
+  {
+   "title": "How Robin Hobb's Assassin's Apprentice Pulls the Rug Out From Under You (Steven Erikson, Reactor, 2016)",
+   "url": "https://reactormag.com/how-robin-hobbs-assassins-apprentice-pulls-the-rug-out-from-under-you/",
+   "kind": "writer-on-writing-essay",
+   "substantive": true
+  },
+  {
+   "title": "Robin Hobb's Assassin's Apprentice and the Joy of Being Surprised (Erikson rerun, Reactor, 2022)",
+   "url": "https://reactormag.com/robin-hobbs-assassins-apprentice-and-the-joy-of-being-surprised/",
+   "kind": "writer-on-writing-essay",
+   "substantive": true
+  },
+  {
+   "title": "Assassins, Pirates, or Dragons: Where to Start With Robin Hobb (Molly Templeton, Reactor)",
+   "url": "https://reactormag.com/assassins-pirates-or-dragons-where-to-start-with-the-work-of-robin-hobb/",
+   "kind": "critic-overview",
+   "substantive": true
+  },
+  {
+   "title": "An Interview with Robin Hobb: Character Writing (Paw Print, Madalen Erez, 2020)",
+   "url": "https://cscsnews.com/744/literary-arts/an-interview-with-robin-hobb-character-writing/",
+   "kind": "interview",
+   "substantive": true
+  },
+  {
+   "title": "My interview with Robin Hobb (The Arched Doorway, 2014) — NOT READ: Cloudflare challenge, not bypassed",
+   "url": "https://archeddoorway.com/2014/11/24/robin-hobb-interview/",
+   "kind": "interview",
+   "substantive": false
+  },
+  {
+   "title": "Assassin's Apprentice – Robin Hobb (Looping Wor(l)d blog review)",
+   "url": "https://loopingworld.com/2025/09/22/assassins-apprentice-robin-hobb/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2025-09-22",
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "Assassin's Apprentice by Robin Hobb, reviewed by Laura M. Hughes (Fantasy-Hive)",
+   "url": "https://fantasy-hive.co.uk/2017/12/assassins-apprentice-robin-hobb/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2017-12-08",
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "Character is in the Details: Robin Hobb's Golden Fool, by Natasha Pulley (Tor.com/Reactor, 'That Was Awesome! Writers on Writing'); rerun 2022-03-22 as 'The Meticulous Character Details of Robin Hobb'",
+   "url": "https://reactormag.com/character-is-in-the-details-robin-hobbs-golden-fool/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2015-07-10",
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "How Robin Hobb's Assassin's Apprentice Pulls the Rug Out From Under You, by Steven Erikson (Tor.com/Reactor); rerun 2022-01-27 as 'Robin Hobb's Assassin's Apprentice and the Joy of Being Surprised'",
+   "url": "https://reactormag.com/how-robin-hobbs-assassins-apprentice-pulls-the-rug-out-from-under-you/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2016-04-27",
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "Assassin's Apprentice by Robin Hobb, reviewed by Adam Whitehead (The Wertzone)",
+   "url": "https://thewertzone.blogspot.com/2016/08/assassins-apprentice-by-robin-hobb.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2016-08-28",
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "Writing Excuses 11.Bonus-01: Characterization and Differentiation, with Robin Hobb (full transcript, recorded at GenCon Indy)",
+   "url": "https://writingexcuses.com/11-bonus-01-characterization-and-differentiation-with-robin-hobb/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2016",
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "How Robin Hobb Created a Legendary Hero in Fitzchivalry Farseer (The Huntress And The Wolf, Substack)",
+   "url": "https://thehuntressandthewolf.substack.com/p/how-robin-hobb-created-a-legendary",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2026-02-15",
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "Robin Hobb on changing cultures, writing about violence, and the anonymity of living on a farm, by Pauline Bock (New Statesman)",
+   "url": "https://www.newstatesman.com/long-reads/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2018-07-27",
+   "route": "Wayback raw capture (live URL returned 403 Varnish)"
+  },
+  {
+   "title": "My interview with Robin Hobb, by Rebecca Lovatt (The Arched Doorway) — transcript of an SFContario interview",
+   "url": "https://archeddoorway.com/2014/11/24/robin-hobb-interview/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2014-11-24",
+   "route": "Wayback raw capture (live URL returned an empty body)"
+  },
+  {
+   "title": "The Liveship Traders Series by Robin Hobb (no spoilers), by Lew Kelly (Fantasy-Faction)",
+   "url": "https://fantasy-faction.com/2014/the-liveship-traders-series-by-robin-hobb-no-spoilers",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2014-08-19",
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "The Liveship Traders Trilogy – Robin Hobb – Review (HearWriteNow)",
+   "url": "https://hearwritenow.com/reviews/fantasy/liveship/",
+   "kind": "analysis",
+   "substantive": true,
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "Robin Hobb's Writing Advice: 3 Tips for Crafting Your Villain, by Tayan Hatch (Dragonsteel Books, The Cognitive Realm) — quotes Hobb from Dragonsteel Nexus",
+   "url": "https://www.dragonsteelbooks.com/blogs/the-cognitive-realm/robin-hobb-writing-villians",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2024-12-19",
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "Book Review: The Liveship Traders by Robin Hobb (lexlingua, LiveJournal)",
+   "url": "https://lexlingua.livejournal.com/33522.html",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2012-06-13",
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "A Robin Hobb Rereading Series, Entry 1: Assassin's Apprentice, Chapter 1, by Geoffrey B. Elliott (medievalist; MA thesis on Hobb; the series runs to 539 entries as of Sept 2026)",
+   "url": "https://elliottrwi.com/2019/05/24/a-robin-hobb-rereading-series-entry-1-assassins-apprentice-chapter-1/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2019-05-24",
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "A Robin Hobb Rereading Series, Entry 226: Fool's Errand, Chapter 6, by Geoffrey B. Elliott",
+   "url": "https://elliottrwi.com/2021/09/10/a-robin-hobb-rereading-series-entry-226-fools-errand-chapter-6/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2021-09-10",
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "A Robin Hobb Rereading Series, Entry 315: Dragon Keeper, Front Matter, by Geoffrey B. Elliott",
+   "url": "https://elliottrwi.com/2022/07/15/a-robin-hobb-rereading-series-entry-315-dragon-keeper-front-matter/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2022-07-15",
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "A Robin Hobb Rereading Series, Entry 254: Golden Fool, Chapter 4, by Geoffrey B. Elliott",
+   "url": "https://elliottrwi.com/2021/12/01/a-robin-hobb-rereading-series-entry-254-golden-fool-chapter-4/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2021-12-01",
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "A Robin Hobb Rereading Series, Entry 26: Royal Assassin, Chapter 1, by Geoffrey B. Elliott",
+   "url": "https://elliottrwi.com/2019/08/30/a-robin-hobb-rereading-series-entry-26-royal-assassin-chapter-1/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2019-08-30",
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "Matthew Oliver, 'History in the Margins: Epigraphs and Negative Space in Robin Hobb's Assassin's Apprentice', Mythlore vol. 41 no. 1 (Fall/Winter 2022), article 4 — 21-page PDF; canonical landing page https://dc.swosu.edu/mythlore/vol41/iss1/4/",
+   "url": "https://web.archive.org/web/20240707045408id_/https://dc.swosu.edu/cgi/viewcontent.cgi?article=3044&context=mythlore",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2022-10",
+   "route": "Wayback raw PDF capture, text extracted with pdfminer (live viewcontent.cgi serves an HTML interstitial)"
+  },
+  {
+   "title": "Abstract page for Matthew Oliver, 'History in the Margins' (SWOSU Digital Commons, Mythlore 41.1)",
+   "url": "https://dc.swosu.edu/mythlore/vol41/iss1/4/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2022-10",
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "On the use of epigraphs and metanarratives in Robin Hobb's 'Assassin's Apprentice', by Jeffrey O (Substack)",
+   "url": "https://jeffreydavidoutcalt.substack.com/p/on-the-use-of-epigraphs-and-metanarratives",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2024-07-02",
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "Realm of the Elderlings: A Series Review (The Quaint Book Nook)",
+   "url": "https://thequaintbooknook.wordpress.com/2023/09/03/realm-of-the-elderlings-a-series-review/",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2023-09-03",
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "Reread and Review of Assassin's Apprentice by Robin Hobb (Omnilegent: A Need to Read)",
+   "url": "https://sassideeee.blog/2020/06/21/reread-and-review-of-assassins-apprentice-by-robin-hobb/",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2020-06-21",
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "What Works For Me, by Robin Hobb (robinhobb.com blog)",
+   "url": "https://www.robinhobb.com/blog/posts/40869",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2022-05-20",
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "Robin Hobb reviews collected under the Robin Hobb tag (Vacuous Wastrel blog) — long analytic reviews of The Golden Fool, Fool's Quest, Dragon Haven and others",
+   "url": "https://vacuouswastrel.wordpress.com/tag/robin-hobb/",
+   "kind": "analysis",
+   "substantive": true,
+   "route": "raw curl with browser user agent (tag archive page aggregating the individual reviews)"
+  },
+  {
+   "title": "Fool's Assassin: How Robin Hobb Writes Lyrical Fantasy Without Being Boring, by M Harold Page (Black Gate) — 'a dissection, not a review'",
+   "url": "https://www.blackgate.com/2016/02/09/fools-assassin-how-robin-hobb-writes-lyrical-fantasy-without-being-boring/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2016-02-09",
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "Book Review: Assassin's Apprentice by Robin Hobb (Grimdark Magazine) — general reception, nothing at the line level",
+   "url": "https://www.grimdarkmagazine.com/book-review-assassins-apprentice-robin-hobb/",
+   "kind": "reception",
+   "substantive": false,
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "Fantasy Buddy Reads: Realm of the Elderlings group-read topic (Goodreads reading group) — chatty, nothing at the line level",
+   "url": "https://www.goodreads.com/topic/show/22252480-realm-of-the-elderlings-series-2023-currently-reading-liveship-trade",
+   "kind": "reader",
+   "substantive": false,
+   "date": "2023",
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "Re-Read Review: Assassin's Apprentice by Robin Hobb (Once Upon a Bookcase) — thematic, not stylistic",
+   "url": "http://www.onceuponabookcase.co.uk/2022/05/reread-assassins-apprentice-hobb.html",
+   "kind": "reader",
+   "substantive": false,
+   "date": "2022-05",
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "It All Starts With The Writing, by Dan Jorgensen (A Writer's Moment, syndicated to Goodreads) — relays a Hobb quotation and George R.R. Martin's blurb",
+   "url": "https://www.goodreads.com/author_blog_posts/16571523-it-all-starts-with-the-writing",
+   "kind": "relay",
+   "substantive": false,
+   "date": "2018-03-23",
+   "route": "raw curl with browser user agent"
   }
  ],
  "verdicts": {

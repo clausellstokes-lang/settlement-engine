@@ -2,157 +2,157 @@
  "name": "dnd",
  "chunk": 35,
  "indices": [
-  574,
-  575,
-  576,
-  577,
-  578,
-  579,
-  580,
-  581,
-  582,
-  583,
-  584,
-  585,
-  586,
-  587,
-  588
+  679,
+  680,
+  681,
+  682,
+  683,
+  684,
+  685,
+  686,
+  687,
+  688,
+  689,
+  690,
+  691,
+  692,
+  693
  ],
  "claims": [
   {
-   "index": 574,
-   "feature": "stylometry",
-   "claim": "Garcia read and compared more than 5,500 pages of D&D and Pathfinder rulebook text across editions for his 2017 study.",
-   "source": "Antero Garcia, Mind, Culture, and Activity 24(3), 2017",
-   "url": "https://www.tandfonline.com/doi/abs/10.1080/10749039.2017.1293691",
-   "quote": "more than 5,500 pages",
-   "page": "Method / Context for study, p. 236"
+   "index": 679,
+   "feature": "other: authorial voice in rulebooks",
+   "claim": "James Maliszewski reports that Gygax demurred when told his voice was a dialect of Jack Vance's.",
+   "source": "James Maliszewski, 'High Gygaxian', Grognardia, 2009",
+   "url": "http://grognardia.blogspot.com/2009/02/high-gygaxian.html",
+   "quote": "I once told Gary my opinion on this and he demurred",
+   "page": "High Gygaxian"
   },
   {
-   "index": 575,
-   "feature": "edition and house style",
-   "claim": "The 1989 AD&D second edition defended its exclusive male pronoun as clear, concise and familiar in written material.",
-   "source": "David 'Zeb' Cook, AD&D 2nd ed. (1989) p. 9, quoted by Antero Garcia (2017)",
-   "url": "https://www.tandfonline.com/doi/abs/10.1080/10749039.2017.1293691",
-   "quote": "clear, concise, and familiar",
-   "page": "Gender construction and representation in D&D, p. 238"
+   "index": 680,
+   "feature": "other: authorial voice in rulebooks",
+   "claim": "James Maliszewski contrasts Gygax's florid prose with modern game books, which he says read like technical manuals.",
+   "source": "James Maliszewski, 'High Gygaxian', Grognardia, 2009",
+   "url": "http://grognardia.blogspot.com/2009/02/high-gygaxian.html",
+   "quote": "Modern game books read like what they are: technical manuals.",
+   "page": "High Gygaxian"
   },
   {
-   "index": 576,
-   "feature": "edition and house style",
-   "claim": "Garcia reports that D&D rulebooks stopped explaining their pronoun choice from the third edition (2000) onward.",
-   "source": "Antero Garcia, Mind, Culture, and Activity 24(3), 2017",
-   "url": "https://www.tandfonline.com/doi/abs/10.1080/10749039.2017.1293691",
-   "quote": "Explanations about pronouns would cease with later editions",
-   "page": "p. 238"
-  },
-  {
-   "index": 577,
+   "index": 681,
    "feature": "place and institution description",
-   "claim": "The 5e Player's Handbook tells the reader that nine human ethnic groups are widely recognized in the Forgotten Realms.",
-   "source": "D&D 5e Player's Handbook (2014) p. 30, quoted by Antero Garcia (2017)",
-   "url": "https://www.tandfonline.com/doi/abs/10.1080/10749039.2017.1293691",
-   "quote": "nine human ethnic groups are widely recognized",
-   "page": "p. 240"
+   "claim": "James Maliszewski holds up Gygax's description of the Vault of the Drow as more evocative than the place descriptions in contemporary adventures.",
+   "source": "James Maliszewski, 'High Gygaxian', Grognardia, 2009",
+   "url": "http://grognardia.blogspot.com/2009/02/high-gygaxian.html",
+   "quote": "you'll find few passages in contemporary adventures that are as evocative",
+   "page": "High Gygaxian"
   },
   {
-   "index": 578,
-   "feature": "place and institution description",
-   "claim": "The same 5e passage frames material culture and physical characteristics as varying by region.",
-   "source": "D&D 5e Player's Handbook (2014) p. 30, quoted by Antero Garcia (2017)",
-   "url": "https://www.tandfonline.com/doi/abs/10.1080/10749039.2017.1293691",
-   "quote": "change wildly from region to region",
-   "page": "p. 240"
+   "index": 682,
+   "feature": "boxed text form",
+   "claim": "Dyson Logos tells OSR adventure writers to get rid of boxed text.",
+   "source": "Dyson Logos, 'The Dreaded Boxed Text', Dyson's Dodecahedron, 2013",
+   "url": "https://dysonlogos.blog/2013/09/29/the-dreaded-boxed-text/",
+   "quote": "So, OSR adventure writers, get rid of the boxed text.",
+   "page": "The Dreaded Boxed Text"
   },
   {
-   "index": 579,
-   "feature": "other: named trait paragraph",
-   "claim": "The 5e half-orc entry carries a bolded named paragraph, 'Grudging Acceptance', describing how half-orcs are received by others.",
-   "source": "D&D 5e Player's Handbook (2014) p. 41, quoted by Antero Garcia (2017)",
-   "url": "https://www.tandfonline.com/doi/abs/10.1080/10749039.2017.1293691",
-   "quote": "Grudging Acceptance",
-   "page": "p. 240"
-  },
-  {
-   "index": 580,
-   "feature": "edition and house style",
-   "claim": "Gygax described Holmes's contribution to the 1977 Basic Set as the rewriting and editing that extracted a beginner's set from existing D&D texts.",
-   "source": "Gary Gygax, Dragon #14 (May 1978), compiled by Zach Howard, Zenopus Archives, 2013",
-   "url": "https://zenopusarchives.blogspot.com/2013/03/gygax-on-holmes.html",
-   "quote": "the rewriting and editing necessary to extract a",
-   "page": "May 1978 entry"
-  },
-  {
-   "index": 581,
-   "feature": "edition and house style",
-   "claim": "Gygax said TSR decided the original booklets needed a clarified introductory piece for a wider readership.",
-   "source": "Gary Gygax, Dragon #35 (March 1980), compiled by Zach Howard, Zenopus Archives, 2013",
-   "url": "https://zenopusarchives.blogspot.com/2013/03/gygax-on-holmes.html",
-   "quote": "clarified, introductory piece was needed",
-   "page": "March 1980 entry"
-  },
-  {
-   "index": 582,
-   "feature": "edition and house style",
-   "claim": "An RPGA interviewer in 1981 characterised Holmes's Basic Set as easier reading than the original set and Mentzer's as understandable by anyone willing to read it.",
-   "source": "RPGA interviewer (presumed Frank Mentzer), Polyhedron #1 (1981), compiled by Zach Howard",
-   "url": "https://zenopusarchives.blogspot.com/2013/03/gygax-on-holmes.html",
-   "quote": "a little bit easier",
-   "page": "Summer of 1981 entry"
-  },
-  {
-   "index": 583,
-   "feature": "edition and house style",
-   "claim": "Gygax judged Holmes's editorial work on the Basic Set favourably in a 2005 forum reply.",
-   "source": "Gary Gygax, EN World post 22 Feb 2005, compiled by Zach Howard",
-   "url": "https://zenopusarchives.blogspot.com/2013/03/gygax-on-holmes.html",
-   "quote": "fine bit of editing with the set",
-   "page": "2/22/05 entry"
-  },
-  {
-   "index": 584,
-   "feature": "civic record register",
-   "claim": "Trammell argues the aim of the orientalist register is encyclopedic knowledge of an imagined other.",
-   "source": "Aaron Trammell, Analog Game Studies III:1, January 2016",
-   "url": "https://analoggamestudies.org/2016/01/how-dungeons-dragons-appropriated-the-orient/",
-   "quote": "produce encyclopedic knowledge about an imagined and exotic other",
-   "page": "image caption, section on Orientalist texts"
-  },
-  {
-   "index": 585,
-   "feature": "place and institution description",
-   "claim": "Trammell criticises the reductionism by which one sourcebook is written as if a whole culture could be contained by a single text.",
-   "source": "Aaron Trammell, Analog Game Studies III:1, January 2016",
-   "url": "https://analoggamestudies.org/2016/01/how-dungeons-dragons-appropriated-the-orient/",
-   "quote": "contained by a single text",
-   "page": "Comeliness and Honor section"
-  },
-  {
-   "index": 586,
-   "feature": "place and institution description",
-   "claim": "Trammell shows Oriental Adventures gives elite occupations far more specific named detail than commoner ones.",
-   "source": "Aaron Trammell, Analog Game Studies III:1, January 2016",
-   "url": "https://analoggamestudies.org/2016/01/how-dungeons-dragons-appropriated-the-orient/",
-   "quote": "the culture of the common people is barely distinguishable",
-   "page": "non-weapon proficiencies section"
-  },
-  {
-   "index": 587,
-   "feature": "stylometry",
-   "claim": "A reader commenting on Trammell's essay attributes Oriental Adventures' authorship to David Cook on the evidence of its diction and style.",
-   "source": "Commenter on Aaron Trammell, Analog Game Studies, comment thread",
-   "url": "https://analoggamestudies.org/2016/01/how-dungeons-dragons-appropriated-the-orient/",
-   "quote": "Judging from the diction and style of the writing",
-   "page": "comments"
-  },
-  {
-   "index": 588,
+   "index": 683,
    "feature": "dm-facing sentence",
-   "claim": "Merwin advises putting information useful to the DM but not for players into an appendix.",
-   "source": "Shawn Merwin, 'Let's Design an Adventure: Outlines and Frameworks', D&D Beyond, 9 Oct 2019",
-   "url": "https://www.dndbeyond.com/posts/623-lets-design-an-adventure-outlines-and-frameworks",
-   "quote": "not meant to be seen by the players",
-   "page": "outline checklist"
+   "claim": "Dyson Logos proposes replacing read-aloud prose with a point-form list of the things seen in the room, so the DM can present them conversationally.",
+   "source": "Dyson Logos, 'The Dreaded Boxed Text', Dyson's Dodecahedron, 2013",
+   "url": "https://dysonlogos.blog/2013/09/29/the-dreaded-boxed-text/",
+   "quote": "replace it with a point-form list of things seen in the room",
+   "page": "The Dreaded Boxed Text"
+  },
+  {
+   "index": 684,
+   "feature": "boxed text form",
+   "claim": "Dyson Logos traces the arrival of read-aloud text in the 1e era to the tournament use of the early published adventures.",
+   "source": "Dyson Logos, 'The Dreaded Boxed Text', Dyson's Dodecahedron, 2013",
+   "url": "https://dysonlogos.blog/2013/09/29/the-dreaded-boxed-text/",
+   "quote": "I tend to blame this on the tournament usage",
+   "page": "The Dreaded Boxed Text"
+  },
+  {
+   "index": 685,
+   "feature": "other: key format",
+   "claim": "Bryce Lynch says the number one complaint about published adventures is that they are hard to run.",
+   "source": "Bryce Lynch, 'The Book Introduction', tenfootpole.org",
+   "url": "https://tenfootpole.org/ironspike/?page_id=9593",
+   "quote": "The number one complaint about published adventures",
+   "page": "The Book Introduction, opening"
+  },
+  {
+   "index": 686,
+   "feature": "dm-facing sentence",
+   "claim": "Bryce Lynch distinguishes writing for oneself, where the words are only a memory cue, from writing for a stranger.",
+   "source": "Bryce Lynch, 'The Book Introduction', tenfootpole.org",
+   "url": "https://tenfootpole.org/ironspike/?page_id=9593",
+   "quote": "The words on the page are only a memory cue",
+   "page": "The Book Introduction, third paragraph"
+  },
+  {
+   "index": 687,
+   "feature": "place and institution description",
+   "claim": "Bryce Lynch attributes dry and tedious encounters to the failed transfer of the writer's imagined scene into the reader's head.",
+   "source": "Bryce Lynch, 'The Book Introduction', tenfootpole.org",
+   "url": "https://tenfootpole.org/ironspike/?page_id=9593",
+   "quote": "leading to dry and tedious encounters",
+   "page": "The Book Introduction, fourth paragraph"
+  },
+  {
+   "index": 688,
+   "feature": "other: audience",
+   "claim": "Bryce Lynch frames his book as advice on writing an adventure for publication rather than for one's own table.",
+   "source": "Bryce Lynch, 'The Book Introduction', tenfootpole.org",
+   "url": "https://tenfootpole.org/ironspike/?page_id=9593",
+   "quote": "This book is advice on how to write an adventure for publication.",
+   "page": "The Book Introduction, second paragraph"
+  },
+  {
+   "index": 689,
+   "feature": "plainness and economy",
+   "claim": "Courtney Campbell's key format admits no word that is not important.",
+   "source": "Courtney Campbell, 'On Set Design', Hack & Slash, 2012",
+   "url": "http://hackslashmaster.blogspot.com/2012/06/on-set-design.html",
+   "quote": "Any word that is not important, is not used.",
+   "page": "On Set Design, explanation"
+  },
+  {
+   "index": 690,
+   "feature": "dm-facing sentence",
+   "claim": "Courtney Campbell's key replaces prose with bolded nouns, and he says he describes a room using only the bolded words.",
+   "source": "Courtney Campbell, 'On Set Design', Hack & Slash, 2012",
+   "url": "http://hackslashmaster.blogspot.com/2012/06/on-set-design.html",
+   "quote": "When describing things, I only use the bolded words!",
+   "page": "On Set Design, explanation"
+  },
+  {
+   "index": 691,
+   "feature": "plainness and economy",
+   "claim": "Courtney Campbell reports that his key gives him everything needed to run the tick encounter in seven words.",
+   "source": "Courtney Campbell, 'On Set Design', Hack & Slash, 2012",
+   "url": "http://hackslashmaster.blogspot.com/2012/06/on-set-design.html",
+   "quote": "everything I need to run the encounter successfully in seven words",
+   "page": "On Set Design, explanation"
+  },
+  {
+   "index": 692,
+   "feature": "other: seen in a glance",
+   "claim": "In Courtney Campbell's format the items placed after the bar are the ones immediately visible on entering.",
+   "source": "Courtney Campbell, 'On Set Design', Hack & Slash, 2012",
+   "url": "http://hackslashmaster.blogspot.com/2012/06/on-set-design.html",
+   "quote": "After the bar are the immediately visible items!",
+   "page": "On Set Design, explanation"
+  },
+  {
+   "index": 693,
+   "feature": "plainness and economy",
+   "claim": "Gabor Lux credits the classic modules with terse simplicity and language that is expressive but functional.",
+   "source": "Gabor Lux (Melan), 'OSR Module O1: Against the Ultra-Minimalism', Beyond Fomalhaut, 2017",
+   "url": "http://beyondfomalhaut.blogspot.com/2017/01/blog-osr-module-o1-against-ultra.html",
+   "quote": "terse simplicity, expressive but functional language, play-oriented presentation",
+   "page": "Against the Ultra-Minimalism, 'Know your enemy'"
   }
  ]
 }

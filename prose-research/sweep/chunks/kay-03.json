@@ -2,157 +2,157 @@
  "name": "kay",
  "chunk": 3,
  "indices": [
-  45,
-  46,
-  47,
-  48,
-  49,
-  50,
-  51,
-  52,
-  53,
-  54,
-  55,
-  56,
-  57,
-  58,
-  59
+  441,
+  442,
+  447,
+  450,
+  456,
+  457,
+  458,
+  459,
+  460,
+  461,
+  473,
+  477,
+  481,
+  484,
+  485
  ],
  "claims": [
   {
-   "index": 45,
-   "feature": "smaller, oblique work that lasts",
-   "claim": "Cobb notes Crispin's surviving second mosaic is on a smaller scale and more obliquely expressed, the novel implying that is why it lasts.",
-   "source": "Christopher Cobb, 'Guy Gavriel Kay and the Psychology of History', Foundation (Summer 2005), reprinted on Bright Weavings",
-   "url": "https://brightweavings.com/hspsychologyhistory/",
-   "quote": "on a smaller scale and more obliquely expressed",
-   "page": ""
+   "index": 441,
+   "feature": "other: competing versions of one story",
+   "claim": "Kay says the vast gulf between how the Uskoks were seen by Venice and Dubrovnik and how they understood themselves is very fertile ground for a novelist.",
+   "source": "Guy Gavriel Kay, interviewed by Chris Urie, Clarkesworld issue 117",
+   "url": "https://clarkesworldmagazine.com/kay_interview/",
+   "quote": "That kind of gap is very fertile ground for a novelist",
+   "page": "answer on the Uskoks"
   },
   {
-   "index": 46,
-   "feature": "human smallness before history",
-   "claim": "Cobb contrasts Kay's sense of proportion, the smallness of the human being in relation to the world, with Silverberg's hero who masters history.",
-   "source": "Christopher Cobb, 'Guy Gavriel Kay and the Psychology of History', Foundation (Summer 2005), reprinted on Bright Weavings",
-   "url": "https://brightweavings.com/hspsychologyhistory/",
-   "quote": "the smallness of the human being in relation to the world",
-   "page": ""
+   "index": 442,
+   "feature": "other: under-explored corners of the record",
+   "claim": "Kay says he likes finding corners of history that have been under-explored.",
+   "source": "Guy Gavriel Kay, interviewed by Chris Urie, Clarkesworld issue 117",
+   "url": "https://clarkesworldmagazine.com/kay_interview/",
+   "quote": "I like finding corners of history that have been under-explored",
+   "page": "answer on the Uskoks"
   },
   {
-   "index": 47,
-   "feature": "variable internal focalization share",
-   "claim": "Töyrylä estimates about sixty per cent of Tigana is focalized through Devin or Dianora, with at least nineteen other identifiable focal characters and most chapters alternating three or more perspectives.",
-   "source": "Roosa Töyrylä, 'Ambiguities and Divided Loyalties: Focalization in Guy Gavriel Kay's Tigana' (BA thesis, University of Helsinki, 2017)",
+   "index": 447,
+   "feature": "other: not talking down to the reader",
+   "claim": "Kay says he is drawn to intelligent characters and gets irritated if he feels too much smarter than the characters, unless that is done with purpose.",
+   "source": "Guy Gavriel Kay, interviewed by Patrick St-Denis (fantasyhotlist)",
+   "url": "https://brightweavings.com/patrick/",
+   "quote": "I get irritated if I feel too much smarter than the characters",
+   "page": "answer on extraordinary individuals"
+  },
+  {
+   "index": 450,
+   "feature": "dialogue register",
+   "claim": "McBean writes that in Kay's dialogue emotion is often conveyed by what is not said.",
+   "source": "Chris McBean, The Rowanwood Chronicles blog, 24 December 2025",
+   "url": "https://therowanwoodchronicles.blog/2025/12/24/fantasy-as-memory-the-historical-imagination-of-guy-gavriel-kay/",
+   "quote": "Emotion is often conveyed by what is not said.",
+   "page": "section 'Dialogue as character and culture'"
+  },
+  {
+   "index": 456,
+   "feature": "other: worldview rendered as the inhabitants hold it",
+   "claim": "Kay says the fantastic lets him make the world be as his characters believe it to be.",
+   "source": "Guy Gavriel Kay, interviewed by Christine Fischer Guy, Los Angeles Review of Books, 14 August 2016",
+   "url": "https://lareviewofbooks.org/article/fantastic-worlds-guy-gavriel-kay/",
+   "quote": "make the world be as my characters believe it to be",
+   "page": "answer to 'How else does the fantastic serve your purposes?'"
+  },
+  {
+   "index": 457,
+   "feature": "other: worldview rendered as the inhabitants hold it",
+   "claim": "Kay says a modern reader tends to a smug, patronising attitude toward the past, and that presenting the world as the characters believe it removes that smugness.",
+   "source": "Guy Gavriel Kay, interviewed by Christine Fischer Guy, Los Angeles Review of Books, 14 August 2016",
+   "url": "https://lareviewofbooks.org/article/fantastic-worlds-guy-gavriel-kay/",
+   "quote": "it removes that smugness from the reader",
+   "page": "answer to 'How else does the fantastic serve your purposes?'"
+  },
+  {
+   "index": 458,
+   "feature": "other: signalling the invented world",
+   "claim": "Kay says he has used two moons in several books as a signal to the reader that the setting is not our world.",
+   "source": "Guy Gavriel Kay, interviewed by Christine Fischer Guy, Los Angeles Review of Books, 14 August 2016",
+   "url": "https://lareviewofbooks.org/article/fantastic-worlds-guy-gavriel-kay/",
+   "quote": "The two moons say, We’re not here",
+   "page": "answer about setting the rules of engagement"
+  },
+  {
+   "index": 459,
+   "feature": "other: history-shaped invention",
+   "claim": "Kay says that if a reader can pick out what is made up and what is real, the storytelling has been botched.",
+   "source": "Guy Gavriel Kay, interviewed by Christine Fischer Guy, Los Angeles Review of Books, 14 August 2016",
+   "url": "https://lareviewofbooks.org/article/fantastic-worlds-guy-gavriel-kay/",
+   "quote": "if a reader can pick out what’s made up and what’s real",
+   "page": "answer about the Hilary Mantel review"
+  },
+  {
+   "index": 460,
+   "feature": "other: distance from the past",
+   "claim": "Kay says the past is, for him, staggeringly alien, and that writers about the past should acknowledge and work with that.",
+   "source": "Guy Gavriel Kay, interviewed by Christine Fischer Guy, Los Angeles Review of Books, 14 August 2016",
+   "url": "https://lareviewofbooks.org/article/fantastic-worlds-guy-gavriel-kay/",
+   "quote": "it’s also, for me, staggeringly alien",
+   "page": "answer about the Huxley quotation"
+  },
+  {
+   "index": 461,
+   "feature": "diction (native vs latinate)",
+   "claim": "The interviewer Christine Fischer Guy writes that a reverence for language runs through everything Kay writes.",
+   "source": "Christine Fischer Guy (interviewer's framing), Los Angeles Review of Books, 14 August 2016",
+   "url": "https://lareviewofbooks.org/article/fantastic-worlds-guy-gavriel-kay/",
+   "quote": "A reverence for language runs through everything he writes.",
+   "page": "interviewer's introduction"
+  },
+  {
+   "index": 473,
+   "feature": "other: approximate figures in a report",
+   "claim": "Toyryla notes that the narrator gives an approximate number of the dead in the Senzio massacre rather than an exact one.",
+   "source": "Roosa Toyryla, BA thesis, University of Helsinki, 2017, hosted at BrightWeavings",
    "url": "https://brightweavings.com/ambiguities-and-divided-loyalties-focalization-in-guy-gavriel-kays-tigana/",
-   "quote": "About sixty per cent of the text",
-   "page": ""
+   "quote": "The approximate number of the dead could also point",
+   "page": "section 'Narratorial Focalization: All-seeing but Indifferent'"
   },
   {
-   "index": 48,
-   "feature": "narrated monologue amplifies emotion",
-   "claim": "Töyrylä shows Dianora's passages use free indirect thought with the character's own metaphors, deictics and incomplete sentences, amplifying the emotional notes.",
-   "source": "Roosa Töyrylä, 'Ambiguities and Divided Loyalties: Focalization in Guy Gavriel Kay's Tigana' (BA thesis, University of Helsinki, 2017)",
+   "index": 477,
+   "feature": "other: minor lives as world texture",
+   "claim": "Toyryla argues that focalizing a passage through the Governor of Stevanien strengthens the illusion of a world full of other stories around the one the novel is about.",
+   "source": "Roosa Toyryla, BA thesis, University of Helsinki, 2017, hosted at BrightWeavings",
    "url": "https://brightweavings.com/ambiguities-and-divided-loyalties-focalization-in-guy-gavriel-kays-tigana/",
-   "quote": "incomplete sentences point in the direction of the character",
-   "page": ""
+   "quote": "the illusion of there being a world full of other stories",
+   "page": "section 'Minor Characters as Focal Characters'"
   },
   {
-   "index": 49,
-   "feature": "polysyndetic verb chains",
-   "claim": "Töyrylä points to the long list of verbs ('battered and levelled and burned... and killed... and taken away') as the character's voice inside the narration.",
-   "source": "Roosa Töyrylä, 'Ambiguities and Divided Loyalties: Focalization in Guy Gavriel Kay's Tigana' (BA thesis, University of Helsinki, 2017)",
-   "url": "https://brightweavings.com/ambiguities-and-divided-loyalties-focalization-in-guy-gavriel-kays-tigana/",
-   "quote": "the long list of verbs",
-   "page": ""
+   "index": 481,
+   "feature": "other: magic quantity across the oeuvre",
+   "claim": "Walton describes a trajectory away from magic across Kay's books, with Fionavar full of magic, Tigana less, Arbonne less again, and The Lions of Al-Rassan containing nothing but an accurate prophecy.",
+   "source": "Jo Walton, Tor.com, 6 August 2010",
+   "url": "https://reactormag.com/provencal-fantasy-guy-gavriel-kays-a-song-for-arbonne/",
+   "quote": "nothing but an accurate prophecy",
+   "page": "third paragraph"
   },
   {
-   "index": 50,
-   "feature": "antagonist as focal character",
-   "claim": "Töyrylä notes Alberico is a regular focal character, which humanises him with frustration and fear without making him sympathetic.",
-   "source": "Roosa Töyrylä, 'Ambiguities and Divided Loyalties: Focalization in Guy Gavriel Kay's Tigana' (BA thesis, University of Helsinki, 2017)",
-   "url": "https://brightweavings.com/ambiguities-and-divided-loyalties-focalization-in-guy-gavriel-kays-tigana/",
-   "quote": "Using the antagonist as a focal character makes him",
-   "page": ""
+   "index": 484,
+   "feature": "other: signalling the invented world",
+   "claim": "Nepveu identifies a throw-away line in the prologue of Sailing to Sarantium, a sandalmaker's having seen a ghost, as the first signal that the book is not a straight historical.",
+   "source": "Kate Nepveu, steelypips.org, 12 May 1999",
+   "url": "https://www.steelypips.org/reviews/sarantium.html",
+   "quote": "a throw-away line in the prologue is the first signal",
+   "page": "third paragraph"
   },
   {
-   "index": 51,
-   "feature": "multiple focalization of one scene",
-   "claim": "Töyrylä analyses the Ring Dive as narrated twice or thrice through Devin, Dianora and Alessan, with contradictory readings of Brandin's expressionless face.",
-   "source": "Roosa Töyrylä, 'Ambiguities and Divided Loyalties: Focalization in Guy Gavriel Kay's Tigana' (BA thesis, University of Helsinki, 2017)",
-   "url": "https://brightweavings.com/ambiguities-and-divided-loyalties-focalization-in-guy-gavriel-kays-tigana/",
-   "quote": "some of the events are narrated twice or even thrice",
-   "page": ""
-  },
-  {
-   "index": 52,
-   "feature": "withheld focal character",
-   "claim": "Töyrylä shows Rhun is never a focal character until the final pages, enabling the Valentin twist while other focalizants register him in passing.",
-   "source": "Roosa Töyrylä, 'Ambiguities and Divided Loyalties: Focalization in Guy Gavriel Kay's Tigana' (BA thesis, University of Helsinki, 2017)",
-   "url": "https://brightweavings.com/ambiguities-and-divided-loyalties-focalization-in-guy-gavriel-kays-tigana/",
-   "quote": "the focalization unexpectedly shifts to him",
-   "page": ""
-  },
-  {
-   "index": 53,
-   "feature": "minor focalizant then flat execution",
-   "claim": "Töyrylä reads the innkeeper Ettocio: focalized for a few pages, then a shift to narratorial focalization enables the matter-of-fact description of his execution.",
-   "source": "Roosa Töyrylä, 'Ambiguities and Divided Loyalties: Focalization in Guy Gavriel Kay's Tigana' (BA thesis, University of Helsinki, 2017)",
-   "url": "https://brightweavings.com/ambiguities-and-divided-loyalties-focalization-in-guy-gavriel-kays-tigana/",
-   "quote": "enables the matter-of-fact description of his execution",
-   "page": ""
-  },
-  {
-   "index": 54,
-   "feature": "indifferent narrator, minimal commentary",
-   "claim": "Töyrylä finds narratorial passages are matter-of-fact description with only minimal commentary (e.g. 'Unfortunately'), denying readers a guiding moral voice.",
-   "source": "Roosa Töyrylä, 'Ambiguities and Divided Loyalties: Focalization in Guy Gavriel Kay's Tigana' (BA thesis, University of Helsinki, 2017)",
-   "url": "https://brightweavings.com/ambiguities-and-divided-loyalties-focalization-in-guy-gavriel-kays-tigana/",
-   "quote": "matter-of-fact description with only minimal commentary",
-   "page": ""
-  },
-  {
-   "index": 55,
-   "feature": "report-style summary of violence",
-   "claim": "Töyrylä notes the Senzio courtyard slaughter is narrated in summary with 'according to most reports later' and approximate casualties, the narrator restricting omniscience to what becomes known.",
-   "source": "Roosa Töyrylä, 'Ambiguities and Divided Loyalties: Focalization in Guy Gavriel Kay's Tigana' (BA thesis, University of Helsinki, 2017)",
-   "url": "https://brightweavings.com/ambiguities-and-divided-loyalties-focalization-in-guy-gavriel-kays-tigana/",
-   "quote": "the narrator is merely reporting what happened, without any commentary",
-   "page": ""
-  },
-  {
-   "index": 56,
-   "feature": "'as everyone knows' communal viewpoint",
-   "claim": "Töyrylä identifies a narrator who reports what the world seems like to an average inhabitant, adopting the Palm's religious stance ('as everyone knows') and using 'word went forth' to mislead truthfully.",
-   "source": "Roosa Töyrylä, 'Ambiguities and Divided Loyalties: Focalization in Guy Gavriel Kay's Tigana' (BA thesis, University of Helsinki, 2017)",
-   "url": "https://brightweavings.com/ambiguities-and-divided-loyalties-focalization-in-guy-gavriel-kays-tigana/",
-   "quote": "reporting what the world seems like to an average person",
-   "page": ""
-  },
-  {
-   "index": 57,
-   "feature": "intermental / group focalization with irony",
-   "claim": "Töyrylä analyses tavern-patron and Astibar-town passages focalized through a group, combining sardonic tone with dramatic irony since readers know more.",
-   "source": "Roosa Töyrylä, 'Ambiguities and Divided Loyalties: Focalization in Guy Gavriel Kay's Tigana' (BA thesis, University of Helsinki, 2017)",
-   "url": "https://brightweavings.com/ambiguities-and-divided-loyalties-focalization-in-guy-gavriel-kays-tigana/",
-   "quote": "a sardonic tone is combined with the deeper level irony",
-   "page": ""
-  },
-  {
-   "index": 58,
-   "feature": "truthful misdirection at the opening",
-   "claim": "Töyrylä argues Kay's 'outright lie' opening is not a lie: the narrator says only that word went forth of Sandre's death.",
-   "source": "Roosa Töyrylä, 'Ambiguities and Divided Loyalties: Focalization in Guy Gavriel Kay's Tigana' (BA thesis, University of Helsinki, 2017)",
-   "url": "https://brightweavings.com/ambiguities-and-divided-loyalties-focalization-in-guy-gavriel-kays-tigana/",
-   "quote": "the narrator does not claim that Sandre is dead",
-   "page": ""
-  },
-  {
-   "index": 59,
-   "feature": "authorial aim: ambiguities and divided loyalties",
-   "claim": "Töyrylä quotes Kay's afterword that Tigana aimed to stretch the reader with ambiguities and divided loyalties in a genre that tends not to work that way.",
-   "source": "Roosa Töyrylä, 'Ambiguities and Divided Loyalties: Focalization in Guy Gavriel Kay's Tigana' (BA thesis, University of Helsinki, 2017)",
-   "url": "https://brightweavings.com/ambiguities-and-divided-loyalties-focalization-in-guy-gavriel-kays-tigana/",
-   "quote": "to stretch the reader with ambiguities and divided loyalties",
-   "page": ""
+   "index": 485,
+   "feature": "other: proleptic aside",
+   "claim": "The Speculiction reviewer identifies as a habit of Kay's middle period numerous throwaway lines that flash forward to a later consequence.",
+   "source": "Jesse, 'Review of Sailing to Sarantium by Guy Gavriel Kay', Speculiction, 6 May 2014",
+   "url": "http://speculiction.blogspot.com/2014/05/review-of-sailing-to-sarantium-by-guy.html",
+   "quote": "there are numerous throwaway lines to the effect",
+   "page": "paragraph beginning 'Forever utilizing the patient voice'"
   }
  ]
 }

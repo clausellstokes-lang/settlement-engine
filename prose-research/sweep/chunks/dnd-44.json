@@ -2,157 +2,157 @@
  "name": "dnd",
  "chunk": 44,
  "indices": [
-  709,
-  710,
-  711,
-  712,
-  713,
-  714,
-  715,
-  716,
-  717,
-  718,
-  719,
-  720,
-  721,
-  722,
-  723
+  814,
+  815,
+  816,
+  817,
+  818,
+  819,
+  820,
+  821,
+  822,
+  823,
+  824,
+  825,
+  826,
+  827,
+  828
  ],
  "claims": [
   {
-   "index": 709,
-   "feature": "edition and house style",
-   "claim": "Justin Alexander says the delve format artificially isolates the encounter from its context and so defeats its own purpose.",
-   "source": "Justin Alexander, 'Are We Really This Stupid?', The Alexandrian, 2011",
-   "url": "https://thealexandrian.net/wordpress/1217/roleplaying-games/are-we-really-this-stupid",
-   "quote": "it artificially isolates the “encounter”",
-   "page": "Are We Really This Stupid?, 'Isolated Encounters'"
+   "index": 814,
+   "feature": "diction (native vs latinate)",
+   "claim": "The same essay characterises Gygax's prose as resembling a baroque sermon.",
+   "source": "Serban Ionita, 'The Shadowed Old Gods of Game Design', The RPG Gazette, 2025",
+   "url": "https://therpggazette.wordpress.com/2025/11/11/the-shadowed-old-gods-of-game-design-remembering-holmes-moldvay-and-mentzer/",
+   "quote": "whose prose resembled a baroque sermon",
+   "page": "section 'The Teacher: Frank Mentzer'"
   },
   {
-   "index": 710,
+   "index": 815,
+   "feature": "omission as information",
+   "claim": "The essay says Moldvay's adventures implied a cosmology, a history and a mood through their placement of statues, monsters and ruins.",
+   "source": "Serban Ionita, 'The Shadowed Old Gods of Game Design', The RPG Gazette, 2025",
+   "url": "https://therpggazette.wordpress.com/2025/11/11/the-shadowed-old-gods-of-game-design-remembering-holmes-moldvay-and-mentzer/",
+   "quote": "Each adventure implied a cosmology, a history, and a mood",
+   "page": "section 'The poet: Tom Moldvay'"
+  },
+  {
+   "index": 816,
+   "feature": "place and institution description",
+   "claim": "The essay says Moldvay's adventures communicated worldviews rather than merely offering maps.",
+   "source": "Serban Ionita, 'The Shadowed Old Gods of Game Design', The RPG Gazette, 2025",
+   "url": "https://therpggazette.wordpress.com/2025/11/11/the-shadowed-old-gods-of-game-design-remembering-holmes-moldvay-and-mentzer/",
+   "quote": "These adventures communicated worldviews, rather than merely offering maps",
+   "page": "section 'The poet: Tom Moldvay'"
+  },
+  {
+   "index": 817,
+   "feature": "stylometry",
+   "claim": "Deterding and Zagal place the study of textuality, authorship and narrative in RPGs with literary and media scholars in the 2000s.",
+   "source": "Sebastian Deterding and Jose P. Zagal, 'The Many Faces of Role-Playing Game Studies', in Role-Playing Game Studies (Routledge 2018)",
+   "url": "https://eprints.whiterose.ac.uk/id/eprint/147044/1/Deterding_Zagal_Many_Faces_RPG_Studies.pdf",
+   "quote": "textuality, authorship, and narrative in RPGs",
+   "page": "section on the history of RPG studies"
+  },
+  {
+   "index": 818,
+   "feature": "other: scholarly field map",
+   "claim": "Deterding and Zagal credit Peterson and Appelcline, independent authors, with the substantial historiographies of tabletop role-playing games.",
+   "source": "Sebastian Deterding and Jose P. Zagal, 'The Many Faces of Role-Playing Game Studies', in Role-Playing Game Studies (Routledge 2018)",
+   "url": "https://eprints.whiterose.ac.uk/id/eprint/147044/1/Deterding_Zagal_Many_Faces_RPG_Studies.pdf",
+   "quote": "have produced substantial historiographies of the emergence and evolution",
+   "page": "section on the history of RPG studies"
+  },
+  {
+   "index": 819,
+   "feature": "withheld information and inference",
+   "claim": "A D&D Beyond article credits Carl Sargent with implying terrifying things through a few carefully chosen words in Iuz the Evil.",
+   "source": "John Roy, 'Greyhawk Returns in the 2024 Dungeon Master's Guide', D&D Beyond, 2024",
+   "url": "https://www.dndbeyond.com/posts/1834-greyhawk-returns-in-the-2024-dungeon-masters-guide",
+   "quote": "implying terrifying things with a few carefully chosen words",
+   "page": "section 'Getting into Greyhawk'"
+  },
+  {
+   "index": 820,
+   "feature": "civic record register",
+   "claim": "The article says Gygax's settlement populations and locations followed real-world economic maxims.",
+   "source": "John Roy, 'Greyhawk Returns in the 2024 Dungeon Master's Guide', D&D Beyond, 2024",
+   "url": "https://www.dndbeyond.com/posts/1834-greyhawk-returns-in-the-2024-dungeon-masters-guide",
+   "quote": "His settlement populations and locations followed real-world economic maxims",
+   "page": "section 'Keeping It Real'"
+  },
+  {
+   "index": 821,
+   "feature": "civic record register",
+   "claim": "The article says Gygax gave each nation its imports, exports and the trade routes used to carry them.",
+   "source": "John Roy, 'Greyhawk Returns in the 2024 Dungeon Master's Guide', D&D Beyond, 2024",
+   "url": "https://www.dndbeyond.com/posts/1834-greyhawk-returns-in-the-2024-dungeon-masters-guide",
+   "quote": "each nation's imports and exports and the trade routes they used",
+   "page": "section 'Keeping It Real'"
+  },
+  {
+   "index": 822,
+   "feature": "place and institution description",
+   "claim": "The 2024 Dungeon Master's Guide gazetteer highlights dozens of locations across the Flanaess.",
+   "source": "John Roy, 'Greyhawk Returns in the 2024 Dungeon Master's Guide', D&D Beyond, 2024",
+   "url": "https://www.dndbeyond.com/posts/1834-greyhawk-returns-in-the-2024-dungeon-masters-guide",
+   "quote": "highlights dozens of locations across the Flanaess",
+   "page": "section 'Keeping It Real'"
+  },
+  {
+   "index": 823,
    "feature": "dm-facing sentence",
-   "claim": "Justin Alexander asks publishers to trust DMs rather than pre-programming every monster's behaviour in the text.",
-   "source": "Justin Alexander, 'Are We Really This Stupid?', The Alexandrian, 2011",
-   "url": "https://thealexandrian.net/wordpress/1217/roleplaying-games/are-we-really-this-stupid",
-   "quote": "publishers can put a little more trust in DMs",
-   "page": "Are We Really This Stupid?, 'Encounters on the Fly'"
+   "claim": "The article tells DMs to emphasise in their descriptions that Oerth is a world much like our own late Middle Ages.",
+   "source": "John Roy, 'Greyhawk Returns in the 2024 Dungeon Master's Guide', D&D Beyond, 2024",
+   "url": "https://www.dndbeyond.com/posts/1834-greyhawk-returns-in-the-2024-dungeon-masters-guide",
+   "quote": "emphasize that this is a world much like our own",
+   "page": "section 'Giving Greyhawk: DMing in Gygax's World'"
   },
   {
-   "index": 711,
-   "feature": "other: key format",
-   "claim": "Brendan of Necropraxis describes the dominant published format as areas written out in lengthy proper English prose.",
-   "source": "Brendan (Necropraxis), 'Improved area keys', 2013",
-   "url": "http://www.necropraxis.com/2013/12/07/improved-area-keys/",
-   "quote": "Areas are described in lengthy, proper english prose.",
-   "page": "Improved area keys"
+   "index": 824,
+   "feature": "place and institution description",
+   "claim": "A reviewer says the 2024 DMG's Greyhawk material serves as a prime example of what a setting can look like.",
+   "source": "brimmels, 'In-Depth Review of the 2024 Dungeon Master's Guide', EN World, 2024",
+   "url": "https://www.enworld.org/threads/in-depth-review-of-the-2024-dungeon-masters-guide.707861/",
+   "quote": "it's a prime example of what a setting can look like",
+   "page": "section on the settings chapter"
   },
   {
-   "index": 712,
-   "feature": "other: read-play gap",
-   "claim": "Brendan of Necropraxis grants that well-written prose modules are pleasurable to read.",
-   "source": "Brendan (Necropraxis), 'Improved area keys', 2013",
-   "url": "http://www.necropraxis.com/2013/12/07/improved-area-keys/",
-   "quote": "pleasurable to read (if well-written)",
-   "page": "Improved area keys"
-  },
-  {
-   "index": 713,
-   "feature": "other: read-play gap",
-   "claim": "Brendan of Necropraxis says the same prose modules are cumbersome to use in play.",
-   "source": "Brendan (Necropraxis), 'Improved area keys', 2013",
-   "url": "http://www.necropraxis.com/2013/12/07/improved-area-keys/",
-   "quote": "quite cumbersome to use in play",
-   "page": "Improved area keys"
-  },
-  {
-   "index": 714,
+   "index": 825,
    "feature": "plainness and economy",
-   "claim": "Brendan of Necropraxis objects that Courtney Campbell's outline key, though usable, lacks poetry.",
-   "source": "Brendan (Necropraxis), 'Improved area keys', 2013",
-   "url": "http://www.necropraxis.com/2013/12/07/improved-area-keys/",
-   "quote": "it lacks poetry",
-   "page": "Improved area keys"
+   "claim": "Zeb Cook says TSR's early module settings were held to no more than what would fit on a page.",
+   "source": "David 'Zeb' Cook, Kobold Press world building seminar transcript, part 1, 2025",
+   "url": "https://koboldpress.com/world-building-design-seminar-with-wolfgang-baur-zeb-cook-and-richard-green-part-1/",
+   "quote": "We made no more than what we could put on a page",
+   "page": "first exchange on models of world building"
   },
   {
-   "index": 715,
-   "feature": "dm-facing sentence",
-   "claim": "Brendan of Necropraxis keeps running prose but bolds the features the referee needs immediately.",
-   "source": "Brendan (Necropraxis), 'Improved area keys', 2013",
-   "url": "http://www.necropraxis.com/2013/12/07/improved-area-keys/",
-   "quote": "I bold the immediately relevant features.",
-   "page": "Improved area keys"
+   "index": 826,
+   "feature": "place and institution description",
+   "claim": "Cook says every early TSR module required a quick setting created only so the module could be explained.",
+   "source": "David 'Zeb' Cook, Kobold Press world building seminar transcript, part 1, 2025",
+   "url": "https://koboldpress.com/world-building-design-seminar-with-wolfgang-baur-zeb-cook-and-richard-green-part-1/",
+   "quote": "For every module, you had to create a quick setting",
+   "page": "first exchange on models of world building"
   },
   {
-   "index": 716,
-   "feature": "boxed text form",
-   "claim": "Brendan of Necropraxis faults boxed text for separating a thing's first impression from its elaboration further down the page.",
-   "source": "Brendan (Necropraxis), 'Improved area keys', 2013",
-   "url": "http://www.necropraxis.com/2013/12/07/improved-area-keys/",
-   "quote": "separated the initial impression (“treasure chest”) from elaboration",
-   "page": "Improved area keys"
+   "index": 827,
+   "feature": "omission as information",
+   "claim": "Cook reports readers wrote in convinced TSR held much more setting material than the page contained.",
+   "source": "David 'Zeb' Cook, Kobold Press world building seminar transcript, part 1, 2025",
+   "url": "https://koboldpress.com/world-building-design-seminar-with-wolfgang-baur-zeb-cook-and-richard-green-part-1/",
+   "quote": "You obviously have a whole bunch more",
+   "page": "first exchange on models of world building"
   },
   {
-   "index": 717,
-   "feature": "other: seen in a glance",
-   "claim": "Brendan of Necropraxis says the aim of bolding is that the referee can take in the area with a glance.",
-   "source": "Brendan (Necropraxis), 'Improved area keys', 2013",
-   "url": "http://www.necropraxis.com/2013/12/07/improved-area-keys/",
-   "quote": "take in the area with a glance",
-   "page": "Improved area keys"
-  },
-  {
-   "index": 718,
-   "feature": "plainness and economy",
-   "claim": "On his worked example Brendan of Necropraxis reports the text that must be read is cut by more than half without degrading the prose.",
-   "source": "Brendan (Necropraxis), 'Improved area keys', 2013",
-   "url": "http://www.necropraxis.com/2013/12/07/improved-area-keys/",
-   "quote": "cut down by more than half",
-   "page": "Improved area keys"
-  },
-  {
-   "index": 719,
-   "feature": "boxed text form",
-   "claim": "Reviewing a 2006 DCC module, Gabor Lux says much boxed text and follow-up writing are expended to say relatively little.",
-   "source": "Gabor Lux (Melan), '[REVIEW] Halls of the Minotaur', Beyond Fomalhaut, 2018",
-   "url": "http://beyondfomalhaut.blogspot.com/2018/03/review-halls-of-minotaur.html",
-   "quote": "much boxed text and followup writing are expended to say relatively little",
-   "page": "Halls of the Minotaur review"
-  },
-  {
-   "index": 720,
-   "feature": "other: read-play gap",
-   "claim": "Gabor Lux reports that the same module played better at the table than it read on the page.",
-   "source": "Gabor Lux (Melan), '[REVIEW] Halls of the Minotaur', Beyond Fomalhaut, 2018",
-   "url": "http://beyondfomalhaut.blogspot.com/2018/03/review-halls-of-minotaur.html",
-   "quote": "It really did play better than it reads",
-   "page": "Halls of the Minotaur review"
-  },
-  {
-   "index": 721,
-   "feature": "boxed text form",
-   "claim": "Bryce Lynch's rule in a 2026 review is that read-aloud should never be long.",
-   "source": "Bryce Lynch, review of 'The Swan Hollow Intrigue', tenfootpole.org, 2026",
-   "url": "https://tenfootpole.org/ironspike/?p=10575",
-   "quote": "Read-aloud should never be long",
-   "page": "Swan Hollow Intrigue review"
-  },
-  {
-   "index": 722,
-   "feature": "other: read-aloud delivery",
-   "claim": "Bryce Lynch says long read-aloud makes players lose focus and reach for their phones.",
-   "source": "Bryce Lynch, review of 'The Swan Hollow Intrigue', tenfootpole.org, 2026",
-   "url": "https://tenfootpole.org/ironspike/?p=10575",
-   "quote": "Long read-aloud causes players to loose focus",
-   "page": "Swan Hollow Intrigue review"
-  },
-  {
-   "index": 723,
-   "feature": "edition and house style",
-   "claim": "Bryce Lynch says long passages set in italics are cognitively hard to read.",
-   "source": "Bryce Lynch, review of 'The Swan Hollow Intrigue', tenfootpole.org, 2026",
-   "url": "https://tenfootpole.org/ironspike/?p=10575",
-   "quote": "Long italics is hard to read, cognitively.",
-   "page": "Swan Hollow Intrigue review"
+   "index": 828,
+   "feature": "register modulation",
+   "claim": "Baur says the most important thing to know about world building is who you are doing it for.",
+   "source": "Wolfgang Baur, Kobold Press world building seminar transcript, part 1, 2025",
+   "url": "https://koboldpress.com/world-building-design-seminar-with-wolfgang-baur-zeb-cook-and-richard-green-part-1/",
+   "quote": "the most important thing to know about world building is, who",
+   "page": "opening exchange"
   }
  ]
 }

@@ -2,157 +2,157 @@
  "name": "ai",
  "chunk": 26,
  "indices": [
-  644,
-  645,
-  646,
-  647,
-  648,
-  649,
-  650,
-  651,
-  652,
-  653,
-  654,
-  655,
-  656,
-  657,
-  658
+  894,
+  895,
+  896,
+  897,
+  898,
+  899,
+  900,
+  901,
+  902,
+  903,
+  904,
+  905,
+  906,
+  907,
+  908
  ],
  "claims": [
   {
-   "index": 644,
-   "feature": "homogenisation",
-   "claim": "Preston reports that Brenda's developers touted her unrelenting consistency as a feature, claiming that because she said the same thing to everyone she was incapable of bias.",
-   "source": "Laura Preston, former chatbot operator, n+1 Issue 44, 2022, reporting the developers' claim",
-   "url": "https://www.nplusonemag.com/issue-44/essays/human_fallback/",
-   "quote": "The developers touted her unrelenting consistency as a feature",
-   "page": "section beginning \"Brenda's cyclical catchphrases\""
-  },
-  {
-   "index": 645,
-   "feature": "abstraction over the concrete",
-   "claim": "Preston reports that neither she nor Brenda could answer prospects' specific questions such as carpet or hardwood and which direction the windows faced, and that specifics were what people cared about most.",
-   "source": "Laura Preston, former chatbot operator, n+1 Issue 44, 2022",
-   "url": "https://www.nplusonemag.com/issue-44/essays/human_fallback/",
-   "quote": "specifics, it turns out, were what people cared about the most",
-   "page": "section beginning \"The unfortunate truth\""
-  },
-  {
-   "index": 646,
+   "index": 894,
    "feature": "reader and expert judgment",
-   "claim": "Preston reports that when Brenda sounded odd and graceless, people were less likely to get intimate with her, which reduced the number of conversations escalated to a human.",
-   "source": "Laura Preston, former chatbot operator, n+1 Issue 44, 2022",
-   "url": "https://www.nplusonemag.com/issue-44/essays/human_fallback/",
-   "quote": "when Brenda sounded odd and graceless, people were less likely to get intimate",
-   "page": "section beginning \"Eventually I reached a level of virtuosity\""
+   "claim": "The WikiProject warns that humans are notoriously bad at distinguishing human and LLM-generated text and cites a 2025 study finding human ability no better than chance.",
+   "source": "WikiProject AI Cleanup, Wikipedia:Signs of AI writing, version of 6 September 2026",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "Humans are notoriously bad at distinguishing human and LLM-generated text.",
+   "page": "section 'Caveats', subsection 'Your detection ability'"
   },
   {
-   "index": 647,
-   "feature": "detection and its failures",
-   "claim": "Clarke reports that even AI works that have been co-written or given a polishing edit to disguise them still display the hallmarks he has come to expect.",
-   "source": "Neil Clarke, editor of Clarkesworld, Editor's Desk, August 2025",
-   "url": "https://clarkesworldmagazine.com/clarke_08_25/",
-   "quote": "they still display the hallmarks I",
-   "page": "para. beginning \"In many cases, these works have been 'co-written'\""
-  },
-  {
-   "index": 648,
-   "feature": "detection and its failures",
-   "claim": "Clarke states parenthetically that the tells of generated fiction are more obvious on longer works, which is why some AI flash fiction and poetry has found publication elsewhere.",
-   "source": "Neil Clarke, editor of Clarkesworld, Editor's Desk, August 2025",
-   "url": "https://clarkesworldmagazine.com/clarke_08_25/",
-   "quote": "the tells are more obvious on longer works",
-   "page": "para. beginning \"In many cases, these works have been 'co-written'\""
-  },
-  {
-   "index": 649,
+   "index": 895,
    "feature": "reader and expert judgment",
-   "claim": "Clarke describes the AI systems writers co-write with as having produced some of the worst stories he has read.",
-   "source": "Neil Clarke, editor of Clarkesworld, Editor's Desk, August 2025",
-   "url": "https://clarkesworldmagazine.com/clarke_08_25/",
-   "quote": "some of the worst stories I",
-   "page": "para. beginning \"If any of that makes you nervous\""
+   "claim": "The WikiProject cites a 2025 preprint finding that heavy users of LLMs correctly determine whether an article was AI-generated about 90% of the time, while light users did only slightly better than chance.",
+   "source": "WikiProject AI Cleanup relaying a 2025 preprint, Wikipedia:Signs of AI writing",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "heavy users of LLMs can correctly determine whether an article was",
+   "page": "section 'Caveats', subsection 'Your detection ability'"
   },
   {
-   "index": 650,
+   "index": 896,
    "feature": "detection and its failures",
-   "claim": "Clarke reports that at the peak of the generated-submission surge Clarkesworld's submissions more than doubled.",
-   "source": "Neil Clarke, editor of Clarkesworld, Editor's Desk, August 2025",
-   "url": "https://clarkesworldmagazine.com/clarke_08_25/",
-   "quote": "our submissions more than doubled due to the high volume of generated works",
-   "page": "para. beginning \"The good news is that the adaptations\""
+   "claim": "The WikiProject advises against relying solely on AI-detection tools such as GPTZero and Pangram because they have non-trivial error rates and are susceptible to paraphrasing and markup changes.",
+   "source": "WikiProject AI Cleanup, Wikipedia:Signs of AI writing, version of 6 September 2026",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "these tools have non-trivial error rates",
+   "page": "section 'Caveats', subsection 'AI detection tools'"
   },
   {
-   "index": 651,
-   "feature": "detection and its failures",
-   "claim": "Clarke reports that when he evaluated commercial detection tools he observed an even greater error rate on works written by non-native English speakers.",
-   "source": "Neil Clarke, editor of Clarkesworld, Editor's Desk, August 2025",
-   "url": "https://clarkesworldmagazine.com/clarke_08_25/",
-   "quote": "an even greater error rate when it came to works written by non-native English speakers",
-   "page": "para. beginning \"I was already thinking ahead\""
+   "index": 897,
+   "feature": "other: sensory language attached to the immaterial",
+   "claim": "Sam Kriss argues that AI works sensory language into its prose but, lacking an anchor in the real world, attaches all of it to the immaterial.",
+   "source": "Sam Kriss, The New York Times Magazine, 2025",
+   "url": "https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html",
+   "quote": "all of its sensory language ends up getting attached to the immaterial",
+   "page": "section after the Woolf 'plateful of blue water' passage"
   },
   {
-   "index": 652,
-   "feature": "detection and its failures",
-   "claim": "Clarke states that he would never trust an algorithm to make a final assessment and personally evaluates each submission his automated check flags as suspicious.",
-   "source": "Neil Clarke, editor of Clarkesworld, personal blog, 2 May 2025",
-   "url": "https://neil-clarke.com/how-ai-submissions-have-changed-our-submissions-process/",
-   "quote": "I would never trust an algorithm to make a final assessment",
-   "page": "para. beginning \"No process is perfect\""
+   "index": 898,
+   "feature": "lexical tells",
+   "claim": "Kriss reports that AI-generated fiction is obsessed with ghosts and that in machine-written fiction everything is spectral, a shadow, a memory or a whisper.",
+   "source": "Sam Kriss, The New York Times Magazine, 2025",
+   "url": "https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html",
+   "quote": "In machine-written fiction, everything is spectral.",
+   "page": "section beginning 'But if you task an A.I. with the production of culture itself'"
   },
   {
-   "index": 653,
-   "feature": "reader and expert judgment",
-   "claim": "Clarke states that setting aside legal and ethical concerns, the output of generative AI tools is nowhere near the standards Clarkesworld expects.",
-   "source": "Neil Clarke, editor of Clarkesworld, personal blog, 2 May 2025",
-   "url": "https://neil-clarke.com/how-ai-submissions-have-changed-our-submissions-process/",
-   "quote": "the output of these tools is nowhere near the standards we expect",
-   "page": "closing section, para. beginning \"And repeated from the previous post\""
+   "index": 899,
+   "feature": "lexical tells",
+   "claim": "Kriss reports that AI fiction describes things as quiet or softly humming for no obvious reason and often against the logic of the narrative.",
+   "source": "Sam Kriss, The New York Times Magazine, 2025",
+   "url": "https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html",
+   "quote": "They also love quietness.",
+   "page": "same section"
   },
   {
-   "index": 654,
-   "feature": "other: abstract-concrete conjunction (eyeball kick)",
-   "claim": "nostalgebraist claims the main stylistic hallmark shared by DeepSeek-R1 and an unreleased OpenAI creative-writing model is the conjunction of one thing that is abstract or incorporeal with another that is concrete or sensory.",
-   "source": "nostalgebraist, blogger and ML researcher, Tumblr, March 2025",
-   "url": "https://www.tumblr.com/nostalgebraist/778041178124926976/hydrogen-jukeboxes",
-   "quote": "one thing that is abstract and/or incorporeal",
-   "page": "section \"A mechanical boot, a human eye\""
+   "index": 900,
+   "feature": "other: measured tell count in one generated story",
+   "claim": "Kriss counted seven words in the roughly 1,100-word ChatGPT story Sam Altman presented as evidence of creative-writing ability: quiet, hum, humming, echo twice, liminal and ghosts.",
+   "source": "Sam Kriss, The New York Times Magazine, 2025",
+   "url": "https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html",
+   "quote": "A.I.s are absolutely obsessed with ghosts",
+   "page": "same section, discussing Altman's metafictional short story"
   },
   {
-   "index": 655,
+   "index": 901,
+   "feature": "other: reaching for the marker of a quality instead of the quality",
+   "claim": "Kriss's mechanism for the tells is that the model is constantly tickling the Simpsons: knowing good writing is subtle, it screams at the top of its voice that everything is subtle and quiet.",
+   "source": "Sam Kriss, The New York Times Magazine, 2025",
+   "url": "https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html",
+   "quote": "it’s constantly tickling the Simpsons",
+   "page": "section following the ChatGPT-5 examples"
+  },
+  {
+   "index": 902,
+   "feature": "other: overfitting as the mechanism",
+   "claim": "Kriss names overfitting as the technical term for the pattern in which the model reproduces a marker correlated with a quality instead of the quality itself.",
+   "source": "Sam Kriss, The New York Times Magazine, 2025",
+   "url": "https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html",
+   "quote": "The technical term for this is “overfitting,”",
+   "page": "section following the Simpsons anecdote"
+  },
+  {
+   "index": 903,
+   "feature": "punctuation tics",
+   "claim": "Kriss's explanation for the em dash is that within training data it appears more often in texts marked as well-formed, high-quality prose.",
+   "source": "Sam Kriss, The New York Times Magazine, 2025",
+   "url": "https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html",
+   "quote": "the em dash is more likely to appear in texts",
+   "page": "section on the em dash"
+  },
+  {
+   "index": 904,
    "feature": "steerability",
-   "claim": "nostalgebraist reports that R1 kept producing abstract/concrete conjunctions in spite of user-specified stylistic directions, including prompts to imitate named literary authors.",
-   "source": "nostalgebraist, blogger and ML researcher, Tumblr, March 2025",
-   "url": "https://www.tumblr.com/nostalgebraist/778041178124926976/hydrogen-jukeboxes",
-   "quote": "R1 even consistently does this in spite of user-specified stylistic directions",
-   "page": "section \"A mechanical boot, a human eye\""
+   "claim": "Kriss reports that telling a model directly to stop using em dashes typically produces an agreement that itself contains em dashes.",
+   "source": "Sam Kriss, The New York Times Magazine, 2025",
+   "url": "https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html",
+   "quote": "But it’s strangely hard to get rid of them.",
+   "page": "section on the em dash"
   },
   {
-   "index": 656,
-   "feature": "steerability",
-   "claim": "nostalgebraist reports that the one pastiche free of the abstract/concrete tell was the Hemingway attempt, which he attributes to Hemingway having a distinctive and constrained style leaving no room for such flourishes.",
-   "source": "nostalgebraist, blogger and ML researcher, Tumblr, March 2025",
-   "url": "https://www.tumblr.com/nostalgebraist/778041178124926976/hydrogen-jukeboxes",
-   "quote": "presumably because Hemingway himself has a distinctive and constrained style",
-   "page": "section \"A mechanical boot, a human eye\", parenthesis after the pastiche list"
+   "index": 905,
+   "feature": "lexical tells",
+   "claim": "Kriss reports that asked for science fiction the model has an uncanny habit of naming the protagonist Elara Voss, with Kael the usual male name, and that hundreds of self-published Amazon books now use those names where before 2023 there were none.",
+   "source": "Sam Kriss, The New York Times Magazine, 2025",
+   "url": "https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html",
+   "quote": "an uncanny habit of naming the protagonist Elara Voss",
+   "page": "section on overfitting and word choice"
   },
   {
-   "index": 657,
-   "feature": "uniform rhythm (low burstiness)",
-   "claim": "nostalgebraist describes this crammed prose as having no modulation and no room to breathe, an unrelenting stream of gee-whiz effects.",
-   "source": "nostalgebraist, blogger and ML researcher, Tumblr, March 2025",
-   "url": "https://www.tumblr.com/nostalgebraist/778041178124926976/hydrogen-jukeboxes",
-   "quote": "no modulation, no room to breathe",
-   "page": "section \"A mechanical boot, a human eye\""
+   "index": 906,
+   "feature": "lexical tells",
+   "claim": "Kriss reports that in PubMed abstracts the word delve appeared in roughly one in every 10,000 abstracts in 2022 and that by 2024 usage had shot up by 2,700 percent.",
+   "source": "Sam Kriss reporting published research, The New York Times Magazine, 2025",
+   "url": "https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html",
+   "quote": "By 2024, usage had shot up by 2,700 percent.",
+   "page": "section on word choice"
   },
   {
-   "index": 658,
-   "feature": "homogenisation",
-   "claim": "nostalgebraist guesses that the shared style of two unrelated models is convergent evolution, what happens if you optimize for human judgments of literary quality in a generic way.",
-   "source": "nostalgebraist, blogger and ML researcher, Tumblr, March 2025",
-   "url": "https://www.tumblr.com/nostalgebraist/778041178124926976/hydrogen-jukeboxes",
-   "quote": "maybe this is just what happens if you optimize for human judgments",
-   "page": "section \"Background: the new OpenAI model\""
+   "index": 907,
+   "feature": "other: rule of three",
+   "claim": "Kriss asserts that AI is extremely fixated on the rule of threes and that in fiction it swaps the not-X-but-Y form for a more literary No X. No Y. Just Z.",
+   "source": "Sam Kriss, The New York Times Magazine, 2025",
+   "url": "https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html",
+   "quote": "A.I. is also extremely fixated on the rule of threes.",
+   "page": "section on AI's rhetoric"
+  },
+  {
+   "index": 908,
+   "feature": "discourse-level tells",
+   "claim": "Kriss names as a tic that the model stops midway through a sentence to ask itself a question, more often in conversation than in generated essays.",
+   "source": "Sam Kriss, The New York Times Magazine, 2025",
+   "url": "https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html",
+   "quote": "stopping midway through a sentence to ask itself a question",
+   "page": "section on AI's rhetoric"
   }
  ]
 }

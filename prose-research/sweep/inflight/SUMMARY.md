@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 13:56:12 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 14:00:13 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -265,8 +265,8 @@
 | kay | critic |  | failed | 0 | — | — | 12:27:27 |
 | kay | finder | academic | result | 76 | claims.json, sources.json | 52 claims, complete=True @12:23:25 | 12:27:22 |
 | kay | finder | close | failed | 91 | — | 102 claims, complete=True @08:27:06 | 12:27:07 |
-| kay | finder | craft | result | 112 | — | 283 claims, complete=True @13:18:49 | 17:25:51 |
-| kay | finder | craft | failed | 76 | — | 283 claims, complete=True @13:18:49 | 12:26:47 |
+| kay | finder | craft | result | 112 | — | 163 claims, complete=True @14:00:13 | 17:25:51 |
+| kay | finder | craft | failed | 76 | — | 163 claims, complete=True @14:00:13 | 12:26:47 |
 | kay | finder | voice | result | 86 | — | 105 claims, complete=True @12:23:25 | 12:20:20 |
 | kay | regrade | regrade-r3c | failed | 0 | — | — | 12:27:25 |
 | kay | regrade | regrade-r4 | failed | 0 | — | — | 17:51:50 |

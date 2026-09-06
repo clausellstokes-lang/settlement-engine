@@ -2,157 +2,157 @@
  "name": "dnd",
  "chunk": 43,
  "indices": [
-  694,
-  695,
-  696,
-  697,
-  698,
-  699,
-  700,
-  701,
-  702,
-  703,
-  704,
-  705,
-  706,
-  707,
-  708
+  799,
+  800,
+  801,
+  802,
+  803,
+  804,
+  805,
+  806,
+  807,
+  808,
+  809,
+  810,
+  811,
+  812,
+  813
  ],
  "claims": [
   {
-   "index": 694,
-   "feature": "other: authorial voice in rulebooks",
-   "claim": "Gabor Lux argues that how an adventure is told matters as well as what is told.",
-   "source": "Gabor Lux (Melan), 'OSR Module O1: Against the Ultra-Minimalism', Beyond Fomalhaut, 2017",
-   "url": "http://beyondfomalhaut.blogspot.com/2017/01/blog-osr-module-o1-against-ultra.html",
-   "quote": "it also matters how it gets told",
-   "page": "Against the Ultra-Minimalism, 'The Keep on the Borderlands without...'"
+   "index": 799,
+   "feature": "withheld information and inference",
+   "claim": "Merwin locates drama in the dissonance between what characters know entering an encounter and what they learn inside it.",
+   "source": "Shawn Merwin, 'Let's Design an Adventure: Encounter Basics', D&D Beyond, 2019",
+   "url": "https://www.dndbeyond.com/posts/626-lets-design-an-adventure-encounter-basics",
+   "quote": "There is drama and tension in the dissonance between the information",
+   "page": "section 'Known Information'"
   },
   {
-   "index": 695,
+   "index": 800,
+   "feature": "dm-facing sentence",
+   "claim": "Peterson says In Search of the Unknown carried starting guidance on running an adventure absent from the then-current D&D books.",
+   "source": "Jon Peterson, Game Wizards (MIT Press 2021), excerpt published by Polygon",
+   "url": "https://www.polygon.com/2021/10/12/22722602/dungeons-dragons-game-wizards-book-excerpt-jon-peterson-arneson-lawsuit",
+   "quote": "useful starting guidance on running an adventure that you wouldn’t find",
+   "page": "paragraph 1 of the excerpt"
+  },
+  {
+   "index": 801,
+   "feature": "edition and house style",
+   "claim": "Peterson says much of Carr's text on the art of dungeon mastering was effectively paraphrased in Gygax's Keep on the Borderlands.",
+   "source": "Jon Peterson, Game Wizards (MIT Press 2021), excerpt published by Polygon",
+   "url": "https://www.polygon.com/2021/10/12/22722602/dungeons-dragons-game-wizards-book-excerpt-jon-peterson-arneson-lawsuit",
+   "quote": "enlightening text about the art of dungeon mastering was effectively paraphrased",
+   "page": "paragraph beginning 'It was then that Gygax apparently grasped'"
+  },
+  {
+   "index": 802,
+   "feature": "edition and house style",
+   "claim": "Peterson dates the start of modules as a business for TSR to the summer of 1978.",
+   "source": "Jon Peterson, Game Wizards (MIT Press 2021), excerpt published by Polygon",
+   "url": "https://www.polygon.com/2021/10/12/22722602/dungeons-dragons-game-wizards-book-excerpt-jon-peterson-arneson-lawsuit",
+   "quote": "Modules only started to become a business for TSR in the summer",
+   "page": "paragraph 1 of the excerpt"
+  },
+  {
+   "index": 803,
+   "feature": "other: circulation of the register",
+   "claim": "Peterson reports Keep on the Borderlands selling 750,000 copies a year at the height of the 1981 boom.",
+   "source": "Jon Peterson, Game Wizards (MIT Press 2021), excerpt published by Polygon",
+   "url": "https://www.polygon.com/2021/10/12/22722602/dungeons-dragons-game-wizards-book-excerpt-jon-peterson-arneson-lawsuit",
+   "quote": "selling 750,000 copies a year",
+   "page": "final paragraph"
+  },
+  {
+   "index": 804,
+   "feature": "terminology consistency",
+   "claim": "Peterson notes Arneson still wrote armour class values in Roman numerals in his 1977 tournament documents.",
+   "source": "Jon Peterson, 'Dave Arneson's Origins 1977 Tournament', Playing at the World, 2020",
+   "url": "https://playingattheworld.blogspot.com/2020/04/dave-arnesons-origins-1977-tournament.html",
+   "quote": "Arneson still wrote armor class values with Roman numerals",
+   "page": "final paragraph"
+  },
+  {
+   "index": 805,
+   "feature": "diction (native vs latinate)",
+   "claim": "A long-form reader writeup describes the D&D Gazetteer line's language as casual and informal.",
+   "source": "Rulebook Heavily, 'Dungeons & Dragons Gazetteer' writeup, RPG Writeups",
+   "url": "https://writeups.letsyouandhimfight.com/rulebook-heavily/dungeonsanddragons-gazetteer/",
+   "quote": "The language is casual and informal",
+   "page": "Introduction, 'The Base Rules'"
+  },
+  {
+   "index": 806,
    "feature": "plainness and economy",
-   "claim": "Gabor Lux argues that ultra-minimalism strips flavour, depth and inner complexity out of game texts.",
-   "source": "Gabor Lux (Melan), 'OSR Module O1: Against the Ultra-Minimalism', Beyond Fomalhaut, 2017",
-   "url": "http://beyondfomalhaut.blogspot.com/2017/01/blog-osr-module-o1-against-ultra.html",
-   "quote": "Ultra-Minimalism is stripping games of their flavour, depth and inner complexity",
-   "page": "Against the Ultra-Minimalism, opening"
+   "claim": "The same writeup says the Gazetteers make their points quickly and efficiently.",
+   "source": "Rulebook Heavily, 'Dungeons & Dragons Gazetteer' writeup, RPG Writeups",
+   "url": "https://writeups.letsyouandhimfight.com/rulebook-heavily/dungeonsanddragons-gazetteer/",
+   "quote": "points are made quickly and efficiently",
+   "page": "Introduction, 'The Base Rules'"
   },
   {
-   "index": 696,
-   "feature": "other: authorial voice in rulebooks",
-   "claim": "Gabor Lux says stylistic elements technically superfluous to an encounter give a game text a voice that sticks in the imagination.",
-   "source": "Gabor Lux (Melan), 'OSR Module O1: Against the Ultra-Minimalism', Beyond Fomalhaut, 2017",
-   "url": "http://beyondfomalhaut.blogspot.com/2017/01/blog-osr-module-o1-against-ultra.html",
-   "quote": "a voice that speaks to us and sticks",
-   "page": "Against the Ultra-Minimalism, 'The Keep on the Borderlands without...'"
+   "index": 807,
+   "feature": "plainness and economy",
+   "claim": "GAZ1 The Grand Duchy of Karameikos runs to 64 pages plus maps.",
+   "source": "Rulebook Heavily, 'Dungeons & Dragons Gazetteer' writeup, RPG Writeups",
+   "url": "https://writeups.letsyouandhimfight.com/rulebook-heavily/dungeonsanddragons-gazetteer/",
+   "quote": "The first one clocks in at a mere 64 pages plus maps",
+   "page": "Introduction, 'The Base Rules'"
   },
   {
-   "index": 697,
+   "index": 808,
+   "feature": "register modulation",
+   "claim": "The writeup says GAZ1's chapter of place descriptions is meant mostly for players rather than the DM.",
+   "source": "Rulebook Heavily, 'Dungeons & Dragons Gazetteer' writeup, RPG Writeups",
+   "url": "https://writeups.letsyouandhimfight.com/rulebook-heavily/dungeonsanddragons-gazetteer/",
+   "quote": "The descriptions in this chapter are mostly meant for players",
+   "page": "Gaz 1 Part 4: The Lay of the Land"
+  },
+  {
+   "index": 809,
+   "feature": "civic record register",
+   "claim": "GAZ1 gives Specularum an official census of 50.000 taken fifteen years before the setting's present.",
+   "source": "Rulebook Heavily, 'Dungeons & Dragons Gazetteer' writeup, RPG Writeups",
+   "url": "https://writeups.letsyouandhimfight.com/rulebook-heavily/dungeonsanddragons-gazetteer/",
+   "quote": "the official census of 50.000 was taken 15 years ago",
+   "page": "Gaz 1 Part 4, the cities of Karameikos"
+  },
+  {
+   "index": 810,
    "feature": "place and institution description",
-   "claim": "Gabor Lux says The Village of Hommlet paints an idyllic rural community by dwelling on random details that do not matter in an adventure.",
-   "source": "Gabor Lux (Melan), 'OSR Module O1: Against the Ultra-Minimalism', Beyond Fomalhaut, 2017",
-   "url": "http://beyondfomalhaut.blogspot.com/2017/01/blog-osr-module-o1-against-ultra.html",
-   "quote": "spending much of its time talking about random details",
-   "page": "Against the Ultra-Minimalism, 'Know your enemy'"
+   "claim": "In GAZ1 some notable places of Karameikos merit only a paragraph of description.",
+   "source": "Rulebook Heavily, 'Dungeons & Dragons Gazetteer' writeup, RPG Writeups",
+   "url": "https://writeups.letsyouandhimfight.com/rulebook-heavily/dungeonsanddragons-gazetteer/",
+   "quote": "Some merit only a paragraph",
+   "page": "Gaz 1 Part 4, the cities of Karameikos"
   },
   {
-   "index": 698,
-   "feature": "edition and house style",
-   "claim": "Gabor Lux says layout and graphic design can improve accessibility but do not replace style.",
-   "source": "Gabor Lux (Melan), 'OSR Module O1: Against the Ultra-Minimalism', Beyond Fomalhaut, 2017",
-   "url": "http://beyondfomalhaut.blogspot.com/2017/01/blog-osr-module-o1-against-ultra.html",
-   "quote": "it doesn’t replace style",
-   "page": "Against the Ultra-Minimalism, 'The Keep on the Borderlands without...'"
-  },
-  {
-   "index": 699,
-   "feature": "other: read-play gap",
-   "claim": "Gabor Lux says the large Pathfinder and 5e publishers produce encounters that read well and play terribly.",
-   "source": "Gabor Lux (Melan), 'Aid, Not Replacement', Beyond Fomalhaut, 2018",
-   "url": "http://beyondfomalhaut.blogspot.com/2018/03/blog-aid-not-replacement.html",
-   "quote": "encounters which read well but play terribly",
-   "page": "Aid, Not Replacement"
-  },
-  {
-   "index": 700,
-   "feature": "other: aid not replacement",
-   "claim": "Gabor Lux revives T. Foster's slogan that a published game text is a creativity aid, not a creativity replacement.",
-   "source": "Gabor Lux (Melan), 'Aid, Not Replacement', Beyond Fomalhaut, 2018",
-   "url": "http://beyondfomalhaut.blogspot.com/2018/03/blog-aid-not-replacement.html",
-   "quote": "Creativity aid, not creativity replacement",
-   "page": "Aid, Not Replacement"
-  },
-  {
-   "index": 701,
+   "index": 811,
    "feature": "plainness and economy",
-   "claim": "Tad Davis proposes a middle way between maximalist and minimalist keys resting on a skillful application of economy.",
-   "source": "Tad Davis, 'On Useful Dungeon Key Entries', ars phantasia, 2013",
-   "url": "https://arsphantasia.wordpress.com/2013/12/05/on-useful-dungeon-key-entries/",
-   "quote": "a skillful application of the principle of economy",
-   "page": "On Useful Dungeon Key Entries, 'A Via Media'"
+   "claim": "An essayist characterises J. Eric Holmes's Basic Set prose as dispassionate, methodical and encouraging.",
+   "source": "Serban Ionita, 'The Shadowed Old Gods of Game Design', The RPG Gazette, 2025",
+   "url": "https://therpggazette.wordpress.com/2025/11/11/the-shadowed-old-gods-of-game-design-remembering-holmes-moldvay-and-mentzer/",
+   "quote": "His prose is dispassionate, methodical, and encouraging",
+   "page": "section 'The Translotar: J. Eric Holmes'"
   },
   {
-   "index": 702,
-   "feature": "boxed text form",
-   "claim": "Tad Davis reports the minimalist camp's argument that read-aloud descriptions take too much time and bore players.",
-   "source": "Tad Davis, 'On Useful Dungeon Key Entries', ars phantasia, 2013",
-   "url": "https://arsphantasia.wordpress.com/2013/12/05/on-useful-dungeon-key-entries/",
-   "quote": "take up too much time and bore players to tears",
-   "page": "On Useful Dungeon Key Entries, 'Assessing the Two Approaches'"
-  },
-  {
-   "index": 703,
-   "feature": "boxed text form",
-   "claim": "Tad Davis declines to eliminate boxed text, valuing it as a way of partitioning the information meant for players.",
-   "source": "Tad Davis, 'On Useful Dungeon Key Entries', ars phantasia, 2013",
-   "url": "https://arsphantasia.wordpress.com/2013/12/05/on-useful-dungeon-key-entries/",
-   "quote": "not convinced that we should completely eliminate the boxed text",
-   "page": "On Useful Dungeon Key Entries, 'Assessing the Two Approaches'"
-  },
-  {
-   "index": 704,
-   "feature": "other: key format",
-   "claim": "Tad Davis says that navigating walls of text costs time even when the page is well laid out.",
-   "source": "Tad Davis, 'On Useful Dungeon Key Entries', ars phantasia, 2013",
-   "url": "https://arsphantasia.wordpress.com/2013/12/05/on-useful-dungeon-key-entries/",
-   "quote": "navigating the walls of text takes time",
-   "page": "On Useful Dungeon Key Entries, 'Assessing the Two Approaches'"
-  },
-  {
-   "index": 705,
-   "feature": "concrete sensory noun",
-   "claim": "cygnus rewrites each key with a one to two sentence description touching the five senses.",
-   "source": "cygnus, 'Rewriting Dungeon Keys', The Lady and Tiger, 2023",
-   "url": "https://theladyandtiger.com/2023/11/30/rewriting-dungeon-keys/",
-   "quote": "Short description (one to two sentences), highlighting the 5 senses.",
-   "page": "Rewriting Dungeon Keys, 'The Key'"
-  },
-  {
-   "index": 706,
-   "feature": "other: seen in a glance",
-   "claim": "cygnus says focusing on what the characters can immediately perceive is what keeps the description from rambling.",
-   "source": "cygnus, 'Rewriting Dungeon Keys', The Lady and Tiger, 2023",
-   "url": "https://theladyandtiger.com/2023/11/30/rewriting-dungeon-keys/",
-   "quote": "focusing on what the characters can immediately perceive",
-   "page": "Rewriting Dungeon Keys"
-  },
-  {
-   "index": 707,
+   "index": 812,
    "feature": "edition and house style",
-   "claim": "cygnus names the Old-School Essentials house style for adventure writing as one of the two models for his rewritten keys.",
-   "source": "cygnus, 'Rewriting Dungeon Keys', The Lady and Tiger, 2023",
-   "url": "https://theladyandtiger.com/2023/11/30/rewriting-dungeon-keys/",
-   "quote": "the Old-School Essentials house style for adventure writing",
-   "page": "Rewriting Dungeon Keys"
+   "claim": "The same essay calls the original 1974 boxed set's text dense and peculiar.",
+   "source": "Serban Ionita, 'The Shadowed Old Gods of Game Design', The RPG Gazette, 2025",
+   "url": "https://therpggazette.wordpress.com/2025/11/11/the-shadowed-old-gods-of-game-design-remembering-holmes-moldvay-and-mentzer/",
+   "quote": "The text in the set was dense and peculiar",
+   "page": "section 'The Translotar: J. Eric Holmes'"
   },
   {
-   "index": 708,
-   "feature": "other: reference layout",
-   "claim": "Justin Alexander says the one thing he loves about the delve format is putting everything needed to run an area in that area's description.",
-   "source": "Justin Alexander, 'Are We Really This Stupid?', The Alexandrian, 2011",
-   "url": "https://thealexandrian.net/wordpress/1217/roleplaying-games/are-we-really-this-stupid",
-   "quote": "Putting everything you need to run an encounter area in the description",
-   "page": "Are We Really This Stupid?, 'Isolated Encounters'"
+   "index": 813,
+   "feature": "plainness and economy",
+   "claim": "The same essay calls Tom Moldvay's 1981 Basic text both efficient and lyrical.",
+   "source": "Serban Ionita, 'The Shadowed Old Gods of Game Design', The RPG Gazette, 2025",
+   "url": "https://therpggazette.wordpress.com/2025/11/11/the-shadowed-old-gods-of-game-design-remembering-holmes-moldvay-and-mentzer/",
+   "quote": "Moldvay’s text seems both efficient and lyrical",
+   "page": "section 'The poet: Tom Moldvay'"
   }
  ]
 }

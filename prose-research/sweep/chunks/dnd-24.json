@@ -2,157 +2,157 @@
  "name": "dnd",
  "chunk": 24,
  "indices": [
-  409,
-  410,
-  411,
-  412,
-  413,
-  414,
-  415,
-  416,
-  417,
-  418,
-  419,
-  420,
-  421,
-  422,
-  423
+  514,
+  515,
+  516,
+  517,
+  518,
+  519,
+  520,
+  521,
+  522,
+  523,
+  524,
+  525,
+  526,
+  527,
+  528
  ],
  "claims": [
   {
-   "index": 409,
-   "feature": "naming and forms of address",
-   "claim": "James Maliszewski praises the names of Hommlet's inhabitants as Gygax at his best and lists five of them.",
-   "source": "James Maliszewski, Grognardia",
-   "url": "http://grognardia.blogspot.com/2008/10/retrospective-village-of-hommlet.html",
-   "quote": "are Gygax at his mellifluent best",
-   "page": "Retrospective: The Village of Hommlet"
+   "index": 514,
+   "feature": "other: rumour table",
+   "claim": "Merric Blackman says Ghosts of Saltmarsh includes ten rumors that can be heard on the docks.",
+   "source": "Merric Blackman, Merric's Musings, 2019",
+   "url": "https://merricb.com/2019/05/22/ghosts-of-saltmarsh-looking-at-the-town/",
+   "quote": "includes ten rumors that can be heard on the docks",
+   "page": "body, paragraph on rumors"
   },
   {
-   "index": 410,
-   "feature": "proverbs and sayings",
-   "claim": "Maliszewski singles out the holy sayings of St Cuthbert printed in The Village of Hommlet and quotes three of them in capitals as they appear in the module.",
-   "source": "James Maliszewski, Grognardia",
-   "url": "http://grognardia.blogspot.com/2008/10/retrospective-village-of-hommlet.html",
-   "quote": "his holy sayings presented in the module",
-   "page": "Retrospective: The Village of Hommlet"
+   "index": 515,
+   "feature": "boxed text form",
+   "claim": "Merric Blackman says T1's player-facing village text is a long way from read-aloud text and should be paraphrased.",
+   "source": "Merric Blackman, Merric's Musings, 2022",
+   "url": "https://merricb.com/2022/01/26/add-review-the-village-of-hommlet/",
+   "quote": "a long way from read-aloud text",
+   "page": "body, paragraph on parentheses and bold"
   },
   {
-   "index": 411,
-   "feature": "withheld information and inference",
-   "claim": "Jim Nelson reads Hommlet's villager entries as an iceberg: their ambitions, suspicions and secrets enrich the setting although the players will probably never meet them.",
-   "source": "Jim Nelson, novelist, 'A different kind of naturalism'",
-   "url": "https://j-nelson.net/2020/02/a-different-kind-of-naturalism/",
-   "quote": "make the setting richer even if little of it is presented",
-   "page": "A different kind of naturalism"
-  },
-  {
-   "index": 412,
-   "feature": "concrete sensory noun",
-   "claim": "Nelson cites a Hommlet household entry's exact hidden sum as the kind of specific detail that implies a story behind it.",
-   "source": "Jim Nelson, 'A different kind of naturalism'",
-   "url": "https://j-nelson.net/2020/02/a-different-kind-of-naturalism/",
-   "quote": "stashed seventy-three silver coins in the hollow of a tree",
-   "page": "A different kind of naturalism"
-  },
-  {
-   "index": 413,
+   "index": 516,
    "feature": "place and institution description",
-   "claim": "Nelson quotes a reviewer's line that Hommlet is a place whose history shapes its layout, mood and inhabitants.",
-   "source": "Jim Nelson quoting an unnamed reviewer",
-   "url": "https://j-nelson.net/2020/02/a-different-kind-of-naturalism/",
-   "quote": "is a place with history and its history shapes and affects",
-   "page": "A different kind of naturalism"
+   "claim": "Merric Blackman judges T1's inhabitants to be described in more detail than necessary.",
+   "source": "Merric Blackman, Merric's Musings, 2022",
+   "url": "https://merricb.com/2022/01/26/add-review-the-village-of-hommlet/",
+   "quote": "described in more detail than I think necessary",
+   "page": "body, paragraph on the published version"
   },
   {
-   "index": 414,
+   "index": 517,
+   "feature": "place and institution description",
+   "claim": "Merric Blackman says T1 presents the villagers mostly in the houses where they live.",
+   "source": "Merric Blackman, Merric's Musings, 2022",
+   "url": "https://merricb.com/2022/01/26/add-review-the-village-of-hommlet/",
+   "quote": "in the houses where they live",
+   "page": "body, paragraph on Wall of Text syndrome"
+  },
+  {
+   "index": 518,
+   "feature": "annalist voice and deep time",
+   "claim": "Merric Blackman says T1's introduction describes the founding of the village, the rise of the Temple and its fall.",
+   "source": "Merric Blackman, Merric's Musings, 2022",
+   "url": "https://merricb.com/2022/01/26/add-review-the-village-of-hommlet/",
+   "quote": "It describes the founding of the Village of Hommlet",
+   "page": "body, paragraph on the introduction"
+  },
+  {
+   "index": 519,
+   "feature": "civic record register",
+   "claim": "Hipsters and Dragons says Dragon Heist's final chapter details Waterdeep's laws, taxes, landmarks, nobility and guilds before its wards.",
+   "source": "Hipsters & Dragons review of Waterdeep: Dragon Heist, 2018",
+   "url": "https://www.hipstersanddragons.com/waterdeep-dragon-heist-review/",
+   "quote": "details on laws, admin, taxes, taxis, landmarks, nobility and guilds",
+   "page": "section Chapters 9: Volo's Waterdeep Enchiridion"
+  },
+  {
+   "index": 520,
+   "feature": "civic record register",
+   "claim": "Strange Assembly says Dragon Heist's Enchiridion gives a very brief history and layout of Waterdeep.",
+   "source": "Strange Assembly review of Waterdeep: Dragon Heist, 2018",
+   "url": "https://www.strangeassembly.com/2018/waterdeep-dragon-heist-a-dungeons-dragons-review",
+   "quote": "a very brief history, layout",
+   "page": "body, paragraph on the closing sections"
+  },
+  {
+   "index": 521,
+   "feature": "civic record register",
+   "claim": "Strange Assembly says the Enchiridion introduces Waterdeep's legal system alongside its social norms.",
+   "source": "Strange Assembly review of Waterdeep: Dragon Heist, 2018",
+   "url": "https://www.strangeassembly.com/2018/waterdeep-dragon-heist-a-dungeons-dragons-review",
+   "quote": "an introduction to the legal system",
+   "page": "body, paragraph on the closing sections"
+  },
+  {
+   "index": 522,
+   "feature": "other: in-world guidebook voice",
+   "claim": "Shannon Appelcline says the early-nineties in-character game books were written as if they were real-world sources from within the setting.",
+   "source": "Shannon Appelcline, Product History for Volo's Guide to Waterdeep, DriveThruRPG",
+   "url": "https://www.drivethrurpg.com/product/16836/Volos-Guide-to-Waterdeep-2e",
+   "quote": "written as if they were real-world sources from within the gaming settings",
+   "page": "Product History, Introducing the Volo Guides"
+  },
+  {
+   "index": 523,
    "feature": "point of view and distance",
-   "claim": "Shawn Merwin's first rule for boxed text is to move from second person to third, and he supplies the same clearing in both, the third-person version making the corpse the subject.",
-   "source": "Shawn Merwin, Critical Hits",
-   "url": "https://critical-hits.com/blog/2010/08/27/thinking-outside-the-boxed-text/",
-   "quote": "The bloated corpse of a headless dragon dominates the center",
-   "page": "Tip 1"
+   "claim": "Appelcline reports that Greenwood used an unreliable narrator so that DMs could dismiss any detail by saying Volo was wrong.",
+   "source": "Shannon Appelcline, Product History for Volo's Guide to Waterdeep, DriveThruRPG, reporting Ed Greenwood",
+   "url": "https://www.drivethrurpg.com/product/16836/Volos-Guide-to-Waterdeep-2e",
+   "quote": "Volo was wrong",
+   "page": "Product History, Introducing the Volo Guides"
   },
   {
-   "index": 415,
-   "feature": "adjective and adverb discipline",
-   "claim": "Merwin's rule of thumb as a writer and editor is to keep only the environmental details the characters will have to interact with.",
-   "source": "Shawn Merwin, Critical Hits",
-   "url": "https://critical-hits.com/blog/2010/08/27/thinking-outside-the-boxed-text/",
-   "quote": "leave in only the details about the environment",
-   "page": "Tip 2a"
+   "index": 524,
+   "feature": "omission as information",
+   "claim": "Appelcline says Greenwood could omit a locale by writing that Volo had been kicked out of it.",
+   "source": "Shannon Appelcline, Product History for Volo's Guide to Waterdeep, DriveThruRPG",
+   "url": "https://www.drivethrurpg.com/product/16836/Volos-Guide-to-Waterdeep-2e",
+   "quote": "",
+   "page": "Product History, paragraph on the in-world narrator"
   },
   {
-   "index": 416,
-   "feature": "sentence length variation",
-   "claim": "Merwin's own model opening boxed text, printed in the article, is four sentences and under a hundred words, and he then explains what each of the four sentences does.",
-   "source": "Shawn Merwin, 'Let's Design an Adventure: Boxed Text', D&D Beyond",
-   "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
-   "quote": "Four sentences, and less than 100 words.",
-   "page": "A Boxed-Text Opening"
+   "index": 525,
+   "feature": "dialogue register",
+   "claim": "Elminster's in-world preface to Volo's Guide to Waterdeep opens by warning the reader.",
+   "source": "Ed Greenwood writing as Elminster, preface to Volo's Guide to Waterdeep (TSR, 1993), quoted in Appelcline's Product History",
+   "url": "https://www.drivethrurpg.com/product/16836/Volos-Guide-to-Waterdeep-2e",
+   "quote": "I must warn ye",
+   "page": "Product History, quoting Elminster's preface"
   },
   {
-   "index": 417,
-   "feature": "other: hedging verbs",
-   "claim": "Merwin tells adventure writers to avoid 'seems to be' and 'appears to be' in read-aloud text because for the characters perception is reality and the hedge invites metagaming.",
-   "source": "Shawn Merwin, D&D Beyond",
-   "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
-   "quote": "For the characters, perception is reality.",
-   "page": "Tip 4"
+   "index": 526,
+   "feature": "other: in-world guidebook voice",
+   "claim": "The product page describes Volo's Guide to Waterdeep as the first of a series of in-character looks at parts of the Forgotten Realms.",
+   "source": "Shannon Appelcline, Product History for Volo's Guide to Waterdeep, DriveThruRPG",
+   "url": "https://www.drivethrurpg.com/product/16836/Volos-Guide-to-Waterdeep-2e",
+   "quote": "in-depth, in-character looks at important parts",
+   "page": "Product History, opening paragraph"
   },
   {
-   "index": 418,
-   "feature": "cadence and rhythm",
-   "claim": "Merwin makes reading boxed text aloud a required check, naming tongue-twisters and unintended alliteration as faults invisible on the page.",
-   "source": "Shawn Merwin, D&D Beyond",
-   "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
-   "quote": "funny-sounding phrases, unintended alliteration",
-   "page": "Tip 5"
-  },
-  {
-   "index": 419,
-   "feature": "terminology consistency",
-   "claim": "Merwin tells writers not to use game-mechanical words such as stunned or frightened in their ordinary sense inside read-aloud text.",
-   "source": "Shawn Merwin, D&D Beyond",
-   "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
-   "quote": "Avoid game mechanical terms used in a non-mechanical way",
-   "page": "Tip 6"
-  },
-  {
-   "index": 420,
-   "feature": "other: craft difficulty",
-   "claim": "Merwin says writing good boxed text needs the precision of fiction or poetry while also doing the work of technical writing.",
-   "source": "Shawn Merwin, D&D Beyond",
-   "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
-   "quote": "the same precision that one might use for fiction or poetry",
-   "page": "opening"
-  },
-  {
-   "index": 421,
-   "feature": "plainness and economy",
-   "claim": "David Hartlage reads the 1989 Gamescience expansion of a Tegel Manor bedroom key as one good middle sentence padded out to length.",
-   "source": "David Hartlage, DMDavid",
-   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
-   "quote": "pads it like a school paper stretched to an assigned length",
-   "page": "Longer descriptions"
-  },
-  {
-   "index": 422,
-   "feature": "other: format-induced padding",
-   "claim": "Hartlage attributes the padding to the format itself: the custom of long descriptions makes authors write even where they have nothing to add.",
-   "source": "David Hartlage, DMDavid",
-   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
-   "quote": "encourages authors to write something even when they have little to add",
-   "page": "Longer descriptions"
-  },
-  {
-   "index": 423,
+   "index": 527,
    "feature": "place and institution description",
-   "claim": "Hartlage argues a location's description should be sized to its purpose in play, instancing a sheriff met about a wanted poster whose kitchen needs no inventory.",
-   "source": "David Hartlage, DMDavid",
-   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
-   "quote": "no one needs an item-by-item inventory of her kitchen",
-   "page": "Matching description to a location's purpose"
+   "claim": "Gus L says B2's Keep is heaped with loving detail to almost no obvious purpose.",
+   "source": "Gus L, Dungeon of Signs, 2014",
+   "url": "http://dungeonofsigns.blogspot.com/2014/01/b2-keep-on-borderlands-review.html",
+   "quote": "heaped with loving detail to almost no obvious purpose",
+   "page": "section 1. Excessively Keep Focused"
+  },
+  {
+   "index": 528,
+   "feature": "place and institution description",
+   "claim": "Prince of Nothing says B2 describes the Keep as a series of rooms with text conveyed in thick blocks.",
+   "source": "Prince of Nothing, Age of Dusk blog, 2019",
+   "url": "https://princeofnothingblogs.wordpress.com/2019/01/26/review-b2-keep-on-the-borderlands-dd-basic-crucible/",
+   "quote": "described as a series of rooms, with text conveyed in thick blocks",
+   "page": "body, paragraph on the first major roadblock"
   }
  ]
 }

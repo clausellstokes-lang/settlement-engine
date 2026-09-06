@@ -2,157 +2,157 @@
  "name": "dnd",
  "chunk": 12,
  "indices": [
-  229,
-  230,
-  231,
-  232,
-  233,
-  234,
-  235,
-  236,
-  237,
-  238,
-  239,
-  240,
-  241,
-  242,
-  243
+  334,
+  335,
+  336,
+  337,
+  338,
+  339,
+  340,
+  341,
+  342,
+  343,
+  344,
+  345,
+  346,
+  347,
+  348
  ],
  "claims": [
   {
-   "index": 229,
-   "feature": "sensory immersion",
-   "claim": "Greenwood writes by imagining he is present, smelling and tasting what characters do, then writing down enough for the reader to see the crypt or court.",
-   "source": "Making the Realms Shine: A Conversation with Ed Greenwood, Part I (Kobold Press, 2009)",
-   "url": "https://koboldpress.com/making-the-realms-shine-a-conversation-with-ed-greenwood-part-i/",
-   "quote": "I'm smelling what the characters are smelling",
-   "page": "interview (read via curl)"
+   "index": 334,
+   "feature": "real-world religion analogs",
+   "claim": "Real-world religions may not serve as analogs for evil D&D religions.",
+   "source": "DnD Standards (Wizards of the Coast, 2020) in the Dungeoncraft Pack 2023-12-04",
+   "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+   "quote": "Don’t use real-world religions as analogs for evil religions",
+   "page": ""
   },
   {
-   "index": 230,
-   "feature": "writing to order",
-   "claim": "Greenwood writes what publishers ask for, in the way they want it, and still entertainingly.",
-   "source": "Making the Realms Shine: A Conversation with Ed Greenwood, Part I (Kobold Press, 2009)",
-   "url": "https://koboldpress.com/making-the-realms-shine-a-conversation-with-ed-greenwood-part-i/",
-   "quote": "I write about what publishers ask me to",
-   "page": "interview (read via curl)"
-  },
-  {
-   "index": 231,
-   "feature": "rewrite the weak",
-   "claim": "Greenwood's advice: never think your words are perfect; rewrite anything weak or awkward.",
-   "source": "Author Interview: Ed Greenwood (Paizo Blog, 2013-06-20)",
-   "url": "https://paizo.com/blog/author-interview-ed-greenwood",
-   "quote": "Never think your words are perfect",
-   "page": "interview"
-  },
-  {
-   "index": 232,
-   "feature": "text stands on its own (RAW)",
-   "claim": "Crawford reads a rule first as written, in context and without regard to intent, because the published text must stand on its own.",
-   "source": "Sage Advice Compendium (Jeremy Crawford, Wizards of the Coast, v2.7 2021)",
-   "url": "https://media.wizards.com/2020/dnd/downloads/SA-Compendium.pdf",
-   "quote": "The text is forced to stand on its own.",
-   "page": "official rules document (designer's own words)"
-  },
-  {
-   "index": 233,
-   "feature": "rules as foundation, DM as bridge",
-   "claim": "5e's rules deliberately lay a foundation for the DM to build on rather than trying to cover every contingency.",
-   "source": "Sage Advice Compendium (Jeremy Crawford, Wizards of the Coast, v2.7 2021)",
-   "url": "https://media.wizards.com/2020/dnd/downloads/SA-Compendium.pdf",
-   "quote": "no set of rules could reasonably account for every contingency",
-   "page": "official rules document (designer's own words)"
-  },
-  {
-   "index": 234,
-   "feature": "public statements are not rulings",
-   "claim": "Only the compendium is official; designers' tweets and public statements are advice.",
-   "source": "Sage Advice Compendium (Jeremy Crawford, Wizards of the Coast, v2.7 2021)",
-   "url": "https://media.wizards.com/2020/dnd/downloads/SA-Compendium.pdf",
-   "quote": "are not official rulings; they are advice",
-   "page": "official rules document (designer's own words)"
-  },
-  {
-   "index": 235,
-   "feature": "glossary and taught key terms",
-   "claim": "The 2024 PHB teaches key terms (D20 Test, Magic action) in an opening play guide with examples of play and sidebars, and summarizes rules terminology in a glossary appendix.",
-   "source": "What's New in the 2024 Player's Handbook? (Michael Galvis, D&D Beyond, 2024-09-17)",
-   "url": "https://www.dndbeyond.com/posts/1745-whats-new-in-the-2024-players-handbook",
-   "quote": "key terms of the game, like what a D20 Test",
-   "page": "official article"
-  },
-  {
-   "index": 236,
-   "feature": "updated terminology table",
-   "claim": "The 2024 PHB renames terms via an Updated Terminology Table: Race to Species, Cast a Spell action to Magic action, Ki to Monk's Focus.",
-   "source": "Updates in the Player's Handbook (2024) (D&D Beyond staff, 2024-09-03)",
-   "url": "https://www.dndbeyond.com/posts/1810-updates-in-the-players-handbook-2024",
-   "quote": "uses some new terms, as shown in the Updated Terminology Table",
-   "page": "official article"
-  },
-  {
-   "index": 237,
-   "feature": "headers and bullets for the DM's eye",
-   "claim": "Merwin: use headers, subheaders and bullets to draw the DM's eye to the right information at the right time.",
-   "source": "Let's Design an Adventure: Thinking Like a Designer (Shawn Merwin, D&D Beyond, 2020-03-25)",
-   "url": "https://www.dndbeyond.com/posts/753-lets-design-an-adventure-thinking-like-a-designer",
-   "quote": "Use headers and subheaders to call out breaks in information",
-   "page": "official column (AL veteran designer)"
-  },
-  {
-   "index": 238,
-   "feature": "short, evocative, helpful",
-   "claim": "Goodman Games designer Burnside (2025) says boxed text must be short, evocative and helpful, and that his 2018 boxes carried too many distractions.",
-   "source": "Read aloud text in modules: What are folks opinions, page 10 (EN World, 2025)",
-   "url": "https://www.enworld.org/threads/read-aloud-text-in-modules-what-are-folks-opinions-about-read-aloud-content.712737/page-10",
-   "quote": "short, evocative, and helpful to the DM and players",
-   "page": "forum (posts by a Goodman Games designer)"
-  },
-  {
-   "index": 239,
-   "feature": "self-contained lore nuggets",
-   "claim": "Crawford: the 2025 core books are filled with lore nuggets because WotC will not assume readers own the old books.",
-   "source": "D&D's Jeremy Crawford on the 2025 Monster Manual, The New Starter Set, and High Level Gameplay (CBR, 2025-02-05)",
-   "url": "https://www.cbr.com/jeremy-crawford-interview-dnd-5e-monster-manual-2025/",
-   "quote": "fill them with lore nuggets",
-   "page": "interview"
-  },
-  {
-   "index": 240,
-   "feature": "house style exists",
-   "claim": "Mearls (2025) credits a collaborator with making sure a third-party manuscript matched the D&D house style, confirming an internal style exists even where none is published.",
-   "source": "Grognardia: Interview: Mike Mearls (2025-08-27)",
-   "url": "http://grognardia.blogspot.com/2025/08/interview-mike-mearls.html",
-   "quote": "everything matched the D&D house style",
-   "page": "interview"
-  },
-  {
-   "index": 241,
-   "feature": "style foundation (Chicago + Merriam-Webster)",
-   "claim": "The 2019 guide (v1.08a) rests on the Chicago Manual of Style 17th edition and Merriam-Webster's Collegiate 11th edition, and covers only D&D-specific departures from them.",
-   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
-   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
-   "quote": "Merriam-Webster’s Collegiate Dictionary, 11th edition",
+   "index": 335,
+   "feature": "credible threat",
+   "claim": "Perkins and Bilsland's second principle is that an adventure needs a credible threat with logical goals the heroes can uncover and thwart.",
+   "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "An adventure needs a credible threat",
    "page": "p.1"
   },
   {
-   "index": 242,
-   "feature": "scope across product types",
-   "claim": "The general rules bind every D&D product, not just rulebooks.",
-   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
-   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
-   "quote": "whether RPG books, board games, novels, or something else",
+   "index": 336,
+   "feature": "here and now",
+   "claim": "Principle four: adventures are about the here and now; the less backstory needed to set things up, the better.",
+   "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "An adventure is about the here and now.",
    "page": "p.1"
   },
   {
-   "index": 243,
-   "feature": "edition naming",
-   "claim": "Editions are spelled out and lowercased ('fifth edition'), with 4E/5E abbreviations confined to tables, conversion documents, or informal text.",
-   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
-   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
-   "quote": "We write “fifth edition,” for instance, not “5th Edition.”",
+   "index": 337,
+   "feature": "concision for the DM",
+   "claim": "Principle seven: present information as concisely as possible to ease the DM's burden, reserving descriptive texture for NPCs, dungeon dressing, and treasure.",
+   "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "to ease the burden on the DM",
+   "page": "p.1"
+  },
+  {
+   "index": 338,
+   "feature": "logical order of information",
+   "claim": "Principle six: information appears in the order a first-time DM needs it, with an NPC introduced before being named casually and nothing important buried.",
+   "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "An adventure needs to present information in a logical",
+   "page": "p.1"
+  },
+  {
+   "index": 339,
+   "feature": "NPC description content",
+   "claim": "NPCs get character through distinctive physical features, mannerisms, and quirks the DM can roleplay.",
+   "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "features, mannerisms, and quirks",
    "page": "p.2"
+  },
+  {
+   "index": 340,
+   "feature": "clichés with a spin",
+   "claim": "Familiar tropes (taverns, dragons, mad wizards) are acceptable if the adventure can still surprise; writers add their own spin.",
+   "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "as long as the adventure can still surprise",
+   "page": "p.1"
+  },
+  {
+   "index": 341,
+   "feature": "PCs as heroes",
+   "claim": "The player characters are the heroes, not spectators; fetch quests for a lazy merchant are called out as underwhelming.",
+   "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "The player characters (PCs) are the heroes",
+   "page": "p.1"
+  },
+  {
+   "index": 342,
+   "feature": "no railroading",
+   "claim": "Text must account for players' decisions and alternate outcomes, or players feel railroaded.",
+   "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "players will feel “railroaded” by the plot",
+   "page": "p.1"
+  },
+  {
+   "index": 343,
+   "feature": "rise above the humdrum",
+   "claim": "Encounters are elevated by odd monster pairings, terrain, hazards, ruses, complex motives, and plot twists.",
+   "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "An adventure needs to rise above the humdrum",
+   "page": "p.2"
+  },
+  {
+   "index": 344,
+   "feature": "read adventures to write them",
+   "claim": "The guide's craft advice is to read many good adventures, as novelists read novels.",
+   "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "The more good D&D adventures you read, the",
+   "page": "p.2"
+  },
+  {
+   "index": 345,
+   "feature": "organized play: no preset ending",
+   "claim": "AL writers must not decide in advance how the adventure ends, even in a 2- or 4-hour slot.",
+   "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "how the adventure should end",
+   "page": "p.2"
+  },
+  {
+   "index": 346,
+   "feature": "Chicago edition cited by the design guide",
+   "claim": "The design guide still cites Chicago 16th edition, one edition behind the style guide's 17th, showing the bundle's documents were not synchronized.",
+   "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "Chicago Manual of Style (16th edition)",
+   "page": "p.2"
+  },
+  {
+   "index": 347,
+   "feature": "bundle cross-reference to format template",
+   "claim": "The design guide points writers to the House Style Guide for grammar and to the Adventure Format Template for layout, which is where boxed-text rules live.",
+   "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "",
+   "page": "p.2"
+  },
+  {
+   "index": 348,
+   "feature": "Realms tone: hopeful",
+   "claim": "The Forgotten Realms guide sets a hopeful tone in which the good guys eventually win, contrasted with cynical Greyhawk and tragic Dragonlance.",
+   "source": "Forgotten Realms Style Guide (Wizards of the Coast, bundle document)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/forgotten_realms_style_guide.pdf",
+   "quote": "The Forgotten Realms is a hopeful setting.",
+   "page": "p.1"
   }
  ]
 }

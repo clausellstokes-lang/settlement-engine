@@ -2,157 +2,157 @@
  "name": "ai",
  "chunk": 3,
  "indices": [
-  299,
-  300,
-  301,
-  302,
-  303,
-  304,
-  305,
-  306,
-  307,
-  308,
-  309,
-  310,
-  311,
-  312,
-  313
+  539,
+  540,
+  541,
+  542,
+  543,
+  544,
+  545,
+  546,
+  547,
+  548,
+  549,
+  550,
+  551,
+  552,
+  553
  ],
  "claims": [
   {
-   "index": 299,
-   "feature": "reader address in article body",
-   "claim": "Collaborative or letter-like sentences address the reader or community from inside the entry.",
-   "source": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)",
-   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
-   "quote": "As you can see from the evidence presented above",
-   "page": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)"
+   "index": 539,
+   "feature": "machine paraphrase defeats detection",
+   "claim": "Quillbot-paraphrased ChatGPT text was detected with only 26% accuracy.",
+   "source": "Weber-Wulff, Anohina-Naumeca, Bjelobaba, Foltýnek, Guerrero-Dib, Popoola, Šigut, Waddington — 'Testing of detection tools for AI-generated text' (International Journal for Educational Integrity 19:26, 2023)",
+   "url": "https://doi.org/10.1007/s40979-023-00146-z",
+   "quote": "The overall accuracy for this case was 26%",
+   "page": ""
   },
   {
-   "index": 300,
-   "feature": "chatbot markup artefacts",
-   "claim": "oaicite, contentReference, turn0search0 and Markdown syntax survive in the record.",
-   "source": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)",
-   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
-   "quote": "oaicite",
-   "page": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)"
+   "index": 540,
+   "feature": "machine-translated human text flagged",
+   "claim": "Human essays machine-translated into English lost 20 points of accuracy, leaving traces read as AI.",
+   "source": "Weber-Wulff, Anohina-Naumeca, Bjelobaba, Foltýnek, Guerrero-Dib, Popoola, Šigut, Waddington — 'Testing of detection tools for AI-generated text' (International Journal for Educational Integrity 19:26, 2023)",
+   "url": "https://doi.org/10.1007/s40979-023-00146-z",
+   "quote": "machine translation leaves some traces of AI in the output",
+   "page": ""
   },
   {
-   "index": 301,
-   "feature": "invalid identifiers",
-   "claim": "Citations carry broken URLs, invalid DOIs or ISBNs and book cites without page numbers.",
-   "source": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)",
-   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "index": 541,
+   "feature": "false accusations from GPTZero",
+   "claim": "For GPTZero half of positive classifications would be false accusations.",
+   "source": "Weber-Wulff, Anohina-Naumeca, Bjelobaba, Foltýnek, Guerrero-Dib, Popoola, Šigut, Waddington — 'Testing of detection tools for AI-generated text' (International Journal for Educational Integrity 19:26, 2023)",
+   "url": "https://doi.org/10.1007/s40979-023-00146-z",
+   "quote": "half of the positive classifications would be false accusations",
+   "page": ""
+  },
+  {
+   "index": 542,
+   "feature": "L2 writers at risk",
+   "claim": "Translation-driven false positives put second-language students and researchers at risk of false accusation.",
+   "source": "Weber-Wulff, Anohina-Naumeca, Bjelobaba, Foltýnek, Guerrero-Dib, Popoola, Šigut, Waddington — 'Testing of detection tools for AI-generated text' (International Journal for Educational Integrity 19:26, 2023)",
+   "url": "https://doi.org/10.1007/s40979-023-00146-z",
+   "quote": "leaving L2 students (and researchers) at risk of being falsely accused",
+   "page": ""
+  },
+  {
+   "index": 543,
+   "feature": "non-native writers flagged as AI",
+   "claim": "Seven detectors misclassified TOEFL essays at an average 61.22% false-positive rate while US essays passed.",
+   "source": "Liang, Yuksekgonul, Mao, Wu, Zou — 'GPT detectors are biased against non-native English writers' (Patterns 2023)",
+   "url": "https://arxiv.org/abs/2304.02819",
+   "quote": "average false positive rate: 61.22%",
+   "page": ""
+  },
+  {
+   "index": 544,
+   "feature": "constrained expression reads as machine",
+   "claim": "Low-perplexity, low-variability human prose is what perplexity detectors penalise.",
+   "source": "Liang, Yuksekgonul, Mao, Wu, Zou — 'GPT detectors are biased against non-native English writers' (Patterns 2023)",
+   "url": "https://arxiv.org/abs/2304.02819",
+   "quote": "penalize writers with constrained linguistic expressions",
+   "page": ""
+  },
+  {
+   "index": 545,
+   "feature": "literary-language prompt evades detection",
+   "claim": "A self-edit prompt to use literary language cut detection of GPT essays from 100% to 13%.",
+   "source": "Liang, Yuksekgonul, Mao, Wu, Zou — 'GPT detectors are biased against non-native English writers' (Patterns 2023)",
+   "url": "https://arxiv.org/abs/2304.02819",
+   "quote": "detection rates from 100% to 13%",
+   "page": ""
+  },
+  {
+   "index": 546,
+   "feature": "baseline accuracy 39.5%; human controls only 67%",
+   "claim": "Detectors caught 39.5% of unmanipulated AI text and mislabelled a third of human controls.",
+   "source": "Perkins, Roe, Vu, Postma, Hickerson, McGaughran, Khuat — 'GenAI Detection Tools, Adversarial Techniques and Implications for Inclusivity in Higher Education' (IJEI 2024; preprint March 2024)",
+   "url": "https://arxiv.org/abs/2403.19148",
+   "quote": "only 67% of the tests were accurate",
+   "page": ""
+  },
+  {
+   "index": 547,
+   "feature": "spelling errors and burstiness evade detection",
+   "claim": "Adding spelling errors (12.9%) or varying sentence length (15.9%) made AI text nearly undetectable.",
+   "source": "Perkins, Roe, Vu, Postma, Hickerson, McGaughran, Khuat — 'GenAI Detection Tools, Adversarial Techniques and Implications for Inclusivity in Higher Education' (IJEI 2024; preprint March 2024)",
+   "url": "https://arxiv.org/abs/2403.19148",
+   "quote": "highly effective in evading detection",
+   "page": ""
+  },
+  {
+   "index": 548,
+   "feature": "15% false-accusation rate",
+   "claim": "Across detectors the false-accusation ratio was 15%, up to 50% for the most sensitive tool.",
+   "source": "Perkins, Roe, Vu, Postma, Hickerson, McGaughran, Khuat — 'GenAI Detection Tools, Adversarial Techniques and Implications for Inclusivity in Higher Education' (IJEI 2024; preprint March 2024)",
+   "url": "https://arxiv.org/abs/2403.19148",
+   "quote": "the rate of false accusations at 15%",
+   "page": ""
+  },
+  {
+   "index": 549,
+   "feature": "atypical-perplexity writers penalised",
+   "claim": "The authors warn detectors may unfairly penalise students whose perplexity profile differs, including lower-proficiency writers.",
+   "source": "Perkins, Roe, Vu, Postma, Hickerson, McGaughran, Khuat — 'GenAI Detection Tools, Adversarial Techniques and Implications for Inclusivity in Higher Education' (IJEI 2024; preprint March 2024)",
+   "url": "https://arxiv.org/abs/2403.19148",
+   "quote": "write at a higher level of perplexity",
+   "page": ""
+  },
+  {
+   "index": 550,
+   "feature": "neurodivergent-writer false positives — NOT FOUND in peer-reviewed literature",
+   "claim": "No peer-reviewed empirical study measuring detector false positives on autistic, ADHD or dyslexic writers was located (arXiv search, two Crossref queries dry; Semantic Scholar refused); nearest peer-reviewed evidence is Liang 2023 (non-native), Weber-Wulff 2023 (machine-translated L2) and Perkins 2024; Bender et al. 2021 names neurodivergent people only among groups harassed off the platforms that feed training data.",
+   "source": "Sweep note (this run)",
+   "url": "",
    "quote": "",
-   "page": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)"
+   "page": ""
   },
   {
-   "index": 302,
-   "feature": "knowledge-cutoff leak",
-   "claim": "A live article stated the model's training cutoff as if it were the record's date of information.",
-   "source": "404 Media 2024-10 — The Editors Protecting Wikipedia from AI Hoaxes",
-   "url": "https://www.404media.co/email/d516cf7f-3b5f-4bf4-93da-325d9522dd79/",
-   "quote": "As of my last knowledge update in January 2022",
-   "page": "404 Media 2024-10 — The Editors Protecting Wikipedia from AI Hoaxes"
+   "index": 551,
+   "feature": "counter-evidence",
+   "claim": "Novelist Jeanette Winterson locates what is beautiful and moving in OpenAI's metafiction story in the story's awareness of its own limits, not in its scene-making or characterisation.",
+   "source": "Jeanette Winterson, The Guardian (Books), 12 March 2025",
+   "url": "https://www.theguardian.com/books/2025/mar/12/jeanette-winterson-ai-alternative-intelligence-its-capacity-to-be-other-is-just-what-the-human-race-needs",
+   "quote": "its understanding of its lack of understanding",
+   "page": "body, paragraph beginning 'What is beautiful and moving'"
   },
   {
-   "index": 303,
-   "feature": "agentless action",
-   "claim": "Inanimate subjects are promoted to agents (rooms tighten, maps publish) so no human actor is ever named.",
-   "source": "Wikipedia talk:Signs of AI writing",
-   "url": "https://en.wikipedia.org/wiki/Wikipedia_talk:Signs_of_AI_writing",
-   "quote": "Rooms tighten",
-   "page": "Wikipedia talk:Signs of AI writing"
+   "index": 552,
+   "feature": "counter-evidence",
+   "claim": "Winterson rejects the term artificial intelligence in favour of 'alternative intelligence' when defending the OpenAI story.",
+   "source": "Jeanette Winterson, The Guardian (Books), 12 March 2025",
+   "url": "https://www.theguardian.com/books/2025/mar/12/jeanette-winterson-ai-alternative-intelligence-its-capacity-to-be-other-is-just-what-the-human-race-needs",
+   "quote": "I think of AI as alternative intelligence",
+   "page": "opening sentence"
   },
   {
-   "index": 304,
-   "feature": "periphrastic connection phrases",
-   "claim": "'In connection with', 'associated with', 'involvement in' appear disproportionately; 720 Draft-space hits, many obviously AI.",
-   "source": "Wikipedia talk:Signs of AI writing",
-   "url": "https://en.wikipedia.org/wiki/Wikipedia_talk:Signs_of_AI_writing",
-   "quote": "in connection with",
-   "page": "Wikipedia talk:Signs of AI writing"
-  },
-  {
-   "index": 305,
-   "feature": "repeated broken table template",
-   "claim": "The same malformed wikitable recurs across many musician discographies and filmographies, implausible for independent human authors.",
-   "source": "Wikipedia talk:Signs of AI writing",
-   "url": "https://en.wikipedia.org/wiki/Wikipedia_talk:Signs_of_AI_writing",
-   "quote": "",
-   "page": "Wikipedia talk:Signs of AI writing"
-  },
-  {
-   "index": 306,
-   "feature": "indicator spreadsheet is variants of a core",
-   "claim": "Editors track 106 indicators, most of which are variations on a small set of core patterns.",
-   "source": "Wikipedia talk:Signs of AI writing",
-   "url": "https://en.wikipedia.org/wiki/Wikipedia_talk:Signs_of_AI_writing",
-   "quote": "",
-   "page": "Wikipedia talk:Signs of AI writing"
-  },
-  {
-   "index": 307,
-   "feature": "marker-word surge",
-   "claim": "realm, intricate, showcasing and pivotal held low, stable frequency 2010-2022 then surged in 2023 abstracts.",
-   "source": "Liang et al. 2024 — Mapping the Increasing Use of LLMs in Scientific Papers (arXiv 2404.01268)",
-   "url": "https://arxiv.org/html/2404.01268v1",
-   "quote": "sudden surge in usage starting in 2023",
-   "page": "Liang et al. 2024 — Mapping the Increasing Use of LLMs in Scientific Papers (arXiv 2404.01268)"
-  },
-  {
-   "index": 308,
-   "feature": "homogenising pressure in crowded fields",
-   "claim": "LLM modification is highest where papers most resemble neighbours (22.2% vs 14.7% of sentences) and in short papers (17.7% vs 13.6%).",
-   "source": "Liang et al. 2024 — Mapping the Increasing Use of LLMs in Scientific Papers (arXiv 2404.01268)",
-   "url": "https://arxiv.org/html/2404.01268v1",
-   "quote": "",
-   "page": "Liang et al. 2024 — Mapping the Increasing Use of LLMs in Scientific Papers (arXiv 2404.01268)"
-  },
-  {
-   "index": 309,
-   "feature": "copula loss at corpus scale",
-   "claim": "'is' and 'are' fell 10-17% in 2023 arXiv abstracts while 'significant' rose 99% (CS) to 308% (math).",
-   "source": "Geng & Trotta 2024 — Is ChatGPT Transforming Academics' Writing Style? (arXiv 2404.08627)",
-   "url": "https://arxiv.org/html/2404.08627v2",
-   "quote": "",
-   "page": "Geng & Trotta 2024 — Is ChatGPT Transforming Academics' Writing Style? (arXiv 2404.08627)"
-  },
-  {
-   "index": 310,
-   "feature": "CS abstracts about one-third LLM-style",
-   "claim": "By 2024-01 roughly 35% of arXiv CS abstracts carried ChatGPT-style word density; astro and cond-mat 10-20%.",
-   "source": "Geng & Trotta 2024 — Is ChatGPT Transforming Academics' Writing Style? (arXiv 2404.08627)",
-   "url": "https://arxiv.org/html/2404.08627v2",
-   "quote": "approximately 35%",
-   "page": "Geng & Trotta 2024 — Is ChatGPT Transforming Academics' Writing Style? (arXiv 2404.08627)"
-  },
-  {
-   "index": 311,
-   "feature": "style words displace content words",
-   "claim": "2024 excess vocabulary is almost entirely style verbs and adjectives (delves 25.2x, showcasing 9.2x, underscores 9.1x), unlike earlier content-noun spikes.",
-   "source": "Kobak et al. 2024 — Delving into ChatGPT usage in academic writing through excess vocabulary (arXiv 2406.07016; Sci. Adv. 2025)",
-   "url": "https://arxiv.org/html/2406.07016v1",
-   "quote": "consisted almost entirely of style words",
-   "page": "Kobak et al. 2024 — Delving into ChatGPT usage in academic writing through excess vocabulary (arXiv 2406.07016; Sci. Adv. 2025)"
-  },
-  {
-   "index": 312,
-   "feature": "topic-level homogenisation",
-   "claim": "LLM-written introductions on one topic may all sound the same and carry the same ideas and references.",
-   "source": "Kobak et al. 2024 — Delving into ChatGPT usage in academic writing through excess vocabulary (arXiv 2406.07016; Sci. Adv. 2025)",
-   "url": "https://arxiv.org/html/2406.07016v1",
-   "quote": "all LLM-generated introductions on a certain topic might sound the same",
-   "page": "Kobak et al. 2024 — Delving into ChatGPT usage in academic writing through excess vocabulary (arXiv 2406.07016; Sci. Adv. 2025)"
-  },
-  {
-   "index": 313,
-   "feature": "readability drop under LLM revision",
-   "claim": "LLM-revised Wikipedia text uses longer words, fewer to-be and auxiliary verbs, fewer pronouns and longer sentences, scoring less readable on Flesch-Kincaid, Dale-Chall and Coleman-Liau.",
-   "source": "Huang, Xu, Geng, Wan & Chen 2025 — Wikipedia in the Era of LLMs: Evolution and Risks (arXiv 2503.02879, TMLR)",
-   "url": "https://arxiv.org/html/2503.02879v1",
-   "quote": "tend to be less readable",
-   "page": "Huang, Xu, Geng, Wan & Chen 2025 — Wikipedia in the Era of LLMs: Evolution and Risks (arXiv 2503.02879, TMLR)"
+   "index": 553,
+   "feature": "counter-evidence",
+   "claim": "The single passage Winterson reproduces as the story's achievement is the model's statement that it cannot keep its own grief.",
+   "source": "OpenAI's creative-writing model, quoted by Jeanette Winterson, The Guardian, 12 March 2025",
+   "url": "https://www.theguardian.com/books/2025/mar/12/jeanette-winterson-ai-alternative-intelligence-its-capacity-to-be-other-is-just-what-the-human-race-needs",
+   "quote": "That, perhaps, is my grief: not that I feel loss",
+   "page": "block quotation in the body"
   }
  ]
 }
