@@ -1,0 +1,233 @@
+{
+ "name": "ai",
+ "chunk": 1,
+ "claims": [
+  {
+   "index": 120,
+   "feature": "the gloss",
+   "claim": "AI prose puts aphorisms where connective tissue should be and pivots to abstraction in place of concrete physical imagery.",
+   "source": "Matthew Vollmer (2026-04-24)",
+   "url": "https://matthewvollmer.substack.com/p/i-asked-the-machine-to-tell-on-itself",
+   "quote": "",
+   "page": "I Asked the Machine to Tell on Itself: A Field Guide to AI Tells"
+  },
+  {
+   "index": 121,
+   "feature": "the gloss",
+   "claim": "AI-assisted manuscripts carry heavy-handed thematic messaging that the editor had to strip back.",
+   "source": "Mary Kole (2026-08-13)",
+   "url": "https://janefriedman.com/after-editing-two-ai-assisted-manuscripts-i-rewrote-my-client-agreement/",
+   "quote": "",
+   "page": "After Editing Two AI-Assisted Manuscripts, I Rewrote My Client Agreement"
+  },
+  {
+   "index": 122,
+   "feature": "pet words",
+   "claim": "AI fiction accumulates a recycled mood vocabulary drawn from Instagram-poetry registers, collapsing diverse tones into one.",
+   "source": "Matthew Vollmer (2026-04-24)",
+   "url": "https://matthewvollmer.substack.com/p/i-asked-the-machine-to-tell-on-itself",
+   "quote": "ache, hollow, tether, linger, fragile, fractured, ember, bloom",
+   "page": "I Asked the Machine to Tell on Itself: A Field Guide to AI Tells"
+  },
+  {
+   "index": 123,
+   "feature": "pet words",
+   "claim": "A cluster of grandeur nouns and verbs (testament, pivotal, delve, intricate, realm) co-occurs in LLM output and lends borrowed significance to flat subjects.",
+   "source": "Wikipedia editors, Signs of AI writing",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "enduring testament to the influence of Italian colonial",
+   "page": "Wikipedia:Signs of AI writing"
+  },
+  {
+   "index": 124,
+   "feature": "pet words",
+   "claim": "Metaphors of symphonies, tapestries, and dances, plus delve/navigate/enhance/elevate, mark machine prose.",
+   "source": "Carly Ayres (2024-12-05)",
+   "url": "https://carly.substack.com/p/spotting-machine-made-prose",
+   "quote": "symphonies, tapestries, or complex dances",
+   "page": "Spotting machine-made prose"
+  },
+  {
+   "index": 125,
+   "feature": "pet words",
+   "claim": "'Quiet/magic' adverbs (quietly, deeply, fundamentally, remarkably) are used to make mundane description feel significant.",
+   "source": "tropes.fyi AI Writing Pattern Directory",
+   "url": "https://tropes.fyi/directory",
+   "quote": "Quietly orchestrating workflows and decisions",
+   "page": "Tropes - AI Writing Pattern Directory"
+  },
+  {
+   "index": 126,
+   "feature": "pet words (syntax)",
+   "claim": "AI avoids plain copulatives, replacing 'is' with 'serves as' or 'holds the distinction of being'.",
+   "source": "Wikipedia editors, Signs of AI writing",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "quote": "Harian Metro holds the distinction of being the first",
+   "page": "Wikipedia:Signs of AI writing"
+  },
+  {
+   "index": 127,
+   "feature": "metaphor",
+   "claim": "AI metaphors are slightly off-target but stay in the right semantic neighborhood, and descriptions are mood-saturated pathetic fallacy such as rain mirroring grief.",
+   "source": "Matthew Vollmer (2026-04-24)",
+   "url": "https://matthewvollmer.substack.com/p/i-asked-the-machine-to-tell-on-itself",
+   "quote": "",
+   "page": "I Asked the Machine to Tell on Itself: A Field Guide to AI Tells"
+  },
+  {
+   "index": 128,
+   "feature": "metaphor",
+   "claim": "AI comparisons break when followed across a second dimension; the model does not grasp real-world metaphors or keep logical coherence.",
+   "source": "sudo, LessWrong (2026-04-12)",
+   "url": "https://www.lesswrong.com/posts/nTuKjJBwMtMuuLonA/hot-take-problems-with-ai-prose",
+   "quote": "AIs fail to grasp: real-world metaphors, logical coherence",
+   "page": "[Hot take] Problems with AI prose"
+  },
+  {
+   "index": 129,
+   "feature": "metaphor",
+   "claim": "AI stacks multiple comparisons onto one concept and overloads description with redundant sensory 'eyeball kicks'.",
+   "source": "Makin, Record Crash (2025-11-27)",
+   "url": "https://recordcrash.substack.com/p/how-to-identify-ai-written-web-fiction",
+   "quote": "",
+   "page": "How to Identify AI-Written Web Fiction"
+  },
+  {
+   "index": 130,
+   "feature": "metaphor",
+   "claim": "Forced figurative language sounds clever but obscures rather than clarifies.",
+   "source": "tropes.fyi AI Writing Pattern Directory",
+   "url": "https://tropes.fyi/directory",
+   "quote": "Like tracking weight loss on a rigged scale",
+   "page": "Tropes - AI Writing Pattern Directory"
+  },
+  {
+   "index": 131,
+   "feature": "emotion rendering",
+   "claim": "AI carries emotion through bodily sensation and somatic metaphor 81% of the time versus 38% for humans, while naming emotions explicitly less often (8% vs 29%), an inversion of the usual 'AI tells emotions' assumption.",
+   "source": "Russell et al., StoryScope (2026-04-03)",
+   "url": "https://arxiv.org/abs/2604.03136",
+   "quote": "AI overwhelmingly conveys emotion through physical sensations and bodily metaphors",
+   "page": "StoryScope: Investigating idiosyncrasies in AI fiction"
+  },
+  {
+   "index": 132,
+   "feature": "reader address",
+   "claim": "AI narrators write as if no one is watching: fourth-wall breaks in 39% of AI stories versus 67% human, direct reader address 7% versus 28%.",
+   "source": "Russell et al., StoryScope (2026-04-03)",
+   "url": "https://arxiv.org/abs/2604.03136",
+   "quote": "AI writes as though no one is watching",
+   "page": "StoryScope: Investigating idiosyncrasies in AI fiction"
+  },
+  {
+   "index": 133,
+   "feature": "flinching",
+   "claim": "AI retreats from difficult material: it softens violence, obscures intimacy, and explains cruelty instead of rendering it.",
+   "source": "Richard Lowe (2026-04-29)",
+   "url": "https://associationofghostwriters.org/the-real-reason-not-to-use-ai-to-write-your-novel/",
+   "quote": "AI flinches every time",
+   "page": "The Real Reason Not to Use AI to Write Your Novel"
+  },
+  {
+   "index": 134,
+   "feature": "surprise",
+   "claim": "Language models optimize for predictability while good writing must surprise; AI output drifts rather than evolves with purpose.",
+   "source": "Michael O. Church, antipodes Substack (2025-05-28)",
+   "url": "https://antipodes.substack.com/p/how-to-make-ai-write-a-bestsellerand",
+   "quote": "Good writing must be surprising. It needs to mix shit up.",
+   "page": "How to make AI write a bestseller—and why you can't"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 120,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "There is no connective tissue, only epigrams stacked.",
+   "note": "No quote was supplied, so substance only. Page also carries 'abstractions that refused to stay concrete' and 'No Tuesday. No laundromat.' for the concrete-imagery half. Both halves of the claim hold."
+  },
+  {
+   "index": 121,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "stripping back thematic overstatements",
+   "note": "Kole lists this among the work she did on AI-assisted manuscripts ('reshaping emotional arcs, deepening characterization, stripping back thematic overstatements'). Supports the claim in the source's own words; no quote was supplied."
+  },
+  {
+   "index": 122,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "ache, hollow, tether, linger, fragile, fractured, ember, bloom",
+   "note": "The eight words appear contiguously and in order; the source list continues '..., cradle, ruin, veil, threadbare'. Vollmer calls it 'mood-word accumulation' from 'Instagram poetry and the Poetry Foundation's most-shared pages collapsed into a single register', which supports the collapse-of-tones half."
+  },
+  {
+   "index": 123,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "delve, intricate/intricacies, pivotal, tapestry, testament (realm absent)",
+   "note": "The quotation is verbatim on the page ('An enduring testament to the influence of Italian colonial rule in Somalia'), but the claim's word cluster is not fully supported: a literal search of the raw wikitext finds NO occurrence of 'realm'. 'delve' is listed only for the 2023-mid-2024 era, noted as dropping off sharply in 2025. Downgraded from verbatim because the claim asserts an unsupported member."
+  },
+  {
+   "index": 124,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Metaphors involving symphonies, tapestries, or \"complex dances\"",
+   "note": "Words match in order; the source puts scare quotes around 'complex dances'. The verb list is also confirmed: 'Overuse of words like \"navigate,\" \"enhance,\" \"elevate\"', and 'delve' is discussed at length via Paul Graham."
+  },
+  {
+   "index": 125,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "quietly orchestrating workflows, decisions, and interactions",
+   "note": "The supplied quote 'Quietly orchestrating workflows and decisions' is a truncation, not verbatim. The claim itself is supported word for word by the trope entry: 'AI reaches for these adverbs to make mundane descriptions feel significant. Also includes: deeply, fundamentally, remarkably, arguably.'"
+  },
+  {
+   "index": 126,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Harian Metro holds the distinction of being the first",
+   "note": "Appears in the copulatives example ('...the first and oldest Malay-language tabloid'). The page states LLM text 'often replaces simple constructions that use copulas such as is or are with constructions such as serves as a', so both named substitutes are supported."
+  },
+  {
+   "index": 127,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Right ballpark, wrong physics.",
+   "note": "No quote was supplied. Off-target-but-adjacent metaphor is Vollmer's 'Right ballpark, wrong physics' gloss on a sample line; the pathetic-fallacy half is the page's own example 'The rain pattered softly against the window, mirroring her unspoken grief,' filed under 'mood-saturated weather and rooms'."
+  },
+  {
+   "index": 128,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Metaphors ... analogous on multiple dimensions; Logically coherent metaphors",
+   "note": "The supplied quote is a compression, not verbatim; the page's list under 'AIs fail to grasp' reads 'Metaphors based on real-world physical objects or phenomena which are analogous on multiple dimensions ... Logically coherent metaphors'. The second-dimension collapse is demonstrated in the Blood Meridian passage ('Marshmallows did not wait for men')."
+  },
+  {
+   "index": 129,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "metaphors spammed in the final sentence to describe a single concept",
+   "note": "No quote was supplied. Stacking is the author's own Micro-tell wording. 'Eyeball Kicks' is named as AI overuse but the author credits Nostalgebraist for the analysis rather than arguing it himself, and notes newer models have improved at sensical metaphors - so the sensory-overload half rests on a citation, not this author's evidence."
+  },
+  {
+   "index": 130,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "sounds clever rather than because it clarifies anything",
+   "note": "The claim is supported almost word for word by the 'Forced figurative language' entry. But the attributed quote 'Like tracking weight loss on a rigged scale' does NOT appear; the page's example reads 'Using them as a productivity measure is like tracking your weight loss with a scale that you also control the calibration on.' The quote as cited is a paraphrase presented as a quotation."
+  },
+  {
+   "index": 131,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "AI overwhelmingly conveys emotion through physical sensations and bodily metaphors",
+   "note": "Found in the paper's full text (arxiv.org/html/2604.03136v1), not on the /abs abstract page. Both figure pairs check out: '(81% vs. 38% human)' and 'Humans use explicit emotion labels 29% of the time versus just 8% for AI.' The 'inversion of the usual assumption' framing is the claim author's gloss, not the paper's phrasing."
+  },
+  {
+   "index": 132,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "AI writes as though no one is watching.",
+   "note": "Also in the full text rather than the abstract. Both figures confirmed: 'Humans break the fourth wall far more often (67% vs. 39%)' and 'address the reader directly more frequently (28% vs. 7%)'."
+  },
+  {
+   "index": 133,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "AI flinches every time",
+   "note": "Closes the section headed 'AI is a Coward'. All three retreats are the article's own: 'Violence softens. Sex goes vague. Cruelty gets explained so the reader understands it rather than feels it.'"
+  },
+  {
+   "index": 134,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Good writing must be surprising. It needs to mix shit up.",
+   "note": "Verbatim, continuing 'Otherwise, readers get bored.' Both halves of the claim are the article's own: 'The basic training objective of a language model is least surprise' and 'Good stories evolve from beginning to end, but they don't drift' / 'AI writing, on the other hand, drifts aimlessly.'"
+  }
+ ]
+}

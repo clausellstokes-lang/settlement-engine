@@ -718,5 +718,37 @@
    "note": "Live fetch 200. 'Magic action' word for word in the Updated Terminology table, which also carries every other rename in the claim: Race -> Species, Cast a Spell action -> Magic action, Inspiration -> Heroic Inspiration, Use an Object action -> Utilize action, and Shoving -> Unarmed Strike. The 'New Rules' list of the 2024 Rules Glossary includes Ally, Bloodied, Enemy and Passive Perception (the glossary spells the action entry 'Magic (action)'). All sub-claims supported.",
    "fromFile": "verdicts-dnd-i30-44.json"
   }
+ },
+ {
+  "index": 45,
+  "feature": "2024 glossary layout",
+  "claim": "Screen Rant notes the 2024 Rules Glossary de-emphasises art with monochrome scenes to prioritise text and lacks a dedicated Conditions section.",
+  "source": "Ben Brosofsky, Screen Rant, 2024-09-21",
+  "url": "https://screenrant.com/dnd-2024-players-handbook-rules-glossary-change/",
+  "quote": "the lack of a dedicated section for Conditions",
+  "angle": "academic",
+  "verdict": {
+   "index": 45,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the lack of a dedicated section for Conditions",
+   "note": "Quote appears word for word: 'Tossing so much into one glossary does come with certain drawbacks, like the need to reference the back of the book more frequently while learning the basic rules and the lack of a dedicated section for Conditions.' The art clause is also verbatim on the page: 'the Rules Glossary is also the one part of DnD's 2024 Player's Handbook that largely de-emphasizes artwork, squeezing monochrome scenes into banners at the top of some pages but devoting most of the real estate to the text.' Both halves of the claim confirmed. Fetched via WebFetch, HTTP 200.",
+   "fromFile": "verdicts-dnd-i45-48.json"
+  }
+ },
+ {
+  "index": 46,
+  "feature": "2025 Monster Manual lore compression",
+  "claim": "Arndt reports the 2025 Monster Manual cuts iconic monsters' multi-page lore to at most three paragraphs and a roll table, adds a subtitle epithet to every monster, renames phylactery to 'spirit jar', and reads as a utilitarian encyclopedia.",
+  "source": "Dan Arndt, The Fandomentals, 2025-01-28",
+  "url": "https://www.thefandomentals.com/in-the-new-dungeons-dragons-monster-manual-more-is-unfortunately-less/",
+  "quote": "three paragraphs and a table to roll on",
+  "angle": "academic",
+  "verdict": {
+   "index": 46,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "three paragraphs and a table to roll on",
+   "note": "Quote verbatim: 'Creatures like Aboleths, Beholders, and Mind Flayers from multi-page descriptions that show you their backstory and place in the world to, at best, three paragraphs and a table to roll on.' All three remaining sub-assertions confirmed on the page: subtitles — 'they also all now have Dark Souls boss subtitles' (article's word is 'subtitles', not 'epithet'); phylactery — 'Instead of the Greek word Phylactery ... the Monster Manual now uses \"spirit jar.\"'; utilitarian encyclopedia — 'It goes from an in-universe collection of monster lore to a glorified encyclopedia. It's stripped down to something purely utilitarian.' Byline and date in page JSON-LD match the citation exactly: author 'Dan Arndt', datePublished 2025-01-28. WebFetch returned HTTP 403; retrieved via curl with a browser user agent, HTTP 200, 289,672 bytes.",
+   "fromFile": "verdicts-dnd-i45-48.json"
+  }
  }
 ]
