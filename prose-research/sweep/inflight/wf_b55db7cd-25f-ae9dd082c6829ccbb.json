@@ -42,5 +42,10 @@
  "agent": "ae9dd082c6829ccbb",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/059d4243-f837-4b07-8096-8c9ca76b03fb/subagents/workflows/wf_b55db7cd-25f/agent-ae9dd082c6829ccbb.jsonl",
  "journal": "failed",
- "checkpointFile": null
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-kay-transcripts-and-readers.json",
+  "claims": 40,
+  "complete": false,
+  "mtime": "19:07:12"
+ }
 }

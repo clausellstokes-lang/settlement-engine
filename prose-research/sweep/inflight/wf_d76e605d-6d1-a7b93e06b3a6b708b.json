@@ -3,12 +3,12 @@
  "name": "kay",
  "angle": "transcripts-and-readers",
  "tag": null,
- "lines": 282,
+ "lines": 338,
  "firstTs": "2026-09-06T22:40:03.727Z",
- "lastTs": "2026-09-06T23:01:00.160Z",
+ "lastTs": "2026-09-06T23:07:12.274Z",
  "tools": {
   "Read": 1,
-  "Bash": 68,
+  "Bash": 83,
   "ToolSearch": 1,
   "WebSearch": 8,
   "mcp__Claude_Browser__navigate": 1
@@ -79,7 +79,22 @@
   "https://www.reddit.com/r/Fantasy/comments/1goa369/tigana_a_review/",
   "https://www.reddit.com/r/Fantasy/comments/15u1pk0/comment/jwnbsp8/",
   "https://www.reddit.com/r/Fantasy/comments/fkdpfg/review_tigana_a_misguided_masterpiece/",
-  "https://www.reddit.com/r/Fantasy/comments/7p5ro9/tigana_by_ggk_should_i_keep_going/"
+  "https://www.reddit.com/r/Fantasy/comments/7p5ro9/tigana_by_ggk_should_i_keep_going/",
+  "https://www.youtube.com/api/timedtext?...`",
+  "https://web.archive.org/web/",
+  "https://html.duckduckgo.com/html/",
+  "https://www\\.reddit\\.com/r/[A-Za-z",
+  "https://web.archive.org/web/2024id_/https://www.reddit.com/r/Fantasy/comments/$S/",
+  "https://www.reddit.com/r/Fantasy/comments/%s/",
+  "https://www.goodreads.com/book/show/104089.Tigana",
+  "https://www.goodreads.com/book/show/104101.The_Lions_of_Al_Rassan",
+  "https://www.goodreads.com/topic/show/565852-guy-gavriel-kay-where-should-i-start",
+  "https://www.reddit.com/r/Fantasy/comments/15u1pk0/some_thoughts_about_tigana_heavy_spoilers/",
+  "https://www.reddit.com/r/Fantasy/comments/ve636z/tigana_why_do_people_like_this_book/",
+  "https://www.reddit.com/r/Fantasy/comments/tizob2/tigana_reviewrant/",
+  "https://www.reddit.com/r/Fantasy/comments/1bep250/is_tigana_a_good_representation_of_guy_gavriel_kay/",
+  "https://www.reddit.com/r/Fantasy/comments/15kr5yn/just_finished_tigana_im_disappointed/",
+  "https://www.reddit.com/r/Fantasy/comments/15i9i3y/tigana_by_guy_gavriel_kay_a_brief_review_spoiler/"
  ],
  "filesWritten": [],
  "lastAssistantText": "I'll start by reading the finder method, then work the roster.",
@@ -87,5 +102,10 @@
  "agent": "a7b93e06b3a6b708b",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/cc123b6c-1961-44c5-b071-c5e5aee7ee80/subagents/workflows/wf_d76e605d-6d1/agent-a7b93e06b3a6b708b.jsonl",
  "journal": "in-flight",
- "checkpointFile": null
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-kay-transcripts-and-readers.json",
+  "claims": 40,
+  "complete": false,
+  "mtime": "19:07:12"
+ }
 }

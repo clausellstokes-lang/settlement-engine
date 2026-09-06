@@ -1,9 +1,9 @@
 {
  "complete": false,
- "coverage": "coverage in progress: Urth September close-reading remainder read in full (34 messages, 21 substantive); no chapter III thread exists (measured against the October and November thread indexes). Reddit reachable only by RSS. cwhowell.com fetched live. Wayback was offline mid-run and is being retried.",
+ "coverage": "in progress: Urth October 2006 close-reading-continuation threads read (40 messages fetched via Wayback raw; 18 substantive). Remaining roster: Jo Walton rereads, Dirda, Gary K. Wolfe/Locus, podcast transcripts, r/genewolfe, donbeck/scatterings1976/lofkin.",
  "sourcesRead": [
   {
-   "title": "(urth) Close Reading: Torturer — Jon Capps, Urth mailing list, September 2006 (message 002913)",
+   "title": "(urth) Close Reading: Torturer \u2014 Jon Capps, Urth mailing list, September 2006 (message 002913)",
    "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/002913.html",
    "kind": "reader",
    "substantive": false,
@@ -11,7 +11,7 @@
    "route": "Wayback raw capture (web.archive.org/web/2021id_/)"
   },
   {
-   "title": "(urth) Close Reading: Torturer — 'nastler', Urth mailing list, September 2006 (message 002914)",
+   "title": "(urth) Close Reading: Torturer \u2014 'nastler', Urth mailing list, September 2006 (message 002914)",
    "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/002914.html",
    "kind": "reader",
    "substantive": false,
@@ -19,7 +19,7 @@
    "route": "Wayback raw capture (web.archive.org/web/2021id_/)"
   },
   {
-   "title": "(urth) Close Reading: Torturer — powens, Urth mailing list, September 2006 (message 002916)",
+   "title": "(urth) Close Reading: Torturer \u2014 powens, Urth mailing list, September 2006 (message 002916)",
    "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/002916.html",
    "kind": "reader",
    "substantive": false,
@@ -27,7 +27,7 @@
    "route": "Wayback raw capture (web.archive.org/web/2021id_/)"
   },
   {
-   "title": "(urth) Close Reading: Torturer — 'HHR', Urth mailing list, September 2006 (message 002917)",
+   "title": "(urth) Close Reading: Torturer \u2014 'HHR', Urth mailing list, September 2006 (message 002917)",
    "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/002917.html",
    "kind": "reader",
    "substantive": true,
@@ -35,7 +35,7 @@
    "route": "Wayback raw capture (web.archive.org/web/2021id_/)"
   },
   {
-   "title": "(urth) Close Reading: Torturer — Rex Lycanthrosaurus, Urth mailing list, September 2006 (message 002918)",
+   "title": "(urth) Close Reading: Torturer \u2014 Rex Lycanthrosaurus, Urth mailing list, September 2006 (message 002918)",
    "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/002918.html",
    "kind": "reader",
    "substantive": true,
@@ -43,7 +43,7 @@
    "route": "Wayback raw capture (web.archive.org/web/2021id_/)"
   },
   {
-   "title": "(urth) Close Reading: Torturer — 'b sharp', Urth mailing list, September 2006 (message 002919)",
+   "title": "(urth) Close Reading: Torturer \u2014 'b sharp', Urth mailing list, September 2006 (message 002919)",
    "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/002919.html",
    "kind": "reader",
    "substantive": true,
@@ -51,7 +51,7 @@
    "route": "Wayback raw capture (web.archive.org/web/2021id_/)"
   },
   {
-   "title": "(urth) Close Reading: Torturer — Tony Ellis, Urth mailing list, September 2006 (message 002920)",
+   "title": "(urth) Close Reading: Torturer \u2014 Tony Ellis, Urth mailing list, September 2006 (message 002920)",
    "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/002920.html",
    "kind": "reader",
    "substantive": true,
@@ -59,7 +59,7 @@
    "route": "Wayback raw capture (web.archive.org/web/2021id_/)"
   },
   {
-   "title": "(urth) Close Reading: Torturer — Rex Lycanthrosaurus, Urth mailing list, September 2006 (message 002921)",
+   "title": "(urth) Close Reading: Torturer \u2014 Rex Lycanthrosaurus, Urth mailing list, September 2006 (message 002921)",
    "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/002921.html",
    "kind": "reader",
    "substantive": true,
@@ -67,7 +67,7 @@
    "route": "Wayback raw capture (web.archive.org/web/2021id_/)"
   },
   {
-   "title": "(urth) Close Reading: Torturer — Dan'l Danehy-Oakes, Urth mailing list, September 2006 (message 002923)",
+   "title": "(urth) Close Reading: Torturer \u2014 Dan'l Danehy-Oakes, Urth mailing list, September 2006 (message 002923)",
    "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/002923.html",
    "kind": "reader",
    "substantive": false,
@@ -75,7 +75,7 @@
    "route": "Wayback raw capture (web.archive.org/web/2021id_/)"
   },
   {
-   "title": "(urth) Close Reading: Torturer — Dan'l Danehy-Oakes, Urth mailing list, September 2006 (message 002924)",
+   "title": "(urth) Close Reading: Torturer \u2014 Dan'l Danehy-Oakes, Urth mailing list, September 2006 (message 002924)",
    "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/002924.html",
    "kind": "reader",
    "substantive": false,
@@ -83,7 +83,7 @@
    "route": "Wayback raw capture (web.archive.org/web/2021id_/)"
   },
   {
-   "title": "(urth) Close Reading: Torturer — Dan'l Danehy-Oakes, Urth mailing list, September 2006 (message 002925)",
+   "title": "(urth) Close Reading: Torturer \u2014 Dan'l Danehy-Oakes, Urth mailing list, September 2006 (message 002925)",
    "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/002925.html",
    "kind": "reader",
    "substantive": true,
@@ -91,7 +91,7 @@
    "route": "Wayback raw capture (web.archive.org/web/2021id_/)"
   },
   {
-   "title": "(urth) Close Reading: Torturer — Roy C. Lackey, Urth mailing list, September 2006 (message 002926)",
+   "title": "(urth) Close Reading: Torturer \u2014 Roy C. Lackey, Urth mailing list, September 2006 (message 002926)",
    "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/002926.html",
    "kind": "reader",
    "substantive": true,
@@ -99,7 +99,7 @@
    "route": "Wayback raw capture (web.archive.org/web/2021id_/)"
   },
   {
-   "title": "(urth) Close Reading: Torturer — Roy C. Lackey, Urth mailing list, September 2006 (message 002927)",
+   "title": "(urth) Close Reading: Torturer \u2014 Roy C. Lackey, Urth mailing list, September 2006 (message 002927)",
    "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/002927.html",
    "kind": "reader",
    "substantive": true,
@@ -107,7 +107,7 @@
    "route": "Wayback raw capture (web.archive.org/web/2021id_/)"
   },
   {
-   "title": "(urth) Close Reading: Torturer — Dan'l Danehy-Oakes, Urth mailing list, September 2006 (message 002929)",
+   "title": "(urth) Close Reading: Torturer \u2014 Dan'l Danehy-Oakes, Urth mailing list, September 2006 (message 002929)",
    "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/002929.html",
    "kind": "reader",
    "substantive": false,
@@ -115,7 +115,7 @@
    "route": "Wayback raw capture (web.archive.org/web/2021id_/)"
   },
   {
-   "title": "(urth) Close Reading: Torturer — Jon Capps, Urth mailing list, September 2006 (message 002932)",
+   "title": "(urth) Close Reading: Torturer \u2014 Jon Capps, Urth mailing list, September 2006 (message 002932)",
    "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/002932.html",
    "kind": "reader",
    "substantive": false,
@@ -123,7 +123,7 @@
    "route": "Wayback raw capture (web.archive.org/web/2021id_/)"
   },
   {
-   "title": "(urth) Close Reading: Torturer — 'nastler', Urth mailing list, September 2006 (message 002936)",
+   "title": "(urth) Close Reading: Torturer \u2014 'nastler', Urth mailing list, September 2006 (message 002936)",
    "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/002936.html",
    "kind": "reader",
    "substantive": true,
@@ -131,7 +131,7 @@
    "route": "Wayback raw capture (web.archive.org/web/2021id_/)"
   },
   {
-   "title": "(urth) Close Reading: Torturer — Roy C. Lackey, Urth mailing list, September 2006 (message 002937)",
+   "title": "(urth) Close Reading: Torturer \u2014 Roy C. Lackey, Urth mailing list, September 2006 (message 002937)",
    "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/002937.html",
    "kind": "reader",
    "substantive": false,
@@ -139,7 +139,7 @@
    "route": "Wayback raw capture (web.archive.org/web/2021id_/)"
   },
   {
-   "title": "(urth) Close Reading: Torturer — 'nastler', Urth mailing list, September 2006 (message 002938)",
+   "title": "(urth) Close Reading: Torturer \u2014 'nastler', Urth mailing list, September 2006 (message 002938)",
    "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/002938.html",
    "kind": "reader",
    "substantive": true,
@@ -147,7 +147,7 @@
    "route": "Wayback raw capture (web.archive.org/web/2021id_/)"
   },
   {
-   "title": "(urth) Close Reading: Torturer — Dan'l Danehy-Oakes, Urth mailing list, September 2006 (message 002945)",
+   "title": "(urth) Close Reading: Torturer \u2014 Dan'l Danehy-Oakes, Urth mailing list, September 2006 (message 002945)",
    "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/002945.html",
    "kind": "reader",
    "substantive": false,
@@ -155,7 +155,7 @@
    "route": "Wayback raw capture (web.archive.org/web/2021id_/)"
   },
   {
-   "title": "(urth) Close Reading: Torturer — Tony Ellis, Urth mailing list, September 2006 (message 002950)",
+   "title": "(urth) Close Reading: Torturer \u2014 Tony Ellis, Urth mailing list, September 2006 (message 002950)",
    "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/002950.html",
    "kind": "reader",
    "substantive": false,
@@ -163,7 +163,7 @@
    "route": "Wayback raw capture (web.archive.org/web/2021id_/)"
   },
   {
-   "title": "(urth) Close Reading: Torturer — Dan'l Danehy-Oakes, Urth mailing list, September 2006 (message 002954)",
+   "title": "(urth) Close Reading: Torturer \u2014 Dan'l Danehy-Oakes, Urth mailing list, September 2006 (message 002954)",
    "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/002954.html",
    "kind": "reader",
    "substantive": false,
@@ -171,7 +171,7 @@
    "route": "Wayback raw capture (web.archive.org/web/2021id_/)"
   },
   {
-   "title": "(urth) Close Reading: Torturer — Dan'l Danehy-Oakes, Urth mailing list, September 2006 (message 002972)",
+   "title": "(urth) Close Reading: Torturer \u2014 Dan'l Danehy-Oakes, Urth mailing list, September 2006 (message 002972)",
    "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/002972.html",
    "kind": "reader",
    "substantive": true,
@@ -179,7 +179,7 @@
    "route": "Wayback raw capture (web.archive.org/web/2021id_/)"
   },
   {
-   "title": "(urth) Close Reading: Torturer — Sarah Dorrance-Minch, Urth mailing list, September 2006 (message 002977)",
+   "title": "(urth) Close Reading: Torturer \u2014 Sarah Dorrance-Minch, Urth mailing list, September 2006 (message 002977)",
    "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/002977.html",
    "kind": "reader",
    "substantive": true,
@@ -187,7 +187,7 @@
    "route": "Wayback raw capture (web.archive.org/web/2021id_/)"
   },
   {
-   "title": "(urth) Close Reading: Torturer — Roy C. Lackey, Urth mailing list, September 2006 (message 002983)",
+   "title": "(urth) Close Reading: Torturer \u2014 Roy C. Lackey, Urth mailing list, September 2006 (message 002983)",
    "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/002983.html",
    "kind": "reader",
    "substantive": true,
@@ -195,7 +195,7 @@
    "route": "Wayback raw capture (web.archive.org/web/2021id_/)"
   },
   {
-   "title": "(urth) Close Reading: Torturer — 'stilskin' (Paul), Urth mailing list, September 2006 (message 002985)",
+   "title": "(urth) Close Reading: Torturer \u2014 'stilskin' (Paul), Urth mailing list, September 2006 (message 002985)",
    "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/002985.html",
    "kind": "reader",
    "substantive": true,
@@ -203,7 +203,7 @@
    "route": "Wayback raw capture (web.archive.org/web/2021id_/)"
   },
   {
-   "title": "(urth) Close Reading: Torturer — Mo Holkar, Urth mailing list, September 2006 (message 002986)",
+   "title": "(urth) Close Reading: Torturer \u2014 Mo Holkar, Urth mailing list, September 2006 (message 002986)",
    "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/002986.html",
    "kind": "reader",
    "substantive": false,
@@ -211,7 +211,7 @@
    "route": "Wayback raw capture (web.archive.org/web/2021id_/)"
   },
   {
-   "title": "(urth) Close Reading: Torturer — Daniel D Jones, Urth mailing list, September 2006 (message 002988)",
+   "title": "(urth) Close Reading: Torturer \u2014 Daniel D Jones, Urth mailing list, September 2006 (message 002988)",
    "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/002988.html",
    "kind": "reader",
    "substantive": true,
@@ -219,7 +219,7 @@
    "route": "Wayback raw capture (web.archive.org/web/2021id_/)"
   },
   {
-   "title": "(urth) Close Reading: Torturer — David Duffy, Urth mailing list, September 2006 (message 002989)",
+   "title": "(urth) Close Reading: Torturer \u2014 David Duffy, Urth mailing list, September 2006 (message 002989)",
    "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/002989.html",
    "kind": "reader",
    "substantive": false,
@@ -227,7 +227,7 @@
    "route": "Wayback raw capture (web.archive.org/web/2021id_/)"
   },
   {
-   "title": "(urth) Close Reading: Torturer — Chris Mulder, Urth mailing list, September 2006 (message 002993)",
+   "title": "(urth) Close Reading: Torturer \u2014 Chris Mulder, Urth mailing list, September 2006 (message 002993)",
    "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/002993.html",
    "kind": "reader",
    "substantive": false,
@@ -235,7 +235,7 @@
    "route": "Wayback raw capture (web.archive.org/web/2021id_/)"
   },
   {
-   "title": "(urth) Close Reading: Torturer — Robin Hankin, Urth mailing list, September 2006 (message 002995)",
+   "title": "(urth) Close Reading: Torturer \u2014 Robin Hankin, Urth mailing list, September 2006 (message 002995)",
    "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/002995.html",
    "kind": "reader",
    "substantive": true,
@@ -243,7 +243,7 @@
    "route": "Wayback raw capture (web.archive.org/web/2021id_/)"
   },
   {
-   "title": "(urth) Close Reading: Torturer — 'b sharp', Urth mailing list, September 2006 (message 003008)",
+   "title": "(urth) Close Reading: Torturer \u2014 'b sharp', Urth mailing list, September 2006 (message 003008)",
    "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/003008.html",
    "kind": "reader",
    "substantive": true,
@@ -251,7 +251,7 @@
    "route": "Wayback raw capture (web.archive.org/web/2021id_/)"
   },
   {
-   "title": "(urth) Close Reading: Torturer — Dan'l Danehy-Oakes, Urth mailing list, September 2006 (message 003009)",
+   "title": "(urth) Close Reading: Torturer \u2014 Dan'l Danehy-Oakes, Urth mailing list, September 2006 (message 003009)",
    "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/003009.html",
    "kind": "reader",
    "substantive": true,
@@ -259,7 +259,7 @@
    "route": "Wayback raw capture (web.archive.org/web/2021id_/)"
   },
   {
-   "title": "(urth) Close Reading: Torturer — Wesley Parsons, Urth mailing list, September 2006 (message 058579)",
+   "title": "(urth) Close Reading: Torturer \u2014 Wesley Parsons, Urth mailing list, September 2006 (message 058579)",
    "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/058579.html",
    "kind": "reader",
    "substantive": false,
@@ -267,7 +267,7 @@
    "route": "Wayback raw capture (web.archive.org/web/2021id_/)"
   },
   {
-   "title": "(urth) Close Reading: Torturer — Jack Redelfs, Urth mailing list, September 2006 (message 058600)",
+   "title": "(urth) Close Reading: Torturer \u2014 Jack Redelfs, Urth mailing list, September 2006 (message 058600)",
    "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/058600.html",
    "kind": "reader",
    "substantive": true,
@@ -275,7 +275,7 @@
    "route": "Wayback raw capture (web.archive.org/web/2021id_/)"
   },
   {
-   "title": "Basic analysis of word and sentence structure in The Shadow of the Torturer, chapter 1 — u/5777777777, r/genewolfe",
+   "title": "Basic analysis of word and sentence structure in The Shadow of the Torturer, chapter 1 \u2014 u/5777777777, r/genewolfe",
    "url": "https://www.reddit.com/r/genewolfe/comments/lq6c8t/basic_analysis_of_word_and_sentence_structure_in/",
    "kind": "measurement",
    "substantive": true,
@@ -283,7 +283,7 @@
    "route": "reddit search RSS (www.reddit.com HTML and .json are 403 from here)"
   },
   {
-   "title": "Anyone else notice an abrupt shift in style from The Sword of Lictor onwards? — u/MelancholyNightmare, r/genewolfe",
+   "title": "Anyone else notice an abrupt shift in style from The Sword of Lictor onwards? \u2014 u/MelancholyNightmare, r/genewolfe",
    "url": "https://www.reddit.com/r/genewolfe/comments/1hsijpa/anyone_else_notice_an_abrupt_shift_in_style_from/",
    "kind": "reader",
    "substantive": true,
@@ -291,7 +291,7 @@
    "route": "reddit search RSS"
   },
   {
-   "title": "Notes Toward an Analysis of the Book of The New Sun — u/WaysofReading, r/genewolfe",
+   "title": "Notes Toward an Analysis of the Book of The New Sun \u2014 u/WaysofReading, r/genewolfe",
    "url": "https://www.reddit.com/r/genewolfe/comments/1et7cug/notes_toward_an_analysis_of_the_book_of_the_new/",
    "kind": "analysis",
    "substantive": true,
@@ -307,7 +307,7 @@
    "route": "reddit RSS"
   },
   {
-   "title": "The Book of the New Sun is the Dark Souls of Books — C.W. Howell",
+   "title": "The Book of the New Sun is the Dark Souls of Books \u2014 C.W. Howell",
    "url": "https://www.cwhowell.com/the-book-of-the-new-sun-is-the-dark-souls-of-books/",
    "kind": "analysis",
    "substantive": true,
@@ -315,12 +315,332 @@
    "route": "live site, browser user agent"
   },
   {
-   "title": "The Fifth Head of Cerberus: Notes on a Neglected Masterpiece — C.W. Howell",
+   "title": "The Fifth Head of Cerberus: Notes on a Neglected Masterpiece \u2014 C.W. Howell",
    "url": "https://www.cwhowell.com/the-fifth-head-of-cerberus-notes-on-a-neglected-masterpiece/",
    "kind": "analysis",
    "substantive": true,
    "date": "2024",
    "route": "live site, browser user agent"
+  },
+  {
+   "title": "Urth mailing list, '(urth) Thecla's genealogy folio' thread, message 003046 (October 2006)",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003046.html",
+   "kind": "reader",
+   "substantive": false,
+   "date": "2006-10",
+   "route": "wayback raw capture (web.archive.org/web/2021id_/)"
+  },
+  {
+   "title": "Urth mailing list, '(urth) Thecla's genealogy folio' thread, message 003048 (October 2006)",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003048.html",
+   "kind": "reader",
+   "substantive": false,
+   "date": "2006-10",
+   "route": "wayback raw capture (web.archive.org/web/2021id_/)"
+  },
+  {
+   "title": "Urth mailing list, '(urth) Thecla's genealogy folio' thread, message 003051 (October 2006)",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003051.html",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2006-10",
+   "route": "wayback raw capture (web.archive.org/web/2021id_/)"
+  },
+  {
+   "title": "Urth mailing list, '(urth) Thecla's genealogy folio' thread, message 003053 (October 2006)",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003053.html",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2006-10",
+   "route": "wayback raw capture (web.archive.org/web/2021id_/)"
+  },
+  {
+   "title": "Urth mailing list, '(urth) Thecla's genealogy folio' thread, message 003054 (October 2006)",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003054.html",
+   "kind": "reader",
+   "substantive": false,
+   "date": "2006-10",
+   "route": "wayback raw capture (web.archive.org/web/2021id_/)"
+  },
+  {
+   "title": "Urth mailing list, '(urth) Thecla's genealogy folio' thread, message 003055 (October 2006)",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003055.html",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2006-10",
+   "route": "wayback raw capture (web.archive.org/web/2021id_/)"
+  },
+  {
+   "title": "Urth mailing list, '(urth) Thecla's genealogy folio' thread, message 003057 (October 2006)",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003057.html",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2006-10",
+   "route": "wayback raw capture (web.archive.org/web/2021id_/)"
+  },
+  {
+   "title": "Urth mailing list, '(urth) Thecla's genealogy folio' thread, message 003058 (October 2006)",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003058.html",
+   "kind": "reader",
+   "substantive": false,
+   "date": "2006-10",
+   "route": "wayback raw capture (web.archive.org/web/2021id_/)"
+  },
+  {
+   "title": "Urth mailing list, '(urth) Ouen's Catherine' thread, message 003060 (October 2006)",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003060.html",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2006-10",
+   "route": "wayback raw capture (web.archive.org/web/2021id_/)"
+  },
+  {
+   "title": "Urth mailing list, '(urth) Ouen's Catherine' thread, message 003061 (October 2006)",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003061.html",
+   "kind": "reader",
+   "substantive": false,
+   "date": "2006-10",
+   "route": "wayback raw capture (web.archive.org/web/2021id_/)"
+  },
+  {
+   "title": "Urth mailing list, '(urth) Ouen's Catherine' thread, message 003062 (October 2006)",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003062.html",
+   "kind": "reader",
+   "substantive": false,
+   "date": "2006-10",
+   "route": "wayback raw capture (web.archive.org/web/2021id_/)"
+  },
+  {
+   "title": "Urth mailing list, '(urth) Ouen's Catherine' thread, message 003063 (October 2006)",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003063.html",
+   "kind": "reader",
+   "substantive": false,
+   "date": "2006-10",
+   "route": "wayback raw capture (web.archive.org/web/2021id_/)"
+  },
+  {
+   "title": "Urth mailing list, '(urth) Ouen's Catherine' thread, message 003066 (October 2006)",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003066.html",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2006-10",
+   "route": "wayback raw capture (web.archive.org/web/2021id_/)"
+  },
+  {
+   "title": "Urth mailing list, '(urth) Thecla's Green Book' thread, message 003067 (October 2006)",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003067.html",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2006-10",
+   "route": "wayback raw capture (web.archive.org/web/2021id_/)"
+  },
+  {
+   "title": "Urth mailing list, '(urth) Ouen's Catherine' thread, message 003068 (October 2006)",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003068.html",
+   "kind": "reader",
+   "substantive": false,
+   "date": "2006-10",
+   "route": "wayback raw capture (web.archive.org/web/2021id_/)"
+  },
+  {
+   "title": "Urth mailing list, '(urth) Ouen's Catherine' thread, message 003094 (October 2006)",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003094.html",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2006-10",
+   "route": "wayback raw capture (web.archive.org/web/2021id_/)"
+  },
+  {
+   "title": "Urth mailing list, '(urth) Catherine, Cyriaca and baby Severian' thread, message 003161 (October 2006)",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003161.html",
+   "kind": "reader",
+   "substantive": false,
+   "date": "2006-10",
+   "route": "wayback raw capture (web.archive.org/web/2021id_/)"
+  },
+  {
+   "title": "Urth mailing list, '(urth) Catherine, Cyriaca and baby Severian' thread, message 003166 (October 2006)",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003166.html",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2006-10",
+   "route": "wayback raw capture (web.archive.org/web/2021id_/)"
+  },
+  {
+   "title": "Urth mailing list, '(urth) Catherine, Cyriaca and baby Severian' thread, message 003175 (October 2006)",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003175.html",
+   "kind": "reader",
+   "substantive": false,
+   "date": "2006-10",
+   "route": "wayback raw capture (web.archive.org/web/2021id_/)"
+  },
+  {
+   "title": "Urth mailing list, '(urth) Parallels' thread, message 003178 (October 2006)",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003178.html",
+   "kind": "reader",
+   "substantive": false,
+   "date": "2006-10",
+   "route": "wayback raw capture (web.archive.org/web/2021id_/)"
+  },
+  {
+   "title": "Urth mailing list, '(urth) Catherine, Cyriaca and baby Severian' thread, message 003180 (October 2006)",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003180.html",
+   "kind": "reader",
+   "substantive": false,
+   "date": "2006-10",
+   "route": "wayback raw capture (web.archive.org/web/2021id_/)"
+  },
+  {
+   "title": "Urth mailing list, '(urth) Parallels' thread, message 003190 (October 2006)",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003190.html",
+   "kind": "reader",
+   "substantive": false,
+   "date": "2006-10",
+   "route": "wayback raw capture (web.archive.org/web/2021id_/)"
+  },
+  {
+   "title": "Urth mailing list, '(urth) The Katharine maid' thread, message 003212 (October 2006)",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003212.html",
+   "kind": "reader",
+   "substantive": false,
+   "date": "2006-10",
+   "route": "wayback raw capture (web.archive.org/web/2021id_/)"
+  },
+  {
+   "title": "Urth mailing list, '(urth) The Katharine maid' thread, message 003216 (October 2006)",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003216.html",
+   "kind": "reader",
+   "substantive": false,
+   "date": "2006-10",
+   "route": "wayback raw capture (web.archive.org/web/2021id_/)"
+  },
+  {
+   "title": "Urth mailing list, '(urth) The Katharine maid' thread, message 003218 (October 2006)",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003218.html",
+   "kind": "reader",
+   "substantive": false,
+   "date": "2006-10",
+   "route": "wayback raw capture (web.archive.org/web/2021id_/)"
+  },
+  {
+   "title": "Urth mailing list, '(urth) The Katharine maid' thread, message 003220 (October 2006)",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003220.html",
+   "kind": "reader",
+   "substantive": false,
+   "date": "2006-10",
+   "route": "wayback raw capture (web.archive.org/web/2021id_/)"
+  },
+  {
+   "title": "Urth mailing list, '(urth) The Katharine maid' thread, message 003224 (October 2006)",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003224.html",
+   "kind": "reader",
+   "substantive": false,
+   "date": "2006-10",
+   "route": "wayback raw capture (web.archive.org/web/2021id_/)"
+  },
+  {
+   "title": "Urth mailing list, '(urth) The Katharine maid' thread, message 003230 (October 2006)",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003230.html",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2006-10",
+   "route": "wayback raw capture (web.archive.org/web/2021id_/)"
+  },
+  {
+   "title": "Urth mailing list, '(urth) The littlest apprentices' thread, message 003263 (October 2006)",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003263.html",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2006-10",
+   "route": "wayback raw capture (web.archive.org/web/2021id_/)"
+  },
+  {
+   "title": "Urth mailing list, '(urth) The littlest apprentices' thread, message 003266 (October 2006)",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003266.html",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2006-10",
+   "route": "wayback raw capture (web.archive.org/web/2021id_/)"
+  },
+  {
+   "title": "Urth mailing list, '(urth) The littlest apprentices' thread, message 003268 (October 2006)",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003268.html",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2006-10",
+   "route": "wayback raw capture (web.archive.org/web/2021id_/)"
+  },
+  {
+   "title": "Urth mailing list, '(urth) Thecla's fourth book' thread, message 058654 (October 2006)",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/058654.html",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2006-10",
+   "route": "wayback raw capture (web.archive.org/web/2021id_/)"
+  },
+  {
+   "title": "Urth mailing list, '(urth) Thecla's genealogy folio' thread, message 058665 (October 2006)",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/058665.html",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2006-10",
+   "route": "wayback raw capture (web.archive.org/web/2021id_/)"
+  },
+  {
+   "title": "Urth mailing list, '(urth) Ouen's Catherine' thread, message 058679 (October 2006)",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/058679.html",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2006-10",
+   "route": "wayback raw capture (web.archive.org/web/2021id_/)"
+  },
+  {
+   "title": "Urth mailing list, '(urth) Thecla's Green Book' thread, message 058684 (October 2006)",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/058684.html",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2006-10",
+   "route": "wayback raw capture (web.archive.org/web/2021id_/)"
+  },
+  {
+   "title": "Urth mailing list, '(urth) Catherine, Cyriaca and baby Severian' thread, message 058775 (October 2006)",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/058775.html",
+   "kind": "reader",
+   "substantive": false,
+   "date": "2006-10",
+   "route": "wayback raw capture (web.archive.org/web/2021id_/)"
+  },
+  {
+   "title": "Urth mailing list, '(urth) Parallels' thread, message 058797 (October 2006)",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/058797.html",
+   "kind": "reader",
+   "substantive": false,
+   "date": "2006-10",
+   "route": "wayback raw capture (web.archive.org/web/2021id_/)"
+  },
+  {
+   "title": "Urth mailing list, '(urth) The Master of the Curators' thread, message 058827 (October 2006)",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/058827.html",
+   "kind": "reader",
+   "substantive": false,
+   "date": "2006-10",
+   "route": "wayback raw capture (web.archive.org/web/2021id_/)"
+  },
+  {
+   "title": "Urth mailing list, '(urth) The Katharine maid' thread, message 058830 (October 2006)",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/058830.html",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2006-10",
+   "route": "wayback raw capture (web.archive.org/web/2021id_/)"
+  },
+  {
+   "title": "Urth mailing list, '(urth) The littlest apprentices' thread, message 058880 (October 2006)",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/058880.html",
+   "kind": "reader",
+   "substantive": false,
+   "date": "2006-10",
+   "route": "wayback raw capture (web.archive.org/web/2021id_/)"
   }
  ],
  "claims": [
@@ -925,6 +1245,440 @@
    "routeHint": "live site, browser user agent",
    "registerHint": "dossier-archivist",
    "confidence": "high"
+  },
+  {
+   "feature": "withheld information and inference",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/058684.html",
+   "page": "body, first paragraph",
+   "source": "'thalassocrat', Urth mailing list, '(urth) Thecla's Green Book' thread, 2006-10-14",
+   "claim": "A close reader reports an apparent authorial slip found only by comparing two incidental physical descriptions of the same book \u2014 its stated size when handed over, and its being too wide for the slot in a cell door.",
+   "quote": "Wolfe seems to have made a",
+   "polarity": "asserts",
+   "registerHint": "dossier-archivist",
+   "kind": "reader",
+   "routeHint": "wayback raw capture https://web.archive.org/web/2021id_/<url>",
+   "confidence": "high",
+   "date": "2006-10"
+  },
+  {
+   "feature": "other: apparent authorial error as concealed design",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003067.html",
+   "page": "body, paragraph 2",
+   "source": "Roy C. Lackey, Urth mailing list, '(urth) Thecla's Green Book' thread, 2006-10-15",
+   "claim": "Lackey rejects the reading that the size discrepancy is an error and holds it deliberate.",
+   "quote": "was just being particularly devious.",
+   "polarity": "rejects",
+   "kind": "reader",
+   "routeHint": "wayback raw capture https://web.archive.org/web/2021id_/<url>",
+   "confidence": "high",
+   "registerHint": "none",
+   "date": "2006-10"
+  },
+  {
+   "feature": "withheld information and inference",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003067.html",
+   "page": "body, paragraph 3",
+   "source": "Roy C. Lackey, Urth mailing list, '(urth) Thecla's Green Book' thread, 2006-10-15",
+   "claim": "Lackey resolves the discrepancy by inferring a second, never-named green book whose existence the narrative mentions only once and obliquely.",
+   "quote": "There is only one oblique mention of it in NEW SUN",
+   "polarity": "asserts",
+   "registerHint": "dossier-archivist",
+   "kind": "reader",
+   "routeHint": "wayback raw capture https://web.archive.org/web/2021id_/<url>",
+   "confidence": "high",
+   "date": "2006-10"
+  },
+  {
+   "feature": "omission as information",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003067.html",
+   "page": "body, paragraph 3",
+   "source": "Roy C. Lackey, Urth mailing list, '(urth) Thecla's Green Book' thread, 2006-10-15",
+   "claim": "Lackey characterises Wolfe's handling of the book that shares the tetralogy's title as saying as little as he could get away with.",
+   "quote": "trying to say as little as he could get away with",
+   "polarity": "asserts",
+   "registerHint": "dossier-archivist",
+   "kind": "reader",
+   "routeHint": "wayback raw capture https://web.archive.org/web/2021id_/<url>",
+   "confidence": "high",
+   "date": "2006-10"
+  },
+  {
+   "feature": "withheld information and inference",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/058665.html",
+   "page": "body, paragraph 1",
+   "kind": "relay",
+   "source": "Roy C. Lackey relaying Gene Wolfe's essay 'Books in The Book of the New Sun' (PLAN[E]T ENGINEERING), Urth mailing list, 2006-10-03",
+   "claim": "Wolfe stated in his own essay that all four of a character's requested books must have something to do with the narrator, i.e. that no listed object in the scene is inert.",
+   "quote": "[t]hey all must have something to do with",
+   "polarity": "asserts",
+   "confidence": "medium",
+   "registerHint": "dossier-archivist",
+   "routeHint": "wayback raw capture https://web.archive.org/web/2021id_/<url>",
+   "date": "2006-10"
+  },
+  {
+   "feature": "omission as information",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003051.html",
+   "page": "body, paragraph 5",
+   "source": "Rex Lycanthrosaurus, Urth mailing list, '(urth) Thecla's genealogy folio' thread, 2006-10-06",
+   "claim": "A load-bearing personal name appears exactly once in the tetralogy, buried at the end of a long sentence.",
+   "quote": "the name Lelia occurs only once and",
+   "polarity": "asserts",
+   "registerHint": "dossier-archivist",
+   "kind": "reader",
+   "routeHint": "wayback raw capture https://web.archive.org/web/2021id_/<url>",
+   "confidence": "high",
+   "date": "2006-10"
+  },
+  {
+   "feature": "withheld information and inference",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003051.html",
+   "page": "body, paragraph 5",
+   "source": "Rex Lycanthrosaurus, Urth mailing list, '(urth) Thecla's genealogy folio' thread, 2006-10-06",
+   "claim": "The reader attributes that once-only placement to deliberate concealment on Wolfe's part.",
+   "quote": "is particularly deceitful in this manner",
+   "polarity": "asserts",
+   "kind": "reader",
+   "routeHint": "wayback raw capture https://web.archive.org/web/2021id_/<url>",
+   "confidence": "high",
+   "registerHint": "none",
+   "date": "2006-10"
+  },
+  {
+   "feature": "withheld information and inference",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003053.html",
+   "page": "body, 'Which sister is the older?' paragraph",
+   "source": "Roy C. Lackey, Urth mailing list, '(urth) Thecla's genealogy folio' thread, 2006-10-07",
+   "claim": "A character's inheritance of an estate is inferred from one line of reported speech; the death and the inheritance are never stated.",
+   "quote": "Her father was dead, so",
+   "polarity": "asserts",
+   "registerHint": "dossier-archivist",
+   "kind": "reader",
+   "routeHint": "wayback raw capture https://web.archive.org/web/2021id_/<url>",
+   "confidence": "high",
+   "date": "2006-10"
+  },
+  {
+   "feature": "place and institution description",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003053.html",
+   "page": "body, penultimate paragraph",
+   "source": "Roy C. Lackey, Urth mailing list, '(urth) Thecla's genealogy folio' thread, 2006-10-07",
+   "claim": "A map and its flat caption in a supplementary volume are used as documentary evidence against the geography implied by the narrative.",
+   "quote": "The map in PE shows exultant villas on the",
+   "polarity": "applies",
+   "registerHint": "dm-page",
+   "kind": "reader",
+   "routeHint": "wayback raw capture https://web.archive.org/web/2021id_/<url>",
+   "confidence": "high",
+   "date": "2006-10"
+  },
+  {
+   "feature": "other: close-reading method",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003053.html",
+   "page": "body, mid-message",
+   "source": "Roy C. Lackey, Urth mailing list, '(urth) Thecla's genealogy folio' thread, 2006-10-07",
+   "claim": "Lackey states the close-reading method explicitly: assemble the scattered flat statements that any hypothesis must account for.",
+   "quote": "Here are some of the \"facts\" that have to be accounted for:",
+   "polarity": "applies",
+   "kind": "reader",
+   "routeHint": "wayback raw capture https://web.archive.org/web/2021id_/<url>",
+   "confidence": "high",
+   "registerHint": "none",
+   "date": "2006-10"
+  },
+  {
+   "feature": "point of view and distance",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003055.html",
+   "page": "body, paragraph 2",
+   "source": "Rex Lycanthrosaurus, Urth mailing list, '(urth) Thecla's genealogy folio' thread, 2006-10-07",
+   "claim": "The reader treats the narrator's own stated explanation of an event as possibly mistaken.",
+   "quote": "Severian may be misinterpreting the reason for her",
+   "polarity": "asserts",
+   "kind": "reader",
+   "routeHint": "wayback raw capture https://web.archive.org/web/2021id_/<url>",
+   "confidence": "high",
+   "registerHint": "none",
+   "date": "2006-10"
+  },
+  {
+   "feature": "point of view and distance",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003055.html",
+   "page": "body, paragraph 2",
+   "source": "Rex Lycanthrosaurus, Urth mailing list, '(urth) Thecla's genealogy folio' thread, 2006-10-07",
+   "claim": "The reader names kin-recognition as the specific blind spot of this first-person narrator.",
+   "quote": "no one is worse at recognizing kin",
+   "polarity": "asserts",
+   "kind": "reader",
+   "routeHint": "wayback raw capture https://web.archive.org/web/2021id_/<url>",
+   "confidence": "high",
+   "registerHint": "none",
+   "date": "2006-10"
+  },
+  {
+   "feature": "withheld information and inference",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003057.html",
+   "page": "body, paragraph 3",
+   "source": "Roy C. Lackey, Urth mailing list, '(urth) Thecla's genealogy folio' thread, 2006-10-12",
+   "claim": "A facial feature mentioned in passing of two separate characters is read as an encoded blood relation the narrative never states.",
+   "quote": "This shared facial characteristic may be Wolfe's way",
+   "polarity": "asserts",
+   "kind": "reader",
+   "routeHint": "wayback raw capture https://web.archive.org/web/2021id_/<url>",
+   "confidence": "high",
+   "registerHint": "none",
+   "date": "2006-10"
+  },
+  {
+   "feature": "omission as information",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/058679.html",
+   "page": "body, paragraph 5",
+   "source": "Roy C. Lackey, Urth mailing list, '(urth) Ouen's Catherine' thread, 2006-10-13",
+   "claim": "The absence of a detail the narrator habitually supplies \u2014 a woman's height \u2014 is itself treated as evidence about her.",
+   "quote": "Nothing at all was mentioned about Catherine's height",
+   "polarity": "asserts",
+   "registerHint": "dossier-archivist",
+   "kind": "reader",
+   "routeHint": "wayback raw capture https://web.archive.org/web/2021id_/<url>",
+   "confidence": "high",
+   "date": "2006-10"
+  },
+  {
+   "feature": "naming and forms of address",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/058679.html",
+   "page": "body, paragraph 3",
+   "source": "Roy C. Lackey, Urth mailing list, '(urth) Ouen's Catherine' thread, 2006-10-13",
+   "claim": "A distinction between two spellings of one name exists on the page but cannot be heard by the characters who speak it.",
+   "quote": "Can you hear the difference in spelling between the spoken",
+   "polarity": "asserts",
+   "registerHint": "dossier-archivist",
+   "kind": "reader",
+   "routeHint": "wayback raw capture https://web.archive.org/web/2021id_/<url>",
+   "confidence": "high",
+   "date": "2006-10"
+  },
+  {
+   "feature": "withheld information and inference",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/058679.html",
+   "page": "body, paragraph 2",
+   "source": "Roy C. Lackey, Urth mailing list, '(urth) Ouen's Catherine' thread, 2006-10-13",
+   "claim": "The narrator asks a question premised on a belief the text never records him forming, leaving the reader to supply it.",
+   "quote": "I don't see any indication in the text prior to this scene",
+   "polarity": "asserts",
+   "registerHint": "dossier-archivist",
+   "kind": "reader",
+   "routeHint": "wayback raw capture https://web.archive.org/web/2021id_/<url>",
+   "confidence": "high",
+   "date": "2006-10"
+  },
+  {
+   "feature": "place and institution description",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003166.html",
+   "page": "body, reply to the burial point",
+   "source": "Roy C. Lackey, Urth mailing list, '(urth) Catherine, Cyriaca and baby Severian' thread, 2006-10-20",
+   "claim": "Burial custom by social class is used as evidence about who a corpse in an early scene can be.",
+   "quote": "Exultants weren't usually buried in the necropolis at all.",
+   "polarity": "applies",
+   "registerHint": "dossier-archivist",
+   "kind": "reader",
+   "routeHint": "wayback raw capture https://web.archive.org/web/2021id_/<url>",
+   "confidence": "high",
+   "date": "2006-10"
+  },
+  {
+   "feature": "point of view and distance",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003166.html",
+   "page": "body, final paragraph",
+   "source": "Roy C. Lackey, Urth mailing list, '(urth) Catherine, Cyriaca and baby Severian' thread, 2006-10-20",
+   "claim": "The manuscript is not a journal but a single retrospective composition, so every sentence is written with knowledge the narrator gained years after the events.",
+   "quote": "Severian's manuscript was not a daily journal or diary.",
+   "polarity": "asserts",
+   "registerHint": "chronicle-line",
+   "kind": "reader",
+   "routeHint": "wayback raw capture https://web.archive.org/web/2021id_/<url>",
+   "confidence": "high",
+   "date": "2006-10"
+  },
+  {
+   "feature": "repetition and refrain",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003175.html",
+   "page": "body, paragraph 3",
+   "kind": "measurement",
+   "source": "Roy C. Lackey, Urth mailing list, '(urth) Catherine, Cyriaca and baby Severian' thread, 2006-10-21",
+   "claim": "One ordinary noun is used of a character ten times in about three pages, and the count is read as a planted signal.",
+   "quote": "ten times in about three pages",
+   "polarity": "asserts",
+   "registerHint": "dossier-archivist",
+   "routeHint": "wayback raw capture https://web.archive.org/web/2021id_/<url>",
+   "confidence": "high",
+   "date": "2006-10"
+  },
+  {
+   "feature": "omission as information",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003060.html",
+   "page": "body, final paragraph",
+   "source": "'thalassocrat', Urth mailing list, '(urth) Ouen's Catherine' thread, 2006-10-14",
+   "claim": "A close reader concludes the text withholds too much for the character to be recovered at all, an echo being all the reader gets.",
+   "quote": "but the woman herself is lost",
+   "polarity": "disputes",
+   "kind": "reader",
+   "routeHint": "wayback raw capture https://web.archive.org/web/2021id_/<url>",
+   "confidence": "high",
+   "registerHint": "none",
+   "date": "2006-10"
+  },
+  {
+   "feature": "withheld information and inference",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003066.html",
+   "page": "body, paragraph 5",
+   "source": "'b sharp', Urth mailing list, '(urth) Ouen's Catherine' thread, 2006-10-15",
+   "claim": "An incidental behavioural detail \u2014 a woman calmly prompting the narrator through a rite he has frozen in \u2014 is read as evidence of her long service in it.",
+   "quote": "he freezes, and the maid cooly prompts him to",
+   "polarity": "asserts",
+   "registerHint": "dossier-archivist",
+   "kind": "reader",
+   "routeHint": "wayback raw capture https://web.archive.org/web/2021id_/<url>",
+   "confidence": "high",
+   "date": "2006-10"
+  },
+  {
+   "feature": "other: incidental physical detail as evidence",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003094.html",
+   "page": "body, paragraph 3",
+   "source": "'b sharp', Urth mailing list, '(urth) Ouen's Catherine' thread, 2006-10-17",
+   "claim": "A reader assembles a hidden biography by matching scattered physical descriptions \u2014 hair, gown, complexion, face shape \u2014 across four separately introduced women.",
+   "quote": "I just can't ignore the circular connection between four characters",
+   "polarity": "applies",
+   "kind": "reader",
+   "routeHint": "wayback raw capture https://web.archive.org/web/2021id_/<url>",
+   "confidence": "high",
+   "registerHint": "none",
+   "date": "2006-10"
+  },
+  {
+   "feature": "place and institution description",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/058830.html",
+   "page": "body, paragraph 4",
+   "source": "Roy C. Lackey, Urth mailing list, '(urth) The Katharine maid' thread, 2006-10-25",
+   "claim": "A ruined building still in ceremonial use is read as physical evidence that the cult it belonged to once held official sanction.",
+   "quote": "annual ceremony is evidence that the cult",
+   "polarity": "applies",
+   "registerHint": "dossier-archivist",
+   "kind": "reader",
+   "routeHint": "wayback raw capture https://web.archive.org/web/2021id_/<url>",
+   "confidence": "high",
+   "date": "2006-10"
+  },
+  {
+   "feature": "omission as information",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/058830.html",
+   "page": "body, paragraph 2",
+   "source": "Roy C. Lackey, Urth mailing list, '(urth) The Katharine maid' thread, 2006-10-25",
+   "claim": "Lackey names a specific stretch of institutional history the text declines to supply and calls the omission important.",
+   "quote": "Alas, the text doesn't say, yet it's",
+   "polarity": "asserts",
+   "registerHint": "dossier-archivist",
+   "kind": "reader",
+   "routeHint": "wayback raw capture https://web.archive.org/web/2021id_/<url>",
+   "confidence": "high",
+   "date": "2006-10"
+  },
+  {
+   "feature": "withheld information and inference",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/058830.html",
+   "page": "body, penultimate paragraph",
+   "source": "Roy C. Lackey, Urth mailing list, '(urth) The Katharine maid' thread, 2006-10-25",
+   "claim": "The officers of an institution are inferred to know the fact the narrative withholds, because the rite could not proceed without their cooperation.",
+   "quote": "The guild masters knew damn well who the maid was",
+   "polarity": "asserts",
+   "registerHint": "dossier-archivist",
+   "kind": "reader",
+   "routeHint": "wayback raw capture https://web.archive.org/web/2021id_/<url>",
+   "confidence": "high",
+   "date": "2006-10"
+  },
+  {
+   "feature": "other: one word carries a plot fact",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003230.html",
+   "page": "body, final paragraph",
+   "source": "Roy C. Lackey, Urth mailing list, '(urth) The Katharine maid' thread, 2006-10-26",
+   "claim": "A disputed fact of parentage turns on which past participle a single word in one sentence is.",
+   "quote": "\"Borne\" is the past participle of \"bear\"",
+   "polarity": "applies",
+   "registerHint": "dossier-archivist",
+   "kind": "reader",
+   "routeHint": "wayback raw capture https://web.archive.org/web/2021id_/<url>",
+   "confidence": "high",
+   "date": "2006-10"
+  },
+  {
+   "feature": "withheld information and inference",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003266.html",
+   "page": "body, final paragraphs",
+   "source": "Daniel D Jones, Urth mailing list, '(urth) The littlest apprentices' thread, 2006-10-31",
+   "claim": "A dispute about what the narrator knows is settled by the logical direction of one conjunction in one sentence.",
+   "quote": "The statement about the cell follows, and is predicated upon",
+   "polarity": "disputes",
+   "registerHint": "dossier-archivist",
+   "kind": "reader",
+   "routeHint": "wayback raw capture https://web.archive.org/web/2021id_/<url>",
+   "confidence": "high",
+   "date": "2006-10"
+  },
+  {
+   "feature": "other: close-reading method",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003266.html",
+   "page": "body, final paragraph",
+   "source": "Daniel D Jones, Urth mailing list, '(urth) The littlest apprentices' thread, 2006-10-31",
+   "claim": "Jones refuses an inference on the ground that the plain meaning of the sentence will not support it.",
+   "quote": "I can't find any interpretation of the plain meaning",
+   "polarity": "rejects",
+   "kind": "reader",
+   "routeHint": "wayback raw capture https://web.archive.org/web/2021id_/<url>",
+   "confidence": "high",
+   "registerHint": "none",
+   "date": "2006-10"
+  },
+  {
+   "feature": "other: internal contradiction in the record",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003268.html",
+   "page": "body, final paragraph",
+   "source": "Daniel D Jones, Urth mailing list, '(urth) The littlest apprentices' thread, 2006-10-31",
+   "claim": "Two flat statements about the same institution's handling of infants are read as contradicting each other.",
+   "quote": "It still leaves the apparent contradiction between the statement that they",
+   "polarity": "asserts",
+   "registerHint": "dossier-archivist",
+   "kind": "reader",
+   "routeHint": "wayback raw capture https://web.archive.org/web/2021id_/<url>",
+   "confidence": "high",
+   "date": "2006-10"
+  },
+  {
+   "feature": "place and institution description",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/003263.html",
+   "page": "body, final paragraph",
+   "source": "Dan Rabin, Urth mailing list, '(urth) The littlest apprentices' thread, 2006-10-30",
+   "claim": "What an order does with a child it cannot use is held to be inferable from the order's one governing habit, obedience.",
+   "quote": "we know exactly what the Order will do",
+   "polarity": "asserts",
+   "registerHint": "dossier-archivist",
+   "kind": "reader",
+   "routeHint": "wayback raw capture https://web.archive.org/web/2021id_/<url>",
+   "confidence": "high",
+   "date": "2006-10"
+  },
+  {
+   "feature": "withheld information and inference",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-October/058654.html",
+   "page": "body, quoted portion",
+   "source": "Roy C. Lackey, quoted in James B. Jordan's message, Urth mailing list, '(urth) Thecla's fourth book' thread, 2006-10-01",
+   "claim": "The narrator's flat statement that he writes in the last year of the old sun is falsified by the later book.",
+   "quote": "That turned out not to be true.",
+   "polarity": "asserts",
+   "confidence": "medium",
+   "registerHint": "chronicle-line",
+   "kind": "reader",
+   "routeHint": "wayback raw capture https://web.archive.org/web/2021id_/<url>",
+   "date": "2006-10"
   }
  ]
 }
