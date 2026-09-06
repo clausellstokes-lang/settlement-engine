@@ -7013,5 +7013,485 @@
    "note": "Same Wayback-recovered Schurer PDF, article p.7: 'Tolkien's first paragraph about the Second Age reads: \"These were the dark years for Men of Middle-earth, but the years of the glory of Numenor. Of events in Middle-earth the records are few and brief, and their dates are often uncertain\" (Lord of the Rings 1082)', in a passage explicitly about Appendix B, 'The Tale of Years'. Quote verbatim, page cite p.7 confirmed. Schurer reads the paragraph as evidence of a bleak view of the world; the claim's closing gloss that 'the annalist states the limits of his sources before listing them' is the claimer's in-world framing, entailed by the quoted primary text but not Schurer's own point.",
    "fromFile": "verdicts-tolkien-i433-447.json"
   }
+ },
+ {
+  "index": 463,
+  "feature": "landscape-description density",
+  "claim": "Drout estimates that over half the novel is landscape description and asks whether fewer words would have been as effective.",
+  "source": "Drout, Wormtalk 2007-04-12",
+  "url": "http://wormtalk.blogspot.com/2007/04/how-to-critique-tolkiens-prose-style-at.html",
+  "quote": "",
+  "angle": "primaries",
+  "verdict": {
+   "index": 463,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "something more than 50% of the novel is devoted to landscape",
+   "note": "Raw blogspot HTML fetched and stripped to text. No quote field was supplied, so the verbatim grade is unavailable; the page's own wording is 'Without doing tedious tabulation, I would venture to argue that something more than 50% of the novel is devoted to landscape description', and the second limb is exact: 'I wonder if Tolkien could have been just as effective with fewer words.' Both limbs supported.",
+   "fromFile": "verdicts-tolkien-i463-477.json"
+  }
+ },
+ {
+  "index": 464,
+  "feature": "apo koinou syntax",
+  "claim": "A phrase like 'speeding along with little hope of stopping or turning' attaches two ways at once, forcing the reader into small re-parsings of the sentence.",
+  "source": "Drout, Wormtalk 2007-04-12",
+  "url": "http://wormtalk.blogspot.com/2007/04/how-to-critique-tolkiens-prose-style-at.html",
+  "quote": "tiny re-constructions of sentence meaning",
+  "angle": "primaries",
+  "verdict": {
+   "index": 464,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "'tiny re-constructions of sentence meaning' appears word for word: 'I think that such tiny re-constructions of sentence meaning are very important in poetry, but others disagree.' The two-way attachment limb is supported by the preceding sentence, which reads the phrase as 'an apo koinu construction: A: \"speeding along with little hope\" ...; B: \"of stopping or turning\"'. Note the page spells it 'apo koinu' (the claim's feature label uses 'apo koinou').",
+   "fromFile": "verdicts-tolkien-i463-477.json"
+  }
+ },
+ {
+  "index": 465,
+  "feature": "deliberate repetition as myth-making",
+  "claim": "The rain-as-grey-curtain image is justified by its recurrence across the book rather than by novelty, producing a mythic feel.",
+  "source": "Drout, Wormtalk 2007-04-12",
+  "url": "http://wormtalk.blogspot.com/2007/04/how-to-critique-tolkiens-prose-style-at.html",
+  "quote": "The recurrent image of the rain as a curtain is significant",
+  "angle": "primaries",
+  "verdict": {
+   "index": 465,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Exact but for sentence-initial capitalisation: '...because the recurrent image of the rain as a curtain is significant elsewhere in The Lord of the Rings, and here were could have the kind of layering through repetition which creates the \"myth\" feel of the book.' Recurrence-across-the-book, the mythic feel, and the rather-than-novelty framing (Drout is hesitant to call 'grey falling curtains' a cliche for this reason) are all supported.",
+   "fromFile": "verdicts-tolkien-i463-477.json"
+  }
+ },
+ {
+  "index": 466,
+  "feature": "critical method",
+  "claim": "Hand-waving about undefined 'depth' is worthless; a real critique of Tolkien's prose must be specific and detailed at the sentence level.",
+  "source": "Drout, Wormtalk 2007-04-12",
+  "url": "http://wormtalk.blogspot.com/2007/04/how-to-critique-tolkiens-prose-style-at.html",
+  "quote": "useless as criticism",
+  "angle": "primaries",
+  "verdict": {
+   "index": 466,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "'useless as criticism' is verbatim in the post's update: 'hand-waving and invocations of a lack of \"depth\" are useless as criticism'; 'undefined' is the post's own word for that notion of depth ('the undefined notion of \"depth\" that Appleyard uses'). The second limb is carried by 'I assert that specific and detailed discussion makes for better scholarship, criticism and intellectual practice than blanket condemnation' plus the post's demonstrated sentence-level method ('I think the sentence would have given the reader a better image without the \"or\"'). The page's assertion is comparative ('makes for better') where the claim says 'must be'.",
+   "fromFile": "verdicts-tolkien-i463-477.json"
+  }
+ },
+ {
+  "index": 467,
+  "feature": "lexical depth by literary reference",
+  "claim": "Tolkien's rare words (eyot, laving, louver, ninnyhammer, dwimmerlaik) are precise terms that link back through literary reference to earlier works.",
+  "source": "Drout, Wormtalk, 'Children of Húrin or, Tolkien: The Scholars and the Critics' (2007-04-08)",
+  "url": "https://wormtalk.blogspot.com/2007/04/children-of-hrin-or-tolkien-scholars.html",
+  "quote": "precise technical terms",
+  "angle": "primaries",
+  "verdict": {
+   "index": 467,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Verbatim: 'when Tolkien uses \"eyot\" or \"laving\" or \"louver,\" or \"ninnyhammer,\" or \"dwimmerlaik,\" he is using precise technical terms and linking back, through literary reference, to earlier works of literature'. All five words, and both limbs (precise terms; literary reference back to earlier works), are on the page.",
+   "fromFile": "verdicts-tolkien-i463-477.json"
+  }
+ },
+ {
+  "index": 468,
+  "feature": "syntactic archaism as allusion",
+  "claim": "The inverted imperative 'Come not between the Nazgûl and his prey' invokes larger literary contexts through traditional referentiality.",
+  "source": "Drout, Wormtalk 2007-04-08",
+  "url": "https://wormtalk.blogspot.com/2007/04/children-of-hrin-or-tolkien-scholars.html",
+  "quote": "makes use of traditional referentiality",
+  "angle": "primaries",
+  "verdict": {
+   "index": 468,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Verbatim: 'When Tolkien uses syntactic constructions such as \"Come not between the Nazgul and his prey,\" or \"That was a grim meeting,\" he makes use of traditional referentiality to invoke larger literary contexts.' The page prints 'Nazgul' without the circumflex and calls it a 'syntactic construction' rather than an 'inverted imperative' — the claim's grammatical label, accurate to the phrase but not the page's wording.",
+   "fromFile": "verdicts-tolkien-i463-477.json"
+  }
+ },
+ {
+  "index": 469,
+  "feature": "modernist misreading of surface",
+  "claim": "The prose is not shallow; the depths it references are simply not the ones the modernist critic knows.",
+  "source": "Drout, Wormtalk 2007-04-08",
+  "url": "https://wormtalk.blogspot.com/2007/04/children-of-hrin-or-tolkien-scholars.html",
+  "quote": "not the depths that the critic knows",
+  "angle": "primaries",
+  "verdict": {
+   "index": 469,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Verbatim: 'It is not, then, that Tolken's prose lacks depth, but that the depths which it references are not the depths that the critic knows.' (The page carries the typo 'Tolken's'.) That sentence says 'the critic'; the 'modernist' qualifier is supported elsewhere on the same page, which ties Appleyard and his fellow reviewers to 'most modernistic aesthetic theories... internalized by the reviewers who publish in the Times' and to 'irony, that all-purpose condiment of modernist writers, critics and journalists'.",
+   "fromFile": "verdicts-tolkien-i463-477.json"
+  }
+ },
+ {
+  "index": 470,
+  "feature": "annalistic vs novelistic voice",
+  "claim": "The Children of Húrin is a hybrid between the historic/annalistic style of The Silmarillion and the novelistic style of The Lord of the Rings.",
+  "source": "Drout, Wormtalk, 'The Children of Húrin Review' (2007-04-17)",
+  "url": "https://wormtalk.blogspot.com/2007/04/children-of-hrin-review-below-contains.html",
+  "quote": "historic/annalistic style of The Silmarillion",
+  "angle": "primaries",
+  "verdict": {
+   "index": 470,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Verbatim: 'Like the \"Narn,\" the story is quite readable, and like the \"Narn,\" it is somewhat of a hybrid between the historic/annalistic style of The Silmarillion and the novelistic style of The Lord of the Rings.' The claim drops the page's hedge 'somewhat of a hybrid'; otherwise every limb is on the page.",
+   "fromFile": "verdicts-tolkien-i463-477.json"
+  }
+ },
+ {
+  "index": 471,
+  "feature": "mythopoeic bricolage",
+  "claim": "Reusing annals, key turns of phrase and stock tableaux from Tolkien's own earlier texts makes the writing feel like inherited myth rather than invention.",
+  "source": "Drout, Wormtalk 2007-04-17",
+  "url": "https://wormtalk.blogspot.com/2007/04/children-of-hrin-review-below-contains.html",
+  "quote": "bricolage of previously existing texts",
+  "angle": "primaries",
+  "verdict": {
+   "index": 471,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Verbatim: 'Tolkien's work feels like myth rather than invention because it contains the same bricolage of previously existing texts that long-established mythological traditions seem to contain', preceded by 'Nagy shows how Tolkien's incorporation of poetry, annals, key turns of phrase, stock tableaux--from his own previous writings--creates the \"mythopoeic\" effects of the writing'. Attribution nuance: Drout is reporting and endorsing Gergely Nagy's 'The Great Chain of Reading' ('the most effective explanation'), not advancing it as his own; the claim does not misattribute, but the argument is Nagy's.",
+   "fromFile": "verdicts-tolkien-i463-477.json"
+  }
+ },
+ {
+  "index": 472,
+  "feature": "sentence-level criticism (gap)",
+  "claim": "The biggest failing in Tolkien criticism is the absence of discussion of his sentence-level writing, word choice and syntax.",
+  "source": "Drout & Wynne, Envoi 9.2 (2000), p. 123",
+  "url": "https://ora.ox.ac.uk/objects/uuid:f0131cce-4e2e-4ac6-9d86-5bd7df17ed40/files/rsx61dm627",
+  "quote": "his sentence-level writing, his word choice and syntax",
+  "angle": "primaries",
+  "verdict": {
+   "index": 472,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "PDF fetched as a binary from ORA (67pp, 200) and text-extracted. Verbatim on the page headed 123: 'The biggest failing in Tolkien criticism, however, is its lack of discussion of Tolkien's style, his sentence-level writing, his word choice and syntax.' The cited page 123 is confirmed by the PDF's own running head. Every limb supported.",
+   "fromFile": "verdicts-tolkien-i463-477.json"
+  }
+ },
+ {
+  "index": 473,
+  "feature": "shifting voice / archaism / diction",
+  "claim": "Shippey's Author of the Century addresses head-on the archaism, diction and shifting voice that characterise The Lord of the Rings.",
+  "source": "Drout & Wynne, Envoi 9.2 (2000), p. 123",
+  "url": "https://ora.ox.ac.uk/objects/uuid:f0131cce-4e2e-4ac6-9d86-5bd7df17ed40/files/rsx61dm627",
+  "quote": "the issues of archaism, diction, and shifting voice",
+  "angle": "primaries",
+  "verdict": {
+   "index": 473,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Verbatim on the same page 123: 'Shippey's Author likewise addresses head-on the issues of archaism, diction, and shifting voice that characterize LotR in particular.' (A first whitespace-normalised search missed it only because the PDF extractor joined 'archaism,diction' across a line break with no space; a space-stripped comparison confirms the printed text matches word for word.)",
+   "fromFile": "verdicts-tolkien-i463-477.json"
+  }
+ },
+ {
+  "index": 474,
+  "feature": "per-speaker register (Gaffer baseline)",
+  "claim": "Inside Gandalf's monologue at the Council of Elrond, Gaffer Gamgee's speech ('changes for the worst', 'abide') functions as the base-line of ordinary, semantically empty modern talk.",
+  "source": "Tom Shippey, The Road to Middle-earth, pp. 107–8",
+  "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+  "quote": "a kind of base-line of normality",
+  "angle": "primaries",
+  "verdict": {
+   "index": 474,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Archive.org djvu full text fetched and the <pre> block extracted; OCR line-wraps normalised. Verbatim: 'Within that monologue Gaffer Gamgee functions as a kind of base-line of normality -and, concomitantly, of emptiness.' Both cited phrases are there ('I can't abide changes... least of all changes for the worst'), the emptiness limb is explicit ('As for \"abide\", as used by Gaffer Gamgee it has almost no semantic content at all'), and the 'modern' limb is carried by 'there is another modern voice in Gandalf's monologue... this is Saruman's' set against 'By contrast with these familiar styles and voices'. The page break '108 THE ROAD TO MIDDLE-EARTH' falls mid-passage, confirming the cited pp. 107-8.",
+   "fromFile": "verdicts-tolkien-i463-477.json"
+  }
+ },
+ {
+  "index": 475,
+  "feature": "per-speaker register (political voice)",
+  "claim": "Saruman's habit of balancing phrases so incompatibles are resolved, and his empty words 'deploring', 'ultimate', 'real', mark him by style and lexis as a politician.",
+  "source": "Shippey, The Road to Middle-earth, p. 108",
+  "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+  "quote": "Saruman talks like a politician",
+  "angle": "primaries",
+  "verdict": {
+   "index": 475,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Verbatim: 'the message is conveyed by style and lexis. Saruman talks like a politician.' The balancing limb and the three empty words are exact: 'No other character in Middle-earth has Saruman's trick of balancing phrases against each other so that incompatibles are resolved, and none comes out with words as empty as \"deploring\", \"ultimate\", worst of all, \"real\".' The passage sits between the page-108 and page-109 running heads, confirming the cited p. 108.",
+   "fromFile": "verdicts-tolkien-i463-477.json"
+  }
+ },
+ {
+  "index": 476,
+  "feature": "archaic syntax (Elrond)",
+  "claim": "Elrond's Council speech is full of old-fashioned syntactic inversions and words like weregild, esquire, shards, suited to his age.",
+  "source": "Shippey, The Road to Middle-earth, p. 109",
+  "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+  "quote": "full of old-fashioned inversions of syntax",
+  "angle": "primaries",
+  "verdict": {
+   "index": 476,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Verbatim (OCR breaks 'old- fashioned' across a line): 'Elrond's speech (256-8), as is only suitable for one so old, is full of old-fashioned inversions of syntax and words like \"weregild\", \"esquire\", \"shards\".' All three words and the suited-to-his-age limb are on the page, which falls after the page-109 running head as cited.",
+   "fromFile": "verdicts-tolkien-i463-477.json"
+  }
+ },
+ {
+  "index": 477,
+  "feature": "authenticating archaism (Gandalf, Isildur)",
+  "claim": "Gandalf uses an older vocabulary than usual at the Council, and Isildur's scroll combines ancient words and endings ('glede', 'fadeth', 'loseth') with Gollum-like phrasing.",
+  "source": "Shippey, The Road to Middle-earth, pp. 109–10",
+  "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+  "quote": "as if to authenticate himself",
+  "angle": "primaries",
+  "verdict": {
+   "index": 477,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Verbatim: 'Gandalf himself uses an older vocabulary than usual, as if to authenticate himself' (p. 109). The second limb is on p. 110: 'Gandalf's account of Isildur makes a point through its combination of ancient words and endings (\"glede\", \"fadeth\", \"loseth\", etc.) with sudden recall of the words of Bilbo and Gollum.' Two wording differences, neither changing the substance: Shippey writes 'Gandalf's account of Isildur', not 'Isildur's scroll', and names Bilbo as well as Gollum. Page break markers 110 and 111 bracket the passage, confirming the cited pp. 109-10.",
+   "fromFile": "verdicts-tolkien-i463-477.json"
+  }
+ },
+ {
+  "index": 493,
+  "feature": "dismissal of prose style (hostile)",
+  "claim": "Jenny Turner's 2001 LRB essay dismisses Tolkien's prose style in passing without analysis.",
+  "source": "Jenny Turner 2001, as reported in Curry, 'The Critical Response to Tolkien's Fiction'",
+  "url": "http://www.patrickcurry.co.uk/papers/Critical%20Response%20for%202nd%20edn.pdf",
+  "quote": "dreadful prose style",
+  "angle": "primaries",
+  "verdict": {
+   "index": 493,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Turner mentions Tolkien's \"dreadful prose style\" in passing (cf. Drout 2004)",
+   "note": "Curry PDF (raw, pypdf text, p.6): 'Turner mentions Tolkien's \"dreadful prose style\" in passing (cf. Drout 2004)'. Every limb held: Curry names the 2001 London Review of Books article by its editor Jenny Turner ('Reasons for Liking Tolkien', LRB 23.22, 15 Nov 2001, in the bibliography) and characterises the essay as seeking 'not so much to understand Tolkien or his readers as to place them beyond serious consideration'. 'Without analysis' is the page's 'in passing' (Curry's cf. Drout 2004 points to the analysis Turner does not do).",
+   "fromFile": "verdicts-tolkien-i493-507.json"
+  }
+ },
+ {
+  "index": 494,
+  "feature": "three lexical causes of archaicity",
+  "claim": "The reader's impression of archaicity comes partly from over-use of nineteenth-century fiction words, avoidance of modern-world words, and dense coinages, unusual grammar and rare or obsolescent words.",
+  "source": "Dirk Siepmann, 'Tolkien as a stylist: a corpus-based investigation into The Lord of the Rings' (CL2017)",
+  "url": "https://www.birmingham.ac.uk/documents/college-artslaw/corpus/conference-archives/2017/general/paper239.pdf",
+  "quote": "three simple lexical causes",
+  "angle": "primaries",
+  "verdict": {
+   "index": 494,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "impression of archaicity ... partly due to three simple lexical causes",
+   "note": "Siepmann CL2017 PDF p.2: 'the impression of archaicity which any reader will experience on reading Lord of the Rings is partly due to three simple lexical causes: the \"overuse\" of words borrowed from nineteenth-century fiction, the avoidance of words associated with the modern world, and the comparatively dense use of new coinages, unusual grammatical patterns, rare or obsolescent words.' All three causes match the claim exactly.",
+   "fromFile": "verdicts-tolkien-i493-507.json"
+  }
+ },
+ {
+  "index": 495,
+  "feature": "nineteenth-century keyword sets",
+  "claim": "Keywords shared with nineteenth-century novels cluster in landscape, position/direction (whither, thither, thence, yonder, afar), warfare, and descriptive verbs/adjectives, many obsolete when Tolkien wrote.",
+  "source": "Siepmann CL2017",
+  "url": "https://www.birmingham.ac.uk/documents/college-artslaw/corpus/conference-archives/2017/general/paper239.pdf",
+  "quote": "so many of the keywords used to describe its settings",
+  "angle": "primaries",
+  "verdict": {
+   "index": 495,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "four lexical sets; setting keywords 'obsolete or obsolescent at the time of writing'",
+   "note": "Siepmann p.2 lists 'four lexical sets: (1) landscape description; (2) position or direction; (3) warfare and the struggle between good and evil; (4) other descriptive verbs and adjectives', among 'the highest scoring 200 key words shared with nineteenth-century novels', with 'whither, thither, thence, whence, upwards, yonder, afar' all present. The obsolescence limb is the page's 'so many of the keywords used to describe its settings were obsolete or obsolescent at the time of writing' — stated of the setting keywords, which is enough to support the claim's hedged 'many'.",
+   "fromFile": "verdicts-tolkien-i493-507.json"
+  }
+ },
+ {
+  "index": 496,
+  "feature": "Beowulf-translation diction",
+  "claim": "Tolkien borrows words such as valour, valiant and corslet from his Beowulf translation and stretches them beyond their Old and Middle English range.",
+  "source": "Siepmann CL2017",
+  "url": "https://www.birmingham.ac.uk/documents/college-artslaw/corpus/conference-archives/2017/general/paper239.pdf",
+  "quote": "Tolkien borrows a host of words from his translation of Beowulf",
+  "angle": "primaries",
+  "verdict": {
+   "index": 496,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "borrows a host of words from his Beowulf translation, stretching them creatively",
+   "note": "Siepmann p.2: 'Tolkien borrows a host of words from his translation of Beowulf (e.g. valour, valiant, corslet), stretching them creatively to cover a wider range of uses than was possible in Old or Middle English'. Exemplars and the Old/Middle English range limb both verbatim.",
+   "fromFile": "verdicts-tolkien-i493-507.json"
+  }
+ },
+ {
+  "index": 497,
+  "feature": "modern words in old grammatical patterns",
+  "claim": "Even core modern words are used in nineteenth-century patterns, e.g. 'a black smoke' with the indefinite article, rare in modern fiction.",
+  "source": "Siepmann CL2017",
+  "url": "https://www.birmingham.ac.uk/documents/college-artslaw/corpus/conference-archives/2017/general/paper239.pdf",
+  "quote": "tends to use many of these words in nineteenth-century patterns",
+  "angle": "primaries",
+  "verdict": {
+   "index": 497,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "smoke commonly preceded by the indefinite article; 'a black smoke swirled in the air'",
+   "note": "Siepmann p.2: modern key words 'are usually part of the core vocabulary of present-day English ... However, Tolkien tends to use many of these words in nineteenth-century patterns. One example among many is smoke, which is commonly preceded by the indefinite article in Lord of the Rings (e.g. … a black smoke swirled in the air.), a use that is notably infrequent in modern fiction.'",
+   "fromFile": "verdicts-tolkien-i493-507.json"
+  }
+ },
+ {
+  "index": 498,
+  "feature": "descriptive verbs (modernist streak)",
+  "claim": "Tolkien follows a modernist tendency in his abundant manner-laden verbs: clutch, cower, flicker, gleam, glimmer, loom, peer, plod, stride, twist.",
+  "source": "Siepmann CL2017",
+  "url": "https://www.birmingham.ac.uk/documents/college-artslaw/corpus/conference-archives/2017/general/paper239.pdf",
+  "quote": "abundant use of descriptive verbs",
+  "angle": "primaries",
+  "verdict": {
+   "index": 498,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "follows modernist tendencies in his abundant use of descriptive verbs",
+   "note": "Siepmann p.2: 'One area in which Tolkien tends to follow modernist tendencies is his abundant use of descriptive verbs (i.e. verbs which apart from denoting an event contain an additional semantic feature that assumes the function of a manner adverb...)'. All ten verbs cited in the claim (clutch, cower, flicker, gleam, glimmer, loom, peer, plod, stride, twist) appear in the paper's key-verb list.",
+   "fromFile": "verdicts-tolkien-i493-507.json"
+  }
+ },
+ {
+  "index": 499,
+  "feature": "Tolkien-exclusive keywords",
+  "claim": "Words key only to Tolkien (dingle, fen, glades, starless, lore-masters, wolf-riders, yesteryear, yuledays, along/among/outwards) are rare but not archaic and together create otherworldliness.",
+  "source": "Siepmann CL2017",
+  "url": "https://www.birmingham.ac.uk/documents/college-artslaw/corpus/conference-archives/2017/general/paper239.pdf",
+  "quote": "an atmosphere of medievalism or otherworldliness",
+  "angle": "primaries",
+  "verdict": {
+   "index": 499,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "rare in present-day English, 'although not archaic', creating medievalism or otherworldliness",
+   "note": "Siepmann pp.2-3: the Tolkien-exclusive ('non-key in 19th and 20th century fiction') keywords include dingle, fen, glades, starless, lore-masters, wolf-riders, yesteryear, yuledays and 'along, among, outwards'; 'most of these words are comparatively rare in present-day English and, although not archaic, work together to create an atmosphere of medievalism or otherworldliness.'",
+   "fromFile": "verdicts-tolkien-i493-507.json"
+  }
+ },
+ {
+  "index": 500,
+  "feature": "homely collocation and hyperbole",
+  "claim": "Tolkien prefers the most homely collocations available yet uses everyday adjectives like 'great' in unusual pairings, and his key semantic domains (speed, size, loudness) point to hyperbole.",
+  "source": "Siepmann CL2017",
+  "url": "https://www.birmingham.ac.uk/documents/college-artslaw/corpus/conference-archives/2017/general/paper239.pdf",
+  "quote": "a marked preference for the most homely collocations available",
+  "angle": "primaries",
+  "verdict": {
+   "index": 500,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "homely collocations, yet 'everyday adjectives in ... unusual collocations'; hyperbole hypothesis",
+   "note": "Siepmann p.3: 'Tolkien shows a marked preference for the most homely collocations available. However, Tolkien also uses everyday adjectives in what would have been considered unusual collocations even in his day. Great, for example...' and the domains 'speed:fast (slow)', 'entire/maximum', 'sound:loud', 'temperature:hot/on fire', 'long, tall and wide' are 'the last five domains lending additional weight to the hypothesis that Tolkien tends to resort to hyperbole' — covering speed, loudness and size.",
+   "fromFile": "verdicts-tolkien-i493-507.json"
+  }
+ },
+ {
+  "index": 501,
+  "feature": "linguistic postmodernism",
+  "claim": "Far from amateurish, the prose deploys several centuries of linguistic development, putting old words to new uses and vice versa.",
+  "source": "Siepmann CL2017",
+  "url": "https://www.birmingham.ac.uk/documents/college-artslaw/corpus/conference-archives/2017/general/paper239.pdf",
+  "quote": "he is a linguistic postmodernist",
+  "angle": "primaries",
+  "verdict": {
+   "index": 501,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "far from 'amateurish' ... employs several centuries' worth of linguistic developments",
+   "note": "Siepmann p.3: 'far from being \"amateurish\", Tolkien's prose effectively employs several centuries' worth of linguistic developments, putting old words to new uses and vice versa. In a much less obvious sense than in the case of James Joyce or Virginia Woolf, he is a linguistic postmodernist.' Quote verbatim; every limb of the claim on the page.",
+   "fromFile": "verdicts-tolkien-i493-507.json"
+  }
+ },
+ {
+  "index": 502,
+  "feature": "dependence on the nineteenth-century novel",
+  "claim": "Keyword, n-gram and collocation methods show the style of The Lord of the Rings relies heavily on nineteenth-century novels and on Tolkien's Beowulf translation.",
+  "source": "Kullmann & Siepmann, 'Tolkien as a Stylist: Key Words and Key Collocations' (2021), ch. 2",
+  "url": "https://link.springer.com/chapter/10.1007/978-3-030-69299-5_2",
+  "quote": "relies heavily on the nineteenth-century novel",
+  "angle": "primaries",
+  "verdict": {
+   "index": 502,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "key word method, key n-grams and collocations; relies heavily on the nineteenth-century novel",
+   "note": "link.springer.com serves a CDN 'Client Challenge' and has no Wayback capture for _2; recovered via Springer's own mirror host rd.springer.com/chapter/10.1007/978-3-030-69299-5_2 (HTTP 200, 93KB, full chapter landing page with abstract). Abstract: 'Using a variety of corpus-linguistic tools and approaches, such as the key word method and the computation of key n-grams and collocations, we show how the style of The Lord of the Rings relies heavily on the nineteenth-century novel and on Tolkien's translation of Beowulf.' Raw page reached, not a snippet or summarizer.",
+   "fromFile": "verdicts-tolkien-i493-507.json"
+  }
+ },
+ {
+  "index": 503,
+  "feature": "collocational subtlety",
+  "claim": "The full subtlety of Tolkien's collocations has escaped both casual readers and literary critics.",
+  "source": "Kullmann & Siepmann 2021, ch. 2",
+  "url": "https://link.springer.com/chapter/10.1007/978-3-030-69299-5_2",
+  "quote": "escaped both the casual reader's and the literary critic's notice",
+  "angle": "primaries",
+  "verdict": {
+   "index": 503,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "full subtlety of the resultant collocations has so far escaped ... notice",
+   "note": "Same rd.springer.com raw page (ch. 2 abstract): 'The full subtlety of the resultant collocations has so far escaped both the casual reader's and the literary critic's notice.' Quote verbatim; the claim's 'Tolkien's collocations' is the abstract's 'the resultant collocations' (those of his style, as analysed).",
+   "fromFile": "verdicts-tolkien-i493-507.json"
+  }
+ },
+ {
+  "index": 504,
+  "feature": "hobbit focalisation in ordinary language",
+  "claim": "The third-person narrator presents the point of view of a group of characters, usually hobbits, recorded in ordinary language.",
+  "source": "Kullmann & Siepmann 2021, ch. 4 'Points of View'",
+  "url": "https://link.springer.com/chapter/10.1007/978-3-030-69299-5_4",
+  "quote": "usually hobbits",
+  "angle": "primaries",
+  "verdict": {
+   "index": 504,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "narrator presents the point of view of a group of characters, usually hobbits",
+   "note": "Live Springer blocked (Client Challenge); recovered via Wayback raw capture web.archive.org/web/20251019112825id_/...69299-5_4?error=cookies_not_supported. Ch. 4 abstract: 'This chapter examines those parts of The Lord of the Rings which are written as a third-person narrative. Most of the time the narrator presents the point of view of a group of characters, usually hobbits, or a single character...' and 'While the hobbits' points of view are recorded in \"ordinary\" language'. Both limbs on the page.",
+   "fromFile": "verdicts-tolkien-i493-507.json"
+  }
+ },
+ {
+  "index": 505,
+  "feature": "archaic diction for epic characters",
+  "claim": "Other passages carry an archaic diction reminiscent of ancient epic and Macpherson's Ossian, conveying an omniscient point of view tied to epic characters like Aragorn.",
+  "source": "Kullmann & Siepmann 2021, ch. 4",
+  "url": "https://link.springer.com/chapter/10.1007/978-3-030-69299-5_4",
+  "quote": "archaic diction, reminiscent of ancient epic poetry",
+  "angle": "primaries",
+  "verdict": {
+   "index": 505,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "archaic diction, reminiscent of ancient epic poetry as well as Macpherson's Ossian",
+   "note": "Same Wayback raw capture of ch. 4 abstract: 'other passages are characterised by an archaic diction, reminiscent of ancient epic poetry as well as Macpherson's Ossian. They convey an omniscient point of view, usually in connection with \"epic characters\" like Aragorn.' Every limb (Ossian, omniscient POV, Aragorn) verbatim.",
+   "fromFile": "verdicts-tolkien-i493-507.json"
+  }
+ },
+ {
+  "index": 506,
+  "feature": "nineteenth-century focalisation practice",
+  "claim": "Limiting point of view to certain characters' perceptions, thoughts and feelings follows nineteenth-century novelistic practice.",
+  "source": "Kullmann & Siepmann 2021, ch. 4",
+  "url": "https://link.springer.com/chapter/10.1007/978-3-030-69299-5_4",
+  "quote": "follows nineteenth-century novelistic practice",
+  "angle": "primaries",
+  "verdict": {
+   "index": 506,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In limiting the point of view to the perceptions, thoughts and feelings of certain characters",
+   "note": "Same Wayback raw capture of ch. 4 abstract: 'In limiting the point of view to the perceptions, thoughts and feelings of certain characters, Tolkien follows nineteenth-century novelistic practice.' Quote verbatim, whole claim supported.",
+   "fromFile": "verdicts-tolkien-i493-507.json"
+  }
+ },
+ {
+  "index": 507,
+  "feature": "self-effacing narrator",
+  "claim": "Thomas calls the narrator of The Lord of the Rings self-effacing, unintrusive and vanishing, and counts ten different viewpoints in the opening chapter.",
+  "source": "Paul Edmund Thomas, 'Some of Tolkien's Narrators' (2000), as quoted in Kullmann & Siepmann 2021, ch. 4",
+  "url": "https://link.springer.com/chapter/10.1007/978-3-030-69299-5_4",
+  "quote": "ten different viewpoints",
+  "angle": "primaries",
+  "verdict": {
+   "index": 507,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "calling him 'self-effacing', 'unintrusive' and 'vanishing' ... ten different viewpoints",
+   "note": "Same Wayback raw capture of ch. 4 — the page exposes the chapter's Notes; note 7 reads: 'Paul Edmund Thomas draws attention to the narrator's non-committal stance in the opening chapter, calling him \"self-effacing\", \"unintrusive\" and \"vanishing\" (175-176), and identifies ten different viewpoints in this first chapter (177).' The Works Cited on the same page confirms Thomas, Paul Edmund, 'Some of Tolkien's Narrators', in Tolkien's Legendarium (Greenwood, 2000), 161-181. All limbs verbatim.",
+   "fromFile": "verdicts-tolkien-i493-507.json"
+  }
  }
 ]

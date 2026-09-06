@@ -73,3 +73,74 @@
   [mojeek] bytes=5531 results=1
   - Newsletter | https://buttondown.email/Mojeek
   [yahoo] bytes=0 results=0
+  [brave] bytes=73789 results=0
+
+### QUERY: Le Guin "Steering the Craft" "crowding and leaping" editor analysis
+  [mojeek] bytes=5582 results=1
+  - Newsletter | https://buttondown.email/Mojeek
+  [yahoo] bytes=217336 results=8
+  - kaelan.fyi https://kaelan.fyi › research › le-guin-craft Le Guin's Craft | Research | Kaelan | https://kaelan.fyi/research/le-guin-craft/
+  - marginchronicles.com https://marginchronicles.com › site › articles Ursula K. Le Guin on the Subtle  | https://marginchronicles.com/site/articles/leaping-over-dialogue.html
+  - wouldthatimight.blogspot.com https://wouldthatimight.blogspot.com › 2018 › 07 Le Guin's Steering The | https://wouldthatimight.blogspot.com/2018/07/le-guins-steering-craft-chapter-ten.html
+  - Ursula K. Le Guin https://www.ursulakleguin.com › steering-the-craft Ursula K. Le Guin — Steering th | https://www.ursulakleguin.com/steering-the-craft
+  - laurellecommunications.blog https://laurellecommunications.blog › 2023/05/07 › steering Steering the | https://laurellecommunications.blog/2023/05/07/steering-the-craft-a-handbook-for-story-tellers/
+  - Archive https://archive.org › download › steering-the-craft-a-twenty Steering the Craft - Archive.or | https://archive.org/download/steering-the-craft-a-twenty-first-century-guide-to-sailing-the-sea-of-story-repr/steering-the-craft-a-twenty-first-century-guide-to-sailing-the-sea-of-story-reprintnbsped-9780544611610-9780544612341-0544611616.pdf
+  - Daily Kos https://www.dailykos.com › stories › 2023/1/12 Write On! Crowding and Leaping, according t | https://www.dailykos.com/stories/2023/1/12/2146773/community/Write-On-Crowding-and-Leaping-according-to-LeGuin/
+  - Suggestions | https://yahoo.uservoice.com/forums/193847-search
+  [brave] bytes=73789 results=0
+
+### QUERY: Le Guin Tehanu prose register later Earthsea books craft essay
+  [mojeek] bytes=5569 results=1
+  - Newsletter | https://buttondown.email/Mojeek
+  [yahoo] bytes=185573 results=6
+  - eNotes.com https://www.enotes.com › topics › tehanu Essay & Research Prompts — Tehanu - eNotes.com | https://www.enotes.com/topics/tehanu/teachers/essay-prompts
+  - BookRags https://www.bookrags.com › lessonplan › tehanu2 Tehanu: The Last Book of Earthsea Essay Top | https://www.bookrags.com/lessonplan/tehanu2/essaytopics.html
+  - BookRags https://www.bookrags.com › Tehanu Tehanu: The Last Book of Earthsea - BookRags.com | https://www.bookrags.com/Tehanu/
+  - prosperosbooksva.com https://prosperosbooksva.com › journal › earthsea-reading Returning to Earthsea | https://prosperosbooksva.com/journal/earthsea-reading-order-ursula-k-le-guin/
+  - litseller.com https://litseller.com › k-le-guin-ursula › tehanu Tehanu — Ursula K. Le Guin: Brief ov | https://litseller.com/k-le-guin-ursula/tehanu
+  - Suggestions | https://yahoo.uservoice.com/forums/193847-search
+  [brave] bytes=73789 results=0
+
+### QUERY: Le Guin Hemingway prose comparison essay sentences
+  [mojeek] bytes=5551 results=1
+  - Newsletter | https://buttondown.email/Mojeek
+  [yahoo] bytes=0 results=0
+  [brave] bytes=73789 results=0
+
+### QUERY: "Le Guin" "The Sound of Your Writing" chapter blog
+  [mojeek] bytes=5563 results=1
+  - Newsletter | https://buttondown.email/Mojeek
+  [yahoo] bytes=0 results=0
+  [brave] bytes=73789 results=0
+
+### QUERY: "Kim Stanley Robinson" Le Guin style prose essay
+  [mojeek] bytes=5555 results=1
+  - Newsletter | https://buttondown.email/Mojeek
+  [yahoo] bytes=0 results=0
+  [brave] bytes=73789 results=0
+
+### QUERY: Le Guin Earthsea "narrative designer" OR "game writer" prose lessons
+  [mojeek] bytes=5583 results=1
+  - Newsletter | https://buttondown.email/Mojeek
+  [yahoo] bytes=0 results=0
+  [brave] bytes=73789 results=0
+
+### QUERY: "Writing Excuses" Le Guin prose
+  [mojeek] bytes=5532 results=1
+  - Newsletter | https://buttondown.email/Mojeek
+  [yahoo] bytes=0 results=0
+  [brave] bytes=73789 results=0
+
+### QUERY: Le Guin "Earthsea" "prose" "sentence" analysis novelist blog "how she"
+  [mojeek] bytes=5593 results=1
+  - Newsletter | https://buttondown.email/Mojeek
+  [yahoo] bytes=205588 results=8
+  - boldly.blue https://boldly.blue › ursula-k-le-guin-writing-style Ursula K. Le Guin's Writing Style - | https://boldly.blue/ursula-k-le-guin-writing-style/
+  - Scribd https://www.scribd.com › document › 848879133 Ursula K. Le Guin: Science and Ethics | PDF - S | https://www.scribd.com/document/848879133/Stengers-UrsulaLeGuinThinkinginSFMode
+  - Reddit https://www.reddit.com › r › UrsulaKLeGuin Ursula K. Le Guin - Reddit | https://www.reddit.com/r/UrsulaKLeGuin/
+  - Collider https://collider.com › perfect-high-fantasy-books 10 Perfect High Fantasy Books That I Knew | https://collider.com/perfect-high-fantasy-books-masterpieces-first-10-pages/
+  - Reddit https://www.reddit.com › r › TrueLit What Are You Reading This Week and Weekly Rec Thread | https://www.reddit.com/r/TrueLit/comments/149l9to/what_are_you_reading_this_week_and_weekly_rec/
+  - sydneybookpublishers.com https://sydneybookpublishers.com › blogs › popular-book-genres Book Genres  | https://sydneybookpublishers.com/blogs/popular-book-genres/
+  - The Brutalist Report https://brutalist.report The Brutalist Report | https://brutalist.report/
+  - Suggestions | https://yahoo.uservoice.com/forums/193847-search
+  [brave] bytes=73789 results=0
