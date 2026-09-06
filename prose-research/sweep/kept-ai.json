@@ -5645,6 +5645,214 @@
   }
  },
  {
+  "index": 449,
+  "feature": "regurgitated tropes; no surprise",
+  "claim": "Humour depends on surprise, and a predictive model that regurgitates tropes cannot supply it.",
+  "source": "Mirowski, Mathewson, Pittman, Evans — 'A Robot Walks into a Bar: Can Language Models Serve as Creativity Support Tools for Comedy?' (FAccT 2024)",
+  "url": "https://arxiv.org/html/2405.20956",
+  "quote": "AI is only adept at regurgitating tropes",
+  "angle": "peer-reviewed-absentees",
+  "verdict": {
+   "index": 449,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "AI is only adept at regurgitating tropes",
+   "note": "Raw arXiv HTML (2405.20956v2) fetched 200 with a browser UA. Quote exact, Sec. 4.4: 'the whole idea of humor is that it is surprising, and it is so human, and AI is only adept at regurgitating tropes' (p15), framed by the authors as: 'By simply learning to predict the most likely next token of text, they hypothesized, models will be unable to produce the surprising and unique moments that are hallmarks of comedy.' All limbs present; note the proposition is reported as a participant hypothesis (p15), not an authors' finding.",
+   "fromFile": "verdicts-ai-i449-463.json"
+  }
+ },
+ {
+  "index": 450,
+  "feature": "unspoken subtext missing",
+  "claim": "Comedy runs on unspoken subtext that a text-only model neither carries nor reads.",
+  "source": "Mirowski, Mathewson, Pittman, Evans — 'A Robot Walks into a Bar: Can Language Models Serve as Creativity Support Tools for Comedy?' (FAccT 2024)",
+  "url": "https://arxiv.org/html/2405.20956",
+  "quote": "comedy is all about subtext",
+  "angle": "peer-reviewed-absentees",
+  "verdict": {
+   "index": 450,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "comedy is all about subtext, and a lot of that subtext can be unspoken",
+   "note": "Quote exact, Sec. 4.4.2: 'comedy is all about subtext, and a lot of that subtext can be unspoken, about who's on stage, what environment they're in' (p14). Authors' framing supports the second limb: 'This poses a fundamental challenge for LLMs, they argued, because they lacked any context beyond what is provided to them in the prompt.' Section heading 4.4.3 supplies 'text-only medium'.",
+   "fromFile": "verdicts-ai-i449-463.json"
+  }
+ },
+ {
+  "index": 451,
+  "feature": "placeless voice; no audience or location",
+  "claim": "LLM material has no sense of where or to whom it is spoken.",
+  "source": "Mirowski, Mathewson, Pittman, Evans — 'A Robot Walks into a Bar: Can Language Models Serve as Creativity Support Tools for Comedy?' (FAccT 2024)",
+  "url": "https://arxiv.org/html/2405.20956",
+  "quote": "everywhere and nowhere all at once",
+  "angle": "peer-reviewed-absentees",
+  "verdict": {
+   "index": 451,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "everywhere and nowhere all at once",
+   "note": "Quote exact, Sec. 4.4.2 (p11), whose heading is \"AI's lack of context (understanding of its audience and location) is a fundamental limitation\" — audience and location are exactly the 'to whom' and 'where' of the claim. Preceding participant quotes contrast India/UK and LA/Raleigh/Chicago/Albuquerque.",
+   "fromFile": "verdicts-ai-i449-463.json"
+  }
+ },
+ {
+  "index": 452,
+  "feature": "moderation flattens dark and minority-coded material",
+  "claim": "Safety filters refused dark material and stripped out gay-coded language, which comedians read as censorship of their own identities.",
+  "source": "Mirowski, Mathewson, Pittman, Evans — 'A Robot Walks into a Bar: Can Language Models Serve as Creativity Support Tools for Comedy?' (FAccT 2024)",
+  "url": "https://arxiv.org/html/2405.20956",
+  "quote": "taking out the gay language of it",
+  "angle": "peer-reviewed-absentees",
+  "verdict": {
+   "index": 452,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it's taking out the gay language of it to make it more appealing or more palpable",
+   "note": "Quote exact, Sec. 4.3.3 (p6). Dark-material limb confirmed separately in Sec. 4.2.2 (p8): 'it wouldn't write me any dark stuff, because it sort of thought I was going to commit suicide. So it just stopped giving me anything.' Censorship-of-identity limb confirmed by the abstract: moderation 'reinforced hegemonic viewpoints by erasing minority groups and their perspectives, and qualified this as a form of censorship.'",
+   "fromFile": "verdicts-ai-i449-463.json"
+  }
+ },
+ {
+  "index": 453,
+  "feature": "cultural defaults survive a language switch",
+  "claim": "Switching the conversation into Indian languages left the character names un-localised.",
+  "source": "Mirowski, Mathewson, Pittman, Evans — 'A Robot Walks into a Bar: Can Language Models Serve as Creativity Support Tools for Comedy?' (FAccT 2024)",
+  "url": "https://arxiv.org/html/2405.20956",
+  "quote": "it didn’t automatically change the names",
+  "angle": "peer-reviewed-absentees",
+  "verdict": {
+   "index": 453,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "when I switched the whole conversation to Indian languages, it didn't automatically change the names",
+   "note": "Quote exact, Sec. 4.3.2 (p18), continuing 'It still was Maria, Evan, Lexi'. Section heading confirms the generalisation: 'When prompted to reflect non-dominant identities, LLMs made only shallow adjustments.' A parallel Swedish example (p20) corroborates.",
+   "fromFile": "verdicts-ai-i449-463.json"
+  }
+ },
+ {
+  "index": 454,
+  "feature": "no pride or uniqueness in AI-assisted material",
+  "claim": "Most participants felt neither pride nor uniqueness in material co-written with the model; the Creativity Support Index was mediocre.",
+  "source": "Mirowski, Mathewson, Pittman, Evans — 'A Robot Walks into a Bar: Can Language Models Serve as Creativity Support Tools for Comedy?' (FAccT 2024)",
+  "url": "https://arxiv.org/html/2405.20956",
+  "quote": "did not feel pride in the material written with AI",
+  "angle": "peer-reviewed-absentees",
+  "verdict": {
+   "index": 454,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The majority of participants did not feel pride in the material written with AI, nor did they feel it was unique",
+   "note": "Quote exact, Sec. 3. CSI limb confirmed by the paper's own word: 'We computed the Creativity Support Index ... with an average score that is mediocre (mu=54.6, sigma=18.1)', against the paper's own scale note in Sec. 2.2 that 'is a number between 0 and 100, where 90 is considered excellent and 50 mediocre'.",
+   "fromFile": "verdicts-ai-i449-463.json"
+  }
+ },
+ {
+  "index": 455,
+  "feature": "delivery and surprise absent from a text-only medium",
+  "claim": "The paper names delivery and surprise as critical comedic elements a text-only model cannot provide.",
+  "source": "Mirowski, Mathewson, Pittman, Evans — 'A Robot Walks into a Bar: Can Language Models Serve as Creativity Support Tools for Comedy?' (FAccT 2024)",
+  "url": "https://arxiv.org/html/2405.20956",
+  "quote": "delivery and surprise",
+  "angle": "peer-reviewed-absentees",
+  "verdict": {
+   "index": 455,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "As a text-only medium, (current) LLMs are missing critical aspects of comedy: delivery and surprise",
+   "note": "Quote exact; it is the wording of section heading 4.4.3 itself, which carries every limb of the claim (text-only medium, critical aspects of comedy, delivery and surprise, missing).",
+   "fromFile": "verdicts-ai-i449-463.json"
+  }
+ },
+ {
+  "index": 458,
+  "feature": "vague stock phrases instead of specifics",
+  "claim": "Weak summaries substitute stock phrases for the specific content of the story (64 'vague' span errors across models).",
+  "source": "Subbiah, Zhang, Chilton, McKeown — 'Reading Subtext: Evaluating Large Language Models on Short Story Summarization with Writers' (TACL 2024)",
+  "url": "https://arxiv.org/html/2403.01061",
+  "quote": "stock phrases or stand-ins rather than accurate, specific summary",
+  "angle": "peer-reviewed-absentees",
+  "verdict": {
+   "index": 458,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "makes use of...stock phrases or stand-ins rather than accurate, specific summary",
+   "note": "Quote exact, Sec. 6.1, listed among comments on 'the worst summaries' — matching the claim's 'weak summaries'. The figure checks against Table 5: Coverage/vague = 15 (GPT-4) + 19 (Claude) + 30 (Llama) = 64 total, and the paper states 'vagueness is a significant issue across all three models'.",
+   "fromFile": "verdicts-ai-i449-463.json"
+  }
+ },
+ {
+  "index": 459,
+  "feature": "schoolroom over-analysis that misses the feeling",
+  "claim": "Summaries pile on interpretive claims in a classroom register while missing the story's larger emotional point.",
+  "source": "Subbiah, Zhang, Chilton, McKeown — 'Reading Subtext: Evaluating Large Language Models on Short Story Summarization with Writers' (TACL 2024)",
+  "url": "https://arxiv.org/html/2403.01061",
+  "quote": "like a high school english class",
+  "angle": "peer-reviewed-absentees",
+  "verdict": {
+   "index": 459,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "tries to make too many analyses like a high school english class while missing the overall bigger feelings",
+   "note": "Quote exact, Sec. 6.1, in the list of comments on the worst summaries. Every limb present in the source sentence: piling on interpretation ('too many analyses'), classroom register ('high school english class'), missing the emotional point ('missing the overall bigger feelings').",
+   "fromFile": "verdicts-ai-i449-463.json"
+  }
+ },
+ {
+  "index": 460,
+  "feature": "hypernormative interpretation",
+  "claim": "Claude imposed a heteronormative monogamous reading of an interaction over what the text actually says.",
+  "source": "Subbiah, Zhang, Chilton, McKeown — 'Reading Subtext: Evaluating Large Language Models on Short Story Summarization with Writers' (TACL 2024)",
+  "url": "https://arxiv.org/html/2403.01061",
+  "quote": "assumes a heteronormative monogamous interpretation",
+  "angle": "peer-reviewed-absentees",
+  "verdict": {
+   "index": 460,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Claude assumes a heteronormative monogamous interpretation of the interaction instead of what is written",
+   "note": "Quote exact, Sec. 6.2, and the source sentence names Claude and carries the 'over what the text actually says' limb as 'instead of what is written'. Corroborated by a writer's comment about 'a hypernormative interpretive framework'.",
+   "fromFile": "verdicts-ai-i449-463.json"
+  }
+ },
+ {
+  "index": 461,
+  "feature": "implication read literally",
+  "claim": "An implied death was rendered as a deliberate choice to stay at the summit.",
+  "source": "Subbiah, Zhang, Chilton, McKeown — 'Reading Subtext: Evaluating Large Language Models on Short Story Summarization with Writers' (TACL 2024)",
+  "url": "https://arxiv.org/html/2403.01061",
+  "quote": "The cold settled into me",
+  "angle": "peer-reviewed-absentees",
+  "verdict": {
+   "index": 461,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The cold settled into me",
+   "note": "Quote exact, Sec. 6.2, in the sentence carrying both limbs: 'The action error example in Figure 7 mistakenly states that the narrator decided to stay at the summit. However, \"The cold settled into me\", is meant to imply that the narrator died at the summit, which was not an action or choice.'",
+   "fromFile": "verdicts-ai-i449-463.json"
+  }
+ },
+ {
+  "index": 462,
+  "feature": "errors cluster in what characters did and felt",
+  "claim": "Most faithfulness errors fall in Action and Feeling, the categories requiring interpretation of characters' deeds and reactions.",
+  "source": "Subbiah, Zhang, Chilton, McKeown — 'Reading Subtext: Evaluating Large Language Models on Short Story Summarization with Writers' (TACL 2024)",
+  "url": "https://arxiv.org/html/2403.01061",
+  "quote": "most faithfulness errors across the models are in Action and Feeling",
+  "angle": "peer-reviewed-absentees",
+  "verdict": {
+   "index": 462,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "most faithfulness errors across the models are in Action and Feeling",
+   "note": "Quote exact, Sec. 6.2, immediately followed by the claim's second limb verbatim in substance: 'These errors require interpretation of what characters did and how they reacted or felt.' Arithmetic checks: Table 5 faithfulness Action 39 + Feeling 23 = 62 of 104 total.",
+   "fromFile": "verdicts-ai-i449-463.json"
+  }
+ },
+ {
+  "index": 463,
+  "feature": "unsupported analysis even in top-rated summaries",
+  "claim": "Summaries rated 4/4 for analysis still contained on average at least one analysis error (104 unsupported-analysis spans in total).",
+  "source": "Subbiah, Zhang, Chilton, McKeown — 'Reading Subtext: Evaluating Large Language Models on Short Story Summarization with Writers' (TACL 2024)",
+  "url": "https://arxiv.org/html/2403.01061",
+  "quote": "at least one error in analysis on average",
+  "angle": "peer-reviewed-absentees",
+  "verdict": {
+   "index": 463,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "summaries rated 4 for analysis actually contain at least one error in analysis on average",
+   "note": "Quote exact, Sec. 6.1. The '4/4' framing is correct: Sec. 5.2 states writers 'rate each of the four attributes on a Likert scale from 1 to 4', and Table 3 gives 1.22 average analysis errors at rating 4. The parenthetical checks against Table 5: Analysis/unsupported 18 + 16 + 70 = 104.",
+   "fromFile": "verdicts-ai-i449-463.json"
+  }
+ },
+ {
   "index": 464,
   "feature": "excellence only about half the time",
   "claim": "GPT-4 and Claude can produce excellent literary summaries, but only about half the time.",
@@ -5866,6 +6074,230 @@
    "trueWording": "Unwillingness to accept nuance; anything that strays is a flaw.",
    "note": "Table 8, under 'Lack of Nuance Subtext or Symbolism', SH: 'Its unwillingness to accept nuance. The story must be either happy or entirely fatalistic and the model finds that anything that strays is a flaw in the work.' Quote verbatim; 'resists ambiguity' = 'unwillingness to accept nuance', and the treats-as-flawed limb is the page's own trailing clause.",
    "fromFile": "verdicts-ai-i464-478.json"
+  }
+ },
+ {
+  "index": 479,
+  "feature": "homogenising toward dominant narratives",
+  "claim": "Writers saw a violent homogenising pull toward the narratives of dominant powers and voices.",
+  "source": "Chakrabarty, Padmakumar, Brahman, Muresan — 'Creativity Support in the Age of Large Language Models: An Empirical Study Involving Emerging Writers' (arXiv 2023)",
+  "url": "https://arxiv.org/html/2309.12570",
+  "quote": "a weird and violent kind of homogenizing",
+  "angle": "peer-reviewed-absentees",
+  "verdict": {
+   "index": 479,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“a weird and violent kind of homogenizing that steer toward the narratives of dominant powers, voices, and stories”",
+   "note": "Quote verbatim in Sec. 6.5 weakness table (theme ‘Reliance on Cliches and Tropes’). The ‘dominant powers, voices’ framing is participant FV’s alone; the plural ‘writers’ holds for the homogenising/generic pull, which NM (‘cliched conception of literature’, ‘generic… essay-like texts’), SH (‘one narrative that it knows how to write’) and MC (‘autocompletes with the most obvious version’) also report. Cite FV by name for the dominant-powers wording.",
+   "fromFile": "verdicts-ai-i479-493.json"
+  }
+ },
+ {
+  "index": 481,
+  "feature": "style mimicry is shallow imitation",
+  "claim": "Asked to mimic an author, the model produced a campy facsimile rather than the author's actual wit.",
+  "source": "Chakrabarty, Padmakumar, Brahman, Muresan — 'Creativity Support in the Age of Large Language Models: An Empirical Study Involving Emerging Writers' (arXiv 2023)",
+  "url": "https://arxiv.org/html/2309.12570",
+  "quote": "less ‘artificial intelligence’ and more ‘automatic imitation’",
+  "angle": "peer-reviewed-absentees",
+  "verdict": {
+   "index": 481,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "MG: “less ‘artificial intelligence’ and more ‘automatic imitation’ … a shallow campy weird facsimile of Rupert’s style”",
+   "note": "Quote verbatim in Sec. 6.6. Every limb holds: asked to mimic a writer’s style (Rupert Everett), the model produced ‘a shallow campy weird facsimile’ instead of the author’s actual wit — the page calls Everett’s writing ‘delightfully cleverly bitchy and hilarious’, which the model ‘couldn’t do’. Single participant (MG), and the claim already says ‘the model’, not ‘writers’.",
+   "fromFile": "verdicts-ai-i479-493.json"
+  }
+ },
+ {
+  "index": 482,
+  "feature": "derivative plotting shaped by alignment",
+  "claim": "Plot instincts were boring or carried a particular ethical perspective the writers attributed to alignment.",
+  "source": "Chakrabarty, Padmakumar, Brahman, Muresan — 'Creativity Support in the Age of Large Language Models: An Empirical Study Involving Emerging Writers' (arXiv 2023)",
+  "url": "https://arxiv.org/html/2309.12570",
+  "quote": "The AI’s creative impulses are the definition of derivative",
+  "angle": "peer-reviewed-absentees",
+  "verdict": {
+   "index": 482,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "ES: “The AI’s creative impulses are the definition of derivative, meaning the instincts on plotting are often boring, or interestingly embedded with a particular ethical perspective (alignment).”",
+   "note": "Quote verbatim; both limbs (boring plot instincts; ethical perspective ascribed to alignment) sit in the same sentence, with ‘(alignment)’ written by the participant. The authors endorse the attribution in their own voice nearby (‘potentially an artifact of aligning models via RLHF’; Ippolito et al. 2022 on alignment training being in conflict). Named source is ES; other writers (Anon, SH, MG) report the moralising sibling of the same effect.",
+   "fromFile": "verdicts-ai-i479-493.json"
+  }
+ },
+ {
+  "index": 483,
+  "feature": "formulaic and too literal",
+  "claim": "Dialogue and description came out formulaic and the model read craft too literally.",
+  "source": "Chakrabarty, Padmakumar, Brahman, Muresan — 'Creativity Support in the Age of Large Language Models: An Empirical Study Involving Emerging Writers' (arXiv 2023)",
+  "url": "https://arxiv.org/html/2309.12570",
+  "quote": "is too literal",
+  "angle": "peer-reviewed-absentees",
+  "verdict": {
+   "index": 483,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Anon: craft “is too literal”; NM: “dialogue and description that is very formulaic”",
+   "note": "The quoted fragment ‘is too literal’ appears verbatim (Anon, on characterization and plot). The other limb is verbatim too, from NM in the same table: ‘will produce dialogue and description that is very formulaic’; MC adds it ‘can’t effectively write real scenes with realistic dialogue and details’. Both limbs supported, by two different participants.",
+   "fromFile": "verdicts-ai-i479-493.json"
+  }
+ },
+ {
+  "index": 484,
+  "feature": "writer fights the tool",
+  "claim": "One writer described the session as fighting the model to get what they wanted rather than being helped.",
+  "source": "Chakrabarty, Padmakumar, Brahman, Muresan — 'Creativity Support in the Age of Large Language Models: An Empirical Study Involving Emerging Writers' (arXiv 2023)",
+  "url": "https://arxiv.org/html/2309.12570",
+  "quote": "fighting against the AI to produce what I wanted",
+  "angle": "peer-reviewed-absentees",
+  "verdict": {
+   "index": 484,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "NM: “It mostly felt as though I was fighting against the AI to produce what I wanted, instead of the AI helping me.”",
+   "note": "Quote verbatim, appearing twice (Sec. 6.4 and the frustration discussion). ‘One writer’ is exactly right — the page attributes it to NM — and ‘rather than being helped’ is the sentence’s own second half.",
+   "fromFile": "verdicts-ai-i479-493.json"
+  }
+ },
+ {
+  "index": 485,
+  "feature": "Western default suggestions",
+  "claim": "The first suggested food was always pizza or sushi and the first festival invariably Christmas, for Indian writers too.",
+  "source": "Agarwal, Naaman, Vashistha — 'AI Suggestions Homogenize Writing Toward Western Styles and Diminish Cultural Nuances' (CHI 2025)",
+  "url": "https://arxiv.org/html/2409.11360",
+  "quote": "always pizza or sushi",
+  "angle": "peer-reviewed-absentees",
+  "verdict": {
+   "index": 485,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“the first suggested food item was always pizza or sushi, and the first suggested festival was invariably Christmas”",
+   "note": "Quote ‘always pizza or sushi’ word-for-word (Sec. 4.4.2 and again in 4.4.3), with ‘invariably’ the page’s own adverb for Christmas. The ‘for Indian writers too’ limb is supported: the suggestions were the same for both cohorts, and the page tracks the consequence for Indians specifically — no Indian chose sushi without AI yet it appeared in three AI-condition essays, and Christmas rose above the 12.5% (3/24) No-AI baseline.",
+   "fromFile": "verdicts-ai-i479-493.json"
+  }
+ },
+ {
+  "index": 486,
+  "feature": "Western gaze on the writer's own culture",
+  "claim": "With suggestions on, Indians described their own food and festivals from a Western, exoticising gaze.",
+  "source": "Agarwal, Naaman, Vashistha — 'AI Suggestions Homogenize Writing Toward Western Styles and Diminish Cultural Nuances' (CHI 2025)",
+  "url": "https://arxiv.org/html/2409.11360",
+  "quote": "describe their own food and festivals from a Western gaze",
+  "angle": "peer-reviewed-absentees",
+  "verdict": {
+   "index": 486,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“with AI suggestions, Indians lose cultural nuance and describe their own food and festivals from a Western gaze”",
+   "note": "Quote verbatim in the introduction. The ‘exoticising’ limb is separately supported in Sec. 4.4.1: AI phrasing ‘subtly exoticizing Indian food’, with exoticization, misrepresentation and Western gaze coded as analysis dimensions (Table 5, after Qadri et al. 2023).",
+   "fromFile": "verdicts-ai-i479-493.json"
+  }
+ },
+ {
+  "index": 487,
+  "feature": "cross-cultural convergence",
+  "claim": "Indian–American essay similarity rose from 0.48 to 0.54 and nationality-prediction accuracy fell from 90.6% to 83.5% with AI.",
+  "source": "Agarwal, Naaman, Vashistha — 'AI Suggestions Homogenize Writing Toward Western Styles and Diminish Cultural Nuances' (CHI 2025)",
+  "url": "https://arxiv.org/html/2409.11360",
+  "quote": "rose to 0.54",
+  "angle": "peer-reviewed-absentees",
+  "verdict": {
+   "index": 487,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "similarity 0.48 (SD=0.11) → 0.54 (SD=0.13); classifier accuracy 90.6% → 83.5%",
+   "note": "Both figures verbatim and both limbs exact: ‘without AI, the mean similarity between Indians and Americans was 0.48… with AI, the similarity score rose to 0.54’ (t(6958)=-17.89, p<0.001); ‘the accuracy decreased by 7.1 percentage points, from 90.6% in the No AI condition to 83.5% in the AI condition’ (t(38)=2.25, p=0.03). The second figure is nationality-prediction (classifier) accuracy, as the claim says.",
+   "fromFile": "verdicts-ai-i479-493.json"
+  }
+ },
+ {
+  "index": 488,
+  "feature": "specific detail replaced by generic tropes",
+  "claim": "Regional preparation details gave way to 'rich', 'flavorful', 'aromatic' phrasing that subtly exoticised the dish.",
+  "source": "Agarwal, Naaman, Vashistha — 'AI Suggestions Homogenize Writing Toward Western Styles and Diminish Cultural Nuances' (CHI 2025)",
+  "url": "https://arxiv.org/html/2409.11360",
+  "quote": "subtly exoticizing Indian food",
+  "angle": "peer-reviewed-absentees",
+  "verdict": {
+   "index": 488,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "essays with AI “frequently used cultural tropes like ‘rich’, ‘flavorful’, and ‘aromatic’, subtly exoticizing Indian food”",
+   "note": "Quote verbatim; the displaced detail limb is the same sentence’s first half — No-AI participants ‘described specific regional variations and accompaniments’ (Table 5 gives ‘dates chutney’ as the concrete instance) and AI essays ‘did not contain such details’. Dish in question is Biryani.",
+   "fromFile": "verdicts-ai-i479-493.json"
+  }
+ },
+ {
+  "index": 489,
+  "feature": "extra editing burden on non-Western writers",
+  "claim": "Indians modified suggestions in 63.5% of tasks versus 59.4% for Americans and gained less per suggestion.",
+  "source": "Agarwal, Naaman, Vashistha — 'AI Suggestions Homogenize Writing Toward Western Styles and Diminish Cultural Nuances' (CHI 2025)",
+  "url": "https://arxiv.org/html/2409.11360",
+  "quote": "Indians lose cultural nuance",
+  "angle": "peer-reviewed-absentees",
+  "verdict": {
+   "index": 489,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“Indian participants modified suggestions in 63.5% of the tasks (SD=4.2) whereas American participants modified suggestions in 59.4%”",
+   "note": "Both statistics exact (t(198)=6.48, p<0.001, Cohen’s d=0.91), and the second limb is confirmed in Sec. 4.1.3: ‘Indians derived significantly less productivity per suggestion compared to Americans’ (U=5424.0, p<0.001), ‘Americans derived more productivity from each suggestion’. The supplied quote ‘Indians lose cultural nuance’ is verbatim on the page but comes from the introduction’s cultural-gaze sentence, not from the passage carrying these numbers — re-quote from Sec. 4.1.2/4.1.3 if the quotation must sit with the figures.",
+   "fromFile": "verdicts-ai-i479-493.json"
+  }
+ },
+ {
+  "index": 490,
+  "feature": "Western public figures suggested",
+  "claim": "Initial celebrity suggestions for Indian writers were almost exclusively Western figures and never matched the final choice.",
+  "source": "Agarwal, Naaman, Vashistha — 'AI Suggestions Homogenize Writing Toward Western Styles and Diminish Cultural Nuances' (CHI 2025)",
+  "url": "https://arxiv.org/html/2409.11360",
+  "quote": "almost exclusively Western figures",
+  "angle": "peer-reviewed-absentees",
+  "verdict": {
+   "index": 490,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“no instance where the first suggested celebrity matched the one ultimately included… the initial suggestions were almost exclusively Western figures (with one exception)”",
+   "note": "Quote verbatim. Both limbs supported for Indian participants; note the page’s parenthetical ‘(with one exception)’, which the claim’s ‘almost exclusively’ already accommodates, while ‘never matched the final choice’ is the page’s stronger ‘no instance’.",
+   "fromFile": "verdicts-ai-i479-493.json"
+  }
+ },
+ {
+  "index": 491,
+  "feature": "a single default poetic mode",
+  "claim": "GPT poetry is far more constrained and uniform than human poetry, defaulting to rhymed iambic quatrains.",
+  "source": "Walsh, Preus, Gronski — 'Does ChatGPT Have a Poetic Style?' (CHR 2024, CEUR Vol-3834 paper122)",
+  "url": "https://arxiv.org/html/2410.15299",
+  "quote": "much more constrained and uniform than human poetry",
+  "angle": "peer-reviewed-absentees",
+  "verdict": {
+   "index": 491,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“GPT poetry is much more constrained and uniform than human poetry, showing a strong penchant for rhyme, quatrains… iambic meter”",
+   "note": "Quote verbatim in both the abstract and Sec. 1. The ‘default rhymed iambic quatrains’ limb is the paper’s own conclusion: ‘there is a sort of default poetic mode in GPT models, which favors quatrains, iambic meter, and end rhyme.’",
+   "fromFile": "verdicts-ai-i479-493.json"
+  }
+ },
+ {
+  "index": 492,
+  "feature": "quatrain dominance",
+  "claim": "66.8% of GPT-3.5 and 59.6% of GPT-4 stanzas are quatrains against 16.7% of human stanzas.",
+  "source": "Walsh, Preus, Gronski — 'Does ChatGPT Have a Poetic Style?' (CHR 2024, CEUR Vol-3834 paper122)",
+  "url": "https://arxiv.org/html/2410.15299",
+  "quote": "a whopping 66.8% of all GPT-3.5 stanzas",
+  "angle": "peer-reviewed-absentees",
+  "verdict": {
+   "index": 492,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“just 16.7% of the human-authored stanzas are quatrains, a whopping 66.8% of all GPT-3.5 stanzas and 59.6% of all GPT-4 stanzas”",
+   "note": "Quote verbatim; all three percentages exact and stanza-level, matching Table 3 (3,014/18,052 human; 16,089/24,093 GPT-3.5; 13,303/22,305 GPT-4). Human corpus is Poetry Foundation + Academy of American Poets.",
+   "fromFile": "verdicts-ai-i479-493.json"
+  }
+ },
+ {
+  "index": 493,
+  "feature": "rhyme even where the form does not ask for it",
+  "claim": "About 90% of GPT poems rhyme versus 65% of human poems, including forms like aubade and pastoral.",
+  "source": "Walsh, Preus, Gronski — 'Does ChatGPT Have a Poetic Style?' (CHR 2024, CEUR Vol-3834 paper122)",
+  "url": "https://arxiv.org/html/2410.15299",
+  "quote": "Around 90% of the poems generated by both",
+  "angle": "peer-reviewed-absentees",
+  "verdict": {
+   "index": 493,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“Around 90% of the poems generated by both… contained at least one end rhyme, compared to around 65% of our human-authored corpus”",
+   "note": "Quote verbatim; both percentages exact (measured as at least one AA/ABAB/ABBA/ABCB end rhyme via the CMU Pronouncing Dictionary). The aubade/pastoral limb is the next sentence: for those unfixed forms, ‘which do not typically require specific patterns of rhyme’, the models ‘always produced poems with at least one end rhyme’.",
+   "fromFile": "verdicts-ai-i479-493.json"
   }
  }
 ]

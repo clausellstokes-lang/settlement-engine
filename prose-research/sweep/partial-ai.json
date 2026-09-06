@@ -1618,6 +1618,40 @@
   }
  },
  {
+  "index": 456,
+  "feature": "subtext missing or misread",
+  "claim": "Models reproduce what is on the surface of a literary story while the subtext is absent or wrongly interpreted.",
+  "source": "Subbiah, Zhang, Chilton, McKeown — 'Reading Subtext: Evaluating Large Language Models on Short Story Summarization with Writers' (TACL 2024)",
+  "url": "https://arxiv.org/html/2403.01061",
+  "quote": "Subtext is missing entirely",
+  "angle": "peer-reviewed-absentees",
+  "verdict": {
+   "index": 456,
+   "verdict": "PARTIAL",
+   "trueWording": "the 'subtext' is either incorrectly interpreted or missing",
+   "note": "Raw arXiv HTML (2403.01061v3) fetched 200. Quote exact, Sec. 6.2: three writers on subtext, incl. 'Subtext is missing entirely' (Llama) and, on a Claude summary, \"Everything that's 'text' is accurately represented and well summarized, but the 'subtext' is either incorrectly interpreted or missing\". The subtext half is fully supported and is also the authors' own conclusion ('models struggle with ... interpreting subtext'). The surface half is a single writer's comment on one Claude summary and is undercut at the aggregate level by the paper's own Table 4 and abstract.",
+   "unsupportedLimb": "that models reproduce the surface accurately: faithfulness is the paper's LOWEST-scoring attribute — only 44% (GPT-4), 30% (Claude), 8% (Llama) of summaries are rated fully correct, and the abstract says all three 'make faithfulness mistakes in over 50% of summaries'",
+   "fromFile": "verdicts-ai-i449-463.json"
+  }
+ },
+ {
+  "index": 457,
+  "feature": "unreliable narrator taken at face value",
+  "claim": "All three models score lower on stories with unreliable narrators and repeat the narrator's self-description as fact.",
+  "source": "Subbiah, Zhang, Chilton, McKeown — 'Reading Subtext: Evaluating Large Language Models on Short Story Summarization with Writers' (TACL 2024)",
+  "url": "https://arxiv.org/html/2403.01061",
+  "quote": "the narrator is not really to be trusted",
+  "angle": "peer-reviewed-absentees",
+  "verdict": {
+   "index": 457,
+   "verdict": "PARTIAL",
+   "trueWording": "stories with unreliable narrators are harder for all three models to summarize",
+   "note": "Quote exact, Sec. 6.3.3 (writer comment). First limb CONFIRMED by Table 6 and the authors' sentence 'All three models have lower average scores in this bucket' (reliable 3.45/3.29/2.60 vs unreliable 3.28/2.89/2.45). Second limb rests on a single example, and that example is GPT-4 only: it renders the narrator's self-description as shared fact, 'a desire for a simple life ... even though there is no evidence she likes a simple life (or even that we should believe the narrator that he does)'.",
+   "unsupportedLimb": "that ALL THREE models repeat the narrator's self-description as fact — the page evidences this with one GPT-4 example only; no Claude or Llama instance is shown",
+   "fromFile": "verdicts-ai-i449-463.json"
+  }
+ },
+ {
   "index": 472,
   "feature": "metaphors too simple and sensible",
   "claim": "The model offered only simple, sensible metaphors where writers wanted complex or not-quite-sensible ones.",
@@ -1632,6 +1666,23 @@
    "unsupportedLimb": "the exclusivity 'only' — the page says Wordcraft 'generally' suggests simple and sensible metaphors, not that it offered nothing else",
    "note": "Quote is verbatim in Section 8.2, attributed to JM: 'Wordcraft generally suggests simple and sensible metaphors; but sometimes one wants metaphors to be complex, or not quite sensible.' The wanting-complex-metaphors limb is fully supported (JM's generic 'one wants' covers the claim's 'writers wanted'). Only the quantifier fails: the claim's 'offered only simple, sensible metaphors' is exclusive where the page is merely typical ('generally').",
    "fromFile": "verdicts-ai-i464-478.json"
+  }
+ },
+ {
+  "index": 480,
+  "feature": "weak similes and metaphors",
+  "claim": "Figurative language was judged poor in the little the writers tested.",
+  "source": "Chakrabarty, Padmakumar, Brahman, Muresan — 'Creativity Support in the Age of Large Language Models: An Empirical Study Involving Emerging Writers' (arXiv 2023)",
+  "url": "https://arxiv.org/html/2309.12570",
+  "quote": "Its similes and metaphors aren’t very good",
+  "angle": "peer-reviewed-absentees",
+  "verdict": {
+   "index": 480,
+   "verdict": "PARTIAL",
+   "trueWording": "MG: “Its similes and metaphors aren’t very good from the little I’ve experimented with this.”",
+   "note": "Quote is word-for-word on the page, under the ‘Lack of Nuance, Subtext or Symbolism’ theme, but it is one participant (MG) speaking in the first person about his OWN limited experimentation. No other participant judges figurative language, and the paper never aggregates a group verdict on similes/metaphors. Correct citation: ‘one writer judged its similes and metaphors poor, from the little he had tested’.",
+   "unsupportedLimb": "‘the writers tested’ — the page shows a single participant (MG) reporting his own limited experimentation, not the writer group",
+   "fromFile": "verdicts-ai-i479-493.json"
   }
  }
 ]

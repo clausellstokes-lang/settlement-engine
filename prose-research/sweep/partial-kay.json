@@ -165,5 +165,29 @@
    "unsupportedLimb": "the definite 'would polish' - the page says only 'I might polish the prose itself'",
    "fromFile": "verdicts-kay-i210-224.json"
   }
+ },
+ {
+  "index": 332,
+  "feature": "closing sentence",
+  "claim": "The closing words of Written on the Dark, as Moscrop quotes them, are a four-word sentence repeated once.",
+  "source": "Guy Gavriel Kay's novel Written on the Dark, closing words quoted by David Moscrop in The Globe and Mail, 2025",
+  "url": "https://www.theglobeandmail.com/arts/books/reviews/article-guy-gavriel-kay-novel-written-on-the-dark/",
+  "quote": "I did that. I did that.",
+  "page": "body, first paragraph",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2025",
+  "routeHint": "direct curl with browser user agent",
+  "registerHint": "chronicle-line",
+  "confidence": "high",
+  "angle": "craft",
+  "verdict": {
+   "index": 332,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'a four-word sentence' — the sentence Moscrop quotes, \"I did that.\", is three words",
+   "trueWording": "\"I did that. I did that.\" — a three-word sentence repeated once",
+   "note": "The quotation is on the raw page verbatim, as the review's opening line, and 'repeated once' is right. The word count is not: I/did/that is three words, so the page's own text refutes the 'four-word' limb. Everything else in the claim holds.",
+   "fromFile": "verdicts-kay-i330-344.json"
+  }
  }
 ]

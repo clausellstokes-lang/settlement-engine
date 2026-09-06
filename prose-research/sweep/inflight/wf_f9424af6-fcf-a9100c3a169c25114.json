@@ -1,0 +1,21 @@
+{
+ "role": "verifier",
+ "name": "dnd",
+ "angle": null,
+ "tag": "i229-243",
+ "lines": 5,
+ "firstTs": "2026-09-06T17:51:02.711Z",
+ "lastTs": "2026-09-06T17:51:03.040Z",
+ "tools": {},
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "You've hit your session limit · resets 5:20pm (America/New_York)",
+ "run": "wf_f9424af6-fcf",
+ "agent": "a9100c3a169c25114",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_f9424af6-fcf/agent-a9100c3a169c25114.jsonl",
+ "journal": "failed",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-dnd-i229-243.json",
+  "exists": false
+ }
+}

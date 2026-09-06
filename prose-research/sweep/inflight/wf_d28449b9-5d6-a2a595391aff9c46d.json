@@ -3,13 +3,14 @@
  "name": "ai",
  "angle": null,
  "tag": "i464-478",
- "lines": 42,
+ "lines": 45,
  "firstTs": "2026-09-06T17:46:45.659Z",
- "lastTs": "2026-09-06T17:49:43.019Z",
+ "lastTs": "2026-09-06T17:50:13.624Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 6
+  "Bash": 6,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://arxiv.org/html/2403.01061",
@@ -21,7 +22,7 @@
  "run": "wf_d28449b9-5d6",
  "agent": "a2a595391aff9c46d",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_d28449b9-5d6/agent-a2a595391aff9c46d.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-ai-i464-478.json",
   "exists": true

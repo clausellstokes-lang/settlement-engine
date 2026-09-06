@@ -3,13 +3,14 @@
  "name": "ai",
  "angle": null,
  "tag": "i434-448",
- "lines": 64,
+ "lines": 67,
  "firstTs": "2026-09-06T17:46:45.657Z",
- "lastTs": "2026-09-06T17:49:50.318Z",
+ "lastTs": "2026-09-06T17:50:13.893Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 14
+  "Bash": 14,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://text.npr.org/1238647721",
@@ -23,7 +24,7 @@
  "run": "wf_d28449b9-5d6",
  "agent": "a2dc745a6fbafcd8a",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_d28449b9-5d6/agent-a2dc745a6fbafcd8a.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-ai-i434-448.json",
   "exists": true

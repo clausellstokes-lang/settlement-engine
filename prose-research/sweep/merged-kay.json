@@ -9165,6 +9165,322 @@
    "note": "Quote verbatim in the paragraph beginning 'You can write about yesterday's snows'; 'Not for lessons!' immediately precedes it and supports the second limb.",
    "fromFile": "verdicts-kay-i285-299.json"
   },
+  "300": {
+   "index": 300,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "War and Peace, LOTR or Song of Solomon 'can be made to sound trivial, silly, shallow if boiled down to a paragraph's worth of sound bite'",
+   "note": "Raw page (whatever.scalzi.com, curl with browser UA, HTTP 200) carries the quote verbatim in Kay's signed Big Idea essay: 'Some of us (well, me?) take the considered view that War and Peace or The Lord of the Rings or Song of Solomon can be made to sound trivial, silly, shallow if boiled down to a paragraph's worth of sound bite.' 'A major novel' is the claim's generalisation of the three named novels; page says 'a paragraph's worth of sound bite' where the claim says 'a paragraph of sound bite'. All limbs supported.",
+   "fromFile": "verdicts-kay-i300-314.json"
+  },
+  "301": {
+   "index": 301,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the talk 'went on to discuss the vital importance of the unsaid and the unexplained in fiction'",
+   "note": "Raw pmb.ox.ac.uk news item (HTTP 200) verbatim: 'The talk began with some of Kay's reflections from his time in Oxfordshire ... and went on to discuss the vital importance of the unsaid and the unexplained in fiction.' Item is Pembroke College's own report of the 11 May 2021 eighth annual JRR Tolkien Lecture delivered by Kay. Every limb supported.",
+   "fromFile": "verdicts-kay-i300-314.json"
+  },
+  "302": {
+   "index": 302,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "he grappled with 'how comfortable in our responses to art are we with mystery, with not knowing'",
+   "note": "Same raw pmb.ox.ac.uk page, sentence following the one behind index 301: 'Drawing on quotations from both Tolkien and Bagehot, he grappled with the question of \"how comfortable in our responses to art are we with mystery, with not knowing [and with] the presence of the numinous that we do not fully grasp?\"' Quote verbatim; the page presents it as a direct quotation from Kay's lecture, supporting 'asked in the lecture'.",
+   "fromFile": "verdicts-kay-i300-314.json"
+  },
+  "303": {
+   "index": 303,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'She is lying beside her love dreaming of her love.' opens the Sarantium Mosaic Drabble",
+   "note": "Raw brightweavings.com/drabbles/ (HTTP 200). The first line of 'Aliana in the West (spoiler for The Sarantine Mosaic) / The Sarantium Mosaic Drabble / (c)2014: Guy Gavriel Kay' is the quoted sentence, verbatim. Counted: She/is/lying/beside/her/love/dreaming/of/her/love = 10 words. Counted the whole Drabble body from the page = exactly 100 words, and the page's editorial note defines a Drabble as 'a 100 word short story'. All limbs supported.",
+   "fromFile": "verdicts-kay-i300-314.json"
+  },
+  "304": {
+   "index": 304,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'In 2014 Guy Kay wrote two Drabbles ... A Drabble is a 100 word short story'",
+   "note": "Raw brightweavings.com/drabbles/ editorial note above the stories, posted 4 October 2025 by Alec Lynch: 'In 2014 Guy Kay wrote two Drabbles in support of The Pixel Project ... A Drabble is a 100 word short story.' Quote verbatim; both limbs (two Drabbles, 2014, 100-word definition) supported.",
+   "fromFile": "verdicts-kay-i300-314.json"
+  },
+  "305": {
+   "index": 305,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'She is lying beside her love dreaming of her love.' — 'her love' occurs twice",
+   "note": "Raw brightweavings.com/drabbles/ first line of 'Aliana in the West'. String 'her love' appears exactly twice in that opening sentence (positions 5-6 and 9-10 of ten words). Quotation verbatim; limb supported.",
+   "fromFile": "verdicts-kay-i300-314.json"
+  },
+  "306": {
+   "index": 306,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'As usual, Kay deploys an impressive variety of such narrative voices'",
+   "note": "Raw locusmag.com review (HTTP 200), paragraph beginning 'As usual'. Quote verbatim. 'Such' refers back to the preceding paragraph's character voices (e.g. Guidanio Cerra's 'haunting and haunted voice'); the review is of All the Seas of the World, so the novel limb holds.",
+   "fromFile": "verdicts-kay-i300-314.json"
+  },
+  "307": {
+   "index": 307,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'the occasional shift into first-person has something of the effect of hearing a skilled soloist in a symphony'",
+   "note": "Raw locusmag.com review, same 'As usual' paragraph, immediately after the index-306 clause. Full sentence continues '(for some reason, I think of oboes or bassoons, but maybe that's just me)'. Quote verbatim; every limb supported.",
+   "fromFile": "verdicts-kay-i300-314.json"
+  },
+  "308": {
+   "index": 308,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'devotees who have come to learn his invented nomenclature for nations, cities, geographical features'",
+   "note": "Raw locusmag.com review, first body paragraph: '... including both devotees who have come to learn his invented nomenclature for nations, cities, geographical features, and religions, and first-time readers ...' Quote verbatim (page has a soft hyphen inside 'religions' only, outside the quoted span). Claim's 'devoted readers' = page's 'devotees'; the claim omits 'religions', which subtracts nothing from the supported limbs.",
+   "fromFile": "verdicts-kay-i300-314.json"
+  },
+  "309": {
+   "index": 309,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'the catalog ... at first might seem intimidating, the on-the-ground tale is a model of clarity and focus'",
+   "note": "Raw locusmag.com review, final body paragraph: 'While the catalog of these characters offered at the beginning of the novel at first might seem intimidating (at least to me, but then I was terrified by the character list at the beginning of War and Peace), the on-the-ground tale is a model of clarity and focus ...' Quote verbatim; both limbs (intimidating list at the front, clarity and focus) supported.",
+   "fromFile": "verdicts-kay-i300-314.json"
+  },
+  "310": {
+   "index": 310,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'even the secondary figures gain a haunting presence, especially when we are offered brief glimpses into their future lives'",
+   "note": "Raw locusmag.com review; the sentence sits in the same paragraph as 'As his isolated and exiled figures ...' (Locus runs it as one paragraph beginning 'As usual'). Quote 'brief glimpses into their future lives' verbatim; 'even the secondary figures gain a haunting presence' also verbatim. All limbs supported.",
+   "fromFile": "verdicts-kay-i300-314.json"
+  },
+  "311": {
+   "index": 311,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "''Lives change, turn, pivot on small things, accidents of timing,'' we are reminded more than once",
+   "note": "Raw locusmag.com review, paragraph beginning 'Not uncharacteristically'. Quote verbatim inside the review's own quotation marks, followed by Wolfe's 'we are reminded more than once' — so both the wording (the novel's) and the 'more than once' limb (Wolfe's) are supported on the page.",
+   "fromFile": "verdicts-kay-i300-314.json"
+  },
+  "312": {
+   "index": 312,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'his measured prose, sometimes minimalist, sometimes ornate'",
+   "note": "Raw thewertzone.blogspot.com review (HTTP 200), paragraph beginning 'The traditional strengths of Kay are on full display'. Quote verbatim; attribution to Adam Whitehead confirmed by the post's byline. Every limb supported.",
+   "fromFile": "verdicts-kay-i300-314.json"
+  },
+  "313": {
+   "index": 313,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "prose 'known [sic] when to deploy words like bludgeons and when like scalpels'",
+   "note": "Raw thewertzone.blogspot.com review, same 'traditional strengths' sentence: '... his measured prose, sometimes minimalist, sometimes ornate, known when to deploy words like bludgeons and when like scalpels.' The supplied quote appears word for word. The page's verb is 'known' (an evident slip for 'knowing'/'knows') and the knowing is grammatically pinned to the prose rather than to Kay; the claim's 'Kay knows' is the same substance, so all limbs hold.",
+   "fromFile": "verdicts-kay-i300-314.json"
+  },
+  "314": {
+   "index": 314,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'Kay provides a list of historical sources at the end of the novel'",
+   "note": "Raw thewertzone.blogspot.com review, paragraph beginning 'This book is set in the much-mentioned land of Ferrieres'. Quote verbatim; 'the novel' is Written on the Dark, the book under review, so the claim's substitution of the title is supported.",
+   "fromFile": "verdicts-kay-i300-314.json"
+  },
+  "315": {
+   "index": 315,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "more humour in this book than perhaps some previous ones",
+   "note": "Wertzone live fetch 200 (browser UA). Byline 'Adam Whitehead', dated Sunday 29 June 2025, post title 'Written on the Dark by Guy Gavriel Kay'. Quote byte-exact in the paragraph beginning 'The traditional strengths of Kay'. Source hedges with 'perhaps', which the claim drops; substance unchanged.",
+   "fromFile": "verdicts-kay-i315-329.json"
+  },
+  "316": {
+   "index": 316,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "quick flash-forward removes the 'will they survive' suspense",
+   "note": "fantasyliterature.com returned 403 to both bare and www live fetches; reached via Wayback raw capture https://web.archive.org/web/20250803031327id_/... (route 2), not a summarizer. Full sentence: '...take the focus away from the usual suspense element of \"will they survive\" via a quick flash-forward (or an earlier one) so that the reader knows immediately, or already, that the character will do just that — survive.' Paragraph beginning 'But Kay more often than not' confirmed. Byline 'Posted by Bill Capossere', April 18th, 2022.",
+   "fromFile": "verdicts-kay-i315-329.json"
+  },
+  "317": {
+   "index": 317,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "plot evokes not 'what happens next' but 'who are they now'",
+   "note": "Same Wayback raw capture. Verbatim: 'the plot evokes not so much the more traditional \"what happens next\" response but a \"who are they now\" response.' Same paragraph as 316; both limbs (the evoked response and the contrast with what-happens-next) present.",
+   "fromFile": "verdicts-kay-i315-329.json"
+  },
+  "318": {
+   "index": 318,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "narrator's meta-fictional aside: 'Some tales are told, most are not'",
+   "note": "Verbatim on page: 'As our narrator says in one of the several meta-fictional asides, \"Some tales are told, most are not\"'. Every limb — narrator, meta-fictional aside, the words themselves — is on the page, in the paragraph beginning 'In a somewhat similar vein'.",
+   "fromFile": "verdicts-kay-i315-329.json"
+  },
+  "319": {
+   "index": 319,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Kay gives us more of those untold tales than most authors",
+   "note": "Clause immediately following the 318 quote in the same sentence: '...and that holds true here as well, but Kay gives us more of those untold tales than most authors.' Byte-exact.",
+   "fromFile": "verdicts-kay-i315-329.json"
+  },
+  "320": {
+   "index": 320,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Danio's elegiac older voice layers an aching sense of time's passage",
+   "note": "Verbatim: 'Guidanio (\"Danio\") Cerra... though his softly elegiac older voice, as he recalls events from a later date layers over the book's present moments an aching sense of time's passage.' Paragraph beginning 'I could go on rapturously' confirmed; the recalling-from-later limb and the layering limb are both explicit.",
+   "fromFile": "verdicts-kay-i315-329.json"
+  },
+  "321": {
+   "index": 321,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "novel opens with 'The memory of home can be too far away'",
+   "note": "Verbatim: 'The novel opens with the line \"The memory of home can be too far away,\" introducing the twinned ideas of home and exile.' The reviewer does state it is the opening line, so the 'opens with' limb is Capossere's own report, not an inference. Paragraph beginning 'Beyond character and plot' confirmed.",
+   "fromFile": "verdicts-kay-i315-329.json"
+  },
+  "322": {
+   "index": 322,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a favourite 'Kay-ism': a few lines of gentle dignity at death",
+   "note": "Verbatim: 'Even when death strikes, it's leavened with what has become one of my favorite \"Kay-isms\" — the lingering of a spirit for a brief while in a few moments consideration of a life lived and now ended, a few lines of gentle dignity, of respect accorded by the author... granted to a wide range of characters'. Kay-ism limb, death-moment limb and granted-to-a-character limb all present. Paragraph beginning 'But Kay also is quick to show' confirmed.",
+   "fromFile": "verdicts-kay-i315-329.json"
+  },
+  "323": {
+   "index": 323,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Kay drops into the text so many seeds to prepare us",
+   "note": "Verbatim: 'The way Kay drops into the text so many seeds to carefully prepare us for what's to come.' Paragraph beginning 'Finally, the craft is' confirmed.",
+   "fromFile": "verdicts-kay-i315-329.json"
+  },
+  "324": {
+   "index": 324,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Repeatedly characters or narrator reflect 'You could die so easily'",
+   "note": "Verbatim: 'Repeatedly characters (or the narrator) reflect on how \"You could die so easily\" or \"Death could be so swift.\"' The claim's 'how easily one could die' is exactly the quoted reflection. Paragraph beginning 'The world Kay creates' confirmed.",
+   "fromFile": "verdicts-kay-i315-329.json"
+  },
+  "325": {
+   "index": 325,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "characters richly drawn whether central or given two or three paragraphs",
+   "note": "Verbatim: 'the characters... are richly drawn and utterly compelling across the board, whether they take up the bulk of the pages, as with Rafel and Lenia, several strands of a few pages each... or are given just two or three paragraphs.' The 'still richly drawn' limb is carried by 'across the board'. Paragraph beginning 'What I'm trying to say here' confirmed.",
+   "fromFile": "verdicts-kay-i315-329.json"
+  },
+  "326": {
+   "index": 326,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "meticulously crafted in structure, pace, language, dialogue",
+   "note": "Verbatim: 'The novel is meticulously crafted in structure, pace, language, dialogue.' Located in the review's last substantive paragraph, immediately before the publisher's jacket blurb — the cited page location holds.",
+   "fromFile": "verdicts-kay-i315-329.json"
+  },
+  "327": {
+   "index": 327,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'I found it on the whole to be telling rather than showing'",
+   "note": "Comment thread on the same page, preserved in the Wayback capture. Commenter 'Ilana', April 19, 2022 at 7:30 pm, about Tigana: 'I didn't enjoy it – I found the female characters to be flat and underdeveloped... and I found it on the whole to be telling rather than showing.' Author, date and referent (Tigana, named in the same comment: 'I really didn't like Tigana') all confirmed. The claim's pronoun 'she' is inferred from the name and never stated on the page — incidental, not a substantive limb.",
+   "fromFile": "verdicts-kay-i315-329.json"
+  },
+  "328": {
+   "index": 328,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "more explicit storytelling tone than I've come to expect",
+   "note": "strangecurrencies.org live fetch 200. Byline 'Dan Ruffolo June 7, 2022'. First body paragraph, verbatim: 'Taking in places a more explicit storytelling tone than I've come to expect from Guy's work, All the Seas of the World nevertheless captures his scintillating prose...'. The 'in places' limb and the 'from Kay' limb ('from Guy's work') are both on the page.",
+   "fromFile": "verdicts-kay-i315-329.json"
+  },
+  "329": {
+   "index": 329,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "we can know through the narration of the impacts they had",
+   "note": "Verbatim: '...people who feel much as we do can know, or we can know through the narration, of the impacts they had, the lives they touched, is a salve against that feeling of helplessness.' Both limbs (impacts had, lives touched) present. Paragraph beginning 'This theme feels especially important' confirmed.",
+   "fromFile": "verdicts-kay-i315-329.json"
+  },
+  "330": {
+   "index": 330,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Written on the Dark is equally as impressive for its accessibility and its density\"",
+   "note": "Globe and Mail page fetched raw (curl, browser UA, HTTP 200). Sentence present word for word in the penultimate body paragraph, which continues \"qualities that may seem to be at odds, but aren't.\" Byline David Moscrop, published June 6, 2025. Claim's 'equally impressive' drops only the source's 'as'.",
+   "fromFile": "verdicts-kay-i330-344.json"
+  },
+  "331": {
+   "index": 331,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"It's not giving away much to open this review with the closing words\"",
+   "note": "Raw page: the review's first body line is the quoted closing words, immediately followed by \"It's not giving away much to open this review with the closing words of Written on the Dark, Guy Gavriel Kay's tale of a tavern poet...\". Both limbs (opens; cites the closing words) supported.",
+   "fromFile": "verdicts-kay-i330-344.json"
+  },
+  "332": {
+   "index": 332,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'a four-word sentence' — the sentence Moscrop quotes, \"I did that.\", is three words",
+   "trueWording": "\"I did that. I did that.\" — a three-word sentence repeated once",
+   "note": "The quotation is on the raw page verbatim, as the review's opening line, and 'repeated once' is right. The word count is not: I/did/that is three words, so the page's own text refutes the 'four-word' limb. Everything else in the claim holds.",
+   "fromFile": "verdicts-kay-i330-344.json"
+  },
+  "333": {
+   "index": 333,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"even for the mysteries it refuses to explain, it makes sense\"",
+   "note": "Raw page, paragraph beginning \"The brilliance of Written on the Dark\": \"Maybe that's the least realistic thing about this novel of fantasy, that even for the mysteries it refuses to explain, it makes sense.\" Quote verbatim; both limbs (makes sense; mysteries it refuses to explain) supported.",
+   "fromFile": "verdicts-kay-i330-344.json"
+  },
+  "334": {
+   "index": 334,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"A master of telling small stories in a big world, Kay reveals spots of hope\"",
+   "note": "BookPage page fetched raw (HTTP 200). Final review paragraph opens with the phrase word for word. Page also carries the 'STARRED REVIEW' flag, the May 17, 2022 date and 'Review by Noah Fram', so the attribution limbs hold too.",
+   "fromFile": "verdicts-kay-i330-344.json"
+  },
+  "335": {
+   "index": 335,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"his characters see their homes fade from the map and their own lives taken for the pettiest of causes\"",
+   "note": "First body paragraph of the raw BookPage review: \"Kay's fictional worlds, while beautiful, are defined by this bleak inertia; his characters see their homes fade from the map and their own lives taken for the pettiest of causes.\" Quote verbatim; the claim's 'their lives' merely drops the source's 'own'.",
+   "fromFile": "verdicts-kay-i330-344.json"
+  },
+  "336": {
+   "index": 336,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"That means he doesn't have to play by the more restrictive rules of modern publishing\"",
+   "note": "Christianity Today page fetched raw (HTTP 200), paragraph beginning \"It helps that Kay, 70, has been writing successfully for decades.\" The rule list, attributed with 'he told me', opens \"Rules like: Don't jump from the past tense to the present tense.\" Seniority limb (age 70, decades of success) and the freedom limb both on the page.",
+   "fromFile": "verdicts-kay-i330-344.json"
+  },
+  "337": {
+   "index": 337,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Don't hop between characters' heads—just choose one perspective per chapter\"",
+   "note": "Same raw CT paragraph: \"Don't hop between characters' heads—just choose one perspective per chapter or, ideally, one perspective for the entire book.\" Listed among the rules Kay told the reporter he need not play by, so the 'does not have to obey' limb holds.",
+   "fromFile": "verdicts-kay-i330-344.json"
+  },
+  "338": {
+   "index": 338,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"don't write an entire chapter from the viewpoint of a grizzled medieval courier who is largely irrelevant to the plot\"",
+   "note": "Raw CT page, closing item of the same rule list: \"And definitely don't write an entire chapter from the viewpoint of a grizzled medieval courier who is largely irrelevant to the plot.\" Quote verbatim; the 'plot-irrelevant' limb is the page's own 'largely irrelevant to the plot'.",
+   "fromFile": "verdicts-kay-i330-344.json"
+  },
+  "339": {
+   "index": 339,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"'I trust my readers,' he said simply.\"",
+   "note": "Raw CT page, immediately after the one-line paragraph \"Still, Kay has resisted.\": \"'I trust my readers,' he said simply. 'And at this stage, my readers—and I mean it when I say this is a gift—my readers let me get away with it.'\" The claim's 'simply' is the page's own adverb.",
+   "fromFile": "verdicts-kay-i330-344.json"
+  },
+  "340": {
+   "index": 340,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Every book I've ever written has been, in part, an attempt to look at how different the past is and how similar it is\"",
+   "note": "Raw CT page, direct quotation attributed to Kay ('Kay said'), from the Toronto interview described earlier in the piece. Quote verbatim; 'every book', 'in part' and the different/similar pairing all present.",
+   "fromFile": "verdicts-kay-i330-344.json"
+  },
+  "341": {
+   "index": 341,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"wanted security, wanted a roof, wanted a harvest\"",
+   "note": "Raw CT page, same Kay quotation continuing: \"The people of the past are strange and alien and wildly different from us, but they also loved their children, loved their spouses, didn't love their spouses, wanted security, wanted a roof, wanted a harvest.\" All three concrete wants verbatim and in order.",
+   "fromFile": "verdicts-kay-i330-344.json"
+  },
+  "342": {
+   "index": 342,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"There are no elaborate, concrete magic systems here; instead, the books are haunted by the other, the transcendent, and mystery\"",
+   "note": "Raw CT page, paragraph beginning \"Kay's characteristic 'quarter turn to the fantastic'\". Quote verbatim and the 'haunted by the transcendent' limb is the page's own clause (which also names 'the other' and 'mystery'). Reporter's own sentence, as the claim's attribution says.",
+   "fromFile": "verdicts-kay-i330-344.json"
+  },
+  "343": {
+   "index": 343,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"When we work with distant history, to a very great degree, we are all guessing.\"",
+   "note": "BrightWeavings 'Home and Away' fetched raw (HTTP 200); page header confirms the amended-speech provenance and the shorter Globe and Mail version of fall 1999. Sentence sits in the paragraph following the Rodrigo Diaz / El Cid passage; the next clause extends it to 'those who claim to be factual historians as it is of novelists', so the claim's 'writers' is inside the source's scope. Claim's 'to a great degree' drops the source's 'very'.",
+   "fromFile": "verdicts-kay-i330-344.json"
+  },
+  "344": {
+   "index": 344,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"by inventing the setting and inventing a man based on Rodrigo Diaz... I might also be demonstrating a measure of appropriate distance\"",
+   "note": "Raw BrightWeavings page, El Cid paragraph, verbatim. Every limb present (invented setting; man based on Rodrigo Diaz 'but clearly not him'; appropriate distance). One softening worth flagging: Kay writes the hedged 'I might also be demonstrating', not a flat 'demonstrates', and speaks of his own book rather than as a general rule.",
+   "fromFile": "verdicts-kay-i330-344.json"
+  },
   "345": {
    "index": 345,
    "verdict": "VERIFIED_VERBATIM",

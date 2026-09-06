@@ -427,6 +427,30 @@
   }
  },
  {
+  "index": 697,
+  "feature": "point of view and distance",
+  "claim": "Steve Jeffery's 1997 Vector review attributes the episodic feel of A Game of Thrones's later stretches to Martin's alternation of chapters between major viewpoint characters.",
+  "source": "Steve Jeffery, review of A Game of Thrones, Vector 192 (BSFA), March/April 1997, p.19",
+  "url": "https://fanac.org/fanzines/Vector/Vector192.pdf",
+  "quote": "Martin's technique of alternating chapters between a number of major viewpoint characters",
+  "page": "Vector 192, p.19 (PDF page index 18)",
+  "kind": "reception",
+  "polarity": "asserts",
+  "date": "1997-03-01",
+  "routeHint": "fanac.org PDF binary, text layer extracted with pypdf; the OCR layer is garbled elsewhere on the page but this sentence is clean",
+  "registerHint": "none",
+  "confidence": "medium — the PDF's OCR text layer is imperfect elsewhere on the same page",
+  "angle": "reception",
+  "verdict": {
+   "index": 697,
+   "verdict": "PARTIAL",
+   "trueWording": "episodic feel 'underlined by' the chapter alternation, not caused by it",
+   "unsupportedLimb": "the causal attribution: the review attributes the growing episodic quality to the threads developing independently and says the POV alternation 'underlines' it, rather than attributing the episodic feel to the alternation",
+   "note": "fanac.org/fanzines/Vector/Vector192.pdf fetched raw (HTTP 200, 10.99 MB) and text extracted with pypdf; page index 18 carries the running head 'Vector 192 - March/April 1997' and the folio 'page 19', with 'George R.R. Martin / Reviewed by Steve Jeffery / A Game of Thrones'. Full sentence: '...threads start to develop independently towards the end, things become more episodic, underlined by Martin's technique of alternating chapters between a number of major viewpoint characters.' Quote exact; date, reviewer, venue and page all confirmed. Only the causal connective overstates the source.",
+   "fromFile": "verdicts-martin-i690-704.json"
+  }
+ },
+ {
   "index": 730,
   "feature": "place and institution description",
   "claim": "Jennings's 2011 review says Martin is often more intrigued by the friction among conflicting religions and by what he calls the Kremlinology of Westeros than by fantasy's usual furniture.",

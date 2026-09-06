@@ -14229,6 +14229,217 @@
    "note": "Live publishersweekly.com fetched with a browser UA (HTTP 200). Quote exact; accomplished prose is the second of exactly three named qualities, and the 'stand out from similar work' limb is the same sentence. Page states 'Reviewed on: 07/29/1996'.",
    "fromFile": "verdicts-martin-i675-689.json"
   },
+  "690": {
+   "index": 690,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "publishersweekly.com/9780553103540 fetched raw (HTTP 200, browser UA). Review body: 'Although conventional in form, the book stands out from similar work by Eddings, Brooks and others by virtue of its superbly developed characters, accomplished prose and sheer bloody-mindedness.' Page metadata 'Reviewed on: 07/29/1996' confirms the 29 July 1996 date; a sidebar entry confirms PW starred it. Quote exact; every limb supported.",
+   "fromFile": "verdicts-martin-i690-704.json"
+  },
+  "691": {
+   "index": 691,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "paullevinson.blogspot.com post fetched raw (HTTP 200). Header on the post: 'from Tangent Magazine, #16, Fall 1996 ... Reviewed by Paul Levinson'; body: 'Martin writes as convincingly of tart juices oozing from an apple as of sleet on the side of a mountain'. Quote exact; 'sleet on a mountainside' is the page's 'sleet on the side of a mountain'. Levinson notes in the comments that the URL's '2006' is his own typo and the review is 1996.",
+   "fromFile": "verdicts-martin-i690-704.json"
+  },
+  "692": {
+   "index": 692,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same page, same sentence's continuation: 'and his book is as much an adventure of the senses as it is of the mind.' Quote exact; claim fully supported.",
+   "fromFile": "verdicts-martin-i690-704.json"
+  },
+  "693": {
+   "index": 693,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same page, paragraph 2: 'The settings are equally diverse and evocative.' Quote exact as a full sentence; claim fully supported.",
+   "fromFile": "verdicts-martin-i690-704.json"
+  },
+  "694": {
+   "index": 694,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same page, paragraph beginning 'But the dragon thread has other problems.': 'The descriptive passages are marvelous - you can smell the spice, and taste it in every cup of wine Martin renders'. Quote exact. The review never uses the name Daenerys: it calls this 'the dragon thread' and identifies it as the 'Blood of the Dragon' novella following the pretender's sister, given as bride to a 'Ghenghis Khan-type character' — i.e. unambiguously the Daenerys thread, so the claim's label is a naming of what the page describes, not an added assertion.",
+   "fromFile": "verdicts-martin-i690-704.json"
+  },
+  "695": {
+   "index": 695,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same page, supernatural paragraph: 'But the actual brief appearance of these cold nightmares-come-true has far less impact than their suggestion.' Quote exact; the 'cold creatures' limb is the page's 'cold, slouching beast[s]' / 'cold nightmares-come-true'.",
+   "fromFile": "verdicts-martin-i690-704.json"
+  },
+  "696": {
+   "index": 696,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same page, next sentence: 'Similarly, the dragons work better as natural history - they're believed to have died out over a century before the action begins in this book, and their skeletons are admired, feared, and lamented by various characters who contemplate them - than as actual hatchlings at the end of the novel.' Quote exact; every limb (natural history, skeletons admired/feared/lamented by characters, versus living hatchlings) is on the page.",
+   "fromFile": "verdicts-martin-i690-704.json"
+  },
+  "697": {
+   "index": 697,
+   "verdict": "PARTIAL",
+   "trueWording": "episodic feel 'underlined by' the chapter alternation, not caused by it",
+   "unsupportedLimb": "the causal attribution: the review attributes the growing episodic quality to the threads developing independently and says the POV alternation 'underlines' it, rather than attributing the episodic feel to the alternation",
+   "note": "fanac.org/fanzines/Vector/Vector192.pdf fetched raw (HTTP 200, 10.99 MB) and text extracted with pypdf; page index 18 carries the running head 'Vector 192 - March/April 1997' and the folio 'page 19', with 'George R.R. Martin / Reviewed by Steve Jeffery / A Game of Thrones'. Full sentence: '...threads start to develop independently towards the end, things become more episodic, underlined by Martin's technique of alternating chapters between a number of major viewpoint characters.' Quote exact; date, reviewer, venue and page all confirmed. Only the causal connective overstates the source.",
+   "fromFile": "verdicts-martin-i690-704.json"
+  },
+  "698": {
+   "index": 698,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same PDF page: 'A Game of Thrones appears with all the distinguishing features of the fantasy blockbuster, as Book One of A Song of Fire and Ice. Those distinguishing features include a map, cunningly divided into The North and The South, an Appendix listing a cast of Cecil B. DeMille proportions, and the obligatory jacket blurb...'. Quote exact; the appendix cast list is explicitly one of the listed 'distinguishing features of the fantasy blockbuster'.",
+   "fromFile": "verdicts-martin-i690-704.json"
+  },
+  "699": {
+   "index": 699,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same PDF page: the blurb quoted by Jeffery announces 'the most imaginative, ambitious and compelling fantasy epic since Lord of the Rings' and Martin as yet another 'true heir' to Tolkien; the next paragraph opens 'This sort of gushing hype does no favours to anybody, least of all Martin.' and the paragraph closes 'A Game of Thrones deserves better.' Quote exact (including the trailing comma); the 'no favours to the book' limb is carried by 'deserves better'.",
+   "fromFile": "verdicts-martin-i690-704.json"
+  },
+  "700": {
+   "index": 700,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "publishersweekly.com/9780553801477 fetched raw (HTTP 200). First sentence: 'A few images recur in the enormously complex fifth installment of Martin's massively multicharacter epic: the chess-like game cyvasse, small rivers flowing into larger ones, ships and armies battered by terrible storms.' Quote exact; all three images and the 2011 date ('Reviewed on: 05/30/2011') confirmed.",
+   "fromFile": "verdicts-martin-i690-704.json"
+  },
+  "701": {
+   "index": 701,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "kirkusreviews.com raw page fetched (HTTP 200, browser UA). Paragraph 2: 'There's the usual blend of exposition, sometimes seemingly endless, and the usual swords-and-sorcery dialogue:' followed by exactly three quoted lines ('The plunder from Astapor...', 'Two kings to wake the dragon...', 'False friends, treacherous servants...'). 'Review Posted Online: Sept. 26, 2011' confirms the date. Quote exact; the three-lines limb confirmed by count.",
+   "fromFile": "verdicts-martin-i690-704.json"
+  },
+  "702": {
+   "index": 702,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same Kirkus page, same sentence: 'There's the usual blend of exposition, sometimes seemingly endless'. Quote exact; claim fully supported.",
+   "fromFile": "verdicts-martin-i690-704.json"
+  },
+  "703": {
+   "index": 703,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same Kirkus page: 'Martin has been likened to J.R.R. Tolkien, but Tolkien was never quite so ponderous, and certainly not so obsessed with bodily functions of various sorts'. Quote exact; the comparison's implied second term is Martin, named in the same sentence.",
+   "fromFile": "verdicts-martin-i690-704.json"
+  },
+  "704": {
+   "index": 704,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same Kirkus sentence continues '...and certainly not so obsessed with bodily functions of various sorts:' followed by exactly two quoted lines ('The Grand Maester befouled himself in dying...' and 'When you bugger a man you expect a squeal or two.'), then 'Indeed.' Quote exact; the charge lands on Martin by the Tolkien contrast, and the two-lines limb is confirmed by count.",
+   "fromFile": "verdicts-martin-i690-704.json"
+  },
+  "705": {
+   "index": 705,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Filled with vividly rendered set pieces",
+   "note": "WaPo live fetch failed (HTTP/2 INTERNAL_ERROR); reached raw via Wayback id_ capture 20230306235122. Byline 'By Bill Sheehan', 'July 12, 2011'. Final content paragraph reads 'Filled with vividly rendered set pieces, unexpected turnings, assorted cliffhangers and moments of appalling cruelty, “A Dance With Dragons” is epic fantasy as it should be written'. Every limb supported.",
+   "fromFile": "verdicts-martin-i705-719.json"
+  },
+  "706": {
+   "index": 706,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "epic fantasy as it should be written: passionate, compelling, convincingly detailed and thoroughly imagined",
+   "note": "Same WaPo Wayback raw capture, same final paragraph: '“A Dance With Dragons” is epic fantasy as it should be written: passionate, compelling, convincingly detailed and thoroughly imagined.' Quote exact; author, outlet, date all match the page.",
+   "fromFile": "verdicts-martin-i705-719.json"
+  },
+  "707": {
+   "index": 707,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the book — and the series as a whole — feels grounded in the brutal reality of medieval times",
+   "note": "Same WaPo Wayback raw capture: 'Despite a number of overtly fantastic elements (dragons, seers, shape shifters and sorcerers), the book — and the series as a whole — feels grounded in the brutal reality of medieval times and has more in common with the Wars of the Roses than it does with “The Lord of the Rings.”' Both limbs (series-level, overtly fantastic elements) supported.",
+   "fromFile": "verdicts-martin-i705-719.json"
+  },
+  "708": {
+   "index": 708,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Every town has an elaborately recalled series of triumphs and troubles.",
+   "note": "NYT live fetch 403; reached raw via Wayback id_ capture 20251027173637. Page is 'Dragons Ascendant: George R. R. Martin and the Rise of Fantasy', By David Orr, Aug. 12, 2011, printed Page 31 of the Sunday Book Review. Sentence appears verbatim in the paragraph beginning 'Martin’s second virtue'.",
+   "fromFile": "verdicts-martin-i705-719.json"
+  },
+  "709": {
+   "index": 709,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Moreover, historical asides are inseparable from the books’ larger narratives",
+   "note": "Same NYT Wayback raw capture, same 'Martin’s second virtue' paragraph. Quote exact including the curly apostrophe in 'books’'.",
+   "fromFile": "verdicts-martin-i705-719.json"
+  },
+  "710": {
+   "index": 710,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "All of his hundreds of characters have grace notes of history and personality that advance a plot line.",
+   "note": "Same NYT Wayback raw capture, same paragraph. 'hundreds of characters', 'grace notes of history and personality', and 'advance a plot line' are all on the page in one sentence.",
+   "fromFile": "verdicts-martin-i705-719.json"
+  },
+  "711": {
+   "index": 711,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Martin’s books, however, are generally praised for their realism. When people are stabbed, they die; when kingdoms ignore debts, the bankers show up.",
+   "note": "Same NYT Wayback raw capture, closing section. The realism limb and the bankers example sit in adjacent sentences exactly as the claim frames them.",
+   "fromFile": "verdicts-martin-i705-719.json"
+  },
+  "712": {
+   "index": 712,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Tyrion “waddles” at least 12 times here",
+   "note": "Same NYT Wayback raw capture. Quote 'at least 12 times here' is exact; 'here' is “A Dance With Dragons”, named two sentences earlier. The page uses 'waddles' and later 'the “waddling”', so the claim's gerund is on the page too. Locator field says the paragraph begins 'This series is long' — that phrase is mid-paragraph, not at its start; a locator nit only, no claim limb affected.",
+   "fromFile": "verdicts-martin-i705-719.json"
+  },
+  "713": {
+   "index": 713,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Such length isn’t necessary, and it hurts Martin’s prose and his plot mechanics.",
+   "note": "Same NYT Wayback raw capture. Claim's two limbs (length unnecessary, hurts prose) both explicit; the page adds 'and his plot mechanics', which the claim does not deny.",
+   "fromFile": "verdicts-martin-i705-719.json"
+  },
+  "714": {
+   "index": 714,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the sensation is like riding a wave that’s somehow moving away from shore, with the water beneath you growing deeper and more shadowed as your speed increases",
+   "note": "Same NYT Wayback raw capture, same 'Martin’s second virtue' paragraph. All three limbs — wave moving away from shore, water beneath growing deeper, speed increasing — are in the sentence.",
+   "fromFile": "verdicts-martin-i705-719.json"
+  },
+  "715": {
+   "index": 715,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Martin now must find a way to let us feel that strangeness as the characters themselves do, rather than simply explaining it to death.",
+   "note": "Same NYT Wayback raw capture, closing sentence. 'that strangeness' refers to 'the magical elements of his books ... not, in fact, within the characters’ understanding at all', so the claim's 'strangeness of the magical elements' limb is supported.",
+   "fromFile": "verdicts-martin-i705-719.json"
+  },
+  "716": {
+   "index": 716,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Martin’s prose is concise but pithy, begging to be devoured over and over again.",
+   "note": "CSM live fetch 404; reached raw via Wayback id_ capture 20251117164216. Byline 'By Megan Wasson', 'July 12, 2011, 7:05 a.m. ET'. Quote exact, in the last body paragraph before the contributor line.",
+   "fromFile": "verdicts-martin-i705-719.json"
+  },
+  "717": {
+   "index": 717,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Martin is the kind of writer who needs to be read with an “A Song of Ice and Fire” encyclopedia at hand to catch all the layered, subtle hints and details that he leaves throughout his books.",
+   "note": "Same CSM Wayback raw capture, middle of the review. Quote exact. The page specifies an 'A Song of Ice and Fire' encyclopedia where the claim says just 'an encyclopedia' — a generalization the page supports rather than contradicts.",
+   "fromFile": "verdicts-martin-i705-719.json"
+  },
+  "718": {
+   "index": 718,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "his writing style tends to start slow and build to a climax",
+   "note": "Same CSM Wayback raw capture: 'Diehard George R. R. Martin fans will know that his writing style tends to start slow and build to a climax'. Quote exact and the claim's full sentence is on the page.",
+   "fromFile": "verdicts-martin-i705-719.json"
+  },
+  "719": {
+   "index": 719,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "characters who use the same idioms (and have sex in exactly the same manner) no matter their ethnicity, social class, or continent",
+   "note": "Atlantic fetched live raw with a browser UA (HTTP 200, no archive needed). Byline 'By Rachael Brown July 11, 2011'. The review preface lists weaknesses: 'too much repetition, unexceptional prose, and characters who use the same idioms (and have sex in exactly the same manner) no matter their ethnicity, social class, or continent.' Every limb supported.",
+   "fromFile": "verdicts-martin-i705-719.json"
+  },
   "720": {
    "index": 720,
    "verdict": "VERIFIED_VERBATIM",
@@ -14334,6 +14545,111 @@
    "trueWording": "bizarre and beautifully imaginative set-pieces on haunted rivers and in the supernatural North",
    "note": "Locus (live, 200), byline 'by Jeff VanderMeer', headed 'A Dozen of the Best from 2011', dated February 5, 2012: \"a huge, dense novel that devotes several scenes to bizarre and beautifully imaginative set-pieces on haunted rivers and in the supernatural North.\" Author, title, date and quote all confirmed.",
    "fromFile": "verdicts-martin-i720-734.json"
+  },
+  "735": {
+   "index": 735,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A stalled military campaign stuck in the dead of winter is also evocative and harrowing.",
+   "note": "Live locusmag page fetched raw (HTTP 200, browser UA). Sentence appears word for word in the A Dance with Dragons entry; both limbs (evocative, harrowing) present.",
+   "fromFile": "verdicts-martin-i735-749.json"
+  },
+  "736": {
+   "index": 736,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Scenes from the point of view of a certain famous dwarf",
+   "note": "Quote is verbatim on the raw page ('are perhaps the baggiest in the novel, straining at times for sardonic effect'), but the page never writes 'Tyrion' - it says 'a certain famous dwarf'. Identification is unambiguous in context yet is the claim's wording, not VanderMeer's, so graded substance rather than verbatim.",
+   "fromFile": "verdicts-martin-i735-749.json"
+  },
+  "737": {
+   "index": 737,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a huge, dense novel that devotes several scenes to bizarre and beautifully imaginative set-pieces",
+   "note": "Verbatim on the raw locusmag page in the A Dance with Dragons entry.",
+   "fromFile": "verdicts-martin-i735-749.json"
+  },
+  "738": {
+   "index": 738,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The general prose style is reasonable, although prone to repetition.",
+   "note": "Verbatim on the raw Wertzone page (HTTP 200, browser UA), in the paragraph following 'The book's conceit'.",
+   "fromFile": "verdicts-martin-i735-749.json"
+  },
+  "739": {
+   "index": 739,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It is not uncommon to see a phrase used and then re-used just a few paragraphs later.",
+   "note": "Verbatim on the raw page, the sentence immediately after the prose-style sentence of claim 738.",
+   "fromFile": "verdicts-martin-i735-749.json"
+  },
+  "740": {
+   "index": 740,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the attempt to give the text an in-universe origin (a young maester writing a brief primer on the world for the notoriously impatient King Robert Baratheon) makes for a less dry reading experience than it might have been",
+   "note": "Verbatim on the raw page in the third paragraph; every limb (in-universe origin, young maester, brief primer, King Robert Baratheon, less dry) is on the page.",
+   "fromFile": "verdicts-martin-i735-749.json"
+  },
+  "741": {
+   "index": 741,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Yandel likes to cover almost every claim in the book with lengthy caveats.",
+   "note": "Verbatim in the paragraph beginning 'The other problem'. Yandel's status as the book's in-world author/narrator is established earlier on the same page ('the young Maester Yandel ... has written the book').",
+   "fromFile": "verdicts-martin-i735-749.json"
+  },
+  "742": {
+   "index": 742,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "by sometimes describing an event as mythological or untrue, but when combined with the reader's knowledge of the novels it becomes clearer what conclusions the reader is being directed to",
+   "note": "Verbatim on the raw page at the end of the 'The other problem' paragraph. Claim's 'makes clear' renders the page's 'becomes clearer'; no substantive divergence.",
+   "fromFile": "verdicts-martin-i735-749.json"
+  },
+  "743": {
+   "index": 743,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The North gets short shrift, which is quite surprising, whilst the longest region chapter is given to the ironborn.",
+   "note": "Verbatim on the raw page; the preceding sentence supplies the disparity-of-information limb ('There is also an issue with the disparity of information given on different regions').",
+   "fromFile": "verdicts-martin-i735-749.json"
+  },
+  "744": {
+   "index": 744,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "excerpts from his work are rare ... he does give us some of the more evocative moments in the book",
+   "note": "Verbatim on the raw page. The rarity limb and Gyldayn's status as the second, more authoritative in-world source are both stated. Note the page spells him 'Master Gyldayn' (apparent typo for Maester) at first mention.",
+   "fromFile": "verdicts-martin-i735-749.json"
+  },
+  "745": {
+   "index": 745,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The book's conceit is that the young Maester Yandel ... has written the book a sort of Rough Guide to Westeros and Essos",
+   "note": "Verbatim on the raw page (the page's own sentence has a dropped 'as' before 'a sort of').",
+   "fromFile": "verdicts-martin-i735-749.json"
+  },
+  "746": {
+   "index": 746,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Going in, I was expecting something a little on the dry side-but I was pleasantly surprised by the ease of Martin, Garcia, and Antonsson's prose",
+   "note": "Live blogs.slj.com returned HTTP 500 (WordPress critical error); verdict formed on the raw Wayback capture https://web.archive.org/web/20150205084238id_/http://blogs.slj.com/adult4teen/2015/01/08/the-world-of-ice-and-fire/ - raw archived HTML, not a summarizer. Quote verbatim in the blog preface, as the claim's page hint says.",
+   "fromFile": "verdicts-martin-i735-749.json"
+  },
+  "747": {
+   "index": 747,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "their facility in conjuring epic conflicts and romances in the few sentences allotted to them in various entries",
+   "note": "Verbatim in the preface of the raw Wayback capture. Claim's 'each entry' renders the page's 'various entries'; the praised parties are Martin, Garcia and Antonsson.",
+   "fromFile": "verdicts-martin-i735-749.json"
+  },
+  "748": {
+   "index": 748,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the bulk of the book's first half is taken up by a reign-by-reign account of the Targaryen dynasty",
+   "note": "Verbatim in the signed review body of the raw Wayback capture; page says 'the bulk of' the first half, which the claim compresses to 'the first half'.",
+   "fromFile": "verdicts-martin-i735-749.json"
+  },
+  "749": {
+   "index": 749,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The second half sketches each of the Seven Kingdoms, along with accounts of the ruling families. This half has less narrative drive",
+   "note": "Verbatim in the signed review body. The comparand is implicit: the page writes an unmarked 'less narrative drive' immediately after describing the first half's reign-by-reign Targaryen account, so 'than the dynastic half' is the only available reading, not an explicit statement.",
+   "fromFile": "verdicts-martin-i735-749.json"
   }
  }
 }

@@ -1,14 +1,17 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 13:50:07 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 13:56:12 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
 | ai | critic |  | failed | 0 | — | — | 12:30:12 |
+| ai | critic |  | failed | 0 | — | — | 17:50:58 |
 | ai | finder | counter-cases | result | 45 | — | 83 claims, complete=True @12:23:29 | 12:26:46 |
 | ai | finder | critics-direct | failed | 42 | extra_a.py, extra_b.py, extra_c.py, claims_data.py | 234 claims, complete=True @13:20:38 | 12:26:52 |
 | ai | finder | critics-direct | result | 45 | — | 234 claims, complete=True @13:20:38 | 17:26:31 |
 | ai | finder | steerability-mechanism | result | 46 | — | 72 claims, complete=True @12:23:29 | 12:30:07 |
 | ai | regrade | regrade-r3 | failed | 0 | — | — | 12:30:11 |
+| ai | regrade | regrade-r4 | failed | 0 | — | — | 17:50:56 |
 | ai | synth |  | failed | 0 | — | — | 12:30:11 |
+| ai | synth |  | failed | 0 | — | — | 17:50:57 |
 | ai | verifier | i254-268 | failed | 0 | — | verdict file WRITTEN | 12:30:07 |
 | ai | verifier | i254-268 | result | 6 | — | verdict file WRITTEN | 17:32:27 |
 | ai | verifier | i269-283 | failed | 0 | — | verdict file WRITTEN | 12:30:07 |
@@ -34,38 +37,72 @@
 | ai | verifier | i419-433 | failed | 0 | — | verdict file WRITTEN | 12:30:08 |
 | ai | verifier | i419-433 | result | 12 | — | verdict file WRITTEN | 17:46:17 |
 | ai | verifier | i434-448 | failed | 0 | — | verdict file WRITTEN | 12:30:08 |
-| ai | verifier | i434-448 | in-flight | 5 | — | verdict file WRITTEN | 17:49:50 |
-| ai | verifier | i449-463 | failed | 0 | — | verdict file absent | 12:30:08 |
-| ai | verifier | i449-463 | in-flight | 2 | — | verdict file absent | 17:49:43 |
+| ai | verifier | i434-448 | result | 5 | — | verdict file WRITTEN | 17:50:13 |
+| ai | verifier | i449-463 | failed | 0 | — | verdict file WRITTEN | 12:30:08 |
+| ai | verifier | i449-463 | result | 2 | — | verdict file WRITTEN | 17:50:50 |
 | ai | verifier | i464-478 | failed | 0 | — | verdict file WRITTEN | 12:30:08 |
-| ai | verifier | i464-478 | in-flight | 3 | — | verdict file WRITTEN | 17:49:43 |
-| ai | verifier | i479-493 | failed | 0 | — | verdict file absent | 12:30:09 |
-| ai | verifier | i479-493 | in-flight | 1 | — | verdict file absent | 17:50:05 |
+| ai | verifier | i464-478 | result | 3 | — | verdict file WRITTEN | 17:50:13 |
+| ai | verifier | i479-493 | failed | 0 | — | verdict file WRITTEN | 12:30:09 |
+| ai | verifier | i479-493 | failed | 1 | — | verdict file WRITTEN | 17:50:53 |
 | ai | verifier | i494-508 | failed | 0 | — | verdict file absent | 12:30:09 |
+| ai | verifier | i494-508 | failed | 0 | — | verdict file absent | 17:50:53 |
 | ai | verifier | i509-523 | failed | 0 | — | verdict file absent | 12:30:09 |
+| ai | verifier | i509-523 | failed | 0 | — | verdict file absent | 17:50:53 |
 | ai | verifier | i524-538 | failed | 0 | — | verdict file absent | 12:30:09 |
+| ai | verifier | i524-538 | failed | 0 | — | verdict file absent | 17:50:53 |
 | ai | verifier | i539-550 | failed | 0 | — | verdict file absent | 12:30:09 |
+| ai | verifier | i539-553 | failed | 0 | — | verdict file absent | 17:50:53 |
 | ai | verifier | i551-565 | failed | 0 | — | verdict file absent | 12:30:09 |
+| ai | verifier | i554-568 | failed | 0 | — | verdict file absent | 17:50:54 |
 | ai | verifier | i566-580 | failed | 0 | — | verdict file absent | 12:30:09 |
+| ai | verifier | i569-583 | failed | 0 | — | verdict file absent | 17:50:54 |
 | ai | verifier | i581-595 | failed | 0 | — | verdict file absent | 12:30:09 |
+| ai | verifier | i584-598 | failed | 0 | — | verdict file absent | 17:50:54 |
 | ai | verifier | i596-610 | failed | 0 | — | verdict file absent | 12:30:09 |
+| ai | verifier | i599-613 | failed | 0 | — | verdict file absent | 17:50:54 |
 | ai | verifier | i611-625 | failed | 0 | — | verdict file absent | 12:30:10 |
+| ai | verifier | i614-628 | failed | 0 | — | verdict file absent | 17:50:54 |
 | ai | verifier | i626-640 | failed | 0 | — | verdict file absent | 12:30:10 |
+| ai | verifier | i629-643 | failed | 0 | — | verdict file absent | 17:50:54 |
 | ai | verifier | i641-655 | failed | 0 | — | verdict file absent | 12:30:10 |
+| ai | verifier | i644-658 | failed | 0 | — | verdict file absent | 17:50:54 |
 | ai | verifier | i656-670 | failed | 0 | — | verdict file absent | 12:30:10 |
+| ai | verifier | i659-673 | failed | 0 | — | verdict file absent | 17:50:54 |
 | ai | verifier | i671-685 | failed | 0 | — | verdict file absent | 12:30:10 |
+| ai | verifier | i674-688 | failed | 0 | — | verdict file absent | 17:50:54 |
 | ai | verifier | i686-700 | failed | 0 | — | verdict file absent | 12:30:10 |
+| ai | verifier | i689-703 | failed | 0 | — | verdict file absent | 17:50:54 |
 | ai | verifier | i701-705 | failed | 0 | — | verdict file absent | 12:30:10 |
+| ai | verifier | i704-718 | failed | 0 | — | verdict file absent | 17:50:54 |
+| ai | verifier | i719-733 | failed | 0 | — | verdict file absent | 17:50:54 |
+| ai | verifier | i734-748 | failed | 0 | — | verdict file absent | 17:50:55 |
+| ai | verifier | i749-763 | failed | 0 | — | verdict file absent | 17:50:55 |
+| ai | verifier | i764-778 | failed | 0 | — | verdict file absent | 17:50:55 |
+| ai | verifier | i779-793 | failed | 0 | — | verdict file absent | 17:50:55 |
+| ai | verifier | i794-808 | failed | 0 | — | verdict file absent | 17:50:55 |
+| ai | verifier | i809-811 | failed | 0 | — | verdict file absent | 17:50:55 |
+| ai | verifier | i812-826 | failed | 0 | — | verdict file absent | 17:50:55 |
+| ai | verifier | i827-841 | failed | 0 | — | verdict file absent | 17:50:55 |
+| ai | verifier | i842-856 | failed | 0 | — | verdict file absent | 17:50:55 |
+| ai | verifier | i857-871 | failed | 0 | — | verdict file absent | 17:50:55 |
+| ai | verifier | i872-886 | failed | 0 | — | verdict file absent | 17:50:55 |
+| ai | verifier | i887-901 | failed | 0 | — | verdict file absent | 17:50:55 |
+| ai | verifier | i902-916 | failed | 0 | — | verdict file absent | 17:50:56 |
+| ai | verifier | i917-931 | failed | 0 | — | verdict file absent | 17:50:56 |
+| ai | verifier | i932-939 | failed | 0 | — | verdict file absent | 17:50:56 |
 | dnd | critic |  | failed | 0 | — | — | 12:30:57 |
+| dnd | critic |  | failed | 0 | — | — | 17:51:08 |
 | dnd | finder | close | result | 51 | — | 90 claims, complete=True @12:23:28 | 12:26:47 |
 | dnd | finder | place-register | result | 52 | — | 82 claims, complete=True @12:23:28 | 12:25:37 |
 | dnd | finder | scholarship-history | failed | 69 | — | 112 claims, complete=True @13:30:12 | 12:26:59 |
 | dnd | finder | scholarship-history | result | 95 | — | 112 claims, complete=True @13:30:12 | 17:35:10 |
 | dnd | finder | usability-school | result | 54 | — | 123 claims, complete=True @12:23:28 | 12:30:50 |
 | dnd | regrade | regrade-r3 | failed | 0 | — | — | 12:30:56 |
+| dnd | regrade | regrade-r4 | failed | 0 | — | — | 17:51:07 |
 | dnd | synth |  | failed | 0 | — | — | 12:30:56 |
+| dnd | synth |  | failed | 0 | — | — | 17:51:08 |
 | dnd | verifier | i109-123 | failed | 0 | — | verdict file absent | 12:30:51 |
-| dnd | verifier | i109-123 | in-flight | 12 | — | verdict file absent | 17:50:04 |
+| dnd | verifier | i109-123 | failed | 12 | — | verdict file absent | 17:51:02 |
 | dnd | verifier | i124-138 | failed | 0 | — | verdict file WRITTEN | 12:30:51 |
 | dnd | verifier | i124-138 | result | 14 | — | verdict file WRITTEN | 17:49:59 |
 | dnd | verifier | i139-153 | failed | 0 | — | verdict file WRITTEN | 12:30:51 |
@@ -73,46 +110,94 @@
 | dnd | verifier | i154-168 | failed | 0 | — | verdict file WRITTEN | 12:30:51 |
 | dnd | verifier | i154-168 | result | 7 | — | verdict file WRITTEN | 17:48:12 |
 | dnd | verifier | i169-183 | failed | 0 | — | verdict file absent | 12:30:52 |
+| dnd | verifier | i169-183 | failed | 0 | — | verdict file absent | 17:51:02 |
 | dnd | verifier | i184-198 | failed | 0 | — | verdict file absent | 12:30:52 |
+| dnd | verifier | i184-198 | failed | 0 | — | verdict file absent | 17:51:02 |
 | dnd | verifier | i199-213 | failed | 0 | — | verdict file absent | 12:30:52 |
+| dnd | verifier | i199-213 | failed | 0 | — | verdict file absent | 17:51:02 |
 | dnd | verifier | i214-228 | failed | 0 | — | verdict file absent | 12:30:52 |
+| dnd | verifier | i214-228 | failed | 0 | — | verdict file absent | 17:51:02 |
 | dnd | verifier | i229-243 | failed | 0 | — | verdict file absent | 12:30:52 |
+| dnd | verifier | i229-243 | failed | 0 | — | verdict file absent | 17:51:03 |
 | dnd | verifier | i244-258 | failed | 0 | — | verdict file absent | 12:30:52 |
+| dnd | verifier | i244-258 | failed | 0 | — | verdict file absent | 17:51:03 |
 | dnd | verifier | i259-273 | failed | 0 | — | verdict file absent | 12:30:52 |
+| dnd | verifier | i259-273 | failed | 0 | — | verdict file absent | 17:51:03 |
 | dnd | verifier | i274-288 | failed | 0 | — | verdict file absent | 12:30:52 |
+| dnd | verifier | i274-288 | failed | 0 | — | verdict file absent | 17:51:03 |
 | dnd | verifier | i289-303 | failed | 0 | — | verdict file absent | 12:30:53 |
+| dnd | verifier | i289-303 | failed | 0 | — | verdict file absent | 17:51:03 |
 | dnd | verifier | i304-318 | failed | 0 | — | verdict file absent | 12:30:53 |
+| dnd | verifier | i304-318 | failed | 0 | — | verdict file absent | 17:51:03 |
 | dnd | verifier | i319-333 | failed | 0 | — | verdict file absent | 12:30:53 |
+| dnd | verifier | i319-333 | failed | 0 | — | verdict file absent | 17:51:03 |
 | dnd | verifier | i334-348 | failed | 0 | — | verdict file absent | 12:30:53 |
+| dnd | verifier | i334-348 | failed | 0 | — | verdict file absent | 17:51:03 |
 | dnd | verifier | i349-363 | failed | 0 | — | verdict file absent | 12:30:53 |
+| dnd | verifier | i349-363 | failed | 0 | — | verdict file absent | 17:51:04 |
 | dnd | verifier | i364-378 | failed | 0 | — | verdict file absent | 12:30:53 |
+| dnd | verifier | i364-378 | failed | 0 | — | verdict file absent | 17:51:04 |
 | dnd | verifier | i379-392 | failed | 0 | — | verdict file absent | 12:30:53 |
+| dnd | verifier | i379-393 | failed | 0 | — | verdict file absent | 17:51:04 |
 | dnd | verifier | i393-407 | failed | 0 | — | verdict file absent | 12:30:53 |
+| dnd | verifier | i394-408 | failed | 0 | — | verdict file absent | 17:51:04 |
 | dnd | verifier | i408-422 | failed | 0 | — | verdict file absent | 12:30:53 |
+| dnd | verifier | i409-423 | failed | 0 | — | verdict file absent | 17:51:04 |
 | dnd | verifier | i423-437 | failed | 0 | — | verdict file absent | 12:30:53 |
+| dnd | verifier | i424-438 | failed | 0 | — | verdict file absent | 17:51:04 |
 | dnd | verifier | i438-452 | failed | 0 | — | verdict file absent | 12:30:53 |
+| dnd | verifier | i439-453 | failed | 0 | — | verdict file absent | 17:51:04 |
 | dnd | verifier | i453-467 | failed | 0 | — | verdict file absent | 12:30:53 |
+| dnd | verifier | i454-468 | failed | 0 | — | verdict file absent | 17:51:04 |
 | dnd | verifier | i468-482 | failed | 0 | — | verdict file absent | 12:30:54 |
+| dnd | verifier | i469-483 | failed | 0 | — | verdict file absent | 17:51:04 |
 | dnd | verifier | i483-497 | failed | 0 | — | verdict file absent | 12:30:54 |
+| dnd | verifier | i484-498 | failed | 0 | — | verdict file absent | 17:51:04 |
 | dnd | verifier | i49-63 | failed | 0 | — | verdict file WRITTEN | 12:30:51 |
 | dnd | verifier | i49-63 | result | 13 | — | verdict file WRITTEN | 17:44:09 |
 | dnd | verifier | i498-512 | failed | 0 | — | verdict file absent | 12:30:54 |
+| dnd | verifier | i499-513 | failed | 0 | — | verdict file absent | 17:51:05 |
 | dnd | verifier | i513-527 | failed | 0 | — | verdict file absent | 12:30:54 |
+| dnd | verifier | i514-528 | failed | 0 | — | verdict file absent | 17:51:04 |
 | dnd | verifier | i528-542 | failed | 0 | — | verdict file absent | 12:30:55 |
+| dnd | verifier | i529-543 | failed | 0 | — | verdict file absent | 17:51:05 |
 | dnd | verifier | i543-557 | failed | 0 | — | verdict file absent | 12:30:54 |
+| dnd | verifier | i544-558 | failed | 0 | — | verdict file absent | 17:51:05 |
 | dnd | verifier | i558-572 | failed | 0 | — | verdict file absent | 12:30:54 |
+| dnd | verifier | i559-573 | failed | 0 | — | verdict file absent | 17:51:05 |
 | dnd | verifier | i573-587 | failed | 0 | — | verdict file absent | 12:30:54 |
+| dnd | verifier | i574-588 | failed | 0 | — | verdict file absent | 17:51:05 |
 | dnd | verifier | i588-602 | failed | 0 | — | verdict file absent | 12:30:55 |
+| dnd | verifier | i589-603 | failed | 0 | — | verdict file absent | 17:51:05 |
 | dnd | verifier | i603-617 | failed | 0 | — | verdict file absent | 12:30:55 |
+| dnd | verifier | i604-618 | failed | 0 | — | verdict file absent | 17:51:05 |
 | dnd | verifier | i618-632 | failed | 0 | — | verdict file absent | 12:30:55 |
+| dnd | verifier | i619-633 | failed | 0 | — | verdict file absent | 17:51:05 |
 | dnd | verifier | i633-647 | failed | 0 | — | verdict file absent | 12:30:55 |
+| dnd | verifier | i634-648 | failed | 0 | — | verdict file absent | 17:51:05 |
 | dnd | verifier | i64-78 | failed | 0 | — | verdict file WRITTEN | 12:30:51 |
 | dnd | verifier | i64-78 | result | 5 | — | verdict file WRITTEN | 17:40:23 |
 | dnd | verifier | i648-662 | failed | 0 | — | verdict file absent | 12:30:55 |
+| dnd | verifier | i649-663 | failed | 0 | — | verdict file absent | 17:51:06 |
 | dnd | verifier | i663-677 | failed | 0 | — | verdict file absent | 12:30:55 |
+| dnd | verifier | i664-678 | failed | 0 | — | verdict file absent | 17:51:06 |
 | dnd | verifier | i678-687 | failed | 0 | — | verdict file absent | 12:30:55 |
+| dnd | verifier | i679-693 | failed | 0 | — | verdict file absent | 17:51:06 |
+| dnd | verifier | i694-708 | failed | 0 | — | verdict file absent | 17:51:06 |
+| dnd | verifier | i709-723 | failed | 0 | — | verdict file absent | 17:51:06 |
+| dnd | verifier | i724-738 | failed | 0 | — | verdict file absent | 17:51:06 |
+| dnd | verifier | i739-753 | failed | 0 | — | verdict file absent | 17:51:06 |
+| dnd | verifier | i754-759 | failed | 0 | — | verdict file absent | 17:51:06 |
+| dnd | verifier | i760-774 | failed | 0 | — | verdict file absent | 17:51:06 |
+| dnd | verifier | i775-789 | failed | 0 | — | verdict file absent | 17:51:06 |
 | dnd | verifier | i79-93 | failed | 0 | — | verdict file WRITTEN | 12:30:51 |
 | dnd | verifier | i79-93 | result | 15 | — | verdict file WRITTEN | 17:41:58 |
+| dnd | verifier | i790-804 | failed | 0 | — | verdict file absent | 17:51:06 |
+| dnd | verifier | i805-819 | failed | 0 | — | verdict file absent | 17:51:06 |
+| dnd | verifier | i820-834 | failed | 0 | — | verdict file absent | 17:51:07 |
+| dnd | verifier | i835-849 | failed | 0 | — | verdict file absent | 17:51:07 |
+| dnd | verifier | i850-864 | failed | 0 | — | verdict file absent | 17:51:07 |
+| dnd | verifier | i865-871 | failed | 0 | — | verdict file absent | 17:51:07 |
 | dnd | verifier | i94-108 | failed | 0 | — | verdict file WRITTEN | 12:30:51 |
 | dnd | verifier | i94-108 | result | 14 | — | verdict file WRITTEN | 17:42:38 |
 | hobb | critic |  | failed | 0 | — | — | 12:29:45 |
@@ -176,6 +261,7 @@
 | hobb | verifier | i77-91 | failed | 0 | — | verdict file absent | 12:29:39 |
 | hobb | verifier | i90-104 | result | 8 | — | verdict file WRITTEN | 17:05:31 |
 | hobb | verifier | i92-106 | failed | 0 | — | verdict file absent | 12:29:39 |
+| kay | critic |  | failed | 0 | — | — | 17:51:51 |
 | kay | critic |  | failed | 0 | — | — | 12:27:27 |
 | kay | finder | academic | result | 76 | claims.json, sources.json | 52 claims, complete=True @12:23:25 | 12:27:22 |
 | kay | finder | close | failed | 91 | — | 102 claims, complete=True @08:27:06 | 12:27:07 |
@@ -183,6 +269,8 @@
 | kay | finder | craft | failed | 76 | — | 283 claims, complete=True @13:18:49 | 12:26:47 |
 | kay | finder | voice | result | 86 | — | 105 claims, complete=True @12:23:25 | 12:20:20 |
 | kay | regrade | regrade-r3c | failed | 0 | — | — | 12:27:25 |
+| kay | regrade | regrade-r4 | failed | 0 | — | — | 17:51:50 |
+| kay | synth |  | failed | 0 | — | — | 17:51:50 |
 | kay | synth |  | failed | 0 | — | — | 12:27:26 |
 | kay | verifier | i0-14 | result | 2 | — | verdict file WRITTEN | 17:29:44 |
 | kay | verifier | i0-14 | failed | 0 | — | verdict file WRITTEN | 12:27:22 |
@@ -217,27 +305,52 @@
 | kay | verifier | i291-305 | failed | 0 | — | verdict file absent | 12:27:25 |
 | kay | verifier | i30-44 | result | 2 | — | verdict file WRITTEN | 17:30:03 |
 | kay | verifier | i30-44 | failed | 0 | — | verdict file WRITTEN | 12:27:22 |
-| kay | verifier | i300-314 | in-flight | 5 | — | verdict file absent | 17:49:40 |
+| kay | verifier | i300-314 | result | 5 | — | verdict file WRITTEN | 17:50:46 |
 | kay | verifier | i306-320 | failed | 0 | — | verdict file absent | 12:27:25 |
-| kay | verifier | i315-329 | in-flight | 7 | — | verdict file WRITTEN | 17:50:05 |
+| kay | verifier | i315-329 | result | 7 | — | verdict file WRITTEN | 17:50:31 |
 | kay | verifier | i321-327 | failed | 0 | — | verdict file absent | 12:27:25 |
-| kay | verifier | i330-344 | in-flight | 4 | — | verdict file absent | 17:49:22 |
-| kay | verifier | i345-359 | in-flight | 1 | — | verdict file WRITTEN | 17:49:53 |
+| kay | verifier | i330-344 | failed | 4 | — | verdict file WRITTEN | 17:51:47 |
+| kay | verifier | i345-359 | result | 1 | — | verdict file WRITTEN | 17:50:18 |
+| kay | verifier | i360-374 | failed | 0 | — | verdict file absent | 17:51:48 |
+| kay | verifier | i375-389 | failed | 0 | — | verdict file absent | 17:51:47 |
+| kay | verifier | i390-404 | failed | 0 | — | verdict file absent | 17:51:48 |
+| kay | verifier | i405-419 | failed | 0 | — | verdict file absent | 17:51:48 |
+| kay | verifier | i420-434 | failed | 0 | — | verdict file absent | 17:51:48 |
+| kay | verifier | i435-449 | failed | 0 | — | verdict file absent | 17:51:48 |
 | kay | verifier | i45-59 | result | 2 | — | verdict file WRITTEN | 17:29:11 |
 | kay | verifier | i45-59 | failed | 0 | — | verdict file WRITTEN | 12:27:22 |
+| kay | verifier | i450-464 | failed | 0 | — | verdict file absent | 17:51:48 |
+| kay | verifier | i465-479 | failed | 0 | — | verdict file absent | 17:51:48 |
+| kay | verifier | i480-494 | failed | 0 | — | verdict file absent | 17:51:48 |
+| kay | verifier | i495-509 | failed | 0 | — | verdict file absent | 17:51:48 |
+| kay | verifier | i510-524 | failed | 0 | — | verdict file absent | 17:51:48 |
+| kay | verifier | i525-539 | failed | 0 | — | verdict file absent | 17:51:48 |
+| kay | verifier | i540-549 | failed | 0 | — | verdict file absent | 17:51:49 |
+| kay | verifier | i550-564 | failed | 0 | — | verdict file absent | 17:51:49 |
+| kay | verifier | i565-579 | failed | 0 | — | verdict file absent | 17:51:49 |
+| kay | verifier | i580-594 | failed | 0 | — | verdict file absent | 17:51:49 |
+| kay | verifier | i595-609 | failed | 0 | — | verdict file absent | 17:51:49 |
 | kay | verifier | i60-74 | result | 1 | — | verdict file WRITTEN | 17:34:19 |
 | kay | verifier | i60-74 | failed | 0 | — | verdict file WRITTEN | 12:27:23 |
+| kay | verifier | i610-624 | failed | 0 | — | verdict file absent | 17:51:49 |
+| kay | verifier | i625-639 | failed | 0 | — | verdict file absent | 17:51:49 |
+| kay | verifier | i640-654 | failed | 0 | — | verdict file absent | 17:51:49 |
+| kay | verifier | i655-669 | failed | 0 | — | verdict file absent | 17:51:49 |
+| kay | verifier | i670-684 | failed | 0 | — | verdict file absent | 17:51:49 |
+| kay | verifier | i685-699 | failed | 0 | — | verdict file absent | 17:51:49 |
+| kay | verifier | i700-712 | failed | 0 | — | verdict file absent | 17:51:49 |
 | kay | verifier | i75-89 | result | 1 | — | verdict file WRITTEN | 17:33:59 |
 | kay | verifier | i75-89 | failed | 0 | — | verdict file WRITTEN | 12:27:23 |
 | kay | verifier | i90-104 | result | 4 | — | verdict file WRITTEN | 17:34:44 |
 | kay | verifier | i90-104 | failed | 0 | — | verdict file WRITTEN | 12:27:23 |
+| leguin | critic |  | failed | 0 | — | — | 17:51:02 |
 | leguin | critic |  | failed | 0 | — | — | 12:27:10 |
 | leguin | finder | close | result | 61 | — | 78 claims, complete=True @12:23:26 | 12:25:57 |
 | leguin | finder | craft | result | 36 | — | 123 claims, complete=True @12:23:26 | 12:25:23 |
 | leguin | finder | voice | result | 34 | — | 83 claims, complete=True @12:23:25 | 12:25:01 |
 | leguin | regrade | regrade-r3c | failed | 0 | — | — | 12:27:09 |
 | leguin | regrade | regrade-r4 | result | 0 | build-leguin-r4.mjs | — | 17:31:56 |
-| leguin | synth |  | in-flight | 0 | section-leguin.md | — | 17:47:50 |
+| leguin | synth |  | result | 0 | section-leguin.md | — | 17:50:43 |
 | leguin | synth |  | failed | 0 | — | — | 12:27:09 |
 | leguin | verifier | i100-114 | failed | 0 | — | verdict file absent | 12:27:06 |
 | leguin | verifier | i105-119 | result | 2 | — | verdict file WRITTEN | 17:03:23 |
@@ -285,6 +398,7 @@
 | leguin | verifier | i75-89 | failed | 6 | — | verdict file WRITTEN | 12:27:06 |
 | leguin | verifier | i90-104 | result | 9 | — | verdict file WRITTEN | 16:57:40 |
 | leguin | verifier | i90-99 | failed | 8 | — | verdict file absent | 12:27:05 |
+| martin | critic |  | failed | 0 | — | — | 17:51:24 |
 | martin | critic |  | failed | 0 | — | — | 12:28:10 |
 | martin | finder | closereading | result | 43 | build_found.py, found-martin-closereading.json | 88 claims, complete=True @13:15:17 | 17:19:05 |
 | martin | finder | closereading | failed | 0 | — | 88 claims, complete=True @13:15:17 | 12:28:05 |
@@ -294,6 +408,8 @@
 | martin | finder | reception | result | 56 | — | 73 claims, complete=True @12:23:27 | 12:25:18 |
 | martin | finder | scholarship | result | 49 | — | 83 claims, complete=True @12:23:27 | 12:28:04 |
 | martin | regrade | regrade-r3 | failed | 0 | — | — | 12:28:08 |
+| martin | regrade | regrade-r4 | failed | 0 | — | — | 17:51:22 |
+| martin | synth |  | failed | 0 | — | — | 17:51:23 |
 | martin | synth |  | failed | 0 | — | — | 12:28:09 |
 | martin | verifier | i330-344 | result | 5 | — | verdict file WRITTEN | 17:24:27 |
 | martin | verifier | i330-344 | failed | 0 | — | verdict file WRITTEN | 12:28:05 |
@@ -344,21 +460,39 @@
 | martin | verifier | i664-678 | failed | 0 | — | verdict file absent | 12:28:07 |
 | martin | verifier | i675-689 | result | 11 | — | verdict file WRITTEN | 17:46:00 |
 | martin | verifier | i679-693 | failed | 0 | — | verdict file absent | 12:28:08 |
-| martin | verifier | i690-704 | in-flight | 5 | — | verdict file absent | 17:49:58 |
+| martin | verifier | i690-704 | result | 5 | — | verdict file WRITTEN | 17:51:20 |
 | martin | verifier | i694-708 | failed | 0 | — | verdict file absent | 12:28:08 |
-| martin | verifier | i705-719 | in-flight | 7 | — | verdict file WRITTEN | 17:50:05 |
+| martin | verifier | i705-719 | result | 7 | — | verdict file WRITTEN | 17:50:33 |
 | martin | verifier | i709-723 | failed | 0 | — | verdict file absent | 12:28:08 |
-| martin | verifier | i720-734 | in-flight | 4 | — | verdict file WRITTEN | 17:49:56 |
+| martin | verifier | i720-734 | result | 4 | — | verdict file WRITTEN | 17:50:22 |
 | martin | verifier | i724-738 | failed | 0 | — | verdict file absent | 12:28:08 |
-| martin | verifier | i735-749 | in-flight | 5 | — | verdict file absent | 17:50:02 |
+| martin | verifier | i735-749 | failed | 5 | — | verdict file WRITTEN | 17:50:53 |
 | martin | verifier | i739-753 | failed | 0 | — | verdict file absent | 12:28:08 |
+| martin | verifier | i750-764 | failed | 0 | — | verdict file absent | 17:51:21 |
 | martin | verifier | i754-768 | failed | 0 | — | verdict file absent | 12:28:08 |
+| martin | verifier | i765-779 | failed | 0 | — | verdict file absent | 17:51:21 |
 | martin | verifier | i769-783 | failed | 0 | — | verdict file absent | 12:28:08 |
+| martin | verifier | i780-794 | failed | 0 | — | verdict file absent | 17:51:21 |
 | martin | verifier | i784-792 | failed | 0 | — | verdict file absent | 12:28:08 |
+| martin | verifier | i795-809 | failed | 0 | — | verdict file absent | 17:51:21 |
+| martin | verifier | i810-824 | failed | 0 | — | verdict file absent | 17:51:21 |
+| martin | verifier | i825-839 | failed | 0 | — | verdict file absent | 17:51:21 |
+| martin | verifier | i840-841 | failed | 0 | — | verdict file absent | 17:51:21 |
+| martin | verifier | i842-856 | failed | 0 | — | verdict file absent | 17:51:21 |
+| martin | verifier | i857-871 | failed | 0 | — | verdict file absent | 17:51:21 |
+| martin | verifier | i872-886 | failed | 0 | — | verdict file absent | 17:51:21 |
+| martin | verifier | i887-901 | failed | 0 | — | verdict file absent | 17:51:21 |
+| martin | verifier | i902-916 | failed | 0 | — | verdict file absent | 17:51:22 |
+| martin | verifier | i917-931 | failed | 0 | — | verdict file absent | 17:51:22 |
+| martin | verifier | i932-946 | failed | 0 | — | verdict file absent | 17:51:22 |
+| martin | verifier | i947-961 | failed | 0 | — | verdict file absent | 17:51:22 |
+| martin | verifier | i962-976 | failed | 0 | — | verdict file absent | 17:51:22 |
+| martin | verifier | i977-989 | failed | 0 | — | verdict file absent | 17:51:22 |
+| tolkien | critic |  | failed | 0 | — | — | 17:51:50 |
 | tolkien | critic |  | failed | 0 | — | — | 12:27:15 |
 | tolkien | regrade | regrade-r3 | failed | 0 | — | — | 12:27:14 |
 | tolkien | regrade | regrade-r4 | result | 0 | — | — | 17:47:06 |
-| tolkien | synth |  | in-flight | 0 | — | — | 17:49:18 |
+| tolkien | synth |  | failed | 0 | — | — | 17:51:49 |
 | tolkien | synth |  | failed | 0 | — | — | 12:27:14 |
 | tolkien | verifier | i448-462 | result | 15 | — | verdict file WRITTEN | 12:06:58 |
 | tolkien | verifier | i463-477 | result | 5 | — | verdict file WRITTEN | 12:06:16 |
@@ -406,13 +540,14 @@
 | tolkien | verifier | i853-867 | failed | 0 | — | verdict file WRITTEN | 12:27:13 |
 | tolkien | verifier | i868-873 | result | 2 | verdicts-tolkien-i868-873.json | verdict file WRITTEN | 17:33:38 |
 | tolkien | verifier | i868-873 | failed | 0 | — | verdict file WRITTEN | 12:27:13 |
+| wolfe | critic |  | failed | 0 | — | — | 17:52:41 |
 | wolfe | critic |  | failed | 0 | — | — | 12:30:36 |
 | wolfe | finder | academic | result | 49 | — | 112 claims, complete=True @12:23:26 | 12:30:29 |
 | wolfe | finder | close | failed | 53 | — | 111 claims, complete=True @08:26:37 | 12:26:55 |
 | wolfe | finder | craft | result | 72 | — | 89 claims, complete=True @12:23:26 | 12:24:01 |
 | wolfe | regrade | regrade-r3c | failed | 0 | — | — | 12:30:34 |
 | wolfe | regrade | regrade-r4 | result | 0 | — | — | 17:43:04 |
-| wolfe | synth |  | in-flight | 0 | wolfe-features.mjs | — | 17:49:17 |
+| wolfe | synth |  | failed | 0 | wolfe-features.mjs | — | 17:52:40 |
 | wolfe | synth |  | failed | 0 | — | — | 12:30:35 |
 | wolfe | verifier | i0-14 | result | 1 | — | verdict file WRITTEN | 16:57:12 |
 | wolfe | verifier | i0-14 | failed | 0 | — | verdict file WRITTEN | 12:30:30 |
