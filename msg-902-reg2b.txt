@@ -1,0 +1,12 @@
+OSR rung-18 landing (register car 2b): the writer-reach register is re-taken at the tip because the chair's amend of register car 1 orphaned the sha its first re-take had recorded
+
+Register car 2 (25322159a) froze the writer-reach register with frozenAtSha 21cf7dff0 — the sha register car 1 carried when the
+door ran. The chair then AMENDED register car 1's message (→ f4d0e7a6a) to state its unchanged figures, and the amend rewrote the
+sha, so 21cf7dff0 is no longer an ancestor of the consist and chair-verify refused the CAS: "frozenAtSha measured INSIDE this
+consist — 21cf7dff0". An amend is a replay; a register taken over a car must be re-taken if that car's sha moves. This car is the
+plain --write at f8c19e3de: exactly two lines move (frozenAtSha 21cf7dff0 -> f8c19e3de); no identity, no figure, no digest
+changes; the plain re-run is the receipt (WR_PLAIN_EXIT=0). The gate re-runs over the eight cars before the CAS.
+
+Seat: Fable 5.1 — validated
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>

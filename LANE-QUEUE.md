@@ -99,7 +99,7 @@ Updated 2026-09-05 by the Fable chair (after §898: product 5e28d5c83, ledger 6c
 OSR-SCHEMA17 · every register act · every ceiling ruling (clamp: ONCE, at the final wave) · the words of DESK-7 and ENC-5.
 
 ## THE SWEEP QUEUE (09-05 evening, after the reboot; owner: "a full research workflow, the same as Martin and Tolkien", for every pending author)
-Cap: FOUR running agents of any kind (each sweep runs at cap 1 = one agent); at most TWO while a full-suite run (proof / ratchet / gate) is in flight — a running sweep is STOPPED and resumed from its verdict files, never left to keep a quiet window shut.
+Cap (CORRECTED by the owner 09-06 01:15): FOUR BUILD LANES; research agents are NOT lanes — every queued sweep may run at once, bounded only by measured load during a full-suite run (web-fetch agents are light; measured 1.8–3.5 at four) and by the usage window. A run that would keep a ratchet's quiet window shut is still launched only AFTER the window opens.
 | # | run | mode | status |
 |---|---|---|---|
 | S1 | tolkien | resume (118 of 373 unverified → 8 chunks) | RUNNING `wf_d9292937-340` |
