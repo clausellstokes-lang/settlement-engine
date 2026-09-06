@@ -1,6 +1,6 @@
 {
   "_doc": "PER-TEST failure census for the source phase (all tests except tests/build/**). SHRINK-ONLY. A failing test ABSENT from `entries` is a REGRESSION and reds the gate. Every entry MUST carry a full attribution — subsystem, cause, introducedAt, class — or tests/lint/testRatchet.test.js refuses it. Every entry MUST also carry a `magnitude` array: a banked row freezes its EXISTENCE, and the magnitude is what freezes its SIZE, so the population behind a permitted red cannot grow invisibly (ODQ 854, TE-RATCHET-MAG). `--update` can only REMOVE entries and LOWER magnitude ceilings; adding one is a deliberate, attributed hand edit. See scripts/check-test-ratchet.mjs.",
-  "measuredAtSha": "47aed9eb44e369feb13ab8828ad6f9c04fb2d7ec",
+  "measuredAtSha": "25322159a158d828cc5cd960d7e3d7dc3f69ea9c",
   "totalTests": 31970,
   "totalFiles": 2489,
   "skippedCeiling": 1,
@@ -37,40 +37,6 @@
           "pattern": "^\\S+\\.md:\\d+\\s",
           "ceiling": 6,
           "unit": "documentation completeness claims with no resolvable @enforced-by target"
-        }
-      ]
-    },
-    "tests/lint/writerReach.walker.test.js :: writer-with-no-reader ratchet: the frozen register the frozen corpusMeta EQUALS the observed-shape register corpusMeta — one corpus, two walkers": {
-      "file": "tests/lint/writerReach.walker.test.js",
-      "test": "writer-with-no-reader ratchet: the frozen register the frozen corpusMeta EQUALS the observed-shape register corpusMeta — one corpus, two walkers",
-      "subsystem": "writer-reach ↔ observed-shape register (one corpus, two walkers)",
-      "cause": "DECLARED DEBT at the §900 desk landing, retired at OSR rung 18: the writer-reach register was re-taken at the composed tip (register car 2, `--rebank --charter=§900`) and measures corpusMeta.simulationFlagsLit = 81 — the walker corpus lights every simulation flag and SEAT-78 minted `irregularForceEnabled` — while the observed-shape register still carries 80, because its schema-17 migration receipt's `migrationReview.subjectSha` (0742f8ff5, OSR-SCHEMA17's own dock) is not an ancestor of the composed lineage after the cherry-pick replay (fea88e5b1) and the OSR CLI `--write` REFUSES to re-take it (`rulings/RULING-OSR-900-NO-WRITE.md`; memory: a-cherry-picked-register-genesis-cannot-write-again-until-the-next-rung). The two walkers therefore disagree by exactly the one flag until rung 18 re-executes the migration with a subject commit inside the lineage. The arm's message is 'corpusMeta.simulationFlagsLit must equal OSR's frozen value: expected 81 to be 80'; the magnitude freezes the LIT count so a second new flag reds by figure. Chair act (Fable 5.1 — validated); not owner-gated: the re-anchoring is the chair's at rung 18.",
-      "introducedAt": "fea88e5b16a3c329de838b83287de2c7e6d8d986",
-      "class": "debt",
-      "magnitude": [
-        {
-          "name": "simulation-flags-lit",
-          "kind": "capture",
-          "pattern": "expected (\\d+) to be 80",
-          "ceiling": 81,
-          "unit": "simulation flags lit in the walker corpus (OSR frozen at 80)"
-        }
-      ]
-    },
-    "tests/lint/writerReach.walker.test.js :: writer-with-no-reader ratchet: the frozen register the frozen shapesDigest EQUALS the in-process digest of corpus.shapes — two executions of one builder are one corpus by bit, not by count": {
-      "file": "tests/lint/writerReach.walker.test.js",
-      "test": "writer-with-no-reader ratchet: the frozen register the frozen shapesDigest EQUALS the in-process digest of corpus.shapes — two executions of one builder are one corpus by bit, not by count",
-      "subsystem": "writer-reach ↔ observed-shape register (one corpus, two walkers)",
-      "cause": "DECLARED DEBT at the §900 desk landing, retired at OSR rung 18: the writer-reach register was re-taken at the composed tip (register car 2, `--rebank --charter=§900`) and measures corpusMeta.simulationFlagsLit = 81 — the walker corpus lights every simulation flag and SEAT-78 minted `irregularForceEnabled` — while the observed-shape register still carries 80, because its schema-17 migration receipt's `migrationReview.subjectSha` (0742f8ff5, OSR-SCHEMA17's own dock) is not an ancestor of the composed lineage after the cherry-pick replay (fea88e5b1) and the OSR CLI `--write` REFUSES to re-take it (`rulings/RULING-OSR-900-NO-WRITE.md`; memory: a-cherry-picked-register-genesis-cannot-write-again-until-the-next-rung). The two walkers therefore disagree by exactly the one flag until rung 18 re-executes the migration with a subject commit inside the lineage. The arm's message is 'live corpusMeta.simulationFlagsLit still equals OSR's frozen value: expected 81 to be 80'; the magnitude freezes the LIT count so a second new flag reds by figure. Chair act (Fable 5.1 — validated); not owner-gated: the re-anchoring is the chair's at rung 18.",
-      "introducedAt": "fea88e5b16a3c329de838b83287de2c7e6d8d986",
-      "class": "debt",
-      "magnitude": [
-        {
-          "name": "simulation-flags-lit",
-          "kind": "capture",
-          "pattern": "expected (\\d+) to be 80",
-          "ceiling": 81,
-          "unit": "simulation flags lit in the walker corpus (OSR frozen at 80)"
         }
       ]
     },
