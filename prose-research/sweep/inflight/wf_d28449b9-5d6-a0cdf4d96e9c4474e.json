@@ -3,14 +3,15 @@
  "name": "ai",
  "angle": null,
  "tag": "i329-343",
- "lines": 68,
+ "lines": 132,
  "firstTs": "2026-09-06T17:33:15.657Z",
- "lastTs": "2026-09-06T17:35:43.907Z",
+ "lastTs": "2026-09-06T17:40:53.008Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
   "WebFetch": 4,
-  "Bash": 12
+  "Bash": 27,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://arxiv.org/html/2602.05930",
@@ -25,16 +26,18 @@
   "https://arxiv.org/html/2507.03373v1",
   "https://ar5iv.labs.arxiv.org/html/2308.07540",
   "https://web.archive.org/web/20260806173738id_/https://www.crikey.com.au/2024/09/03/ai-worse-summarising-information-humans-government-trial/",
-  "http://web.archive.org/cdx/search/cdx?url=crikey.com.au/2024/09/03/ai-worse-summarising-information-humans-government-trial/&output=text&limit=40&filter=statuscode:200"
+  "http://web.archive.org/cdx/search/cdx?url=crikey.com.au/2024/09/03/ai-worse-summarising-information-humans-government-trial/&output=text&limit=40&filter=statuscode:200",
+  "https://web.archive.org/web/20240903043403id_/https://www.crikey.com.au/2024/09/03/ai-worse-summarising-information-humans-government-trial/",
+  "https://en.wikipedia.org/w/index.php?title=Wikipedia:Signs_of_AI_writing&action=history&limit=100"
  ],
  "filesWritten": [],
- "lastAssistantText": "Now let me get the raw page text directly via curl to verify verbatim quotes.",
+ "lastAssistantText": "All sources reached. Now writing the checkpoint file.",
  "run": "wf_d28449b9-5d6",
  "agent": "a0cdf4d96e9c4474e",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_d28449b9-5d6/agent-a0cdf4d96e9c4474e.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-ai-i329-343.json",
-  "exists": false
+  "exists": true
  }
 }

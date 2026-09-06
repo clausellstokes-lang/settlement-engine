@@ -1,0 +1,39 @@
+{
+ "role": "verifier",
+ "name": "kay",
+ "angle": null,
+ "tag": "i210-224",
+ "lines": 100,
+ "firstTs": "2026-09-06T17:38:53.990Z",
+ "lastTs": "2026-09-06T17:43:31.101Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 27
+ },
+ "urlsFetched": [
+  "http://brightweavings.com/justinian-visited-and-revisited/|justinian",
+  "http://brightweavings.com/jadslight/|jadslight",
+  "http://brightweavings.com/worldbuilding/|worldbuilding",
+  "http://brightweavings.com/webbtigana/|webbtigana",
+  "https://brightweavings.com/fantasies-of-history-guy-gavriel-kays-synthesis-of-the-historical-fantasy-novel/|rettino",
+  "https://ro.uow.edu.au/theses/3910",
+  "https://d.lib.rochester.edu/camelot/text/interview-with-guy-gavriel-kay.html",
+  "https://elar.urfu.ru/bitstream/10995/151646/1/978-5-91256-808-4_128.pdf",
+  "https://reactormag.com/altering-the-familiar-tigana-by-guy-gavriel-kay/",
+  "https://web.archive.org/web/20240223181104id_/https://ro.uow.edu.au/theses/3910/",
+  "https://ro.uow.edu.au/cgi/viewcontent.cgi?article=4917&context=theses",
+  "http://timetravel.mementoweb.org/timemap/link/https://ro.uow.edu.au/cgi/viewcontent.cgi?article=4917&context=theses",
+  "https://web.archive.org/web/20240915231703id_/https://ro.uow.edu.au/cgi/viewcontent.cgi?article=4917&context=theses"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "All 9 sources reached raw. Now writing the checkpoint file.",
+ "run": "wf_ae11ef1d-bb8",
+ "agent": "ab369736da5969f16",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_ae11ef1d-bb8/agent-ab369736da5969f16.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-kay-i210-224.json",
+  "exists": false
+ }
+}

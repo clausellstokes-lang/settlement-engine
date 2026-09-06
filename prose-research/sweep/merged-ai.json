@@ -11105,6 +11105,433 @@
    "trueWording": "six readability metrics all indicate LLM-generated texts tend to be less readable",
    "note": "Huang et al. v1 raw. Quote verbatim: 'Figure 5(c) presents the results of six readability metrics, all of which indicate that LLM-generated texts tend to be less readable.' Table 1's LLM-processing column carries every other limb: Long word % up, 'To Be' verb % down, Auxiliary verb % down, Pronouns % down, Average sentence length up (Long sentence % up), Dale-Chall readability up, Flesch-Kincaid grade level up, Coleman-Liau index up (and Flesch reading ease down) - all three named formulas move in the less-readable direction. 'LLM-revised Wikipedia text' matches the method: real Wikipedia simulated through GPT-4o-mini and Gemini-1.5-Flash, 'comparing the texts before and after LLM processing'.",
    "fromFile": "verdicts-ai-i299-313.json"
+  },
+  "314": {
+   "index": 314,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "arxiv.org/html/2503.02879v1 fetched raw (200, 397KB; header stamp arXiv:2503.02879v1 [cs.CL] 04 Mar 2025). Sec 5.2.2: 'the accuracy of responses based on ChatGPT-processed pages shows little change and responses based on Gemini-processed pages show a clear drop in accuracy' - quote verbatim, and Gemini-worse-than-GPT limb supported. Sec 5.2.3 bullet: 'Keyword Replacement and Omission: LLM might replace or omit key terms, altering the original meaning and causing misinterpretation.' Finding 5 generalises: 'LLM-processed content could perform less effectively in RAG systems compared to human-created texts.'",
+   "fromFile": "verdicts-ai-i314-328.json"
+  },
+  "315": {
+   "index": 315,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "arxiv.org/html/2410.08044 fetched raw (200; stamp arXiv:2410.08044v1 [cs.CL] 10 Oct 2024, Brooks/Eggert/Peskoff, Princeton). Table 2 English row: footnotes per sentence 0.667 (AI-detected) vs 0.972 (all new); outgoing links per word 0.383 vs 1.77. Quote verbatim: 'AI-generated ones use fewer references and are less integrated into the Wikipedia nexus.' Note the four figures are the English row specifically (French/German/Italian rows differ); thresholds set to a 1% FPR.",
+   "fromFile": "verdicts-ai-i314-328.json"
+  },
+  "316": {
+   "index": 316,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same page, Sec 5.2 Advertisement: 'Of the 45 flagged pages, we identify eight that were created to promote organizations such as small businesses, restaurants, or websites.' The estate page is one of them; moderator note quoted verbatim: 'Reference links are all dead apart from one for the town council, which makes no mention of the estate.' 45 = the articles flagged independently by both GPTZero and Binoculars, manually inspected.",
+   "fromFile": "verdicts-ai-i314-328.json"
+  },
+  "317": {
+   "index": 317,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same page, abstract: 'With thresholds calibrated to achieve a 1% false positive rate on pre-GPT-3.5 articles, detectors flag over 5% of newly created English Wikipedia articles as AI-generated... Flagged Wikipedia articles are typically of lower quality and are often self-promotional...' Figure 1 pins the sample: 5% of 2,909 English articles created in August 2024. Quote verbatim.",
+   "fromFile": "verdicts-ai-i314-328.json"
+  },
+  "318": {
+   "index": 318,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "arxiv.org/html/2504.05711 fetched raw (200, 345KB; stamp arXiv:2504.05711v2). Sec 3.3: 'different LLMs could adopt different ways to tag these elements, and even the same LLM might use various tags at different time.' Quote verbatim. 'these elements' = descriptive elements of archival description standards generally; ISAD(G) is the standard the system and its evaluation use throughout (Table 1 lists the ISAD(G) areas/elements), so the ISAD(G) framing is fair but is the paper's context rather than that sentence's own words.",
+   "fromFile": "verdicts-ai-i314-328.json"
+  },
+  "319": {
+   "index": 319,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same page, next sentence: 'although we use the LLMs, which are familiar with the archival description standards, they do not always strictly follow them, and the metadata descriptions created by LLMs could have different structures and elements at different times.' Quote verbatim; the LLM Instructor agent retrieves the standard's spec and builds the instructions (Sec 3.1), so 'they were prompted with' is supported.",
+   "fromFile": "verdicts-ai-i314-328.json"
+  },
+  "320": {
+   "index": 320,
+   "verdict": "PARTIAL",
+   "trueWording": "federated output more complete than ground truth, scored lower",
+   "unsupportedLimb": "'more than the record asked for' - the paper says ISAD(G)'s Extent element asks for size AND format, so the extra was beyond the archivist ground truth, not beyond the standard",
+   "note": "Sec 4: 'according to the ISAD(G) specification, the element Id:Extent describes the physical or digital size and format of the unit. For the element, our federated approach creates its content as \"3 pages, digital document (PDF)\", while the ground truth is only \"3 pages\". Obviously, the content created by the federated approach is more complete than the ground truth.' Quote verbatim and the ground-truth contrast verbatim, but the paper's own reading is the opposite of 'unasked-for detail': it says the federated approach 'adheres to the archiving standards more strictly' and was penalised by the metric for it.",
+   "fromFile": "verdicts-ai-i314-328.json"
+  },
+  "321": {
+   "index": 321,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "tendency for slightly decreasing scores for larger documents",
+   "note": "Same page, Sec 4 (Figure 5 discussion): 'Looking at the overall score for the whole metadata descriptions, we see a tendency for slightly decreasing scores for larger documents (ignoring the outliers with low scores for smaller documents).' Claim carries no quote string, so graded on substance; wording matches almost word for word.",
+   "fromFile": "verdicts-ai-i314-328.json"
+  },
+  "322": {
+   "index": 322,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "55% of GPT-3.5 and 18% of GPT-4 citations fabricated",
+   "note": "pmc.ncbi.nlm.nih.gov/articles/PMC10484980/ fetched raw with a browser UA (200, 175KB; Sci Rep 2023;13:14045, Walters & Wilder). Abstract: '55% of the GPT-3.5 citations but just 18% of the GPT-4 citations are fabricated.' Table 3 chapters row: 70% (10) for GPT-3.5 and 70% (23) for GPT-4; text: 'Even with GPT-4, however, 70% of the cited book chapters are fabricated.' Claim carries no quote string, so graded on substance.",
+   "fromFile": "verdicts-ai-i314-328.json"
+  },
+  "323": {
+   "index": 323,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "43% GPT-3.5, 24% GPT-4 real citations had substantive errors",
+   "note": "Same page, abstract: '43% of the real (non-fabricated) GPT-3.5 citations but just 24% of the real GPT-4 citations include substantive citation errors.' Results: 'More than a third of the articles have incorrect volume, issue, or page numbers, and 22% of the cited works have incorrect dates (years)'; Table 4 confirms volume/issue/page (34% / 13%) and date (22% / 16%) as the two largest error categories, so 'mostly volume/issue/pages and years' holds. No quote string supplied.",
+   "fromFile": "verdicts-ai-i314-328.json"
+  },
+  "324": {
+   "index": 324,
+   "verdict": "PARTIAL",
+   "trueWording": "fabricated citations include names of real journals and publishers",
+   "unsupportedLimb": "'authentic-sounding authors and plausible titles' - the paper never assesses author or title plausibility in fabricated citations",
+   "note": "Same page. Supported: 'most of the fabricated article, book, and website citations include the names of real journals, publishers, and organizations' (Table 3: journal fabricated in only 2% of fabricated article citations). Also supported, though hedged: 'Bibliographic problems may persist to the extent that citations are treated as regular text rather than a type of text for which special processing is required.' Not supported: the authors/titles limb. The nearest text is 'ChatGPT's fabricated citations tend to look legitimate at first glance', which the paper attributes to refs 13 and 28, not to its own data; its own author/title figures (Table 4) cover only the REAL citations. The paper's own conjecture also runs the other way - it suspects ChatGPT 'may attempt to recognize bibliographic citations and to treat them differently than regular text'.",
+   "fromFile": "verdicts-ai-i314-328.json"
+  },
+  "325": {
+   "index": 325,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "64 of 141 real citations (45.4%) contained errors",
+   "note": "pmc.ncbi.nlm.nih.gov/articles/PMC12658395/ fetched raw with a browser UA (200, 162KB; JMIR Ment Health 2025;12:e80371, Linardon et al.). Abstract: 'Among the 141 real citations, 64 (45.4%) contained errors, most frequently incorrect or invalid digital object identifiers.' Table 1 'Error type' block, combined column: DOI 51/135 (37.8), Page 39/131 (29.8) - denominators vary because elements absent from a citation were excluded. No quote string supplied.",
+   "fromFile": "verdicts-ai-i314-328.json"
+  },
+  "326": {
+   "index": 326,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "arxiv.org/html/2602.05930 fetched raw (200, 141KB; stamp arXiv:2602.05930v1 [cs.DL] 05 Feb 2026, Ansari). Table 1 (primary codes, N=100): Total Fabrication 66 (66.0%), Partial Attribute Corruption 27 (27.0%), Identifier Hijacking 4 (4.0%), Placeholder Hallucination 2 (2.0%), Semantic Hallucination 1 (1.0%). Quote appears as 'The citation has zero overlap with any real scholarly work' (capitalisation of the leading word aside). Citations are the hallucinated ones found in 53 NeurIPS 2025 accepted papers.",
+   "fromFile": "verdicts-ai-i314-328.json"
+  },
+  "327": {
+   "index": 327,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same page, Sec 2.2 category 2: 'Partial Attribute Corruption (PAC): The citation blends real and fabricated elements. This includes: real authors attributed to papers they did not write; real paper titles with fabricated authors; correct venues with wrong publication years...' Quote verbatim (leading capital aside); both halves of the claim - real authors on papers they did not write, real titles with fabricated authors - are the first two items.",
+   "fromFile": "verdicts-ai-i314-328.json"
+  },
+  "328": {
+   "index": 328,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Same page, Sec 2.2 category 5: 'Placeholder Hallucination (PH): The citation contains obvious generation failures such as template variables (\"Firstname Lastname\"), incomplete identifiers (\"arXiv:2305.XXXX\"), or placeholder text (\"To appear\").' Table 2 gives the live instance: 'Firstname Lastname and Others. Drivlme: A large-scale multi-agent driving benchmark, 2023. URL or arXiv ID to be updated.' These citations are drawn from ACCEPTED NeurIPS 2025 papers, so 'survive into the submitted record' is supported. Quote verbatim.",
+   "fromFile": "verdicts-ai-i314-328.json"
+  },
+  "329": {
+   "index": 329,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "76% of Total Fabrications layer semantic plausibility on wholesale invention",
+   "note": "arxiv.org/html/2602.05930 reached raw (abs + full HTML). Sec. text: 'among the 66 Total Fabrications, 50 cases (76%) utilized Semantic Hallucination as their secondary mode' and 'The fact that 76% of Total Fabrications specifically layer semantic plausibility on top of wholesale invention'. Abstract: 'every hallucination (100%) exhibited compound failure modes'. Both limbs supported. Graded SUBSTANCE only because the claim carries no quote field to match word-for-word; the page wording is near-identical. Caution: the abstract's ALL-citation secondary-mode figure is 63%, a different denominator from the claim's 76%-of-TF.",
+   "fromFile": "verdicts-ai-i329-343.json"
+  },
+  "330": {
+   "index": 330,
+   "verdict": "PARTIAL",
+   "trueWording": "a group of 24 drivers ... had actually taken a detour",
+   "unsupportedLimb": "'coach parties' - the article reports one group of 24 DRIVERS on a trip from the mainland, not coach/bus parties",
+   "note": "euronews.com raw article fetched (browser UA). Quote verbatim: 'I said, ‘If you find the hot springs, come back and let me know and I’ll shout you beers all night’. They didn’t come back.' Supported: 'the (non-existent) Weldborough Hot Springs is listed alongside the (real) Hastings Caves and Thermal Springs'; 'complete with AI-generated images'; 'Weldborough, however, has never had hot springs'; posted July, 'a steady stream of duped travellers' to a Jan-2026 piece = months. Only the vehicle/party type is wrong.",
+   "fromFile": "verdicts-ai-i329-343.json"
+  },
+  "331": {
+   "index": 331,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "paid about €140 to reach a remote rural road without a destination",
+   "note": "Same Euronews raw page. 'two tourists in Peru set off to find the “Sacred Canyon of Humantay” in the Andes Mountains – before a local tour guide overheard them and stopped them... They had reportedly paid about €140 to reach a remote rural road “without a guide or [a destination]”'; and 'two travellers used ChatGPT to plan a romantic sunset hike up a mountain in Japan... the AI tool had given them incorrect operating hours for the ropeway to get down and they were stuck in the dark.' Both limbs supported. SUBSTANCE not VERBATIM because the claim supplies no quote. Note the article attributes both cases to earlier BBC reporting.",
+   "fromFile": "verdicts-ai-i329-343.json"
+  },
+  "332": {
+   "index": 332,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "towns by the names of “Orangeotild” and “Whata Bod” ... wild hallucinations of AI",
+   "note": "vice.com raw article fetched. 'Whata Bod' appears word for word. 'the Weather Service confirmed the graphic was created using generative AI, which had hallucinated entire communities and gave them appropriately silly names.' Idaho NWS wind-forecast map confirmed. (Aside: Vice's own text says 'Ohio residents' - an error in the source, not in the claim; the map and headline are Idaho.)",
+   "fromFile": "verdicts-ai-i329-343.json"
+  },
+  "333": {
+   "index": 333,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "AI tools fabricate citations. They invent record collections.",
+   "note": "denyseallen.substack.com raw page fetched. Exact sentence: 'AI tools fabricate citations. They invent record collections. They create plausible-sounding sources that don’t exist.' Quote 'They invent record collections.' matches word for word; both limbs supported. The claim's 'whole' is an added intensifier with no counterpart on the page, and 'that do not exist' attaches on the page to 'sources', not to the collections - neither changes the substance.",
+   "fromFile": "verdicts-ai-i329-343.json"
+  },
+  "334": {
+   "index": 334,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "AI will present fabricated sources, invented dates, and fictional ancestors with total confidence.",
+   "note": "Same raw Substack page. Quote 'fictional ancestors with total confidence' appears word for word inside that sentence; every limb (fabricated sources, invented dates, fictional ancestors, total confidence) is present.",
+   "fromFile": "verdicts-ai-i329-343.json"
+  },
+  "335": {
+   "index": 335,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "agents tasked with “filling in gaps” can create plausible fake records",
+   "note": "Same raw Substack page: 'AI agents tasked with “filling in gaps” can create plausible fake records. A fabricated marriage record. An invented census entry. A person who never existed.' All three examples present. Claim carries no quote, so SUBSTANCE. Modality flag: the source states this as a forward-looking platform risk ('can create'), not as an observed incident; the claim's flat present tense reads as a disposition, which is what the page asserts.",
+   "fromFile": "verdicts-ai-i329-343.json"
+  },
+  "336": {
+   "index": 336,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "human summaries beat out their AI competitors on every criteria and on every submission",
+   "note": "Live crikey.com.au is paywalled after four paragraphs; recovered the full text from the Wayback raw capture 20240903043403id_. Quote 'might actually create additional work for people' verbatim in the lede. 'five submissions from a parliamentary inquiry into audit and consultancy firms' for ASIC; reviewers 'found that the human summaries beat out their AI competitors on every criteria and on every submission, scoring an 81% on an internal rubric compared with the machine’s 47%'; reviewers said AI summaries 'may be counterproductive and create further work'. Every limb supported.",
+   "fromFile": "verdicts-ai-i329-343.json"
+  },
+  "337": {
+   "index": 337,
+   "verdict": "PARTIAL",
+   "trueWording": "GPTZero is black-box; the second tool, Binoculars, is 'more transparent'",
+   "unsupportedLimb": "'the detectors black-box' (plural) - only GPTZero is; the Signpost explicitly calls the second detector, the open-source Binoculars, 'more transparent'",
+   "note": "en.wikipedia.org raw wikitext (?action=raw) fetched. Quote 'concept drift' verbatim: 'The authors are clearly aware of this [[concept drift]] problem, but only make a very perfunctory attempt to address it'. Supported: 'both tools disagreed frequently, with GPTZero being much more detection-happy than Binoculars in English, French, and German, but much less in Italian'; 'the fact that additional edits by human Wikipedia editors make the AI detection score go up in both detectors might increase skepticism'. The black-box property is quoted from the paper about GPTZero alone.",
+   "fromFile": "verdicts-ai-i329-343.json"
+  },
+  "338": {
+   "index": 338,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I don't think this is a reliable indicator of human or AI writing",
+   "note": "Wikipedia talk raw wikitext fetched. Section '== Citations at the end of paragraphs ==' (proposed by Quxyz, 21 Aug 2026). Thryduulf: 'This is something that I've seen in articles for the whole of the two decades I've been reading Wikipedia... I don't think this is a reliable indicator of human or AI writing.' Bearcat concurs: 'human editors have been doing the same thing for decades.' Proposer stood down: 'Pretty much what I wanted to know before doing an in-depth hunt'. Quote 'not a reliable indicator' verbatim (twice). 'Rejected' is a fair reading of a talk-page consensus, not a formal delisting.",
+   "fromFile": "verdicts-ai-i329-343.json"
+  },
+  "339": {
+   "index": 339,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "updating markdown section - LLMs aren't bad at wikitext to this extent anymore",
+   "note": "Revision-history page fetched raw with a browser UA. 20:09, 27 August 2026, Gnomingstuff, -84 bytes, summary 'updating markdown section - LLMs aren't bad at wikitext to this extent anymore -- and hopefully also condensing' (plus a -6 m edit at 20:10 to 'Use of Markdown'). 10:18, 19 August 2026, EmoryNB, +5,008: 'added a new indicator for \"Vague expression of connection or association\"'. 23:12, 20 August 2026, Superb Owl, +1,259: 'adding subsection on content biases as possible indicators, with recent example of pro-authoritarian content', section 'Pro-authoritarian bias'. All three dates and directions confirmed; 'dated snapshot' is the researcher's inference, which the history supports.",
+   "fromFile": "verdicts-ai-i329-343.json"
+  },
+  "340": {
+   "index": 340,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "task-specific MGT ... more closely resemble their human-written text (HWT) references",
+   "note": "arxiv.org/html/2507.03373v1 fetched raw (557KB). Quote verbatim: 'These results show that detectors struggle with MGT in realistic generation scenarios'. Numbers: 'training-based detectors achieve an average accuracy of 78%, while zero-shot detectors average 58%' - the claim's 58-78% band. Resemblance limb: 'the textual characteristics of task-specific MGT—unlike open-ended, topic-to-text MGT—more closely resemble their human-written text (HWT) references.' The three tasks are Paragraph Writing, Summarisation (lead-section generation per the MoS) and Text Style Transfer (neutralisation, via mWNC/WNC) - so 'lead summarisation' and 'neutralisation' both check out.",
+   "fromFile": "verdicts-ai-i329-343.json"
+  },
+  "341": {
+   "index": 341,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "most common undesired behavior ... hallucinating, or making up, facts about the monsters",
+   "note": "ar5iv full text fetched raw. Verbatim: 'The most common undesired behavior DMs noticed was the model hallucinating, or making up, facts about the monsters, such as giving giant spiders telepathy (P15), an insect monster a poison ability (P8), or a frost salamander wings (P14).' Quote 'giving giant spiders telepathy' matches word for word. 71 participants: 'invited 71 players and DMs (referred to as P1-71)'; Discord: 'All gameplay occurred on our Discord server.' Scope note (not a failed limb): that sentence sits in the Abstractive Understanding results paragraph, i.e. it is the most common complaint about that interface rather than an aggregate across all three.",
+   "fromFile": "verdicts-ai-i329-343.json"
+  },
+  "342": {
+   "index": 342,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "simply rephrasing the information in the monster's reference material",
+   "note": "Same ar5iv raw text. Quote verbatim (curly apostrophe on page): 'DMs argued that simply rephrasing the information in the monster’s reference material “doesn’t really help in running an encounter” (P8)'. Model identity: 'we prompted GPT-3 (Brown et al. 2020) (specifically, the text-davinci-003 model)'. Stats limb: 'when prompted with the task to summarize provided information, GPT-3 would focus too much on numeric game stats (despite the prompt stating not to)' and 'the model’s output simply paraphrased the information written in the setting and stat block'. Every limb supported.",
+   "fromFile": "verdicts-ai-i329-343.json"
+  },
+  "343": {
+   "index": 343,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the model would often include the phrase “mythology and common sense” verbatim in its output",
+   "note": "Same ar5iv raw text: 'We also found that if we repeated a certain phrase multiple times in the prompt, e.g. “you may use information from mythology and common sense” ..., the model would often include the phrase “mythology and common sense” verbatim in its output. This is likely a case of degenerative output (Holtzman et al. 2020). To prevent this, each time a set phrase would have been templated in, we instead randomly chose 2-4 words from the set {”folklore”, “common sense”, “mythology”, “culture”} and inserted them in a random order.' Quote matches word for word including the curly quotes; prompt phrase and the randomisation remedy both confirmed.",
+   "fromFile": "verdicts-ai-i329-343.json"
+  },
+  "344": {
+   "index": 344,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "DMs found that the model struggled sometimes to describe combat",
+   "note": "ar5iv 2308.07540 fetched raw (HTTP 200). One sentence carries every limb: 'DMs found that the model struggled sometimes to describe combat, and suggested that including more information about the combat state ... or map placement information could help generate more specific descriptions (P3, P9). Some DMs used these descriptions verbatim (P3, P8, P17), while others picked out particularly vivid phrases to use in a description of their own (P3, P8, P10, P12, P20). Others disagreed with the model's description and wrote their own instead (P13, P16, P18, P19).' Three-way split confirmed with participant ids. Minor framing note: the missing combat-state/map-placement is the DMs' suggested remedy, so the causal 'because' is the paper's implication rather than its assertion.",
+   "fromFile": "verdicts-ai-i344-358.json"
+  },
+  "345": {
+   "index": 345,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "no helpful summary when a monster had only numeric game stats",
+   "note": "No quote was supplied, so substance-graded. Page: 'Another common case where Calypso did not present a helpful summary was when a monster did not have a published prose description, only numeric game stats. Most commonly, such creatures were an animal found in real life (e.g. a brown bear; P3) or relied entirely on a DM's thematic commonsense to run (e.g. a snow golem; P3).' The remedy limb is explicit: 'we had to prompt it with explicit instructions to do so ... we remodeled the summarization task to a more abstract \"understanding\" task, in which we provided the model explicit instructions to use thematic commonsense.' One softening: the paper says the model used 'minimal external knowledge', not literally nothing to draw on.",
+   "fromFile": "verdicts-ai-i344-358.json"
+  },
+  "346": {
+   "index": 346,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "different users tended to produce less semantically distinct ideas with ChatGPT",
+   "note": "arxiv 2402.01536 HTML fetched raw. Abstract carries the quote verbatim and the 36-participant within-subjects design; Section 3.2.2 confirms the Oblique Strategies deck as comparator. p-value exact: 'M = .24, SD = .07 ... compared to ... OS, (M = .28, SD = .08), t(32) = 2.154, p = 0.038, d = .47' followed by 'At the group level, ideas produced with the help of ChatGPT were more homogenized.' Individual-level null confirmed separately (t(32) = .944, p = 0.352) and the discussion states homogenization 'stems not from individual-level increases in fixation ... but from group-level suggestion of similar ideas to different users by the LLM.' Note 36 were recruited, 3 excluded, so tests run at df=32.",
+   "fromFile": "verdicts-ai-i344-358.json"
+  },
+  "347": {
+   "index": 347,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "When I asked for more [ChatGPT] repeated half",
+   "note": "Quote appears verbatim twice: in the participant-quote table ('When I asked for more [ChatGPT] repeated half... When I want more, I want different more.') and in the discussion ('\"When I want more\", one user asserts, \"I want different more.\"'). Plural-participant limb supported: 'a few ChatGPT users explicitly noted the repetitiveness of the model's responses' and the interview theme 'the LLM responses were too repetitive (8.33%, n = 3)'.",
+   "fromFile": "verdicts-ai-i344-358.json"
+  },
+  "348": {
+   "index": 348,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "single most common theme was ChatGPT easier to use but less rewarding",
+   "note": "Section 4.4.1 is headed 'Interview', so the 'interview theme' limb is exact. Page: 'The single most common theme was that ChatGPT was easier to use but less rewarding (27.78%, n = 10). ... Participants also reported finding ChatGPT to be less engaging (22.22%, n =8)'. Both counts match the claim.",
+   "fromFile": "verdicts-ai-i344-358.json"
+  },
+  "349": {
+   "index": 349,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "attributable in part to the low inferential distance between LLM outputs and apparently complete ideas",
+   "note": "Quote verbatim in three places; the takeaway sentence matches the claim's exact phrasing: 'we suggest that the homogenization effect of LLMs on creative ideation is attributable in part to the low inferential distance between LLM outputs and apparently complete ideas.' The gloss 'arrives looking finished, so users stop diverging' is supported by Section 5.2: low inferential distance 'can be viewed as enabling algorithmic loafing ... simply accepting and passing along the decisions made by the algorithm', versus OS cards where the user 'has to do more work to interpret the text'.",
+   "fromFile": "verdicts-ai-i344-358.json"
+  },
+  "350": {
+   "index": 350,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "fifteen hundred words ... the result of at least fifteen hundred decisions",
+   "note": "PDF fetched raw (HTTP 200, 349,849 bytes) and text-extracted locally with pdfminer. Quote verbatim. The numeric limb is on the page spelled out, not in digits, which is why a digit search misses it: 'A piece of writing that contains fifteen hundred words can be thought of as the result of at least fifteen hundred decisions'. Delegation limb: authors expanding 'a one-sentence instruction' to 'a complete written story or essay ... delegate many of the creative decisions ... resulting in a piece of writing with an unusually low ratio of human decision-making to output length.'",
+   "fromFile": "verdicts-ai-i344-358.json"
+  },
+  "351": {
+   "index": 351,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The term 'soullessness' reflects the sparseness of intent in the outputs",
+   "note": "Near-word-for-word on the page: 'The term \"soullessness\" reflects the sparseness of intent in the outputs that are easiest to create with many AI-based tools, and that therefore dominate most non-enthusiasts' impressions'. The 'recurring verdict' limb is supported by the preceding sentence: outputs 'are often referred to as \"soulless\"'.",
+   "fromFile": "verdicts-ai-i344-358.json"
+  },
+  "352": {
+   "index": 352,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "an ear for evocative language and a strong aversion to cliche",
+   "note": "Page: 'Experienced writers tend to have an ear for evocative language and a strong aversion to cliché ... These writers are readily able to identify problems in AI-generated text [5]'. Novice limb equally explicit: 'Novice writers, on the other hand, may tend to treat the machine as a creative authority [2] and delegate a greater proportion of their creative decisions - a form of algorithmic loafing'.",
+   "fromFile": "verdicts-ai-i344-358.json"
+  },
+  "353": {
+   "index": 353,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "greater homogenization from tools that make a greater proportion of decisions directly",
+   "note": "Page: 'Homogenization effects can be explained by authors' delegation of creative decision-making to a tool that makes similar creative decisions in similar usage scenarios, with greater degrees of homogenization resulting from tools that make a greater proportion of creative decisions directly.' Both limbs, including the proportionality, are in that one sentence.",
+   "fromFile": "verdicts-ai-i344-358.json"
+  },
+  "354": {
+   "index": 354,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "effective at open-domain story generation ... struggle with long-term story coherence",
+   "note": "arxiv 2406.00554 fetched raw. Page: 'LLMs, on the other hand, are effective at open-domain story generation. However, they tend to struggle with long-term story coherence, often failing to produce a satisfying overall story arc or reader experience Kreminski and Martens (2022).' Provenance caveat for citation use: this is the paper's related-work framing attributed to Kreminski and Martens 2022, not a new result measured in this paper.",
+   "fromFile": "verdicts-ai-i344-358.json"
+  },
+  "355": {
+   "index": 355,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "unoriginality or homogeneity in both the semantic and syntactic aspects of generated stories",
+   "note": "Same sentence block: 'comparing LLM-generated to human-written stories reveals many aesthetic weaknesses ... in particular a tendency toward unoriginality or homogeneity in both the semantic and syntactic aspects of generated stories Anderson et al. (2024); Begus (2023).' The claim's gloss of semantic/syntactic as 'what happens / how sentences are built' is a fair rendering. Same provenance caveat: the page attributes this to Anderson et al. 2024 and Begus 2023.",
+   "fromFile": "verdicts-ai-i344-358.json"
+  },
+  "356": {
+   "index": 356,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'openings converge hardest' - the paper immediately qualifies the trend as 'relatively weak' and says it 'did not hold across all premises', a hedge the claim drops",
+   "trueWording": "earlier paragraphs tended to be more homogenous than later paragraphs",
+   "note": "No quote was supplied. The measurable limbs check out: 'For each premise, we generated a set of ten seven-paragraph stories using each approach' (ten-story sets per premise, six premises) and 'We also observed that earlier paragraphs tended to be more homogenous than later paragraphs regardless of whether ASP guidance was used.' The very next sentence is the problem: 'However, this trend was relatively weak and did not hold across all premises.' The paper also offers a mechanism opposite in spirit to hard convergence - later paragraphs are more diverse because minor early differences 'pile up'. Graded PARTIAL because a flat superlative reading of the opening convergence is not what the page supports.",
+   "fromFile": "verdicts-ai-i344-358.json"
+  },
+  "357": {
+   "index": 357,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Existing instruction-tuned models formed one cluster ... high reward but with low diversity",
+   "note": "arxiv 2503.17126 fetched raw. All three limbs land. Quality-vs-diversity: 'proximal policy optimization (PPO) ... or direct preference optimization (DPO) ... can strongly increase the quality of LLM output, this tuning also seems to decrease output diversity.' Cluster: 'Existing instruction-tuned models (GPT-4o, GPT-4o-iter, o1, Claude-3.5-sonnet, DeepSeek-R1, Instruct) formed one cluster, where they show high reward but with low diversity.' Deviation objective: abstract states the deviation-weighted DPO/ORPO model 'could achieve on-par diversity as a human-created dataset while having output quality similar to the best instruction-tuned models'; plain DPO and ORPO by contrast raised reward 'while either maintaining or decreasing diversity', which supports the 'was needed' framing.",
+   "fromFile": "verdicts-ai-i344-358.json"
+  },
+  "358": {
+   "index": 358,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'28% for humans' for Man in Hole - Figure 4 gives the human share as 30.7% (GPT-4 51.3%); no 28% figure for that arc appears anywhere in the paper",
+   "trueWording": "Man in Hole: 30.7% of human stories versus 51.3% of GPT-4 stories",
+   "note": "HTML fetched raw, then the arXiv PDF fetched and text-extracted because the arc shares live only in the Figure 4 pie charts, whose labels survive as vector text in the PDF. Legend order 'Oedipus, Cinderella, Riches to Rags, Rags to Riches, Icarus, Man in Hole, Double Man in Hole' against human '9.3% 15.1% 14.6% 4.4% 4.9% 30.7% 21.0%' and GPT-4 '1.7% 17.2% 1.3% 13.0% 2.9% 51.3% 12.6%'. The mapping is cross-checked by four figures stated in prose (Oedipus 9.3/1.7, Riches to Rags 14.6/1.3, Rags to Riches 4.4/13.0), so Man in Hole is 30.7% human, 51.3% GPT-4. Everything else verifies: the quote is verbatim in the abstract; the corpus is 819 human synopses with one paired GPT-4 synopsis each (1638 total); 'more than half of the time' matches 'over 50%'; and Riches to Rags 1.3% vs 14.6% is exact. Only the human Man in Hole figure is wrong - it should read roughly 31%, not 28%.",
+   "fromFile": "verdicts-ai-i344-358.json"
+  },
+  "359": {
+   "index": 359,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "LLMs introduce plot turning points earlier in the timeline",
+   "note": "Quote verbatim in Figure 1 caption of arxiv.org/html/2407.13248. Sec.4 confirms every limb: 'we observe a substantial advancement (i.e., early occurrence) of TP4 and TP5 in AI outputs... major setback (TP4) and climax (TP5)'; intro: 'notable deficiencies in narrative pacing... diminishing two key qualities: suspense and arousal'; App.: 'the major setbacks and climax arrive earlier in machine generated narratives'.",
+   "fromFile": "verdicts-ai-i359-373.json"
+  },
+  "360": {
+   "index": 360,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "biased towards macro-level story-arcs, lacking narrative diversity",
+   "note": "Quote 'particularly in avoiding negative plot progressions' verbatim in the introduction, in the sentence 'machines are biased towards certain types of macro-level story-arcs and show a lack of narrative diversity, particularly in avoiding negative plot progressions.' Sec.4 gives the numbers (Riches to Rags 14.6% human vs 1.3% GPT-4).",
+   "fromFile": "verdicts-ai-i359-373.json"
+  },
+  "361": {
+   "index": 361,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Human arousal higher; gap enlarges midpoint to end; +40% over vanilla",
+   "note": "Claim carried no quote, so graded on substance. Figure 3 caption: 'Human stories consistently exhibit higher levels of suspense (greater arousal). The gap enlarges from the midpoint to the end.' Intro: 'incorporating turning point information significantly improves narrative suspense and engagement (outperforming vanilla by 40%)'; abstract says 'over 40% improvement'. Note the 40% is a human comparative win-rate (Table 4: suspense-best 7.9% Outline-Only vs 48.3% +Self TP), not a rating scale.",
+   "fromFile": "verdicts-ai-i359-373.json"
+  },
+  "362": {
+   "index": 362,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "As map scale increases, plans skip steps, keeping high-level structure",
+   "note": "Quote 'output plans tend to skip steps, leading to failure cases' verbatim at arxiv.org/html/2506.10161 Sec.IV-B: 'As the map scale increases, output plans tend to skip steps, leading to failure cases. These failed plans often maintain a correct high-level structure.' The more-characters limb: 'increasing the number of adventurers leads to plans that skip steps while maintaining reasonable high-level structure.'",
+   "fromFile": "verdicts-ai-i359-373.json"
+  },
+  "363": {
+   "index": 363,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "most failed plans causally sound, actions lacking valid intention",
+   "note": "Quote 'character actions lacking valid intention' verbatim. Full page sentence: 'For the o1 model, most failed plans are causally sound, but often with character actions lacking valid intention. For instance, Aladdin kills the dragon due to perceived threat but then obtains the lamp and casts a spell without valid motivation.' Two qualifiers the claim drops but does not contradict: the finding is scoped to the o1 model on the Aladdin intentional-planning task, and the page says 'often with', not always.",
+   "fromFile": "verdicts-ai-i359-373.json"
+  },
+  "364": {
+   "index": 364,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "shortcuts for conflict: adventurer snakebitten or self-healing, no other characters",
+   "note": "Claim carried no quote. Page (Sec.IV-B, western/conflict domain): 'We observe other types of attempts to create shortcuts for conflict, such as an adventurer repeatedly getting snakebites or healing themselves to cause medicine shortage without involving other characters.' Page has 'or healing themselves' where the claim has 'and healing himself'. The 'rather than clashing commitment frames' limb is supported in substance: Sec.II-B defines conflict as arising 'between commitment frames', and the shortcut is expressly 'without involving other characters'.",
+   "fromFile": "verdicts-ai-i359-373.json"
+  },
+  "365": {
+   "index": 365,
+   "verdict": "PARTIAL",
+   "trueWording": "drops are in western conflict-planning with adventurers, not intentional planning",
+   "note": "The numbers are real and verbatim-adjacent, but attached to the wrong experiment. Page: 'Figure 3(c) displays the o1 model's performance on WESTERN variations with varying numbers of adventurers... The success rate drops sharply from 2 to 3 adventurers (likely due to handling multi-party conflicts) and from 10 to 12 adventurers (likely due to exceeding context limits).' The western/adventurer variations are the CONFLICT-planning domain; intentional planning is the Aladdin delegation-network experiment (Figure 3(b)), whose reported driver is added delegation layers, not adventurer count. Second limb is supported: abstract says 'planning with character intentionality and dramatic conflict remains challenging, requiring LLMs trained with reinforcement learning for complex reasoning.'",
+   "unsupportedLimb": "the attribution of the 2-to-3 and 10-to-12 adventurer drops to intentional planning; the page reports them for the western dramatic-conflict variations",
+   "fromFile": "verdicts-ai-i359-373.json"
+  },
+  "366": {
+   "index": 366,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Narrators explicitly explain the theme 77% versus 52% for humans",
+   "note": "Quote verbatim at arxiv.org/html/2604.03136: 'The pattern is one of over-determination: AI spells out meaning rather than trusting the reader to infer it.' Preceding sentence: 'Narrators explicitly explain the story's theme 77% of the time, versus 52% for humans.' Corpus size confirmed: '10,272 writing prompts, each written by a human author and five LLMs... yielding 61,608 stories'.",
+   "fromFile": "verdicts-ai-i359-373.json"
+  },
+  "367": {
+   "index": 367,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "conveys emotion through physical sensations and bodily metaphors (81% vs. 38%)",
+   "note": "Quote verbatim: 'AI overwhelmingly conveys emotion through physical sensations and bodily metaphors (81% vs. 38% human), deploys more smell-based imagery (82% vs. 57%).' Both figures match the claim exactly.",
+   "fromFile": "verdicts-ai-i359-373.json"
+  },
+  "368": {
+   "index": 368,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "far fewer subplots (79% no subplots vs. 57%); resolutions 69% vs. 46%",
+   "note": "Quote verbatim (curly quotes in source): 'AI stories exhibit tighter causal chains, more protagonist-driven resolutions (69% vs. 46%), and far fewer subplots (79% “no subplots” vs. 57%).' All three limbs on the page in one sentence.",
+   "fromFile": "verdicts-ai-i359-373.json"
+  },
+  "369": {
+   "index": 369,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "AI sticks to vague allusions, avoids naming real brands, places, or works",
+   "note": "Quote verbatim: 'whereas AI generally sticks to vague allusions and avoids naming real brands, places, or works.' Same sentence: 'Humans reference specific texts and authors at nearly double the AI rate (47% vs. 24%).' The 72% vs 50% allusion figure is on the page one paragraph earlier: 'references to other works tend to be vague allusions (72% vs. 50%)'.",
+   "fromFile": "verdicts-ai-i359-373.json"
+  },
+  "370": {
+   "index": 370,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "present morally ambivalent protagonists more often (59% vs. 38%)",
+   "note": "Quote verbatim: 'Human stories draw from a broader narrative repertoire: they span more locations, carry more dialogue relative to narration, integrate more subplots into overarching themes (42% vs. 21%), and present morally ambivalent protagonists more often (59% vs. 38%).' All three limbs are in that one sentence.",
+   "fromFile": "verdicts-ai-i359-373.json"
+  },
+  "371": {
+   "index": 371,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "AI resolutions favor internal understanding or acceptance (47% vs. 27%)",
+   "note": "Quote verbatim: 'AI resolutions favor internal understanding or acceptance (47% vs. 27%), whereas humans are more comfortable with ambiguous endings.'",
+   "fromFile": "verdicts-ai-i359-373.json"
+  },
+  "372": {
+   "index": 372,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "human stories occupy a rarer, more dispersed region of narrative space",
+   "note": "Quote 'Human narratives are rarer.' is verbatim (a paragraph heading in Sec.4 and in the contents list). Conclusion: 'human stories show greater structural diversity and occupy a rarer, more dispersed region of narrative space'; dispersion measured ('Human stories are also more dispersed'; mean rarity percentile 0.71 vs 0.49). Detection limb: 'narrative features alone achieve 93.2% macro-F1 for human vs. AI detection'.",
+   "fromFile": "verdicts-ai-i359-373.json"
+  },
+  "373": {
+   "index": 373,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "without further specification of style or substance, output feels generic",
+   "note": "Quote verbatim at arxiv.org/html/2402.18659v5 (stamped 'arXiv:2402.18659v5 [cs.CL] 09 Dec 2024'), Sec.III-D: 'Prompting current LLMs for stories, without any further specification of style or substance, tends to produce output that feels generic.' The claim restates that sentence.",
+   "fromFile": "verdicts-ai-i359-373.json"
   }
  }
 }

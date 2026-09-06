@@ -1,0 +1,34 @@
+{
+ "role": "verifier",
+ "name": "ai",
+ "angle": null,
+ "tag": "i404-418",
+ "lines": 77,
+ "firstTs": "2026-09-06T17:40:53.047Z",
+ "lastTs": "2026-09-06T17:43:41.378Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 16
+ },
+ "urlsFetched": [
+  "http://tenfootpole.org/forum/index.php?threads/making-a-module-using-chatgpt.386/page-4",
+  "http://tenfootpole.org/forum/index.php?threads/making-a-module-using-chatgpt.386/",
+  "https://slyflourish.com/best_llm.html",
+  "https://slyflourish.com/writing_awesome_readaloud_text.html",
+  "https://slyflourish.com/tell_dont_show.html",
+  "https://emshort.blog/2021/07/18/the-uncanny-deck-co-authoring-with-gpt-2/",
+  "https://news.ubisoft.com/en-us/article/5qXdxhshJBXoanFZApdG3L/how-ubisofts-new-generative-ai-prototype-changes-the-narrative-for-npcs",
+  "https://www.gamedeveloper.com/design/how-do-ubisoft-s-ai-driven-npcs-handle-dynamic-player-interactions-"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "All eight fetched with HTTP 200. Now converting to text and searching for each quote.",
+ "run": "wf_d28449b9-5d6",
+ "agent": "ac89f2d0fabb1a858",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_d28449b9-5d6/agent-ac89f2d0fabb1a858.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-ai-i404-418.json",
+  "exists": false
+ }
+}

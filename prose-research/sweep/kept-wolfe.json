@@ -1,22 +1,5 @@
 [
  {
-  "index": 0,
-  "feature": "single-placement of clues",
-  "claim": "Wolfe plants each clue exactly once and refuses to repeat it, on the principle that a clue told five times is written for someone dumber than the reader.",
-  "source": "Jordan 1992 interview (Shadows of the New Sun)",
-  "url": "https://gwern.net/doc/fiction/gene-wolfe/1992-jordan.pdf",
-  "quote": "I try not to leave a clue more than once",
-  "page": "p. 121 (Soldier of Arete / Card's complaint)",
-  "angle": "voice",
-  "verdict": {
-   "index": 0,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "'I try not to leave a clue more than once ... if you tell me five times then I feel that you are writing for somebody that is a lot dumber than I am' (p.121).",
-   "note": "Quote verbatim on p.121. Both limbs on the page; he also says 'So I try and leave my clues once.' Only softening: he says 'I try not to', a shade less absolute than the claim's 'refuses'.",
-   "fromFile": "verdicts-wolfe-i0-14.json"
-  }
- },
- {
   "index": 1,
   "feature": "surplus of clues, solvability",
   "claim": "He says he leaves all the clues a reader will need and often more, because in real detection the work is finding more clues, not reasoning harder from a few.",
@@ -98,23 +81,6 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "'That is not the way I conceived it when I wrote it. I conceived it more that he was a ghost trying to make sense of his own life. And I think that is another way of saying that.' (p.116)",
    "note": "Quote verbatim. Both limbs hold, with a nuance the claim keeps: to 'is Weer in Purgatory working toward peace?' he first answers 'Yeah, I think probably he is', then distinguishes conception from purgatory and accepts purgatory as 'another way of saying that'.",
-   "fromFile": "verdicts-wolfe-i0-14.json"
-  }
- },
- {
-  "index": 7,
-  "feature": "amnesiac narrator as social allegory",
-  "claim": "The Soldier books are built to show the problems of a genuinely good man who cannot remember, which Wolfe maps onto a decent society that has no awareness of its history.",
-  "source": "Jordan 1992 interview",
-  "url": "https://gwern.net/doc/fiction/gene-wolfe/1992-jordan.pdf",
-  "quote": "a genuinely good man who can't remember",
-  "page": "p. 118",
-  "angle": "voice",
-  "verdict": {
-   "index": 7,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "'The book really is intended to show the problems faced by a genuinely good man who can't remember. Because it seems to me that is the problem of our society... our society has no memory because it has no awareness of history.' (p.118)",
-   "note": "Quote verbatim and the society mapping explicit ('We have a genuinely good society... quite decent individuals'; 'this America blundering around on the world stage more or less as Latro does'). Page says singular 'The book' (Soldier of Arete under discussion) where the claim says 'The Soldier books'.",
    "fromFile": "verdicts-wolfe-i0-14.json"
   }
  },
@@ -467,22 +433,6 @@
   }
  },
  {
-  "index": 31,
-  "feature": "narrator may comment; author may not",
-  "claim": "First person puts the reader inside the story and lets the narrator comment on actions, whereas authorial comment is usually ruinously bad.",
-  "source": "Clarkesworld 2015 (Baker)",
-  "url": "https://clarkesworldmagazine.com/wolfe_interview_2015/",
-  "quote": "it's usually ruinously bad",
-  "angle": "voice",
-  "verdict": {
-   "index": 31,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "\"If the author comments from his viewpoint, it's usually ruinously bad.\"",
-   "note": "Clarkesworld 2015 raw (HTTP 200). Quote verbatim. Page: 'When you have a first person narrator, you are much more into the story. Also, the first person narrator can comment from his viewpoint on actions.' Note the page's 'you are much more into the story' is the writer's vantage as much as the reader's; the claim's 'puts the reader inside the story' is a mild gloss but consistent with the answer's contrast to third person distance.",
-   "fromFile": "verdicts-wolfe-i30-44.json"
-  }
- },
- {
   "index": 32,
   "feature": "two kinds of unreliable narrator",
   "claim": "Narrators are either openly unreliable or pretend to be totally reliable, but all are unreliable because people write books and people cannot be trusted.",
@@ -717,23 +667,6 @@
   }
  },
  {
-  "index": 49,
-  "feature": "war as perceptual register",
-  "claim": "Military service teaches you to look at scenery as defensive positions, the perception behind Severian's line that war is a new geography.",
-  "source": "MIT Technology Review 2014",
-  "url": "https://www.technologyreview.com/2014/07/25/12916/a-qa-with-gene-wolfe/",
-  "quote": "look at scenery from a standpoint of defensive positions",
-  "page": "War and religion",
-  "angle": "voice",
-  "verdict": {
-   "index": 49,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "\"You learn to look at scenery from a standpoint of defensive positions\"",
-   "note": "Same page, WAR AND RELIGION section. The interviewer quotes Severian's passage (\"War is not a new experience; it is a new world ... Even its geography is new, because it is a geography in which insignificant hills and hollows are lifted to the importance of cities\") and Wolfe's whole reply is the quoted line. The claim's link between the Severian passage and the perception is by direct adjacency (reply to that quoted passage), not an explicit statement; the military framing is the section's own (\"What military service does is rub off a lot of the pretense and self-deception\").",
-   "fromFile": "verdicts-wolfe-i45-59.json"
-  }
- },
- {
   "index": 50,
   "feature": "cut every unneeded word",
   "claim": "Wolfe learned prose from a college editor who blue-pencilled every word a sentence did not require, and he wrote the next story so it could not be cut.",
@@ -862,22 +795,6 @@
   }
  },
  {
-  "index": 58,
-  "feature": "difficulty equals unsuited style",
-  "claim": "A style becomes difficult only when it is not suited to what is being said; if it is the right style he likes it, if not he changes it.",
-  "source": "SF Site Jan 2002 (Gevers)",
-  "url": "https://web.archive.org/web/20020703232613/http://www.sfsite.com/03b/gw124.htm",
-  "quote": "A style becomes difficult when it is not suited",
-  "angle": "voice",
-  "verdict": {
-   "index": 58,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "\"I use the style suited to the story... If it isn't, I change it\"",
-   "note": "Same SF Site capture: \"There really aren't any answers. I use the style suited to the story. If it's the right style for the story, I like it. If it isn't, I change it. A style becomes difficult when it is not suited to what is being said.\" Quote and both limbs verbatim. Wording note: the page says \"becomes difficult when it is not suited\"; the claim's \"only when\" is a (fair, context-consistent) tightening, not the page's word.",
-   "fromFile": "verdicts-wolfe-i45-59.json"
-  }
- },
- {
   "index": 59,
   "feature": "speech modes from listening",
   "claim": "Character speech comes from listening to what people actually say as well as what they mean; Remora and Incus are slight exaggerations of real people, and Oreb manages only two syllables.",
@@ -922,22 +839,6 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "\"I could have done everything in third person, but it would have been dead there on the page. The chief difficulty was balancing the stories -- not letting one storyline run away with the book.\"",
    "note": "Quote verbatim. The interviewer's question frames the approach as the interweaving of past/present with uncertain narrator identities, so 'interwoven narrators' is the question's own wording. Minor nuance: Wolfe's primary stated reason is 'that was what I had to do to tell the story'; the third-person remark is his supporting contrast, exactly as the claim renders it.",
-   "fromFile": "verdicts-wolfe-i60-74.json"
-  }
- },
- {
-  "index": 62,
-  "feature": "secondary narrators reconstruct honestly but fallibly",
-  "claim": "Daisy, principal writer of the Whorl chapters, strings others' accounts into plausible incidents and has deliberately falsified nothing, leaving errors to ignorance not intent.",
-  "source": "SF Site Jan 2002 (Gevers)",
-  "url": "https://web.archive.org/web/20020703232613/http://www.sfsite.com/03b/gw124.htm",
-  "quote": "She has deliberately falsified nothing.",
-  "angle": "voice",
-  "verdict": {
-   "index": 62,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "\"Daisy is the principal writer of the storyline back on the Whorl... She has done her best to string the incidents together and make everything plausible. She has deliberately falsified nothing.\"",
-   "note": "Quote and the first three limbs verbatim. The last limb ('errors to ignorance not intent') is the direct entailment of the question it answers -- 'Have Hoof, Hide, Daisy, and Vadsig got major details wrong, deliberately, or out of ignorance?' -- but note that Wolfe does not concede the one alleged error: on the godling's size he replies 'he is far too large if he is structured along familiar lines, but who said he was?'",
    "fromFile": "verdicts-wolfe-i60-74.json"
   }
  },
@@ -1082,22 +983,6 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "\"most rotten people are only rotten selectively. They're not lousy and rotten to their kids, or they are, but they're nice to their drinking buddies.\"",
    "note": "Quote and the drinking-buddies limb verbatim. The utopian/dystopian contrast is the immediately preceding text ('Utopias in the utopian novels work because everyone is good and reasonable'; 'The dystopian novel... Everybody is lousy and rotten in all their relationships'), and the complex-character limb is Wolfe's next answer: Q 'So the goal is to make complex character?' GW 'I think that's what real human character is.'",
-   "fromFile": "verdicts-wolfe-i60-74.json"
-  }
- },
- {
-  "index": 73,
-  "feature": "paper is paper: the concrete credo",
-  "claim": "Against a materialist correspondent Wolfe insists a piece of paper is a piece of paper and cheese is cheese, the animal-level knowing that living and, by implication, fiction require.",
-  "source": "Baber 1994 interview",
-  "url": "https://web.archive.org/web/20060208231553/http://mysite.verizon.net/~vze2tmhh/wolfeint.html",
-  "quote": "It is paper. It is cheese.",
-  "angle": "voice",
-  "verdict": {
-   "index": 73,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "\"the one thing that we really can't get along without is the realization that a piece of paper is a piece of paper... That's what you've got to do to live on the animal level.\" / \"Knowing what it is. It is paper. It is cheese.\"",
-   "note": "Quote verbatim; the correspondent is verbatim 'a materialist philosophy student who used to write to me', and the cheese figure is the mouse's 'I know cheese'. The fiction application is flagged by the claim itself as 'by implication' and is contextual: the materialism exchange grows out of Wolfe calling literary realism 'a dumbed-down part of reality'. The page never states the fiction consequence outright.",
    "fromFile": "verdicts-wolfe-i60-74.json"
   }
  },
@@ -1283,23 +1168,6 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "He is smart to make you smart as well.",
    "note": "Rule 7: 'There are two kinds of clever writer. The ones that point out how clever they are, and the ones who see no need to point out how clever they are. Gene Wolfe is of the second kind, and the intelligence is less important than the tale. He is not smart to make you feel stupid. He is smart to make you smart as well.' Quote exact. The claim's 'the intelligence serves the tale' renders the page's 'the intelligence is less important than the tale'.",
-   "fromFile": "verdicts-wolfe-i75-89.json"
-  }
- },
- {
-  "index": 87,
-  "feature": "narrator withholds what he witnessed",
-  "claim": "Rule 8 asserts the author was there and knows whose reflection they saw in the mirror, i.e. the withheld fact is known and recoverable.",
-  "source": "Gaiman, How to Read Gene Wolfe",
-  "url": "https://web.archive.org/web/2008/http://www.sfsite.com/fsf/2007/gwng0704.htm",
-  "quote": "He knows whose reflection they saw in the mirror",
-  "page": "rule 8",
-  "angle": "voice",
-  "verdict": {
-   "index": 87,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "He was there. He saw it happen. He knows whose reflection they saw in the mirror that night.",
-   "note": "Rule 8 exact, quote verbatim as a prefix. The 'known' limb is rule 8 itself; the 'recoverable' limb is not in rule 8 but is supported elsewhere on the same page by rule 1, 'Trust the text implicitly. The answers are in there.'",
    "fromFile": "verdicts-wolfe-i75-89.json"
   }
  },
@@ -2139,22 +2007,6 @@
   }
  },
  {
-  "index": 150,
-  "feature": "reliable judgment, unreliable perception (Latro)",
-  "claim": "Latro's judgments are sound; it is his perceptions and memory that cannot be trusted, unlike Severian who may claim sudden fear or Weer who may not bury the thief.",
-  "source": "Aramini interview, Ultan's Library 2013",
-  "url": "https://ultan.org.uk/shadows-of-the-new-sun-an-interview-with-marc-aramini/",
-  "quote": "It is not Latro who can't be trusted",
-  "angle": "voice",
-  "verdict": {
-   "index": 150,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "\"It is not Latro who can't be trusted, it is his perceptions of the world.\"",
-   "note": "Aramini, Ultan's Library interview (Q on why Latro was chosen as narrator). Raw page reached via live URL, HTTP 200. Quote is word for word. Every limb present: \"Latro is the one who will almost invariably act according to sound moral judgments\"; \"Severian might jump in to save a child, or he might stand back and claim that he was suddenly overcome with fear\"; \"Weer might or might not bury someone who tried to steal from him.\" One wording nuance: Aramini names \"his perceptions of the world\", not \"perceptions and memory\"; memory enters only as \"He is unreliable only insofar as people try to use his lack of memory against him.\"",
-   "fromFile": "verdicts-wolfe-i150-164.json"
-  }
- },
- {
   "index": 153,
   "feature": "two-word line carrying the tragedy",
   "claim": "Return to the Whorl delivers its central tragedy in a two-word sentence, 'Silk nodded.', which Person calls heartbreaking.",
@@ -2183,29 +2035,6 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "\"Readers will also find a helpful lexicon for the obscure words and expressions\"",
    "note": "WolfeWiki page for The Castle of the Otter; raw page reached live, HTTP 200. Quote verbatim inside the SFBC jacket blurb, which also carries the names limb: \"you'll read Wolfe's own explanation of how he named his characters and what the names mean.\" The page's Contents list confirms both essays, though the second is titled in full \"Onomastics, the Study of Names (1982)\" - the claim shortens it to 'Onomastics'. \"Words Weird and Wonderful (1982)\" is exact.",
-   "fromFile": "verdicts-wolfe-i150-164.json"
-  }
- },
- {
-  "index": 156,
-  "feature": "place and institution description",
-  "claim": "Gerlach argues that the reader of The Book of the Long Sun comes to occupy its city as its inhabitants do, rather than being given an explanatory overview of it.",
-  "source": "John Gerlach, 'The Rhetoric of an Impossible Object: Gods, Chems, and Science Fantasy in Gene Wolfe's Book of the Long Sun', Extrapolation vol. 40 no. 2 (1999), Kent State University Press",
-  "url": "https://gwern.net/doc/fiction/gene-wolfe/1999-gerlach.pdf",
-  "quote": "we begin to inhabit much as the characters do",
-  "page": "p. 155",
-  "kind": "analysis",
-  "polarity": "asserts",
-  "date": "1999",
-  "routeHint": "gwern.net raw PDF, browser UA, macOS Quartz text layer",
-  "registerHint": "dossier-archivist",
-  "confidence": "high",
-  "angle": "academic",
-  "verdict": {
-   "index": 156,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "\"the world we're immersed in is one we begin to inhabit much as the characters do\"",
-   "note": "Gerlach 1999, printed p. 155; PDF fetched as binary from gwern.net (HTTP 200, 148,965 bytes) and text-extracted. Quote verbatim. The contrastive limb is supported by the same paragraph and the one before it: \"clues are so sparse the reader will focus elsewhere\" and \"only occasionally is a clue given to invoke again the issue of who the gods are or where this world is\" - i.e. no explanatory overview. One paraphrase drift worth recording: Gerlach writes \"world\"/\"whorl\", not \"city\", though his supporting detail is civic (\"recurring street names\").",
    "fromFile": "verdicts-wolfe-i150-164.json"
   }
  },
@@ -2417,29 +2246,6 @@
   }
  },
  {
-  "index": 169,
-  "feature": "withheld information and inference",
-  "claim": "Wolfe states that the premise of Peace is that its narrator has already died and is haunting his own memories.",
-  "source": "Gene Wolfe, interviewed by Melissa Mia Hall, Amazing Science Fiction Stories, September 1981; reprinted as chapter 3 of Peter Wright (ed.), Shadows of the New Sun, Liverpool University Press, 2007",
-  "url": "https://gwern.net/doc/fiction/gene-wolfe/2007-hall.pdf",
-  "quote": "a man has died and he is haunting his own mind",
-  "page": "p. 41",
-  "kind": "own-words",
-  "polarity": "asserts",
-  "date": "1981-09",
-  "routeHint": "gwern.net raw PDF",
-  "registerHint": "none",
-  "confidence": "high",
-  "angle": "academic",
-  "verdict": {
-   "index": 169,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "a man has died and he is haunting his own mind",
-   "note": "Raw PDF of the Liverpool UP chapter (Shadows of the New Sun ch. 3, pp. 36-43), printed p. 41: 'The basic idea is that a man has died and he is haunting his own mind, his own past.' plus 'In Peace that ghost prowls through his memories throughout the book.' Quote verbatim and premise limb exact. Wolfe says 'a man' rather than naming him the narrator; Peace's first-person narration makes that identification, not the page's wording.",
-   "fromFile": "verdicts-wolfe-i165-179.json"
-  }
- },
- {
   "index": 171,
   "feature": "other: drafting method",
   "claim": "Wolfe says he had all four volumes of The Book of the New Sun in second draft before he offered the first for sale.",
@@ -2509,29 +2315,6 @@
   }
  },
  {
-  "index": 174,
-  "feature": "omission as information",
-  "claim": "Wright argues that the unsolved puzzle in The Fifth Head of Cerberus carries the book's political argument, so the withholding is where the meaning lives rather than an obstacle in front of it.",
-  "source": "Peter Wright, 'Confounding the Skin and the Mask', Ultan's Library, 15 January 2002",
-  "url": "https://ultan.org.uk/confounding-the-skin-and-the-mask/",
-  "quote": "the puzzle is where the political arguments of the novel can be found",
-  "page": "section on prior criticism",
-  "kind": "analysis",
-  "polarity": "asserts",
-  "date": "2002-01-15",
-  "routeHint": "live URL, browser UA",
-  "registerHint": "dossier-archivist",
-  "confidence": "high",
-  "angle": "academic",
-  "verdict": {
-   "index": 174,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "the puzzle is where the political arguments can be found",
-   "note": "Verbatim: 'even at this stage it is important to understand that the existence of the puzzle is more significant that its solution, since the puzzle is where the political arguments of the novel can be found.' Both limbs supported. 'Unsolved' is the claim's gloss on 'existence... more significant than its solution' — Wright does later resolve one part of the puzzle (he names Marsch-Trenchard as the author of the embedded story).",
-   "fromFile": "verdicts-wolfe-i165-179.json"
-  }
- },
- {
   "index": 175,
   "feature": "other: documentary frame",
   "claim": "Wright argues that the authorship of the embedded document inside The Fifth Head of Cerberus can be settled by clues planted elsewhere in the collection rather than by any statement of attribution.",
@@ -2551,29 +2334,6 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "authenticity can be validated from the clues Wolfe weaves",
    "note": "Verbatim: 'this narrative is the contextualising document of the collection, whose authenticity can be validated from the clues Wolfe weaves into the text.' The authorship limb is carried by the next sentence: 'the reader can determine that the author of the story is Marsch-Trenchard (if s/he has noted Marsch-Trenchard's contempt for secondhand information... and his resolution to produce a novel [which] would only confuse his case)' — clues drawn from 'V.R.T.', i.e. elsewhere in the collection, against the document's own title-page attribution to John V. Marsch. Note the quoted sentence's word is 'authenticity'; 'authorship' rests on the adjoining sentence.",
-   "fromFile": "verdicts-wolfe-i165-179.json"
-  }
- },
- {
-  "index": 176,
-  "feature": "withheld information and inference",
-  "claim": "Wright says Wolfe's clues, though subtle, lead the careful reader to a determinate conclusion, so the ambiguity is resolvable rather than open.",
-  "source": "Peter Wright, 'Confounding the Skin and the Mask', Ultan's Library, 15 January 2002",
-  "url": "https://ultan.org.uk/confounding-the-skin-and-the-mask/",
-  "quote": "clues lead the cautious and reflective reader",
-  "page": "section on authenticity",
-  "kind": "analysis",
-  "polarity": "asserts",
-  "date": "2002-01-15",
-  "routeHint": "live URL, browser UA",
-  "registerHint": "none",
-  "confidence": "high",
-  "angle": "academic",
-  "verdict": {
-   "index": 176,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "clues lead the cautious and reflective reader",
-   "note": "Verbatim: 'Although subtle, Wolfe's clues lead the cautious and reflective reader to that inevitable conclusion.' 'Though subtle' = 'Although subtle'; 'determinate conclusion' = 'that inevitable conclusion' (that the apparent humans are amnesiac aborigines). 'Resolvable rather than open' is the claim's inference from 'inevitable', consistent with the page at this point, though Wright's larger thesis still calls ambiguity 'a means of confounding interpretation'.",
    "fromFile": "verdicts-wolfe-i165-179.json"
   }
  },
@@ -2621,29 +2381,6 @@
    "trueWording": "little pieces of the jigsaw and one is never quite sure",
    "note": "Verbatim in the opening paragraph: \"'Hints, hints, damnable hints and clues! That's all there is in Gene Wolfe's stories: little pieces of the jigsaw and one is never quite sure that there is a pattern to the jigsaw', declares Bruce Gillespie, making no attempt to disguise his exasperation.\" Note 1 gives the source exactly as the claim does: Bruce Gillespie, 'Gene Wolfe's Sleight of Hand', Australian Science Fiction Review, March 1986, p. 15.",
    "fromFile": "verdicts-wolfe-i165-179.json"
-  }
- },
- {
-  "index": 180,
-  "feature": "other: place naming",
-  "claim": "Wolfe writes in his foreword to Soldier of the Mist that the narrator recorded place names as he believed he understood their meanings, so the record's names are the narrator's guesses.",
-  "source": "Gene Wolfe, foreword to Soldier of the Mist (Tor, 1986), p. xii, quoted by Scott Wowra in Ultan's Library, 7 September 2016",
-  "url": "https://ultan.org.uk/place-names-in-gene-wolfes-soldier-of-the-mist/",
-  "quote": "he understood (or believed he understood) their meanings",
-  "page": "Introduction",
-  "kind": "own-words",
-  "polarity": "asserts",
-  "date": "1986 (quoted 2016)",
-  "routeHint": "live URL, browser UA",
-  "registerHint": "dossier-archivist",
-  "confidence": "high",
-  "angle": "academic",
-  "verdict": {
-   "index": 180,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "translated them when he understood (or believed he understood) their meanings",
-   "note": "Raw page (curl, browser UA, HTTP 200) quotes Wolfe's Foreword, Soldier of the Mist 1986 p.xii verbatim: 'In dealing with place names, I have followed the original writer, who sometimes wrote them as he heard them but more often translated them when he understood (or believed he understood) their meanings.' Wowra's own thesis ('folk etymology... the primary method Latro uses') supports the 'guesses' limb. Minor: Wolfe adds that some names were written as heard, so not every name is a guess; the article elsewhere calls the same p.xii text the 'Introduction'.",
-   "fromFile": "verdicts-wolfe-i180-194.json"
   }
  },
  {
@@ -3333,29 +3070,6 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "",
    "note": "Page quotes the tale's opening line, then: 'informing us immediately that (as with so much of Wolfe) we are reading a memoir, one that ... we are meant to understand has actually been written down'. Quote verbatim; first-sentence, at-once, memoir and physically-written-down limbs all supported.",
-   "fromFile": "verdicts-wolfe-i210-224.json"
-  }
- },
- {
-  "index": 214,
-  "feature": "other: academic reception",
-  "claim": "Clute states that academics have tended to avoid Wolfe for decades because his stories cannot be mined for detachable themes.",
-  "source": "John Clute, SCI FI Wire, 6 April 2009",
-  "url": "https://gwern.net/doc/fiction/gene-wolfe/2009-04-06-johnclute-thebestofgenewolfe-review.html",
-  "quote": "academics have notoriously tended to shun him for decades",
-  "page": "paragraph on academic reception",
-  "kind": "analysis",
-  "polarity": "asserts",
-  "date": "2009-04-06",
-  "routeHint": "gwern.net mirror",
-  "registerHint": "none",
-  "confidence": "high",
-  "angle": "academic",
-  "verdict": {
-   "index": 214,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "",
-   "note": "Page: 'academics have notoriously tended to shun him for decades: because you cannot strip-mine Gene Wolfe for \"meaning,\" you cannot abstract themes from stories that only make sense when it is understood how they have been told.' Quote verbatim. Clute hedges the causal link ('which may be one of the reasons') and names a second reason ('he is indeed difficult'); the claim states the reason more firmly than the page but does not misname it.",
    "fromFile": "verdicts-wolfe-i210-224.json"
   }
  },
@@ -4211,29 +3925,6 @@
   }
  },
  {
-  "index": 259,
-  "feature": "opening sentence",
-  "claim": "Wolfe said the reason he rewrote that opening so many times was to establish the feeling of stagnation that governs what follows.",
-  "source": "Gene Wolfe, interviewed by Larry McCaffery, Science Fiction Studies #46, November 1988",
-  "url": "https://web.archive.org/web/20260117042947id_/https://www.depauw.edu/sfs/interviews/wolfe46interview.htm",
-  "quote": "the feeling of stagnation which affects a lot of",
-  "page": "answer on revision",
-  "kind": "own-words",
-  "polarity": "asserts",
-  "date": "1988-11",
-  "routeHint": "Wayback raw capture",
-  "registerHint": "dossier-archivist",
-  "confidence": "high",
-  "angle": "academic",
-  "verdict": {
-   "index": 259,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "\"because it seemed essential to capture that certain flavor ... the feeling of stagnation which affects a lot of what's to follow\"",
-   "note": "Same raw SFS capture; quote verbatim and the causal limb ('because it seemed essential to capture...') is explicit. Wording nuance, not an unsupported limb: Wolfe says the stagnation 'affects a lot of what's to follow', slightly weaker in force and scope than the claim's 'governs what follows'.",
-   "fromFile": "verdicts-wolfe-i255-269.json"
-  }
- },
- {
   "index": 260,
   "feature": "register modulation",
   "claim": "Wolfe said getting the language right matters most when he is trying to capture a specific atmosphere or cultural attitude in a story.",
@@ -4771,28 +4462,6 @@
   }
  },
  {
-  "index": 285,
-  "feature": "withheld information and inference",
-  "claim": "Sini says the presence Wolfe's sentences summon has contours that are not clearly defined and yet are not vague.",
-  "source": "Matthew Sini, 'Great Uncle Gene', New Mythologies (Substack), 2023",
-  "url": "https://newmythologies.substack.com/p/great-uncle-gene",
-  "quote": "its contours aren’t always clearly defined, but it’s also not vague",
-  "page": "para 4",
-  "kind": "analysis",
-  "polarity": "asserts",
-  "date": "2023-07-17",
-  "registerHint": "none",
-  "confidence": "medium",
-  "angle": "craft",
-  "verdict": {
-   "index": 285,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "its contours aren't always clearly defined, but it's also not vague",
-   "note": "Live raw page (curl, 200). Quote exact, in the paragraph on Wolfe's sentences as 'mystagogic initiation': 'The presence of \"something\" is brought forth, and its contours aren't always clearly defined, but it's also not vague.' Page hedges with 'always'; the claim drops it, which is the only drift.",
-   "fromFile": "verdicts-wolfe-i285-299.json"
-  }
- },
- {
   "index": 286,
   "feature": "point of view and distance",
   "claim": "Sini says much of Wolfe's world is withheld from the reader by the narrowness of the narrator's perception.",
@@ -4855,28 +4524,6 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "Apparent contradictions are often useful hints that the narrator is concealing something.",
    "note": "Live raw page. Sentence stands verbatim as a full sentence opening its paragraph in 'Hints for Beginners', followed by the advice to ask which of X or Y the narrator would prefer to be true.",
-   "fromFile": "verdicts-wolfe-i285-299.json"
-  }
- },
- {
-  "index": 289,
-  "feature": "omission as information",
-  "claim": "The guide asserts the information a reader needs is always present in a Wolfe text, though not where the reader expects it.",
-  "source": "WolfeWiki, 'Where to Begin? A Novice's Guide to the Lupine Maze', last modified 2017",
-  "url": "https://www.wolfewiki.com/pmwiki/pmwiki.php?n=Articles.Novice",
-  "quote": "The information you need is always there",
-  "page": "section 'Hints for Beginners'",
-  "kind": "analysis",
-  "polarity": "asserts",
-  "date": "2017-11-17",
-  "registerHint": "dossier-archivist",
-  "confidence": "high",
-  "angle": "craft",
-  "verdict": {
-   "index": 289,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "The information you need is always there -- but it might not be where you expect it to be",
-   "note": "Live raw page. Quote exact. Both limbs present; note the page hedges the second limb with 'might not be where you expect it to be', where the claim states it flatly. The guide adds: 'If the information you need isn't there, you're probably attacking the wrong question.'",
    "fromFile": "verdicts-wolfe-i285-299.json"
   }
  },
@@ -5119,28 +4766,6 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "a small detail in one book frequently presages a large revelation in a later one",
    "note": "Raw page fetched (HTTP 200, live URL). Matthew Keeley, 'The Best Way to Approach The Book of the New Sun', Reactor, published December 4, 2017. Quote is word-for-word inside the fifth piece of advice ('...Read quickly (but not too quickly)'), in a paragraph explicitly about the volumes of The Book of the New Sun, so 'one volume ... a later one' is exactly the page's sense ('one book' = one volume of the four).",
-   "fromFile": "verdicts-wolfe-i300-314.json"
-  }
- },
- {
-  "index": 301,
-  "feature": "plainness and economy",
-  "claim": "Novelist Michael Swanwick rates Wolfe's prose as good as prose gets, in a beginners' guide first printed in F&SF in 2007.",
-  "source": "Michael Swanwick, 'The Wolf in the Labyrinth', F&SF 2007, reposted on Flogging Babel 2016",
-  "url": "http://floggingbabel.blogspot.com/2016/05/how-to-read-gene-wolfe.html",
-  "quote": "his prose is as good as prose gets",
-  "page": "essay, para 3",
-  "kind": "reception",
-  "polarity": "asserts",
-  "date": "2016-05-09",
-  "registerHint": "none",
-  "confidence": "high",
-  "angle": "craft",
-  "verdict": {
-   "index": 301,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "and his prose is as good as prose gets",
-   "note": "Raw page fetched (HTTP 200). Quote verbatim in the catalogue of Wolfe's virtues. The page supports every substantive limb: 'an essay I wrote for a special GW issue of The Magazine of Fantasy and Science Fiction back in 2007', 'meant to be a sort of beginners' guide', essay titled 'The Wolf in the Labyrinth', byline 'Posted by Michael Swanwick' / 'Essay copyright 2007 by Michael Swanwick'. The page never itself calls Swanwick a novelist (only implies he is a writer); that descriptor is external but uncontested.",
    "fromFile": "verdicts-wolfe-i300-314.json"
   }
  },
@@ -6909,29 +6534,6 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "Clues in the text suggest his surname is Wolfe—the book under 'W' in the library",
    "note": "iansales post #1: \"'The Fifth Head Of Cerberus' is the remembrances of an unnamed narrator. Clues in the text suggest his surname is Wolfe—the description of a book by his father appearing under 'W' in the library:\" followed by the block-quoted shelf passage. Quote exact; unnamed-narrator and library-shelf limbs both supported.",
-   "fromFile": "verdicts-wolfe-i375-389.json"
-  }
- },
- {
-  "index": 387,
-  "feature": "other: incidental detail as evidence",
-  "claim": "A forum analyst says objective outside detail is, in his opinion, at the heart of getting to the bottom of things in Wolfe.",
-  "source": "SFF Chronicles user “felicibusbrevis”, thread 11050, 24 March 2013 (an analysis written for the Urth mailing list)",
-  "url": "https://www.sffchronicles.com/threads/11050/",
-  "quote": "at the heart of getting to the bottom of things in Wolfe",
-  "page": "post #16, opening statement of method",
-  "kind": "analysis",
-  "polarity": "asserts",
-  "date": "2013-03-24",
-  "routeHint": "live URL fetched raw with a browser user agent (curl), HTML parsed to text",
-  "registerHint": "dossier-archivist",
-  "confidence": "high",
-  "angle": "close",
-  "verdict": {
-   "index": 387,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "objective outside detail is usually, in my opinion, at the heart of getting to the bottom of things in Wolfe",
-   "note": "felicibusbrevis post #16, Mar 24 2013, written for the Urth list (\"I just wrote this little write up for the urth list\"); the sentence sits in the \"First, my philosophy on Wolfe's stories\" paragraph. Quote exact. Only slippage: the page hedges with \"usually\", which the claim drops; the claim keeps \"in his opinion\", so no limb is left unsupported.",
    "fromFile": "verdicts-wolfe-i375-389.json"
   }
  },
@@ -8726,29 +8328,6 @@
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "\"If this is so, Wolfe is an amazing teacher: he shows Severian instructing us on the power of symbols yet simultaneously being blind to them (making their power all the more evident).\" The tomb limb is carried by the same message: \"Does Severian see the connection between the symbols graven on his tomb and what he would later do?\" and \"Severian was shaped by the tomb that bore his face\".",
    "note": "Raw page reached via Wayback raw capture https://web.archive.org/web/20210416053620id_/http://lists.urth.net/pipermail/urth-urth.net/2006-September/003004.html (live host refuses connections: ECONNREFUSED 69.163.136.55:443, and a browser-UA curl timed out). Byline and date on the page: Bruce Hayles, brucehayles at gmail.com, Sun Sep 10 09:46:58 PDT 2006. Quote appears word for word (it spans a line wrap in the raw source: \"...instructing us on the / power of symbols\"). Every limb holds: the rule (\"It seems instead that Wolfe is giving us a rule\"; the quoted symbol speech \"We believe that we invent symbols. The truth is that they invent us...\"), Severian as its stater (\"he gives us the symbol speech\"), and the blindness to the tomb's symbols — the fountain, ship volant and rose Hayles calls \"the symbols graven on his tomb\".",
-   "fromFile": "verdicts-wolfe-i465-467.json"
-  }
- },
- {
-  "index": 466,
-  "feature": "withheld information and inference",
-  "claim": "Bruce Hayles says the reader must derive the importance of three symbols despite the narrator not emphasising them at all.",
-  "source": "Bruce Hayles, Urth mailing list, 10 September 2006",
-  "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/003004.html",
-  "quote": "despite the fact that Severian does not emphasize them whatsoever",
-  "page": "message body, final paragraph",
-  "kind": "reader",
-  "polarity": "asserts",
-  "date": "2006-09-10",
-  "routeHint": "lists.urth.net dead from here (curl 000); Wayback raw capture https://web.archive.org/web/2021id_/<url>",
-  "registerHint": "dossier-archivist",
-  "confidence": "high",
-  "angle": "close",
-  "verdict": {
-   "index": 466,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "\"...we can use that rule to derive the influence of the ship volant, the fountain, and the rose, despite the fact that Severian does not emphasize them whatsoever.\"",
-   "note": "Same raw Wayback capture of 003004. Quote appears word for word. Three symbols named (ship volant, fountain, rose); the narrator who does not emphasise them is Severian; \"importance\" is the message's own frame (\"It certainly seems Wolfe is at least trying to tell us they are important\"). One wording nuance short of an unsupported limb: Hayles writes \"we CAN use that rule to derive\", where the claim says the reader \"must\" derive — the modality is softer on the page, but the operation, the three symbols and the absence of emphasis are all stated as claimed.",
    "fromFile": "verdicts-wolfe-i465-467.json"
   }
  }

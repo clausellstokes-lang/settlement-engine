@@ -1,0 +1,41 @@
+{
+ "role": "verifier",
+ "name": "kay",
+ "angle": null,
+ "tag": "i195-209",
+ "lines": 107,
+ "firstTs": "2026-09-06T17:38:53.990Z",
+ "lastTs": "2026-09-06T17:43:45.899Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 28
+ },
+ "urlsFetched": [
+  "https://brightweavings.com/$u/",
+  "https://locusmag.com/feature/guy-gavriel-kay-margins-of-history/",
+  "https://link.springer.com/chapter/10.1007/978-3-030-15685-5_7",
+  "https://api.crossref.org/works/10.1111/oli.70057",
+  "https://api.openalex.org/works/doi:10.1111/oli.70057",
+  "https://api.crossref.org/works/10.1007/978-3-030-15685-5_7",
+  "https://web.archive.org/web/20191114214457id_/https://link.springer.com/chapter/10.1007%2F978-3-030-15685-5_7",
+  "https://api.openalex.org/works/doi:10.1007/978-3-030-15685-5_7",
+  "http://brightweavings.com/ambiguities-and-divided-loyalties-focalization-in-guy-gavriel-kays-tigana/",
+  "http://brightweavings.com/creative_history/",
+  "http://brightweavings.com/presentreality/",
+  "https://doi.org/10.1111/oli.70057",
+  "http://brightweavings.com/justinian-visited-and-revisited/",
+  "https://onlinelibrary.wiley.com/doi/10.1111/oli.70057",
+  "https://web.archive.org/web/20191114214457id_/https://link.springer.com/chapter/10.1007%2F978-3-030-15685-5_7,"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "All fifteen quotations were located word-for-word on their raw pages. Checkpoint written to `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-kay-i195-209.json`.",
+ "run": "wf_ae11ef1d-bb8",
+ "agent": "a79f558d352d27b4c",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_ae11ef1d-bb8/agent-a79f558d352d27b4c.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-kay-i195-209.json",
+  "exists": true
+ }
+}

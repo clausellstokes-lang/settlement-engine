@@ -278,5 +278,104 @@
    "unsupportedLimb": "'the Water Gardens passage' - the page calls it the 'Water Palace of Lord Martell of Dorne'",
    "fromFile": "verdicts-martin-i495-509.json"
   }
+ },
+ {
+  "index": 532,
+  "feature": "tone",
+  "claim": "Book five is cynical, dark, with few laughs and not much action, mostly exposition.",
+  "source": "Kirkus Reviews, 'A Dance with Dragons', 26 Sep 2011",
+  "url": "https://www.kirkusreviews.com/book-reviews/george-rr-martin/dance-dragons/",
+  "quote": "a little cynical, plenty dark, with not many laughs",
+  "angle": "longform",
+  "verdict": {
+   "index": 532,
+   "verdict": "PARTIAL",
+   "trueWording": "a little cynical, plenty dark, few laughs, not much action, the usual blend of exposition",
+   "unsupportedLimb": "'mostly exposition' - the page says 'the usual blend of exposition, sometimes seemingly endless, and the usual swords-and-sorcery dialogue', i.e. a blend of exposition AND dialogue, never that the book is mostly exposition",
+   "note": "Kirkus raw page carries the quote word for word: 'it's vintage Martin: It's a little cynical, plenty dark, with not many laughs and, truth be told, not much action.' The cynical / dark / few laughs / not much action limbs are all supported verbatim, and 'book five' matches ('The fifth installment'). Only the 'mostly exposition' limb overstates the page, which credits exposition as one half of a blend (albeit 'sometimes seemingly endless').",
+   "fromFile": "verdicts-martin-i525-539.json"
+  }
+ },
+ {
+  "index": 544,
+  "feature": "intrigue over elevated prose",
+  "claim": "The series' approach emphasised intrigue and realism over magic and elevated prose.",
+  "source": "Matt Hilliard, 'A Song of Ice and Fire 1–4', Yet There Are Statues, 14 Aug 2010",
+  "url": "https://matthilliard.wordpress.com/2010/08/14/a-song-of-ice-and-fire-by-george-r-r-martin/",
+  "quote": "intrigue and realism over magic and elevated prose",
+  "angle": "longform",
+  "verdict": {
+   "index": 544,
+   "verdict": "PARTIAL",
+   "trueWording": "I primarily associated ... intrigue and realism over magic and elevated prose",
+   "note": "Quote is verbatim on the page, but it sits inside the reviewer's PRE-READING expectation: 'from countless asides in conversations with friends and reviews of other books, I primarily associated two attributes with Martin's work: First, an unromantic approach to fantasy that emphasized intrigue and realism over magic and elevated prose.' He then writes 'the series Martin wrote was quite a bit different than the one I had expected to read' and, on grit and realism, 'Compared to Joe Abercrombie ... Martin seems like a hopeless romantic.' The page therefore does not assert this as the series' actual approach.",
+   "unsupportedLimb": "the claim asserts as the series' approach what the page gives as the reviewer's pre-reading expectation and then partly walks back",
+   "fromFile": "verdicts-martin-i540-554.json"
+  }
+ },
+ {
+  "index": 549,
+  "feature": "out-of-order composition",
+  "claim": "Martin writes chapters out of order and sequences them later, like a film editor.",
+  "source": "Thomas M. Wagner, SFF180 review of A Dance with Dragons (undated, c. 2011)",
+  "url": "https://sff180.com/reviews/m/martin_george_rr/dance_with_dragons.html",
+  "quote": "he writes chapters out of order, and then sequences them later",
+  "angle": "longform",
+  "verdict": {
+   "index": 549,
+   "verdict": "PARTIAL",
+   "trueWording": "like a filmmaker, he writes chapters out of order, and then sequences them later",
+   "note": "Quote verbatim on the page: 'Martin has said in interviews (or at least in one convention interview I sat in on) that, like a filmmaker, he writes chapters out of order, and then sequences them later.' The page's simile is 'filmmaker', not 'film editor'; it also attributes the practice to Martin's own interview remarks rather than stating it in the reviewer's own voice.",
+   "unsupportedLimb": "'like a film editor' - the page says 'like a filmmaker'",
+   "fromFile": "verdicts-martin-i540-554.json"
+  }
+ },
+ {
+  "index": 611,
+  "feature": "civic record register",
+  "claim": "Antonsson says the concept of a maester writing The World of Ice and Fire was their suggestion, not Martin's.",
+  "source": "Linda Antonsson, La Garde de Nuit interview (recorded Worldcon Dublin 2019, published 2020-03-25)",
+  "url": "https://web.archive.org/web/20251202235322id_/https://www.lagardedenuit.com/meeting-with-elio-linda-westeros-org-the-world-of-ice-and-fire/",
+  "quote": "the concept of the book, the idea that there would be a maester writing it",
+  "page": "transcript, About The World of Ice and Fire",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2020-03-25",
+  "routeHint": "wayback id_ raw capture 20251202235322",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "editorial-ownwords",
+  "verdict": {
+   "index": 611,
+   "verdict": "PARTIAL",
+   "trueWording": "And also the concept of the book, the idea that there would be a maester writing it. That was also our suggestion from early on, inspired in part of George that has this idea",
+   "note": "Wayback raw capture (25 mars 2020 publication date confirmed on the page); speaker confirmed as Linda. The quotation is verbatim and 'our suggestion from early on' is on the page, but the page does not say the concept was not Martin's -- it says the suggestion was theirs *inspired in part* by George's own idea of a fallible in-world guidebook narrator. The exclusive negation is the claim's addition.",
+   "unsupportedLimb": "not Martin's -- the page qualifies it as 'inspired in part of George that has this idea'",
+   "fromFile": "verdicts-martin-i600-614.json"
+  }
+ },
+ {
+  "index": 620,
+  "feature": "terminology consistency",
+  "claim": "García says version control between Martin's original WordStar files and the edited documents was a problem, because Martin often worked from files that had not been through Groell's editing.",
+  "source": "Elio M. García Jr. and Linda Antonsson, La Garde de Nuit interview (published 2020-03-25)",
+  "url": "https://web.archive.org/web/20251202235322id_/https://www.lagardedenuit.com/meeting-with-elio-linda-westeros-org-the-world-of-ice-and-fire/",
+  "quote": "the all versioning control was definitely a bit of a problem",
+  "page": "transcript, About Fire and Blood",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2020-03-25",
+  "routeHint": "wayback id_ raw capture 20251202235322",
+  "registerHint": "none",
+  "confidence": "high",
+  "angle": "editorial-ownwords",
+  "verdict": {
+   "index": 620,
+   "verdict": "PARTIAL",
+   "trueWording": "Antonsson: versioning control was definitely a bit of a problem",
+   "note": "The quoted sentence is verbatim on the page but it is Linda Antonsson speaking, not Garcia: 'Linda: ... George would often work from his original files, which weren't necessarily the files that had then gone back to us and through Anne's editing. So, the all versioning control was definitely a bit of a problem'. Garcia separately supports the WordStar limb elsewhere on the page ('George wouldn't refer to those when he looked back to his original WordStar files where we didn't have any comments'), and 'Anne, the editor' is Anne Groell (named in full in the page's correction note). Substance of the claim is on the page; only the speaker attribution in the claim sentence fails. Note also that Antonsson's own sentence says 'his original files', not 'WordStar files'.",
+   "unsupportedLimb": "the claim's attribution to Garcia - the versioning-control sentence is spoken by Antonsson",
+   "fromFile": "verdicts-martin-i615-629.json"
+  }
  }
 ]

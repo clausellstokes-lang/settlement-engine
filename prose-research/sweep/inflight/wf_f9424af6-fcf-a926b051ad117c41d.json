@@ -3,13 +3,14 @@
  "name": "dnd",
  "angle": null,
  "tag": "i79-93",
- "lines": 19,
+ "lines": 125,
  "firstTs": "2026-09-06T17:35:10.149Z",
- "lastTs": "2026-09-06T17:35:44.158Z",
+ "lastTs": "2026-09-06T17:41:58.497Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 1
+  "Bash": 27,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://olddungeonmaster.com/2015/08/03/5e-writers-guide/",
@@ -29,13 +30,13 @@
   "https://skylandgames.wordpress.com/2017/11/13/review-xanathars-guide-to-everything/"
  ],
  "filesWritten": [],
- "lastAssistantText": "All 15 fetched HTTP 200. Now converting to text and checking each.",
+ "lastAssistantText": "Checkpoint written. All 15 URLs returned HTTP 200 on the first route (live URL with a browser user agent, read as raw stripped HTML — no summarizer, no Wayback needed, no BLOCKED).",
  "run": "wf_f9424af6-fcf",
  "agent": "a926b051ad117c41d",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_f9424af6-fcf/agent-a926b051ad117c41d.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-dnd-i79-93.json",
-  "exists": false
+  "exists": true
  }
 }

@@ -7577,10 +7577,11 @@
   },
   "6": {
    "index": 6,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "drags that same baggage through the reading",
    "note": "Quote exact; full support: 'When my characters get hurt, physically or emotionally, they acquire baggage and later on it may affect what they do. As the reader experiences the story, he drags that same baggage through the reading.' Claim's 'alters' is slightly firmer than the page's 'may affect'.",
-   "fromFile": "verdicts-hobb-i0-14.json"
+   "unsupportedLimb": "\"becomes baggage that alters later action\" — the verifier's note says the claim's 'alters' is firmer than the page's 'it may affect what they do'; the page states a possibility, the claim a consequence.",
+   "fromFile": "verdicts-hobb-regrade-r4.json"
   },
   "7": {
    "index": 7,
@@ -7606,10 +7607,11 @@
   },
   "10": {
    "index": 10,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "usually a lot slower than towards the end",
    "note": "Quote exact: 'The pacing at the beginning of any of my books is usually a lot slower than towards the end of the book, simply because so many words are given over to character construction.' The 'simply because...' clause carries the claim's 'deliberately'. The claim drops the page's 'usually' hedge, though the quote itself retains it.",
-   "fromFile": "verdicts-hobb-i0-14.json"
+   "unsupportedLimb": "\"the pacing at the start of ANY of her books is deliberately much slower\" — the verifier's note says the claim drops the page's 'usually' hedge, so the page's typical case is stated as a universal rule.",
+   "fromFile": "verdicts-hobb-regrade-r4.json"
   },
   "11": {
    "index": 11,
@@ -7662,10 +7664,11 @@
   },
   "18": {
    "index": 18,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "I really have to put that character on like a coat",
    "note": "Exact substring. Page continues: 'I am now Kennit. I feel absolutely justified... I have to share his convictions and his righteousness and his fears and his paranoia, and I have to be that character for the time it takes me to write them' — supporting both the believes-what-they-believe and for-the-duration limbs. Minor narrowing: the page frames it as 'when I am writing from a tight third-person point of view' rather than any viewpoint. Independently corroborated on the Writing Excuses transcript ('you put on that character like you'd put on a coat and you wear it').",
-   "fromFile": "verdicts-hobb-i15-29.json"
+   "unsupportedLimb": "\"to write any viewpoint\" — the verifier's note says the page frames the coat move as 'when I am writing from a tight third-person point of view', not as a practice for any viewpoint.",
+   "fromFile": "verdicts-hobb-regrade-r4.json"
   },
   "19": {
    "index": 19,
@@ -7676,10 +7679,11 @@
   },
   "20": {
    "index": 20,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "In a novel, I sprawl, and I know it",
    "note": "Exact substring. Both limbs on the page in adjacent answers: 'In a novel, I sprawl, and I know it. Luckily I have incredible editors standing by to yank my chain' and 'Prose as Megan Lindholm is much leaner than prose as Robin Hobb.' Note the sprawl sentence is unqualified by pen name; the Hobb/Lindholm contrast comes from the second answer.",
-   "fromFile": "verdicts-hobb-i15-29.json"
+   "unsupportedLimb": "\"as Hobb she sprawls\" — the verifier's note says the sprawl sentence is unqualified by pen name on the page; the Hobb-specific attribution of the sprawl is the claim's, drawn from a separate answer.",
+   "fromFile": "verdicts-hobb-regrade-r4.json"
   },
   "21": {
    "index": 21,
@@ -7778,17 +7782,19 @@
   },
   "34": {
    "index": 34,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "that food served in the kitchen was warmer than that served in the hall",
    "note": "Quote verbatim on the page, but inside the interviewer's question quoting Fitz's observation, not in Hobb's own words. Hobb's answer supports the status limb ('inevitable that we judge the status of characters or people by if they are seated below or above the salt') while disclaiming that she plotted it ('you are giving me too much credit for thinking ahead').",
-   "fromFile": "verdicts-hobb-i30-44.json"
+   "unsupportedLimb": "the sourcing of the kitchen/hall observation — the verifier's note says the quoted line sits inside the interviewer's question (quoting Fitz), not in Hobb's own words, and that Hobb disclaims having planned the detail ('you are giving me too much credit for thinking ahead').",
+   "fromFile": "verdicts-hobb-regrade-r4.json"
   },
   "35": {
    "index": 35,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "No flour, no sugar, no milk, cream or butter, unless he trades for those items",
    "note": "Verbatim, preceded by 'I know that he's still going to have a very limited menu.' The page's setting wording is 'a small subsistence farmer with a few chickens or pigs and some fish from the stream' rather than 'frontier'.",
-   "fromFile": "verdicts-hobb-i30-44.json"
+   "unsupportedLimb": "\"a character on the frontier\" — the verifier's note says the page's setting wording is 'a small subsistence farmer with a few chickens or pigs and some fish from the stream'; 'frontier' is not on the page.",
+   "fromFile": "verdicts-hobb-regrade-r4.json"
   },
   "36": {
    "index": 36,
@@ -8118,10 +8124,11 @@
   },
   "82": {
    "index": 82,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Perhaps the most striking stylistic element of this book is its continual insistence on describing what is not happening",
    "note": "Wayback raw PDF capture 20240707045408id_ (live dc.swosu.edu viewcontent.cgi returns 403 Cloudflare even with browser UA, referer and landing cookies); text extracted with pypdf. Verbatim on p.57, matching the cited page. Oliver hedges with 'Perhaps', which the claim drops; the feature named is otherwise identical, and the sentence continues 'instead of or before describing what is happening, a style we might think of as \"negative narration.\"'",
-   "fromFile": "verdicts-hobb-i75-89.json"
+   "unsupportedLimb": "\"Oliver names ... its continual insistence\" as the most striking element — the verifier's note says Oliver hedges with 'Perhaps the most striking', which the claim drops, turning a conjecture into an assertion.",
+   "fromFile": "verdicts-hobb-regrade-r4.json"
   },
   "83": {
    "index": 83,
@@ -8202,10 +8209,11 @@
   },
   "94": {
    "index": 94,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "recollection and gossip masquerading as an accurate description of the past",
    "note": "Mythlore p.63, block quotation of Mendlesohn (16), attributed 'Mendlesohn's argument that this novel (and other epic fantasy like it) assumes...'; Works Cited confirms 'Mendlesohn, Farah. Rhetorics of Fantasy. Wesleyan UP, 2008.' Quote verbatim: 'Each chapter begins with a memoir not dissimilar to the Venerable Bede's history: recollection and gossip masquerading as an accurate description of the past.' Fair-reading caveat, not a defect: Mendlesohn calls the circular argument 'nonetheless valid', and Oliver replies that she 'misses how the structure of epigraph and negative space precisely draw attention to the \"masquerade\", undermining its authority even as it is instated' (p.64) - so the disputing-authority gloss is Oliver's reading of her as much as hers.",
-   "fromFile": "verdicts-hobb-i90-104.json"
+   "unsupportedLimb": "\"Mendlesohn ... disputes the authority\" — the verifier's note says Mendlesohn calls the circular argument 'nonetheless valid' and that the disputing-authority gloss is Oliver's reading of her as much as hers.",
+   "fromFile": "verdicts-hobb-regrade-r4.json"
   },
   "95": {
    "index": 95,
@@ -8216,10 +8224,11 @@
   },
   "96": {
    "index": 96,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Chapter 22 has an inexplicable narrative intrusion into the epigraphs",
    "note": "Mythlore p.62. 'Chapter 20 has epigraph text from the subjective perspective of another culture while the \"objective\" scholarly attribution is relocated to the main text at the start of the chapter, and Chapter 22 has an inexplicable narrative intrusion into the epigraphs, as the epigraph describes a dream-vision Fitz has'. Both named breaches verbatim. Context caveat, not an unsupported limb: Oliver introduces them as part of 'several instances' of heightened blurring and calls the chapter-15 epigraph 'the best example', so 'two' is not an exhaustive count of the breaches he records.",
-   "fromFile": "verdicts-hobb-i90-104.json"
+   "unsupportedLimb": "\"records two late breaches\" — the verifier's note says 'two' is not an exhaustive count of the breaches Oliver records; he introduces them among 'several instances' and calls the chapter-15 epigraph the best example.",
+   "fromFile": "verdicts-hobb-regrade-r4.json"
   },
   "97": {
    "index": 97,
@@ -8483,24 +8492,27 @@
   },
   "134": {
    "index": 134,
-   "verdict": "VERIFIED_SUBSTANCE",
+   "verdict": "PARTIAL",
    "trueWording": "reframe this pattern by shifting emphasis to the survivor",
    "note": "Raw OpenAlex JSON fetched at the cited URL (W2942637364); abstract reconstructed from abstract_inverted_index. It reads: 'Hobb's novels seem to reframe this pattern by shifting emphasis to the survivor and actually redefining what rape is', where 'this pattern' is the '\"traditional\" rape script' named earlier in the same abstract. Graded SUBSTANCE not VERBATIM because the claim carries no quotation to match (quote field empty) and it drops the abstract's hedge 'seem to'.",
-   "fromFile": "verdicts-hobb-i120-134.json"
+   "unsupportedLimb": "\"Hobb's novels reframe the traditional rape script\" — the verifier's note says the claim drops the abstract's hedge, which reads 'seem to reframe this pattern'.",
+   "fromFile": "verdicts-hobb-regrade-r4.json"
   },
   "135": {
    "index": 135,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Bee travels up the Rain Wild River, noting animals and plants matching North American flora/fauna",
    "note": "Raw HTML of elliottrwi.com post (18 May 2026, by geoffreybelliott) fetched with a browser UA. Body text: \"In a yet later example, Bee travels up the Rain Wild River, noting animals and plants that seem to line up with North American flora and fauna.\" Quote exact; the paper is expressly on the Fitz and the Fool novels. Only softening: Elliott hedges \"seem to line up with\" where the claim says \"matching\".",
-   "fromFile": "verdicts-hobb-i135-149.json"
+   "unsupportedLimb": "\"animals and plants MATCHING North American flora and fauna\" — the verifier's note says Elliott hedges 'animals and plants that seem to line up with', which the claim hardens into a match.",
+   "fromFile": "verdicts-hobb-regrade-r4.json"
   },
   "136": {
    "index": 136,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "20 test texts taken from works by Bardugo, Dickens, Gaiman, Hobb, Landy, Sanderson, Tolkien",
    "note": "Sciendo PDF fetched and text-extracted (19 pp.); title/author/journal/DOI match (Slavova, CAIT 20.2, 2020, DOI 10.2478/cait-2020-0012). p. 13: \"We designated 20 texts, each about one page long, taken from works by Leigh Bardugo, Charles Dickens, Neil Gaiman, Robin Hobb, Derek Landy, Brandon Sanderson, and J. R. R. Tolkien.\" Quote exact. Nuance worth carrying: these are the validation \"experimental texts\", not the main EmoBank-derived corpus.",
-   "fromFile": "verdicts-hobb-i135-149.json"
+   "unsupportedLimb": "\"drew ITS TEXTS from a set of authors including Robin Hobb\" — the verifier's note says these are the study's 20 validation 'experimental texts', not the main EmoBank-derived corpus the study is built on.",
+   "fromFile": "verdicts-hobb-regrade-r4.json"
   },
   "137": {
    "index": 137,
@@ -9153,10 +9165,11 @@
   },
   "229": {
    "index": 229,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Perhaps the most striking stylistic element ... 'negative narration'",
    "note": "p.57: 'Perhaps the most striking stylistic element of this book is its continual insistence on describing what is not happening instead of or before describing what is happening, a style we might think of as \"negative narration.\"' Both limbs supported; note Oliver hedges ('Perhaps', 'we might think of as') where the claim asserts flatly.",
-   "fromFile": "verdicts-hobb-i225-239.json"
+   "unsupportedLimb": "\"Oliver names Hobb's most striking stylistic element negative narration\" — the verifier's note says Oliver hedges twice ('Perhaps', 'a style we might think of as') where the claim asserts flatly.",
+   "fromFile": "verdicts-hobb-regrade-r4.json"
   },
   "230": {
    "index": 230,
@@ -9371,10 +9384,11 @@
   },
   "260": {
    "index": 260,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "\"Going full out, I average about 25 pages an hour, or 200 pages a day\"",
    "note": "Raw page reached. Quote exact. It is a parenthetical attached to the first-read sentence, so the 'on that first close read' limb holds. One qualifier the claim drops: the page prefixes it with 'Going full out', and adds that an 800-pager therefore takes 4 solid days 'if there is nothing else to do - but there is always something else to do, meaning this often stretches to a week and a half.'",
-   "fromFile": "verdicts-hobb-i255-269.json"
+   "unsupportedLimb": "\"she averages about 25 pages an hour, or 200 pages a day\" — the verifier's note says the page prefixes it 'Going full out' and adds that the work 'often stretches to a week and a half'; the claim states a peak rate as an average.",
+   "fromFile": "verdicts-hobb-regrade-r4.json"
   },
   "261": {
    "index": 261,
@@ -9631,10 +9645,11 @@
   },
   "297": {
    "index": 297,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "In our house, we have a galley, we have a head, we have a deck",
    "note": "Raw page reached (curl, browser UA, HTTP 200); the Mike Barker transcript is on the episode page itself, lines attributed [Robin]. Quote exact, in the answer beginning 'Well, again, it’s knowing the character’s background', which also carries the farmer / sailing-ship vocabulary limb verbatim. Full passage: 'I’m married to a sailor. In our house, we have a galley, we have a head, we have a deck. I happen to have like a kitchen and a bathroom and a floor.' Two wording nuances: Hobb says 'we have' / 'I happen to have' rather than explicitly assigning the nautical terms to her husband (the sailor attribution is entailed by 'I’m married to a sailor', not stated), and deck/floor is not a room — 'the same rooms' is the claim's compression, not the transcript's.",
-   "fromFile": "verdicts-hobb-i285-299.json"
+   "unsupportedLimb": "\"the same rooms are galley, head and deck ... kitchen, bathroom and floor\" — the verifier's note says deck/floor is not a room, so 'the same rooms' is the claim's compression, not the transcript's; it also notes the nautical terms are not explicitly assigned to the husband.",
+   "fromFile": "verdicts-hobb-regrade-r4.json"
   },
   "298": {
    "index": 298,
@@ -9885,10 +9900,11 @@
   },
   "333": {
    "index": 333,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "spoilt Malta is to be married off to a Rain Wilds fellow as debt repayment",
    "note": "Raw page (HTTP 200). Quote verbatim inside the list that opens 'There are numerous plotlines running through the book.' Post is 'Book Review: The Liveship Traders by Robin Hobb', lexlingua, June 13 2012. Minor: the reviewer writes 'the book' in that sentence though the post reviews the whole trilogy; Malta's status as a daughter comes from an earlier paragraph, and the page says 'as debt repayment' without naming whose debt.",
-   "fromFile": "verdicts-hobb-i330-344.json"
+   "unsupportedLimb": "\"the trilogy's plot lines\" and \"a FAMILY'S debt\" — the verifier's note says the reviewer writes 'the book' in that sentence, and that the page says 'as debt repayment' without naming whose debt.",
+   "fromFile": "verdicts-hobb-regrade-r4.json"
   },
   "334": {
    "index": 334,
@@ -9899,10 +9915,11 @@
   },
   "335": {
    "index": 335,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "The name suggests that he is an embodiment of honor, and descriptions of the character reported by others generally confirm it",
    "note": "Raw page (HTTP 200). Quote verbatim in the section 'A couple of other thoughts on the chapter'. Note the page hedges the second limb as a disjunction the claim flattens: the unacknowledged bastard 'suggests either a failure on his part or a comment by Hobb about the ultimately flawed nature of chivalric constructions' - the chivalric-comment reading is one of two Elliott offers, not his sole reading.",
-   "fromFile": "verdicts-hobb-i330-344.json"
+   "unsupportedLimb": "\"his fathering of an unacknowledged bastard as a comment on chivalric constructions\" — the verifier's note says Elliott offers this as one of two disjuncts ('either a failure on his part or a comment by Hobb'), which the claim flattens into his sole reading.",
+   "fromFile": "verdicts-hobb-regrade-r4.json"
   },
   "336": {
    "index": 336,
@@ -10004,10 +10021,11 @@
   },
   "350": {
    "index": 350,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "a style we might think of as “negative narration.”",
    "note": "p.57, section 'NEGATIVE NARRATION': 'Perhaps the most striking stylistic element of this book is its continual insistence on describing what is not happening instead of or before describing what is happening, a style we might think of as \"negative narration.\"' Quote verbatim and every limb present. One fidelity note: Oliver hedges with 'Perhaps the most striking'; the claim drops the hedge.",
-   "fromFile": "verdicts-hobb-i345-359.json"
+   "unsupportedLimb": "\"Oliver names the book's most striking stylistic element\" — the verifier's note says Oliver hedges with 'Perhaps the most striking' and the claim drops the hedge.",
+   "fromFile": "verdicts-hobb-regrade-r4.json"
   },
   "351": {
    "index": 351,
@@ -10053,10 +10071,11 @@
   },
   "357": {
    "index": 357,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "Wynne Jones satirizes the use of “Gnomic Utterances”",
    "note": "p.46, footnote 1, verbatim: 'The use of epigraphs is a subject of frequent comment by readers: for instance, Diana Wynne Jones satirizes the use of \"Gnomic Utterances\" in her Tough Guide to Fantasyland (1996) and David Pringle comments on how \"refreshing\" it is when fantasy has \"no epigraphs\" or other paratextual materials (193).' Both cited instances carry the negative valence the claim reports. Wording note: Oliver attributes the comment to 'readers', not 'critics', and adds that he knows 'of only two critical studies focusing on epigraphs in fantasy'.",
-   "fromFile": "verdicts-hobb-i345-359.json"
+   "unsupportedLimb": "\"other CRITICS treat the fictional epigraph as a genre tic\" — the verifier's note says Oliver attributes the comment to 'readers', not critics, and adds that he knows of only two critical studies focusing on epigraphs in fantasy.",
+   "fromFile": "verdicts-hobb-regrade-r4.json"
   },
   "358": {
    "index": 358,
@@ -10179,10 +10198,11 @@
   },
   "375": {
    "index": 375,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "It’s not done in an intrusive, postmodern way – it’s so subliminal I don’t think I really picked up on it the first time I read it – but every level of the narration is imperfect.",
    "note": "Found in the raw tag-archive page (curl, browser UA), inside 'The Golden Fool, by Robin Hobb' (4 Feb 2013), in the final discussion paragraph ('Finally: on this re-read, I continue to be struck by the ambiguity of the narration...') immediately before the Adrenaline/Emotion ratings, exactly as the claim's page-locator says. Quote is word-for-word. Layered unreliability limb supported ('the Fitz of the past can't be trusted... should we really trust Fitz-the-narrator?', 'every level of the narration is imperfect'); missed-on-first-reading limb supported verbatim. Only unsupported detail is the reviewer's gender ('he'), which the page does not state — too trivial to downgrade.",
-   "fromFile": "verdicts-hobb-i375-385.json"
+   "unsupportedLimb": "the reviewer's gender ('he') — the verifier's note states outright that this detail is unsupported and that the page does not state it, then waives it as 'too trivial to downgrade'.",
+   "fromFile": "verdicts-hobb-regrade-r4.json"
   },
   "376": {
    "index": 376,

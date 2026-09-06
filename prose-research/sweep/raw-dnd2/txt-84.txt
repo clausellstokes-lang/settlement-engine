@@ -1,0 +1,142 @@
+I Read The Player’s Handbook (2024) – Playful Void 
+ Skip to content 
+ August 31, 2024 
+I Read The Player’s Handbook (2024)
+ I Read Games reviews are me reading games when I have nothing better to do, like read a module or write or play a game. I don’t seriously believe that I can judge a game without playing it, usually a lot, so I don’t take these very seriously. But I can talk about its choices and whether or not it gets me excited about bringing it to the table. 
+My daughter is at gymnastics and it’s 36 degrees out (that’s 97 for ya’ll Americans), so instead of my usual walk to the sandwich shop I’m reading the Player’s Handbook (2024). Now, this version of the PHB is a whopping 383 pages long — a solid 80 pages longer than the 2014 version — so I suspect it’ll take longer than an hour for me to get through, and breaking the rules of the 5th edition of Dungeons and Dragons down? That seems tiresome, honestly, and I have no interest in breaking down intricacies in a very complex system I have little interest in playing. So, why review this? Curiosity, mainly. This will be a (loosely) comparative review with the 2014 edition, a text which is known for its complexity and opaqueness despite its popularity. I’m interested in what this new game actually is — is it new, actually? — and how it responds to the surprising twists and turns the hobby has taken in the least decade.With the unlimited power and money of the 1745th most valuable company in the world (according to Bing), can they take what they’ve learnt in the last ten years to make this challenging game easy to learn? And what direction are they choosing to take the game in? Are they listening from actual play, how lockdowns affected gaming, and the resurgence of digital play?
+[Disclaimer: I’m not being paid for this, obviously, I wish I was, but if I was I’d have published this a month ago with all the famous people and news sites]
+The book (aside from a preface, which you can skip reasonably, and is mainly Crawford boasting about hanging out with Gygax), starts, in grand contrast with the last edition, with the rules of the game. All of them. It summarises the lot of them in 29 pages. That’s an absolute feat of information design, helped in great part by the 18 page rules glossary in Appendix C it depends on. These 48 pages aren’t just rules, though: Most notably each section features a really compelling two column layout where one column is an example of play, and the second annotates that example with applicable rules and reasoning behind decision-making. It feels inspired by the play examples in Mothership 1e (and the small nods in these examples of play to popular figures in the current DIY elegant scene suggests the authors remain cognisant of how the scene is developing). They do this for social interaction, exploration and combat, all for extended examples. This is very good information design. This stresses a problem in the 2014 edition, which was the lack of support for social and exploration pillars — they get support here, although don’t innovate as much as you’d hope. Nothing like exploration procedure here, sadly, and no renegade innovations in social interaction like in Errant; but they streamline and bring optional roles like disposition to the fore.
+Starting with the rules rather than with the character creation signals to me a significant change in perspective from the 2014 edition; it suggests to me that they think that they have more faith that the new generation of players will be comfortable with the rules, and will make their character building dependent on how they can bend and implement those rules, rather than based on vibe or on flavour. It suggests that either the audience has changed since 4th edition, or that they have more faith in their audience than they did in 2014.
+The other thing that to me is notable is that it spends a decent chunk of time describing the expectations of play: Namely, that teamwork, collaboration, and exploration are key to play and that adversarial play is clearly discouraged. The lack of reframing of the Dungeon Master’s role disappoints me, though. For players like me who ran many hundreds of sessions of 5th edition, the lack of Dungeon Master support seems to continue to exclude me, expecting me to “ guide the story ” and to “ make sure the rules serve the groups fun ”. It doesn’t encourage me to dip my feet back into the official waters of Dungeons and Dragons. It also borrows from the lineage of Apocalypse World in talking about rhythm and flow of conversation, which is lovely and brings innovations that really should’ve been in the last edition. While it ain’t no Trophy Gold principle-driven play, it’s a step in the right direction.
+The character creation chapter is also much better than the old one, with advice on class complexity, how to build a party together, and most importantly an annotated character sheet that the descriptions refer to. Like the previous section, this is much better organised to encourage the type of play and introduce you to the rules if you haven’t done it before, than 2014 was.
+Individually, classes are really robust. Let’s take the infamously dodgy rangers as an example. It’s classed in the creation chapter as a class that likes survival with average complexity — just like a wizard. Instructions cover 1st level and multiclassing, and you get spell casting and spell slots to streamline resource management. You get a new power every level unless you choose not to take feats, and choose 1 new spell consistently each level. A new mechanic called “C asting Spells Without Slots” also streamlines how powers like hunters mark work. 5 out of 20 of the class wide powers are utility, but most have alternate combat utility. You get a bunch of cool stuff from your subclass, too — I’m disappointed in the taking a subclass at level 3 brevity retaining here, especially as it breaks the clean tier lines — Tier 2 begins at 5th level, not third. Overall, though, the ranger is far more robust and stands shoulder to shoulder with the other classes, while maintaining its essentials — and all the other classes manage to do this as well.
+I love the tables that determine what traits you have based on your ability scores and alignment. It makes the process of determining your character from your stats — something that a lot of players struggle to do — intuitive. There’s some interesting world building in the character creation and class lists, too. The language table positions Sigil at the centre of a D&D multiverse (and amusingly implies to anyone familiar with 2nd edition that everyone speaks in a faux cockney accent). This planar emphasis also manifests in the classes: there is a planar barbarism here, feywild bards, shadowfel monks, feywild and shadowfel rangers, and far realm, astral, mechanus and limbo sorcerers. Almost race — now species, is that better? — has a planar connection, even humans. We get psionics in the core book, in fighter, rogue and sorcerer subclasses, which are tied directly to the astral plane, and all of these also get feats you can just take if you want. The multiverse is the only non-rules appendix in the book. Why does position the appendix mean so much? the appendices are streamlined down to 3, from 5, although 1 is added. Two of these are incorporated into the body text — conditions and religion. Religion gets centre stage in species descriptions, another indication of the importance of lore in this edition. Conditions is in the core rules now. Inspirational reading is completely gone here. Overall the world building here is very 3rd edition: A huge amount of confidence that the weirdness of the Dungeons and Dragons multiverse is something to lean into, rather than something to be embarrassed about. The prestige of the brand has changed alot in a decade, and it shows.
+The 2024 edition is a hell of a nostalgia kick compared to the 2014 edition — honestly that’s a big statement — pulling hard from a bunch of older editions. The centrality of the planes, many settings, and Sigil in particular pulls from 2nd edition. They’ve dropped the barebones world building of the 2014 edition and replaced it with loads of references to gods and specific locations right there in the character options in a way that hasn’t been done since 3rd edition. Feats get centre stage here, a huge pull from 3rd edition, but structurally (especially with the epic boons) more like 4th. There are a bunch of new weapon specific abilities (“mastery properties”) that are reminiscent to me of 2nd edition. Either they’re aiming at winning back crowds who’ve left 5th edition behind, or they’re confident that these added complexities will further serve to entrench their existing audience.
+Layout is pretty unremarkable as your expect; the most interesting innovation is the annotations in the first chapter. Chapters are separated by full page art of the uncanny digital painting style that has become more popular over the last ten years. There more interesting as anecdotes than as art, and seem muddy and poorly-framed for the most part, although I’ll admit a “ooh! i know them!” factor which tells me they’re more confident now that their audience will recognise their assets more — the first big splash is a hefty Dragonlance reference for example. The art ratio here is actually pretty low in most places, but notably multiplies hugely to illustrate character options; the beginning and ends of the book are art light, and the midsection is art heavy. I’m also not super sold on the art styles here, but mainly because it’s really tonally inconsistent; we have sketchy line art that would’ve fit in with 3rd edition, stylistic painted art from 4th, a more modern version of the 2014 editions art in some places, and a more cartoonish style reminiscent of webcomics joining them. I miss the cohesiveness of previous editions, and wish they’d had the guts to lean into one of these art styles to give the book its own personality.
+But information design is a whole different beast, heavily innovating. Let’s look at the core rules as an example: Interestingly, comparing page counts indicates the 2014 spends only 35 pages on core rules (compared to 48) although it is all split into other sections as well, so it’s much less neat there. So why does the 2024 edition seem better? It should be worse! It has bloated! But the truth is, I was convinced this was shorter and more succinct than the 2014 edition. The organisation and use of the rules glossary is absolutely stellar information design if used how it’s supposed to be used, which is as a complement, covering regularly referred to rules. Sometimes, this is clumsy — the Influence action isn’t defined in the social interaction section for example — but more often it makes for less interruptions and non-sequiter rules or sidebars. The improvement in information design is universal: Tier is spelled out more clearly like in 4th edition, meaning class descriptions are also clarified. and class power descriptions become level by level instead of guesswork. Spell lists are with your class description, so you refer to only one section when you level up. Classes are given equal space, with wizards and clerics no longer being double or triple the number of subclasses compared to the other classes. Everything, including backgrounds, impact your character mechanically, granting almost complete flexibility in an intuitive way. Equipment lists are very clear on the rules governing their use, harkening back to 3rd edition, something that incorporates optional rules like crafting into the core rules in a pleasing way. Spell preparation differences between classes is spelt out clearly in the spellcasting section, and common use cases like spell identification get clarified. The spell list has who can use the spell in the description. Stat blocks, while still not exactly brief, fit far more relevant information into the same space. I would have to spend far more time immersed in the rules glossary and the index to see if these work, but in principle it’s highly referenced, which is always a good thing, and allegedly the index will point old terms to the rules for new terms — inspiration to heroic inspiration, for example. Overall, the information design lesson is that shockingly, the adage that 5th edition is complex is a misnomer: The 2014 edition had an information design problem, not a complexity problem. All the complexity is in the character options and the players love those: It just felt complex because those rules weren’t clearly explained and were poorly organised and written. Hate to break it to you Chris Mcdowall, but Into the Odd takes 57 pages to cover the same rules. Obviously that’s a tongue in cheek comment: Into the Odd is a smaller format, less dense book. But it points to a truth: Ignoring character options, this rule book is most definitely not more complex than other less popular TTRPGs, and the 2024 edition ups its game considerably in making it accessible.
+This is an incredibly confident book. It successfully reframes and develops the 2014 formula into something more compelling for the players who love it. It teaches these new rules very well, truth be told, although it does it better for new players than for existing ones. It does as good a job or better than most of the rule books I’ve read in recent memory; it’s definitely better than the Pathfinder Remaster which I read a few months ago, I’m loath to admit. This is a hell of a rule book. I’m impressed, and surprised by the direction it takes: It leans hard into the lore of Dungeons and Dragons, showing either a confidence in the audience that they’ll buy into it, as 3rd edition did, or more cynically leaning into the intellectual property they own and can sell, in the light of the popularity of Exandria and the slow movement of IPs such as Critical Role away from 5th edition, and in the light of Baldur’s Gate 3 and the recent Dungeons and Dragons movie.
+It also leans harder into the tactical combat of 4th edition, which it already shared a lot of DNA with, and the customisation of 3rd edition, for a more complex and intricate character creation system with a much larger range of tactical, utility and flavourful options. There are 48 subclasses, 10 races out of the box, and 16 backgrounds making for over 7000 character combinations out of the box, and the now mandatory feats mean that non-magical classes effectively have a spell list of their own, making for far more. The backgrounds have more mechanical heft here, so in my opinion they count more for customisation than they did as a more or less optional addition in the 2014 edition. For comparisons sake, 2014 has 42 subclasses (but most of those are cleric or wizard), 9 races, and the backgrounds lacked mechanical heft, resulting in under 400 options. With feats underplayed competitively in 2014 and considered optional, this gap is huge. But tying these tactical and utility options into the lore means there’s a reason to invest for people who aren’t interested in optimisation.
+One thing it doesn’t do is relieve the Dungeon Master of any of the pressure that I believe to be the source of so many prominent Dungeon Masters turning coat against the game — the huge money to Shadowdark by the Youtube GM advice community being a recent example of this longstanding trend. Instead, it perfects the player options, and as I’ve long felt, the huge amount of scaffolding and excitement the character options bring for players of 5th edition are difficult to substitute for in any other game.
+This is not what I expected at all, to be honest. I was expecting, as my friend Marcia declared , that this edition would be focused on recreating Critical Role or Dimension 20 at the table; it would be about playing with your OCs, mechanical framework be damned. But no, I think it’s a renewed attempt to do what the 2014 edition set out to do: Unify the various playstyles under one roof, and solidify the player base. It attempts to make the mechanics more appealing, tie them into the story of the characters more deeply. And it does this by leaning into the memefication of Dungeons and Dragons as an intellectual property, for a very clever corporate double tap.
+Speaking of corporate gunplay, though, the elephant in the room: The other surprise here is that there is no mention at all of online tools or D&D Beyond. I have no doubt that the firming of the mechanical systems and proliferation of character options are in tune with the rumoured upcoming virtual tabletop and the dreaded loss of the 2014 content from D&D Beyond, and inevitable microtransaction filled future, but there is no sales pitch here for it at all. This book still wants to be at a table with your friends, and it’s better designed for that than ever before.
+While I can’t imagine I’ll run D&D 2024, I’ve got to say reading this has me very interested in what comes next. Should you buy D&D 2024? Like, if you’re not going to escape 5th editions orbit, this is better than 2014. Buy this if your old book decays. Is it worth all the extra cash? No, I wouldn’t drop it with any urgency. If I wanted to introduce my niece to 5th edition though? This is a far better option than the book that actually caused the ascendancy of 5th edition in the last decade. If I was forced to run 5th edition again (heavens forbid), after giving away all my 2014 books: Yes, I’d pick these up. Are the rules better? I don’t freaking know; it wasn’t immediately obvious to me the ranger was broken in 2014. certainly, they seem more cohesive and confident in their choices, less appeasing of an imaginary audience. It feels intentionally designed, in a way that no other edition aside from 4th edition has. 
+The rules definitely aren’t better for Dungeon Masters, though. The 2024 Player’s Handbook doesn’t try to bring me specifically back into the fold. But also, the Dungeon Master’s Guide isn’t released until November. To put my money where my mouth is, what would the Dungeon Master’s Guide (and the Monster Manual in February, and potentially the adventures later in the year) have to do to bring me back into the fold? Well, a lot:
+Robust system for generating balanced combats (CR or whatever)
+ Streamlined ways to run mobs and large scale battles
+More interesting approaches to bosses than “oh my gosh more hit points!”
+Support for running faction
+A deeper dive into disposition
+Procedural exploration and dungeon crawling
+Slot-based inventory as no 5th edition table I’ve played in have ever tracked weight
+Modules that aren’t boulders needing sculpting to turn into anything interesting or fun
+Online tools to support streamlined prep
+Basically, I want a minimal prep, easy-to-run session. I’m not confident based on the lack of implementation of some of these rules in the PHB. But based on the Player’s Handbook (2024), I’ll read them to find out. I’m no longer confident it won’t surprise me. 
+Because this did surprise me — because we’re right — Dungeons and Dragons 2024 isn’t 6th edition, this is what 5th edition should have been, 10 years too late for me. Maybe it’s right on time for you, or someone you care about.
+Idle Cartulary
+ Playful Void is a production of Idle Cartulary. If you liked this article, please consider liking, sharing, and subscribing to the Idle Digest Newsletter . If you want to support Idle Cartulary continuing to provide Bathtub Reviews, I Read Reviews, and Dungeon Regular, please consider a one-off donation or becoming a regular supporter of Idle Cartulary on Ko-fi . 
+ Tweet 
+ Share on Mastodon (Opens in new window) 
+ Mastodon 
+ Like Loading… 
+ I Read A Game 
+ 5e 
+Posted by:
+Idle Cartulary
+ « Previous Post 
+ Next Post » 
+4 responses to “I Read The Player’s Handbook (2024)”
+ Anonymous
+ September 2, 2024 at 3:54 am 
+It also leans harder into the tactical combat of 4th edition, which it already shared a lot of DNA with…
+Hi! Thanks for this review!
+I’m wondering: ‘Leans harder’ into 4e-style combat…in what sense?
+ Like Liked by 1 person 
+ Reply 
+ Idle Cartulary 
+ September 2, 2024 at 4:36 am 
+Classes have more combat focus, actions are more concrete, weapons deal more constant damage over time, and feats have more combat focus!
+ Like Like 
+ Reply 
+ I Read The Dungeon Master’s Guide (2024) – Playful Void 
+ November 12, 2024 at 5:14 am 
+[…] read The Player’s Handbook (2024) here. If you didn’t read that, and don’t want to, this is why I’m interested in reading […]
+ Like Like 
+ Reply 
+ I Read Heroes of the Borderlands – Playful Void 
+ June 15, 2026 at 8:00 pm 
+[…] of the Coast half-baking their game design plans. You can go back and read my reviews of the Player’s Handbook (spoiler: it slapped) and Dungeon Masters Guide (spoiler: huge bummer) a few years ago, if you […]
+ Like Like 
+ Reply 
+Leave a comment Cancel reply 
+ Δ 
+Want to support Playful Void or Bathtub Reviews? Donate to or join my Ko-fi! 
+I use affiliate links where I can, to keep reviewing sustainable! Please click them if you’re considering buying something I’ve reviewed! Want to know more? 
+Have a module, adventure or supplement you’d like me to review? Read my review policy here , and then email me at idle dot cartulary at gmail dot com, or direct message me on Discord!
+Recent Posts
+ Bathtub Review: The Doom of the Dark 
+ Bathtub Review: These Bloody Sails 
+ Bathtub Review: Drought Dragon Desolation 
+ Bathtub Review: Oni 
+ Bathtub Review: Tomb of Tog 
+ rootring: follow the ring from blog to blog, catch up on recent posts, and discover new TTRPG writing without relying on feeds, timelines, or recommendation algorithms. 
+ Prev 
+ Next 
+ Random 
+ Ring 
+Categories
+ A Wee Mechanic 
+ Appendix Nova 
+ Bathtub Reviews 
+ Content 
+ Critique Navidad! 
+ Design 
+ I Read A Game 
+ Intentional Reviews 
+ Make Dice Work For You 
+ Reveries 
+ Session Reports 
+ Techniques 
+ Theory 
+ Uncategorized 
+ Zungeon Zundays 
+Archives
+ August 2024 
+ M 
+ T 
+ W 
+ T 
+ F 
+ S 
+ S 
+ 1 2 3 4 
+ 5 6 7 8 9 10 11 
+ 12 13 14 15 16 17 18 
+ 19 20 21 22 23 24 25 
+ 26 27 28 29 30 31 
+ « Jul 
+ Sep » 
+ Search Search 
+Recent Posts
+ Loading Comments... 
+ Write a Comment... 
+ Email 
+ Name 
+ Website 
+ Comment 
+ Subscribe 
+ Subscribed 
+ Playful Void 
+ Join 95 other subscribers
+ Sign me up 
+ Already have a WordPress.com account? Log in now. 
+ Playful Void 
+ Subscribe 
+ Subscribed 
+ Sign up 
+ Log in 
+ Copy shortlink 
+ Report this content 
+ View post in Reader 
+ Manage subscriptions 
+ Collapse this bar 
+ %d

@@ -1,1 +1,110 @@
-[]
+[
+ {
+  "index": 71,
+  "feature": "'not' contractions encouraged",
+  "claim": "The guide encourages contractions formed with 'not' (don't, can't, wasn't) and warns against ambiguous ones like 'who's' — a deliberately conversational register for rules.",
+  "source": "Wizards of the Coast — D&D Style Guide: Writing and Editing, Version 1.04a (©2013; PDF hosted by the Adventurers League blog)",
+  "url": "https://adventurersleague.wordpress.com/wp-content/uploads/2018/10/1765690-dnd_house_style_guide.pdf",
+  "quote": "",
+  "page": "v1.04a p.3, Contractions",
+  "angle": "craft",
+  "verdict": {
+   "index": 71,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'a deliberately conversational register for rules' — the guide gives no rationale for encouraging contractions; the phrase 'conversational' appears nowhere near this rule",
+   "trueWording": "We encourage the use of contractions formed with \"not,\" such as \"don't,\" \"can't,\" and \"wasn't\"",
+   "note": "The first two limbs are verbatim on p.3 'Contractions', including the ambiguity warning: 'Use other contractions with care, especially any contraction that can be misread. For example, \"who's\" can be read as \"who is\" or \"who has.\"' The register gloss is the compiler's inference, not the page's. Machine-checked: 'conversational register' is absent from all 9 pages; the guide's only two uses of 'tone'/'conversational' are the High Fantasy 'general tone' passage and a separate rule allowing 'Dungeon Master' as a verb 'in an informal context, such as in a blog or a web article that has a conversational tone' — a different rule, not this one.",
+   "fromFile": "verdicts-dnd-i64-78.json"
+  }
+ },
+ {
+  "index": 84,
+  "feature": "glossary as information design (2024)",
+  "claim": "Idle Cartulary judges the 48-page rules section plus 18-page glossary 'absolutely stellar information design' and 'an incredibly confident book', though terms like Influence action lack definition where used.",
+  "source": "Idle Cartulary (Playful Void) — I Read The Player's Handbook (2024) (2024-08-31)",
+  "url": "http://idlecartulary.com/2024/08/31/i-read-the-players-handbook-2024/",
+  "quote": "absolutely stellar information design",
+  "page": "blog post",
+  "angle": "craft",
+  "verdict": {
+   "index": 84,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'the 48-page rules section plus 18-page glossary' - the 18 pages are inside the 48, not additional (29 rules pages + 18-page glossary = 'These 48 pages')",
+   "trueWording": "29 pages of rules plus an 18-page glossary make 48",
+   "note": "Raw page read via curl. Both quotations verbatim: 'The organisation and use of the rules glossary is absolutely stellar information design' and 'This is an incredibly confident book.' Influence limb verbatim: 'the Influence action isn't defined in the social interaction section for example'. But the page reads 'It summarises the lot of them in 29 pages... helped in great part by the 18 page rules glossary in Appendix C it depends on. These 48 pages aren't just rules', and later '(compared to 48)' as the 2024 core-rules total - so the claim double-counts the glossary. Second, smaller slippage: 'absolutely stellar information design' is applied specifically to the organisation and use of the rules glossary, not to the 48 pages as a whole.",
+   "fromFile": "verdicts-dnd-i79-93.json"
+  }
+ },
+ {
+  "index": 87,
+  "feature": "editing layers: precision vs emotion",
+  "claim": "5e core-book editor Scott Fitzgerald Gray: mechanics editing needs precision in how a book 'fits in with the game as a whole', narrative editing needs flow and pacing, and prose editing serves 'the emotional language of the game' so readers feel like a character in the world.",
+  "source": "Shadomain — Tales From the Tavern: Interview with Scott Fitzgerald Gray (2024-03-20)",
+  "url": "https://shadomain.com/tales-from-the-tavern-interview-with-scott-fitzgerald-gray/",
+  "quote": "the emotional language of the game",
+  "page": "interview",
+  "angle": "craft",
+  "verdict": {
+   "index": 87,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'5e core-book editor' - the interview never says Gray edited the 5e core rulebooks; it names Secrets of Sarlona (3e Eberron) and Vault of the Dracolich, and 'freelance editing for Wizards'",
+   "trueWording": "Prose editing requires attention to the emotional language of the game",
+   "note": "Raw page read via curl. The substance of the three-layer answer is verbatim: 'Mechanics in RPGs need a specific amount of precision and clarity, not just within a single book but in terms of how that book fits in with the game as a whole. Narrative within a book needs attention to flow and pacing more than attention to words. Prose editing requires attention to the emotional language of the game and how a book can make the game feel real, so that a player reading an RPG doesn't just feel like a player reading rules - they feel on some level like a character in the world that the game creates.' He names the three layers 'narrative editing, rules editing, and prose editing'. What this page does NOT establish is the credential: no mention of the 5e Player's Handbook, DMG or Monster Manual anywhere in the interview. Cite the credential from a credits page, not from here.",
+   "fromFile": "verdicts-dnd-i79-93.json"
+  }
+ },
+ {
+  "index": 89,
+  "feature": "brevity as DMG editorial rule",
+  "claim": "Perkins on the 2024 DMG: 'everything in there better be cracking on topic'; the sample adventures use 'tight and short' read-aloud scripts to jog the DM's memory, avoiding his earlier 32-page adventures.",
+  "source": "Screen Rant — 'Everything In There Better Be Cracking On Topic': D&D Designers Talk The 2024 DMG (Perkins & Wyatt interview, 2024-10-25)",
+  "url": "https://screenrant.com/dnd-2024-dungeon-master-guide-interview-perkins-wyatt/",
+  "quote": "tight and short",
+  "page": "interview",
+  "angle": "craft",
+  "verdict": {
+   "index": 89,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'read-aloud scripts' - the page says the sample adventures are 'scripts for the DM to just to jog their memory', i.e. DM-facing, not read-aloud/boxed text for players",
+   "trueWording": "scripts for the DM to just to jog their memory",
+   "note": "Raw page read via curl (Screen Rant interview, Ben Brosofsky, Oct 25 2024). Perkins verbatim: 'everything in there better be cracking on topic and directed at DMs who are either new or who are looking for ways as experienced DMs to make their games more interesting.' And: 'I remember I was taught that an adventure was like a 32-page publishable thing. And so all of my home adventures I wrote as like 32-page things, fully written out... And so if I had the 2024 DMG, which has sample adventures in it, which are tight and short and really sort of scripts for the DM to just to jog their memory and make sure that they're sort of remembering the pace and flow of the adventure, I could have saved myself a lot of prep time.' 'tight and short' and the jog-the-memory and 32-page limbs are all verbatim; only 'read-aloud' is imported by the claim, and it inverts the audience of the scripts.",
+   "fromFile": "verdicts-dnd-i79-93.json"
+  }
+ },
+ {
+  "index": 101,
+  "feature": "boxed-text length (attention after three sentences)",
+  "claim": "Justin Alexander: 'boxed text is often too long'; break 'freeze-frame' text into actionable chunks and stop at the reaction point so players respond before the world moves on.",
+  "source": "The Alexandrian — GM Don't List #13: Boxed Text Pitfalls (Justin Alexander, 2022-08-01)",
+  "url": "https://thealexandrian.net/wordpress/48312/roleplaying-games/gm-dont-list-13-boxed-text-pitfalls",
+  "quote": "boxed text is often too long",
+  "page": "essay",
+  "angle": "craft",
+  "verdict": {
+   "index": 101,
+   "verdict": "PARTIAL",
+   "trueWording": "I agree that it must be mentioned that boxed text is often too long",
+   "note": "The quotation IS on the page but it is not Justin Alexander's. It appears in the comment section, in the third of three responses, by a commenter named 'Andrew' dated August 2nd, 2022 - 7:13 pm, whose next sentence is 'I also tend to agree with Justin's critiques here', confirming Andrew is not Alexander. The essay body (everything above 'Filed under: Roleplaying Games Comments (3)') contains the string 'too long' zero times. The claim's other limbs ARE Alexander's own: 'what you should do is break it up into actionable chunks', 'What we've identified here is the reaction point', and the rule against letting 'the game world continue to move forward past the reaction point without letting the players react'. Related: the chunk's feature label for this claim, 'attention after three sentences', also traces to a comment - mellonbread, 11:58 am - recalling a lost WotC devblog piece, not to Alexander.",
+   "unsupportedLimb": "the attribution to Justin Alexander: 'boxed text is often too long' is a reader comment by 'Andrew', not the essay",
+   "fromFile": "verdicts-dnd-i94-108.json"
+  }
+ },
+ {
+  "index": 102,
+  "feature": "key length (five sentences)",
+  "claim": "Gus L.: a basic room key is five sentences maximum; longer only for puzzles and NPCs — 'no one wants to read a three page key'.",
+  "source": "All Dead Generations — Dungeon Design, Process and Keys (Gus L., 2022-12-19)",
+  "url": "https://alldeadgenerations.blogspot.com/2022/12/dungeon-design-process-and-keys.html",
+  "quote": "no one wants to read a three page key",
+  "page": "essay",
+  "angle": "craft",
+  "verdict": {
+   "index": 102,
+   "verdict": "PARTIAL",
+   "trueWording": "Keys longer than five or six sentences can work, with a good editor",
+   "note": "By Gus L., Monday December 19, 2022. The designated quote is verbatim (page: 'No one wants to read a three page key to a single room, written in the style of Undermountian or a 1993 Dungeon Magazine adventure'). But the page does not set five sentences as a maximum. It reads: 'Keys longer than five or six sentences can work, with a good editor, and an attention to ordering their contents, but that's a good basic limit. Longer keys are even needed at times for complex puzzles and npcs, but basic description shouldn't really get beyond a paragraph.' So the figure is five-or-six, framed as a soft 'good basic limit' that longer keys can exceed with editing - and puzzles/NPCs are given as cases where longer is 'even needed at times', not as the sole licensed exception.",
+   "unsupportedLimb": "'five sentences maximum' and 'longer only for puzzles and NPCs': page says five or six as a soft 'good basic limit' that longer keys can exceed with a good editor",
+   "fromFile": "verdicts-dnd-i94-108.json"
+  }
+ }
+]

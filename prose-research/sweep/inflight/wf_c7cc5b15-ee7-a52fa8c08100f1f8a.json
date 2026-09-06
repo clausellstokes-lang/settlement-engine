@@ -1,0 +1,35 @@
+{
+ "role": "verifier",
+ "name": "martin",
+ "angle": null,
+ "tag": "i660-674",
+ "lines": 40,
+ "firstTs": "2026-09-06T17:41:51.891Z",
+ "lastTs": "2026-09-06T17:43:49.697Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 9
+ },
+ "urlsFetched": [
+  "https://authorarrivera.com/2023/09/10/a-brief-linguistic-exam-of-a-song-of-ice-and-fire/",
+  "https://www.dothraki.com/2011/09/the-header-script/",
+  "https://dothraki.com/2012/03/developing-canon/",
+  "http://dothraki.conlang.org/official-hbo-press-release/",
+  "https://en.wikipedia.org/wiki/Dothraki_language",
+  "https://wonderlandpress.com/a-song-of-ice-and-fire-structureword-count-case-study/",
+  "https://link.springer.com/chapter/10.1007/978-3-658-36145-7_6",
+  "https://web.archive.org/web/20200817120827id_/http://dothraki.conlang.org/official-hbo-press-release/",
+  "https://web.archive.org/web/20250801025545id_/https://link.springer.com/chapter/10.1007/978-3-658-36145-7_6"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "Three sources need recovery routes: Springer (Client Challenge), conlang.org (DNS fail). Let me run those plus extract Rivera and Wikipedia.",
+ "run": "wf_c7cc5b15-ee7",
+ "agent": "a52fa8c08100f1f8a",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_c7cc5b15-ee7/agent-a52fa8c08100f1f8a.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-martin-i660-674.json",
+  "exists": false
+ }
+}

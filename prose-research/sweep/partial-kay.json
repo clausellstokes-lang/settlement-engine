@@ -83,5 +83,63 @@
    "note": "Quote \"a way of being honest about limitations\" is verbatim on the page, and the Henry James framing is real: \"It was Henry James who argued that historical fiction was, in fact, impossible ... getting to 'the real thing' with regard to the world views of people in the past simply could not be done.\" But Kay's own sentence is \"I don't agree, but I see the point, and it strikes me forcibly that by treating the past through the form of a fantasy, one acknowledges the sort of difficulties James was referring to, while still probing and revealing motifs of the past.\" Difficulties acknowledged, impossibility disputed — so the claim's 'impossibility' limb overstates the source.",
    "fromFile": "verdicts-kay-i90-104.json"
   }
+ },
+ {
+  "index": 120,
+  "feature": "wit shown via unexplained references",
+  "claim": "Kay borrows Dunnett's method of demonstrating intelligence by having characters say things the reader does not get.",
+  "source": "'Guy Gavriel Kay: Margins of History', Locus (May 2025 excerpt) — read via Wayback copy",
+  "url": "https://locusmag.com/feature/guy-gavriel-kay-margins-of-history/",
+  "quote": "say things the reader doesn’t understand",
+  "angle": "academic",
+  "verdict": {
+   "index": 120,
+   "verdict": "PARTIAL",
+   "trueWording": "Dunnett did this “by having him... say things the reader doesn’t understand”",
+   "note": "Locus page reached raw (curl, HTTP 200). Quote is verbatim: “one of the ways she did it is by having him, or sometimes other people, say things the reader doesn’t understand.” But Kay presents this strictly as Dorothy Dunnett’s technique in the Lymond books, admired in the context of how hard it is “to convey the idea that a character is genuinely smart.” Nowhere on the page does he say he borrows or uses the device himself.",
+   "unsupportedLimb": "that Kay borrows/adopts the method for his own fiction — the page attributes it to Dunnett only",
+   "fromFile": "verdicts-kay-i120-134.json"
+  }
+ },
+ {
+  "index": 148,
+  "feature": "set-piece moments",
+  "claim": "Walton remembers Arbonne chiefly through set-piece moments of the kind Kay does so well.",
+  "source": "Jo Walton, 'Provencal Fantasy: Guy Gavriel Kay's A Song for Arbonne', Tor.com/Reactor (2010-08-06)",
+  "url": "https://reactormag.com/provencal-fantasy-guy-gavriel-kays-a-song-for-arbonne/",
+  "quote": "a few set-piece moments, of the kind Kay does so well",
+  "angle": "academic",
+  "verdict": {
+   "index": 148,
+   "verdict": "PARTIAL",
+   "trueWording": "The characters, however, and the plot, had vanished from my mind ... except for a few set-piece moments",
+   "note": "Quote is exact, but Walton's 'except' applies to characters and plot only — the same sentence-pair says 'I remembered the setting perfectly well' (lavender fields, Court of Love, troubadours), so set-pieces are not how she chiefly remembers the book.",
+   "unsupportedLimb": "that she remembers Arbonne chiefly through set-pieces — she remembered the setting perfectly well; only characters and plot had vanished",
+   "fromFile": "verdicts-kay-i135-149.json"
+  }
+ },
+ {
+  "index": 179,
+  "feature": "place and institution description",
+  "claim": "Randall argues the reader must assemble Kay's secondary world by inference from the successive focalizations rather than from direct exposition.",
+  "source": "Neil Randall, critic, Canadian Literature 129 (Summer 1991)",
+  "url": "http://brightweavings.com/randallfionavar/",
+  "quote": "Our task is to piece together the world by understanding the focalizations.",
+  "page": "opening section",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "1991",
+  "routeHint": "live URL, raw HTML",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "academic",
+  "verdict": {
+   "index": 179,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'rather than from direct exposition' - the page never contrasts focalization with exposition or direct description of the world",
+   "trueWording": "\"Our task is to piece together the world by understanding the focalizations.\"",
+   "note": "Quotation is verbatim on the raw Randall page and the assembling-by-inference limb is supported ('Kay's forces us to experience Fionavar as its many characters do'; the strategy 'controls the speed and the manner in which we assimilate the culture of Fionavar'). But the article contains no occurrence of 'exposition' at all, and the only contrast it draws is with fantasies focalized through one or two central characters, not with expository delivery. The nearest support is a different sentence, about events rather than the world: 'the shifting is necessary if we are to observe the kernels directly, instead of having them related by direct speech or another kind of sub-narration.' Graded PARTIAL rather than verified because the contrastive limb is an inference the page does not state.",
+   "fromFile": "verdicts-kay-i165-179.json"
+  }
  }
 ]

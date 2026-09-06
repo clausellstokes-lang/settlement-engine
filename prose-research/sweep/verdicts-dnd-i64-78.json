@@ -1,0 +1,234 @@
+{
+ "name": "dnd",
+ "chunk": 1,
+ "claims": [
+  {
+   "index": 64,
+   "feature": "Ability (Skill) check pattern",
+   "claim": "Third-party style guidance derived from the WotC guide: skill checks are always written as '[Ability Score] ([Skill])', outcomes are stated for success and failure, and multi-skill checks name at most two skills for brevity.",
+   "source": "Kobold Press — Designing with Style: Ability Checks and Saving Throws (Hannah Rose, 2019-05-31)",
+   "url": "https://koboldpress.com/designing-with-style-ability-checks-and-saving-throws/",
+   "quote": "always written as [Ability Score] ([Skill])",
+   "page": "blog post"
+  },
+  {
+   "index": 65,
+   "feature": "numerals in rules vs words in narrative",
+   "claim": "Rules text uses numerals for any game quantity ('regains 3 hit points', 'lasts for 1 round', 'The room is 20 feet square') while narrative time and distance are spelled out ('slept for six hours', 'fifty miles apart').",
+   "source": "Wizards of the Coast — D&D Style Guide: Writing and Editing, Version 1.04a (©2013; PDF hosted by the Adventurers League blog)",
+   "url": "https://adventurersleague.wordpress.com/wp-content/uploads/2018/10/1765690-dnd_house_style_guide.pdf",
+   "quote": "the characters slept for six hours",
+   "page": "v1.04a pp.5-6, Numerals in Rules Text"
+  },
+  {
+   "index": 66,
+   "feature": "abandoned 4e terms ('save', 'result')",
+   "claim": "The guide explicitly retires 4e usages: 'save' as 'successful saving throw' and 'result' as 'the number rolled on a die' — 'We have abandoned that practice.'",
+   "source": "Wizards of the Coast — D&D Style Guide: Writing and Editing, Version 1.04a (©2013; PDF hosted by the Adventurers League blog)",
+   "url": "https://adventurersleague.wordpress.com/wp-content/uploads/2018/10/1765690-dnd_house_style_guide.pdf",
+   "quote": "We have abandoned that practice",
+   "page": "v1.04a p.6"
+  },
+  {
+   "index": 67,
+   "feature": "'points of damage' banned",
+   "claim": "Write 'deals 10 fire damage', not '10 points of fire damage'; write 'hit point maximum', not 'maximum hit points'; 'magic item' is never 'magical item'.",
+   "source": "Wizards of the Coast — D&D Style Guide: Writing and Editing, Version 1.04a (©2013; PDF hosted by the Adventurers League blog)",
+   "url": "https://adventurersleague.wordpress.com/wp-content/uploads/2018/10/1765690-dnd_house_style_guide.pdf",
+   "quote": "Avoid referring to points of damage",
+   "page": "v1.04a pp.6-7"
+  },
+  {
+   "index": 68,
+   "feature": "capitalize / italicize term classes",
+   "claim": "Capitalize ability scores, Armor Class, class features, Difficulty Class, feats, languages, planes, skills, racial/monster traits; italicize spell and magic-item names as titles (the spell wall of fire produces a wall of fire).",
+   "source": "Wizards of the Coast — D&D Style Guide: Writing and Editing, Version 1.04a (©2013; PDF hosted by the Adventurers League blog)",
+   "url": "https://adventurersleague.wordpress.com/wp-content/uploads/2018/10/1765690-dnd_house_style_guide.pdf",
+   "quote": "",
+   "page": "v1.04a p.5, Formatting Game Terms"
+  },
+  {
+   "index": 69,
+   "feature": "inline subhead punctuation",
+   "claim": "Inline subheads (heading 4) end with terminal punctuation, not a colon — 'Keen Senses. You have proficiency…' — and are set in bold italics; bolded stat-block fields are a different thing.",
+   "source": "Wizards of the Coast — D&D Style Guide: Writing and Editing, Version 1.04a (©2013; PDF hosted by the Adventurers League blog)",
+   "url": "https://adventurersleague.wordpress.com/wp-content/uploads/2018/10/1765690-dnd_house_style_guide.pdf",
+   "quote": "followed by terminal punctuation, not a colon",
+   "page": "v1.04a p.2, Inline Subheads"
+  },
+  {
+   "index": 70,
+   "feature": "no weeks or months in rules",
+   "claim": "Because a Realms week is a tenday, rules durations are given in days, never weeks or months (years are allowed).",
+   "source": "Wizards of the Coast — D&D Style Guide: Writing and Editing, Version 1.04a (©2013; PDF hosted by the Adventurers League blog)",
+   "url": "https://adventurersleague.wordpress.com/wp-content/uploads/2018/10/1765690-dnd_house_style_guide.pdf",
+   "quote": "say a game effect lasts for 7 days",
+   "page": "v1.04a p.7"
+  },
+  {
+   "index": 71,
+   "feature": "'not' contractions encouraged",
+   "claim": "The guide encourages contractions formed with 'not' (don't, can't, wasn't) and warns against ambiguous ones like 'who's' — a deliberately conversational register for rules.",
+   "source": "Wizards of the Coast — D&D Style Guide: Writing and Editing, Version 1.04a (©2013; PDF hosted by the Adventurers League blog)",
+   "url": "https://adventurersleague.wordpress.com/wp-content/uploads/2018/10/1765690-dnd_house_style_guide.pdf",
+   "quote": "",
+   "page": "v1.04a p.3, Contractions"
+  },
+  {
+   "index": 72,
+   "feature": "High Fantasy tone rule",
+   "claim": "The only tone guidance in the guide: D&D is high fantasy about small teams; humor or tragedy is fine if it doesn't overtake the tone, tested against Lord of the Rings / Game of Thrones — 'ring wraiths aren't used for gags'.",
+   "source": "Wizards of the Coast — D&D Style Guide: Writing and Editing, Version 1.04a (©2013; PDF hosted by the Adventurers League blog)",
+   "url": "https://adventurersleague.wordpress.com/wp-content/uploads/2018/10/1765690-dnd_house_style_guide.pdf",
+   "quote": "ring wraiths aren't used for gags",
+   "page": "v1.04a p.5, High Fantasy"
+  },
+  {
+   "index": 73,
+   "feature": "'party' not 'fellowship' (v1.08a)",
+   "claim": "v1.08a adds a diction rule: avoid 'fellowship' for adventuring groups because D&D companies are 'often fractious or more mercenary'; use group, band, company or especially 'party'.",
+   "source": "Wizards of the Coast — D&D Style Guide: Writing and Editing, Version 1.08a (©2018, 'updated January 2019'; PDF mirror)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "often fractious or more mercenary",
+   "page": "v1.08a p.9-10, Adventuring Parties"
+  },
+  {
+   "index": 74,
+   "feature": "edition naming (v1.08a)",
+   "claim": "v1.08a switches from '5th Edition' to lowercase 'fifth edition', preferably as a modifier ('the fifth edition Dungeon Master's Guide').",
+   "source": "Wizards of the Coast — D&D Style Guide: Writing and Editing, Version 1.08a (©2018, 'updated January 2019'; PDF mirror)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "",
+   "page": "v1.08a p.2"
+  },
+  {
+   "index": 75,
+   "feature": "gender-specific suffixes (v1.08a)",
+   "claim": "v1.08a: write 'priest', 'actor', 'god' regardless of gender; '-ess' forms only in in-world titles.",
+   "source": "Wizards of the Coast — D&D Style Guide: Writing and Editing, Version 1.08a (©2018, 'updated January 2019'; PDF mirror)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "Avoid gender-specific suffixes whenever possible",
+   "page": "v1.08a p.3"
+  },
+  {
+   "index": 76,
+   "feature": "headings and sidebars (v1.08a)",
+   "claim": "v1.08a requires descending the heading hierarchy without skipping levels, forbids inline subheads used merely for emphasis, and says the best sidebars 'can appear anywhere on a page and still make sense'.",
+   "source": "Wizards of the Coast — D&D Style Guide: Writing and Editing, Version 1.08a (©2018, 'updated January 2019'; PDF mirror)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "",
+   "page": "v1.08a pp.3-4"
+  },
+  {
+   "index": 77,
+   "feature": "in-world tenday rule vs WotC practice",
+   "claim": "A poster notes the style guide bans 'week' in favor of 'tenday' while WotC's own hardcovers violate the rule — house style is aspirational, not uniformly applied.",
+   "source": "EN World — DMsGuild: D&D Style-Guides give a unique insight into the game (thread, 2018-11-25)",
+   "url": "https://www.enworld.org/threads/dmsguild-d-d-style-guides-give-a-unique-insight-into-the-game.655198/",
+   "quote": "",
+   "page": "post by pukunui, 2018-11-27"
+  },
+  {
+   "index": 78,
+   "feature": "formulaic feature wording",
+   "claim": "Half-Cover infers from the books that spells and saving throws use 'very specific wording' and that features always spell out interactions (e.g., already having a cantrip), with fixed section order (starting equipment before class features).",
+   "source": "Half-Cover — How to Follow the Writing Style of D&D (Michael, 2017-09-02)",
+   "url": "https://half-cover.com/blogs/find-the-path/importance-following-writing-style-dd-manuals/",
+   "quote": "a strict style guide that all D&D sections adhere to",
+   "page": "blog post"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 64,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "skill checks are always written as [Ability Score] ([Skill])",
+   "note": "Raw HTML fetched (200, 529KB). Quote verbatim. All three limbs on page: the [Ability Score] ([Skill]) rule; success/failure outcome language (Option 1/Option 2, 'On a success... On a failure...'); and 'If there are more than two possible skills... you probably want to pick at most two for the sake of brevity and elegance.' Third-party derivation limb confirmed: 'The Designing with Style series breaks down the official 5th-edition style guide.' Byline Hannah Rose, May 31, 2019, both on page."
+  },
+  {
+   "index": 65,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "After winning the fight, the characters slept for six hours.",
+   "note": "PDF fetched (200, 1.24MB) and text-extracted with pypdf; 9 pages read in full. Quote verbatim on p.5 (line-broken in the PDF, contiguous when whitespace-normalized). Every example in the claim is verbatim in 'Numerals in Rules Text' (pp.5-6): 'Anyone who touches the orb regains 3 hit points.'; 'The spell lasts for 1 round.'; 'The room is 20 feet square.'; and under 'But:' — 'the characters slept for six hours' and 'The two cities are fifty miles apart.' Page citation pp.5-6 is correct."
+  },
+  {
+   "index": 66,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In 4E, we used \"save\" as a synonym for \"successful saving throw.\" We have abandoned that practice.",
+   "note": "Quote 'We have abandoned that practice' appears verbatim TWICE on p.6, once in each named place. Minor precision point, not an unsupported limb: the guide attributes the 'result' usage to '3E and 4E', not 4E alone — 'In 3E and 4E, the word \"result\" was sometimes used as a synonym for \"the number rolled on a die.\"' The 'save' usage is attributed to 4E alone, as claimed."
+  },
+  {
+   "index": 67,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Avoid referring to points of damage. ... And \"magic item\" and its variants should never be \"magical item.\"",
+   "note": "All three limbs verbatim. p.6 'Points of Damage': 'write, \"The spell deals 10 fire damage,\" not \"The spell deals 10 points of fire damage.\"'; p.7 'Hit Point Maximum': 'When you write about a creature's hit point maximum, avoid \"maximum hit points.\"'; p.6 '\"Magic\" vs. \"Magical\"': '\"magic item\" and its variants should never be \"magical item.\"' Page citation pp.6-7 is correct."
+  },
+  {
+   "index": 68,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "the wall of fire spell produces a wall of fire",
+   "note": "Claim carries no quote field, and its parenthetical inverts the guide's word order (guide: 'the wall of fire spell produces a wall of fire'; claim: 'the spell wall of fire produces a wall of fire') — hence SUBSTANCE, not VERBATIM. Every listed term is on p.5 'Formatting Game Terms': Terms to Capitalize lists Ability scores, Armor Class, Artifacts, Class features, Difficulty Class, Dungeon Master, Feats, Languages, Planes of existence, Skills, 'Traits in races and monsters'; Terms to Italicize lists Artifacts, Magic items, Spells; and 'The italicized terms are treated as titles, even when they don't use title capitalization.'"
+  },
+  {
+   "index": 69,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "this subhead should be followed by terminal punctuation, not a colon",
+   "note": "Quote verbatim on p.2. Limbs: 'The lowest level of our heading hierarchy is the inline subhead. It functions as our heading 4.'; the correct example is verbatim 'Keen Senses. You have proficiency in the Perception skill.' (with the colon version shown as incorrect); and 'Don't confuse an inline subhead with the bolded title of a stat block entry or other data field.' One nuance on the bold-italics limb: it is the guide's fallback instruction, not unconditional — 'If you don't have access to the style, set the subhead in bold italics to distinguish it from text that is simply bold.'"
+  },
+  {
+   "index": 70,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "say a game effect lasts for 7 days, not 1 week",
+   "note": "Quote verbatim on p.7, section 'Avoid \"Week\" and \"Month\"'. Limbs: 'A week is ten days long in the Forgotten Realms, for instance, and is called a tenday.'; 'don't express durations or other lengths of time in weeks or months when you're writing rules'; 'The length of the year varies as well, but you may use years for durations and the like.' One nuance: the guide's stated reason is broader than the claim's — 'The lengths of weeks and months vary in different D&D worlds', with the Realms tenday given as an instance."
+  },
+  {
+   "index": 71,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'a deliberately conversational register for rules' — the guide gives no rationale for encouraging contractions; the phrase 'conversational' appears nowhere near this rule",
+   "trueWording": "We encourage the use of contractions formed with \"not,\" such as \"don't,\" \"can't,\" and \"wasn't\"",
+   "note": "The first two limbs are verbatim on p.3 'Contractions', including the ambiguity warning: 'Use other contractions with care, especially any contraction that can be misread. For example, \"who's\" can be read as \"who is\" or \"who has.\"' The register gloss is the compiler's inference, not the page's. Machine-checked: 'conversational register' is absent from all 9 pages; the guide's only two uses of 'tone'/'conversational' are the High Fantasy 'general tone' passage and a separate rule allowing 'Dungeon Master' as a verb 'in an informal context, such as in a blog or a web article that has a conversational tone' — a different rule, not this one."
+  },
+  {
+   "index": 72,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "there are moments of humor with the hobbits, but ring wraiths aren't used for gags",
+   "note": "Quote verbatim on p.5, section 'High Fantasy'. Limbs verbatim: 'A typical D&D story or adventure is part of the high fantasy subgenre'; 'D&D is about small bands of characters embarking on adventures together'; 'Elements of humor or tragedy are fine, so long as they are true to the facts of the brand and don't overtake the general tone'; 'When in doubt, think about properties like the Lord of the Rings or Game of Thrones.' The 'only tone guidance' limb was checked exhaustively against all 9 pages: 'High Fantasy' is the sole section addressing narrative tone; the only other occurrence of 'tone' is the blog-register aside under '\"Dungeon Master\" Isn't a Verb'."
+  },
+  {
+   "index": 73,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "D&D adventuring companies are often fractious or more mercenary than the word \"fellowship\" implies",
+   "note": "PDF fetched (200, 402KB), text-extracted, 11 pages read in full. Quote verbatim in the 'Adventuring Parties' block (end of p.9 in the text stream; the claim cites pp.9-10). Prescription verbatim: 'In most in-world contexts and all other contexts, use \"group,\" \"band,\" \"company,\" or, especially, \"party.\"' The 'v1.08a adds' limb is machine-confirmed: 'fellowship' appears nowhere in v1.04a. One nuance the claim's blanket 'avoid' compresses: the guide permits in-world naming — '\"Fellowship\" might be used in-world in the name of an adventuring band (the Fellowship of the Griffon)'."
+  },
+  {
+   "index": 74,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "We write \"fifth edition,\" for instance, not \"5th Edition.\"",
+   "note": "Claim carries no quote field, but all three of its inline quoted strings are verbatim on pp.1-2: 'In a departure from previous usage, we spell out and lowercase references to editions of the roleplaying game. We write \"fifth edition,\" for instance, not \"5th Edition.\" We prefer to use an edition designation as a modifier of another term—\"the fifth edition Dungeon Master's Guide,\" for example.' The 'switches' limb is machine-confirmed by diff: v1.04a contains '5th Edition' and not 'fifth edition' (its edition list reads '1st Edition ... 5th Edition'); v1.08a's list reads 'first edition ... fifth edition'."
+  },
+  {
+   "index": 75,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Avoid gender-specific suffixes whenever possible.",
+   "note": "Quote verbatim on p.3. Limbs verbatim: 'we write \"priest\" or \"actor\" whether the person is male or female'; 'use \"god\" whether the deity is male or female. Again, in-world uses of \"goddess\" are fine.' The '-ess only in in-world titles' limb is very slightly compressed — the guide's condition is 'only if it's part of a person's title or an in-world organizations' titles', i.e. a person's title as well as an organization's. Section is new in v1.08a: 'gender-specific suffixes' is absent from v1.04a."
+  },
+  {
+   "index": 76,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The best sidebars can appear anywhere on a page and still make sense.",
+   "note": "The claim's inline quotation is verbatim on p.3. Limbs verbatim: 'Work your way down the heading hierarchy without skipping steps'; 'don't use an inline subhead when you simply want to emphasize a word or phrase. Use bold for such emphasis'. All three rules are new in v1.08a (v1.04a has no Headings or Sidebars section; 'skipping steps' and 'sidebars' are absent from it). Minor citation drift, not a limb: all three passages sit on p.3, not pp.3-4."
+  },
+  {
+   "index": 77,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "WotC doesn't bother to make sure their hardcovers follow the guidelines",
+   "note": "Raw thread HTML fetched (200, 167KB). Post #8 by pukunui, timestamped 2018-11-27 in the page's own <time datetime> attributes (thread opened 2018-11-25), reads: 'There's some great stuff in the FR style guide. It's a real shame WotC doesn't bother to make sure their hardcovers follow the guidelines (e.g. The style guide says \"week\" is banned and one should use \"tenday\" instead, but \"week\" shows up in FR products all the time!)'. Poster, ban, tenday and hardcover-violation limbs all present verbatim; the claim's closing gloss 'house style is aspirational, not uniformly applied' is the compiler's paraphrase of that sentence rather than the poster's wording, hence SUBSTANCE. Note the poster attributes the rule to the FR style guide specifically."
+  },
+  {
+   "index": 78,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a strict style guide that all D&D sections adhere to when explaining mechanics",
+   "note": "Raw HTML fetched (200, 60KB). Quote verbatim. All limbs verbatim: 'This is why spells or saving throws have very specific wording'; 'the feature will always clarify what happens if you already have the cantrip because of another mechanic or feature in the game'; 'For example, starting equipment is always before class features in any class section.' The 'infers from the books' limb is supported: 'to my knowledge Wizards of the Coast has not yet published the official style guide for D&D 5th Edition' and 'the best way to draft your homebrew is to inspect the actual manuals'. Byline Michael, 2 Sep 2017, on page."
+  }
+ ]
+}
