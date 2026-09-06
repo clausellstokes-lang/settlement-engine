@@ -1,0 +1,158 @@
+{
+ "name": "ai",
+ "chunk": 13,
+ "indices": [
+  449,
+  450,
+  451,
+  452,
+  453,
+  454,
+  455,
+  456,
+  457,
+  458,
+  459,
+  460,
+  461,
+  462,
+  463
+ ],
+ "claims": [
+  {
+   "index": 449,
+   "feature": "regurgitated tropes; no surprise",
+   "claim": "Humour depends on surprise, and a predictive model that regurgitates tropes cannot supply it.",
+   "source": "Mirowski, Mathewson, Pittman, Evans — 'A Robot Walks into a Bar: Can Language Models Serve as Creativity Support Tools for Comedy?' (FAccT 2024)",
+   "url": "https://arxiv.org/html/2405.20956",
+   "quote": "AI is only adept at regurgitating tropes",
+   "page": ""
+  },
+  {
+   "index": 450,
+   "feature": "unspoken subtext missing",
+   "claim": "Comedy runs on unspoken subtext that a text-only model neither carries nor reads.",
+   "source": "Mirowski, Mathewson, Pittman, Evans — 'A Robot Walks into a Bar: Can Language Models Serve as Creativity Support Tools for Comedy?' (FAccT 2024)",
+   "url": "https://arxiv.org/html/2405.20956",
+   "quote": "comedy is all about subtext",
+   "page": ""
+  },
+  {
+   "index": 451,
+   "feature": "placeless voice; no audience or location",
+   "claim": "LLM material has no sense of where or to whom it is spoken.",
+   "source": "Mirowski, Mathewson, Pittman, Evans — 'A Robot Walks into a Bar: Can Language Models Serve as Creativity Support Tools for Comedy?' (FAccT 2024)",
+   "url": "https://arxiv.org/html/2405.20956",
+   "quote": "everywhere and nowhere all at once",
+   "page": ""
+  },
+  {
+   "index": 452,
+   "feature": "moderation flattens dark and minority-coded material",
+   "claim": "Safety filters refused dark material and stripped out gay-coded language, which comedians read as censorship of their own identities.",
+   "source": "Mirowski, Mathewson, Pittman, Evans — 'A Robot Walks into a Bar: Can Language Models Serve as Creativity Support Tools for Comedy?' (FAccT 2024)",
+   "url": "https://arxiv.org/html/2405.20956",
+   "quote": "taking out the gay language of it",
+   "page": ""
+  },
+  {
+   "index": 453,
+   "feature": "cultural defaults survive a language switch",
+   "claim": "Switching the conversation into Indian languages left the character names un-localised.",
+   "source": "Mirowski, Mathewson, Pittman, Evans — 'A Robot Walks into a Bar: Can Language Models Serve as Creativity Support Tools for Comedy?' (FAccT 2024)",
+   "url": "https://arxiv.org/html/2405.20956",
+   "quote": "it didn’t automatically change the names",
+   "page": ""
+  },
+  {
+   "index": 454,
+   "feature": "no pride or uniqueness in AI-assisted material",
+   "claim": "Most participants felt neither pride nor uniqueness in material co-written with the model; the Creativity Support Index was mediocre.",
+   "source": "Mirowski, Mathewson, Pittman, Evans — 'A Robot Walks into a Bar: Can Language Models Serve as Creativity Support Tools for Comedy?' (FAccT 2024)",
+   "url": "https://arxiv.org/html/2405.20956",
+   "quote": "did not feel pride in the material written with AI",
+   "page": ""
+  },
+  {
+   "index": 455,
+   "feature": "delivery and surprise absent from a text-only medium",
+   "claim": "The paper names delivery and surprise as critical comedic elements a text-only model cannot provide.",
+   "source": "Mirowski, Mathewson, Pittman, Evans — 'A Robot Walks into a Bar: Can Language Models Serve as Creativity Support Tools for Comedy?' (FAccT 2024)",
+   "url": "https://arxiv.org/html/2405.20956",
+   "quote": "delivery and surprise",
+   "page": ""
+  },
+  {
+   "index": 456,
+   "feature": "subtext missing or misread",
+   "claim": "Models reproduce what is on the surface of a literary story while the subtext is absent or wrongly interpreted.",
+   "source": "Subbiah, Zhang, Chilton, McKeown — 'Reading Subtext: Evaluating Large Language Models on Short Story Summarization with Writers' (TACL 2024)",
+   "url": "https://arxiv.org/html/2403.01061",
+   "quote": "Subtext is missing entirely",
+   "page": ""
+  },
+  {
+   "index": 457,
+   "feature": "unreliable narrator taken at face value",
+   "claim": "All three models score lower on stories with unreliable narrators and repeat the narrator's self-description as fact.",
+   "source": "Subbiah, Zhang, Chilton, McKeown — 'Reading Subtext: Evaluating Large Language Models on Short Story Summarization with Writers' (TACL 2024)",
+   "url": "https://arxiv.org/html/2403.01061",
+   "quote": "the narrator is not really to be trusted",
+   "page": ""
+  },
+  {
+   "index": 458,
+   "feature": "vague stock phrases instead of specifics",
+   "claim": "Weak summaries substitute stock phrases for the specific content of the story (64 'vague' span errors across models).",
+   "source": "Subbiah, Zhang, Chilton, McKeown — 'Reading Subtext: Evaluating Large Language Models on Short Story Summarization with Writers' (TACL 2024)",
+   "url": "https://arxiv.org/html/2403.01061",
+   "quote": "stock phrases or stand-ins rather than accurate, specific summary",
+   "page": ""
+  },
+  {
+   "index": 459,
+   "feature": "schoolroom over-analysis that misses the feeling",
+   "claim": "Summaries pile on interpretive claims in a classroom register while missing the story's larger emotional point.",
+   "source": "Subbiah, Zhang, Chilton, McKeown — 'Reading Subtext: Evaluating Large Language Models on Short Story Summarization with Writers' (TACL 2024)",
+   "url": "https://arxiv.org/html/2403.01061",
+   "quote": "like a high school english class",
+   "page": ""
+  },
+  {
+   "index": 460,
+   "feature": "hypernormative interpretation",
+   "claim": "Claude imposed a heteronormative monogamous reading of an interaction over what the text actually says.",
+   "source": "Subbiah, Zhang, Chilton, McKeown — 'Reading Subtext: Evaluating Large Language Models on Short Story Summarization with Writers' (TACL 2024)",
+   "url": "https://arxiv.org/html/2403.01061",
+   "quote": "assumes a heteronormative monogamous interpretation",
+   "page": ""
+  },
+  {
+   "index": 461,
+   "feature": "implication read literally",
+   "claim": "An implied death was rendered as a deliberate choice to stay at the summit.",
+   "source": "Subbiah, Zhang, Chilton, McKeown — 'Reading Subtext: Evaluating Large Language Models on Short Story Summarization with Writers' (TACL 2024)",
+   "url": "https://arxiv.org/html/2403.01061",
+   "quote": "The cold settled into me",
+   "page": ""
+  },
+  {
+   "index": 462,
+   "feature": "errors cluster in what characters did and felt",
+   "claim": "Most faithfulness errors fall in Action and Feeling, the categories requiring interpretation of characters' deeds and reactions.",
+   "source": "Subbiah, Zhang, Chilton, McKeown — 'Reading Subtext: Evaluating Large Language Models on Short Story Summarization with Writers' (TACL 2024)",
+   "url": "https://arxiv.org/html/2403.01061",
+   "quote": "most faithfulness errors across the models are in Action and Feeling",
+   "page": ""
+  },
+  {
+   "index": 463,
+   "feature": "unsupported analysis even in top-rated summaries",
+   "claim": "Summaries rated 4/4 for analysis still contained on average at least one analysis error (104 unsupported-analysis spans in total).",
+   "source": "Subbiah, Zhang, Chilton, McKeown — 'Reading Subtext: Evaluating Large Language Models on Short Story Summarization with Writers' (TACL 2024)",
+   "url": "https://arxiv.org/html/2403.01061",
+   "quote": "at least one error in analysis on average",
+   "page": ""
+  }
+ ]
+}

@@ -13,7 +13,10 @@
   337,
   338,
   339,
-  340
+  340,
+  341,
+  342,
+  343
  ],
  "claims": [
   {
@@ -123,6 +126,33 @@
    "url": "https://arxiv.org/html/2507.03373v1",
    "quote": "detectors struggle with MGT in realistic generation scenarios",
    "page": "WETBench 2025 — A Benchmark for Detecting Task-Specific Machine-Generated Text on Wikipedia (arXiv 2507.03373)"
+  },
+  {
+   "index": 341,
+   "feature": "fact hallucination in creature lore",
+   "claim": "In CALYPSO's 71-participant Discord deployment, the most common undesired behaviour DMs reported was the model inventing monster facts — giant spiders with telepathy, an insect with a poison ability, a frost salamander with wings.",
+   "source": "CALYPSO: LLMs as Dungeon Masters' Assistants (Zhu, Martin, Head, Callison-Burch; AIIDE 2023) — ar5iv full text",
+   "url": "https://ar5iv.labs.arxiv.org/html/2308.07540",
+   "quote": "giving giant spiders telepathy",
+   "page": "CALYPSO: LLMs as Dungeon Masters' Assistants (Zhu, Martin, Head, Callison-Burch; AIIDE 2023) — ar5iv full text"
+  },
+  {
+   "index": 342,
+   "feature": "paraphrase instead of synthesis",
+   "claim": "Asked to summarise an encounter, GPT-3 (text-davinci-003) merely rephrased the monster reference text, which DMs said does not help run the encounter and over-focused on numeric stats.",
+   "source": "CALYPSO: LLMs as Dungeon Masters' Assistants (Zhu, Martin, Head, Callison-Burch; AIIDE 2023) — ar5iv full text",
+   "url": "https://ar5iv.labs.arxiv.org/html/2308.07540",
+   "quote": "doesn't really help in running an encounter",
+   "page": "CALYPSO: LLMs as Dungeon Masters' Assistants (Zhu, Martin, Head, Callison-Burch; AIIDE 2023) — ar5iv full text"
+  },
+  {
+   "index": 343,
+   "feature": "prompt-phrase echo (degenerate output)",
+   "claim": "A phrase repeated in the prompt ('you may use information from mythology and common sense') came back verbatim in the output, forcing the authors to randomise prompt wording.",
+   "source": "CALYPSO: LLMs as Dungeon Masters' Assistants (Zhu, Martin, Head, Callison-Burch; AIIDE 2023) — ar5iv full text",
+   "url": "https://ar5iv.labs.arxiv.org/html/2308.07540",
+   "quote": "include the phrase “mythology and common sense” verbatim",
+   "page": "CALYPSO: LLMs as Dungeon Masters' Assistants (Zhu, Martin, Head, Callison-Burch; AIIDE 2023) — ar5iv full text"
   }
  ]
 }

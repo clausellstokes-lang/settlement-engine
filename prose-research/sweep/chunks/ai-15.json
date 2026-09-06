@@ -1,0 +1,158 @@
+{
+ "name": "ai",
+ "chunk": 15,
+ "indices": [
+  479,
+  480,
+  481,
+  482,
+  483,
+  484,
+  485,
+  486,
+  487,
+  488,
+  489,
+  490,
+  491,
+  492,
+  493
+ ],
+ "claims": [
+  {
+   "index": 479,
+   "feature": "homogenising toward dominant narratives",
+   "claim": "Writers saw a violent homogenising pull toward the narratives of dominant powers and voices.",
+   "source": "Chakrabarty, Padmakumar, Brahman, Muresan — 'Creativity Support in the Age of Large Language Models: An Empirical Study Involving Emerging Writers' (arXiv 2023)",
+   "url": "https://arxiv.org/html/2309.12570",
+   "quote": "a weird and violent kind of homogenizing",
+   "page": ""
+  },
+  {
+   "index": 480,
+   "feature": "weak similes and metaphors",
+   "claim": "Figurative language was judged poor in the little the writers tested.",
+   "source": "Chakrabarty, Padmakumar, Brahman, Muresan — 'Creativity Support in the Age of Large Language Models: An Empirical Study Involving Emerging Writers' (arXiv 2023)",
+   "url": "https://arxiv.org/html/2309.12570",
+   "quote": "Its similes and metaphors aren’t very good",
+   "page": ""
+  },
+  {
+   "index": 481,
+   "feature": "style mimicry is shallow imitation",
+   "claim": "Asked to mimic an author, the model produced a campy facsimile rather than the author's actual wit.",
+   "source": "Chakrabarty, Padmakumar, Brahman, Muresan — 'Creativity Support in the Age of Large Language Models: An Empirical Study Involving Emerging Writers' (arXiv 2023)",
+   "url": "https://arxiv.org/html/2309.12570",
+   "quote": "less ‘artificial intelligence’ and more ‘automatic imitation’",
+   "page": ""
+  },
+  {
+   "index": 482,
+   "feature": "derivative plotting shaped by alignment",
+   "claim": "Plot instincts were boring or carried a particular ethical perspective the writers attributed to alignment.",
+   "source": "Chakrabarty, Padmakumar, Brahman, Muresan — 'Creativity Support in the Age of Large Language Models: An Empirical Study Involving Emerging Writers' (arXiv 2023)",
+   "url": "https://arxiv.org/html/2309.12570",
+   "quote": "The AI’s creative impulses are the definition of derivative",
+   "page": ""
+  },
+  {
+   "index": 483,
+   "feature": "formulaic and too literal",
+   "claim": "Dialogue and description came out formulaic and the model read craft too literally.",
+   "source": "Chakrabarty, Padmakumar, Brahman, Muresan — 'Creativity Support in the Age of Large Language Models: An Empirical Study Involving Emerging Writers' (arXiv 2023)",
+   "url": "https://arxiv.org/html/2309.12570",
+   "quote": "is too literal",
+   "page": ""
+  },
+  {
+   "index": 484,
+   "feature": "writer fights the tool",
+   "claim": "One writer described the session as fighting the model to get what they wanted rather than being helped.",
+   "source": "Chakrabarty, Padmakumar, Brahman, Muresan — 'Creativity Support in the Age of Large Language Models: An Empirical Study Involving Emerging Writers' (arXiv 2023)",
+   "url": "https://arxiv.org/html/2309.12570",
+   "quote": "fighting against the AI to produce what I wanted",
+   "page": ""
+  },
+  {
+   "index": 485,
+   "feature": "Western default suggestions",
+   "claim": "The first suggested food was always pizza or sushi and the first festival invariably Christmas, for Indian writers too.",
+   "source": "Agarwal, Naaman, Vashistha — 'AI Suggestions Homogenize Writing Toward Western Styles and Diminish Cultural Nuances' (CHI 2025)",
+   "url": "https://arxiv.org/html/2409.11360",
+   "quote": "always pizza or sushi",
+   "page": ""
+  },
+  {
+   "index": 486,
+   "feature": "Western gaze on the writer's own culture",
+   "claim": "With suggestions on, Indians described their own food and festivals from a Western, exoticising gaze.",
+   "source": "Agarwal, Naaman, Vashistha — 'AI Suggestions Homogenize Writing Toward Western Styles and Diminish Cultural Nuances' (CHI 2025)",
+   "url": "https://arxiv.org/html/2409.11360",
+   "quote": "describe their own food and festivals from a Western gaze",
+   "page": ""
+  },
+  {
+   "index": 487,
+   "feature": "cross-cultural convergence",
+   "claim": "Indian–American essay similarity rose from 0.48 to 0.54 and nationality-prediction accuracy fell from 90.6% to 83.5% with AI.",
+   "source": "Agarwal, Naaman, Vashistha — 'AI Suggestions Homogenize Writing Toward Western Styles and Diminish Cultural Nuances' (CHI 2025)",
+   "url": "https://arxiv.org/html/2409.11360",
+   "quote": "rose to 0.54",
+   "page": ""
+  },
+  {
+   "index": 488,
+   "feature": "specific detail replaced by generic tropes",
+   "claim": "Regional preparation details gave way to 'rich', 'flavorful', 'aromatic' phrasing that subtly exoticised the dish.",
+   "source": "Agarwal, Naaman, Vashistha — 'AI Suggestions Homogenize Writing Toward Western Styles and Diminish Cultural Nuances' (CHI 2025)",
+   "url": "https://arxiv.org/html/2409.11360",
+   "quote": "subtly exoticizing Indian food",
+   "page": ""
+  },
+  {
+   "index": 489,
+   "feature": "extra editing burden on non-Western writers",
+   "claim": "Indians modified suggestions in 63.5% of tasks versus 59.4% for Americans and gained less per suggestion.",
+   "source": "Agarwal, Naaman, Vashistha — 'AI Suggestions Homogenize Writing Toward Western Styles and Diminish Cultural Nuances' (CHI 2025)",
+   "url": "https://arxiv.org/html/2409.11360",
+   "quote": "Indians lose cultural nuance",
+   "page": ""
+  },
+  {
+   "index": 490,
+   "feature": "Western public figures suggested",
+   "claim": "Initial celebrity suggestions for Indian writers were almost exclusively Western figures and never matched the final choice.",
+   "source": "Agarwal, Naaman, Vashistha — 'AI Suggestions Homogenize Writing Toward Western Styles and Diminish Cultural Nuances' (CHI 2025)",
+   "url": "https://arxiv.org/html/2409.11360",
+   "quote": "almost exclusively Western figures",
+   "page": ""
+  },
+  {
+   "index": 491,
+   "feature": "a single default poetic mode",
+   "claim": "GPT poetry is far more constrained and uniform than human poetry, defaulting to rhymed iambic quatrains.",
+   "source": "Walsh, Preus, Gronski — 'Does ChatGPT Have a Poetic Style?' (CHR 2024, CEUR Vol-3834 paper122)",
+   "url": "https://arxiv.org/html/2410.15299",
+   "quote": "much more constrained and uniform than human poetry",
+   "page": ""
+  },
+  {
+   "index": 492,
+   "feature": "quatrain dominance",
+   "claim": "66.8% of GPT-3.5 and 59.6% of GPT-4 stanzas are quatrains against 16.7% of human stanzas.",
+   "source": "Walsh, Preus, Gronski — 'Does ChatGPT Have a Poetic Style?' (CHR 2024, CEUR Vol-3834 paper122)",
+   "url": "https://arxiv.org/html/2410.15299",
+   "quote": "a whopping 66.8% of all GPT-3.5 stanzas",
+   "page": ""
+  },
+  {
+   "index": 493,
+   "feature": "rhyme even where the form does not ask for it",
+   "claim": "About 90% of GPT poems rhyme versus 65% of human poems, including forms like aubade and pastoral.",
+   "source": "Walsh, Preus, Gronski — 'Does ChatGPT Have a Poetic Style?' (CHR 2024, CEUR Vol-3834 paper122)",
+   "url": "https://arxiv.org/html/2410.15299",
+   "quote": "Around 90% of the poems generated by both",
+   "page": ""
+  }
+ ]
+}

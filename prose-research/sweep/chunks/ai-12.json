@@ -1,0 +1,158 @@
+{
+ "name": "ai",
+ "chunk": 12,
+ "indices": [
+  434,
+  435,
+  436,
+  437,
+  438,
+  439,
+  440,
+  441,
+  442,
+  443,
+  444,
+  445,
+  446,
+  447,
+  448
+ ],
+ "claims": [
+  {
+   "index": 434,
+   "feature": "micro-moments not stories",
+   "claim": "Joon Sung Park: generative agents are good at believable micro-moments but unlikely to be used to create really fun stories.",
+   "source": "NPR — Can AI create compelling video game stories? Writers have their doubts (Vincent Acovino, 2024-03-14; text-only transcript)",
+   "url": "https://text.npr.org/1238647721",
+   "quote": "creating these believable, like, micro-moments",
+   "page": "NPR — Can AI create compelling video game stories? Writers have their doubts (Vincent Acovino, 2024-03-14; text-only transcript)"
+  },
+  {
+   "index": 435,
+   "feature": "pipeline of voices",
+   "claim": "Xalavier Nelson Jr.: eliminating junior writing positions means no mid-levels, no seniors, and no vibrant creative voices later.",
+   "source": "NPR — Can AI create compelling video game stories? Writers have their doubts (Vincent Acovino, 2024-03-14; text-only transcript)",
+   "url": "https://text.npr.org/1238647721",
+   "quote": "they don't become the vibrant, creative voices",
+   "page": "NPR — Can AI create compelling video game stories? Writers have their doubts (Vincent Acovino, 2024-03-14; text-only transcript)"
+  },
+  {
+   "index": 436,
+   "feature": "soulless machines",
+   "claim": "Eric Barone: even if AI becomes indistinguishable from the best writers, he wants games made by human beings.",
+   "source": "NPR — Can AI create compelling video game stories? Writers have their doubts (Vincent Acovino, 2024-03-14; text-only transcript)",
+   "url": "https://text.npr.org/1238647721",
+   "quote": "games made by soulless machines",
+   "page": "NPR — Can AI create compelling video game stories? Writers have their doubts (Vincent Acovino, 2024-03-14; text-only transcript)"
+  },
+  {
+   "index": 437,
+   "feature": "no thread or resolution",
+   "claim": "AI Dungeon's freeform tales have no recognisable thread or resolution; wrapping up is left to the player.",
+   "source": "TapSmart — AI Dungeon review (Jon Mundy, 2020-02-28)",
+   "url": "https://www.tapsmart.com/news/ai-dungeon-freeform-narrative-adventures/",
+   "quote": "no recognizable thread or resolution to any of its freeform tales",
+   "page": "TapSmart — AI Dungeon review (Jon Mundy, 2020-02-28)"
+  },
+  {
+   "index": 438,
+   "feature": "player does the heavy lifting",
+   "claim": "Even when a story makes occasional sense, the player is the one doing all the heavy lifting to make it cohere.",
+   "source": "TapSmart — AI Dungeon review (Jon Mundy, 2020-02-28)",
+   "url": "https://www.tapsmart.com/news/ai-dungeon-freeform-narrative-adventures/",
+   "quote": "you're the one doing all the heavy lifting",
+   "page": "TapSmart — AI Dungeon review (Jon Mundy, 2020-02-28)"
+  },
+  {
+   "index": 439,
+   "feature": "vague witnesses and non-sequiturs",
+   "claim": "A detective scenario became a fever dream of frustratingly vague witnesses and bizarre non-sequiturs, and not in an artfully noirish way.",
+   "source": "TapSmart — AI Dungeon review (Jon Mundy, 2020-02-28)",
+   "url": "https://www.tapsmart.com/news/ai-dungeon-freeform-narrative-adventures/",
+   "quote": "frustratingly vague witnesses and bizarre non-sequiturs",
+   "page": "TapSmart — AI Dungeon review (Jon Mundy, 2020-02-28)"
+  },
+  {
+   "index": 440,
+   "feature": "continuity errors",
+   "claim": "Told he was stabbed 'again' with no first time; a locked door becomes an open, lockless one.",
+   "source": "TapSmart — AI Dungeon review (Jon Mundy, 2020-02-28)",
+   "url": "https://www.tapsmart.com/news/ai-dungeon-freeform-narrative-adventures/",
+   "quote": "stabbed ‘again’ in my sleep (there was no first time)",
+   "page": "TapSmart — AI Dungeon review (Jon Mundy, 2020-02-28)"
+  },
+  {
+   "index": 441,
+   "feature": "no memory of premise",
+   "claim": "The bot has little to no memory of what was established or of the initial prompt, so stories hop off the rails unless constantly reminded.",
+   "source": "148Apps — AI Dungeon review (Campbell Bird, 2019-12-30, 4.5/5)",
+   "url": "https://www.148apps.com/reviews/ai-dungeon-review/",
+   "quote": "little to no memory of what you've already established",
+   "page": "148Apps — AI Dungeon review (Campbell Bird, 2019-12-30, 4.5/5)"
+  },
+  {
+   "index": 442,
+   "feature": "dead-end loops",
+   "claim": "Stories hit dead-end loops where whatever the player types returns the same reply.",
+   "source": "148Apps — AI Dungeon review (Campbell Bird, 2019-12-30, 4.5/5)",
+   "url": "https://www.148apps.com/reviews/ai-dungeon-review/",
+   "quote": "I keep getting the same reply over and over again",
+   "page": "148Apps — AI Dungeon review (Campbell Bird, 2019-12-30, 4.5/5)"
+  },
+  {
+   "index": 443,
+   "feature": "hijacks the protagonist",
+   "claim": "The bot takes control of the player character, swaps characters and hops genres to move things along.",
+   "source": "148Apps — AI Dungeon review (Campbell Bird, 2019-12-30, 4.5/5)",
+   "url": "https://www.148apps.com/reviews/ai-dungeon-review/",
+   "quote": "",
+   "page": "148Apps — AI Dungeon review (Campbell Bird, 2019-12-30, 4.5/5)"
+  },
+  {
+   "index": 444,
+   "feature": "abrupt shifts",
+   "claim": "The story could not decide whether the player had witnessed or survived a plane crash before another abrupt shift upended everything.",
+   "source": "Stuff — AI Dungeon review (Craig Grannell, c. 2020, 4/5) — fetched via curl",
+   "url": "https://www.stuff.tv/app-reviews/ai-dungeon/review",
+   "quote": "another abrupt shift that upended everything",
+   "page": "Stuff — AI Dungeon review (Craig Grannell, c. 2020, 4/5) — fetched via curl"
+  },
+  {
+   "index": 445,
+   "feature": "blandness / genericity",
+   "claim": "Professional comedians found LLM comedy output generic and bland, lacking the incisiveness of human-written language.",
+   "source": "Mirowski, Mathewson, Pittman, Evans — 'A Robot Walks into a Bar: Can Language Models Serve as Creativity Support Tools for Comedy?' (FAccT 2024)",
+   "url": "https://arxiv.org/html/2405.20956",
+   "quote": "the words seem very generic. They lack that incisiveness",
+   "page": ""
+  },
+  {
+   "index": 446,
+   "feature": "no point of view; cannot punch up or down",
+   "claim": "Without a perspective the model cannot calibrate who a joke targets, so it takes no comedic risks.",
+   "source": "Mirowski, Mathewson, Pittman, Evans — 'A Robot Walks into a Bar: Can Language Models Serve as Creativity Support Tools for Comedy?' (FAccT 2024)",
+   "url": "https://arxiv.org/html/2405.20956",
+   "quote": "It had no perspective, so it couldn’t take any risks",
+   "page": ""
+  },
+  {
+   "index": 447,
+   "feature": "dated, biased comedy tropes",
+   "claim": "Outputs read as stale mid-century material, described by participants as bland and biased tropes.",
+   "source": "Mirowski, Mathewson, Pittman, Evans — 'A Robot Walks into a Bar: Can Language Models Serve as Creativity Support Tools for Comedy?' (FAccT 2024)",
+   "url": "https://arxiv.org/html/2405.20956",
+   "quote": "cruise ship comedy material from the 1950s",
+   "page": ""
+  },
+  {
+   "index": 448,
+   "feature": "setup without punchline",
+   "claim": "Comedians used the model only for setup and structure because it could not land a punchline.",
+   "source": "Mirowski, Mathewson, Pittman, Evans — 'A Robot Walks into a Bar: Can Language Models Serve as Creativity Support Tools for Comedy?' (FAccT 2024)",
+   "url": "https://arxiv.org/html/2405.20956",
+   "quote": "just consistently bad",
+   "page": ""
+  }
+ ]
+}

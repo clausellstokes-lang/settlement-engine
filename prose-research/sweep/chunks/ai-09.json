@@ -1,0 +1,158 @@
+{
+ "name": "ai",
+ "chunk": 9,
+ "indices": [
+  389,
+  390,
+  391,
+  392,
+  393,
+  394,
+  395,
+  396,
+  397,
+  398,
+  399,
+  400,
+  401,
+  402,
+  403
+ ],
+ "claims": [
+  {
+   "index": 389,
+   "feature": "rules not applied",
+   "claim": "ChatGPT violated the one-page ruleset's two core mechanics within the first turns (no complication after a success, arithmetic wrong on the target number).",
+   "source": "The Alexandrian — Thought of the Day: GenAI and RPGs (Justin Alexander, 2025-12-28)",
+   "url": "https://thealexandrian.net/wordpress/53232/roleplaying-games/thought-of-the-day-genai-and-rpgs",
+   "quote": "",
+   "page": "The Alexandrian — Thought of the Day: GenAI and RPGs (Justin Alexander, 2025-12-28)"
+  },
+  {
+   "index": 390,
+   "feature": "telling emotion instead of showing",
+   "claim": "Read-aloud announces 'the desperate cry of a woman in distress' and that a mask 'emanates a palpable malevolence' instead of letting players feel it.",
+   "source": "tenfootpole.org — The Curse of the Swamp (Bryce Lynch review, 2024-06-01, plus comments)",
+   "url": "https://tenfootpole.org/ironspike/?p=9177",
+   "quote": "You're telling people things. You want to SHOW people things.",
+   "page": "tenfootpole.org — The Curse of the Swamp (Bryce Lynch review, 2024-06-01, plus comments)"
+  },
+  {
+   "index": 391,
+   "feature": "AI-style prose recognised by readers",
+   "claim": "Commenters flagged the prose as AI or EASL and the publisher's reply as written in ChatGPT style; hooks were 'standard please help me stuff, very abstract'.",
+   "source": "tenfootpole.org — The Curse of the Swamp (Bryce Lynch review, 2024-06-01, plus comments)",
+   "url": "https://tenfootpole.org/ironspike/?p=9177",
+   "quote": "the prose reeks of either EASL or AI",
+   "page": "tenfootpole.org — The Curse of the Swamp (Bryce Lynch review, 2024-06-01, plus comments)"
+  },
+  {
+   "index": 392,
+   "feature": "content-free padding openers",
+   "claim": "Room openers like 'Arriving at the house, the PCs see a strange sight: the structure appears to be…' say nothing and can be deleted without impact; every encounter does this.",
+   "source": "tenfootpole.org — A Strange House (Bryce Lynch review, 2024-11-25, plus comments)",
+   "url": "https://tenfootpole.org/ironspike/?p=9471",
+   "quote": "Note the padding. Note how it doesn't say ANYTHING.",
+   "page": "tenfootpole.org — A Strange House (Bryce Lynch review, 2024-11-25, plus comments)"
+  },
+  {
+   "index": 393,
+   "feature": "ChatGPT default room-description style",
+   "claim": "A commenter identifies the padding as ChatGPT's default when asked to 'write a room description for a D&D game'; 'be brief' removes it, but the author must first see it as meaningless.",
+   "source": "tenfootpole.org — A Strange House (Bryce Lynch review, 2024-11-25, plus comments)",
+   "url": "https://tenfootpole.org/ironspike/?p=9471",
+   "quote": "A tell-tale sign of ChatGPT, btw. It's its default style",
+   "page": "tenfootpole.org — A Strange House (Bryce Lynch review, 2024-11-25, plus comments)"
+  },
+  {
+   "index": 394,
+   "feature": "training corpus mediocrity",
+   "claim": "Commenters note the model's style inherits the mediocrity of the typical D&D adventure writing it was trained on.",
+   "source": "tenfootpole.org — A Strange House (Bryce Lynch review, 2024-11-25, plus comments)",
+   "url": "https://tenfootpole.org/ironspike/?p=9471",
+   "quote": "the typical D&D adventure writing ChatGPT was trained on",
+   "page": "tenfootpole.org — A Strange House (Bryce Lynch review, 2024-11-25, plus comments)"
+  },
+  {
+   "index": 395,
+   "feature": "abstract adjective vs concrete detail",
+   "claim": "The review contrasts the module's weak abstract adjectives with the concrete detail a good description needs.",
+   "source": "tenfootpole.org — A Strange House (Bryce Lynch review, 2024-11-25, plus comments)",
+   "url": "https://tenfootpole.org/ironspike/?p=9471",
+   "quote": "",
+   "page": "tenfootpole.org — A Strange House (Bryce Lynch review, 2024-11-25, plus comments)"
+  },
+  {
+   "index": 396,
+   "feature": "second-person action narration",
+   "claim": "The intro read-aloud is full of second-person narration of the players' own actions, which a commenter attributes to ChatGPT's default unless told 'not to describe my actions'.",
+   "source": "tenfootpole.org — A Plague of Rats (Bryce Lynch review, 2024-06-08, plus comments)",
+   "url": "https://tenfootpole.org/ironspike/?p=9189",
+   "quote": "YOU step off the boat. YOU see a so and so.",
+   "page": "tenfootpole.org — A Plague of Rats (Bryce Lynch review, 2024-06-08, plus comments)"
+  },
+  {
+   "index": 397,
+   "feature": "identical prompts yield identical corridors",
+   "claim": "A commenter received the module's exact corridor phrase from ChatGPT a year earlier for a different sewer adventure — same prompt, same output.",
+   "source": "tenfootpole.org — A Plague of Rats (Bryce Lynch review, 2024-06-08, plus comments)",
+   "url": "https://tenfootpole.org/ironspike/?p=9189",
+   "quote": "the results will be almost or exactly the same",
+   "page": "tenfootpole.org — A Plague of Rats (Bryce Lynch review, 2024-06-08, plus comments)"
+  },
+  {
+   "index": 398,
+   "feature": "read-aloud/DM-text boundary blur",
+   "claim": "No typographic distinction between read-aloud and DM text; the long intro diverts player attention.",
+   "source": "tenfootpole.org — A Plague of Rats (Bryce Lynch review, 2024-06-08, plus comments)",
+   "url": "https://tenfootpole.org/ironspike/?p=9189",
+   "quote": "It just sort of all runs together",
+   "page": "tenfootpole.org — A Plague of Rats (Bryce Lynch review, 2024-06-08, plus comments)"
+  },
+  {
+   "index": 399,
+   "feature": "stock decay-and-dripping sensory line",
+   "claim": "The module's 'stench of decay… dripping water echoes off the damp walls' line is cited as the predictable generated sensory opener; three dock encounters reuse identical read-aloud.",
+   "source": "tenfootpole.org — A Plague of Rats (Bryce Lynch review, 2024-06-08, plus comments)",
+   "url": "https://tenfootpole.org/ironspike/?p=9189",
+   "quote": "",
+   "page": "tenfootpole.org — A Plague of Rats (Bryce Lynch review, 2024-06-08, plus comments)"
+  },
+  {
+   "index": 400,
+   "feature": "backstory for everything",
+   "claim": "Everything in the module gets a backstory and the read-aloud reveals all details, so players need not engage in the back-and-forth that is the heart of play; a commenter asks whether the publisher relies on AI.",
+   "source": "tenfootpole.org — The Temple of the Serpent Queen (Bryce Lynch review, 2024-08-07, plus comments)",
+   "url": "https://tenfootpole.org/ironspike/?p=9302",
+   "quote": "",
+   "page": "tenfootpole.org — The Temple of the Serpent Queen (Bryce Lynch review, 2024-08-07, plus comments)"
+  },
+  {
+   "index": 401,
+   "feature": "plausible word-sequences (technobabble)",
+   "claim": "ChatGPT's explanations are superficially plausible technobabble that get less clear on inspection because it is generating plausible word-sequences with no idea what they mean.",
+   "source": "tenfootpole forum — Making a Module using ChatGPT, page 4 (Dec 2022)",
+   "url": "http://tenfootpole.org/forum/index.php?threads/making-a-module-using-chatgpt.386/page-4",
+   "quote": "just generating plausible word-sequences",
+   "page": "tenfootpole forum — Making a Module using ChatGPT, page 4 (Dec 2022)"
+  },
+  {
+   "index": 402,
+   "feature": "spatial nonsense",
+   "claim": "Generated rooms had trap doors in the ceiling that characters fall through; the bot does not understand up and down.",
+   "source": "tenfootpole forum — Making a Module using ChatGPT, page 4 (Dec 2022)",
+   "url": "http://tenfootpole.org/forum/index.php?threads/making-a-module-using-chatgpt.386/page-4",
+   "quote": "does not understand the implications of “up” and “down”",
+   "page": "tenfootpole forum — Making a Module using ChatGPT, page 4 (Dec 2022)"
+  },
+  {
+   "index": 403,
+   "feature": "fluff without mechanics",
+   "claim": "A generated 'burst of flame' had no damage stats — pure fluff with no game effect.",
+   "source": "tenfootpole forum — Making a Module using ChatGPT, page 4 (Dec 2022)",
+   "url": "http://tenfootpole.org/forum/index.php?threads/making-a-module-using-chatgpt.386/page-4",
+   "quote": "it's pure fluff with no effect",
+   "page": "tenfootpole forum — Making a Module using ChatGPT, page 4 (Dec 2022)"
+  }
+ ]
+}

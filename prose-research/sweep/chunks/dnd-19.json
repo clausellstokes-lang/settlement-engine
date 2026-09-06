@@ -1,0 +1,158 @@
+{
+ "name": "dnd",
+ "chunk": 19,
+ "indices": [
+  334,
+  335,
+  336,
+  337,
+  338,
+  339,
+  340,
+  341,
+  342,
+  343,
+  344,
+  345,
+  346,
+  347,
+  348
+ ],
+ "claims": [
+  {
+   "index": 334,
+   "feature": "real-world religion analogs",
+   "claim": "Real-world religions may not serve as analogs for evil D&D religions.",
+   "source": "DnD Standards (Wizards of the Coast, 2020) in the Dungeoncraft Pack 2023-12-04",
+   "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+   "quote": "Don’t use real-world religions as analogs for evil religions",
+   "page": ""
+  },
+  {
+   "index": 335,
+   "feature": "credible threat",
+   "claim": "Perkins and Bilsland's second principle is that an adventure needs a credible threat with logical goals the heroes can uncover and thwart.",
+   "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "An adventure needs a credible threat",
+   "page": "p.1"
+  },
+  {
+   "index": 336,
+   "feature": "here and now",
+   "claim": "Principle four: adventures are about the here and now; the less backstory needed to set things up, the better.",
+   "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "An adventure is about the here and now.",
+   "page": "p.1"
+  },
+  {
+   "index": 337,
+   "feature": "concision for the DM",
+   "claim": "Principle seven: present information as concisely as possible to ease the DM's burden, reserving descriptive texture for NPCs, dungeon dressing, and treasure.",
+   "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "to ease the burden on the DM",
+   "page": "p.1"
+  },
+  {
+   "index": 338,
+   "feature": "logical order of information",
+   "claim": "Principle six: information appears in the order a first-time DM needs it, with an NPC introduced before being named casually and nothing important buried.",
+   "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "An adventure needs to present information in a logical",
+   "page": "p.1"
+  },
+  {
+   "index": 339,
+   "feature": "NPC description content",
+   "claim": "NPCs get character through distinctive physical features, mannerisms, and quirks the DM can roleplay.",
+   "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "features, mannerisms, and quirks",
+   "page": "p.2"
+  },
+  {
+   "index": 340,
+   "feature": "clichés with a spin",
+   "claim": "Familiar tropes (taverns, dragons, mad wizards) are acceptable if the adventure can still surprise; writers add their own spin.",
+   "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "as long as the adventure can still surprise",
+   "page": "p.1"
+  },
+  {
+   "index": 341,
+   "feature": "PCs as heroes",
+   "claim": "The player characters are the heroes, not spectators; fetch quests for a lazy merchant are called out as underwhelming.",
+   "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "The player characters (PCs) are the heroes",
+   "page": "p.1"
+  },
+  {
+   "index": 342,
+   "feature": "no railroading",
+   "claim": "Text must account for players' decisions and alternate outcomes, or players feel railroaded.",
+   "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "players will feel “railroaded” by the plot",
+   "page": "p.1"
+  },
+  {
+   "index": 343,
+   "feature": "rise above the humdrum",
+   "claim": "Encounters are elevated by odd monster pairings, terrain, hazards, ruses, complex motives, and plot twists.",
+   "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "An adventure needs to rise above the humdrum",
+   "page": "p.2"
+  },
+  {
+   "index": 344,
+   "feature": "read adventures to write them",
+   "claim": "The guide's craft advice is to read many good adventures, as novelists read novels.",
+   "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "The more good D&D adventures you read, the",
+   "page": "p.2"
+  },
+  {
+   "index": 345,
+   "feature": "organized play: no preset ending",
+   "claim": "AL writers must not decide in advance how the adventure ends, even in a 2- or 4-hour slot.",
+   "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "how the adventure should end",
+   "page": "p.2"
+  },
+  {
+   "index": 346,
+   "feature": "Chicago edition cited by the design guide",
+   "claim": "The design guide still cites Chicago 16th edition, one edition behind the style guide's 17th, showing the bundle's documents were not synchronized.",
+   "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "Chicago Manual of Style (16th edition)",
+   "page": "p.2"
+  },
+  {
+   "index": 347,
+   "feature": "bundle cross-reference to format template",
+   "claim": "The design guide points writers to the House Style Guide for grammar and to the Adventure Format Template for layout, which is where boxed-text rules live.",
+   "source": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "quote": "",
+   "page": "p.2"
+  },
+  {
+   "index": 348,
+   "feature": "Realms tone: hopeful",
+   "claim": "The Forgotten Realms guide sets a hopeful tone in which the good guys eventually win, contrasted with cynical Greyhawk and tragic Dragonlance.",
+   "source": "Forgotten Realms Style Guide (Wizards of the Coast, bundle document)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/forgotten_realms_style_guide.pdf",
+   "quote": "The Forgotten Realms is a hopeful setting.",
+   "page": "p.1"
+  }
+ ]
+}

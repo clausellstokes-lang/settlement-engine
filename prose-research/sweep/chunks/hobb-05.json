@@ -1,0 +1,28 @@
+{
+ "name": "hobb",
+ "chunk": 5,
+ "indices": [
+  75,
+  76
+ ],
+ "claims": [
+  {
+   "index": 75,
+   "feature": "Lindholm more to the point",
+   "claim": "A reader of The Inheritance finds Hobb epic and Lindholm more to the point.",
+   "source": "Val's Random Comments review (2011)",
+   "url": "http://valsrandomcomments.blogspot.com/2011/04/inheritance-robin-hobb-and-megan.html",
+   "quote": "Lindholm writes more to the point",
+   "page": ""
+  },
+  {
+   "index": 76,
+   "feature": "lived not read",
+   "claim": "Readers report the books are lived rather than read.",
+   "source": "Jackie Morris, Reading Robin Hobb",
+   "url": "https://www.jackiemorris.co.uk/reading-robin-hobb/",
+   "quote": "you don't so much read them as live them",
+   "page": ""
+  }
+ ]
+}

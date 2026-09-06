@@ -1,0 +1,158 @@
+{
+ "name": "wolfe",
+ "chunk": 6,
+ "indices": [
+  90,
+  91,
+  92,
+  93,
+  94,
+  95,
+  96,
+  97,
+  98,
+  99,
+  100,
+  101,
+  102,
+  103,
+  104
+ ],
+ "claims": [
+  {
+   "index": 90,
+   "feature": "indirection deciphered by the reader",
+   "claim": "The true story is conveyed by indirection and reveals itself through the reader's ultimate decipherment.",
+   "source": "Clute, SFE entry",
+   "url": "https://sf-encyclopedia.com/entry/wolfe_gene",
+   "quote": "conveyed by indirection",
+   "page": ""
+  },
+  {
+   "index": 91,
+   "feature": "subliminal clues lucid in retrospect",
+   "claim": "Fifth Head's clues are almost subliminal on first pass but in retrospect or after rereading lucid and inevitable, and the key twists are extractable from the manuscript that tells the story.",
+   "source": "Clute, SFE entry",
+   "url": "https://sf-encyclopedia.com/entry/wolfe_gene",
+   "quote": "in retrospect or after rereading almost invariably lucid",
+   "page": ""
+  },
+  {
+   "index": 92,
+   "feature": "recursive retrospect",
+   "claim": "Clute names the structure shared by the major works 'recursive retrospect': a narrator looking back on events whose meaning loops back on the telling.",
+   "source": "Clute, SFE entry",
+   "url": "https://sf-encyclopedia.com/entry/wolfe_gene",
+   "quote": "recursive retrospect",
+   "page": ""
+  },
+  {
+   "index": 93,
+   "feature": "taxing reticences of presentation",
+   "claim": "Wolfe's reticences of presentation make the work very nearly opaque, combining the utterly present and the implacably remote.",
+   "source": "Clute, SFE entry",
+   "url": "https://sf-encyclopedia.com/entry/wolfe_gene",
+   "quote": "taxing reticences of presentation",
+   "page": ""
+  },
+  {
+   "index": 94,
+   "feature": "confessional mode under question",
+   "claim": "Peace is a childhood narrated all unknowingly from beyond the grave, its truth value unrelentingly put under the question.",
+   "source": "Clute, SFE entry",
+   "url": "https://sf-encyclopedia.com/entry/wolfe_gene",
+   "quote": "unrelentingly put under the question",
+   "page": ""
+  },
+  {
+   "index": 95,
+   "feature": "sins of omission with visible gaps",
+   "claim": "Severian's unreliability is mostly omission; the gaps are not hidden but catch gently on first reading and insistently on rereading.",
+   "source": "Evenson, Reactor 2021",
+   "url": "https://reactormag.com/what-makes-an-unreliable-narrator-severians-voice-in-gene-wolfes-the-book-of-the-new-sun/",
+   "quote": "more sins of omission than outright deception",
+   "page": ""
+  },
+  {
+   "index": 96,
+   "feature": "telling order differs from event order",
+   "claim": "The rearranged order of recounting, combined with gaps, leaves it uncertain whether Severian hides things or merely tells what he wants in the order he wants, making the unreliability feel human rather than literary.",
+   "source": "Evenson, Reactor 2021",
+   "url": "https://reactormag.com/what-makes-an-unreliable-narrator-severians-voice-in-gene-wolfes-the-book-of-the-new-sun/",
+   "quote": "less literarily motivated, more informal and human",
+   "page": ""
+  },
+  {
+   "index": 97,
+   "feature": "hint placed before its explanation",
+   "claim": "Severian's obscure wish to carry the moon-landing picture to a forest reads as random until pages later we learn the moon is now forested; Wolfe often passes such moments in silence.",
+   "source": "Evenson, Reactor 2021",
+   "url": "https://reactormag.com/what-makes-an-unreliable-narrator-severians-voice-in-gene-wolfes-the-book-of-the-new-sun/",
+   "quote": "we later discover that it's exactly right",
+   "page": ""
+  },
+  {
+   "index": 98,
+   "feature": "overlapping selves narrate as one",
+   "claim": "After absorbing Thecla and the Autarch the narrator is a multiplicity speaking as a oneness; a parenthetical memory of torturing for fun turns out to be Thecla's.",
+   "source": "Evenson, Reactor 2021",
+   "url": "https://reactormag.com/what-makes-an-unreliable-narrator-severians-voice-in-gene-wolfes-the-book-of-the-new-sun/",
+   "quote": "a multiplicity trying to speak as if it were a oneness",
+   "page": ""
+  },
+  {
+   "index": 99,
+   "feature": "chapter ends in muddle explained next chapter (reader comment)",
+   "claim": "A commenter observes that chapters tend to end in an incoherent hugger-mugger that the next chapter's opening explains.",
+   "source": "Evenson, Reactor 2021 (comment by NancyLebovitz)",
+   "url": "https://reactormag.com/what-makes-an-unreliable-narrator-severians-voice-in-gene-wolfes-the-book-of-the-new-sun/",
+   "quote": "explained at the beginning of the next chapter",
+   "page": "comments"
+  },
+  {
+   "index": 100,
+   "feature": "miracle never acknowledged by the narrator (reader comment)",
+   "claim": "Commenters note Severian resurrects Dorcas with the Claw and never states that he did so, even after he learns the Claw's power.",
+   "source": "Evenson, Reactor 2021 (comments by AndyLove, pfsmith)",
+   "url": "https://reactormag.com/what-makes-an-unreliable-narrator-severians-voice-in-gene-wolfes-the-book-of-the-new-sun/",
+   "quote": "",
+   "page": "comments"
+  },
+  {
+   "index": 101,
+   "feature": "three-level diction",
+   "claim": "Wolfe eschews neologism; his obscure real words work at a surface level, a mystery-clue level and an allusive level, which drives close reading and rereading.",
+   "source": "Gerwel 2014",
+   "url": "https://aidanmoher.com/blog/featured-article/2014/07/gene-wolfe-reliably-unreliable-author-chris-gerwel/",
+   "quote": "Wolfe eschews the use of neologism",
+   "page": ""
+  },
+  {
+   "index": 102,
+   "feature": "unstated premise solved from clues (Peace)",
+   "claim": "Peace never states that its narrator is dead, in a memory-palace purgatory, and probably a multiple murderer; the reader must identify and solve the puzzle from clues.",
+   "source": "Gerwel 2014",
+   "url": "https://aidanmoher.com/blog/featured-article/2014/07/gene-wolfe-reliably-unreliable-author-chris-gerwel/",
+   "quote": "a puzzle which must be identified and then solved",
+   "page": ""
+  },
+  {
+   "index": 103,
+   "feature": "first sentence paid off by one later line",
+   "claim": "The opening sentence about the fallen elm becomes clear only when connected to a single, seemingly unrelated line of dialogue in the novel's final third.",
+   "source": "Gerwel 2014",
+   "url": "https://aidanmoher.com/blog/featured-article/2014/07/gene-wolfe-reliably-unreliable-author-chris-gerwel/",
+   "quote": "a different, single, and seemingly unrelated line",
+   "page": ""
+  },
+  {
+   "index": 104,
+   "feature": "forgetting-yet-consistent vs remembering-yet-lying",
+   "claim": "Severian cannot forget yet lies and is inconsistent; Latro cannot remember yet his narrative is consistent, an inversion that asks which narrator is trustworthy.",
+   "source": "Gerwel 2014",
+   "url": "https://aidanmoher.com/blog/featured-article/2014/07/gene-wolfe-reliably-unreliable-author-chris-gerwel/",
+   "quote": "his narrative is consistent throughout",
+   "page": ""
+  }
+ ]
+}

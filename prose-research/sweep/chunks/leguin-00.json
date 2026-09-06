@@ -2,157 +2,157 @@
  "name": "leguin",
  "chunk": 0,
  "indices": [
-  0,
-  1,
-  2,
-  3,
-  4,
-  5,
-  6,
-  7,
-  8,
-  9,
-  10,
-  11,
-  12,
-  13,
-  14
+  45,
+  46,
+  47,
+  48,
+  49,
+  50,
+  51,
+  52,
+  53,
+  54,
+  55,
+  56,
+  57,
+  58,
+  59
  ],
  "claims": [
   {
-   "index": 0,
-   "feature": "style is the book",
-   "claim": "Le Guin holds that style is not an ingredient added to a fantasy but the book itself; strip it and only a plot synopsis remains, a claim she calls 'absolutely true of fantasy'.",
-   "source": "Le Guin, 'From Elfland to Poughkeepsie' (1973), full essay text (PDF)",
-   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
-   "quote": "The style, of course, is the book.",
-   "page": "p. 9"
-  },
-  {
-   "index": 1,
-   "feature": "plain noble style",
-   "claim": "She argues most epics, the Mabinogion and the sagas use straightforward language that keeps oral directness, and that plainness is the noblest and hardest register for heroic fantasy.",
-   "source": "Le Guin, 'From Elfland to Poughkeepsie' (1973), full essay text (PDF)",
-   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
-   "quote": "A plain language is the noblest of all.",
-   "page": "p. 8"
-  },
-  {
-   "index": 2,
-   "feature": "fake plainness (journalistic prose)",
-   "claim": "She separates true plainness from the flat, inexact 'Poughkeepsie' prose of commercial fantasy, which is journalism's deliberate suppression of sensibility applied to the remote and elemental.",
-   "source": "Le Guin, 'From Elfland to Poughkeepsie' (1973), full essay text (PDF)",
-   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
-   "quote": "It is not really simple, but flat.",
-   "page": "p. 8"
-  },
-  {
-   "index": 3,
-   "feature": "sensory specificity",
-   "claim": "Sensory cues are 'extremely important in imaginative writing'; when rocks, wind and trees are vague and generalized the scene is not felt.",
-   "source": "Le Guin, 'From Elfland to Poughkeepsie' (1973), full essay text (PDF)",
-   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
-   "quote": "the scenery is cardboard, or plastic",
-   "page": "p. 8"
-  },
-  {
-   "index": 4,
-   "feature": "archaism as high wire",
-   "claim": "The archaic manner is a perfect distancer only when done perfectly; botched thee/thou verbs, subjunctives, 'mayhap' and 'ichor' are the touchstones of failure.",
-   "source": "Le Guin, 'From Elfland to Poughkeepsie' (1973), full essay text (PDF)",
-   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
-   "quote": "It's a high wire: one slip spoils all.",
-   "page": "p. 6"
-  },
-  {
-   "index": 5,
-   "feature": "distance without archaism",
-   "claim": "Archaisms are inessential to distancing from the ordinary: Jack Vance's aloof, restrained, consistent narrative and dialogue prose is an achieved style with none.",
-   "source": "Le Guin, 'From Elfland to Poughkeepsie' (1973), full essay text (PDF)",
-   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
-   "quote": "And it contains no archaisms at all.",
-   "page": "p. 7"
-  },
-  {
-   "index": 6,
-   "feature": "register consistency",
-   "claim": "Alternating colloquial American for humour with formal usage for earnest moments (Leiber, Zelazny) jerks the reader between Elfland and Poughkeepsie and dissolves the characters' coherence.",
-   "source": "Le Guin, 'From Elfland to Poughkeepsie' (1973), full essay text (PDF)",
-   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
-   "quote": "the characters lose coherence in my mind",
-   "page": "p. 7"
-  },
-  {
-   "index": 7,
-   "feature": "dialogue diction as the test",
-   "claim": "Speech reveals character whether the author knows it or not; a lord who says 'I could have told you that' can never be a hero, and genuine Elfland dialogue cannot be relocated to Capitol Hill by changing four words.",
-   "source": "Le Guin, 'From Elfland to Poughkeepsie' (1973), full essay text (PDF)",
-   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
-   "quote": "Speech expresses character.",
-   "page": "p. 4"
-  },
-  {
-   "index": 8,
-   "feature": "flexible plain range (Tolkien model)",
-   "claim": "Tolkien's plain clear English is praised for flexibility and variety, moving from commonplace to stately and sliding into metre unnoticed, with an unremarkable vocabulary and everything direct, concrete and simple.",
-   "source": "Le Guin, 'From Elfland to Poughkeepsie' (1973), full essay text (PDF)",
-   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
-   "quote": "Its outstanding virtue is its flexibility, its variety.",
-   "page": "p. 8"
-  },
-  {
-   "index": 9,
-   "feature": "musical test: sound, syntax, rhythm",
-   "claim": "Good prose, even archaic (Eddison), is judged visually for precision and musically for the sound of words, the movement of syntax and the rhythm of sentences, with nothing faked or blurred.",
-   "source": "Le Guin, 'From Elfland to Poughkeepsie' (1973), full essay text (PDF)",
-   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
-   "quote": "the movement of the syntax, and the rhythm of the sentences",
-   "page": "p. 6"
-  },
-  {
-   "index": 10,
-   "feature": "every word counts (exposed construct)",
-   "claim": "In fantasy there is no borrowed reality to hide flaws, only a construct built in a void with every seam exposed, so every word counts and the only voice is the creator's.",
-   "source": "Le Guin, 'From Elfland to Poughkeepsie' (1973), full essay text (PDF)",
-   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
-   "quote": "And every word counts.",
-   "page": "p. 10"
-  },
-  {
-   "index": 11,
-   "feature": "polysyndeton as costume",
-   "claim": "Imitation Dunsany is diagnosed as elaborate made-up names, vague gorgeous cities and many sentences beginning with 'And' — biblical cadence worn as costume.",
-   "source": "Le Guin, 'From Elfland to Poughkeepsie' (1973), full essay text (PDF)",
-   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
-   "quote": "a great many sentences beginning with \"And.\"",
-   "page": "p. 5"
-  },
-  {
-   "index": 12,
-   "feature": "passion invests trivial acts",
-   "claim": "The Eddison and Morris dialogue passages show nothing happening (reading a book, dividing a rabbit) yet invest trivial acts with importance, emotion and vitality — the elevation lies in the speech, not the event.",
-   "source": "Le Guin, 'From Elfland to Poughkeepsie' (1973), full essay text (PDF)",
-   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
-   "quote": "with what importance they invest these trivial acts",
-   "page": "p. 4"
-  },
-  {
-   "index": 13,
-   "feature": "simple timelessness (Tolkien dialogue)",
-   "claim": "Tolkien's speakers use 'an English extraordinary for its simple timelessness' with sobriety, wit and force — the language of men of character rather than mannered archaism.",
-   "source": "Le Guin, 'From Elfland to Poughkeepsie' (1973), full essay text (PDF)",
-   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
-   "quote": "an English extraordinary for its simple timelessness",
-   "page": "p. 4"
-  },
-  {
-   "index": 14,
-   "feature": "style as fantasy's authenticity test",
-   "claim": "The Wikipedia synthesis reads the essay as claiming fantastic creation must reach into words and grammar, and cites Peter S. Beagle calling it the definitive piece on why sprinkling thees and thous fails.",
-   "source": "Wikipedia: From Elfland to Poughkeepsie",
-   "url": "https://en.wikipedia.org/wiki/From_Elfland_to_Poughkeepsie",
-   "quote": "reach to the very words and grammar",
+   "index": 45,
+   "feature": "clarity and evocative precision",
+   "claim": "The Left Hand of Darkness is told in a prose notable for its clarity and evocative precision.",
+   "source": "Encyclopedia of Science Fiction (SFE), entry 'Le Guin, Ursula K'",
+   "url": "https://sf-encyclopedia.com/entry/le_guin_ursula_k",
+   "quote": "a prose notable for its clarity and evocative precision",
    "page": ""
+  },
+  {
+   "index": 46,
+   "feature": "motifs as story",
+   "claim": "Archetypal motif pairs (darkness/light, root/branch, language/silence) are woven until the motifs are the story, treated as balanced twins rather than polarities.",
+   "source": "Encyclopedia of Science Fiction (SFE), entry 'Le Guin, Ursula K'",
+   "url": "https://sf-encyclopedia.com/entry/le_guin_ursula_k",
+   "quote": "the motifs are the story",
+   "page": ""
+  },
+  {
+   "index": 47,
+   "feature": "restrained immanence",
+   "claim": "Searoad's nonfantastic stories convey 'the same capably restrained immanence' — restraint named as a constant of her manner.",
+   "source": "Encyclopedia of Science Fiction (SFE), entry 'Le Guin, Ursula K'",
+   "url": "https://sf-encyclopedia.com/entry/le_guin_ursula_k",
+   "quote": "capably restrained immanence",
+   "page": ""
+  },
+  {
+   "index": 48,
+   "feature": "sad, powerful, quiet (Tehanu)",
+   "claim": "Tehanu is described as a sad, powerful, quiet book about the strength of women.",
+   "source": "Encyclopedia of Science Fiction (SFE), entry 'Le Guin, Ursula K'",
+   "url": "https://sf-encyclopedia.com/entry/le_guin_ursula_k",
+   "quote": "a sad, powerful, quiet book",
+   "page": ""
+  },
+  {
+   "index": 49,
+   "feature": "magus-root neologisms",
+   "claim": "Le Guin avoids 'magician' (tainted by stage illusion) and coins Archmage, magelight, magewind and magery from Latin magus — none in the OED — so that the vocabulary itself resets the reader's assumptions about magic.",
+   "source": "Tom Shippey, 'The Magic Art and the Evolution of Words' (Hard Reading, Liverpool UP 2016; orig. Mosaic 1977) — chapter abstract",
+   "url": "https://academic.oup.com/liverpool-scholarship-online/book/43316/chapter/363083559",
+   "quote": "based on a semantic point",
+   "page": ""
+  },
+  {
+   "index": 50,
+   "feature": "true-name semantics",
+   "claim": "The magic system rests on a 'Rumpelstiltskin theory' in which every thing has a true name distinct from ordinary language, and knowing it gives power — a linguistic premise that carries plot and theme.",
+   "source": "Tom Shippey, 'The Magic Art and the Evolution of Words' (Hard Reading, Liverpool UP 2016; orig. Mosaic 1977) — chapter abstract",
+   "url": "https://academic.oup.com/liverpool-scholarship-online/book/43316/chapter/363083559",
+   "quote": "Rumpelstiltskin theory",
+   "page": ""
+  },
+  {
+   "index": 51,
+   "feature": "sentence rhythm foreshadows the whole",
+   "claim": "Kelso reads the Lathe of Heaven jellyfish sentence's four opposing blocks (two compound adjectives, two clauses) as an ocean-on-beach here-and-back rhythm that foreshadows the novel's yin/yang structure of recurrence.",
+   "source": "Sylvia A. Kelso, 'Boldly to Re-Venture: New Writing on the Works of Ursula K. Le Guin', Paradoxa 21 (2008), pp. 7–22 (PDF)",
+   "url": "https://paradoxa.com/wp-content/uploads/2020/07/1-Boldly-to-Re-Venture-New-Writing-on-the-Works-of-Ursula-K.-Le-Guin-Kelso-pp-7-22.pdf",
+   "quote": "rhythm at sentence level foreshadows the tenor",
+   "page": "pp. 14–15"
+  },
+  {
+   "index": 52,
+   "feature": "move toward austerity",
+   "claim": "Like Yeats, Le Guin moves toward simplicity or austerity in both rhythm and content of later work; Tehanu begins in farm life and ends among a few goats and bean vines.",
+   "source": "Sylvia A. Kelso, 'Boldly to Re-Venture: New Writing on the Works of Ursula K. Le Guin', Paradoxa 21 (2008), pp. 7–22 (PDF)",
+   "url": "https://paradoxa.com/wp-content/uploads/2020/07/1-Boldly-to-Re-Venture-New-Writing-on-the-Works-of-Ursula-K.-Le-Guin-Kelso-pp-7-22.pdf",
+   "quote": "move toward simplicity, or at least austerity",
+   "page": "p. 16"
+  },
+  {
+   "index": 53,
+   "feature": "stage business as rhythmic punctuation",
+   "claim": "In the Tenar–Moss rush-splitting scene the 'business' works as a suite of variations for pause and emphasis: the leisurely 'They split rushes for a while in silence' quickens to the snaps of 'neatly, quickly, with her nail' and is cut by the bare 'They split rushes.'",
+   "source": "Sylvia A. Kelso, 'Boldly to Re-Venture: New Writing on the Works of Ursula K. Le Guin', Paradoxa 21 (2008), pp. 7–22 (PDF)",
+   "url": "https://paradoxa.com/wp-content/uploads/2020/07/1-Boldly-to-Re-Venture-New-Writing-on-the-Works-of-Ursula-K.-Le-Guin-Kelso-pp-7-22.pdf",
+   "quote": "a suite of variations to indicate pause and emphasis",
+   "page": "pp. 16–17"
+  },
+  {
+   "index": 54,
+   "feature": "long smooth sentence, triple repetition, assonance",
+   "claim": "Kalessin's arrival pairs an extraordinarily long comma-weighted sentence (weighting 'sinuous', 'claws', 'fire') with a classic triple repetition whose final word links by assonance to the previous paragraph, approaching actual poetry.",
+   "source": "Sylvia A. Kelso, 'Boldly to Re-Venture: New Writing on the Works of Ursula K. Le Guin', Paradoxa 21 (2008), pp. 7–22 (PDF)",
+   "url": "https://paradoxa.com/wp-content/uploads/2020/07/1-Boldly-to-Re-Venture-New-Writing-on-the-Works-of-Ursula-K.-Le-Guin-Kelso-pp-7-22.pdf",
+   "quote": "almost somnambulistically smooth",
+   "page": "p. 17"
+  },
+  {
+   "index": 55,
+   "feature": "rhythm as enabler (dragon wingbeats)",
+   "claim": "Kelso quotes Le Guin ('Collectors, Rhymesters and Drummers'): holding to the rhythm of the dragon's flight let Tehanu tell itself, and when she lost the beat she fell off and had to wait.",
+   "source": "Sylvia A. Kelso, 'Boldly to Re-Venture: New Writing on the Works of Ursula K. Le Guin', Paradoxa 21 (2008), pp. 7–22 (PDF)",
+   "url": "https://paradoxa.com/wp-content/uploads/2020/07/1-Boldly-to-Re-Venture-New-Writing-on-the-Works-of-Ursula-K.-Le-Guin-Kelso-pp-7-22.pdf",
+   "quote": "the very large, long wingbeats",
+   "page": "pp. 17–18"
+  },
+  {
+   "index": 56,
+   "feature": "vocabulary as rhythm's twin",
+   "claim": "Rhythm analysis slides into vocabulary, 'rhythm's Siamese twin': Lathe's 'tugged hugely' and 'tidal abyss' lean embroidered, while elsewhere the same book reaches a homely simile of love made like bread.",
+   "source": "Sylvia A. Kelso, 'Boldly to Re-Venture: New Writing on the Works of Ursula K. Le Guin', Paradoxa 21 (2008), pp. 7–22 (PDF)",
+   "url": "https://paradoxa.com/wp-content/uploads/2020/07/1-Boldly-to-Re-Venture-New-Writing-on-the-Works-of-Ursula-K.-Le-Guin-Kelso-pp-7-22.pdf",
+   "quote": "rhythm's Siamese twin",
+   "page": "p. 14"
+  },
+  {
+   "index": 57,
+   "feature": "less doing more",
+   "claim": "Tehanu shows 'the skill of experience making less do more, rather than more do more' — the late style compresses.",
+   "source": "Sylvia A. Kelso, 'Boldly to Re-Venture: New Writing on the Works of Ursula K. Le Guin', Paradoxa 21 (2008), pp. 7–22 (PDF)",
+   "url": "https://paradoxa.com/wp-content/uploads/2020/07/1-Boldly-to-Re-Venture-New-Writing-on-the-Works-of-Ursula-K.-Le-Guin-Kelso-pp-7-22.pdf",
+   "quote": "making less do more",
+   "page": "p. 16"
+  },
+  {
+   "index": 58,
+   "feature": "lyrical unruly critical voice",
+   "claim": "The Language of the Night established Le Guin's lyrical, unruly and individual critical voice with 'From Elfland to Poughkeepsie' among its essays.",
+   "source": "Sylvia A. Kelso, 'Boldly to Re-Venture: New Writing on the Works of Ursula K. Le Guin', Paradoxa 21 (2008), pp. 7–22 (PDF)",
+   "url": "https://paradoxa.com/wp-content/uploads/2020/07/1-Boldly-to-Re-Venture-New-Writing-on-the-Works-of-Ursula-K.-Le-Guin-Kelso-pp-7-22.pdf",
+   "quote": "lyrical, unruly, and individual critical voice",
+   "page": "p. 8"
+  },
+  {
+   "index": 59,
+   "feature": "paragraph shaping by clause length",
+   "claim": "In the Always Coming Home vision paragraph, a long opening clause checks into shortening phrases, brakes at a colon, then returns through a triple of lengthening units to a singing polysyllable ('over the Obsidian').",
+   "source": "Sylvia A. Kelso, 'Boldly to Re-Venture: New Writing on the Works of Ursula K. Le Guin', Paradoxa 21 (2008), pp. 7–22 (PDF)",
+   "url": "https://paradoxa.com/wp-content/uploads/2020/07/1-Boldly-to-Re-Venture-New-Writing-on-the-Works-of-Ursula-K.-Le-Guin-Kelso-pp-7-22.pdf",
+   "quote": "Here there are no rhythmic superfluities.",
+   "page": "p. 15"
   }
  ]
 }

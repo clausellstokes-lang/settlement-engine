@@ -2,157 +2,157 @@
  "name": "tolkien",
  "chunk": 22,
  "indices": [
-  703,
-  704,
-  705,
-  706,
-  707,
-  708,
-  709,
-  710,
-  711,
-  712,
-  713,
-  714,
-  715,
-  716,
-  717
+  778,
+  779,
+  780,
+  781,
+  782,
+  783,
+  784,
+  785,
+  786,
+  787,
+  788,
+  789,
+  790,
+  791,
+  792
  ],
  "claims": [
   {
-   "index": 703,
-   "feature": "Hobbit paragraph count",
-   "claim": "Tauber: The Hobbit has 1,566 paragraphs; 85.8% are uniquely identifiable by their first three tokens and 98.5% by five or fewer.",
-   "source": "James Tauber, 'Minimal Prefixes to Identify Hobbit Paragraphs' (Digital Tolkien Project, 2021)",
-   "url": "https://digitaltolkien.com/2021/03/06/minimal-prefixes-to-identify-hobbit-paragraphs.html",
+   "index": 778,
+   "feature": "flattened key word",
+   "claim": "Henrik Williams argued Andersson's 'Min dyrgrip' for 'precious' is lexically correct but loses the corrupting allure that Ohlmarks's 'älskade' caught.",
+   "source": "Översättning av Sagan om ringen till svenska (sv.wikipedia)",
+   "url": "https://sv.wikipedia.org/wiki/%C3%96vers%C3%A4ttning_av_Sagan_om_ringen_till_svenska",
+   "quote": "Min dyrgrip",
+   "page": ""
+  },
+  {
+   "index": 779,
+   "feature": "nostalgia for ornate phrasing",
+   "claim": "Petter Lindgren expressed nostalgia for Ohlmarks's almost comically elaborate phrasing against Andersson's terse rendering.",
+   "source": "Översättning av Sagan om ringen till svenska (sv.wikipedia)",
+   "url": "https://sv.wikipedia.org/wiki/%C3%96vers%C3%A4ttning_av_Sagan_om_ringen_till_svenska",
    "quote": "",
    "page": ""
   },
   {
-   "index": 704,
-   "feature": "direct-speech punctuation conventions",
-   "claim": "Tauber: in LOTR a single-sentence utterance followed by a tag ends in a comma before the closing quote; 'A,' said X, 'B.' versus 'A,' said X. 'B.' distinguish one interrupted sentence from two, and the first form is ambiguous.",
-   "source": "James Tauber, 'Punctuation and Structure in Marking Up Direct Speech' (Digital Tolkien Project, 2019)",
-   "url": "https://digitaltolkien.com/2019/05/18/punctuation-and-structure-in-marking-up-direct-speech.html",
+   "index": 780,
+   "feature": "over-domesticated names",
+   "claim": "Stefan Spjuth found 'Möcklegräva' for Michel Delving sounded like a place from Swedish MAD magazine.",
+   "source": "Översättning av Sagan om ringen till svenska (sv.wikipedia)",
+   "url": "https://sv.wikipedia.org/wiki/%C3%96vers%C3%A4ttning_av_Sagan_om_ringen_till_svenska",
    "quote": "",
    "page": ""
   },
   {
-   "index": 705,
-   "feature": "speaker identification corpus",
-   "claim": "The Digital Tolkien Project reports speaker identification completed for The Hobbit, The Lord of the Rings and The Silmarillion, enabling dialogue/narrative separation by speaker.",
-   "source": "Digital Tolkien Project, Overview and Sub-Projects",
-   "url": "https://digitaltolkien.com/subprojects/",
-   "quote": "Speaker identification has been completed",
+   "index": 781,
+   "feature": "narrator's voice changed",
+   "claim": "Strömbom found the narrator's voice completely changed in the new translation, so that it was practically a question of two different works.",
+   "source": "Charlotte Strömbom, 'God åkermark eller fet och fruktbar mylla?' (Vetsaga)",
+   "url": "https://vetsaga.se/?p=50",
+   "quote": "praktiskt taget var fråga om två olika verk",
    "page": ""
   },
   {
-   "index": 706,
-   "feature": "multidimensional register analysis (planned)",
-   "claim": "Tauber's Oxonmoot 2023 abstract applies Multidimensional Register Analysis across The Book of Lost Tales, The Hobbit, LOTR and The Silmarillion, asking whether the Silmarillion's elevated style appears in Elven direct speech in LOTR, noting these shifts had not previously been studied quantitatively.",
-   "source": "Digital Tolkien Project, 'Upcoming Talks' (2023) with Oxonmoot abstract 'Linguistic Variation in Tolkien's Writing Styles'",
-   "url": "https://digitaltolkien.com/2023/06/10/upcoming-talks.html",
-   "quote": "have not previously been studied quantitatively",
+   "index": 782,
+   "feature": "prologue sentence contrast",
+   "claim": "In the prologue's first sentence Tolkien and Andersson use simple language while Ohlmarks does not, turning 'a little' into 'en någorlunda klar bild av' against Andersson's 'litet'.",
+   "source": "Charlotte Strömbom, 'God åkermark eller fet och fruktbar mylla?' (Vetsaga)",
+   "url": "https://vetsaga.se/?p=50",
+   "quote": "en någorlunda klar bild av",
    "page": ""
   },
   {
-   "index": 707,
-   "feature": "LOTR word counts",
-   "claim": "Rateliff collates counts: LotR Project 481,103; an unofficial count 478,492 without appendices and 526,172 with; The Hobbit 95,356; The Silmarillion 130,115; Tolkien's own 1950 estimate was 600,000.",
-   "source": "John D. Rateliff, 'Just How Long is LotR Anyway? (word counts)', Sacnoth's Scriptorium (2017)",
-   "url": "http://sacnoths.blogspot.com/2017/04/just-how-long-is-lotr-anyway-word-counts.html",
+   "index": 783,
+   "feature": "higher style-value and longer sentences",
+   "claim": "Ohlmarks's sentences are as a rule longer and more complex than the original's, with a somewhat higher stylistic value where Tolkien's word choice is simple and open.",
+   "source": "Charlotte Strömbom, 'God åkermark eller fet och fruktbar mylla?' (Vetsaga)",
+   "url": "https://vetsaga.se/?p=50",
+   "quote": "något högre stilvalör",
+   "page": ""
+  },
+  {
+   "index": 784,
+   "feature": "intensifying adjectives",
+   "claim": "Ohlmarks turns 'the pale king' into 'den dödsbleke konungen' and 'bathed Frodo's shoulder' into a bathing 'med dekokten', consistently seeking more drama than the original.",
+   "source": "Charlotte Strömbom, 'God åkermark eller fet och fruktbar mylla?' (Vetsaga)",
+   "url": "https://vetsaga.se/?p=50",
+   "quote": "den dödsbleke konungen",
+   "page": ""
+  },
+  {
+   "index": 785,
+   "feature": "frenetic tone added",
+   "claim": "In 'Flight to the Ford' Ohlmarks's 'tröttnade aldrig på att inskärpa vikten av' adds a frenzy absent from Tolkien's and Andersson's matter-of-fact statements.",
+   "source": "Charlotte Strömbom, 'God åkermark eller fet och fruktbar mylla?' (Vetsaga)",
+   "url": "https://vetsaga.se/?p=50",
+   "quote": "tröttnade aldrig på att inskärpa vikten av",
+   "page": ""
+  },
+  {
+   "index": 786,
+   "feature": "simplification beyond the original",
+   "claim": "Strömbom suggests Andersson sometimes cultivates a style even somewhat simpler than Tolkien's.",
+   "source": "Charlotte Strömbom, 'God åkermark eller fet och fruktbar mylla?' (Vetsaga)",
+   "url": "https://vetsaga.se/?p=50",
+   "quote": "ännu något enklare än Tolkiens",
+   "page": ""
+  },
+  {
+   "index": 787,
+   "feature": "ornate language obscures story",
+   "claim": "The Tolkiens Arda reviewer holds that ornate language gets in the way of the story and that Andersson is more faithful to the English original than Ohlmarks, who added editorial glosses such as 'originell lustigkurre' at Bilbo's party.",
+   "source": "Recensionen: Ringarnas herre (Tolkiens Arda)",
+   "url": "https://tolkiensarda.se/new/nummer/magsidor/art31_2.php",
+   "quote": "originell lustigkurre",
+   "page": ""
+  },
+  {
+   "index": 788,
+   "feature": "heroic register hardest",
+   "claim": "Andersson said the heroic register, especially in Book V, was the hardest to translate, and that names allow no room to manoeuvre.",
+   "source": "Intervju: Erik Andersson — om Ringens brödraskap (Tolkiens Arda)",
+   "url": "https://tolkiensarda.se/new/nummer/magsidor/art28_1.php",
+   "quote": "Det finns inget svängrum i ett namn",
+   "page": ""
+  },
+  {
+   "index": 789,
+   "feature": "tonal evolution and Aragorn's registers",
+   "claim": "Andersson observed the book starts out as a children's book and moves into a more sinister mode, and that Aragorn's speech varies between ranger and king.",
+   "source": "Translating Tolkien — Erik Andersson interview (TheOneRing.net, 2004)",
+   "url": "https://www.theonering.net/torwp/2004/01/01/24998-translating-tolkien-2/",
+   "quote": "starts out as a children's book",
+   "page": ""
+  },
+  {
+   "index": 790,
+   "feature": "retranslator on predecessor",
+   "claim": "Andersson called Ohlmarks's version excellent as a creation in its own right even if it does not always follow Tolkien.",
+   "source": "Translating Tolkien — Erik Andersson interview (TheOneRing.net, 2004)",
+   "url": "https://www.theonering.net/torwp/2004/01/01/24998-translating-tolkien-2/",
+   "quote": "As a creation in its own right it is excellent",
+   "page": ""
+  },
+  {
+   "index": 791,
+   "feature": "flattening of register (retranslation critique)",
+   "claim": "The Tolkien på svenska essay charges that Andersson tones down the differences between the original's varieties of language, removes Sam's courteous address, lacks the ear for poetry, and that his small deviations all run in the same direction.",
+   "source": "Om Erik Anderssons översättning (Tolkien på svenska)",
+   "url": "https://tolkien.mbor.se/omandersson.php",
+   "quote": "alla i samma riktning",
+   "page": ""
+  },
+  {
+   "index": 792,
+   "feature": "how something is said",
+   "claim": "The same essay insists that in Tolkien's text how something is said matters as much as what is said.",
+   "source": "Om Erik Anderssons översättning (Tolkien på svenska)",
+   "url": "https://tolkien.mbor.se/omandersson.php",
    "quote": "",
    "page": ""
-  },
-  {
-   "index": 708,
-   "feature": "Third Age corpus sizes",
-   "claim": "Livesey's corpus: The Hobbit 95,559 tokens; the two books of The Two Towers 66,374 and 64,738 tokens; 'ring' occurs 306 times in Fellowship (1.72 per thousand words), 70 in Two Towers (0.45) and 73 in Return of the King.",
-   "source": "Michael Livesey, 'The Ring Cycle: Journeying Through the Language of Tolkien's Third Age with Corpus Linguistics', JTR 18.1 (2023)",
-   "url": "https://scholar.valpo.edu/journaloftolkienresearch/vol18/iss1/4/",
-   "quote": "a total wordcount of 95,559 tokens",
-   "page": ""
-  },
-  {
-   "index": 709,
-   "feature": "Hobbit + LOTR token total",
-   "claim": "Beasley's chapter-level corpus of The Hobbit (19 chapters) and LOTR (5 prologue sections plus 61 chapters) totals 578,432 tokens.",
-   "source": "Michael H. Beasley, 'A Spatial Text Analysis of J. R. R. Tolkien's Middle-Earth' (USC senior thesis, 2019)",
-   "url": "https://scholarcommons.sc.edu/senior_theses/297",
-   "quote": "the total word count calculated, was 578,432",
-   "page": ""
-  },
-  {
-   "index": 710,
-   "feature": "average sentence length (Hobbit opening)",
-   "claim": "Shugar's grammatical analysis of The Hobbit's opening finds an average sentence length of 19 words, a longest sentence of 59 words, nested clauses with coordinating conjunctions and em-dash interruptions.",
-   "source": "Amelia Shugar, 'A Grammatical Journey down the Hobbit Hole' (2019)",
-   "url": "https://ameliashugar.com/a-grammatical-journey-down-the-hobbit-hole/",
-   "quote": "an average sentence length of 19 words",
-   "page": ""
-  },
-  {
-   "index": 711,
-   "feature": "longest sentences",
-   "claim": "Forum counting finds a 144-word sentence in the original Fall of Gondolin tale, cites an online claim that the longest LOTR sentence is 111 words, and corrects a 96-word count to 97; Tolkien's punctuation is credited with keeping such sentences readable.",
-   "source": "The Tolkien Forum thread 'Tolkien's Longest Sentence?' (2022)",
-   "url": "https://thetolkien.forum/threads/tolkiens-longest-sentence.30796/",
-   "quote": "one long sentence, counting at 144 words",
-   "page": ""
-  },
-  {
-   "index": 712,
-   "feature": "dialogue extraction by quotation marks",
-   "claim": "Qiu extracts The Hobbit's dialogue by regex on text enclosed in double quotation marks across 19 chapters; top dialogue words are good (89), time (65), Baggins (46).",
-   "source": "Lilin Qiu, 'Quantifying Emotional Tone in Tolkien's The Hobbit' (arXiv 2512.10865, 2025)",
-   "url": "https://arxiv.org/html/2512.10865v1",
-   "quote": "text enclosed in double quotation marks",
-   "page": ""
-  },
-  {
-   "index": 713,
-   "feature": "unique-word density",
-   "claim": "LotrProject reports The Hobbit has more unique words and a higher unique-word density than The Silmarillion and each LOTR volume (2009 HarperCollins eBooks, appendices excluded).",
-   "source": "LotrProject, 'Word count and density' (via Wayback)",
-   "url": "http://lotrproject.com/statistics/books/wordscount",
-   "quote": "higher unique word density",
-   "page": ""
-  },
-  {
-   "index": 714,
-   "feature": "register modulation (translation as experiment)",
-   "claim": "Krege's 2000 German retranslation deliberately re-differentiated Tolkien's registers, modernising the hobbits' speech into late-1990s German against a biblical high style for Elves and human nobility, where Carroux (1969-70) had used one unified style.",
-   "source": "Translating The Lord of the Rings (Wikipedia)",
-   "url": "https://en.wikipedia.org/wiki/Translating_The_Lord_of_the_Rings",
-   "quote": "late 1990s German",
-   "page": "German (Carroux) 1969–1970"
-  },
-  {
-   "index": 715,
-   "feature": "reader rejection of modernised register",
-   "claim": "German critics judged that Krege took too many liberties in a translator-centred approach unsuited to Tolkien, and the 2012 edition reverted the most controversial decisions.",
-   "source": "Translating The Lord of the Rings (Wikipedia)",
-   "url": "https://en.wikipedia.org/wiki/Translating_The_Lord_of_the_Rings",
-   "quote": "translator-centred approach",
-   "page": "German"
-  },
-  {
-   "index": 716,
-   "feature": "register overshoot",
-   "claim": "Linguist Rainer Nagel found that Krege corrects Carroux's errors but often overshoots his target.",
-   "source": "Translating The Lord of the Rings (Wikipedia)",
-   "url": "https://en.wikipedia.org/wiki/Translating_The_Lord_of_the_Rings",
-   "quote": "often overshoots its target",
-   "page": "German"
-  },
-  {
-   "index": 717,
-   "feature": "uniform register (Carroux)",
-   "claim": "Carroux treated the source with enormous respect and a unified linguistic style, and Tolkien was delighted with her work apart from the poems.",
-   "source": "Translating The Lord of the Rings (Wikipedia)",
-   "url": "https://en.wikipedia.org/wiki/Translating_The_Lord_of_the_Rings",
-   "quote": "enormous respect",
-   "page": "German"
   }
  ]
 }

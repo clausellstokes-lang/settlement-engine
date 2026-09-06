@@ -1,0 +1,158 @@
+{
+ "name": "ai",
+ "chunk": 18,
+ "indices": [
+  524,
+  525,
+  526,
+  527,
+  528,
+  529,
+  530,
+  531,
+  532,
+  533,
+  534,
+  535,
+  536,
+  537,
+  538
+ ],
+ "claims": [
+  {
+   "index": 524,
+   "feature": "hegemonic voices over-represented",
+   "claim": "Web crawling, participation and filtering all favour those who hew to the hegemonic viewpoint.",
+   "source": "Bender, Gebru, McMillan-Major, Shmitchell — 'On the Dangers of Stochastic Parrots: Can Language Models Be Too Big?' (FAccT 2021)",
+   "url": "https://doi.org/10.1145/3442188.3445922",
+   "quote": "most likely to hew to a hegemonic viewpoint",
+   "page": ""
+  },
+  {
+   "index": 525,
+   "feature": "value-lock on static data",
+   "claim": "Static training data reifies older, less-inclusive framings as language moves on.",
+   "source": "Bender, Gebru, McMillan-Major, Shmitchell — 'On the Dangers of Stochastic Parrots: Can Language Models Be Too Big?' (FAccT 2021)",
+   "url": "https://doi.org/10.1145/3442188.3445922",
+   "quote": "reifies older, less-inclusive understandings",
+   "page": ""
+  },
+  {
+   "index": 526,
+   "feature": "filtering strips marginalised voices",
+   "claim": "Bad-word filtering attenuates the online spaces built by and for LGBTQ people.",
+   "source": "Bender, Gebru, McMillan-Major, Shmitchell — 'On the Dangers of Stochastic Parrots: Can Language Models Be Too Big?' (FAccT 2021)",
+   "url": "https://doi.org/10.1145/3442188.3445922",
+   "quote": "online spaces built by and for LGBTQ people",
+   "page": ""
+  },
+  {
+   "index": 527,
+   "feature": "bias amplification",
+   "claim": "LMs producing text reproduce and even amplify the biases in their input.",
+   "source": "Bender, Gebru, McMillan-Major, Shmitchell — 'On the Dangers of Stochastic Parrots: Can Language Models Be Too Big?' (FAccT 2021)",
+   "url": "https://doi.org/10.1145/3442188.3445922",
+   "quote": "reproduce and even amplify the biases in their input",
+   "page": ""
+  },
+  {
+   "index": 528,
+   "feature": "cherry-picked output passes; random output fails",
+   "claim": "Judges could not detect human-selected GPT-2 poems but did detect randomly sampled ones.",
+   "source": "Köbis, Mossink — 'Artificial intelligence versus Maya Angelou: Experimental evidence that people cannot differentiate AI-generated from human-written poetry' (Computers in Human Behavior 114:106553, 2021)",
+   "url": "https://doi.org/10.1016/j.chb.2020.106553",
+   "quote": "failed to reliably detect the algorithmically-generated poems",
+   "page": ""
+  },
+  {
+   "index": 529,
+   "feature": "human poems still preferred",
+   "claim": "Against professional poets, human poems won 64.90% of pairwise preferences; against novices 56.97%.",
+   "source": "Köbis, Mossink — 'Artificial intelligence versus Maya Angelou: Experimental evidence that people cannot differentiate AI-generated from human-written poetry' (Computers in Human Behavior 114:106553, 2021)",
+   "url": "https://doi.org/10.1016/j.chb.2020.106553",
+   "quote": "Human writers overall won 64.90% of the comparisons",
+   "page": ""
+  },
+  {
+   "index": 530,
+   "feature": "failure to detect is ability, not effort",
+   "claim": "Incentivised judges still scored 50.21% in Study 1, so detection is a matter of ability not motivation.",
+   "source": "Köbis, Mossink — 'Artificial intelligence versus Maya Angelou: Experimental evidence that people cannot differentiate AI-generated from human-written poetry' (Computers in Human Behavior 114:106553, 2021)",
+   "url": "https://doi.org/10.1016/j.chb.2020.106553",
+   "quote": "not a matter of incentives but ability",
+   "page": ""
+  },
+  {
+   "index": 531,
+   "feature": "no deep emotion",
+   "claim": "The authors state the results do not show machine creativity, which requires expression of deep emotion.",
+   "source": "Köbis, Mossink — 'Artificial intelligence versus Maya Angelou: Experimental evidence that people cannot differentiate AI-generated from human-written poetry' (Computers in Human Behavior 114:106553, 2021)",
+   "url": "https://doi.org/10.1016/j.chb.2020.106553",
+   "quote": "a feat that machines lack",
+   "page": ""
+  },
+  {
+   "index": 532,
+   "feature": "selection is the capability",
+   "claim": "Only experimenter-selected poems passed as human, so human curation is doing the passing.",
+   "source": "Köbis, Mossink — 'Artificial intelligence versus Maya Angelou: Experimental evidence that people cannot differentiate AI-generated from human-written poetry' (Computers in Human Behavior 114:106553, 2021)",
+   "url": "https://doi.org/10.1016/j.chb.2020.106553",
+   "quote": "only poems selected by the experimenters successfully passed as human",
+   "page": ""
+  },
+  {
+   "index": 533,
+   "feature": "collective homogenisation",
+   "claim": "Each additional human essay adds more new ideas than each additional GPT-4 essay, and the gap widens with volume.",
+   "source": "Moon, Green, Kushlev — 'Homogenizing Effect of Large Language Models (LLMs) on Creative Diversity: An Empirical Comparison of Human and ChatGPT Writing' (Computers in Human Behavior: Artificial Humans, 2025; preprint 2024)",
+   "url": "https://doi.org/10.1016/j.chbah.2025.100207",
+   "quote": "contributed more new ideas than did each additional GPT-4 essay",
+   "page": ""
+  },
+  {
+   "index": 534,
+   "feature": "diversity growth rate 31% then 11% of human",
+   "claim": "Base GPT-4's diversity growth rate was about 31% of human in Studies 1–2 and about 11% in Study 3.",
+   "source": "Moon, Green, Kushlev — 'Homogenizing Effect of Large Language Models (LLMs) on Creative Diversity: An Empirical Comparison of Human and ChatGPT Writing' (Computers in Human Behavior: Artificial Humans, 2025; preprint 2024)",
+   "url": "https://doi.org/10.1016/j.chbah.2025.100207",
+   "quote": "only about 11% of the rate for the human-written essays",
+   "page": ""
+  },
+  {
+   "index": 535,
+   "feature": "newer model more homogenised",
+   "claim": "gpt-4-0125-preview homogenised more than gpt-4-0613, so the drift is not curing with versions.",
+   "source": "Moon, Green, Kushlev — 'Homogenizing Effect of Large Language Models (LLMs) on Creative Diversity: An Empirical Comparison of Human and ChatGPT Writing' (Computers in Human Behavior: Artificial Humans, 2025; preprint 2024)",
+   "url": "https://doi.org/10.1016/j.chbah.2025.100207",
+   "quote": "actually yielded higher homogenization than the previous model",
+   "page": ""
+  },
+  {
+   "index": 536,
+   "feature": "diversity knobs cost coherence",
+   "claim": "Presence/frequency penalties raised individual diversity above human but at the expense of coherence and readability.",
+   "source": "Moon, Green, Kushlev — 'Homogenizing Effect of Large Language Models (LLMs) on Creative Diversity: An Empirical Comparison of Human and ChatGPT Writing' (Computers in Human Behavior: Artificial Humans, 2025; preprint 2024)",
+   "url": "https://doi.org/10.1016/j.chbah.2025.100207",
+   "quote": "at the expense of coherence and readability",
+   "page": ""
+  },
+  {
+   "index": 537,
+   "feature": "homogenisation inherent to next-token plus RLHF",
+   "claim": "The authors attribute persistent homogenisation to most-probable-token selection and RLHF safety tuning.",
+   "source": "Moon, Green, Kushlev — 'Homogenizing Effect of Large Language Models (LLMs) on Creative Diversity: An Empirical Comparison of Human and ChatGPT Writing' (Computers in Human Behavior: Artificial Humans, 2025; preprint 2024)",
+   "url": "https://doi.org/10.1016/j.chbah.2025.100207",
+   "quote": "homogenization may be an inherent feature of current LLMs",
+   "page": ""
+  },
+  {
+   "index": 538,
+   "feature": "detectors neither accurate nor reliable",
+   "claim": "Fourteen detectors all scored below 80% accuracy, biased toward calling text human.",
+   "source": "Weber-Wulff, Anohina-Naumeca, Bjelobaba, Foltýnek, Guerrero-Dib, Popoola, Šigut, Waddington — 'Testing of detection tools for AI-generated text' (International Journal for Educational Integrity 19:26, 2023)",
+   "url": "https://doi.org/10.1007/s40979-023-00146-z",
+   "quote": "neither accurate nor reliable",
+   "page": ""
+  }
+ ]
+}

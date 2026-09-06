@@ -1,0 +1,158 @@
+{
+ "name": "ai",
+ "chunk": 7,
+ "indices": [
+  359,
+  360,
+  361,
+  362,
+  363,
+  364,
+  365,
+  366,
+  367,
+  368,
+  369,
+  370,
+  371,
+  372,
+  373
+ ],
+ "claims": [
+  {
+   "index": 359,
+   "feature": "premature turning points",
+   "claim": "LLMs place the major setback and climax earlier in the timeline than human writers, compressing pacing and diminishing suspense and arousal.",
+   "source": "Are Large Language Models Capable of Generating Human-Level Narratives? (Tian et al.; EMNLP 2024)",
+   "url": "https://arxiv.org/html/2407.13248",
+   "quote": "introduce plot turning points earlier in the timeline",
+   "page": "Are Large Language Models Capable of Generating Human-Level Narratives? (Tian et al.; EMNLP 2024)"
+  },
+  {
+   "index": 360,
+   "feature": "avoidance of negative progressions",
+   "claim": "Models are biased toward certain macro arcs and lack narrative diversity, especially by avoiding negative plot progressions.",
+   "source": "Are Large Language Models Capable of Generating Human-Level Narratives? (Tian et al.; EMNLP 2024)",
+   "url": "https://arxiv.org/html/2407.13248",
+   "quote": "particularly in avoiding negative plot progressions",
+   "page": "Are Large Language Models Capable of Generating Human-Level Narratives? (Tian et al.; EMNLP 2024)"
+  },
+  {
+   "index": 361,
+   "feature": "flat late-story arousal",
+   "claim": "Human stories show higher arousal than LLM stories, and the gap widens after the midpoint toward the ending; explicit turning-point guidance raised suspense ratings ~40%.",
+   "source": "Are Large Language Models Capable of Generating Human-Level Narratives? (Tian et al.; EMNLP 2024)",
+   "url": "https://arxiv.org/html/2407.13248",
+   "quote": "",
+   "page": "Are Large Language Models Capable of Generating Human-Level Narratives? (Tian et al.; EMNLP 2024)"
+  },
+  {
+   "index": 362,
+   "feature": "skipped steps at scale",
+   "claim": "As story scale grows (larger maps, more characters), generated plans skip necessary steps while keeping a correct high-level structure.",
+   "source": "Can LLMs Generate Good Stories? Insights and Challenges from a Narrative Planning Perspective (CoG 2025; Kreminski co-author per his publications page)",
+   "url": "https://arxiv.org/html/2506.10161",
+   "quote": "output plans tend to skip steps, leading to failure cases",
+   "page": "Can LLMs Generate Good Stories? Insights and Challenges from a Narrative Planning Perspective (CoG 2025; Kreminski co-author per his publications page)"
+  },
+  {
+   "index": 363,
+   "feature": "unmotivated character action",
+   "claim": "Most failed plans were causally sound but had characters acting without valid intention — Aladdin obtains the lamp and casts a spell with no established motive.",
+   "source": "Can LLMs Generate Good Stories? Insights and Challenges from a Narrative Planning Perspective (CoG 2025; Kreminski co-author per his publications page)",
+   "url": "https://arxiv.org/html/2506.10161",
+   "quote": "character actions lacking valid intention",
+   "page": "Can LLMs Generate Good Stories? Insights and Challenges from a Narrative Planning Perspective (CoG 2025; Kreminski co-author per his publications page)"
+  },
+  {
+   "index": 364,
+   "feature": "conflict shortcuts",
+   "claim": "When asked for dramatic conflict, models produced shortcuts such as an adventurer repeatedly getting snakebites and healing himself rather than clashing commitment frames.",
+   "source": "Can LLMs Generate Good Stories? Insights and Challenges from a Narrative Planning Perspective (CoG 2025; Kreminski co-author per his publications page)",
+   "url": "https://arxiv.org/html/2506.10161",
+   "quote": "",
+   "page": "Can LLMs Generate Good Stories? Insights and Challenges from a Narrative Planning Perspective (CoG 2025; Kreminski co-author per his publications page)"
+  },
+  {
+   "index": 365,
+   "feature": "context-limit collapse",
+   "claim": "Intentional-planning success drops sharply from 2 to 3 adventurers and again from 10 to 12, the latter likely from exceeding context limits; only RL-trained reasoning models handled intentionality and conflict.",
+   "source": "Can LLMs Generate Good Stories? Insights and Challenges from a Narrative Planning Perspective (CoG 2025; Kreminski co-author per his publications page)",
+   "url": "https://arxiv.org/html/2506.10161",
+   "quote": "",
+   "page": "Can LLMs Generate Good Stories? Insights and Challenges from a Narrative Planning Perspective (CoG 2025; Kreminski co-author per his publications page)"
+  },
+  {
+   "index": 366,
+   "feature": "thematic over-determination",
+   "claim": "Across 61,608 stories, AI narrators explain the theme in 77% of stories versus 52% human; the pattern is over-determination.",
+   "source": "StoryScope: Investigating idiosyncrasies in AI fiction (Russell, Rajendhran, Pham, Iyyer, Wieting; 2026)",
+   "url": "https://arxiv.org/html/2604.03136",
+   "quote": "AI spells out meaning rather than trusting the reader",
+   "page": "StoryScope: Investigating idiosyncrasies in AI fiction (Russell, Rajendhran, Pham, Iyyer, Wieting; 2026)"
+  },
+  {
+   "index": 367,
+   "feature": "bodily-metaphor emotion",
+   "claim": "AI conveys emotion through physical sensations and bodily metaphors in 81% of stories versus 38% human, and over-uses smell imagery (82% vs 57%).",
+   "source": "StoryScope: Investigating idiosyncrasies in AI fiction (Russell, Rajendhran, Pham, Iyyer, Wieting; 2026)",
+   "url": "https://arxiv.org/html/2604.03136",
+   "quote": "physical sensations and bodily metaphors (81% vs. 38% human)",
+   "page": "StoryScope: Investigating idiosyncrasies in AI fiction (Russell, Rajendhran, Pham, Iyyer, Wieting; 2026)"
+  },
+  {
+   "index": 368,
+   "feature": "subplot-free single track",
+   "claim": "79% of AI stories have no subplots versus 57% human; AI favours tighter causal chains and protagonist-driven resolutions (69% vs 46%).",
+   "source": "StoryScope: Investigating idiosyncrasies in AI fiction (Russell, Rajendhran, Pham, Iyyer, Wieting; 2026)",
+   "url": "https://arxiv.org/html/2604.03136",
+   "quote": "far fewer subplots (79% “no subplots” vs. 57%)",
+   "page": "StoryScope: Investigating idiosyncrasies in AI fiction (Russell, Rajendhran, Pham, Iyyer, Wieting; 2026)"
+  },
+  {
+   "index": 369,
+   "feature": "vague allusion, no named specifics",
+   "claim": "AI avoids naming real brands, places or works and uses vague allusions (72% vs 50%); humans cite specific texts and authors at nearly double the rate (47% vs 24%).",
+   "source": "StoryScope: Investigating idiosyncrasies in AI fiction (Russell, Rajendhran, Pham, Iyyer, Wieting; 2026)",
+   "url": "https://arxiv.org/html/2604.03136",
+   "quote": "avoids naming real brands, places, or works",
+   "page": "StoryScope: Investigating idiosyncrasies in AI fiction (Russell, Rajendhran, Pham, Iyyer, Wieting; 2026)"
+  },
+  {
+   "index": 370,
+   "feature": "morally unambiguous protagonists",
+   "claim": "Human stories present morally ambivalent protagonists more often (59% vs 38%), span more locations, and carry more dialogue relative to narration.",
+   "source": "StoryScope: Investigating idiosyncrasies in AI fiction (Russell, Rajendhran, Pham, Iyyer, Wieting; 2026)",
+   "url": "https://arxiv.org/html/2604.03136",
+   "quote": "present morally ambivalent protagonists more often (59% vs. 38%)",
+   "page": "StoryScope: Investigating idiosyncrasies in AI fiction (Russell, Rajendhran, Pham, Iyyer, Wieting; 2026)"
+  },
+  {
+   "index": 371,
+   "feature": "acceptance endings",
+   "claim": "AI resolutions favour internal understanding or acceptance (47% vs 27% human).",
+   "source": "StoryScope: Investigating idiosyncrasies in AI fiction (Russell, Rajendhran, Pham, Iyyer, Wieting; 2026)",
+   "url": "https://arxiv.org/html/2604.03136",
+   "quote": "favor internal understanding or acceptance (47% vs. 27%)",
+   "page": "StoryScope: Investigating idiosyncrasies in AI fiction (Russell, Rajendhran, Pham, Iyyer, Wieting; 2026)"
+  },
+  {
+   "index": 372,
+   "feature": "human rarity in narrative space",
+   "claim": "Human narratives occupy a rarer, more dispersed region of narrative-feature space; narrative features alone detect AI at 93.2% macro-F1.",
+   "source": "StoryScope: Investigating idiosyncrasies in AI fiction (Russell, Rajendhran, Pham, Iyyer, Wieting; 2026)",
+   "url": "https://arxiv.org/html/2604.03136",
+   "quote": "Human narratives are rarer.",
+   "page": "StoryScope: Investigating idiosyncrasies in AI fiction (Russell, Rajendhran, Pham, Iyyer, Wieting; 2026)"
+  },
+  {
+   "index": 373,
+   "feature": "generic without specification",
+   "claim": "Prompting current LLMs for stories without specifying style or substance yields output that feels generic.",
+   "source": "Large Language Models and Games: A Survey and Roadmap (Gallotta et al.; v5 2024-12-09)",
+   "url": "https://arxiv.org/html/2402.18659v5",
+   "quote": "tends to produce output that feels generic",
+   "page": "Large Language Models and Games: A Survey and Roadmap (Gallotta et al.; v5 2024-12-09)"
+  }
+ ]
+}

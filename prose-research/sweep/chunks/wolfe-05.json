@@ -1,0 +1,158 @@
+{
+ "name": "wolfe",
+ "chunk": 5,
+ "indices": [
+  75,
+  76,
+  77,
+  78,
+  79,
+  80,
+  81,
+  82,
+  83,
+  84,
+  85,
+  86,
+  87,
+  88,
+  89
+ ],
+ "claims": [
+  {
+   "index": 75,
+   "feature": "pretences that turn out true",
+   "claim": "Asked why he is drawn to deceptions that turn out to be true, Wolfe says it must be the unconscious hope that some of his will.",
+   "source": "Cloud Chamber 77 (1997)",
+   "url": "https://ansible.uk/cc/cc77.html",
+   "quote": "the unconscious hope that some of mine will",
+   "page": "Q2"
+  },
+  {
+   "index": 76,
+   "feature": "reconstructed scenes attributed to informants",
+   "claim": "Scenes Horn could not have witnessed are sourced within the fiction (an unnamed kite builder; prayers written by Horn and Nettle who heard Silk pray), and Wolfe points to a page in Exodus.",
+   "source": "Cloud Chamber 77 (1997)",
+   "url": "https://ansible.uk/cc/cc77.html",
+   "quote": "Please reread Exodus, p. 371.",
+   "page": "Q21"
+  },
+  {
+   "index": 77,
+   "feature": "happened / probably happened / must have happened",
+   "claim": "Horn and Nettle tell what happened, what probably happened and what must have happened, in dramatic form; their account is necessarily subjective and they make mistakes.",
+   "source": "Cloud Chamber 77 (1997)",
+   "url": "https://ansible.uk/cc/cc77.html",
+   "quote": "what probably happened, and what must have happened",
+   "page": "Q21a"
+  },
+  {
+   "index": 78,
+   "feature": "errors are errors, not clues",
+   "claim": "Wolfe concedes the Mint/Marble location swap in Exodus is his mistake; Langford notes readers had been reading subtleties into his least typos.",
+   "source": "Cloud Chamber 77 (1997)",
+   "url": "https://ansible.uk/cc/cc77.html",
+   "quote": "they are my mistakes",
+   "page": "Q28"
+  },
+  {
+   "index": 79,
+   "feature": "literal answer to a symbolic question",
+   "claim": "Asked who or what Oreb is, Wolfe answers only that Oreb is a night chough, declining the symbolic reading the questioner wanted.",
+   "source": "Cloud Chamber 77 (1997)",
+   "url": "https://ansible.uk/cc/cc77.html",
+   "quote": "Oreb is a night chough.",
+   "page": "Q1"
+  },
+  {
+   "index": 80,
+   "feature": "answers deferred to the next book",
+   "claim": "Some questions (Quetzal's motive) are answered only by telling the reader to read the next series, keeping the withholding in force.",
+   "source": "Cloud Chamber 77 (1997)",
+   "url": "https://ansible.uk/cc/cc77.html",
+   "quote": "You will have to read The Book",
+   "page": "Q23"
+  },
+  {
+   "index": 81,
+   "feature": "a society displayed, not argued",
+   "claim": "Wolfe reads Tolkien as having uncovered a forgotten Folk Law and built Middle-earth as a means of displaying it in the clearest light, planting the truth that society need not be as we see it.",
+   "source": "The Best Introduction to the Mountains (2001)",
+   "url": "https://web.archive.org/web/2004/http://home.clara.net/andywrobertson/wolfemountains.html",
+   "quote": "society need not be as we see it around us",
+   "page": ""
+  },
+  {
+   "index": 82,
+   "feature": "rereading as reading discipline",
+   "claim": "He describes rationing The Fellowship to one chapter an evening while permitting himself to reread earlier chapters endlessly, the habit of the rereader he later writes for.",
+   "source": "The Best Introduction to the Mountains (2001)",
+   "url": "https://web.archive.org/web/2004/http://home.clara.net/andywrobertson/wolfemountains.html",
+   "quote": "no more than a single chapter each evening",
+   "page": ""
+  },
+  {
+   "index": 83,
+   "feature": "etymology inside and outside the story",
+   "claim": "Tolkien's reply to Wolfe's fan letter distinguishes a word's etymology within the story from the author's source for it, a distinction Wolfe's own Latinate diction depends on.",
+   "source": "The Best Introduction to the Mountains (2001)",
+   "url": "https://web.archive.org/web/2004/http://home.clara.net/andywrobertson/wolfemountains.html",
+   "quote": "two sides",
+   "page": "Tolkien letter, 7 Nov 1966"
+  },
+  {
+   "index": 84,
+   "feature": "trust the text / do not trust the text",
+   "claim": "Gaiman's first two rules: trust the text implicitly because the answers are in there, and do not trust it farther than you can throw it because it may go off in your hand.",
+   "source": "Gaiman, How to Read Gene Wolfe",
+   "url": "https://web.archive.org/web/2008/http://www.sfsite.com/fsf/2007/gwng0704.htm",
+   "quote": "Trust the text implicitly. The answers are in there.",
+   "page": "rules 1-2"
+  },
+  {
+   "index": 85,
+   "feature": "text reshapes on rereading",
+   "claim": "The books subtly reshape themselves while you are away; Peace was a gentle Midwestern memoir on first reading and a horror novel on the second or third.",
+   "source": "Gaiman, How to Read Gene Wolfe",
+   "url": "https://web.archive.org/web/2008/http://www.sfsite.com/fsf/2007/gwng0704.htm",
+   "quote": "It only became a horror novel on the second",
+   "page": "rule 3"
+  },
+  {
+   "index": 86,
+   "feature": "clever without pointing it out",
+   "claim": "Wolfe is the kind of clever writer who sees no need to point out his cleverness; the intelligence serves the tale and makes the reader smart too.",
+   "source": "Gaiman, How to Read Gene Wolfe",
+   "url": "https://web.archive.org/web/2008/http://www.sfsite.com/fsf/2007/gwng0704.htm",
+   "quote": "He is smart to make you smart as well.",
+   "page": "rule 7"
+  },
+  {
+   "index": 87,
+   "feature": "narrator withholds what he witnessed",
+   "claim": "Rule 8 asserts the author was there and knows whose reflection they saw in the mirror, i.e. the withheld fact is known and recoverable.",
+   "source": "Gaiman, How to Read Gene Wolfe",
+   "url": "https://web.archive.org/web/2008/http://www.sfsite.com/fsf/2007/gwng0704.htm",
+   "quote": "He knows whose reflection they saw in the mirror",
+   "page": "rule 8"
+  },
+  {
+   "index": 88,
+   "feature": "engineer's mind, clue-reading",
+   "claim": "Gaiman reports Wolfe solving a ninety-year-old murder from a press clipping (the matches by the railway tracks), evidence of the engineer's mind behind the clue-planting.",
+   "source": "Gaiman, How to Read Gene Wolfe / journal",
+   "url": "https://journal.neilgaiman.com/2007/03/gene-wolves.html",
+   "quote": "He has an engineer's mind",
+   "page": ""
+  },
+  {
+   "index": 89,
+   "feature": "story knows more than it says",
+   "claim": "Clute's summary law: a Wolfe story always knows more than it says and can almost never be fully grasped on a first reading.",
+   "source": "Clute, SFE entry",
+   "url": "https://sf-encyclopedia.com/entry/wolfe_gene",
+   "quote": "A Wolfe story always knows more than it says",
+   "page": ""
+  }
+ ]
+}

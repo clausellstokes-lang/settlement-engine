@@ -1,0 +1,158 @@
+{
+ "name": "hobb",
+ "chunk": 0,
+ "indices": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14
+ ],
+ "claims": [
+  {
+   "index": 0,
+   "feature": "first person as natural storytelling voice",
+   "claim": "Hobb chooses first person because it is the voice people use when telling family what happened today.",
+   "source": "A Dribble of Ink interview (Aidan Moher, 2007)",
+   "url": "https://aidanmoher.com/blog/2007/06/interviews/interview-robin-hobb/",
+   "quote": "the natural voice for the story teller",
+   "page": ""
+  },
+  {
+   "index": 1,
+   "feature": "first-person intimacy",
+   "claim": "First person lets the reader be privy to the viewpoint character's innermost thoughts and feelings.",
+   "source": "A Dribble of Ink interview (Aidan Moher, 2007)",
+   "url": "https://aidanmoher.com/blog/2007/06/interviews/interview-robin-hobb/",
+   "quote": "privy to the characters innermost thoughts and feelings",
+   "page": ""
+  },
+  {
+   "index": 2,
+   "feature": "first-person epistemic limit and dramatic irony",
+   "claim": "The reader knows only what the protagonist knows, yet may see what is coming before he does.",
+   "source": "SFFWorld interview (2005)",
+   "url": "https://www.sffworld.com/2005/09/interview-with-robin-hobb/",
+   "quote": "see what is coming even if the main character doesn't",
+   "page": ""
+  },
+  {
+   "index": 3,
+   "feature": "chapter prologues as compensating device",
+   "claim": "In Farseer the chapter-opening prologues exist to give the reader information the first-person narrator cannot.",
+   "source": "A Dribble of Ink interview (Aidan Moher, 2007)",
+   "url": "https://aidanmoher.com/blog/2007/06/interviews/interview-robin-hobb/",
+   "quote": "little prologues at the beginning of each chapter",
+   "page": ""
+  },
+  {
+   "index": 4,
+   "feature": "no narrative cutaway",
+   "claim": "First person forbids the cutaway; everything must be learned as Fitz learns it.",
+   "source": "The OF Blog interview (2003)",
+   "url": "http://ofblog.blogspot.com/2003/04/robin-hobb-interview.html",
+   "quote": "Meanwhile, back at the castle",
+   "page": ""
+  },
+  {
+   "index": 5,
+   "feature": "third person for simultaneity",
+   "claim": "She switched to third-person multiple viewpoint in Liveship only because important events happened at once in different places.",
+   "source": "A Dribble of Ink interview (Aidan Moher, 2007)",
+   "url": "https://aidanmoher.com/blog/2007/06/interviews/interview-robin-hobb/",
+   "quote": "occurring simultaneously in different places",
+   "page": ""
+  },
+  {
+   "index": 6,
+   "feature": "baggage: consequence carried forward",
+   "claim": "A hurt, physical or emotional, becomes baggage that alters later action, and the reader drags the same baggage through the reading.",
+   "source": "A Dribble of Ink interview (Aidan Moher, 2007)",
+   "url": "https://aidanmoher.com/blog/2007/06/interviews/interview-robin-hobb/",
+   "quote": "drags that same baggage through the reading",
+   "page": ""
+  },
+  {
+   "index": 7,
+   "feature": "dwelling on the event",
+   "claim": "Other heroes' ordeals feel lesser because the event is not dwelt on and leaves no lingering change; Hobb dwells and lets it change the character.",
+   "source": "A Dribble of Ink interview (Aidan Moher, 2007)",
+   "url": "https://aidanmoher.com/blog/2007/06/interviews/interview-robin-hobb/",
+   "quote": "the event is not dwelt on",
+   "page": ""
+  },
+  {
+   "index": 8,
+   "feature": "first person amplifies hardship",
+   "claim": "She denies being crueller than Tolkien; first person makes the same trials feel more harrowing because they are lived from inside.",
+   "source": "A Dribble of Ink interview (Aidan Moher, 2007)",
+   "url": "https://aidanmoher.com/blog/2007/06/interviews/interview-robin-hobb/",
+   "quote": "perceived as more harrowing or depressing",
+   "page": ""
+  },
+  {
+   "index": 9,
+   "feature": "register: leisurely and intimate",
+   "claim": "Hobb describes her own style in two words, leisurely and intimate.",
+   "source": "Fantasy Book Critic interview (2008)",
+   "url": "https://fantasybookcritic.blogspot.com/2008/01/interview-with-robin-hobb.html",
+   "quote": "both leisurely and intimate",
+   "page": ""
+  },
+  {
+   "index": 10,
+   "feature": "slow openings",
+   "claim": "The pacing at the start of any of her books is deliberately much slower than toward the end.",
+   "source": "Fantasy Book Critic interview (2008)",
+   "url": "https://fantasybookcritic.blogspot.com/2008/01/interview-with-robin-hobb.html",
+   "quote": "usually a lot slower than towards the end",
+   "page": ""
+  },
+  {
+   "index": 11,
+   "feature": "ramps before the exciting scene",
+   "claim": "An exciting scene lacks impact unless she has slowed down to build the ramps up to it.",
+   "source": "Fantasy Book Critic interview (2008)",
+   "url": "https://fantasybookcritic.blogspot.com/2008/01/interview-with-robin-hobb.html",
+   "quote": "construct the ramps up to that exciting scene",
+   "page": ""
+  },
+  {
+   "index": 12,
+   "feature": "non-plot details and incidents",
+   "claim": "She spends words on details and incidents that do not move the plot because they are what make the character.",
+   "source": "Fantasy Book Critic interview (2008)",
+   "url": "https://fantasybookcritic.blogspot.com/2008/01/interview-with-robin-hobb.html",
+   "quote": "not directly move the plot forward but are very important",
+   "page": ""
+  },
+  {
+   "index": 13,
+   "feature": "show what is held before it is lost (consequence device)",
+   "claim": "A loss registers only if the text has first shown how much the lost thing mattered; otherwise the event is a throwaway moment.",
+   "source": "Fantasy Book Critic interview (2008)",
+   "url": "https://fantasybookcritic.blogspot.com/2008/01/interview-with-robin-hobb.html",
+   "quote": "this event is just a throwaway moment",
+   "page": ""
+  },
+  {
+   "index": 14,
+   "feature": "pace sacrificed for character",
+   "claim": "Excitement and quick pace are sometimes sacrificed for character, knowingly.",
+   "source": "Fantasy Book Critic interview (2008)",
+   "url": "https://fantasybookcritic.blogspot.com/2008/01/interview-with-robin-hobb.html",
+   "quote": "have to be sacrificed for character",
+   "page": ""
+  }
+ ]
+}

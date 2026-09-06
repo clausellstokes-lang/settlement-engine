@@ -1,0 +1,158 @@
+{
+ "name": "hobb",
+ "chunk": 3,
+ "indices": [
+  45,
+  46,
+  47,
+  48,
+  49,
+  50,
+  51,
+  52,
+  53,
+  54,
+  55,
+  56,
+  57,
+  58,
+  59
+ ],
+ "claims": [
+  {
+   "index": 45,
+   "feature": "slice-of-life over action (interviewer's reading)",
+   "claim": "The interviewer places Hobb's writing closer to slice-of-life than to action, with fights serving character rather than plot.",
+   "source": "Paw Print interview (Madalen Erez, 2020)",
+   "url": "https://cscsnews.com/744/literary-arts/an-interview-with-robin-hobb-character-writing/",
+   "quote": "closer the slice-of-life style than to action",
+   "page": ""
+  },
+  {
+   "index": 46,
+   "feature": "primary documents",
+   "claim": "Her research prefers diaries, journals and other primary documents over histories.",
+   "source": "Fantasy-Faction interview part one (2013)",
+   "url": "https://fantasy-faction.com/2013/robin-hobb-interview",
+   "quote": "diaries, journals and things of that sort",
+   "page": ""
+  },
+  {
+   "index": 47,
+   "feature": "bodily research",
+   "claim": "She booked time aboard tall ships to get the smells and sensations of a sailing vessel.",
+   "source": "Fantasy-Faction interview part one (2013)",
+   "url": "https://fantasy-faction.com/2013/robin-hobb-interview",
+   "quote": "the smells and sensations of a sailing vessel",
+   "page": ""
+  },
+  {
+   "index": 48,
+   "feature": "no message stories",
+   "claim": "She writes from questions, not answers, and dislikes message stories.",
+   "source": "HuffPost interview (2017)",
+   "url": "https://www.huffpost.com/entry/a-fantasy-world-to-get-lost-in-an-interview-with-robin_b_598101d5e4b0b35d274c5e7c",
+   "quote": "I do not care for 'message' stories",
+   "page": ""
+  },
+  {
+   "index": 49,
+   "feature": "cross-world repercussions",
+   "claim": "Events in one place inevitably have repercussions elsewhere in the world.",
+   "source": "HuffPost interview (2017)",
+   "url": "https://www.huffpost.com/entry/a-fantasy-world-to-get-lost-in-an-interview-with-robin_b_598101d5e4b0b35d274c5e7c",
+   "quote": "inevitably have repercussions in the Six Duchies",
+   "page": ""
+  },
+  {
+   "index": 50,
+   "feature": "first-person present tense abandoned",
+   "claim": "She wrote one novel in first-person present tense and will never attempt it again.",
+   "source": "SciFiNow interview (Jodie Tyley, 2012)",
+   "url": "https://www.scifinow.co.uk/interviews/interview-author-robin-hobb-a-k-a-megan-lindholm/",
+   "quote": "something I will NEVER attempt again",
+   "page": ""
+  },
+  {
+   "index": 51,
+   "feature": "slow unfolding",
+   "claim": "She wanted the world's deep history to unfold slowly.",
+   "source": "SciFiNow interview (Jodie Tyley, 2012)",
+   "url": "https://www.scifinow.co.uk/interviews/interview-author-robin-hobb-a-k-a-megan-lindholm/",
+   "quote": "I wanted it to unfold slowly",
+   "page": ""
+  },
+  {
+   "index": 52,
+   "feature": "viewpoint sensory self-interest",
+   "claim": "Each viewpoint reports its own sensory self-interest, as a dog cares how much butter is on the popcorn.",
+   "source": "SciFiNow interview (Jodie Tyley, 2012)",
+   "url": "https://www.scifinow.co.uk/interviews/interview-author-robin-hobb-a-k-a-megan-lindholm/",
+   "quote": "how much butter is on the popcorn",
+   "page": ""
+  },
+  {
+   "index": 53,
+   "feature": "Fitz's voice as persona",
+   "claim": "Fitz's voice kept taking her over even in emails, which is why Tawny Man followed Liveship.",
+   "source": "Locus interview excerpts (December 2005)",
+   "url": "https://www.locusmag.com/2005/Issues/12Hobb.html",
+   "quote": "even when I was writing e-mails",
+   "page": ""
+  },
+  {
+   "index": 54,
+   "feature": "household research in process",
+   "claim": "Her writing log records researching diseases of sheep and inserting chapter headings as bridge scaffolding.",
+   "source": "Robin Hobb's blog, November 2022",
+   "url": "https://www.robinhobb.com/blog/posts/41755",
+   "quote": "researched diseases of sheep",
+   "page": ""
+  },
+  {
+   "index": 55,
+   "feature": "controlled POV and leisurely pace (critic)",
+   "claim": "Erikson admired the controlled point of view and leisurely pace, then found it a quiet seduction that set up the dog scene.",
+   "source": "Steven Erikson, Reactor (2016)",
+   "url": "https://reactormag.com/how-robin-hobbs-assassins-apprentice-pulls-the-rug-out-from-under-you/",
+   "quote": "the controlled point of view, the leisurely pace",
+   "page": ""
+  },
+  {
+   "index": 56,
+   "feature": "knowledge fed at a child's pace",
+   "claim": "The child narrator lets world-knowledge be fed piecemeal at a child's pace of comprehension.",
+   "source": "Steven Erikson, Reactor (2016)",
+   "url": "https://reactormag.com/how-robin-hobbs-assassins-apprentice-pulls-the-rug-out-from-under-you/",
+   "quote": "at a child's pace of comprehension",
+   "page": ""
+  },
+  {
+   "index": 57,
+   "feature": "first person unusual in epic fantasy",
+   "claim": "First person is an unusual approach in epic fantasy and gives complete immersion in Fitz's personality.",
+   "source": "Ilana Teitelbaum, Los Angeles Review of Books (2014)",
+   "url": "https://lareviewofbooks.org/article/bright-home-dark-heart/",
+   "quote": "complete immersion in Fitz's complicated personality",
+   "page": ""
+  },
+  {
+   "index": 58,
+   "feature": "objects of daily life treasured",
+   "claim": "Withywoods values handkerchiefs, beeswax candles and lace as objects, a milieu likened to the Little House books.",
+   "source": "Ilana Teitelbaum, Los Angeles Review of Books (2014)",
+   "url": "https://lareviewofbooks.org/article/bright-home-dark-heart/",
+   "quote": "the objects of daily life are concrete and treasured",
+   "page": ""
+  },
+  {
+   "index": 59,
+   "feature": "household talk instead of intrigue",
+   "claim": "Conversations turn to herbs, crop seasons and fair treatment of servants rather than battle.",
+   "source": "Ilana Teitelbaum, Los Angeles Review of Books (2014)",
+   "url": "https://lareviewofbooks.org/article/bright-home-dark-heart/",
+   "quote": "the uses of herbs, the seasons for crops",
+   "page": ""
+  }
+ ]
+}

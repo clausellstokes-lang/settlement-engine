@@ -2,156 +2,156 @@
  "name": "leguin",
  "chunk": 1,
  "indices": [
-  15,
-  16,
-  17,
-  18,
-  19,
-  20,
-  21,
-  22,
-  23,
-  24,
-  25,
-  26,
-  27,
-  28,
-  29
+  60,
+  61,
+  62,
+  63,
+  64,
+  65,
+  66,
+  67,
+  68,
+  69,
+  70,
+  71,
+  72,
+  73,
+  74
  ],
  "claims": [
   {
-   "index": 15,
-   "feature": "praised stylists",
-   "claim": "The article lists Dunsany, Eddison, Kenneth Morris, Tolkien, Cabell, Evangeline Walton and Jack Vance as the essay's models of style that fits its world.",
-   "source": "Wikipedia: From Elfland to Poughkeepsie",
-   "url": "https://en.wikipedia.org/wiki/From_Elfland_to_Poughkeepsie",
+   "index": 60,
+   "feature": "deliberately limited invented lexicon",
+   "claim": "Le Guin (quoted by Garth) said there was no use trying to make a lexicon of Earthsea's languages, unlike Tolkien who in one sense wrote LOTR to give his languages speakers.",
+   "source": "John Garth, 'Ursula Le Guin, the language of Earthsea, and Tolkien' (blog)",
+   "url": "https://johngarth.wordpress.com/2021/01/22/ursula-le-guin-the-language-of-earthsea-and-tolkien/",
+   "quote": "No use trying to make a lexicon",
+   "page": ""
+  },
+  {
+   "index": 61,
+   "feature": "absorbed Tolkien, own direction",
+   "claim": "Attebery (quoted by Garth) distinguishes her from Tolkien copyists as one who absorbed Tolkien, comprehended him and went her own direction.",
+   "source": "John Garth blog (citing Attebery)",
+   "url": "https://johngarth.wordpress.com/2021/01/22/ursula-le-guin-the-language-of-earthsea-and-tolkien/",
+   "quote": "absorbed Tolkien, comprehended him, and gone on in her own direction",
+   "page": ""
+  },
+  {
+   "index": 62,
+   "feature": "Secret Vice acknowledged",
+   "claim": "Garth notes Le Guin called language invention 'the Secret Vice' after Tolkien's essay and counted LOTR among the three books she had re-read past counting.",
+   "source": "John Garth blog",
+   "url": "https://johngarth.wordpress.com/2021/01/22/ursula-le-guin-the-language-of-earthsea-and-tolkien/",
    "quote": "",
    "page": ""
   },
   {
-   "index": 16,
-   "feature": "clarity and directness",
-   "claim": "Le Guin said fantasy must be clear and direct with language because the reader has no known framework to rest on.",
-   "source": "Wikipedia: A Wizard of Earthsea (citing Le Guin)",
-   "url": "https://en.wikipedia.org/wiki/A_Wizard_of_Earthsea",
-   "quote": "there is no known framework for the reader's mind",
+   "index": 63,
+   "feature": "minimal reference tools",
+   "claim": "In 'Dreams Must Explain Themselves' Le Guin named only the Shorter Oxford Dictionary and Follett's and Fowler's usage manuals as her tools (later Strunk & White).",
+   "source": "Stan Carey, 'How to see one's own world': Le Guin on writing style (Sentence first blog)",
+   "url": "https://stancarey.wordpress.com/2024/10/16/how-to-see-ones-own-world-ursula-k-le-guin-on-writing-style/",
+   "quote": "Follett's and Fowler's manuals",
    "page": ""
   },
   {
-   "index": 17,
-   "feature": "free indirect discourse",
-   "claim": "Mike Cadden characterizes the Earthsea narration as free indirect discourse in which the protagonist's feelings blend with the narrator's, creating sympathy while keeping narrative flexibility.",
-   "source": "Wikipedia: A Wizard of Earthsea (citing Cadden, Beyond Genre)",
-   "url": "https://en.wikipedia.org/wiki/A_Wizard_of_Earthsea",
-   "quote": "free indirect discourse",
-   "page": ""
-  },
-  {
-   "index": 18,
-   "feature": "assumed familiarity, no exposition",
-   "claim": "The narration assumes the reader already knows Earthsea's geography and history, avoiding heavy exposition, and moves between looking ahead into Ged's future and back into Earthsea's past.",
-   "source": "Wikipedia: A Wizard of Earthsea",
-   "url": "https://en.wikipedia.org/wiki/A_Wizard_of_Earthsea",
-   "quote": "switches from looking ahead into Ged's future",
-   "page": ""
-  },
-  {
-   "index": 19,
-   "feature": "depth without backstory",
-   "claim": "A reviewer credits this method with giving the world Tolkien's mysterious depths 'without his tiresome back-stories'.",
-   "source": "Wikipedia: A Wizard of Earthsea (citing Amanda Craig)",
-   "url": "https://en.wikipedia.org/wiki/A_Wizard_of_Earthsea",
-   "quote": "without his tiresome back-stories",
-   "page": ""
-  },
-  {
-   "index": 20,
-   "feature": "dreamlike mood",
-   "claim": "George Slusser described the book's mood as strange and dreamlike, fluctuating between objective reality and Ged's inner thoughts.",
-   "source": "Wikipedia: A Wizard of Earthsea (citing Slusser 1976)",
-   "url": "https://en.wikipedia.org/wiki/A_Wizard_of_Earthsea",
-   "quote": "strange and dreamlike",
-   "page": ""
-  },
-  {
-   "index": 21,
-   "feature": "taut clean prose",
-   "claim": "Amanda Craig (Guardian) praised prose 'as taut and clean as a ship's sail'.",
-   "source": "Wikipedia: A Wizard of Earthsea (citing Craig)",
-   "url": "https://en.wikipedia.org/wiki/A_Wizard_of_Earthsea",
-   "quote": "prose as taut and clean as a ship's sail",
-   "page": ""
-  },
-  {
-   "index": 22,
-   "feature": "high style, epic vision",
-   "claim": "Slusser (1976) called the Earthsea cycle a work of high style and imagination with genuine epic vision.",
-   "source": "Wikipedia: A Wizard of Earthsea (citing Slusser)",
-   "url": "https://en.wikipedia.org/wiki/A_Wizard_of_Earthsea",
-   "quote": "work of high style and imagination",
-   "page": ""
-  },
-  {
-   "index": 23,
-   "feature": "exact word placement, resonance",
-   "claim": "Harold Bloom called Le Guin an exquisite stylist with every word exactly in place and every sentence resonant.",
-   "source": "Wikipedia: Ursula K. Le Guin (citing Bloom)",
-   "url": "https://en.wikipedia.org/wiki/Ursula_K._Le_Guin",
-   "quote": "Every word was exactly in place",
-   "page": ""
-  },
-  {
-   "index": 24,
-   "feature": "lean but lyrical",
-   "claim": "The New York Times characterized her prose as a lean but lyrical style used to explore moral issues.",
-   "source": "Wikipedia: Ursula K. Le Guin (citing NYT)",
-   "url": "https://en.wikipedia.org/wiki/Ursula_K._Le_Guin",
-   "quote": "lean but lyrical style",
-   "page": ""
-  },
-  {
-   "index": 25,
-   "feature": "elegance",
-   "claim": "Zadie Smith called her prose as elegant and beautiful as any written in the twentieth century.",
-   "source": "Wikipedia: Ursula K. Le Guin (citing Zadie Smith)",
-   "url": "https://en.wikipedia.org/wiki/Ursula_K._Le_Guin",
-   "quote": "as elegant and beautiful as any written",
-   "page": ""
-  },
-  {
-   "index": 26,
-   "feature": "collage narrative structure",
-   "claim": "The Left Hand of Darkness is assembled from ethnological reports, myths, diary entries and personal narration, a structure called distinctly post-modern.",
-   "source": "Wikipedia: Ursula K. Le Guin",
-   "url": "https://en.wikipedia.org/wiki/Ursula_K._Le_Guin",
-   "quote": "distinctly post-modern",
-   "page": ""
-  },
-  {
-   "index": 27,
-   "feature": "restrained pathos",
-   "claim": "Bloom described the Left Hand prose as precise, dialectical and always evocative in its restrained pathos.",
-   "source": "Wikipedia: The Left Hand of Darkness (citing Bloom)",
-   "url": "https://en.wikipedia.org/wiki/The_Left_Hand_of_Darkness",
-   "quote": "precise, dialectical—always evocative in its restrained pathos",
-   "page": ""
-  },
-  {
-   "index": 28,
-   "feature": "myth-chapter interleaving",
-   "claim": "Gethenian myths and legends are placed before chapters in which Genly Ai meets similar situations, so the embedded texts explain both cultural detail and philosophy.",
-   "source": "Wikipedia: The Left Hand of Darkness",
-   "url": "https://en.wikipedia.org/wiki/The_Left_Hand_of_Darkness",
+   "index": 64,
+   "feature": "style as vision",
+   "claim": "Carey foregrounds the essay's claim that style is the writer's way of seeing and speaking, and that the artist's hardest lesson is to see his own world and speak in his own words.",
+   "source": "Stan Carey blog (quoting Elfland)",
+   "url": "https://stancarey.wordpress.com/2024/10/16/how-to-see-ones-own-world-ursula-k-le-guin-on-writing-style/",
    "quote": "",
    "page": ""
   },
   {
-   "index": 29,
-   "feature": "naive first-person that learns",
-   "claim": "Ai's first-person report reflects a gradually evolving worldview so the reader's understanding develops with his; the structure was initially found confusing by reviewers (Donna White).",
-   "source": "Wikipedia: The Left Hand of Darkness (citing White)",
-   "url": "https://en.wikipedia.org/wiki/The_Left_Hand_of_Darkness",
-   "quote": "",
+   "index": 65,
+   "feature": "language as subject",
+   "claim": "Margaret Mahy: in Earthsea language is not only the vehicle of the story but at times what the story is about, and Le Guin must find the right name before she can go on.",
+   "source": "Margaret Mahy, 'Speculations on the Earthsea Stories' (ursulakleguin.com)",
+   "url": "https://www.ursulakleguin.com/on-earthsea-mahy",
+   "quote": "what the story is about",
+   "page": ""
+  },
+  {
+   "index": 66,
+   "feature": "names with conviction",
+   "claim": "The invented names carry conviction and inevitability, so the reader feels reminded of a land already known.",
+   "source": "Margaret Mahy (ursulakleguin.com)",
+   "url": "https://www.ursulakleguin.com/on-earthsea-mahy",
+   "quote": "conviction and inevitability",
+   "page": ""
+  },
+  {
+   "index": 67,
+   "feature": "spoken voice in the reader's head",
+   "claim": "Mahy describes the reading experience as words on the page becoming a spoken voice in the reader's head — the storyteller addressing a reader-listener.",
+   "source": "Margaret Mahy (ursulakleguin.com)",
+   "url": "https://www.ursulakleguin.com/on-earthsea-mahy",
+   "quote": "a spoken voice in the reader's head",
+   "page": ""
+  },
+  {
+   "index": 68,
+   "feature": "legend feel",
+   "claim": "Walton calls it one of the very few fantasy novels that succeeds in feeling like a legend.",
+   "source": "Jo Walton, '\"Bright the hawk's flight in the empty sky\": Ursula Le Guin's A Wizard of Earthsea' (Reactor, 2010)",
+   "url": "https://reactormag.com/qbright-the-hawks-flight-in-the-empty-skyq-ursula-le-guins-lemga-wizard-of-earthsealemg/",
+   "quote": "succeeds in feeling like a legend",
+   "page": ""
+  },
+  {
+   "index": 69,
+   "feature": "modulated narrative distance",
+   "claim": "The narration passes easily from what people say and what isn't spoken of, from the distance of the fairy-tale teller to the very close, always sure where the teller stands.",
+   "source": "Jo Walton, '\"Bright the hawk's flight in the empty sky\": Ursula Le Guin's A Wizard of Earthsea' (Reactor, 2010)",
+   "url": "https://reactormag.com/qbright-the-hawks-flight-in-the-empty-skyq-ursula-le-guins-lemga-wizard-of-earthsealemg/",
+   "quote": "the distance of the teller of fairy-tales to the very close",
+   "page": ""
+  },
+  {
+   "index": 70,
+   "feature": "told within the world, after the story",
+   "claim": "The story is told entirely within the world but after it, so the implied reader is assumed to know the great deeds referenced.",
+   "source": "Jo Walton, '\"Bright the hawk's flight in the empty sky\": Ursula Le Guin's A Wizard of Earthsea' (Reactor, 2010)",
+   "url": "https://reactormag.com/qbright-the-hawks-flight-in-the-empty-skyq-ursula-le-guins-lemga-wizard-of-earthsealemg/",
+   "quote": "told entirely within the world, but after the story",
+   "page": ""
+  },
+  {
+   "index": 71,
+   "feature": "no wasted word; read-aloud",
+   "claim": "There is never a wasted word and all the words are right; it is like poetry and among the best books for reading aloud.",
+   "source": "Jo Walton, '\"Bright the hawk's flight in the empty sky\": Ursula Le Guin's A Wizard of Earthsea' (Reactor, 2010)",
+   "url": "https://reactormag.com/qbright-the-hawks-flight-in-the-empty-skyq-ursula-le-guins-lemga-wizard-of-earthsealemg/",
+   "quote": "There's never a wasted word, and all the words are right.",
+   "page": ""
+  },
+  {
+   "index": 72,
+   "feature": "evocative naming",
+   "claim": "The names (Selidor, Iffish, Havnor, Osskil, Gont, Pendor) make the map memorable; the world is 'named and called up' from the first word.",
+   "source": "Jo Walton, '\"Bright the hawk's flight in the empty sky\": Ursula Le Guin's A Wizard of Earthsea' (Reactor, 2010)",
+   "url": "https://reactormag.com/qbright-the-hawks-flight-in-the-empty-skyq-ursula-le-guins-lemga-wizard-of-earthsealemg/",
+   "quote": "Le Guin is so wonderful with names",
+   "page": ""
+  },
+  {
+   "index": 73,
+   "feature": "bounded world",
+   "claim": "A world with much more in it than appears on the page — history, other countries — yet with a clear line drawn round it: 'only in silence the word'.",
+   "source": "Jo Walton, '\"Bright the hawk's flight in the empty sky\": Ursula Le Guin's A Wizard of Earthsea' (Reactor, 2010)",
+   "url": "https://reactormag.com/qbright-the-hawks-flight-in-the-empty-skyq-ursula-le-guins-lemga-wizard-of-earthsealemg/",
+   "quote": "a clear line drawn around it",
+   "page": ""
+  },
+  {
+   "index": 74,
+   "feature": "blank spaces for the reader",
+   "claim": "Plotz (per Burt) calls the prose the antithesis of high-end video-game verisimilitude: it leaves blanks the reader fills, showing how often we fill things in.",
+   "source": "Stephanie Burt, review of John Plotz, Ursula Le Guin's Earthsea (OUP 2023), Strange Horizons",
+   "url": "https://strangehorizons.com/wordpress/non-fiction/ursula-le-guins-earthsea-by-john-plotz/",
+   "quote": "the antithesis of the well-rendered verisimilitude",
    "page": ""
   }
  ]

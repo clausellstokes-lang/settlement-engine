@@ -13,7 +13,10 @@
   237,
   238,
   239,
-  240
+  240,
+  241,
+  242,
+  243
  ],
  "claims": [
   {
@@ -123,6 +126,33 @@
    "url": "http://grognardia.blogspot.com/2025/08/interview-mike-mearls.html",
    "quote": "everything matched the D&D house style",
    "page": "interview"
+  },
+  {
+   "index": 241,
+   "feature": "style foundation (Chicago + Merriam-Webster)",
+   "claim": "The 2019 guide (v1.08a) rests on the Chicago Manual of Style 17th edition and Merriam-Webster's Collegiate 11th edition, and covers only D&D-specific departures from them.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "Merriam-Webster’s Collegiate Dictionary, 11th edition",
+   "page": "p.1"
+  },
+  {
+   "index": 242,
+   "feature": "scope across product types",
+   "claim": "The general rules bind every D&D product, not just rulebooks.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "whether RPG books, board games, novels, or something else",
+   "page": "p.1"
+  },
+  {
+   "index": 243,
+   "feature": "edition naming",
+   "claim": "Editions are spelled out and lowercased ('fifth edition'), with 4E/5E abbreviations confined to tables, conversion documents, or informal text.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "We write “fifth edition,” for instance, not “5th Edition.”",
+   "page": "p.2"
   }
  ]
 }

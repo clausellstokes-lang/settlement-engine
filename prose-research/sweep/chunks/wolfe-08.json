@@ -1,0 +1,158 @@
+{
+ "name": "wolfe",
+ "chunk": 8,
+ "indices": [
+  120,
+  121,
+  122,
+  123,
+  124,
+  125,
+  126,
+  127,
+  128,
+  129,
+  130,
+  131,
+  132,
+  133,
+  134
+ ],
+ "claims": [
+  {
+   "index": 120,
+   "feature": "lost object as buried guilt",
+   "claim": "The Boy Scout knife that Weer can never locate, and the pun in 'my den, where I now never go', carry double meanings the narrator does not acknowledge.",
+   "source": "The Solute 2017",
+   "url": "https://www.the-solute.com/blind-reads-peace-by-gene-wolfe/",
+   "quote": "my den, where I now never go",
+   "page": ""
+  },
+  {
+   "index": 121,
+   "feature": "digression as postponement",
+   "claim": "The layered tales let Weer escape: as long as he keeps telling stories he need not face what comes next.",
+   "source": "The Solute 2017",
+   "url": "https://www.the-solute.com/blind-reads-peace-by-gene-wolfe/",
+   "quote": "as long as Weer keeps telling stories",
+   "page": ""
+  },
+  {
+   "index": 122,
+   "feature": "scrupulously honest up to a point",
+   "claim": "Gaiman's remark, quoted here, that Wolfe's narrators are scrupulously honest but only up to a point.",
+   "source": "The Solute 2017 (quoting Gaiman)",
+   "url": "https://www.the-solute.com/blind-reads-peace-by-gene-wolfe/",
+   "quote": "scrupulously honest, but only up to a point",
+   "page": ""
+  },
+  {
+   "index": 123,
+   "feature": "perfect-memory claim contradicted",
+   "claim": "Weer prides himself on remembering everything yet cannot remember the librarian's name, a self-contradiction the text leaves standing.",
+   "source": "Fernandes, Reactor 2019",
+   "url": "https://reactormag.com/peace-wolfes-masterful-rumination-on-nostalgia-memory-and-uncertainty/",
+   "quote": "I who pride myself upon remembering everything",
+   "page": ""
+  },
+  {
+   "index": 124,
+   "feature": "house as mnemonic haunting device",
+   "claim": "The house functions as a point in space for a dead person to revisit his life, a motif Wolfe reused in 'Checking Out'.",
+   "source": "Fernandes, Reactor 2019",
+   "url": "https://reactormag.com/peace-wolfes-masterful-rumination-on-nostalgia-memory-and-uncertainty/",
+   "quote": "a point in space for a dead person",
+   "page": ""
+  },
+  {
+   "index": 125,
+   "feature": "first line resolved through a married name",
+   "claim": "The elm of the first sentence is planted on Weer's grave: Eleanor Bold became Mrs Porter, who much later says she wants to plant a tree on his grave.",
+   "source": "Knode, Reactor 2012",
+   "url": "https://reactormag.com/gene-wolfe-peace-review/",
+   "quote": "The evidence for it is buried, but convincing.",
+   "page": ""
+  },
+  {
+   "index": 126,
+   "feature": "no breadcrumb trail, clues present",
+   "claim": "Wolfe never talks down to the reader and lays out no breadcrumb trail, but the clues are there.",
+   "source": "Knode, Reactor 2012",
+   "url": "https://reactormag.com/gene-wolfe-peace-review/",
+   "quote": "doesn't lay out breadcrumbs in a trail",
+   "page": ""
+  },
+  {
+   "index": 127,
+   "feature": "blink-and-you-miss revelations",
+   "claim": "Wolfe's mysteries are revealed in blink-and-you-miss moments among endless allusions.",
+   "source": "Michel 2026",
+   "url": "https://countercraft.substack.com/p/why-you-should-read-gene-wolfe-and",
+   "quote": "mysteries that are revealed in blink-and-you-miss moments",
+   "page": ""
+  },
+  {
+   "index": 128,
+   "feature": "context over exposition",
+   "claim": "Where other books spend time on exposition, Wolfe largely depends on context to bring the reader through.",
+   "source": "Khanna, LitReactor 2012",
+   "url": "https://litreactor.com/columns/primer-gene-wolfe-the-subtle-master/",
+   "quote": "largely depends on context to bring the reader through",
+   "page": ""
+  },
+  {
+   "index": 129,
+   "feature": "chapter gaps skip the set piece",
+   "claim": "A chapter may end with Able heading to a battle and the next pick up afterwards; questions posed in one chapter are answered several later.",
+   "source": "Khanna, LitReactor 2012",
+   "url": "https://litreactor.com/columns/primer-gene-wolfe-the-subtle-master/",
+   "quote": "In the following chapter, we pick up afterwards",
+   "page": ""
+  },
+  {
+   "index": 130,
+   "feature": "stated chastity contradicted later",
+   "claim": "Severian describes a chaste relationship and later mentions kissing the woman's breasts, an inconsistency read as intentional or unintentional prevarication.",
+   "source": "Khanna, LitReactor 2012",
+   "url": "https://litreactor.com/columns/primer-gene-wolfe-the-subtle-master/",
+   "quote": "intentional or unintentional prevarication",
+   "page": ""
+  },
+  {
+   "index": 131,
+   "feature": "repurposed old words as new language",
+   "claim": "Wolfe repurposes old words to create an almost new language for the world.",
+   "source": "Khanna, LitReactor 2012",
+   "url": "https://litreactor.com/columns/primer-gene-wolfe-the-subtle-master/",
+   "quote": "repurposes old words to create an almost new language",
+   "page": ""
+  },
+  {
+   "index": 132,
+   "feature": "narrator gives few clues to his own feelings",
+   "claim": "The Toy Theater's narrator, like other Wolfe protagonists, gives very few clues about what he himself is feeling.",
+   "source": "Locus 2009, 'The Toy Theater'",
+   "url": "https://locusmag.com/2009/04/reading-gene-wolfe/",
+   "quote": "so few clues about what he himself is feeling",
+   "page": ""
+  },
+  {
+   "index": 133,
+   "feature": "final line dizzying by omission",
+   "claim": "The story's last reported speech ends on 'know' with nothing after it, leaving two readings open, which the critic finds especially hard to parse.",
+   "source": "Locus 2009, 'The Toy Theater'",
+   "url": "https://locusmag.com/2009/04/reading-gene-wolfe/",
+   "quote": "especially hard to parse",
+   "page": ""
+  },
+  {
+   "index": 134,
+   "feature": "single chosen word as keynote",
+   "claim": "The word 'craquelure' for the cracks under a puppet's cosmetics becomes the keynote suggesting how fake everything may be.",
+   "source": "Locus 2009, 'The Toy Theater'",
+   "url": "https://locusmag.com/2009/04/reading-gene-wolfe/",
+   "quote": "That wonderfully well-chosen word craquelure",
+   "page": ""
+  }
+ ]
+}

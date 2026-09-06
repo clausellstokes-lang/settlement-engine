@@ -1,0 +1,158 @@
+{
+ "name": "hobb",
+ "chunk": 2,
+ "indices": [
+  30,
+  31,
+  32,
+  33,
+  34,
+  35,
+  36,
+  37,
+  38,
+  39,
+  40,
+  41,
+  42,
+  43,
+  44
+ ],
+ "claims": [
+  {
+   "index": 30,
+   "feature": "limited magic",
+   "claim": "Magic must be scarce; three wishes make a tale, infinite wishes make none.",
+   "source": "LisiPieces interview",
+   "url": "https://www.lisipieces.com/robin-hobb-isnt-writing-back-anymore/",
+   "quote": "an infinite number of wishes is no story at all",
+   "page": ""
+  },
+  {
+   "index": 31,
+   "feature": "consistent coinage and value",
+   "claim": "Determine coinage and the value of money and keep it consistent through the book.",
+   "source": "LisiPieces interview",
+   "url": "https://www.lisipieces.com/robin-hobb-isnt-writing-back-anymore/",
+   "quote": "Determine coinage and value of money",
+   "page": ""
+  },
+  {
+   "index": 32,
+   "feature": "village-economy plausibility",
+   "claim": "Research economy and geography: a tiny village will not support an artisan specialising in doorknockers.",
+   "source": "The OF Blog interview (2003)",
+   "url": "http://ofblog.blogspot.com/2003/04/robin-hobb-interview.html",
+   "quote": "an artisan specializing in doorknockers",
+   "page": ""
+  },
+  {
+   "index": 33,
+   "feature": "food constrained by technology, geography, climate",
+   "claim": "A meal must be believable for the technology level, geography and climate, and such details fall naturally into the tale.",
+   "source": "Fran Wilde, Cooking the Books guest post (2014)",
+   "url": "https://franwilde.wordpress.com/2014/11/04/ctb-robin-hobb/",
+   "quote": "the technology level, the geography and climate",
+   "page": ""
+  },
+  {
+   "index": 34,
+   "feature": "household status gradient",
+   "claim": "Status registers in the ordinary: food served in the kitchen was warmer than food served in the hall.",
+   "source": "Fran Wilde, Cooking the Books guest post (2014)",
+   "url": "https://franwilde.wordpress.com/2014/11/04/ctb-robin-hobb/",
+   "quote": "warmer than that served in the hall",
+   "page": ""
+  },
+  {
+   "index": 35,
+   "feature": "subsistence menu",
+   "claim": "A character on the frontier has a limited menu, and the constraint is listed item by item.",
+   "source": "Fran Wilde, Cooking the Books guest post (2014)",
+   "url": "https://franwilde.wordpress.com/2014/11/04/ctb-robin-hobb/",
+   "quote": "No flour, no sugar, no milk, cream or butter",
+   "page": ""
+  },
+  {
+   "index": 36,
+   "feature": "magic paid for in the body",
+   "claim": "The whole saga grew from asking what if magic were addictive and degenerative, so that power is paid for physically.",
+   "source": "Locus interview excerpts (January 1998)",
+   "url": "https://www.locusmag.com/1998/Issues/01/Hobb.html",
+   "quote": "What if magic were addictive?",
+   "page": ""
+  },
+  {
+   "index": 37,
+   "feature": "common magic is technology",
+   "claim": "Magic that everybody can do becomes commonplace technology; scarcity keeps it magic.",
+   "source": "Locus interview excerpts (December 2005)",
+   "url": "https://www.locusmag.com/2005/Issues/12Hobb.html",
+   "quote": "any sufficiently common magic is technology",
+   "page": ""
+  },
+  {
+   "index": 38,
+   "feature": "violence written as ugly",
+   "claim": "Violence is written to be horrifying and ugly, never lascivious, and rape as a haunting that never fully leaves.",
+   "source": "New Statesman profile (Pauline Bock, 2018)",
+   "url": "https://www.newstatesman.com/long-reads/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm",
+   "quote": "how horrifying and ugly violence is",
+   "page": ""
+  },
+  {
+   "index": 39,
+   "feature": "follow the story, no reset",
+   "claim": "Once a story goes somewhere she does not turn back or undo it with an it-was-all-a-dream.",
+   "source": "Fantasy-Faction interview part two (2013)",
+   "url": "https://fantasy-faction.com/2013/robin-hobb-interview-part-two",
+   "quote": "Follow the story, wherever it goes",
+   "page": ""
+  },
+  {
+   "index": 40,
+   "feature": "painted into a corner",
+   "claim": "When a character makes a stupid decision the writer is stuck with it and must write the consequence.",
+   "source": "Dragonsteel Nexus 2024 character panel report",
+   "url": "https://www.dragonsteelbooks.com/blogs/the-cognitive-realm/how-to-write-compelling-characters-panel-dragonsteel-nexus-2024",
+   "quote": "you are stuck with it",
+   "page": ""
+  },
+  {
+   "index": 41,
+   "feature": "experience shapes character (consequence as identity)",
+   "claim": "What happens to a character changes her permanently, and a character not shaped by her experiences makes those experiences pointless to write.",
+   "source": "Paw Print interview (Madalen Erez, 2020)",
+   "url": "https://cscsnews.com/744/literary-arts/an-interview-with-robin-hobb-character-writing/",
+   "quote": "The things that happen to us change us",
+   "page": ""
+  },
+  {
+   "index": 42,
+   "feature": "no plot armour; bodily aftermath",
+   "claim": "Physical damage must leave aftermath, bruises, blood, limping, vomiting, because a good character does not protect anyone from a concussion.",
+   "source": "Paw Print interview (Madalen Erez, 2020)",
+   "url": "https://cscsnews.com/744/literary-arts/an-interview-with-robin-hobb-character-writing/",
+   "quote": "no one limps or throws up in the corner",
+   "page": ""
+  },
+  {
+   "index": 43,
+   "feature": "product of what has been done to us",
+   "claim": "Characters become the product of what has been done to them, or for them.",
+   "source": "Paw Print interview (Madalen Erez, 2020)",
+   "url": "https://cscsnews.com/744/literary-arts/an-interview-with-robin-hobb-character-writing/",
+   "quote": "the product of what has been done to us",
+   "page": ""
+  },
+  {
+   "index": 44,
+   "feature": "character before purpose",
+   "claim": "Characters step onto the stage unplanned and are allowed their own ideas about the story; the Fool was outlined as a minor character.",
+   "source": "Paw Print interview (Madalen Erez, 2020)",
+   "url": "https://cscsnews.com/744/literary-arts/an-interview-with-robin-hobb-character-writing/",
+   "quote": "some characters just have their own ideas about the story",
+   "page": ""
+  }
+ ]
+}

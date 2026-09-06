@@ -1,0 +1,158 @@
+{
+ "name": "dnd",
+ "chunk": 13,
+ "indices": [
+  244,
+  245,
+  246,
+  247,
+  248,
+  249,
+  250,
+  251,
+  252,
+  253,
+  254,
+  255,
+  256,
+  257,
+  258
+ ],
+ "claims": [
+  {
+   "index": 244,
+   "feature": "source discipline for setting facts",
+   "claim": "Writers are told not to rely on internet searches, wikis, or prior-edition products for setting facts.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "Don’t rely on Internet searches",
+   "page": "p.1"
+  },
+  {
+   "index": 245,
+   "feature": "register: high-fantasy tone gate",
+   "claim": "Tone is gated by a Lord of the Rings / Game of Thrones plausibility test; humor and tragedy are allowed only if they do not overtake the general tone.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "ring wraiths aren’t used for gags",
+   "page": "p.2"
+  },
+  {
+   "index": 246,
+   "feature": "register: party over lone hero",
+   "claim": "D&D's brand voice frames adventure as a team's story rather than a lone knight's.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "Teamwork and friendship are a huge part",
+   "page": "p.2"
+  },
+  {
+   "index": 247,
+   "feature": "gender neutrality (2019 rule)",
+   "claim": "Gender-neutral wording is expected whenever a person's gender is unknown or irrelevant, and the reader's gender is not assumed.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "gender neutrality whenever the gender of a person is unknown",
+   "page": "p.2"
+  },
+  {
+   "index": 248,
+   "feature": "second person in rules text",
+   "claim": "Rules text achieves gender neutrality chiefly by being written in the second person.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "writing in the second person whenever possible",
+   "page": "p.2"
+  },
+  {
+   "index": 249,
+   "feature": "singular they (2019: allowed but rationed)",
+   "claim": "v1.08a newly permits singular 'they/their' but tells writers to reach for it only when no other pleasing alternative exists.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "but don’t abuse this liberty",
+   "page": "p.2"
+  },
+  {
+   "index": 250,
+   "feature": "pronoun devices to avoid",
+   "claim": "'He or she' is to be used sparingly; 'he/she' and 's/he' are banned; alternating he and she for inclusivity is banned.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "avoid “he/she” and “s/he” altogether",
+   "page": "p.2"
+  },
+  {
+   "index": 251,
+   "feature": "gender and fantasy races (2019 rule)",
+   "claim": "In 2019 'man' and 'woman' were reserved for humans only, so a dwarf is a 'male dwarf', never a 'dwarf man'.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "we write “male dwarf,” not “dwarf man”",
+   "page": "p.2"
+  },
+  {
+   "index": 252,
+   "feature": "dialogue exemption from editorial style",
+   "claim": "Editorial rules such as the man/woman restriction may be broken in dialogue and first-person narrative, because a character need not follow house style.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "This rule can be broken in dialogue and first-person narrative",
+   "page": "p.3"
+  },
+  {
+   "index": 253,
+   "feature": "gender-specific suffixes",
+   "claim": "Gendered suffixes are avoided ('priest', 'actor'); 'priestess'/'actress' survive only inside an in-world title or organization name.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "Avoid gender-specific suffixes whenever possible",
+   "page": "p.3"
+  },
+  {
+   "index": 254,
+   "feature": "'god' as ungendered noun",
+   "claim": "Deities are called 'god' regardless of gender in editorial voice; 'goddess' is reserved for in-world usage.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "use “god” whether the deity is male or female",
+   "page": "p.3"
+  },
+  {
+   "index": 255,
+   "feature": "heading hierarchy",
+   "claim": "Headings descend Chapter Title > Heading 1 > 2 > 3 > Inline Subhead without skipping, and exist for structure, never aesthetics.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "Use a heading for a structural reason, not an aesthetic one",
+   "page": "p.3"
+  },
+  {
+   "index": 256,
+   "feature": "inline subhead punctuation",
+   "claim": "The inline subhead (heading 4) is set in bold italics and ends with a period, exclamation point, or question mark, not a colon.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "should be followed by terminal punctuation, not a colon",
+   "page": "p.3"
+  },
+  {
+   "index": 257,
+   "feature": "emphasis discipline",
+   "claim": "Bold is the only emphasis device, and a term already in the section heading gets no emphasis in running text.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "Use bold for such emphasis",
+   "page": "p.3"
+  },
+  {
+   "index": 258,
+   "feature": "sidebars",
+   "claim": "Sidebars are rationed; any sidebar that must follow a specific passage to make sense should be folded into body text instead.",
+   "source": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "quote": "The best sidebars can appear anywhere on a page",
+   "page": "p.3"
+  }
+ ]
+}

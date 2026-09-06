@@ -1,0 +1,158 @@
+{
+ "name": "ai",
+ "chunk": 14,
+ "indices": [
+  464,
+  465,
+  466,
+  467,
+  468,
+  469,
+  470,
+  471,
+  472,
+  473,
+  474,
+  475,
+  476,
+  477,
+  478
+ ],
+ "claims": [
+  {
+   "index": 464,
+   "feature": "excellence only about half the time",
+   "claim": "GPT-4 and Claude can produce excellent literary summaries, but only about half the time.",
+   "source": "Subbiah, Zhang, Chilton, McKeown — 'Reading Subtext: Evaluating Large Language Models on Short Story Summarization with Writers' (TACL 2024)",
+   "url": "https://arxiv.org/html/2403.01061",
+   "quote": "excellent summaries, but only about half the time",
+   "page": ""
+  },
+  {
+   "index": 465,
+   "feature": "default bland, elementary voice",
+   "claim": "Nearly all writers noticed a single default voice in the generations, bland and elementary in its language.",
+   "source": "Ippolito, Yuan, Coenen, Burnam — 'Creative Writing with an AI-Powered Writing Assistant: Perspectives from Professional Writers' (arXiv 2022)",
+   "url": "https://arxiv.org/html/2211.05030",
+   "quote": "bland and somewhat elementary in its use of language",
+   "page": ""
+  },
+  {
+   "index": 466,
+   "feature": "novice fan-fiction register",
+   "claim": "Several writers compared the suggestions to those of a novice fan-fiction writer, pitched at an implicit audience of internet users.",
+   "source": "Ippolito, Yuan, Coenen, Burnam — 'Creative Writing with an AI-Powered Writing Assistant: Perspectives from Professional Writers' (arXiv 2022)",
+   "url": "https://arxiv.org/html/2211.05030",
+   "quote": "novice fan fiction writer",
+   "page": ""
+  },
+  {
+   "index": 467,
+   "feature": "genre collapses to its most worn trope",
+   "claim": "The model pushed a fantasy story toward warrior-hero-versus-invaders and treated genre as its dominant trope.",
+   "source": "Ippolito, Yuan, Coenen, Burnam — 'Creative Writing with an AI-Powered Writing Assistant: Perspectives from Professional Writers' (arXiv 2022)",
+   "url": "https://arxiv.org/html/2211.05030",
+   "quote": "fantasy is high fantasy, science fiction is robots and spaceships",
+   "page": ""
+  },
+  {
+   "index": 468,
+   "feature": "heteronormative and male defaults",
+   "claim": "A lesbian romance kept receiving suggestions to add a male character; unspecified gender defaulted to a male voice.",
+   "source": "Ippolito, Yuan, Coenen, Burnam — 'Creative Writing with an AI-Powered Writing Assistant: Perspectives from Professional Writers' (arXiv 2022)",
+   "url": "https://arxiv.org/html/2211.05030",
+   "quote": "kept suggesting that she insert a male character",
+   "page": ""
+  },
+  {
+   "index": 469,
+   "feature": "characters are not allowed to be mean",
+   "claim": "Safety tuning made the system reluctant to generate people doing mean things, flattening conflict.",
+   "source": "Ippolito, Yuan, Coenen, Burnam — 'Creative Writing with an AI-Powered Writing Assistant: Perspectives from Professional Writers' (arXiv 2022)",
+   "url": "https://arxiv.org/html/2211.05030",
+   "quote": "seemed very reluctant to generate people doing mean things",
+   "page": ""
+  },
+  {
+   "index": 470,
+   "feature": "exemplar names leak into every story",
+   "claim": "Prompt exemplars containing 'Sarah' caused the system to try inserting a Sarah into every participant's story.",
+   "source": "Ippolito, Yuan, Coenen, Burnam — 'Creative Writing with an AI-Powered Writing Assistant: Perspectives from Professional Writers' (arXiv 2022)",
+   "url": "https://arxiv.org/html/2211.05030",
+   "quote": "into every single participant’s story",
+   "page": ""
+  },
+  {
+   "index": 471,
+   "feature": "shallow memory of the story",
+   "claim": "All participants complained that the model's understanding of their story was superficial, worsening with length.",
+   "source": "Ippolito, Yuan, Coenen, Burnam — 'Creative Writing with an AI-Powered Writing Assistant: Perspectives from Professional Writers' (arXiv 2022)",
+   "url": "https://arxiv.org/html/2211.05030",
+   "quote": "understanding seemed superficial if not entirely absent",
+   "page": ""
+  },
+  {
+   "index": 472,
+   "feature": "metaphors too simple and sensible",
+   "claim": "The model offered only simple, sensible metaphors where writers wanted complex or not-quite-sensible ones.",
+   "source": "Ippolito, Yuan, Coenen, Burnam — 'Creative Writing with an AI-Powered Writing Assistant: Perspectives from Professional Writers' (arXiv 2022)",
+   "url": "https://arxiv.org/html/2211.05030",
+   "quote": "sometimes one wants metaphors to be complex, or not quite sensible",
+   "page": ""
+  },
+  {
+   "index": 473,
+   "feature": "reversion to trope and repetition",
+   "claim": "Suggestions slid easily back into tropes and repetition, a named system limitation.",
+   "source": "Ippolito, Yuan, Coenen, Burnam — 'Creative Writing with an AI-Powered Writing Assistant: Perspectives from Professional Writers' (arXiv 2022)",
+   "url": "https://arxiv.org/html/2211.05030",
+   "quote": "Suggestions too Easily Revert to Tropes and Repetition",
+   "page": ""
+  },
+  {
+   "index": 474,
+   "feature": "one narrative in many skins",
+   "claim": "Writers reported the model writing the same story over and over with a new surface, regardless of prompt.",
+   "source": "Chakrabarty, Padmakumar, Brahman, Muresan — 'Creativity Support in the Age of Large Language Models: An Empirical Study Involving Emerging Writers' (arXiv 2023)",
+   "url": "https://arxiv.org/html/2309.12570",
+   "quote": "writes exactly the same story over and over again",
+   "page": ""
+  },
+  {
+   "index": 475,
+   "feature": "most-obvious autocomplete",
+   "claim": "The system autocompletes toward the most obvious version of any request, the opposite of good fiction.",
+   "source": "Chakrabarty, Padmakumar, Brahman, Muresan — 'Creativity Support in the Age of Large Language Models: An Empirical Study Involving Emerging Writers' (arXiv 2023)",
+   "url": "https://arxiv.org/html/2309.12570",
+   "quote": "autocompletes with the most obvious version of whatever you ask for",
+   "page": ""
+  },
+  {
+   "index": 476,
+   "feature": "telling over showing",
+   "claim": "The model tells rather than shows and cannot write real scenes with realistic dialogue and detail.",
+   "source": "Chakrabarty, Padmakumar, Brahman, Muresan — 'Creativity Support in the Age of Large Language Models: An Empirical Study Involving Emerging Writers' (arXiv 2023)",
+   "url": "https://arxiv.org/html/2309.12570",
+   "quote": "much better at telling than showing",
+   "page": ""
+  },
+  {
+   "index": 477,
+   "feature": "moralising, didactic endings",
+   "claim": "Every ending arrived as a stated lesson, uplifting and didactic whether or not the story wanted it.",
+   "source": "Chakrabarty, Padmakumar, Brahman, Muresan — 'Creativity Support in the Age of Large Language Models: An Empirical Study Involving Emerging Writers' (arXiv 2023)",
+   "url": "https://arxiv.org/html/2309.12570",
+   "quote": "Here is the lesson learnt",
+   "page": ""
+  },
+  {
+   "index": 478,
+   "feature": "binary tone; no nuance between happy and fatalistic",
+   "claim": "The model resists ambiguity and treats any story that is neither happy nor wholly fatalistic as flawed.",
+   "source": "Chakrabarty, Padmakumar, Brahman, Muresan — 'Creativity Support in the Age of Large Language Models: An Empirical Study Involving Emerging Writers' (arXiv 2023)",
+   "url": "https://arxiv.org/html/2309.12570",
+   "quote": "The story must be either happy or entirely fatalistic",
+   "page": ""
+  }
+ ]
+}

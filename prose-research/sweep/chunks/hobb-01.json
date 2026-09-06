@@ -1,0 +1,158 @@
+{
+ "name": "hobb",
+ "chunk": 1,
+ "indices": [
+  15,
+  16,
+  17,
+  18,
+  19,
+  20,
+  21,
+  22,
+  23,
+  24,
+  25,
+  26,
+  27,
+  28,
+  29
+ ],
+ "claims": [
+  {
+   "index": 15,
+   "feature": "mundane must match reality",
+   "claim": "For dragons to be believed, everything ordinary must match our reality, down to the hero spilling his coffee.",
+   "source": "Helsinki Times WorldCon75 interview (2017)",
+   "url": "https://www.helsinkitimes.fi/culture/14974-worldcon75-interview-with-author-robin-hobb.html",
+   "quote": "the hero spills his cup of hot coffee",
+   "page": ""
+  },
+  {
+   "index": 16,
+   "feature": "refusal to smooth",
+   "claim": "She does not smooth life out for her characters; it is never going to be all pony rides.",
+   "source": "Helsinki Times WorldCon75 interview (2017)",
+   "url": "https://www.helsinkitimes.fi/culture/14974-worldcon75-interview-with-author-robin-hobb.html",
+   "quote": "everything is always going to be pony rides",
+   "page": ""
+  },
+  {
+   "index": 17,
+   "feature": "anti-purple diction",
+   "claim": "She avoids the language that reaches for 'throbbing' anything.",
+   "source": "Helsinki Times WorldCon75 interview (2017)",
+   "url": "https://www.helsinkitimes.fi/culture/14974-worldcon75-interview-with-author-robin-hobb.html",
+   "quote": "his or her 'throbbing' whatever",
+   "page": ""
+  },
+  {
+   "index": 18,
+   "feature": "character as a coat",
+   "claim": "To write any viewpoint she puts the character on like a coat and believes everything they believe for the duration.",
+   "source": "Helsinki Times WorldCon75 interview (2017)",
+   "url": "https://www.helsinkitimes.fi/culture/14974-worldcon75-interview-with-author-robin-hobb.html",
+   "quote": "put that character on like a coat",
+   "page": ""
+  },
+  {
+   "index": 19,
+   "feature": "ordinary interior for every viewpoint",
+   "claim": "Inside any viewpoint, even the villain is wondering what is for dinner.",
+   "source": "The OF Blog interview (2003)",
+   "url": "http://ofblog.blogspot.com/2003/04/robin-hobb-interview.html",
+   "quote": "even the villain is wondering what is for dinner",
+   "page": ""
+  },
+  {
+   "index": 20,
+   "feature": "Hobb sprawls, Lindholm lean",
+   "claim": "As Hobb she sprawls in novels and knows it; her Lindholm prose is much leaner.",
+   "source": "The OF Blog interview (2003)",
+   "url": "http://ofblog.blogspot.com/2003/04/robin-hobb-interview.html",
+   "quote": "In a novel, I sprawl, and I know it",
+   "page": ""
+  },
+  {
+   "index": 21,
+   "feature": "Hobb voice pauses on feeling",
+   "claim": "The Hobb voice is leisurely, with more emotion and more pausing over what characters think or feel, where Lindholm reports what happened.",
+   "source": "Reactor, NYCC 2019 panel report (Natalie Zutter)",
+   "url": "https://reactormag.com/robin-hobb-nycc-2019-highlights-assassins-apprentice-25-years/",
+   "quote": "writes in a much more leisurely manner",
+   "page": ""
+  },
+  {
+   "index": 22,
+   "feature": "depth of feeling indulged",
+   "claim": "The Hobb name was created to write with a depth of feeling she did not usually indulge.",
+   "source": "Gizmodo excerpting The Inheritance forewords (2011)",
+   "url": "https://gizmodo.com/find-out-how-robin-hobb-became-two-different-people-5792234",
+   "quote": "a depth of feeling that I didn't usually indulge",
+   "page": ""
+  },
+  {
+   "index": 23,
+   "feature": "clean dividing line between voices",
+   "claim": "A story idea belongs immediately and unmistakably to one of the two voices.",
+   "source": "Locus interview excerpts (December 2005)",
+   "url": "https://www.locusmag.com/2005/Issues/12Hobb.html",
+   "quote": "a fairly clean dividing line",
+   "page": ""
+  },
+  {
+   "index": 24,
+   "feature": "story equals how events affect characters",
+   "claim": "The story is about how events affect the characters, not about the events.",
+   "source": "Pat's Fantasy Hotlist interview (2005)",
+   "url": "http://fantasyhotlist.blogspot.com/2005/07/robin-hobb-interview.html",
+   "quote": "how the events affect the characters",
+   "page": ""
+  },
+  {
+   "index": 25,
+   "feature": "every character main character of own story",
+   "claim": "Each character, villain included, is written as the main character in his own story.",
+   "source": "Pat's Fantasy Hotlist interview (2005)",
+   "url": "http://fantasyhotlist.blogspot.com/2005/07/robin-hobb-interview.html",
+   "quote": "the main character in his own story",
+   "page": ""
+  },
+  {
+   "index": 26,
+   "feature": "vocabulary as a way of seeing",
+   "claim": "Characters are differentiated by vocabulary, sentence structure, slang and cadence, because word choice is a way of seeing.",
+   "source": "Writing Excuses 11.Bonus-01 transcript",
+   "url": "https://writingexcuses.com/11-bonus-01-characterization-and-differentiation-with-robin-hobb/",
+   "quote": "Choice of vocabulary, it's a way of seeing things",
+   "page": ""
+  },
+  {
+   "index": 27,
+   "feature": "reaction shots",
+   "claim": "How a character reacts to an event reveals more than exposition does.",
+   "source": "Writing Excuses 11.Bonus-01 transcript",
+   "url": "https://writingexcuses.com/11-bonus-01-characterization-and-differentiation-with-robin-hobb/",
+   "quote": "Reaction shots reveal character",
+   "page": ""
+  },
+  {
+   "index": 28,
+   "feature": "character shaped by the world",
+   "claim": "A believable character is shaped by the world they grew up in, not dropped into it.",
+   "source": "Writing Excuses 11.Bonus-01 transcript",
+   "url": "https://writingexcuses.com/11-bonus-01-characterization-and-differentiation-with-robin-hobb/",
+   "quote": "The character has to be shaped by the world",
+   "page": ""
+  },
+  {
+   "index": 29,
+   "feature": "five senses in description",
+   "claim": "In any description she tries to engage as many of the five senses as possible.",
+   "source": "LisiPieces interview",
+   "url": "https://www.lisipieces.com/robin-hobb-isnt-writing-back-anymore/",
+   "quote": "engage as many of them as possible",
+   "page": ""
+  }
+ ]
+}

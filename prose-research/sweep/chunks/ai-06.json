@@ -1,0 +1,158 @@
+{
+ "name": "ai",
+ "chunk": 6,
+ "indices": [
+  344,
+  345,
+  346,
+  347,
+  348,
+  349,
+  350,
+  351,
+  352,
+  353,
+  354,
+  355,
+  356,
+  357,
+  358
+ ],
+ "claims": [
+  {
+   "index": 344,
+   "feature": "combat description without state",
+   "claim": "The model struggled to describe combat because it had no combat-state or map-placement information; DMs split between using output verbatim, mining vivid phrases, and rewriting entirely.",
+   "source": "CALYPSO: LLMs as Dungeon Masters' Assistants (Zhu, Martin, Head, Callison-Burch; AIIDE 2023) — ar5iv full text",
+   "url": "https://ar5iv.labs.arxiv.org/html/2308.07540",
+   "quote": "the model struggled sometimes to describe combat",
+   "page": "CALYPSO: LLMs as Dungeon Masters' Assistants (Zhu, Martin, Head, Callison-Burch; AIIDE 2023) — ar5iv full text"
+  },
+  {
+   "index": 345,
+   "feature": "lore-less creatures get thin text",
+   "claim": "When a monster had only numeric stats and no published prose (real animals, golems), the summariser had nothing to draw on and produced unhelpful text until prompted to use 'thematic commonsense'.",
+   "source": "CALYPSO: LLMs as Dungeon Masters' Assistants (Zhu, Martin, Head, Callison-Burch; AIIDE 2023) — ar5iv full text",
+   "url": "https://ar5iv.labs.arxiv.org/html/2308.07540",
+   "quote": "",
+   "page": "CALYPSO: LLMs as Dungeon Masters' Assistants (Zhu, Martin, Head, Callison-Burch; AIIDE 2023) — ar5iv full text"
+  },
+  {
+   "index": 346,
+   "feature": "group-level homogenization",
+   "claim": "In a 36-participant within-subjects study, different users produced less semantically distinct ideas with ChatGPT than with an Oblique Strategies deck (p=.038); the effect is group-level (the LLM suggests similar ideas to different people), not individual fixation.",
+   "source": "Homogenization Effects of Large Language Models on Human Creative Ideation (Anderson, Shah, Kreminski; C&C 2024, best paper) — arXiv full text",
+   "url": "https://arxiv.org/html/2402.01536",
+   "quote": "less semantically distinct ideas with ChatGPT",
+   "page": "Homogenization Effects of Large Language Models on Human Creative Ideation (Anderson, Shah, Kreminski; C&C 2024, best paper) — arXiv full text"
+  },
+  {
+   "index": 347,
+   "feature": "repetition on request for more",
+   "claim": "Participants found that asking ChatGPT for more ideas returned repeats of the same ones.",
+   "source": "Homogenization Effects of Large Language Models on Human Creative Ideation (Anderson, Shah, Kreminski; C&C 2024, best paper) — arXiv full text",
+   "url": "https://arxiv.org/html/2402.01536",
+   "quote": "When I want more, I want different more.",
+   "page": "Homogenization Effects of Large Language Models on Human Creative Ideation (Anderson, Shah, Kreminski; C&C 2024, best paper) — arXiv full text"
+  },
+  {
+   "index": 348,
+   "feature": "easy but unrewarding",
+   "claim": "The single most common interview theme (n=10) was that ChatGPT was easier to use but less rewarding; n=8 found it less engaging.",
+   "source": "Homogenization Effects of Large Language Models on Human Creative Ideation (Anderson, Shah, Kreminski; C&C 2024, best paper) — arXiv full text",
+   "url": "https://arxiv.org/html/2402.01536",
+   "quote": "easier to use but less rewarding",
+   "page": "Homogenization Effects of Large Language Models on Human Creative Ideation (Anderson, Shah, Kreminski; C&C 2024, best paper) — arXiv full text"
+  },
+  {
+   "index": 349,
+   "feature": "low inferential distance",
+   "claim": "The authors attribute homogenization partly to the low inferential distance between LLM outputs and apparently complete ideas — the output arrives looking finished, so users stop diverging.",
+   "source": "Homogenization Effects of Large Language Models on Human Creative Ideation (Anderson, Shah, Kreminski; C&C 2024, best paper) — arXiv full text",
+   "url": "https://arxiv.org/html/2402.01536",
+   "quote": "low inferential distance between LLM outputs",
+   "page": "Homogenization Effects of Large Language Models on Human Creative Ideation (Anderson, Shah, Kreminski; C&C 2024, best paper) — arXiv full text"
+  },
+  {
+   "index": 350,
+   "feature": "intent-sparse text",
+   "claim": "Expanding a one-sentence instruction into a story delegates most of the ~1,500 decisions a 1,500-word piece needs to the model, leaving text with an unusually low ratio of human decision-making to length.",
+   "source": "The Dearth of the Author in AI-Supported Writing (Kreminski; In2Writing @ CHI 2024) — PDF, text extracted locally",
+   "url": "https://mkremins.github.io/publications/Dearth_In2Writing2024.pdf",
+   "quote": "unusually sparse in terms of expressive intent per word",
+   "page": "The Dearth of the Author in AI-Supported Writing (Kreminski; In2Writing @ CHI 2024) — PDF, text extracted locally"
+  },
+  {
+   "index": 351,
+   "feature": "'soulless' explained",
+   "claim": "The recurring verdict that AI output is 'soulless' reflects the sparseness of intent in the outputs that are easiest to create and therefore dominate non-enthusiasts' impressions.",
+   "source": "The Dearth of the Author in AI-Supported Writing (Kreminski; In2Writing @ CHI 2024) — PDF, text extracted locally",
+   "url": "https://mkremins.github.io/publications/Dearth_In2Writing2024.pdf",
+   "quote": "reflects the sparseness of intent in the outputs",
+   "page": "The Dearth of the Author in AI-Supported Writing (Kreminski; In2Writing @ CHI 2024) — PDF, text extracted locally"
+  },
+  {
+   "index": 352,
+   "feature": "experienced writers detect cliché",
+   "claim": "Experienced writers, with an ear for evocative language and an aversion to cliché, readily identify problems in AI-generated text; novices treat the machine as a creative authority and delegate more.",
+   "source": "The Dearth of the Author in AI-Supported Writing (Kreminski; In2Writing @ CHI 2024) — PDF, text extracted locally",
+   "url": "https://mkremins.github.io/publications/Dearth_In2Writing2024.pdf",
+   "quote": "a strong aversion to cliché",
+   "page": "The Dearth of the Author in AI-Supported Writing (Kreminski; In2Writing @ CHI 2024) — PDF, text extracted locally"
+  },
+  {
+   "index": 353,
+   "feature": "homogenization by delegated decisions",
+   "claim": "A tool that makes similar creative decisions in similar usage scenarios homogenizes different users' outputs in proportion to how many decisions it makes directly.",
+   "source": "The Dearth of the Author in AI-Supported Writing (Kreminski; In2Writing @ CHI 2024) — PDF, text extracted locally",
+   "url": "https://mkremins.github.io/publications/Dearth_In2Writing2024.pdf",
+   "quote": "makes similar creative decisions in similar usage scenarios",
+   "page": "The Dearth of the Author in AI-Supported Writing (Kreminski; In2Writing @ CHI 2024) — PDF, text extracted locally"
+  },
+  {
+   "index": 354,
+   "feature": "long-arc incoherence",
+   "claim": "LLMs are effective at open-domain story generation but struggle with long-term coherence, often failing to produce a satisfying overall arc or reader experience.",
+   "source": "Guiding and Diversifying LLM-Based Story Generation via Answer Set Programming (Wang & Kreminski; Wordplay @ ACL 2024)",
+   "url": "https://arxiv.org/html/2406.00554",
+   "quote": "often failing to produce a satisfying overall story arc",
+   "page": "Guiding and Diversifying LLM-Based Story Generation via Answer Set Programming (Wang & Kreminski; Wordplay @ ACL 2024)"
+  },
+  {
+   "index": 355,
+   "feature": "semantic and syntactic homogeneity",
+   "claim": "Compared with human-written stories, LLM stories show unoriginality in both what happens and how sentences are built.",
+   "source": "Guiding and Diversifying LLM-Based Story Generation via Answer Set Programming (Wang & Kreminski; Wordplay @ ACL 2024)",
+   "url": "https://arxiv.org/html/2406.00554",
+   "quote": "unoriginality or homogeneity in both the semantic and syntactic aspects",
+   "page": "Guiding and Diversifying LLM-Based Story Generation via Answer Set Programming (Wang & Kreminski; Wordplay @ ACL 2024)"
+  },
+  {
+   "index": 356,
+   "feature": "opening-paragraph convergence",
+   "claim": "Across ten-story sets per premise, earlier paragraphs were more homogeneous than later ones whether or not ASP guidance was used — openings converge hardest.",
+   "source": "Guiding and Diversifying LLM-Based Story Generation via Answer Set Programming (Wang & Kreminski; Wordplay @ ACL 2024)",
+   "url": "https://arxiv.org/html/2406.00554",
+   "quote": "",
+   "page": "Guiding and Diversifying LLM-Based Story Generation via Answer Set Programming (Wang & Kreminski; Wordplay @ ACL 2024)"
+  },
+  {
+   "index": 357,
+   "feature": "post-training diversity collapse",
+   "claim": "PPO/DPO-style post-training raises output quality but lowers diversity; instruction-tuned models cluster as high-reward, low-diversity, and a deviation-weighted objective was needed to reach human-dataset diversity.",
+   "source": "Modifying Large Language Model Post-Training for Diverse Creative Writing (Chung, Kreminski et al.; COLM 2025)",
+   "url": "https://arxiv.org/html/2503.17126",
+   "quote": "high reward but with low diversity",
+   "page": "Modifying Large Language Model Post-Training for Diverse Creative Writing (Chung, Kreminski et al.; COLM 2025)"
+  },
+  {
+   "index": 358,
+   "feature": "homogeneously positive arcs",
+   "claim": "Across 819 GPT-4 vs 819 human movie synopses, LLM stories are homogeneously positive and lack tension: GPT-4 produced 'Man in Hole' arcs over 50% of the time versus 28% for humans, and 'Riches to Rags' 1.3% versus 14.6%.",
+   "source": "Are Large Language Models Capable of Generating Human-Level Narratives? (Tian et al.; EMNLP 2024)",
+   "url": "https://arxiv.org/html/2407.13248",
+   "quote": "LLM stories are homogeneously positive and lack tension",
+   "page": "Are Large Language Models Capable of Generating Human-Level Narratives? (Tian et al.; EMNLP 2024)"
+  }
+ ]
+}

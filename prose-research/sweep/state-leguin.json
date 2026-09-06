@@ -1214,6 +1214,318 @@
    "url": "https://www.googleapis.com/books/v1/volumes?q=%22free+indirect+discourse%22+Earthsea+Cadden",
    "kind": "attempted — blocked/404/429, NOT read",
    "substantive": false
+  },
+  {
+   "title": "Le Guin, 'From Elfland to Poughkeepsie' (1973) — full essay",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "kind": "primary essay (PDF, read in full)",
+   "substantive": true
+  },
+  {
+   "title": "Wikipedia: From Elfland to Poughkeepsie",
+   "url": "https://en.wikipedia.org/wiki/From_Elfland_to_Poughkeepsie",
+   "kind": "Wikipedia synthesis",
+   "substantive": true
+  },
+  {
+   "title": "Wikipedia: A Wizard of Earthsea",
+   "url": "https://en.wikipedia.org/wiki/A_Wizard_of_Earthsea",
+   "kind": "Wikipedia synthesis (cites Cadden, Slusser, Attebery, Shippey, SFE, Craig)",
+   "substantive": true
+  },
+  {
+   "title": "Wikipedia: Ursula K. Le Guin",
+   "url": "https://en.wikipedia.org/wiki/Ursula_K._Le_Guin",
+   "kind": "Wikipedia synthesis (Bloom, NYT, Smith, Cadden)",
+   "substantive": true
+  },
+  {
+   "title": "Wikipedia: The Left Hand of Darkness",
+   "url": "https://en.wikipedia.org/wiki/The_Left_Hand_of_Darkness",
+   "kind": "Wikipedia synthesis",
+   "substantive": true
+  },
+  {
+   "title": "Wikipedia: The Tombs of Atuan",
+   "url": "https://en.wikipedia.org/wiki/The_Tombs_of_Atuan",
+   "kind": "Wikipedia synthesis",
+   "substantive": true
+  },
+  {
+   "title": "Wikipedia: Tehanu",
+   "url": "https://en.wikipedia.org/wiki/Tehanu",
+   "kind": "Wikipedia synthesis",
+   "substantive": true
+  },
+  {
+   "title": "Wikipedia: The Language of the Night",
+   "url": "https://en.wikipedia.org/wiki/The_Language_of_the_Night",
+   "kind": "Wikipedia synthesis",
+   "substantive": false
+  },
+  {
+   "title": "Wikipedia: The Farthest Shore",
+   "url": "https://en.wikipedia.org/wiki/The_Farthest_Shore",
+   "kind": "Wikipedia synthesis",
+   "substantive": false
+  },
+  {
+   "title": "Wikipedia: Tales from Earthsea",
+   "url": "https://en.wikipedia.org/wiki/Tales_from_Earthsea",
+   "kind": "Wikipedia synthesis",
+   "substantive": false
+  },
+  {
+   "title": "Wikipedia: The Other Wind",
+   "url": "https://en.wikipedia.org/wiki/The_Other_Wind",
+   "kind": "Wikipedia synthesis",
+   "substantive": false
+  },
+  {
+   "title": "Wikipedia: Earthsea (universe)",
+   "url": "https://en.wikipedia.org/wiki/Earthsea_(universe)",
+   "kind": "Wikipedia synthesis",
+   "substantive": false
+  },
+  {
+   "title": "Wikipedia: Earthsea",
+   "url": "https://en.wikipedia.org/wiki/Earthsea",
+   "kind": "Wikipedia synthesis",
+   "substantive": false
+  },
+  {
+   "title": "Wikipedia: The Books of Earthsea",
+   "url": "https://en.wikipedia.org/wiki/The_Books_of_Earthsea",
+   "kind": "Wikipedia synthesis",
+   "substantive": false
+  },
+  {
+   "title": "Wikipedia: Steering the Craft",
+   "url": "https://en.wikipedia.org/wiki/Steering_the_Craft",
+   "kind": "Wikipedia stub",
+   "substantive": false
+  },
+  {
+   "title": "Wikipedia: Dancing at the Edge of the World",
+   "url": "https://en.wikipedia.org/wiki/Dancing_at_the_Edge_of_the_World",
+   "kind": "Wikipedia synthesis",
+   "substantive": false
+  },
+  {
+   "title": "NEA Big Read Reader's Guide: A Wizard of Earthsea (PDF)",
+   "url": "https://www.arts.gov/sites/default/files/Readers-Guide-WizardofEarthsea.pdf",
+   "kind": "teaching guide with Le Guin interview (PDF, text extracted)",
+   "substantive": true
+  },
+  {
+   "title": "NEA Big Read: A Wizard of Earthsea (web page)",
+   "url": "https://www.arts.gov/initiatives/nea-big-read/wizard-earthsea",
+   "kind": "teaching guide page",
+   "substantive": true
+  },
+  {
+   "title": "SFE: Le Guin, Ursula K (Encyclopedia of Science Fiction)",
+   "url": "https://sf-encyclopedia.com/entry/le_guin_ursula_k",
+   "kind": "reference encyclopedia entry",
+   "substantive": true
+  },
+  {
+   "title": "Shippey, 'The Magic Art and the Evolution of Words' (Hard Reading, LUP 2016) — chapter abstract",
+   "url": "https://academic.oup.com/liverpool-scholarship-online/book/43316/chapter/363083559",
+   "kind": "monograph chapter abstract (Liverpool Scholarship Online)",
+   "substantive": true
+  },
+  {
+   "title": "Kelso, 'Boldly to Re-Venture', Paradoxa 21 (2008) pp. 7–22",
+   "url": "https://paradoxa.com/wp-content/uploads/2020/07/1-Boldly-to-Re-Venture-New-Writing-on-the-Works-of-Ursula-K.-Le-Guin-Kelso-pp-7-22.pdf",
+   "kind": "journal introduction (PDF, read in full)",
+   "substantive": true
+  },
+  {
+   "title": "John Garth, 'Ursula Le Guin, the language of Earthsea, and Tolkien'",
+   "url": "https://johngarth.wordpress.com/2021/01/22/ursula-le-guin-the-language-of-earthsea-and-tolkien/",
+   "kind": "scholar's blog essay",
+   "substantive": true
+  },
+  {
+   "title": "Stan Carey, 'How to see one's own world': Le Guin on writing style",
+   "url": "https://stancarey.wordpress.com/2024/10/16/how-to-see-ones-own-world-ursula-k-le-guin-on-writing-style/",
+   "kind": "editor's blog essay",
+   "substantive": true
+  },
+  {
+   "title": "Margaret Mahy, 'Speculations on the Earthsea Stories' (ursulakleguin.com)",
+   "url": "https://www.ursulakleguin.com/on-earthsea-mahy",
+   "kind": "critic essay on official site",
+   "substantive": true
+  },
+  {
+   "title": "Jo Walton, 'Bright the hawk's flight in the empty sky' (Reactor, 2010)",
+   "url": "https://reactormag.com/qbright-the-hawks-flight-in-the-empty-skyq-ursula-le-guins-lemga-wizard-of-earthsealemg/",
+   "kind": "novelist-critic essay (fetched via curl)",
+   "substantive": true
+  },
+  {
+   "title": "Stephanie Burt, review of Plotz, Ursula Le Guin's Earthsea (Strange Horizons)",
+   "url": "https://strangehorizons.com/wordpress/non-fiction/ursula-le-guins-earthsea-by-john-plotz/",
+   "kind": "review of scholarly monograph",
+   "substantive": true
+  },
+  {
+   "title": "Oliver Tearle, review of Plotz (Interesting Literature)",
+   "url": "https://interestingliterature.com/2023/10/john-plotz-ursula-le-guin-earthsea-review/",
+   "kind": "review of scholarly monograph",
+   "substantive": true
+  },
+  {
+   "title": "Kate Nepveu, LotR re-read: Le Guin 'Rhythmic Pattern in The Lord of the Rings'",
+   "url": "https://kate-nepveu.livejournal.com/180011.html",
+   "kind": "reader summary of primary essay",
+   "substantive": true
+  },
+  {
+   "title": "Vermont Softworks: Le Guin 'Rhythmic Pattern in The Lord of the Rings'",
+   "url": "https://vermontsoftworks.com/post/2023/leguin-rhythmic-pattern-in-lotr/",
+   "kind": "reader summary of primary essay",
+   "substantive": true
+  },
+  {
+   "title": "Literary Hub, 'A Writing Lesson from Ursula K. Le Guin' (Steering the Craft excerpt)",
+   "url": "https://lithub.com/a-writing-lesson-from-ursula-k-leguin/",
+   "kind": "primary excerpt",
+   "substantive": true
+  },
+  {
+   "title": "Le Guin, Bryn Mawr Commencement Address 1986 (Serendip text)",
+   "url": "https://serendipstudio.org/sci_cult/leguin/",
+   "kind": "primary speech text",
+   "substantive": true
+  },
+  {
+   "title": "Newell, 'The Mother Tongue in a World of Sons' (MA thesis, Liberty 2010) — landing page/abstract",
+   "url": "https://digitalcommons.liberty.edu/masters/133/",
+   "kind": "thesis abstract",
+   "substantive": true
+  },
+  {
+   "title": "Crossref record: Comoletti & Drout, Children's Literature 29 (2001)",
+   "url": "https://api.crossref.org/works?query.bibliographic=How+They+Do+Things+with+Words+Language+Power+Gender+Priestly+Wizards+Le+Guin+Earthsea&rows=3",
+   "kind": "bibliographic record (citation only)",
+   "substantive": false
+  },
+  {
+   "title": "Crossref record: Barry & Prescott, Extrapolation 33.2 (1992)",
+   "url": "https://api.crossref.org/works?query.bibliographic=Beyond+Words+Impact+of+Rhythm+as+Narrative+Technique+Left+Hand+of+Darkness+Extrapolation+1992&rows=3",
+   "kind": "bibliographic record (citation only)",
+   "substantive": false
+  },
+  {
+   "title": "Curtis Weyant, The Left Hand of Darkness: Secondary Bibliography",
+   "url": "https://curtisweyant.com/scholarship/le-guin/secondary-bibliography-the-left-hand-of-darkness/",
+   "kind": "scholar-maintained bibliography (fetched via curl)",
+   "substantive": true
+  },
+  {
+   "title": "ursulakleguin.com: The Books of Earthsea",
+   "url": "https://www.ursulakleguin.com/the-books-of-earthsea",
+   "kind": "official site page",
+   "substantive": true
+  },
+  {
+   "title": "ursulakleguin.com: Steering the Craft",
+   "url": "https://www.ursulakleguin.com/steering-the-craft",
+   "kind": "official site page",
+   "substantive": true
+  },
+  {
+   "title": "ursulakleguin.com: From Elfland to Poughkeepsie (publication note)",
+   "url": "https://www.ursulakleguin.com/from-elfland-to-poughkeepsie",
+   "kind": "official site publication note",
+   "substantive": false
+  },
+  {
+   "title": "Sharada Bhanu, 'Tehanu: A Return to the Source' (ursulakleguin.com)",
+   "url": "https://www.ursulakleguin.com/return-to-source",
+   "kind": "critic essay on official site",
+   "substantive": true
+  },
+  {
+   "title": "Rochelle, Communities of the Heart — LSO abstract",
+   "url": "https://academic.oup.com/liverpool-scholarship-online/book/43267",
+   "kind": "monograph abstract",
+   "substantive": false
+  },
+  {
+   "title": "FAU news: Timothy S. Miller, A Wizard of Earthsea: A Critical Companion (Palgrave 2023)",
+   "url": "https://www.fau.edu/artsandletters/english/news/timothy-miller-publishes-ursula-k-leguin-a-wizard-of-earthsea-critical-companion/index.php",
+   "kind": "publication announcement",
+   "substantive": false
+  },
+  {
+   "title": "Comoletti & Drout on Project MUSE",
+   "url": "https://muse.jhu.edu/article/251728/summary",
+   "kind": "attempted — blocked/404/429, NOT read",
+   "substantive": false
+  },
+  {
+   "title": "'Draconic Diction: Truth and Lies in Le Guin's Old Speech' (academia.edu)",
+   "url": "https://www.academia.edu/50882793/Draconic_Diction_Truth_and_Lies_in_Le_Guins_Old_Speech",
+   "kind": "attempted — blocked/404/429, NOT read",
+   "substantive": false
+  },
+  {
+   "title": "Oxford Bibliographies: Ursula K. Le Guin",
+   "url": "https://oxfordbibliographies.com/display/document/obo-9780199827251/obo-9780199827251-0210.xml",
+   "kind": "attempted — blocked/404/429, NOT read",
+   "substantive": false
+  },
+  {
+   "title": "Slusser, 'Le Guin and the Future of SF Criticism' (SFS review essay)",
+   "url": "https://www.depauw.edu/sfs/review_essays/sluss53.htm",
+   "kind": "attempted — blocked/404/429, NOT read",
+   "substantive": false
+  },
+  {
+   "title": "Paris Review, Art of Fiction No. 221: Le Guin",
+   "url": "https://www.theparisreview.org/interviews/6253/the-art-of-fiction-no-221-ursula-k-le-guin",
+   "kind": "attempted — blocked/404/429, NOT read",
+   "substantive": false
+  },
+  {
+   "title": "Mythlore: 'Magic, Witchcraft, and Faërie' (SWOSU PDF)",
+   "url": "https://dc.swosu.edu/cgi/viewcontent.cgi?article=3006&context=mythlore",
+   "kind": "attempted — blocked/404/429, NOT read",
+   "substantive": false
+  },
+  {
+   "title": "Newell thesis full PDF",
+   "url": "https://digitalcommons.liberty.edu/cgi/viewcontent.cgi?article=1134&context=masters",
+   "kind": "attempted — blocked/404/429, NOT read",
+   "substantive": false
+  },
+  {
+   "title": "Springer: Miller, A Wizard of Earthsea: A Critical Companion",
+   "url": "https://link.springer.com/book/10.1007/978-3-031-24640-1",
+   "kind": "attempted — blocked/404/429, NOT read",
+   "substantive": false
+  },
+  {
+   "title": "Poetry Foundation, 'Always Beginning'",
+   "url": "https://www.poetryfoundation.org/articles/148040/always-beginning",
+   "kind": "attempted — blocked/404/429, NOT read",
+   "substantive": false
+  },
+  {
+   "title": "Barry & Prescott at Liverpool UP Online",
+   "url": "https://online.liverpooluniversitypress.co.uk/doi/10.3828/extr.1992.33.2.154",
+   "kind": "attempted — blocked/404/429, NOT read",
+   "substantive": false
+  },
+  {
+   "title": "Google Books API snippets (Cadden / Cummins)",
+   "url": "https://www.googleapis.com/books/v1/volumes?q=%22free+indirect+discourse%22+Earthsea+Cadden",
+   "kind": "attempted — blocked/404/429, NOT read",
+   "substantive": false
   }
  ],
  "verdicts": {

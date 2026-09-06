@@ -1,0 +1,68 @@
+{
+ "name": "wolfe",
+ "chunk": 10,
+ "indices": [
+  150,
+  151,
+  152,
+  153,
+  154,
+  155
+ ],
+ "claims": [
+  {
+   "index": 150,
+   "feature": "reliable judgment, unreliable perception (Latro)",
+   "claim": "Latro's judgments are sound; it is his perceptions and memory that cannot be trusted, unlike Severian who may claim sudden fear or Weer who may not bury the thief.",
+   "source": "Aramini interview, Ultan's Library 2013",
+   "url": "https://ultan.org.uk/shadows-of-the-new-sun-an-interview-with-marc-aramini/",
+   "quote": "It is not Latro who can't be trusted",
+   "page": ""
+  },
+  {
+   "index": 151,
+   "feature": "melancholy, inconclusive endings",
+   "claim": "Wolfe's endings are often melancholy and inconclusive; Soldier of the Mist ends with the amnesiac finding a man who knows him only as he dies.",
+   "source": "Aramini interview, Ultan's Library 2013",
+   "url": "https://ultan.org.uk/shadows-of-the-new-sun-an-interview-with-marc-aramini/",
+   "quote": "his endings are often melancholy",
+   "page": ""
+  },
+  {
+   "index": 152,
+   "feature": "engineered inconsequential details",
+   "claim": "The stories are engineered so that seemingly inconsequential details have consequences later; every tale should be read as a mystery.",
+   "source": "DMR Books 2019",
+   "url": "https://dmrbooks.com/test-blog/2019/5/10/books-of-gold-reading-gene-wolfe",
+   "quote": "seemingly inconsequential details will have consequences later on",
+   "page": ""
+  },
+  {
+   "index": 153,
+   "feature": "two-word line carrying the tragedy",
+   "claim": "Return to the Whorl delivers its central tragedy in a two-word sentence, 'Silk nodded.', which Person calls heartbreaking.",
+   "source": "Person, Gene Wolfe RIP 2019",
+   "url": "https://www.lawrenceperson.com/?p=18206",
+   "quote": "Silk nodded.",
+   "page": ""
+  },
+  {
+   "index": 154,
+   "feature": "onomastics and lexicon as companion apparatus",
+   "claim": "The Castle of the Otter includes Wolfe's explanation of his characters' names and a lexicon for the series' obscure words, with essays 'Words Weird and Wonderful' and 'Onomastics'.",
+   "source": "WolfeWiki, Castle of the Otter (SFBC blurb)",
+   "url": "https://www.wolfewiki.com/pmwiki/pmwiki.php?n=WolfeWiki.TheCastleOfTheOtter",
+   "quote": "a helpful lexicon for the obscure words",
+   "page": ""
+  },
+  {
+   "index": 155,
+   "feature": "parody and homage depth",
+   "claim": "Wolfe acknowledges homages (Borges, M. R. James, Crowley) and jokes that his parodic streak is about five and a half feet deep.",
+   "source": "SF Site Jan 2002 (Gevers)",
+   "url": "https://web.archive.org/web/20020703232613/http://www.sfsite.com/03b/gw124.htm",
+   "quote": "about five and half feet",
+   "page": ""
+  }
+ ]
+}

@@ -1,0 +1,158 @@
+{
+ "name": "ai",
+ "chunk": 10,
+ "indices": [
+  404,
+  405,
+  406,
+  407,
+  408,
+  409,
+  410,
+  411,
+  412,
+  413,
+  414,
+  415,
+  416,
+  417,
+  418
+ ],
+ "claims": [
+  {
+   "index": 404,
+   "feature": "source confabulation",
+   "claim": "Monsters were attributed to the Fiend Folio that appear in no version of it; the model knows they are discussed near the Fiend Folio without knowing its contents.",
+   "source": "tenfootpole forum — Making a Module using ChatGPT, page 4 (Dec 2022)",
+   "url": "http://tenfootpole.org/forum/index.php?threads/making-a-module-using-chatgpt.386/page-4",
+   "quote": "without actually knowing what's in the Fiend Folio",
+   "page": "tenfootpole forum — Making a Module using ChatGPT, page 4 (Dec 2022)"
+  },
+  {
+   "index": 405,
+   "feature": "self-similarity across generations",
+   "claim": "A 'unique' trick room repeated elements of the previous room; the experimenter concluded he would have to seed the model with his own elements.",
+   "source": "tenfootpole forum — Making a Module using ChatGPT, page 4 (Dec 2022)",
+   "url": "http://tenfootpole.org/forum/index.php?threads/making-a-module-using-chatgpt.386/page-4",
+   "quote": "there were similarities with the original room",
+   "page": "tenfootpole forum — Making a Module using ChatGPT, page 4 (Dec 2022)"
+  },
+  {
+   "index": 406,
+   "feature": "templated NPC blocks",
+   "claim": "Beoric's module-generation transcript shows every NPC in the same template and motivations reused verbatim ('greed and loyalty to their boss'), with guard rooms repeated across levels.",
+   "source": "tenfootpole forum — Making a Module using ChatGPT, page 1 (Beoric's experiment, Dec 2022)",
+   "url": "http://tenfootpole.org/forum/index.php?threads/making-a-module-using-chatgpt.386/",
+   "quote": "",
+   "page": "tenfootpole forum — Making a Module using ChatGPT, page 1 (Beoric's experiment, Dec 2022)"
+  },
+  {
+   "index": 407,
+   "feature": "illusion of help",
+   "claim": "Mike Shea finds LLMs useful for small coding projects but not for RPGs: they offer the illusion of help, and his best RPG work is his own.",
+   "source": "Sly Flourish — The Best LLM for Generating RPG Stuff: Your Brain (Mike Shea, 2024-09-30)",
+   "url": "https://slyflourish.com/best_llm.html",
+   "quote": "They offer the illusion of help",
+   "page": "Sly Flourish — The Best LLM for Generating RPG Stuff: Your Brain (Mike Shea, 2024-09-30)"
+  },
+  {
+   "index": 408,
+   "feature": "slop",
+   "claim": "LLM output fills the internet with slop; he lists this alongside IP, energy and labour objections.",
+   "source": "Sly Flourish — The Best LLM for Generating RPG Stuff: Your Brain (Mike Shea, 2024-09-30)",
+   "url": "https://slyflourish.com/best_llm.html",
+   "quote": "They fill the internet with slop.",
+   "page": "Sly Flourish — The Best LLM for Generating RPG Stuff: Your Brain (Mike Shea, 2024-09-30)"
+  },
+  {
+   "index": 409,
+   "feature": "length benchmark (human craft)",
+   "claim": "Shea's read-aloud standard: keep it short and powerful, know its purpose, and cut 25% of any draft — the bar generated boxed text is measured against by reviewers.",
+   "source": "Sly Flourish — Writing Awesome Read-Aloud Text (Mike Shea, 2010-11-08) — human craft benchmark",
+   "url": "https://slyflourish.com/writing_awesome_readaloud_text.html",
+   "quote": "Keep it short and keep it powerful.",
+   "page": "Sly Flourish — Writing Awesome Read-Aloud Text (Mike Shea, 2010-11-08) — human craft benchmark"
+  },
+  {
+   "index": 410,
+   "feature": "clarity benchmark (human craft)",
+   "claim": "Shea's 'Tell, Don't Show': players understand about half of what is described, so state the facts that matter plainly while keeping flavour — the opposite of the padded, withholding generated style.",
+   "source": "Sly Flourish — Tell, Don't Show (Mike Shea, 2024-02-12) — human craft benchmark",
+   "url": "https://slyflourish.com/tell_dont_show.html",
+   "quote": "",
+   "page": "Sly Flourish — Tell, Don't Show (Mike Shea, 2024-02-12) — human craft benchmark"
+  },
+  {
+   "index": 411,
+   "feature": "needs a lot of editing",
+   "claim": "Co-authoring with GPT-2 felt like working with a human writer who needs heavy editing; she kept the bits she liked and re-prompted.",
+   "source": "Emily Short — The Uncanny Deck: Co-authoring with GPT-2 (2021-07-18)",
+   "url": "https://emshort.blog/2021/07/18/the-uncanny-deck-co-authoring-with-gpt-2/",
+   "quote": "a human writer who just needs a lot of editing",
+   "page": "Emily Short — The Uncanny Deck: Co-authoring with GPT-2 (2021-07-18)"
+  },
+  {
+   "index": 412,
+   "feature": "shallow associations",
+   "claim": "Deeper thematic associations ('salt is associated with archiving') needed far more training data to be remembered than surface form.",
+   "source": "Emily Short — The Uncanny Deck: Co-authoring with GPT-2 (2021-07-18)",
+   "url": "https://emshort.blog/2021/07/18/the-uncanny-deck-co-authoring-with-gpt-2/",
+   "quote": "takes more training data to tune it to remember deeper associations",
+   "page": "Emily Short — The Uncanny Deck: Co-authoring with GPT-2 (2021-07-18)"
+  },
+  {
+   "index": 413,
+   "feature": "constraint drift",
+   "claim": "The model spontaneously produced rank-and-suit combinations absent from the corpus — welcome for the fantasy deck, but outside the intended parameters.",
+   "source": "Emily Short — The Uncanny Deck: Co-authoring with GPT-2 (2021-07-18)",
+   "url": "https://emshort.blog/2021/07/18/the-uncanny-deck-co-authoring-with-gpt-2/",
+   "quote": "spontaneously pop up a combo of rank and suit",
+   "page": "Emily Short — The Uncanny Deck: Co-authoring with GPT-2 (2021-07-18)"
+  },
+  {
+   "index": 414,
+   "feature": "boring, robotic baseline",
+   "claim": "A basic language model produces boring, robotic answers; the writer must condition it with backstory, personality and dialogue style before it sounds like anyone.",
+   "source": "Ubisoft News — How Ubisoft's New Generative AI Prototype Changes the Narrative for NPCs (2024-03-19)",
+   "url": "https://news.ubisoft.com/en-us/article/5qXdxhshJBXoanFZApdG3L/how-ubisofts-new-generative-ai-prototype-changes-the-narrative-for-npcs",
+   "quote": "it would produce boring, robotic answers",
+   "page": "Ubisoft News — How Ubisoft's New Generative AI Prototype Changes the Narrative for NPCs (2024-03-19)"
+  },
+  {
+   "index": 415,
+   "feature": "character drift",
+   "claim": "The team constantly asks whether an answer is something the character would say and, when not, traces what in the model made it stray from the writer's vision.",
+   "source": "Ubisoft News — How Ubisoft's New Generative AI Prototype Changes the Narrative for NPCs (2024-03-19)",
+   "url": "https://news.ubisoft.com/en-us/article/5qXdxhshJBXoanFZApdG3L/how-ubisofts-new-generative-ai-prototype-changes-the-narrative-for-npcs",
+   "quote": "Would Lisa say this?",
+   "page": "Ubisoft News — How Ubisoft's New Generative AI Prototype Changes the Narrative for NPCs (2024-03-19)"
+  },
+  {
+   "index": 416,
+   "feature": "bias-driven flirtation",
+   "claim": "An attractive female character's answers veered flirtatious and seductive and had to be reprogrammed.",
+   "source": "Ubisoft News — How Ubisoft's New Generative AI Prototype Changes the Narrative for NPCs (2024-03-19)",
+   "url": "https://news.ubisoft.com/en-us/article/5qXdxhshJBXoanFZApdG3L/how-ubisofts-new-generative-ai-prototype-changes-the-narrative-for-npcs",
+   "quote": "veered towards flirtatious and seductive",
+   "page": "Ubisoft News — How Ubisoft's New Generative AI Prototype Changes the Narrative for NPCs (2024-03-19)"
+  },
+  {
+   "index": 417,
+   "feature": "coherence needs lots of authored content",
+   "claim": "Narrative director Virginie Mosser: NEO NPCs need a lot of written content — backstory, flow, qualities, colloquialisms — to be coherent and have real personality.",
+   "source": "Game Developer — How do Ubisoft's AI-driven NPCs handle dynamic player interactions? (Michael Higham, 2024-03-19, hands-on)",
+   "url": "https://www.gamedeveloper.com/design/how-do-ubisoft-s-ai-driven-npcs-handle-dynamic-player-interactions-",
+   "quote": "a lot of content for them to be more coherent",
+   "page": "Game Developer — How do Ubisoft's AI-driven NPCs handle dynamic player interactions? (Michael Higham, 2024-03-19, hands-on)"
+  },
+  {
+   "index": 418,
+   "feature": "guardrails steer to optimal choice",
+   "claim": "The third demo scenario played like a traditional dialogue tree with an optimal choice, revealing guardrails steering the conversation to the narrative objective.",
+   "source": "Game Developer — How do Ubisoft's AI-driven NPCs handle dynamic player interactions? (Michael Higham, 2024-03-19, hands-on)",
+   "url": "https://www.gamedeveloper.com/design/how-do-ubisoft-s-ai-driven-npcs-handle-dynamic-player-interactions-",
+   "quote": "",
+   "page": "Game Developer — How do Ubisoft's AI-driven NPCs handle dynamic player interactions? (Michael Higham, 2024-03-19, hands-on)"
+  }
+ ]
+}

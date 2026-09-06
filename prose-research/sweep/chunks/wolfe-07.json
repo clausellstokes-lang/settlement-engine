@@ -1,0 +1,158 @@
+{
+ "name": "wolfe",
+ "chunk": 7,
+ "indices": [
+  105,
+  106,
+  107,
+  108,
+  109,
+  110,
+  111,
+  112,
+  113,
+  114,
+  115,
+  116,
+  117,
+  118,
+  119
+ ],
+ "claims": [
+  {
+   "index": 105,
+   "feature": "found-manuscript translator apparatus",
+   "claim": "The Latro books frame the scrolls through a translator who notes the narrator's limited ability to write and the haste of composition, layering unreliability.",
+   "source": "Gerwel 2014",
+   "url": "https://aidanmoher.com/blog/featured-article/2014/07/gene-wolfe-reliably-unreliable-author-chris-gerwel/",
+   "quote": "limited ability to write",
+   "page": ""
+  },
+  {
+   "index": 106,
+   "feature": "depth by omission",
+   "claim": "Wolfe's density comes from what he leaves out rather than elaborate description; suggestion through omission gives the prose its depth.",
+   "source": "Ewing 2010",
+   "url": "https://www.murrayewing.co.uk/mewsings/2010/09/11/the-secret-to-reading-gene-wolfe/",
+   "quote": "what Wolfe's leaves out that gives it its depth",
+   "page": ""
+  },
+  {
+   "index": 107,
+   "feature": "cut-back prose with exotic nouns",
+   "claim": "The sentences are clear, cut back and almost Hemingwayesque, while exotic nouns like 'burginot' estrange without obscuring.",
+   "source": "Ewing 2010",
+   "url": "https://www.murrayewing.co.uk/mewsings/2010/09/11/the-secret-to-reading-gene-wolfe/",
+   "quote": "cut back and simplified, almost Hemmingwayesque",
+   "page": ""
+  },
+  {
+   "index": 108,
+   "feature": "narrator who knows nothing",
+   "claim": "Wolfe's narrators often know little, placing them in the reader's position; 'Tracking Song' opens by telling its narrator he knows nothing.",
+   "source": "Ewing 2010",
+   "url": "https://www.murrayewing.co.uk/mewsings/2010/09/11/the-secret-to-reading-gene-wolfe/",
+   "quote": "You know nothing.",
+   "page": ""
+  },
+  {
+   "index": 109,
+   "feature": "unexplained detail implies a larger world",
+   "claim": "Wolfe takes Heinlein's 'the door dilated' further, using unexplained background details to imply worlds, and leaves questions half-answered as a feature.",
+   "source": "Ewing 2010",
+   "url": "https://www.murrayewing.co.uk/mewsings/2010/09/11/the-secret-to-reading-gene-wolfe/",
+   "quote": "takes this to the next level",
+   "page": ""
+  },
+  {
+   "index": 110,
+   "feature": "encoder and decoder (Wright)",
+   "claim": "Peter Wright's Attending Daedalus casts Wolfe as encoder and the reader as decoder of labyrinthine conundrums, with the element of choice as his principal device for confounding the reader.",
+   "source": "LARB 2013 (quoting Wright)",
+   "url": "https://lareviewofbooks.org/article/we-read-things-differently/",
+   "quote": "Wolfe's principal device for confounding the reader",
+   "page": ""
+  },
+  {
+   "index": 111,
+   "feature": "first misinterpreted narrative",
+   "claim": "Wright records that no reviewer recognised Weer's deathly state, making Peace Wolfe's first misinterpreted narrative.",
+   "source": "LARB 2013 (quoting Wright)",
+   "url": "https://lareviewofbooks.org/article/we-read-things-differently/",
+   "quote": "Wolfe's first misinterpreted narrative",
+   "page": ""
+  },
+  {
+   "index": 112,
+   "feature": "as many readings as readers",
+   "claim": "The reviewer maintains the novel contains as many readings as readers and resists the reading that Wolfe aims to confound.",
+   "source": "LARB 2013",
+   "url": "https://lareviewofbooks.org/article/we-read-things-differently/",
+   "quote": "as many readings perhaps as there are readers",
+   "page": ""
+  },
+  {
+   "index": 113,
+   "feature": "cascading metaphor in the cosmic register",
+   "claim": "Peace's first section collapses SF's cosmic perspective into religious ecstasy and cascades from metaphor to metaphor; no one else writes like that.",
+   "source": "LARB 2013",
+   "url": "https://lareviewofbooks.org/article/we-read-things-differently/",
+   "quote": "cascading from metaphor to metaphor",
+   "page": ""
+  },
+  {
+   "index": 114,
+   "feature": "author claims kinship with his ghost",
+   "claim": "Wolfe is quoted as saying of Weer that they have similar souls, against readings of Weer as the devil.",
+   "source": "LARB 2013 (Wolfe quoted)",
+   "url": "https://lareviewofbooks.org/article/we-read-things-differently/",
+   "quote": "we have similar souls",
+   "page": ""
+  },
+  {
+   "index": 115,
+   "feature": "unfinished stories as evasions",
+   "claim": "Weer leaves stories unfinished and declines to narrate the visit to Gold's farm, later revealing he murdered the librarian; the reader must sift the evidence.",
+   "source": "Jacobs 2024",
+   "url": "https://blog.ayjay.org/peace-peace/",
+   "quote": "the reader has to sift the evidence",
+   "page": ""
+  },
+  {
+   "index": 116,
+   "feature": "interpolated tales comment on the frame",
+   "claim": "The embedded tales comment in various ways on the events Weer narrates, and the reader must decide which ones do.",
+   "source": "Jacobs 2024",
+   "url": "https://blog.ayjay.org/peace-peace/",
+   "quote": "comment in various ways on the events",
+   "page": ""
+  },
+  {
+   "index": 117,
+   "feature": "memory palace with lost rooms",
+   "claim": "Weer lives in a rambling memory palace of his own making whose rooms he can temporarily or permanently lose access to.",
+   "source": "Jacobs 2024",
+   "url": "https://blog.ayjay.org/peace-peace/",
+   "quote": "a rambling memory palace of his own making",
+   "page": ""
+  },
+  {
+   "index": 118,
+   "feature": "lie in dialogue, not in narration",
+   "claim": "Wolfe's characters will lie in dialogue but not in narration, so narrative statements can be trusted while speech cannot.",
+   "source": "The Solute 2017",
+   "url": "https://www.the-solute.com/blind-reads-peace-by-gene-wolfe/",
+   "quote": "characters will lie in dialogue but not in narration",
+   "page": ""
+  },
+  {
+   "index": 119,
+   "feature": "narration stops just before a death",
+   "claim": "Weer's narration stops just before a character dies and resumes later, so murders are inferred from absence, a 'shadow narrative'.",
+   "source": "The Solute 2017",
+   "url": "https://www.the-solute.com/blind-reads-peace-by-gene-wolfe/",
+   "quote": "stops just before a character dies",
+   "page": ""
+  }
+ ]
+}

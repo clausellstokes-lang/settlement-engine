@@ -1,0 +1,158 @@
+{
+ "name": "wolfe",
+ "chunk": 9,
+ "indices": [
+  135,
+  136,
+  137,
+  138,
+  139,
+  140,
+  141,
+  142,
+  143,
+  144,
+  145,
+  146,
+  147,
+  148,
+  149
+ ],
+ "claims": [
+  {
+   "index": 135,
+   "feature": "reading standard: account for every detail",
+   "claim": "The critic's test for a Wolfe reading is a consistent account of why everything in the text is there, in a story of under 3,000 words.",
+   "source": "Locus 2009, 'The Toy Theater'",
+   "url": "https://locusmag.com/2009/04/reading-gene-wolfe/",
+   "quote": "why everything that's in the text is there",
+   "page": ""
+  },
+  {
+   "index": 136,
+   "feature": "names carry meaning (Stromboli, Sarg)",
+   "claim": "Names are always important in Wolfe stories; Stromboli evokes Pinocchio and the planet Sarg the marionettist Tony Sarg.",
+   "source": "Locus 2009, 'The Toy Theater' (with comments)",
+   "url": "https://locusmag.com/2009/04/reading-gene-wolfe/",
+   "quote": "Names are always important in Wolfe stories.",
+   "page": ""
+  },
+  {
+   "index": 137,
+   "feature": "elision of central plot points",
+   "claim": "Central plot points are skipped over and referred to only in retrospect, others presented misdirectingly, others never cleared up.",
+   "source": "Auerbach, Waggish 2007 (dissent)",
+   "url": "https://www.waggish.org/2007/gene-wolfe-the-book-of-the-new-sun/",
+   "quote": "Central plot points are skipped over",
+   "page": ""
+  },
+  {
+   "index": 138,
+   "feature": "liar plus translator frame leaves motive underdetermined",
+   "claim": "Because Severian is known to lie and Wolfe poses as translator of a manuscript for an unknown audience, the text's purpose and the narrator's motives are underdetermined.",
+   "source": "Auerbach, Waggish 2007 (dissent)",
+   "url": "https://www.waggish.org/2007/gene-wolfe-the-book-of-the-new-sun/",
+   "quote": "underdetermined with regard to Severian's motives",
+   "page": ""
+  },
+  {
+   "index": 139,
+   "feature": "archaic Latinate words that look like neologisms",
+   "claim": "The style uses words that appear to be neologisms but are archaic, often Latin-derived usages, evoking strangeness while preserving meaning.",
+   "source": "Auerbach, Waggish 2007 (dissent)",
+   "url": "https://www.waggish.org/2007/gene-wolfe-the-book-of-the-new-sun/",
+   "quote": "words that appear to be neologisms but are anything but",
+   "page": ""
+  },
+  {
+   "index": 140,
+   "feature": "Clute's put-on theory",
+   "claim": "Auerbach reports Clute's argument that the whole narrative is a put-on to justify Severian's taking power.",
+   "source": "Auerbach, Waggish 2007 (reporting Clute)",
+   "url": "https://www.waggish.org/2007/gene-wolfe-the-book-of-the-new-sun/",
+   "quote": "a put-on to justify Severian taking power",
+   "page": "comments"
+  },
+  {
+   "index": 141,
+   "feature": "post-New Sun minimalism",
+   "claim": "After The Book of the New Sun Wolfe abandoned baroque long sentences and strove for a more minimalistic surface text.",
+   "source": "Aramini interview, Ultan's Library 2020",
+   "url": "https://ultan.org.uk/everything-has-to-be-true-somehow/",
+   "quote": "abandons the baroque and long sentences",
+   "page": ""
+  },
+  {
+   "index": 142,
+   "feature": "subtext replaces text in late work",
+   "claim": "In the post-Wizard Knight novels the subtext tends to replace the text, and Wolfe plays less fair by withholding metatextual repetitions.",
+   "source": "Aramini interview, Ultan's Library 2020",
+   "url": "https://ultan.org.uk/everything-has-to-be-true-somehow/",
+   "quote": "The subtext tends to replace the text.",
+   "page": ""
+  },
+  {
+   "index": 143,
+   "feature": "every detail true somehow",
+   "claim": "Aramini's reading principle: something is true about almost every detail, literally or figuratively, so he reads without suspicion and makes everything true somehow.",
+   "source": "Aramini interview, Ultan's Library 2020",
+   "url": "https://ultan.org.uk/everything-has-to-be-true-somehow/",
+   "quote": "everything has to be true somehow, literally or figuratively",
+   "page": ""
+  },
+  {
+   "index": 144,
+   "feature": "two mysteries that explain each other",
+   "claim": "Wolfe sometimes plants two confusing things that explain each other, as with the context-free gunfight and the off-screen death in Home Fires.",
+   "source": "Aramini interview, Ultan's Library 2020",
+   "url": "https://ultan.org.uk/everything-has-to-be-true-somehow/",
+   "quote": "the two mysteries explain each other",
+   "page": ""
+  },
+  {
+   "index": 145,
+   "feature": "literalized metaphor and repeated unrelated fact",
+   "claim": "Wolfe controls meaning through logic, small details, literalized metaphors and juxtaposing unrelated things; tunnel dogs called gods signal that gods are stored in the tunnels.",
+   "source": "Aramini interview, Ultan's Library 2020",
+   "url": "https://ultan.org.uk/everything-has-to-be-true-somehow/",
+   "quote": "the literalization of metaphors",
+   "page": ""
+  },
+  {
+   "index": 146,
+   "feature": "mise en abyme embedded tales",
+   "claim": "Embedded tales map allegorically onto the larger story, and symbols are built to yield concrete plot conclusions.",
+   "source": "Aramini interview, Ultan's Library 2020",
+   "url": "https://ultan.org.uk/everything-has-to-be-true-somehow/",
+   "quote": "embeds tales which map allegorically to the larger story",
+   "page": ""
+  },
+  {
+   "index": 147,
+   "feature": "simplification after 'difficult writer' label",
+   "claim": "Wolfe told Nigel Price that, having so often been called a difficult writer, he strove in later works to make his style simpler and more accessible.",
+   "source": "Aramini interview, Ultan's Library 2020 (Price reporting Wolfe)",
+   "url": "https://ultan.org.uk/everything-has-to-be-true-somehow/",
+   "quote": "make his style simpler and more accessible",
+   "page": ""
+  },
+  {
+   "index": 148,
+   "feature": "classic detective stories as stylistic model",
+   "claim": "Price suggests Wolfe's late reading of Rex Stout and Sayers supplied the stylistic model for his late books, e.g. Wizard Knight as heroic fantasy channelling Stout.",
+   "source": "Aramini interview, Ultan's Library 2020 (Price)",
+   "url": "https://ultan.org.uk/everything-has-to-be-true-somehow/",
+   "quote": "they provided the stylistic model for his writing",
+   "page": ""
+  },
+  {
+   "index": 149,
+   "feature": "elided structures point to one solution",
+   "claim": "Aramini holds Wolfe is a modernist who merely pretends to inconclusive subjectivity; his elided structures point at implied correct conclusions.",
+   "source": "Aramini interview, Ultan's Library 2013",
+   "url": "https://ultan.org.uk/shadows-of-the-new-sun-an-interview-with-marc-aramini/",
+   "quote": "merely pretends to create inconclusive subjectivity",
+   "page": ""
+  }
+ ]
+}

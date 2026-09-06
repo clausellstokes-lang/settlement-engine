@@ -1,0 +1,158 @@
+{
+ "name": "ai",
+ "chunk": 8,
+ "indices": [
+  374,
+  375,
+  376,
+  377,
+  378,
+  379,
+  380,
+  381,
+  382,
+  383,
+  384,
+  385,
+  386,
+  387,
+  388
+ ],
+ "claims": [
+  {
+   "index": 374,
+   "feature": "over-compliant GM",
+   "claim": "An LLM game master accommodates even the most bizarre player requests with little regard for predetermined events, where a human GM would curb them.",
+   "source": "Large Language Models and Games: A Survey and Roadmap (Gallotta et al.; v5 2024-12-09)",
+   "url": "https://arxiv.org/html/2402.18659v5",
+   "quote": "accommodate for even the most bizarre requests",
+   "page": "Large Language Models and Games: A Survey and Roadmap (Gallotta et al.; v5 2024-12-09)"
+  },
+  {
+   "index": 375,
+   "feature": "confident falsehood",
+   "claim": "LLMs output plausible but false statements because they are a probable word sequence.",
+   "source": "Large Language Models and Games: A Survey and Roadmap (Gallotta et al.; v5 2024-12-09)",
+   "url": "https://arxiv.org/html/2402.18659v5",
+   "quote": "output plausible but false statements",
+   "page": "Large Language Models and Games: A Survey and Roadmap (Gallotta et al.; v5 2024-12-09)"
+  },
+  {
+   "index": 376,
+   "feature": "intent capture failure",
+   "claim": "LLMs sometimes fail to capture user intent, especially sarcasm, and repeated clarification frustrates the player.",
+   "source": "Large Language Models and Games: A Survey and Roadmap (Gallotta et al.; v5 2024-12-09)",
+   "url": "https://arxiv.org/html/2402.18659v5",
+   "quote": "sometimes struggle to capture user intent",
+   "page": "Large Language Models and Games: A Survey and Roadmap (Gallotta et al.; v5 2024-12-09)"
+  },
+  {
+   "index": 377,
+   "feature": "detail drift",
+   "claim": "Pilot users of an LLM game master found story elements deviated from their intent and specific details changed, such as the number of enemies or items.",
+   "source": "Static vs. Agentic Game Master AI for Facilitating Solo Role-Playing Experiences (ChatRPG; 2025-03-06)",
+   "url": "https://arxiv.org/html/2502.19519",
+   "quote": "such as the number of enemies or items",
+   "page": "Static vs. Agentic Game Master AI for Facilitating Solo Role-Playing Experiences (ChatRPG; 2025-03-06)"
+  },
+  {
+   "index": 378,
+   "feature": "inventory amnesia",
+   "claim": "Asked what the character was holding, the GM often gave incoherent answers and forgot items just picked up; performance worsened as the game continued.",
+   "source": "Static vs. Agentic Game Master AI for Facilitating Solo Role-Playing Experiences (ChatRPG; 2025-03-06)",
+   "url": "https://arxiv.org/html/2502.19519",
+   "quote": "the GM often provided incoherent responses",
+   "page": "Static vs. Agentic Game Master AI for Facilitating Solo Role-Playing Experiences (ChatRPG; 2025-03-06)"
+  },
+  {
+   "index": 379,
+   "feature": "nonsensical combat outcomes",
+   "claim": "Unless actions were meticulously described, the prompt-engineered GM produced characters stumbling or self-injuring when it failed to identify a target.",
+   "source": "Static vs. Agentic Game Master AI for Facilitating Solo Role-Playing Experiences (ChatRPG; 2025-03-06)",
+   "url": "https://arxiv.org/html/2502.19519",
+   "quote": "characters stumbling or self-injuring",
+   "page": "Static vs. Agentic Game Master AI for Facilitating Solo Role-Playing Experiences (ChatRPG; 2025-03-06)"
+  },
+  {
+   "index": 380,
+   "feature": "over-compliance derailment",
+   "claim": "Over-compliance in the GM role makes the game veer drastically from the intended narrative, potentially irreparably.",
+   "source": "Static vs. Agentic Game Master AI for Facilitating Solo Role-Playing Experiences (ChatRPG; 2025-03-06)",
+   "url": "https://arxiv.org/html/2502.19519",
+   "quote": "veering drastically from the intended narrative",
+   "page": "Static vs. Agentic Game Master AI for Facilitating Solo Role-Playing Experiences (ChatRPG; 2025-03-06)"
+  },
+  {
+   "index": 381,
+   "feature": "immersion-harming dialogue",
+   "claim": "Poorly generated dialogue or incoherent arcs can disrupt immersion or actively harm player experience, undermining the engagement the system was meant to foster.",
+   "source": "Evaluating Quality of Gaming Narratives Co-created with AI (Valdivia & Burelli, ITU Copenhagen; 2025-09-04)",
+   "url": "https://arxiv.org/html/2509.04239",
+   "quote": "poorly generated dialogue or incoherent narrative arcs",
+   "page": "Evaluating Quality of Gaming Narratives Co-created with AI (Valdivia & Burelli, ITU Copenhagen; 2025-09-04)"
+  },
+  {
+   "index": 382,
+   "feature": "voice as a missing dimension",
+   "claim": "A 10-expert Delphi panel added 'Voice' as a quality dimension because naturalness did not capture tone; a distinctive voice is a critical marker of story quality distinct from plot.",
+   "source": "Evaluating Quality of Gaming Narratives Co-created with AI (Valdivia & Burelli, ITU Copenhagen; 2025-09-04)",
+   "url": "https://arxiv.org/html/2509.04239",
+   "quote": "a distinctive and compelling narrative voice",
+   "page": "Evaluating Quality of Gaming Narratives Co-created with AI (Valdivia & Burelli, ITU Copenhagen; 2025-09-04)"
+  },
+  {
+   "index": 383,
+   "feature": "genre misalignment",
+   "claim": "Producing a hard-boiled detective story when fantasy was requested was rated a must-be failure regardless of technical competence.",
+   "source": "Evaluating Quality of Gaming Narratives Co-created with AI (Valdivia & Burelli, ITU Copenhagen; 2025-09-04)",
+   "url": "https://arxiv.org/html/2509.04239",
+   "quote": "producing a hard-boiled detective story when a fantasy narrative is requested",
+   "page": "Evaluating Quality of Gaming Narratives Co-created with AI (Valdivia & Burelli, ITU Copenhagen; 2025-09-04)"
+  },
+  {
+   "index": 384,
+   "feature": "unpredictable quality variance",
+   "claim": "Even with well-crafted prompts, generated quality varies unpredictably across sessions, with trends toward overly positive or uninspired endings.",
+   "source": "Evaluating Quality of Gaming Narratives Co-created with AI (Valdivia & Burelli, ITU Copenhagen; 2025-09-04)",
+   "url": "https://arxiv.org/html/2509.04239",
+   "quote": "",
+   "page": "Evaluating Quality of Gaming Narratives Co-created with AI (Valdivia & Burelli, ITU Copenhagen; 2025-09-04)"
+  },
+  {
+   "index": 385,
+   "feature": "no mental model",
+   "claim": "LLMs cannot read a text, form a mental model of it, and then use that model; they only produce babbled text.",
+   "source": "The Alexandrian — Thought of the Day: GenAI and RPGs (Justin Alexander, 2025-12-28)",
+   "url": "https://thealexandrian.net/wordpress/53232/roleplaying-games/thought-of-the-day-genai-and-rpgs",
+   "quote": "All they can do is produce a stream of babbled text.",
+   "page": "The Alexandrian — Thought of the Day: GenAI and RPGs (Justin Alexander, 2025-12-28)"
+  },
+  {
+   "index": 386,
+   "feature": "continuity loss mid-scene",
+   "claim": "In a ChatGPT Lasers & Feelings playtest transcript, the model forgot everyone was aboard ships and turned the attacking pirates into lost travellers within a few turns.",
+   "source": "The Alexandrian — Thought of the Day: GenAI and RPGs (Justin Alexander, 2025-12-28)",
+   "url": "https://thealexandrian.net/wordpress/53232/roleplaying-games/thought-of-the-day-genai-and-rpgs",
+   "quote": "ChatGPT momentarily forgets that everyone is onboard ships.",
+   "page": "The Alexandrian — Thought of the Day: GenAI and RPGs (Justin Alexander, 2025-12-28)"
+  },
+  {
+   "index": 387,
+   "feature": "hallucination as word-guessing",
+   "claim": "'Hallucination' misdescribes the failure: there is no false model, only a guessed word that matched training patterns and did not conform to reality.",
+   "source": "The Alexandrian — Thought of the Day: GenAI and RPGs (Justin Alexander, 2025-12-28)",
+   "url": "https://thealexandrian.net/wordpress/53232/roleplaying-games/thought-of-the-day-genai-and-rpgs",
+   "quote": "It's just words. There is no underlying mental model",
+   "page": "The Alexandrian — Thought of the Day: GenAI and RPGs (Justin Alexander, 2025-12-28)"
+  },
+  {
+   "index": 388,
+   "feature": "simulacra without totality",
+   "claim": "Individual moments read as good simulacra, but the whole is random babble because a GM's job is to hold and update a canonical model of the world.",
+   "source": "The Alexandrian — Thought of the Day: GenAI and RPGs (Justin Alexander, 2025-12-28)",
+   "url": "https://thealexandrian.net/wordpress/53232/roleplaying-games/thought-of-the-day-genai-and-rpgs",
+   "quote": "the totality of the experience is nothing more than random babble",
+   "page": "The Alexandrian — Thought of the Day: GenAI and RPGs (Justin Alexander, 2025-12-28)"
+  }
+ ]
+}

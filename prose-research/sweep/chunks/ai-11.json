@@ -1,0 +1,158 @@
+{
+ "name": "ai",
+ "chunk": 11,
+ "indices": [
+  419,
+  420,
+  421,
+  422,
+  423,
+  424,
+  425,
+  426,
+  427,
+  428,
+  429,
+  430,
+  431,
+  432,
+  433
+ ],
+ "claims": [
+  {
+   "index": 419,
+   "feature": "bland chatbot demos",
+   "claim": "Tommy Thompson finds these chatbot NPC demos bland because they focus purely on the linguistic aspect.",
+   "source": "AI and Games — Ubisoft's 'Teammates' Demo & Their New Generative AI Push (Tommy Thompson, 2025-11-26; includes his April 2024 NEO NPC assessment)",
+   "url": "https://www.aiandgames.com/p/ubisofts-teammates-demo-and-their",
+   "quote": "I find these chatbot demos really bland",
+   "page": "AI and Games — Ubisoft's 'Teammates' Demo & Their New Generative AI Push (Tommy Thompson, 2025-11-26; includes his April 2024 NEO NPC assessment)"
+  },
+  {
+   "index": 420,
+   "feature": "two writers, three months, twenty minutes",
+   "claim": "The 20–30 minute NEO NPC demo was the end-result of two narrative designers working full-time for three months writing high-quality content so the universe held up.",
+   "source": "AI and Games — Ubisoft's 'Teammates' Demo & Their New Generative AI Push (Tommy Thompson, 2025-11-26; includes his April 2024 NEO NPC assessment)",
+   "url": "https://www.aiandgames.com/p/ubisofts-teammates-demo-and-their",
+   "quote": "two narrative designers working full-time",
+   "page": "AI and Games — Ubisoft's 'Teammates' Demo & Their New Generative AI Push (Tommy Thompson, 2025-11-26; includes his April 2024 NEO NPC assessment)"
+  },
+  {
+   "index": 421,
+   "feature": "robotic delivery",
+   "claim": "In the 2025 Teammates demo the NPCs' dialogue and delivery were rather robotic, and latency added a second or two per exchange.",
+   "source": "AI and Games — Ubisoft's 'Teammates' Demo & Their New Generative AI Push (Tommy Thompson, 2025-11-26; includes his April 2024 NEO NPC assessment)",
+   "url": "https://www.aiandgames.com/p/ubisofts-teammates-demo-and-their",
+   "quote": "rather robotic, which makes sense given they're robots",
+   "page": "AI and Games — Ubisoft's 'Teammates' Demo & Their New Generative AI Push (Tommy Thompson, 2025-11-26; includes his April 2024 NEO NPC assessment)"
+  },
+  {
+   "index": 422,
+   "feature": "no desire to converse",
+   "claim": "Thompson did not strike up conversation with the NPCs because he felt no need to; NPCs should respond to actions.",
+   "source": "AI and Games — Ubisoft's 'Teammates' Demo & Their New Generative AI Push (Tommy Thompson, 2025-11-26; includes his April 2024 NEO NPC assessment)",
+   "url": "https://www.aiandgames.com/p/ubisofts-teammates-demo-and-their",
+   "quote": "I don't feel the need to engage in dialogue with them",
+   "page": "AI and Games — Ubisoft's 'Teammates' Demo & Their New Generative AI Push (Tommy Thompson, 2025-11-26; includes his April 2024 NEO NPC assessment)"
+  },
+  {
+   "index": 423,
+   "feature": "stock deflection lines",
+   "claim": "Square Enix's Portopia NLU assistant answers most inputs with 'Hmm…', 'Maybe we should focus on the task at hand?' and 'I'm not sure what to say about that'.",
+   "source": "PC Gamer — Square Enix's free 'AI tech preview' has a Steam user rating of Very Negative and deserves it (Jody Macgregor, 2023-04-24)",
+   "url": "https://www.pcgamer.com/square-enixs-free-ai-tech-preview-has-a-steam-user-rating-of-very-negative-and-deserves-it/",
+   "quote": "Maybe we should focus on the task at hand?",
+   "page": "PC Gamer — Square Enix's free 'AI tech preview' has a Steam user rating of Very Negative and deserves it (Jody Macgregor, 2023-04-24)"
+  },
+  {
+   "index": 424,
+   "feature": "exact-wording demand",
+   "claim": "'ask about murder' and 'show photograph to bartender' failed; only 'Show the photograph of Kozo Yamakawa to the bartender' worked — the exact problem the AI was meant to solve.",
+   "source": "PC Gamer — Square Enix's free 'AI tech preview' has a Steam user rating of Very Negative and deserves it (Jody Macgregor, 2023-04-24)",
+   "url": "https://www.pcgamer.com/square-enixs-free-ai-tech-preview-has-a-steam-user-rating-of-very-negative-and-deserves-it/",
+   "quote": "unable to do something because I couldn't find the right wording",
+   "page": "PC Gamer — Square Enix's free 'AI tech preview' has a Steam user rating of Very Negative and deserves it (Jody Macgregor, 2023-04-24)"
+  },
+  {
+   "index": 425,
+   "feature": "NLG cut for safety",
+   "claim": "The natural-language generation feature was omitted from the release because of a risk of unethical replies, leaving only pre-written responses.",
+   "source": "Steam — SQUARE ENIX AI Tech Preview: THE PORTOPIA SERIAL MURDER CASE (store page; fetched 2026-09-06)",
+   "url": "https://store.steampowered.com/app/2280000/SQUARE_ENIX_AI_Tech_Preview_THE_PORTOPIA_SERIAL_MURDER_CASE/",
+   "quote": "a risk of the AI generating unethical replies",
+   "page": "Steam — SQUARE ENIX AI Tech Preview: THE PORTOPIA SERIAL MURDER CASE (store page; fetched 2026-09-06)"
+  },
+  {
+   "index": 426,
+   "feature": "repeating phrases to progress",
+   "claim": "After 30 minutes Colantonio had barely progressed and was repeating the same few phrases; the investigation felt as unnatural as classic text adventures.",
+   "source": "Digital Trends — Square Enix's free AI game isn't selling me on the tech's power (Giovanni Colantonio, 2023-04-25)",
+   "url": "https://www.digitaltrends.com/gaming/square-enix-ai-game-portopia-impressions/",
+   "quote": "repeating the same few phrases over and over",
+   "page": "Digital Trends — Square Enix's free AI game isn't selling me on the tech's power (Giovanni Colantonio, 2023-04-25)"
+  },
+  {
+   "index": 427,
+   "feature": "nothing beyond AI Dungeon",
+   "claim": "With generation removed, Colantonio asks what users are seeing that AI Dungeon did not show years earlier.",
+   "source": "Digital Trends — Square Enix's free AI game isn't selling me on the tech's power (Giovanni Colantonio, 2023-04-25)",
+   "url": "https://www.digitaltrends.com/gaming/square-enix-ai-game-portopia-impressions/",
+   "quote": "wasn't already shown in games like AI Dungeon years ago",
+   "page": "Digital Trends — Square Enix's free AI game isn't selling me on the tech's power (Giovanni Colantonio, 2023-04-25)"
+  },
+  {
+   "index": 428,
+   "feature": "reception",
+   "claim": "At launch the demo sat at Very Negative with 236 reviews; as of 2026-09-06 the Steam page shows 15% positive of 476.",
+   "source": "Time Extension — Square Enix's 'The Portopia Serial Murder Case' AI Tech Demo Flooded With Negative Reviews (2023-04)",
+   "url": "https://www.timeextension.com/news/2023/04/square-enix-remaking-the-portopia-serial-murder-case-as-a-free-ai-tech-demo",
+   "quote": "a dumber input system than Zork",
+   "page": "Time Extension — Square Enix's 'The Portopia Serial Murder Case' AI Tech Demo Flooded With Negative Reviews (2023-04)"
+  },
+  {
+   "index": 429,
+   "feature": "couldn't create great narrative",
+   "claim": "Keywords' three-developer team quickly found the technology couldn't write all the code or create great narrative and had to add human experts.",
+   "source": "Keywords Studios — Project AVA: Exploring GenAI's Promising Future in Game Production (2024-05-24)",
+   "url": "https://www.keywordsstudios.com/en/project-ava-exploring-genais-promising-future-in-game-production/",
+   "quote": "couldn't write all the code or create great narrative",
+   "page": "Keywords Studios — Project AVA: Exploring GenAI's Promising Future in Game Production (2024-05-24)"
+  },
+  {
+   "index": 430,
+   "feature": "first drafts only",
+   "claim": "GenAI was useful for first drafts of dialogue and storyline brainstorming, not finished narrative.",
+   "source": "Keywords Studios — Project AVA: Exploring GenAI's Promising Future in Game Production (2024-05-24)",
+   "url": "https://www.keywordsstudios.com/en/project-ava-exploring-genais-promising-future-in-game-production/",
+   "quote": "first drafts of dialogue",
+   "page": "Keywords Studios — Project AVA: Exploring GenAI's Promising Future in Game Production (2024-05-24)"
+  },
+  {
+   "index": 431,
+   "feature": "failed to generate significant portion",
+   "claim": "Even for a deliberately simple narrative-driven 2D game, GenAI failed to generate a significant portion of the code or planned assets.",
+   "source": "Keywords Studios — Project AVA: Exploring GenAI's Promising Future in Game Production (2024-05-24)",
+   "url": "https://www.keywordsstudios.com/en/project-ava-exploring-genais-promising-future-in-game-production/",
+   "quote": "failed to generate a significant portion",
+   "page": "Keywords Studios — Project AVA: Exploring GenAI's Promising Future in Game Production (2024-05-24)"
+  },
+  {
+   "index": 432,
+   "feature": "unable to replace talent",
+   "claim": "After evaluating 400+ tools and pulling bench resource from seven studios, Keywords' FY2023 report concluded the tooling was unable to replace talent; the game will not be released.",
+   "source": "Game Developer — Keywords tried to make a game using GenAI but said the tech was 'unable to replace talent' (2024-03-13)",
+   "url": "https://www.gamedeveloper.com/production/keywords-tried-to-make-a-game-using-genai-but-said-the-tech-was-unable-to-replace-talent-",
+   "quote": "unable to replace talent",
+   "page": "Game Developer — Keywords tried to make a game using GenAI but said the tech was 'unable to replace talent' (2024-03-13)"
+  },
+  {
+   "index": 433,
+   "feature": "generic dialogue vs specificity",
+   "claim": "Josh Sawyer: the demos seem impressive for a chatbot, but Obsidian's appeal is characters and replies that feel very specific, not generic dialogue.",
+   "source": "NPR — Can AI create compelling video game stories? Writers have their doubts (Vincent Acovino, 2024-03-14; text-only transcript)",
+   "url": "https://text.npr.org/1238647721",
+   "quote": "I hate to say it, but generic dialogue",
+   "page": "NPR — Can AI create compelling video game stories? Writers have their doubts (Vincent Acovino, 2024-03-14; text-only transcript)"
+  }
+ ]
+}

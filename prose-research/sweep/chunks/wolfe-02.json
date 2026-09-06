@@ -1,0 +1,158 @@
+{
+ "name": "wolfe",
+ "chunk": 2,
+ "indices": [
+  30,
+  31,
+  32,
+  33,
+  34,
+  35,
+  36,
+  37,
+  38,
+  39,
+  40,
+  41,
+  42,
+  43,
+  44
+ ],
+ "claims": [
+  {
+   "index": 30,
+   "feature": "style as suitability, not ornament",
+   "claim": "Style should suit the story; a wrong style is comic for ten pages, and the narrator's voice is inseparable from style.",
+   "source": "Clarkesworld 2008 (Jones)",
+   "url": "https://clarkesworldmagazine.com/wolfe_interview/",
+   "quote": "the style should suit the story",
+   "page": ""
+  },
+  {
+   "index": 31,
+   "feature": "narrator may comment; author may not",
+   "claim": "First person puts the reader inside the story and lets the narrator comment on actions, whereas authorial comment is usually ruinously bad.",
+   "source": "Clarkesworld 2015 (Baker)",
+   "url": "https://clarkesworldmagazine.com/wolfe_interview_2015/",
+   "quote": "it's usually ruinously bad",
+   "page": ""
+  },
+  {
+   "index": 32,
+   "feature": "two kinds of unreliable narrator",
+   "claim": "Narrators are either openly unreliable or pretend to be totally reliable, but all are unreliable because people write books and people cannot be trusted.",
+   "source": "Clarkesworld 2015 (Baker)",
+   "url": "https://clarkesworldmagazine.com/wolfe_interview_2015/",
+   "quote": "narrators that pretend to be totally reliable",
+   "page": ""
+  },
+  {
+   "index": 33,
+   "feature": "reader sees self in the text",
+   "claim": "Off-the-wall interpretations no longer surprise him because readers look into the story and see themselves.",
+   "source": "Clarkesworld 2015 (Baker)",
+   "url": "https://clarkesworldmagazine.com/wolfe_interview_2015/",
+   "quote": "what they are seeing is themselves",
+   "page": ""
+  },
+  {
+   "index": 34,
+   "feature": "villain never self-identifies",
+   "claim": "Fictional villains have narrow viewpoints; a real villain never thinks he is a villain, which shapes how bad men narrate themselves.",
+   "source": "Clarkesworld 2015 (Baker)",
+   "url": "https://clarkesworldmagazine.com/wolfe_interview_2015/",
+   "quote": "a real villain never thinks he's a villain",
+   "page": ""
+  },
+  {
+   "index": 35,
+   "feature": "show it and shut up",
+   "claim": "Characterization is done only by showing the character thinking, speaking and acting characteristically, never by telling the reader about him.",
+   "source": "Black Gate 2010 (Cooney)",
+   "url": "https://www.blackgate.com/2010/11/23/and-it-goes-on-from-there-an-interview-with-gene-wolfe/",
+   "quote": "You simply show it and shut up.",
+   "page": "Top five advice"
+  },
+  {
+   "index": 36,
+   "feature": "destination before departure",
+   "claim": "Do not start a story without an ending in mind; the ending may change but there must always be a destination.",
+   "source": "Black Gate 2010 (Cooney)",
+   "url": "https://www.blackgate.com/2010/11/23/and-it-goes-on-from-there-an-interview-with-gene-wolfe/",
+   "quote": "you should always have a destination",
+   "page": "Top five advice"
+  },
+  {
+   "index": 37,
+   "feature": "details decided in the writing",
+   "claim": "He does almost no research before writing and fills in world details as he reaches them, researching as he goes (what Greeks ate for breakfast: nothing).",
+   "source": "Black Gate 2010 (Cooney)",
+   "url": "https://www.blackgate.com/2010/11/23/and-it-goes-on-from-there-an-interview-with-gene-wolfe/",
+   "quote": "I do research while I'm writing the book.",
+   "page": ""
+  },
+  {
+   "index": 38,
+   "feature": "withheld name learned by deduction",
+   "claim": "In 'The Tree Is My Hat' the ex-wife's name Mary Christmas is never stated; the reader finds it out by deduction.",
+   "source": "Black Gate 2010 (Cooney)",
+   "url": "https://www.blackgate.com/2010/11/23/and-it-goes-on-from-there-an-interview-with-gene-wolfe/",
+   "quote": "you find out by deduction",
+   "page": ""
+  },
+  {
+   "index": 39,
+   "feature": "concrete image before concept",
+   "claim": "Severian began as a costume (boots, trousers, no shirt, cloak, mask, sword) from which Wolfe deduced the man, an executioner.",
+   "source": "Black Gate 2010 (Cooney)",
+   "url": "https://www.blackgate.com/2010/11/23/and-it-goes-on-from-there-an-interview-with-gene-wolfe/",
+   "quote": "He's an executioner.",
+   "page": ""
+  },
+  {
+   "index": 40,
+   "feature": "padding admitted",
+   "claim": "Wolfe says the storytelling contest in the third New Sun volume is strictly padding added when the publisher split the book.",
+   "source": "Black Gate 2010 (Cooney)",
+   "url": "https://www.blackgate.com/2010/11/23/and-it-goes-on-from-there-an-interview-with-gene-wolfe/",
+   "quote": "a storytelling contest that's strictly padding",
+   "page": ""
+  },
+  {
+   "index": 41,
+   "feature": "later style loosened under criticism",
+   "claim": "Wolfe attributes the shorter paragraphs and looser tone of his later books to criticism for being unreadable and overcomplex, after which he decided to loosen up.",
+   "source": "MIT Technology Review 2014",
+   "url": "https://www.technologyreview.com/2014/07/25/12916/a-qa-with-gene-wolfe/",
+   "quote": "criticism for being unreadable and overcomplex",
+   "page": "Editing and writing"
+  },
+  {
+   "index": 42,
+   "feature": "difficulty as duty to the reader",
+   "claim": "He sets himself hard technical challenges with narrators because an author who makes everything easy for himself bores the reader.",
+   "source": "MIT Technology Review 2014",
+   "url": "https://www.technologyreview.com/2014/07/25/12916/a-qa-with-gene-wolfe/",
+   "quote": "you bore the reader",
+   "page": "Unreliable narrators and craft"
+  },
+  {
+   "index": 43,
+   "feature": "ghost who does not know he is dead",
+   "claim": "Weer's unreliability is that he is a ghost, and ghosts often do not realize they are dead.",
+   "source": "MIT Technology Review 2014",
+   "url": "https://www.technologyreview.com/2014/07/25/12916/a-qa-with-gene-wolfe/",
+   "quote": "Ghosts often don't realize they're dead.",
+   "page": "Unreliable narrators and craft"
+  },
+  {
+   "index": 44,
+   "feature": "narrator talking himself into a false identity",
+   "claim": "Marsch in Fifth Head knows he is not a real Earthman but is trying to talk himself into believing he is.",
+   "source": "MIT Technology Review 2014",
+   "url": "https://www.technologyreview.com/2014/07/25/12916/a-qa-with-gene-wolfe/",
+   "quote": "trying to talk himself into believing that he is",
+   "page": "Unreliable narrators and craft"
+  }
+ ]
+}

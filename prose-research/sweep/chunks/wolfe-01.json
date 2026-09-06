@@ -1,0 +1,158 @@
+{
+ "name": "wolfe",
+ "chunk": 1,
+ "indices": [
+  15,
+  16,
+  17,
+  18,
+  19,
+  20,
+  21,
+  22,
+  23,
+  24,
+  25,
+  26,
+  27,
+  28,
+  29
+ ],
+ "claims": [
+  {
+   "index": 15,
+   "feature": "first person implies unreliability",
+   "claim": "Any narrator who is a person inside the story is going to be unreliable; five or six honest courtroom witnesses to one event all report different things.",
+   "source": "Person 1998 (Nova Express) interview",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2007-person.pdf",
+   "quote": "the narrator is damn well going to be unreliable",
+   "page": "pp. 168-169 (Fifth Head)"
+  },
+  {
+   "index": 16,
+   "feature": "unattributed dialogue by idiolect and content",
+   "claim": "Speakers in crowded Long Sun scenes are identified without tags by characteristic phrases or mistakes and by each saying only what that character would say in that circumstance.",
+   "source": "Person 1998 interview",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2007-person.pdf",
+   "quote": "saying something that only Maytera Marble would say",
+   "page": "p. 168"
+  },
+  {
+   "index": 17,
+   "feature": "clear structure for complex story",
+   "claim": "The more complex the story, the clearer its narrative structure must be; shaken up, a ten-thousand-part machine is just a box of junk.",
+   "source": "Person 1998 interview",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2007-person.pdf",
+   "quote": "it isn't complex, it's simply confused",
+   "page": "p. 169"
+  },
+  {
+   "index": 18,
+   "feature": "archaic real words, not coinages",
+   "claim": "For the New Sun he refused Tars-Tarkas-style invented names and used archaic names and terms in contexts where the reader can work out what is meant.",
+   "source": "Person 1998 interview",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2007-person.pdf",
+   "quote": "not coining Tars Tarkas type names",
+   "page": "p. 173"
+  },
+  {
+   "index": 19,
+   "feature": "dictionary method for anglicised terms",
+   "claim": "He finds the Latin or Greek word for the thing he needs, then searches unabridged dictionaries on the assumption that someone once anglicised it, often finding an 18th-century citation.",
+   "source": "Person 1998 interview",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2007-person.pdf",
+   "quote": "someone will have anglicised this term",
+   "page": "p. 173"
+  },
+  {
+   "index": 20,
+   "feature": "false-author framing",
+   "claim": "In Fifth Head the story attributed to John V. Marsch is actually written by the shadowchild who replaced him, a trick Wolfe concedes is New Wave.",
+   "source": "Person 1998 interview",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2007-person.pdf",
+   "quote": "not actually written by John V. Marsch",
+   "page": "p. 169"
+  },
+  {
+   "index": 21,
+   "feature": "diversity of registers within one world",
+   "claim": "Wolfe rejects monocultured SF worlds as mental sloth, noting that in one big city people at different social levels already speak almost different languages.",
+   "source": "Person 1998 interview",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2007-person.pdf",
+   "quote": "Mental sloth more than anything else.",
+   "page": "pp. 172-173"
+  },
+  {
+   "index": 22,
+   "feature": "revision turns synopsis into hard facts",
+   "claim": "Wolfe often first writes synopsis and in revision lengthens it, turning generalities into hard facts and making each speaker talk as she talks.",
+   "source": "Clarkesworld 2008 (Jones)",
+   "url": "https://clarkesworldmagazine.com/wolfe_interview/",
+   "quote": "I turned generalities into hard facts.",
+   "page": ""
+  },
+  {
+   "index": 23,
+   "feature": "show cruelty, never state it",
+   "claim": "He forbids himself sentences like 'Nick was a bad man and a cruel man' and must instead show Nick being bad within the story.",
+   "source": "Clarkesworld 2008 (Jones)",
+   "url": "https://clarkesworldmagazine.com/wolfe_interview/",
+   "quote": "Easy writing makes damned hard reading.",
+   "page": ""
+  },
+  {
+   "index": 24,
+   "feature": "four-draft ceiling",
+   "claim": "He stops when he can no longer tell whether changes improve the piece, usually after four drafts; a fifth that reverts to the second is a bad sign.",
+   "source": "Clarkesworld 2008 (Jones)",
+   "url": "https://clarkesworldmagazine.com/wolfe_interview/",
+   "quote": "A fifth draft may find me reverting",
+   "page": ""
+  },
+  {
+   "index": 25,
+   "feature": "dialogue as triple-duty action",
+   "claim": "Dialogue must entertain, forward the plot and characterize the speaker at once, and sound like what that speaker would say to that person then.",
+   "source": "Clarkesworld 2008 (Jones)",
+   "url": "https://clarkesworldmagazine.com/wolfe_interview/",
+   "quote": "Dialogue is action.",
+   "page": ""
+  },
+  {
+   "index": 26,
+   "feature": "distinct idiolect for minor characters",
+   "claim": "Even unimportant characters must speak differently from one another; students reject this because everybody sounds alike to them.",
+   "source": "Clarkesworld 2008 (Jones)",
+   "url": "https://clarkesworldmagazine.com/wolfe_interview/",
+   "quote": "The butler mustn't sound like the footman",
+   "page": ""
+  },
+  {
+   "index": 27,
+   "feature": "concrete over abstract",
+   "claim": "Like poetry and song, fiction demands the concrete; he contrasts an abstract shipwreck summary with a ballad naming the ship, the cargo and the shoal.",
+   "source": "Clarkesworld 2008 (Jones)",
+   "url": "https://clarkesworldmagazine.com/wolfe_interview/",
+   "quote": "fiction demands the concrete",
+   "page": ""
+  },
+  {
+   "index": 28,
+   "feature": "expectation and satisfaction as story engine",
+   "claim": "A short story works by engendering expectations and satisfying them; he told a student to post a sign reading 'I AM GOING TO TELL YOU SOMETHING COOL'.",
+   "source": "Clarkesworld 2008 (Jones)",
+   "url": "https://clarkesworldmagazine.com/wolfe_interview/",
+   "quote": "engendering expectations and satisfying them",
+   "page": ""
+  },
+  {
+   "index": 29,
+   "feature": "fantasy as the truer register",
+   "claim": "Realistic fiction leaves out far too much of human experience; fantasy is nearer the truth.",
+   "source": "Clarkesworld 2008 (Jones)",
+   "url": "https://clarkesworldmagazine.com/wolfe_interview/",
+   "quote": "Realistic fiction leaves out far, far too much.",
+   "page": ""
+  }
+ ]
+}
