@@ -1,0 +1,567 @@
+ 
+ GROGNARDIA: Interview: Mike Mearls 
+ Home 
+ About Me 
+ Advanced Grognardia 
+ Grognardia Games Direct 
+ Open Game License (OGL) 
+ Urheim 
+ Wednesday, August 27, 2025 
+ Interview: Mike Mearls 
+ I've known Mike Mearls for a long time. We both toiled in the freelancer salt mines back in the late '90s and early 2000s, but Mike managed to make the leap to full-time game designer that I never did. Until 2023, he was employed by Wizards of the Coast, where he worked on Dungeons & Dragons in both its Fourth and Fifth Editions, rising to the post of the latter's Creative Director. After WotC, Mike went to Chaosium as Executive Producer of RPGs before recently being hired by Asmodee's as its new head. One of Mike's last projects at Chaosium was Cthulhu by Torchlight , which brings aspects of H.P. Lovecraft's Cthulhu Mythos into Dungeons & Dragons Fifth Edition. I recently asked Mike some questions about Cthulhu by Torchlight and its design, which he very kindly answered. 1. With Cthulhu by Torchlight , you've gone from developing the Fifth Edition of Dungeons & Dragons to adapting those same rules for cosmic horror. What challenges did that pose, philosophically or mechanically? The biggest challenge was figuring out how to approach horror in modern D&D . 5e sets the characters up as heroes taking on powerful enemies early in the game. Trying to make the characters feel weak or powerless runs against the game’s design, and I’m not sure that gamers playing 5e want that. If they wanted the full Call of Cthulhu experience, they could just play that game. The key was finding a way to make Mythos entities distinct without leaning into making them just more powerful than other creatures. With how D&D 5e scales, a tougher monster just has a higher Challenge Rating. I also wanted to include a mechanic that evoked sanity from CoC without duplicating that game directly, again to preserve a more heroic feel. To that end, I took the concept of passions from the latest edition of RuneQuest and Pendragon and brought them into 5e. A passion in Cthulhu by Torchlight explains why your character charges headfirst into danger. It gives you a reason why your character pushes dangerous spots that even a hardened adventurer would avoid. 2. What was the core idea behind Cthulhu by Torchlight ? Was it more about bringing Mythos horror to 5e or exploring how 5e could stretch into horror-adjacent modes? The idea was to lean into the Mythos as a threat fully rooted in 5e’s approach to heroic fantasy, with some extra flourishes to make it stand out. There are two main ways the book does that. First, it includes a framework for building mysteries and investigation into 5e. It’s a style of play that is common to Call of Cthulhu , so it felt like a no-brainer to bring that to D&D . Second, the monsters in the book dabble in mechanics that you usually only see in really powerful 5e creatures. Stuff like legendary actions and legendary resistance show up a lot more often in Mythos creatures, especially at lower levels. It’s obviously not horror, but throwing 5e characters into the deep end of the pool helps create a sense of danger and threat that the Mythos brings to the table. 3. The inclusion of passions is a striking choice. What specifically inspired their use and how do they interact with the theme of cosmic horror as opposed to the courtly drama of Pendragon ? It all started with the realization that a lot of D&D players approach the game from a tactical mindset. They weigh options based on risk and reward. If you apply that calculation to the Mythos, the typical adventurer stays home. I wanted a simple mechanical hook that explains why an adventurer steps into a creepy, abandoned mansion. Horror is filled with examples of characters who let their obsessions override their common sense. Thinking of Pendragon , with its elegant mechanics that create situations where a knight’s nature becomes their worst enemy, felt like a great match. Plus, I’ll jump on any excuse to take a design cue from Greg Stafford. 4. Meanwhile, the "dreadful insight" mechanic replaces insanity with obsession. What was your thinking behind this shift and how does it change the player experience of a Mythos-corrupted character? I’ve played a lot of D&D over the years. One of the game’s strengths is its ability to cater to a lot of different players at one table. Dreadful insights are designed to shift how a character acts based on their exposure to the Mythos, but in a way that lets players find their comfort level. Someone really into roleplay might take an insight and run with it, using it to color everything their character does. Another player who focuses on mechanics can use it strictly by its mechanical definition as a passion, an option that can give them some mechanical benefits if they follow it. 5. The Mythos often centers on helplessness in the face of the unknowable. How do you reconcile that with the more heroic power curve of 5e? That’s one element of the Mythos that I had to leave by the wayside. D&D is very much a game where the players determine their own fate, and helplessness is obviously a bad match for that. I leaned into the idea that the characters are the one force that can stand up to the Mythos. I took a lot of inspiration from Ramsey Campbell ’s fantasy stories, specifically his Ryre stories . Ryre is basically your classic sword and sorcery wanderer looking for wealth, and he ends up matched against eldritch horrors. What I love about those stories is how much Ryre disrupts things. He comes into an area where something truly Wrong is tolerated or endured and puts an end to it. That felt like a good starting point for mixing D&D with the Mythos. 6. You’ve converted Mythos tomes and creatures to 5e. Did you find you had to reinterpret anything significantly to make them fit without losing their alien menace? The hardest part was coming up with specific mechanics for D&D . So many Mythos creatures in Call of Cthulhu – quite correctly, to be clear – ask a Keeper to roll a die and kill that many investigators. For D&D , I needed to find some ways to add more texture to them. For entities like Dagon, I tried to think of how they would wreak havoc across an area simply by moving through it. I gave them abilities designed to make it seem like a natural disaster had swept over an area. Hopefully that gives DMs a clear sense of what’s at stake. 7. Did working on Mythos material change how you think about fantasy in general? What does horror make possible in fantasy RPGs that more traditional adventure sometimes doesn't? In a lot of ways, this book synthesized a lot of what I’ve been thinking about fantasy. I mentioned Ramsey Campbell earlier, and his fantasy stories have been a big influence on me. Working on RuneQuest and Glorantha with Jeff Richard over the past year has also pulled me into a more mythic approach to things. I think horror, with its direct refutation of the rational and scientific that sometimes bleeds into D&D , is a good way to bring a more mythic feel to a campaign. There’s always an urge to bring the rational and scientific to D&D. Look at all the "Ecology of …" articles that showed up in Dragon magazine over the years. Horror refutes the idea that we can rationally measure, understand, and control the universe. I think that element is key to keep fantasy powerful and vital. There’s an impulse in gaming to pile layer upon layer of explanation on top of everything. Players want to ask why and get a good answer. I think that undermines what makes fantasy interesting and vital. Horror is a good excuse to pull that away and instead focus on the mythic, the idea that the world is far more malleable and contextual than we might want it to be. 8. What lessons from your previous time working on D&D did you bring into Cthulhu by Torchlight and were there any assumptions you had to leave behind? The biggest lesson was to include an option that let players turn into a cat . This is the third time I’ve done that in a book, and I always see gamers excited about it. We have four cats, and there’s something aspirational to how they are domesticated animals that somehow run our household. A funny assumption I had to leave behind – that I knew all the rules! It’s been years since I wrote anything for D&D , and I was lucky enough to work with two people who are absolute experts at the D&D system. Ian Pace developed the rules and nailed down the technical end of the manuscript, making sure that everything matched the D&D house style and that our rules synched with the D&D rulebooks. Chris Honkala, also known as Treantmonk on YouTube , brought his deep understanding of the D&D system to the project. He whipped the game mechanics into shape, making sure that they matched up with the power level of the game and would work well within the context of high level play. 9. The readership of this blog is obviously more geared toward earlier editions of D&D. Do you think that Cthulhu by Torchlight would still be of interest to players and referees of those older versions of the game and, if so, in what way? If you play AD&D , Shadowdark , B/X , or OSE , I think the book still has a lot of value for you. The monsters and Mythos tomes need adjusting to get their numbers in the right place, but the general direction of the effects should provide plenty of fodder for DMs. Passions and dreadful insights can copy across to those takes on D&D almost directly, with maybe some tweaks to get the benefits of a passion to match up with your specific D&D -like. Even with their grittier feel and less forgiving mechanics, I think earlier editions would benefit the most from using the monster design as a starting point for a conversion. 
+Posted by
+ James Maliszewski 
+at
+ 12:00 AM 
+ Email This BlogThis! Share to X Share to Facebook Share to Pinterest 
+Labels:
+ chaosium ,
+ DnD ,
+ interview ,
+ lovecraft ,
+ mearls 
+ 13 comments: 
+ James Mishler August 27, 2025 at 9:27 AM There is a classic source for taking on the Mythos via torchlight, armed only with a blade a mighty thews -- Robert E. Howard's Conan stories are all a subset of the mythos, and the definitive Sword & Sorcery source. I would have thought those works would have been more prominent in the development of this game... “A devil from the Outer Dark,” he grunted. “Oh, they’re nothing uncommon. They lurk as thick as fleas outside the belt of light which surrounds this world. I’ve heard the wise men of Zamora talk of them. Some find their way to Earth, but when they do, they have to take on earthly form and flesh of some sort. A man like myself, with a sword, is a match for any amount of fangs and talons, infernal or terrestrial.” ― Robert E. Howard, The Vale of Lost Women Reply Delete Replies Anonymous August 27, 2025 at 12:21 PM James Mishler beat me to it! I thought something similar when reading this interview - REH was already doing this. I think people don't really know or too easily forget just how enmeshed REH's Conan stuff was with HPL's story-world, particularly the "yawning gulfs of time" epochal chronology REH came up with as a frame for his Hyborian tales. In early drafts of the stories he even mentions Cthulhu and co. Another thing is just how non-awed Conan can be when confronted with these things. The passage from "Vale" JM quotes above is probably the locus classicus for this (though "Vale" itself is a little-known story), but I also think of the section in "Beyond the Black River" where Conan confronts the demon brother of Zogar Sag sent to slay him. Is he freaked out? Nah, he just says "hey, part those flames a bit so I can see you a little better, you know, before you kill me." And then he leaps in, blade swinging, and hews the thing to pieces. Conan just takes for granted that if it bleeds, he can kill it. Then again, Johansen does ram Cthulhu with his ship. Delete Replies Reply James Mishler August 27, 2025 at 1:56 PM The thing about Conan, though, is he earned his nonchalance via hard battle. In his early days he'd go completely berserk or even flee when he encountered demonic entities. It was over time, as he encountered more of them, and found out that he could, indeed, kill them with cold hard steel, that he started to consider them to be nothing more than just another thing to be overcome. Delete Replies Reply Bonnacon August 27, 2025 at 2:07 PM Not to be a Cthulhu fanboy, but Cthulhu immediately started reforming from the cloud it burst into when rammed and Johansen was lucky to get out of there. And I would guess Cthulhu wasn’t at full strength because the rites weren’t done to properly free it and its race, as the telepathic dream storm that preluded the rise of R’lyeh ended a week or so later. Delete Replies Reply Reply blackstone August 27, 2025 at 10:45 AM Sure, you can get Cthulhu by Torchlight and convert it to earlier editions... OR... Save yourself the time and headache by either getting Swords of Cthulhu by BRW Games (Joseph Bloch) or Realms of Crawling Chaos by Goblinoid Games. Just saying... Reply Delete Replies Reply Daniel August 27, 2025 at 10:50 AM This seems more Beowulfian than Lovecraftian, which, if true, is really cool in its own right, because for all the flexibility of MERP, Rolemaster, OD&D and various Chaosium stuff, the innovation of passion/obsession as a mechanic is the first one I've heard of that "forces" a PC to hunt down Grendel out of deep-seated hatred and revenge, giving him some advantages and disadvantages in the process. My problem with "heroic fantasy" as it is played currently (in my somewhat limited and biased observations of it) is there are no real stakes, only tactics and resources and guiderails. and generic roles to play (probably because my idea of a hero is a PC who has limitations he must overcome, not powers he must execute). This approach sounds like it might actually solve that. Reply Delete Replies Bonnacon August 27, 2025 at 2:18 PM Some superhero games have mechanics to encourage PCs to behave in character. For example, Mutants & Masterminds characters have Complications that when they come up in play reward the character with Hero points to use in battle. A character might have a significant other whose safety they might be obliged to prioritize, or they may harbor feelings of Revenge against some supervillain which might prioritize them going after that NPC rather than doing what makes the most sense logically. I don’t have experience with Passion mechanics, so couldn’t say which works better or even whether they’re really different. Delete Replies Reply Reply THOMAS August 27, 2025 at 12:09 PM Play D&D with a sanity score and Great Old Ones. Reply Delete Replies Reply PaMar August 27, 2025 at 2:00 PM I do not know if you covered this topic already in older posts or if you plan to do in this "Lovecraft Special" but... are you familiar with D20 Cthulhu? If yes, what is your opinion about it? Reply Delete Replies Reply ...m... August 27, 2025 at 6:20 PM ...the tonal difference between *carcosa* and *chtulhu by torchlight* is striking, arguably emblematic of a similar distinction between original and fifth-edition *dungeons and dragons*, but i would nod at *sandy petersen's cthulhu mythos* as a counterpoint to the thesis that fifth-edition mechanics inherently foster heroic high fantasy gameplay... ...i posit that the difference in tone is more cultural than mechanical, and *cthulhu by torchlight* simply caters to a different crowd... Reply Delete Replies Reply Anonymous August 28, 2025 at 4:16 PM Ugh, no thanks. This interview read like a sales pitch for a watered down version of role-plying in the Mythos. Hard pass. Reply Delete Replies Anonymous August 29, 2025 at 1:58 AM Yeah, and it also fails to mention that this product is a D&D Beyond exclusive—not even available as pdf or print copy. Delete Replies Reply Reply R Parker August 30, 2025 at 2:11 AM Those Ryre stories are, by and large, lightweight but excellent in comparison to many of their contemporaries in the 70s S&S scene. Far Away and Never from Necronomicon Press (later DMR) is a nice little chapbook collection. Nothing revelatory, but some fun yarns along the way. Reply Delete Replies Reply Add comment Load more... 
+ Newer Post 
+ Older Post 
+ Home 
+Subscribe to:
+ Post Comments (Atom) 
+ What I'm Refereeing 
+ What I'm Reading 
+ What I'm Selling 
+ Henchmen & Hirelings 
+ "Thayt Chevski, hye is ane rottah. I liketh him notte ande blayme hyme gretely. Lette hym bee beyten withe stikkes." -- Chaucer 
+ Recent Comments 
+ Loading... 
+ Donation 
+ Search Grognardia 
+ Archive of Posts 
+ ► 
+2026
+ (111) 
+ ► 
+August
+ (2) 
+ ► 
+July
+ (1) 
+ ► 
+June
+ (3) 
+ ► 
+May
+ (3) 
+ ► 
+April
+ (10) 
+ ► 
+March
+ (30) 
+ ► 
+February
+ (26) 
+ ► 
+January
+ (36) 
+ ▼ 
+2025
+ (414) 
+ ► 
+December
+ (32) 
+ ► 
+November
+ (35) 
+ ► 
+October
+ (36) 
+ ► 
+September
+ (40) 
+ ▼ 
+August
+ (47) 
+ One of Us 
+ Interview: Jeff Talanian 
+ Hyperborea's Lovecraftian Adventures 
+ What If Lovecraft Had Lived into the '60s? 
+ Dream-Quest: Death & Return 
+ Campaign Updates: Catching Up 
+ Interview: Mike Mearls 
+ Dream-Quest: Character Origins 
+ More HPL in Astounding Stories 
+ Lovecraft the Fantasist 
+ Lovecraft the Blogger 
+ Pulp Fantasy Library: "The Music of Erich Zann" 
+ Interview: Geoffrey McKinney 
+ Lovecraft and Adventure Fantasy 
+ The Dream-Ship Captain 
+ HPL in Astounding Stories 
+ HPL in Weird Tales 
+ Natal Felicitations 
+ Grognard's Grimoire: Moon Prowler 
+ The Articles of Dragon: "Giants in the Earth" (Iss... 
+ Grognard's Grimoire: Dreamer 
+ Pulp Fantasy Library: Through the Gates of the Sil... 
+ Interview: James Edward Raggi IV (Part III) 
+ Interview: James Edward Raggi IV (Part II) 
+ Interview: James Edward Raggi IV (Part I) 
+ Awe-ful 
+ Second Thoughts 
+ Retrospective: Call of Cthulhu 
+ "Lovecraft was not a good writer." 
+ The Articles of Dragon: "The Cthulhu Mythos Revisi... 
+ Why Thousand Suns? 
+ Of Periwigs and Pallid Masks 
+ Pulp Fantasy Library: The Case of Charles Dexter Ward 
+ Special Delivery 
+ Interview: Sean McCoy 
+ Story Isn't the Enemy 
+ Suspense 
+ The Dream-Quest of the Old School Renaissance 
+ Notes from the Margins 
+ Retrospective: Alone Against the Wendigo 
+ Among the Weirdos 
+ The Articles of Dragon: "The Lovecraftian Mythos i... 
+ Hugh Rankin and "The Silver Key" 
+ Pulp Fantasy Library: The Silver Key 
+ Interview: Mike Mason 
+ One Month In 
+ That Is Not Dead 
+ ► 
+July
+ (41) 
+ ► 
+June
+ (32) 
+ ► 
+May
+ (31) 
+ ► 
+April
+ (30) 
+ ► 
+March
+ (30) 
+ ► 
+February
+ (29) 
+ ► 
+January
+ (31) 
+ ► 
+2024
+ (302) 
+ ► 
+December
+ (31) 
+ ► 
+November
+ (23) 
+ ► 
+October
+ (31) 
+ ► 
+September
+ (31) 
+ ► 
+August
+ (34) 
+ ► 
+July
+ (33) 
+ ► 
+June
+ (29) 
+ ► 
+May
+ (31) 
+ ► 
+April
+ (30) 
+ ► 
+March
+ (14) 
+ ► 
+January
+ (15) 
+ ► 
+2023
+ (247) 
+ ► 
+December
+ (18) 
+ ► 
+November
+ (19) 
+ ► 
+October
+ (1) 
+ ► 
+September
+ (10) 
+ ► 
+August
+ (19) 
+ ► 
+July
+ (23) 
+ ► 
+June
+ (14) 
+ ► 
+May
+ (33) 
+ ► 
+April
+ (28) 
+ ► 
+March
+ (18) 
+ ► 
+February
+ (29) 
+ ► 
+January
+ (35) 
+ ► 
+2022
+ (344) 
+ ► 
+December
+ (33) 
+ ► 
+November
+ (30) 
+ ► 
+October
+ (34) 
+ ► 
+September
+ (24) 
+ ► 
+August
+ (46) 
+ ► 
+July
+ (16) 
+ ► 
+June
+ (23) 
+ ► 
+May
+ (5) 
+ ► 
+April
+ (26) 
+ ► 
+March
+ (29) 
+ ► 
+February
+ (39) 
+ ► 
+January
+ (39) 
+ ► 
+2021
+ (410) 
+ ► 
+December
+ (27) 
+ ► 
+November
+ (18) 
+ ► 
+October
+ (17) 
+ ► 
+September
+ (22) 
+ ► 
+August
+ (29) 
+ ► 
+July
+ (34) 
+ ► 
+June
+ (44) 
+ ► 
+May
+ (42) 
+ ► 
+April
+ (52) 
+ ► 
+March
+ (34) 
+ ► 
+February
+ (47) 
+ ► 
+January
+ (44) 
+ ► 
+2020
+ (309) 
+ ► 
+December
+ (38) 
+ ► 
+November
+ (62) 
+ ► 
+October
+ (85) 
+ ► 
+September
+ (95) 
+ ► 
+August
+ (29) 
+ ► 
+2012
+ (345) 
+ ► 
+December
+ (1) 
+ ► 
+November
+ (27) 
+ ► 
+October
+ (23) 
+ ► 
+September
+ (28) 
+ ► 
+August
+ (12) 
+ ► 
+July
+ (24) 
+ ► 
+June
+ (31) 
+ ► 
+May
+ (31) 
+ ► 
+April
+ (45) 
+ ► 
+March
+ (50) 
+ ► 
+February
+ (38) 
+ ► 
+January
+ (35) 
+ ► 
+2011
+ (629) 
+ ► 
+December
+ (41) 
+ ► 
+November
+ (50) 
+ ► 
+October
+ (52) 
+ ► 
+September
+ (33) 
+ ► 
+August
+ (51) 
+ ► 
+July
+ (42) 
+ ► 
+June
+ (66) 
+ ► 
+May
+ (69) 
+ ► 
+April
+ (78) 
+ ► 
+March
+ (53) 
+ ► 
+February
+ (50) 
+ ► 
+January
+ (44) 
+ ► 
+2010
+ (759) 
+ ► 
+December
+ (50) 
+ ► 
+November
+ (73) 
+ ► 
+October
+ (54) 
+ ► 
+September
+ (63) 
+ ► 
+August
+ (68) 
+ ► 
+July
+ (78) 
+ ► 
+June
+ (57) 
+ ► 
+May
+ (59) 
+ ► 
+April
+ (66) 
+ ► 
+March
+ (71) 
+ ► 
+February
+ (57) 
+ ► 
+January
+ (63) 
+ ► 
+2009
+ (669) 
+ ► 
+December
+ (43) 
+ ► 
+November
+ (60) 
+ ► 
+October
+ (43) 
+ ► 
+September
+ (50) 
+ ► 
+August
+ (69) 
+ ► 
+July
+ (56) 
+ ► 
+June
+ (60) 
+ ► 
+May
+ (44) 
+ ► 
+April
+ (62) 
+ ► 
+March
+ (72) 
+ ► 
+February
+ (53) 
+ ► 
+January
+ (57) 
+ ► 
+2008
+ (449) 
+ ► 
+December
+ (49) 
+ ► 
+November
+ (49) 
+ ► 
+October
+ (71) 
+ ► 
+September
+ (73) 
+ ► 
+August
+ (67) 
+ ► 
+July
+ (38) 
+ ► 
+June
+ (27) 
+ ► 
+May
+ (40) 
+ ► 
+April
+ (32) 
+ ► 
+March
+ (3) 
+ Popular Topics and Series 
+ history 
+ (440) 
+ retrospective 
+ (427) 
+ gygax 
+ (414) 
+ pulp fantasy library 
+ (357) 
+ dwimmermount 
+ (285) 
+ traveller 
+ (257) 
+ review 
+ (199) 
+ tekumel 
+ (181) 
+ ept 
+ (145) 
+ articles of dragon 
+ (132) 
+ house of worms 
+ (132) 
+ megadungeon 
+ (123) 
+ ads of dragon 
+ (100) 
+ interview 
+ (97) 
+ sha-arthan 
+ (91) 
+ arneson 
+ (82) 
+ grognard's grimoire 
+ (68) 
+ dungeons 
+ (66) 
+ appendix n 
+ (63) 
+ brandification 
+ (62) 
+ thousand suns 
+ (58) 
+ urheim 
+ (25) 
+ Follow Grognardia 
+Posts
+ Atom
+Posts
+Comments
+ Atom
+Comments
+Grognardia, Grognardia Games, and the Grognardia logo are trademarks of James Maliszewski. Tékumel is a trademark of M.A.R. Barker and is used with permission of the Tékumel Foundation . 
+Awesome Inc. theme. Powered by Blogger .
+ 

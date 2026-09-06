@@ -84,8 +84,8 @@
  "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-martin-measurement.json",
-  "claims": 109,
+  "claims": 60,
   "complete": true,
-  "mtime": "13:16:00"
+  "mtime": "14:02:13"
  }
 }

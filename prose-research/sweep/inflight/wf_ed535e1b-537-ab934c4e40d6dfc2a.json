@@ -1,0 +1,28 @@
+{
+ "role": "verifier",
+ "name": "martin",
+ "angle": null,
+ "tag": "i822-841",
+ "lines": 50,
+ "firstTs": "2026-09-06T18:04:34.742Z",
+ "lastTs": "2026-09-06T18:06:11.273Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 9
+ },
+ "urlsFetched": [
+  "https://atseajournal.com/asoiaf/essays/$p.html",
+  "https://doi.org/10.1007/s13278-024-01365-z"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "Now the Springer/DOI source for claim 830.",
+ "run": "wf_ed535e1b-537",
+ "agent": "ab934c4e40d6dfc2a",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/19ace14d-e63e-4584-ad77-d83bd8e2cd0f/subagents/workflows/wf_ed535e1b-537/agent-ab934c4e40d6dfc2a.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-martin-i822-841.json",
+  "exists": false
+ }
+}

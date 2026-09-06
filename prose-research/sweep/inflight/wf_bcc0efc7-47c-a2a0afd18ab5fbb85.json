@@ -1,0 +1,30 @@
+{
+ "role": "verifier",
+ "name": "ai",
+ "angle": null,
+ "tag": "i569-584",
+ "lines": 34,
+ "firstTs": "2026-09-06T18:05:24.987Z",
+ "lastTs": "2026-09-06T18:06:14.743Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 5
+ },
+ "urlsFetched": [
+  "https://www.sudowrite.com/muse|sudowrite-muse",
+  "https://janefriedman.com/i-would-rather-see-my-books-pirated/|friedman",
+  "https://authorsguild.org/news/ai-survey-90-percent-of-writers-believe-authors-should-be-compensated-for-ai-training-use/|authorsguild",
+  "https://neil-clarke.com/a-concerning-trend/|clarke"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "All four fetched live. Now converting to text and checking each quote.",
+ "run": "wf_bcc0efc7-47c",
+ "agent": "a2a0afd18ab5fbb85",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/19ace14d-e63e-4584-ad77-d83bd8e2cd0f/subagents/workflows/wf_bcc0efc7-47c/agent-a2a0afd18ab5fbb85.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-ai-i569-584.json",
+  "exists": false
+ }
+}

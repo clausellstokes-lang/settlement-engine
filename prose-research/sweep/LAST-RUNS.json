@@ -1,51 +1,51 @@
 {
- "_doc": "the LAST launch of every sweep (chair, 2026-09-06 12:58 (round 4 launched 12:57\u201312:58 beside the \u00a7903 gate, on the owner's word)): runId (this session's; dies with it), argsFile (the args it was launched with), tag, script. resume-research.sh reads this to rebuild the next round from the files.",
+ "_doc": "the LAST launch of every sweep (chair, 2026-09-06 14:12, session 19ace14d: ROUND 5 = the COMPLETION of round 4 after the 13:51 session-limit death — no finders, verify the remainder under S-BOUND triage (--triage), regrade where round 4's regrade never ran, synth + critic; leguin critic-only via skipSynth (v3.3)): runId (this session's; dies with it), argsFile, tag, script. resume-research.sh reads this to rebuild the next round from the files. ⚠ TAG vs OWNER ROUND: r5 here is NOT the owner's 'round 5' — it completes round 4; the owner's 'at most one more round' for dnd/ai/kay/leguin/wolfe/hobb is still unspent and will carry tag r6 with this note.",
  "tolkien": {
-  "runId": "wf_61555b6a-d7c",
-  "argsFile": "args-tolkien-r4.json",
-  "tag": "r4",
-  "script": "research-workflow-v3.js (v3.2 compact chunks)"
+  "runId": "wf_bf5b8fda-a24",
+  "argsFile": "args-tolkien-r5.json",
+  "tag": "r5",
+  "script": "research-workflow-v3.js (v3.3: skipSynth; compact chunks + legacy {file,indices} for triage gaps)"
  },
  "kay": {
-  "runId": "wf_ae11ef1d-bb8",
-  "argsFile": "args-kay-r4.json",
-  "tag": "r4",
-  "script": "research-workflow-v3.js (v3.2 compact chunks)"
+  "runId": "wf_f5b527e0-155",
+  "argsFile": "args-kay-r5.json",
+  "tag": "r5",
+  "script": "research-workflow-v3.js (v3.3: skipSynth; compact chunks + legacy {file,indices} for triage gaps)"
  },
  "leguin": {
-  "runId": "wf_5e5c7e72-458",
-  "argsFile": "args-leguin-r4.json",
-  "tag": "r4",
-  "script": "research-workflow-v3.js (v3.2 compact chunks)"
+  "runId": "wf_146ba5ee-000",
+  "argsFile": "args-leguin-r5.json",
+  "tag": "r5",
+  "script": "research-workflow-v3.js (v3.3: skipSynth; compact chunks + legacy {file,indices} for triage gaps)"
  },
  "wolfe": {
-  "runId": "wf_58e1616d-d5f",
-  "argsFile": "args-wolfe-r4.json",
-  "tag": "r4",
-  "script": "research-workflow-v3.js (v3.2 compact chunks)"
+  "runId": "wf_328e2797-84f",
+  "argsFile": "args-wolfe-r5.json",
+  "tag": "r5",
+  "script": "research-workflow-v3.js (v3.3: skipSynth; compact chunks + legacy {file,indices} for triage gaps)"
  },
  "martin": {
-  "runId": "wf_c7cc5b15-ee7",
-  "argsFile": "args-martin-r4.json",
-  "tag": "r4",
-  "script": "research-workflow-v3.js (v3.2 compact chunks)"
+  "runId": "wf_ed535e1b-537",
+  "argsFile": "args-martin-r5.json",
+  "tag": "r5",
+  "script": "research-workflow-v3.js (v3.3: skipSynth; compact chunks + legacy {file,indices} for triage gaps)"
  },
  "hobb": {
-  "runId": "wf_22752bb0-128",
-  "argsFile": "args-hobb-r4.json",
-  "tag": "r4",
-  "script": "research-workflow-v3.js (v3.2 compact chunks)"
+  "runId": "wf_06d7ffd7-48b",
+  "argsFile": "args-hobb-r5.json",
+  "tag": "r5",
+  "script": "research-workflow-v3.js (v3.3: skipSynth; compact chunks + legacy {file,indices} for triage gaps)"
  },
  "dnd": {
-  "runId": "wf_f9424af6-fcf",
-  "argsFile": "args-dnd-r4.json",
-  "tag": "r4",
-  "script": "research-workflow-v3.js (v3.2 compact chunks)"
+  "runId": "wf_a9298963-fdf",
+  "argsFile": "args-dnd-r5.json",
+  "tag": "r5",
+  "script": "research-workflow-v3.js (v3.3: skipSynth; compact chunks + legacy {file,indices} for triage gaps)"
  },
  "ai": {
-  "runId": "wf_d28449b9-5d6",
-  "argsFile": "args-ai-r4.json",
-  "tag": "r4",
-  "script": "research-workflow-v3.js (v3.2 compact chunks)"
+  "runId": "wf_bcc0efc7-47c",
+  "argsFile": "args-ai-r5.json",
+  "tag": "r5",
+  "script": "research-workflow-v3.js (v3.3: skipSynth; compact chunks + legacy {file,indices} for triage gaps)"
  }
 }

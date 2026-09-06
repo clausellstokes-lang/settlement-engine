@@ -50,8 +50,9 @@ args['regradeTag']=tag; args['cap']=cap
 # v3.2 compact chunks: {f: relative file, i: [first,last]} — the indices a chunk carries are always one contiguous run (split-chunks cuts them so)
 cc=[]
 for c in (args.get('chunks') or []):
-    idx=c['indices']; assert idx==list(range(idx[0],idx[-1]+1)), ('non-contiguous chunk',c['file'])
-    cc.append({'f':os.path.relpath(c['file'],S),'i':[idx[0],idx[-1]]})
+    idx=c['indices']
+    if idx==list(range(idx[0],idx[-1]+1)): cc.append({'f':os.path.relpath(c['file'],S),'i':[idx[0],idx[-1]]})
+    else: cc.append({'file':c['file'],'indices':idx})   # 09-06 14:05: S-BOUND triage leaves GAPS in the todo list; the legacy {file, indices} form carries the exact list (v3.2 accepts both)
 args['chunks']=cc
 if '--inflight' in a:
     # fold the in-flight scanner's progress into PRIOR PROGRESS hints for every angle this round re-runs (finder killed before its checkpoint)
@@ -69,4 +70,4 @@ if '--inflight' in a:
             hints[ang]='%d sources were fetched before the cutoff%s: %s%s. Start from the roster items NOT in that list, then expand.'%(len(urls),(' and %d claims are checkpointed'%claims) if claims else '',' ; '.join(urls[:40]),' (+%d more in sweep/inflight/)'%(len(urls)-40) if len(urls)>40 else '')
     if hints: args['angleHints']=hints; print('  angleHints for', list(hints))
 out=f'{S}/args-{name}-{tag}.json'; json.dump(args,open(out,'w'),ensure_ascii=False)
-print(json.dumps({'name':name,'tag':tag,'out':out,'bytes':os.path.getsize(out),'chunks':len(args.get('chunks') or []),'toVerify':sum(len(c['indices']) for c in (args.get('chunks') or [])),'findAngles':angles,'extraAngles':[e['key'] for e in extras],'droppedComplete':[x for x in (prev.get('findAngles') or []) if complete(x)]+[e['key'] for e in (prev.get('extraAngles') or []) if complete(e['key'])],'baseIndex':args.get('baseIndex'),'verifiedCount':args.get('verifiedCount'),'cap':cap}))
+print(json.dumps({'name':name,'tag':tag,'out':out,'bytes':os.path.getsize(out),'chunks':len(args.get('chunks') or []),'toVerify':sum((len(c['indices']) if 'indices' in c else c['i'][1]-c['i'][0]+1) for c in (args.get('chunks') or [])),'findAngles':angles,'extraAngles':[e['key'] for e in extras],'droppedComplete':[x for x in (prev.get('findAngles') or []) if complete(x)]+[e['key'] for e in (prev.get('extraAngles') or []) if complete(e['key'])],'baseIndex':args.get('baseIndex'),'verifiedCount':args.get('verifiedCount'),'cap':cap}))

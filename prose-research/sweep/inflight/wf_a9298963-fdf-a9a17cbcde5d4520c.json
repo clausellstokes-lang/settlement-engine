@@ -1,0 +1,31 @@
+{
+ "role": "verifier",
+ "name": "dnd",
+ "angle": null,
+ "tag": "i169-183",
+ "lines": 42,
+ "firstTs": "2026-09-06T18:04:54.970Z",
+ "lastTs": "2026-09-06T18:06:11.758Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 9
+ },
+ "urlsFetched": [
+  "https://paizo.com/writersguidelines/dungeon_writer_guidelines.pdf",
+  "https://paizo.com/writersguidelines/dragon_writers_guidelines.pdf",
+  "http://archive.wizards.com/default.asp?x=lg/lgiw/20040413",
+  "https://web.archive.org/web/20161101184116id_/http://archive.wizards.com/default.asp?x=lg/lgiw/20040413",
+  "https://web.archive.org/web/20161101184117id_/http://archive.wizards.com/default.asp?x=lg/lgiw/20041006a"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "Both PDFs downloaded. Now extracting text and fetching the Wayback captures.",
+ "run": "wf_a9298963-fdf",
+ "agent": "a9a17cbcde5d4520c",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/19ace14d-e63e-4584-ad77-d83bd8e2cd0f/subagents/workflows/wf_a9298963-fdf/agent-a9a17cbcde5d4520c.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-dnd-i169-183.json",
+  "exists": false
+ }
+}

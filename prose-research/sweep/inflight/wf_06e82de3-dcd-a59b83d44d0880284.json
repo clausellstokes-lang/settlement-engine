@@ -71,8 +71,8 @@
  "journal": "failed",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-ai-critics-direct.json",
-  "claims": 234,
+  "claims": 128,
   "complete": true,
-  "mtime": "13:20:38"
+  "mtime": "14:02:13"
  }
 }

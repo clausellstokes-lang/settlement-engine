@@ -12031,12 +12031,47 @@
    "note": "Raw page, the 'fish out of water' answer: the quoted sentence is followed by 'The initiation of a character becomes the reader’s initiation.', supporting the claim's second limb.",
    "fromFile": "verdicts-kay-i345-359.json"
   },
+  "360": {
+   "index": 360,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "so I’m very lightly edited",
+   "note": "Raw HTML of brightweavings.com/sfsite/ (HTTP 200, browser UA). GGK: “I’m very slow and somewhat obsessive, so have never delivered a book until I’m quite sure it is just about where I want it to be… and so I’m very lightly edited. In theory, one might have expected problems, given three editors in three countries.” The three-publisher limb: the page says “three editors in three countries” and the interviewer names them earlier — “you are one of the few who separate the Canadian, US and UK markets” — with Kay confirming he is published by a house based in each country, so the English-language limb holds from the page itself, though the phrase “English-language” is not on this page (it is Kay’s wording in the Deep Magic interview).",
+   "fromFile": "verdicts-kay-i360-382.json"
+  },
+  "361": {
+   "index": 361,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I also like to work with cross-sections of a culture or society",
+   "note": "Raw HTML of brightweavings.com/sfchannel/ (HTTP 200). “I also like to work with cross-sections of a culture or society, so I’ll tend to have figures from many different classes.” Quote verbatim; both limbs on the page.",
+   "fromFile": "verdicts-kay-i360-382.json"
+  },
   "362": {
    "index": 362,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
+  },
+  "363": {
+   "index": 363,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "grow in importance because I like their voice",
+   "note": "Same page, earlier paragraph on creating characters: “Other characters, who I think of as minor to start with, grow in importance because I like their voice.” Quote verbatim; page hint (early, on making characters) is accurate.",
+   "fromFile": "verdicts-kay-i360-382.json"
+  },
+  "364": {
+   "index": 364,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "By telescoping events into effectively two generations",
+   "note": "Raw HTML of brightweavings.com/sfx/ (HTTP 200), final answer of the interview: the Reconquista “took place over a period of 300 years… By telescoping events into effectively two generations it allows me to intensify the emotional and intellectual response to what really happened by bringing it home to the same set of characters.” The reader limb is carried by the page’s next sentences: “whatever is a strength for the author is, by automatic extension, a strength for the reader.”",
+   "fromFile": "verdicts-kay-i360-382.json"
+  },
+  "365": {
+   "index": 365,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "great gobbets of raw fact are tucked into the book",
+   "note": "Raw HTML of brightweavings.com/challengingdestiny/ (HTTP 200), answer on the fact/fiction balancing act: “that great gobbets of raw fact are tucked into the book like an undigested meal. You have to get over them in order to get back to the story. That’s failed fiction writing for me.” Quote and every limb verbatim.",
+   "fromFile": "verdicts-kay-i360-382.json"
   },
   "366": {
    "index": 366,
@@ -12073,6 +12108,41 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
   },
+  "371": {
+   "index": 371,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "examine how those great events can impact on ordinary lives",
+   "note": "Raw HTML of brightweavings.com/eventhorizon/ (HTTP 200). Freund introduces Kay as author “most recently, Sailing to Sarantium” and asks the premise; Kay: “This time I wanted to make the protagonist less central to the great events and at the same time examine how those great events can impact on ordinary lives.”",
+   "fromFile": "verdicts-kay-i360-382.json"
+  },
+  "372": {
+   "index": 372,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "as part of his worldbuilding “game,” but here you have it straight",
+   "note": "Same transcript, answer to Ran on the differing LIONS and SARANTIUM maps: “Tolkien would have tried to construct some brilliant elaborate ‘explanation’ for the difference, as part of his worldbuilding ‘game,’ but here you have it straight.” The declining limb is the closing clause.",
+   "fromFile": "verdicts-kay-i360-382.json"
+  },
+  "373": {
+   "index": 373,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "you have to KNOW the theme before you try variations",
+   "note": "Raw HTML of brightweavings.com/deepmagic/ (HTTP 200), answer on settings and history: “if you are doing a fantasy based on a period, a variation on a theme, as it were, you have to KNOW the theme before you try variations!” Capitalisation of KNOW matches.",
+   "fromFile": "verdicts-kay-i360-382.json"
+  },
+  "374": {
+   "index": 374,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "be skeptical when writers present intuitive processes as thought-out planning",
+   "note": "Raw HTML of brightweavings.com/on-the-strengths-of-fiction-done-as-near-history/ (HTTP 200), caveat paragraph: “But here’s a caveat: be skeptical when writers present intuitive processes as thought-out planning. This was an evolution for me, not a strategic concept. I discovered what I was doing… I didn’t lay it out in advance.”",
+   "fromFile": "verdicts-kay-i360-382.json"
+  },
+  "375": {
+   "index": 375,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Readers will never learn the year of the Treaty of Utrecht",
+   "note": "Same essay, downsides paragraph: “There are also downsides, or risks, to how I work… Readers will never learn the year of the Treaty of Utrecht in my novels. They will not assuage any desire to ‘learn the real facts’ about a specific period.” Both limbs on the page.",
+   "fromFile": "verdicts-kay-i360-382.json"
+  },
   "376": {
    "index": 376,
    "verdict": "SKIPPED_TRIAGE",
@@ -12086,6 +12156,41 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
+  },
+  "378": {
+   "index": 378,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I wanted to explore interactions not ideologies",
+   "note": "Same essay, Lions of Al-Rassan section (immediately after “I changed the three religions of our history”): “I wanted to explore interactions not ideologies.” Quote verbatim, book attribution correct.",
+   "fromFile": "verdicts-kay-i360-382.json"
+  },
+  "379": {
+   "index": 379,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "each reader makes the book they read",
+   "note": "Same essay, A Song for Arbonne section: “If they preferred to just treat the book as a tale … well, each reader makes the book they read.” Quote verbatim; section attribution correct.",
+   "fromFile": "verdicts-kay-i360-382.json"
+  },
+  "380": {
+   "index": 380,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "There are no rules. That’s my main contribution to this discussion",
+   "note": "Raw HTML of brightweavings.com/some-writing-advice-dont-take-others-advice/ (HTTP 200), middle of the body. “This discussion” is the essay’s subject, writing advice, opened by “I am, more or less, allergic to writing advice.”",
+   "fromFile": "verdicts-kay-i360-382.json"
+  },
+  "381": {
+   "index": 381,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "People everywhere tell you not to use italics",
+   "note": "Same essay, second paragraph: “I am, more or less, allergic to writing advice… Writing advice is an industry on steroids. People everywhere tell you not to use italics.” Allergy, industry and italics limbs all in the opening paragraphs.",
+   "fromFile": "verdicts-kay-i360-382.json"
+  },
+  "382": {
+   "index": 382,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "history may not repeat, but it rhymes",
+   "note": "Raw HTML of whatever.scalzi.com/2025/05/28/the-big-idea-guy-gavriel-kay-4/ (HTTP 200), the Big Idea essay for Written on the Dark: “A wise man who was not Mark Twain wrote that history may not repeat, but it rhymes. (His name was Theodore Reik and he was a psychoanalyst … but it always seems to be credited to Twain.) I share that thought. I write with that idea in mind.”",
+   "fromFile": "verdicts-kay-i360-382.json"
   },
   "387": {
    "index": 387,
@@ -12192,12 +12297,33 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
   },
+  "413": {
+   "index": 413,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "When I switch to another character's point of view, the conversation isn't the same. It bears a resemblance, but it's not the same.",
+   "note": "LARB raw HTML fetched 200 via curl with a browser UA; quote is verbatim in the answer on multiple points of view. Both limbs (resemblance, not the same) explicit.",
+   "fromFile": "verdicts-kay-i413-439.json"
+  },
   "414": {
    "index": 414,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
+  },
+  "415": {
+   "index": 415,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "if a reader can pick out what's made up and what's real, you've botched your storytelling!",
+   "note": "Verbatim on the LARB raw page, in the answer following the Hilary Mantel / interrogating-a-version-of-the-past question. Page adds an exclamation mark; wording otherwise identical.",
+   "fromFile": "verdicts-kay-i413-439.json"
+  },
+  "416": {
+   "index": 416,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "That's also one of the reasons I've used two moons in several of the books. The two moons say, We're not here.",
+   "note": "Verbatim on LARB raw page. The 'as a signal' limb is supported by the question it answers ('you're setting the rules of engagement? So your reader knows you're not talking about Justinian himself?' — 'That's right.').",
+   "fromFile": "verdicts-kay-i413-439.json"
   },
   "417": {
    "index": 417,
@@ -12220,6 +12346,27 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
   },
+  "420": {
+   "index": 420,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Any strength for the writer, from form, from craft, from technique, becomes a strength for the reader, because we're in this together.",
+   "note": "Verbatim on LARB raw page, in the final substantive answer of the interview, exactly as the page label 'closing answer' says.",
+   "fromFile": "verdicts-kay-i413-439.json"
+  },
+  "421": {
+   "index": 421,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The reading I was doing brought home to me that the ambitions and doings of emperors and empresses and sultans and dukes of powerful city-states didn't really matter that much to the day-to-day desires and ambitions and needs of ordinary people living on the borderlands.",
+   "note": "Verbatim on LARB raw page, in the answer to the follow-up about honouring the legacies of fathers. Every limb (his reading, emperors and sultans, day-to-day needs, borderlands) explicit.",
+   "fromFile": "verdicts-kay-i413-439.json"
+  },
+  "422": {
+   "index": 422,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I don't write any 'one to one' allegories. I'm not writing books about the past that I mean to have the reader feel that's exactly what's happening now.",
+   "note": "CBC raw HTML fetched 200; both sentences verbatim, in the answer to 'Do you feel you need to pay attention to what's happening in the world when you write?'",
+   "fromFile": "verdicts-kay-i413-439.json"
+  },
   "423": {
    "index": 423,
    "verdict": "SKIPPED_TRIAGE",
@@ -12227,12 +12374,47 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
   },
+  "424": {
+   "index": 424,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "When I talk about process and method I always preface it to say this is anecdotal, not prescriptive.",
+   "note": "Verbatim on the CBC raw page, in the answer to 'What is your approach to storytelling? Do you outline first?' Claim's 'prefaces it by saying' vs page's 'preface it to say' is the same sentence; the quoted span itself is word for word.",
+   "fromFile": "verdicts-kay-i413-439.json"
+  },
+  "425": {
+   "index": 425,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Shirley Hazzard's The Transit of Venus. I don't write like that, but my admiration for the craft and intelligence, the sentence by sentence insight and brilliance is extreme.",
+   "note": "Lit Hub raw HTML fetched 200; verbatim in the answer to 'Is there a book you wish you had written?' Both limbs (does not write like that; admiration extreme) explicit.",
+   "fromFile": "verdicts-kay-i413-439.json"
+  },
+  "426": {
+   "index": 426,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "One of the things I'm really interested in is memory. We make stories of our lives and we remember the same moments differently.",
+   "note": "Locus 'Journeying' raw HTML fetched 200; verbatim in the final excerpt (page carries soft hyphens inside 'really', which do not render). Both limbs explicit.",
+   "fromFile": "verdicts-kay-i413-439.json"
+  },
   "427": {
    "index": 427,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
+  },
+  "428": {
+   "index": 428,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I did this very deliberately, five or six times I think, to underscore the way in which we remember and hear and respond differently to the same moments.",
+   "note": "Verbatim in the Locus 'Journeying' final excerpt. 'this book' is Children of Earth and Sky, named on the same page in the preceding excerpt and in the bio; the technique described is the mid-conversation POV cut with repeated, slightly altered dialogue.",
+   "fromFile": "verdicts-kay-i413-439.json"
+  },
+  "429": {
+   "index": 429,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "My proofreader, quite correctly, flagged every one of these as an error ... What I prefer is the change! The difference.",
+   "note": "Both limbs verbatim in the Locus 'Journeying' final excerpt, adjacent sentences. Kay adds 'quite correctly' and gives the proofreader's query in full.",
+   "fromFile": "verdicts-kay-i413-439.json"
   },
   "430": {
    "index": 430,
@@ -12247,6 +12429,20 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
+  },
+  "432": {
+   "index": 432,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It's a wonderful passage about how the concerns of ordinary people are not those that we tend to see if we read the overarching histories of a given time ... None of these are important people.",
+   "note": "Both limbs on the Locus 'Journeying' third excerpt, which names Fernand Braudel as the source of the passage. The number five is a count of the page's own enumeration — the one caught up in the war plus an artist, a woman escaping her father's plan, a merchant and a soldier — immediately followed by 'None of these are important people'; the page does not print the word 'five' or the word 'protagonists'.",
+   "fromFile": "verdicts-kay-i413-439.json"
+  },
+  "433": {
+   "index": 433,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It's fun writing a bad writer, too. I did a bad troubadour early in A Song for Arbonne, and it's ridiculously enjoyable to hack around with a hack's work.",
+   "note": "Locus 'Margins of History' raw HTML fetched 200; verbatim in the excerpt about the poets of Written on the Dark (Marina di Seressa and Thierry Villar), immediately after 'There are a couple of other poets in the novel.'",
+   "fromFile": "verdicts-kay-i413-439.json"
   },
   "434": {
    "index": 434,
@@ -12269,12 +12465,26 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
   },
+  "437": {
+   "index": 437,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I think every serious writer is teaching a reader how to read them. That fits into a classic paradigm: If you think someone's poured you a cup of coffee, but they've poured you tea, your first sip is, 'Oh!'",
+   "note": "Verbatim in the Locus 'Margins of History' excerpt; the coffee/tea limb is the sentence directly following, so both limbs are on the page.",
+   "fromFile": "verdicts-kay-i413-439.json"
+  },
   "438": {
    "index": 438,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r5.json"
+  },
+  "439": {
+   "index": 439,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I don't ever want to write a book where things map directly - where a character maps onto a real person, or where an event maps precisely onto a real event.",
+   "note": "Verbatim in the Locus 'Margins of History' excerpt, in the paragraph on 'History doesn't repeat, but it rhymes'. All three limbs explicit.",
+   "fromFile": "verdicts-kay-i413-439.json"
   },
   "440": {
    "index": 440,
