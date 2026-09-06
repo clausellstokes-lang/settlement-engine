@@ -27,6 +27,7 @@ else:
 io.open(p,'w',encoding='utf-8').write(s)
 PY
   cd $SC
+  sh $SC/snapshot-lanes.sh >/dev/null 2>&1   # 09-06 14:25 owner: record every lane's progress — LANE-STATUS.md refreshed each cycle, sealed with the kit
   PREV=$(git -C $REPO rev-parse refs/preserve/chair-tools-2026-09-05)
   # THE SEAL LIST (2026-09-05 21:15, owner: "I will run out of the 5-hour window frequently — prepare"): EVERYTHING in the kit tree
   # except the docks (lane*/ are git worktrees), the probe farms, the copyrighted raw excerpts, the four fingerprint source texts,

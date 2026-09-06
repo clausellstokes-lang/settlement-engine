@@ -3,13 +3,13 @@
  "name": "dnd",
  "angle": null,
  "tag": "i379-393",
- "lines": 52,
+ "lines": 90,
  "firstTs": "2026-09-06T18:16:19.514Z",
- "lastTs": "2026-09-06T18:18:22.153Z",
+ "lastTs": "2026-09-06T18:20:16.715Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 12
+  "Bash": 24
  },
  "urlsFetched": [
   "https://thealexandrian.net/wordpress/48312/roleplaying-games/gm-dont-list-13-boxed-text-pitfalls",
@@ -21,7 +21,9 @@
   "https://gizmodo.com/dungeons-dragons-team-announces-new-plans-to-address-1844084273|giz1.html",
   "https://gizmodo.com/d-ds-culturally-sensitive-strahd-revamp-is-here-but-it-1844521228|giz2.html",
   "https://en.wikipedia.org/wiki/Tomb_of_Annihilation|toa.html",
-  "https://en.wikipedia.org/wiki/Curse_of_Strahd|cos.html"
+  "https://en.wikipedia.org/wiki/Curse_of_Strahd|cos.html",
+  "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+  "https://www.enworld.org/threads/dmsguild-d-d-style-guides-give-a-unique-insight-into-the-game.655198/page-$p"
  ],
  "filesWritten": [],
  "lastAssistantText": "Let me fetch the sources as raw text, grouped by URL.",

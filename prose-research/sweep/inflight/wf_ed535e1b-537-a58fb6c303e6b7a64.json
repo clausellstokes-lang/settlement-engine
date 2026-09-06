@@ -3,14 +3,15 @@
  "name": "martin",
  "angle": null,
  "tag": "i984-989",
- "lines": 56,
+ "lines": 68,
  "firstTs": "2026-09-06T18:15:54.841Z",
- "lastTs": "2026-09-06T18:18:14.219Z",
+ "lastTs": "2026-09-06T18:19:21.206Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 10,
-  "WebSearch": 1
+  "Bash": 11,
+  "WebSearch": 1,
+  "StructuredOutput": 2
  },
  "urlsFetched": [
   "https://raw.githubusercontent.com/MsEM11/Genre_Prediction/HEAD/CSVs/7_final_books.csv",
@@ -19,16 +20,17 @@
   "https://lightsailed.com/?s=Fire+and+Blood+Martin",
   "https://lightsailed.com/?s=Fire+%26+Blood",
   "https://lightsailed\\.com/catalog/book/[a-z0-9-",
-  "https://lightsailed.com/catalog/book/fire-blood-george-r-r-martin/9781524796297/"
+  "https://lightsailed.com/catalog/book/fire-blood-george-r-r-martin/9781524796297/",
+  "http://prosecraft.io/analysis/word-count/percentile/"
  ],
  "filesWritten": [],
- "lastAssistantText": "Both LightSail records confirmed from raw pages. Writing the checkpoint.",
+ "lastAssistantText": "Checkpoint written and read back (7,049 bytes, 5 claims / 5 verdicts). All four URLs were fetched as raw text via curl — no summarizer in any verdict path.",
  "run": "wf_ed535e1b-537",
  "agent": "a58fb6c303e6b7a64",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/19ace14d-e63e-4584-ad77-d83bd8e2cd0f/subagents/workflows/wf_ed535e1b-537/agent-a58fb6c303e6b7a64.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-martin-i984-989.json",
-  "exists": false
+  "exists": true
  }
 }

@@ -1,0 +1,21 @@
+{
+ "role": "regrade",
+ "name": "martin",
+ "angle": null,
+ "tag": "regrade-r5",
+ "lines": 37,
+ "firstTs": "2026-09-06T18:19:21.269Z",
+ "lastTs": "2026-09-06T18:20:12.317Z",
+ "tools": {
+  "Bash": 6,
+  "Read": 2
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "I'll start by running the merge command and reading the kept-martin.json file.",
+ "run": "wf_ed535e1b-537",
+ "agent": "adcc417f2936eaee0",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/19ace14d-e63e-4584-ad77-d83bd8e2cd0f/subagents/workflows/wf_ed535e1b-537/agent-adcc417f2936eaee0.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}
