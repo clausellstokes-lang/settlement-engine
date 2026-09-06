@@ -7429,6 +7429,994 @@
    "substantive": true,
    "date": "2006-09-10",
    "route": "lists.urth.net dead from here (curl 000); Wayback raw capture https://web.archive.org/web/2021id_/<url>"
+  },
+  {
+   "title": "John Gerlach, 'The Rhetoric of an Impossible Object: Gods, Chems, and Science Fantasy in Gene Wolfe's Book of the Long Sun' (Extrapolation 40.2, 1999)",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1999-gerlach.pdf",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "1999",
+   "route": "gwern.net raw PDF fetched with a browser user agent; text extracted locally from the macOS Quartz PDF text layer"
+  },
+  {
+   "title": "John Farrell, 'The Distant Suns of Gene Wolfe' (First Things, April 2007)",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2007-farrell.pdf",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2007-04",
+   "route": "gwern.net raw PDF, browser user agent, Quartz text extraction"
+  },
+  {
+   "title": "Gwyneth Jones, review of There Are Doors (Foundation, Fall 1989)",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1989-jones.pdf",
+   "kind": "reception",
+   "substantive": true,
+   "date": "1989",
+   "route": "gwern.net raw PDF, browser user agent, Quartz text extraction"
+  },
+  {
+   "title": "Melissa Mia Hall interview with Gene Wolfe (Amazing, Sept 1981; repr. as ch. 3 of Shadows of the New Sun, Liverpool UP 2007)",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2007-hall.pdf",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "1981-09 / repr. 2007-08",
+   "route": "gwern.net raw PDF of the Oxford Academic chapter, browser user agent"
+  },
+  {
+   "title": "Marc Aramini, 'Does It Mean? Gene Wolfe: Perverse Puzzle Maker' (PhD dissertation, UNLV, 2019)",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2019-aramini.pdf",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2019-05",
+   "route": "gwern.net mirror; the UNLV Digital Scholarship copy returned HTTP 403"
+  },
+  {
+   "title": "Peter Wright, 'Confounding the Skin and the Mask' (Ultan's Library, 2002; Birmingham conference paper, 26 Aug 2000)",
+   "url": "https://ultan.org.uk/confounding-the-skin-and-the-mask/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2002-01-15",
+   "route": "live URL fetched with a browser user agent, HTML stripped locally"
+  },
+  {
+   "title": "Scott Wowra, 'Place Names in Gene Wolfe's Soldier of the Mist' (Ultan's Library, 2016)",
+   "url": "https://ultan.org.uk/place-names-in-gene-wolfes-soldier-of-the-mist/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2016-09-07",
+   "route": "live URL, browser user agent"
+  },
+  {
+   "title": "Nick Gevers, 'The Reader as Augur' (Ultan's Library, 2000; written 1998)",
+   "url": "https://ultan.org.uk/the-reader-as-augur/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2000-09-05",
+   "route": "live URL, browser user agent"
+  },
+  {
+   "title": "Robert Borski, 'Desanctifying Victor Trenchard' (Ultan's Library, 2002)",
+   "url": "https://ultan.org.uk/desanctifying-victor-trenchard/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2002-05-24",
+   "route": "live URL, browser user agent"
+  },
+  {
+   "title": "Peter Wright, 'Mapping a Masterwork' (Ultan's Library, 2002)",
+   "url": "https://ultan.org.uk/review-botns/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2002-08-28",
+   "route": "live URL, browser user agent"
+  },
+  {
+   "title": "Michael Andre-Driussi, 'Posthistory 201' (Ultan's Library, 2020, revising Extrapolation 37.2, 1996)",
+   "url": "https://ultan.org.uk/posthistory-201/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2020-07-06",
+   "route": "live URL, browser user agent"
+  },
+  {
+   "title": "Scott Wowra, 'The Lupine Scholar' interview introduction (Ultan's Library, 2009)",
+   "url": "https://ultan.org.uk/the-lupine-scholar-by-scott-wowra/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2009-05-21",
+   "route": "live URL, browser user agent"
+  },
+  {
+   "title": "Robert Borski, review of The Fifth Head of Cerberus (Ultan's Library, 2001)",
+   "url": "https://ultan.org.uk/review-fifth-head-of-cerberus/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2001-08-28",
+   "route": "live URL, browser user agent"
+  },
+  {
+   "title": "John Clute, Excessive Candour on The Book of the Short Sun (Science Fiction Weekly 197, 2001)",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2001-01-29-johnclute-excessivecandorv7no5issue197-itisbecomingtograpplewiththisbook.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2001-01-29",
+   "route": "gwern.net mirror of the scifi.com page (itself a Wayback capture), browser user agent"
+  },
+  {
+   "title": "John Clute, review of The Best of Gene Wolfe (SCI FI Wire, 2009)",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2009-04-06-johnclute-thebestofgenewolfe-review.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2009-04-06",
+   "route": "gwern.net mirror of the scifiwire.com page (itself a Wayback capture), browser user agent"
+  },
+  {
+   "title": "Lawrence Person interview with Gene Wolfe, Nova Express 5.1 (Fall/Winter 1998), collected in Shadows of the New Sun",
+   "url": "http://losarciniegas.blogspot.com/2021/04/suns-new-long-and-short-interview-with.html",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "1998",
+   "route": "blog reproduction of the Nova Express text, browser user agent, after the wolfewiki page proved a stub and lawrenceperson.com returned 404"
+  },
+  {
+   "title": "Larry McCaffery interview with Gene Wolfe, Science Fiction Studies #46 (November 1988)",
+   "url": "https://web.archive.org/web/20260117042947id_/https://www.depauw.edu/sfs/interviews/wolfe46interview.htm",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "1988-11",
+   "route": "Wayback raw capture after every live depauw.edu/sfs path returned HTTP 404"
+  },
+  {
+   "title": "Wikipedia, 'Gene Wolfe' (Style and Reception sections, as of September 2026)",
+   "url": "https://en.wikipedia.org/wiki/Gene_Wolfe",
+   "kind": "relay",
+   "substantive": true,
+   "date": "read 2026-09-06",
+   "route": "live URL, browser user agent; used only as a declared relay for print-only primaries"
+  },
+  {
+   "title": "Joan Gordon, Gene Wolfe (Starmont Reader's Guide 29, 1986)",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1986-gordon-genewolfe.pdf",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "1986",
+   "route": "fetched (41MB scan); the Quartz text layer returns interleaved two-column OCR and no sentence is recoverable verbatim, so no claims were written from it"
+  },
+  {
+   "title": "Thomas D. Clareson, 'The Launching Pad' (SFRA Newsletter, 1985)",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1985-clareson.pdf",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "1985",
+   "route": "gwern.net raw PDF, read in full: a column on the state of sf criticism with Wolfe mentioned only in passing"
+  },
+  {
+   "title": "'2005-green' (gwern.net Gene Wolfe document directory)",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2005-green.pdf",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2005",
+   "route": "fetched 200 OK but image-only scan; text extraction empty; blocked for quotation"
+  },
+  {
+   "title": "Wikipedia, 'The Book of the New Sun'",
+   "url": "https://en.wikipedia.org/wiki/The_Book_of_the_New_Sun",
+   "kind": "relay",
+   "substantive": false,
+   "date": "read 2026-09-06",
+   "route": "live URL; fetched and read, its style material duplicates the Gene Wolfe article and adds no separately citable critic"
+  },
+  {
+   "title": "Wikipedia, 'The Fifth Head of Cerberus'",
+   "url": "https://en.wikipedia.org/wiki/The_Fifth_Head_of_Cerberus",
+   "kind": "relay",
+   "substantive": false,
+   "date": "read 2026-09-06",
+   "route": "live URL; fetched and read, plot and publication history only"
+  },
+  {
+   "title": "Nick Gevers, 'Five Steps towards Briah' (Ultan's Library)",
+   "url": "https://ultan.org.uk/five-steps-towards-briah/",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "read 2026-09-06",
+   "route": "live URL; fetched and skimmed, structural/theological argument superseded for this angle by the same author's 'The Reader as Augur'"
+  },
+  {
+   "title": "'Torture and confession in Wolfe's Book of the New Sun' (Ultan's Library)",
+   "url": "https://ultan.org.uk/torture-and-confession-in-wolfes-book-of-the-new-sun/",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "read 2026-09-06",
+   "route": "live URL; fetched, thematic rather than stylistic, no register or place claims taken"
+  },
+  {
+   "title": "Peter Wright (ed.), Shadows of the New Sun, introduction (Cambridge Core)",
+   "url": "https://www.cambridge.org/core/books/abs/shadows-of-the-new-sun/introduction/C861D0D3B8C29D7A4CD8C40CAA72A62E",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2007",
+   "route": "BLOCKED: connection returned zero bytes to curl with a browser user agent; the volume was reached instead through the Hall interview chapter mirrored on gwern"
+  },
+  {
+   "title": "UNLV Digital Scholarship copy of the Aramini dissertation",
+   "url": "https://digitalscholarship.unlv.edu/cgi/viewcontent.cgi?article=4585&context=thesesdissertations",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2019",
+   "route": "BLOCKED: HTTP 403 to curl with a browser user agent; the same dissertation was read through the gwern mirror"
+  },
+  {
+   "title": "Science Fiction Studies review of Attending Daedalus (SFS 32.1, 2005), and the 1987 SFS review of Joan Gordon's Gene Wolfe",
+   "url": "https://doi.org/10.1525/sfs.32.1.0212",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2005",
+   "route": "BLOCKED: depauw.edu returns 404 for every /sfs/ review path tried, no Wayback capture of the review pages exists, and the DOI record is not open access; located through OpenAlex but not read"
+  },
+  {
+   "title": "Cecilia Michel Lopez, 'Art and Allegory: A Method to Read The Book of the New Sun' (Logos, 2015)",
+   "url": "https://doi.org/10.1353/log.2015.0030",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2015",
+   "route": "BLOCKED: not open access; only the OpenAlex first-paragraph record was available, which is not a read"
+  },
+  {
+   "title": "'Time After Time: On the speculative fiction of Gene Wolfe' (Critical Quarterly, 2020)",
+   "url": "https://doi.org/10.1111/criq.12563",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2020",
+   "route": "BLOCKED: not open access, no abstract in the OpenAlex record"
+  },
+  {
+   "title": "The Wolfeman",
+   "url": "https://maxgladstone.substack.com/p/the-wolfeman",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2022-10-14",
+   "route": "curl browser-UA raw HTML"
+  },
+  {
+   "title": "The Enchanting Prose of Gene Wolfe",
+   "url": "https://floydholland.substack.com/p/the-enchanting-prose-of-gene-wolfe",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2025-01-03",
+   "route": "curl browser-UA raw HTML"
+  },
+  {
+   "title": "Whose Afraid of the Big Bad Wolfe?",
+   "url": "https://jafrank09.substack.com/p/whose-afraid-of-the-big-bad-wolfe",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2025-07-22",
+   "route": "curl browser-UA raw HTML"
+  },
+  {
+   "title": "Great Uncle Gene",
+   "url": "https://newmythologies.substack.com/p/great-uncle-gene",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2023-07-17",
+   "route": "curl browser-UA raw HTML"
+  },
+  {
+   "title": "Where to Begin? A Novice's Guide to the Lupine Maze",
+   "url": "https://www.wolfewiki.com/pmwiki/pmwiki.php?n=Articles.Novice",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2017-11-17",
+   "route": "curl browser-UA raw HTML"
+  },
+  {
+   "title": "How Gene Wolfe Starts a Story (and Where to Start Reading His Work)",
+   "url": "https://reactormag.com/how-gene-wolfe-starts-a-story-and-where-to-start-reading-his-work/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2017-11-09",
+   "route": "curl browser-UA raw HTML"
+  },
+  {
+   "title": "The Best Way to Approach The Book of the New Sun",
+   "url": "https://reactormag.com/the-best-way-to-approach-the-book-of-the-new-sun/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2017-12-04",
+   "route": "curl browser-UA raw HTML"
+  },
+  {
+   "title": "On Gene Wolfe and the Feeling of Being Inspired",
+   "url": "https://monstersandmanuals.blogspot.com/2023/03/on-gene-wolfe-and-feeling-of-being.html",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2023-03-14",
+   "route": "curl browser-UA raw HTML"
+  },
+  {
+   "title": "Gene Wolfe's Writing Rules",
+   "url": "https://brianbiswas.com/blog/2015/wolfewritingrules",
+   "kind": "relay",
+   "substantive": false,
+   "date": "2015-03-27",
+   "route": "curl browser-UA raw HTML"
+  },
+  {
+   "title": "How to Read Gene Wolfe (reposting 'The Wolf in the Labyrinth', F&SF 2007)",
+   "url": "http://floggingbabel.blogspot.com/2016/05/how-to-read-gene-wolfe.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2016-05-09",
+   "route": "curl browser-UA raw HTML"
+  },
+  {
+   "title": "The Explicated Gene Wolfe",
+   "url": "http://floggingbabel.blogspot.com/2009/10/explicated-gene-wolfe_07.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2009-10-07",
+   "route": "curl browser-UA raw HTML"
+  },
+  {
+   "title": "How to Read Gene Wolfe (Kata Iwannhn)",
+   "url": "https://barach.us/2007/03/03/how-to-read-gene-wolfe/",
+   "kind": "relay",
+   "substantive": true,
+   "date": "2007-03-03",
+   "route": "curl browser-UA raw HTML"
+  },
+  {
+   "title": "The Puzzle Left Behind: On Worldbuilding Through Omission",
+   "url": "https://liviajelliot.com/blog/2024/17-podcast-worldbuilding/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2024-10-03",
+   "route": "curl browser-UA raw HTML"
+  },
+  {
+   "title": "Interview: Leo Hunt (Vaults of Vaarn)",
+   "url": "https://bucoliablog.wordpress.com/2022/08/27/interview-leo-hunt/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2022-08-27",
+   "route": "curl browser-UA raw HTML"
+  },
+  {
+   "title": "The Mysteries of Gene Wolfe's Peace (and Why They Keep Me Up at Night)",
+   "url": "https://reactormag.com/the-mysteries-of-gene-wolfes-peace-and-why-they-keep-me-up-at-night/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2015-10-20",
+   "route": "curl browser-UA raw HTML"
+  },
+  {
+   "title": "Numenera: Welcome to the Ninth World",
+   "url": "https://thealexandrian.net/wordpress/40081/roleplaying-games/numenera-welcome-to-the-ninth-world",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2016-08-16",
+   "route": "curl browser-UA raw HTML"
+  },
+  {
+   "title": "How to Read Gene Wolfe (pointer page)",
+   "url": "https://www.wolfewiki.com/pmwiki/pmwiki.php?n=OnlineArticles.HowToReadGeneWolfe",
+   "kind": "relay",
+   "substantive": false,
+   "date": "2023-08-08",
+   "route": "curl browser-UA raw HTML"
+  },
+  {
+   "title": "Me & Gene - by Stephen Palmer",
+   "url": "https://ultan.org.uk/palmer-me-gene/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2015-08-04",
+   "route": "curl browser-UA raw HTML"
+  },
+  {
+   "title": "The Reader as Augur: Beginnings and Endings in The Book of the Long Sun",
+   "url": "https://ultan.org.uk/the-reader-as-augur/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2000-09-05",
+   "route": "curl browser-UA raw HTML"
+  },
+  {
+   "title": "Tell Me About the Lexicon Urthus: an interview with Michael Andre-Driussi",
+   "url": "https://ultan.org.uk/tell-me-about-the-lexicon-urthus-an-interview-with-michael-andre-driussi/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2008-09-25",
+   "route": "curl browser-UA raw HTML"
+  },
+  {
+   "title": "Place Names in Gene Wolfe's Soldier of the Mist",
+   "url": "https://ultan.org.uk/place-names-in-gene-wolfes-soldier-of-the-mist/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2016-09-07",
+   "route": "curl browser-UA raw HTML"
+  },
+  {
+   "title": "THE BOOK OF THE NEW SUN - Gene Wolfe (1980-83)",
+   "url": "https://schicksalgemeinschaft.wordpress.com/2021/05/16/the-book-of-the-new-sun-gene-wolfe-1980-83/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2021-05-16",
+   "route": "curl browser-UA raw HTML"
+  },
+  {
+   "title": "[On Fiction-Writing] Restraint, subtlety, unreliable narrators, and Gene Wolfe",
+   "url": "https://noelvee.wordpress.com/2015/06/03/on-fiction-writing-restraint-subtlety-unreliable-narrators-and-gene-wolfe/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2015-06-03",
+   "route": "curl browser-UA raw HTML"
+  },
+  {
+   "title": "WRITING ADVICE: Short Stories - Advice and Observation #14: Gene Wolfe '& Me'",
+   "url": "https://faithandsciencefiction.blogspot.com/2022/02/writing-advice-short-stories-advice-and.html",
+   "kind": "relay",
+   "substantive": true,
+   "date": "2022-02-12",
+   "route": "curl browser-UA raw HTML"
+  },
+  {
+   "title": "Confounding the Skin and the Mask: The Fifth Head of Cerberus and the Politics of Ambiguity",
+   "url": "https://ultan.org.uk/confounding-the-skin-and-the-mask/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2002-01-15",
+   "route": "curl browser-UA raw HTML"
+  },
+  {
+   "title": "'The Lupine Scholar' - an interview with Michael Andre-Driussi",
+   "url": "https://ultan.org.uk/the-lupine-scholar-by-scott-wowra/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2009-05-21",
+   "route": "curl browser-UA raw HTML"
+  },
+  {
+   "title": "Posthistory 201",
+   "url": "https://ultan.org.uk/posthistory-201/",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2020-07-06",
+   "route": "curl browser-UA raw HTML"
+  },
+  {
+   "title": "What would it be like... (teaser for C. S. E. Cooney piece)",
+   "url": "https://ultan.org.uk/what-would-it-be-like/",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2016-06-08",
+   "route": "curl browser-UA raw HTML"
+  },
+  {
+   "title": "An Homage to my Honorary Grandfather",
+   "url": "https://ultan.org.uk/an-homage-to-my-honorary-grandfather/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2016-06-10",
+   "route": "curl browser-UA raw HTML"
+  },
+  {
+   "title": "Gene Wolfe Interview (James B. Jordan, World Fantasy Convention, 30 Oct 1992; Shadows of the New Sun ch. 9, 2007)",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1992-jordan.pdf",
+   "kind": "interview (author's own words), PDF",
+   "substantive": true
+  },
+  {
+   "title": "James B. Jordan 1992 interview, original Lupine Nuncio text (same interview, pre-2007 edit)",
+   "url": "https://web.archive.org/web/20140725102806/http://mysite.verizon.net/~vze2tmhh/wolfejbj.html",
+   "kind": "interview (author's own words), archived duplicate",
+   "substantive": true
+  },
+  {
+   "title": "Suns New, Long, and Short: An Interview with Gene Wolfe (Lawrence Person, Nova Express Fall/Winter 1998; Shadows of the New Sun ch. 12)",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2007-person.pdf",
+   "kind": "interview (author's own words), PDF",
+   "substantive": true
+  },
+  {
+   "title": "Repost of the Person 1998 interview (losarciniegas blog)",
+   "url": "http://losarciniegas.blogspot.com/2021/04/suns-new-long-and-short-interview-with.html",
+   "kind": "repost of interview",
+   "substantive": false
+  },
+  {
+   "title": "An Interview with Gene Wolfe by Jeremy L. C. Jones (Clarkesworld 23, Aug 2008)",
+   "url": "https://clarkesworldmagazine.com/wolfe_interview/",
+   "kind": "interview (author's own words)",
+   "substantive": true
+  },
+  {
+   "title": "The Humble Swashbuckling Grandmaster: A Conversation with Gene Wolfe (Kate Baker, Clarkesworld 111, Dec 2015)",
+   "url": "https://clarkesworldmagazine.com/wolfe_interview_2015/",
+   "kind": "interview (author's own words)",
+   "substantive": true
+  },
+  {
+   "title": "'And It Goes On From There...' An Interview with Gene Wolfe (C.S.E. Cooney, Black Gate, 23 Nov 2010)",
+   "url": "https://www.blackgate.com/2010/11/23/and-it-goes-on-from-there-an-interview-with-gene-wolfe/",
+   "kind": "interview (author's own words)",
+   "substantive": true
+  },
+  {
+   "title": "Writing advice from Gene Wolfe (Writers of the Future forum repost of the Black Gate top five)",
+   "url": "https://writersofthefuture.com/forum/interviews-entrants-judges-past-winners/writing-advice-from-gene-wolfe/",
+   "kind": "forum repost",
+   "substantive": false
+  },
+  {
+   "title": "A Q&A with Gene Wolfe (MIT Technology Review, 25 Jul 2014)",
+   "url": "https://www.technologyreview.com/2014/07/25/12916/a-qa-with-gene-wolfe/",
+   "kind": "interview (author's own words)",
+   "substantive": true
+  },
+  {
+   "title": "The Wolfe & Gaiman Show: Locus interview excerpts (Sept 2002)",
+   "url": "https://www.locusmag.com/2002/Issue09/GaimanWolfe.html",
+   "kind": "interview excerpts (author's own words)",
+   "substantive": true
+  },
+  {
+   "title": "Gene Wolfe: Engineering the Future (Locus, March 2011, excerpts)",
+   "url": "https://locusmag.com/2011/03/gene-wolfe-engineering-the-future/",
+   "kind": "interview excerpts (author's own words)",
+   "substantive": true
+  },
+  {
+   "title": "A Magus of Many Suns: An Interview with Gene Wolfe (Nick Gevers, SF Site, Jan 2002)",
+   "url": "https://web.archive.org/web/20020703232613/http://www.sfsite.com/03b/gw124.htm",
+   "kind": "interview (author's own words), Wayback copy",
+   "substantive": true
+  },
+  {
+   "title": "Some Moments with the Magus: An Interview with Gene Wolfe (Gevers, Andre-Driussi, Jordan; Infinity Plus, Dec 2003)",
+   "url": "https://www.infinityplus.co.uk/nonfiction/intgw.htm",
+   "kind": "interview (author's own words)",
+   "substantive": true
+  },
+  {
+   "title": "Gene Wolfe Interview conducted 20 Mar 1994 by Brendan Baber (Lupine Nuncio)",
+   "url": "https://web.archive.org/web/20060208231553/http://mysite.verizon.net/~vze2tmhh/wolfeint.html",
+   "kind": "interview (author's own words), Wayback copy",
+   "substantive": true
+  },
+  {
+   "title": "Cloud Chamber 77: 'The Wolfean Oracle Speaks' — Wolfe answers Whorl-list questions, mediated by Michael Andre-Driussi, annotated by David Langford (Sept 1997)",
+   "url": "https://ansible.uk/cc/cc77.html",
+   "kind": "Q&A (author's own words)",
+   "substantive": true
+  },
+  {
+   "title": "The Best Introduction to the Mountains, by Gene Wolfe (Interzone 174, Dec 2001; Andy Robertson's site)",
+   "url": "https://web.archive.org/web/2004/http://home.clara.net/andywrobertson/wolfemountains.html",
+   "kind": "essay (author's own words), Wayback copy",
+   "substantive": true
+  },
+  {
+   "title": "Gene Wolfe on JRR Tolkien: The Best Introduction to the Mountains (John C. Wright's Journal repost of the opening, 2011)",
+   "url": "https://scifiwright.com/2011/05/gene-wolfe-on-jrr-tolkien-the-best-introduction-to-the-mountains/",
+   "kind": "partial repost of essay",
+   "substantive": false
+  },
+  {
+   "title": "How to Read Gene Wolfe, by Neil Gaiman (WHC 2002 program book; F&SF April 2007 web page)",
+   "url": "https://web.archive.org/web/2008/http://www.sfsite.com/fsf/2007/gwng0704.htm",
+   "kind": "critical essay (Gaiman)",
+   "substantive": true
+  },
+  {
+   "title": "Neil Gaiman's Journal: Gene wolves (2 Mar 2007)",
+   "url": "https://journal.neilgaiman.com/2007/03/gene-wolves.html",
+   "kind": "blog post (Gaiman)",
+   "substantive": false
+  },
+  {
+   "title": "Kata Iwannhn: How to Read Gene Wolfe (John Barach, 3 Mar 2007)",
+   "url": "https://barach.us/2007/03/03/how-to-read-gene-wolfe/",
+   "kind": "blog post",
+   "substantive": false
+  },
+  {
+   "title": "SFE: Wolfe, Gene (John Clute; entry updated 13 Jul 2026)",
+   "url": "https://sf-encyclopedia.com/entry/wolfe_gene",
+   "kind": "encyclopedia entry (Clute)",
+   "substantive": true
+  },
+  {
+   "title": "What Makes an Unreliable Narrator: 'Severian's' Voice in Gene Wolfe's The Book of the New Sun (Brian Evenson, Reactor, 8 Dec 2021)",
+   "url": "https://reactormag.com/what-makes-an-unreliable-narrator-severians-voice-in-gene-wolfes-the-book-of-the-new-sun/",
+   "kind": "critical essay",
+   "substantive": true
+  },
+  {
+   "title": "Gene Wolfe: The Reliably Unreliable Author (Chris Gerwel, A Dribble of Ink, 28 Jul 2014)",
+   "url": "https://aidanmoher.com/blog/featured-article/2014/07/gene-wolfe-reliably-unreliable-author-chris-gerwel/",
+   "kind": "critical essay",
+   "substantive": true
+  },
+  {
+   "title": "The Secret to Reading Gene Wolfe (Murray Ewing, Mewsings, 11 Sep 2010)",
+   "url": "https://www.murrayewing.co.uk/mewsings/2010/09/11/the-secret-to-reading-gene-wolfe/",
+   "kind": "blog essay",
+   "substantive": true
+  },
+  {
+   "title": "We Read Things Differently (Los Angeles Review of Books, 30 Apr 2013; review of Peace by the author of the 1986 Starmont Reader's Guide, i.e. Joan Gordon)",
+   "url": "https://lareviewofbooks.org/article/we-read-things-differently/",
+   "kind": "review essay; quotes Wright (Attending Daedalus) and Borski",
+   "substantive": true
+  },
+  {
+   "title": "Peace, Peace (Alan Jacobs, The Homebound Symphony, 20 Apr 2024)",
+   "url": "https://blog.ayjay.org/peace-peace/",
+   "kind": "blog essay",
+   "substantive": true
+  },
+  {
+   "title": "Blind Reads: Peace by Gene Wolfe (Avathoir and Grant Nebel, The Solute, 28 Nov 2017)",
+   "url": "https://www.the-solute.com/blind-reads-peace-by-gene-wolfe/",
+   "kind": "close-reading dialogue",
+   "substantive": true
+  },
+  {
+   "title": "Peace: Wolfe's Masterful Rumination on Nostalgia, Memory, and Uncertainty (Fabio Fernandes, Reactor, 11 Jul 2019)",
+   "url": "https://reactormag.com/peace-wolfes-masterful-rumination-on-nostalgia-memory-and-uncertainty/",
+   "kind": "reread essay",
+   "substantive": true
+  },
+  {
+   "title": "Gene Wolfe's Peace Will Leave You Anything But Peaceful (Mordicai Knode, Reactor, 26 Oct 2012)",
+   "url": "https://reactormag.com/gene-wolfe-peace-review/",
+   "kind": "review essay",
+   "substantive": true
+  },
+  {
+   "title": "Why You Should Read Gene Wolfe (and Where to Start) (Lincoln Michel, Counter Craft, 8 Jan 2026)",
+   "url": "https://countercraft.substack.com/p/why-you-should-read-gene-wolfe-and",
+   "kind": "blog essay",
+   "substantive": true
+  },
+  {
+   "title": "Primer: Gene Wolfe - The Subtle Master (Rajan Khanna, LitReactor, 10 Oct 2012)",
+   "url": "https://litreactor.com/columns/primer-gene-wolfe-the-subtle-master/",
+   "kind": "primer essay",
+   "substantive": true
+  },
+  {
+   "title": "Gene Wolfe (James Crossley, Full Stop, 12 Dec 2012)",
+   "url": "https://www.full-stop.net/2012/12/12/blog/james-crossley/gene-wolfe/",
+   "kind": "blog essay",
+   "substantive": false
+  },
+  {
+   "title": "Reading Gene Wolfe: 'The Toy Theater' (Locus Online blog, 13 Apr 2009, with reader comments)",
+   "url": "https://locusmag.com/2009/04/reading-gene-wolfe/",
+   "kind": "close reading with comments",
+   "substantive": true
+  },
+  {
+   "title": "Gene Wolfe: The Book of the New Sun (David Auerbach, Waggish, 23 Nov 2007) — dissenting reading",
+   "url": "https://www.waggish.org/2007/gene-wolfe-the-book-of-the-new-sun/",
+   "kind": "critical blog essay (dissent)",
+   "substantive": true
+  },
+  {
+   "title": "Everything has to be true somehow — Marc Aramini interviewed by Nigel Price (Ultan's Library, 8 Jun 2020)",
+   "url": "https://ultan.org.uk/everything-has-to-be-true-somehow/",
+   "kind": "critic interview (Aramini)",
+   "substantive": true
+  },
+  {
+   "title": "Shadows of the New Sun: Marc Aramini (Ultan's Library, 29 May 2013)",
+   "url": "https://ultan.org.uk/shadows-of-the-new-sun-an-interview-with-marc-aramini/",
+   "kind": "critic interview (Aramini)",
+   "substantive": true
+  },
+  {
+   "title": "Books of Gold: Reading Gene Wolfe (DMR Books blog, 10 May 2019)",
+   "url": "https://dmrbooks.com/test-blog/2019/5/10/books-of-gold-reading-gene-wolfe",
+   "kind": "blog essay",
+   "substantive": true
+  },
+  {
+   "title": "Gene Wolfe, RIP (Lawrence Person's Futuramen, 16 Apr 2019)",
+   "url": "https://www.lawrenceperson.com/?p=18206",
+   "kind": "obituary blog post",
+   "substantive": true
+  },
+  {
+   "title": "WolfeWiki: The Castle of the Otter (1982) — contents and SFBC jacket blurb",
+   "url": "https://www.wolfewiki.com/pmwiki/pmwiki.php?n=WolfeWiki.TheCastleOfTheOtter",
+   "kind": "reference page",
+   "substantive": true
+  },
+  {
+   "title": "WolfeWiki: Shadows of the New Sun (ed. Peter Wright, 2007) — table of contents incl. Wolfe's essays on craft",
+   "url": "https://www.wolfewiki.com/pmwiki/pmwiki.php?n=BooksAbout.ShadowsOfTheNewSun",
+   "kind": "reference page",
+   "substantive": false
+  },
+  {
+   "title": "WolfeWiki: Interviews with Wolfe (index of ~80 interviews, 1973-2015)",
+   "url": "https://www.wolfewiki.com/pmwiki/pmwiki.php?n=WolfeWiki.Interviews",
+   "kind": "reference index",
+   "substantive": false
+  },
+  {
+   "title": "WolfeWiki: How to Read Gene Wolfe (pointer page)",
+   "url": "https://www.wolfewiki.com/pmwiki/pmwiki.php?n=OnlineArticles.HowToReadGeneWolfe",
+   "kind": "reference page",
+   "substantive": false
+  },
+  {
+   "title": "WolfeWiki: James B. Jordan 1992 Interview (pointer page)",
+   "url": "https://www.wolfewiki.com/pmwiki/pmwiki.php?n=Interviews.Jordan",
+   "kind": "reference page",
+   "substantive": false
+  },
+  {
+   "title": "WolfeWiki: 'Suns New, Long, and Short', Nova Express 1998 (pointer page)",
+   "url": "https://www.wolfewiki.com/pmwiki/pmwiki.php?n=Interviews.NovaExpress",
+   "kind": "reference page",
+   "substantive": false
+  },
+  {
+   "title": "WolfeWiki: Interview: Gene Wolfe -- 'The Legerdemain of the Wolfe' (Thrust 19, 1983; pointer page, text not online)",
+   "url": "https://www.wolfewiki.com/pmwiki/pmwiki.php?n=Interviews.Thrust19",
+   "kind": "reference page",
+   "substantive": false
+  },
+  {
+   "title": "WolfeWiki: The Best Introduction to the Mountains (pointer page)",
+   "url": "https://www.wolfewiki.com/pmwiki/pmwiki.php?n=OnlineNonfiction.TheBestIntroductionToTheMountains",
+   "kind": "reference page",
+   "substantive": false
+  },
+  {
+   "title": "How Gene Wolfe Starts a Story (and Where to Start Reading His Work) — Matthew Keeley, Reactor (Tor.com)",
+   "url": "https://reactormag.com/how-gene-wolfe-starts-a-story-and-where-to-start-reading-his-work/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2017-11-09",
+   "route": "live URL fetched raw with a browser user agent (curl), HTML parsed to text"
+  },
+  {
+   "title": "Rereading Gene Wolfe's “The Fifth Head of Cerberus” — Mark R. Kelly, Views from Crestmont Drive",
+   "url": "https://www.markrkelly.com/Blog/2014/07/03/rereading-gene-wolfes-the-fifth-head-of-cerberus/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2014-07-03",
+   "route": "live URL fetched raw with a browser user agent (curl), HTML parsed to text"
+  },
+  {
+   "title": "Gene Wolfe's The Shadow of the Torturer — Kate Macdonald (podcast script, Really Like This Book)",
+   "url": "https://katemacdonald.net/2017/01/09/gene-wolfes-the-shadow-of-the-torturer/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2017-01-09",
+   "route": "live URL fetched raw with a browser user agent (curl), HTML parsed to text"
+  },
+  {
+   "title": "Gene Wolfe: The Reliably Unreliable Author — MetaFilter thread 149475 (78 comments)",
+   "url": "https://www.metafilter.com/149475/Gene-Wolfe-The-Reliably-Unreliable-Author",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2015-05-08",
+   "route": "live URL fetched raw with a browser user agent (curl), HTML parsed to text"
+  },
+  {
+   "title": "The Fifth Head of Cerberus (caution: spoilers!) — SFF Chronicles thread 11050 (Ian Sales essay 2006; felicibusbrevis analysis 2013)",
+   "url": "https://www.sffchronicles.com/threads/11050/",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2006-06-13",
+   "route": "live URL fetched raw with a browser user agent (curl), HTML parsed to text"
+  },
+  {
+   "title": "Peace (*SPOILERS*) — SFF Chronicles thread 528814",
+   "url": "https://www.sffchronicles.com/threads/528814/",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2010-09-14",
+   "route": "live URL fetched raw with a browser user agent (curl), HTML parsed to text"
+  },
+  {
+   "title": "(urth) Close Reading: Torturer Chapter I — JWillard, Urth mailing list (project proposal + chapter-1 observations)",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/058531.html",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2006-09-04",
+   "route": "lists.urth.net dead from here (curl 000); Wayback raw capture https://web.archive.org/web/2021id_/<url> (byte-identical to the live capture)"
+  },
+  {
+   "title": "(urth) Close Reading: Torturer Chapter I — 'b sharp', Urth mailing list",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/002915.html",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2006-09-05",
+   "route": "lists.urth.net dead from here (curl 000); Wayback raw capture https://web.archive.org/web/2021id_/<url> (byte-identical to the live capture)"
+  },
+  {
+   "title": "(urth) Close Reading: Torturer Chapter I — Dan'l Danehy-Oakes, Urth mailing list",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/002922.html",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2006-09-05",
+   "route": "lists.urth.net dead from here (curl 000); Wayback raw capture https://web.archive.org/web/2021id_/<url> (byte-identical to the live capture)"
+  },
+  {
+   "title": "(urth) Close Reading: Torturer Chapter I — Roy C. Lackey, Urth mailing list",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/002935.html",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2006-09-05",
+   "route": "lists.urth.net dead from here (curl 000); Wayback raw capture https://web.archive.org/web/2021id_/<url> (byte-identical to the live capture)"
+  },
+  {
+   "title": "The Reader as Augur: Beginnings and Endings in Gene Wolfe's The Book of the Long Sun — Nick Gevers, Ultan's Library",
+   "url": "https://ultan.org.uk/the-reader-as-augur/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2000-09-05",
+   "route": "live URL fetched raw with a browser user agent (curl), HTML parsed to text"
+  },
+  {
+   "title": "Review: Peace, by Gene Wolfe — Rich Horton, Strange at Ecbatan",
+   "url": "http://rrhorton.blogspot.com/2024/08/review-peace-by-gene-wolfe.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2024-08",
+   "route": "live URL fetched raw with a browser user agent (curl), HTML parsed to text"
+  },
+  {
+   "title": "Peace by Gene Wolfe — Tree Slices (reader review quoting one long sentence in full)",
+   "url": "https://treeslices.wordpress.com/2016/08/20/peace-by-gene-wolfe/",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2016-08-20",
+   "route": "live URL fetched raw with a browser user agent (curl), HTML parsed to text"
+  },
+  {
+   "title": "Gene Wolfe's Peace — Andy Lee, Lit & Chess",
+   "url": "https://litandchess.substack.com/p/gene-wolfes-peace",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2026-07-12",
+   "route": "live URL fetched raw with a browser user agent (curl), HTML parsed to text"
+  },
+  {
+   "title": "Gene Wolfe's Peace Will Leave You Anything But Peaceful — Mordicai Knode, Reactor (Tor.com)",
+   "url": "https://reactormag.com/gene-wolfe-peace-review/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2012-10-26",
+   "route": "live URL fetched raw with a browser user agent (curl), HTML parsed to text"
+  },
+  {
+   "title": "Place Names in Gene Wolfe's Soldier of the Mist — Scott Wowra, Ultan's Library",
+   "url": "https://ultan.org.uk/place-names-in-gene-wolfes-soldier-of-the-mist/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2016-09-07",
+   "route": "live URL fetched raw with a browser user agent (curl), HTML parsed to text"
+  },
+  {
+   "title": "Posthistory 201 — Michael Andre-Driussi, Ultan's Library",
+   "url": "https://ultan.org.uk/posthistory-201/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2020-07-06",
+   "route": "live URL fetched raw with a browser user agent (curl), HTML parsed to text"
+  },
+  {
+   "title": "The Death of Catherine the Weal — Michael Andre-Driussi, Ultan's Library (essay written 1992 for John Clute's proposed collection)",
+   "url": "https://ultan.org.uk/the-death-of-catherine-the-weal/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2008-08-27",
+   "route": "live URL fetched raw with a browser user agent (curl), HTML parsed to text"
+  },
+  {
+   "title": "The Fifth Head of Cerberus reviewed — Robert Borski, Ultan's Library (Millennium 1999 edition)",
+   "url": "https://ultan.org.uk/review-fifth-head-of-cerberus/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2001-08-28",
+   "route": "live URL fetched raw with a browser user agent (curl), HTML parsed to text"
+  },
+  {
+   "title": "Five Steps towards Briah: Gene Wolfe's The Book of the Long Sun — Nick Gevers, Ultan's Library",
+   "url": "https://ultan.org.uk/five-steps-towards-briah/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2000-08-28",
+   "route": "live URL fetched raw with a browser user agent (curl), HTML parsed to text"
+  },
+  {
+   "title": "Lions and Tigers and Bears . . . of the New Sun — Michael Andre-Driussi, Ultan's Library",
+   "url": "https://ultan.org.uk/lions-and-tigers-and-bears/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2003-12-28",
+   "route": "live URL fetched raw with a browser user agent (curl), HTML parsed to text"
+  },
+  {
+   "title": "Torture and confession in Wolfe's Book of the New Sun — Jeremy Crampton, Ultan's Library",
+   "url": "https://ultan.org.uk/torture-and-confession-in-wolfes-book-of-the-new-sun/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2001-04-10",
+   "route": "live URL fetched raw with a browser user agent (curl), HTML parsed to text"
+  },
+  {
+   "title": "How To Read Gene Wolfe — Neil Gaiman (first published in the World Horror Convention 2002 Program Book; reprinted on the F&SF site, April 2007)",
+   "url": "https://www.sfsite.com/fsf/2007/gwng0704.htm",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2002",
+   "route": "sfsite.com unreachable live (curl 000); Wayback raw capture https://web.archive.org/web/2019id_/http://www.sfsite.com/fsf/2007/gwng0704.htm"
+  },
+  {
+   "title": "We Read Things Differently — Joan Gordon, Los Angeles Review of Books",
+   "url": "https://lareviewofbooks.org/article/we-read-things-differently/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2013-04-30",
+   "route": "live URL fetched raw with a browser user agent (curl), HTML parsed to text"
+  },
+  {
+   "title": "Mapping a Masterwork: A Critical Review of Gene Wolfe's The Book of the New Sun — Peter Wright, Ultan's Library",
+   "url": "https://ultan.org.uk/review-botns/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2002-08-28",
+   "route": "live URL fetched raw with a browser user agent (curl), HTML parsed to text"
+  },
+  {
+   "title": "(urth) Close Reading: Torturer Chapter I — 'b sharp', Urth mailing list (reply to Roy C. Lackey)",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/002941.html",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2006-09-06",
+   "route": "lists.urth.net dead from here (curl 000); Wayback raw capture https://web.archive.org/web/2021id_/<url> (byte-identical to the live capture)"
+  },
+  {
+   "title": "(urth) Close Reading: Torturer Chapter I — JWillard, Urth mailing list (reply summarising the thread)",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/002948.html",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2006-09-06",
+   "route": "lists.urth.net dead from here (curl 000); Wayback raw capture https://web.archive.org/web/2021id_/<url> (byte-identical to the live capture)"
+  },
+  {
+   "title": "(urth) Close Reading: Torturer Chapter II: Severian — JWillard, Urth mailing list (paragraph-by-paragraph notes)",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/058619.html",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2006-09-09",
+   "route": "lists.urth.net dead from here (curl 000); Wayback raw capture https://web.archive.org/web/2021id_/<url>"
+  },
+  {
+   "title": "(urth) Close Reading: Torturer Chapter II: Severian — Bruce Hayles, Urth mailing list",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/003004.html",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2006-09-10",
+   "route": "lists.urth.net dead from here (curl 000); Wayback raw capture https://web.archive.org/web/2021id_/<url>"
+  },
+  {
+   "title": "(urth) Close Reading: Torturer Chapter II: Severian — Roy C. Lackey, Urth mailing list",
+   "url": "http://lists.urth.net/pipermail/urth-urth.net/2006-September/003007.html",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2006-09-10",
+   "route": "lists.urth.net dead from here (curl 000); Wayback raw capture https://web.archive.org/web/2021id_/<url>"
   }
  ],
  "verdicts": {},

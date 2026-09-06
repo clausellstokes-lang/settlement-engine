@@ -111,7 +111,10 @@ CHECKPOINT: write raw notes to ${OUT}/find-${key}-${an.key}.md as you go, and RE
 // ---------------------------------------------------------------- Verify
 phase('Verify')
 const VERDICTS = { type: 'object', required: ['verdicts', 'wroteFile'], properties: { wroteFile: { type: 'boolean' }, verdicts: { type: 'array', items: { type: 'object', required: ['index', 'verdict', 'trueWording', 'note'], properties: { index: { type: 'integer' }, verdict: { type: 'string', enum: ['VERIFIED_VERBATIM', 'VERIFIED_SUBSTANCE', 'PARTIAL', 'NOT_FOUND', 'CONTRADICTED', 'BLOCKED'] }, trueWording: { type: 'string' }, note: { type: 'string' }, unsupportedLimb: { type: 'string' } } } } } }
-const chunks = RESUME ? A.chunks.map((c) => ({ file: c.file, indices: c.indices, inline: null })) : []
+// v3.2 (12:55): a chunk may be given COMPACT as {f: 'chunks/<name>-NN.json', i: [first, last]} (relative to outDir, an inclusive index range) —
+// the legacy {file, indices} form still works. Halves the args a chair must paste inline after a cutoff.
+const expandChunk = (c) => c.f ? { file: OUT + '/' + c.f, indices: Array.from({ length: c.i[1] - c.i[0] + 1 }, (_, j) => c.i[0] + j), inline: null } : { file: c.file, indices: c.indices, inline: null }
+const chunks = RESUME ? A.chunks.map(expandChunk) : []
 for (let i = 0; i < freshClaims.length; i += CHUNK) { const part = freshClaims.slice(i, i + CHUNK); chunks.push({ file: null, indices: part.map((_, j) => BASE_INDEX + i + j), inline: part.map((c, j) => ({ index: BASE_INDEX + i + j, ...c })) }) }
 chunks.forEach((ch, k) => { ch.k = k; ch.tag = `i${ch.indices[0]}-${ch.indices[ch.indices.length - 1]}` })   // verdict files are named by INDEX RANGE, so a top-up never overwrites an earlier run's file
 log(`verification: ${chunks.reduce((n, c) => n + c.indices.length, 0)} claims to verify in ${chunks.length} chunks of up to ${CHUNK} (${RESUME ? 'state chunks; ' + (A.verifiedCount || 0) + ' already verified; ' : ''}${freshClaims.length} fresh)`)

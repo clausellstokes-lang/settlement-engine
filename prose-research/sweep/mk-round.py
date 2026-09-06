@@ -29,6 +29,12 @@ args=json.load(open(f'{S}/args-{name}.json'))
 for k in ('regrade','regradeNotes','synthNotes'):
     if k in prev: args[k]=prev[k]
 args['regradeTag']=tag; args['cap']=cap
+# v3.2 compact chunks: {f: relative file, i: [first,last]} — the indices a chunk carries are always one contiguous run (split-chunks cuts them so)
+cc=[]
+for c in (args.get('chunks') or []):
+    idx=c['indices']; assert idx==list(range(idx[0],idx[-1]+1)), ('non-contiguous chunk',c['file'])
+    cc.append({'f':os.path.relpath(c['file'],S),'i':[idx[0],idx[-1]]})
+args['chunks']=cc
 if '--inflight' in a:
     # fold the in-flight scanner's progress into PRIOR PROGRESS hints for every angle this round re-runs (finder killed before its checkpoint)
     hints={}

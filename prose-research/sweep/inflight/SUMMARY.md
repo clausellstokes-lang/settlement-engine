@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 12:46:58 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 12:53:00 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -106,11 +106,13 @@
 | hobb | synth |  | failed | 0 | — | — | 11:27:28 |
 | hobb | synth |  | failed | 0 | — | — | 12:29:44 |
 | hobb | verifier | i0-14 | failed | 0 | — | verdict file absent | 11:27:26 |
+| hobb | verifier | i0-14 | in-flight | 0 | — | verdict file absent | 16:52:54 |
 | hobb | verifier | i0-14 | failed | 0 | — | verdict file absent | 12:29:38 |
 | hobb | verifier | i107-121 | failed | 0 | — | verdict file absent | 12:29:42 |
 | hobb | verifier | i122-136 | failed | 0 | — | verdict file absent | 12:29:39 |
 | hobb | verifier | i137-151 | failed | 0 | — | verdict file absent | 12:29:39 |
 | hobb | verifier | i15-29 | failed | 0 | — | verdict file absent | 11:27:26 |
+| hobb | verifier | i15-29 | in-flight | 0 | — | verdict file absent | 16:52:54 |
 | hobb | verifier | i15-29 | failed | 0 | — | verdict file absent | 12:29:38 |
 | hobb | verifier | i152-166 | failed | 0 | — | verdict file absent | 12:29:39 |
 | hobb | verifier | i167-181 | failed | 0 | — | verdict file absent | 12:29:42 |
@@ -123,6 +125,7 @@
 | hobb | verifier | i272-286 | failed | 0 | — | verdict file absent | 12:29:42 |
 | hobb | verifier | i287-301 | failed | 0 | — | verdict file absent | 12:29:43 |
 | hobb | verifier | i30-44 | failed | 0 | — | verdict file absent | 11:27:26 |
+| hobb | verifier | i30-44 | in-flight | 0 | — | verdict file absent | 16:52:55 |
 | hobb | verifier | i30-44 | failed | 0 | — | verdict file absent | 12:29:38 |
 | hobb | verifier | i302-316 | failed | 0 | — | verdict file absent | 12:29:43 |
 | hobb | verifier | i317-331 | failed | 0 | — | verdict file absent | 12:29:43 |
@@ -131,6 +134,7 @@
 | hobb | verifier | i362-376 | failed | 0 | — | verdict file absent | 12:29:43 |
 | hobb | verifier | i377-385 | failed | 0 | — | verdict file absent | 12:29:43 |
 | hobb | verifier | i45-59 | failed | 0 | — | verdict file absent | 11:27:26 |
+| hobb | verifier | i45-59 | in-flight | 0 | — | verdict file absent | 16:52:54 |
 | hobb | verifier | i45-59 | failed | 0 | — | verdict file absent | 12:29:39 |
 | hobb | verifier | i60-74 | failed | 0 | — | verdict file absent | 11:27:27 |
 | hobb | verifier | i60-74 | failed | 0 | — | verdict file absent | 12:29:39 |
@@ -199,9 +203,13 @@
 | leguin | verifier | i340-354 | failed | 0 | — | verdict file absent | 12:27:08 |
 | leguin | verifier | i355-369 | failed | 0 | — | verdict file absent | 12:27:08 |
 | leguin | verifier | i370-383 | failed | 0 | — | verdict file absent | 12:27:08 |
+| leguin | verifier | i45-59 | in-flight | 3 | — | verdict file absent | 16:52:55 |
 | leguin | verifier | i45-59 | failed | 3 | — | verdict file absent | 12:26:55 |
+| leguin | verifier | i60-74 | in-flight | 5 | — | verdict file absent | 16:52:56 |
 | leguin | verifier | i60-74 | failed | 5 | — | verdict file absent | 12:26:52 |
+| leguin | verifier | i75-89 | in-flight | 6 | — | verdict file absent | 16:52:56 |
 | leguin | verifier | i75-89 | failed | 6 | — | verdict file absent | 12:27:06 |
+| leguin | verifier | i90-104 | in-flight | 2 | — | verdict file absent | 16:52:57 |
 | leguin | verifier | i90-99 | failed | 8 | — | verdict file absent | 12:27:05 |
 | martin | critic |  | failed | 0 | — | — | 12:28:10 |
 | martin | finder | closereading | failed | 0 | — | — | 12:28:05 |
@@ -261,9 +269,13 @@
 | tolkien | verifier | i583-597 | result | 3 | — | verdict file WRITTEN | 12:19:24 |
 | tolkien | verifier | i598-612 | result | 7 | — | verdict file WRITTEN | 12:19:15 |
 | tolkien | verifier | i613-627 | result | 18 | — | verdict file WRITTEN | 12:20:50 |
+| tolkien | verifier | i628-642 | in-flight | 12 | — | verdict file absent | 16:52:54 |
 | tolkien | verifier | i628-642 | failed | 19 | — | verdict file absent | 12:26:51 |
+| tolkien | verifier | i643-657 | in-flight | 2 | — | verdict file absent | 16:52:55 |
 | tolkien | verifier | i643-657 | failed | 11 | — | verdict file absent | 12:26:59 |
+| tolkien | verifier | i658-672 | in-flight | 5 | — | verdict file absent | 16:52:48 |
 | tolkien | verifier | i658-672 | failed | 13 | — | verdict file absent | 12:27:12 |
+| tolkien | verifier | i673-687 | in-flight | 3 | — | verdict file absent | 16:52:56 |
 | tolkien | verifier | i673-687 | failed | 7 | — | verdict file absent | 12:26:53 |
 | tolkien | verifier | i688-702 | failed | 0 | — | verdict file absent | 12:27:12 |
 | tolkien | verifier | i703-717 | failed | 0 | — | verdict file absent | 12:27:12 |
@@ -290,10 +302,12 @@
 | wolfe | finder | craft | in-flight | 19 | — | 89 claims, complete=True @12:23:26 | 11:47:08 |
 | wolfe | regrade | regrade-r3c | failed | 0 | — | — | 12:30:34 |
 | wolfe | synth |  | failed | 0 | — | — | 12:30:35 |
+| wolfe | verifier | i0-14 | in-flight | 1 | — | verdict file absent | 16:52:56 |
 | wolfe | verifier | i0-14 | failed | 0 | — | verdict file absent | 12:30:30 |
 | wolfe | verifier | i105-119 | failed | 0 | — | verdict file absent | 12:30:31 |
 | wolfe | verifier | i120-134 | failed | 0 | — | verdict file absent | 12:30:32 |
 | wolfe | verifier | i135-149 | failed | 0 | — | verdict file absent | 12:30:32 |
+| wolfe | verifier | i15-29 | in-flight | 2 | — | verdict file absent | 16:52:59 |
 | wolfe | verifier | i15-29 | failed | 0 | — | verdict file absent | 12:30:30 |
 | wolfe | verifier | i150-155 | failed | 0 | — | verdict file absent | 12:30:32 |
 | wolfe | verifier | i156-170 | failed | 0 | — | verdict file absent | 12:30:32 |
@@ -306,11 +320,13 @@
 | wolfe | verifier | i261-275 | failed | 0 | — | verdict file absent | 12:30:33 |
 | wolfe | verifier | i276-290 | failed | 0 | — | verdict file absent | 12:30:33 |
 | wolfe | verifier | i291-305 | failed | 0 | — | verdict file absent | 12:30:34 |
+| wolfe | verifier | i30-44 | in-flight | 0 | — | verdict file absent | 16:52:52 |
 | wolfe | verifier | i30-44 | failed | 0 | — | verdict file absent | 12:30:31 |
 | wolfe | verifier | i306-320 | failed | 0 | — | verdict file absent | 12:30:33 |
 | wolfe | verifier | i321-335 | failed | 0 | — | verdict file absent | 12:30:34 |
 | wolfe | verifier | i336-350 | failed | 0 | — | verdict file absent | 12:30:34 |
 | wolfe | verifier | i351-356 | failed | 0 | — | verdict file absent | 12:30:34 |
+| wolfe | verifier | i45-59 | in-flight | 2 | — | verdict file absent | 16:52:56 |
 | wolfe | verifier | i45-59 | failed | 0 | — | verdict file absent | 12:30:30 |
 | wolfe | verifier | i60-74 | failed | 0 | — | verdict file absent | 12:30:31 |
 | wolfe | verifier | i75-89 | failed | 0 | — | verdict file absent | 12:30:31 |
