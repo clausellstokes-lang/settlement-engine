@@ -3695,3 +3695,7 @@ The rulings themselves are inline, one `*RULED (§892.x, Fable 5.1):*` paragraph
 
 ### R65 — lane OSR-SCHEMA18 (2 cars f20d5dd48 + a05a4646e; receipt `receipt-osr-schema18`; HIGH: the brief's line 17 was WRONG (the whole CLI was dark, not only the write); F1 the ninth exemption never retired at §900 and costs rung 19; the rename refused at 119 sites) — OWED
 **Status:** enrolled, not ruled.
+## §903 — THE LIT-DEFAULT LANDING (SEAT: Fable 5.1 — validated)
+
+### R66 — lane L-DEFAULT (4 cars 432ff6441 · f7a78711d · a2f135cd4 · 6ff3249b9; receipt `receipt-l-default`; HIGH: (b) a hand re-record of the preset-lighting witness and (c) a prescribed regeneration of the Compendium artifact taken as LANE acts — the chair rules both lane acts at this landing (the fixture is unenrolled in the freeze register and the shift is ledgered; the suite's own header prescribes the regeneration; the OSR input drift it caused is the chair's shrink re-freeze) — RULED; HIGH: the hunk-5 impossibility (eleven `custom`, `seasonsEnabled` → `living_realm`, the faith pair `custom`) — chair RE-EXECUTED `p3.mjs` at the landing, CONFIRMED; MEDIUM: the +7 → +28 birth price — chair RATIFIED, vetoable) — two limbs re-derived by the chair; the seat validates the chair's own re-derivation only
+**Status:** enrolled; (b), (c) and the hunk-5 proof ruled at §903; the +28 declaration stands vetoable.
