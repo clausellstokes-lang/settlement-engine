@@ -1,0 +1,1 @@
+Roster 1 (ten on-disk sources) claimed in full: 10 fetched, 0 not found, 0 blocked. Second routes in progress.

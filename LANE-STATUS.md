@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-06 15:00:27 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-06 15:05:58 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = dd5f13218 · ledger = eaf50fee7 §903: the lit default lands at 9 cars — the default preset takes the wave's class C+D (
 
@@ -78,11 +78,11 @@ product claude/composite-r4 = dd5f13218 · ledger = eaf50fee7 §903: the lit def
 - **martin**: claims 990 · verdicts 990 (todo 0) · kept 763 · partial 107 · verdict files 43 (triage 1, regrade r5) · section 09-05 20:41 · critic 09-05 21:01
 - **dnd**: claims 872 · verdicts 872 (todo 0) · kept 705 · partial 63 · verdict files 54 (triage 1, regrade none) · section 09-05 20:56 · critic 09-05 21:12
 - **ai**: claims 940 · verdicts 940 (todo 0) · kept 769 · partial 144 · verdict files 61 (triage 1, regrade r5) · section 09-06 00:39 · critic 09-06 00:55
-- **kay**: claims 713 · verdicts 713 (todo 0) · kept 448 · partial 48 · verdict files 36 (triage 1, regrade r5) · section 09-06 14:42 · critic absent
+- **kay**: claims 713 · verdicts 713 (todo 0) · kept 448 · partial 48 · verdict files 36 (triage 1, regrade r5) · section 09-06 14:42 · critic 09-06 15:04
 - **leguin**: claims 541 · verdicts 491 (todo 50) · kept 342 · partial 42 · verdict files 28 (triage 1, regrade r4) · section 09-06 13:47 · critic 09-06 14:20
 - **wolfe**: claims 468 · verdicts 468 (todo 0) · kept 402 · partial 66 · verdict files 34 (triage 0, regrade r4) · section 09-06 14:19 · critic 09-06 14:32
 - **hobb**: claims 386 · verdicts 386 (todo 0) · kept 346 · partial 40 · verdict files 28 (triage 0, regrade r4) · section 09-06 14:14 · critic 09-06 14:28
-- LAST-RUNS: tolkien r5/wf_bf5b8fda-a24, kay r5/wf_f5b527e0-155, leguin r6/wf_2b731d5b-460, wolfe r5/wf_328e2797-84f, martin r5/wf_ed535e1b-537, hobb r5/wf_06d7ffd7-48b, dnd r5/wf_a9298963-fdf, ai r5/wf_bcc0efc7-47c
+- LAST-RUNS: tolkien r6-not-launched/(none — nothingToRun 14:55), kay r6/wf_6aaded2c-7c9, leguin r7/wf_29dbbf1f-9e3, wolfe r6/wf_5c6be9e9-17f, martin r6/wf_004aff7a-269, hobb r6/wf_ab3eea15-df4, dnd r6/wf_df0a321b-0f2, ai r6/wf_e04d8c44-23e
 
 ## WORKFLOW RUNS of chair session 059d4243-f837-4b07-8096-8c9ca76b03fb (journal lines; a run dies with the session — the FILES above are the checkpoint)
 - wf_004aff7a-269: 1 journal lines, 1 agents
@@ -94,4 +94,4 @@ product claude/composite-r4 = dd5f13218 · ledger = eaf50fee7 §903: the lit def
 - wf_e04d8c44-23e: 1 journal lines, 1 agents
 
 ## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;38055 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.38 2.48 3.45
+load: 2.09 2.40 3.12

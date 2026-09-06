@@ -3,22 +3,51 @@
  "name": "hobb",
  "angle": "dropped-and-routes",
  "tag": null,
- "lines": 79,
+ "lines": 170,
  "firstTs": "2026-09-06T18:57:44.696Z",
- "lastTs": "2026-09-06T19:00:30.002Z",
+ "lastTs": "2026-09-06T19:06:12.780Z",
  "tools": {
   "Read": 1,
-  "Bash": 18
+  "Bash": 42,
+  "ToolSearch": 1
  },
  "urlsFetched": [
   "https://web.archive.org/web/[0-9",
-  "https://web.archive.org/web/[0-9a-z_"
+  "https://web.archive.org/web/[0-9a-z_",
+  "https://web.archive.org/cdx/search/cdx?url=robinhobb.com*&from=2005&to=2006&output=text&fl=timestamp,original&collapse=urlkey&limit=400",
+  "https://archive.org/advancedsearch.php?q=interzone+098&fl%5B%5D=identifier&fl%5B%5D=title&rows=10&output=json",
+  "https://archive.org/advancedsearch.php?q=title%3A%28Asimov%27s+Science+Fiction%29+AND+date%3A%5B1997-01-01+TO+1997-03-01%5D&fl%5B%5D=identifier&fl%5B%5D=title&rows=20&output=json",
+  "https://archive.org/download/$id/${id}_djvu.txt",
+  "https://archive.org/advancedsearch.php?q=identifier%3Asim_asimovs-science-fiction_1997-02*&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date&rows=20&output=json",
+  "https://archive.org/download/interzone-098-1995-08-bogof-39/interzone-098-1995-08-bogof-39_djvu.txt",
+  "https://archive.org/metadata/interzone-098-1995-08-bogof-39",
+  "https://archive.org/advancedsearch.php?q=collection%3Apulpmagazinearchive+AND+asimov+AND+1997&fl%5B%5D=identifier&fl%5B%5D=title&rows=30&output=json",
+  "https://archive.org/metadata/$id",
+  "https://archive.org/advancedsearch.php?q=identifier%3Aasimovsv21*&fl%5B%5D=identifier&fl%5B%5D=title&rows=40&output=json",
+  "https://archive.org/metadata/asimovsv21n02199702_201908",
+  "http://www.robinhobb.com/5000words.html,",
+  "https://web.archive.org/web/20050724083052id_/http://www.robinhobb.com/5000words.html",
+  "https://www.theguardian.com/books/2017/jul/28/robin-hobb-books-interview-assassins-fate",
+  "https://www.theguardian.com/books/2014/sep/10/fools-assassin-robin-hobb-review-fantasy-novel",
+  "https://www.independent.co.uk/arts-entertainment/books/reviews/fool-s-quest-by-robin-hobb-book-review-more-swords-and-sorcery-from-a-dame-of-thrones-10456044.html",
+  "https://reactormag.com/book-review-the-fools-assassin-robin-hobb/",
+  "https://strangehorizons.com/wordpress/non-fiction/reviews/revolutionary-nautical-fantasy-robin-hobbs-liveship-traders-series/",
+  "https://web.archive.org/web/20201111180135id_/https://www.tor.com/2012/02/07/youve-never-read-anything-like-sff-before-robin-hobb-talks-with-peter-orullian/",
+  "https://archive.org/download/interzone-098-1995-08-bogof-39/Interzone%20098%201995-08%20%28Bogof39%29_djvu.txt",
+  "https://archive.org/download/asimovsv21n02199702_201908/Asimovs_v21n02_1997-02_djvu.txt",
+  "https://doi.org/10.12958/2227-2844-2024-2(361",
+  "https://archive.org/metadata/$it"
  ],
  "filesWritten": [],
- "lastAssistantText": "Now the two large magazine OCR files. Let me locate the Hobb sections.",
+ "lastAssistantText": "Checkpoint 1 written. Now the second routes — starting with archive.org search-inside, OpenAlex, and the reddit CDX in parallel.",
  "run": "wf_ab3eea15-df4",
  "agent": "afda9803e3808cd99",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/059d4243-f837-4b07-8096-8c9ca76b03fb/subagents/workflows/wf_ab3eea15-df4/agent-afda9803e3808cd99.jsonl",
  "journal": "in-flight",
- "checkpointFile": null
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-hobb-dropped-and-routes.json",
+  "claims": 68,
+  "complete": false,
+  "mtime": "15:05:58"
+ }
 }

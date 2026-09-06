@@ -1,3 +1,5 @@
+> **STATUS 2026-09-06 14:58 (session 059d4243, after the account switch): §1's THREE LANES ARE DONE — DO NOT RE-DISPATCH THEM** (L-UI-MAT `c2337220a` receipt complete; S12A-CHECKPAIR complete + R2 applied; R15-TAIL JSON complete). §2's research command was RUN at 14:52 for six sweeps and wolfe/hobb were launched from their hand-built r6 files (run ids in `sweep/LAST-RUNS.json`); run it again ONLY if every one of those runs is dead. §3's §904 chain is predicted and NOT started (see the top block of RESUME-NOTE.md). §4's hazards stand.
+
 # REDISPATCH — the successor's exact acts after an ACCOUNT SWITCH or a session death (chair, 2026-09-06 14:25)
 SC=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad · R=/Users/cstokes/Desktop/settlement-engine
 Start the new session IN THE SAME PROJECT DIRECTORY ($R) — the memory dir and the scratchpad root are keyed by that path, not by the account.
