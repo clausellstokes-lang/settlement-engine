@@ -5925,5 +5925,192 @@
    "note": "Quote verbatim: \"all he has to say is: 'Well, I'm back'\". Hobbit-response limb verbatim as given. NOT SUPPORTED: \"emotional restraint\" is not the page's framing - raw text has zero hits for restrain/understat/muted/quiet/anticlimax, and the page calls the departure \"an emotional scene\" and quotes \"not all tears are an evil\". The restraint reading is the researcher's inference from \"all he has to say is\".",
    "fromFile": "verdicts-tolkien-i360-372.json"
   }
+ },
+ {
+  "index": 373,
+  "feature": "mock-editorial foreword",
+  "claim": "Tolkien's Foreword to Farmer Giles poses as the editor and translator of an ancient legend of the Little Kingdom, so the tale opens in the voice of a scholarly apparatus rather than a storyteller.",
+  "source": "Hammond & Scull, 'Farmer Giles of Ham' (Tolkien Estate)",
+  "url": "https://www.tolkienestate.com/writing/farmer-giles-of-ham/",
+  "page": "main text",
+  "quote": "pretends to be the editor and translator of an ancient legend",
+  "angle": "civic-record",
+  "verdict": {
+   "index": 373,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "he pretends to be the editor and translator of an ancient legend",
+   "note": "Tolkien Estate (Hammond & Scull) fetched live with a browser UA; quote appears word for word in 'added a mock foreword in which he pretends to be the editor and translator of an ancient legend of the Little Kingdom'. 'Foreword' carries the 'opens' limb.",
+   "fromFile": "verdicts-tolkien-i373-387.json"
+  }
+ },
+ {
+  "index": 374,
+  "feature": "pseudotranslation from Latin",
+  "claim": "The Foreword declares the tale a translation from 'very insular Latin' of a compilation of old legends, establishing false provenance before any narrative begins.",
+  "source": "Wikipedia, 'Farmer Giles of Ham'",
+  "url": "https://en.wikipedia.org/wiki/Farmer_Giles_of_Ham",
+  "page": "§ Pseudo-translation from Latin",
+  "quote": "very insular Latin",
+  "angle": "civic-record",
+  "verdict": {
+   "index": 374,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "not an original tale but a translation, from 'very insular Latin'",
+   "note": "Rendered Wikipedia article and the raw wikitext both checked. Section 'Pseudo-translation from Latin' reads: 'Farmer Giles is not an original tale but a translation, from very insular Latin, of a compilation of old legends of the Little Kingdom.' All limbs supported.",
+   "fromFile": "verdicts-tolkien-i373-387.json"
+  }
+ },
+ {
+  "index": 375,
+  "feature": "Latin honorific title-string",
+  "claim": "The full Latin subtitle stacks offices and titles chancery-style (Lord of Tame, Count of Worminghall, King of the Little Kingdom), presaging the Latin-based jokes throughout.",
+  "source": "Wikipedia, 'Farmer Giles of Ham'",
+  "url": "https://en.wikipedia.org/wiki/Farmer_Giles_of_Ham",
+  "page": "§ Pseudo-translation from Latin",
+  "quote": "Count of Worminghall and King of the Little Kingdom",
+  "angle": "civic-record",
+  "verdict": {
+   "index": 375,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "This presages the great number of Latin-based jokes throughout the story",
+   "note": "Quote is verbatim inside the block-quoted full subtitle; the very next sentence on the page supplies the 'presaging the Latin-based jokes throughout' limb. The Latin itself stacks Domini de Domito, Aule Draconarie Comitis, Regni Minimi Regis et Basilei. 'Chancery-style' is the analyst's own descriptor, not the page's, but it only characterises the stacking the page displays.",
+   "fromFile": "verdicts-tolkien-i373-387.json"
+  }
+ },
+ {
+  "index": 376,
+  "feature": "solemn source-criticism",
+  "claim": "The Foreword solemnly discusses the document's nature (a late compilation from popular lays), its author (a local inhabitant writing long after the events, shown by his geographical knowledge) and the kingdom's boundaries in time and place, in the manner of a medieval-text editor's preface.",
+  "source": "Paul H. Kocher, Master of Middle-earth (1972), ch. VII",
+  "url": "http://users.bestweb.net/~jfgm/GilesbyKocher.htm",
+  "page": "ch. VII, essay 3",
+  "quote": "Solemnly he discusses the nature of the document",
+  "angle": "civic-record",
+  "verdict": {
+   "index": 376,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Solemnly he discusses the nature of the document",
+   "note": "Live host timed out; retrieved via Wayback raw capture 20220808163757id_. Kocher: 'Solemnly he discusses the nature of the document (a late compilation derived from popular lays...), the author (an inhabitant of the Little Kingdom at a time when the events were already long past, as shown by his intimate knowledge of the geography of that region) and the boundaries of the Little Kingdom in time and place.' The medieval-editor's-preface framing is supplied by the preceding sentence about 'professional editors of ancient manuscripts... who have wrestled in prefaces'.",
+   "fromFile": "verdicts-tolkien-i373-387.json"
+  }
+ },
+ {
+  "index": 377,
+  "feature": "dating by legendary chronology",
+  "claim": "The Foreword fixes the Little Kingdom's date by placement within Geoffrey of Monmouth's chronology of Britain's partitions after Brutus and before Arthur, rather than by a number.",
+  "source": "Paul H. Kocher, Master of Middle-earth (1972), ch. VII",
+  "url": "http://users.bestweb.net/~jfgm/GilesbyKocher.htm",
+  "page": "ch. VII, essay 3",
+  "quote": "for a chronology of the many divisions within the island",
+  "angle": "civic-record",
+  "verdict": {
+   "index": 377,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "chronology of the many divisions within the island after Brutus",
+   "note": "Kocher: Tolkien 'is obliged to call upon the aid... of Geoffrey of Monmouth's... Historia regum Britanniae... for a chronology of the many divisions within the island after Brutus'; and 'Some where between then and Arthur's time, \"after the days of King Coel maybe\"'. No numeric date is given anywhere, which carries the 'rather than by a number' limb.",
+   "fromFile": "verdicts-tolkien-i373-387.json"
+  }
+ },
+ {
+  "index": 378,
+  "feature": "scholar's pious-hope formula",
+  "claim": "Tolkien-as-translator voices the stock scholarly hope that the document will throw light on a dark period of history and on the origin of difficult place-names.",
+  "source": "Paul H. Kocher, Master of Middle-earth (1972), ch. VII",
+  "url": "http://users.bestweb.net/~jfgm/GilesbyKocher.htm",
+  "page": "ch. VII, essay 3",
+  "quote": "the usual pious hope of the scholar",
+  "angle": "civic-record",
+  "verdict": {
+   "index": 378,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the usual pious hope of the scholar",
+   "note": "Kocher: 'Tolkien as translator voices the usual pious hope of the scholar that the document will throw light on a dark period of British history, as well as the origin of \"some difficult place names.\"' Every limb present.",
+   "fromFile": "verdicts-tolkien-i373-387.json"
+  }
+ },
+ {
+  "index": 380,
+  "feature": "dictionary definition as in-world citation",
+  "claim": "When the record needs to say what a blunderbuss is, the compiler refers the question to the Four Wise Clerks of Oxenford, whose reply reproduces the Oxford English Dictionary definition word for word, embedding a modern reference-work register inside the chronicle.",
+  "source": "Paul H. Kocher, Master of Middle-earth (1972), ch. VII",
+  "url": "http://users.bestweb.net/~jfgm/GilesbyKocher.htm",
+  "page": "ch. VII, essay 3",
+  "quote": "corresponds word for word with the definition",
+  "angle": "civic-record",
+  "verdict": {
+   "index": 380,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "corresponds word for word with the definition of blunderbuss",
+   "note": "Kocher: 'the compiler of the manuscript refers him to the answer given by \"the Four Wise Clerks of Oxenford\"' whose reply 'corresponds word for word with the definition of blunderbuss given in the Oxford English Dictionary'. The 'modern reference-work register inside the chronicle' limb is the same point Kocher makes about the anachronistic seventeenth-century blunderbuss in pre-Arthurian England.",
+   "fromFile": "verdicts-tolkien-i373-387.json"
+  }
+ },
+ {
+  "index": 381,
+  "feature": "irony turned on the cited authority",
+  "claim": "The narrator catches the OED's parenthesis about the blunderbuss being superseded 'in civilized countries' and remarks that Ham was not yet civilized enough for other weapons, turning the joke against the authorities cited.",
+  "source": "Paul H. Kocher, Master of Middle-earth (1972), ch. VII",
+  "url": "http://users.bestweb.net/~jfgm/GilesbyKocher.htm",
+  "page": "ch. VII, essay 3",
+  "quote": "rather turns the joke against the Dictionary editors",
+  "angle": "civic-record",
+  "verdict": {
+   "index": 381,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "which rather turns the joke against the Dictionary editors",
+   "note": "Kocher: 'Tolkien catches up the parenthetical remark about supersession of the blunderbuss by other firearms \"in civilized countries\" to remark ironically that his village of Ham was not yet civilized enough to use any other weapons more lethal than bows and arrows - which rather turns the joke against the Dictionary editors.' Kocher attributes the catch to Tolkien rather than to 'the narrator', but that is the same voice inside the mock-editorial frame.",
+   "fromFile": "verdicts-tolkien-i373-387.json"
+  }
+ },
+ {
+  "index": 385,
+  "feature": "vernacular over Book-latin",
+  "claim": "The story's triumph of native over foreign is marked linguistically: in Giles's court the vulgar tongue came into fashion and none of his speeches were in Book-latin.",
+  "source": "Tom Shippey, The Road to Middle-earth, ch. 4 'A Cartographic Plot'",
+  "url": "https://archive.org/details/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology",
+  "page": "p. 90",
+  "quote": "the vulgar tongue came into fashion",
+  "angle": "civic-record",
+  "verdict": {
+   "index": 385,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the triumph of native over foreign... 'the vulgar tongue came into fashion'",
+   "note": "Shippey: 'The story of Farmer Giles is therefore largely the triumph of native over foreign (for in Giles's court \"the vulgar tongue came into fashion, and none of his speeches were in the Book-latin\")'. Note the page reads 'in the Book-latin'; the claim drops the article, but not inside its quoted span.",
+   "fromFile": "verdicts-tolkien-i373-387.json"
+  }
+ },
+ {
+  "index": 386,
+  "feature": "linguistic humour as engine",
+  "claim": "Throughout Farmer Giles linguistic humour is paramount, from Sunny Sam's gloomy proverbs and his misprision of the names Hilarius and Felix to Giles's own native errors of grammar.",
+  "source": "Tom Shippey, The Road to Middle-earth, ch. 4 'A Cartographic Plot'",
+  "url": "https://archive.org/details/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology",
+  "page": "p. 90",
+  "quote": "linguistic humour is paramount",
+  "angle": "civic-record",
+  "verdict": {
+   "index": 386,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In the whole story linguistic humour is paramount",
+   "note": "Shippey, continuing verbatim: 'from the gloomy proverbs of \"Sunny Sam\" and his pigheaded misprision of Hilarius and Felix - \"Ominous names ... I don't like the sound of them\" - to Giles's own determined native errors of grammar.' Every limb present.",
+   "fromFile": "verdicts-tolkien-i373-387.json"
+  }
+ },
+ {
+  "index": 387,
+  "feature": "Farthings from Farthingho",
+  "claim": "The Shire's Farthings descend from Farthingho in the Little Kingdom, and Thame and Worminghall are a long step beyond The Hobbit's bare 'The Hill' and 'The Water' toward the 600-plus named persons and places of The Lord of the Rings.",
+  "source": "Tom Shippey, The Road to Middle-earth, ch. 4 'A Cartographic Plot'",
+  "url": "https://archive.org/details/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology",
+  "page": "p. 91",
+  "quote": "Farthingho set Tolkien thinking about the Farthings",
+  "angle": "civic-record",
+  "verdict": {
+   "index": 387,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Farthingho set Tolkien thinking about the Farthings of 'The Shire'",
+   "note": "Quote verbatim on p. 91, preceded by 'Thame and Worminghall are a long step on from The Hill and The Water' (The Hill and The Water are established on p. 87 as The Hobbit's bare capital-letter names). The index figure on the page is 'over 600 names of Persons, Beasts and Monsters, almost as many places' - the claim's '600-plus named persons and places' compresses two counts into one but does not overstate either.",
+   "fromFile": "verdicts-tolkien-i373-387.json"
+  }
  }
 ]

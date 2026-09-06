@@ -1,1 +1,74 @@
-[]
+[
+ {
+  "index": 379,
+  "feature": "compiler's nostalgic preamble",
+  "claim": "The fictional compiler opens by looking back to a simpler past when there was more time, folk were fewer and villages were proud and independent, so the record voice is itself retrospective.",
+  "source": "Paul H. Kocher, Master of Middle-earth (1972), ch. VII",
+  "url": "http://users.bestweb.net/~jfgm/GilesbyKocher.htm",
+  "page": "ch. VII, essay 3",
+  "quote": "villages were proud and independent still in those days",
+  "angle": "civic-record",
+  "verdict": {
+   "index": 379,
+   "verdict": "PARTIAL",
+   "trueWording": "he looks back to the happier past; villages proud and independent",
+   "note": "Quote verbatim on the Wayback capture, and 'there was more time...and folk were fewer' is there too, as is the retrospective/nostalgic characterisation ('nostalgic about the greater simplicity of life in the old days of which he writes'). What Kocher never says is that this look-back OPENS the record; he places it nowhere in the text's order.",
+   "unsupportedLimb": "that the nostalgic look-back is the compiler's opening ('opens by' / 'preamble') - Kocher never locates it at the start",
+   "fromFile": "verdicts-tolkien-i373-387.json"
+  }
+ },
+ {
+  "index": 382,
+  "feature": "false etymology as afterword",
+  "claim": "The tale closes with mock-learned derivations of Thame and Worminghall attributed to 'the learned in such matters', so place-name philology is the record's final word.",
+  "source": "Tom Shippey, The Road to Middle-earth, ch. 4 'A Cartographic Plot'",
+  "url": "https://archive.org/details/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology",
+  "page": "pp. 90–91",
+  "quote": "Thame with an h is a folly without warrant",
+  "angle": "civic-record",
+  "verdict": {
+   "index": 382,
+   "verdict": "PARTIAL",
+   "trueWording": "Tolkien ends by remarking... 'Thame with an h is a folly without warrant'",
+   "note": "Retrieved from the Internet Archive full text (djvu.txt) of the item, pp. 90-91. Quote verbatim; 'ends by remarking' supports the closing position, and 'the whole story that Tolkien tells to account for the names of Thame and Worminghall is based on nothing, is mere fiction' supports the mock-learned derivations of both names. Shippey nowhere quotes or reports the in-tale attribution phrase.",
+   "unsupportedLimb": "the attribution of the derivations to 'the learned in such matters' - that phrase appears nowhere in Shippey's text",
+   "fromFile": "verdicts-tolkien-i373-387.json"
+  }
+ },
+ {
+  "index": 383,
+  "feature": "editor criticising imagined author",
+  "claim": "Farmer Giles carries a two-layer apparatus in one short foreword: an imagined editor faults an imagined author's geography, though that author 'lived himself in the lands of the Little Kingdom'.",
+  "source": "Tom Shippey, The Road to Middle-earth, ch. 4 'A Cartographic Plot'",
+  "url": "https://archive.org/details/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology",
+  "page": "p. 90",
+  "quote": "the imagined 'editor' of Farmer Giles to criticise its imagined 'author'",
+  "angle": "civic-record",
+  "verdict": {
+   "index": 383,
+   "verdict": "PARTIAL",
+   "trueWording": "extremely unfair of the imagined 'editor'... to criticise its imagined 'author'",
+   "note": "Quote verbatim, and the continuation is verbatim too: 'that \"author\", like Tolkien, \"lived himself in the lands of the Little Kingdom\" and knew what he was writing about.' The editor-over-author two-layer point is squarely Shippey's. What the page does not do is locate that apparatus in the Foreword or call it short; the word 'foreword' does not occur in the passage.",
+   "unsupportedLimb": "that the two layers sit 'in one short foreword' - Shippey never names the Foreword or its length",
+   "fromFile": "verdicts-tolkien-i373-387.json"
+  }
+ },
+ {
+  "index": 384,
+  "feature": "parochial precision of scale",
+  "claim": "Distances and directions in the tale map onto real Oxfordshire places (Ham/Thame, Tamworth, Farthingho, the Rollright Stones) at a parochial scale, so the Little Kingdom is measured like a real county.",
+  "source": "Tom Shippey, The Road to Middle-earth, ch. 4 'A Cartographic Plot'",
+  "url": "https://archive.org/details/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology",
+  "page": "p. 90",
+  "quote": "proof of the 'Little Kingdom's' lack of territorial ambition",
+  "angle": "civic-record",
+  "verdict": {
+   "index": 384,
+   "verdict": "PARTIAL",
+   "trueWording": "Thame in Buckinghamshire; Farthingho in Northamptonshire; parochial scale",
+   "note": "Quote verbatim. Shippey gives Ham = now Thame, twelve miles east of Oxford; the Middle Kingdom's capital 'sounds like Tamworth... sixty-eight miles from Thame'; Farthingho 'on a direct line... about a third of the way' as 'proof of the Little Kingdom's lack of territorial ambition'; Wales and the Pennines 'on this parochial scale suitably far off'; the Standing Stones = the Rollright Stones on the Warwickshire/Oxfordshire boundary. The counties Shippey actually names are Buckinghamshire, Northamptonshire and Warwickshire, not Oxfordshire.",
+   "unsupportedLimb": "'real Oxfordshire places' - Shippey puts Thame in Buckinghamshire, Farthingho in Northamptonshire, and Tamworth as the Mercian capital",
+   "fromFile": "verdicts-tolkien-i373-387.json"
+  }
+ }
+]

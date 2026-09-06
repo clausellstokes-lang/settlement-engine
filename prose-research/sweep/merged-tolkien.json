@@ -10101,6 +10101,115 @@
    "trueWording": "a typical hobbit reaction to the momentous events that have transpired",
    "note": "Quote verbatim: \"all he has to say is: 'Well, I'm back'\". Hobbit-response limb verbatim as given. NOT SUPPORTED: \"emotional restraint\" is not the page's framing - raw text has zero hits for restrain/understat/muted/quiet/anticlimax, and the page calls the departure \"an emotional scene\" and quotes \"not all tears are an evil\". The restraint reading is the researcher's inference from \"all he has to say is\".",
    "fromFile": "verdicts-tolkien-i360-372.json"
+  },
+  "373": {
+   "index": 373,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "he pretends to be the editor and translator of an ancient legend",
+   "note": "Tolkien Estate (Hammond & Scull) fetched live with a browser UA; quote appears word for word in 'added a mock foreword in which he pretends to be the editor and translator of an ancient legend of the Little Kingdom'. 'Foreword' carries the 'opens' limb.",
+   "fromFile": "verdicts-tolkien-i373-387.json"
+  },
+  "374": {
+   "index": 374,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "not an original tale but a translation, from 'very insular Latin'",
+   "note": "Rendered Wikipedia article and the raw wikitext both checked. Section 'Pseudo-translation from Latin' reads: 'Farmer Giles is not an original tale but a translation, from very insular Latin, of a compilation of old legends of the Little Kingdom.' All limbs supported.",
+   "fromFile": "verdicts-tolkien-i373-387.json"
+  },
+  "375": {
+   "index": 375,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "This presages the great number of Latin-based jokes throughout the story",
+   "note": "Quote is verbatim inside the block-quoted full subtitle; the very next sentence on the page supplies the 'presaging the Latin-based jokes throughout' limb. The Latin itself stacks Domini de Domito, Aule Draconarie Comitis, Regni Minimi Regis et Basilei. 'Chancery-style' is the analyst's own descriptor, not the page's, but it only characterises the stacking the page displays.",
+   "fromFile": "verdicts-tolkien-i373-387.json"
+  },
+  "376": {
+   "index": 376,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Solemnly he discusses the nature of the document",
+   "note": "Live host timed out; retrieved via Wayback raw capture 20220808163757id_. Kocher: 'Solemnly he discusses the nature of the document (a late compilation derived from popular lays...), the author (an inhabitant of the Little Kingdom at a time when the events were already long past, as shown by his intimate knowledge of the geography of that region) and the boundaries of the Little Kingdom in time and place.' The medieval-editor's-preface framing is supplied by the preceding sentence about 'professional editors of ancient manuscripts... who have wrestled in prefaces'.",
+   "fromFile": "verdicts-tolkien-i373-387.json"
+  },
+  "377": {
+   "index": 377,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "chronology of the many divisions within the island after Brutus",
+   "note": "Kocher: Tolkien 'is obliged to call upon the aid... of Geoffrey of Monmouth's... Historia regum Britanniae... for a chronology of the many divisions within the island after Brutus'; and 'Some where between then and Arthur's time, \"after the days of King Coel maybe\"'. No numeric date is given anywhere, which carries the 'rather than by a number' limb.",
+   "fromFile": "verdicts-tolkien-i373-387.json"
+  },
+  "378": {
+   "index": 378,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the usual pious hope of the scholar",
+   "note": "Kocher: 'Tolkien as translator voices the usual pious hope of the scholar that the document will throw light on a dark period of British history, as well as the origin of \"some difficult place names.\"' Every limb present.",
+   "fromFile": "verdicts-tolkien-i373-387.json"
+  },
+  "379": {
+   "index": 379,
+   "verdict": "PARTIAL",
+   "trueWording": "he looks back to the happier past; villages proud and independent",
+   "note": "Quote verbatim on the Wayback capture, and 'there was more time...and folk were fewer' is there too, as is the retrospective/nostalgic characterisation ('nostalgic about the greater simplicity of life in the old days of which he writes'). What Kocher never says is that this look-back OPENS the record; he places it nowhere in the text's order.",
+   "unsupportedLimb": "that the nostalgic look-back is the compiler's opening ('opens by' / 'preamble') - Kocher never locates it at the start",
+   "fromFile": "verdicts-tolkien-i373-387.json"
+  },
+  "380": {
+   "index": 380,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "corresponds word for word with the definition of blunderbuss",
+   "note": "Kocher: 'the compiler of the manuscript refers him to the answer given by \"the Four Wise Clerks of Oxenford\"' whose reply 'corresponds word for word with the definition of blunderbuss given in the Oxford English Dictionary'. The 'modern reference-work register inside the chronicle' limb is the same point Kocher makes about the anachronistic seventeenth-century blunderbuss in pre-Arthurian England.",
+   "fromFile": "verdicts-tolkien-i373-387.json"
+  },
+  "381": {
+   "index": 381,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "which rather turns the joke against the Dictionary editors",
+   "note": "Kocher: 'Tolkien catches up the parenthetical remark about supersession of the blunderbuss by other firearms \"in civilized countries\" to remark ironically that his village of Ham was not yet civilized enough to use any other weapons more lethal than bows and arrows - which rather turns the joke against the Dictionary editors.' Kocher attributes the catch to Tolkien rather than to 'the narrator', but that is the same voice inside the mock-editorial frame.",
+   "fromFile": "verdicts-tolkien-i373-387.json"
+  },
+  "382": {
+   "index": 382,
+   "verdict": "PARTIAL",
+   "trueWording": "Tolkien ends by remarking... 'Thame with an h is a folly without warrant'",
+   "note": "Retrieved from the Internet Archive full text (djvu.txt) of the item, pp. 90-91. Quote verbatim; 'ends by remarking' supports the closing position, and 'the whole story that Tolkien tells to account for the names of Thame and Worminghall is based on nothing, is mere fiction' supports the mock-learned derivations of both names. Shippey nowhere quotes or reports the in-tale attribution phrase.",
+   "unsupportedLimb": "the attribution of the derivations to 'the learned in such matters' - that phrase appears nowhere in Shippey's text",
+   "fromFile": "verdicts-tolkien-i373-387.json"
+  },
+  "383": {
+   "index": 383,
+   "verdict": "PARTIAL",
+   "trueWording": "extremely unfair of the imagined 'editor'... to criticise its imagined 'author'",
+   "note": "Quote verbatim, and the continuation is verbatim too: 'that \"author\", like Tolkien, \"lived himself in the lands of the Little Kingdom\" and knew what he was writing about.' The editor-over-author two-layer point is squarely Shippey's. What the page does not do is locate that apparatus in the Foreword or call it short; the word 'foreword' does not occur in the passage.",
+   "unsupportedLimb": "that the two layers sit 'in one short foreword' - Shippey never names the Foreword or its length",
+   "fromFile": "verdicts-tolkien-i373-387.json"
+  },
+  "384": {
+   "index": 384,
+   "verdict": "PARTIAL",
+   "trueWording": "Thame in Buckinghamshire; Farthingho in Northamptonshire; parochial scale",
+   "note": "Quote verbatim. Shippey gives Ham = now Thame, twelve miles east of Oxford; the Middle Kingdom's capital 'sounds like Tamworth... sixty-eight miles from Thame'; Farthingho 'on a direct line... about a third of the way' as 'proof of the Little Kingdom's lack of territorial ambition'; Wales and the Pennines 'on this parochial scale suitably far off'; the Standing Stones = the Rollright Stones on the Warwickshire/Oxfordshire boundary. The counties Shippey actually names are Buckinghamshire, Northamptonshire and Warwickshire, not Oxfordshire.",
+   "unsupportedLimb": "'real Oxfordshire places' - Shippey puts Thame in Buckinghamshire, Farthingho in Northamptonshire, and Tamworth as the Mercian capital",
+   "fromFile": "verdicts-tolkien-i373-387.json"
+  },
+  "385": {
+   "index": 385,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the triumph of native over foreign... 'the vulgar tongue came into fashion'",
+   "note": "Shippey: 'The story of Farmer Giles is therefore largely the triumph of native over foreign (for in Giles's court \"the vulgar tongue came into fashion, and none of his speeches were in the Book-latin\")'. Note the page reads 'in the Book-latin'; the claim drops the article, but not inside its quoted span.",
+   "fromFile": "verdicts-tolkien-i373-387.json"
+  },
+  "386": {
+   "index": 386,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In the whole story linguistic humour is paramount",
+   "note": "Shippey, continuing verbatim: 'from the gloomy proverbs of \"Sunny Sam\" and his pigheaded misprision of Hilarius and Felix - \"Ominous names ... I don't like the sound of them\" - to Giles's own determined native errors of grammar.' Every limb present.",
+   "fromFile": "verdicts-tolkien-i373-387.json"
+  },
+  "387": {
+   "index": 387,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Farthingho set Tolkien thinking about the Farthings of 'The Shire'",
+   "note": "Quote verbatim on p. 91, preceded by 'Thame and Worminghall are a long step on from The Hill and The Water' (The Hill and The Water are established on p. 87 as The Hobbit's bare capital-letter names). The index figure on the page is 'over 600 names of Persons, Beasts and Monsters, almost as many places' - the claim's '600-plus named persons and places' compresses two counts into one but does not overstate either.",
+   "fromFile": "verdicts-tolkien-i373-387.json"
   }
  }
 }
