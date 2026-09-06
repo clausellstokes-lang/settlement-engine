@@ -22,8 +22,20 @@ function merge(name, update) {
   let fromFiles = 0;
   for (const f of files) {
     let d; try { d = load(join(OUT, f)); } catch (e) { console.error(`SKIP ${f}: ${e.message}`); continue; }
-    for (const c of (d.claims || [])) { if (typeof c.index === 'number') { if (!claims[c.index]) claims[c.index] = c; } }
-    for (const v of (d.verdicts || [])) { if (typeof v.index === 'number' && v.verdict) { verdicts[v.index] = v; fromFiles++; } }
+    // MATCH BY CLAIM CONTENT, never by the file's index alone: a chunk file's indices were cut against whatever claims array the
+    // chair pre-split at launch (the first resumed runs were cut against a MISALIGNED array — rebuild-state.py, 2026-09-05), but
+    // every file carries the claim it verified, so the key (lowercase source|feature|claim[:60]) is the stable identity.
+    const keyOf = (c) => (String(c.source || '') + '|' + String(c.feature || '') + '|' + String(c.claim || '').slice(0, 60)).toLowerCase();
+    const kidx = new Map(claims.map((c, i) => [c ? keyOf(c) : null, i]).filter(([k]) => k !== null));
+    const byIdx = new Map((d.claims || []).filter(c => c && typeof c.index === 'number').map(c => [c.index, c]));
+    for (const v of (d.verdicts || [])) {
+      if (typeof v.index !== 'number' || !v.verdict) continue;
+      const c = byIdx.get(v.index);
+      let ni = c ? kidx.get(keyOf(c)) : undefined;
+      if (ni === undefined && c) { ni = v.index; if (!claims[ni]) { claims[ni] = c; kidx.set(keyOf(c), ni); } else if (keyOf(claims[ni]) !== keyOf(c)) { console.error(`SKIP ${f} index ${v.index}: claim not in state and slot ${ni} holds a different claim`); continue; } }
+      if (ni === undefined) { console.error(`SKIP ${f} index ${v.index}: no claim carried`); continue; }
+      verdicts[ni] = { ...v, index: ni, fromFile: f }; fromFiles++;
+    }
   }
   const kept = [];
   for (let i = 0; i < claims.length; i++) { const v = verdicts[i]; if (v && (v.verdict === 'VERIFIED_VERBATIM' || v.verdict === 'VERIFIED_SUBSTANCE')) kept.push({ index: i, ...claims[i], verdict: v }); }

@@ -2,157 +2,157 @@
  "name": "ai",
  "chunk": 3,
  "indices": [
-  120,
-  121,
-  122,
-  123,
-  124,
-  125,
-  126,
-  127,
-  128,
-  129,
-  130,
-  131,
-  132,
-  133,
-  134
+  150,
+  151,
+  152,
+  153,
+  154,
+  155,
+  156,
+  157,
+  158,
+  159,
+  160,
+  161,
+  162,
+  163,
+  164
  ],
  "claims": [
   {
-   "index": 120,
-   "feature": "the gloss",
-   "claim": "AI prose puts aphorisms where connective tissue should be and pivots to abstraction in place of concrete physical imagery.",
-   "source": "Matthew Vollmer (2026-04-24)",
-   "url": "https://matthewvollmer.substack.com/p/i-asked-the-machine-to-tell-on-itself",
+   "index": 150,
+   "feature": "dialogue as debate",
+   "claim": "AI dialogue drifts into philosophical debate rather than character-driven exchange.",
+   "source": "Dramatica blog summarizing StoryScope, 2026-05-29",
+   "url": "https://dramatica.com/blog/the-ai-tells-are-in-the-story",
+   "quote": "AI dialogue more often turns into philosophical debate",
+   "page": ""
+  },
+  {
+   "index": 151,
+   "feature": "narrative sameness across models",
+   "claim": "Stories from five different LLMs cluster together in narrative-feature space while human stories are diverse; narrative features alone reach 93.2% macro-F1 detection.",
+   "source": "Russell et al., StoryScope; Dramatica gloss",
+   "url": "https://dramatica.com/blog/the-ai-tells-are-in-the-story",
+   "quote": "five AI models cluster together in narrative space",
+   "page": ""
+  },
+  {
+   "index": 152,
+   "feature": "redundant exposition (tell-not-show)",
+   "claim": "18% of professional writers' edits to LLM prose removed exposition that restated what was already implied.",
+   "source": "Chakrabarty, Laban, Wu, 'Can AI writing be salvaged?' (arXiv 2409.14509, LAMP corpus, 18 writers, 8,035 edits)",
+   "url": "https://arxiv.org/html/2409.14509",
+   "quote": "show, don't tell",
+   "page": ""
+  },
+  {
+   "index": 153,
+   "feature": "cliché / fluff",
+   "claim": "17% of professional edits to LLM prose removed clichés and filler.",
+   "source": "Chakrabarty, Laban, Wu (arXiv 2409.14509)",
+   "url": "https://arxiv.org/html/2409.14509",
+   "quote": "unnecessary filler",
+   "page": ""
+  },
+  {
+   "index": 154,
+   "feature": "awkward word choice",
+   "claim": "Awkward phrasing was the largest edit category (28%), e.g. the recurring hedge 'seem to (verb)'.",
+   "source": "Chakrabarty, Laban, Wu (arXiv 2409.14509), writer W1",
+   "url": "https://arxiv.org/html/2409.14509",
+   "quote": "not technically wrong it's just inelegant",
+   "page": ""
+  },
+  {
+   "index": 155,
+   "feature": "purple prose and lack of specificity",
+   "claim": "Professional writers' taxonomy of LLM idiosyncrasies also names purple prose (abstract words, excess adjectives/metaphors), lack of specific detail, poor sentence structure (20%), and tense inconsistency.",
+   "source": "Chakrabarty, Laban, Wu (arXiv 2409.14509)",
+   "url": "https://arxiv.org/html/2409.14509",
    "quote": "",
-   "page": "I Asked the Machine to Tell on Itself: A Field Guide to AI Tells"
+   "page": ""
   },
   {
-   "index": 121,
-   "feature": "the gloss",
-   "claim": "AI-assisted manuscripts carry heavy-handed thematic messaging that the editor had to strip back.",
-   "source": "Mary Kole (2026-08-13)",
-   "url": "https://janefriedman.com/after-editing-two-ai-assisted-manuscripts-i-rewrote-my-client-agreement/",
-   "quote": "",
-   "page": "After Editing Two AI-Assisted Manuscripts, I Rewrote My Client Agreement"
+   "index": 156,
+   "feature": "lyrical nonsense",
+   "claim": "LLM literary prose produces metaphors that sound profound but carry no meaning the reader can cash out.",
+   "source": "Lincoln Michel, 'MFA vs. LLM', Counter Craft, 2025-03-17",
+   "url": "https://countercraft.substack.com/p/mfa-vs-llm-is-openais-metafiction",
+   "quote": "Grief, as I've learned, is a delta",
+   "page": ""
   },
   {
-   "index": 122,
-   "feature": "pet words",
-   "claim": "AI fiction accumulates a recycled mood vocabulary drawn from Instagram-poetry registers, collapsing diverse tones into one.",
-   "source": "Matthew Vollmer (2026-04-24)",
-   "url": "https://matthewvollmer.substack.com/p/i-asked-the-machine-to-tell-on-itself",
-   "quote": "ache, hollow, tether, linger, fragile, fractured, ember, bloom",
-   "page": "I Asked the Machine to Tell on Itself: A Field Guide to AI Tells"
+   "index": 157,
+   "feature": "mixed-metaphor pile-up",
+   "claim": "Within one passage the model jumbles construction, tailoring and magic metaphors without coherence.",
+   "source": "Lincoln Michel, 'MFA vs. LLM', 2025-03-17",
+   "url": "https://countercraft.substack.com/p/mfa-vs-llm-is-openais-metafiction",
+   "quote": "protagonists cut from whole cloth, emotions dyed and draped",
+   "page": ""
   },
   {
-   "index": 123,
-   "feature": "pet words",
-   "claim": "A cluster of grandeur nouns and verbs (testament, pivotal, delve, intricate, realm) co-occurs in LLM output and lends borrowed significance to flat subjects.",
-   "source": "Wikipedia editors, Signs of AI writing",
-   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
-   "quote": "enduring testament to the influence of Italian colonial",
-   "page": "Wikipedia:Signs of AI writing"
+   "index": 158,
+   "feature": "no narrative movement",
+   "claim": "The AI story repeats its central idea with new metaphors instead of developing character, plot or thought.",
+   "source": "Lincoln Michel, 'MFA vs. LLM', 2025-03-17",
+   "url": "https://countercraft.substack.com/p/mfa-vs-llm-is-openais-metafiction",
+   "quote": "doesn't really go anywhere. It's flat.",
+   "page": ""
   },
   {
-   "index": 124,
-   "feature": "pet words",
-   "claim": "Metaphors of symphonies, tapestries, and dances, plus delve/navigate/enhance/elevate, mark machine prose.",
-   "source": "Carly Ayres (2024-12-05)",
-   "url": "https://carly.substack.com/p/spotting-machine-made-prose",
-   "quote": "symphonies, tapestries, or complex dances",
-   "page": "Spotting machine-made prose"
+   "index": 159,
+   "feature": "no intentionality / point of view",
+   "claim": "LLMs cannot make parts of a story work together because they have no point of view or intention behind choices.",
+   "source": "Lincoln Michel, 'MFA vs. LLM', 2025-03-17",
+   "url": "https://countercraft.substack.com/p/mfa-vs-llm-is-openais-metafiction",
+   "quote": "They don't have a point of view",
+   "page": ""
   },
   {
-   "index": 125,
-   "feature": "pet words",
-   "claim": "'Quiet/magic' adverbs (quietly, deeply, fundamentally, remarkably) are used to make mundane description feel significant.",
-   "source": "tropes.fyi AI Writing Pattern Directory",
-   "url": "https://tropes.fyi/directory",
-   "quote": "Quietly orchestrating workflows and decisions",
-   "page": "Tropes - AI Writing Pattern Directory"
+   "index": 160,
+   "feature": "choices per word",
+   "claim": "A 10,000-word story is ~10,000 choices; a 100-word prompt makes almost none of them, and the hardest work is shaping and refining.",
+   "source": "Lincoln Michel, 'Art Without Intention', 2024-09-04",
+   "url": "https://countercraft.substack.com/p/art-without-intention",
+   "quote": "shaping, honing, and refining",
+   "page": ""
   },
   {
-   "index": 126,
-   "feature": "pet words (syntax)",
-   "claim": "AI avoids plain copulatives, replacing 'is' with 'serves as' or 'holds the distinction of being'.",
-   "source": "Wikipedia editors, Signs of AI writing",
-   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
-   "quote": "Harian Metro holds the distinction of being the first",
-   "page": "Wikipedia:Signs of AI writing"
+   "index": 161,
+   "feature": "no perspective / no origin",
+   "claim": "AI sentences give the reader no place to stand because they do not originate from any sensibility.",
+   "source": "Charles Schifano, 'What's Missing from AI Writing', 2023-10-27",
+   "url": "https://charlesschifano.substack.com/p/whats-missing-from-ai-writing",
+   "quote": "the sentences don't originate from anywhere",
+   "page": ""
   },
   {
-   "index": 127,
-   "feature": "metaphor",
-   "claim": "AI metaphors are slightly off-target but stay in the right semantic neighborhood, and descriptions are mood-saturated pathetic fallacy such as rain mirroring grief.",
-   "source": "Matthew Vollmer (2026-04-24)",
-   "url": "https://matthewvollmer.substack.com/p/i-asked-the-machine-to-tell-on-itself",
-   "quote": "",
-   "page": "I Asked the Machine to Tell on Itself: A Field Guide to AI Tells"
+   "index": 162,
+   "feature": "no trajectory (swappable sentences)",
+   "claim": "Sentences in AI prose can be reordered with nothing lost, because there is no point of view driving them forward.",
+   "source": "Charles Schifano, 2023-10-27",
+   "url": "https://charlesschifano.substack.com/p/whats-missing-from-ai-writing",
+   "quote": "there's no trajectory in these sentences",
+   "page": ""
   },
   {
-   "index": 128,
-   "feature": "metaphor",
-   "claim": "AI comparisons break when followed across a second dimension; the model does not grasp real-world metaphors or keep logical coherence.",
-   "source": "sudo, LessWrong (2026-04-12)",
-   "url": "https://www.lesswrong.com/posts/nTuKjJBwMtMuuLonA/hot-take-problems-with-ai-prose",
-   "quote": "AIs fail to grasp: real-world metaphors, logical coherence",
-   "page": "[Hot take] Problems with AI prose"
+   "index": 163,
+   "feature": "no narrative, character or plot",
+   "claim": "Asimov's editor, after hundreds of ChatGPT submissions: no originality, no narrative sense, no character development, near-nonexistent plotting.",
+   "source": "Sheila Williams, Asimov's editorial 'ChatGPT and Me', Jan/Feb 2024",
+   "url": "https://asimovs.com/wp-content/uploads/2024/02/Editorial_CHAT-GPT-and-Me_JanFeb24.pdf",
+   "quote": "no sense of narrative, no character development",
+   "page": ""
   },
   {
-   "index": 129,
-   "feature": "metaphor",
-   "claim": "AI stacks multiple comparisons onto one concept and overloads description with redundant sensory 'eyeball kicks'.",
-   "source": "Makin, Record Crash (2025-11-27)",
-   "url": "https://recordcrash.substack.com/p/how-to-identify-ai-written-web-fiction",
-   "quote": "",
-   "page": "How to Identify AI-Written Web Fiction"
-  },
-  {
-   "index": 130,
-   "feature": "metaphor",
-   "claim": "Forced figurative language sounds clever but obscures rather than clarifies.",
-   "source": "tropes.fyi AI Writing Pattern Directory",
-   "url": "https://tropes.fyi/directory",
-   "quote": "Like tracking weight loss on a rigged scale",
-   "page": "Tropes - AI Writing Pattern Directory"
-  },
-  {
-   "index": 131,
-   "feature": "emotion rendering",
-   "claim": "AI carries emotion through bodily sensation and somatic metaphor 81% of the time versus 38% for humans, while naming emotions explicitly less often (8% vs 29%), an inversion of the usual 'AI tells emotions' assumption.",
-   "source": "Russell et al., StoryScope (2026-04-03)",
-   "url": "https://arxiv.org/abs/2604.03136",
-   "quote": "AI overwhelmingly conveys emotion through physical sensations and bodily metaphors",
-   "page": "StoryScope: Investigating idiosyncrasies in AI fiction"
-  },
-  {
-   "index": 132,
-   "feature": "reader address",
-   "claim": "AI narrators write as if no one is watching: fourth-wall breaks in 39% of AI stories versus 67% human, direct reader address 7% versus 28%.",
-   "source": "Russell et al., StoryScope (2026-04-03)",
-   "url": "https://arxiv.org/abs/2604.03136",
-   "quote": "AI writes as though no one is watching",
-   "page": "StoryScope: Investigating idiosyncrasies in AI fiction"
-  },
-  {
-   "index": 133,
-   "feature": "flinching",
-   "claim": "AI retreats from difficult material: it softens violence, obscures intimacy, and explains cruelty instead of rendering it.",
-   "source": "Richard Lowe (2026-04-29)",
-   "url": "https://associationofghostwriters.org/the-real-reason-not-to-use-ai-to-write-your-novel/",
-   "quote": "AI flinches every time",
-   "page": "The Real Reason Not to Use AI to Write Your Novel"
-  },
-  {
-   "index": 134,
-   "feature": "surprise",
-   "claim": "Language models optimize for predictability while good writing must surprise; AI output drifts rather than evolves with purpose.",
-   "source": "Michael O. Church, antipodes Substack (2025-05-28)",
-   "url": "https://antipodes.substack.com/p/how-to-make-ai-write-a-bestsellerand",
-   "quote": "Good writing must be surprising. It needs to mix shit up.",
-   "page": "How to make AI write a bestseller—and why you can't"
+   "index": 164,
+   "feature": "no cultural memory",
+   "claim": "Generated stories show no sign their maker ever absorbed a story, folktale or TV show; worse than any human submission.",
+   "source": "Sheila Williams, Asimov's, Jan/Feb 2024",
+   "url": "https://asimovs.com/wp-content/uploads/2024/02/Editorial_CHAT-GPT-and-Me_JanFeb24.pdf",
+   "quote": "ever read a story, heard some folklore",
+   "page": ""
   }
  ]
 }

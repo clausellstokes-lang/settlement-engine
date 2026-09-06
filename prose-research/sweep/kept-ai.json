@@ -6,6 +6,7 @@
   "source": "Russell, Rajendhran, Iyyer & Wieting, StoryScope (arXiv 2604.03136, Apr 2026)",
   "url": "https://arxiv.org/html/2604.03136v3",
   "quote": "AI stories over-explain themes and favor tidy, single-track plots",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 0,
    "verdict": "VERIFIED_VERBATIM",
@@ -20,6 +21,7 @@
   "source": "Russell et al., StoryScope (arXiv 2604.03136)",
   "url": "https://arxiv.org/html/2604.03136v3",
   "quote": "",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 1,
    "verdict": "VERIFIED_SUBSTANCE",
@@ -34,6 +36,7 @@
   "source": "Russell et al., StoryScope (arXiv 2604.03136)",
   "url": "https://arxiv.org/html/2604.03136v3",
   "quote": "",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 2,
    "verdict": "VERIFIED_SUBSTANCE",
@@ -48,6 +51,7 @@
   "source": "Russell et al., StoryScope (arXiv 2604.03136)",
   "url": "https://arxiv.org/html/2604.03136v3",
   "quote": "",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 3,
    "verdict": "VERIFIED_SUBSTANCE",
@@ -62,6 +66,7 @@
   "source": "Russell et al., StoryScope (arXiv 2604.03136)",
   "url": "https://arxiv.org/html/2604.03136v3",
   "quote": "",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 4,
    "verdict": "VERIFIED_SUBSTANCE",
@@ -76,6 +81,7 @@
   "source": "Russell et al., StoryScope (arXiv 2604.03136)",
   "url": "https://arxiv.org/html/2604.03136v3",
   "quote": "frame protagonist' choices as more morally ambiguous",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 5,
    "verdict": "VERIFIED_VERBATIM",
@@ -90,6 +96,7 @@
   "source": "Russell et al., StoryScope (arXiv 2604.03136)",
   "url": "https://arxiv.org/html/2604.03136v3",
   "quote": "",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 6,
    "verdict": "VERIFIED_SUBSTANCE",
@@ -104,6 +111,7 @@
   "source": "Russell et al., StoryScope (arXiv 2604.03136)",
   "url": "https://arxiv.org/html/2604.03136v3",
   "quote": "occupy a rarer, more dispersed region of narrative space",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 7,
    "verdict": "VERIFIED_VERBATIM",
@@ -118,6 +126,7 @@
   "source": "Russell et al., StoryScope (arXiv 2604.03136)",
   "url": "https://arxiv.org/html/2604.03136v3",
   "quote": "far harder to humanize",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 8,
    "verdict": "VERIFIED_VERBATIM",
@@ -132,6 +141,7 @@
   "source": "Russell et al., StoryScope (arXiv 2604.03136)",
   "url": "https://arxiv.org/html/2604.03136v3",
   "quote": "Claude produces notably flat event escalation",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 9,
    "verdict": "VERIFIED_VERBATIM",
@@ -146,6 +156,7 @@
   "source": "Kobak, González-Márquez, Horvát & Lause (arXiv 2406.07016; Science Advances 2025)",
   "url": "https://arxiv.org/html/2406.07016v4",
   "quote": "",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 10,
    "verdict": "VERIFIED_SUBSTANCE",
@@ -160,6 +171,7 @@
   "source": "Juzek & Ward, Why Does ChatGPT Delve So Much? (arXiv 2412.11385, Dec 2024)",
   "url": "https://arxiv.org/html/2412.11385v1",
   "quote": "Lexical overrepresentation remains a feature of current iterations of ChatGPT",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 11,
    "verdict": "VERIFIED_VERBATIM",
@@ -174,6 +186,7 @@
   "source": "Juzek & Ward (arXiv 2412.11385)",
   "url": "https://arxiv.org/html/2412.11385v1",
   "quote": "wary of the word 'delve'",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 12,
    "verdict": "VERIFIED_VERBATIM",
@@ -188,6 +201,7 @@
   "source": "Chakrabarty, Laban, Agarwal, Muresan & Wu, Art or Artifice? (CHI 2024; arXiv 2309.14556)",
   "url": "https://arxiv.org/abs/2309.14556",
   "quote": "three to ten times less likely to pass individual TTCW",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 13,
    "verdict": "VERIFIED_SUBSTANCE",
@@ -202,6 +216,7 @@
   "source": "Chakrabarty et al., Art or Artifice? (CHI 2024)",
   "url": "https://arxiv.org/abs/2309.14556",
   "quote": "",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 14,
    "verdict": "VERIFIED_SUBSTANCE",
@@ -216,6 +231,7 @@
   "source": "Chakrabarty et al., Art or Artifice? (CHI 2024)",
   "url": "https://arxiv.org/abs/2309.14556",
   "quote": "None of the LLMs positively correlate with the expert assessments",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 21,
    "verdict": "VERIFIED_VERBATIM",
@@ -230,6 +246,7 @@
   "source": "Ismayilzada, Stevenson & van der Plas (ICCC 2025; arXiv 2411.02316)",
   "url": "https://arxiv.org/abs/2411.02316",
   "quote": "fall short in terms of novelty, surprise and diversity",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 22,
    "verdict": "VERIFIED_VERBATIM",
@@ -244,6 +261,7 @@
   "source": "Ismayilzada et al. (ICCC 2025)",
   "url": "https://arxiv.org/abs/2411.02316",
   "quote": "linguistically more complex and verbose yet less creative",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 23,
    "verdict": "VERIFIED_SUBSTANCE",
@@ -258,6 +276,7 @@
   "source": "Doshi & Hauser, Science Advances 10(28), 2024",
   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11244532/",
   "quote": "collectively a narrower scope of novel content is produced",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 25,
    "verdict": "VERIFIED_VERBATIM",
@@ -272,6 +291,7 @@
   "source": "Jakesch, Hancock & Naaman, PNAS 120(11), 2023",
   "url": "https://arxiv.org/abs/2206.07271",
   "quote": "intuitive but flawed heuristics",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 26,
    "verdict": "VERIFIED_VERBATIM",
@@ -286,6 +306,7 @@
   "source": "O'Sullivan, Humanities & Social Sciences Communications 12 (2025-11-11)",
   "url": "https://www.nature.com/articles/s41599-025-05986-3",
   "quote": "display a higher degree of stylistic uniformity, clustering tightly by model",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 27,
    "verdict": "VERIFIED_VERBATIM",
@@ -300,6 +321,7 @@
   "source": "Rettberg & Wigers (arXiv 2507.22445, Jul 2025)",
   "url": "https://arxiv.org/abs/2507.22445",
   "quote": "Real-world conflicts are sanitised, romance is almost absent",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 28,
    "verdict": "VERIFIED_VERBATIM",
@@ -314,6 +336,7 @@
   "source": "Rettberg & Wigers (arXiv 2507.22445)",
   "url": "https://arxiv.org/abs/2507.22445",
   "quote": "prioritises stability above change",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 29,
    "verdict": "VERIFIED_VERBATIM",
@@ -328,6 +351,7 @@
   "source": "Lu, Sclar, Hallinan, Mireshghallah et al., AI as Humanity's Salieri (arXiv 2410.04265)",
   "url": "https://arxiv.org/abs/2410.04265",
   "quote": "on average 66.2% higher than that of LLMs",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 31,
    "verdict": "VERIFIED_VERBATIM",
@@ -342,6 +366,7 @@
   "source": "Reinhart, Markey, Laudenbach, Pantusen, Yurko, Weinberg & Brown, PNAS 122 (2025-02-25)",
   "url": "https://arxiv.org/html/2410.16107v2",
   "quote": "",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 32,
    "verdict": "VERIFIED_VERBATIM",
@@ -356,6 +381,7 @@
   "source": "Reinhart et al., PNAS 2025",
   "url": "https://arxiv.org/html/2410.16107v2",
   "quote": "informationally dense, noun-heavy style",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 33,
    "verdict": "VERIFIED_VERBATIM",
@@ -370,6 +396,7 @@
   "source": "Reinhart et al., PNAS 2025",
   "url": "https://arxiv.org/html/2410.16107v2",
   "quote": "grandiose, if hollow, summative sentences",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 34,
    "verdict": "VERIFIED_VERBATIM",
@@ -384,6 +411,7 @@
   "source": "Reinhart et al., PNAS 2025",
   "url": "https://arxiv.org/html/2410.16107v2",
   "quote": "do not vary their linguistic output in response to contextual factors",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 35,
    "verdict": "VERIFIED_VERBATIM",
@@ -398,6 +426,7 @@
   "source": "Chakrabarty, Laban & Wu, Can AI writing be salvaged? (CHI 2025; arXiv 2409.14509)",
   "url": "https://arxiv.org/html/2409.14509v4",
   "quote": "Writer-edited > LLM-edited > LLM-generated",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 36,
    "verdict": "VERIFIED_VERBATIM",
@@ -412,6 +441,7 @@
   "source": "Chakrabarty, Laban & Wu (CHI 2025)",
   "url": "https://arxiv.org/html/2409.14509v4",
   "quote": "",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 37,
    "verdict": "VERIFIED_SUBSTANCE",
@@ -426,6 +456,7 @@
   "source": "Chakrabarty, Laban & Wu (CHI 2025)",
   "url": "https://arxiv.org/html/2409.14509v4",
   "quote": "writers perceived no significant qualitative differences",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 38,
    "verdict": "VERIFIED_VERBATIM",
@@ -440,6 +471,7 @@
   "source": "Xu, Jojic, Rao, Brockett & Dolan, Echoes in AI (PNAS 2025-09-02; arXiv 2501.00273)",
   "url": "https://arxiv.org/html/2501.00273",
   "quote": "plot elements that are echoed across a number of generations",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 39,
    "verdict": "VERIFIED_VERBATIM",
@@ -454,6 +486,7 @@
   "source": "Xu et al., Echoes in AI (PNAS 2025)",
   "url": "https://arxiv.org/html/2501.00273",
   "quote": "",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 40,
    "verdict": "VERIFIED_SUBSTANCE",
@@ -468,6 +501,7 @@
   "source": "Tian, Huang, Liu, Jiang, Spangher, Chen, May & Peng (EMNLP 2024; arXiv 2407.13248)",
   "url": "https://arxiv.org/html/2407.13248",
   "quote": "strongly favoring positive outcomes",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 41,
    "verdict": "VERIFIED_VERBATIM",
@@ -482,6 +516,7 @@
   "source": "Tian et al. (EMNLP 2024)",
   "url": "https://arxiv.org/html/2407.13248",
   "quote": "higher levels of suspense",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 42,
    "verdict": "VERIFIED_SUBSTANCE",
@@ -496,6 +531,7 @@
   "source": "Sui, Zhu, Cheng, West, So, Long & Holtzman, Spoiler Alert (arXiv 2604.09854, Apr 2026)",
   "url": "https://arxiv.org/html/2604.09854v1",
   "quote": "fundamental inability to defer closure",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 43,
    "verdict": "VERIFIED_VERBATIM",
@@ -510,6 +546,7 @@
   "source": "Sui et al., Spoiler Alert (arXiv 2604.09854)",
   "url": "https://arxiv.org/html/2604.09854v1",
   "quote": "",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 44,
    "verdict": "VERIFIED_SUBSTANCE",
@@ -524,6 +561,7 @@
   "source": "Sui, LLMs Exhibit Significantly Lower Uncertainty in Creative Writing (arXiv 2602.16162, Feb 2026)",
   "url": "https://arxiv.org/html/2602.16162",
   "quote": "trite, repetitive, overly verbose, and cliché-ridden",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 45,
    "verdict": "VERIFIED_VERBATIM",
@@ -538,6 +576,7 @@
   "source": "Li, Zhu, Wu, Bao & Evans, Narrative Flattening (arXiv 2605.27878, May 2026)",
   "url": "https://arxiv.org/abs/2605.27878",
   "quote": "High-intensity emotions give way to neutrality",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 46,
    "verdict": "VERIFIED_VERBATIM",
@@ -552,6 +591,7 @@
   "source": "Nonaka & Perry (arXiv 2510.18932, Sep 2025)",
   "url": "https://arxiv.org/html/2510.18932v1",
   "quote": "less conflict-driven social dynamics",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 47,
    "verdict": "VERIFIED_VERBATIM",
@@ -566,6 +606,7 @@
   "source": "Beguš, Experimental Narratives (HSSC 2024; arXiv 2310.12902)",
   "url": "https://arxiv.org/html/2310.12902",
   "quote": "proneness to wrapping up each story with a moral lesson",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 48,
    "verdict": "VERIFIED_SUBSTANCE",
@@ -580,6 +621,7 @@
   "source": "Wang, Gao, Hu & Wan, Towards a Novel Benchmark (Findings ACL 2025)",
   "url": "https://aclanthology.org/2025.findings-acl.1114/",
   "quote": "high-starting, low-ending",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 49,
    "verdict": "VERIFIED_VERBATIM",
@@ -594,6 +636,7 @@
   "source": "DK & Hatzel, Do LLMs Always Tell the Same Stories? (arXiv 2606.17350)",
   "url": "https://arxiv.org/abs/2606.17350",
   "quote": "fail to meaningfully address this homogeneity",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 50,
    "verdict": "VERIFIED_VERBATIM",
@@ -608,6 +651,7 @@
   "source": "Jung, Choi, Chae & Jung, Style over Story (ACL 2026; arXiv 2510.02025)",
   "url": "https://arxiv.org/abs/2510.02025",
   "quote": "models consistently prioritize Style over narrative content elements",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 51,
    "verdict": "VERIFIED_VERBATIM",
@@ -622,6 +666,7 @@
   "source": "Rohrbacher et al., How LLMs Build Fictional Worlds (arXiv 2609.02482, Sep 2026)",
   "url": "https://arxiv.org/html/2609.02482v1",
   "quote": "roughly twice the human baseline",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 52,
    "verdict": "VERIFIED_VERBATIM",
@@ -636,6 +681,7 @@
   "source": "Li, Guo, Wu, Lee, Li & Xie, Lost in Stories (arXiv 2603.05890)",
   "url": "https://arxiv.org/abs/2603.05890",
   "quote": "most common in factual and temporal dimensions",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 53,
    "verdict": "VERIFIED_VERBATIM",
@@ -650,6 +696,7 @@
   "source": "Xie & Riedl, Creating Suspenseful Stories (arXiv 2402.17119)",
   "url": "https://arxiv.org/html/2402.17119",
   "quote": "poor understanding of story suspense",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 54,
    "verdict": "VERIFIED_VERBATIM",
@@ -664,6 +711,7 @@
   "source": "Matlin et al. (arXiv 2508.15794)",
   "url": "https://arxiv.org/abs/2508.15794",
   "quote": "do not process suspense in the same way as human readers",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 55,
    "verdict": "VERIFIED_VERBATIM",
@@ -678,6 +726,7 @@
   "source": "Hamilton & Mimno, Elias in the Lighthouse, Again? (arXiv 2605.26492, May 2026)",
   "url": "https://arxiv.org/html/2605.26492",
   "quote": "900 times more frequent in our corpus",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 56,
    "verdict": "VERIFIED_VERBATIM",
@@ -692,6 +741,7 @@
   "source": "Brzozowski & Chung, The Ghost Couple (arXiv 2606.02184)",
   "url": "https://arxiv.org/abs/2606.02184",
   "quote": "co-occurrence rates far exceed chance",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 57,
    "verdict": "VERIFIED_VERBATIM",
@@ -706,6 +756,7 @@
   "source": "Ahuja, Li & Lampinen, Beneath the Surface (arXiv 2604.05273)",
   "url": "https://arxiv.org/abs/2604.05273",
   "quote": "strong bias towards overly literal, explicit communication",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 58,
    "verdict": "VERIFIED_VERBATIM",
@@ -720,6 +771,7 @@
   "source": "Marco, Gonzalo, Mateo-Girona & del Castillo, Pron vs Prompt (EMNLP 2024; arXiv 2407.01119)",
   "url": "https://arxiv.org/html/2407.01119v2",
   "quote": "GPT-4 receives predominantly scores of 0/1, while Pron receives mostly 2/3",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 59,
    "verdict": "VERIFIED_VERBATIM",
@@ -734,6 +786,7 @@
   "source": "Marco, Gonzalo & Fresno, The Reader is the Metric (arXiv 2506.03310)",
   "url": "https://arxiv.org/abs/2506.03310",
   "quote": "thematic development, rhetorical variety, and sentiment dynamics",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 61,
    "verdict": "VERIFIED_VERBATIM",
@@ -748,6 +801,7 @@
   "source": "Marco, Rello & Gonzalo (COLING 2025; arXiv 2409.11547)",
   "url": "https://arxiv.org/html/2409.11547v1",
   "quote": "more predictable and formulaic narratives",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 62,
    "verdict": "VERIFIED_VERBATIM",
@@ -762,6 +816,7 @@
   "source": "Porter & Machery, Scientific Reports 14:26133 (2024-11-14)",
   "url": "https://www.nature.com/articles/s41598-024-76900-1",
   "quote": "poetry experience did not improve discrimination performance",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 63,
    "verdict": "VERIFIED_SUBSTANCE",
@@ -776,6 +831,7 @@
   "source": "Russell, Karpinska & Iyyer (ACL 2025; arXiv 2501.15654)",
   "url": "https://arxiv.org/abs/2501.15654",
   "quote": "misclassifies only 1 of 300 articles",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 64,
    "verdict": "VERIFIED_VERBATIM",
@@ -790,6 +846,7 @@
   "source": "Gómez-Rodríguez & Williams, A Confederacy of Models (Findings EMNLP 2023)",
   "url": "https://aclanthology.org/2023.findings-emnlp.966/",
   "quote": "Humans retain an edge in creativity",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 65,
    "verdict": "VERIFIED_VERBATIM",
@@ -804,6 +861,7 @@
   "source": "Gómez-Rodríguez & Williams (Findings EMNLP 2023)",
   "url": "https://aclanthology.org/2023.findings-emnlp.966/",
   "quote": "",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 66,
    "verdict": "VERIFIED_SUBSTANCE",
@@ -818,6 +876,7 @@
   "source": "Shaib, Chakrabarty, Garcia-Olano & Wallace, Measuring AI Slop in Text (arXiv 2509.19163)",
   "url": "https://arxiv.org/html/2509.19163v1",
   "quote": "generic, overly verbose, inaccurate, irrelevant to its intended purpose",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 67,
    "verdict": "VERIFIED_VERBATIM",
@@ -832,6 +891,7 @@
   "source": "Muñoz-Ortiz, Gómez-Rodríguez & Vilares, Artificial Intelligence Review 2024",
   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11422446/",
   "quote": "less variation when compared to human-generated sentences",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 68,
    "verdict": "VERIFIED_VERBATIM",
@@ -846,6 +906,7 @@
   "source": "Muñoz-Ortiz et al. 2024",
   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11422446/",
   "quote": "",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 69,
    "verdict": "VERIFIED_SUBSTANCE",
@@ -860,6 +921,7 @@
   "source": "Rodrigues, Sturm & Pinheiro, iScience (Feb 2026)",
   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12969083/",
   "quote": "broader and flatter distribution",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 70,
    "verdict": "VERIFIED_VERBATIM",
@@ -874,6 +936,7 @@
   "source": "Labbé, Labbé & Savoy (arXiv 2411.18382)",
   "url": "https://arxiv.org/abs/2411.18382",
   "quote": "too standardized sentences",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 71,
    "verdict": "VERIFIED_VERBATIM",
@@ -888,6 +951,7 @@
   "source": "Bakhshi, Saying More Than They Know (arXiv 2604.19768, Mar 2026)",
   "url": "https://arxiv.org/html/2604.19768",
   "quote": "deployed independently of argumentative occasion",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 73,
    "verdict": "VERIFIED_VERBATIM",
@@ -902,6 +966,7 @@
   "source": "Padmakumar & He (ICLR 2024; arXiv 2309.05196)",
   "url": "https://arxiv.org/html/2309.05196v2",
   "quote": "repeat higher-order n-grams more frequently",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 74,
    "verdict": "VERIFIED_VERBATIM",
@@ -916,11 +981,13 @@
   "source": "Anderson, Shah & Kreminski (Creativity & Cognition 2024; arXiv 2402.01536)",
   "url": "https://arxiv.org/abs/2402.01536",
   "quote": "less semantically distinct ideas with ChatGPT",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 75,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "less semantically distinct ideas with ChatGPT",
-   "note": "arXiv abstract carries the quote word for word, plus 'felt less responsible for the ideas they generated' and the 36-participant comparative study. Both halves of the claim hold."
+   "note": "arXiv abstract carries the quote word for word, plus 'felt less responsible for the ideas they generated' and the 36-participant comparative study. Both halves of the claim hold.",
+   "fromFile": "verdicts-ai-chunk-00.json"
   }
  },
  {
@@ -930,11 +997,13 @@
   "source": "Wenger & Kenett, Large language models are homogeneously creative (PNAS Nexus 5(3), 2026)",
   "url": "https://academic.oup.com/pnasnexus/article/5/3/pgag042/8529001",
   "quote": "much more similar to other LLM responses",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 76,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "much more similar to other LLM responses",
-   "note": "academic.oup.com returned HTTP 403 (Cloudflare); verified on the Wayback snapshot 20260819202540 of the same article. Quote exact. Table: AUT mu(V) LLM 0.459 vs human 0.699; DAT 0.632 vs 0.791; n=102 humans, n=22 LLMs - all exact. 'Switching models' half supported by 'it is likely the use of LLMs in general, rather than the use of a specific LLM, that homogenizes creative outputs' and the Llama-family analysis."
+   "note": "academic.oup.com returned HTTP 403 (Cloudflare); verified on the Wayback snapshot 20260819202540 of the same article. Quote exact. Table: AUT mu(V) LLM 0.459 vs human 0.699; DAT 0.632 vs 0.791; n=102 humans, n=22 LLMs - all exact. 'Switching models' half supported by 'it is likely the use of LLMs in general, rather than the use of a specific LLM, that homogenizes creative outputs' and the Llama-family analysis.",
+   "fromFile": "verdicts-ai-chunk-00.json"
   }
  },
  {
@@ -944,11 +1013,13 @@
   "source": "Akoury, Yang & Iyyer (Findings EMNLP 2023)",
   "url": "https://aclanthology.org/2023.findings-emnlp.151/",
   "quote": "702 (61%) state a preference for human-written dialogue",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 77,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "702 (61%) state a preference for human-written dialogue",
-   "note": "The ACL landing page holds only the abstract; verified in the authoritative PDF (aclanthology.org/2023.findings-emnlp.151.pdf), where the quote appears word for word. Every figure checks out: 'H: 64% vs G: 23%; rest ties', 'H: 66% vs G: 23%', logical consistency 'H: 61% vs G: 28%', flow 'H: 67% vs G: 21%'. Note the claim's 28 players and Disco Elysium framing also match."
+   "note": "The ACL landing page holds only the abstract; verified in the authoritative PDF (aclanthology.org/2023.findings-emnlp.151.pdf), where the quote appears word for word. Every figure checks out: 'H: 64% vs G: 23%; rest ties', 'H: 66% vs G: 23%', logical consistency 'H: 61% vs G: 28%', flow 'H: 67% vs G: 21%'. Note the claim's 28 players and Disco Elysium framing also match.",
+   "fromFile": "verdicts-ai-chunk-00.json"
   }
  },
  {
@@ -958,11 +1029,13 @@
   "source": "Akoury, Yang & Iyyer (Findings EMNLP 2023)",
   "url": "https://aclanthology.org/2023.findings-emnlp.151/",
   "quote": "illogical in hindsight",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 78,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "illogical in hindsight",
-   "note": "Quote is a verbatim annotation tag in the paper PDF. Body: 'as 32% of generations rated by at least one player are deemed illogical upon reading the next utterance' - the claim's '32% of GPT-4 game lines' drops the 'rated by at least one player' qualifier, a mild overstatement. Faction example confirmed: generation 'does not conform to the game's notion of an ultra-liberal character'."
+   "note": "Quote is a verbatim annotation tag in the paper PDF. Body: 'as 32% of generations rated by at least one player are deemed illogical upon reading the next utterance' - the claim's '32% of GPT-4 game lines' drops the 'rated by at least one player' qualifier, a mild overstatement. Faction example confirmed: generation 'does not conform to the game's notion of an ultra-liberal character'.",
+   "fromFile": "verdicts-ai-chunk-00.json"
   }
  },
  {
@@ -972,11 +1045,13 @@
   "source": "Mirowski, Mathewson, Pittman & Evans, Dramatron (CHI 2023; arXiv 2209.14958)",
   "url": "https://arxiv.org/abs/2209.14958",
   "quote": "on the nose, pun names",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 79,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "on the nose, pun names",
-   "note": "arxiv.org/abs page shows only the abstract; verified in the full paper via ar5iv render of the same arXiv ID 2209.14958. Section 5.3.1 is titled 'The system outputs are too literal and predictable' and contains 'relationships so tight and prescriptive', 'a noble endeavour, it will be stated in the dialogue', and 'silly' and 'on the nose, pun names'. Participants = 15 theatre and film industry professionals."
+   "note": "arxiv.org/abs page shows only the abstract; verified in the full paper via ar5iv render of the same arXiv ID 2209.14958. Section 5.3.1 is titled 'The system outputs are too literal and predictable' and contains 'relationships so tight and prescriptive', 'a noble endeavour, it will be stated in the dialogue', and 'silly' and 'on the nose, pun names'. Participants = 15 theatre and film industry professionals.",
+   "fromFile": "verdicts-ai-chunk-00.json"
   }
  },
  {
@@ -986,11 +1061,13 @@
   "source": "Mirowski et al., Dramatron (CHI 2023)",
   "url": "https://arxiv.org/abs/2209.14958",
   "quote": "Show, not tell: here we are just telling",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 80,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "Show, not tell: here we are just telling",
-   "note": "Verbatim in section 5.5.3 ('Lack of nuance and subtext') of the full paper via ar5iv. Supporting: 'A lot of information, a bit too verbalised, there should be more subtext' (p6); stageability from 5.5.2 'The system doesn't have an awareness of what is stageable and not stageable'; motivation from 5.5.4."
+   "note": "Verbatim in section 5.5.3 ('Lack of nuance and subtext') of the full paper via ar5iv. Supporting: 'A lot of information, a bit too verbalised, there should be more subtext' (p6); stageability from 5.5.2 'The system doesn't have an awareness of what is stageable and not stageable'; motivation from 5.5.4.",
+   "fromFile": "verdicts-ai-chunk-00.json"
   }
  },
  {
@@ -1000,11 +1077,13 @@
   "source": "Mirowski et al., Dramatron (CHI 2023)",
   "url": "https://arxiv.org/abs/2209.14958",
   "quote": "Where is the emotional motivation",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 81,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "Where is the emotional motivation",
-   "note": "Verbatim in section 5.5.4 ('Lack of a motivation for the characters'), preceded by 'The stories do not finish. The character journeys are not complete.' Logic gaps: 'participants noticed logical gaps in storytelling, lack of common sense, nuance and subtext'. Generation loops are section 5.4. Reached via ar5iv full text; abs page has abstract only."
+   "note": "Verbatim in section 5.5.4 ('Lack of a motivation for the characters'), preceded by 'The stories do not finish. The character journeys are not complete.' Logic gaps: 'participants noticed logical gaps in storytelling, lack of common sense, nuance and subtext'. Generation loops are section 5.4. Reached via ar5iv full text; abs page has abstract only.",
+   "fromFile": "verdicts-ai-chunk-00.json"
   }
  },
  {
@@ -1014,11 +1093,13 @@
   "source": "Lei, Zong, Li, Zhou & Liu, Beyond Direct Generation (arXiv 2510.23163, Oct 2025)",
   "url": "https://arxiv.org/html/2510.23163v1",
   "quote": "lack of thematic focus, out-of-character dialogue, and insufficient character development",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 82,
    "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "preliminary end-to-end experiments revealed these shortcomings, say the authors",
-   "note": "MISATTRIBUTION. The quoted string is verbatim on the page, but it describes the AUTHORS' OWN preliminary experiments: 'Our preliminary experiments with this end-to-end approach revealed suboptimal results. The generated screenplays often suffer from a lack of thematic focus, out-of-character dialogue, and insufficient character development.' The blind evaluation by 'over 20 experienced screenwriters' (professional Chinese television drama screenwriters) produced the Expert Score / 75% win rate, not this defect list. 'Mimicking screenplay style without conciseness or visual language' is also the authors' intro framing: 'outputs that superficially mimic screenplay style but lack the conciseness, visual language, and structural integrity'."
+   "note": "MISATTRIBUTION. The quoted string is verbatim on the page, but it describes the AUTHORS' OWN preliminary experiments: 'Our preliminary experiments with this end-to-end approach revealed suboptimal results. The generated screenplays often suffer from a lack of thematic focus, out-of-character dialogue, and insufficient character development.' The blind evaluation by 'over 20 experienced screenwriters' (professional Chinese television drama screenwriters) produced the Expert Score / 75% win rate, not this defect list. 'Mimicking screenplay style without conciseness or visual language' is also the authors' intro framing: 'outputs that superficially mimic screenplay style but lack the conciseness, visual language, and structural integrity'.",
+   "fromFile": "verdicts-ai-chunk-00.json"
   }
  },
  {
@@ -1028,11 +1109,13 @@
   "source": "Valdivia & Burelli, Evaluating Quality of Gaming Narratives Co-created with AI (arXiv 2509.04239)",
   "url": "https://arxiv.org/html/2509.04239",
   "quote": "overly positive or uninspired endings",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 83,
    "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "some studies identifying trends toward overly positive or uninspired endings",
-   "note": "MISATTRIBUTION. Quote is verbatim but is the authors citing prior literature in the introduction ('with some studies identifying trends toward overly positive or uninspired endings [13]'), not something the expert panel recorded. 'Unconvincing, repetitive, or misaligned with the desired tone or character development' is likewise the authors' framing in the introduction. Only the genre element is genuinely a panel finding: 'experts raised concerns about the degree to which the story aligns with, subverts, or engages with genre conventions'."
+   "note": "MISATTRIBUTION. Quote is verbatim but is the authors citing prior literature in the introduction ('with some studies identifying trends toward overly positive or uninspired endings [13]'), not something the expert panel recorded. 'Unconvincing, repetitive, or misaligned with the desired tone or character development' is likewise the authors' framing in the introduction. Only the genre element is genuinely a panel finding: 'experts raised concerns about the degree to which the story aligns with, subverts, or engages with genre conventions'.",
+   "fromFile": "verdicts-ai-chunk-00.json"
   }
  },
  {
@@ -1042,11 +1125,13 @@
   "source": "Rettberg blog reporting Jessica Witte (jilltxt.net, 2026-08-25; not peer-reviewed)",
   "url": "https://jilltxt.net/ai-generated-stories-have-longer-endings-than-human-stories/",
   "quote": "the story seems to end, then it ends again",
+  "angle": "peer-reviewed",
   "verdict": {
    "index": 84,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "the story seems to end, then it ends again",
-   "note": "Quote verbatim. Post by Jill Walker Rettberg, August 25 2026, reporting Jessica Witte's preprint - correctly flagged as not peer-reviewed. Confirmed: gpt-4o-mini stories vs pre-2022 human r/WritingPrompts stories; 'all 200 human and 200 AI stories'; 'human stories have quite a sharp upturn in the last 10% of the story, the LLM's stories start getting happier much earlier, from around the 70% mark'."
+   "note": "Quote verbatim. Post by Jill Walker Rettberg, August 25 2026, reporting Jessica Witte's preprint - correctly flagged as not peer-reviewed. Confirmed: gpt-4o-mini stories vs pre-2022 human r/WritingPrompts stories; 'all 200 human and 200 AI stories'; 'human stories have quite a sharp upturn in the last 10% of the story, the LLM's stories start getting happier much earlier, from around the 70% mark'.",
+   "fromFile": "verdicts-ai-chunk-00.json"
   }
  },
  {
@@ -1057,11 +1142,13 @@
   "url": "https://janefriedman.com/after-editing-two-ai-assisted-manuscripts-i-rewrote-my-client-agreement/",
   "page": "After Editing Two AI-Assisted Manuscripts, I Rewrote My Client Agreement",
   "quote": "",
+  "angle": "novelists,",
   "verdict": {
    "index": 85,
    "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "The craft was polished ... but the humanity was difficult to find",
-   "note": "No quote was supplied, so verbatim cannot apply. Mary Kole's guest post (August 13 2026) supports the substance: 'At first glance, both looked very polished'; 'The craft was polished ... but the humanity was difficult to find'; 'Instead of having an [author's intention to serve]'. Two attribution caveats: 'soulless' is Josh Bernoff quoted inside Kole's post ('They are also soulless'), and 'no subtext, no psychological reasoning behind it' is a reader comment by Sarah Chauncey that Kole endorses in reply ('No subtext is a great call')."
+   "note": "No quote was supplied, so verbatim cannot apply. Mary Kole's guest post (August 13 2026) supports the substance: 'At first glance, both looked very polished'; 'The craft was polished ... but the humanity was difficult to find'; 'Instead of having an [author's intention to serve]'. Two attribution caveats: 'soulless' is Josh Bernoff quoted inside Kole's post ('They are also soulless'), and 'no subtext, no psychological reasoning behind it' is a reader comment by Sarah Chauncey that Kole endorses in reply ('No subtext is a great call').",
+   "fromFile": "verdicts-ai-chunk-00.json"
   }
  },
  {
@@ -1072,11 +1159,13 @@
   "url": "https://bernoff.com/blog/how-editors-should-handle-ai-generated-manuscripts",
   "page": "How editors should handle AI-generated manuscripts",
   "quote": "There's no human on the other end",
+  "angle": "novelists,",
   "verdict": {
    "index": 86,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "there's no human on the other end",
-   "note": "Verbatim apart from a curly apostrophe and mid-sentence lowercase: 'When I read an AI-generated text, there's no human on the other end. That makes editing much harder.' Intent half supported: 'I'm in communication with the author and their ideas and intent... It's a human-to-human job.' Harder-not-easier supported: 'it's harder than that because of the psychology of editing'. Post dated February 5 2026."
+   "note": "Verbatim apart from a curly apostrophe and mid-sentence lowercase: 'When I read an AI-generated text, there's no human on the other end. That makes editing much harder.' Intent half supported: 'I'm in communication with the author and their ideas and intent... It's a human-to-human job.' Harder-not-easier supported: 'it's harder than that because of the psychology of editing'. Post dated February 5 2026.",
+   "fromFile": "verdicts-ai-chunk-00.json"
   }
  },
  {
@@ -1087,11 +1176,13 @@
   "url": "https://matthewvollmer.substack.com/p/i-asked-the-machine-to-tell-on-itself",
   "page": "I Asked the Machine to Tell on Itself: A Field Guide to AI Tells",
   "quote": "They are boring. They are flat",
+  "angle": "novelists,",
   "verdict": {
    "index": 87,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "They are boring. They are flat",
-   "note": "Verbatim: 'AI stories are bad in ways that no human has been bad before. They are boring. They are flat.' The 'no subtext or layers' element appears in the other pass at the same quote. Secondhand framing is accurate - Vollmer cites Post Alley 2024 and NPR 2023 for Clarke, not Clarke's own post."
+   "note": "Verbatim: 'AI stories are bad in ways that no human has been bad before. They are boring. They are flat.' The 'no subtext or layers' element appears in the other pass at the same quote. Secondhand framing is accurate - Vollmer cites Post Alley 2024 and NPR 2023 for Clarke, not Clarke's own post.",
+   "fromFile": "verdicts-ai-chunk-00.json"
   }
  },
  {
@@ -1102,11 +1193,13 @@
   "url": "https://matthewvollmer.substack.com/p/i-asked-the-machine-to-tell-on-itself",
   "page": "I Asked the Machine to Tell on Itself: A Field Guide to AI Tells",
   "quote": "",
+  "angle": "novelists,",
   "verdict": {
    "index": 88,
    "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "No one has verbal tics, dialect, or pattern of evasion",
-   "note": "No quote supplied. Page: 'Dialogue flattening: characters sound alike; no distinct idiolect. No one has verbal tics, dialect, or pattern of evasion' and 'As-you-know-Bob exposition: the model's default is to resolve mysteries with explanatory speech rather than action.' The clause 'everyone says what they mean' is the claimant's gloss - it is not stated on the page."
+   "note": "No quote supplied. Page: 'Dialogue flattening: characters sound alike; no distinct idiolect. No one has verbal tics, dialect, or pattern of evasion' and 'As-you-know-Bob exposition: the model's default is to resolve mysteries with explanatory speech rather than action.' The clause 'everyone says what they mean' is the claimant's gloss - it is not stated on the page.",
+   "fromFile": "verdicts-ai-chunk-00.json"
   }
  },
  {
@@ -1117,11 +1210,13 @@
   "url": "https://arxiv.org/abs/2604.03136",
   "page": "StoryScope: Investigating idiosyncrasies in AI fiction",
   "quote": "",
+  "angle": "novelists,",
   "verdict": {
    "index": 89,
    "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "AI dialogue serves philosophical debate more often (59% vs. 34%)",
-   "note": "No quote supplied. The abs page carries the abstract only; the figures are in the full text of the same paper (arxiv.org/html/2604.03136v6): section 4.1 'AI dialogue serves philosophical debate more often (59% vs. 34%)' and Table 16 'Dialogue Function -> philosophical debate 34% [human] 59% [AI]'. Numbers exact. The claim's word 'expository' is a gloss; the paper's feature is 'philosophical debate' as a dialogue function."
+   "note": "No quote supplied. The abs page carries the abstract only; the figures are in the full text of the same paper (arxiv.org/html/2604.03136v6): section 4.1 'AI dialogue serves philosophical debate more often (59% vs. 34%)' and Table 16 'Dialogue Function -> philosophical debate 34% [human] 59% [AI]'. Numbers exact. The claim's word 'expository' is a gloss; the paper's feature is 'philosophical debate' as a dialogue function.",
+   "fromFile": "verdicts-ai-chunk-00.json"
   }
  },
  {
@@ -1132,11 +1227,13 @@
   "url": "https://www.lesswrong.com/posts/nTuKjJBwMtMuuLonA/hot-take-problems-with-ai-prose",
   "page": "[Hot take] Problems with AI prose",
   "quote": "Claude does not use its preceding sentences to justify the claim",
+  "angle": "novelists,",
   "verdict": {
    "index": 90,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "Claude does not use its preceding sentences to justify the claim",
-   "note": "Fetched LessWrong post (sudo, 12 Apr 2026). Quote appears word for word inside: 'However, Claude does not use its preceding sentences to justify the claim by either evidence or analogy.' Claim's substance is reinforced by the adjacent sentence 'Claude's output is seven sentences, none of which justify any other.'"
+   "note": "Fetched LessWrong post (sudo, 12 Apr 2026). Quote appears word for word inside: 'However, Claude does not use its preceding sentences to justify the claim by either evidence or analogy.' Claim's substance is reinforced by the adjacent sentence 'Claude's output is seven sentences, none of which justify any other.'",
+   "fromFile": "verdicts-ai-chunk-01.json"
   }
  },
  {
@@ -1147,11 +1244,13 @@
   "url": "https://matthewvollmer.substack.com/p/i-asked-the-machine-to-tell-on-itself",
   "page": "I Asked the Machine to Tell on Itself: A Field Guide to AI Tells",
   "quote": "No grain: no proper nouns, no specific months, no brand names.",
+  "angle": "novelists,",
   "verdict": {
    "index": 91,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "No grain: no proper nouns, no specific months, no brand names",
-   "note": "Quote is verbatim but TRUNCATED: the source sentence continues '...no dialect, no idiosyncratic rhythm.' The claim's 'regional dialect markers' element rests on that cut tail, so quote and claim should be re-joined if cited. Page also carries 'The missing concrete particular: No Tuesday. No laundromat.'"
+   "note": "Quote is verbatim but TRUNCATED: the source sentence continues '...no dialect, no idiosyncratic rhythm.' The claim's 'regional dialect markers' element rests on that cut tail, so quote and claim should be re-joined if cited. Page also carries 'The missing concrete particular: No Tuesday. No laundromat.'",
+   "fromFile": "verdicts-ai-chunk-01.json"
   }
  },
  {
@@ -1162,11 +1261,13 @@
   "url": "https://associationofghostwriters.org/the-real-reason-not-to-use-ai-to-write-your-novel/",
   "page": "The Real Reason Not to Use AI to Write Your Novel",
   "quote": "",
+  "angle": "novelists,",
   "verdict": {
    "index": 92,
    "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "Observations don't accumulate meaning across a manuscript",
-   "note": "Claim carried no quote field, so verified on substance only. Both halves land: (a) 'The observations don't accumulate meaning across a manuscript the way they do when a human being has been sitting with the material for months'; (b) 'AI would have described grief. Buttercup shows a man who cannot stop moving...' — describing versus showing, exactly as claimed."
+   "note": "Claim carried no quote field, so verified on substance only. Both halves land: (a) 'The observations don't accumulate meaning across a manuscript the way they do when a human being has been sitting with the material for months'; (b) 'AI would have described grief. Buttercup shows a man who cannot stop moving...' — describing versus showing, exactly as claimed.",
+   "fromFile": "verdicts-ai-chunk-01.json"
   }
  },
  {
@@ -1177,11 +1278,13 @@
   "url": "https://livinghappy.substack.com/p/what-makes-a-story-look-like-ai-wrote",
   "page": "What Makes a Story \"Look\" Like AI Wrote It?",
   "quote": "It will fail to have the emotion linked to it",
+  "angle": "novelists,",
   "verdict": {
    "index": 93,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "it will fail to have the emotion linked to it",
-   "note": "Quote is word for word (source lowercases 'it' mid-sentence): 'AI can often get cause and effect, but it will repeat the same cause and effect over and over again OR it will fail to have the emotion linked to it.' Shallow POV element is supported by 'it tends to avoid deep point of view'; the sensory-detail element is supported only indirectly, via the worked deep-POV rewrite ('broken asphalt', 'flat wall') rather than a stated rule."
+   "note": "Quote is word for word (source lowercases 'it' mid-sentence): 'AI can often get cause and effect, but it will repeat the same cause and effect over and over again OR it will fail to have the emotion linked to it.' Shallow POV element is supported by 'it tends to avoid deep point of view'; the sensory-detail element is supported only indirectly, via the worked deep-POV rewrite ('broken asphalt', 'flat wall') rather than a stated rule.",
+   "fromFile": "verdicts-ai-chunk-01.json"
   }
  },
  {
@@ -1192,11 +1295,13 @@
   "url": "https://litreactor.com/columns/human-editors-vs-ai-editing/",
   "page": "Human Editors vs AI Editing: What AI Still Can't Do",
   "quote": "that average is equivalent to the least interesting choices possible",
+  "angle": "novelists,",
   "verdict": {
    "index": 94,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "that average is equivalent to the least interesting choices possible",
-   "note": "ATTRIBUTION DEFECT. Quote is word for word on the LitReactor page, but the page presents it as Ted Chiang's, quoted from The New Yorker — not Nick Bailey's own wording: 'As Ted Chiang from The New Yorker puts it: \"AI has to fill in the choices you are not making... that average is equivalent to the least interesting choices possible.\"' Cite Chiang (via LitReactor), not Bailey."
+   "note": "ATTRIBUTION DEFECT. Quote is word for word on the LitReactor page, but the page presents it as Ted Chiang's, quoted from The New Yorker — not Nick Bailey's own wording: 'As Ted Chiang from The New Yorker puts it: \"AI has to fill in the choices you are not making... that average is equivalent to the least interesting choices possible.\"' Cite Chiang (via LitReactor), not Bailey.",
+   "fromFile": "verdicts-ai-chunk-01.json"
   }
  },
  {
@@ -1207,11 +1312,13 @@
   "url": "https://countercraft.substack.com/p/art-without-intention",
   "page": "Art Without Intention",
   "quote": "Art is something that results from making a lot of choices.",
+  "angle": "novelists,",
   "verdict": {
    "index": 95,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "art is something that results from making a lot of choices",
-   "note": "ATTRIBUTION DEFECT, same shape as index 94. Quote is word for word (source lowercases 'art') but it is Ted Chiang's line quoted inside Lincoln Michel's essay, not Michel's. The one-choice-per-word figure is also Chiang's: 'a ten-thousand-word short story requires something on the order of ten thousand choices... a hundred-word prompt, you have made on the order of a hundred choices.' Michel's own supporting wording is 'It produces automatically, without intention.'"
+   "note": "ATTRIBUTION DEFECT, same shape as index 94. Quote is word for word (source lowercases 'art') but it is Ted Chiang's line quoted inside Lincoln Michel's essay, not Michel's. The one-choice-per-word figure is also Chiang's: 'a ten-thousand-word short story requires something on the order of ten thousand choices... a hundred-word prompt, you have made on the order of a hundred choices.' Michel's own supporting wording is 'It produces automatically, without intention.'",
+   "fromFile": "verdicts-ai-chunk-01.json"
   }
  },
  {
@@ -1222,11 +1329,13 @@
   "url": "https://arxiv.org/abs/2604.03136",
   "page": "StoryScope: Investigating idiosyncrasies in AI fiction",
   "quote": "AI-generated stories cluster in a shared region of narrative space",
+  "angle": "novelists,",
   "verdict": {
    "index": 96,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "AI-generated stories cluster in a shared region of narrative space",
-   "note": "Quote is verbatim in the arXiv abstract (Russell, Rajendhran, Pham, Iyyer, Wieting; submitted 3 Apr 2026, v6 10 Aug 2026). The numeric tail is NOT in the abstract, so I fetched the full HTML, where it is confirmed: 'Humans reference specific texts and authors at nearly double the AI rate (47% vs. 24%)' and 'Human stories draw from a broader narrative repertoire: they span more locations, carry more dialogue relative to narration...'. Every element of the claim stands. Note the corpus is five LLMs over 10,272 prompts, 61,608 stories."
+   "note": "Quote is verbatim in the arXiv abstract (Russell, Rajendhran, Pham, Iyyer, Wieting; submitted 3 Apr 2026, v6 10 Aug 2026). The numeric tail is NOT in the abstract, so I fetched the full HTML, where it is confirmed: 'Humans reference specific texts and authors at nearly double the AI rate (47% vs. 24%)' and 'Human stories draw from a broader narrative repertoire: they span more locations, carry more dialogue relative to narration...'. Every element of the claim stands. Note the corpus is five LLMs over 10,272 prompts, 61,608 stories.",
+   "fromFile": "verdicts-ai-chunk-01.json"
   }
  },
  {
@@ -1237,11 +1346,13 @@
   "url": "https://matthewvollmer.substack.com/p/i-asked-the-machine-to-tell-on-itself",
   "page": "I Asked the Machine to Tell on Itself: A Field Guide to AI Tells",
   "quote": "Scenes unfold at a constant rate",
+  "angle": "novelists,",
   "verdict": {
    "index": 98,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "Pacing flatness: scenes unfold at a constant rate",
-   "note": "Quote word for word: 'Pacing flatness: scenes unfold at a constant rate. No elision, no selective summary.' The sentence-length half is separately supported and is sharper than the claim states: 'Uniform sentence length (low burstiness)... LLM prose tends toward a metronomic 14-22-word median with small variance.'"
+   "note": "Quote word for word: 'Pacing flatness: scenes unfold at a constant rate. No elision, no selective summary.' The sentence-length half is separately supported and is sharper than the claim states: 'Uniform sentence length (low burstiness)... LLM prose tends toward a metronomic 14-22-word median with small variance.'",
+   "fromFile": "verdicts-ai-chunk-01.json"
   }
  },
  {
@@ -1252,11 +1363,13 @@
   "url": "https://bernoff.com/blog/how-editors-should-handle-ai-generated-manuscripts",
   "page": "How editors should handle AI-generated manuscripts",
   "quote": "could lull the reader to sleep",
+  "angle": "novelists,",
   "verdict": {
    "index": 99,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "lacks emotional valence and could lull the reader to sleep",
-   "note": "Quote word for word: 'This AI \"accent\" creates text that lacks emotional valence and could lull the reader to sleep.' One wording drift in the claim: Bernoff writes 'A boring, even tone' and 'AI text tends to be predictable' — he says even TONE, not even rhythm. Say tone if quoting him on this."
+   "note": "Quote word for word: 'This AI \"accent\" creates text that lacks emotional valence and could lull the reader to sleep.' One wording drift in the claim: Bernoff writes 'A boring, even tone' and 'AI text tends to be predictable' — he says even TONE, not even rhythm. Say tone if quoting him on this.",
+   "fromFile": "verdicts-ai-chunk-01.json"
   }
  },
  {
@@ -1267,11 +1380,13 @@
   "url": "https://recordcrash.substack.com/p/how-to-identify-ai-written-web-fiction",
   "page": "How to Identify AI-Written Web Fiction",
   "quote": "A new writer wouldn't repeat sentence shapes again and again",
+  "angle": "novelists,",
   "verdict": {
    "index": 100,
    "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "A novice author wouldn't repeatedly go for these sentence patterns",
-   "note": "NOT verbatim. The page's nearest wording is 'A new writer usually doesn't repeat the same sentence shapes again and again, or lean on the same kind of clunky repetition' — and that line sits inside an italicised block Makin presents as MODEL OUTPUT imitating the tell, not as his own assertion. His own-voice equivalent is the trueWording given, from the parody passage above it. Substance holds either way; the supplied quote does not."
+   "note": "NOT verbatim. The page's nearest wording is 'A new writer usually doesn't repeat the same sentence shapes again and again, or lean on the same kind of clunky repetition' — and that line sits inside an italicised block Makin presents as MODEL OUTPUT imitating the tell, not as his own assertion. His own-voice equivalent is the trueWording given, from the parody passage above it. Substance holds either way; the supplied quote does not.",
+   "fromFile": "verdicts-ai-chunk-01.json"
   }
  },
  {
@@ -1282,11 +1397,13 @@
   "url": "https://recordcrash.substack.com/p/how-to-identify-ai-written-web-fiction",
   "page": "How to Identify AI-Written Web Fiction",
   "quote": "Writing keeps swinging between long comparisons, then short stock phrases",
+  "angle": "novelists,",
   "verdict": {
    "index": 101,
    "verdict": "VERIFIED_SUBSTANCE",
    "trueWording": "Alternating loquacious ponderous similes and tiny sentences made out of cliches",
-   "note": "NOT verbatim. Page reads 'The writing kept swinging between two modes: long, heavy comparisons, then short lines that sounded like stock phrases' (again inside the model-output demo block); Makin's own-voice line is the trueWording given. The cliche-well half IS nearly verbatim and is his own voice: 'Once your story has reached a local minimum of samey cliches, it won't stop going to the same well,' against 'even bad ones will \"give it a rest\" when they notice.'"
+   "note": "NOT verbatim. Page reads 'The writing kept swinging between two modes: long, heavy comparisons, then short lines that sounded like stock phrases' (again inside the model-output demo block); Makin's own-voice line is the trueWording given. The cliche-well half IS nearly verbatim and is his own voice: 'Once your story has reached a local minimum of samey cliches, it won't stop going to the same well,' against 'even bad ones will \"give it a rest\" when they notice.'",
+   "fromFile": "verdicts-ai-chunk-01.json"
   }
  },
  {
@@ -1297,11 +1414,13 @@
   "url": "https://livinghappy.substack.com/p/what-makes-a-story-look-like-ai-wrote",
   "page": "What Makes a Story \"Look\" Like AI Wrote It?",
   "quote": "The rhythm is becoming recognizable as an AI pattern",
+  "angle": "novelists,",
   "verdict": {
    "index": 102,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "the rhythm is becoming recognizable as an AI pattern",
-   "note": "QUOTE SPLICE. The quotation is word for word, but it belongs to a DIFFERENT tell: it closes the 'COMMA + LIKE or + AS IF' section and describes that construction's rhythm, not fragments or em-dashes. The claim's two structural elements are nonetheless supported elsewhere on the page: 'each sentence fragment is its own paragraph... Often these come at an end of a scene, right before a \"hook\" to read more' and, for em-dashes, 'There's one in every paragraph.' Do not attach this quote to the fragment/em-dash sentence."
+   "note": "QUOTE SPLICE. The quotation is word for word, but it belongs to a DIFFERENT tell: it closes the 'COMMA + LIKE or + AS IF' section and describes that construction's rhythm, not fragments or em-dashes. The claim's two structural elements are nonetheless supported elsewhere on the page: 'each sentence fragment is its own paragraph... Often these come at an end of a scene, right before a \"hook\" to read more' and, for em-dashes, 'There's one in every paragraph.' Do not attach this quote to the fragment/em-dash sentence.",
+   "fromFile": "verdicts-ai-chunk-01.json"
   }
  },
  {
@@ -1312,11 +1431,13 @@
   "url": "https://tropes.fyi/directory",
   "page": "Tropes - AI Writing Pattern Directory",
   "quote": "He published this. Openly. In a book.",
+  "angle": "novelists,",
   "verdict": {
    "index": 103,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "He published this. Openly. In a book. As a priest.",
-   "note": "Quote is verbatim but truncated — the directory's example runs on to 'As a priest.' Claim itself is squarely supported by the entry: 'Excessive use of very short sentences or sentence fragments as standalone paragraphs for MANUFACTURED EMPHASIS... It's an inhuman style and no real person writes first drafts this way because it doesn't match how humans think or speak.' Source is undated and self-published; treat as illustrative, not evidentiary."
+   "note": "Quote is verbatim but truncated — the directory's example runs on to 'As a priest.' Claim itself is squarely supported by the entry: 'Excessive use of very short sentences or sentence fragments as standalone paragraphs for MANUFACTURED EMPHASIS... It's an inhuman style and no real person writes first drafts this way because it doesn't match how humans think or speak.' Source is undated and self-published; treat as illustrative, not evidentiary.",
+   "fromFile": "verdicts-ai-chunk-01.json"
   }
  },
  {
@@ -1327,11 +1448,13 @@
   "url": "https://www.textsight.ai/blog/ai-rhythm-explained/",
   "page": "What 'AI Rhythm' Means",
   "quote": "AI rhythm is the mechanical, metronomic quality of text",
+  "angle": "novelists,",
   "verdict": {
    "index": 104,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "AI rhythm is the mechanical, metronomic quality of text",
-   "note": "Quote verbatim but truncated ('...of text generated by language models'). Figures confirmed on the page: 'GPT-4o generates approximately 85% of its sentences in the 15-28 word range' and 'Human prose, by contrast, typically spans from 4 to 55+ words without clustering around a central point.' The Gemini element is looser than the claim states: the page says 'Gemini Pro demonstrates paragraph-level rhythm... maintaining 4-5 sentences per paragraph consistently' — a sentence COUNT, not 'nearly identical length.' Vendor blog (TextSight, by its own founder/CEO), no method or sample disclosed; the unreplicated-vendor caveat in the claim is warranted and must survive."
+   "note": "Quote verbatim but truncated ('...of text generated by language models'). Figures confirmed on the page: 'GPT-4o generates approximately 85% of its sentences in the 15-28 word range' and 'Human prose, by contrast, typically spans from 4 to 55+ words without clustering around a central point.' The Gemini element is looser than the claim states: the page says 'Gemini Pro demonstrates paragraph-level rhythm... maintaining 4-5 sentences per paragraph consistently' — a sentence COUNT, not 'nearly identical length.' Vendor blog (TextSight, by its own founder/CEO), no method or sample disclosed; the unreplicated-vendor caveat in the claim is warranted and must survive.",
+   "fromFile": "verdicts-ai-chunk-01.json"
   }
  }
 ]

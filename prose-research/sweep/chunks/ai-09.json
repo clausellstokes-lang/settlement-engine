@@ -2,157 +2,147 @@
  "name": "ai",
  "chunk": 9,
  "indices": [
-  210,
-  211,
-  212,
-  213,
-  214,
-  215,
-  216,
-  217,
-  218,
-  219,
-  220,
-  221,
-  222,
-  223,
-  224
+  240,
+  241,
+  242,
+  243,
+  244,
+  245,
+  246,
+  247,
+  248,
+  249,
+  250,
+  251,
+  252,
+  253
  ],
  "claims": [
   {
-   "index": 210,
-   "feature": "genre and tone misalignment",
-   "claim": "Narrative-design experts list AI game narrative failures: unconvincing or repetitive content, wrong genre, uneven quality across sessions, and a bias toward overly positive endings.",
-   "source": "Valdivia & Burelli, arXiv 2509.04239, 2025-09-04",
-   "url": "https://arxiv.org/html/2509.04239",
-   "quote": "overly positive or uninspired endings",
-   "page": ""
-  },
-  {
-   "index": 211,
-   "feature": "industry sentiment",
-   "claim": "63% of game design and narrative workers say generative AI harms the industry (GDC 2026, n>2,300); positive views fell to 7%.",
-   "source": "Game Developer, 2026-02-03",
-   "url": "https://www.gamedeveloper.com/business/one-third-of-game-workers-use-generative-ai-but-half-think-it-s-bad-for-the-industry",
-   "quote": "a regurgitated amalgamation of everything that's come before",
-   "page": ""
-  },
-  {
-   "index": 212,
-   "feature": "middle-of-the-road adventure text",
-   "claim": "ChatGPT-written RPG adventures land at the most ordinary text possible; the quality floor comes with an equal ceiling.",
-   "source": "H. Tucker Cobey, Epic Table Games, 2023-07-24",
-   "url": "https://epictablegames.com/onebookshelf-aka-drivethrurpg-bans-primarily-ai-generated-content/",
-   "quote": "the most ordinary, middle-of-the-road adventure text",
-   "page": ""
-  },
-  {
-   "index": 213,
-   "feature": "marketplace ban wording",
-   "claim": "DMs Guild and DriveThruRPG refuse commercial content primarily written by AI language generators (effective 2023-07-31) while allowing tagged AI art.",
-   "source": "OneBookShelf policy via EN World thread",
-   "url": "https://www.enworld.org/threads/dms-guild-and-drivethrurpg-ban-ai-written-works-requires-labels-for-ai-generated-art.698936/",
-   "quote": "primarily written by AI language generators",
-   "page": ""
-  },
-  {
-   "index": 214,
-   "feature": "publisher pledge",
-   "claim": "Kobold Press pledges no AI-generated text in game design, framing LLM text as fine for chatbots but not for play with friends.",
-   "source": "Wolfgang Baur, Kobold Press 'No AI Pledge'",
-   "url": "https://koboldpress.com/state-of-play-kobold-press-issues-the-no-ai-pledge/",
-   "quote": "we don't use AI to generate text",
-   "page": ""
-  },
-  {
-   "index": 215,
-   "feature": "publisher bans are ethical not qualitative",
-   "claim": "Paizo, Chaosium, WotC, Renegade, Stonemaier, Free League ban AI text/art on ethics and livelihood grounds; only Monte Cook Games gives a quality verdict.",
-   "source": "Geeknative roundup",
-   "url": "https://www.geeknative.com/221420/the-human-touch-the-growing-list-of-tabletop-companies-banning-ai/",
-   "quote": "exact opposite of inspiration",
-   "page": ""
-  },
-  {
-   "index": 216,
-   "feature": "AI RPG text stagnant and obvious",
-   "claim": "RPG crowdfunding backers report AI-written project text is easy to catch and has not improved in three years; human creators now fear tripping the same alarm.",
-   "source": "EN World, 'AI is destroying crowdfunding' (user Agamon, 2026-08-25)",
-   "url": "https://www.enworld.org/threads/ai-is-destroying-crowdfunding.720435/",
-   "quote": "it's been at the same level for three years",
-   "page": ""
-  },
-  {
-   "index": 217,
-   "feature": "series-level beat repetition",
-   "claim": "Letting AI draft sequels from the same source documents reproduced the first book's story beats; prose stayed 'competent but slightly mechanical' with 'not X but Y'.",
-   "source": "Jon Del Arroz, 2026-03-16",
-   "url": "https://substack.aicentral.blog/p/i-let-ai-write-three-complete-novels",
-   "quote": "producing repetitive story beats",
-   "page": ""
-  },
-  {
-   "index": 218,
-   "feature": "prompt shipped in a published novel",
-   "claim": "A Kindle Unlimited novel (Darkhollow Academy: Year 2, June 2025) went out with an AI rewrite prompt still in the text; Amazon's AI disclosure is not shown to readers.",
-   "source": "Book Riot, 'Can Kindle Unlimited Survive AI?'",
-   "url": "https://bookriot.com/can-kindle-unlimited-survive-ai/",
+   "index": 240,
+   "feature": "machine detectors (vendor rebuttal)",
+   "claim": "A detector vendor's rebuttal disputes the Stanford sample (91 forum essays, 8th-grade comparison, old detector version) but still reports a 5.04% false-positive rate on 1,500+ IELTS essays — roughly one wrongful accusation in twenty (vendor with a stake).",
+   "source": "Originality.AI, 2025-12-11",
+   "url": "https://originality.ai/blog/are-ai-checker-biased-against-non-native-english-speakers",
    "quote": "",
-   "page": ""
+   "page": "Are AI Checkers Biased Against Non-Native English Speakers?"
   },
   {
-   "index": 219,
-   "feature": "reader-side identification criteria",
-   "claim": "Goodreads readers flag ~296 books as obviously AI-generated on the basis of AI cover art plus stereotypical text patterns at slop-level frequency.",
-   "source": "Goodreads list 'Obviously AI-generated'",
-   "url": "https://www.goodreads.com/list/show/221372.Obviously_AI_generated",
-   "quote": "stereotypical text patterns",
-   "page": ""
+   "index": 241,
+   "feature": "machine detectors",
+   "claim": "OpenAI withdrew its own AI-text classifier within six months for low accuracy after stating at launch that reliable detection of all AI-written text is impossible.",
+   "source": "Search Engine Land — Danny Goodwin, 2023-07-26",
+   "url": "https://searchengineland.com/openai-ai-classifier-no-longer-available-429912",
+   "quote": "It is impossible to reliably detect all AI-written text",
+   "page": "OpenAI's AI Text Classifier no longer available"
   },
   {
-   "index": 220,
-   "feature": "false-positive hazard",
-   "claim": "A human-written indie RPG was review-bombed as ChatGPT slop because the story 'felt artificial'; reader tells fire on human work too.",
-   "source": "Outlook Respawn on Shrine's Legacy, 2025-12-15",
-   "url": "https://respawn.outlookindia.com/gaming/gaming-news/shrines-legacy-devs-deny-ai-slop-chatgpt-rumors",
-   "quote": "the story felt artificial",
-   "page": ""
+   "index": 242,
+   "feature": "machine detectors (false positives on canonical prose)",
+   "claim": "GPTZero flagged a section of the US Constitution and selections from the Bible as AI-generated because heavily trained-on human texts are exactly what models reproduce.",
+   "source": "Sensei Enterprises — Sharon D. Nelson, 2023-07-18",
+   "url": "https://senseient.com/ride-the-lightning/ai-detector-believes-the-u-s-constitution-was-written-by-ai/",
+   "quote": "Selections from The Bible also show up as AI-generated",
+   "page": "AI Detector Believes the U.S. Constitution Was Written by AI"
   },
   {
-   "index": 221,
-   "feature": "em dash",
-   "claim": "There is no hard evidence that chatbots use more em dashes than professional human writers; their prevalence in AI output reflects training on human prose.",
-   "source": "The Ringer — Brian Phillips, 2025-08-20",
-   "url": "https://www.theringer.com/2025/08/20/pop-culture/em-dash-use-ai-artificial-intelligence-chatgpt-google-gemini",
-   "quote": "how reliant the AI companies are on the human writers",
-   "page": "Stop AI-Shaming Our Precious, Kindly Em Dashes—Please"
+   "index": 243,
+   "feature": "machine detectors (institutional)",
+   "claim": "Vanderbilt disabled Turnitin's detector: even the vendor's claimed 1% false-positive rate implies about 750 wrongly flagged papers per 75,000, with extra risk to non-native writers, and reliable detection may not be possible at all.",
+   "source": "Vanderbilt University Brightspace, 2023-08-16",
+   "url": "https://www.vanderbilt.edu/brightspace/2023/08/16/guidance-on-ai-detection-and-why-were-disabling-turnitins-ai-detector/",
+   "quote": "if it is even possible",
+   "page": "Guidance on AI Detection and Why We're Disabling Turnitin's AI Detector"
   },
   {
-   "index": 222,
-   "feature": "em dash",
-   "claim": "The em dash was Emily Dickinson's signature mark, restored by later editors after publishers stripped it; treating it as an AI tell confuses the tool with the intent behind it.",
-   "source": "Focus Lab — Nadine Kavanaugh, 2026-02-09",
-   "url": "https://www.focuslab.agency/blog/the-em-dash-is-not-an-ai-tell",
-   "quote": "Machines use it because great writers always have.",
-   "page": "The Em Dash Is Not an AI Tell"
+   "index": 244,
+   "feature": "machine detectors (theory)",
+   "claim": "Recursive paraphrasing breaks watermark, neural, zero-shot and retrieval detectors, and the best achievable detector degrades toward random as LLM text distributions approach human ones; spoofing can also make human text read as AI.",
+   "source": "arXiv 2303.11156 — Sadasivan et al., Can AI-Generated Text be Reliably Detected?",
+   "url": "https://arxiv.org/abs/2303.11156",
+   "quote": "our recursive paraphrasing method can significantly reduce detection rates",
+   "page": "Can AI-Generated Text be Reliably Detected?"
   },
   {
-   "index": 223,
-   "feature": "em dash",
-   "claim": "Google Books Ngram data show em dash frequency in published books has stayed high for centuries, so ChatGPT is mirroring professional convention rather than exhibiting a machine signature.",
-   "source": "SALT.agency — Sarah Mitchell, 2026-01-29",
-   "url": "https://salt.agency/blog/in-defence-of-the-em-dash-what-the-ai-writing-debate-gets-wrong/",
-   "quote": "There is no simple formula for detecting AI writing.",
-   "page": "In Defence of the em dash"
+   "index": 245,
+   "feature": "human detection in the wild",
+   "claim": "Unmodified GPT-4 answers submitted to five real university psychology modules went 94% undetected by markers and scored about half a grade boundary above real students.",
+   "source": "PLOS ONE — Scarfe et al., 2024",
+   "url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0305354",
+   "quote": "94% of our AI submissions were undetected",
+   "page": "A real-world test of artificial intelligence infiltration of a university examinations system"
   },
   {
-   "index": 224,
-   "feature": "em dash",
-   "claim": "An AP Stylebook editor confirms em dashes are ubiquitous in professional journalism and predate AI; avoiding them to dodge suspicion lets machines dictate human style in a feedback loop.",
-   "source": "Writer's Guide (Substack) — Robert Roy Britt, 2026-07-28",
-   "url": "https://writersguide.substack.com/p/dont-let-ai-ban-the-em-dash",
-   "quote": "Em dashes aren't the problem.",
-   "page": "AI's Assault on the Em Dash Should Worry All Writers"
+   "index": 246,
+   "feature": "human heuristics",
+   "claim": "Across six experiments (N = 4,600) people could not detect AI self-presentations and leaned on wrong cues — first-person pronouns, contractions, family topics — which AI can exploit to read as more human than humans.",
+   "source": "PNAS 2023 / arXiv 2206.07271 — Jakesch, Hancock, Naaman",
+   "url": "https://arxiv.org/abs/2206.07271",
+   "quote": "more human than human",
+   "page": "Human heuristics for AI-generated language are flawed"
+  },
+  {
+   "index": 247,
+   "feature": "human heuristics",
+   "claim": "Untrained evaluators distinguished GPT-3 stories, news and recipes from human text at chance; training lifted accuracy only to 55%, and evaluators gave contradictory reasons for their calls.",
+   "source": "ACL 2021 / arXiv 2107.00061 — Clark et al.",
+   "url": "https://arxiv.org/abs/2107.00061",
+   "quote": "often contradictory reasons evaluators gave for their judgments",
+   "page": "All That's 'Human' Is Not Gold"
+  },
+  {
+   "index": 248,
+   "feature": "human heuristics (overconfidence)",
+   "claim": "254 Czech readers scored 55.4% without feedback, wrongly expecting AI text to be rigid and administrative and readable text to be human, and made the most errors when most confident (below chance at peak confidence).",
+   "source": "arXiv 2505.01877 — Milička, Marklová, Drobil, Pospíšilová, 2025",
+   "url": "https://arxiv.org/html/2505.01877",
+   "quote": "make the most errors precisely when they feel most confident",
+   "page": "Humans can learn to detect AI-generated texts, or at least learn when they can't"
+  },
+  {
+   "index": 249,
+   "feature": "expert detection (contrast case)",
+   "claim": "Five heavy ChatGPT users' majority vote misclassified only 1 of 300 articles even under paraphrase and humanization, but they relied on AI vocabulary plus holistic judgments of formality, originality and clarity — not punctuation counts.",
+   "source": "ACL 2025 / arXiv 2501.15654 — Russell, Karpinska, Iyyer",
+   "url": "https://arxiv.org/abs/2501.15654",
+   "quote": "misclassifies only 1 of 300 articles",
+   "page": "People who frequently use ChatGPT for writing tasks are accurate and robust detectors of AI-generated text"
+  },
+  {
+   "index": 250,
+   "feature": "reader preference (poetry)",
+   "claim": "696 non-expert readers judged AI imitations of ten canonical poets more human and slightly better than the originals, because the imitations strip the ambiguity and complexity that inexperienced readers read as 'not making sense'.",
+   "source": "The Conversation — Jon Stone, 2024-11-15 (on Porter & Machery, Sci. Reports 2024)",
+   "url": "https://theconversation.com/people-cant-tell-the-difference-between-human-and-ai-generated-poetry-new-study-243750",
+   "quote": "slightly preferring the imitation to the real thing",
+   "page": "People can't tell the difference between human and AI-generated poetry"
+  },
+  {
+   "index": 251,
+   "feature": "reader preference (critique)",
+   "claim": "The poetry-indistinguishability result collapses under expert reading: the AI poems separate at 87.8% on formal metrics alone, paid-per-task raters were scoring comprehensibility, and imitation of known styles cannot test the innovation human poets are judged on.",
+   "source": "The Luddite — Nature's Folly",
+   "url": "https://theluddite.org/post/ai-poetry.html",
+   "quote": "human poets are expected to innovate on style",
+   "page": "A Response to 'AI-generated poetry is indistinguishable...'"
+  },
+  {
+   "index": 252,
+   "feature": "homogenization",
+   "claim": "AI-idea assistance made weaker writers' stories up to 26.6% better written and 22.6% more enjoyable, yet made stories 10.7% more similar to each other — the real failure is collective sameness, invisible in any single text's surface features.",
+   "source": "ScienceDaily on Doshi & Hauser, Science Advances, 2024-07-12",
+   "url": "https://www.sciencedaily.com/releases/2024/07/240712222127.htm",
+   "quote": "up to 26.6% better written",
+   "page": "AI found to boost individual creativity -- at the expense of less varied content"
+  },
+  {
+   "index": 253,
+   "feature": "originality (where the gap actually sits)",
+   "claim": "Ten professional writers applying a 14-test Torrance creative-writing rubric found LLM stories pass 3–10x fewer tests than professionals', with the deficit in originality and elaboration rather than fluency or structure; LLM judges did not correlate with the experts.",
+   "source": "CHI 2024 / arXiv 2309.14556 — Chakrabarty et al.",
+   "url": "https://arxiv.org/abs/2309.14556",
+   "quote": "pass 3-10X less TTCW tests",
+   "page": "Art or Artifice? Large Language Models and the False Promise of Creativity"
   }
  ]
 }
