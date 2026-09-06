@@ -25412,6 +25412,20 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r7.json"
   },
+  "531": {
+   "index": 531,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Writers who want to take responsibility are wary of it",
+   "note": "Raw page fetched live. In her answer to Christy she says she wants to quote from Steering the Craft, 'On p. 56-57 is a little essay on the passive voice', and the quoted essay ends with this sentence; 'it' is the passive voice. Every limb supported.",
+   "fromFile": "verdicts-leguin-i531-560.json"
+  },
+  "532": {
+   "index": 532,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "one of the lovely versatilities of the verb",
+   "note": "Same answer to Christy, same quoted pp. 56-57 essay, sentence immediately preceding: where the passive does belong, she says, we ought to use it freely. Both limbs of the claim supported.",
+   "fromFile": "verdicts-leguin-i531-560.json"
+  },
   "533": {
    "index": 533,
    "verdict": "SKIPPED_TRIAGE",
@@ -25447,6 +25461,27 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r7.json"
   },
+  "538": {
+   "index": 538,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "steady, and you fall into the flow of the gait",
+   "note": "Walking paragraph on the live page; it continues that you cover ground while seeing everything around you. The immediately preceding paragraph describes the running story as 'fast-paced, suspenseful', so the contrast limb holds; a third type (dancing) follows.",
+   "fromFile": "verdicts-leguin-i531-560.json"
+  },
+  "539": {
+   "index": 539,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A writer is a person who cares what words mean",
+   "note": "Second paragraph of the live page, opening the sentence; it continues with what they say and how. Undated, signed Ursula K. Le Guin.",
+   "fromFile": "verdicts-leguin-i531-560.json"
+  },
+  "540": {
+   "index": 540,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "these are the names of the writer's tools",
+   "note": "'From the Introduction' section on the live Steering the Craft page. The preceding sentence lists subject, predicate, object, adjective and adverb, past tense and past perfect tense, so every grammar term in the claim is on the page. Page describes the book as a complete revision of the 1998 edition.",
+   "fromFile": "verdicts-leguin-i531-560.json"
+  },
   "541": {
    "index": 541,
    "verdict": "SKIPPED_TRIAGE",
@@ -25468,6 +25503,20 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "544": {
+   "index": 544,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Le Guin is inconsistent, untruthful, in her worldbuilding - openly, directly so",
+   "note": "Claim supplied no quotation, so graded on substance. Live Medium URL returned 403; reached via Wayback raw capture 20250908044316id_. Roberts introduces the Spufford block quote with a sentence saying he differs from Spufford's account, then says he would put it slightly differently, grants that Le Guin is indeed careful, and then asserts the wording above (italic emphasis on the negating prefixes). Minor metadata note: the capture's latestPublishedAt is 2023-02-06, one day off the claim's stated 5 February 2023.",
+   "fromFile": "verdicts-leguin-i531-560.json"
+  },
+  "545": {
+   "index": 545,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the deep consistency that allows an imagined world to unfold",
+   "note": "Inside the block quotation Roberts reproduces from Spufford, The Child That Books Built (2002), 84-85, cited in-page. Spufford is describing Le Guin's Earthsea novels and says this is what they shared with Tolkien; the sentence continues 'from its premises solidly, step by certain step'. Reached via Wayback raw capture.",
+   "fromFile": "verdicts-leguin-i531-560.json"
+  },
   "546": {
    "index": 546,
    "verdict": "SKIPPED_TRIAGE",
@@ -25475,12 +25524,34 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "547": {
+   "index": 547,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "too scrupulous in her worldbuilding to leave this detail",
+   "note": "Paragraph on the gates of horn and ivory. The same sentence carries the parenthetical reason (Earthsea has no elephants) and the gloss, which the page renders as a tooth of the Great Dragon. All three limbs supported. Reached via Wayback raw capture.",
+   "fromFile": "verdicts-leguin-i531-560.json"
+  },
   "548": {
    "index": 548,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
+  },
+  "549": {
+   "index": 549,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "an elegant way of acknowledging her major influence",
+   "note": "Page gives the True Speech word for rock as tolk and for sea as inien, then reads Earthsea as tolk-inien, i.e. Tolkienian, followed by this phrase. Roberts frames it as what Le Guin is saying; the reading is his. Reached via Wayback raw capture.",
+   "fromFile": "verdicts-leguin-i531-560.json"
+  },
+  "550": {
+   "index": 550,
+   "verdict": "PARTIAL",
+   "trueWording": "A mage can control only what is near him",
+   "note": "The quotation is exact and the p.48 marker is on the page, but the raw markup shows the <blockquote> opens at 'Here is the reason.' and closes after '[48]' - so the two-true-names rule, the 'sets the limits of that power' sentence and the quoted line are all one continuous quotation from the novel, with no Roberts commentary between them. Roberts's own adjacent sentences run the other way: he calls exact-and-whole naming impossible and says the magic system 'is and is not' consistent. The claim's paraphrase also drops 'what is near him', which is a separate limit from naming.",
+   "unsupportedLimb": "the limb making the two-true-names rule and the mage's-limit inference Roberts's own note - both sit inside the quoted p.48 novel passage, not in his commentary",
+   "fromFile": "verdicts-leguin-i531-560.json"
   },
   "551": {
    "index": 551,
@@ -25496,6 +25567,20 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "553": {
+   "index": 553,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "incredible sentences, artful descriptions, and expert use of setting and tone",
+   "note": "Live reactormag page, byline Sean Guynes, published April 29 2020, in the paragraph beginning 'The dark is a powerful fictive tool'. The clause continues 'by now all obvious staples of her work as a writer', supporting that limb.",
+   "fromFile": "verdicts-leguin-i531-560.json"
+  },
+  "554": {
+   "index": 554,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "with Ged as a regular mouthpiece-for pages at a time!",
+   "note": "Live reactormag page, byline Sean Guynes, published May 6 2020, paragraph beginning 'Of course, comparisons aren't everything.' The clause continues 'for musings about power and responsibility, life and death, doing and being', supporting both the subject-matter and the pages-at-a-time limbs.",
+   "fromFile": "verdicts-leguin-i531-560.json"
+  },
   "555": {
    "index": 555,
    "verdict": "SKIPPED_TRIAGE",
@@ -25510,12 +25595,33 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
   },
+  "557": {
+   "index": 557,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "you get things like Don't Meddle. Keep the Balance",
+   "note": "Coyote's Song Conclusion (chapter 20), ~1.9k characters in, reached via the supplied Wayback raw capture. Erlich introduces it as Le Guin responding to the 1975 Le Guin issue of Science-Fiction Studies, quotes 'If you dissect the ideas out of' the Earthsea trilogy, gives a third example, and cites (45); the page's own word is 'Fortune-cookie ideas'. Authorship confirmed from CoyoteHome.htm.",
+   "fromFile": "verdicts-leguin-i531-560.json"
+  },
   "558": {
    "index": 558,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-leguin-triage-r8.json"
+  },
+  "559": {
+   "index": 559,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "teaching works and not Sister Ursula Explaining It All",
+   "note": "Coyote's Song chapter 12, 'Other Lessons: Picture Books', within the Fish Soup section, reached via the supplied Wayback raw capture. Page attributes it to a sly sense of humor (US spelling), glossed as the mature comic sense. Page hedges slightly more than the claim: it says this is 'Part of what' keeps her work 'almost always' so.",
+   "fromFile": "verdicts-leguin-i531-560.json"
+  },
+  "560": {
+   "index": 560,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Le Guin has her certainties, but they are rare",
+   "note": "Coyote's Song Introduction, opening pages (~2k characters in), reached via the supplied Wayback raw capture. All limbs on the page: he accepts her didacticism as a given, avoids the word because readers hear it negatively, offers 'dialogic didacticism', and the quoted sentence ends 'and, ordinarily, she debates with herself.' Authorship (Richard D. Erlich) confirmed from CoyoteHome.htm.",
+   "fromFile": "verdicts-leguin-i531-560.json"
   },
   "561": {
    "index": 561,

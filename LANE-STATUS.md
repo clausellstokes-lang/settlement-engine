@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-06 17:47:34 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-06 17:53:08 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = dd5f13218 · ledger = eaf50fee7 §903: the lit default lands at 9 cars — the default preset takes the wave's class C+D (
 
@@ -79,7 +79,7 @@ product claude/composite-r4 = dd5f13218 · ledger = eaf50fee7 §903: the lit def
 - **dnd**: claims 872 · verdicts 872 (todo 0) · kept 619 · partial 147 · verdict files 55 (triage 1, regrade r6) · section 09-05 20:56 · critic 09-05 21:12
 - **ai**: claims 940 · verdicts 940 (todo 0) · kept 769 · partial 144 · verdict files 61 (triage 1, regrade r5) · section 09-06 15:34 · critic 09-06 00:55
 - **kay**: claims 1007 · verdicts 893 (todo 114) · kept 448 · partial 48 · verdict files 37 (triage 2, regrade r5) · section 09-06 14:42 · critic 09-06 15:04
-- **leguin**: claims 924 · verdicts 807 (todo 117) · kept 385 · partial 44 · verdict files 32 (triage 2, regrade r4) · section 09-06 13:47 · critic 09-06 14:20
+- **leguin**: claims 924 · verdicts 822 (todo 102) · kept 399 · partial 45 · verdict files 33 (triage 2, regrade r4) · section 09-06 13:47 · critic 09-06 14:20
 - **wolfe**: claims 978 · verdicts 739 (todo 239) · kept 402 · partial 66 · verdict files 35 (triage 1, regrade r4) · section 09-06 14:19 · critic 09-06 14:32
 - **hobb**: claims 696 · verdicts 696 (todo 0) · kept 488 · partial 52 · verdict files 40 (triage 1, regrade r4) · section 09-06 14:14 · critic 09-06 14:28
 Traceback (most recent call last):
@@ -95,7 +95,7 @@ KeyError: 'tag'
 - wf_3d71f708-fe3: 1 journal lines, 1 agents
 - wf_b15831a8-df4: 1 journal lines, 1 agents
 - wf_d76e605d-6d1: 1 journal lines, 1 agents
-- wf_e95fca37-bb5: 10 journal lines, 8 agents
+- wf_e95fca37-bb5: 16 journal lines, 12 agents
 
 ## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 1.76 2.28 2.31
+load: 2.37 2.46 2.38

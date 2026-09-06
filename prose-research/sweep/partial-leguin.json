@@ -930,5 +930,29 @@
    "unsupportedLimb": "ends on a filing formula - the formula is mid-paragraph; the memoir's final sentence is reflective, not bureaucratic",
    "fromFile": "verdicts-leguin-i477-528.json"
   }
+ },
+ {
+  "index": 550,
+  "feature": "terminology consistency",
+  "claim": "Adam Roberts notes that Le Guin's rule that no thing can have two true names forces the limit on a mage's power, quoting the novel's statement that a mage can control only what he can name exactly and wholly.",
+  "source": "Ursula K. Le Guin, A Wizard of Earthsea, p. 48, quoted in Adam Roberts, Adam's Notebook (Medium), 5 February 2023",
+  "url": "https://medium.com/adams-notebook/ursula-le-guin-a-wizard-of-earthsea-1968-c51a9a61881f",
+  "quote": "A mage can control only what is near him",
+  "page": "block quotation, [48]",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2023-02-05",
+  "routeHint": "Wayback raw 20250908044316id_",
+  "registerHint": "dm-page",
+  "confidence": "high",
+  "angle": "close",
+  "verdict": {
+   "index": 550,
+   "verdict": "PARTIAL",
+   "trueWording": "A mage can control only what is near him",
+   "note": "The quotation is exact and the p.48 marker is on the page, but the raw markup shows the <blockquote> opens at 'Here is the reason.' and closes after '[48]' - so the two-true-names rule, the 'sets the limits of that power' sentence and the quoted line are all one continuous quotation from the novel, with no Roberts commentary between them. Roberts's own adjacent sentences run the other way: he calls exact-and-whole naming impossible and says the magic system 'is and is not' consistent. The claim's paraphrase also drops 'what is near him', which is a separate limit from naming.",
+   "unsupportedLimb": "the limb making the two-true-names rule and the mage's-limit inference Roberts's own note - both sit inside the quoted p.48 novel passage, not in his commentary",
+   "fromFile": "verdicts-leguin-i531-560.json"
+  }
  }
 ]

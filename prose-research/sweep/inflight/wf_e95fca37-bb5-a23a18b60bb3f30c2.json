@@ -1,0 +1,36 @@
+{
+ "role": "verifier",
+ "name": "leguin",
+ "angle": null,
+ "tag": "i709-759",
+ "lines": 65,
+ "firstTs": "2026-09-06T21:49:35.297Z",
+ "lastTs": "2026-09-06T21:51:30.844Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 17
+ },
+ "urlsFetched": [
+  "https://api.crossref.org/works/10.33274/2079-4835-2020-21-2-27-37",
+  "https://paradoxa.com/volume-21-ursula-k-le-guin/",
+  "https://strangehorizons.com/wordpress/non-fiction/articles/i-never-did-like-smart-ass-utopians-on-always-coming-home-by-ursula-k-le-guin/",
+  "https://dannyreviews.com/h/Always_Coming_Home.html",
+  "https://troypress.com/a-history-of-earthsea/",
+  "https://vector-bsfa.com/2020/12/24/review-the-left-hand-of-darkness-by-ursula-k-le-guin/",
+  "https://en.wikipedia.org/wiki/Tales_from_Earthsea",
+  "https://openlibrary.org/search/inside?q=%22A+Description+of+Earthsea%22",
+  "https://www.bookreporter.com/reviews/tales-from-earthsea-the-earthsea-cycle-book-5",
+  "https://www.ursulakleguin.com/foreword-the-birthday-of-the-world"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "All 10 sources fetched with HTTP 200. Now examining each for the claimed content.",
+ "run": "wf_e95fca37-bb5",
+ "agent": "a23a18b60bb3f30c2",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/cc123b6c-1961-44c5-b071-c5e5aee7ee80/subagents/workflows/wf_e95fca37-bb5/agent-a23a18b60bb3f30c2.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-leguin-i709-759.json",
+  "exists": false
+ }
+}
