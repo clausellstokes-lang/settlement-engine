@@ -1,6 +1,6 @@
 {
- "complete": false,
- "coverage": "IN PROGRESS.",
+ "complete": true,
+ "coverage": "ROSTER: the angle names no explicit URLs, so the 'named roster' was its source types (craft essays and writing-advice by novelists, editors and game designers). Discovery: a full crawl of the BrightWeavings sitemap (549 URLs) diffed against the 130 URLs the predecessor finder had already read, plus eight lateral WebSearches; the last two consecutive searches surfaced nothing new. 76 new sources fetched raw by curl with a browser user agent (no summariser, no snippet); 45 substantive, 30 non-substantive (index pages, art pages, video-only pages, student essays, roundups), 1 blocked (justaword.fr, a Medium-hosted interview that returned a 750-byte stub). Per route: bibliography/site-crawl 58 fetched (36 substantive); lateral search 16 fetched (8 substantive); direct named-venue fetch 2. Reddit was unreachable for raw reads (both old.reddit JSON and HTML return the login interstitial to curl), so no reader-forum claims were added this round. GAP: no game designer was found writing about Kay's prose - the only games-adjacent source is an RPGnet forum thread the predecessor already read - and no formal stylometric or corpus study of Kay exists that this sweep could locate. This file carries the predecessor's 120 checkpointed claims plus 163 new ones (283 total across 102 sources); the structured return carries only the 163 new claims.",
  "sourcesRead": [
   {
    "title": "Joshua Palmatier, 'Altering the Familiar: Tigana by Guy Gavriel Kay', Reactor (Tor.com), 'That Was Awesome! Writers on Writing'",
@@ -817,6 +817,198 @@
    "substantive": false,
    "date": "",
    "route": "curl browser UA, live URL; index page used for discovery"
+  },
+  {
+   "title": "Post-Romantic Romance / student essays landing pages (mythinfantasy)",
+   "url": "https://brightweavings.com/mythinfantasy/",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "",
+   "route": "curl browser UA, live URL; undergraduate thesis chapter, thematic not prose-level"
+  },
+  {
+   "title": "How Are Heroes Born? (Patricia Gagne, translated)",
+   "url": "https://brightweavings.com/howareheroesborn/",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "",
+   "route": "curl browser UA, live URL; thematic student essay"
+  },
+  {
+   "title": "Fate and Free Will in The Fionavar Tapestry",
+   "url": "https://brightweavings.com/fate_freewill/",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "",
+   "route": "curl browser UA, live URL; thematic student essay"
+  },
+  {
+   "title": "Just a Game (BrightWeavings)",
+   "url": "https://brightweavings.com/justagame/",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "",
+   "route": "curl browser UA, live URL; no prose-craft content"
+  },
+  {
+   "title": "Mondegreens (BrightWeavings)",
+   "url": "https://brightweavings.com/mondegreens/",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "",
+   "route": "curl browser UA, live URL; no prose-craft content"
+  },
+  {
+   "title": "Hitchhiker (BrightWeavings)",
+   "url": "https://brightweavings.com/hitchhiker/",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "",
+   "route": "curl browser UA, live URL"
+  },
+  {
+   "title": "Phantastes (BrightWeavings)",
+   "url": "https://brightweavings.com/phantastes/",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "",
+   "route": "curl browser UA, live URL"
+  },
+  {
+   "title": "Too Much GGK (BrightWeavings)",
+   "url": "https://brightweavings.com/toomuchggk/",
+   "kind": "reader",
+   "substantive": false,
+   "date": "",
+   "route": "curl browser UA, live URL"
+  },
+  {
+   "title": "A Word from Guy Gavriel Kay",
+   "url": "https://brightweavings.com/a-word-from-guy-gavriel-kay/",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "",
+   "route": "curl browser UA, live URL"
+  },
+  {
+   "title": "What Do We Lose and Gain as Book Tours Move Online (BrightWeavings landing)",
+   "url": "https://brightweavings.com/what-do-we-lose-and-gain-as-book-tours-move-online/",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "2020",
+   "route": "curl browser UA, live URL; stub linking out"
+  },
+  {
+   "title": "What Do We Lose and Gain as Book Tours Move Online (Literary Hub)",
+   "url": "https://lithub.com/what-do-we-lose-and-gain-as-book-tours-move-online/",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "2020",
+   "route": "curl browser UA, live URL; on touring, no prose-craft content"
+  },
+  {
+   "title": "Guy Gavriel Kay author page (Literary Hub)",
+   "url": "https://lithub.com/author/guygavrielkay/",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "",
+   "route": "curl browser UA, live URL; index used for discovery"
+  },
+  {
+   "title": "Andrews interview page (BrightWeavings)",
+   "url": "https://brightweavings.com/andrews/",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "",
+   "route": "curl browser UA, live URL"
+  },
+  {
+   "title": "The Annotated GGK (BrightWeavings)",
+   "url": "https://brightweavings.com/scholarship/the-annotated-ggk/",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "",
+   "route": "curl browser UA, live URL; annotation index"
+  },
+  {
+   "title": "George R.R. Martin on Under Heaven (BrightWeavings)",
+   "url": "https://brightweavings.com/martin/",
+   "kind": "reception",
+   "substantive": false,
+   "date": "",
+   "route": "curl browser UA, live URL; blurb page"
+  },
+  {
+   "title": "Barnes & Noble interview page (BrightWeavings)",
+   "url": "https://brightweavings.com/barnes-noble/",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "",
+   "route": "curl browser UA, live URL; no prose-craft content in fetched page"
+  },
+  {
+   "title": "Audio interview with Rick Kleffel of The Agony Column (BrightWeavings)",
+   "url": "https://brightweavings.com/audio-interview-with-rick-kleffel-of-the-agony-column/",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "",
+   "route": "curl browser UA, live URL; audio only, no transcript"
+  },
+  {
+   "title": "GGK in conversation with Nancy Pearl (BrightWeavings)",
+   "url": "https://brightweavings.com/university-book-store-presents-guy-gavriel-kay-in-conversation-with-nancy-pearl/",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "",
+   "route": "curl browser UA, live URL; video link only"
+  },
+  {
+   "title": "GGK in conversation with Paul Blezard, Lockdown LitFest (BrightWeavings)",
+   "url": "https://brightweavings.com/watch-ggk-in-conversation-with-paul-blezard-at-the-lockdown-litfest/",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "",
+   "route": "curl browser UA, live URL; video link only"
+  },
+  {
+   "title": "Guest editor for LoveReading (BrightWeavings)",
+   "url": "https://brightweavings.com/guest-editor-for-lovereading/",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "",
+   "route": "curl browser UA, live URL; link only"
+  },
+  {
+   "title": "Reviews of A Brightness Long Ago (BrightWeavings roundup)",
+   "url": "https://brightweavings.com/reviews-of-a-brightness-long-ago/",
+   "kind": "reception",
+   "substantive": false,
+   "date": "",
+   "route": "curl browser UA, live URL; index only"
+  },
+  {
+   "title": "Writing Excuses tag page for Guy Gavriel Kay",
+   "url": "https://writingexcuses.com/tag/guy-gavriel-kay/",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "",
+   "route": "curl browser UA, live URL; two episode pages tagged, neither transcript discusses Kay's prose"
+  },
+  {
+   "title": "Writing Excuses 10.21: Q&A on World Building",
+   "url": "https://writingexcuses.com/writing-excuses-10-21-qa-on-world-building/",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2015-05-24",
+   "route": "curl browser UA, live URL; no Kay content in the page text"
+  },
+  {
+   "title": "Writing Excuses 5.36: Non-Traditional Settings with Saladin Ahmed",
+   "url": "https://writingexcuses.com/writing-excuses-5-36-non-traditional-settings-with-saladin-ahmed/",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2011-05-08",
+   "route": "curl browser UA, live URL; no Kay content in the page text"
   }
  ],
  "claims": [

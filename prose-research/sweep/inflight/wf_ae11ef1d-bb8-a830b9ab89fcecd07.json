@@ -3,14 +3,14 @@
  "name": "kay",
  "angle": "craft",
  "tag": null,
- "lines": 262,
+ "lines": 330,
  "firstTs": "2026-09-06T16:54:17.208Z",
- "lastTs": "2026-09-06T17:15:16.797Z",
+ "lastTs": "2026-09-06T17:19:47.211Z",
  "tools": {
   "Read": 1,
-  "Bash": 56,
+  "Bash": 71,
   "ToolSearch": 1,
-  "WebSearch": 12,
+  "WebSearch": 16,
   "WebFetch": 1
  },
  "urlsFetched": [
@@ -113,18 +113,30 @@
   "https://shereadsnovels.com/2025/05/30/written-on-the-dark-by-guy-gavriel-kay/",
   "https://shereadsnovels.com/2013/08/17/the-lions-of-al-rassan-by-guy-gavriel-kay/",
   "https://bookwormex.com/brightness-long-ago-guy-gavriel-kay-review/",
-  "https://brightweavings.com/category/ggks-words/interviews/"
+  "https://brightweavings.com/category/ggks-words/interviews/",
+  "https://brightweavings.com/[a-z0-9_-",
+  "https://brightweavings.com/category/ggks-words/interviews/page/$p/",
+  "https://writingexcuses.com/tag/guy-gavriel-kay/",
+  "https://writingexcuses.com/[^",
+  "https://writingexcuses\\.com/(?:writing-excuses|wx|20\\d\\d|[a-z0-9-",
+  "https://writingexcuses.com/writing-excuses-10-21-qa-on-world-building/",
+  "https://writingexcuses.com/writing-excuses-5-36-non-traditional-settings-with-saladin-ahmed/",
+  "https://lithub.com/author/guygavrielkay/",
+  "https://lithub.com/[a-z0-9-",
+  "https://fantasyliterature.com/fantasy-author/kayguygavriel/",
+  "https://fantasyliterature.com/reviews/[a-z0-9-",
+  "https://lithub.com/what-do-we-lose-and-gain-as-book-tours-move-online/"
  ],
  "filesWritten": [],
- "lastAssistantText": "Now the checkpoint write.",
+ "lastAssistantText": "Now the raw notes file, then the final return.",
  "run": "wf_ae11ef1d-bb8",
  "agent": "a830b9ab89fcecd07",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_ae11ef1d-bb8/agent-a830b9ab89fcecd07.jsonl",
  "journal": "in-flight",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-kay-craft.json",
-  "claims": 264,
-  "complete": false,
-  "mtime": "13:13:29"
+  "claims": 283,
+  "complete": true,
+  "mtime": "13:18:49"
  }
 }

@@ -1,0 +1,235 @@
+{
+ "name": "wolfe",
+ "chunk": 23,
+ "claims": [
+  {
+   "index": 345,
+   "feature": "other: characterisation method",
+   "claim": "Guy Stewart reports Wolfe's rule that a character is characterised by being shown thinking, speaking and acting in a characteristic way rather than described.",
+   "source": "Gene Wolfe's writing advice, relayed by Guy Stewart, 2022",
+   "url": "https://faithandsciencefiction.blogspot.com/2022/02/writing-advice-short-stories-advice-and.html",
+   "quote": "showing the character thinking, speaking and acting in a characteristic way",
+   "page": "post, the five rules"
+  },
+  {
+   "index": 346,
+   "feature": "withheld information and inference",
+   "claim": "Critic Peter Wright says ambiguity in The Fifth Head of Cerberus is an organising principle of the book's form, not only a theme.",
+   "source": "Peter Wright, 'Confounding the Skin and the Mask', Ultan's Library, 2002",
+   "url": "https://ultan.org.uk/confounding-the-skin-and-the-mask/",
+   "quote": "it is also an organising principle of form",
+   "page": "article, opening paragraph"
+  },
+  {
+   "index": 347,
+   "feature": "withheld information and inference",
+   "claim": "Wright says the existence of the puzzle in The Fifth Head of Cerberus matters more than its solution.",
+   "source": "Peter Wright, 'Confounding the Skin and the Mask', Ultan's Library, 2002",
+   "url": "https://ultan.org.uk/confounding-the-skin-and-the-mask/",
+   "quote": "the existence of the puzzle is more significant that its solution",
+   "page": "article, after the Wendland discussion"
+  },
+  {
+   "index": 348,
+   "feature": "archaism",
+   "claim": "Scott Wowra reports that readers in the early 1980s accused Wolfe of fabricating unusual words, and says this is untrue.",
+   "source": "Scott Wowra, 'The Lupine Scholar', Ultan's Library, 2009",
+   "url": "https://ultan.org.uk/the-lupine-scholar-by-scott-wowra/",
+   "quote": "readers accused Mr. Wolfe of deliberately fabricating unusual words",
+   "page": "introduction"
+  },
+  {
+   "index": 349,
+   "feature": "archaism",
+   "claim": "Wowra says Wolfe's real rare words show how odd genuine language can sound without any invented vocabulary.",
+   "source": "Scott Wowra, 'The Lupine Scholar', Ultan's Library, 2009",
+   "url": "https://ultan.org.uk/the-lupine-scholar-by-scott-wowra/",
+   "quote": "they remind us just how odd language can sound",
+   "page": "introduction"
+  },
+  {
+   "index": 350,
+   "feature": "diction (native vs latinate)",
+   "claim": "Wowra gives omophagist and cherkaji as examples of the seemingly counterfeit but real words in The Book of the New Sun.",
+   "source": "Scott Wowra, 'The Lupine Scholar', Ultan's Library, 2009",
+   "url": "https://ultan.org.uk/the-lupine-scholar-by-scott-wowra/",
+   "quote": "omophagist (an eater of raw flesh) and cherkaji",
+   "page": "introduction"
+  },
+  {
+   "index": 351,
+   "feature": "annalist voice and deep time",
+   "claim": "Michael Andre-Driussi revises his estimate of the span from Ymar to Severian, giving a range between one thousand and thirty-thousand years.",
+   "source": "Michael Andre-Driussi, 'Posthistory 201', Ultan's Library, 2020",
+   "url": "https://ultan.org.uk/posthistory-201/",
+   "quote": "the range is actually between one thousand and thirty-thousand years",
+   "page": "section 2.1 Overview"
+  },
+  {
+   "index": 352,
+   "feature": "annalist voice and deep time",
+   "claim": "Andre-Driussi derived his earlier thousand-year figure for the Autarchy from a single character's offhand remark rather than any stated chronology.",
+   "source": "Michael Andre-Driussi, 'Posthistory 201', Ultan's Library, 2020",
+   "url": "https://ultan.org.uk/posthistory-201/",
+   "quote": "This statement strongly implied to me that the autarchs had reigned",
+   "page": "section 2.2 Revising my estimate"
+  },
+  {
+   "index": 353,
+   "feature": "annalist voice and deep time",
+   "claim": "To narrow the chronology Andre-Driussi searched the text for the time words chiliads, thousand years, ages, aeons and eons.",
+   "source": "Michael Andre-Driussi, 'Posthistory 201', Ultan's Library, 2020",
+   "url": "https://ultan.org.uk/posthistory-201/",
+   "quote": "a brute force method of searching for the terms",
+   "page": "section 2.3 Narrowing the range"
+  },
+  {
+   "index": 354,
+   "feature": "plainness and economy",
+   "claim": "Wolfe, quoted from a letter by novelist C. S. E. Cooney, advised always telling a story as cleanly and as clearly as possible.",
+   "source": "Gene Wolfe, in letters and conversation, quoted by C. S. E. Cooney, Ultan's Library, 2016",
+   "url": "https://ultan.org.uk/an-homage-to-my-honorary-grandfather/",
+   "quote": "Always tell a story as cleanly and as clearly as possible.",
+   "page": "memoir, later section"
+  },
+  {
+   "index": 355,
+   "feature": "other: exposition and infodump",
+   "claim": "Wolfe's critique of Cooney's draft named her habit of interrupting dialogue with long infodumps, which he called lumps of prose like uncooked dumplings.",
+   "source": "Gene Wolfe, letter to C. S. E. Cooney, quoted in Ultan's Library, 2016",
+   "url": "https://ultan.org.uk/an-homage-to-my-honorary-grandfather/",
+   "quote": "lumps of prose like uncooked dumplings",
+   "page": "memoir, on the first letter"
+  },
+  {
+   "index": 356,
+   "feature": "cadence and rhythm",
+   "claim": "Cooney reports that when she proposed cutting the sing-song rhythm and internal rhyme from one story, Wolfe urged her not to.",
+   "source": "C. S. E. Cooney, 'An Homage to my Honorary Grandfather', Ultan's Library, 2016",
+   "url": "https://ultan.org.uk/an-homage-to-my-honorary-grandfather/",
+   "quote": "he urged me not to take my knife to it",
+   "page": "memoir, after the clean-and-clear advice"
+  },
+  {
+   "index": 357,
+   "feature": "opening sentence",
+   "claim": "Keeley reads the opening line of The Fifth Head of Cerberus as a riff on the opening of Proust's Swann's Way.",
+   "source": "Matthew Keeley, Reactor (Tor.com), 9 November 2017",
+   "url": "https://reactormag.com/how-gene-wolfe-starts-a-story-and-where-to-start-reading-his-work/",
+   "quote": "is a riff on Proust’s",
+   "page": "body, paragraph on Wolfe's reading"
+  },
+  {
+   "index": 358,
+   "feature": "withheld information and inference",
+   "claim": "Keeley says the grammar of that opening sentence carries a slight clue to the story.",
+   "source": "Matthew Keeley, Reactor (Tor.com), 9 November 2017",
+   "url": "https://reactormag.com/how-gene-wolfe-starts-a-story-and-where-to-start-reading-his-work/",
+   "quote": "a slight clue to the story in the sentence’s grammar",
+   "page": "body, paragraph on Wolfe's reading"
+  },
+  {
+   "index": 359,
+   "feature": "omission as information",
+   "claim": "Keeley says the reader eventually learns why the comma is missing from the phrase “my brother David”.",
+   "source": "Matthew Keeley, Reactor (Tor.com), 9 November 2017",
+   "url": "https://reactormag.com/how-gene-wolfe-starts-a-story-and-where-to-start-reading-his-work/",
+   "quote": "We eventually do learn why that comma is missing.",
+   "page": "body, paragraph on Wolfe's reading"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 345,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Wolfe: characterize by showing thinking, speaking, acting characteristically.",
+   "note": "Stewart's blog (POSSIBLY IRRITATING ESSAYS, Feb 2022) relays five bits of advice Wolfe gave Neil Gaiman; the quote sits verbatim in the fourth: 'You do not characterize by telling the reader about the character. You do it by showing the character thinking, speaking and acting in a characteristic way. You simply show it and shut up.' Every limb holds, including 'rather than described'."
+  },
+  {
+   "index": 346,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Ambiguity: organising principle of form and fundamental theme.",
+   "note": "Opening paragraph, verbatim: 'ambiguity is the watchword to the text. More significantly, it is also an organising principle of form, a means of confounding interpretation, and a fundamental theme...'. Article by Peter Wright, Ultan's Library, 15 January 2002; the 'not only a theme' limb is supported because the page asserts both roles."
+  },
+  {
+   "index": 347,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Puzzle's existence more significant than its solution.",
+   "note": "Verbatim (including the page's own typo 'more significant that its solution'), and located exactly where the claim says - the paragraph closing the Wendland discussion: '...the existence of the puzzle is more significant that its solution, since the puzzle is where the political arguments of the novel can be found.'"
+  },
+  {
+   "index": 348,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Early-1980s readers accused Wolfe of fabricating words; untrue.",
+   "note": "Wowra's introduction to his 2009 interview with Andre-Driussi: 'In the early 1980s, frustrated readers accused Mr. Wolfe of deliberately fabricating unusual words to confuse them. Nothing could be further from the truth.' Both limbs (the early-1980s dating and the denial) are on the page."
+  },
+  {
+   "index": 349,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Real strange words show how odd language sounds.",
+   "note": "Verbatim: 'All of the strange words that appear in THE BOOK OF THE NEW SUN are real. And they remind us just how odd language can sound without science fiction authors inventing new words that lack inherent meaning.' The 'without any invented vocabulary' limb is the page's own clause."
+  },
+  {
+   "index": 350,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Bizarre, seemingly counterfeit words: omophagist and cherkaji.",
+   "note": "Verbatim in the same introduction: 'full of bizarre and seemingly counterfeit words like omophagist (an eater of raw flesh) and cherkaji (Persian light cavalry)', with 'All of the strange words... are real' two sentences later, supporting the 'seemingly counterfeit but real' limb."
+  },
+  {
+   "index": 351,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Range actually one thousand to thirty-thousand years, revising 'about a chiliad'.",
+   "note": "Section 2.1 Overview, verbatim: 'In “Posthistory 101” and Lexicon Urthus I stated that the time from Ymar to Severian was about a chiliad. Recent reading suggests that the range is actually between one thousand and thirty-thousand years...'. By Michael Andre-Driussi, Ultan's Library, 6 July 2020; the revision limb is explicit."
+  },
+  {
+   "index": 352,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "that the earlier thousand-year figure rested on a single character's remark - the page names a second basis, Wolfe's own remark in a 1983 Robert Frazier interview ('an autarch a chiliad dead'), and concludes 'Based, then, on Vodalus’ and Wolfe’s comments, I took the 1K model as being solid'",
+   "trueWording": "Vodalus's line plus Wolfe's 1983 interview remark grounded 1K.",
+   "note": "Quote is verbatim in section 2.2 ('This statement strongly implied to me that the autarchs had reigned for about a thousand years'), and the 'rather than any stated chronology' limb is supported ('it turns out I had not adequately cited the source text for that detail'). The 'single character's offhand remark' limb overstates: the source text is Vodalus's recruitment-pitch line (II, chap. 10) AND Wolfe's interview statement, which Andre-Driussi says he was 'perhaps unduly influenced by'."
+  },
+  {
+   "index": 353,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Brute-force search for chiliads, thousand years, ages, aeons, eons.",
+   "note": "Section 2.3 Narrowing the range, verbatim: 'In an attempt to narrow that down a bit, I set upon a brute force method of searching for the terms “chiliads,” “thousand years,” “ages,” “aeons,” and “eons,” in order to sift for further clues.' The five time words match the claim exactly, and the narrowing purpose is stated."
+  },
+  {
+   "index": 354,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "that this advice came in a letter - the memoir introduces it only as 'He once advised', naming no setting; the letter it does describe is the earlier critique of her novel chapters (the 'uncooked dumplings' letter)",
+   "trueWording": "'He once advised' - setting unnamed, not attributed to a letter.",
+   "note": "Quotation verbatim: 'He once advised, “Always tell a story as cleanly and as clearly as possible.”' Cooney's memoir (Ultan's Library, 10 June 2016) mixes dinner conversation and correspondence, and this line is not placed in either. Secondary: the page calls her a poet and short-story writer with an unsold novel; 'novelist' is not the page's word."
+  },
+  {
+   "index": 355,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Letter on her chapters: infodumps, 'lumps of prose like uncooked dumplings'.",
+   "note": "Verbatim and every limb holds: 'he wrote me a long letter about what he did read... I had a tendency to interrupt my dialogue with long infodumps. He used the phrase “lumps of prose like uncooked dumplings”'. The draft was the first chapters of her novel, which she had sent him."
+  },
+  {
+   "index": 356,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "She'd cut sing-songy rhythm and rhyme; he urged otherwise.",
+   "note": "Verbatim, and directly after the clean-and-clear advice as the claim locates it: 'after I wrote “Three Fancies from the Infernal Garden”... and showed it to Gene, telling him I’d probably need to cut much of the sing-songy rhythm and internal rhyme, he urged me not to take my knife to it.'"
+  },
+  {
+   "index": 357,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "5HoC's opening line riffs on Proust's 'For a long time I went to bed early.'",
+   "note": "Verbatim: 'The opening line of The Fifth Head of Cerberus... is a riff on Proust’s “For a long time I went to bed early.”' By Matthew Keeley, Tor.com/Reactor, published 9 November 2017 (datePublished 2017-11-09). The page names Swann's Way as the work in the next sentence ('Readers unfamiliar with Swann’s Way... people who recognize the source quote'); it does not itself use the word 'opening' for the Proust line, though that line is Swann's Way's first sentence."
+  },
+  {
+   "index": 358,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'There’s also, perhaps, a slight clue... in the sentence’s grammar'.",
+   "note": "Verbatim in the same paragraph. The page hedges with 'perhaps', which the claim drops; the claim's own wording ('a slight clue') keeps the page's low strength, so the limb stands."
+  },
+  {
+   "index": 359,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'We eventually do learn why that comma is missing.'",
+   "note": "Verbatim, and the missing comma is explicitly the one in 'my brother David': 'If the narrator had only one brother, we would read “my brother, David” rather than the comma-less “my brother David.” We eventually do learn why that comma is missing.'"
+  }
+ ]
+}

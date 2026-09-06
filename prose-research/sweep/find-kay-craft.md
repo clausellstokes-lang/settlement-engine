@@ -41,3 +41,31 @@ Started 2026-09-06. Every source below was FETCHED (WebFetch) unless marked SNIP
 - "Readers who know nothing about the actual history don't ever feel they're behind the curve"
 - begins with images ("a cabin in the woods"), no template
 - "The past isn't even past" — characters carry cultural history
+
+---
+
+# ROUND 2 (2026-09-06, Opus finder, after the predecessor's session cutoff)
+
+Working dir for raw fetches: `sweep/kaycraft2/` (every source has a `.html` and a `.txt`; `fetch.sh` = curl with a Chrome user agent + an HTML-to-text strip; `body.py` prints paragraphs >60 chars).
+Exclusion set built from the four `found-kay-*.json` files (130 URLs) → `sweep/kay-craft-exclude.txt`.
+Discovery: full BrightWeavings sitemap crawl (`wp-sitemap-posts-post-1.xml` + `-page-1.xml`, 549 URLs) diffed against that set; then eight lateral WebSearches. Last two searches surfaced nothing new.
+
+## The highest-value finds
+- **`brightweavings.com/review-by-bill-capossere-for-fantasy-literature/`** quotes the Rector's Council passage from *Children of Earth and Sky* verbatim: present tense, spelled-out count, civic nouns, institutional inventory ("There are sixty-five members of the Rector's Council as of this morning"), and Capossere's own analysis that the passage "goes on for several pages in this same wide-casting vision, often employing passive voice". This is the closest thing in the Kay corpus to the settlement-dossier register the program is reconstructing.
+- **`brightweavings.com/books/ysabel-journal/`** — Kay at the sentence level with his copy-editor: colon vs semicolon in the novel's first sentence, deleting 'taste' to unclog a metaphor and to de-repeat a later use, "I'll use punctuation varaibly depending on context, speaker, rhythms" (sic), "LAST LIGHT is punctuated differently than the MOSAIC was", italics deleted every book because they "look LOUDER in galleys".
+- **`brightweavings.com/books/under-heaven-tour-journal/`** — Kay's craft post: "just as language needs to suit setting, so does playing with emotions"; plus a guest post by his Penguin Canada production editor ("he forges his own rules when it comes to punctuation").
+- **`brightweavings.com/nyrsf_halasz/`** (Peter Halasz, NYRSF 2000) — "the writing changes in every book"; the Sarantium prologue written as contrasting mosaic tiles; "The formal, brief lives of the two troubadours" framing *Arbonne*; "Details are critical."
+- **`brightweavings.com/dictionary/`** — the Manguel & Guadalupi *Dictionary of Imaginary Places* entry on Fionavar, reproduced whole: a working GAZETTEER register over Kay's world (headword + locative gloss; builder and reign in parentheses; "Access to the Godwood and the tree is strictly controlled"; "Fionavar's prehistory is hazy"; "it is a matter of some dispute which race came first"; hedged reports; a parenthetical source list).
+- **`brightweavings.com/review-by-desi-stern-for-petrichor-machine/`** — the *River of Stars* narrator is "omniscient and unreliable at once", and the tense switches per character (past for most, present for Shan).
+- **`locusmag.com/review/gary-k-wolfe-reviews-a-brightness-long-ago...`** — the near-invisible outer narrator compared to Conrad's frame seaman; "Stories, he reminds us, are told, but novels are shaped."
+
+## Disagreements worth keeping (the synthesis should not flatten them)
+- **Spare vs lavish.** Dirda: "Kay has chosen a spare, slightly courtly style"; Snyder (same book, same year): "Kay's lavish descriptions of the remote landscape".
+- **Clear vs obscure.** Capossere: "The prose is always under control"; Hoyle: "sentences are often convoluted, meanings often obscured" and "Kay's style is often obtuse".
+- **Counter-reception.** MetaStellar's Amira Loutfi: "many other readers find it to be annoying"; Elitist Book Reviews (a completist fan): "his books tend towards a certain… sameness".
+
+## Gaps this round could not fill
+- No game designer writing about Kay's prose was found; the only games-adjacent source is the RPGnet thread the predecessor already read.
+- No stylometric or corpus study of Kay located.
+- Reddit is unreachable to curl (login interstitial on both old.reddit HTML and the .json endpoint), so no reader-forum claims this round.
+- `justaword.fr` (Medium-hosted interview) returned a 750-byte stub: BLOCKED.

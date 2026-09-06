@@ -1,0 +1,31 @@
+{
+ "role": "verifier",
+ "name": "martin",
+ "angle": null,
+ "tag": "i345-359",
+ "lines": 94,
+ "firstTs": "2026-09-06T17:19:44.669Z",
+ "lastTs": "2026-09-06T17:23:34.680Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 23
+ },
+ "urlsFetched": [
+  "https://www.publishersweekly.com/978-1-5247-9628-0",
+  "https://www.publishersweekly.com/pw/by-topic/authors/interviews/article/77516-pw-talks-with-george-r-r-martin.html",
+  "https://ew.com/author-interviews/2018/11/19/george-rr-martin-interview/",
+  "https://georgerrmartin.com/notablog/2018/04/25/fire-blood-on-the-way/",
+  "https://web.archive.org/web/20250303213006id_/https://ew.com/author-interviews/2018/11/19/george-rr-martin-interview/"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "All quotes checked mechanically. Now writing the checkpoint file.",
+ "run": "wf_c7cc5b15-ee7",
+ "agent": "ab9d763ba23d3a597",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_c7cc5b15-ee7/agent-ab9d763ba23d3a597.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-martin-i345-359.json",
+  "exists": true
+ }
+}

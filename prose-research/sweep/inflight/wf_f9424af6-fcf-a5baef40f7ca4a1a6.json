@@ -3,15 +3,15 @@
  "name": "dnd",
  "angle": "scholarship-history",
  "tag": null,
- "lines": 266,
+ "lines": 378,
  "firstTs": "2026-09-06T16:58:52.736Z",
- "lastTs": "2026-09-06T17:15:16.958Z",
+ "lastTs": "2026-09-06T17:23:35.021Z",
  "tools": {
   "Read": 1,
-  "Bash": 55,
+  "Bash": 82,
   "ToolSearch": 1,
   "WebFetch": 1,
-  "WebSearch": 15
+  "WebSearch": 19
  },
  "urlsFetched": [
   "https://api.crossref.org/works?filter=isbn:9780262547604&rows=60&select=title,DOI,author,page,abstract",
@@ -77,7 +77,30 @@
   "https://playingattheworld.blogspot.com/2020/04/dave-arnesons-origins-1977-tournament.html",
   "https://www.polygon.com/2021/10/12/22722602/dungeons-dragons-game-wizards-book-excerpt-jon-peterson-arneson-lawsuit",
   "https://www.dndbeyond.com/posts/1834-greyhawk-returns-in-the-2024-dungeon-masters-guide",
-  "https://www.enworld.org/threads/in-depth-review-of-the-2024-dungeon-masters-guide.707861/"
+  "https://www.enworld.org/threads/in-depth-review-of-the-2024-dungeon-masters-guide.707861/",
+  "https://anyflip.com/fgoih/itgk/basic/",
+  "https://anyflip.com/fgoih/itgk/files/basic-html/page1.html",
+  "https://anyflip.com/fgoih/itgk/files/search/search_text.js",
+  "https://online.anyflip.com/fgoih/itgk/mobile/index.html",
+  "https://anyflip.com/",
+  "https://online.anyflip.com/fgoih/itgk/files/search/search_text_1.js",
+  "https://online.anyflip.com/fgoih/itgk/files/basic-html/page7.html",
+  "https://online.anyflip.com/fgoih/itgk/files/mobile/1.html",
+  "https://pdfcoffee.com/download/koboldx27s-guide-to-world-building-pdf-free.html",
+  "https://koboldpress.com/world-building-design-seminar-with-wolfgang-baur-zeb-cook-and-richard-green-part-1/",
+  "https://gnomestew.com/review-the-kobold-guide-to-plots-and-campaigns-and-the-kobold-guide-to-worldbuilding/",
+  "https://koboldpress.com/kobold-guide-to-worldbuilding-now-available/",
+  "https://koboldpress.com/world-building-design-seminar-with-wolfgang-baur-zeb-cook-and-richard-green-part-2/",
+  "https://journals.uu.se/IJRP/issue/archive",
+  "https://journals.uu.se/IJRP/issue/view/$v",
+  "https://journals\\.uu\\.se/IJRP/article/view/(\\d+",
+  "https://journals.uu.se/IJRP/article/view/[0-9",
+  "https://journals.uu.se/IJRP/article/view/1197/1052",
+  "https://journals.uu.se/IJRP/article/view/1192/1045",
+  "https://journals.uu.se/IJRP/article/download/1197/1052/4802",
+  "https://analoggamestudies.org/2022/01/book-review-dread-trident/",
+  "https://liverpooluniversitypress.blog/2020/01/27/dread-trident-in-conversation-with-curtis-d-carbonell/",
+  "https://sfrareview.org/2022/01/10/review-of-dread-trident-tabletop-role-playing-games-and-the-modern-fantastic/"
  ],
  "filesWritten": [],
  "lastAssistantText": "Now let me add these to the checkpoint and write raw notes.",
@@ -87,8 +110,8 @@
  "journal": "in-flight",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-dnd-scholarship-history.json",
-  "claims": 59,
+  "claims": 79,
   "complete": false,
-  "mtime": "13:14:14"
+  "mtime": "13:18:18"
  }
 }

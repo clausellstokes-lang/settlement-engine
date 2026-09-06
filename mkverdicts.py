@@ -1,46 +1,80 @@
-import json
-base='/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/'
-src=json.load(open(base+'chunks/leguin-01.json',encoding='utf-8'))
-V=[
- (15,"VERIFIED_SUBSTANCE","holds up those seven writers as successful examples",
-  "Raw wikitext + rendered plaintext (Special:Export + action=query prop=extracts). Page: 'In her argument that fantastic creation should reach to the very words and grammar in fantasy writers, she holds up Lord Dunsany, E. R. Eddison, Kenneth Morris, J. R. R. Tolkien, James Branch Cabell, Evangeline Walton, and Jack Vance as successful examples.' All seven names match in order; the claim's gloss 'models of style that fits its world' is a paraphrase of 'fantastic creation should reach to the very words and grammar', hence SUBSTANCE not VERBATIM (claim carried no quote).",None),
- (16,"VERIFIED_VERBATIM","because there is no known framework for the reader's mind to rest upon",
-  "Raw wikitext, Style-and-mood section: 'Le Guin herself said that in fantasy it was necessary to be clear and direct with language, because there is no known framework for the reader's mind to rest upon.' Quoted fragment is word-for-word; both limbs (clear and direct; no framework for the reader) supported. Cited to Slusser 1976 pp.32-35.",None),
- (17,"PARTIAL","makes the narrator seem sympathetic, does not distance his thoughts",
-  "Raw wikitext: 'This narrative technique, which Cadden characterizes as \"free indirect discourse\", makes the narrator of the book seem sympathetic to the protagonist, and does not distance his thoughts from the reader.' Quote verbatim; 'Mike Cadden' confirmed elsewhere on the same page ('Scholar Mike Cadden'); sympathy limb supported; blending of protagonist feelings with narration supported only loosely ('does not distance his thoughts from the reader') and stated squarely on the SEPARATE Ursula K. Le Guin article, not this one. Nothing on this page says anything about narrative flexibility.",
-  "'while keeping narrative flexibility' - the cited page never claims the technique preserves flexibility"),
- (18,"VERIFIED_VERBATIM","the narration switches from looking ahead into Ged's future",
-  "Raw wikitext: 'The story often appears to assume that readers are familiar with the geography and history of Earthsea, a technique which allowed Le Guin to avoid exposition ... In keeping with the notion of an epic, the narration switches from looking ahead into Ged's future and looking back into the past of Earthsea.' Quote verbatim; all limbs present. Minor hedge: the page says 'often appears to assume' where the claim asserts it flatly.",None),
- (19,"VERIFIED_VERBATIM","gives Le Guin's world the mysterious depths of Tolkien's, but without his tiresome back-stories and versifying",
-  "Raw wikitext: 'a reviewer wrote that this method \"gives Le Guin's world the mysterious depths of Tolkien's, but without his tiresome back-stories and versifying\"', ref name='Craig 2003' (Amanda Craig, The Guardian, 24 Sep 2003). Quote verbatim; 'a reviewer' and the crediting of the no-exposition method both supported.",None),
- (20,"VERIFIED_VERBATIM","Slusser described the mood of the novel as \"strange and dreamlike\"",
-  "Raw wikitext: 'Slusser described the mood of the novel as \"strange and dreamlike\", fluctuating between objective reality and the thoughts in Ged's mind'. Quote verbatim; the fluctuation limb is present word for word; 'George Slusser' is given in full earlier in the same section, cited to Slusser 1976 pp.35-38.",None),
- (21,"VERIFIED_VERBATIM","in prose as taut and clean as a ship's sail",
-  "Raw wikitext, Reception: 'a review in The Guardian by author and journalist Amanda Craig said it was \"The most thrilling, wise and beautiful children's novel ever, [written] in prose as taut and clean as a ship's sail.\"' Quote verbatim; Craig and The Guardian both named on the page.",None),
- (22,"PARTIAL","Slusser: \"work of high style and imagination\"; \"genuine epic vision\" cited to Cadden",
-  "Raw wikitext: 'Slusser described the Earthsea cycle as a \"work of high style and imagination\",{{sfn|Slusser|1976|pp=32-35}} and the original trilogy of books a product of \"genuine epic vision\".{{sfn|Cadden|2005|p=86}}' The quoted limb is verbatim and is Slusser 1976. The second limb is footnoted to Cadden 2005 and its object is the original trilogy, not the cycle.",
-  "'the Earthsea cycle ... with genuine epic vision' per Slusser 1976 - the page applies 'genuine epic vision' to the original trilogy and footnotes it to Cadden 2005"),
- (23,"VERIFIED_VERBATIM","Every word was exactly in place and every sentence or line had resonance",
-  "Raw wikitext: 'literary critic Harold Bloom described Le Guin as an \"exquisite stylist\", saying that in her writing, \"Every word was exactly in place and every sentence or line had resonance\".' Quote verbatim; 'exquisite stylist', exact placement and resonance all present.",None),
- (24,"VERIFIED_VERBATIM","described her as using \"a lean but lyrical style\" to explore issues of moral relevance",
-  "Raw wikitext: 'The New York Times described her as using \"a lean but lyrical style\" to explore issues of moral relevance.' Quote verbatim; the moral-issues limb is supported as 'issues of moral relevance'. The page attributes the style to her writing rather than the word 'prose', a wording difference only.",None),
- (25,"VERIFIED_VERBATIM","Her prose, according to Zadie Smith, was \"as elegant and beautiful as any written in the twentieth century\"",
-  "Raw wikitext: exact sentence present, ref 'Fellow Writers' (Library of America, 26 Jan 2018). Quote verbatim; every limb supported.",None),
- (26,"VERIFIED_VERBATIM","personal narration, diary extracts, Gethenian myths, and ethnological reports; \"distinctly post-modern\"",
-  "Raw wikitext, same paragraph: 'The heterogeneous structure of The Left Hand of Darkness, described as \"distinctly post-modern\", was unusual for the time of its publication' and '... the material, consisting of personal narration, diary extracts, Gethenian myths, and ethnological reports.' Quote verbatim; all four components present.",None),
- (27,"VERIFIED_VERBATIM","described by Bloom as \"precise, dialectical-always evocative in its restrained pathos\"",
-  "Raw wikitext has 'restrained [[pathos]]' (wikilink), so the quote was confirmed against the RENDERED plaintext extract via action=query&prop=extracts&explaintext, where the exact string 'precise, dialectical—always evocative in its restrained pathos' is present (em dash, as in the claim). Attributed to Bloom 1987 and applied to Le Guin's writing style in this novel.",None),
- (28,"VERIFIED_SUBSTANCE","tales immediately precede chapters describing Ai's similar experience; explain culture and philosophy",
-  "Raw wikitext: 'The myths and legends serve to explain specific features about Gethenian culture, as well as larger philosophical aspects of society. Many of the tales used in the novel immediately precede chapters describing Ai's experience with a similar situation.' Claim carried no quote and is a paraphrase; both limbs supported. Page hedges with 'Many of the tales' where the claim generalises.",None),
- (29,"VERIFIED_SUBSTANCE","first-person narration reflects his slowly developing view; White: initially confusing to reviewers",
-  "Raw wikitext: 'Ai's first-person narration reflects his slowly developing view, and the reader's knowledge and understanding of the Gethens evolves with Ai's awareness. He begins in naivety, gradually discovering his profound errors in judgement.' And: 'In 1999, literary scholar Donna White wrote that the unorthodox structure of the novel made it initially confusing to reviewers, before it was interpreted as an attempt to follow the trajectory of Ai's changing views.' Both limbs supported; claim carried no quote, hence SUBSTANCE.",None),
+import json, os
+
+src = "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/tolkien-09.json"
+out = "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-tolkien-i763-777.json"
+
+chunk = json.load(open(src, encoding="utf-8"))
+
+verdicts = [
+ {"index":763,"verdict":"VERIFIED_SUBSTANCE",
+  "trueWording":"\"sound like a traditional Chinese wuxia [martial arts fiction] story\"",
+  "note":"Raw wikitext of en.wikipedia Translating_The_Lord_of_the_Rings, Chinese section, reached via action=raw. Page: \"Li states that Ding et al's version may be more literary, at the cost of making it 'sound like a traditional Chinese wuxia [martial arts fiction] story'. In contrast, Chu, more familiar with Western fantasy, has written a far more popular version.\" Both limbs supported. Not VERBATIM: the supplied quote 'sounds like traditional Chinese wuxia' differs from the page ('sound like a traditional Chinese wuxia'), and the page hedges the judgement as Li Hong-man's ('may be')."},
+
+ {"index":764,"verdict":"VERIFIED_VERBATIM",
+  "trueWording":"\"fer que els orcs tinguessin un parlar com mes desballestat millor\"",
+  "note":"PDF fetched from ddd.uab.cat and text-extracted with pdfminer (17pp). Quote present verbatim. Limb 1: \"Sabia, aixo si, que el llibre es publicaria en una col.leccio escolar... Per aixo, prou curiosament, El hobbit es mes farcit de cultismes o formes potser un xic arcaiques o desuetes que no pas d'altres traduccions.\" Limb 2: \"els unics detalls linguistics... van ser alguns trets peculiars emprats pels homes del sud (Boromir, Faramir...): aqueix, son/seua, naltros, mos/vos...\" Limb 3 is the quoted orc clause. All three limbs supported."},
+
+ {"index":765,"verdict":"VERIFIED_SUBSTANCE",
+  "trueWording":"\"el cas de les dues traduccions alemanyes existents es invers\"",
+  "note":"Same PDF. Page: \"Segons que sembla, el cas de les dues traduccions alemanyes existents es invers: la primera, de Margaret Carroux, publicada entre 1969 i 1970, gaudeix de mes 'prestigi' que no pas la segona, de l'any 2000...\" The immediately preceding section is the Swedish case (Ohlmarks 1959-61 superseded by the orthodox Andersson/Olsson 2005), so 'invers' does refer to the Swedish. No quote was supplied, hence SUBSTANCE not VERBATIM; the page hedges with 'Segons que sembla' (apparently)."},
+
+ {"index":766,"verdict":"VERIFIED_VERBATIM",
+  "trueWording":"\"adding words and indulging in lengthy paraphrases... more complicated and high-faluting\"",
+  "note":"Raw wikitext of en.wikipedia Translation_of_The_Lord_of_the_Rings_into_Swedish. 'high-faluting' appears verbatim in the Stroembom footnote translation: \"by embroidering Tolkien's text, adding words and indulging in lengthy paraphrases, by frankly stubbornly turning the simple language into a more complicated and high-faluting one\". The 'hyperbolic' limb is supported separately on the same page: \"Andreas Brunner commented... that Ohlmarks' prose is hyperbolic in style, where the original uses simple or even laconic language.\" All limbs supported."},
+
+ {"index":767,"verdict":"VERIFIED_VERBATIM",
+  "trueWording":"\"he had intentionally created an interpretation of Tolkien, not a straight translation\"",
+  "note":"Same page. Lead: \"Ohlmarks rejected all criticism, stating that he had intentionally created an interpretation of Tolkien, not a straight translation.\" Quote is an exact substring. Refusal-of-revision limb: \"He ignored complaints and calls for revision from readers\" and \"Ohlmarks remained impervious to the numerous complaints and calls for revision\"."},
+
+ {"index":768,"verdict":"VERIFIED_SUBSTANCE",
+  "trueWording":"Sample table: Ohlmarks 42 words, Andersson and Olsson 24 words",
+  "note":"Same page, 'Prose' section. Stroembom's comparison table gives Tolkien 20 words, Ohlmarks 1959-1961 42 words, Andersson and Olsson 2005 24 words for 'Indeed, few Hobbits had ever seen or sailed upon the Sea...'. The laconic limb is supported: \"Commentators including Petter Lindgren in Aftonbladet have remarked on Ohlmarks's wordy text compared to Andersson's more laconic version\", and the page calls Tolkien's own language 'simple or even laconic'. No quote supplied, so SUBSTANCE; 'matched Tolkien's laconic tone' is the claim's phrasing, the page says only 'more laconic' than Ohlmarks."},
+
+ {"index":769,"verdict":"VERIFIED_VERBATIM",
+  "trueWording":"\"a readable, even and in large part correct translation\"",
+  "note":"Same page. Henrik Williams in Dagens Nyheter: \"Let me say that Andersson & Olsson have prepared a readable, even and in large part correct translation...\" - quote is an exact substring. Second limb, Malte Persson in Goeteborgsposten: \"the new translation follows the original's fluent prose very closely, and only a linguistic pedant could find anything to object to\". Both reviews are dated 27 September 2004 on the page although the article labels the version 2005."},
+
+ {"index":770,"verdict":"PARTIAL",
+  "unsupportedLimb":"Lavskaegge (reading 'beam' as light)",
+  "trueWording":"Lavskaegge = 'Lichenbeard'; beam-as-light is Quickbeam -> Snabba solstralen",
+  "note":"Same page. Two of three examples are supported: \"Ohlmarks used Vattnadal ('Water-dale') for Rivendell, apparently, Tolkien commented, by way of taking riven for river\"; and the names table gives Ford of Bruinen -> Bjoernavad ('Bear Ford'), \"A guess, using English 'Bruin', a brown bear\". The third is a conflation: the page glosses Lavskaegge as 'Lichenbeard', Ohlmarks's rendering of Treebeard, while the beam-as-light misreading belongs to a different name entirely - \"The Ent Quickbeam becomes Snabba solstralen ('Swift Sunbeam'), apparently taking beam in the sense of 'beam of light' instead of 'tree'\"."},
+
+ {"index":771,"verdict":"VERIFIED_VERBATIM",
+  "trueWording":"\"Dr. Ohlmarks is a conceited person, less competent than charming Max Schuchart\"",
+  "note":"Same page. Letter 263 blockquote: \"The enclosure that you brought from Almqvist &c. was both puzzling and irritating. A letter in Swedish from fil. dr. Ake Ohlmarks, and a huge list (9 pages foolscap) of names in the L.R. which he had altered... the impression remains, nonetheless, that Dr. Ohlmarks is a conceited person...\" - covers the nine-page altered-name list and 'both puzzling and irritating'. The Dutch limb is supported by the running text: \"He thought Ohlmarks's version was even worse than Schuchart's 1956-57 Dutch translation\". All limbs supported."},
+
+ {"index":772,"verdict":"VERIFIED_VERBATIM",
+  "trueWording":"his Vidstige \"even outdoes the original's Strider\"",
+  "note":"Same page: \"Stefan Spjut, reviewing the new translation in Svenska Dagbladet, commented that Ohlmarks's version had its merits, and that his Vidstige 'even outdoes the original's Strider', but that people would probably get used to the new version.\" Word for word; the page uses a curly apostrophe in original's where the supplied quote uses an ASCII one - a typographic difference only. 'One reviewer conceded' matches Spjut allowing merits to a version he is otherwise superseding."},
+
+ {"index":773,"verdict":"VERIFIED_SUBSTANCE",
+  "trueWording":"\"prompting him to compile his Guide to the Names\"; 1982 book, hostility from late 1970s",
+  "note":"Raw wikitext of en.wikipedia Ake_Ohlmarks. \"Ohlmarks translation of Tolkien's The Lord of the Rings was strongly disliked by the author, prompting him to compile his 'Guide to the Names in The Lord of the Rings'.\" And: \"As a result of the severe criticism... Ohlmarks in the late 1970s began to display hostility towards the 'Tolkien phenomenon', and in 1982 published a book titled Tolkien and Black Magic\" (Tolkien och den svarta magin, 1982). Both limbs supported; no quote was supplied, hence SUBSTANCE."},
+
+ {"index":774,"verdict":"VERIFIED_SUBSTANCE",
+  "trueWording":"\"lade till adjektiv och piffade upp dialogen... en helt annan bok\"",
+  "note":"Raw wikitext of sv.wikipedia Oeversaettning_av_Sagan_om_ringen_till_svenska. \"I Sydsvenska Dagbladet (2004) ger Andreas Brunner foersiktig beroem: 'Tolkien ville faa fram en aalderdomlig kaensla med ett avskalat spraak. Ohlmarks gjorde precis tvaertom, lade till adjektiv och piffade upp dialogen. Resultatet blev en foertjusande bok, men ocksaa en helt annan bok aen den Tolkien hade skrivit'.\" Added adjectives, spruced-up dialogue, delightful but quite different book - all three limbs supported; no quote supplied, so SUBSTANCE."},
+
+ {"index":775,"verdict":"VERIFIED_VERBATIM",
+  "trueWording":"\"six meals a day\" blev \"sex vaellagade maaltider om dagen\"",
+  "note":"Same sv.wikipedia page. \"Leif Jacobsen har granskat Ohlmarks oeversaettning... Dessutom menar han att oeversaettaren genomgaaende broderar ut texten och laegger till information som inte finns i originalet. Exempel som han lyfter fram aer 'six meals a day' som i Ohlmarks oeversaettning blev 'sex vaellagade maaltider om dagen'.\" Quote present verbatim; the padding limb and the attribution to Jacobsen are both supported."},
+
+ {"index":776,"verdict":"PARTIAL",
+  "unsupportedLimb":"to make the world feel ancient",
+  "trueWording":"\"en levande sagovaerld\" with as little to do with England as possible",
+  "note":"Same sv.wikipedia page. Supported: \"I Ohlmarks bok Tolkiens arv uppger denne att den egna uppgiften varit att goera en tolkning av Tolkien\" (Tolkiens arv is 1978 in the page's source list), and the block quote \"Jag gjorde foerst en noggrann slaetoeversaettning av hela boken och skrev sedan radikalt om den, hela tiden ledd av en straevan att soeka skildra en levande sagovaerld som hade precis saa lite att goera med England och engelskan som Tolkien tydligen avsett.\" The plain-draft-then-rewrite limb and the distance-from-England limb are exact. The 'feel ancient' limb is not in Ohlmarks's stated aim - he says a LIVING saga-world ('levande sagovaerld'); the only 'aalderdomlig kaensla' (archaic feeling) on the page is Brunner's description of what TOLKIEN wanted, of which he says Ohlmarks did the opposite."},
+
+ {"index":777,"verdict":"PARTIAL",
+  "unsupportedLimb":"attributing the Merry death-blow and the two Prancing Pony names to Malte Persson",
+  "trueWording":"Persson: \"missfoerstaand, felsyftningar, inkonsekvenser och godtyckliga tillaegg\"",
+  "note":"Same sv.wikipedia page. The first half is verbatim from Persson (Goeteborgs-Posten, 2004): \"Den aer saa spaeckad med missfoerstaand, felsyftningar, inkonsekvenser och godtyckliga tillaegg...\" Both examples exist on the page but neither is credited to Persson: the Witch-king error is unattributed article text in its own section ('Haexmaestarens doed' - \"I de flesta upplagor... aer det felaktigt hoben Meriadoc som ger Haexmaestaren av Angmar det doedande hugget, medan det i sjaelva verket aer Eowyn\"), and the inn's two names ('Den dansande ponnyn' in the prologue vs 'Den stegrande ponnyn' in the text) is sourced to Jacobsen and to the book itself. The 'including' limb therefore misattributes."},
 ]
-verdicts=[]
-for i,v,tw,note,limb in V:
-    d={"index":i,"verdict":v,"trueWording":tw,"note":note}
-    if limb: d["unsupportedLimb"]=limb
-    verdicts.append(d)
-out={"name":"leguin","chunk":1,"claims":src["claims"],"verdicts":verdicts}
-p=base+'verdicts-leguin-i15-29.json'
-json.dump(out,open(p,'w',encoding='utf-8'),indent=1,ensure_ascii=False)
-print("wrote",p,len(verdicts))
+
+assert len(verdicts) == 15
+assert [v["index"] for v in verdicts] == chunk["indices"], "index mismatch"
+
+payload = {"name": "tolkien", "chunk": 9, "claims": chunk["claims"], "verdicts": verdicts}
+os.makedirs(os.path.dirname(out), exist_ok=True)
+with open(out, "w", encoding="utf-8") as f:
+    json.dump(payload, f, ensure_ascii=False, indent=1)
+print("WROTE", out, os.path.getsize(out), "bytes")

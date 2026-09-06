@@ -268,5 +268,51 @@
    "unsupportedLimb": "that her only rule is the pronounceability rule — the page's single 'rule' has a second, equally stated half: avoid sweet swoony names ending in -a",
    "fromFile": "verdicts-leguin-i240-254.json"
   }
+ },
+ {
+  "index": 343,
+  "feature": "register modulation",
+  "claim": "John Plotz says the Earthsea books, written for young adults, tip two different registers at once.",
+  "source": "John Plotz, in conversation with Elizabeth Ferry, Public Books, 21 February 2024",
+  "url": "https://www.publicbooks.org/john-plotz-on-earthsea-anarchism-and-ursula-k-le-guin/",
+  "quote": "young adults can tip two different registers at once",
+  "page": "opening exchange",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2024-02-21",
+  "routeHint": "curl with browser user agent (live URL)",
+  "registerHint": "chronicle-line",
+  "angle": "close",
+  "verdict": {
+   "index": 343,
+   "verdict": "PARTIAL",
+   "trueWording": "And that rings true to me in that way that young adults can tip two different registers at once.",
+   "note": "Raw page fetched (Public Books, datePublished 2024-02-21, Elizabeth Ferry in conversation with John Plotz). The quotation is on the page word for word and is Plotz speaking. But its grammatical subject is young adults (readers), not the books: he says the Earthsea books' commissioning as the first YA fantasy series 'rings true... in that way that young adults can tip two different registers at once'. The two-registered quality of the books themselves is supported nearby only in other words ('the dual-aspect reality that she creates. That she's telling stories for adults and for children as well'; 'the two-sidedness of what it's like to read the books'), so repeating the quoted phrase as a statement about the books misplaces its subject.",
+   "unsupportedLimb": "the books (rather than young adults) as what tips two different registers at once",
+   "fromFile": "verdicts-leguin-i330-344.json"
+  }
+ },
+ {
+  "index": 349,
+  "feature": "place and institution description",
+  "claim": "Theodora Goss reads the opening of A Wizard of Earthsea as a camera that swoops down over the island from its high peak.",
+  "source": "Theodora Goss, \"Stonecoast: Wizard of Earthsea\", theodoragoss.com, 28 February 2015",
+  "url": "https://theodoragoss.com/2015/02/28/stonecoast-wizard-of-earthsea/",
+  "quote": "we swoop down over the island, from its high peak",
+  "page": "analysis following the quoted opening",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2015-02-28",
+  "routeHint": "curl with browser user agent (live URL)",
+  "registerHint": "dossier-archivist",
+  "angle": "close",
+  "verdict": {
+   "index": 349,
+   "verdict": "PARTIAL",
+   "trueWording": "we swoop down over the island, from its high peak",
+   "note": "Quotation is exact, but Goss never frames the movement as a camera. Her figure is the reader in motion under a bird's-eye view: 'often called a bird's eye view', 'At the beginning of Le Guin's book, we are the Sparrowhawk. We move as the hawk moves.' The hawk figure is load-bearing for her (it ties the viewpoint to Sparrowhawk), so 'camera' is the claimant's metaphor, not Goss's.",
+   "unsupportedLimb": "the 'camera' figure - Goss says bird's eye view and 'we move as the hawk moves', never a camera",
+   "fromFile": "verdicts-leguin-i345-359.json"
+  }
  }
 ]

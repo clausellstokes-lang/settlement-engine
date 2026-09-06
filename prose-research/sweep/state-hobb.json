@@ -8804,6 +8804,112 @@
    "note": "Quote verbatim. All limbs supported: her own household, occupational vocabulary (farmer vs sailing-ship background), and the same rooms under two names — the page adds 'But it's all in the same house.'",
    "fromFile": "verdicts-hobb-i165-179.json"
   },
+  "180": {
+   "index": 180,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "you should be able to tell who is talking without all the little clues like Joe said and Samantha replied",
+   "note": "Robin Hobb, verbatim in the transcript: 'If you want to do a double check, read your dialogue... you should be able to tell who is talking without all the little clues like Joe said and Samantha replied. If you can't tell who's speaking, then maybe you need to do some tweaking on it.' The 'little clues like Joe said and Samantha replied' are exactly the attribution tags, and 'do a double check' is the test framing. Every limb supported.",
+   "fromFile": "verdicts-hobb-i180-194.json"
+  },
+  "181": {
+   "index": 181,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "if you are an assassin and you walk into the room and there's three people there, what he notices is going to be very different from the child character who runs in the room",
+   "note": "Spoken by [Robin] verbatim: '...what he notices is going to be very different from the child character who runs in the room and is totally fixed on finding the toy they left there earlier and the big people standing around talking don't matter at all.' Same room, differing notice - fully supported.",
+   "fromFile": "verdicts-hobb-i180-194.json"
+  },
+  "182": {
+   "index": 182,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "All of these details that fill in around the character build the world at the same time",
+   "note": "Spoken by [Robin] verbatim, and the enumerated details immediately preceding are biographical: 'What sort of a family did you grow up in? What did your father and your mother do for a living? Are you in a small town? ... Are you wealthy? Are you poor?' Every limb supported.",
+   "fromFile": "verdicts-hobb-i180-194.json"
+  },
+  "183": {
+   "index": 183,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Its first paragraph is an excerpt from a piece being composed within the milieu, not unlike the Encyclopedia Galactica from Asimov's Foundation novels",
+   "note": "Elliott, of Assassin's Apprentice: 'The text of the novel opens with a chapter titled \"The Earliest History.\" Its first paragraph is an excerpt from a piece being composed within the milieu...' Quote verbatim; 'within the milieu' = inside the story's own world.",
+   "fromFile": "verdicts-hobb-i180-194.json"
+  },
+  "184": {
+   "index": 184,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I've noted before the Asimovian move of grounding chapters in in-milieu reference materials, something I appreciate",
+   "note": "Verbatim in the commentary paragraph of Entry 226 (Fool's Errand, Chapter 6): 'I am taken by the reminiscence with which the chapter opens. I've noted before the Asimovian move of grounding chapters in in-milieu reference materials...' Every limb supported.",
+   "fromFile": "verdicts-hobb-i180-194.json"
+  },
+  "185": {
+   "index": 185,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the opening passage is particularly compelling, the piecing-together of disparate and not always complete sources being something with which, as a medievalist, I am familiar",
+   "note": "Verbatim in the same commentary paragraph, and the medievalist limb is Elliott's own words in the same sentence. The chapter opens with Fitz's 'efforts at creating a coherent history of his nation', so the passage does enact the piecing-together.",
+   "fromFile": "verdicts-hobb-i180-194.json"
+  },
+  "186": {
+   "index": 186,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it takes it from the mythic realm and fleshes it out with motivations and characters and consequences until it looks like an entirely realistic plot point",
+   "note": "Review body: the big moment is 'lifted straight out of the fairy tale/epic fantasy Big Book of Cliches... What it is is, in a way, a deconstruction of the myth: it takes it from the mythic realm and fleshes it out...' Cliched-plot-point, fleshing-out, and realistic-result limbs all supported.",
+   "fromFile": "verdicts-hobb-i180-194.json"
+  },
+  "187": {
+   "index": 187,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it gives us a standard heroic plot, but it tells the story from an unexpected, peripheral perspective, and in the process gives us, as it were, the realistic inner workings of the myth",
+   "note": "Verbatim in the review body, one sentence carrying every limb of the claim.",
+   "fromFile": "verdicts-hobb-i180-194.json"
+  },
+  "188": {
+   "index": 188,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Most epic fantasy doesn't spend pages musing on the potential hurt feelings of unsympathetic former lovers or worrying about the apprentice fees for dependants",
+   "note": "Verbatim in the Originality: 4/5 paragraph, exactly as the claim's page hint says. The 'most epic fantasy does not spend pages on' limb is the same sentence's subject.",
+   "fromFile": "verdicts-hobb-i180-194.json"
+  },
+  "189": {
+   "index": 189,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "This is the sort of book that's determined to remind us ... that motivations are personal, and that consequences will also be personal",
+   "note": "Verbatim, closing the Originality: 4/5 paragraph. 'determined to remind us' carries the claim's 'insists'.",
+   "fromFile": "verdicts-hobb-i180-194.json"
+  },
+  "190": {
+   "index": 190,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "determined to remind us that the fantasy only matters because of the reality in its shadow",
+   "note": "Verbatim in the Originality: 4/5 paragraph; 'remind us' is the reviewer's own verb, matching the claim's 'reminds the reader'.",
+   "fromFile": "verdicts-hobb-i180-194.json"
+  },
+  "191": {
+   "index": 191,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "So much can be accomplished with only glances",
+   "note": "Review body, and the tenseness limb is supported by the same paragraph's opening: 'It's also a surprisingly tense and exciting book... some of my favourites are the scenes where Fitz is watching the expressions of various characters in a room as they each watch the expressions of the others (and of Fitz).'",
+   "fromFile": "verdicts-hobb-i180-194.json"
+  },
+  "192": {
+   "index": 192,
+   "verdict": "PARTIAL",
+   "trueWording": "As is usually the case with Hobb, her prose is unremarkable, and the flashes of beautiful imagery are balanced by her willingness to describe the horrific and the ugly",
+   "note": "Quote is verbatim in the 'Beauty: 3/5' paragraph, so the 'usually unremarkable' limb is solid. But the reviewer never says where her effect IS located; the sentence continues only about imagery balanced against the horrific and the ugly. The second limb is the analyst's gloss, not the page's statement.",
+   "unsupportedLimb": "locating her effect elsewhere than in sentence beauty",
+   "fromFile": "verdicts-hobb-i180-194.json"
+  },
+  "193": {
+   "index": 193,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "As always, Hobb's prose is solid and effective and occasionally pretty, but isn't going to win awards for its beauty",
+   "note": "Verbatim in the 'Beauty: 3/5' paragraph of the Fool's Fate review; both limbs (solid/effective/occasionally pretty, and not award-winning for beauty) are in the one sentence.",
+   "fromFile": "verdicts-hobb-i180-194.json"
+  },
+  "194": {
+   "index": 194,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "while the language does have that slightly heavy and old-fashioned tone common to the genre, that doesn't prevent it from delivering fantastic lines",
+   "note": "Verbatim in the 'Overall: 7/7. BRILLIANT.' paragraph of the Fool's Quest review, exactly where the claim's page hint places it.",
+   "fromFile": "verdicts-hobb-i180-194.json"
+  },
   "195": {
    "index": 195,
    "verdict": "VERIFIED_VERBATIM",
@@ -8909,6 +9015,640 @@
    "note": "Quote is verbatim, but the page says 'always ... when', not 'only ... when' — the converse. Page reserves the restrictive 'only' for description in the very next bullet ('She only delivers description when it's part of a conflict'), so the contrast is deliberate and the claim's 'only' is not on the page.",
    "unsupportedLimb": "the restrictive 'only' — the page asserts 'always serves up characterisation when it is immediately significant', which does not exclude characterisation at other moments",
    "fromFile": "verdicts-hobb-i195-209.json"
+  },
+  "210": {
+   "index": 210,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "She drops information on us after-the-fact but in ways that point forward",
+   "note": "Live page (blackgate.com, 200 OK, raw HTML stripped). Sentence appears verbatim under the 'First Person Slow Burn Thriller' heading; both limbs (after-the-fact, points forward) supported by the following gloss about mysterious strangers meaning danger 'Right Now'.",
+   "fromFile": "verdicts-hobb-i210-224.json"
+  },
+  "211": {
+   "index": 211,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "She exploits the fact we know what genre we are reading",
+   "note": "Live page, raw. Verbatim. Every limb supported: the sentence answers Page's own question 'So how does Robin Hobb keep the Thriller plot alive?' and is followed by 'We don't need a point-of-view shift to tell us that the ninjas have arrived.'",
+   "fromFile": "verdicts-hobb-i210-224.json"
+  },
+  "212": {
+   "index": 212,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a country house Gothic from the point of view of the moody denizens",
+   "note": "Live page, raw. Verbatim substring; full page sentence adds 'of the moody denizens', so 'its denizens' is supported. Said of Fool's Assassin in the opening paragraphs.",
+   "fromFile": "verdicts-hobb-i210-224.json"
+  },
+  "213": {
+   "index": 213,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "They are people who are at the lower echelons of the economic strata",
+   "note": "Live page (lightspeedmagazine.com, 200 OK, raw). Verbatim. The question that prompts it names The Inheritance & Other Stories, 'featuring short fiction from throughout your career', so the short-fiction limb is supported by context; Hobb's own words are 'many of the characters in my stories'.",
+   "fromFile": "verdicts-hobb-i210-224.json"
+  },
+  "214": {
+   "index": 214,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "in the spectrum of fantasy people who actually work every day for a living and have a tight budget can seem like they're poor",
+   "note": "Live page, raw. Verbatim, and every limb (fantasy, work every day, tight budget, seem poor) is in the one sentence.",
+   "fromFile": "verdicts-hobb-i210-224.json"
+  },
+  "215": {
+   "index": 215,
+   "verdict": "PARTIAL",
+   "trueWording": "we hunted and fished a lot for food... we had to put that food up for the winter",
+   "note": "Live page, raw. The quotation is verbatim, and the Alaskan-upbringing/food-preservation limbs are supported. But the passage is Hobb's answer to whether novelists should move to Alaska (about what a self-reliant location offers), not a statement about her fiction; she nowhere links putting food up to a survival economy in her work. The nearest real-life-to-work attribution on the page is geographic: 'There are a lot of things that come from real life into my written work, such as seismic activity, and lahars, and tidal waves.'",
+   "unsupportedLimb": "as the source of the survival economy in her work",
+   "fromFile": "verdicts-hobb-i210-224.json"
+  },
+  "216": {
+   "index": 216,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "They simply have something they want to get done, and it is more important to them than anything your protagonist wants to do",
+   "note": "Live host returned 403 to curl; recovered via Wayback raw capture 20250808211906id_ (200, 46KB). Verbatim. Byline confirmed in the page's JSON-LD: \"author\":{\"@type\":\"Person\",\"name\":\"Tayan Hatch\"}; dated 2024-12-19. The 'outweighs the protagonist's aim' limb is the sentence's own second clause.",
+   "fromFile": "verdicts-hobb-i210-224.json"
+  },
+  "217": {
+   "index": 217,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "You have to put it on like a coat and say, 'Now I believe everything you believe.'",
+   "note": "Wayback raw capture (same as 216). Verbatim. Introduced by Hatch as 'the importance of fully embodying a villain's perspective', supporting the 'a character's viewpoint' limb.",
+   "fromFile": "verdicts-hobb-i210-224.json"
+  },
+  "218": {
+   "index": 218,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "You could take that whole trilogy and rewrite it from his point of view, and he would be a tragic hero",
+   "note": "Wayback raw capture (same as 216). Verbatim, and named to Regal of the Farseer Trilogy in the immediately preceding sentences.",
+   "fromFile": "verdicts-hobb-i210-224.json"
+  },
+  "219": {
+   "index": 219,
+   "verdict": "PARTIAL",
+   "trueWording": "I'm not talking about world building here. I will mention briefly: coinage or money value, major religions, calendar with seasonal names and year dates",
+   "note": "Live page (robinhobb.com, 200 OK, raw). The list is verbatim, so the three named items are fully supported. But Hobb introduces the list by expressly bracketing the topic off - 'I'm not talking about world building here' - and then turns to what she does keep: 'But what I'm discussing here is the writer keeping the story straight' (time line and glossary). The page does not say she keeps records of coinage, religions or the calendar.",
+   "unsupportedLimb": "that these are worldbuilding records she keeps",
+   "fromFile": "verdicts-hobb-i210-224.json"
+  },
+  "220": {
+   "index": 220,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Not with a page number or even a chapter... but the incident. As in, 'Joe is met in the tavern shortly before the disastrous river crossing.'",
+   "note": "Live page, raw. Verbatim. Every limb supported in one passage: 'I needed my own glossary', 'I also found it handy to include when that character first appeared. Not with a page number or even a chapter, as those always change in the construction of a book, but the incident.'",
+   "fromFile": "verdicts-hobb-i210-224.json"
+  },
+  "221": {
+   "index": 221,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Each chapter begins with an epigraph-a snippet of in-world text ranging from historical treatises and herbalist journals to fragments of folklore and political propaganda",
+   "note": "Live host returned 403 to curl; recovered via Wayback raw capture 20260607133057id_ (200, 60KB). Verbatim, in section '2.2 The Epigraphs: World-Building through Fragmented History'. Note the page's list also includes herbalist journals, which the claim omits without misstating.",
+   "fromFile": "verdicts-hobb-i210-224.json"
+  },
+  "222": {
+   "index": 222,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the dry, academic tone of an epigraph about the 'glory' of the Farseer line is immediately followed by a scene depicting the brutal, unglamorous reality of Fitz's life",
+   "note": "Wayback raw capture (same as 221). Verbatim, under the 'Tonal Contrast' bullet in section 2.2.",
+   "fromFile": "verdicts-hobb-i210-224.json"
+  },
+  "223": {
+   "index": 223,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "By dedicating thousands of words to the mundane details of Fitz's daily existence... Hobb forces the reader to inhabit the protagonist's rhythm of life",
+   "note": "Wayback raw capture (same as 221). Verbatim, in section 2.3 'The \"Slow Burn\" as Psychological Immersion'; the causal 'attributes the slow burn to' limb is the sentence's own structure.",
+   "fromFile": "verdicts-hobb-i210-224.json"
+  },
+  "224": {
+   "index": 224,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The chapter epigraphs are excerpts from a public document, largely a formal history written in a distant, scholarly voice",
+   "note": "Abstract landing page fetched live (200) but does not carry the sentence; the PDF at cgi/viewcontent.cgi?article=3044 returned 403 live, recovered via Wayback raw capture 20240707045408id_ (200, application/pdf, 21pp) and text-extracted. The sentence is verbatim on PDF page 4, whose running head is 'Mythlore 41.1, Fall/Winter 2022 45', confirming p. 45. Side note, not part of the claim sentence: the PDF runs to printed p. 62, not p. 66 as the citation's page range states.",
+   "fromFile": "verdicts-hobb-i210-224.json"
+  },
+  "225": {
+   "index": 225,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "presumably the primary one, the authoritative one",
+   "note": "p.46 (PDF via Wayback raw capture): 'the formal, scholarly, distant history is presumably the primary one, the authoritative one, yet it is placed in the margins of the text'. Both limbs (authoritative; placed in the margins) supported verbatim.",
+   "fromFile": "verdicts-hobb-i225-239.json"
+  },
+  "226": {
+   "index": 226,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "opens with the authoritative voice of History",
+   "note": "p.53: 'the epigraph to the first chapter opens with the authoritative voice of History establishing a clear center to its narrative'. Claim's 'centre' is a spelling variant of the page's 'center'.",
+   "fromFile": "verdicts-hobb-i225-239.json"
+  },
+  "227": {
+   "index": 227,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Instead, he includes evidentiary quotes from her nursemaids",
+   "note": "p.56: 'Chapter 13 ... opens with an epigraph describing his father's widow, Patience. This lengthy excerpt contains no hint of the author's relationship to her or that any information in it came from his experience of her. Instead, he includes evidentiary quotes from her nursemaids and publicly available information.' All limbs supported.",
+   "fromFile": "verdicts-hobb-i225-239.json"
+  },
+  "228": {
+   "index": 228,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the main text feels more authoritative and satisfying",
+   "note": "pp.56-57: 'The \"marginalia\" here (that is, the main text) feels more authoritative and satisfying than the dry, impersonal, but objective history beginning the chapter'. Both limbs supported; Oliver's verb is 'feels', which the claim renders as 'judges'. Quote actually sits at the p.56/57 break, not p.56 alone (citation field only).",
+   "fromFile": "verdicts-hobb-i225-239.json"
+  },
+  "229": {
+   "index": 229,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Perhaps the most striking stylistic element ... 'negative narration'",
+   "note": "p.57: 'Perhaps the most striking stylistic element of this book is its continual insistence on describing what is not happening instead of or before describing what is happening, a style we might think of as \"negative narration.\"' Both limbs supported; note Oliver hedges ('Perhaps', 'we might think of as') where the claim asserts flatly.",
+   "fromFile": "verdicts-hobb-i225-239.json"
+  },
+  "230": {
+   "index": 230,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "in sentences that start by telling what a character is not doing",
+   "note": "p.57: 'This manifests not just in double negatives (of which there are many) but in sentences that start by telling what a character is not doing or feeling.' Verbatim, including the 'or feeling' limb.",
+   "fromFile": "verdicts-hobb-i225-239.json"
+  },
+  "231": {
+   "index": 231,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "constantly focuses on what is not happening or what is not present",
+   "note": "p.45: 'the novel constantly focuses on what is not happening or what is not present in order to define what is happening by evoking it in imagination.' Every limb verbatim.",
+   "fromFile": "verdicts-hobb-i225-239.json"
+  },
+  "232": {
+   "index": 232,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "can we imagine and apprehend what did happen",
+   "note": "p.47: 'Only through absences, the negative spaces, the things that did not happen, can we imagine and apprehend what did happen'. Claim's 'the reader' stands for Oliver's inclusive 'we'; page adds 'imagine and' before 'apprehend'.",
+   "fromFile": "verdicts-hobb-i225-239.json"
+  },
+  "233": {
+   "index": 233,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a lengthy portion of the narrative given over to describing what is not there",
+   "note": "p.61: 'In a way, this is a lengthy portion of the narrative given over to describing what is not there' (the 'misted' section where Galen's tampering is the absent detail). The seventy-page limb is supported two paragraphs later, pp.61-62: 'Then Verity finally explicates what has been happening for the past 70 pages of the novel' — same stretch, but the figure and the phrase are not in one sentence.",
+   "fromFile": "verdicts-hobb-i225-239.json"
+  },
+  "234": {
+   "index": 234,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "particularly extensive parataxis, elevated figurative language, and parallelism",
+   "note": "pp.59-60: 'His description employs several syntactic patterns typical of the elevated style associated with fantasy novels, particularly extensive parataxis, elevated figurative language, and parallelism', and 'Fitz marks his shift from a discourse of history to a discourse of fantasy with a shift in style.' Both limbs supported.",
+   "fromFile": "verdicts-hobb-i225-239.json"
+  },
+  "235": {
+   "index": 235,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "increasingly infected by the style of imaginative fiction",
+   "note": "pp.60-61: 'the epigraphs become increasingly infected by the style of imaginative fiction in place of the style of scholarly discourse', in a passage about the novel's later movement ('Even as the narrator starts to shift the burden of constructing events to the reader'). A first literal string match missed only because pypdf breaks the word as 'imag inative' at a line end.",
+   "fromFile": "verdicts-hobb-i225-239.json"
+  },
+  "236": {
+   "index": 236,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Two sentences use inverted syntax (the first and the last)",
+   "note": "pp.62-63, on the chapter 15 epigraph about the Skill: 'Two sentences use inverted syntax (the first and the last), in addition to the parataxis across sentence boundaries (\"And this is the thing\") and the listing of parallel phrases'. All three limbs supported.",
+   "fromFile": "verdicts-hobb-i225-239.json"
+  },
+  "237": {
+   "index": 237,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a memoir not dissimilar to the Venerable Bede's history",
+   "note": "p.63, Oliver's block quotation of Mendlesohn: 'Each chapter begins with a memoir not dissimilar to the Venerable Bede's history: recollection and gossip masquerading as an accurate description of the past.' Cited '(16)' and Works Cited gives 'Mendlesohn, Farah. Rhetorics of Fantasy. Wesleyan UP, 2008.' — attribution, year and page all check out.",
+   "fromFile": "verdicts-hobb-i225-239.json"
+  },
+  "238": {
+   "index": 238,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I try to keep in mind that every character is the hero of his own story",
+   "note": "Raw HTML of sylrmartin.com (200, live, no summarizer): 'I try to keep in mind that every character is the hero of his own story, that is, he brings his own past, his problems, his attitude and his hope for the future to the story.' Attributed to ROBIN HOBB answering SRM; page datePublished 2023-05-19.",
+   "fromFile": "verdicts-hobb-i225-239.json"
+  },
+  "239": {
+   "index": 239,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Each character has to be the product of the imaginary world they exist in",
+   "note": "Same live page, inspiration answer: 'But I never take a person I know, change name and hair colour and insert into a book. It just wouldn't work. Each character has to be the product of the imaginary world they exist in.' Verbatim, Hobb speaking.",
+   "fromFile": "verdicts-hobb-i225-239.json"
+  },
+  "240": {
+   "index": 240,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I like to use people as sources ... that will be my first choice",
+   "note": "Raw page read. Verbatim: 'I like to use people as sources so if I can find a person who will tell me about bee-keeping or navigating or whatever topic I'm researching, that will be my first choice.' Both limbs (people first, bee-keeping/navigating named) on the page.",
+   "fromFile": "verdicts-hobb-i240-254.json"
+  },
+  "241": {
+   "index": 241,
+   "verdict": "PARTIAL",
+   "trueWording": "Diaries or other first person accounts are great",
+   "note": "Quote is verbatim: 'Diaries or other first person accounts are great if I'm trying to find out about an older technology.' The 'older technology' pairing is exact, but the page ranks only people ('that will be my first choice'); diaries are called 'great', never preferred over other sources.",
+   "unsupportedLimb": "'preferred sources' - the page says only that diaries are 'great' for older technology; the sole stated first choice is people",
+   "fromFile": "verdicts-hobb-i240-254.json"
+  },
+  "242": {
+   "index": 242,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Transplants are simply not believable",
+   "note": "Raw page read. Sentence appears verbatim. Both limbs covered: 'I never take an actual event ... and drop it into a book' (event) and 'I never take a person I know, change name and hair colour and insert into a book ... Each character has to be the product of the imaginary world they exist in' (person).",
+   "fromFile": "verdicts-hobb-i240-254.json"
+  },
+  "243": {
+   "index": 243,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "no one is bruised afterwards, there is no blood, no one limps",
+   "note": "Raw page read. Verbatim within: 'Often, no one is bruised afterwards, there is no blood, no one limps or throws up in the corner.' The screen limb is on the page: 'I'm often annoyed by movies in which the protagonist is kicked in the head...'",
+   "fromFile": "verdicts-hobb-i240-254.json"
+  },
+  "244": {
+   "index": 244,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Having a good character does not protect you from physical damage",
+   "note": "Raw page read. Sentence appears verbatim in the 'Writing Traumatic Experiences' section, following 'if you get kicked in the head, you brain sloshes around in your skull'. Page sense is moral character, which the claim's wording preserves.",
+   "fromFile": "verdicts-hobb-i240-254.json"
+  },
+  "245": {
+   "index": 245,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The things that happen to us change us ... what makes a character interesting",
+   "note": "Raw page read. Verbatim: 'The things that happen to us change us.' The second limb is the same paragraph: 'I think that is actually what makes a character interesting.'",
+   "fromFile": "verdicts-hobb-i240-254.json"
+  },
+  "246": {
+   "index": 246,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "We are all the sum of our experiences, good and bad",
+   "note": "Raw page read. Sentence appears verbatim in the 'Writing Traumatic Experiences' section.",
+   "fromFile": "verdicts-hobb-i240-254.json"
+  },
+  "247": {
+   "index": 247,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Characters are shaped by their experiences. We become the product of what has been done to us",
+   "note": "Raw page read. Verbatim in the 'Hobb's Writing as a Whole' section, exactly as the claim's page field says; the page adds 'Or for us.'",
+   "fromFile": "verdicts-hobb-i240-254.json"
+  },
+  "248": {
+   "index": 248,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the writer must put that character on like donning a coat",
+   "note": "Raw page read. Verbatim within: 'Creating a character who is a viewpoint character means that the writer must put that character on like donning a coat.'",
+   "fromFile": "verdicts-hobb-i240-254.json"
+  },
+  "249": {
+   "index": 249,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "rely on the reader to be alert and connect the dots",
+   "note": "Raw page read. Verbatim within: 'And sometimes that means that I, as a writer, have to rely on the reader to be alert and connect the dots, so to speak.' First person is the stated cause (the disadvantage of first-person narration).",
+   "fromFile": "verdicts-hobb-i240-254.json"
+  },
+  "250": {
+   "index": 250,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the reader will know things that the protagonist would not otherwise verbalize",
+   "note": "Raw page read. Verbatim within: 'I like the intimacy of telling a story in the first person, because the reader will know things that the protagonist would not otherwise verbalize at all.' The intimacy limb is explicit.",
+   "fromFile": "verdicts-hobb-i240-254.json"
+  },
+  "251": {
+   "index": 251,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the reader will perhaps be able to see what is coming even if the main character doesn't",
+   "note": "Raw page read. Verbatim within that sentence. 'Main character' is the first-person narrator in this passage, so the claim's 'narrator' limb holds.",
+   "fromFile": "verdicts-hobb-i240-254.json"
+  },
+  "252": {
+   "index": 252,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The writing and style in those books differs substantially from the Robin Hobb books",
+   "note": "Raw page read. Verbatim. 'Those books' is fixed by the question asked - whether the Megan Lindholm books will return to print in the US.",
+   "fromFile": "verdicts-hobb-i240-254.json"
+  },
+  "253": {
+   "index": 253,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I think I write for people who really like to know the characters",
+   "note": "Raw page read. The quoted string appears word for word inside the page sentence, which carries a hedge ('I think I write for people...'); the claim's substance is otherwise exact.",
+   "fromFile": "verdicts-hobb-i240-254.json"
+  },
+  "254": {
+   "index": 254,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "you get to collect all the best bits, and then you can joggle things a bit to make them fit your world",
+   "note": "Raw page read. Verbatim within: 'The thing about researching for a fantasy is that you get to collect all the best bits, and then you can joggle things a bit to make them fit your world.' The history limb follows: 'The writer isn't locked into any exact period of history...'",
+   "fromFile": "verdicts-hobb-i240-254.json"
+  },
+  "255": {
+   "index": 255,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"You can just type, 'After four days of punishing travel...'\"",
+   "note": "Raw page reached (robinhobb.com, HTTP 200). Section 'I don't want to write the next scene. It's boring.' Every limb holds: the boring stretch should not be written ('The solution. Don't write it.'), the four-day desert crossing is her own example, and she supplies the sentence verbatim - the page continues '...they reached a small holding near a water hole.' Or something similar.",
+   "fromFile": "verdicts-hobb-i255-269.json"
+  },
+  "256": {
+   "index": 256,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"You can have a one sentence chapter if you want.\"",
+   "note": "Raw page reached. Exact sentence in the same section, immediately after the sample travel sentence, followed by 'It's your book.'",
+   "fromFile": "verdicts-hobb-i255-269.json"
+  },
+  "257": {
+   "index": 257,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"the same synonyms that every other writer is using\"",
+   "note": "Raw page reached. The asterisked footnote reads: 'Do you have a copy of Roget's Thesaurus? If not, go buy one now. A fat paper thesaurus is a treasure. See, if I look for a synonym for treasure via the word processing program I'm using, it will show me the same synonyms that every other writer is using. The thesaurus will give you a lot more choices.' Both limbs (rejection of the word-processor thesaurus, recommendation of a paper Roget's) are on the page.",
+   "fromFile": "verdicts-hobb-i255-269.json"
+  },
+  "258": {
+   "index": 258,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"The car isn't red, it's candy apple red with metal flake.\"",
+   "note": "Raw page reached. Section 'Nope. I'm blocked. Really blocked.' The 'revision-pass' limb is supported by the surrounding instruction: 'Go back four pages... Put on your editor hat and start looking at your work', with the car line as one of three sample line-edits.",
+   "fromFile": "verdicts-hobb-i255-269.json"
+  },
+  "259": {
+   "index": 259,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"on my first read, I do the really close line-reading and individual sentence editing\"",
+   "note": "Raw page reached (juliecrisp.co.uk, HTTP 200; live host, no archive needed). Quote exact. The descriptor limb is supported by the interviewer's intro: 'Anne Groell who is an SFF Executive editor over at Random House USA... editing George R. R. Martin through to Terry Brooks, Robin Hobb, Naomi Novik, Scott Lynch, Connie Willis' - note that framing is Crisp's, not Groell's own words.",
+   "fromFile": "verdicts-hobb-i255-269.json"
+  },
+  "260": {
+   "index": 260,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Going full out, I average about 25 pages an hour, or 200 pages a day\"",
+   "note": "Raw page reached. Quote exact. It is a parenthetical attached to the first-read sentence, so the 'on that first close read' limb holds. One qualifier the claim drops: the page prefixes it with 'Going full out', and adds that an 800-pager therefore takes 4 solid days 'if there is nothing else to do - but there is always something else to do, meaning this often stretches to a week and a half.'",
+   "fromFile": "verdicts-hobb-i255-269.json"
+  },
+  "261": {
+   "index": 261,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Bingtown could belong to an entirely different age than the Six Duchies.\"",
+   "note": "Raw page reached (theidlewoman.net, HTTP 200). Exact sentence in the opening paragraph of the review body, right after Bingtown is placed 'between Chalced and Jamaillia'.",
+   "fromFile": "verdicts-hobb-i255-269.json"
+  },
+  "262": {
+   "index": 262,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"rather than the medievalism of The Farseer trilogy, we have trade and shipping and merchants' colonies, with a distinctly seventeenth-century feel\"",
+   "note": "Raw page reached. Same opening paragraph, the sentence immediately after the one quoted at index 261. All three limbs - trade/shipping/merchants' colonies, the seventeenth-century feel, and the contrast with Farseer medievalism - are in that one sentence.",
+   "fromFile": "verdicts-hobb-i255-269.json"
+  },
+  "263": {
+   "index": 263,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Hobb's habit of repeating things, as if she didn't trust her readers to remember them\"",
+   "note": "Raw page reached (strangehorizons.com, HTTP 200). Quote exact, in the fourth paragraph as the chunk states. Context worth carrying if the claim is reused: Goldstein names the habit only to say it 'is very little in evidence' in Dragon Haven - the criticism is of Hobb's general habit, not of this book.",
+   "fromFile": "verdicts-hobb-i255-269.json"
+  },
+  "264": {
+   "index": 264,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"The writing, which seemed tired and repetitious in the earlier book, is tightened here\"",
+   "note": "Raw page reached. Quote exact, fourth paragraph. The claim's naming of 'Dragon Keeper' for the page's 'the earlier book' is licensed by the review's own first paragraph ('Dragon Keeper, the first book in Robin Hobb's new series') and by 'the previous novel' in the third; 'here' is Dragon Haven, the book under review.",
+   "fromFile": "verdicts-hobb-i255-269.json"
+  },
+  "265": {
+   "index": 265,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Very little happens that couldn't have been guessed by an astute reader\"",
+   "note": "Raw page reached. Quote exact, sixth paragraph as the chunk states, opening 'In the end, though, Dragon Haven left me with a vague taste of disappointment.' and continuing 'there are few surprises along the way.'",
+   "fromFile": "verdicts-hobb-i255-269.json"
+  },
+  "266": {
+   "index": 266,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Fan fiction closes up the space that I have engineered into the story\"",
+   "note": "Wayback raw capture (web/20050630015105id_/robinhobb.com/rant.html) fetched directly, HTTP 200 - the id_ route the chunk supplies returns the unmodified 2005 page, no summarizer involved. Quote exact, in the section answering 'I should be flattered that readers like my stories enough to want to continue them.'",
+   "fromFile": "verdicts-hobb-i255-269.json"
+  },
+  "267": {
+   "index": 267,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"the reader is told what he must think rather than being allowed to observe the characters and draw his own conclusions\"",
+   "note": "Same raw Wayback capture. Quote exact - it is the second half of the very sentence quoted at index 266, so both claims rest on one sentence of the rant.",
+   "fromFile": "verdicts-hobb-i255-269.json"
+  },
+  "268": {
+   "index": 268,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"If something is left nebulous, it is because the author intends for it to be nebulous.\"",
+   "note": "Same raw Wayback capture. Quote exact. The page phrases the principle in the third person ('the author'), not the first; the claim's 'her text / she intends' reading is carried by the immediate context, where Hobb is defending her own work ('the space that I have engineered into the story' is the next sentence). Quote it as written to stay accurate.",
+   "fromFile": "verdicts-hobb-i255-269.json"
+  },
+  "269": {
+   "index": 269,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"A writer puts a great deal of thought into what goes into the story and what doesn't.\"",
+   "note": "Same raw Wayback capture. Quote exact, and the following sentence extends it: 'If a particular scene doesn't happen on stage before the reader's eyes, there is probably a reason for it.'",
+   "fromFile": "verdicts-hobb-i255-269.json"
+  },
+  "270": {
+   "index": 270,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Each of us draws his own conclusions about her elusive smile",
+   "note": "Archived 2005 capture of robinhobb.com/rant.html fetched raw. Section 'I should be flattered that readers like my stories enough to want to continue them.' reads: 'To use an analogy, we look at the Mona Lisa and wonder. Each of us draws his own conclusions about her elusive smile. We don't draw eyebrows on her to make her look surprised, or put a balloon caption over her head.' Quote verbatim; analogy, the drawn conclusions and the eyebrows limb all present.",
+   "fromFile": "verdicts-hobb-i270-284.json"
+  },
+  "271": {
+   "index": 271,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "We have five senses, and in a description of anything, I want to engage as many of them as possible",
+   "note": "lisipieces.com fetched raw (byline 'By Elise Mead', datePublished 2025-10-18). Hobb, quoted in the food section and again verbatim in the Q&A: 'I think it goes back to ‘show don’t tell.’ We have five senses, and in a description of anything, I want to engage as many of them as possible.' Quote verbatim, whole claim supported.",
+   "fromFile": "verdicts-hobb-i270-284.json"
+  },
+  "272": {
+   "index": 272,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "She maintains geographical consistency, ensuring ingredients match what would actually grow in each region",
+   "note": "Same page, Mead's own prose: 'She maintains geographical consistency, ensuring ingredients match what would actually grow in each region, though she admits to enjoying the occasional imported luxury like ginger root.' Quote verbatim; attribution to Mead paraphrasing Hobb correct (Hobb's own answer says 'I try to keep the menu to what might actually be growing and available in that type of area').",
+   "fromFile": "verdicts-hobb-i270-284.json"
+  },
+  "273": {
+   "index": 273,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "she wishes she’d determined coinage and monetary values from the start",
+   "note": "Same page, practical-wisdom section: 'When it comes to worldbuilding, she wishes she’d determined coinage and monetary values from the start.' Backed by Hobb's own words in the Q&A: 'Things I wish I’d done? Determine coinage and value of money and stick to it consistently.' Quote verbatim, every limb supported.",
+   "fromFile": "verdicts-hobb-i270-284.json"
+  },
+  "274": {
+   "index": 274,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "anchored to a chapter or event rather than page numbers",
+   "note": "Same page: 'Maintaining a glossary where every proper noun goes in alphabetically with a brief explanation, anchored to a chapter or event rather than page numbers.' Hobb's own answer: 'Page numbers won’t work, because they change. Use a chapter or an event to anchor it.' Quote verbatim.",
+   "fromFile": "verdicts-hobb-i270-284.json"
+  },
+  "275": {
+   "index": 275,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A tale of three magic wishes works well; an infinite number of wishes is no story at all",
+   "note": "Same page, in Hobb's own interview answer on magic limits: 'It is essential, in my opinion, that magic have limits in a story. A tale of three magic wishes works well; an infinite number of wishes is no story at all.' Quote verbatim; both limbs (three wishes works, infinite is no story) present and attributed to Hobb.",
+   "fromFile": "verdicts-hobb-i270-284.json"
+  },
+  "276": {
+   "index": 276,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The geography of Fitz’s world is not a backdrop … full of sight, sound, taste, and cinematic color",
+   "note": "Same page, Mead's worldbuilding section: 'The geography of Fitz’s world is not a backdrop in Hobb’s work. It’s a living entity, full of sight, sound, taste, and cinematic color.' Quote verbatim; the 'not a backdrop' limb is the immediately preceding sentence.",
+   "fromFile": "verdicts-hobb-i270-284.json"
+  },
+  "277": {
+   "index": 277,
+   "verdict": "PARTIAL",
+   "trueWording": "because at that early point Fitz had no exposure to the world, and so wouldn’t have any notion of what a “iodine smell” would be",
+   "note": "loopingworld.com post (22 September 2025, author Abalieno) fetched raw. The P.S. reads: 'the book is written in first person, but it’s not as much a close perspective as I expected. This early passage at page 21: “I leaned my forehead against his back and felt ill in the brackish iodine smell of the immense water…” I wrote a note there, because at that early point Fitz had no exposure to the world… I was expecting a much more closed perspective there.' Quote verbatim and every other limb (first person, less close than expected, brackish iodine smell, page 21, a perception Fitz could not have had) is supported. Graded PARTIAL only because the blogger never states Fitz's age; he says 'at that early point' and elsewhere 'Fitz, by being just a kid'.",
+   "unsupportedLimb": "the narrator's age — 'six-year-old' is nowhere on the page; the blogger says only 'at that early point'",
+   "fromFile": "verdicts-hobb-i270-284.json"
+  },
+  "278": {
+   "index": 278,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "You don’t see melodrama, you don’t see the character screaming in pain, or being in shock",
+   "note": "Same post, paragraph on time jumps and Fitz's voice: 'when something dramatic happens, it’s like there’s no screen. You don’t see melodrama, you don’t see the character screaming in pain, or being in shock.' Quote verbatim; the 'in shock' limb of the claim is the continuation of the same sentence.",
+   "fromFile": "verdicts-hobb-i270-284.json"
+  },
+  "279": {
+   "index": 279,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "But I think Fitz voice is actually understated",
+   "note": "Same paragraph: 'I’d have expected a very strong personality, very strong characterization. But I think Fitz voice is actually understated.' The second limb is supported later in the same paragraph: 'I think this kind of muted internal voice helps to instead bring up the other characters and places. Making the surrounding pieces more lively.' Quote verbatim.",
+   "fromFile": "verdicts-hobb-i270-284.json"
+  },
+  "280": {
+   "index": 280,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "And it is prose first and foremost, with direct dialogue taking a backseat",
+   "note": "Same post, paragraph beginning 'This was the romantic view': 'For me it was purely the prose… This is a book to enjoy because of how well it is written. And it is prose first and foremost, with direct dialogue taking a backseat.' Quote verbatim; both limbs supported.",
+   "fromFile": "verdicts-hobb-i270-284.json"
+  },
+  "281": {
+   "index": 281,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "some actions don’t seem to have any other consequence … As if the characters shrugged off what happened",
+   "note": "Same post, paragraph beginning 'Even here it’s not all “perfect.”': 'And it’s completely baffling that some actions don’t seem to have any other consequence, without spoiling the plot. The aftermath just appears to be absurd. As if the characters shrugged off what happened, and move on just as usual.' Quote verbatim; the 'final chapters' limb is supported by the same paragraph's frame ('all plot that didn’t happen through most of the book, happens all at once at the end').",
+   "fromFile": "verdicts-hobb-i270-284.json"
+  },
+  "282": {
+   "index": 282,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the slow pacing here isn’t a weak point to overcome, it’s where the whole value is",
+   "note": "Same post, the paragraph immediately after the block-quoted reader review of the third book: 'But as the quote above states, the slow pacing here isn’t a weak point to overcome, it’s where the whole value is. You don’t look ahead to anticipate where the story will go, you stay in the present.' Reinforced two paragraphs later: 'To slow down, to be in the present, within the page you’re reading, rather than looking ahead.' Quote verbatim; both limbs supported.",
+   "fromFile": "verdicts-hobb-i270-284.json"
+  },
+  "283": {
+   "index": 283,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "But the novel’s main strength is its narrative voice",
+   "note": "fantasy-hive.co.uk review fetched raw; byline 'By Laura M. Hughes', dated December 8, 2017. Final body paragraph: 'Both the plot and the characters are well-rounded and captivating, as is the setting and worldbuilding. But the novel’s main strength is its narrative voice.' Quote verbatim; the 'not plot or worldbuilding' contrast is the immediately preceding sentence.",
+   "fromFile": "verdicts-hobb-i270-284.json"
+  },
+  "284": {
+   "index": 284,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "unlike Kvothe, Fitz is brutally honest, and his self-deprecating narrative includes all the damning facts about himself and his own actions",
+   "note": "Same final paragraph: '…brings to the fore a likeable and sympathetic main character who is in many ways the opposite of Rothfuss’s Kvothe. Like Kvothe, Fitz is conscious of telling his own story; unlike Kvothe, Fitz is brutally honest, and his self-deprecating narrative includes all the damning facts about himself and his own actions.' Quote verbatim; the contrast with Rothfuss's Kvothe, the self-deprecating narration and the damning facts about his own actions are all on the page ('rather than flattering him' is the direct sense of 'self-deprecating'/'brutally honest').",
+   "fromFile": "verdicts-hobb-i270-284.json"
+  },
+  "285": {
+   "index": 285,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "which would have been the narratively efficient thing to do",
+   "note": "Raw page reached (curl, browser UA, HTTP 200); full article body present. Quote exact. Every limb holds: 'But nobody just says ‘it was Garetha the garden maid’, which would have been the narratively efficient thing to do. Far more realistically — they live in a castle with hundreds of people in it — neither of them quite know who she is and they have to work it out between them.' Byline 'By Natasha Pulley', 'Published on July 10, 2015'; the author bio on the same page confirms novelist ('The Watchmaker of Filigree Street is her first novel').",
+   "fromFile": "verdicts-hobb-i285-299.json"
+  },
+  "286": {
+   "index": 286,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "What’s brilliant, though, is that he does it over straw",
+   "note": "Quote exact. All limbs on the page: the Fool says 'Hair the colour of clean straw'; Fitz answers 'Her hair is light brown, not gold'; Pulley then writes 'He grew up in stables and now he’s having to work as a manservant. The Fool, however, was the King’s jester and now lives rather the high life as a wealthy nobleman. He has no business whatsoever with straw.' Only wording nuance: the page never labels the phrase a 'simile' — that word is the claim's, not Pulley's; the comparison itself is quoted verbatim on the page.",
+   "fromFile": "verdicts-hobb-i285-299.json"
+  },
+  "287": {
+   "index": 287,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It says volumes about both of them",
+   "note": "Quote exact and it is the last sentence of that paragraph, as the page hint says. The 'class histories' limb is carried by the page's own contrast in the immediately preceding sentences (stables → manservant vs King’s jester → wealthy nobleman), and the 'without statement' limb by 'says volumes' about an argument the page frames as being over 'this irrelevant woman'. The page does not use the word 'class'; it states the two social histories concretely.",
+   "fromFile": "verdicts-hobb-i285-299.json"
+  },
+  "288": {
+   "index": 288,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "but it has these pin-sharp moments too",
+   "note": "Quote exact, in the final body paragraph as the hint says: 'This trilogy has dragons in it, and prophets, and sweeping landscapes, but it has these pin-sharp moments too.' Every listed element (dragons, prophets, sweeping landscapes) and the contrast are on the page verbatim.",
+   "fromFile": "verdicts-hobb-i285-299.json"
+  },
+  "289": {
+   "index": 289,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "admired the controlled point of view, the leisurely pace",
+   "note": "Raw page reached (curl, browser UA, HTTP 200); full essay body present. Quote exact: 'Started reading, admired the controlled point of view, the leisurely pace.' First-reading limb supported by the preceding paragraph ('I’d not read Hobb before and knew nothing of her'). Byline 'By Steven Erikson', 'Published on April 27, 2016'; bio on the page confirms novelist (Malazan Book of the Fallen).",
+   "fromFile": "verdicts-hobb-i285-299.json"
+  },
+  "290": {
+   "index": 290,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "deconstructing, line by line, to catch every subtle tell",
+   "note": "Quote exact. Both remaining limbs on the page in the same sentence and the one before it: 'that passage left me stunned, rapidly flipping back through the pages that led up to that scene. Rereading (I almost never reread), and then, in wonder, deconstructing, line by line, to catch every subtle tell, every hint that I missed the first time around.'",
+   "fromFile": "verdicts-hobb-i285-299.json"
+  },
+  "291": {
+   "index": 291,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "in the workshops I occasionally teach, I cite the opening chapters",
+   "note": "Quote exact: 'To this day in the workshops I occasionally teach, I cite the opening chapters of Assassin’s Apprentice as required reading when it comes to point of view.' All limbs supported. Two wording differences worth carrying if the sentence is quoted tightly: the page says 'cite ... as required reading' rather than 'sets', and 'workshops I occasionally teach' rather than an unqualified 'teaches'.",
+   "fromFile": "verdicts-hobb-i285-299.json"
+  },
+  "292": {
+   "index": 292,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Knowledge is fed piecemeal, at a child’s pace of comprehension",
+   "note": "Quote exact, in the paragraph beginning 'It’s no accident the child POV is popular in fantasy fiction'. The 'worked example is Hobb’s Fitz' limb is supported by the essay as a whole and by the very next paragraph: 'So here I bought into Fitz’s little world, bought into its seeming normality, only to have it all suddenly torn away.'",
+   "fromFile": "verdicts-hobb-i285-299.json"
+  },
+  "293": {
+   "index": 293,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the further things and events are from Fitz's perspective, the less reliable they are",
+   "note": "Raw page reached (curl, browser UA, HTTP 200); full review present, dated 'Sunday, 28 August 2016', 'Posted by Adam Whitehead'. Quote exact, in the paragraph beginning 'Much of your enjoyment of these books'. The page frames it as the mechanism of Fitz as 'an effectively unreliable narrator', which is exactly the reliability rule the claim states.",
+   "fromFile": "verdicts-hobb-i285-299.json"
+  },
+  "294": {
+   "index": 294,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "her deft hand with charaterisation and her naturalistic way of presenting the world",
+   "note": "Quote exact: 'Robin Hobb’s greatest strength is her deft hand with charaterisation and her naturalistic way of presenting the world.' Both limbs (naturalistic presentation of the world, alongside characterisation, named as the greatest strength) verbatim. Page spells it 'charaterisation' (sic).",
+   "fromFile": "verdicts-hobb-i285-299.json"
+  },
+  "295": {
+   "index": 295,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a tendency to meander, to have characters sitting around talking about the plot",
+   "note": "Quote exact, in the same paragraph as 294: 'Her greatest weakness is a tendency to meander, to have characters sitting around talking about the plot rather than getting on with things and taking a hundred pages to do what a more concise author would do in ten.' The 'at length' limb is carried by that hundred-pages-for-ten clause.",
+   "fromFile": "verdicts-hobb-i285-299.json"
+  },
+  "296": {
+   "index": 296,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Hobb is a superior prose writer and a gifted communicator of emotions and atmosphere",
+   "note": "Quote exact and the claim reproduces the full sentence's substance without addition; it opens its own paragraph on the page, as the hint says.",
+   "fromFile": "verdicts-hobb-i285-299.json"
+  },
+  "297": {
+   "index": 297,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In our house, we have a galley, we have a head, we have a deck",
+   "note": "Raw page reached (curl, browser UA, HTTP 200); the Mike Barker transcript is on the episode page itself, lines attributed [Robin]. Quote exact, in the answer beginning 'Well, again, it’s knowing the character’s background', which also carries the farmer / sailing-ship vocabulary limb verbatim. Full passage: 'I’m married to a sailor. In our house, we have a galley, we have a head, we have a deck. I happen to have like a kitchen and a bathroom and a floor.' Two wording nuances: Hobb says 'we have' / 'I happen to have' rather than explicitly assigning the nautical terms to her husband (the sailor attribution is entailed by 'I’m married to a sailor', not stated), and deck/floor is not a room — 'the same rooms' is the claim's compression, not the transcript's.",
+   "fromFile": "verdicts-hobb-i285-299.json"
+  },
+  "298": {
+   "index": 298,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "you should be able to tell who is talking without all the little clues",
+   "note": "Quote exact: 'If you want to do a double check, read your dialogue. Can you tell by reading, not just a single line like a three word dialogue, but if there is a piece of dialogue and you read it, you should be able to tell who is talking without all the little clues like Joe said and Samantha replied.' The page hint's cue phrase is on the page and every limb (a test, read a passage of dialogue, tell the speaker without attribution tags) is supported; the episode's own homework repeats it ('examine the dialog itself, without tags').",
+   "fromFile": "verdicts-hobb-i285-299.json"
+  },
+  "299": {
+   "index": 299,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Some characters speak in longer sentences, some speak in shorter sentences",
+   "note": "Quote exact, in the answer beginning 'If you have two farmers', as the hint says: 'If you have two farmers, a lot of it’s going to be based on attitude. Even the choice of sentence structure. If you think about it… I’m going to take The Lord of the Rings and think about how all the different characters in The Lord of the Rings, you can pretty much tell… Some characters speak in longer sentences, some speak in shorter sentences.' The Lord of the Rings limb is Hobb's own example, verbatim.",
+   "fromFile": "verdicts-hobb-i285-299.json"
   }
  },
  "assembledFrom": [

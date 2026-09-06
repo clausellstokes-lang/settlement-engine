@@ -10132,6 +10132,857 @@
    "trueWording": "I might easily have saved myself great labor by invented terms; in no case have I done so",
    "note": "Verbatim in the Style section blockquote, introduced as 'In the appendix to The Shadow of the Torturer, he says'. The citation is Wolfe, Shadow & Claw, Tor 1994, p. 211, matching the claim's source line. The 'could have used' limb is 'I might easily have saved myself a great deal of labor by having recourse to invented terms'.",
    "fromFile": "verdicts-wolfe-i225-239.json"
+  },
+  "240": {
+   "index": 240,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "and are intended to be suggestive rather than definitive.",
+   "note": "Style section quotes the appendix verbatim; footnote 27 is Shadow & Claw (Tor, 1994), p. 211, matching the cited source. Appendix also says he used no invented terms, supporting 'real words'.",
+   "fromFile": "verdicts-wolfe-i240-254.json"
+  },
+  "241": {
+   "index": 241,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Such words as peltast, androgyn, and exultant are substitutions of this kind",
+   "note": "Verbatim on the page; the only difference is whitespace left by stripped italic tags around the commas. Preceding sentence supplies 'yet undiscovered concepts' and 'in no case have I done so' (no invented terms).",
+   "fromFile": "verdicts-wolfe-i240-254.json"
+  },
+  "242": {
+   "index": 242,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "One that can be read with pleasure by a cultivated reader and reread with increasing pleasure.",
+   "note": "Verbatim. Footnote 26 dates it: chain letter to George R. R. Martin and Greg Benford, July 10, 1982, as published in Castle of Days (1992) - so the '1982 letter' limb is carried by the page's own citation.",
+   "fromFile": "verdicts-wolfe-i240-254.json"
+  },
+  "243": {
+   "index": 243,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Wolfe also left subtle hints and lacunae that may never be explicitly referred to in the text.",
+   "note": "Verbatim, and the next sentence gives the example: 'a backyard full of morning glories is an intentional foreshadowing of events in Free Live Free, but it is apparent only to a reader with a horticultural background.' The sentence carries no footnote, so 'unattributed editorial synthesis' holds.",
+   "fromFile": "verdicts-wolfe-i240-254.json"
+  },
+  "244": {
+   "index": 244,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Severian's post-historic vantage point means that all time is vague",
+   "note": "In section 2.2, verbatim. Page frames it as shared with Nigel Price ('We agreed with the basic principle'), and Severian is the narrator, so 'Wolfe's narrator' is right.",
+   "fromFile": "verdicts-wolfe-i240-254.json"
+  },
+  "245": {
+   "index": 245,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In this Wolfe goes against the Vancean grain of numbered Aeons known as history",
+   "note": "Section 2.2, verbatim, followed by two Rhialto the Marvellous (1984) examples ('During the 17th Aeon...'). The page writes 'Vancean' and 'the dying Earth' rather than spelling out 'Jack Vance' in that sentence.",
+   "fromFile": "verdicts-wolfe-i240-254.json"
+  },
+  "246": {
+   "index": 246,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Recent reading suggests that the range is actually between one thousand and thirty-thousand years",
+   "note": "Section 2.1, verbatim, directly after 'In \"Posthistory 101\" and Lexicon Urthus I stated that the time from Ymar to Severian was about a chiliad' - the revision limb. He then refines: 'most accurately \"many chiliads,\" which means \"more than three chiliads\"', a narrowing the claim omits but does not misstate.",
+   "fromFile": "verdicts-wolfe-i240-254.json"
+  },
+  "247": {
+   "index": 247,
+   "verdict": "PARTIAL",
+   "trueWording": "When Jonas says the city was not called Nessus yet because it did not poison the water, it now seems crystal clear to me that the poisoning of the water is a direct result of technological decline.",
+   "note": "Quote is verbatim in section 1 and the water-treatment reading is explicit ('a metropolis of the high population density only possible through 20th century technology for water treatment'). But the page does not call the remark offhand, and it treats Jonas as a major interpretive figure - 'Jonas now shines for me as the man of history... he is our stand-in, our surrogate in Severian's Commonwealth' - so 'a single offhand remark by a minor character' is the claim-writer's framing, not the page's.",
+   "unsupportedLimb": "that the source is a single offhand remark by a minor character (the page casts Jonas as a major figure and never calls the remark offhand)",
+   "fromFile": "verdicts-wolfe-i240-254.json"
+  },
+  "248": {
+   "index": 248,
+   "verdict": "PARTIAL",
+   "trueWording": "The technology fell until finally the city had to move upstream to avoid its own filth.",
+   "note": "Quote is verbatim in the same section 1 paragraph, and it is plainly the critic's own inference ('it now seems crystal clear to me'). The page nowhere asserts that Wolfe's narrative never states this civic history outright, so that limb is unsupported by this source.",
+   "unsupportedLimb": "that the narrative never states this civic history outright - the page makes no claim about what the novels do or do not state",
+   "fromFile": "verdicts-wolfe-i240-254.json"
+  },
+  "249": {
+   "index": 249,
+   "verdict": "PARTIAL",
+   "trueWording": "All of the strange words that appear in THE BOOK OF THE NEW SUN are real.",
+   "note": "Wowra's introduction carries the quoted clause verbatim ('...just how odd language can sound without science fiction authors inventing new words that lack inherent meaning'). But the page says the words are 'real', never 'English'; the word 'English' does not appear anywhere on the page, and its own gloss for cherkaji is 'Persian light cavalry'.",
+   "unsupportedLimb": "that the strange words are real ENGLISH words - the page says only that they are 'real'",
+   "fromFile": "verdicts-wolfe-i240-254.json"
+  },
+  "250": {
+   "index": 250,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Mr. Wolfe produced the essay \"Words Weird and Wonderful\" in THE CASTLE OF THE OTTER (1982) to demonstrate that, in fact, all the words he used in THE SHADOW OF THE TORTURER were genuine.",
+   "note": "Verbatim. The charge limb is on the page too: 'In the early 1980s, frustrated readers accused Mr. Wolfe of deliberately fabricating unusual words to confuse them.'",
+   "fromFile": "verdicts-wolfe-i240-254.json"
+  },
+  "251": {
+   "index": 251,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "bizarre and seemingly counterfeit words like omophagist (an eater of raw flesh) and cherkaji (Persian light cavalry)",
+   "note": "Verbatim, including both glosses; 'seemingly counterfeit' and 'are real' carry the counterfeit-but-genuine limb.",
+   "fromFile": "verdicts-wolfe-i240-254.json"
+  },
+  "252": {
+   "index": 252,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Framing everything is the present-time narrative, wherein an unnamed junior military officer is seeking to adjudicate the case of John V. Marsch",
+   "note": "Verbatim in the V.R.T. paragraph; the page names V.R.T. as 'the closing' of the three novellas, and the file-of-documents limb is carried by 'Much of what the officer examines takes the form of extracts. Among the materials he samples...'.",
+   "fromFile": "verdicts-wolfe-i240-254.json"
+  },
+  "253": {
+   "index": 253,
+   "verdict": "PARTIAL",
+   "trueWording": "Much of what the officer examines takes the form of extracts... taped interviews by various interrogators of Marsch, the field journal... and Marsch's prison diary.",
+   "note": "The quoted sentence is verbatim and all three document types are on the page. The quantifier is not: the page says 'Much of what the officer examines', not 'most of what that officer reads'. The page also says 'taped interviews by various interrogators', not 'taped interrogation transcripts', and describes what the officer examines rather than how it reaches the reader.",
+   "unsupportedLimb": "'most' - the page says 'Much of what the officer examines'; and 'taped interrogation transcripts' for the page's 'taped interviews by various interrogators'",
+   "fromFile": "verdicts-wolfe-i240-254.json"
+  },
+  "254": {
+   "index": 254,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Little is told chronologically, and often mundanities from the present-time narrative intrude",
+   "note": "Verbatim. The 'present-time narrative' is defined two sentences earlier as the officer's frame, 'the long night that encompasses his task', so 'the officer's own present' is supported.",
+   "fromFile": "verdicts-wolfe-i240-254.json"
+  },
+  "255": {
+   "index": 255,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"'V.R.T' is told anachronically, with the reader left to piece everything together from a fragmentary, disjointed narrative\"",
+   "note": "Raw HTML of ultan.org.uk fetched with a browser UA (HTTP 200) and stripped to text; quote present word for word. Byline confirms 'reviewed by Robert Borski', posted 28 August 2001. The review also names 'V.R.T.' as 'the closing' novella, so 'third novella' holds. Borski writes 'piece everything together' rather than 'the case', though the same review describes the frame as an officer 'seeking to adjudicate the case of John V. Marsch'.",
+   "fromFile": "verdicts-wolfe-i255-269.json"
+  },
+  "256": {
+   "index": 256,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"I do a minimum of three 'writes' for everything I do-an original and then at least two rewrites\"",
+   "note": "Wayback raw capture (id_ URL, HTTP 200) of the DePauw SFS #46 page; header confirms 'Larry McCaffery -- On Encompassing the Entire Universe: An Interview with Gene Wolfe', Science Fiction Studies #46 = Volume 15, Part 3 = November 1988. Quote verbatim in Wolfe's answer on revision.",
+   "fromFile": "verdicts-wolfe-i255-269.json"
+  },
+  "257": {
+   "index": 257,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"A lot of stuff goes through four drafts, and some of it goes 15 or even more drafts\"",
+   "note": "Same raw SFS capture; quote verbatim, immediately after the three-writes sentence. 'some of his work' matches 'some of it'.",
+   "fromFile": "verdicts-wolfe-i255-269.json"
+  },
+  "258": {
+   "index": 258,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"when I started 'The Fifth Head of Cerberus' I completely rewrote those opening pages at least eight or ten times\"",
+   "note": "Same raw SFS capture; quote verbatim. On the page the title is in quotation marks, i.e. Wolfe is naming the novella; the claim's 'The Fifth Head of Cerberus' reads the same either way.",
+   "fromFile": "verdicts-wolfe-i255-269.json"
+  },
+  "259": {
+   "index": 259,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"because it seemed essential to capture that certain flavor ... the feeling of stagnation which affects a lot of what's to follow\"",
+   "note": "Same raw SFS capture; quote verbatim and the causal limb ('because it seemed essential to capture...') is explicit. Wording nuance, not an unsupported limb: Wolfe says the stagnation 'affects a lot of what's to follow', slightly weaker in force and scope than the claim's 'governs what follows'.",
+   "fromFile": "verdicts-wolfe-i255-269.json"
+  },
+  "260": {
+   "index": 260,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"that's important, especially when I'm trying to capture a specific atmosphere or cultural attitude in a story\"",
+   "note": "Same raw SFS capture; quote verbatim. Wolfe's 'especially when' carries the claim's 'matters most when'; he is comparing occasions, and the page separately says character is the element he is most interested in overall.",
+   "fromFile": "verdicts-wolfe-i255-269.json"
+  },
+  "261": {
+   "index": 261,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"my intent in using these approaches is not to mystify my readers\"",
+   "note": "Same raw SFS capture; quote verbatim. The antecedent 'these approaches' is McCaffery's question about Wolfe's 'refracted' methods (memory, dream, unreliable narrators, stories within stories, different points of view), so the 'refracted narrative methods' limb is supported by the page itself.",
+   "fromFile": "verdicts-wolfe-i255-269.json"
+  },
+  "262": {
+   "index": 262,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"I had to draw a floor plan of the two storys of the house because otherwise I found myself getting tangled up in such details\"",
+   "note": "Same raw SFS capture; quote verbatim, and the page names the book as Free Live Free with the action set in 'an old brick house on a city street'. 'Storys' is the page's own spelling.",
+   "fromFile": "verdicts-wolfe-i255-269.json"
+  },
+  "263": {
+   "index": 263,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"such details as: Could you see the street from this window? Could you see from this room to that room?\"",
+   "note": "Same raw SFS capture; quote verbatim as the first of three listed questions (the third is whether Ben Free could hear steps overhead).",
+   "fromFile": "verdicts-wolfe-i255-269.json"
+  },
+  "264": {
+   "index": 264,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"I want to make sure he's the same person on page 300 as he was on page 10\"",
+   "note": "Same raw SFS capture; quote verbatim, of the recurring character Malrubius 'who shows up in widely separated places'. Second limb explicit: 'sometimes I like the man on page 300 better ... so then I have to go back and re write page 10 to make him match the way he appears later on.'",
+   "fromFile": "verdicts-wolfe-i255-269.json"
+  },
+  "265": {
+   "index": 265,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Memory is all we have. The present is a knife's edge, and the future doesn't really exist\"",
+   "note": "Same raw SFS capture; quote verbatim and both trailing limbs appear in the same two sentences of Wolfe's answer on memory.",
+   "fromFile": "verdicts-wolfe-i255-269.json"
+  },
+  "266": {
+   "index": 266,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"its sure control of a variety of imaginative narrative voices\"",
+   "note": "Same raw SFS capture; quote verbatim in the introductory headnote, whose subject is The Fifth Head of Cerberus ('Cerberus established Wolfe as an eccentric but important new figure in SF. Its prismatic manner of exposition, its sure control...'). The headnote sits inside the piece bylined Larry McCaffery, above the first 'LM:' question, so the attribution holds.",
+   "fromFile": "verdicts-wolfe-i255-269.json"
+  },
+  "267": {
+   "index": 267,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Its prismatic manner of exposition\"",
+   "note": "Same raw SFS capture; quote verbatim in the same McCaffery headnote sentence, with 'Its' referring to The Fifth Head of Cerberus.",
+   "fromFile": "verdicts-wolfe-i255-269.json"
+  },
+  "268": {
+   "index": 268,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"building theories by rubbing together two sentences two hundred pages apart\"",
+   "note": "Raw substack HTML fetched with a browser UA (HTTP 200), full post text present, not truncated by a paywall; byline 'Max Gladstone', dated Oct 14, 2022. Quote verbatim. 'rather than from anything stated outright' is supported in substance by the same essay ('vast churning implications invisible to the casual reader'), though not in those words. The quote sits in the paragraph beginning 'Second, when one puts forth a theory' (5th body paragraph, not 4th).",
+   "fromFile": "verdicts-wolfe-i255-269.json"
+  },
+  "269": {
+   "index": 269,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"They assert their eidetic memories and perfect recall and utter honesty, and then straight-up lie, or forget things\"",
+   "note": "Same raw Substack fetch; quote verbatim and the lying/forgetting limb continues the same sentence (which adds 'or have their memories edited out from under them').",
+   "fromFile": "verdicts-wolfe-i255-269.json"
+  },
+  "270": {
+   "index": 270,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"vast churning implications invisible to the casual reader\"",
+   "note": "Raw page (curl, browser UA, 200). Full sentence: \"If any piece of text (or elision) in a Gene Wolfe novel could be read to suggest vast churning implications invisible to the casual reader, it has definitely been read that way by someone on the internet.\" The elision limb is explicit in the parenthetical; Gladstone adds that many such readings \"are not wrong.\"",
+   "fromFile": "verdicts-wolfe-i270-284.json"
+  },
+  "271": {
+   "index": 271,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"We fumble through darkness, trying to assemble clues by touch.\"",
+   "note": "Raw page. Sentence stands verbatim, closing the paragraph on narrators who \"assert their eidetic memories and perfect recall and utter honesty, and then straight-up lie\"; the preceding clause \"We rely on the text, and the text alone... even as the text screams out, 'do not trust me!'\" carries the claim's 'rather than being told' limb.",
+   "fromFile": "verdicts-wolfe-i270-284.json"
+  },
+  "272": {
+   "index": 272,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"not indica of 'what's really going on', but rather fingerprints, or the signature, of the author\"",
+   "note": "Raw page. Quote verbatim (\"Wolfe loves to include winking asides between author and audience.\"); the signature-vs-story-evidence limb is supported one paragraph later: \"some of the clues Wolfe provides are not indica of 'what's really going on', but rather fingerprints, or the signature, of the author.\" Examples given: wolf-skins/Wolfe-skins, werewolf/where Wolfe.",
+   "fromFile": "verdicts-wolfe-i270-284.json"
+  },
+  "273": {
+   "index": 273,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"the dense prose, interjecting itself with parentheticals and complicating clauses\"",
+   "note": "Raw page. Appears in the list of \"everything I associate with Gene Wolfe\" immediately after the long Fifth Head of Cerberus excerpt, alongside \"the acute attention to detail\" and the unreliable narrator.",
+   "fromFile": "verdicts-wolfe-i270-284.json"
+  },
+  "274": {
+   "index": 274,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"One never feels he let a sentence get away from him; there is an aura of control throughout.\"",
+   "note": "Raw page. Both limbs in one sentence; the aura-of-control clause is the same sentence's second half, so the claim's second limb is verbatim too.",
+   "fromFile": "verdicts-wolfe-i270-284.json"
+  },
+  "275": {
+   "index": 275,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"What would otherwise be unwieldy and overbearing sentences are made beautiful by careful word choice and a certain confidence of construction.\"",
+   "note": "Raw page. The 'otherwise unwieldy' limb is the same sentence's subject (\"unwieldy and overbearing\"), so every limb is on the page.",
+   "fromFile": "verdicts-wolfe-i270-284.json"
+  },
+  "276": {
+   "index": 276,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Real people really are unreliable narrators all the time, even if they try to be reliable narrators.\"",
+   "note": "Raw page. Holland introduces it as Wolfe's own words (\"a favorite device of Gene Wolfe, who considered it much truer to life. In his words:\"). The claim truncates before \"even if they try to be reliable narrators\", which does not distort the sense.",
+   "fromFile": "verdicts-wolfe-i270-284.json"
+  },
+  "277": {
+   "index": 277,
+   "verdict": "PARTIAL",
+   "trueWording": "\"the scene is peppered with clues to the larger story which is wrapped in mystery\"",
+   "unsupportedLimb": "that the scene reads as ordinary recollection — Holland never characterises it as ordinary or plain; he calls the prose dense, 'sophisticated' and 'mature', with 'acute attention to detail' and an 'intensely psychological focus', and the effect 'vivid and compelling'",
+   "note": "Raw page. Quotation is verbatim. The clue-planting limb is fully supported; the contrastive limb is the researcher's addition. Holland does frame the excerpt as recollection (\"the slow breakthrough of recollection\") but never as ordinary or unremarkable — if anything he flags it as distinctively Wolfean (\"in even more Gene Wolfe fashion\").",
+   "fromFile": "verdicts-wolfe-i270-284.json"
+  },
+  "278": {
+   "index": 278,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"There are no obvious genre trappings in this opening paragraph, at all.\"",
+   "note": "Raw page. Verbatim, in the section headed \"What can an opening teach you?\", reinforced by \"There is nothing speculative, or even particularly fanciful happening here.\" One framing wrinkle short of a PARTIAL: the essay describes itself as dissecting \"a single paragraph\" rather than a sentence-by-sentence reading, but it is a close reading of that opening paragraph's own sentences, so the 'sentence-level' descriptor is not a false limb.",
+   "fromFile": "verdicts-wolfe-i270-284.json"
+  },
+  "279": {
+   "index": 279,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"What's noticeable here is not what's present but what's missing.\"",
+   "note": "Raw page. Verbatim with curly apostrophe; it opens the paragraph that then names the missing genre trappings.",
+   "fromFile": "verdicts-wolfe-i270-284.json"
+  },
+  "280": {
+   "index": 280,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"grounded in a narrator's spatial description that is concrete (the orientation of the house) and sensory\"",
+   "note": "Raw page. Quote verbatim. The wings/courtyard limb is carried by the opening paragraph Alex reproduces on the same page (\"our dormitory was in the east wing of the house, with a broad window facing the central courtyard and thus looking west\") and by Alex's own \"the house has not just rooms but wings and a courtyard\"; his gloss for the orientation is \"(the orientation of the house)\".",
+   "fromFile": "verdicts-wolfe-i270-284.json"
+  },
+  "281": {
+   "index": 281,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Wolfe grasps that weird details feel all the weirder when they are grounded amidst the mundane and the conventional.\"",
+   "note": "Raw page. Quote verbatim as a substring; the 'among mundane ones' limb is the same sentence's tail. Context is the father's crippled monkey, \"Something odd in an otherwise very conventional description of a boyhood home.\"",
+   "fromFile": "verdicts-wolfe-i270-284.json"
+  },
+  "282": {
+   "index": 282,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"These little opacities feel 'realer' than any explanation of them would.\"",
+   "note": "Raw page. Verbatim with curly quotes, closing the essay; preceded by \"For Wolfe, 'showing vs. telling' is often a false binary.\"",
+   "fromFile": "verdicts-wolfe-i270-284.json"
+  },
+  "283": {
+   "index": 283,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"They hint at a private life that the reader never gets access to.\"",
+   "note": "Raw page. Verbatim as a substring; the antecedent is explicit — \"The soundless gestures the brothers use to share their stories, which closes the paragraph, are never elaborated upon or explained subsequently.\"",
+   "fromFile": "verdicts-wolfe-i270-284.json"
+  },
+  "284": {
+   "index": 284,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"they hit at the level of rhythm and structure\"",
+   "note": "Raw page. Verbatim inside \"Not just because they hit at the level of rhythm and structure, but because so many of them feel like a mystagogic initiation.\" The 'not just' is additive, not a denial, so the claim's limb holds; note Sini's larger point is the mystagogic quality he calls \"vibrational precision\".",
+   "fromFile": "verdicts-wolfe-i270-284.json"
+  },
+  "285": {
+   "index": 285,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "its contours aren't always clearly defined, but it's also not vague",
+   "note": "Live raw page (curl, 200). Quote exact, in the paragraph on Wolfe's sentences as 'mystagogic initiation': 'The presence of \"something\" is brought forth, and its contours aren't always clearly defined, but it's also not vague.' Page hedges with 'always'; the claim drops it, which is the only drift.",
+   "fromFile": "verdicts-wolfe-i285-299.json"
+  },
+  "286": {
+   "index": 286,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "many aspects of it are also kept from us",
+   "note": "Live raw page. Full sentence: 'The world of New Sun, Urth, is made visible, but many aspects of it are also kept from us due to the narrowness of the narrator's perception, but the narrator's perception of things is all we have to cling to.' Sits in the penultimate body paragraph, matching the cited 'closing section'.",
+   "fromFile": "verdicts-wolfe-i285-299.json"
+  },
+  "287": {
+   "index": 287,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Wolfe has said that he doesn't give the important information twice",
+   "note": "Live raw page (curl, 200). Under 'Hints for Beginners': 'Wolfe has said that he doesn't give the important information twice, because he feels his intelligence insulted when other writers do so.' Attribution to Wolfe via the guide is exactly as claimed. Page footer confirms last modified November 17, 2017.",
+   "fromFile": "verdicts-wolfe-i285-299.json"
+  },
+  "288": {
+   "index": 288,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Apparent contradictions are often useful hints that the narrator is concealing something.",
+   "note": "Live raw page. Sentence stands verbatim as a full sentence opening its paragraph in 'Hints for Beginners', followed by the advice to ask which of X or Y the narrator would prefer to be true.",
+   "fromFile": "verdicts-wolfe-i285-299.json"
+  },
+  "289": {
+   "index": 289,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The information you need is always there -- but it might not be where you expect it to be",
+   "note": "Live raw page. Quote exact. Both limbs present; note the page hedges the second limb with 'might not be where you expect it to be', where the claim states it flatly. The guide adds: 'If the information you need isn't there, you're probably attacking the wrong question.'",
+   "fromFile": "verdicts-wolfe-i285-299.json"
+  },
+  "290": {
+   "index": 290,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "figures out what they would say, rather than what he wants to say",
+   "note": "Live raw page. Full sentence: 'He goes more deeply into the heads of his narrators, as narrators, than most writers, and figures out what they would say, rather than what he wants to say.' Both limbs (narrator's speech vs author's) supported.",
+   "fromFile": "verdicts-wolfe-i285-299.json"
+  },
+  "291": {
+   "index": 291,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Who is telling this story, and when? Why are they telling it, and to whom?",
+   "note": "Live raw page. Framed as 'some good questions to begin with' on encountering a Lupine text; all four interrogatives (who, when, why, to whom) present, and the guide adds that obvious answers are probably wrong.",
+   "fromFile": "verdicts-wolfe-i285-299.json"
+  },
+  "292": {
+   "index": 292,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "There's also, perhaps, a slight clue to the story in the sentence's grammar",
+   "note": "Live raw page (curl, 200; published November 9, 2017). The sentence under discussion is expressly the opening line of The Fifth Head of Cerberus. Page hedges with 'perhaps, a slight'; the following sentence ('We eventually do learn why that comma is missing') affirms the clue is real.",
+   "fromFile": "verdicts-wolfe-i285-299.json"
+  },
+  "293": {
+   "index": 293,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "We eventually do learn why that comma is missing.",
+   "note": "Live raw page. Preceding sentence supplies the comma limb: 'If the narrator had only one brother, we would read \"my brother, David\" rather than the comma-less \"my brother David.\"' So the absent comma in the phrase naming the brother, and the later explanation, are both on the page.",
+   "fromFile": "verdicts-wolfe-i285-299.json"
+  },
+  "294": {
+   "index": 294,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a single sentence in the first person near the very end of a book otherwise in the third person",
+   "note": "Live raw page. Full sentence ends '...asks readers to reconsider everything that they've already read.' Every limb (single first-person sentence, near the very end, otherwise third-person, reconsider all of it) is present; the article's subject throughout is Wolfe.",
+   "fromFile": "verdicts-wolfe-i285-299.json"
+  },
+  "295": {
+   "index": 295,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It's not that Wolfe strews neologisms over the page - every word in the book appears in a dictionary",
+   "note": "Live raw page (curl, 200; published December 4, 2017), advice 1 'Set aside the dictionary'. Both limbs explicit: the dictionary limb verbatim, the not-neologism limb in the same sentence.",
+   "fromFile": "verdicts-wolfe-i285-299.json"
+  },
+  "296": {
+   "index": 296,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "most of the potentially-unfamiliar words are extremely rare, and chosen to be evocative, rather than specific",
+   "note": "Live raw page, advice 1. The 'rare words' limb is in the same clause, so both limbs of the claim are supported.",
+   "fromFile": "verdicts-wolfe-i285-299.json"
+  },
+  "297": {
+   "index": 297,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Such words as peltast, androgyn, and exultant are substitutions of this kind, and are intended to be suggestive rather than definitive.",
+   "note": "Live raw page, advice 1, block quotation, introduced as 'In the brief appendix to the first volume, The Shadow of the Torturer, Wolfe introduces himself as the translator...'. Both named words (peltast, exultant) appear; the appendix attribution is Keeley's own framing, as the claim says.",
+   "fromFile": "verdicts-wolfe-i285-299.json"
+  },
+  "298": {
+   "index": 298,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Pay attention to his sins of omission: the white space between chapters...",
+   "note": "Live raw page, third piece of advice ('Mind the gaps'), matching the cited 'advice 3'. Continues: '...and the gap between one book's end and another's beginning are rarely insignificant.'",
+   "fromFile": "verdicts-wolfe-i285-299.json"
+  },
+  "299": {
+   "index": 299,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "He self-justifies and misinterprets, but rarely lies outright.",
+   "note": "Live raw page, advice 3, immediately after 'Severian is an unreliable narrator for several reasons, but not much of a liar.' Quote is an exact standalone sentence and every limb is supported.",
+   "fromFile": "verdicts-wolfe-i285-299.json"
+  },
+  "300": {
+   "index": 300,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a small detail in one book frequently presages a large revelation in a later one",
+   "note": "Raw page fetched (HTTP 200, live URL). Matthew Keeley, 'The Best Way to Approach The Book of the New Sun', Reactor, published December 4, 2017. Quote is word-for-word inside the fifth piece of advice ('...Read quickly (but not too quickly)'), in a paragraph explicitly about the volumes of The Book of the New Sun, so 'one volume ... a later one' is exactly the page's sense ('one book' = one volume of the four).",
+   "fromFile": "verdicts-wolfe-i300-314.json"
+  },
+  "301": {
+   "index": 301,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "and his prose is as good as prose gets",
+   "note": "Raw page fetched (HTTP 200). Quote verbatim in the catalogue of Wolfe's virtues. The page supports every substantive limb: 'an essay I wrote for a special GW issue of The Magazine of Fantasy and Science Fiction back in 2007', 'meant to be a sort of beginners' guide', essay titled 'The Wolf in the Labyrinth', byline 'Posted by Michael Swanwick' / 'Essay copyright 2007 by Michael Swanwick'. The page never itself calls Swanwick a novelist (only implies he is a writer); that descriptor is external but uncontested.",
+   "fromFile": "verdicts-wolfe-i300-314.json"
+  },
+  "302": {
+   "index": 302,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "there's no telling at what point interpretation ends and invention begins",
+   "note": "Raw page fetched. Quote verbatim; the full page sentence is 'Gene Wolfe is notorious for never explaining his stories, so there's no telling at what point interpretation ends and invention begins,' which supports the second limb ('no reader can tell where interpretation stops') in the page's own words. Occurs in the 'A Solar Labyrinth' section as the claim's page hint states.",
+   "fromFile": "verdicts-wolfe-i300-314.json"
+  },
+  "303": {
+   "index": 303,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "1. Look for hidden implications.",
+   "note": "Raw page fetched. Verbatim as the first of the three numbered rules, introduced as 'three simple rules for enjoying his work' in an essay posted under the title 'How to Read Gene Wolfe'; 'first rule for reading Wolfe' is exactly the page's framing.",
+   "fromFile": "verdicts-wolfe-i300-314.json"
+  },
+  "304": {
+   "index": 304,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "2. Remember Poe's purloined letter, and pay serious attention to the obvious.",
+   "note": "Raw page fetched. Verbatim (curly apostrophe in 'Poe's' as quoted) as rule 2 of the three rules. Both limbs — second rule, and the Poe purloined-letter citation — are on the page.",
+   "fromFile": "verdicts-wolfe-i300-314.json"
+  },
+  "305": {
+   "index": 305,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I suggest you look up the prayer to see what Wolfe left out",
+   "note": "Raw page fetched. Verbatim inside the parenthesis in the closing 'Memorare' discussion: 'When a story is titled \"Memorare\" (I suggest you look up the prayer to see what Wolfe left out)...', which supports 'the prayer of that name'.",
+   "fromFile": "verdicts-wolfe-i300-314.json"
+  },
+  "306": {
+   "index": 306,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "simply because a story has deeper levels, its surface meaning can be ignored with impunity",
+   "note": "Raw page fetched. Verbatim; full page sentence: 'it's a very big mistake to think that simply because a story has deeper levels, its surface meaning can be ignored with impunity.' It sits immediately after the 'A Solar Labyrinth' section, as the page hint says. The page phrases the rule generally ('a story'), but the surrounding argument is entirely about reading Wolfe.",
+   "fromFile": "verdicts-wolfe-i300-314.json"
+  },
+  "307": {
+   "index": 307,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Wolfe always leaves room for multiple interpretations in his work.",
+   "note": "Raw page fetched. Verbatim, in the 'Memorare' section, right after Swanwick offers his own symbolic reading and says 'you don't have to accept my version of what's going on.'",
+   "fromFile": "verdicts-wolfe-i300-314.json"
+  },
+  "308": {
+   "index": 308,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Note the careful engineering of the suits and cenotaphs. Note the craftsmanship.",
+   "note": "Raw page fetched. Verbatim. The preceding sentence — 'The surface story, sufficient in itself, is an extremely good science fiction adventure' — supports 'craftsmanship on the story's surface', and 'Note the craftsmanship.' follows immediately.",
+   "fromFile": "verdicts-wolfe-i300-314.json"
+  },
+  "309": {
+   "index": 309,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Almost any interesting work of art comes close to saying the opposite of what it really says.",
+   "note": "Raw page fetched. Quote verbatim; the page attributes it to Wolfe's 'short essay titled, with disarming modesty, \"What I Know About Writing (in no particular order)\"'. The claim's paraphrase drops 'really' from 'what it really says', which does not change the sense; the quoted fragment itself is exact.",
+   "fromFile": "verdicts-wolfe-i300-314.json"
+  },
+  "310": {
+   "index": 310,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "such efforts are particularly rewarding when applied to Wolfe's oeuvre",
+   "note": "Raw page fetched (HTTP 200), 'The Explicated Gene Wolfe', Flogging Babel, Oct 2009. Quote verbatim: '...because he puts so much more into his works than almost any other writer.' The page's word for the payoff limb is 'scholarship, both true and faux' being 'particularly rewarding'; the post's subject is annotation works (Lexicon Urthus, The Wizard Knight Companion), so 'annotation pays off' is the page's sense in other words. Sentence sits in the fifth paragraph, not the third.",
+   "fromFile": "verdicts-wolfe-i300-314.json"
+  },
+  "311": {
+   "index": 311,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the literary equivalent of what programmers call \"Easter eggs\" ... not necessary for your enjoyment",
+   "note": "Raw page fetched. Verbatim. Full page sentence, immediately after the fuligin / selective-black example: 'it's the literary equivalent of what programmers call \"Easter eggs,\" hidden messages or treats placed into games or programs for the lucky (or canny) person to find, which are not necessary for your enjoyment of the experience.' Both limbs on the page.",
+   "fromFile": "verdicts-wolfe-i300-314.json"
+  },
+  "312": {
+   "index": 312,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "he slips in clues and, as he has himself said, he gives a clue only once",
+   "note": "Raw page fetched (HTTP 200). Kata Iwannhn, 'How to Read Gene Wolfe', dated March 3, 2007, 'Posted by John Barach'. Quote verbatim, and 'as he has himself said' supports the limb that this is Wolfe's own statement reported by Barach. In the eighth paragraph rather than the sixth.",
+   "fromFile": "verdicts-wolfe-i300-314.json"
+  },
+  "313": {
+   "index": 313,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Reading for world-building requires retaining information without context: a term, a place, a coin",
+   "note": "Raw page fetched (HTTP 200). Verbatim inside the block quotation of Palmer's foreword. The page supports the attribution limbs: 'my Tor Essentials edition has a Foreword written by Ada Palmer (author of the Terra Ignota series)' about Shadow & Claw, quoted by Livia J. Elliot, transcript dated 3 Oct 2024.",
+   "fromFile": "verdicts-wolfe-i300-314.json"
+  },
+  "314": {
+   "index": 314,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "authors (and in this case, Gene Wolfe), will often give information about the world without context",
+   "note": "Raw page fetched. Verbatim substring, and it is Elliot's own sentence ('As I see it, Palmer is saying that...'), positioned immediately after the Palmer block quotation exactly as the page hint states. Byline 'Livia J. Elliot', 'Books Undone | Episode 010 | Transcript', 3 Oct 2024 — all on the page.",
+   "fromFile": "verdicts-wolfe-i300-314.json"
+  },
+  "315": {
+   "index": 315,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "First, the characters may already know about those concepts",
+   "note": "Quote verbatim in the transcript; full sentence continues 'and, therefore, do not feel the need to explain them... even when they are foreign to the reader.' Both limbs (first of three reasons; foreign to the reader) supported. Page fetched raw with a browser UA, HTTP 200.",
+   "fromFile": "verdicts-wolfe-i315-329.json"
+  },
+  "316": {
+   "index": 316,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Or, third, perhaps the society has forgotten or misinterpreted its own history",
+   "note": "Quote verbatim; the page numbers it explicitly as the third of the tripartite answer ('Or, third,'). Raw page, HTTP 200.",
+   "fromFile": "verdicts-wolfe-i315-329.json"
+  },
+  "317": {
+   "index": 317,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The combination of these three types of omission adds a level of realism",
+   "note": "Quote verbatim as a contiguous substring; the page's full sentence ends '...to the world-building', supporting the claim's 'combination' and 'realism to the world-building' limbs.",
+   "fromFile": "verdicts-wolfe-i315-329.json"
+  },
+  "318": {
+   "index": 318,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "those bits of incomprehensible history are what makes the world-building pop out of the page",
+   "note": "Quote verbatim; 'pop out of the page' is the page's fuller phrasing of the claim's 'stand out'. Context is Elliot's own opinion about lost/incomprehensible history.",
+   "fromFile": "verdicts-wolfe-i315-329.json"
+  },
+  "319": {
+   "index": 319,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "specific authors who, like Gene Wolfe, do not aid the reader by explaining concepts",
+   "note": "Quote verbatim; Wolfe is named in the same clause as the exemplar. Claim's limbs fully supported.",
+   "fromFile": "verdicts-wolfe-i315-329.json"
+  },
+  "320": {
+   "index": 320,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Key setting elements like ... the obscure and archaic language that's employed",
+   "note": "Quote verbatim (curly apostrophe). It appears in the answer to the second interview question, which asks what each literary influence contributed to the world of Vaarn; Hunt lists it among 'Key setting elements' that are 'all these Vaarnish themes'. Byline/date confirmed: interview posted 27 August 2022, Bucolia.",
+   "fromFile": "verdicts-wolfe-i315-329.json"
+  },
+  "321": {
+   "index": 321,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the melancholic weight of hundreds of extinguished civilisations weighing upon the present day",
+   "note": "Quote verbatim; the page's continuation 'weighing upon the present day' supports the claim's 'on the present day', and the sentence's frame ('all these Vaarnish themes and more are found in Wolfe's magnum opus') supports 'carried into his game setting'.",
+   "fromFile": "verdicts-wolfe-i315-329.json"
+  },
+  "322": {
+   "index": 322,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "His sins and shames are carefully hidden away ... but they can be identified by the scars they leave in his memory",
+   "note": "Quote verbatim. 'Narrator' limb supported: the page describes Peace as 'the ramblings of one Alden Weer ... looking back on his life', and 'his memory' refers to Weer. Author bio on page confirms Polansky is a novelist ('author of four novels'). Reactormag fetched raw, HTTP 200.",
+   "fromFile": "verdicts-wolfe-i315-329.json"
+  },
+  "323": {
+   "index": 323,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The narrative of Weer's life is riddled with ambiguities and contradictions, with holes we are encouraged to investigate",
+   "note": "Quote verbatim. The page's subject is 'the narrative of Weer's life' rather than the literal words 'the narrative of Peace', but Peace is Weer's retrospective account of that life, so the claim's subject is the same thing; 'we are encouraged' supports 'the reader is encouraged'.",
+   "fromFile": "verdicts-wolfe-i315-329.json"
+  },
+  "324": {
+   "index": 324,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "altogether possible to miss the subtle clues with which the book is filled ... and to still walk away touched by the book",
+   "note": "Quote verbatim. Both limbs supported: 'to miss them altogether' (miss entirely) and 'still walk away touched by the book' (still be moved). The page frames this as conditional on being ignorant of Wolfe's reputation, which does not contradict the claim.",
+   "fromFile": "verdicts-wolfe-i315-329.json"
+  },
+  "325": {
+   "index": 325,
+   "verdict": "PARTIAL",
+   "trueWording": "My favourite books are usually the ones where only a proportion of the meaning is on the surface",
+   "note": "Quote is verbatim on the page and the first limb holds (though the page says 'usually'). The second limb fails: in the same paragraph Palmer expressly disclaims Wolfe as a model - 'I didn't copy his style ... nor did I copy his techniques' and 'I wanted my novels to have many hidden depths, not in imitation of Gene Wolfe but because that was what interested, indeed, compelled me.' He calls Wolfe an influence and BotNS 'like manna to me', but never the model. Page confirms 'SF writer Stephen Palmer', 'author of nine science fiction novels', 4 August 2015.",
+   "unsupportedLimb": "names Wolfe as the model - the page has Palmer explicitly denying imitation of Wolfe's style or techniques, and saying his taste for hidden depths was 'not in imitation of Gene Wolfe'",
+   "fromFile": "verdicts-wolfe-i315-329.json"
+  },
+  "326": {
+   "index": 326,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a great proportion of the meaning is concealed and has to be teased out by the reader",
+   "note": "Quote verbatim. 'His own Wolfe-influenced novel' supported: 'The other one of my novels that is much influenced by Gene Wolfe is Urbis Morpheos'; 'much of its meaning' = 'a great proportion of the meaning'.",
+   "fromFile": "verdicts-wolfe-i315-329.json"
+  },
+  "327": {
+   "index": 327,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "each opening passage features a dialogue between a more-or-less naive individual and a figure possessing privileged information",
+   "note": "Quote verbatim (page uses 'naive' with diaeresis). 'Every opening passage' supported by 'each opening passage', in a paragraph explicitly about 'the beginnings and endings of the four volumes' of Long Sun. Byline confirmed on page: 'By Nick Gevers', 5 September 2000, Ultan's Library.",
+   "fromFile": "verdicts-wolfe-i315-329.json"
+  },
+  "328": {
+   "index": 328,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The opening passage of Nightside has been a warning - from God or Wolfe - that great care must be exercised in interpreting divine or authorial evidence",
+   "note": "Quote verbatim; the 'warning' and 'opening passage of Nightside' limbs are the page's own words.",
+   "fromFile": "verdicts-wolfe-i315-329.json"
+  },
+  "329": {
+   "index": 329,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the conceit that its text is like a hologram: any fragment contains the essence of the whole",
+   "note": "Quote verbatim; the page's frame 'One of the numerous formal devices of The Book of the New Sun is the conceit...' supports 'formal conceit of The Book of the New Sun'.",
+   "fromFile": "verdicts-wolfe-i315-329.json"
+  },
+  "330": {
+   "index": 330,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "that’s what Wolfe himself said in “Words Weird and Wonderful.”",
+   "note": "Line reads: 'That’s what all the fans were saying, that the words were real, and then that’s what Wolfe himself said in “Words Weird and Wonderful.”' The interviewer's preceding question supplies 'real words and not Wolfe’s coinages'; the article is placed in The Castle of the Otter. Every limb supported.",
+   "fromFile": "verdicts-wolfe-i330-344.json"
+  },
+  "331": {
+   "index": 331,
+   "verdict": "PARTIAL",
+   "trueWording": "How soon did you uncover the various naming schemes Wolfe uses… like naming people in the Commonwealth after Catholic saints?",
+   "unsupportedLimb": "that Andre-Driussi speaks the quoted words — they are the interviewer Master Ultan's question, not Andre-Driussi's speech",
+   "note": "The quoted string is verbatim but sits inside Master Ultan's question. Andre-Driussi's own reply endorses the substance ('The saints clue was given in Castle. Still, nobody had published the results of tracking them all down') and adds further group schemes he found himself — 'the “iron” names of the sailors, the star names of the people in Yesod' — so the naming-schemes-by-group substance holds; only the attribution of the wording fails.",
+   "fromFile": "verdicts-wolfe-i330-344.json"
+  },
+  "332": {
+   "index": 332,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "who sometimes wrote them as he heard them but more often translated them when he understood… their meanings",
+   "note": "Wowra introduces the block quote as from 'the Foreword to Soldier of the Mist' with the citation '(Soldier of the Mist, 1986, xii)'. Byline 'By Scott Wowra', dated 'On 7 September 2016'. Wolfe's translator persona says 'I have followed the original writer, who sometimes wrote them...' — the original writer being Latro, the narrator. All limbs supported.",
+   "fromFile": "verdicts-wolfe-i330-344.json"
+  },
+  "333": {
+   "index": 333,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "This process of translation is referred to as folk etymology, and it is the primary method Latro uses to record his place names.",
+   "note": "Verbatim in Wowra's own voice, immediately after the Foreword quotation. Latro is the narrator of Soldier of the Mist.",
+   "fromFile": "verdicts-wolfe-i330-344.json"
+  },
+  "334": {
+   "index": 334,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "classify… according to Stewart’s taxonomy. The predominant category is folk etymology",
+   "note": "Full sentence: 'The following sections attempt to classify some of Latro’s place names in Soldier of the Mist according to Stewart’s taxonomy. The predominant category is folk etymology, followed by the less frequent use of descriptive, associative, and commemorative place names.' The toponymic-taxonomy limb is George Stewart's (1975) taxonomy, named on the page.",
+   "fromFile": "verdicts-wolfe-i330-344.json"
+  },
+  "335": {
+   "index": 335,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "these include folk etymology, association, description, and commemoration",
+   "note": "Verbatim. Page: 'Latro uses a variety of methods to generate place names and, applying the categories provided by academic toponomy, we can identify that these include folk etymology, association, description, and commemoration.' Note the page's hedge is 'include' rather than an explicit 'four', but the essay's own summary enumerates exactly these four ('folk etymology, followed by the less frequent use of descriptive, associative, and commemorative place names') and its section structure follows them, so the four-process limb holds.",
+   "fromFile": "verdicts-wolfe-i330-344.json"
+  },
+  "336": {
+   "index": 336,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Silent Country | Laconia | Gk. Lakōnikos – taciturn (Spartans were renowned for brevity in speech)",
+   "note": "The quote is a cell in Wowra's Folk Etymology table, on the row whose first two columns are 'Silent Country' (Latro's name) and 'Laconia' (English place name). Corroborated in the essay body, where Wolfe's introduction is quoted: 'Latro seems to have heard some taciturn person referred to as having Laconic manners, and to have concluded that Laconia meant “Silent Country.”'",
+   "fromFile": "verdicts-wolfe-i330-344.json"
+  },
+  "337": {
+   "index": 337,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Latro calls Athens Thought because that’s what he thinks it means. As it turns out, he’s right.",
+   "note": "Verbatim, and the attribution holds: Wowra introduces the block quote as from 'Darrell Schweitzer’s interview with Mr. Wolfe that appeared in the Spring 1988 edition of Weird Tales', and the reference list carries 'Schweitzer, D. (1988). “Profile: Gene Wolfe”. Spring 1988 issue of Weird Tales'. Latro is the narrator.",
+   "fromFile": "verdicts-wolfe-i330-344.json"
+  },
+  "338": {
+   "index": 338,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "most importantly, he doesn’t tell certain things to the reader straight away",
+   "note": "Verbatim in the blogger's numbered response to reason 1. The post is explicitly a reread ('When I started rereading it, I intended to review only The Shadow of the Torturer').",
+   "fromFile": "verdicts-wolfe-i330-344.json"
+  },
+  "339": {
+   "index": 339,
+   "verdict": "PARTIAL",
+   "trueWording": "Even though Severian is an unreliable narrator strictu sensu, as far as I can tell, he doesn’t lie to the reader.",
+   "unsupportedLimb": "that the essay disputes a 'common claim that Severian lies to the reader' — the received view it answers is 'Severian is an unreliable narrator', and three paragraphs later the same essay asserts the opposite of the claim's holding",
+   "note": "The quoted words are verbatim and are the blogger's own qualified position ('as far as I can tell'). But the page never frames 'Severian lies to the reader' as the common claim; the alleged difficulty it lists is '1) Severian is an unreliable narrator'. More sharply, the same essay soon states 'We know that Severian is a liar quite early on' and reasons from 'Severian’s lies' and 'what intent may be behind Severian’s lies', so 'holding that he does not' is not a position the essay sustains. Anyone reusing this must not present the essay as settled on the point.",
+   "fromFile": "verdicts-wolfe-i330-344.json"
+  },
+  "340": {
+   "index": 340,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the book reportedly being a found text… and because of that had to resort to obscure words to use for animals and things that do not exist yet",
+   "note": "Verbatim, as item 3 of the essay's list 'Interpreting TBotNS is allegedly difficult for a couple of reasons'. The causal limb is explicit ('because of that'), and the found-text conceit is stated ('as Wolfe claims he has translated it from the original future language'). The 'allegedly' hedges whether these reasons make interpretation difficult, not the found-text mechanism; the blogger's own reply to reason 3 accepts the obscure words and only denies they impede enjoyment.",
+   "fromFile": "verdicts-wolfe-i330-344.json"
+  },
+  "341": {
+   "index": 341,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "he describes his world in a way that an actual character of this world would describe it: to the best of their knowledge",
+   "note": "Verbatim. Post bylined 'Noel', dated June 3, 2015, and self-described as by a fiction writer ('So where does that leave a fiction writer like me?'). 'Actual character of this world' supports 'actual inhabitant of that world'.",
+   "fromFile": "verdicts-wolfe-i330-344.json"
+  },
+  "342": {
+   "index": 342,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "strange creatures inhabit this world and yet we only get the barest of descriptions as to their nature",
+   "note": "Verbatim, in the same sentence chain as the light-fishes and aliens examples.",
+   "fromFile": "verdicts-wolfe-i330-344.json"
+  },
+  "343": {
+   "index": 343,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "To me, the most interesting stories arise from the untold details.",
+   "note": "Verbatim, opening the closing paragraph.",
+   "fromFile": "verdicts-wolfe-i330-344.json"
+  },
+  "344": {
+   "index": 344,
+   "verdict": "PARTIAL",
+   "trueWording": "No, don’t tell me histories as if they were written in books. Tell me histories that arise from your psyche. Tell me histories that surface from interaction with your surroundings.",
+   "unsupportedLimb": "that the wanted history surfaces from a character's interaction with surroundings — the page addresses the writer ('your psyche', 'your surroundings'), never a character",
+   "note": "The rejection limb is verbatim. The positive half is addressed in the second person to the author throughout that paragraph ('your deliberate attempts to flesh out your world', 'your psyche', 'your surroundings'), so the claim's substitution of a character as the agent of the interaction is the claim's inference, not the page's wording.",
+   "fromFile": "verdicts-wolfe-i330-344.json"
+  },
+  "345": {
+   "index": 345,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Wolfe: characterize by showing thinking, speaking, acting characteristically.",
+   "note": "Stewart's blog (POSSIBLY IRRITATING ESSAYS, Feb 2022) relays five bits of advice Wolfe gave Neil Gaiman; the quote sits verbatim in the fourth: 'You do not characterize by telling the reader about the character. You do it by showing the character thinking, speaking and acting in a characteristic way. You simply show it and shut up.' Every limb holds, including 'rather than described'.",
+   "fromFile": "verdicts-wolfe-i345-359.json"
+  },
+  "346": {
+   "index": 346,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Ambiguity: organising principle of form and fundamental theme.",
+   "note": "Opening paragraph, verbatim: 'ambiguity is the watchword to the text. More significantly, it is also an organising principle of form, a means of confounding interpretation, and a fundamental theme...'. Article by Peter Wright, Ultan's Library, 15 January 2002; the 'not only a theme' limb is supported because the page asserts both roles.",
+   "fromFile": "verdicts-wolfe-i345-359.json"
+  },
+  "347": {
+   "index": 347,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Puzzle's existence more significant than its solution.",
+   "note": "Verbatim (including the page's own typo 'more significant that its solution'), and located exactly where the claim says - the paragraph closing the Wendland discussion: '...the existence of the puzzle is more significant that its solution, since the puzzle is where the political arguments of the novel can be found.'",
+   "fromFile": "verdicts-wolfe-i345-359.json"
+  },
+  "348": {
+   "index": 348,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Early-1980s readers accused Wolfe of fabricating words; untrue.",
+   "note": "Wowra's introduction to his 2009 interview with Andre-Driussi: 'In the early 1980s, frustrated readers accused Mr. Wolfe of deliberately fabricating unusual words to confuse them. Nothing could be further from the truth.' Both limbs (the early-1980s dating and the denial) are on the page.",
+   "fromFile": "verdicts-wolfe-i345-359.json"
+  },
+  "349": {
+   "index": 349,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Real strange words show how odd language sounds.",
+   "note": "Verbatim: 'All of the strange words that appear in THE BOOK OF THE NEW SUN are real. And they remind us just how odd language can sound without science fiction authors inventing new words that lack inherent meaning.' The 'without any invented vocabulary' limb is the page's own clause.",
+   "fromFile": "verdicts-wolfe-i345-359.json"
+  },
+  "350": {
+   "index": 350,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Bizarre, seemingly counterfeit words: omophagist and cherkaji.",
+   "note": "Verbatim in the same introduction: 'full of bizarre and seemingly counterfeit words like omophagist (an eater of raw flesh) and cherkaji (Persian light cavalry)', with 'All of the strange words... are real' two sentences later, supporting the 'seemingly counterfeit but real' limb.",
+   "fromFile": "verdicts-wolfe-i345-359.json"
+  },
+  "351": {
+   "index": 351,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Range actually one thousand to thirty-thousand years, revising 'about a chiliad'.",
+   "note": "Section 2.1 Overview, verbatim: 'In “Posthistory 101” and Lexicon Urthus I stated that the time from Ymar to Severian was about a chiliad. Recent reading suggests that the range is actually between one thousand and thirty-thousand years...'. By Michael Andre-Driussi, Ultan's Library, 6 July 2020; the revision limb is explicit.",
+   "fromFile": "verdicts-wolfe-i345-359.json"
+  },
+  "352": {
+   "index": 352,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "that the earlier thousand-year figure rested on a single character's remark - the page names a second basis, Wolfe's own remark in a 1983 Robert Frazier interview ('an autarch a chiliad dead'), and concludes 'Based, then, on Vodalus’ and Wolfe’s comments, I took the 1K model as being solid'",
+   "trueWording": "Vodalus's line plus Wolfe's 1983 interview remark grounded 1K.",
+   "note": "Quote is verbatim in section 2.2 ('This statement strongly implied to me that the autarchs had reigned for about a thousand years'), and the 'rather than any stated chronology' limb is supported ('it turns out I had not adequately cited the source text for that detail'). The 'single character's offhand remark' limb overstates: the source text is Vodalus's recruitment-pitch line (II, chap. 10) AND Wolfe's interview statement, which Andre-Driussi says he was 'perhaps unduly influenced by'.",
+   "fromFile": "verdicts-wolfe-i345-359.json"
+  },
+  "353": {
+   "index": 353,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Brute-force search for chiliads, thousand years, ages, aeons, eons.",
+   "note": "Section 2.3 Narrowing the range, verbatim: 'In an attempt to narrow that down a bit, I set upon a brute force method of searching for the terms “chiliads,” “thousand years,” “ages,” “aeons,” and “eons,” in order to sift for further clues.' The five time words match the claim exactly, and the narrowing purpose is stated.",
+   "fromFile": "verdicts-wolfe-i345-359.json"
+  },
+  "354": {
+   "index": 354,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "that this advice came in a letter - the memoir introduces it only as 'He once advised', naming no setting; the letter it does describe is the earlier critique of her novel chapters (the 'uncooked dumplings' letter)",
+   "trueWording": "'He once advised' - setting unnamed, not attributed to a letter.",
+   "note": "Quotation verbatim: 'He once advised, “Always tell a story as cleanly and as clearly as possible.”' Cooney's memoir (Ultan's Library, 10 June 2016) mixes dinner conversation and correspondence, and this line is not placed in either. Secondary: the page calls her a poet and short-story writer with an unsold novel; 'novelist' is not the page's word.",
+   "fromFile": "verdicts-wolfe-i345-359.json"
+  },
+  "355": {
+   "index": 355,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Letter on her chapters: infodumps, 'lumps of prose like uncooked dumplings'.",
+   "note": "Verbatim and every limb holds: 'he wrote me a long letter about what he did read... I had a tendency to interrupt my dialogue with long infodumps. He used the phrase “lumps of prose like uncooked dumplings”'. The draft was the first chapters of her novel, which she had sent him.",
+   "fromFile": "verdicts-wolfe-i345-359.json"
+  },
+  "356": {
+   "index": 356,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "She'd cut sing-songy rhythm and rhyme; he urged otherwise.",
+   "note": "Verbatim, and directly after the clean-and-clear advice as the claim locates it: 'after I wrote “Three Fancies from the Infernal Garden”... and showed it to Gene, telling him I’d probably need to cut much of the sing-songy rhythm and internal rhyme, he urged me not to take my knife to it.'",
+   "fromFile": "verdicts-wolfe-i345-359.json"
+  },
+  "357": {
+   "index": 357,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "5HoC's opening line riffs on Proust's 'For a long time I went to bed early.'",
+   "note": "Verbatim: 'The opening line of The Fifth Head of Cerberus... is a riff on Proust’s “For a long time I went to bed early.”' By Matthew Keeley, Tor.com/Reactor, published 9 November 2017 (datePublished 2017-11-09). The page names Swann's Way as the work in the next sentence ('Readers unfamiliar with Swann’s Way... people who recognize the source quote'); it does not itself use the word 'opening' for the Proust line, though that line is Swann's Way's first sentence.",
+   "fromFile": "verdicts-wolfe-i345-359.json"
+  },
+  "358": {
+   "index": 358,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'There’s also, perhaps, a slight clue... in the sentence’s grammar'.",
+   "note": "Verbatim in the same paragraph. The page hedges with 'perhaps', which the claim drops; the claim's own wording ('a slight clue') keeps the page's low strength, so the limb stands.",
+   "fromFile": "verdicts-wolfe-i345-359.json"
+  },
+  "359": {
+   "index": 359,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'We eventually do learn why that comma is missing.'",
+   "note": "Verbatim, and the missing comma is explicitly the one in 'my brother David': 'If the narrator had only one brother, we would read “my brother, David” rather than the comma-less “my brother David.” We eventually do learn why that comma is missing.'",
+   "fromFile": "verdicts-wolfe-i345-359.json"
   }
  },
  "assembledFrom": [

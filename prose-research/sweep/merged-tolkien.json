@@ -12349,6 +12349,221 @@
    "unsupportedLimb": "that the three peaks fall in Book Four - the third is Book Six, Chapter III (Mount Doom)",
    "fromFile": "verdicts-tolkien-i673-687.json"
   },
+  "688": {
+   "index": 688,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the impression of archaicity ... is partly due to three simple lexical causes",
+   "note": "Raw PDF fetched live (200, 4pp, pdfminer text). Quote 'three simple lexical causes' verbatim. All three causes verbatim: 'overuse' of words borrowed from nineteenth-century fiction, avoidance of words associated with the modern world, dense use of new coinages, unusual grammatical patterns, rare or obsolescent words. yonder, journey (v) and topmost all appear in the listed 19th-century key words. Corpora verbatim: 19th-century corpus 'about 30 million words', post-war fiction 'around 160 million running words', 'a reference corpus of 94 million words' (heterogeneous/mixed). Only softening: the page says 'partly due to', the claim says 'comes from'.",
+   "fromFile": "verdicts-tolkien-i688-702.json"
+  },
+  "689": {
+   "index": 689,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Tolkien tends to use many of these words in nineteenth-century patterns",
+   "note": "No quotation supplied, so VERBATIM is not assessable; every limb is on the raw page, mostly word for word: modern key words 'such as they, big, wake, wall, unfriendly, tired or smoke'; smoke 'commonly preceded by the indefinite article in Lord of the Rings (e.g. ... a black smoke swirled in the air.), a use that is notably infrequent in modern fiction'. The page's list also includes 'unfriendly', which the claim omits (an omission, not an error).",
+   "fromFile": "verdicts-tolkien-i688-702.json"
+  },
+  "690": {
+   "index": 690,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the paratactic style here, with the repeated use of \"and\" in the manner of the New Testament",
+   "note": "Raw Wikipedia HTML fetched (200) and de-tagged. Quote 'repeated use of \"and\"' verbatim. Turner limb verbatim: 'Tolkien's style is both generally simple, using parataxis ... and varied, adapted to the race and standing of the speaker'. Pelennor limb verbatim: Turner on the second eucatastrophe in the Battle of the Pelennor Fields, readers experience 'an impression of exalted register' because of the biblical association, 'even though Tolkien uses few unusual or archaic words in the passage'.",
+   "fromFile": "verdicts-tolkien-i688-702.json"
+  },
+  "691": {
+   "index": 691,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Shippey calls such deliberate use of the conjunction, avoiding explicit logical connection, \"loose semantic fit\"",
+   "note": "No quotation supplied, so VERBATIM is not assessable; both limbs are on the raw page in the claim's own words. Shippey limb sits in the Pelennor eucatastrophe passage (the article separately credits Turner with 'special stylistic effects at key moments'). Rosebury limb verbatim: 'the following \"But glad would he have been\", with effective use of inversion. Rosebury shows how awkward the uninverted form would have been: \"But he who wrought it long ago ... would have been glad to know its fate.\"'",
+   "fromFile": "verdicts-tolkien-i688-702.json"
+  },
+  "692": {
+   "index": 692,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "using it to achieve a sense of \"breathless excitement\"",
+   "note": "Raw WordPress page fetched (200). Quote word for word apart from the source's internal quotation marks around 'breathless excitement'. Garth attribution and page verbatim: '(Tolkien and the Great War, 271)'. Parataxis defined as 'short, simple sentences joined by coordinating conjunctions (e.g., \"and\")'. Both examples are from 'The Ride of the Rohirrim' and 'The Battle of Pelennor Fields'. 'Rising foreboding' corresponds to the page's 'cranking up the tension and foreboding before the denouement'.",
+   "fromFile": "verdicts-tolkien-i688-702.json"
+  },
+  "693": {
+   "index": 693,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the narrator has become impartial and self-effacing",
+   "note": "Raw LiveJournal HTML fetched (200), post dated June 6 2006. Quote verbatim. Every limb verbatim: 'the opening of The Hobbit is told by a very intrusive narrator, but as the book gets more serious toward the end, the narrator recedes'; 'the initial drafts of LotR, which were unsuccessful attempts to return to the intrusive voice'; Booth footnote: 'a system from Wayne Booth's The Rhetoric of Fiction that characterizes narrators on a scale between unintrusive and intrusive'.",
+   "fromFile": "verdicts-tolkien-i688-702.json"
+  },
+  "694": {
+   "index": 694,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "omniscient, frequently discusses the events, speaks to the reader as if to a child",
+   "note": "Raw PDF fetched live from Dialnet (200, 16pp) and text-extracted. No quotation supplied. All limbs supported: omniscient and 'constantly speaks to the reader as if to a child'; 'deliberately conceals pieces of information in order to generate interest' and 'omits data that the reader already knows' (withholding); anticipation via 'you will see whether he gained anything in the end' and postponing to 'the next chapter'; 'he is conscious of the fact that his narration is in a written medium'. Kuznets is also cited on the page for 'an omniscient narrator that comments on events and addresses the reader directly'.",
+   "fromFile": "verdicts-tolkien-i688-702.json"
+  },
+  "695": {
+   "index": 695,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the narrative voice becomes more neutral and the narrator disappears behind the characters",
+   "note": "Same raw Dialnet PDF. Quote 'the narrator disappears behind the characters' verbatim. Limbs verbatim: 'It begins with a chapter that has a conversational and uninhibited tone'; 'some of the asides that also characterize the narrative voice of The Hobbit'; 'The narrator is sometimes unreliable: \"A day or two later a rumour (probably started by the knowledgeable Sam)\" (I, 47)'. Page reads 'more neutral'; claim says 'neutral'.",
+   "fromFile": "verdicts-tolkien-i688-702.json"
+  },
+  "696": {
+   "index": 696,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the archaic style is not predominant throughout the story ... (chiefly books II and III)",
+   "note": "Same raw Dialnet PDF. Quote 'chiefly books II and III' verbatim. Limbs verbatim: 'the use of archaic forms such as \"ye\" and \"hath\" and the inversion of nouns and adjectives'; 'used in episodes relating to the world of elves and men -in short, those inspired by epic fantasy'; 'creating proper names by using a capital letter for the first letter of common nouns ... the Sea, the City, the Gate'. Poveda judges the capitals a flaw ('makes the style pompous'), which the claim's neutral 'mark the style' does not contradict.",
+   "fromFile": "verdicts-tolkien-i688-702.json"
+  },
+  "697": {
+   "index": 697,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the narrator of The Hobbit is an intrusive authorial narrator who frequently comments on and judges",
+   "note": "Raw GRIN product page fetched (200); it carries the paper's summary, ToC, abstract and an excerpt. Quote 'intrusive authorial narrator' verbatim, in: 'an intrusive authorial narrator who frequently comments on and judges the characters as well as the unfolding events ... and who addressed his readers in a direct way'. Stanzel/Booth limb: 'Analysis of narrative situations based on the theories of Franz K. Stanzel and Wayne C. Booth'. Point-of-view limb is ToC section 2.3.6 'Changing the Point of View'. Final-chapters limb: 'changes to the narrative voice in the last chapters of the book, which were written over three years after the rest of the novel'. Author/year/venue on page: Nadja Litschko, 2006, GRIN.",
+   "fromFile": "verdicts-tolkien-i688-702.json"
+  },
+  "698": {
+   "index": 698,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Tolkien tends to draw back into a limited omniscience ... we do not enter their minds",
+   "note": "Raw LiveJournal HTML fetched (200), post dated September 14 2021. Quote 'we do not enter their minds' verbatim, and it appears twice. Limbs verbatim: 'We see this story mainly through Frodo's mind. As the story develops, we occasionally enter Merry or Pippin's mind. Toward the end, we see a lot of the story through Sam's mind'; Book 3 on Aragorn, Legolas and Gimli 'Tolkien reverts to limited omniscience ... we do not enter their minds'; and, in the same Book 3 discussion, 'we are witnessing all this like those watching a stage-play'.",
+   "fromFile": "verdicts-tolkien-i688-702.json"
+  },
+  "699": {
+   "index": 699,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The limited third-person narrative focuses attention more on one character",
+   "note": "The dc.swosu.edu landing page carries only an abstract; the article PDF (viewcontent.cgi?article=2155) returns 403 to a browser UA live, so recovered via the Wayback raw capture https://web.archive.org/web/20230512031427id_/... (200, application/pdf, 18pp) and text-extracted. Quote verbatim (line-wrapped in the PDF). Tellers list verbatim: 'Bilbo, Aragorn, Gandalf, the historian/scholar who discovered the \"Red Book of Westmarch\", the scribe in Minas Tirith who recorded Aragorn's story, and the omniscient narrator in The Silmarillion'. Contrast verbatim: 'the more limited point of view is less broad in scope or theme, but at least in Tolkien more detailed in description, dialogue, poetry, song, etc. The omniscient narrator has a broader purpose'.",
+   "fromFile": "verdicts-tolkien-i688-702.json"
+  },
+  "700": {
+   "index": 700,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "frame tale which authenticates the story ... and gives away the \"happy ending\"",
+   "note": "Same Wayback raw PDF of the Mythlore article. No quotation supplied. All limbs on the page: 'the entire frame tale which authenticates the story as having come from the \"Red Book of Westmarch\" ... also provides a larger context for the present tale and gives away the \"happy ending\" by mentioning some history of the characters after the events of the present tale. This level is useful to compare with the point of view in The Hobbit, as well, since the narrator then paraphrased Bilbo's account, revealing his own bias.'",
+   "fromFile": "verdicts-tolkien-i688-702.json"
+  },
+  "701": {
+   "index": 701,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "that Wikipedia cites Thomson (1967) for the found-manuscript / editor-translator frame - Thomson [9] is cited only in the 'traditional romance' section (tapestry romance, Frye's phases); the framing paragraph cites [12] Turner 2011a and [14] Brljak 2010, and the following sentence [12][13][14][15]",
+   "trueWording": "found manuscript conceit ... he was the book's editor and translator (cited to Turner 2011a, Brljak 2010)",
+   "note": "Raw Wikipedia HTML fetched (200) and de-tagged; citation numbers resolved against the article's own Secondary reference list, in which Thomson 1967 is note 9 and Turner 2011a is note 12. The rest of the claim is supported: 'The found manuscript conceit, and the claim that he had translated it into English from the original Westron rather than written it himself, put him in the frame with the story that he was the book's editor and translator'; the Red Book frame at 'Tolkien came up with a frame story for the sequel, the Red Book of Westmarch'; and the lead's 'many other elements such as genealogies and footnotes, giving the impression that Tolkien was the editor and translator of the work, forming an editorial frame'. Only the Thomson attribution fails.",
+   "fromFile": "verdicts-tolkien-i688-702.json"
+  },
+  "702": {
+   "index": 702,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "The 95,137 tokens come in 11,532 different types",
+   "note": "Raw page fetched (200). The supplied quotation '95,137 tokens in 11,532 types' is NOT on the page word for word: the page has 'we get 95,137 tokens in The Hobbit' and, separately, 'The 95,137 tokens come in 11,532 different types'. Every figure checks out: 70th Anniversary edition; 'just deal with the 19 chapters of the main narrative'; whitespace split gives 95,137; 'we've suggested 95,137, 95,390 and 95,643 as possibilities' turning on em-dash handling; '5,165 types consist of a word followed by punctuation'; and the residual '254 remaining types that have an em-dash in the middle' ('These all have em-dashes in them').",
+   "fromFile": "verdicts-tolkien-i688-702.json"
+  },
+  "703": {
+   "index": 703,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“In 98.5% of paragraphs, it takes five tokens or fewer”",
+   "note": "Page (fetched raw, HTTP 200): '1,542 out of 1,566 cases'; 'In 98.5% of paragraphs, it takes five tokens or fewer to identify the reference'; 'Even with just the initial three tokens you can get 85.8% of references unambiguously.' All three figures verbatim. Claim carried no quote field; every limb supported.",
+   "fromFile": "verdicts-tolkien-i703-717.json"
+  },
+  "704": {
+   "index": 704,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“‘A,’ said X, ‘B.’” versus “‘A,’ said X. ‘B.’”",
+   "note": "Page states the comma-inside-quotes convention with the final period omitted, then the two patterns verbatim ('if X says A, B. it is typeset ‘A,’ said X, ‘B.’ whereas if X says A. B. it is typeset ‘A,’ said X. ‘B.’'), and the ambiguity ('could mean that X said A, B. or that X said A B.'). LOTR context (Farewell to Lórien) confirmed. Note the text uses single quotation marks.",
+   "fromFile": "verdicts-tolkien-i703-717.json"
+  },
+  "705": {
+   "index": 705,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“Speaker identification has been completed for The Hobbit, The Lord of the Rings, and The Silmarillion”",
+   "note": "Quote verbatim under 'Text Annotation and Analysis → Status and Plans'. The 'enabling dialogue/narrative separation by speaker' gloss is supported in other words by the same section's annotation list, which pairs 'direct speech markup and speaker identification'.",
+   "fromFile": "verdicts-tolkien-i703-717.json"
+  },
+  "706": {
+   "index": 706,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“they have not previously been studied quantitatively”",
+   "note": "Oxonmoot abstract on the page names Book of Lost Tales, The Hobbit, LOTR and The Silmarillion; asks 'is the elevated style of The Silmarillion unique to that work or is it also the way the Elves speak in The Lord of the Rings?'; and names 'Multidimensional Register Analysis'. Quote appears as '…they have not previously been studied quantitatively.' Talk is upcoming (posted Jun 2023, Oxonmoot September), matching the 'planned' framing.",
+   "fromFile": "verdicts-tolkien-i703-717.json"
+  },
+  "707": {
+   "index": 707,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“The LotR Project: 481,103 words”; “478,492 without Appendices and 526,172 with them”",
+   "note": "All five figures on the page: 481,103; 'cf. 95.356 for THE HOBBIT and 130.115 for SILM' (European thousands separator = 95,356 and 130,115); 'In February 1950 Tolkien tells Unwin the newly finished book is 600,000 words'. The 478,492/526,172 pair appears in Rateliff's own signed comment ('the unofficial but reliable result of 478,492 without Appendices and 526, 172 with them'), not the post body. Page also records Tolkien's later 1950 escalations to 1m and 1.2m words, which the claim does not mention.",
+   "fromFile": "verdicts-tolkien-i703-717.json"
+  },
+  "708": {
+   "index": 708,
+   "verdict": "PARTIAL",
+   "trueWording": "“books four and six… including only 66,374 and 64,738 tokens each”",
+   "note": "Landing page carries only the abstract; the full article was reached as raw PDF via Wayback (web.archive.org/web/20250602181027id_/…viewcontent.cgi?article=1327, 44pp, text extracted). Quote 'a total wordcount of 95,559 tokens' is verbatim. Ring counts verbatim: '306 times in The Fellowship (1.72/thousand words); 70 times in The Two Towers (0.45/thousand words); and 73 times in The Return of the King'. But the two sub-corpus figures are misattributed: Livesey writes 'books four and six', i.e. the second book of The Two Towers and the second book of The Return of the King — not 'the two books of The Two Towers' (which would be books three and four).",
+   "unsupportedLimb": "that 66,374 and 64,738 are the two books of The Two Towers — the article says books four and six",
+   "fromFile": "verdicts-tolkien-i703-717.json"
+  },
+  "709": {
+   "index": 709,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“the total word count calculated, was 578,432”",
+   "note": "Landing page is abstract-only; full thesis reached as raw PDF via Wayback (…20240222182336id_/…viewcontent.cgi?article=1299, 77pp). Page: 'this began with one “chapter” of notes at the beginning of The Hobbit, followed by its nineteen chapters. Five “chapters” of prologue began The Lord of the Rings, with its three volumes comprising the remaining sixty-one chapters', total 86 columns; quote verbatim. The claim omits the one extra 'notes' column for The Hobbit, which the source says the 578,432 total includes.",
+   "fromFile": "verdicts-tolkien-i703-717.json"
+  },
+  "710": {
+   "index": 710,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“In a piece with an average sentence length of 19 words”",
+   "note": "Quote verbatim. Also on the page: 'This 59-word sentence is the longest one within the section I analyzed'; 'propelled by the nested clauses and coordinating conjunctions'; and the em-dash interruption ('All’s right with the world and then… EM DASH… “Gandalf came by”'). Byline on the page reads 'By Amelia Turkette', March 2019, on ameliashugar.com — the attribution name differs from the byline.",
+   "fromFile": "verdicts-tolkien-i703-717.json"
+  },
+  "711": {
+   "index": 711,
+   "verdict": "PARTIAL",
+   "trueWording": "“There is ‘information’ on the web indicating the longest sentence found to be 111 words”",
+   "note": "Live site is behind a Cloudflare challenge (HTTP 403 with browser UA); reached via Wayback raw capture 20260820220652id_. Quote 'one long sentence, counting at 144 words' verbatim (post #10 by Ent), about the Fall of Gondolin original tale quoted in post #1. Also verbatim: 'The one he cites at 96 words is actually 97' and 'Tolkien’s (arguably) correct use of punctuation saves the sentence so it does not grind the mind into submission.' But the 111-word figure is not tied to LOTR anywhere on the page — the thread is about Tolkien's longest sentence generally and the source sentence is from The Fall of Gondolin.",
+   "unsupportedLimb": "that the 111-word online claim concerns The Lord of the Rings — the page says only 'the longest sentence found', naming no work",
+   "fromFile": "verdicts-tolkien-i703-717.json"
+  },
+  "712": {
+   "index": 712,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“Dialogue is identified by detecting text enclosed in double quotation marks”",
+   "note": "Quote verbatim (§2.3). Page: 'All spoken dialogue is extracted chapter by chapter using Python’s re module'; 'the nineteen chapters of The Hobbit' / 'all 19 chapters'; 'The Cirrus output shows good (89), time (65), Baggins (46), mountain (42), and Thorin (41) as the most frequently appearing dialogue words.' Every limb supported.",
+   "fromFile": "verdicts-tolkien-i703-717.json"
+  },
+  "713": {
+   "index": 713,
+   "verdict": "PARTIAL",
+   "trueWording": "“The Hobbit has more unique words and a higher unique word density than both the Silmarillion and each volume in the Lord of the Rings”",
+   "note": "Live host returns a WAF block (HTTP 454); reached via Wayback raw capture 20260808182141id_. Quote 'higher unique word density' verbatim, and the appendices exclusion is on the page ('neither has the appendicies to the Lord of the Rings… since they are not part of the story'). No edition is named anywhere in the capture — 'HarperCollins', '2009' and 'edition' do not occur; a 2013 capture of the same URL also lacks them.",
+   "unsupportedLimb": "the 2009 HarperCollins eBook editions as the source texts — no edition is named on the page",
+   "fromFile": "verdicts-tolkien-i703-717.json"
+  },
+  "714": {
+   "index": 714,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“modernising the language of the Hobbits into the linguistic style of late 1990s German”",
+   "note": "Quote verbatim in the 'German (Carroux) 1969–1970' section. Page: 'In 2000, Klett-Cotta published a new translation by Wolfgang Krege… It focuses more on the differences in linguistic style that Tolkien employed to set apart the more biblical prose and the high style of elvish and human ‘nobility’ from the more colloquial 1940s English spoken by the Hobbits, something that Krege thought Carroux’s more unified version was lacking.' Every limb supported.",
+   "fromFile": "verdicts-tolkien-i703-717.json"
+  },
+  "715": {
+   "index": 715,
+   "verdict": "PARTIAL",
+   "trueWording": "“critics felt that he took too many liberties”; Nagel: a “translator-centred approach”",
+   "note": "Quote 'translator-centred approach' is verbatim on the page, and 'The 2012 edition of Krege has reverted the most controversial of his decisions' supports the second half of the claim. But the page attributes the too-many-liberties judgement to unnamed 'critics' and the 'translator-centred approach' / 'style unsuitable for Tolkien' wording to one named linguist, Rainer Nagel — the claim merges the two into a single collective judgement by 'German critics'.",
+   "unsupportedLimb": "that 'German critics' called it a translator-centred approach unsuited to Tolkien — the page attributes that phrase to the linguist Rainer Nagel alone",
+   "fromFile": "verdicts-tolkien-i703-717.json"
+  },
+  "716": {
+   "index": 716,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“Krege corrects many errors in Carroux, but ‘often overshoots its target of modernising’”",
+   "note": "Quote 'often overshoots its target' verbatim; Nagel is identified on the page as 'The linguist Rainer Nagel'. Two compressions, neither contradicted: the source says 'many errors in Carroux' (not all), and the target is specified as 'its target of modernising'.",
+   "fromFile": "verdicts-tolkien-i703-717.json"
+  },
+  "717": {
+   "index": 717,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“treating its source with ‘enormous respect’”; “Tolkien was delighted with Carroux’s work”",
+   "note": "Quote verbatim. Page: 'Tolkien was delighted with Carroux’s work, with the sole exception of the poems and songs.' The unified-style limb is supported by 'Krege thought Carroux’s more unified version was lacking' and by the lead's 'using a similar linguistic style for the speech of both elves and hobbits'. Note 'enormous respect' is the Tolkien scholar Susanne Stopfel's characterisation, which the claim states unattributed.",
+   "fromFile": "verdicts-tolkien-i703-717.json"
+  },
   "718": {
    "index": 718,
    "verdict": "VERIFIED_VERBATIM",
@@ -12455,6 +12670,113 @@
    "trueWording": "'Kräuter' ist schlicht falsch, da 'Kraut' ... als Landpflanze definiert ist",
    "note": "Quote 'Kräuter' present verbatim, as is the construction 'make ... bend': 'Man sieht, dass Carroux sich eng an die Vorlage hält. Das \\'kostet\\' den Text ein wenig an Flüssigkeit (lassen alle Türme sich verbeugen; wogen sie). Aber im Original heißt es schließlich auch nicht \"the towers are bend by the wrinkles\", sondern \"make ... bend\".' Botany limb: 'Also ist es eine \"Wasserpflanze\", und \"Kräuter\" ist schlicht falsch, da \"Kraut\" laut Brockhaus\\' Lexikon Biologie ... auf Seite 477 als Landpflanze definiert ist.' Naming point: the page never writes 'Aglarond' (checked as an exact substring) — it identifies the passage as Gimli in the caves of Helm's Deep, which is the same referent, so the label is a correct external identification rather than a page limb.",
    "fromFile": "verdicts-tolkien-i718-732.json"
+  },
+  "733": {
+   "index": 733,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "hunderte kleinerer und groesserer Fehler",
+   "note": "Raw page (curl, browser UA over http; WebFetch failed TLS). Verbatim: 'Eine genaue Textanalyse zeigte hunderte kleinerer und groesserer Fehler', immediately after 'die Fehler, die ein Projektteam der Deutschen Tolkiengesellschaft entdeckte'. Rush-job limb also explicit: Krege got 'einen Eilauftrag' and 'musste nun mit heisser Nadel stricken' because of 'die nahende Veroeffentlichung der Verfilmung von Peter Jackson'. Page signed F.W. / (c) Frank Weinreich.",
+   "fromFile": "verdicts-tolkien-i733-747.json"
+  },
+  "734": {
+   "index": 734,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Krege redet von 'Kunde' - das finde ich eigentlich besser",
+   "note": "Raw page: 'So bezeichnet Bauer Maggot, den Nazgul, der sich bei ihm nach Frodo erkundigt, im Original als \"fellow\", was Carroux als \"Bursche\" wiedergibt. Krege redet von \"Kunde\" - das finde ich eigentlich besser, da die ambivalente Bedeutung des \"fellow\" in einen moderneren Begriff gepackt wurde, der diese Ambivalenz traegt.' Page says Nazgul rather than 'Black Rider'; same referent.",
+   "fromFile": "verdicts-tolkien-i733-747.json"
+  },
+  "735": {
+   "index": 735,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "by using archaic language (e.g. the archaic deferential Ihr pronoun) and at places awkward syntax",
+   "note": "PDF downloaded (browser UA) and text-extracted with pypdf; p.26: 'Carroux's translation shows a sort of foreignization ... by using archaic language (e.g. the archaic deferential Ihr pronoun) and at places awkward syntax.' p.27: 'Carroux's translation may read like a \"translation\" from Middle High German into modern German, and thus foreignized' - addressed to 'a potential target reader, who is not familiar with the SL English'.",
+   "fromFile": "verdicts-tolkien-i733-747.json"
+  },
+  "736": {
+   "index": 736,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "he preserves the archaism where a contrast ... was made, e.g. Theoden meeting the Hobbits in Isengard",
+   "note": "Claim carries no quote, so graded on substance. p.27 verbatim: 'he uses a, for the time of publication in 2000, modern German (though he preserves the archaism where a contrast between archaic and modern speech was made in Tolkien's text, e.g. in the first meeting of Theoden and the Hobbits in Isengard).' Every limb supported.",
+   "fromFile": "verdicts-tolkien-i733-747.json"
+  },
+  "737": {
+   "index": 737,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Nagel in 2004 criticizes the use of 'speziell' by Krege as it ruins the simple speech of Butterbur",
+   "note": "p.27: 'words like \"Halunke\" (412) are not used in the German of 2021; but Nagel in 2004 criticizes the use of \"speziell\" by Krege as it ruins the simple speech of Butterbur (\"Verschiedene Interpretationen\" 96)'. Quote 'speziell' appears verbatim; the framing sentence is 'This \"modern\" aspect of Krege's language does not hold up well to a reader in 2021.'",
+   "fromFile": "verdicts-tolkien-i733-747.json"
+  },
+  "738": {
+   "index": 738,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "not merely as a translation, but as a modernisation of Tolkien's text",
+   "note": "p.27 quotes Nagel: '[I]t would appear that Wolfgang Krege approached his translation not merely as a translation, but as a modernisation of Tolkien's text to make it acceptable ... for what he believed to be a \"new\" generation of readers' (\"New One\" 28). Quote verbatim; attribution to Nagel via Held correct. (Same sentence is independently present in Nagel's own chapter, p.28 of Cormare 6.)",
+   "fromFile": "verdicts-tolkien-i733-747.json"
+  },
+  "739": {
+   "index": 739,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Krege gives Butterbur a vernacular manner of speech, with expressions like 'Dalli, dalli!'",
+   "note": "p.28: 'in Tolkien's text, Butterbur speaks a form of a rural English dialect in an old-fashioned form ...; while Carroux, as usual, tries to translate verbatim with a similar syntax, Krege gives Butterbur a vernacular manner of speech, with expressions like \"Dalli, dalli!\" (174; Tolkien: \"Double sharp!\" 153; Carroux: \"Schneller, schneller!\" 193).' All three renderings and the 'verbatim' characterisation of Carroux are on the page.",
+   "fromFile": "verdicts-tolkien-i733-747.json"
+  },
+  "740": {
+   "index": 740,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Wenn er's vergisst, wasch' ich ihm den Kopf",
+   "note": "p.28 table (Tolkien 170 / Carroux I:213 / Krege 193) gives 'If he forgets, I shall roast him.' against Krege's 'Wenn er's vergisst, wasch' ich ihm den Kopf.' Surrounding text: 'he repeatedly replaces idioms or introduces an idiomatic phrase when the English text did not include one'; it 'lose[s] the ... very real possibility that Gandalf meant it verbatim (thus changing the perception of the character Gandalf, also considering the fact that Krege lets Gandalf use oral forms (\"er's\"; \"wasch'\") in a written letter)'. Every limb supported.",
+   "fromFile": "verdicts-tolkien-i733-747.json"
+  },
+  "741": {
+   "index": 741,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Krege was found to be domesticating and dynamically equivalent ... Carroux ... foreignizing ... and formally equivalent",
+   "note": "Ch.6 'Analysis: Results' (p.66): 'While Carroux's differences compared to Tolkien are often minuscule, Krege's differences ... changed how human or how animalistic the readers may perceive Gollum or the Black Riders to be and changed Galadriel's social standing in Elvish society, as titles were translated differently'; and 'Krege was found to be domesticating and dynamically equivalent in his translation, while Carroux was foreignizing ... and formally equivalent.' Quote 'often minuscule' verbatim.",
+   "fromFile": "verdicts-tolkien-i733-747.json"
+  },
+  "742": {
+   "index": 742,
+   "verdict": "PARTIAL",
+   "trueWording": "some 'foreignized' forms already existing in the ST prevail (e.g. 'Schwestersohn' ... instead of using 'Neffe')",
+   "note": "Quote 'Schwestersohn' is on p.28, but inside a sentence whose subject is Krege alone: 'it can be said that Krege's translation falls under the translation tradition of domestication, even though some \"foreignized\" forms already existing in the ST prevail (e.g. \"Schwestersohn\" as translation of \"sister-son\" instead of using \"Neffe\")'. 'Schwestersohn'/'Neffe' occur exactly once in the whole 81-page thesis (grep-confirmed); Carroux's rendering of 'sister-son' is never stated. The only other mention (p.26) is Turner on Tolkien's own compounds.",
+   "unsupportedLimb": "that BOTH translations keep 'Schwestersohn' - the page states it only of Krege",
+   "fromFile": "verdicts-tolkien-i733-747.json"
+  },
+  "743": {
+   "index": 743,
+   "verdict": "PARTIAL",
+   "trueWording": "Nagel's chapter, entitled 'The New One Wants to Assimilate the Alien'",
+   "note": "Raw review page (curl) verified. Second limb fully supported: 'Krege's attempts to produce a more \"modern\" translation, using language calculated to appeal to a younger readership, sometimes has the result that it does not fully convey the voice intended by the author.' Krege's own defence as the page reports it is different wording: he 'claims that his work is closer to the original as it did not simply render the text from one language to another, but took account of Tolkien's source material'. The exact string 'assimilating the alien' is absent (inflection differs, attribution differs).",
+   "unsupportedLimb": "that Krege defended his version as 'assimilating the alien' - on this page the phrase is Nagel's chapter title, not Krege's words, and appears only as 'Assimilate the Alien'",
+   "fromFile": "verdicts-tolkien-i733-747.json"
+  },
+  "744": {
+   "index": 744,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "five different uses ... these cannot adequately replicate Tolkien's nuanced use of thou",
+   "note": "No quote supplied, so graded on substance. Raw page: Honegger 'tracks the use of thou ... suggesting that it has five different uses: in poetry or songs; archaic, in formal or formulaic speech; as an expression of contempt; as an indicator of high emotion, or an expression of familiarity or emotional closeness'; and 'although many modern languages have distinction in pronominal address, such as the French tu vs. vous and the German du vs. Sie, these cannot adequately replicate Tolkien's nuanced use of thou and you'. All five functions and both language pairs match.",
+   "fromFile": "verdicts-tolkien-i733-747.json"
+  },
+  "745": {
+   "index": 745,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "'elves' as 'aelvor,' a word which apparently has the connotation of 'fairy'",
+   "note": "No quote supplied. Raw page: 'Stenstrom is critical of many of Zetterholm's choices, including \"elves\" as \"aelvor,\" a word which apparently has the connotation of \"fairy.\"' The criticism carries the 'unwanted' sense. Context limb not in the claim: this is Zetterholm's Swedish Hobbit, not the LotR translation.",
+   "fromFile": "verdicts-tolkien-i733-747.json"
+  },
+  "746": {
+   "index": 746,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'Penner' / dosser ... acceptable in young persons' speech, but not expected in the language of an elderly innkeeper",
+   "note": "epdf.pub mirror fetched live with a browser UA; a naive tag-stripper silently ate this chapter (stray '<' in the OCR), so the page was re-parsed with html.parser - Nagel ch.1 IS present in full. Sect.4 'AN INTRODUCTORY EXAMPLE: THE PRANCING PONY', Excerpt 1: OV 'Where are you, you woolly-footed slow-coach?' / OT (Carroux) 'du wollfuessiges Faultier?' / NT (Krege) 'du flaumfuessiger Penner?', with the comment quoted at left. Both 'Penner' and 'Faultier' verbatim; the elderly-innkeeper-to-young-speech shift is stated explicitly.",
+   "fromFile": "verdicts-tolkien-i733-747.json"
+  },
+  "747": {
+   "index": 747,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "creating stylistic levelling; modernisation 'in fact a reduction of vocabulary'",
+   "note": "No quote supplied. Nagel ch.1 (p.26): the omissions 'simply narrow down the tone of passage as given in OV ..., creating stylistic levelling not too far removed from what Wolfgang Krege might have meant by OT's \"uniform\" language' - i.e. the paradox that modernisation reproduces the uniformity Krege charged the old version with. Vocabulary limb: 'such \"modernisation\" (in fact a reduction of vocabulary and stylistic level)'. Simplification limb: 'a tendency of simplifying speech patterns'; 'simplified sentence structure'; conclusion cites 'NT's syntactic simplification' and 'NT's over-simplification of OV's lexical structures and stylistic devices'. 'New uniformity' is Nagel's inference-by-comparison rather than his phrase, hence SUBSTANCE not VERBATIM.",
+   "fromFile": "verdicts-tolkien-i733-747.json"
   }
  }
 }

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""mk-round.py <name> <tag> --prev <args-file> [--runs <runId,...>] [--cap N] [--inflight] — build the NEXT round's args from the FILES:
+"""mk-round.py <name> <tag> --prev <args-file> [--runs <runId,...>] [--cap N] [--inflight] [--triage] — build the NEXT round's args from the FILES:
 salvage finders from this session's journals (extract-found.py), merge every verdict file (sweep-state summary), fold found files
 (assemble), re-split (split-chunks), then angles = prev.findAngles/extraAngles minus those whose found file is COMPLETE
 (a found file with "complete": false is assembled AND its angle re-run; legacy files without the flag count as complete),
@@ -12,7 +12,25 @@ runs=a[a.index('--runs')+1].split(',') if '--runs' in a else []
 cap=int(a[a.index('--cap')+1]) if '--cap' in a else int(prev.get('cap',3))
 def sh(cmd): r=subprocess.run(cmd,capture_output=True,text=True,cwd=K); print('  $',' '.join(cmd),'->',(r.stdout.strip() or r.stderr.strip())[:300]); return r
 if runs: sh(['python3',f'{S}/extract-found.py',name]+runs)
-sh(['node','sweep-state.mjs','summary']); sh(['node','sweep-state.mjs','assemble',name]); sh(['python3',f'{S}/split-chunks.py',name])
+sh(['node','sweep-state.mjs','summary']); sh(['node','sweep-state.mjs','assemble',name])
+if '--triage' in a:
+    # S-BOUND (owner 2026-09-06): verify only claims whose FEATURE has fewer than three verified distinct sources; record the rest as
+    # SKIPPED_TRIAGE in a verdict file so the state shows them decided (never kept) and split-chunks leaves them out.
+    import collections
+    sp=f'{S}/state-{name}.json'; st=json.load(open(sp)); claims=st['claims']; verd=st.get('verdicts') or {}
+    per=collections.defaultdict(set)
+    for i,c in enumerate(claims):
+        v=verd.get(str(i)); 
+        if c and v and v.get('verdict') in ('VERIFIED_VERBATIM','VERIFIED_SUBSTANCE'): per[str(c.get('feature','')).lower()].add(str(c.get('source','')).lower())
+    skip=[i for i,c in enumerate(claims) if c and str(i) not in verd and len(per[str(c.get('feature','')).lower()])>=3]
+    keep=[i for i,c in enumerate(claims) if c and str(i) not in verd and i not in set(skip)]
+    if skip:
+        vf=f'{S}/verdicts-{name}-triage-{tag}.json'
+        json.dump({'name':name,'triage':True,'claims':[{'index':i,**{k:claims[i].get(k,'') for k in ('feature','claim','source','url','quote')}} for i in skip],
+                   'verdicts':[{'index':i,'verdict':'SKIPPED_TRIAGE','trueWording':'','note':'S-BOUND: the feature already has three or more verified independent sources; not verified this round'} for i in skip]},open(vf,'w'),ensure_ascii=False)
+        sh(['node','sweep-state.mjs','summary'])
+    print('  triage: %d unverified claims kept for verification, %d skipped (feature already settled by 3+ sources)'%(len(keep),len(skip)))
+sh(['python3',f'{S}/split-chunks.py',name])
 def complete(angle):
     f=f'{S}/found-{name}-{angle}.json'
     if not os.path.exists(f): return False

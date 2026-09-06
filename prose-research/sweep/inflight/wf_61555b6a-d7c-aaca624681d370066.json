@@ -3,13 +3,14 @@
  "name": "tolkien",
  "angle": null,
  "tag": "i688-702",
- "lines": 102,
+ "lines": 110,
  "firstTs": "2026-09-06T17:09:13.597Z",
- "lastTs": "2026-09-06T17:14:17.389Z",
+ "lastTs": "2026-09-06T17:16:24.101Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 25
+  "Bash": 26,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://www.birmingham.ac.uk/documents/college-artslaw/corpus/conference-archives/2017/general/paper239.pdf",
@@ -23,16 +24,17 @@
   "https://en.wikipedia.org/wiki/Storytelling_in_The_Lord_of_the_Rings",
   "https://digitaltolkien.com/2021/03/14/tokenizing-the-hobbit.html",
   "https://dc.swosu.edu/cgi/viewcontent.cgi?article=2155&context=mythlore",
-  "https://web.archive.org/web/20230512031427id_/https://dc.swosu.edu/cgi/viewcontent.cgi?article=2155&context=mythlore"
+  "https://web.archive.org/web/20230512031427id_/https://dc.swosu.edu/cgi/viewcontent.cgi?article=2155&context=mythlore",
+  "https://web.archive.org/web/20230512031427id_/..."
  ],
  "filesWritten": [],
- "lastAssistantText": "All ten sources fetched as raw text (two PDFs extracted with pdfminer; the Mythlore PDF recovered via the Wayback raw capture after a live 403). Now writing the checkpoint.",
+ "lastAssistantText": "Checkpoint written and validated (15 claims, 15 verdicts, indices aligned).",
  "run": "wf_61555b6a-d7c",
  "agent": "aaca624681d370066",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_61555b6a-d7c/agent-aaca624681d370066.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-tolkien-i688-702.json",
-  "exists": false
+  "exists": true
  }
 }

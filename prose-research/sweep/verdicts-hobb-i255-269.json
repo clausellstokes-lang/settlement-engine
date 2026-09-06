@@ -1,0 +1,233 @@
+{
+ "name": "hobb",
+ "chunk": 17,
+ "claims": [
+  {
+   "index": 255,
+   "feature": "other: time compression in one sentence",
+   "claim": "Hobb advises skipping a dull stretch of travel by summarising it in one sentence, and supplies the sample sentence herself.",
+   "source": "Robin Hobb, 'What Works For Me', robinhobb.com blog, 2022",
+   "url": "https://www.robinhobb.com/blog/posts/40869",
+   "quote": "After four days of punishing travel, they reached a small holding",
+   "page": "Section: I don't want to write the next scene"
+  },
+  {
+   "index": 256,
+   "feature": "sentence length variation",
+   "claim": "Hobb says a chapter may consist of a single sentence.",
+   "source": "Robin Hobb, 'What Works For Me', robinhobb.com blog, 2022",
+   "url": "https://www.robinhobb.com/blog/posts/40869",
+   "quote": "You can have a one sentence chapter if you want",
+   "page": "Section: I don't want to write the next scene"
+  },
+  {
+   "index": 257,
+   "feature": "diction (native vs latinate)",
+   "claim": "Hobb rejects the word processor's thesaurus because it offers the same synonyms every other writer is using, and recommends a paper Roget's instead.",
+   "source": "Robin Hobb, 'What Works For Me', robinhobb.com blog, 2022",
+   "url": "https://www.robinhobb.com/blog/posts/40869",
+   "quote": "the same synonyms that every other writer is using",
+   "page": "Footnote on the thesaurus"
+  },
+  {
+   "index": 258,
+   "feature": "concrete sensory noun",
+   "claim": "Hobb gives as a revision-pass example replacing a red car with candy apple red with metal flake.",
+   "source": "Robin Hobb, 'What Works For Me', robinhobb.com blog, 2022",
+   "url": "https://www.robinhobb.com/blog/posts/40869",
+   "quote": "The car isn't red, it's candy apple red with metal flake",
+   "page": "Section: Nope. I'm blocked"
+  },
+  {
+   "index": 259,
+   "feature": "edition and house style",
+   "claim": "Groell, the Random House editor of Hobb, Martin and others, says her first read of a book is close line-reading and individual sentence editing.",
+   "source": "Anne Groell, executive SFF editor, Random House USA, interviewed by Julie Crisp, 2016",
+   "url": "http://www.juliecrisp.co.uk/blog-1/2016/1/4/a-day-in-the-life-of-an-editor-with-anne-groell",
+   "quote": "I do the really close line-reading and individual sentence editing",
+   "page": "Middle of the piece"
+  },
+  {
+   "index": 260,
+   "feature": "edition and house style",
+   "claim": "Groell says she averages about 25 pages an hour, or 200 pages a day, on that first close read.",
+   "source": "Anne Groell, executive SFF editor, Random House USA, interviewed by Julie Crisp, 2016",
+   "url": "http://www.juliecrisp.co.uk/blog-1/2016/1/4/a-day-in-the-life-of-an-editor-with-anne-groell",
+   "quote": "I average about 25 pages an hour, or 200 pages a day",
+   "page": "Middle of the piece"
+  },
+  {
+   "index": 261,
+   "feature": "register modulation",
+   "claim": "The Idle Woman says Bingtown could belong to an entirely different age than the Six Duchies.",
+   "source": "The Idle Woman (pseudonymous reviewer), 'Ship of Magic (1998): Robin Hobb', 2013",
+   "url": "https://theidlewoman.net/2013/05/05/ship-of-magic-robin-hobb/",
+   "quote": "Bingtown could belong to an entirely different age than the Six Duchies",
+   "page": "Opening paragraph"
+  },
+  {
+   "index": 262,
+   "feature": "place and institution description",
+   "claim": "The Idle Woman says trade, shipping and merchants' colonies give Bingtown a distinctly seventeenth-century feel in contrast with the medievalism of the Farseer trilogy.",
+   "source": "The Idle Woman (pseudonymous reviewer), 'Ship of Magic (1998): Robin Hobb', 2013",
+   "url": "https://theidlewoman.net/2013/05/05/ship-of-magic-robin-hobb/",
+   "quote": "with a distinctly seventeenth-century feel",
+   "page": "Opening paragraph"
+  },
+  {
+   "index": 263,
+   "feature": "repetition and refrain",
+   "claim": "Goldstein criticises Hobb's habit of repeating things, as if she did not trust readers to remember them from one chapter to the next.",
+   "source": "Lisa Goldstein, novelist, reviewing Dragon Haven in Strange Horizons, 2010",
+   "url": "http://strangehorizons.com/non-fiction/reviews/dragon-haven-by-robin-hobb/",
+   "quote": "trust her readers to remember them from one chapter to the next",
+   "page": "Fourth paragraph"
+  },
+  {
+   "index": 264,
+   "feature": "plainness and economy",
+   "claim": "Goldstein says the writing seemed tired and repetitious in Dragon Keeper and is tightened in Dragon Haven.",
+   "source": "Lisa Goldstein, novelist, reviewing Dragon Haven in Strange Horizons, 2010",
+   "url": "http://strangehorizons.com/non-fiction/reviews/dragon-haven-by-robin-hobb/",
+   "quote": "which seemed tired and repetitious in the earlier book",
+   "page": "Fourth paragraph"
+  },
+  {
+   "index": 265,
+   "feature": "withheld information and inference",
+   "claim": "Goldstein complains that very little in Dragon Haven could not have been guessed by an astute reader.",
+   "source": "Lisa Goldstein, novelist, reviewing Dragon Haven in Strange Horizons, 2010",
+   "url": "http://strangehorizons.com/non-fiction/reviews/dragon-haven-by-robin-hobb/",
+   "quote": "Very little happens that couldn't have been guessed by an astute reader",
+   "page": "Sixth paragraph"
+  },
+  {
+   "index": 266,
+   "feature": "omission as information",
+   "claim": "Hobb says fan fiction closes up the space she has engineered into the story.",
+   "source": "Robin Hobb, 'The Fan Fiction Rant', robinhobb.com (page since removed)",
+   "url": "https://web.archive.org/web/20050630015105id_/http://www.robinhobb.com/rant.html",
+   "quote": "closes up the space that I have engineered into the story",
+   "page": "Section: I should be flattered"
+  },
+  {
+   "index": 267,
+   "feature": "withheld information and inference",
+   "claim": "Hobb objects that the reader is then told what he must think rather than being allowed to observe the characters and draw his own conclusions.",
+   "source": "Robin Hobb, 'The Fan Fiction Rant', robinhobb.com (page since removed)",
+   "url": "https://web.archive.org/web/20050630015105id_/http://www.robinhobb.com/rant.html",
+   "quote": "told what he must think rather than being allowed to observe",
+   "page": "Section: I should be flattered"
+  },
+  {
+   "index": 268,
+   "feature": "omission as information",
+   "claim": "Hobb says that if something is left nebulous in her text it is because she intends it to be nebulous.",
+   "source": "Robin Hobb, 'The Fan Fiction Rant', robinhobb.com (page since removed)",
+   "url": "https://web.archive.org/web/20050630015105id_/http://www.robinhobb.com/rant.html",
+   "quote": "If something is left nebulous, it is because the author intends",
+   "page": "Section: I should be flattered"
+  },
+  {
+   "index": 269,
+   "feature": "omission as information",
+   "claim": "Hobb says a writer puts a great deal of thought into what goes into the story and what does not.",
+   "source": "Robin Hobb, 'The Fan Fiction Rant', robinhobb.com (page since removed)",
+   "url": "https://web.archive.org/web/20050630015105id_/http://www.robinhobb.com/rant.html",
+   "quote": "A writer puts a great deal of thought into what goes",
+   "page": "Section: I should be flattered"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 255,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"You can just type, 'After four days of punishing travel...'\"",
+   "note": "Raw page reached (robinhobb.com, HTTP 200). Section 'I don't want to write the next scene. It's boring.' Every limb holds: the boring stretch should not be written ('The solution. Don't write it.'), the four-day desert crossing is her own example, and she supplies the sentence verbatim - the page continues '...they reached a small holding near a water hole.' Or something similar."
+  },
+  {
+   "index": 256,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"You can have a one sentence chapter if you want.\"",
+   "note": "Raw page reached. Exact sentence in the same section, immediately after the sample travel sentence, followed by 'It's your book.'"
+  },
+  {
+   "index": 257,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"the same synonyms that every other writer is using\"",
+   "note": "Raw page reached. The asterisked footnote reads: 'Do you have a copy of Roget's Thesaurus? If not, go buy one now. A fat paper thesaurus is a treasure. See, if I look for a synonym for treasure via the word processing program I'm using, it will show me the same synonyms that every other writer is using. The thesaurus will give you a lot more choices.' Both limbs (rejection of the word-processor thesaurus, recommendation of a paper Roget's) are on the page."
+  },
+  {
+   "index": 258,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"The car isn't red, it's candy apple red with metal flake.\"",
+   "note": "Raw page reached. Section 'Nope. I'm blocked. Really blocked.' The 'revision-pass' limb is supported by the surrounding instruction: 'Go back four pages... Put on your editor hat and start looking at your work', with the car line as one of three sample line-edits."
+  },
+  {
+   "index": 259,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"on my first read, I do the really close line-reading and individual sentence editing\"",
+   "note": "Raw page reached (juliecrisp.co.uk, HTTP 200; live host, no archive needed). Quote exact. The descriptor limb is supported by the interviewer's intro: 'Anne Groell who is an SFF Executive editor over at Random House USA... editing George R. R. Martin through to Terry Brooks, Robin Hobb, Naomi Novik, Scott Lynch, Connie Willis' - note that framing is Crisp's, not Groell's own words."
+  },
+  {
+   "index": 260,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Going full out, I average about 25 pages an hour, or 200 pages a day\"",
+   "note": "Raw page reached. Quote exact. It is a parenthetical attached to the first-read sentence, so the 'on that first close read' limb holds. One qualifier the claim drops: the page prefixes it with 'Going full out', and adds that an 800-pager therefore takes 4 solid days 'if there is nothing else to do - but there is always something else to do, meaning this often stretches to a week and a half.'"
+  },
+  {
+   "index": 261,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Bingtown could belong to an entirely different age than the Six Duchies.\"",
+   "note": "Raw page reached (theidlewoman.net, HTTP 200). Exact sentence in the opening paragraph of the review body, right after Bingtown is placed 'between Chalced and Jamaillia'."
+  },
+  {
+   "index": 262,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"rather than the medievalism of The Farseer trilogy, we have trade and shipping and merchants' colonies, with a distinctly seventeenth-century feel\"",
+   "note": "Raw page reached. Same opening paragraph, the sentence immediately after the one quoted at index 261. All three limbs - trade/shipping/merchants' colonies, the seventeenth-century feel, and the contrast with Farseer medievalism - are in that one sentence."
+  },
+  {
+   "index": 263,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Hobb's habit of repeating things, as if she didn't trust her readers to remember them\"",
+   "note": "Raw page reached (strangehorizons.com, HTTP 200). Quote exact, in the fourth paragraph as the chunk states. Context worth carrying if the claim is reused: Goldstein names the habit only to say it 'is very little in evidence' in Dragon Haven - the criticism is of Hobb's general habit, not of this book."
+  },
+  {
+   "index": 264,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"The writing, which seemed tired and repetitious in the earlier book, is tightened here\"",
+   "note": "Raw page reached. Quote exact, fourth paragraph. The claim's naming of 'Dragon Keeper' for the page's 'the earlier book' is licensed by the review's own first paragraph ('Dragon Keeper, the first book in Robin Hobb's new series') and by 'the previous novel' in the third; 'here' is Dragon Haven, the book under review."
+  },
+  {
+   "index": 265,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Very little happens that couldn't have been guessed by an astute reader\"",
+   "note": "Raw page reached. Quote exact, sixth paragraph as the chunk states, opening 'In the end, though, Dragon Haven left me with a vague taste of disappointment.' and continuing 'there are few surprises along the way.'"
+  },
+  {
+   "index": 266,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Fan fiction closes up the space that I have engineered into the story\"",
+   "note": "Wayback raw capture (web/20050630015105id_/robinhobb.com/rant.html) fetched directly, HTTP 200 - the id_ route the chunk supplies returns the unmodified 2005 page, no summarizer involved. Quote exact, in the section answering 'I should be flattered that readers like my stories enough to want to continue them.'"
+  },
+  {
+   "index": 267,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"the reader is told what he must think rather than being allowed to observe the characters and draw his own conclusions\"",
+   "note": "Same raw Wayback capture. Quote exact - it is the second half of the very sentence quoted at index 266, so both claims rest on one sentence of the rant."
+  },
+  {
+   "index": 268,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"If something is left nebulous, it is because the author intends for it to be nebulous.\"",
+   "note": "Same raw Wayback capture. Quote exact. The page phrases the principle in the third person ('the author'), not the first; the claim's 'her text / she intends' reading is carried by the immediate context, where Hobb is defending her own work ('the space that I have engineered into the story' is the next sentence). Quote it as written to stay accurate."
+  },
+  {
+   "index": 269,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"A writer puts a great deal of thought into what goes into the story and what doesn't.\"",
+   "note": "Same raw Wayback capture. Quote exact, and the following sentence extends it: 'If a particular scene doesn't happen on stage before the reader's eyes, there is probably a reason for it.'"
+  }
+ ]
+}

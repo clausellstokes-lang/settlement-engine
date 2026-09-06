@@ -201,6 +201,30 @@
   }
  },
  {
+  "index": 192,
+  "feature": "plainness and economy",
+  "claim": "The reviewer judges that Hobb's prose is usually unremarkable, locating her effect elsewhere than in sentence beauty.",
+  "source": "Vacuous Wastrel (pseudonymous reviewer), 'Dragon Keeper, by Robin Hobb', 2014",
+  "url": "https://vacuouswastrel.wordpress.com/2014/04/13/dragon-keeper-by-robin-hobb/",
+  "quote": "As is usually the case with Hobb, her prose is unremarkable",
+  "page": "Beauty rating",
+  "kind": "reception",
+  "polarity": "disputes",
+  "date": "2014-04-13",
+  "routeHint": "curl browser-UA on live URL",
+  "registerHint": "none",
+  "confidence": "high",
+  "angle": "craft",
+  "verdict": {
+   "index": 192,
+   "verdict": "PARTIAL",
+   "trueWording": "As is usually the case with Hobb, her prose is unremarkable, and the flashes of beautiful imagery are balanced by her willingness to describe the horrific and the ugly",
+   "note": "Quote is verbatim in the 'Beauty: 3/5' paragraph, so the 'usually unremarkable' limb is solid. But the reviewer never says where her effect IS located; the sentence continues only about imagery balanced against the horrific and the ugly. The second limb is the analyst's gloss, not the page's statement.",
+   "unsupportedLimb": "locating her effect elsewhere than in sentence beauty",
+   "fromFile": "verdicts-hobb-i180-194.json"
+  }
+ },
+ {
   "index": 209,
   "feature": "concrete sensory noun",
   "claim": "Page says Hobb serves up characterisation only when it is immediately significant to a choice or tactic.",
@@ -222,6 +246,102 @@
    "note": "Quote is verbatim, but the page says 'always ... when', not 'only ... when' — the converse. Page reserves the restrictive 'only' for description in the very next bullet ('She only delivers description when it's part of a conflict'), so the contrast is deliberate and the claim's 'only' is not on the page.",
    "unsupportedLimb": "the restrictive 'only' — the page asserts 'always serves up characterisation when it is immediately significant', which does not exclude characterisation at other moments",
    "fromFile": "verdicts-hobb-i195-209.json"
+  }
+ },
+ {
+  "index": 215,
+  "feature": "consequence on a household",
+  "claim": "Hobb cites her own Alaskan upbringing, in which the family had to put food up for the winter, as the source of the survival economy in her work.",
+  "source": "Robin Hobb, interviewed for The Geek's Guide to the Galaxy, reprinted in Lightspeed, April 2012",
+  "url": "https://www.lightspeedmagazine.com/nonfiction/interview-robin-hobb/",
+  "quote": "we had to put that food up for the winter",
+  "page": "On Alaska",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2012-04",
+  "routeHint": "curl browser-UA on live URL",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "craft",
+  "verdict": {
+   "index": 215,
+   "verdict": "PARTIAL",
+   "trueWording": "we hunted and fished a lot for food... we had to put that food up for the winter",
+   "note": "Live page, raw. The quotation is verbatim, and the Alaskan-upbringing/food-preservation limbs are supported. But the passage is Hobb's answer to whether novelists should move to Alaska (about what a self-reliant location offers), not a statement about her fiction; she nowhere links putting food up to a survival economy in her work. The nearest real-life-to-work attribution on the page is geographic: 'There are a lot of things that come from real life into my written work, such as seismic activity, and lahars, and tidal waves.'",
+   "unsupportedLimb": "as the source of the survival economy in her work",
+   "fromFile": "verdicts-hobb-i210-224.json"
+  }
+ },
+ {
+  "index": 219,
+  "feature": "civic record register",
+  "claim": "Hobb names coinage or money value, major religions and a calendar with seasonal names and year dates among the worldbuilding records she keeps.",
+  "source": "Robin Hobb, 'As You Intend To Be', robinhobb.com blog, 2020",
+  "url": "https://www.robinhobb.com/blog/posts/36450",
+  "quote": "coinage or money value, major religions, calendar with seasonal names",
+  "page": "Paragraph on record keeping",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2020-05-21",
+  "routeHint": "curl browser-UA on live URL",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "craft",
+  "verdict": {
+   "index": 219,
+   "verdict": "PARTIAL",
+   "trueWording": "I'm not talking about world building here. I will mention briefly: coinage or money value, major religions, calendar with seasonal names and year dates",
+   "note": "Live page (robinhobb.com, 200 OK, raw). The list is verbatim, so the three named items are fully supported. But Hobb introduces the list by expressly bracketing the topic off - 'I'm not talking about world building here' - and then turns to what she does keep: 'But what I'm discussing here is the writer keeping the story straight' (time line and glossary). The page does not say she keeps records of coinage, religions or the calendar.",
+   "unsupportedLimb": "that these are worldbuilding records she keeps",
+   "fromFile": "verdicts-hobb-i210-224.json"
+  }
+ },
+ {
+  "index": 241,
+  "feature": "other: research method",
+  "claim": "Hobb says diaries and other first-person accounts are her preferred sources for older technology.",
+  "source": "Robin Hobb, interviewed by Syl R. Martin, 2023",
+  "url": "https://sylrmartin.com/portfolio/interviewing-robin-hobb-epic-fantasy-best-selling-author/",
+  "quote": "Diaries or other first person accounts are great",
+  "page": "On research",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2023-05-19",
+  "routeHint": "curl browser-UA on live URL",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "craft",
+  "verdict": {
+   "index": 241,
+   "verdict": "PARTIAL",
+   "trueWording": "Diaries or other first person accounts are great",
+   "note": "Quote is verbatim: 'Diaries or other first person accounts are great if I'm trying to find out about an older technology.' The 'older technology' pairing is exact, but the page ranks only people ('that will be my first choice'); diaries are called 'great', never preferred over other sources.",
+   "unsupportedLimb": "'preferred sources' - the page says only that diaries are 'great' for older technology; the sole stated first choice is people",
+   "fromFile": "verdicts-hobb-i240-254.json"
+  }
+ },
+ {
+  "index": 277,
+  "feature": "point of view and distance",
+  "claim": "The blogger argues Hobb's first person in Assassin's Apprentice is less closely restricted to the child narrator than he expected, citing the phrase 'brackish iodine smell' on page 21 as a perception the six-year-old Fitz could not have had.",
+  "source": "Abalieno, Looping Wor(l)d blog, 22 September 2025",
+  "url": "https://loopingworld.com/2025/09/22/assassins-apprentice-robin-hobb/",
+  "quote": "at that early point Fitz had no exposure to the world",
+  "page": "P.S. section at end of post",
+  "kind": "analysis",
+  "polarity": "disputes",
+  "date": "2025-09-22",
+  "routeHint": "raw curl with browser user agent",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "close",
+  "verdict": {
+   "index": 277,
+   "verdict": "PARTIAL",
+   "trueWording": "because at that early point Fitz had no exposure to the world, and so wouldn’t have any notion of what a “iodine smell” would be",
+   "note": "loopingworld.com post (22 September 2025, author Abalieno) fetched raw. The P.S. reads: 'the book is written in first person, but it’s not as much a close perspective as I expected. This early passage at page 21: “I leaned my forehead against his back and felt ill in the brackish iodine smell of the immense water…” I wrote a note there, because at that early point Fitz had no exposure to the world… I was expecting a much more closed perspective there.' Quote verbatim and every other limb (first person, less close than expected, brackish iodine smell, page 21, a perception Fitz could not have had) is supported. Graded PARTIAL only because the blogger never states Fitz's age; he says 'at that early point' and elsewhere 'Fitz, by being just a kid'.",
+   "unsupportedLimb": "the narrator's age — 'six-year-old' is nowhere on the page; the blogger says only 'at that early point'",
+   "fromFile": "verdicts-hobb-i270-284.json"
   }
  }
 ]

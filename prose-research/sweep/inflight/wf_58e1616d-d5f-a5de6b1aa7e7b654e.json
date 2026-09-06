@@ -3,13 +3,14 @@
  "name": "wolfe",
  "angle": null,
  "tag": "i270-284",
- "lines": 44,
+ "lines": 52,
  "firstTs": "2026-09-06T17:13:05.686Z",
- "lastTs": "2026-09-06T17:15:14.975Z",
+ "lastTs": "2026-09-06T17:16:09.289Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 7
+  "Bash": 8,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://maxgladstone.substack.com/p/the-wolfeman",
@@ -18,13 +19,13 @@
   "https://newmythologies.substack.com/p/great-uncle-gene"
  ],
  "filesWritten": [],
- "lastAssistantText": "All 15 quotes verify byte-exact on the raw pages. Writing the checkpoint.",
+ "lastAssistantText": "Checkpoint written and read back (15 claims, 15 verdicts). All four source pages fetched raw with a browser user agent (HTTP 200, no summarizer in the loop, no blocked hosts, no Wayback needed); every quotation was matched byte-for-byte against the stripped page text, curly punctuation included.",
  "run": "wf_58e1616d-d5f",
  "agent": "a5de6b1aa7e7b654e",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_58e1616d-d5f/agent-a5de6b1aa7e7b654e.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-wolfe-i270-284.json",
-  "exists": false
+  "exists": true
  }
 }

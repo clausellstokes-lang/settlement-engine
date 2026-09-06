@@ -1,0 +1,234 @@
+{
+ "name": "leguin",
+ "chunk": 19,
+ "claims": [
+  {
+   "index": 330,
+   "feature": "omission as information",
+   "claim": "A student reader-response essay observes that Le Guin describes Omelas without giving exact details, leaving the reader to interpret.",
+   "source": "Student reader-response essay on Omelas, Beginnings and Endings: A Critical Edition (Pressbooks, College of Western Idaho)",
+   "url": "https://cwi.pressbooks.pub/beginnings-and-endings-a-critical-edition/chapter/reader-response-9/",
+   "quote": "without giving exact details, allows the reader to interpret",
+   "page": "Reader Response chapter"
+  },
+  {
+   "index": 331,
+   "feature": "place and institution description",
+   "claim": "Erin Ramsay notes that in The Tombs of Atuan the conflict is administrative, over the posting of guards and how to punish unbelievers.",
+   "source": "Erin Ramsay, \"Earthsea: A Sharpening of Scale\", The Lighthouse (Substack)",
+   "url": "https://erinramsay.substack.com/p/earthsea-a-sharpening-of-scale",
+   "quote": "over the posting of guards and how to punish unbelievers",
+   "page": "Tombs of Atuan section"
+  },
+  {
+   "index": 332,
+   "feature": "register modulation",
+   "claim": "Ramsay argues the mythic register of A Wizard of Earthsea gives way to the realistic and mundane in The Tombs of Atuan.",
+   "source": "Erin Ramsay, \"Earthsea: A Sharpening of Scale\", The Lighthouse (Substack)",
+   "url": "https://erinramsay.substack.com/p/earthsea-a-sharpening-of-scale",
+   "quote": "gives way to the realistic and mundane in this novel",
+   "page": "Tombs of Atuan section"
+  },
+  {
+   "index": 333,
+   "feature": "other: narrowing of scale",
+   "claim": "Ramsay reads Tehanu as the final sharpening of scale across the first four Earthsea books.",
+   "source": "Erin Ramsay, \"Earthsea: A Sharpening of Scale\", The Lighthouse (Substack)",
+   "url": "https://erinramsay.substack.com/p/earthsea-a-sharpening-of-scale",
+   "quote": "This is the final sharpening of scale across the first four",
+   "page": "Tehanu section"
+  },
+  {
+   "index": 334,
+   "feature": "concrete sensory noun",
+   "claim": "Ramsay quotes Le Guin describing the villagers of Lorbanery as sullen and silent in the large, soft rain of April.",
+   "source": "Ursula K. Le Guin, quoted by Erin Ramsay, The Lighthouse (Substack)",
+   "url": "https://erinramsay.substack.com/p/earthsea-a-sharpening-of-scale",
+   "quote": "sullen and silent in the large, soft rain of April",
+   "page": "The Farthest Shore section"
+  },
+  {
+   "index": 335,
+   "feature": "cadence and rhythm",
+   "claim": "Matt Bell close-reads a Rocannon's World sentence and points to the parallel construction of its two rhyming sets.",
+   "source": "Matt Bell, \"My Le Guin Year: Craft Lessons From a Master\", Reactor (Tor.com), 24 August 2021",
+   "url": "https://reactormag.com/my-le-guin-year-craft-lessons-from-a-master/",
+   "quote": "hear the parallel construction of the two rhyming sets",
+   "page": "prose paragraph, mid-essay"
+  },
+  {
+   "index": 336,
+   "feature": "other: escalation inside one sentence",
+   "claim": "Bell describes the same sentence as containing two progressions that expand its scale as it goes.",
+   "source": "Matt Bell, Reactor (Tor.com), 24 August 2021",
+   "url": "https://reactormag.com/my-le-guin-year-craft-lessons-from-a-master/",
+   "quote": "See the two progressions expanding its scale as it goes",
+   "page": "prose paragraph, mid-essay"
+  },
+  {
+   "index": 337,
+   "feature": "place and institution description",
+   "claim": "Bell says Le Guin built cultures by working from the big picture down to the minutiae of local life.",
+   "source": "Matt Bell, Reactor (Tor.com), 24 August 2021",
+   "url": "https://reactormag.com/my-le-guin-year-craft-lessons-from-a-master/",
+   "quote": "working from the big picture down to the minutiae of local life",
+   "page": "worldbuilding paragraph"
+  },
+  {
+   "index": 338,
+   "feature": "concrete sensory noun",
+   "claim": "Bell cites as a pleasurable detail the Gethenian table implement for cracking the ice formed on a drink.",
+   "source": "Ursula K. Le Guin (The Left Hand of Darkness), quoted by Matt Bell, Reactor, 24 August 2021",
+   "url": "https://reactormag.com/my-le-guin-year-craft-lessons-from-a-master/",
+   "quote": "with which you crack the ice that has formed",
+   "page": "worldbuilding paragraph"
+  },
+  {
+   "index": 339,
+   "feature": "concrete sensory noun",
+   "claim": "Bell singles out a Left Hand of Darkness sentence that names the landscape as four bare nouns.",
+   "source": "Ursula K. Le Guin (The Left Hand of Darkness), quoted by Matt Bell, Reactor, 24 August 2021",
+   "url": "https://reactormag.com/my-le-guin-year-craft-lessons-from-a-master/",
+   "quote": "rock, ice, sky, and silence: nothing else, for eighty-one days",
+   "page": "opening anecdote"
+  },
+  {
+   "index": 340,
+   "feature": "plainness and economy",
+   "claim": "A commenter on Bell's essay says Le Guin can say more in twenty words than almost anyone.",
+   "source": "Reader comment on Matt Bell's essay, Reactor comment thread",
+   "url": "https://reactormag.com/my-le-guin-year-craft-lessons-from-a-master/",
+   "quote": "She can say more in twenty words than almost anyone",
+   "page": "comment thread"
+  },
+  {
+   "index": 341,
+   "feature": "archaism",
+   "claim": "A forum reader describes the prose of A Wizard of Earthsea as very archaic.",
+   "source": "SilentRoamer, thread \"Is a Wizard of Earthsea indicative of Le Guins writing style?\", SFF Chronicles, 1 Aug 2022",
+   "url": "https://www.sffchronicles.com/threads/583221/",
+   "quote": "very archaic and flowed in a unique style",
+   "page": "post #1"
+  },
+  {
+   "index": 342,
+   "feature": "register modulation",
+   "claim": "A forum moderator reports The Left Hand of Darkness is very different from the Earthsea books in style and tone.",
+   "source": "The Judge, SFF Chronicles thread 583221, 1 Aug 2022",
+   "url": "https://www.sffchronicles.com/threads/583221/",
+   "quote": "very different from the Earthsea books in style and tone",
+   "page": "post #4"
+  },
+  {
+   "index": 343,
+   "feature": "register modulation",
+   "claim": "John Plotz says the Earthsea books, written for young adults, tip two different registers at once.",
+   "source": "John Plotz, in conversation with Elizabeth Ferry, Public Books, 21 February 2024",
+   "url": "https://www.publicbooks.org/john-plotz-on-earthsea-anarchism-and-ursula-k-le-guin/",
+   "quote": "young adults can tip two different registers at once",
+   "page": "opening exchange"
+  },
+  {
+   "index": 344,
+   "feature": "place and institution description",
+   "claim": "Rob Tomlinson says Le Guin's style is spot-on for describing unfamiliar places and cultures.",
+   "source": "Rob Tomlinson, \"The Dispossessed\", A Good Read (rob-tomlinson.com)",
+   "url": "https://www.rob-tomlinson.com/a-good-read/dispossessed",
+   "quote": "a style that is spot-on for describing unfamiliar places and cultures",
+   "page": "second paragraph"
+  }
+ ],
+ "verdicts": [
+  {
+   "index": 330,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "She's quite the opposite and without giving exact details, allows the reader to interpret and create their version of a utopia.",
+   "note": "Raw page fetched (cwi.pressbooks.pub 301s to idaho.pressbooks.pub, HTTP 200). Chapter is the Reader Response essay 'The Ones Who Choose to Stay' by Kelsey Jennings on 'The Ones Who Walk Away from Omelas'; quote appears word for word in paragraph 2. The 'student' limb is confirmed on the book's own home page: 'This book collects student essays on short stories written for English 211, Literary Analysis' (Liza Long, ed., 2021)."
+  },
+  {
+   "index": 331,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Instead of conversations with dragons, there are struggles between Arha and the scheming Kossil, High Priestess of the Godkings, over the posting of guards and how to punish unbelievers.",
+   "note": "Raw page fetched (HTTP 200, full essay text present). Quote exact in the 'The Tombs of Atuan (1970)' section. 'Administrative' is the claim's gloss, not Ramsay's word, but it summarises exactly the two items she lists (guard postings, punishment of unbelievers) and matches her own framing of them as 'the realistic and mundane'."
+  },
+  {
+   "index": 332,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The mythic and fundamental in A Wizard of Earthsea gives way to the realistic and mundane in this novel.",
+   "note": "Raw page fetched. Quote exact; 'this novel' is The Tombs of Atuan (the section heading immediately above). Ramsay's noun pair is 'the mythic and fundamental'; the claim's 'mythic register' is a gloss that does not change the sense. She adds: 'This makes The Tombs of Atuan the first narrowing of scale within the Earthsea books.'"
+  },
+  {
+   "index": 333,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "This is the final sharpening of scale across the first four books of Earthsea.",
+   "note": "Raw page fetched. Quote exact, opening the paragraph in the 'Tehanu (1990)' section; the essay's title is 'Earthsea: A Sharpening of Scale' and it treats exactly the first four books."
+  },
+  {
+   "index": 334,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "There is time enough to spend with the villagers of Lorbanery, sullen and silent in the large, soft rain of April, sitting outside their inn...",
+   "note": "Raw page fetched. The full phrase appears word for word in the 'The Farthest Shore (1972)' section. In the HTML only 'large, soft rain of April' is wrapped in <em>, which is Ramsay's consistent convention for wording lifted from Le Guin (cf. 'girlish lad', 'golden seal', 'tired and stupid'); 'sullen and silent' sits in roman type, so the quoted-from-Le Guin span is narrower than the claim implies, though the sentence as a whole is Ramsay describing the villagers exactly this way."
+  },
+  {
+   "index": 335,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "...hear the parallel construction of the two rhyming sets of steel and wheel and of tractor and reactor...",
+   "note": "Raw page fetched (HTTP 200). Byline 'Matt Bell', datePublished 2021-08-24. The sentence under discussion is named as from 'her 1966 debut Rocannon's World': 'A hundred worlds had been trained and armed, a thousand more were being schooled in the uses of steel and wheel and tractor and reactor.' Quote exact."
+  },
+  {
+   "index": 336,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "See the two progressions expanding its scale as it goes, its scope expanding from hundred to thousands of worlds...",
+   "note": "Raw page fetched. Quote exact, in the same sentence-level close reading of the Rocannon's World line as index 335 (same paragraph, clause immediately preceding the 'rhyming sets' clause)."
+  },
+  {
+   "index": 337,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I thrilled at how she turned thought problems into intricate cultures, working from the big picture down to the minutiae of local life...",
+   "note": "Raw page fetched. Quote exact in the worldbuilding paragraph."
+  },
+  {
+   "index": 338,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "...filling books with pleasurable details like the 'common table implement' on Gethen 'with which you crack the ice that has formed on your drink between drafts', a necessity for drinking hot beer on a frozen planet.",
+   "note": "Raw page fetched. Quote exact; Bell's own word is 'pleasurable details', and the implement is placed 'on Gethen' (Bell does not name The Left Hand of Darkness at this point, but the claim does not assert that he does)."
+  },
+  {
+   "index": 339,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "All those miles and days had been across a houseless, speechless desolation: rock, ice, sky, and silence: nothing else, for eighty-one days, except each other.",
+   "note": "Raw page fetched. Quote exact. Bell introduces it as the close of Genly Ai and Estraven's Gobrin ice-sheet crossing in The Left Hand of Darkness — 'it ended with this unforgettable sentence' — in the essay's opening anecdote. 'Four bare nouns' is the claim's own characterisation, but it is directly observable in the quoted line (rock, ice, sky, silence)."
+  },
+  {
+   "index": 340,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "She can say more in twenty words than almost anyone I can think of.",
+   "note": "Raw page fetched with the comment thread intact (5 comments). The commenter is Rachel Holmen ('Rachel E. Holmen'), 5 years ago, who also calls Le Guin's writing 'cheesecake... incredibly rich and dense'. Quote exact as a prefix of her sentence."
+  },
+  {
+   "index": 341,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The prose was lovely - very archaic and flowed in a unique style.",
+   "note": "Raw page fetched (HTTP 200). Post #1 of thread 583221, SilentRoamer, Aug 1 2022, about A Wizard of Earthsea ('I read A Wizard of Earthsea recently'). Quote exact."
+  },
+  {
+   "index": 342,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The Left Hand of Darkness -- very different from the Earthsea books in style and tone, I'd have said...",
+   "note": "Raw page fetched. Post #4, Aug 1 2022, by 'The Judge', whose user title is 'Truth. Order. Moderation.' and who is flagged 'Staff member' — the moderator limb holds. Quote exact."
+  },
+  {
+   "index": 343,
+   "verdict": "PARTIAL",
+   "trueWording": "And that rings true to me in that way that young adults can tip two different registers at once.",
+   "note": "Raw page fetched (Public Books, datePublished 2024-02-21, Elizabeth Ferry in conversation with John Plotz). The quotation is on the page word for word and is Plotz speaking. But its grammatical subject is young adults (readers), not the books: he says the Earthsea books' commissioning as the first YA fantasy series 'rings true... in that way that young adults can tip two different registers at once'. The two-registered quality of the books themselves is supported nearby only in other words ('the dual-aspect reality that she creates. That she's telling stories for adults and for children as well'; 'the two-sidedness of what it's like to read the books'), so repeating the quoted phrase as a statement about the books misplaces its subject.",
+   "unsupportedLimb": "the books (rather than young adults) as what tips two different registers at once"
+  },
+  {
+   "index": 344,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It is also a style that is spot-on for describing unfamiliar places and cultures.",
+   "note": "Raw page fetched (HTTP 200). rob-tomlinson.com, 'A good read' section, page 'The Dispossessed' (page title 'The Dispossessed | Rob Tomlinson', written in the first person on his own site). Quote exact, in the second paragraph as the claim states."
+  }
+ ]
+}

@@ -730,6 +730,92 @@
   }
  },
  {
+  "index": 701,
+  "feature": "editor/translator frame",
+  "claim": "Wikipedia cites Thomson (1967) and Turner (2011) for the found-manuscript frame in which Tolkien poses as editor/translator of the Red Book, with genealogies and footnotes as editorial apparatus.",
+  "source": "Wikipedia, Storytelling in The Lord of the Rings",
+  "url": "https://en.wikipedia.org/wiki/Storytelling_in_The_Lord_of_the_Rings",
+  "quote": "",
+  "angle": "pov-syntax",
+  "verdict": {
+   "index": 701,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "that Wikipedia cites Thomson (1967) for the found-manuscript / editor-translator frame - Thomson [9] is cited only in the 'traditional romance' section (tapestry romance, Frye's phases); the framing paragraph cites [12] Turner 2011a and [14] Brljak 2010, and the following sentence [12][13][14][15]",
+   "trueWording": "found manuscript conceit ... he was the book's editor and translator (cited to Turner 2011a, Brljak 2010)",
+   "note": "Raw Wikipedia HTML fetched (200) and de-tagged; citation numbers resolved against the article's own Secondary reference list, in which Thomson 1967 is note 9 and Turner 2011a is note 12. The rest of the claim is supported: 'The found manuscript conceit, and the claim that he had translated it into English from the original Westron rather than written it himself, put him in the frame with the story that he was the book's editor and translator'; the Red Book frame at 'Tolkien came up with a frame story for the sequel, the Red Book of Westmarch'; and the lead's 'many other elements such as genealogies and footnotes, giving the impression that Tolkien was the editor and translator of the work, forming an editorial frame'. Only the Thomson attribution fails.",
+   "fromFile": "verdicts-tolkien-i688-702.json"
+  }
+ },
+ {
+  "index": 708,
+  "feature": "Third Age corpus sizes",
+  "claim": "Livesey's corpus: The Hobbit 95,559 tokens; the two books of The Two Towers 66,374 and 64,738 tokens; 'ring' occurs 306 times in Fellowship (1.72 per thousand words), 70 in Two Towers (0.45) and 73 in Return of the King.",
+  "source": "Michael Livesey, 'The Ring Cycle: Journeying Through the Language of Tolkien's Third Age with Corpus Linguistics', JTR 18.1 (2023)",
+  "url": "https://scholar.valpo.edu/journaloftolkienresearch/vol18/iss1/4/",
+  "quote": "a total wordcount of 95,559 tokens",
+  "angle": "pov-syntax",
+  "verdict": {
+   "index": 708,
+   "verdict": "PARTIAL",
+   "trueWording": "“books four and six… including only 66,374 and 64,738 tokens each”",
+   "note": "Landing page carries only the abstract; the full article was reached as raw PDF via Wayback (web.archive.org/web/20250602181027id_/…viewcontent.cgi?article=1327, 44pp, text extracted). Quote 'a total wordcount of 95,559 tokens' is verbatim. Ring counts verbatim: '306 times in The Fellowship (1.72/thousand words); 70 times in The Two Towers (0.45/thousand words); and 73 times in The Return of the King'. But the two sub-corpus figures are misattributed: Livesey writes 'books four and six', i.e. the second book of The Two Towers and the second book of The Return of the King — not 'the two books of The Two Towers' (which would be books three and four).",
+   "unsupportedLimb": "that 66,374 and 64,738 are the two books of The Two Towers — the article says books four and six",
+   "fromFile": "verdicts-tolkien-i703-717.json"
+  }
+ },
+ {
+  "index": 711,
+  "feature": "longest sentences",
+  "claim": "Forum counting finds a 144-word sentence in the original Fall of Gondolin tale, cites an online claim that the longest LOTR sentence is 111 words, and corrects a 96-word count to 97; Tolkien's punctuation is credited with keeping such sentences readable.",
+  "source": "The Tolkien Forum thread 'Tolkien's Longest Sentence?' (2022)",
+  "url": "https://thetolkien.forum/threads/tolkiens-longest-sentence.30796/",
+  "quote": "one long sentence, counting at 144 words",
+  "angle": "pov-syntax",
+  "verdict": {
+   "index": 711,
+   "verdict": "PARTIAL",
+   "trueWording": "“There is ‘information’ on the web indicating the longest sentence found to be 111 words”",
+   "note": "Live site is behind a Cloudflare challenge (HTTP 403 with browser UA); reached via Wayback raw capture 20260820220652id_. Quote 'one long sentence, counting at 144 words' verbatim (post #10 by Ent), about the Fall of Gondolin original tale quoted in post #1. Also verbatim: 'The one he cites at 96 words is actually 97' and 'Tolkien’s (arguably) correct use of punctuation saves the sentence so it does not grind the mind into submission.' But the 111-word figure is not tied to LOTR anywhere on the page — the thread is about Tolkien's longest sentence generally and the source sentence is from The Fall of Gondolin.",
+   "unsupportedLimb": "that the 111-word online claim concerns The Lord of the Rings — the page says only 'the longest sentence found', naming no work",
+   "fromFile": "verdicts-tolkien-i703-717.json"
+  }
+ },
+ {
+  "index": 713,
+  "feature": "unique-word density",
+  "claim": "LotrProject reports The Hobbit has more unique words and a higher unique-word density than The Silmarillion and each LOTR volume (2009 HarperCollins eBooks, appendices excluded).",
+  "source": "LotrProject, 'Word count and density' (via Wayback)",
+  "url": "http://lotrproject.com/statistics/books/wordscount",
+  "quote": "higher unique word density",
+  "angle": "pov-syntax",
+  "verdict": {
+   "index": 713,
+   "verdict": "PARTIAL",
+   "trueWording": "“The Hobbit has more unique words and a higher unique word density than both the Silmarillion and each volume in the Lord of the Rings”",
+   "note": "Live host returns a WAF block (HTTP 454); reached via Wayback raw capture 20260808182141id_. Quote 'higher unique word density' verbatim, and the appendices exclusion is on the page ('neither has the appendicies to the Lord of the Rings… since they are not part of the story'). No edition is named anywhere in the capture — 'HarperCollins', '2009' and 'edition' do not occur; a 2013 capture of the same URL also lacks them.",
+   "unsupportedLimb": "the 2009 HarperCollins eBook editions as the source texts — no edition is named on the page",
+   "fromFile": "verdicts-tolkien-i703-717.json"
+  }
+ },
+ {
+  "index": 715,
+  "feature": "reader rejection of modernised register",
+  "claim": "German critics judged that Krege took too many liberties in a translator-centred approach unsuited to Tolkien, and the 2012 edition reverted the most controversial decisions.",
+  "source": "Translating The Lord of the Rings (Wikipedia)",
+  "url": "https://en.wikipedia.org/wiki/Translating_The_Lord_of_the_Rings",
+  "page": "German",
+  "quote": "translator-centred approach",
+  "angle": "register-experiments",
+  "verdict": {
+   "index": 715,
+   "verdict": "PARTIAL",
+   "trueWording": "“critics felt that he took too many liberties”; Nagel: a “translator-centred approach”",
+   "note": "Quote 'translator-centred approach' is verbatim on the page, and 'The 2012 edition of Krege has reverted the most controversial of his decisions' supports the second half of the claim. But the page attributes the too-many-liberties judgement to unnamed 'critics' and the 'translator-centred approach' / 'style unsuitable for Tolkien' wording to one named linguist, Rainer Nagel — the claim merges the two into a single collective judgement by 'German critics'.",
+   "unsupportedLimb": "that 'German critics' called it a translator-centred approach unsuited to Tolkien — the page attributes that phrase to the linguist Rainer Nagel alone",
+   "fromFile": "verdicts-tolkien-i703-717.json"
+  }
+ },
+ {
   "index": 722,
   "feature": "translator's stated register goal",
   "claim": "Krege aimed to reproduce Tolkien's speech registers from Biblical language to 1940s British colloquialism, against what he saw as Carroux's uniform, artificially folksy German.",
@@ -763,6 +849,42 @@
    "trueWording": "Scherf omitted the poems; Krege appeals to grown-up readership",
    "note": "Quote 'Hurricane' present verbatim on en.wikipedia. Supported: free interpretation ('various sentences are interpreted in a way which cannot any more be regarded as translation but is clearly new script'); modern words ('Krege's version features a number of modern words like \"Hurricane\" which can easily be seen atypical for the medievally and European inspired Middle-earth'); the 1998 date from the works list ('Der Hobbit, Stuttgart 1998'), though the article body says only 'In the 1990s'. Two further precision points: the page says the modern words are seen as atypical, not that Krege 'admitted' (conceded) them; and Ardapedia — a source in this same chunk — dates the Hobbit retranslation to 1997 and does support the restoration limb ('Hier sind erstmals alle Lieder und Gedichte, sowie das Vorwort vollständig übersetzt und enthalten'). The restoration limb is thus true but not on the CITED page; re-cite it to Ardapedia.",
    "fromFile": "verdicts-tolkien-i718-732.json"
+  }
+ },
+ {
+  "index": 742,
+  "feature": "compound archaism kept",
+  "claim": "Both translations keep Tolkien's foreignised compound 'sister-son' as 'Schwestersohn' rather than 'Neffe'.",
+  "source": "Alexander Held, Lost in Translation: How the perception of Characters changes in the German Translations of Tolkien's The Lord of the Rings (MA thesis, Waterloo/Mannheim 2021)",
+  "url": "https://uwspace.uwaterloo.ca/bitstreams/3c9577de-c111-4abc-9fac-45151e7f3e0b/download",
+  "page": "ch. 4, p. 28",
+  "quote": "Schwestersohn",
+  "angle": "register-experiments",
+  "verdict": {
+   "index": 742,
+   "verdict": "PARTIAL",
+   "trueWording": "some 'foreignized' forms already existing in the ST prevail (e.g. 'Schwestersohn' ... instead of using 'Neffe')",
+   "note": "Quote 'Schwestersohn' is on p.28, but inside a sentence whose subject is Krege alone: 'it can be said that Krege's translation falls under the translation tradition of domestication, even though some \"foreignized\" forms already existing in the ST prevail (e.g. \"Schwestersohn\" as translation of \"sister-son\" instead of using \"Neffe\")'. 'Schwestersohn'/'Neffe' occur exactly once in the whole 81-page thesis (grep-confirmed); Carroux's rendering of 'sister-son' is never stated. The only other mention (p.26) is Turner on Tolkien's own compounds.",
+   "unsupportedLimb": "that BOTH translations keep 'Schwestersohn' - the page states it only of Krege",
+   "fromFile": "verdicts-tolkien-i733-747.json"
+  }
+ },
+ {
+  "index": 743,
+  "feature": "assimilating the alien",
+  "claim": "Nagel's chapter reports Krege defending his version as 'assimilating the alien' where Carroux merely rendered the text, and concludes that Krege's language for younger readers sometimes fails to convey the voice the author intended.",
+  "source": "Review: Translating Tolkien: Text and Film (Mythopoeic Society)",
+  "url": "https://mythsoc.org/reviews/translating-tolkien-text-and-film.htm",
+  "page": "",
+  "quote": "assimilating the alien",
+  "angle": "register-experiments",
+  "verdict": {
+   "index": 743,
+   "verdict": "PARTIAL",
+   "trueWording": "Nagel's chapter, entitled 'The New One Wants to Assimilate the Alien'",
+   "note": "Raw review page (curl) verified. Second limb fully supported: 'Krege's attempts to produce a more \"modern\" translation, using language calculated to appeal to a younger readership, sometimes has the result that it does not fully convey the voice intended by the author.' Krege's own defence as the page reports it is different wording: he 'claims that his work is closer to the original as it did not simply render the text from one language to another, but took account of Tolkien's source material'. The exact string 'assimilating the alien' is absent (inflection differs, attribution differs).",
+   "unsupportedLimb": "that Krege defended his version as 'assimilating the alien' - on this page the phrase is Nagel's chapter title, not Krege's words, and appears only as 'Assimilate the Alien'",
+   "fromFile": "verdicts-tolkien-i733-747.json"
   }
  }
 ]

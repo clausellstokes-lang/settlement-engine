@@ -1,0 +1,30 @@
+{
+ "role": "verifier",
+ "name": "tolkien",
+ "angle": null,
+ "tag": "i763-777",
+ "lines": 91,
+ "firstTs": "2026-09-06T17:18:06.307Z",
+ "lastTs": "2026-09-06T17:23:06.355Z",
+ "tools": {
+  "Read": 1,
+  "Bash": 25
+ },
+ "urlsFetched": [
+  "https://en.wikipedia.org/w/index.php?title=Translating_The_Lord_of_the_Rings&action=raw",
+  "https://en.wikipedia.org/w/index.php?title=Translation_of_The_Lord_of_the_Rings_into_Swedish&action=raw",
+  "https://en.wikipedia.org/w/index.php?title=%C3%85ke_Ohlmarks&action=raw",
+  "https://sv.wikipedia.org/w/index.php?title=%C3%96vers%C3%A4ttning_av_Sagan_om_ringen_till_svenska&action=raw",
+  "https://ddd.uab.cat/pub/caplli/2018/237309/tradlit_a2018p21.pdf"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "All claims checked against raw pages. Writing the checkpoint file.",
+ "run": "wf_61555b6a-d7c",
+ "agent": "a2dccba56da787b74",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_61555b6a-d7c/agent-a2dccba56da787b74.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-tolkien-i763-777.json",
+  "exists": true
+ }
+}
