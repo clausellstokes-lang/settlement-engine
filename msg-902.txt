@@ -1,8 +1,8 @@
-§902: __SUBJECT__
+§902: the OSR rung-18 landing lands at 7 cars — the observed-shape register is re-anchored inside the product lineage with a subject commit of its own, the CLI door is open again, the two writer-reach census rows banked at §900 retire with their ledger entries, and the base-state capsule regenerates for the first time since August; the lane corrected the brief twice and refused the rename with measurement
 
-__BODY__
+Lane OSR-SCHEMA18 (Opus) re-executed the governed schema 17 -> 18 migration in laneOSR18 with the SUBJECT COMMIT INSIDE THE LINEAGE (the rung f20d5dd48; the genesis a05a4646e): validateBaselineHistory reconstructs, the CLI exits 0, corpusMeta.simulationFlagsLit reads 81 on both walkers, rows minted 0 / cleared 0 by digest, _doc cured. The proof at a05a4646e: three reds, all banked; both writer-reach arms green. Registers re-taken at the tip with every figure unchanged (provenance and the writer-reach detector digest moved, the observed-shape register being one of its inputs); the ratchet retired the two writer-reach rows by a remove-only update and their WALKER_ROWS_OWED entries and OWED_CEILING 5 -> 3 left in one car; the capsule regenerated with this ratchet's totalTests. Landed by fast-forward — a replay would have re-darkened the register. Owner row: the ninth exemption's retirement never landed at §900 and now costs rung 19 (a detector-source change). Next: L-DEFAULT.
 
-Enrols: __ENROLS__
+Enrols: R65 (OSR-SCHEMA18) — OWED a Fable walk; the chair's register cars, the totals car, the retirement car and the capsule car are Fable-validated acts and enrol nothing
 
 Seat: Fable 5.1 — validated
 
