@@ -3,12 +3,12 @@
  "name": "kay",
  "angle": "academic-routes",
  "tag": null,
- "lines": 288,
+ "lines": 360,
  "firstTs": "2026-09-06T19:09:46.390Z",
- "lastTs": "2026-09-06T19:32:55.830Z",
+ "lastTs": "2026-09-06T19:37:46.045Z",
  "tools": {
-  "Read": 2,
-  "Bash": 81,
+  "Read": 3,
+  "Bash": 101,
   "ToolSearch": 1,
   "WebSearch": 1
  },
@@ -110,18 +110,29 @@
   "https://www.cambridge.org/core/product/identifier/9781787448858%23c11/type/book_part",
   "https://onlinelibrary.wiley.com/doi/10.1111/oli.70057",
   "https://www.aup.nl/en/book/9781802703696/medievalism-in-english-canadian-identity-and-literature",
-  "http://web.archive.org/cdx/search/cdx?url=questia.com*&filter=original:.*fantastic-in-the-arts.*&limit=60&fl=timestamp,original&collapse=original"
+  "http://web.archive.org/cdx/search/cdx?url=questia.com*&filter=original:.*fantastic-in-the-arts.*&limit=60&fl=timestamp,original&collapse=original",
+  "https://api.openalex.org/works/doi:$d?$M",
+  "https://www.atlantisjournal.org/index.php/atlantis/article/download/1069/606",
+  "https://api.openalex.org/works?search=Last%20Light%20of%20the%20Sun%20Toswell&per-page=15&$M",
+  "https://api.crossref.org/works?query.author=Toswell&query.bibliographic=Kay+OR+Anglo-Saxon+fantasy&rows=20&select=DOI,title,container-title,issued,author,type",
+  "https://api.crossref.org/works/$d",
+  "https://api.openalex.org/works/doi:10.1111/oli.70057",
+  "https://api.crossref.org/works?query.author=Toswell&query.bibliographic=Kay+OR+Anglo-Saxon+fantasy&rows=20",
+  "https://api.crossref.org/works?query.bibliographic=%22Guy+Gavriel+Kay%22&rows=60&select=DOI,title,container-title,issued,author,type",
+  "https://api.openalex.org/works?filter=primary_location.source.issn:0897-0521&per-page=200&cursor=$CUR&$M",
+  "https://api.openalex.org/works?filter=primary_location.source.issn:0897-0521,publication_year:2002|2003&per-page=100&mailto=settlementforge@gmail.com",
+  "https://www.cambridge.org/core/product/identifier/"
  ],
  "filesWritten": [],
- "lastAssistantText": "Wolfe recovered. Let me build and pre-verify the claim set.",
+ "lastAssistantText": "The record file is written with `complete: true`. Returning the same result.",
  "run": "wf_b55db7cd-25f",
  "agent": "a7ce26cfdf8b0a937",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/059d4243-f837-4b07-8096-8c9ca76b03fb/subagents/workflows/wf_b55db7cd-25f/agent-a7ce26cfdf8b0a937.jsonl",
  "journal": "in-flight",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-kay-academic-routes.json",
-  "claims": 30,
-  "complete": false,
-  "mtime": "15:29:20"
+  "claims": 46,
+  "complete": true,
+  "mtime": "15:37:17"
  }
 }

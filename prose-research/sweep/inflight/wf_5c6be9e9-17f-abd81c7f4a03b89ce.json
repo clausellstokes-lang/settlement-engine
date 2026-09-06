@@ -3,13 +3,13 @@
  "name": "wolfe",
  "angle": "monographs",
  "tag": null,
- "lines": 210,
+ "lines": 318,
  "firstTs": "2026-09-06T19:25:33.191Z",
- "lastTs": "2026-09-06T19:32:51.811Z",
+ "lastTs": "2026-09-06T19:38:54.363Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 45,
+  "Bash": 73,
   "WebFetch": 2,
   "WebSearch": 2,
   "mcp__Claude_Browser__browser_batch": 3
@@ -54,7 +54,25 @@
   "https://html.duckduckgo.com/html/?q=%22narratological+sleight+of+hand%22+Wolfe",
   "https://lite.duckduckgo.com/lite/?q=%22narratological+sleight+of+hand%22",
   "https://search.marcia.com",
-  "https://archive.org/advancedsearch.php?q=$1&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=year&fl%5B%5D=collection&rows=10&output=json"
+  "https://archive.org/advancedsearch.php?q=$1&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=year&fl%5B%5D=collection&rows=10&output=json",
+  "https://api.crossref.org/works/$d",
+  "https://api.unpaywall.org/v2/$d?email=settlementforge@gmail.com",
+  "https://muse.jhu.edu/article/599372",
+  "https://onlinelibrary.wiley.com/doi/10.1111/criq.12563",
+  "http://web.archive.org/cdx/search/cdx?url=depauw.edu/sfs/reviews_pages/*&fl=original,timestamp&collapse=urlkey&limit=30",
+  "https://scholar.archive.org/search?q=%22Attending+Daedalus%22",
+  "https://gwern.net/doc/fiction/gene-wolfe/1986-gordon-genewolfe.pdf",
+  "https://ultan.org.uk/reviews/",
+  "https://ultan.org.uk/[a-z0-9-",
+  "https://ultan.org.uk/$s",
+  "https://ultan.org.uk/[^",
+  "https://ultan.org.uk/sitemap[^",
+  "https://ultan.org.uk/tell-me-about-the-lexicon-urthus-an-interview-with-michael-andre-driussi/",
+  "https://ultan.org.uk/standing-on-the-shoulders-of-giants-a-review-of-michael-andre-driussis-the-book-of-the-new-sun-a-chapter-guide/",
+  "https://ultan.org.uk/micro-wolfenomics-joan-gordon-reviews-gene-wolfes-first-four-novels-a-chapter-guide-by-michael-andre-driussi/",
+  "https://ultan.org.uk/lexicon-urthus-second-edition/",
+  "https://sf-encyclopedia.com/entry/wolfe_gene",
+  "https://www.cambridge.org/core/books/abs/shadows-of-the-new-sun/introduction/C861D0D3B8C29B0D31A5A0EE9BB4B0D1"
  ],
  "filesWritten": [],
  "lastAssistantText": "I'll start by reading the finder method that binds this work.",
@@ -62,5 +80,10 @@
  "agent": "abd81c7f4a03b89ce",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/059d4243-f837-4b07-8096-8c9ca76b03fb/subagents/workflows/wf_5c6be9e9-17f/agent-abd81c7f4a03b89ce.jsonl",
  "journal": "in-flight",
- "checkpointFile": null
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-wolfe-monographs.json",
+  "claims": 27,
+  "complete": false,
+  "mtime": "15:38:34"
+ }
 }

@@ -3,15 +3,16 @@
  "name": "kay",
  "angle": "rescue-unread",
  "tag": null,
- "lines": 418,
+ "lines": 437,
  "firstTs": "2026-09-06T19:09:46.389Z",
- "lastTs": "2026-09-06T19:32:31.994Z",
+ "lastTs": "2026-09-06T19:38:12.811Z",
  "tools": {
   "Read": 1,
-  "Bash": 107,
+  "Bash": 111,
   "ToolSearch": 1,
   "WebSearch": 11,
-  "WebFetch": 1
+  "WebFetch": 1,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://brightweavings.com/wp-sitemap.xml",
@@ -123,18 +124,21 @@
   "https://brightweavings.com/revlions/",
   "https://brightweavings.com/leatherboundtiganaintro/",
   "https://brightweavings.com/reviews-of-written-on-the-dark/",
-  "https://brightweavings.com/faire-ladies-re-imagined-female-characters-in-guy-gavriel-kays-a-song-for-arbonne-by-sylwia-borowska-szerszun/"
+  "https://brightweavings.com/faire-ladies-re-imagined-female-characters-in-guy-gavriel-kays-a-song-for-arbonne-by-sylwia-borowska-szerszun/",
+  "https://brightweavings.com/revsarantium/",
+  "https://brightweavings.com/revlastlight/",
+  "https://brightweavings.com/revarbonne/"
  ],
  "filesWritten": [],
- "lastAssistantText": "I'll start by reading the finder method that binds this work.",
+ "lastAssistantText": "The rescue run is complete. The file `found-kay-rescue-unread.json` holds the full record (40 sources, 100 claims, every quotation re-verified verbatim against the fetched text before writing).",
  "run": "wf_b55db7cd-25f",
  "agent": "a7195aa6409506a05",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/059d4243-f837-4b07-8096-8c9ca76b03fb/subagents/workflows/wf_b55db7cd-25f/agent-a7195aa6409506a05.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-kay-rescue-unread.json",
-  "claims": 83,
-  "complete": false,
-  "mtime": "15:31:20"
+  "claims": 100,
+  "complete": true,
+  "mtime": "15:33:47"
  }
 }

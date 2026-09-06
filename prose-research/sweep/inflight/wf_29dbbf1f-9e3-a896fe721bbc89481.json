@@ -3,15 +3,15 @@
  "name": "leguin",
  "angle": "academic-2",
  "tag": null,
- "lines": 229,
+ "lines": 295,
  "firstTs": "2026-09-06T18:59:47.841Z",
- "lastTs": "2026-09-06T19:32:54.317Z",
+ "lastTs": "2026-09-06T19:38:29.480Z",
  "tools": {
   "Read": 1,
-  "Bash": 56,
+  "Bash": 72,
   "ToolSearch": 1,
-  "WebFetch": 5,
-  "WebSearch": 1
+  "WebFetch": 8,
+  "WebSearch": 2
  },
  "urlsFetched": [
   "https://openlibrary.org/search/inside.json?q=%22Le+Guin%22",
@@ -41,7 +41,23 @@
   "https://openlibrary.org/search/inside.json?q=identifier%3Afantasytradition0000atte",
   "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguinvoy0000unse",
   "https://openlibrary.org/search/inside.json?q=%22wryly+cataloging+a+weird+matter%22",
-  "https://openlibrary.org/search.json?q=Dancing+with+dragons+Le+Guin+critics&fields=title,author_name,first_publish_year,ia&limit=5"
+  "https://openlibrary.org/search.json?q=Dancing+with+dragons+Le+Guin+critics&fields=title,author_name,first_publish_year,ia&limit=5",
+  "https://archive.org/metadata/ursulakleguinswi00dird",
+  "https://openlibrary.org/search/inside.json?q=identifier%3Aursulakleguinswi00dird",
+  "https://openlibrary.org/search/inside.json?q=identifier%3Adragonsoffantasy0000pett",
+  "https://openlibrary.org/search.json?q=Dancing+with+dragons+Le+Guin+critics",
+  "https://api.crossref.org/works/10.33274/2079-4835-2020-21-2-27-37",
+  "https://paradoxa.com/volumes/21",
+  "https://paradoxa.com/",
+  "https://paradoxa.com/volume-21-ursula-k-le-guin/",
+  "https://paradoxa.com/?page_id=21",
+  "https://paradoxa.com/volumes/",
+  "https://api.crossref.org/works",
+  "https://www.jstor.org/stable/4239558",
+  "https://online.ucpress.edu/sfs/article/10/3/306",
+  "https://www.sfrareview.org/",
+  "https://www.google.com/search?q=%22Coyote%27s+Song%22+Erlich+Le+Guin",
+  "https://sfrareviewarchive.wordpress.com/"
  ],
  "filesWritten": [],
  "lastAssistantText": "Pre-verifying every new quotation against its own URL.",
@@ -51,8 +67,8 @@
  "journal": "in-flight",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-leguin-academic-2.json",
-  "claims": 86,
+  "claims": 102,
   "complete": false,
-  "mtime": "15:29:09"
+  "mtime": "15:35:57"
  }
 }

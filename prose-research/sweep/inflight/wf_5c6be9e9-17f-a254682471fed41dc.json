@@ -3,12 +3,12 @@
  "name": "wolfe",
  "angle": "close-continued",
  "tag": null,
- "lines": 108,
+ "lines": 126,
  "firstTs": "2026-09-06T19:25:33.191Z",
- "lastTs": "2026-09-06T19:32:54.550Z",
+ "lastTs": "2026-09-06T19:33:46.976Z",
  "tools": {
   "Read": 1,
-  "Bash": 25,
+  "Bash": 31,
   "ToolSearch": 1,
   "WebSearch": 1,
   "WebFetch": 1
@@ -30,7 +30,12 @@
   "https://search.marginalia.nu/search?query=Jo+Walton+Gene+Wolfe+Peace",
   "https://www.bing.com/search?q=Jo+Walton+%22Gene+Wolfe%22+Peace+site%3Areactormag.com",
   "https://(www\\.",
-  "https://www.youtube.com/watch?v=7zvBdTEaJ1M"
+  "https://www.youtube.com/watch?v=7zvBdTEaJ1M",
+  "https://www.reddit.com/r/genewolfe/top.json?t=all&limit=50",
+  "https://old.reddit.com/r/genewolfe/top/.json?t=all&limit=50",
+  "https://api.reddit.com/r/genewolfe/top?t=all&limit=50",
+  "https://www.reddit.com/r/genewolfe/top/.rss?t=all",
+  "https://redlib.catsarch.com/r/genewolfe/top?t=all"
  ],
  "filesWritten": [],
  "lastAssistantText": "I'll start by reading the finder method that binds this work.",

@@ -986,5 +986,51 @@
    "note": "Verbatim on PDF page 3, printed p.184, in the семантична експлікація section — the section is right but the cited p.183 is off by one. Two limbs fail: the article never labels the passage an epigraph, and the excerpt's antecedent is only 'such names', continuing with King Taker and King Ruler as the first two Outislanders to rule what became the Six Duchies; the Farseers are named on the same page but in a separate, unrelated функціональний аналог example.",
    "fromFile": "verdicts-hobb-i431-445.json"
   }
+ },
+ {
+  "index": 464,
+  "feature": "point of view and distance",
+  "claim": "Hobb says she decided to write the first Farseer book in the first person and to attempt a completely different sort of voice and telling.",
+  "source": "Robin Hobb, '5000 Words About Myself', written for Alienisti (Finncon), robinhobb.com, 2004",
+  "url": "https://web.archive.org/web/20050724083052id_/http://www.robinhobb.com/5000words.html",
+  "quote": "to attempt a completely different sort of voice and telling",
+  "page": "section on writing Chivalry's Bastard",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2004",
+  "routeHint": "wayback raw id_ capture; original URL recovered via the archive.org CDX API. Text has apostrophes stripped, so quotes avoid them.",
+  "registerHint": "none",
+  "confidence": "high",
+  "verdict": {
+   "index": 464,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'the first Farseer book' - the page names the book only by its working title, Chivalry's Bastard, and never calls it a Farseer book",
+   "trueWording": "to attempt a completely different sort of voice and telling",
+   "note": "Quote is verbatim in the pen-name section, alongside her decision to write it in the first person; the Farseer identification is an outside inference. The page's only Farseer mentions are the later tenth book set in a different universe and Fitz and the Fool.",
+   "fromFile": "verdicts-hobb-i461-475.json"
+  }
+ },
+ {
+  "index": 470,
+  "feature": "other: character over plot",
+  "claim": "Hobb says the piece that won her an A in her only creative-writing class was long on character and short on plot, and that she knew it was not a story.",
+  "source": "Robin Hobb, '5000 Words About Myself', written for Alienisti (Finncon), robinhobb.com, 2004",
+  "url": "https://web.archive.org/web/20050724083052id_/http://www.robinhobb.com/5000words.html",
+  "quote": "long on character and short on plot",
+  "page": "section on Denver University",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2004",
+  "routeHint": "wayback raw id_ capture; original URL recovered via the archive.org CDX API. Text has apostrophes stripped, so quotes avoid them.",
+  "registerHint": "none",
+  "confidence": "high",
+  "verdict": {
+   "index": 470,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'the piece that won her an A' - the page gives the A as a course grade and only says the instructor praised the piece; it also scopes the class to the one she took at Denver University",
+   "trueWording": "long on character and short on plot",
+   "note": "Quote verbatim in the Denver paragraph, and 'not a story, because nothing really happened' is on the page. The grade attribution and the unrestricted 'her only creative-writing class' are the widened limbs.",
+   "fromFile": "verdicts-hobb-i461-475.json"
+  }
  }
 ]

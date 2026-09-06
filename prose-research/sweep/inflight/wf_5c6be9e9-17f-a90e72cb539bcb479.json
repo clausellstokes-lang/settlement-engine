@@ -3,12 +3,15 @@
  "name": "wolfe",
  "angle": "primary-on-disk",
  "tag": null,
- "lines": 132,
+ "lines": 202,
  "firstTs": "2026-09-06T19:25:33.190Z",
- "lastTs": "2026-09-06T19:32:34.044Z",
+ "lastTs": "2026-09-06T19:38:20.720Z",
  "tools": {
   "Read": 5,
-  "Bash": 30
+  "Bash": 49,
+  "ToolSearch": 1,
+  "WebSearch": 1,
+  "WebFetch": 1
  },
  "urlsFetched": [
   "https://gwern.net/doc/culture/2007-wolfe",
@@ -18,18 +21,39 @@
   "https://www.middletownlibrary.org/",
   "https://lareviewofbooks.org/article/the-haunted-library-of-gene-wolfe",
   "https://www.blackgate.com/2018/11/20/i-severian-the-book-of-the-new-sun-by-gene-wolfe/",
-  "https://www.theguardian.com/books/2011/may/13/gene-wolfe-hero-neil-gaiman-sf"
+  "https://www.theguardian.com/books/2011/may/13/gene-wolfe-hero-neil-gaiman-sf",
+  "https://www.middletownlibrary.org/wp-content/uploads/2020/09/Marc-Aramini-Interview.pdf",
+  "https://web.archive.org/web/20201116152809/https://www.nyrsf.com/2013/09/a-story-kim-stanley-robinson.html",
+  "https://lorehaven.com/speculativefaith/a-brief-introduction-to-gene-wolfe-my-favorite-contemporary-author/",
+  "https://ultan.org.uk/lions-and-tigers-and-bears/",
+  "https://ultan.org.uk/the-death-of-catherine-the-weal/",
+  "https://ultan.org.uk/some-greek-themes/",
+  "https://ultan.org.uk/some-greek-themes/|https://ultan.org.uk/some-greek-themes-in-latro/|",
+  "https://ultan.org.uk/some-greek-themes-in-latro/",
+  "https://fanac.org/fanzines/Thrust/",
+  "https://openlibrary.org/search/inside?q=%22Words+Weird+and+Wonderful%22+Wolfe",
+  "https://archive.org/advancedsearch.php?q=title%3A%28castle+of+days%29+AND+creator%3A%28wolfe%29&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=year&rows=20&output=json",
+  "https://fanac.org/fanzines/Thrust.html",
+  "https://fanac.org/fanzines/Thrust/index.html",
+  "https://fanac.org/fan.php?title=Thrust",
+  "https://fancyclopedia.org/Thrust",
+  "https://archive.org/stream/castleofdays00wolf/castleofdays00wolf_djvu.txt",
+  "https://ia-fts.archive.org/api/v1/search/hits_inside?q=%22Words%20Weird%20and%20Wonderful%22&identifier=castleofdays00wolf",
+  "https://api.archivelab.org/books/castleofdays00wolf/searchinside?q=Onomastics",
+  "https://fanac.org/fanzines/",
+  "https://fanac.org/fanzines/Thrust/Thrust19.pdf",
+  "https://floggingbabel.blogspot.com/search?q=%22What+I+Know+About+Writing%22"
  ],
  "filesWritten": [],
- "lastAssistantText": "Now checkpointing all claims from the 13 on-disk roster sources.",
+ "lastAssistantText": "All 109 quotes verified verbatim. Now the off-disk roster — starting with the Locus 2002 scan already on disk.",
  "run": "wf_5c6be9e9-17f",
  "agent": "a90e72cb539bcb479",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/059d4243-f837-4b07-8096-8c9ca76b03fb/subagents/workflows/wf_5c6be9e9-17f/agent-a90e72cb539bcb479.jsonl",
  "journal": "in-flight",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-wolfe-primary-on-disk.json",
-  "claims": 0,
+  "claims": 109,
   "complete": false,
-  "mtime": "15:30:22"
+  "mtime": "15:35:56"
  }
 }

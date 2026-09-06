@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-06 15:33:43 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-06 15:38:46 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = dd5f13218 · ledger = eaf50fee7 §903: the lit default lands at 9 cars — the default preset takes the wave's class C+D (
 
@@ -75,13 +75,13 @@ product claude/composite-r4 = dd5f13218 · ledger = eaf50fee7 §903: the lit def
 
 ## RESEARCH SWEEPS (state = claims/verdicts/kept; verdict files; section/critic mtimes) — round tags in sweep/LAST-RUNS.json
 - **tolkien**: claims 874 · verdicts 874 (todo 0) · kept 641 · partial 214 · verdict files 43 (triage 0, regrade r4) · section 09-06 14:20 · critic 09-06 14:42
-- **martin**: claims 990 · verdicts 990 (todo 0) · kept 763 · partial 107 · verdict files 43 (triage 1, regrade r5) · section 09-06 15:31 · critic 09-05 21:01
+- **martin**: claims 990 · verdicts 990 (todo 0) · kept 763 · partial 107 · verdict files 43 (triage 1, regrade r5) · section 09-06 15:37 · critic 09-05 21:01
 - **dnd**: claims 872 · verdicts 872 (todo 0) · kept 619 · partial 147 · verdict files 55 (triage 1, regrade r6) · section 09-05 20:56 · critic 09-05 21:12
-- **ai**: claims 940 · verdicts 940 (todo 0) · kept 769 · partial 144 · verdict files 61 (triage 1, regrade r5) · section 09-06 00:39 · critic 09-06 00:55
+- **ai**: claims 940 · verdicts 940 (todo 0) · kept 769 · partial 144 · verdict files 61 (triage 1, regrade r5) · section 09-06 15:34 · critic 09-06 00:55
 - **kay**: claims 713 · verdicts 713 (todo 0) · kept 448 · partial 48 · verdict files 36 (triage 1, regrade r5) · section 09-06 14:42 · critic 09-06 15:04
 - **leguin**: claims 541 · verdicts 491 (todo 50) · kept 342 · partial 42 · verdict files 28 (triage 1, regrade r4) · section 09-06 13:47 · critic 09-06 14:20
 - **wolfe**: claims 468 · verdicts 468 (todo 0) · kept 402 · partial 66 · verdict files 34 (triage 0, regrade r4) · section 09-06 14:19 · critic 09-06 14:32
-- **hobb**: claims 446 · verdicts 446 (todo 0) · kept 401 · partial 45 · verdict files 32 (triage 0, regrade r4) · section 09-06 14:14 · critic 09-06 14:28
+- **hobb**: claims 491 · verdicts 491 (todo 0) · kept 444 · partial 47 · verdict files 35 (triage 0, regrade r4) · section 09-06 14:14 · critic 09-06 14:28
 - LAST-RUNS: tolkien r6-not-launched/(none — nothingToRun 14:55), kay r7/wf_b55db7cd-25f, leguin r7/wf_29dbbf1f-9e3, wolfe r6/wf_5c6be9e9-17f, martin r6/wf_004aff7a-269, hobb r6/wf_ab3eea15-df4, dnd r6/wf_df0a321b-0f2, ai r6/wf_e04d8c44-23e
 
 ## WORKFLOW RUNS of chair session 059d4243-f837-4b07-8096-8c9ca76b03fb (journal lines; a run dies with the session — the FILES above are the checkpoint)
@@ -89,10 +89,10 @@ product claude/composite-r4 = dd5f13218 · ledger = eaf50fee7 §903: the lit def
 - wf_29dbbf1f-9e3: 7 journal lines, 4 agents
 - wf_5c6be9e9-17f: 11 journal lines, 7 agents
 - wf_6aaded2c-7c9: 2 journal lines, 1 agents
-- wf_ab3eea15-df4: 14 journal lines, 8 agents
-- wf_b55db7cd-25f: 5 journal lines, 4 agents
+- wf_ab3eea15-df4: 22 journal lines, 12 agents
+- wf_b55db7cd-25f: 7 journal lines, 4 agents
 - wf_df0a321b-0f2: 11 journal lines, 6 agents
 - wf_e04d8c44-23e: 1 journal lines, 1 agents
 
 ## PROCESSES: 26892 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;38055 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 2.15 2.37 2.60
+load: 2.52 2.37 2.51
