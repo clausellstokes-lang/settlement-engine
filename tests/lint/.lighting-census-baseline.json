@@ -24,10 +24,10 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "a05a4646e4cd41942ebd530e044197932498730a",
-  "measuredBy": "Fable 5.1 chair — §902 OSR rung-18 landing",
+  "measuredAtSha": "e4ca5ec9d757216078327cc27a81a64bd9537510",
+  "measuredBy": "Fable 5.1 chair — §903 lit-default landing",
   "date": "2026-09-06",
-  "note": "the OSR rung-18 consist (two chair-integrated lane cars over the §901 CAS) at the tip; re-derived by the farmed probe (printed in run-registers-902.sh)",
+  "note": "the L-DEFAULT hunk-1 consist (four lane cars over the §902 CAS) at the tip; re-derived by the farmed probe (printed in run-registers-903.sh)",
   "files": 2543,
   "parked": 373,
   "credited": 2170,
