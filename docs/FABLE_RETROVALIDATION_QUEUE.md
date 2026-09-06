@@ -3678,3 +3678,16 @@ The rulings themselves are inline, one `*RULED (§892.x, Fable 5.1):*` paragraph
 ### R53 — lane DESK-VISIBILITY (4 cars b4bb29f07; receipt `receipt-desk-visibility`; 46 rows classified twice; six offenders measured over 60 towns; the first-paint arm + the registry escape) — OWED
 ### R54 — lane VIS-RESOLVER (1 car fa45a079f, replayed 7ef501df9; receipt `receipt-vis-resolver`; all 18 general-desk mounts OPEN; HIGH: the brief counted 2 unknown rows, there were 18) — OWED
 **Status (§900.1):** enrolled, not ruled — the four lanes the grouped §900 rows missed.
+## §901 — THE LIGHTING LANDING (SEAT: Fable 5.1 — validated)
+
+### R55 — lane L-HOMES-1 (LGT-P1-BIRTH, 1 car 408d2e2b1; receipt `receipt-lgt-p1-birth`; HIGH: the +7-key birth cost, the third birth path `applyTonePreset`) — OWED
+### R56 — lane L-HOMES-2 (LGT-P2-MANIFEST, 1 car 4a2e1110c; receipt `receipt-lgt-p2-manifest`; the register identifier kept, the rename rides rung 18) — OWED
+### R57 — lane L-HOMES-3 (LGT-P13-FENCES, 4 cars 1506d657d; receipt `receipt-lgt-p13-fences`; four files, five keys; a refuted certification citation) — OWED
+### R58 — lane L-HOMES-4 (LGT-P5-WOPS, 6 cars 427b85c63; receipt `receipt-lgt-p5-wops`; four doors in the family gates; "mint dark = false" refused) — OWED
+### R59 — lane L-HOMES-6 (LGT-P4-READER, 2 cars 35aaeb4ba; receipt `receipt-lgt-p4-reader`; a forked turnings ladder accepted) — OWED
+### R60 — lane L-HOMES-8 (LGT-P8-MATBOUND, 2 cars 9f7378a55; receipt `receipt-lgt-p8-matbound`; HIGH: the premise refuted; the MAT wiring refused as a build; the stripper false green) — OWED
+### R61 — lane L-HOMES-9 (LGT-P14-WITNESS, 1 car c0c1db24b; receipt `receipt-lgt-p14-witness`; HIGH: the fixture renamed `*-golden.json` so the roster claims it; `it.each` refused) — OWED
+### R62 — lane STRIPPER-UNIFY (1 car 4ed6d1da3; receipt `receipt-stripper-unify`; twelve strippers, 0 flips; the helper migration refused on 33 verdict flips) — OWED
+### R63 — lane L-CHAIR-901 (1 car f2ab6c802; receipt `receipt-l-chair-901`; HIGH: two base reds cured; four dead citations; the content-keyed golden roster arm; the plant harness that destroyed its own files once) — OWED
+### R64 — lanes L-HOMES-5 (LGT-P6-ESPWIRE) and L-HOMES-7 (LGT-P7-DRIFTDOOR), REFUSED with measurement, zero bytes (receipts `receipt-lgt-p6-espwire`, `receipt-lgt-p7-driftdoor`); the refusals themselves are Opus judgments the chair ratified — OWED (walk the refusal, not a car)
+**Status:** enrolled, not ruled.
