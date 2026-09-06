@@ -73,3 +73,19 @@ Re-fetched & CONFIRMED: Gladstone (2022-10-14), Michel (2026-01-08), Khanna (201
 - episode pattern "Severian stumbles into X, does Y, and ends up Z"; three unifying devices: destiny foreknowledge hook, clinical detached narrator voice from torturer training, recursion ("Events echo across the narrative like memories resurfacing")
 
 ### BLOCKED: medium (Roberts) 403; aidanmoher (Gerwel) 403; reactormag (Evenson) 403; newyorker 403; web.archive.org unfetchable. Try Browser pane.
+
+## Batch 3 — 2026-09-06, Opus finder, raw curl+strip route (browser UA), files in sweep/wolfe-craft-raw/
+Roster note: the angle names no fixed URL roster; roster = critics named in the subject line (Clute, Wright, Aramini, Le Guin, Gaiman, Borski) plus craft/writing-advice venues. Dedupe target: the 33 urls already in state-wolfe.json.
+
+FETCHED RAW (HTTP 200, full body):
+- maxgladstone.substack.com/p/the-wolfeman — Max Gladstone, novelist, 2022-10-14 — substantive
+- floydholland.substack.com/p/the-enchanting-prose-of-gene-wolfe — Floyd Holland, 2025-01-03 (NB: earlier note said 2026-01-08 — WRONG, page says Jan 03, 2025) — substantive
+- jafrank09.substack.com/p/whose-afraid-of-the-big-bad-wolfe — "Alex", 2025-07-22 — sentence-level reading of the 5HC opening paragraph — substantive
+- newmythologies.substack.com/p/great-uncle-gene — Matthew Sini, 2023-07-17 — substantive
+- wolfewiki.com ... Articles.Novice — community guide, last modified 2017-11-17 — substantive (reading-protocol rules)
+- reactormag.com/how-gene-wolfe-starts-a-story... — Matthew Keeley, 2017-11-09 — OPENING SENTENCES, the missing-comma reading — substantive
+- reactormag.com/the-best-way-to-approach-the-book-of-the-new-sun/ — Matthew Keeley, 2017-12-04 — diction + sins of omission — substantive
+- monstersandmanuals.blogspot.com/2023/03/on-gene-wolfe-and-feeling-of-being.html — noisms (game designer, Yoon-Suin) — NOT substantive on prose mechanics (essay is about inspiration); logged, no claims
+- brianbiswas.com/blog/2015/wolfewritingrules — relay of the Black Gate interview already in state; five rules; thin
+NOT FOUND / BLOCKED: cwhowell.com Dark Souls post (404 at guessed path), conceptualfiction.com (404), donbeck1.substack (404 at guessed slug), scatterings1976.blogspot (empty body).
+NOTE reactormag is NOT blocked via curl + browser UA (earlier round recorded 403).

@@ -1,174 +1,10 @@
-Main
-
- Top
-
- Interesting
-
- Help
-
- kate_nepveu 
-
- Follow us: 
-
- Follow us on Twitter 
-
- Applications
-
- Download
-
- Huawei
-
- RuStore
-
- COMPANY
-
- About
-
- News
-
- Help
-
- PRODUCTS
-
- "Share" button
-
- COMMUNITY
-
- Frank
-
- CHOOSE LANGUAGE
-
- English 
- Deutsch 
- Dansk 
- español 
- Français 
- Italiano 
- Русский 
- Українська 
- Беларуская 
- 日本語 
- Português 
- Esperanto 
- עברית 
- Nederlands 
- Magyar 
- Gaeilge 
- íslenska 
- suomi 
- Ελληνικά 
- Norsk bokmål 
- Svenska 
- polski 
- 简体中文 
- Latviešu 
- Türkçe 
- Bahasa Melayu 
- हिन्दी 
- Brazilian Portuguese 
- Chinese Traditional 
- Lietuvių 
- Norsk nynorsk 
-
- Privacy Policy
-
- User Agreement
-
- Recommendation technologies
-
- Help
-
- LiveJournal — v.935 
-
- Main
-
- Top
-
- Interesting
-
- #КИНОМЕЖДУСТРОК
-
- Help
-
- Follow us: 
-
- Follow us on Twitter 
-
- Applications
-
- Download
-
- Huawei
-
- RuStore
-
- COMPANY
-
- About
-
- News
-
- Help
-
- PRODUCTS
-
- "Share" button
-
- COMMUNITY
-
- Frank
-
- CHOOSE LANGUAGE
-
- English 
- Deutsch 
- Dansk 
- español 
- Français 
- Italiano 
- Русский 
- Українська 
- Беларуская 
- 日本語 
- Português 
- Esperanto 
- עברית 
- Nederlands 
- Magyar 
- Gaeilge 
- íslenska 
- suomi 
- Ελληνικά 
- Norsk bokmål 
- Svenska 
- polski 
- 简体中文 
- Latviešu 
- Türkçe 
- Bahasa Melayu 
- हिन्दी 
- Brazilian Portuguese 
- Chinese Traditional 
- Lietuvių 
- Norsk nynorsk 
-
- Privacy Policy
-
- User Agreement
-
- Recommendation technologies
-
- Help
-
- LiveJournal — v.935 
-
- ? 
-
- ? 
+LotR re-read: Le Guin, "Rhythmic Pattern in The Lord of the Rings": kate_nepveu — LiveJournal 
 
  LiveJournal 
 
  Find more 
+
+ Your 2020 in LJ 
 
  Communities 
 
@@ -176,22 +12,18 @@ Main
 
  Shop 
 
- Help
+ Help 
 
- Search
+ Login 
 
- Log in 
-
- kate_nepveu 
-
- Log in 
+ Login 
 
  Join free
 
  Join
 
  English
-
+ 
  (en)
 
  English (en) 
@@ -212,6 +44,14 @@ Main
 
  Беларуская (be) 
 
+ kate_nepveu 
+
+ — 
+
+ Subscribe
+
+ Readability 
+
  Log in
 
  No account? 
@@ -225,22 +65,33 @@ Main
 
  Log in 
 
- Login with Sber ID
+ Facebook 
 
- QR code 
+ Twitter 
 
- No account? 
+ Google 
 
- Create an account
+ RAMBLER&Co ID 
 
  By logging in to LiveJournal using a third-party service you accept LiveJournal's User agreement 
 
+ No account? 
+ 
+ Create an account
+
+ Kate ( kate_nepveu ) wrote, 
+ 2006 - 06 - 04 18:46:00 
+ Kate
  kate_nepveu 
+ 2006 - 06 - 04 18:46:00 
+ 
+ Previous 
 
- June 4 2006, 18:46 
+ Share
 
- 3 
-
+ Flag 
+ Next 
+ 
  LotR re-read: Le Guin, "Rhythmic Pattern in The Lord of the Rings" 
  As I re-read The Lord of the Rings , I intend to also read critical essays and other commentary. rushthatspeaks recommended the first of these, the Le Guin essay I discuss below; I also borrowed from the local library Understanding The Lord of the Rings : The Best of Tolkien Criticism , edited by Rose A. Zimbardo and Neil D. Isaacs, which looked to have a good range of material. I have some meta essays at lotrfic_crit bookmarked for later reading as well; other recommendations are welcome. (I do have access to a college library via Chad, though I should note that my background in literary theory is not strong.)
 
@@ -272,44 +123,74 @@ Main
 
  [ more LotR re-read posts ]
 
- books lotr 
+ Tags: books , lotr 
+ 
+ Subscribe 
 
- LJ Video 
+ Loncon: quick followups 
+ I am so busy that I don't have time to tell you how busy I am. Also operating under a fairly serious sleep deficiency. But, very quickly:…
+ 
+ Loncon: The Gendered AI 
+ It's late but I'm jazzed from good conversation and think I can quickly make this presentable before I go to bed. Description: Strictly speaking,…
+ 
+ Loncon: I Before They, Except After You 
+ This was the panel immediately before the prior one and it was lovely, which is why I saved it for last. Description: Who is the narrator? Where…
 
- 0" > 0" target="_blank" class="mdspost-comments-controls__count" > 
+ Post a new comment Error
+ 
+ Anonymous comments are disabled in this journal
 
- Applications
+ ramblerID 
+ 
+ We will log you in after post 
+ We will log you in after post 
+ 
+ We will log you in after post 
+ We will log you in after post 
+ We will log you in after post 
+ Anonymously 
+ 
+ switch ramblerID 
+ LiveJournal 
+ Facebook 
+ Twitter 
+ OpenId 
+ Google 
+ MailRu 
+ VKontakte 
+ Anonymously 
 
- Download
+ default userpic 
 
- Huawei
+ Your reply will be screened
+ Your IP address will be recorded 
+ 
+ Post a new comment 
+ Preview comment 
 
- RuStore
+ Help 
+
+ 3 comments 
+
+ Post a new comment 
+ 3 comments 
 
  Follow us: 
 
+ Follow us on Facebook 
+
  Follow us on Twitter 
 
- LiveJournal 
+ Applications
 
- COMPANY
+ iOS
 
- About
+ Android
 
- News
+ Huawei
 
- Help
-
- PRODUCTS
-
- "Share" button
-
- COMMUNITY
-
- Frank
-
- CHOOSE LANGUAGE
-
+ Choose language 
+ 
  English 
  Deutsch 
  Dansk 
@@ -342,12 +223,17 @@ Main
  Lietuvių 
  Norsk nynorsk 
 
- v.935 
+ Current version 
+ v.522 
 
- Privacy Policy
+ News
+
+ About
 
  User Agreement
 
- Recommendation technologies
+ Privacy Policy
 
  Help
+
+ Button "Share"

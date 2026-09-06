@@ -1,0 +1,786 @@
+The Dreaded Boxed Text | Dyson's Dodecahedron 
+
+ Home 
+
+ About 
+ 
+ Contact 
+
+ Map Copyright & Usage Agreement 
+
+ Characters 
+
+ Downloads 
+ 
+ A Flask Full of Gasoline 
+
+ Character Sheets 
+
+ deadEarth Resources 
+
+ Geodesic Gnomes 
+
+ House Rules 
+ 
+ Random Tables 
+
+ Maps 
+ 
+ All Maps 
+
+ Commercial Maps 
+
+ Tutorials & Help 
+
+ Adventures 
+
+ Cities & Towns 
+
+ Inns and Taverns 
+
+ Multi-Page Dungeons 
+ 
+ The Scavengers’ Deep 
+
+ The Dyson MegaDelve 
+
+ Heart of Darkling 
+
+ Return to the Barrier Peaks 
+
+ My Private Jakalla 
+
+ Dyson’s Delve II 
+
+ The Tumíssan Underworld 
+
+ The Graxworm 
+
+ The Index Card Dungeon 
+
+ Iseldec’s Drop 
+
+ Geomorphs 
+
+ Vertical Morphology 
+
+ Sewers 
+
+ Kevin Campbell 
+
+ ZERO/Barrier 
+ 
+ 2014 Review 
+
+ 2015 Review 
+
+ 2016 Review 
+
+ Dyson’s Delves 
+
+ Dodecahedron 
+
+ Magical Theorems & Dark Pacts 
+
+ Dyson's Dodecahedron 
+
+ ~ Award Winning Dungeon Design
+
+ The Dreaded Boxed Text
+ 
+ 29 
+ Sunday 
+ Sep 2013 
+
+ Posted by Dyson Logos in Advice , Fantasy 
+
+ ≈ 15 Comments 
+
+ Tags 
+ Adventures , Advice , Dungeons & Dragons , Fantasy , Labyrinth Lord , OSR , RPG 
+
+ I’m enjoying the new wave of old school adventures, but the reality is that we’ve learned a lot about adventure design and what makes old school good over the intervening years since I first started running 1e adventures.
+
+ During the 1e days, we saw the advent of “boxed” or “read-aloud” text. I tend to blame this on the tournament usage of the original published adventures – the goal being to standardize the game experience for each play group, regardless of the DM.
+
+ Standardize it did. Players around the world fell asleep, looked off into space, and generally felt their brains leak out of their ears.
+
+ 9 Sentences. On top of which it predicts the future for the party (upon approaching…) instead of leaving that up to them. The only thing it doesn’t do that some boxed text insists on doing is truly controlling the PCs with “you stand in shock…” or something similar at the beginning.
+
+ Back in 2005 when Jesse Decker and David Noonan still worked for Wizards of the Coast, they did some awesome hands-on research at the GenCon D&D tables. They watched and observed.
+
+ If you’re the DM, you get two sentences. Period. Beyond that, your players are stacking dice, talking to each other, or staring off into space. Time after time, players were missing the actual data in the boxed text – basic stuff, like room dimensions, how many doors exit the room, and number of monsters. Among the questions I heard from players who’d supposedly been paying attention: 
+
+ “How come the floor is slippery?” 
+
+ “What color is the dragon again?” 
+
+ “There’s a big lever on the wall?” 
+
+ “Wait, the lady in the room is a corpse?” 
+
+ “Who’s Karthos? Is that the guy we’re fighting?” 
+
+ Over the course of four days, I saw otherwise smart players get stymied because they missed a salient fact within boxed text. I saw otherwise engaging DMs read through boxed text, then get frustrated because they wound up repeating and paraphrasing all the information in it anyway – often in the middle of the action. 
+
+ The full article is here: http://www.wizards.com/default.asp?x=dnd/dd/20050916a 
+
+ So, OSR adventure writers, get rid of the boxed text. Or if you insist that it is needed, reduce it down to one or two SIMPLE sentences. But really, replace it with a point-form list of things seen in the room. That makes it easy for the DM to present the salient information in a conversational manner without having to dig through all your “beautiful” prose.
+
+ Rate this:
+
+ Share this:
+ 
+ Share on Reddit (Opens in new window) 
+ Reddit 
+
+ Share on Facebook (Opens in new window) 
+ Facebook 
+
+ Share on X (Opens in new window) 
+ X 
+
+ Email a link to a friend (Opens in new window) 
+ Email 
+
+ Print (Opens in new window) 
+ Print 
+ 
+ More 
+
+ Share on LinkedIn (Opens in new window) 
+ LinkedIn 
+
+ Share on Tumblr (Opens in new window) 
+ Tumblr 
+
+ Share on Pinterest (Opens in new window) 
+ Pinterest 
+
+ Like Loading... 
+
+ Related 
+
+ About Dyson Logos
+
+ That guy who draws all those maps at Dyson's Dodecahedron. Old School. 
+ 
+ View all posts by Dyson Logos » 
+
+ Post navigation
+
+ ← Previous post 
+ Next post → 
+
+ 15 thoughts on “The Dreaded Boxed Text” 
+
+ Yomar said: 
+
+ September 29, 2013 at 8:37 am 
+
+ That’s not boxed text, that’s garden-variety bloated DM info that happens to be surrounded by a box. Boxed text is intended to be read out verbatim to the players.
+
+ Reply 
+
+ Dyson Logos said: 
+
+ September 29, 2013 at 8:48 am 
+
+ Indeed, my bad.
+
+ For some reason, module A4 included boxed and unboxed text, NEITHER of which was to be read to the players.
+
+ I’ll replace it with some boxed text from another module.
+
+ Reply 
+
+ Spiralbound said: 
+
+ September 29, 2013 at 11:47 am 
+
+ We all know what Dyson was getting at, and it’s a very valid point. I suspect there is a disconnect occurring with module authors – they are writing an adventure in a text format, but are forgetting that adventures are to be EXPERIENCED, not read. While a descriptive paragraph is fine for a novel, it is usually painfully boring to listen to, ESPECIALLY when a paragraph or more is read aloud all at once. It is a huge break in the flow of gameplay.
+
+ In the absence of a prewritten adventure, information at the gaming table is usually passed along conversationally or by player request in tiny bits every minute or so, not in a big chunk at the opening of a scenario.
+
+ The players are told they are approaching a cave mouth, then they are told it has a closed stone door. As the players approach, usually one will ask if there are inscriptions, the GM then describes the text border carved into the door and the red gem inset into the center of the door. When the door is opened, the GM may say there is a waft of stale dusty air that blows towards the characters from within the pitch black interior, etc, etc. The two sentence rule sounds like an excellent quick guideline.
+
+ It is terrible pacing to bring the game to a complete halt just to describe every detail of the dungeon entrance before resuming play. Even in “real life” we don’t experience things that way. No one stops outside a building and mentally surveys every aspect of the entrance before continuing inside. Once inside, the average person will be lucky to describe any aspect of the exterior. As we approach a place, we simply look for the entrance and walk through. Module writers should present their info in the same way. Instead of one block of text, liberally scatter many snippets to be read as needed, presenting only the most immediate info that the circumstance would reasonably dictate as being of primary importance..
+
+ Reply 
+
+ Tad Davis said: 
+
+ December 20, 2013 at 7:59 pm 
+
+ I think you’ve made some good points here, but I think a good dungeon room format can accommodate these insights whilst still employing boxed text. So let’s take these points one by one.
+
+ First, I’m not sure I buy the “Experienced/Read” dichotomy. Literature, as a medium, invites us to experience a narrative by means of our imaginative capacities of sympathy and simulation. We identify with the emotions and concerns of the protagonists and we are drawn into the world through descriptions that evoke our senses. To be sure, RPGs are a different medium than literature, one that relies upon collective story-telling via conversation. Prolonged monologues may be a hindrance rather than an aid to this form of storytelling. However, I am inclined to think that brief descriptions, particularly when they include evocative sensory imagery can actually aid in the process of immersing us within the game world.
+
+ Second, you make a good point about the way that we naturally experience the world. We take in general features though (unless we are paying close attention) generally are not consciously aware of the all. It is only when we consciously attend to various items that we become more fully aware of specific details pertaining to them. A good dungeon room format ought to be able to model this. Thing is, I think a dungeon room format can do this while still using a boxed description. Here’s how. Keep the boxed description brief and general. Describe only those things the PCs would notice upon an initial cursory survey of a room, and use evocative imagery (and other sensory data) to set the scene. Elsewhere in the dungeon room key place more info about each of the items you’ve just described, so that if players investigate you can further describe what they find.
+
+ This format should be brief enough not bore your players to tears, and should help to captivate their imagination. I’ve offered a model (which is a variation of Courtney Campbell’s model) of this over at my blog: 
+
+ Testing out a New Dungeon Format 
+
+ More recently, I’ve written some responses to the sorts of concerns raised by Dyson (and those within the article he cites), as well as others. At the end of the day I think that Boxed descriptions can actually be a helpful device but unfortunately to date it has been poorly utilized, so much so that most people who have had experience with them have an ingrained dislike of them (which is too bad to my mind)
+
+ Reply 
+
+ Adam Bragg said: 
+
+ December 28, 2013 at 7:17 pm 
+
+ At first I thought you were refuting my point, but I can’t disagree with you because you’re saying the same thing I did, just in your own words. Colour me confused. Ah well, maybe it sounds better when you say it.
+
+ Reply 
+
+ Tad Davis said: 
+
+ December 29, 2013 at 12:26 am 
+
+ Perhaps it is I who was confused; I thought you were putting forth the idea that Boxed Text was a poor way of conveying information because: (a) They are usually too long, and this inhibits the “experience” and “pacing” of role playing, and (b) They usually contain far more within their descriptions than what an average person would be perceive upon first entering a room. I was agreeing that boxed text often is guilty of this but was arguing that it needn’t always be, and I offered a model for how to employ it more effectively. Have I misunderstood what you were saying?
+
+ Reply 
+
+ valadil said: 
+
+ September 29, 2013 at 8:52 pm 
+
+ Vindication! I came to nearly the same conclusion in my last game. My limit was three sentences instead of two, but my sentences are usually pretty brief.
+
+ Basically what I noticed wasn’t that details were being missed but that more than three sentences of my talking put the players in audience mode. I told and they listened. Then I had to fight with them to get them out of passive response mode.
+
+ Reply 
+
+ Aoi said: 
+
+ September 30, 2013 at 7:45 am 
+
+ Over on Hack & Slash, the author deals with this exact same issue with a solution that is very similar to what you suggest (a bullet-point list) with some cool formatting. Might be worth it to check it out:
+
+ http://hackslashmaster.blogspot.com/2012/06/on-set-design.html 
+
+ http://hackslashmaster.blogspot.com/2012/06/on-expanded-set-design.html 
+
+ http://hackslashmaster.blogspot.com/2012/06/on-reader-mail-set-design.html 
+
+ Reply 
+
+ Pingback: Blog Watch: Overdesign in RPGs, Box Text Bane, and the Old Lady in Dubuque | Jeffro's Space Gaming Blog 
+
+ Pingback: Két mondatod van – Dévai Nándor blogja 
+
+ Pingback: The Badger’s Bite: Just Say “Hell, No” To Boxed Text | OSR Today 
+
+ Rikhard von Katzen said: 
+
+ January 14, 2018 at 6:59 pm 
+
+ Doesn’t stop WotC from publishing shitloads of florid boxed text in they’re overpriced garbage adventures.
+
+ Reply 
+
+ eric said: 
+
+ December 30, 2018 at 8:43 pm 
+
+ WotC moved the referenced article, find it here:
+
+ http://archive.wizards.com/default.asp?x=dnd/dd/20050916a 
+
+ Reply 
+
+ Pingback: Why I Use Point Crawls More Than Hex Crawls - Silverarm 
+
+ Pingback: Spielergezeichnete Karten: Ist das Kunst oder kann das weg? – Kritischer Fehlschlag 
+
+ Leave a comment Cancel reply 
+
+ Δ 
+
+ Books in print at LuLu 
+
+ Books in PDF format at RPGnow 
+
+ Navigation
+
+ About 
+ 
+ Art License 
+
+ Contact 
+
+ Map Copyright & Usage Agreement 
+
+ Characters 
+
+ Colour Portfolio 
+
+ Downloads 
+ 
+ A Flask Full of Gasoline 
+
+ Character Sheets 
+
+ deadEarth Resources 
+
+ Geodesic Gnomes 
+
+ House Rules 
+ 
+ Random Tables 
+
+ Maps 
+ 
+ Adventures 
+
+ Cities & Towns 
+
+ Commercial Maps 
+
+ Dyson’s Delve 
+
+ Erdea Manor 
+
+ Geomorphs 
+
+ Inns and Taverns 
+
+ Kevin Campbell 
+
+ Multi-Page Dungeons 
+ 
+ Baraloba and Environs 
+
+ Dyson’s Delve II 
+
+ Heart of Darkling 
+
+ Iseldec’s Drop 
+
+ Longboat Mountain 
+
+ My Private Jakalla 
+
+ Return to the Barrier Peaks 
+
+ The Graxworm 
+
+ The Index Card Dungeon 
+
+ The Scavengers’ Deep 
+
+ The Tumíssan Underworld 
+
+ Sewers 
+
+ The Dyson MegaDelve 
+
+ Tutorials & Help 
+
+ Vertical Morphology 
+
+ Shadows of the Ruinous Powers 
+
+ ZERO/Barrier 
+ 
+ 2014 Cartographic Review 
+
+ 2015 Cartographic Review 
+
+ 2016 Cartographic Review 
+
+ Dodecahedron 
+
+ Dyson’s Delves 
+
+ Dyson’s Delves Books 
+
+ Dyson’s Delves II 
+
+ Magical Theorems & Dark Pacts 
+
+ Post Categories
+ Post Categories 
+ Select Category 
+ Adventure (173) 
+ Adventures in the New Kingdoms (25) 
+ Advice (26) 
+ Black Polished Chrome (4) 
+ Books (117) 
+ Colour Maps (5) 
+ Commercial Maps (731) 
+ Dodecahedron (37) 
+ Doodles (277) 
+ Fantasy (2,905) 
+ Gaming-Related (91) 
+ Geomorph Mapping Challenge (217) 
+ Horror (41) 
+ House Rules (160) 
+ Kalisz by Night (1) 
+ Maps (2,193) 
+ Mini-Review (31) 
+ Modern (117) 
+ Official Maps (5) 
+ Old School Blue Maps (5) 
+ Random Tables (75) 
+ Science Fiction (218) 
+ Site Related (104) 
+ Supers (6) 
+ Top 5 Lists (24) 
+ Weird (129) 
+ Western (2) 
+
+ Maps in your Inbox! 
+
+ Enter your email address to subscribe to the Dodecahedron and receive notifications of new posts by email.
+
+ Email Address: 
+
+ Subscribe! 
+
+ Join 2,103 other subscribers 
+
+ Lost in the depths?
+
+ Search: 
+
+ Archives
+ Archives 
+
+ Select Month 
+ August 2026 (10) 
+ July 2026 (12) 
+ June 2026 (18) 
+ May 2026 (16) 
+ April 2026 (13) 
+ March 2026 (17) 
+ February 2026 (14) 
+ January 2026 (19) 
+ December 2025 (16) 
+ November 2025 (20) 
+ October 2025 (19) 
+ September 2025 (20) 
+ August 2025 (19) 
+ July 2025 (23) 
+ June 2025 (12) 
+ May 2025 (26) 
+ April 2025 (17) 
+ March 2025 (10) 
+ February 2025 (11) 
+ January 2025 (10) 
+ December 2024 (10) 
+ November 2024 (11) 
+ October 2024 (10) 
+ September 2024 (10) 
+ August 2024 (14) 
+ July 2024 (21) 
+ June 2024 (12) 
+ May 2024 (19) 
+ April 2024 (17) 
+ March 2024 (13) 
+ February 2024 (11) 
+ January 2024 (14) 
+ December 2023 (13) 
+ November 2023 (12) 
+ October 2023 (11) 
+ September 2023 (10) 
+ August 2023 (14) 
+ July 2023 (16) 
+ June 2023 (13) 
+ May 2023 (11) 
+ April 2023 (15) 
+ March 2023 (14) 
+ February 2023 (13) 
+ January 2023 (18) 
+ December 2022 (13) 
+ November 2022 (14) 
+ October 2022 (18) 
+ September 2022 (19) 
+ August 2022 (12) 
+ July 2022 (13) 
+ June 2022 (12) 
+ May 2022 (18) 
+ April 2022 (19) 
+ March 2022 (18) 
+ February 2022 (14) 
+ January 2022 (16) 
+ December 2021 (25) 
+ November 2021 (19) 
+ October 2021 (31) 
+ September 2021 (48) 
+ August 2021 (15) 
+ July 2021 (21) 
+ June 2021 (19) 
+ May 2021 (17) 
+ April 2021 (11) 
+ March 2021 (13) 
+ February 2021 (12) 
+ January 2021 (22) 
+ December 2020 (17) 
+ November 2020 (24) 
+ October 2020 (25) 
+ September 2020 (20) 
+ August 2020 (16) 
+ July 2020 (12) 
+ June 2020 (20) 
+ May 2020 (24) 
+ April 2020 (23) 
+ March 2020 (21) 
+ February 2020 (25) 
+ January 2020 (23) 
+ December 2019 (19) 
+ November 2019 (15) 
+ October 2019 (15) 
+ September 2019 (12) 
+ August 2019 (16) 
+ July 2019 (11) 
+ June 2019 (21) 
+ May 2019 (14) 
+ April 2019 (15) 
+ March 2019 (15) 
+ February 2019 (19) 
+ January 2019 (14) 
+ December 2018 (14) 
+ November 2018 (13) 
+ October 2018 (19) 
+ September 2018 (14) 
+ August 2018 (14) 
+ July 2018 (21) 
+ June 2018 (17) 
+ May 2018 (12) 
+ April 2018 (13) 
+ March 2018 (15) 
+ February 2018 (10) 
+ January 2018 (13) 
+ December 2017 (13) 
+ November 2017 (13) 
+ October 2017 (10) 
+ September 2017 (15) 
+ August 2017 (12) 
+ July 2017 (18) 
+ June 2017 (12) 
+ May 2017 (14) 
+ April 2017 (12) 
+ March 2017 (16) 
+ February 2017 (13) 
+ January 2017 (12) 
+ December 2016 (17) 
+ November 2016 (15) 
+ October 2016 (11) 
+ September 2016 (14) 
+ August 2016 (13) 
+ July 2016 (14) 
+ June 2016 (12) 
+ May 2016 (12) 
+ April 2016 (10) 
+ March 2016 (19) 
+ February 2016 (15) 
+ January 2016 (15) 
+ December 2015 (17) 
+ November 2015 (14) 
+ October 2015 (14) 
+ September 2015 (14) 
+ August 2015 (10) 
+ July 2015 (14) 
+ June 2015 (12) 
+ May 2015 (19) 
+ April 2015 (27) 
+ March 2015 (19) 
+ February 2015 (24) 
+ January 2015 (20) 
+ December 2014 (16) 
+ November 2014 (15) 
+ October 2014 (11) 
+ September 2014 (11) 
+ August 2014 (17) 
+ July 2014 (16) 
+ June 2014 (15) 
+ May 2014 (11) 
+ April 2014 (16) 
+ March 2014 (19) 
+ February 2014 (27) 
+ January 2014 (20) 
+ December 2013 (21) 
+ November 2013 (25) 
+ October 2013 (19) 
+ September 2013 (22) 
+ August 2013 (21) 
+ July 2013 (22) 
+ June 2013 (23) 
+ May 2013 (32) 
+ April 2013 (17) 
+ March 2013 (10) 
+ February 2013 (13) 
+ January 2013 (17) 
+ December 2012 (24) 
+ November 2012 (11) 
+ October 2012 (8) 
+ September 2012 (1) 
+ June 2012 (1) 
+ April 2012 (3) 
+ March 2012 (9) 
+ February 2012 (5) 
+ January 2012 (5) 
+ December 2011 (1) 
+ September 2011 (5) 
+ August 2011 (26) 
+ July 2011 (31) 
+ June 2011 (31) 
+ May 2011 (34) 
+ April 2011 (30) 
+ March 2011 (30) 
+ February 2011 (28) 
+ January 2011 (34) 
+ December 2010 (30) 
+ November 2010 (22) 
+ October 2010 (14) 
+ September 2010 (15) 
+ August 2010 (9) 
+ July 2010 (5) 
+ June 2010 (10) 
+ May 2010 (16) 
+ April 2010 (15) 
+ March 2010 (15) 
+ February 2010 (15) 
+ January 2010 (12) 
+ December 2009 (17) 
+ November 2009 (30) 
+ October 2009 (15) 
+ September 2009 (29) 
+ August 2009 (31) 
+ July 2009 (35) 
+ June 2009 (30) 
+ May 2009 (32) 
+ April 2009 (24) 
+ March 2009 (12) 
+
+ Blog Stats
+ 
+ 15,725,306 hits
+
+ Actual Play 
+ Adventure 
+ B/X 
+ Basic 
+ Books 
+ Building 
+ Cave 
+ Cavern 
+ Caverns 
+ Caves 
+ City 
+ Commercial Maps 
+ Crypt 
+ Crypts 
+ CyberPunk 
+ D&D 
+ DnD 
+ DnD5e 
+ Doodle 
+ Doodles 
+ Drawings 
+ Dungeon 
+ Dungeons & Dragons 
+ dungeons-and-dragons 
+ Empire of the Petal Throne 
+ Fantasy 
+ Fortification 
+ Fortress 
+ Free 
+ Gaming 
+ geomorph 
+ Geomorph Mapping Challenge 
+ Hex 
+ Hex Map 
+ House Rules 
+ Illustration 
+ Isometric 
+ Keep 
+ Kudos 
+ Labyrinth Lord 
+ Magic Items 
+ mapping challenge 
+ Maps 
+ Megadungeon 
+ Modern 
+ Mutant Future 
+ Old School Essentials 
+ OSE 
+ OSR 
+ postaday2011 
+ Post Apocalyptic 
+ Random Tables 
+ Regional 
+ Release the Kraken 
+ River 
+ RPG 
+ Ruins 
+ Science Fiction 
+ Shadows of the Ruinous Powers 
+ Shrine 
+ Swordtember 
+ Tavern 
+ Tekumel 
+ Temple 
+ The Enemy Within 
+ Tomb 
+ Tombs 
+ Tower 
+ Town 
+ TTRPG 
+ Urban 
+ Warhammer Fantasy 
+ Weird 
+ WHFRP 
+ WHFRP1e 
+
+ Blog at WordPress.com. 
+
+ Comment 
+
+ Reblog 
+
+ Subscribe 
+
+ Subscribed 
+
+ Dyson's Dodecahedron 
+
+ Join 2,103 other subscribers
+
+ Sign me up 
+
+ Already have a WordPress.com account? Log in now. 
+
+ Dyson's Dodecahedron 
+
+ Subscribe 
+
+ Subscribed 
+
+ Sign up 
+
+ Log in 
+
+ Copy shortlink 
+
+ Report this content 
+
+ View post in Reader 
+
+ Manage subscriptions 
+
+ Collapse this bar 
+
+ Loading Comments... 
+
+ Write a Comment... 
+
+ Email (Required) 
+
+ Name (Required) 
+
+ Website 
+
+ %d

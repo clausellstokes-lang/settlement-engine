@@ -1,26 +1,32 @@
-# -*- coding: utf-8 -*-
-import json, io, os
-OUT = "found-hobb-close.json"
-
-sourcesRead = []
-claims = []
-
-def S(title,url,kind,substantive,date=None,route=None):
-    d={"title":title,"url":url,"kind":kind,"substantive":substantive}
-    if date: d["date"]=date
-    if route: d["route"]=route
-    sourcesRead.append(d)
-
-def C(feature,claim,source,url,quote,page=None,kind=None,polarity=None,date=None,routeHint=None,registerHint=None,confidence=None,modelEra=None):
-    d={"feature":feature,"claim":claim,"source":source,"url":url,"quote":quote}
-    for k,v in [("page",page),("kind",kind),("polarity",polarity),("date",date),
-                ("routeHint",routeHint),("registerHint",registerHint),
-                ("confidence",confidence),("modelEra",modelEra)]:
-        if v: d[k]=v
-    claims.append(d)
-
-def write(complete, coverage):
-    json.dump({"complete":complete,"coverage":coverage,
-               "sourcesRead":sourcesRead,"claims":claims},
-              io.open(OUT,"w",encoding="utf-8"), ensure_ascii=False, indent=1)
-    print("wrote",OUT,len(sourcesRead),"sources",len(claims),"claims")
+import json,os,re,sys,unicodedata
+BASE="/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep"
+RAW=os.path.join(BASE,"raw")
+def norm(s):
+    s=unicodedata.normalize("NFKC",s)
+    s=s.replace("’","'").replace("‘","'").replace("“",'"').replace("”",'"')
+    s=s.replace("—","--").replace("–","-").replace("…","...")
+    s=re.sub(r"\s+"," ",s)
+    return s.lower().strip()
+CACHE={}
+def text(f):
+    if f not in CACHE:
+        p=os.path.join(RAW,f) if os.path.exists(os.path.join(RAW,f)) else os.path.join(BASE,f)
+        CACHE[f]=norm(open(p,encoding='utf-8',errors='replace').read())
+    return CACHE[f]
+def check(claims):
+    bad=[]
+    for i,c in enumerate(claims):
+        q=c.get("quote","")
+        f=c.pop("_file",None)
+        if not q: continue
+        if len(q.split())>12: bad.append((i,"TOO LONG",q))
+        elif norm(q) not in text(f): bad.append((i,"NOT FOUND in "+f,q))
+    return bad
+if __name__=="__main__":
+    src=json.load(open(os.path.join(BASE,"claims-draft.json")))
+    bad=check(src["claims"])
+    for b in bad: print("BAD:",b)
+    if bad: sys.exit(1)
+    out={"complete":src.get("complete",False),"coverage":src["coverage"],"sourcesRead":src["sourcesRead"],"claims":src["claims"]}
+    json.dump(out,open(os.path.join(BASE,"found-leguin-craft.json"),"w"),indent=1,ensure_ascii=False)
+    print("OK claims:",len(src["claims"]),"sources:",len(src["sourcesRead"]))

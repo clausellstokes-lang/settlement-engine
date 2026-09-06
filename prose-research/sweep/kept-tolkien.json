@@ -7015,6 +7015,174 @@
   }
  },
  {
+  "index": 450,
+  "feature": "annalistic compression",
+  "claim": "The Silmarillion uses a compressed style in which events are briefly documented as if in annals recording history and legend, with minimal dialogue, which makes it feel more distant and difficult.",
+  "source": "Wikipedia, 'Tolkien's prose style'",
+  "url": "https://en.wikipedia.org/wiki/Tolkien%27s_prose_style",
+  "page": "§ The Silmarillion",
+  "quote": "as if in annals recording history and legend",
+  "angle": "civic-record",
+  "verdict": {
+   "index": 450,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "compressed style; events briefly documented as if in annals",
+   "note": "Wikitext, section 'The Silmarillion': 'written in a compressed style, in which events are briefly documented as if in [[annals]] recording history and legend' (cited to Bratman 2000). Minimal dialogue: 'Many chapters have little in the way of dialogue'. Distant: Shippey, 'a more distant and mythic work'. Difficult: 'making the work feel more difficult' (Turner). Note the page distributes the causation across three sources rather than deriving distance/difficulty from the annalistic mode.",
+   "fromFile": "verdicts-tolkien-i448-462.json"
+  }
+ },
+ {
+  "index": 451,
+  "feature": "varying styles as a depth factor",
+  "claim": "Drout, Hitotsubashi and Scavera identify four factors behind the impression of depth, the fourth being different texts written in varying styles as if by different hands.",
+  "source": "Wikipedia, 'Literary devices in The Lord of the Rings'",
+  "url": "https://en.wikipedia.org/wiki/Literary_devices_in_The_Lord_of_the_Rings",
+  "page": "§ Impression of depth",
+  "quote": "Different texts written in varying styles",
+  "angle": "civic-record",
+  "verdict": {
+   "index": 451,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "writing different texts in varying styles",
+   "note": "Substance exact: 'The effect was constructed on at least four factors, namely the enormous scale ... the apparently casual and incomplete mentions ... multiple inconsistent accounts, as in real history; and writing different texts in varying styles' (sfn Drout|Hitotsubashi|Scavera|2014, pp. 167-211). Not VERBATIM because the supplied quote 'Different texts written in varying styles' is a reordering; the page says 'writing different texts in varying styles' (that exact phrasing is also on the companion 'Impression of depth' article, which additionally heads a section 'Varying styles'). Page says 'at least four factors', not exactly four.",
+   "fromFile": "verdicts-tolkien-i448-462.json"
+  }
+ },
+ {
+  "index": 452,
+  "feature": "multiple-manuscripts device",
+  "claim": "Sipahi highlights the Prologue's device of multiple manuscripts, redactions and translations of the Red Book as the framework that establishes authenticity, while Brooke-Rose dismissed the genealogies and histories as unnecessary to the narrative.",
+  "source": "Wikipedia, 'Impression of depth in The Lord of the Rings'",
+  "url": "https://en.wikipedia.org/wiki/Impression_of_depth_in_The_Lord_of_the_Rings",
+  "page": "§ Factors; § Reception",
+  "quote": "",
+  "angle": "civic-record",
+  "verdict": {
+   "index": 452,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "details the various copies, redactions, and translations of the Red Book",
+   "note": "No quote supplied, so verbatim grading not applicable. Sipahi limb supported under Factors > 'Multiple accounts, apparent contradictions': 'Scholars such as Peri Sipahi note that the use of multiple accounts is introduced in the Prologue ... and then details the various copies, redactions, and translations that were made of the fictive Red Book of Westmarch' (page says 'copies', claim says 'manuscripts'). Brooke-Rose limb supported under Reception: she 'attacked \"the histories and genealogies\" as not \"in the least necessary to the narrative\"'. Caveat: 'establishes authenticity' is the article's lead-level framing of the whole depth effect ('attractively authentic'), not something the page attributes to Sipahi.",
+   "fromFile": "verdicts-tolkien-i448-462.json"
+  }
+ },
+ {
+  "index": 453,
+  "feature": "history true or feigned",
+  "claim": "Bowman shows Tolkien blurring the line between story and history in the Appendices, following his stated preference for history, true or feigned.",
+  "source": "Wikipedia, 'The Tale of Aragorn and Arwen'",
+  "url": "https://en.wikipedia.org/wiki/The_Tale_of_Aragorn_and_Arwen",
+  "page": "§ History, true or feigned",
+  "quote": "history, true or feigned",
+  "angle": "civic-record",
+  "verdict": {
+   "index": 453,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "To Bowman, this blurs the line between story and history",
+   "note": "Section is literally headed '\"History, true or feigned\"'. Body: 'To Bowman, this blurs the line between story and history, something that as she notes Tolkien much preferred, whether \"true or feigned\"', with the Foreword footnote 'I much prefer history, true or feigned, with its varied applicability...'. The instance analysed (Aragorn naming Arwen Tinuviel, comparing himself with Beren) sits inside Appendix A, so the 'in the Appendices' limb holds.",
+   "fromFile": "verdicts-tolkien-i448-462.json"
+  }
+ },
+ {
+  "index": 454,
+  "feature": "record names its own scribes",
+  "claim": "The Tale of Aragorn and Arwen is attributed within the frame to Barahir, grandson of Faramir, writing after Aragorn's death, with an abbreviated version entered in the Thain's Book by Findegil.",
+  "source": "Wikipedia, 'The Tale of Aragorn and Arwen'",
+  "url": "https://en.wikipedia.org/wiki/The_Tale_of_Aragorn_and_Arwen",
+  "page": "§ Frame story",
+  "quote": "written after Aragorn's death by Barahir",
+  "angle": "civic-record",
+  "verdict": {
+   "index": 454,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "written after Aragorn's death by Barahir, grandson of Faramir and Eowyn",
+   "note": "Frame-story sentence verbatim: 'the frame story is that the tale was written after Aragorn's death by Barahir, grandson of Faramir and Eowyn, and that an abbreviated version of the tale was included in the copy of the Thain's Book made by Findegil.' Page's own Tolkien footnote adds 'The full tale is stated to have been written by Barahir, grandson of the Steward Faramir, some time after the passing of the King.' Only nuance: Findegil made the copy of the Thain's Book into which the abbreviated version was added.",
+   "fromFile": "verdicts-tolkien-i448-462.json"
+  }
+ },
+ {
+  "index": 457,
+  "feature": "appendices as guidebook",
+  "claim": "The Appendices function as a guidebook to the relics of Middle-earth's history and, in Tolkien's own words quoted by Gray, played a very large part in readers' pleasure.",
+  "source": "Richard Gray, 'The Read Goes Ever On: Appendices' (The Reel Bits)",
+  "url": "https://thereelbits.com/2021/11/25/the-read-goes-ever-on-appendices/",
+  "page": "main text",
+  "quote": "a guidebook to those relics",
+  "angle": "civic-record",
+  "verdict": {
+   "index": 457,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the Appendices are something of a guidebook to those relics",
+   "note": "Both limbs verbatim on the live page. Gray: 'So by this measure, the Appendices are something of a guidebook to those relics, still within the framing device of the fictional Red Book of Westmarch'. Tolkien (Jan 1961 letter to Allen & Unwin, quoted by Gray): 'the Appendices have played a very large part in reader's pleasure, in turning library readers into purchasers...'. Page hedges with 'something of a'; page writes 'reader's pleasure' (singular possessive).",
+   "fromFile": "verdicts-tolkien-i448-462.json"
+  }
+ },
+ {
+  "index": 458,
+  "feature": "modern words in nineteenth-century structures",
+  "claim": "Siepmann's corpus comparison finds Tolkien uses roughly twice the nineteenth-century key words of his baseline and sets modern words inside nineteenth-century structural patterns so that common English words are rendered strange.",
+  "source": "Sharon L. Bolding, review of Kullmann & Siepmann, Mythlore 41.1 (2022)",
+  "url": "https://dc.swosu.edu/mythlore/vol41/iss1/23/",
+  "page": "pp. 3–4",
+  "quote": "common English words are rendered strange",
+  "angle": "civic-record",
+  "verdict": {
+   "index": 458,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "modern words placed within 19th-century structural patterns; rendered strange",
+   "note": "Raw PDF via Wayback (live dc.swosu.edu viewcontent.cgi 403s), Mythlore 41.1 pp. 279-280 (PDF sheet 5). 'Concerning 19th-century terminology, he had a propensity to use about twice the number of key words.' Baseline limb supported: Siepmann compares to 'curated sets of 19th- and 20th-century writings ... 30 and 94 million words', key = 'outstandingly frequent compared to the baseline corpus'. Quote verbatim: 'while the words were modern, they were placed within 19th-century structural patterns of speech, such that common English words are rendered strange to the eye of the reader.' Chapter explicitly Siepmann's.",
+   "fromFile": "verdicts-tolkien-i448-462.json"
+  }
+ },
+ {
+  "index": 459,
+  "feature": "per-character registers",
+  "claim": "Kullmann's character-by-character stylistics finds Gandalf and Frodo the most flexible registers, Sam the most evolving, Gimli and Legolas the most traditional, and Merry and Pippin speaking common English as reality-based touchstones.",
+  "source": "Sharon L. Bolding, review of Kullmann & Siepmann, Mythlore 41.1 (2022)",
+  "url": "https://dc.swosu.edu/mythlore/vol41/iss1/23/",
+  "page": "p. 8",
+  "quote": "reality-based touchstones",
+  "angle": "civic-record",
+  "verdict": {
+   "index": 459,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Gandalf and Frodo most flexible; Merry and Pippin reality-based touchstones",
+   "note": "Same PDF, p. 284 (sheet 10), on the penultimate chapter 'Language and Character' and its '\"character by character\" stylistics of direct speech': 'Gandalf and Frodo are found to be the most flexible. Sam undergoes the most evolution. Gimli and Legolas represent the most traditional registers for their typology. Merry and Pippen use common English language as befitting their role of reality-based touchstones.' Quote verbatim. Attribution nuance: this sentence says 'the author', with Kullmann named as the author of the immediately preceding chapters; the review spells it 'Pippen'.",
+   "fromFile": "verdicts-tolkien-i448-462.json"
+  }
+ },
+ {
+  "index": 461,
+  "feature": "register modulation / narrator intrusion",
+  "claim": "The fox's thoughts in Fellowship ch. 3 are a failure of tone, an intrusive narrator jarring the reader after ch. 2's seriousness.",
+  "source": "Michael Drout, Wormtalk, 'How to Critique Tolkien's Prose Style' (2007-04-12)",
+  "url": "http://wormtalk.blogspot.com/2007/04/how-to-critique-tolkiens-prose-style-at.html",
+  "quote": "moving us back towards the intrusive narrator of The Hobbit",
+  "angle": "primaries",
+  "verdict": {
+   "index": 461,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a failure of tone ... and jarring to the readers",
+   "note": "Live blogspot post reached. Verbatim: 'the narrator's giving us the thoughts (in English) of a fox in Chapter 3 of The Fellowship of the Ring. I think this is a failure of tone (moving us back towards the intrusive narrator of The Hobbit) and jarring to the readers, who, after getting through all of the cute hobbit-business and small jokes of Chapter 1, have all of a sudden entered into a much more serious world in Chapter 2 (The Shadow of the Past).' Every limb present. Drout later concedes 'an irrational dislike' of the fox passage.",
+   "fromFile": "verdicts-tolkien-i448-462.json"
+  }
+ },
+ {
+  "index": 462,
+  "feature": "ornamental vs functional archaism",
+  "claim": "'thrawn' is decorative archaism, whereas eyot, laving, louver and dwimmerlaik are precise technical words with a function.",
+  "source": "Drout, Wormtalk 2007-04-12",
+  "url": "http://wormtalk.blogspot.com/2007/04/how-to-critique-tolkiens-prose-style-at.html",
+  "quote": "merely an ornamental archaism",
+  "angle": "primaries",
+  "verdict": {
+   "index": 462,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "thrawn seems merely an ornamental archaism; eyot, laving give technical description",
+   "note": "Same post, verbatim: 'the \"thrawn\" trees: everything up to that point is good, but \"thrawn\" seems to me merely an ornamental archaism. You could make the argument that it provides additional color, but I wouldn't necessarily accept it as giving an important technical description the way that eyot, laving, louver, dwimmerlaik, etc., do in other places.' Both limbs supported; the judgment is hedged as Drout's own ('seems to me'), and commenters dispute it (one notes 'thrawn' is current Scots).",
+   "fromFile": "verdicts-tolkien-i448-462.json"
+  }
+ },
+ {
   "index": 463,
   "feature": "landscape-description density",
   "claim": "Drout estimates that over half the novel is landscape description and asks whether fewer words would have been as effective.",
@@ -7252,6 +7420,214 @@
    "trueWording": "",
    "note": "Verbatim: 'Gandalf himself uses an older vocabulary than usual, as if to authenticate himself' (p. 109). The second limb is on p. 110: 'Gandalf's account of Isildur makes a point through its combination of ancient words and endings (\"glede\", \"fadeth\", \"loseth\", etc.) with sudden recall of the words of Bilbo and Gollum.' Two wording differences, neither changing the substance: Shippey writes 'Gandalf's account of Isildur', not 'Isildur's scroll', and names Bilbo as well as Gollum. Page break markers 110 and 111 bracket the passage, confirming the cited pp. 109-10.",
    "fromFile": "verdicts-tolkien-i463-477.json"
+  }
+ },
+ {
+  "index": 478,
+  "feature": "per-speaker register (Aragorn vs Boromir)",
+  "claim": "Aragorn's language is deceptively modern and easy-going but wider in range than Boromir's stiff magniloquence, and the contrast carries their rivalry.",
+  "source": "Shippey, The Road to Middle-earth, p. 110",
+  "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+  "quote": "Boromir's slightly wooden magniloquence",
+  "angle": "primaries",
+  "verdict": {
+   "index": 478,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Aragorn's language deceptively modern, even easy-going on occasion, but with greater range than Boromir's slightly wooden magniloquence",
+   "note": "Shippey p.110 (djvu page marker confirms): 'More subtly Aragorn and Boromir strike sparks off each other through their ways of speech as well as their claims, Aragorn's language deceptively modern, even easy-going on occasion, but with greater range than Boromir's slightly wooden magniloquence.' Quote verbatim; the rivalry limb is carried by 'strike sparks off each other' and by Aragorn 'letting his rival have the last word'.",
+   "fromFile": "verdicts-tolkien-i478-492.json"
+  }
+ },
+ {
+  "index": 479,
+  "feature": "dwarvish understatement",
+  "claim": "Dwarf dialogues (Dáin and Sauron's messenger, Elrond and Gimli, Théoden) delight in cool polite surface over passionate interior, so 'not too long' means 'extremely rapidly'.",
+  "source": "Shippey, The Road to Middle-earth, p. 110",
+  "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+  "quote": "passionate interior and polite or rational expression",
+  "angle": "primaries",
+  "verdict": {
+   "index": 479,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "delight in the contrast between passionate interior and polite or rational expression",
+   "note": "Shippey p.110, verbatim: 'Their unifying feature is delight in the contrast between passionate interior and polite or rational expression... Thus the messenger's \"things will not seem so well\" works as violent threat; \"not too long\" means \"extremely rapidly\".' All three named dialogues present: Dain and Sauron's messenger, 'Elrond and Gimli swap grim proverbs', 'Theoden King silences Merry'.",
+   "fromFile": "verdicts-tolkien-i478-492.json"
+  }
+ },
+ {
+  "index": 480,
+  "feature": "language variation as ethical dramatisation",
+  "claim": "Stylistic variation between speakers is Tolkien's thorough and economical way of dramatising ethical debate.",
+  "source": "Shippey, The Road to Middle-earth, p. 111",
+  "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+  "quote": "a thorough and economical way of dramatising ethical debate",
+  "angle": "primaries",
+  "verdict": {
+   "index": 480,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Language variation gives Tolkien a thorough and economical way of dramatising ethical debate",
+   "note": "Shippey p.111, verbatim sentence. The page's subject noun is 'Language variation' rather than 'stylistic variation between speakers', but the whole preceding analysis is of the Council speakers' contrasting styles, so the limb holds.",
+   "fromFile": "verdicts-tolkien-i478-492.json"
+  }
+ },
+ {
+  "index": 481,
+  "feature": "whole book as stylistic contrast",
+  "claim": "The whole of The Lord of the Rings works on its larger scale like the Council of Elrond, depending on relished stylistic variation and separate tableaux more than on plot.",
+  "source": "Shippey, The Road to Middle-earth, p. 111",
+  "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+  "quote": "the relishing of stylistic variation",
+  "angle": "primaries",
+  "verdict": {
+   "index": 481,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the single chapter relies for a great part of its effect on the relishing of stylistic variation",
+   "note": "Shippey p.111, verbatim: 'The whole of The Lord of the Rings is on its larger scale like \"The Council of Elrond\"... just as the single chapter relies for a great part of its effect on the relishing of stylistic variation, so the work as a whole depends very largely on tableaux: separate images of places, peoples, societies...'. The 'more than on plot' limb is supported by the page's own contrast with 'critics or reviewers skimming through for the plot' and tableaux 'there mostly or largely for their own sake'.",
+   "fromFile": "verdicts-tolkien-i478-492.json"
+  }
+ },
+ {
+  "index": 482,
+  "feature": "loose semantic fit",
+  "claim": "Tolkien deliberately emulates Malory's medieval tolerance of semantically loose phrasing ('by stock or by stone', echoing Pearl), which puzzles readers trained on modern exactness.",
+  "source": "Shippey, The Road to Middle-earth, pp. 160–1",
+  "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+  "quote": "His emulation of 'loose semantic fit'",
+  "angle": "primaries",
+  "verdict": {
+   "index": 482,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "His emulation of 'loose semantic fit' does however puzzle many modern readers",
+   "note": "Shippey pp.160-1, verbatim. Every limb on the page: Malory 'did not feel this urge towards exactness at all' and 'Malory's insensitivity in this respect (a common thing in medieval writers) had not led necessarily to failure'; \"'By stock or by stone' is certainly a deliberate echo of the fourteenth century poem Pearl\"; puzzled readers are 'those especially who have been sophisticated by modern literary practice'.",
+   "fromFile": "verdicts-tolkien-i478-492.json"
+  }
+ },
+ {
+  "index": 483,
+  "feature": "register rise in elvish speech",
+  "claim": "Galadriel's farewell to Treebeard suddenly shifts to less plain language with an elvish place-name, against Treebeard's triple 'feel ... feel ... smell'.",
+  "source": "Shippey, The Road to Middle-earth, p. 161",
+  "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+  "quote": "sudden change to less plain language",
+  "angle": "primaries",
+  "verdict": {
+   "index": 483,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the sudden change to less plain language in Galadriel's speech, with its elvish place-name",
+   "note": "Shippey p.161, verbatim: '...the triple repetition of \"feel ... feel ... smell\", or the sudden change to less plain language in Galadriel's speech, with its elvish place-name'. The triple repetition is Treebeard's ('I feel it in the water, I feel it in the earth, and I smell it in the air'); Galadriel's reply carries the place-name Tasarinan and 'Farewell!'. Shippey lists the two as separate candidate irritants rather than explicitly setting one 'against' the other, but both facts are on the page.",
+   "fromFile": "verdicts-tolkien-i478-492.json"
+  }
+ },
+ {
+  "index": 484,
+  "feature": "archaic effect without archaic words",
+  "claim": "In an exchange containing no archaic word except perhaps 'naught', a strong archaic effect is produced by inverting nouns and adjectives and by adverbs of time such as 'yet' and 'seldom'.",
+  "source": "Shippey, The Road to Middle-earth (chapter on style, 'hovering between styles')",
+  "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+  "quote": "by inversion of nouns and adjectives",
+  "angle": "primaries",
+  "verdict": {
+   "index": 484,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a strong archaic effect is produced, by inversion of nouns and adjectives, careful selection of adverbs of time like 'yet' and 'seldom'",
+   "note": "Shippey pp.199-200 (Legolas/Gimli exchange at Minas Tirith), verbatim: 'There is no archaic word in the passage, except perhaps \"naught\". Nevertheless a strong archaic effect is produced, by inversion of nouns and adjectives, careful selection of adverbs of time like \"yet\" and \"seldom\", and other less obvious linguistic features.' The source field's 'hovering between styles' is also verbatim in the preceding sentence.",
+   "fromFile": "verdicts-tolkien-i478-492.json"
+  }
+ },
+ {
+  "index": 485,
+  "feature": "modern rewrite would ring false",
+  "claim": "Tolkien could have written the same exchange in modern English, but the discrepancy between modern usage and archaic thought would have sounded bogus, a disunion of word and meaning.",
+  "source": "Shippey, The Road to Middle-earth",
+  "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+  "quote": "would simply have sounded bogus",
+  "angle": "primaries",
+  "verdict": {
+   "index": 485,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The discrepancy between modern usage and archaic thought would simply have sounded bogus, leading to a deep 'disunion of word and meaning'",
+   "note": "Shippey p.200, verbatim, and the preceding sentence supplies the first limb: 'It would have been no trouble to him to write the exchange in modern English' (with a modern-English rewrite given).",
+   "fromFile": "verdicts-tolkien-i478-492.json"
+  }
+ },
+ {
+  "index": 486,
+  "feature": "overworked cadence (hostile)",
+  "claim": "Manlove condemns the Treebeard/Galadriel farewell for over-worked cadences and a droning monotonous pitch offering only sentimental indulgence or embarrassment.",
+  "source": "C. N. Manlove, Modern Fantasy (1975), quoted verbatim in Shippey, Road to Middle-earth p. 160 (Google Books confirms 'overworked' on p. 188 of the 2020 edition)",
+  "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+  "quote": "The overworked cadences, the droning, monotonous pitch",
+  "angle": "primaries",
+  "verdict": {
+   "index": 486,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The overworked cadences, the droning, monotonous pitch, the sheer sense of hearts charged not with lead but gas, can offer only nervous sentimental indulgence or plain embarrassment to the reader",
+   "note": "Shippey p.160 quotes Manlove verbatim; attribution on the page is explicit ('Modern Fantasy by Dr C. N. Manlove, who then goes straight on as usual to spearhead the critical assault and declare:'), and the passage under attack is 'the parting of Treebeard from Celeborn and Galadriel in The Return of the King, p. 259'. The claim's shortened 'sentimental indulgence or embarrassment' drops Manlove's 'nervous' and 'plain' but adds nothing.",
+   "fromFile": "verdicts-tolkien-i478-492.json"
+  }
+ },
+ {
+  "index": 487,
+  "feature": "elegiac register (hostile comparison)",
+  "claim": "Manlove sets Ector's lament in Malory and the Ubi sunt of The Wanderer against Tolkien's farewell as real elegy with something to be elegiac about.",
+  "source": "Manlove 1975, quoted in Shippey, Road to Middle-earth p. 160",
+  "url": "https://archive.org/stream/the-road-to-middle-earth-how-j.-r.-r.-tolkien-created-a-new-mythology/The%20Road%20to%20Middle-Earth%20_%20How%20J.R.R.%20Tolkien%20Created%20a%20New%20Mythology%20(%20PDFDrive%20)_djvu.txt",
+  "quote": "This is real elegy",
+  "angle": "primaries",
+  "verdict": {
+   "index": 487,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Compare this with, say, Ector's lament over Arthur in Malory... 'This is real elegy, for it has something to be elegiac about'",
+   "note": "Shippey p.160, verbatim: Manlove cites Ector's lament in Malory, the 'Survivor's Lament' in Beowulf, and a well-known Ubi sunt passage from 'The Wanderer', observing 'This is real elegy, for it has something to be elegiac about'. (Shippey adds that Manlove got it wrong: 'As for Ector's lament, it was in fact over Lancelot, not Arthur' - a defect in Manlove, not in this claim.)",
+   "fromFile": "verdicts-tolkien-i478-492.json"
+  }
+ },
+ {
+  "index": 489,
+  "feature": "professorial amateurishness (hostile)",
+  "claim": "Edmund Wilson judged Tolkien's prose and verse to be on the same level of professorial amateurishness.",
+  "source": "Edmund Wilson 1956, as quoted in Siepmann, 'Tolkien as a stylist' (CL2017)",
+  "url": "https://www.birmingham.ac.uk/documents/college-artslaw/corpus/conference-archives/2017/general/paper239.pdf",
+  "quote": "the same level of professorial amateurishness",
+  "angle": "primaries",
+  "verdict": {
+   "index": 489,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "prose and verse are on the same level of professorial amateurishness",
+   "note": "Siepmann CL2017 PDF, opening sentence, verbatim: 'scathing criticisms to the effect that \"prose and verse are on the same level of professorial amateurishness\" (Wilson, 1995, p. 59)'. The paper names the critic by initial only ('Wilson, E.'); its reference list gives Wilson, E. (1956), 'Oo, Those Awful Orcs', The Nation, April 14 - i.e. Edmund Wilson's essay - so the forename is a safe expansion. (The paper's own in-text date '1995' does not match its reference list's 1956; that is the paper's inconsistency, not a limb of the claim.)",
+   "fromFile": "verdicts-tolkien-i478-492.json"
+  }
+ },
+ {
+  "index": 491,
+  "feature": "unironic high style",
+  "claim": "Anthony Lane observed that Tolkien's high style had hardly been used without irony since Tennyson's Idylls, so reverting to it in the 1950s challenged modernity head-on.",
+  "source": "Anthony Lane 2001, as quoted in Patrick Curry, 'The Critical Response to Tolkien's Fiction'",
+  "url": "http://www.patrickcurry.co.uk/papers/Critical%20Response%20for%202nd%20edn.pdf",
+  "quote": "Hardly anyone had used it unironically since Tennyson",
+  "angle": "primaries",
+  "verdict": {
+   "index": 491,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Hardly anyone had used it unironically since Tennyson's 'Idylls of the King,' and to revert to it with a straight face in the nineteen-fifties was to mount a head-on challenge to modernity",
+   "note": "Curry, 'The Critical Response to Tolkien's Fiction', verbatim, attributed on the page to 'Anthony Lane (2001)' seeing 'the same dynamic in Tolkien's \"high\" style'; the reference list gives Lane, Anthony. 2001. 'The Hobbit Habit', The New Yorker, December 10.",
+   "fromFile": "verdicts-tolkien-i478-492.json"
+  }
+ },
+ {
+  "index": 492,
+  "feature": "archaic 'high' style as taste barrier",
+  "claim": "Curry concedes Tolkien's tone is sometimes sentimental and that the occasional archaic and high style will never suit some readers.",
+  "source": "Patrick Curry, 'The Critical Response to Tolkien's Fiction' (Companion ch. 25)",
+  "url": "http://www.patrickcurry.co.uk/papers/Critical%20Response%20for%202nd%20edn.pdf",
+  "quote": "its occasional archaic and 'high' style",
+  "angle": "primaries",
+  "verdict": {
+   "index": 492,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Tolkien's tone (not unlike that of Dickens) is sometimes sentimental, and its occasional archaic and 'high' style will never be to some readers' tastes",
+   "note": "Curry, verbatim in Curry's own voice, in the passage listing reasons why The Lord of the Rings 'will never have universal appeal'. The quoted fragment matches word for word; the page sets 'high' in curly double quotes where the claim uses single quotes.",
+   "fromFile": "verdicts-tolkien-i478-492.json"
   }
  },
  {

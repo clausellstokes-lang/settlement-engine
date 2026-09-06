@@ -196,5 +196,129 @@
    "note": "Live blogspot page, HTTP 200. The quoted limb is verbatim: 'He would rather change the English language and make new words than provide us with a substandard translation.' The consistency limb is supported in other words: 'He created words in the English language simply so he could consistently translate the Red Book of Westmarch from Westron into English.' Only the Appendix F locus fails; the post's stated source is 'his forward in the first edition of The Fellowship of the Ring'.",
    "fromFile": "verdicts-tolkien-i418-432.json"
   }
+ },
+ {
+  "index": 448,
+  "feature": "annals versus Tales as two modes",
+  "claim": "Tolkien told Waldman that the Rings of Power and the Downfall of Númenor were dealt with annalistically and in two Tales or Accounts, naming a two-mode scheme of compressed annal and expanded tale.",
+  "source": "Norbert Schürer, 'Second Age, Middle Age', JTR 15.2 (2022), quoting Letter 131",
+  "url": "https://scholar.valpo.edu/journaloftolkienresearch/vol15/iss2/6",
+  "page": "p. 8",
+  "quote": "dealt with annalistically, and in two Tales or Accounts",
+  "angle": "civic-record",
+  "verdict": {
+   "index": 448,
+   "verdict": "PARTIAL",
+   "trueWording": "Tolkien: \"dealt with annalistically, and in two Tales or Accounts\" (Letters 151)",
+   "note": "Raw PDF reached via Wayback (live viewcontent.cgi 403s). Quote verbatim on PDF sheet 10 = article p. 8: 'Tolkien writes that The Rings of Power and the Downfall of Numenor are \"dealt with annalistically, and in two Tales or Accounts\" (Letters 151)'. Schuerer does NOT read this as two modes: he says 'These tales or accounts are perhaps the annals collected in the section \"The Tale of Years of the Second Age\"', i.e. he identifies the tales WITH the annals rather than opposing compressed annal to expanded tale.",
+   "unsupportedLimb": "naming a two-mode scheme of compressed annal and expanded tale",
+   "fromFile": "verdicts-tolkien-i448-462.json"
+  }
+ },
+ {
+  "index": 449,
+  "feature": "Anglo-Saxon Chronicle model",
+  "claim": "Tolkien's annals are modelled on the Anglo-Saxon Chronicle, with entries opening 'Here' or 'In this year', and his Old English versions use the early West Saxon dialect of the Chronicle's earliest parts.",
+  "source": "Himring, 'Fingon's rescue of Maedhros in Old English' (Silmarillion Writers' Guild)",
+  "url": "https://www.silmarillionwritersguild.org/node/1854/single?page=0",
+  "page": "notes",
+  "quote": "early West Saxon (second half of the ninth century)",
+  "angle": "civic-record",
+  "verdict": {
+   "index": 449,
+   "verdict": "PARTIAL",
+   "trueWording": "annals clearly inspired by Anglo-Saxon Chronicle; dialect early West Saxon",
+   "note": "Quote verbatim: 'The dialect of these annals is the early West Saxon (second half of the ninth century) of traditional Old English textbooks and of the earliest parts of the Anglo-Saxon Chronicle'; also 'The style of Tolkien's annals ... is clearly inspired by the Anglo-Saxon Chronicle'. The opening-formula limb is only shown by one example, never stated as a convention: the AB I year-2 entry reads 'Here Fingon son of Fingolfin healed the feud...' / OE 'Her Fingon Fingolfines sunu...' cribbed as 'Here (this year)'. The page never writes 'In this year', and the other displayed entry opens 'Tha weartd' ('Then was').",
+   "unsupportedLimb": "that annal entries open 'Here' or 'In this year' as a convention",
+   "fromFile": "verdicts-tolkien-i448-462.json"
+  }
+ },
+ {
+  "index": 455,
+  "feature": "embedded first-person witnesses in annals",
+  "claim": "Barkley argues the main part of the Tale is narrated by Aragorn and Armstrong considers Arwen as narrator after his death, so the annal admits embedded first-person witnesses within an editorial frame.",
+  "source": "Wikipedia, 'The Tale of Aragorn and Arwen'",
+  "url": "https://en.wikipedia.org/wiki/The_Tale_of_Aragorn_and_Arwen",
+  "page": "§ Analysis",
+  "quote": "narrated by Aragorn",
+  "angle": "civic-record",
+  "verdict": {
+   "index": 455,
+   "verdict": "PARTIAL",
+   "trueWording": "considers the main part narrated by Aragorn; Armstrong: Arwen narrator",
+   "note": "Both attributions verbatim: Barkley 'considers the main part of the tale to have been narrated by Aragorn'; footnote: Armstrong 'examines the implications of one of the narrators of the tale being Arwen as she related the story after Aragorn's death'. The page frames this as narrative voice / point of view and never says the narration is first-person, nor calls the text an annal; the editorial frame is real (Pezzini's 'scribal glosses, later notes, and editorial references') but the synthesis limb is the claimant's, not the page's.",
+   "unsupportedLimb": "so the annal admits embedded first-person witnesses within an editorial frame",
+   "fromFile": "verdicts-tolkien-i448-462.json"
+  }
+ },
+ {
+  "index": 456,
+  "feature": "historian's narrative style",
+  "claim": "Appendix A reads like a real history because its narrative style is that of a historian summarising primary documents rather than a novelist.",
+  "source": "Tolkien Geek, 'Appendix A (Part One)'",
+  "url": "https://tolkiengeek.blogspot.com/2006/02/appendix-part-one.html",
+  "page": "main text",
+  "quote": "reads like a real history",
+  "angle": "civic-record",
+  "verdict": {
+   "index": 456,
+   "verdict": "PARTIAL",
+   "trueWording": "Appendix A reads like a real history; historian summarizing primary documents",
+   "note": "Live page reached. Sentence: 'Appendix A reads like a real history and Tolkien's narrative style is that of an historian who is summarizing information that he derived from primary documents.' Quote verbatim and the historian/primary-documents limb verbatim, but the post 'novel'/'novelist' contrast does not appear anywhere on the page (the only hit for 'author' is a commenter), and the page joins the two clauses with 'and', not a causal 'because'.",
+   "unsupportedLimb": "rather than a novelist (the page never contrasts historian with novelist)",
+   "fromFile": "verdicts-tolkien-i448-462.json"
+  }
+ },
+ {
+  "index": 460,
+  "feature": "names generate story",
+  "claim": "Shippey reports Tolkien's working rule that one should always start with a name, because a name produces a story, which underlies the place-name etymologies that open and close his civic records.",
+  "source": "Tom Shippey, 'J.R.R. Tolkien and Philology' (Tolkien Estate)",
+  "url": "https://www.tolkienestate.com/scholarship/tom-shippey-j-r-r-tolkien-and-philology/",
+  "page": "main text",
+  "quote": "Give me a name and it produces a story",
+  "angle": "civic-record",
+  "verdict": {
+   "index": 460,
+   "verdict": "PARTIAL",
+   "trueWording": "I always in writing, always start with a name",
+   "note": "Live page reached. Quote verbatim as a pull-quote: 'I always in writing, always start with a name. Give me a name and it produces a story.' - but the page credits it to 'Tolkien, audio interview by Denys Gueroult, 1965', not to Shippey's reporting; Shippey's own prose says only that names are the widest 'survivor-genre', 'full of buried information', and that Tolkien 'took deep personal interest in names, and was always ready to consider their etymologies'. The application limb is absent from the page entirely.",
+   "unsupportedLimb": "which underlies the place-name etymologies that open and close his civic records",
+   "fromFile": "verdicts-tolkien-i448-462.json"
+  }
+ },
+ {
+  "index": 488,
+  "feature": "'not literature' verdict (hostile)",
+  "claim": "Raffel grants The Lord of the Rings magnificence but denies it the status of literature, on grounds including style.",
+  "source": "Burton Raffel 1968, p. 218, as quoted in Kullmann & Siepmann, Tolkien as a Literary Artist, Introduction n. 11",
+  "url": "https://link.springer.com/chapter/10.1007/978-3-030-69299-5_1",
+  "quote": "is not literature",
+  "angle": "primaries",
+  "verdict": {
+   "index": 488,
+   "verdict": "PARTIAL",
+   "trueWording": "We disagree with critics like Burton Raffel who declares that while 'The Lord of the Rings is a magnificent performance, full of charm, excitement, and affection [...] it is not [...] literature' (Raffel 218)",
+   "note": "Raw page reached only through a real browser (curl and WebFetch both hit Springer's JS 'Client Challenge'; no Wayback capture exists; Crossref and OpenAlex carry no abstract). Note 11 is exactly as above, so magnificence-granted and literature-denied are both supported and the p.218 cite matches the Works Cited entry (Raffel, 'The Lord of the Rings as Literature', 1968, 218-246). Two defects: the quoted words are not contiguous on the page - the page reads 'it is not [...] literature' with a bracketed elision, not 'is not literature' - and the note gives no reason at all for Raffel's verdict.",
+   "unsupportedLimb": "'on grounds including style' - note 11 states Raffel's verdict without giving any grounds, stylistic or otherwise",
+   "fromFile": "verdicts-tolkien-i478-492.json"
+  }
+ },
+ {
+  "index": 490,
+  "feature": "ordinary yet dignified diction",
+  "claim": "Siepmann characterises Kirk's 1971 essay as praise of Tolkien's ordinary yet dignified diction, against Wilson's scorn.",
+  "source": "Elizabeth Kirk 1971 (1977 reprint), as characterised in Siepmann CL2017",
+  "url": "https://www.birmingham.ac.uk/documents/college-artslaw/corpus/conference-archives/2017/general/paper239.pdf",
+  "quote": "Tolkien's ordinary yet dignified diction",
+  "angle": "primaries",
+  "verdict": {
+   "index": 490,
+   "verdict": "PARTIAL",
+   "trueWording": "praise of Tolkien's ordinary yet dignified diction (Kirk, 1977, Rosebury, 2003, p. 22)",
+   "note": "Quote verbatim in the PDF's opening sentence, and the against-Wilson framing is supported by the 'ranging from scathing criticisms... to praise of...' construction. But the page dates Kirk 1977, not 1971, in both the in-text citation and the reference list: 'Kirk, E. (1977). I Would Rather Have Written in Elvish: Language, Fiction, and The Lord of the Rings. Novel 5, 5-18. Reprinted in M. Spilka (Ed.) (1977) Towards a Poetics of Fiction'. The year 1971 appears nowhere in the paper.",
+   "unsupportedLimb": "'Kirk's 1971 essay' - the page dates the essay 1977 in both citation and reference list, and never prints 1971",
+   "fromFile": "verdicts-tolkien-i478-492.json"
+  }
  }
 ]

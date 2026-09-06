@@ -242,3 +242,135 @@ C("writerswrite-worldbuild.txt","consequence on a household",
   "Dean says Hobb's characters grow or die or get worse rather than remaining stable.",
   "Christopher Luke Dean, 'The Greatest Fictional World Builders: Robin Hobb', Writers Write, 2020","https://www.writerswrite.co.za/the-greatest-fictional-world-builders-robin-hobb/",
   "Her characters grow or die or get worse","Later section",kind="analysis",date="2020-02-12")
+
+SOURCES += [
+ {"title":"On the use of epigraphs and metanarratives in Robin Hobb's 'Assassin's Apprentice' (Jeffrey Outcalt, Substack)","url":"https://jeffreydavidoutcalt.substack.com/p/on-the-use-of-epigraphs-and-metanarratives","kind":"analysis","substantive":True,"date":"2024-07-02","route":"curl browser-UA on live URL"},
+ {"title":"Fool's Assassin: How Robin Hobb Writes Lyrical Fantasy Without Being Boring (M Harold Page, Black Gate)","url":"https://www.blackgate.com/2016/02/09/fools-assassin-how-robin-hobb-writes-lyrical-fantasy-without-being-boring/","kind":"analysis","substantive":True,"date":"2016-02-09","route":"curl browser-UA on live URL"},
+ {"title":"Interview: Robin Hobb (Lightspeed Magazine / The Geek's Guide to the Galaxy)","url":"https://www.lightspeedmagazine.com/nonfiction/interview-robin-hobb/","kind":"own-words","substantive":True,"date":"2012-04","route":"curl browser-UA on live URL"},
+ {"title":"Robin Hobb's Writing Advice: 3 Tips for Crafting Your Villian (Tayan Hatch, Dragonsteel Books)","url":"https://www.dragonsteelbooks.com/blogs/the-cognitive-realm/robin-hobb-writing-villians","kind":"own-words","substantive":True,"date":"2024-12-19","route":"curl browser-UA on live URL"},
+ {"title":"As You Intend To Be (Robin Hobb's Infrequent and Off Topic Blog)","url":"https://www.robinhobb.com/blog/posts/36450","kind":"own-words","substantive":True,"date":"2020-05-21","route":"curl browser-UA on live URL"},
+ {"title":"The Assassin's Canvas: A Comprehensive Analysis... (unsigned article, rpgstorytellers.com)","url":"https://rpgstorytellers.com/the-assassins-canvas-a-comprehensive-analysis-of-narrative-interiority-magic-systems-and-cultural-anthropology-in-robin-hobbs-farseer-trilogy/","kind":"analysis","substantive":True,"date":"2026-01-13","route":"curl browser-UA on live URL"},
+ {"title":"June Author Crush: Robin Hobb... is a Master Worldbuilder (Rachel Carter, BookTrib)","url":"https://booktrib.com/2017/06/15/june-author-crush-robin-hobb-worldbuilder/","kind":"reception","substantive":False,"date":"2017-06-15","route":"curl browser-UA on live URL"},
+]
+
+# --- Outcalt craft essay on epigraphs ---
+C("outcalt-epigraphs.txt","civic record register",
+  "Outcalt says the epigraphs at the beginning of each chapter carry historical facts about the Six Duchies.",
+  "Jeffrey Outcalt, 'On the use of epigraphs and metanarratives in Robin Hobb's Assassin's Apprentice', 2024","https://jeffreydavidoutcalt.substack.com/p/on-the-use-of-epigraphs-and-metanarratives",
+  "The epigraphs at the beginning of each chapter will have historical facts","Section establishing the pattern",kind="analysis",date="2024-07-02",registerHint="chronicle-line")
+C("outcalt-epigraphs.txt","civic record register",
+  "Outcalt characterises the opening in-world history epigraph of Assassin's Apprentice as informative yet boring.",
+  "Jeffrey Outcalt, Substack craft essay on Hobb's epigraphs, 2024","https://jeffreydavidoutcalt.substack.com/p/on-the-use-of-epigraphs-and-metanarratives",
+  "A pretty informative, yet boring, introduction epigraph","On the first epigraph",kind="analysis",date="2024-07-02",registerHint="chronicle-line")
+C("outcalt-epigraphs.txt","civic record register",
+  "Outcalt says the framing makes the reader feel they are reading from the same tome the narrator scribed.",
+  "Jeffrey Outcalt, Substack craft essay on Hobb's epigraphs, 2024","https://jeffreydavidoutcalt.substack.com/p/on-the-use-of-epigraphs-and-metanarratives",
+  "It reads as if we are reading from the same tome","On metanarrative",kind="analysis",date="2024-07-02",registerHint="dossier-archivist")
+C("outcalt-epigraphs.txt","withheld information and inference",
+  "Outcalt says the bias in the Queen Desire epigraph alerts the reader to the potential of an unreliable narrator.",
+  "Jeffrey Outcalt, Substack craft essay on Hobb's epigraphs, 2024","https://jeffreydavidoutcalt.substack.com/p/on-the-use-of-epigraphs-and-metanarratives",
+  "This should immediately alert us to the potential of an unreliable narrator","On the chapter 7 epigraph",kind="analysis",date="2024-07-02",registerHint="chronicle-line")
+C("outcalt-epigraphs.txt","omission as information",
+  "Outcalt says Hobb leaves it to the reader to do light investigative work rather than cutting to flashback.",
+  "Jeffrey Outcalt, Substack craft essay on Hobb's epigraphs, 2024","https://jeffreydavidoutcalt.substack.com/p/on-the-use-of-epigraphs-and-metanarratives",
+  "leaves it up to the reader to do some light investigative work","On metanarrative",kind="analysis",date="2024-07-02")
+C("outcalt-epigraphs.txt","civic record register",
+  "Outcalt says some epigraphs raise details about characters that are disclosed nowhere else in the book.",
+  "Jeffrey Outcalt, Substack craft essay on Hobb's epigraphs, 2024","https://jeffreydavidoutcalt.substack.com/p/on-the-use-of-epigraphs-and-metanarratives",
+  "details about the characters in ways that are NOT disclosed anywhere else","On later epigraphs",kind="analysis",date="2024-07-02",registerHint="dossier-archivist")
+C("outcalt-epigraphs.txt","annalist voice and deep time",
+  "Outcalt describes a slow congealing of fact and fiction across the sequence of epigraphs.",
+  "Jeffrey Outcalt, Substack craft essay on Hobb's epigraphs, 2024","https://jeffreydavidoutcalt.substack.com/p/on-the-use-of-epigraphs-and-metanarratives",
+  "the slow congealing of fact and fiction in the epigraphs","On the chapter 7 epigraph",kind="analysis",date="2024-07-02",registerHint="chronicle-line")
+
+# --- M Harold Page craft dissection ---
+C("blackgate-page.txt","cadence and rhythm",
+  "Page identifies an unremitting rhythm of buts at all levels of the story as a device in Fool's Assassin.",
+  "M Harold Page, novelist, 'Fool's Assassin: How Robin Hobb Writes Lyrical Fantasy Without Being Boring', Black Gate, 2016","https://www.blackgate.com/2016/02/09/fools-assassin-how-robin-hobb-writes-lyrical-fantasy-without-being-boring/",
+  "an unremitting rhythm of buts at all levels of the story","Making Lyrical Fantasy Interesting",kind="analysis",date="2016-02-09")
+C("blackgate-page.txt","consequence on a household",
+  "Page says a death arising from the thriller plot has domestic and child-rearing implications in Fool's Assassin.",
+  "M Harold Page, novelist, Black Gate craft dissection of Fool's Assassin, 2016","https://www.blackgate.com/2016/02/09/fools-assassin-how-robin-hobb-writes-lyrical-fantasy-without-being-boring/",
+  "a death resulting from the Thriller has domestic and child-rearing implications","First Person Slow Burn Thriller",kind="analysis",date="2016-02-09",registerHint="dossier-archivist")
+C("blackgate-page.txt","consequence on a household",
+  "Page says the same duty in Fool's Assassin manifests both domestically and politically.",
+  "M Harold Page, novelist, Black Gate craft dissection of Fool's Assassin, 2016","https://www.blackgate.com/2016/02/09/fools-assassin-how-robin-hobb-writes-lyrical-fantasy-without-being-boring/",
+  "the same duty manifests both domestically and politically","First Person Slow Burn Thriller",kind="analysis",date="2016-02-09")
+C("blackgate-page.txt","place and institution description",
+  "Page says Hobb only delivers description when it is part of a conflict.",
+  "M Harold Page, novelist, Black Gate craft dissection of Fool's Assassin, 2016","https://www.blackgate.com/2016/02/09/fools-assassin-how-robin-hobb-writes-lyrical-fantasy-without-being-boring/",
+  "She only delivers description when it","Making Lyrical Fantasy Interesting",kind="analysis",date="2016-02-09",registerHint="dossier-archivist")
+C("blackgate-page.txt","concrete sensory noun",
+  "Page says Hobb serves up characterisation only when it is immediately significant to a choice or tactic.",
+  "M Harold Page, novelist, Black Gate craft dissection of Fool's Assassin, 2016","https://www.blackgate.com/2016/02/09/fools-assassin-how-robin-hobb-writes-lyrical-fantasy-without-being-boring/",
+  "Hobb always serves up characterisation when it is immediately significant","Making Lyrical Fantasy Interesting",kind="analysis",date="2016-02-09")
+C("blackgate-page.txt","withheld information and inference",
+  "Page says Hobb drops information after the fact but in ways that point forward.",
+  "M Harold Page, novelist, Black Gate craft dissection of Fool's Assassin, 2016","https://www.blackgate.com/2016/02/09/fools-assassin-how-robin-hobb-writes-lyrical-fantasy-without-being-boring/",
+  "She drops information on us after-the-fact but in ways that point forward","First Person Slow Burn Thriller",kind="analysis",date="2016-02-09",registerHint="chronicle-line")
+C("blackgate-page.txt","omission as information",
+  "Page says Hobb exploits the reader's knowledge of the genre instead of a point-of-view shift to keep the thriller plot alive.",
+  "M Harold Page, novelist, Black Gate craft dissection of Fool's Assassin, 2016","https://www.blackgate.com/2016/02/09/fools-assassin-how-robin-hobb-writes-lyrical-fantasy-without-being-boring/",
+  "She exploits the fact we know what genre we are reading","First Person Slow Burn Thriller",kind="analysis",date="2016-02-09")
+C("blackgate-page.txt","point of view and distance",
+  "Page describes Fool's Assassin as a country house Gothic told from the point of view of its denizens.",
+  "M Harold Page, novelist, Black Gate craft dissection of Fool's Assassin, 2016","https://www.blackgate.com/2016/02/09/fools-assassin-how-robin-hobb-writes-lyrical-fantasy-without-being-boring/",
+  "a country house Gothic from the point of view","Opening",kind="analysis",date="2016-02-09")
+
+# --- Lightspeed 2012 ---
+C("lightspeed-hobb.txt","consequence on a household",
+  "Hobb says the characters in her short fiction are people at the lower echelons of the economic strata.",
+  "Robin Hobb, interviewed for The Geek's Guide to the Galaxy, reprinted in Lightspeed, April 2012","https://www.lightspeedmagazine.com/nonfiction/interview-robin-hobb/",
+  "people who are at the lower echelons of the economic strata","On The Inheritance & Other Stories",kind="own-words",date="2012-04",registerHint="dossier-archivist")
+C("lightspeed-hobb.txt","consequence on a household",
+  "Hobb says that in fantasy, people who work every day for a living on a tight budget can seem poor.",
+  "Robin Hobb, interviewed for The Geek's Guide to the Galaxy, reprinted in Lightspeed, April 2012","https://www.lightspeedmagazine.com/nonfiction/interview-robin-hobb/",
+  "people who actually work every day for a living","On The Inheritance & Other Stories",kind="own-words",date="2012-04",registerHint="dossier-archivist")
+C("lightspeed-hobb.txt","consequence on a household",
+  "Hobb cites her own Alaskan upbringing, in which the family had to put food up for the winter, as the source of the survival economy in her work.",
+  "Robin Hobb, interviewed for The Geek's Guide to the Galaxy, reprinted in Lightspeed, April 2012","https://www.lightspeedmagazine.com/nonfiction/interview-robin-hobb/",
+  "we had to put that food up for the winter","On Alaska",kind="own-words",date="2012-04",registerHint="dossier-archivist")
+
+# --- Dragonsteel 2024 ---
+C("dragonsteel-villains.txt","point of view and distance",
+  "Hobb, quoted by Hatch, says an antagonist simply has something they want to get done that outweighs the protagonist's aim.",
+  "Robin Hobb, quoted by Tayan Hatch, Dragonsteel Books blog, 2024","https://www.dragonsteelbooks.com/blogs/the-cognitive-realm/robin-hobb-writing-villians",
+  "They simply have something they want to get done","Now I Believe Everything You Believe",kind="own-words",date="2024-12-19",
+  confidence="medium; a marketing-blog write-up quoting a spontaneous interview, not a transcript")
+C("dragonsteel-villains.txt","point of view and distance",
+  "Hobb, quoted by Hatch, says a writer must put a character's viewpoint on like a coat.",
+  "Robin Hobb, quoted by Tayan Hatch, Dragonsteel Books blog, 2024","https://www.dragonsteelbooks.com/blogs/the-cognitive-realm/robin-hobb-writing-villians",
+  "You have to put it on like a coat","Now I Believe Everything You Believe",kind="own-words",date="2024-12-19",
+  confidence="medium; a marketing-blog write-up quoting a spontaneous interview")
+C("dragonsteel-villains.txt","point of view and distance",
+  "Hobb, quoted by Hatch, says the Farseer trilogy rewritten from Regal's point of view would make him a tragic hero.",
+  "Robin Hobb, quoted by Tayan Hatch, Dragonsteel Books blog, 2024","https://www.dragonsteelbooks.com/blogs/the-cognitive-realm/robin-hobb-writing-villians",
+  "he would be a tragic hero","Now I Believe Everything You Believe",kind="own-words",date="2024-12-19",
+  confidence="medium; a marketing-blog write-up quoting a spontaneous interview")
+
+# --- Hobb's own blog, 2020 ---
+C("hobb-blog-36450.txt","civic record register",
+  "Hobb names coinage or money value, major religions and a calendar with seasonal names and year dates among the worldbuilding records she keeps.",
+  "Robin Hobb, 'As You Intend To Be', robinhobb.com blog, 2020","https://www.robinhobb.com/blog/posts/36450",
+  "coinage or money value, major religions, calendar with seasonal names","Paragraph on record keeping",kind="own-words",date="2020-05-21",registerHint="dossier-archivist")
+C("hobb-blog-36450.txt","other: indexing by incident rather than page",
+  "Hobb says her working glossary records where a character first appears by the incident rather than by page or chapter number.",
+  "Robin Hobb, 'As You Intend To Be', robinhobb.com blog, 2020","https://www.robinhobb.com/blog/posts/36450",
+  "Joe is met in the tavern shortly before the disastrous river crossing","Paragraph on record keeping",kind="own-words",date="2020-05-21",registerHint="chronicle-line")
+
+# --- rpgstorytellers (unsigned, low provenance) ---
+C("rpgstory-canvas.txt","civic record register",
+  "The article describes each Farseer chapter as beginning with a snippet of in-world text ranging from historical treatises to folklore and propaganda.",
+  "Unsigned article, rpgstorytellers.com, 2026","https://rpgstorytellers.com/the-assassins-canvas-a-comprehensive-analysis-of-narrative-interiority-magic-systems-and-cultural-anthropology-in-robin-hobbs-farseer-trilogy/",
+  "a snippet of in-world text ranging from historical treatises","Section 2.2",kind="analysis",date="2026-01-13",registerHint="chronicle-line",
+  confidence="low; the page carries no named author and reads as a machine-compiled report with unresolved footnote markers")
+C("rpgstory-canvas.txt","civic record register",
+  "The article says the dry, academic tone of an epigraph on Farseer glory is set against the unglamorous scene that follows.",
+  "Unsigned article, rpgstorytellers.com, 2026","https://rpgstorytellers.com/the-assassins-canvas-a-comprehensive-analysis-of-narrative-interiority-magic-systems-and-cultural-anthropology-in-robin-hobbs-farseer-trilogy/",
+  "the dry, academic tone of an epigraph","Section 2.2, Tonal Contrast",kind="analysis",date="2026-01-13",registerHint="chronicle-line",
+  confidence="low; unsigned page, machine-compiled in appearance")
+C("rpgstory-canvas.txt","other: pacing",
+  "The article attributes Hobb's slow burn to dedicating thousands of words to the mundane details of the protagonist's daily existence.",
+  "Unsigned article, rpgstorytellers.com, 2026","https://rpgstorytellers.com/the-assassins-canvas-a-comprehensive-analysis-of-narrative-interiority-magic-systems-and-cultural-anthropology-in-robin-hobbs-farseer-trilogy/",
+  "dedicating thousands of words to the mundane details","Section 2.3",kind="analysis",date="2026-01-13",
+  confidence="low; unsigned page, machine-compiled in appearance")

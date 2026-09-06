@@ -1,0 +1,9 @@
+{"_doc": "the LAST launch of every sweep (chair, 2026-09-06 08:10): runId (this session's; dies with it), argsFile (the args it was launched with), tag, script. resume-research.sh reads this to rebuild the next round from the files.",
+ "tolkien": {"runId": "wf_d8edf077-aca", "argsFile": "args-tolkien-r3c.json", "tag": "r3c", "script": "research-workflow-v3.js"},
+ "kay":     {"runId": "wf_d3dd5573-480", "argsFile": "args-kay-r3c.json",     "tag": "r3c", "script": "research-workflow-v3.js"},
+ "leguin":  {"runId": "wf_82a424f3-15a", "argsFile": "args-leguin-r3c.json",  "tag": "r3c", "script": "research-workflow-v3.js"},
+ "wolfe":   {"runId": "wf_97888015-461", "argsFile": "args-wolfe-r3c.json",   "tag": "r3c", "script": "research-workflow-v3.js"},
+ "martin":  {"runId": "wf_faf66625-17e", "argsFile": "args-martin-r3c.json",  "tag": "r3c", "script": "research-workflow-v3.js"},
+ "hobb":    {"runId": "wf_914a589e-da6", "argsFile": "args-hobb-r3c.json",    "tag": "r3c", "script": "research-workflow-v3.js"},
+ "dnd":     {"runId": "wf_4f47327c-3fe", "argsFile": "args-dnd-r3c.json",     "tag": "r3c", "script": "research-workflow-v3.js"},
+ "ai":      {"runId": "wf_06e82de3-dcd", "argsFile": "args-ai-r3c.json",      "tag": "r3c", "script": "research-workflow-v3.js"}}

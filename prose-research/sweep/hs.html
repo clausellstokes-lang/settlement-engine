@@ -1,0 +1,780 @@
+<!doctype html>
+<html lang="en-US" >
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>The Header Script &#8211; Dothraki</title>
+<meta name='robots' content='max-image-preview:large' />
+<link rel="alternate" type="application/rss+xml" title="Dothraki &raquo; Feed" href="https://dothraki.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Dothraki &raquo; Comments Feed" href="https://dothraki.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Dothraki &raquo; The Header Script Comments Feed" href="https://dothraki.com/2011/09/the-header-script/feed/" />
+<link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="https://dothraki.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdothraki.com%2F2011%2F09%2Fthe-header-script%2F" />
+<link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="https://dothraki.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdothraki.com%2F2011%2F09%2Fthe-header-script%2F&#038;format=xml" />
+<style id="wp-img-auto-sizes-contain-inline-css">
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<style id="wp-emoji-styles-inline-css">
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+/*# sourceURL=wp-emoji-styles-inline-css */
+</style>
+<style id="wp-block-library-inline-css">
+:root{--wp-block-synced-color:#7a00df;--wp-block-synced-color--rgb:122,0,223;--wp-bound-block-color:var(--wp-block-synced-color);--wp-editor-canvas-background:#ddd;--wp-admin-theme-color:#007cba;--wp-admin-theme-color--rgb:0,124,186;--wp-admin-theme-color-darker-10:#006ba1;--wp-admin-theme-color-darker-10--rgb:0,107,160.5;--wp-admin-theme-color-darker-20:#005a87;--wp-admin-theme-color-darker-20--rgb:0,90,135;--wp-admin-border-width-focus:2px}@media (min-resolution:192dpi){:root{--wp-admin-border-width-focus:1.5px}}.wp-element-button{cursor:pointer}:root .has-very-light-gray-background-color{background-color:#eee}:root .has-very-dark-gray-background-color{background-color:#313131}:root .has-very-light-gray-color{color:#eee}:root .has-very-dark-gray-color{color:#313131}:root .has-vivid-green-cyan-to-vivid-cyan-blue-gradient-background{background:linear-gradient(135deg,#00d084,#0693e3)}:root .has-purple-crush-gradient-background{background:linear-gradient(135deg,#34e2e4,#4721fb 50%,#ab1dfe)}:root .has-hazy-dawn-gradient-background{background:linear-gradient(135deg,#faaca8,#dad0ec)}:root .has-subdued-olive-gradient-background{background:linear-gradient(135deg,#fafae1,#67a671)}:root .has-atomic-cream-gradient-background{background:linear-gradient(135deg,#fdd79a,#004a59)}:root .has-nightshade-gradient-background{background:linear-gradient(135deg,#330968,#31cdcf)}:root .has-midnight-gradient-background{background:linear-gradient(135deg,#020381,#2874fc)}:root{--wp--preset--font-size--normal:16px;--wp--preset--font-size--huge:42px}.has-regular-font-size{font-size:1em}.has-larger-font-size{font-size:2.625em}.has-normal-font-size{font-size:var(--wp--preset--font-size--normal)}.has-huge-font-size{font-size:var(--wp--preset--font-size--huge)}:root .has-text-align-center{text-align:center}:root .has-text-align-left{text-align:left}:root .has-text-align-right{text-align:right}.has-fit-text{white-space:nowrap!important}#end-resizable-editor-section{display:none}.aligncenter{clear:both}.items-justified-left{justify-content:flex-start}.items-justified-center{justify-content:center}.items-justified-right{justify-content:flex-end}.items-justified-space-between{justify-content:space-between}.screen-reader-text{word-wrap:normal!important;border:0;clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;word-break:normal!important}.screen-reader-text:focus{background-color:#ddd;clip-path:none;color:#444;display:block;font-size:1em;height:auto;left:5px;line-height:normal;padding:15px 23px 14px;text-decoration:none;top:5px;width:auto;z-index:100000}html :where(.has-border-color){border-style:solid}html :where([style^=border-color],[style*=";border-color"],[style*="; border-color"]){border-style:solid}html :where([style^=border-top-color],[style*=";border-top-color"],[style*="; border-top-color"]){border-top-style:solid}html :where([style^=border-right-color],[style*=";border-right-color"],[style*="; border-right-color"]){border-right-style:solid}html :where([style^=border-bottom-color],[style*=";border-bottom-color"],[style*="; border-bottom-color"]){border-bottom-style:solid}html :where([style^=border-left-color],[style*=";border-left-color"],[style*="; border-left-color"]){border-left-style:solid}html :where([style^=border-width],[style*=";border-width"],[style*="; border-width"]){border-style:solid}html :where([style^=border-top-width],[style*=";border-top-width"],[style*="; border-top-width"]){border-top-style:solid}html :where([style^=border-right-width],[style*=";border-right-width"],[style*="; border-right-width"]){border-right-style:solid}html :where([style^=border-bottom-width],[style*=";border-bottom-width"],[style*="; border-bottom-width"]){border-bottom-style:solid}html :where([style^=border-left-width],[style*=";border-left-width"],[style*="; border-left-width"]){border-left-style:solid}html :where(img[class*=wp-image-]){height:auto;max-width:100%}:where(figure){margin:0 0 1em}html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:var(--wp-admin--admin-bar--height,0px)}@media screen and (max-width:600px){html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:0px}}
+
+/*# sourceURL=/wp-includes/css/dist/block-library/common.min.css */
+</style>
+<style id="classic-theme-styles-inline-css">
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+/*# sourceURL=/wp-includes/css/classic-themes.min.css */
+</style>
+
+<style id="global-styles-inline-css">
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #FFFFFF;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--color--dark-gray: #28303D;--wp--preset--color--gray: #39414D;--wp--preset--color--green: #D1E4DD;--wp--preset--color--blue: #D1DFE4;--wp--preset--color--purple: #D1D1E4;--wp--preset--color--red: #E4D1D1;--wp--preset--color--orange: #E4DAD1;--wp--preset--color--yellow: #EEEADD;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgb(6,147,227) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgb(252,185,0) 0%,rgb(255,105,0) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgb(255,105,0) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--gradient--purple-to-yellow: linear-gradient(160deg, #D1D1E4 0%, #EEEADD 100%);--wp--preset--gradient--yellow-to-purple: linear-gradient(160deg, #EEEADD 0%, #D1D1E4 100%);--wp--preset--gradient--green-to-yellow: linear-gradient(160deg, #D1E4DD 0%, #EEEADD 100%);--wp--preset--gradient--yellow-to-green: linear-gradient(160deg, #EEEADD 0%, #D1E4DD 100%);--wp--preset--gradient--red-to-yellow: linear-gradient(160deg, #E4D1D1 0%, #EEEADD 100%);--wp--preset--gradient--yellow-to-red: linear-gradient(160deg, #EEEADD 0%, #E4D1D1 100%);--wp--preset--gradient--purple-to-red: linear-gradient(160deg, #D1D1E4 0%, #E4D1D1 100%);--wp--preset--gradient--red-to-purple: linear-gradient(160deg, #E4D1D1 0%, #D1D1E4 100%);--wp--preset--font-size--small: 18px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 24px;--wp--preset--font-size--x-large: 42px;--wp--preset--font-size--extra-small: 16px;--wp--preset--font-size--normal: 20px;--wp--preset--font-size--extra-large: 40px;--wp--preset--font-size--huge: 96px;--wp--preset--font-size--gigantic: 144px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgb(255, 255, 255), 6px 6px rgb(0, 0, 0);--wp--preset--shadow--crisp: 6px 6px 0px rgb(0, 0, 0);}.wp-block-button{--wp--preset--dimension--25: 25%;--wp--preset--dimension--50: 50%;--wp--preset--dimension--75: 75%;--wp--preset--dimension--100: 100%;}:where(body) { margin: 0; }:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}body{padding-top: 0px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px;}:root :where(.wp-element-button, .wp-block-button__link){background-color: #32373c;border-width: 0;color: #fff;font-family: inherit;font-size: inherit;font-style: inherit;font-weight: inherit;letter-spacing: inherit;line-height: inherit;padding-top: calc(0.667em + 2px);padding-right: calc(1.333em + 2px);padding-bottom: calc(0.667em + 2px);padding-left: calc(1.333em + 2px);text-decoration: none;text-transform: inherit;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-dark-gray-color{color: var(--wp--preset--color--dark-gray) !important;}.has-gray-color{color: var(--wp--preset--color--gray) !important;}.has-green-color{color: var(--wp--preset--color--green) !important;}.has-blue-color{color: var(--wp--preset--color--blue) !important;}.has-purple-color{color: var(--wp--preset--color--purple) !important;}.has-red-color{color: var(--wp--preset--color--red) !important;}.has-orange-color{color: var(--wp--preset--color--orange) !important;}.has-yellow-color{color: var(--wp--preset--color--yellow) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-dark-gray-background-color{background-color: var(--wp--preset--color--dark-gray) !important;}.has-gray-background-color{background-color: var(--wp--preset--color--gray) !important;}.has-green-background-color{background-color: var(--wp--preset--color--green) !important;}.has-blue-background-color{background-color: var(--wp--preset--color--blue) !important;}.has-purple-background-color{background-color: var(--wp--preset--color--purple) !important;}.has-red-background-color{background-color: var(--wp--preset--color--red) !important;}.has-orange-background-color{background-color: var(--wp--preset--color--orange) !important;}.has-yellow-background-color{background-color: var(--wp--preset--color--yellow) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-dark-gray-border-color{border-color: var(--wp--preset--color--dark-gray) !important;}.has-gray-border-color{border-color: var(--wp--preset--color--gray) !important;}.has-green-border-color{border-color: var(--wp--preset--color--green) !important;}.has-blue-border-color{border-color: var(--wp--preset--color--blue) !important;}.has-purple-border-color{border-color: var(--wp--preset--color--purple) !important;}.has-red-border-color{border-color: var(--wp--preset--color--red) !important;}.has-orange-border-color{border-color: var(--wp--preset--color--orange) !important;}.has-yellow-border-color{border-color: var(--wp--preset--color--yellow) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-purple-to-yellow-gradient-background{background: var(--wp--preset--gradient--purple-to-yellow) !important;}.has-yellow-to-purple-gradient-background{background: var(--wp--preset--gradient--yellow-to-purple) !important;}.has-green-to-yellow-gradient-background{background: var(--wp--preset--gradient--green-to-yellow) !important;}.has-yellow-to-green-gradient-background{background: var(--wp--preset--gradient--yellow-to-green) !important;}.has-red-to-yellow-gradient-background{background: var(--wp--preset--gradient--red-to-yellow) !important;}.has-yellow-to-red-gradient-background{background: var(--wp--preset--gradient--yellow-to-red) !important;}.has-purple-to-red-gradient-background{background: var(--wp--preset--gradient--purple-to-red) !important;}.has-red-to-purple-gradient-background{background: var(--wp--preset--gradient--red-to-purple) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}.has-extra-small-font-size{font-size: var(--wp--preset--font-size--extra-small) !important;}.has-normal-font-size{font-size: var(--wp--preset--font-size--normal) !important;}.has-extra-large-font-size{font-size: var(--wp--preset--font-size--extra-large) !important;}.has-huge-font-size{font-size: var(--wp--preset--font-size--huge) !important;}.has-gigantic-font-size{font-size: var(--wp--preset--font-size--gigantic) !important;}
+/*# sourceURL=global-styles-inline-css */
+</style>
+
+<link rel='stylesheet' id='twenty-twenty-one-style-css' href='https://dothraki.com/wp-content/themes/twentytwentyone/style.css?ver=1.5' media='all' />
+<link rel='stylesheet' id='twenty-twenty-one-print-style-css' href='https://dothraki.com/wp-content/themes/twentytwentyone/assets/css/print.css?ver=1.5' media='print' />
+<script id="jquery-core-js" src="https://dothraki.com/wp-includes/js/jquery/jquery.min.js?ver=3.7.1"></script>
+<script id="jquery-migrate-js" src="https://dothraki.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1"></script>
+<link rel="https://api.w.org/" href="https://dothraki.com/wp-json/" /><link rel="alternate" title="JSON" type="application/json" href="https://dothraki.com/wp-json/wp/v2/posts/92" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://dothraki.com/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 7.1" />
+<link rel="canonical" href="https://dothraki.com/2011/09/the-header-script/" />
+<link rel='shortlink' href='https://dothraki.com/?p=92' />
+</head>
+
+<body class="wp-singular post-template-default single single-post postid-92 single-format-standard wp-embed-responsive wp-theme-twentytwentyone is-light-theme no-js singular">
+<div id="page" class="site">
+	<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+	
+<header id="masthead" class="site-header has-title-and-tagline">
+
+	
+
+<div class="site-branding">
+
+	
+						<p class="site-title"><a href="https://dothraki.com/">Dothraki</a></p>
+			
+			<p class="site-description">
+			A Language of Fire and Blood		</p>
+	</div><!-- .site-branding -->
+	
+
+</header><!-- #masthead -->
+
+	<div id="content" class="site-content">
+		<div id="primary" class="content-area">
+			<main id="main" class="site-main">
+
+<article id="post-92" class="post-92 post type-post status-publish format-standard has-post-thumbnail hentry category-conlanging tag-misc tag-other-conlangs tag-writing entry">
+
+	<header class="entry-header alignwide">
+		<h1 class="entry-title">The Header Script</h1>		
+		
+			<figure class="post-thumbnail">
+				<img width="569" height="334" src="https://dothraki.com/wp-content/uploads/2011/09/halfsies.png" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="Characters used in the background image." decoding="async" fetchpriority="high" srcset="https://dothraki.com/wp-content/uploads/2011/09/halfsies.png 569w, https://dothraki.com/wp-content/uploads/2011/09/halfsies-300x176.png 300w" sizes="(max-width: 569px) 100vw, 569px" style="width:100%;height:58.7%;max-width:569px;" />									<figcaption class="wp-caption-text">Click to enlarge.</figcaption>
+							</figure><!-- .post-thumbnail -->
+
+					</header><!-- .entry-header -->
+
+	<div class="entry-content">
+		<div id='en-trans' class='trans'><p>I&#8217;ve gotten a few questions about the script in the header (the one in black below the word &#8220;Dothraki&#8221; in white), so I thought I&#8217;d address it, even though it doesn&#8217;t relate much to Dothraki itself.</p>
+<p>First (in case there&#8217;s anyone who can&#8217;t make it out), it&#8217;s intended to say &#8220;Dothraki&#8221; in English (works if you kind of squint your eyes at it [especially when you get to the &#8220;a&#8221;]). Even so, the script was not intended to be a Roman font: it was created for a <a href="http://en.wikipedia.org/wiki/Conlang" class="term" target="_blank" title="A constructed language.">conlang</a>.</p>
+<p>Back in mid-2010, when I was working on season 1 of <i>Game of Thrones</i>, I was also participating in a group conlang creation project (the language was called <a href="http://kenakoliku.conlang.org/" target="_blank">Kenakoliku</a>). It didn&#8217;t end up being successful (group projects are <i>very</i> difficult to maintain), but it was fun at the time. Since my favorite part of creating a language is creating its <a href="http://en.wikipedia.org/wiki/Orthography" target="_blank" class="term" title="The native writing system for a language.">orthography</a>, I devoted my energies to creating a possible orthography for Kenakoliku.</p>
+<p>I initially fonted up five proposals (just one character for each): two instantiations of someone else&#8217;s hand-drawn proposal, and three of my own. They&#8217;re shown below:</p>
+<figure id="attachment_94" aria-describedby="caption-attachment-94" style="width: 159px" class="wp-caption aligncenter"><a href="https://dothraki.com/wp-content/uploads/2011/09/sample.png"><img decoding="async" src="https://dothraki.com/wp-content/uploads/2011/09/sample-159x300.png" alt="Five orthographic proposals for Kenakoliku." title="Five orthographic proposals for Kenakoliku." width="159" height="300" class="size-medium wp-image-94" /></a><figcaption id="caption-attachment-94" class="wp-caption-text">Click to enlarge.</figcaption></figure>
+<p>I actually liked the one called &#8220;Curvy Glyphs&#8221; the best, with &#8220;Kadani B&#8221; coming in a close second (for some reason it reminded me of those block Greek letters you see on fraternity houses&#8230;), but most everyone else liked what I called &#8220;Halfsies&#8221;: an orthography where the consonant was on the bottom, and the vowel on the top. As a result, I filled the font out, creating possible consonant and vowel characters without assigning any values to them (so people on the board could choose which ones they liked best). Here&#8217;s the chart I came up with:</p>
+<figure id="attachment_97" aria-describedby="caption-attachment-97" style="width: 218px" class="wp-caption aligncenter"><a href="https://dothraki.com/wp-content/uploads/2011/09/newsample.png"><img decoding="async" src="https://dothraki.com/wp-content/uploads/2011/09/newsample-218x300.png" alt="Full version of the Halfsies font." title="Full version of the Halfsies font." width="218" height="300" class="size-medium wp-image-97" srcset="https://dothraki.com/wp-content/uploads/2011/09/newsample-218x300.png 218w, https://dothraki.com/wp-content/uploads/2011/09/newsample.png 569w" sizes="(max-width: 218px) 100vw, 218px" /></a><figcaption id="caption-attachment-97" class="wp-caption-text">Click to enlarge.</figcaption></figure>
+<p>From this sample, everyone (mostly) settled on form-sound combinations they liked, and I produced a font, a sample of which is shown below:</p>
+<figure id="attachment_98" aria-describedby="caption-attachment-98" style="width: 219px" class="wp-caption aligncenter"><a href="https://dothraki.com/wp-content/uploads/2011/09/ex.png"><img decoding="async" src="https://dothraki.com/wp-content/uploads/2011/09/ex-219x300.png" alt="A sample of the full Halfsies font." title="A sample of the full Halfsies font." width="219" height="300" class="size-medium wp-image-98" srcset="https://dothraki.com/wp-content/uploads/2011/09/ex-219x300.png 219w, https://dothraki.com/wp-content/uploads/2011/09/ex.png 469w" sizes="(max-width: 219px) 100vw, 219px" /></a><figcaption id="caption-attachment-98" class="wp-caption-text">Click to enlarge.</figcaption></figure>
+<p>The font had some problems, and I mostly fixed them so that the font worked in <i>my</i> word processor of choice, but then it still had problems in other word processors, and then the language itself kind of wound down anyway, so I abandoned the project and the script. If you&#8217;d like, you can download what remains of the font and toy around with it <a href="http://dedalvs.com/misc/kenakoliku/kena_font.zip">here (.zip)</a>. I warn you, though: the ligatures may not work on your end, and I&#8217;m no longer maintaining it.</p>
+<p>Anyway, several months later, <i>Game of Thrones</i> debuted, and I started up <a href="http://dothraki.livejournal.com/" target="_blank">a LiveJournal account</a> mainly to make comments on <a href="http://grrm.livejournal.com/" target="_blank">George R. R. Martin&#8217;s LiveJournal</a>. In order to do so, though, I needed an icon. I didn&#8217;t want to use a picture of one of the actors from the show (or, even worse, a picture of me), and Dothraki didn&#8217;t have its own script, so I was in a quandary. I&#8217;d always liked the Halfsies font, though (I always referred to it in my head as the Swashbuckler&#8217;s Script), and one of the characters kind of looked like a &#8220;D&#8221;, so I made it my LJ icon:</p>
+<p><img loading="lazy" decoding="async" alt="The Dothraki D." src="http://dedalvs.com/images/lj/dothraki_avatar.png" title="The Dothraki D." class="aligncenter" width="100" height="100" /></p>
+<p>And that&#8217;s been my little Dothraki icon ever since.</p>
+<p>When it came to making <i>this</i> blog, I found a theme I <i>really</i> liked (props to <a href="http://digitalnature.eu/" target="_blank">digitalnature</a>!), but the font in the header looked way too plain (sans-serif?! Decidedly un-Dothraki!). And since I didn&#8217;t want to actually go in and mess with the CSS, I just created a background image with the Halfsies font. In order to get something that looked like English, I had to pick and choose characters (and alter some, using Photoshop), some of which you will have seen in the image above:</p>
+<figure id="attachment_99" aria-describedby="caption-attachment-99" style="width: 300px" class="wp-caption aligncenter"><a href="https://dothraki.com/wp-content/uploads/2011/09/halfsies.png"><img loading="lazy" decoding="async" src="https://dothraki.com/wp-content/uploads/2011/09/halfsies-300x176.png" alt="Characters used in the background image." title="Characters used in the background image." width="300" height="176" class="size-medium wp-image-99" srcset="https://dothraki.com/wp-content/uploads/2011/09/halfsies-300x176.png 300w, https://dothraki.com/wp-content/uploads/2011/09/halfsies.png 569w" sizes="auto, (max-width: 300px) 100vw, 300px" /></a><figcaption id="caption-attachment-99" class="wp-caption-text">Click to enlarge.</figcaption></figure>
+<p>And eventually I had it.</p>
+<p>So that&#8217;s the story behind the script in the header. The look of it was, indeed, inspired by <a href="http://en.wikipedia.org/wiki/Devanagari" target="_blank" class="term" title="The script used to write Hindi and a number of other related languages.">Devanāgarī</a>, but the actual structure is a bit different. The font above can&#8217;t actually be used to write English (it&#8217;d need a <i>lot</i> of work for that), but maybe if someone&#8217;s interested they can take it and manipulate it.</p>
+<p>I feel like I should have something related to Dothraki in here, since this is a Dothraki blog. Let&#8217;s see&#8230; If I had to give &#8220;Halfsies&#8221; a name in Dothraki it&#8217;d probably be <i>Lirisirazo</i> (a class B inanimate noun, as all noun-adjective compounds are that end in a vowel), which means something like &#8220;Bladed Writing&#8221;.</p>
+<p>Also, for the curious, Dothraki is now up to 3,163 words: More words than <a href="http://en.wikipedia.org/wiki/Tony_gwynn" target="_blank">Mr. Padre Tony Gwynn</a> has hits, but still a ways to go to catch <a href="http://en.wikipedia.org/wiki/Pete_Rose" target="_blank">Pete Rose</a> (and my guess is Dothraki will have double his number before he gets even a sniff of the Hall of Fame).</p>
+</div>	</div><!-- .entry-content -->
+
+	<footer class="entry-footer default-max-width">
+		<div class="posted-by"><span class="posted-on">Published <time class="entry-date published updated" datetime="2011-09-21T04:00:28-07:00">September 21, 2011</time></span><span class="byline">By <a href="https://dothraki.com/author/dedalvs/" rel="author">David J. Peterson</a></span></div><div class="post-taxonomies"><span class="cat-links">Categorized as <a href="https://dothraki.com/category/conlanging/" rel="category tag">Conlanging</a> </span><span class="tags-links">Tagged <a href="https://dothraki.com/tag/misc/" rel="tag">misc</a>, <a href="https://dothraki.com/tag/other-conlangs/" rel="tag">other conlangs</a>, <a href="https://dothraki.com/tag/writing/" rel="tag">writing</a></span></div>	</footer><!-- .entry-footer -->
+
+				
+</article><!-- #post-92 -->
+
+<div id="comments" class="comments-area default-max-width show-avatars">
+
+			<h2 class="comments-title">
+							30 comments					</h2><!-- .comments-title -->
+
+		<ol class="comment-list">
+					<li id="comment-24" class="comment even thread-even depth-1 parent">
+			<article id="div-comment-24" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='https://secure.gravatar.com/avatar/5ad0fb76938c5a5721f599eb06479e159004bdc5187a53a07949d7dfee34ca3e?s=60&#038;d=identicon&#038;r=x' srcset='https://secure.gravatar.com/avatar/5ad0fb76938c5a5721f599eb06479e159004bdc5187a53a07949d7dfee34ca3e?s=120&#038;d=identicon&#038;r=x 2x' class='avatar avatar-60 photo' height='60' width='60' loading='lazy' decoding='async'/>						<b class="fn">Mia</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://dothraki.com/2011/09/the-header-script/#comment-24"><time datetime="2011-09-21T13:52:51-07:00">September 21, 2011 at 1:52 pm</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>I like Kadani A &amp; B quite a lot, but Halfsies is pretty.<br />
+I sometimes get the urge to gather all the Kenakoliku material into one place and make something of it. (With all due credit to the other contributors, of course.)</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://dothraki.com/2011/09/the-header-script/?replytocom=24#respond" data-commentid="24" data-postid="92" data-belowelement="div-comment-24" data-respondelement="respond" data-replyto="Reply to Mia" aria-label="Reply to Mia">Reply</a></div>			</article><!-- .comment-body -->
+		<ol class="children">
+		<li id="comment-25" class="comment byuser comment-author-dedalvs bypostauthor odd alt depth-2">
+			<article id="div-comment-25" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='https://secure.gravatar.com/avatar/a748004ab15080ac0248fa9fdf1c65bb9bcea7bad5ae044c6b50df6987e832e9?s=60&#038;d=identicon&#038;r=x' srcset='https://secure.gravatar.com/avatar/a748004ab15080ac0248fa9fdf1c65bb9bcea7bad5ae044c6b50df6987e832e9?s=120&#038;d=identicon&#038;r=x 2x' class='avatar avatar-60 photo' height='60' width='60' loading='lazy' decoding='async'/>						<b class="fn"><a href="http://dedalvs.com/" class="url" rel="ugc external nofollow">David J. Peterson</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://dothraki.com/2011/09/the-header-script/#comment-25"><time datetime="2011-09-21T14:18:10-07:00">September 21, 2011 at 2:18 pm</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>*sigh* No one liked my Curvy Glyphs&#8230; <img src="https://dothraki.com/wp-includes/images/smilies/icon_wink.gif" alt=";)" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>You can always use one of the urls (colla or kenakoliku). Though they have bb&#8217;s on there, you can still create static pages and link directly to them—or perhaps produce an article summarizing the entire project.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://dothraki.com/2011/09/the-header-script/?replytocom=25#respond" data-commentid="25" data-postid="92" data-belowelement="div-comment-25" data-respondelement="respond" data-replyto="Reply to David J. Peterson" aria-label="Reply to David J. Peterson">Reply</a></div>			</article><!-- .comment-body -->
+		</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-26" class="comment even thread-odd thread-alt depth-1">
+			<article id="div-comment-26" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='https://secure.gravatar.com/avatar/32ec66fc621fa0695c8b9fb37a1ff0f386c537fd6faa1e40d982fa51508538f1?s=60&#038;d=identicon&#038;r=x' srcset='https://secure.gravatar.com/avatar/32ec66fc621fa0695c8b9fb37a1ff0f386c537fd6faa1e40d982fa51508538f1?s=120&#038;d=identicon&#038;r=x 2x' class='avatar avatar-60 photo' height='60' width='60' loading='lazy' decoding='async'/>						<b class="fn">Tim Stoffel</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://dothraki.com/2011/09/the-header-script/#comment-26"><time datetime="2011-09-24T01:00:25-07:00">September 24, 2011 at 1:00 am</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>David, your scripts have always amazed me (I like watching them go by on your home page), and this is simply more proof of that. I like Kadani B a lot, as well as the square script. But, there is something very organic about both the curvy and the halfsies scripts, that make them intriguing.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://dothraki.com/2011/09/the-header-script/?replytocom=26#respond" data-commentid="26" data-postid="92" data-belowelement="div-comment-26" data-respondelement="respond" data-replyto="Reply to Tim Stoffel" aria-label="Reply to Tim Stoffel">Reply</a></div>			</article><!-- .comment-body -->
+		</li><!-- #comment-## -->
+		<li id="comment-43" class="comment odd alt thread-even depth-1 parent">
+			<article id="div-comment-43" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='https://secure.gravatar.com/avatar/79b7b45abad4bc8d39f405b88700e37292731c39a8fed001abd05005f9de2e4f?s=60&#038;d=identicon&#038;r=x' srcset='https://secure.gravatar.com/avatar/79b7b45abad4bc8d39f405b88700e37292731c39a8fed001abd05005f9de2e4f?s=120&#038;d=identicon&#038;r=x 2x' class='avatar avatar-60 photo' height='60' width='60' loading='lazy' decoding='async'/>						<b class="fn">Daenerys</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://dothraki.com/2011/09/the-header-script/#comment-43"><time datetime="2011-09-28T11:08:42-07:00">September 28, 2011 at 11:08 am</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>I absolutely love the &#8220;Lirisirazo&#8221;! It looks very Dothraki. I think it would be wonderful to develop it into either a romanized version to write Dothraki in or with the vowels being added on top of the consonants as originally shown. The later reminds me of how Tolkien did his Elvish script. </p>
+<p>Considering the Dothraki&#8217;s contact with literate societies, the written word is on their horizon. <img src="https://dothraki.com/wp-includes/images/smilies/icon_smile.gif" alt=":)" class="wp-smiley" style="height: 1em; max-height: 1em;" />  They are already, at least in the show, using that pretty blue &#8220;war paint&#8221;, which must have symbolic meaning depending on the design. <img src="https://dothraki.com/wp-includes/images/smilies/icon_smile.gif" alt=":)" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://dothraki.com/2011/09/the-header-script/?replytocom=43#respond" data-commentid="43" data-postid="92" data-belowelement="div-comment-43" data-respondelement="respond" data-replyto="Reply to Daenerys" aria-label="Reply to Daenerys">Reply</a></div>			</article><!-- .comment-body -->
+		<ol class="children">
+		<li id="comment-44" class="comment byuser comment-author-dedalvs bypostauthor even depth-2 parent">
+			<article id="div-comment-44" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='https://secure.gravatar.com/avatar/a748004ab15080ac0248fa9fdf1c65bb9bcea7bad5ae044c6b50df6987e832e9?s=60&#038;d=identicon&#038;r=x' srcset='https://secure.gravatar.com/avatar/a748004ab15080ac0248fa9fdf1c65bb9bcea7bad5ae044c6b50df6987e832e9?s=120&#038;d=identicon&#038;r=x 2x' class='avatar avatar-60 photo' height='60' width='60' loading='lazy' decoding='async'/>						<b class="fn"><a href="http://dedalvs.com/" class="url" rel="ugc external nofollow">David J. Peterson</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://dothraki.com/2011/09/the-header-script/#comment-44"><time datetime="2011-09-28T16:29:02-07:00">September 28, 2011 at 4:29 pm</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>A quick reply to the last bit. As a human being, I, frankly, can&#8217;t understand how a people can create art of any kind and <i>not</i> create a writing system. And yet, it&#8217;s happened—lots and lots and lots of times. I&#8217;m not sure if there&#8217;s any civilization that lacks art, but there are plenty that never invented writing. I don&#8217;t see how, but, well, that&#8217;s history.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://dothraki.com/2011/09/the-header-script/?replytocom=44#respond" data-commentid="44" data-postid="92" data-belowelement="div-comment-44" data-respondelement="respond" data-replyto="Reply to David J. Peterson" aria-label="Reply to David J. Peterson">Reply</a></div>			</article><!-- .comment-body -->
+		<ol class="children">
+		<li id="comment-45" class="comment odd alt depth-3 parent">
+			<article id="div-comment-45" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='https://secure.gravatar.com/avatar/5ebd35ba60cb72c74e9136ae0439b314b98a59d4f4ef604bb1b8ac909a4331c9?s=60&#038;d=identicon&#038;r=x' srcset='https://secure.gravatar.com/avatar/5ebd35ba60cb72c74e9136ae0439b314b98a59d4f4ef604bb1b8ac909a4331c9?s=120&#038;d=identicon&#038;r=x 2x' class='avatar avatar-60 photo' height='60' width='60' loading='lazy' decoding='async'/>						<b class="fn">ingsve</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://dothraki.com/2011/09/the-header-script/#comment-45"><time datetime="2011-09-28T17:53:33-07:00">September 28, 2011 at 5:53 pm</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Another question could be whether people can create art without having a language. When do linguists believe the first human languages came about?</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://dothraki.com/2011/09/the-header-script/?replytocom=45#respond" data-commentid="45" data-postid="92" data-belowelement="div-comment-45" data-respondelement="respond" data-replyto="Reply to ingsve" aria-label="Reply to ingsve">Reply</a></div>			</article><!-- .comment-body -->
+		<ol class="children">
+		<li id="comment-46" class="comment byuser comment-author-dedalvs bypostauthor even depth-4 parent">
+			<article id="div-comment-46" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='https://secure.gravatar.com/avatar/a748004ab15080ac0248fa9fdf1c65bb9bcea7bad5ae044c6b50df6987e832e9?s=60&#038;d=identicon&#038;r=x' srcset='https://secure.gravatar.com/avatar/a748004ab15080ac0248fa9fdf1c65bb9bcea7bad5ae044c6b50df6987e832e9?s=120&#038;d=identicon&#038;r=x 2x' class='avatar avatar-60 photo' height='60' width='60' loading='lazy' decoding='async'/>						<b class="fn"><a href="http://dedalvs.com/" class="url" rel="ugc external nofollow">David J. Peterson</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://dothraki.com/2011/09/the-header-script/#comment-46"><time datetime="2011-09-28T19:42:01-07:00">September 28, 2011 at 7:42 pm</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>The thinking now is that a human community can&#8217;t exist without a language, and that we&#8217;ve been speaking for at least 10,000 years. By that logic, it&#8217;d seem that it wouldn&#8217;t be possible to create art without language. A lot of this, though, depends on conjectures about ancient peoples we have absolutely no records of.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://dothraki.com/2011/09/the-header-script/?replytocom=46#respond" data-commentid="46" data-postid="92" data-belowelement="div-comment-46" data-respondelement="respond" data-replyto="Reply to David J. Peterson" aria-label="Reply to David J. Peterson">Reply</a></div>			</article><!-- .comment-body -->
+		<ol class="children">
+		<li id="comment-47" class="comment odd alt depth-5">
+			<article id="div-comment-47" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='https://secure.gravatar.com/avatar/5ebd35ba60cb72c74e9136ae0439b314b98a59d4f4ef604bb1b8ac909a4331c9?s=60&#038;d=identicon&#038;r=x' srcset='https://secure.gravatar.com/avatar/5ebd35ba60cb72c74e9136ae0439b314b98a59d4f4ef604bb1b8ac909a4331c9?s=120&#038;d=identicon&#038;r=x 2x' class='avatar avatar-60 photo' height='60' width='60' loading='lazy' decoding='async'/>						<b class="fn">ingsve</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://dothraki.com/2011/09/the-header-script/#comment-47"><time datetime="2011-09-28T22:12:28-07:00">September 28, 2011 at 10:12 pm</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>If that&#8217;s the thinking then I would guess language must probably be even older than that since cave paintings for example are perhaps 40000 years old.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://dothraki.com/2011/09/the-header-script/?replytocom=47#respond" data-commentid="47" data-postid="92" data-belowelement="div-comment-47" data-respondelement="respond" data-replyto="Reply to ingsve" aria-label="Reply to ingsve">Reply</a></div>			</article><!-- .comment-body -->
+		</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-184921" class="comment even depth-3">
+			<article id="div-comment-184921" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='https://secure.gravatar.com/avatar/4bd452c63c638779a84b9ffb802341ef7550ce16ce9469793c70a33cdf3a2a35?s=60&#038;d=identicon&#038;r=x' srcset='https://secure.gravatar.com/avatar/4bd452c63c638779a84b9ffb802341ef7550ce16ce9469793c70a33cdf3a2a35?s=120&#038;d=identicon&#038;r=x 2x' class='avatar avatar-60 photo' height='60' width='60' loading='lazy' decoding='async'/>						<b class="fn">Khal Qanno</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://dothraki.com/2011/09/the-header-script/#comment-184921"><time datetime="2020-05-04T10:50:27-07:00">May 4, 2020 at 10:50 am</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Having an orthography for a language is a pretty urban-biased idea. Written language is a really weird idea, and even weirder in practice if you really think about it, so I can totally see why many societies don&#8217;t form one.</p>
+<p>And really, the main reason why most societies take one on is because they need to check receipts more than anything else. People usually see its usefulness for art and knowledge after the fact (though I will admit the Mayans did know what was good from the getgo)</p>
+<p>One day I&#8217;d love to take the time and develop a conlang without an orthography or romanization system &#8211; just build it from my hands, voice and memory</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://dothraki.com/2011/09/the-header-script/?replytocom=184921#respond" data-commentid="184921" data-postid="92" data-belowelement="div-comment-184921" data-respondelement="respond" data-replyto="Reply to Khal Qanno" aria-label="Reply to Khal Qanno">Reply</a></div>			</article><!-- .comment-body -->
+		</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-542" class="comment odd alt thread-odd thread-alt depth-1 parent">
+			<article id="div-comment-542" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='https://secure.gravatar.com/avatar/3b174ab3aaad4a10b56d51b18114f8a3660395760db70917298a79ee9145f2f8?s=60&#038;d=identicon&#038;r=x' srcset='https://secure.gravatar.com/avatar/3b174ab3aaad4a10b56d51b18114f8a3660395760db70917298a79ee9145f2f8?s=120&#038;d=identicon&#038;r=x 2x' class='avatar avatar-60 photo' height='60' width='60' loading='lazy' decoding='async'/>						<b class="fn"><a href="http://www.kellinixon.com" class="url" rel="ugc external nofollow">Bill Nixon</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://dothraki.com/2011/09/the-header-script/#comment-542"><time datetime="2012-06-08T22:51:09-07:00">June 8, 2012 at 10:51 pm</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>I just finished watching Season 1 on DVD so don&#8217;t tell me what happens.  After completing the season, I watched the feature about the language you created.  Very, very cool.  During the feature there is a book that is shown.  It is titled, &#8220;Dothraki reference grammar and lexicon.&#8221;  You also mention MP3s that the actors studied.  </p>
+<p>I know it is probably and HBO super-secret thing that I am asking, but would it ever be possible to get that book somewhere and the pronunciation MP3&#8217;s.  I have searched a great deal, but have only found scattered bits and pieces.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://dothraki.com/2011/09/the-header-script/?replytocom=542#respond" data-commentid="542" data-postid="92" data-belowelement="div-comment-542" data-respondelement="respond" data-replyto="Reply to Bill Nixon" aria-label="Reply to Bill Nixon">Reply</a></div>			</article><!-- .comment-body -->
+		<ol class="children">
+		<li id="comment-543" class="comment byuser comment-author-dedalvs bypostauthor even depth-2 parent">
+			<article id="div-comment-543" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='https://secure.gravatar.com/avatar/a748004ab15080ac0248fa9fdf1c65bb9bcea7bad5ae044c6b50df6987e832e9?s=60&#038;d=identicon&#038;r=x' srcset='https://secure.gravatar.com/avatar/a748004ab15080ac0248fa9fdf1c65bb9bcea7bad5ae044c6b50df6987e832e9?s=120&#038;d=identicon&#038;r=x 2x' class='avatar avatar-60 photo' height='60' width='60' loading='lazy' decoding='async'/>						<b class="fn"><a href="http://dedalvs.com/" class="url" rel="ugc external nofollow">David J. Peterson</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://dothraki.com/2011/09/the-header-script/#comment-543"><time datetime="2012-06-09T00:53:36-07:00">June 9, 2012 at 12:53 am</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Hi, Bill! That book is a print version of the grammar document I maintain of the Dothraki language. I literally had it printed out at Staples for that Dothraki promo I did for HBO (and then I&#8217;ve used it elsewhere for other TV spots). There&#8217;s only one copy of it, and it&#8217;s hopelessly out of date at this point. What would be best is to produce a book, and both I and HBO are open to the idea, but thus far there hasn&#8217;t been any interest from any publishers.</p>
+<p>As for the .mp3&#8217;s, I have them all on my computer. I could probably put them up somewhere (after all the lines are in the show), but there are hundreds; I can&#8217;t think of a practical way to do it. Maybe I&#8217;ll throw a few up here and there on future blog posts.</p>
+<p>Thanks for the comment!</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://dothraki.com/2011/09/the-header-script/?replytocom=543#respond" data-commentid="543" data-postid="92" data-belowelement="div-comment-543" data-respondelement="respond" data-replyto="Reply to David J. Peterson" aria-label="Reply to David J. Peterson">Reply</a></div>			</article><!-- .comment-body -->
+		<ol class="children">
+		<li id="comment-93953" class="comment odd alt depth-3 parent">
+			<article id="div-comment-93953" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='https://secure.gravatar.com/avatar/9c581a9ab26a3ec55001ef8b1a71849a5eb2fb9b9a9cf6fe8e734f67b4689ba3?s=60&#038;d=identicon&#038;r=x' srcset='https://secure.gravatar.com/avatar/9c581a9ab26a3ec55001ef8b1a71849a5eb2fb9b9a9cf6fe8e734f67b4689ba3?s=120&#038;d=identicon&#038;r=x 2x' class='avatar avatar-60 photo' height='60' width='60' loading='lazy' decoding='async'/>						<b class="fn">CJ</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://dothraki.com/2011/09/the-header-script/#comment-93953"><time datetime="2015-04-15T15:05:56-07:00">April 15, 2015 at 3:05 pm</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Howdy,</p>
+<p>Old comment I know, but has there been any interest from publishers? If there hasn&#8217;t, would a Kickstarter/Gofundme to get the manuscript polished up and uploaded to Lulu work? At which point it&#8217;s print on demand and sales can do whatever they please.</p>
+<p>As for the .mp3&#8217;s, have you still got them? If so, have you considered a torrent file? Torrents are currently the sanest method for sharing large amounts of files, or very large files, and once the swarm has a full file the initial seeder can drop off the radar.</p>
+<p>A Kickstarted/Lulu printed book with torrent audio wouldn&#8217;t be as fancy as a hardcover engraved tome on Amazon, complete with CD&#8217;s or a custom USB, but then that sort of thing tends to be expensive to produce, sell, and ship. Throwing them on an engraved USB stick for a Kickstarter could be fun, but not absolutely necessary.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://dothraki.com/2011/09/the-header-script/?replytocom=93953#respond" data-commentid="93953" data-postid="92" data-belowelement="div-comment-93953" data-respondelement="respond" data-replyto="Reply to CJ" aria-label="Reply to CJ">Reply</a></div>			</article><!-- .comment-body -->
+		<ol class="children">
+		<li id="comment-93955" class="comment byuser comment-author-dedalvs bypostauthor even depth-4">
+			<article id="div-comment-93955" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='https://secure.gravatar.com/avatar/a748004ab15080ac0248fa9fdf1c65bb9bcea7bad5ae044c6b50df6987e832e9?s=60&#038;d=identicon&#038;r=x' srcset='https://secure.gravatar.com/avatar/a748004ab15080ac0248fa9fdf1c65bb9bcea7bad5ae044c6b50df6987e832e9?s=120&#038;d=identicon&#038;r=x 2x' class='avatar avatar-60 photo' height='60' width='60' loading='lazy' decoding='async'/>						<b class="fn"><a href="http://dedalvs.com/" class="url" rel="ugc external nofollow">David J. Peterson</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://dothraki.com/2011/09/the-header-script/#comment-93955"><time datetime="2015-04-15T15:20:30-07:00">April 15, 2015 at 3:20 pm</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Hey CJ!</p>
+<p>In case you missed it, I <i>did</i> get the opportunity to publish a book on Dothraki. It&#8217;s called <i>Living Language Dothraki</i>, and you can purchase it <a href="http://livinglanguage.com/dothraki" rel="nofollow">here</a>. It&#8217;s different from my own document, because it&#8217;s intended as an instructional guide, and reference grammars aren&#8217;t that.</p>
+<p>Self-publishing, though, is not an option. Since HBO owns the work, HBO has to license it (which they did with <i>Living Language Dothraki</i>). They&#8217;re not going to license the work for a self-published project—at least not right now. If nothing else has cropped up for other <i>Game of Thrones</i> languages a few years after the show has ended, they might be interested, in which case I <i>could</i> probably do a Kickstarter to try to pay the licensing fee, whatever it is, in addition to the cost of making the book. That, though, is something for the future. For now, we work through traditional publishing, and we at least have one book! That&#8217;s not too bad!</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://dothraki.com/2011/09/the-header-script/?replytocom=93955#respond" data-commentid="93955" data-postid="92" data-belowelement="div-comment-93955" data-respondelement="respond" data-replyto="Reply to David J. Peterson" aria-label="Reply to David J. Peterson">Reply</a></div>			</article><!-- .comment-body -->
+		</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-561" class="comment odd alt thread-even depth-1 parent">
+			<article id="div-comment-561" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='https://secure.gravatar.com/avatar/6f6a4c09c7b34af48ddbadd8c6cdafa43b685a3fd19b6d2769c0b05f4e29f258?s=60&#038;d=identicon&#038;r=x' srcset='https://secure.gravatar.com/avatar/6f6a4c09c7b34af48ddbadd8c6cdafa43b685a3fd19b6d2769c0b05f4e29f258?s=120&#038;d=identicon&#038;r=x 2x' class='avatar avatar-60 photo' height='60' width='60' loading='lazy' decoding='async'/>						<b class="fn"><a href="http://www.sincerelylesley.blogspot.com" class="url" rel="ugc external nofollow">Lesley</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://dothraki.com/2011/09/the-header-script/#comment-561"><time datetime="2012-06-26T20:56:28-07:00">June 26, 2012 at 8:56 pm</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Haha, The second I looked at the curvy glyphs; my mind went straight to Kamakawi. I&#8217;m guessing that that glyph type is what ultimately spawned the Kamakawi script (which I like but find confusing :P)</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://dothraki.com/2011/09/the-header-script/?replytocom=561#respond" data-commentid="561" data-postid="92" data-belowelement="div-comment-561" data-respondelement="respond" data-replyto="Reply to Lesley" aria-label="Reply to Lesley">Reply</a></div>			</article><!-- .comment-body -->
+		<ol class="children">
+		<li id="comment-562" class="comment byuser comment-author-dedalvs bypostauthor even depth-2 parent">
+			<article id="div-comment-562" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='https://secure.gravatar.com/avatar/a748004ab15080ac0248fa9fdf1c65bb9bcea7bad5ae044c6b50df6987e832e9?s=60&#038;d=identicon&#038;r=x' srcset='https://secure.gravatar.com/avatar/a748004ab15080ac0248fa9fdf1c65bb9bcea7bad5ae044c6b50df6987e832e9?s=120&#038;d=identicon&#038;r=x 2x' class='avatar avatar-60 photo' height='60' width='60' loading='lazy' decoding='async'/>						<b class="fn"><a href="http://dedalvs.com/" class="url" rel="ugc external nofollow">David J. Peterson</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://dothraki.com/2011/09/the-header-script/#comment-562"><time datetime="2012-06-27T02:43:24-07:00">June 27, 2012 at 2:43 am</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Nah, the <a href="http://dedalvs.com/kamakawi/orthography.html" rel="nofollow">Kamakawi script</a> predated Curvy Glyphs by <i>many</i> years. Never thought they looked alike&#8230; Live and learn!</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://dothraki.com/2011/09/the-header-script/?replytocom=562#respond" data-commentid="562" data-postid="92" data-belowelement="div-comment-562" data-respondelement="respond" data-replyto="Reply to David J. Peterson" aria-label="Reply to David J. Peterson">Reply</a></div>			</article><!-- .comment-body -->
+		<ol class="children">
+		<li id="comment-563" class="comment odd alt depth-3">
+			<article id="div-comment-563" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='https://secure.gravatar.com/avatar/69cee722abe045a1302be2090ff02d9f387a0506e267a38270f6d748e7762e60?s=60&#038;d=identicon&#038;r=x' srcset='https://secure.gravatar.com/avatar/69cee722abe045a1302be2090ff02d9f387a0506e267a38270f6d748e7762e60?s=120&#038;d=identicon&#038;r=x 2x' class='avatar avatar-60 photo' height='60' width='60' loading='lazy' decoding='async'/>						<b class="fn"><a href="http://tulvan.blogspot.com.ar/" class="url" rel="ugc external nofollow">Esploranto</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://dothraki.com/2011/09/the-header-script/#comment-563"><time datetime="2012-06-27T08:40:50-07:00">June 27, 2012 at 8:40 am</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Actually I like the curvy glyphs better. They kind of remind me of Thai to some extent. I would have loved to see how you would have developed a complete set for the curvy glyphs.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://dothraki.com/2011/09/the-header-script/?replytocom=563#respond" data-commentid="563" data-postid="92" data-belowelement="div-comment-563" data-respondelement="respond" data-replyto="Reply to Esploranto" aria-label="Reply to Esploranto">Reply</a></div>			</article><!-- .comment-body -->
+		</li><!-- #comment-## -->
+		<li id="comment-567" class="comment even depth-3">
+			<article id="div-comment-567" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='https://secure.gravatar.com/avatar/69cee722abe045a1302be2090ff02d9f387a0506e267a38270f6d748e7762e60?s=60&#038;d=identicon&#038;r=x' srcset='https://secure.gravatar.com/avatar/69cee722abe045a1302be2090ff02d9f387a0506e267a38270f6d748e7762e60?s=120&#038;d=identicon&#038;r=x 2x' class='avatar avatar-60 photo' height='60' width='60' loading='lazy' decoding='async'/>						<b class="fn"><a href="http://tulvan.blogspot.com.ar/" class="url" rel="ugc external nofollow">Esploranto</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://dothraki.com/2011/09/the-header-script/#comment-567"><time datetime="2012-06-28T12:05:54-07:00">June 28, 2012 at 12:05 pm</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>In fact I think the curvy glyphs would be very very cool for Valyrian glyphs! :p</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://dothraki.com/2011/09/the-header-script/?replytocom=567#respond" data-commentid="567" data-postid="92" data-belowelement="div-comment-567" data-respondelement="respond" data-replyto="Reply to Esploranto" aria-label="Reply to Esploranto">Reply</a></div>			</article><!-- .comment-body -->
+		</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-2240" class="comment odd alt thread-odd thread-alt depth-1 parent">
+			<article id="div-comment-2240" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='https://secure.gravatar.com/avatar/4192750815ad97f3ea19a3ecf6ada0b92d6545990d2563ba929b538520cd52e3?s=60&#038;d=identicon&#038;r=x' srcset='https://secure.gravatar.com/avatar/4192750815ad97f3ea19a3ecf6ada0b92d6545990d2563ba929b538520cd52e3?s=120&#038;d=identicon&#038;r=x 2x' class='avatar avatar-60 photo' height='60' width='60' loading='lazy' decoding='async'/>						<b class="fn">alejandro</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://dothraki.com/2011/09/the-header-script/#comment-2240"><time datetime="2013-08-05T15:16:23-07:00">August 5, 2013 at 3:16 pm</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>hi,i want to make me a tattoo that say: Yer jalan atthirari anni , you can send me to me this text in dothraki font text, please</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://dothraki.com/2011/09/the-header-script/?replytocom=2240#respond" data-commentid="2240" data-postid="92" data-belowelement="div-comment-2240" data-respondelement="respond" data-replyto="Reply to alejandro" aria-label="Reply to alejandro">Reply</a></div>			</article><!-- .comment-body -->
+		<ol class="children">
+		<li id="comment-2241" class="comment byuser comment-author-dedalvs bypostauthor even depth-2">
+			<article id="div-comment-2241" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='https://secure.gravatar.com/avatar/a748004ab15080ac0248fa9fdf1c65bb9bcea7bad5ae044c6b50df6987e832e9?s=60&#038;d=identicon&#038;r=x' srcset='https://secure.gravatar.com/avatar/a748004ab15080ac0248fa9fdf1c65bb9bcea7bad5ae044c6b50df6987e832e9?s=120&#038;d=identicon&#038;r=x 2x' class='avatar avatar-60 photo' height='60' width='60' loading='lazy' decoding='async'/>						<b class="fn"><a href="http://dedalvs.com/" class="url" rel="ugc external nofollow">David J. Peterson</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://dothraki.com/2011/09/the-header-script/#comment-2241"><time datetime="2013-08-05T19:06:44-07:00">August 5, 2013 at 7:06 pm</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Just to double check, you&#8217;d like it in the font I created on this post? Just do you know, it wasn&#8217;t created for Dothraki, but I think I can do it, nonetheless.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://dothraki.com/2011/09/the-header-script/?replytocom=2241#respond" data-commentid="2241" data-postid="92" data-belowelement="div-comment-2241" data-respondelement="respond" data-replyto="Reply to David J. Peterson" aria-label="Reply to David J. Peterson">Reply</a></div>			</article><!-- .comment-body -->
+		</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-93957" class="comment odd alt thread-even depth-1 parent">
+			<article id="div-comment-93957" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='https://secure.gravatar.com/avatar/16d4f63c6b2018151428958bbf66b5eec71fda58b1e96011061d2a25e2779db6?s=60&#038;d=identicon&#038;r=x' srcset='https://secure.gravatar.com/avatar/16d4f63c6b2018151428958bbf66b5eec71fda58b1e96011061d2a25e2779db6?s=120&#038;d=identicon&#038;r=x 2x' class='avatar avatar-60 photo' height='60' width='60' loading='lazy' decoding='async'/>						<b class="fn">Alexandria Rivas</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://dothraki.com/2011/09/the-header-script/#comment-93957"><time datetime="2015-04-15T16:12:12-07:00">April 15, 2015 at 4:12 pm</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Would you consider publishing a book on (High) Valyrian, the way you did with Dothraki?</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://dothraki.com/2011/09/the-header-script/?replytocom=93957#respond" data-commentid="93957" data-postid="92" data-belowelement="div-comment-93957" data-respondelement="respond" data-replyto="Reply to Alexandria Rivas" aria-label="Reply to Alexandria Rivas">Reply</a></div>			</article><!-- .comment-body -->
+		<ol class="children">
+		<li id="comment-93958" class="comment byuser comment-author-dedalvs bypostauthor even depth-2 parent">
+			<article id="div-comment-93958" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='https://secure.gravatar.com/avatar/a748004ab15080ac0248fa9fdf1c65bb9bcea7bad5ae044c6b50df6987e832e9?s=60&#038;d=identicon&#038;r=x' srcset='https://secure.gravatar.com/avatar/a748004ab15080ac0248fa9fdf1c65bb9bcea7bad5ae044c6b50df6987e832e9?s=120&#038;d=identicon&#038;r=x 2x' class='avatar avatar-60 photo' height='60' width='60' loading='lazy' decoding='async'/>						<b class="fn"><a href="http://dedalvs.com/" class="url" rel="ugc external nofollow">David J. Peterson</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://dothraki.com/2011/09/the-header-script/#comment-93958"><time datetime="2015-04-15T16:29:30-07:00">April 15, 2015 at 4:29 pm</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>If it were up to me, absolutely! It&#8217;s not my call, though, at this point. To get a book up, a publisher, HBO, and I have to say &#8220;yes&#8221;. We definitely have a &#8220;yes&#8221; on my side. Consequently, it&#8217;s out of my hands at the moment. This is purely because the show is ongoing, though. I mean, <i>Game of Thrones</i> is not just HBO&#8217;s current property: It&#8217;s its hottest property. They want to make sure everything that happens surrounding the show happens in a particular way and according to a particular timeline (which makes sense, from a marketing perspective). After the show is done, I may have more wiggle room to start pitching things on my own, but right now it really has to come from HBO.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://dothraki.com/2011/09/the-header-script/?replytocom=93958#respond" data-commentid="93958" data-postid="92" data-belowelement="div-comment-93958" data-respondelement="respond" data-replyto="Reply to David J. Peterson" aria-label="Reply to David J. Peterson">Reply</a></div>			</article><!-- .comment-body -->
+		<ol class="children">
+		<li id="comment-93962" class="comment odd alt depth-3 parent">
+			<article id="div-comment-93962" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='https://secure.gravatar.com/avatar/16d4f63c6b2018151428958bbf66b5eec71fda58b1e96011061d2a25e2779db6?s=60&#038;d=identicon&#038;r=x' srcset='https://secure.gravatar.com/avatar/16d4f63c6b2018151428958bbf66b5eec71fda58b1e96011061d2a25e2779db6?s=120&#038;d=identicon&#038;r=x 2x' class='avatar avatar-60 photo' height='60' width='60' loading='lazy' decoding='async'/>						<b class="fn">Alexandria Rivas</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://dothraki.com/2011/09/the-header-script/#comment-93962"><time datetime="2015-04-15T17:00:49-07:00">April 15, 2015 at 5:00 pm</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Would it be possible, and would you be willing to translate a text to High Valyrian for a tattoo I&#8217;d like to get? Nine words! I&#8217;ve been reading up on the translated words and word order but it would be a lot if it were directly translated by the creator!</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://dothraki.com/2011/09/the-header-script/?replytocom=93962#respond" data-commentid="93962" data-postid="92" data-belowelement="div-comment-93962" data-respondelement="respond" data-replyto="Reply to Alexandria Rivas" aria-label="Reply to Alexandria Rivas">Reply</a></div>			</article><!-- .comment-body -->
+		<ol class="children">
+		<li id="comment-93963" class="comment byuser comment-author-dedalvs bypostauthor even depth-4 parent">
+			<article id="div-comment-93963" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='https://secure.gravatar.com/avatar/a748004ab15080ac0248fa9fdf1c65bb9bcea7bad5ae044c6b50df6987e832e9?s=60&#038;d=identicon&#038;r=x' srcset='https://secure.gravatar.com/avatar/a748004ab15080ac0248fa9fdf1c65bb9bcea7bad5ae044c6b50df6987e832e9?s=120&#038;d=identicon&#038;r=x 2x' class='avatar avatar-60 photo' height='60' width='60' loading='lazy' decoding='async'/>						<b class="fn"><a href="http://dedalvs.com/" class="url" rel="ugc external nofollow">David J. Peterson</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://dothraki.com/2011/09/the-header-script/#comment-93963"><time datetime="2015-04-15T17:02:43-07:00">April 15, 2015 at 5:02 pm</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Sure. What is it?</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://dothraki.com/2011/09/the-header-script/?replytocom=93963#respond" data-commentid="93963" data-postid="92" data-belowelement="div-comment-93963" data-respondelement="respond" data-replyto="Reply to David J. Peterson" aria-label="Reply to David J. Peterson">Reply</a></div>			</article><!-- .comment-body -->
+		<ol class="children">
+		<li id="comment-93964" class="comment odd alt depth-5 parent">
+			<article id="div-comment-93964" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='https://secure.gravatar.com/avatar/16d4f63c6b2018151428958bbf66b5eec71fda58b1e96011061d2a25e2779db6?s=60&#038;d=identicon&#038;r=x' srcset='https://secure.gravatar.com/avatar/16d4f63c6b2018151428958bbf66b5eec71fda58b1e96011061d2a25e2779db6?s=120&#038;d=identicon&#038;r=x 2x' class='avatar avatar-60 photo' height='60' width='60' loading='lazy' decoding='async'/>						<b class="fn">Alexandria Rivas</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://dothraki.com/2011/09/the-header-script/#comment-93964"><time datetime="2015-04-15T17:06:10-07:00">April 15, 2015 at 5:06 pm</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Oh my god, thank you! It&#8217;s &#8220;Sky above me. Earth below me. Fire within me.&#8221; <img src="https://dothraki.com/wp-includes/images/smilies/icon_smile.gif" alt=":)" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://dothraki.com/2011/09/the-header-script/?replytocom=93964#respond" data-commentid="93964" data-postid="92" data-belowelement="div-comment-93964" data-respondelement="respond" data-replyto="Reply to Alexandria Rivas" aria-label="Reply to Alexandria Rivas">Reply</a></div>			</article><!-- .comment-body -->
+		<ol class="children">
+		<li id="comment-93965" class="comment byuser comment-author-dedalvs bypostauthor even depth-6">
+			<article id="div-comment-93965" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='https://secure.gravatar.com/avatar/a748004ab15080ac0248fa9fdf1c65bb9bcea7bad5ae044c6b50df6987e832e9?s=60&#038;d=identicon&#038;r=x' srcset='https://secure.gravatar.com/avatar/a748004ab15080ac0248fa9fdf1c65bb9bcea7bad5ae044c6b50df6987e832e9?s=120&#038;d=identicon&#038;r=x 2x' class='avatar avatar-60 photo' height='60' width='60' loading='lazy' decoding='async'/>						<b class="fn"><a href="http://dedalvs.com/" class="url" rel="ugc external nofollow">David J. Peterson</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://dothraki.com/2011/09/the-header-script/#comment-93965"><time datetime="2015-04-15T17:24:01-07:00">April 15, 2015 at 5:24 pm</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Tough one, because of the &#8220;within me&#8221;&#8230; Let&#8217;s see.</p>
+<p><i>Jēdar yno toliot. Tegon yno gō. Perzys yno iemnȳ.</i></p>
+<p>I used the &#8220;inside&#8221; postposition that&#8217;s used for emphatic &#8220;inside&#8221;-ness because ordinarily you&#8217;d just use the locative. I also thought of using <i>hen</i>, but that&#8217;s a preposition and would break up the symmetry. This translation preserves the symmetry.</p>
+<p>So, there you are! If you get a tattoo please send pictures. <img src="https://dothraki.com/wp-includes/images/smilies/icon_smile.gif" alt=":)" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+				</div><!-- .comment-content -->
+
+							</article><!-- .comment-body -->
+		</li><!-- #comment-## -->
+		<li id="comment-94452" class="comment odd alt depth-6">
+			<article id="div-comment-94452" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='https://secure.gravatar.com/avatar/becd4afa883be528e898ad2ee4a2a5ebaa0bf558c58b519481f6d71bfe711f30?s=60&#038;d=identicon&#038;r=x' srcset='https://secure.gravatar.com/avatar/becd4afa883be528e898ad2ee4a2a5ebaa0bf558c58b519481f6d71bfe711f30?s=120&#038;d=identicon&#038;r=x 2x' class='avatar avatar-60 photo' height='60' width='60' loading='lazy' decoding='async'/>						<b class="fn"><a href="http://jdm314.livejournal.com" class="url" rel="ugc external nofollow">Mad Latinist</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://dothraki.com/2011/09/the-header-script/#comment-94452"><time datetime="2015-04-20T13:02:57-07:00">April 20, 2015 at 1:02 pm</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Hmm, if you had gone with <i>hen</i> would that have been <i>hen ynot</i> &#8220;out of me&#8221; or <i>hen *ynā</i> &#8220;from me&#8221;? Interesting that this might even be considered for &#8220;within.&#8221;</p>
+				</div><!-- .comment-content -->
+
+							</article><!-- .comment-body -->
+		</li><!-- #comment-## -->
+		<li id="comment-94454" class="comment even depth-6">
+			<article id="div-comment-94454" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='https://secure.gravatar.com/avatar/becd4afa883be528e898ad2ee4a2a5ebaa0bf558c58b519481f6d71bfe711f30?s=60&#038;d=identicon&#038;r=x' srcset='https://secure.gravatar.com/avatar/becd4afa883be528e898ad2ee4a2a5ebaa0bf558c58b519481f6d71bfe711f30?s=120&#038;d=identicon&#038;r=x 2x' class='avatar avatar-60 photo' height='60' width='60' loading='lazy' decoding='async'/>						<b class="fn"><a href="http://jdm314.livejournal.com" class="url" rel="ugc external nofollow">Mad Latinist</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://dothraki.com/2011/09/the-header-script/#comment-94454"><time datetime="2015-04-20T13:15:13-07:00">April 20, 2015 at 1:15 pm</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>I do remember that a couple years back, when you had to translate into HV on the fly for that one podcast, you were in doubt as to how to say &#8220;inside&#8221; to describing Homer&#8217;s predicament. I believe you said that, at the time, you had not come up with a way to say that specifically, and just went with the locative case or applicative. But the point is moot because you have repeatedly told us to disregard that sentence <img src="https://dothraki.com/wp-includes/images/smilies/icon_wink.gif" alt=";)" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+				</div><!-- .comment-content -->
+
+							</article><!-- .comment-body -->
+		</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-93966" class="comment odd alt thread-odd thread-alt depth-1 parent">
+			<article id="div-comment-93966" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='https://secure.gravatar.com/avatar/16d4f63c6b2018151428958bbf66b5eec71fda58b1e96011061d2a25e2779db6?s=60&#038;d=identicon&#038;r=x' srcset='https://secure.gravatar.com/avatar/16d4f63c6b2018151428958bbf66b5eec71fda58b1e96011061d2a25e2779db6?s=120&#038;d=identicon&#038;r=x 2x' class='avatar avatar-60 photo' height='60' width='60' loading='lazy' decoding='async'/>						<b class="fn">Alexandria Rivas</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://dothraki.com/2011/09/the-header-script/#comment-93966"><time datetime="2015-04-15T17:27:37-07:00">April 15, 2015 at 5:27 pm</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Thank you so much! I really appreciate it, and will do! I&#8217;m actually pretty impressed with myself, I used &#8220;inside&#8221; too but could&#8217;t find &#8220;me&#8221; so kept using &#8220;I&#8221;. Really hoping to see a Valyrian language guide in the future and think the Kickstarter is an awesome idea, that I&#8217;m sure would get a lot of support, mine included. Thanks again!! <img src="https://dothraki.com/wp-includes/images/smilies/icon_biggrin.gif" alt=":D" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://dothraki.com/2011/09/the-header-script/?replytocom=93966#respond" data-commentid="93966" data-postid="92" data-belowelement="div-comment-93966" data-respondelement="respond" data-replyto="Reply to Alexandria Rivas" aria-label="Reply to Alexandria Rivas">Reply</a></div>			</article><!-- .comment-body -->
+		<ol class="children">
+		<li id="comment-94457" class="comment even depth-2">
+			<article id="div-comment-94457" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='https://secure.gravatar.com/avatar/becd4afa883be528e898ad2ee4a2a5ebaa0bf558c58b519481f6d71bfe711f30?s=60&#038;d=identicon&#038;r=x' srcset='https://secure.gravatar.com/avatar/becd4afa883be528e898ad2ee4a2a5ebaa0bf558c58b519481f6d71bfe711f30?s=120&#038;d=identicon&#038;r=x 2x' class='avatar avatar-60 photo' height='60' width='60' loading='lazy' decoding='async'/>						<b class="fn"><a href="http://jdm314.livejournal.com" class="url" rel="ugc external nofollow">Mad Latinist</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://dothraki.com/2011/09/the-header-script/#comment-94457"><time datetime="2015-04-20T13:39:29-07:00">April 20, 2015 at 1:39 pm</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>You are not the first learner to be confused by &#8220;I&#8221; vs. &#8220;me.&#8221; I guess we need to add a better explanation of this on the wiki.</p>
+<p>But as things stand, by each pronoun in the vocabulary there is at least a link to the chart explaining how to decline them. The problem is that many beginners won&#8217;t realize how that relates to the English I/me distinction!</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://dothraki.com/2011/09/the-header-script/?replytocom=94457#respond" data-commentid="94457" data-postid="92" data-belowelement="div-comment-94457" data-respondelement="respond" data-replyto="Reply to Mad Latinist" aria-label="Reply to Mad Latinist">Reply</a></div>			</article><!-- .comment-body -->
+		</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-93968" class="comment odd alt thread-even depth-1">
+			<article id="div-comment-93968" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='https://secure.gravatar.com/avatar/16d4f63c6b2018151428958bbf66b5eec71fda58b1e96011061d2a25e2779db6?s=60&#038;d=identicon&#038;r=x' srcset='https://secure.gravatar.com/avatar/16d4f63c6b2018151428958bbf66b5eec71fda58b1e96011061d2a25e2779db6?s=120&#038;d=identicon&#038;r=x 2x' class='avatar avatar-60 photo' height='60' width='60' loading='lazy' decoding='async'/>						<b class="fn">Alexandria Rivas</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://dothraki.com/2011/09/the-header-script/#comment-93968"><time datetime="2015-04-15T17:59:10-07:00">April 15, 2015 at 5:59 pm</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Ah, I meant i got the &#8220;below&#8221;, using the word &#8220;under&#8221; because I couldn&#8217;t find &#8220;below&#8221;. I saw iemny translated to stomach but it would make sense to use it as &#8220;inside&#8221; or &#8220;within&#8221; lol, still kinda getting the hang of the bits and pieces I find on forums and such, but love the language, its very eloquent and if pronounced correctly, rolls off the tongue. Bought the Dothraki guide yesterday and it is a lot tougher to pronounce but so much fun all the same!</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://dothraki.com/2011/09/the-header-script/?replytocom=93968#respond" data-commentid="93968" data-postid="92" data-belowelement="div-comment-93968" data-respondelement="respond" data-replyto="Reply to Alexandria Rivas" aria-label="Reply to Alexandria Rivas">Reply</a></div>			</article><!-- .comment-body -->
+		</li><!-- #comment-## -->
+		</ol><!-- .comment-list -->
+
+		
+			
+		<div id="respond" class="comment-respond">
+		<h2 id="reply-title" class="comment-reply-title">Leave a comment <small><a rel="nofollow" id="cancel-comment-reply-link" href="/2011/09/the-header-script/#respond" style="display:none;">Cancel reply</a></small></h2><form action="https://dothraki.com/wp-comments-post.php" method="post" id="commentform" class="comment-form"><p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> <span class="required-field-message">Required fields are marked <span class="required">*</span></span></p><p class="comment-form-comment"><label for="comment">Comment <span class="required">*</span></label> <textarea id="comment" name="comment" cols="45" rows="5" maxlength="65525" required></textarea></p><p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" autocomplete="name" required /></p>
+<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes" autocomplete="email" required /></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="url" value="" size="30" maxlength="200" autocomplete="url" /></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment" /> <input type='hidden' name='comment_post_ID' value='92' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="e8304e3640" /></p><p style="display: none !important;" class="akismet-fields-container" data-prefix="ak_"><label>&#916;<textarea name="ak_hp_textarea" cols="45" rows="8" maxlength="100"></textarea></label><input type="hidden" id="ak_js_1" name="ak_js" value="203"/><script>
+document.getElementById( "ak_js_1" ).setAttribute( "value", ( new Date() ).getTime() );
+</script>
+</p></form>	</div><!-- #respond -->
+	<p class="akismet_comment_form_privacy_notice">This site uses Akismet to reduce spam. <a href="https://akismet.com/privacy/" target="_blank" rel="nofollow noopener">Learn how your comment data is processed.</a></p>
+</div><!-- #comments -->
+
+	<nav class="navigation post-navigation" aria-label="Posts">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://dothraki.com/2011/09/dothraki-writing-system/" rel="prev"><p class="meta-nav"><svg class="svg-icon" width="24" height="24" aria-hidden="true" role="img" focusable="false" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M20 13v-2H8l4-4-1-2-7 7 7 7 1-2-4-4z" fill="currentColor"/></svg>Previous post</p><p class="post-title">Dothraki Writing System&#8230;?</p></a></div><div class="nav-next"><a href="https://dothraki.com/2011/09/asshekhqoyi-vezhvena/" rel="next"><p class="meta-nav">Next post<svg class="svg-icon" width="24" height="24" aria-hidden="true" role="img" focusable="false" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="m4 13v-2h12l-4-4 1-2 7 7-7 7-1-2 4-4z" fill="currentColor"/></svg></p><p class="post-title">Asshekhqoyi Vezhvena!</p></a></div></div>
+	</nav>			</main><!-- #main -->
+		</div><!-- #primary -->
+	</div><!-- #content -->
+
+	
+	<aside class="widget-area">
+		<section id="search-2" class="widget widget_search"><form role="search"  method="get" class="search-form" action="https://dothraki.com/">
+	<label for="search-form-1">Search&hellip;</label>
+	<input type="search" id="search-form-1" class="search-field" value="" name="s" />
+	<input type="submit" class="search-submit" value="Search" />
+</form>
+</section><section id="linkcat-2" class="widget widget_links"><h2 class="widget-title">Resources</h2>
+	<ul class='xoxo blogroll'>
+<li><a href="http://dedalvs.com/" title="David J. Peterson&#8217;s conlanging website." target="_blank">Dedalvs.com</a></li>
+<li><a href="http://forum.dothraki.org/" title="A forum for discussing the Dothraki language." target="_blank">Dothraki Forums</a></li>
+<li><a href="http://wiki.dothraki.org/" title="A wiki documenting the various aspects of the Dothraki language." target="_blank">Dothraki Language Wiki</a></li>
+<li><a href="http://www.dothraki.org/" title="The Dothraki Language fan community." target="_blank">Dothraki.org</a></li>
+<li><a href="http://www.conlang.org/" title="The homepage of the Language Creation Society (LCS)." target="_blank">Language Creation Society</a></li>
+<li><a href="http://westeros.org/" title="The premiere Song of Ice and Fire fansite on the net." target="_blank">Westeros.org</a></li>
+<li><a href="http://winter-is-coming.net/" title="A site for news and rumors about HBO&#8217;s Game of Thrones." target="_blank">Winter-Is-Coming.net</a></li>
+
+	</ul>
+</section>
+	</aside><!-- .widget-area -->
+
+
+	<footer id="colophon" class="site-footer">
+
+				<div class="site-info">
+			<div class="site-name">
+																						<a href="https://dothraki.com/">Dothraki</a>
+																		</div><!-- .site-name -->
+
+			
+			<div class="powered-by">
+				Proudly powered by <a href="https://wordpress.org/">WordPress</a>.			</div><!-- .powered-by -->
+
+		</div><!-- .site-info -->
+	</footer><!-- #colophon -->
+
+</div><!-- #page -->
+
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/wp-content/uploads/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/twentytwentyone/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+<script>document.body.classList.remove("no-js");</script>	<script>
+	if ( -1 !== navigator.userAgent.indexOf( 'MSIE' ) || -1 !== navigator.appVersion.indexOf( 'Trident/' ) ) {
+		document.body.classList.add( 'is-IE' );
+	}
+	</script>
+			<script>
+		/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",(function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())}),!1);
+		</script>
+		<script id="my_script-js" src="https://dothraki.com/wp-content/plugins/byrd-translate/translate.js?ver=1.0"></script>
+<script async data-wp-strategy="async" fetchpriority="low" id="comment-reply-js" src="https://dothraki.com/wp-includes/js/comment-reply.min.js?ver=7.1"></script>
+<script id="twenty-twenty-one-ie11-polyfills-js-after">
+( Element.prototype.matches && Element.prototype.closest && window.NodeList && NodeList.prototype.forEach ) || document.write( '<\u0073cript src="https://dothraki.com/wp-content/themes/twentytwentyone/assets/js/polyfills.js?ver=1.5"></scr' + 'ipt>' );
+//# sourceURL=twenty-twenty-one-ie11-polyfills-js-after
+</script>
+<script id="twenty-twenty-one-responsive-embeds-script-js" src="https://dothraki.com/wp-content/themes/twentytwentyone/assets/js/responsive-embeds.js?ver=1.5"></script>
+<script defer id="akismet-frontend-js" src="https://dothraki.com/wp-content/plugins/akismet/_inc/akismet-frontend.js?ver=1787794922"></script>
+<script id="wp-emoji-settings" type="application/json">
+{"baseUrl":"https://s.w.org/images/core/emoji/17.0.2/72x72/","ext":".png","svgUrl":"https://s.w.org/images/core/emoji/17.0.2/svg/","svgExt":".svg","source":{"concatemoji":"https://dothraki.com/wp-includes/js/wp-emoji-release.min.js?ver=7.1"}}
+</script>
+<script type="module">
+/*! This file is auto-generated */
+var e="script#wp-emoji-settings",t=document.querySelector(e);if(!(t instanceof HTMLScriptElement))throw new Error("Element missing: "+e);const r=JSON.parse(t.text),s=(window._wpemojiSettings=r,"wpEmojiSettingsSupports"),o=["flag","emoji"];function i(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(s,JSON.stringify(t))}catch(e){}}function c(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0);const r=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);return t.every((e,t)=>e===r[t])}function p(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var n=e.getImageData(16,16,1,1);for(let e=0;e<n.data.length;e++)if(0!==n.data[e])return!1;return!0}function u(e,t,n,r){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!r(e,"\ud83e\u1fac8")}return!1}function f(e,t,n,r){let a;const s=(a="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):document.createElement("canvas")).getContext("2d",{willReadFrequently:!0}),o=(s.textBaseline="top",s.font="600 32px Arial",{});return e.forEach(e=>{o[e]=t(s,e,n,r)}),o}function a(e){var t=document.createElement("script");t.src=e,t.defer=!0,document.head.appendChild(t)}r.supports={everything:!0,everythingExceptFlag:!0},new Promise(t=>{let n=function(){try{var e=JSON.parse(sessionStorage.getItem(s));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(o),u.toString(),c.toString(),p.toString()].join(",")+"));",r=new Blob([e],{type:"text/javascript"});const a=new Worker(URL.createObjectURL(r),{name:"wpTestEmojiSupports"});return void(a.onmessage=e=>{i(n=e.data),a.terminate(),t(n)})}catch(e){}i(n=f(o,u,c,p))}t(n)}).then(e=>{for(const n in e)r.supports[n]=e[n],r.supports.everything=r.supports.everything&&r.supports[n],"flag"!==n&&(r.supports.everythingExceptFlag=r.supports.everythingExceptFlag&&r.supports[n]);var t;r.supports.everythingExceptFlag=r.supports.everythingExceptFlag&&!r.supports.flag,r.supports.everything||((t=r.source||{}).concatemoji?a(t.concatemoji):t.wpemoji&&t.twemoji&&(a(t.twemoji),a(t.wpemoji)))});
+//# sourceURL=https://dothraki.com/wp-includes/js/wp-emoji-loader.min.js
+</script>
+
+</body>
+</html>

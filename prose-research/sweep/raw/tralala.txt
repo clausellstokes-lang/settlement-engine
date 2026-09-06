@@ -1,0 +1,1844 @@
+Nothing Tra La La?: Steering the Craft, by Ursula le Guin 
+
+Nothing Tra La La?
+
+ The blog of writer and producer Simon Guerrier 
+
+ Friday, January 30, 2026 
+
+Steering the Craft, by Ursula le Guin
+
+Dr Una McCormack recommended me this brilliant book on the craft of writing. The title is a pun, the idea being that a piece of writing — a story, a novel, a work of non-fiction — is like a boat on the water, making for a destination. What can be done to guide it? 
+ Other guides to writing, such as Screenplay by Syd Field , approach this kind of thing like we’re building a house. You work out the frame of your story, put up the scaffolding and then fill in the gaps. 
+ The danger of that, I think, is that it often becomes a kind of prescribed blueprint, the way screenplays must be constructed. You end up with vast estates of near-identical houses, all achingly by-the-numbers. Sometimes, I watch the first few minutes of a movie, or even the trailer, and know exactly how the thing will play out. 
+ Le Guin is on to this:
+ 
+ “Plot is so much discussed in literature and writing courses, and action is so highly valued, that I want to put in a counterweight opinion. A story that has nothing but action and plot is a pretty poor affair; and some great stories have neither. To my mind, plot is merely one way of telling a story, by connecting the happenings tightly, usually through causal chains. Plot is a marvellous device.
+ But it’s not superior to story, and not even necessary to it. As for action, indeed a story must move, something must happen: but the action can be nothing more than a letter sent that doesn’t arrive, a thought unspoken, the passage of a summer day. Unceasing violent action is usually a sign that in fact no story is being told.” (p. 83)
+
+ She comes at things from the opposite direction. Rather than start with the structure then fill in the gaps, her focus is on what you put in each sentence. Start with ensuring you have the right tools and know how to use them. To switch analogies, the effect of the book is like sharpening one’s knives before starting to cook.
+ The chapters cover the sound of your writing spoken aloud, punctuation and grammar, sentence length, the use of repetition, adjectives and adverbs, using verbs to express person and tense, point of view, indirect narration and what she calls “crowding and leaping” — when to provide lots of detail and where to skip through it. 
+ Each chapter contains examples, either from works of classic (ie out-of-copyright) literature or stuff specially written by le Guin. This stuff is illuminating and fun. 
+ For example, le Guin quotes the opening paragraphs of the first three chapters of Bleak House by Charles Dickens (1852). The first two are in what she calls the “involved authorial voice” — she objects to the term “omniscient” narrator as judgmental (p. 57) — and then it switches to first person, past tense, from the POV of Esther Summerson. Le Guin comments afterwards:
+ “ Bleak House is a powerful novel, and some of its dramatic power may come from this highly artificial alternation and contrast of voices. But the transition from Dickens to Esther is always a jolt. And the twenty-year-old girl sometimes begins to sound awfully like the middle-aged novelist, which is implausible (though rather a relief, because Esther is given to tiresome fits of self-depreciation, and Dickens isn’t). Dickens was well aware of the dangers of his narrative strategy; the narrating author never overlaps with the observer-narrator, never enters Esther’s mind, never even sees her. The two narratives remain separate. The plot unites them but they never touch. It is an odd device.” (p. 75)
+
+ This stuff about different kinds of narrator has been really useful in clarifying my thoughts about what Terrance Dicks was doing as he novelised Doctor Who stories. Le Guin details several different kinds of narrator, with the same scene related in each different mode so we can see the effect. She differentiates between first person, limited third person (ie in the head of one character), involved author, detached author, and observer-narrator (both first and third person).
+ For example:
+ 
+ “ Detached Author (‘Fly on the Wall’, ‘Camera Eye’, Objective Narrator’) 
+ There is no viewpoint character. The narrator is not one of the characters and can say of the characters only what a totally neutral observer (an intelligent fly on the wall) might infer of them from behaviour and speech. The author never enters a character’s mind. People and places may be exactly described, but values and judgements can only be implied indirectly. A popular voice around 1900 and in ‘minimalist’ and ‘brand-name’ fiction, it is the least overtly, most covertly manipulative of the points of view.” (pp. 58-59).
+
+ I can see why this mode would suit “brand-name” fiction. If you’re writing a novelisation of a TV show or film, the source takes that point of view anyway — because the viewer is effectively the fly on the wall, and all pertinent information must be relayed by what we see or characters say. Even if you write an original Doctor Who novel — or Star Trek or Star Wars — you’re still often in that mode. Make it read like something we’re watching, and it will feel more authentic.
+ If you want a novel to feel more novelistic, you do something else. In the very first Doctor Who novelisation, Doctor Who in an Exciting Adventure with the Daleks (1964), writer David Whitaker used first person, relaying events originally seen on screen through the perspective of one of the lead characters. On screen, a lot of the mood is created by visual design, effects and music. On the page, the tone is set by a narrator sharing his feelings.
+ In 1990, when editor Peter Darvill Evans established a range of original Doctor Who novels aimed at adult readers, he wanted “stories too broad and deep for the small screen” — a claim printed on the backs of the books. One way he achieved this richness was to insist that books were written from multiple points of view, strictly marshalled.
+ As per the guidelines sent out to prospective authors, each distinct section of a chapter was to be told in limited third person, the events as seen and understood by one character. If the writer wanted to change perspective, they needed to start a new section. They were also not to relay information from the perspective of the Doctor, so that he’d remain alien and mysterious.
+ I’ve seen some correspondence from editor Peter Darvill-Evans to Terrance Dicks, insisting on this approach for the novel that became Timewyrm: Exodus (1991). After 64 novelisations of TV Doctor Who stories, Terrance had developed a very different method for writing Doctor Who — but not as detached author.
+ He’ll tell us, for example, that the Doctor brooding at the start of Doctor Who and the Pyramids of Mars (1976) is not his usual, cheery disposition. That’s not the Doctor’s point of view, or that of companion Sarah; it is Terrance as author. He tells us where Sarah picked up her knowledge of ancient Egypt, or what the letters in TARDIS stand for. He’s an involved author, putting out sign-posts to guide the reader.
+ Within the same section, Terrance might change POV or jump in space and time, but it’s never confusing — we know exactly where we are. Le Guin gives an example of another writer doing the same thing. In To the Lighthouse by Virginia Woolf (1927), we move back and forth between the perspectives of Mrs Ramsay and her husband. Le Guins provides a long example, then says:
+ “Notice how Woolf makes the transitions effortlessly but perfectly clearly. … The paragraph indent is the signal for the switch back to Mrs Ramsay. What are the next switches and how are they signalled?” (p. 80)
+
+ That’s not to suggest that Terrance Dicks was consciously following the example of Virginia Woolf; it’s just that she, via le Guin, opened up for me what he was doing. Note also that le Guin doesn’t simply tell us what’s being done. She prompts us to read the example again and puzzle out its workings for ourselves.
+ Each chapter includes writing exercises aimed at writing groups of at least six people to prompt discussion and reflection. The point is not to prescribe a method of writing but to suggest things to think about and try.
+ In that sense, this book reminded me of “Politics and the English language”, the essay by George Orwell about conveying meaning in a plain style to maximise the chances of being understood, which I found so useful when I worked in the press office of a government department, and which I think still influences a lot of what I write. Orwell lays out a series of rules, then tells us to break them if needed.
+ In the same way, Steering the Craft is a practical and pragmatic guide for writers, and has really helped me this week on something I’m writing as yet unannounced. It meant a switch of perspective, too. Oh, I realised, as the problem I’d been wrestling with suddenly resolved, I’m the one being steered.
+ See also:
+ 
+ Me on The Wizard of Earthsea , The Tombs of Atuan and The Farthest Shore by Ursula le Guin
+
+Posted by
+
+ 0tralala 
+
+at
+ 
+ 11:22 am 
+
+Labels:
+ books ,
+ classics ,
+ david whitaker ,
+ droo ,
+ orwell ,
+ sci-fi ,
+ stuff written ,
+ terrance dicks ,
+ writing 
+
+ No comments:
+
+ Post a Comment 
+
+ Newer Post 
+
+ Older Post 
+ 
+ Home 
+
+Subscribe to:
+ Post Comments (Atom) 
+
+ Essential information
+
+ About Simon Guerrier 
+
+ -- Audio by me 
+
+ -- Books by me 
+
+ -- Comics by me 
+
+ -- Film, TV and video 
+
+ -- Journalism 
+
+ -- Short stories 
+
+ Me on Bluesky 
+
+ Me on Wikipedia 
+
+ Me on IMDB 
+
+ My interviews with Doctor Who cast and crew 
+
+ Blog Archive
+
+ ▼ 
+
+2026
+ 
+ (63) 
+
+ ► 
+
+September
+ 
+ (3) 
+
+ ► 
+
+August
+ 
+ (6) 
+
+ ► 
+
+July
+ 
+ (11) 
+
+ ► 
+
+June
+ 
+ (3) 
+
+ ► 
+
+May
+ 
+ (4) 
+
+ ► 
+
+April
+ 
+ (13) 
+
+ ► 
+
+March
+ 
+ (7) 
+
+ ► 
+
+February
+ 
+ (7) 
+
+ ▼ 
+
+January
+ 
+ (9) 
+ 
+ Steering the Craft, by Ursula le Guin 
+
+ DWM The Yearbook 2026 
+
+ Box of Delights, by Richard Marson 
+
+ LokI: A Bad God's Guide 5, by Louie Stowell 
+
+ Blake's 7 in the Telegraph 
+
+ The Doctor Who Dinosaur Book, by Terrance Dicks an... 
+
+ Vortex #203 — The Heartless Sea 
+
+ Lynchian, by John Higgs 
+
+ Screenplay — The Foundations of Screenwriting, by ... 
+
+ ► 
+
+2025
+ 
+ (117) 
+
+ ► 
+
+December
+ 
+ (14) 
+
+ ► 
+
+November
+ 
+ (11) 
+
+ ► 
+
+October
+ 
+ (10) 
+
+ ► 
+
+September
+ 
+ (10) 
+
+ ► 
+
+August
+ 
+ (8) 
+
+ ► 
+
+July
+ 
+ (8) 
+
+ ► 
+
+June
+ 
+ (12) 
+
+ ► 
+
+May
+ 
+ (9) 
+
+ ► 
+
+April
+ 
+ (11) 
+
+ ► 
+
+March
+ 
+ (11) 
+
+ ► 
+
+February
+ 
+ (6) 
+
+ ► 
+
+January
+ 
+ (7) 
+
+ ► 
+
+2024
+ 
+ (106) 
+
+ ► 
+
+December
+ 
+ (12) 
+
+ ► 
+
+November
+ 
+ (5) 
+
+ ► 
+
+October
+ 
+ (11) 
+
+ ► 
+
+September
+ 
+ (11) 
+
+ ► 
+
+August
+ 
+ (7) 
+
+ ► 
+
+July
+ 
+ (9) 
+
+ ► 
+
+June
+ 
+ (11) 
+
+ ► 
+
+May
+ 
+ (8) 
+
+ ► 
+
+April
+ 
+ (9) 
+
+ ► 
+
+March
+ 
+ (9) 
+
+ ► 
+
+February
+ 
+ (6) 
+
+ ► 
+
+January
+ 
+ (8) 
+
+ ► 
+
+2023
+ 
+ (71) 
+
+ ► 
+
+December
+ 
+ (7) 
+
+ ► 
+
+November
+ 
+ (14) 
+
+ ► 
+
+October
+ 
+ (5) 
+
+ ► 
+
+September
+ 
+ (5) 
+
+ ► 
+
+August
+ 
+ (4) 
+
+ ► 
+
+July
+ 
+ (3) 
+
+ ► 
+
+June
+ 
+ (5) 
+
+ ► 
+
+May
+ 
+ (5) 
+
+ ► 
+
+April
+ 
+ (4) 
+
+ ► 
+
+March
+ 
+ (6) 
+
+ ► 
+
+February
+ 
+ (7) 
+
+ ► 
+
+January
+ 
+ (6) 
+
+ ► 
+
+2022
+ 
+ (65) 
+
+ ► 
+
+December
+ 
+ (6) 
+
+ ► 
+
+November
+ 
+ (4) 
+
+ ► 
+
+October
+ 
+ (1) 
+
+ ► 
+
+September
+ 
+ (3) 
+
+ ► 
+
+August
+ 
+ (5) 
+
+ ► 
+
+July
+ 
+ (8) 
+
+ ► 
+
+June
+ 
+ (10) 
+
+ ► 
+
+May
+ 
+ (3) 
+
+ ► 
+
+April
+ 
+ (7) 
+
+ ► 
+
+March
+ 
+ (8) 
+
+ ► 
+
+February
+ 
+ (7) 
+
+ ► 
+
+January
+ 
+ (3) 
+
+ ► 
+
+2021
+ 
+ (66) 
+
+ ► 
+
+December
+ 
+ (6) 
+
+ ► 
+
+November
+ 
+ (10) 
+
+ ► 
+
+October
+ 
+ (10) 
+
+ ► 
+
+September
+ 
+ (4) 
+
+ ► 
+
+August
+ 
+ (6) 
+
+ ► 
+
+July
+ 
+ (3) 
+
+ ► 
+
+June
+ 
+ (6) 
+
+ ► 
+
+May
+ 
+ (4) 
+
+ ► 
+
+April
+ 
+ (8) 
+
+ ► 
+
+March
+ 
+ (3) 
+
+ ► 
+
+February
+ 
+ (3) 
+
+ ► 
+
+January
+ 
+ (3) 
+
+ ► 
+
+2020
+ 
+ (66) 
+
+ ► 
+
+December
+ 
+ (4) 
+
+ ► 
+
+November
+ 
+ (4) 
+
+ ► 
+
+October
+ 
+ (4) 
+
+ ► 
+
+September
+ 
+ (7) 
+
+ ► 
+
+August
+ 
+ (2) 
+
+ ► 
+
+July
+ 
+ (6) 
+
+ ► 
+
+June
+ 
+ (3) 
+
+ ► 
+
+May
+ 
+ (11) 
+
+ ► 
+
+April
+ 
+ (6) 
+
+ ► 
+
+March
+ 
+ (6) 
+
+ ► 
+
+February
+ 
+ (7) 
+
+ ► 
+
+January
+ 
+ (6) 
+
+ ► 
+
+2019
+ 
+ (85) 
+
+ ► 
+
+December
+ 
+ (6) 
+
+ ► 
+
+November
+ 
+ (8) 
+
+ ► 
+
+October
+ 
+ (8) 
+
+ ► 
+
+September
+ 
+ (6) 
+
+ ► 
+
+August
+ 
+ (10) 
+
+ ► 
+
+July
+ 
+ (11) 
+
+ ► 
+
+June
+ 
+ (13) 
+
+ ► 
+
+May
+ 
+ (7) 
+
+ ► 
+
+April
+ 
+ (4) 
+
+ ► 
+
+March
+ 
+ (3) 
+
+ ► 
+
+February
+ 
+ (6) 
+
+ ► 
+
+January
+ 
+ (3) 
+
+ ► 
+
+2018
+ 
+ (65) 
+
+ ► 
+
+December
+ 
+ (6) 
+
+ ► 
+
+November
+ 
+ (6) 
+
+ ► 
+
+October
+ 
+ (4) 
+
+ ► 
+
+September
+ 
+ (4) 
+
+ ► 
+
+August
+ 
+ (7) 
+
+ ► 
+
+July
+ 
+ (7) 
+
+ ► 
+
+June
+ 
+ (7) 
+
+ ► 
+
+May
+ 
+ (2) 
+
+ ► 
+
+April
+ 
+ (6) 
+
+ ► 
+
+March
+ 
+ (7) 
+
+ ► 
+
+February
+ 
+ (4) 
+
+ ► 
+
+January
+ 
+ (5) 
+
+ ► 
+
+2017
+ 
+ (38) 
+
+ ► 
+
+December
+ 
+ (2) 
+
+ ► 
+
+November
+ 
+ (4) 
+
+ ► 
+
+October
+ 
+ (1) 
+
+ ► 
+
+September
+ 
+ (2) 
+
+ ► 
+
+August
+ 
+ (4) 
+
+ ► 
+
+July
+ 
+ (3) 
+
+ ► 
+
+June
+ 
+ (6) 
+
+ ► 
+
+May
+ 
+ (2) 
+
+ ► 
+
+April
+ 
+ (5) 
+
+ ► 
+
+March
+ 
+ (3) 
+
+ ► 
+
+February
+ 
+ (3) 
+
+ ► 
+
+January
+ 
+ (3) 
+
+ ► 
+
+2016
+ 
+ (46) 
+
+ ► 
+
+December
+ 
+ (5) 
+
+ ► 
+
+November
+ 
+ (4) 
+
+ ► 
+
+October
+ 
+ (6) 
+
+ ► 
+
+September
+ 
+ (4) 
+
+ ► 
+
+August
+ 
+ (1) 
+
+ ► 
+
+July
+ 
+ (3) 
+
+ ► 
+
+June
+ 
+ (3) 
+
+ ► 
+
+May
+ 
+ (4) 
+
+ ► 
+
+April
+ 
+ (4) 
+
+ ► 
+
+March
+ 
+ (5) 
+
+ ► 
+
+February
+ 
+ (5) 
+
+ ► 
+
+January
+ 
+ (2) 
+
+ ► 
+
+2015
+ 
+ (46) 
+
+ ► 
+
+December
+ 
+ (4) 
+
+ ► 
+
+November
+ 
+ (1) 
+
+ ► 
+
+October
+ 
+ (4) 
+
+ ► 
+
+September
+ 
+ (9) 
+
+ ► 
+
+August
+ 
+ (5) 
+
+ ► 
+
+July
+ 
+ (3) 
+
+ ► 
+
+June
+ 
+ (5) 
+
+ ► 
+
+May
+ 
+ (6) 
+
+ ► 
+
+April
+ 
+ (2) 
+
+ ► 
+
+March
+ 
+ (4) 
+
+ ► 
+
+February
+ 
+ (2) 
+
+ ► 
+
+January
+ 
+ (1) 
+
+ ► 
+
+2014
+ 
+ (40) 
+
+ ► 
+
+December
+ 
+ (6) 
+
+ ► 
+
+November
+ 
+ (1) 
+
+ ► 
+
+October
+ 
+ (1) 
+
+ ► 
+
+September
+ 
+ (2) 
+
+ ► 
+
+August
+ 
+ (3) 
+
+ ► 
+
+July
+ 
+ (2) 
+
+ ► 
+
+June
+ 
+ (3) 
+
+ ► 
+
+May
+ 
+ (2) 
+
+ ► 
+
+April
+ 
+ (2) 
+
+ ► 
+
+March
+ 
+ (4) 
+
+ ► 
+
+February
+ 
+ (4) 
+
+ ► 
+
+January
+ 
+ (10) 
+
+ ► 
+
+2013
+ 
+ (111) 
+
+ ► 
+
+December
+ 
+ (13) 
+
+ ► 
+
+November
+ 
+ (21) 
+
+ ► 
+
+October
+ 
+ (6) 
+
+ ► 
+
+September
+ 
+ (5) 
+
+ ► 
+
+August
+ 
+ (7) 
+
+ ► 
+
+July
+ 
+ (9) 
+
+ ► 
+
+June
+ 
+ (7) 
+
+ ► 
+
+May
+ 
+ (8) 
+
+ ► 
+
+April
+ 
+ (15) 
+
+ ► 
+
+March
+ 
+ (8) 
+
+ ► 
+
+February
+ 
+ (4) 
+
+ ► 
+
+January
+ 
+ (8) 
+
+ ► 
+
+2012
+ 
+ (66) 
+
+ ► 
+
+December
+ 
+ (3) 
+
+ ► 
+
+November
+ 
+ (9) 
+
+ ► 
+
+October
+ 
+ (4) 
+
+ ► 
+
+September
+ 
+ (5) 
+
+ ► 
+
+August
+ 
+ (6) 
+
+ ► 
+
+July
+ 
+ (7) 
+
+ ► 
+
+June
+ 
+ (7) 
+
+ ► 
+
+May
+ 
+ (12) 
+
+ ► 
+
+April
+ 
+ (3) 
+
+ ► 
+
+March
+ 
+ (1) 
+
+ ► 
+
+February
+ 
+ (3) 
+
+ ► 
+
+January
+ 
+ (6) 
+
+ ► 
+
+2011
+ 
+ (76) 
+
+ ► 
+
+December
+ 
+ (5) 
+
+ ► 
+
+November
+ 
+ (9) 
+
+ ► 
+
+October
+ 
+ (9) 
+
+ ► 
+
+September
+ 
+ (9) 
+
+ ► 
+
+August
+ 
+ (5) 
+
+ ► 
+
+July
+ 
+ (6) 
+
+ ► 
+
+June
+ 
+ (13) 
+
+ ► 
+
+May
+ 
+ (6) 
+
+ ► 
+
+April
+ 
+ (1) 
+
+ ► 
+
+March
+ 
+ (1) 
+
+ ► 
+
+February
+ 
+ (3) 
+
+ ► 
+
+January
+ 
+ (9) 
+
+ ► 
+
+2010
+ 
+ (95) 
+
+ ► 
+
+December
+ 
+ (2) 
+
+ ► 
+
+November
+ 
+ (4) 
+
+ ► 
+
+October
+ 
+ (2) 
+
+ ► 
+
+September
+ 
+ (7) 
+
+ ► 
+
+August
+ 
+ (9) 
+
+ ► 
+
+July
+ 
+ (4) 
+
+ ► 
+
+June
+ 
+ (3) 
+
+ ► 
+
+May
+ 
+ (9) 
+
+ ► 
+
+April
+ 
+ (9) 
+
+ ► 
+
+March
+ 
+ (21) 
+
+ ► 
+
+February
+ 
+ (13) 
+
+ ► 
+
+January
+ 
+ (12) 
+
+ ► 
+
+2009
+ 
+ (144) 
+
+ ► 
+
+December
+ 
+ (15) 
+
+ ► 
+
+November
+ 
+ (14) 
+
+ ► 
+
+October
+ 
+ (6) 
+
+ ► 
+
+September
+ 
+ (10) 
+
+ ► 
+
+August
+ 
+ (12) 
+
+ ► 
+
+July
+ 
+ (8) 
+
+ ► 
+
+June
+ 
+ (10) 
+
+ ► 
+
+May
+ 
+ (12) 
+
+ ► 
+
+April
+ 
+ (11) 
+
+ ► 
+
+March
+ 
+ (13) 
+
+ ► 
+
+February
+ 
+ (13) 
+
+ ► 
+
+January
+ 
+ (20) 
+
+ ► 
+
+2008
+ 
+ (179) 
+
+ ► 
+
+December
+ 
+ (12) 
+
+ ► 
+
+November
+ 
+ (10) 
+
+ ► 
+
+October
+ 
+ (12) 
+
+ ► 
+
+September
+ 
+ (15) 
+
+ ► 
+
+August
+ 
+ (25) 
+
+ ► 
+
+July
+ 
+ (15) 
+
+ ► 
+
+June
+ 
+ (17) 
+
+ ► 
+
+May
+ 
+ (19) 
+
+ ► 
+
+April
+ 
+ (21) 
+
+ ► 
+
+March
+ 
+ (16) 
+
+ ► 
+
+February
+ 
+ (5) 
+
+ ► 
+
+January
+ 
+ (12) 
+
+ ► 
+
+2007
+ 
+ (166) 
+
+ ► 
+
+December
+ 
+ (16) 
+
+ ► 
+
+November
+ 
+ (21) 
+
+ ► 
+
+October
+ 
+ (18) 
+
+ ► 
+
+September
+ 
+ (7) 
+
+ ► 
+
+August
+ 
+ (15) 
+
+ ► 
+
+July
+ 
+ (17) 
+
+ ► 
+
+June
+ 
+ (6) 
+
+ ► 
+
+May
+ 
+ (15) 
+
+ ► 
+
+April
+ 
+ (16) 
+
+ ► 
+
+March
+ 
+ (10) 
+
+ ► 
+
+February
+ 
+ (10) 
+
+ ► 
+
+January
+ 
+ (15) 
+
+ ► 
+
+2006
+ 
+ (263) 
+
+ ► 
+
+December
+ 
+ (19) 
+
+ ► 
+
+November
+ 
+ (20) 
+
+ ► 
+
+October
+ 
+ (17) 
+
+ ► 
+
+September
+ 
+ (24) 
+
+ ► 
+
+August
+ 
+ (25) 
+
+ ► 
+
+July
+ 
+ (18) 
+
+ ► 
+
+June
+ 
+ (23) 
+
+ ► 
+
+May
+ 
+ (23) 
+
+ ► 
+
+April
+ 
+ (22) 
+
+ ► 
+
+March
+ 
+ (20) 
+
+ ► 
+
+February
+ 
+ (24) 
+
+ ► 
+
+January
+ 
+ (28) 
+
+ ► 
+
+2005
+ 
+ (132) 
+
+ ► 
+
+December
+ 
+ (24) 
+
+ ► 
+
+November
+ 
+ (17) 
+
+ ► 
+
+October
+ 
+ (26) 
+
+ ► 
+
+September
+ 
+ (22) 
+
+ ► 
+
+August
+ 
+ (11) 
+
+ ► 
+
+July
+ 
+ (13) 
+
+ ► 
+
+June
+ 
+ (19) 
+
+ Popular Posts
+
+ Artemis, by Andy Weir 
+
+ I really enjoyed this rollicking thriller by the author of The Martian . Like that, it's full of practical problem-solving in space, ...
+
+ List of books written by Terrance Dicks 
+
+ Here is what I hope is a definitive list of the 235 books written by the prolific Terrance Dicks. The Doctor Who books are well attested; wo...
+
+ ST: TNG 2.9 The Measure of a Man 
+
+ This is the second of 12 episodes of Star Trek: The Next Generation recommended to me. The first one was 1.13 Datalore . We begin 2.9 ...
+
+ Game over 
+
+ The IVF didn't work. Me and the Dr can't have our own kids.* It's not unexpected - the odds were always stacked against us - bu...
+
+ Make the most of it 
+
+ Watched the second part of Root of all Evil? last night. The Doctor arrived just in time for the chimps, and quickly ran away again. There...
+
+ Kingdom Come, by Mark Waid and Alex Ross 
+
+ I'm struggling a bit with reading at the moment - one day last week I started four different books and couldn't hold my concentra...
+
+ Van Gogh's paintings in Doctor Who 
+
+ Vincent Van Gogh was born on this day in 1853, and this evening my clever friend Emily Cook at Doctor Who Magazine has organised a special...
+
+ An alternative present 
+
+ With a week to go before the proper release of V for vendetta at the pictures , here's something I originally wrote for my MA in spacesh...
+
+ Smiley happy people holding hands 
+
+ “Some people act a memory, the Superintendent thought, noticing his concentration, others have one. In the Superintendent’s book, memory w...
+
+ Oddfelt 
+
+ Have spoken before about odd things in James Bond films , but working my way through the shiny new attache case of all 20 remastered flicks,...
+
+ Followers
+
+ Blogger profile
+
+0tralala
+
+ Writer and sometime producer, see www.simonguerrier.com . 
+
+Latest books: David Whitaker in an Exciting Adventure with Television and Black Archive: The Edge of Destruction . 
+ 
+ View my complete profile

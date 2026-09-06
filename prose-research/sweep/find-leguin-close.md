@@ -47,3 +47,29 @@ an empty body (POT-token gated) so no video transcript has been READ yet; videos
 - NOT substantive for prose: Jon Mayo (beats only), By Singing Light Tombs, John Pyle, Allison Wall (exercise only), Ekostories, Calmgrove (poetry),
   Cannonball stegolily, Goodreads Robinson (one line), Kamffer Goodreads stub, stillnotarobot (stub), Bros Before Prose, Reactor Farthest Shore (Walton), Wall, Ann Kroeker, Wille 2012 (quote only).
 - UNREACHABLE: moonswordbooks (DNS), fimfiction (Cloudflare), YouTube transcripts, Examined Life (JS shell), dearheadofmine (paywall).
+
+---
+# ROUND 3 (2026-09-06, Opus finder) — checkpoint 1
+Round-2 notes above list ~30 sources already read; merged-leguin.json already banks 100 claims (kept 41), so round 3 deliberately opened NEW ground rather than re-mining Stan Carey / NEA / Walton / Nepveu / LitHub, which are already banked.
+Route: WebFetch returned SUMMARIES not page text, so every page this round was pulled RAW by `curl --compressed -A <Chrome UA>` into sweep/lgc/*.html and de-tagged to sweep/lgc/*.txt. Every quotation was grep-verified against the fetched .txt (lgc-claims1.py -> 0 unverified).
+
+## NEW VEIN A — ALWAYS COMING HOME as the archival/gazetteer register (the closest thing in Le Guin to a settlement dossier; ABSENT from rounds 1-2)
+- Rich Horton, Strange at Ecbatan (2024-04-24) — SUBSTANTIVE + counter-evidence: the ethnographic sections are "intellectually intriguing, but, really, often a struggle to read"; reads "like a writer deciding to include all her notes"; the book is "more impressive than it is involving"; a ~100-page appendix "The Back of the Book"; Pandora = "a stand in for the author or the future anthropologist".
+- Scott Manley Hadley, Triumph Of The Now (2019-07-13) — "a novel that masquerades as anthropology, a study of a people"; third-person essays on "how they measure time, how they draw maps"; "It is fiction without being storytelling".
+- Cat Eldridge, A Green Man Review (2001) — "Tolkien's world has virtually no ethnographic detail" while Le Guin's has no history; the back of the book is "in a traditional ethnographic form"; should be "read in very small pieces".
+- Nathanael Bonnell, New Maps Winter 2021 / Resilience.org (2023-02-16) — "not a single story but a collection of texts"; document types "short plays, songs, a chapter of a novel, personal accounts"; the present day survives "remembered only in stray fragments of folklore" (the Red Brick People); Le Guin stages "a dialogue between herself-as-narrator and a Kesh village archivist"; opening asks the reader to "bear with some unfamiliar terms".
+  => the register lesson: an archival register can carry a whole book, but four independent readers all report the same failure mode (fragmentary, slow, better in small pieces).
+
+## NEW VEIN B — OMELAS as a description of a CITY (also absent from rounds 1-2)
+- Oliver Tearle, Interesting Literature (2021-02) — the narrator is an "uncertain narrator", "as distinct from an unreliable narrator", who confesses to "lacking detailed knowledge of the laws and rules of Omelas"; the city is characterised by absent institutions ("They have no King, and do not keep slaves"; "no stock exchange and no advertisements").
+- Sarah Wyman (SUNY New Paltz), Literary Ladies Guide — the only true line-level source found this round: "long lines of the first paragraph mimic the festival parade"; a "chiastic" sound echo; the narrator interrupts to ask "How is one to tell about joy?"; she "divest[s] herself of authority and responsibility for defining Omelas".
+- Pressbooks student Reader Response (CWI, 2022-12) — Le Guin describes "without giving exact details, allows the reader to interpret".
+
+## NEW VEIN C — Earthsea scale and institutions
+- Erin Ramsay, "Earthsea: A Sharpening of Scale" (Substack) — Tombs of Atuan's conflict is administrative, "over the posting of guards and how to punish unbelievers"; the mythic "gives way to the realistic and mundane"; Tehanu is "the final sharpening of scale"; quotes Lorbanery villagers "sullen and silent in the large, soft rain of April".
+- Matt Bell, Reactor 2021-08-24 — a genuine one-sentence close reading of Rocannon's World ("See the two progressions expanding its scale as it goes"; "hear the parallel construction of the two rhyming sets"); worldbuilding "working from the big picture down to the minutiae of local life"; the Gethenian ice-cracking table implement; the bare-noun LHoD line "rock, ice, sky, and silence: nothing else, for eighty-one days"; a commenter: "She can say more in twenty words than almost anyone".
+- SFF Chronicles thread 583221 (2022-08-01) — thin but a real forum: a reader calls the Wizard prose "very archaic and flowed in a unique style" (counter-evidence against Le Guin's own anti-costume rule); a moderator: LHoD is "very different from the Earthsea books in style and tone".
+
+## NOT substantive for prose this round: John Pyle (Fairy Spell), F(r)iction (Morken), LitCharts ch.1, Matt Bell substack #21 (Le Guin named only in passing).
+## Redirect/duplicate: reactormag "storytelling-lessons" (2022-03-10) is a republication of the same 2021 essay ("Originally published August 2021").
+## BLOCKED so far: youtubetotranscript.com 403; www.tor.com 403 (reactormag mirror works); no yt-dlp/youtube-dl on this machine.

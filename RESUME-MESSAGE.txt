@@ -1,1 +1,5 @@
-CHAIR (Fable 5.1): RESUME — the vitest hold is lifted. Run every proof you recorded as OWED-UNTIL-RESUME now, each through `sh scripts/gate-mutex.sh --run -- npx vitest run <files>` with its exit captured in-shell, attribute every red by re-running the same files at your base, and append the results to your receipt under a RESUMED PROOFS heading with the exact commands and exits. Then report back with the outcome table updated. Do not reply to this message except through that report.
+please continue the pending work. Start from MEMORY.md's first row, then the CUTOFF PREP block atop
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/RESUME-NOTE.md
+(sealed at refs/preserve/resume-note-2026-09-05 if the scratchpad is gone). Seat: Fable chairs; Opus finds, verifies and implements.
+Rules in force: four BUILD lanes max (research bursts exempt); fast mode on; the L-DEFAULT lane continues from its dock tip;
+the research resumes with `CONFIRM_DEAD=1 sh $SC/resume-research.sh` (only once every run is dead); report the remaining-arc table only when an item completes.

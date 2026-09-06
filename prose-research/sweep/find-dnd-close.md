@@ -1,76 +1,35 @@
-# find-dnd-close — raw notes (D&D official prose style; angle: close readings / line-level analyses)
+# find-dnd-close — raw notes (Opus finder, D&D official content × close/line-level readings)
+Started 2026-09-06.
 
-Checkpoint 1 (2026-09-06). Sibling lanes (find-dnd-craft, find-dnd-voice) already cite 137 URLs incl. Alexandrian boxed-text pieces, DMDavid picturing/dungeon-key, slyflourish readaloud, dndbeyond 625/207, EN World read-aloud thread pp.4/10, tenfootpole 4366/5395, house style guides 1.04a/1.08a, Blog of Holding 2024 style guide. This lane targets NEW sources that quote a line and explain it.
+## Roster (angle-named) status
+- tenfootpole.org (Bryce Lynch) — FETCHED (Review Standards page)
+- The Alexandrian (Justin Alexander) — FETCHED (GM Don't List #13: Boxed Text Pitfalls)
+- DMDavid — pending
+- forums (ENWorld/RPGnet/rpg.net/Dragonsfoot) — pending
+- video-essay transcripts — pending
+- reading groups — pending
 
-## Sources fetched so far (kind / substantive)
+## S1 tenfootpole Review Standards (https://tenfootpole.org/ironspike/?page_id=1201)
+Two authors on one page. Bryce Lynch's list, then "The Pretty Girl"'s rating scale.
+- Bryce bullet: "Boxed text is usually not a good thing."
+- Bryce bullets: "Evocative atmosphere." / "Terse writing style" + "I don't care about your epic backstory. Give me a little to work with to get things going."
+- Bryce comment 2016-04-19: "I LOATHE the overly long backstory and fiction intro's, but they are not on this list."
+- The Pretty Girl's Language scale: "4 – Succinct and evocative" top; "2 – Conversational but clear"; "0 – Very wordy/ incomprehensible". ATTRIBUTION: NOT Bryce.
+- Comment by eric points to WotC boxed-text article at archive.wizards.com/default.asp?x=dnd/dd/20050916a → chase.
 
-1. tenfootpole.org Curse of Strahd review (?p=2936) — blog review, substantive TRUE.
-   - Quotes lazy read-aloud: "You stumble upon an old grave", "You find a corpse", "You hear the howls of a wolf some distance away", "You find something on the ground". Verdict "meaningless dreck". Suggests pay-per-word or rigid style guide forced these.
-   - DM text: "Three sentences are used when one will do. Six are used when it needed two, or three." "It's impossible to run with the book open in front of you."
-   - Praise: room 15 (nursemaid through stained glass) "an example of doing a description right"; room 20 children's bodies "GOLD. Pure GOLD."
-2. bumblingthroughdungeons.com CoS review — blog review, substantive TRUE.
-   - imagery "often excellently evocative" but "way too much"; "Pick the best stuff, cut the text by like 50% or more"; dining hall needs "about three columns – a page and a half!"; cobwebs ~15+ times in one section; Amber Temple "feels like a Gygaxian 1e creation snuck into a distinctly 5e adventure"; "cross-referencing stuff can be tedious".
-3. rancourt.substack.com Rewriting Isfjall / describing-a-scene — blog close-reading rewrite of Hall of Judgment (DFRPG, not WotC), substantive TRUE (angle-relevant: line-level rewrite).
-   - "It always begins with the establishing shot... Then, it talks about the exits... Then, it talks about the interactables."; "The fun, flowery language and complicated prose is for the players. The GM needs short, clear instructions."; 2023 edit prefers OSR conversational keying, "furniture" not "rotten, moldy oak chairs".
-4. comicbook.com boxed text debate — news article, substantive TRUE.
-   - Introcaso: "even the shortest boxed text can momentarily break the players out of the adventure's story"; proposes single-sentence bullet points. Haeck: "baseline script that I can throw away if needed". Sly Flourish poll >1,000: players prefer boxed text. Critical details embedded in boxed text without emphasis in DM notes.
-5. EN World to-boxed-text-or-not p10 — forum, moderately substantive TRUE.
-   - pemerton: "I find a lot of RPG material, especially from WotC, to be over-written"; Rhenny wants staged text boxes (immediate sensory, then deeper investigation).
-6. EN World boxed-texts 673236 — forum, substantive FALSE (usage preferences only). humble minion: "the way modules are written is very different to my normal use of language when I'm GMing."
-7. EN World in-depth 2024 DMG review (Beth Rimmels) — review, substantive TRUE (organization, Lore Glossary "such a brilliant idea"; stripped-down adventure outlines).
-8. Tribality DMG 2024 highs/lows (Brandes Stoddard) — review, substantive TRUE. "the incisive, practical quality of this writing"; traps: "tries to cram into one paragraph what the 4e DMG 2 lavished a half-page sidebar on"; "stops at one example, and that example is bad advice".
-9. Alexandrian Auxiliary Reading D&D Aloud (53132) — announcement only, substantive FALSE.
-10. rpg.net CoS review 17548 — redirects to forum, NOT READ.
-11. questingbeast.substack.com can-boxed-text-be-saved — newsletter, partial (paywalled). "Boxed text has been plague on adventure design for decades." Example from Desert of Desolation behind paywall. substantive TRUE (thin).
-12. loottheroom.uk Form and Structure (Chris Bissette) — blog essay, substantive TRUE. WotC 5e: "bolded key terms at the start of each paragraph so we can quickly scan"; structure "remained largely unchanged for close to 20 years"; OSR bullet syntax "what the thing is (followed by further details in parenthesis)"; read-aloud "everything that's immediately obvious to PCs".
-13. goodreads Robin D. Laws "Watch Your Boilerplate" — blog post, substantive TRUE. cut intro boilerplate; "At worst, this is a tell, revealing your lack of confidence in your work."; GM must "quickly zero in on the passages she needs while running."
-14. tenfootpole The Hoard (?p=7786) — 1e Gaxx Works, not WotC; substantive TRUE but off-subject (conversational padding; "Each room is about a page or longer"; "highlight a few words with bolding").
-15. EN World to-capitalize 681642 (2014) — forum, substantive TRUE. Yaarel: 2019 House Style Guide "races and subraces (and monsters) are lowercase"; ethnicities capitalized; DEFCON 1 capitalizes conditions/skills/feats/properties/class features; official sources inconsistent (Udadrow etc.).
-16. Tribality PHB 2024 highs/lows (Stoddard) — review, substantive TRUE. Glossary "a great improvement"; "The term 'action' doing double duty... is part of the problem"; "less trust in the DM's judgment"; Legend Lore failure text "stupid and cutesy"; glossary monsters vs NPCs distinction.
-17. Wargamer PHB 2024 review (Mollie Russell) — review, substantive TRUE. "explains what the game is before asking you to make a character"; "Confusing wording rears its ugly head"; "D20 Tests (the new umbrella term...)"; "sacrifices flavor and worldbuilding"; "so busy teaching you how to play... forgets to show off the worlds".
-18. EN World Boxed Text 509286 — forum, substantive TRUE. Celebrim: "It should be well written, literate, even slightly florid. The language should be evocative of Tolkien, Wolfe, Howard"; "should not make assumptions about the player's behavior"; C1 Tamoachan "some of the best boxed text ever done"; Hickman "terse and to the point". aramis erak: narrative voice, no trigger info mid-description, no player dialogue. Morrus: prefers details filled in as players ask.
-19. EN World read-aloud thread p12 — forum, substantive TRUE. toucanbuzz cites 2005 Noonan/Decker: "If you're the DM, you get two sentences. Period."; jgsugden: "Descriptions that are not subjective", only involuntary reactions; Kromanjon: bolded keywords; LordEntrails: after-action boxed text "indicative of a railroad".
-20. EN World building-an-adventure-flavor-text 579452 — forum, substantive TRUE. robus: "Focus on the senses... Then go with some concrete items: exits, large items."; Quickleaf: "direction-neutral & concise".
-21. dmdavid tag boxed-text — blog, substantive TRUE (two posts). Tamoachan 1979 origin; "their voice takes a different tone and cadence"; "pads it like a school paper stretched to an assigned length"; match length to purpose.
-22. bonesofcontention Outlaws of the Iron Route (DDEX 5e AL, Will Doyle 2014) — blog review, substantive TRUE. Boxed text "assumes the players negotiated their way in"; "[l]aunch this event whenever seems appropriate"; NPC voice lines "This is definitely gonna cost you" praised as voice guides.
+## S2 Alexandrian GM Don't List #13 (2022-08-01)
+- Definition: "a prewritten narration designed to be read to the players by the GM."
+- Quotes boxed text from Journeys Through the Radiant Citadel (WotC 2022) as freeze-frame; "reaction point"; "the game world continue to move forward past the reaction point"
+- Remote-control boxed text = declaring PC thoughts/feelings/actions; his demonstration lines (not official quotes) incl. Trollskull Manor.
+- Advantage: prepared wording "virtually guarantee that it's not accidentally omitted".
+- Cost list: time-consuming; "inherently less flexible"; reading aloud is a performance.
+- Reader comment (mellonbread): lost WotC devblog said descriptive text "should never be longer than three sentences" (reader recollection, kind=reader).
 
-## Leads to fetch next
-- Dungeon of Signs ToA review; NewbieDM ToA review; Alexandrian Review: Descent Into Avernus; EN World 2024 capitalize thread 697665; nodiceleftbehind MM; screenrant MM 2025 review; archive.wizards.com dd/20050916a (Noonan/Decker two sentences); Wandering DMs boxed text video transcript; web.archive rpg.net CoS; Prince of Nothing 5e reviews; Gus L other reviews.
-
-## Checkpoint 2 — more sources fetched
-
-23. dungeonofsigns ToA review (Gus L, 2017) — blog close review, TRUE. "so optimized for a GM to read it like a novel that it is almost unusable at the table"; "copious read aloud text"; Grand Souk column-long; "most of the detail are not remotely interesting, the writing is uninspiring"; wants "the way it smells and bustles—the tinkling of fountains"; port box text "ropes, tar and gulls... streets of flowering vines" acceptable.
-24. newbiedm ToA review — review, FALSE (no prose commentary; one quoted DM tip line).
-25. Alexandrian Review: Descent Into Avernus (47480) — review, TRUE (structural). Lulu "The sword! The sword! I know where it is!" / "Spoiler Alert: She doesn't."; "cargo cult" NPC direction without "semantic content"; NPC dialogue treated as "white noise"; kenku recognition "never mentioned again".
-26. EN World 2024 to-capitalize 697665 — forum, TRUE. Yaarel catalogs: "action" lowercase during turn but "Attack action" capitalized; "Extra Attack" cap; "Bonus" cap but "modifier" not; Shiroiken "capitalize mechanics to emphasize they're mechanics"; Deset Gled "a very 3e (dare I say, gamist?) feel".
-27. nodiceleftbehind MM 2024 — review, FALSE-ish (tables with flavor details; treasure lines "so vague they are almost useless").
-28. screenrant MM 2025 review (Christian Hoffer) — review, TRUE. "many monster entries have descriptions that are half the size of its 2014 predecessor"; Ankheg 223 words → 109; "de-emphasizes lore specific to Dungeons & Dragons".
-29. archive.wizards.com dd/20050916a — NOT READ (redirect/403).  The Noonan/Decker "two sentences" quote is carried by EN World p12 (toucanbuzz) and Dyson (sibling).
-30. Wandering DMs boxed text video — transcript NOT obtainable (403 / empty).
-31. Alexandrian Rime part 2 (45452) — review, TRUE, line-level. Quotes "Perched atop the largest stone is an emaciated kobold with glowing red eyes. It bares elongated fangs as it hisses at you, then scampers away." (boxed text assumes PC behaviour/outcome); B3 Workshop "Frost covers every surface of this abandoned workshop." (omits the tool table and bookcase that are only on the map) → "The adventure is written exclusively for GMs using virtual tabletops."; cave descriptions give ceiling height but not room shape; "The door is otherwise unopenable, indestructible, and impassable. Any spell cast with the intent of bypassing the door fails and is wasted."; contradictory info "on the same page".
-32. Alexandrian Rime part 1 (45437) — review, TRUE. Sephek hook paraphrased mockingly "Hello. Yes. I would like to pay you 100 gold pieces..."; "one of the worst I've ever read. It's comically bad."; structure explanation "both inadequate and filled with vague contradictions".
-33. Alexandrian Shattered Obelisk (50077) — review, TRUE. "the opening boxed text of the adventure is completely unaltered and still refers exclusively to the original Rockseer adventure hook"; psionic goblins line "These strange goblins have elongated skulls, and glowing green energy surrounds their weapons when they attack." → "LOL-so-random-LOL"; "graffiti on a masterpiece".
-34. tenfootpole LMoP (?p=2469) — review, TRUE, line-level. "The farmers wife tells you…" vs "the prim farmers wife"; "Granny, prim, biddy, lusty, stoic, proper — all of those give you something to work with"; "you see three goblins"; bugbear surprise bonus "presented completely mechanically"; "+1 sword, deals max damage to plant creatures" "board gamey"; "lack of descriptive language"; "just a word or two really".
-35. idlecartulary Bathtub Review LMoP (2025) — review, TRUE. "the text of the key talks the referee through how to handle situations, then gradually removes this scaffolding throughout the module"; overwriting "a signature of 5th edition module writing"; NPCs lack "goals or anything for the referee to hook into".
-36. tabletopandstitches LMoP Goblin Ambush — blog rewrite, TRUE but mostly tactical; boxed text elements listed.
-37. dropthedie Rime (JB Little) — review, TRUE. "You can feel in the prose and even the mechanics of those early chapters that people were bringing their A-game."; towns each "a unique flavor... a different presentation"; "no feeling of homogenization here like you may find in Elemental Evil"; later chapters echo prior WotC; "dad jokes" vs burning at the stake / "a singing trout mounted on a plaque"; "read 170 pages before you fully understand".
-38. noahgrand Vecna review — FALSE (no prose commentary).
-39. dragnacarta Death House review — NOT READ (redirect).
-40. strangeassembly Keys — FALSE. 41. EN World Candlekeep in-depth — FALSE.
-42. tenfootpole Out of the Abyss (?p=2755) — review, TRUE. "evocative specificity": "there's a fine line in providing inspiration to the DM... By constraining things just a little the mind can then explode onward."; drow sleep on "pallets" vs "spiderweb hammocks, or maybe cocoon pods"; Society of Brilliance lacks "a sentence on the NPC's personality"; madness "Monster Screaming Demonlord Battlecry"; "ABSOLUTELY TERRIBLE layout templates that WOTC is using... headings, colors, size, break-outs, etc all run together".
-43. tenfootpole HotDQ (?p=2514) — review, TRUE. "Nobody talks like that. It's too long and feels stilted." (monk's exposition); "They have chosen a very conversational style that contributes to a Wall of Text issue."; lack of "offsets and bullet lists"; Episode 5 bullet list "terse, imaginative, the reactions are more evocative than most" "Form+Function here is a perfect fit"; "Congratulations; you've said nothing of consequence."; strong language example "murder them mercilessly"; "throw a couple of encounters at the players" vague.
-44. tenfootpole PotA (?p=2617) — review, TRUE. "Be the steam!" GOLD/concrete; Ancient Silos description = "empty room" filler ("Crumbling & Ancient Grain Silos" would lose nothing); "Almost none of [read-alouds] add any value. They describe generic kitchens, guard rooms, barracks"; "Faerúnian names that are hard to remember and hard to distinguish"; "Howling Hatred", "Lareth the Beautiful" praised.
-45. tenfootpole Rise of Tiamat (?p=2604) — review, TRUE. "The sounding of the Draakhorn weighs heavily..." generic filler; trophy room "nothing remains but dust" unhelpful; confuses "detail with gameable content"; NPCs in "Wall of Text form over about seven pages"; "Episodes" are really sections; needs "an editor... Someone... that has some Common Sense."
-46. strangeassembly OotA — FALSE. 47. limithron Ben Milton podcast — no transcript, FALSE.
-48. Alexandrian SKT review (47378) — TRUE (thin on prose): "mail carrier hooks" "Deliver a letter for me. Come with me to visit my friend."; "utterly devoid of purpose"; "several hundred words detailing" ship hiring vs no resolution.
-49. Alexandrian Dragon Heist review (41114) — TRUE (structural): "teeming with continuity errors"; "pockmarked with exhortations for the GM to railroad"; "flipping back and forth".
-50. Power Score SKT review (Sean McGovern) — FALSE-ish: Port Llast "half a page".
-51. rpg.net 17537 — NOT READ (redirect).
-52. dropthedie Dragon Heist (JB Little) — TRUE: "the return of my beloved flavor text! Man, I missed seeing this in Storm King's Thunder."; "if you don't like it… don't read it out loud."; intro "gentle nature, the reassuring way".
-53. eventyrgames Dragon Heist — FALSE.
-54. evhelm Value of Boxed Text (2019) — blog, TRUE: "reduces the amount of work I have to do on the fly"; specificity excludes players whose experiences don't match second-person narration; cites Merwin "reasonably short, direct, and clear"; Courtney Campbell: reads like fiction, buries mechanical details.
-55. EN World read-aloud p7 — forum, TRUE: LordEntrails "It should tell them what they sense as they enter a room" not "what they do (or their emotions)"; Desdichado "usually extremely poorly executed in actual practice"; Stormonu two-stage example "In the center of this dimly lit room sits a group of five human-sized green-gray humanoids..."; Tonguez ordering Initial Feel → Dimensions → Furniture → Danger Signs; Bill Zebub "terse bullet points".
-56. idlecartulary I Read the DMG 2024 — review, TRUE: DMG "more traditional" vs PHB's "cartoonish, fourth-wall breaking asides"; "clearly aimed at the kind of person who knows who Zuggtmoy is"; "There are so many ways to arrange this information, and I can't believe they didn't even choose one."; "a hodgepodge".
-57. formofdread Vecna (2025) — blog, TRUE: contradictory "Indifferent toward intruders and attack only in self-defense" vs "Determined not to stand for further intrusion, the Elementals rise to attack"; "The text is intentionally vague about how much time it takes Teremini to complete her ritual"; "He is too focused to pay the characters any mind unless they confront him directly"; "a wizard did it".
-58. hinterlandet I6→CoS evolution (Morten Greis) — blog, TRUE: "the amount of text has grown considerably"; "a needless amount of mechanics and rules cluttering the text, instead of just letting the GM run the scene"; DM-roll → player-save shift.
-59. geeksundergrace DMG 2024 — FALSE.
+## S3 DM's Workshop, "Dungeon Mastering 101: Mastering the Boxed Text" (2019-09-27)
+- History: boxed text introduced in The Hidden Shrine of Tamoachan (1979), C-series competition, to keep descriptions identical across tables.
+- Close reading of Out of the Abyss Bruenor speech: the "he says" attribution tag is novelistic; names force pauses/spelling; module's own next line "Paraphrase Bruenor's speech as needed to handle interjections by the characters".
+- Counter-model: Lost Mine of Phandelver introduces Sildar via bullet points.
+- Waterdeep: Dragon Heist mixes forms — bookstore short paraphrasable paragraph; noble villa great hall bullet points.
+- Advice: third-person objective ("A 200-foot waterfall cascades down…") vs second-person subjective ("You see a majestic waterfall hundreds of feet in height…").
+- Length: "it's rare that a boxed text that includes a paragraph break isn't already too long by half"; villain lines in ~six-second chunks.
+- Descent into Avernus = return to full boxed text.
