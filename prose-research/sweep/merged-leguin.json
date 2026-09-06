@@ -13291,24 +13291,27 @@
   },
   "14": {
    "index": 14,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "fantastic creation should reach to the very words and grammar",
-   "note": "Wikipedia article fetched raw (wikitext via ?action=raw and rendered HTML, oldid 1352490882, last edited 4 May 2026). Verbatim: 'In her argument that fantastic creation should reach to the very words and grammar in fantasy writers, she holds up Lord Dunsany, E. R. Eddison...' Beagle limb verbatim: 'The novelist Peter S. Beagle called it \"the definitive piece on fantasy, and on why simply sprinkling goblins, magic swords, and assorted thees and thous through your story will not get you a step closer to that vast and beautiful realm.\"' Note the page frames the work as a 1972 speech published 1973.",
-   "fromFile": "verdicts-leguin-i0-14.json"
+   "verdict": "PARTIAL",
+   "trueWording": "fantastic creation should reach to the very words (Wikipedia, lead)",
+   "note": "Wikipedia article fetched raw (wikitext via ?action=raw and rendered HTML, oldid 1352490882, last edited 4 May 2026). Verbatim: 'In her argument that fantastic creation should reach to the very words and grammar in fantasy writers, she holds up Lord Dunsany, E. R. Eddison...' Beagle limb verbatim: 'The novelist Peter S. Beagle called it \"the definitive piece on fantasy, and on why simply sprinkling goblins, magic swords, and assorted thees and thous through your story will not get you a step closer to that vast and beautiful realm.\"' Note the page frames the work as a 1972 speech published 1973. REGRADE (Wikipedia relay): no close-2 or academic-2 row fetched Peter S. Beagle's statement or the essay text; graded against its primary, this row is a relay.",
+   "unsupportedLimb": "relay; primary not reached — the Beagle judgement and the essay are reached only through Wikipedia",
+   "fromFile": "verdicts-leguin-regrade-r8.json"
   },
   "15": {
    "index": 15,
-   "verdict": "VERIFIED_SUBSTANCE",
-   "trueWording": "holds up those seven writers as successful examples",
-   "note": "Raw wikitext + rendered plaintext (Special:Export + action=query prop=extracts). Page: 'In her argument that fantastic creation should reach to the very words and grammar in fantasy writers, she holds up Lord Dunsany, E. R. Eddison, Kenneth Morris, J. R. R. Tolkien, James Branch Cabell, Evangeline Walton, and Jack Vance as successful examples.' All seven names match in order; the claim's gloss 'models of style that fits its world' is a paraphrase of 'fantastic creation should reach to the very words and grammar', hence SUBSTANCE not VERBATIM (claim carried no quote).",
-   "fromFile": "verdicts-leguin-i15-29.json"
+   "verdict": "PARTIAL",
+   "trueWording": "holds up seven writers as successful examples (Wikipedia, Synopsis)",
+   "note": "Raw wikitext + rendered plaintext (Special:Export + action=query prop=extracts). Page: 'In her argument that fantastic creation should reach to the very words and grammar in fantasy writers, she holds up Lord Dunsany, E. R. Eddison, Kenneth Morris, J. R. R. Tolkien, James Branch Cabell, Evangeline Walton, and Jack Vance as successful examples.' All seven names match in order; the claim's gloss 'models of style that fits its world' is a paraphrase of 'fantastic creation should reach to the very words and grammar', hence SUBSTANCE not VERBATIM (claim carried no quote). REGRADE (Wikipedia relay): the seven-writer list is Wikipedia's own summary sentence; no close-2/academic-2 row reaches \"From Elfland to Poughkeepsie\" for it. Regrade note: her doctrine by praise or blame of another author, not her own practice.",
+   "unsupportedLimb": "relay; primary not reached — the essay itself was not fetched by close-2 or academic-2",
+   "fromFile": "verdicts-leguin-regrade-r8.json"
   },
   "16": {
    "index": 16,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "because there is no known framework for the reader's mind to rest upon",
-   "note": "Raw wikitext, Style-and-mood section: 'Le Guin herself said that in fantasy it was necessary to be clear and direct with language, because there is no known framework for the reader's mind to rest upon.' Quoted fragment is word-for-word; both limbs (clear and direct; no framework for the reader) supported. Cited to Slusser 1976 pp.32-35.",
-   "fromFile": "verdicts-leguin-i15-29.json"
+   "verdict": "PARTIAL",
+   "trueWording": "no known framework for the reader's mind (Style and mood)",
+   "note": "Raw wikitext, Style-and-mood section: 'Le Guin herself said that in fantasy it was necessary to be clear and direct with language, because there is no known framework for the reader's mind to rest upon.' Quoted fragment is word-for-word; both limbs (clear and direct; no framework for the reader) supported. Cited to Slusser 1976 pp.32-35. REGRADE (Wikipedia relay): academic-2 touched Slusser, The Farthest Shores (1976) only at indices 647/648, both SKIPPED_TRIAGE and on other sentences. fullSentence: trim before any copy.",
+   "unsupportedLimb": "relay; primary not reached — Slusser 1976 pp.32-35 not fetched",
+   "fromFile": "verdicts-leguin-regrade-r8.json"
   },
   "17": {
    "index": 17,
@@ -13328,24 +13331,27 @@
   },
   "19": {
    "index": 19,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "gives Le Guin's world the mysterious depths of Tolkien's, but without his tiresome back-stories and versifying",
-   "note": "Raw wikitext: 'a reviewer wrote that this method \"gives Le Guin's world the mysterious depths of Tolkien's, but without his tiresome back-stories and versifying\"', ref name='Craig 2003' (Amanda Craig, The Guardian, 24 Sep 2003). Quote verbatim; 'a reviewer' and the crediting of the no-exposition method both supported.",
-   "fromFile": "verdicts-leguin-i15-29.json"
+   "verdict": "PARTIAL",
+   "trueWording": "mysterious depths of Tolkien's, but without his tiresome back-stories (Reception)",
+   "note": "Raw wikitext: 'a reviewer wrote that this method \"gives Le Guin's world the mysterious depths of Tolkien's, but without his tiresome back-stories and versifying\"', ref name='Craig 2003' (Amanda Craig, The Guardian, 24 Sep 2003). Quote verbatim; 'a reviewer' and the crediting of the no-exposition method both supported. REGRADE (Wikipedia relay): the Craig primary was proposed at close-2 index 440 with this same quotation but was SKIPPED_TRIAGE (not verified this round). fullSentence: trim before any copy. Regrade note: her doctrine by praise or blame of another author, not her own practice.",
+   "unsupportedLimb": "relay; primary not reached — Craig, The Guardian, 24 Sep 2003 not fetched",
+   "fromFile": "verdicts-leguin-regrade-r8.json"
   },
   "20": {
    "index": 20,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "Slusser described the mood of the novel as \"strange and dreamlike\"",
-   "note": "Raw wikitext: 'Slusser described the mood of the novel as \"strange and dreamlike\", fluctuating between objective reality and the thoughts in Ged's mind'. Quote verbatim; the fluctuation limb is present word for word; 'George Slusser' is given in full earlier in the same section, cited to Slusser 1976 pp.35-38.",
-   "fromFile": "verdicts-leguin-i15-29.json"
+   "verdict": "PARTIAL",
+   "trueWording": "the mood of the novel as \"strange and dreamlike\" (Style and mood)",
+   "note": "Raw wikitext: 'Slusser described the mood of the novel as \"strange and dreamlike\", fluctuating between objective reality and the thoughts in Ged's mind'. Quote verbatim; the fluctuation limb is present word for word; 'George Slusser' is given in full earlier in the same section, cited to Slusser 1976 pp.35-38. REGRADE (Wikipedia relay): no close-2 or academic-2 row carries \"strange and dreamlike\" at Slusser.",
+   "unsupportedLimb": "relay; primary not reached — Slusser 1976 pp.35-38 not fetched",
+   "fromFile": "verdicts-leguin-regrade-r8.json"
   },
   "21": {
    "index": 21,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "in prose as taut and clean as a ship's sail",
-   "note": "Raw wikitext, Reception: 'a review in The Guardian by author and journalist Amanda Craig said it was \"The most thrilling, wise and beautiful children's novel ever, [written] in prose as taut and clean as a ship's sail.\"' Quote verbatim; Craig and The Guardian both named on the page.",
-   "fromFile": "verdicts-leguin-i15-29.json"
+   "verdict": "PARTIAL",
+   "trueWording": "prose as taut and clean as a ship's sail (Reception)",
+   "note": "Raw wikitext, Reception: 'a review in The Guardian by author and journalist Amanda Craig said it was \"The most thrilling, wise and beautiful children's novel ever, [written] in prose as taut and clean as a ship's sail.\"' Quote verbatim; Craig and The Guardian both named on the page. REGRADE (Wikipedia relay): close-2 proposed the Craig primary (indices 440/441) but neither row carries \"taut and clean as a ship's sail\", and both were SKIPPED_TRIAGE.",
+   "unsupportedLimb": "relay; primary not reached — Craig, The Guardian, 24 Sep 2003 not fetched",
+   "fromFile": "verdicts-leguin-regrade-r8.json"
   },
   "22": {
    "index": 22,
@@ -13357,38 +13363,43 @@
   },
   "23": {
    "index": 23,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "Every word was exactly in place and every sentence or line had resonance",
-   "note": "Raw wikitext: 'literary critic Harold Bloom described Le Guin as an \"exquisite stylist\", saying that in her writing, \"Every word was exactly in place and every sentence or line had resonance\".' Quote verbatim; 'exquisite stylist', exact placement and resonance all present.",
-   "fromFile": "verdicts-leguin-i15-29.json"
+   "verdict": "PARTIAL",
+   "trueWording": "Every word was exactly in place (Legacy paragraph)",
+   "note": "Raw wikitext: 'literary critic Harold Bloom described Le Guin as an \"exquisite stylist\", saying that in her writing, \"Every word was exactly in place and every sentence or line had resonance\".' Quote verbatim; 'exquisite stylist', exact placement and resonance all present. REGRADE (Wikipedia relay): close-2 indices 438 and 439 carry exactly \"an exquisite stylist\" and \"Every word was exactly in place\" at the Library of America primary, but both were SKIPPED_TRIAGE. fullSentence: trim before any copy.",
+   "unsupportedLimb": "relay; primary not reached — the Library of America tribute not fetched",
+   "fromFile": "verdicts-leguin-regrade-r8.json"
   },
   "24": {
    "index": 24,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "described her as using \"a lean but lyrical style\" to explore issues of moral relevance",
-   "note": "Raw wikitext: 'The New York Times described her as using \"a lean but lyrical style\" to explore issues of moral relevance.' Quote verbatim; the moral-issues limb is supported as 'issues of moral relevance'. The page attributes the style to her writing rather than the word 'prose', a wording difference only.",
-   "fromFile": "verdicts-leguin-i15-29.json"
+   "verdict": "PARTIAL",
+   "trueWording": "\"a lean but lyrical style\" (Wikipedia, Style paragraph)",
+   "note": "Raw wikitext: 'The New York Times described her as using \"a lean but lyrical style\" to explore issues of moral relevance.' Quote verbatim; the moral-issues limb is supported as 'issues of moral relevance'. The page attributes the style to her writing rather than the word 'prose', a wording difference only. REGRADE (Wikipedia relay): close-2 fetched the obituary raw (index 466, Wayback capture) but only for the Bloom quotation; the \"lean but lyrical style\" row, index 463, was SKIPPED_TRIAGE. fullSentence: trim before any copy.",
+   "unsupportedLimb": "relay; primary not reached — the NYT obituary sentence not verified",
+   "fromFile": "verdicts-leguin-regrade-r8.json"
   },
   "25": {
    "index": 25,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "Her prose, according to Zadie Smith, was \"as elegant and beautiful as any written in the twentieth century\"",
-   "note": "Raw wikitext: exact sentence present, ref 'Fellow Writers' (Library of America, 26 Jan 2018). Quote verbatim; every limb supported.",
-   "fromFile": "verdicts-leguin-i15-29.json"
+   "verdict": "PARTIAL",
+   "trueWording": "\"as elegant and beautiful as any written\" (Legacy)",
+   "note": "Raw wikitext: exact sentence present, ref 'Fellow Writers' (Library of America, 26 Jan 2018). Quote verbatim; every limb supported. REGRADE (Wikipedia relay): close-2 index 437 is the Zadie Smith primary with this quotation but was SKIPPED_TRIAGE. fullSentence: trim before any copy.",
+   "unsupportedLimb": "relay; primary not reached — the Library of America tribute not fetched",
+   "fromFile": "verdicts-leguin-regrade-r8.json"
   },
   "26": {
    "index": 26,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "personal narration, diary extracts, Gethenian myths, and ethnological reports; \"distinctly post-modern\"",
-   "note": "Raw wikitext, same paragraph: 'The heterogeneous structure of The Left Hand of Darkness, described as \"distinctly post-modern\", was unusual for the time of its publication' and '... the material, consisting of personal narration, diary extracts, Gethenian myths, and ethnological reports.' Quote verbatim; all four components present.",
-   "fromFile": "verdicts-leguin-i15-29.json"
+   "verdict": "PARTIAL",
+   "trueWording": "personal narration, diary extracts, Gethenian myths, ethnological reports (Style paragraph)",
+   "note": "Raw wikitext, same paragraph: 'The heterogeneous structure of The Left Hand of Darkness, described as \"distinctly post-modern\", was unusual for the time of its publication' and '... the material, consisting of personal narration, diary extracts, Gethenian myths, and ethnological reports.' Quote verbatim; all four components present. REGRADE (Wikipedia relay): the post-modern characterisation and the four-part list are Wikipedia's own; no close-2/academic-2 row reaches the cited criticism.",
+   "unsupportedLimb": "relay; primary not reached — no primary fetched",
+   "fromFile": "verdicts-leguin-regrade-r8.json"
   },
   "27": {
    "index": 27,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "described by Bloom as \"precise, dialectical-always evocative in its restrained pathos\"",
-   "note": "Raw wikitext has 'restrained [[pathos]]' (wikilink), so the quote was confirmed against the RENDERED plaintext extract via action=query&prop=extracts&explaintext, where the exact string 'precise, dialectical—always evocative in its restrained pathos' is present (em dash, as in the claim). Attributed to Bloom 1987 and applied to Le Guin's writing style in this novel.",
-   "fromFile": "verdicts-leguin-i15-29.json"
+   "verdict": "PARTIAL",
+   "trueWording": "\"precise, dialectical—always evocative in its restrained pathos\" (Style section)",
+   "note": "Raw wikitext has 'restrained [[pathos]]' (wikilink), so the quote was confirmed against the RENDERED plaintext extract via action=query&prop=extracts&explaintext, where the exact string 'precise, dialectical—always evocative in its restrained pathos' is present (em dash, as in the claim). Attributed to Bloom 1987 and applied to Le Guin's writing style in this novel. REGRADE (Wikipedia relay): academic-2 index 655 is that introduction but was SKIPPED_TRIAGE; academic-2 verified only \"precise, dialectical style\" in the 1986 Modern Critical Views volume (index 654), not \"always evocative in its restrained pathos\" for this novel.",
+   "unsupportedLimb": "relay; primary not reached — Bloom 1987, the Left Hand introduction, not fetched",
+   "fromFile": "verdicts-leguin-regrade-r8.json"
   },
   "28": {
    "index": 28,
@@ -13400,10 +13411,11 @@
   },
   "29": {
    "index": 29,
-   "verdict": "VERIFIED_SUBSTANCE",
-   "trueWording": "first-person narration reflects his slowly developing view; White: initially confusing to reviewers",
-   "note": "Raw wikitext: 'Ai's first-person narration reflects his slowly developing view, and the reader's knowledge and understanding of the Gethens evolves with Ai's awareness. He begins in naivety, gradually discovering his profound errors in judgement.' And: 'In 1999, literary scholar Donna White wrote that the unorthodox structure of the novel made it initially confusing to reviewers, before it was interpreted as an attempt to follow the trajectory of Ai's changing views.' Both limbs supported; claim carried no quote, hence SUBSTANCE.",
-   "fromFile": "verdicts-leguin-i15-29.json"
+   "verdict": "PARTIAL",
+   "trueWording": "first-person narration reflects his slowly developing view (Style; Reception)",
+   "note": "Raw wikitext: 'Ai's first-person narration reflects his slowly developing view, and the reader's knowledge and understanding of the Gethens evolves with Ai's awareness. He begins in naivety, gradually discovering his profound errors in judgement.' And: 'In 1999, literary scholar Donna White wrote that the unorthodox structure of the novel made it initially confusing to reviewers, before it was interpreted as an attempt to follow the trajectory of Ai's changing views.' Both limbs supported; claim carried no quote, hence SUBSTANCE. REGRADE (Wikipedia relay): no close-2 or academic-2 row reaches Donna White or the primary text for Ai's narration.",
+   "unsupportedLimb": "relay; primary not reached — White 1999 not fetched",
+   "fromFile": "verdicts-leguin-regrade-r8.json"
   },
   "30": {
    "index": 30,
@@ -13415,10 +13427,11 @@
   },
   "31": {
    "index": 31,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "",
-   "note": "Same page. Verbatim: 'Science fiction writer Jo Walton said that it was a \"beautifully written\" book. She went on to write that a \"lesser writer\" would have ended the novel after the earthquake and the collapse of the Tombs, but that the last section of the story, about Ged and Tenar's travel, \"do a lot to ground it\", making it \"solid and well rooted as ever\".' Every limb (Walton, final travel section, grounding, after the earthquake) supported.",
-   "fromFile": "verdicts-leguin-i30-44.json"
+   "verdict": "PARTIAL",
+   "trueWording": "\"do a lot to ground it\"; \"solid and well rooted\" (Reception)",
+   "note": "Same page. Verbatim: 'Science fiction writer Jo Walton said that it was a \"beautifully written\" book. She went on to write that a \"lesser writer\" would have ended the novel after the earthquake and the collapse of the Tombs, but that the last section of the story, about Ged and Tenar's travel, \"do a lot to ground it\", making it \"solid and well rooted as ever\".' Every limb (Walton, final travel section, grounding, after the earthquake) supported. REGRADE (Wikipedia relay): close-2 fetched Walton's Tombs of Atuan essay raw (index 447) but this row's sentence sits in index 448, SKIPPED_TRIAGE.",
+   "unsupportedLimb": "relay; primary not reached — Walton's \"ground it\"/\"solid and well rooted\" sentence not verified at the primary",
+   "fromFile": "verdicts-leguin-regrade-r8.json"
   },
   "32": {
    "index": 32,
@@ -13429,17 +13442,19 @@
   },
   "33": {
    "index": 33,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "",
-   "note": "Same page. Verbatim: Dirda in The Washington Post — Tehanu is 'less sheerly exciting' but perhaps 'the most moving'; the book gives the Earthsea themes 'a darker, more realistic edge'; and 'Further, Tehanu presents the world from a woman's point of view...' all carrying ref name 'Dirda 1990' ('The Twilight of an Age of Magic', February 25, 1990). All four limbs supported, and the claim correctly preserves Dirda's 'perhaps'.",
-   "fromFile": "verdicts-leguin-i30-44.json"
+   "verdict": "PARTIAL",
+   "trueWording": "\"less sheerly exciting\"; \"the most moving\" (Reception, Dirda 1990)",
+   "note": "Same page. Verbatim: Dirda in The Washington Post — Tehanu is 'less sheerly exciting' but perhaps 'the most moving'; the book gives the Earthsea themes 'a darker, more realistic edge'; and 'Further, Tehanu presents the world from a woman's point of view...' all carrying ref name 'Dirda 1990' ('The Twilight of an Age of Magic', February 25, 1990). All four limbs supported, and the claim correctly preserves Dirda's 'perhaps'. REGRADE (Wikipedia relay): close-2 fetched the Washington Post review raw (index 460) but only for the \"windy and soft\" sentence; indices 457-459 and 461-462 were SKIPPED_TRIAGE.",
+   "unsupportedLimb": "relay; primary not reached — Dirda's \"less sheerly exciting\"/\"most moving\" sentences not verified at the primary",
+   "fromFile": "verdicts-leguin-regrade-r8.json"
   },
   "34": {
    "index": 34,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "",
-   "note": "Same page. Verbatim: 'Jo Walton finds Tehanu \"problematic\", writing that it is \"a restless book with very strange pacing\", but that it is surprising that it \"works as well as it does\", given the competing demands of \"the force of story\" - plot, action - and Le Guin's evident intention to place \"women's domestic lives\" at the novel's centre.' The 'torn between plot and women's domestic lives' limb is supported by that competing-demands sentence; note the page frames it as competing demands the book nonetheless survives, not as a failure.",
-   "fromFile": "verdicts-leguin-i30-44.json"
+   "verdict": "PARTIAL",
+   "trueWording": "\"a restless book with very strange pacing\" (Reception)",
+   "note": "Same page. Verbatim: 'Jo Walton finds Tehanu \"problematic\", writing that it is \"a restless book with very strange pacing\", but that it is surprising that it \"works as well as it does\", given the competing demands of \"the force of story\" - plot, action - and Le Guin's evident intention to place \"women's domestic lives\" at the novel's centre.' The 'torn between plot and women's domestic lives' limb is supported by that competing-demands sentence; note the page frames it as competing demands the book nonetheless survives, not as a failure. REGRADE (Wikipedia relay): close-2 index 443 verifies \"This is a restless book with very strange pacing\" at the primary (Jo Walton, Reactor, 25 Oct 2011); the \"torn between plot and women's domestic lives\" limb is attested only through Wikipedia.",
+   "unsupportedLimb": "relay; primary reached for one limb only — the competing-demands limb was not reached",
+   "fromFile": "verdicts-leguin-regrade-r8.json"
   },
   "35": {
    "index": 35,
@@ -13863,10 +13878,11 @@
   },
   "93": {
    "index": 93,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "The structuralist view of language revealed in Le Guin's Earthsea Cycle informs her depiction of power and balance",
-   "note": "digitalcommons.liberty.edu/masters/133/ fetched live (200, 35 KB); abstract present in the raw HTML. Page metadata confirms Daniel Newell, Master of Arts (MA), Masters Theses 133, 5-2010, Liberty University, keyword 'Structuralism'. Claim's 'underlies' = page's 'informs... and is central to understanding'; the supplied fragment is verbatim.",
-   "fromFile": "verdicts-leguin-i90-104.json"
+   "verdict": "PARTIAL",
+   "trueWording": "structuralist view of language informs her depiction of power (abstract)",
+   "note": "Completeness critic: abstract-only and unmarked — the verifier's note records only that the abstract is present in the raw HTML; no full PDF was fetched this round. fullSentence: trim before any copy.",
+   "unsupportedLimb": "abstract only",
+   "fromFile": "verdicts-leguin-regrade-r8.json"
   },
   "94": {
    "index": 94,
@@ -13878,10 +13894,11 @@
   },
   "95": {
    "index": 95,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "Beyond Words: The Impact of Rhythm as Narrative Technique in The Left Hand of Darkness",
-   "note": "Crossref API queried live (200); top hit is the exact record: Nora Barry & Mary Prescott, Extrapolation 33(2): 154-165, DOI 10.3828/extr.1992.33.2.154, issued 1992-07, type journal-article. Every limb of the claim (1992, Extrapolation, rhythm as narrative technique, 'beyond words', Left Hand of Darkness) is verbatim in the record title/metadata.",
-   "fromFile": "verdicts-leguin-i90-104.json"
+   "verdict": "PARTIAL",
+   "trueWording": "\"Beyond Words: The Impact of Rhythm as Narrative Technique\" (Crossref title)",
+   "note": "Completeness critic: a Crossref TITLE record used as attestation, no page read. fullSentence: trim before any copy.",
+   "unsupportedLimb": "title only",
+   "fromFile": "verdicts-leguin-regrade-r8.json"
   },
   "96": {
    "index": 96,
@@ -13914,10 +13931,11 @@
   },
   "100": {
    "index": 100,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "A plain language is the noblest of all.",
-   "note": "PDF fetched live from digginganddeepening.com (200, 346,717 bytes, application/pdf, 8 pages) and text-extracted with pdfminer; the sentence is on PDF page 8, matching the claim's page field. Quote verbatim. The claim's narrowing to 'narrative languages' is weaker than the page, which says it flatly, and the surrounding sentences are about narrative ('Clarity and simplicity are permanent virtues in a narrative', epics and sagas), so the limb holds.",
-   "fromFile": "verdicts-leguin-i90-104.json"
+   "verdict": "PARTIAL",
+   "trueWording": "A plain language is the noblest of all. (p.8)",
+   "note": "duplicate quotation of #1",
+   "unsupportedLimb": "duplicate quotation",
+   "fromFile": "verdicts-leguin-regrade-r8.json"
   },
   "101": {
    "index": 101,
@@ -13935,10 +13953,11 @@
   },
   "103": {
    "index": 103,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "It is a fake plainness. It is not really simple, but flat.",
-   "note": "Same PDF, page 8, on 'the Poughkeepsie style of fantasy... also written in a plain and apparently direct prose. Does that make it equal to Tolkien's? Alas, no. It is a fake plainness. It is not really simple, but flat.' Both limbs (a fake plainness; flat rather than simple) verbatim.",
-   "fromFile": "verdicts-leguin-i90-104.json"
+   "verdict": "PARTIAL",
+   "trueWording": "It is a fake plainness. (p.8, Poughkeepsie-style paragraph)",
+   "note": "duplicate quotation of #2",
+   "unsupportedLimb": "duplicate quotation",
+   "fromFile": "verdicts-leguin-regrade-r8.json"
   },
   "104": {
    "index": 104,
@@ -14014,10 +14033,11 @@
   },
   "114": {
    "index": 114,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "elaborate made-up names... and a great many sentences beginning with \"And.\"",
-   "note": "Exact on p.5. Completeness caveat: Le Guin's list has three items, not two - the claim omits \"some vague descriptions of gorgeous cities and unmentionable dooms\". Both limbs it does assert are on the page, so no limb is unsupported.",
-   "fromFile": "verdicts-leguin-i105-119.json"
+   "verdict": "PARTIAL",
+   "trueWording": "a great many sentences beginning with \"And.\" (p.5)",
+   "note": "Exact on p.5. Completeness caveat: Le Guin's list has three items, not two - the claim omits \"some vague descriptions of gorgeous cities and unmentionable dooms\". Both limbs it does assert are on the page, so no limb is unsupported. Regrade note: her doctrine by praise or blame of another author, not her own practice.",
+   "unsupportedLimb": "the trueWording joins two spans with an ellipsis (method §4.4)",
+   "fromFile": "verdicts-leguin-regrade-r8.json"
   },
   "115": {
    "index": 115,
@@ -14028,17 +14048,19 @@
   },
   "116": {
    "index": 116,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "The style, of course, is the book.",
-   "note": "Exact on p.9, answering the preceding sentence about editors who treat style \"as if it were an ingredient of a book... or something added onto the book\", which supports the claim's \"not an ingredient added to a book\" limb.",
-   "fromFile": "verdicts-leguin-i105-119.json"
+   "verdict": "PARTIAL",
+   "trueWording": "The style, of course, is the book. (p.9)",
+   "note": "duplicate quotation of #0",
+   "unsupportedLimb": "duplicate quotation",
+   "fromFile": "verdicts-leguin-regrade-r8.json"
   },
   "117": {
    "index": 117,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "The sound of the language is where it all begins.",
-   "note": "Exact and page-initial in the excerpt body. The page's own standfirst states it is \"the first chapter of Ursula K. Le Guin's updated edition of Steering the Craft\", supporting both the \"opens\" and \"her writing guide\" limbs.",
-   "fromFile": "verdicts-leguin-i105-119.json"
+   "verdict": "PARTIAL",
+   "trueWording": "The sound of the language is where it all begins. (ch.1 opening)",
+   "note": "duplicate quotation of #85",
+   "unsupportedLimb": "duplicate quotation",
+   "fromFile": "verdicts-leguin-regrade-r8.json"
   },
   "118": {
    "index": 118,
@@ -14255,17 +14277,19 @@
   },
   "148": {
    "index": 148,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "how much of what I remembered as Earthsea's worldbuilding is actually due to Le Guin's wordcraft",
-   "note": "Raw HTML. Opens with 'When I started my reread for this article, something that constantly surprised me is...'. Placement note: this is the first paragraph of 'The Bad', mid-article, not the closing section as the page field says; that field is metadata, not a claim limb.",
-   "fromFile": "verdicts-leguin-i135-149.json"
+   "verdict": "PARTIAL",
+   "trueWording": "actually due to Le Guin's wordcraft (head of 'The Bad')",
+   "note": "Completeness critic: same placement caveat as #149 — the passage is the first paragraph of the article's section 'The Bad', mid-article, not the closing section the page field names. fullSentence: trim before any copy.",
+   "unsupportedLimb": "placement",
+   "fromFile": "verdicts-leguin-regrade-r8.json"
   },
   "149": {
    "index": 149,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "she describes a goat-charming spell with such evocative detail that it lets the reader imagine a world where even these tiny acts of sorcery are stupendous",
-   "note": "Raw HTML. The impression is of rare, treasured low-level magic, which the page rejects ('that's not the case at all') and refutes in the following 'Vague and Overpowered Magic' section. Same placement caveat as 148: it sits at the head of 'The Bad'.",
-   "fromFile": "verdicts-leguin-i135-149.json"
+   "verdict": "PARTIAL",
+   "trueWording": "a goat-charming spell with such evocative detail (head of 'The Bad')",
+   "note": "Completeness critic: polarity flipped — the goat-charming detail heads the article's section 'The Bad' and the page says the impression it creates 'is not the case at all'. fullSentence: trim before any copy.",
+   "unsupportedLimb": "polarity",
+   "fromFile": "verdicts-leguin-regrade-r8.json"
   },
   "150": {
    "index": 150,
@@ -14616,10 +14640,11 @@
   },
   "199": {
    "index": 199,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "There’s never a wasted word, and all the words are right.",
-   "note": "Live page (HTTP 200, reactormag.com, the Tor.com post republished). Quote exact (curly apostrophe on page) in the prose paragraph: 'how gorgeous the prose is. There’s never a wasted word, and all the words are right. It’s like poetry.' By Jo Walton, published October 4, 2011.",
-   "fromFile": "verdicts-leguin-i195-209.json"
+   "verdict": "PARTIAL",
+   "trueWording": "There's never a wasted word (prose paragraph)",
+   "note": "duplicate quotation of #71",
+   "unsupportedLimb": "duplicate quotation",
+   "fromFile": "verdicts-leguin-regrade-r8.json"
   },
   "200": {
    "index": 200,
@@ -14749,17 +14774,19 @@
   },
   "218": {
    "index": 218,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "For the most part, for me, rhythm is something that appears (and surprises me) by way of a lot of editing.",
-   "note": "Raw page fetched (Substack, HTTP 200). Quote verbatim in Saunders's answer. The 'rather than by plan' limb is supported by the immediately preceding sentence: writers who 'start out with some idea about a rhythm they want to attain (a plan, or schematic vision)... but that's not true for me.'",
-   "fromFile": "verdicts-leguin-i210-224.json"
+   "verdict": "NOT_FOUND",
+   "trueWording": "by way of a lot of editing (Saunders’s answer)",
+   "note": "Completeness critic: George Saunders on his own rhythm, nothing about Le Guin. fullSentence: trim before any copy. Regrade note: her doctrine by praise or blame of another author, not her own practice.",
+   "unsupportedLimb": "the Le Guin limb",
+   "fromFile": "verdicts-leguin-regrade-r8.json"
   },
   "219": {
    "index": 219,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "But the rhythm of prose is something that not very many people have studied. The rhythms are so subtle and have to be irregular.",
-   "note": "Raw page fetched. Quote verbatim, and it sits inside the reader's question, which opens 'In an interview with author Ursula Le Guin' and reports her in paraphrase -- both limbs (reader paraphrase; Le Guin interview) supported.",
-   "fromFile": "verdicts-leguin-i210-224.json"
+   "verdict": "PARTIAL",
+   "trueWording": "The rhythms are so subtle and have to be irregular (reader’s question)",
+   "note": "Completeness critic: a Story Club reader's unattributed paraphrase presented as her view; the primary is the Paris Review 2013 interview, which voice-2 fetches. fullSentence: trim before any copy.",
+   "unsupportedLimb": "attribution",
+   "fromFile": "verdicts-leguin-regrade-r8.json"
   },
   "220": {
    "index": 220,
@@ -15025,10 +15052,11 @@
   },
   "257": {
    "index": 257,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "'Listing is not describing. Only the relevant belongs.'",
-   "note": "Raw djvu text of the 2015 Mariner edition fetched from archive.org (HTTP 200, 221,397 bytes). Quote appears word for word in chapter 10 'Crowding and Leaping' (chapter numbering confirmed: heading '10. crowding and leaping'), in the paragraph on leaping and description.",
-   "fromFile": "verdicts-leguin-i255-269.json"
+   "verdict": "PARTIAL",
+   "trueWording": "Listing is not describing. (ch.10, leaping paragraph)",
+   "note": "duplicate quotation of #207",
+   "unsupportedLimb": "duplicate quotation",
+   "fromFile": "verdicts-leguin-regrade-r8.json"
   },
   "258": {
    "index": 258,
@@ -15039,10 +15067,11 @@
   },
   "259": {
    "index": 259,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "'There's got to be white space around the word, silence around the voice.'",
-   "note": "Same raw djvu text. The quoted fragment appears verbatim inside that sentence; the claim's 'there has to be' renders the book's 'There's got to be' — same proposition, chapter 10.",
-   "fromFile": "verdicts-leguin-i255-269.json"
+   "verdict": "PARTIAL",
+   "trueWording": "white space around the word, silence around the voice (ch.10)",
+   "note": "duplicate quotation of #206 fullSentence: trim before any copy.",
+   "unsupportedLimb": "duplicate quotation",
+   "fromFile": "verdicts-leguin-regrade-r8.json"
   },
   "260": {
    "index": 260,
@@ -15187,10 +15216,11 @@
   },
   "280": {
    "index": 280,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "The sound of the language is where it all begins",
-   "note": "Verbatim opening of the Lit Hub excerpt, followed by 'The test of a sentence is, Does it sound right?'; the page states this is the first chapter of Steering the Craft.",
-   "fromFile": "verdicts-leguin-i270-284.json"
+   "verdict": "PARTIAL",
+   "trueWording": "The sound of the language is where it all begins (ch.1)",
+   "note": "duplicate quotation of #85",
+   "unsupportedLimb": "duplicate quotation",
+   "fromFile": "verdicts-leguin-regrade-r8.json"
   },
   "281": {
    "index": 281,
@@ -15250,10 +15280,11 @@
   },
   "289": {
    "index": 289,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "those are in very simple, pure Spanish, because they're storyteller's stories",
-   "note": "Lit Hub page fetched raw (HTTP 200); byline 'Euan Monaghan', dated 'April 1, 2016' on the page. Full context: 'And my translation of Angelica Gorodischer, the Kalpa Imperial, I knew very little Spanish then, but those are in very simple, pure Spanish, because they're storyteller's stories, and I could work through them with the dictionary.' Quote character-exact.",
-   "fromFile": "verdicts-leguin-i285-299.json"
+   "verdict": "NOT_FOUND",
+   "trueWording": "in very simple, pure Spanish (of Gorodischer's Kalpa Imperial)",
+   "note": "Completeness critic: the sentence describes Gorodischer's Spanish in Kalpa Imperial, a book Le Guin translated, not Le Guin's own prose.",
+   "unsupportedLimb": "the Le Guin-register limb",
+   "fromFile": "verdicts-leguin-regrade-r8.json"
   },
   "290": {
    "index": 290,
@@ -15575,10 +15606,11 @@
   },
   "335": {
    "index": 335,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "...hear the parallel construction of the two rhyming sets of steel and wheel and of tractor and reactor...",
-   "note": "Raw page fetched (HTTP 200). Byline 'Matt Bell', datePublished 2021-08-24. The sentence under discussion is named as from 'her 1966 debut Rocannon's World': 'A hundred worlds had been trained and armed, a thousand more were being schooled in the uses of steel and wheel and tractor and reactor.' Quote exact.",
-   "fromFile": "verdicts-leguin-i330-344.json"
+   "verdict": "PARTIAL",
+   "trueWording": "the parallel construction of the two rhyming sets (Rocannon's World paragraph)",
+   "note": "duplicate quotation of #213 fullSentence: trim before any copy.",
+   "unsupportedLimb": "duplicate quotation",
+   "fromFile": "verdicts-leguin-regrade-r8.json"
   },
   "336": {
    "index": 336,
@@ -15589,10 +15621,11 @@
   },
   "337": {
    "index": 337,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "I thrilled at how she turned thought problems into intricate cultures, working from the big picture down to the minutiae of local life...",
-   "note": "Raw page fetched. Quote exact in the worldbuilding paragraph.",
-   "fromFile": "verdicts-leguin-i330-344.json"
+   "verdict": "PARTIAL",
+   "trueWording": "working from the big picture down to the minutiae (worldbuilding paragraph)",
+   "note": "duplicate quotation of #215 fullSentence: trim before any copy.",
+   "unsupportedLimb": "duplicate quotation",
+   "fromFile": "verdicts-leguin-regrade-r8.json"
   },
   "338": {
    "index": 338,
@@ -16342,10 +16375,11 @@
   },
   "444": {
    "index": 444,
-   "verdict": "VERIFIED_VERBATIM",
+   "verdict": "PARTIAL",
    "trueWording": "I didn't quite believe in Tenar's life as a farmwife",
    "note": "Same Walton essay: 'I didn't quite believe in Tenar's life as a farmwife on Gont-there's something false about it.' Quote verbatim; note the source hedges with 'quite', which the claim's 'did not believe' drops.",
-   "fromFile": "verdicts-leguin-i416-475.json"
+   "unsupportedLimb": "the unhedged 'did not believe' — the source reads \"I didn't quite believe\"",
+   "fromFile": "verdicts-leguin-regrade-r8.json"
   },
   "445": {
    "index": 445,
@@ -17149,10 +17183,11 @@
   },
   "559": {
    "index": 559,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "teaching works and not Sister Ursula Explaining It All",
+   "verdict": "PARTIAL",
+   "trueWording": "teaching works and not Sister Ursula Explaining It All (Fish Soup)",
    "note": "Coyote's Song chapter 12, 'Other Lessons: Picture Books', within the Fish Soup section, reached via the supplied Wayback raw capture. Page attributes it to a sly sense of humor (US spelling), glossed as the mature comic sense. Page hedges slightly more than the claim: it says this is 'Part of what' keeps her work 'almost always' so.",
-   "fromFile": "verdicts-leguin-i531-560.json"
+   "unsupportedLimb": "the unhedged attribution — the page says this is only 'Part of what' keeps her work 'almost always' so",
+   "fromFile": "verdicts-leguin-regrade-r8.json"
   },
   "560": {
    "index": 560,
@@ -17795,10 +17830,11 @@
   },
   "651": {
    "index": 651,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "a flexible use of compound and complex sentences",
+   "verdict": "PARTIAL",
+   "trueWording": "a flexible use of compound and complex sentences (Bloom volume, snippet)",
    "note": "ursulakleguin00bloo (Bloom, ed., Ursula K. Le Guin, 1986). Walked left to the subject: \"Le Guin's style has evolved towards simplicity, it is still characterized by this flowing quality, a skillful use of cadence and sound patterns, and a flexible use...\". The snippet route cannot say which contributed essay holds the passage, only that it is in the volume.",
-   "fromFile": "verdicts-leguin-i628-708.json"
+   "unsupportedLimb": "which contributed essay — the snippet route establishes only that the passage is in the Bloom volume",
+   "fromFile": "verdicts-leguin-regrade-r8.json"
   },
   "652": {
    "index": 652,
@@ -17837,10 +17873,11 @@
   },
   "657": {
    "index": 657,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "put speakers on a more equal ideological footing",
+   "verdict": "PARTIAL",
+   "trueWording": "to help put speakers on a more equal ideological footing",
    "note": "ursulakleguinbey0000cadd (Cadden, Ursula K. Le Guin Beyond Genre, 2005). Widened hit: 'Le Guin uses free indirect discourse to help put speakers on a more equal ideological footing with other characters'. Source says 'to help put'; claim says 'to put'.",
-   "fromFile": "verdicts-leguin-i628-708.json"
+   "unsupportedLimb": "the unqualified 'to put' — the source reads 'to help put'",
+   "fromFile": "verdicts-leguin-regrade-r8.json"
   },
   "658": {
    "index": 658,
@@ -19128,10 +19165,11 @@
   },
   "841": {
    "index": 841,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "a thousand orcs in agony leave us unmoved",
+   "verdict": "PARTIAL",
+   "trueWording": "a thousand orcs in agony leave us unmoved (answer to Lauren)",
    "note": "Raw page, answer to Lauren (question 5). Quote verbatim, preceded by 'a mutilated corpse or two may make us flinch'. One modality gap worth flagging: Le Guin hedges - 'There seems to be a relationship' and 'if the magnitude ... dilutes its emotional effect' - where the claim asserts the dilution flatly.",
-   "fromFile": "verdicts-leguin-i808-842.json"
+   "unsupportedLimb": "the flat assertion of dilution — Le Guin hedges ('There seems to be a relationship'; 'if the magnitude ... dilutes its emotional effect')",
+   "fromFile": "verdicts-leguin-regrade-r8.json"
   },
   "842": {
    "index": 842,
@@ -19275,10 +19313,11 @@
   },
   "862": {
    "index": 862,
-   "verdict": "VERIFIED_VERBATIM",
-   "trueWording": "You use what is known to be known.",
+   "verdict": "PARTIAL",
+   "trueWording": "You use what is known to be known. (Lavinia excerpt)",
    "note": "Raw page fetched (same locusmag 2008 page, HTTP 200). The quoted sentence appears word for word inside the Lavinia excerpt, introduced as something Delany said. NOTE ON THE ATTRIBUTION LIMB: the page names him 'Chip Delany', not 'Samuel' - Chip is Samuel R. Delany's long-standing nickname, so the person is the same, but the given name in the claim comes from outside the page.",
-   "fromFile": "verdicts-leguin-i843-885.json"
+   "unsupportedLimb": "the given name 'Samuel' — the page names him 'Chip Delany'",
+   "fromFile": "verdicts-leguin-regrade-r8.json"
   },
   "863": {
    "index": 863,

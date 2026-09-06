@@ -12,3 +12,12 @@ Not implemented: HTMLCanvasElement's toDataURL() method: without installing the 
 Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
 Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
 Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+[ai-spend-alarm] dispatch failed (not fatal): network down
+Not implemented: HTMLMediaElement's pause() method
+Not implemented: HTMLMediaElement's load() method
+vendored lib tinymce/plugins/__exact_set_probe__.js ships under public/map/libs/ but is NOT pinned in VENDOR-MANIFEST.json — it would reach production un-verified. Audit the bytes for advisories, add a manifest entry, then re-pin: node scripts/validate-map-fork.mjs --update-manifest
+vendored lib pinned in manifest is missing on disk: flatqueue.js
+ ❯ tests/property/generatorGoldenMaster.test.js (3 tests | 1 failed) 28270ms
+     × every config produces byte-identical output to the golden master 28260ms
+Not implemented: navigation to another Document
+Not implemented: navigation to another Document
