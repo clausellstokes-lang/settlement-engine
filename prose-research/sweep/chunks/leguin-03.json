@@ -1,0 +1,58 @@
+{
+ "name": "leguin",
+ "chunk": 3,
+ "indices": [
+  531,
+  532,
+  538,
+  539,
+  540
+ ],
+ "claims": [
+  {
+   "index": 531,
+   "feature": "other: passive voice",
+   "claim": "Le Guin, quoting her own Steering the Craft, says writers who want to take responsibility are wary of the passive voice.",
+   "source": "Ursula K. Le Guin quoting Steering the Craft pp. 56-57, in 'Navigating the Ocean of Story - Session 1, Part 3' (2015)",
+   "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-1-part-3",
+   "quote": "Writers who want to take responsibility are wary of it.",
+   "page": "answer to Christy; she cites Steering the Craft pp. 56-57"
+  },
+  {
+   "index": 532,
+   "feature": "other: passive voice",
+   "claim": "Le Guin says the passive voice ought to be used freely where it belongs and calls it one of the lovely versatilities of the verb.",
+   "source": "Ursula K. Le Guin quoting Steering the Craft pp. 56-57, in 'Navigating the Ocean of Story - Session 1, Part 3' (2015)",
+   "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-1-part-3",
+   "quote": "It is one of the lovely versatilities of the verb.",
+   "page": "answer to Christy; she cites Steering the Craft pp. 56-57"
+  },
+  {
+   "index": 538,
+   "feature": "other: story shape",
+   "claim": "Le Guin offers the walking story, in which you cover ground while seeing everything around you, as an alternative to the fast-paced suspenseful one.",
+   "source": "Ursula K. Le Guin, 'What Makes a Story' (c. 2007), ursulakleguin.com",
+   "url": "https://www.ursulakleguin.com/what-makes-a-story",
+   "quote": "steady, and you fall into the flow of the gait",
+   "page": "paragraph on walking"
+  },
+  {
+   "index": 539,
+   "feature": "other: responsibility for words",
+   "claim": "Le Guin defines a writer as a person who cares what words mean.",
+   "source": "Ursula K. Le Guin, 'A Few Words to a Young Writer' (undated), ursulakleguin.com",
+   "url": "https://www.ursulakleguin.com/a-few-words-to-a-young-writer",
+   "quote": "A writer is a person who cares what words mean",
+   "page": "second paragraph"
+  },
+  {
+   "index": 540,
+   "feature": "terminology consistency",
+   "claim": "Le Guin says the grammar words subject, predicate, object, adjective, adverb and the tenses are the names of the writer's tools.",
+   "source": "Ursula K. Le Guin, introduction to the 2015 revision of Steering the Craft, quoted on ursulakleguin.com",
+   "url": "https://www.ursulakleguin.com/steering-the-craft",
+   "quote": "these are the names of the writer’s tools",
+   "page": "'From the Introduction' section"
+  }
+ ]
+}

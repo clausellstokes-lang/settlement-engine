@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 14:48:38 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 14:54:40 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -176,6 +176,7 @@
 | dnd | verifier | i709-723 | failed | 0 | — | verdict file WRITTEN | 17:51:06 |
 | dnd | verifier | i724-738 | failed | 0 | — | verdict file absent | 18:42:06 |
 | dnd | verifier | i724-738 | failed | 0 | — | verdict file absent | 17:51:06 |
+| dnd | verifier | i724-795 | in-flight | 0 | — | verdict file absent | 18:54:31 |
 | dnd | verifier | i739-753 | failed | 0 | — | verdict file absent | 18:42:06 |
 | dnd | verifier | i739-753 | failed | 0 | — | verdict file absent | 17:51:06 |
 | dnd | verifier | i754-759 | failed | 0 | — | verdict file absent | 17:51:06 |
@@ -186,16 +187,19 @@
 | dnd | verifier | i784-798 | failed | 0 | — | verdict file absent | 18:42:50 |
 | dnd | verifier | i79-93 | result | 15 | — | verdict file WRITTEN | 17:41:58 |
 | dnd | verifier | i790-804 | failed | 0 | — | verdict file absent | 17:51:06 |
+| dnd | verifier | i796-842 | in-flight | 0 | — | verdict file absent | 18:54:32 |
 | dnd | verifier | i799-813 | failed | 0 | — | verdict file absent | 18:42:50 |
 | dnd | verifier | i805-819 | failed | 0 | — | verdict file absent | 17:51:06 |
 | dnd | verifier | i814-828 | failed | 0 | — | verdict file absent | 18:42:50 |
 | dnd | verifier | i820-834 | failed | 0 | — | verdict file absent | 17:51:07 |
 | dnd | verifier | i829-843 | failed | 0 | — | verdict file absent | 18:42:50 |
 | dnd | verifier | i835-849 | failed | 0 | — | verdict file absent | 17:51:07 |
+| dnd | verifier | i843-870 | in-flight | 0 | — | verdict file absent | 18:54:37 |
 | dnd | verifier | i844-858 | failed | 0 | — | verdict file absent | 18:42:51 |
 | dnd | verifier | i850-864 | failed | 0 | — | verdict file absent | 17:51:07 |
 | dnd | verifier | i859-871 | failed | 0 | — | verdict file absent | 18:42:51 |
 | dnd | verifier | i865-871 | failed | 0 | — | verdict file absent | 17:51:07 |
+| dnd | verifier | i871-871 | in-flight | 1 | — | verdict file absent | 18:54:39 |
 | dnd | verifier | i94-108 | result | 14 | — | verdict file WRITTEN | 17:42:38 |
 | hobb | critic |  | result | 0 | critic-hobb.md | — | 18:29:49 |
 | hobb | regrade | regrade-r4 | result | 0 | — | — | 17:37:59 |
@@ -227,6 +231,7 @@
 | hobb | verifier | i60-74 | result | 9 | — | verdict file WRITTEN | 17:02:10 |
 | hobb | verifier | i75-89 | result | 5 | — | verdict file WRITTEN | 17:02:42 |
 | hobb | verifier | i90-104 | result | 8 | — | verdict file WRITTEN | 17:05:31 |
+| kay | critic |  | in-flight | 0 | — | — | 18:54:28 |
 | kay | critic |  | failed | 0 | — | — | 18:42:13 |
 | kay | critic |  | failed | 0 | — | — | 17:51:51 |
 | kay | finder | craft | result | 112 | — | 163 claims, complete=True @14:02:12 | 17:25:51 |
@@ -332,6 +337,7 @@
 | martin | finder | measurement | result | 60 | — | 60 claims, complete=True @14:02:13 | 17:19:44 |
 | martin | regrade | regrade-r4 | failed | 0 | — | — | 17:51:22 |
 | martin | regrade | regrade-r5 | result | 0 | — | — | 18:33:01 |
+| martin | synth |  | in-flight | 0 | — | — | 18:54:40 |
 | martin | synth |  | failed | 0 | — | — | 18:41:30 |
 | martin | synth |  | failed | 0 | — | — | 17:51:23 |
 | martin | verifier | i330-344 | result | 5 | — | verdict file WRITTEN | 17:24:27 |

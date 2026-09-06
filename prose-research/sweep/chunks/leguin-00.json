@@ -1,0 +1,158 @@
+{
+ "name": "leguin",
+ "chunk": 0,
+ "indices": [
+  385,
+  386,
+  387,
+  394,
+  396,
+  397,
+  399,
+  406,
+  409,
+  410,
+  411,
+  412,
+  413,
+  414,
+  415
+ ],
+ "claims": [
+  {
+   "index": 385,
+   "feature": "other: ethnographic anthology form",
+   "claim": "Slusser describes Always Coming Home as building its vision through an objective-sounding layering of one didactic essay upon another.",
+   "source": "George Slusser, 'Le Guin and the Future of SF Criticism', Science Fiction Studies #53 (March 1991)",
+   "url": "https://web.archive.org/web/20250524105632id_/https://www.depauw.edu/sfs/review_essays/sluss53.htm",
+   "quote": "objective-sounding layering of didactic essay upon essay",
+   "page": "paragraph on Always Coming Home and Number of the Beast"
+  },
+  {
+   "index": 386,
+   "feature": "per-speaker register",
+   "claim": "Slusser reports that Cummins's reading of Always Coming Home gave him the impression of a strong identity speaking through a controlled polyphony of fictional voices.",
+   "source": "George Slusser summarising Elizabeth Cummins, in Science Fiction Studies #53 (March 1991)",
+   "url": "https://web.archive.org/web/20250524105632id_/https://www.depauw.edu/sfs/review_essays/sluss53.htm",
+   "quote": "a controlled polyphony of fictional voices",
+   "page": "paragraph contrasting Cummins with Selinger"
+  },
+  {
+   "index": 387,
+   "feature": "other: reputation as stylist",
+   "claim": "Slusser quotes Harold Bloom's 1986 introduction calling Le Guin a superbly imaginative creator and major stylist.",
+   "source": "George Slusser quoting Harold Bloom's introduction to Modern Critical Views: Ursula K. Le Guin (1986), in Science Fiction Studies #53 (March 1991)",
+   "url": "https://web.archive.org/web/20250524105632id_/https://www.depauw.edu/sfs/review_essays/sluss53.htm",
+   "quote": "a superbly imaginative creator and major stylist",
+   "page": "third paragraph"
+  },
+  {
+   "index": 394,
+   "feature": "other: centripetal narrowing description",
+   "claim": "Suvin writes that Le Guin delineates ever more precisely the same object, describing her method as centripetal.",
+   "source": "Darko Suvin, 'Parables of De-Alienation', Science Fiction Studies #7 (November 1975), abstract as printed on the SFS page",
+   "url": "https://web.archive.org/web/20260206193435id_/https://www.depauw.edu/sfs/backissues/7/suvin7art.htm",
+   "quote": "she delineates ever more precisely the same object",
+   "page": "ABSTRACT"
+  },
+  {
+   "index": 396,
+   "feature": "other: formal polish and closure",
+   "claim": "Suvin characterises the Earthsea Trilogy as beautiful, polished and self-enclosed like a diamond necklace.",
+   "source": "Darko Suvin, 'Parables of De-Alienation', Science Fiction Studies #7 (November 1975)",
+   "url": "https://web.archive.org/web/20260206193435id_/https://www.depauw.edu/sfs/backissues/7/suvin7art.htm",
+   "quote": "polished, and self-enclosed like a diamond necklace",
+   "page": "section on the Earthsea Trilogy"
+  },
+  {
+   "index": 397,
+   "feature": "closing sentence",
+   "claim": "Suvin says the closing segment of 'The New Atlantis' is rendered all the weightier for consisting of only three sentences.",
+   "source": "Darko Suvin, 'Parables of De-Alienation', Science Fiction Studies #7 (November 1975)",
+   "url": "https://web.archive.org/web/20260206193435id_/https://www.depauw.edu/sfs/backissues/7/suvin7art.htm",
+   "quote": "all the weightier for consisting of only three sentences",
+   "page": "section on The New Atlantis"
+  },
+  {
+   "index": 399,
+   "feature": "other: stylistic lineage",
+   "claim": "Suvin attributes much of Le Guin's stylistic power and accessibility to a blend of nineteenth-century realism, lyric-poetic technique and the ethical abstraction of American romances.",
+   "source": "Darko Suvin, 'Parables of De-Alienation', Science Fiction Studies #7 (November 1975)",
+   "url": "https://web.archive.org/web/20260206193435id_/https://www.depauw.edu/sfs/backissues/7/suvin7art.htm",
+   "quote": "account for much of her stylistic power and accessibility",
+   "page": "closing section"
+  },
+  {
+   "index": 406,
+   "feature": "proverbs and sayings",
+   "claim": "Judah Bierman identifies sententiae as the constant feature of Le Guin's style in The Dispossessed.",
+   "source": "Judah Bierman, 'Ambiguity in Utopia: The Dispossessed', Science Fiction Studies #7 (November 1975)",
+   "url": "https://web.archive.org/web/20251219192652id_/https://www.depauw.edu/sfs/backissues/7/bierman7art.htm",
+   "quote": "the sententiae that are her style",
+   "page": "section on the ansible"
+  },
+  {
+   "index": 409,
+   "feature": "metaphor discipline",
+   "claim": "Douglas Barbour identifies the wall, introduced on the first page of The Dispossessed, as one major local image running through the novel.",
+   "source": "Douglas Barbour, 'Wholeness and Balance: An Addendum', Science Fiction Studies #7 (November 1975)",
+   "url": "https://web.archive.org/web/20251225062058id_/https://www.depauw.edu/sfs/backissues/7/barbour7art.htm",
+   "quote": "One major local image—a brilliantly ambiguous one—is the wall",
+   "page": "third paragraph"
+  },
+  {
+   "index": 410,
+   "feature": "consequence on a household",
+   "claim": "Le Guin complains that science fiction never makes the poor and the hard-working into persons.",
+   "source": "Ursula K. Le Guin, 'American SF and the Other', Science Fiction Studies #7 (November 1975)",
+   "url": "https://web.archive.org/web/20251215080725id_/https://www.depauw.edu/sfs/backissues/7/leguin7art.htm",
+   "quote": "Where are the poor, the people who work hard",
+   "page": "fourth paragraph"
+  },
+  {
+   "index": 411,
+   "feature": "consequence on a household",
+   "claim": "Le Guin states that in science fiction the people are not people but masses existing to be led by their superiors.",
+   "source": "Ursula K. Le Guin, 'American SF and the Other', Science Fiction Studies #7 (November 1975)",
+   "url": "https://web.archive.org/web/20251215080725id_/https://www.depauw.edu/sfs/backissues/7/leguin7art.htm",
+   "quote": "They are masses, existing for one purpose: to be led",
+   "page": "fifth paragraph"
+  },
+  {
+   "index": 412,
+   "feature": "metaphor discipline",
+   "claim": "Ian Watson reads Le Guin's phrase for the forest paths as a neural simile that supports an impression that the forest is conscious.",
+   "source": "Ian Watson, 'The Forest as Metaphor for Mind', Science Fiction Studies #7 (November 1975)",
+   "url": "https://web.archive.org/web/20260107011510id_/https://www.depauw.edu/sfs/backissues/7/watson7art.htm",
+   "quote": "a neural simile which supports the impression",
+   "page": "early section on The Word for World is Forest"
+  },
+  {
+   "index": 413,
+   "feature": "other: structural iconicity",
+   "claim": "Rafail Nudelman identifies thorough iconicity as the essential structural principle of Le Guin's SF, each episode being an image of the whole.",
+   "source": "Rafail Nudelman, 'An Approach to the Structure of Le Guin's SF', Science Fiction Studies #7 (November 1975)",
+   "url": "https://web.archive.org/web/20221202232531id_/https://www.depauw.edu/sfs/backissues/7/nudelman7art.htm",
+   "quote": "its thorough iconicity",
+   "page": "section on radial linkage"
+  },
+  {
+   "index": 414,
+   "feature": "metaphor discipline",
+   "claim": "David Mitchell states that metaphors and similes are rare in A Wizard of Earthsea, and that this scarcity is what makes them vivid when they do appear.",
+   "source": "David Mitchell, \"David Mitchell on Earthsea: a rival to Tolkien and George RR Martin\", The Guardian, 23 October 2015",
+   "url": "https://www.theguardian.com/books/2015/oct/23/david-mitchell-wizard-of-earthsea-tolkien-george-rr-martin",
+   "quote": "Metaphors and similes are scarce enough to burn vividly",
+   "page": "section on style and voice"
+  },
+  {
+   "index": 415,
+   "feature": "dialogue register",
+   "claim": "David Mitchell states that dialogue in A Wizard of Earthsea is sparing.",
+   "source": "David Mitchell, \"David Mitchell on Earthsea: a rival to Tolkien and George RR Martin\", The Guardian, 23 October 2015",
+   "url": "https://www.theguardian.com/books/2015/oct/23/david-mitchell-wizard-of-earthsea-tolkien-george-rr-martin",
+   "quote": "dialogue is sparing",
+   "page": "section on style and voice"
+  }
+ ]
+}

@@ -1,0 +1,24 @@
+{
+ "role": "verifier",
+ "name": "dnd",
+ "angle": null,
+ "tag": "i724-795",
+ "lines": 15,
+ "firstTs": "2026-09-06T18:54:27.262Z",
+ "lastTs": "2026-09-06T18:54:31.227Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1
+ },
+ "urlsFetched": [],
+ "filesWritten": [],
+ "lastAssistantText": "I'll start by reading the chunk file.",
+ "run": "wf_df0a321b-0f2",
+ "agent": "afd02c7fc6e7ae063",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/059d4243-f837-4b07-8096-8c9ca76b03fb/subagents/workflows/wf_df0a321b-0f2/agent-afd02c7fc6e7ae063.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-dnd-i724-795.json",
+  "exists": false
+ }
+}

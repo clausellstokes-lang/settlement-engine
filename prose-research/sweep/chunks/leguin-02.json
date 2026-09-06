@@ -1,0 +1,158 @@
+{
+ "name": "leguin",
+ "chunk": 2,
+ "indices": [
+  477,
+  485,
+  487,
+  491,
+  492,
+  493,
+  494,
+  495,
+  498,
+  501,
+  503,
+  513,
+  521,
+  527,
+  528
+ ],
+ "claims": [
+  {
+   "index": 477,
+   "feature": "metaphor discipline",
+   "claim": "Sylvia Kelso judges that the closing clauses of the bread-and-stone passage in The Lathe of Heaven, though rhythmically necessary, slightly weaken its antithesis and its homely simile.",
+   "source": "Sylvia A. Kelso, \"Boldly to Re-Venture: New Writing on the Works of Ursula K. Le Guin\", Paradoxa 21 (2009), pp. 7-22",
+   "url": "https://paradoxa.com/wp-content/uploads/2020/07/1-Boldly-to-Re-Venture-New-Writing-on-the-Works-of-Ursula-K.-Le-Guin-Kelso-pp-7-22.pdf",
+   "quote": "actually detract slightly from the antithesis of bread and stone",
+   "page": "p. 15"
+  },
+  {
+   "index": 485,
+   "feature": "other: self-dating record",
+   "claim": "The Seggri frame dates its own assertion against the report that contains it rather than against a calendar year.",
+   "source": "Ursula K. Le Guin, 'The Matter of Seggri' (1994), full text transcription, sfsfss.com",
+   "url": "https://www.sfsfss.com/stories2/Le%20Guin,%20Ursula%20K.%20-%20The%20Matter%20of%20Seggri.html",
+   "quote": "As of the date of this report the Seggri have not",
+   "page": "frame passage after Merriment's notes"
+  },
+  {
+   "index": 487,
+   "feature": "terminology consistency",
+   "claim": "The Seggri frame names an institutional procedure as a capitalised proper term and leaves it unglossed.",
+   "source": "Ursula K. Le Guin, 'The Matter of Seggri' (1994), full text transcription, sfsfss.com",
+   "url": "https://www.sfsfss.com/stories2/Le%20Guin,%20Ursula%20K.%20-%20The%20Matter%20of%20Seggri.html",
+   "quote": "They made Resehavanar's Choice as \"all the truth slowly.\"",
+   "page": "frame passage after Merriment's notes"
+  },
+  {
+   "index": 491,
+   "feature": "per-speaker register",
+   "claim": "The captain's log inside 'The Matter of Seggri' is written in an archaic diction the frame narrator never uses.",
+   "source": "Ursula K. Le Guin, 'The Matter of Seggri' (1994), full text transcription, sfsfss.com",
+   "url": "https://www.sfsfss.com/stories2/Le%20Guin,%20Ursula%20K.%20-%20The%20Matter%20of%20Seggri.html",
+   "quote": "They are ordinary drudges, living in towns which belong",
+   "page": "Captain Aolao-olao's Report"
+  },
+  {
+   "index": 492,
+   "feature": "other: bureaucratic idiom",
+   "claim": "The closing personal memoir of 'The Matter of Seggri' ends on a filing formula borrowed from an application form.",
+   "source": "Ursula K. Le Guin, 'The Matter of Seggri' (1994), full text transcription, sfsfss.com",
+   "url": "https://www.sfsfss.com/stories2/Le%20Guin,%20Ursula%20K.%20-%20The%20Matter%20of%20Seggri.html",
+   "quote": "my record is herewith enclosed",
+   "page": "final section, autobiographical sketch"
+  },
+  {
+   "index": 493,
+   "feature": "other: proportion of record to narrative",
+   "claim": "Rich Horton reports that the closing ethnographic section of Always Coming Home runs to some 100 pages.",
+   "source": "Rich Horton, Strange at Ecbatan (blog), 2024",
+   "url": "http://rrhorton.blogspot.com/2024/04/review-always-coming-home-by-ursula-k.html",
+   "quote": "the final section, some 100 pages, called",
+   "page": "paragraph 3"
+  },
+  {
+   "index": 494,
+   "feature": "other: readability of the record register",
+   "claim": "Rich Horton judges the ethnographic passages of Always Coming Home intellectually interesting but hard to read.",
+   "source": "Rich Horton, Strange at Ecbatan (blog), 2024",
+   "url": "http://rrhorton.blogspot.com/2024/04/review-always-coming-home-by-ursula-k.html",
+   "quote": "intellectually intriguing, but, really, often a struggle to read",
+   "page": "final verdict paragraph"
+  },
+  {
+   "index": 495,
+   "feature": "other: readability of the record register",
+   "claim": "Rich Horton reads the ethnographic material of Always Coming Home as an author's notes deliberately left in.",
+   "source": "Rich Horton, Strange at Ecbatan (blog), 2024",
+   "url": "http://rrhorton.blogspot.com/2024/04/review-always-coming-home-by-ursula-k.html",
+   "quote": "like a writer deciding to include all her notes",
+   "page": "paragraph 3"
+  },
+  {
+   "index": 498,
+   "feature": "other: encyclopedic form",
+   "claim": "Brian Attebery, the editor of the Library of America edition, calls the form Le Guin chose for Always Coming Home encyclopedic.",
+   "source": "Brian Attebery, interviewed by Library of America",
+   "url": "https://www.loa.org/news-and-views/1491-always-coming-home-the-ursula-k-le-guin-book-that-breaks-the-novel-form-8220wide-open8221/",
+   "quote": "The encyclopedic form of Always Coming Home was exactly what",
+   "page": "third answer"
+  },
+  {
+   "index": 501,
+   "feature": "other: encyclopedic form",
+   "claim": "Matthew Keeley characterises Le Guin's method in Always Coming Home as ethnography rather than epic narrative.",
+   "source": "Matthew Keeley, Reactor (Tor.com) review, 2019",
+   "url": "https://reactormag.com/book-reviews-the-new-edition-of-ursula-k-le-guins-always-coming-home/",
+   "quote": "Le Guin’s mode is ethnography, not epic.",
+   "page": "paragraph beginning 'The interrupted story'"
+  },
+  {
+   "index": 503,
+   "feature": "other: reader routing through a record",
+   "claim": "Le Guin's own first-page note tells readers that the explanatory pieces are set apart so a narrative reader can skip them.",
+   "source": "Ursula K. Le Guin, first-page note to Always Coming Home, quoted in Matthew Keeley's Reactor review",
+   "url": "https://reactormag.com/book-reviews-the-new-edition-of-ursula-k-le-guins-always-coming-home/",
+   "quote": "where those who want narrative can ignore them",
+   "page": "paragraph beginning 'The table of contents'"
+  },
+  {
+   "index": 513,
+   "feature": "other: style as substance",
+   "claim": "Le Guin says that to her the style is the book, to a large extent.",
+   "source": "Ursula K. Le Guin, interviewed by John Wray, The Paris Review, Art of Fiction No. 221 (2013)",
+   "url": "https://web.archive.org/web/20140118190325id_/http://www.theparisreview.org/interviews/6253/the-art-of-fiction-no-221-ursula-k-le-guin",
+   "quote": "To me the style is the book, to a large extent",
+   "page": "answer on genre prose and Borges"
+  },
+  {
+   "index": 521,
+   "feature": "other: showing versus telling",
+   "claim": "Le Guin says showing can be quite static while telling always involves moving on.",
+   "source": "Ursula K. Le Guin, 'Navigating the Ocean of Story - Session 1' (Book View Cafe, 2015)",
+   "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-1",
+   "quote": "Showing can be quite static, after all",
+   "page": "answer to Paige"
+  },
+  {
+   "index": 527,
+   "feature": "other: false dichotomies of craft advice",
+   "claim": "Le Guin denies that reflection and action, or character and action, are opposites.",
+   "source": "Ursula K. Le Guin, 'Navigating the Ocean of Story: Session 1, Continued' (Book View Cafe, 2015)",
+   "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-1-continued",
+   "quote": "reflection and action, character and action, are not opposites",
+   "page": "section 'SOME FALSE DICHOTOMIES'"
+  },
+  {
+   "index": 528,
+   "feature": "other: conflict is not obligatory",
+   "claim": "Le Guin says conflict is one possible element of a story and is not an obligatory ingredient of narrative.",
+   "source": "Ursula K. Le Guin, 'Navigating the Ocean of Story: Session 1, Continued' (Book View Cafe, 2015)",
+   "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-1-continued",
+   "quote": "neither is an obligatory ingredient of narrative",
+   "page": "section 'SOME FALSE DICHOTOMIES'"
+  }
+ ]
+}

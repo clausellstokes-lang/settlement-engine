@@ -15796,6 +15796,720 @@
    "trueWording": "Long italics is hard to read, cognitively.",
    "note": "Quote verbatim on the same raw page, immediately after the read-aloud sentence; the claim's 'long passages set in italics' matches the antecedent 'There are long stretches of read-aloud, in italics.'",
    "fromFile": "verdicts-dnd-i709-723.json"
+  },
+  "725": {
+   "index": 725,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "726": {
+   "index": 726,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "727": {
+   "index": 727,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "728": {
+   "index": 728,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "729": {
+   "index": 729,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "730": {
+   "index": 730,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "731": {
+   "index": 731,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "733": {
+   "index": 733,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "734": {
+   "index": 734,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "735": {
+   "index": 735,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "736": {
+   "index": 736,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "738": {
+   "index": 738,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "739": {
+   "index": 739,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "740": {
+   "index": 740,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "741": {
+   "index": 741,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "742": {
+   "index": 742,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "744": {
+   "index": 744,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "745": {
+   "index": 745,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "746": {
+   "index": 746,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "747": {
+   "index": 747,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "748": {
+   "index": 748,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "749": {
+   "index": 749,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "750": {
+   "index": 750,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "751": {
+   "index": 751,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "752": {
+   "index": 752,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "753": {
+   "index": 753,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "754": {
+   "index": 754,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "755": {
+   "index": 755,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "757": {
+   "index": 757,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "758": {
+   "index": 758,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "760": {
+   "index": 760,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "761": {
+   "index": 761,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "762": {
+   "index": 762,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "763": {
+   "index": 763,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "765": {
+   "index": 765,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "766": {
+   "index": 766,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "767": {
+   "index": 767,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "768": {
+   "index": 768,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "769": {
+   "index": 769,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "770": {
+   "index": 770,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "772": {
+   "index": 772,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "773": {
+   "index": 773,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "774": {
+   "index": 774,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "775": {
+   "index": 775,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "776": {
+   "index": 776,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "777": {
+   "index": 777,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "779": {
+   "index": 779,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "780": {
+   "index": 780,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "782": {
+   "index": 782,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "783": {
+   "index": 783,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "784": {
+   "index": 784,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "785": {
+   "index": 785,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "787": {
+   "index": 787,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "788": {
+   "index": 788,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "791": {
+   "index": 791,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "792": {
+   "index": 792,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "793": {
+   "index": 793,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "797": {
+   "index": 797,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "798": {
+   "index": 798,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "799": {
+   "index": 799,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "800": {
+   "index": 800,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "801": {
+   "index": 801,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "802": {
+   "index": 802,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "804": {
+   "index": 804,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "806": {
+   "index": 806,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "807": {
+   "index": 807,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "809": {
+   "index": 809,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "810": {
+   "index": 810,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "811": {
+   "index": 811,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "812": {
+   "index": 812,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "813": {
+   "index": 813,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "815": {
+   "index": 815,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "816": {
+   "index": 816,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "819": {
+   "index": 819,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "820": {
+   "index": 820,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "821": {
+   "index": 821,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "822": {
+   "index": 822,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "823": {
+   "index": 823,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "824": {
+   "index": 824,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "825": {
+   "index": 825,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "826": {
+   "index": 826,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "827": {
+   "index": 827,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "829": {
+   "index": 829,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "830": {
+   "index": 830,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "831": {
+   "index": 831,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "835": {
+   "index": 835,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "837": {
+   "index": 837,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "838": {
+   "index": 838,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "841": {
+   "index": 841,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "851": {
+   "index": 851,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "852": {
+   "index": 852,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "853": {
+   "index": 853,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "856": {
+   "index": 856,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "857": {
+   "index": 857,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "858": {
+   "index": 858,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "859": {
+   "index": 859,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "861": {
+   "index": 861,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "862": {
+   "index": 862,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "863": {
+   "index": 863,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "864": {
+   "index": 864,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "866": {
+   "index": 866,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "867": {
+   "index": 867,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
   }
  }
 }

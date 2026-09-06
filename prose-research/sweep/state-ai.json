@@ -23099,6 +23099,1184 @@
    "substantive": true,
    "date": "2024-05-11",
    "route": "openreview.net PDF route returns an HTML shell; Wayback raw capture web.archive.org/web/20260302103430id_/ + pypdf"
+  },
+  {
+   "title": "OpenAI's metafictional short story about grief is beautiful and moving",
+   "url": "https://www.theguardian.com/books/2025/mar/12/jeanette-winterson-ai-alternative-intelligence-its-capacity-to-be-other-is-just-what-the-human-race-needs",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2025-03-12",
+   "route": "curl + browser UA, live"
+  },
+  {
+   "title": "Akutagawa Prize draws controversy after win for work that used ChatGPT",
+   "url": "https://www.japantimes.co.jp/culture/2024/01/19/books/akutagawa-prize-book-chatgpt/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2024-01-19",
+   "route": "curl + browser UA, live"
+  },
+  {
+   "title": "AI writing results (Mark Lawrence blind test)",
+   "url": "https://www.marklawrence.buzz/2023/09/ai-writing-results.html",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2023-09-14",
+   "route": "curl + browser UA, live"
+  },
+  {
+   "title": "So ... is AI writing any good? (Mark Lawrence, test setup and all eight pieces)",
+   "url": "https://www.marklawrence.buzz/2023/09/so-is-ai-writing-any-good.html",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2023-09-13",
+   "route": "curl + browser UA, live"
+  },
+  {
+   "title": "Ghosts (Vauhini Vara)",
+   "url": "https://believermag.com/ghosts/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2021-08-09",
+   "route": "Wayback raw capture 20220512115630id_ (live URL Cloudflare-blocked)"
+  },
+  {
+   "title": "Sudowrite Muse product page",
+   "url": "https://www.sudowrite.com/muse",
+   "kind": "vendor",
+   "substantive": true,
+   "date": "fetched 2026-09-06",
+   "route": "curl + browser UA, live"
+  },
+  {
+   "title": "I Would Rather See My Books Get Pirated Than This",
+   "url": "https://janefriedman.com/i-would-rather-see-my-books-pirated/",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2023-08-07",
+   "route": "curl + browser UA, live"
+  },
+  {
+   "title": "Survey Reveals 90 Percent of Writers Believe Authors Should Be Compensated for the Use of Their Books in Training Generative AI",
+   "url": "https://authorsguild.org/news/ai-survey-90-percent-of-writers-believe-authors-should-be-compensated-for-ai-training-use/",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2023-05-15",
+   "route": "curl + browser UA, live"
+  },
+  {
+   "title": "A Concerning Trend (Neil Clarke)",
+   "url": "https://neil-clarke.com/a-concerning-trend/",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2023-02-15",
+   "route": "curl + browser UA, live"
+  },
+  {
+   "title": "A sci-fi magazine has cut off submissions after a flood of AI-generated stories",
+   "url": "https://www.npr.org/2023/02/24/1159286436/rise-of-ai-chatbot-programs-has-led-to-flood-of-fake-submissions-to-sci-fi-magazi",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2023-02-24",
+   "route": "curl + browser UA, live"
+  },
+  {
+   "title": "TechScape: How cheap, outsourced labour in Africa is shaping AI English",
+   "url": "https://www.theguardian.com/technology/2024/apr/16/techscape-ai-gadgest-humane-ai-pin-chatgpt",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2024-04-16",
+   "route": "curl + browser UA, live"
+  },
+  {
+   "title": "Customer Experience with AI-Generated Content Within Titles (DriveThruRPG)",
+   "url": "https://help.drivethrurpg.com/hc/en-us/articles/26794784634007-Customer-Experience-with-AI-Generated-Content-Within-Titles",
+   "kind": "vendor",
+   "substantive": true,
+   "date": "2024-10-28",
+   "route": "Wayback raw capture 20251005160536id_ (live Cloudflare-blocked)"
+  },
+  {
+   "title": "DMs Guild and DriveThruRPG ban AI written works (EN World thread quoting Gizmodo)",
+   "url": "https://www.enworld.org/threads/dms-guild-and-drivethrurpg-ban-ai-written-works-requires-labels-for-ai-generated-art.698936/",
+   "kind": "relay",
+   "substantive": true,
+   "date": "2023-07-25",
+   "route": "curl + browser UA, live"
+  },
+  {
+   "title": "How cheap, outsourced labour in Africa is shaping AI English (Simon Willison link blog)",
+   "url": "https://simonwillison.net/2024/Apr/18/delve/",
+   "kind": "relay",
+   "substantive": false,
+   "date": "2024-04-18",
+   "route": "curl + browser UA, live; used only to recover the Guardian URL"
+  },
+  {
+   "title": "AI-generated poetry is indistinguishable from human-written poetry and is rated more favorably",
+   "url": "https://www.nature.com/articles/s41598-024-76900-1",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2024-11-14",
+   "route": "curl + browser UA, live nature.com"
+  },
+  {
+   "title": "Can Good Writing Be Generative? Expert-Level AI Writing Emerges through Fine-Tuning on High-Quality Books (CHI 2026)",
+   "url": "https://arxiv.org/html/2601.18353v1",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2026-01-26",
+   "route": "curl + browser UA on the arXiv HTML full text"
+  },
+  {
+   "title": "Readers Prefer Outputs of AI Trained on Copyrighted Books over Expert Human Writers",
+   "url": "https://arxiv.org/abs/2510.13939",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2026-03-17",
+   "route": "curl on the arXiv abstract page (SSRN Cloudflare-blocked); abstract only"
+  },
+  {
+   "title": "Do readers prefer AI-generated Italian short stories?",
+   "url": "https://arxiv.org/abs/2601.17363v3",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2026-01-24",
+   "route": "curl on the arXiv abstract page; abstract only"
+  },
+  {
+   "title": "Art or Artifice? Large Language Models and the False Promise of Creativity (CHI 2024)",
+   "url": "https://arxiv.org/abs/2309.14556v3",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2024-03-08",
+   "route": "curl on the arXiv abstract page; abstract only"
+  },
+  {
+   "title": "Can AI writing be salvaged? Mitigating Idiosyncrasies and Improving Human-AI Alignment (CHI 2025)",
+   "url": "https://arxiv.org/abs/2409.14509v5",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2025-03-04",
+   "route": "curl on the arXiv abstract page; abstract only"
+  },
+  {
+   "title": "Generative AI enhances individual creativity but reduces the collective diversity of novel content (Science Advances)",
+   "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11244532/fullTextXML",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2024-07-12",
+   "route": "science.org Cloudflare-blocked; full text via Europe PMC REST fullTextXML for PMC11244532"
+  },
+  {
+   "title": "Editorial and Technical Review of 'Readers Prefer Outputs of AI Trained on Copyrighted Books...' (Zenodo, Zeus Dutta Roy)",
+   "url": "https://zenodo.org/records/19553084",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2026-04-13",
+   "route": "record page fetched; the PDF download returned 763 bytes and could not be read, so no claim is drawn from it"
+  },
+  {
+   "title": "The Dramatica Co., \"The AI Tells Are in the Story\", Dramatica Blog",
+   "url": "https://dramatica.com/blog/the-ai-tells-are-in-the-story",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2026-05-29",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Marina Adami, \"How AI-generated prose diverges from human writing and why it matters\", Reuters Institute for the Study of Journalism",
+   "url": "https://reutersinstitute.politics.ox.ac.uk/news/how-ai-generated-prose-diverges-human-writing-and-why-it-matters",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2025-12-09",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Jenna Russell, Rishanth Rajendhran, Chau Minh Pham, Mohit Iyyer, John Wieting, \"StoryScope: Investigating idiosyncrasies in AI fiction\", arXiv:2604.03136v6",
+   "url": "https://arxiv.org/html/2604.03136v6",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2026-04-03 (v1); v6 2026-08-10",
+   "route": "arxiv HTML, direct curl"
+  },
+  {
+   "title": "Chuck Wendig, \"Generative A.I. For Writers: An Unfolding (But Not Inevitable) Nightmare\", Terribleminds",
+   "url": "https://terribleminds.com/ramble/2024/04/01/generative-a-i-for-writers-an-unfolding-but-not-inevitable-nightmare/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2024-04-01",
+   "route": "Wayback raw capture 20260606000920id_"
+  },
+  {
+   "title": "Tiffany Yates Martin, \"Can AI Edit Your Book?\", Fox Print Editorial",
+   "url": "https://foxprinteditorial.com/2025/08/14/can-ai-edit-your-book/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2025-08-14",
+   "route": "live URL blocked by CleanTalk anti-crawler; Wayback raw capture 20260615085614id_"
+  },
+  {
+   "title": "Elizabeth Goodspeed, \"on why design writing needs designers writing\", It's Nice That",
+   "url": "https://www.itsnicethat.com/articles/elizabeth-goodspeed-designers-who-write-creative-industry-020426",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "2026-04-02",
+   "route": "Wayback raw capture 20260715020203id_; read in full — the essay is about design writing and carries no AI-failure claim"
+  },
+  {
+   "title": "Lincoln Michel, \"Art Without Intention\", Counter Craft",
+   "url": "https://countercraft.substack.com/p/art-without-intention",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2024-09-04",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Lincoln Michel, \"Criticism in the Age of AI\", Counter Craft",
+   "url": "https://countercraft.substack.com/p/criticism-in-the-age-of-ai",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2025-09-05",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Lincoln Michel, \"Surf's Up in Slop City\", Counter Craft",
+   "url": "https://countercraft.substack.com/p/surfs-up-in-slop-city",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2026-02-10",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Harvey Randall, \"The bigwigs who want AI-generated NPCs and writing think you're too dumb to appreciate a good story\", PC Gamer",
+   "url": "https://www.pcgamer.com/gaming-industry/game-development/the-bigwigs-who-want-ai-generated-npcs-and-writing-think-youre-too-dumb-to-appreciate-a-good-story-dont-prove-them-right/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2026-08-15",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Ted Litchfield, \"Larian's head writer has a simple answer for how AI-generated text helps development: 'It doesn't'\", PC Gamer",
+   "url": "https://www.pcgamer.com/games/rpg/larians-head-writer-has-a-simple-answer-for-how-ai-generated-text-helps-development-it-doesnt-thanks-to-its-best-output-being-a-3-10-at-best-worse-than-his-worst-drafts/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2026-01-10",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Robin Valentine, \"AI-generated story and dialogue is not going to work, says Dragon Age creator David Gaider\", PC Gamer",
+   "url": "https://www.pcgamer.com/ai-generated-story-and-dialogue-is-not-going-to-work-says-dragon-age-creator-david-gaider-a-lot-of-effort-is-going-to-be-wasted-on-this/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2023-05-30",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Elie Gould, \"AI is 'just a plagiarism machine that makes people lose their jobs' in the eyes of The Talos Principle 3's writers\", PC Gamer",
+   "url": "https://www.pcgamer.com/games/puzzle/ai-is-just-a-plagiarism-machine-that-makes-people-lose-their-jobs-in-the-eyes-of-the-talos-principle-3s-writers/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2026-08-26",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Sam Liberty, \"Why Nobody Has Cracked AI Dialogue In Games\", Medium (Bootcamp)",
+   "url": "https://medium.com/design-bootcamp/why-nobody-has-cracked-ai-dialogue-in-games-and-a-thought-experiment-on-how-to-do-it-148a22330552",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "unknown",
+   "route": "BLOCKED — Medium paywall/JS shell returned 778 bytes; scribe.rip returned empty; no claim extracted"
+  },
+  {
+   "title": "WikiProject AI Cleanup, \"Wikipedia:Signs of AI writing\" (advice page; version as fetched 6 September 2026)",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "live page, fetched 2026-09-06; banner says parts need updating as of August 2026",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Sam Kriss, \"Why Does A.I. Write Like … That?\" (print headline \"The Omniwriter\"), The New York Times Magazine",
+   "url": "https://www.nytimes.com/2025/12/03/magazine/chatbot-writing-style.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2025-12-03",
+   "route": "live URL paywalled (43 bytes); Wayback capture 20260127025121id_ truncated at the paywall; full text from Wayback capture 20251221211413id_"
+  },
+  {
+   "title": "Taha Yasseri, \"How Similar Are Grokipedia and Wikipedia? A Multi-Dimensional Textual and Structural Comparison\", arXiv:2510.26899v2",
+   "url": "https://arxiv.org/html/2510.26899v2",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2025-11-03",
+   "route": "arxiv HTML, direct curl"
+  },
+  {
+   "title": "Robin Sloan, \"Is it okay?\", robinsloan.com lab blog",
+   "url": "https://www.robinsloan.com/lab/is-it-okay/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2025-02-11",
+   "route": "direct curl, browser UA — NOTE the page inserts soft hyphens (U+00AD) inside many words, so most quotations cannot be matched as plain text"
+  },
+  {
+   "title": "Neil Clarke, \"AI and Short Fiction #1 – Some recommendations for readers\", neil-clarke.com",
+   "url": "https://neil-clarke.com/ai-and-short-fiction-1/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2026-07-14",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Neil Clarke, \"AI and Short Fiction #2 – Some recommendations for editors\", neil-clarke.com",
+   "url": "https://neil-clarke.com/ai-and-short-fiction-2/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2026-07-16",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Ethan Mollick, \"On Writing With AI\" (attempted), One Useful Thing",
+   "url": "https://www.oneusefulthing.org/p/on-writing-with-ai",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "n/a",
+   "route": "NOT FOUND — URL returned a 1,920-byte stub, no such post"
+  },
+  {
+   "title": "Cory Doctorow, Pluralistic 2025-06-07 (attempted)",
+   "url": "https://pluralistic.net/2025/06/07/ai-slop/",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "n/a",
+   "route": "NOT FOUND — 3,045-byte stub, no such post at that slug"
+  },
+  {
+   "title": "Ted Chiang, \"ChatGPT Is a Blurry JPEG of the Web\", The New Yorker",
+   "url": "https://www.newyorker.com/tech/annals-of-technology/chatgpt-is-a-blurry-jpeg-of-the-web",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2023-02-09",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Mark Williams, \"Why David Shelley Will Never Be AI Witchfinder General\", The New Publishing Standard",
+   "url": "https://thenewpublishingstandard.com/2026/06/09/david-shelley-ai-detection-publishing/",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2026-06-09",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Charlie Guo, \"Native Speakers\", Artificial Ignorance",
+   "url": "https://www.ignorance.ai/p/native-speakers",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2025 (undated in the fetched text)",
+   "route": "direct curl, browser UA — fetched in full; the essay is about AI-consumable interfaces and carries no claim about generated prose quality"
+  },
+  {
+   "title": "CALYPSO: LLMs as Dungeon Masters' Assistants (Zhu, Martin, Head, Callison-Burch; AIIDE 2023) — ar5iv full text",
+   "url": "https://ar5iv.labs.arxiv.org/html/2308.07540",
+   "kind": "academic paper (games research)",
+   "substantive": true
+  },
+  {
+   "title": "Homogenization Effects of Large Language Models on Human Creative Ideation (Anderson, Shah, Kreminski; C&C 2024, best paper) — arXiv full text",
+   "url": "https://arxiv.org/html/2402.01536",
+   "kind": "academic paper",
+   "substantive": true
+  },
+  {
+   "title": "Max Kreminski — Publications (index page)",
+   "url": "https://mkremins.github.io/publications/",
+   "kind": "index page",
+   "substantive": false
+  },
+  {
+   "title": "The Dearth of the Author in AI-Supported Writing (Kreminski; In2Writing @ CHI 2024) — PDF, text extracted locally",
+   "url": "https://mkremins.github.io/publications/Dearth_In2Writing2024.pdf",
+   "kind": "academic position paper",
+   "substantive": true
+  },
+  {
+   "title": "Endless Forms Most Similar: The Dearth of the Author in AI-Supported Art (Kreminski; AI & Society 2025) — PDF, grep only",
+   "url": "https://mkremins.github.io/publications/Dearth_AI&S2025.pdf",
+   "kind": "academic paper (grep only, not read in full)",
+   "substantive": false
+  },
+  {
+   "title": "Guiding and Diversifying LLM-Based Story Generation via Answer Set Programming (Wang & Kreminski; Wordplay @ ACL 2024)",
+   "url": "https://arxiv.org/html/2406.00554",
+   "kind": "academic paper",
+   "substantive": true
+  },
+  {
+   "title": "Modifying Large Language Model Post-Training for Diverse Creative Writing (Chung, Kreminski et al.; COLM 2025)",
+   "url": "https://arxiv.org/html/2503.17126",
+   "kind": "academic paper",
+   "substantive": true
+  },
+  {
+   "title": "Can LLMs Generate Good Stories? Insights and Challenges from a Narrative Planning Perspective (CoG 2025; Kreminski co-author per his publications page)",
+   "url": "https://arxiv.org/html/2506.10161",
+   "kind": "academic paper (games research)",
+   "substantive": true
+  },
+  {
+   "title": "Are Large Language Models Capable of Generating Human-Level Narratives? (Tian et al.; EMNLP 2024)",
+   "url": "https://arxiv.org/html/2407.13248",
+   "kind": "academic paper",
+   "substantive": true
+  },
+  {
+   "title": "StoryScope: Investigating idiosyncrasies in AI fiction (Russell, Rajendhran, Pham, Iyyer, Wieting; 2026)",
+   "url": "https://arxiv.org/html/2604.03136",
+   "kind": "academic paper",
+   "substantive": true
+  },
+  {
+   "title": "Large Language Models and Games: A Survey and Roadmap (Gallotta et al.; v5 2024-12-09)",
+   "url": "https://arxiv.org/html/2402.18659v5",
+   "kind": "academic survey (games research)",
+   "substantive": true
+  },
+  {
+   "title": "Static vs. Agentic Game Master AI for Facilitating Solo Role-Playing Experiences (ChatRPG; 2025-03-06)",
+   "url": "https://arxiv.org/html/2502.19519",
+   "kind": "academic paper (games research)",
+   "substantive": true
+  },
+  {
+   "title": "Evaluating Quality of Gaming Narratives Co-created with AI (Valdivia & Burelli, ITU Copenhagen; 2025-09-04)",
+   "url": "https://arxiv.org/html/2509.04239",
+   "kind": "academic paper (games research, Delphi study)",
+   "substantive": true
+  },
+  {
+   "title": "The Alexandrian — Thought of the Day: GenAI and RPGs (Justin Alexander, 2025-12-28)",
+   "url": "https://thealexandrian.net/wordpress/53232/roleplaying-games/thought-of-the-day-genai-and-rpgs",
+   "kind": "practitioner essay (RPG design)",
+   "substantive": true
+  },
+  {
+   "title": "The Alexandrian — posts tagged 'ai' (one post only)",
+   "url": "https://thealexandrian.net/wordpress/tag/ai",
+   "kind": "index page",
+   "substantive": false
+  },
+  {
+   "title": "tenfootpole.org — The Curse of the Swamp (Bryce Lynch review, 2024-06-01, plus comments)",
+   "url": "https://tenfootpole.org/ironspike/?p=9177",
+   "kind": "adventure-module review",
+   "substantive": true
+  },
+  {
+   "title": "tenfootpole.org — A Strange House (Bryce Lynch review, 2024-11-25, plus comments)",
+   "url": "https://tenfootpole.org/ironspike/?p=9471",
+   "kind": "adventure-module review",
+   "substantive": true
+  },
+  {
+   "title": "tenfootpole.org — A Plague of Rats (Bryce Lynch review, 2024-06-08, plus comments)",
+   "url": "https://tenfootpole.org/ironspike/?p=9189",
+   "kind": "adventure-module review",
+   "substantive": true
+  },
+  {
+   "title": "tenfootpole.org — The Temple of the Serpent Queen (Bryce Lynch review, 2024-08-07, plus comments)",
+   "url": "https://tenfootpole.org/ironspike/?p=9302",
+   "kind": "adventure-module review",
+   "substantive": true
+  },
+  {
+   "title": "tenfootpole forum — Making a Module using ChatGPT, page 4 (Dec 2022)",
+   "url": "http://tenfootpole.org/forum/index.php?threads/making-a-module-using-chatgpt.386/page-4",
+   "kind": "practitioner forum thread",
+   "substantive": true
+  },
+  {
+   "title": "tenfootpole forum — Making a Module using ChatGPT, page 1 (Beoric's experiment, Dec 2022)",
+   "url": "http://tenfootpole.org/forum/index.php?threads/making-a-module-using-chatgpt.386/",
+   "kind": "practitioner forum thread",
+   "substantive": true
+  },
+  {
+   "title": "tenfootpole.org site search for 'chatgpt' (returned Nothing Found)",
+   "url": "https://tenfootpole.org/ironspike/?s=chatgpt",
+   "kind": "site search (dry)",
+   "substantive": false
+  },
+  {
+   "title": "Sly Flourish — The Best LLM for Generating RPG Stuff: Your Brain (Mike Shea, 2024-09-30)",
+   "url": "https://slyflourish.com/best_llm.html",
+   "kind": "practitioner essay (DM advice)",
+   "substantive": true
+  },
+  {
+   "title": "Sly Flourish — Writing Awesome Read-Aloud Text (Mike Shea, 2010-11-08) — human craft benchmark",
+   "url": "https://slyflourish.com/writing_awesome_readaloud_text.html",
+   "kind": "practitioner craft article (benchmark, no AI content)",
+   "substantive": true
+  },
+  {
+   "title": "Sly Flourish — Tell, Don't Show (Mike Shea, 2024-02-12) — human craft benchmark",
+   "url": "https://slyflourish.com/tell_dont_show.html",
+   "kind": "practitioner craft article (benchmark, no AI content)",
+   "substantive": true
+  },
+  {
+   "title": "Sly Flourish — article archive (index)",
+   "url": "https://slyflourish.com/archive.html",
+   "kind": "index page",
+   "substantive": false
+  },
+  {
+   "title": "Emily Short — The Uncanny Deck: Co-authoring with GPT-2 (2021-07-18)",
+   "url": "https://emshort.blog/2021/07/18/the-uncanny-deck-co-authoring-with-gpt-2/",
+   "kind": "practitioner essay (IF author)",
+   "substantive": true
+  },
+  {
+   "title": "Emily Short blog searches for LLM / large language model / ChatGPT / AI Dungeon / generative, and the 2023 archive (no LLM-era posts; 2024 and 2025 archives return 404)",
+   "url": "https://emshort.blog/?s=LLM",
+   "kind": "site search (dry)",
+   "substantive": false
+  },
+  {
+   "title": "The Game Design Roundtable #308 — Narrative AI with Emily Short (episode page; outline only, no transcript)",
+   "url": "https://thegamedesignroundtable.com/episode/308-narrative-ai-with-emily-short/",
+   "kind": "podcast page (no transcript)",
+   "substantive": false
+  },
+  {
+   "title": "Ubisoft News — How Ubisoft's New Generative AI Prototype Changes the Narrative for NPCs (2024-03-19)",
+   "url": "https://news.ubisoft.com/en-us/article/5qXdxhshJBXoanFZApdG3L/how-ubisofts-new-generative-ai-prototype-changes-the-narrative-for-npcs",
+   "kind": "primary corporate article (team interviews)",
+   "substantive": true
+  },
+  {
+   "title": "Game Developer — How do Ubisoft's AI-driven NPCs handle dynamic player interactions? (Michael Higham, 2024-03-19, hands-on)",
+   "url": "https://www.gamedeveloper.com/design/how-do-ubisoft-s-ai-driven-npcs-handle-dynamic-player-interactions-",
+   "kind": "trade journalism (hands-on)",
+   "substantive": true
+  },
+  {
+   "title": "AI and Games — Ubisoft's 'Teammates' Demo & Their New Generative AI Push (Tommy Thompson, 2025-11-26; includes his April 2024 NEO NPC assessment)",
+   "url": "https://www.aiandgames.com/p/ubisofts-teammates-demo-and-their",
+   "kind": "expert analysis (game AI researcher)",
+   "substantive": true
+  },
+  {
+   "title": "Matt's Homepage — Ubisoft demoed AI NPC tech at GDC 2024 (2024-09-12)",
+   "url": "https://mattfife.com/?p=12230",
+   "kind": "personal blog (thin)",
+   "substantive": false
+  },
+  {
+   "title": "Time Extension — Square Enix's 'The Portopia Serial Murder Case' AI Tech Demo Flooded With Negative Reviews (2023-04)",
+   "url": "https://www.timeextension.com/news/2023/04/square-enix-remaking-the-portopia-serial-murder-case-as-a-free-ai-tech-demo",
+   "kind": "games journalism",
+   "substantive": true
+  },
+  {
+   "title": "PC Gamer — Square Enix's free 'AI tech preview' has a Steam user rating of Very Negative and deserves it (Jody Macgregor, 2023-04-24)",
+   "url": "https://www.pcgamer.com/square-enixs-free-ai-tech-preview-has-a-steam-user-rating-of-very-negative-and-deserves-it/",
+   "kind": "games journalism (hands-on)",
+   "substantive": true
+  },
+  {
+   "title": "Digital Trends — Square Enix's free AI game isn't selling me on the tech's power (Giovanni Colantonio, 2023-04-25)",
+   "url": "https://www.digitaltrends.com/gaming/square-enix-ai-game-portopia-impressions/",
+   "kind": "games journalism (hands-on)",
+   "substantive": true
+  },
+  {
+   "title": "Steam — SQUARE ENIX AI Tech Preview: THE PORTOPIA SERIAL MURDER CASE (store page; fetched 2026-09-06)",
+   "url": "https://store.steampowered.com/app/2280000/SQUARE_ENIX_AI_Tech_Preview_THE_PORTOPIA_SERIAL_MURDER_CASE/",
+   "kind": "primary (publisher description + review aggregate)",
+   "substantive": true
+  },
+  {
+   "title": "Wikipedia — The Portopia Serial Murder Case (2023 AI Tech Preview section; used as a map to PC Gamer and Digital Trends)",
+   "url": "https://en.wikipedia.org/wiki/The_Portopia_Serial_Murder_Case",
+   "kind": "aggregator",
+   "substantive": false
+  },
+  {
+   "title": "Game Developer — Keywords tried to make a game using GenAI but said the tech was 'unable to replace talent' (2024-03-13)",
+   "url": "https://www.gamedeveloper.com/production/keywords-tried-to-make-a-game-using-genai-but-said-the-tech-was-unable-to-replace-talent-",
+   "kind": "trade journalism (quotes FY2023 report)",
+   "substantive": true
+  },
+  {
+   "title": "Keywords Studios — Project AVA: Exploring GenAI's Promising Future in Game Production (2024-05-24)",
+   "url": "https://www.keywordsstudios.com/en/project-ava-exploring-genais-promising-future-in-game-production/",
+   "kind": "primary corporate write-up",
+   "substantive": true
+  },
+  {
+   "title": "PC Games Insider — Keywords tried making game with generative AI, failed (2024-03-15; echoes the same report)",
+   "url": "https://www.pcgamesinsider.biz/news/74358/keywords-tried-making-game-with-generative-ai-failed/",
+   "kind": "trade journalism (echo of gd-keywords)",
+   "substantive": false
+  },
+  {
+   "title": "NPR — Can AI create compelling video game stories? Writers have their doubts (Vincent Acovino, 2024-03-14; text-only transcript)",
+   "url": "https://text.npr.org/1238647721",
+   "kind": "journalism (radio transcript)",
+   "substantive": true
+  },
+  {
+   "title": "GamesRadar — Indie game dev says generative AI means he couldn't make his 2021 breakout today (Xalavier Nelson Jr., 2024-01)",
+   "url": "https://www.gamesradar.com/indie-game-devs-says-generative-ai-means-he-couldnt-make-his-2021-breakout-today/",
+   "kind": "games journalism (off-angle: stock-image provenance, not prose)",
+   "substantive": false
+  },
+  {
+   "title": "TheGamer — Game Developers Band Together To Rubbish Nexon's Claims That Every Studio Is Using AI (2025-11-12)",
+   "url": "https://www.thegamer.com/developers-speak-out-against-nexon-claims-everybody-uses-ai/",
+   "kind": "games journalism (stance only, no prose critique)",
+   "substantive": false
+  },
+  {
+   "title": "Game Developer — Xalavier Nelson Jr. author page and 'Phantom inspiration and the ethical auteur' podcast page",
+   "url": "https://www.gamedeveloper.com/design/phantom-inspiration-and-the-ethical-auteur-with-xalavier-nelson-jr-",
+   "kind": "index / podcast page (no AI content)",
+   "substantive": false
+  },
+  {
+   "title": "Wikipedia — AI Dungeon (Reception section; used as a map to TapSmart, 148Apps, Stuff reviews)",
+   "url": "https://en.wikipedia.org/wiki/AI_Dungeon",
+   "kind": "aggregator",
+   "substantive": false
+  },
+  {
+   "title": "TapSmart — AI Dungeon review (Jon Mundy, 2020-02-28)",
+   "url": "https://www.tapsmart.com/news/ai-dungeon-freeform-narrative-adventures/",
+   "kind": "app review (GPT-2 era)",
+   "substantive": true
+  },
+  {
+   "title": "148Apps — AI Dungeon review (Campbell Bird, 2019-12-30, 4.5/5)",
+   "url": "https://www.148apps.com/reviews/ai-dungeon-review/",
+   "kind": "app review (GPT-2 era)",
+   "substantive": true
+  },
+  {
+   "title": "Stuff — AI Dungeon review (Craig Grannell, c. 2020, 4/5) — fetched via curl",
+   "url": "https://www.stuff.tv/app-reviews/ai-dungeon/review",
+   "kind": "app review (GPT-2 era)",
+   "substantive": true
+  },
+  {
+   "title": "Cheap and Easy Open-Ended Text Input for Interactive Emergent Narrative (Kreminski et al.; FDG 2024) — grep only",
+   "url": "https://mkremins.github.io/publications/PWIM_FDG2024.pdf",
+   "kind": "academic paper (grep only)",
+   "substantive": false
+  },
+  {
+   "title": "Unmet Creativity Support Needs in Computationally Supported Creative Writing (Kreminski & Martens; In2Writing 2022) — grep only",
+   "url": "https://mkremins.github.io/publications/WritingSupportNeeds_In2Writing2022.pdf",
+   "kind": "academic paper (grep only)",
+   "substantive": false
+  },
+  {
+   "title": "Mirowski, Mathewson, Pittman, Evans — 'A Robot Walks into a Bar: Can Language Models Serve as Creativity Support Tools for Comedy?' (FAccT 2024)",
+   "url": "https://arxiv.org/html/2405.20956",
+   "kind": "peer-reviewed conference (ACM FAccT 2024), read at arXiv HTML",
+   "substantive": true
+  },
+  {
+   "title": "Subbiah, Zhang, Chilton, McKeown — 'Reading Subtext: Evaluating Large Language Models on Short Story Summarization with Writers' (TACL 2024)",
+   "url": "https://arxiv.org/html/2403.01061",
+   "kind": "peer-reviewed journal (TACL 2024), read at arXiv HTML",
+   "substantive": true
+  },
+  {
+   "title": "Ippolito, Yuan, Coenen, Burnam — 'Creative Writing with an AI-Powered Writing Assistant: Perspectives from Professional Writers' (arXiv 2022)",
+   "url": "https://arxiv.org/html/2211.05030",
+   "kind": "arXiv preprint 2022 (Google Wordcraft study), read at arXiv HTML",
+   "substantive": true
+  },
+  {
+   "title": "Chakrabarty, Padmakumar, Brahman, Muresan — 'Creativity Support in the Age of Large Language Models: An Empirical Study Involving Emerging Writers' (arXiv 2023)",
+   "url": "https://arxiv.org/html/2309.12570",
+   "kind": "arXiv preprint 2023, read at arXiv HTML",
+   "substantive": true
+  },
+  {
+   "title": "Agarwal, Naaman, Vashistha — 'AI Suggestions Homogenize Writing Toward Western Styles and Diminish Cultural Nuances' (CHI 2025)",
+   "url": "https://arxiv.org/html/2409.11360",
+   "kind": "peer-reviewed conference (ACM CHI 2025), read at arXiv HTML",
+   "substantive": true
+  },
+  {
+   "title": "Walsh, Preus, Gronski — 'Does ChatGPT Have a Poetic Style?' (CHR 2024, CEUR Vol-3834 paper122)",
+   "url": "https://arxiv.org/html/2410.15299",
+   "kind": "peer-reviewed conference (Computational Humanities Research 2024), read at arXiv HTML v2",
+   "substantive": true
+  },
+  {
+   "title": "Walsh, Preus, Antoniak — 'Sonnet or Not, Bot? Poetry Evaluation for Large Models and Datasets' (Findings of EMNLP 2024)",
+   "url": "https://arxiv.org/html/2406.18906",
+   "kind": "peer-reviewed (Findings of EMNLP 2024), read at arXiv HTML",
+   "substantive": true
+  },
+  {
+   "title": "Dugan, Ippolito, Kirubarajan, Shi, Callison-Burch — 'Real or Fake Text?: Investigating Human Ability to Detect Boundaries Between Human-Written and Machine-Generated Text' (AAAI 2023)",
+   "url": "https://arxiv.org/abs/2212.12672",
+   "kind": "peer-reviewed conference (AAAI 2023), read at arXiv HTML v1",
+   "substantive": true
+  },
+  {
+   "title": "Ippolito, Duckworth, Callison-Burch, Eck — 'Automatic Detection of Generated Text is Easiest when Humans are Fooled' (ACL 2020)",
+   "url": "https://aclanthology.org/2020.acl-main.164/",
+   "kind": "peer-reviewed conference (ACL 2020), read from cached ACL PDF text",
+   "substantive": true
+  },
+  {
+   "title": "Bender, Koller — 'Climbing towards NLU: On Meaning, Form, and Understanding in the Age of Data' (ACL 2020)",
+   "url": "https://aclanthology.org/2020.acl-main.463/",
+   "kind": "peer-reviewed conference (ACL 2020), read from cached ACL PDF text",
+   "substantive": true
+  },
+  {
+   "title": "Bender, Gebru, McMillan-Major, Shmitchell — 'On the Dangers of Stochastic Parrots: Can Language Models Be Too Big?' (FAccT 2021)",
+   "url": "https://doi.org/10.1145/3442188.3445922",
+   "kind": "peer-reviewed conference (ACM FAccT 2021), read from cached ACM PDF text",
+   "substantive": true
+  },
+  {
+   "title": "Köbis, Mossink — 'Artificial intelligence versus Maya Angelou: Experimental evidence that people cannot differentiate AI-generated from human-written poetry' (Computers in Human Behavior 114:106553, 2021)",
+   "url": "https://doi.org/10.1016/j.chb.2020.106553",
+   "kind": "peer-reviewed journal (CHB 2021), read from cached author manuscript (arXiv 2005.09980)",
+   "substantive": true
+  },
+  {
+   "title": "Moon, Green, Kushlev — 'Homogenizing Effect of Large Language Models (LLMs) on Creative Diversity: An Empirical Comparison of Human and ChatGPT Writing' (Computers in Human Behavior: Artificial Humans, 2025; preprint 2024)",
+   "url": "https://doi.org/10.1016/j.chbah.2025.100207",
+   "kind": "peer-reviewed journal (accepted manuscript), read from cached PDF text",
+   "substantive": true
+  },
+  {
+   "title": "Weber-Wulff, Anohina-Naumeca, Bjelobaba, Foltýnek, Guerrero-Dib, Popoola, Šigut, Waddington — 'Testing of detection tools for AI-generated text' (International Journal for Educational Integrity 19:26, 2023)",
+   "url": "https://doi.org/10.1007/s40979-023-00146-z",
+   "kind": "peer-reviewed journal (IJEI 2023), read from cached PDF text; abstract confirmed at arXiv 2306.15666",
+   "substantive": true
+  },
+  {
+   "title": "Liang, Yuksekgonul, Mao, Wu, Zou — 'GPT detectors are biased against non-native English writers' (Patterns 2023)",
+   "url": "https://arxiv.org/abs/2304.02819",
+   "kind": "peer-reviewed journal (Cell Patterns 2023), read at arXiv HTML v3",
+   "substantive": true
+  },
+  {
+   "title": "Perkins, Roe, Vu, Postma, Hickerson, McGaughran, Khuat — 'GenAI Detection Tools, Adversarial Techniques and Implications for Inclusivity in Higher Education' (IJEI 2024; preprint March 2024)",
+   "url": "https://arxiv.org/abs/2403.19148",
+   "kind": "peer-reviewed journal (International Journal for Educational Integrity 2024), read from cached preprint text",
+   "substantive": true
+  },
+  {
+   "title": "arXiv listing: 2412.15299 (LAMA-UT, speech recognition) — wrong id given in brief for Walsh/Preus/Gronski",
+   "url": "https://arxiv.org/html/2412.15299",
+   "kind": "arXiv HTML (mis-cited id)",
+   "substantive": false
+  },
+  {
+   "title": "arXiv title search 'Does ChatGPT Have a Poetic Style' (resolved correct id 2410.15299)",
+   "url": "https://arxiv.org/search/?query=Does+ChatGPT+Have+a+Poetic+Style&searchtype=title",
+   "kind": "search page",
+   "substantive": false
+  },
+  {
+   "title": "CEUR-WS Vol-3834 (CHR 2024 proceedings table of contents; paper122.pdf pp.1201–1219)",
+   "url": "https://ceur-ws.org/Vol-3834/",
+   "kind": "proceedings ToC",
+   "substantive": false
+  },
+  {
+   "title": "Weber-Wulff et al. 2023 arXiv mirror (abstract confirmation)",
+   "url": "https://arxiv.org/abs/2306.15666",
+   "kind": "arXiv abstract",
+   "substantive": false
+  },
+  {
+   "title": "Köbis & Mossink arXiv mirror (abstract confirmation)",
+   "url": "https://arxiv.org/abs/2005.09980",
+   "kind": "arXiv abstract",
+   "substantive": false
+  },
+  {
+   "title": "arXiv search 'neurodivergent AI detector' — no results",
+   "url": "https://arxiv.org/search/?query=neurodivergent+AI+detector&searchtype=all",
+   "kind": "search page (dry)",
+   "substantive": false
+  },
+  {
+   "title": "Crossref query: AI detector neurodivergent students false positives — only Angelier 2026 SSRN essay, no empirical study",
+   "url": "https://api.crossref.org/works?query=AI+generated+text+detector+neurodivergent+students+false+positives&rows=15",
+   "kind": "API search (dry)",
+   "substantive": false
+  },
+  {
+   "title": "Crossref query: AI detection autistic/autism writers false positive — no match",
+   "url": "https://api.crossref.org/works?query.bibliographic=AI+generated+text+detection+autistic+autism+writers+false+positive&rows=12",
+   "kind": "API search (dry)",
+   "substantive": false
+  },
+  {
+   "title": "Semantic Scholar paper search (neurodivergent detector) — HTTP 429 twice",
+   "url": "https://api.semanticscholar.org/graph/v1/paper/search?query=AI+detector+neurodivergent+writing&limit=10",
+   "kind": "API search (refused)",
+   "substantive": false
+  },
+  {
+   "title": "link.springer.com IJEI article page — redirect/IdP loop, not fetchable; cached PDF text used",
+   "url": "https://link.springer.com/article/10.1007/s40979-023-00146-z",
+   "kind": "publisher page (blocked)",
+   "substantive": false
+  },
+  {
+   "title": "ACM DL Stochastic Parrots PDF — HTTP 403; cached ACM PDF text used",
+   "url": "https://dl.acm.org/doi/pdf/10.1145/3442188.3445922",
+   "kind": "publisher page (blocked)",
+   "substantive": false
+  },
+  {
+   "title": "Wikipedia:Signs of AI writing (WikiProject AI Cleanup field guide)",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+   "kind": "community reference",
+   "substantive": true
+  },
+  {
+   "title": "Wikipedia talk:Signs of AI writing",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia_talk:Signs_of_AI_writing",
+   "kind": "editor discussion",
+   "substantive": true
+  },
+  {
+   "title": "Wikipedia:Signs of AI writing — revision history (2026-08-12 to 2026-09-06)",
+   "url": "https://en.wikipedia.org/w/index.php?title=Wikipedia:Signs_of_AI_writing&action=history&limit=100",
+   "kind": "revision log",
+   "substantive": true
+  },
+  {
+   "title": "Wikipedia:WikiProject AI Cleanup",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:WikiProject_AI_Cleanup",
+   "kind": "project page",
+   "substantive": true
+  },
+  {
+   "title": "Wikipedia:WikiProject AI Cleanup/Guide and resources",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:WikiProject_AI_Cleanup/Guide",
+   "kind": "project guide",
+   "substantive": true
+  },
+  {
+   "title": "Wikipedia:Large language models",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Large_language_models",
+   "kind": "policy essay",
+   "substantive": true
+  },
+  {
+   "title": "Wikipedia:Case against LLM-generated articles",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Case_against_LLM-generated_articles",
+   "kind": "essay",
+   "substantive": true
+  },
+  {
+   "title": "Brooks, Eggert & Peskoff 2024 — The Rise of AI-Generated Content in Wikipedia (arXiv 2410.08044, WikiNLP/EMNLP 2024)",
+   "url": "https://arxiv.org/html/2410.08044",
+   "kind": "study",
+   "substantive": true
+  },
+  {
+   "title": "Wikipedia Signpost 2024-10-19 Recent research — review of Brooks et al.",
+   "url": "https://en.wikipedia.org/wiki/Wikipedia:Wikipedia_Signpost/2024-10-19/Recent_research",
+   "kind": "research review",
+   "substantive": true
+  },
+  {
+   "title": "Liang et al. 2024 — Mapping the Increasing Use of LLMs in Scientific Papers (arXiv 2404.01268)",
+   "url": "https://arxiv.org/html/2404.01268v1",
+   "kind": "study",
+   "substantive": true
+  },
+  {
+   "title": "Geng & Trotta 2024 — Is ChatGPT Transforming Academics' Writing Style? (arXiv 2404.08627)",
+   "url": "https://arxiv.org/html/2404.08627v2",
+   "kind": "study",
+   "substantive": true
+  },
+  {
+   "title": "Kobak et al. 2024 — Delving into ChatGPT usage in academic writing through excess vocabulary (arXiv 2406.07016; Sci. Adv. 2025)",
+   "url": "https://arxiv.org/html/2406.07016v1",
+   "kind": "study",
+   "substantive": true
+  },
+  {
+   "title": "Huang, Xu, Geng, Wan & Chen 2025 — Wikipedia in the Era of LLMs: Evolution and Risks (arXiv 2503.02879, TMLR)",
+   "url": "https://arxiv.org/html/2503.02879v1",
+   "kind": "study",
+   "substantive": true
+  },
+  {
+   "title": "Min et al. 2023 — FActScore: Fine-grained Atomic Evaluation of Factual Precision in Long Form Text Generation (arXiv 2305.14251)",
+   "url": "https://arxiv.org/html/2305.14251",
+   "kind": "study",
+   "substantive": true
+  },
+  {
+   "title": "Shao et al. 2024 — Assisting in Writing Wikipedia-like Articles From Scratch with LLMs (STORM, arXiv 2402.14207, NAACL 2024)",
+   "url": "https://arxiv.org/html/2402.14207",
+   "kind": "study",
+   "substantive": true
+  },
+  {
+   "title": "WETBench 2025 — A Benchmark for Detecting Task-Specific Machine-Generated Text on Wikipedia (arXiv 2507.03373)",
+   "url": "https://arxiv.org/html/2507.03373v1",
+   "kind": "study",
+   "substantive": true
+  },
+  {
+   "title": "404 Media 2024-10 — The Editors Protecting Wikipedia from AI Hoaxes",
+   "url": "https://www.404media.co/email/d516cf7f-3b5f-4bf4-93da-325d9522dd79/",
+   "kind": "journalism",
+   "substantive": true
+  },
+  {
+   "title": "404 Media 2025 — Librarians Are Being Asked to Find AI-Hallucinated Books",
+   "url": "https://www.404media.co/librarians-are-being-asked-to-find-ai-hallucinated-books/",
+   "kind": "journalism (paywalled; one usable line)",
+   "substantive": false
+  },
+  {
+   "title": "Index on Censorship 2025-11 — History is being written by the AI victors",
+   "url": "https://www.indexoncensorship.org/2025/11/history-is-being-written-by-the-ai-victors/",
+   "kind": "journalism/essay",
+   "substantive": true
+  },
+  {
+   "title": "Historica.org — AI Hallucinations and the Risks to Historical Research Integrity",
+   "url": "https://www.historica.org/blog/ai-fictions-historiography-misinformation",
+   "kind": "blog (historiography)",
+   "substantive": true
+  },
+  {
+   "title": "Denyse Allen — AI safety for family historians: what the genealogy world isn't talking about",
+   "url": "https://denyseallen.substack.com/p/ai-safety-family-historians-genealogy",
+   "kind": "practitioner essay (genealogy)",
+   "substantive": true
+  },
+  {
+   "title": "Amy Johnson Crow — Using ChatGPT for Genealogy, Accurately",
+   "url": "https://www.amyjohnsoncrow.com/using-chatgpt-for-genealogy-accurately/",
+   "kind": "practitioner test (genealogy)",
+   "substantive": true
+  },
+  {
+   "title": "Automated Archival Descriptions with Federated Intelligence of LLMs (arXiv 2504.05711, 2025)",
+   "url": "https://arxiv.org/html/2504.05711",
+   "kind": "study (ISAD(G) archival description)",
+   "substantive": true
+  },
+  {
+   "title": "Walters & Wilder 2023 — Fabrication and errors in the bibliographic citations generated by ChatGPT (Scientific Reports; PMC10484980)",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10484980/",
+   "kind": "study",
+   "substantive": true
+  },
+  {
+   "title": "Influence of Topic Familiarity and Prompt Specificity on Citation Fabrication in Mental Health Research Using LLMs (JMIR 2025; PMC12658395)",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12658395/",
+   "kind": "study",
+   "substantive": true
+  },
+  {
+   "title": "Ansari 2026 — Compound Deception in Elite Peer Review: A Failure Mode Taxonomy of 100 Fabricated Citations at NeurIPS 2025 (arXiv 2602.05930)",
+   "url": "https://arxiv.org/html/2602.05930",
+   "kind": "study",
+   "substantive": true
+  },
+  {
+   "title": "Euronews Travel 2026-01-30 — How an AI-generated travel website sent tourists to a non-existent hot spring attraction",
+   "url": "https://euronews.com/travel/2026/01/30/how-an-ai-generated-travel-website-sent-tourists-to-a-non-existent-hot-spring-attraction",
+   "kind": "journalism",
+   "substantive": true
+  },
+  {
+   "title": "Vice — An AI-Generated NWS Map Hallucinated Fake Towns in Idaho",
+   "url": "https://www.vice.com/en/article/an-ai-generated-nws-map-hallucinated-fake-towns-in-idaho/",
+   "kind": "journalism",
+   "substantive": true
+  },
+  {
+   "title": "Crikey 2024-09-03 — AI worse than humans in every way at summarising information, government trial finds",
+   "url": "https://www.crikey.com.au/2024/09/03/ai-worse-summarising-information-humans-government-trial/",
+   "kind": "journalism (paywalled; headline-level only)",
+   "substantive": false
+  },
+  {
+   "title": "Understanding the Effects of RLHF on LLM Generalisation and Diversity (ICLR 2024)",
+   "url": "https://arxiv.org/pdf/2310.06452",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2024-02-19",
+   "route": "curl browser-UA to arXiv PDF + pypdf"
+  },
+  {
+   "title": "Verbalized Sampling: How to Mitigate Mode Collapse and Unlock LLM Diversity",
+   "url": "https://arxiv.org/pdf/2510.01171",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2026-07-15",
+   "route": "curl browser-UA to arXiv PDF + pypdf"
+  },
+  {
+   "title": "Diverse Preference Optimization (Lanchantin et al., Meta)",
+   "url": "https://arxiv.org/pdf/2501.18101",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2025-05-22",
+   "route": "curl browser-UA to arXiv PDF + pypdf"
+  },
+  {
+   "title": "Towards Understanding Sycophancy in Language Models (Sharma et al., Anthropic, ICLR 2024)",
+   "url": "https://arxiv.org/pdf/2310.13548",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2025-05-10",
+   "route": "curl browser-UA to arXiv PDF + pypdf"
+  },
+  {
+   "title": "AI models collapse when trained on recursively generated data (Nature 631:755-759)",
+   "url": "https://www.pure.ed.ac.uk/ws/portalfiles/portal/460496122/ShumailovEtalNature2024AIModelsCollapseWhen.pdf",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2024-07-25",
+   "route": "nature.com/articles/s41586-024-07566-6 returns Page Not Found (correct DOI is 10.1038/s41586-024-07566-y); publisher version-of-record PDF via Edinburgh Research Explorer + pypdf"
+  },
+  {
+   "title": "Base Models Beat Aligned Models at Randomness and Creativity (West and Potts, COLM 2025)",
+   "url": "https://arxiv.org/pdf/2505.00047",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2025-09-13",
+   "route": "curl browser-UA to arXiv PDF + pypdf"
+  },
+  {
+   "title": "Does Writing with Language Models Reduce Content Diversity? (Padmakumar and He, ICLR 2024)",
+   "url": "https://arxiv.org/pdf/2309.05196",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2024-07-01",
+   "route": "curl browser-UA to arXiv PDF + pypdf"
+  },
+  {
+   "title": "AI as Humanity's Salieri: Quantifying Linguistic Creativity of Language Models",
+   "url": "https://arxiv.org/pdf/2410.04265",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2025-01-12",
+   "route": "curl browser-UA to arXiv PDF + pypdf"
+  },
+  {
+   "title": "The Price of Format: Diversity Collapse in LLMs (Yun et al.)",
+   "url": "https://arxiv.org/pdf/2505.18949",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2025-05-25",
+   "route": "curl browser-UA to arXiv PDF + pypdf"
+  },
+  {
+   "title": "Is Model Collapse Inevitable? Breaking the Curse of Recursion by Accumulating Real and Synthetic Data",
+   "url": "https://arxiv.org/pdf/2404.01413",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2024-04-01",
+   "route": "curl browser-UA to arXiv PDF + pypdf"
+  },
+  {
+   "title": "One fish, two fish, but not the whole sea: Alignment reduces language models' conceptual diversity",
+   "url": "https://arxiv.org/pdf/2411.04427",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2024-11-07",
+   "route": "curl browser-UA to arXiv PDF + pypdf"
+  },
+  {
+   "title": "Evaluating the Diversity and Quality of LLM Generated Content (Shypula et al., COLM 2025)",
+   "url": "https://arxiv.org/pdf/2504.12522",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2025-04-16",
+   "route": "curl browser-UA to arXiv PDF + pypdf"
+  },
+  {
+   "title": "Modifying Large Language Model Post-Training for Diverse Creative Writing (Midjourney)",
+   "url": "https://arxiv.org/pdf/2503.17126",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2025-03-21",
+   "route": "curl browser-UA to arXiv PDF + pypdf"
+  },
+  {
+   "title": "On the Algorithmic Bias of Aligning LLMs with RLHF: Preference Collapse and Matching Regularization (JASA)",
+   "url": "https://arxiv.org/pdf/2405.16455",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2025-08-25",
+   "route": "curl browser-UA to arXiv PDF + pypdf"
+  },
+  {
+   "title": "Mysteries of mode collapse (janus, LessWrong / AI Alignment Forum)",
+   "url": "https://www.lesswrong.com/posts/t9svvNPNmFf5Qa3TA/mysteries-of-mode-collapse",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2022-11-08",
+   "route": "live site blocked by a Vercel security checkpoint; Wayback raw capture web.archive.org/web/20260725093614id_/"
+  },
+  {
+   "title": "A Note on Shumailov et al. (2024) (Ali Borji)",
+   "url": "https://arxiv.org/pdf/2410.12954",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2024-10-24",
+   "route": "curl browser-UA to arXiv PDF + pypdf"
+  },
+  {
+   "title": "The Rise of AI-Generated Content in Wikipedia (WikiNLP, ACL 2024)",
+   "url": "https://aclanthology.org/2024.wikinlp-1.12.pdf",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2024-11-16",
+   "route": "curl browser-UA to ACL Anthology PDF + pypdf"
+  },
+  {
+   "title": "Standardizing the Measurement of Text Diversity (Shaib et al.)",
+   "url": "https://arxiv.org/pdf/2403.00553",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2024-03-01",
+   "route": "curl browser-UA to arXiv PDF + pypdf"
+  },
+  {
+   "title": "Is Temperature the Creativity Parameter of Large Language Models? (ICCC 2024)",
+   "url": "https://arxiv.org/pdf/2405.00492",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2024-05-01",
+   "route": "curl browser-UA to arXiv PDF + pypdf"
+  },
+  {
+   "title": "Attributing Mode Collapse in the Fine-Tuning of Large Language Models (ICLR 2024 ME-FoMo workshop)",
+   "url": "https://openreview.net/pdf?id=3pDMYjpOxk",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2024-05-11",
+   "route": "openreview.net PDF route returns an HTML shell; Wayback raw capture web.archive.org/web/20260302103430id_/ + pypdf"
   }
  ],
  "assembledFrom": [

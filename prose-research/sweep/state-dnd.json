@@ -15801,6 +15801,720 @@
    "trueWording": "Long italics is hard to read, cognitively.",
    "note": "Quote verbatim on the same raw page, immediately after the read-aloud sentence; the claim's 'long passages set in italics' matches the antecedent 'There are long stretches of read-aloud, in italics.'",
    "fromFile": "verdicts-dnd-i709-723.json"
+  },
+  "725": {
+   "index": 725,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "726": {
+   "index": 726,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "727": {
+   "index": 727,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "728": {
+   "index": 728,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "729": {
+   "index": 729,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "730": {
+   "index": 730,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "731": {
+   "index": 731,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "733": {
+   "index": 733,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "734": {
+   "index": 734,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "735": {
+   "index": 735,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "736": {
+   "index": 736,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "738": {
+   "index": 738,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "739": {
+   "index": 739,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "740": {
+   "index": 740,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "741": {
+   "index": 741,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "742": {
+   "index": 742,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "744": {
+   "index": 744,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "745": {
+   "index": 745,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "746": {
+   "index": 746,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "747": {
+   "index": 747,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "748": {
+   "index": 748,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "749": {
+   "index": 749,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "750": {
+   "index": 750,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "751": {
+   "index": 751,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "752": {
+   "index": 752,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "753": {
+   "index": 753,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "754": {
+   "index": 754,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "755": {
+   "index": 755,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "757": {
+   "index": 757,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "758": {
+   "index": 758,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "760": {
+   "index": 760,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "761": {
+   "index": 761,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "762": {
+   "index": 762,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "763": {
+   "index": 763,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "765": {
+   "index": 765,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "766": {
+   "index": 766,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "767": {
+   "index": 767,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "768": {
+   "index": 768,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "769": {
+   "index": 769,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "770": {
+   "index": 770,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "772": {
+   "index": 772,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "773": {
+   "index": 773,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "774": {
+   "index": 774,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "775": {
+   "index": 775,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "776": {
+   "index": 776,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "777": {
+   "index": 777,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "779": {
+   "index": 779,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "780": {
+   "index": 780,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "782": {
+   "index": 782,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "783": {
+   "index": 783,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "784": {
+   "index": 784,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "785": {
+   "index": 785,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "787": {
+   "index": 787,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "788": {
+   "index": 788,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "791": {
+   "index": 791,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "792": {
+   "index": 792,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "793": {
+   "index": 793,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "797": {
+   "index": 797,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "798": {
+   "index": 798,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "799": {
+   "index": 799,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "800": {
+   "index": 800,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "801": {
+   "index": 801,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "802": {
+   "index": 802,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "804": {
+   "index": 804,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "806": {
+   "index": 806,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "807": {
+   "index": 807,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "809": {
+   "index": 809,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "810": {
+   "index": 810,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "811": {
+   "index": 811,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "812": {
+   "index": 812,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "813": {
+   "index": 813,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "815": {
+   "index": 815,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "816": {
+   "index": 816,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "819": {
+   "index": 819,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "820": {
+   "index": 820,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "821": {
+   "index": 821,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "822": {
+   "index": 822,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "823": {
+   "index": 823,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "824": {
+   "index": 824,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "825": {
+   "index": 825,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "826": {
+   "index": 826,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "827": {
+   "index": 827,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "829": {
+   "index": 829,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "830": {
+   "index": 830,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "831": {
+   "index": 831,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "835": {
+   "index": 835,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "837": {
+   "index": 837,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "838": {
+   "index": 838,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "841": {
+   "index": 841,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "851": {
+   "index": 851,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "852": {
+   "index": 852,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "853": {
+   "index": 853,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "856": {
+   "index": 856,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "857": {
+   "index": 857,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "858": {
+   "index": 858,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "859": {
+   "index": 859,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "861": {
+   "index": 861,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "862": {
+   "index": 862,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "863": {
+   "index": 863,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "864": {
+   "index": 864,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "866": {
+   "index": 866,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "867": {
+   "index": 867,
+   "verdict": "SKIPPED_TRIAGE",
+   "trueWording": "",
+   "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
+   "fromFile": "verdicts-dnd-triage-r6.json"
   }
  },
  "mergedAt": "see autosave.log",
@@ -21492,6 +22206,2136 @@
    "substantive": false,
    "date": "2016-04-24",
    "route": "live domain lapsed; Wayback raw capture 20260301223639id_ — a play report, not a register analysis"
+  },
+  {
+   "title": "Quagmire! The Making of a 1980's D&D Module (Jon Peterson, Medium, 2014)",
+   "url": "https://medium.com/@increment/quagmire-the-making-of-a-1980s-d-d-module-c30e788ea5f2",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2014",
+   "route": "wayback raw id_ capture 20260205123012 (live URL 403)"
+  },
+  {
+   "title": "Privilege, Power, and Dungeons & Dragons (Antero Garcia, Mind, Culture, and Activity 24:3, 2017)",
+   "url": "https://www.tandfonline.com/doi/abs/10.1080/10749039.2017.1293691",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2017-04-07",
+   "route": "PDF of the T&F offprint fetched from a mirror (i.4pcdn.org/tg/1565719003240.pdf); text extracted with pypdf"
+  },
+  {
+   "title": "Gygax on Holmes (Zenopus Archives, Zach Howard, 4 March 2013) — a dated compilation of Gygax quotes on Holmes Basic",
+   "url": "https://zenopusarchives.blogspot.com/2013/03/gygax-on-holmes.html",
+   "kind": "relay",
+   "substantive": true,
+   "date": "2013-03-04",
+   "route": "direct curl with browser UA, HTML stripped"
+  },
+  {
+   "title": "How Dungeons & Dragons Appropriated the Orient (Aaron Trammell, Analog Game Studies III:1, January 2016)",
+   "url": "https://analoggamestudies.org/2016/01/how-dungeons-dragons-appropriated-the-orient/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2016-01",
+   "route": "direct curl with browser UA"
+  },
+  {
+   "title": "Let's Design an Adventure: Outlines and Frameworks (Shawn Merwin, D&D Beyond, 9 Oct 2019)",
+   "url": "https://www.dndbeyond.com/posts/623-lets-design-an-adventure-outlines-and-frameworks",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2019-10-09",
+   "route": "direct curl with browser UA"
+  },
+  {
+   "title": "Let's Design an Adventure: Putting Encounters Together (Shawn Merwin, D&D Beyond, 2019)",
+   "url": "https://www.dndbeyond.com/posts/700-lets-design-an-adventure-putting-encounters",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "2019",
+   "route": "direct curl with browser UA"
+  },
+  {
+   "title": "Let's Design an Adventure: Thinking Like a Designer (Shawn Merwin, D&D Beyond, 2020)",
+   "url": "https://www.dndbeyond.com/posts/753-lets-design-an-adventure-thinking-like-a-designer",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2020",
+   "route": "direct curl with browser UA"
+  },
+  {
+   "title": "How much description should a dungeon key include? (David Hartlage, DMDavid, 21 Nov 2016)",
+   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2016-11-21",
+   "route": "WP REST API search then direct curl"
+  },
+  {
+   "title": "From B1 to Pinebrook: Every D&D Adventure That Includes DM Advice and What They Taught (David Hartlage, DMDavid, 30 Jan 2024)",
+   "url": "https://dmdavid.com/tag/from-b1-to-pinebrook-every-dd-adventure-that-includes-dm-advice-and-what-they-taught/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2024-01-30",
+   "route": "WP REST API search then direct curl"
+  },
+  {
+   "title": "Fourth Edition Improved D&D Design For Good, But One of Its Innovations Still Leads to Bad Adventures (David Hartlage, DMDavid, 14 Feb 2023)",
+   "url": "https://dmdavid.com/tag/fourth-edition-improved-dd-design-for-good-but-one-of-its-innovations-still-leads-to-bad-adventures/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2023-02-14",
+   "route": "WP REST API search then direct curl"
+  },
+  {
+   "title": "Murders on the Stage, Tortures, Woundings, and the Like: Dungeons & Dragons Adventures as Tragedy (Brian McKenzie, Analog Game Studies, 18 Dec 2023)",
+   "url": "https://analoggamestudies.org/2023/12/murders-on-the-stage-tortures-woundings-and-the-like-dungeons-dragons-adventures-as-tragedy/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2023-12-18",
+   "route": "site search then direct curl"
+  },
+  {
+   "title": "Concealed Conscientization: A Case Study of a Commercial Dungeons & Dragons Adventure (McKenzie, Zawilski, Beirne, International Journal of Role-Playing 17, 2026)",
+   "url": "https://journals.uu.se/IJRP/article/download/679/1013",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2026",
+   "route": "OJS download galley PDF, pypdf extraction"
+  },
+  {
+   "title": "Let's Design an Adventure: Boxed Text (Shawn Merwin, D&D Beyond, 2019)",
+   "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2019",
+   "route": "direct curl with browser UA"
+  },
+  {
+   "title": "When Worlds Collaborate: The Style of Early Tabletop Role-Playing Games (Stefan Huddleston, Analog Game Studies, 18 Dec 2022)",
+   "url": "https://analoggamestudies.org/2022/12/when-worlds-collaborate-the-style-of-early-tabletop-role-playing-games/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2022-12-18",
+   "route": "WP REST search then direct curl"
+  },
+  {
+   "title": "Mechanical Storytelling in D&D: Strahd in Relation to the Gothic (Meghan Hewitt, Analog Game Studies, 15 Dec 2024)",
+   "url": "https://analoggamestudies.org/2024/12/mechanical-storytelling-in-dungeons-and-dragons-strahd-in-relation-to-the-gothic/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2024-12-15",
+   "route": "WP REST search then direct curl"
+  },
+  {
+   "title": "That's Just What the Book Says: Game Mechanics and Narrative in Tomb of Annihilation (Mark Hines, Analog Game Studies, 19 Mar 2023)",
+   "url": "https://analoggamestudies.org/2023/03/thats-just-what-the-book-says-game-mechanics-and-narrative-as-symbiotic-co-constructive-elements-in-tomb-of-annihilation/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2023-03-19",
+   "route": "WP REST search then direct curl"
+  },
+  {
+   "title": "Blackmoor Gazette and Rumormonger #1 (Jon Peterson, Playing at the World, 3 Aug 2012)",
+   "url": "https://playingattheworld.blogspot.com/2012/08/blackmoor-gazette-and-rumormonger-1.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2012-08-03",
+   "route": "blog search then direct curl"
+  },
+  {
+   "title": "Immersion and Role Playing in the 1970s (Jon Peterson, Playing at the World, 31 Jan 2021)",
+   "url": "https://playingattheworld.blogspot.com/2021/01/immersion-and-role-playing-in-1970s.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2021-01-31",
+   "route": "blog search then direct curl"
+  },
+  {
+   "title": "The Art of the Key (Justin Alexander, The Alexandrian, 19 May 2014)",
+   "url": "https://thealexandrian.net/wordpress/35180/roleplaying-games/the-art-of-the-key",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2014-05-19",
+   "route": "direct curl with browser UA"
+  },
+  {
+   "title": "Review Standards (tenfootpole.org)",
+   "url": "https://tenfootpole.org/ironspike/?page_id=1201",
+   "kind": "craft-criticism",
+   "substantive": true,
+   "date": "undated page; comments 2016-2026",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "The Art of the Key",
+   "url": "https://thealexandrian.net/wordpress/36903/roleplaying-games/the-art-of-the-key",
+   "kind": "craft-criticism",
+   "substantive": true,
+   "date": "2014-05-19",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "The Art of the Key - Part 2: The Essential Key",
+   "url": "https://thealexandrian.net/wordpress/35201/roleplaying-games/the-art-of-the-key-part-2-the-essential-key",
+   "kind": "craft-criticism",
+   "substantive": true,
+   "date": "2014-05-21",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "The Art of the Key - Part 3: Hierarchy of Reference",
+   "url": "https://thealexandrian.net/wordpress/38497/roleplaying-games/the-art-of-the-key-part-3-hierarchy-of-reference",
+   "kind": "craft-criticism",
+   "substantive": true,
+   "date": "2016-05-02",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "GM Don't List #13: Boxed Text Pitfalls",
+   "url": "https://thealexandrian.net/wordpress/48312/roleplaying-games/gm-dont-list-13-boxed-text-pitfalls",
+   "kind": "craft-criticism",
+   "substantive": true,
+   "date": "2022-08-01",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Picturing the dungeon - boxed text (DMDavid)",
+   "url": "https://dmdavid.com/tag/picturing-the-dungeon-boxed-text/",
+   "kind": "craft-criticism",
+   "substantive": true,
+   "date": "2012-11-15",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Design & Development: Undercover at Gen Con, Part 1 (Wizards of the Coast)",
+   "url": "https://web.archive.org/web/20161031220137/http://archive.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "kind": "designer-observation",
+   "substantive": true,
+   "date": "2005-09-16",
+   "route": "Wayback capture 20161031220137 of archive.wizards.com (live URL dead)"
+  },
+  {
+   "title": "GROGNARDIA: High Gygaxian",
+   "url": "http://grognardia.blogspot.com/2009/02/high-gygaxian.html",
+   "kind": "craft-criticism",
+   "substantive": true,
+   "date": "2009-02-19",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "GROGNARDIA: Trent Foster Makes It Plain",
+   "url": "http://grognardia.blogspot.com/2009/07/trent-foster-makes-it-plain.html",
+   "kind": "blog-post",
+   "substantive": false,
+   "date": "2009-07-30",
+   "route": "direct curl; post is a bare link to knights-n-knaves.com thread t=5969, no prose content"
+  },
+  {
+   "title": "GROGNARDIA: White Dwarf Interviews Gary Gygax",
+   "url": "http://grognardia.blogspot.com/2021/10/white-dwarf-interviews-gary-gygax.html",
+   "kind": "relay",
+   "substantive": false,
+   "date": "2021-10-26",
+   "route": "direct curl; relays White Dwarf #14 (late 1979) but on inspirations/players, nothing on prose or keys"
+  },
+  {
+   "title": "The Dreaded Boxed Text (Dyson's Dodecahedron)",
+   "url": "https://dysonlogos.blog/2013/09/29/the-dreaded-boxed-text/",
+   "kind": "craft-criticism",
+   "substantive": true,
+   "date": "2013-09-29",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "The Book Introduction (tenfootpole.org)",
+   "url": "https://tenfootpole.org/ironspike/?page_id=9593",
+   "kind": "craft-criticism",
+   "substantive": true,
+   "date": "undated page (book in progress)",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "My Favorite of the new old school adventurers (tenfootpole.org)",
+   "url": "https://tenfootpole.org/ironspike/?page_id=844",
+   "kind": "list",
+   "substantive": false,
+   "date": "undated",
+   "route": "direct curl; recommendation list only, no prose doctrine"
+  },
+  {
+   "title": "Hack & Slash: On Set Design",
+   "url": "http://hackslashmaster.blogspot.com/2012/06/on-set-design.html",
+   "kind": "craft-criticism",
+   "substantive": true,
+   "date": "2012-06",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Beyond Fomalhaut: OSR Module O1: Against the Ultra-Minimalism",
+   "url": "http://beyondfomalhaut.blogspot.com/2017/01/blog-osr-module-o1-against-ultra.html",
+   "kind": "craft-criticism",
+   "substantive": true,
+   "date": "2017-01-12",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Beyond Fomalhaut: Aid, Not Replacement",
+   "url": "http://beyondfomalhaut.blogspot.com/2018/03/blog-aid-not-replacement.html",
+   "kind": "craft-criticism",
+   "substantive": true,
+   "date": "2018-03-09",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "On Useful Dungeon Key Entries (ars phantasia)",
+   "url": "https://arsphantasia.wordpress.com/2013/12/05/on-useful-dungeon-key-entries/",
+   "kind": "craft-criticism",
+   "substantive": true,
+   "date": "2013-12-05",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Rewriting Dungeon Keys (The Lady and Tiger)",
+   "url": "https://theladyandtiger.com/2023/11/30/rewriting-dungeon-keys/",
+   "kind": "craft-criticism",
+   "substantive": true,
+   "date": "2023-11-30",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "The Alexandrian: Are We Really This Stupid?",
+   "url": "https://thealexandrian.net/wordpress/1217/roleplaying-games/are-we-really-this-stupid",
+   "kind": "craft-criticism",
+   "substantive": true,
+   "date": "2011-01-10",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Improved area keys (Necropraxis)",
+   "url": "http://www.necropraxis.com/2013/12/07/improved-area-keys/",
+   "kind": "craft-criticism",
+   "substantive": true,
+   "date": "2013-12-07",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Beyond Fomalhaut: [REVIEW] Halls of the Minotaur",
+   "url": "http://beyondfomalhaut.blogspot.com/2018/03/review-halls-of-minotaur.html",
+   "kind": "review",
+   "substantive": true,
+   "date": "2018-03",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "The Swan Hollow Intrigue (tenfootpole.org review)",
+   "url": "https://tenfootpole.org/ironspike/?p=10575",
+   "kind": "review",
+   "substantive": true,
+   "date": "2026-09-05",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "The Alexandrian: Ptolus - Running the Campaign: From Table to Page",
+   "url": "https://thealexandrian.net/wordpress/39322/roleplaying-games/ptolus-running-the-campaign-from-table-to-page",
+   "kind": "craft-criticism",
+   "substantive": true,
+   "date": "2018-01-05",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "All Dead Generations: Maxims of the OSR",
+   "url": "https://alldeadgenerations.blogspot.com/2023/08/maxims-of-osr.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2023-08",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "The Lions of Tell Arn Part 2 - The City & The City (tenfootpole.org review)",
+   "url": "https://tenfootpole.org/ironspike/?p=10550",
+   "kind": "review",
+   "substantive": true,
+   "date": "2026-07-06",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "How much description should a dungeon key include? (DMDavid)",
+   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
+   "kind": "craft-criticism",
+   "substantive": true,
+   "date": "2016-11-21",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "The Alexandrian: Advanced Gamemastery: Boxed Text (video page)",
+   "url": "https://thealexandrian.net/wordpress/50680/roleplaying-games/advanced-gamemastery-boxed-text",
+   "kind": "video-page",
+   "substantive": false,
+   "date": "2024-02-28",
+   "route": "direct curl; page carries only a promo blurb for a video, no argument text"
+  },
+  {
+   "title": "Knights & Knaves Alehouse thread t=5969 (the Trent Foster posting Grognardia praised)",
+   "url": "http://www.knights-n-knaves.com/phpbb/viewtopic.php?t=5969",
+   "kind": "forum",
+   "substantive": false,
+   "date": "2009",
+   "route": "NOT FOUND: forum offline and archive.org/wayback/available returns no snapshot"
+  },
+  {
+   "title": "Bullet Points vs Prose (Luke Gearing)",
+   "url": "https://lukegearing.blot.im/bullet-points-vs-prose",
+   "kind": "craft-criticism",
+   "substantive": true,
+   "date": "2023-03-23",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Techniques to Write Adventures (Luke Gearing)",
+   "url": "https://lukegearing.blot.im/techniques-to-write-adventures",
+   "kind": "craft-criticism",
+   "substantive": true,
+   "date": "2021-09-14",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "The Alexandrian — GM Don't List #13: Boxed Text Pitfalls (Justin Alexander, 2022-08-01)",
+   "url": "https://thealexandrian.net/wordpress/48312/roleplaying-games/gm-dont-list-13-boxed-text-pitfalls",
+   "kind": "craft essay (game designer)",
+   "substantive": true
+  },
+  {
+   "title": "The Alexandrian — Advanced Gamemastery: Boxed Text (video announcement, 2024-02-28)",
+   "url": "https://thealexandrian.net/wordpress/50680/roleplaying-games/advanced-gamemastery-boxed-text",
+   "kind": "video announcement page",
+   "substantive": false
+  },
+  {
+   "title": "The Alexandrian — The Art of the Key (2014)",
+   "url": "https://thealexandrian.net/wordpress/35180/roleplaying-games/the-art-of-the-key",
+   "kind": "craft essay (game designer)",
+   "substantive": true
+  },
+  {
+   "title": "The Alexandrian — The Art of the Key, Part 2: The Essential Key (2014-05-21)",
+   "url": "https://thealexandrian.net/wordpress/35201/roleplaying-games/the-art-of-the-key-part-2-the-essential-key",
+   "kind": "craft essay (game designer)",
+   "substantive": true
+  },
+  {
+   "title": "The Alexandrian — Random GM Tip: Description Formulas (2022-02-08)",
+   "url": "https://thealexandrian.net/wordpress/47328/roleplaying-games/random-gm-tip-description-formulas",
+   "kind": "craft essay (game designer)",
+   "substantive": true
+  },
+  {
+   "title": "The Alexandrian — D&D 5E 2024: Why Rules Glossaries Kinda Suck (2024-08-28)",
+   "url": "https://thealexandrian.net/wordpress/51393/roleplaying-games/dd-5e-2024-why-rules-glossaries-kinda-suck",
+   "kind": "critical analysis of 2024 rules text",
+   "substantive": true
+  },
+  {
+   "title": "tenfootpole.org — Review Standards (Bryce Lynch)",
+   "url": "https://tenfootpole.org/ironspike/?page_id=1201",
+   "kind": "reviewer's stated prose standards",
+   "substantive": true
+  },
+  {
+   "title": "tenfootpole.org — (5e) Death in the Wood review (Bryce Lynch, 2019-02-09)",
+   "url": "https://tenfootpole.org/ironspike/?p=5395",
+   "kind": "adventure review (prose critique)",
+   "substantive": true
+  },
+  {
+   "title": "tenfootpole.org — Writing with Style: An Editor's Advice for RPG Writers review (Bryce Lynch, 2018-08-13)",
+   "url": "https://tenfootpole.org/ironspike/?p=4366",
+   "kind": "book review by critic",
+   "substantive": true
+  },
+  {
+   "title": "Into the Dark — Bryce Lynch's Adventure Design Tips Summarized and Explained, Mark 2 (Jon Miller, 2016-07-25)",
+   "url": "http://into-the-dark-rpg.blogspot.com/2016/07/bryce-lynchs-adventure-design-tips.html",
+   "kind": "secondary summary of a critic's standards",
+   "substantive": true
+  },
+  {
+   "title": "Dyson's Dodecahedron — The Dreaded Boxed Text (Dyson Logos, 2013-09-29)",
+   "url": "https://dysonlogos.blog/2013/09/29/the-dreaded-boxed-text/",
+   "kind": "designer blog essay",
+   "substantive": true
+  },
+  {
+   "title": "Dungeon Master's Workshop — DM 101: Mastering the Boxed Text (2019-09-27)",
+   "url": "https://dmsworkshop.com/2019/09/27/dm-101-boxed-text-mastering/",
+   "kind": "GM-advice essay",
+   "substantive": true
+  },
+  {
+   "title": "Wizards of the Coast — D&D Style Guide: Writing and Editing, Version 1.04a (©2013; PDF hosted by the Adventurers League blog)",
+   "url": "https://adventurersleague.wordpress.com/wp-content/uploads/2018/10/1765690-dnd_house_style_guide.pdf",
+   "kind": "primary house style guide (PDF, 9 pp.)",
+   "substantive": true
+  },
+  {
+   "title": "Wizards of the Coast — D&D Style Guide: Writing and Editing, Version 1.08a (©2018, 'updated January 2019'; PDF mirror)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "kind": "primary house style guide (PDF, 10 pp.)",
+   "substantive": true
+  },
+  {
+   "title": "Wizards of the Coast — D&D Adventurers League Dungeoncraft Design Guide: The Wild Beyond the Witchlight, v1.2 (media.wizards.com)",
+   "url": "https://media.wizards.com/2021/dnd/downloads/Dungeoncraft_Wild_Beyond_the_Witchlight_v1.2.pdf",
+   "kind": "official organized-play author guide (PDF)",
+   "substantive": true
+  },
+  {
+   "title": "Half-Cover — How to Follow the Writing Style of D&D (Michael, 2017-09-02)",
+   "url": "https://half-cover.com/blogs/find-the-path/importance-following-writing-style-dd-manuals/",
+   "kind": "community analysis of 5e house style",
+   "substantive": true
+  },
+  {
+   "title": "Shadomain — Tales From the Tavern: Interview with Scott Fitzgerald Gray (2024-03-20)",
+   "url": "https://shadomain.com/tales-from-the-tavern-interview-with-scott-fitzgerald-gray/",
+   "kind": "editor interview (5e core-book editor)",
+   "substantive": true
+  },
+  {
+   "title": "EN World — Read aloud text in modules: What are folks' opinions? (thread, page 4, 2025-04-05)",
+   "url": "https://www.enworld.org/threads/read-aloud-text-in-modules-what-are-folks-opinions-about-read-aloud-content.712737/page-4",
+   "kind": "forum thread (community)",
+   "substantive": true
+  },
+  {
+   "title": "Sly Flourish — Writing Awesome Read-Aloud Text (Mike Shea, 2010-11-08)",
+   "url": "https://slyflourish.com/writing_awesome_readaloud_text.html",
+   "kind": "designer craft essay",
+   "substantive": true
+  },
+  {
+   "title": "DMDavid — Picturing the dungeon: boxed text (David Hartlage, 2012-11-15)",
+   "url": "https://dmdavid.com/tag/picturing-the-dungeon-boxed-text/",
+   "kind": "history/analysis blog",
+   "substantive": true
+  },
+  {
+   "title": "DMDavid — How much description should a dungeon key include? (David Hartlage, 2016-11-21)",
+   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
+   "kind": "analysis blog",
+   "substantive": true
+  },
+  {
+   "title": "DMDavid — Stonehell tag page (returns the 2016-11-21 dungeon-key post)",
+   "url": "https://dmdavid.com/tag/tag/stonehell/",
+   "kind": "blog tag page",
+   "substantive": true
+  },
+  {
+   "title": "Critical Hits — Thinking Outside the Boxed Text (Shawn Merwin, 2010-08-27)",
+   "url": "https://critical-hits.com/blog/2010/08/27/thinking-outside-the-boxed-text/",
+   "kind": "designer craft essay",
+   "substantive": true
+  },
+  {
+   "title": "Gnome Stew — Hot Button: Reading the Boxed Text (Walt Ciechanowski, 2008-12-18)",
+   "url": "https://gnomestew.com/hot-button-reading-the-boxed-text/",
+   "kind": "GM blog + comments",
+   "substantive": true
+  },
+  {
+   "title": "D&D Sage Advice (sageadvice.eu) — 'What are your thoughts on boxed text?' (Shawn Merwin tweet, 2019-04-14)",
+   "url": "https://www.sageadvice.eu/what-are-your-thoughts-on-boxed-text/",
+   "kind": "designer tweet (archived)",
+   "substantive": true
+  },
+  {
+   "title": "D&D Sage Advice (sageadvice.eu) — 'This is exactly why boxed text is important' (Shawn Merwin, 2021-11)",
+   "url": "https://www.sageadvice.eu/this-is-exactly-why-boxed-text-is-important/",
+   "kind": "designer tweet (archived)",
+   "substantive": true
+  },
+  {
+   "title": "Goblin Punch — How I Write An Adventure (Arnold K., 2017-01-27)",
+   "url": "https://goblinpunch.blogspot.com/2017/01/how-i-write-adventure.html",
+   "kind": "designer process essay",
+   "substantive": true
+  },
+  {
+   "title": "Blog of Holding — Unofficial D&D 2024 Style Guide (Paul Hughes, 2025-01-07)",
+   "url": "https://www.blogofholding.com/?p=8463",
+   "kind": "community style analysis (2024 rules)",
+   "substantive": true
+  },
+  {
+   "title": "Screen Rant — After DM's Guide Preview, I'm Convinced Future D&D Adventures Will Drop These Two Repetitive Features (Ben Brosofsky, 2024-10-29)",
+   "url": "https://screenrant.com/dnd-2024-dungeon-master-guide-future-campaigns/",
+   "kind": "journalism (reports Perkins/Wyatt interview)",
+   "substantive": true
+  },
+  {
+   "title": "Screen Rant — 'Everything In There Better Be Cracking On Topic': D&D Designers Talk The 2024 DMG (Perkins & Wyatt interview, 2024-10-25)",
+   "url": "https://screenrant.com/dnd-2024-dungeon-master-guide-interview-perkins-wyatt/",
+   "kind": "designer interview (journalism)",
+   "substantive": true
+  },
+  {
+   "title": "Screen Rant — D&D's 2024 DMG Fixes One Tiny Thing That Annoyed Chris Perkins (2024)",
+   "url": "https://screenrant.com/dnd-2024-dungeon-master-guide-doors-chris-perkins/",
+   "kind": "journalism",
+   "substantive": false
+  },
+  {
+   "title": "Revivify Games — What I Value In Adventure Design (2025-03-04)",
+   "url": "https://revivifygames.com/blogs/news/what-i-value-in-adventure-design",
+   "kind": "designer blog",
+   "substantive": true
+  },
+  {
+   "title": "Ray Vallese — Writing With Style: An Editor's Advice for RPG Writers (book page)",
+   "url": "https://rayvallese.com/writing-with-style/",
+   "kind": "editor's book page (contents list)",
+   "substantive": true
+  },
+  {
+   "title": "Monte Cook — Subtext in Game Writing (RPG Design Theories, 2022-12-22)",
+   "url": "https://montecook.substack.com/p/subtext-in-game-writing",
+   "kind": "designer craft essay",
+   "substantive": true
+  },
+  {
+   "title": "Monte Cook — Talking About Games, Part 1 (2025-05-19)",
+   "url": "https://montecook.substack.com/p/talking-about-games-part-1",
+   "kind": "designer essay (off-angle: criticism vocabulary, not prose)",
+   "substantive": false
+  },
+  {
+   "title": "Designing Dungeons — Chapter 10: Formatting Room Descriptions (Josh McCrowell & Warren D)",
+   "url": "https://dungeons.hismajestytheworm.games/docs/chapter10/",
+   "kind": "designer handbook chapter",
+   "substantive": true
+  },
+  {
+   "title": "All Dead Generations — Dungeon Design, Process and Keys (Gus L., 2022-12-19)",
+   "url": "https://alldeadgenerations.blogspot.com/2022/12/dungeon-design-process-and-keys.html",
+   "kind": "designer craft essay",
+   "substantive": true
+  },
+  {
+   "title": "The Lady and Tiger — Rewriting Dungeon Keys (Cygnus, 2023-11-30)",
+   "url": "https://theladyandtiger.com/2023/11/30/rewriting-dungeon-keys/",
+   "kind": "GM craft blog",
+   "substantive": true
+  },
+  {
+   "title": "Being An Asshole To A Goblin — Elements of a Key 4: Rules for Key-Writing (Misha F, 2026-04-28)",
+   "url": "https://baatag.blogspot.com/2026/04/elements-of-key-4-rules-for-key-writing.html",
+   "kind": "designer craft essay",
+   "substantive": true
+  },
+  {
+   "title": "ars phantasia — On Useful Dungeon Key Entries (Tad Davis, 2013-12-05)",
+   "url": "https://arsphantasia.wordpress.com/2013/12/05/on-useful-dungeon-key-entries/",
+   "kind": "blog essay",
+   "substantive": true
+  },
+  {
+   "title": "Coins and Scrolls — OSR: Sharpening the Axe: How I Plan and Write RPG Books (Skerples, 2019-09-05)",
+   "url": "https://coinsandscrolls.blogspot.com/2019/09/osr-sharpening-axe-how-i-plan-and-write.html",
+   "kind": "designer craft essay",
+   "substantive": true
+  },
+  {
+   "title": "EN World — Design Philosophy of 5e (thread, 2014-06-25)",
+   "url": "https://www.enworld.org/threads/design-philosophy-of-5e.356173/",
+   "kind": "forum thread (community inference)",
+   "substantive": true
+  },
+  {
+   "title": "Tenkar's Tavern — Mike Mearls' Latest Legends & Lore Column: Where Less is More (2013-03-03)",
+   "url": "https://www.tenkarstavern.com/2013/03/mike-mearls-latest-legends-lore-column.html",
+   "kind": "blog quoting a designer column",
+   "substantive": true
+  },
+  {
+   "title": "Gnome Stew — dScryb First Impressions (Rascher, 2021-07)",
+   "url": "https://gnomestew.com/dscryb-first-impressions/",
+   "kind": "product review",
+   "substantive": true
+  },
+  {
+   "title": "Idle Cartulary (Playful Void) — I Read The Player's Handbook (2024) (2024-08-31)",
+   "url": "http://idlecartulary.com/2024/08/31/i-read-the-players-handbook-2024/",
+   "kind": "critical read of 2024 PHB text",
+   "substantive": true
+  },
+  {
+   "title": "Wargamer — New DnD Player's Handbook aims to actually teach you the game (2024-06-18)",
+   "url": "https://www.wargamer.com/dnd/new-players-handbook-easier",
+   "kind": "journalism with Crawford quotes",
+   "substantive": true
+  },
+  {
+   "title": "Dungeon Master Assistance — D&D 5.5 PHB Review: Playing the Game and the Rules Glossary (Ronny, 2024-10-01)",
+   "url": "https://olddungeonmaster.com/2024/10/01/dd-5-5-phb-review-playing-the-game-and-the-rules-glossary/",
+   "kind": "community review of 2024 text",
+   "substantive": true
+  },
+  {
+   "title": "Dungeon Master Assistance — D&D 5E Writer's Guide (Ronny, 2015-08-03)",
+   "url": "https://olddungeonmaster.com/2015/08/03/5e-writers-guide/",
+   "kind": "community-compiled style guide",
+   "substantive": true
+  },
+  {
+   "title": "POCGamer — What happened? Writing for Wizards, Part 1 (Graeme Barber, 2021-03-23)",
+   "url": "https://pocgamer.com/archives/1426",
+   "kind": "freelancer process account",
+   "substantive": true
+  },
+  {
+   "title": "EN World — DMsGuild: D&D Style-Guides give a unique insight into the game (thread, 2018-11-25)",
+   "url": "https://www.enworld.org/threads/dmsguild-d-d-style-guides-give-a-unique-insight-into-the-game.655198/",
+   "kind": "forum thread on the released style guides",
+   "substantive": true
+  },
+  {
+   "title": "The Kind GM — DMs Guild Style Guide Resources (2018-10-24)",
+   "url": "https://thekindgm.com/2018/10/24/dmsguild-style-guide-resources/",
+   "kind": "blog note on the creator resource",
+   "substantive": true
+  },
+  {
+   "title": "D&D Sage Advice (sageadvice.eu) — 'Creators: Style Guide is now on DMsGuild!' (@dms_guild, 2019-02-22)",
+   "url": "https://www.sageadvice.eu/style-guide-is-now-on-dmsguild-creators/",
+   "kind": "announcement tweet (archived)",
+   "substantive": true
+  },
+  {
+   "title": "EN World — D&D Adventurers League Unveils New DungeonCraft Document with Planescape In Focus (Raddu, 2023-11)",
+   "url": "https://www.enworld.org/threads/d-d-adventurers-league-unveils-new-dungeoncraft-document-with-planescape-in-focus.700991/",
+   "kind": "news article + thread",
+   "substantive": true
+  },
+  {
+   "title": "Gaming Ballistic — Ballistic's Report: How to Write Adventure Modules that Don't Suck (2017-07-19)",
+   "url": "https://gamingballistic.com/2017/07/19/ballistics-report-how-to-write-adventure-modules-that-dont-suck/",
+   "kind": "report on a designer essay collection",
+   "substantive": true
+  },
+  {
+   "title": "Gnome Stew — Review: Writing with Style (J.T. Evans, 2017-10-23)",
+   "url": "https://gnomestew.com/review-writing-with-style/",
+   "kind": "book review",
+   "substantive": true
+  },
+  {
+   "title": "Free State of Geek — Review: Writing With Style by Ray Vallese (Sam Rushing, 2017-08-24)",
+   "url": "https://freestateofgeek.com/2017/08/24/review-writing-with-style-an-editors-advice-for-rpg-writers-by-ray-vallese/",
+   "kind": "book review",
+   "substantive": true
+  },
+  {
+   "title": "Kobold Press — Designing with Style: Ability Checks and Saving Throws (Hannah Rose, 2019-05-31)",
+   "url": "https://koboldpress.com/designing-with-style-ability-checks-and-saving-throws/",
+   "kind": "designer style essay (quotes the official House Style Guide)",
+   "substantive": true
+  },
+  {
+   "title": "Kobold Press — Midgard Notebook: Writing, Game Design, and the Oral Tradition (Wolfgang Baur, 2017-04-24)",
+   "url": "https://koboldpress.com/midgard-notebook-writing-game-design-and-the-oral-tradition/",
+   "kind": "designer essay (off-angle: storytelling, not prose)",
+   "substantive": false
+  },
+  {
+   "title": "Kobold Press — Run your best actual play: Paint Me a Picture (Celeste Conowitch, 2026-07-20)",
+   "url": "https://koboldpress.com/run-your-best-actual-play-paint-me-a-picture-july-20-2026/",
+   "kind": "designer advice essay",
+   "substantive": true
+  },
+  {
+   "title": "Pelgrane Press — Five Keys to Punchier Prose (Robin D. Laws, 2012-02-01)",
+   "url": "https://pelgranepress.com/2012/02/01/five-keys-to-punchier-prose/",
+   "kind": "craft essay (novelist/game designer)",
+   "substantive": true
+  },
+  {
+   "title": "EN World — Chris Perkins and James Wyatt Answer Burning Questions About the 2024 DMG (Christian Hoffer, 2024-10-25)",
+   "url": "https://www.enworld.org/threads/chris-perkins-and-james-wyatt-answer-burning-questions-about-the-2024-dungeon-masters-guide.707569/",
+   "kind": "designer interview (no prose content)",
+   "substantive": false
+  },
+  {
+   "title": "EN World — same thread, page 3",
+   "url": "https://www.enworld.org/threads/chris-perkins-and-james-wyatt-answer-burning-questions-about-the-2024-dungeon-masters-guide.707569/page-3",
+   "kind": "forum page",
+   "substantive": false
+  },
+  {
+   "title": "EN World — Monsters & More: An In-Depth Review of the 2025 D&D Monster Manual (Beth Rimmels, 2025-01-28)",
+   "url": "https://www.enworld.org/threads/monsters-more-an-in-depth-review-of-the-2025-d-d-monster-manual.710932/",
+   "kind": "review",
+   "substantive": true
+  },
+  {
+   "title": "TheGamer — 2025 Monster Manual Review (Jerel Levy, 2025-01-28)",
+   "url": "https://www.thegamer.com/dungeons-dragons-dnd-2025-monster-manual-review-impressions/",
+   "kind": "review",
+   "substantive": true
+  },
+  {
+   "title": "Skyland Games — Review: Xanathar's Guide to Everything (Scott D, 2017-11-13)",
+   "url": "https://skylandgames.wordpress.com/2017/11/13/review-xanathars-guide-to-everything/",
+   "kind": "review",
+   "substantive": true
+  },
+  {
+   "title": "Half-Cover — Review for Xanathar's Guide to Everything (Kody, 2017-11-18)",
+   "url": "https://half-cover.com/blogs/zone-of-truth/review-xanathars-guide-everything/",
+   "kind": "review (mechanics only)",
+   "substantive": false
+  },
+  {
+   "title": "D&D Beyond — Let's Design an Adventure: Boxed Text (Shawn Merwin, 2019-11-06)",
+   "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+   "kind": "designer craft essay on the official site",
+   "substantive": true
+  },
+  {
+   "title": "RJD20 — Read Christopher Perkins's The Dungeon Master Experience (2022-01)",
+   "url": "https://www.rjd20.com/2022/01/read-christopher-perkins-dm-experience.html",
+   "kind": "blog recommendation (no prose claims)",
+   "substantive": false
+  },
+  {
+   "title": "Tribality — Jeremy Crawford Interview, Gen Con 2015 (Michael Long, 2015-08-08)",
+   "url": "https://www.tribality.com/2015/08/08/jeremy-crawford-interview-gen-con-2015/",
+   "kind": "designer interview (no rules-language content)",
+   "substantive": false
+  },
+  {
+   "title": "CBR — Jeremy Crawford on the 2024 Player's Handbook (Jennifer Melzer, 2024-07-23)",
+   "url": "https://www.cbr.com/dnd-5e-2024-players-handbook-jeremy-crawford-interview/",
+   "kind": "designer interview (no writing content)",
+   "substantive": false
+  },
+  {
+   "title": "Wargamer — Playing D&D with its top designer made me a better, lazier DM (Mollie Russell, updated 2025-07-17)",
+   "url": "https://www.wargamer.com/dnd/jeremy-crawford-game",
+   "kind": "journalism (DMing style, not text)",
+   "substantive": false
+  },
+  {
+   "title": "Dicegeeks — Writing for D&D and DM Bad Habits with James Introcaso (2020-05-20)",
+   "url": "https://www.dicegeeks.com/writing-dnd-james-introcaso/",
+   "kind": "podcast page (no notes)",
+   "substantive": false
+  },
+  {
+   "title": "World Builder Blog — 008: Writing Adventures (James Introcaso, 2017-02-20)",
+   "url": "https://worldbuilderblog.me/2017/02/20/008-writing-adventures/",
+   "kind": "podcast page (no notes)",
+   "substantive": false
+  },
+  {
+   "title": "DMDavid — Shawn Merwin tag page",
+   "url": "https://dmdavid.com/tag/tag/shawn-merwin/",
+   "kind": "blog tag page (no prose claims)",
+   "substantive": false
+  },
+  {
+   "title": "Dollars and Dragons — 'Thinking Inside The Box', Ep 26 with David Shulman",
+   "url": "https://www.dollarsanddragons.com/p/thinking-inside-the-box-ep-26-david",
+   "kind": "podcast page (no notes)",
+   "substantive": false
+  },
+  {
+   "title": "D&D Sage Advice — 'Do you ever read and critique unofficial adventures?' (Perkins, 2016-04-29)",
+   "url": "https://www.sageadvice.eu/do-you-ever-read-and-critique-unofficial-adventures/",
+   "kind": "designer tweet (no prose content)",
+   "substantive": false
+  },
+  {
+   "title": "D&D Sage Advice — 'How do you prepare to run adventures you didn't write?' (Perkins, 2016-03-26)",
+   "url": "https://www.sageadvice.eu/how-do-you-prepare-to-run-adventures-you-didnt-write/",
+   "kind": "designer tweet (no prose content)",
+   "substantive": false
+  },
+  {
+   "title": "Design & Development: Undercover at Gen Con, Part 1 (Jesse Decker & David Noonan, 2005-09-16)",
+   "url": "http://archive.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "kind": "WotC designer column (read via Wayback text)",
+   "substantive": true
+  },
+  {
+   "title": "Design & Development: Reads Bad, Plays Good (David Noonan, 2006-06-16)",
+   "url": "http://www.wizards.com/default.asp?x=dnd/dd/20060616a",
+   "kind": "WotC designer column (read via Wayback)",
+   "substantive": true
+  },
+  {
+   "title": "Living Greyhawk, Intro to Writing: Dire Boxed Text (Craig Heir, RPGA/WotC, 2004-04-13)",
+   "url": "http://archive.wizards.com/default.asp?x=lg/lgiw/20040413",
+   "kind": "RPGA editor column on WotC site (read via Wayback)",
+   "substantive": true
+  },
+  {
+   "title": "Living Greyhawk, Intro to Writing: Editor's Pen (Craig Heir, 2004-10-06)",
+   "url": "http://archive.wizards.com/default.asp?x=lg/lgiw/20041006a",
+   "kind": "RPGA editor column on WotC site (read via Wayback)",
+   "substantive": true
+  },
+  {
+   "title": "Living Greyhawk, Intro to Writing: Write it Down (Craig Heir, 2004-02-03)",
+   "url": "http://archive.wizards.com/default.asp?x=lg/lgiw/20040203a",
+   "kind": "RPGA editor column on WotC site (read via Wayback)",
+   "substantive": false
+  },
+  {
+   "title": "Dungeon Submission Guidelines (Dungeon staff, Paizo, 3.5 era)",
+   "url": "https://paizo.com/writersguidelines/dungeon_writer_guidelines.pdf",
+   "kind": "official editorial guidelines (PDF)",
+   "substantive": true
+  },
+  {
+   "title": "Dragon Writers' Guidelines (Dragon staff, Paizo, 3.5 era)",
+   "url": "https://paizo.com/writersguidelines/dragon_writers_guidelines.pdf",
+   "kind": "official editorial guidelines (PDF)",
+   "substantive": true
+  },
+  {
+   "title": "Grognardia: Interview: Steve Winter (2009-08-08)",
+   "url": "http://grognardia.blogspot.com/2009/08/interview-steve-winter.html",
+   "kind": "interview (TSR/WotC editor)",
+   "substantive": true
+  },
+  {
+   "title": "Mike Mearls of Dungeons & Dragons: Documenting Imaginary Worlds (SFWA, 2016-12-22)",
+   "url": "https://sfwa.org/2016/12/22/mike-mearls-dungeons-dragons-documenting-imaginary-worlds/",
+   "kind": "interview (5e lead designer)",
+   "substantive": true
+  },
+  {
+   "title": "Legend & Lore says 'story not rules' (EN World thread quoting Mearls' 2013-03-04 column)",
+   "url": "https://www.enworld.org/threads/legend-lore-says-story-not-rules-3-4.334907/",
+   "kind": "forum thread quoting designer column",
+   "substantive": true
+  },
+  {
+   "title": "An Interview with Chris Perkins, designer of Warriors of Heaven (Mimir.net, 1999)",
+   "url": "https://mimir.net/chant/an-interview-with-chris-perkins-designer-of-warriors-of-heaven/",
+   "kind": "interview",
+   "substantive": true
+  },
+  {
+   "title": "Curse of Strahd Interview with Chris Perkins (Fraternity of Shadows, Feb 2016)",
+   "url": "https://www.fraternityofshadows.com/TheParlor/Curse_Of_Strahd_Interview.html",
+   "kind": "interview",
+   "substantive": true
+  },
+  {
+   "title": "Chris Perkins on Writing your own Adventures (D&D Beyond, 2018-04-19, Todd Kenreck transcript)",
+   "url": "https://www.dndbeyond.com/posts/207-chris-perkins-on-writing-your-own-adventures",
+   "kind": "official interview transcript",
+   "substantive": true
+  },
+  {
+   "title": "Ex D&D boss Chris Perkins tells us why Strahd is the RPG's most successful villain (Wargamer, 2026-03-19)",
+   "url": "https://www.wargamer.com/dnd/chris-perkins-strahd",
+   "kind": "interview",
+   "substantive": true
+  },
+  {
+   "title": "D&D's James Wyatt & Chris Perkins Talk 2024 DM's Guide (CBR, 2024-10-25)",
+   "url": "https://www.cbr.com/dnd-5e-2024-chris-perkins-james-wyatt-dmg-interview/",
+   "kind": "interview",
+   "substantive": true
+  },
+  {
+   "title": "Chris Perkins and James Wyatt Answer Burning Questions About the 2024 DMG, page 2 (EN World, 2024-10-25)",
+   "url": "https://www.enworld.org/threads/chris-perkins-and-james-wyatt-answer-burning-questions-about-the-2024-dungeon-masters-guide.707569/page-2",
+   "kind": "interview transcript + forum",
+   "substantive": true
+  },
+  {
+   "title": "After DM's Guide Preview, Future D&D Adventures Will Drop These Two Repetitive Features (Screen Rant, 2024-10-29)",
+   "url": "https://screenrant.com/dnd-2024-dungeon-master-guide-future-campaigns/",
+   "kind": "interview report",
+   "substantive": true
+  },
+  {
+   "title": "The Best and Worst of Adventure Formats at Winter Fantasy 2020 (Teos Abadia, Alphastream, 2020-02-20)",
+   "url": "https://alphastream.org/index.php/2020/02/20/the-best-and-worst-of-adventure-formats-at-winter-fantasy-2020/",
+   "kind": "AL admin/designer blog",
+   "substantive": true
+  },
+  {
+   "title": "Best and Worst of the Revised Monster Manual (Teos Abadia, Alphastream, 2025-03-13)",
+   "url": "https://alphastream.org/index.php/2025/03/13/best-and-worst-of-the-revised-monster-manual/",
+   "kind": "AL admin/designer blog",
+   "substantive": true
+  },
+  {
+   "title": "Compiling Wolfgang Baur's AMA (EN World, 2015-06-03)",
+   "url": "https://www.enworld.org/threads/compiling-wolfgang-baurs-ama.663114/",
+   "kind": "compiled AMA (ex-Dungeon editor)",
+   "substantive": true
+  },
+  {
+   "title": "Adventure Builder: Writing Your First Adventure, Part 1 of 6 (Wolfgang Baur, Wizards.com, 2006-07-28)",
+   "url": "http://www.wizards.com/default.asp?x=dnd/ab/20060728a",
+   "kind": "WotC column (read via Wayback)",
+   "substantive": true
+  },
+  {
+   "title": "Adventure Builder: Setting the Hook, Part 2 of 6 (Wolfgang Baur, Wizards.com, 2006-08-11)",
+   "url": "http://www.wizards.com/default.asp?x=dnd/ab/20060811a",
+   "kind": "WotC column (read via Wayback)",
+   "substantive": true
+  },
+  {
+   "title": "Design & Development: How to Make a Monster Manual, Part 1 (David Noonan, 2007-07-27)",
+   "url": "http://www.wizards.com/default.asp?x=dnd/dd/20070727a",
+   "kind": "WotC designer column (read via Wayback)",
+   "substantive": true
+  },
+  {
+   "title": "Baker's Field: Twenty-Eight Adventures (Part 1) (Richard Baker, 2015-03-09)",
+   "url": "http://richard-baker.blogspot.com/2015/03/twenty-eight-adventures-part-1.html",
+   "kind": "designer blog",
+   "substantive": true
+  },
+  {
+   "title": "Freelancer Chronicles: The Coast Wizards and I, Some Lessons (Critical Hits, 2012-12-19)",
+   "url": "https://critical-hits.com/blog/2012/12/19/freelancer-chronicles-the-coast-wizards-and-i-some-lessons/",
+   "kind": "WotC freelancer blog",
+   "substantive": true
+  },
+  {
+   "title": "On Writing Adventures (Mike Shea, Sly Flourish, 2019-06-17)",
+   "url": "https://slyflourish.com/on_writing_adventures.html",
+   "kind": "compilation of designer advice incl. WotC Adventure Guide",
+   "substantive": true
+  },
+  {
+   "title": "Making the Realms Shine: A Conversation with Ed Greenwood, Part I (Kobold Press, 2009)",
+   "url": "https://koboldpress.com/making-the-realms-shine-a-conversation-with-ed-greenwood-part-i/",
+   "kind": "interview (read via curl)",
+   "substantive": true
+  },
+  {
+   "title": "Author Interview: Ed Greenwood (Paizo Blog, 2013-06-20)",
+   "url": "https://paizo.com/blog/author-interview-ed-greenwood",
+   "kind": "interview",
+   "substantive": true
+  },
+  {
+   "title": "Sage Advice Compendium (Jeremy Crawford, Wizards of the Coast, v2.7 2021)",
+   "url": "https://media.wizards.com/2020/dnd/downloads/SA-Compendium.pdf",
+   "kind": "official rules document (designer's own words)",
+   "substantive": true
+  },
+  {
+   "title": "Updates in the Player's Handbook (2024) (D&D Beyond staff, 2024-09-03)",
+   "url": "https://www.dndbeyond.com/posts/1810-updates-in-the-players-handbook-2024",
+   "kind": "official article",
+   "substantive": true
+  },
+  {
+   "title": "What's New in the 2024 Player's Handbook? (Michael Galvis, D&D Beyond, 2024-09-17)",
+   "url": "https://www.dndbeyond.com/posts/1745-whats-new-in-the-2024-players-handbook",
+   "kind": "official article",
+   "substantive": true
+  },
+  {
+   "title": "Let's Design an Adventure: Thinking Like a Designer (Shawn Merwin, D&D Beyond, 2020-03-25)",
+   "url": "https://www.dndbeyond.com/posts/753-lets-design-an-adventure-thinking-like-a-designer",
+   "kind": "official column (AL veteran designer)",
+   "substantive": true
+  },
+  {
+   "title": "Read aloud text in modules: What are folks opinions, page 10 (EN World, 2025)",
+   "url": "https://www.enworld.org/threads/read-aloud-text-in-modules-what-are-folks-opinions-about-read-aloud-content.712737/page-10",
+   "kind": "forum (posts by a Goodman Games designer)",
+   "substantive": true
+  },
+  {
+   "title": "D&D's Jeremy Crawford on the 2025 Monster Manual, The New Starter Set, and High Level Gameplay (CBR, 2025-02-05)",
+   "url": "https://www.cbr.com/jeremy-crawford-interview-dnd-5e-monster-manual-2025/",
+   "kind": "interview",
+   "substantive": true
+  },
+  {
+   "title": "Grognardia: Interview: Mike Mearls (2025-08-27)",
+   "url": "http://grognardia.blogspot.com/2025/08/interview-mike-mearls.html",
+   "kind": "interview",
+   "substantive": true
+  },
+  {
+   "title": "Writing Adventures the Wolfgang Baur Way (Gnome Stew)",
+   "url": "https://gnomestew.com/writing-adventures-the-wolfgang-baur-way/",
+   "kind": "secondary summary of Baur's WotC column",
+   "substantive": false
+  },
+  {
+   "title": "Chris Perkins says too many rulebooks hurt tabletop RPGs (Popverse, PAX East 2026, 2026-06-02)",
+   "url": "https://www.thepopverse.com/gaming-chris-perkins-daggerheart-pax-east-2026-interview-adventures-fewer-books-critical-role",
+   "kind": "interview",
+   "substantive": false
+  },
+  {
+   "title": "Ray Winninger, Dungeoncraft #20: Your Game's Voice (Dragon 1997-99, darkshire.net mirror)",
+   "url": "https://www.darkshire.net/jhkim/rpg/dnd/dungeoncraft/dungeon_craft_20.html",
+   "kind": "designer column mirror",
+   "substantive": false
+  },
+  {
+   "title": "Ray Winninger's Dungeoncraft Essays (index)",
+   "url": "https://www.darkshire.net/jhkim/rpg/dnd/dungeoncraft/",
+   "kind": "index page",
+   "substantive": false
+  },
+  {
+   "title": "Steve Winter tag (DM David)",
+   "url": "https://dmdavid.com/tag/tag/steve-winter/",
+   "kind": "blog tag page",
+   "substantive": false
+  },
+  {
+   "title": "Three Years of D&D 5e with Mike Mearls (Sly Flourish, 2017-12-18)",
+   "url": "https://slyflourish.com/three_years_with_5e_with_mearls.html",
+   "kind": "interview report",
+   "substantive": false
+  },
+  {
+   "title": "Six Questions: Wolfgang Baur (Keith Baker, 2013-01-11)",
+   "url": "https://keith-baker.com/six-questions-wolfgang-baur/",
+   "kind": "interview",
+   "substantive": false
+  },
+  {
+   "title": "AMA: Wolfgang Baur, page 1 (EN World, 2015-04-25)",
+   "url": "https://www.enworld.org/threads/ama-thurs-april-30-wolfgang-baur-kobold-press-tsr-dungeon-magazine-d-d-5e-tyranny-of-dragons-advanced-races-compendium.444980/",
+   "kind": "forum AMA",
+   "substantive": false
+  },
+  {
+   "title": "Jeremy Crawford Talks 2024 Player's Handbook In-Depth (Screen Rant, 2024-07-23)",
+   "url": "https://screenrant.com/jeremy-crawford-dnd-players-handbook-interview/",
+   "kind": "interview",
+   "substantive": false
+  },
+  {
+   "title": "Curse of Strahd Interview with Chris Perkins (CGMagazine, 2016-03-08)",
+   "url": "https://www.cgmagonline.com/interviews/curse-strahd-interview-chris-perkins/",
+   "kind": "interview",
+   "substantive": false
+  },
+  {
+   "title": "Chris Perkins - Den of Geek Interview (Tribality, 2014-12-11)",
+   "url": "https://www.tribality.com/2014/12/11/chris-perkins-den-of-geek-interview/",
+   "kind": "interview summary",
+   "substantive": false
+  },
+  {
+   "title": "Perkins AMA Compiled; Haunted One Background Preview (EN World, 2016-02-26)",
+   "url": "https://www.enworld.org/threads/perkins-ama-compiled-haunted-one-background-preview.663636/",
+   "kind": "compiled AMA",
+   "substantive": false
+  },
+  {
+   "title": "This Week's Guest ... Jeremy Crawford (50 Years in the Dungeon, 2025)",
+   "url": "https://50yearsinthedungeon.substack.com/p/this-weeks-guest-jeremy-crawford",
+   "kind": "podcast announcement",
+   "substantive": false
+  },
+  {
+   "title": "Gen Con 2025 D&D Highlights and Interview with Designers Makenzie and Justice (Geek to Geek Media, 2025-08-20)",
+   "url": "https://geektogeekmedia.com/geekery/tabletop-gaming/gen-con-2025-dnd/",
+   "kind": "article",
+   "substantive": false
+  },
+  {
+   "title": "EN World Interview With Mike Mearls, Lead Designer of D&D Next (2012-05)",
+   "url": "https://www.enworld.org/threads/en-world-interview-with-mike-mearls-lead-designer-of-d-d-next.323442/",
+   "kind": "interview",
+   "substantive": false
+  },
+  {
+   "title": "Mike Mearls Interview with the Escapist, page 2 (EN World, 2014-08-26)",
+   "url": "https://www.enworld.org/threads/mike-mearls-interview-with-the-escapist.358714/page-2",
+   "kind": "forum thread",
+   "substantive": false
+  },
+  {
+   "title": "TSR & WotC Veteran Steve Winter - Episode 284 (Shane Plays, 2025-07-28)",
+   "url": "https://shaneplays.com/steve-winter-rpg-designer-and-tsr-wotc-veteran/",
+   "kind": "podcast page",
+   "substantive": false
+  },
+  {
+   "title": "Adventure-Writing Tips from Dungeon (Gnome Stew, 2006-07-16)",
+   "url": "https://gnomestew.com/adventure-writing-tips-from-dungeon/",
+   "kind": "pointer post",
+   "substantive": false
+  },
+  {
+   "title": "Ed Greenwood Interview (SFFWorld, 2015-03-15)",
+   "url": "https://www.sffworld.com/2015/03/ed-greenwood-interview/",
+   "kind": "interview",
+   "substantive": false
+  },
+  {
+   "title": "Let's Design an Adventure: Encounter Basics (Shawn Merwin, D&D Beyond, 2019-12-04)",
+   "url": "https://www.dndbeyond.com/posts/626-lets-design-an-adventure-encounter-basics",
+   "kind": "official column",
+   "substantive": false
+  },
+  {
+   "title": "Jeremy Crawford Talks The 2025 Monster Manual (Screen Rant, 2025-01-28)",
+   "url": "https://screenrant.com/dnd-jeremy-crawford-2025-monster-manual-interview/",
+   "kind": "interview",
+   "substantive": false
+  },
+  {
+   "title": "Five Takeaways From the 2025 Monster Manual (EN World, 2025-04-13)",
+   "url": "https://www.enworld.org/threads/five-takeaways-from-the-2025-monster-manual.710206/",
+   "kind": "article",
+   "substantive": false
+  },
+  {
+   "title": "1d12 questions with James Wyatt (NewbieDM, 2009-09-14)",
+   "url": "https://newbiedm.com/2009/09/14/1d12-questions-with-james-wyatt/",
+   "kind": "interview",
+   "substantive": false
+  },
+  {
+   "title": "The James Wyatt Interrogation, Part 1 (dungeonmastering.com)",
+   "url": "https://www.dungeonmastering.com/the-james-wyatt-interrogation-part-1/",
+   "kind": "interview",
+   "substantive": false
+  },
+  {
+   "title": "Rules as Written (Monte Cook, RPG Design Theories substack, 2026-06-25)",
+   "url": "https://montecook.substack.com/p/rules-as-written",
+   "kind": "designer essay",
+   "substantive": false
+  },
+  {
+   "title": "D&D's Chris Perkins Talks About His Stories, Legacy and Anxiety (Forbes, 2017-05-30)",
+   "url": "https://www.forbes.com/sites/toddkenreck/2017/05/30/dds-chris-perkins-talks-about-his-stories-legacy-and-anxiety/",
+   "kind": "video interview page (read via Wayback; text is one paragraph)",
+   "substantive": false
+  },
+  {
+   "title": "Review Standards (Bryce Lynch and 'The Pretty Girl', tenfootpole.org)",
+   "url": "https://tenfootpole.org/ironspike/?page_id=1201",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2016 (page; comments to 2018)",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "GM Don't List #13: Boxed Text Pitfalls (Justin Alexander, The Alexandrian)",
+   "url": "https://thealexandrian.net/wordpress/48312/roleplaying-games/gm-dont-list-13-boxed-text-pitfalls",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2022-08-01",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Dungeon Mastering 101: Mastering the Boxed Text (Dungeon Master's Workshop)",
+   "url": "https://dmsworkshop.com/2019/09/27/dm-101-boxed-text-mastering/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2019-09-27",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Design & Development: Undercover at Gen Con, Part 1 (Jesse Decker and David Noonan, Wizards of the Coast)",
+   "url": "http://archive.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2005-09-16",
+   "route": "Wayback raw capture web.archive.org/web/20210713073031id_/"
+  },
+  {
+   "title": "Retrospective: The Village of Hommlet (James Maliszewski, Grognardia)",
+   "url": "http://grognardia.blogspot.com/2008/10/retrospective-village-of-hommlet.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2008-10-01",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "A different kind of naturalism (Jim Nelson)",
+   "url": "https://j-nelson.net/2020/02/a-different-kind-of-naturalism/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2020-02-12 (updated 2020-08-14)",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Thinking Outside the Boxed Text (Shawn Merwin, Critical Hits)",
+   "url": "https://critical-hits.com/blog/2010/08/27/thinking-outside-the-boxed-text/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2010-08-27",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Let's Design an Adventure: Boxed Text (Shawn Merwin, D&D Beyond)",
+   "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2019-11-06",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "How much description should a dungeon key include? (David Hartlage, DMDavid)",
+   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "n.d.",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "The Art of the Key (Justin Alexander, The Alexandrian)",
+   "url": "https://thealexandrian.net/wordpress/35180/roleplaying-games/the-art-of-the-key",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2014-05-19",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "[5e] – Lost Mine of Phandelver (Bryce Lynch, tenfootpole.org)",
+   "url": "https://tenfootpole.org/ironspike/?p=2469",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2014-07-07",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Curse of Strahd (Bryce Lynch, tenfootpole.org)",
+   "url": "https://tenfootpole.org/ironspike/?p=2936",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2016-03-14",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "What Does It Look Like? 4 Steps for Beating the Boxed Text Blues (Radiating Gnome, EN World) and its reply thread",
+   "url": "https://www.enworld.org/threads/what-does-it-look-like-4-steps-for-beating-the-boxed-text-blues.661997/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2013-07-13 (replies to 2013-07-16)",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Lost Mines of Phandelver - Review (Gus L., Dungeon of Signs)",
+   "url": "http://dungeonofsigns.blogspot.com/2015/12/lost-mines-of-phandelver-review.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2015-12",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Read aloud text in modules: what are folks opinions about read aloud content? (EN World thread, page 1)",
+   "url": "https://www.enworld.org/threads/read-aloud-text-in-modules-what-are-folks-opinions-about-read-aloud-content.712737/",
+   "kind": "reader",
+   "substantive": false,
+   "date": "2025",
+   "route": "direct curl, browser UA — only the opening posts rendered; thin"
+  },
+  {
+   "title": "Picturing the dungeon – boxed text (David Hartlage, DMDavid)",
+   "url": "https://dmdavid.com/tag/picturing-the-dungeon-boxed-text/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2012-11-15",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Forgotten Realms: A Textual History of the Yawning Portal (Justin Alexander, The Alexandrian)",
+   "url": "https://thealexandrian.net/wordpress/47553/roleplaying-games/forgotten-realms-a-textual-history-of-the-yawning-portal",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2022-03-31",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Scrappy-Doo and the Hickman Revolution (James Maliszewski, Grognardia)",
+   "url": "https://grognardia.blogspot.com/2008/12/scrappy-doo-and-hickman-revolution.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2008-12-04",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Retrospective: The Hidden Shrine of Tamoachan (James Maliszewski, Grognardia)",
+   "url": "https://grognardia.blogspot.com/2010/06/retrospective-hidden-shrine-of.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2010-06-02",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "The Book Introduction (Bryce Lynch, tenfootpole.org)",
+   "url": "https://tenfootpole.org/ironspike/?page_id=9593",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "n.d.",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "The Art of the Key – Part 2: The Essential Key (Justin Alexander, The Alexandrian)",
+   "url": "https://thealexandrian.net/wordpress/35201/roleplaying-games/the-art-of-the-key-part-2-the-essential-key",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2014-05-21",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Reviewing Standards (Prince, Age of Dusk)",
+   "url": "https://princeofnothingblogs.wordpress.com/reviewing-standards/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "n.d. (page, revised)",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Meanwhile over at Tenfootpole.org… (Prince, Age of Dusk)",
+   "url": "https://princeofnothingblogs.wordpress.com/2018/03/21/meanwhile-over-at-tenfootpole-org/",
+   "kind": "reception",
+   "substantive": false,
+   "date": "2018-03-21",
+   "route": "direct curl, browser UA — read, no claim drawn"
+  },
+  {
+   "title": "On Set Design (Courtney Campbell, Hack & Slash)",
+   "url": "https://hackslashmaster.blogspot.com/2012/06/on-set-design.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2012-06",
+   "route": "direct curl, browser UA (the .co.nz link in The Alexandrian redirects to blogspot.com)"
+  },
+  {
+   "title": "Seen in a Glance (Necropraxis)",
+   "url": "https://necropraxis.com/2014/05/20/seen-in-a-glance/",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "n/a",
+   "route": "NOT FOUND — 404 page returned; known only through The Alexandrian's citation"
+  },
+  {
+   "title": "Random GM Tip: Awesome Dungeon Rooms (Justin Alexander, The Alexandrian)",
+   "url": "https://thealexandrian.net/wordpress/47256/roleplaying-games/random-gm-tip-awesome-dungeon-rooms",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2022-01-19",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "How to Prep a Module – Part 2 (Justin Alexander, The Alexandrian)",
+   "url": "https://thealexandrian.net/wordpress/46535/roleplaying-games/how-to-prep-a-module-part-2",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2021-07-28",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Review: Heroes of the Borderlands – D&D Starter Set 2025 (Justin Alexander, The Alexandrian)",
+   "url": "https://thealexandrian.net/wordpress/52962/roleplaying-games/review-heroes-of-the-borderlands-dd-starter-set-2025",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2025",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Read aloud text in modules (EN World thread, page 4)",
+   "url": "https://www.enworld.org/threads/read-aloud-text-in-modules-what-are-folks-opinions-about-read-aloud-content.712737/page-4",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2025-04-05",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Boxed texts (EN World thread)",
+   "url": "https://www.enworld.org/threads/boxed-texts.673236/",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2020-07-12",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "D&D Style Guide: Writing and Editing, Version 1.08a (2018; 'updated January 2019')",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
+   "kind": "primary WotC document (PDF, downloaded and read in full)",
+   "substantive": true
+  },
+  {
+   "title": "D&D Style Guide: Writing and Editing, Version 1.04a (2013)",
+   "url": "https://adventurersleague.files.wordpress.com/2018/10/1765690-dnd_house_style_guide.pdf",
+   "kind": "primary WotC document, superseded (PDF, read in full for lineage)",
+   "substantive": true
+  },
+  {
+   "title": "DnD House Style Guide.docx (Wizards of the Coast; created Kim Mohan 2016-03-07, last modified Judy Bauer 2021-07-06) in the Dungeoncraft Pack 2023-12-04",
+   "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+   "kind": "primary WotC document (docx inside zip, read in full; metadata read)",
+   "substantive": true
+  },
+  {
+   "title": "DC Adventure Format v1.3.docx (Claire Hoffman / Ma'at Crook, 2023-11) in the Dungeoncraft Pack 2023-12-04",
+   "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+   "kind": "primary Adventurers League template document (docx inside zip, read in full)",
+   "substantive": true
+  },
+  {
+   "title": "1 - D&D AL Template.dotx (Jeremy Crawford, 2019-10) in the Dungeoncraft Pack 2023-12-04",
+   "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+   "kind": "primary Adventurers League Word template (dotx inside zip, read in full)",
+   "substantive": true
+  },
+  {
+   "title": "DnD Standards (Wizards of the Coast, 2020) in the Dungeoncraft Pack 2023-12-04",
+   "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+   "kind": "primary WotC content-standards sheet (PDF inside zip, read in full)",
+   "substantive": true
+  },
+  {
+   "title": "Dungeoncraft Design Guide CCv1.4 (effective 2023-12-04) in the Dungeoncraft Pack",
+   "url": "https://media.dndbeyond.com/compendium-images/ddal/reference-docs/03-2024/dungeoncraft-pack-2023-12dec04.zip",
+   "kind": "primary AL guide (PDF inside zip, grepped for style rules)",
+   "substantive": false
+  },
+  {
+   "title": "Adventure Design Guide ('Writing Adventures', Chris Perkins & Greg Bilsland)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/adventure_design_guide.pdf",
+   "kind": "primary WotC document (PDF, read in full; identical bytes to the 2018 adventurersleague.files.wordpress.com copy)",
+   "substantive": true
+  },
+  {
+   "title": "Forgotten Realms Style Guide (Wizards of the Coast, bundle document)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/forgotten_realms_style_guide.pdf",
+   "kind": "primary WotC document (PDF, 29 pp; tone, gender, time, language, and word-list sections read)",
+   "substantive": true
+  },
+  {
+   "title": "D&D IP Guide (Wizards of the Coast, bundle document)",
+   "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dd_ip_guide.pdf",
+   "kind": "primary WotC document (PDF, 13 pp; opening pages read, rest grepped)",
+   "substantive": true
+  },
+  {
+   "title": "D&D Adventurers League Dungeoncraft Design Guide v1.9c (effective May 2025, updated 2025-06-23)",
+   "url": "http://theadventurerleagues.com/vault/2024/07/Dungeoncraft__CCv1.9c.pdf",
+   "kind": "primary AL guide (PDF, read; grepped for template/style rules)",
+   "substantive": true
+  },
+  {
+   "title": "D&D Adventurers League Dungeoncraft Design Guide: The Wild Beyond the Witchlight v1.2 (2021)",
+   "url": "https://media.wizards.com/2021/dnd/downloads/Dungeoncraft_Wild_Beyond_the_Witchlight_v1.2.pdf",
+   "kind": "primary AL guide (PDF, grepped)",
+   "substantive": false
+  },
+  {
+   "title": "D&D Free Rules (2024) Rules Glossary, D&D Beyond",
+   "url": "https://www.dndbeyond.com/sources/dnd/free-rules/rules-glossary",
+   "kind": "primary 2024 rules text (web)",
+   "substantive": true
+  },
+  {
+   "title": "Sage Advice archive: Jeremy Crawford on singular they in the style guide (2018-12-21)",
+   "url": "https://www.sageadvice.eu/have-you-discussed-opening-up-use-of-they-their-as-singular-pronouns-in-the-dd-style-guide/",
+   "kind": "archived designer tweet",
+   "substantive": true
+  },
+  {
+   "title": "Sage Advice archive: DMs Guild 'Style Guide is now on DMsGuild' (2019-02-22)",
+   "url": "https://www.sageadvice.eu/2019/04/01/style-guide-is-now-on-dmsguild-creators/",
+   "kind": "archived publisher tweet",
+   "substantive": true
+  },
+  {
+   "title": "Sage Advice archive: Jeremy Crawford boxed-text poll (2016-11-17)",
+   "url": "https://www.sageadvice.eu/how-much-boxed-text-do-you-like-in-an-adventure-you-run/",
+   "kind": "archived designer tweet (poll only)",
+   "substantive": false
+  },
+  {
+   "title": "Sage Advice archive: 'What are your thoughts on boxed text?' (Shea, Haeck, Merwin, Marks, Introcaso; April 2019)",
+   "url": "https://www.sageadvice.eu/what-are-your-thoughts-on-boxed-text/",
+   "kind": "archived designer thread",
+   "substantive": true
+  },
+  {
+   "title": "Sage Advice archive: Shawn Merwin, 'This is exactly why boxed text is important' (2021-11)",
+   "url": "https://www.sageadvice.eu/this-is-exactly-why-boxed-text-is-important/",
+   "kind": "archived designer thread",
+   "substantive": true
+  },
+  {
+   "title": "The Alexandrian: GM Don't List #13 – Boxed Text Pitfalls (2022-08-01) and comments",
+   "url": "https://thealexandrian.net/wordpress/48312/roleplaying-games/gm-dont-list-13-boxed-text-pitfalls",
+   "kind": "community analysis",
+   "substantive": true
+  },
+  {
+   "title": "The Alexandrian: Advanced Gamemastery – Boxed Text (2024-02-28)",
+   "url": "https://thealexandrian.net/wordpress/50680/roleplaying-games/advanced-gamemastery-boxed-text",
+   "kind": "video announcement (no text guidance)",
+   "substantive": false
+  },
+  {
+   "title": "EN World: DMsGuild D&D Style-Guides give a unique insight into the game (2018-11-25)",
+   "url": "https://www.enworld.org/threads/dmsguild-d-d-style-guides-give-a-unique-insight-into-the-game.655198/",
+   "kind": "news/community thread",
+   "substantive": true
+  },
+  {
+   "title": "EN World: D&D Adventurers League Unveils New DungeonCraft Document with Planescape In Focus (2023-11)",
+   "url": "https://www.enworld.org/threads/d-d-adventurers-league-unveils-new-dungeoncraft-document-with-planescape-in-focus.700991/",
+   "kind": "news",
+   "substantive": true
+  },
+  {
+   "title": "The Kind GM: DMs Guild Style Guide Resources (2018-10-24)",
+   "url": "https://thekindgm.com/2018/10/24/dmsguild-style-guide-resources/",
+   "kind": "blog",
+   "substantive": false
+  },
+  {
+   "title": "D&D Beyond forums: Is there an update to the D&D Style Guide yet? (2025-06-13, unanswered)",
+   "url": "https://www.dndbeyond.com/forums/dungeons-dragons-discussion/dungeon-masters-guild/224705-is-there-an-update-to-the-d-d-style-guide-writing",
+   "kind": "forum",
+   "substantive": true
+  },
+  {
+   "title": "D&D Beyond forums: D&D Adventurers League Resources & Links (updated 2026-08-12)",
+   "url": "https://www.dndbeyond.com/forums/dungeons-dragons-discussion/d-d-organized-play/192532-d-d-adventurers-league-resources-links-updated-08",
+   "kind": "forum resource index",
+   "substantive": true
+  },
+  {
+   "title": "Gizmodo/io9: Dungeons & Dragons Team Announces New Plans to Address Racism (2020-06-18)",
+   "url": "https://gizmodo.com/dungeons-dragons-team-announces-new-plans-to-address-1844084273",
+   "kind": "journalism reporting the WotC statement (original WotC URL now redirects; archive.org unreachable)",
+   "substantive": true
+  },
+  {
+   "title": "Gizmodo/io9: D&D's Culturally Sensitive Strahd Revamp Is Here (2020-07-27)",
+   "url": "https://gizmodo.com/d-ds-culturally-sensitive-strahd-revamp-is-here-but-it-1844521228",
+   "kind": "journalism/criticism",
+   "substantive": true
+  },
+  {
+   "title": "Wikipedia: Curse of Strahd",
+   "url": "https://en.wikipedia.org/wiki/Curse_of_Strahd",
+   "kind": "aggregator (citations followed where reachable)",
+   "substantive": true
+  },
+  {
+   "title": "Wikipedia: Tomb of Annihilation",
+   "url": "https://en.wikipedia.org/wiki/Tomb_of_Annihilation",
+   "kind": "aggregator (quotes the 2020-06-17 statement; cited 411mania/io9 sources)",
+   "substantive": true
+  },
+  {
+   "title": "Wikipedia: Ray Winninger",
+   "url": "https://en.wikipedia.org/wiki/Ray_Winninger",
+   "kind": "aggregator",
+   "substantive": false
+  },
+  {
+   "title": "Cyborgs and Mages site search: style guide (hosting context for the 2019 PDFs)",
+   "url": "https://cyborgsandmages.wordpress.com/?s=style+guide",
+   "kind": "hosting blog search page",
+   "substantive": false
+  },
+  {
+   "title": "Sly Flourish homepage (no read-aloud article located)",
+   "url": "https://slyflourish.com/",
+   "kind": "blog index",
+   "substantive": false
+  },
+  {
+   "title": "The Adventurer Leagues site search: dungeoncraft",
+   "url": "http://theadventurerleagues.com/?s=dungeoncraft",
+   "kind": "site search",
+   "substantive": false
+  },
+  {
+   "title": "[Review] T1 The Village of Hommlet (AD&D); Foreshadow — Age of Dusk (Prince of Nothing)",
+   "url": "https://princeofnothingblogs.wordpress.com/2021/07/31/review-t1-the-village-of-hommlet-add-foreshadow/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2021-07-31",
+   "route": "direct fetch, browser UA"
+  },
+  {
+   "title": "Greyhawk Returns in the 2024 Dungeon Master's Guide (John Roy, D&D Beyond)",
+   "url": "https://www.dndbeyond.com/posts/1834-greyhawk-returns-in-the-2024-dungeon-masters-guide",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2024",
+   "route": "direct fetch, browser UA"
+  },
+  {
+   "title": "GROGNARDIA: Retrospective: The Grand Duchy of Karameikos (James Maliszewski)",
+   "url": "http://grognardia.blogspot.com/2022/09/retrospective-grand-duchy-of-karameikos.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2022-09-28",
+   "route": "direct fetch, browser UA"
+  },
+  {
+   "title": "[Review] Gaz 1 The Grand Duchy of Karameikos (DnD Basic): Back to Basics — Age of Dusk (Prince of Nothing)",
+   "url": "https://princeofnothingblogs.wordpress.com/2020/03/30/review-gaz-1-the-grand-duchy-of-karameikos-dnd-basic/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2020-03-30",
+   "route": "direct fetch, browser UA"
+  },
+  {
+   "title": "Dungeon of Signs: Lost Mines of Phandelver - Review (Gus L)",
+   "url": "http://dungeonofsigns.blogspot.com/2015/12/lost-mines-of-phandelver-review.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2015-12",
+   "route": "direct fetch, browser UA"
+  },
+  {
+   "title": "Bathtub Review: Lost Mine of Phandelver — Playful Void (Idle Cartulary)",
+   "url": "https://idlecartulary.com/2025/01/13/bathtub-review-lost-mine-of-phandelver/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2025-01-13",
+   "route": "direct fetch, browser UA"
+  },
+  {
+   "title": "Running Towns in Fantasy RPGs (Mike Shea, Sly Flourish)",
+   "url": "https://slyflourish.com/introducing_towns.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2023-11-13",
+   "route": "direct fetch, browser UA"
+  },
+  {
+   "title": "The Alexandrian: Review: Ptolus – City of Adventure (Justin Alexander)",
+   "url": "https://thealexandrian.net/wordpress/47935/roleplaying-games/review-ptolus-city-of-adventure",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2022-05-20",
+   "route": "direct fetch, browser UA; concerns the adventure anthology, not the city sourcebook's prose"
+  },
+  {
+   "title": "Ghosts of Saltmarsh – Looking at the Town (Merric Blackman, Merric's Musings)",
+   "url": "https://merricb.com/2019/05/22/ghosts-of-saltmarsh-looking-at-the-town/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2019-05-22",
+   "route": "live domain lapsed (redirects to an unrelated site); read via Wayback raw capture 20230416034304id_"
+  },
+  {
+   "title": "AD&D Review: The Village of Hommlet (Merric Blackman, Merric's Musings)",
+   "url": "https://merricb.com/2022/01/26/add-review-the-village-of-hommlet/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2022-01-26",
+   "route": "live domain lapsed; read via Wayback raw capture 20220816043420id_"
+  },
+  {
+   "title": "Waterdeep: Dragon Heist - Review and Tips For Running (Hipsters & Dragons)",
+   "url": "https://www.hipstersanddragons.com/waterdeep-dragon-heist-review/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2018 (updated)",
+   "route": "direct fetch, browser UA"
+  },
+  {
+   "title": "Review – Waterdeep: Dragon Heist (Strange Assembly)",
+   "url": "https://www.strangeassembly.com/2018/waterdeep-dragon-heist-a-dungeons-dragons-review",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2018",
+   "route": "direct fetch, browser UA"
+  },
+  {
+   "title": "Volo's Guide to Waterdeep (2e) — Product History by Shannon Appelcline, DriveThruRPG",
+   "url": "https://www.drivethrurpg.com/product/16836/Volos-Guide-to-Waterdeep-2e",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "product history undated; describes the 1993 release",
+   "route": "live page 403 to curl and its DMs Guild mirror; read via Wayback raw capture 20210120014759id_"
+  },
+  {
+   "title": "Dungeon of Signs: B2 - Keep on the Borderlands - Review (Gus L)",
+   "url": "http://dungeonofsigns.blogspot.com/2014/01/b2-keep-on-borderlands-review.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2014-01",
+   "route": "direct fetch, browser UA"
+  },
+  {
+   "title": "[Review] B2 Keep on the Borderlands (D&D Basic); Crucible — Age of Dusk (Prince of Nothing)",
+   "url": "https://princeofnothingblogs.wordpress.com/2019/01/26/review-b2-keep-on-the-borderlands-dd-basic-crucible/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2019-01-26",
+   "route": "direct fetch, browser UA"
+  },
+  {
+   "title": "Review: Ptolus – Monte Cook's City by the Spire (Storytelling and Gaming)",
+   "url": "https://angelscitadel.com/2021/05/21/review-ptolus-monte-cooks-city-by-the-spire/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2021-05-21",
+   "route": "direct fetch, browser UA"
+  },
+  {
+   "title": "The Alexandrian: Thinking About Urbancrawls – Part 4: Experimental City Hexes (Justin Alexander)",
+   "url": "https://thealexandrian.net/wordpress/36508/roleplaying-games/thinking-about-urbancrawls-part-4-experimental-city-hexes",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2015",
+   "route": "direct fetch, browser UA"
+  },
+  {
+   "title": "Volo's Guide to Waterdeep — Wikipedia",
+   "url": "https://en.wikipedia.org/wiki/Volo%27s_Guide_to_Waterdeep",
+   "kind": "relay",
+   "substantive": false,
+   "date": "fetched 2026-09-06",
+   "route": "direct fetch; its only cited primary is a 1993 White Wolf print review, not online"
+  },
+  {
+   "title": "Age of Ravens: Gazetteers of Mystara: The Review List (Lowell Francis)",
+   "url": "http://ageofravens.blogspot.com/2012/04/gazetteers-of-mystara-review-list.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2012-04-11",
+   "route": "direct fetch, browser UA"
+  },
+  {
+   "title": "In-Depth Review of the 2024 Dungeon Master's Guide (Beth Rimmels, EN World)",
+   "url": "https://www.enworld.org/threads/in-depth-review-of-the-2024-dungeon-masters-guide.707861/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2024-11-12",
+   "route": "direct fetch, browser UA"
+  },
+  {
+   "title": "How to Use the Greyhawk World Setting from D&D 5e's 2024 Dungeon Master's Guide (CBR)",
+   "url": "https://www.cbr.com/dnd-5e-dmg-greyhawk-world-setting/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2024",
+   "route": "direct fetch, browser UA"
+  },
+  {
+   "title": "Curse of Strahd — review (Bryce Lynch, tenfootpole.org)",
+   "url": "https://tenfootpole.org/ironspike/?p=2936",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2016",
+   "route": "direct fetch, browser UA; found via the site's own ?s= search after the web-search budget ran out"
+  },
+  {
+   "title": "AA#13 – White Dragon Run (Bryce Lynch, tenfootpole.org)",
+   "url": "https://tenfootpole.org/ironspike/?p=304",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2011-10-07",
+   "route": "direct fetch, browser UA"
+  },
+  {
+   "title": "The Alexandrian: Ptolus: Running the Campaign – Using Lore Books (Justin Alexander)",
+   "url": "https://thealexandrian.net/wordpress/45361/roleplaying-games/ptolus-running-the-campaign-using-lore-books",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2020-10-30",
+   "route": "direct fetch, browser UA"
+  },
+  {
+   "title": "Read the DMG (d20 Digest, Substack)",
+   "url": "https://d20digest.substack.com/p/read-the-dmg",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "fetched 2026-09-06",
+   "route": "direct fetch; page body did not render to text (JS/paywall shell)"
+  },
+  {
+   "title": "The Alexandrian: Forgotten Realms – A Textual History of the Yawning Portal (Justin Alexander)",
+   "url": "https://thealexandrian.net/wordpress/47553/roleplaying-games/forgotten-realms-a-textual-history-of-the-yawning-portal",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2022-03-31",
+   "route": "direct fetch, browser UA; found by the site's own ?s= search"
+  },
+  {
+   "title": "The Alexandrian: Chaos Lorebook – The Assassins of Chaos (Justin Alexander)",
+   "url": "https://thealexandrian.net/wordpress/53746/roleplaying-games/chaos-lorebook-the-assassins-of-chaos",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2026-08-17",
+   "route": "direct fetch, browser UA"
+  },
+  {
+   "title": "Running Curse of Strahd, Part 2 (Merric Blackman, Merric's Musings)",
+   "url": "https://merricb.com/2016/04/24/running-curse-of-strahd-part-2/",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2016-04-24",
+   "route": "live domain lapsed; Wayback raw capture 20260301223639id_ — a play report, not a register analysis"
+  },
+  {
+   "title": "Part 46: \"Zenopus Built a Tower\" (Holmes manuscript vs published Basic Set)",
+   "url": "https://zenopusarchives.blogspot.com/2015/02/part-46-zenopus-built-tower.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2015-02-06",
+   "route": "direct fetch"
+  },
+  {
+   "title": "Dungeon Delve - WTF? (quoting Bill Slavicsek's introduction to Dungeon Delve, 2009)",
+   "url": "https://thealexandrian.net/wordpress/4051/roleplaying-games/dungeon-delve-wtf",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2009-04-16",
+   "route": "direct fetch"
+  },
+  {
+   "title": "Designing Layout and Information in Adventures",
+   "url": "https://deathtrap-games.blogspot.com/2021/08/designing-layout-and-information-in.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2021-08-29",
+   "route": "direct fetch"
+  },
+  {
+   "title": "New Article: D&D Adventure Format (quoting Bruce Cordell's Design & Development column)",
+   "url": "https://greyhawkery.blogspot.com/2011/06/new-article-d-adventure-format.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2011-06-30",
+   "route": "direct fetch"
+  },
+  {
+   "title": "Early Evolution of Encounter Text",
+   "url": "https://deltasdnd.blogspot.com/2021/10/early-evolution-of-encounter-text.html",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2021-10-25",
+   "route": "direct fetch"
+  },
+  {
+   "title": "Tip-Offs in Tamoachan",
+   "url": "https://deltasdnd.blogspot.com/2017/10/tip-offs-in-tamoachan.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2017-10-02",
+   "route": "direct fetch"
+  },
+  {
+   "title": "Designers & Dragons: The Column #24: My History of Dungeons & Dragons, Part One",
+   "url": "https://www.rpg.net/columns/designers-and-dragons/designers-and-dragons24.phtml",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2013-01-23",
+   "route": "Wayback raw capture 20240224035027 (live rpg.net returns 403)"
+  },
+  {
+   "title": "Let's Design an Adventure: Adventure Hooks and Opening Scenes",
+   "url": "https://www.dndbeyond.com/posts/624-lets-design-an-adventure-adventure-hooks-and",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2019-10-23",
+   "route": "direct fetch of https://www.dndbeyond.com/posts/624"
+  },
+  {
+   "title": "Let's Design an Adventure: Encounter Basics",
+   "url": "https://www.dndbeyond.com/posts/626-lets-design-an-adventure-encounter-basics",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2019-12-04",
+   "route": "direct fetch of https://www.dndbeyond.com/posts/626"
+  },
+  {
+   "title": "From the Unknown to the Borderlands (excerpt from Jon Peterson, Game Wizards, MIT Press 2021)",
+   "url": "https://www.polygon.com/2021/10/12/22722602/dungeons-dragons-game-wizards-book-excerpt-jon-peterson-arneson-lawsuit",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2021-10-12",
+   "route": "direct fetch"
+  },
+  {
+   "title": "Dave Arneson's Origins 1977 Tournament",
+   "url": "https://playingattheworld.blogspot.com/2020/04/dave-arnesons-origins-1977-tournament.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2020-04",
+   "route": "direct fetch"
+  },
+  {
+   "title": "Dungeons & Dragons Gazetteer (long-form writeup of GAZ1 The Grand Duchy of Karameikos)",
+   "url": "https://writeups.letsyouandhimfight.com/rulebook-heavily/dungeonsanddragons-gazetteer/",
+   "kind": "reader",
+   "substantive": true,
+   "date": "undated writeup; GAZ1 published 1987",
+   "route": "direct fetch"
+  },
+  {
+   "title": "The Shadowed Old Gods of Game Design: Remembering Holmes, Moldvay and Mentzer",
+   "url": "https://therpggazette.wordpress.com/2025/11/11/the-shadowed-old-gods-of-game-design-remembering-holmes-moldvay-and-mentzer/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2025-11-11",
+   "route": "direct fetch"
+  },
+  {
+   "title": "The Many Faces of Role-Playing Game Studies (Deterding & Zagal, chapter 1 of Role-Playing Game Studies, Routledge 2018)",
+   "url": "https://eprints.whiterose.ac.uk/id/eprint/147044/1/Deterding_Zagal_Many_Faces_RPG_Studies.pdf",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2018-04-04",
+   "route": "White Rose eprints accepted-manuscript PDF, text extracted with pypdf"
+  },
+  {
+   "title": "Fifty Years of Dungeons & Dragons chapter pages (Peterson ch.3; Rowe & Howard ch.5; Cote & Saidel ch.15; Trammell & Garcia ch.17)",
+   "url": "https://direct.mit.edu/books/book/5778/chapter/4746687/Doctor-Holmes-I-Presume-How-a-California-Neurology",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2023",
+   "route": "BLOCKED: direct.mit.edu returns 403 to curl and WebFetch; no Wayback capture; OpenAlex and Semantic Scholar hold no abstract"
+  },
+  {
+   "title": "Shared Fantasy (Fine 1983) and The Fantasy Role-Playing Game (Mackay 2001) full-text search",
+   "url": "https://archive.org/metadata/sharedfantasyrol0000fine",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "1983/2001",
+   "route": "BLOCKED: archive.org search-inside endpoints unreachable from this host (HTTP 000)"
+  },
+  {
+   "title": "Greyhawk Returns in the 2024 Dungeon Master's Guide",
+   "url": "https://www.dndbeyond.com/posts/1834-greyhawk-returns-in-the-2024-dungeon-masters-guide",
+   "kind": "vendor",
+   "substantive": true,
+   "date": "2024-10-21",
+   "route": "direct fetch"
+  },
+  {
+   "title": "In-Depth Review of the 2024 Dungeon Master's Guide",
+   "url": "https://www.enworld.org/threads/in-depth-review-of-the-2024-dungeon-masters-guide.707861/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2024-11-12",
+   "route": "direct fetch"
+  },
+  {
+   "title": "World Building design seminar with Wolfgang Baur, Zeb Cook, and Richard Green, part 1",
+   "url": "https://koboldpress.com/world-building-design-seminar-with-wolfgang-baur-zeb-cook-and-richard-green-part-1/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2025-07-14",
+   "route": "direct fetch"
+  },
+  {
+   "title": "World Building design seminar with Wolfgang Baur, Zeb Cook, and Richard Green, part 2",
+   "url": "https://koboldpress.com/world-building-design-seminar-with-wolfgang-baur-zeb-cook-and-richard-green-part-2/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2025-07-21",
+   "route": "direct fetch"
+  },
+  {
+   "title": "Review: The Kobold Guide to Plots and Campaigns and The Kobold Guide to Worldbuilding",
+   "url": "https://gnomestew.com/review-the-kobold-guide-to-plots-and-campaigns-and-the-kobold-guide-to-worldbuilding/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "undated review of the 2012 book",
+   "route": "direct fetch"
+  },
+  {
+   "title": "Kobold Guide to Worldbuilding full text (Wolfgang Baur, 'How to Design a City State, Tribe, or Nation')",
+   "url": "https://online.anyflip.com/fgoih/itgk/mobile/index.html",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2012",
+   "route": "BLOCKED: anyflip serves the flipbook shell only (page files 403, no search_text index); pdfcoffee behind Cloudflare; Google Books search-inside quota-blocked. Reached instead at one remove through the Gnome Stew review's page-cited quotation and Baur's own seminar words."
+  },
+  {
+   "title": "Nicholas J. Mizer, 'The Role of the Cosmographer', International Journal of Role-playing 18 (2025)",
+   "url": "https://journals.uu.se/IJRP/article/download/1197/1052/4802",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2025",
+   "route": "OJS download URL (the /view/ PDF link returns an HTML wrapper); text extracted with pypdf"
+  },
+  {
+   "title": "Adrianna Burton, 'Book Review: Dread Trident', Analog Game Studies",
+   "url": "https://analoggamestudies.org/2022/01/book-review-dread-trident/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2022-01-09",
+   "route": "direct fetch"
+  },
+  {
+   "title": "Dread Trident - In Conversation with Curtis D. Carbonell",
+   "url": "https://liverpooluniversitypress.blog/2020/01/27/dread-trident-in-conversation-with-curtis-d-carbonell/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2020-01-27",
+   "route": "direct fetch"
+  },
+  {
+   "title": "Clare Wall, 'Review of Dread Trident', SFRA Review 52.1",
+   "url": "https://sfrareview.org/2022/01/10/review-of-dread-trident-tabletop-role-playing-games-and-the-modern-fantastic/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2022-01-10",
+   "route": "direct fetch"
+  },
+  {
+   "title": "Design & Development: Undercover at Gen Con, Part 1 (Jesse Decker and David Noonan, Wizards of the Coast)",
+   "url": "http://www.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2005-09-16",
+   "route": "Wayback raw capture https://web.archive.org/web/20140530180347id_/http://www.wizards.com/default.asp?x=dnd/dd/20050916a (live wizards.com URL is dead)"
+  },
+  {
+   "title": "The Dreaded Boxed Text",
+   "url": "https://dysonlogos.blog/2013/09/29/the-dreaded-boxed-text/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2013-09-29",
+   "route": "direct fetch"
+  },
+  {
+   "title": "David Jara, 'A Closer Look at the (Rule-)Books: Framings and Paratexts in Tabletop Role-playing Games', International Journal of Role-Playing 4",
+   "url": "https://journals.uu.se/IJRP/article/download/228/252",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2013",
+   "route": "OJS download URL; text extracted with pypdf"
+  },
+  {
+   "title": "TSR Style Guides (pointer post naming Sine Nomine's 'A Brief Study of TSR Book Design')",
+   "url": "http://doomslakers.blogspot.com/2022/01/tsr-style-guides.html",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2022-01",
+   "route": "direct fetch; the post is only a list of links, and the Sine Nomine study itself is a paid PDF not reachable from here"
+  },
+  {
+   "title": "Stuart Gorman, review of Fifty Years of Dungeons and Dragons (MIT Press)",
+   "url": "https://www.stuartellisgorman.com/blog/fifty-years-of-dungeons-and-dragons-ed-premeet-sidhu-marcus-carter-and-jos-p-zagal",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2024-08-01",
+   "route": "direct fetch; the only route reached to the contents of the blocked MIT volume"
   },
   {
    "title": "Quagmire! The Making of a 1980's D&D Module (Jon Peterson, Medium, 2014)",
