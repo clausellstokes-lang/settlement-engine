@@ -38,3 +38,38 @@ Angle: craft essays / writing-advice pieces analysing HOW Wolfe prose works.
 - meaning from "hints and partial answers"; clues visible on second read
 
 ### 403: aidanmoher.com Gerwel; wolfewiki Gaiman page. Retry via alternates.
+
+## Batch 2 (this run, re-fetched batch 1 + new; 2026-09-06)
+Re-fetched & CONFIRMED: Gladstone (2022-10-14), Michel (2026-01-08), Khanna (2012-10-10), Ewing (2010-09-11), Waggish (2007-11-23).
+
+### Floyd Holland, "The Enchanting Prose of Gene Wolfe" — floydholland.substack.com/p/the-enchanting-prose-of-gene-wolfe — writer newsletter — substantive
+- "dense prose, interjecting itself with parentheticals and complicating clauses"; "an aura of control throughout"; balance of "complexity and punchiness"
+- specificity does double duty: scene-setting + embedded plot clues; mystery via "offhand reference"
+- first-person reflection -> "intense psychological focus"; imperfect memory thematic
+
+### Tachy.org review BotNS — tachy.org/posts/botns — reader review — thin/substantive-lite
+- "prose itself is elegant but simple"; archaic words "taken straight from ancient Greek"; memoir style; short chapters; "glaring inconsistencies and unspoken details"
+
+### C.W. Howell, "The Book of the New Sun Is the Dark Souls of Books" — cwhowell.com — 2023-07-23 — game/literature essay — substantive
+- "story is communicated impressionistically through environmental insinuation, flavor text, and a few lines of cryptic dialogue"
+- "Key narrative events can happen off-screen, referred to off-handedly"; "communicated via implication and innuendo"
+- "A single detail can recontextualize an entire character in retrospect" (Armstrong photo as knight)
+- archaic/obscure terminology instead of renaming; "most of the narrative takes place before the game starts"; ouroboros
+
+### Creative Game Life (Patrick M), BotNS guide — creativegamelife.com — game-site essay — substantive-lite
+- "Every sentence carries weight. Details that seem incidental often acquire significance hundreds of pages later."
+- "Wolfe never pauses to explain the world"; refuses exposition stops; understanding "long after an event has passed"; reader meets setting "exactly as its inhabitants do"
+- "remembering everything is not the same as understanding everything"; gap between what Severian sees and reader infers
+
+### Peter Wright, "Mapping a Masterwork" — ultan.org.uk/review-botns — 2002-08-28 — critic — substantive
+- diction "convey the flavour of an odd place at odd time"; words "suggestive rather than definitive" -> enforced polysemy
+- eidetic memory is the very mark of unreliability; mnemonist "passive-receptive attitude"; "scattering meaning"
+- gulf between plot and story ("the apparent and the real"); Severian's "inconscience"
+
+### Guy Stewart, "Gene Wolfe & Me" writing advice — faithandsciencefiction.blogspot.com 2022-02-12 — writer-blog writing advice — substantive (attributions loose)
+- Wolfe: characterize by "showing the character thinking, speaking and acting in a characteristic way"; rewrote opening pages "eight or ten times"; minimum three writes; up to 15 drafts
+
+### Don Beck, "Structure of the New Sun" — donbeck1.substack.com 2025-06-03 — writer essay — substantive
+- episode pattern "Severian stumbles into X, does Y, and ends up Z"; three unifying devices: destiny foreknowledge hook, clinical detached narrator voice from torturer training, recursion ("Events echo across the narrative like memories resurfacing")
+
+### BLOCKED: medium (Roberts) 403; aidanmoher (Gerwel) 403; reactormag (Evenson) 403; newyorker 403; web.archive.org unfetchable. Try Browser pane.
