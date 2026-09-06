@@ -3,13 +3,14 @@
  "name": "kay",
  "angle": null,
  "tag": "i715-749",
- "lines": 109,
+ "lines": 122,
  "firstTs": "2026-09-06T23:23:41.913Z",
- "lastTs": "2026-09-06T23:30:20.912Z",
+ "lastTs": "2026-09-06T23:32:58.862Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 29
+  "Bash": 31,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "https://web.archive.org/web/20150917090646id_/https://www.questia.com/library/journal/1G1-223225904/guy-gavriel-kay-an-introduction",
@@ -24,13 +25,13 @@
   "https://www.cambridge.org/core/books/medievalism-in-english-canadian-literature/remembering-the-romance-medievalist-romance-in-fantasy-fiction-by-guy-gavriel-kay-and-charles-de-lint/BCD555D514EC39CF190DEEAC896686A8"
  ],
  "filesWritten": [],
- "lastAssistantText": "All fifteen sources fetched as raw text. Writing the checkpoint.",
+ "lastAssistantText": "Checkpoint written and validated: 15 claims, 15 verdicts, index order preserved, every `trueWording` at or under twelve words.",
  "run": "wf_d76e605d-6d1",
  "agent": "a09f06f6c5eb3e20e",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/cc123b6c-1961-44c5-b071-c5e5aee7ee80/subagents/workflows/wf_d76e605d-6d1/agent-a09f06f6c5eb3e20e.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-kay-i715-749.json",
-  "exists": false
+  "exists": true
  }
 }

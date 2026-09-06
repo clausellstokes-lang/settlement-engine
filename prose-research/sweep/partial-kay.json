@@ -1043,7 +1043,7 @@
    "verdict": "PARTIAL",
    "unsupportedLimb": "'the ICFA audience' - the page never names ICFA or the International Conference on the Fantastic in the Arts",
    "trueWording": "a defense of fantasy literature as a way of addressing history",
-   "note": "Wayback raw capture reached and read directly. The quotation is verbatim, inside 'I'm then going to perform poised arabesques ... and connect this to a defense of fantasy literature as a way of addressing history and avoiding these ethical concerns', immediately after the privacy/autonomy thesis - so the privacy-to-fantasy connection limb is fully supported. The venue is given only circumstantially: 'guests of honor', Farah Mendlesohn and Christine Mains, 'spring training here in Florida'. grep for 'ICFA', 'IAFA' and 'international conference' on the fetched page returns zero hits, so the ICFA identification is an inference, not the page's own wording.",
+   "note": "Wayback raw capture reached and read directly. The quotation is verbatim, in the sentence where Kay says he will 'connect this to' that defence, immediately after stating his privacy-and-autonomy thesis, so the privacy-to-fantasy limb is fully supported. The venue is given only circumstantially: he addresses 'guests of honor' alongside Farah Mendlesohn and Christine Mains, with a nod to 'spring training here in Florida'. grep for ICFA, IAFA and 'international conference' on the fetched page returns zero hits, so the ICFA identification is an inference, not the page's wording.",
    "fromFile": "verdicts-kay-i715-749.json"
   }
  },
@@ -1067,7 +1067,7 @@
    "verdict": "PARTIAL",
    "unsupportedLimb": "'rather than the events themselves' - Kay names the rebellion's colossal scale alongside its consequence, not consequence instead of the events",
    "trueWording": "colossal scale and consequence (through ripple effects)",
-   "note": "medievalists.net fetched live (HTTP 200) and read directly. Answering which place he most enjoyed researching, Kay says he found Tang China mesmerizing 'partly because my gateway was the astonishingly great poets of that time, partly because of the colossal scale and consequence (through ripple effects) of the An Lushan Rebellion in the middle of the 8th century.' The quotation and the 'part of what drew him' limb are exact, but the source couples scale with consequence rather than setting ripple effects against the events, so the contrastive limb is the claim's own addition.",
+   "note": "medievalists.net fetched live (HTTP 200) and read directly. Answering which place he most enjoyed researching, Kay says he found Tang China mesmerizing partly because of the poets and partly because of the quoted 'scale and consequence' of the An Lushan Rebellion. The quotation and the 'part of what drew him' limb are exact, but the source couples scale with consequence rather than setting ripple effects against the events, so the contrastive limb is the claim's own addition.",
    "fromFile": "verdicts-kay-i715-749.json"
   }
  },
@@ -1091,7 +1091,7 @@
    "verdict": "PARTIAL",
    "unsupportedLimb": "the attribution to Siourbas - the MUSE table of contents lists chapter titles and page ranges only, with no author names",
    "trueWording": "Kay's Tigana and Randy Bradshaw's The Song Spinner",
-   "note": "muse.jhu.edu/book/6623 fetched live (HTTP 200) and read directly. The table of contents carries 'More Than Just Survival: The Successful Quest for Voice in Guy Gavriel Kay's Tigana and Randy Bradshaw's The Song Spinner', 'pp. 73-80', so the two-work title limb is verbatim and the eight-page limb is exact. But grep for 'Siourbas' returns zero hits in both the rendered text and the raw HTML: every entry is rendered as a bare h3 title plus a page div, with the .toc .entry .author slot empty, so this page cannot confirm who wrote the chapter.",
+   "note": "muse.jhu.edu/book/6623 fetched live (HTTP 200) and read directly. The table of contents carries the chapter title 'More Than Just Survival: The Successful Quest for Voice in' the two named works, with 'pp. 73-80', so the two-work limb is verbatim and the eight-page limb is exact. But grep for 'Siourbas' returns zero hits in both the rendered text and the raw HTML: every entry renders as a bare h3 title plus a page div, with the .toc .entry .author slot empty, so this page cannot confirm who wrote the chapter.",
    "fromFile": "verdicts-kay-i715-749.json"
   }
  },
@@ -1141,6 +1141,78 @@
    "note": "Raw subtitle file fetched (200) from media.podcasts.ox.ac.uk (the .srt linked off the writersinspire.org page); the landing page itself carries no transcript. Quote is verbatim at cue 4, and the medievalist limb holds - cue 2 has her as a 'junior research fellow in mediaeval studies here at Oxford' (auto-transcribed as 'Catherine Oli'; the page credits Katherine Olley). But the framing limb fails: cue 1 introduces Kay as 'one of modem [sic] fantasy's best selling authors' and cue 4 as 'a Canadian born novelist', with the editorship as the recognition hook, not the primary identification; the talk sits in the 'Fantasy Literature: An Introduction' collection, addressed to a fantasy-literature audience rather than a Tolkien one.",
    "unsupportedLimb": "that she introduces him to a Tolkien audience 'primarily' as a Silmarillion editor",
    "fromFile": "verdicts-kay-i858-894.json"
+  }
+ },
+ {
+  "index": 915,
+  "feature": "other: silence about the editing method",
+  "claim": "Noad says the details of Kay's contribution will probably never be known unless Kay breaks his silence on the matter.",
+  "source": "Charles Noad, comments published by John D. Rateliff, Sacnoth's Scriptorium, 27 January 2020",
+  "url": "https://sacnoths.blogspot.com/2020/01/charles-noad-comments-was-christophers.html",
+  "quote": "Kay one day breaks his silence on the matter",
+  "page": "Charles Noad's letter, third paragraph",
+  "kind": "analysis",
+  "polarity": "asserts",
+  "date": "2020-01-27",
+  "routeHint": "live URL with browser user agent (curl)",
+  "registerHint": "none",
+  "confidence": "high",
+  "angle": "silmarillion-and-verse",
+  "verdict": {
+   "index": 915,
+   "verdict": "PARTIAL",
+   "trueWording": "Unless Christopher Tolkien kept some sort of detailed diary of the process",
+   "note": "Same Jan 2020 post, Noad's letter, third paragraph, one fetch. The quoted clause is verbatim, and the never-known limb is supported ('I doubt if we'll ever know'). But the claim's 'unless' makes Kay's silence the sole exception, whereas Noad's sentence is a disjunction whose first branch is a Christopher Tolkien diary. Graded PARTIAL rather than verbatim because a downstream writer using the claim as worded would drop Noad's other named route.",
+   "unsupportedLimb": "that Kay breaking his silence is the only route to knowing - Noad gives it as one of two conditions, the other being a detailed Christopher Tolkien diary of the composition process",
+   "fromFile": "verdicts-kay-i895-919.json"
+  }
+ },
+ {
+  "index": 936,
+  "feature": "other: poetry practice",
+  "claim": "Rettino reports that in his introduction to Beyond this Dark House the poet Don Coles writes that Kay has an ease with crafting words in prose or poetry.",
+  "source": "Matthew Rettino, review of Beyond this Dark House, matthewrettino.com, 7 February 2014",
+  "url": "https://matthewrettino.com/2014/02/07/beyond-this-dark-house-by-guy-gavriel-kay/",
+  "quote": "Coles writes that Kay has an ease with crafting words",
+  "page": "review body, third paragraph",
+  "kind": "reception",
+  "polarity": "asserts",
+  "date": "2014-02-07",
+  "routeHint": "live URL with browser user agent (curl)",
+  "registerHint": "none",
+  "confidence": "medium",
+  "angle": "silmarillion-and-verse",
+  "verdict": {
+   "index": 936,
+   "verdict": "PARTIAL",
+   "trueWording": "Coles writes that Kay has an ease with crafting words",
+   "unsupportedLimb": "'the poet Don Coles' - the page never describes Coles as a poet (it calls Kay a poet); Coles is introduced only as writer of the introduction",
+   "note": "Live page (200). Third body paragraph reads 'In his introduction to the collection, Don Coles quotes a line of Kay's verse ... Whether in prose or poetry,' then the quoted clause verbatim. Introduction, collection and the prose-or-poetry limb all check out; only the 'poet' epithet is absent from the page.",
+   "fromFile": "verdicts-kay-i920-969.json"
+  }
+ },
+ {
+  "index": 982,
+  "feature": "other: narrator roster",
+  "claim": "Kay's site records that Simon Vance read Under Heaven for the audiobook as he had for Tigana and the Fionavar trilogy.",
+  "source": "Guy Gavriel Kay, Brightweavings Under Heaven tour journal, 18 February 2010",
+  "url": "https://brightweavings.com/books/under-heaven-tour-journal/",
+  "quote": "do the reading, as he did for Tigana and the Fionavar trilogy",
+  "page": "Under Heaven tour journal, 18 February 2010",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "2010-02-18",
+  "routeHint": "live fetch with browser UA",
+  "registerHint": "none",
+  "confidence": "high",
+  "angle": "translators-and-ear",
+  "verdict": {
+   "index": 982,
+   "verdict": "PARTIAL",
+   "trueWording": "producer ‘would like to have Simon Vance do the reading’",
+   "note": "Under Heaven tour journal, post of Thursday, February 18, 2010. The quoted words are on the page verbatim, and the Tigana / Fionavar trilogy limb is fully supported. But the post reports an email from Penguin USA that the audio book's producer WOULD LIKE Vance to read; Kay says he is 'completely onside' and that they will be going into studio soon. Vance is named only this once in the whole journal, so the page records a proposal, not a completed reading of Under Heaven.",
+   "unsupportedLimb": "that Simon Vance actually read Under Heaven — the page records only the producer's request and a not-yet-started studio session",
+   "fromFile": "verdicts-kay-i973-991.json"
   }
  }
 ]

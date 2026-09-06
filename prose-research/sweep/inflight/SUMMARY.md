@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 19:31:41 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 19:37:44 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -348,7 +348,7 @@
 | kay | verifier | i700-712 | failed | 0 | — | verdict file absent | 17:51:49 |
 | kay | verifier | i711-711 | result | 1 | — | verdict file WRITTEN | 18:14:26 |
 | kay | verifier | i713-727 | failed | 0 | — | verdict file absent | 19:45:36 |
-| kay | verifier | i715-749 | in-flight | 10 | — | verdict file absent | 23:30:20 |
+| kay | verifier | i715-749 | result | 10 | — | verdict file WRITTEN | 23:32:58 |
 | kay | verifier | i728-742 | failed | 0 | — | verdict file absent | 19:45:36 |
 | kay | verifier | i743-757 | failed | 2 | — | verdict file absent | 19:45:56 |
 | kay | verifier | i75-89 | result | 1 | — | verdict file WRITTEN | 17:33:59 |
@@ -365,13 +365,17 @@
 | kay | verifier | i863-877 | failed | 0 | — | verdict file absent | 19:46:18 |
 | kay | verifier | i878-892 | failed | 0 | — | verdict file absent | 19:46:18 |
 | kay | verifier | i893-907 | failed | 0 | — | verdict file absent | 19:46:18 |
+| kay | verifier | i895-919 | in-flight | 6 | — | verdict file WRITTEN | 23:37:40 |
 | kay | verifier | i90-104 | result | 4 | — | verdict file WRITTEN | 17:34:44 |
 | kay | verifier | i908-922 | failed | 0 | — | verdict file absent | 19:46:18 |
+| kay | verifier | i920-969 | result | 12 | — | verdict file WRITTEN | 23:36:40 |
 | kay | verifier | i923-937 | failed | 0 | — | verdict file absent | 19:46:18 |
 | kay | verifier | i938-952 | failed | 0 | — | verdict file absent | 19:46:19 |
 | kay | verifier | i953-967 | failed | 0 | — | verdict file absent | 19:46:18 |
 | kay | verifier | i968-982 | failed | 0 | — | verdict file absent | 19:46:18 |
+| kay | verifier | i973-991 | result | 8 | — | verdict file WRITTEN | 23:36:54 |
 | kay | verifier | i983-997 | failed | 0 | — | verdict file absent | 19:46:19 |
+| kay | verifier | i992-1005 | in-flight | 13 | — | verdict file WRITTEN | 23:37:36 |
 | kay | verifier | i998-1006 | failed | 0 | — | verdict file absent | 19:46:19 |
 | leguin | critic |  | failed | 0 | — | — | 19:46:19 |
 | leguin | critic |  | result | 32 | critic-leguin.md | — | 18:21:42 |
@@ -553,15 +557,15 @@
 | wolfe | critic |  | result | 0 | critic-wolfe.md | — | 18:34:19 |
 | wolfe | critic |  | failed | 0 | — | — | 17:52:41 |
 | wolfe | finder | close-continued | failed | 42 | — | 136 claims, complete=True @19:26:41 | 19:45:45 |
-| wolfe | finder | close-continued | in-flight | 41 | — | 136 claims, complete=True @19:26:41 | 23:27:24 |
+| wolfe | finder | close-continued | result | 41 | — | 136 claims, complete=True @19:26:41 | 23:31:55 |
 | wolfe | finder | close-continued | in-flight | 1 | — | 136 claims, complete=True @19:26:41 | 21:31:03 |
 | wolfe | finder | counter | result | 68 | — | 114 claims, complete=True @17:25:54 | 19:22:08 |
 | wolfe | finder | editors | result | 35 | — | 78 claims, complete=True @17:25:54 | 19:17:55 |
 | wolfe | finder | le-guin | result | 56 | — | 31 claims, complete=True @17:25:54 | 19:25:33 |
 | wolfe | finder | measure | result | 36 | find-wolfe-measure.md, found-wolfe-measure.json, metrics.py | 38 claims, complete=True @17:25:54 | 19:18:11 |
-| wolfe | finder | monographs | failed | 71 | — | 201 claims, complete=False @19:30:35 | 19:46:26 |
-| wolfe | finder | monographs | in-flight | 65 | — | 201 claims, complete=False @19:30:35 | 23:31:30 |
-| wolfe | finder | monographs | in-flight | 8 | — | 201 claims, complete=False @19:30:35 | 21:31:03 |
+| wolfe | finder | monographs | failed | 71 | — | 238 claims, complete=True @19:34:41 | 19:46:26 |
+| wolfe | finder | monographs | in-flight | 69 | — | 238 claims, complete=True @19:34:41 | 23:35:51 |
+| wolfe | finder | monographs | in-flight | 8 | — | 238 claims, complete=True @19:34:41 | 21:31:03 |
 | wolfe | finder | primary-on-disk | result | 43 | — | 152 claims, complete=True @17:25:54 | 19:50:37 |
 | wolfe | regrade | regrade-r4 | result | 0 | — | — | 17:43:04 |
 | wolfe | regrade | regrade-r6 | failed | 0 | — | — | 19:50:40 |

@@ -358,5 +358,37 @@
   "substantive": false,
   "date": "1986",
   "route": "local PDF text layer; two independent extractions both unusable, so no new quotes taken (the predecessor's Gordon claims stand)"
+ },
+ {
+  "title": "John Clute, 'It Is Becoming to Grapple with This Book', Excessive Candour, Science Fiction Weekly issue 197 -- Clute direct, read in full",
+  "url": "https://gwern.net/doc/fiction/gene-wolfe/2001-01-29-johnclute-excessivecandorv7no5issue197-itisbecomingtograpplewiththisbook.html",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2001-01-29",
+  "route": "gwern.net mirror of the defunct scifi.com column"
+ },
+ {
+  "title": "John Clute, review of The Best of Gene Wolfe, SCI FI Wire -- Clute direct, read in full",
+  "url": "https://gwern.net/doc/fiction/gene-wolfe/2009-04-06-johnclute-thebestofgenewolfe-review.html",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2009-04-06",
+  "route": "gwern.net mirror of the defunct SCI FI Wire review"
+ },
+ {
+  "title": "Marc A. Aramini, '...Does It Mean? Gene Wolfe: Perverse Puzzle Maker', PhD dissertation, University of Nevada Las Vegas -- 654 KB of clean text, searched and read in the relevant chapters",
+  "url": "https://gwern.net/doc/fiction/gene-wolfe/2019-aramini.pdf",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2019-05",
+  "route": "PDF fetched from gwern.net, text extracted with pdftotext -layout"
+ },
+ {
+  "title": "Marc Aramini interviewed by Nigel Price, 'Everything has to be true somehow', Ultan's Library",
+  "url": "https://ultan.org.uk/everything-has-to-be-true-somehow/",
+  "kind": "analysis",
+  "substantive": true,
+  "date": "2020-06-08",
+  "route": "live page fetched with a browser user agent"
  }
 ]

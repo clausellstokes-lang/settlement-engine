@@ -18964,7 +18964,7 @@
    "index": 715,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "between story as represented in history and story as transformed by fantasy",
-   "note": "Wayback raw capture of the Questia article preview reached and read directly. The quoted phrase appears word for word in the opening 'Article excerpt' paragraph, in a sentence saying Kay has been fascinated with the multiplicity of story and with the negotiations between new and old stories. Byline 'By Wolfe, Gary K.' and 'Journal of the Fantastic in the Arts, Vol. 20, No. 2, Spring 2009' are on the page; the page number 238 is not shown on the preview but is not a limb of the claim sentence.",
+   "note": "Wayback raw capture of the Questia preview reached and read directly. The quoted phrase appears word for word in the opening Article excerpt paragraph, in a sentence about Kay being fascinated with the multiplicity of story and the negotiations between new stories and old ones. Byline 'By Wolfe, Gary K.' and the JFA 20.2 Spring 2009 masthead are on the page; p. 238 is not shown on the preview but is not a limb of the claim sentence.",
    "fromFile": "verdicts-kay-i715-749.json"
   },
   "716": {
@@ -18979,7 +18979,7 @@
    "verdict": "PARTIAL",
    "unsupportedLimb": "'the ICFA audience' - the page never names ICFA or the International Conference on the Fantastic in the Arts",
    "trueWording": "a defense of fantasy literature as a way of addressing history",
-   "note": "Wayback raw capture reached and read directly. The quotation is verbatim, inside 'I'm then going to perform poised arabesques ... and connect this to a defense of fantasy literature as a way of addressing history and avoiding these ethical concerns', immediately after the privacy/autonomy thesis - so the privacy-to-fantasy connection limb is fully supported. The venue is given only circumstantially: 'guests of honor', Farah Mendlesohn and Christine Mains, 'spring training here in Florida'. grep for 'ICFA', 'IAFA' and 'international conference' on the fetched page returns zero hits, so the ICFA identification is an inference, not the page's own wording.",
+   "note": "Wayback raw capture reached and read directly. The quotation is verbatim, in the sentence where Kay says he will 'connect this to' that defence, immediately after stating his privacy-and-autonomy thesis, so the privacy-to-fantasy limb is fully supported. The venue is given only circumstantially: he addresses 'guests of honor' alongside Farah Mendlesohn and Christine Mains, with a nod to 'spring training here in Florida'. grep for ICFA, IAFA and 'international conference' on the fetched page returns zero hits, so the ICFA identification is an inference, not the page's wording.",
    "fromFile": "verdicts-kay-i715-749.json"
   },
   "718": {
@@ -19000,35 +19000,35 @@
    "index": 720,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "This is nonsense, and it is pervasive",
-   "note": "brightweavings.com/privacy/ fetched live (HTTP 200) and read in full. The page quotes the New York Times on Oates's Blonde saying a novel can 'give us her interior world', then asks what has happened 'when someone suggests that a novel gives us the inner world of a real person? This is nonsense, and it is pervasive.' Quotation verbatim; every limb supported.",
+   "note": "brightweavings.com/privacy/ fetched live (HTTP 200) and read in full. The page quotes a New York Times line on Oates's Blonde about a novel giving 'her interior world', then asks what has happened when someone suggests a novel gives the inner world of a real person, and answers with the quoted sentence. Quotation verbatim; every limb supported.",
    "fromFile": "verdicts-kay-i715-749.json"
   },
   "721": {
    "index": 721,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "the absence of a record, offers license or opportunity",
-   "note": "Same live page. Kay quotes Atwood on Alias Grace, then writes that the implication is that the obscurity of the subject and the absence of a record offers license or opportunity, and immediately contrasts Findley with Jung and Johnson with Smallwood, where the documented existence of the well-known subject is 'not seen as impacting on license, but perhaps actually conferring it'. Both limbs supported verbatim.",
+   "note": "Same live page, the Alias Grace passage. Kay quotes Atwood's fear of a biscuit box of Grace Marks letters, then draws the implication in the quoted words, and immediately contrasts Findley on Jung and Johnson on Smallwood, where the documented existence of a well-known subject is instead seen as 'actually conferring' licence. Both limbs supported verbatim.",
    "fromFile": "verdicts-kay-i715-749.json"
   },
   "722": {
    "index": 722,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "Shouldn't we care what is real and what is made up?",
-   "note": "Same live page. The question is verbatim, and it directly follows the Calgary Herald review of Johnson's Colony ('I have no idea how factual the novel is, I don't care') and the New York Times on Blonde, which the text introduces as remarks worth pausing over. The plural 'reviewers' is carried by the pair of reviews Kay sets side by side, one of which explicitly says it does not care.",
+   "note": "Same live page. The question is verbatim. It directly follows two reviewer remarks Kay sets side by side and asks the reader to pause over: the Calgary Herald on Johnson's Colony, whose reviewer says 'I don't care' how factual the novel is, and the New York Times on Blonde. The plural 'reviewers' is carried by that pair.",
    "fromFile": "verdicts-kay-i715-749.json"
   },
   "723": {
    "index": 723,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "an expanded perception of entitlement",
-   "note": "Same live page. The phrase is verbatim in 'with all the variations of purpose and craft, what we can see in all of these works - and countless inferior ones - is an expanded perception of entitlement', summing up the run of novels by Findley, Johnson, Ondaatje, Atwood, Oates, Cunningham, DeLillo, Doctorow and Duffy, and it sits immediately before the closing return to Yogi Berra, exactly as the claim's page field says.",
+   "note": "Same live page. The phrase is verbatim in the sentence saying that, with all the variations of purpose and craft, what we see in all of these works is that expanded perception. It sums up the run of novels by Findley, Johnson, Ondaatje, Atwood, Oates, Cunningham, DeLillo, Doctorow and Duffy, and sits immediately before the closing return to Yogi Berra, exactly as the claim's page field says.",
    "fromFile": "verdicts-kay-i715-749.json"
   },
   "724": {
    "index": 724,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "the injury caused by seeing cannot be measured",
-   "note": "Wayback raw capture of the JFA version reached and read. The rabbinical passage is quoted verbatim: even the smallest intrusion into private space by the unwanted gaze causes damage, 'because the injury caused by seeing cannot be measured'. The societal-standard limb is supported by the following sentences - the anxiety 'was judged worth assuaging by that society', the breach could not be permitted by the individual, and the intrusion 'was an offense against society, how it defined itself'.",
+   "note": "Wayback raw capture of the JFA version reached and read. The rabbinical passage is quoted verbatim in the clause naming the unmeasurable injury. The societal-standard limb is supported by the surrounding sentences: the anxiety was 'judged worth assuaging by that society', the breach could not be permitted by the individual, and the intrusion was 'an offense against society, how it defined itself'.",
    "fromFile": "verdicts-kay-i715-749.json"
   },
   "725": {
@@ -19063,7 +19063,7 @@
    "index": 729,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "All three of them strongly emphasize the transitory nature of things",
-   "note": "The repository PDF is an 18-page image-only Konica Minolta scan with no text layer (pdftotext yielded 18 bytes), so I rendered it at 250 dpi and OCRed every page with tesseract. On the page whose printed folio reads 222, under the running head 'Sylwia Borowska-Szerszun', the three sayings are set out as a list - Asharite 'The deeds of men, as footprints in the desert' (109), Kindath 'Nothing under the circling moon is fated to last' (109), Jaddite 'Even the sun goes down' (110) - followed immediately by the quoted sentence. Quotation verbatim; both limbs and the page number confirmed.",
+   "note": "The repository PDF is an 18-page image-only Konica Minolta scan with no text layer (pdftotext yielded 18 bytes), so I rendered it at 250 dpi and OCRed every page with tesseract. On the page whose printed folio reads 222, under the running head 'Sylwia Borowska-Szerszun', the three sayings are set out as a labelled list - Asharite (109), Kindath (109), Jaddite (110) - followed immediately by the quoted sentence. Quotation verbatim; both limbs and the page number confirmed.",
    "fromFile": "verdicts-kay-i715-749.json"
   },
   "730": {
@@ -19084,14 +19084,14 @@
    "index": 732,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "fantasy literature as one of many forms of recalling the Middle Ages",
-   "note": "The identifier URL returns HTTP 301; following the redirect to the Cambridge Core chapter landing page gave the full chapter Summary. The quoted phrase appears verbatim in 'we can see fantasy literature as one of many forms of recalling the Middle Ages in contemporary culture'. Sylwia Borowska-Szerszun is named as the chapter author on the page, and the page range is given as pp. 155-171, so the p. 155 opening is consistent.",
+   "note": "The identifier URL returns HTTP 301; following the redirect to the Cambridge Core chapter landing page gave the full chapter Summary. The quoted phrase appears verbatim in a sentence saying we can see fantasy literature that way 'in contemporary culture'. Sylwia Borowska-Szerszun is named as chapter author on the page and the range is given as pp. 155-171, consistent with a p. 155 opening.",
    "fromFile": "verdicts-kay-i715-749.json"
   },
   "733": {
    "index": 733,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "medievalism interrogates how different groups, individuals, or eras",
-   "note": "Same Cambridge Core Summary. The Marshall quotation runs 'medievalism interrogates how different groups, individuals, or eras for various reasons, often distortedly, remember the Middle Ages', attributed to David W. Marshall in the introduction to a collection on the Middle Ages in popular culture, and the next sentence says 'Marshall's observation proves an inspiring starting point'. Quotation verbatim; the starting-point limb is the page's own word.",
+   "note": "Same Cambridge Core Summary. The Marshall quotation continues past the claim's fragment to 'remember the Middle Ages', is attributed on the page to David W. Marshall's introduction to a collection on the Middle Ages in popular culture, and the next sentence calls his observation 'an inspiring starting point'. Quotation verbatim; the starting-point limb is the page's own word.",
    "fromFile": "verdicts-kay-i715-749.json"
   },
   "734": {
@@ -19113,7 +19113,7 @@
    "verdict": "PARTIAL",
    "unsupportedLimb": "'rather than the events themselves' - Kay names the rebellion's colossal scale alongside its consequence, not consequence instead of the events",
    "trueWording": "colossal scale and consequence (through ripple effects)",
-   "note": "medievalists.net fetched live (HTTP 200) and read directly. Answering which place he most enjoyed researching, Kay says he found Tang China mesmerizing 'partly because my gateway was the astonishingly great poets of that time, partly because of the colossal scale and consequence (through ripple effects) of the An Lushan Rebellion in the middle of the 8th century.' The quotation and the 'part of what drew him' limb are exact, but the source couples scale with consequence rather than setting ripple effects against the events, so the contrastive limb is the claim's own addition.",
+   "note": "medievalists.net fetched live (HTTP 200) and read directly. Answering which place he most enjoyed researching, Kay says he found Tang China mesmerizing partly because of the poets and partly because of the quoted 'scale and consequence' of the An Lushan Rebellion. The quotation and the 'part of what drew him' limb are exact, but the source couples scale with consequence rather than setting ripple effects against the events, so the contrastive limb is the claim's own addition.",
    "fromFile": "verdicts-kay-i715-749.json"
   },
   "737": {
@@ -19127,7 +19127,7 @@
    "index": 738,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "Reality has become disenchanted. The gods have left.",
-   "note": "brightweavings.com/nath_arbonne/ fetched live (HTTP 200) and read in full; the page credits Nathalie Labrousse-Marchau, translated by Francois Vincent. The two sentences are verbatim at the close of the paragraph tracing the recession: in Fionavar gods were present and magic permeated everything; in Tigana 'the gods are far off' and magic must be invoked at the cost of two fingers; in A Song for Arbonne 'the break is complete', with no magic and gods reduced to focal points for faith.",
+   "note": "brightweavings.com/nath_arbonne/ fetched live (HTTP 200) and read in full; the page credits Nathalie Labrousse-Marchau, translated by Francois Vincent. The two sentences are verbatim at the close of the paragraph tracing the recession: in Fionavar gods are present and magic permeates everything; in Tigana 'the gods are far off' and magic must be invoked at the cost of two fingers; in A Song for Arbonne 'the break is complete', with no magic and gods reduced to focal points for faith.",
    "fromFile": "verdicts-kay-i715-749.json"
   },
   "739": {
@@ -19141,7 +19141,7 @@
    "index": 740,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "The shadows are inextricably linked to the light",
-   "note": "Same live page, penultimate paragraph. 'With Guy Gavriel Kay, we will not find the dichotomy of \"good\" and \"evil\" that is so frequently employed in typical fantasy. The shadows are inextricably linked to the light and the light to the shadows.' Quotation verbatim; the genre-refusal limb and the binding-together limb are both the page's own wording.",
+   "note": "Same live page, penultimate paragraph. The sentence before the quotation says that with Kay we will not find the good-and-evil dichotomy 'so frequently employed in typical fantasy', and the quoted sentence continues 'and the light to the shadows'. Quotation verbatim; both the genre-refusal limb and the binding-together limb are the page's own wording.",
    "fromFile": "verdicts-kay-i715-749.json"
   },
   "741": {
@@ -19156,7 +19156,7 @@
    "verdict": "PARTIAL",
    "unsupportedLimb": "the attribution to Siourbas - the MUSE table of contents lists chapter titles and page ranges only, with no author names",
    "trueWording": "Kay's Tigana and Randy Bradshaw's The Song Spinner",
-   "note": "muse.jhu.edu/book/6623 fetched live (HTTP 200) and read directly. The table of contents carries 'More Than Just Survival: The Successful Quest for Voice in Guy Gavriel Kay's Tigana and Randy Bradshaw's The Song Spinner', 'pp. 73-80', so the two-work title limb is verbatim and the eight-page limb is exact. But grep for 'Siourbas' returns zero hits in both the rendered text and the raw HTML: every entry is rendered as a bare h3 title plus a page div, with the .toc .entry .author slot empty, so this page cannot confirm who wrote the chapter.",
+   "note": "muse.jhu.edu/book/6623 fetched live (HTTP 200) and read directly. The table of contents carries the chapter title 'More Than Just Survival: The Successful Quest for Voice in' the two named works, with 'pp. 73-80', so the two-work limb is verbatim and the eight-page limb is exact. But grep for 'Siourbas' returns zero hits in both the rendered text and the raw HTML: every entry renders as a bare h3 title plus a page div, with the .toc .entry .author slot empty, so this page cannot confirm who wrote the chapter.",
    "fromFile": "verdicts-kay-i715-749.json"
   },
   "743": {
@@ -19205,7 +19205,7 @@
    "index": 749,
    "verdict": "VERIFIED_VERBATIM",
    "trueWording": "detach the past from its particular settings",
-   "note": "Cambridge Core page fetched live (HTTP 200) and read directly; Sylwia Borowska-Szerszun is named as chapter author and the page range is given as pp. 174-191. The chapter Summary reads that Kay 'has accustomed his readers to a specific form of historical fantasy, which is grounded in history but uses the elements of the fantastic in order to detach the past from its particular settings and give it a more universal feel'. Quotation verbatim and every limb - characteristic form, grounded in history, fantastic elements, detaching the past - supported. The wording sits in the Cambridge Core abstract rather than in body text of p. 174.",
+   "note": "Cambridge Core page fetched live (HTTP 200) and read directly; Sylwia Borowska-Szerszun is named as chapter author and the range given as pp. 174-191. The chapter Summary says Kay has accustomed readers to a form of historical fantasy 'grounded in history' that uses the fantastic to detach the past from its particular settings 'and give it a more universal feel'. Quotation verbatim and every limb supported. The wording sits in the Cambridge Core abstract rather than in body text of p. 174.",
    "fromFile": "verdicts-kay-i715-749.json"
   },
   "750": {
@@ -20225,6 +20225,13 @@
    "note": "Raw page, Q3 answer, final sentence: framed as 'my aspiration in my historical fantasies', wanting the novels to work for those who know the periods 'but also to be engaging and accessible to readers who know nothing at all of the actual historical periods.'",
    "fromFile": "verdicts-kay-i858-894.json"
   },
+  "895": {
+   "index": 895,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I like playing variations on some other writers",
+   "note": "brightweavings.com fetched live, HTTP 200, raw HTML. Q&A Q4: the analogy limb is explicit - Kay first likes the 'variations on a theme' notion inherent in a fantasy novel inspired by an actual historical period, then 'In the same way' the quoted clause. Page confirms the Penguin Canada provenance in its standfirst.",
+   "fromFile": "verdicts-kay-i895-919.json"
+  },
   "896": {
    "index": 896,
    "verdict": "SKIPPED_TRIAGE",
@@ -20260,6 +20267,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r8.json"
   },
+  "901": {
+   "index": 901,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "They worked on the book at Oxford from 1974-75",
+   "note": "locusmag.com fetched live, HTTP 200. Biographical note, first paragraph; 'They' = Kay and Christopher Tolkien, named in the preceding sentence. Page dated May 12, 2025, matching the source line.",
+   "fromFile": "verdicts-kay-i895-919.json"
+  },
   "902": {
    "index": 902,
    "verdict": "SKIPPED_TRIAGE",
@@ -20273,6 +20287,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r8.json"
+  },
+  "904": {
+   "index": 904,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "studded with poetry quoted in Scots, French, Spanish, Italian, Latin",
+   "note": "foxedquarterly.com fetched live, HTTP 200. Article 'Stumbling with Precision', Desert Island Discs paragraph; the quoted list continues to ten languages. Concealment limb rests on the page's framing - the interview called one of the worst ways to gain insight, Dunnett presenting herself as a housewife - but the page's own verb is 'No one mentions', which spreads the omission across her and Plomley rather than her persona alone. Extract credit line reads Slightly Foxed Issue 81, 2024.",
+   "fromFile": "verdicts-kay-i895-919.json"
   },
   "905": {
    "index": 905,
@@ -20288,12 +20309,111 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r8.json"
   },
+  "907": {
+   "index": 907,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the conversation isn't the same. It bears a resemblance",
+   "note": "lareviewofbooks.org fetched live, HTTP 200; datePublished 2016-08-14, Christine Fischer Guy, matching the source line. Multiple-points-of-view answer. Page says 'in this novel', which is Children of Earth and Sky throughout the interview, so the title limb holds.",
+   "fromFile": "verdicts-kay-i895-919.json"
+  },
   "908": {
    "index": 908,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r8.json"
+  },
+  "909": {
+   "index": 909,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "pick out what's made up and what's real, you've botched your storytelling",
+   "note": "Same LARB page, one fetch. Bring Up the Bodies question, as the claim's page field says; Kay's full sentence opens 'To my mind,' and ends on an exclamation mark. Both limbs - the picking out and the botched storytelling - are in one sentence.",
+   "fromFile": "verdicts-kay-i895-919.json"
+  },
+  "910": {
+   "index": 910,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I don't know of any evidence that Kay wrote any of it",
+   "note": "sacnoths.blogspot.com Feb 2020 post fetched live, HTTP 200, full post plus comment thread. Third paragraph, as claimed. 'It' is the 1977 SILMARILLION, named in the same sentence, so the 'published Silmarillion' limb holds; Rateliff adds he would be surprised if Kay had.",
+   "fromFile": "verdicts-kay-i895-919.json"
+  },
+  "911": {
+   "index": 911,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "far more likely that Kay helped in the sorting and sequencing",
+   "note": "Same Feb 2020 post, one fetch. Fourth paragraph, as claimed; Rateliff's sentence runs 'I think it far more likely that Kay helped in the sorting and sequencing of the manuscripts', so the 'judges it far more likely' limb is on the page word for word.",
+   "fromFile": "verdicts-kay-i895-919.json"
+  },
+  "912": {
+   "index": 912,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I think Kay also served as a sounding board",
+   "note": "Same Feb 2020 post, fourth paragraph. Both limbs present: the sounding-board clause verbatim, and the advice limb in the next sentence, which says Christopher sometimes took Kay's advice with one or two known examples. Rateliff adds the decisions remained entirely Christopher's.",
+   "fromFile": "verdicts-kay-i895-919.json"
+  },
+  "913": {
+   "index": 913,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I think Kilby had the least input and Kay probably the most",
+   "note": "Same Feb 2020 post, sixth paragraph, as claimed; the sentence ranks all three, placing Taum between the two and closer to Kay. Naming note: the page writes 'Kilby' without a forename (the claim's 'Clyde' is not on the page), while 'Taum Santoski' does appear in full in the fifth paragraph.",
+   "fromFile": "verdicts-kay-i895-919.json"
+  },
+  "914": {
+   "index": 914,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Kay's nascent creativity in the matter of narrative played a part",
+   "note": "sacnoths.blogspot.com Jan 2020 post fetched live, HTTP 200, full letter plus both comments. Noad's letter, third paragraph; his framing verb is 'I think it reasonable to suppose', matching the claim's 'thinks it reasonable to suppose', and he immediately adds that the details are unknown.",
+   "fromFile": "verdicts-kay-i895-919.json"
+  },
+  "915": {
+   "index": 915,
+   "verdict": "PARTIAL",
+   "trueWording": "Unless Christopher Tolkien kept some sort of detailed diary of the process",
+   "note": "Same Jan 2020 post, Noad's letter, third paragraph, one fetch. The quoted clause is verbatim, and the never-known limb is supported ('I doubt if we'll ever know'). But the claim's 'unless' makes Kay's silence the sole exception, whereas Noad's sentence is a disjunction whose first branch is a Christopher Tolkien diary. Graded PARTIAL rather than verbatim because a downstream writer using the claim as worded would drop Noad's other named route.",
+   "unsupportedLimb": "that Kay breaking his silence is the only route to knowing - Noad gives it as one of two conditions, the other being a detailed Christopher Tolkien diary of the composition process",
+   "fromFile": "verdicts-kay-i895-919.json"
+  },
+  "916": {
+   "index": 916,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "unquestionably the passage about Thingol's death is an invention of the editors",
+   "note": "Same Jan 2020 post, Noad's letter, third paragraph. 'Unquestionably' is on the page, immediately before the quoted clause. The published-Silmarillion limb is set by the letter's opening and by the Kane quotation Noad reproduces, which places Thingol's death in the dark recesses of Menegroth.",
+   "fromFile": "verdicts-kay-i895-919.json"
+  },
+  "917": {
+   "index": 917,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Here I think is where Guy Gavriel Kay enters the picture",
+   "note": "Same Jan 2020 page, one fetch; the passage is inside the Anonymous comment of January 29, 2020, quoting Noad. Both limbs on the page: the different-skills contrast and the 'degree of creativity' sentence precede the quoted clause. PROVENANCE CORRECTION for the source field: the commenter states the Tolkien Plaza review itself is NOT archived and that he is quoting from an archived discussion about the review in which he had previously quoted Noad - so this is Noad at second hand, not the archived review.",
+   "fromFile": "verdicts-kay-i895-919.json"
+  },
+  "918": {
+   "index": 918,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Kay's idea to produce a finished narrative rather than a scholarly version",
+   "note": "Same Jan 2020 page, same Anonymous comment of January 29, 2020. Noad's clause is a 'Given that' premise on which he builds his submission that the published Silmarillion owes a good deal to Kay's input, and he adds parenthetically that Kay has since gone on record against publishing Tolkien's unfinished texts. Same provenance correction as index 917: archived discussion quoting the review, not the review itself.",
+   "fromFile": "verdicts-kay-i895-919.json"
+  },
+  "919": {
+   "index": 919,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "mistakenly referred to the scene of Thingol's death as J.R.R. Tolkien's work",
+   "note": "Same Jan 2020 page, first comment in the thread, dated January 26, 2020, as the claim's page field says. All three names are on the page - Tom Shippey, Verlyn Flieger, Brian Rosebury - and the editors'-scene limb is carried by the commenter's closing clause crediting Christopher Tolkien and Guy Gavriel Kay with crafting it. ATTRIBUTION CORRECTION for the source field: the comment is signed N.E. Brigand, not an anonymous commenter (the separate Anonymous comment is the later January 29 one).",
+   "fromFile": "verdicts-kay-i895-919.json"
+  },
+  "920": {
+   "index": 920,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "he created the final publish work with Guy Kay's help",
+   "note": "Live page (200). Kane's answer to the 'what made you decide a book should be written' question contains the quote verbatim, in the sentence saying Christopher Tolkien 'provided just as remarkably little insight into the final step of the process'. Every limb (Kane speaking; remarkably little insight; final step; Kay's help) supported.",
+   "fromFile": "verdicts-kay-i920-969.json"
+  },
+  "921": {
+   "index": 921,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Kane's answer seems to be yes",
+   "note": "Live page (200). Ordway's review closes a paragraph with a rhetorical question asking whether the cumulative effect of the edits sufficed to change Tolkien's prose style for the worse, then the quoted sentence. Page says 'these edits' where the claim says 'editorial cuts'; the referenced edits explicitly include removal of descriptive detail, so the limb holds.",
+   "fromFile": "verdicts-kay-i920-969.json"
   },
   "922": {
    "index": 922,
@@ -20372,12 +20492,41 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r8.json"
   },
+  "933": {
+   "index": 933,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "he became an editor of The Silmarillion in 1974 (Ordway 140)",
+   "note": "Live page (200). BrightWeavings header states it is the 2012 honours thesis by Matthew Rettino written at McGill; the quoted clause with its parenthetical Ordway citation stands in the opening abstract/introduction paragraph before section 'I. Theory of Fantasy and Historical Fiction'.",
+   "fromFile": "verdicts-kay-i920-969.json"
+  },
+  "934": {
+   "index": 934,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The strongest single literary influence on Kay's creation of The Fionavar",
+   "note": "Live page (200). In section 'I. The Fionavar Tapestry' the sentence continues by naming Tolkien and calling it a natural enough result after Kay co-edited The Silmarillion with Christopher Tolkien; both limbs supported.",
+   "fromFile": "verdicts-kay-i920-969.json"
+  },
   "935": {
    "index": 935,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r8.json"
+  },
+  "936": {
+   "index": 936,
+   "verdict": "PARTIAL",
+   "trueWording": "Coles writes that Kay has an ease with crafting words",
+   "unsupportedLimb": "'the poet Don Coles' - the page never describes Coles as a poet (it calls Kay a poet); Coles is introduced only as writer of the introduction",
+   "note": "Live page (200). Third body paragraph reads 'In his introduction to the collection, Don Coles quotes a line of Kay's verse ... Whether in prose or poetry,' then the quoted clause verbatim. Introduction, collection and the prose-or-poetry limb all check out; only the 'poet' epithet is absent from the page.",
+   "fromFile": "verdicts-kay-i920-969.json"
+  },
+  "937": {
+   "index": 937,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "nods towards his relationship with J. R. R. Tolkien",
+   "note": "Live page (200). Sentence names the poem 'If I Should Fly Across the Sea Again' and adds 'to whom the poem is dedicated', supporting the dedication limb. Paragraph is the last body paragraph, not the sixth as the claim's page field says; that is a locator, not a limb.",
+   "fromFile": "verdicts-kay-i920-969.json"
   },
   "938": {
    "index": 938,
@@ -20407,6 +20556,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r8.json"
   },
+  "942": {
+   "index": 942,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "every detail is seamlessly woven into her astonishing tapestries",
+   "note": "Live host returned 403 to both browser UAs; reached via Wayback raw capture https://web.archive.org/web/20240616085027id_/... In the section bylined 'Marie Macpherson, author of The Knox Trilogy', the sentence continues ': the profusion of sounds, tastes, colours, and textures offer a sensory experience', and is preceded by 'Painstakingly researched'. All limbs supported.",
+   "fromFile": "verdicts-kay-i920-969.json"
+  },
   "943": {
    "index": 943,
    "verdict": "SKIPPED_TRIAGE",
@@ -20434,6 +20590,41 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r8.json"
+  },
+  "947": {
+   "index": 947,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "author and keynote speaker @ DD Centenary Gathering 2023",
+   "note": "Same Wayback capture (live host 403). The string is the byline under the 'Guy Gavriel Kay' heading, verbatim including the '@'.",
+   "fromFile": "verdicts-kay-i920-969.json"
+  },
+  "948": {
+   "index": 948,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "she was wonderful in person, not just in print",
+   "note": "Same Wayback capture (live host 403). Kay's contribution reads that from the first meeting 'and through many other encounters' the quoted clause follows, supporting the many-encounters limb.",
+   "fromFile": "verdicts-kay-i920-969.json"
+  },
+  "949": {
+   "index": 949,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "working on the papers that became The Silmarillion",
+   "note": "Live page (200), BrightWeavings reproduction headed 'This appreciation first appeared in Locus Magazine, December 2001.' First paragraph: Kay met Dunnett in the spring of 1975 while living in a village called Hanney just outside Oxford, then the quoted clause. All four limbs (1975, spring, village outside Oxford, Silmarillion papers) supported.",
+   "fromFile": "verdicts-kay-i920-969.json"
+  },
+  "950": {
+   "index": 950,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "which was a part of the editing process",
+   "note": "Live page (200). First paragraph: going through the Tolkien correspondence is followed by the quoted parenthesis verbatim; Kay is the one doing it, so the 'he worked on' limb holds.",
+   "fromFile": "verdicts-kay-i920-969.json"
+  },
+  "951": {
+   "index": 951,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I didn't discuss the details of editing The Silmarillion",
+   "note": "Live page (200). Parenthesis continues 'then, and still don't', inside the paragraph describing the three-hour conversation at Dunnett's house following the spring 1975 call, so both the 1975/Dunnett limb and the still-does-not limb hold. It is the third body paragraph, not the fourth.",
+   "fromFile": "verdicts-kay-i920-969.json"
   },
   "952": {
    "index": 952,
@@ -20519,6 +20710,20 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r8.json"
   },
+  "964": {
+   "index": 964,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "enticed me into a paper chase as I tried to locate",
+   "note": "Live page (200) at digitalmedievalist.com, titled 'The Books of Dorothy Dunnett - Celtic Studies Resources', copyright line names Lisa L. Spangenberg. Opening paragraph credits the enormous quantity of literary allusions and quotations in the Lymond Chronicles, then the quoted clause, ending 'Dunnett's sources.'",
+   "fromFile": "verdicts-kay-i920-969.json"
+  },
+  "965": {
+   "index": 965,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "offer the sources and even the translations, for many of the allusions",
+   "note": "Same live page, section 'The Dorothy Dunnet Companions'; subject of the sentence is 'The two Companions books', and the page lists The Dorothy Dunnett Companion and Companion II. Claim's 'supply' paraphrases the page's 'offer'; quote itself is verbatim.",
+   "fromFile": "verdicts-kay-i920-969.json"
+  },
   "966": {
    "index": 966,
    "verdict": "SKIPPED_TRIAGE",
@@ -20539,6 +20744,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r8.json"
+  },
+  "969": {
+   "index": 969,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "had to look up the former",
+   "note": "Live page (200), post dated August 5, 2026, byline 'bill', on Bill's Dunnett Blog. Paragraph glosses epithalamium then elegy and asks 'I wonder what percentage of readers had to look up the former to make sure they understood it?!' - 'the former' is epithalamium, as the claim reads.",
+   "fromFile": "verdicts-kay-i920-969.json"
   },
   "970": {
    "index": 970,
@@ -20561,6 +20773,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r8.json"
   },
+  "973": {
+   "index": 973,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "ce choix de traduction diminue à mon avis l’effet",
+   "note": "Thesis PDF fetched and text-extracted; footnote 42 carries the quoted words verbatim and continues that the choice weakens the effect the legendary name produces in the reader's imagination (Vonarburg rendering Guinevere as 'Geneviève' not 'Guenièvre'). Author, Université Laval, 2013 confirmed on the title page.",
+   "fromFile": "verdicts-kay-i973-991.json"
+  },
   "974": {
    "index": 974,
    "verdict": "SKIPPED_TRIAGE",
@@ -20575,12 +20794,83 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r8.json"
   },
+  "976": {
+   "index": 976,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I’ll use punctuation varaibly depending on context, speaker, rhythms.",
+   "note": "Ysabel journal, post of Thursday, September 14, 2006 on proofreading. Quoted sentence appears word for word, including the page's own typo 'varaibly', after his complaint about a proofreader over-punctuating speech.",
+   "fromFile": "verdicts-kay-i973-991.json"
+  },
+  "977": {
+   "index": 977,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "LAST LIGHT is punctuated differently than the MOSAIC was.",
+   "note": "Same September 14, 2006 proofreading post, the sentence immediately following the punctuation-variably line. The page uses the shorthand caps titles LAST LIGHT and MOSAIC for The Last Light of the Sun and the Sarantine Mosaic.",
+   "fromFile": "verdicts-kay-i973-991.json"
+  },
   "978": {
    "index": 978,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r8.json"
+  },
+  "979": {
+   "index": 979,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "comma, semi-colon, paragraph break, tense shift, word-choice wars",
+   "note": "Children of Earth and Sky category page. The phrase appears verbatim in the post describing his review of copy-editor Catherine Marjoribanks's pass, with the surrounding paragraph on marginalia dialogues and 'stet' confirming these are his exchanges with her.",
+   "fromFile": "verdicts-kay-i973-991.json"
+  },
+  "980": {
+   "index": 980,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Hearing a reading aloud isn’t reading a book.",
+   "note": "Under Heaven tour journal, post of Sunday, April 25, 2010, in the passage on touring and 'the sharing'. The sentence appears word for word; the next sentence adds that hearing an author interviewed is not either, but they can shed light.",
+   "fromFile": "verdicts-kay-i973-991.json"
+  },
+  "981": {
+   "index": 981,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "what works when you are reading alone to yourself is not",
+   "note": "Ysabel journal, post of Monday, November 20, 2006 on his first public reading from Ysabel. The quoted words appear verbatim and the sentence completes with the same-as/listening-in-public contrast the claim states.",
+   "fromFile": "verdicts-kay-i973-991.json"
+  },
+  "982": {
+   "index": 982,
+   "verdict": "PARTIAL",
+   "trueWording": "producer ‘would like to have Simon Vance do the reading’",
+   "note": "Under Heaven tour journal, post of Thursday, February 18, 2010. The quoted words are on the page verbatim, and the Tigana / Fionavar trilogy limb is fully supported. But the post reports an email from Penguin USA that the audio book's producer WOULD LIKE Vance to read; Kay says he is 'completely onside' and that they will be going into studio soon. Vance is named only this once in the whole journal, so the page records a proposal, not a completed reading of Under Heaven.",
+   "unsupportedLimb": "that Simon Vance actually read Under Heaven — the page records only the producer's request and a not-yet-started studio session",
+   "fromFile": "verdicts-kay-i973-991.json"
+  },
+  "983": {
+   "index": 983,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I’m not an audio book person",
+   "note": "Same February 18, 2010 post, opening the paragraph after the Vance news; the page continues that a growing number of friends and professional contacts are.",
+   "fromFile": "verdicts-kay-i973-991.json"
+  },
+  "984": {
+   "index": 984,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "you are reading someone else’s rendering of me",
+   "note": "Ysabel journal, October 2006 post (between the October 14 and October 8, 2006 entries) on translation and the Giller Prize. The page's conditional names Russian, Korean and Portuguese exactly as the claim does.",
+   "fromFile": "verdicts-kay-i973-991.json"
+  },
+  "985": {
+   "index": 985,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It is a version, an interpretation, of that person’s work.",
+   "note": "Same October 2006 Ysabel translation post; the sentence closes the paragraph arguing that a translated work should not be treated as purely the original author's and that a mediating translator's voice exists.",
+   "fromFile": "verdicts-kay-i973-991.json"
+  },
+  "986": {
+   "index": 986,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the gift or the burden of the people who carry my work",
+   "note": "Same October 2006 Ysabel post; the full clause reads that he feels 'alternatively' the gift or the burden of the people who carry his work over into another language. The claim's 'alternately' is the only wording difference and does not change the sense.",
+   "fromFile": "verdicts-kay-i973-991.json"
   },
   "987": {
    "index": 987,
@@ -20589,12 +20879,75 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r8.json"
   },
+  "988": {
+   "index": 988,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "la traduction, pour une écrivaine, c’est encore de l’écriture",
+   "note": "Diacritik interview headlined 'Fiat Tyranael. Et Tyranael fut', tagged Yann Etienne, conducted by mail in January 2021, published 19 February 2021. The words appear verbatim inside the answer about what translating other authors taught her, in the aside about writing Kay's multiple viewpoints herself while translating.",
+   "fromFile": "verdicts-kay-i973-991.json"
+  },
+  "989": {
+   "index": 989,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "particulièrement utile pour cette traduction",
+   "note": "Cabon's own page for Comme un diamant dans ma mémoire, Références section: the phrase is verbatim and names Le vêtement de A à Z by Sophie George (Falbalas), described as an illustrated encyclopedia of clothing styles across ages and civilisations. The page header gives the original title A Brightness Long Ago (2019).",
+   "fromFile": "verdicts-kay-i973-991.json"
+  },
+  "990": {
+   "index": 990,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "m'a permis de résoudre bien des énigmes liées aux légendes chinoises",
+   "note": "Cabon's own page for Les Chevaux célestes, Références section; the subject of the verbatim clause is the dictionary Chinese Mythology A to Z by Jeremy Roberts. The page header gives the original title Under Heaven (2010).",
+   "fromFile": "verdicts-kay-i973-991.json"
+  },
+  "991": {
+   "index": 991,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "efforcé de garder à l'esprit pendant mes propres travaux",
+   "note": "Cabon's own page for Le Fleuve céleste (original title River of Stars, 2013), last line of the Références section, thanking Marie-Christine Guyon for pointing him to Jean-François Billeter's Trois essais sur la traduction. Strictly, what he says he kept in mind is the enriching illumination that this réflexion sur les difficultés de la traduction de la poésie chinoise gave him; the substance of the claim holds.",
+   "fromFile": "verdicts-kay-i973-991.json"
+  },
+  "992": {
+   "index": 992,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "son refus de trahir les personnages historiques en présumant de leurs réactions",
+   "note": "Raw page fetched (curl, browser UA). Fourth paragraph of the article, signed Mikael Cabon, dated 11 juillet 2014: Kay integrates plots founded on authentic facts into fictional universes for ethical and artistic reasons, among them the cited refusal (which continues '...et de leurs sentiments'). Quotation is a contiguous substring; every limb (Cabon as author; fact-based plots; invented worlds; refusal to presume reactions) is on the page.",
+   "fromFile": "verdicts-kay-i992-1005.json"
+  },
   "993": {
    "index": 993,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r8.json"
+  },
+  "994": {
+   "index": 994,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "L'ÉPOPÉE BYZANTINE DE GUY GAVRIEL KAY DANS UNE NOUVELLE TRADUCTION",
+   "note": "Raw page fetched. mikaelcabon.fr is headed 'Mikael Cabon, traducteur'; the Voile vers Sarance page reproduces the quatrieme de couverture and closes it with the em-dash banner line containing the quoted words verbatim (in capitals). Byzantine limb supported both by the banner and by the back-cover text naming Justinian's Constantinople.",
+   "fromFile": "verdicts-kay-i992-1005.json"
+  },
+  "995": {
+   "index": 995,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Il avait déjà été traduit par Élisabeth Vonarburg et paru en 2020",
+   "note": "Live page initially failed (HTTP/2 PROTOCOL_ERROR, then empty reply); recovered on the live URL by first taking a phpBB session cookie from index.php, then re-requesting over HTTP/1.1 with that cookie. Page 4 of 7 confirmed. Post by 'Al1', jeu. 24 août 2023: the novel is a Cabon translation of 'A Brightness Long Ago' (2019), and the quoted sentence continues 'sous le nom \"Un éclat d'antan\"'; he adds L'Atalante's site makes no mention of the earlier one. A second reader (Aerendhyl) re-quotes it and identifies it as the Alire edition.",
+   "fromFile": "verdicts-kay-i992-1005.json"
+  },
+  "996": {
+   "index": 996,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Last Light of the Sun is wrapped, read by Holter Graham",
+   "note": "Raw page fetched from brightweavings.com/news/ (GGK's official site). The 'May 18' entry about audible.com downloads carries the quoted words verbatim. Year limb checked independently of the page's year headers (which sit at block ends here): the same block announces Worldcon 'this August in Montreal' (Anticipation, Aug 2009) and a new novel due spring 2010 (Under Heaven), fixing the entry at 18 May 2009.",
+   "fromFile": "verdicts-kay-i992-1005.json"
+  },
+  "997": {
+   "index": 997,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "read by Euan Morton (who sang the songs, as well)",
+   "note": "Same 18 May 2009 entry on brightweavings.com/news/: 'A Song for Arbonne is also done, and should appear next,' followed by the quoted parenthesis verbatim. Corroborated by two later entries on the same page (April 18 and July 4) describing Morton as the reader who 'also did Arbonne, including singing the songs'.",
+   "fromFile": "verdicts-kay-i992-1005.json"
   },
   "998": {
    "index": 998,
@@ -20610,6 +20963,20 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r8.json"
   },
+  "1000": {
+   "index": 1000,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "c'est parfois là aussi quelque peu « accessoire »",
+   "note": "Raw page fetched. Third paragraph of the chronique, signed '— Gillossen, le 19/04/2009': Kay tries to offset a less exotic Celtic setting 'avec notamment une multiplication de termes \"d'époque\"' — the quotation verbatim — but this is sometimes only incidental 'quant à l'intérêt réel que tout cela apporte à l'histoire'. Both limbs (the multiplication of period terms; sometimes incidental to what it adds) are on the page.",
+   "fromFile": "verdicts-kay-i992-1005.json"
+  },
+  "1001": {
+   "index": 1001,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "ce qui donne un intéressant effet kaléidoscopique",
+   "note": "Raw page fetched. Penultimate paragraph of the chronique, signed '— Siriane, le 20/01/2017': key events 'peuvent d'ailleurs être étudiés sous le point de vue de différents personnages,' followed by the quoted clause verbatim. Same-events, different-POV and kaleidoscopic limbs both supported; review is of Children of Earth and Sky (French edition, L'Atalante).",
+   "fromFile": "verdicts-kay-i992-1005.json"
+  },
   "1002": {
    "index": 1002,
    "verdict": "SKIPPED_TRIAGE",
@@ -20623,6 +20990,20 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-kay-triage-r8.json"
+  },
+  "1004": {
+   "index": 1004,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "avec cette fois une traduction de Mikael Cabon",
+   "note": "Raw page fetched. Block headed 'Mise à jour du 20 aout 2021' at the foot of the Les Derniers Feux du soleil page: after a first publication at Le Pré aux Clercs the novel appears in a new edition at L'Atalante, closing with the quoted words verbatim. All three limbs (prior Pré aux Clercs publication; L'Atalante reissue; Cabon translation) present.",
+   "fromFile": "verdicts-kay-i992-1005.json"
+  },
+  "1005": {
+   "index": 1005,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "stops the action dead in order to make a flowery speech",
+   "note": "Raw page fetched from goodreads.com (author blog post, published May 24, 2020, titled for the Simon Vance narration). Third paragraph: 'There are too many times where one of the characters' + the quoted words verbatim + 'about people with long unmemorable names'. Criticism limb supported; note for context the same post is otherwise laudatory and ends 'Five stars.'",
+   "fromFile": "verdicts-kay-i992-1005.json"
   },
   "1006": {
    "index": 1006,
