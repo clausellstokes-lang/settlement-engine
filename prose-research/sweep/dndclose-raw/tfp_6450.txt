@@ -1,0 +1,609 @@
+(5e) DDAL-EB-01 The Night Land | tenfootpole.org 
+
+ Skip to content
+
+ tenfootpole.org
+
+ I bought these adventure and review them so you don't have to.
+
+Home
+My Favorite of the new old school adventurers
+
+The Black Maw
+
+The Book Introduction
+
+About Bryce …
+
+ Bryce’s ToDo List of reviews
+
+ Review Standards
+
+ ← The Anthropophagi of Xambaala
+
+ The Dungeon of Kursh Velgont →
+
+ (5e) DDAL-EB-01 The Night Land
+
+ Posted on January 11, 2020 by Bryce Lynch 
+
+By Shawn Merwin
+Self-published
+5e
+Level 1
+
+The brokers of Salvation pay good coin for artifacts scavenged from the haunted battlefields of the Mournland. In this nest of cutthroats, daring explorers gather to carve their destinies from the ruins of Cyre. They’ll need all the help they can get: it’s no secret that most scavengers don’t survive their first expedition in the Gray.
+
+This 29 page adventure is a collection of three short “one encounter” adventures in sixteen pages. Set in a kind of post-apocalyptic “Bartertown”/salvage-town bordertown, it has you making trips in to a Forbidden Zone to do short missions. Nice concepts with the whole thing, but the actual implementation is boring. There’s little continuity and the “creative” part of evocative writing is missing.
+
+Ok, so, evidently I’m an asshole. All this time I’ve thought of Eberron as a techno- fantasy setting, kind of RenFaire stuff, which has absolutely no appeal to me at all. Magic railroads and Sphere of Annihilation toilets and the like. But this adventure seems to imply NOT. This is a kind of post-apocalyptic people living in Bartertown kind of vibe going on, or tries to anyway. A less gonzo Rifts or a Gamma World with some magic tossed in? Fuck yeah I’m in! Maybe it’s just this setting and I’ll gouge my eyes out later when magic Zeppelin races appear. Anyway, there’s this underlying vibe of a barely there town and people salvaging things from The Forbidden Zone.
+
+A cloud bank straight out Fury Road, a little ways off from town. Screaming faces and buildings collapsing sometimes appear in the fog. Fuck Yeah! That’s what I want to see! Talk about a transition to the mythic underworld! The description for the threshold is pretty good and gives this great sense of impending danger and YOU ARE ELSEWHERE NOW. The whole town vibe is enhanced by a little newspaper handout with some decently Orwellian writing that again adds to the mood. “Remember: Sheriff is watching. So keep your troubles outside the outpost.” Orwellian inside but a free for all outside! I’m in! And the newspaper announcing 70% of people who go in don’t come back out? Uh huh uh huh. I’m in LUUUUUUV.
+
+Substantial information is conveyed through bullets, with what you can learn from NPC’s being the primary usage of them. Bolding and section headings, indents and a summary table are all present. And, there’s job board handouts in addition to the newspaper. Very nice. And there’s this little NPC, the leader of a fellow salvage gang, with a great little table of how they know you/how you’re connected to you. “Saved from kneecapping” and the like; the table is full of flavour!
+
+And the entire fucking thing is actually implemented lame as all fuck. 
+
+That NPC reference table? Full of the wrong things. Instead of it being a table that helps you run the NPC’s it’s more a writers reference. “Chaotic Good Human Female Artificer.” Great. How about quirks? Goals? A train? Something to help me actually run the NPC? No. For that you need to reference the text and hope that the designer put in a little offset box for that NPC. The table is ineffectual for its intended purpose.
+
+The three “missions” come from the job board in a tavern. There’s really nothing tying the three together at all … which may be ok, I think, if it’s serving as an introduction to the town and the salvage lifestyle. But then THAT becomes the theming and tie to hold them together, and it’s just not there. It feels like three changes of scenery rather than “my life as a salvage worker on the edge.” And that salvage board … a centerpiece of the adventure and the entire town built around salvage? A boring ass bulletin board in a tavern. No mementoes or shrines to the fallen salvagers, no rituals, nothing. This was a SUBSTANTIAL miss in adding to the “Salvage Life 4EVAR” thing that should be going on in this adventure.
+
+Most of the writing it boring. A ghost train comes across as boring. The writing is just not evocative at all. Now, we should all know by now that I’m NOT looking for a lot of text, but I expect the text that IS present it be interesting and describe the scene/thing in a way that makes it comes alive. “The air around you suddenly fills with cracking, ringing noises. Some of the larger black glass shards twitch and fragment, reforming into lizard- like beasts with maws of razor-sharp glass teeth.” B O R I N G. Nice idea, ozone, crackling, maws of obsidian glass … but a “lizard like creature” is boring, as is anything with the fucking word “Suddenly.” This is poor writing. 
+
+More than that though .. The Mournland, inside the fog cloud, is boring. The fog is a barrier. No dust storms. No 70% death rate. No littered landscape. Just more featureless plains. And no wanderers. No hint of danger. I was excited for this shit! “In the morning of the second day of travel …” It’s not even the slow burn of Stalker or Annihilation. Just nothing. No text to speak of and what there is “decrepit wood buildings.” The whole place comes off as dumb and boring. Just Another Shitty Lame Ass Boring Generic D&D Setting. Go somewhere, have an encounter, mission over.
+
+It tries. With that Mournland text. With a sculpture made out of corpses. But it fails. It feels thrown together and as if not much work in to it beyond a draft. Repetition of text, and not in a Salome way but in a Didn’t Think About It way. Some read-aloud gets long. There’s a section in the beginning, in which bar patrons gets hushed when an old salvager gets on top of a table to speak … a load of nonsense. I’d guess it has to do with the overall plot that will eventually show up in these, but it telegraphed HORRIBLY. Everyone should recognize “yeah, this is the evil cult thing we’ll eventually have to stop,” and, at the same time, it would have been MUCH more effective if introduced as a part of one of the other missions (NO! NOT A FUCKIGN DIARY!) or somehow his exposition had an impact. The hushed voices of the rowdy scavvers? Great! Just anti-climactic as fuck. “Oh, it’s a fucking monologue. Great.”
+
+Missed opportunities include a little construct Dog, which should have been called Timmy, or had a Timmy/well codeword/connotation/theming. And a goblin turned to stone with a ghost train hurtling down on her NEEDS to be her caught in the train tracks. No, I don’t know how it works … that’s the designers job. But fuck me if rescuing people from train tracks isn’t iconic.
+
+And then again that scene shows the problems. The train arrives in five rounds to crush the little girl. How far away are you? Who the fuck knows, we’re never told. And this sort of Missing Information thing, critical information for a scene, is not uncommon. The overall impact is that the 70% of people who die in the Mournlands do so of boredom. 
+
+It’s so full of promise, you can see it in the edge. But the actual implementation, the writing, the “now the D&D encounter starts” format … it’s kills the thing. It should be enhancing that half-glimped themes and vibes. I’m not sure I’d tout my MFA in Creative Writing if I turned this out.
+
+This is $5 at DmsGuild. The preview is four pages. The last page actually has something for you to look at. You can see a long/useless read-aloud for the tavern and then the little gnomes speech … that has no impact on the adventure. Bad preview. 
+
+https://www.dmsguild.com/product/296403/EB01-The-Night-Land?1892600
+
+ This entry was posted in 5e, Dungeons & Dragons Adventure Review, Reviews. Bookmark the permalink. 
+
+ ← The Anthropophagi of Xambaala
+
+ The Dungeon of Kursh Velgont →
+
+ 7 Responses to (5e) DDAL-EB-01 The Night Land 
+
+ AJ says: 
+
+ January 11, 2020 at 4:02 pm 
+
+ ? This is actually super helpful, even though it doesn’t paint the best picture of the module. I plan to run the whole series, so reviews like this show me where I can look to beef it up for a better player experience. Thanks for taking the time – and would it be cruel of me to hope you review each of the modules with such a keen eye? ?
+
+ Reply 
+
+ Ron says: 
+
+ January 12, 2020 at 1:35 pm 
+
+ That took a quick downturn. Sounds, definitely, like some interesting bits though!
+
+ Reply 
+
+ Evard’s Small Tentacle says: 
+
+ January 12, 2020 at 6:55 pm 
+
+ This is interesting. I find what Bryce points out here to be an issue for a lot of adventures; the broad summary seems awesome, the details are so mundane and bland that it is horribly misaligned and makes the broad summary a lie.
+
+ Reply 
+
+ Bigby's Affirmative Consent Lubed Fist says: 
+
+ January 12, 2020 at 9:04 pm 
+
+ it has you making trips in to a Forbidden Zone to do short missions. Nice concepts with the whole thing, but the actual implementation is boring.
+
+https://www.youtube.com/watch?v=YuOnfQd-aTw
+
+ Reply 
+
+ Bryce Lynch says: 
+
+ January 13, 2020 at 9:00 am 
+
+ Ah, but is this a commentary on the adventure or the movie … OR BOTH!
+
+ Reply 
+
+ Bigby's Affirmative Consent Lubed Fist says: 
+
+ January 13, 2020 at 6:42 pm 
+
+ 2 for 1 special, dear boy!
+
+ Reply 
+
+ Shuffling Wombat says: 
+
+ January 13, 2020 at 8:05 am 
+
+ So interesting ideas, imperfect execution. There appears to be a sequel, with hero points available for successful completion of missions, and an extra item available for groups that saved the goblin in this module. Some sort of notoriety score would be appropriate, a “town reputation”. I would prefer a much more open-ended set-up, rather than mission of the week; having a list of starting adventures is fine, but then I would let the PCs find clues to other quests, and let them pick which ones to go on, and sell information to other groups for others. I agree “the big enemy” should be shrouded in mystery, tantalising snippets of information rather than some old codger spelling it out.
+
+One point I would not quibble with is that the 70% death rate applies to NPC parties, rather than the PCs. I don’t mind a few fatalities, but there is a limit to the amount of time I want players to spend on rolling up new characters.
+
+ Reply 
+
+ Leave a Reply Cancel reply
+Your email address will not be published. Required fields are marked *
+Comment * 
+Name * 
+
+Email * 
+
+Website 
+
+ Notify me of follow-up comments by email.
+ Notify me of new posts by email.
+
+ My Patreon
+
+ Emupad
+
+RSS https://tenfootpole.org/ironspike/?feed=rss2
+
+ Bryce’s Adventure Design Forum – Featuring… Book Talk!
+
+Search Archive:
+
+ Search for:
+
+Recent Comments
+AG on The Swan Hollow Intrigue
+rekalgelos on The Swan Hollow Intrigue
+Kubo on AA#18 – The Forsaken Sepulcher
+Slipjoint on AA#18 – The Forsaken Sepulcher
+Beoric on The Swan Hollow Intrigue
+Slipjoint on AA#5 – The Flaming Footprints of Jilanth
+Lycaon on The Swan Hollow Intrigue
+Lycaon on The Swan Hollow Intrigue
+Slipjoint on Wheel of Evil
+Stripe on The Swan Hollow Intrigue
+Beoric on Stronghold of the Mad Dwarf
+mudcore on Stronghold of the Mad Dwarf
+DangerousPuhson on Stronghold of the Mad Dwarf
+DangerousPuhson on Stronghold of the Mad Dwarf
+"It's dark and you can't see" on The Doom of the Dark
+Beoric on Stronghold of the Mad Dwarf
+Beoric on Stronghold of the Mad Dwarf
+DangerousPuhson on Stronghold of the Mad Dwarf
+DangerousPuhson on Stronghold of the Mad Dwarf
+Effective Voulging on Stronghold of the Mad Dwarf
+
+Blogroll
+
+Dungeon Categories
+My ongoing attempt to identify good dungeoncrawls. The reviews are just a byproduct.
+0
+
+ Categories
+
+ 2 out of 10
+
+ 5e
+
+ Adventurers League
+
+ ArtPunk Shovelware
+
+ Colored Lights May Hypnotize
+
+ Do Not Buy Ever
+
+ Dungeon Magazine
+
+ Dungeons & Dragons Adventure Review
+
+ God Effort
+
+ It fucking sucks, man
+
+ Level 0
+
+ Level 1
+
+ Level 12
+
+ Level 2
+
+ Level 3
+
+ Level 4
+
+ Level 5
+
+ Level 6
+
+ Level 8
+
+ Level 9
+
+ Meh. It's fine
+
+ Millions and Millions of its Babies
+
+ My Life is a Living Fucking Hell
+
+ No Regerts
+
+ No, seriously, the worst EVAR?
+
+ Pathfinder
+
+ Reviews
+
+ ribbet, ribbet
+
+ SciFi
+
+ The Best
+
+ The Worst EVAR?
+
+ Uncategorized
+
+ The link to the product in this review is probably an affiliate link. If you follow the link and buy the product, I make some money. Just thought you should know.
+
+Archives
+
+ September 2026
+
+ August 2026
+
+ July 2026
+
+ June 2026
+
+ May 2026
+
+ April 2026
+
+ March 2026
+
+ February 2026
+
+ January 2026
+
+ December 2025
+
+ November 2025
+
+ October 2025
+
+ September 2025
+
+ August 2025
+
+ July 2025
+
+ June 2025
+
+ May 2025
+
+ April 2025
+
+ March 2025
+
+ February 2025
+
+ January 2025
+
+ December 2024
+
+ November 2024
+
+ October 2024
+
+ September 2024
+
+ August 2024
+
+ July 2024
+
+ June 2024
+
+ May 2024
+
+ April 2024
+
+ March 2024
+
+ February 2024
+
+ January 2024
+
+ December 2023
+
+ November 2023
+
+ October 2023
+
+ September 2023
+
+ August 2023
+
+ July 2023
+
+ June 2023
+
+ May 2023
+
+ April 2023
+
+ March 2023
+
+ February 2023
+
+ January 2023
+
+ December 2022
+
+ November 2022
+
+ October 2022
+
+ September 2022
+
+ August 2022
+
+ July 2022
+
+ June 2022
+
+ May 2022
+
+ April 2022
+
+ March 2022
+
+ February 2022
+
+ January 2022
+
+ December 2021
+
+ November 2021
+
+ October 2021
+
+ September 2021
+
+ August 2021
+
+ July 2021
+
+ June 2021
+
+ May 2021
+
+ April 2021
+
+ March 2021
+
+ February 2021
+
+ January 2021
+
+ December 2020
+
+ November 2020
+
+ October 2020
+
+ September 2020
+
+ August 2020
+
+ July 2020
+
+ June 2020
+
+ May 2020
+
+ April 2020
+
+ March 2020
+
+ February 2020
+
+ January 2020
+
+ December 2019
+
+ November 2019
+
+ October 2019
+
+ September 2019
+
+ August 2019
+
+ July 2019
+
+ June 2019
+
+ May 2019
+
+ April 2019
+
+ March 2019
+
+ February 2019
+
+ January 2019
+
+ December 2018
+
+ November 2018
+
+ October 2018
+
+ September 2018
+
+ August 2018
+
+ July 2018
+
+ June 2018
+
+ May 2018
+
+ April 2018
+
+ March 2018
+
+ February 2018
+
+ January 2018
+
+ December 2017
+
+ November 2017
+
+ October 2017
+
+ September 2017
+
+ August 2017
+
+ July 2017
+
+ June 2017
+
+ May 2017
+
+ April 2017
+
+ March 2017
+
+ February 2017
+
+ January 2017
+
+ December 2016
+
+ November 2016
+
+ October 2016
+
+ September 2016
+
+ August 2016
+
+ July 2016
+
+ June 2016
+
+ May 2016
+
+ April 2016
+
+ March 2016
+
+ February 2016
+
+ December 2015
+
+ November 2015
+
+ October 2015
+
+ September 2015
+
+ August 2015
+
+ July 2015
+
+ June 2015
+
+ May 2015
+
+ April 2015
+
+ August 2014
+
+ July 2014
+
+ June 2014
+
+ May 2014
+
+ April 2014
+
+ March 2014
+
+ February 2014
+
+ January 2014
+
+ December 2013
+
+ November 2013
+
+ October 2013
+
+ September 2013
+
+ August 2013
+
+ July 2013
+
+ June 2013
+
+ May 2013
+
+ April 2013
+
+ March 2013
+
+ February 2013
+
+ January 2013
+
+ December 2012
+
+ November 2012
+
+ October 2012
+
+ September 2012
+
+ August 2012
+
+ July 2012
+
+ June 2012
+
+ May 2012
+
+ April 2012
+
+ March 2012
+
+ February 2012
+
+ January 2012
+
+ December 2011
+
+ November 2011
+
+ October 2011
+
+ September 2011
+
+ August 2011
+
+ The link to the product in this review is probably an affiliate link. If you follow the link and buy the product, I make some money. Just thought you should know.
+
+ tenfootpole.org 
+
+ Proudly powered by WordPress.

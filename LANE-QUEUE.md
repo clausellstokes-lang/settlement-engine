@@ -1,4 +1,4 @@
-# LANE-QUEUE — the owner's cap is FOUR running agents of any kind (read-only and workflow agents count)
+# LANE-QUEUE — the owner's cap is FOUR BUILD LANES (corrected 09-06 01:15: "i didn't say four agents cap, i said four lanes cap"); research/read-only/workflow agents are bounded only by measured load during a full-suite run
 Updated 2026-09-05 by the Fable chair (after §898: product 5e28d5c83, ledger 6cab7c69a). Dispatch strictly in this order as slots free; every dispatch is `model: "opus"`.
 
 ## RUNNING (4/4)
@@ -102,17 +102,17 @@ OSR-SCHEMA17 · every register act · every ceiling ruling (clamp: ONCE, at the 
 Cap (CORRECTED by the owner 09-06 01:15): FOUR BUILD LANES; research agents are NOT lanes — every queued sweep may run at once, bounded only by measured load during a full-suite run (web-fetch agents are light; measured 1.8–3.5 at four) and by the usage window. A run that would keep a ratchet's quiet window shut is still launched only AFTER the window opens.
 | # | run | mode | status |
 |---|---|---|---|
-| S1 | tolkien | resume (118 of 373 unverified → 8 chunks) | RUNNING `wf_d9292937-340` |
-| S2 | martin | resume (30 of 330 → 2 chunks) | RUNNING `wf_e31bf7e0-3c5` |
-| S3 | dnd | resume (49 of 49 → 4 chunks) | RUNNING `wf_c125a904-b11` |
-| S4 | ai | resume (179 of 254 → 12 chunks) | RUNNING `wf_014422dc-e75` |
-| S5 | kay | FULL fresh (4 angles → verify → synth → critic) | queued — next free slot |
-| S6 | leguin | FULL fresh | queued |
-| S7 | wolfe | FULL fresh (promoted from a one-device probe; the device is in the brief) | queued |
-| S8 | hobb | FULL fresh (likewise) | queued |
-| S9 | dnd TOP-UP | all four angles' finders re-run, NEW claims deduped against the 49 and appended from index 49 (`findAngles`, `existingKeys`, `baseIndex`) — the 49 came from ONE finder before the cutoff | queued, after S3 |
+| S1 | tolkien | ROUND 3 (35 chunks: regrade + re-verify + the r2 finders' claims) | RUNNING `wf_c20cdfd9-f87` since 05:16 |
+| S2 | martin | ROUND 3 (5 extra angles + 17 chunks, regrade r3) | RUNNING `wf_e2658300-98b` since 05:39 |
+| S3 | dnd | ROUND 3 (`findAngles: close` + 4 extras + 14 chunks; S9's top-up FOLDED IN) | RUNNING `wf_0782e71f-b18` since 05:38 |
+| S4 | ai | ROUND 3 (5 extra angles + 7 chunks, regrade r3) | RUNNING `wf_ff38fa41-dfb` since 05:38 |
+| S5 | kay | FULL fresh (4 angles → verify → synth → critic) | RUNNING `wf_36139527-d91` since 05:36 |
+| S6 | leguin | FULL fresh (3 angles + 7 chunks; academic found file salvaged) | RUNNING `wf_562294f4-b38` since 05:36 |
+| S7 | wolfe | FULL fresh (promoted from a one-device probe; the device is in the brief) | RUNNING `wf_329c41b6-c8e` since 05:36 |
+| S8 | hobb | FULL fresh (likewise) | RUNNING `wf_ddf37721-d84` since 05:36 |
+| S9 | ~~dnd TOP-UP~~ FOLDED INTO S3 round 3 (05:38) | all four angles' finders re-run, NEW claims deduped against the 49 and appended from index 49 (`findAngles`, `existingKeys`, `baseIndex`) — the 49 came from ONE finder before the cutoff | queued, after S3 |
 | S10 | FIVE-AUTHOR ESSAY (row 47) | every attribution in `prose-research/OWNER-PROPOSAL-2026-09-05-five-authors.md` refuted against raw source text before any of it becomes a rule | queued, after S5–S8 |
-| S11 | PROBE-ALL-REFUTE (row 46) | Opus refutation of PROBE_ALL's corpus figures | queued |
+| S11 | PROBE-ALL-REFUTE (row 46) | Opus refutation of PROBE_ALL's corpus figures (`probe-all-refute-workflow.js`, tree `laneOSR18` = the CAS tip, cap 4) | RUNNING `wf_c310f7d4-ba9` since 05:36 |
 | S1b | tolkien ROUND 2 | LOOP-UNTIL-DRY, one round per critic report: (a) REGRADE — every kept verdict whose own note flags an unsupported limb becomes a visible PARTIAL (29 named by the critic) + the critic's §1 findings (#300 film review, #343 inverted, #366 wrong book, #63/#252 contradiction, #349) applied; (b) SECOND ROUTES for #180, #34, #73, #365, #355, #94 (epistleofdude, OpenAlex/Crossref DOIs, scribe.rip, Google Books/Wikipedia, IA full text); (c) FINDERS on the critic's §3/§4: the primary critics direct (Drout 2004, Raffel 1968, Stimpson, Manlove, Kirk 1971, Crabbe, Mendlesohn, Shippey/Rosebury direct, Bratman, Thomas, Garth, Hammond & Scull), Tolkien's own essays and letters (On Fairy-stories, A Secret Vice, Letters 215/193/210, the Beowulf lecture), THE CIVIC-RECORD TEXTS INSIDE TOLKIEN (the Shire's Ordering, Appendices A/B, Farmer Giles — the register nearest our dossier), point of view, translation as a register experiment, imitation failure modes, measured syntax/stylometry, the 1981 BBC radio; (d) re-synthesize with the PARTIAL table and a register map (which rules bind the Herald, the chronicle line, the pools — the critic's §8 last row); (e) critic again; STOP when the critic's next-round table is empty or only "nice to have" | queued — launches at the next free slot |
 | S2b | martin ROUND 2 — ARGS BUILT 21:05 (`sweep/args-martin-r2.json`: seven critic-named angles, a nine-row re-verification chunk with routes, regrade notes, synthesis notes incl. the §6 self-contradictions to reconcile; launch = `Workflow({scriptPath: research-workflow-v2.js, args: <that file's JSON>})` at the next free slot) | the same loop on the v2 critic's list (20:59; the critic re-fetched all 121 cited URLs — 299 of 325 kept rows verbatim on page): the CHRONICLE register (Fire & Blood, World of Ice & Fire), editorial testimony (Groell), first-publication reviews traced to the primary, book-length and quantitative scholarship (Young 2019, Beveridge & Shan, Peterson, Spathis) — `sweep/extra-martin-round2.json`, args via `sweep/mk-args.py martin --extra …`; regrade + the re-run critic's list once it lands | queued, after the martin re-synth |
 | S3b | dnd ROUND 2 = its COMPLETION — LAUNCHED 21:25 (`sweep/args-dnd-r2.json`): the three angles that never ran (craft, voice, close) + four critic-named angles (how official D&D describes a PLACE; the 2019 house style guide that supersedes the 2013 one the first sweep read; the usability school; scholarship and edition history), a 13-row re-verification against the 2019 guide, regrade, synthesis notes | RUNNING |

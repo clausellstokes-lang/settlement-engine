@@ -1,0 +1,196 @@
+
+===== PAGE 1 =====
+W A
+RITING D
+By Chris Perkins
+A D&D® adventure can be location-based, event-based, o
+A location-based adventure, in its simplest form, is a ro
+terms can be any self-contained adventure location. Most
+“dungeon” when referring to surface locations such as ca
+memorable and exciting about the adventure, and some o
+featured distinctive, memorable dungeons.
+The simplest event-based adventure presents a sequen
+another. More sophisticated event-based scenarios have
+choices that affect the outcome, creating a less linear exp
+don’t have locations to explore—quite the contrary! How
+unfolding narrative.
+In truth, many adventures that are location-based have
+based adventures include room-by-room descriptions of
+General Principles
+Regardless of an adventure’s type, level, length, or setting
+1. A D&D adventure follows the rules of good storytelling
+remember: The player characters (PCs) are the heroes, n
+matter. Gathering animal pelts for a lazy merchant might
+underwhelming D&D experience.
+2. An adventure needs a credible threat — one worthy of
+villain or monster, a villain with lackeys, an assortment o
+whoever they are, should have logical goals that the hero
+adventure.
+3. An adventure should blend familiar D&D tropes with c
+adventure around dragons, orcs, and insane wizards in to
+might also seem trite to begin an adventure in a tavern, b
+okay, as long as the adventure can still surprise and delig
+offer, but try to put your own clever “spin” on it. For exam
+with a quest on behalf of the king might, in fact, be the kin
+projected illusion created by a band of greedy gnome thie
+4. An adventure is about the here and now. A little bit of h
+it, the better. Instead of dealing with what happened in th
+present situation, what the bad guys are up to, and how t
+5. An adventure must allow the players’ actions and decis
+to the extent that players’ actions and decisions become m
+needs to allow for more than one preset outcome. Otherw
+example, if the major villain shows up before the end of t
+possibility that the heroes might slay or capture the villa
+6. An adventure needs to present information in a logical
+confused. For example, make sure that an NPC is properl
+name in running text. Also, the adventure shouldn’t conc
+understand what’s really going on. The goal isn’t to keep
+information the DM needs in the most logical and intuitiv
+7. An adventure should strive to present information as c
+However, there are certain elements of an adventure tha
+dressings, and treasure hoards. You can add character to
+--- col ---
+DVENTURES
+s & Greg Bilsland
+or both.
+oom-by-room description of a dungeon, which in D&D
+t dungeons are subterranean, but we also use the term
+astles and ruins. The location in large part defines what’s
+of the most memorable D&D adventures ever written
+nce of events that are programmed to occur one after
+“branches” built into them so that players can make
+perience. That’s not to say that event-based scenarios
+wever, the locations generally take a back seat to the
+e programmed events built into them, and many event-
+f important locations.
+g, keep these principles in mind.
+g (which I won’t belabor here). One important thing to
+not mere spectators, and they’re looking for quests that
+t be a tolerable MMO quest, but it makes for an
+f the heroes’ attention. The threat might be a singular
+of monsters, or an evil organization. The antagonists,
+oes can uncover and thwart in the course of the
+clever twists. It might seem stereotypical to build an
+owers, but these are staples of the D&D experience. It
+but again, it’s an idea that’s very true to D&D. Clichés are
+ght players. Avail yourself of everything the game has to
+mple, the mysterious figure who presents adventurers
+ng in disguise. The crazy wizard in the tower might be a
+eves to guard their loot.
+history might be needed to set things up, but the less of
+he past, an adventure should focus on describing the
+the player characters get involved in the story.
+sions to matter, not control the outcome of encounters
+meaningless. The adventure isn’t a novel or a novella; it
+wise, players will feel “railroaded” by the plot. For
+the adventure, the text needs to account for the
+ain. In a D&D game, weirder things can happen!
+l order, so that a DM reading it for the first time isn’t
+ly introduced before casually mentioning the NPC by
+ceal or bury important information that the DM needs to
+the DM in suspense, but rather to organize all the
+ve way.
+concisely as possible, to ease the burden on the DM.
+at deserve special attention, namely NPCs, dungeon
+o any NPC by describing his or her distinctive physical
+===== PAGE 2 =====
+features, mannerisms, and quirks (which the DM can then
+dungeon feature (such as a mural or carving) or interesti
+jewelry) can also benefit from a splash of descriptive text
+8. An adventure needs to appeal to a variety of player and
+exploration, while others relish intrigue and roleplaying.
+more altruistic. An adventure needs to cast a wide net an
+plotting out an adventure, it’s always good to ask questio
+includes a barbarian?” or “Is there anything here for the p
+9. An adventure needs to rise above the humdrum. Any D
+heroes to fight. A good adventure strives to make the DM
+“Wow, I can’t wait to run this encounter!” or “Wow, I wis
+the norm can be accomplished with odd monster pairing
+unexpected reinforcements, red herrings, atypical monst
+complex motives, and the occasional plot twist.
+10. An adventure needs thoughtfully constructed, neatly
+map not only invites them to run the adventure but also g
+dull, uninspired map has the opposite effect. Nonsymmet
+symmetrical or linear ones, since they allow players to m
+Spend as much time on your maps as you spend on your
+writer who can’t draw or doesn’t like drawing, there are
+To write good novels, you need to read good novels, not o
+learn the tricks of the trade. The same is true for adventu
+easier it will be to write good D&D adventures of your ow
+Additional Principles for Organized Pla
+When writing adventures for the D&D Adventurers Leag
+1. Utilize previously published monsters and mag
+The Monster Manual and Dungeon Master’s Guid
+while these resources lack some monsters and i
+absences. NPCs are an exception. If possible, use
+to create a unique NPC.
+2. Use the Player’s Handbook, Monster Manual, and
+matters of lore. Don’t assume you know the stor
+3. Do not assume that players built characters usin
+Don’t build adventures for “optimized character
+Player skill level, character power level, and par
+4. Even in a shorter organized play experience, pr
+because an adventure is only 2 hours or 4 hours
+established outcome. Don’t decide in advance h
+5. Characters should be able to make significant ch
+adventure or a short play experience. How do th
+characters barter with the orc tribe or wipe the
+object it recovered—sell it or destroy it?
+6. Adventurers League content can use factions (b
+using factions:
+a. Don’t put factions in direct opposition
+tolerate one another.
+b. A character’s faction can inform the ch
+interaction with an NPC, but it should
+primary adventure motivation.
+c. Adventures should not presume a gro
+d. Commonly appear as just NPCs.
+For rules on grammar and punctuation, please see Th
+D&D House Style Guide. For adventure format, refer t
+--- col ---
+n use to roleplay the NPC effectively). A striking
+ing bit of treasure (such as an art object or piece of
+t.
+d character types. Some players prefer combat and
+. Some characters have selfish motives, while others are
+nd draw as many PCs into the story as possible. When
+ons such as, “Does this adventure work if the party
+player who enjoys roleplaying?”
+DM can throw a bunch of monsters in a room for the
+M sit up and say, “Wow, that’s a really clever idea!” or
+sh I’d thought of that!” Elevating an encounter beyond
+gs, unusual terrain, environmental hazards, traps,
+ter tactics, ruses and other deceptions, NPCs with
+labeled maps. Most DMs are visual people, and a good
+gives them an idea of what the adventure is about. A
+trical, nonlinear dungeon layouts are better than
+make choices while keeping the dungeon unpredictable.
+text, and Dungeon Masters will love you for it. For the
+lots of mapmaking software options to choose from.
+only to see what other people have done but also to
+ures. The more good D&D adventures you read, the
+wn.
+ay
+gue, keep the following in mind:
+gic items unless an administrator gives you approval.
+de contain hundreds of magic items and monsters, and
+items, it should be possible to work around the
+e a humanoid template for the MM, but if not, it’s okay
+d Dungeon Master’s Guide as an authoritative source on
+ry of a monster or item—even a common one!
+ng any resources other than the Player’s Handbook.
+rs” or adventures that assume a “balanced party.”
+rty builds will vary.
+rinciple #5 (see guidelines above) holds true. Just
+s doesn’t mean it should be linear or have a pre-
+how the adventure should end.
+hoices, even in the context of an organized play
+he characters approach the bad guys’ base? Do the
+em out? What does the party do with the valuable cursed
+but it doesn't have to!). Here are some guidelines for
+n. They should always have a reason to work together or
+haracter’s motivations for a quest or his or her
+always be an additional narrative layer beyond the
+oup includes a member of a particular faction.
+he Chicago Manual of Style (16th edition) and the
+to the Adventure Format Template.

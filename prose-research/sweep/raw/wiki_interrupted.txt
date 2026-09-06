@@ -1,0 +1,92 @@
+{{short description|Book of Tolkien scholarship}}
+{{Infobox book
+| italic title      = yes
+| name              = Interrupted Music:<br/>The Making of Tolkien's Mythology
+| image             = File:Interrupted_Music.jpg
+| author            = [[Verlyn Flieger]]
+| subject           = [[Tolkien's legendarium]]
+| genre             = Literary criticism
+| publisher         = [[Kent State University Press]]
+| pub_date          = 2005
+| media_type        = Print
+| pages             = 172
+| isbn              = 978-0-87338-824-5
+| preceded_by       = [[A Question of Time (book)|A Question of Time]]
+}}
+'''''Interrupted Music''''' is a 2005 book of literary analysis by [[Verlyn Flieger]] of [[J. R. R. Tolkien]]'s [[legendarium]], the mass of documents summarized in ''[[The Silmarillion]]''. Despite its title, it is not about [[Music of Middle-earth|Tolkien's use of music]]; it explores how and why he set about creating [[a mythology for England]], what models he used as a guide – especially [[Elias Lönnrot]] and [[Arthurian legend]], and how he made the mythology resemble a real one. The book has been well received by scholars; they have stated that the chapter on how Tolkien made the legendarium [[Editorial framing of The Lord of the Rings|seem like a genuine tradition]] is the most important in the book.
+
+== Context ==
+
+=== Tolkien's fiction ===
+
+The philologist and fantasy author [[J. R. R. Tolkien]] spent much of his life constructing [[Tolkien's legendarium|his legendarium]], a body of writings on his fictional world of [[Middle-earth]].{{sfn|Flieger|1983|p=107}} He is best known for his children's book ''[[The Hobbit]]'' and his fantasy novel ''[[The Lord of the Rings]]'', both set in Middle-earth.{{sfn|Carpenter|1977|pp=111, 200, 266 and throughout}}
+
+=== Author ===
+
+[[Verlyn Flieger]] is a scholar of English literature. She is also known as a [[Tolkien scholar]],<ref>{{cite web |title=Verlyn Flieger |website=Mythus |url=http://www.mythus.com/ |access-date=28 June 2020}}</ref><ref name="Signum">{{cite web |title=Verlyn Flieger |url=https://signumuniversity.org/directory/verlyn-flieger/ |publisher=[[Signum University]] |access-date=28 June 2020}}</ref> including for her books on [[Tolkien's legendarium]], ''[[Splintered Light]]''<ref name="Eden 2013">{{cite book |last=Eden |first=Bradford Lee |author-link=Bradford Lee Eden |chapter=Music |year=2013 |editor-last=Lee |editor-first=Stuart D. |editor-link=Stuart D. Lee |title=[[A Companion to J. R. R. Tolkien]] |publisher=[[Wiley-Blackwell]] |isbn=978-1-119-65602-9 |pages=504, 509}}</ref><ref name="Dawson 2020">{{cite journal |last1=Dawson |first1=Deidre A. |title=[Review:] A Wilderness of Dragons: Essays in Honor of Verlyn Flieger |journal=[[Journal of Tolkien Research]] |date=January 2020 |volume=11 |issue=1 |id={{Gale|A647455098}}}}</ref> and ''[[A Question of Time (book)|A Question of Time]]''.<ref name="Bratman 2008">{{cite journal |last=Bratman |first=David |author-link=David Bratman |year=2008 |title=Review of The Evolution of Tolkien's Mythology: A Study of the History of Middle-earth, by E. A. Whittingham |journal=[[Mythlore]] |volume=26 |issue=3/4 |pages=201–203 |jstor=26814594 |url=https://dc.swosu.edu/mythlore/vol26/iss3/14}}</ref> She has won the [[Mythopoeic Award|Mythopoeic Scholarship Award]] for her work on Tolkien's [[Middle-earth]] writings.<ref>{{cite web |title=Mythopoeic Awards 2013 |url=http://www.mythsoc.org/awards/awards-2019-remarks.htm |publisher=[[Mythopoeic Society]] |access-date=28 June 2020 |date=2019}}</ref>
+
+== Book ==
+
+=== Summary ===
+
+{{see also|Tolkien's legendarium}}
+
+The book's title alludes to the music of creation in the ''[[Ainulindalë]]'' at the start of ''[[The Silmarillion]]''; the music is interrupted by the evil [[Melkor]], spoiling the world of [[Arda (Middle-earth)|Arda]]. The book is not about [[Music of Middle-earth|Tolkien's use of music]] as such.<ref name="Renneisen 2008">{{cite thesis |last=Renneisen |first=Elizabeth |title=''Discordia Concours'' in Tolkien's Musical Universe |publisher=[[Middle Tennessee State University]] |type=PhD thesis |year=2008 |pages=10–13 |url=https://jewlscholar.mtsu.edu/server/api/core/bitstreams/59c16ae1-ce5f-481d-931b-5d4a8658dff6/content}}</ref>
+
+The book is in three parts. Part 1 examines Tolkien's "[[Tolkien's legendarium|body of connected legend]]", which he intended as [[a mythology for England]]. The four chapters assess Tolkien's motives for attempting this; the models available to him, including people such as [[Elias Lönnrot]] who assembled the Finnish epic poem, the ''[[Kalevala]]'', and literary traditions such as [[Arthurian legend]]; points of view on the mythology; and the way Tolkien assembled a literary tradition.<ref name="Nagy 2006"/> Flieger states that Tolkien presents ''The Lord of the Rings'' at four levels: "as the story itself; as one version of that story embodying references to other versions; as a historical artifact—the ''[[Red Book of Westmarch|Red Book]]''; [and] as a modern edition of that book complete with scholarly and critical apparatus".{{sfn|Flieger|2005|p=80}}
+
+Part 2 describes how Tolkien intended to present his legendarium, in particular [[Tolkien's frame stories|by framing it]] with [[Time in Tolkien's fiction|a time-travelling visitor]] such as [[Ælfwine (Tolkien)|Eriol/Ælfwine the mariner]].<ref name="Nagy 2006"/>
+
+Part 3 looks at [[Celtic influences on Tolkien]].<ref name="Nagy 2006"/> He had stated that he disliked the Celtic in a letter, but Flieger notes that he also said that his mythology should possess "the fair elusive beauty that some call Celtic".{{sfn|Flieger|2005|p=122}} The influences she identifies include the Celtic [[otherworld]], stories of "sunken or engulfed lands" like Tolkien's [[Númenor]], and the ''[[immram]]'' tradition of wandering sea-voyages.{{sfn|Flieger|2005|p=126}}
+
+=== Publication history ===
+
+''Interrupted Music'' was first published by [[Kent State University Press]] in 2005, in paperback format.{{sfn|Flieger|2001|p=iv}} The book is not illustrated, other than the use of [[Ted Nasmith]]'s ''The Incoming Sea at the Rainbow Cleft'' on the cover.{{sfn|Flieger|2001|p=rear cover}}
+
+== Reception ==
+
+=== Whole book ===
+
+[[David Bratman]], in ''[[Mythlore]]'', describes ''Interrupted Music'' as "a full-length meditation on the framing of the series" of 12 volumes of ''[[The History of Middle-earth]]''.<ref name="Bratman 2008"/> [[Gergely Nagy (scholar)|Gergely Nagy]], in ''[[Tolkien Studies]]'', writes that the book proves that Flieger is a "good established Tolkien critic", and in particular that she is "a critic whose work can be built on."<ref name="Nagy 2006"/> Shelley Gurney writes in ''[[Utopian Studies]]'' that Flieger "deals eloquently and concisely with the fundamental ideas behind ... Tolkien's mythology", and that she considers Flieger "the foremost scholar in research on ''The Silmarillion''".<ref name="Gurney 2007"/>
+
+Cami Agan writes in ''Mythlore'' that Flieger's books "establish Tolkien's grounding in [literary] sources ... [and] offer scintillating readings of Tolkien's themes, his processes of revision and recasting, and the resulting complexity of Middle-earth which he dedicated 'to England'".<ref name="Agan 2008"/> She adds that ''Interrupted Music'' uses "Tolkien's conception of creation as Music in order to explore the complex process of composition" of his legendarium.<ref name="Agan 2008">{{cite journal |last=Agan |first=Cami |year=2008 |title=Song as Mythic Conduit in The Fellowship of the Ring |journal=[[Mythlore]] |volume=26 |issue=3 |at=Article 5 |url=https://dc.swosu.edu/mythlore/vol26/iss3/5}}</ref>
+
+The Tolkien scholar [[Elizabeth Whittingham]] comments that in ''Interrupted Music'', Flieger "comes closest to achieving what she sets out to do [in comparison to her books ''[[Splintered Light]]'' and ''[[A Question of Time]]''], that is to undertake 'a comparison of the texts for the purpose of discovering patterns or movement in any direction'". Whittingham adds that Flieger's method of working is to trace Tolkien's many changes to his legendarium texts, searching for patterns of significant evolution in his mythic elements like "[[cosmogony]], theogony, cosmology, [[thanatology]] and [[eschatology]]".<ref name="Whittingham 2008">{{cite journal |title=The Evolution of Tolkien's Mythology: A Study of the History of Middle-earth (review) |journal=[[Tolkien Studies]] |volume=5 |issue=1 |date=2008 |doi=10.1353/tks.0.0028 |pages=205–209 |via=[[Project Muse]]}}</ref>
+
+The Christian linguist Oliver Stegen writes that readers interested in linguistics with a reasonable knowledge of Tolkien's Middle-earth writings will discover "eye-opening parallels" with wider language studies.<ref name="Stegen 2015">{{cite web |last=Stegen |first=Oliver |title=Review of: Interrupted Music, by Verlyn Flieger |url=https://www.academia.edu/14932089/Review_of_Interrupted_Music_by_Verlyn_Flieger?auto=download |publisher=[[SIL Global]] |date=August 2015}}</ref>
+
+The Catholic author [[Stratford Caldecott]] praised<!--† RIP--> ''Interrupted Music'' as joining the ranks of the "most fascinating books" of Tolkien scholarship, alongside Flieger's ''Splintered Light''. He noted that the title could be taken both as a description of the Great Music at the start of ''The Silmarillion'', and of Tolkien's never-finished [[legendarium]]. He quoted Flieger's description of her subject, the legendarium, as "an unfinished symphony whose implications outrun its execution".<ref name="Caldecott 2005"/> In his view, Flieger worked on three topics: tracing the evolution of the legendarium; discovering the "multitudinous" influences on Tolkien as he wrote; and Tolkien's effort to make the work [[a mythology for England]].<ref name="Caldecott 2005">{{cite journal |last=Caldecott |first=Stratford |author-link=Stratford Caldecott |date=2005 |title=The Battle for Middle-Earth: Tolkien's Divine Design in The Lord of the Rings, by Fleming Rutledge; The Lord of the Rings and Philosophy: One Book to Rule Them All, ed. Gregory Bassham and Eric Bronson; Tolkien and the Invention of Myth: A Reader, ed. Jane Chance; Interrupted Music: The Making of Tolkien’s Mythology, by Verlyn Flieger; Smith of Wootton Major, by J. R. R. Tolkien |journal=[[The Chesterton Review]] |volume=31 |issue=3/4 |pages=250-254 <!--|url=https://www.pdcnet.org/pdc/bvdb.nsf/purchase26?openform&fp=chesterton&id=chesterton_2005_0031_40606_0250_0254--><!--paywalled--> |doi=10.5840/chesterton2005313/425}}</ref>
+
+Elizabeth Renneisen offers the criticism that "If Flieger's purpose is to offer a definitive outline of Tolkien's brilliant attempt at an English mythology, she falls short of success", adding however that Flieger certainly succeeds in encouraging readers to speculate about Tolkien's mythology.<ref name="Renneisen 2008"/>
+
+=== Chapter 4: "The Tradition" ===
+
+{{see also|Editorial framing of The Lord of the Rings|Pseudotranslation in The Lord of the Rings}}
+
+Thomas Fornet-Ponse, in ''[[Marion E. Wade Center|VII]]'', writes that the tradition chapter shows how "Tolkien depicts his work like a true mythology with different layering, multiple narrators, overlapping texts and variant versions."<ref name="Fornet-Ponse 2007">{{cite journal |last=Fornet-Ponse |first=Thomas |year=2007 |title=Review of Interrupted Music: The Making of Tolkien's Mythology, by V. Flieger |journal=[[Marion E. Wade Center|VII]] |issue=24 |pages=107–109 |jstor=45297147}}</ref>
+
+Nagy considers the chapter on the tradition of the legendarium "an admirable synthesis", and "the most important part of the book", and that [[Tolkien's self-referentiality]] is "very effectively reflected on".<ref name="Nagy 2006">{{cite journal |last=Nagy |first=Gergely |author-link=Gergely Nagy (scholar) |title=Interrupted Music. The Making of Tolkien's Mythology (review) |journal=[[Tolkien Studies]] |volume=3 |issue=1 |date=2006 |doi=10.1353/tks.2006.0025 |pages=173–177}}</ref>
+
+Gurney states that the tradition chapter is "the most significant", showing how the legendarium "adheres to the established mythic tradition" by illustrating each means of transmission of myths in ''The Lord of the Rings''. She comments that she found the book straightforward to read, but cautions that readers without "a passing knowledge of at least some of Tolkien's sources" might find it "confusing".<ref name="Gurney 2007">{{cite journal |last=Gurney |first=Shelley |year=2007 |title=Review of Interrupted Music: The Making of Tolkien's Mythology, by V. Flieger |journal=[[Utopian Studies]] |volume=18 |issue=1 |pages=103–105 |jstor=20719856}}</ref>
+
+== References ==
+
+{{reflist|27em}}
+
+== Sources ==
+
+* {{ME-ref|Carpenter}} <!--Carpenter 1977-->
+* {{cite book |last=Flieger |first=Verlyn |author-link=Verlyn Flieger |year=1983 |title=Splintered Light: Logos and Language in Tolkien's World |title-link=Splintered Light |publisher=Wm B. Eerdmans Publishing |isbn=978-0-8028-1955-0}}
+* {{cite book |last=Flieger |first=Verlyn |author-link=Verlyn Flieger |title=[[A Question of Time (book)|A Question of Time]] |publisher=[[Kent State University Press]] |publication-place=Kent, Ohio |year=2001 |orig-year=1997 |isbn=978-0-87338-699-9}}
+* {{cite book |last=Flieger |first=Verlyn |author-link=Verlyn Flieger |title=Interrupted Music |publisher=[[Kent State University Press]] |publication-place=Kent, Ohio |year=2005|isbn=978-0-87338-824-5}}
+
+{{J. R. R. Tolkien}}
+{{Middle-earth}}
+
+{{Authority control}}
+
+[[Category:1997 non-fiction books]]
+[[Category:1997 English-language non-fiction books]]
+[[Category:American non-fiction books]]
+
+[[Category:Books about Middle-earth]]
