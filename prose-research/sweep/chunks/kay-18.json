@@ -1,0 +1,158 @@
+{
+ "name": "kay",
+ "chunk": 18,
+ "indices": [
+  270,
+  271,
+  272,
+  273,
+  274,
+  275,
+  276,
+  277,
+  278,
+  279,
+  280,
+  281,
+  282,
+  283,
+  284
+ ],
+ "claims": [
+  {
+   "index": 270,
+   "feature": "other: sentimentality as a named risk",
+   "claim": "Oden reports that critics sometimes fault Kay for being too sentimental and too romantic, and partly concedes the charge.",
+   "source": "Scott Oden (novelist), 'A Quarter Turn', Towers of Spider-Haunted Mystery (Substack), 2026",
+   "url": "https://soden.substack.com/p/a-quarter-turn",
+   "quote": "Critics sometimes hit Kay for being too sentimental, too romantic",
+   "page": "body, paragraph beginning 'Critics sometimes hit Kay'"
+  },
+  {
+   "index": 271,
+   "feature": "point of view and distance",
+   "claim": "A tabletop-RPG forum reader says Kay's narrator commentary and foreshadowing often felt heavy-handed to him.",
+   "source": "'Uqbarian', post #19 in 'Talk to me of Guy Gavriel Kay', RPGnet forum, 2022",
+   "url": "https://forum.rpg.net/index.php?threads/talk-to-me-of-guy-gavriel-kay.898766/",
+   "quote": "his narrator commentary and foreshadowing often felt really heavy-handed to me",
+   "page": "post #19, 2022-06-26"
+  },
+  {
+   "index": 272,
+   "feature": "plainness and economy",
+   "claim": "The same reader says Kay is a top-notch prose stylist who goes on rather more than he needs to.",
+   "source": "'Uqbarian', post #19 in 'Talk to me of Guy Gavriel Kay', RPGnet forum, 2022",
+   "url": "https://forum.rpg.net/index.php?threads/talk-to-me-of-guy-gavriel-kay.898766/",
+   "quote": "he just goes on rather more than he needs to",
+   "page": "post #19, 2022-06-26"
+  },
+  {
+   "index": 273,
+   "feature": "other: portent and stated import",
+   "claim": "The same reader reports a scene in The Lions of Al-Rassan of characters thinking portentous thoughts for five and a half pages.",
+   "source": "'Uqbarian', post #19 in 'Talk to me of Guy Gavriel Kay', RPGnet forum, 2022",
+   "url": "https://forum.rpg.net/index.php?threads/talk-to-me-of-guy-gavriel-kay.898766/",
+   "quote": "thinking portentous thoughts for five and a half pages",
+   "page": "post #19, 2022-06-26"
+  },
+  {
+   "index": 274,
+   "feature": "naming and forms of address",
+   "claim": "Another forum reader says the renamed real cities of The Last Light of the Sun left him constantly mixing up not-Constantinople and not-Jerusalem.",
+   "source": "'Daztur', post #10 in 'Talk to me of Guy Gavriel Kay', RPGnet forum, 2022",
+   "url": "https://forum.rpg.net/index.php?threads/talk-to-me-of-guy-gavriel-kay.898766/",
+   "quote": "constantly get not-Constantinople and not-Jerusalem mixed up",
+   "page": "post #10, 2022-06-25"
+  },
+  {
+   "index": 275,
+   "feature": "register modulation",
+   "claim": "A forum reader says The Lions of Al-Rassan moves between an adventure story and a people-living-through-history story.",
+   "source": "'Gavin Bennett', quoted post in 'Talk to me of Guy Gavriel Kay', RPGnet forum, 2022",
+   "url": "https://forum.rpg.net/index.php?threads/talk-to-me-of-guy-gavriel-kay.898766/",
+   "quote": "a sort of adventure story and a people living through history",
+   "page": "post quoted at #19, 2022-06-26"
+  },
+  {
+   "index": 276,
+   "feature": "plainness and economy",
+   "claim": "A reviewer says that while he enjoys Kay's prose he often wishes there was less of it.",
+   "source": "'Brok3n Engines', review of Tigana, Brok3n Engines (Substack), 2025",
+   "url": "https://b3en.substack.com/p/ggk-in-transition",
+   "quote": "while I enjoy his prose, I often wish there was less",
+   "page": "final body paragraph"
+  },
+  {
+   "index": 277,
+   "feature": "point of view and distance",
+   "claim": "Kay says the subject engaging him is that a novel you read is a story being told to you by someone.",
+   "source": "Guy Gavriel Kay, interviewed by Patrick St-Denis, Pat's Fantasy Hotlist, 2019",
+   "url": "http://fantasyhotlist.blogspot.com/2019/05/new-guy-gavriel-kay-interview.html",
+   "quote": "a story being told to you by someone",
+   "page": "answer to 'So what interests a more mature ... Kay nowadays?'"
+  },
+  {
+   "index": 278,
+   "feature": "annalist voice and deep time",
+   "claim": "Kay says he is fascinated by how we examine and remember the past and shape the narratives we need from it.",
+   "source": "Guy Gavriel Kay, interviewed by Patrick St-Denis, Pat's Fantasy Hotlist, 2019",
+   "url": "http://fantasyhotlist.blogspot.com/2019/05/new-guy-gavriel-kay-interview.html",
+   "quote": "how we examine and remember the past",
+   "page": "answer to 'So what interests a more mature ... Kay nowadays?'"
+  },
+  {
+   "index": 279,
+   "feature": "other: structure and shape",
+   "claim": "Kay says he would be more an architect than a gardener because the shape of a novel matters a lot to him.",
+   "source": "Guy Gavriel Kay, interviewed by Patrick St-Denis, Pat's Fantasy Hotlist, 2019",
+   "url": "http://fantasyhotlist.blogspot.com/2019/05/new-guy-gavriel-kay-interview.html",
+   "quote": "the shape of a novel matters a lot to me",
+   "page": "answer to the architect-or-gardener question"
+  },
+  {
+   "index": 280,
+   "feature": "place and institution description",
+   "claim": "Kay says setting came first for A Brightness Long Ago.",
+   "source": "Guy Gavriel Kay, interviewed by Patrick St-Denis, Pat's Fantasy Hotlist, 2019",
+   "url": "http://fantasyhotlist.blogspot.com/2019/05/new-guy-gavriel-kay-interview.html",
+   "quote": "I think setting came first here",
+   "page": "answer about A Brightness Long Ago's arc of emergence"
+  },
+  {
+   "index": 281,
+   "feature": "place and institution description",
+   "claim": "The interviewer reports Kay having said that in general setting precedes theme, which grows out of learning about time and place.",
+   "source": "Patrick St-Denis (interviewer), paraphrasing Kay's earlier answer, Pat's Fantasy Hotlist, 2019",
+   "url": "http://fantasyhotlist.blogspot.com/2019/05/new-guy-gavriel-kay-interview.html",
+   "quote": "in general setting precedes theme",
+   "page": "interviewer's question about A Brightness Long Ago"
+  },
+  {
+   "index": 282,
+   "feature": "other: writing-advice stance",
+   "claim": "Kay warns readers to be sceptical when writers present intuitive processes as thought-out planning.",
+   "source": "Guy Gavriel Kay, 'On the Strengths of Fiction Done as Near-History' (first published at boingboing.net, 2016), Bright Weavings",
+   "url": "https://brightweavings.com/on-the-strengths-of-fiction-done-as-near-history/",
+   "quote": "be skeptical when writers present intuitive processes as thought-out planning",
+   "page": "body, paragraph beginning 'There are a multiplicity of reasons'"
+  },
+  {
+   "index": 283,
+   "feature": "civic record register",
+   "claim": "Kay says he always includes starter bibliographies in his novels.",
+   "source": "Guy Gavriel Kay, 'On the Strengths of Fiction Done as Near-History' (first published at boingboing.net, 2016), Bright Weavings",
+   "url": "https://brightweavings.com/on-the-strengths-of-fiction-done-as-near-history/",
+   "quote": "And I always include starter bibliographies",
+   "page": "body, paragraph beginning 'And I found that I liked'"
+  },
+  {
+   "index": 284,
+   "feature": "withheld information and inference",
+   "claim": "Kay says each reader makes the book they read.",
+   "source": "Guy Gavriel Kay, 'On the Strengths of Fiction Done as Near-History' (first published at boingboing.net, 2016), Bright Weavings",
+   "url": "https://brightweavings.com/on-the-strengths-of-fiction-done-as-near-history/",
+   "quote": "each reader makes the book they read",
+   "page": "body, paragraph beginning 'And I found that I liked'"
+  }
+ ]
+}

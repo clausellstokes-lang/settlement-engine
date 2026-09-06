@@ -1,432 +1,4 @@
 {
- "complete": true,
- "coverage": "Named roster (the angle names Kay's own essays and interviews on writing history-shaped fantasy): FETCHED in full from brightweavings.com, Kay's authorized site, by walking wp-sitemap-posts-post-1.xml (490 urls) and both essay indexes (/essays/, /siteessays/), then fetching every GGK's-Words item - 13 essays and afterwords, 11 interviews, 3 letters/author's notes, 4 later blog-era pieces. BLOCKED: fantasyliterature.com (HTTP 403 to a browser UA) - recovered via the Wayback raw capture 20250515225734id_ and read in full. NOT FOUND as text: the 2021 Tolkien Lecture 'Just Enough Light' (video only; the BrightWeavings and Pembroke pages are announcements), the Nancy Pearl and Paul Blezard conversations and the Kleffel/Siregar/Telander interviews (audio/video only), and the full Locus interviews (print-only; the site carries excerpts, read raw). Off-site expansion: LARB, CBC Books, LitHub x2, Whatever/Scalzi, Locus x3, Clarkesworld, The Guardian (via the authorized reprint), fantasyhotlist (via the authorized reprint). Substantive sources per route: 27 via the BrightWeavings roster, 9 via lateral search, 1 via Wayback recovery, 0 via cited-by (an author's interviews have no citation graph). Two consecutive further searches (Reddit AMA, a Kay Tor.com essay) surfaced nothing new before the session's web-search budget ran out; every quotation was grepped against the fetched text before writing.",
- "sourcesRead": [
-  {
-   "title": "Home and Away (essay/keynote speech; short version Globe and Mail, autumn 1999)",
-   "url": "https://brightweavings.com/globe/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "1999",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "On Myth (Chapters 'Great Writers' newspaper insert)",
-   "url": "https://brightweavings.com/mythessay/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "summer 1999",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "Tigana Afterword (ROC USA 10th anniversary edition)",
-   "url": "https://brightweavings.com/tiganaafterword/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "1999",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "On Writing Sailing to Sarantium (written for Earthlight, UK publisher)",
-   "url": "https://brightweavings.com/earthlight/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "c. 1998",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "Under Heaven Author's Letter (printed in advance reading copies)",
-   "url": "https://brightweavings.com/underheavenauthorsletter/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2010",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "Interview with SFSite, conducted by Rodger Turner",
-   "url": "https://brightweavings.com/sfsite/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "September 2000",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "A Question of Character - interview by Sandy Auden, UK Sci Fi Channel website",
-   "url": "https://brightweavings.com/sfchannel/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "undated (c. 2000s)",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "Interview with SFX (UK magazine) #93, conducted by Guy Haley",
-   "url": "https://brightweavings.com/sfx/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "July 2002",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "Interview with Challenging Destiny #11, by James Schellenberg and David M. Switzer",
-   "url": "https://brightweavings.com/challengingdestiny/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "c. 2001",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "Interview with Deep Magic ezine",
-   "url": "https://brightweavings.com/deepmagic/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "February 2004",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "Chat transcript with Event Horizon (Flashpoint, hosted by Jim Freund)",
-   "url": "https://brightweavings.com/eventhorizon/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "1999-04-08",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "GGK's Later Novels: The History behind the Books (Mohanraj and Cobb, Strange Horizons)",
-   "url": "https://brightweavings.com/histories/",
-   "kind": "analysis",
-   "substantive": false,
-   "date": "undated",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "Essays index (BrightWeavings, GGK's Words)",
-   "url": "https://brightweavings.com/essays/",
-   "kind": "relay",
-   "substantive": false,
-   "date": "2014-11-15",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "Site Essays index (BrightWeavings, GGK's Words)",
-   "url": "https://brightweavings.com/siteessays/",
-   "kind": "relay",
-   "substantive": false,
-   "date": "2014-11-15",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "On the Strengths of Fiction Done as Near-History (first appeared at boingboing.net)",
-   "url": "https://brightweavings.com/on-the-strengths-of-fiction-done-as-near-history/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2016",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "Some Writing Advice: Don't Take Others' Advice (first appeared at lithub.com)",
-   "url": "https://brightweavings.com/some-writing-advice-dont-take-others-advice/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2019",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "The Big Idea: Guy Gavriel Kay (on Written on the Dark), Whatever",
-   "url": "https://whatever.scalzi.com/2025/05/28/the-big-idea-guy-gavriel-kay-4/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2025-05-28",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "Children of Earth and Sky Author Questions",
-   "url": "https://brightweavings.com/children-of-earth-and-sky-author-questions/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "posted 2017-07-15 (book 2016)",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "Children of Earth and Sky: An Origin Story",
-   "url": "https://brightweavings.com/children-of-earth-and-sky-an-origin-story/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "posted 2017-07-04",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "Letter to the Reader of Ysabel",
-   "url": "https://brightweavings.com/letter-to-the-reader-of-ysabel/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "c. 2007 (posted 2016)",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "Interview with Kristin Centorcelli, SF Signal",
-   "url": "https://brightweavings.com/interview-with-kristin-centorcelli/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "February 2013",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "Where I Have No Notes (a link to a reader review)",
-   "url": "https://brightweavings.com/where-i-have-no-notes/",
-   "kind": "reader",
-   "substantive": false,
-   "date": "2026-01-02",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "Mostly Quiet (note on a poem shared at newpoetry.ca)",
-   "url": "https://brightweavings.com/mostly-quiet/",
-   "kind": "own-words",
-   "substantive": false,
-   "date": "2025-07-26",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "Sooner gather the birds (poem, image only; The Advocates' Journal)",
-   "url": "https://brightweavings.com/sooner-gather-the-birds/",
-   "kind": "own-words",
-   "substantive": false,
-   "date": "2023-03-25",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "The Fionavar Tapestry Afterword (HarperPerennial Canada 20th anniversary edition)",
-   "url": "https://brightweavings.com/fionavarafterword/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "December 2003",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "Exile (essay written for a publicist's question, around River of Stars)",
-   "url": "https://brightweavings.com/exile/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "c. 2013",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "6 Books I Love (first appeared at cbc.ca)",
-   "url": "https://brightweavings.com/6-books-i-love/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2016",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "Interview with Alison Flood for The Guardian",
-   "url": "https://brightweavings.com/interview-with-alison-flood-for-the-guardian/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2017 (30 years after Fionavar)",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "Something to Write Home About (first appeared at thewalrus.ca)",
-   "url": "https://brightweavings.com/something-to-write-home-about/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2016",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "On Rereading",
-   "url": "https://brightweavings.com/rereading/",
-   "kind": "own-words",
-   "substantive": false,
-   "date": "undated",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "Reflections on an Ethical Society (speech, Convocation Hall, Toronto)",
-   "url": "https://brightweavings.com/privacy/",
-   "kind": "own-words",
-   "substantive": false,
-   "date": "2000-11-04",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "Teaching Literature (keynote, Ontario College Association of Language and Learning)",
-   "url": "https://brightweavings.com/ggkorillia/",
-   "kind": "own-words",
-   "substantive": false,
-   "date": "2001",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "Pieces of History (review by Cheryl Morgan, Emerald City)",
-   "url": "https://brightweavings.com/pieces-of-history-2/",
-   "kind": "reception",
-   "substantive": false,
-   "date": "undated",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "GGK's Later Novels: rambles / hsrambles reader Q and A pages",
-   "url": "https://brightweavings.com/rambles/",
-   "kind": "own-words",
-   "substantive": false,
-   "date": "c. 2004",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "In Memoriam: Dorothy Dunnett",
-   "url": "https://brightweavings.com/dunnett/",
-   "kind": "own-words",
-   "substantive": false,
-   "date": "c. 2001",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "Q&A with Guy about Ysabel",
-   "url": "https://brightweavings.com/qa-with-guy-about-ysabel/",
-   "kind": "own-words",
-   "substantive": false,
-   "date": "c. 2007",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "The J.R.R. Tolkien Lecture on Fantasy Literature (announcement only; lecture delivered 2022-05-11)",
-   "url": "https://brightweavings.com/the-j-r-r-tolkien-lecture-on-fantasy-literature/",
-   "kind": "own-words",
-   "substantive": false,
-   "date": "posted 2021-05-30",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "Tigana (leather bound intro) - publisher's front matter, not Kay",
-   "url": "https://brightweavings.com/leatherboundtiganaintro/",
-   "kind": "vendor",
-   "substantive": false,
-   "date": "undated",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "The Fantastic Worlds of Guy Gavriel Kay - Christine Fischer Guy interviews Kay, Los Angeles Review of Books",
-   "url": "https://lareviewofbooks.org/article/fantastic-worlds-guy-gavriel-kay/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2016-08-14",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "Guy Gavriel Kay on why writing fantasy fiction ... will never go out of style, CBC Books (Ryan B. Patrick)",
-   "url": "https://www.cbc.ca/books/guy-gavriel-kay-on-why-writing-fantasy-fiction-about-destiny-dominion-and-deceit-will-never-go-out-of-style-1.5206593",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2019-07-16 (updated 2024-11-07)",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "Guy Gavriel Kay: 5 Books in My Life, Literary Hub",
-   "url": "https://lithub.com/guy-gavriel-kay-5-books-in-my-life/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2016-05-24",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "Guy Gavriel Kay Children of Earth and Sky: Shakespearean Fantasy Interview and Review (Rick Kleffel, Narrative Species) - review text plus a link to an audio interview",
-   "url": "https://narrativespecies.wordpress.com/2016/06/08/guy-gavriel-kay-children-of-earth-and-sky-shakespearean-fantasy-interview-and-review/",
-   "kind": "reception",
-   "substantive": false,
-   "date": "2016-06-08",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "Rob chats with Guy Gavriel Kay about River of Stars, FantasyLiterature",
-   "url": "https://web.archive.org/web/20250515225734id_/https://fantasyliterature.com/author-interviews/guy-gavriel-kay-2/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "c. 2013",
-   "route": "live URL 403 -> Wayback raw capture 20250515225734id_"
-  },
-  {
-   "title": "Guy Gavriel Kay: Margins of History (Locus interview excerpt; full interview in the May 2025 issue)",
-   "url": "https://locusmag.com/feature/guy-gavriel-kay-margins-of-history/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2025-05-12",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "Guy Gavriel Kay: View from the North (Locus interview excerpts; full interview April 2004 issue)",
-   "url": "https://www.locusmag.com/2004/Issues/04Kay.html",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "April 2004",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "Guy Gavriel Kay: Journeying (Locus interview excerpt; full interview May 2016 issue)",
-   "url": "https://locusmag.com/feature/guy-gavriel-kay-journeying/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "May 2016",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "The 'Quarter Turn' of History: A Conversation with Guy Gavriel Kay, by Chris Urie, Clarkesworld issue 117",
-   "url": "https://clarkesworldmagazine.com/kay_interview/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "June 2016",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "Interview with Patrick St-Denis (originally at fantasyhotlist.blogspot.com)",
-   "url": "https://brightweavings.com/patrick/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "April 2010",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "Interview with Randy Thompson (BrightWeavings) - long interview on Fionavar and the Arthurian material",
-   "url": "https://brightweavings.com/thompson/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "undated",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "Interview with Voyageur (BrightWeavings)",
-   "url": "https://brightweavings.com/voyageur/",
-   "kind": "own-words",
-   "substantive": false,
-   "date": "c. 2002",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "Toastmaster Address, World Fantasy Awards 2007 (BrightWeavings)",
-   "url": "https://brightweavings.com/wfc2007/",
-   "kind": "own-words",
-   "substantive": false,
-   "date": "2007",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "Guy Gavriel Kay Lecture Recording (announcement of the 2021 Tolkien Lecture 'Just Enough Light'; video only, no transcript)",
-   "url": "https://tolkienlecture.org/2021/05/14/guy-gavriel-kay-lecture-recording/",
-   "kind": "own-words",
-   "substantive": false,
-   "date": "2021-05-14",
-   "route": "live URL, curl browser UA"
-  },
-  {
-   "title": "Just Enough Light: Guy Gavriel Kay Delivers JRR Tolkien Lecture, Pembroke College news",
-   "url": "https://www.pmb.ox.ac.uk/news/just-enough-light-guy-gavriel-kay-delivers-jrr-tolkien-lecture",
-   "kind": "relay",
-   "substantive": false,
-   "date": "2021",
-   "route": "live URL, curl browser UA"
-  }
- ],
  "claims": [
   {
    "feature": "withheld information and inference",
@@ -1898,5 +1470,433 @@
    "registerHint": "dossier-archivist",
    "confidence": "high"
   }
- ]
+ ],
+ "sourcesRead": [
+  {
+   "title": "Home and Away (essay/keynote speech; short version Globe and Mail, autumn 1999)",
+   "url": "https://brightweavings.com/globe/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "1999",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "On Myth (Chapters 'Great Writers' newspaper insert)",
+   "url": "https://brightweavings.com/mythessay/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "summer 1999",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "Tigana Afterword (ROC USA 10th anniversary edition)",
+   "url": "https://brightweavings.com/tiganaafterword/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "1999",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "On Writing Sailing to Sarantium (written for Earthlight, UK publisher)",
+   "url": "https://brightweavings.com/earthlight/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "c. 1998",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "Under Heaven Author's Letter (printed in advance reading copies)",
+   "url": "https://brightweavings.com/underheavenauthorsletter/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2010",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "Interview with SFSite, conducted by Rodger Turner",
+   "url": "https://brightweavings.com/sfsite/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "September 2000",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "A Question of Character - interview by Sandy Auden, UK Sci Fi Channel website",
+   "url": "https://brightweavings.com/sfchannel/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "undated (c. 2000s)",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "Interview with SFX (UK magazine) #93, conducted by Guy Haley",
+   "url": "https://brightweavings.com/sfx/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "July 2002",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "Interview with Challenging Destiny #11, by James Schellenberg and David M. Switzer",
+   "url": "https://brightweavings.com/challengingdestiny/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "c. 2001",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "Interview with Deep Magic ezine",
+   "url": "https://brightweavings.com/deepmagic/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "February 2004",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "Chat transcript with Event Horizon (Flashpoint, hosted by Jim Freund)",
+   "url": "https://brightweavings.com/eventhorizon/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "1999-04-08",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "GGK's Later Novels: The History behind the Books (Mohanraj and Cobb, Strange Horizons)",
+   "url": "https://brightweavings.com/histories/",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "undated",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "Essays index (BrightWeavings, GGK's Words)",
+   "url": "https://brightweavings.com/essays/",
+   "kind": "relay",
+   "substantive": false,
+   "date": "2014-11-15",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "Site Essays index (BrightWeavings, GGK's Words)",
+   "url": "https://brightweavings.com/siteessays/",
+   "kind": "relay",
+   "substantive": false,
+   "date": "2014-11-15",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "On the Strengths of Fiction Done as Near-History (first appeared at boingboing.net)",
+   "url": "https://brightweavings.com/on-the-strengths-of-fiction-done-as-near-history/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2016",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "Some Writing Advice: Don't Take Others' Advice (first appeared at lithub.com)",
+   "url": "https://brightweavings.com/some-writing-advice-dont-take-others-advice/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2019",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "The Big Idea: Guy Gavriel Kay (on Written on the Dark), Whatever",
+   "url": "https://whatever.scalzi.com/2025/05/28/the-big-idea-guy-gavriel-kay-4/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2025-05-28",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "Children of Earth and Sky Author Questions",
+   "url": "https://brightweavings.com/children-of-earth-and-sky-author-questions/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "posted 2017-07-15 (book 2016)",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "Children of Earth and Sky: An Origin Story",
+   "url": "https://brightweavings.com/children-of-earth-and-sky-an-origin-story/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "posted 2017-07-04",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "Letter to the Reader of Ysabel",
+   "url": "https://brightweavings.com/letter-to-the-reader-of-ysabel/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "c. 2007 (posted 2016)",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "Interview with Kristin Centorcelli, SF Signal",
+   "url": "https://brightweavings.com/interview-with-kristin-centorcelli/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "February 2013",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "Where I Have No Notes (a link to a reader review)",
+   "url": "https://brightweavings.com/where-i-have-no-notes/",
+   "kind": "reader",
+   "substantive": false,
+   "date": "2026-01-02",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "Mostly Quiet (note on a poem shared at newpoetry.ca)",
+   "url": "https://brightweavings.com/mostly-quiet/",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "2025-07-26",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "Sooner gather the birds (poem, image only; The Advocates' Journal)",
+   "url": "https://brightweavings.com/sooner-gather-the-birds/",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "2023-03-25",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "The Fionavar Tapestry Afterword (HarperPerennial Canada 20th anniversary edition)",
+   "url": "https://brightweavings.com/fionavarafterword/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "December 2003",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "Exile (essay written for a publicist's question, around River of Stars)",
+   "url": "https://brightweavings.com/exile/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "c. 2013",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "6 Books I Love (first appeared at cbc.ca)",
+   "url": "https://brightweavings.com/6-books-i-love/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2016",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "Interview with Alison Flood for The Guardian",
+   "url": "https://brightweavings.com/interview-with-alison-flood-for-the-guardian/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2017 (30 years after Fionavar)",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "Something to Write Home About (first appeared at thewalrus.ca)",
+   "url": "https://brightweavings.com/something-to-write-home-about/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2016",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "On Rereading",
+   "url": "https://brightweavings.com/rereading/",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "undated",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "Reflections on an Ethical Society (speech, Convocation Hall, Toronto)",
+   "url": "https://brightweavings.com/privacy/",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "2000-11-04",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "Teaching Literature (keynote, Ontario College Association of Language and Learning)",
+   "url": "https://brightweavings.com/ggkorillia/",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "2001",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "Pieces of History (review by Cheryl Morgan, Emerald City)",
+   "url": "https://brightweavings.com/pieces-of-history-2/",
+   "kind": "reception",
+   "substantive": false,
+   "date": "undated",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "Rambles / hsrambles reader Q and A pages",
+   "url": "https://brightweavings.com/rambles/",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "c. 2004",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "In Memoriam: Dorothy Dunnett",
+   "url": "https://brightweavings.com/dunnett/",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "c. 2001",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "Q&A with Guy about Ysabel",
+   "url": "https://brightweavings.com/qa-with-guy-about-ysabel/",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "c. 2007",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "The J.R.R. Tolkien Lecture on Fantasy Literature (announcement only; lecture delivered 2021)",
+   "url": "https://brightweavings.com/the-j-r-r-tolkien-lecture-on-fantasy-literature/",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "posted 2021-05-30",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "Tigana (leather bound intro) - publisher's front matter, not Kay",
+   "url": "https://brightweavings.com/leatherboundtiganaintro/",
+   "kind": "vendor",
+   "substantive": false,
+   "date": "undated",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "The Fantastic Worlds of Guy Gavriel Kay - Christine Fischer Guy interviews Kay, Los Angeles Review of Books",
+   "url": "https://lareviewofbooks.org/article/fantastic-worlds-guy-gavriel-kay/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2016-08-14",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "Guy Gavriel Kay on why writing fantasy fiction ... will never go out of style, CBC Books (Ryan B. Patrick)",
+   "url": "https://www.cbc.ca/books/guy-gavriel-kay-on-why-writing-fantasy-fiction-about-destiny-dominion-and-deceit-will-never-go-out-of-style-1.5206593",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2019-07-16 (updated 2024-11-07)",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "Guy Gavriel Kay: 5 Books in My Life, Literary Hub",
+   "url": "https://lithub.com/guy-gavriel-kay-5-books-in-my-life/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2016-05-24",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "Guy Gavriel Kay Children of Earth and Sky: Shakespearean Fantasy Interview and Review (Rick Kleffel, Narrative Species) - review text plus a link to an audio interview",
+   "url": "https://narrativespecies.wordpress.com/2016/06/08/guy-gavriel-kay-children-of-earth-and-sky-shakespearean-fantasy-interview-and-review/",
+   "kind": "reception",
+   "substantive": false,
+   "date": "2016-06-08",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "Rob chats with Guy Gavriel Kay about River of Stars, FantasyLiterature",
+   "url": "https://web.archive.org/web/20250515225734id_/https://fantasyliterature.com/author-interviews/guy-gavriel-kay-2/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2013-04-02",
+   "route": "live URL 403 -> Wayback raw capture 20250515225734id_"
+  },
+  {
+   "title": "Guy Gavriel Kay: Margins of History (Locus interview excerpt; full interview in the May 2025 issue)",
+   "url": "https://locusmag.com/feature/guy-gavriel-kay-margins-of-history/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2025-05-12",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "Guy Gavriel Kay: View from the North (Locus interview excerpts; full interview April 2004 issue)",
+   "url": "https://www.locusmag.com/2004/Issues/04Kay.html",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "April 2004",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "Guy Gavriel Kay: Journeying (Locus interview excerpt; full interview May 2016 issue)",
+   "url": "https://locusmag.com/feature/guy-gavriel-kay-journeying/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "May 2016",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "The 'Quarter Turn' of History: A Conversation with Guy Gavriel Kay, by Chris Urie, Clarkesworld issue 117",
+   "url": "https://clarkesworldmagazine.com/kay_interview/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "June 2016",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "Interview with Patrick St-Denis (originally at fantasyhotlist.blogspot.com)",
+   "url": "https://brightweavings.com/patrick/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "April 2010",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "Interview with Randy Thompson (BrightWeavings) - long interview on Fionavar and the Arthurian material",
+   "url": "https://brightweavings.com/thompson/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "undated",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "Interview with Voyageur (BrightWeavings)",
+   "url": "https://brightweavings.com/voyageur/",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "c. 2002",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "Toastmaster Address, World Fantasy Awards 2007 (BrightWeavings)",
+   "url": "https://brightweavings.com/wfc2007/",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "2007",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "Guy Gavriel Kay Lecture Recording (announcement of the 2021 Tolkien Lecture 'Just Enough Light'; video only, no transcript)",
+   "url": "https://tolkienlecture.org/2021/05/14/guy-gavriel-kay-lecture-recording/",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "2021-05-14",
+   "route": "live URL, curl browser UA"
+  },
+  {
+   "title": "Just Enough Light: Guy Gavriel Kay Delivers JRR Tolkien Lecture, Pembroke College news",
+   "url": "https://www.pmb.ox.ac.uk/news/just-enough-light-guy-gavriel-kay-delivers-jrr-tolkien-lecture",
+   "kind": "relay",
+   "substantive": false,
+   "date": "2021",
+   "route": "live URL, curl browser UA"
+  }
+ ],
+ "complete": true,
+ "coverage": "Named roster (Kay's own essays and interviews on writing history-shaped fantasy): FETCHED in full from brightweavings.com, Kay's authorized site, by walking wp-sitemap-posts-post-1.xml (490 urls) plus both essay indexes and the GGK's-Words category — 13 essays and afterwords, 11 interviews, 3 letters/author's notes, 4 blog-era pieces, all read raw via curl with a browser UA, not via summariser. BLOCKED: fantasyliterature.com (HTTP 403) — recovered through the Wayback raw capture 20250515225734id_ and read in full. NOT FOUND as text: the 2021 Tolkien Lecture \"Just Enough Light\" (video only; both the BrightWeavings and Pembroke pages are announcements), the Nancy Pearl, Blezard, Kleffel, Siregar and Telander conversations (audio/video only), and the complete Locus interviews (print-only; the site's substantial excerpts were read raw). Off-site expansion: LARB, CBC Books, LitHub, Whatever/Scalzi, Locus x3, Clarkesworld, plus The Guardian and fantasyhotlist via their authorized reprints. Substantive sources per route: 27 via the BrightWeavings roster, 9 via lateral search, 1 via Wayback recovery, 0 via cited-by (an author's interview corpus has no citation graph). Two further searches (a Reddit AMA, a Kay Tor.com essay) surfaced nothing new before the session's web-search budget ran out. Every one of the 105 quotations was grepped against the fetched text before writing; all are verbatim and twelve words or fewer."
 }

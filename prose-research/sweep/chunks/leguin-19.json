@@ -1,0 +1,158 @@
+{
+ "name": "leguin",
+ "chunk": 19,
+ "indices": [
+  330,
+  331,
+  332,
+  333,
+  334,
+  335,
+  336,
+  337,
+  338,
+  339,
+  340,
+  341,
+  342,
+  343,
+  344
+ ],
+ "claims": [
+  {
+   "index": 330,
+   "feature": "omission as information",
+   "claim": "A student reader-response essay observes that Le Guin describes Omelas without giving exact details, leaving the reader to interpret.",
+   "source": "Student reader-response essay on Omelas, Beginnings and Endings: A Critical Edition (Pressbooks, College of Western Idaho)",
+   "url": "https://cwi.pressbooks.pub/beginnings-and-endings-a-critical-edition/chapter/reader-response-9/",
+   "quote": "without giving exact details, allows the reader to interpret",
+   "page": "Reader Response chapter"
+  },
+  {
+   "index": 331,
+   "feature": "place and institution description",
+   "claim": "Erin Ramsay notes that in The Tombs of Atuan the conflict is administrative, over the posting of guards and how to punish unbelievers.",
+   "source": "Erin Ramsay, \"Earthsea: A Sharpening of Scale\", The Lighthouse (Substack)",
+   "url": "https://erinramsay.substack.com/p/earthsea-a-sharpening-of-scale",
+   "quote": "over the posting of guards and how to punish unbelievers",
+   "page": "Tombs of Atuan section"
+  },
+  {
+   "index": 332,
+   "feature": "register modulation",
+   "claim": "Ramsay argues the mythic register of A Wizard of Earthsea gives way to the realistic and mundane in The Tombs of Atuan.",
+   "source": "Erin Ramsay, \"Earthsea: A Sharpening of Scale\", The Lighthouse (Substack)",
+   "url": "https://erinramsay.substack.com/p/earthsea-a-sharpening-of-scale",
+   "quote": "gives way to the realistic and mundane in this novel",
+   "page": "Tombs of Atuan section"
+  },
+  {
+   "index": 333,
+   "feature": "other: narrowing of scale",
+   "claim": "Ramsay reads Tehanu as the final sharpening of scale across the first four Earthsea books.",
+   "source": "Erin Ramsay, \"Earthsea: A Sharpening of Scale\", The Lighthouse (Substack)",
+   "url": "https://erinramsay.substack.com/p/earthsea-a-sharpening-of-scale",
+   "quote": "This is the final sharpening of scale across the first four",
+   "page": "Tehanu section"
+  },
+  {
+   "index": 334,
+   "feature": "concrete sensory noun",
+   "claim": "Ramsay quotes Le Guin describing the villagers of Lorbanery as sullen and silent in the large, soft rain of April.",
+   "source": "Ursula K. Le Guin, quoted by Erin Ramsay, The Lighthouse (Substack)",
+   "url": "https://erinramsay.substack.com/p/earthsea-a-sharpening-of-scale",
+   "quote": "sullen and silent in the large, soft rain of April",
+   "page": "The Farthest Shore section"
+  },
+  {
+   "index": 335,
+   "feature": "cadence and rhythm",
+   "claim": "Matt Bell close-reads a Rocannon's World sentence and points to the parallel construction of its two rhyming sets.",
+   "source": "Matt Bell, \"My Le Guin Year: Craft Lessons From a Master\", Reactor (Tor.com), 24 August 2021",
+   "url": "https://reactormag.com/my-le-guin-year-craft-lessons-from-a-master/",
+   "quote": "hear the parallel construction of the two rhyming sets",
+   "page": "prose paragraph, mid-essay"
+  },
+  {
+   "index": 336,
+   "feature": "other: escalation inside one sentence",
+   "claim": "Bell describes the same sentence as containing two progressions that expand its scale as it goes.",
+   "source": "Matt Bell, Reactor (Tor.com), 24 August 2021",
+   "url": "https://reactormag.com/my-le-guin-year-craft-lessons-from-a-master/",
+   "quote": "See the two progressions expanding its scale as it goes",
+   "page": "prose paragraph, mid-essay"
+  },
+  {
+   "index": 337,
+   "feature": "place and institution description",
+   "claim": "Bell says Le Guin built cultures by working from the big picture down to the minutiae of local life.",
+   "source": "Matt Bell, Reactor (Tor.com), 24 August 2021",
+   "url": "https://reactormag.com/my-le-guin-year-craft-lessons-from-a-master/",
+   "quote": "working from the big picture down to the minutiae of local life",
+   "page": "worldbuilding paragraph"
+  },
+  {
+   "index": 338,
+   "feature": "concrete sensory noun",
+   "claim": "Bell cites as a pleasurable detail the Gethenian table implement for cracking the ice formed on a drink.",
+   "source": "Ursula K. Le Guin (The Left Hand of Darkness), quoted by Matt Bell, Reactor, 24 August 2021",
+   "url": "https://reactormag.com/my-le-guin-year-craft-lessons-from-a-master/",
+   "quote": "with which you crack the ice that has formed",
+   "page": "worldbuilding paragraph"
+  },
+  {
+   "index": 339,
+   "feature": "concrete sensory noun",
+   "claim": "Bell singles out a Left Hand of Darkness sentence that names the landscape as four bare nouns.",
+   "source": "Ursula K. Le Guin (The Left Hand of Darkness), quoted by Matt Bell, Reactor, 24 August 2021",
+   "url": "https://reactormag.com/my-le-guin-year-craft-lessons-from-a-master/",
+   "quote": "rock, ice, sky, and silence: nothing else, for eighty-one days",
+   "page": "opening anecdote"
+  },
+  {
+   "index": 340,
+   "feature": "plainness and economy",
+   "claim": "A commenter on Bell's essay says Le Guin can say more in twenty words than almost anyone.",
+   "source": "Reader comment on Matt Bell's essay, Reactor comment thread",
+   "url": "https://reactormag.com/my-le-guin-year-craft-lessons-from-a-master/",
+   "quote": "She can say more in twenty words than almost anyone",
+   "page": "comment thread"
+  },
+  {
+   "index": 341,
+   "feature": "archaism",
+   "claim": "A forum reader describes the prose of A Wizard of Earthsea as very archaic.",
+   "source": "SilentRoamer, thread \"Is a Wizard of Earthsea indicative of Le Guins writing style?\", SFF Chronicles, 1 Aug 2022",
+   "url": "https://www.sffchronicles.com/threads/583221/",
+   "quote": "very archaic and flowed in a unique style",
+   "page": "post #1"
+  },
+  {
+   "index": 342,
+   "feature": "register modulation",
+   "claim": "A forum moderator reports The Left Hand of Darkness is very different from the Earthsea books in style and tone.",
+   "source": "The Judge, SFF Chronicles thread 583221, 1 Aug 2022",
+   "url": "https://www.sffchronicles.com/threads/583221/",
+   "quote": "very different from the Earthsea books in style and tone",
+   "page": "post #4"
+  },
+  {
+   "index": 343,
+   "feature": "register modulation",
+   "claim": "John Plotz says the Earthsea books, written for young adults, tip two different registers at once.",
+   "source": "John Plotz, in conversation with Elizabeth Ferry, Public Books, 21 February 2024",
+   "url": "https://www.publicbooks.org/john-plotz-on-earthsea-anarchism-and-ursula-k-le-guin/",
+   "quote": "young adults can tip two different registers at once",
+   "page": "opening exchange"
+  },
+  {
+   "index": 344,
+   "feature": "place and institution description",
+   "claim": "Rob Tomlinson says Le Guin's style is spot-on for describing unfamiliar places and cultures.",
+   "source": "Rob Tomlinson, \"The Dispossessed\", A Good Read (rob-tomlinson.com)",
+   "url": "https://www.rob-tomlinson.com/a-good-read/dispossessed",
+   "quote": "a style that is spot-on for describing unfamiliar places and cultures",
+   "page": "second paragraph"
+  }
+ ]
+}

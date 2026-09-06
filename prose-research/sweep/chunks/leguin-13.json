@@ -1,0 +1,158 @@
+{
+ "name": "leguin",
+ "chunk": 13,
+ "indices": [
+  240,
+  241,
+  242,
+  243,
+  244,
+  245,
+  246,
+  247,
+  248,
+  249,
+  250,
+  251,
+  252,
+  253,
+  254
+ ],
+ "claims": [
+  {
+   "index": 240,
+   "feature": "plainness and economy",
+   "claim": "Le Guin warns that narrative written by a poet is sometimes both over-elliptic and over-written, too aware of itself.",
+   "source": "Ursula K. Le Guin, answer to 'Deepthi', 'Navigating the Ocean of Story - Session 1 part 3', Book View Cafe, 2015",
+   "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-1-part-3",
+   "quote": "over-elliptic and over-written",
+   "page": "Session 1 part 3, answer to Deepthi"
+  },
+  {
+   "index": 241,
+   "feature": "other: passive voice",
+   "claim": "Quoting her own Steering the Craft, Le Guin says that where the passive voice belongs we ought to use it freely, calling it one of the lovely versatilities of the verb.",
+   "source": "Ursula K. Le Guin, answer to 'Christy', quoting Steering the Craft (2015) pp. 56-57, 'Navigating the Ocean of Story - Session 1 part 3', Book View Cafe, 2015",
+   "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-1-part-3",
+   "quote": "It is one of the lovely versatilities of the verb.",
+   "page": "Session 1 part 3, answer to Christy, quoting Steering the Craft pp. 56-57"
+  },
+  {
+   "index": 242,
+   "feature": "other: telling vs showing",
+   "claim": "Le Guin says that whatever writing schools teach, stories are not shown but told.",
+   "source": "Ursula K. Le Guin, answer to 'Paige', 'Navigating the Ocean of Story - Session 1', Book View Cafe, 10 August 2015",
+   "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-1",
+   "quote": "stories are not shown, but told",
+   "page": "Session 1, answer to Paige"
+  },
+  {
+   "index": 243,
+   "feature": "other: telling vs showing",
+   "claim": "Le Guin says showing can be quite static whereas telling always involves moving on.",
+   "source": "Ursula K. Le Guin, answer to 'Paige', 'Navigating the Ocean of Story - Session 1', Book View Cafe, 10 August 2015",
+   "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-1",
+   "quote": "telling always involves moving on",
+   "page": "Session 1, answer to Paige"
+  },
+  {
+   "index": 244,
+   "feature": "point of view and distance",
+   "claim": "Le Guin describes limited third person as currently practised as a kind of flashlight beam giving a brilliant, narrow, simplifying intensity of vision.",
+   "source": "Ursula K. Le Guin, answer to 'Patricia', 'Navigating the Ocean of Story - Session 1', Book View Cafe, 10 August 2015",
+   "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-1",
+   "quote": "a kind of flashlight beam",
+   "page": "Session 1, answer to Patricia"
+  },
+  {
+   "index": 245,
+   "feature": "point of view and distance",
+   "claim": "Le Guin tells writers to distrust anybody who says fiction must use only limited third person.",
+   "source": "Ursula K. Le Guin, answer to 'Patricia', 'Navigating the Ocean of Story - Session 1', Book View Cafe, 10 August 2015",
+   "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-1",
+   "quote": "",
+   "page": "Session 1, answer to Patricia"
+  },
+  {
+   "index": 246,
+   "feature": "repetition and refrain",
+   "claim": "Le Guin tells a writer to indulge the resonances, hints, half-repetitions, echoes and foreshadows that appear as a novel takes shape, calling a novel a living architecture.",
+   "source": "Ursula K. Le Guin, answer to 'Wm Henry', 'Navigating the Ocean of Story - Session 1', Book View Cafe, 10 August 2015",
+   "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-1",
+   "quote": "A novel is a living architecture.",
+   "page": "Session 1, answer to Wm Henry"
+  },
+  {
+   "index": 247,
+   "feature": "other: exposition and description defended",
+   "claim": "Le Guin says description without any apparent, overt action can carry a story powerfully forward, and questions the separation of action from description as a false dichotomy.",
+   "source": "Ursula K. Le Guin, answer to 'Robby', 'Navigating the Ocean of Story - Session 1 continued', Book View Cafe, 2015",
+   "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-1-continued",
+   "quote": "description without any apparent, overt action can carry a story",
+   "page": "Session 1 continued, answer to Robby"
+  },
+  {
+   "index": 248,
+   "feature": "archaism",
+   "claim": "Le Guin says she is sick of historical novels and pastiches that are tone-deaf to the morals, the manners, the ideas and above all the language of their period.",
+   "source": "Ursula K. Le Guin, answer to 'Nilanjana', 'Navigating the Ocean of Story - Session 1 continued', Book View Cafe, 2015",
+   "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-1-continued",
+   "quote": "above all the language of the period",
+   "page": "Session 1 continued, answer to Nilanjana"
+  },
+  {
+   "index": 249,
+   "feature": "naming and forms of address",
+   "claim": "Le Guin gives as her only rule for invented names that they avoid unpronounceable names, because the reader cannot pronounce them.",
+   "source": "Ursula K. Le Guin, interlineated reply to 'T.A.', 'Navigating the Ocean of Story - Session 1 part 3', Book View Cafe, 2015",
+   "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-1-part-3",
+   "quote": "avoid unpronounceable names",
+   "page": "Session 1 part 3, interlineated answer to T.A."
+  },
+  {
+   "index": 250,
+   "feature": "naming and forms of address",
+   "claim": "Asked whether invented names need lots of apostrophes, Le Guin dismisses the device with the reply 'What for?'.",
+   "source": "Ursula K. Le Guin, interlineated reply to 'T.A.', 'Navigating the Ocean of Story - Session 1 part 3', Book View Cafe, 2015",
+   "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-1-part-3",
+   "quote": "Lots of apostrophes? What for?",
+   "page": "Session 1 part 3, interlineated answer to T.A."
+  },
+  {
+   "index": 251,
+   "feature": "concrete sensory noun",
+   "claim": "Le Guin says specific features or mannerisms can help fix a minor character in the reader's mind when they turn up again.",
+   "source": "Ursula K. Le Guin, answer to 'Tim', 'Navigating the Ocean of Story - Session 1 continued', Book View Cafe, 2015",
+   "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-1-continued",
+   "quote": "can help fix a minor character in the reader’s mind",
+   "page": "Session 1 continued, answer to Tim"
+  },
+  {
+   "index": 252,
+   "feature": "dialogue register",
+   "claim": "Le Guin's recommendation for convincing dialogue is to read or speak it aloud, out loud rather than muttered.",
+   "source": "Ursula K. Le Guin, answer to 'Jacob', 'Navigating the Ocean of Story - Session 1 continued', Book View Cafe, 2015",
+   "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-1-continued",
+   "quote": "read/speak your dialogue aloud",
+   "page": "Session 1 continued, answer to Jacob"
+  },
+  {
+   "index": 253,
+   "feature": "cadence and rhythm",
+   "claim": "Le Guin gives pronunciation guidelines for her invented names because pronunciation affects the sound and rhythm of a sentence.",
+   "source": "Ursula K. Le Guin, 'Ursula on Ursula', ursulakleguin.com, undated",
+   "url": "https://www.ursulakleguin.com/ursula-on-ursula",
+   "quote": "this does affect the sound and rhythm of a sentence",
+   "page": "pronunciation section"
+  },
+  {
+   "index": 254,
+   "feature": "edition and house style",
+   "claim": "In her introduction to the revised Steering the Craft, Le Guin calls the vocabulary of grammar the names of the writer's tools.",
+   "source": "Ursula K. Le Guin, Introduction to the revised Steering the Craft (Mariner, 2015), reproduced on ursulakleguin.com",
+   "url": "https://www.ursulakleguin.com/steering-the-craft",
+   "quote": "these are the names of the writer’s tools",
+   "page": "From the Introduction"
+  }
+ ]
+}

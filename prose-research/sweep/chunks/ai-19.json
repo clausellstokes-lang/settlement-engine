@@ -13,7 +13,10 @@
   547,
   548,
   549,
-  550
+  550,
+  551,
+  552,
+  553
  ],
  "claims": [
   {
@@ -123,6 +126,33 @@
    "url": "",
    "quote": "",
    "page": ""
+  },
+  {
+   "index": 551,
+   "feature": "counter-evidence",
+   "claim": "Novelist Jeanette Winterson locates what is beautiful and moving in OpenAI's metafiction story in the story's awareness of its own limits, not in its scene-making or characterisation.",
+   "source": "Jeanette Winterson, The Guardian (Books), 12 March 2025",
+   "url": "https://www.theguardian.com/books/2025/mar/12/jeanette-winterson-ai-alternative-intelligence-its-capacity-to-be-other-is-just-what-the-human-race-needs",
+   "quote": "its understanding of its lack of understanding",
+   "page": "body, paragraph beginning 'What is beautiful and moving'"
+  },
+  {
+   "index": 552,
+   "feature": "counter-evidence",
+   "claim": "Winterson rejects the term artificial intelligence in favour of 'alternative intelligence' when defending the OpenAI story.",
+   "source": "Jeanette Winterson, The Guardian (Books), 12 March 2025",
+   "url": "https://www.theguardian.com/books/2025/mar/12/jeanette-winterson-ai-alternative-intelligence-its-capacity-to-be-other-is-just-what-the-human-race-needs",
+   "quote": "I think of AI as alternative intelligence",
+   "page": "opening sentence"
+  },
+  {
+   "index": 553,
+   "feature": "counter-evidence",
+   "claim": "The single passage Winterson reproduces as the story's achievement is the model's statement that it cannot keep its own grief.",
+   "source": "OpenAI's creative-writing model, quoted by Jeanette Winterson, The Guardian, 12 March 2025",
+   "url": "https://www.theguardian.com/books/2025/mar/12/jeanette-winterson-ai-alternative-intelligence-its-capacity-to-be-other-is-just-what-the-human-race-needs",
+   "quote": "That, perhaps, is my grief: not that I feel loss",
+   "page": "block quotation in the body"
   }
  ]
 }

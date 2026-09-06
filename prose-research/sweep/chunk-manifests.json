@@ -1,249 +1,9 @@
 {
 "tolkien": {
-"verifiedCount": 448,
+"verifiedCount": 628,
 "chunks": [
 {
 "file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/tolkien-00.json",
-"indices": [
-448,
-449,
-450,
-451,
-452,
-453,
-454,
-455,
-456,
-457,
-458,
-459,
-460,
-461,
-462
-]
-},
-{
-"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/tolkien-01.json",
-"indices": [
-463,
-464,
-465,
-466,
-467,
-468,
-469,
-470,
-471,
-472,
-473,
-474,
-475,
-476,
-477
-]
-},
-{
-"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/tolkien-02.json",
-"indices": [
-478,
-479,
-480,
-481,
-482,
-483,
-484,
-485,
-486,
-487,
-488,
-489,
-490,
-491,
-492
-]
-},
-{
-"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/tolkien-03.json",
-"indices": [
-493,
-494,
-495,
-496,
-497,
-498,
-499,
-500,
-501,
-502,
-503,
-504,
-505,
-506,
-507
-]
-},
-{
-"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/tolkien-04.json",
-"indices": [
-508,
-509,
-510,
-511,
-512,
-513,
-514,
-515,
-516,
-517,
-518,
-519,
-520,
-521,
-522
-]
-},
-{
-"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/tolkien-05.json",
-"indices": [
-523,
-524,
-525,
-526,
-527,
-528,
-529,
-530,
-531,
-532,
-533,
-534,
-535,
-536,
-537
-]
-},
-{
-"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/tolkien-06.json",
-"indices": [
-538,
-539,
-540,
-541,
-542,
-543,
-544,
-545,
-546,
-547,
-548,
-549,
-550,
-551,
-552
-]
-},
-{
-"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/tolkien-07.json",
-"indices": [
-553,
-554,
-555,
-556,
-557,
-558,
-559,
-560,
-561,
-562,
-563,
-564,
-565,
-566,
-567
-]
-},
-{
-"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/tolkien-08.json",
-"indices": [
-568,
-569,
-570,
-571,
-572,
-573,
-574,
-575,
-576,
-577,
-578,
-579,
-580,
-581,
-582
-]
-},
-{
-"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/tolkien-09.json",
-"indices": [
-583,
-584,
-585,
-586,
-587,
-588,
-589,
-590,
-591,
-592,
-593,
-594,
-595,
-596,
-597
-]
-},
-{
-"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/tolkien-10.json",
-"indices": [
-598,
-599,
-600,
-601,
-602,
-603,
-604,
-605,
-606,
-607,
-608,
-609,
-610,
-611,
-612
-]
-},
-{
-"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/tolkien-11.json",
-"indices": [
-613,
-614,
-615,
-616,
-617,
-618,
-619,
-620,
-621,
-622,
-623,
-624,
-625,
-626,
-627
-]
-},
-{
-"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/tolkien-12.json",
 "indices": [
 628,
 629,
@@ -263,7 +23,7 @@
 ]
 },
 {
-"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/tolkien-13.json",
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/tolkien-01.json",
 "indices": [
 643,
 644,
@@ -283,7 +43,7 @@
 ]
 },
 {
-"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/tolkien-14.json",
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/tolkien-02.json",
 "indices": [
 658,
 659,
@@ -303,7 +63,7 @@
 ]
 },
 {
-"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/tolkien-15.json",
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/tolkien-03.json",
 "indices": [
 673,
 674,
@@ -323,7 +83,7 @@
 ]
 },
 {
-"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/tolkien-16.json",
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/tolkien-04.json",
 "indices": [
 688,
 689,
@@ -343,7 +103,7 @@
 ]
 },
 {
-"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/tolkien-17.json",
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/tolkien-05.json",
 "indices": [
 703,
 704,
@@ -363,7 +123,7 @@
 ]
 },
 {
-"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/tolkien-18.json",
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/tolkien-06.json",
 "indices": [
 718,
 719,
@@ -383,7 +143,7 @@
 ]
 },
 {
-"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/tolkien-19.json",
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/tolkien-07.json",
 "indices": [
 733,
 734,
@@ -403,7 +163,7 @@
 ]
 },
 {
-"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/tolkien-20.json",
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/tolkien-08.json",
 "indices": [
 748,
 749,
@@ -423,7 +183,7 @@
 ]
 },
 {
-"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/tolkien-21.json",
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/tolkien-09.json",
 "indices": [
 763,
 764,
@@ -443,7 +203,7 @@
 ]
 },
 {
-"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/tolkien-22.json",
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/tolkien-10.json",
 "indices": [
 778,
 779,
@@ -463,7 +223,7 @@
 ]
 },
 {
-"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/tolkien-23.json",
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/tolkien-11.json",
 "indices": [
 793,
 794,
@@ -483,7 +243,7 @@
 ]
 },
 {
-"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/tolkien-24.json",
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/tolkien-12.json",
 "indices": [
 808,
 809,
@@ -503,7 +263,7 @@
 ]
 },
 {
-"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/tolkien-25.json",
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/tolkien-13.json",
 "indices": [
 823,
 824,
@@ -523,7 +283,7 @@
 ]
 },
 {
-"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/tolkien-26.json",
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/tolkien-14.json",
 "indices": [
 838,
 839,
@@ -543,7 +303,7 @@
 ]
 },
 {
-"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/tolkien-27.json",
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/tolkien-15.json",
 "indices": [
 853,
 854,
@@ -563,7 +323,7 @@
 ]
 },
 {
-"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/tolkien-28.json",
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/tolkien-16.json",
 "indices": [
 868,
 869,
@@ -884,7 +644,385 @@
 555,
 556,
 557,
-558
+558,
+559,
+560,
+561,
+562,
+563,
+564,
+565,
+566,
+567,
+568,
+569
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/martin-16.json",
+"indices": [
+570,
+571,
+572,
+573,
+574,
+575,
+576,
+577,
+578,
+579,
+580,
+581,
+582,
+583,
+584
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/martin-17.json",
+"indices": [
+585,
+586,
+587,
+588,
+589,
+590,
+591,
+592,
+593,
+594,
+595,
+596,
+597,
+598,
+599
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/martin-18.json",
+"indices": [
+600,
+601,
+602,
+603,
+604,
+605,
+606,
+607,
+608,
+609,
+610,
+611,
+612,
+613,
+614
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/martin-19.json",
+"indices": [
+615,
+616,
+617,
+618,
+619,
+620,
+621,
+622,
+623,
+624,
+625,
+626,
+627,
+628,
+629
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/martin-20.json",
+"indices": [
+630,
+631,
+632,
+633,
+634,
+635,
+636,
+637,
+638,
+639,
+640,
+641,
+642,
+643,
+644
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/martin-21.json",
+"indices": [
+645,
+646,
+647,
+648,
+649,
+650,
+651,
+652,
+653,
+654,
+655,
+656,
+657,
+658,
+659
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/martin-22.json",
+"indices": [
+660,
+661,
+662,
+663,
+664,
+665,
+666,
+667,
+668,
+669,
+670,
+671,
+672,
+673,
+674
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/martin-23.json",
+"indices": [
+675,
+676,
+677,
+678,
+679,
+680,
+681,
+682,
+683,
+684,
+685,
+686,
+687,
+688,
+689
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/martin-24.json",
+"indices": [
+690,
+691,
+692,
+693,
+694,
+695,
+696,
+697,
+698,
+699,
+700,
+701,
+702,
+703,
+704
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/martin-25.json",
+"indices": [
+705,
+706,
+707,
+708,
+709,
+710,
+711,
+712,
+713,
+714,
+715,
+716,
+717,
+718,
+719
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/martin-26.json",
+"indices": [
+720,
+721,
+722,
+723,
+724,
+725,
+726,
+727,
+728,
+729,
+730,
+731,
+732,
+733,
+734
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/martin-27.json",
+"indices": [
+735,
+736,
+737,
+738,
+739,
+740,
+741,
+742,
+743,
+744,
+745,
+746,
+747,
+748,
+749
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/martin-28.json",
+"indices": [
+750,
+751,
+752,
+753,
+754,
+755,
+756,
+757,
+758,
+759,
+760,
+761,
+762,
+763,
+764
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/martin-29.json",
+"indices": [
+765,
+766,
+767,
+768,
+769,
+770,
+771,
+772,
+773,
+774,
+775,
+776,
+777,
+778,
+779
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/martin-30.json",
+"indices": [
+780,
+781,
+782,
+783,
+784,
+785,
+786,
+787,
+788,
+789,
+790,
+791,
+792,
+793,
+794
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/martin-31.json",
+"indices": [
+795,
+796,
+797,
+798,
+799,
+800,
+801,
+802,
+803,
+804,
+805,
+806,
+807,
+808,
+809
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/martin-32.json",
+"indices": [
+810,
+811,
+812,
+813,
+814,
+815,
+816,
+817,
+818,
+819,
+820,
+821,
+822,
+823,
+824
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/martin-33.json",
+"indices": [
+825,
+826,
+827,
+828,
+829,
+830,
+831,
+832,
+833,
+834,
+835,
+836,
+837,
+838,
+839
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/martin-34.json",
+"indices": [
+840,
+841
 ]
 }
 ]
@@ -1348,7 +1486,499 @@
 389,
 390,
 391,
-392
+392,
+393
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/dnd-23.json",
+"indices": [
+394,
+395,
+396,
+397,
+398,
+399,
+400,
+401,
+402,
+403,
+404,
+405,
+406,
+407,
+408
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/dnd-24.json",
+"indices": [
+409,
+410,
+411,
+412,
+413,
+414,
+415,
+416,
+417,
+418,
+419,
+420,
+421,
+422,
+423
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/dnd-25.json",
+"indices": [
+424,
+425,
+426,
+427,
+428,
+429,
+430,
+431,
+432,
+433,
+434,
+435,
+436,
+437,
+438
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/dnd-26.json",
+"indices": [
+439,
+440,
+441,
+442,
+443,
+444,
+445,
+446,
+447,
+448,
+449,
+450,
+451,
+452,
+453
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/dnd-27.json",
+"indices": [
+454,
+455,
+456,
+457,
+458,
+459,
+460,
+461,
+462,
+463,
+464,
+465,
+466,
+467,
+468
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/dnd-28.json",
+"indices": [
+469,
+470,
+471,
+472,
+473,
+474,
+475,
+476,
+477,
+478,
+479,
+480,
+481,
+482,
+483
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/dnd-29.json",
+"indices": [
+484,
+485,
+486,
+487,
+488,
+489,
+490,
+491,
+492,
+493,
+494,
+495,
+496,
+497,
+498
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/dnd-30.json",
+"indices": [
+499,
+500,
+501,
+502,
+503,
+504,
+505,
+506,
+507,
+508,
+509,
+510,
+511,
+512,
+513
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/dnd-31.json",
+"indices": [
+514,
+515,
+516,
+517,
+518,
+519,
+520,
+521,
+522,
+523,
+524,
+525,
+526,
+527,
+528
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/dnd-32.json",
+"indices": [
+529,
+530,
+531,
+532,
+533,
+534,
+535,
+536,
+537,
+538,
+539,
+540,
+541,
+542,
+543
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/dnd-33.json",
+"indices": [
+544,
+545,
+546,
+547,
+548,
+549,
+550,
+551,
+552,
+553,
+554,
+555,
+556,
+557,
+558
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/dnd-34.json",
+"indices": [
+559,
+560,
+561,
+562,
+563,
+564,
+565,
+566,
+567,
+568,
+569,
+570,
+571,
+572,
+573
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/dnd-35.json",
+"indices": [
+574,
+575,
+576,
+577,
+578,
+579,
+580,
+581,
+582,
+583,
+584,
+585,
+586,
+587,
+588
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/dnd-36.json",
+"indices": [
+589,
+590,
+591,
+592,
+593,
+594,
+595,
+596,
+597,
+598,
+599,
+600,
+601,
+602,
+603
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/dnd-37.json",
+"indices": [
+604,
+605,
+606,
+607,
+608,
+609,
+610,
+611,
+612,
+613,
+614,
+615,
+616,
+617,
+618
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/dnd-38.json",
+"indices": [
+619,
+620,
+621,
+622,
+623,
+624,
+625,
+626,
+627,
+628,
+629,
+630,
+631,
+632,
+633
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/dnd-39.json",
+"indices": [
+634,
+635,
+636,
+637,
+638,
+639,
+640,
+641,
+642,
+643,
+644,
+645,
+646,
+647,
+648
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/dnd-40.json",
+"indices": [
+649,
+650,
+651,
+652,
+653,
+654,
+655,
+656,
+657,
+658,
+659,
+660,
+661,
+662,
+663
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/dnd-41.json",
+"indices": [
+664,
+665,
+666,
+667,
+668,
+669,
+670,
+671,
+672,
+673,
+674,
+675,
+676,
+677,
+678
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/dnd-42.json",
+"indices": [
+679,
+680,
+681,
+682,
+683,
+684,
+685,
+686,
+687,
+688,
+689,
+690,
+691,
+692,
+693
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/dnd-43.json",
+"indices": [
+694,
+695,
+696,
+697,
+698,
+699,
+700,
+701,
+702,
+703,
+704,
+705,
+706,
+707,
+708
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/dnd-44.json",
+"indices": [
+709,
+710,
+711,
+712,
+713,
+714,
+715,
+716,
+717,
+718,
+719,
+720,
+721,
+722,
+723
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/dnd-45.json",
+"indices": [
+724,
+725,
+726,
+727,
+728,
+729,
+730,
+731,
+732,
+733,
+734,
+735,
+736,
+737,
+738
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/dnd-46.json",
+"indices": [
+739,
+740,
+741,
+742,
+743,
+744,
+745,
+746,
+747,
+748,
+749,
+750,
+751,
+752,
+753
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/dnd-47.json",
+"indices": [
+754,
+755,
+756,
+757,
+758,
+759
 ]
 }
 ]
@@ -1750,7 +2380,358 @@
 547,
 548,
 549,
-550
+550,
+551,
+552,
+553
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/ai-20.json",
+"indices": [
+554,
+555,
+556,
+557,
+558,
+559,
+560,
+561,
+562,
+563,
+564,
+565,
+566,
+567,
+568
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/ai-21.json",
+"indices": [
+569,
+570,
+571,
+572,
+573,
+574,
+575,
+576,
+577,
+578,
+579,
+580,
+581,
+582,
+583
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/ai-22.json",
+"indices": [
+584,
+585,
+586,
+587,
+588,
+589,
+590,
+591,
+592,
+593,
+594,
+595,
+596,
+597,
+598
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/ai-23.json",
+"indices": [
+599,
+600,
+601,
+602,
+603,
+604,
+605,
+606,
+607,
+608,
+609,
+610,
+611,
+612,
+613
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/ai-24.json",
+"indices": [
+614,
+615,
+616,
+617,
+618,
+619,
+620,
+621,
+622,
+623,
+624,
+625,
+626,
+627,
+628
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/ai-25.json",
+"indices": [
+629,
+630,
+631,
+632,
+633,
+634,
+635,
+636,
+637,
+638,
+639,
+640,
+641,
+642,
+643
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/ai-26.json",
+"indices": [
+644,
+645,
+646,
+647,
+648,
+649,
+650,
+651,
+652,
+653,
+654,
+655,
+656,
+657,
+658
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/ai-27.json",
+"indices": [
+659,
+660,
+661,
+662,
+663,
+664,
+665,
+666,
+667,
+668,
+669,
+670,
+671,
+672,
+673
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/ai-28.json",
+"indices": [
+674,
+675,
+676,
+677,
+678,
+679,
+680,
+681,
+682,
+683,
+684,
+685,
+686,
+687,
+688
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/ai-29.json",
+"indices": [
+689,
+690,
+691,
+692,
+693,
+694,
+695,
+696,
+697,
+698,
+699,
+700,
+701,
+702,
+703
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/ai-30.json",
+"indices": [
+704,
+705,
+706,
+707,
+708,
+709,
+710,
+711,
+712,
+713,
+714,
+715,
+716,
+717,
+718
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/ai-31.json",
+"indices": [
+719,
+720,
+721,
+722,
+723,
+724,
+725,
+726,
+727,
+728,
+729,
+730,
+731,
+732,
+733
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/ai-32.json",
+"indices": [
+734,
+735,
+736,
+737,
+738,
+739,
+740,
+741,
+742,
+743,
+744,
+745,
+746,
+747,
+748
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/ai-33.json",
+"indices": [
+749,
+750,
+751,
+752,
+753,
+754,
+755,
+756,
+757,
+758,
+759,
+760,
+761,
+762,
+763
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/ai-34.json",
+"indices": [
+764,
+765,
+766,
+767,
+768,
+769,
+770,
+771,
+772,
+773,
+774,
+775,
+776,
+777,
+778
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/ai-35.json",
+"indices": [
+779,
+780,
+781,
+782,
+783,
+784,
+785,
+786,
+787,
+788,
+789,
+790,
+791,
+792,
+793
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/ai-36.json",
+"indices": [
+794,
+795,
+796,
+797,
+798,
+799,
+800,
+801,
+802,
+803,
+804,
+805,
+806,
+807,
+808
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/ai-37.json",
+"indices": [
+809,
+810,
+811
 ]
 }
 ]
@@ -1862,7 +2843,416 @@
 "file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/hobb-05.json",
 "indices": [
 75,
-76
+76,
+77,
+78,
+79,
+80,
+81,
+82,
+83,
+84,
+85,
+86,
+87,
+88,
+89
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/hobb-06.json",
+"indices": [
+90,
+91,
+92,
+93,
+94,
+95,
+96,
+97,
+98,
+99,
+100,
+101,
+102,
+103,
+104
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/hobb-07.json",
+"indices": [
+105,
+106,
+107,
+108,
+109,
+110,
+111,
+112,
+113,
+114,
+115,
+116,
+117,
+118,
+119
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/hobb-08.json",
+"indices": [
+120,
+121,
+122,
+123,
+124,
+125,
+126,
+127,
+128,
+129,
+130,
+131,
+132,
+133,
+134
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/hobb-09.json",
+"indices": [
+135,
+136,
+137,
+138,
+139,
+140,
+141,
+142,
+143,
+144,
+145,
+146,
+147,
+148,
+149
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/hobb-10.json",
+"indices": [
+150,
+151,
+152,
+153,
+154,
+155,
+156,
+157,
+158,
+159,
+160,
+161,
+162,
+163,
+164
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/hobb-11.json",
+"indices": [
+165,
+166,
+167,
+168,
+169,
+170,
+171,
+172,
+173,
+174,
+175,
+176,
+177,
+178,
+179
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/hobb-12.json",
+"indices": [
+180,
+181,
+182,
+183,
+184,
+185,
+186,
+187,
+188,
+189,
+190,
+191,
+192,
+193,
+194
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/hobb-13.json",
+"indices": [
+195,
+196,
+197,
+198,
+199,
+200,
+201,
+202,
+203,
+204,
+205,
+206,
+207,
+208,
+209
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/hobb-14.json",
+"indices": [
+210,
+211,
+212,
+213,
+214,
+215,
+216,
+217,
+218,
+219,
+220,
+221,
+222,
+223,
+224
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/hobb-15.json",
+"indices": [
+225,
+226,
+227,
+228,
+229,
+230,
+231,
+232,
+233,
+234,
+235,
+236,
+237,
+238,
+239
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/hobb-16.json",
+"indices": [
+240,
+241,
+242,
+243,
+244,
+245,
+246,
+247,
+248,
+249,
+250,
+251,
+252,
+253,
+254
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/hobb-17.json",
+"indices": [
+255,
+256,
+257,
+258,
+259,
+260,
+261,
+262,
+263,
+264,
+265,
+266,
+267,
+268,
+269
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/hobb-18.json",
+"indices": [
+270,
+271,
+272,
+273,
+274,
+275,
+276,
+277,
+278,
+279,
+280,
+281,
+282,
+283,
+284
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/hobb-19.json",
+"indices": [
+285,
+286,
+287,
+288,
+289,
+290,
+291,
+292,
+293,
+294,
+295,
+296,
+297,
+298,
+299
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/hobb-20.json",
+"indices": [
+300,
+301,
+302,
+303,
+304,
+305,
+306,
+307,
+308,
+309,
+310,
+311,
+312,
+313,
+314
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/hobb-21.json",
+"indices": [
+315,
+316,
+317,
+318,
+319,
+320,
+321,
+322,
+323,
+324,
+325,
+326,
+327,
+328,
+329
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/hobb-22.json",
+"indices": [
+330,
+331,
+332,
+333,
+334,
+335,
+336,
+337,
+338,
+339,
+340,
+341,
+342,
+343,
+344
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/hobb-23.json",
+"indices": [
+345,
+346,
+347,
+348,
+349,
+350,
+351,
+352,
+353,
+354,
+355,
+356,
+357,
+358,
+359
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/hobb-24.json",
+"indices": [
+360,
+361,
+362,
+363,
+364,
+365,
+366,
+367,
+368,
+369,
+370,
+371,
+372,
+373,
+374
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/hobb-25.json",
+"indices": [
+375,
+376,
+377,
+378,
+379,
+380,
+381,
+382,
+383,
+384,
+385
 ]
 }
 ]
@@ -2098,7 +3488,511 @@
 167,
 168,
 169,
-170
+170,
+171,
+172,
+173,
+174,
+175,
+176,
+177,
+178,
+179
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/kay-12.json",
+"indices": [
+180,
+181,
+182,
+183,
+184,
+185,
+186,
+187,
+188,
+189,
+190,
+191,
+192,
+193,
+194
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/kay-13.json",
+"indices": [
+195,
+196,
+197,
+198,
+199,
+200,
+201,
+202,
+203,
+204,
+205,
+206,
+207,
+208,
+209
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/kay-14.json",
+"indices": [
+210,
+211,
+212,
+213,
+214,
+215,
+216,
+217,
+218,
+219,
+220,
+221,
+222,
+223,
+224
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/kay-15.json",
+"indices": [
+225,
+226,
+227,
+228,
+229,
+230,
+231,
+232,
+233,
+234,
+235,
+236,
+237,
+238,
+239
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/kay-16.json",
+"indices": [
+240,
+241,
+242,
+243,
+244,
+245,
+246,
+247,
+248,
+249,
+250,
+251,
+252,
+253,
+254
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/kay-17.json",
+"indices": [
+255,
+256,
+257,
+258,
+259,
+260,
+261,
+262,
+263,
+264,
+265,
+266,
+267,
+268,
+269
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/kay-18.json",
+"indices": [
+270,
+271,
+272,
+273,
+274,
+275,
+276,
+277,
+278,
+279,
+280,
+281,
+282,
+283,
+284
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/kay-19.json",
+"indices": [
+285,
+286,
+287,
+288,
+289,
+290,
+291,
+292,
+293,
+294,
+295,
+296,
+297,
+298,
+299
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/kay-20.json",
+"indices": [
+300,
+301,
+302,
+303,
+304,
+305,
+306,
+307,
+308,
+309,
+310,
+311,
+312,
+313,
+314
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/kay-21.json",
+"indices": [
+315,
+316,
+317,
+318,
+319,
+320,
+321,
+322,
+323,
+324,
+325,
+326,
+327,
+328,
+329
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/kay-22.json",
+"indices": [
+330,
+331,
+332,
+333,
+334,
+335,
+336,
+337,
+338,
+339,
+340,
+341,
+342,
+343,
+344
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/kay-23.json",
+"indices": [
+345,
+346,
+347,
+348,
+349,
+350,
+351,
+352,
+353,
+354,
+355,
+356,
+357,
+358,
+359
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/kay-24.json",
+"indices": [
+360,
+361,
+362,
+363,
+364,
+365,
+366,
+367,
+368,
+369,
+370,
+371,
+372,
+373,
+374
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/kay-25.json",
+"indices": [
+375,
+376,
+377,
+378,
+379,
+380,
+381,
+382,
+383,
+384,
+385,
+386,
+387,
+388,
+389
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/kay-26.json",
+"indices": [
+390,
+391,
+392,
+393,
+394,
+395,
+396,
+397,
+398,
+399,
+400,
+401,
+402,
+403,
+404
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/kay-27.json",
+"indices": [
+405,
+406,
+407,
+408,
+409,
+410,
+411,
+412,
+413,
+414,
+415,
+416,
+417,
+418,
+419
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/kay-28.json",
+"indices": [
+420,
+421,
+422,
+423,
+424,
+425,
+426,
+427,
+428,
+429,
+430,
+431,
+432,
+433,
+434
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/kay-29.json",
+"indices": [
+435,
+436,
+437,
+438,
+439,
+440,
+441,
+442,
+443,
+444,
+445,
+446,
+447,
+448,
+449
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/kay-30.json",
+"indices": [
+450,
+451,
+452,
+453,
+454,
+455,
+456,
+457,
+458,
+459,
+460,
+461,
+462,
+463,
+464
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/kay-31.json",
+"indices": [
+465,
+466,
+467,
+468,
+469,
+470,
+471,
+472,
+473,
+474,
+475,
+476,
+477,
+478,
+479
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/kay-32.json",
+"indices": [
+480,
+481,
+482,
+483,
+484,
+485,
+486,
+487,
+488,
+489,
+490,
+491,
+492,
+493,
+494
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/kay-33.json",
+"indices": [
+495,
+496,
+497,
+498,
+499,
+500,
+501,
+502,
+503,
+504,
+505,
+506,
+507,
+508,
+509
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/kay-34.json",
+"indices": [
+510,
+511,
+512,
+513,
+514,
+515,
+516,
+517,
+518,
+519,
+520,
+521,
+522,
+523,
+524
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/kay-35.json",
+"indices": [
+525,
+526,
+527,
+528,
+529,
+530,
+531,
+532,
+533,
+534,
+535,
+536,
+537,
+538,
+539
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/kay-36.json",
+"indices": [
+540,
+541,
+542,
+543,
+544,
+545,
+546,
+547,
+548,
+549
 ]
 }
 ]
@@ -2178,7 +4072,386 @@
 96,
 97,
 98,
-99
+99,
+100,
+101,
+102,
+103,
+104
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/leguin-04.json",
+"indices": [
+105,
+106,
+107,
+108,
+109,
+110,
+111,
+112,
+113,
+114,
+115,
+116,
+117,
+118,
+119
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/leguin-05.json",
+"indices": [
+120,
+121,
+122,
+123,
+124,
+125,
+126,
+127,
+128,
+129,
+130,
+131,
+132,
+133,
+134
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/leguin-06.json",
+"indices": [
+135,
+136,
+137,
+138,
+139,
+140,
+141,
+142,
+143,
+144,
+145,
+146,
+147,
+148,
+149
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/leguin-07.json",
+"indices": [
+150,
+151,
+152,
+153,
+154,
+155,
+156,
+157,
+158,
+159,
+160,
+161,
+162,
+163,
+164
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/leguin-08.json",
+"indices": [
+165,
+166,
+167,
+168,
+169,
+170,
+171,
+172,
+173,
+174,
+175,
+176,
+177,
+178,
+179
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/leguin-09.json",
+"indices": [
+180,
+181,
+182,
+183,
+184,
+185,
+186,
+187,
+188,
+189,
+190,
+191,
+192,
+193,
+194
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/leguin-10.json",
+"indices": [
+195,
+196,
+197,
+198,
+199,
+200,
+201,
+202,
+203,
+204,
+205,
+206,
+207,
+208,
+209
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/leguin-11.json",
+"indices": [
+210,
+211,
+212,
+213,
+214,
+215,
+216,
+217,
+218,
+219,
+220,
+221,
+222,
+223,
+224
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/leguin-12.json",
+"indices": [
+225,
+226,
+227,
+228,
+229,
+230,
+231,
+232,
+233,
+234,
+235,
+236,
+237,
+238,
+239
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/leguin-13.json",
+"indices": [
+240,
+241,
+242,
+243,
+244,
+245,
+246,
+247,
+248,
+249,
+250,
+251,
+252,
+253,
+254
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/leguin-14.json",
+"indices": [
+255,
+256,
+257,
+258,
+259,
+260,
+261,
+262,
+263,
+264,
+265,
+266,
+267,
+268,
+269
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/leguin-15.json",
+"indices": [
+270,
+271,
+272,
+273,
+274,
+275,
+276,
+277,
+278,
+279,
+280,
+281,
+282,
+283,
+284
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/leguin-16.json",
+"indices": [
+285,
+286,
+287,
+288,
+289,
+290,
+291,
+292,
+293,
+294,
+295,
+296,
+297,
+298,
+299
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/leguin-17.json",
+"indices": [
+300,
+301,
+302,
+303,
+304,
+305,
+306,
+307,
+308,
+309,
+310,
+311,
+312,
+313,
+314
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/leguin-18.json",
+"indices": [
+315,
+316,
+317,
+318,
+319,
+320,
+321,
+322,
+323,
+324,
+325,
+326,
+327,
+328,
+329
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/leguin-19.json",
+"indices": [
+330,
+331,
+332,
+333,
+334,
+335,
+336,
+337,
+338,
+339,
+340,
+341,
+342,
+343,
+344
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/leguin-20.json",
+"indices": [
+345,
+346,
+347,
+348,
+349,
+350,
+351,
+352,
+353,
+354,
+355,
+356,
+357,
+358,
+359
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/leguin-21.json",
+"indices": [
+360,
+361,
+362,
+363,
+364,
+365,
+366,
+367,
+368,
+369,
+370,
+371,
+372,
+373,
+374
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/leguin-22.json",
+"indices": [
+375,
+376,
+377,
+378,
+379,
+380,
+381,
+382,
+383
 ]
 }
 ]
@@ -2394,7 +4667,424 @@
 152,
 153,
 154,
-155
+155,
+156,
+157,
+158,
+159,
+160,
+161,
+162,
+163,
+164
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/wolfe-11.json",
+"indices": [
+165,
+166,
+167,
+168,
+169,
+170,
+171,
+172,
+173,
+174,
+175,
+176,
+177,
+178,
+179
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/wolfe-12.json",
+"indices": [
+180,
+181,
+182,
+183,
+184,
+185,
+186,
+187,
+188,
+189,
+190,
+191,
+192,
+193,
+194
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/wolfe-13.json",
+"indices": [
+195,
+196,
+197,
+198,
+199,
+200,
+201,
+202,
+203,
+204,
+205,
+206,
+207,
+208,
+209
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/wolfe-14.json",
+"indices": [
+210,
+211,
+212,
+213,
+214,
+215,
+216,
+217,
+218,
+219,
+220,
+221,
+222,
+223,
+224
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/wolfe-15.json",
+"indices": [
+225,
+226,
+227,
+228,
+229,
+230,
+231,
+232,
+233,
+234,
+235,
+236,
+237,
+238,
+239
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/wolfe-16.json",
+"indices": [
+240,
+241,
+242,
+243,
+244,
+245,
+246,
+247,
+248,
+249,
+250,
+251,
+252,
+253,
+254
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/wolfe-17.json",
+"indices": [
+255,
+256,
+257,
+258,
+259,
+260,
+261,
+262,
+263,
+264,
+265,
+266,
+267,
+268,
+269
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/wolfe-18.json",
+"indices": [
+270,
+271,
+272,
+273,
+274,
+275,
+276,
+277,
+278,
+279,
+280,
+281,
+282,
+283,
+284
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/wolfe-19.json",
+"indices": [
+285,
+286,
+287,
+288,
+289,
+290,
+291,
+292,
+293,
+294,
+295,
+296,
+297,
+298,
+299
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/wolfe-20.json",
+"indices": [
+300,
+301,
+302,
+303,
+304,
+305,
+306,
+307,
+308,
+309,
+310,
+311,
+312,
+313,
+314
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/wolfe-21.json",
+"indices": [
+315,
+316,
+317,
+318,
+319,
+320,
+321,
+322,
+323,
+324,
+325,
+326,
+327,
+328,
+329
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/wolfe-22.json",
+"indices": [
+330,
+331,
+332,
+333,
+334,
+335,
+336,
+337,
+338,
+339,
+340,
+341,
+342,
+343,
+344
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/wolfe-23.json",
+"indices": [
+345,
+346,
+347,
+348,
+349,
+350,
+351,
+352,
+353,
+354,
+355,
+356,
+357,
+358,
+359
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/wolfe-24.json",
+"indices": [
+360,
+361,
+362,
+363,
+364,
+365,
+366,
+367,
+368,
+369,
+370,
+371,
+372,
+373,
+374
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/wolfe-25.json",
+"indices": [
+375,
+376,
+377,
+378,
+379,
+380,
+381,
+382,
+383,
+384,
+385,
+386,
+387,
+388,
+389
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/wolfe-26.json",
+"indices": [
+390,
+391,
+392,
+393,
+394,
+395,
+396,
+397,
+398,
+399,
+400,
+401,
+402,
+403,
+404
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/wolfe-27.json",
+"indices": [
+405,
+406,
+407,
+408,
+409,
+410,
+411,
+412,
+413,
+414,
+415,
+416,
+417,
+418,
+419
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/wolfe-28.json",
+"indices": [
+420,
+421,
+422,
+423,
+424,
+425,
+426,
+427,
+428,
+429,
+430,
+431,
+432,
+433,
+434
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/wolfe-29.json",
+"indices": [
+435,
+436,
+437,
+438,
+439,
+440,
+441,
+442,
+443,
+444,
+445,
+446,
+447,
+448,
+449
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/wolfe-30.json",
+"indices": [
+450,
+451,
+452,
+453,
+454,
+455,
+456,
+457,
+458,
+459,
+460,
+461,
+462,
+463,
+464
+]
+},
+{
+"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/chunks/wolfe-31.json",
+"indices": [
+465,
+466,
+467
 ]
 }
 ]

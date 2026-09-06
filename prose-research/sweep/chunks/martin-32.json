@@ -1,0 +1,158 @@
+{
+ "name": "martin",
+ "chunk": 32,
+ "indices": [
+  810,
+  811,
+  812,
+  813,
+  814,
+  815,
+  816,
+  817,
+  818,
+  819,
+  820,
+  821,
+  822,
+  823,
+  824
+ ],
+ "claims": [
+  {
+   "index": 810,
+   "feature": "withheld information and inference",
+   "claim": "Germani argues Martin sticks to the present because it lets him maintain mysteries.",
+   "source": "Erik Germani, 'Now, As We All Know', At Sea Journal",
+   "url": "https://atseajournal.com/asoiaf/essays/stealth_exposition.html",
+   "quote": "He sticks to the present because it lets him maintain mysteries",
+   "page": "essay body"
+  },
+  {
+   "index": 811,
+   "feature": "civic record register",
+   "claim": "Germani observes that facts one would look up in an encyclopedia of Westeros must instead be delivered by the cast, since no such reference exists in the text.",
+   "source": "Erik Germani, 'Now, As We All Know', At Sea Journal",
+   "url": "https://atseajournal.com/asoiaf/essays/stealth_exposition.html",
+   "quote": "the kind of fact one would look up in the Encyclopedia Westerosica",
+   "page": "essay body, section 'Appendices'"
+  },
+  {
+   "index": 812,
+   "feature": "point of view and distance",
+   "claim": "Germani reproduces Martin's statement that he is a strong believer in telling stories through a limited but very tight third person point of view.",
+   "source": "George R. R. Martin, interview for Adria's News, quoted by Erik Germani, At Sea Journal",
+   "url": "https://atseajournal.com/asoiaf/essays/psychic_distance.html",
+   "quote": "telling stories through a limited but very tight third person",
+   "page": "essay epigraph"
+  },
+  {
+   "index": 813,
+   "feature": "point of view and distance",
+   "claim": "Germani finds Martin generally hovering right over his point of view characters' shoulders, then stepping back at odd times.",
+   "source": "Erik Germani, 'The Unseen Plane Crash', At Sea Journal",
+   "url": "https://atseajournal.com/asoiaf/essays/psychic_distance.html",
+   "quote": "hovering right over his POV’s shoulders",
+   "page": "essay body"
+  },
+  {
+   "index": 814,
+   "feature": "point of view and distance",
+   "claim": "Germani identifies a passage naming Jaime Lannister in full from Tyrion's viewpoint as the author's voice rather than the character's.",
+   "source": "Erik Germani, 'The Unseen Plane Crash', At Sea Journal",
+   "url": "https://atseajournal.com/asoiaf/essays/psychic_distance.html",
+   "quote": "that’s Martin talking",
+   "page": "essay body, on a breakfast scene"
+  },
+  {
+   "index": 815,
+   "feature": "cadence and rhythm",
+   "claim": "Germani argues Martin keeps readers turning pages with a steady flow of low-density sentences.",
+   "source": "Erik Germani, 'George R.R. Martin, The American Homer', At Sea Journal",
+   "url": "https://atseajournal.com/asoiaf/essays/epithets.html",
+   "quote": "Martin keeps us turning pages with a steady flow of low-density sentences",
+   "page": "essay body"
+  },
+  {
+   "index": 816,
+   "feature": "repetition and refrain",
+   "claim": "Germani compared authors in his corpus for comparisons of the colour black and found Martin the runaway consumer of the construction.",
+   "source": "Erik Germani, 'George R.R. Martin, The American Homer', At Sea Journal",
+   "url": "https://atseajournal.com/asoiaf/essays/epithets.html",
+   "quote": "Martin was the runaway consumer of the construction",
+   "page": "essay body, on 'black as night'"
+  },
+  {
+   "index": 817,
+   "feature": "plainness and economy",
+   "claim": "Germani writes that except in cases of emotional shock a reader never has to read a sentence of A Game of Thrones twice.",
+   "source": "Erik Germani, 'George R.R. Martin, The American Homer', At Sea Journal",
+   "url": "https://atseajournal.com/asoiaf/essays/epithets.html",
+   "quote": "you never have to read an AGOT sentence twice",
+   "page": "essay body"
+  },
+  {
+   "index": 818,
+   "feature": "dialogue register",
+   "claim": "Germani states that the prose constituting the other 60% of the text, beside dialogue, is forgettable.",
+   "source": "Erik Germani, 'George R.R. Martin, The American Homer', At Sea Journal",
+   "url": "https://atseajournal.com/asoiaf/essays/epithets.html",
+   "quote": "the prose that constitutes the other 60% of the text is forgettable",
+   "page": "essay body"
+  },
+  {
+   "index": 819,
+   "feature": "archaism",
+   "claim": "Germani writes that most fantasists settle for a few linguistic relics to give a historical veneer, and names 'must needs', 'soon or late' and 'near as' among Martin's.",
+   "source": "Erik Germani, 'Linguistic Anachronism', At Sea Journal",
+   "url": "https://atseajournal.com/asoiaf/essays/linguistic_anachronism.html",
+   "quote": "a few linguistic relics to give a historical veneer",
+   "page": "essay body"
+  },
+  {
+   "index": 820,
+   "feature": "diction (native vs latinate)",
+   "claim": "Germani argues that what a fantasy writer needs to build is cultures rather than worlds, and that a culture is before anything else a language and a voice.",
+   "source": "Erik Germani, 'Linguistic Anachronism', At Sea Journal",
+   "url": "https://atseajournal.com/asoiaf/essays/linguistic_anachronism.html",
+   "quote": "What we need to do is build cultures, not worlds",
+   "page": "essay body"
+  },
+  {
+   "index": 821,
+   "feature": "concrete sensory noun",
+   "claim": "Germani argues that it matters what kind of trees a fantasy writer names and what sort of animals.",
+   "source": "Erik Germani, 'Linguistic Anachronism', At Sea Journal",
+   "url": "https://atseajournal.com/asoiaf/essays/linguistic_anachronism.html",
+   "quote": "It matters what kind of trees you name, what sort of animals",
+   "page": "essay body"
+  },
+  {
+   "index": 822,
+   "feature": "other: punctuation practice",
+   "claim": "Germani finds that in A Game of Thrones Martin uses semicolons and colons interchangeably.",
+   "source": "Erik Germani, 'Punctuation', At Sea Journal",
+   "url": "https://atseajournal.com/asoiaf/essays/punctuation.html",
+   "quote": "Martin uses semicolons and colons interchangeably",
+   "page": "essay body, opening"
+  },
+  {
+   "index": 823,
+   "feature": "other: punctuation practice",
+   "claim": "Germani reports finding three instances of a semicolon standing where a colon belongs on a single page of his edition of A Game of Thrones.",
+   "source": "Erik Germani, 'Punctuation', At Sea Journal",
+   "url": "https://atseajournal.com/asoiaf/essays/punctuation.html",
+   "quote": "there are three examples of this on one page",
+   "page": "essay body, citing p.239 of his edition"
+  },
+  {
+   "index": 824,
+   "feature": "parataxis vs hypotaxis",
+   "claim": "Germani likens Martin's paragraphs to Jenga towers from which several sentences can be removed before they wobble.",
+   "source": "Erik Germani, 'Compressible Paragraphs', At Sea Journal",
+   "url": "https://atseajournal.com/asoiaf/essays/compressibility.html",
+   "quote": "Martin’s paragraphs are like Jenga towers",
+   "page": "essay body, opening"
+  }
+ ]
+}

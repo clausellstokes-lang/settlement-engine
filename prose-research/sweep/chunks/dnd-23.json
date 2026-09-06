@@ -1,0 +1,158 @@
+{
+ "name": "dnd",
+ "chunk": 23,
+ "indices": [
+  394,
+  395,
+  396,
+  397,
+  398,
+  399,
+  400,
+  401,
+  402,
+  403,
+  404,
+  405,
+  406,
+  407,
+  408
+ ],
+ "claims": [
+  {
+   "index": 394,
+   "feature": "plainness and economy",
+   "claim": "Bryce Lynch names a terse writing style as one of the things he looks for in an adventure module.",
+   "source": "Bryce Lynch, 'Review Standards', tenfootpole.org",
+   "url": "https://tenfootpole.org/ironspike/?page_id=1201",
+   "quote": "Terse writing style",
+   "page": "Review Standards, bullet list"
+  },
+  {
+   "index": 395,
+   "feature": "other: backstory and front matter",
+   "claim": "Bryce Lynch says in a comment on his own standards page that he loathes overly long backstory and fiction introductions in modules.",
+   "source": "Bryce Lynch, comment of 19 April 2016 on 'Review Standards', tenfootpole.org",
+   "url": "https://tenfootpole.org/ironspike/?page_id=1201",
+   "quote": "I LOATHE the overly long backstory",
+   "page": "comments, 19 April 2016"
+  },
+  {
+   "index": 396,
+   "feature": "other: review rubric for prose",
+   "claim": "The tenfootpole reviewer who writes as 'The Pretty Girl' puts succinct-and-evocative at the top of her four-point Language scale for modules; the scale is hers, not Bryce Lynch's.",
+   "source": "'The Pretty Girl', rating scale on 'Review Standards', tenfootpole.org",
+   "url": "https://tenfootpole.org/ironspike/?page_id=1201",
+   "quote": "4 – Succinct and evocative",
+   "page": "Review Standards, 'The Pretty Girl' section, Language scale"
+  },
+  {
+   "index": 397,
+   "feature": "boxed text form",
+   "claim": "Justin Alexander defines boxed text in an RPG scenario as narration written in advance for the GM to read to the players.",
+   "source": "Justin Alexander, The Alexandrian",
+   "url": "https://thealexandrian.net/wordpress/48312/roleplaying-games/gm-dont-list-13-boxed-text-pitfalls",
+   "quote": "a prewritten narration designed to be read to the players",
+   "page": "opening paragraph"
+  },
+  {
+   "index": 398,
+   "feature": "boxed text form",
+   "claim": "Justin Alexander names the reaction point and says a description must not carry the world past it before the players may respond; he applies the test to a boxed passage he quotes from Journeys Through the Radiant Citadel.",
+   "source": "Justin Alexander, The Alexandrian",
+   "url": "https://thealexandrian.net/wordpress/48312/roleplaying-games/gm-dont-list-13-boxed-text-pitfalls",
+   "quote": "the game world continue to move forward past the reaction point",
+   "page": "section on freeze-frame boxed text"
+  },
+  {
+   "index": 399,
+   "feature": "other: length of read-aloud text",
+   "claim": "A commenter on Alexander's post recalls a lost Wizards devblog article arguing GM-delivered descriptive text should stop at three sentences; the recollection is the commenter's, and the original article is not linked.",
+   "source": "commenter 'mellonbread', comment of 2 August 2022 on The Alexandrian",
+   "url": "https://thealexandrian.net/wordpress/48312/roleplaying-games/gm-dont-list-13-boxed-text-pitfalls",
+   "quote": "should never be longer than three sentences",
+   "page": "comments, 2 August 2022"
+  },
+  {
+   "index": 400,
+   "feature": "other: length of read-aloud text",
+   "claim": "David Noonan reports that from watching games at Gen Con 2005 he concluded a DM reading boxed text holds player attention for two sentences.",
+   "source": "Jesse Decker and David Noonan, 'Design & Development: Undercover at Gen Con, Part 1', Wizards of the Coast",
+   "url": "http://archive.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "If you’re the DM, you get two sentences. Period.",
+   "page": "Undercover Insight #1: Boxed Text = MEGO"
+  },
+  {
+   "index": 401,
+   "feature": "boxed text form",
+   "claim": "Noonan's stated mechanism for the attention loss is that read-aloud text converts the game's normal conversation into oration.",
+   "source": "Jesse Decker and David Noonan, Wizards of the Coast",
+   "url": "http://archive.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "Boxed text replaces that conversation with oration.",
+   "page": "Undercover Insight #1"
+  },
+  {
+   "index": 402,
+   "feature": "edition and house style",
+   "claim": "Noonan sets a three-sentence 2005 boxed text from Sons of Gruumsh beside a much longer one from 1999's Return to the Keep on the Borderlands to show that read-aloud text used to be far longer.",
+   "source": "Jesse Decker and David Noonan, Wizards of the Coast",
+   "url": "http://archive.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "Boxed text in adventures used to be a lot longer",
+   "page": "Undercover Insight #1, Tangent Alert"
+  },
+  {
+   "index": 403,
+   "feature": "dm-facing sentence",
+   "claim": "Noonan reports that players who heard boxed text still missed its factual content, naming room dimensions, exits and monster counts as what went past them.",
+   "source": "Jesse Decker and David Noonan, Wizards of the Coast",
+   "url": "http://archive.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "quote": "basic stuff, like room dimensions, how many doors exit the room",
+   "page": "Undercover Insight #1"
+  },
+  {
+   "index": 404,
+   "feature": "dialogue register",
+   "claim": "The Dungeon Master's Workshop close reading of King Bruenor's speech in Out of the Abyss objects that the passage is formatted like a novel, with a 'he says' attribution tag inside text meant to be spoken.",
+   "source": "Dungeon Master's Workshop, 'Dungeon Mastering 101: Mastering the Boxed Text'",
+   "url": "https://dmsworkshop.com/2019/09/27/dm-101-boxed-text-mastering/",
+   "quote": "structuring the narrative like it’s a book",
+   "page": "section on Out of the Abyss"
+  },
+  {
+   "index": 405,
+   "feature": "boxed text form",
+   "claim": "The same close reading notes that Out of the Abyss's own instruction immediately after the Bruenor boxed text tells the DM to paraphrase it.",
+   "source": "Dungeon Master's Workshop, quoting Out of the Abyss",
+   "url": "https://dmsworkshop.com/2019/09/27/dm-101-boxed-text-mastering/",
+   "quote": "Paraphrase Bruenor’s speech as needed",
+   "page": "section on Out of the Abyss"
+  },
+  {
+   "index": 406,
+   "feature": "sentence length variation",
+   "claim": "Dungeon Master's Workshop advises that a boxed text containing a paragraph break is usually already twice as long as it should be.",
+   "source": "Dungeon Master's Workshop",
+   "url": "https://dmsworkshop.com/2019/09/27/dm-101-boxed-text-mastering/",
+   "quote": "already too long by half",
+   "page": "Don't Overdo It"
+  },
+  {
+   "index": 407,
+   "feature": "point of view and distance",
+   "claim": "Dungeon Master's Workshop offers third-person objective and second-person subjective as two switchable registers for the same location description, illustrating each with a waterfall sentence.",
+   "source": "Dungeon Master's Workshop",
+   "url": "https://dmsworkshop.com/2019/09/27/dm-101-boxed-text-mastering/",
+   "quote": "A 200-foot waterfall cascades down",
+   "page": "Using Boxed Text Your Way"
+  },
+  {
+   "index": 408,
+   "feature": "place and institution description",
+   "claim": "Dungeon Master's Workshop reports that Waterdeep: Dragon Heist describes minor locations in mixed forms, a bookstore getting a short paraphrasable paragraph and a villa's great hall a set of bullet points.",
+   "source": "Dungeon Master's Workshop",
+   "url": "https://dmsworkshop.com/2019/09/27/dm-101-boxed-text-mastering/",
+   "quote": "A bookstore receives a short paragraph description",
+   "page": "section on Waterdeep: Dragon Heist"
+  }
+ ]
+}

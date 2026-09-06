@@ -1,6 +1,6 @@
 {
  "complete": true,
- "coverage": "29 sources fetched raw and read, 21 substantive, 52 claims, every non-empty quotation re-checked against the fetched text before writing. ROSTER: the angle named no individual titles, so the roster was built from the two standing bibliographies — BrightWeavings' \"Professional Scholarship\" (20 items) and \"Student Papers\" (17 items) — plus OpenAlex (80 hits on \"Guy Gavriel Kay\", two pages walked), Crossref bibliographic queries, and the Wikipedia relay. FETCHED: Randall (Canadian Literature 129, 1991), Webb x2, Gunn (Easton Press intro), Cobb (Foundation 2005), Ordway (1998), Malosse (Anabases 5, 2007, English and French), Ringel (ICFA 2009), Patton (Sarantine Letters, in-world conceit), Doherty, Cawsey (Arthuriana 25.2, PDF), Taylor, Clements, Rettino (McGill honours 2012), Toyryla (Helsinki BA 2017), Hatch (Calgary), Kleander (Stirling 2008), Campbell (Wollongong PhD 2013, via Figshare mirror after the repository blocked the download), Pugar (Zagreb, Words to Works), Doshlova (Kuban/UrFU, Russian), Thompson's 1989 Camelot Project interview, the Locus 2025 interview, the LARB 2016 interview, and the Wikipedia articles on Kay and Tigana. ABSTRACT ONLY: Johnston (Palgrave 2019, read raw from a Wayback capture of the SpringerLink page) and Borowska-Szerszun (Orbis Litterarum 2026, read from the Crossref record). BLOCKED: Gary K. Wolfe, \"Guy Gavriel Kay: An Introduction\", Journal of the Fantastic in the Arts 20.2 (2009) — the JSTOR issue page fails to render and its only other index, Questia, is defunct with no Wayback capture; Toswell, \"Guy Gavriel Kay: Historical Fantasy\" (Amsterdam UP / De Gruyter Brill 2025) and Borowska-Szerszun, \"Remembering the Romance\" (Boydell 2020) — publisher pages return empty bodies, the books are not in OAPEN or DOAB, and the Google Books API quota was exhausted; Borowska-Szerszun, \"When Gods are Absent from Fantasy\" (2017) — the Bialystok repository PDF is a 4.7 MB image-only scan yielding 18 characters; Anabases on OpenEdition — Anubis bot filter, no Wayback capture (cured by the author-authorized reprint). ROUTES: 19 substantive by live raw HTML, 3 by PDF binary plus text extraction (one of them only via a Figshare mirror), 2 by abstract records (Wayback and Crossref). NEGATIVE FINDING: no stylometric, corpus-stylistic or computational study of Kay exists that I could locate through OpenAlex, Crossref or open web search — the quantitative claims in this angle are hand counts by narratologists (Randall's 26 focalizants and 87 shifts; Kleander's 21 focalizants and 150-plus focalizations in Tigana). Web search quota was exhausted mid-sweep, so the last expansion rounds ran through OpenAlex, Crossref and bibliography chasing only; two consecutive index queries surfaced nothing new.",
+ "coverage": "29 sources fetched raw and read, 21 substantive, 52 claims, every non-empty quotation re-checked against the fetched text before writing. ROSTER: the angle named no individual titles, so the roster was built from the two standing bibliographies — BrightWeavings' \"Professional Scholarship\" (20 items) and \"Student Papers\" (17 items) — plus OpenAlex (80 hits on \"Guy Gavriel Kay\", two pages walked), Crossref bibliographic queries, and the Wikipedia relay. FETCHED: Randall (Canadian Literature 129, 1991), Webb x2, Gunn (Easton Press intro), Cobb (Foundation 2005), Ordway (1998), Malosse (Anabases 5, 2007, English and French), Ringel (ICFA 2009), Patton (Sarantine Letters, in-world conceit), Doherty, Cawsey (Arthuriana 25.2, PDF), Taylor, Clements, Rettino (McGill honours 2012), Töyrylä (Helsinki BA 2017), Hatch (Calgary), Kleander (Stirling 2008), Campbell (Wollongong PhD 2013, via a Figshare mirror after the repository blocked the download), Pugar (Zagreb, Words to Works), Doshlova (Kuban/UrFU, Russian), Thompson's 1989 Camelot Project interview, the Locus 2025 interview, the LARB 2016 interview, and the Wikipedia articles on Kay and Tigana. ABSTRACT ONLY: Johnston (Palgrave 2019, read raw from a Wayback capture of the SpringerLink page) and Borowska-Szerszun (Orbis Litterarum 2026, read from the Crossref record). BLOCKED: Gary K. Wolfe, \"Guy Gavriel Kay: An Introduction\", Journal of the Fantastic in the Arts 20.2 (2009) — the JSTOR issue page fails to render and its only other index, Questia, is defunct with no Wayback capture; Toswell, \"Guy Gavriel Kay: Historical Fantasy\" (Amsterdam UP / De Gruyter Brill 2025) and Borowska-Szerszun, \"Remembering the Romance\" (Boydell 2020) — publisher pages return empty bodies, the books are not in OAPEN or DOAB, and the Google Books API quota was exhausted; Borowska-Szerszun, \"When Gods are Absent from Fantasy\" (2017) — the Białystok repository PDF is a 4.7 MB image-only scan yielding 18 characters; Anabases on OpenEdition — Anubis bot filter, no Wayback capture (cured by the author-authorized reprint). ROUTES: 19 substantive by live raw HTML, 3 by PDF binary plus text extraction (one only via a Figshare mirror), 2 by abstract records (Wayback and Crossref). NEGATIVE FINDING: no stylometric, corpus-stylistic or computational study of Kay exists that OpenAlex, Crossref or open web search surfaced — every quantitative claim in this angle is a hand count by a narratologist (Randall's 26 focalizants and 87 shifts; Kleander's 21 focalizants and more than 150 focalizations in Tigana). The web-search quota was exhausted mid-sweep, so the last expansion rounds ran through OpenAlex, Crossref and bibliography chasing only; two consecutive index queries surfaced nothing new.",
  "sourcesRead": [
   {
    "title": "Neil Randall, \"Shifting Focalization and the Strategy of Delay: The Narrative Weaving of The Fionavar Tapestry\", Canadian Literature 129 (Summer 1991)",
@@ -71,11 +71,11 @@
    "url": "https://lareviewofbooks.org/article/fantastic-worlds-guy-gavriel-kay/",
    "kind": "own-words",
    "substantive": true,
-   "date": "2016 (Children of Earth and Sky, published 2016)",
+   "date": "2016 (on Children of Earth and Sky, published 2016)",
    "route": "live URL, raw HTML"
   },
   {
-   "title": "Petra Pugar, \"A Marvellous (Hi)story: An Analysis of Tigana by Guy Gavriel Kay\", Words to Works (Anglophonia, University of Zagreb), pp. 162-",
+   "title": "Petra Pugar, \"A Marvellous (Hi)story: An Analysis of Tigana by Guy Gavriel Kay\", Words to Works (Anglophonia, University of Zagreb), from p. 162",
    "url": "https://anglophonia.ffzg.unizg.hr/wp-content/uploads/2020/07/162_pugar.pdf",
    "kind": "analysis",
    "substantive": true,
@@ -128,7 +128,7 @@
    "kind": "analysis",
    "substantive": false,
    "date": "2015-06",
-   "route": "PDF binary via BrightWeavings, text extracted with pypdf — read in full; argument is about Kay's philosophical inversion of Malory, no prose-style or register analysis"
+   "route": "PDF binary via BrightWeavings, text extracted with pypdf — read in full; the argument is Kay's philosophical inversion of Malory, with no prose-style or register analysis"
   },
   {
    "title": "Susan A. Johnston, \"When Are We Ever at Home? Exile and Nostalgia in the Work of Guy Gavriel Kay\", in Canadian Science Fiction, Fantasy, and Horror (Palgrave Macmillan, Studies in Global Science Fiction, 2019)",
@@ -136,7 +136,7 @@
    "kind": "analysis",
    "substantive": true,
    "date": "2019",
-   "route": "paywalled; abstract read raw via Wayback capture https://web.archive.org/web/20191114214457id_/… — ABSTRACT ONLY"
+   "route": "paywalled; abstract read raw via the Wayback capture https://web.archive.org/web/20191114214457id_/… — ABSTRACT ONLY"
   },
   {
    "title": "Sylwia Borowska-Szerszun, \"The limits of the happy ending: Eucatastrophe and cultural memory in Guy Gavriel Kay's Tigana\", Orbis Litterarum (4 June 2026), doi:10.1111/oli.70057",
@@ -155,11 +155,11 @@
    "route": "live URL, raw HTML"
   },
   {
-   "title": "Raymond H. Thompson, \"Interview with Guy Gavriel Kay\" (Taliesin's Successors), Robbins Library / The Camelot Project, University of Rochester",
+   "title": "Raymond H. Thompson, \"Interview with Guy Gavriel Kay\" (Taliesin's Successors), Robbins Library / The Camelot Project, University of Rochester — interview conducted at Mythcon, Vancouver, 30 July 1989",
    "url": "https://d.lib.rochester.edu/camelot/text/interview-with-guy-gavriel-kay.html",
    "kind": "own-words",
    "substantive": true,
-   "date": "n.d. (Taliesin's Successors interview series)",
+   "date": "1989-07-30 (published Camelot Project 1999)",
    "route": "live URL, raw HTML"
   },
   {
@@ -200,7 +200,7 @@
    "kind": "analysis",
    "substantive": true,
    "date": "2013",
-   "route": "ro.uow.edu.au download blocked (empty body); obtained via the Figshare mirror https://ndownloader.figshare.com/files/50372574, PDF text extracted with pdfminer"
+   "route": "the ro.uow.edu.au download returned an empty body; obtained via the Figshare mirror https://ndownloader.figshare.com/files/50372574, PDF text extracted with pdfminer"
   },
   {
    "title": "Susannah Clements, \"From Middle Earth to Fionavar: Free Will and Sacrifice in High Fantasy by J.R.R. Tolkien and Guy Gavriel Kay\", Conference on Christianity and Literature (2002)",
@@ -232,7 +232,7 @@
    "kind": "analysis",
    "substantive": false,
    "date": "2017",
-   "route": "BLOCKED for reading: the repository PDF is a 4.7 MB image-only scan and yielded 18 characters of extractable text; the BrightWeavings landing page carries only an abstract-length excerpt"
+   "route": "BLOCKED for reading: the repository PDF is a 4.7 MB image-only scan that yielded 18 characters of extractable text; the BrightWeavings landing page carries only an abstract-length excerpt"
   }
  ],
  "claims": [
@@ -560,7 +560,7 @@
   },
   {
    "feature": "civic record register",
-   "claim": "Pugar argues that Tigana's prologue persuades the reader they are reading a true account giving evidence of the past.",
+   "claim": "Pugar argues that Tigana's prologue persuades the implied reader that they are dealing with a true account giving evidence of the past.",
    "source": "Petra Pugar, University of Zagreb, Words to Works",
    "url": "https://anglophonia.ffzg.unizg.hr/wp-content/uploads/2020/07/162_pugar.pdf",
    "quote": "they are dealing with a true account, giving evidence of the past",
@@ -736,7 +736,7 @@
    "kind": "own-words",
    "polarity": "asserts",
    "date": "2025-05-12",
-   "routeHint": "live URL, raw HTML",
+   "routeHint": "live URL, raw HTML — NOTE the page inserts soft hyphens (U+00AD) inside some words on this line",
    "registerHint": "chronicle-line",
    "confidence": "high"
   },
@@ -750,7 +750,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2026-06-04",
-   "routeHint": "Crossref record abstract (article paywalled)",
+   "routeHint": "Crossref record abstract (article paywalled at Wiley)",
    "registerHint": "none",
    "confidence": "medium — abstract only, the article text was not reachable"
   },
@@ -848,7 +848,7 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2013",
-   "routeHint": "Figshare mirror of the thesis PDF, pdfminer text",
+   "routeHint": "Figshare mirror of the thesis PDF (ndownloader.figshare.com/files/50372574), pdfminer text",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -956,7 +956,7 @@
    "source": "M. R. Doshlova, Kuban State University, conference paper (Ural Federal University archive)",
    "url": "https://elar.urfu.ru/bitstream/10995/151646/1/978-5-91256-808-4_128.pdf",
    "quote": "",
-   "page": "abstract (p. 1237)",
+   "page": "abstract, p. 1237",
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2026",

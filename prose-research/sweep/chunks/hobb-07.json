@@ -1,0 +1,158 @@
+{
+ "name": "hobb",
+ "chunk": 7,
+ "indices": [
+  105,
+  106,
+  107,
+  108,
+  109,
+  110,
+  111,
+  112,
+  113,
+  114,
+  115,
+  116,
+  117,
+  118,
+  119
+ ],
+ "claims": [
+  {
+   "index": 105,
+   "feature": "point of view and distance",
+   "claim": "Lagus finds Ship of Magic's internal focalization immersive and often pronounced.",
+   "source": "Timo Lagus, MA thesis, University of Helsinki, 2006",
+   "url": "https://helda.helsinki.fi/server/api/core/bitstreams/ae370f8d-eafe-41e3-8eb9-79b245702b82/content",
+   "quote": "Its internal focalization is immersive and often pronounced",
+   "page": "ch. 5, p. 125"
+  },
+  {
+   "index": 106,
+   "feature": "consequence on a household",
+   "claim": "To exemplify Hobb's figural perspectivism Lagus reprints a domestic bedside passage in which the trader matriarch Ronica Vestrit, nursing her dying husband, weighs what to do about an indentured servant.",
+   "source": "Timo Lagus, MA thesis, University of Helsinki, 2006",
+   "url": "https://helda.helsinki.fi/server/api/core/bitstreams/ae370f8d-eafe-41e3-8eb9-79b245702b82/content",
+   "quote": "Sitting by her dying husband's bedside, Ronica Vestrit, the matriarch",
+   "page": "ch. 5, pp. 126-127 (block quotation from Ship of Magic)"
+  },
+  {
+   "index": 107,
+   "feature": "annalist voice and deep time",
+   "claim": "Moon describes the older narrating Fitz as a historian who keeps getting distracted by his own role in the history.",
+   "source": "Emily Moon, \"'I set no limits on my love': Magic, Queerness and the Disruption of Binaries in Robin Hobb's Realm of the Elderlings\", MA by Research, University of Kent, 2024",
+   "url": "https://kar.kent.ac.uk/108514/1/97moon2024maresfinal.pdf",
+   "quote": "that of a historian getting distracted by their own role",
+   "page": "ch. 2, p. 55"
+  },
+  {
+   "index": 108,
+   "feature": "per-speaker register",
+   "claim": "Moon reads the sudden appearance and disappearance of quotation marks around a pronoun as the seam between the child Fitz's usage and the older narrator's.",
+   "source": "Emily Moon, MA by Research, University of Kent, 2024",
+   "url": "https://kar.kent.ac.uk/108514/1/97moon2024maresfinal.pdf",
+   "quote": "the abrupt addition and disappearance of quotation marks",
+   "page": "ch. 3, p. 88"
+  },
+  {
+   "index": 109,
+   "feature": "place and institution description",
+   "claim": "Susan Mandala, as relayed by Wikipedia, holds that Hobb writes the fantastic as an unquestioned, familiar part of the setting, producing an illusion of familiarity for the reader.",
+   "source": "Wikipedia, 'Farseer trilogy', Style section, relaying Susan Mandala, Language in Science Fiction and Fantasy: The Question of Style (Continuum, 2010) 100-102",
+   "url": "https://en.wikipedia.org/wiki/Farseer_trilogy",
+   "quote": "casts the fantastic as an unquestioned, familiar aspect of the setting",
+   "page": "Style section"
+  },
+  {
+   "index": 110,
+   "feature": "register modulation",
+   "claim": "Mandala, relayed by Wikipedia, observes that Hobb's narration of Fitz's first shared dream with a dog stays lexically coherent across the human and the animal parts.",
+   "source": "Wikipedia, 'Farseer trilogy', Style section, relaying Susan Mandala, Language in Science Fiction and Fantasy (2010) 101-102",
+   "url": "https://en.wikipedia.org/wiki/Farseer_trilogy",
+   "quote": "the narration matches how he experiences the dream",
+   "page": "Style section"
+  },
+  {
+   "index": 111,
+   "feature": "terminology consistency",
+   "claim": "When the Skill is first named, the narrative does not explain the term, treating its meaning as known inside the world.",
+   "source": "Wikipedia, 'Farseer trilogy', Style section, relaying Susan Mandala, Language in Science Fiction and Fantasy (2010) 102",
+   "url": "https://en.wikipedia.org/wiki/Farseer_trilogy",
+   "quote": "the narrative does not address the term directly",
+   "page": "Style section"
+  },
+  {
+   "index": 112,
+   "feature": "naming and forms of address",
+   "claim": "Mandala, relayed by Wikipedia, notes that Fitz describes his own family in the same terms he uses for strangers, his grandfather becoming 'the tall man' and his mother 'a voice'.",
+   "source": "Wikipedia, 'Farseer trilogy', Style section, relaying Susan Mandala, Language in Science Fiction and Fantasy (2010) 128-130",
+   "url": "https://en.wikipedia.org/wiki/Farseer_trilogy",
+   "quote": "Fitz describes his immediate family in the same terms as the",
+   "page": "Style section"
+  },
+  {
+   "index": 113,
+   "feature": "civic record register",
+   "claim": "Wikipedia's Farseer article describes the chapter-prefacing excerpts as short memoirs narrating a fictional history of the setting, and calls them unreliable narratives.",
+   "source": "Wikipedia, 'Farseer trilogy', Style section",
+   "url": "https://en.wikipedia.org/wiki/Farseer_trilogy",
+   "quote": "short memoirs prefacing each chapter that narrate a fictional history",
+   "page": "Style section"
+  },
+  {
+   "index": 114,
+   "feature": "consequence on a household",
+   "claim": "Elliott calls attention to the all-too-human factors of avarice and pettiness a hallmark of Hobb's writing, citing the looting of her memorial city by merchants.",
+   "source": "Geoffrey B. Elliott, 'Sites of Memory in Robin Hobb's Realm of the Elderlings', paper given at the 2021 International Congress on Medieval Studies (Tales after Tolkien Society session), self-published 19 May 2021",
+   "url": "https://elliottrwi.com/2021/05/19/sites-of-memory-in-robin-hobbs-realm-of-the-elderlings/",
+   "quote": "the all-too-human factors of avarice and pettiness",
+   "page": "section 'The Typical Sites of Memory'"
+  },
+  {
+   "index": 115,
+   "feature": "consequence on a household",
+   "claim": "Elliott reports that in Hobb's Bingtown a family buying a liveship commonly takes a multi-generational loan secured by potential marriages.",
+   "source": "Geoffrey B. Elliott, 'Sites of Memory in Robin Hobb's Realm of the Elderlings' (ICMS 2021)",
+   "url": "https://elliottrwi.com/2021/05/19/sites-of-memory-in-robin-hobbs-realm-of-the-elderlings/",
+   "quote": "a multi-generational loan, secured by potential marriages, to purchase one",
+   "page": "section 'The Strange Sites of Memory: The Liveships'"
+  },
+  {
+   "index": 116,
+   "feature": "place and institution description",
+   "claim": "Elliott notes that Hobb introduces the ruined city Kelsingra through what Fitz fails to perceive there.",
+   "source": "Geoffrey B. Elliott, 'Sites of Memory in Robin Hobb's Realm of the Elderlings' (ICMS 2021)",
+   "url": "https://elliottrwi.com/2021/05/19/sites-of-memory-in-robin-hobbs-realm-of-the-elderlings/",
+   "quote": "he finds it empty, perceiving no signs of life around him",
+   "page": "section 'The Typical Sites of Memory'"
+  },
+  {
+   "index": 117,
+   "feature": "stylometry",
+   "claim": "Waumans, Nicodeme and Bersini's corpus of forty-seven best-selling novels includes seven of Hobb's - the three Liveship Traders and four Rain Wild Chronicles books.",
+   "source": "Michael C. Waumans, Thibaut Nicodeme and Hugues Bersini, 'Topology Analysis of Social Networks Extracted from Literature', PLoS ONE 10.6 (3 June 2015)",
+   "url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0126470",
+   "quote": "the forty-seven best-selling books",
+   "page": "Introduction"
+  },
+  {
+   "index": 118,
+   "feature": "stylometry",
+   "claim": "The study proposes dialogue spacing and alias-network topology as features that may identify an author's style.",
+   "source": "Waumans, Nicodeme and Bersini, PLoS ONE 10.6 (2015)",
+   "url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0126470",
+   "quote": "relevant in the identification of the author's style like the dialog",
+   "page": "Conclusion and future work"
+  },
+  {
+   "index": 119,
+   "feature": "stylometry",
+   "claim": "In the study's hierarchical clustering the Rain Wild Chronicles books cluster together, which the authors treat as an absence of the style fluctuation they see in a scattered series.",
+   "source": "Waumans, Nicodeme and Bersini, PLoS ONE 10.6 (2015)",
+   "url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0126470",
+   "quote": "The dendrogram shows a good clustering of certain series",
+   "page": "Results, Fig 21"
+  }
+ ]
+}

@@ -1,0 +1,158 @@
+{
+ "name": "wolfe",
+ "chunk": 15,
+ "indices": [
+  225,
+  226,
+  227,
+  228,
+  229,
+  230,
+  231,
+  232,
+  233,
+  234,
+  235,
+  236,
+  237,
+  238,
+  239
+ ],
+ "claims": [
+  {
+   "index": 225,
+   "feature": "per-speaker register",
+   "claim": "Wolfe says an intelligent reader can tell who spoke from what was said, without a speech tag.",
+   "source": "Gene Wolfe, interviewed by Lawrence Person, Nova Express vol. 5 no. 1, Fall/Winter 1998",
+   "url": "http://losarciniegas.blogspot.com/2021/04/suns-new-long-and-short-interview-with.html",
+   "quote": "knows who said that from what was said",
+   "page": "answer on speech patterns"
+  },
+  {
+   "index": 226,
+   "feature": "point of view and distance",
+   "claim": "Wolfe states that once a person inside the story tells the story, that narrator is necessarily unreliable.",
+   "source": "Gene Wolfe, interviewed by Lawrence Person, Nova Express, Fall/Winter 1998",
+   "url": "http://losarciniegas.blogspot.com/2021/04/suns-new-long-and-short-interview-with.html",
+   "quote": "then the narrator is damn well going to be unreliable",
+   "page": "answer on The Fifth Head of Cerberus"
+  },
+  {
+   "index": 227,
+   "feature": "withheld information and inference",
+   "claim": "Wolfe grounds narrator unreliability in courtroom testimony, where several witnesses all trying to tell the truth have nonetheless seen different things.",
+   "source": "Gene Wolfe, interviewed by Lawrence Person, Nova Express, Fall/Winter 1998",
+   "url": "http://losarciniegas.blogspot.com/2021/04/suns-new-long-and-short-interview-with.html",
+   "quote": "all trying to tell the truth, but they have all seen",
+   "page": "answer on The Fifth Head of Cerberus"
+  },
+  {
+   "index": 228,
+   "feature": "plainness and economy",
+   "claim": "Wolfe says a complex story has to be told in a clear structure, because otherwise it is not complex but merely confused.",
+   "source": "Gene Wolfe, interviewed by Lawrence Person, Nova Express, Fall/Winter 1998",
+   "url": "http://losarciniegas.blogspot.com/2021/04/suns-new-long-and-short-interview-with.html",
+   "quote": "or it isn't complex, it's simply confused",
+   "page": "answer on narrative style"
+  },
+  {
+   "index": 229,
+   "feature": "plainness and economy",
+   "claim": "The interviewer characterises The Book of the Long Sun as told in a straightforward and transparent narrative style despite its complexity, and Wolfe does not dispute the description.",
+   "source": "Lawrence Person, question put to Gene Wolfe in Nova Express vol. 5 no. 1, Fall/Winter 1998",
+   "url": "http://losarciniegas.blogspot.com/2021/04/suns-new-long-and-short-interview-with.html",
+   "quote": "told in a very straightforward and transparent narrative style",
+   "page": "question on narrative style"
+  },
+  {
+   "index": 230,
+   "feature": "archaism",
+   "claim": "Wolfe says he began the Sun books with the deliberate decision not to coin invented proper names.",
+   "source": "Gene Wolfe, interviewed by Lawrence Person, Nova Express, Fall/Winter 1998",
+   "url": "http://losarciniegas.blogspot.com/2021/04/suns-new-long-and-short-interview-with.html",
+   "quote": "the idea of not coining Tars Tarkas type names",
+   "page": "answer on research and vocabulary"
+  },
+  {
+   "index": 231,
+   "feature": "archaism",
+   "claim": "Wolfe says the right choice for those books was archaic real names and archaic terms rather than coinages.",
+   "source": "Gene Wolfe, interviewed by Lawrence Person, Nova Express, Fall/Winter 1998",
+   "url": "http://losarciniegas.blogspot.com/2021/04/suns-new-long-and-short-interview-with.html",
+   "quote": "using archaic names and archaic terms for things",
+   "page": "answer on research and vocabulary"
+  },
+  {
+   "index": 232,
+   "feature": "archaism",
+   "claim": "Wolfe attaches a condition to his use of archaic terms: they must appear in contexts that make their meaning clear to the reader.",
+   "source": "Gene Wolfe, interviewed by Lawrence Person, Nova Express, Fall/Winter 1998",
+   "url": "http://losarciniegas.blogspot.com/2021/04/suns-new-long-and-short-interview-with.html",
+   "quote": "it will be clear to the reader what is meant",
+   "page": "answer on research and vocabulary"
+  },
+  {
+   "index": 233,
+   "feature": "diction (native vs latinate)",
+   "claim": "Wolfe describes his method of sourcing vocabulary as looking up the Latin or Greek word for what he needs and then finding an English word someone had already anglicised from it.",
+   "source": "Gene Wolfe, interviewed by Lawrence Person, Nova Express, Fall/Winter 1998",
+   "url": "http://losarciniegas.blogspot.com/2021/04/suns-new-long-and-short-interview-with.html",
+   "quote": "someone will have anglicized this term as a new word",
+   "page": "answer on research and vocabulary"
+  },
+  {
+   "index": 234,
+   "feature": "naming and forms of address",
+   "claim": "Wolfe praises Avram Davidson for building imaginary countries out of obsolete real place names.",
+   "source": "Gene Wolfe, interviewed by Lawrence Person, Nova Express, Fall/Winter 1998",
+   "url": "http://losarciniegas.blogspot.com/2021/04/suns-new-long-and-short-interview-with.html",
+   "quote": "in using obsolete place names",
+   "page": "answer on research and vocabulary"
+  },
+  {
+   "index": 235,
+   "feature": "naming and forms of address",
+   "claim": "Wolfe describes Davidson's place-naming procedure as taking a third-century name and asking what if this place had survived under that name.",
+   "source": "Gene Wolfe, interviewed by Lawrence Person, Nova Express, Fall/Winter 1998",
+   "url": "http://losarciniegas.blogspot.com/2021/04/suns-new-long-and-short-interview-with.html",
+   "quote": "Suppose this place survived as an entity with that name",
+   "page": "answer on research and vocabulary"
+  },
+  {
+   "index": 236,
+   "feature": "place and institution description",
+   "claim": "Wolfe argues that a very large city would show great diversity across its neighbourhoods and social levels, and calls the monocultured world of much science fiction laziness.",
+   "source": "Gene Wolfe, interviewed by Lawrence Person, Nova Express, Fall/Winter 1998",
+   "url": "http://losarciniegas.blogspot.com/2021/04/suns-new-long-and-short-interview-with.html",
+   "quote": "diversity among the neighborhoods and social levels",
+   "page": "answer on multiple cultures"
+  },
+  {
+   "index": 237,
+   "feature": "per-speaker register",
+   "claim": "Wolfe observes that in a real city people on different social levels already talk in ways that are almost different languages.",
+   "source": "Gene Wolfe, interviewed by Lawrence Person, Nova Express, Fall/Winter 1998",
+   "url": "http://losarciniegas.blogspot.com/2021/04/suns-new-long-and-short-interview-with.html",
+   "quote": "people are talking in ways that are almost different languages",
+   "page": "answer on multiple cultures"
+  },
+  {
+   "index": 238,
+   "feature": "point of view and distance",
+   "claim": "Wolfe says real people are unreliable narrators all the time even when they are trying to be reliable.",
+   "source": "Gene Wolfe, quoted in Wikipedia's Gene Wolfe article, citing Lawrence Person's Nova Express interview (Fall/Winter 1998)",
+   "url": "https://en.wikipedia.org/wiki/Gene_Wolfe",
+   "quote": "Real people really are unreliable narrators all the time",
+   "page": "Style section"
+  },
+  {
+   "index": 239,
+   "feature": "archaism",
+   "claim": "In the appendix to The Shadow of the Torturer Wolfe states that he could have used invented terms but in no case did so.",
+   "source": "Wikipedia relaying Gene Wolfe's appendix to The Shadow of the Torturer (cited as Shadow and Claw, Tor 1994, p. 211)",
+   "url": "https://en.wikipedia.org/wiki/Gene_Wolfe",
+   "quote": "in no case have I done so",
+   "page": "Style section"
+  }
+ ]
+}

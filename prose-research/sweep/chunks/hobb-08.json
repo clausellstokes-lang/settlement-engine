@@ -1,0 +1,158 @@
+{
+ "name": "hobb",
+ "chunk": 8,
+ "indices": [
+  120,
+  121,
+  122,
+  123,
+  124,
+  125,
+  126,
+  127,
+  128,
+  129,
+  130,
+  131,
+  132,
+  133,
+  134
+ ],
+ "claims": [
+  {
+   "index": 120,
+   "feature": "stylometry",
+   "claim": "Slavova's sound-symbolic experiment selected twenty roughly one-page passages, drawn from works by seven authors including Robin Hobb.",
+   "source": "Velina Slavova, 'Towards Emotion Recognition in Texts - A Sound-Symbolic Experiment', International Journal of Cognitive Research in Science, Engineering and Education 7.2 (2019) 41-51",
+   "url": "https://www.ijcrsee.com/index.php/ijcrsee/article/view/238",
+   "quote": "Twenty approximately one-page-long passages of text",
+   "page": "Materials and Methods"
+  },
+  {
+   "index": 121,
+   "feature": "place and institution description",
+   "claim": "Elliott's annotation reports that Shropshire's geography thesis codes Hobb's landscape passages as performing five functions, among them establishing verisimilitude, criticising social systems and denoting privilege and relative power.",
+   "source": "Geoffrey B. Elliott, annotating Catherine Ann Shropshire, 'The Importance of Geographic Realism in Genre Fiction' (MS thesis, Oklahoma State University, 2019), in The Fedwren Project: A Robin Hobb Annotated Bibliography (last updated 18 May 2026)",
+   "url": "https://elliottrwi.com/research/hobb-bibliography/",
+   "quote": "establishing verisimilitude, criticizing social systems, denoting privilege and relative power",
+   "page": "entry: Shropshire, Catherine Ann"
+  },
+  {
+   "index": 122,
+   "feature": "place and institution description",
+   "claim": "Elliott's annotation reports that Crane and Fletcher read the Liveship Traders novels as inverting the usual depiction of land as busy and sea as empty.",
+   "source": "Geoffrey B. Elliott, annotating Ralph Crane and Lisa Fletcher, 'An Imaginary Water World: Robin Hobb's The Liveship Traders Trilogy' (2017), in The Fedwren Project",
+   "url": "https://elliottrwi.com/research/hobb-bibliography/",
+   "quote": "inverting the usual depiction of land as busy and sea",
+   "page": "entry: Crane, Ralph, and Lisa Fletcher"
+  },
+  {
+   "index": 123,
+   "feature": "point of view and distance",
+   "claim": "Elliott's annotation records that Mendlesohn's taxonomy places Hobb's Elderlings corpus as an example of portal-quest fantasy.",
+   "source": "Geoffrey B. Elliott, annotating Farah Mendlesohn, Rhetorics of Fantasy (2008), in The Fedwren Project",
+   "url": "https://elliottrwi.com/research/hobb-bibliography/",
+   "quote": "offering an example of the portal-quest fantasy in the Elderlings corpus",
+   "page": "entry: Mendlesohn, Farah"
+  },
+  {
+   "index": 124,
+   "feature": "naming and forms of address",
+   "claim": "Tkach and Volkova find Hobb's Six Duchies naming built on a principle of national-cultural contrast.",
+   "source": "Polina Tkach (National Academy of the National Guard of Ukraine) and Maryna Volkova (Kharkiv National Air Force University), \"Robin Hobb's 'The World of the Elderlings' Onomasticon: The Structural and Functional Significance of Charactonyms\", Perspectives and Innovations of Science 5(47) (2026) 372-381",
+   "url": "https://perspectives.pp.ua/index.php/vno/article/download/46053/46079",
+   "quote": "meticulously constructed upon the fundamental principle of national-cultural contrast",
+   "page": "Abstract"
+  },
+  {
+   "index": 125,
+   "feature": "naming and forms of address",
+   "claim": "They report that names for the neighbouring nations - Eyod, Rurisk, Kettricken - are phonetically foreign and carry no transparent semantics for the reader.",
+   "source": "Tkach and Volkova, Perspectives and Innovations of Science 5(47) (2026) 372-381",
+   "url": "https://perspectives.pp.ua/index.php/vno/article/download/46053/46079",
+   "quote": "phonetic foreignness and an absolute lack of transparent semantics",
+   "page": "Abstract"
+  },
+  {
+   "index": 126,
+   "feature": "naming and forms of address",
+   "claim": "Socially significant anthroponyms are the largest group in Hobb's naming, which the authors read as mirroring a setting where social mask, status and destiny are bound together.",
+   "source": "Tkach and Volkova, Perspectives and Innovations of Science 5(47) (2026) 372-381",
+   "url": "https://perspectives.pp.ua/index.php/vno/article/download/46053/46079",
+   "quote": "a person's social mask, status, and destiny are inextricably linked",
+   "page": "Abstract"
+  },
+  {
+   "index": 127,
+   "feature": "naming and forms of address",
+   "claim": "Names such as Shrewd, Desire and Patience are treated as direct psychological characterisation carried by the name itself.",
+   "source": "Tkach and Volkova, Perspectives and Innovations of Science 5(47) (2026) 372-381",
+   "url": "https://perspectives.pp.ua/index.php/vno/article/download/46053/46079",
+   "quote": "tools of direct psychological characterization",
+   "page": "Abstract"
+  },
+  {
+   "index": 128,
+   "feature": "naming and forms of address",
+   "claim": "Srsic notes that the Liveship Traders characters call the woman known only as Mother by that role and never by a name, and that her name is never given.",
+   "source": "Petra Srsic (University of Osijek), 'Motherhood, Disability, and Rebellion: Constructing the Mother in Hobb's Liveship Traders Trilogy', Studia Anglica Resoviensia 22 (2025) 145-157",
+   "url": "https://journals.ur.edu.pl/SAR/article/download/11148/11875",
+   "quote": "they always refer to her as Mother, never by her name",
+   "page": "section 3, Violence, Trauma, and Naming"
+  },
+  {
+   "index": 129,
+   "feature": "plainness and economy",
+   "claim": "Elliott reads Hobb's novella Words like Coins as a commentary on the craft of writing that warns against sloppiness of language.",
+   "source": "Geoffrey B. Elliott, 'Sample Conference-length Paper: Searching the Hoard in Words like Coins', Geoffrey B. Elliott's Teaching Blog, 29 July 2013",
+   "url": "http://gelliottteaching.blogspot.com/2013/07/sample-conference-length-paper.html",
+   "quote": "serves as a commentary on the craft of writing",
+   "page": "para. 2"
+  },
+  {
+   "index": 130,
+   "feature": "plainness and economy",
+   "claim": "In Elliott's reading the pecksies of that novella repeatedly press for linguistic precision and frugality.",
+   "source": "Geoffrey B. Elliott, 'Searching the Hoard in Words like Coins' (2013)",
+   "url": "http://gelliottteaching.blogspot.com/2013/07/sample-conference-length-paper.html",
+   "quote": "Linguistic precision and frugality are repeatedly emphasized by the pecksie",
+   "page": "para. 4"
+  },
+  {
+   "index": 131,
+   "feature": "plainness and economy",
+   "claim": "Elliott says the pecksies keep their own utterances exact, giving no more than is needed to be clear, so as to limit unintended consequences.",
+   "source": "Geoffrey B. Elliott, 'Searching the Hoard in Words like Coins' (2013)",
+   "url": "http://gelliottteaching.blogspot.com/2013/07/sample-conference-length-paper.html",
+   "quote": "giving no more than is necessary to be clear",
+   "page": "para. 5"
+  },
+  {
+   "index": 132,
+   "feature": "consequence on a household",
+   "claim": "Elliott traces the novella's central disaster - a near-fatal childbirth - to the protagonist's imprecise wording of a charm.",
+   "source": "Geoffrey B. Elliott, 'Searching the Hoard in Words like Coins' (2013)",
+   "url": "http://gelliottteaching.blogspot.com/2013/07/sample-conference-length-paper.html",
+   "quote": "all as a result of Mirrifen's lack of specificity",
+   "page": "para. 8"
+  },
+  {
+   "index": 133,
+   "feature": "point of view and distance",
+   "claim": "Borowska-Szerszun, relayed by Wikipedia, contrasts Martin's focus on the brutality of realism with Hobb's focus on the psychological aspects of trauma.",
+   "source": "Wikipedia, 'Liveship Traders', Style section, relaying Sylwia Borowska-Szerszun, Extrapolation 60.1 (2019) 1-22",
+   "url": "https://en.wikipedia.org/wiki/Liveship_Traders",
+   "quote": "Hobb's narrative focuses more on the psychological aspects of trauma",
+   "page": "Style section"
+  },
+  {
+   "index": 134,
+   "feature": "point of view and distance",
+   "claim": "Borowska-Szerszun's own abstract says Hobb's novels reframe the traditional rape script by shifting emphasis to the survivor.",
+   "source": "Sylwia Borowska-Szerszun, 'Representation of Rape in George R. R. Martin's A Song of Ice and Fire and Robin Hobb's Liveship Traders', Extrapolation 60.1 (2019) 1-22 - abstract only, via the OpenAlex record",
+   "url": "https://api.openalex.org/works/doi:10.3828/extr.2019.2",
+   "quote": "",
+   "page": "abstract"
+  }
+ ]
+}

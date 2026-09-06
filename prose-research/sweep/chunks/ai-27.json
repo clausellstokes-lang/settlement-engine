@@ -1,0 +1,158 @@
+{
+ "name": "ai",
+ "chunk": 27,
+ "indices": [
+  659,
+  660,
+  661,
+  662,
+  663,
+  664,
+  665,
+  666,
+  667,
+  668,
+  669,
+  670,
+  671,
+  672,
+  673
+ ],
+ "claims": [
+  {
+   "index": 659,
+   "feature": "other: technique without purpose",
+   "claim": "nostalgebraist argues that where human writers deploy these devices to specific ends, the LLMs seem to use them arbitrarily and incessantly.",
+   "source": "nostalgebraist, blogger and ML researcher, Tumblr, March 2025",
+   "url": "https://www.tumblr.com/nostalgebraist/778041178124926976/hydrogen-jukeboxes",
+   "quote": "the LLMs seem to use them arbitrarily and incessantly",
+   "page": "section \"Commentary\""
+  },
+  {
+   "index": 660,
+   "feature": "lexical tells",
+   "claim": "nostalgebraist identifies personification of nature or the inanimate as a trick overused by R1, and suggests it is favoured because it is easy and reads as distinctively literary.",
+   "source": "nostalgebraist, blogger and ML researcher, Tumblr, March 2025",
+   "url": "https://www.tumblr.com/nostalgebraist/778041178124926976/hydrogen-jukeboxes",
+   "quote": "personification of nature (or the inanimate)",
+   "page": "section \"More on style: personification\""
+  },
+  {
+   "index": 661,
+   "feature": "reflexive antithesis",
+   "claim": "Coagulopath, quoted by nostalgebraist, lists R1's endless not-thing-x-but-thing-y parallelisms among the model's recognisable repetitive habits.",
+   "source": "Coagulopath, commenter, quoted verbatim by nostalgebraist on Tumblr, March 2025",
+   "url": "https://www.tumblr.com/nostalgebraist/778041178124926976/hydrogen-jukeboxes",
+   "quote": "not thing x, but thing y",
+   "page": "section \"Background: R1\", quoted point 7"
+  },
+  {
+   "index": 662,
+   "feature": "lexical tells",
+   "claim": "Coagulopath, quoted by nostalgebraist, describes R1's overwhelming reliance on cliche as spinning a Rolodex of 20-30 generic images and selecting one at random.",
+   "source": "Coagulopath, commenter, quoted verbatim by nostalgebraist on Tumblr, March 2025",
+   "url": "https://www.tumblr.com/nostalgebraist/778041178124926976/hydrogen-jukeboxes",
+   "quote": "spinning its Rolodex of 20-30 generic images",
+   "page": "section \"Background: R1\", quoted point 3"
+  },
+  {
+   "index": 663,
+   "feature": "other: no idle detail (everything is functional)",
+   "claim": "Coagulopath, quoted by nostalgebraist, complains that in R1 fiction every line of dialogue advances the plot and every description is functional, so nothing on the page has weight.",
+   "source": "Coagulopath, commenter, quoted verbatim by nostalgebraist on Tumblr, March 2025",
+   "url": "https://www.tumblr.com/nostalgebraist/778041178124926976/hydrogen-jukeboxes",
+   "quote": "Every line of dialog advances the plot",
+   "page": "section \"Background: R1\", quoted point 5"
+  },
+  {
+   "index": 664,
+   "feature": "steerability",
+   "claim": "Coagulopath, quoted by nostalgebraist, reports that reprompting R1 after a story you dislike is almost pointless because you just get the same stuff again.",
+   "source": "Coagulopath, commenter, quoted verbatim by nostalgebraist on Tumblr, March 2025",
+   "url": "https://www.tumblr.com/nostalgebraist/778041178124926976/hydrogen-jukeboxes",
+   "quote": "you just get the same stuff again",
+   "page": "section \"Background: R1\", quoted point 7"
+  },
+  {
+   "index": 665,
+   "feature": "uniform rhythm (low burstiness)",
+   "claim": "Guo lists monotony as a tell, writing that in AI-generated content sentences are roughly the same length and the cadence never varies.",
+   "source": "Charlie Guo, Artificial Ignorance newsletter, 22 October 2025",
+   "url": "https://www.ignorance.ai/p/the-field-guide-to-ai-slop",
+   "quote": "Sentences are roughly the same length",
+   "page": "section \"Monotony\""
+  },
+  {
+   "index": 666,
+   "feature": "other: fixed person and tense",
+   "claim": "Guo observes that LLMs uncommonly switch person or tense and tend to pick a lane and stay in it with unnatural consistency.",
+   "source": "Charlie Guo, Artificial Ignorance newsletter, 22 October 2025",
+   "url": "https://www.ignorance.ai/p/the-field-guide-to-ai-slop",
+   "quote": "They tend to pick a lane and stay in it",
+   "page": "section \"Monotony\""
+  },
+  {
+   "index": 667,
+   "feature": "abstraction over the concrete",
+   "claim": "Guo argues that AI metaphors are plausible and generic, gesturing toward meaning without quite achieving it, whereas human metaphors are either highly specific or culturally resonant.",
+   "source": "Charlie Guo, Artificial Ignorance newsletter, 22 October 2025",
+   "url": "https://www.ignorance.ai/p/the-field-guide-to-ai-slop",
+   "quote": "They gesture toward meaning without quite achieving it",
+   "page": "section \"Awkward Analogies\""
+  },
+  {
+   "index": 668,
+   "feature": "other: surface polish with nothing underneath",
+   "claim": "Guo names the combination of surface polish with nothing underneath as AI's signature failure.",
+   "source": "Charlie Guo, Artificial Ignorance newsletter, 22 October 2025",
+   "url": "https://www.ignorance.ai/p/the-field-guide-to-ai-slop",
+   "quote": "surface polish with nothing underneath",
+   "page": "section \"Filler\""
+  },
+  {
+   "index": 669,
+   "feature": "gloss and over-explaining",
+   "claim": "Guo reports that a common AI failure is a paragraph saying in four sentences something that could easily have been said in one, with the other three adding nothing.",
+   "source": "Charlie Guo, Artificial Ignorance newsletter, 22 October 2025",
+   "url": "https://www.ignorance.ai/p/the-field-guide-to-ai-slop",
+   "quote": "in four sentences something that could easily have been said",
+   "page": "section \"Filler\""
+  },
+  {
+   "index": 670,
+   "feature": "reflexive antithesis",
+   "claim": "Guo argues that the it's-not-X-it's-Y parallelism is a legitimate rhetorical device but that AI uses it constantly and reflexively in situations where it adds nothing.",
+   "source": "Charlie Guo, Artificial Ignorance newsletter, 22 October 2025",
+   "url": "https://www.ignorance.ai/p/the-field-guide-to-ai-slop",
+   "quote": "AI uses it constantly, reflexively, in situations where it adds nothing",
+   "page": "section \"Parallelism (It's Not X, It's Y)\""
+  },
+  {
+   "index": 671,
+   "feature": "detection and its failures",
+   "claim": "Guo rejects absence of typos as a tell, writing that with tools like Grammarly widespread, perfect grammar is no longer the smoking gun it once was.",
+   "source": "Charlie Guo, Artificial Ignorance newsletter, 22 October 2025",
+   "url": "https://www.ignorance.ai/p/the-field-guide-to-ai-slop",
+   "quote": "Perfect grammar is no longer the smoking gun it once was",
+   "page": "section \"The Red Herrings\""
+  },
+  {
+   "index": 672,
+   "feature": "other: frequency not presence is the tell",
+   "claim": "Guo argues that the devices themselves are not the difference: a good writer uses these devices sparingly and with intention, while AI litters them throughout its writing indiscriminately.",
+   "source": "Charlie Guo, Artificial Ignorance newsletter, 22 October 2025",
+   "url": "https://www.ignorance.ai/p/the-field-guide-to-ai-slop",
+   "quote": "a good writer uses these devices sparingly, and with intention",
+   "page": "section \"Pattern Matching\""
+  },
+  {
+   "index": 673,
+   "feature": "detection and its failures",
+   "claim": "Guo states that AI writing detectors do not work and produce false positives at alarming rates.",
+   "source": "Charlie Guo, Artificial Ignorance newsletter, 22 October 2025",
+   "url": "https://www.ignorance.ai/p/the-field-guide-to-ai-slop",
+   "quote": "They produce false positives at alarming rates",
+   "page": "section \"Pattern Matching\""
+  }
+ ]
+}

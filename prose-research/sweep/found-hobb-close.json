@@ -1,245 +1,4 @@
 {
- "complete": true,
- "coverage": "The angle named kinds of source rather than URLs, so the roster was built by kind: close-reading blogs FETCHED (Looping Wor(l)d, The Wertzone, Fantasy-Faction, HearWriteNow, Fantasy-Hive, The Quaint Book Nook, Omnilegent, Once Upon a Bookcase, Grimdark), novelists line-level essays FETCHED (Natasha Pulley and Steven Erikson at Tor.com/Reactor, M Harold Page at Black Gate), a peer-reviewed close reading FETCHED (Matthew Oliver, Mythlore 41.1, via a Wayback PDF capture), a 500-plus-entry chapter-by-chapter reread FETCHED (Geoffrey B. Elliott, five entries), Substack close readings FETCHED (The Huntress And The Wolf; Jeffrey O on the epigraphs), Hobb own words FETCHED (robinhobb.com blog; the Writing Excuses 11.Bonus-01 transcript; The Arched Doorway SFContario transcript and the New Statesman interview, both via Wayback; Dragonsteel Nexus), and a reading group FETCHED but thin (Goodreads Fantasy Buddy Reads). BLOCKED: reddit.com r/Fantasy (403 on JSON and HTML with a browser user agent, 302 loop on old.reddit, and the reachable redlib mirror serves an Anubis proof-of-work challenge), YouTube video-essay transcripts (no extractor available and the transcript proxies return empty), the wetranscripts LiveJournal copy of the Writing Excuses episode (shell only, read at writingexcuses.com instead), and the tapatalk Robin Hobb forum reread threads (784 bytes of shell). NOT FOUND: Ekman and Taylor 2021 on fictional epigraphs, chased from Oliver bibliography (CONTENTdm is JavaScript-driven and Academia.edu needs a login). Substantive sources per route: 13 from the named kinds, 6 from bibliography chasing and cited-by (Oliver plus the five Elliott entries reached from his chapter-by-chapter series), 7 from lateral searches (Hobb own blog, Black Gate, Vacuous Wastrel, the two Substacks, Dragonsteel, New Statesman). 25 substantive sources, 109 single-limb claims, every quotation checked verbatim against the fetched text by script.",
- "sourcesRead": [
-  {
-   "title": "Assassin's Apprentice – Robin Hobb (Looping Wor(l)d blog review)",
-   "url": "https://loopingworld.com/2025/09/22/assassins-apprentice-robin-hobb/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2025-09-22",
-   "route": "raw curl with browser user agent"
-  },
-  {
-   "title": "Assassin's Apprentice by Robin Hobb, reviewed by Laura M. Hughes (Fantasy-Hive)",
-   "url": "https://fantasy-hive.co.uk/2017/12/assassins-apprentice-robin-hobb/",
-   "kind": "reception",
-   "substantive": true,
-   "date": "2017-12-08",
-   "route": "raw curl with browser user agent"
-  },
-  {
-   "title": "Character is in the Details: Robin Hobb's Golden Fool, by Natasha Pulley (Tor.com/Reactor, 'That Was Awesome! Writers on Writing')",
-   "url": "https://reactormag.com/character-is-in-the-details-robin-hobbs-golden-fool/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2015-07-10",
-   "route": "raw curl with browser user agent"
-  },
-  {
-   "title": "How Robin Hobb's Assassin's Apprentice Pulls the Rug Out From Under You, by Steven Erikson (Tor.com/Reactor)",
-   "url": "https://reactormag.com/how-robin-hobbs-assassins-apprentice-pulls-the-rug-out-from-under-you/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2016-04-27",
-   "route": "raw curl with browser user agent"
-  },
-  {
-   "title": "Assassin's Apprentice by Robin Hobb, reviewed by Adam Whitehead (The Wertzone)",
-   "url": "https://thewertzone.blogspot.com/2016/08/assassins-apprentice-by-robin-hobb.html",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2016-08-28",
-   "route": "raw curl with browser user agent"
-  },
-  {
-   "title": "Writing Excuses 11.Bonus-01: Characterization and Differentiation, with Robin Hobb (transcript, recorded at GenCon Indy)",
-   "url": "https://writingexcuses.com/11-bonus-01-characterization-and-differentiation-with-robin-hobb/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2016",
-   "route": "raw curl with browser user agent"
-  },
-  {
-   "title": "How Robin Hobb Created a Legendary Hero in Fitzchivalry Farseer (The Huntress And The Wolf, Substack)",
-   "url": "https://thehuntressandthewolf.substack.com/p/how-robin-hobb-created-a-legendary",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2026-02-15",
-   "route": "raw curl with browser user agent"
-  },
-  {
-   "title": "Robin Hobb on changing cultures, writing about violence, and the anonymity of living on a farm, by Pauline Bock (New Statesman)",
-   "url": "https://www.newstatesman.com/long-reads/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2018-07-27",
-   "route": "Wayback raw capture (web.archive.org /<ts>id_/)"
-  },
-  {
-   "title": "My interview with Robin Hobb, by Rebecca Lovatt (The Arched Doorway), transcript of an SFContario interview",
-   "url": "https://archeddoorway.com/2014/11/24/robin-hobb-interview/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2014-11-24",
-   "route": "Wayback raw capture (web.archive.org /<ts>id_/)"
-  },
-  {
-   "title": "The Liveship Traders Series by Robin Hobb (no spoilers), by Lew Kelly (Fantasy-Faction)",
-   "url": "https://fantasy-faction.com/2014/the-liveship-traders-series-by-robin-hobb-no-spoilers",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2014-08-19",
-   "route": "raw curl with browser user agent"
-  },
-  {
-   "title": "The Liveship Traders Trilogy – Robin Hobb – Review (HearWriteNow)",
-   "url": "https://hearwritenow.com/reviews/fantasy/liveship/",
-   "kind": "analysis",
-   "substantive": true,
-   "route": "raw curl with browser user agent"
-  },
-  {
-   "title": "Robin Hobb's Writing Advice: 3 Tips for Crafting Your Villain, by Tayan Hatch (Dragonsteel Books, The Cognitive Realm)",
-   "url": "https://www.dragonsteelbooks.com/blogs/the-cognitive-realm/robin-hobb-writing-villians",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2024-12-19",
-   "route": "raw curl with browser user agent"
-  },
-  {
-   "title": "Book Review: The Liveship Traders by Robin Hobb (lexlingua, LiveJournal)",
-   "url": "https://lexlingua.livejournal.com/33522.html",
-   "kind": "reader",
-   "substantive": true,
-   "date": "2012-06-13",
-   "route": "raw curl with browser user agent"
-  },
-  {
-   "title": "A Robin Hobb Rereading Series, Entry 1: Assassin's Apprentice, Chapter 1, by Geoffrey B. Elliott (a medievalist who wrote an MA thesis on Hobb; the series runs to 500+ chapter-by-chapter entries)",
-   "url": "https://elliottrwi.com/2019/05/24/a-robin-hobb-rereading-series-entry-1-assassins-apprentice-chapter-1/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2019-05-24",
-   "route": "raw curl with browser user agent"
-  },
-  {
-   "title": "A Robin Hobb Rereading Series, Entry 226: Fool's Errand, Chapter 6, by Geoffrey B. Elliott",
-   "url": "https://elliottrwi.com/2021/09/10/a-robin-hobb-rereading-series-entry-226-fools-errand-chapter-6/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2021-09-10",
-   "route": "raw curl with browser user agent"
-  },
-  {
-   "title": "A Robin Hobb Rereading Series, Entry 315: Dragon Keeper, Front Matter, by Geoffrey B. Elliott",
-   "url": "https://elliottrwi.com/2022/07/15/a-robin-hobb-rereading-series-entry-315-dragon-keeper-front-matter/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2022-07-15",
-   "route": "raw curl with browser user agent"
-  },
-  {
-   "title": "A Robin Hobb Rereading Series, Entry 254: Golden Fool, Chapter 4, by Geoffrey B. Elliott",
-   "url": "https://elliottrwi.com/2021/12/01/a-robin-hobb-rereading-series-entry-254-golden-fool-chapter-4/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2021-12-01",
-   "route": "raw curl with browser user agent"
-  },
-  {
-   "title": "A Robin Hobb Rereading Series, Entry 26: Royal Assassin, Chapter 1, by Geoffrey B. Elliott",
-   "url": "https://elliottrwi.com/2019/08/30/a-robin-hobb-rereading-series-entry-26-royal-assassin-chapter-1/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2019-08-30",
-   "route": "raw curl with browser user agent"
-  },
-  {
-   "title": "Matthew Oliver, 'History in the Margins: Epigraphs and Negative Space in Robin Hobb's Assassin's Apprentice', Mythlore vol. 41 no. 1 (Fall/Winter 2022), article 4 — canonical landing page https://dc.swosu.edu/mythlore/vol41/iss1/4/",
-   "url": "https://web.archive.org/web/20240707045408id_/https://dc.swosu.edu/cgi/viewcontent.cgi?article=3044&context=mythlore",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2022-10",
-   "route": "Wayback raw PDF capture, text extracted with pdfminer"
-  },
-  {
-   "title": "Abstract page for Matthew Oliver, 'History in the Margins' (SWOSU Digital Commons, Mythlore 41.1)",
-   "url": "https://dc.swosu.edu/mythlore/vol41/iss1/4/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2022-10",
-   "route": "raw curl with browser user agent"
-  },
-  {
-   "title": "On the use of epigraphs and metanarratives in Robin Hobb's 'Assassin's Apprentice', by Jeffrey O (Substack)",
-   "url": "https://jeffreydavidoutcalt.substack.com/p/on-the-use-of-epigraphs-and-metanarratives",
-   "kind": "reader",
-   "substantive": true,
-   "date": "2024-07-02",
-   "route": "raw curl with browser user agent"
-  },
-  {
-   "title": "Realm of the Elderlings: A Series Review (The Book Nook / thequaintbooknook)",
-   "url": "https://thequaintbooknook.wordpress.com/2023/09/03/realm-of-the-elderlings-a-series-review/",
-   "kind": "reader",
-   "substantive": true,
-   "date": "2023-09-03",
-   "route": "raw curl with browser user agent"
-  },
-  {
-   "title": "Reread and Review of Assassin's Apprentice by Robin Hobb (Omnilegent: A Need to Read)",
-   "url": "https://sassideeee.blog/2020/06/21/reread-and-review-of-assassins-apprentice-by-robin-hobb/",
-   "kind": "reader",
-   "substantive": true,
-   "date": "2020-06-21",
-   "route": "raw curl with browser user agent"
-  },
-  {
-   "title": "What Works For Me, by Robin Hobb (robinhobb.com blog)",
-   "url": "https://www.robinhobb.com/blog/posts/40869",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2022-05-20",
-   "route": "raw curl with browser user agent"
-  },
-  {
-   "title": "Robin Hobb reviews collected under the Robin Hobb tag (Vacuous Wastrel blog) — long analytic reviews of Golden Fool, Fool's Quest, Dragon Haven and others",
-   "url": "https://vacuouswastrel.wordpress.com/tag/robin-hobb/",
-   "kind": "analysis",
-   "substantive": true,
-   "route": "raw curl with browser user agent (tag archive page aggregating the individual reviews)"
-  },
-  {
-   "title": "Fool's Assassin: How Robin Hobb Writes Lyrical Fantasy Without Being Boring, by M Harold Page (Black Gate) — described by its author as a dissection, not a review",
-   "url": "https://www.blackgate.com/2016/02/09/fools-assassin-how-robin-hobb-writes-lyrical-fantasy-without-being-boring/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2016-02-09",
-   "route": "raw curl with browser user agent"
-  },
-  {
-   "title": "Book Review: Assassin's Apprentice by Robin Hobb (Grimdark Magazine)",
-   "url": "https://www.grimdarkmagazine.com/book-review-assassins-apprentice-robin-hobb/",
-   "kind": "reception",
-   "substantive": false,
-   "route": "raw curl with browser user agent"
-  },
-  {
-   "title": "Fantasy Buddy Reads: Realm of the Elderlings group read topic (Goodreads reading group)",
-   "url": "https://www.goodreads.com/topic/show/22252480-realm-of-the-elderlings-series-2023-currently-reading-liveship-trade",
-   "kind": "reader",
-   "substantive": false,
-   "date": "2023",
-   "route": "raw curl with browser user agent"
-  },
-  {
-   "title": "Re-Read Review: Assassin's Apprentice by Robin Hobb (Once Upon a Bookcase)",
-   "url": "http://www.onceuponabookcase.co.uk/2022/05/reread-assassins-apprentice-hobb.html",
-   "kind": "reader",
-   "substantive": false,
-   "date": "2022-05",
-   "route": "raw curl with browser user agent"
-  },
-  {
-   "title": "It All Starts With The Writing, by Dan Jorgensen (A Writer's Moment, syndicated to Goodreads) — quotes Hobb and George R.R. Martin",
-   "url": "https://www.goodreads.com/author_blog_posts/16571523-it-all-starts-with-the-writing",
-   "kind": "relay",
-   "substantive": false,
-   "date": "2018-03-23",
-   "route": "raw curl with browser user agent"
-  }
- ],
  "claims": [
   {
    "feature": "point of view and distance",
@@ -1757,6 +1516,247 @@
    "routeHint": "raw curl with browser user agent",
    "registerHint": "chronicle-line",
    "confidence": "high"
+  }
+ ],
+ "complete": true,
+ "coverage": "The angle named kinds of source rather than URLs, so the roster was built by kind: close-reading blogs FETCHED (Looping Wor(l)d, The Wertzone, Fantasy-Faction, HearWriteNow, Fantasy-Hive, The Quaint Book Nook, Omnilegent, Once Upon a Bookcase, Grimdark); novelists' line-level essays FETCHED (Natasha Pulley and Steven Erikson at Tor.com/Reactor, M Harold Page at Black Gate); a peer-reviewed close reading FETCHED (Matthew Oliver, Mythlore 41.1, via a Wayback PDF capture after the live PDF returned a 151,139-byte HTML interstitial); a 500-plus-entry chapter-by-chapter reread FETCHED (Geoffrey B. Elliott, five entries); Substack close readings FETCHED (The Huntress And The Wolf; Jeffrey O on the epigraphs); Hobb's own words FETCHED (robinhobb.com blog; the Writing Excuses 11.Bonus-01 transcript; The Arched Doorway SFContario transcript and the New Statesman interview, both via Wayback; Dragonsteel Nexus); and a reading group FETCHED but thin (Goodreads Fantasy Buddy Reads). BLOCKED: reddit.com r/Fantasy (403 on JSON and HTML with a browser user agent, 302 loop on old.reddit, and the one reachable redlib mirror serves an Anubis proof-of-work challenge, which I did not attempt); YouTube video-essay transcripts (no extractor available, transcript proxies return empty) — this is the one limb of the angle left unfilled; the wetranscripts LiveJournal copy of the Writing Excuses episode (shell only, read at writingexcuses.com instead); the tapatalk Robin Hobb forum reread threads (784 bytes of shell). NOT FOUND: Ekman and Taylor 2021, \"Between World and Narrative: Fictional Epigraphs and Critical World-Building\", chased from Oliver's footnote 1 (CONTENTdm is JavaScript-driven and Academia.edu needs a login) — recommend a library route next round. Substantive sources per route: 13 from the named kinds, 6 from bibliography chasing (Oliver plus five Elliott entries), 7 from lateral searches. 26 substantive sources, 109 single-limb claims; every quotation was re-checked verbatim against the fetched text by script, which caught and fixed one over-length quote and one line-wrap mismatch. Checkpoint files: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-hobb-close.json and find-hobb-close.md. Note for the chair: the sweep directory is shared and a concurrent lane overwrote a generically named helper mid-run; my working files are isolated under sweep/hobbclose/.",
+ "sourcesRead": [
+  {
+   "title": "Assassin's Apprentice – Robin Hobb (Looping Wor(l)d blog review)",
+   "url": "https://loopingworld.com/2025/09/22/assassins-apprentice-robin-hobb/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2025-09-22",
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "Assassin's Apprentice by Robin Hobb, reviewed by Laura M. Hughes (Fantasy-Hive)",
+   "url": "https://fantasy-hive.co.uk/2017/12/assassins-apprentice-robin-hobb/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2017-12-08",
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "Character is in the Details: Robin Hobb's Golden Fool, by Natasha Pulley (Tor.com/Reactor, 'That Was Awesome! Writers on Writing'); rerun 2022-03-22 as 'The Meticulous Character Details of Robin Hobb'",
+   "url": "https://reactormag.com/character-is-in-the-details-robin-hobbs-golden-fool/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2015-07-10",
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "How Robin Hobb's Assassin's Apprentice Pulls the Rug Out From Under You, by Steven Erikson (Tor.com/Reactor); rerun 2022-01-27 as 'Robin Hobb's Assassin's Apprentice and the Joy of Being Surprised'",
+   "url": "https://reactormag.com/how-robin-hobbs-assassins-apprentice-pulls-the-rug-out-from-under-you/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2016-04-27",
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "Assassin's Apprentice by Robin Hobb, reviewed by Adam Whitehead (The Wertzone)",
+   "url": "https://thewertzone.blogspot.com/2016/08/assassins-apprentice-by-robin-hobb.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2016-08-28",
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "Writing Excuses 11.Bonus-01: Characterization and Differentiation, with Robin Hobb (full transcript, recorded at GenCon Indy)",
+   "url": "https://writingexcuses.com/11-bonus-01-characterization-and-differentiation-with-robin-hobb/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2016",
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "How Robin Hobb Created a Legendary Hero in Fitzchivalry Farseer (The Huntress And The Wolf, Substack)",
+   "url": "https://thehuntressandthewolf.substack.com/p/how-robin-hobb-created-a-legendary",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2026-02-15",
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "Robin Hobb on changing cultures, writing about violence, and the anonymity of living on a farm, by Pauline Bock (New Statesman)",
+   "url": "https://www.newstatesman.com/long-reads/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2018-07-27",
+   "route": "Wayback raw capture (live URL returned 403 Varnish)"
+  },
+  {
+   "title": "My interview with Robin Hobb, by Rebecca Lovatt (The Arched Doorway) — transcript of an SFContario interview",
+   "url": "https://archeddoorway.com/2014/11/24/robin-hobb-interview/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2014-11-24",
+   "route": "Wayback raw capture (live URL returned an empty body)"
+  },
+  {
+   "title": "The Liveship Traders Series by Robin Hobb (no spoilers), by Lew Kelly (Fantasy-Faction)",
+   "url": "https://fantasy-faction.com/2014/the-liveship-traders-series-by-robin-hobb-no-spoilers",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2014-08-19",
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "The Liveship Traders Trilogy – Robin Hobb – Review (HearWriteNow)",
+   "url": "https://hearwritenow.com/reviews/fantasy/liveship/",
+   "kind": "analysis",
+   "substantive": true,
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "Robin Hobb's Writing Advice: 3 Tips for Crafting Your Villain, by Tayan Hatch (Dragonsteel Books, The Cognitive Realm) — quotes Hobb from Dragonsteel Nexus",
+   "url": "https://www.dragonsteelbooks.com/blogs/the-cognitive-realm/robin-hobb-writing-villians",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2024-12-19",
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "Book Review: The Liveship Traders by Robin Hobb (lexlingua, LiveJournal)",
+   "url": "https://lexlingua.livejournal.com/33522.html",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2012-06-13",
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "A Robin Hobb Rereading Series, Entry 1: Assassin's Apprentice, Chapter 1, by Geoffrey B. Elliott (medievalist; MA thesis on Hobb; the series runs to 539 entries as of Sept 2026)",
+   "url": "https://elliottrwi.com/2019/05/24/a-robin-hobb-rereading-series-entry-1-assassins-apprentice-chapter-1/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2019-05-24",
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "A Robin Hobb Rereading Series, Entry 226: Fool's Errand, Chapter 6, by Geoffrey B. Elliott",
+   "url": "https://elliottrwi.com/2021/09/10/a-robin-hobb-rereading-series-entry-226-fools-errand-chapter-6/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2021-09-10",
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "A Robin Hobb Rereading Series, Entry 315: Dragon Keeper, Front Matter, by Geoffrey B. Elliott",
+   "url": "https://elliottrwi.com/2022/07/15/a-robin-hobb-rereading-series-entry-315-dragon-keeper-front-matter/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2022-07-15",
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "A Robin Hobb Rereading Series, Entry 254: Golden Fool, Chapter 4, by Geoffrey B. Elliott",
+   "url": "https://elliottrwi.com/2021/12/01/a-robin-hobb-rereading-series-entry-254-golden-fool-chapter-4/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2021-12-01",
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "A Robin Hobb Rereading Series, Entry 26: Royal Assassin, Chapter 1, by Geoffrey B. Elliott",
+   "url": "https://elliottrwi.com/2019/08/30/a-robin-hobb-rereading-series-entry-26-royal-assassin-chapter-1/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2019-08-30",
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "Matthew Oliver, 'History in the Margins: Epigraphs and Negative Space in Robin Hobb's Assassin's Apprentice', Mythlore vol. 41 no. 1 (Fall/Winter 2022), article 4 — 21-page PDF; canonical landing page https://dc.swosu.edu/mythlore/vol41/iss1/4/",
+   "url": "https://web.archive.org/web/20240707045408id_/https://dc.swosu.edu/cgi/viewcontent.cgi?article=3044&context=mythlore",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2022-10",
+   "route": "Wayback raw PDF capture, text extracted with pdfminer (live viewcontent.cgi serves an HTML interstitial)"
+  },
+  {
+   "title": "Abstract page for Matthew Oliver, 'History in the Margins' (SWOSU Digital Commons, Mythlore 41.1)",
+   "url": "https://dc.swosu.edu/mythlore/vol41/iss1/4/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2022-10",
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "On the use of epigraphs and metanarratives in Robin Hobb's 'Assassin's Apprentice', by Jeffrey O (Substack)",
+   "url": "https://jeffreydavidoutcalt.substack.com/p/on-the-use-of-epigraphs-and-metanarratives",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2024-07-02",
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "Realm of the Elderlings: A Series Review (The Quaint Book Nook)",
+   "url": "https://thequaintbooknook.wordpress.com/2023/09/03/realm-of-the-elderlings-a-series-review/",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2023-09-03",
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "Reread and Review of Assassin's Apprentice by Robin Hobb (Omnilegent: A Need to Read)",
+   "url": "https://sassideeee.blog/2020/06/21/reread-and-review-of-assassins-apprentice-by-robin-hobb/",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2020-06-21",
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "What Works For Me, by Robin Hobb (robinhobb.com blog)",
+   "url": "https://www.robinhobb.com/blog/posts/40869",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2022-05-20",
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "Robin Hobb reviews collected under the Robin Hobb tag (Vacuous Wastrel blog) — long analytic reviews of The Golden Fool, Fool's Quest, Dragon Haven and others",
+   "url": "https://vacuouswastrel.wordpress.com/tag/robin-hobb/",
+   "kind": "analysis",
+   "substantive": true,
+   "route": "raw curl with browser user agent (tag archive page aggregating the individual reviews)"
+  },
+  {
+   "title": "Fool's Assassin: How Robin Hobb Writes Lyrical Fantasy Without Being Boring, by M Harold Page (Black Gate) — 'a dissection, not a review'",
+   "url": "https://www.blackgate.com/2016/02/09/fools-assassin-how-robin-hobb-writes-lyrical-fantasy-without-being-boring/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2016-02-09",
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "Book Review: Assassin's Apprentice by Robin Hobb (Grimdark Magazine) — general reception, nothing at the line level",
+   "url": "https://www.grimdarkmagazine.com/book-review-assassins-apprentice-robin-hobb/",
+   "kind": "reception",
+   "substantive": false,
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "Fantasy Buddy Reads: Realm of the Elderlings group-read topic (Goodreads reading group) — chatty, nothing at the line level",
+   "url": "https://www.goodreads.com/topic/show/22252480-realm-of-the-elderlings-series-2023-currently-reading-liveship-trade",
+   "kind": "reader",
+   "substantive": false,
+   "date": "2023",
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "Re-Read Review: Assassin's Apprentice by Robin Hobb (Once Upon a Bookcase) — thematic, not stylistic",
+   "url": "http://www.onceuponabookcase.co.uk/2022/05/reread-assassins-apprentice-hobb.html",
+   "kind": "reader",
+   "substantive": false,
+   "date": "2022-05",
+   "route": "raw curl with browser user agent"
+  },
+  {
+   "title": "It All Starts With The Writing, by Dan Jorgensen (A Writer's Moment, syndicated to Goodreads) — relays a Hobb quotation and George R.R. Martin's blurb",
+   "url": "https://www.goodreads.com/author_blog_posts/16571523-it-all-starts-with-the-writing",
+   "kind": "relay",
+   "substantive": false,
+   "date": "2018-03-23",
+   "route": "raw curl with browser user agent"
   }
  ]
 }

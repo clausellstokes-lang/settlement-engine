@@ -7,7 +7,16 @@
   167,
   168,
   169,
-  170
+  170,
+  171,
+  172,
+  173,
+  174,
+  175,
+  176,
+  177,
+  178,
+  179
  ],
  "claims": [
   {
@@ -63,6 +72,87 @@
    "url": "https://c2cjournal.ca/2016/09/the-fantastic-fiction-of-guy-gavriel-kay/",
    "quote": "",
    "page": ""
+  },
+  {
+   "index": 171,
+   "feature": "plainness and economy",
+   "claim": "Randall states that in the passage narrating Darien's death in The Darkest Road the sentences are short and the description concrete.",
+   "source": "Neil Randall, critic, Canadian Literature 129 (Summer 1991)",
+   "url": "http://brightweavings.com/randallfionavar/",
+   "quote": "Sentences are short, description is concrete.",
+   "page": "section 'The Strategy of Delay'"
+  },
+  {
+   "index": 172,
+   "feature": "point of view and distance",
+   "claim": "Randall describes the tone of that same Darien death passage as matter-of-fact.",
+   "source": "Neil Randall, critic, Canadian Literature 129 (Summer 1991)",
+   "url": "http://brightweavings.com/randallfionavar/",
+   "quote": "The tone, moreover, is matter-of-fact.",
+   "page": "section 'The Strategy of Delay'"
+  },
+  {
+   "index": 173,
+   "feature": "register modulation",
+   "claim": "Randall reads the passage narrating the departure of Arthur, Lancelot and Guinevere as a deliberate reach for rhetorical high style, in contrast with the plain Darien passage.",
+   "source": "Neil Randall, critic, Canadian Literature 129 (Summer 1991)",
+   "url": "http://brightweavings.com/randallfionavar/",
+   "quote": "the language here is an obvious attempt at rhetorical",
+   "page": "section 'The Strategy of Delay'"
+  },
+  {
+   "index": 174,
+   "feature": "register modulation",
+   "claim": "Randall explains the elevated register of the Arthurian departure scene as a consequence of who perceives it, not of the event's importance.",
+   "source": "Neil Randall, critic, Canadian Literature 129 (Summer 1991)",
+   "url": "http://brightweavings.com/randallfionavar/",
+   "quote": "because it is perceived by minds capable of comprehending magnificence",
+   "page": "section 'The Strategy of Delay'"
+  },
+  {
+   "index": 175,
+   "feature": "point of view and distance",
+   "claim": "Randall counts twenty-six different agents of focalization in The Fionavar Tapestry.",
+   "source": "Neil Randall, critic, Canadian Literature 129 (Summer 1991)",
+   "url": "http://brightweavings.com/randallfionavar/",
+   "quote": "employs twenty-six different agents of focalization",
+   "page": "opening section, before 'Assimilating the Secondary World'"
+  },
+  {
+   "index": 176,
+   "feature": "point of view and distance",
+   "claim": "Randall counts twenty-one shifts of focalization in the eighth chapter of The Summer Tree.",
+   "source": "Neil Randall, critic, Canadian Literature 129 (Summer 1991)",
+   "url": "http://brightweavings.com/randallfionavar/",
+   "quote": "shifts focalization twenty-one times",
+   "page": "opening section"
+  },
+  {
+   "index": 177,
+   "feature": "withheld information and inference",
+   "claim": "Randall counts eighty-seven shifts of focalization across Darien's search for Rakoth, with Darien himself the focalizant only nine of those times.",
+   "source": "Neil Randall, critic, Canadian Literature 129 (Summer 1991)",
+   "url": "http://brightweavings.com/randallfionavar/",
+   "quote": "the narrative shifts focalization eighty-seven times",
+   "page": "section 'The Strategy of Delay'"
+  },
+  {
+   "index": 178,
+   "feature": "withheld information and inference",
+   "claim": "Randall argues that Kay's shifts of focalization delay the unfolding of the story as well as advancing it.",
+   "source": "Neil Randall, critic, Canadian Literature 129 (Summer 1991)",
+   "url": "http://brightweavings.com/randallfionavar/",
+   "quote": "the shifts delay the unfolding of the story",
+   "page": "opening section, four-fold effect list"
+  },
+  {
+   "index": 179,
+   "feature": "place and institution description",
+   "claim": "Randall argues the reader must assemble Kay's secondary world by inference from the successive focalizations rather than from direct exposition.",
+   "source": "Neil Randall, critic, Canadian Literature 129 (Summer 1991)",
+   "url": "http://brightweavings.com/randallfionavar/",
+   "quote": "Our task is to piece together the world by understanding the focalizations.",
+   "page": "opening section"
   }
  ]
 }

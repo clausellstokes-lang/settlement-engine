@@ -1,0 +1,158 @@
+{
+ "name": "ai",
+ "chunk": 35,
+ "indices": [
+  779,
+  780,
+  781,
+  782,
+  783,
+  784,
+  785,
+  786,
+  787,
+  788,
+  789,
+  790,
+  791,
+  792,
+  793
+ ],
+ "claims": [
+  {
+   "index": 779,
+   "feature": "other: mechanism of mode collapse",
+   "claim": "Lu et al. speculate that models learned certain linguistic styles preferred by humans during RLHF, decreasing surface-form diversity.",
+   "source": "Lu, Sclar, Hallinan, Mireshghallah, Liu, Han, Ettinger, Jiang, Chandu, Dziri and Choi (UW/AI2), arXiv 2410.04265 v2",
+   "url": "https://arxiv.org/pdf/2410.04265",
+   "quote": "learned certain linguistic styles preferred by humans during RLHF",
+   "page": "Section 4, What impact does RLHF have on model creativity?"
+  },
+  {
+   "index": 780,
+   "feature": "other: mechanism of mode collapse",
+   "claim": "Yun et al. attribute a diversity collapse in instruction-tuned LLMs to the structural tokens of the chat template rather than to decoding randomness.",
+   "source": "Yun, An, Wang, Peng and Shang (UC San Diego), arXiv 2505.18949 v1",
+   "url": "https://arxiv.org/pdf/2505.18949",
+   "quote": "",
+   "page": "Abstract and Section 1"
+  },
+  {
+   "index": 781,
+   "feature": "steerability",
+   "claim": "Yun et al. found that prompting for diversity inside a chat template still failed to close the gap with a minimal prompt.",
+   "source": "Yun, An, Wang, Peng and Shang (UC San Diego), arXiv 2505.18949 v1",
+   "url": "https://arxiv.org/pdf/2505.18949",
+   "quote": "still fails to close the gap with Simple",
+   "page": "Section 5.5, Explicit Prompts for Diversity Still Fall Short"
+  },
+  {
+   "index": 782,
+   "feature": "steerability",
+   "claim": "Yun et al. report that prompts using full chat templates gain substantially less diversity from temperature scaling than simple steer prompts do.",
+   "source": "Yun, An, Wang, Peng and Shang (UC San Diego), arXiv 2505.18949 v1",
+   "url": "https://arxiv.org/pdf/2505.18949",
+   "quote": "from temperature scaling are substantially smaller",
+   "page": "Section 5.4, Effect of Decoding Temperature on Diversity"
+  },
+  {
+   "index": 783,
+   "feature": "steerability",
+   "claim": "In Yun et al.'s WritingPrompts task the semantic diversity was 0.3291 under the full chat template, 0.4767 under a simple steer prompt and 0.3427 under the template with an explicit diversity instruction.",
+   "source": "Yun, An, Wang, Peng and Shang (UC San Diego), arXiv 2505.18949 v1",
+   "url": "https://arxiv.org/pdf/2505.18949",
+   "quote": "",
+   "page": "Table 5"
+  },
+  {
+   "index": 784,
+   "feature": "counter-evidence",
+   "claim": "Gerstgrasser et al. demonstrate that accumulating successive generations of synthetic data alongside the original real data avoids model collapse.",
+   "source": "Gerstgrasser, Schaeffer, Dey, Rafailov et al. (Stanford and others), arXiv 2404.01413",
+   "url": "https://arxiv.org/pdf/2404.01413",
+   "quote": "generations of synthetic data alongside the original real data avoids model",
+   "page": "Abstract"
+  },
+  {
+   "index": 785,
+   "feature": "other: mechanism of mode collapse",
+   "claim": "Gerstgrasser et al. confirm that replacing the original real data by each generation's synthetic data does tend towards model collapse.",
+   "source": "Gerstgrasser, Schaeffer, Dey, Rafailov et al. (Stanford and others), arXiv 2404.01413",
+   "url": "https://arxiv.org/pdf/2404.01413",
+   "quote": "the original real data by each generation",
+   "page": "Abstract"
+  },
+  {
+   "index": 786,
+   "feature": "homogenisation",
+   "claim": "Murthy, Ullman and Hu found aligned models generally display less conceptual diversity than their instruction fine-tuned counterparts.",
+   "source": "Murthy, Ullman and Hu (Harvard / Kempner Institute), arXiv 2411.04427",
+   "url": "https://arxiv.org/pdf/2411.04427",
+   "quote": "display less diversity than their instruction fine-",
+   "page": "Abstract"
+  },
+  {
+   "index": 787,
+   "feature": "homogenisation",
+   "claim": "Murthy, Ullman and Hu report that no model in their study reached human-like conceptual diversity.",
+   "source": "Murthy, Ullman and Hu (Harvard / Kempner Institute), arXiv 2411.04427",
+   "url": "https://arxiv.org/pdf/2411.04427",
+   "quote": "While no model reaches",
+   "page": "Abstract"
+  },
+  {
+   "index": 788,
+   "feature": "counter-evidence",
+   "claim": "Shypula et al. find that preference-tuned models exhibit greater effective semantic diversity than SFT or base models once quality thresholds are applied.",
+   "source": "Shypula, Li, Zhang, Padmakumar, Yin and Bastani (Penn / NYU / Berkeley), COLM 2025",
+   "url": "https://arxiv.org/pdf/2504.12522",
+   "quote": "models exhibit greater effective semantic diversity",
+   "page": "Section 1, Introduction"
+  },
+  {
+   "index": 789,
+   "feature": "other: mechanism of mode collapse",
+   "claim": "Shypula et al. found that restricted to high-quality generations only, preference-tuned models produce less semantically diverse content within that subset.",
+   "source": "Shypula, Li, Zhang, Padmakumar, Yin and Bastani (Penn / NYU / Berkeley), COLM 2025",
+   "url": "https://arxiv.org/pdf/2504.12522",
+   "quote": "duce less semantically diverse content within that subset",
+   "page": "Section 1, Introduction"
+  },
+  {
+   "index": 790,
+   "feature": "counter-evidence",
+   "claim": "Shypula et al. report that for open-ended creative writing preference tuning is linked to greater diversity in lexical patterns.",
+   "source": "Shypula, Li, Zhang, Padmakumar, Yin and Bastani (Penn / NYU / Berkeley), COLM 2025",
+   "url": "https://arxiv.org/pdf/2504.12522",
+   "quote": "preference tuning is linked to greater diversity in lexical patterns",
+   "page": "Section 1, Introduction"
+  },
+  {
+   "index": 791,
+   "feature": "steerability",
+   "claim": "Chung et al. report that their trained models had higher diversity than GPT-4o-iter, a baseline that used diversity-inducing prompts.",
+   "source": "Chung, Padmakumar, Roemmele, Sun and Kreminski (Midjourney / NYU), arXiv 2503.17126",
+   "url": "https://arxiv.org/pdf/2503.17126",
+   "quote": "even higher than •GPT-4o-iter, which used diversity-inducing prompts",
+   "page": "Section 5.2, Results"
+  },
+  {
+   "index": 792,
+   "feature": "reader and expert judgment",
+   "claim": "Chung et al. report that human-crafted gold stories scored lower on their reward model than the instruction-tuned models but were far more diverse.",
+   "source": "Chung, Padmakumar, Roemmele, Sun and Kreminski (Midjourney / NYU), arXiv 2503.17126",
+   "url": "https://arxiv.org/pdf/2503.17126",
+   "quote": "these models but the diversity was far higher",
+   "page": "Section 5.2, Results"
+  },
+  {
+   "index": 793,
+   "feature": "steerability",
+   "claim": "Chung et al. report an 8B-parameter model trained with their deviation-weighted objective achieving diversity on par with a human-created dataset.",
+   "source": "Chung, Padmakumar, Roemmele, Sun and Kreminski (Midjourney / NYU), arXiv 2503.17126",
+   "url": "https://arxiv.org/pdf/2503.17126",
+   "quote": "achieve on-par diversity as a human-created",
+   "page": "Abstract"
+  }
+ ]
+}

@@ -1,0 +1,158 @@
+{
+ "name": "wolfe",
+ "chunk": 29,
+ "indices": [
+  435,
+  436,
+  437,
+  438,
+  439,
+  440,
+  441,
+  442,
+  443,
+  444,
+  445,
+  446,
+  447,
+  448,
+  449
+ ],
+ "claims": [
+  {
+   "index": 435,
+   "feature": "withheld information and inference",
+   "claim": "Borski says 'V.R.T.' is told anachronically and leaves the reader to piece everything together from a fragmentary, disjointed narrative.",
+   "source": "Robert Borski, Ultan's Library, 28 August 2001",
+   "url": "https://ultan.org.uk/review-fifth-head-of-cerberus/",
+   "quote": "with the reader left to piece everything together from a fragmentary",
+   "page": "review, paragraph 2"
+  },
+  {
+   "index": 436,
+   "feature": "naming and forms of address",
+   "claim": "Borski says the only name the first novella's narrator is identified by is Number Five, though his first and last names are decodeable.",
+   "source": "Robert Borski, Ultan's Library, 28 August 2001",
+   "url": "https://ultan.org.uk/review-fifth-head-of-cerberus/",
+   "quote": "the only name he’s identified by in the book: Number Five",
+   "page": "review, paragraph on the first novella"
+  },
+  {
+   "index": 437,
+   "feature": "per-speaker register",
+   "claim": "Gevers says rich eccentricities of diction abound in The Book of the Long Sun, retarding comprehension, and lists a distinct manner of speech for each class and character.",
+   "source": "Nick Gevers, “Five Steps towards Briah”, Ultan's Library, 28 August 2000",
+   "url": "https://ultan.org.uk/five-steps-towards-briah/",
+   "quote": "Rich eccentricities of diction abound, retarding comprehension.",
+   "page": "section 'Voices'"
+  },
+  {
+   "index": 438,
+   "feature": "civic record register",
+   "claim": "Gevers says Long Sun's narrator reconstructs Silk's story years afterwards from his own memories and from much oral testimony.",
+   "source": "Nick Gevers, “Five Steps towards Briah”, Ultan's Library, 28 August 2000",
+   "url": "https://ultan.org.uk/five-steps-towards-briah/",
+   "quote": "reconstructs Silk’s story from his own memories and from much oral",
+   "page": "section 'Plot'"
+  },
+  {
+   "index": 439,
+   "feature": "annalist voice and deep time",
+   "claim": "Gevers says the resulting narrative relates some events in great and possibly very significant detail while telling complex developments at second hand.",
+   "source": "Nick Gevers, “Five Steps towards Briah”, Ultan's Library, 28 August 2000",
+   "url": "https://ultan.org.uk/five-steps-towards-briah/",
+   "quote": "Sometimes events are related in great, possibly very significant detail",
+   "page": "section 'Plot'"
+  },
+  {
+   "index": 440,
+   "feature": "omission as information",
+   "claim": "Gevers says parts of the Long Sun narrative are conveyed speedily and with gaping lacunae.",
+   "source": "Nick Gevers, “Five Steps towards Briah”, Ultan's Library, 28 August 2000",
+   "url": "https://ultan.org.uk/five-steps-towards-briah/",
+   "quote": "conveyed speedily and with gaping lacunae",
+   "page": "section 'Plot'"
+  },
+  {
+   "index": 441,
+   "feature": "withheld information and inference",
+   "claim": "Gevers says that in certain instances of Long Sun only guesswork can reconstruct what has occurred.",
+   "source": "Nick Gevers, “Five Steps towards Briah”, Ultan's Library, 28 August 2000",
+   "url": "https://ultan.org.uk/five-steps-towards-briah/",
+   "quote": "in certain instances, only guesswork can reconstruct what has occurred",
+   "page": "section 'Plot'"
+  },
+  {
+   "index": 442,
+   "feature": "withheld information and inference",
+   "claim": "Gevers says detailed textual analysis is demanded by all of Wolfe's works.",
+   "source": "Nick Gevers, “Five Steps towards Briah”, Ultan's Library, 28 August 2000",
+   "url": "https://ultan.org.uk/five-steps-towards-briah/",
+   "quote": "of the kind all Wolfe’s works demand",
+   "page": "section on Oreb and Quetzal"
+  },
+  {
+   "index": 443,
+   "feature": "place and institution description",
+   "claim": "Crampton says the torturers of the Book of the New Sun are the executors of a sentence decided elsewhere by the judicial process.",
+   "source": "Jeremy Crampton, Ultan's Library, 10 April 2001",
+   "url": "https://ultan.org.uk/torture-and-confession-in-wolfes-book-of-the-new-sun/",
+   "quote": "the torturers are the executors of a sentence decided elsewhere",
+   "page": "section on the guild and the judiciary"
+  },
+  {
+   "index": 444,
+   "feature": "place and institution description",
+   "claim": "Crampton says the silence of the torturer emphasises that the confession exists not for the torturers but to produce penitence or truth for the authorities.",
+   "source": "Jeremy Crampton, Ultan's Library, 10 April 2001",
+   "url": "https://ultan.org.uk/torture-and-confession-in-wolfes-book-of-the-new-sun/",
+   "quote": "The silence of the torturer also emphasises that the confession is",
+   "page": "section on the guild and the judiciary"
+  },
+  {
+   "index": 445,
+   "feature": "place and institution description",
+   "claim": "Crampton says Wolfe's juridical system approximates closely that of Europe up to the early modern period.",
+   "source": "Jeremy Crampton, Ultan's Library, 10 April 2001",
+   "url": "https://ultan.org.uk/torture-and-confession-in-wolfes-book-of-the-new-sun/",
+   "quote": "his system should approximate so closely that of Europe up to",
+   "page": "conclusion"
+  },
+  {
+   "index": 446,
+   "feature": "withheld information and inference",
+   "claim": "Gaiman's first rule for reading Wolfe is to trust the text implicitly because the answers are in it.",
+   "source": "Neil Gaiman, “How To Read Gene Wolfe”, World Horror Convention 2002 Program Book, reprinted on the F&SF site",
+   "url": "https://www.sfsite.com/fsf/2007/gwng0704.htm",
+   "quote": "Trust the text implicitly. The answers are in there.",
+   "page": "numbered rule 1"
+  },
+  {
+   "index": 447,
+   "feature": "withheld information and inference",
+   "claim": "Gaiman says Peace read as a gentle Midwestern memoir on his first reading and became a horror novel only on a later one.",
+   "source": "Neil Gaiman, “How To Read Gene Wolfe”, World Horror Convention 2002 Program Book, reprinted on the F&SF site",
+   "url": "https://www.sfsite.com/fsf/2007/gwng0704.htm",
+   "quote": "really was a gentle Midwestern memoir the first time I read",
+   "page": "numbered rule 3"
+  },
+  {
+   "index": 448,
+   "feature": "plainness and economy",
+   "claim": "Gaiman places Wolfe among the clever writers who see no need to point out how clever they are.",
+   "source": "Neil Gaiman, “How To Read Gene Wolfe”, World Horror Convention 2002 Program Book, reprinted on the F&SF site",
+   "url": "https://www.sfsite.com/fsf/2007/gwng0704.htm",
+   "quote": "who see no need to point out how clever they are",
+   "page": "numbered rule 7"
+  },
+  {
+   "index": 449,
+   "feature": "concrete sensory noun",
+   "claim": "Joan Gordon says the individual scenes of Peace are sharply evoked so that the reader travels in time to its streets and houses.",
+   "source": "Joan Gordon, “We Read Things Differently”, Los Angeles Review of Books, 30 April 2013",
+   "url": "https://lareviewofbooks.org/article/we-read-things-differently/",
+   "quote": "Its individual scenes are sharply evoked so that we travel in time",
+   "page": "standfirst and body"
+  }
+ ]
+}

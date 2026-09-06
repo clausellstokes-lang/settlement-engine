@@ -1,0 +1,158 @@
+{
+ "name": "leguin",
+ "chunk": 20,
+ "indices": [
+  345,
+  346,
+  347,
+  348,
+  349,
+  350,
+  351,
+  352,
+  353,
+  354,
+  355,
+  356,
+  357,
+  358,
+  359
+ ],
+ "claims": [
+  {
+   "index": 345,
+   "feature": "withheld information and inference",
+   "claim": "Tomlinson says the reader can rely on Le Guin explaining a noted difference in due course rather than at once.",
+   "source": "Rob Tomlinson, A Good Read (rob-tomlinson.com)",
+   "url": "https://www.rob-tomlinson.com/a-good-read/dispossessed",
+   "quote": "rely on her explaining that difference in due course",
+   "page": "second paragraph"
+  },
+  {
+   "index": 346,
+   "feature": "concrete sensory noun",
+   "claim": "Tomlinson quotes the opening of The Dispossessed, which describes the wall as built of uncut rocks roughly mortared.",
+   "source": "Ursula K. Le Guin (The Dispossessed), quoted by Rob Tomlinson",
+   "url": "https://www.rob-tomlinson.com/a-good-read/dispossessed",
+   "quote": "It was built of uncut rocks roughly mortared",
+   "page": "quoted opening paragraph"
+  },
+  {
+   "index": 347,
+   "feature": "place and institution description",
+   "claim": "Tomlinson says Le Guin depicts the under-belly of a dazzling society in just a few pages of dense, carefully-worked text.",
+   "source": "Rob Tomlinson, A Good Read (rob-tomlinson.com)",
+   "url": "https://www.rob-tomlinson.com/a-good-read/dispossessed",
+   "quote": "In just a few pages of dense, carefully-worked text",
+   "page": "Nio Old Town paragraph"
+  },
+  {
+   "index": 348,
+   "feature": "concrete sensory noun",
+   "claim": "Tomlinson renders the poor quarter of Nio as broken street lights, shuttered windows and shop fronts gutted by fire.",
+   "source": "Rob Tomlinson, A Good Read (rob-tomlinson.com), paraphrasing The Dispossessed",
+   "url": "https://www.rob-tomlinson.com/a-good-read/dispossessed",
+   "quote": "Street lights were broken, windows shuttered, shop fronts gutted by fire",
+   "page": "Nio Old Town paragraph"
+  },
+  {
+   "index": 349,
+   "feature": "place and institution description",
+   "claim": "Theodora Goss reads the opening of A Wizard of Earthsea as a camera that swoops down over the island from its high peak.",
+   "source": "Theodora Goss, \"Stonecoast: Wizard of Earthsea\", theodoragoss.com, 28 February 2015",
+   "url": "https://theodoragoss.com/2015/02/28/stonecoast-wizard-of-earthsea/",
+   "quote": "we swoop down over the island, from its high peak",
+   "page": "analysis following the quoted opening"
+  },
+  {
+   "index": 350,
+   "feature": "other: general-to-particular descent",
+   "claim": "Goss says the opening moves from a grander, larger view toward a smaller, more intimate one.",
+   "source": "Theodora Goss, theodoragoss.com, 28 February 2015",
+   "url": "https://theodoragoss.com/2015/02/28/stonecoast-wizard-of-earthsea/",
+   "quote": "moves from a grander, larger view toward a smaller, more intimate",
+   "page": "analysis section"
+  },
+  {
+   "index": 351,
+   "feature": "naming and forms of address",
+   "claim": "Goss notes the opening names its subject in descending order, Sparrowhawk to Ged to Duny.",
+   "source": "Theodora Goss, theodoragoss.com, 28 February 2015",
+   "url": "https://theodoragoss.com/2015/02/28/stonecoast-wizard-of-earthsea/",
+   "quote": "Sparrowhawk to Ged to Duny",
+   "page": "analysis section"
+  },
+  {
+   "index": 352,
+   "feature": "opening sentence",
+   "claim": "Goss argues the opening scene is structured by oppositions between boy and man, village and world.",
+   "source": "Theodora Goss, theodoragoss.com, 28 February 2015",
+   "url": "https://theodoragoss.com/2015/02/28/stonecoast-wizard-of-earthsea/",
+   "quote": "structured by the oppositions between boy and man, village and world",
+   "page": "analysis section"
+  },
+  {
+   "index": 353,
+   "feature": "place and institution description",
+   "claim": "Doug Merrill observes that no people appear in the first paragraph of The Dispossessed.",
+   "source": "Doug Merrill, \"The Dispossessed by Ursula K. Le Guin\", The Frumious Consortium, 19 March 2018",
+   "url": "https://www.thefrumiousconsortium.net/2018/03/19/the-dispossessed-by-ursula-k-le-guin/",
+   "quote": "No people appear in the first paragraph",
+   "page": "close reading of the opening"
+  },
+  {
+   "index": 354,
+   "feature": "naming and forms of address",
+   "claim": "Merrill notes no names are mentioned in the novel until the seventh page.",
+   "source": "Doug Merrill, The Frumious Consortium, 19 March 2018",
+   "url": "https://www.thefrumiousconsortium.net/2018/03/19/the-dispossessed-by-ursula-k-le-guin/",
+   "quote": "no names are mentioned until the seventh",
+   "page": "close reading of the opening"
+  },
+  {
+   "index": 355,
+   "feature": "concrete sensory noun",
+   "claim": "Merrill says the opening paragraph establishes the rough and improvised nature of a key setting.",
+   "source": "Doug Merrill, The Frumious Consortium, 19 March 2018",
+   "url": "https://www.thefrumiousconsortium.net/2018/03/19/the-dispossessed-by-ursula-k-le-guin/",
+   "quote": "the rough and improvised nature of a key setting",
+   "page": "close reading of the opening"
+  },
+  {
+   "index": 356,
+   "feature": "omission as information",
+   "claim": "Merrill lists among the opening paragraph's subjects things that do not look important but are.",
+   "source": "Doug Merrill, The Frumious Consortium, 19 March 2018",
+   "url": "https://www.thefrumiousconsortium.net/2018/03/19/the-dispossessed-by-ursula-k-le-guin/",
+   "quote": "things that do not look important but are",
+   "page": "close reading of the opening"
+  },
+  {
+   "index": 357,
+   "feature": "withheld information and inference",
+   "claim": "Merrill says Le Guin's sketches of incidental characters hint at full lives lived off the page.",
+   "source": "Doug Merrill, The Frumious Consortium, 19 March 2018",
+   "url": "https://www.thefrumiousconsortium.net/2018/03/19/the-dispossessed-by-ursula-k-le-guin/",
+   "quote": "hint at the full lives they have lived off the page",
+   "page": "later section on smaller bits"
+  },
+  {
+   "index": 358,
+   "feature": "plainness and economy",
+   "claim": "A Cannonball Read reviewer calls Le Guin's writing spare and lyrical, begging to be read aloud.",
+   "source": "alannaofdoom, \"Bright the hawk's flight on the empty sky\", Cannonball Read, 13 February 2014",
+   "url": "https://cannonballread.com/2014/02/bright-the-hawks-flight-on-the-empty-sky/",
+   "quote": "Her writing is spare and lyrical, just begging to be read aloud",
+   "page": "review body, second point"
+  },
+  {
+   "index": 359,
+   "feature": "annalist voice and deep time",
+   "claim": "The same reviewer says the first lines have the feel of an old legend told and retold around hearth fires.",
+   "source": "alannaofdoom, Cannonball Read, 13 February 2014",
+   "url": "https://cannonballread.com/2014/02/bright-the-hawks-flight-on-the-empty-sky/",
+   "quote": "the feel of an old legend, told and retold around hearth",
+   "page": "review body, second point"
+  }
+ ]
+}

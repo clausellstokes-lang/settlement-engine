@@ -1,0 +1,158 @@
+{
+ "name": "kay",
+ "chunk": 34,
+ "indices": [
+  510,
+  511,
+  512,
+  513,
+  514,
+  515,
+  516,
+  517,
+  518,
+  519,
+  520,
+  521,
+  522,
+  523,
+  524
+ ],
+ "claims": [
+  {
+   "index": 510,
+   "feature": "other: reception split",
+   "claim": "The Quill to Live book club reports that half the group scored Tigana nine or above and the other half scored it below five, for an average of a solid seven.",
+   "source": "Andrew, 'Book Club Discussion: Tigana By Guy Gavriel Kay', The Quill to Live, 17 March 2016",
+   "url": "https://thequilltolive.com/2016/03/17/book-club-discussion-tigana-by-guy-gabriel-kay/",
+   "quote": "half of the group had scores of nine or above",
+   "page": "opening paragraph"
+  },
+  {
+   "index": 511,
+   "feature": "point of view and distance",
+   "claim": "The Quill to Live book club reports that some readers found the pacing jarring because the perspective often jumps from point of view to point of view.",
+   "source": "Andrew reporting the anti-Tigana camp, The Quill to Live, 17 March 2016",
+   "url": "https://thequilltolive.com/2016/03/17/book-club-discussion-tigana-by-guy-gabriel-kay/",
+   "quote": "the perspective often jumps from point-of-view to point-of-view",
+   "page": "section 'Team Anti-Tigana'"
+  },
+  {
+   "index": 512,
+   "feature": "plainness and economy",
+   "claim": "The Quill to Live book club reports that some readers found Kay's writing pretentious and said they preferred more austere prose.",
+   "source": "Andrew reporting the anti-Tigana camp, The Quill to Live, 17 March 2016",
+   "url": "https://thequilltolive.com/2016/03/17/book-club-discussion-tigana-by-guy-gabriel-kay/",
+   "quote": "found the writing pretentious and that they preferred more austere prose",
+   "page": "section 'Team Anti-Tigana'"
+  },
+  {
+   "index": 513,
+   "feature": "consequence on a household",
+   "claim": "The forum member Erfael says there are no extras in Kay's books: the stories concern how each character's presence affects history at a given point or how history affects them.",
+   "source": "Erfael, in the thread 'Question regarding Guy Gavriel Kay's books', SFFWorld forum, 6 December 2011",
+   "url": "https://www.sffworld.com/forum/threads/question-regarding-guy-gavriel-kays-books.32913/",
+   "quote": "how history affects them at a given point",
+   "page": "post #5"
+  },
+  {
+   "index": 514,
+   "feature": "other: everything is load-bearing",
+   "claim": "Erfael says Kay works in a style where everything that happens is somehow important or represented, which can come across as contrived.",
+   "source": "Erfael, SFFWorld forum, 6 December 2011",
+   "url": "https://www.sffworld.com/forum/threads/question-regarding-guy-gavriel-kays-books.32913/",
+   "quote": "everything that happens is somehow important or represented",
+   "page": "post #5"
+  },
+  {
+   "index": 515,
+   "feature": "dialogue register",
+   "claim": "The thread's opening poster says Tigana is almost written like a play, being long conversations of pure dialogue with little else.",
+   "source": "taoofjord, SFFWorld forum, 5 December 2011",
+   "url": "https://www.sffworld.com/forum/threads/question-regarding-guy-gavriel-kays-books.32913/",
+   "quote": "The book is almost written like a play.",
+   "page": "post #1"
+  },
+  {
+   "index": 516,
+   "feature": "other: history woven into narrative",
+   "claim": "The forum member chokipokilo says Kay uses flashbacks and internal monologues a great deal and that the way he blends history into the narrative amazes him.",
+   "source": "chokipokilo, SFFWorld forum, 6 December 2011",
+   "url": "https://www.sffworld.com/forum/threads/question-regarding-guy-gavriel-kays-books.32913/",
+   "quote": "The way he blends history into the narrative",
+   "page": "post #6"
+  },
+  {
+   "index": 517,
+   "feature": "other: coincidence as a device",
+   "claim": "chokipokilo says the coincidental revelation is a device Kay uses in all his works and that after a few books a reader starts to see it coming.",
+   "source": "chokipokilo, SFFWorld forum, 6 December 2011",
+   "url": "https://www.sffworld.com/forum/threads/question-regarding-guy-gavriel-kays-books.32913/",
+   "quote": "that's a device GGK uses in all his works",
+   "page": "post #6"
+  },
+  {
+   "index": 518,
+   "feature": "register modulation",
+   "claim": "The forum member Severn reports lovely, subtle differences in Kay's tone and manner of writing between Tigana and The Last Light of the Sun.",
+   "source": "Severn, SFFWorld forum, 6 December 2011",
+   "url": "https://www.sffworld.com/forum/threads/question-regarding-guy-gavriel-kays-books.32913/",
+   "quote": "subtle differences in his tone and manner of writing",
+   "page": "post #2"
+  },
+  {
+   "index": 519,
+   "feature": "point of view and distance",
+   "claim": "The reviewer at Tar Vol On describes The Lions of Al-Rassan as told in an old-school third-person omniscient narration that mostly follows three characters.",
+   "source": "tarvolon, 'Fantasy Novel Review: The Lions of Al-Rassan by Guy Gavriel Kay', Tar Vol On, 4 February 2021",
+   "url": "https://www.tarvolon.com/2021/02/04/fantasy-novel-review-the-lions-of-al-rassan-by-guy-gavriel-kay/",
+   "quote": "an old school, third-person omniscient narration",
+   "page": "third paragraph"
+  },
+  {
+   "index": 520,
+   "feature": "other: the inevitable left off the page",
+   "claim": "Katherine Olley says that once events become inevitable Kay largely leaves them to be supplied by the imagination of the reader.",
+   "source": "Katherine Olley, 'Guy Gavriel Kay: A Short Introduction', University of Oxford Podcasts video lecture, 16 December 2020",
+   "url": "https://writersinspire.org/content/guy-gavriel-kay-short-introduction",
+   "quote": "he largely leaves them to be supplied by the imagination",
+   "page": "transcript, section on Under Heaven"
+  },
+  {
+   "index": 521,
+   "feature": "annalist voice and deep time",
+   "claim": "Olley says almost the entire An Lushan rebellion in Under Heaven - its years of upheaval, victories, losses, alliances and political manoeuvrings - is condensed into an epilogue.",
+   "source": "Katherine Olley, University of Oxford Podcasts, 16 December 2020",
+   "url": "https://writersinspire.org/content/guy-gavriel-kay-short-introduction",
+   "quote": "all of that is condensed into an epilogue",
+   "page": "transcript, section on Under Heaven"
+  },
+  {
+   "index": 522,
+   "feature": "point of view and distance",
+   "claim": "Olley says that rather than building suspense Kay encourages reflection, looking back with the tragic clarity of hindsight rather than forward with bated breath.",
+   "source": "Katherine Olley, University of Oxford Podcasts, 16 December 2020",
+   "url": "https://writersinspire.org/content/guy-gavriel-kay-short-introduction",
+   "quote": "to look back with the tragic clarity of hindsight",
+   "page": "transcript"
+  },
+  {
+   "index": 523,
+   "feature": "other: history as retrospective construction",
+   "claim": "Olley names the retrospective construction of history and its many ironies as one of Kay's chief thematic concerns across all his works.",
+   "source": "Katherine Olley, University of Oxford Podcasts, 16 December 2020",
+   "url": "https://writersinspire.org/content/guy-gavriel-kay-short-introduction",
+   "quote": "The nature of history is retrospective construction",
+   "page": "transcript"
+  },
+  {
+   "index": 524,
+   "feature": "place and institution description",
+   "claim": "Olley says Kay shows little interest in hitting the predictable beats of a historical period, focusing instead on the smaller, more personal moments behind the scenes that shape larger events.",
+   "source": "Katherine Olley, University of Oxford Podcasts, 16 December 2020",
+   "url": "https://writersinspire.org/content/guy-gavriel-kay-short-introduction",
+   "quote": "little interest in hitting the predictable beats of the historical period",
+   "page": "transcript"
+  }
+ ]
+}

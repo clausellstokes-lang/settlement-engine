@@ -1,0 +1,158 @@
+{
+ "name": "leguin",
+ "chunk": 4,
+ "indices": [
+  105,
+  106,
+  107,
+  108,
+  109,
+  110,
+  111,
+  112,
+  113,
+  114,
+  115,
+  116,
+  117,
+  118,
+  119
+ ],
+ "claims": [
+  {
+   "index": 105,
+   "feature": "register modulation",
+   "claim": "Le Guin praises Tolkien's plain English for ranging easily from the commonplace to the stately.",
+   "source": "Ursula K. Le Guin, 'From Elfland to Poughkeepsie' (1972 speech; Pendragon Press 1973)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "It ranges easily from the commonplace to the stately",
+   "page": "p.8, on Tolkien's plain English"
+  },
+  {
+   "index": 106,
+   "feature": "concrete sensory noun",
+   "claim": "Le Guin faults the failed fantasy style for sensory cues so vague that the rocks, wind and trees are not felt.",
+   "source": "Ursula K. Le Guin, 'From Elfland to Poughkeepsie' (1972 speech; Pendragon Press 1973)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "the rocks, the wind, the trees are not there",
+   "page": "p.8, on the 'Poughkeepsie style'"
+  },
+  {
+   "index": 107,
+   "feature": "civic record register",
+   "claim": "Le Guin identifies the prose style she is attacking as journalistic prose.",
+   "source": "Ursula K. Le Guin, 'From Elfland to Poughkeepsie' (1972 speech; Pendragon Press 1973)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "To what then is it appropriate? To journalism.",
+   "page": "p.8, on the 'Poughkeepsie style'"
+  },
+  {
+   "index": 108,
+   "feature": "point of view and distance",
+   "claim": "Le Guin says that in journalism the suppression of the author's personality and sensibility is deliberate.",
+   "source": "Ursula K. Le Guin, 'From Elfland to Poughkeepsie' (1972 speech; Pendragon Press 1973)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "the suppression of the author's personality and sensibility is deliberate",
+   "page": "p.8, on journalistic prose"
+  },
+  {
+   "index": 109,
+   "feature": "dialogue register",
+   "claim": "Le Guin asserts that speech expresses character, whether or not the writer intends it.",
+   "source": "Ursula K. Le Guin, 'From Elfland to Poughkeepsie' (1972 speech; Pendragon Press 1973)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "Speech expresses character.",
+   "page": "p.4, after the three dialogue samples"
+  },
+  {
+   "index": 110,
+   "feature": "cadence and rhythm",
+   "claim": "Le Guin defines the musical dimension of prose as the sound of the words, the movement of the syntax and the rhythm of the sentences.",
+   "source": "Ursula K. Le Guin, 'From Elfland to Poughkeepsie' (1972 speech; Pendragon Press 1973)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "the movement of the syntax, and the rhythm of the sentences",
+   "page": "p.6, on Eddison's prose"
+  },
+  {
+   "index": 111,
+   "feature": "metaphor discipline",
+   "claim": "Le Guin reports that the Song of Roland has four thousand lines containing one simile and no metaphors.",
+   "source": "Ursula K. Le Guin, 'From Elfland to Poughkeepsie' (1972 speech; Pendragon Press 1973)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "one simile and no metaphors",
+   "page": "p.8, on epic plainness"
+  },
+  {
+   "index": 112,
+   "feature": "archaism",
+   "claim": "Le Guin calls the archaic manner a trap into which almost all very young fantasy writers walk.",
+   "source": "Ursula K. Le Guin, 'From Elfland to Poughkeepsie' (1972 speech; Pendragon Press 1973)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "a trap into which almost all very young fantasy writers walk",
+   "page": "p.5, on archaicizing"
+  },
+  {
+   "index": 113,
+   "feature": "archaism",
+   "claim": "Le Guin notes approvingly that Jack Vance's achieved style contains no archaisms at all.",
+   "source": "Ursula K. Le Guin, 'From Elfland to Poughkeepsie' (1972 speech; Pendragon Press 1973)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "And it contains no archaisms at all.",
+   "page": "p.7, on Jack Vance"
+  },
+  {
+   "index": 114,
+   "feature": "parataxis vs hypotaxis",
+   "claim": "Le Guin dismisses imitation Dunsany as made-up names plus a great many sentences beginning with 'And'.",
+   "source": "Ursula K. Le Guin, 'From Elfland to Poughkeepsie' (1972 speech; Pendragon Press 1973)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "a great many sentences beginning with",
+   "page": "p.5, on imitating Dunsany"
+  },
+  {
+   "index": 115,
+   "feature": "register modulation",
+   "claim": "Le Guin says that alternating colloquial American English with old formal usages makes characters lose coherence for her as a reader.",
+   "source": "Ursula K. Le Guin, 'From Elfland to Poughkeepsie' (1972 speech; Pendragon Press 1973)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "the characters lose coherence in my mind",
+   "page": "p.7, on Leiber and Zelazny"
+  },
+  {
+   "index": 116,
+   "feature": "other: style is the work",
+   "claim": "Le Guin asserts that style is not an ingredient added to a book but is the book itself.",
+   "source": "Ursula K. Le Guin, 'From Elfland to Poughkeepsie' (1972 speech; Pendragon Press 1973)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "The style, of course, is the book.",
+   "page": "p.9, on what style is"
+  },
+  {
+   "index": 117,
+   "feature": "cadence and rhythm",
+   "claim": "Le Guin opens her writing guide by saying the sound of the language is where it all begins.",
+   "source": "Ursula K. Le Guin, Steering the Craft (2015 revised ed.), chapter 1, excerpted at Literary Hub",
+   "url": "https://lithub.com/a-writing-lesson-from-ursula-k-leguin/",
+   "quote": "The sound of the language is where it all begins.",
+   "page": "Steering the Craft ch.1, first line"
+  },
+  {
+   "index": 118,
+   "feature": "cadence and rhythm",
+   "claim": "Le Guin makes the test of a sentence whether it sounds right.",
+   "source": "Ursula K. Le Guin, Steering the Craft (2015 revised ed.), chapter 1, excerpted at Literary Hub",
+   "url": "https://lithub.com/a-writing-lesson-from-ursula-k-leguin/",
+   "quote": "The test of a sentence is, Does it sound right?",
+   "page": "Steering the Craft ch.1, first paragraph"
+  },
+  {
+   "index": 119,
+   "feature": "cadence and rhythm",
+   "claim": "Le Guin says the sound effects of prose are usually subtle and always irregular, unlike those of poetry.",
+   "source": "Ursula K. Le Guin, Steering the Craft (2015 revised ed.), chapter 1, excerpted at Literary Hub",
+   "url": "https://lithub.com/a-writing-lesson-from-ursula-k-leguin/",
+   "quote": "the sound effects of prose are usually subtle and always irregular",
+   "page": "Steering the Craft ch.1, first paragraph"
+  }
+ ]
+}

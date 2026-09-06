@@ -1,0 +1,158 @@
+{
+ "name": "wolfe",
+ "chunk": 16,
+ "indices": [
+  240,
+  241,
+  242,
+  243,
+  244,
+  245,
+  246,
+  247,
+  248,
+  249,
+  250,
+  251,
+  252,
+  253,
+  254
+ ],
+ "claims": [
+  {
+   "index": 240,
+   "feature": "archaism",
+   "claim": "Wolfe's appendix says his substituted real words are meant to be suggestive rather than definitive.",
+   "source": "Wikipedia relaying Gene Wolfe's appendix to The Shadow of the Torturer (cited as Shadow and Claw, Tor 1994, p. 211)",
+   "url": "https://en.wikipedia.org/wiki/Gene_Wolfe",
+   "quote": "intended to be suggestive rather than definitive",
+   "page": "Style section"
+  },
+  {
+   "index": 241,
+   "feature": "archaism",
+   "claim": "Wolfe's appendix names peltast, androgyn and exultant as real words standing in for undiscovered concepts.",
+   "source": "Wikipedia relaying Gene Wolfe's appendix to The Shadow of the Torturer (cited as Shadow and Claw, Tor 1994, p. 211)",
+   "url": "https://en.wikipedia.org/wiki/Gene_Wolfe",
+   "quote": "Such words as peltast, androgyn, and exultant are substitutions",
+   "page": "Style section"
+  },
+  {
+   "index": 242,
+   "feature": "other: rereading",
+   "claim": "Wolfe defined a great story in a 1982 letter as one a cultivated reader can read with pleasure and reread with increasing pleasure.",
+   "source": "Wikipedia relaying Gene Wolfe, chain letter to George R. R. Martin and Greg Benford, 10 July 1982, as published in Castle of Days (1992)",
+   "url": "https://en.wikipedia.org/wiki/Gene_Wolfe",
+   "quote": "One that can be read with pleasure by a cultivated reader",
+   "page": "Style section"
+  },
+  {
+   "index": 243,
+   "feature": "omission as information",
+   "claim": "Wikipedia's synthesis states that Wolfe planted subtle hints and lacunae that the text may never refer to explicitly, giving a backyard of morning glories in Free Live Free as an example legible only to a reader with horticultural knowledge.",
+   "source": "Wikipedia, 'Gene Wolfe', Style section (unattributed editorial synthesis)",
+   "url": "https://en.wikipedia.org/wiki/Gene_Wolfe",
+   "quote": "subtle hints and lacunae that may never be explicitly referred to",
+   "page": "Style section"
+  },
+  {
+   "index": 244,
+   "feature": "annalist voice and deep time",
+   "claim": "Andre-Driussi argues that Wolfe's narrator writes from a post-historic vantage point at which all dating is vague.",
+   "source": "Michael Andre-Driussi, 'Posthistory 201', Ultan's Library, 6 July 2020, revising his 'Posthistory 101' (Extrapolation vol. 37 no. 2, 1996)",
+   "url": "https://ultan.org.uk/posthistory-201/",
+   "quote": "post-historic vantage point means that all time is vague",
+   "page": "section 2.2"
+  },
+  {
+   "index": 245,
+   "feature": "annalist voice and deep time",
+   "claim": "Andre-Driussi contrasts Wolfe with Jack Vance, who dates his dying-Earth events by numbered Aeons, and says Wolfe writes against that grain.",
+   "source": "Michael Andre-Driussi, 'Posthistory 201', Ultan's Library, 6 July 2020",
+   "url": "https://ultan.org.uk/posthistory-201/",
+   "quote": "goes against the Vancean grain of numbered Aeons",
+   "page": "section 2.2"
+  },
+  {
+   "index": 246,
+   "feature": "annalist voice and deep time",
+   "claim": "Andre-Driussi revises his own published estimate of the duration of the Autarchy and reports that the text supports only a range between one thousand and thirty thousand years.",
+   "source": "Michael Andre-Driussi, 'Posthistory 201', Ultan's Library, 6 July 2020",
+   "url": "https://ultan.org.uk/posthistory-201/",
+   "quote": "the range is actually between one thousand and thirty-thousand years",
+   "page": "section 2.1"
+  },
+  {
+   "index": 247,
+   "feature": "place and institution description",
+   "claim": "Andre-Driussi infers from a single offhand remark by a minor character that the city's name records a failure of its water treatment, and that technological decline is what poisoned the river.",
+   "source": "Michael Andre-Driussi, 'Posthistory 201', Ultan's Library, 6 July 2020",
+   "url": "https://ultan.org.uk/posthistory-201/",
+   "quote": "the poisoning of the water is a direct result of technological decline",
+   "page": "section 1"
+  },
+  {
+   "index": 248,
+   "feature": "consequence on a household",
+   "claim": "Andre-Driussi reconstructs from that same remark that the city had to move upstream to escape its own filth, a civic history the narrative never states outright.",
+   "source": "Michael Andre-Driussi, 'Posthistory 201', Ultan's Library, 6 July 2020",
+   "url": "https://ultan.org.uk/posthistory-201/",
+   "quote": "the city had to move upstream to avoid its own filth",
+   "page": "section 1"
+  },
+  {
+   "index": 249,
+   "feature": "archaism",
+   "claim": "Wowra states that all the strange words in The Book of the New Sun are real English words, and that this shows how odd language can sound without invented vocabulary.",
+   "source": "Scott Wowra, introduction to 'The Lupine Scholar: an interview with Michael Andre-Driussi', Ultan's Library, 21 May 2009",
+   "url": "https://ultan.org.uk/the-lupine-scholar-by-scott-wowra/",
+   "quote": "how odd language can sound without science fiction authors inventing new words",
+   "page": "introduction"
+  },
+  {
+   "index": 250,
+   "feature": "archaism",
+   "claim": "Wowra reports that Wolfe answered the charge of fabricating words by publishing the essay 'Words Weird and Wonderful' in The Castle of the Otter in 1982 to show the words were genuine.",
+   "source": "Scott Wowra, introduction to 'The Lupine Scholar', Ultan's Library, 21 May 2009",
+   "url": "https://ultan.org.uk/the-lupine-scholar-by-scott-wowra/",
+   "quote": "all the words he used in THE SHADOW OF THE TORTURER",
+   "page": "introduction"
+  },
+  {
+   "index": 251,
+   "feature": "archaism",
+   "claim": "Wowra gives omophagist and cherkaji as examples of Wolfe's seemingly counterfeit but genuine vocabulary, glossing them as an eater of raw flesh and Persian light cavalry.",
+   "source": "Scott Wowra, introduction to 'The Lupine Scholar', Ultan's Library, 21 May 2009",
+   "url": "https://ultan.org.uk/the-lupine-scholar-by-scott-wowra/",
+   "quote": "omophagist (an eater of raw flesh) and cherkaji",
+   "page": "introduction"
+  },
+  {
+   "index": 252,
+   "feature": "civic record register",
+   "claim": "Borski describes the frame of the third novella of The Fifth Head of Cerberus as a junior military officer adjudicating a case from a file of documents.",
+   "source": "Robert Borski, review of The Fifth Head of Cerberus (Millennium, 1999), Ultan's Library, 28 August 2001",
+   "url": "https://ultan.org.uk/review-fifth-head-of-cerberus/",
+   "quote": "an unnamed junior military officer is seeking to adjudicate the case",
+   "page": "section on V.R.T."
+  },
+  {
+   "index": 253,
+   "feature": "other: documentary frame",
+   "claim": "Borski reports that most of what that officer reads comes to the reader as extracts, among them taped interrogation transcripts, a field journal and a prison diary.",
+   "source": "Robert Borski, review of The Fifth Head of Cerberus, Ultan's Library, 28 August 2001",
+   "url": "https://ultan.org.uk/review-fifth-head-of-cerberus/",
+   "quote": "Much of what the officer examines takes the form of extracts",
+   "page": "section on V.R.T."
+  },
+  {
+   "index": 254,
+   "feature": "other: documentary frame",
+   "claim": "Borski notes that the dossier is not ordered chronologically and that ordinary details of the officer's own present keep interrupting the documents he is reading.",
+   "source": "Robert Borski, review of The Fifth Head of Cerberus, Ultan's Library, 28 August 2001",
+   "url": "https://ultan.org.uk/review-fifth-head-of-cerberus/",
+   "quote": "Little is told chronologically, and often mundanities from the present-time narrative intrude",
+   "page": "section on V.R.T."
+  }
+ ]
+}

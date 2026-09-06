@@ -1,0 +1,158 @@
+{
+ "name": "leguin",
+ "chunk": 11,
+ "indices": [
+  210,
+  211,
+  212,
+  213,
+  214,
+  215,
+  216,
+  217,
+  218,
+  219,
+  220,
+  221,
+  222,
+  223,
+  224
+ ],
+ "claims": [
+  {
+   "index": 210,
+   "feature": "plainness and economy",
+   "claim": "Le Guin's revision advice is to crowd in the first draft, then cut and recombine until what is left is what counts.",
+   "source": "Ursula K. Le Guin, Steering the Craft chapter 10, quoted by 'not a lamb', Daily Kos",
+   "url": "https://www.dailykos.com/stories/2023/1/12/2146773/-Write-On-Crowding-and-Leaping-according-to-LeGuin",
+   "quote": "cut and recombine until what's left is what counts",
+   "page": "block quotation of chapter 10, tactics"
+  },
+  {
+   "index": 211,
+   "feature": "concrete sensory noun",
+   "claim": "The chapter's exercise halves a passage's word count while keeping the narrative clear and the sensory impact vivid.",
+   "source": "Ursula K. Le Guin, Steering the Craft chapter 10 exercise, reported by 'not a lamb', Daily Kos",
+   "url": "https://www.dailykos.com/stories/2023/1/12/2146773/-Write-On-Crowding-and-Leaping-according-to-LeGuin",
+   "quote": "keeping the narrative clear and the sensory impact vivid",
+   "page": "the blogger's report of the chapter's exercise"
+  },
+  {
+   "index": 212,
+   "feature": "other: scope of the craft book",
+   "claim": "The Blue Garret's reviewer lists the book's topics as sound and syntax, adjectives and adverbs, verb tense and point of view.",
+   "source": "The Blue Garret, craft-book review series, review of Steering the Craft",
+   "url": "https://www.thebluegarret.com/blog/steering-the-craft-leguin-review",
+   "quote": "how to adjust sound and syntax, how to marshal adjectives and adverbs",
+   "page": "review body"
+  },
+  {
+   "index": 213,
+   "feature": "cadence and rhythm",
+   "claim": "Novelist Matt Bell analyses a Rocannon's World sentence for the parallel construction of its two rhyming word-sets.",
+   "source": "Matt Bell (novelist), 'My Le Guin Year: Craft Lessons From a Master', Tor.com",
+   "url": "https://reactormag.com/my-le-guin-year-craft-lessons-from-a-master/",
+   "quote": "hear the parallel construction of the two rhyming sets",
+   "page": "paragraph on Le Guin's prose"
+  },
+  {
+   "index": 214,
+   "feature": "other: sentence architecture",
+   "claim": "Matt Bell analyses the same sentence as built on two progressions that expand its scale as it goes.",
+   "source": "Matt Bell (novelist), 'My Le Guin Year: Craft Lessons From a Master', Tor.com",
+   "url": "https://reactormag.com/my-le-guin-year-craft-lessons-from-a-master/",
+   "quote": "See the two progressions expanding its scale as it goes",
+   "page": "paragraph on Le Guin's prose"
+  },
+  {
+   "index": 215,
+   "feature": "place and institution description",
+   "claim": "Matt Bell describes Le Guin's worldbuilding method as working from the big picture down to the minutiae of local life.",
+   "source": "Matt Bell (novelist), 'My Le Guin Year: Craft Lessons From a Master', Tor.com",
+   "url": "https://reactormag.com/my-le-guin-year-craft-lessons-from-a-master/",
+   "quote": "working from the big picture down to the minutiae of local life",
+   "page": "paragraph on her worldbuilding"
+  },
+  {
+   "index": 216,
+   "feature": "concrete sensory noun",
+   "claim": "Matt Bell says Le Guin fills books with pleasurable details, citing the Gethenian implement for cracking ice on a drink.",
+   "source": "Matt Bell (novelist), 'My Le Guin Year: Craft Lessons From a Master', Tor.com",
+   "url": "https://reactormag.com/my-le-guin-year-craft-lessons-from-a-master/",
+   "quote": "filling books with pleasurable details",
+   "page": "paragraph on her worldbuilding"
+  },
+  {
+   "index": 217,
+   "feature": "place and institution description",
+   "claim": "Matt Bell ties Le Guin's ecologies and cultures to the unique geographies evoked in her hand-drawn maps.",
+   "source": "Matt Bell (novelist), 'My Le Guin Year: Craft Lessons From a Master', Tor.com",
+   "url": "https://reactormag.com/my-le-guin-year-craft-lessons-from-a-master/",
+   "quote": "her well-made ecologies and cultures tied to the unique geographies evoked",
+   "page": "paragraph on her worldbuilding"
+  },
+  {
+   "index": 218,
+   "feature": "cadence and rhythm",
+   "claim": "George Saunders says that for him rhythm appears by way of a lot of editing rather than by plan.",
+   "source": "George Saunders (novelist), reply in 'A Question of Rhythm', Story Club",
+   "url": "https://georgesaunders.substack.com/p/a-question-of-rhythm",
+   "quote": "rhythm is something that appears (and surprises me) by way",
+   "page": "Saunders's reply"
+  },
+  {
+   "index": 219,
+   "feature": "cadence and rhythm",
+   "claim": "A reader paraphrasing a Le Guin interview reports her saying prose rhythms are so subtle and have to be irregular.",
+   "source": "A Story Club reader's paraphrase of a Le Guin interview, in a question to George Saunders",
+   "url": "https://georgesaunders.substack.com/p/a-question-of-rhythm",
+   "quote": "The rhythms are so subtle and have to be irregular.",
+   "page": "the reader's question"
+  },
+  {
+   "index": 220,
+   "feature": "register modulation",
+   "claim": "A Story Grid editor says the voice of A Wizard of Earthsea gives it an almost biblical rhythm.",
+   "source": "Valerie (Story Grid editor), transcribed by Leslie Watts, 'A Wizard of Earthsea - Editor's Six Core Questions'",
+   "url": "https://storygrid.com/writers-room-wizard-of-earthsea-e6cq/",
+   "quote": "The voice she uses gives it an almost biblical rhythm.",
+   "page": "question 3, Point of View"
+  },
+  {
+   "index": 221,
+   "feature": "point of view and distance",
+   "claim": "A Story Grid editor argues the editorial omniscient point of view creates a huge emotional gap between reader and protagonist.",
+   "source": "Valerie (Story Grid editor), transcribed by Leslie Watts, Story Grid",
+   "url": "https://storygrid.com/writers-room-wizard-of-earthsea-e6cq/",
+   "quote": "creates a huge emotional gap between the reader and protagonist",
+   "page": "question 3, Point of View"
+  },
+  {
+   "index": 222,
+   "feature": "point of view and distance",
+   "claim": "Leslie Watts's Story Grid analysis labels the novel's point of view Editorial Omniscient.",
+   "source": "Leslie Watts, 'A Wizard of Earthsea - Editor's Six Core Questions', Story Grid",
+   "url": "https://storygrid.com/writers-room-wizard-of-earthsea-e6cq/",
+   "quote": "Point of View: Editorial Omniscient",
+   "page": "Editor's Six Core Questions, narrative device"
+  },
+  {
+   "index": 223,
+   "feature": "place and institution description",
+   "claim": "Le Guin says Tolkien's references to places, people and events that are not part of the immediate story give the reader a conviction of the reality of the immediate scene.",
+   "source": "Ursula K. Le Guin, 'Plausibility in Fantasy: an open letter to Alexei Mutovkin', ursulakleguin.com, 2005",
+   "url": "https://www.ursulakleguin.com/plausibility-in-fantasy-an-open-letter",
+   "quote": "a conviction of the reality of the immediate scene",
+   "page": "body, third paragraph of the answer"
+  },
+  {
+   "index": 224,
+   "feature": "annalist voice and deep time",
+   "claim": "Le Guin describes the mechanism as showing the immediate scene to be part of a much greater landscape and a long history of which it is only a glimpse.",
+   "source": "Ursula K. Le Guin, 'Plausibility in Fantasy: an open letter to Alexei Mutovkin', ursulakleguin.com, 2005",
+   "url": "https://www.ursulakleguin.com/plausibility-in-fantasy-an-open-letter",
+   "quote": "part of a much greater landscape, a long history",
+   "page": "body, third paragraph of the answer"
+  }
+ ]
+}

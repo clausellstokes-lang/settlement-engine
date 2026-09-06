@@ -1,0 +1,158 @@
+{
+ "name": "dnd",
+ "chunk": 24,
+ "indices": [
+  409,
+  410,
+  411,
+  412,
+  413,
+  414,
+  415,
+  416,
+  417,
+  418,
+  419,
+  420,
+  421,
+  422,
+  423
+ ],
+ "claims": [
+  {
+   "index": 409,
+   "feature": "naming and forms of address",
+   "claim": "James Maliszewski praises the names of Hommlet's inhabitants as Gygax at his best and lists five of them.",
+   "source": "James Maliszewski, Grognardia",
+   "url": "http://grognardia.blogspot.com/2008/10/retrospective-village-of-hommlet.html",
+   "quote": "are Gygax at his mellifluent best",
+   "page": "Retrospective: The Village of Hommlet"
+  },
+  {
+   "index": 410,
+   "feature": "proverbs and sayings",
+   "claim": "Maliszewski singles out the holy sayings of St Cuthbert printed in The Village of Hommlet and quotes three of them in capitals as they appear in the module.",
+   "source": "James Maliszewski, Grognardia",
+   "url": "http://grognardia.blogspot.com/2008/10/retrospective-village-of-hommlet.html",
+   "quote": "his holy sayings presented in the module",
+   "page": "Retrospective: The Village of Hommlet"
+  },
+  {
+   "index": 411,
+   "feature": "withheld information and inference",
+   "claim": "Jim Nelson reads Hommlet's villager entries as an iceberg: their ambitions, suspicions and secrets enrich the setting although the players will probably never meet them.",
+   "source": "Jim Nelson, novelist, 'A different kind of naturalism'",
+   "url": "https://j-nelson.net/2020/02/a-different-kind-of-naturalism/",
+   "quote": "make the setting richer even if little of it is presented",
+   "page": "A different kind of naturalism"
+  },
+  {
+   "index": 412,
+   "feature": "concrete sensory noun",
+   "claim": "Nelson cites a Hommlet household entry's exact hidden sum as the kind of specific detail that implies a story behind it.",
+   "source": "Jim Nelson, 'A different kind of naturalism'",
+   "url": "https://j-nelson.net/2020/02/a-different-kind-of-naturalism/",
+   "quote": "stashed seventy-three silver coins in the hollow of a tree",
+   "page": "A different kind of naturalism"
+  },
+  {
+   "index": 413,
+   "feature": "place and institution description",
+   "claim": "Nelson quotes a reviewer's line that Hommlet is a place whose history shapes its layout, mood and inhabitants.",
+   "source": "Jim Nelson quoting an unnamed reviewer",
+   "url": "https://j-nelson.net/2020/02/a-different-kind-of-naturalism/",
+   "quote": "is a place with history and its history shapes and affects",
+   "page": "A different kind of naturalism"
+  },
+  {
+   "index": 414,
+   "feature": "point of view and distance",
+   "claim": "Shawn Merwin's first rule for boxed text is to move from second person to third, and he supplies the same clearing in both, the third-person version making the corpse the subject.",
+   "source": "Shawn Merwin, Critical Hits",
+   "url": "https://critical-hits.com/blog/2010/08/27/thinking-outside-the-boxed-text/",
+   "quote": "The bloated corpse of a headless dragon dominates the center",
+   "page": "Tip 1"
+  },
+  {
+   "index": 415,
+   "feature": "adjective and adverb discipline",
+   "claim": "Merwin's rule of thumb as a writer and editor is to keep only the environmental details the characters will have to interact with.",
+   "source": "Shawn Merwin, Critical Hits",
+   "url": "https://critical-hits.com/blog/2010/08/27/thinking-outside-the-boxed-text/",
+   "quote": "leave in only the details about the environment",
+   "page": "Tip 2a"
+  },
+  {
+   "index": 416,
+   "feature": "sentence length variation",
+   "claim": "Merwin's own model opening boxed text, printed in the article, is four sentences and under a hundred words, and he then explains what each of the four sentences does.",
+   "source": "Shawn Merwin, 'Let's Design an Adventure: Boxed Text', D&D Beyond",
+   "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+   "quote": "Four sentences, and less than 100 words.",
+   "page": "A Boxed-Text Opening"
+  },
+  {
+   "index": 417,
+   "feature": "other: hedging verbs",
+   "claim": "Merwin tells adventure writers to avoid 'seems to be' and 'appears to be' in read-aloud text because for the characters perception is reality and the hedge invites metagaming.",
+   "source": "Shawn Merwin, D&D Beyond",
+   "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+   "quote": "For the characters, perception is reality.",
+   "page": "Tip 4"
+  },
+  {
+   "index": 418,
+   "feature": "cadence and rhythm",
+   "claim": "Merwin makes reading boxed text aloud a required check, naming tongue-twisters and unintended alliteration as faults invisible on the page.",
+   "source": "Shawn Merwin, D&D Beyond",
+   "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+   "quote": "funny-sounding phrases, unintended alliteration",
+   "page": "Tip 5"
+  },
+  {
+   "index": 419,
+   "feature": "terminology consistency",
+   "claim": "Merwin tells writers not to use game-mechanical words such as stunned or frightened in their ordinary sense inside read-aloud text.",
+   "source": "Shawn Merwin, D&D Beyond",
+   "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+   "quote": "Avoid game mechanical terms used in a non-mechanical way",
+   "page": "Tip 6"
+  },
+  {
+   "index": 420,
+   "feature": "other: craft difficulty",
+   "claim": "Merwin says writing good boxed text needs the precision of fiction or poetry while also doing the work of technical writing.",
+   "source": "Shawn Merwin, D&D Beyond",
+   "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+   "quote": "the same precision that one might use for fiction or poetry",
+   "page": "opening"
+  },
+  {
+   "index": 421,
+   "feature": "plainness and economy",
+   "claim": "David Hartlage reads the 1989 Gamescience expansion of a Tegel Manor bedroom key as one good middle sentence padded out to length.",
+   "source": "David Hartlage, DMDavid",
+   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
+   "quote": "pads it like a school paper stretched to an assigned length",
+   "page": "Longer descriptions"
+  },
+  {
+   "index": 422,
+   "feature": "other: format-induced padding",
+   "claim": "Hartlage attributes the padding to the format itself: the custom of long descriptions makes authors write even where they have nothing to add.",
+   "source": "David Hartlage, DMDavid",
+   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
+   "quote": "encourages authors to write something even when they have little to add",
+   "page": "Longer descriptions"
+  },
+  {
+   "index": 423,
+   "feature": "place and institution description",
+   "claim": "Hartlage argues a location's description should be sized to its purpose in play, instancing a sheriff met about a wanted poster whose kitchen needs no inventory.",
+   "source": "David Hartlage, DMDavid",
+   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
+   "quote": "no one needs an item-by-item inventory of her kitchen",
+   "page": "Matching description to a location's purpose"
+  }
+ ]
+}

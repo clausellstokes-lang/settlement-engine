@@ -1,0 +1,158 @@
+{
+ "name": "hobb",
+ "chunk": 12,
+ "indices": [
+  180,
+  181,
+  182,
+  183,
+  184,
+  185,
+  186,
+  187,
+  188,
+  189,
+  190,
+  191,
+  192,
+  193,
+  194
+ ],
+ "claims": [
+  {
+   "index": 180,
+   "feature": "dialogue register",
+   "claim": "Hobb proposes a test in which the reader of a passage of dialogue should be able to tell who is speaking without the attribution tags.",
+   "source": "Robin Hobb, speaking on Writing Excuses 11.Bonus-01 (Oct 2016), fan transcript at wetranscripts",
+   "url": "https://wetranscripts.livejournal.com/121439.html",
+   "quote": "able to tell who is talking without all the little clues",
+   "page": "Second half, on character differentiation"
+  },
+  {
+   "index": 181,
+   "feature": "point of view and distance",
+   "claim": "Hobb says that what an assassin notices on entering a room differs from what a child entering the same room notices.",
+   "source": "Robin Hobb, speaking on Writing Excuses 11.Bonus-01 (Oct 2016), fan transcript at wetranscripts",
+   "url": "https://wetranscripts.livejournal.com/121439.html",
+   "quote": "if you are an assassin and you walk into the room",
+   "page": "Second half, on description"
+  },
+  {
+   "index": 182,
+   "feature": "place and institution description",
+   "claim": "Hobb says the biographical details filled in around a character build the world at the same time.",
+   "source": "Robin Hobb, speaking on Writing Excuses 11.Bonus-01 (Oct 2016), fan transcript at wetranscripts",
+   "url": "https://wetranscripts.livejournal.com/121439.html",
+   "quote": "details that fill in around the character build the world",
+   "page": "First half, on character creation"
+  },
+  {
+   "index": 183,
+   "feature": "civic record register",
+   "claim": "Elliott describes the first paragraph of Assassin's Apprentice as an excerpt from a piece being composed inside the story's own world.",
+   "source": "Geoffrey B. Elliott, 'A Robin Hobb Rereading Series-Entry 1', Elliott RWI, 2019",
+   "url": "https://elliottrwi.com/2019/05/24/a-robin-hobb-rereading-series-entry-1-assassins-apprentice-chapter-1/",
+   "quote": "an excerpt from a piece being composed within the milieu",
+   "page": "Third paragraph"
+  },
+  {
+   "index": 184,
+   "feature": "civic record register",
+   "claim": "Elliott names Hobb's habit of opening chapters with in-world reference materials an Asimovian move.",
+   "source": "Geoffrey B. Elliott, 'A Robin Hobb Rereading Series: Entry 226', Elliott RWI, 2021",
+   "url": "https://elliottrwi.com/2021/09/10/a-robin-hobb-rereading-series-entry-226-fools-errand-chapter-6/",
+   "quote": "the Asimovian move of grounding chapters in in-milieu reference materials",
+   "page": "Commentary paragraph"
+  },
+  {
+   "index": 185,
+   "feature": "annalist voice and deep time",
+   "claim": "Elliott, writing as a medievalist, says the chapter-opening passage enacts the piecing-together of disparate and not always complete sources.",
+   "source": "Geoffrey B. Elliott, 'A Robin Hobb Rereading Series: Entry 226', Elliott RWI, 2021",
+   "url": "https://elliottrwi.com/2021/09/10/a-robin-hobb-rereading-series-entry-226-fools-errand-chapter-6/",
+   "quote": "the piecing-together of disparate and not always complete sources",
+   "page": "Commentary paragraph"
+  },
+  {
+   "index": 186,
+   "feature": "consequence on a household",
+   "claim": "The reviewer says Hobb takes a cliched epic-fantasy plot point and fleshes it out with motivations and characters and consequences until it looks realistic.",
+   "source": "Vacuous Wastrel (pseudonymous reviewer), 'The Golden Fool, by Robin Hobb', 2013",
+   "url": "https://vacuouswastrel.wordpress.com/2013/02/04/the-golden-fool-by-robin-hobb/",
+   "quote": "fleshes it out with motivations and characters and consequences",
+   "page": "Review body"
+  },
+  {
+   "index": 187,
+   "feature": "point of view and distance",
+   "claim": "The reviewer says Hobb tells a standard heroic plot from an unexpected, peripheral perspective and thereby gives the realistic inner workings of the myth.",
+   "source": "Vacuous Wastrel (pseudonymous reviewer), 'The Golden Fool, by Robin Hobb', 2013",
+   "url": "https://vacuouswastrel.wordpress.com/2013/02/04/the-golden-fool-by-robin-hobb/",
+   "quote": "the realistic inner workings of the myth",
+   "page": "Review body"
+  },
+  {
+   "index": 188,
+   "feature": "consequence on a household",
+   "claim": "The reviewer identifies worrying about the apprentice fees for dependants as the kind of domestic matter most epic fantasy does not spend pages on.",
+   "source": "Vacuous Wastrel (pseudonymous reviewer), 'The Golden Fool, by Robin Hobb', 2013",
+   "url": "https://vacuouswastrel.wordpress.com/2013/02/04/the-golden-fool-by-robin-hobb/",
+   "quote": "worrying about the apprentice fees for dependants",
+   "page": "Originality rating paragraph"
+  },
+  {
+   "index": 189,
+   "feature": "consequence on a household",
+   "claim": "The reviewer says the book insists that motivations are personal and that consequences will also be personal.",
+   "source": "Vacuous Wastrel (pseudonymous reviewer), 'The Golden Fool, by Robin Hobb', 2013",
+   "url": "https://vacuouswastrel.wordpress.com/2013/02/04/the-golden-fool-by-robin-hobb/",
+   "quote": "that motivations are personal, and that consequences will also be personal",
+   "page": "Originality rating paragraph"
+  },
+  {
+   "index": 190,
+   "feature": "other: fantastic subordinated to the ordinary",
+   "claim": "The reviewer says the book reminds the reader that the fantasy only matters because of the reality in its shadow.",
+   "source": "Vacuous Wastrel (pseudonymous reviewer), 'The Golden Fool, by Robin Hobb', 2013",
+   "url": "https://vacuouswastrel.wordpress.com/2013/02/04/the-golden-fool-by-robin-hobb/",
+   "quote": "the fantasy only matters because of the reality in its shadow",
+   "page": "Originality rating paragraph"
+  },
+  {
+   "index": 191,
+   "feature": "withheld information and inference",
+   "claim": "The reviewer says Hobb builds tense scenes out of characters watching each other's expressions, so that much is accomplished with only glances.",
+   "source": "Vacuous Wastrel (pseudonymous reviewer), 'The Golden Fool, by Robin Hobb', 2013",
+   "url": "https://vacuouswastrel.wordpress.com/2013/02/04/the-golden-fool-by-robin-hobb/",
+   "quote": "So much can be accomplished with only glances",
+   "page": "Review body"
+  },
+  {
+   "index": 192,
+   "feature": "plainness and economy",
+   "claim": "The reviewer judges that Hobb's prose is usually unremarkable, locating her effect elsewhere than in sentence beauty.",
+   "source": "Vacuous Wastrel (pseudonymous reviewer), 'Dragon Keeper, by Robin Hobb', 2014",
+   "url": "https://vacuouswastrel.wordpress.com/2014/04/13/dragon-keeper-by-robin-hobb/",
+   "quote": "As is usually the case with Hobb, her prose is unremarkable",
+   "page": "Beauty rating"
+  },
+  {
+   "index": 193,
+   "feature": "plainness and economy",
+   "claim": "The reviewer judges Hobb's prose solid and effective and occasionally pretty, but not award-winning for beauty.",
+   "source": "Vacuous Wastrel (pseudonymous reviewer), 'Fool's Fate, by Robin Hobb', 2013",
+   "url": "https://vacuouswastrel.wordpress.com/2013/11/11/fools-fate-by-robin-hobb/",
+   "quote": "prose is solid and effective and occasionally pretty",
+   "page": "Beauty rating"
+  },
+  {
+   "index": 194,
+   "feature": "archaism",
+   "claim": "The reviewer describes Hobb's language as having a slightly heavy and old-fashioned tone common to the genre.",
+   "source": "Vacuous Wastrel (pseudonymous reviewer), 'Fool's Quest, by Robin Hobb', 2015",
+   "url": "https://vacuouswastrel.wordpress.com/2015/11/27/fools-quest-by-robin-hobb/",
+   "quote": "that slightly heavy and old-fashioned tone common to the genre",
+   "page": "Overall rating paragraph"
+  }
+ ]
+}

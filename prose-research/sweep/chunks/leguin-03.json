@@ -11,7 +11,12 @@
   96,
   97,
   98,
-  99
+  99,
+  100,
+  101,
+  102,
+  103,
+  104
  ],
  "claims": [
   {
@@ -103,6 +108,51 @@
    "url": "https://www.ursulakleguin.com/return-to-source",
    "quote": "sees exactly the same world with different eyes",
    "page": ""
+  },
+  {
+   "index": 100,
+   "feature": "plainness and economy",
+   "claim": "Le Guin asserts that plain language is the noblest of all narrative languages.",
+   "source": "Ursula K. Le Guin, 'From Elfland to Poughkeepsie' (1972 speech; Pendragon Press 1973; repr. The Language of the Night 1979)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "A plain language is the noblest of all.",
+   "page": "p.8, on epic plainness"
+  },
+  {
+   "index": 101,
+   "feature": "plainness and economy",
+   "claim": "Le Guin asserts that plain language is also the most difficult to write.",
+   "source": "Ursula K. Le Guin, 'From Elfland to Poughkeepsie' (1972 speech; Pendragon Press 1973)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "It is also the most difficult.",
+   "page": "p.8, immediately after the plain-language claim"
+  },
+  {
+   "index": 102,
+   "feature": "plainness and economy",
+   "claim": "Le Guin calls clarity and simplicity permanent virtues in a narrative.",
+   "source": "Ursula K. Le Guin, 'From Elfland to Poughkeepsie' (1972 speech; Pendragon Press 1973)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "Clarity and simplicity are permanent virtues in a narrative.",
+   "page": "p.8, on epics and sagas"
+  },
+  {
+   "index": 103,
+   "feature": "plainness and economy",
+   "claim": "Le Guin distinguishes a fake plainness, which she calls flat rather than simple, from real plainness.",
+   "source": "Ursula K. Le Guin, 'From Elfland to Poughkeepsie' (1972 speech; Pendragon Press 1973)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "It is not really simple, but flat.",
+   "page": "p.8, on the 'Poughkeepsie style'"
+  },
+  {
+   "index": 104,
+   "feature": "diction (native vs latinate)",
+   "claim": "Le Guin describes Tolkien's vocabulary as unstriking and everything in it as direct, concrete and simple.",
+   "source": "Ursula K. Le Guin, 'From Elfland to Poughkeepsie' (1972 speech; Pendragon Press 1973)",
+   "url": "https://digginganddeepening.com/texts/ESSAYS/U%20K%20LeGuin/1973_FromElflandtoPoughkeepsie_1.pdf",
+   "quote": "everything is direct, concrete, and simple",
+   "page": "p.8, on Tolkien's plain English"
   }
  ]
 }

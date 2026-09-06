@@ -1,0 +1,158 @@
+{
+ "name": "kay",
+ "chunk": 27,
+ "indices": [
+  405,
+  406,
+  407,
+  408,
+  409,
+  410,
+  411,
+  412,
+  413,
+  414,
+  415,
+  416,
+  417,
+  418,
+  419
+ ],
+ "claims": [
+  {
+   "index": 405,
+   "feature": "place and institution description",
+   "claim": "Kay says the idea of exile lets a novelist underscore elements of the society being evoked by asking why people are exiled, what it means for them and for those left behind.",
+   "source": "Guy Gavriel Kay, 'Exile', BrightWeavings",
+   "url": "https://brightweavings.com/exile/",
+   "quote": "underscore elements of the society being evoked",
+   "page": "body, on exile as a technique"
+  },
+  {
+   "index": 406,
+   "feature": "other: no moralising or lecture",
+   "claim": "Kay says he does not write novels inspired by history to offer easy parallels to our own time, because that can feel lazy or glib or both.",
+   "source": "Guy Gavriel Kay, 'Exile', BrightWeavings",
+   "url": "https://brightweavings.com/exile/",
+   "quote": "That can feel lazy, or glib, or both",
+   "page": "body, River of Stars section"
+  },
+  {
+   "index": 407,
+   "feature": "plainness and economy",
+   "claim": "Kay praises Penelope Fitzgerald's short novels for achieving so much with such small strokes that they frequently feel miraculous.",
+   "source": "Guy Gavriel Kay, '6 Books I Love', cbc.ca",
+   "url": "https://brightweavings.com/6-books-i-love/",
+   "quote": "achieve so much with such small strokes",
+   "page": "entry on Penelope Fitzgerald"
+  },
+  {
+   "index": 408,
+   "feature": "other: not talking down to the reader",
+   "claim": "Kay praises Dorothy Dunnett for flatly refusing to talk down to her readers, making demands and rewarding them.",
+   "source": "Guy Gavriel Kay, '6 Books I Love', cbc.ca",
+   "url": "https://brightweavings.com/6-books-i-love/",
+   "quote": "flatly refuses to talk down to her readers",
+   "page": "entry on the Lymond Chronicles"
+  },
+  {
+   "index": 409,
+   "feature": "other: quarter turn to the fantastic",
+   "claim": "Kay tells The Guardian he steeps himself in a period and then twists it just a little to give himself ethical and creative space.",
+   "source": "Guy Gavriel Kay, quoted by Alison Flood, The Guardian",
+   "url": "https://brightweavings.com/interview-with-alison-flood-for-the-guardian/",
+   "quote": "I steep myself in a period and then I twist it",
+   "page": "later in the article, on El Cid"
+  },
+  {
+   "index": 410,
+   "feature": "other: quarter turn to the fantastic",
+   "claim": "Alison Flood reports that Kay loves one critic's description of his work as history with a quarter-turn to the fantastic; the phrase is the critic's, reported by Flood.",
+   "source": "Alison Flood (reporter's paraphrase), The Guardian",
+   "url": "https://brightweavings.com/interview-with-alison-flood-for-the-guardian/",
+   "quote": "history with a quarter-turn to the fantastic",
+   "page": "middle of the article"
+  },
+  {
+   "index": 411,
+   "feature": "other: real lives not co-opted",
+   "claim": "Kay says he has been calling the current practice an epidemic of co-opting real lives, while declining to criticise writers who do it.",
+   "source": "Guy Gavriel Kay, quoted by Alison Flood, The Guardian",
+   "url": "https://brightweavings.com/interview-with-alison-flood-for-the-guardian/",
+   "quote": "an epidemic of co-opting real lives",
+   "page": "later in the article"
+  },
+  {
+   "index": 412,
+   "feature": "other: competing versions of one story",
+   "claim": "Kay says Children of Earth and Sky has several scenes in which one conversation is described by more than one of the people in it, and that when he switches point of view the conversation is not the same.",
+   "source": "Guy Gavriel Kay, interviewed by Christine Fischer Guy, Los Angeles Review of Books",
+   "url": "https://lareviewofbooks.org/article/fantastic-worlds-guy-gavriel-kay/",
+   "quote": "as described by more than one of the people in the conversation",
+   "page": "answer on multiple points of view"
+  },
+  {
+   "index": 413,
+   "feature": "other: competing versions of one story",
+   "claim": "Kay says a second point of view's account of the same conversation bears a resemblance to the first but is not the same.",
+   "source": "Guy Gavriel Kay, interviewed by Christine Fischer Guy, LARB",
+   "url": "https://lareviewofbooks.org/article/fantastic-worlds-guy-gavriel-kay/",
+   "quote": "another character’s point of view, the conversation isn’t the same",
+   "page": "answer on multiple points of view"
+  },
+  {
+   "index": 414,
+   "feature": "annalist voice and deep time",
+   "claim": "Kay says you can have a forgotten emperor while the chronicler of the reign is remembered, citing Ezra Pound on Homer and Troy.",
+   "source": "Guy Gavriel Kay, interviewed by Christine Fischer Guy, LARB",
+   "url": "https://lareviewofbooks.org/article/fantastic-worlds-guy-gavriel-kay/",
+   "quote": "a forgotten emperor and the chronicler of the reign is remembered",
+   "page": "answer on art enduring after empires"
+  },
+  {
+   "index": 415,
+   "feature": "other: seam between invention and record must not show",
+   "claim": "Kay says that if a reader can pick out what is made up and what is real, the storytelling has been botched.",
+   "source": "Guy Gavriel Kay, interviewed by Christine Fischer Guy, LARB",
+   "url": "https://lareviewofbooks.org/article/fantastic-worlds-guy-gavriel-kay/",
+   "quote": "pick out what’s made up and what’s real, you’ve botched your storytelling",
+   "page": "answer on interrogating a version of the past"
+  },
+  {
+   "index": 416,
+   "feature": "other: a signal that the world is not ours",
+   "claim": "Kay says he has used two moons in several books as a signal, and that the two moons say we are not here.",
+   "source": "Guy Gavriel Kay, interviewed by Christine Fischer Guy, LARB",
+   "url": "https://lareviewofbooks.org/article/fantastic-worlds-guy-gavriel-kay/",
+   "quote": "The two moons say, We’re not here",
+   "page": "answer on setting the rules of engagement"
+  },
+  {
+   "index": 417,
+   "feature": "consequence on a household",
+   "claim": "Kay says that at most times and places in history the only people you could rely upon were your kin, and that those cut off from kinship bonds were in radical danger.",
+   "source": "Guy Gavriel Kay, interviewed by Christine Fischer Guy, LARB",
+   "url": "https://lareviewofbooks.org/article/fantastic-worlds-guy-gavriel-kay/",
+   "quote": "the only people you could rely upon were your kin",
+   "page": "answer on legacy and family"
+  },
+  {
+   "index": 418,
+   "feature": "point of view and distance",
+   "claim": "Kay says the past is for him staggeringly alien and that writers about the past should acknowledge and work with that.",
+   "source": "Guy Gavriel Kay, interviewed by Christine Fischer Guy, LARB",
+   "url": "https://lareviewofbooks.org/article/fantastic-worlds-guy-gavriel-kay/",
+   "quote": "staggeringly alien",
+   "page": "answer on the Huxley quotation"
+  },
+  {
+   "index": 419,
+   "feature": "point of view and distance",
+   "claim": "Kay says the fantastic lets him make the world be as his characters believe it to be, and that the reader then accepts it without any sense that the worldview is quaint.",
+   "source": "Guy Gavriel Kay, interviewed by Christine Fischer Guy, LARB",
+   "url": "https://lareviewofbooks.org/article/fantastic-worlds-guy-gavriel-kay/",
+   "quote": "without any sense that the worldview is quaint",
+   "page": "closing answers on how the fantastic serves him"
+  }
+ ]
+}

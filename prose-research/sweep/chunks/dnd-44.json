@@ -1,0 +1,158 @@
+{
+ "name": "dnd",
+ "chunk": 44,
+ "indices": [
+  709,
+  710,
+  711,
+  712,
+  713,
+  714,
+  715,
+  716,
+  717,
+  718,
+  719,
+  720,
+  721,
+  722,
+  723
+ ],
+ "claims": [
+  {
+   "index": 709,
+   "feature": "edition and house style",
+   "claim": "Justin Alexander says the delve format artificially isolates the encounter from its context and so defeats its own purpose.",
+   "source": "Justin Alexander, 'Are We Really This Stupid?', The Alexandrian, 2011",
+   "url": "https://thealexandrian.net/wordpress/1217/roleplaying-games/are-we-really-this-stupid",
+   "quote": "it artificially isolates the “encounter”",
+   "page": "Are We Really This Stupid?, 'Isolated Encounters'"
+  },
+  {
+   "index": 710,
+   "feature": "dm-facing sentence",
+   "claim": "Justin Alexander asks publishers to trust DMs rather than pre-programming every monster's behaviour in the text.",
+   "source": "Justin Alexander, 'Are We Really This Stupid?', The Alexandrian, 2011",
+   "url": "https://thealexandrian.net/wordpress/1217/roleplaying-games/are-we-really-this-stupid",
+   "quote": "publishers can put a little more trust in DMs",
+   "page": "Are We Really This Stupid?, 'Encounters on the Fly'"
+  },
+  {
+   "index": 711,
+   "feature": "other: key format",
+   "claim": "Brendan of Necropraxis describes the dominant published format as areas written out in lengthy proper English prose.",
+   "source": "Brendan (Necropraxis), 'Improved area keys', 2013",
+   "url": "http://www.necropraxis.com/2013/12/07/improved-area-keys/",
+   "quote": "Areas are described in lengthy, proper english prose.",
+   "page": "Improved area keys"
+  },
+  {
+   "index": 712,
+   "feature": "other: read-play gap",
+   "claim": "Brendan of Necropraxis grants that well-written prose modules are pleasurable to read.",
+   "source": "Brendan (Necropraxis), 'Improved area keys', 2013",
+   "url": "http://www.necropraxis.com/2013/12/07/improved-area-keys/",
+   "quote": "pleasurable to read (if well-written)",
+   "page": "Improved area keys"
+  },
+  {
+   "index": 713,
+   "feature": "other: read-play gap",
+   "claim": "Brendan of Necropraxis says the same prose modules are cumbersome to use in play.",
+   "source": "Brendan (Necropraxis), 'Improved area keys', 2013",
+   "url": "http://www.necropraxis.com/2013/12/07/improved-area-keys/",
+   "quote": "quite cumbersome to use in play",
+   "page": "Improved area keys"
+  },
+  {
+   "index": 714,
+   "feature": "plainness and economy",
+   "claim": "Brendan of Necropraxis objects that Courtney Campbell's outline key, though usable, lacks poetry.",
+   "source": "Brendan (Necropraxis), 'Improved area keys', 2013",
+   "url": "http://www.necropraxis.com/2013/12/07/improved-area-keys/",
+   "quote": "it lacks poetry",
+   "page": "Improved area keys"
+  },
+  {
+   "index": 715,
+   "feature": "dm-facing sentence",
+   "claim": "Brendan of Necropraxis keeps running prose but bolds the features the referee needs immediately.",
+   "source": "Brendan (Necropraxis), 'Improved area keys', 2013",
+   "url": "http://www.necropraxis.com/2013/12/07/improved-area-keys/",
+   "quote": "I bold the immediately relevant features.",
+   "page": "Improved area keys"
+  },
+  {
+   "index": 716,
+   "feature": "boxed text form",
+   "claim": "Brendan of Necropraxis faults boxed text for separating a thing's first impression from its elaboration further down the page.",
+   "source": "Brendan (Necropraxis), 'Improved area keys', 2013",
+   "url": "http://www.necropraxis.com/2013/12/07/improved-area-keys/",
+   "quote": "separated the initial impression (“treasure chest”) from elaboration",
+   "page": "Improved area keys"
+  },
+  {
+   "index": 717,
+   "feature": "other: seen in a glance",
+   "claim": "Brendan of Necropraxis says the aim of bolding is that the referee can take in the area with a glance.",
+   "source": "Brendan (Necropraxis), 'Improved area keys', 2013",
+   "url": "http://www.necropraxis.com/2013/12/07/improved-area-keys/",
+   "quote": "take in the area with a glance",
+   "page": "Improved area keys"
+  },
+  {
+   "index": 718,
+   "feature": "plainness and economy",
+   "claim": "On his worked example Brendan of Necropraxis reports the text that must be read is cut by more than half without degrading the prose.",
+   "source": "Brendan (Necropraxis), 'Improved area keys', 2013",
+   "url": "http://www.necropraxis.com/2013/12/07/improved-area-keys/",
+   "quote": "cut down by more than half",
+   "page": "Improved area keys"
+  },
+  {
+   "index": 719,
+   "feature": "boxed text form",
+   "claim": "Reviewing a 2006 DCC module, Gabor Lux says much boxed text and follow-up writing are expended to say relatively little.",
+   "source": "Gabor Lux (Melan), '[REVIEW] Halls of the Minotaur', Beyond Fomalhaut, 2018",
+   "url": "http://beyondfomalhaut.blogspot.com/2018/03/review-halls-of-minotaur.html",
+   "quote": "much boxed text and followup writing are expended to say relatively little",
+   "page": "Halls of the Minotaur review"
+  },
+  {
+   "index": 720,
+   "feature": "other: read-play gap",
+   "claim": "Gabor Lux reports that the same module played better at the table than it read on the page.",
+   "source": "Gabor Lux (Melan), '[REVIEW] Halls of the Minotaur', Beyond Fomalhaut, 2018",
+   "url": "http://beyondfomalhaut.blogspot.com/2018/03/review-halls-of-minotaur.html",
+   "quote": "It really did play better than it reads",
+   "page": "Halls of the Minotaur review"
+  },
+  {
+   "index": 721,
+   "feature": "boxed text form",
+   "claim": "Bryce Lynch's rule in a 2026 review is that read-aloud should never be long.",
+   "source": "Bryce Lynch, review of 'The Swan Hollow Intrigue', tenfootpole.org, 2026",
+   "url": "https://tenfootpole.org/ironspike/?p=10575",
+   "quote": "Read-aloud should never be long",
+   "page": "Swan Hollow Intrigue review"
+  },
+  {
+   "index": 722,
+   "feature": "other: read-aloud delivery",
+   "claim": "Bryce Lynch says long read-aloud makes players lose focus and reach for their phones.",
+   "source": "Bryce Lynch, review of 'The Swan Hollow Intrigue', tenfootpole.org, 2026",
+   "url": "https://tenfootpole.org/ironspike/?p=10575",
+   "quote": "Long read-aloud causes players to loose focus",
+   "page": "Swan Hollow Intrigue review"
+  },
+  {
+   "index": 723,
+   "feature": "edition and house style",
+   "claim": "Bryce Lynch says long passages set in italics are cognitively hard to read.",
+   "source": "Bryce Lynch, review of 'The Swan Hollow Intrigue', tenfootpole.org, 2026",
+   "url": "https://tenfootpole.org/ironspike/?p=10575",
+   "quote": "Long italics is hard to read, cognitively.",
+   "page": "Swan Hollow Intrigue review"
+  }
+ ]
+}

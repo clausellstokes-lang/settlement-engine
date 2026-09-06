@@ -1,0 +1,158 @@
+{
+ "name": "dnd",
+ "chunk": 39,
+ "indices": [
+  634,
+  635,
+  636,
+  637,
+  638,
+  639,
+  640,
+  641,
+  642,
+  643,
+  644,
+  645,
+  646,
+  647,
+  648
+ ],
+ "claims": [
+  {
+   "index": 634,
+   "feature": "plainness and economy",
+   "claim": "Alexander identifies the failure mode of a fixed section format as filling the format, writing paragraphs where nothing needed saying.",
+   "source": "Justin Alexander, 'The Art of the Key', The Alexandrian, 2014",
+   "url": "https://thealexandrian.net/wordpress/35180/roleplaying-games/the-art-of-the-key",
+   "quote": "so you might as well write two or three paragraphs about it",
+   "page": "Adventure Formatting Guides"
+  },
+  {
+   "index": 635,
+   "feature": "other: order of information",
+   "claim": "Alexander argues the order of a location's description must follow what is salient there, an ogre in the open being named first and a hidden goblin not.",
+   "source": "Justin Alexander, 'The Art of the Key', The Alexandrian, 2014",
+   "url": "https://thealexandrian.net/wordpress/35180/roleplaying-games/the-art-of-the-key",
+   "quote": "should talk about the ogre first",
+   "page": "Adventure Formatting Guides"
+  },
+  {
+   "index": 636,
+   "feature": "edition and house style",
+   "claim": "Alexander calls the fourth edition delve format the culmination of rigid formatting and says such a format forces information out of sequence.",
+   "source": "Justin Alexander, 'The Art of the Key', The Alexandrian, 2014",
+   "url": "https://thealexandrian.net/wordpress/35180/roleplaying-games/the-art-of-the-key",
+   "quote": "forces information to be presented out-of-sequence",
+   "page": "Adventure Formatting Guides"
+  },
+  {
+   "index": 637,
+   "feature": "boxed text form",
+   "claim": "Bryce Lynch's own list of what he looks for in an adventure module states that boxed text is usually not a good thing.",
+   "source": "Bryce Lynch, 'Review Standards', tenfootpole.org",
+   "url": "https://tenfootpole.org/ironspike/?page_id=1201",
+   "quote": "Boxed text is usually not a good thing.",
+   "page": "Review Standards, bullet list"
+  },
+  {
+   "index": 638,
+   "feature": "plainness and economy",
+   "claim": "Bryce Lynch lists a terse writing style among the qualities he looks for in an adventure module.",
+   "source": "Bryce Lynch, 'Review Standards', tenfootpole.org",
+   "url": "https://tenfootpole.org/ironspike/?page_id=1201",
+   "quote": "Terse writing style",
+   "page": "Review Standards, bullet list"
+  },
+  {
+   "index": 639,
+   "feature": "concrete sensory noun",
+   "claim": "Bryce Lynch lists evocative atmosphere among the qualities he looks for in an adventure module.",
+   "source": "Bryce Lynch, 'Review Standards', tenfootpole.org",
+   "url": "https://tenfootpole.org/ironspike/?page_id=1201",
+   "quote": "Evocative atmosphere.",
+   "page": "Review Standards, bullet list"
+  },
+  {
+   "index": 640,
+   "feature": "other: backstory economy",
+   "claim": "Bryce Lynch's standards reject epic backstory in an adventure module and ask only for enough to start play.",
+   "source": "Bryce Lynch, 'Review Standards', tenfootpole.org",
+   "url": "https://tenfootpole.org/ironspike/?page_id=1201",
+   "quote": "I don’t care about your epic backstory.",
+   "page": "Review Standards, bullet list"
+  },
+  {
+   "index": 641,
+   "feature": "plainness and economy",
+   "claim": "The phrase 'succinct and evocative' on tenfootpole.org is the top grade for Language on a second reviewer's rating scale (signed 'The Pretty Girl'), not a line of Bryce Lynch's own standards.",
+   "source": "'The Pretty Girl' (second reviewer), rating scale on tenfootpole.org 'Review Standards'",
+   "url": "https://tenfootpole.org/ironspike/?page_id=1201",
+   "quote": "Succinct and evocative",
+   "page": "Review Standards, 'The Pretty Girl' scale, Language 4"
+  },
+  {
+   "index": 642,
+   "feature": "plainness and economy",
+   "claim": "On that same Language scale the lowest grade is reserved for writing that is very wordy or incomprehensible.",
+   "source": "'The Pretty Girl' (second reviewer), rating scale on tenfootpole.org 'Review Standards'",
+   "url": "https://tenfootpole.org/ironspike/?page_id=1201",
+   "quote": "Very wordy/ incomprehensible",
+   "page": "Review Standards, 'The Pretty Girl' scale, Language 0"
+  },
+  {
+   "index": 643,
+   "feature": "other: backstory economy",
+   "claim": "In a comment on his own standards page Bryce Lynch says he loathes overly long backstory and fiction introductions.",
+   "source": "Bryce Lynch, comment of 19 April 2016 on tenfootpole.org 'Review Standards'",
+   "url": "https://tenfootpole.org/ironspike/?page_id=1201",
+   "quote": "I LOATHE the overly long backstory",
+   "page": "Review Standards, comments, 2016-04-19"
+  },
+  {
+   "index": 644,
+   "feature": "other: key format",
+   "claim": "Justin Alexander judges the location keys of published adventures to be almost universally terrible.",
+   "source": "Justin Alexander, 'The Art of the Key', The Alexandrian, 2014",
+   "url": "https://thealexandrian.net/wordpress/36903/roleplaying-games/the-art-of-the-key",
+   "quote": "almost universally terrible",
+   "page": "Art of the Key, opening"
+  },
+  {
+   "index": 645,
+   "feature": "boxed text form",
+   "claim": "Justin Alexander defines boxed text as prewritten text designed to be read aloud by the GM.",
+   "source": "Justin Alexander, 'The Art of the Key', The Alexandrian, 2014",
+   "url": "https://thealexandrian.net/wordpress/36903/roleplaying-games/the-art-of-the-key",
+   "quote": "prewritten text designed to be read aloud by the GM",
+   "page": "Art of the Key, 'The Era of Boxed Text'"
+  },
+  {
+   "index": 646,
+   "feature": "boxed text form",
+   "claim": "Justin Alexander dates the first appearance of read-aloud boxed text to Lost Tamoachan and hedges between 1979 and 1980.",
+   "source": "Justin Alexander, 'The Art of the Key', The Alexandrian, 2014",
+   "url": "https://thealexandrian.net/wordpress/36903/roleplaying-games/the-art-of-the-key",
+   "quote": "In either 1979 or 1980",
+   "page": "Art of the Key, 'The Era of Boxed Text'"
+  },
+  {
+   "index": 647,
+   "feature": "other: information sequencing",
+   "claim": "Justin Alexander argues a room key must sequence information by what the players meet first, so a room with an ogre in the middle of it leads with the ogre.",
+   "source": "Justin Alexander, 'The Art of the Key', The Alexandrian, 2014",
+   "url": "https://thealexandrian.net/wordpress/36903/roleplaying-games/the-art-of-the-key",
+   "quote": "should talk about the ogre first",
+   "page": "Art of the Key, 'Adventure Formatting Guides'"
+  },
+  {
+   "index": 648,
+   "feature": "edition and house style",
+   "claim": "Justin Alexander argues that a rigid adventure format defeats its own aim of making information easy to parse and reference.",
+   "source": "Justin Alexander, 'The Art of the Key', The Alexandrian, 2014",
+   "url": "https://thealexandrian.net/wordpress/36903/roleplaying-games/the-art-of-the-key",
+   "quote": "a rigid format ends up having the opposite effect",
+   "page": "Art of the Key, closing of Part 1"
+  }
+ ]
+}

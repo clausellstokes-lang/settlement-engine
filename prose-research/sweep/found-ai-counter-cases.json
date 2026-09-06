@@ -1,184 +1,4 @@
 {
- "complete": true,
- "coverage": "Named roster: all eleven items reached. Fetched at the primary — Winterson (Guardian 12 Mar 2025), Kudan/Qudan (Japan Times 19 Jan 2024, quoting the acceptance speech), Mark Lawrence's two 2023 posts, Sudowrite Muse, Jane Friedman (7 Aug 2023), the Authors Guild survey release (15 May 2023, after the briefed URL 404'd), Clarke's 'A Concerning Trend' (15 Feb 2023, at neil-clarke.com; clarkesworldmagazine.com/clarke_02_23/ serves a different editorial), NPR (24 Feb 2023) and Hern's TechScape (which is dated 16 April 2024, not May). Recovered by ladder — Vara's 'Ghosts' via the Wayback raw capture (Believer live is Cloudflare-blocked); Doshi and Hauser via Europe PMC full-text XML (science.org Cloudflare-blocked); the DriveThruRPG storefront-filter page via Wayback. Not found at the primary — the July 2023 OneBookShelf written-content ban text: help.drivethrurpg.com is Cloudflare-blocked with no Wayback capture of that article, so it is recorded as a relay through EN World quoting Gizmodo, and the only primary DriveThru text reached (Oct 2024) labels artwork only, not AI-written text. Blocked and unread — the SSRN version of the Chakrabarty/Ginsburg/Dhillon paper (arXiv used instead, abstract only) and the Zenodo critique PDF (763-byte download). Expansion: bibliography chasing through the CHI 2026 paper's reference list yielded four further primaries (Art or Artifice, Can AI writing be salvaged, Readers Prefer Outputs of AI Trained on Copyrighted Books, Doshi and Hauser); arXiv API relevance queries yielded two more (the Chakrabarty/Dhillon paper itself and Farrell's Italian study); a lateral route through Simon Willison's link blog recovered the correct Guardian TechScape URL. 20 substantive sources of 22 read: 13 from the named roster and its policy relay, 5 by bibliography chasing through the CHI 2026 reference list, 2 by arXiv API relevance search; the two non-substantive rows are Simon Willison's link blog (used only to recover a URL) and the Zenodo critique whose PDF would not download. The WebSearch budget was exhausted mid-sweep, so the last expansion rounds used the arXiv, OpenAlex, Crossref-style and Europe PMC APIs and reference-list chasing instead of open lateral search. Standing gap unchanged: no source read here measured the archival, encyclopedic or civic-record register — every measurement is on lyric poetry, flash or short fiction, literary excerpts of 450 words or less, or biomedical article vocabulary.",
- "sourcesRead": [
-  {
-   "title": "OpenAI's metafictional short story about grief is beautiful and moving",
-   "url": "https://www.theguardian.com/books/2025/mar/12/jeanette-winterson-ai-alternative-intelligence-its-capacity-to-be-other-is-just-what-the-human-race-needs",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2025-03-12",
-   "route": "curl + browser UA, live"
-  },
-  {
-   "title": "Akutagawa Prize draws controversy after win for work that used ChatGPT",
-   "url": "https://www.japantimes.co.jp/culture/2024/01/19/books/akutagawa-prize-book-chatgpt/",
-   "kind": "reception",
-   "substantive": true,
-   "date": "2024-01-19",
-   "route": "curl + browser UA, live"
-  },
-  {
-   "title": "AI writing results (Mark Lawrence blind test)",
-   "url": "https://www.marklawrence.buzz/2023/09/ai-writing-results.html",
-   "kind": "measurement",
-   "substantive": true,
-   "date": "2023-09-14",
-   "route": "curl + browser UA, live"
-  },
-  {
-   "title": "So ... is AI writing any good? (Mark Lawrence, test setup and all eight pieces)",
-   "url": "https://www.marklawrence.buzz/2023/09/so-is-ai-writing-any-good.html",
-   "kind": "measurement",
-   "substantive": true,
-   "date": "2023-09-13",
-   "route": "curl + browser UA, live"
-  },
-  {
-   "title": "Ghosts (Vauhini Vara)",
-   "url": "https://believermag.com/ghosts/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2021-08-09",
-   "route": "Wayback raw capture 20220512115630id_ (live URL Cloudflare-blocked)"
-  },
-  {
-   "title": "Sudowrite Muse product page",
-   "url": "https://www.sudowrite.com/muse",
-   "kind": "vendor",
-   "substantive": true,
-   "date": "fetched 2026-09-06",
-   "route": "curl + browser UA, live"
-  },
-  {
-   "title": "I Would Rather See My Books Get Pirated Than This",
-   "url": "https://janefriedman.com/i-would-rather-see-my-books-pirated/",
-   "kind": "reader",
-   "substantive": true,
-   "date": "2023-08-07",
-   "route": "curl + browser UA, live"
-  },
-  {
-   "title": "Survey Reveals 90 Percent of Writers Believe Authors Should Be Compensated...",
-   "url": "https://authorsguild.org/news/ai-survey-90-percent-of-writers-believe-authors-should-be-compensated-for-ai-training-use/",
-   "kind": "measurement",
-   "substantive": true,
-   "date": "2023-05-15",
-   "route": "curl + browser UA, live"
-  },
-  {
-   "title": "A Concerning Trend (Neil Clarke)",
-   "url": "https://neil-clarke.com/a-concerning-trend/",
-   "kind": "measurement",
-   "substantive": true,
-   "date": "2023-02-15",
-   "route": "curl + browser UA, live"
-  },
-  {
-   "title": "A sci-fi magazine has cut off submissions after a flood of AI-generated stories",
-   "url": "https://www.npr.org/2023/02/24/1159286436/rise-of-ai-chatbot-programs-has-led-to-flood-of-fake-submissions-to-sci-fi-magazi",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2023-02-24",
-   "route": "curl + browser UA, live"
-  },
-  {
-   "title": "TechScape: How cheap, outsourced labour in Africa is shaping AI English",
-   "url": "https://www.theguardian.com/technology/2024/apr/16/techscape-ai-gadgest-humane-ai-pin-chatgpt",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2024-04-16",
-   "route": "curl + browser UA, live"
-  },
-  {
-   "title": "Customer Experience with AI-Generated Content Within Titles (DriveThruRPG)",
-   "url": "https://help.drivethrurpg.com/hc/en-us/articles/26794784634007-Customer-Experience-with-AI-Generated-Content-Within-Titles",
-   "kind": "vendor",
-   "substantive": true,
-   "date": "2024-10-28",
-   "route": "Wayback raw capture 20251005160536id_ (live Cloudflare-blocked)"
-  },
-  {
-   "title": "DMs Guild and DriveThruRPG ban AI written works (EN World thread quoting Gizmodo)",
-   "url": "https://www.enworld.org/threads/dms-guild-and-drivethrurpg-ban-ai-written-works-requires-labels-for-ai-generated-art.698936/",
-   "kind": "relay",
-   "substantive": true,
-   "date": "2023-07-25",
-   "route": "curl + browser UA, live"
-  },
-  {
-   "title": "How cheap, outsourced labour in Africa is shaping AI English (Simon Willison link blog)",
-   "url": "https://simonwillison.net/2024/Apr/18/delve/",
-   "kind": "relay",
-   "substantive": false,
-   "date": "2024-04-18",
-   "route": "curl + browser UA, live; used only to recover the Guardian URL"
-  },
-  {
-   "title": "AI-generated poetry is indistinguishable from human-written poetry and is rated more favorably",
-   "url": "https://www.nature.com/articles/s41598-024-76900-1",
-   "kind": "measurement",
-   "substantive": true,
-   "date": "2024-11-14",
-   "route": "curl + browser UA, live nature.com"
-  },
-  {
-   "title": "Can Good Writing Be Generative? Expert-Level AI Writing Emerges through Fine-Tuning on High-Quality Books (CHI 2026)",
-   "url": "https://arxiv.org/html/2601.18353v1",
-   "kind": "measurement",
-   "substantive": true,
-   "date": "2026-01-26",
-   "route": "curl + browser UA on the arXiv HTML full text"
-  },
-  {
-   "title": "Readers Prefer Outputs of AI Trained on Copyrighted Books over Expert Human Writers",
-   "url": "https://arxiv.org/abs/2510.13939",
-   "kind": "measurement",
-   "substantive": true,
-   "date": "2026-03-17",
-   "route": "curl on the arXiv abstract page (SSRN Cloudflare-blocked); abstract only"
-  },
-  {
-   "title": "Do readers prefer AI-generated Italian short stories?",
-   "url": "https://arxiv.org/abs/2601.17363v3",
-   "kind": "measurement",
-   "substantive": true,
-   "date": "2026-01-24",
-   "route": "curl on the arXiv abstract page; abstract only"
-  },
-  {
-   "title": "Art or Artifice? Large Language Models and the False Promise of Creativity (CHI 2024)",
-   "url": "https://arxiv.org/abs/2309.14556v3",
-   "kind": "measurement",
-   "substantive": true,
-   "date": "2024-03-08",
-   "route": "curl on the arXiv abstract page; abstract only"
-  },
-  {
-   "title": "Can AI writing be salvaged? Mitigating Idiosyncrasies and Improving Human-AI Alignment (CHI 2025)",
-   "url": "https://arxiv.org/abs/2409.14509v5",
-   "kind": "measurement",
-   "substantive": true,
-   "date": "2025-03-04",
-   "route": "curl on the arXiv abstract page; abstract only"
-  },
-  {
-   "title": "Generative AI enhances individual creativity but reduces the collective diversity of novel content (Science Advances)",
-   "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11244532/fullTextXML",
-   "kind": "measurement",
-   "substantive": true,
-   "date": "2024-07-12",
-   "route": "science.org Cloudflare-blocked; full text via Europe PMC REST fullTextXML for PMC11244532"
-  },
-  {
-   "title": "Editorial and Technical Review of 'Readers Prefer Outputs of AI Trained on Copyrighted Books...' (Zenodo, Zeus Dutta Roy)",
-   "url": "https://zenodo.org/records/19553084",
-   "kind": "analysis",
-   "substantive": false,
-   "date": "2026-04-13",
-   "route": "record page fetched; the PDF download returned 763 bytes and could not be read, so no claim is drawn from it"
-  }
- ],
  "claims": [
   {
    "feature": "counter-evidence",
@@ -328,7 +148,6 @@
    "routeHint": "curl with browser user agent on the live blog URL",
    "registerHint": "chronicle-line",
    "confidence": "medium",
-   "reason": "Lawrence's attribution of the low rating to the archaism instruction is his own inference, not a measured contrast",
    "modelEra": "ChatGPT 4 (paid tier), September 2023; register measured: fantasy flash fiction in a nineteenth-century pastiche register"
   },
   {
@@ -344,7 +163,6 @@
    "routeHint": "curl with browser user agent on the live blog URL; comment sits below the post body",
    "registerHint": "none",
    "confidence": "medium",
-   "reason": "one reader's unaudited pattern claim, not a count by the experimenter",
    "modelEra": "ChatGPT 4, pieces generated September 2023; register measured: fantasy flash fiction"
   },
   {
@@ -555,7 +373,6 @@
    "routeHint": "curl with browser user agent on the live sudowrite.com/muse page",
    "registerHint": "none",
    "confidence": "medium",
-   "reason": "vendor self-assessment with no measurement offered on the page",
    "modelEra": "Sudowrite Muse, vendor page September 2026; register measured: commercial fiction"
   },
   {
@@ -751,7 +568,6 @@
    "routeHint": "curl with browser user agent on the live Guardian URL",
    "registerHint": "none",
    "confidence": "medium",
-   "reason": "Hern cites an unnamed 'another dataset' rather than reporting his own figures",
    "modelEra": "ChatGPT era, April 2024; register measured: general chatbot output"
   },
   {
@@ -842,7 +658,6 @@
    "routeHint": "curl on the live EN World thread; the OneBookShelf policy page itself is unreachable (Cloudflare, no Wayback capture)",
    "registerHint": "dm-page",
    "confidence": "medium",
-   "reason": "a forum post quoting a news site quoting the policy; the policy text was not reachable at its primary",
    "modelEra": "July 2023; register measured: tabletop RPG product text"
   },
   {
@@ -858,7 +673,6 @@
    "routeHint": "curl on the live EN World thread; policy page unreachable at its primary",
    "registerHint": "dm-page",
    "confidence": "medium",
-   "reason": "relay of a relay; the policy page could not be fetched",
    "modelEra": "July 2023; register measured: tabletop RPG product text"
   },
   {
@@ -1084,7 +898,6 @@
    "routeHint": "curl on https://arxiv.org/html/2601.18353v1",
    "registerHint": "none",
    "confidence": "medium",
-   "reason": "the authors hedge this mechanism with the word 'possibly'",
    "modelEra": "GPT-4o fine-tuned per author, January 2026; register measured: literary fiction excerpts"
   },
   {
@@ -1205,7 +1018,6 @@
    "routeHint": "curl on the arXiv abstract page; the SSRN version (Columbia Public Law Research Paper No. 5606570) is behind a Cloudflare interstitial",
    "registerHint": "none",
    "confidence": "medium",
-   "reason": "read at the abstract only; the detector names and thresholds are not on the abstract page",
    "modelEra": "ChatGPT, Claude and Gemini prompted, plus ChatGPT fine-tuned per author; preprint revised March 2026; register measured: up to 450-word literary excerpts"
   },
   {
@@ -1221,7 +1033,6 @@
    "routeHint": "curl on the arXiv abstract page",
    "registerHint": "none",
    "confidence": "medium",
-   "reason": "abstract-only read",
    "modelEra": "ChatGPT fine-tuning, priced as of the October 2025 preprint; register measured: literary excerpts"
   },
   {
@@ -1237,7 +1048,6 @@
    "routeHint": "curl on the arXiv abstract page",
    "registerHint": "none",
    "confidence": "medium",
-   "reason": "abstract-only read",
    "modelEra": "preprint revised March 2026; register measured: literary excerpts"
   },
   {
@@ -1253,7 +1063,6 @@
    "routeHint": "curl on the arXiv abstract page",
    "registerHint": "none",
    "confidence": "medium",
-   "reason": "only 20 participants and three stories; the author calls the differences modest",
    "modelEra": "ChatGPT-4o, study reported January 2026; register measured: Italian-language literary short story"
   },
   {
@@ -1284,7 +1093,6 @@
    "routeHint": "curl on the arXiv abstract page",
    "registerHint": "none",
    "confidence": "medium",
-   "reason": "abstract-only read; the model versions are not named on the abstract page",
    "modelEra": "LLMs of 2023; register measured: New Yorker-length short stories"
   },
   {
@@ -1300,7 +1108,6 @@
    "routeHint": "curl on the arXiv abstract page",
    "registerHint": "none",
    "confidence": "medium",
-   "reason": "abstract-only read",
    "modelEra": "LLMs of 2023; register measured: short stories"
   },
   {
@@ -1316,7 +1123,6 @@
    "routeHint": "curl on the arXiv abstract page",
    "registerHint": "none",
    "confidence": "medium",
-   "reason": "abstract-only read; the seven categories are not enumerated on the abstract page",
    "modelEra": "GPT-4o, Claude 3.5 Sonnet, Llama 3.1 70b, corpus built 2024; register measured: creative-writing paragraphs in several domains"
   },
   {
@@ -1332,7 +1138,6 @@
    "routeHint": "curl on the arXiv abstract page",
    "registerHint": "none",
    "confidence": "medium",
-   "reason": "abstract-only read",
    "modelEra": "GPT-4o, Claude 3.5 Sonnet, Llama 3.1 70b, 2024; register measured: creative-writing paragraphs"
   },
   {
@@ -1348,7 +1153,6 @@
    "routeHint": "curl on the arXiv abstract page",
    "registerHint": "none",
    "confidence": "medium",
-   "reason": "abstract-only read",
    "modelEra": "2024-25; register measured: creative-writing paragraphs"
   },
   {
@@ -1440,6 +1244,186 @@
    "registerHint": "none",
    "confidence": "high",
    "modelEra": "GPT-4, 2023; register measured: short stories, with AI supplying ideas rather than prose"
+  }
+ ],
+ "complete": true,
+ "coverage": "Named roster: all eleven items reached. Fetched at the primary — Winterson (Guardian 12 Mar 2025), Kudan/Qudan (Japan Times 19 Jan 2024, quoting the acceptance speech), Mark Lawrence's two 2023 posts, Sudowrite Muse, Jane Friedman (7 Aug 2023), the Authors Guild survey release (15 May 2023, after the briefed URL 404'd), Clarke's 'A Concerning Trend' (15 Feb 2023, at neil-clarke.com; clarkesworldmagazine.com/clarke_02_23/ serves a different editorial), NPR (24 Feb 2023) and Hern's TechScape (which is dated 16 April 2024, not May). Recovered by ladder — Vara's 'Ghosts' via the Wayback raw capture (Believer live is Cloudflare-blocked); Doshi and Hauser via Europe PMC full-text XML (science.org Cloudflare-blocked); the DriveThruRPG storefront-filter page via Wayback. Not found at the primary — the July 2023 OneBookShelf written-content ban text: help.drivethrurpg.com is Cloudflare-blocked with no Wayback capture of that article, so it is recorded as a relay through EN World quoting Gizmodo, and the only primary DriveThru text reached (Oct 2024) labels artwork only, not AI-written text. Blocked and unread — the SSRN version of the Chakrabarty/Ginsburg/Dhillon paper (arXiv used instead, abstract only) and the Zenodo critique PDF (763-byte download). Expansion: bibliography chasing through the CHI 2026 paper's reference list yielded four further primaries (Art or Artifice, Can AI writing be salvaged, Readers Prefer Outputs of AI Trained on Copyrighted Books, Doshi and Hauser); arXiv API relevance queries yielded two more (the Chakrabarty/Dhillon paper itself and Farrell's Italian study); a lateral route through Simon Willison's link blog recovered the correct Guardian TechScape URL. 20 substantive sources of 22 read: 13 from the named roster and its policy relay, 5 by bibliography chasing through the CHI 2026 reference list, 2 by arXiv API relevance search; the two non-substantive rows are Simon Willison's link blog (used only to recover a URL) and the Zenodo critique whose PDF would not download. The WebSearch budget was exhausted mid-sweep, so the last expansion rounds used the arXiv, OpenAlex and Europe PMC APIs and reference-list chasing instead of open lateral search. Standing gap unchanged: no source read here measured the archival, encyclopedic or civic-record register — every measurement is on lyric poetry, flash or short fiction, literary excerpts of 450 words or less, or biomedical article vocabulary.",
+ "sourcesRead": [
+  {
+   "title": "OpenAI's metafictional short story about grief is beautiful and moving",
+   "url": "https://www.theguardian.com/books/2025/mar/12/jeanette-winterson-ai-alternative-intelligence-its-capacity-to-be-other-is-just-what-the-human-race-needs",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2025-03-12",
+   "route": "curl + browser UA, live"
+  },
+  {
+   "title": "Akutagawa Prize draws controversy after win for work that used ChatGPT",
+   "url": "https://www.japantimes.co.jp/culture/2024/01/19/books/akutagawa-prize-book-chatgpt/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2024-01-19",
+   "route": "curl + browser UA, live"
+  },
+  {
+   "title": "AI writing results (Mark Lawrence blind test)",
+   "url": "https://www.marklawrence.buzz/2023/09/ai-writing-results.html",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2023-09-14",
+   "route": "curl + browser UA, live"
+  },
+  {
+   "title": "So ... is AI writing any good? (Mark Lawrence, test setup and all eight pieces)",
+   "url": "https://www.marklawrence.buzz/2023/09/so-is-ai-writing-any-good.html",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2023-09-13",
+   "route": "curl + browser UA, live"
+  },
+  {
+   "title": "Ghosts (Vauhini Vara)",
+   "url": "https://believermag.com/ghosts/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2021-08-09",
+   "route": "Wayback raw capture 20220512115630id_ (live URL Cloudflare-blocked)"
+  },
+  {
+   "title": "Sudowrite Muse product page",
+   "url": "https://www.sudowrite.com/muse",
+   "kind": "vendor",
+   "substantive": true,
+   "date": "fetched 2026-09-06",
+   "route": "curl + browser UA, live"
+  },
+  {
+   "title": "I Would Rather See My Books Get Pirated Than This",
+   "url": "https://janefriedman.com/i-would-rather-see-my-books-pirated/",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2023-08-07",
+   "route": "curl + browser UA, live"
+  },
+  {
+   "title": "Survey Reveals 90 Percent of Writers Believe Authors Should Be Compensated for the Use of Their Books in Training Generative AI",
+   "url": "https://authorsguild.org/news/ai-survey-90-percent-of-writers-believe-authors-should-be-compensated-for-ai-training-use/",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2023-05-15",
+   "route": "curl + browser UA, live"
+  },
+  {
+   "title": "A Concerning Trend (Neil Clarke)",
+   "url": "https://neil-clarke.com/a-concerning-trend/",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2023-02-15",
+   "route": "curl + browser UA, live"
+  },
+  {
+   "title": "A sci-fi magazine has cut off submissions after a flood of AI-generated stories",
+   "url": "https://www.npr.org/2023/02/24/1159286436/rise-of-ai-chatbot-programs-has-led-to-flood-of-fake-submissions-to-sci-fi-magazi",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2023-02-24",
+   "route": "curl + browser UA, live"
+  },
+  {
+   "title": "TechScape: How cheap, outsourced labour in Africa is shaping AI English",
+   "url": "https://www.theguardian.com/technology/2024/apr/16/techscape-ai-gadgest-humane-ai-pin-chatgpt",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2024-04-16",
+   "route": "curl + browser UA, live"
+  },
+  {
+   "title": "Customer Experience with AI-Generated Content Within Titles (DriveThruRPG)",
+   "url": "https://help.drivethrurpg.com/hc/en-us/articles/26794784634007-Customer-Experience-with-AI-Generated-Content-Within-Titles",
+   "kind": "vendor",
+   "substantive": true,
+   "date": "2024-10-28",
+   "route": "Wayback raw capture 20251005160536id_ (live Cloudflare-blocked)"
+  },
+  {
+   "title": "DMs Guild and DriveThruRPG ban AI written works (EN World thread quoting Gizmodo)",
+   "url": "https://www.enworld.org/threads/dms-guild-and-drivethrurpg-ban-ai-written-works-requires-labels-for-ai-generated-art.698936/",
+   "kind": "relay",
+   "substantive": true,
+   "date": "2023-07-25",
+   "route": "curl + browser UA, live"
+  },
+  {
+   "title": "How cheap, outsourced labour in Africa is shaping AI English (Simon Willison link blog)",
+   "url": "https://simonwillison.net/2024/Apr/18/delve/",
+   "kind": "relay",
+   "substantive": false,
+   "date": "2024-04-18",
+   "route": "curl + browser UA, live; used only to recover the Guardian URL"
+  },
+  {
+   "title": "AI-generated poetry is indistinguishable from human-written poetry and is rated more favorably",
+   "url": "https://www.nature.com/articles/s41598-024-76900-1",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2024-11-14",
+   "route": "curl + browser UA, live nature.com"
+  },
+  {
+   "title": "Can Good Writing Be Generative? Expert-Level AI Writing Emerges through Fine-Tuning on High-Quality Books (CHI 2026)",
+   "url": "https://arxiv.org/html/2601.18353v1",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2026-01-26",
+   "route": "curl + browser UA on the arXiv HTML full text"
+  },
+  {
+   "title": "Readers Prefer Outputs of AI Trained on Copyrighted Books over Expert Human Writers",
+   "url": "https://arxiv.org/abs/2510.13939",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2026-03-17",
+   "route": "curl on the arXiv abstract page (SSRN Cloudflare-blocked); abstract only"
+  },
+  {
+   "title": "Do readers prefer AI-generated Italian short stories?",
+   "url": "https://arxiv.org/abs/2601.17363v3",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2026-01-24",
+   "route": "curl on the arXiv abstract page; abstract only"
+  },
+  {
+   "title": "Art or Artifice? Large Language Models and the False Promise of Creativity (CHI 2024)",
+   "url": "https://arxiv.org/abs/2309.14556v3",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2024-03-08",
+   "route": "curl on the arXiv abstract page; abstract only"
+  },
+  {
+   "title": "Can AI writing be salvaged? Mitigating Idiosyncrasies and Improving Human-AI Alignment (CHI 2025)",
+   "url": "https://arxiv.org/abs/2409.14509v5",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2025-03-04",
+   "route": "curl on the arXiv abstract page; abstract only"
+  },
+  {
+   "title": "Generative AI enhances individual creativity but reduces the collective diversity of novel content (Science Advances)",
+   "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11244532/fullTextXML",
+   "kind": "measurement",
+   "substantive": true,
+   "date": "2024-07-12",
+   "route": "science.org Cloudflare-blocked; full text via Europe PMC REST fullTextXML for PMC11244532"
+  },
+  {
+   "title": "Editorial and Technical Review of 'Readers Prefer Outputs of AI Trained on Copyrighted Books...' (Zenodo, Zeus Dutta Roy)",
+   "url": "https://zenodo.org/records/19553084",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2026-04-13",
+   "route": "record page fetched; the PDF download returned 763 bytes and could not be read, so no claim is drawn from it"
   }
  ]
 }

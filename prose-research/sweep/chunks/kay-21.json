@@ -1,0 +1,158 @@
+{
+ "name": "kay",
+ "chunk": 21,
+ "indices": [
+  315,
+  316,
+  317,
+  318,
+  319,
+  320,
+  321,
+  322,
+  323,
+  324,
+  325,
+  326,
+  327,
+  328,
+  329
+ ],
+ "claims": [
+  {
+   "index": 315,
+   "feature": "humour",
+   "claim": "Whitehead says there is more humour in Written on the Dark than in some of Kay's previous books.",
+   "source": "Adam Whitehead, review of Written on the Dark, The Wertzone, 2025",
+   "url": "https://thewertzone.blogspot.com/2025/06/written-on-dark-by-guy-gavriel-kay.html",
+   "quote": "There is more humour in this book than perhaps some",
+   "page": "body, paragraph beginning 'The traditional strengths of Kay'"
+  },
+  {
+   "index": 316,
+   "feature": "other: flash-forward tells the outcome early",
+   "claim": "Capossere says Kay takes the suspense out of dangerous scenes with a flash-forward so the reader already knows the character survives.",
+   "source": "Bill Capossere, 'All the Seas of the World: A master working at the top of his craft', Fantasy Literature, 2022",
+   "url": "https://fantasyliterature.com/reviews/all-the-seas-of-the-world/",
+   "quote": "the reader knows immediately, or already, that the character will",
+   "page": "body, paragraph beginning 'But Kay more often than not'"
+  },
+  {
+   "index": 317,
+   "feature": "withheld information and inference",
+   "claim": "Capossere says Kay's plot evokes a who-are-they-now response rather than a what-happens-next one.",
+   "source": "Bill Capossere, 'All the Seas of the World: A master working at the top of his craft', Fantasy Literature, 2022",
+   "url": "https://fantasyliterature.com/reviews/all-the-seas-of-the-world/",
+   "quote": "a “who are they now” response",
+   "page": "body, paragraph beginning 'But Kay more often than not'"
+  },
+  {
+   "index": 318,
+   "feature": "omission as information",
+   "claim": "Capossere quotes the novel's narrator saying in a meta-fictional aside that some tales are told and most are not.",
+   "source": "Guy Gavriel Kay's novel All the Seas of the World, quoted by Bill Capossere at Fantasy Literature, 2022",
+   "url": "https://fantasyliterature.com/reviews/all-the-seas-of-the-world/",
+   "quote": "Some tales are told, most are not",
+   "page": "body, paragraph beginning 'In a somewhat similar vein'"
+  },
+  {
+   "index": 319,
+   "feature": "omission as information",
+   "claim": "Capossere says Kay gives the reader more of those untold tales than most authors do.",
+   "source": "Bill Capossere, 'All the Seas of the World: A master working at the top of his craft', Fantasy Literature, 2022",
+   "url": "https://fantasyliterature.com/reviews/all-the-seas-of-the-world/",
+   "quote": "Kay gives us more of those untold tales than most authors",
+   "page": "body, paragraph beginning 'In a somewhat similar vein'"
+  },
+  {
+   "index": 320,
+   "feature": "annalist voice and deep time",
+   "claim": "Capossere says Danio Cerra's older recalling voice layers an aching sense of time's passage over the book's present moments.",
+   "source": "Bill Capossere, 'All the Seas of the World: A master working at the top of his craft', Fantasy Literature, 2022",
+   "url": "https://fantasyliterature.com/reviews/all-the-seas-of-the-world/",
+   "quote": "an aching sense of time’s passage",
+   "page": "body, paragraph beginning 'I could go on rapturously'"
+  },
+  {
+   "index": 321,
+   "feature": "opening sentence",
+   "claim": "Capossere reports that the novel opens with the line about the memory of home being too far away.",
+   "source": "Guy Gavriel Kay's novel All the Seas of the World, quoted by Bill Capossere at Fantasy Literature, 2022",
+   "url": "https://fantasyliterature.com/reviews/all-the-seas-of-the-world/",
+   "quote": "The memory of home can be too far away",
+   "page": "body, paragraph beginning 'Beyond character and plot'"
+  },
+  {
+   "index": 322,
+   "feature": "consequence on a household",
+   "claim": "Capossere names as a Kay-ism a few lines of gentle dignity granted to a character at the moment of death.",
+   "source": "Bill Capossere, 'All the Seas of the World: A master working at the top of his craft', Fantasy Literature, 2022",
+   "url": "https://fantasyliterature.com/reviews/all-the-seas-of-the-world/",
+   "quote": "a few lines of gentle dignity, of respect accorded by the",
+   "page": "body, paragraph beginning 'But Kay also is quick to show'"
+  },
+  {
+   "index": 323,
+   "feature": "withheld information and inference",
+   "claim": "Capossere says Kay drops many seeds into the text to prepare the reader for what is to come.",
+   "source": "Bill Capossere, 'All the Seas of the World: A master working at the top of his craft', Fantasy Literature, 2022",
+   "url": "https://fantasyliterature.com/reviews/all-the-seas-of-the-world/",
+   "quote": "so many seeds to carefully prepare us for what’s to come",
+   "page": "body, paragraph beginning 'Finally, the craft is'"
+  },
+  {
+   "index": 324,
+   "feature": "repetition and refrain",
+   "claim": "Capossere says characters or the narrator reflect repeatedly on how easily one could die.",
+   "source": "Bill Capossere, 'All the Seas of the World: A master working at the top of his craft', Fantasy Literature, 2022",
+   "url": "https://fantasyliterature.com/reviews/all-the-seas-of-the-world/",
+   "quote": "Repeatedly characters (or the narrator) reflect on how",
+   "page": "body, paragraph beginning 'The world Kay creates'"
+  },
+  {
+   "index": 325,
+   "feature": "plainness and economy",
+   "claim": "Capossere says some of Kay's characters are given just two or three paragraphs and are still richly drawn.",
+   "source": "Bill Capossere, 'All the Seas of the World: A master working at the top of his craft', Fantasy Literature, 2022",
+   "url": "https://fantasyliterature.com/reviews/all-the-seas-of-the-world/",
+   "quote": "are given just two or three paragraphs",
+   "page": "body, paragraph beginning 'What I'm trying to say here'"
+  },
+  {
+   "index": 326,
+   "feature": "other: structure and shape",
+   "claim": "Capossere says the novel is meticulously crafted in structure, pace, language and dialogue.",
+   "source": "Bill Capossere, 'All the Seas of the World: A master working at the top of his craft', Fantasy Literature, 2022",
+   "url": "https://fantasyliterature.com/reviews/all-the-seas-of-the-world/",
+   "quote": "meticulously crafted in structure, pace, language, dialogue",
+   "page": "body, final paragraph"
+  },
+  {
+   "index": 327,
+   "feature": "omission as information",
+   "claim": "A reader commenting on the review says she found Tigana on the whole to be telling rather than showing.",
+   "source": "'Ilana', reader comment on Bill Capossere's Fantasy Literature review, 2022-04-19",
+   "url": "https://fantasyliterature.com/reviews/all-the-seas-of-the-world/",
+   "quote": "I found it on the whole to be telling rather than",
+   "page": "comments, 'Ilana', 2022-04-19"
+  },
+  {
+   "index": 328,
+   "feature": "register modulation",
+   "claim": "Ruffolo says All the Seas of the World takes in places a more explicit storytelling tone than he expects from Kay.",
+   "source": "Dan Ruffolo, review of All the Seas of the World, Strange Currencies, 2022",
+   "url": "https://strangecurrencies.org/2022/06/07/review-of-all-the-seas-of-the-world-by-guy-gavriel-kay/",
+   "quote": "a more explicit storytelling tone than I’ve come to expect",
+   "page": "body, first paragraph"
+  },
+  {
+   "index": 329,
+   "feature": "annalist voice and deep time",
+   "claim": "Ruffolo says the narration lets the reader know the impacts the characters had and the lives they touched.",
+   "source": "Dan Ruffolo, review of All the Seas of the World, Strange Currencies, 2022",
+   "url": "https://strangecurrencies.org/2022/06/07/review-of-all-the-seas-of-the-world-by-guy-gavriel-kay/",
+   "quote": "we can know through the narration, of the impacts they had",
+   "page": "body, paragraph beginning 'This theme feels especially important'"
+  }
+ ]
+}

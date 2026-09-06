@@ -1,0 +1,158 @@
+{
+ "name": "ai",
+ "chunk": 28,
+ "indices": [
+  674,
+  675,
+  676,
+  677,
+  678,
+  679,
+  680,
+  681,
+  682,
+  683,
+  684,
+  685,
+  686,
+  687,
+  688
+ ],
+ "claims": [
+  {
+   "index": 674,
+   "feature": "abstraction over the concrete",
+   "claim": "Guo says his own defence against AI slop is to cultivate specificity, writing things rooted in particular knowledge and tangible experience, which he says AI still struggles to replicate convincingly.",
+   "source": "Charlie Guo, Artificial Ignorance newsletter, 22 October 2025",
+   "url": "https://www.ignorance.ai/p/the-field-guide-to-ai-slop",
+   "quote": "to write things rooted in particular knowledge and tangible experience",
+   "page": "closing section \"Articulate Architecture\""
+  },
+  {
+   "index": 675,
+   "feature": "model era drift",
+   "claim": "Guo reports anecdotally that GPT-4o produces emoji-led bullet lists more than its predecessors and, anecdotally, more than GPT-5, and that he rarely sees Claude do it.",
+   "source": "Charlie Guo, Artificial Ignorance newsletter, 22 October 2025",
+   "url": "https://www.ignorance.ai/p/the-field-guide-to-ai-slop",
+   "quote": "GPT-4o does this more than its predecessors",
+   "page": "section \"Lists (And Emojis)\""
+  },
+  {
+   "index": 676,
+   "feature": "reader and expert judgment",
+   "claim": "Scalzi wrote in February 2023 that the AI-generated stories then flooding science fiction magazines are kinda trash.",
+   "source": "John Scalzi, novelist, Whatever, 23 February 2023",
+   "url": "https://whatever.scalzi.com/2023/02/23/omg-is-the-ai-coming-for-my-job/",
+   "quote": "all these generated stories are kinda trash",
+   "page": "opening paragraph"
+  },
+  {
+   "index": 677,
+   "feature": "homogenisation",
+   "claim": "Scalzi argues that a single prompter sees one output and may find it original, but an editor sees the current AI tropes dozens of times with each new iteration of the generators.",
+   "source": "John Scalzi, novelist, Whatever, 23 February 2023",
+   "url": "https://whatever.scalzi.com/2023/02/23/omg-is-the-ai-coming-for-my-job/",
+   "quote": "see the current AI tropes dozens of times",
+   "page": "para. beginning \"If this is indeed mostly scamsters\""
+  },
+  {
+   "index": 678,
+   "feature": "homogenisation",
+   "claim": "Scalzi argues that leaving prose quality aside, the sheer repetition of elements across generated submissions is by itself enough to remove the material from serious editorial consideration.",
+   "source": "John Scalzi, novelist, Whatever, 23 February 2023",
+   "url": "https://whatever.scalzi.com/2023/02/23/omg-is-the-ai-coming-for-my-job/",
+   "quote": "the sheer repetition of elements will remove the material from serious consideration",
+   "page": "para. beginning \"If this is indeed mostly scamsters\""
+  },
+  {
+   "index": 679,
+   "feature": "other: surface polish with nothing underneath",
+   "claim": "Scalzi describes AI as a fast, infinite generator of competently-assembled bullshit with no ability to tell truth from nonsense.",
+   "source": "John Scalzi, novelist, Whatever, 23 February 2023",
+   "url": "https://whatever.scalzi.com/2023/02/23/omg-is-the-ai-coming-for-my-job/",
+   "quote": "a fast, infinite generator of competently-assembled bullshit",
+   "page": "para. beginning \"But, as it happens, I agree with the text here\""
+  },
+  {
+   "index": 680,
+   "feature": "other: surface polish with nothing underneath",
+   "claim": "Scalzi frames the gap as one between text that is serviceable on the sentence level and text that is actually good, and says closing it takes so much human work that skipping the generation step would be less work.",
+   "source": "John Scalzi, novelist, Whatever, 23 February 2023",
+   "url": "https://whatever.scalzi.com/2023/02/23/omg-is-the-ai-coming-for-my-job/",
+   "quote": "serviceable on the sentence level",
+   "page": "para. beginning \"This estimation, mind you\""
+  },
+  {
+   "index": 681,
+   "feature": "reader and expert judgment",
+   "claim": "Scalzi states in February 2026 that he does not use AI in his published text partly because he writes better than AI can or ever will.",
+   "source": "John Scalzi, novelist, Whatever, 14 February 2026",
+   "url": "https://whatever.scalzi.com/2026/02/14/10-thoughts-on-ai-february-2026-edition/",
+   "quote": "I write better than",
+   "page": "numbered point 1"
+  },
+  {
+   "index": 682,
+   "feature": "reader and expert judgment",
+   "claim": "Scalzi asserts in February 2026 that there is no statistical model that can create what is uniquely you.",
+   "source": "John Scalzi, novelist, Whatever, 14 February 2026",
+   "url": "https://whatever.scalzi.com/2026/02/14/10-thoughts-on-ai-february-2026-edition/",
+   "quote": "There is no statistical model that can create what is uniquely you",
+   "page": "numbered point 10, final line before the '- JS' sign-off"
+  },
+  {
+   "index": 683,
+   "feature": "model era drift",
+   "claim": "A commenter using the name Fatman argues on Scalzi's blog that although LLMs have improved considerably at pattern-recognition tasks, more powerful software has so far not led to better machine-generated fiction.",
+   "source": "'Fatman', a reader commenting on John Scalzi's Whatever, 15 February 2026",
+   "url": "https://whatever.scalzi.com/2026/02/14/10-thoughts-on-ai-february-2026-edition/",
+   "quote": "more powerful software has so far not led to better machine-generated fiction",
+   "page": "comment thread, comment by Fatman timestamped February 15, 2026, 9:50 am"
+  },
+  {
+   "index": 684,
+   "feature": "counter-evidence",
+   "claim": "A commenter using the name Quill argues on Scalzi's blog that AI will be better at writing than Scalzi within roughly two to seven years.",
+   "source": "'Quill', a reader commenting on John Scalzi's Whatever, quoted by another commenter, February 2026",
+   "url": "https://whatever.scalzi.com/2026/02/14/10-thoughts-on-ai-february-2026-edition/",
+   "quote": "AI will be better at writing than you are",
+   "page": "comment thread, quoted by Fatman on February 15, 2026"
+  },
+  {
+   "index": 685,
+   "feature": "other: surface polish with nothing underneath",
+   "claim": "Wendig argues that a generative model does not conjure an answer but an answer-shaped thing, filling the space with the shape of what was asked for.",
+   "source": "Chuck Wendig, novelist, Terribleminds, 21 May 2025",
+   "url": "https://terribleminds.com/ramble/2025/05/21/repeat-after-me-ai-doesnt-know-anything/",
+   "quote": "It will conjure not an answer, but an answer-shaped thing",
+   "page": "section beginning \"AI doesn't know anything\""
+  },
+  {
+   "index": 686,
+   "feature": "other: surface polish with nothing underneath",
+   "claim": "Wendig calls generative AI almost literally a super-fancy lorum ipsum generator.",
+   "source": "Chuck Wendig, novelist, Terribleminds, 21 May 2025",
+   "url": "https://terribleminds.com/ramble/2025/05/21/repeat-after-me-ai-doesnt-know-anything/",
+   "quote": "a super-fancy lorum ipsum generator",
+   "page": "section beginning \"AI doesn't know anything\""
+  },
+  {
+   "index": 687,
+   "feature": "reader and expert judgment",
+   "claim": "A commenter using the name bluespiderwort writes on Wendig's post that AI paragraphs have words, sometimes big words, and lots of sentences, but frequently say nothing.",
+   "source": "'bluespiderwort', a reader commenting on Chuck Wendig's Terribleminds, 21 May 2025",
+   "url": "https://terribleminds.com/ramble/2025/05/21/repeat-after-me-ai-doesnt-know-anything/",
+   "quote": "The paragraphs have words, sometimes big words",
+   "page": "comment thread below the post"
+  },
+  {
+   "index": 688,
+   "feature": "other: no model of what the draft is doing",
+   "claim": "Sloan reports that when he tried to make Google's Wordcraft AI play detective in a locked-room mystery it had no idea what was happening a few paragraphs in.",
+   "source": "Robin Sloan, novelist, newsletter, November 2022",
+   "url": "https://www.robinsloan.com/newsletters/authors-note/",
+   "quote": "it had no idea what was happening",
+   "page": "section \"Notes on writing with Google's AI\""
+  }
+ ]
+}

@@ -1,288 +1,4 @@
 {
- "complete": true,
- "coverage": "Angle named categories rather than URLs, so the roster was read as: Hobb's own craft essays/interviews/blog (FETCHED, 16 items: OF Blog 2003, Locus 1998 and 2005, Pat's Fantasy Hotlist 2005, SFFWorld 2005, Aidan Moher 2007, Fantasy Book Critic 2008, Lightspeed/Geek's Guide 2012, Writing Excuses 11.Bonus-01 2016 fan transcript, Paw Print 2020, robinhobb.com 'As You Intend To Be' 2020 and 'What Works For Me' 2022 and 'How to Write a Book' 2022, Syl R. Martin 2023, Dragonsteel 2024, LisiPieces 2025, plus 'The Fan Fiction Rant' recovered from Wayback after removal from the live site); critics and close readers on register and pacing (FETCHED: Geoffrey B. Elliott's chapter-by-chapter reread entries 1 and 226, five Vacuous Wastrel reviews, The Idle Woman, Lisa Goldstein in Strange Horizons); craft essays and writing-advice pieces by novelists and craft sites (FETCHED: M Harold Page in Black Gate 2016, Jeffrey Outcalt's Substack epigraph essay 2024, Christopher Luke Dean at Writers Write 2020); editors (FETCHED: Anne Groell, Hobb's Random House editor, interviewed by Julie Crisp 2016, but she discusses her editing method and not Hobb's prose); game designers (NOT FOUND as a substantive category: the nearest is an unsigned, apparently machine-compiled article on rpgstorytellers.com, logged at low confidence; four searches aimed at RPG and game-design writing on Hobb surfaced only wikis, forum recommendation threads and generic DM advice). BLOCKED and recovered: aidanmoher.com refused WebFetch with HTTP 403 and yielded to curl with a browser user agent; the Mythlore PDF of Matthew Oliver's 'History in the Margins' refused a direct fetch with HTTP 403 and was recovered from a Wayback raw capture and parsed with pdfminer; fanlore.org returned HTTP 403 and was bypassed by going to the primary. Substantive sources per route: named-roster/direct search 22; bibliography chasing 3 (Oliver via Elliott's Fedwren Project, which also surfaced Ekman and Taylor 2021 and Mandala 2010, not pursued as they fall to the academic angle); lateral search 5. WebFetch was not used for any claim: it returned summaries rather than page text and once mis-attributed a page, so every source was read raw via curl with a browser user agent and stripped to text locally, and every quotation was string-searched against that text before being written. 35 sources logged, 30 substantive, 127 claims.",
- "sourcesRead": [
-  {
-   "title": "Robin Hobb Interview (Other Fantasy / OF Blog, Larry Nolen)",
-   "url": "http://ofblog.blogspot.com/2003/04/robin-hobb-interview.html",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2003-04-28",
-   "route": "curl browser-UA on live URL"
-  },
-  {
-   "title": "Interview | Robin Hobb (A Dribble of Ink, Aidan Moher)",
-   "url": "https://aidanmoher.com/blog/2007/06/interviews/interview-robin-hobb/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2007-06-23",
-   "route": "WebFetch 403; curl browser-UA succeeded"
-  },
-  {
-   "title": "Robin Hobb: More Questions Than Answers (Locus, interview excerpts)",
-   "url": "https://www.locusmag.com/2005/Issues/12Hobb.html",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2005-12",
-   "route": "curl browser-UA on live URL"
-  },
-  {
-   "title": "Robin Hobb: Behind the Scenes (Locus, January 1998 excerpts)",
-   "url": "https://www.locusmag.com/1998/Issues/01/Hobb.html",
-   "kind": "own-words",
-   "substantive": false,
-   "date": "1998-01",
-   "route": "curl browser-UA on live URL"
-  },
-  {
-   "title": "Interview with Robin Hobb (Fantasy Book Critic, Robert Thompson)",
-   "url": "https://fantasybookcritic.blogspot.com/2008/01/interview-with-robin-hobb.html",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2008-01",
-   "route": "curl browser-UA on live URL"
-  },
-  {
-   "title": "Robin Hobb Interview (Pat's Fantasy Hotlist, Patrick St-Denis)",
-   "url": "http://fantasyhotlist.blogspot.com/2005/07/robin-hobb-interview.html",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2005-07-11",
-   "route": "curl browser-UA on live URL"
-  },
-  {
-   "title": "Writing Excuses 11.Bonus-01: Characterization and Differentiation, With Robin Hobb (fan transcript)",
-   "url": "https://wetranscripts.livejournal.com/121439.html",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2016-10-12",
-   "route": "curl browser-UA on live URL"
-  },
-  {
-   "title": "A Robin Hobb Rereading Series-Entry 1: Assassin's Apprentice, Chapter 1 (Geoffrey B. Elliott)",
-   "url": "https://elliottrwi.com/2019/05/24/a-robin-hobb-rereading-series-entry-1-assassins-apprentice-chapter-1/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2019-05-24",
-   "route": "curl browser-UA on live URL"
-  },
-  {
-   "title": "A Robin Hobb Rereading Series: Entry 226: Fool's Errand, Chapter 6 (Geoffrey B. Elliott)",
-   "url": "https://elliottrwi.com/2021/09/10/a-robin-hobb-rereading-series-entry-226-fools-errand-chapter-6/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2021-09-10",
-   "route": "curl browser-UA on live URL"
-  },
-  {
-   "title": "The Golden Fool, by Robin Hobb (Vacuous Wastrel)",
-   "url": "https://vacuouswastrel.wordpress.com/2013/02/04/the-golden-fool-by-robin-hobb/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2013-02-04",
-   "route": "curl browser-UA on live URL"
-  },
-  {
-   "title": "Fool's Quest, by Robin Hobb (Vacuous Wastrel)",
-   "url": "https://vacuouswastrel.wordpress.com/2015/11/27/fools-quest-by-robin-hobb/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2015-11-27",
-   "route": "curl browser-UA on live URL"
-  },
-  {
-   "title": "Dragon Keeper, by Robin Hobb (Vacuous Wastrel)",
-   "url": "https://vacuouswastrel.wordpress.com/2014/04/13/dragon-keeper-by-robin-hobb/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2014-04-13",
-   "route": "curl browser-UA on live URL"
-  },
-  {
-   "title": "Fool's Fate, by Robin Hobb (Vacuous Wastrel)",
-   "url": "https://vacuouswastrel.wordpress.com/2013/11/11/fools-fate-by-robin-hobb/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2013-11-11",
-   "route": "curl browser-UA on live URL"
-  },
-  {
-   "title": "The Greatest Fictional World Builders: Robin Hobb (Writers Write, Christopher Luke Dean)",
-   "url": "https://www.writerswrite.co.za/the-greatest-fictional-world-builders-robin-hobb/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2020-02-12",
-   "route": "curl browser-UA on live URL"
-  },
-  {
-   "title": "How to Write a Book When You Don't Have Time to Write (Robin Hobb's blog)",
-   "url": "https://www.robinhobb.com/blog/posts/41755",
-   "kind": "own-words",
-   "substantive": false,
-   "date": "2022-11-03",
-   "route": "curl browser-UA on live URL"
-  },
-  {
-   "title": "On the use of epigraphs and metanarratives in Robin Hobb's 'Assassin's Apprentice' (Jeffrey Outcalt, Substack)",
-   "url": "https://jeffreydavidoutcalt.substack.com/p/on-the-use-of-epigraphs-and-metanarratives",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2024-07-02",
-   "route": "curl browser-UA on live URL"
-  },
-  {
-   "title": "Fool's Assassin: How Robin Hobb Writes Lyrical Fantasy Without Being Boring (M Harold Page, Black Gate)",
-   "url": "https://www.blackgate.com/2016/02/09/fools-assassin-how-robin-hobb-writes-lyrical-fantasy-without-being-boring/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2016-02-09",
-   "route": "curl browser-UA on live URL"
-  },
-  {
-   "title": "Interview: Robin Hobb (Lightspeed Magazine / The Geek's Guide to the Galaxy)",
-   "url": "https://www.lightspeedmagazine.com/nonfiction/interview-robin-hobb/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2012-04",
-   "route": "curl browser-UA on live URL"
-  },
-  {
-   "title": "Robin Hobb's Writing Advice: 3 Tips for Crafting Your Villian (Tayan Hatch, Dragonsteel Books)",
-   "url": "https://www.dragonsteelbooks.com/blogs/the-cognitive-realm/robin-hobb-writing-villians",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2024-12-19",
-   "route": "curl browser-UA on live URL"
-  },
-  {
-   "title": "As You Intend To Be (Robin Hobb's Infrequent and Off Topic Blog)",
-   "url": "https://www.robinhobb.com/blog/posts/36450",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2020-05-21",
-   "route": "curl browser-UA on live URL"
-  },
-  {
-   "title": "The Assassin's Canvas: A Comprehensive Analysis... (unsigned article, rpgstorytellers.com)",
-   "url": "https://rpgstorytellers.com/the-assassins-canvas-a-comprehensive-analysis-of-narrative-interiority-magic-systems-and-cultural-anthropology-in-robin-hobbs-farseer-trilogy/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2026-01-13",
-   "route": "curl browser-UA on live URL"
-  },
-  {
-   "title": "June Author Crush: Robin Hobb... is a Master Worldbuilder (Rachel Carter, BookTrib)",
-   "url": "https://booktrib.com/2017/06/15/june-author-crush-robin-hobb-worldbuilder/",
-   "kind": "reception",
-   "substantive": false,
-   "date": "2017-06-15",
-   "route": "curl browser-UA on live URL"
-  },
-  {
-   "title": "History in the Margins: Epigraphs and Negative Space in Robin Hobb's Assassin's Apprentice (Matthew Oliver, Mythlore 41.1)",
-   "url": "https://dc.swosu.edu/mythlore/vol41/iss1/4/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2022-10",
-   "route": "Wayback raw PDF capture (live PDF 403), pdfminer extraction"
-  },
-  {
-   "title": "The Fedwren Project: A Robin Hobb Annotated Bibliography (Geoffrey B. Elliott)",
-   "url": "https://elliottrwi.com/research/hobb-bibliography/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "accessed 2026-09-06",
-   "route": "curl browser-UA on live URL; used for bibliography chasing"
-  },
-  {
-   "title": "Interviewing Robin Hobb, Epic-Fantasy Best-Selling Author (Syl R. Martin)",
-   "url": "https://sylrmartin.com/portfolio/interviewing-robin-hobb-epic-fantasy-best-selling-author/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2023-05-19",
-   "route": "curl browser-UA on live URL"
-  },
-  {
-   "title": "An Interview with Robin Hobb: Character Writing (Madalen Erez, Paw Print)",
-   "url": "https://cscsnews.com/744/literary-arts/an-interview-with-robin-hobb-character-writing/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2020-11-19",
-   "route": "curl browser-UA on live URL"
-  },
-  {
-   "title": "My Reddit 'AMA' Q&A with Robin Hobb Is On Today! (Helen Lowe)",
-   "url": "https://helenlowe.info/blog/2012/05/17/my-reddit-ama-qa-with-robin-hobb-is-on-today/",
-   "kind": "reception",
-   "substantive": false,
-   "date": "2012-05-17",
-   "route": "curl browser-UA on live URL"
-  },
-  {
-   "title": "Interview with Robin Hobb (Rob Bedford, SFFWorld)",
-   "url": "https://www.sffworld.com/2005/09/interview-with-robin-hobb/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2005-09-01",
-   "route": "curl browser-UA on live URL"
-  },
-  {
-   "title": "What Works For Me (Robin Hobb's Infrequent and Off Topic Blog)",
-   "url": "https://www.robinhobb.com/blog/posts/40869",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2022-05-20",
-   "route": "curl browser-UA on live URL"
-  },
-  {
-   "title": "A Day in the Life of an Editor - with Anne Groell (Julie Crisp)",
-   "url": "http://www.juliecrisp.co.uk/blog-1/2016/1/4/a-day-in-the-life-of-an-editor-with-anne-groell",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2016-01-04",
-   "route": "curl browser-UA on live URL"
-  },
-  {
-   "title": "Ship of Magic (1998): Robin Hobb (The Idle Woman)",
-   "url": "https://theidlewoman.net/2013/05/05/ship-of-magic-robin-hobb/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2013-05-05",
-   "route": "curl browser-UA on live URL"
-  },
-  {
-   "title": "Dragon Haven by Robin Hobb (Lisa Goldstein, Strange Horizons)",
-   "url": "http://strangehorizons.com/non-fiction/reviews/dragon-haven-by-robin-hobb/",
-   "kind": "reception",
-   "substantive": true,
-   "date": "2010-05-10",
-   "route": "curl browser-UA on live URL"
-  },
-  {
-   "title": "The Fan Fiction Rant (Robin Hobb, robinhobb.com, captured 30 June 2005)",
-   "url": "https://web.archive.org/web/20050630015105id_/http://www.robinhobb.com/rant.html",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "captured 2005-06-30",
-   "route": "Wayback raw capture of a page since removed from the live site"
-  },
-  {
-   "title": "Robin Hobb Isn't Writing Back Anymore (Elise Mead, LisiPieces)",
-   "url": "https://www.lisipieces.com/robin-hobb-isnt-writing-back-anymore/",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2025-10-18",
-   "route": "curl browser-UA on live URL"
-  },
-  {
-   "title": "Blogging rant (robinhobb.com/rant.html, captured 7 January 2009)",
-   "url": "https://web.archive.org/web/20090107003409id_/http://robinhobb.com/rant.html",
-   "kind": "own-words",
-   "substantive": false,
-   "date": "captured 2009-01-07",
-   "route": "Wayback raw capture; the later occupant of the same URL, an anti-blogging piece, not craft"
-  }
- ],
  "claims": [
   {
    "feature": "plainness and economy",
@@ -434,7 +150,7 @@
    "kind": "own-words",
    "polarity": "asserts",
    "date": "2007-06-23",
-   "routeHint": "WebFetch returned HTTP 403; curl with browser user agent returned the page",
+   "routeHint": "WebFetch returned HTTP 403; curl with a browser user agent returned the page",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -1344,161 +1060,161 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2022-10",
-   "routeHint": "live PDF at dc.swosu.edu returned HTTP 403; fetched the Wayback raw capture https://web.archive.org/web/20240707045408id_/https://dc.swosu.edu/cgi/viewcontent.cgi?article=3044&context=mythlore and extracted text with pdfminer; quotations verified against the whitespace-normalised extraction",
+   "routeHint": "Wayback raw PDF capture (live PDF 403), pdfminer extraction, whitespace-normalised",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
   {
    "feature": "civic record register",
    "claim": "Oliver says the first chapter's epigraph opens with the authoritative voice of History establishing a clear centre to its narrative.",
-   "source": "Matthew Oliver, 'History in the Margins: Epigraphs and Negative Space in Robin Hobb's Assassin's Apprentice', Mythlore 41.1 (2022), pp. 45-66",
+   "source": "Matthew Oliver, Mythlore 41.1 (2022)",
    "url": "https://dc.swosu.edu/mythlore/vol41/iss1/4/",
    "quote": "opens with the authoritative voice of History",
    "page": "p. 53",
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2022-10",
-   "routeHint": "live PDF at dc.swosu.edu returned HTTP 403; fetched the Wayback raw capture https://web.archive.org/web/20240707045408id_/https://dc.swosu.edu/cgi/viewcontent.cgi?article=3044&context=mythlore and extracted text with pdfminer; quotations verified against the whitespace-normalised extraction",
+   "routeHint": "Wayback raw PDF capture (live PDF 403), pdfminer extraction, whitespace-normalised",
    "registerHint": "chronicle-line",
    "confidence": "high"
   },
   {
    "feature": "civic record register",
    "claim": "Oliver observes that the chapter thirteen epigraph on Patience includes evidentiary quotes from her nursemaids and publicly available information rather than the author's own experience of her.",
-   "source": "Matthew Oliver, 'History in the Margins: Epigraphs and Negative Space in Robin Hobb's Assassin's Apprentice', Mythlore 41.1 (2022), pp. 45-66",
+   "source": "Matthew Oliver, Mythlore 41.1 (2022)",
    "url": "https://dc.swosu.edu/mythlore/vol41/iss1/4/",
    "quote": "he includes evidentiary quotes from her nursemaids and publicly available information",
    "page": "p. 56",
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2022-10",
-   "routeHint": "live PDF at dc.swosu.edu returned HTTP 403; fetched the Wayback raw capture https://web.archive.org/web/20240707045408id_/https://dc.swosu.edu/cgi/viewcontent.cgi?article=3044&context=mythlore and extracted text with pdfminer; quotations verified against the whitespace-normalised extraction",
+   "routeHint": "Wayback raw PDF capture (live PDF 403), pdfminer extraction, whitespace-normalised",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
   {
    "feature": "civic record register",
    "claim": "Oliver calls the history that opens the Patience chapter dry, impersonal, but objective, and judges the personal main text more authoritative and satisfying.",
-   "source": "Matthew Oliver, 'History in the Margins: Epigraphs and Negative Space in Robin Hobb's Assassin's Apprentice', Mythlore 41.1 (2022), pp. 45-66",
+   "source": "Matthew Oliver, Mythlore 41.1 (2022)",
    "url": "https://dc.swosu.edu/mythlore/vol41/iss1/4/",
    "quote": "the dry, impersonal, but objective history beginning the chapter",
    "page": "p. 56",
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2022-10",
-   "routeHint": "live PDF at dc.swosu.edu returned HTTP 403; fetched the Wayback raw capture https://web.archive.org/web/20240707045408id_/https://dc.swosu.edu/cgi/viewcontent.cgi?article=3044&context=mythlore and extracted text with pdfminer; quotations verified against the whitespace-normalised extraction",
+   "routeHint": "Wayback raw PDF capture (live PDF 403), pdfminer extraction, whitespace-normalised",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
   {
    "feature": "omission as information",
    "claim": "Oliver names Hobb's most striking stylistic element negative narration: describing what is not happening instead of or before what is happening.",
-   "source": "Matthew Oliver, 'History in the Margins: Epigraphs and Negative Space in Robin Hobb's Assassin's Apprentice', Mythlore 41.1 (2022), pp. 45-66",
+   "source": "Matthew Oliver, Mythlore 41.1 (2022)",
    "url": "https://dc.swosu.edu/mythlore/vol41/iss1/4/",
    "quote": "describing what is not happening instead of or before describing",
    "page": "p. 57",
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2022-10",
-   "routeHint": "live PDF at dc.swosu.edu returned HTTP 403; fetched the Wayback raw capture https://web.archive.org/web/20240707045408id_/https://dc.swosu.edu/cgi/viewcontent.cgi?article=3044&context=mythlore and extracted text with pdfminer; quotations verified against the whitespace-normalised extraction",
+   "routeHint": "Wayback raw PDF capture (live PDF 403), pdfminer extraction, whitespace-normalised",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
   {
    "feature": "omission as information",
    "claim": "Oliver says the negative narration shows up in sentences that start by telling what a character is not doing or feeling.",
-   "source": "Matthew Oliver, 'History in the Margins: Epigraphs and Negative Space in Robin Hobb's Assassin's Apprentice', Mythlore 41.1 (2022), pp. 45-66",
+   "source": "Matthew Oliver, Mythlore 41.1 (2022)",
    "url": "https://dc.swosu.edu/mythlore/vol41/iss1/4/",
    "quote": "sentences that start by telling what a character is not doing",
    "page": "p. 57",
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2022-10",
-   "routeHint": "live PDF at dc.swosu.edu returned HTTP 403; fetched the Wayback raw capture https://web.archive.org/web/20240707045408id_/https://dc.swosu.edu/cgi/viewcontent.cgi?article=3044&context=mythlore and extracted text with pdfminer; quotations verified against the whitespace-normalised extraction",
+   "routeHint": "Wayback raw PDF capture (live PDF 403), pdfminer extraction, whitespace-normalised",
    "registerHint": "none",
    "confidence": "high"
   },
   {
    "feature": "withheld information and inference",
    "claim": "Oliver says the novel constantly focuses on what is not happening or not present in order to define what is happening.",
-   "source": "Matthew Oliver, 'History in the Margins: Epigraphs and Negative Space in Robin Hobb's Assassin's Apprentice', Mythlore 41.1 (2022), pp. 45-66",
+   "source": "Matthew Oliver, Mythlore 41.1 (2022)",
    "url": "https://dc.swosu.edu/mythlore/vol41/iss1/4/",
    "quote": "focuses on what is not happening or what is not present",
    "page": "p. 45",
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2022-10",
-   "routeHint": "live PDF at dc.swosu.edu returned HTTP 403; fetched the Wayback raw capture https://web.archive.org/web/20240707045408id_/https://dc.swosu.edu/cgi/viewcontent.cgi?article=3044&context=mythlore and extracted text with pdfminer; quotations verified against the whitespace-normalised extraction",
+   "routeHint": "Wayback raw PDF capture (live PDF 403), pdfminer extraction, whitespace-normalised",
    "registerHint": "none",
    "confidence": "high"
   },
   {
    "feature": "omission as information",
    "claim": "Oliver argues that only through absences and the things that did not happen can the reader apprehend what did happen.",
-   "source": "Matthew Oliver, 'History in the Margins: Epigraphs and Negative Space in Robin Hobb's Assassin's Apprentice', Mythlore 41.1 (2022), pp. 45-66",
+   "source": "Matthew Oliver, Mythlore 41.1 (2022)",
    "url": "https://dc.swosu.edu/mythlore/vol41/iss1/4/",
    "quote": "Only through absences, the negative spaces, the things that did not happen",
    "page": "p. 47",
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2022-10",
-   "routeHint": "live PDF at dc.swosu.edu returned HTTP 403; fetched the Wayback raw capture https://web.archive.org/web/20240707045408id_/https://dc.swosu.edu/cgi/viewcontent.cgi?article=3044&context=mythlore and extracted text with pdfminer; quotations verified against the whitespace-normalised extraction",
+   "routeHint": "Wayback raw PDF capture (live PDF 403), pdfminer extraction, whitespace-normalised",
    "registerHint": "none",
    "confidence": "high"
   },
   {
    "feature": "omission as information",
-   "claim": "Oliver identifies a roughly seventy-page stretch of the novel as a lengthy portion of the narrative given over to describing what is not there.",
-   "source": "Matthew Oliver, 'History in the Margins: Epigraphs and Negative Space in Robin Hobb's Assassin's Apprentice', Mythlore 41.1 (2022), pp. 45-66",
+   "claim": "Oliver identifies a roughly seventy-page stretch of the novel as narrative given over to describing what is not there.",
+   "source": "Matthew Oliver, Mythlore 41.1 (2022)",
    "url": "https://dc.swosu.edu/mythlore/vol41/iss1/4/",
    "quote": "the narrative given over to describing what is not there",
    "page": "p. 61",
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2022-10",
-   "routeHint": "live PDF at dc.swosu.edu returned HTTP 403; fetched the Wayback raw capture https://web.archive.org/web/20240707045408id_/https://dc.swosu.edu/cgi/viewcontent.cgi?article=3044&context=mythlore and extracted text with pdfminer; quotations verified against the whitespace-normalised extraction",
+   "routeHint": "Wayback raw PDF capture (live PDF 403), pdfminer extraction, whitespace-normalised",
    "registerHint": "none",
    "confidence": "high"
   },
   {
    "feature": "register modulation",
    "claim": "Oliver says that when Fitz shifts from a discourse of history to a discourse of fantasy the style shifts to extensive parataxis, elevated figurative language, and parallelism.",
-   "source": "Matthew Oliver, 'History in the Margins: Epigraphs and Negative Space in Robin Hobb's Assassin's Apprentice', Mythlore 41.1 (2022), pp. 45-66",
+   "source": "Matthew Oliver, Mythlore 41.1 (2022)",
    "url": "https://dc.swosu.edu/mythlore/vol41/iss1/4/",
    "quote": "extensive parataxis, elevated figurative language, and parallelism",
    "page": "p. 59",
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2022-10",
-   "routeHint": "live PDF at dc.swosu.edu returned HTTP 403; fetched the Wayback raw capture https://web.archive.org/web/20240707045408id_/https://dc.swosu.edu/cgi/viewcontent.cgi?article=3044&context=mythlore and extracted text with pdfminer; quotations verified against the whitespace-normalised extraction",
+   "routeHint": "Wayback raw PDF capture (live PDF 403), pdfminer extraction, whitespace-normalised",
    "registerHint": "chronicle-line",
    "confidence": "high"
   },
   {
    "feature": "register modulation",
    "claim": "Oliver says the later epigraphs become increasingly infected by the style of imaginative fiction in place of the style of scholarly discourse.",
-   "source": "Matthew Oliver, 'History in the Margins: Epigraphs and Negative Space in Robin Hobb's Assassin's Apprentice', Mythlore 41.1 (2022), pp. 45-66",
+   "source": "Matthew Oliver, Mythlore 41.1 (2022)",
    "url": "https://dc.swosu.edu/mythlore/vol41/iss1/4/",
    "quote": "the epigraphs become increasingly infected by the style of imaginative fiction",
    "page": "p. 61",
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2022-10",
-   "routeHint": "live PDF at dc.swosu.edu returned HTTP 403; fetched the Wayback raw capture https://web.archive.org/web/20240707045408id_/https://dc.swosu.edu/cgi/viewcontent.cgi?article=3044&context=mythlore and extracted text with pdfminer; quotations verified against the whitespace-normalised extraction",
+   "routeHint": "Wayback raw PDF capture (live PDF 403), pdfminer extraction, whitespace-normalised",
    "registerHint": "chronicle-line",
    "confidence": "high"
   },
   {
    "feature": "parataxis vs hypotaxis",
    "claim": "Oliver counts two sentences using inverted syntax in the chapter fifteen epigraph, alongside parataxis across sentence boundaries and listed parallel phrases.",
-   "source": "Matthew Oliver, 'History in the Margins: Epigraphs and Negative Space in Robin Hobb's Assassin's Apprentice', Mythlore 41.1 (2022), pp. 45-66",
+   "source": "Matthew Oliver, Mythlore 41.1 (2022)",
    "url": "https://dc.swosu.edu/mythlore/vol41/iss1/4/",
    "quote": "Two sentences use inverted syntax",
    "page": "p. 62",
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2022-10",
-   "routeHint": "live PDF at dc.swosu.edu returned HTTP 403; fetched the Wayback raw capture https://web.archive.org/web/20240707045408id_/https://dc.swosu.edu/cgi/viewcontent.cgi?article=3044&context=mythlore and extracted text with pdfminer; quotations verified against the whitespace-normalised extraction",
+   "routeHint": "Wayback raw PDF capture (live PDF 403), pdfminer extraction, whitespace-normalised",
    "registerHint": "chronicle-line",
    "confidence": "high"
   },
@@ -1512,7 +1228,7 @@
    "kind": "relay",
    "polarity": "disputes",
    "date": "2008",
-   "routeHint": "live PDF at dc.swosu.edu returned HTTP 403; fetched the Wayback raw capture https://web.archive.org/web/20240707045408id_/https://dc.swosu.edu/cgi/viewcontent.cgi?article=3044&context=mythlore and extracted text with pdfminer; quotations verified against the whitespace-normalised extraction",
+   "routeHint": "Wayback raw PDF capture of Oliver (live PDF 403), pdfminer extraction; Mendlesohn's book itself not read",
    "registerHint": "chronicle-line",
    "confidence": "medium; a quotation of Mendlesohn inside Oliver's article, not read at Rhetorics of Fantasy itself"
   },
@@ -1932,7 +1648,7 @@
    "kind": "own-words",
    "polarity": "rejects",
    "date": "2005 or earlier",
-   "routeHint": "the essay was removed from robinhobb.com; located the original URL via the Wayback CDX API and fetched the 2005-06-30 raw capture (id_ form), gunzipped locally",
+   "routeHint": "Wayback CDX lookup then raw id_ capture, gunzipped locally",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -1946,7 +1662,7 @@
    "kind": "own-words",
    "polarity": "asserts",
    "date": "2005 or earlier",
-   "routeHint": "the essay was removed from robinhobb.com; located the original URL via the Wayback CDX API and fetched the 2005-06-30 raw capture (id_ form), gunzipped locally",
+   "routeHint": "Wayback CDX lookup then raw id_ capture, gunzipped locally",
    "registerHint": "dossier-archivist",
    "confidence": "high"
   },
@@ -1960,7 +1676,7 @@
    "kind": "own-words",
    "polarity": "asserts",
    "date": "2005 or earlier",
-   "routeHint": "the essay was removed from robinhobb.com; located the original URL via the Wayback CDX API and fetched the 2005-06-30 raw capture (id_ form), gunzipped locally",
+   "routeHint": "Wayback CDX lookup then raw id_ capture, gunzipped locally",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -1974,7 +1690,7 @@
    "kind": "own-words",
    "polarity": "asserts",
    "date": "2005 or earlier",
-   "routeHint": "the essay was removed from robinhobb.com; located the original URL via the Wayback CDX API and fetched the 2005-06-30 raw capture (id_ form), gunzipped locally",
+   "routeHint": "Wayback CDX lookup then raw id_ capture, gunzipped locally",
    "registerHint": "none",
    "confidence": "high"
   },
@@ -2061,6 +1777,290 @@
    "routeHint": "curl browser-UA on live URL",
    "registerHint": "dossier-archivist",
    "confidence": "high"
+  }
+ ],
+ "complete": true,
+ "coverage": "Angle named categories rather than URLs, so the roster was read as four groups. Hobb's own craft essays, interviews and blog: FETCHED, 16 items (OF Blog 2003, Locus 1998 and 2005, Pat's Fantasy Hotlist 2005, SFFWorld 2005, A Dribble of Ink 2007, Fantasy Book Critic 2008, Lightspeed/Geek's Guide 2012, Writing Excuses 11.Bonus-01 2016 fan transcript, Paw Print 2020, robinhobb.com \"As You Intend To Be\" 2020, \"What Works For Me\" 2022 and \"How to Write a Book\" 2022, Syl R. Martin 2023, Dragonsteel 2024, LisiPieces 2025, plus \"The Fan Fiction Rant\" recovered from Wayback after removal from the live site). Critics and close readers on register and pacing: FETCHED (Geoffrey B. Elliott's chapter-by-chapter reread entries 1 and 226, four Vacuous Wastrel reviews, The Idle Woman, Lisa Goldstein in Strange Horizons, and Matthew Oliver's Mythlore article reached by bibliography chasing through Elliott's Fedwren Project). Craft essays and writing-advice pieces by novelists and craft sites: FETCHED (M Harold Page in Black Gate 2016, Jeffrey Outcalt's Substack epigraph essay 2024, Christopher Luke Dean at Writers Write 2020). Editors: FETCHED (Anne Groell, Hobb's Random House editor, interviewed by Julie Crisp 2016, though she discusses her own editing method rather than Hobb's prose, and both her claims are marked accordingly). Game designers: NOT FOUND as a substantive category — four targeted searches surfaced only wikis, an EN World recommendation thread and generic DM advice; the nearest thing is an unsigned, apparently machine-compiled article on rpgstorytellers.com, logged with three claims at low confidence and flagged for possible deletion. BLOCKED and recovered: aidanmoher.com refused WebFetch with HTTP 403 and yielded to curl with a browser user agent; the Mythlore PDF refused a direct fetch with HTTP 403 and was recovered from a Wayback raw capture and parsed with pdfminer; fanlore.org returned HTTP 403 and was bypassed by going to the primary via the Wayback CDX API. Substantive sources per route: named-roster and direct search 22; bibliography chasing 3; lateral search 5. WebFetch underpins no claim — it returns summaries rather than page text and once mis-attributed a page, so every source was read raw via curl with a browser user agent, stripped to text locally, and every quotation string-searched against that text by a build script that fails closed on a miss or a quotation over twelve words. 35 sources logged, 30 substantive, 127 claims. Raw captures and the claim source live in sweep/hobbcraft/; notes in sweep/find-hobb-craft.md; the record in sweep/found-hobb-craft.json.",
+ "sourcesRead": [
+  {
+   "title": "Robin Hobb Interview (Other Fantasy / OF Blog, Larry Nolen)",
+   "url": "http://ofblog.blogspot.com/2003/04/robin-hobb-interview.html",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2003-04-28",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "Interview | Robin Hobb (A Dribble of Ink, Aidan Moher)",
+   "url": "https://aidanmoher.com/blog/2007/06/interviews/interview-robin-hobb/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2007-06-23",
+   "route": "WebFetch 403; curl browser-UA succeeded"
+  },
+  {
+   "title": "Robin Hobb: More Questions Than Answers (Locus, interview excerpts)",
+   "url": "https://www.locusmag.com/2005/Issues/12Hobb.html",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2005-12",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "Robin Hobb: Behind the Scenes (Locus, January 1998 excerpts)",
+   "url": "https://www.locusmag.com/1998/Issues/01/Hobb.html",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "1998-01",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "Interview with Robin Hobb (Fantasy Book Critic, Robert Thompson)",
+   "url": "https://fantasybookcritic.blogspot.com/2008/01/interview-with-robin-hobb.html",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2008-01",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "Robin Hobb Interview (Pat's Fantasy Hotlist, Patrick St-Denis)",
+   "url": "http://fantasyhotlist.blogspot.com/2005/07/robin-hobb-interview.html",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2005-07-11",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "Writing Excuses 11.Bonus-01: Characterization and Differentiation, With Robin Hobb (fan transcript)",
+   "url": "https://wetranscripts.livejournal.com/121439.html",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2016-10-12",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "A Robin Hobb Rereading Series-Entry 1: Assassin's Apprentice, Chapter 1 (Geoffrey B. Elliott)",
+   "url": "https://elliottrwi.com/2019/05/24/a-robin-hobb-rereading-series-entry-1-assassins-apprentice-chapter-1/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2019-05-24",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "A Robin Hobb Rereading Series: Entry 226: Fool's Errand, Chapter 6 (Geoffrey B. Elliott)",
+   "url": "https://elliottrwi.com/2021/09/10/a-robin-hobb-rereading-series-entry-226-fools-errand-chapter-6/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2021-09-10",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "The Golden Fool, by Robin Hobb (Vacuous Wastrel)",
+   "url": "https://vacuouswastrel.wordpress.com/2013/02/04/the-golden-fool-by-robin-hobb/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2013-02-04",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "Fool's Quest, by Robin Hobb (Vacuous Wastrel)",
+   "url": "https://vacuouswastrel.wordpress.com/2015/11/27/fools-quest-by-robin-hobb/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2015-11-27",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "Dragon Keeper, by Robin Hobb (Vacuous Wastrel)",
+   "url": "https://vacuouswastrel.wordpress.com/2014/04/13/dragon-keeper-by-robin-hobb/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2014-04-13",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "Fool's Fate, by Robin Hobb (Vacuous Wastrel)",
+   "url": "https://vacuouswastrel.wordpress.com/2013/11/11/fools-fate-by-robin-hobb/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2013-11-11",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "The Greatest Fictional World Builders: Robin Hobb (Writers Write, Christopher Luke Dean)",
+   "url": "https://www.writerswrite.co.za/the-greatest-fictional-world-builders-robin-hobb/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2020-02-12",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "How to Write a Book When You Don't Have Time to Write (Robin Hobb's blog)",
+   "url": "https://www.robinhobb.com/blog/posts/41755",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "2022-11-03",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "On the use of epigraphs and metanarratives in Robin Hobb's 'Assassin's Apprentice' (Jeffrey Outcalt, Substack)",
+   "url": "https://jeffreydavidoutcalt.substack.com/p/on-the-use-of-epigraphs-and-metanarratives",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2024-07-02",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "Fool's Assassin: How Robin Hobb Writes Lyrical Fantasy Without Being Boring (M Harold Page, Black Gate)",
+   "url": "https://www.blackgate.com/2016/02/09/fools-assassin-how-robin-hobb-writes-lyrical-fantasy-without-being-boring/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2016-02-09",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "Interview: Robin Hobb (Lightspeed Magazine / The Geek's Guide to the Galaxy)",
+   "url": "https://www.lightspeedmagazine.com/nonfiction/interview-robin-hobb/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2012-04",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "Robin Hobb's Writing Advice: 3 Tips for Crafting Your Villian (Tayan Hatch, Dragonsteel Books)",
+   "url": "https://www.dragonsteelbooks.com/blogs/the-cognitive-realm/robin-hobb-writing-villians",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2024-12-19",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "As You Intend To Be (Robin Hobb's Infrequent and Off Topic Blog)",
+   "url": "https://www.robinhobb.com/blog/posts/36450",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2020-05-21",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "The Assassin's Canvas: A Comprehensive Analysis of Narrative Interiority... (unsigned article, rpgstorytellers.com)",
+   "url": "https://rpgstorytellers.com/the-assassins-canvas-a-comprehensive-analysis-of-narrative-interiority-magic-systems-and-cultural-anthropology-in-robin-hobbs-farseer-trilogy/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2026-01-13",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "June Author Crush: Robin Hobb, Like Tolkien and R. R. Martin, is a Master Worldbuilder (Rachel Carter, BookTrib)",
+   "url": "https://booktrib.com/2017/06/15/june-author-crush-robin-hobb-worldbuilder/",
+   "kind": "reception",
+   "substantive": false,
+   "date": "2017-06-15",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "History in the Margins: Epigraphs and Negative Space in Robin Hobb's Assassin's Apprentice (Matthew Oliver, Mythlore 41.1)",
+   "url": "https://dc.swosu.edu/mythlore/vol41/iss1/4/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2022-10",
+   "route": "Wayback raw PDF capture (live PDF 403), pdfminer extraction"
+  },
+  {
+   "title": "The Fedwren Project: A Robin Hobb Annotated Bibliography (Geoffrey B. Elliott)",
+   "url": "https://elliottrwi.com/research/hobb-bibliography/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "accessed 2026-09-06",
+   "route": "curl browser-UA on live URL; used for bibliography chasing"
+  },
+  {
+   "title": "Interviewing Robin Hobb, Epic-Fantasy Best-Selling Author (Syl R. Martin)",
+   "url": "https://sylrmartin.com/portfolio/interviewing-robin-hobb-epic-fantasy-best-selling-author/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2023-05-19",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "An Interview with Robin Hobb: Character Writing (Madalen Erez, Paw Print)",
+   "url": "https://cscsnews.com/744/literary-arts/an-interview-with-robin-hobb-character-writing/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2020-11-19",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "My Reddit 'AMA' Q&A with Robin Hobb Is On Today! (Helen Lowe)",
+   "url": "https://helenlowe.info/blog/2012/05/17/my-reddit-ama-qa-with-robin-hobb-is-on-today/",
+   "kind": "reception",
+   "substantive": false,
+   "date": "2012-05-17",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "Interview with Robin Hobb (Rob Bedford, SFFWorld)",
+   "url": "https://www.sffworld.com/2005/09/interview-with-robin-hobb/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2005-09-01",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "What Works For Me (Robin Hobb's Infrequent and Off Topic Blog)",
+   "url": "https://www.robinhobb.com/blog/posts/40869",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2022-05-20",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "A Day in the Life of an Editor - with Anne Groell (Julie Crisp)",
+   "url": "http://www.juliecrisp.co.uk/blog-1/2016/1/4/a-day-in-the-life-of-an-editor-with-anne-groell",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2016-01-04",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "Ship of Magic (1998): Robin Hobb (The Idle Woman)",
+   "url": "https://theidlewoman.net/2013/05/05/ship-of-magic-robin-hobb/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2013-05-05",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "Dragon Haven by Robin Hobb (Lisa Goldstein, Strange Horizons)",
+   "url": "http://strangehorizons.com/non-fiction/reviews/dragon-haven-by-robin-hobb/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2010-05-10",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "The Fan Fiction Rant (Robin Hobb, robinhobb.com, captured 30 June 2005)",
+   "url": "https://web.archive.org/web/20050630015105id_/http://www.robinhobb.com/rant.html",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "captured 2005-06-30",
+   "route": "Wayback CDX lookup then raw id_ capture of a page since removed from the live site; gunzipped locally"
+  },
+  {
+   "title": "Robin Hobb Isn't Writing Back Anymore (Elise Mead, LisiPieces)",
+   "url": "https://www.lisipieces.com/robin-hobb-isnt-writing-back-anymore/",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2025-10-18",
+   "route": "curl browser-UA on live URL"
+  },
+  {
+   "title": "Blogging rant (robinhobb.com/rant.html, captured 7 January 2009)",
+   "url": "https://web.archive.org/web/20090107003409id_/http://robinhobb.com/rant.html",
+   "kind": "own-words",
+   "substantive": false,
+   "date": "captured 2009-01-07",
+   "route": "Wayback raw capture; the later occupant of the same URL, an anti-blogging piece, not craft"
   }
  ]
 }

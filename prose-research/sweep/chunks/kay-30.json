@@ -1,0 +1,158 @@
+{
+ "name": "kay",
+ "chunk": 30,
+ "indices": [
+  450,
+  451,
+  452,
+  453,
+  454,
+  455,
+  456,
+  457,
+  458,
+  459,
+  460,
+  461,
+  462,
+  463,
+  464
+ ],
+ "claims": [
+  {
+   "index": 450,
+   "feature": "dialogue register",
+   "claim": "McBean writes that in Kay's dialogue emotion is often conveyed by what is not said.",
+   "source": "Chris McBean, The Rowanwood Chronicles blog, 24 December 2025",
+   "url": "https://therowanwoodchronicles.blog/2025/12/24/fantasy-as-memory-the-historical-imagination-of-guy-gavriel-kay/",
+   "quote": "Emotion is often conveyed by what is not said.",
+   "page": "section 'Dialogue as character and culture'"
+  },
+  {
+   "index": 451,
+   "feature": "plainness and economy",
+   "claim": "McBean characterises Kay's prose as elegant without being ornamental.",
+   "source": "Chris McBean, The Rowanwood Chronicles blog, 24 December 2025",
+   "url": "https://therowanwoodchronicles.blog/2025/12/24/fantasy-as-memory-the-historical-imagination-of-guy-gavriel-kay/",
+   "quote": "elegant without being ornamental",
+   "page": "third paragraph"
+  },
+  {
+   "index": 452,
+   "feature": "point of view and distance",
+   "claim": "Kay says that in Children of Earth and Sky he wrote several scenes in which one conversation is described by more than one of the people in it.",
+   "source": "Guy Gavriel Kay, interviewed by Christine Fischer Guy, Los Angeles Review of Books, 14 August 2016",
+   "url": "https://lareviewofbooks.org/article/fantastic-worlds-guy-gavriel-kay/",
+   "quote": "a conversation takes place, as described by more than one",
+   "page": "answer to the question about multiple points of view"
+  },
+  {
+   "index": 453,
+   "feature": "point of view and distance",
+   "claim": "Kay says that when he switches to another character's point of view the same conversation is not the same, though it bears a resemblance.",
+   "source": "Guy Gavriel Kay, interviewed by Christine Fischer Guy, Los Angeles Review of Books, 14 August 2016",
+   "url": "https://lareviewofbooks.org/article/fantastic-worlds-guy-gavriel-kay/",
+   "quote": "It bears a resemblance, but it’s not the same.",
+   "page": "answer to the question about multiple points of view"
+  },
+  {
+   "index": 454,
+   "feature": "place and institution description",
+   "claim": "Kay says one starting point of Children of Earth and Sky was that it takes place on the borderlands in the lives of not-powerful people.",
+   "source": "Guy Gavriel Kay, interviewed by Christine Fischer Guy, Los Angeles Review of Books, 14 August 2016",
+   "url": "https://lareviewofbooks.org/article/fantastic-worlds-guy-gavriel-kay/",
+   "quote": "on the borderlands in the lives of not-powerful people",
+   "page": "answer about legacy and fathers"
+  },
+  {
+   "index": 455,
+   "feature": "consequence on a household",
+   "claim": "Kay says his reading brought home to him that the ambitions of emperors, empresses, sultans and dukes did not much matter to the day-to-day desires of ordinary people on the borderlands.",
+   "source": "Guy Gavriel Kay, interviewed by Christine Fischer Guy, Los Angeles Review of Books, 14 August 2016",
+   "url": "https://lareviewofbooks.org/article/fantastic-worlds-guy-gavriel-kay/",
+   "quote": "the ambitions and doings of emperors and empresses and sultans",
+   "page": "answer about legacy and fathers"
+  },
+  {
+   "index": 456,
+   "feature": "other: worldview rendered as the inhabitants hold it",
+   "claim": "Kay says the fantastic lets him make the world be as his characters believe it to be.",
+   "source": "Guy Gavriel Kay, interviewed by Christine Fischer Guy, Los Angeles Review of Books, 14 August 2016",
+   "url": "https://lareviewofbooks.org/article/fantastic-worlds-guy-gavriel-kay/",
+   "quote": "make the world be as my characters believe it to be",
+   "page": "answer to 'How else does the fantastic serve your purposes?'"
+  },
+  {
+   "index": 457,
+   "feature": "other: worldview rendered as the inhabitants hold it",
+   "claim": "Kay says a modern reader tends to a smug, patronising attitude toward the past, and that presenting the world as the characters believe it removes that smugness.",
+   "source": "Guy Gavriel Kay, interviewed by Christine Fischer Guy, Los Angeles Review of Books, 14 August 2016",
+   "url": "https://lareviewofbooks.org/article/fantastic-worlds-guy-gavriel-kay/",
+   "quote": "it removes that smugness from the reader",
+   "page": "answer to 'How else does the fantastic serve your purposes?'"
+  },
+  {
+   "index": 458,
+   "feature": "other: signalling the invented world",
+   "claim": "Kay says he has used two moons in several books as a signal to the reader that the setting is not our world.",
+   "source": "Guy Gavriel Kay, interviewed by Christine Fischer Guy, Los Angeles Review of Books, 14 August 2016",
+   "url": "https://lareviewofbooks.org/article/fantastic-worlds-guy-gavriel-kay/",
+   "quote": "The two moons say, We’re not here",
+   "page": "answer about setting the rules of engagement"
+  },
+  {
+   "index": 459,
+   "feature": "other: history-shaped invention",
+   "claim": "Kay says that if a reader can pick out what is made up and what is real, the storytelling has been botched.",
+   "source": "Guy Gavriel Kay, interviewed by Christine Fischer Guy, Los Angeles Review of Books, 14 August 2016",
+   "url": "https://lareviewofbooks.org/article/fantastic-worlds-guy-gavriel-kay/",
+   "quote": "if a reader can pick out what’s made up and what’s real",
+   "page": "answer about the Hilary Mantel review"
+  },
+  {
+   "index": 460,
+   "feature": "other: distance from the past",
+   "claim": "Kay says the past is, for him, staggeringly alien, and that writers about the past should acknowledge and work with that.",
+   "source": "Guy Gavriel Kay, interviewed by Christine Fischer Guy, Los Angeles Review of Books, 14 August 2016",
+   "url": "https://lareviewofbooks.org/article/fantastic-worlds-guy-gavriel-kay/",
+   "quote": "it’s also, for me, staggeringly alien",
+   "page": "answer about the Huxley quotation"
+  },
+  {
+   "index": 461,
+   "feature": "diction (native vs latinate)",
+   "claim": "The interviewer Christine Fischer Guy writes that a reverence for language runs through everything Kay writes.",
+   "source": "Christine Fischer Guy (interviewer's framing), Los Angeles Review of Books, 14 August 2016",
+   "url": "https://lareviewofbooks.org/article/fantastic-worlds-guy-gavriel-kay/",
+   "quote": "A reverence for language runs through everything he writes.",
+   "page": "interviewer's introduction"
+  },
+  {
+   "index": 462,
+   "feature": "point of view and distance",
+   "claim": "Eric Falden writes that Kay employs a limited omniscience that vacillates between being inside a character's head and being more objective for certain scenes.",
+   "source": "Eric Falden, 'You Should Read Tigana', Falden's Forge (Substack), 23 February 2024",
+   "url": "https://ericfalden.substack.com/p/you-should-read-tigana",
+   "quote": "Kay employs a limited omniscience that vacillates between being in",
+   "page": "section 'Writing Style'"
+  },
+  {
+   "index": 463,
+   "feature": "point of view and distance",
+   "claim": "Falden writes that Kay changes narrative distance by zooming in and out of the narrative, the farther narration no less haunting for giving summary.",
+   "source": "Eric Falden, Falden's Forge (Substack), 23 February 2024",
+   "url": "https://ericfalden.substack.com/p/you-should-read-tigana",
+   "quote": "Kay changes narrative distance incredibly well, zooming in and out",
+   "page": "section 'Writing Style'"
+  },
+  {
+   "index": 464,
+   "feature": "place and institution description",
+   "claim": "Falden writes that Kay lets the reader learn about the Peninsula of the Palm by living in it rather than by being spoon-fed.",
+   "source": "Eric Falden, Falden's Forge (Substack), 23 February 2024",
+   "url": "https://ericfalden.substack.com/p/you-should-read-tigana",
+   "quote": "lets the reader learn about the Palm by living in it",
+   "page": "section 'World-Building & Exposition'"
+  }
+ ]
+}

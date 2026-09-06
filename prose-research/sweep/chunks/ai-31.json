@@ -1,0 +1,158 @@
+{
+ "name": "ai",
+ "chunk": 31,
+ "indices": [
+  719,
+  720,
+  721,
+  722,
+  723,
+  724,
+  725,
+  726,
+  727,
+  728,
+  729,
+  730,
+  731,
+  732,
+  733
+ ],
+ "claims": [
+  {
+   "index": 719,
+   "feature": "other: what a human editor sees first",
+   "claim": "The LAMP corpus consists of 1,057 LLM-generated paragraphs edited by professional writers according to that taxonomy.",
+   "source": "Tuhin Chakrabarty, Philippe Laban et al., Salesforce AI Research, arXiv:2409.14509, September 2024",
+   "url": "https://arxiv.org/html/2409.14509v3",
+   "quote": "1,057 LLM-generated paragraphs edited by professional writers",
+   "page": "Abstract"
+  },
+  {
+   "index": 720,
+   "feature": "other: what a human editor sees first",
+   "claim": "Eighteen professional writers produced 8035 fine-grained edits on those responses.",
+   "source": "Tuhin Chakrabarty, Philippe Laban et al., Salesforce AI Research, arXiv:2409.14509, September 2024",
+   "url": "https://arxiv.org/html/2409.14509v3",
+   "quote": "resulting in 8035 fine-grained edits",
+   "page": "Section 1, Introduction"
+  },
+  {
+   "index": 721,
+   "feature": "steerability",
+   "claim": "The models in that study were explicitly prompted to be original and were instructed not to use ornamental language and to focus on nuance, simplicity, and subtext, yet their output still drew the seven categories of expert edits.",
+   "source": "Tuhin Chakrabarty, Philippe Laban et al., Salesforce AI Research, arXiv:2409.14509, September 2024",
+   "url": "https://arxiv.org/html/2409.14509v3",
+   "quote": "Do not use ornamental language and focus on nuance, simplicity, and subtext",
+   "page": "Section 4.1, Collecting Instruction and Response Pairs (prompt quoted in text; full prompt in Appendix A Table 13)"
+  },
+  {
+   "index": 722,
+   "feature": "discourse-level tells",
+   "claim": "Of the 50 most common part-of-speech templates in the study's LLM-generated responses, 15 templates do not occur as frequently in the original human-written seed paragraphs.",
+   "source": "Tuhin Chakrabarty, Philippe Laban et al., Salesforce AI Research, arXiv:2409.14509, September 2024",
+   "url": "https://arxiv.org/html/2409.14509v3",
+   "quote": "15 templates do not occur as frequently in original human-written seed paragraphs",
+   "page": "Section 5.3, Are there any specific stylistic idiosyncrasies in LLM generated responses?"
+  },
+  {
+   "index": 723,
+   "feature": "lexical tells",
+   "claim": "In the study's Table 8 the syntactic pattern DT NN IN NN CC, represented by sequences such as a mix of pride and or a sense of wonder and, was edited by the writers 54% of the times it occurred.",
+   "source": "Tuhin Chakrabarty, Philippe Laban et al., Salesforce AI Research, arXiv:2409.14509, September 2024",
+   "url": "https://arxiv.org/html/2409.14509v3",
+   "quote": "",
+   "page": "Table 8, first row (Syntactic Pattern DT NN IN NN CC, % of Times Edited 54%)"
+  },
+  {
+   "index": 724,
+   "feature": "lexical tells",
+   "claim": "The study reports that the word unspoken occurs in about 15% of the LLM-generated responses in the LAMP corpus.",
+   "source": "Tuhin Chakrabarty, Philippe Laban et al., Salesforce AI Research, arXiv:2409.14509, September 2024",
+   "url": "https://arxiv.org/html/2409.14509v3",
+   "quote": "a word like unspoken occurs in about 15% of LLM-generated responses",
+   "page": "Section 5.3, discussion of Figure 6"
+  },
+  {
+   "index": 725,
+   "feature": "lexical tells",
+   "claim": "The study reports that the phrases weight of, sense of and mix of occur very rarely or not at all in the human-written seed paragraphs while occurring frequently in the LLM-generated responses.",
+   "source": "Tuhin Chakrabarty, Philippe Laban et al., Salesforce AI Research, arXiv:2409.14509, September 2024",
+   "url": "https://arxiv.org/html/2409.14509v3",
+   "quote": "",
+   "page": "Section 5.3, discussion of Figure 6"
+  },
+  {
+   "index": 726,
+   "feature": "homogenisation",
+   "claim": "The study calls it the most surprising finding that all three LLMs generate the same idiosyncratic words and phrases, and suggests overlap in instruction tuning data across model families or training on another model's synthetic output.",
+   "source": "Tuhin Chakrabarty, Philippe Laban et al., Salesforce AI Research, arXiv:2409.14509, September 2024",
+   "url": "https://arxiv.org/html/2409.14509v3",
+   "quote": "all 3 LLMs generate these idiosyncratic words/phrases",
+   "page": "Section 5.3"
+  },
+  {
+   "index": 727,
+   "feature": "model era drift",
+   "claim": "The study found that none of the three LLMs it used outperformed each other in terms of writing quality, which it reads as common limitations across model families.",
+   "source": "Tuhin Chakrabarty, Philippe Laban et al., Salesforce AI Research, arXiv:2409.14509, September 2024",
+   "url": "https://arxiv.org/html/2409.14509v3",
+   "quote": "none of the LLMs used in our study",
+   "page": "Abstract"
+  },
+  {
+   "index": 728,
+   "feature": "abstraction over the concrete",
+   "claim": "In the study's taxonomy, edits in the Lack of Specificity and Detail category typically make the text longer, because writers add detail rather than cut.",
+   "source": "Tuhin Chakrabarty, Philippe Laban et al., Salesforce AI Research, arXiv:2409.14509, September 2024",
+   "url": "https://arxiv.org/html/2409.14509v3",
+   "quote": "typically make the text longer as writers add more details",
+   "page": "Section 4.4.5, Lack of Specificity and Detail"
+  },
+  {
+   "index": 729,
+   "feature": "lexical tells",
+   "claim": "One professional writer in the study, identified as W1, reported that a very common phrasing in the LLM excerpts was seem to plus a verb, which the writer judged inelegant and preferred replaced by the plain verb.",
+   "source": "Writer W1, quoted from an email in Chakrabarty, Laban et al., arXiv:2409.14509, September 2024",
+   "url": "https://arxiv.org/html/2409.14509v3",
+   "quote": "a very common phrasing in these excerpts is",
+   "page": "Section 4.4.6, Awkward Word Choice and Phrasing"
+  },
+  {
+   "index": 730,
+   "feature": "reader and expert judgment",
+   "claim": "The study's large-scale preference annotation found that experts largely prefer text edited by other experts over automatically edited text.",
+   "source": "Tuhin Chakrabarty, Philippe Laban et al., Salesforce AI Research, arXiv:2409.14509, September 2024",
+   "url": "https://arxiv.org/html/2409.14509v3",
+   "quote": "although experts largely prefer text edited by other experts",
+   "page": "Abstract"
+  },
+  {
+   "index": 731,
+   "feature": "detection and its failures",
+   "claim": "In the study's span-detection evaluation, expert agreement with each other on which spans are problematic reached only 0.57 general precision and 0.23 categorical precision.",
+   "source": "Tuhin Chakrabarty, Philippe Laban et al., Salesforce AI Research, arXiv:2409.14509, September 2024",
+   "url": "https://arxiv.org/html/2409.14509v3",
+   "quote": "",
+   "page": "Section 6.1, results table row 'Expert Agreement'"
+  },
+  {
+   "index": 732,
+   "feature": "homogenisation",
+   "claim": "Mollick writes that the sameness of AI writing eventually gets tedious enough that he skips writing on interesting topics when his internal AI detector goes off.",
+   "source": "Ethan Mollick, Wharton professor, One Useful Thing, 26 May 2026",
+   "url": "https://www.oneusefulthing.org/p/choosing-to-stay-human",
+   "quote": "the sameness of the AI writing",
+   "page": "opening section"
+  },
+  {
+   "index": 733,
+   "feature": "gloss and over-explaining",
+   "claim": "Mollick argues that badly prompted AI writing produces very little meaning per word and takes the reader in intellectual circles.",
+   "source": "Ethan Mollick, Wharton professor, One Useful Thing, 26 May 2026",
+   "url": "https://www.oneusefulthing.org/p/choosing-to-stay-human",
+   "quote": "produces very little meaning per word, taking you in intellectual circles",
+   "page": "opening section"
+  }
+ ]
+}

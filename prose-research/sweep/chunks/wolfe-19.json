@@ -1,0 +1,158 @@
+{
+ "name": "wolfe",
+ "chunk": 19,
+ "indices": [
+  285,
+  286,
+  287,
+  288,
+  289,
+  290,
+  291,
+  292,
+  293,
+  294,
+  295,
+  296,
+  297,
+  298,
+  299
+ ],
+ "claims": [
+  {
+   "index": 285,
+   "feature": "withheld information and inference",
+   "claim": "Sini says the presence Wolfe's sentences summon has contours that are not clearly defined and yet are not vague.",
+   "source": "Matthew Sini, 'Great Uncle Gene', New Mythologies (Substack), 2023",
+   "url": "https://newmythologies.substack.com/p/great-uncle-gene",
+   "quote": "its contours aren’t always clearly defined, but it’s also not vague",
+   "page": "para 4"
+  },
+  {
+   "index": 286,
+   "feature": "point of view and distance",
+   "claim": "Sini says much of Wolfe's world is withheld from the reader by the narrowness of the narrator's perception.",
+   "source": "Matthew Sini, 'Great Uncle Gene', New Mythologies (Substack), 2023",
+   "url": "https://newmythologies.substack.com/p/great-uncle-gene",
+   "quote": "kept from us due to the narrowness of the narrator’s perception",
+   "page": "closing section"
+  },
+  {
+   "index": 287,
+   "feature": "withheld information and inference",
+   "claim": "The WolfeWiki novice guide reports Wolfe said he does not give important information twice.",
+   "source": "WolfeWiki, 'Where to Begin? A Novice's Guide to the Lupine Maze', last modified 2017",
+   "url": "https://www.wolfewiki.com/pmwiki/pmwiki.php?n=Articles.Novice",
+   "quote": "he doesn't give the important information twice",
+   "page": "section 'Hints for Beginners'"
+  },
+  {
+   "index": 288,
+   "feature": "withheld information and inference",
+   "claim": "The guide advises reading an apparent contradiction as a hint that the narrator is concealing something.",
+   "source": "WolfeWiki, 'Where to Begin? A Novice's Guide to the Lupine Maze', last modified 2017",
+   "url": "https://www.wolfewiki.com/pmwiki/pmwiki.php?n=Articles.Novice",
+   "quote": "Apparent contradictions are often useful hints that the narrator is concealing something.",
+   "page": "section 'Hints for Beginners'"
+  },
+  {
+   "index": 289,
+   "feature": "omission as information",
+   "claim": "The guide asserts the information a reader needs is always present in a Wolfe text, though not where the reader expects it.",
+   "source": "WolfeWiki, 'Where to Begin? A Novice's Guide to the Lupine Maze', last modified 2017",
+   "url": "https://www.wolfewiki.com/pmwiki/pmwiki.php?n=Articles.Novice",
+   "quote": "The information you need is always there",
+   "page": "section 'Hints for Beginners'"
+  },
+  {
+   "index": 290,
+   "feature": "per-speaker register",
+   "claim": "The guide says Wolfe works out what a narrator would say rather than what the author wants to say.",
+   "source": "WolfeWiki, 'Where to Begin? A Novice's Guide to the Lupine Maze', last modified 2017",
+   "url": "https://www.wolfewiki.com/pmwiki/pmwiki.php?n=Articles.Novice",
+   "quote": "what they would say, rather than what he wants to say",
+   "page": "section 'Hints for Beginners'"
+  },
+  {
+   "index": 291,
+   "feature": "point of view and distance",
+   "claim": "The guide tells a new reader to begin by asking who is telling the story, when, why, and to whom.",
+   "source": "WolfeWiki, 'Where to Begin? A Novice's Guide to the Lupine Maze', last modified 2017",
+   "url": "https://www.wolfewiki.com/pmwiki/pmwiki.php?n=Articles.Novice",
+   "quote": "Who is telling this story, and when? Why are they telling it",
+   "page": "section 'Hints for Beginners'"
+  },
+  {
+   "index": 292,
+   "feature": "opening sentence",
+   "claim": "Matthew Keeley says the grammar of the opening sentence of The Fifth Head of Cerberus carries a clue to the story.",
+   "source": "Matthew Keeley, Tor.com/Reactor, 2017",
+   "url": "https://reactormag.com/how-gene-wolfe-starts-a-story-and-where-to-start-reading-his-work/",
+   "quote": "a slight clue to the story in the sentence’s grammar",
+   "page": "body, para 4"
+  },
+  {
+   "index": 293,
+   "feature": "withheld information and inference",
+   "claim": "Keeley reads the absent comma in the phrase naming the narrator's brother as a detail the book later explains.",
+   "source": "Matthew Keeley, Tor.com/Reactor, 2017",
+   "url": "https://reactormag.com/how-gene-wolfe-starts-a-story-and-where-to-start-reading-his-work/",
+   "quote": "We eventually do learn why that comma is missing.",
+   "page": "body, para 4"
+  },
+  {
+   "index": 294,
+   "feature": "point of view and distance",
+   "claim": "Keeley says one first-person sentence near the end of an otherwise third-person Wolfe book makes the reader reconsider all of it.",
+   "source": "Matthew Keeley, Tor.com/Reactor, 2017",
+   "url": "https://reactormag.com/how-gene-wolfe-starts-a-story-and-where-to-start-reading-his-work/",
+   "quote": "asks readers to reconsider everything that they’ve already read",
+   "page": "body, para 5"
+  },
+  {
+   "index": 295,
+   "feature": "archaism",
+   "claim": "Keeley says every word in The Book of the New Sun can be found in a dictionary, so the strangeness is not neologism.",
+   "source": "Matthew Keeley, Tor.com/Reactor, 2017",
+   "url": "https://reactormag.com/the-best-way-to-approach-the-book-of-the-new-sun/",
+   "quote": "every word in the book appears in a dictionary",
+   "page": "advice 1"
+  },
+  {
+   "index": 296,
+   "feature": "diction (native vs latinate)",
+   "claim": "Keeley says the rare words in The Book of the New Sun were chosen to be evocative rather than specific.",
+   "source": "Matthew Keeley, Tor.com/Reactor, 2017",
+   "url": "https://reactormag.com/the-best-way-to-approach-the-book-of-the-new-sun/",
+   "quote": "chosen to be evocative, rather than specific",
+   "page": "advice 1"
+  },
+  {
+   "index": 297,
+   "feature": "archaism",
+   "claim": "Wolfe's appendix to The Shadow of the Torturer, quoted by Keeley, says substituted words like peltast and exultant are meant to be suggestive rather than definitive.",
+   "source": "Gene Wolfe, appendix to The Shadow of the Torturer, quoted by Matthew Keeley (Tor.com, 2017)",
+   "url": "https://reactormag.com/the-best-way-to-approach-the-book-of-the-new-sun/",
+   "quote": "are intended to be suggestive rather than definitive",
+   "page": "advice 1, block quotation"
+  },
+  {
+   "index": 298,
+   "feature": "omission as information",
+   "claim": "Keeley advises the reader to attend to Severian's sins of omission.",
+   "source": "Matthew Keeley, Tor.com/Reactor, 2017",
+   "url": "https://reactormag.com/the-best-way-to-approach-the-book-of-the-new-sun/",
+   "quote": "Pay attention to his sins of omission",
+   "page": "advice 3"
+  },
+  {
+   "index": 299,
+   "feature": "point of view and distance",
+   "claim": "Keeley says Severian self-justifies and misinterprets but rarely lies outright.",
+   "source": "Matthew Keeley, Tor.com/Reactor, 2017",
+   "url": "https://reactormag.com/the-best-way-to-approach-the-book-of-the-new-sun/",
+   "quote": "He self-justifies and misinterprets, but rarely lies outright.",
+   "page": "advice 3"
+  }
+ ]
+}

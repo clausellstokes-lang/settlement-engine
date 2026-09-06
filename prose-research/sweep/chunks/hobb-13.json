@@ -1,0 +1,158 @@
+{
+ "name": "hobb",
+ "chunk": 13,
+ "indices": [
+  195,
+  196,
+  197,
+  198,
+  199,
+  200,
+  201,
+  202,
+  203,
+  204,
+  205,
+  206,
+  207,
+  208,
+  209
+ ],
+ "claims": [
+  {
+   "index": 195,
+   "feature": "place and institution description",
+   "claim": "Dean says Hobb has created a number of small intimate settings centred around her characters.",
+   "source": "Christopher Luke Dean, 'The Greatest Fictional World Builders: Robin Hobb', Writers Write, 2020",
+   "url": "https://www.writerswrite.co.za/the-greatest-fictional-world-builders-robin-hobb/",
+   "quote": "created a number of small intimate settings centred around her characters",
+   "page": "Section on setting"
+  },
+  {
+   "index": 196,
+   "feature": "place and institution description",
+   "claim": "Dean says Hobb makes her readers care for her setting as much as her characters.",
+   "source": "Christopher Luke Dean, 'The Greatest Fictional World Builders: Robin Hobb', Writers Write, 2020",
+   "url": "https://www.writerswrite.co.za/the-greatest-fictional-world-builders-robin-hobb/",
+   "quote": "make her readers care for her setting as much as her characters",
+   "page": "Section on setting"
+  },
+  {
+   "index": 197,
+   "feature": "consequence on a household",
+   "claim": "Dean says Hobb's characters grow or die or get worse rather than remaining stable.",
+   "source": "Christopher Luke Dean, 'The Greatest Fictional World Builders: Robin Hobb', Writers Write, 2020",
+   "url": "https://www.writerswrite.co.za/the-greatest-fictional-world-builders-robin-hobb/",
+   "quote": "Her characters grow or die or get worse",
+   "page": "Later section"
+  },
+  {
+   "index": 198,
+   "feature": "civic record register",
+   "claim": "Outcalt says the epigraphs at the beginning of each chapter carry historical facts about the Six Duchies.",
+   "source": "Jeffrey Outcalt, 'On the use of epigraphs and metanarratives in Robin Hobb's Assassin's Apprentice', 2024",
+   "url": "https://jeffreydavidoutcalt.substack.com/p/on-the-use-of-epigraphs-and-metanarratives",
+   "quote": "The epigraphs at the beginning of each chapter will have historical facts",
+   "page": "Section establishing the pattern"
+  },
+  {
+   "index": 199,
+   "feature": "civic record register",
+   "claim": "Outcalt characterises the opening in-world history epigraph of Assassin's Apprentice as informative yet boring.",
+   "source": "Jeffrey Outcalt, Substack craft essay on Hobb's epigraphs, 2024",
+   "url": "https://jeffreydavidoutcalt.substack.com/p/on-the-use-of-epigraphs-and-metanarratives",
+   "quote": "A pretty informative, yet boring, introduction epigraph",
+   "page": "On the first epigraph"
+  },
+  {
+   "index": 200,
+   "feature": "civic record register",
+   "claim": "Outcalt says the framing makes the reader feel they are reading from the same tome the narrator scribed.",
+   "source": "Jeffrey Outcalt, Substack craft essay on Hobb's epigraphs, 2024",
+   "url": "https://jeffreydavidoutcalt.substack.com/p/on-the-use-of-epigraphs-and-metanarratives",
+   "quote": "It reads as if we are reading from the same tome",
+   "page": "On metanarrative"
+  },
+  {
+   "index": 201,
+   "feature": "withheld information and inference",
+   "claim": "Outcalt says the bias in the Queen Desire epigraph alerts the reader to the potential of an unreliable narrator.",
+   "source": "Jeffrey Outcalt, Substack craft essay on Hobb's epigraphs, 2024",
+   "url": "https://jeffreydavidoutcalt.substack.com/p/on-the-use-of-epigraphs-and-metanarratives",
+   "quote": "This should immediately alert us to the potential of an unreliable narrator",
+   "page": "On the chapter 7 epigraph"
+  },
+  {
+   "index": 202,
+   "feature": "omission as information",
+   "claim": "Outcalt says Hobb leaves it to the reader to do light investigative work rather than cutting to flashback.",
+   "source": "Jeffrey Outcalt, Substack craft essay on Hobb's epigraphs, 2024",
+   "url": "https://jeffreydavidoutcalt.substack.com/p/on-the-use-of-epigraphs-and-metanarratives",
+   "quote": "leaves it up to the reader to do some light investigative work",
+   "page": "On metanarrative"
+  },
+  {
+   "index": 203,
+   "feature": "civic record register",
+   "claim": "Outcalt says some epigraphs raise details about characters that are disclosed nowhere else in the book.",
+   "source": "Jeffrey Outcalt, Substack craft essay on Hobb's epigraphs, 2024",
+   "url": "https://jeffreydavidoutcalt.substack.com/p/on-the-use-of-epigraphs-and-metanarratives",
+   "quote": "details about the characters in ways that are NOT disclosed anywhere else",
+   "page": "On later epigraphs"
+  },
+  {
+   "index": 204,
+   "feature": "annalist voice and deep time",
+   "claim": "Outcalt describes a slow congealing of fact and fiction across the sequence of epigraphs.",
+   "source": "Jeffrey Outcalt, Substack craft essay on Hobb's epigraphs, 2024",
+   "url": "https://jeffreydavidoutcalt.substack.com/p/on-the-use-of-epigraphs-and-metanarratives",
+   "quote": "the slow congealing of fact and fiction in the epigraphs",
+   "page": "On the chapter 7 epigraph"
+  },
+  {
+   "index": 205,
+   "feature": "cadence and rhythm",
+   "claim": "Page identifies an unremitting rhythm of buts at all levels of the story as a device in Fool's Assassin.",
+   "source": "M Harold Page, novelist, 'Fool's Assassin: How Robin Hobb Writes Lyrical Fantasy Without Being Boring', Black Gate, 2016",
+   "url": "https://www.blackgate.com/2016/02/09/fools-assassin-how-robin-hobb-writes-lyrical-fantasy-without-being-boring/",
+   "quote": "an unremitting rhythm of buts at all levels of the story",
+   "page": "Making Lyrical Fantasy Interesting"
+  },
+  {
+   "index": 206,
+   "feature": "consequence on a household",
+   "claim": "Page says a death arising from the thriller plot has domestic and child-rearing implications in Fool's Assassin.",
+   "source": "M Harold Page, novelist, Black Gate craft dissection of Fool's Assassin, 2016",
+   "url": "https://www.blackgate.com/2016/02/09/fools-assassin-how-robin-hobb-writes-lyrical-fantasy-without-being-boring/",
+   "quote": "a death resulting from the Thriller has domestic and child-rearing implications",
+   "page": "First Person Slow Burn Thriller"
+  },
+  {
+   "index": 207,
+   "feature": "consequence on a household",
+   "claim": "Page says the same duty in Fool's Assassin manifests both domestically and politically.",
+   "source": "M Harold Page, novelist, Black Gate craft dissection of Fool's Assassin, 2016",
+   "url": "https://www.blackgate.com/2016/02/09/fools-assassin-how-robin-hobb-writes-lyrical-fantasy-without-being-boring/",
+   "quote": "the same duty manifests both domestically and politically",
+   "page": "First Person Slow Burn Thriller"
+  },
+  {
+   "index": 208,
+   "feature": "place and institution description",
+   "claim": "Page says Hobb only delivers description when it is part of a conflict.",
+   "source": "M Harold Page, novelist, Black Gate craft dissection of Fool's Assassin, 2016",
+   "url": "https://www.blackgate.com/2016/02/09/fools-assassin-how-robin-hobb-writes-lyrical-fantasy-without-being-boring/",
+   "quote": "She only delivers description when it",
+   "page": "Making Lyrical Fantasy Interesting"
+  },
+  {
+   "index": 209,
+   "feature": "concrete sensory noun",
+   "claim": "Page says Hobb serves up characterisation only when it is immediately significant to a choice or tactic.",
+   "source": "M Harold Page, novelist, Black Gate craft dissection of Fool's Assassin, 2016",
+   "url": "https://www.blackgate.com/2016/02/09/fools-assassin-how-robin-hobb-writes-lyrical-fantasy-without-being-boring/",
+   "quote": "Hobb always serves up characterisation when it is immediately significant",
+   "page": "Making Lyrical Fantasy Interesting"
+  }
+ ]
+}

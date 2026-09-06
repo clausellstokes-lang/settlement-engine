@@ -1,0 +1,158 @@
+{
+ "name": "kay",
+ "chunk": 14,
+ "indices": [
+  210,
+  211,
+  212,
+  213,
+  214,
+  215,
+  216,
+  217,
+  218,
+  219,
+  220,
+  221,
+  222,
+  223,
+  224
+ ],
+ "claims": [
+  {
+   "index": 210,
+   "feature": "other: competing memories of one event",
+   "claim": "Malosse notes that the scene he cites to show Kay's style is presented as a senator's memory of what happened in front of him.",
+   "source": "Pierre-Louis Malosse, Université Paul Valéry, Anabases 5 (2007)",
+   "url": "http://brightweavings.com/justinian-visited-and-revisited/",
+   "quote": "A senator, Plautus Bonosus, remembers the scene as it unfolded before him",
+   "page": "concluding section"
+  },
+  {
+   "index": 211,
+   "feature": "other: mythic versus historical register",
+   "claim": "Malosse offers one passage as the sample by which to judge Kay's style against the narrative Procopius supplies.",
+   "source": "Pierre-Louis Malosse, Université Paul Valéry, Anabases 5 (2007)",
+   "url": "http://brightweavings.com/justinian-visited-and-revisited/",
+   "quote": "a passage to provide a sense of Guy Gavriel Kay’s style",
+   "page": "concluding section"
+  },
+  {
+   "index": 212,
+   "feature": "parataxis vs hypotaxis",
+   "claim": "Patton describes Kay laying narrative episodes next to each other in a lapidary fashion, sometimes making neighbours of vastly different places, ranks and perspectives.",
+   "source": "Andrew Patton, artist and art critic, in a Sarantine Letters essay written inside an in-world scholarly conceit",
+   "url": "http://brightweavings.com/jadslight/",
+   "quote": "the lapidary fashion in which narratival episodes were laid next to each other",
+   "page": "later section of the essay"
+  },
+  {
+   "index": 213,
+   "feature": "cadence and rhythm",
+   "claim": "Patton urges attention to the construction of Kay's book at the scale of the sentence as well as of the episode.",
+   "source": "Andrew Patton, artist and art critic, in a Sarantine Letters essay written inside an in-world scholarly conceit",
+   "url": "http://brightweavings.com/jadslight/",
+   "quote": "in both the writing of sentences and the composing of separate episodes",
+   "page": "later section of the essay"
+  },
+  {
+   "index": 214,
+   "feature": "register modulation",
+   "claim": "Campbell argues that Kay's shift into a more formal register for one episode of The Summer Tree adds mythic gravitas to that section.",
+   "source": "Narelle Campbell, PhD thesis, University of Wollongong (2013)",
+   "url": "https://ro.uow.edu.au/theses/3910",
+   "quote": "further mythic gravitas to this section of Kay’s tale.",
+   "page": "c. p. 322, chapter on Diarmuid and Sharra"
+  },
+  {
+   "index": 215,
+   "feature": "other: register as concealment",
+   "claim": "Campbell argues that the mythic ambience and literary resonance of The Fionavar Tapestry obscure the ethnic and gender imbalances of the episode in which Diarmuid seduces Sharra.",
+   "source": "Narelle Campbell, PhD thesis, University of Wollongong (2013)",
+   "url": "https://ro.uow.edu.au/theses/3910",
+   "quote": "",
+   "page": "chapter on Diarmuid and Sharra, paragraph beginning 'the plausibility of newer stories'"
+  },
+  {
+   "index": 216,
+   "feature": "annalist voice and deep time",
+   "claim": "Rettino argues that when the narrator's voice reveals itself in Tigana it takes on the authority of a club-story teller.",
+   "source": "Matthew Rettino, McGill honours thesis (2012)",
+   "url": "https://brightweavings.com/fantasies-of-history-guy-gavriel-kays-synthesis-of-the-historical-fantasy-novel/",
+   "quote": "When the narrator’s voice reveals itself, it adopts the authority of the club-story teller",
+   "page": "section on Tigana and the club-story"
+  },
+  {
+   "index": 217,
+   "feature": "omission as information",
+   "claim": "Rettino argues that Kay's omniscient narrator in Under Heaven subverts historical narration by revealing that many events in history are not known.",
+   "source": "Matthew Rettino, McGill honours thesis (2012)",
+   "url": "https://brightweavings.com/fantasies-of-history-guy-gavriel-kays-synthesis-of-the-historical-fantasy-novel/",
+   "quote": "by revealing that many events in history are not known",
+   "page": "section on Under Heaven"
+  },
+  {
+   "index": 218,
+   "feature": "other: authorial revision",
+   "claim": "Kay said in 1989 that if he rewrote The Fionavar Tapestry he would polish the prose of the opening chapters.",
+   "source": "Guy Gavriel Kay, interviewed by Raymond H. Thompson at Mythcon, Vancouver, 30 July 1989 (The Camelot Project, 1999)",
+   "url": "https://d.lib.rochester.edu/camelot/text/interview-with-guy-gavriel-kay.html",
+   "quote": "I might polish the prose itself",
+   "page": "answer to 'If you could wave a magic wand that would rewrite the book'"
+  },
+  {
+   "index": 219,
+   "feature": "place and institution description",
+   "claim": "Ordway frames her study as an account of how Kay invests a secondary world with the consistency of reality.",
+   "source": "Holly E. Ordway, UMass Amherst independent study (1998)",
+   "url": "http://brightweavings.com/worldbuilding/",
+   "quote": "investing it with the consistency of reality",
+   "page": "opening paragraphs"
+  },
+  {
+   "index": 220,
+   "feature": "other: sources of a secondary world",
+   "claim": "Ordway states that Kay draws on literature, mythology and history as well as his own imagination to build his worlds.",
+   "source": "Holly E. Ordway, UMass Amherst independent study (1998)",
+   "url": "http://brightweavings.com/worldbuilding/",
+   "quote": "draws on literature, mythology, and history as well as his own imagination",
+   "page": "opening paragraphs"
+  },
+  {
+   "index": 221,
+   "feature": "other: freely willed action",
+   "claim": "Webb argues that in Tigana the major events have their genesis in the emphatically freely willed actions of the protagonists.",
+   "source": "Janeen Webb, The Ringbearer: Journal of the Mythopoeic Literature Society of Australia (1991)",
+   "url": "http://brightweavings.com/webbtigana/",
+   "quote": "the major events have their genesis in the emphatically freely willed actions",
+   "page": "section on mythology and human deeds"
+  },
+  {
+   "index": 222,
+   "feature": "other: memory and the erased name",
+   "claim": "Doshlova argues that Tigana's central metaphors — the lost name, distorted memory and music — form a single artistic system representing the formation, loss and recovery of national identity.",
+   "source": "M. R. Doshlova, Kuban State University, conference paper (Ural Federal University archive)",
+   "url": "https://elar.urfu.ru/bitstream/10995/151646/1/978-5-91256-808-4_128.pdf",
+   "quote": "",
+   "page": "abstract, p. 1237"
+  },
+  {
+   "index": 223,
+   "feature": "place and institution description",
+   "claim": "Palmatier says the Italian flavour of Tigana's invented world is carried by its word structure, place names and characters.",
+   "source": "Joshua Palmatier (novelist), 'Altering the Familiar: Tigana by Guy Gavriel Kay', Reactor/Tor.com 'That Was Awesome! Writers on Writing', 2016",
+   "url": "https://reactormag.com/altering-the-familiar-tigana-by-guy-gavriel-kay/",
+   "quote": "the flavor of Italy is there—in the word structure, the place names",
+   "page": "body, paragraph beginning 'In Tigana'"
+  },
+  {
+   "index": 224,
+   "feature": "metaphor discipline",
+   "claim": "Palmatier disputes the common view that Kay's art lies in his use of language, locating it instead in the alteration of a familiar setting.",
+   "source": "Joshua Palmatier (novelist), 'Altering the Familiar: Tigana by Guy Gavriel Kay', Reactor/Tor.com 'That Was Awesome! Writers on Writing', 2016",
+   "url": "https://reactormag.com/altering-the-familiar-tigana-by-guy-gavriel-kay/",
+   "quote": "not in the use of language, but in the subtle way",
+   "page": "final body paragraph"
+  }
+ ]
+}

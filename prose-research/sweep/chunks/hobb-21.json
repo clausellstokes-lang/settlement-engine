@@ -1,0 +1,158 @@
+{
+ "name": "hobb",
+ "chunk": 21,
+ "indices": [
+  315,
+  316,
+  317,
+  318,
+  319,
+  320,
+  321,
+  322,
+  323,
+  324,
+  325,
+  326,
+  327,
+  328,
+  329
+ ],
+ "claims": [
+  {
+   "index": 315,
+   "feature": "consequence on a household",
+   "claim": "Hobb, quoted by the reporter, reads Keffria Vestrit's ceding of decisions to her husband as a rule about power: power not exercised is lost.",
+   "source": "Robin Hobb, quoted by Pauline Bock, New Statesman, 27 July 2018",
+   "url": "https://www.newstatesman.com/long-reads/2018/07/robin-hobb-changing-cultures-writing-about-violence-and-anonymity-living-farm",
+   "quote": "if you do not exercise your power, it goes away",
+   "page": "paragraph beginning 'The Elderlings books never ignore women’s stories'"
+  },
+  {
+   "index": 316,
+   "feature": "place and institution description",
+   "claim": "Hobb says setting is a third element the fantasy writer must supply that mainstream writers need not, contrasting a 1970s Chevrolet, which arrives with its own impact, against a horse and cart whose condition she must establish with detail.",
+   "source": "Robin Hobb, interviewed by Rebecca Lovatt, The Arched Doorway, 24 November 2014 (transcript)",
+   "url": "https://archeddoorway.com/2014/11/24/robin-hobb-interview/",
+   "quote": "put in enough detail that the reader picks that up",
+   "page": "answer to the question on the fantasy genre expanding"
+  },
+  {
+   "index": 317,
+   "feature": "plainness and economy",
+   "claim": "Hobb says she admires the fantasy writers of the earlier paperback generation because every sentence in their work carries character development, setting and plot at once.",
+   "source": "Robin Hobb, interviewed by Rebecca Lovatt, The Arched Doorway, 24 November 2014 (transcript)",
+   "url": "https://archeddoorway.com/2014/11/24/robin-hobb-interview/",
+   "quote": "every sentence is freighted with character development, and setting, and plot",
+   "page": "answer to the question on the fantasy genre expanding"
+  },
+  {
+   "index": 318,
+   "feature": "edition and house style",
+   "claim": "Hobb reports the physical constraint she wrote under early on: she was told a paperback binding would not hold more than 250 pages, and had to tell her story within that number of words and pages.",
+   "source": "Robin Hobb, interviewed by Rebecca Lovatt, The Arched Doorway, 24 November 2014 (transcript)",
+   "url": "https://archeddoorway.com/2014/11/24/robin-hobb-interview/",
+   "quote": "a paperback binding would not hold more than 250 pages",
+   "page": "answer to the question on the fantasy genre expanding"
+  },
+  {
+   "index": 319,
+   "feature": "withheld information and inference",
+   "claim": "Hobb states the limit of her preferred first person as a rule of disclosure: the narration can tell the reader exactly what the hero knows and no more.",
+   "source": "Robin Hobb, interviewed by Rebecca Lovatt, The Arched Doorway, 24 November 2014 (transcript)",
+   "url": "https://archeddoorway.com/2014/11/24/robin-hobb-interview/",
+   "quote": "you can only tell the reader exactly what the hero knows",
+   "page": "answer to 'how do you decide whether a story should be told in first or third-person?'"
+  },
+  {
+   "index": 320,
+   "feature": "point of view and distance",
+   "claim": "Hobb describes her third-person practice as a very tight point of view in which any given scene stays inside one character only, never switching mid-conversation.",
+   "source": "Robin Hobb, interviewed by Rebecca Lovatt, The Arched Doorway, 24 November 2014 (transcript)",
+   "url": "https://archeddoorway.com/2014/11/24/robin-hobb-interview/",
+   "quote": "in any given scene, you will only be with one character",
+   "page": "answer to 'how do you decide whether a story should be told in first or third-person?'"
+  },
+  {
+   "index": 321,
+   "feature": "point of view and distance",
+   "claim": "Hobb calls first person the most intimate voice and likens it to the voice a family uses in the evening or a mother recounting her childhood.",
+   "source": "Robin Hobb, interviewed by Rebecca Lovatt, The Arched Doorway, 24 November 2014 (transcript)",
+   "url": "https://archeddoorway.com/2014/11/24/robin-hobb-interview/",
+   "quote": "It is the most intimate voice",
+   "page": "answer to 'how do you decide whether a story should be told in first or third-person?'"
+  },
+  {
+   "index": 322,
+   "feature": "humour",
+   "claim": "Hobb says that fantasy full of pratfalls and silliness is fun but lessens the impact felt when a character is hurt or disappointed.",
+   "source": "Robin Hobb, interviewed by Rebecca Lovatt, The Arched Doorway, 24 November 2014 (transcript)",
+   "url": "https://archeddoorway.com/2014/11/24/robin-hobb-interview/",
+   "quote": "it lessens the impact that you feel if the character is hurt",
+   "page": "answer on her influences"
+  },
+  {
+   "index": 323,
+   "feature": "withheld information and inference",
+   "claim": "Hobb says she planted clues at the end of the Tawny Man trilogy that only readers attending to every detail of the book would have picked up as signalling more story to come.",
+   "source": "Robin Hobb, interviewed by Rebecca Lovatt, The Arched Doorway, 24 November 2014 (transcript)",
+   "url": "https://archeddoorway.com/2014/11/24/robin-hobb-interview/",
+   "quote": "readers who were really reading every detail of the book",
+   "page": "answer to 'Did you know you’d be coming back all these years later'"
+  },
+  {
+   "index": 324,
+   "feature": "adjective and adverb discipline",
+   "claim": "Reviewer Lew Kelly charges Hobb with an overreliance on adverbs in Ship of Magic, saying it stunts the novel's flow.",
+   "source": "Lew Kelly, Fantasy-Faction, 19 August 2014",
+   "url": "https://fantasy-faction.com/2014/the-liveship-traders-series-by-robin-hobb-no-spoilers",
+   "quote": "Her overreliance on adverbs often stunts the novel’s flow",
+   "page": "paragraph beginning 'The opening of the novel'"
+  },
+  {
+   "index": 325,
+   "feature": "consequence on a household",
+   "claim": "Kelly describes The Mad Ship as tracking a household and a city together: as the Vestrits' domestic situation worsens, so does the political situation in Bingtown.",
+   "source": "Lew Kelly, Fantasy-Faction, 19 August 2014",
+   "url": "https://fantasy-faction.com/2014/the-liveship-traders-series-by-robin-hobb-no-spoilers",
+   "quote": "As their domestic situation worsens, so does the political situation",
+   "page": "paragraph on The Mad Ship"
+  },
+  {
+   "index": 326,
+   "feature": "consequence on a household",
+   "claim": "Kelly names morality as the trilogy's major theme and states its recurring form as a household choice between the morally correct action and the profitable one.",
+   "source": "Lew Kelly, Fantasy-Faction, 19 August 2014",
+   "url": "https://fantasy-faction.com/2014/the-liveship-traders-series-by-robin-hobb-no-spoilers",
+   "quote": "a choice between a morally correct action or a profitable one",
+   "page": "paragraph beginning 'Hobb’s major theme in the trilogy is morality'"
+  },
+  {
+   "index": 327,
+   "feature": "point of view and distance",
+   "claim": "Kelly argues Hobb's prose is at its best inside a single character's head, and that the many shifting Liveship viewpoints leave the characters feeling distanced and harder to empathise with.",
+   "source": "Lew Kelly, Fantasy-Faction, 19 August 2014",
+   "url": "https://fantasy-faction.com/2014/the-liveship-traders-series-by-robin-hobb-no-spoilers",
+   "quote": "her talent truly shines when she’s deep inside a characters head",
+   "page": "paragraph beginning 'The opening of the novel'"
+  },
+  {
+   "index": 328,
+   "feature": "other: exposition without explanation",
+   "claim": "The reviewer credits Hobb with conveying a great deal of historical, societal and environmental information through characters who each know different aspects of the same events, without it sounding explanatory.",
+   "source": "HearWriteNow blog review of The Liveship Traders",
+   "url": "https://hearwritenow.com/reviews/fantasy/liveship/",
+   "quote": "without it sounding explanatory",
+   "page": "section 'The Liveship Traders', third paragraph"
+  },
+  {
+   "index": 329,
+   "feature": "point of view and distance",
+   "claim": "The reviewer notes that the Liveship Traders trilogy keeps its multiple viewpoints professionally contained to one viewpoint per scene.",
+   "source": "HearWriteNow blog review of The Liveship Traders",
+   "url": "https://hearwritenow.com/reviews/fantasy/liveship/",
+   "quote": "professionally contained to one viewpoint per scene",
+   "page": "section 'The Liveship Traders', first paragraph"
+  }
+ ]
+}

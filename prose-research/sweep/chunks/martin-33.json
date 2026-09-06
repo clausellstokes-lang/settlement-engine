@@ -1,0 +1,158 @@
+{
+ "name": "martin",
+ "chunk": 33,
+ "indices": [
+  825,
+  826,
+  827,
+  828,
+  829,
+  830,
+  831,
+  832,
+  833,
+  834,
+  835,
+  836,
+  837,
+  838,
+  839
+ ],
+ "claims": [
+  {
+   "index": 825,
+   "feature": "opening sentence",
+   "claim": "Germani assembled a readable 427-word passage out of the first sentences of 26 different paragraphs of A Game of Thrones totalling 1,897 words.",
+   "source": "Erik Germani, 'Compressible Paragraphs', At Sea Journal",
+   "url": "https://atseajournal.com/asoiaf/essays/compressibility.html",
+   "quote": "built from the first sentences of 26 different paragraphs",
+   "page": "essay body"
+  },
+  {
+   "index": 826,
+   "feature": "adjective and adverb discipline",
+   "claim": "Germani's verdict is that Martin is imprecise rather than incompetent as a sentence writer.",
+   "source": "Erik Germani, 'Imprecise Sentences', At Sea Journal",
+   "url": "https://atseajournal.com/asoiaf/essays/imprecision.html",
+   "quote": "Martin is imprecise, not incompetent",
+   "page": "essay body"
+  },
+  {
+   "index": 827,
+   "feature": "cadence and rhythm",
+   "claim": "Germani argues that flow between sentences, rather than great individual sentences, is the litmus test for a successful author, and that Martin passes it.",
+   "source": "Erik Germani, 'Imprecise Sentences', At Sea Journal",
+   "url": "https://atseajournal.com/asoiaf/essays/imprecision.html",
+   "quote": "Flow between sentences is the litmus test for a successful author",
+   "page": "essay body"
+  },
+  {
+   "index": 828,
+   "feature": "register modulation",
+   "claim": "Germani observes Martin shifting into antiquated diction in a passage describing the haunted forest.",
+   "source": "Erik Germani, 'Purple Prose in Green and Red', At Sea Journal",
+   "url": "https://atseajournal.com/asoiaf/essays/purple.html",
+   "quote": "Martin shifts into antiquated diction",
+   "page": "essay body"
+  },
+  {
+   "index": 829,
+   "feature": "register modulation",
+   "claim": "Germani argues Martin's writing leaps into a high register when presented with the wordless sensations of nature and violence.",
+   "source": "Erik Germani, 'Purple Prose in Green and Red', At Sea Journal",
+   "url": "https://atseajournal.com/asoiaf/essays/purple.html",
+   "quote": "leap into a high register",
+   "page": "essay body"
+  },
+  {
+   "index": 830,
+   "feature": "stylometry",
+   "claim": "Amalvy and colleagues count 777 characters in the novels for their U2 period, against 199 in the TV show annotations.",
+   "source": "Amalvy et al., Social Network Analysis and Mining 14 (2024)",
+   "url": "https://doi.org/10.1007/s13278-024-01365-z",
+   "quote": "there are 777 characters in the novels",
+   "page": "section 2.5 'Character Sets'"
+  },
+  {
+   "index": 831,
+   "feature": "naming and forms of address",
+   "claim": "Amalvy and colleagues report that 731, or 94 percent, of the novels' characters in their U2 period are named.",
+   "source": "Amalvy et al., Social Network Analysis and Mining 14 (2024)",
+   "url": "https://doi.org/10.1007/s13278-024-01365-z",
+   "quote": "named characters in the novels",
+   "page": "section 2.5 'Character Sets'"
+  },
+  {
+   "index": 832,
+   "feature": "withheld information and inference",
+   "claim": "Amalvy and colleagues note that their novel interaction data includes memories, because important plot information is frequently revealed through a character thinking of past events.",
+   "source": "Amalvy et al., Social Network Analysis and Mining 14 (2024)",
+   "url": "https://doi.org/10.1007/s13278-024-01365-z",
+   "quote": "Note that this does include memories",
+   "page": "section 2.2, on the novels dataset"
+  },
+  {
+   "index": 833,
+   "feature": "stylometry",
+   "claim": "Germani counts 148,130 sentences in A Song of Ice and Fire.",
+   "source": "Erik Germani, 'Zeugma and Literary DNA', At Sea Journal",
+   "url": "https://atseajournal.com/asoiaf/essays/proselike.html",
+   "quote": "148,130 by my count",
+   "page": "essay body"
+  },
+  {
+   "index": 834,
+   "feature": "parataxis vs hypotaxis",
+   "claim": "Germani found roughly 250 examples in A Song of Ice and Fire of a zeugma structure in which one verb governs two comma-separated clauses.",
+   "source": "Erik Germani, 'Zeugma and Literary DNA', At Sea Journal",
+   "url": "https://atseajournal.com/asoiaf/essays/proselike.html",
+   "quote": "I found ~250 examples of it",
+   "page": "essay body"
+  },
+  {
+   "index": 835,
+   "feature": "place and institution description",
+   "claim": "Germani identifies the zeugma structure as one Martin uses for describing sky and weather, with the human body as its most common subject.",
+   "source": "Erik Germani, 'Zeugma and Literary DNA', At Sea Journal",
+   "url": "https://atseajournal.com/asoiaf/essays/proselike.html",
+   "quote": "one verb controls multiple phrases",
+   "page": "essay body, defining zeugma"
+  },
+  {
+   "index": 836,
+   "feature": "dialogue register",
+   "claim": "Germani finds Martin willing to be culturally anachronistic in dialogue, citing a Lannister line lifted from Robert Frost.",
+   "source": "Erik Germani, 'Cultural Anachronism', At Sea Journal",
+   "url": "https://atseajournal.com/asoiaf/essays/cultural_anachronism.html",
+   "quote": "Martin is willing to be anachronistic with his dialogue",
+   "page": "essay body, opening"
+  },
+  {
+   "index": 837,
+   "feature": "dialogue register",
+   "claim": "Germani reports that one of Theon's chapters in A Dance with Dragons features 33 different speakers.",
+   "source": "Erik Germani, 'Line Reading', At Sea Journal",
+   "url": "https://atseajournal.com/asoiaf/essays/line_reading.html",
+   "quote": "chapters features 33 different speakers",
+   "page": "essay body"
+  },
+  {
+   "index": 838,
+   "feature": "other: introduction formula for a person",
+   "claim": "Germani finds that Martin's block characterisations follow a fixed order, hitting age, hair, eyes, clothes, and physique.",
+   "source": "Erik Germani, 'Block Characterization', in 'Odds and Ends', At Sea Journal",
+   "url": "https://atseajournal.com/asoiaf/essays/snippets.html",
+   "quote": "He hits on age, hair, eyes, clothes, and physique",
+   "page": "section 'Block Characterization'"
+  },
+  {
+   "index": 839,
+   "feature": "other: introduction formula for a person",
+   "claim": "Germani defines a block characterisation as the block of description a character receives when first coming on stage.",
+   "source": "Erik Germani, 'Block Characterization', in 'Odds and Ends', At Sea Journal",
+   "url": "https://atseajournal.com/asoiaf/essays/snippets.html",
+   "quote": "block of description characters receive when they first come on stage",
+   "page": "section 'Block Characterization'"
+  }
+ ]
+}

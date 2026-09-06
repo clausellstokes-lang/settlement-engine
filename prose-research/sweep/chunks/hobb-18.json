@@ -1,0 +1,158 @@
+{
+ "name": "hobb",
+ "chunk": 18,
+ "indices": [
+  270,
+  271,
+  272,
+  273,
+  274,
+  275,
+  276,
+  277,
+  278,
+  279,
+  280,
+  281,
+  282,
+  283,
+  284
+ ],
+ "claims": [
+  {
+   "index": 270,
+   "feature": "withheld information and inference",
+   "claim": "Hobb uses the Mona Lisa as her analogy: each viewer draws his own conclusions about the elusive smile rather than having eyebrows drawn on.",
+   "source": "Robin Hobb, 'The Fan Fiction Rant', robinhobb.com (page since removed)",
+   "url": "https://web.archive.org/web/20050630015105id_/http://www.robinhobb.com/rant.html",
+   "quote": "Each of us draws his own conclusions about her elusive smile",
+   "page": "Section: I should be flattered"
+  },
+  {
+   "index": 271,
+   "feature": "concrete sensory noun",
+   "claim": "Hobb says that in a description of anything she wants to engage as many of the five senses as possible.",
+   "source": "Robin Hobb, interviewed by Elise Mead, LisiPieces, 2025",
+   "url": "https://www.lisipieces.com/robin-hobb-isnt-writing-back-anymore/",
+   "quote": "We have five senses, and in a description of anything",
+   "page": "On writing food"
+  },
+  {
+   "index": 272,
+   "feature": "place and institution description",
+   "claim": "Mead reports that Hobb keeps geographical consistency by ensuring ingredients match what would actually grow in each region.",
+   "source": "Elise Mead, paraphrasing Robin Hobb, LisiPieces, 2025",
+   "url": "https://www.lisipieces.com/robin-hobb-isnt-writing-back-anymore/",
+   "quote": "ensuring ingredients match what would actually grow in each region",
+   "page": "On writing food"
+  },
+  {
+   "index": 273,
+   "feature": "place and institution description",
+   "claim": "Mead reports that Hobb wishes she had determined coinage and monetary values from the start of her worldbuilding.",
+   "source": "Elise Mead, paraphrasing Robin Hobb, LisiPieces, 2025",
+   "url": "https://www.lisipieces.com/robin-hobb-isnt-writing-back-anymore/",
+   "quote": "determined coinage and monetary values from the start",
+   "page": "On practical wisdom for authors"
+  },
+  {
+   "index": 274,
+   "feature": "other: indexing by incident rather than page",
+   "claim": "Mead reports that Hobb's glossary entries are anchored to a chapter or event rather than page numbers.",
+   "source": "Elise Mead, paraphrasing Robin Hobb, LisiPieces, 2025",
+   "url": "https://www.lisipieces.com/robin-hobb-isnt-writing-back-anymore/",
+   "quote": "anchored to a chapter or event rather than page numbers",
+   "page": "On practical wisdom for authors"
+  },
+  {
+   "index": 275,
+   "feature": "other: magic bounded by limitation",
+   "claim": "Hobb says a tale of three magic wishes works well while an infinite number of wishes is no story at all.",
+   "source": "Robin Hobb, interviewed by Elise Mead, LisiPieces, 2025",
+   "url": "https://www.lisipieces.com/robin-hobb-isnt-writing-back-anymore/",
+   "quote": "A tale of three magic wishes works well",
+   "page": "On the magic systems"
+  },
+  {
+   "index": 276,
+   "feature": "place and institution description",
+   "claim": "Mead says the geography of Fitz's world is not a backdrop but is full of sight, sound, taste, and cinematic color.",
+   "source": "Elise Mead, LisiPieces, 2025",
+   "url": "https://www.lisipieces.com/robin-hobb-isnt-writing-back-anymore/",
+   "quote": "full of sight, sound, taste, and cinematic color",
+   "page": "On worldbuilding"
+  },
+  {
+   "index": 277,
+   "feature": "point of view and distance",
+   "claim": "The blogger argues Hobb's first person in Assassin's Apprentice is less closely restricted to the child narrator than he expected, citing the phrase 'brackish iodine smell' on page 21 as a perception the six-year-old Fitz could not have had.",
+   "source": "Abalieno, Looping Wor(l)d blog, 22 September 2025",
+   "url": "https://loopingworld.com/2025/09/22/assassins-apprentice-robin-hobb/",
+   "quote": "at that early point Fitz had no exposure to the world",
+   "page": "P.S. section at end of post"
+  },
+  {
+   "index": 278,
+   "feature": "adjective and adverb discipline",
+   "claim": "The blogger observes that Hobb renders dramatic events without melodrama: no character screams in pain or is shown in shock.",
+   "source": "Abalieno, Looping Wor(l)d blog, 22 September 2025",
+   "url": "https://loopingworld.com/2025/09/22/assassins-apprentice-robin-hobb/",
+   "quote": "You don’t see melodrama, you don’t see the character screaming in pain",
+   "page": "body, paragraph on time jumps and Fitz's voice"
+  },
+  {
+   "index": 279,
+   "feature": "point of view and distance",
+   "claim": "The blogger characterises Fitz's narrating voice as understated rather than strongly defined, and credits that understatement with bringing the surrounding characters and places forward.",
+   "source": "Abalieno, Looping Wor(l)d blog, 22 September 2025",
+   "url": "https://loopingworld.com/2025/09/22/assassins-apprentice-robin-hobb/",
+   "quote": "But I think Fitz voice is actually understated",
+   "page": "body, paragraph on time jumps"
+  },
+  {
+   "index": 280,
+   "feature": "plainness and economy",
+   "claim": "The blogger says the book is carried by prose rather than dialogue, with direct dialogue taking a secondary place.",
+   "source": "Abalieno, Looping Wor(l)d blog, 22 September 2025",
+   "url": "https://loopingworld.com/2025/09/22/assassins-apprentice-robin-hobb/",
+   "quote": "it is prose first and foremost, with direct dialogue taking a backseat",
+   "page": "body, paragraph beginning 'This was the romantic view'"
+  },
+  {
+   "index": 281,
+   "feature": "consequence on a household",
+   "claim": "The blogger complains that in the final chapters some actions of Assassin's Apprentice appear to carry no consequence, the aftermath being shrugged off by the characters.",
+   "source": "Abalieno, Looping Wor(l)d blog, 22 September 2025",
+   "url": "https://loopingworld.com/2025/09/22/assassins-apprentice-robin-hobb/",
+   "quote": "some actions don’t seem to have any other consequence",
+   "page": "body, paragraph beginning 'Even here it’s not all “perfect.”'"
+  },
+  {
+   "index": 282,
+   "feature": "other: pacing as the site of value",
+   "claim": "The blogger argues the slow pacing of Assassin's Apprentice is not a defect to be endured but where the book's value lies, and that the reading method it demands is staying in the present of the page rather than anticipating.",
+   "source": "Abalieno, Looping Wor(l)d blog, 22 September 2025",
+   "url": "https://loopingworld.com/2025/09/22/assassins-apprentice-robin-hobb/",
+   "quote": "the slow pacing here isn’t a weak point to overcome",
+   "page": "body, paragraph after the quoted reader review"
+  },
+  {
+   "index": 283,
+   "feature": "point of view and distance",
+   "claim": "Reviewer Laura M. Hughes names the narrative voice, not plot or worldbuilding, as the novel's main strength.",
+   "source": "Laura M. Hughes, Fantasy-Hive, 8 December 2017",
+   "url": "https://fantasy-hive.co.uk/2017/12/assassins-apprentice-robin-hobb/",
+   "quote": "the novel’s main strength is its narrative voice",
+   "page": "final body paragraph"
+  },
+  {
+   "index": 284,
+   "feature": "withheld information and inference",
+   "claim": "Hughes contrasts Fitz with Rothfuss's Kvothe, arguing Fitz's self-deprecating narration reports the damning facts about his own actions rather than flattering him.",
+   "source": "Laura M. Hughes, Fantasy-Hive, 8 December 2017",
+   "url": "https://fantasy-hive.co.uk/2017/12/assassins-apprentice-robin-hobb/",
+   "quote": "unlike Kvothe, Fitz is brutally honest",
+   "page": "final body paragraph"
+  }
+ ]
+}

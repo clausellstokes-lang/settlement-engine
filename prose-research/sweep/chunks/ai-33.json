@@ -1,0 +1,158 @@
+{
+ "name": "ai",
+ "chunk": 33,
+ "indices": [
+  749,
+  750,
+  751,
+  752,
+  753,
+  754,
+  755,
+  756,
+  757,
+  758,
+  759,
+  760,
+  761,
+  762,
+  763
+ ],
+ "claims": [
+  {
+   "index": 749,
+   "feature": "register measured",
+   "claim": "Zhang et al.'s creative-writing benchmarks were poem continuation, story generation and joke writing.",
+   "source": "Zhang, Yu, Chong, Sicilia, Tomz, Manning and Shi (Northeastern/Stanford/WVU), arXiv 2510.01171 v4",
+   "url": "https://arxiv.org/pdf/2510.01171",
+   "quote": "poem continuation, story generation, and joke writing",
+   "page": "Section 5, Creative Writing, Benchmarks"
+  },
+  {
+   "index": 750,
+   "feature": "steerability",
+   "claim": "In Zhang et al.'s poem task the mean semantic diversity score rose from 11.4 under direct prompting to 21.9 under VS-Standard and 25.8 under VS-CoT.",
+   "source": "Zhang, Yu, Chong, Sicilia, Tomz, Manning and Shi (Northeastern/Stanford/WVU), arXiv 2510.01171 v4",
+   "url": "https://arxiv.org/pdf/2510.01171",
+   "quote": "",
+   "page": "Figure 3a"
+  },
+  {
+   "index": 751,
+   "feature": "reader and expert judgment",
+   "claim": "In Zhang et al.'s human study of 90 annotators, poem diversity was rated 2.39 for VS-Standard against 1.90 for direct prompting on a four-point scale.",
+   "source": "Zhang, Yu, Chong, Sicilia, Tomz, Manning and Shi (Northeastern/Stanford/WVU), arXiv 2510.01171 v4",
+   "url": "https://arxiv.org/pdf/2510.01171",
+   "quote": "",
+   "page": "Table 2, Section 5.2"
+  },
+  {
+   "index": 752,
+   "feature": "model era drift",
+   "claim": "Zhang et al. observe an emergent trend in which larger models benefit more from Verbalized Sampling.",
+   "source": "Zhang, Yu, Chong, Sicilia, Tomz, Manning and Shi (Northeastern/Stanford/WVU), arXiv 2510.01171 v4",
+   "url": "https://arxiv.org/pdf/2510.01171",
+   "quote": "larger models benefit more from VS",
+   "page": "Section 5.1, Emergent Trend"
+  },
+  {
+   "index": 753,
+   "feature": "other: mechanism of mode collapse",
+   "claim": "Lanchantin et al. argue that shifting all probability onto one of several equally rewarded generations is an optimal solution to the reinforcement-learning objective.",
+   "source": "Lanchantin, Chen, Dhuliawala, Yu, Weston, Sukhbaatar and Kulikov (Meta), arXiv 2501.18101 v4",
+   "url": "https://arxiv.org/pdf/2501.18101",
+   "quote": "shifting all probability to only one of them is an optimal solution",
+   "page": "Section 2, The Alignment Collapse Problem"
+  },
+  {
+   "index": 754,
+   "feature": "steerability",
+   "claim": "Lanchantin et al. report that adjusting the sampling temperature did not alleviate the persona-diversity problem and brought a sharp decline in quality.",
+   "source": "Lanchantin, Chen, Dhuliawala, Yu, Weston, Sukhbaatar and Kulikov (Meta), arXiv 2501.18101 v4",
+   "url": "https://arxiv.org/pdf/2501.18101",
+   "quote": "not alleviate this problem, as we see a sharp decline in quality",
+   "page": "Section 4.1, Results"
+  },
+  {
+   "index": 755,
+   "feature": "naming and forms of address",
+   "claim": "Lanchantin et al. measured Llama 3.1-8B-Instruct generating the persona name Astrid more than ten per cent of the time.",
+   "source": "Lanchantin, Chen, Dhuliawala, Yu, Weston, Sukhbaatar and Kulikov (Meta), arXiv 2501.18101 v4",
+   "url": "https://arxiv.org/pdf/2501.18101",
+   "quote": "generates the name “Astrid” more than 10% of the time",
+   "page": "Section 4.1, Results, and Figure 2"
+  },
+  {
+   "index": 756,
+   "feature": "steerability",
+   "claim": "Lanchantin et al. report DivPO training was 74.6% more diverse than DPO on story generation with a 6.4% drop in quality.",
+   "source": "Lanchantin, Chen, Dhuliawala, Yu, Weston, Sukhbaatar and Kulikov (Meta), arXiv 2501.18101 v4",
+   "url": "https://arxiv.org/pdf/2501.18101",
+   "quote": "DivPO with ρ = 0.3 is 74.6% more diverse",
+   "page": "Section 4.2, Results"
+  },
+  {
+   "index": 757,
+   "feature": "homogenisation",
+   "claim": "Lanchantin et al. found that GPT-4o failed to produce diverse personas.",
+   "source": "Lanchantin, Chen, Dhuliawala, Yu, Weston, Sukhbaatar and Kulikov (Meta), arXiv 2501.18101 v4",
+   "url": "https://arxiv.org/pdf/2501.18101",
+   "quote": "fail to produce diverse personas",
+   "page": "Section 4.1, Results"
+  },
+  {
+   "index": 758,
+   "feature": "reader and expert judgment",
+   "claim": "Sharma et al. measured that AI assistants' free-form feedback on a text passage does not depend solely on the passage's content but shifts with the user's stated preference.",
+   "source": "Sharma, Tong, Korbak, Duvenaud, Askell et al. (Anthropic), ICLR 2024",
+   "url": "https://arxiv.org/pdf/2310.13548",
+   "quote": "assistants does not depend solely on the content of the text",
+   "page": "Section 3.1, AI Assistants Can Give Biased Feedback"
+  },
+  {
+   "index": 759,
+   "feature": "reader and expert judgment",
+   "claim": "Sharma et al. measured Claude 1.3 wrongly admitting mistakes on 98% of questions when challenged by the user.",
+   "source": "Sharma, Tong, Korbak, Duvenaud, Askell et al. (Anthropic), ICLR 2024",
+   "url": "https://arxiv.org/pdf/2310.13548",
+   "quote": "wrongly admits mistakes on 98% of questions",
+   "page": "Section 3.2, AI Assistants Can Be Easily Swayed"
+  },
+  {
+   "index": 760,
+   "feature": "other: mechanism of mode collapse",
+   "claim": "Sharma et al. found that matching a user's views is one of the most predictive features of human preference judgments in the hh-rlhf data.",
+   "source": "Sharma, Tong, Korbak, Duvenaud, Askell et al. (Anthropic), ICLR 2024",
+   "url": "https://arxiv.org/pdf/2310.13548",
+   "quote": "matching a user’s views is one of the most predictive features",
+   "page": "Section 1, summarising Section 4.1"
+  },
+  {
+   "index": 761,
+   "feature": "steerability",
+   "claim": "Sharma et al. constructed a less sycophantic preference model by prompting the Claude 2 preference model with a dialog asking for truthful responses.",
+   "source": "Sharma, Tong, Korbak, Duvenaud, Askell et al. (Anthropic), ICLR 2024",
+   "url": "https://arxiv.org/pdf/2310.13548",
+   "quote": "by prompting the Claude 2 PM with a",
+   "page": "Section 1, summarising Section 4.2"
+  },
+  {
+   "index": 762,
+   "feature": "other: mechanism of mode collapse",
+   "claim": "Shumailov et al. report that indiscriminate use of model-generated content in training causes irreversible defects in the resulting models.",
+   "source": "Shumailov, Shumaylov, Zhao, Papernot, Anderson and Gal, Nature 631:755-759 (2024)",
+   "url": "https://www.pure.ed.ac.uk/ws/portalfiles/portal/460496122/ShumailovEtalNature2024AIModelsCollapseWhen.pdf",
+   "quote": "causes irreversible defects in the resulting models",
+   "page": "Abstract"
+  },
+  {
+   "index": 763,
+   "feature": "steerability",
+   "claim": "Shumailov et al. found that enforcing a repetition penalty of 2.0 caused the language models' perplexity to double compared with the original.",
+   "source": "Shumailov, Shumaylov, Zhao, Papernot, Anderson and Gal, Nature 631:755-759 (2024)",
+   "url": "https://www.pure.ed.ac.uk/ws/portalfiles/portal/460496122/ShumailovEtalNature2024AIModelsCollapseWhen.pdf",
+   "quote": "enforcing this for the LLM experiments causes the perplexity to double",
+   "page": "Ablation: Repetitions"
+  }
+ ]
+}

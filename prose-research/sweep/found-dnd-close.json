@@ -1,240 +1,4 @@
 {
- "complete": true,
- "coverage": "Angle roster fetched in full: tenfootpole.org (Review Standards, the Book Introduction, the Phandelver and Curse of Strahd reviews), The Alexandrian (GM Don't List #13, Art of the Key parts 1-2, Yawning Portal textual history, Awesome Dungeon Rooms, How to Prep a Module 2, 2025 starter-set review), DMDavid (two posts), Grognardia (three posts), and forum threads on EN World (three); blogs Critical Hits, D&D Beyond, Dungeon Master's Workshop, Dungeon of Signs, Age of Dusk, Hack & Slash and Jim Nelson's site; one primary recovered from the Wayback Machine (Decker and Noonan's 2005 Wizards column, the source everyone cites). Not found: Necropraxis 'Seen in a Glance' (404; reached only through The Alexandrian's citation). Blocked: no video-essay transcript and no dedicated reading-group thread was reached - WebSearch hit its 200-call session budget early, and DuckDuckGo, Marginalia and Reddit all refused direct curl, so late discovery ran on bibliography chasing and site-internal search only. Substantive sources by route: 9 from the named roster, 11 by bibliography chasing and on-site search from those pages, 3 by lateral search before the budget ran out; 27 substantive of 29 fetched.",
- "sourcesRead": [
-  {
-   "title": "Review Standards",
-   "url": "https://tenfootpole.org/ironspike/?page_id=1201",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2016 (page, comments to 2018)",
-   "route": "direct curl, browser UA"
-  },
-  {
-   "title": "GM Don't List #13: Boxed Text Pitfalls (Justin Alexander, The Alexandrian)",
-   "url": "https://thealexandrian.net/wordpress/48312/roleplaying-games/gm-dont-list-13-boxed-text-pitfalls",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2022-08-01",
-   "route": "direct curl, browser UA"
-  },
-  {
-   "title": "Dungeon Mastering 101: Mastering the Boxed Text (Dungeon Master's Workshop)",
-   "url": "https://dmsworkshop.com/2019/09/27/dm-101-boxed-text-mastering/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2019-09-27",
-   "route": "direct curl, browser UA"
-  },
-  {
-   "title": "Design & Development: Undercover at Gen Con, Part 1 (Jesse Decker and David Noonan, Wizards of the Coast)",
-   "url": "http://archive.wizards.com/default.asp?x=dnd/dd/20050916a",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "2005-09-16",
-   "route": "Wayback raw id_ capture 20210713073031"
-  },
-  {
-   "title": "Retrospective: The Village of Hommlet (James Maliszewski, Grognardia)",
-   "url": "http://grognardia.blogspot.com/2008/10/retrospective-village-of-hommlet.html",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2008-10-01",
-   "route": "direct curl, browser UA"
-  },
-  {
-   "title": "A different kind of naturalism (Jim Nelson)",
-   "url": "https://j-nelson.net/2020/02/a-different-kind-of-naturalism/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2020-02-12 (updated 2020-08-14)",
-   "route": "direct curl, browser UA"
-  },
-  {
-   "title": "Thinking Outside the Boxed Text (Shawn Merwin, Critical Hits)",
-   "url": "https://critical-hits.com/blog/2010/08/27/thinking-outside-the-boxed-text/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2010-08-27",
-   "route": "direct curl, browser UA"
-  },
-  {
-   "title": "Let's Design an Adventure: Boxed Text (Shawn Merwin, D&D Beyond)",
-   "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2019-11-06",
-   "route": "direct curl, browser UA"
-  },
-  {
-   "title": "How much description should a dungeon key include? (David Hartlage, DMDavid)",
-   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "n.d. (DMDavid)",
-   "route": "direct curl, browser UA"
-  },
-  {
-   "title": "The Art of the Key (Justin Alexander, The Alexandrian)",
-   "url": "https://thealexandrian.net/wordpress/35180/roleplaying-games/the-art-of-the-key",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2014-05-19",
-   "route": "direct curl, browser UA"
-  },
-  {
-   "title": "[5e] – Lost Mine of Phandelver (Bryce Lynch, tenfootpole.org)",
-   "url": "https://tenfootpole.org/ironspike/?p=2469",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2014-07-07",
-   "route": "direct curl, browser UA"
-  },
-  {
-   "title": "Curse of Strahd (Bryce Lynch, tenfootpole.org)",
-   "url": "https://tenfootpole.org/ironspike/?p=2936",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2016-03-14",
-   "route": "direct curl, browser UA"
-  },
-  {
-   "title": "What Does It Look Like? 4 Steps for Beating the Boxed Text Blues (Radiating Gnome, EN World) and its reply thread",
-   "url": "https://www.enworld.org/threads/what-does-it-look-like-4-steps-for-beating-the-boxed-text-blues.661997/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2013-07-13 (replies to 2013-07-16)",
-   "route": "direct curl, browser UA"
-  },
-  {
-   "title": "Lost Mines of Phandelver - Review (Gus L., Dungeon of Signs)",
-   "url": "http://dungeonofsigns.blogspot.com/2015/12/lost-mines-of-phandelver-review.html",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2015-12",
-   "route": "direct curl, browser UA"
-  },
-  {
-   "title": "Read aloud text in modules: what are folks opinions about read aloud content? (EN World thread)",
-   "url": "https://www.enworld.org/threads/read-aloud-text-in-modules-what-are-folks-opinions-about-read-aloud-content.712737/",
-   "kind": "reader",
-   "substantive": false,
-   "date": "thread, page 1 fetched",
-   "route": "direct curl, browser UA — only page 1 of 12 rendered; thin"
-  },
-  {
-   "title": "Picturing the dungeon – boxed text (David Hartlage, DMDavid)",
-   "url": "https://dmdavid.com/tag/picturing-the-dungeon-boxed-text/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2012-11-15",
-   "route": "direct curl, browser UA"
-  },
-  {
-   "title": "Forgotten Realms: A Textual History of the Yawning Portal (Justin Alexander, The Alexandrian)",
-   "url": "https://thealexandrian.net/wordpress/47553/roleplaying-games/forgotten-realms-a-textual-history-of-the-yawning-portal",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2022-03-31",
-   "route": "direct curl, browser UA"
-  },
-  {
-   "title": "Scrappy-Doo and the Hickman Revolution (James Maliszewski, Grognardia)",
-   "url": "https://grognardia.blogspot.com/2008/12/scrappy-doo-and-hickman-revolution.html",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2008-12-04",
-   "route": "direct curl, browser UA"
-  },
-  {
-   "title": "Retrospective: The Hidden Shrine of Tamoachan (James Maliszewski, Grognardia)",
-   "url": "https://grognardia.blogspot.com/2010/06/retrospective-hidden-shrine-of.html",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2010-06-02",
-   "route": "direct curl, browser UA"
-  },
-  {
-   "title": "The Book Introduction (Bryce Lynch, tenfootpole.org)",
-   "url": "https://tenfootpole.org/ironspike/?page_id=9593",
-   "kind": "own-words",
-   "substantive": true,
-   "date": "n.d.",
-   "route": "direct curl, browser UA"
-  },
-  {
-   "title": "The Art of the Key – Part 2: The Essential Key (Justin Alexander, The Alexandrian)",
-   "url": "https://thealexandrian.net/wordpress/35201/roleplaying-games/the-art-of-the-key-part-2-the-essential-key",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2014-05-21",
-   "route": "direct curl, browser UA"
-  },
-  {
-   "title": "Reviewing Standards (Prince, Age of Dusk)",
-   "url": "https://princeofnothingblogs.wordpress.com/reviewing-standards/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "n.d. (page, revised)",
-   "route": "direct curl, browser UA"
-  },
-  {
-   "title": "On Set Design (Courtney Campbell, Hack & Slash)",
-   "url": "https://hackslashmaster.blogspot.com/2012/06/on-set-design.html",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2012-06",
-   "route": "direct curl, browser UA (blogspot.com host; the .co.nz link in The Alexandrian redirects)"
-  },
-  {
-   "title": "Seen in a Glance (Necropraxis)",
-   "url": "https://necropraxis.com/2014/05/20/seen-in-a-glance/",
-   "kind": "analysis",
-   "substantive": false,
-   "date": "n/a",
-   "route": "NOT FOUND — 404 page returned; cited only through The Alexandrian"
-  },
-  {
-   "title": "Random GM Tip: Awesome Dungeon Rooms (Justin Alexander, The Alexandrian)",
-   "url": "https://thealexandrian.net/wordpress/47256/roleplaying-games/random-gm-tip-awesome-dungeon-rooms",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2022-01-19",
-   "route": "direct curl, browser UA"
-  },
-  {
-   "title": "How to Prep a Module – Part 2 (Justin Alexander, The Alexandrian)",
-   "url": "https://thealexandrian.net/wordpress/46535/roleplaying-games/how-to-prep-a-module-part-2",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2021-07-28",
-   "route": "direct curl, browser UA"
-  },
-  {
-   "title": "Review: Heroes of the Borderlands – D&D Starter Set 2025 (Justin Alexander, The Alexandrian)",
-   "url": "https://thealexandrian.net/wordpress/52962/roleplaying-games/review-heroes-of-the-borderlands-dd-starter-set-2025",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2025 (review of the 2025 starter set)",
-   "route": "direct curl, browser UA"
-  },
-  {
-   "title": "Read aloud text in modules (EN World thread, page 4)",
-   "url": "https://www.enworld.org/threads/read-aloud-text-in-modules-what-are-folks-opinions-about-read-aloud-content.712737/page-4",
-   "kind": "reader",
-   "substantive": true,
-   "date": "2025-04-05",
-   "route": "direct curl, browser UA"
-  },
-  {
-   "title": "Boxed texts (EN World thread, 2020)",
-   "url": "https://www.enworld.org/threads/boxed-texts.673236/",
-   "kind": "reader",
-   "substantive": true,
-   "date": "2020-07-12",
-   "route": "direct curl, browser UA"
-  }
- ],
  "claims": [
   {
    "feature": "boxed text form",
@@ -1495,6 +1259,250 @@
    "routeHint": "direct curl with browser UA",
    "registerHint": "dm-page",
    "confidence": "high"
+  }
+ ],
+ "complete": true,
+ "coverage": "Angle roster fetched in full: tenfootpole.org (Review Standards, The Book Introduction, the Phandelver and Curse of Strahd reviews), The Alexandrian (GM Don't List #13, Art of the Key parts 1-2, the Yawning Portal textual history, Awesome Dungeon Rooms, How to Prep a Module 2, the 2025 starter-set review), DMDavid (two posts), Grognardia (three posts), and three EN World forum threads; plus Critical Hits, D&D Beyond, Dungeon Master's Workshop, Dungeon of Signs, Age of Dusk, Hack & Slash and Jim Nelson's site; one primary recovered from the Wayback Machine (Decker and Noonan's 2005 Wizards column, the source the later critics all cite). Not found: Necropraxis \"Seen in a Glance\" (404; reached only through The Alexandrian's citation). Blocked: no video-essay transcript and no dedicated reading-group thread was reached — WebSearch hit its 200-call session budget early and DuckDuckGo, Marginalia and Reddit all refused direct curl, so late discovery ran on bibliography chasing and site-internal search only. Substantive sources by route: 9 from the named roster, 11 by bibliography chasing and on-site search from those pages, 3 by lateral search before the budget ran out; 27 substantive of 29 fetched, 90 claims, every quotation re-verified verbatim against the fetched text. Full record at scratchpad/prose-research/sweep/found-dnd-close.json with raw notes in find-dnd-close.md.",
+ "sourcesRead": [
+  {
+   "title": "Review Standards (Bryce Lynch and 'The Pretty Girl', tenfootpole.org)",
+   "url": "https://tenfootpole.org/ironspike/?page_id=1201",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2016 (page; comments to 2018)",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "GM Don't List #13: Boxed Text Pitfalls (Justin Alexander, The Alexandrian)",
+   "url": "https://thealexandrian.net/wordpress/48312/roleplaying-games/gm-dont-list-13-boxed-text-pitfalls",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2022-08-01",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Dungeon Mastering 101: Mastering the Boxed Text (Dungeon Master's Workshop)",
+   "url": "https://dmsworkshop.com/2019/09/27/dm-101-boxed-text-mastering/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2019-09-27",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Design & Development: Undercover at Gen Con, Part 1 (Jesse Decker and David Noonan, Wizards of the Coast)",
+   "url": "http://archive.wizards.com/default.asp?x=dnd/dd/20050916a",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "2005-09-16",
+   "route": "Wayback raw capture web.archive.org/web/20210713073031id_/"
+  },
+  {
+   "title": "Retrospective: The Village of Hommlet (James Maliszewski, Grognardia)",
+   "url": "http://grognardia.blogspot.com/2008/10/retrospective-village-of-hommlet.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2008-10-01",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "A different kind of naturalism (Jim Nelson)",
+   "url": "https://j-nelson.net/2020/02/a-different-kind-of-naturalism/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2020-02-12 (updated 2020-08-14)",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Thinking Outside the Boxed Text (Shawn Merwin, Critical Hits)",
+   "url": "https://critical-hits.com/blog/2010/08/27/thinking-outside-the-boxed-text/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2010-08-27",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Let's Design an Adventure: Boxed Text (Shawn Merwin, D&D Beyond)",
+   "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2019-11-06",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "How much description should a dungeon key include? (David Hartlage, DMDavid)",
+   "url": "https://dmdavid.com/tag/how-much-description-should-a-dungeon-key-include/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "n.d.",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "The Art of the Key (Justin Alexander, The Alexandrian)",
+   "url": "https://thealexandrian.net/wordpress/35180/roleplaying-games/the-art-of-the-key",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2014-05-19",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "[5e] – Lost Mine of Phandelver (Bryce Lynch, tenfootpole.org)",
+   "url": "https://tenfootpole.org/ironspike/?p=2469",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2014-07-07",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Curse of Strahd (Bryce Lynch, tenfootpole.org)",
+   "url": "https://tenfootpole.org/ironspike/?p=2936",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2016-03-14",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "What Does It Look Like? 4 Steps for Beating the Boxed Text Blues (Radiating Gnome, EN World) and its reply thread",
+   "url": "https://www.enworld.org/threads/what-does-it-look-like-4-steps-for-beating-the-boxed-text-blues.661997/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2013-07-13 (replies to 2013-07-16)",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Lost Mines of Phandelver - Review (Gus L., Dungeon of Signs)",
+   "url": "http://dungeonofsigns.blogspot.com/2015/12/lost-mines-of-phandelver-review.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2015-12",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Read aloud text in modules: what are folks opinions about read aloud content? (EN World thread, page 1)",
+   "url": "https://www.enworld.org/threads/read-aloud-text-in-modules-what-are-folks-opinions-about-read-aloud-content.712737/",
+   "kind": "reader",
+   "substantive": false,
+   "date": "2025",
+   "route": "direct curl, browser UA — only the opening posts rendered; thin"
+  },
+  {
+   "title": "Picturing the dungeon – boxed text (David Hartlage, DMDavid)",
+   "url": "https://dmdavid.com/tag/picturing-the-dungeon-boxed-text/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2012-11-15",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Forgotten Realms: A Textual History of the Yawning Portal (Justin Alexander, The Alexandrian)",
+   "url": "https://thealexandrian.net/wordpress/47553/roleplaying-games/forgotten-realms-a-textual-history-of-the-yawning-portal",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2022-03-31",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Scrappy-Doo and the Hickman Revolution (James Maliszewski, Grognardia)",
+   "url": "https://grognardia.blogspot.com/2008/12/scrappy-doo-and-hickman-revolution.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2008-12-04",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Retrospective: The Hidden Shrine of Tamoachan (James Maliszewski, Grognardia)",
+   "url": "https://grognardia.blogspot.com/2010/06/retrospective-hidden-shrine-of.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2010-06-02",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "The Book Introduction (Bryce Lynch, tenfootpole.org)",
+   "url": "https://tenfootpole.org/ironspike/?page_id=9593",
+   "kind": "own-words",
+   "substantive": true,
+   "date": "n.d.",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "The Art of the Key – Part 2: The Essential Key (Justin Alexander, The Alexandrian)",
+   "url": "https://thealexandrian.net/wordpress/35201/roleplaying-games/the-art-of-the-key-part-2-the-essential-key",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2014-05-21",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Reviewing Standards (Prince, Age of Dusk)",
+   "url": "https://princeofnothingblogs.wordpress.com/reviewing-standards/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "n.d. (page, revised)",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Meanwhile over at Tenfootpole.org… (Prince, Age of Dusk)",
+   "url": "https://princeofnothingblogs.wordpress.com/2018/03/21/meanwhile-over-at-tenfootpole-org/",
+   "kind": "reception",
+   "substantive": false,
+   "date": "2018-03-21",
+   "route": "direct curl, browser UA — read, no claim drawn"
+  },
+  {
+   "title": "On Set Design (Courtney Campbell, Hack & Slash)",
+   "url": "https://hackslashmaster.blogspot.com/2012/06/on-set-design.html",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2012-06",
+   "route": "direct curl, browser UA (the .co.nz link in The Alexandrian redirects to blogspot.com)"
+  },
+  {
+   "title": "Seen in a Glance (Necropraxis)",
+   "url": "https://necropraxis.com/2014/05/20/seen-in-a-glance/",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "n/a",
+   "route": "NOT FOUND — 404 page returned; known only through The Alexandrian's citation"
+  },
+  {
+   "title": "Random GM Tip: Awesome Dungeon Rooms (Justin Alexander, The Alexandrian)",
+   "url": "https://thealexandrian.net/wordpress/47256/roleplaying-games/random-gm-tip-awesome-dungeon-rooms",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2022-01-19",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "How to Prep a Module – Part 2 (Justin Alexander, The Alexandrian)",
+   "url": "https://thealexandrian.net/wordpress/46535/roleplaying-games/how-to-prep-a-module-part-2",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2021-07-28",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Review: Heroes of the Borderlands – D&D Starter Set 2025 (Justin Alexander, The Alexandrian)",
+   "url": "https://thealexandrian.net/wordpress/52962/roleplaying-games/review-heroes-of-the-borderlands-dd-starter-set-2025",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2025",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Read aloud text in modules (EN World thread, page 4)",
+   "url": "https://www.enworld.org/threads/read-aloud-text-in-modules-what-are-folks-opinions-about-read-aloud-content.712737/page-4",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2025-04-05",
+   "route": "direct curl, browser UA"
+  },
+  {
+   "title": "Boxed texts (EN World thread)",
+   "url": "https://www.enworld.org/threads/boxed-texts.673236/",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2020-07-12",
+   "route": "direct curl, browser UA"
   }
  ]
 }

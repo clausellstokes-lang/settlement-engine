@@ -1,0 +1,158 @@
+{
+ "name": "wolfe",
+ "chunk": 11,
+ "indices": [
+  165,
+  166,
+  167,
+  168,
+  169,
+  170,
+  171,
+  172,
+  173,
+  174,
+  175,
+  176,
+  177,
+  178,
+  179
+ ],
+ "claims": [
+  {
+   "index": 165,
+   "feature": "other: historical density",
+   "claim": "Farrell argues that the density of historical detail in the Soldier novels prevents them from being read as straightforward allegory.",
+   "source": "John Farrell, First Things, April 2007",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2007-farrell.pdf",
+   "quote": "The novels are too dense with the details of history",
+   "page": "p. 29"
+  },
+  {
+   "index": 166,
+   "feature": "point of view and distance",
+   "claim": "Farrell judges Wolfe's Castleview weakened by the absence of a first-person narrator to unify it.",
+   "source": "John Farrell, First Things, April 2007",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2007-farrell.pdf",
+   "quote": "lacks the unifying force of a first-person narrator",
+   "page": "p. 30"
+  },
+  {
+   "index": 167,
+   "feature": "place and institution description",
+   "claim": "Gwyneth Jones faults the alternate world of There Are Doors for having no coherent geography, population or time scale.",
+   "source": "Gwyneth Jones, review of Gene Wolfe's There Are Doors, Foundation, Fall 1989 (Science Fiction Foundation)",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1989-jones.pdf",
+   "quote": "without coherent geography, population or time scale",
+   "page": "p. 78"
+  },
+  {
+   "index": 168,
+   "feature": "withheld information and inference",
+   "claim": "Jones reports that Wolfe's withholding in There Are Doors left her groping without guidance rather than inferring.",
+   "source": "Gwyneth Jones, Foundation, Fall 1989",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/1989-jones.pdf",
+   "quote": "The reader is left groping without guidance",
+   "page": "p. 78"
+  },
+  {
+   "index": 169,
+   "feature": "withheld information and inference",
+   "claim": "Wolfe states that the premise of Peace is that its narrator has already died and is haunting his own memories.",
+   "source": "Gene Wolfe, interviewed by Melissa Mia Hall, Amazing Science Fiction Stories, September 1981; reprinted as chapter 3 of Peter Wright (ed.), Shadows of the New Sun, Liverpool University Press, 2007",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2007-hall.pdf",
+   "quote": "a man has died and he is haunting his own mind",
+   "page": "p. 41"
+  },
+  {
+   "index": 170,
+   "feature": "omission as information",
+   "claim": "Wolfe says that very few readers grasp the central fact of Peace, which the novel signals only through its opening sentence about a fallen elm.",
+   "source": "Gene Wolfe, interviewed by Melissa Mia Hall, Amazing, September 1981; repr. Shadows of the New Sun, Liverpool UP 2007",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2007-hall.pdf",
+   "quote": "This is something very few people seem to understand about Peace",
+   "page": "p. 41"
+  },
+  {
+   "index": 171,
+   "feature": "other: drafting method",
+   "claim": "Wolfe says he had all four volumes of The Book of the New Sun in second draft before he offered the first for sale.",
+   "source": "Gene Wolfe, interviewed by Melissa Mia Hall, Amazing, September 1981; repr. Shadows of the New Sun, Liverpool UP 2007",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2007-hall.pdf",
+   "quote": "I had all four volumes in second draft",
+   "page": "p. 43"
+  },
+  {
+   "index": 172,
+   "feature": "other: visual versus verbal texture",
+   "claim": "Wolfe says that when he began the Torturer books he was worried that his writing had become too verbal and too cerebral.",
+   "source": "Gene Wolfe, interviewed by Melissa Mia Hall, Amazing, September 1981; repr. Shadows of the New Sun, Liverpool UP 2007",
+   "url": "https://gwern.net/doc/fiction/gene-wolfe/2007-hall.pdf",
+   "quote": "I've been tending to be too verbal, too cerebral",
+   "page": "p. 40"
+  },
+  {
+   "index": 173,
+   "feature": "withheld information and inference",
+   "claim": "Peter Wright argues that ambiguity in The Fifth Head of Cerberus is not decoration but an organising principle of the book's form.",
+   "source": "Peter Wright, 'Confounding the Skin and the Mask', paper given at the Gene Wolfe conference, University of Birmingham, 26 August 2000; published in Ultan's Library, 15 January 2002",
+   "url": "https://ultan.org.uk/confounding-the-skin-and-the-mask/",
+   "quote": "an organising principle of form, a means of confounding interpretation",
+   "page": "opening paragraph"
+  },
+  {
+   "index": 174,
+   "feature": "omission as information",
+   "claim": "Wright argues that the unsolved puzzle in The Fifth Head of Cerberus carries the book's political argument, so the withholding is where the meaning lives rather than an obstacle in front of it.",
+   "source": "Peter Wright, 'Confounding the Skin and the Mask', Ultan's Library, 15 January 2002",
+   "url": "https://ultan.org.uk/confounding-the-skin-and-the-mask/",
+   "quote": "the puzzle is where the political arguments of the novel can be found",
+   "page": "section on prior criticism"
+  },
+  {
+   "index": 175,
+   "feature": "other: documentary frame",
+   "claim": "Wright argues that the authorship of the embedded document inside The Fifth Head of Cerberus can be settled by clues planted elsewhere in the collection rather than by any statement of attribution.",
+   "source": "Peter Wright, 'Confounding the Skin and the Mask', Ultan's Library, 15 January 2002",
+   "url": "https://ultan.org.uk/confounding-the-skin-and-the-mask/",
+   "quote": "whose authenticity can be validated from the clues Wolfe weaves",
+   "page": "section on authenticity"
+  },
+  {
+   "index": 176,
+   "feature": "withheld information and inference",
+   "claim": "Wright says Wolfe's clues, though subtle, lead the careful reader to a determinate conclusion, so the ambiguity is resolvable rather than open.",
+   "source": "Peter Wright, 'Confounding the Skin and the Mask', Ultan's Library, 15 January 2002",
+   "url": "https://ultan.org.uk/confounding-the-skin-and-the-mask/",
+   "quote": "clues lead the cautious and reflective reader",
+   "page": "section on authenticity"
+  },
+  {
+   "index": 177,
+   "feature": "place and institution description",
+   "claim": "Wright reads the house at 666 Saltimbanque in The Fifth Head of Cerberus as a standing figure for cultural isolationism, so that the building carries the book's political argument.",
+   "source": "Peter Wright, 'Confounding the Skin and the Mask', Ultan's Library, 15 January 2002",
+   "url": "https://ultan.org.uk/confounding-the-skin-and-the-mask/",
+   "quote": "is a rambling metaphor for cultural isolationism",
+   "page": "section on mimicry"
+  },
+  {
+   "index": 178,
+   "feature": "civic record register",
+   "claim": "Wright argues that Wolfe's two colonised worlds are shown inside a colonial system that has no colonial discourse, so no official account of who is human is available to the reader.",
+   "source": "Peter Wright, 'Confounding the Skin and the Mask', Ultan's Library, 15 January 2002",
+   "url": "https://ultan.org.uk/confounding-the-skin-and-the-mask/",
+   "quote": "exist in a colonial system lacking a colonial discourse",
+   "page": "section on colonial discourse"
+  },
+  {
+   "index": 179,
+   "feature": "withheld information and inference",
+   "claim": "Wright quotes the critic Bruce Gillespie complaining that Wolfe's stories offer only jigsaw pieces with no certainty that a pattern exists.",
+   "source": "Bruce Gillespie, 'Gene Wolfe's Sleight of Hand', Australian Science Fiction Review, March 1986, p. 15, quoted by Peter Wright in Ultan's Library (2002)",
+   "url": "https://ultan.org.uk/confounding-the-skin-and-the-mask/",
+   "quote": "little pieces of the jigsaw and one is never quite sure",
+   "page": "opening paragraph"
+  }
+ ]
+}

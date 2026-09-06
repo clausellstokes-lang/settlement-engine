@@ -1,0 +1,158 @@
+{
+ "name": "ai",
+ "chunk": 29,
+ "indices": [
+  689,
+  690,
+  691,
+  692,
+  693,
+  694,
+  695,
+  696,
+  697,
+  698,
+  699,
+  700,
+  701,
+  702,
+  703
+ ],
+ "claims": [
+  {
+   "index": 689,
+   "feature": "abstraction over the concrete",
+   "claim": "Sloan reports that the model knew he was writing a mystery and reached for the appropriate terms and tropes, but that this was nowhere close to sufficient.",
+   "source": "Robin Sloan, novelist, newsletter, November 2022",
+   "url": "https://www.robinsloan.com/newsletters/authors-note/",
+   "quote": "It knew I was writing a mystery",
+   "page": "section \"Notes on writing with Google's AI\""
+  },
+  {
+   "index": 690,
+   "feature": "steerability",
+   "claim": "Sloan reports that the project only worked once he established a fenced-in space for the AI, assigning it a litany of grisly deaths and fantasy character names to riff on rather than any structural role.",
+   "source": "Robin Sloan, novelist, newsletter, November 2022",
+   "url": "https://www.robinsloan.com/newsletters/authors-note/",
+   "quote": "a fenced-in space for the AI",
+   "page": "section \"Notes on writing with Google's AI\""
+  },
+  {
+   "index": 691,
+   "feature": "steerability",
+   "claim": "Sloan reports that the AI did not make a useful or pleasant writing partner because even a state-of-the-art language model cannot presently understand what a fiction writer is trying to accomplish in an evolving draft.",
+   "source": "Robin Sloan, novelist, newsletter, November 2022",
+   "url": "https://www.robinsloan.com/newsletters/authors-note/",
+   "quote": "did not make a useful or pleasant writing partner",
+   "page": "section \"Notes on writing with Google's AI\", third closing thought"
+  },
+  {
+   "index": 692,
+   "feature": "gloss and over-explaining",
+   "claim": "Doctorow refers in passing to the verbosity of chatbot responses as a reason forwarding transcripts imposes on the reader.",
+   "source": "Cory Doctorow, novelist and journalist, Pluralistic, 2 March 2026",
+   "url": "https://pluralistic.net/2026/03/02/nonconsensual-slopping/",
+   "quote": "the verbosity of chatbot responses",
+   "page": "para. beginning \"The same is true of your conversations with chatbots\""
+  },
+  {
+   "index": 693,
+   "feature": "other: surface polish with nothing underneath",
+   "claim": "Doctorow argues that prompting a model for a rebuttal yields a blob of plausible sentences that is just stochastic word-salad until a human who understands the issue verifies it line by line.",
+   "source": "Cory Doctorow, novelist and journalist, Pluralistic, 2 March 2026",
+   "url": "https://pluralistic.net/2026/03/02/nonconsensual-slopping/",
+   "quote": "you have generated a blob of plausible sentences",
+   "page": "para. beginning \"You haven't generated a rebuttal\""
+  },
+  {
+   "index": 694,
+   "feature": "gloss and over-explaining",
+   "claim": "Doctorow describes what a chatbot costlessly produces as infinite volumes of verbose, plausible-seeming topical sentences.",
+   "source": "Cory Doctorow, novelist and journalist, Pluralistic, 2 March 2026",
+   "url": "https://pluralistic.net/2026/03/02/nonconsensual-slopping/",
+   "quote": "infinite volumes of verbose, plausible-seeming topical sentences",
+   "page": "para. beginning \"Remember: even the AI companies will tell you\""
+  },
+  {
+   "index": 695,
+   "feature": "counter-evidence",
+   "claim": "Mark Williams rejects the premise of AI-spotting, arguing that machine writing does not carry a stable, visible fingerprint.",
+   "source": "Mark Williams, editor-in-chief, The New Publishing Standard, 16 August 2026",
+   "url": "https://thenewpublishingstandard.com/2026/08/16/anthropic-ai-slop-detection-guide/",
+   "quote": "machine writing carries a stable, visible fingerprint",
+   "page": "section \"Full disclosure\""
+  },
+  {
+   "index": 696,
+   "feature": "counter-evidence",
+   "claim": "Williams argues that what the supposed AI tells actually mark is the fingerprint of editing - clarity, structure, transitions, a point that goes somewhere - which is a feature of good writing whoever produced the first draft.",
+   "source": "Mark Williams, editor-in-chief, The New Publishing Standard, 16 August 2026",
+   "url": "https://thenewpublishingstandard.com/2026/08/16/anthropic-ai-slop-detection-guide/",
+   "quote": "What it carries is the fingerprint of editing",
+   "page": "section \"Full disclosure\""
+  },
+  {
+   "index": 697,
+   "feature": "detection and its failures",
+   "claim": "Williams argues that classifiers cannot reliably separate AI prose from human prose because the models were trained on human prose, so the categories overlap by construction.",
+   "source": "Mark Williams, editor-in-chief, The New Publishing Standard, 16 August 2026",
+   "url": "https://thenewpublishingstandard.com/2026/08/16/anthropic-ai-slop-detection-guide/",
+   "quote": "the categories overlap by construction",
+   "page": "section beginning \"So here's the actual argument\""
+  },
+  {
+   "index": 698,
+   "feature": "detection and its failures",
+   "claim": "Williams argues that detectors falsely flag non-native English writing because ESL prose tends toward simpler sentence-length variance, safer phrasing and fewer idioms, the very features detectors treat as tells.",
+   "source": "Mark Williams, editor-in-chief, The New Publishing Standard, 16 August 2026",
+   "url": "https://thenewpublishingstandard.com/2026/08/16/anthropic-ai-slop-detection-guide/",
+   "quote": "simpler sentence-length variance, safer phrasing, fewer idioms",
+   "page": "section beginning \"So here's the actual argument\""
+  },
+  {
+   "index": 699,
+   "feature": "counter-evidence",
+   "claim": "Williams discloses that the twenty satirical tell-tale signs in his own piece were not written by him but gathered from several AI models, whose sharpest lines he picked and presented as one voice.",
+   "source": "Mark Williams, editor-in-chief, The New Publishing Standard, 16 August 2026",
+   "url": "https://thenewpublishingstandard.com/2026/08/16/anthropic-ai-slop-detection-guide/",
+   "quote": "I put a version of this challenge to several AI models",
+   "page": "section \"Full disclosure\""
+  },
+  {
+   "index": 700,
+   "feature": "homogenisation",
+   "claim": "Strauss reports that the AI-driven author scams she tracks are marked by hyper-personalization coupled with lavish praise, which she attributes to generative AI.",
+   "source": "Victoria Strauss, Writer Beware, 28 August 2026",
+   "url": "https://writerbeware.blog/2026/08/28/production-companies-literary-agents-foreign-languages-ai-driven-scams-continue-to-morph/",
+   "quote": "hyper-personalization coupled with lavish praise",
+   "page": "para. beginning \"The one thing the scammers haven't changed\""
+  },
+  {
+   "index": 701,
+   "feature": "homogenisation",
+   "claim": "Strauss reports that receiving multiple flattering yet suspiciously similar solicitations every day is itself what makes the AI-written approaches start to seem inauthentic.",
+   "source": "Victoria Strauss, Writer Beware, 28 August 2026",
+   "url": "https://writerbeware.blog/2026/08/28/production-companies-literary-agents-foreign-languages-ai-driven-scams-continue-to-morph/",
+   "quote": "suspiciously similar solicitations every day",
+   "page": "para. beginning \"The one thing the scammers haven't changed\""
+  },
+  {
+   "index": 702,
+   "feature": "discourse-level tells",
+   "claim": "Strauss identifies friendly, open-ended inquiry as a common ingredient of AI marketing solicitations, used to incentivize a reply and draw the writer into a long exchange.",
+   "source": "Victoria Strauss, Writer Beware, 28 August 2026",
+   "url": "https://writerbeware.blog/2026/08/28/production-companies-literary-agents-foreign-languages-ai-driven-scams-continue-to-morph/",
+   "quote": "friendly, open-ended inquiry is a common ingredient",
+   "page": "section on the German-language solicitation"
+  },
+  {
+   "index": 703,
+   "feature": "steerability",
+   "claim": "In a pre-registered study of 81 participants post-editing LLM drafts for personal writing tasks, the post-edited text still remained stylistically closer to LLM text than to the participants' own unassisted control text.",
+   "source": "Baumler, Bao, Nghiem, Yang, Carpuat and Daume III, University of Maryland, arXiv:2604.24444, April 2026",
+   "url": "https://arxiv.org/html/2604.24444v1",
+   "quote": "post-edited text still remains stylistically closer in style to LLM text",
+   "page": "Abstract"
+  }
+ ]
+}

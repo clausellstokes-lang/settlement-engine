@@ -1,0 +1,158 @@
+{
+ "name": "dnd",
+ "chunk": 34,
+ "indices": [
+  559,
+  560,
+  561,
+  562,
+  563,
+  564,
+  565,
+  566,
+  567,
+  568,
+  569,
+  570,
+  571,
+  572,
+  573
+ ],
+ "claims": [
+  {
+   "index": 559,
+   "feature": "civic record register",
+   "claim": "City of Splendors classifies the Yawning Portal as a three-story Class C building.",
+   "source": "City of Splendors boxed set (TSR, 1994), reported by Justin Alexander",
+   "url": "https://thealexandrian.net/wordpress/47553/roleplaying-games/forgotten-realms-a-textual-history-of-the-yawning-portal",
+   "quote": "a 3-story Class C building",
+   "page": "section THE EARLY DAYS, list of City of Splendors details"
+  },
+  {
+   "index": 560,
+   "feature": "civic record register",
+   "claim": "City of Splendors dates the founding of the Yawning Portal to 1306 DR.",
+   "source": "City of Splendors boxed set (TSR, 1994), reported by Justin Alexander",
+   "url": "https://thealexandrian.net/wordpress/47553/roleplaying-games/forgotten-realms-a-textual-history-of-the-yawning-portal",
+   "quote": "Durnan established the Yawning Portal in 1306 DR",
+   "page": "section THE EARLY DAYS, list of City of Splendors details"
+  },
+  {
+   "index": 561,
+   "feature": "other: measured detail",
+   "claim": "Ruins of Undermountain gives the taproom well a depth of 140 feet.",
+   "source": "Ruins of Undermountain (TSR, 1991), reported by Justin Alexander",
+   "url": "https://thealexandrian.net/wordpress/47553/roleplaying-games/forgotten-realms-a-textual-history-of-the-yawning-portal",
+   "quote": "The well is 140 feet deep",
+   "page": "section THE EARLY DAYS, list of Ruins of Undermountain details"
+  },
+  {
+   "index": 562,
+   "feature": "other: in-world document form",
+   "claim": "Alexander's published chaos lorebook opens by naming the physical document before its contents.",
+   "source": "Justin Alexander, The Alexandrian, Chaos Lorebook: The Assassins of Chaos, 2026",
+   "url": "https://thealexandrian.net/wordpress/53746/roleplaying-games/chaos-lorebook-the-assassins-of-chaos",
+   "quote": "Three blood-stained scrolls have been bound together",
+   "page": "opening paragraph of the handout"
+  },
+  {
+   "index": 563,
+   "feature": "withheld information and inference",
+   "claim": "Alexander's lorebook handout hedges its source's boasts as claims one can only hope are exaggerated.",
+   "source": "Justin Alexander, The Alexandrian, Chaos Lorebook: The Assassins of Chaos, 2026",
+   "url": "https://thealexandrian.net/wordpress/53746/roleplaying-games/chaos-lorebook-the-assassins-of-chaos",
+   "quote": "which one can only hope are exaggerated",
+   "page": "section UNTO THE DEATH OF WORLDS"
+  },
+  {
+   "index": 564,
+   "feature": "point of view and distance",
+   "claim": "Alexander's lorebook handout marks its inferences with the phrase that it appears the creatures behave a certain way.",
+   "source": "Justin Alexander, The Alexandrian, Chaos Lorebook: The Assassins of Chaos, 2026",
+   "url": "https://thealexandrian.net/wordpress/53746/roleplaying-games/chaos-lorebook-the-assassins-of-chaos",
+   "quote": "It appears that the carach",
+   "page": "section UNTO THE DEATH OF WORLDS"
+  },
+  {
+   "index": 565,
+   "feature": "edition and house style",
+   "claim": "Frank Mentzer's redline review of the Quagmire! rough draft objected that the text was padded.",
+   "source": "Jon Peterson, 'Quagmire! The Making of a 1980's D&D Module', Medium, 2014",
+   "url": "https://medium.com/@increment/quagmire-the-making-of-a-1980s-d-d-module-c30e788ea5f2",
+   "quote": "obviously padded",
+   "page": "Development Hell Level 7: Rough Draft Consultation"
+  },
+  {
+   "index": 566,
+   "feature": "repetition and refrain",
+   "claim": "Mentzer's review of the same draft also faulted it as extremely repetitive.",
+   "source": "Jon Peterson, 'Quagmire! The Making of a 1980's D&D Module', Medium, 2014",
+   "url": "https://medium.com/@increment/quagmire-the-making-of-a-1980s-d-d-module-c30e788ea5f2",
+   "quote": "extremely repetitive",
+   "page": "Development Hell Level 7"
+  },
+  {
+   "index": 567,
+   "feature": "terminology consistency",
+   "claim": "Mentzer objected to the redundant construction 'Patriarch Cleric' by likening it to 'female girl'.",
+   "source": "Jon Peterson, 'Quagmire!', Medium, 2014, reporting Mentzer's marginalia",
+   "url": "https://medium.com/@increment/quagmire-the-making-of-a-1980s-d-d-module-c30e788ea5f2",
+   "quote": "female girl",
+   "page": "Development Hell Level 7"
+  },
+  {
+   "index": 568,
+   "feature": "terminology consistency",
+   "claim": "Mentzer's consultation role was to ensure BECMI modules used the game's system terms consistently.",
+   "source": "Jon Peterson, 'Quagmire!', Medium, 2014",
+   "url": "https://medium.com/@increment/quagmire-the-making-of-a-1980s-d-d-module-c30e788ea5f2",
+   "quote": "exercised the system consistently",
+   "page": "Development Hell Level 7"
+  },
+  {
+   "index": 569,
+   "feature": "edition and house style",
+   "claim": "Every TSR module of the period had a product standards sheet fixing its styles, type sizes and margins.",
+   "source": "Jon Peterson, 'Quagmire!', Medium, 2014",
+   "url": "https://medium.com/@increment/quagmire-the-making-of-a-1980s-d-d-module-c30e788ea5f2",
+   "quote": "listed all of the styles, typesizes, margins",
+   "page": "Development Hell Level 8: The Proof"
+  },
+  {
+   "index": 570,
+   "feature": "plainness and economy",
+   "claim": "Much of the flavor text that troubled Mentzer was cut from the published module.",
+   "source": "Jon Peterson, 'Quagmire!', Medium, 2014",
+   "url": "https://medium.com/@increment/quagmire-the-making-of-a-1980s-d-d-module-c30e788ea5f2",
+   "quote": "including the saving throw notation and the flavor text",
+   "page": "Development Hell Level 7"
+  },
+  {
+   "index": 571,
+   "feature": "other: text budgeting",
+   "claim": "The module's section breakdown worksheet projected each section's length in both pages and lines of the HP3000 editor.",
+   "source": "Jon Peterson, 'Quagmire!', Medium, 2014",
+   "url": "https://medium.com/@increment/quagmire-the-making-of-a-1980s-d-d-module-c30e788ea5f2",
+   "quote": "measured both by page count and by line count",
+   "page": "Development Hell Level 5: Design Crunch Time"
+  },
+  {
+   "index": 572,
+   "feature": "omission as information",
+   "claim": "TSR stripped city names from the player-facing map of Quagmire!, and withheld the pointer to the Spiral City itself.",
+   "source": "Jon Peterson, 'Quagmire!', Medium, 2014",
+   "url": "https://medium.com/@increment/quagmire-the-making-of-a-1980s-d-d-module-c30e788ea5f2",
+   "quote": "is withheld from the players",
+   "page": "Development Hell Level 6: Maps and Illustrations"
+  },
+  {
+   "index": 573,
+   "feature": "boxed text form",
+   "claim": "The front cover of a 1984 TSR module carried only a few sentences of flavor text beneath the cover illustration.",
+   "source": "Jon Peterson, 'Quagmire!', Medium, 2014",
+   "url": "https://medium.com/@increment/quagmire-the-making-of-a-1980s-d-d-module-c30e788ea5f2",
+   "quote": "a few sentences of flavor text",
+   "page": "Development Hell Level 8: The Proof"
+  }
+ ]
+}

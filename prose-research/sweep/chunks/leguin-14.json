@@ -1,0 +1,158 @@
+{
+ "name": "leguin",
+ "chunk": 14,
+ "indices": [
+  255,
+  256,
+  257,
+  258,
+  259,
+  260,
+  261,
+  262,
+  263,
+  264,
+  265,
+  266,
+  267,
+  268,
+  269
+ ],
+ "claims": [
+  {
+   "index": 255,
+   "feature": "edition and house style",
+   "claim": "Steering the Craft was first published by Eighth Mountain in 1998 and the revised edition was published by Mariner in 2015.",
+   "source": "Ursula K. Le Guin Foundation website, Steering the Craft book page",
+   "url": "https://www.ursulakleguin.com/steering-the-craft",
+   "quote": "first published by Eighth Mountain in 1998",
+   "page": "publication note"
+  },
+  {
+   "index": 256,
+   "feature": "edition and house style",
+   "claim": "'From Elfland to Poughkeepsie' was a speech given at the Second Annual Science Fiction Writers' Workshop in 1972 and first published by Pendragon Press in 1973 in a limited run of 776 copies.",
+   "source": "Ursula K. Le Guin Foundation website, From Elfland to Poughkeepsie book page",
+   "url": "https://www.ursulakleguin.com/from-elfland-to-poughkeepsie",
+   "quote": "in 1973 published it in a limited run of 776 copies",
+   "page": "book description"
+  },
+  {
+   "index": 257,
+   "feature": "omission as information",
+   "claim": "Le Guin states as a principle of narrative description that listing is not describing and that only the relevant belongs.",
+   "source": "Ursula K. Le Guin, Steering the Craft: A Twenty-First-Century Guide to Sailing the Sea of Story (Mariner Books / Houghton Mifflin Harcourt, 2015)",
+   "url": "https://archive.org/download/steering-the-craft-a-twenty-first-century-guide-to-sailing-the-sea-of-story-repr/steering-the-craft-a-twenty-first-century-guide-to-sailing-the-sea-of-story-reprintnbsped-9780544611610-9780544612341-0544611616_djvu.txt",
+   "quote": "Listing is not describing. Only the relevant belongs.",
+   "page": "chapter 10, 'Crowding and Leaping'"
+  },
+  {
+   "index": 258,
+   "feature": "omission as information",
+   "claim": "Le Guin says what a writer leaves out is infinitely more than what is left in.",
+   "source": "Ursula K. Le Guin, Steering the Craft: A Twenty-First-Century Guide to Sailing the Sea of Story (Mariner Books / Houghton Mifflin Harcourt, 2015)",
+   "url": "https://archive.org/download/steering-the-craft-a-twenty-first-century-guide-to-sailing-the-sea-of-story-repr/steering-the-craft-a-twenty-first-century-guide-to-sailing-the-sea-of-story-reprintnbsped-9780544611610-9780544612341-0544611616_djvu.txt",
+   "quote": "what you leave out is infinitely more than what you leave in",
+   "page": "chapter 10, 'Crowding and Leaping'"
+  },
+  {
+   "index": 259,
+   "feature": "omission as information",
+   "claim": "Le Guin says there has to be white space around the word and silence around the voice.",
+   "source": "Ursula K. Le Guin, Steering the Craft: A Twenty-First-Century Guide to Sailing the Sea of Story (Mariner Books / Houghton Mifflin Harcourt, 2015)",
+   "url": "https://archive.org/download/steering-the-craft-a-twenty-first-century-guide-to-sailing-the-sea-of-story-repr/steering-the-craft-a-twenty-first-century-guide-to-sailing-the-sea-of-story-reprintnbsped-9780544611610-9780544612341-0544611616_djvu.txt",
+   "quote": "white space around the word, silence around the voice",
+   "page": "chapter 10, 'Crowding and Leaping'"
+  },
+  {
+   "index": 260,
+   "feature": "plainness and economy",
+   "claim": "Le Guin glosses crowding as never using ten vague words where two exact words will do.",
+   "source": "Ursula K. Le Guin, Steering the Craft: A Twenty-First-Century Guide to Sailing the Sea of Story (Mariner Books / Houghton Mifflin Harcourt, 2015)",
+   "url": "https://archive.org/download/steering-the-craft-a-twenty-first-century-guide-to-sailing-the-sea-of-story-repr/steering-the-craft-a-twenty-first-century-guide-to-sailing-the-sea-of-story-reprintnbsped-9780544611610-9780544612341-0544611616_djvu.txt",
+   "quote": "never to use ten vague words where two exact words will do",
+   "page": "chapter 10, 'Crowding and Leaping'"
+  },
+  {
+   "index": 261,
+   "feature": "place and institution description",
+   "claim": "Le Guin warns that overcrowded descriptions clog the story and suffocate themselves.",
+   "source": "Ursula K. Le Guin, Steering the Craft: A Twenty-First-Century Guide to Sailing the Sea of Story (Mariner Books / Houghton Mifflin Harcourt, 2015)",
+   "url": "https://archive.org/download/steering-the-craft-a-twenty-first-century-guide-to-sailing-the-sea-of-story-repr/steering-the-craft-a-twenty-first-century-guide-to-sailing-the-sea-of-story-reprintnbsped-9780544611610-9780544612341-0544611616_djvu.txt",
+   "quote": "Overcrowded descriptions clog the story and suffocate themselves.",
+   "page": "chapter 10, 'Crowding and Leaping'"
+  },
+  {
+   "index": 262,
+   "feature": "concrete sensory noun",
+   "claim": "Praising Patrick O'Brian's sea battles, Le Guin says everything the reader needs to know is included but nothing more.",
+   "source": "Ursula K. Le Guin, Steering the Craft: A Twenty-First-Century Guide to Sailing the Sea of Story (Mariner Books / Houghton Mifflin Harcourt, 2015)",
+   "url": "https://archive.org/download/steering-the-craft-a-twenty-first-century-guide-to-sailing-the-sea-of-story-repr/steering-the-craft-a-twenty-first-century-guide-to-sailing-the-sea-of-story-reprintnbsped-9780544611610-9780544612341-0544611616_djvu.txt",
+   "quote": "Everything the reader needs to know is included, but nothing more.",
+   "page": "chapter 10, 'Crowding and Leaping'"
+  },
+  {
+   "index": 263,
+   "feature": "concrete sensory noun",
+   "claim": "Le Guin praises O'Brian's sensory details as intense, brief and precise.",
+   "source": "Ursula K. Le Guin, Steering the Craft: A Twenty-First-Century Guide to Sailing the Sea of Story (Mariner Books / Houghton Mifflin Harcourt, 2015)",
+   "url": "https://archive.org/download/steering-the-craft-a-twenty-first-century-guide-to-sailing-the-sea-of-story-repr/steering-the-craft-a-twenty-first-century-guide-to-sailing-the-sea-of-story-reprintnbsped-9780544611610-9780544612341-0544611616_djvu.txt",
+   "quote": "The sensory details are intense, brief, precise.",
+   "page": "chapter 10, 'Crowding and Leaping'"
+  },
+  {
+   "index": 264,
+   "feature": "sentence length variation",
+   "claim": "Le Guin says there is no optimum sentence length and that the optimum is variety.",
+   "source": "Ursula K. Le Guin, Steering the Craft: A Twenty-First-Century Guide to Sailing the Sea of Story (Mariner Books / Houghton Mifflin Harcourt, 2015)",
+   "url": "https://archive.org/download/steering-the-craft-a-twenty-first-century-guide-to-sailing-the-sea-of-story-repr/steering-the-craft-a-twenty-first-century-guide-to-sailing-the-sea-of-story-reprintnbsped-9780544611610-9780544612341-0544611616_djvu.txt",
+   "quote": "There is no optimum sentence length. The optimum is variety.",
+   "page": "chapter 3, 'Sentence Length and Complex Syntax'"
+  },
+  {
+   "index": 265,
+   "feature": "sentence length variation",
+   "claim": "Le Guin attributes to teachers, style textbooks, journalists and thriller writers the notion that the only good sentence is a short sentence, and disagrees with it.",
+   "source": "Ursula K. Le Guin, Steering the Craft: A Twenty-First-Century Guide to Sailing the Sea of Story (Mariner Books / Houghton Mifflin Harcourt, 2015)",
+   "url": "https://archive.org/download/steering-the-craft-a-twenty-first-century-guide-to-sailing-the-sea-of-story-repr/steering-the-craft-a-twenty-first-century-guide-to-sailing-the-sea-of-story-reprintnbsped-9780544611610-9780544612341-0544611616_djvu.txt",
+   "quote": "the only good sentence is a short sentence",
+   "page": "chapter 3, 'Sentence Length and Complex Syntax'"
+  },
+  {
+   "index": 266,
+   "feature": "sentence length variation",
+   "claim": "Le Guin calls it a myth that short-sentence prose is more like the way we speak.",
+   "source": "Ursula K. Le Guin, Steering the Craft: A Twenty-First-Century Guide to Sailing the Sea of Story (Mariner Books / Houghton Mifflin Harcourt, 2015)",
+   "url": "https://archive.org/download/steering-the-craft-a-twenty-first-century-guide-to-sailing-the-sea-of-story-repr/steering-the-craft-a-twenty-first-century-guide-to-sailing-the-sea-of-story-reprintnbsped-9780544611610-9780544612341-0544611616_djvu.txt",
+   "quote": "It’s a myth that short-sentence prose is",
+   "page": "chapter 3, 'Sentence Length and Complex Syntax'"
+  },
+  {
+   "index": 267,
+   "feature": "cadence and rhythm",
+   "claim": "Le Guin says that in a narrative the chief duty of a sentence is to lead to the next sentence.",
+   "source": "Ursula K. Le Guin, Steering the Craft: A Twenty-First-Century Guide to Sailing the Sea of Story (Mariner Books / Houghton Mifflin Harcourt, 2015)",
+   "url": "https://archive.org/download/steering-the-craft-a-twenty-first-century-guide-to-sailing-the-sea-of-story-repr/steering-the-craft-a-twenty-first-century-guide-to-sailing-the-sea-of-story-reprintnbsped-9780544611610-9780544612341-0544611616_djvu.txt",
+   "quote": "the chief duty of a sentence is to lead to the next",
+   "page": "chapter 3, 'Sentence Length and Complex Syntax'"
+  },
+  {
+   "index": 268,
+   "feature": "metaphor discipline",
+   "claim": "Le Guin says a sentence is not working as a narrative sentence if its similes or metaphors are so dazzling that they stop the reader.",
+   "source": "Ursula K. Le Guin, Steering the Craft: A Twenty-First-Century Guide to Sailing the Sea of Story (Mariner Books / Houghton Mifflin Harcourt, 2015)",
+   "url": "https://archive.org/download/steering-the-craft-a-twenty-first-century-guide-to-sailing-the-sea-of-story-repr/steering-the-craft-a-twenty-first-century-guide-to-sailing-the-sea-of-story-reprintnbsped-9780544611610-9780544612341-0544611616_djvu.txt",
+   "quote": "the proper beauty and power of prose",
+   "page": "chapter 3, 'Sentence Length and Complex Syntax'"
+  },
+  {
+   "index": 269,
+   "feature": "adjective and adverb discipline",
+   "claim": "Le Guin says adjectives and adverbs are rich and good and nourishing, and cause obesity in prose only when used lazily or overused.",
+   "source": "Ursula K. Le Guin, Steering the Craft: A Twenty-First-Century Guide to Sailing the Sea of Story (Mariner Books / Houghton Mifflin Harcourt, 2015)",
+   "url": "https://archive.org/download/steering-the-craft-a-twenty-first-century-guide-to-sailing-the-sea-of-story-repr/steering-the-craft-a-twenty-first-century-guide-to-sailing-the-sea-of-story-reprintnbsped-9780544611610-9780544612341-0544611616_djvu.txt",
+   "quote": "ADJECTIVES AND ADVERBS ARE RICH AND good and nourishing.",
+   "page": "chapter 5, 'Adjectives and Adverbs', sidebar"
+  }
+ ]
+}

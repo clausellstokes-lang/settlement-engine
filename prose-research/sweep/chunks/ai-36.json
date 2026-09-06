@@ -1,0 +1,158 @@
+{
+ "name": "ai",
+ "chunk": 36,
+ "indices": [
+  794,
+  795,
+  796,
+  797,
+  798,
+  799,
+  800,
+  801,
+  802,
+  803,
+  804,
+  805,
+  806,
+  807,
+  808
+ ],
+ "claims": [
+  {
+   "index": 794,
+   "feature": "other: mechanism of mode collapse",
+   "claim": "Xiao et al. argue the Kullback-Leibler-based regularization in RLHF carries an algorithmic bias that in extreme cases produces preference collapse.",
+   "source": "Xiao, Li, Xie, Getzen, Fang, Long and Su, Journal of the American Statistical Association (arXiv 2405.16455 v2)",
+   "url": "https://arxiv.org/pdf/2405.16455",
+   "quote": "this bias could lead to a phenomenon we term preference collapse",
+   "page": "Abstract"
+  },
+  {
+   "index": 795,
+   "feature": "steerability",
+   "claim": "Xiao et al. report their preference-matching RLHF variant improved alignment with human preferences by 29% to 41% over standard RLHF on one metric.",
+   "source": "Xiao, Li, Xie, Getzen, Fang, Long and Su, Journal of the American Statistical Association (arXiv 2405.16455 v2)",
+   "url": "https://arxiv.org/pdf/2405.16455",
+   "quote": "",
+   "page": "Abstract"
+  },
+  {
+   "index": 796,
+   "feature": "other: mechanism of mode collapse",
+   "claim": "janus, who coined the mode-collapse usage, later corrected the post to say text-davinci-002 was not trained with RLHF.",
+   "source": "janus, 'Mysteries of mode collapse', LessWrong / AI Alignment Forum, 8 November 2022, with the author's later correction note",
+   "url": "https://www.lesswrong.com/posts/t9svvNPNmFf5Qa3TA/mysteries-of-mode-collapse",
+   "quote": "text-davinci-002 was not trained with RLHF",
+   "page": "Important correction, head of post"
+  },
+  {
+   "index": 797,
+   "feature": "steerability",
+   "claim": "janus argues that raising the sampling temperature flattens the rest of the output distribution into undifferentiated goo before it helps escape a high-confidence attractor.",
+   "source": "janus, 'Mysteries of mode collapse', LessWrong / AI Alignment Forum, 8 November 2022",
+   "url": "https://www.lesswrong.com/posts/t9svvNPNmFf5Qa3TA/mysteries-of-mode-collapse",
+   "quote": "will flatten the rest of the output distribution into undifferentiated goo",
+   "page": "Section on temperature"
+  },
+  {
+   "index": 798,
+   "feature": "steerability",
+   "claim": "janus argues the mode collapse he observed is irreducible to an effective decrease in temperature.",
+   "source": "janus, 'Mysteries of mode collapse', LessWrong / AI Alignment Forum, 8 November 2022",
+   "url": "https://www.lesswrong.com/posts/t9svvNPNmFf5Qa3TA/mysteries-of-mode-collapse",
+   "quote": "is irreducible to an effective decrease in temperature",
+   "page": "Section on temperature / Attractors"
+  },
+  {
+   "index": 799,
+   "feature": "steerability",
+   "claim": "janus reports it is sometimes possible to avoid mode collapse using prompt engineering.",
+   "source": "janus, 'Mysteries of mode collapse', LessWrong / AI Alignment Forum, 8 November 2022",
+   "url": "https://www.lesswrong.com/posts/t9svvNPNmFf5Qa3TA/mysteries-of-mode-collapse",
+   "quote": "possible to avoid mode collapse using prompt engineering",
+   "page": "Section on when mode collapse occurs"
+  },
+  {
+   "index": 800,
+   "feature": "counter-evidence",
+   "claim": "Borji concludes from kernel-density-estimate resampling experiments that the outcomes Shumailov et al. report are a statistical phenomenon and may be unavoidable.",
+   "source": "Ali Borji, 'A Note on Shumailov et al. (2024)', arXiv 2410.12954 v2",
+   "url": "https://arxiv.org/pdf/2410.12954",
+   "quote": "the outcomes reported are a statistical phenomenon and may be unavoidable",
+   "page": "Abstract"
+  },
+  {
+   "index": 801,
+   "feature": "register measured",
+   "claim": "Brooks, Eggert and Peskoff detect as many as 5% of 2,909 English Wikipedia articles created in August 2024 as containing significant AI-generated content.",
+   "source": "Brooks, Eggert and Peskoff (Princeton), First Workshop on Advancing NLP for Wikipedia (WikiNLP), ACL 2024",
+   "url": "https://aclanthology.org/2024.wikinlp-1.12.pdf",
+   "quote": "we detect that as many as 5% of 2,909 English",
+   "page": "Figure 1 caption"
+  },
+  {
+   "index": 802,
+   "feature": "detection and its failures",
+   "claim": "Brooks, Eggert and Peskoff report that the Wikipedia articles their detectors flagged are typically of lower quality.",
+   "source": "Brooks, Eggert and Peskoff (Princeton), First Workshop on Advancing NLP for Wikipedia (WikiNLP), ACL 2024",
+   "url": "https://aclanthology.org/2024.wikinlp-1.12.pdf",
+   "quote": "Flagged Wikipedia articles are typically",
+   "page": "Abstract"
+  },
+  {
+   "index": 803,
+   "feature": "detection and its failures",
+   "claim": "Shaib et al. state there is no standard method to measure lexical diversity in language-model output.",
+   "source": "Shaib, Govindarajan, Barrow, Sun, Siu, Wallace and Nenkova, arXiv 2403.00553",
+   "url": "https://arxiv.org/pdf/2403.00553",
+   "quote": "there is no standard method to measure",
+   "page": "Abstract"
+  },
+  {
+   "index": 804,
+   "feature": "steerability",
+   "claim": "Peeperkorn et al. found temperature only weakly correlated with novelty in a narrative generation task.",
+   "source": "Peeperkorn, Kouwenhoven, Brown and Jordanous, 'Is Temperature the Creativity Parameter of Large Language Models?', ICCC 2024 (arXiv 2405.00492)",
+   "url": "https://arxiv.org/pdf/2405.00492",
+   "quote": "temperature is weakly correlated with novelty",
+   "page": "Abstract"
+  },
+  {
+   "index": 805,
+   "feature": "steerability",
+   "claim": "Peeperkorn et al. conclude that raising temperature does not enable access to a larger slice of the probability distribution.",
+   "source": "Peeperkorn, Kouwenhoven, Brown and Jordanous, ICCC 2024 (arXiv 2405.00492)",
+   "url": "https://arxiv.org/pdf/2405.00492",
+   "quote": "does not enable access to a larger slice of the probability",
+   "page": "Conclusion"
+  },
+  {
+   "index": 806,
+   "feature": "steerability",
+   "claim": "Peeperkorn et al. describe the influence of temperature on creativity as far more nuanced and weak than the creativity-parameter claim suggests.",
+   "source": "Peeperkorn, Kouwenhoven, Brown and Jordanous, ICCC 2024 (arXiv 2405.00492)",
+   "url": "https://arxiv.org/pdf/2405.00492",
+   "quote": "far more nuanced and weak",
+   "page": "Conclusion"
+  },
+  {
+   "index": 807,
+   "feature": "other: mechanism of mode collapse",
+   "claim": "O'Mahony et al. find that supervised fine-tuning is largely responsible for the drop in next-token prediction diversity.",
+   "source": "O'Mahony, Grinsztajn, Schoelkopf and Biderman (EleutherAI / Limerick / INRIA), ICLR 2024 ME-FoMo workshop",
+   "url": "https://openreview.net/pdf?id=3pDMYjpOxk",
+   "quote": "We find that SFT is largely responsible for the drop",
+   "page": "Section 1, Introduction"
+  },
+  {
+   "index": 808,
+   "feature": "other: mechanism of mode collapse",
+   "claim": "O'Mahony et al. find the reward-based fine-tuning step causes a dramatic decrease in output diversity not present in its SFT precursor.",
+   "source": "O'Mahony, Grinsztajn, Schoelkopf and Biderman (EleutherAI / Limerick / INRIA), ICLR 2024 ME-FoMo workshop",
+   "url": "https://openreview.net/pdf?id=3pDMYjpOxk",
+   "quote": "dramatic decrease in output diversity which is not present",
+   "page": "Section 1, Introduction"
+  }
+ ]
+}

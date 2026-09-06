@@ -1,0 +1,158 @@
+{
+ "name": "martin",
+ "chunk": 30,
+ "indices": [
+  780,
+  781,
+  782,
+  783,
+  784,
+  785,
+  786,
+  787,
+  788,
+  789,
+  790,
+  791,
+  792,
+  793,
+  794
+ ],
+ "claims": [
+  {
+   "index": 780,
+   "feature": "other: event scheduling and unpredictability",
+   "claim": "Gessey-Jones and colleagues found the distribution of intervals between significant deaths measured in chapters to be geometric rather than power law.",
+   "source": "Gessey-Jones et al., PNAS 117.46 (2020)",
+   "url": "https://www.pnas.org/doi/10.1073/pnas.2006465117",
+   "quote": "geometric rather than power law",
+   "page": "Abstract"
+  },
+  {
+   "index": 781,
+   "feature": "other: interaction extraction method",
+   "claim": "Gessey-Jones and colleagues counted two characters as interacting if they directly meet or the text makes it explicitly clear they knew one another.",
+   "source": "Gessey-Jones et al., PNAS 117.46 (2020)",
+   "url": "https://www.pnas.org/doi/10.1073/pnas.2006465117",
+   "quote": "if they directly meet each other or it is explicitly",
+   "page": "Materials and Methods"
+  },
+  {
+   "index": 782,
+   "feature": "other: authenticity claim",
+   "claim": "Riggs reports that Carroll's main thrust is that Martin uses an argument from authenticity to justify his treatment of women, violence and non-Westerosi characters.",
+   "source": "Don Riggs, book review, Fafnir 6.2 (2019), reporting Shiloh Carroll",
+   "url": "https://journal.finfar.org/articles/book-review-medievalism-in-a-song-of-ice-and-fire-and-game-of-thrones/",
+   "quote": "Martin uses an argument from",
+   "page": "review body, opening paragraph"
+  },
+  {
+   "index": 783,
+   "feature": "withheld information and inference",
+   "claim": "Riggs reports that Carroll sees Martin taking up medieval romance tropes only to subvert them by curtailing the reader's expectation with real-life intrusions.",
+   "source": "Don Riggs, book review, Fafnir 6.2 (2019), reporting Shiloh Carroll",
+   "url": "https://journal.finfar.org/articles/book-review-medievalism-in-a-song-of-ice-and-fire-and-game-of-thrones/",
+   "quote": "curtailing the reader",
+   "page": "review body, on the chapter 'Romance and Anti-Romance'"
+  },
+  {
+   "index": 784,
+   "feature": "place and institution description",
+   "claim": "Riggs quotes Carroll's closing judgement that in reaching for realism Martin created compelling characters, complex plots and subplots, and a masterpiece of worldbuilding.",
+   "source": "Shiloh Carroll, quoted at p.182 in Don Riggs's review, Fafnir 6.2 (2019)",
+   "url": "https://journal.finfar.org/articles/book-review-medievalism-in-a-song-of-ice-and-fire-and-game-of-thrones/",
+   "quote": "Martin has created compelling characters, complex plots and subplots",
+   "page": "review body, quoting Carroll p.182"
+  },
+  {
+   "index": 785,
+   "feature": "register modulation",
+   "claim": "Carroll characterises Martin's way of reimagining the Middle Ages as violent, dark, brutal, and relentlessly masculine.",
+   "source": "Shiloh Carroll, The Public Medievalist (2018)",
+   "url": "https://publicmedievalist.com/grimdark-medievalism/",
+   "quote": "violent, dark, brutal, and relentlessly masculine",
+   "page": "section 'Fantasy for People Who Hate Fantasy'"
+  },
+  {
+   "index": 786,
+   "feature": "concrete sensory noun",
+   "claim": "Carroll argues Martin goes too far in counteracting a rosy vision of the past with one covered in mud.",
+   "source": "Shiloh Carroll, The Public Medievalist (2018)",
+   "url": "https://publicmedievalist.com/grimdark-medievalism/",
+   "quote": "counteracting a rosy vision of the past with one covered in mud",
+   "page": "section 'Fantasy for People Who Hate Fantasy'"
+  },
+  {
+   "index": 787,
+   "feature": "other: realism justification",
+   "claim": "Carroll quotes Martin's defence that it is fundamentally dishonest to write a war story and leave rape out.",
+   "source": "George R. R. Martin, quoted by Shiloh Carroll, The Public Medievalist (2018)",
+   "url": "https://publicmedievalist.com/grimdark-medievalism/",
+   "quote": "if you write a war story and you leave that out",
+   "page": "section 'A Savage Beast in Every Man'"
+  },
+  {
+   "index": 788,
+   "feature": "place and institution description",
+   "claim": "Mendlesohn writes that the immersive fantasy depends for its effectiveness on an assumption of realism that denies the need for explication.",
+   "source": "Farah Mendlesohn, Rhetorics of Fantasy (2008), Introduction",
+   "url": "http://fantasyliterature.pbworks.com/w/file/fetch/86904445/farah%20mendlesohn%20-%20rhetorics%20of%20fantasy%20intro.pdf",
+   "quote": "an assumption of realism that denies the need for explication",
+   "page": "Introduction, section 'The Immersive Fantasy'"
+  },
+  {
+   "index": 789,
+   "feature": "point of view and distance",
+   "claim": "Mendlesohn writes that in immersive fantasy the reader has access to the protagonist's eyes and ears but is not provided with an explanatory narrative.",
+   "source": "Farah Mendlesohn, Rhetorics of Fantasy (2008), Introduction",
+   "url": "http://fantasyliterature.pbworks.com/w/file/fetch/86904445/farah%20mendlesohn%20-%20rhetorics%20of%20fantasy%20intro.pdf",
+   "quote": "we are not provided with an explanatory narrative",
+   "page": "Introduction, section 'The Immersive Fantasy'"
+  },
+  {
+   "index": 790,
+   "feature": "other: expository pressure of the chosen rhetoric",
+   "claim": "Mendlesohn writes that the quest fantasy's transitional narrative forces the author to describe and explain what the point of view character sees.",
+   "source": "Farah Mendlesohn, Rhetorics of Fantasy (2008), Introduction",
+   "url": "http://fantasyliterature.pbworks.com/w/file/fetch/86904445/farah%20mendlesohn%20-%20rhetorics%20of%20fantasy%20intro.pdf",
+   "quote": "forcing the author to describe and explain what",
+   "page": "Introduction, on quest and portal fantasy"
+  },
+  {
+   "index": 791,
+   "feature": "place and institution description",
+   "claim": "Mendlesohn characterises the portal fantasy's language as the elaboration of the anthropologist, intensely descriptive and exploratory rather than assumptive.",
+   "source": "Farah Mendlesohn, Rhetorics of Fantasy (2008), Introduction",
+   "url": "http://fantasyliterature.pbworks.com/w/file/fetch/86904445/farah%20mendlesohn%20-%20rhetorics%20of%20fantasy%20intro.pdf",
+   "quote": "intensely descriptive and exploratory rather than assumptive",
+   "page": "Introduction, on the portal fantasy"
+  },
+  {
+   "index": 792,
+   "feature": "point of view and distance",
+   "claim": "Mendlesohn writes that in portal fantasy the protagonist provides the reader with a guided tour of the landscapes.",
+   "source": "Farah Mendlesohn, Rhetorics of Fantasy (2008), Introduction",
+   "url": "http://fantasyliterature.pbworks.com/w/file/fetch/86904445/farah%20mendlesohn%20-%20rhetorics%20of%20fantasy%20intro.pdf",
+   "quote": "provides us with a guided tour of the landscapes",
+   "page": "Introduction, on the portal fantasy"
+  },
+  {
+   "index": 793,
+   "feature": "point of view and distance",
+   "claim": "Mendlesohn writes that the point of view character of an immersive fantasy must take for granted the fantastic elements surrounding him or her.",
+   "source": "Farah Mendlesohn, Rhetorics of Fantasy (2008), Introduction",
+   "url": "http://fantasyliterature.pbworks.com/w/file/fetch/86904445/farah%20mendlesohn%20-%20rhetorics%20of%20fantasy%20intro.pdf",
+   "quote": "must take for granted the fantastic elements",
+   "page": "Introduction, section 'The Immersive Fantasy'"
+  },
+  {
+   "index": 794,
+   "feature": "plainness and economy",
+   "claim": "Mendlesohn writes that successful immersive fantasy consciously negates the sense of wonder in favour of an atmosphere of ennui.",
+   "source": "Farah Mendlesohn, Rhetorics of Fantasy (2008), Introduction",
+   "url": "http://fantasyliterature.pbworks.com/w/file/fetch/86904445/farah%20mendlesohn%20-%20rhetorics%20of%20fantasy%20intro.pdf",
+   "quote": "consciously negates the sense of wonder",
+   "page": "Introduction, section 'The Immersive Fantasy'"
+  }
+ ]
+}

@@ -15,7 +15,8 @@
   389,
   390,
   391,
-  392
+  392,
+  393
  ],
  "claims": [
   {
@@ -143,6 +144,15 @@
    "url": "https://cyborgsandmages.wordpress.com/wp-content/uploads/2019/11/dnd_house_style_guide_updated_january_2019.pdf",
    "quote": "",
    "page": ""
+  },
+  {
+   "index": 393,
+   "feature": "boxed text form",
+   "claim": "Bryce Lynch lists boxed text among the things he does not want in an adventure module.",
+   "source": "Bryce Lynch, 'Review Standards', tenfootpole.org",
+   "url": "https://tenfootpole.org/ironspike/?page_id=1201",
+   "quote": "Boxed text is usually not a good thing.",
+   "page": "Review Standards, bullet list"
   }
  ]
 }

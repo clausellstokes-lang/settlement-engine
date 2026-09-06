@@ -1,0 +1,158 @@
+{
+ "name": "ai",
+ "chunk": 26,
+ "indices": [
+  644,
+  645,
+  646,
+  647,
+  648,
+  649,
+  650,
+  651,
+  652,
+  653,
+  654,
+  655,
+  656,
+  657,
+  658
+ ],
+ "claims": [
+  {
+   "index": 644,
+   "feature": "homogenisation",
+   "claim": "Preston reports that Brenda's developers touted her unrelenting consistency as a feature, claiming that because she said the same thing to everyone she was incapable of bias.",
+   "source": "Laura Preston, former chatbot operator, n+1 Issue 44, 2022, reporting the developers' claim",
+   "url": "https://www.nplusonemag.com/issue-44/essays/human_fallback/",
+   "quote": "The developers touted her unrelenting consistency as a feature",
+   "page": "section beginning \"Brenda's cyclical catchphrases\""
+  },
+  {
+   "index": 645,
+   "feature": "abstraction over the concrete",
+   "claim": "Preston reports that neither she nor Brenda could answer prospects' specific questions such as carpet or hardwood and which direction the windows faced, and that specifics were what people cared about most.",
+   "source": "Laura Preston, former chatbot operator, n+1 Issue 44, 2022",
+   "url": "https://www.nplusonemag.com/issue-44/essays/human_fallback/",
+   "quote": "specifics, it turns out, were what people cared about the most",
+   "page": "section beginning \"The unfortunate truth\""
+  },
+  {
+   "index": 646,
+   "feature": "reader and expert judgment",
+   "claim": "Preston reports that when Brenda sounded odd and graceless, people were less likely to get intimate with her, which reduced the number of conversations escalated to a human.",
+   "source": "Laura Preston, former chatbot operator, n+1 Issue 44, 2022",
+   "url": "https://www.nplusonemag.com/issue-44/essays/human_fallback/",
+   "quote": "when Brenda sounded odd and graceless, people were less likely to get intimate",
+   "page": "section beginning \"Eventually I reached a level of virtuosity\""
+  },
+  {
+   "index": 647,
+   "feature": "detection and its failures",
+   "claim": "Clarke reports that even AI works that have been co-written or given a polishing edit to disguise them still display the hallmarks he has come to expect.",
+   "source": "Neil Clarke, editor of Clarkesworld, Editor's Desk, August 2025",
+   "url": "https://clarkesworldmagazine.com/clarke_08_25/",
+   "quote": "they still display the hallmarks I",
+   "page": "para. beginning \"In many cases, these works have been 'co-written'\""
+  },
+  {
+   "index": 648,
+   "feature": "detection and its failures",
+   "claim": "Clarke states parenthetically that the tells of generated fiction are more obvious on longer works, which is why some AI flash fiction and poetry has found publication elsewhere.",
+   "source": "Neil Clarke, editor of Clarkesworld, Editor's Desk, August 2025",
+   "url": "https://clarkesworldmagazine.com/clarke_08_25/",
+   "quote": "the tells are more obvious on longer works",
+   "page": "para. beginning \"In many cases, these works have been 'co-written'\""
+  },
+  {
+   "index": 649,
+   "feature": "reader and expert judgment",
+   "claim": "Clarke describes the AI systems writers co-write with as having produced some of the worst stories he has read.",
+   "source": "Neil Clarke, editor of Clarkesworld, Editor's Desk, August 2025",
+   "url": "https://clarkesworldmagazine.com/clarke_08_25/",
+   "quote": "some of the worst stories I",
+   "page": "para. beginning \"If any of that makes you nervous\""
+  },
+  {
+   "index": 650,
+   "feature": "detection and its failures",
+   "claim": "Clarke reports that at the peak of the generated-submission surge Clarkesworld's submissions more than doubled.",
+   "source": "Neil Clarke, editor of Clarkesworld, Editor's Desk, August 2025",
+   "url": "https://clarkesworldmagazine.com/clarke_08_25/",
+   "quote": "our submissions more than doubled due to the high volume of generated works",
+   "page": "para. beginning \"The good news is that the adaptations\""
+  },
+  {
+   "index": 651,
+   "feature": "detection and its failures",
+   "claim": "Clarke reports that when he evaluated commercial detection tools he observed an even greater error rate on works written by non-native English speakers.",
+   "source": "Neil Clarke, editor of Clarkesworld, Editor's Desk, August 2025",
+   "url": "https://clarkesworldmagazine.com/clarke_08_25/",
+   "quote": "an even greater error rate when it came to works written by non-native English speakers",
+   "page": "para. beginning \"I was already thinking ahead\""
+  },
+  {
+   "index": 652,
+   "feature": "detection and its failures",
+   "claim": "Clarke states that he would never trust an algorithm to make a final assessment and personally evaluates each submission his automated check flags as suspicious.",
+   "source": "Neil Clarke, editor of Clarkesworld, personal blog, 2 May 2025",
+   "url": "https://neil-clarke.com/how-ai-submissions-have-changed-our-submissions-process/",
+   "quote": "I would never trust an algorithm to make a final assessment",
+   "page": "para. beginning \"No process is perfect\""
+  },
+  {
+   "index": 653,
+   "feature": "reader and expert judgment",
+   "claim": "Clarke states that setting aside legal and ethical concerns, the output of generative AI tools is nowhere near the standards Clarkesworld expects.",
+   "source": "Neil Clarke, editor of Clarkesworld, personal blog, 2 May 2025",
+   "url": "https://neil-clarke.com/how-ai-submissions-have-changed-our-submissions-process/",
+   "quote": "the output of these tools is nowhere near the standards we expect",
+   "page": "closing section, para. beginning \"And repeated from the previous post\""
+  },
+  {
+   "index": 654,
+   "feature": "other: abstract-concrete conjunction (eyeball kick)",
+   "claim": "nostalgebraist claims the main stylistic hallmark shared by DeepSeek-R1 and an unreleased OpenAI creative-writing model is the conjunction of one thing that is abstract or incorporeal with another that is concrete or sensory.",
+   "source": "nostalgebraist, blogger and ML researcher, Tumblr, March 2025",
+   "url": "https://www.tumblr.com/nostalgebraist/778041178124926976/hydrogen-jukeboxes",
+   "quote": "one thing that is abstract and/or incorporeal",
+   "page": "section \"A mechanical boot, a human eye\""
+  },
+  {
+   "index": 655,
+   "feature": "steerability",
+   "claim": "nostalgebraist reports that R1 kept producing abstract/concrete conjunctions in spite of user-specified stylistic directions, including prompts to imitate named literary authors.",
+   "source": "nostalgebraist, blogger and ML researcher, Tumblr, March 2025",
+   "url": "https://www.tumblr.com/nostalgebraist/778041178124926976/hydrogen-jukeboxes",
+   "quote": "R1 even consistently does this in spite of user-specified stylistic directions",
+   "page": "section \"A mechanical boot, a human eye\""
+  },
+  {
+   "index": 656,
+   "feature": "steerability",
+   "claim": "nostalgebraist reports that the one pastiche free of the abstract/concrete tell was the Hemingway attempt, which he attributes to Hemingway having a distinctive and constrained style leaving no room for such flourishes.",
+   "source": "nostalgebraist, blogger and ML researcher, Tumblr, March 2025",
+   "url": "https://www.tumblr.com/nostalgebraist/778041178124926976/hydrogen-jukeboxes",
+   "quote": "presumably because Hemingway himself has a distinctive and constrained style",
+   "page": "section \"A mechanical boot, a human eye\", parenthesis after the pastiche list"
+  },
+  {
+   "index": 657,
+   "feature": "uniform rhythm (low burstiness)",
+   "claim": "nostalgebraist describes this crammed prose as having no modulation and no room to breathe, an unrelenting stream of gee-whiz effects.",
+   "source": "nostalgebraist, blogger and ML researcher, Tumblr, March 2025",
+   "url": "https://www.tumblr.com/nostalgebraist/778041178124926976/hydrogen-jukeboxes",
+   "quote": "no modulation, no room to breathe",
+   "page": "section \"A mechanical boot, a human eye\""
+  },
+  {
+   "index": 658,
+   "feature": "homogenisation",
+   "claim": "nostalgebraist guesses that the shared style of two unrelated models is convergent evolution, what happens if you optimize for human judgments of literary quality in a generic way.",
+   "source": "nostalgebraist, blogger and ML researcher, Tumblr, March 2025",
+   "url": "https://www.tumblr.com/nostalgebraist/778041178124926976/hydrogen-jukeboxes",
+   "quote": "maybe this is just what happens if you optimize for human judgments",
+   "page": "section \"Background: the new OpenAI model\""
+  }
+ ]
+}

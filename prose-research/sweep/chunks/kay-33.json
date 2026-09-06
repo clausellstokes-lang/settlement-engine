@@ -1,0 +1,158 @@
+{
+ "name": "kay",
+ "chunk": 33,
+ "indices": [
+  495,
+  496,
+  497,
+  498,
+  499,
+  500,
+  501,
+  502,
+  503,
+  504,
+  505,
+  506,
+  507,
+  508,
+  509
+ ],
+ "claims": [
+  {
+   "index": 495,
+   "feature": "other: flash-forward over a whole life",
+   "claim": "Capossere describes a quick in-and-out flash forward tied to a character the narration has just been close to, telling in one sentence what that character would remember all his life.",
+   "source": "Bill Capossere, FantasyLiterature.com, May 2025",
+   "url": "https://fantasyliterature.com/reviews/written-on-the-dark/",
+   "quote": "a simple, quick in and out flash forward",
+   "page": "section on Kay's style"
+  },
+  {
+   "index": 496,
+   "feature": "consequence on a household",
+   "claim": "Capossere says a favourite element of Kay's writing is the refusal to denote characters as lesser or minor, viewing them instead as characters in their own story.",
+   "source": "Bill Capossere, FantasyLiterature.com, May 2025",
+   "url": "https://fantasyliterature.com/reviews/written-on-the-dark/",
+   "quote": "view them as characters in their own story",
+   "page": "paragraph on secondary characters"
+  },
+  {
+   "index": 497,
+   "feature": "other: structure as vignettes",
+   "claim": "Capossere writes that Written on the Dark is not a seamless narrative but more a series of situations, pausing on a time and then jumping ahead over intervening months or years.",
+   "source": "Bill Capossere, FantasyLiterature.com, May 2025",
+   "url": "https://fantasyliterature.com/reviews/written-on-the-dark/",
+   "quote": "not a seamless narrative but more a series of situations",
+   "page": "paragraph on the novel's structure"
+  },
+  {
+   "index": 498,
+   "feature": "other: pivot points",
+   "claim": "Capossere names as a major theme the way small decisions by people overlooked by the history books - tavern poets, bartenders, guardsmen - can have major impact.",
+   "source": "Bill Capossere, FantasyLiterature.com, May 2025",
+   "url": "https://fantasyliterature.com/reviews/written-on-the-dark/",
+   "quote": "the tavern poets, the bartenders, the guardsmen",
+   "page": "paragraph on themes"
+  },
+  {
+   "index": 499,
+   "feature": "plainness and economy",
+   "claim": "The Fantasy Book Review reviewer Floresiensis writes that there is a precision, care and subtlety to each and every sentence of Sailing to Sarantium.",
+   "source": "Floresiensis, review of Sailing to Sarantium, Fantasy Book Review (undated)",
+   "url": "https://www.fantasybookreview.co.uk/Guy-Gavriel-Kay/Sailing-to-Sarantium.html",
+   "quote": "there is a precision, care and subtlety to each and every sentence",
+   "page": "first reviewer's section"
+  },
+  {
+   "index": 500,
+   "feature": "plainness and economy",
+   "claim": "The Quill to Live blogger writes that Kay's writing style is poetic but not too dense, so passages move without requiring hours of thought to decipher.",
+   "source": "The Quill to Live, 'The Masters Of Prose', 7 January 2016",
+   "url": "https://thequilltolive.com/2016/01/07/the-masters-of-prose/",
+   "quote": "incredibly poetic but also not too dense",
+   "page": "Guy Gavriel Kay entry"
+  },
+  {
+   "index": 501,
+   "feature": "opening sentence",
+   "claim": "The blogger lepusdomesticus reports that the first clause of Tigana is 'Both moons were high.'",
+   "source": "lepusdomesticus (Susie), 'Tigana: Head Smashing', LiveJournal, 31 March 2014",
+   "url": "https://lepusdomesticus.livejournal.com/106763.html",
+   "quote": "The first clause of the entire book is",
+   "page": "section 'WORLD-BUILDING'"
+  },
+  {
+   "index": 502,
+   "feature": "compounds and coinages",
+   "claim": "lepusdomesticus objects that Tigana invents species names - trialla and grele in place of nightingales and partridges - and calls them smeerps.",
+   "source": "lepusdomesticus (Susie), LiveJournal, 31 March 2014",
+   "url": "https://lepusdomesticus.livejournal.com/106763.html",
+   "quote": "instead of nightingales and partridges",
+   "page": "section 'WORLD-BUILDING'"
+  },
+  {
+   "index": 503,
+   "feature": "compounds and coinages",
+   "claim": "lepusdomesticus argues that invented names for endemic species are distracting rather than verisimilitude-increasing, because a fantasy world will not mesh with accepted reality anyway.",
+   "source": "lepusdomesticus (Susie), LiveJournal, 31 March 2014",
+   "url": "https://lepusdomesticus.livejournal.com/106763.html",
+   "quote": "in practice it is distracting",
+   "page": "section 'WORLD-BUILDING'"
+  },
+  {
+   "index": 504,
+   "feature": "compounds and coinages",
+   "claim": "lepusdomesticus says the invented species names in Tigana feel completely arbitrary because they appear to have no bearing on the plot or the rest of the story.",
+   "source": "lepusdomesticus (Susie), LiveJournal, 31 March 2014",
+   "url": "https://lepusdomesticus.livejournal.com/106763.html",
+   "quote": "it feels completely arbitrary",
+   "page": "section 'WORLD-BUILDING'"
+  },
+  {
+   "index": 505,
+   "feature": "withheld information and inference",
+   "claim": "lepusdomesticus notes that Kay begins chapter one of Tigana with unreliable narration, which she takes as a sign that he knows more than his characters intentionally.",
+   "source": "lepusdomesticus (Susie), LiveJournal, 31 March 2014",
+   "url": "https://lepusdomesticus.livejournal.com/106763.html",
+   "quote": "with unreliable narration",
+   "page": "introductory section"
+  },
+  {
+   "index": 506,
+   "feature": "other: prologue as a false beginning",
+   "claim": "lepusdomesticus argues that both the Prologue and Chapter One of Tigana are false beginnings that name many characters who never reappear.",
+   "source": "lepusdomesticus (Susie), LiveJournal, 31 March 2014",
+   "url": "https://lepusdomesticus.livejournal.com/106763.html",
+   "quote": "Chapter One of the novel are false beginnings",
+   "page": "section 'PROLOGUES'"
+  },
+  {
+   "index": 507,
+   "feature": "opening sentence",
+   "claim": "The rereader keilexandra advises going back to read the first sentence of Chapter 1 of Tigana after finishing the book.",
+   "source": "keilexandra, 'Tigana, by Guy Gavriel Kay (reread)', LiveJournal, 2008",
+   "url": "https://keilexandra.livejournal.com/160364.html",
+   "quote": "read the first sentence of Chapter 1 after you finish the book",
+   "page": "main review paragraph"
+  },
+  {
+   "index": 508,
+   "feature": "plainness and economy",
+   "claim": "keilexandra says she loves Kay's prose while calling it overwrought as it sometimes is.",
+   "source": "keilexandra, LiveJournal, 2008",
+   "url": "https://keilexandra.livejournal.com/160364.html",
+   "quote": "overwrought as it sometimes is",
+   "page": "main review paragraph"
+  },
+  {
+   "index": 509,
+   "feature": "point of view and distance",
+   "claim": "keilexandra characterises Tigana as having skilfully shifting, poetic narration.",
+   "source": "keilexandra, LiveJournal, 2008",
+   "url": "https://keilexandra.livejournal.com/160364.html",
+   "quote": "skillfully shifting, poetic narration",
+   "page": "final paragraph"
+  }
+ ]
+}

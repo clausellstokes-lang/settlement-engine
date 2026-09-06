@@ -1,0 +1,158 @@
+{
+ "name": "kay",
+ "chunk": 22,
+ "indices": [
+  330,
+  331,
+  332,
+  333,
+  334,
+  335,
+  336,
+  337,
+  338,
+  339,
+  340,
+  341,
+  342,
+  343,
+  344
+ ],
+ "claims": [
+  {
+   "index": 330,
+   "feature": "plainness and economy",
+   "claim": "Moscrop says Written on the Dark is equally impressive for its accessibility and its density.",
+   "source": "David Moscrop, review of Written on the Dark, The Globe and Mail, 2025",
+   "url": "https://www.theglobeandmail.com/arts/books/reviews/article-guy-gavriel-kay-novel-written-on-the-dark/",
+   "quote": "equally as impressive for its accessibility and its density",
+   "page": "body, final paragraph"
+  },
+  {
+   "index": 331,
+   "feature": "closing sentence",
+   "claim": "Moscrop opens his review by citing the closing words of Written on the Dark.",
+   "source": "David Moscrop, review of Written on the Dark, The Globe and Mail, 2025",
+   "url": "https://www.theglobeandmail.com/arts/books/reviews/article-guy-gavriel-kay-novel-written-on-the-dark/",
+   "quote": "the closing words of Written on the Dark",
+   "page": "body, first paragraph"
+  },
+  {
+   "index": 332,
+   "feature": "closing sentence",
+   "claim": "The closing words of Written on the Dark, as Moscrop quotes them, are a four-word sentence repeated once.",
+   "source": "Guy Gavriel Kay's novel Written on the Dark, closing words quoted by David Moscrop in The Globe and Mail, 2025",
+   "url": "https://www.theglobeandmail.com/arts/books/reviews/article-guy-gavriel-kay-novel-written-on-the-dark/",
+   "quote": "I did that. I did that.",
+   "page": "body, first paragraph"
+  },
+  {
+   "index": 333,
+   "feature": "omission as information",
+   "claim": "Moscrop says the novel makes sense even for the mysteries it refuses to explain.",
+   "source": "David Moscrop, review of Written on the Dark, The Globe and Mail, 2025",
+   "url": "https://www.theglobeandmail.com/arts/books/reviews/article-guy-gavriel-kay-novel-written-on-the-dark/",
+   "quote": "even for the mysteries it refuses to explain",
+   "page": "body, paragraph beginning 'The brilliance of Written on the Dark'"
+  },
+  {
+   "index": 334,
+   "feature": "consequence on a household",
+   "claim": "Fram calls Kay a master of telling small stories in a big world.",
+   "source": "Noah Fram, starred review of All the Seas of the World, BookPage, 2022",
+   "url": "https://www.bookpage.com/reviews/all-the-seas-of-the-world-review/",
+   "quote": "A master of telling small stories in a big world",
+   "page": "review, final paragraph"
+  },
+  {
+   "index": 335,
+   "feature": "place and institution description",
+   "claim": "Fram says Kay's characters see their homes fade from the map and their lives taken for the pettiest of causes.",
+   "source": "Noah Fram, starred review of All the Seas of the World, BookPage, 2022",
+   "url": "https://www.bookpage.com/reviews/all-the-seas-of-the-world-review/",
+   "quote": "see their homes fade from the map",
+   "page": "review, first body paragraph"
+  },
+  {
+   "index": 336,
+   "feature": "register modulation",
+   "claim": "Wilt reports Kay saying his seniority frees him from the modern rule against jumping from past tense to present tense.",
+   "source": "Haley Byrd Wilt, 'The Author Who Pulled Me out of the Doomscroll', Christianity Today, 2025 (reporter's paraphrase of Kay's remarks)",
+   "url": "https://www.christianitytoday.com/2025/06/author-doomscroll-guy-gavriel-kay-written-on-the-dark/",
+   "quote": "Don’t jump from the past tense to the present tense",
+   "page": "body, paragraph beginning 'It helps that Kay'"
+  },
+  {
+   "index": 337,
+   "feature": "point of view and distance",
+   "claim": "Wilt reports Kay naming the rule against hopping between characters' heads as one he does not have to obey.",
+   "source": "Haley Byrd Wilt, 'The Author Who Pulled Me out of the Doomscroll', Christianity Today, 2025 (reporter's paraphrase of Kay's remarks)",
+   "url": "https://www.christianitytoday.com/2025/06/author-doomscroll-guy-gavriel-kay-written-on-the-dark/",
+   "quote": "just choose one perspective per chapter",
+   "page": "body, paragraph beginning 'It helps that Kay'"
+  },
+  {
+   "index": 338,
+   "feature": "consequence on a household",
+   "claim": "Wilt reports Kay naming the rule against writing a whole chapter from the viewpoint of a plot-irrelevant medieval courier.",
+   "source": "Haley Byrd Wilt, 'The Author Who Pulled Me out of the Doomscroll', Christianity Today, 2025 (reporter's paraphrase of Kay's remarks)",
+   "url": "https://www.christianitytoday.com/2025/06/author-doomscroll-guy-gavriel-kay-written-on-the-dark/",
+   "quote": "an entire chapter from the viewpoint of a grizzled medieval courier",
+   "page": "body, paragraph beginning 'It helps that Kay'"
+  },
+  {
+   "index": 339,
+   "feature": "withheld information and inference",
+   "claim": "Kay says simply that he trusts his readers.",
+   "source": "Guy Gavriel Kay, interviewed in Toronto by Haley Byrd Wilt, Christianity Today, 2025",
+   "url": "https://www.christianitytoday.com/2025/06/author-doomscroll-guy-gavriel-kay-written-on-the-dark/",
+   "quote": "I trust my readers",
+   "page": "body, paragraph beginning 'Still, Kay has resisted'"
+  },
+  {
+   "index": 340,
+   "feature": "annalist voice and deep time",
+   "claim": "Kay says every book he has written has been in part an attempt to look at how different and how similar the past is.",
+   "source": "Guy Gavriel Kay, interviewed in Toronto by Haley Byrd Wilt, Christianity Today, 2025",
+   "url": "https://www.christianitytoday.com/2025/06/author-doomscroll-guy-gavriel-kay-written-on-the-dark/",
+   "quote": "how different the past is and how similar it is",
+   "page": "body, quotation beginning 'Every book I've ever written'"
+  },
+  {
+   "index": 341,
+   "feature": "concrete sensory noun",
+   "claim": "Kay characterises the people of the past with concrete wants: security, a roof, a harvest.",
+   "source": "Guy Gavriel Kay, interviewed in Toronto by Haley Byrd Wilt, Christianity Today, 2025",
+   "url": "https://www.christianitytoday.com/2025/06/author-doomscroll-guy-gavriel-kay-written-on-the-dark/",
+   "quote": "wanted security, wanted a roof, wanted a harvest",
+   "page": "body, quotation beginning 'The people of the past are strange'"
+  },
+  {
+   "index": 342,
+   "feature": "other: magic system withheld",
+   "claim": "Wilt says there are no elaborate, concrete magic systems in Kay's books, which are instead haunted by the transcendent.",
+   "source": "Haley Byrd Wilt, 'The Author Who Pulled Me out of the Doomscroll', Christianity Today, 2025 (reporter's paraphrase of Kay's remarks)",
+   "url": "https://www.christianitytoday.com/2025/06/author-doomscroll-guy-gavriel-kay-written-on-the-dark/",
+   "quote": "There are no elaborate, concrete magic systems here",
+   "page": "body, paragraph beginning 'Kay's characteristic'"
+  },
+  {
+   "index": 343,
+   "feature": "withheld information and inference",
+   "claim": "Kay states that when writers work with distant history they are, to a great degree, guessing.",
+   "source": "Guy Gavriel Kay, 'Home and Away', BrightWeavings (speech, amended; short version Globe and Mail 1999)",
+   "url": "https://brightweavings.com/globe/",
+   "quote": "we are all guessing",
+   "page": "body, paragraph on The Lions of Al-Rassan and Rodrigo Diaz"
+  },
+  {
+   "index": 344,
+   "feature": "point of view and distance",
+   "claim": "Kay says inventing a setting and a character modelled on a real figure demonstrates a measure of appropriate distance.",
+   "source": "Guy Gavriel Kay, 'Home and Away', BrightWeavings",
+   "url": "https://brightweavings.com/globe/",
+   "quote": "a measure of appropriate distance",
+   "page": "body, El Cid paragraph"
+  }
+ ]
+}

@@ -1,0 +1,158 @@
+{
+ "name": "wolfe",
+ "chunk": 24,
+ "indices": [
+  360,
+  361,
+  362,
+  363,
+  364,
+  365,
+  366,
+  367,
+  368,
+  369,
+  370,
+  371,
+  372,
+  373,
+  374
+ ],
+ "claims": [
+  {
+   "index": 360,
+   "feature": "point of view and distance",
+   "claim": "Keeley says a single first-person sentence near the end of an otherwise third-person Wolfe book asks readers to reconsider everything already read.",
+   "source": "Matthew Keeley, Reactor (Tor.com), 9 November 2017",
+   "url": "https://reactormag.com/how-gene-wolfe-starts-a-story-and-where-to-start-reading-his-work/",
+   "quote": "asks readers to reconsider everything that they’ve already read",
+   "page": "body, paragraph after the 5HC discussion"
+  },
+  {
+   "index": 361,
+   "feature": "withheld information and inference",
+   "claim": "Kelly says the narrator of The Fifth Head of Cerberus describes his surroundings at face value and leaves understanding to the reader.",
+   "source": "Mark R. Kelly, Views from Crestmont Drive, 3 July 2014",
+   "url": "https://www.markrkelly.com/Blog/2014/07/03/rereading-gene-wolfes-the-fifth-head-of-cerberus/",
+   "quote": "describes his surroundings at face value, leaving it up to the reader",
+   "page": "body, after the plot summary"
+  },
+  {
+   "index": 362,
+   "feature": "withheld information and inference",
+   "claim": "Kelly says a Wolfe story carries an underlying real story that the point-of-view character does not necessarily understand and that Wolfe expects the reader to deduce.",
+   "source": "Mark R. Kelly, Views from Crestmont Drive, 3 July 2014",
+   "url": "https://www.markrkelly.com/Blog/2014/07/03/rereading-gene-wolfes-the-fifth-head-of-cerberus/",
+   "quote": "which Wolfe counts on the reader to being able to deduce",
+   "page": "body, after the plot summary"
+  },
+  {
+   "index": 363,
+   "feature": "place and institution description",
+   "claim": "Kelly says the fact that the narrator's large house is a brothel emerges in the course of the narration rather than being stated.",
+   "source": "Mark R. Kelly, Views from Crestmont Drive, 3 July 2014",
+   "url": "https://www.markrkelly.com/Blog/2014/07/03/rereading-gene-wolfes-the-fifth-head-of-cerberus/",
+   "quote": "It develops that this large house is a brothel.",
+   "page": "body, plot summary"
+  },
+  {
+   "index": 364,
+   "feature": "withheld information and inference",
+   "claim": "Kelly, summarising Joan Gordon's 1986 Starmont study, says the novella's theme is underscored by small details in the text such as the house's address.",
+   "source": "Mark R. Kelly, Views from Crestmont Drive, 3 July 2014, relaying Joan Gordon's 1986 Starmont House study of Wolfe",
+   "url": "https://www.markrkelly.com/Blog/2014/07/03/rereading-gene-wolfes-the-fifth-head-of-cerberus/",
+   "quote": "underscored by small details in the text",
+   "page": "body, paragraph on Joan Gordon"
+  },
+  {
+   "index": 365,
+   "feature": "other: precision as a constant of the prose",
+   "claim": "Kelly says it is difficult to find a paragraph anywhere in Wolfe that is not both precise and poetic.",
+   "source": "Mark R. Kelly, Views from Crestmont Drive, 3 July 2014",
+   "url": "https://www.markrkelly.com/Blog/2014/07/03/rereading-gene-wolfes-the-fifth-head-of-cerberus/",
+   "quote": "not both precise and poetic",
+   "page": "body, before the sample paragraph"
+  },
+  {
+   "index": 366,
+   "feature": "withheld information and inference",
+   "claim": "Macdonald says the things Severian knows that the reader does not are left unexplained because they are the mysteries of his trade.",
+   "source": "Kate Macdonald, katemacdonald.net, 9 January 2017",
+   "url": "https://katemacdonald.net/2017/01/09/gene-wolfes-the-shadow-of-the-torturer/",
+   "quote": "are not explained because they are the mysteries of his trade",
+   "page": "body, plot summary"
+  },
+  {
+   "index": 367,
+   "feature": "compounds and coinages",
+   "claim": "Macdonald says Wolfe's new vocabulary is mainly nouns that sound as if made from a familiar root by changing a vowel or suffix.",
+   "source": "Kate Macdonald, katemacdonald.net, 9 January 2017",
+   "url": "https://katemacdonald.net/2017/01/09/gene-wolfes-the-shadow-of-the-torturer/",
+   "quote": "His new vocabulary (mainly nouns) sounds as if it was altered",
+   "page": "body, vocabulary paragraph"
+  },
+  {
+   "index": 368,
+   "feature": "compounds and coinages",
+   "claim": "Macdonald says the meaning of Wolfe's strange words is fairly obvious from context.",
+   "source": "Kate Macdonald, katemacdonald.net, 9 January 2017",
+   "url": "https://katemacdonald.net/2017/01/09/gene-wolfes-the-shadow-of-the-torturer/",
+   "quote": "Their meaning is fairly obvious in the context",
+   "page": "body, vocabulary paragraph"
+  },
+  {
+   "index": 369,
+   "feature": "archaism",
+   "claim": "Macdonald says Wolfe also changes the meaning of real words, giving destrier as her example.",
+   "source": "Kate Macdonald, katemacdonald.net, 9 January 2017",
+   "url": "https://katemacdonald.net/2017/01/09/gene-wolfes-the-shadow-of-the-torturer/",
+   "quote": "He also changes the meaning of real words, like destrier",
+   "page": "body, vocabulary paragraph"
+  },
+  {
+   "index": 370,
+   "feature": "civic record register",
+   "claim": "Macdonald says Wolfe's frame invites the reader to think about these stories as histories, reports, assessments and commentaries rather than only as story.",
+   "source": "Kate Macdonald, katemacdonald.net, 9 January 2017",
+   "url": "https://katemacdonald.net/2017/01/09/gene-wolfes-the-shadow-of-the-torturer/",
+   "quote": "we also think about these stories as histories, reports, assessments, commentaries",
+   "page": "body, paragraph on the appended note about invented words"
+  },
+  {
+   "index": 371,
+   "feature": "point of view and distance",
+   "claim": "Macdonald says the torture is reported from a very clinical viewpoint.",
+   "source": "Kate Macdonald, katemacdonald.net, 9 January 2017",
+   "url": "https://katemacdonald.net/2017/01/09/gene-wolfes-the-shadow-of-the-torturer/",
+   "quote": "we’re told about the event from a very clinical viewpoint",
+   "page": "body, paragraph on the torture scenes"
+  },
+  {
+   "index": 372,
+   "feature": "omission as information",
+   "claim": "Macdonald says the narration withholds screams, bleeding flesh and details of pain from the torture scenes, so the reader feels no immediate horrified empathy.",
+   "source": "Kate Macdonald, katemacdonald.net, 9 January 2017",
+   "url": "https://katemacdonald.net/2017/01/09/gene-wolfes-the-shadow-of-the-torturer/",
+   "quote": "we aren’t told anything about screams, bleeding flesh, details of pain",
+   "page": "body, paragraph on the torture scenes"
+  },
+  {
+   "index": 373,
+   "feature": "other: aside as misdirection",
+   "claim": "Macdonald says Wolfe casts casual asides into the reader's path just when attention is expected elsewhere.",
+   "source": "Kate Macdonald, katemacdonald.net, 9 January 2017",
+   "url": "https://katemacdonald.net/2017/01/09/gene-wolfes-the-shadow-of-the-torturer/",
+   "quote": "casting casual asides down in our path",
+   "page": "body, paragraph on gaps in knowledge"
+  },
+  {
+   "index": 374,
+   "feature": "omission as information",
+   "claim": "A MetaFilter reader reports that in Shadow of the Torturer the narrator meets a blind man and never mentions that he is blind.",
+   "source": "MetaFilter user “straight”, thread 149475, 8 May 2015, 9:00 AM",
+   "url": "https://www.metafilter.com/149475/Gene-Wolfe-The-Reliably-Unreliable-Author",
+   "quote": "encounters a blind man but never mentions he is blind",
+   "page": "comment by straight, 9:00 AM"
+  }
+ ]
+}

@@ -1,0 +1,158 @@
+{
+ "name": "dnd",
+ "chunk": 37,
+ "indices": [
+  604,
+  605,
+  606,
+  607,
+  608,
+  609,
+  610,
+  611,
+  612,
+  613,
+  614,
+  615,
+  616,
+  617,
+  618
+ ],
+ "claims": [
+  {
+   "index": 604,
+   "feature": "other: character sketch shorthand",
+   "claim": "DDA2 Legions of Thyatis (1990) advised characterising an NPC by picturing him as an animal while describing him.",
+   "source": "John Nephew, DDA2 Legions of Thyatis (TSR, 1990), quoted by David Hartlage, DMDavid, 2024",
+   "url": "https://dmdavid.com/tag/from-b1-to-pinebrook-every-dd-adventure-that-includes-dm-advice-and-what-they-taught/",
+   "quote": "visualize him as an animal",
+   "page": "DDA2 Legions of Thyatis (1990) — Characterizing NPCs"
+  },
+  {
+   "index": 605,
+   "feature": "omission as information",
+   "claim": "The Hidden Halls of Hazacor (2018) told new DMs to replace unimportant sequences with a short summary.",
+   "source": "Scott Fitzgerald Gray, The Hidden Halls of Hazacor (2018), quoted by David Hartlage, DMDavid, 2024",
+   "url": "https://dmdavid.com/tag/from-b1-to-pinebrook-every-dd-adventure-that-includes-dm-advice-and-what-they-taught/",
+   "quote": "you can give the players a short summary instead",
+   "page": "The Hidden Halls of Hazacor (2018) — Summarize the boring parts"
+  },
+  {
+   "index": 606,
+   "feature": "boxed text form",
+   "claim": "Hartlage notes that the 1999 introductory modules printed scripted text for the DM to read to new players.",
+   "source": "David Hartlage, DMDavid, 30 Jan 2024, on Eye of the Wyvern (1999)",
+   "url": "https://dmdavid.com/tag/from-b1-to-pinebrook-every-dd-adventure-that-includes-dm-advice-and-what-they-taught/",
+   "quote": "scripted text for the DM to read to new players",
+   "page": "Eye of the Wyvern (1999)"
+  },
+  {
+   "index": 607,
+   "feature": "edition and house style",
+   "claim": "Hartlage describes a fourth-edition design goal of letting a casual DM simply buy an adventure and read its boxed text.",
+   "source": "David Hartlage, DMDavid, 14 Feb 2023",
+   "url": "https://dmdavid.com/tag/fourth-edition-improved-dd-design-for-good-but-one-of-its-innovations-still-leads-to-bad-adventures/",
+   "quote": "buy an adventure, read the boxed text",
+   "page": "Skill challenges satisfied three design goals"
+  },
+  {
+   "index": 608,
+   "feature": "boxed text form",
+   "claim": "McKenzie dates the first appearance of boxed read-aloud text in D&D to the 1980 module The Hidden Shrine of Tamoachan.",
+   "source": "Brian McKenzie, Analog Game Studies, 18 Dec 2023",
+   "url": "https://analoggamestudies.org/2023/12/murders-on-the-stage-tortures-woundings-and-the-like-dungeons-dragons-adventures-as-tragedy/",
+   "quote": "marks its first appearance",
+   "page": "section on descriptive text and 'at rise' descriptions"
+  },
+  {
+   "index": 609,
+   "feature": "boxed text form",
+   "claim": "McKenzie argues D&D read-aloud text is the genre analogue of the theatre's 'at rise' stage description.",
+   "source": "Brian McKenzie, Analog Game Studies, 18 Dec 2023",
+   "url": "https://analoggamestudies.org/2023/12/murders-on-the-stage-tortures-woundings-and-the-like-dungeons-dragons-adventures-as-tragedy/",
+   "quote": "Read-aloud text is analogous to",
+   "page": "descriptive text section"
+  },
+  {
+   "index": 610,
+   "feature": "withheld information and inference",
+   "claim": "The Hidden Shrine of Tamoachan's own instruction is that its read-aloud text hints at what may be done and that the DM answer questions only vaguely.",
+   "source": "Harold Johnson and Jeff R. Leason, The Hidden Shrine of Tamoachan (1980), quoted by Brian McKenzie (2023)",
+   "url": "https://analoggamestudies.org/2023/12/murders-on-the-stage-tortures-woundings-and-the-like-dungeons-dragons-adventures-as-tragedy/",
+   "quote": "the DM should only provide vague information if questioned",
+   "page": "descriptive text section, note 34"
+  },
+  {
+   "index": 611,
+   "feature": "withheld information and inference",
+   "claim": "McKenzie's summary of the function of read-aloud text is that it offers clues and frames narrative boundaries.",
+   "source": "Brian McKenzie, Analog Game Studies, 18 Dec 2023",
+   "url": "https://analoggamestudies.org/2023/12/murders-on-the-stage-tortures-woundings-and-the-like-dungeons-dragons-adventures-as-tragedy/",
+   "quote": "It offers clues and the frames narrative boundaries",
+   "page": "descriptive text section"
+  },
+  {
+   "index": 612,
+   "feature": "boxed text form",
+   "claim": "McKenzie states that Jennifer Grouling Cover's is perhaps the only academic discussion of read-aloud text in tabletop adventures.",
+   "source": "Brian McKenzie, Analog Game Studies, 18 Dec 2023",
+   "url": "https://analoggamestudies.org/2023/12/murders-on-the-stage-tortures-woundings-and-the-like-dungeons-dragons-adventures-as-tragedy/",
+   "quote": "one of the few—perhaps the only—academic discussions",
+   "page": "descriptive text section"
+  },
+  {
+   "index": 613,
+   "feature": "boxed text form",
+   "claim": "Michael Shea likens read-aloud text to the script of a Broadway show.",
+   "source": "Michael Shea, quoted by Brian McKenzie, Analog Game Studies, 2023",
+   "url": "https://analoggamestudies.org/2023/12/murders-on-the-stage-tortures-woundings-and-the-like-dungeons-dragons-adventures-as-tragedy/",
+   "quote": "our read-aloud text is part of our script",
+   "page": "descriptive text section, note 35"
+  },
+  {
+   "index": 614,
+   "feature": "boxed text form",
+   "claim": "A Twitter poll by D&D lead rules designer Jeremy Crawford drew 2,248 replies, of which 59.5% wanted occasional boxed text, 34.4% wanted lots and 6% wanted none.",
+   "source": "Jeremy Crawford's poll, reported by Brian McKenzie, Analog Game Studies, 2023",
+   "url": "https://analoggamestudies.org/2023/12/murders-on-the-stage-tortures-woundings-and-the-like-dungeons-dragons-adventures-as-tragedy/",
+   "quote": "2,248 replies",
+   "page": "descriptive text section, note 38"
+  },
+  {
+   "index": 615,
+   "feature": "boxed text form",
+   "claim": "Merwin calls boxed text as much a part of D&D's history and brand as saving throws, hit points and armor class.",
+   "source": "Shawn Merwin, 'Let's Design an Adventure: Boxed Text', D&D Beyond, 2019",
+   "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+   "quote": "as much a part of D&D's history and brand",
+   "page": "opening"
+  },
+  {
+   "index": 616,
+   "feature": "boxed text form",
+   "claim": "Merwin says the act of writing boxed text forces designers to think harder about their encounters.",
+   "source": "Shawn Merwin, 'Let's Design an Adventure: Boxed Text', D&D Beyond, 2019",
+   "url": "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+   "quote": "to think harder about their encounters",
+   "page": "opening"
+  },
+  {
+   "index": 617,
+   "feature": "boxed text form",
+   "claim": "A scholarly case study lists read-aloud text, player handouts, DM instructions and NPC dialogue among the five textual elements that carry an adventure's ideas.",
+   "source": "Brian McKenzie, Bret Zawilski and James Beirne, International Journal of Role-Playing 17, 2026",
+   "url": "https://journals.uu.se/IJRP/article/download/679/1013",
+   "quote": "read-aloud text, player handouts, instructions to the Dungeon Master",
+   "page": "p. 145, design section"
+  },
+  {
+   "index": 618,
+   "feature": "edition and house style",
+   "claim": "Huddleston notes that many early tabletop rulebooks contain little prose or narrative, being given over to rules.",
+   "source": "Stefan Huddleston, Analog Game Studies, 18 Dec 2022",
+   "url": "https://analoggamestudies.org/2022/12/when-worlds-collaborate-the-style-of-early-tabletop-role-playing-games/",
+   "quote": "many early examples lack prose and narrative in favor of rules",
+   "page": "sources and methodology section"
+  }
+ ]
+}

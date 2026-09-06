@@ -1,0 +1,108 @@
+{
+ "name": "kay",
+ "chunk": 36,
+ "indices": [
+  540,
+  541,
+  542,
+  543,
+  544,
+  545,
+  546,
+  547,
+  548,
+  549
+ ],
+ "claims": [
+  {
+   "index": 540,
+   "feature": "register modulation",
+   "claim": "Allard observes that the High Elder's speech at court in A Song for Arbonne takes on a poetic quality and is described in musical terms.",
+   "source": "James Allard, 'The Unacknowledged Legislators of the World': Songs and Poetry in Guy Gavriel Kay's A Song for Arbonne, University of Waterloo, 1997, hosted at BrightWeavings",
+   "url": "https://brightweavings.com/legislatorsarbonne/",
+   "quote": "his speech begins to take on a very poetic quality",
+   "page": "section on Gorhaut"
+  },
+  {
+   "index": 541,
+   "feature": "register modulation",
+   "claim": "Allard quotes a passage of A Song for Arbonne rendered in the present tense, describing the speech as a first proclamation only, a muted instrument sounded amid smoking fires.",
+   "source": "James Allard, University of Waterloo, 1997, hosted at BrightWeavings",
+   "url": "https://brightweavings.com/legislatorsarbonne/",
+   "quote": "This is a first proclamation only, a beginning, a muted instrument",
+   "page": "quoted passage, Arbonne p.90"
+  },
+  {
+   "index": 542,
+   "feature": "other: language without innate power",
+   "claim": "Allard argues that in A Song for Arbonne songs and poetry are not prophetic, unlike in Middle-earth, and act only as a cue for action rather than causing events.",
+   "source": "James Allard, University of Waterloo, 1997, hosted at BrightWeavings",
+   "url": "https://brightweavings.com/legislatorsarbonne/",
+   "quote": "nevertheless acts only as a cue for action",
+   "page": "opening argument"
+  },
+  {
+   "index": 543,
+   "feature": "place and institution description",
+   "claim": "Ringel quotes Brian Bethune that the general cultural milieu is all Kay adopts from his sources, everything else being altered to fit the needs of the story.",
+   "source": "Faye Ringel quoting Brian Bethune of Maclean's, in 'Kay's Provence: From Arbonne to Ysabel', ICFA and Anticipation 2009, hosted at BrightWeavings",
+   "url": "https://brightweavings.com/kaysprovence/",
+   "quote": "that general cultural milieu is all he adopts from his sources",
+   "page": "early section"
+  },
+  {
+   "index": 544,
+   "feature": "place and institution description",
+   "claim": "Ringel reports Bethune's observation that Kay collapses events separated by centuries in actual history into a single era.",
+   "source": "Faye Ringel quoting Brian Bethune, 2009, hosted at BrightWeavings",
+   "url": "https://brightweavings.com/kaysprovence/",
+   "quote": "events separated by centuries in actual history are often collapsed",
+   "page": "early section"
+  },
+  {
+   "index": 545,
+   "feature": "other: small magic",
+   "claim": "Ringel notes that magic in Arbonne is confined to small things, the coinage of hearth and heart, in keeping with the small amount of pagan marvel in real medieval romances.",
+   "source": "Faye Ringel, 2009, hosted at BrightWeavings",
+   "url": "https://brightweavings.com/kaysprovence/",
+   "quote": "Confined to small things, the coinage of hearth and heart",
+   "page": "section on magic in Arbonne"
+  },
+  {
+   "index": 546,
+   "feature": "civic record register",
+   "claim": "Andrew Patton's BrightWeavings essay is written in the voice of an in-world Sarantine art historian who reviews Kay's novels as though they were a chronicle of the period.",
+   "source": "Andrew Patton, 'We See by Jad's Light Alone: Guy Gavriel Kay and the New Sanctuary Mosaicist', hosted at BrightWeavings",
+   "url": "https://brightweavings.com/jadslight/",
+   "quote": "there is so much of the inaccurate to his chronicle",
+   "page": "opening of the essay proper"
+  },
+  {
+   "index": 547,
+   "feature": "withheld information and inference",
+   "claim": "The r/Fantasy commenter runevault says Kay does not give readers many easy outs and does not let them put a character or moment into a single box and call it the truth.",
+   "source": "u/runevault, comment in the r/Fantasy thread 'Some thoughts about Tigana (heavy spoilers)'",
+   "url": "https://www.reddit.com/r/Fantasy/comments/15u1pk0/some_thoughts_about_tigana_heavy_spoilers/",
+   "quote": "He doesn't give readers many easy outs.",
+   "page": "top comment"
+  },
+  {
+   "index": 548,
+   "feature": "point of view and distance",
+   "claim": "The thread's author contrasupra says the book does not make the tyrant Brandin sympathetic so much as show him at times when he is not actively doing evil, and ask the reader to grapple with that.",
+   "source": "u/contrasupra, r/Fantasy thread 'Some thoughts about Tigana (heavy spoilers)'",
+   "url": "https://www.reddit.com/r/Fantasy/comments/15u1pk0/some_thoughts_about_tigana_heavy_spoilers/",
+   "quote": "",
+   "page": "original post"
+  },
+  {
+   "index": 549,
+   "feature": "other: compassion without exculpation",
+   "claim": "The commenter newtothegarden characterises Kay's position as a compassion that is deeper because of the terribleness of what people do.",
+   "source": "u/newtothegarden, r/Fantasy thread 'Some thoughts about Tigana (heavy spoilers)'",
+   "url": "https://www.reddit.com/r/Fantasy/comments/15u1pk0/some_thoughts_about_tigana_heavy_spoilers/",
+   "quote": "compassion that is deeper because of the terribleness",
+   "page": "comment reply"
+  }
+ ]
+}

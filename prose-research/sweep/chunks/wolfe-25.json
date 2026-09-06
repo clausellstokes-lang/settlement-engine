@@ -1,0 +1,158 @@
+{
+ "name": "wolfe",
+ "chunk": 25,
+ "indices": [
+  375,
+  376,
+  377,
+  378,
+  379,
+  380,
+  381,
+  382,
+  383,
+  384,
+  385,
+  386,
+  387,
+  388,
+  389
+ ],
+ "claims": [
+  {
+   "index": 375,
+   "feature": "withheld information and inference",
+   "claim": "A MetaFilter reader disputes the ambiguity reading, arguing Wolfe's unreliability is a puzzle readers assemble from careful cluing rather than genuine epistemic uncertainty.",
+   "source": "MetaFilter user “RogerB”, thread 149475, 8 May 2015, 8:50 AM",
+   "url": "https://www.metafilter.com/149475/Gene-Wolfe-The-Reliably-Unreliable-Author",
+   "quote": "assemble based on careful cluing the truth that the narrator doesn't know",
+   "page": "comment by RogerB, 8:50 AM"
+  },
+  {
+   "index": 376,
+   "feature": "withheld information and inference",
+   "claim": "A MetaFilter reader says the text reveals how horrible Severian is through what still manages to slip through his own narration.",
+   "source": "MetaFilter user “Pseudoephedrine”, thread 149475, 8 May 2015, 12:29 PM",
+   "url": "https://www.metafilter.com/149475/Gene-Wolfe-The-Reliably-Unreliable-Author",
+   "quote": "revealing how horrible he is through what still manages to slip",
+   "page": "comment by Pseudoephedrine, 12:29 PM"
+  },
+  {
+   "index": 377,
+   "feature": "point of view and distance",
+   "claim": "A MetaFilter reader says some Wolfe narrators are sincere recorders of what they experienced who have fundamentally misunderstood the events they record.",
+   "source": "MetaFilter user “byanyothername”, thread 149475, 8 May 2015, 9:00 AM",
+   "url": "https://www.metafilter.com/149475/Gene-Wolfe-The-Reliably-Unreliable-Author",
+   "quote": "sincere recorders of the truth they've experienced, but they've fundamentally misunderstood",
+   "page": "comment by byanyothername, 9:00 AM"
+  },
+  {
+   "index": 378,
+   "feature": "withheld information and inference",
+   "claim": "A MetaFilter reader names deliberate frustration of expectations as the Wolfe device more central than unreliable narration.",
+   "source": "MetaFilter user “straight”, thread 149475, 8 May 2015, 9:11 AM",
+   "url": "https://www.metafilter.com/149475/Gene-Wolfe-The-Reliably-Unreliable-Author",
+   "quote": "the deliberate frustration of expectations",
+   "page": "comment by straight, 9:11 AM"
+  },
+  {
+   "index": 379,
+   "feature": "diction (native vs latinate)",
+   "claim": "A MetaFilter reader states that in The Book of the New Sun everything archaic to Severian is rendered as Latin.",
+   "source": "MetaFilter user “Ipsifendus”, thread 149475, 8 May 2015, 8:57 AM",
+   "url": "https://www.metafilter.com/149475/Gene-Wolfe-The-Reliably-Unreliable-Author",
+   "quote": "Everything archaic to Severian is rendered as Latin.",
+   "page": "comment by Ipsifendus, 8:57 AM"
+  },
+  {
+   "index": 380,
+   "feature": "withheld information and inference",
+   "claim": "A MetaFilter reader attributes to Wolfe the remark that everything means something but not everything means very much.",
+   "source": "MetaFilter user “straight” relaying Gene Wolfe, thread 149475, 8 May 2015",
+   "url": "https://www.metafilter.com/149475/Gene-Wolfe-The-Reliably-Unreliable-Author",
+   "quote": "Everything means something, but not everything means very much.",
+   "page": "comment by straight, 9:00 AM"
+  },
+  {
+   "index": 381,
+   "feature": "other: counter-evidence, anomaly as authorial error",
+   "claim": "A MetaFilter reader reports that Wolfe, asked by letter about a contradiction in the first pages of Shadow of the Torturer, answered that it was a typo.",
+   "source": "MetaFilter user “Ipsifendus” reporting a letter from Gene Wolfe, thread 149475, 8 May 2015, 9:25 AM",
+   "url": "https://www.metafilter.com/149475/Gene-Wolfe-The-Reliably-Unreliable-Author",
+   "quote": "Typo.",
+   "page": "comment by Ipsifendus, 9:25 AM"
+  },
+  {
+   "index": 382,
+   "feature": "opening sentence",
+   "claim": "Ian Sales says the title novella of The Fifth Head of Cerberus opens traditionally, as a childhood memory.",
+   "source": "Ian Sales (“iansales”), SFF Chronicles thread 11050, 13 June 2006",
+   "url": "https://www.sffchronicles.com/threads/11050/",
+   "quote": "The novella opens traditionally enough—a childhood memory",
+   "page": "post #1, essay body"
+  },
+  {
+   "index": 383,
+   "feature": "withheld information and inference",
+   "claim": "Ian Sales says that three paragraphs after that conventional opening the reader learns the narrator's father traded in children.",
+   "source": "Ian Sales (“iansales”), SFF Chronicles thread 11050, 13 June 2006",
+   "url": "https://www.sffchronicles.com/threads/11050/",
+   "quote": "three paragraphs later we learn that the narrator’s father traded in children",
+   "page": "post #1, essay body"
+  },
+  {
+   "index": 384,
+   "feature": "civic record register",
+   "claim": "Ian Sales says the novella 'V.R.T.' consists of excerpts from taped interviews and a field journal, framed by a military officer reading those documents to decide on an incarceration.",
+   "source": "Ian Sales (“iansales”), SFF Chronicles thread 11050, 13 June 2006",
+   "url": "https://www.sffchronicles.com/threads/11050/",
+   "quote": "It consists of excerpts from taped interviews, the field journal",
+   "page": "post #1, essay body"
+  },
+  {
+   "index": 385,
+   "feature": "withheld information and inference",
+   "claim": "Ian Sales says the authorities read a table of bullet-drop figures found in a field guide as meaning Marsch is an assassin.",
+   "source": "Ian Sales (“iansales”), SFF Chronicles thread 11050, 13 June 2006",
+   "url": "https://www.sffchronicles.com/threads/11050/",
+   "quote": "the authorities take this to mean Marsch is an assassin",
+   "page": "post #1, essay body"
+  },
+  {
+   "index": 386,
+   "feature": "withheld information and inference",
+   "claim": "Ian Sales says clues in the text, including a library shelf description, suggest the unnamed narrator's surname is Wolfe.",
+   "source": "Ian Sales (“iansales”), SFF Chronicles thread 11050, 13 June 2006",
+   "url": "https://www.sffchronicles.com/threads/11050/",
+   "quote": "Clues in the text suggest his surname is Wolfe",
+   "page": "post #1, essay body"
+  },
+  {
+   "index": 387,
+   "feature": "other: incidental detail as evidence",
+   "claim": "A forum analyst says objective outside detail is, in his opinion, at the heart of getting to the bottom of things in Wolfe.",
+   "source": "SFF Chronicles user “felicibusbrevis”, thread 11050, 24 March 2013 (an analysis written for the Urth mailing list)",
+   "url": "https://www.sffchronicles.com/threads/11050/",
+   "quote": "at the heart of getting to the bottom of things in Wolfe",
+   "page": "post #16, opening statement of method"
+  },
+  {
+   "index": 388,
+   "feature": "register modulation",
+   "claim": "The same forum analyst says the embedded aboriginal myth “A Story” is written in a mythic dream prose very different from the first part of the novel.",
+   "source": "SFF Chronicles user “felicibusbrevis”, thread 11050, 24 March 2013",
+   "url": "https://www.sffchronicles.com/threads/11050/",
+   "quote": "mythic but confusing dream prose that channels the savage mind",
+   "page": "post #16, section on “A Story”"
+  },
+  {
+   "index": 389,
+   "feature": "withheld information and inference",
+   "claim": "A reader of Peace reports taking things in at face value and failing to catch the significance of what Wolfe was alluding to.",
+   "source": "SFF Chronicles user “Fried Egg”, thread 528814, 14 September 2010",
+   "url": "https://www.sffchronicles.com/threads/528814/",
+   "quote": "taking things in at face value and failed to catch the significance",
+   "page": "post #1"
+  }
+ ]
+}

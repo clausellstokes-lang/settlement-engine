@@ -1,0 +1,158 @@
+{
+ "name": "dnd",
+ "chunk": 27,
+ "indices": [
+  454,
+  455,
+  456,
+  457,
+  458,
+  459,
+  460,
+  461,
+  462,
+  463,
+  464,
+  465,
+  466,
+  467,
+  468
+ ],
+ "claims": [
+  {
+   "index": 454,
+   "feature": "adjective and adverb discipline",
+   "claim": "Hartlage names sunset colour as the type of unimportant ornament too many boxed descriptions dwell on.",
+   "source": "David Hartlage, DMDavid",
+   "url": "https://dmdavid.com/tag/picturing-the-dungeon-boxed-text/",
+   "quote": "the color of the sunset and other bits of obviously unimportant fluff",
+   "page": "Boxed text"
+  },
+  {
+   "index": 455,
+   "feature": "boxed text form",
+   "claim": "Hartlage, though he paraphrases at the table, says nothing has replaced boxed text as a way of summarising what players must learn on entering a room.",
+   "source": "David Hartlage, DMDavid",
+   "url": "https://dmdavid.com/tag/picturing-the-dungeon-boxed-text/",
+   "quote": "No one has shown a better way to summarize",
+   "page": "Boxed text"
+  },
+  {
+   "index": 456,
+   "feature": "civic record register",
+   "claim": "Justin Alexander shows the Yawning Portal's first official entry in FR1 Waterdeep and the North was a numbered cross-reference line with no description.",
+   "source": "Justin Alexander, The Alexandrian, quoting FR1 Waterdeep and the North (1987)",
+   "url": "https://thealexandrian.net/wordpress/47553/roleplaying-games/forgotten-realms-a-textual-history-of-the-yawning-portal",
+   "quote": "4. The Yawning Portal (inn) – See Durnan, p. 17",
+   "page": "The Early Days"
+  },
+  {
+   "index": 457,
+   "feature": "omission as information",
+   "claim": "Alexander quotes Ruins of Undermountain (1991) declining to describe the inn on the stated ground of leaving DMs free rein, and calls the claim implausible given three prior books.",
+   "source": "Justin Alexander quoting TSR's Ruins of Undermountain (1991)",
+   "url": "https://thealexandrian.net/wordpress/47553/roleplaying-games/forgotten-realms-a-textual-history-of-the-yawning-portal",
+   "quote": "to allow DMs free rein in customizing this rambling, shady place",
+   "page": "The Early Days"
+  },
+  {
+   "index": 458,
+   "feature": "civic record register",
+   "claim": "Alexander records that City of Splendors (1994) fixes the inn's founding year and building class, adding registry-style facts to the accumulated description.",
+   "source": "Justin Alexander, The Alexandrian, on City of Splendors (1994)",
+   "url": "https://thealexandrian.net/wordpress/47553/roleplaying-games/forgotten-realms-a-textual-history-of-the-yawning-portal",
+   "quote": "Durnan established the Yawning Portal in 1306 DR.",
+   "page": "The Early Days"
+  },
+  {
+   "index": 459,
+   "feature": "edition and house style",
+   "claim": "James Maliszewski characterises pre-1982 module backgrounds as thin and credits Tracy Hickman's modules with introducing NPCs given hopes, dreams and fears.",
+   "source": "James Maliszewski, Grognardia",
+   "url": "https://grognardia.blogspot.com/2008/12/scrappy-doo-and-hickman-revolution.html",
+   "quote": "the thin backgrounds of earlier adventures",
+   "page": "Scrappy-Doo and the Hickman Revolution"
+  },
+  {
+   "index": 460,
+   "feature": "dm-facing sentence",
+   "claim": "Maliszewski quotes The Hidden Shrine of Tamoachan's own DM notes instructing the referee to read the module through and annotate the margins before play.",
+   "source": "James Maliszewski quoting module C1's Notes for the Dungeon Master",
+   "url": "https://grognardia.blogspot.com/2010/06/retrospective-hidden-shrine-of.html",
+   "quote": "read the module thoroughly before play starts, making notes in the margins",
+   "page": "Retrospective: The Hidden Shrine of Tamoachan"
+  },
+  {
+   "index": 461,
+   "feature": "point of view and distance",
+   "claim": "Bryce Lynch frames published adventure prose as a transfer problem: a private note is only a memory cue, and writing for a stranger must carry the image itself.",
+   "source": "Bryce Lynch, 'The Book Introduction', tenfootpole.org",
+   "url": "https://tenfootpole.org/ironspike/?page_id=9593",
+   "quote": "The words on the page are only a memory cue",
+   "page": "The Book Introduction"
+  },
+  {
+   "index": 462,
+   "feature": "other: craft difficulty",
+   "claim": "Lynch counts at least two translations between the writer's image and the gamemaster's, and blames dry encounters on their failure.",
+   "source": "Bryce Lynch, tenfootpole.org",
+   "url": "https://tenfootpole.org/ironspike/?page_id=9593",
+   "quote": "there are at least two translations between your head and the gamemaster",
+   "page": "The Book Introduction"
+  },
+  {
+   "index": 463,
+   "feature": "other: information order",
+   "claim": "Alexander's key structure puts the seen-at-a-glance block first and requires it to hold everything conveyed on entering, before checks and before element-by-element detail.",
+   "source": "Justin Alexander, 'The Art of the Key – Part 2', The Alexandrian",
+   "url": "https://thealexandrian.net/wordpress/35201/roleplaying-games/the-art-of-the-key-part-2-the-essential-key",
+   "quote": "contain all of the information that should be immediately conveyed",
+   "page": "Boxed Text"
+  },
+  {
+   "index": 464,
+   "feature": "other: information order",
+   "claim": "Alexander's ordering principle for a location entry is general to specific, tracked against how the reader will actually come by each fact.",
+   "source": "Justin Alexander, The Alexandrian",
+   "url": "https://thealexandrian.net/wordpress/35201/roleplaying-games/the-art-of-the-key-part-2-the-essential-key",
+   "quote": "move from the general to the specific",
+   "page": "Developing Significant Elements"
+  },
+  {
+   "index": 465,
+   "feature": "plainness and economy",
+   "claim": "The Age of Dusk reviewer's writing standard is that short evocative prose conveys a place's feel and leaves blanks for the GM to fill.",
+   "source": "Prince, 'Reviewing Standards', Age of Dusk",
+   "url": "https://princeofnothingblogs.wordpress.com/reviewing-standards/",
+   "quote": "Short, evocative writing communicates the feel of a place",
+   "page": "Writing"
+  },
+  {
+   "index": 466,
+   "feature": "place and institution description",
+   "claim": "The same standard lists two-page room descriptions among the things everyone dislikes in adventure writing.",
+   "source": "Prince, 'Reviewing Standards', Age of Dusk",
+   "url": "https://princeofnothingblogs.wordpress.com/reviewing-standards/",
+   "quote": "room descriptions that go on for two pages",
+   "page": "Writing"
+  },
+  {
+   "index": 467,
+   "feature": "dm-facing sentence",
+   "claim": "Courtney Campbell's location notation reduces the spoken description to the bolded words alone, everything else waiting on a player's question.",
+   "source": "Courtney Campbell, 'On Set Design', Hack & Slash",
+   "url": "https://hackslashmaster.blogspot.com/2012/06/on-set-design.html",
+   "quote": "When describing things, I only use the bolded words!",
+   "page": "On Set Design"
+  },
+  {
+   "index": 468,
+   "feature": "plainness and economy",
+   "claim": "Campbell's stated rule for the same notation is that no unimportant word appears at all.",
+   "source": "Courtney Campbell, 'On Set Design', Hack & Slash",
+   "url": "https://hackslashmaster.blogspot.com/2012/06/on-set-design.html",
+   "quote": "Any word that is not important, is not used.",
+   "page": "On Set Design"
+  }
+ ]
+}

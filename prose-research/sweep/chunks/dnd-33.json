@@ -1,0 +1,158 @@
+{
+ "name": "dnd",
+ "chunk": 33,
+ "indices": [
+  544,
+  545,
+  546,
+  547,
+  548,
+  549,
+  550,
+  551,
+  552,
+  553,
+  554,
+  555,
+  556,
+  557,
+  558
+ ],
+ "claims": [
+  {
+   "index": 544,
+   "feature": "plainness and economy",
+   "claim": "Lowell Francis praises GAZ3 for delivering in 96 pages what many books would have needed twice that to do.",
+   "source": "Lowell Francis, Age of Ravens, Gazetteers of Mystara review list, 2012",
+   "url": "http://ageofravens.blogspot.com/2012/04/gazetteers-of-mystara-review-list.html",
+   "quote": "a booklet which offers in 96 pages what many books would have needed twice that to do",
+   "page": "entry GAZ3: The Principalities of Glantri, OVERALL"
+  },
+  {
+   "index": 545,
+   "feature": "place and institution description",
+   "claim": "Bryce Lynch reports that the village write-up details nine major buildings including the garrison, inn, jeweler, church and general store.",
+   "source": "Bryce Lynch, tenfootpole.org review of AA#13 White Dragon Run, 2011",
+   "url": "https://tenfootpole.org/ironspike/?p=304",
+   "quote": "including the garrison, inn, jeweler, church and general store",
+   "page": "body, paragraph on the village proper"
+  },
+  {
+   "index": 546,
+   "feature": "other: rumour table",
+   "claim": "Bryce Lynch calls a decent sized rumor table proper equipment for a home base settlement.",
+   "source": "Bryce Lynch, tenfootpole.org review of AA#13 White Dragon Run, 2011",
+   "url": "https://tenfootpole.org/ironspike/?p=304",
+   "quote": "We also get a decent sized rumor table",
+   "page": "body, paragraph on the village proper"
+  },
+  {
+   "index": 547,
+   "feature": "place and institution description",
+   "claim": "Bryce Lynch faults the village for occupants who all seem to be fine upstanding members of the community.",
+   "source": "Bryce Lynch, tenfootpole.org review of AA#13 White Dragon Run, 2011",
+   "url": "https://tenfootpole.org/ironspike/?p=304",
+   "quote": "The occupants all seem to be fine upstanding members of the community",
+   "page": "body, paragraph on the village proper"
+  },
+  {
+   "index": 548,
+   "feature": "place and institution description",
+   "claim": "Justin Alexander's urbancrawl key entry for a Ptolus castle is a single sentence of material, colour and contents.",
+   "source": "Justin Alexander, The Alexandrian, urbancrawl series part 4",
+   "url": "https://thealexandrian.net/wordpress/36508/roleplaying-games/thinking-about-urbancrawls-part-4-experimental-city-hexes",
+   "quote": "A huge castle made from purple stone",
+   "page": "THE KEY, entry A2 CASTLE SHARD"
+  },
+  {
+   "index": 549,
+   "feature": "withheld information and inference",
+   "claim": "Justin Alexander advises writing the clue rather than the conclusion in an in-world lore book.",
+   "source": "Justin Alexander, The Alexandrian, Ptolus: Running the Campaign – Using Lore Books, 2020",
+   "url": "https://thealexandrian.net/wordpress/45361/roleplaying-games/ptolus-running-the-campaign-using-lore-books",
+   "quote": "Instead of writing the conclusion, you are writing the clue",
+   "page": "section WRITING THE BOOK"
+  },
+  {
+   "index": 550,
+   "feature": "omission as information",
+   "claim": "Justin Alexander says it is often useful if the key information is not what the in-world book is primarily about.",
+   "source": "Justin Alexander, The Alexandrian, Ptolus: Running the Campaign – Using Lore Books, 2020",
+   "url": "https://thealexandrian.net/wordpress/45361/roleplaying-games/ptolus-running-the-campaign-using-lore-books",
+   "quote": "the key information is not what the book is primarily about",
+   "page": "section WRITING THE BOOK"
+  },
+  {
+   "index": 551,
+   "feature": "withheld information and inference",
+   "claim": "Justin Alexander often presents a lore book's information in an oblique or mythic manner.",
+   "source": "Justin Alexander, The Alexandrian, Ptolus: Running the Campaign – Using Lore Books, 2020",
+   "url": "https://thealexandrian.net/wordpress/45361/roleplaying-games/ptolus-running-the-campaign-using-lore-books",
+   "quote": "presenting the information in an oblique or mythic manner",
+   "page": "section WRITING THE BOOK"
+  },
+  {
+   "index": 552,
+   "feature": "other: in-world document form",
+   "claim": "Justin Alexander says his lore-book handouts serve as an executive summary for a book that does not exist.",
+   "source": "Justin Alexander, The Alexandrian, Ptolus: Running the Campaign – Using Lore Books, 2020",
+   "url": "https://thealexandrian.net/wordpress/45361/roleplaying-games/ptolus-running-the-campaign-using-lore-books",
+   "quote": "an executive summary for a book that doesn",
+   "page": "body, paragraph on what lore books are"
+  },
+  {
+   "index": 553,
+   "feature": "concrete sensory noun",
+   "claim": "Justin Alexander advises describing the physical experience of reading the in-world book, not only its contents.",
+   "source": "Justin Alexander, The Alexandrian, Ptolus: Running the Campaign – Using Lore Books, 2020",
+   "url": "https://thealexandrian.net/wordpress/45361/roleplaying-games/ptolus-running-the-campaign-using-lore-books",
+   "quote": "describe the experience of reading the book",
+   "page": "section TIPS & TRICKS"
+  },
+  {
+   "index": 554,
+   "feature": "other: in-world document form",
+   "claim": "Alexander's own demonstration lore-book text says the volume's scholarship cannot easily be separated from fancy.",
+   "source": "Justin Alexander, The Alexandrian, 2020, quoting his own demonstration lore-book handout",
+   "url": "https://thealexandrian.net/wordpress/45361/roleplaying-games/ptolus-running-the-campaign-using-lore-books",
+   "quote": "it is rather difficult to separate what is meant to be scholarship",
+   "page": "body, first example handout"
+  },
+  {
+   "index": 555,
+   "feature": "place and institution description",
+   "claim": "Justin Alexander says FR1 Waterdeep and the North carried most of the Yawning Portal's information inside its proprietor's NPC write-up.",
+   "source": "Justin Alexander, The Alexandrian, A Textual History of the Yawning Portal, 2022",
+   "url": "https://thealexandrian.net/wordpress/47553/roleplaying-games/forgotten-realms-a-textual-history-of-the-yawning-portal",
+   "quote": "contained in the NPC write-up of its proprietor",
+   "page": "section THE EARLY DAYS"
+  },
+  {
+   "index": 556,
+   "feature": "concrete sensory noun",
+   "claim": "FRE3 Waterdeep describes the inn's door as bearing chalked words welcoming visitors.",
+   "source": "FRE3 Waterdeep (Ed Greenwood, TSR, 1989), quoted by Justin Alexander",
+   "url": "https://thealexandrian.net/wordpress/47553/roleplaying-games/forgotten-realms-a-textual-history-of-the-yawning-portal",
+   "quote": "Come Ye Inn",
+   "page": "section THE EARLY DAYS, list of FRE3 details"
+  },
+  {
+   "index": 557,
+   "feature": "place and institution description",
+   "claim": "Ruins of Undermountain describes the Yawning Portal as a rambling, dingy, blue-tapestried building of carved pillars and paneling.",
+   "source": "Ruins of Undermountain (TSR, 1991), quoted by Justin Alexander",
+   "url": "https://thealexandrian.net/wordpress/47553/roleplaying-games/forgotten-realms-a-textual-history-of-the-yawning-portal",
+   "quote": "a rambling, dingy, blue-tapestried building of smoothly carved pillars",
+   "page": "section THE EARLY DAYS, list of Ruins of Undermountain details"
+  },
+  {
+   "index": 558,
+   "feature": "omission as information",
+   "claim": "Ruins of Undermountain says it omitted the inn's details to allow DMs free rein in customizing the place.",
+   "source": "Ruins of Undermountain (TSR, 1991), block-quoted by Justin Alexander",
+   "url": "https://thealexandrian.net/wordpress/47553/roleplaying-games/forgotten-realms-a-textual-history-of-the-yawning-portal",
+   "quote": "to allow DMs free rein in customizing this rambling, shady place",
+   "page": "section THE EARLY DAYS, block quotation from Ruins of Undermountain"
+  }
+ ]
+}

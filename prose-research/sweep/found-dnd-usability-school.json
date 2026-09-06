@@ -1,6 +1,6 @@
 {
  "complete": true,
- "coverage": "Named roster: FETCHED raw - tenfootpole Review Standards (the ?page_id=3 guess 404s; the live page is ?page_id=1201), Alexandrian 'The Art of the Key' Parts 1-3 plus 'GM Don't List #13: Boxed Text Pitfalls', 'Are We Really This Stupid?' and the Ptolus table-to-page post, Melan/Gabor Lux (three Beyond Fomalhaut posts), David Hartlage/DMDavid (the 1979 Lost Tamoachan boxed-text dating plus his 'How much description' essay), Grognardia 'High Gygaxian' (Gygax's own account of 'old fashioned' boyhood reading and dictionaries/thesauruses), and 'Gearing' - identified via tenfootpole's own site search as Luke Gearing (two craft posts). NOT SUBSTANTIVE though fetched: Grognardia 'White Dwarf Interviews Gary Gygax' (relays WD #14, late 1979, but says nothing on prose or keys), Alexandrian 'Advanced Gamemastery: Boxed Text' (video promo blurb only), tenfootpole favourites list. NOT FOUND: Trent Foster's own 2009 posting - the Grognardia item praising it is a bare link to Knights & Knaves Alehouse thread t=5969, which is offline and has no Wayback snapshot; his slogan survives here only through Melan's relay. Expansion: bibliography-chasing gave 3 substantive (Courtney Campbell 'On Set Design' and Brendan/Necropraxis 'Improved area keys', both cited by the Alexandrian; the 2005 Wizards Decker & Noonan Gen Con article, cited in a tenfootpole comment and by Dyson, recovered from a Wayback capture since archive.wizards.com is dead); lateral/site-search gave 5 more substantive (Dyson Logos, ars phantasia, The Lady and Tiger, Gus L, plus a 2026-09-05 and a 2026-07-06 tenfootpole review carrying Bryce Lynch's live doctrine). Academic 'cited by' routes (Semantic Scholar / OpenAlex / Crossref) do not index this literature, which is entirely blogs, reviews and one vendor devblog. BLOCKED: the session's WebSearch budget was exhausted (200/200) mid-sweep; DuckDuckGo timed out, Mojeek served a CAPTCHA (not solved), Bing returned no organic results - all discovery after that point was link-chasing and on-site search. 25 substantive sources of 30 fetched; 123 claims.",
+ "coverage": "Named roster FETCHED RAW: tenfootpole \"Review Standards\" (the ?page_id=3 guess 404s; live page is ?page_id=1201), Alexandrian \"The Art of the Key\" Parts 1-3 plus \"GM Don't List #13: Boxed Text Pitfalls\", \"Are We Really This Stupid?\" and the Ptolus table-to-page post, Melan/Gabor Lux (three Beyond Fomalhaut posts), David Hartlage/DMDavid (the 1979 Lost Tamoachan dating plus his \"How much description\" essay), Grognardia \"High Gygaxian\" (Gygax's own account: \"old fashioned\" boyhood reading, dictionaries and thesauruses), and \"Gearing\" — identified via tenfootpole's own site search as LUKE GEARING (two craft posts). FETCHED BUT NON-SUBSTANTIVE for this angle: Grognardia \"White Dwarf Interviews Gary Gygax\" (relays WD #14, late 1979, nothing on prose or keys), Alexandrian \"Advanced Gamemastery: Boxed Text\" (video promo blurb only), tenfootpole favourites list. NOT FOUND: Trent Foster's own 2009 posting — the Grognardia item praising it is a bare link to Knights & Knaves Alehouse thread t=5969, which is offline with no Wayback snapshot; his slogan survives here only through Melan's relay. EXPANSION: bibliography-chasing gave 3 substantive (Courtney Campbell \"On Set Design\" and Brendan/Necropraxis \"Improved area keys\", both cited by the Alexandrian; the 2005 Wizards Decker & Noonan Gen Con article — the primary behind the \"two sentences\" figure — recovered from a Wayback capture since archive.wizards.com is dead); lateral/on-site search gave 5 more (Dyson Logos, ars phantasia, The Lady and Tiger, Gus L, plus a 2026-09-05 and a 2026-07-06 tenfootpole review carrying Bryce Lynch's live doctrine and his model room text). Academic \"cited by\" routes (Semantic Scholar/OpenAlex/Crossref) do not index this literature — it is entirely blogs, reviews and one vendor devblog; no published style guide is claimed by any of them. BLOCKED: the session's WebSearch budget was exhausted (200/200) mid-sweep, DuckDuckGo timed out, Mojeek served a CAPTCHA (not solved), Bing returned no organic results — all later discovery was link-chasing and site-search endpoints. 25 substantive sources of 30 fetched; 123 claims. Authoritative record: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/found-dnd-usability-school.json (complete:true), raw pages in sweep/raw/u*.txt and sweep/s0*.txt, notes in find-dnd-usability-school.md.",
  "sourcesRead": [
   {
    "title": "Review Standards (tenfootpole.org)",
@@ -253,7 +253,6 @@
    "page": "Review Standards, bullet list",
    "kind": "analysis",
    "polarity": "rejects",
-   "date": "",
    "routeHint": "direct curl (browser UA)",
    "registerHint": "dm-page",
    "confidence": "high"
@@ -267,7 +266,6 @@
    "page": "Review Standards, bullet list",
    "kind": "analysis",
    "polarity": "asserts",
-   "date": "",
    "routeHint": "direct curl (browser UA)",
    "registerHint": "dm-page",
    "confidence": "high"
@@ -281,7 +279,6 @@
    "page": "Review Standards, bullet list",
    "kind": "analysis",
    "polarity": "asserts",
-   "date": "",
    "routeHint": "direct curl (browser UA)",
    "registerHint": "dm-page",
    "confidence": "high"
@@ -295,7 +292,6 @@
    "page": "Review Standards, bullet list",
    "kind": "analysis",
    "polarity": "rejects",
-   "date": "",
    "routeHint": "direct curl (browser UA)",
    "registerHint": "dm-page",
    "confidence": "high"
@@ -309,7 +305,6 @@
    "page": "Review Standards, 'The Pretty Girl' scale, Language 4",
    "kind": "analysis",
    "polarity": "asserts",
-   "date": "",
    "routeHint": "direct curl (browser UA)",
    "registerHint": "dm-page",
    "confidence": "high"
@@ -323,7 +318,6 @@
    "page": "Review Standards, 'The Pretty Girl' scale, Language 0",
    "kind": "analysis",
    "polarity": "rejects",
-   "date": "",
    "routeHint": "direct curl (browser UA)",
    "registerHint": "dm-page",
    "confidence": "high"
@@ -925,7 +919,6 @@
    "page": "The Book Introduction, opening",
    "kind": "analysis",
    "polarity": "asserts",
-   "date": "",
    "routeHint": "direct curl (browser UA)",
    "registerHint": "dm-page",
    "confidence": "high"
@@ -939,7 +932,6 @@
    "page": "The Book Introduction, third paragraph",
    "kind": "analysis",
    "polarity": "asserts",
-   "date": "",
    "routeHint": "direct curl (browser UA)",
    "registerHint": "dm-page",
    "confidence": "high"
@@ -953,7 +945,6 @@
    "page": "The Book Introduction, fourth paragraph",
    "kind": "analysis",
    "polarity": "asserts",
-   "date": "",
    "routeHint": "direct curl (browser UA)",
    "registerHint": "dossier-archivist",
    "confidence": "high"
@@ -967,7 +958,6 @@
    "page": "The Book Introduction, second paragraph",
    "kind": "analysis",
    "polarity": "asserts",
-   "date": "",
    "routeHint": "direct curl (browser UA)",
    "registerHint": "dm-page",
    "confidence": "high"

@@ -1,0 +1,158 @@
+{
+ "name": "kay",
+ "chunk": 15,
+ "indices": [
+  225,
+  226,
+  227,
+  228,
+  229,
+  230,
+  231,
+  232,
+  233,
+  234,
+  235,
+  236,
+  237,
+  238,
+  239
+ ],
+ "claims": [
+  {
+   "index": 225,
+   "feature": "place and institution description",
+   "claim": "Palmatier says Kay alters the familiar world at the level of everyday ritual, myth, legend and superstition rather than by cosmetic changes.",
+   "source": "Joshua Palmatier (novelist), 'Altering the Familiar: Tigana by Guy Gavriel Kay', Reactor/Tor.com 'That Was Awesome! Writers on Writing', 2016",
+   "url": "https://reactormag.com/altering-the-familiar-tigana-by-guy-gavriel-kay/",
+   "quote": "down to arbitrary everyday rituals, including myths and legends and superstitions",
+   "page": "body, paragraph beginning 'How he does is it arcane'"
+  },
+  {
+   "index": 226,
+   "feature": "plainness and economy",
+   "claim": "Mather says Kay's poetic style is not so dense that passages require hours of thought to decipher.",
+   "source": "Andrew Mather, 'The Masters Of Prose', The Quill to Live (review blog), 2016",
+   "url": "https://thequilltolive.com/2016/01/07/the-masters-of-prose/",
+   "quote": "incredibly poetic but also not too dense",
+   "page": "entry for Guy Gavriel Kay"
+  },
+  {
+   "index": 227,
+   "feature": "place and institution description",
+   "claim": "Mather calls Kay the most transportive writer he has read, attributing it to years of study of the cultures and places written about.",
+   "source": "Andrew Mather, 'The Masters Of Prose', The Quill to Live (review blog), 2016",
+   "url": "https://thequilltolive.com/2016/01/07/the-masters-of-prose/",
+   "quote": "Kay is the most transportive writer I have ever read",
+   "page": "entry for Guy Gavriel Kay"
+  },
+  {
+   "index": 228,
+   "feature": "sentence length variation",
+   "claim": "Michal says The Last Light of the Sun cuts Kay's ornate style down to a rougher language full of sentence fragments.",
+   "source": "Michal, 'Flippant Reviews: Guy Gavriel Kay', One Last Sketch (blog), 2011",
+   "url": "https://onelastsketch.wordpress.com/2011/12/12/flippant-reviews-guy-gavriel-kay/",
+   "quote": "rife with sentence fragments and strong images recounting the frozen north",
+   "page": "entry for The Last Light of the Sun"
+  },
+  {
+   "index": 229,
+   "feature": "closing sentence",
+   "claim": "Michal says The Last Light of the Sun has one of the most beautiful closing sentences he has encountered anywhere.",
+   "source": "Michal, 'Flippant Reviews: Guy Gavriel Kay', One Last Sketch (blog), 2011",
+   "url": "https://onelastsketch.wordpress.com/2011/12/12/flippant-reviews-guy-gavriel-kay/",
+   "quote": "one of the most beautiful closing sentences I’ve encountered anywhere",
+   "page": "entry for The Last Light of the Sun"
+  },
+  {
+   "index": 230,
+   "feature": "withheld information and inference",
+   "claim": "Michal faults Tigana for telling the reader how to feel rather than leaving the feeling to be inferred.",
+   "source": "Michal, 'Flippant Reviews: Guy Gavriel Kay', One Last Sketch (blog), 2011",
+   "url": "https://onelastsketch.wordpress.com/2011/12/12/flippant-reviews-guy-gavriel-kay/",
+   "quote": "We’re all too often told how to feel",
+   "page": "entry for Tigana"
+  },
+  {
+   "index": 231,
+   "feature": "annalist voice and deep time",
+   "claim": "Michal names as a flaw Kay's tendency to digress into long passages describing the vast import of a historical moment.",
+   "source": "Michal, 'Flippant Reviews: Guy Gavriel Kay', One Last Sketch (blog), 2011",
+   "url": "https://onelastsketch.wordpress.com/2011/12/12/flippant-reviews-guy-gavriel-kay/",
+   "quote": "off on long tangents describing the vast import of some historical moment",
+   "page": "entry for Tigana"
+  },
+  {
+   "index": 232,
+   "feature": "other: writing-advice stance",
+   "claim": "Kay states in his own essay that there are no rules for writing, offering his own practice as anecdote rather than prescription.",
+   "source": "Guy Gavriel Kay, 'Some Writing Advice: Don't Take Others' Advice', Literary Hub, 2019",
+   "url": "https://lithub.com/some-writing-advice-dont-take-others-advice/",
+   "quote": "There are no rules",
+   "page": "body, paragraph beginning 'There are no rules'"
+  },
+  {
+   "index": 233,
+   "feature": "other: sentence-level craft as a value",
+   "claim": "Kay names sentence-by-sentence insight and brilliance in Shirley Hazzard's The Transit of Venus as the object of his extreme admiration.",
+   "source": "Guy Gavriel Kay, '5 Books in My Life', Literary Hub, 2016",
+   "url": "https://lithub.com/guy-gavriel-kay-5-books-in-my-life/",
+   "quote": "the sentence by sentence insight and brilliance is extreme",
+   "page": "answer to 'Is there a book you wish you had written?'"
+  },
+  {
+   "index": 234,
+   "feature": "other: influence and reading",
+   "claim": "Kay says he does not write like Shirley Hazzard even though he admires her craft.",
+   "source": "Guy Gavriel Kay, '5 Books in My Life', Literary Hub, 2016",
+   "url": "https://lithub.com/guy-gavriel-kay-5-books-in-my-life/",
+   "quote": "I don’t write like that",
+   "page": "answer to 'Is there a book you wish you had written?'"
+  },
+  {
+   "index": 235,
+   "feature": "cadence and rhythm",
+   "claim": "Kay says the books he rereads most are the poetry of Yeats or George Seferis.",
+   "source": "Guy Gavriel Kay, '5 Books in My Life', Literary Hub, 2016",
+   "url": "https://lithub.com/guy-gavriel-kay-5-books-in-my-life/",
+   "quote": "the poetry of Yeats or George Seferis",
+   "page": "answer to 'What's the book you reread the most?'"
+  },
+  {
+   "index": 236,
+   "feature": "other: exposition without prerequisite knowledge",
+   "claim": "Kay says it is important to him that readers who know nothing of the actual history never feel behind the curve.",
+   "source": "Guy Gavriel Kay, quoted from a Morrin Centre talk by Joel Miller, 'I Drove 12 Hours to Meet Guy Gavriel Kay', Transmissions from Tomorrow (Substack), 2026",
+   "url": "https://transmissionsfromtomorrow.substack.com/p/meeting-guy-gavriel-kay-what-he-told",
+   "quote": "don’t ever feel they’re behind the curve or missing something",
+   "page": "section 'You Don't Need a Course in the 100 Years War'"
+  },
+  {
+   "index": 237,
+   "feature": "other: no template",
+   "claim": "Kay says he has no pattern, template or system for writing a novel.",
+   "source": "Guy Gavriel Kay, quoted from a Morrin Centre talk by Joel Miller, 'I Drove 12 Hours to Meet Guy Gavriel Kay', Transmissions from Tomorrow (Substack), 2026",
+   "url": "https://transmissionsfromtomorrow.substack.com/p/meeting-guy-gavriel-kay-what-he-told",
+   "quote": "I don’t have a pattern, a template, or a system",
+   "page": "section 'On Craft: There Is No System'"
+  },
+  {
+   "index": 238,
+   "feature": "annalist voice and deep time",
+   "claim": "Kay says writing characters who are aware of their own past and their country's and culture's past is what lets him work with historical awareness.",
+   "source": "Guy Gavriel Kay, quoted from a Morrin Centre talk by Joel Miller, 'I Drove 12 Hours to Meet Guy Gavriel Kay', Transmissions from Tomorrow (Substack), 2026",
+   "url": "https://transmissionsfromtomorrow.substack.com/p/meeting-guy-gavriel-kay-what-he-told",
+   "quote": "aware of their own past and the past of their country",
+   "page": "section 'The Past Isn't Even Past'"
+  },
+  {
+   "index": 239,
+   "feature": "plainness and economy",
+   "claim": "A reader commenting on the piece describes Kay's writing as seeming casual yet perfect.",
+   "source": "David McMillan, reader comment on Joel Miller's 'I Drove 12 Hours to Meet Guy Gavriel Kay', Transmissions from Tomorrow (Substack), 2026",
+   "url": "https://transmissionsfromtomorrow.substack.com/p/meeting-guy-gavriel-kay-what-he-told",
+   "quote": "it seems so casual yet so perfect",
+   "page": "comments, David McMillan, May 25"
+  }
+ ]
+}

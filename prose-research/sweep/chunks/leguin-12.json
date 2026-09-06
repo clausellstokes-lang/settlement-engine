@@ -1,0 +1,158 @@
+{
+ "name": "leguin",
+ "chunk": 12,
+ "indices": [
+  225,
+  226,
+  227,
+  228,
+  229,
+  230,
+  231,
+  232,
+  233,
+  234,
+  235,
+  236,
+  237,
+  238,
+  239
+ ],
+ "claims": [
+  {
+   "index": 225,
+   "feature": "withheld information and inference",
+   "claim": "Le Guin says she has often named events or places in her fantasies that she did not yet know anything about, which were merely words when she wrote them.",
+   "source": "Ursula K. Le Guin, 'Plausibility in Fantasy: an open letter to Alexei Mutovkin', ursulakleguin.com, 2005",
+   "url": "https://www.ursulakleguin.com/plausibility-in-fantasy-an-open-letter",
+   "quote": "when I wrote them, merely words",
+   "page": "body, on the later exploits of Ged"
+  },
+  {
+   "index": 226,
+   "feature": "concrete sensory noun",
+   "claim": "Le Guin asserts that the more exact and factual the detail in a fantasy story, the more plausible the imagined world will be.",
+   "source": "Ursula K. Le Guin, 'Plausibility in Fantasy: an open letter to Alexei Mutovkin', ursulakleguin.com, 2005",
+   "url": "https://www.ursulakleguin.com/plausibility-in-fantasy-an-open-letter",
+   "quote": "Exact and vivid words make an exact and vivid world.",
+   "page": "body, paragraph beginning 'Then there is detail'"
+  },
+  {
+   "index": 227,
+   "feature": "other: internal coherence",
+   "claim": "Le Guin names coherence as the touchstone of plausibility in imaginative fiction.",
+   "source": "Ursula K. Le Guin, 'Plausibility in Fantasy: an open letter to Alexei Mutovkin', ursulakleguin.com, 2005",
+   "url": "https://www.ursulakleguin.com/plausibility-in-fantasy-an-open-letter",
+   "quote": "The touchstone to plausibility in imaginative fiction is probably coherence.",
+   "page": "body, penultimate section"
+  },
+  {
+   "index": 228,
+   "feature": "other: internal coherence",
+   "claim": "Le Guin says what constitutes plausibility in fantasy is the coherence of the story and its consistent self-reference.",
+   "source": "Ursula K. Le Guin, 'Plausibility Revisited', ursulakleguin.com, 2005",
+   "url": "https://www.ursulakleguin.com/plausibility-revisited",
+   "quote": "What constitutes plausibility in fantasy is the coherence of the story",
+   "page": "body, paragraph on fantasy's contract with the reader"
+  },
+  {
+   "index": 229,
+   "feature": "place and institution description",
+   "claim": "Le Guin objects that a preindustrial fantasy setting is no justification for a world having no economics and no social justice.",
+   "source": "Ursula K. Le Guin, 'Some Assumptions about Fantasy', speech at the Children's Literature Breakfast, BookExpo America, Chicago, 4 June 2004",
+   "url": "https://www.ursulakleguin.com/some-assumptions-about-fantasy",
+   "quote": "no economics and no social justice",
+   "page": "Assumption 2"
+  },
+  {
+   "index": 230,
+   "feature": "place and institution description",
+   "claim": "Le Guin says she feels like setting off fireworks whenever she finds a fantasy set in a genuinely imagined society and culture.",
+   "source": "Ursula K. Le Guin, 'Some Assumptions about Fantasy', BookExpo America, 4 June 2004",
+   "url": "https://www.ursulakleguin.com/some-assumptions-about-fantasy",
+   "quote": "genuinely imagined society and culture instead of this lazy-minded",
+   "page": "Assumption 2"
+  },
+  {
+   "index": 231,
+   "feature": "place and institution description",
+   "claim": "Le Guin defines a society's technology as how it copes with physical reality, and lists food, clothing, power sources, what people build with and what they build, and their medicine.",
+   "source": "Ursula K. Le Guin, 'A Rant About \"Technology\"', ursulakleguin.com, 2005",
+   "url": "https://www.ursulakleguin.com/a-rant-about-technology",
+   "quote": "how people get and keep and cook food",
+   "page": "body, paragraph beginning 'Its technology is how a society copes'"
+  },
+  {
+   "index": 232,
+   "feature": "place and institution description",
+   "claim": "Le Guin defines technology as the active human interface with the material world.",
+   "source": "Ursula K. Le Guin, 'A Rant About \"Technology\"', ursulakleguin.com, 2005",
+   "url": "https://www.ursulakleguin.com/a-rant-about-technology",
+   "quote": "Technology is the active human interface with the material world.",
+   "page": "body, one-sentence paragraph"
+  },
+  {
+   "index": 233,
+   "feature": "other: exposition and description defended",
+   "claim": "Le Guin says that thanks to 'show don't tell' she finds writers in her workshops who are afraid to describe the world they have invented.",
+   "source": "Ursula K. Le Guin, 'On Rules of Writing, or, Riffing on Rechy', first published in the Los Angeles Times, 5 January 2003, as 'When to Bend, When to Break'",
+   "url": "https://www.ursulakleguin.com/on-rules-of-writing",
+   "quote": "They’re afraid to describe the world they’ve invented.",
+   "page": "body, third paragraph"
+  },
+  {
+   "index": 234,
+   "feature": "point of view and distance",
+   "claim": "Le Guin argues the narrator's voice, disparaged as omniscient, is the most intimate voice of all rather than a distancing one.",
+   "source": "Ursula K. Le Guin, 'On Rules of Writing, or, Riffing on Rechy', Los Angeles Times, 5 January 2003",
+   "url": "https://www.ursulakleguin.com/on-rules-of-writing",
+   "quote": "it’s the most intimate voice of all",
+   "page": "body, fourth paragraph"
+  },
+  {
+   "index": 235,
+   "feature": "point of view and distance",
+   "claim": "Le Guin says the same fear of distancing leads writers to abandon the narrative past tense for the tight-focused present tense, and answers that distance lends enchantment.",
+   "source": "Ursula K. Le Guin, 'On Rules of Writing, or, Riffing on Rechy', Los Angeles Times, 5 January 2003",
+   "url": "https://www.ursulakleguin.com/on-rules-of-writing",
+   "quote": "But distance lends enchantment",
+   "page": "body, fourth paragraph"
+  },
+  {
+   "index": 236,
+   "feature": "cadence and rhythm",
+   "claim": "Le Guin says writing is made of words that are bodily, and that the rhythms of words are bodily rhythms.",
+   "source": "Ursula K. Le Guin, 'What Makes a Story', ursulakleguin.com, c. 2007",
+   "url": "https://www.ursulakleguin.com/what-makes-a-story",
+   "quote": "the rhythms of words are bodily rhythms",
+   "page": "body, paragraph on bodily similes"
+  },
+  {
+   "index": 237,
+   "feature": "sentence length variation",
+   "claim": "Le Guin says many contemporary writers avoid complex sentences and write what she calls Macho Staccato.",
+   "source": "Ursula K. Le Guin, answer to 'Joe', 'Navigating the Ocean of Story - Session 1 part 3', Book View Cafe, 2015",
+   "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-1-part-3",
+   "quote": "avoid complex sentences and write what I call Macho Staccato",
+   "page": "Session 1 part 3, answer to Joe"
+  },
+  {
+   "index": 238,
+   "feature": "sentence length variation",
+   "claim": "Le Guin says the ideal is flexibility, a balance of different sentence lengths depending on what the sentences do.",
+   "source": "Ursula K. Le Guin, answer to 'Michael', 'Navigating the Ocean of Story - Session 1 part 3', Book View Cafe, 2015",
+   "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-1-part-3",
+   "quote": "The ideal is flexibility, a balance of different sentence lengths",
+   "page": "Session 1 part 3, answer to Michael"
+  },
+  {
+   "index": 239,
+   "feature": "plainness and economy",
+   "claim": "Le Guin says a poet's desire to make words vivid, exact and as few as possible carries over into writing prose.",
+   "source": "Ursula K. Le Guin, answer to 'Deepthi', 'Navigating the Ocean of Story - Session 1 part 3', Book View Cafe, 2015",
+   "url": "https://www.ursulakleguin.com/bvc-navigating-the-ocean-of-story-session-1-part-3",
+   "quote": "as exact and accurate, and as few as possible",
+   "page": "Session 1 part 3, answer to Deepthi"
+  }
+ ]
+}

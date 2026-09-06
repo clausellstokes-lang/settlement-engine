@@ -301,6 +301,20 @@
    "confidence": "high"
   },
   {
+   "feature": "repetition and refrain",
+   "claim": "Pajiba reports that Martin was stubborn about keeping the repeated phrase his editor wanted cut.",
+   "source": "Genevieve Burgess, Pajiba (2014-05-30), relaying Anne Groell's Suvudu Q&A",
+   "url": "https://web.archive.org/web/20241126034104id_/https://www.pajiba.com/game_of_thrones/george-rr-martins-editor-does-a-qa-but-doesnt-have-the-answer-you-want.php",
+   "quote": "but Martin was “stubborn.”",
+   "page": "numbered highlight 6",
+   "kind": "relay",
+   "polarity": "asserts",
+   "date": "2014-05-30",
+   "routeHint": "wayback id_ raw capture 20241126034104",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
    "feature": "concrete sensory noun",
    "claim": "MoPOP headlines its Martin oral-history clip with Martin's remark that he always knew they were summer snows, an image he says he had from the beginning.",
    "source": "Museum of Pop Culture blog (2019-04-16), quoting George R.R. Martin's MoPOP oral history",
@@ -1043,6 +1057,20 @@
    "confidence": "high"
   },
   {
+   "feature": "terminology consistency",
+   "claim": "Antonsson says they helped Anne Groell go over the Fire & Blood material and try to keep it consistent with The World of Ice and Fire.",
+   "source": "Linda Antonsson, La Garde de Nuit interview (published 2020-03-25)",
+   "url": "https://web.archive.org/web/20251202235322id_/https://www.lagardedenuit.com/meeting-with-elio-linda-westeros-org-the-world-of-ice-and-fire/",
+   "quote": "try and keep it consistent between the two books",
+   "page": "transcript, About Fire and Blood",
+   "kind": "analysis",
+   "polarity": "asserts",
+   "date": "2020-03-25",
+   "routeHint": "wayback id_ raw capture 20251202235322",
+   "registerHint": "chronicle-line",
+   "confidence": "high"
+  },
+  {
    "feature": "edition and house style",
    "claim": "Groell says elements of The World of Ice and Fire had to be shortened because the book was already getting too long.",
    "source": "Anne Groell, Suvudu Universe Q&A re-transcribed at The Fireside (2014-05-29)",
@@ -1055,6 +1083,20 @@
    "routeHint": "live curl with browser UA; the original Suvudu page is gone",
    "registerHint": "chronicle-line",
    "confidence": "medium — fan re-transcription of a Q&A whose original host is dead; the source's line wrapping splits the sentence"
+  },
+  {
+   "feature": "edition and house style",
+   "claim": "Groell says Martin had to reveal a few secrets to her so that she could help him redirect parts of the plot of The World of Ice and Fire.",
+   "source": "Anne Groell, Suvudu Universe Q&A re-transcribed at The Fireside (2014-05-29)",
+   "url": "https://insurrbution.blogspot.com/2014/05/interview-with-anne-groell-grrms-editor.html",
+   "quote": "to reveal a few secrets so I could help him redirect parts of the plot",
+   "page": "Q&A, answer on knowing the ending",
+   "kind": "relay",
+   "polarity": "asserts",
+   "date": "2014-05-29",
+   "routeHint": "live curl with browser UA; the original Suvudu page is gone",
+   "registerHint": "chronicle-line",
+   "confidence": "medium — fan re-transcription of a Q&A whose original host is dead"
   },
   {
    "feature": "other: series length",
@@ -1237,48 +1279,6 @@
    "routeHint": "wayback id_ raw capture 20010503051917",
    "registerHint": "dossier-archivist",
    "confidence": "medium — unsigned review; authorship inferred from the site copyright line"
-  },
-  {
-   "feature": "repetition and refrain",
-   "claim": "Pajiba reports that Martin was stubborn about keeping the repeated phrase his editor wanted cut.",
-   "source": "Genevieve Burgess, Pajiba (2014-05-30), relaying Anne Groell's Suvudu Q&A",
-   "url": "https://web.archive.org/web/20241126034104id_/https://www.pajiba.com/game_of_thrones/george-rr-martins-editor-does-a-qa-but-doesnt-have-the-answer-you-want.php",
-   "quote": "but Martin was “stubborn.”",
-   "page": "numbered highlight 6",
-   "kind": "relay",
-   "polarity": "asserts",
-   "date": "2014-05-30",
-   "routeHint": "wayback id_ raw capture 20241126034104",
-   "registerHint": "chronicle-line",
-   "confidence": "high"
-  },
-  {
-   "feature": "terminology consistency",
-   "claim": "Antonsson says they helped Anne Groell go over the Fire & Blood material and try to keep it consistent with The World of Ice and Fire.",
-   "source": "Linda Antonsson, La Garde de Nuit interview (published 2020-03-25)",
-   "url": "https://web.archive.org/web/20251202235322id_/https://www.lagardedenuit.com/meeting-with-elio-linda-westeros-org-the-world-of-ice-and-fire/",
-   "quote": "try and keep it consistent between the two books",
-   "page": "transcript, About Fire and Blood",
-   "kind": "analysis",
-   "polarity": "asserts",
-   "date": "2020-03-25",
-   "routeHint": "wayback id_ raw capture 20251202235322",
-   "registerHint": "chronicle-line",
-   "confidence": "high"
-  },
-  {
-   "feature": "edition and house style",
-   "claim": "Groell says Martin had to reveal a few secrets to her so that she could help him redirect parts of the plot of The World of Ice and Fire.",
-   "source": "Anne Groell, Suvudu Universe Q&A re-transcribed at The Fireside (2014-05-29)",
-   "url": "https://insurrbution.blogspot.com/2014/05/interview-with-anne-groell-grrms-editor.html",
-   "quote": "to reveal a few secrets so I could help him redirect parts of the plot",
-   "page": "Q&A, answer on knowing the ending",
-   "kind": "relay",
-   "polarity": "asserts",
-   "date": "2014-05-29",
-   "routeHint": "live curl with browser UA; the original Suvudu page is gone",
-   "registerHint": "chronicle-line",
-   "confidence": "medium — fan re-transcription of a Q&A whose original host is dead"
   }
  ]
 }

@@ -1,277 +1,4 @@
 {
- "complete": true,
- "coverage": "Round 3, Le Guin close-readings/line-level angle. Named roster: the four items the angle names (the Earthsea prose, From Elfland to Poughkeepsie, Steering the Craft, The Language of the Night) were all FETCHED and already banked in rounds 1-2 (merged-leguin.json holds 100 Le Guin claims, 41 kept, including the Elfland PDF, the NEA guide, Walton's reread, Stan Carey, LitHub, Nepveu and Vermont Softworks); this round re-read Stan Carey raw to confirm and then spent its budget on close readings the earlier rounds missed rather than duplicating them. NOT FOUND: no line-level close reading of Always Coming Home's ethnographic entries themselves (four reviews describe the form, none reads a Kesh paragraph). BLOCKED: every route to a video-essay transcript (YouTube timedtext returns an empty body, youtubetotranscript 403, tactiq 401, youtubetranscript.com is client-side only, no yt-dlp on the machine), so no video essay is cited; www.tor.com, theparisreview.org, granta.com and reddit all 403 to curl (the first cured by the reactormag mirror, the next two by Wayback raw captures, reddit not cured). WebFetch returned model-written summaries rather than page text for every URL tried, so nothing is quoted from it: all 34 pages were read raw. Sources: 34 fetched, 25 substantive. By route: named roster / prior-round confirmation 2; lateral search (WebSearch, budget exhausted mid-round) 24; bibliography chasing from the estate's own index of critical writing and from the Pressbooks book's sibling chapters 6; Wayback recovery ladder 2. The new ground opened: Always Coming Home as a fictional ethnography and the nearest thing in Le Guin to a settlement gazetteer (4 independent readers, who agree it works and agree it reads slowly); 'The Ones Who Walk Away from Omelas' as a sustained description of a city by a narrator who admits the limits of the record (3); the opening paragraph of The Dispossessed, close-read twice independently (no people in it, no names for seven pages); the opening of A Wizard of Earthsea read as a descent from a bird's-eye view to a goatherd, by a novelist who teaches it; a one-sentence close reading by Matt Bell; and reader/forum/comment-thread material including the dissenting view that the distance reads as surface without depth.",
- "sourcesRead": [
-  {
-   "title": "Sentence first (Stan Carey) \u2014 'How to see one's own world': Le Guin on writing style",
-   "url": "https://stancarey.wordpress.com/2024/10/16/how-to-see-ones-own-world-ursula-k-le-guin-on-writing-style/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2024-10-16",
-   "route": "curl browser UA"
-  },
-  {
-   "title": "John Pyle, 'From Elfland to Poughkeepsie' (Fairy Spell blog)",
-   "url": "https://fairyspell.wordpress.com/2012/11/23/from-elfland-to-poughkeepsie/",
-   "kind": "analysis",
-   "substantive": false,
-   "date": "2012-11-23",
-   "route": "curl browser UA"
-  },
-  {
-   "title": "Rich Horton, Review: Always Coming Home (Strange at Ecbatan)",
-   "url": "http://rrhorton.blogspot.com/2024/04/review-always-coming-home-by-ursula-k.html",
-   "kind": "reception",
-   "substantive": true,
-   "date": "2024-04-24",
-   "route": "curl browser UA"
-  },
-  {
-   "title": "Scott Manley Hadley, Always Coming Home (Triumph Of The Now)",
-   "url": "https://triumphofthenow.com/2019/07/13/always-coming-home-by-ursula-le-guin/",
-   "kind": "reception",
-   "substantive": true,
-   "date": "2019-07-13",
-   "route": "curl browser UA"
-  },
-  {
-   "title": "Cat Eldridge, Ursula K. Le Guin's Always Coming Home (A Green Man Review)",
-   "url": "https://agreenmanreview.com/books/ursula-k-le-guins-always-coming-home/",
-   "kind": "reception",
-   "substantive": true,
-   "date": "2001",
-   "route": "curl browser UA"
-  },
-  {
-   "title": "Nathanael Bonnell, Always Coming Home: Review (New Maps, via Resilience.org)",
-   "url": "https://www.resilience.org/stories/2023-02-16/always-coming-home-review/",
-   "kind": "reception",
-   "substantive": true,
-   "date": "2023-02-16",
-   "route": "curl browser UA"
-  },
-  {
-   "title": "Oliver Tearle, Summary and Analysis of 'The Ones Who Walk Away from Omelas' (Interesting Literature)",
-   "url": "https://interestingliterature.com/2021/02/ursula-le-guin-ones-who-walk-away-from-omelas-summary-analysis/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2021-02",
-   "route": "curl browser UA"
-  },
-  {
-   "title": "Sarah Wyman (SUNY New Paltz), analysis of 'The Ones Who Walk Away from Omelas' (Literary Ladies Guide)",
-   "url": "https://www.literaryladiesguide.com/literary-analyses/ones-who-walk-away-from-omelas-ursula-le-guin/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2021",
-   "route": "curl browser UA"
-  },
-  {
-   "title": "Reader Response chapter on Omelas, Beginnings and Endings: A Critical Edition (Pressbooks)",
-   "url": "https://cwi.pressbooks.pub/beginnings-and-endings-a-critical-edition/chapter/reader-response-9/",
-   "kind": "reader",
-   "substantive": true,
-   "date": "2022-12",
-   "route": "curl browser UA"
-  },
-  {
-   "title": "SFF Chronicles thread 583221: Is a Wizard of Earthsea indicative of Le Guin's writing style?",
-   "url": "https://www.sffchronicles.com/threads/583221/",
-   "kind": "reader",
-   "substantive": true,
-   "date": "2022-08-01",
-   "route": "curl browser UA"
-  },
-  {
-   "title": "Erin Ramsay, Earthsea: A Sharpening of Scale (The Lighthouse, Substack)",
-   "url": "https://erinramsay.substack.com/p/earthsea-a-sharpening-of-scale",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2024",
-   "route": "curl browser UA"
-  },
-  {
-   "title": "Jaclyn Morken, Late to the Party: A Wizard of Earthsea (F(r)iction)",
-   "url": "https://frictionlit.org/late-to-the-party-a-wizard-of-earthsea-by-ursula-k-le-guin/",
-   "kind": "reception",
-   "substantive": false,
-   "date": "2021",
-   "route": "curl browser UA"
-  },
-  {
-   "title": "LitCharts, A Wizard of Earthsea Chapter 1 Summary & Analysis",
-   "url": "https://www.litcharts.com/lit/a-wizard-of-earthsea/chapter-1",
-   "kind": "analysis",
-   "substantive": false,
-   "route": "curl browser UA"
-  },
-  {
-   "title": "Matt Bell, Exercise #21: How to Study Sentence Structure (Substack)",
-   "url": "https://mattbell.substack.com/p/exercise-21-how-to-study-sentence",
-   "kind": "analysis",
-   "substantive": false,
-   "date": "2021-09",
-   "route": "curl browser UA"
-  },
-  {
-   "title": "Matt Bell, My Le Guin Year: Craft Lessons From a Master (Reactor / Tor.com)",
-   "url": "https://reactormag.com/my-le-guin-year-craft-lessons-from-a-master/",
-   "kind": "analysis",
-   "substantive": true,
-   "date": "2021-08-24",
-   "route": "curl browser UA"
-  },
-  {
-   "title": "Matt Bell, My Le Guin Year: Storytelling Lessons From a Master (Reactor) \u2014 republication of the Aug 2021 essay, same body text",
-   "url": "https://reactormag.com/my-le-guin-year-storytelling-lessons-from-a-master/",
-   "kind": "analysis",
-   "substantive": false,
-   "date": "2022-03-10",
-   "route": "curl browser UA"
-  },
-  {
-   "title": "John Plotz on Earthsea, Anarchism, and Ursula K. Le Guin (Public Books, with Elizabeth Ferry)",
-   "url": "https://www.publicbooks.org/john-plotz-on-earthsea-anarchism-and-ursula-k-le-guin/",
-   "kind": "analysis",
-   "substantive": true,
-   "route": "curl with browser user agent (live URL)",
-   "date": "2024-02-21"
-  },
-  {
-   "title": "Rob Tomlinson, The Dispossessed (A Good Read)",
-   "url": "https://www.rob-tomlinson.com/a-good-read/dispossessed",
-   "kind": "analysis",
-   "substantive": true,
-   "route": "curl with browser user agent (live URL)",
-   "date": "2020s"
-  },
-  {
-   "title": "Theodora Goss, Stonecoast: Wizard of Earthsea",
-   "url": "https://theodoragoss.com/2015/02/28/stonecoast-wizard-of-earthsea/",
-   "kind": "analysis",
-   "substantive": true,
-   "route": "curl with browser user agent (live URL)",
-   "date": "2015-02-28"
-  },
-  {
-   "title": "The Book Nut, A Wizard of Earthsea (review + comment thread)",
-   "url": "https://thebooknut.com/2018/03/30/a-wizard-of-earthsea/",
-   "kind": "reception",
-   "substantive": true,
-   "route": "curl with browser user agent (live URL)",
-   "date": "2018-03-30"
-  },
-  {
-   "title": "Doug Merrill, The Dispossessed by Ursula K. Le Guin (The Frumious Consortium)",
-   "url": "https://www.thefrumiousconsortium.net/2018/03/19/the-dispossessed-by-ursula-k-le-guin/",
-   "kind": "analysis",
-   "substantive": true,
-   "route": "curl with browser user agent (live URL)",
-   "date": "2018-03-19"
-  },
-  {
-   "title": "alannaofdoom, 'Bright the hawk's flight on the empty sky' (Cannonball Read)",
-   "url": "https://cannonballread.com/2014/02/bright-the-hawks-flight-on-the-empty-sky/",
-   "kind": "reader",
-   "substantive": true,
-   "route": "curl with browser user agent (live URL)",
-   "date": "2014-02-13"
-  },
-  {
-   "title": "Wet Broken Things, Book review - Tehanu",
-   "url": "https://wetbrokenthings.wordpress.com/2025/05/25/book-review-tehanu/",
-   "kind": "reception",
-   "substantive": true,
-   "route": "curl with browser user agent (live URL)",
-   "date": "2025-05-25"
-  },
-  {
-   "title": "Moda od Radosti, Tehanu, a novel by Ursula K. Le Guin (book review)",
-   "url": "https://modaodaradosti.blogspot.com/2024/08/tehanu-novel-by-ursula-k-le-guin-book.html",
-   "kind": "reader",
-   "substantive": true,
-   "route": "curl with browser user agent (live URL)",
-   "date": "2024-08"
-  },
-  {
-   "title": "YouTube video essay 'What is good fantasy prose?' (5lDA8VyeLx0) \u2014 BLOCKED, transcript unreachable",
-   "url": "https://www.youtube.com/watch?v=5lDA8VyeLx0",
-   "kind": "analysis",
-   "substantive": false,
-   "route": "curl with browser user agent (live URL)"
-  },
-  {
-   "title": "YouTube video essay 'From Elfland to Poughkeepsie ... Fantasy Essays' (bt5ypCZvivg) \u2014 BLOCKED, transcript unreachable",
-   "url": "https://www.youtube.com/watch?v=bt5ypCZvivg",
-   "kind": "analysis",
-   "substantive": false,
-   "route": "curl with browser user agent (live URL)"
-  },
-  {
-   "title": "Michael Chabon, Le Guin's Subversive Imagination (The Paris Review Daily)",
-   "url": "https://www.theparisreview.org/blog/2019/11/20/leguins-subversive-imagination/",
-   "kind": "analysis",
-   "substantive": true,
-   "route": "live URL 403; Wayback raw capture (20260620070427id_)",
-   "date": "2019-11-20"
-  },
-  {
-   "title": "Jason P. Vest, The Re-Possessed: Ursula K. Le Guin storms the Library of America (The Common Reader)",
-   "url": "https://commonreader.wustl.edu/c/the-re-possessed/",
-   "kind": "analysis",
-   "substantive": true,
-   "route": "curl browser UA",
-   "date": "2021-05-30"
-  },
-  {
-   "title": "Alison Smith, Her Left Hand, The Darkness (Granta)",
-   "url": "https://granta.com/her-left-hand-the-darkness/",
-   "kind": "reception",
-   "substantive": true,
-   "route": "live URL 403; Wayback raw capture (20250903091534id_)",
-   "date": "2019-01-03"
-  },
-  {
-   "title": "Sherryl Vint interviewed by Cal Flyn, The Best Ursula Le Guin Books (Five Books)",
-   "url": "https://fivebooks.com/best-books/best-ursula-le-guin-books-sherryl-vint/",
-   "kind": "analysis",
-   "substantive": true,
-   "route": "curl browser UA",
-   "date": "2021-05-07"
-  },
-  {
-   "title": "Sean Guynes, Introducing the Ursula K. Le Guin Reread (Reactor) + comment thread",
-   "url": "https://reactormag.com/introducing-the-ursula-k-le-guin-reread/",
-   "kind": "reader",
-   "substantive": true,
-   "route": "curl browser UA",
-   "date": "2020-06-22"
-  },
-  {
-   "title": "Terry Morris, Earthsea and Tales from Earthsea, Steam Engine Time No. 11 (fanzine PDF)",
-   "url": "https://efanzines.com/SFC/SteamEngineTime/SET11.pdf",
-   "kind": "reception",
-   "substantive": true,
-   "route": "PDF binary fetched, streams decompressed, text operators extracted",
-   "date": "2009-02"
-  },
-  {
-   "title": "Writing About Ursula and Her Work \u2014 the estate's index of critical writing (used for bibliography chasing)",
-   "url": "https://www.ursulakleguin.com/reviews",
-   "kind": "relay",
-   "substantive": false,
-   "route": "curl browser UA",
-   "date": "2026"
-  },
-  {
-   "title": "New Criticism chapter on Omelas, Beginnings and Endings: A Critical Edition (thematic, not prose-level)",
-   "url": "https://idaho.pressbooks.pub/beginnings-and-endings-a-critical-edition/chapter/new-criticism-10/",
-   "kind": "reader",
-   "substantive": false,
-   "route": "curl browser UA",
-   "date": "2022-12"
-  }
- ],
  "claims": [
   {
    "feature": "civic record register",
@@ -382,7 +109,7 @@
    "claim": "Cat Eldridge contrasts the two worlds: Tolkien has virtually no ethnographic detail where Le Guin has no history.",
    "source": "Cat Eldridge, review of Always Coming Home, A Green Man Review",
    "url": "https://agreenmanreview.com/books/ursula-k-le-guins-always-coming-home/",
-   "quote": "Tolkien\u2019s world has virtually no ethnographic detail",
+   "quote": "Tolkien’s world has virtually no ethnographic detail",
    "page": "review body",
    "kind": "reception",
    "polarity": "asserts",
@@ -653,7 +380,7 @@
   },
   {
    "feature": "cadence and rhythm",
-   "claim": "Matt Bell close-reads a Rocannon\u2019s World sentence and points to the parallel construction of its two rhyming sets.",
+   "claim": "Matt Bell close-reads a Rocannon's World sentence and points to the parallel construction of its two rhyming sets.",
    "source": "Matt Bell, \"My Le Guin Year: Craft Lessons From a Master\", Reactor (Tor.com), 24 August 2021",
    "url": "https://reactormag.com/my-le-guin-year-craft-lessons-from-a-master/",
    "quote": "hear the parallel construction of the two rhyming sets",
@@ -718,8 +445,8 @@
   },
   {
    "feature": "plainness and economy",
-   "claim": "A commenter on Bell\u2019s essay says Le Guin can say more in twenty words than almost anyone.",
-   "source": "Reader comment on Matt Bell\u2019s essay, Reactor comment thread",
+   "claim": "A commenter on Bell's essay says Le Guin can say more in twenty words than almost anyone.",
+   "source": "Reader comment on Matt Bell's essay, Reactor comment thread",
    "url": "https://reactormag.com/my-le-guin-year-craft-lessons-from-a-master/",
    "quote": "She can say more in twenty words than almost anyone",
    "page": "comment thread",
@@ -741,7 +468,7 @@
    "date": "2022-08-01",
    "routeHint": "curl with browser user agent (live URL)",
    "registerHint": "none",
-   "confidence": "medium: a reader impression, and it runs against Le Guin\u2019s own stated rejection of costume archaism"
+   "confidence": "medium: a reader impression, and it runs against Le Guin's own stated rejection of costume archaism"
   },
   {
    "feature": "register modulation",
@@ -771,7 +498,7 @@
   },
   {
    "feature": "place and institution description",
-   "claim": "Rob Tomlinson says Le Guin\u2019s style is spot-on for describing unfamiliar places and cultures.",
+   "claim": "Rob Tomlinson says Le Guin's style is spot-on for describing unfamiliar places and cultures.",
    "source": "Rob Tomlinson, \"The Dispossessed\", A Good Read (rob-tomlinson.com)",
    "url": "https://www.rob-tomlinson.com/a-good-read/dispossessed",
    "quote": "a style that is spot-on for describing unfamiliar places and cultures",
@@ -927,7 +654,7 @@
   },
   {
    "feature": "omission as information",
-   "claim": "Merrill lists among the opening paragraph\u2019s subjects things that do not look important but are.",
+   "claim": "Merrill lists among the opening paragraph's subjects things that do not look important but are.",
    "source": "Doug Merrill, The Frumious Consortium, 19 March 2018",
    "url": "https://www.thefrumiousconsortium.net/2018/03/19/the-dispossessed-by-ursula-k-le-guin/",
    "quote": "things that do not look important but are",
@@ -940,7 +667,7 @@
   },
   {
    "feature": "withheld information and inference",
-   "claim": "Merrill says Le Guin\u2019s sketches of incidental characters hint at full lives lived off the page.",
+   "claim": "Merrill says Le Guin's sketches of incidental characters hint at full lives lived off the page.",
    "source": "Doug Merrill, The Frumious Consortium, 19 March 2018",
    "url": "https://www.thefrumiousconsortium.net/2018/03/19/the-dispossessed-by-ursula-k-le-guin/",
    "quote": "hint at the full lives they have lived off the page",
@@ -953,8 +680,8 @@
   },
   {
    "feature": "plainness and economy",
-   "claim": "A Cannonball Read reviewer calls Le Guin\u2019s writing spare and lyrical, begging to be read aloud.",
-   "source": "alannaofdoom, \"Bright the hawk\u2019s flight on the empty sky\", Cannonball Read, 13 February 2014",
+   "claim": "A Cannonball Read reviewer calls Le Guin's writing spare and lyrical, begging to be read aloud.",
+   "source": "alannaofdoom, \"Bright the hawk's flight on the empty sky\", Cannonball Read, 13 February 2014",
    "url": "https://cannonballread.com/2014/02/bright-the-hawks-flight-on-the-empty-sky/",
    "quote": "Her writing is spare and lyrical, just begging to be read aloud",
    "page": "review body, second point",
@@ -979,7 +706,7 @@
   },
   {
    "feature": "cadence and rhythm",
-   "claim": "The reviewer says Le Guin\u2019s ear for rhythm turns the description of the midsummer Long Dance into a dance.",
+   "claim": "The reviewer says Le Guin's ear for rhythm turns the description of the midsummer Long Dance into a dance.",
    "source": "alannaofdoom, Cannonball Read, 13 February 2014",
    "url": "https://cannonballread.com/2014/02/bright-the-hawks-flight-on-the-empty-sky/",
    "quote": "her ear for rhythm turns a description of the midsummer Long",
@@ -1096,7 +823,7 @@
   },
   {
    "feature": "concrete sensory noun",
-   "claim": "The same reviewer lists the book\u2019s subject matter as the harvest, cooking and cleaning, and conversations amongst women.",
+   "claim": "The same reviewer lists the book's subject matter as the harvest, cooking and cleaning, and conversations amongst women.",
    "source": "Wet Broken Things blog, 25 May 2025",
    "url": "https://wetbrokenthings.wordpress.com/2025/05/25/book-review-tehanu/",
    "quote": "the harvest, cooking and cleaning, conversations amongst women",
@@ -1162,14 +889,14 @@
   {
    "feature": "place and institution description",
    "claim": "Michael Chabon lists the ingredients of the Earthsea world as its flora, its weather, and the dialects and ceremonies of its inhabitants.",
-   "source": "Michael Chabon, \"Le Guin\u2019s Subversive Imagination\", The Paris Review Daily, 20 November 2019",
+   "source": "Michael Chabon, \"Le Guin's Subversive Imagination\", The Paris Review Daily, 20 November 2019",
    "url": "https://www.theparisreview.org/blog/2019/11/20/leguins-subversive-imagination/",
    "quote": "from its flora to its weather to the dialects and ceremonies",
    "page": "middle of the essay",
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2019-11-20",
-   "routeHint": "live URL 403; read at the Wayback raw capture https://web.archive.org/web/<ts>id_/<url>",
+   "routeHint": "live URL 403; read at the Wayback raw capture https://web.archive.org/web/20260620070427id_/<url>",
    "registerHint": "dossier-archivist"
   },
   {
@@ -1182,15 +909,15 @@
    "kind": "analysis",
    "polarity": "asserts",
    "date": "2019-11-20",
-   "routeHint": "live URL 403; read at the Wayback raw capture https://web.archive.org/web/<ts>id_/<url>",
+   "routeHint": "live URL 403; read at the Wayback raw capture https://web.archive.org/web/20260620070427id_/<url>",
    "registerHint": "dossier-archivist"
   },
   {
    "feature": "place and institution description",
-   "claim": "Jason P. Vest says Le Guin weaves each place\u2019s contradictions, tensions, mores and rites into detailed portraits.",
+   "claim": "Jason P. Vest says Le Guin weaves each place's contradictions, tensions, mores and rites into detailed portraits.",
    "source": "Jason P. Vest, \"The Re-Possessed\", The Common Reader (Washington University), 30 May 2021",
    "url": "https://commonreader.wustl.edu/c/the-re-possessed/",
-   "quote": "each place\u2019s contradictions, tensions, mores, and rites into satisfyingly detailed",
+   "quote": "each place’s contradictions, tensions, mores, and rites into satisfyingly detailed",
    "page": "early section on the Hainish novels",
    "kind": "analysis",
    "polarity": "asserts",
@@ -1200,7 +927,7 @@
   },
   {
    "feature": "place and institution description",
-   "claim": "Vest says Le Guin\u2019s invented worlds convince readers they are real places rife with complex histories, cultures and characters.",
+   "claim": "Vest says Le Guin's invented worlds convince readers they are real places rife with complex histories, cultures and characters.",
    "source": "Jason P. Vest, The Common Reader, 30 May 2021",
    "url": "https://commonreader.wustl.edu/c/the-re-possessed/",
    "quote": "real places rife with complex histories, cultures, and characters",
@@ -1226,7 +953,7 @@
   },
   {
    "feature": "plainness and economy",
-   "claim": "Alison Smith calls Le Guin\u2019s prose in Very Far Away From Anywhere Else spare and clarifying.",
+   "claim": "Alison Smith calls Le Guin's prose in Very Far Away From Anywhere Else spare and clarifying.",
    "source": "Alison Smith, \"Her Left Hand, The Darkness\", Granta, 3 January 2019",
    "url": "https://granta.com/her-left-hand-the-darkness/",
    "quote": "too taboo for her spare, clarifying prose",
@@ -1234,12 +961,12 @@
    "kind": "reception",
    "polarity": "asserts",
    "date": "2019-01-03",
-   "routeHint": "live URL 403; read at the Wayback raw capture https://web.archive.org/web/<ts>id_/<url>",
+   "routeHint": "live URL 403; read at the Wayback raw capture https://web.archive.org/web/20250903091534id_/<url>",
    "registerHint": "none"
   },
   {
    "feature": "plainness and economy",
-   "claim": "Smith describes Le Guin\u2019s genius as an amalgam of vivid prose, straight talk and revolutionary engagement.",
+   "claim": "Smith describes Le Guin's genius as an amalgam of vivid prose, straight talk and revolutionary engagement.",
    "source": "Alison Smith, Granta, 3 January 2019",
    "url": "https://granta.com/her-left-hand-the-darkness/",
    "quote": "vivid prose, straight talk and revolutionary engagement",
@@ -1247,7 +974,7 @@
    "kind": "reception",
    "polarity": "asserts",
    "date": "2019-01-03",
-   "routeHint": "live URL 403; read at the Wayback raw capture https://web.archive.org/web/<ts>id_/<url>",
+   "routeHint": "live URL 403; read at the Wayback raw capture https://web.archive.org/web/20250903091534id_/<url>",
    "registerHint": "none"
   },
   {
@@ -1289,6 +1016,279 @@
    "routeHint": "curl the PDF binary, then decompress its streams and pull the text-show operators",
    "registerHint": "dossier-archivist",
    "confidence": "medium: read from PDF stream text extracted by hand, so spacing and apostrophes in the source may differ from my extraction"
+  }
+ ],
+ "complete": true,
+ "coverage": "Round 3, Le Guin close-readings/line-level angle. Named roster: the four items the angle names (Earthsea prose, From Elfland to Poughkeepsie, Steering the Craft, The Language of the Night) were all FETCHED and already banked in rounds 1-2 (merged-leguin.json holds 100 Le Guin claims, 41 kept, including the Elfland PDF, the NEA guide, Walton's reread, Stan Carey, LitHub, Nepveu, Vermont Softworks); Stan Carey was re-read raw here to confirm, and the round then spent its budget on close readings the earlier rounds missed rather than duplicating them. NOT FOUND: no line-level close reading of Always Coming Home's ethnographic entries themselves — four reviewers describe the form, none reads a Kesh paragraph. BLOCKED: every route to a video-essay transcript (YouTube timedtext returns an empty body, youtubetotranscript 403, tactiq 401, youtubetranscript.com is client-side only, no yt-dlp on the machine), so no video is cited; www.tor.com, theparisreview.org, granta.com and reddit all 403 to curl — the first cured by the reactormag mirror, the next two by Wayback raw captures, reddit not cured. WebFetch returned model-written summaries rather than page text for every URL tried, so nothing is quoted from it: all 34 pages were read raw by curl with a browser user agent, and every quotation was grep-verified against the fetched text (0 unverified). Sources: 34 fetched, 25 substantive — by route: named roster / prior-round confirmation 2, lateral search 24 (the session's WebSearch budget was exhausted mid-round and every fallback engine refused: DuckDuckGo connection-refused, Mojeek 403, Marginalia empty, Bing JS-only, Reddit 403), bibliography chasing from the estate's index of critical writing and the Pressbooks book's sibling chapters 6, Wayback recovery ladder 2. New ground opened: Always Coming Home as a fictional ethnography and the nearest thing in Le Guin to a settlement gazetteer (4 independent readers who agree it works and agree it reads slowly); Omelas as a sustained description of a city by a narrator who admits the limits of the record (3); the opening paragraph of The Dispossessed close-read twice independently (no people in it, no names for seven pages); the opening of A Wizard of Earthsea read as a descent from bird's-eye view to goatherd by a novelist who teaches it; a one-sentence close reading by Matt Bell; and reader/forum/comment-thread material including the dissent that the distance reads as surface without depth.",
+ "sourcesRead": [
+  {
+   "title": "Sentence first (Stan Carey) — 'How to see one's own world': Le Guin on writing style",
+   "url": "https://stancarey.wordpress.com/2024/10/16/how-to-see-ones-own-world-ursula-k-le-guin-on-writing-style/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2024-10-16",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "John Pyle, 'From Elfland to Poughkeepsie' (Fairy Spell blog)",
+   "url": "https://fairyspell.wordpress.com/2012/11/23/from-elfland-to-poughkeepsie/",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2012-11-23",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "Rich Horton, Review: Always Coming Home (Strange at Ecbatan)",
+   "url": "http://rrhorton.blogspot.com/2024/04/review-always-coming-home-by-ursula-k.html",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2024-04-24",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "Scott Manley Hadley, Always Coming Home (Triumph Of The Now)",
+   "url": "https://triumphofthenow.com/2019/07/13/always-coming-home-by-ursula-le-guin/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2019-07-13",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "Cat Eldridge, Ursula K. Le Guin's Always Coming Home (A Green Man Review)",
+   "url": "https://agreenmanreview.com/books/ursula-k-le-guins-always-coming-home/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2001",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "Nathanael Bonnell, Always Coming Home: Review (New Maps, via Resilience.org)",
+   "url": "https://www.resilience.org/stories/2023-02-16/always-coming-home-review/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2023-02-16",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "Oliver Tearle, Summary and Analysis of 'The Ones Who Walk Away from Omelas' (Interesting Literature)",
+   "url": "https://interestingliterature.com/2021/02/ursula-le-guin-ones-who-walk-away-from-omelas-summary-analysis/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2021-02",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "Sarah Wyman (SUNY New Paltz), analysis of 'The Ones Who Walk Away from Omelas' (Literary Ladies Guide)",
+   "url": "https://www.literaryladiesguide.com/literary-analyses/ones-who-walk-away-from-omelas-ursula-le-guin/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2021",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "Reader Response chapter on Omelas, Beginnings and Endings: A Critical Edition (Pressbooks)",
+   "url": "https://cwi.pressbooks.pub/beginnings-and-endings-a-critical-edition/chapter/reader-response-9/",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2022-12",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "SFF Chronicles thread 583221: Is a Wizard of Earthsea indicative of Le Guin's writing style?",
+   "url": "https://www.sffchronicles.com/threads/583221/",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2022-08-01",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "Erin Ramsay, Earthsea: A Sharpening of Scale (The Lighthouse, Substack)",
+   "url": "https://erinramsay.substack.com/p/earthsea-a-sharpening-of-scale",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2024",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "Jaclyn Morken, Late to the Party: A Wizard of Earthsea (F(r)iction)",
+   "url": "https://frictionlit.org/late-to-the-party-a-wizard-of-earthsea-by-ursula-k-le-guin/",
+   "kind": "reception",
+   "substantive": false,
+   "date": "2021",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "LitCharts, A Wizard of Earthsea Chapter 1 Summary & Analysis",
+   "url": "https://www.litcharts.com/lit/a-wizard-of-earthsea/chapter-1",
+   "kind": "analysis",
+   "substantive": false,
+   "route": "curl browser UA"
+  },
+  {
+   "title": "Matt Bell, Exercise #21: How to Study Sentence Structure (Substack)",
+   "url": "https://mattbell.substack.com/p/exercise-21-how-to-study-sentence",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2021-09",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "Matt Bell, My Le Guin Year: Craft Lessons From a Master (Reactor / Tor.com)",
+   "url": "https://reactormag.com/my-le-guin-year-craft-lessons-from-a-master/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2021-08-24",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "Matt Bell, My Le Guin Year: Storytelling Lessons From a Master (Reactor) — republication of the Aug 2021 essay, same body text",
+   "url": "https://reactormag.com/my-le-guin-year-storytelling-lessons-from-a-master/",
+   "kind": "analysis",
+   "substantive": false,
+   "date": "2022-03-10",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "John Plotz on Earthsea, Anarchism, and Ursula K. Le Guin (Public Books, with Elizabeth Ferry)",
+   "url": "https://www.publicbooks.org/john-plotz-on-earthsea-anarchism-and-ursula-k-le-guin/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2024-02-21",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "Rob Tomlinson, The Dispossessed (A Good Read)",
+   "url": "https://www.rob-tomlinson.com/a-good-read/dispossessed",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2020s",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "Theodora Goss, Stonecoast: Wizard of Earthsea",
+   "url": "https://theodoragoss.com/2015/02/28/stonecoast-wizard-of-earthsea/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2015-02-28",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "The Book Nut, A Wizard of Earthsea (review + comment thread)",
+   "url": "https://thebooknut.com/2018/03/30/a-wizard-of-earthsea/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2018-03-30",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "Doug Merrill, The Dispossessed by Ursula K. Le Guin (The Frumious Consortium)",
+   "url": "https://www.thefrumiousconsortium.net/2018/03/19/the-dispossessed-by-ursula-k-le-guin/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2018-03-19",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "alannaofdoom, 'Bright the hawk's flight on the empty sky' (Cannonball Read)",
+   "url": "https://cannonballread.com/2014/02/bright-the-hawks-flight-on-the-empty-sky/",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2014-02-13",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "Wet Broken Things, Book review - Tehanu",
+   "url": "https://wetbrokenthings.wordpress.com/2025/05/25/book-review-tehanu/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2025-05-25",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "Moda od Radosti, Tehanu, a novel by Ursula K. Le Guin (book review)",
+   "url": "https://modaodaradosti.blogspot.com/2024/08/tehanu-novel-by-ursula-k-le-guin-book.html",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2024-08",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "YouTube video essay 'What is good fantasy prose?' (5lDA8VyeLx0) — BLOCKED, transcript unreachable by four routes",
+   "url": "https://www.youtube.com/watch?v=5lDA8VyeLx0",
+   "kind": "analysis",
+   "substantive": false,
+   "route": "blocked"
+  },
+  {
+   "title": "YouTube video essay 'From Elfland to Poughkeepsie ... Fantasy Essays' (bt5ypCZvivg) — BLOCKED, transcript unreachable",
+   "url": "https://www.youtube.com/watch?v=bt5ypCZvivg",
+   "kind": "analysis",
+   "substantive": false,
+   "route": "blocked"
+  },
+  {
+   "title": "Michael Chabon, Le Guin's Subversive Imagination (The Paris Review Daily)",
+   "url": "https://www.theparisreview.org/blog/2019/11/20/leguins-subversive-imagination/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2019-11-20",
+   "route": "live URL 403; Wayback raw capture (20260620070427id_)"
+  },
+  {
+   "title": "Jason P. Vest, The Re-Possessed: Ursula K. Le Guin storms the Library of America (The Common Reader)",
+   "url": "https://commonreader.wustl.edu/c/the-re-possessed/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2021-05-30",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "Alison Smith, Her Left Hand, The Darkness (Granta)",
+   "url": "https://granta.com/her-left-hand-the-darkness/",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2019-01-03",
+   "route": "live URL 403; Wayback raw capture (20250903091534id_)"
+  },
+  {
+   "title": "Sherryl Vint interviewed by Cal Flyn, The Best Ursula Le Guin Books (Five Books)",
+   "url": "https://fivebooks.com/best-books/best-ursula-le-guin-books-sherryl-vint/",
+   "kind": "analysis",
+   "substantive": true,
+   "date": "2021-05-07",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "Sean Guynes, Introducing the Ursula K. Le Guin Reread (Reactor) + comment thread",
+   "url": "https://reactormag.com/introducing-the-ursula-k-le-guin-reread/",
+   "kind": "reader",
+   "substantive": true,
+   "date": "2020-06-22",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "Terry Morris, Earthsea and Tales from Earthsea, Steam Engine Time No. 11 (fanzine PDF)",
+   "url": "https://efanzines.com/SFC/SteamEngineTime/SET11.pdf",
+   "kind": "reception",
+   "substantive": true,
+   "date": "2009-02",
+   "route": "PDF binary fetched, streams decompressed, text operators extracted"
+  },
+  {
+   "title": "Writing About Ursula and Her Work — the estate's index of critical writing (used for bibliography chasing)",
+   "url": "https://www.ursulakleguin.com/reviews",
+   "kind": "relay",
+   "substantive": false,
+   "date": "2026",
+   "route": "curl browser UA"
+  },
+  {
+   "title": "New Criticism chapter on Omelas, Beginnings and Endings: A Critical Edition (thematic, not prose-level)",
+   "url": "https://idaho.pressbooks.pub/beginnings-and-endings-a-critical-edition/chapter/new-criticism-10/",
+   "kind": "reader",
+   "substantive": false,
+   "date": "2022-12",
+   "route": "curl browser UA"
   }
  ]
 }

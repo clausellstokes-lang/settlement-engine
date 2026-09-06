@@ -1,0 +1,158 @@
+{
+ "name": "wolfe",
+ "chunk": 23,
+ "indices": [
+  345,
+  346,
+  347,
+  348,
+  349,
+  350,
+  351,
+  352,
+  353,
+  354,
+  355,
+  356,
+  357,
+  358,
+  359
+ ],
+ "claims": [
+  {
+   "index": 345,
+   "feature": "other: characterisation method",
+   "claim": "Guy Stewart reports Wolfe's rule that a character is characterised by being shown thinking, speaking and acting in a characteristic way rather than described.",
+   "source": "Gene Wolfe's writing advice, relayed by Guy Stewart, 2022",
+   "url": "https://faithandsciencefiction.blogspot.com/2022/02/writing-advice-short-stories-advice-and.html",
+   "quote": "showing the character thinking, speaking and acting in a characteristic way",
+   "page": "post, the five rules"
+  },
+  {
+   "index": 346,
+   "feature": "withheld information and inference",
+   "claim": "Critic Peter Wright says ambiguity in The Fifth Head of Cerberus is an organising principle of the book's form, not only a theme.",
+   "source": "Peter Wright, 'Confounding the Skin and the Mask', Ultan's Library, 2002",
+   "url": "https://ultan.org.uk/confounding-the-skin-and-the-mask/",
+   "quote": "it is also an organising principle of form",
+   "page": "article, opening paragraph"
+  },
+  {
+   "index": 347,
+   "feature": "withheld information and inference",
+   "claim": "Wright says the existence of the puzzle in The Fifth Head of Cerberus matters more than its solution.",
+   "source": "Peter Wright, 'Confounding the Skin and the Mask', Ultan's Library, 2002",
+   "url": "https://ultan.org.uk/confounding-the-skin-and-the-mask/",
+   "quote": "the existence of the puzzle is more significant that its solution",
+   "page": "article, after the Wendland discussion"
+  },
+  {
+   "index": 348,
+   "feature": "archaism",
+   "claim": "Scott Wowra reports that readers in the early 1980s accused Wolfe of fabricating unusual words, and says this is untrue.",
+   "source": "Scott Wowra, 'The Lupine Scholar', Ultan's Library, 2009",
+   "url": "https://ultan.org.uk/the-lupine-scholar-by-scott-wowra/",
+   "quote": "readers accused Mr. Wolfe of deliberately fabricating unusual words",
+   "page": "introduction"
+  },
+  {
+   "index": 349,
+   "feature": "archaism",
+   "claim": "Wowra says Wolfe's real rare words show how odd genuine language can sound without any invented vocabulary.",
+   "source": "Scott Wowra, 'The Lupine Scholar', Ultan's Library, 2009",
+   "url": "https://ultan.org.uk/the-lupine-scholar-by-scott-wowra/",
+   "quote": "they remind us just how odd language can sound",
+   "page": "introduction"
+  },
+  {
+   "index": 350,
+   "feature": "diction (native vs latinate)",
+   "claim": "Wowra gives omophagist and cherkaji as examples of the seemingly counterfeit but real words in The Book of the New Sun.",
+   "source": "Scott Wowra, 'The Lupine Scholar', Ultan's Library, 2009",
+   "url": "https://ultan.org.uk/the-lupine-scholar-by-scott-wowra/",
+   "quote": "omophagist (an eater of raw flesh) and cherkaji",
+   "page": "introduction"
+  },
+  {
+   "index": 351,
+   "feature": "annalist voice and deep time",
+   "claim": "Michael Andre-Driussi revises his estimate of the span from Ymar to Severian, giving a range between one thousand and thirty-thousand years.",
+   "source": "Michael Andre-Driussi, 'Posthistory 201', Ultan's Library, 2020",
+   "url": "https://ultan.org.uk/posthistory-201/",
+   "quote": "the range is actually between one thousand and thirty-thousand years",
+   "page": "section 2.1 Overview"
+  },
+  {
+   "index": 352,
+   "feature": "annalist voice and deep time",
+   "claim": "Andre-Driussi derived his earlier thousand-year figure for the Autarchy from a single character's offhand remark rather than any stated chronology.",
+   "source": "Michael Andre-Driussi, 'Posthistory 201', Ultan's Library, 2020",
+   "url": "https://ultan.org.uk/posthistory-201/",
+   "quote": "This statement strongly implied to me that the autarchs had reigned",
+   "page": "section 2.2 Revising my estimate"
+  },
+  {
+   "index": 353,
+   "feature": "annalist voice and deep time",
+   "claim": "To narrow the chronology Andre-Driussi searched the text for the time words chiliads, thousand years, ages, aeons and eons.",
+   "source": "Michael Andre-Driussi, 'Posthistory 201', Ultan's Library, 2020",
+   "url": "https://ultan.org.uk/posthistory-201/",
+   "quote": "a brute force method of searching for the terms",
+   "page": "section 2.3 Narrowing the range"
+  },
+  {
+   "index": 354,
+   "feature": "plainness and economy",
+   "claim": "Wolfe, quoted from a letter by novelist C. S. E. Cooney, advised always telling a story as cleanly and as clearly as possible.",
+   "source": "Gene Wolfe, in letters and conversation, quoted by C. S. E. Cooney, Ultan's Library, 2016",
+   "url": "https://ultan.org.uk/an-homage-to-my-honorary-grandfather/",
+   "quote": "Always tell a story as cleanly and as clearly as possible.",
+   "page": "memoir, later section"
+  },
+  {
+   "index": 355,
+   "feature": "other: exposition and infodump",
+   "claim": "Wolfe's critique of Cooney's draft named her habit of interrupting dialogue with long infodumps, which he called lumps of prose like uncooked dumplings.",
+   "source": "Gene Wolfe, letter to C. S. E. Cooney, quoted in Ultan's Library, 2016",
+   "url": "https://ultan.org.uk/an-homage-to-my-honorary-grandfather/",
+   "quote": "lumps of prose like uncooked dumplings",
+   "page": "memoir, on the first letter"
+  },
+  {
+   "index": 356,
+   "feature": "cadence and rhythm",
+   "claim": "Cooney reports that when she proposed cutting the sing-song rhythm and internal rhyme from one story, Wolfe urged her not to.",
+   "source": "C. S. E. Cooney, 'An Homage to my Honorary Grandfather', Ultan's Library, 2016",
+   "url": "https://ultan.org.uk/an-homage-to-my-honorary-grandfather/",
+   "quote": "he urged me not to take my knife to it",
+   "page": "memoir, after the clean-and-clear advice"
+  },
+  {
+   "index": 357,
+   "feature": "opening sentence",
+   "claim": "Keeley reads the opening line of The Fifth Head of Cerberus as a riff on the opening of Proust's Swann's Way.",
+   "source": "Matthew Keeley, Reactor (Tor.com), 9 November 2017",
+   "url": "https://reactormag.com/how-gene-wolfe-starts-a-story-and-where-to-start-reading-his-work/",
+   "quote": "is a riff on Proust’s",
+   "page": "body, paragraph on Wolfe's reading"
+  },
+  {
+   "index": 358,
+   "feature": "withheld information and inference",
+   "claim": "Keeley says the grammar of that opening sentence carries a slight clue to the story.",
+   "source": "Matthew Keeley, Reactor (Tor.com), 9 November 2017",
+   "url": "https://reactormag.com/how-gene-wolfe-starts-a-story-and-where-to-start-reading-his-work/",
+   "quote": "a slight clue to the story in the sentence’s grammar",
+   "page": "body, paragraph on Wolfe's reading"
+  },
+  {
+   "index": 359,
+   "feature": "omission as information",
+   "claim": "Keeley says the reader eventually learns why the comma is missing from the phrase “my brother David”.",
+   "source": "Matthew Keeley, Reactor (Tor.com), 9 November 2017",
+   "url": "https://reactormag.com/how-gene-wolfe-starts-a-story-and-where-to-start-reading-his-work/",
+   "quote": "We eventually do learn why that comma is missing.",
+   "page": "body, paragraph on Wolfe's reading"
+  }
+ ]
+}
