@@ -1,0 +1,749 @@
+139
+International Journal of Role-Playing - Issue 17
+Concealed Conscientization: 
+A Case Study of a Commercial Dungeons & Dragons Adventure
+Abstract: This study presents a case study of a Dungeons & Dragons (D&D) adventure that embeds 
+key concepts from Karl Marx and Franz Fanon with the goal of provoking conscientization, the critical 
+awakening advocated by Paolo Freire, for those who play it. The adventure was written under a pseud-
+onym and has been accepted and published by a commercial publisher. Results from a playtest group 
+provide empirical evidence that players received and made sense of the adventure in line with the intent 
+of the author to critique contemporary religious fundamentalism and prompt reflection on colonial-
+ism. This research indicates that commercial publication of critical game design specifically within the 
+context of the hegemonic D&D rules system has the potential to reach a significant audience. 
+Keywords: Dungeons & Dragons, reception theory, Franz Fanon, Paolo Freire, conscientization, game 
+design
+Brian McKenzie
+Maynooth University, Ireland
+Brian.McKenzie@mu.ie
+Bret Zawilski
+Maynooth University, Ireland
+Bret.Zawilski@mu.ie
+James Beirne
+Maynooth University, Ireland
+James.Beirne@mu.ie
+1. INTRODUCTION
+Role-playing games (RPGs), and D&D specifically, are potentially transformative, pivotal experiences for 
+their players (Sidhu and Carter 2021). Content, design, and experience are at the heart of transformative play. 
+Y et despite decades of research and gaming, the path from game design to impact, from theory to practice, 
+remains difficult both to map and travel. How can we design game content that is impactful and transfor-
+mative? How do we know if we are successful? Most importantly, if we achieve transformative game design, 
+how can we make it broadly relevant? This article presents a case study of game design research through game 
+design practice (A. Hook and Coulton 2017) using a D&D adventure written under a pseudonym by one 
+of the authors and accepted for commercial publication. The adventure is inspired by and embeds Fanonian 
+and Marxist critiques of colonialism and religion with the aim of achieving Paulo Freire’s goal of “conscien -
+tization” of players. Our empirical research based on a playtest group for the adventure confirms that D&D 
+is a potentially transformative game, and we show that a commercial D&D publication can prompt players 
+to critically reflect on important social issues; yet our research also shows that D&D’s core feature of a small 
+group of violent adventurers may teach lessons that are incompatible with Freire’s ultimate goals for consci-
+entization.
+2. LITERATURE REVIEW
+The research on the potential of RPGs as persuasive and transformative is rich and varied across disciplines 
+and methodologies. However, two axes of research dominate. One is the psychological, personal, and in-
+ter-personal benefits of playing RPGs; the other is the ability of RPGs to influence players, and similarly, how 
+players use and make sense of RPGs in the context of their own beliefs and values. A large and growing body 
+of research attests to the social-psychological benefits of playing RPGs. A scoping review in the field of psy-
+140
+International Journal of Role-Playing - Issue 17
+chology concluded that RPGs were a “complementary tool” for psychotherapy (Arenas, Viduani, and Araujo 
+2022, 304). Another recent study showed that playing D&D for one hour per week over eight weeks had sig-
+nificant benefits to players’ wellbeing by reducing depression, stress, and anxiety while increasing self-esteem 
+and self-efficacy (Merrick, Li, and Miller 2024). The authors of another study summarize expansive benefits 
+associated with playing D&D: “[it] can aid in friendship and relationship maintenance, mitigation of social 
+anxiety, improved social skills, reducing stress, alleviation from mental health challenges, and providing a 
+connection with others” (Baker, Turner, and Kotera 2022, 3906). The benefits from playing RPGs are thus 
+empirically established, and significant (Sidhu 2024; W alsh and Linehan 2024). 
+The other axis of research is related but distinct. Researchers here are less interested in the social-psy-
+chological benefits of RPGs (or games in general) to the individual, and more interested in the ability of games 
+to influence players’ beliefs and values. Ian Bogost’s Persuasive Games (Bogost 2010) is arguably the most 
+impactful work in this area in the last two decades, but his focus is video games. Numerous publications in 
+this area focus on tabletop, card, and board games while offering insight into game design generally (Flanagan 
+2009; Kaufman and Flanagan 2015; Flanagan 2021; Kaufman, Flanagan, and Seidman 2016; Freedman et al. 
+2018; Flanagan and Jakobsson 2023). Researchers also consider how players make use of games. Rather than 
+a game’s influence on players, Mark Hines’s research examines how players use a D&D adventure, The Tomb 
+of Annihilation, to “co-construct” orientalist beliefs (Hines 2023). 
+An interesting aspect of this avenue of research is the variety of disciplinary and methodological ap -
+proaches. Some research that critiques D&D for racist, colonial, and misogynistic tropes (Stang and T ram-
+mell 2020; Garcia 2017) or an emphasis on violence (Albom 2021) is based on textual analysis of rules and 
+game mechanics. In contrast, research that seeks to show the utility of games to shape values positively or as 
+a pivotal experience is often empirical (Wright, W eissglass, and Casey 2020; Sidhu and Carter 2021). This 
+variety in approach speaks to the richness of the game studies field, but also the difficulty of assessing impact, 
+positive or negative, and designing impactful games—a challenge made clear in Bogost’s self-critique of Per-
+suasive Games (Bogost 2021).  
+The research on games’ ability to influence, as distinct from their benefits, is equally concerned with 
+conscientization broadly construed and game design. The utility of games to promote conscientization was 
+apparent almost immediately after the original publication of Freire’s Pedagogy of the Oppressed . In 1972, 
+William A. Smith advocated using simulation games for conscientization (Smith 1972). Freire advocated an 
+approach to education that would empower learners. “In problem-posing education,” he explains, “people 
+develop their power to perceive critically the way they exist in the world with which and in which they find 
+themselves; they come to see the world not as a static reality, but as a reality in process, in transformation” 
+(Freire 1993, 56). Conscientization, according to Freire, empowers people to view their circumstances “as 
+an historical reality susceptible of transformation” (Freire 1993, 58). The ability of games to model social 
+structures combined with the power of the experience of play make them a natural, compelling site for con -
+scientization. Smith’s emphasis on mechanics to achieve conscientization foreshadows Bogost’s “procedural 
+rhetoric.”
+The research group Homo Ludens at the Université du Québec à Montréal recently published a list 
+of criteria to assess a game’s ability, not limited to RPGs, to contribute to Freireian conscientization or con -
+sciousness raising (Homo Ludens 2023). “ A conscientization game,” they explain, “Is a game that through its 
+ludic, narrative, and aesthetic elements explicitly aims to stimulate a critical consciousness in individuals in 
+situations of oppression and to equip them with tools to facilitate the implementation of communal processes 
+aimed at systemic social change” (Homo Ludens 2023, 6). In addition to offering examples of game design 
+that meet their criteria, Homo Ludens advocates game jams as a form of consciousness-raising activity where 
+individuals can create games, explore solutions, and share experiences. Other researchers also recommend 
+141
+International Journal of Role-Playing - Issue 17
+game jams as a Freireian activity (Myers, Piccolo, and Collins 2019). The application of Freire to game design, 
+particularly as articulated by Homo Ludens, is ambitious and political. 
+Nevertheless, the reach of games designed for either avenue of research, benefits or influence, tends to 
+be limited. Such games are usually niche and bespoke, designed for a specific audience, indeed sometimes lim-
+ited to the test subject group itself. For example, two important studies that demonstrate the utility of D&D 
+to teach moral reasoning (Wright, W eissglass, and Casey 2020) and as an efficacious activity for improving 
+mental health (Merrick, Li, and Miller 2024) both make use of homebrew adventures. W e argue for a different 
+approach, one that embraces commercial publication to reach, and hopefully impact, a large audience.
+There is clear empirical evidence for the efficacy of RPGs in general and D&D specifically as a site 
+of transformative play. W e agree with Dimitra Nikolaidou that the unique, immersive experience of D&D 
+game sessions, of co-creating narratives, “influence participants at an even more fundamental level than other 
+storytelling media” (Nikolaidou 2024, 163). In addition, D&D holds a hegemonic position in the industry 
+and in its raw number of players (Griepp 2024; Given and Polkinghorne 2024). Y et the game and its players 
+are surprisingly accessible to independent designers. In January 2023, Wizards of the Coast (W otC) released 
+its System Reference Document (SRD 5.1), a collection of rules for D&D, under a CC-BY 4.0 license. In 
+April 2025, W otC released an updated SRD 5.2, also under CC-BY 4.0, that includes material from the new 
+Player’s Handbook. The SRD serves as the basis for many commercial so-called third-party publishers to pro-
+duce RPG content for D&D. The SRD, combined with two self-publishing platforms, DriveThruRPG and 
+DM’s Guild, offers opportunities for independent designers to reach a vast audience of gamers. Success on 
+these platforms can serve as an entrée to the realm of commercial publishers, as was the case with the author, 
+under a pseudonym, of the adventure for this research. In addition, several independent systems use the D&D 
+rules system in a different setting or game because of the ubiquity of players familiar with its rules. This article 
+takes a “research through design” approach to argue that commercial D&D publications afford critical game 
+designers the opportunity to maximize their potential audience and thus the impact of their games. 
+3. STEALTH DESIGN
+Our work is informed by the “stealth interventions” and “embedded design” approach articulated by Geoff  
+Kaufman, Mary Flanagan, and Max Seidman (Kaufman, Flanagan, and Seidman 2021; Flanagan 2021). Their 
+approach makes use of three strategies: intermixing, obfuscating, and distancing. For the purposes of writing 
+a D&D adventure, the latter two strategies are most applicable. Obfuscating hides the persuasive intent of the 
+game and its designers. A key strategy here is to use a genre, as they explain, “whose associated goals or expec-
+tations do not include the aim to change players’ attitudes, beliefs, or behaviors” (Kaufman, Flanagan, and 
+Seidman 2021, 79). D&D players have an expectation that their play experience will be inclusive and allow for 
+diversity. W otC’s “Commitment to Diversity” states, “One of the explicit design goals of 5th edition D&D is 
+to depict humanity in all its beautiful diversity by depicting characters who represent an array of ethnicities, 
+gender identities, sexual orientations, and beliefs” (D&D Official 2020). However, it is unlikely that play-
+ers would expect a D&D adventure to introduce concepts such as false consciousness, organic intellectuals, 
+structural inequality, or other socio-political ideas. That is, W otC supports inclusivity but that does not mean 
+D&D adventures encourage players to explore the causes or consequences of intolerance. More research is 
+needed on player expectations about fantasy worlds. Recent W otC adventures consist of depoliticized fantasy 
+realism—dragons but not slaves, despots but not fascists. As Mason argues, W otC articulates “a conservative 
+status quo, with a thin veneer of diversity, equity, and inclusion” (Mason 2024, 174). The D&D adventure is 
+thus a suitable genre for obfuscation. 
+Distancing is the other embedded design strategy that is felicitous for writing critical D&D adven-
+tures. This refers to the psychological distance, a “safe space,” between players and any sensitive topics. “By sep-
+142
+International Journal of Role-Playing - Issue 17
+arating players from their real-life identities and prior knowledge, beliefs, and experiences,” explain Kaufman, 
+Flanagan, and Seidman, “Persuasive games can effectively circumvent players’ reticence or reluctance and en-
+hance the game’s transformative potential” (Kaufman, Flanagan, and Seidman 2021, 83). Indeed, distancing 
+is at the heart of RPGs though the “player-character” (PC), the fictional character the players roleplay. PCs 
+are an opportunity for players to explore identities; PCs allow both distancing from and experimentation 
+with a player’s own conception of self, values, and orientation (Bowman and Schrier 2018). They further 
+recommend two mechanisms to achieve distancing: hypotheticality and fictionalizing. Both clearly are ideal 
+for RPGs. RPG settings and adventures are a form of speculative fiction that can be used to test hypotheticals, 
+e.g., what are the consequences for a society if magic is common? RPG settings and adventures also fictional-
+ize—depict metaphorically or fantastically—real issues and events. For example, the Chernobyl disaster could 
+be modelled as a magical vortex collapse or interplanar energy leak in a fantasy realm. 
+Related to the idea of embedded design is the concept of “reskinning” or remixing. This refers to the 
+process whereby a designer or Game Master (GM) translates or imports a compelling character or situation 
+from another setting into a game (Shea 2018). In homebrew games a character might be taken into a game 
+whole cloth. As a game master, one author has, on more than one occasion, reskinned Colonel W alter Kurtz 
+from Apocalypse Now and used some quotes verbatim. For example, when in a recent game the final boss told 
+the PCs, “Y ou have a right to kill me. Y ou have a right to do that. But you have no right to judge me” (Coppola 
+1979). Crucially, reskinning can extend, and commonly does, to narrative and plot structure. For example, a 
+GM for a science fiction RPG could reskin the classic movie The Blues Brothers as an adventure that finds the 
+PCs in a desperate race to save a foundling hospital for exoplanet orphans from foreclosure. Reskinning allows 
+the importation of famous works of fiction, historical events, moral parables, and much more, in a disguised, 
+“fantasized,” way. The official D&D adventure Storm King’s Thunder is a remix of King Lear. 
+An example that illustrates a missed opportunity for reskinning is Premeet Sidhu’s use of George 
+Orwell’s Animal Farm (Sidhu 2023). Rather than reskinning the book, Sidhu gamified it. She re-created the 
+book with close fidelity to its original content as a RPG adventure using the D&D rules system. The charac-
+ters, setting, and the plot approximates the book. In other words, the players know they are playing the book. 
+Sidhu was interested in using a game to investigate player agency, transgression, and death, and her playtest re-
+sults indicate the game was successful in this respect (Sidhu 2023). Of course, Animal Farm itself is an exercise 
+in fantasizing and reskinning. Y et, imagine Animal Farm reskinned with embedded design as a fantasy D&D 
+adventure with the same themes but also with the intent of engaging PCs with the broader critical ideas raised 
+by the book: W eberian institutionalized charismatic authority and T ocquevillian continuity. W e can reimag-
+ine the character Napoleon reskinned as a Lawful Evil paladin non-player-character (NPC) while Snowball 
+is a Neutral Good NPC. The farm can be reskinned as a remote underground city and we could change the 
+Windmill to a lift apparatus to the surface. The designer who reskins Animal Farm in this way would follow 
+plots and events, and write the same NPCs, but they would be distanced and fictionalized. 
+Flanagan’s empirical research provides evidence of the effectiveness of these strategies. For example, 
+she shows that fictionalizing or “activating fantasy’ creates psychological distance for players. This distance 
+leads to abstraction and helps players “see the big picture” rather than make a judgement in response to ob-
+jects and ideas recognized from their everyday experience (Flanagan 2021, 286). A fantasy game developed by 
+Flanagan, The Enchanter, successfully increased self-confidence in women scientists (Flanagan 2021). 
+4. RECEPTION THEORY
+Central to our research is the question of how adventure writing converts to play, to player experience, and 
+to player meaning-making. W e are interested in the nature of transmission, the conversion of author intent 
+to a D&D adventure to player understanding. This is, of course, the crux of persuasive gaming and critical 
+143
+International Journal of Role-Playing - Issue 17
+game design. As Flanagan explains, “While it is true that messages are a part of a game’s story, messages that a 
+designer thinks are in the game may not actually be there, or may not be read/experienced as intended” (Fla -
+nagan 2021, 284). There is a strong structuralist component in the field of persuasive gaming influenced by 
+classic theories of communication such as Jakobson’s model of linguistic functions (Jakobson 1960). The Big 
+Model developed by Ron Edwards at The Forge sought to organize and understand the experience and nature 
+of tabletop role-playing games using a variation of frame theory as a means of designing better games (White 
+2020). Bogost’s influential concept of “procedural rhetoric” was an attempt to convert game mechanics into 
+persuasive outcomes, although he subsequently acknowledged its limitations (Bogost 2010; 2021). Structural 
+theories are important, particularly for highlighting material conditions of play, but more recent research has 
+focused more closely on player subjectivity and experience. 
+W e are interested in using embedded design to shift the attitudes of players, but we are also interested 
+in recognition. Do the players recognize the intended meanings, “the moral of the story”, and tropes em -
+bedded in a D&D adventure? Recognition and identification of themes and tropes is a common strategy of 
+scholars who criticize racist, misogynistic, or colonial tropes and themes in games. Why not turn this on its 
+head? Why not use recognizable tropes as a component of critical design? W e can then better understand if 
+the players recognize the proxies and themes in the adventure and how the game play session itself affords an 
+opportunity for conscientization. Here we are following the work of Stuart Hall who argues that messages 
+coded in the “dominant cultural order” will likely be decoded as such (Hall 1973).
+The question of authorial intent, reader reception, and the nature of texts is central to literary theory. 
+The “postmodern turn” in the 1980s landed several “critical hits” on classical reception theory. Stanley Fish’s 
+1980 book Is There a Text in This Class?  argued against the existence of any determinate meaning for lan -
+guage (Fish 1980). Language, according to Claude Lévi-Strauss, consists of “floating signifiers”—words with 
+indeterminate meaning (Mehlman 1972). Readers are agentic and subjective, and words are indeterminate. 
+T o make matters worse, according to Barthes, the author is dead: their intentions are inscrutable and cannot 
+be inferred from context or biography (Barthes 1984). Postmodern theory elevated the ontological status of a 
+text. “The artwork,” explains the theorist Brenkman, “Exceeds its source as the expression of its creator and its 
+destination as an expression for its recipient” (Brenkman 2020, 111).
+The nature of a text is also central to scholars who study RPGs. The game studies scholar, like the 
+literary or art critic, confronts the complex relationship between author, audience, and text. One perspective 
+is to consider the game session itself as a text. This creates complex methodological and theoretical issues. 
+“The actual text of a [tabletop role-playing game] session is ephemeral,” explains Cover, “It exists in the moment 
+of face-to-face interaction and then vanishes” (Cover 2010, 175). If we treat a RPG session as a text then as 
+Harviainen explains, “The base text is not truly accessible and the interpretations will be subjective and in -
+complete if and when they are explicated to a researcher” (Harviainen 2008, 75). Solipsism, however, is a risk 
+here, and numerous critics highlight this tendency in postmodern thought (Kien 2021). Nevertheless, con -
+temporary literary theory—even the context of postmodern theory —offers rich analyses, tools, and theories 
+for game studies (Jara and T orner 2018). Close readings of adventures (Hines 2023), hermeneutical analysis of 
+game sessions (Harviainen 2008), and genre analysis (Cover 2010), are just a few examples of how researchers 
+have deployed the full range of literary theory to the study of RPGs.
+Symbolic interactionism offers an important theoretical perspective for the study of role-playing 
+games reception (Williams et al. 2018). This theory complements the move in media studies to thread a path 
+between semiotic relativism and reception determinism (Ang 2013). As Fine explains, “central to this ap -
+proach is the assertion that human beings reside in finite worlds of meaning, and that individuals are skilled 
+in juggling these worlds” (Fine 1983, 181). Interactionism holds that individuals make practical sense of the 
+media they use (Eichner 2020). Audiences recognize “action-guiding themes” in media that correspond to 
+their lifeworld, a concept from phenomenology that holds that common beliefs and meanings operate inter-
+144
+International Journal of Role-Playing - Issue 17
+subjectively, and also across and between societies (Beyer 2003; Eichner 2020). Recognizable, relatable themes 
+rather than similarities or proximity in culture allow for the use and consumption of media, and explain their 
+appeal, globally and locally. As Eichner explains, “When the topic depicted is not a central theme in the view-
+ers’ lifeworlds, it will be disregarded or rejected during the reception process” (Eichner 2020, 117). Different 
+audiences may focus on or be interested in different themes, but the themes themselves have cross-cultural 
+appeal (Eichner 2020). The benefit of this perspective is that it affords epistemological and empirical grounds 
+for researchers to speak to the fidelity of the intended meaning in an author’s work and its corresponding 
+reception by an audience (Bryman 1999). 
+The implications of symbolic interactionism for game design in the context of global late-stage capi-
+talism can be pessimistic. Baeza-González offers a bleak assessment of video game production in Chile. “Chil-
+ean games are not unique,” he concludes, “nor do they present authentic traits that characterize their games” 
+(Baeza-González 2021, 51). Rather, Chilean game designers make games based on global cultural tropes to 
+satisfy the core markets of the Global North. The strength of the Chilean video game design industry resides 
+in its ability to satisfy consumers’ love of dominant game franchises (Baeza-González 2021). D&D not only 
+represents the core market of the Global North, it is a hegemonic rules system, released under a CC-BY 4.0 
+license, for tabletop role-playing games. The challenge thus becomes whether game designers can work within 
+this dominant system subversively, capitalizing on global cultural tropes to embed critical ideas.
+5. ADVENTURE DESIGN
+The D&D adventure that is the subject of this study embeds key ideas from Franz Fanon’s The Wretched of 
+the Earth. The author is specifically interested in Fanon’s argument for the necessity of violence, the role of 
+religion in abetting colonial oppression, and the idea that colonial subjects must liberate themselves rather 
+than rely on typically white anti-colonial allies originating in the colonial powers. The adventure seeks to 
+subvert the D&D binary between heroic, “civilizing” PCs and savages, some in need of uplifting, others in 
+need of killing (Justice 2024). Roland Barthes’s explanation of the Exotic was key in how the author framed 
+the NPC factions. W estern culture, argues Barthes, creates “…an Orient which is exotic in form, while being 
+in reality profoundly similar to the Occident…” (Barthes 1972, 94). For Barthes, exoticism is a means of strip-
+ping colonial subjects of their histories and making them a “pure reflection of the W est” (Barthes 1972, 96). 
+In practical terms for game design, carefully crafted factions can serve as vectors to introduce critical concepts 
+and narratives into an adventure. An “exotic” faction possesses “authenticity” and is recognizable by players 
+while at the same time psychologically distanced in line with “stealth” strategies. 
+The main faction in this adventure is based on a well-known mythological European creature. They 
+are written as multi-layered signs: primitives, savages, and religious fundamentalist. Their religious fundamen-
+talism results in them being duped by imposters posing as prophets of their deity. This imposter faction is 
+inspired by rudos from the Luchaverse. In the good/evil dichotomy of the Luchaverse, rudos are the bad guys. 
+Although a rudo may be a complicated, transgressive figure, their morality is transparent. Rudos rely on decep-
+tion and brute force; from a performance perspective the rudo strives to make the audience angry and incite 
+their disapproval (Levi 2008). This faction marks the religious faction as victims—they have been deceived by 
+the rudos and are clearly victims. The presence of a faction in the role of rudos reinforces the PCs’ identities as 
+heroes (técnicos in the Luchaverse).
+Prompted by reports of raids on “civilized” lands by “savages,” the PCs travel to the location at the 
+behest of a powerful ruler. En route there is an encounter in a village designed to subvert the concept of “civi-
+lized” and instead depict the “advanced” society as one of servile dependence. The denizens of the “advanced” 
+society are more primitive in outlook than the factions encountered later. Upon arrival at the main location 
+of the adventure, a number of encounters introduce the factions. The interaction between the factions is key 
+145
+International Journal of Role-Playing - Issue 17
+to the adventure plot. It is clear to the PCs that the religious fundamentalism of the main faction allows them 
+to be taken advantage of by the imposters. A small group of the religious faction proclaims them as imposters 
+and breaks away to begin an asymmetrical campaign to eliminate the imposters and the members of the re -
+ligious faction who follow them. The PCs either ally with the separatists or work independently pursuing 
+the same goal, the elimination of the imposters. Ultimately the separatist faction will attempt to kill the PCs. 
+While the imposters and their followers are heretical, the PCs represent colonizers, an equal threat. The be-
+trayal, if allied, or attempted murder, if working independently, occurs after the defeat of the imposters and 
+concludes the adventure. 
+The design of the adventure relies on five elements to embed the critical ideas: plot (including encoun-
+ters), read-aloud text, player handouts, instructions to the Dungeon Master (DM), and NPC dialogue. The 
+adventure author used these elements conscious of the contested authority of adventure writers which falls 
+between the agency and autonomy of players and DMs and the canonical authority of the system (Hammer 
+2007). 
+The creation of the adventure for this study thus comprises three strands: reception theory, critical so-
+cial theory, and game design. The ultimate goal was to produce an adventure that would critique the influence 
+of religion and challenge player assumptions about the status of “heroic liberators.” Freireian consciousness 
+raising requires that individuals apprehend and understand the conditions of their own oppression.  In other 
+words, rather than seeing the impact of religion on an NPC faction, for consciousness raising to occur, the 
+adventure would need to prompt players to see the impact of religious fundamentalism in their own societies. 
+In addition, the subversion of the civilized/savage and liberator/victim dichotomies present in the adventure 
+would also prompt players to reflect on their own assumptions. 
+6. PLAY SESSIONS AND DATA COLLECTION
+In addition to the above elements of game design and theorization, our research builds upon a consideration 
+of tabletop role-playing games—and D&D in particular—as transformative experiences (Sidhu and Carter, 
+2021). In order to better understand the effects of a commercialized adventure focused around Fanonian and 
+Marxist themes, we facilitated and observed players as they interacted with this material in D&D play sessions. 
+W e employed a constructivist grounded theory approach (Charmaz 2017) in the development of our research, 
+understanding the primary body of inquiry would be co-created through the participant observation of game-
+play, and this stage of the project was guided by three questions:
+• How do players recognize or fail to recognize critiques of colonialism and religion when exposed 
+to embedded Fanonian and Marxist ideologies?
+• T o what extent would this recognition or lack of recognition influence the choices made by play-
+ers within the space of the game?
+• Does ideological game content convert to meaning-making beyond the gaming table (Sidhu and 
+Carter, 2021)?
+Since we were interested in the effects of ideological content on players engaging with commercialized D&D 
+adventures, it was important to locate individuals with prior experience playing D&D. The Games Society at 
+Maynooth University is one of the largest student-operated organizations on campus and regularly facilitates 
+D&D campaigns. Upon receiving ethical approval, we sent invitations to the members of the Games Society, 
+and over the next two months, we interviewed and observed five participants. These individuals took part in 
+a pre-game interview, game sessions that were observed by the researchers, and a post-adventure focus group.
+146
+International Journal of Role-Playing - Issue 17
+The adventure itself was divided into three play sessions that took place over a month. Players had 
+all previously had experience playing in fifth edition campaign settings, though their individual levels of ex-
+perience differed. During the game sessions, one author DMed the adventure while another took notes and 
+monitored audio recording equipment. 
+Observations from throughout the three game sessions were used to inform a focus group interview 
+with the players after the conclusion of the adventure. In this focus group, we asked participants to reflect 
+upon their experiences over the course of the three play sessions and later used this session to identify places 
+in the adventure that seemed particularly impactful for the participants. Once the data collection process was 
+complete, transcriptions of interviews and play sessions were read alongside recorded notes and observations. 
+Of particular interest were player reflections on in-game moments where they encountered Fanonian and 
+Marxist themed content, the results of which are shared in the following sections.
+7. RESULTS AND LIMITATIONS
+As D&D is mediated entirely through language, both written and spoken, it becomes imperative to approach 
+the study of the game through the lens of language. At the same time, materialist considerations must be taken 
+into account, recognizing the situated space within which the game is taking place. And it is true that “quali-
+tative research is heavily invested in language practices: interviews, fieldnotes, focus groups...But conventional 
+forms of analysis frequently find the bodily entanglements of language troublesome or trivial” (MacLure 
+2013, 664). Future research might pay more attention to the physical, bodily interactions of participants in 
+this style of game, and a future project may benefit from video recording to better capture participant reac-
+tions that otherwise might go unnoticed. After all, “transcripts seldom record what eyebrows, hands, shoul-
+ders or crossed legs are doing” (MacLure 2013, 664).
+Additionally, careful attention was given in the game to avoid overt prompting on the part of the DM. 
+Analysis of the transcripts of play sessions confirmed that the DM offered no cues or prompts to promote 
+recognition of the tropes and factions. Our intentions were to give students a chance to naturally react to the 
+content of the campaign without overtly signaling any specific political or ideological undertones within the 
+campaign itself. However, a future study may benefit from having an outside DM run the material to further 
+ensure that participants are responding as naturally as possible. Building on Hammer’s research, it is also 
+worth considering the role that the DM plays in rearticulating adventure content since D&D is ultimately a 
+participatory activity (Hammer 2007). In some ways, the DM of a commercial adventure functions much as a 
+technical communicator, taking material presented through game books and rearticulating it for a new audi-
+ence. As Shanmugaraj et al. note (Shanmugaraj, W olfe, and W odzak 2020), any time an individual paraphrases 
+or interprets texts, they are engaging in a knowledge transforming act. As such, the interaction of the DM 
+with the game material is another promising site of future inquiry when considering games as transformative 
+experiences.
+The research of Guttorm et al. on the participatory nature of dance also applied to D&D, in which 
+“encounters...consist of movement, talking, and writing in various combinations and ways emerging/(im)
+materializing/(resulting) in scattered words, scattered papers, scattered thoughts...and lots of uninhibited ut-
+terances, laughter, fooling around, and jokes” (Guttorm et al. 2016, 417). The players knew each other from 
+the Games Society but had not played together previously. One difficulty this presented was that play style 
+and expectations, the creative agenda of the players, differed. One player was often adversarial to other players 
+and the DM. Only experienced DMing prevented player-vs-player (PVP) combat during some play sessions.
+In using D&D as a site for critical design, an author faces two key constraints. The first is that combat 
+is a key expectation for players of this game. An adventure that downplays this pillar of the game would likely 
+fail to meet player expectations. Another constraint is the importance of the PCs as heroes. Adventures give 
+147
+International Journal of Role-Playing - Issue 17
+the PCs the opportunity to be heroes and do heroic things. The adventure for this game subverted this role 
+when the NPC faction refused to view the PCs as liberating heroes, viewing them as dangerous colonizers to 
+be killed instead. Subverting this expectation without creating an unsatisfactory adventure was difficult. In 
+the case of the playtest group, the players accepted the betrayal as an element of this faction’s religious funda-
+mentalism. In addition, the PCs defeat the imposter faction, and this provides the heroic achievement in clear 
+terms, as when the técnicos defeat the rudos.
+The empirical results are encouraging. In particular, they confirm the validity of the interactions 
+framework of reception. The results show that authorial intent can convert to player reception at the table. 
+Discussing the main factions, a player from Spain made this comparison: “The way the [imposter faction] 
+treated the [NPC faction] was kind of like, well, how the Spanish treated Latin America in colonization.” 
+When discussing the NPC faction’s views of the PCs, another player who is involved in student government 
+explained that the NPC faction was correct to be skeptical; the PCs were not, in fact, helping for selfless rea -
+sons. This player compared the role of the PCs to university administrators who act, in their view, for personal 
+gain and “to look less bad,” rather than from ethical principles or to serve the best interests of the students. 
+The adventure author’s intent with the village encounter was to present its inhabitants as poverty-stricken but 
+also wholly lacking in class consciousness. T wo players compared the village inhabitants to “nice Americans” 
+who were attached to an abstract concept of “freedom” while living in squalor and ignorance. 
+Regarding the specific targets for critical reflection, the adventure did prompt reflections on religion:
+Author 1: Did the [NPC faction] remind you of anyone?
+Sorcerer 2 PC: Republicans.
+Author 1: Republicans?
+Wizard PC: Y es.
+Sorcerer PC: They’re crutching on their religion as an excuse to cause harm to others. And if they 
+don’t like them, they just make up something like “God’s told me you suck therefore you must die.”
+Wizard PC: Y eah.
+Fighter PC: Using God as an excuse. 
+Fighter PC: V ery xenophobic and hyper religious. They use their religion as a crutch. 
+Before you were a fascist you were a bully and an arsehole. 
+Author 1: Did the religion of the [NPC faction] hurt them or help them in their struggle?
+Sorcerer 1 PC: So yeah, for the [NPC faction] it’s good to have something to cling to when they’re in 
+the prison—their Christ or something that makes them stick together. But once we get past that step, 
+taking actions for the good-being of a religion instead of people, it’s plain stupid.
+Wizard PC: It hurt them. They believed [the Imposters] solely because they said they were from 
+their gods. It’s like if they weren’t that strong into religion, 90% of them would have been rebels.
+148
+International Journal of Role-Playing - Issue 17
+For conscientization to occur, an individual must come to grips and be aware of the source or cause of their 
+oppression. In Ireland, 94.6% of public primary schools are governed by a religious ethos (88.4% Catholic, 
+6.2% Protestant and other religious ethos) (Department of Education 2024). In the United States, the Su-
+preme Court under Roberts has found in favor of religious organizations 83% of the time, compared to 50% 
+since 1953 (Epstein and Posner 2022). As religiosity declines in many European countries (Nadeem 2022), the 
+religious elite nevertheless remain a powerful oppressive force in the lives of billions. Our playtest showed that 
+the religious fundamentalism of the NPC faction was read as intended, as analogues to contemporary funda-
+mentalists. 
+8. COMMERCIAL CONSCIENTIZATION?
+Commercially published games are an underappreciated medium for this type of research. It might be thought 
+that the dictates of commercial publishing, in which creations are created or subsumed within relations of 
+global capital accumulation, could preclude them from offering moments of genuine critical experience. Also, 
+given the constraints inherent to the use of a popular commercial game system or adventure, which comes with 
+its own discourses, lore, mechanics, and expectations of social behavior, it might be thought researchers should 
+use a bespoke game tailored to the audience, or at the least something underground. Y et across media, examples 
+of effective critique being offered by commercial publications abound. Moreover, Fanonian and Marxist cri-
+tique, whose transmission is under study, itself suggests that it is important to rely on the media terrain–both 
+technical and discursive–provided by the very structures they critique. Commercial games, therefore, both can 
+and should be explored as a site of conscientization.
+The 2023 film Barbie offers a salient case study. The film has patriarchy as a central theme, but given 
+Barbie’s longstanding role as an archetype of capitalist patriarchy, its reception was predictably contested both 
+popularly and academically. One student journalist aptly summed up the debate: “Barbie: Feminist Master-
+piece or Capitalistic Greed?” (Boskovic 2023). Robert Luke Naylor lauded the film’s “verve” and “nuance”, 
+comparing it to the anarchist exploration of utopia in Ursula K. Le Guin’s The Dispossessed, and noting 
+one character describes, like Karl Marx, how Ken’s new exploitative society has ‘sown the seeds of its own 
+destruction’…. Of course, feminist critiques such as these exist in all sorts of different forms of big-screen 
+fiction, but Barbie shows a system of oppression being systematically dismantled. It is dynamic and full 
+of hope. (Naylor 2023, 1)
+Naylor suggests that the critical storytelling of this film gives it a realism (in spite of its fantastic premise) that 
+makes it a powerful tool for not only teaching and research, but also social change.
+Amy La Porte and Lena Cavusoglu, on the other hand, situate Barbie in light of Mattel’s other recent 
+attempts to rehabilitate Barbie by representing a greater degree of diversity in their toy lineup. While acknowl-
+edging the benefits of such representation, they note that it occurs within a framework of conventional beauty 
+standards, displaying “a clear preference for thinness” (La Porte and Cavusoglu 2023, 5). Similarly, they suggest 
+that despite Barbie’s feminist themes, it fails to fundamentally challenge patriarchy. The film’s conclusion, in 
+which Barbie visits a gynecologist, could be interpreted as “underscore[ing] the significance of reproductive 
+health and broach[ing] a typically taboo topic,” but they note the potential problems with reducing women’s 
+identity to genitalia (La Porte and Cavusoglu 2023, 7). “ At its core, Barbie is undisputedly an advertisement 
+for a socially problematic doll,” a cynical money-grab from an audience willing to pay for its themes (La Porte 
+and Cavusoglu 2023, 9).
+However, the question of whether conscientization occurs is a different one than whether its instigat-
+ing context–whether it be a film, game, or workshop–can be classified as radical or cynical. A context does not 
+149
+International Journal of Role-Playing - Issue 17
+need to be purified of all problematic elements to still have subversive potential. It might take a long time for 
+a critical consensus to form on Barbie, if indeed this ever occurs, but it is not necessary to wait until the ques-
+tion is settled to look for conscientization. Since conscientization involves a transformation of consciousness 
+that empowers people to understand how their reality can be transformed, it also leads to changes in behavior 
+and is therefore subject to empirical study. In the case of Barbie, Senechel et al. note the established relation-
+ship between health behaviors and popular media, finding that “In the week following Barbie’s release, there 
+were large increases in the national online search volume for terms referring to gynecologists (51.3%; 95% 
+CI, 31.8%-72.1%; P < .001) and gynecologist definition (154.1%; 95% CI, 68.2%-304.5%; adjusted P = .03)” 
+(Senechal et al. 2024, 2), while noting that there was no other apparent reason to explain such an increase. 
+This suggests that Barbie’s gynecology scene might have led to an increased interest in and awareness of gyne-
+cological care. While the authors caution that this evidence does not of itself demonstrate an improvement in 
+health access or outcomes, it is worth noting that the conscious act of seeking out further information is itself 
+a change in behavior. Regardless of the film’s commercial nature, or its potentially compromised narrative, it 
+therefore seems to have facilitated a notable moment of conscientization.
+If potentially compromised sites of mass culture can  lead to conscientization, there are also explicit 
+reasons why they ought to be exploited. In his 1959 study on the Algerian revolution, in which he was an 
+active participant, Fanon noted that “Radio-Alger, the French broadcasting station which has been estab -
+lished in Algeria for decades… is essentially the instrument of colonial society and values,” (Fanon 1965a, 69). 
+While the cost of radio sets meant that their ownership was heavily concentrated among European settlers, 
+he notes that out of a passive opposition to the proliferation of colonial cultural norms, even those Algerians 
+who could have afforded to acquire one often did not. Meanwhile, he argues, the French cultural content 
+discouraged settlers from “‘go[ing] native,’” (Fanon 1965a, 71). In sum, the radio in Algeria played an import-
+ant dichotomizing function in colonialism’s cultural structure, keeping the French French and (via their ab -
+stention) Algerians Algerian. In other words, it served as a bulwark against conscientization. It also played an 
+important role in the dissemination of information to Europeans about threats to their rule, thereby further 
+preventing social change (Fanon 1965a). 
+Revolutionary Algerians naturally developed their own information networks with older technolo -
+gies like word of mouth and newspapers, but these were subject to technical limitations such as censorship, 
+excessive localism, and surveillance. The revolutionaries created a counterpart to Radio-Algiers, The V oice 
+of Fighting Algeria (La voix de l’ Algérie combattante), and facilitated rapid and widespread dissemination of 
+radio sets among an increasingly interested populace (Fanon 1965a). This not only had the effect of trans -
+forming the radio into an instrument of liberation, but as Algerians began to broadcast not only in Arabic 
+but in French they “created confusion and disorder in [the occupier’s] defense system,” (Fanon 1965a, 91). 
+The revolutionaries authored the content of their messages, but their dissemination was dependent on the 
+technical and discursive medium of the colonists. For Fanon, The V oice of Fighting Algeria was therefore a 
+crucial step forward in the transformation of consciousness and society on a national and international scale. 
+The scale of our study of conscientization is clearly much smaller than the cases of either Barbie or 
+The V oice of Fighting Algeria, but the principles are the same. The fact that mass media can be subject to 
+political and commercial constraints does not preclude conscientization. Indeed, mass media provides a speed 
+and range of dissemination which cannot be paralleled by other media. Thus, it has a significance for con -
+scientization which other media do not. Authors and activists who wish to facilitate conscientization will 
+surely pursue commercial publication, even as they will also use other means. Furthermore, since audiences 
+inevitably bring their own meanings to texts, appropriating and making use of them in their own way, the 
+possibility for conscientization remains open even where it might not be intended by authors. In the realm 
+of game studies, the clear analogue to the juggernaut of Hollywood is indisputably D&D, which in addition 
+to official content, has a thriving and variegated market of third-party publishers who employ the discourses 
+150
+International Journal of Role-Playing - Issue 17
+of the game system for their own ends. Exclusive analysis of systems or texts that are independent, noncom-
+mercial, private, or homebrew—in other words, that have limited distribution—overlooks a crucial site of 
+conscientization.
+9. CONCLUSION
+This study offers prima facie evidence that critical game designers can successfully publish commercial, mass 
+distributed works that embed social theory and are impactful. The implications for this research suggest that 
+more attention be given to working within established game systems with broad player bases. There are other 
+lessons. Designing and writing a D&D adventure with critical intent and getting it accepted by a commercial 
+publisher is challenging. Specifically, the strategies outlined by Flanagan, Kaufman, and Seidman (Kaufman, 
+Flanagan, and Seidman 2021; Flanagan 2009; Kaufman and Flanagan 2015; Flanagan 2021) proved essential 
+not only for the adventure’s impact on players but also for acceptance by a commercial publisher. By deploy-
+ing these strategies we avoided the fate of Graeme Barber’s adventure in the official book Candlekeep Myster-
+ies where W otC removed and edited content that sought to subvert racial and colonial tropes (Carter 2021). 
+Our adventure was published as written. The designer must write a D&D adventure that meets the expecta-
+tions of commercial publishers and the player base itself. The adventure must be fun, novel, challenging, and 
+composed with absolute fluency in the rules system.
+In one key respect our research shows that D&D is incompatible with the Freireian approach to con-
+sciousness raising. The key goal of education and liberation for Freire is to transcend the dialectic so that the 
+oppressed does not become the new oppressor. Awareness of the systems that perpetuate oppression is the 
+key goal of conscientization, and how the dialectic can be broken (Homo Ludens 2023). Violence, for Freire, 
+is the primary tool of the oppressor, not the oppressed. The oppressed may respond violently, but the goal is 
+different: “Consciously or unconsciously, the act of rebellion (an act which is always, or nearly always, as vio-
+lent as the initial violence of the oppressors) can initiate love” (Freire 1993, 30). Community, solidarity, unity, 
+cooperation, and empathy underlie the actions of the oppressed. Without these animating the oppressed they 
+are “mere objects of the revolutionary activity…” (Freire 1993, 144). For Fanon too, violence is an essential 
+early feature of revolutionary praxis. The emphasis on violence in D&D generally and in this adventure spe -
+cifically which sees an NPC faction embrace Fanon’s observation that “For the native, this violence represents 
+the absolute line of action,” risks neglecting the longer-term  visions of revolutionary praxis he and Freire 
+articulated (Fanon 1965b, 85).
+Consider the typical D&D adventuring party. It consists of a small vanguard of outsiders who use 
+violence to overthrow a regime. This model of praxis is Blanquist rather than Freireian (Blanqui 2009). A 
+Gramscian organic intellectual is a rare background for a D&D PC. One avenue of further research would 
+be to design a low-level adventure with “session zero” guidance (an introductory meeting where the players 
+and DM make characters and agree on goals) to model the PCs as emergent organic intellectuals. This ad-
+venture showed evidence of achieving conscientization in the players, but there was an unresolved tension 
+between Fanon’s emphasis on the necessity of violence and Freire’s emphasis on community and solidarity. 
+This tension is possibly resolvable. Fanon, for example, tells us, “Violence alone, violence committed by the 
+people, violence organized and educated by its leaders, makes it possible for the masses to understand social 
+truths and gives the key to them” (Fanon 1965b, 147). However, in our case, the adventurers were, from the 
+outset, outsiders with no connection to “the people.” This was a conscious design decision to problematize 
+the white savior-as-adventurer trope. However, another adventure could be written that more closely invests 
+and relates the PCs to an oppressed group. This single D&D adventure does not align with all the criteria for 
+a Freireian game proposed by the Homo Ludens research group, in particular the importance of community 
+(Homo Ludens 2023). However, we are confident that another adventure or, more easily, a campaign (a series 
+of linked adventures), could achieve this goal.
+151
+International Journal of Role-Playing - Issue 17
+In addition, the question remains whether the players in the test group were oppressed in the classic 
+Freireian sense. “The oppressed,” he contends, “having internalized the image of the oppressor and adopted 
+his guidelines, are fearful of freedom” (Freire 1993, 21). Conscientization in this case means apprehending 
+not only the source of oppression but also one’s own agency and reflexivity. The author specifically wrote the 
+adventure in the hopes that it would be played by religious players. The strategy of using the exotic to embed 
+the critique of religion is central to its design. However, we were unable to control for religiosity in the test 
+group and there was very little. Thus, the players recognized the oppressive role of religion but the praxis 
+was Fanonian and Blanquist not Freireian. A playtest with a group of religious players would be required to 
+test for a more Freireian impact: bleed-out, rather than bleed-in (Bowman, Diakolambrianou, and Brind eds. 
+2024).
+A RPG adventure without critical theory and intent is a missed opportunity. T abletop role-playing 
+games are an amazing site for theoretical experimentation. Whether it is the nature of morality (Mussett 2014; 
+Hummel 2014) or, as in the case of this adventure, questions relating to colonialism, TTRPGs are a unique 
+site to explore, model, enact, and speculate about history, social theory, and philosophy. The Creative Com-
+mons SRD offers a powerful opportunity for critical designers to work within the hegemonic D&D land-
+scape. W e hope this study encourages more critical designers to embrace commercial publication.
+REFERENCES
+Albom, Sarah. 2021. “The Killing Roll: The Prevalence of Violence in Dungeons & Dragons.” International 
+Journal of Role-Playing 11: 6–24.
+Ang, Ien. 2013. W atching Dallas: Soap Opera and the Melodramatic Imagination. Routledge.
+Arenas, Daniel Luccas, Anna Viduani, and Renata Brasil Araujo. 2022. “Therapeutic Use of Role-Playing 
+Game (RPG) in Mental Health: A Scoping Review.” Simulation &0 Gaming 53 (3): 285–311. Link 
+here.
+Baeza-González, Sebastián. 2021. “Video Games Development in the Periphery: Cultural Dependency?” 
+Geografiska Annaler: Series B, Human Geography 103 (1): 39–54.
+Baker, Ian S., Ian J. Turner, and Y asuhiro Kotera. 2022. “Role-Play Games (RPGs) for Mental Health (Why 
+Not?): Roll for Initiative.” International Journal of Mental Health and Addiction (May). Link here.
+Barthes, Roland. 1972. Mythologies. T ranslated by Annette Lavers. Farrar, Straus and Giroux.
+Barthes, Roland. 1984. “La Mort de l’ Auteur.” In Le Bruissement de La Langue, 61–67. Seuil.
+Beyer, Christian. 2003. “Edmund Husserl.” The Stanford Encyclopedia of Philosophy , edited by Edward N. 
+Zalta and Uri Nodelman. Winter 2022. Link here.
+Blanqui, Auguste. 2009. Instructions pour une prise d’armes. Cent Pages.
+Bogost, Ian. 2010. Persuasive Games: The Expressive Power of Videogames. MIT Press.
+152
+International Journal of Role-Playing - Issue 17
+Bogost, Ian. 2021. “Persuasive Games, A Decade Later.” In Persuasive Gaming in Context, edited by T eresa de 
+la Hera, Jeroen Jansz, Joost Raessens, and Ben Schouten, 29–40. Amsterdam University Press.  Link 
+here.
+Boskovic, Kat. 2023. “Barbie: Feminist Masterpiece or Capitalistic Greed?” Panther Press, November 4. Link 
+here.
+Bowman, Sarah Lynne, Elektra Diakolambrianou, and Simon Brind, eds. 2024. Transformative Role-Playing 
+Game Design. 1st ed. T ransformative Play Research Series. Uppsala University Library. Link here.
+Bowman, Sarah Lynne, and Karen Schrier. 2018. “Players and Their Characters in Role-Playing Games.” In 
+Role-Playing Game Studies: Transmedia Foundations, edited by José P. Zagal and Sebastian Deterd -
+ing, 395–410. Routledge.
+Brenkman, John. 2020. Mood and Trope: The Rhetoric and Poetics of Affect. University of Chicago Press.
+Bryman, Alan. 1999. “Global Disney.” The American Century: Consensus and Coercion in the Projection of 
+American Power, edited by David Slater and Peter J. T aylor, 261–72. Wiley-Blackwell.
+Carter, Chase. 2021. “ An Author Is Questioning Wizards of the Coast’s ‘Problematic’ Changes to His Adven-
+ture in the Newest D&D 5E Sourcebook.” Dicebreaker. March 24, 2021. Link here.
+Charmaz, Kathy. 2017. “Constructivist Grounded Theory.” The Journal of Positive Psychology  12 (3): 299–
+300. Link here.
+D&D Official. 2020.“Commitment to Diversity | Dungeons & Dragons.” D&D Official | Dungeons & Drag-
+ons. No longer available online.
+Coppola, Francis Ford, dir. 1979. Apocalypse Now.
+Cover, Jennifer Grouling. 2010. The Creation of Narrative in Tabletop Role-Playing Games. McFarland.
+Department of Education. 2024. “Statistical Bulletin August 2024.” Link here.
+Eichner, Susanne. 2020. “Lifeworld Relevance and Practical Sense-Making : Audience Engagement with 
+Danish T elevision Drama Series.” In The Global Audiences of Danish Television Drama, edited by Pia 
+Majbritt Jensen and Ushma Chauhan Jacobsen 107–23. Nordicom, University of Gothenburg. Link 
+here.
+Epstein, Lee, and Eric A. Posner. 2022. “The Roberts Court and the T ransformation of Constitutional Pro-
+tections for Religion: A Statistical Portrait.” Supreme Court Review 2021 (1): 315–47.
+Fanon, Frantz. 1965a. A Dying Colonialism. T rans. Haakon Chevalier. Grove Press.
+Fanon, Frantz. 1965b. The Wretched of the Earth. T rans. Constance Farrington. Grove Press.
+Fine, Gary Alan. 1983. Shared Fantasy : Role-Playing Games as Social W orlds. University of Chicago Press.
+153
+International Journal of Role-Playing - Issue 17
+Fish, Stanley. 1980. Is There a Text in This Class?: The Authority of Interpretive Communities . Harvard Uni-
+versity Press. Link here.
+Flanagan, Mary. 2009. Critical Play: Radical Game Design. MIT Press. Link here.
+Flanagan, Mary. 2021. “If Y ou Play It, Do Y ou Believe It?” Narrative Mechanics. Transcript-V erlag, 279–90.
+Flanagan, Mary, and Mikael Jakobsson. 2023. Playing Oppression: The Legacy of Conquest and Empire in Co-
+lonialist Board Games. MIT Press.
+Freedman, Gili, Max Seidman, Mary Flanagan, Geoff Kaufman, and Melanie C. Green. 2018. “The Impact of 
+an ‘ Aha’ Moment on Gender Biases: Limited Evidence for the Efficacy of a Game Intervention That 
+Challenges Gender Assumptions.” Journal of Experimental Social Psychology 78 (September):162–67. 
+Link here.
+Freire, Paulo. 1993. Pedagogy of the Oppressed . T ranslated by Myra Bergman Ramos. New Y ork: Penguin 
+Books.
+Garcia, Antero. 2017. “Privilege, Power, and Dungeons & Dragons: How Systems Shape Racial and Gender 
+Identities in T abletop Role-Playing Games.” Mind, Culture, and Activity 24 (3): 232–46. Link here.
+Given, Lisa M., and Sarah Polkinghorne. 2024. “50 Y ears on, Dungeons & Dragons Is Still a Gaming Staple. 
+What’s behind Its Monumental Success?” The Conversation. February 9, 2024. Link here.
+Griepp, Martin, 2024. “Hobby Game Sales Eke Out a T ough Win in 2023.” ICv2, March 28. Link 
+here.
+Guttorm, Hanna Ellen, T eija Löytönen, Eeva Anttila, and Anita V alkeemäki. 2016. “Mo(ve)Ments, Encoun-
+ters, Repetitions: Writing With (Embodied and T extual) Encounters.” Qualitative Inquiry 22 (5): 
+417–27. Link here.
+Hall, Stuart. 1973. “Encoding and Decoding in the T elevision Discourse.” Paper Presented at Council Of 
+Europe Colloquy on T raining in the Critical Reading of Televisual Language. University of Leicester, 
+September.
+Hammer, Jessica. 2007. “ Agency and Authority in Role-Playing ‘T exts.’” In A New Literacies Sampler, 67–94. 
+New Y ork: Peter Lang.
+Harviainen, J. Tuomas. 2008. “ A Hermeneutical Approach to Role-Playing Analysis.” International Journal 
+of Role-Playing, no. 1 (December), 66–78. Link here.
+Hines, Mark. 2023. “Game Mechanics and Narrative as Symbiotic, Co-Constructive Elements in T omb of 
+Annihilation.” Analog Game Studies (March 19). Link here.
+Homo Ludens. 2023. “Dix critères inspirés de Paulo Freire pour l’étude et la conception de jeux à visée de 
+conscientisation.” Sciences du jeu, no. 19 (June). Link here.
+154
+International Journal of Role-Playing - Issue 17
+Hook, Alan, and Paul Coulton. 2017. “Games Design Research through Game Design Practice.” In Game 
+Design Research, edited by Petri Lankoski and Jussi Holopainen, 97. ETC Press. Link here.
+Hook, Nathan. 2015. “Grounded Theory.” In Game Research Methods: An Overview, edited by Petri Lankos-
+ki and Staffan Björk, 309–21. ETC Press.
+Hummel, Matt. 2014. “Menzoberranzan.” In Dungeons & Dragons and Philosophy, 121–31. John Wiley & 
+Sons, Ltd. Link here.
+Jakobson, Roman. 1960. “Linguistics and Poetics.” In Style in Language, 350–77. MIT Press.
+Jara, David, and Evan T orner. 2018. “Literary Studies and Role-Playing Games.” In Role-Playing Game Stud-
+ies: Transmedia Foundations, edited by José P. Zagal and Sebastian Deterding, 265–82. Routledge.
+Justice, Daniel Heath. 2024. “Hack the Orcs, Loot the T omb, and T ake the Land: Reflections on Settler Colo-
+nialism, Indigeneity, and Otherwise Possibilities of Dungeons & Dragons.” In Fifty Years of Dungeons 
+& Dragons, 259–73. MIT Press.
+Kaufman, Geoff, and Mary Flanagan. 2015. “ A Psychologically ‘Embedded’ Approach to Designing Games 
+for Prosocial Causes.” Cyberpsychology: Journal of Psychosocial Research on Cyberspace 9 (3).
+Kaufman, Geoff, Mary Flanagan, and Max Seidman. 2016. “Creating Stealth Game Interventions for Atti -
+tude and Behavior Change: An ‘Embedded Design’ Model.” Transactions of the Digital Games Re-
+search Association 2 (November). Link here.
+Kaufman, Geoff, Mary Flanagan, and Max Seidman. 2021. “Creating Stealth Game Interventions for Atti -
+tude and Behavior Change .” In Persuasive Gaming in Context , edited by T eresa de la Hera, Jeroen 
+Jansz, Joost Raessens, and Ben Schouten, 73–90. Amsterdam University Press. Link here.
+Kien, Grant. 2021. “Postmodernism T rumps All: The W orld Without Facts.” Qualitative Inquiry 27 (3–4): 
+374–80. Link here.
+La Porte, Amy, and Lena Cavusoglu. 2023. “Faux Feminism in a Capitalistic Fever Dream: A Review of Greta 
+Gerwig’s Barbie (2023).” Markets, Globalization & Development Review 8 (2). Link here.
+Lankoski, Petri, and Staffan Björk. 2015. Game Research Methods: An Overview. ETC Press.
+Lankoski, Petri, and Jussi Holopainen. 2017. Game Design Research: An Introduction to Theory & Practice . 
+ETC Press.
+Levi, Heather. 2008. The W orld of Lucha Libre. Duke University Press. Link here.
+MacLure, Maggie. 2013. “Researching without Representation? Language and Materiality in Post-Qualita -
+tive Methodology.” International Journal of Qualitative Studies in Education  26 (6): 658–67.  Link 
+here.
+155
+International Journal of Role-Playing - Issue 17
+Mason, Kelsey Paige. 2024. “ Are Games and Utopia ‘Just Make-Believe?’ A Study of Commodified Neutrality 
+and Granular Diversity in Dungeons & Dragons.” In Utopia on the Tabletop , edited by Jo Lindsay 
+W alton, 150–209. Ping Press.
+Mehlman, Jeffrey. 1972. “The ‘Floating Signifier’: From Lévi-Strauss to Lacan.” Yale French Studies, no. 48, 
+10–37. Link here.
+Merrick, Alyssia, W endy W en Li, and Dan J. Miller. 2024. “ A Study on the Efficacy of the T abletop Roleplay-
+ing Game Dungeons & Dragons for Improving Mental Health and Self-Concepts in a Community 
+Sample.” Games for Health Journal 13 (2): 128–33. Link here.
+Mussett, Neil. 2014. “Is Anyone Actually Chaotic Evil?” In Dungeons & Dragons and Philosophy , 35–59. 
+Newark: John Wiley & Sons, Ltd. Link here.
+Myers, Christina, Lara S. G. Piccolo, and T revor Collins. 2019. “Game Jams as a Space to T ackle Social Is-
+sues: An Approach Based on the Critical Pedagogy.” In Proceedings of the International Conference on 
+Game Jams, Hackathons and Game Creation Events 2019, 1–8. ICGJ 2019. Association for Comput-
+ing Machinery. Link here.
+Nadeem, Reem. 2022. “Key Findings From the Global Religious Futures Project.” Pew Research Center  
+(blog). December 21, 2022. Link here.
+Naylor, Robert Luke. 2023. “Why Barbie and Not Oppenheimer: A Film Review of Barbie, Directed by Gre-
+ta Gerwig. W arner Bros. Pictures, 2023.” Endeavour 47 (3): 100873. Link here.
+Nikolaidou, Dimitra. 2024. “Spelling With Dice: The Role of Dungeons & Dragons in Contemporary Specu-
+lative Fiction.” In Fifty Years of Dungeons & Dragons, 161–77. MIT Press.
+Pitkänen, Jori. 2015. “Studying Thoughts: Stimulated Recall as a Game Research Method.” In Game Re-
+search Methods, edited by Petri Lankoski and Staffan Björk, 117–32. ETC Press.
+Senechal, Eva, Charles F. Bray, Christopher M. W orsham, and Anupam B. Jena. 2024. “Online Search In-
+terest in Gynecologists After the Release of the Film Barbie.” JAMA Network Open 7 (7): e2424658. 
+Link here.
+Shanmugaraj, Nisha, Joanna W olfe, and Sophie W odzak. 2020. “Rhetorically-Grounded Paraphrasing In-
+struction.” Composition Forum 43. Link here.
+Shea, Michael. 2018. Return of the Lazy Dungeon Master. Independently published.
+Sidhu, Premeet. 2023. “Playing Animal Farm: Designing a Dungeons & Dragons [D&D] One-Shot for Piv -
+otal Play and Learning.” In Proceedings of DiGRA 2023.
+Sidhu, Premeet. 2024. “Classrooms and Dragons: Learning from Dungeons & Dragons.” In Fifty Years of 
+Dungeons & Dragons, edited by Premeet Sidhu, Marcus Carter, José P. Zagal, 179–96. MIT Press.
+156
+International Journal of Role-Playing - Issue 17
+Sidhu, Premeet, and Marcus Carter. 2021. “Pivotal Play: Rethinking Meaningful Play in Games through 
+Death in Dungeons & Dragons.” Games and Culture 16 (8): 1044–64.
+Smith, William A. 1972. “Concientizacaõ and Simulation Games.” Technical Notes 2:1–26.
+Stang, Sarah, and Aaron T rammell. 2020. “The Ludic Bestiary: Misogynistic T ropes of Female Monstrosity 
+in Dungeons & Dragons.” Games & Culture 15 (6): 730–47. Link here.
+W alsh, Orla, and Conor Linehan. 2024. “Roll for Insight: Understanding How the Experience of Playing 
+Dungeons & Dragons Impacts the Mental Health of an Average Player.” International Journal of 
+Role-Playing, no. 15 (June): 36–60. Link here.
+White, William J. 2020. Tabletop RPG Design in Theory and Practice at the Forge, 2001–2012: Designs and 
+Discussions. 1st ed. 2020 edition. Palgrave Macmillan.
+Williams, J. Patrick, David Kirschner, Nicholas Mizer, and Sebastian Deterding. 2018. “Sociology and 
+Role-Playing Games.” In Role-Playing Game Studies: Transmedia Foundations, edited by José P. Za-
+gal and Sebastian Deterding, 227–44. Routledge.
+Wright, Jennifer Cole, Daniel E. W eissglass, and V anessa Casey. 2020. “Imaginative Role-Playing as a Medium 
+for Moral Development: Dungeons & Dragons Provides Moral T raining.” Journal of Humanistic 
+Psychology 60 (1): 99–129. Link here.
+ 
+157
+International Journal of Role-Playing - Issue 17
+Brian McKenzie is an Associate Professor at Maynooth University. He has PhD in 
+history from Stony Brook University. He is subject leader for Critical Skills, May-
+nooth University’s First Y ear Seminar, and a co-creator of Maynooth University’s mi-
+crocredential ‘Writing for Role-Playing Games: Narratives, Adventures, and W orld-
+building.’ His research interests are in game studies, the pedagogy of multiliteracies 
+and digital technologies, and Wikipedia. 
+Bret Zawilski, Ph.D., is a Lecturer of Critical Skills at Maynooth University, where 
+he teaches courses on writing and scientific communication. He’s an avid player of 
+indie TTRPGs and his academic research investigates writing processes, knowledge 
+transfer, and multimodal pedagogy. He has a background and experience in writing 
+and technical communication.
+James Beirne holds a PhD in Social & Political Thought from Y ork University. 
+His doctoral research examined the transformation of property relations in Ireland 
+through dispossessive colonial practices and the construction of the political appa -
+ratus which mediated these processes. Current research interests include political 
+subjectivity, the relationship between oral and literary cultural spaces, theories of the 
+state, and political economies of colonialism and fascism. He currently teaches in 
+Critical Skills at Maynooth University.

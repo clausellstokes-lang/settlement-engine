@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-06 14:34:26 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-06 14:35:34 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = dd5f13218 · ledger = eaf50fee7 §903: the lit default lands at 9 cars — the default preset takes the wave's class C+D (
 
@@ -40,7 +40,7 @@ product claude/composite-r4 = dd5f13218 · ledger = eaf50fee7 §903: the lit def
       | | 1d | Lived-experience preset census 3 → 4 | **A second red hunk 1 CAUSED**: a literal three-preset roster for `traditionsEnabled`. | **LANDED** | `6ff3249b9` |
       | | 2 | O-1 birth form (lit successor id) | Mints a **PUBLIC, PERSISTED** preset identifier. Brief supplies neither id nor label. | ⛔ **REFUSED — owner-gated** | — |
       | | 3 | Class B into lit successors | Requires hunk 2's id. | ⛔ **REFUSED — gated on 2** | — |
-- **S12A-CHECKPAIR** (kit/read-only lane) receipt `receipt-s12a-checkpair.md` (mtime 09-06 14:30) head:
+- **S12A-CHECKPAIR** (kit/read-only lane) receipt `receipt-s12a-checkpair.md` (mtime 09-06 14:34) head:
       | # RECEIPT — lane S12A-CHECKPAIR (the two checker gaps + the crosscheck label)
       | ⟦Chair: Fable 5.1 · Lane: Opus 5 (S12A-CHECKPAIR) · KIT-ONLY — no repo change, no dock change, no commit · 2026-09-06⟧
       | 
@@ -76,7 +76,7 @@ product claude/composite-r4 = dd5f13218 · ledger = eaf50fee7 §903: the lit def
 ## RESEARCH SWEEPS (state = claims/verdicts/kept; verdict files; section/critic mtimes) — round tags in sweep/LAST-RUNS.json
 - **tolkien**: claims 874 · verdicts 874 (todo 0) · kept 641 · partial 214 · verdict files 43 (triage 0, regrade r4) · section 09-06 14:20 · critic 09-05 20:39
 - **martin**: claims 990 · verdicts 990 (todo 0) · kept 763 · partial 107 · verdict files 43 (triage 1, regrade r5) · section 09-05 20:41 · critic 09-05 21:01
-- **dnd**: claims 872 · verdicts 574 (todo 298) · kept 517 · partial 55 · verdict files 39 (triage 0, regrade none) · section 09-05 20:56 · critic 09-05 21:12
+- **dnd**: claims 872 · verdicts 589 (todo 283) · kept 530 · partial 57 · verdict files 40 (triage 0, regrade none) · section 09-05 20:56 · critic 09-05 21:12
 - **ai**: claims 940 · verdicts 940 (todo 0) · kept 804 · partial 109 · verdict files 60 (triage 1, regrade r1) · section 09-06 00:39 · critic 09-06 00:55
 - **kay**: claims 713 · verdicts 713 (todo 0) · kept 448 · partial 48 · verdict files 36 (triage 1, regrade r5) · section absent · critic absent
 - **leguin**: claims 384 · verdicts 384 (todo 0) · kept 342 · partial 42 · verdict files 27 (triage 0, regrade r4) · section 09-06 13:47 · critic 09-06 14:20
@@ -89,11 +89,11 @@ product claude/composite-r4 = dd5f13218 · ledger = eaf50fee7 §903: the lit def
 - wf_146ba5ee-000: 2 journal lines, 1 agents
 - wf_2b731d5b-460: 4 journal lines, 4 agents
 - wf_328e2797-84f: 4 journal lines, 2 agents
-- wf_a9298963-fdf: 58 journal lines, 32 agents
+- wf_a9298963-fdf: 61 journal lines, 32 agents
 - wf_bcc0efc7-47c: 61 journal lines, 31 agents
 - wf_bf5b8fda-a24: 3 journal lines, 2 agents
 - wf_ed535e1b-537: 21 journal lines, 11 agents
 - wf_f5b527e0-155: 23 journal lines, 12 agents
 
 ## PROCESSES: 38055 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.f;
-load: 4.48 4.34 8.19
+load: 3.49 4.05 7.79

@@ -14638,6 +14638,113 @@
    "note": "Raw page fetched (HTTP 200). Quote verbatim inside the block quotation from the Ruins of Undermountain boxed set in THE EARLY DAYS, which Alexander introduces as 'which rather hilariously notes:'. All limbs supported.",
    "fromFile": "verdicts-dnd-i544-558.json"
   },
+  "559": {
+   "index": 559,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The Yawning Portal is a 3-story Class C building",
+   "note": "Listed under City of Splendors (1994) 'notable new details'; quote appears word for word on the live Alexandrian page.",
+   "fromFile": "verdicts-dnd-i559-573.json"
+  },
+  "560": {
+   "index": 560,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Durnan established the Yawning Portal in 1306 DR.",
+   "note": "Same City of Splendors bullet list; quote verbatim, attribution to the boxed set explicit in the surrounding sentence.",
+   "fromFile": "verdicts-dnd-i559-573.json"
+  },
+  "561": {
+   "index": 561,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The well is 140 feet deep, dark below 50 feet",
+   "note": "Under 'Ruins of Undermountain does add several new details'; the preceding bullet places the first well 'in the main taproom'.",
+   "fromFile": "verdicts-dnd-i559-573.json"
+  },
+  "562": {
+   "index": 562,
+   "verdict": "PARTIAL",
+   "trueWording": "Three blood-stained scrolls have been bound together",
+   "note": "Quote verbatim, and the scrolls are named before the three contents sections; but the handout's first block is a set-off italic verse epigraph about the carach, so the naming is not the opening.",
+   "unsupportedLimb": "'opens' — an italic blockquote epigraph ('Like an arrow drawn from its quiver...') precedes the naming of the physical document",
+   "fromFile": "verdicts-dnd-i559-573.json"
+  },
+  "563": {
+   "index": 563,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "achievements of the carach, which one can only hope are exaggerated",
+   "note": "In UNTO THE DEATH OF WORLDS, hedging the scroll's escalating boasts (princes slain, kingdoms fall, worlds destroyed).",
+   "fromFile": "verdicts-dnd-i559-573.json"
+  },
+  "564": {
+   "index": 564,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It appears that the carach... are methodical and relentless",
+   "note": "Same section; the hedge marks an inference about behaviour the scroll only implies. One instance on the page.",
+   "fromFile": "verdicts-dnd-i559-573.json"
+  },
+  "565": {
+   "index": 565,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "he is concerned that the text is 'obviously padded'",
+   "note": "Wayback raw capture of the Medium article, Development Hell Level 7; Frank Mentzer's redline review of the 'Quagmire' rough draft.",
+   "fromFile": "verdicts-dnd-i559-573.json"
+  },
+  "566": {
+   "index": 566,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "'obviously padded' and 'extremely repetitive'",
+   "note": "Same sentence as 565; both faults are the summary side-comments on the same rough draft.",
+   "fromFile": "verdicts-dnd-i559-573.json"
+  },
+  "567": {
+   "index": 567,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Constructions like 'Patriarch Cleric' are redundant, as in 'female girl'",
+   "note": "Level 7, among Mentzer's system-point corrections; quote verbatim.",
+   "fromFile": "verdicts-dnd-i559-573.json"
+  },
+  "568": {
+   "index": 568,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "making sure modules exercised the system consistently",
+   "note": "Page: Mentzer as shepherd of BECMI held responsibility that modules 'exercised the system consistently and met with quality expectations'; the article's examples are terminology fixes.",
+   "fromFile": "verdicts-dnd-i559-573.json"
+  },
+  "569": {
+   "index": 569,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Every TSR module had a product standards sheet which listed all of the styles, typesizes, margins",
+   "note": "Development Hell Level 8: The Proof; 'and related layout decisions' follows.",
+   "fromFile": "verdicts-dnd-i559-573.json"
+  },
+  "570": {
+   "index": 570,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Much of the detail which troubled Frank... did not make the final cut",
+   "note": "Level 7; the cut detail is enumerated as 'the saving throw notation and the flavor text'.",
+   "fromFile": "verdicts-dnd-i559-573.json"
+  },
+  "571": {
+   "index": 571,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "measured both by page count and by line count",
+   "note": "Level 5; lines 'reflect the total number of lines in the HP3000 EDIT2 program' and Merle's filled values 'are projections'.",
+   "fromFile": "verdicts-dnd-i559-573.json"
+  },
+  "572": {
+   "index": 572,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "TSR removed the names of cities from the map",
+   "note": "Level 6; 'Even the pointer to the Spiral City of Quagmire itself is withheld from the players.'",
+   "fromFile": "verdicts-dnd-i559-573.json"
+  },
+  "573": {
+   "index": 573,
+   "verdict": "PARTIAL",
+   "trueWording": "only a few lines of text on the front: code, author, flavor text",
+   "note": "Level 8; quote verbatim and the flavor text does sit below the cover illustration, but the page lists two further items on the front and never states the release year (it only puts release after the April 3, 1984 layoff).",
+   "unsupportedLimb": "'only a few sentences of flavor text' — the front also carried the module's code and its author's name",
+   "fromFile": "verdicts-dnd-i559-573.json"
+  },
   "589": {
    "index": 589,
    "verdict": "VERIFIED_VERBATIM",
