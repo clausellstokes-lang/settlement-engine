@@ -1,0 +1,28 @@
+{
+ "role": "verifier",
+ "name": "ai",
+ "angle": null,
+ "tag": "i449-463",
+ "lines": 55,
+ "firstTs": "2026-09-06T17:46:45.658Z",
+ "lastTs": "2026-09-06T17:49:43.211Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 10
+ },
+ "urlsFetched": [
+  "https://arxiv.org/html/2405.20956",
+  "https://arxiv.org/html/2403.01061"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "All 15 quotes verified verbatim on the raw pages; three claims have limbs the page does not carry. Writing the checkpoint.",
+ "run": "wf_d28449b9-5d6",
+ "agent": "ac462f1c7be9fb17a",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_d28449b9-5d6/agent-ac462f1c7be9fb17a.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-ai-i449-463.json",
+  "exists": false
+ }
+}

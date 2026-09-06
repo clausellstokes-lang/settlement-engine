@@ -377,5 +377,77 @@
    "unsupportedLimb": "the claim's attribution to Garcia - the versioning-control sentence is spoken by Antonsson",
    "fromFile": "verdicts-martin-i615-629.json"
   }
+ },
+ {
+  "index": 666,
+  "feature": "compounds and coinages",
+  "claim": "HBO's press release says Peterson drew on Martin's description of the language rather than on a vocabulary Martin had supplied.",
+  "source": "HBO official press release, dothraki.conlang.org, 12 April 2010",
+  "url": "http://dothraki.conlang.org/official-hbo-press-release/",
+  "quote": "drew inspiration from George R.R. Martin’s description of the language",
+  "page": "press release body",
+  "kind": "vendor",
+  "polarity": "asserts",
+  "date": "2010-04-12",
+  "routeHint": "Wayback raw capture",
+  "registerHint": "none",
+  "confidence": "high",
+  "angle": "measurement",
+  "verdict": {
+   "index": 666,
+   "verdict": "PARTIAL",
+   "trueWording": "Peterson drew inspiration from George R.R. Martin's description of the language, as well as from such languages as Russian, Turkish, Estonian, Inuktitut and Swahili",
+   "note": "Wayback raw capture (see 665). The quoted clause is verbatim. But the release draws no contrast with a Martin-supplied vocabulary: the alternative it names is other natural languages, and Peterson's own quoted words point the other way, at material Martin did supply in print - 'I wanted to remain as faithful as possible to the extant material in George R.R. Martin's series... Though there isn't a lot of data, there is evidence of a dominant word order'. The 'rather than' framing is the claimant's inference, not the page's.",
+   "unsupportedLimb": "rather than on a vocabulary Martin had supplied",
+   "fromFile": "verdicts-martin-i660-674.json"
+  }
+ },
+ {
+  "index": 667,
+  "feature": "compounds and coinages",
+  "claim": "Wikipedia, relaying the HBO press release, states Peterson delivered over 1700 words to HBO before the initial shooting, a figure the press release itself puts at more than 1,800.",
+  "source": "Wikipedia 'Dothraki language' relaying the HBO press release of 12 April 2010",
+  "url": "https://en.wikipedia.org/wiki/Dothraki_language",
+  "quote": "He delivered over 1700 words to HBO before the initial shooting.",
+  "page": "section 'Development'",
+  "kind": "relay",
+  "polarity": "asserts",
+  "date": "fetched 2026-09-06",
+  "routeHint": "en.wikipedia.org action=raw, then the cited primary via Wayback",
+  "registerHint": "none",
+  "confidence": "high",
+  "angle": "measurement",
+  "verdict": {
+   "index": 667,
+   "verdict": "PARTIAL",
+   "trueWording": "He delivered over 1700 words to HBO before the initial shooting.",
+   "note": "Raw page fetched live (HTTP 200). The quoted sentence is verbatim in section 'Development'. Two limbs fail. (1) 'relaying the HBO press release': that sentence carries no footnote of its own; ref [5] ('Official HBO Press Release', Dothraki.conlang.org, April 12, 2010) is attached to the NEXT sentence, and the press release itself (read raw via Wayback) contains no 1700 figure at all. (2) 'a figure the press release itself puts at more than 1,800': the release's 'more than 1,800 words' describes the language's total vocabulary, not words delivered to HBO before shooting - a different quantity, so the two are not the same figure restated. Wikipedia's own '3163 words' as of September 2011 elsewhere on the page shows the vocabulary count is tracked separately.",
+   "unsupportedLimb": "that the 1700 figure relays the press release, which puts the same figure at more than 1,800",
+   "fromFile": "verdicts-martin-i660-674.json"
+  }
+ },
+ {
+  "index": 730,
+  "feature": "place and institution description",
+  "claim": "Jennings's 2011 review says Martin is often more intrigued by the friction among conflicting religions and by what he calls the Kremlinology of Westeros than by fantasy's usual furniture.",
+  "source": "Dana Jennings, 'Books of The Times', The New York Times, 14 July 2011",
+  "url": "https://www.nytimes.com/2011/07/15/books/a-dance-with-dragons-by-george-r-r-martin-review.html",
+  "quote": "by the Kremlinology of Westeros",
+  "page": "paragraph beginning 'The elements of fantasy'",
+  "kind": "reception",
+  "polarity": "asserts",
+  "date": "2011-07-14",
+  "routeHint": "Wayback raw capture 20251024170837id_",
+  "registerHint": "dossier-archivist",
+  "confidence": "high",
+  "angle": "reception",
+  "verdict": {
+   "index": 730,
+   "verdict": "PARTIAL",
+   "trueWording": "Jennings's own phrase, not attributed to Martin",
+   "note": "NYT (Wayback raw): \"He's often more intrigued by the friction among conflicting religions, by the Kremlinology of Westeros, in the 'plots, ploys, whispers, lies, secrets within secrets' that make of up 'the game of thrones.'\" Quote verbatim and the 'more intrigued... than fantasy's usual furniture' contrast is carried by the preceding sentence ('The elements of fantasy exist here but are deftly muted'), but the page nowhere has Martin calling it that -- the coinage is the reviewer's.",
+   "unsupportedLimb": "the claim's 'what he calls' -- attributing the phrase 'the Kremlinology of Westeros' to Martin; on the page it is Jennings's own wording, with no attribution to Martin",
+   "fromFile": "verdicts-martin-i720-734.json"
+  }
  }
 ]

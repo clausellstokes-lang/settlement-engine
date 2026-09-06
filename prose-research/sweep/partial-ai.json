@@ -1544,5 +1544,94 @@
    "unsupportedLimb": "the attribution of the 2-to-3 and 10-to-12 adventurer drops to intentional planning; the page reports them for the western dramatic-conflict variations",
    "fromFile": "verdicts-ai-i359-373.json"
   }
+ },
+ {
+  "index": 394,
+  "feature": "training corpus mediocrity",
+  "claim": "Commenters note the model's style inherits the mediocrity of the typical D&D adventure writing it was trained on.",
+  "source": "tenfootpole.org — A Strange House (Bryce Lynch review, 2024-11-25, plus comments)",
+  "url": "https://tenfootpole.org/ironspike/?p=9471",
+  "quote": "the typical D&D adventure writing ChatGPT was trained on",
+  "page": "tenfootpole.org — A Strange House (Bryce Lynch review, 2024-11-25, plus comments)",
+  "angle": "games-practice",
+  "verdict": {
+   "index": 394,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "\"Commenters\" (plural) - exactly one comment on the page makes this point (Anonymous, Nov 26 2024, 1:04 am); no second commenter says it",
+   "trueWording": "One commenter laments the mediocre D&D corpus ChatGPT trained on",
+   "note": "Quote is on the page word for word, inside the whole comment: \"If only the typical D&D adventure writing ChatGPT was trained on was good\". The substance - style inheriting the mediocrity of the training corpus - is carried by that single wry conditional; it is the entire comment, with no elaboration. Downgraded on the plural attribution only, which matters because this chunk's neighbouring claims (391) genuinely do rest on several commenters.",
+   "fromFile": "verdicts-ai-i389-403.json"
+  }
+ },
+ {
+  "index": 409,
+  "feature": "length benchmark (human craft)",
+  "claim": "Shea's read-aloud standard: keep it short and powerful, know its purpose, and cut 25% of any draft — the bar generated boxed text is measured against by reviewers.",
+  "source": "Sly Flourish — Writing Awesome Read-Aloud Text (Mike Shea, 2010-11-08) — human craft benchmark",
+  "url": "https://slyflourish.com/writing_awesome_readaloud_text.html",
+  "quote": "Keep it short and keep it powerful.",
+  "page": "Sly Flourish — Writing Awesome Read-Aloud Text (Mike Shea, 2010-11-08) — human craft benchmark",
+  "angle": "games-practice",
+  "verdict": {
+   "index": 409,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "the bar generated boxed text is measured against by reviewers",
+   "trueWording": "Keep it short and keep it powerful.",
+   "note": "Quote is verbatim on the raw page. The craft limbs all check out: 'Know the purpose of your read-aloud text up front'; 'If you didn't edit your read-aloud text and remove 25% of what was there, you didn't try hard enough.' Byline 'by Mike on 8 November 2010' matches. But the page is a 2010 article that never mentions generated text, AI, or reviewers measuring machine output against this standard — that final limb is the researcher's framing, not on the page.",
+   "fromFile": "verdicts-ai-i404-418.json"
+  }
+ },
+ {
+  "index": 410,
+  "feature": "clarity benchmark (human craft)",
+  "claim": "Shea's 'Tell, Don't Show': players understand about half of what is described, so state the facts that matter plainly while keeping flavour — the opposite of the padded, withholding generated style.",
+  "source": "Sly Flourish — Tell, Don't Show (Mike Shea, 2024-02-12) — human craft benchmark",
+  "url": "https://slyflourish.com/tell_dont_show.html",
+  "quote": "",
+  "page": "Sly Flourish — Tell, Don't Show (Mike Shea, 2024-02-12) — human craft benchmark",
+  "angle": "games-practice",
+  "verdict": {
+   "index": 410,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "the opposite of the padded, withholding generated style",
+   "trueWording": "Players understand about half of what we describe to them.",
+   "note": "No quote supplied. Raw page ('Tell, Don't Show', by Mike on 12 February 2024) supports the reported limbs: 'Players understand about half of what we describe to them.'; a section 'Don't Hold Your Cards Too Close' against DMs holding back information; and 'Feel free to keep your language colorful and stay in the world but state clearly what the characters know, or should know, about the situation.' The withholding it criticises is the human GM's, not a model's — the page says nothing about generated prose, so the closing comparison is unsupported.",
+   "fromFile": "verdicts-ai-i404-418.json"
+  }
+ },
+ {
+  "index": 428,
+  "feature": "reception",
+  "claim": "At launch the demo sat at Very Negative with 236 reviews; as of 2026-09-06 the Steam page shows 15% positive of 476.",
+  "source": "Time Extension — Square Enix's 'The Portopia Serial Murder Case' AI Tech Demo Flooded With Negative Reviews (2023-04)",
+  "url": "https://www.timeextension.com/news/2023/04/square-enix-remaking-the-portopia-serial-murder-case-as-a-free-ai-tech-demo",
+  "quote": "a dumber input system than Zork",
+  "page": "Time Extension — Square Enix's 'The Portopia Serial Murder Case' AI Tech Demo Flooded With Negative Reviews (2023-04)",
+  "angle": "games-practice",
+  "verdict": {
+   "index": 428,
+   "verdict": "PARTIAL",
+   "trueWording": "the demo now sits at a 'Very Negative' rating with a total of 236 posts from users",
+   "note": "Live Time Extension page fetched raw (Jack Yarwood, 24 Apr 2023 update). First limb verbatim-supported. The 2026 Steam figure is genuinely true - I fetched the Steam store page in the same pass and it reads 'Very Negative (476) - 15% of the 476 user reviews for this software are positive' - but it is not on the cited page, so this claim's source attribution is wrong for that half. Also worth flagging: the quote 'a dumber input system than Zork' is on the page only as reader comment #4 (NatiaAdamo, 25 Apr 2023), not the article's own words; citing it as Time Extension's assessment would misattribute it. The article's own line is 'the game repeating lines like \"Hmm...\", \"Maybe we should focus on the task at hand\", and \"I'm not sure what to say about that\" to anything but the most precise of inputs.'",
+   "unsupportedLimb": "'as of 2026-09-06 the Steam page shows 15% positive of 476' - absent from this page (it is on the Steam store page, where I confirmed it); and the Zork quote is a reader comment, not the article",
+   "fromFile": "verdicts-ai-i419-433.json"
+  }
+ },
+ {
+  "index": 472,
+  "feature": "metaphors too simple and sensible",
+  "claim": "The model offered only simple, sensible metaphors where writers wanted complex or not-quite-sensible ones.",
+  "source": "Ippolito, Yuan, Coenen, Burnam — 'Creative Writing with an AI-Powered Writing Assistant: Perspectives from Professional Writers' (arXiv 2022)",
+  "url": "https://arxiv.org/html/2211.05030",
+  "quote": "sometimes one wants metaphors to be complex, or not quite sensible",
+  "angle": "peer-reviewed-absentees",
+  "verdict": {
+   "index": 472,
+   "verdict": "PARTIAL",
+   "trueWording": "Wordcraft generally suggests simple and sensible metaphors.",
+   "unsupportedLimb": "the exclusivity 'only' — the page says Wordcraft 'generally' suggests simple and sensible metaphors, not that it offered nothing else",
+   "note": "Quote is verbatim in Section 8.2, attributed to JM: 'Wordcraft generally suggests simple and sensible metaphors; but sometimes one wants metaphors to be complex, or not quite sensible.' The wanting-complex-metaphors limb is fully supported (JM's generic 'one wants' covers the claim's 'writers wanted'). Only the quantifier fails: the claim's 'offered only simple, sensible metaphors' is exclusive where the page is merely typical ('generally').",
+   "fromFile": "verdicts-ai-i464-478.json"
+  }
  }
 ]

@@ -13806,6 +13806,534 @@
    "trueWording": "it needs to be logical and consistent and integral",
    "note": "Speech, in the passage on the sacrosanct protected ending: 'The ending of a piece of fiction should grow out of what has gone before; it needs to be logical and consistent and integral to the rest of the story.' Quote verbatim; both limbs present.",
    "fromFile": "verdicts-martin-i615-629.json"
+  },
+  "630": {
+   "index": 630,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The best fantasy is written in the language of dreams",
+   "note": "Verbatim opening sentence of the essay body on the live georgerrmartin.com page (HTTP 200, raw HTML read). All limbs supported.",
+   "fromFile": "verdicts-martin-i630-644.json"
+  },
+  "631": {
+   "index": 631,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Reality is the strip malls of Burbank, the smokestacks of Cleveland",
+   "note": "Second body paragraph, verbatim: 'Reality is the strip malls of Burbank, the smokestacks of Cleveland, a parking garage in Newark.' The paragraph sets Fantasy against Reality throughout ('Fantasy is the towers of Minas Tirith…'), so the named-concrete-places limb holds.",
+   "fromFile": "verdicts-martin-i630-644.json"
+  },
+  "632": {
+   "index": 632,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "on the road toward stagnation and self-parody",
+   "note": "Live page, raw HTML: 'I think the work has to change, that a writer who repeats himself too often is on the road toward stagnation and self-parody.' Page header confirms provenance: 'Guest of Honor Speech / Delivered at Windycon X / October 7, 1983', and the passage sits in the paragraph introducing The Armageddon Rag.",
+   "fromFile": "verdicts-martin-i630-644.json"
+  },
+  "633": {
+   "index": 633,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "themes recur, a distinctive voice develops",
+   "note": "Verbatim: 'All writers repeat themselves to a certain extent, of course; themes recur, a distinctive voice develops, characteristic concerns and literary motifs become discernible.' Same paragraph as index 632.",
+   "fromFile": "verdicts-martin-i630-644.json"
+  },
+  "634": {
+   "index": 634,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "piece-by-piece like a jigsaw puzzle forming into place haphazardly",
+   "note": "Wayback raw id_ capture fetched (HTTP 200): 'Slowly the history is unveiled, piece-by-piece like a jigsaw puzzle forming into place haphazardly, and layers of events are formed…' — fifth paragraph, as cited. Page footer confirms 'copyright © 1999-2001 Elio M. García and Linda Antonsson'; the review carries no byline.",
+   "fromFile": "verdicts-martin-i630-644.json"
+  },
+  "635": {
+   "index": 635,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "more than a few POV characters whose chapters are always divided by other POVs lying in-between",
+   "note": "Verbatim on the page. Note the framing is a negative conditional — 'If you want something written… without a huge cast of characters and more than a few POV characters whose chapters are always divided by other POVs lying in-between, then A Game of Thrones may not be for you' — so the review attributes the feature to the book by clear implication rather than by direct assertion.",
+   "fromFile": "verdicts-martin-i630-644.json"
+  },
+  "636": {
+   "index": 636,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "this one is more grounded in history and reality",
+   "note": "Verbatim: 'Where that great work is inspired by epic legends and myth, this one is more grounded in history and reality,' the sentence immediately after naming The Lord of the Rings. Both limbs supported.",
+   "fromFile": "verdicts-martin-i630-644.json"
+  },
+  "637": {
+   "index": 637,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the lack of -ly adverbs in Game of Thrones",
+   "note": "Section '4) Adverbs', verbatim: 'The first observation is the lack of -ly adverbs in Game of Thrones.' Four-series text-mining comparison confirmed ('4 authors. 19 books. 3,896,568 words.'; Martin's series explicitly glossed as A Song of Ice and Fire). The relative-to-the-other-three limb is carried by the article's comparative frame and by the key takeaway 'significantly fewer -ly adverbs'. Medium live URL returned HTTP 403 to a browser UA; recovered by Wayback raw id_ captures 20150830212411 (original 2015 page) and 20250828164038 — both carry identical wording.",
+   "fromFile": "verdicts-martin-i630-644.json"
+  },
+  "638": {
+   "index": 638,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Game of Thrones contains significantly fewer -ly adverbs.",
+   "note": "Key takeaways bullet, verbatim. The comparator ('than the other series analysed') is not spelled out in the bullet but is unambiguous in a four-series comparison whose other bullets name the rival series. Medium live URL returned HTTP 403 to a browser UA; recovered by Wayback raw id_ captures 20150830212411 (original 2015 page) and 20250828164038 — both carry identical wording.",
+   "fromFile": "verdicts-martin-i630-644.json"
+  },
+  "639": {
+   "index": 639,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "significantly fewer -ly adverbs",
+   "note": "Checked the full raw article text: every adverb finding specifies the -ly form — section 4 ('the lack of -ly adverbs in Game of Thrones') and the key takeaway ('significantly fewer -ly adverbs'); the only other adverb mentions are the section heading '4) Adverbs', the contents line 'Top adverbs', an aside about Tolkien 'abusing swiftly', and the lexical-density definition. No whole-class adverb finding appears in the text. The unread chart image is not a statement. Medium live URL returned HTTP 403 to a browser UA; recovered by Wayback raw id_ captures 20150830212411 (original 2015 page) and 20250828164038 — both carry identical wording.",
+   "fromFile": "verdicts-martin-i630-644.json"
+  },
+  "640": {
+   "index": 640,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Section 4 gives no figures; only a chart image follows.",
+   "note": "No quote supplied and none needed: section '4) Adverbs' is two sentences plus an aside, containing no rate, count or percentage, and is followed by an embedded figure (the 2025 capture renders the placeholder 'Press enter or click to view image in full size'; the contents list names 'Top adverbs' as a chart section). The quantitative comparison is therefore carried by the image alone. Medium live URL returned HTTP 403 to a browser UA; recovered by Wayback raw id_ captures 20150830212411 (original 2015 page) and 20250828164038 — both carry identical wording.",
+   "fromFile": "verdicts-martin-i630-644.json"
+  },
+  "641": {
+   "index": 641,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "as well as character names",
+   "note": "'Technical' section, verbatim: 'Very frequent words and phrases such as of, the or i don’t, would you etc. were eliminated as stopwords, as well as character names.' The 'before ranking parts of speech' limb is not stated as an explicit ordering, but stopword elimination necessarily precedes the frequency rankings the article reports (top nouns/verbs/adverbs/adjectives). Medium live URL returned HTTP 403 to a browser UA; recovered by Wayback raw id_ captures 20150830212411 (original 2015 page) and 20250828164038 — both carry identical wording.",
+   "fromFile": "verdicts-martin-i630-644.json"
+  },
+  "642": {
+   "index": 642,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "4 authors. 19 books. 3,896,568 words.",
+   "note": "Verbatim in the introduction; the preceding sentence names the four authors (Rowling, Martin, Collins, Tolkien). Every limb supported. Medium live URL returned HTTP 403 to a browser UA; recovered by Wayback raw id_ captures 20150830212411 (original 2015 page) and 20250828164038 — both carry identical wording.",
+   "fromFile": "verdicts-martin-i630-644.json"
+  },
+  "643": {
+   "index": 643,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Game of Thrones to 11-year-olds",
+   "note": "Section '7) Understandability', verbatim: 'So, on average, the thresholds for understanding are: Hunger Games correspond to 10-year-olds, Game of Thrones to 11-year-olds, Lord of the Rings to 14-year-olds and Harry Potter to 15-year-olds.' The section is explicitly the Automated Readability Index (ARI). Medium live URL returned HTTP 403 to a browser UA; recovered by Wayback raw id_ captures 20150830212411 (original 2015 page) and 20250828164038 — both carry identical wording.",
+   "fromFile": "verdicts-martin-i630-644.json"
+  },
+  "644": {
+   "index": 644,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Martin mentions red, white, grey most",
+   "note": "Section '5) Adjectives', verbatim: 'Notable is the usage of colors by author: Martin mentions red, white, grey most, Rowling black, Collins white and Tolkien black, white, grey and green.' The quoted fragment appears word for word and the colour trio matches. Medium live URL returned HTTP 403 to a browser UA; recovered by Wayback raw id_ captures 20150830212411 (original 2015 page) and 20250828164038 — both carry identical wording.",
+   "fromFile": "verdicts-martin-i630-644.json"
+  },
+  "645": {
+   "index": 645,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Gender equality is probably apparent in Game of Thrones lady, queen",
+   "note": "Section '2) Nouns' reads: \"Gender “equality” is probably apparent in Game of Thrones lady, queen as well as in Hunger Games mother\"; quote appears word for word. Key takeaways add \"high occurrence of words such as lady, queen and mother\". Raw page reached via Wayback capture 20250828164038id_ (live Medium returned 403).",
+   "fromFile": "verdicts-martin-i645-659.json"
+  },
+  "646": {
+   "index": 646,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Perhaps George Martin follows Stephen King’s advice",
+   "note": "Section '4) Adverbs' reads: \"The first observation is the lack of -ly adverbs in Game of Thrones. Perhaps George Martin follows Stephen King’s advice ‘The adverb is not your friend...’\". Quote verbatim; 'Perhaps' marks it as Spathis's own speculation, and nothing on the page attributes it to Martin. Raw page via Wayback.",
+   "fromFile": "verdicts-martin-i645-659.json"
+  },
+  "647": {
+   "index": 647,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Indeed, the largest books of our analysis behave poorly",
+   "note": "Section '6) Lexical Density' reads: \"It is obvious to draw parallels between the book length and its lexical density... Indeed, the largest books of our analysis behave poorly.\" Quote verbatim; the analysis covers four series / 19 books. Raw page via Wayback.",
+   "fromFile": "verdicts-martin-i645-659.json"
+  },
+  "648": {
+   "index": 648,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Total | 4,224 | 344 | 1,736,054",
+   "note": "Table 'Length of A Song of Ice and Fire books' Total row gives Chapters 344 across the five published novels (73+70+82+46+73=344). Raw page reached via Wayback capture 20260210045808id_ (live wordsrated.com returned a WAF '454 Request blocked' interstitial to curl).",
+   "fromFile": "verdicts-martin-i645-659.json"
+  },
+  "649": {
+   "index": 649,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Total | 4,224 | 344 | 1,736,054",
+   "note": "Same Total row gives Words 1,736,054; page adds \"There are more than 1.7 million words in the 5 A Song of Ice and Fire novels\". Raw page via Wayback.",
+   "fromFile": "verdicts-martin-i645-659.json"
+  },
+  "650": {
+   "index": 650,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A Storm of Swords | 973 | 82 | 414,604",
+   "note": "Table row for A Storm of Swords: Pages 973, Chapters 82, Words 414,604 — both limbs of the claim present. Raw page via Wayback.",
+   "fromFile": "verdicts-martin-i645-659.json"
+  },
+  "651": {
+   "index": 651,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The books are written in 3rd person limited.",
+   "note": "Section 'Characters, narrative device and perspective' opens with that exact sentence. Raw page via Wayback.",
+   "fromFile": "verdicts-martin-i645-659.json"
+  },
+  "652": {
+   "index": 652,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The first book takes place from the perspective of 9 different characters",
+   "note": "Bullet under 'How many chapters are there from each character’s perspective in GOT?' reads exactly that; the next bullet gives 31 by the fifth book. Raw page via Wayback.",
+   "fromFile": "verdicts-martin-i645-659.json"
+  },
+  "653": {
+   "index": 653,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Words/sentence 11,02 10,59 (GoT dialogues, male/female)",
+   "note": "Tab. 1, p. 88: the Words/sentence row under 'GoT dialogues' gives 11,02 (Male Characters) and 10,59 (Female Characters). The LIWC limb holds — the methodology section names LIWC2015 as the tool. PDF fetched directly (HTTP 200) and text extracted with pypdf.",
+   "fromFile": "verdicts-martin-i645-659.json"
+  },
+  "654": {
+   "index": 654,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Word count (%) 81890 (84%) 15026 (16%)",
+   "note": "Tab. 1, p. 88, first row, GoT dialogues: male characters 81890 (84%) against female 15026 (16%); surrounding prose confirms these are all dialogues in the novel. PDF text extracted directly.",
+   "fromFile": "verdicts-martin-i645-659.json"
+  },
+  "655": {
+   "index": 655,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "in each and every case the male characters’ utterances are characterized by having longer sentences",
+   "note": "p. 88: \"While the difference ... is less conspicuous, in each and every case the male characters’ utterances are characterized by having longer sentences and using longer words compared to the female counterparts\" — said of all three versions (novel, graphic novel, TV series). Quote verbatim.",
+   "fromFile": "verdicts-martin-i645-659.json"
+  },
+  "656": {
+   "index": 656,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Except for the number of words per sentence ... the female characters have a slight advantage",
+   "note": "p. 89, discussion of Tab. 2 (the eight viewpoint characters): \"only in one case do the female characters ‘perform better’... Except for the number of words per sentence in the original version of A Game of Thrones, where the female characters have a slight advantage\". Tab. 2 confirms: GoT Words/sentence male AVG 10,11 vs female AVG 10,61. Quote verbatim.",
+   "fromFile": "verdicts-martin-i645-659.json"
+  },
+  "657": {
+   "index": 657,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The high-born characters also speak differently than the characters of lower birth. A sort of dialect ruled by rank rather than region.",
+   "note": "Both limbs are consecutive sentences on the page, and the m’Lord / my Lord / your Grace examples follow. Live page fetched directly with a browser user agent (HTTP 200).",
+   "fromFile": "verdicts-martin-i645-659.json"
+  },
+  "658": {
+   "index": 658,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In just a few paragraphs, the insult is repeated five times for emphasis",
+   "note": "The sentence follows a block cited \"(A Game Of Thrones, Martin, pp. 118-19)\" about the insult 'bastard' slung at Jon Snow, and continues \"this kind of repetition is called lexical cohesion\". Every limb supported. Live page fetched directly.",
+   "fromFile": "verdicts-martin-i645-659.json"
+  },
+  "659": {
+   "index": 659,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A Game of Thrones has a score between 4 and 4.5, which is quite low",
+   "note": "Lexical-density paragraph, compared against the first Harry Potter book. Quote verbatim; 'quite low' is the page's own wording. Live page fetched directly.",
+   "fromFile": "verdicts-martin-i645-659.json"
+  },
+  "660": {
+   "index": 660,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Each term is used in a context that provides a reader with the ability to decipher the older meaning",
+   "note": "Raw page fetched live (HTTP 200). Quote 'not only archaic diction, but synonymy and antonymy, semantic shifts, and varying registers' is verbatim in the opening paragraph; the deciphering limb is carried verbatim by the sentence closing the 'elsewise'/'without' paragraph: 'Each term is used in a context that provides a reader with the ability to decipher the older meaning, thus enriching the reading experience without disruption.' Every limb supported.",
+   "fromFile": "verdicts-martin-i660-674.json"
+  },
+  "661": {
+   "index": 661,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Dothraki is now up to 3,163 words",
+   "note": "Raw page fetched live (HTTP 200). Verbatim near the end of the post: 'Also, for the curious, Dothraki is now up to 3,163 words: More words than Mr. Padre Tony Gwynn has hits...'. Byline 'Published September 21, 2011 By David J. Peterson' supports the date and the authorship limb.",
+   "fromFile": "verdicts-martin-i660-674.json"
+  },
+  "662": {
+   "index": 662,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The spellings in the books are canon.",
+   "note": "Raw page fetched live (HTTP 200). Verbatim as principle 1 of the numbered list, introduced by 'In analyzing the words in the books, I held to the following principles'. The accommodation limb is further supported by 'This doesn't mean, though, that the spellings in the books ought to change... jh is just the book's way of spelling Dothraki zh'.",
+   "fromFile": "verdicts-martin-i660-674.json"
+  },
+  "663": {
+   "index": 663,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "they only appear in two places: In the names Pono and Bharbo",
+   "note": "Raw page fetched live (HTTP 200). Full sentence pair: 'The letters p and b occur almost nowhere in Dothraki. In fact they only appear in two places: In the names Pono and Bharbo.' The post's frame is the book-attested corpus ('the Dothraki that existed in the books before I took a crack at it'), and the follow-on 'have them survive only in names' confirms the reading. Note the page's own hedge 'almost nowhere' sits beside the absolute 'only appear in two places'; the claim tracks the latter.",
+   "fromFile": "verdicts-martin-i660-674.json"
+  },
+  "664": {
+   "index": 664,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the Dothraki that existed in the books before I took a crack at it",
+   "note": "Raw page fetched live (HTTP 200). Verbatim in the second paragraph: 'let's take a look at the Dothraki that existed in the books before I took a crack at it.' Every limb supported.",
+   "fromFile": "verdicts-martin-i660-674.json"
+  },
+  "665": {
+   "index": 665,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "an extensive vocabulary of more than 1,800 words",
+   "note": "Live host dothraki.conlang.org does not resolve (curl exit 6, DNS timeout on the subdomain). Recovered via Wayback raw capture https://web.archive.org/web/20200817120827id_/http://dothraki.conlang.org/official-hbo-press-release/ (HTTP 200, 6858 bytes). Quote verbatim: 'It has its own unique sound, an extensive vocabulary of more than 1,800 words and a complex grammatical structure.' Page is dated 'April 12th, 2010' and headed 'EXPERT CREATES LANGUAGE FOR NEW HBO SERIES GAME OF THRONES', supporting the announcement-time limb.",
+   "fromFile": "verdicts-martin-i660-674.json"
+  },
+  "666": {
+   "index": 666,
+   "verdict": "PARTIAL",
+   "trueWording": "Peterson drew inspiration from George R.R. Martin's description of the language, as well as from such languages as Russian, Turkish, Estonian, Inuktitut and Swahili",
+   "note": "Wayback raw capture (see 665). The quoted clause is verbatim. But the release draws no contrast with a Martin-supplied vocabulary: the alternative it names is other natural languages, and Peterson's own quoted words point the other way, at material Martin did supply in print - 'I wanted to remain as faithful as possible to the extant material in George R.R. Martin's series... Though there isn't a lot of data, there is evidence of a dominant word order'. The 'rather than' framing is the claimant's inference, not the page's.",
+   "unsupportedLimb": "rather than on a vocabulary Martin had supplied",
+   "fromFile": "verdicts-martin-i660-674.json"
+  },
+  "667": {
+   "index": 667,
+   "verdict": "PARTIAL",
+   "trueWording": "He delivered over 1700 words to HBO before the initial shooting.",
+   "note": "Raw page fetched live (HTTP 200). The quoted sentence is verbatim in section 'Development'. Two limbs fail. (1) 'relaying the HBO press release': that sentence carries no footnote of its own; ref [5] ('Official HBO Press Release', Dothraki.conlang.org, April 12, 2010) is attached to the NEXT sentence, and the press release itself (read raw via Wayback) contains no 1700 figure at all. (2) 'a figure the press release itself puts at more than 1,800': the release's 'more than 1,800 words' describes the language's total vocabulary, not words delivered to HBO before shooting - a different quantity, so the two are not the same figure restated. Wikipedia's own '3163 words' as of September 2011 elsewhere on the page shows the vocabulary count is tracked separately.",
+   "unsupportedLimb": "that the 1700 figure relays the press release, which puts the same figure at more than 1,800",
+   "fromFile": "verdicts-martin-i660-674.json"
+  },
+  "668": {
+   "index": 668,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the main POV has an undistinguished number of chapters in the first half of the book, and then comes to dominate the number of chapters in the latter half",
+   "note": "Raw page fetched live (HTTP 200). Quote verbatim; the preceding clause supplies the first-half limb and 'There is a main plot and a main character to each book' supplies the per-book limb. The page hedges with 'usually' and closes 'this is really tentative', which the claim's 'argues' fairly carries.",
+   "fromFile": "verdicts-martin-i660-674.json"
+  },
+  "669": {
+   "index": 669,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "archaisms and particularly pseudo-archaisms in Game of Thrones may not be particularly frequent token-wise, but are highly salient",
+   "note": "link.springer.com served a Cloudflare-style 'Client Challenge' interstitial to a browser user agent (3038 bytes, no content). Recovered via Wayback raw capture https://web.archive.org/web/20250801025545id_/https://link.springer.com/chapter/10.1007/978-3-658-36145-7_6 (HTTP 200, 102593 bytes), which carries the COMPLETE open-access chapter text - abstract, sections 1-6, Notes and References - so all six Kirner-Ludwig claims were checked against raw body text, not a landing-page abstract. Quote verbatim in the Abstract; the Conclusion restates it ('language seems to play a comparably marginal role frequency-wise').",
+   "fromFile": "verdicts-martin-i660-674.json"
+  },
+  "670": {
+   "index": 670,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "GoT does not overdo the use of pseudo-archaisms or, e.g., archaic pronouns at all.",
+   "note": "Wayback raw capture (see 669). Verbatim in section '6 Conclusion'; the page's own wording covers both limbs of the claim (pseudo-archaisms and archaic pronouns) in one sentence.",
+   "fromFile": "verdicts-martin-i660-674.json"
+  },
+  "671": {
+   "index": 671,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the full GoT transcripts covering 8 seasons and 73 episodes",
+   "note": "Wayback raw capture (see 669). Quote verbatim in section '1 Introduction: Object of this Study'. Section '4 Data and Method' corroborates: 'a corpus including all 73 episodes in all released 8 seasons of GoT (2011-2019)... compiled as a corpus of all in all 506,540 words'. Sketch Engine limb supported twice - Abstract ('By making use of the corpus tool Sketch Engine') and body ('Due to Sketch Engine's automated parts of speech (POS) tagging function').",
+   "fromFile": "verdicts-martin-i660-674.json"
+  },
+  "672": {
+   "index": 672,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Function words make up for ca. 43% of the corpus",
+   "note": "Wayback raw capture (see 669). Verbatim in section 5: 'Function words make up for ca. 43% of the corpus, which left me with 57% of the word stock to work with.' Corpus is the GoT transcripts (506,540 words), supporting that limb.",
+   "fromFile": "verdicts-martin-i660-674.json"
+  },
+  "673": {
+   "index": 673,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Out of that, only 7.6% responded to the lexico-semantic fields or frames under investigation",
+   "note": "Wayback raw capture (see 669). Verbatim in section 5, immediately after the 43%/57% sentence, so 'Out of that' means out of the 57% non-function-word stock - exactly the claim's 'lexical word stock', not the whole corpus. The cited Table 3 is captioned 'Stereotypically medieval and fantasy-medieval frames as represented in GoT', supporting the semantic-fields limb; the next sentence reads 'those small groupings making up less than 8% of the vocabulary'.",
+   "fromFile": "verdicts-martin-i660-674.json"
+  },
+  "674": {
+   "index": 674,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "42,426 tokens (8.38%) cover names of persons, places and languages",
+   "note": "Wayback raw capture (see 669). Verbatim as note 6 in the 'Notes' list (the footnote marker sits on the 7.6% sentence in section 5, matching the claim's 'endnote 6'); it continues 'and were thus not included in any further deliberations'. Arithmetic corroborates the 'of her corpus' limb: 42,426 / 506,540 = 8.38%.",
+   "fromFile": "verdicts-martin-i660-674.json"
+  },
+  "675": {
+   "index": 675,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "That is even true for George R. R. Martin himself.",
+   "note": "Raw route: live link.springer.com served a JS 'Client Challenge' block; recovered via Wayback raw capture 20250801025545id_ of the exact URL (open-access chapter, full body present). Page: screenplay writers 'will usually lack any expert knowledge about the historical stages of English. That is even true for George R. R. Martin himself.' Quote exact; every limb supported. Metadata nit only (not a claim limb): the passage sits in section 3.2 'Archaisms and Pseudo-Archaisms', not section 4.",
+   "fromFile": "verdicts-martin-i675-689.json"
+  },
+  "676": {
+   "index": 676,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Ice and Fire is presented from the personal perspectives of 24 point of view (POV) characters.",
+   "note": "Live pnas.org returned HTTP 403; verified on TWO raw routes that both carry the full text: Wayback raw capture 20250710185328id_ of the exact URL, and PMC7682562 efetch XML. Quote exact in both. It is the first sentence of Results, as the claim's page field states.",
+   "fromFile": "verdicts-martin-i675-689.json"
+  },
+  "677": {
+   "index": 677,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Of these, we consider 14 to be major: eight or more chapters.",
+   "note": "Same two raw routes (Wayback id_ capture + PMC XML); quote exact in both. The page's full criterion reads 'eight or more chapters, mostly titled with their names, are relayed from their perspectives' - the claim quotes the chapter threshold only, but that threshold is stated as the criterion and is what excludes Arys Oakheart in the paper's own example, so no limb is unsupported.",
+   "fromFile": "verdicts-martin-i675-689.json"
+  },
+  "678": {
+   "index": 678,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "From the five books containing 343 chapters, 2,007 characters were identified.",
+   "note": "Same two raw routes; quote exact in both, in Results / 'Evolution of the Social Network Structure' exactly as the page field states. Both limbs (343 chapters across five books; 2,007 characters identified) explicit.",
+   "fromFile": "verdicts-martin-i675-689.json"
+  },
+  "679": {
+   "index": 679,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "of which 1,806 interact with another at least once",
+   "note": "Same two raw routes; quote exact in both, same sentence as index 678 in 'Evolution of the Social Network Structure'.",
+   "fromFile": "verdicts-martin-i675-689.json"
+  },
+  "680": {
+   "index": 680,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it is geometric rather than power law",
+   "note": "Same two raw routes; quote exact in the Abstract, which also carries the second limb verbatim: 'This provides measurable support for the widely held view that significant deaths in A Song of Ice and Fire are unpredictable chapter by chapter,' and 'intervals between significant deaths in chapters'.",
+   "fromFile": "verdicts-martin-i675-689.json"
+  },
+  "681": {
+   "index": 681,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the order and pacing of deaths differ greatly between discourse time and story time",
+   "note": "Same two raw routes; quote exact, in the discussion paragraph immediately preceding Materials and Methods. Page defines discourse time as 'the order and pacing of events as experienced by the reader'.",
+   "fromFile": "verdicts-martin-i675-689.json"
+  },
+  "682": {
+   "index": 682,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "So far, ignoring prologue and epilogue chapters, 24 characters have had POV chapters.",
+   "note": "arXiv abstract page carries only the abstract, so I fetched the paper PDF (arxiv.org/pdf/1409.5830v1, 8 pp) and extracted its text. Section 1.1 reads: 'Five books have so far been published... So far, ignoring prologue and epilogue chapters in some of the books, 24 characters have had chapters told from their point of view.' Quote exact; every limb (five novels, prologue/epilogue set aside, 24) supported, in section 1.1 as stated.",
+   "fromFile": "verdicts-martin-i675-689.json"
+  },
+  "683": {
+   "index": 683,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the real authors of the text actually imitated the style of the medieval chronicle",
+   "note": "Fetched the cyberleninka PDF directly (HTTP 200, 30 pp) and extracted text. Full sentence: '...the real authors of the text actually imitated the style of the medieval chronicle, synthesized it with modern simplistic historical representations.' Quote exact; the synthesis limb is explicit ('simplified' = the page's 'simplistic').",
+   "fromFile": "verdicts-martin-i675-689.json"
+  },
+  "684": {
+   "index": 684,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the imagined author... allowed himself reasoning about the age of the world; his estimates ranged from 40 to 500 thousand years",
+   "note": "Same PDF. Quote exact. 'Rather than a fixed figure' is carried by the page's own 'estimates ranged from...to'; the chronicler is 'the imagined author of the historical chronicle'.",
+   "fromFile": "verdicts-martin-i675-689.json"
+  },
+  "685": {
+   "index": 685,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "(\"Seven Kingdoms\" was the style used, though Dorne had not submitted. Nor would it, for more than a century to come) (Martin, Antonsson, & Garcia, 2014, p. 79)",
+   "note": "Same PDF. Quote exact, and the parenthesis, the p. 79 citation, and the Dorne limb are all on the page: the block quote proclaims Aegon 'Lord of the Seven Kingdoms' and then qualifies that style in the parenthesis. 'Correcting his own titulature' is the analyst's characterization of what the page shows as a parenthetical self-qualification of the style just used - substantively supported, not a separate assertion.",
+   "fromFile": "verdicts-martin-i675-689.json"
+  },
+  "686": {
+   "index": 686,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the first of a fantasy series entitled, insipidly enough, A Song of Ice and Fire",
+   "note": "Live kirkusreviews.com fetched with a browser UA (HTTP 200). Quote exact, in the review's opening sentence. Review carries no byline (unsigned) and the page states 'Kirkus Reviews Issue: July 1, 1996'.",
+   "fromFile": "verdicts-martin-i675-689.json"
+  },
+  "687": {
+   "index": 687,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A vast, rich saga... an intricate plot flawlessly articulated against a backdrop of real depth and texture.",
+   "note": "Same live Kirkus page. Quote exact, in the closing verdict; 'and texture' follows immediately, so the claim's 'depth and texture' limb is on the page.",
+   "fromFile": "verdicts-martin-i675-689.json"
+  },
+  "688": {
+   "index": 688,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Still, after 672 dense pages, were you expecting a satisfying resolution?",
+   "note": "Same live Kirkus page. Quote exact, and the page's metadata independently reads 'Page Count: 672'.",
+   "fromFile": "verdicts-martin-i675-689.json"
+  },
+  "689": {
+   "index": 689,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the book stands out from similar work by Eddings, Brooks and others by virtue of its superbly developed characters, accomplished prose and sheer bloody-mindedness",
+   "note": "Live publishersweekly.com fetched with a browser UA (HTTP 200). Quote exact; accomplished prose is the second of exactly three named qualities, and the 'stand out from similar work' limb is the same sentence. Page states 'Reviewed on: 07/29/1996'.",
+   "fromFile": "verdicts-martin-i675-689.json"
+  },
+  "720": {
+   "index": 720,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "too much repetition, unexceptional prose",
+   "note": "Atlantic (live, 200): \"Weaknesses that have plagued Martin's previous books are also present: too much repetition, unexceptional prose, and characters who use the same idioms...\" Quote verbatim; every limb supported.",
+   "fromFile": "verdicts-martin-i720-734.json"
+  },
+  "721": {
+   "index": 721,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "cries out for better editing, it remains entirely engrossing",
+   "note": "Atlantic (live): \"But while A Dance with Dragons cries out for better editing, it remains entirely engrossing.\" Quote verbatim; both limbs on page.",
+   "fromFile": "verdicts-martin-i720-734.json"
+  },
+  "722": {
+   "index": 722,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I've always agreed with William Faulkner",
+   "note": "Atlantic (live), Martin's first answer: \"I've always agreed with William Faulkner-- he said that the human heart in conflict with itself is the only thing worth writing about.\" Verbatim.",
+   "fromFile": "verdicts-martin-i720-734.json"
+  },
+  "723": {
+   "index": 723,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "and the rest is just set dressing",
+   "note": "Atlantic (live): \"I've always taken that as my guiding principle, and the rest is just set dressing. I mean, you can have a dragon, you can have a science fiction story set on a distant planet with aliens and starships...\" Dragons and settings limb supported by the following sentence.",
+   "fromFile": "verdicts-martin-i720-734.json"
+  },
+  "724": {
+   "index": 724,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "bliss to be found in the word-drunk naming of places",
+   "note": "NYT via Wayback raw capture 20251024170837id_ (live URL 403, DataDome): \"Still, there's bliss to be found in the word-drunk naming of places -- the Frostfangs, Sea Dragon Point, Rook's Rest -- and people\". All three place names present.",
+   "fromFile": "verdicts-martin-i720-734.json"
+  },
+  "725": {
+   "index": 725,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Wick Whittlestick and Pinchface Jon Myre",
+   "note": "NYT (Wayback raw): the same 'bliss' sentence continues \"...and people: Homeless Harry Strickland and Bloodbeard, Cotter Pyke and Three-Finger Hobb, Wick Whittlestick and Pinchface Jon Myre.\" Person-names framed as bliss/pleasure.",
+   "fromFile": "verdicts-martin-i720-734.json"
+  },
+  "726": {
+   "index": 726,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a blunt and bawdy earthiness that befits the son of a Bayonne, N.J., longshoreman",
+   "note": "NYT (Wayback raw), para 2: \"Mr. Martin writes fantasy for grown-ups, with a blunt and bawdy earthiness that befits the son of a Bayonne, N.J., longshoreman.\" Verbatim.",
+   "fromFile": "verdicts-martin-i720-734.json"
+  },
+  "727": {
+   "index": 727,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a sprawling and panoramic 19th-century novel turned out in fantasy motley",
+   "note": "NYT (Wayback raw), para 2: \"The series... is like a sprawling and panoramic 19th-century novel turned out in fantasy motley, more Balzac and Dickens than Tolkien.\" Both limbs verbatim.",
+   "fromFile": "verdicts-martin-i720-734.json"
+  },
+  "728": {
+   "index": 728,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In a work this size... a summary up front would be useful",
+   "note": "NYT (Wayback raw): \"In a work this size it's the reader who must embark on a harrowing quest, and a summary up front would be useful.\" 'to the reader' is the same sentence's subject.",
+   "fromFile": "verdicts-martin-i720-734.json"
+  },
+  "729": {
+   "index": 729,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a mammoth novel that so far totals 1,742,848 words",
+   "note": "NYT (Wayback raw): \"it's just a 1,016-page installment in a mammoth novel that so far totals 1,742,848 words.\" The 'mammoth novel' is the cycle; figure exact.",
+   "fromFile": "verdicts-martin-i720-734.json"
+  },
+  "730": {
+   "index": 730,
+   "verdict": "PARTIAL",
+   "trueWording": "Jennings's own phrase, not attributed to Martin",
+   "note": "NYT (Wayback raw): \"He's often more intrigued by the friction among conflicting religions, by the Kremlinology of Westeros, in the 'plots, ploys, whispers, lies, secrets within secrets' that make of up 'the game of thrones.'\" Quote verbatim and the 'more intrigued... than fantasy's usual furniture' contrast is carried by the preceding sentence ('The elements of fantasy exist here but are deftly muted'), but the page nowhere has Martin calling it that -- the coinage is the reviewer's.",
+   "unsupportedLimb": "the claim's 'what he calls' -- attributing the phrase 'the Kremlinology of Westeros' to Martin; on the page it is Jennings's own wording, with no attribution to Martin",
+   "fromFile": "verdicts-martin-i720-734.json"
+  },
+  "731": {
+   "index": 731,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The elements of fantasy exist here but are deftly muted",
+   "note": "NYT (Wayback raw): \"The elements of fantasy exist here but are deftly muted, as Mr. Martin defies genre conventions.\" Verbatim.",
+   "fromFile": "verdicts-martin-i720-734.json"
+  },
+  "732": {
+   "index": 732,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "his medieval realms ring with echoes of our own time",
+   "note": "NYT (Wayback raw): \"All the while his medieval realms ring with echoes of our own time, of our modern terrorscapes that rage with liars, spies and true believers.\" Verbatim.",
+   "fromFile": "verdicts-martin-i720-734.json"
+  },
+  "733": {
+   "index": 733,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Mr. Martin is a literary dervish, enthralled by complicated characters and vivid language",
+   "note": "NYT (Wayback raw): full sentence continues \"and bursting with the wild vision of the very best tale tellers.\" Verbatim.",
+   "fromFile": "verdicts-martin-i720-734.json"
+  },
+  "734": {
+   "index": 734,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "bizarre and beautifully imaginative set-pieces on haunted rivers and in the supernatural North",
+   "note": "Locus (live, 200), byline 'by Jeff VanderMeer', headed 'A Dozen of the Best from 2011', dated February 5, 2012: \"a huge, dense novel that devotes several scenes to bizarre and beautifully imaginative set-pieces on haunted rivers and in the supernatural North.\" Author, title, date and quote all confirmed.",
+   "fromFile": "verdicts-martin-i720-734.json"
   }
  }
 }

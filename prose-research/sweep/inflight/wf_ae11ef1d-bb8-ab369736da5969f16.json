@@ -3,13 +3,14 @@
  "name": "kay",
  "angle": null,
  "tag": "i210-224",
- "lines": 100,
+ "lines": 107,
  "firstTs": "2026-09-06T17:38:53.990Z",
- "lastTs": "2026-09-06T17:43:31.101Z",
+ "lastTs": "2026-09-06T17:44:48.557Z",
  "tools": {
   "Read": 1,
   "ToolSearch": 1,
-  "Bash": 27
+  "Bash": 28,
+  "StructuredOutput": 1
  },
  "urlsFetched": [
   "http://brightweavings.com/justinian-visited-and-revisited/|justinian",
@@ -31,9 +32,9 @@
  "run": "wf_ae11ef1d-bb8",
  "agent": "ab369736da5969f16",
  "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_ae11ef1d-bb8/agent-ab369736da5969f16.jsonl",
- "journal": "in-flight",
+ "journal": "result",
  "checkpointFile": {
   "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-kay-i210-224.json",
-  "exists": false
+  "exists": true
  }
 }

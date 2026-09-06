@@ -11121,6 +11121,217 @@
    "note": "Same extracted PDF text. Passage discusses the prologue — Saevar on the riverbank, 'the first focalizer in the novel', and the next sentence begins 'After the prologue, the reader discovers…' — so the 'prologue' limb is supported. The sentence sits before the running header 'Words to Works 166', i.e. on p. 165 as cited.",
    "fromFile": "verdicts-kay-i180-194.json"
   },
+  "195": {
+   "index": 195,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Again a matter-of-fact style is used to describe a dramatic and violent event",
+   "note": "Verbatim in the Toyryla thesis (brightweavings, bylined 'a bachelor's thesis by Roosa Toyryla, written at the University of Helsinki, Finland. 2017'), analysing the Senzio castle massacre in Tigana (Kay 722-23). The page phrases it passively ('a matter-of-fact style is used') and credits the narrator rather than naming Kay, but the text under analysis is Kay's Tigana.",
+   "fromFile": "verdicts-kay-i195-209.json"
+  },
+  "196": {
+   "index": 196,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the narrator is merely reporting what happened, without any commentary",
+   "note": "Verbatim; the full sentence continues 'and in the summary fashion of ambient focalization'. Same paragraph as index 195, so 'that passage's narrator' is correct.",
+   "fromFile": "verdicts-kay-i195-209.json"
+  },
+  "197": {
+   "index": 197,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "narrating only what people hear about the incident afterwards",
+   "note": "Page: 'This is signalled by the phrase \"according to most reports later\"... The phrase also suggests that the narrator is restricting their omniscience and narrating only what people hear about the incident afterwards, not what is actually happening.' Only divergence: the thesis writes 'their omniscience', the claim writes 'his'.",
+   "fromFile": "verdicts-kay-i195-209.json"
+  },
+  "198": {
+   "index": 198,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "This window shift distances the narration from Ettocio and enables the matter-of-fact description of his execution",
+   "note": "Verbatim, in the variable-internal-focalization section; the preceding sentence supplies the shift limb: 'The latter part of the above excerpt shifts from Ettocio's perspective to narratorial focalization.'",
+   "fromFile": "verdicts-kay-i195-209.json"
+  },
+  "199": {
+   "index": 199,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the narrator describes things like an inhabitant of that world would",
+   "note": "Verbatim in the communal-viewpoint section; the 'rather than as an outsider' limb is carried by the immediately preceding clause 'does not give the impression of being outside the story but inside it'.",
+   "fromFile": "verdicts-kay-i195-209.json"
+  },
+  "200": {
+   "index": 200,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Thus the narrator's perspective concurs with that of an average citizen of the Palm",
+   "note": "Verbatim, in the section headed 'Communal Viewpoints: As Everyone Knows'; the conclusion is drawn from the 'as everyone knows' phrase (Kay 65) - 'This comes most strongly across in the phrase \"as everyone knows\"'. The thesis argues it from that one excerpt inside a section about such passages generally.",
+   "fromFile": "verdicts-kay-i195-209.json"
+  },
+  "201": {
+   "index": 201,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Through his characterization of Pertennius, Kay illustrates the fact that the power of the historian is more lasting than that of the rulers of the world",
+   "note": "Verbatim in the Pertennius section of 'The Creative Construction of History in Guy Gavriel Kay's The Sarantine Mosaic', bylined 'by Jillian Hatch, 2005'. The page does not itself state the University of Calgary affiliation, but the claim sentence does not assert it.",
+   "fromFile": "verdicts-kay-i195-209.json"
+  },
+  "202": {
+   "index": 202,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Kay's narrator claims that, \"writers of history often seek the dramatic over the truth\" (Sailing 1)",
+   "note": "Verbatim in Hatch's final paragraph: 'At the end of the very first paragraph on the very first page of the first book in the Sarantine Mosaic...'; the page identifies Sailing to Sarantium as that first book.",
+   "fromFile": "verdicts-kay-i195-209.json"
+  },
+  "203": {
+   "index": 203,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In addition to the non-focalized narrative, there are twenty-one separate focalizants in Tigana, and more than 150 separate focalizations",
+   "note": "Verbatim in the numbered note (1) that closes the Tigana chapter of Anya Kleander's Stirling honours dissertation (page bylined 'a dissertation by Anya Kleander... at Stirling University, submitted in Spring 2008'). The note continues with Devin 41 and Dianora 27 focalizations.",
+   "fromFile": "verdicts-kay-i195-209.json"
+  },
+  "204": {
+   "index": 204,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Kay believes 'that the quiet, steady accumulation of detail and complexity reach out to readers in an almost subliminal way'",
+   "note": "Verbatim in the Sarantine Mosaic chapter, cited '(Kay in SFSite Interview 2000, url)'; the sentence continues 'and induces trust in the author and the book'.",
+   "fromFile": "verdicts-kay-i195-209.json"
+  },
+  "205": {
+   "index": 205,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I've talked often about looking for the unwritten histories, the people at the margins of history",
+   "note": "Verbatim in the interview excerpt published on the Locus site (12 May 2025, 'Guy Gavriel Kay: Margins of History'); the page carries only an excerpt, the full interview being in the May 2025 issue, but this passage is present on the page.",
+   "fromFile": "verdicts-kay-i195-209.json"
+  },
+  "206": {
+   "index": 206,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The unwritten lives of women, and of the poor. Though I do also love the chronicles of the dukes and the popes",
+   "note": "Verbatim, immediately after the index-205 sentence; Kay adds 'They are not exclusive ways of looking', which supports the claim's 'alongside'.",
+   "fromFile": "verdicts-kay-i195-209.json"
+  },
+  "207": {
+   "index": 207,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "While the restoration of Tigana's name appears to reproduce a recognizably Tolkienian resolution, it remains marked by loss, fragmentation, and incomplete knowledge",
+   "note": "Wiley's live page is Cloudflare-blocked (HTTP 403); verified on the publisher-deposited abstract returned raw by Crossref (api.crossref.org/works/10.1111/oli.70057) and matched word for word by OpenAlex. Article: 'The limits of the happy ending: Eucatastrophe and cultural memory in Guy Gavriel Kay's Tigana', Sylwia Borowska-Szerszun, Orbis Litterarum, 2026-06-04.",
+   "fromFile": "verdicts-kay-i195-209.json"
+  },
+  "208": {
+   "index": 208,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "novels that reimagine world history in alternate versions of ancient and medieval Europe and Asia, estranging the familiar, rendering it unheimlich: both home and not home at once",
+   "note": "link.springer.com serves only a JavaScript 'Client Challenge' to curl; verified on the raw Wayback capture https://web.archive.org/web/20191114214457id_/https://link.springer.com/chapter/10.1007%2F978-3-030-15685-5_7, whose chapter abstract carries the quote. Chapter 'When Are We Ever at Home? Exile and Nostalgia in the Work of Guy Gavriel Kay', Susan Johnston (Crossref gives no middle initial), Canadian Science Fiction, Fantasy, and Horror, 2019, pp. 119-133.",
+   "fromFile": "verdicts-kay-i195-209.json"
+  },
+  "209": {
+   "index": 209,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the Sarantine Mosaic, which is unfaithful to history and deliberately inverts and reconstructs historical matter, evokes the Late Antique and Eastern Mediaeval world much more exactly than the novels of de Camp and Silverberg, which endeavour to respect history's givens",
+   "note": "Verbatim in the concluding section of Morgon Mills's English translation of Pierre-Louis Malosse, 'Justinian Visited and Revisited' (Anabases 5, 2007, pp. 229-235), hosted at brightweavings. The comparanda are de Camp's Lest Darkness Fall and Silverberg's time-travel novel, both introduced earlier as time-travel narratives, so 'time-travel novels' holds. Note the source attaches 'deliberately' to 'inverts and reconstructs', not to 'unfaithful'.",
+   "fromFile": "verdicts-kay-i195-209.json"
+  },
+  "210": {
+   "index": 210,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A senator, Plautus Bonosus, remembers the scene as it unfolded before him",
+   "note": "Raw page (brightweavings, 'Justinian Visited and Revisited', by Pierre-Louis Malosse, Universite Paul Valery, first published Anabases 5 (2007) pp.229-235) fetched via curl. Concluding section carries the quotation word for word, immediately after Malosse says it is 'worth citing a passage to provide a sense of Guy Gavriel Kay's style'. Every limb holds: the cited passage is Theodora/Alixana's speech, and it is framed as senator Plautus Bonosus's memory of the scene 'as it unfolded before him'.",
+   "fromFile": "verdicts-kay-i210-224.json"
+  },
+  "211": {
+   "index": 211,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "citing a passage to provide a sense of Guy Gavriel Kay's style",
+   "note": "Same raw page. Full sentence: 'By way of conclusion, it is certainly worth citing a passage to provide a sense of Guy Gavriel Kay's style, especially as compared with the narrative supplied by Procopius17.' Both limbs supported - one passage offered as the style sample, and explicitly set against Procopius's narrative.",
+   "fromFile": "verdicts-kay-i210-224.json"
+  },
+  "212": {
+   "index": 212,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the lapidary fashion in which narratival episodes were laid next to each other",
+   "note": "Raw page (brightweavings /jadslight/, 'In Jad's Light', by Andrew Patton, introduced by Kay as art critic Andy Patton and written inside the in-world 'Sarantine Letters' conceit). Quotation verbatim; the sentence continues 'sometimes making neighbours of vastly different places, ranks of persons, or perspectives', supporting the claim's second limb (claim says 'ranks', page says 'ranks of persons').",
+   "fromFile": "verdicts-kay-i210-224.json"
+  },
+  "213": {
+   "index": 213,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "attend carefully to the book's construction at both large and small scales",
+   "note": "Same raw page. Verbatim: 'If you will attend carefully to the book's construction at both large and small scales, in both the writing of sentences and the composing of separate episodes, you will see... that Kay is attempting to convince us that writing, like mosaic, is an art.' Both scales - sentence and episode - are supported.",
+   "fromFile": "verdicts-kay-i210-224.json"
+  },
+  "214": {
+   "index": 214,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "attaches an even greater sense of distance and further mythic gravitas",
+   "note": "Live host is behind an AWS WAF challenge (HTTP 202, 0 bytes) for both the landing page and the PDF; recovered the thesis PDF via Wayback raw capture (web.archive.org/web/20240915231703id_/.../viewcontent.cgi?article=4917&context=theses, 1.96 MB) and extracted text with pdfminer. Verbatim on the page numbered 322: 'The adoption of a more formal register for this particular episode appeals to the cultural legacy of older tales. It attaches an even greater sense of distance and further mythic gravitas to this section of Kay's tale.' The episode is Diarmuid's seduction of Sharra, cited throughout to ST = The Summer Tree; thesis is Narelle Campbell, University of Wollongong, 2013.",
+   "fromFile": "verdicts-kay-i210-224.json"
+  },
+  "215": {
+   "index": 215,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "ambience and literary resonance obscure the ethnic and gender imbalances",
+   "note": "No quote supplied, so graded on substance; the page's own wording is nearly identical. From the same Wayback-recovered PDF, in the paragraph that begins 'the plausibility of newer stories': 'The ambience and the literary resonance in The Fionavar Tapestry, aided by Kay's knowledge and use of mythic and medieval tropes and traditional narrative patterns, obscure the ethnic and gender imbalances present in the episode of Diarmuid's seduction of Sharra.' The claim's 'mythic' modifier is carried by the page's 'mythic and medieval tropes' clause rather than attached to 'ambience' directly.",
+   "fromFile": "verdicts-kay-i210-224.json"
+  },
+  "216": {
+   "index": 216,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "When the narrator's voice reveals itself, it adopts the authority of the club-story teller",
+   "note": "Raw page (brightweavings, Matthew Rettino's 2012 McGill honours thesis) fetched via curl. Quotation verbatim, and the surrounding paragraph is squarely about Tigana (Duke Sandre, Alberico, page cite '(12)'). Page adds 'becoming unquestionable'.",
+   "fromFile": "verdicts-kay-i210-224.json"
+  },
+  "217": {
+   "index": 217,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The omniscient narrator, by revealing that many events in history are not known, subverts",
+   "note": "Same raw page. Verbatim: 'The omniscient narrator, by revealing that many events in history are not known, subverts the role of unquestionable historical narration and exposes the ideology underlying the portal-quest fantasy...' The paragraph is the Under Heaven discussion (Wen Zhou, Teng Pass, Kitai, Spring Rain's lost letter), so the Under Heaven limb holds.",
+   "fromFile": "verdicts-kay-i210-224.json"
+  },
+  "218": {
+   "index": 218,
+   "verdict": "PARTIAL",
+   "trueWording": "I might polish the prose itself, perhaps adding some gloss notes on character",
+   "note": "Raw page (d.lib.rochester.edu Camelot Project, Raymond H. Thompson interview, Mythcon Vancouver, 30 July 1989) fetched via curl; quotation is verbatim. Date, work (the Fionavar trilogy - 'before the characters from our world cross to Fionavar'), and 'opening chapters' ('the first few chapters') all check out. The one limb the page does not carry is the flat 'would': Kay's definite 'would' attaches to paying attention to the first few chapters, while polishing the prose is explicitly hedged as 'I might'. Cure by rewording to 'said he might polish the prose'.",
+   "unsupportedLimb": "the definite 'would polish' - the page says only 'I might polish the prose itself'",
+   "fromFile": "verdicts-kay-i210-224.json"
+  },
+  "219": {
+   "index": 219,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "creating a 'secondary world' and investing it with the consistency of reality",
+   "note": "Raw page (brightweavings /worldbuilding/, 'The World-Building of Guy Gavriel Kay' by Holly E. Ordway, dated May 13, 1998) fetched via curl. Verbatim in the second paragraph: 'What I have set out to do in this paper is to explore some of the ways that fantasist Guy Gavriel Kay has gone about creating a “secondary world” and investing it with the consistency of reality.' Note: the page carries author and date but makes no mention of UMass Amherst or of an independent study - that detail sits in the source field, not in the claim sentence, so it does not affect the grade.",
+   "fromFile": "verdicts-kay-i210-224.json"
+  },
+  "220": {
+   "index": 220,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Kay draws on literature, mythology, and history as well as his own imagination",
+   "note": "Same raw page, same paragraph: 'Kay draws on literature, mythology, and history as well as his own imagination to create the worlds of his fantasy novels.' Quotation verbatim; every limb supported.",
+   "fromFile": "verdicts-kay-i210-224.json"
+  },
+  "221": {
+   "index": 221,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the major events have their genesis in the emphatically freely willed actions performed by the protagonists",
+   "note": "Raw page (brightweavings /webbtigana/, by Janeen Webb, (c) 1991, first published in The Ring Bearer: Journal of the Mythopoeic Literature Society of Australia, Spring 1991, Vol 8 No 2) fetched via curl. Quotation verbatim; the page continues 'performed by the protagonists on the relevant Ember Days', so the protagonists limb is supported and the claim merely omits the Ember Days qualifier.",
+   "fromFile": "verdicts-kay-i210-224.json"
+  },
+  "222": {
+   "index": 222,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "central metaphors form an integral artistic system representing formation, loss and restoration",
+   "note": "No quote supplied, so graded on substance. PDF fetched live from elar.urfu.ru (374 KB, 8 pp.) and text extracted with pdfminer; the English abstract on the final page reads: 'It is proved that the central metaphors of the novel (“the lost name”, “distorted memory”, “music”) form an integral artistic system representing the processes of formation, loss and restoration of national identity. The research material is Guy Gavriel Kay's novel “Tigana”.' Byline confirmed: 'M. R. Doshlova - KubSU, Krasnodar (Russia)'. Claim's 'single artistic system' = 'integral artistic system'; 'recovery' = 'restoration'.",
+   "fromFile": "verdicts-kay-i210-224.json"
+  },
+  "223": {
+   "index": 223,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the flavor of Italy is there—in the word structure, the place names, the characters",
+   "note": "Raw page (reactormag.com, 'Altering the Familiar: Tigana by Guy Gavriel Kay', By Joshua Palmatier, in the 'That Was Awesome! Writers on Writing' series) fetched via curl. Quotation verbatim, and the sentence names the characters as well: '...the place names, the characters; in the gestures, the traditions, the everyday force of life moving people forward.'",
+   "fromFile": "verdicts-kay-i210-224.json"
+  },
+  "224": {
+   "index": 224,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "not in the use of language, but in the subtle way he skews a familiar setting",
+   "note": "Same raw page, final body paragraph, verbatim: 'Most writers, when speaking of Guy Gavriel Kay's work, talk of his deft and lyrical skill with language... But for me, the true art of Kay's work is not in the use of language, but in the subtle way he skews what is so obviously a familiar setting into something fantastical and mysterious and completely different.' Both limbs hold: the common view is named and set aside, and the art is relocated to the alteration of a familiar setting.",
+   "fromFile": "verdicts-kay-i210-224.json"
+  },
   "225": {
    "index": 225,
    "verdict": "VERIFIED_VERBATIM",
@@ -11225,6 +11436,531 @@
    "trueWording": "blown away by his writing skill - it seems so casual yet so perfect",
    "note": "Raw HTML fetched (HTTP 200); the comment thread is present in the served page. Attribution checked: the quote sits in the comment headed 'David McMillan May 25', reading 'I'm blown away by his writing skill - it seems so casual yet so perfect - absolutely brilliant.' Matches the cited commenter and date.",
    "fromFile": "verdicts-kay-i225-239.json"
+  },
+  "240": {
+   "index": 240,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Unlike much epic fantasy, he does not bury the reader",
+   "note": "Page, section 'Lyrical clarity rather than baroque fantasy': 'Unlike much epic fantasy, he does not bury the reader in invented terminology or ornate description.' Quote and both limbs (the contrast with epic fantasy, the no-burying claim) present verbatim. Raw HTML fetched via curl with browser UA, stripped to text.",
+   "fromFile": "verdicts-kay-i240-254.json"
+  },
+  "241": {
+   "index": 241,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The beauty of the prose comes from rhythm and precision",
+   "note": "Same section, verbatim: 'The beauty of the prose comes from rhythm and precision, not spectacle.' Whole claim supported.",
+   "fromFile": "verdicts-kay-i240-254.json"
+  },
+  "242": {
+   "index": 242,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Kay's sentences are musical, but they are rarely flashy",
+   "note": "Same section, opening sentence verbatim; 'musical' and 'rarely flashy' both on the page.",
+   "fromFile": "verdicts-kay-i240-254.json"
+  },
+  "243": {
+   "index": 243,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "People speak with restraint, implication, and subtext",
+   "note": "Section 'Dialogue as character and culture', verbatim; the surrounding sentences make 'People' Kay's characters ('His dialogue is formal... shaped by the social worlds his characters inhabit').",
+   "fromFile": "verdicts-kay-i240-254.json"
+  },
+  "244": {
+   "index": 244,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Triumphs are provisional. Victories are costly.",
+   "note": "Section 'Melancholy as a narrative tone', two consecutive sentences verbatim. Feature label 'consequence on a household' is a categorisation, not a claim limb.",
+   "fromFile": "verdicts-kay-i240-254.json"
+  },
+  "245": {
+   "index": 245,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "his frequent use of memory, foreknowledge, and reflective distance",
+   "note": "Same section: 'Stylistically, this appears in his frequent use of memory, foreknowledge, and reflective distance' - 'this' refers to the quiet melancholy, so the stylistic-expression limb holds.",
+   "fromFile": "verdicts-kay-i240-254.json"
+  },
+  "246": {
+   "index": 246,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the master of a specific type of omniscient tight third person",
+   "note": "Paragraph beginning 'Guy Gavriel Kay is the master of a specific type of omniscient tight third person narration'. Verbatim, page location as cited.",
+   "fromFile": "verdicts-kay-i240-254.json"
+  },
+  "247": {
+   "index": 247,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "narrative commentary, foreshadowing, and emotional emphasis apart from the character's thoughts",
+   "note": "Same paragraph: 'the reader sees what a character is thinking but also gets narrative commentary, foreshadowing, and emotional emphasis apart from the character's thoughts.' 'separate from' = the page's 'apart from'.",
+   "fromFile": "verdicts-kay-i240-254.json"
+  },
+  "248": {
+   "index": 248,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "if something is important, Kay tells you, explicitly and sometimes repetitively",
+   "note": "Same paragraph, verbatim (the quote's truncation continues '...repetitively'). The 'rather than leaving it to the reader' limb is carried by the same paragraph: 'It can feel heavy-handed' and 'The narrator will ensure that you don't miss anything important.'",
+   "fromFile": "verdicts-kay-i240-254.json"
+  },
+  "249": {
+   "index": 249,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The narrative commentary functions like a soundtrack in a movie",
+   "note": "Same paragraph, verbatim, immediately followed by 'It tells you when to pay close attention and when you can relax', which supports the attention limb.",
+   "fromFile": "verdicts-kay-i240-254.json"
+  },
+  "250": {
+   "index": 250,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "just a moment of doubled perspective or retrospective commentary",
+   "note": "Paragraph beginning 'Kay also strikes just the right balance...': 'He will often switch viewpoint characters in the middle of a scene, but he avoids the trap of replaying the scene... There is instead just a moment of doubled perspective or retrospective commentary.' All three limbs present.",
+   "fromFile": "verdicts-kay-i240-254.json"
+  },
+  "251": {
+   "index": 251,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "usually through the eyes or memory of the relevant characters",
+   "note": "Section 'World-Building & Exposition': 'Important circumstances are explained whenever needed, usually through the eyes or memory of the relevant characters.' Verbatim; the piece is about Tigana throughout.",
+   "fromFile": "verdicts-kay-i240-254.json"
+  },
+  "252": {
+   "index": 252,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a limited omniscience that vacillates between being in someone's head",
+   "note": "Section 'Writing Style': 'Instead Kay employs a limited omniscience that vacillates between being in someone's head and being more objective for certain scenes.' The 'standing more objectively outside it' limb is the page's 'being more objective for certain scenes'.",
+   "fromFile": "verdicts-kay-i240-254.json"
+  },
+  "253": {
+   "index": 253,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Kay changes narrative distance incredibly well, zooming in and out",
+   "note": "Same section, verbatim ('...zooming in and out of the narrative'); the detailed/sparse limb is the next sentence: 'A given scene may be very detailed or rather sparese [sic], but always for good reason'.",
+   "fromFile": "verdicts-kay-i240-254.json"
+  },
+  "254": {
+   "index": 254,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "And frankly, some of his names are poor",
+   "note": "Section 'Why You Might Not Love It', verbatim; the examples given (Alberico the Barbadian, Brandin of Ygrath) are Kay's invented Tigana names, supporting the 'invented names in Tigana' limb.",
+   "fromFile": "verdicts-kay-i240-254.json"
+  },
+  "255": {
+   "index": 255,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "things and people that seem innocuous in that placid beginning",
+   "note": "Raw HTML fetched (200, 234,792 B) from ericfalden.substack.com; quote 'turn out—all at once—to be Chekhov’s guns' appears character-exact under 'Why You Might Not Love It' → 'Slow Start', as the chunk's page hint says. Every limb supported: 'all sorts of things and people that seem innocuous in that placid beginning which then turn out—all at once—to be Chekhov’s guns, littered all around the place.'",
+   "fromFile": "verdicts-kay-i255-269.json"
+  },
+  "256": {
+   "index": 256,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "for Tigana can feel quite academic in its structure and descriptions",
+   "note": "Raw HTML fetched (200, 109,637 B) from fantasy-faction.com; full review text present, byline 'By Alister Davison', July 6, 2013. Quote is character-exact in the paragraph beginning 'The notes about the author', as hinted.",
+   "fromFile": "verdicts-kay-i255-269.json"
+  },
+  "257": {
+   "index": 257,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the prose often felt cold and clinical, even lacking in emotion",
+   "note": "Character-exact in the paragraph beginning 'While the technical aspects of the book and the author’s skill with words are to be applauded'. Attribution to Kay's Tigana prose is the review's subject throughout.",
+   "fromFile": "verdicts-kay-i255-269.json"
+  },
+  "258": {
+   "index": 258,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Characters often sounded the same",
+   "note": "Character-exact, same paragraph ('While the technical aspects...'): 'Characters often sounded the same, the dialogue sometimes little more than a summary of history between speech marks.' The claim's 'as one another' is the plain sense of 'the same'.",
+   "fromFile": "verdicts-kay-i255-269.json"
+  },
+  "259": {
+   "index": 259,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the dialogue sometimes little more than a summary of history between speech marks",
+   "note": "Character-exact, same paragraph as 258. The claim's 'sometimes' matches the page's 'sometimes'.",
+   "fromFile": "verdicts-kay-i255-269.json"
+  },
+  "260": {
+   "index": 260,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a certain feeling of detachment from the story",
+   "note": "Character-exact in the paragraph beginning 'Yet, despite the achievements and plaudits'. The second limb is on the page too: 'making it seem as if it happened long ago, rather than is happening now.'",
+   "fromFile": "verdicts-kay-i255-269.json"
+  },
+  "261": {
+   "index": 261,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "We’re told their strengths and some of their tactics, but little else. They are numbers, not men",
+   "note": "Quote 'They are numbers, not men' is character-exact in the paragraph beginning 'The notes about the author', and the surrounding sentences carry the final-battle and strengths/tactics limbs. Adversarial note: the page says 'some of their tactics', slightly narrower than the claim's unqualified 'tactics' — a compression, not an unsupported limb.",
+   "fromFile": "verdicts-kay-i255-269.json"
+  },
+  "262": {
+   "index": 262,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "that’s what Tigana felt like to me; a dry slice of history",
+   "note": "Character-exact in the paragraph beginning 'Yet, despite the achievements'. The 'rather than an immediate story' limb is supported in the same paragraph ('no immediacy to draw me in') and in the closing paragraph ('rather than a ‘here and now’ story to grip and enthral the reader').",
+   "fromFile": "verdicts-kay-i255-269.json"
+  },
+  "263": {
+   "index": 263,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "While Kay always tells the story of the person not the people",
+   "note": "Raw HTML fetched (200, 133,766 B) from thequilltolive.com; character-exact in the paragraph beginning 'Children of Earth and Sky is a story set in the same universe', as hinted. Byline 'Andrew Mather - The Quill to Live', May 17, 2016.",
+   "fromFile": "verdicts-kay-i255-269.json"
+  },
+  "264": {
+   "index": 264,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the messages in Children of Earth and Sky are much more subtle and quietly spoken than Kay’s other books",
+   "note": "Character-exact in the final body paragraph ('Like all Kay books, it has taken me a long time...'), as hinted.",
+   "fromFile": "verdicts-kay-i255-269.json"
+  },
+  "265": {
+   "index": 265,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "he was a poet first, and still publishes poetry from time to time",
+   "note": "Raw HTML fetched (200, 127,210 B) from lareviewofbooks.org — no paywall, full interview text. Character-exact in the introduction paragraph 'Kay and I met in Toronto in early June'. Byline Christine Fischer Guy, August 14, 2016.",
+   "fromFile": "verdicts-kay-i255-269.json"
+  },
+  "266": {
+   "index": 266,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "they’re reflections, echoes, versions that rhyme with the real thing without being identical to it",
+   "note": "Raw HTML fetched (200, 180,561 B) from soden.substack.com; byline Scott Oden, Feb 23, 2026. Character-exact in the paragraph beginning 'The Asharites worship the stars', as hinted. The 'invented religions' limb is the paragraph's own subject (Asharite stars / Jaddite sun / Kindath moons vs Islam, Christianity, Judaism).",
+   "fromFile": "verdicts-kay-i255-269.json"
+  },
+  "267": {
+   "index": 267,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "you believe in the politics, the cultural tensions, the way power flows through institutions",
+   "note": "Character-exact in the paragraph beginning 'Kay walks that line better than almost anyone', as hinted; the 'worlds feel real' limb is the immediately preceding clause ('His worlds feel real in the way historical fiction feels real').",
+   "fromFile": "verdicts-kay-i255-269.json"
+  },
+  "268": {
+   "index": 268,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Kay’s fantasy is functional. It’s there to create space … But it never takes over the story",
+   "note": "Character-exact; both limbs of the claim ('to create space' and 'rather than to take over the story') are in the same paragraph verbatim.",
+   "fromFile": "verdicts-kay-i255-269.json"
+  },
+  "269": {
+   "index": 269,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "His prose can get lyrical in ways that remind me of the good Professor, JRRT",
+   "note": "Character-exact in the paragraph beginning 'Critics sometimes hit Kay for being too sentimental'. The claim's 'Tolkien' limb is supported: the page names him 'the good Professor, JRRT' (J.R.R. Tolkien), and the article elsewhere discusses Kay editing The Silmarillion with Christopher Tolkien.",
+   "fromFile": "verdicts-kay-i255-269.json"
+  },
+  "270": {
+   "index": 270,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Critics sometimes hit Kay for being too sentimental, too romantic, too invested in beauty and tragedy and doomed nobility. And yeah, there's some of that.\"",
+   "note": "Raw page fetched (HTTP 200, browser UA). Byline 'Scott Oden', Towers of Spider-Haunted Mystery, Feb 23 2026 — matches source. Quote appears word for word; the partial concession limb is carried by 'And yeah, there's some of that.' (followed by 'But I think the criticism misses something.').",
+   "fromFile": "verdicts-kay-i270-284.json"
+  },
+  "271": {
+   "index": 271,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"In particular, his narrator commentary and foreshadowing often felt really heavy-handed to me.\"",
+   "note": "Raw thread page fetched (HTTP 200). Found in post #19 by Uqbarian, Jun 26 2022 — post number and date match. forum.rpg.net is a tabletop-RPG forum, so that limb holds. ('him' is the researcher's pronoun; the poster writes 'to me' and states no gender.)",
+   "fromFile": "verdicts-kay-i270-284.json"
+  },
+  "272": {
+   "index": 272,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"He is a top-notch prose stylist, but he just goes on rather more than he needs to.\"",
+   "note": "Same raw page, same post #19 (Uqbarian, Jun 26 2022) — 'the same reader' limb confirmed by shared post. Quote verbatim; both limbs (top-notch stylist, goes on too long) are in one sentence.",
+   "fromFile": "verdicts-kay-i270-284.json"
+  },
+  "273": {
+   "index": 273,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Al-Rassan has a scene of key characters just looking at each other and thinking portentous thoughts for five and a half pages.\"",
+   "note": "Same raw page, same post #19. Quote verbatim. 'Al-Rassan' is The Lions of Al-Rassan — named in full in the Gavin Bennett post quoted immediately above it in the same post.",
+   "fromFile": "verdicts-kay-i270-284.json"
+  },
+  "274": {
+   "index": 274,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"...so I don't have to constantly get not-Constantinople and not-Jerusalem mixed up.\"",
+   "note": "Raw page, post #10 by Daztur, Jun 25 2022 — post number and date match. Quote verbatim; the renaming and The Last Light of the Sun limbs are in the same post ('I found The Last Light of the Sun incredibly annoying. If you're going to have Rome, Jerusalem, Constantinople... just call them...'). Poster's gender is not stated on the page.",
+   "fromFile": "verdicts-kay-i270-284.json"
+  },
+  "275": {
+   "index": 275,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"it moves interestingly between a sort of adventure story and a people living through history story\"",
+   "note": "Raw page. Written by Gavin Bennett in post #9 (Jun 25 2022) and re-quoted inside Uqbarian's post #19 (Jun 26 2022), as the source's page hint says. Subject is 'The Lions of Al-Rassan', named in the preceding sentence.",
+   "fromFile": "verdicts-kay-i270-284.json"
+  },
+  "276": {
+   "index": 276,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"But the truth is that, while I enjoy his prose, I often wish there was less of it.\"",
+   "note": "Raw page fetched (HTTP 200); full body text present, no paywall. Brok3n Engines review of Tigana, Apr 16 2025 — matches source. Quote verbatim as final-paragraph clause. The reviewer's gender is not stated on the page ('he' is the researcher's pronoun).",
+   "fromFile": "verdicts-kay-i270-284.json"
+  },
+  "277": {
+   "index": 277,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"That whole subject of storytelling, that a novel you read is a story being told to you by someone ...\"",
+   "note": "Raw page fetched (HTTP 200). Quote verbatim in Kay's answer to 'So what interests a more mature and hopefully wiser Guy Gavriel Kay nowadays?' — the exact question the source names — and Kay frames it as 'what is engaging me', supporting the 'subject engaging him' limb.",
+   "fromFile": "verdicts-kay-i270-284.json"
+  },
+  "278": {
+   "index": 278,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"I'm fascinated by how we examine and remember the past ... and shape narratives we need or want from that.\"",
+   "note": "Same raw page, same answer. Quote verbatim. Page says 'narratives we need or want from that'; the claim's 'the narratives we need from it' drops 'or want' but does not overstate.",
+   "fromFile": "verdicts-kay-i270-284.json"
+  },
+  "279": {
+   "index": 279,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"I'd be more an architect because the shape of a novel matters a lot to me (as a reader, too).\"",
+   "note": "Same raw page. Quote verbatim in Kay's answer to the George R. R. Martin architects-or-gardeners question, so both the architect-over-gardener limb and the reason limb are supported.",
+   "fromFile": "verdicts-kay-i270-284.json"
+  },
+  "280": {
+   "index": 280,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"I think setting came first here...\"",
+   "note": "Same raw page. Quote verbatim; 'here' is anchored by the interviewer's immediately preceding line 'How was it for A BRIGHTNESS LONG AGO?', so the book limb holds.",
+   "fromFile": "verdicts-kay-i270-284.json"
+  },
+  "281": {
+   "index": 281,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"You replied that in general setting precedes theme (which grows out of learning about time and place)\"",
+   "note": "Same raw page. Quote verbatim, and it does sit in the interviewer's (Patrick St-Denis's) question rather than in Kay's own words — exactly as the claim attributes it.",
+   "fromFile": "verdicts-kay-i270-284.json"
+  },
+  "282": {
+   "index": 282,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"But here's a caveat: be skeptical when writers present intuitive processes as thought-out planning.\"",
+   "note": "Raw page fetched (HTTP 200). Bright Weavings, posted Dec 10 2016, header line 'This first appeared at http://boingboing.net/ in 2016' — provenance limb confirmed. Quote verbatim in the paragraph beginning 'There are a multiplicity of reasons', as the source's page hint says.",
+   "fromFile": "verdicts-kay-i270-284.json"
+  },
+  "283": {
+   "index": 283,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"(And I always include starter bibliographies.)\"",
+   "note": "Same raw page, in the paragraph beginning 'And I found that I liked' — page hint matches. Quote verbatim. 'In his novels' is not literal on the page but the whole essay is about his own novels and the sentence sits among his readers' post-reading history reading.",
+   "fromFile": "verdicts-kay-i270-284.json"
+  },
+  "284": {
+   "index": 284,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"well, each reader makes the book they read\"",
+   "note": "Same raw page, same paragraph beginning 'And I found that I liked'. Quote verbatim.",
+   "fromFile": "verdicts-kay-i270-284.json"
+  },
+  "285": {
+   "index": 285,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "he or she cannot be sure they know where the novel they are reading is going",
+   "note": "Quote verbatim in the paragraph beginning 'I had come to realize'; the sentence attributes it to 'this shift from following the events of history' i.e. the quarter-turn named in the same paragraph's opening line.",
+   "fromFile": "verdicts-kay-i285-299.json"
+  },
+  "286": {
+   "index": 286,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I telescoped the Reconquista in Lions. The tragedy of a culture's demise could play out in one or two generations",
+   "note": "Quote verbatim; the very next sentence supplies the 'one or two generations' limb, in the paragraph beginning 'It was with Lions'.",
+   "fromFile": "verdicts-kay-i285-299.json"
+  },
+  "287": {
+   "index": 287,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "About Procopius the historian, about the writers of history, chroniclers and artists",
+   "note": "Quote verbatim; the paragraph beginning 'I suppose I've never looked back' names the Sarantine Mosaic as where he 'had thoughts I wanted to develop and explore that way'.",
+   "fromFile": "verdicts-kay-i285-299.json"
+  },
+  "288": {
+   "index": 288,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Readers will never learn the year of the Treaty of Utrecht in my novels",
+   "note": "Quote verbatim in the paragraph beginning 'So, briefly told', which is explicitly introduced as 'downsides, or risks, to how I work'.",
+   "fromFile": "verdicts-kay-i285-299.json"
+  },
+  "289": {
+   "index": 289,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the need to vary the tension, drama, the type of scenes a book has, even the langiuage in which the story is told",
+   "note": "Quote verbatim in answer 4, misspelling 'langiuage' included, preceded by 'I really believe, as a writer, in what you are noting here'.",
+   "fromFile": "verdicts-kay-i285-299.json"
+  },
+  "290": {
+   "index": 290,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Artists are, more good or ill, the recorders, chroniclers of a time",
+   "note": "Quote verbatim in answer 5; the next sentence carries the second limb: 'they can become, for later eras, the emblems of a day'.",
+   "fromFile": "verdicts-kay-i285-299.json"
+  },
+  "291": {
+   "index": 291,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I am interested in shaping a long view, a sense for the reader of time passing",
+   "note": "Quote verbatim in answer 1; 'across periods' is carried by 'looking in on history at various moments and periods'.",
+   "fromFile": "verdicts-kay-i285-299.json"
+  },
+  "292": {
+   "index": 292,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "That doesn't necessarily mean the minutiae of dates and places",
+   "note": "Quote verbatim in answer 2; the antecedent of 'That' is the preceding sentence's 'ignorant of the themes of history'.",
+   "fromFile": "verdicts-kay-i285-299.json"
+  },
+  "293": {
+   "index": 293,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "If a book is done well, readers can be moved by a single line ... because they know why he did that",
+   "note": "Quote verbatim in answer 4; both the 'done well' condition and the 'because they know why' clause are on the page.",
+   "fromFile": "verdicts-kay-i285-299.json"
+  },
+  "294": {
+   "index": 294,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I am not a 'detached' writer ... I am very much engaged as I write them",
+   "note": "Quote verbatim in answer 4, with 'when intense things happen to my characters, or even quietly moving ones' supplying both scene types.",
+   "fromFile": "verdicts-kay-i285-299.json"
+  },
+  "295": {
+   "index": 295,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Children of Earth and Sky was deliberately set up in my mind to be about people who are not important in the scheme of things",
+   "note": "Quote verbatim in answer 5; claim omits only the phrase 'in my mind'.",
+   "fromFile": "verdicts-kay-i285-299.json"
+  },
+  "296": {
+   "index": 296,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I think it catches something about our own lives, even if less dramatic, which is what I am always trying to do in a book",
+   "note": "Quote verbatim in the paragraph beginning 'I went with my own feeling'; every limb of the claim is that one sentence.",
+   "fromFile": "verdicts-kay-i285-299.json"
+  },
+  "297": {
+   "index": 297,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "one of my earliest readers, an experienced man in the book trade, expressed doubts: 'They connect awfully fast, don't they?'",
+   "note": "Quote verbatim in the paragraph beginning 'Here's where it got interesting'; 'objected' renders the page's 'expressed doubts', and the two women are Danica and Leonora.",
+   "fromFile": "verdicts-kay-i285-299.json"
+  },
+  "298": {
+   "index": 298,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I'm focused on complicating things, multiple ideas, on nuance, on letting readers decide what they find in or take away from a book",
+   "note": "Quote verbatim in the paragraph beginning 'Truth is'; both the nuance limb and the readers-decide limb are in the same sentence.",
+   "fromFile": "verdicts-kay-i285-299.json"
+  },
+  "299": {
+   "index": 299,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Not for lessons! I'm offering a story not giving a lecture",
+   "note": "Quote verbatim in the paragraph beginning 'You can write about yesterday's snows'; 'Not for lessons!' immediately precedes it and supports the second limb.",
+   "fromFile": "verdicts-kay-i285-299.json"
+  },
+  "345": {
+   "index": 345,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It detaches the tale from a narrow context",
+   "note": "Raw HTML of brightweavings.com/globe/ (curl, browser UA, HTTP 200). Quote exact in the 'what can fantasy do better' paragraph: 'First of all the genre allows the universalizing of a story... It detaches the tale from a narrow context, permits a stripping away, or at least an eroding of prejudices and assumptions.' The subject of 'It' is the fantasy genre, so the claim's limb about setting a story as fantasy holds.",
+   "fromFile": "verdicts-kay-i345-359.json"
+  },
+  "346": {
+   "index": 346,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Fantasy, in this light, becomes a way of being honest about limitations",
+   "note": "Raw page. Exact sentence in the Henry James paragraph, preceded by 'by treating the past through the form of a fantasy, one acknowledges the sort of difficulties James was referring to' — both limbs (treating the past as fantasy; honesty about limitations) supported.",
+   "fromFile": "verdicts-kay-i345-359.json"
+  },
+  "347": {
+   "index": 347,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Douglas Barbour described a fantasy he admired as that escape",
+   "note": "Raw page, closing paragraph: 'Many years ago, the poet and critic, Douglas Barbour, described a fantasy he admired as, ‘The kind of escape that brings you home.’ I realized, reading these words, that this was how I’d always seen the potential of the genre.' Attribution to Barbour and Kay's endorsement both explicit.",
+   "fromFile": "verdicts-kay-i345-359.json"
+  },
+  "348": {
+   "index": 348,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "All renderings matter; in the changes we find truths about evolving worlds and societies",
+   "note": "Raw HTML of brightweavings.com/mythessay/ (HTTP 200). First body paragraph: 'All renderings matter, and in the changes, the shiftings, we find truths about evolving worlds and societies.' Page header confirms the source: written summer 1999 for the Chapters 'Great Writers' series, run as full-page newspaper inserts. Kay's wording is 'evolving worlds and societies' rather than the claim's 'societies that made them'; in context (renderings shifting as generations and cultures change) the limb is supported, but the claim's phrasing is a gloss, not Kay's.",
+   "fromFile": "verdicts-kay-i345-359.json"
+  },
+  "349": {
+   "index": 349,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the earliest version of a legend isn’t always the most important",
+   "note": "Raw page, first body paragraph: 'One of the first things learned in the study of myth is that the earliest version of a legend isn’t always the the most important.' (The doubled 'the the' is a typo on the page; the quoted fragment matches character-for-character.)",
+   "fromFile": "verdicts-kay-i345-359.json"
+  },
+  "350": {
+   "index": 350,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I tried to imagine myself with a stiletto not a bludgeon",
+   "note": "Raw HTML of brightweavings.com/tiganaafterword/ (HTTP 200); header confirms the ROC USA 10th anniversary edition of Tigana, 1999. Penultimate paragraph: 'I tried to imagine myself with a stiletto not a bludgeon, slipping the themes of the story in quietly while keeping a reader turning pages well past bedtime.' All limbs supported.",
+   "fromFile": "verdicts-kay-i345-359.json"
+  },
+  "351": {
+   "index": 351,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I wanted to start a book about subterfuge and deception with an outright lie",
+   "note": "Raw page: 'I wanted to start a book about subterfuge and deception with an outright lie – and the first sentence of chapter one does that. I wanted to work with music...' — confirms both the intent limb and the first-sentence-of-chapter-one limb, and the located paragraph does go on to music.",
+   "fromFile": "verdicts-kay-i345-359.json"
+  },
+  "352": {
+   "index": 352,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "registered powerfully for me, and lingered for twenty years: not only killed, but made to never have been",
+   "note": "Raw page, photograph paragraph: two LIFE-magazine Prague Spring photographs, the second missing one functionary with a plant inserted; 'The missing figure – part of the crushed uprising – is not only dead, he has been erased from the record... the two photographs registered powerfully for me, and lingered for twenty years: not only killed, but made to never have been.' The seeding limb is supported by the framing 'a reconstruction of the earliest seeds of the book'.",
+   "fromFile": "verdicts-kay-i345-359.json"
+  },
+  "353": {
+   "index": 353,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Names link to history, and we need a sense of our history to define ourselves",
+   "note": "Raw page, Brian Friel 'Translations' paragraph; the sentence carries both limbs of the claim verbatim.",
+   "fromFile": "verdicts-kay-i345-359.json"
+  },
+  "354": {
+   "index": 354,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "fantasy has never been in its essence about... variations on the use of hyphens and apostrophes in invented names",
+   "note": "Raw HTML of brightweavings.com/earthlight/ (HTTP 200); header confirms it was written for Earthlight, GGK's British publishing house. The rejection limb is explicit: 'For me, fantasy has never been in its essence about constructing elaborate magical systems... or further variations on the use of hyphens and apostrophes in invented names.'",
+   "fromFile": "verdicts-kay-i345-359.json"
+  },
+  "355": {
+   "index": 355,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I am happy establishing a space between the invented character and the real man",
+   "note": "Raw HTML of brightweavings.com/underheavenauthorsletter/ (HTTP 200); header confirms it was first printed in the advance reading copies of Under Heaven, 2010. The sentence closes the paragraph about the real Tang prime minister versus 'my prime minister of Ninth Dynasty Kitai'.",
+   "fromFile": "verdicts-kay-i345-359.json"
+  },
+  "356": {
+   "index": 356,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I’ve served notice with the shift to an imagined Kitai from real China that I reserve the right to change, or telescope events",
+   "note": "Raw page. The sentence sits in the paragraph opening 'I want to keep readers turning pages until two in the morning', exactly as the claim's page hint says; both limbs (the shift serves notice; the reserved right to change or telescope) are explicit.",
+   "fromFile": "verdicts-kay-i345-359.json"
+  },
+  "357": {
+   "index": 357,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the quiet, steady accumulation of detail and complexity reach out to readers in an almost subliminal way",
+   "note": "Raw HTML of brightweavings.com/sfsite/ (HTTP 200); header confirms an interview conducted by Rodger Turner, September 2000, reproduced from SFSite. In the answer that opens 'Depends what one means by the ‘credibility of the book’', followed by 'Readers end up with a measure of trust in the author and the book... and that trust is invaluable' — the trust limb is supported.",
+   "fromFile": "verdicts-kay-i345-359.json"
+  },
+  "358": {
+   "index": 358,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "what we know of the great figures of the past is so much shaped by (at the mercy of!) those who chronicled them",
+   "note": "Raw page, the answer on legacy and posterity: '...and Procopius’s malevolent The Secret History is a perfect example of that, vis a vis Justinian and Theodora.' Both the shaped-by/at-the-mercy-of limb and the Procopius citation limb are explicit.",
+   "fromFile": "verdicts-kay-i345-359.json"
+  },
+  "359": {
+   "index": 359,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A viewpoint character observing a setting for the first time serves wonderfully as a ‘window’ for the reader",
+   "note": "Raw page, the 'fish out of water' answer: the quoted sentence is followed by 'The initiation of a character becomes the reader’s initiation.', supporting the claim's second limb.",
+   "fromFile": "verdicts-kay-i345-359.json"
   }
  },
  "assembledFrom": [

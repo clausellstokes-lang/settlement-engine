@@ -1,0 +1,30 @@
+{
+ "role": "verifier",
+ "name": "martin",
+ "angle": null,
+ "tag": "i720-734",
+ "lines": 54,
+ "firstTs": "2026-09-06T17:47:35.678Z",
+ "lastTs": "2026-09-06T17:49:56.334Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 12
+ },
+ "urlsFetched": [
+  "https://www.theatlantic.com/entertainment/archive/2011/07/george-r-r-martin-on-sex-fantasy-and-a-dance-with-dragons/241738/",
+  "https://www.nytimes.com/2011/07/15/books/a-dance-with-dragons-by-george-r-r-martin-review.html",
+  "https://locusmag.com/review/a-dozen-of-the-best-from-2011/",
+  "https://web.archive.org/web/20251024170837id_/https://www.nytimes.com/2011/07/15/books/a-dance-with-dragons-by-george-r-r-martin-review.html"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "Checkpoint written (13,680 bytes). Returning the verdicts.",
+ "run": "wf_c7cc5b15-ee7",
+ "agent": "ab88dcacaed617063",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_c7cc5b15-ee7/agent-ab88dcacaed617063.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-martin-i720-734.json",
+  "exists": true
+ }
+}

@@ -9334,6 +9334,114 @@
    "note": "The claim is a self-declared negative result; its 'source' field names the sweep's own searches, not the URL. The cited arXiv page (2210.07109, 'Dungeons and Dragons as a Dialog Challenge for Artificial Intelligence') was fetched successfully and does confirm the one clause that touches it — it is an actual-play dialogue NLP dataset ('a gameplay dataset consisting of nearly 900 games ... 800,000 dialogue turns ... 58 million words'), not stylometry or authorship attribution, so the citation is correctly characterised. But no single page can establish the load-bearing existential negative (that no stylometric/corpus study of official D&D prose exists, and that 'Gygaxian' is absent from three journal indexes), and the arXiv page asserts nothing about it. Two adversarial counter-searches (stylometry/corpus/authorship-attribution of D&D rulebook prose; 'Gygaxian' across AGS, Games and Culture, IJRP) surfaced no refuting study, so the negative is not contradicted — it is merely unestablished by the cited source. Verify this row by index searches, not by source fetch.",
    "fromFile": "verdicts-dnd-i45-48.json"
   },
+  "49": {
+   "index": 49,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "D&D Style Guide: Writing and Editing; Version 1.04a ©2013",
+   "note": "Raw PDF fetched (HTTP 200, 9 pp., pypdf extraction). p.1 carries the title verbatim, 'Version 1.04a ©2013 Wizards of the Coast', and the two named foundations: 'The Chicago Manual of Style, 16th edition' and 'Merriam-Webster's Collegiate Dictionary, 11th edition'. Governance limbs all present: typography ('Typographic Treatment of Product Names'), numerals ('Numerals versus Words', 'Numerals in Rules Text'), verb collocations ('Verb Usage', p.6), capitalization ('Terms to Capitalize', p.5), tone (the 'High Fantasy' sidebar: humor/tragedy must not 'overtake the general tone'). Boxed/read-aloud limb confirmed by absence: case-insensitive grep for 'box' = 0 hits and 'aloud' = 0 hits across all 9 pages.",
+   "fromFile": "verdicts-dnd-i49-63.json"
+  },
+  "50": {
+   "index": 50,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Avoid overusing sidebars.",
+   "note": "Raw PDF fetched (HTTP 200, 11 pp.). Quote appears verbatim as the opening of the new 'Sidebars' section (p.3). 'Version 1.08a ©2018 Wizards of the Coast' on every page; 'The Chicago Manual of Style, 17th edition' p.1. Additions confirmed against the v1.04a text: 'Headings' hierarchy section (Chapter Title / Heading 1-3 / Inline Subhead), 'Sidebars', 'Gender-Specific Suffixes', and 'Adventuring Parties' — which is the fellowship-vs-party rule ('The word “fellowship” has strong connections with The Lord of the Rings… use “group,” “band,” “company,” or, especially, “party.”'; 'fellowship' = 0 hits in v1.04a). Edition-naming rule is new in wording: 'In a departure from previous usage, we spell out and lowercase references to editions'. Boxed-text limb confirmed by absence: 'box' = 0 hits, 'aloud' = 0 hits. One nuance: 'updated January 2019' is the mirror's filename only — neither 'January' nor '2019' appears anywhere in the document — which matches the claim's own wording 'circulated as'.",
+   "fromFile": "verdicts-dnd-i49-63.json"
+  },
+  "51": {
+   "index": 51,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "that these PDFs 'had previously gone only to official-play writers' — the EN World thread says nothing about who received them before the DMs Guild posting",
+   "trueWording": "Free on DMsGuild, 'only been on the site a month or so', four PDFs",
+   "note": "Raw thread page 1 fetched (HTTP 200). Remathilis, Nov 25 2018: 'a rather interesting little gem that is free to download: A D&D Style-guide for publishing' and 'Its only been on the site a month or so' — which puts the posting around October 2018 — and 'Its divided into four PDFs: An IP Guide… an Adventure Guide… a Style Guide… and a Forgotten Realms Style Guide'. Those limbs are solid. Greps of the whole page for 'official play', 'organized play', 'Adventurers League', 'previously' and 'only to' return nothing. The missing limb is corroborated verbatim on this chunk's index-53 source (thekindgm.com: 'They were first available only to official play writers but now they're available to the broader public of the DMs Guild') — so the fact is sound but this citation does not carry it.",
+   "fromFile": "verdicts-dnd-i49-63.json"
+  },
+  "52": {
+   "index": 52,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "An updated #DnD House Style Guide is now on #DMsGuild",
+   "note": "Raw page fetched (HTTP 200). The embedded tweet reads verbatim: 'An updated #DnD House Style Guide is now on #DMsGuild, creators! Among other changes, this guide includes tips on achieving gender neutral language.' with the byline '— Dungeon Masters Guild (@dms_guild) February 22, 2019', matching the 2019-02-22 date and the DMs Guild account. The 'listing' limb is also on the page: 'Please note this is a totally new listing! We fixed an error when the original was set up.' (The sageadvice.eu post itself is dated April 1, 2019 — the tweet it archives is 2019-02-22, as the claim states.)",
+   "fromFile": "verdicts-dnd-i49-63.json"
+  },
+  "53": {
+   "index": 53,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'so the public window was roughly 2018–2020' — the page never says availability ended; the author's reply is that he fixed the link",
+   "trueWording": "'Apparently, this material is no longer available.' / 'I have updated the link'",
+   "note": "Raw page fetched (HTTP 200). Post dated 'October 24, 2018 May 25, 2020'. Comment by mattwest2342, May 25 2020 5:43 am: 'Apparently, this material is no longer available.' Reply by The Kind GM, May 25 2020 12:33 pm: 'Thank you for bringing it to my attention. I have updated the link'. So the commenter report and the author's acknowledgement are exact. The inference limb is the problem: the author's response points to a working link rather than to a lapse, so this page does not establish that the public window closed around 2020. The page does support the window's opening: 'They were first available only to official play writers but now they're available to the broader public of the DMs Guild.'",
+   "fromFile": "verdicts-dnd-i49-63.json"
+  },
+  "54": {
+   "index": 54,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "has not yet published the official style guide",
+   "note": "All three sources the sentence names were fetched raw and each quote is word for word. Half-Cover (fetched HTTP 200; page footer '2 Sep 2017 / By: Michael'): 'unfortunately, to my knowledge Wizards of the Coast has not yet published the official style guide for D&D 5th Edition.' Old Dungeon Master (olddungeonmaster.wordpress.com/2015/08/03/5e-writers-guide/, fetched separately HTTP 200, 'Posted by Ronny on August 3, 2015'): 'I was looking for an official writer's guide, or style sheet, from Wizards of the Coast… Perhaps they have one and I just couldn't find it. So I took the copies I had from 3.5 and 4.0 and updated them for 5th edition' — both the quote and the 3.5/4e-compilation limb. Blog of Holding (this chunk's index-55 source, fetched HTTP 200, dated January 7 2025): 'it annoys me not to have an official style guide.' Note for the record that the claim's url field holds only the first of the three; the other two limbs are verified on the pages the sentence itself names, not on half-cover.com.",
+   "fromFile": "verdicts-dnd-i49-63.json"
+  },
+  "55": {
+   "index": 55,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it annoys me not to have an official style guide",
+   "note": "Raw page fetched (HTTP 200). Full sentence: 'When I'm writing rules for D&D 2024, it annoys me not to have an official style guide. In its absence, I made my own style guide so I can quickly answer my own questions' — quote verbatim, and it carries both the 'built an unofficial 2024 style guide' and the 'because no official one exists' limbs. Title: 'Unofficial D&D 2024 Style Guide (Your Capitalization Questions Answered!)', dated 'Tuesday, January 7th, 2025'. One attribution nuance: the post is first-person and unsigned — 'Hughes' appears nowhere in the page HTML or in the site's RSS feed (no dc:creator tags); the only byline evidence on the page is the sidebar's 'You can also get Paul's DM Notebook', i.e. the first name only.",
+   "fromFile": "verdicts-dnd-i49-63.json"
+  },
+  "56": {
+   "index": 56,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "that the template is a Word template — the packet list on the page names only 'The 5e Template', never Word",
+   "trueWording": "Receive an instructional packet containing: The D&D Wizards House Style Guide",
+   "note": "Raw page fetched (HTTP 200; 'Graeme Barber / 23/03/2021'). Every other limb is exact. Stage 1 is 'Accept the offer, signing an NDA and providing payment information'; stage 2 is 'Receive an instructional packet containing: The D&D Wizards House Style Guide. The 5e Template. An example of a Pitch. Project Instructions. Project Appropriate Lore. An example of a pitch, draft, and extras.' — so style guide, template, pitch examples and lore documents at contract start, all confirmed, in a process the page frames as 'writing for Wizards as a work-for-hire freelance writer'. The formatting limb is verbatim too: 'Drafting Process: You will write a draft, formatted using the Style Guide and Template, and submit it.' Grep for the word 'Word' on the page returns nothing. The Word detail is corroborated elsewhere — the v1.04a style guide (this chunk's index-49 source) says 'If you are using the 5E Template in Word' — but POCGamer does not say it.",
+   "fromFile": "verdicts-dnd-i49-63.json"
+  },
+  "57": {
+   "index": 57,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "You should be familiar with the D&D Style Guide (also provided) as well.",
+   "note": "Raw PDF fetched from media.wizards.com (HTTP 200, 10 pp.). p.1 'TECHNICAL INFORMATION': 'A template is provided for use, including the Community Created D&D Adventurers League logo. You must use this template, and follow the formatting standards as presented in the template. This logo must appear on your adventure… You should be familiar with the D&D Style Guide (also provided) as well.' Both quoted fragments are verbatim, and 'also provided' carries the claim's final limb. The document self-identifies as 'Dungeoncraft Adventures: The Wild Beyond the Witchlight' for 'D&D Adventurers League' with 'Effective Date: October 1, 2021. Version 1.2.' The same passage repeats for the second option later in the document.",
+   "fromFile": "verdicts-dnd-i49-63.json"
+  },
+  "58": {
+   "index": 58,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "more guiderails than your usual table does",
+   "note": "Raw thread fetched (HTTP 200; thread starter Raddu, Nov 13 2023). Article body: 'The newly released Dungeoncraft Design Guide, effective from November 9th, 2023, provides comprehensive instructions and standards for crafting these adventures' and 'Creators must use a specific template provided for Dungeoncraft adventures, including the Community Created D&D Adventurers League logo. Familiarity with the D&D Style Guide and adherence to the DMsGuild Content Guidelines are also required.' The forum quote is verbatim in a reply defending the requirements: 'These guidelines above, however, are part of style of play that needs more guiderails than your usual table does', in a post that frames the contrast as Adventurers League / Living campaign play versus a home table — matching 'a poster frames this as organized play'.",
+   "fromFile": "verdicts-dnd-i49-63.json"
+  },
+  "59": {
+   "index": 59,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "breaks down the official 5th-edition style guide",
+   "note": "Raw page fetched (HTTP 200; 'By Hannah Rose / May 31, 2019 / Articles, Designing with Style'). Standfirst verbatim: 'The Designing with Style series breaks down the official 5th-edition style guide to help designers create content that's well-written, polished, and precise.' The Common Pitfalls limb is exact: 'Describing an ability check is so often botched that it falls under the “Common Pitfalls” section of the official D&D House Style Guide (emphasis mine):' followed by a block quote that I diffed against the v1.04a PDF — it reproduces the guide's 'Making a Roll vs. Succeeding on One' paragraph word for word. The trailing clause is the claim's own inference: the page demonstrates canonical treatment by a third-party 5e publisher directly, while 'the guide was public' is inferred from a rival publisher quoting it openly in 2019 rather than stated on the page.",
+   "fromFile": "verdicts-dnd-i49-63.json"
+  },
+  "60": {
+   "index": 60,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In rules text, we often achieve gender neutrality by writing in the second person.",
+   "note": "Raw PDF, p.2, under 'Gender' → 'Achieving Gender Neutrality'. The sentence appears exactly as the claim renders it, and it is the guide's only statement about second person, so 'the guide's stated reason for second person in rules text is gender neutrality' is precisely what the page says. (v1.08a softens the same rule to 'we prefer to achieve gender neutrality by writing in the second person whenever possible'.)",
+   "fromFile": "verdicts-dnd-i49-63.json"
+  },
+  "61": {
+   "index": 61,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "but don't abuse this liberty",
+   "note": "Both named versions fetched raw. v1.08a p.2 verbatim: 'In a departure from our past usage, we allow the use of “they” and “their” as singular pronouns, but don't abuse this liberty. Rely on this device only when you have no other reasonable or pleasing alternative.' — giving the quote, the 'in a departure from our past usage' wording and the no-pleasing-alternative limb. The v1.04a limb is verified on the v1.04a PDF (this chunk's index-49 source), p.2: 'Don't use “they” or “their” as singular pronouns, except in an informal context like dialogue.' Slight compression to flag: the older guide's exception is 'an informal context like dialogue', broader than the claim's 'except in dialogue'.",
+   "fromFile": "verdicts-dnd-i49-63.json"
+  },
+  "62": {
+   "index": 62,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "You make a saving throw, and it succeeds or fails.",
+   "note": "Raw PDF p.6, 'Verb Usage' list. Every collocation in the claim is a line of that list, verbatim: 'You cast a spell.' / 'You deal damage.' / 'You make a saving throw, and it succeeds or fails.' / 'You make an attack (or you attack), and your attack hits or misses (it doesn't succeed or fail).' / 'You take damage.' / 'You regain hit points.' / 'You score a critical hit.' / 'You use a feature.' The list is indeed a fixed list of the game's verb idiom, so the framing limb holds as well.",
+   "fromFile": "verdicts-dnd-i49-63.json"
+  },
+  "63": {
+   "index": 63,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "You must succeed on a DC 15 Strength check to clamber up the wall.",
+   "note": "Raw PDF p.6, 'Common Pitfalls' → 'Making a Roll vs. Succeeding on One', verbatim: 'Don't mistake making an ability check, a saving throw, or other roll with succeeding on it. The following sentence gets it right: “You must succeed on a DC 15 Strength check to clamber up the wall.” Don't write, “You must make a DC 15 Strength check to clamber up the wall,” unless that sentence is immediately followed by a description of what happens on a success or failure.' Both limbs — the prohibition-unless-consequences-follow and 'must succeed on' as the canonical form — are on the page, in the Common Pitfalls section the claim names.",
+   "fromFile": "verdicts-dnd-i49-63.json"
+  },
   "64": {
    "index": 64,
    "verdict": "VERIFIED_VERBATIM",
@@ -9654,6 +9762,327 @@
    "trueWording": "addressed to them instead of the empty air",
    "note": "Both quoted strings verbatim. Recommendation section: 'don't shy away from shifting text from third-person objective (\"A 200-foot waterfall cascades down...\") to second-person subjective (\"You see a majestic waterfall hundreds of feet in height...\") if your players tend to lose focus, as it will help them feel engaged.' Engagement rationale, from the Matthew Mercer passage earlier in the same essay: 'The players are drawn in because the description feels addressed to them instead of the empty air.' The direction of the shift is genuinely the reverse of Merwin's Tip 1 (verified against claims 104/105), though this page never names Merwin. Two nuances recorded, neither an unsupported limb: the two quoted phrases sit in different sections of the one essay, and the advice is conditional ('if your players tend to lose focus') and addressed to a DM adapting published boxed text rather than to a designer writing it.",
    "fromFile": "verdicts-dnd-i94-108.json"
+  },
+  "124": {
+   "index": 124,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "keep it simple with a few powerful details",
+   "note": "Kobold Press page (Celeste Conowitch, July 20, 2026) carries the quote word for word. Every limb holds: 'give the players the facts they need, and one thing to get them invested'; 'You step into a small stone room that reeks of garlic' -- 'the room has a story, a quirk'; and on naming monsters, 'describing the troll without ever using the word troll. It drives me bonkers when GMs use monster names.'",
+   "fromFile": "verdicts-dnd-i124-138.json"
+  },
+  "125": {
+   "index": 125,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Try to include three of them in each description",
+   "note": "The Alexandrian (Feb 8, 2022) verbatim. Room formula: 'List every notable thing in the room and its position'; 'Use the Three of Five rule' with the parenthetical 'Think about your five senses. Try to include three of them in each description.'; 'If appropriate, add a verb.' NPC formula reads 'An action. What are they wearing? One physical trait.' and closes 'you're not describing their headshot, you're establishing them in the scene.'",
+   "fromFile": "verdicts-dnd-i124-138.json"
+  },
+  "126": {
+   "index": 126,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "five senses acting in dynamic concert; 'you detect orcs'",
+   "note": "Claim carried an empty quote field, but its one embedded quotation, 'you detect orcs', is on the page word for word, and every limb is supported. Gaming Ballistic (July 19, 2017) reports: \"Listen! Do You Smell Something? By Anne K. Brown hits on some really good tips... available for consumption by the five senses acting in dynamic concert\"; 'show, don't tell'; 'a much more subtle way to convey information than \"you detect orcs.\"'; and 'She covers overdoing it too... if your players can't or won't use the information, it can be cut.' Caveat worth carrying forward: the 'you detect orcs' contrast is the reviewer's own illustration inside his report of Brown's essay, which the claim's '(as reported)' framing does cover.",
+   "fromFile": "verdicts-dnd-i124-138.json"
+  },
+  "127": {
+   "index": 127,
+   "verdict": "PARTIAL",
+   "trueWording": "GIANT SLAVERING OGRE is moving through broken furniture",
+   "note": "The quotation is on the page verbatim, twice, and the ordering limbs all hold -- immediate threat first, 'the rest can be dealt with after the party has survived the immediate threat', 'use newspaper conventions - big details that are right in your face up front, and details later', and 'the more your party searches, the more paragraphs can be read.' What fails is the attribution. The reviewer introduces the whole newspaper-lead passage as HIS addition to Doyle: 'One thing that might be implied but could be made explicit' -- an explicit disclaimer that Doyle's essay does not say it -- and then credits the advice to someone else: 'In fact, Juan Ochoa gave me that advice about giving him art direction.' What the page does attribute to Doyle is the encounter checklist (read-aloud text, description and details, stats, how a critter fights, treasure, consequences and developments) and the balance line 'first, it goes without saying that encounters need to be balanced for the adventuring party.'",
+   "unsupportedLimb": "that the newspaper-lead ordering is Chris Doyle's -- the page flags it as the reviewer's own addition ('might be implied but could be made explicit') and credits it to Juan Ochoa",
+   "fromFile": "verdicts-dnd-i124-138.json"
+  },
+  "128": {
+   "index": 128,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "quit writing read-aloud text that sounds like it came from Ikea instructions",
+   "note": "Sly Flourish (Mike, 8 November 2010) verbatim under the heading 'Keep it fantastic': 'We're playing a fantasy roleplaying game, quit writing read-aloud text that sounds like it came from Ikea instructions.' The second quoted fragment is verbatim too, under 'Keep it short': 'Ensure every word has a place in it.'",
+   "fromFile": "verdicts-dnd-i124-138.json"
+  },
+  "129": {
+   "index": 129,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The descriptions themselves are very punchy and to the point",
+   "note": "Gnome Stew, Jared Rascher, July 27th 2021. All three quoted fragments verbatim: 'The descriptions themselves are very punchy and to the point'; monster descriptions 'often convey emotional information, motivations, or default assumptions about the creature'; and 'Some descriptions are slanted towards \"selling\" the creature or location being described to trigger an emotional effect.' The claim says 'creature or place' where the page says 'creature or location' -- outside its quotation marks, so not a verbatim failure.",
+   "fromFile": "verdicts-dnd-i124-138.json"
+  },
+  "130": {
+   "index": 130,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "After: Its wormlike body is thin and scaly",
+   "note": "tenfootpole.org, Bryce Lynch, August 13 2018, reviewing Ray Vallese. Stacked-modifier example verbatim: 'Before: Its body is thin, scaly, and wormlike. After: Its wormlike body is thin and scaly.' Expletive constructions verbatim: filler phrases 'there is' and 'there are'; 'There is an old wise man who watches over the children.' converted to 'An old wise man watches over the children.' The active-voice limb is supported more loosely -- the page lists 'Future vs Present Tense, my old friend passive voice, and a host of other examples' among what Vallese addresses, rather than stating an active-voice rule outright.",
+   "fromFile": "verdicts-dnd-i124-138.json"
+  },
+  "131": {
+   "index": 131,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Just be sure you understand the rules before you break them",
+   "note": "Gnome Stew, J.T. Evans, October 23rd 2017, quoting page four of Vallese: 'Do you have to follow all of these tips all the time? Nope. It's fine to break them to add variety to your writing. In fact, you should. Don't hammer all the flavor or voice out of your text to rigidly adhere to guidelines. Just be sure you understand the rules before you break them.' The claim's ellipsis elides exactly that flavor/voice sentence, which is also the limb it asserts.",
+   "fromFile": "verdicts-dnd-i124-138.json"
+  },
+  "132": {
+   "index": 132,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Characters can leave their pistols at the door, or leave them on the ship",
+   "note": "Pelgrane Press, By Robin D. Laws, posted February 1, 2012. Verbatim: 'The character can leave his pistol at the door, or leave it on the ship. Becomes: Characters can leave their pistols at the door, or leave them on the ship.' The 'fifth key' limb checks out by counting the article's five sub-headings: Passive Voice, Weak Verbs, Paring 'of the', Deprecation of the 'will', and Plurals Are Pluralistic -- the plurals section is fifth and last. Rationale verbatim: 'turn the subject plural to avoiding assuming gender for your hypothetical subject.'",
+   "fromFile": "verdicts-dnd-i124-138.json"
+  },
+  "133": {
+   "index": 133,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "check for 'to be' verbs and replace them with something more active",
+   "note": "No quotation was supplied to check word for word, so this grades as substance, but the page supports every limb of Rule 7 directly. BAATAG (Misha F, April 2026), 'Rule 7: Information should be presented in the manner in which the players can discover it... This is \"show, don't tell\", but even more so... A rote way to help with this is to check for usage of \"to be\" verbs and replace them with something more active. This can be as simple as replacing \"there is a painting of the king\" with \"the painting reveals the form of the king\", but it's a good check to make sure that you're describing information that can actually be revealed in play.' The author's own retrospective later on the page reinforces it: he 'completely avoid[ed] statements of being in favor of statements of action (Rule 7)'.",
+   "fromFile": "verdicts-dnd-i124-138.json"
+  },
+  "134": {
+   "index": 134,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Excellent boxed text does a lot of heavy lifting",
+   "note": "sageadvice.eu reproduces two Shawn Merwin tweets. November 23, 2021: 'It's more than description. It's a series of prompts that can help your game flow more smoothly.' November 26, 2021: '(Perhaps that's why I prefer to call it \"narrative text\"). Excellent boxed text does a lot of heavy lifting, and atmosphere is definitely part of that burden.' Both quoted fragments verbatim, the preference for 'narrative text' explicit, and the atmosphere limb explicit. The host post itself is dated May 24, 2022; the tweets it archives are the 2021-11 ones the claim cites.",
+   "fromFile": "verdicts-dnd-i124-138.json"
+  },
+  "135": {
+   "index": 135,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A majority of DMs out there WANT boxed text (well-written hopefully)",
+   "note": "sageadvice.eu archives the Shawn Merwin tweet of April 14, 2019 verbatim: '...A majority of DMs out there WANT boxed text (well-written hopefully) to make their lives easier when they buy adventure content. So it is a risk not to provide what your audience and consumers want.' The streaming limb is in the same block: 'if boxed text worked well, then we would see it used on the streams as a go-to to start a scene. I don't think we ever see it.' Note that streaming sentence is the point Merwin is replying to ('A point I was trying to make was...' then 'While this is true...'), not a separate source. Host post dated May 5, 2019.",
+   "fromFile": "verdicts-dnd-i124-138.json"
+  },
+  "136": {
+   "index": 136,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "tends to encourage writers to 'fill the format'",
+   "note": "The Alexandrian, May 19th 2014. The format named is confirmed as 3rd Edition's: 'When 3rd Edition arrived... First appearing in The Sunless Citadel, this format had the familiar boxed text and wall of text, but supplemented this with a specific set of bold-faced sections: Traps Creatures Tactics Development Treasure' -- exactly the five the claim lists, in order. Quote verbatim, and the ogre/goblin illustration verbatim: 'A room with an ogre standing in the middle of it should talk about the ogre first; a room with a goblin hiding behind a tapestry, on the other hand, shouldn't lead off with the goblin.' Plus 'the rigid adventure format forces information to be presented out-of-sequence.'",
+   "fromFile": "verdicts-dnd-i124-138.json"
+  },
+  "137": {
+   "index": 137,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Complete sentences are overrated: Get the information across efficiently",
+   "note": "The Alexandrian, Part 2, May 21st 2014. Every component is a section heading or explicit line on the page: 'TITLE OF THE ROOM'; 'BOXED TEXT... I also think of this section as seen in a glance'; 'REACTIVE SKILL CHECKS -- Directly after the boxed text are the reactive skill checks which should be made immediately'; 'SIGNIFICANT ELEMENTS... Notice that the bold title makes it easy to find the information you need'; 'DEVELOPING SIGNIFICANT ELEMENTS... move from the general to the specific'; 'GM BACKGROUND TAG'. Closing line verbatim: 'Complete sentences are overrated: Get the information across in the most efficient fashion possible.'",
+   "fromFile": "verdicts-dnd-i124-138.json"
+  },
+  "138": {
+   "index": 138,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Write a paragraph that describes everything immediately observable",
+   "note": "dungeons.hismajestytheworm.games Chapter 10: Formatting Room Descriptions. Quote verbatim, continuing 'by adventurers first entering the room... In this paragraph, highlight anything that's interactable in bold.' Ordering limb verbatim under 'First described, first keyed': 'Your bullet points should follow the same order as they were listed in the description.' Monster limb verbatim under 'Except monsters': 'I list obvious dangers like monsters last in my introductory paragraphs. However, because I know that players will want to interact with those elements first, I list those monsters first in subsequent keying.' One note: the page carries no byline, so the 'Josh McCrowell & Warren D' authorship in the source field is not confirmable from this page -- it is not a limb of the claim sentence, which the page supports in full.",
+   "fromFile": "verdicts-dnd-i124-138.json"
+  },
+  "139": {
+   "index": 139,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Raw page (curl, HTTP 200). Quote verbatim: 'but only 3 or 4 bolded words maximum for a complex room that takes up a page or so'. 'Each bolded word refers to a follow up paragraph that explains it.' Rule 3: 'I start with the room's inhabitants... obvious environmental dangers (chasms, lava, etc) and visible valuables... Hidden things such as traps... I tend to write \"(trap)\"or \"(hidden)\" after them.' Every limb supported.",
+   "fromFile": "verdicts-dnd-i139-153.json"
+  },
+  "140": {
+   "index": 140,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Raw page (curl, HTTP 200), dated Tuesday, April 28, 2026, author Misha F. Rule 2 heading: 'Everything defaults to unformatted paragraphs.' Body: 'No bullet points, no bolding.' Quote verbatim in Rule 2's second paragraph: 'Plain text paragraphs still need to serve as reference documents, and still need to follow patterns...'. Rule 4 verbatim: 'Later paragraphs describe one topic each, and that topic should be recognizable from the paragraph's first few words.'",
+   "fromFile": "verdicts-dnd-i139-153.json"
+  },
+  "141": {
+   "index": 141,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Raw page (curl, HTTP 200), cygnus, November 30, 2023. Quote verbatim: 'focusing on what the characters can immediately perceive helps to both A) avoid rambling boxed text and, B) quickly identify key room elements'. Format block matches all limbs: 'Key # - Room Name / Short description (one to two sentences), highlighting the 5 senses. / Visible room element 1 ... | Additional detail provided upon party interaction. / || Nested additional detail ... / Creature stat lines'; plus 'I prefer having the stat lines for creature near the bottom.' ('long' vs the page's 'rambling' boxed text is the only wording slack.)",
+   "fromFile": "verdicts-dnd-i139-153.json"
+  },
+  "142": {
+   "index": 142,
+   "verdict": "PARTIAL",
+   "trueWording": "Sensory line is a commenter's suggestion, not Campbell's method",
+   "unsupportedLimb": "'with sound/smell/breeze cues' — not part of Davis's account of Campbell's method",
+   "note": "Raw page (curl, HTTP 200), Tad Davis, December 5, 2013. Four limbs verbatim in the body: 'the immediately visible items are listed in bold-face'; 'Arrows to Non-boldfaced entries indicate items that are only described if the players investigate'; 'indents are used to group the items and these items are listed in the actual order they are stacked'; 'Words that are not essential are simply not used.' But 'sounds, smells, breezes, etc.' appears ONLY in a reader comment by 'Emily' (Dec 5, 2013, 7:43 am), proposed as something the format 'would work very well for' — not a described feature of Campbell's method and not Davis's text. Claim carries no quote field, so no verbatim grade available.",
+   "fromFile": "verdicts-dnd-i139-153.json"
+  },
+  "143": {
+   "index": 143,
+   "verdict": "PARTIAL",
+   "trueWording": "Page: 'everything I need to run the encounter successfully in seven words' — unattributed blockquote",
+   "unsupportedLimb": "attribution to Courtney Campbell — the page does not credit the seven-words target to him",
+   "note": "Raw page (curl, HTTP 200). In 'How can I write even shorter, punchier room descriptions?' the seven-words sentence sits in an UNATTRIBUTED <blockquote> (no cite in the HTML), and the next, separate paragraph says 'On Set Design by Courtney Campbell lays out an alternate pattern for keying rooms that is very terse' — i.e. Campbell is offered as an alternative to the quoted approach, not as its author. Also the claim's inner quotation ('everything you need to run successfully in seven words') is not word-for-word: the page reads 'everything I need to run the encounter successfully in seven words'. The 'tick room' of the blockquote is not this chapter's worked example (that is a sludge/funeral-shrine room), confirming the block is imported from elsewhere.",
+   "fromFile": "verdicts-dnd-i139-153.json"
+  },
+  "144": {
+   "index": 144,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Raw page (curl, HTTP 200), Coins and Scrolls, 2019/09/05. Verbatim: 'But sprawl is the enemy of utility. Cut mercilessly. Turn pages to paragraphs, paragraphs sentences, sentences to tables, and tables to entries on better and more useful tables.' Order limb verbatim: 'Start with the most important information. What do the PCs see at a glance? What's moving? Then, smells. Details. Hidden information.' And: 'No \"This room is...\". It's a room description. We get it.' Every limb supported.",
+   "fromFile": "verdicts-dnd-i139-153.json"
+  },
+  "145": {
+   "index": 145,
+   "verdict": "PARTIAL",
+   "trueWording": "Rule heading: 'Listing Dimensions and Exits is a Waste!' — with stated exceptions",
+   "unsupportedLimb": "'never' — the post explicitly allows exceptions for exits and for Dungeon23 dimensions",
+   "note": "Raw page (curl, HTTP 200). Quote verbatim: 'Maps! Use them.' is the whole line under rule 2. But the same rule says 'However, listing exits can be helpful if things are confusing, the entrance is itself important, or it holds some evocative detail like a taxidermy crow nailed to a door. I mentioned before that there's no absolutes in these rules.' and 'I also suspect there's some odd specifics with Dungeon23 that make including dimensions and exits more helpful'. The absolute 'never spend key lines on dimensions and exits' overstates a rule the author himself qualifies twice.",
+   "fromFile": "verdicts-dnd-i139-153.json"
+  },
+  "146": {
+   "index": 146,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Raw page (curl, HTTP 200). Rule 4 heading 'Plain Text is Better than Boxed Text!' and 'I dislike box text'. Quote verbatim: 'by sidelining the referee boxed text risks depreciating one big advantage RPGs have over computer RPGs.' Displacement limb verbatim in the next sentence: 'More practically, it discourages the referee from reading the adventure and thus understanding what's in the room before playing it.' Player-facing limb: 'since box text is player facing, the referee doesn't learn about the important hidden aspects of the room until they are already in play.' Only slack: the page hedges 'risks depreciating' where the claim asserts 'is'.",
+   "fromFile": "verdicts-dnd-i139-153.json"
+  },
+  "147": {
+   "index": 147,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Raw page (curl, HTTP 200), David Hartlage, November 21, 2016. All three quotations verbatim: 'When D&D co-creator Gary Gygax created his first dungeon under Castle Greyhawk, he usually wrote a 1-line note for each room'; 'Gary started publishing adventures with G1 Steading of the Hill Giant Chief (1978). He included generous descriptions for every location'; 'Gary's longer descriptions set the pattern for virtually every adventure to follow.' Final limb is a section heading plus its first sentence: 'Matching description to a location's purpose / A location's purpose in the game should also figure into the length of its descriptions.'",
+   "fromFile": "verdicts-dnd-i139-153.json"
+  },
+  "148": {
+   "index": 148,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Raw page (curl, HTTP 200), July 19, 2017. Verbatim: 'The first essay... is \"Adventures in Context,\" by Jobe Bittman. In it we are told that adventure writing is not fiction writing, that it's important to give that which is necessary for the GM to run the scenario and have it make sense, and no more.' Quote 'and no more' present word for word; the 'as reported' framing matches the page's 'we are told' (the reviewer paraphrasing Bittman's essay).",
+   "fromFile": "verdicts-dnd-i139-153.json"
+  },
+  "149": {
+   "index": 149,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Raw page (curl, HTTP 200), Monte Cook, RPG Design Theories, Dec 22, 2022. Solution-as-subtext limb verbatim: an adventure writer 'might be tempted to then explain: \"The way to get the idol out is to get a hover platform and follow the path to the airlock.\" This, I might argue, should be subtext. It's better unsaid.' Facts-plainly limb: 'Blatant \"expository\" writing is a good thing when it comes to telling them what's really going on' and 'Make it clear that the hover platforms will hold the weight of the idol... Don't hide that information'. Setting limb verbatim: 'Don't be coy about the important stuff.' Rules limb verbatim: 'The only place you shouldn't think about subtext is in straight-up rule writing.'",
+   "fromFile": "verdicts-dnd-i139-153.json"
+  },
+  "150": {
+   "index": 150,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Raw page (curl, HTTP 200), Goblin Punch, Friday, January 27, 2017. Verbatim: 'Write snippets. You'll have time to sew them together later.'; 'running a dungeon for your players is the best way to (a) get ideas for your dungeon and (b) expose your dungeon's weaknesses'; 'Cut away all the parts that aren't awesome. It's better to have a small, excellent dungeon that it is to have a bloated, generic megadungeon.' Quote appears word for word. Every limb supported.",
+   "fromFile": "verdicts-dnd-i139-153.json"
+  },
+  "151": {
+   "index": 151,
+   "verdict": "PARTIAL",
+   "trueWording": "'He does touch briefly, in an off-hand way, on those'",
+   "unsupportedLimb": "'faults ... for saying nothing about white space, bullets or evocative writing' — the review says he does touch on them, and frames this as scope, not a fault",
+   "note": "Raw page (curl, HTTP 200), Bryce Lynch, August 13, 2018. Quote verbatim: 'A core part of being perfectly organized is scannability ... the ability of a DM to glance at the page and immediately find what they need'. But the white-space sentence reads: 'This isn't a book on evocative writing, or even adventure organization topics like the use of white space or bullets. He does touch briefly, in an off-hand way, on those but not to any real extent.' — an explicit denial of 'nothing'. The faults Lynch actually names are 'editor minutia' and the alphabetical organization ('WRONG!'); his verdict is positive: 'It's easy to recommend this' and 'the only thing in the How to Write Adventures category that I'd recommend.'",
+   "fromFile": "verdicts-dnd-i139-153.json"
+  },
+  "152": {
+   "index": 152,
+   "verdict": "PARTIAL",
+   "trueWording": "'sample adventures ... which are tight and short and really sort of scripts ... to jog their memory'",
+   "unsupportedLimb": "'read-aloud' and 'not to be recited' — Perkins describes the sample adventures themselves; the words read-aloud/aloud/recite appear nowhere in the article",
+   "note": "Raw page (curl, HTTP 200), Screen Rant, datePublished 2024-10-25, headline '\"Everything In There Better Be Cracking On Topic\": D&D Designers Talk The 2024 Dungeon Master's Guide'. Perkins verbatim: 'if I had the 2024 DMG, which has sample adventures in it, which are tight and short and really sort of scripts for the DM to just to jog their memory and make sure that they're sort of remembering the pace and flow of the adventure, I could have saved myself a lot of prep time.' The quoted phrase 'tight and short' modifies the sample adventures, not their read-aloud text; a case-insensitive grep for 'aloud', 'recit' and 'verbatim' over the whole article returns nothing. Boxed text is mentioned only by Wyatt, on a different point (adventures needlessly re-explaining what boxed text is).",
+   "fromFile": "verdicts-dnd-i139-153.json"
+  },
+  "153": {
+   "index": 153,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "",
+   "note": "Raw page (curl, HTTP 200), David Hartlage, November 15, 2012. Verbatim: 'In 1979, Hidden Shrine of Tamoachan introduced boxed text descriptions for the DM to read when the players entered a location. The Hidden Shrine originated as the adventure used for the \"Official Advanced Dungeons & Dragons tournament at Origins in '79.\" The boxed text provided a way to offer a consistent play experience in a competitive environment.' The claim's inner quotation matches word for word; every limb supported.",
+   "fromFile": "verdicts-dnd-i139-153.json"
+  },
+  "154": {
+   "index": 154,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "When most speakers read something aloud, their voice takes a different tone",
+   "note": "Live page (dmdavid.com tag URL resolves to the 2012-11-15 post by David Hartlage). Exact sentence: 'When most speakers read something aloud, their voice takes a different tone and cadence than when they speak extemporaneously, and that monotony can cause players' attention to wander.' The sunset limb is also present: 'Perhaps too many boxed text descriptions have lingered on descriptions of the color of the sunset and other bits of obviously unimportant fluff.'",
+   "fromFile": "verdicts-dnd-i154-168.json"
+  },
+  "155": {
+   "index": 155,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it was considered a cardinal sin in my gaming circles",
+   "note": "Live page. 'Back in the Reagan era, it was considered a cardinal sin in my gaming circles to read boxed text in published modules'; 'As players, we expected the GM to read the boxed text on her own and paraphrase it for us'; 'I found that I didn't mind boxed text so much. It helped with immersion'. The commenter line is in the page's comment markup as 'Basically, short box text is fine, long box text is a challenge.' — the claim drops 'Basically,' and capitalises. Scope note: the author locates the taboo 'in my gaming circles', not among GMs generally.",
+   "fromFile": "verdicts-dnd-i154-168.json"
+  },
+  "156": {
+   "index": 156,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "match the pace of the text to your regular speech",
+   "note": "Claim carries no quote field, so verbatim grading does not apply; the page supports every limb in near-identical words. 'Practice reading some of the text aloud between sessions if you can so that you can learn the pronunciation and how to match the pace of the text to the cadence of your regular speech.' Tool-not-script limb: 'The most important thing to understand about boxed text is that it's a tool... You need to take the boxed text and make it yours rather than submit to its authority' and 'Adjust it as much or as little as you like'.",
+   "fromFile": "verdicts-dnd-i154-168.json"
+  },
+  "157": {
+   "index": 157,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "If you're the DM, you get two sentences. Period.",
+   "note": "Wayback raw capture 20210713073031id_ of archive.wizards.com. Full context: 'If you're the DM, you get two sentences. Period. Beyond that, your players are stacking dice, talking to each other, or staring off into space.' Narrator of the undercover section is Noonan ('because Dave spent a lot of time wandering around the convention hall at Gen Con'), Gen Con 2005. Only difference from the claim's quote is the page's curly apostrophe.",
+   "fromFile": "verdicts-dnd-i154-168.json"
+  },
+  "158": {
+   "index": 158,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Boxed text replaces that conversation with oration.",
+   "note": "Same 2005 capture. Verbatim. Conversation limb: 'At its heart, a D&D game is a conversation... You tell the DM what you want to do, and the DM replies with the consequences of the action.' Not-used-to-listening limb: DMs without boxed text 'are doing it in a style the players are used to', and 'oration is inherently harder to concentrate on than conversation.'",
+   "fromFile": "verdicts-dnd-i154-168.json"
+  },
+  "159": {
+   "index": 159,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "basic stuff, like room dimensions, how many doors exit the room",
+   "note": "Same 2005 capture. Full: 'players were missing the actual data in the boxed text - basic stuff, like room dimensions, how many doors exit the room, and number of monsters.' Corpse limb from the quoted player questions: 'Wait, the lady in the room is a corpse?' Repetition limb: DMs 'wound up repeating and paraphrasing all the information in it anyway - often in the middle of the action.'",
+   "fromFile": "verdicts-dnd-i154-168.json"
+  },
+  "160": {
+   "index": 160,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Not a recipe for compelling delivery.",
+   "note": "Same 2005 capture. 'DMs are, by and large, reading the boxed text cold... even a dynamic, dramatic DM is reading from a script that he or she has never uttered aloud before. Not a recipe for compelling delivery.' The claim's 'flatly' is the page's 'not a recipe for compelling delivery'.",
+   "fromFile": "verdicts-dnd-i154-168.json"
+  },
+  "161": {
+   "index": 161,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Boxed text in adventures used to be a lot longer than it is today",
+   "note": "Same 2005 capture. The Sons of Gruumsh excerpt quoted on the page is exactly three sentences about two 15-foot oak doors; it is contrasted with a single long paragraph, the cave-mouth entry from '1999's Return to the Keep on the Borderlands, pulled at random from my shelf'.",
+   "fromFile": "verdicts-dnd-i154-168.json"
+  },
+  "162": {
+   "index": 162,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "ditch the boxed text and use your own words",
+   "note": "Same 2005 capture. 'Or better yet, ditch the boxed text and use your own words for the initial description of the room. You'll engage your players in a conversation.'",
+   "fromFile": "verdicts-dnd-i154-168.json"
+  },
+  "163": {
+   "index": 163,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "We're goofing around with some alternatives right now.",
+   "note": "Same 2005 capture. 'But boxed text is something we're definitely watching closely. We're goofing around with some alternatives right now. If they play better at the table, you'll see them in products at some point.' Hedge worth carrying: the page says 'goofing around with', which is weaker than the claim's 'actively testing'; the table-play condition and the products limb are explicit.",
+   "fromFile": "verdicts-dnd-i154-168.json"
+  },
+  "164": {
+   "index": 164,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Reading a roleplaying book just lets you make an educated guess",
+   "note": "Wayback raw capture 20130531083417id_ of www.wizards.com. 'Roleplaying games are fundamentally different than most other media because the way you first experience the product (by reading it) isn't the way you experience it in the long term (by playing it)... Reading a roleplaying book just lets you make an educated guess about whether it's any good or not. You've got to play it to know for sure.' Byline is David Noonan alone.",
+   "fromFile": "verdicts-dnd-i154-168.json"
+  },
+  "165": {
+   "index": 165,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In short, they read good, played bad.",
+   "note": "Same 2006 capture. 'A lot of roleplaying games and especially campaign settings from the mid-1990s... an intertwined web of factions and organizations... Most had ongoing metaplots... It's difficult to slot your own PCs into a game with an important metaplot... either adhere to canon and relegate the PCs to bit players in the ongoing drama, or do your own thing and pitch the provided metaplot... In short, they read good, played bad.'",
+   "fromFile": "verdicts-dnd-i154-168.json"
+  },
+  "166": {
+   "index": 166,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "They're no fun on a read-through.",
+   "note": "Same 2006 capture. 'Another example of \"reads boring\" is the sets of pregenerated NPC stat blocks we put in books. They're no fun on a read-through. But they might save the busy DM's bacon at the table... (And for the record, we're working on ways to make that sort of thing easier for the DM to find and use quickly.)' The page hedges with 'might save'; the claim states it flatly.",
+   "fromFile": "verdicts-dnd-i154-168.json"
+  },
+  "167": {
+   "index": 167,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Avoid the word \"you\" like the plague including derivations",
+   "note": "Wayback raw capture 20161101184116id_ of archive.wizards.com; Living Greyhawk 'Intro to Writing' column, 04/13/2004, by Craig Heir. 'Avoid the word \"you\" like the plague including derivations like \"your\" or \"you're.\"' Reason limb: the rewritten example is glossed 'The text is straight forward but takes control of the characters.' Framing note: the column presents this as tips/guidelines, not a formal prohibition.",
+   "fromFile": "verdicts-dnd-i154-168.json"
+  },
+  "168": {
+   "index": 168,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "read aloud text does not run the character, the player does",
+   "note": "Same 2004 capture. 'some boxed text dictates character actions or assigns emotions to characters... After all, read aloud text does not run the character, the player does.' Both cited examples are on the page verbatim - 'The crying of the babies brings a tear to your eyes.' and 'Fearing for your safety, you grab the hilt of your sword.' - each followed by a neutral rewrite ('Inside the orphanage the babies cry for their lost parents.').",
+   "fromFile": "verdicts-dnd-i154-168.json"
   }
  },
  "mergedAt": "see autosave.log",

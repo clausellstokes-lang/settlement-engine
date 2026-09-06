@@ -141,5 +141,29 @@
    "note": "Quotation is verbatim on the raw Randall page and the assembling-by-inference limb is supported ('Kay's forces us to experience Fionavar as its many characters do'; the strategy 'controls the speed and the manner in which we assimilate the culture of Fionavar'). But the article contains no occurrence of 'exposition' at all, and the only contrast it draws is with fantasies focalized through one or two central characters, not with expository delivery. The nearest support is a different sentence, about events rather than the world: 'the shifting is necessary if we are to observe the kernels directly, instead of having them related by direct speech or another kind of sub-narration.' Graded PARTIAL rather than verified because the contrastive limb is an inference the page does not state.",
    "fromFile": "verdicts-kay-i165-179.json"
   }
+ },
+ {
+  "index": 218,
+  "feature": "other: authorial revision",
+  "claim": "Kay said in 1989 that if he rewrote The Fionavar Tapestry he would polish the prose of the opening chapters.",
+  "source": "Guy Gavriel Kay, interviewed by Raymond H. Thompson at Mythcon, Vancouver, 30 July 1989 (The Camelot Project, 1999)",
+  "url": "https://d.lib.rochester.edu/camelot/text/interview-with-guy-gavriel-kay.html",
+  "quote": "I might polish the prose itself",
+  "page": "answer to 'If you could wave a magic wand that would rewrite the book'",
+  "kind": "own-words",
+  "polarity": "asserts",
+  "date": "1989-07-30",
+  "routeHint": "live URL, raw HTML",
+  "registerHint": "none",
+  "confidence": "high",
+  "angle": "academic",
+  "verdict": {
+   "index": 218,
+   "verdict": "PARTIAL",
+   "trueWording": "I might polish the prose itself, perhaps adding some gloss notes on character",
+   "note": "Raw page (d.lib.rochester.edu Camelot Project, Raymond H. Thompson interview, Mythcon Vancouver, 30 July 1989) fetched via curl; quotation is verbatim. Date, work (the Fionavar trilogy - 'before the characters from our world cross to Fionavar'), and 'opening chapters' ('the first few chapters') all check out. The one limb the page does not carry is the flat 'would': Kay's definite 'would' attaches to paying attention to the first few chapters, while polishing the prose is explicitly hedged as 'I might'. Cure by rewording to 'said he might polish the prose'.",
+   "unsupportedLimb": "the definite 'would polish' - the page says only 'I might polish the prose itself'",
+   "fromFile": "verdicts-kay-i210-224.json"
+  }
  }
 ]

@@ -1,5 +1,59 @@
 [
  {
+  "index": 51,
+  "feature": "house style guide (public release window)",
+  "claim": "The style guide was released publicly on DMs Guild around October 2018 as one of four free PDFs (IP guide, adventure guide, style guide, Forgotten Realms guide) that had previously gone only to official-play writers.",
+  "source": "EN World — DMsGuild: D&D Style-Guides give a unique insight into the game (thread, 2018-11-25)",
+  "url": "https://www.enworld.org/threads/dmsguild-d-d-style-guides-give-a-unique-insight-into-the-game.655198/",
+  "quote": "",
+  "page": "thread page 1",
+  "angle": "craft",
+  "verdict": {
+   "index": 51,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "that these PDFs 'had previously gone only to official-play writers' — the EN World thread says nothing about who received them before the DMs Guild posting",
+   "trueWording": "Free on DMsGuild, 'only been on the site a month or so', four PDFs",
+   "note": "Raw thread page 1 fetched (HTTP 200). Remathilis, Nov 25 2018: 'a rather interesting little gem that is free to download: A D&D Style-guide for publishing' and 'Its only been on the site a month or so' — which puts the posting around October 2018 — and 'Its divided into four PDFs: An IP Guide… an Adventure Guide… a Style Guide… and a Forgotten Realms Style Guide'. Those limbs are solid. Greps of the whole page for 'official play', 'organized play', 'Adventurers League', 'previously' and 'only to' return nothing. The missing limb is corroborated verbatim on this chunk's index-53 source (thekindgm.com: 'They were first available only to official play writers but now they're available to the broader public of the DMs Guild') — so the fact is sound but this citation does not carry it.",
+   "fromFile": "verdicts-dnd-i49-63.json"
+  }
+ },
+ {
+  "index": 53,
+  "feature": "house style guide (availability lapsed)",
+  "claim": "The Kind GM's post on the creator resource carries a May 2020 commenter report that the material was no longer available, which the author acknowledged — so the public window was roughly 2018–2020.",
+  "source": "The Kind GM — DMs Guild Style Guide Resources (2018-10-24)",
+  "url": "https://thekindgm.com/2018/10/24/dmsguild-style-guide-resources/",
+  "quote": "",
+  "page": "post + comments",
+  "angle": "craft",
+  "verdict": {
+   "index": 53,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "'so the public window was roughly 2018–2020' — the page never says availability ended; the author's reply is that he fixed the link",
+   "trueWording": "'Apparently, this material is no longer available.' / 'I have updated the link'",
+   "note": "Raw page fetched (HTTP 200). Post dated 'October 24, 2018 May 25, 2020'. Comment by mattwest2342, May 25 2020 5:43 am: 'Apparently, this material is no longer available.' Reply by The Kind GM, May 25 2020 12:33 pm: 'Thank you for bringing it to my attention. I have updated the link'. So the commenter report and the author's acknowledgement are exact. The inference limb is the problem: the author's response points to a working link rather than to a lapse, so this page does not establish that the public window closed around 2020. The page does support the window's opening: 'They were first available only to official play writers but now they're available to the broader public of the DMs Guild.'",
+   "fromFile": "verdicts-dnd-i49-63.json"
+  }
+ },
+ {
+  "index": 56,
+  "feature": "house style guide (freelancer distribution)",
+  "claim": "Work-for-hire WotC freelancers receive the D&D House Style Guide, the 5e Word template, pitch examples and lore documents at contract start, and drafts are formatted with them.",
+  "source": "POCGamer — What happened? Writing for Wizards, Part 1 (Graeme Barber, 2021-03-23)",
+  "url": "https://pocgamer.com/archives/1426",
+  "quote": "",
+  "page": "blog post",
+  "angle": "craft",
+  "verdict": {
+   "index": 56,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "that the template is a Word template — the packet list on the page names only 'The 5e Template', never Word",
+   "trueWording": "Receive an instructional packet containing: The D&D Wizards House Style Guide",
+   "note": "Raw page fetched (HTTP 200; 'Graeme Barber / 23/03/2021'). Every other limb is exact. Stage 1 is 'Accept the offer, signing an NDA and providing payment information'; stage 2 is 'Receive an instructional packet containing: The D&D Wizards House Style Guide. The 5e Template. An example of a Pitch. Project Instructions. Project Appropriate Lore. An example of a pitch, draft, and extras.' — so style guide, template, pitch examples and lore documents at contract start, all confirmed, in a process the page frames as 'writing for Wizards as a work-for-hire freelance writer'. The formatting limb is verbatim too: 'Drafting Process: You will write a draft, formatted using the Style Guide and Template, and submit it.' Grep for the word 'Word' on the page returns nothing. The Word detail is corroborated elsewhere — the v1.04a style guide (this chunk's index-49 source) says 'If you are using the 5E Template in Word' — but POCGamer does not say it.",
+   "fromFile": "verdicts-dnd-i49-63.json"
+  }
+ },
+ {
   "index": 71,
   "feature": "'not' contractions encouraged",
   "claim": "The guide encourages contractions formed with 'not' (don't, can't, wasn't) and warns against ambiguous ones like 'who's' — a deliberately conversational register for rules.",
@@ -105,6 +159,114 @@
    "note": "By Gus L., Monday December 19, 2022. The designated quote is verbatim (page: 'No one wants to read a three page key to a single room, written in the style of Undermountian or a 1993 Dungeon Magazine adventure'). But the page does not set five sentences as a maximum. It reads: 'Keys longer than five or six sentences can work, with a good editor, and an attention to ordering their contents, but that's a good basic limit. Longer keys are even needed at times for complex puzzles and npcs, but basic description shouldn't really get beyond a paragraph.' So the figure is five-or-six, framed as a soft 'good basic limit' that longer keys can exceed with editing - and puzzles/NPCs are given as cases where longer is 'even needed at times', not as the sole licensed exception.",
    "unsupportedLimb": "'five sentences maximum' and 'longer only for puzzles and NPCs': page says five or six as a soft 'good basic limit' that longer keys can exceed with a good editor",
    "fromFile": "verdicts-dnd-i94-108.json"
+  }
+ },
+ {
+  "index": 127,
+  "feature": "newspaper-lead ordering",
+  "claim": "Chris Doyle's essay (as reported): write read-aloud like a newspaper lead — immediate threat first ('GIANT SLAVERING OGRE'), secondary details after, lower-level details left for searching.",
+  "source": "Gaming Ballistic — Ballistic's Report: How to Write Adventure Modules that Don't Suck (2017-07-19)",
+  "url": "https://gamingballistic.com/2017/07/19/ballistics-report-how-to-write-adventure-modules-that-dont-suck/",
+  "quote": "GIANT SLAVERING OGRE",
+  "page": "report on Doyle, 'How to Write Encounters that Don't Suck'",
+  "angle": "craft",
+  "verdict": {
+   "index": 127,
+   "verdict": "PARTIAL",
+   "trueWording": "GIANT SLAVERING OGRE is moving through broken furniture",
+   "note": "The quotation is on the page verbatim, twice, and the ordering limbs all hold -- immediate threat first, 'the rest can be dealt with after the party has survived the immediate threat', 'use newspaper conventions - big details that are right in your face up front, and details later', and 'the more your party searches, the more paragraphs can be read.' What fails is the attribution. The reviewer introduces the whole newspaper-lead passage as HIS addition to Doyle: 'One thing that might be implied but could be made explicit' -- an explicit disclaimer that Doyle's essay does not say it -- and then credits the advice to someone else: 'In fact, Juan Ochoa gave me that advice about giving him art direction.' What the page does attribute to Doyle is the encounter checklist (read-aloud text, description and details, stats, how a critter fights, treasure, consequences and developments) and the balance line 'first, it goes without saying that encounters need to be balanced for the adventuring party.'",
+   "unsupportedLimb": "that the newspaper-lead ordering is Chris Doyle's -- the page flags it as the reviewer's own addition ('might be implied but could be made explicit') and credits it to Juan Ochoa",
+   "fromFile": "verdicts-dnd-i124-138.json"
+  }
+ },
+ {
+  "index": 142,
+  "feature": "Courtney Campbell bold/arrow key economy",
+  "claim": "Tad Davis describes Campbell's economy method: bold for immediately visible items, arrows to hidden ones, indentation for stacking, omitting non-essential words, with sound/smell/breeze cues.",
+  "source": "ars phantasia — On Useful Dungeon Key Entries (Tad Davis, 2013-12-05)",
+  "url": "https://arsphantasia.wordpress.com/2013/12/05/on-useful-dungeon-key-entries/",
+  "quote": "",
+  "page": "essay",
+  "angle": "craft",
+  "verdict": {
+   "index": 142,
+   "verdict": "PARTIAL",
+   "trueWording": "Sensory line is a commenter's suggestion, not Campbell's method",
+   "unsupportedLimb": "'with sound/smell/breeze cues' — not part of Davis's account of Campbell's method",
+   "note": "Raw page (curl, HTTP 200), Tad Davis, December 5, 2013. Four limbs verbatim in the body: 'the immediately visible items are listed in bold-face'; 'Arrows to Non-boldfaced entries indicate items that are only described if the players investigate'; 'indents are used to group the items and these items are listed in the actual order they are stacked'; 'Words that are not essential are simply not used.' But 'sounds, smells, breezes, etc.' appears ONLY in a reader comment by 'Emily' (Dec 5, 2013, 7:43 am), proposed as something the format 'would work very well for' — not a described feature of Campbell's method and not Davis's text. Claim carries no quote field, so no verbatim grade available.",
+   "fromFile": "verdicts-dnd-i139-153.json"
+  }
+ },
+ {
+  "index": 143,
+  "feature": "seven-word density",
+  "claim": "Designing Dungeons cites Courtney Campbell's target of encoding 'everything you need to run successfully in seven words'.",
+  "source": "Designing Dungeons — Chapter 10: Formatting Room Descriptions (Josh McCrowell & Warren D)",
+  "url": "https://dungeons.hismajestytheworm.games/docs/chapter10/",
+  "quote": "",
+  "page": "chapter 10, citing Campbell's Set Design",
+  "angle": "craft",
+  "verdict": {
+   "index": 143,
+   "verdict": "PARTIAL",
+   "trueWording": "Page: 'everything I need to run the encounter successfully in seven words' — unattributed blockquote",
+   "unsupportedLimb": "attribution to Courtney Campbell — the page does not credit the seven-words target to him",
+   "note": "Raw page (curl, HTTP 200). In 'How can I write even shorter, punchier room descriptions?' the seven-words sentence sits in an UNATTRIBUTED <blockquote> (no cite in the HTML), and the next, separate paragraph says 'On Set Design by Courtney Campbell lays out an alternate pattern for keying rooms that is very terse' — i.e. Campbell is offered as an alternative to the quoted approach, not as its author. Also the claim's inner quotation ('everything you need to run successfully in seven words') is not word-for-word: the page reads 'everything I need to run the encounter successfully in seven words'. The 'tick room' of the blockquote is not this chapter's worked example (that is a sludge/funeral-shrine room), confirming the block is imported from elsewhere.",
+   "fromFile": "verdicts-dnd-i139-153.json"
+  }
+ },
+ {
+  "index": 145,
+  "feature": "map carries dimensions and exits",
+  "claim": "Gus L.: 'Maps! Use them.' — never spend key lines on dimensions and exits.",
+  "source": "All Dead Generations — Dungeon Design, Process and Keys (Gus L., 2022-12-19)",
+  "url": "https://alldeadgenerations.blogspot.com/2022/12/dungeon-design-process-and-keys.html",
+  "quote": "Maps! Use them.",
+  "page": "essay",
+  "angle": "craft",
+  "verdict": {
+   "index": 145,
+   "verdict": "PARTIAL",
+   "trueWording": "Rule heading: 'Listing Dimensions and Exits is a Waste!' — with stated exceptions",
+   "unsupportedLimb": "'never' — the post explicitly allows exceptions for exits and for Dungeon23 dimensions",
+   "note": "Raw page (curl, HTTP 200). Quote verbatim: 'Maps! Use them.' is the whole line under rule 2. But the same rule says 'However, listing exits can be helpful if things are confusing, the entrance is itself important, or it holds some evocative detail like a taxidermy crow nailed to a door. I mentioned before that there's no absolutes in these rules.' and 'I also suspect there's some odd specifics with Dungeon23 that make including dimensions and exits more helpful'. The absolute 'never spend key lines on dimensions and exits' overstates a rule the author himself qualifies twice.",
+   "fromFile": "verdicts-dnd-i139-153.json"
+  }
+ },
+ {
+  "index": 151,
+  "feature": "scannability as the editor's gap",
+  "claim": "Lynch faults Vallese's guide for saying nothing about white space, bullets or evocative writing — the DM must 'glance at the page and immediately find' what is needed.",
+  "source": "tenfootpole.org — Writing with Style: An Editor's Advice for RPG Writers review (Bryce Lynch, 2018-08-13)",
+  "url": "https://tenfootpole.org/ironspike/?p=4366",
+  "quote": "glance at the page and immediately find",
+  "page": "review",
+  "angle": "craft",
+  "verdict": {
+   "index": 151,
+   "verdict": "PARTIAL",
+   "trueWording": "'He does touch briefly, in an off-hand way, on those'",
+   "unsupportedLimb": "'faults ... for saying nothing about white space, bullets or evocative writing' — the review says he does touch on them, and frames this as scope, not a fault",
+   "note": "Raw page (curl, HTTP 200), Bryce Lynch, August 13, 2018. Quote verbatim: 'A core part of being perfectly organized is scannability ... the ability of a DM to glance at the page and immediately find what they need'. But the white-space sentence reads: 'This isn't a book on evocative writing, or even adventure organization topics like the use of white space or bullets. He does touch briefly, in an off-hand way, on those but not to any real extent.' — an explicit denial of 'nothing'. The faults Lynch actually names are 'editor minutia' and the alphabetical organization ('WRONG!'); his verdict is positive: 'It's easy to recommend this' and 'the only thing in the How to Write Adventures category that I'd recommend.'",
+   "fromFile": "verdicts-dnd-i139-153.json"
+  }
+ },
+ {
+  "index": 152,
+  "feature": "Perkins: script text jogs memory",
+  "claim": "Perkins describes the 2024 DMG sample adventures' read-aloud as 'tight and short' scripts whose job is to jog the DM's memory, not to be recited.",
+  "source": "Screen Rant — 'Everything In There Better Be Cracking On Topic': D&D Designers Talk The 2024 DMG (Perkins & Wyatt interview, 2024-10-25)",
+  "url": "https://screenrant.com/dnd-2024-dungeon-master-guide-interview-perkins-wyatt/",
+  "quote": "tight and short",
+  "page": "interview",
+  "angle": "craft",
+  "verdict": {
+   "index": 152,
+   "verdict": "PARTIAL",
+   "trueWording": "'sample adventures ... which are tight and short and really sort of scripts ... to jog their memory'",
+   "unsupportedLimb": "'read-aloud' and 'not to be recited' — Perkins describes the sample adventures themselves; the words read-aloud/aloud/recite appear nowhere in the article",
+   "note": "Raw page (curl, HTTP 200), Screen Rant, datePublished 2024-10-25, headline '\"Everything In There Better Be Cracking On Topic\": D&D Designers Talk The 2024 Dungeon Master's Guide'. Perkins verbatim: 'if I had the 2024 DMG, which has sample adventures in it, which are tight and short and really sort of scripts for the DM to just to jog their memory and make sure that they're sort of remembering the pace and flow of the adventure, I could have saved myself a lot of prep time.' The quoted phrase 'tight and short' modifies the sample adventures, not their read-aloud text; a case-insensitive grep for 'aloud', 'recit' and 'verbatim' over the whole article returns nothing. Boxed text is mentioned only by Wyatt, on a different point (adventures needlessly re-explaining what boxed text is).",
+   "fromFile": "verdicts-dnd-i139-153.json"
   }
  }
 ]

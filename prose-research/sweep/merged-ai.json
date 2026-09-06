@@ -11532,6 +11532,641 @@
    "trueWording": "without further specification of style or substance, output feels generic",
    "note": "Quote verbatim at arxiv.org/html/2402.18659v5 (stamped 'arXiv:2402.18659v5 [cs.CL] 09 Dec 2024'), Sec.III-D: 'Prompting current LLMs for stories, without any further specification of style or substance, tends to produce output that feels generic.' The claim restates that sentence.",
    "fromFile": "verdicts-ai-i359-373.json"
+  },
+  "374": {
+   "index": 374,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "An LLM Game Master would try to accommodate for even the most bizarre requests",
+   "note": "Sec. V Limitations. Raw arXiv HTML v5, exact: 'Human GMs frequently curb the more exotic player requests...' then 'An LLM Game Master would try to accommodate for even the most bizarre requests, with little consideration for the consequential impacts to any predetermined game events.' Every limb (human GM curbs; LLM accommodates; little regard for predetermined events) is on the page. Only softening: the paper's verb is conditional 'would try to', the claim's is indicative 'accommodates'.",
+   "fromFile": "verdicts-ai-i374-388.json"
+  },
+  "375": {
+   "index": 375,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "they will output plausible but false statements simply because they are a probable sequence of words",
+   "note": "Sec. V, hallucination paragraph. Exact on raw page: 'LLMs suffer from hallucinations [50,151], meaning that they will output plausible but false statements simply because they are a probable sequence of words.' Both limbs supported.",
+   "fromFile": "verdicts-ai-i374-388.json"
+  },
+  "376": {
+   "index": 376,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "LLMs sometimes struggle to capture user intent; especially sarcasm; clarifying multiple times leads to frustration",
+   "note": "Sec. V. Exact: 'Another limitation is that LLMs sometimes struggle to capture user intent. This is especially evident with expressions of sarcasm [156].' and 'Many LLMs misunderstand user requests [157], and clarifying to the LLM multiple times leads to frustration.' The player limb is carried by the surrounding sentences ('applications of LLMs that converse directly with the player'; 'can be a frustrating experience' for the user).",
+   "fromFile": "verdicts-ai-i374-388.json"
+  },
+  "377": {
+   "index": 377,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "some story elements deviated from their intent or specific details seemed to change",
+   "note": "Sec. 3.3 Pilot Study with Game Master v1 (N=8, recruited TTRPG/CYOA players). Exact: 'many participants finding that some story elements deviated from their intent or that the specific details seemed to change, such as the number of enemies or items.' The 'pilot users' limb is confirmed by the section heading and 'The resulting GM v1 was validated in a pilot study with users (N=8)'.",
+   "fromFile": "verdicts-ai-i374-388.json"
+  },
+  "378": {
+   "index": 378,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the GM often provided incoherent responses or forgot that the player had just picked up an item",
+   "note": "Sec. 3.3, same pilot paragraph. Exact: 'participants asked for a more robust way to check what items their character was holding-some tried to ask the system, and this worked in some cases, yet the GM often provided incoherent responses or forgot that the player had just picked up an item.' The worsening limb is the next sentence: 'the system would begin to do worse as the game continued in terms of keeping track of the story'.",
+   "fromFile": "verdicts-ai-i374-388.json"
+  },
+  "379": {
+   "index": 379,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "unless they meticulously described their actions, v1 often resulted in non-sensical outcomes",
+   "note": "Sec. 5.2, Game Master Flexibility Dynamics. Exact: 'Participants found that unless they meticulously described their actions, v1 often resulted in non-sensical outcomes, such as characters stumbling or self-injuring when the system failed to identify an appropriate target.' The 'prompt-engineered GM' limb = v1, confirmed by the Introduction: 'explored if and how well we can realize a first GM version with prompt engineering techniques alone.'",
+   "fromFile": "verdicts-ai-i374-388.json"
+  },
+  "380": {
+   "index": 380,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "over-compliance ... may result in the game veering drastically from the intended narrative, potentially causing irreparable disruptions",
+   "note": "Sec. 2 related work. Exact on the page: 'Another issue is the over-compliance of LLMs, which, in the role of a GM, may result in the game veering drastically from the intended narrative, potentially causing irreparable disruptions.' Note for the record: this sentence is ChatRPG's paraphrase of Gallotta et al. 2024 (the claim-374 source), not an original ChatRPG finding - but it is the page's own wording, so the attribution holds.",
+   "fromFile": "verdicts-ai-i374-388.json"
+  },
+  "381": {
+   "index": 381,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "poorly generated dialogue or incoherent narrative arcs may disrupt player immersion or actively harm player experience",
+   "note": "Sec. I Introduction. Exact: 'In some cases, poorly generated dialogue or incoherent narrative arcs may disrupt player immersion or actively harm player experience-undermining the very engagement such systems are designed to foster.' Every limb present.",
+   "fromFile": "verdicts-ai-i374-388.json"
+  },
+  "382": {
+   "index": 382,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "we engaged a panel of n=10 experts; a distinctive and compelling narrative voice is a critical marker",
+   "note": "Sec. III-B and V-A. The panel-size limb IS on the raw page: 'we engaged a panel of <math alttext=\"n=10\">...</math> experts in narrative design for games' - rendered as MathML, so a naive tag-strip drops it; confirmed both in the raw HTML source and in the arXiv PDF ('a panel of n = 10 experts'). Sec. V-A exact: 'while \"Naturalness\" was included as a dimension, it did not fully capture the nuanced aspects of voice or tone' and 'a distinctive and compelling narrative voice is a critical marker of story quality, distinct from plot or character development.' Delphi method confirmed throughout.",
+   "fromFile": "verdicts-ai-i374-388.json"
+  },
+  "383": {
+   "index": 383,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "producing a hard-boiled detective story when a fantasy narrative is requested ... regardless of technical competence",
+   "note": "Sec. V-A. Exact: 'a story that fails to adhere to or meaningfully challenge the tropes of its genre, such as producing a hard-boiled detective story when a fantasy narrative is requested, was identified as a significant quality failure, regardless of technical competence. As such, genre alignment emerged as a \"must-be\" requirement for the readers.' The 'must-be' label attaches to the genre-alignment dimension rather than to the individual example, but the claim's compression is faithful.",
+   "fromFile": "verdicts-ai-i374-388.json"
+  },
+  "384": {
+   "index": 384,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "Quality varies unpredictably; cited studies found overly positive endings, uneven sessions",
+   "note": "No quote was supplied and none is needed: every limb is on the raw page, but split across two sentences of Sec. I with different attributions. The paper's own sentence: 'Even with well-crafted prompts, the quality of the generated content can vary unpredictably, leading to results that are unconvincing, repetitive, or misaligned with the desired tone or character development.' The endings and across-sessions limbs come from the preceding sentence, where the paper is REPORTING other work: 'with some studies identifying trends toward overly positive or uninspired endings [13], or uneven output quality across sessions [14]' (refs 13/14 = Taveekitworachai et al. 2023). So the claim is supported by the source but fuses the authors' own assertion with findings they attribute to cited studies; graded SUBSTANCE rather than VERBATIM for that reason.",
+   "fromFile": "verdicts-ai-i374-388.json"
+  },
+  "385": {
+   "index": 385,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "They can't read a text, form a mental model ... All they can do is produce a stream of babbled text",
+   "note": "Exact on the live page (thealexandrian.net, HTTP 200, no block): 'They can't read a text, form a mental model of what that text means, and then use that mental model. They can't observe the world, think about it abstractly, and then describe their conclusions. All they can do is produce a stream of babbled text.' Both limbs verbatim.",
+   "fromFile": "verdicts-ai-i374-388.json"
+  },
+  "386": {
+   "index": 386,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "ChatGPT momentarily forgets that everyone is onboard ships ... now they're no longer pirates. They're lost travelers",
+   "note": "Section 'AI GAME MASTERS'. Exact: 'The PCs are following a distress signal. It turns out that the distress signal is actually a trap set by bloodthirsty pirates. Two ships attack! ChatGPT momentarily forgets that everyone is onboard ships. We're back in ships, but now there's only one pirate ship. And now they're no longer pirates. They're lost travelers who are hoping the PCs can help them chart a course home.' The 'playtest transcript' limb is the page's own framing: 'I asked it to generate a playtest transcript of the game' and the transcript's own header 'Lasers & Feelings - Playtest Session Transcript'. 'Within a few turns' is a faithful compression of the successive beats of one encounter.",
+   "fromFile": "verdicts-ai-i374-388.json"
+  },
+  "387": {
+   "index": 387,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "A 'hallucination' would imply a false mental model ... It's just words. There is no underlying mental model",
+   "note": "Exact: 'This is why the term \"hallucinate\" is deceptive... A \"hallucination\" would imply that the LLM has formed a false mental model of the world and is now describing that false understanding. But this is not, in fact, what's happening. What's happened is that it guessed a word and that word, while matching the patterns found in the model's training data, did not conform to reality. It's just words. There is no underlying mental model behind them.' All three limbs (misdescription, no false model, guessed word matching training patterns but not reality) verbatim.",
+   "fromFile": "verdicts-ai-i374-388.json"
+  },
+  "388": {
+   "index": 388,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "individual moments ... are all pretty good simulacra ... the totality of the experience is nothing more than random babble",
+   "note": "Exact: 'The individual moments ... are all pretty good simulacra. But they are, in fact, an illusion, and the totality of the experience is nothing more than random babble.' The causal limb is the immediately preceding paragraph: 'the GM's primary responsibility is to create and hold a mental model of the game world... This mental model is the canonical reality of the game, and it's continuously updated', followed by 'LLMs can't handle the fictional continuity of an RPG adventure for the same reason they \"hallucinate.\"'",
+   "fromFile": "verdicts-ai-i374-388.json"
+  },
+  "389": {
+   "index": 389,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "basic math screwed up; no complication inflicted after the success",
+   "note": "Raw page fetched live (200, browser UA), dated December 28th, 2025. Both named violations are on the page in the Lasers & Feelings playtest: at character creation ChatGPT \"almost immediately screws up basic math\" (\"Number: 3 (balanced but slightly leaning Lasers)\" - 3 leans Feelings), it mis-states the target number (\"Under 3 counts as a success\" - \"This is incorrect. A 3 would also count as a success\"), and after the first successful roll \"The GM did not inflict a complication, harm, or cost.\" Claim carries no quote field, so substance grade. Precision point: the article's own \"two mechanics\" of this one-page game are the action roll and Helping; both errors the claim names are action-roll rules (Helping is never shown violated), so \"two core mechanics\" reads correctly only as the two rules the parenthetical enumerates.",
+   "fromFile": "verdicts-ai-i389-403.json"
+  },
+  "390": {
+   "index": 390,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"You're telling people things. You want to SHOW people things.\"",
+   "note": "Quote appears word for word (curly apostrophe in original). Both read-aloud specimens are on the page verbatim: \"Suddenly, in the distance, you hear the desperate cry of a woman in distress!\" and \"a black skull mask to his face, a cursed artifact that emanates a palpable malevolence\". The \"instead of letting players feel it\" limb is the next sentence: \"We want them to feel it, visceral. Not be told it.\"",
+   "fromFile": "verdicts-ai-i389-403.json"
+  },
+  "391": {
+   "index": 391,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"the prose reeks of either EASL or AI\"; \"write a response in ChatGPT Style\"",
+   "note": "Quote verbatim (Anonymous, June 1 2024). Plural \"commenters\" is right: Lonely Penguin \"Pretty clearly written by AI\" and Yomar \"clearly written using an LLM\" as well. The publisher (1st Adventures team) posted a reply June 2, and Anonymous answered \"Motherfuckers even write a response in ChatGPT Style. Oof.\", with another commenter reproducing a ChatGPT-generated version of that reply. Hooks limb verbatim in Bryce's text: \"The standard please help me stuff, very abstract, in about one sentence.\"",
+   "fromFile": "verdicts-ai-i389-403.json"
+  },
+  "392": {
+   "index": 392,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"Note the padding. Note how it doesn't say ANYTHING.\"",
+   "note": "Quote verbatim. The opener is on the page exactly as claimed (\"Arriving at the house, the PCs see a strange sight: the structure appears to be ...\" - \"This then is the opening line of the first real room\"), as is the deletability limb: \"You can literally delete everything here and not impact the adventure in any way at all.\" The \"every encounter\" limb is the page's \"And encounter after encounter does this, is like this\" plus \"This is the normal manner for this adventure\" - repetition-across-encounters, phrased as recurrence rather than a literal universal.",
+   "fromFile": "verdicts-ai-i389-403.json"
+  },
+  "393": {
+   "index": 393,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"A tell-tale sign of ChatGPT, btw. It's its default style\"",
+   "note": "Quote verbatim from commenter Max Z (Nov 25 2024), continuing \"...if you ask it to 'write a room description for a D&D game'\". Both remaining limbs verbatim in the same comment: \"you can tell it to 'be brief' and it cuts this shit out without any problem\" and \"But the author would have to understand that this padding is meaningless first\".",
+   "fromFile": "verdicts-ai-i389-403.json"
+  },
+  "394": {
+   "index": 394,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "\"Commenters\" (plural) - exactly one comment on the page makes this point (Anonymous, Nov 26 2024, 1:04 am); no second commenter says it",
+   "trueWording": "One commenter laments the mediocre D&D corpus ChatGPT trained on",
+   "note": "Quote is on the page word for word, inside the whole comment: \"If only the typical D&D adventure writing ChatGPT was trained on was good\". The substance - style inheriting the mediocrity of the training corpus - is carried by that single wry conditional; it is the entire comment, with no elaboration. Downgraded on the plural attribution only, which matters because this chunk's neighbouring claims (391) genuinely do rest on several commenters.",
+   "fromFile": "verdicts-ai-i389-403.json"
+  },
+  "395": {
+   "index": 395,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "be more specific than \"wicked\": wiry fur, fangs, red eyes",
+   "note": "No quote field, so substance grade. The contrast is explicit in Bryce's review of the bird/goat: \"I might be more specific than 'wicked' in a description ... wiry brustle fur, sharp fangs and blood red eyes or some such\" (page's own typo \"brustle\"), set against the module's \"small, wicked-looking six-legged three-eyed winged goat\". So: weak abstract adjective named, concrete alternative supplied.",
+   "fromFile": "verdicts-ai-i389-403.json"
+  },
+  "396": {
+   "index": 396,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"it's full of second person narrative, YOU step off the boat. YOU see a so and so.\"",
+   "note": "Quote verbatim in Bryce's text. The intro-read-aloud limb is supported: \"The long read-aloud literally has you stepping off your boat on to the dock and seeing a sign on the tavern door\", \"a page of single column read-aloud ... all on monologue form\". Attribution limb verbatim from commenter Max Z (June 13 2024): \"I bet that's also where the abundance of second person comes too - ChatGPT does it by default unless you tell it 'not to describe my actions'.\"",
+   "fromFile": "verdicts-ai-i389-403.json"
+  },
+  "397": {
+   "index": 397,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"a year ago ... this is the _exact_ phrase the AI was giving me for some corridor\"",
+   "note": "Quote verbatim, ending Max Z's comment: \"Basically, if the prompts are all the same, the results will be almost or exactly the same.\" Every limb holds: \"a year ago\", a different adventure (\"one of OSRIC sewers adventures (AA25, Beneath the Heart of Empire)\"), and the exact corridor phrase - he quotes back the module's \"The air is thick with the stench of decay...\" line. \"Same prompt, same output\" is his stated principle rather than a claim that his prompt was byte-identical.",
+   "fromFile": "verdicts-ai-i389-403.json"
+  },
+  "398": {
+   "index": 398,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"There's no real distinction between when read-aloud starts and when it stops. It just sort of all runs together\"",
+   "note": "Quote verbatim. Typographic limb is explicit: the adventure \"IMMEDIATELY shifts to DM text, with no change in font, or shading, or section heading\" (also \"one paragraph break suddenly turns in to DM text again\"). Attention limb verbatim: \"the intro read-aloud text being Looooong, diverting players focus from paying attention.\"",
+   "fromFile": "verdicts-ai-i389-403.json"
+  },
+  "399": {
+   "index": 399,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "stench of decay, dripping water echoes off damp walls",
+   "note": "No quote field, so substance grade - though the fragment embedded in the claim matches the page word for word. The line is the module's sewer-descent opener, quoted by Bryce and then quoted back by commenter Max Z, who says ChatGPT gave him \"the _exact_ phrase\" a year earlier - that is what makes it \"the predictable generated sensory opener\". Dock limb verbatim: encounters one to three on the docks share \"some read-aloud that is to be used for all three of these encounters\" / \"used for all three of the encounters, exactly the same\".",
+   "fromFile": "verdicts-ai-i389-403.json"
+  },
+  "400": {
+   "index": 400,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "EVERYTHING gets a backstory; read-aloud over-reveals; commenter asks about AI",
+   "note": "No quote field, so substance grade; all three limbs are nonetheless verbatim on the page. Backstory: \"The fucking adventure is FULL of backstory. EVERYTHING gets a backstory.\" Read-aloud: \"the read-aloud text also over-reveals information. Why engage in the trivial back and forth between the DM and players that is the heart of the game when you can now get all of the details in the read-aloud\" (Bryce's sarcasm, i.e. players need not engage). Commenter Philipp (Aug 8 2024): \"I had the feeling this publisher relies heavily on AI, both text and illustrations. Would you say is this apparent in this module?\"",
+   "fromFile": "verdicts-ai-i389-403.json"
+  },
+  "401": {
+   "index": 401,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"just generating plausible word-sequences and has no idea what it means\"",
+   "note": "Quote verbatim in Hemlock's commentary (Dec 21 2022) on an F# answer relayed from Reddit: \"ChatGPT's 'explanation' is superficially plausible as technobabble, but deeply untrustworthy in the same way as Star Trek technobabble.\" The inspection limb is his next clause: \"unlike a good explanation, it doesn't become more clear as you study it more closely ... instead it becomes more clear that chatGPT is just generating plausible word-sequences\" - i.e. scrutiny exposes the emptiness rather than clarifying the explanation, which the claim renders as getting less clear on inspection.",
+   "fromFile": "verdicts-ai-i389-403.json"
+  },
+  "402": {
+   "index": 402,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"the Bot does not understand the implications of 'up' and 'down'\"",
+   "note": "Quote verbatim (Beoric, Dec 19 2022): \"it thought it was reasonable that you could fall through trap doors on the ceiling.\" The generated text is on the same page twice, in two separate bot outputs: \"The ceiling of this room is dotted with numerous trap doors ... Any character standing beneath one of these trap doors when it is triggered will fall through, taking 1d6 points of damage\", and the regenerated trick room's \"The ceiling is dotted with trap doors that open and close at random intervals, forcing the characters to duck and weave to avoid falling through.\" Plural \"rooms\" therefore holds.",
+   "fromFile": "verdicts-ai-i389-403.json"
+  },
+  "403": {
+   "index": 403,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "\"The 'burst of flame' has no damage stats though; it's pure fluff with no effect\"",
+   "note": "Quote verbatim (Hemlock, Dec 19 2022), posted in direct reply to Maynard's quoted line \"Interesting to see that even AI can write a better kitchen than most of the dreck Bryce reads.\" The \"generated\" limb was confirmed by also fetching page 3 of the same thread, where Beoric's ChatGPT output reads: \"There is a trap in the room that will release a burst of flames if triggered, which has a one in six chance of affecting any creatures in the room\" - no damage dice anywhere in it. Only the generating text itself sits on page 3; the assessment quoted is on page 4.",
+   "fromFile": "verdicts-ai-i389-403.json"
+  },
+  "404": {
+   "index": 404,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "without actually knowing what's in the Fiend Folio",
+   "note": "Raw page (curl, HTTP 200) post #67 by Hemlock: 'They all exist in the 5E MMs though. A good illustration of the limits of GPT: apparently it's aware that these monsters tend to be discussed adjacent to the Fiend Folio, without actually knowing what's in the Fiend Folio.' The first limb is carried by Beoric's quoted post on the same page: 'It is worth mentioning that as far as I can tell some of those monsters do not appear in any version of the FF that I am aware of.' The generated room listed Hezrous, Gibbering mouthers, Grell, Vargouilles and Dretch as Fiend Folio monsters. Both source statements are hedged ('as far as I can tell', 'apparently'); the claim states them flatly.",
+   "fromFile": "verdicts-ai-i404-418.json"
+  },
+  "405": {
+   "index": 405,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "there were similarities with the original room",
+   "note": "Raw page, Beoric post #64: after asking for 'a unique encounter in the trick room', he writes 'The other is that there were similarities with the original room; I assume this is because it has a limited data set of D&D adventures to draw on. I suspect that if you use it a lot, you would have to seed it with your own elements.' Both limbs supported. Minor softening: the page says 'I suspect ... if you use it a lot', the claim says 'concluded'.",
+   "fromFile": "verdicts-ai-i404-418.json"
+  },
+  "406": {
+   "index": 406,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "motivated by greed and loyalty to their goblin boss",
+   "note": "No quote supplied, so graded on substance. Raw page 1 of the thread carries Beoric's transcript. The phrase 'They are motivated by greed and loyalty to their goblin boss' recurs verbatim across at least six entries (lighthouse basement, dungeon entrance, guard room, armory, kitchen, treasure room) — the claim's parenthetical drops the word 'goblin'. Every creature entry follows one identical block ('They are not initially hostile, but will attack if provoked ... They are motivated by ... They want ... They have a fear of ... They are currently ...'). 'Guard room' entry 3 recurs on dungeon level 1 and again on level 2 in near-identical wording. Two caveats a reader should see: that block format was dictated by Beoric's own prompt, and the village NPC list earlier in the transcript uses a different (also prompt-dictated) template, so 'every NPC in the same template' holds within a key, not across the whole transcript.",
+   "fromFile": "verdicts-ai-i404-418.json"
+  },
+  "407": {
+   "index": 407,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "They offer the illusion of help",
+   "note": "Raw page: 'I find LLMs useful for small coding projects but they don't help me with RPGs. They offer the <em>illusion</em> of help, but my best RPG work is the work I do myself.' Rendered text matches the quote word for word (the em tag is markup only). Byline 'by Mike on 30 September 2024'; site footer names Michael E. Shea. All limbs supported.",
+   "fromFile": "verdicts-ai-i404-418.json"
+  },
+  "408": {
+   "index": 408,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "They fill the internet with slop.",
+   "note": "Raw HTML: '<li>They fill the internet with <a ...>slop</a>.</li>' — rendered visible text is the quote exactly. It is the fourth of four bulleted costs, the others being 'built on people's intellectual property without their permission and without compensation', 'They use tons of power and water', and 'They displace workers with shitty AI alternatives' — i.e. the IP, energy and labour objections the claim names. The subject on the page is generative AI tools generally, not 'LLM output' narrowly.",
+   "fromFile": "verdicts-ai-i404-418.json"
+  },
+  "409": {
+   "index": 409,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "the bar generated boxed text is measured against by reviewers",
+   "trueWording": "Keep it short and keep it powerful.",
+   "note": "Quote is verbatim on the raw page. The craft limbs all check out: 'Know the purpose of your read-aloud text up front'; 'If you didn't edit your read-aloud text and remove 25% of what was there, you didn't try hard enough.' Byline 'by Mike on 8 November 2010' matches. But the page is a 2010 article that never mentions generated text, AI, or reviewers measuring machine output against this standard — that final limb is the researcher's framing, not on the page.",
+   "fromFile": "verdicts-ai-i404-418.json"
+  },
+  "410": {
+   "index": 410,
+   "verdict": "PARTIAL",
+   "unsupportedLimb": "the opposite of the padded, withholding generated style",
+   "trueWording": "Players understand about half of what we describe to them.",
+   "note": "No quote supplied. Raw page ('Tell, Don't Show', by Mike on 12 February 2024) supports the reported limbs: 'Players understand about half of what we describe to them.'; a section 'Don't Hold Your Cards Too Close' against DMs holding back information; and 'Feel free to keep your language colorful and stay in the world but state clearly what the characters know, or should know, about the situation.' The withholding it criticises is the human GM's, not a model's — the page says nothing about generated prose, so the closing comparison is unsupported.",
+   "fromFile": "verdicts-ai-i404-418.json"
+  },
+  "411": {
+   "index": 411,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a human writer who just needs a lot of editing",
+   "note": "Raw page: 'The fast iteration, though, is much more like interact with a human writer who just needs a lot of editing.' (sic, page's own grammar). Second limb also on the page: 'if the GPT produces something I almost like, but not quite, I can keep the bit I did like and use it as a prompt again, perhaps with a new random seed.' Title confirms 'The Uncanny Deck: Co-authoring with GPT-2'.",
+   "fromFile": "verdicts-ai-i404-418.json"
+  },
+  "412": {
+   "index": 412,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "takes more training data to tune it to remember deeper associations",
+   "note": "Raw page: 'But it takes more training data to tune it to remember deeper associations and themes — like “salt is associated with archiving” or “venom is associated with drugs and bright colours.”' The contrast with surface form is the preceding sentence: 'I could fairly easily train a GPT model to create outputs that structurally resembled the card-description pattern I had'. Only overstatement is the intensifier 'far more'; the page says 'more'.",
+   "fromFile": "verdicts-ai-i404-418.json"
+  },
+  "413": {
+   "index": 413,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "spontaneously pop up a combo of rank and suit",
+   "note": "Raw page: 'But sometimes it will spontaneously pop up a combo of rank and suit that don't exist in the original — just as I hoped from the fantasy version of the deck. “Ghost” is a rank in the original corpus, but “Butterflock” is not a suit there'. 'Absent from the corpus' and 'welcome for the fantasy deck' both supported. 'Outside the intended parameters' reads correctly only as outside the original grammar/corpus — the page elsewhere says the model strays 'from the constraints of the original grammar' and 'gets further from what the model was trained to do'; for this specific case the author wanted it.",
+   "fromFile": "verdicts-ai-i404-418.json"
+  },
+  "414": {
+   "index": 414,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it would produce boring, robotic answers",
+   "note": "Raw page, Data Scientist Melanie Lopez Malet: 'if you were to talk to a basic language model, it would produce boring, robotic answers. By conditioning the statistics within the model to go in the direction you want, based on the backstory, personality, and dialogue style as envisioned by a writer, it begins to understand what you expect.' Both limbs supported; article dated March 19, 2024, by Lucy O'Brien.",
+   "fromFile": "verdicts-ai-i404-418.json"
+  },
+  "415": {
+   "index": 415,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Would Lisa say this?",
+   "note": "Raw page: 'while we're talking to it, we ask ourselves: “is this Lisa? Would Lisa say this?” and if the answer is no, we need to go back and find out what happened within the model to make it stray from the vision Virginie had.' Both limbs supported. 'Constantly' is a mild strengthening of 'while we're talking to it'.",
+   "fromFile": "verdicts-ai-i404-418.json"
+  },
+  "416": {
+   "index": 416,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "veered towards flirtatious and seductive",
+   "note": "Raw page, under 'Catching Bias': '“we created a physically attractive female character,” explains Malet, “and its answers veered towards flirtatious and seductive, so we had to reprogram it”.' Every limb supported verbatim.",
+   "fromFile": "verdicts-ai-i404-418.json"
+  },
+  "417": {
+   "index": 417,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a lot of content for them to be more coherent",
+   "note": "Raw page: Mosser, in a post-demo panel — 'So my role is to nurture them [NEO NPCs] to build the backstory, the flow, the qualities, the colloquialisms, because it's important for the dialogue style. It takes a lot of content for them to be more coherent, to have a real personality and a real focus for emotion'. Title 'narrative director', the four content types, coherence and real personality all present. Byline Michael Higham, March 19, 2024.",
+   "fromFile": "verdicts-ai-i404-418.json"
+  },
+  "418": {
+   "index": 418,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "more structured like a traditional dialogue tree; an optimal choice existed",
+   "note": "No quote supplied. Raw page: 'The third and final phase of the demo had me planning an operation to infiltrate a building alongside a new NPC named Iron. While talking to her and asking questions provided more insight on the goals of the operation, it was more structured like a traditional dialogue tree: there were correct responses for the best outcome; for example, suggesting the team's hacker disable cameras as opposed to creating cover with smoke grenades was the optimal choice.' The steering limb is carried by the immediately following paragraph — 'the Ubisoft narrative team dictates the parameters for NEO NPCs to be compliant within the bounds of the lore and story of the experience, so there is a level of curation' — and by Inworld CEO Kylan Gibbs on 'narrative controls, making sure that you're not going outside of the intended domain of the world'. The word 'guardrails' is the researcher's, not the article's.",
+   "fromFile": "verdicts-ai-i404-418.json"
+  },
+  "419": {
+   "index": 419,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I find these chatbot demos really bland, given they focus purely on the linguistic aspects",
+   "note": "Live page (aiandgames.com, Tommy Thompson, Nov 26 2025), raw HTML fetched with a browser UA. Full sentence: 'I find these chatbot demos really bland, given they focus purely on the linguistic aspects and not the broader game AI considerations - I'm far more interested in how we turn language into gameplay, than having a conversation.' Quote verbatim; the 'purely linguistic' limb is the page's own reason clause.",
+   "fromFile": "verdicts-ai-i419-433.json"
+  },
+  "420": {
+   "index": 420,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "two narrative designers working full-time on the project for that three month window",
+   "note": "Same live page. 'The 20-30 minute demo was the end-result of two narrative designers working full-time on the project for that three month window, writing a large swathe of content at high quality to ensure the universe they had established held up.' Context confirms it is the Ubisoft NEO NPC demo (his April 10 2024 write-up, 'the end result of a mere 3 months of work'). Every limb supported.",
+   "fromFile": "verdicts-ai-i419-433.json"
+  },
+  "421": {
+   "index": 421,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "rather robotic, which makes sense given they're robots; latency 'an extra second or two'",
+   "note": "Same live page. 'The dialogue and the delivery of said dialogue by Sofia and Pablo is rather robotic, which makes sense given they're robots.' (curly apostrophe in source). Latency limb: 'the latency was an issue throughout the demo - with the rationale being that the recent launch of Google's Gemini 3 launch having an impact on server performance, often by an extra second or two.' Article is the 2025 Teammates demo.",
+   "fromFile": "verdicts-ai-i419-433.json"
+  },
+  "422": {
+   "index": 422,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I don't feel the need to engage in dialogue with them",
+   "note": "Same live page: 'I didn't really strike up a conversation with Sofia and Pablo, because I don't feel the need to engage in dialogue with them. They're NPCs in a video game, they should be responding to my actions and letting me just get on with playing the game.' Both limbs (no need to converse; NPCs should respond to actions) verbatim.",
+   "fromFile": "verdicts-ai-i419-433.json"
+  },
+  "423": {
+   "index": 423,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Get used to seeing Yasu reply [the three lines]; 'the usual' deflection",
+   "note": "Live PC Gamer page, raw HTML fetched with a browser UA. 'Get used to seeing Yasu reply \"I'm not sure what to say about that\", \"Maybe we should focus on the task at hand?\" and \"Hmm...\"' — all three stock lines verbatim, quote verbatim. 'Most inputs' rests on the page's 'Get used to seeing' plus the later 'all came up with the usual \"Maybe we should focus on the task at hand?\" responses'; the page gives no explicit proportion, but supplies the basis.",
+   "fromFile": "verdicts-ai-i419-433.json"
+  },
+  "424": {
+   "index": 424,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "unable to do something because I couldn't find the right wording",
+   "note": "Same PC Gamer page. 'ask about murder' listed among inputs that got no response; '\"show photograph\", \"show photograph to bartender\", and \"show photograph of Kozo to bartender\" all came up with the usual \"Maybe we should focus on the task at hand?\" responses'; 'the sentence I needed to type, which was \"Show the photograph of Kozo Yamakawa to the bartender\"'; and 'which sure felt like being unable to do something because I couldn't find the right wording-the problem the latest in AI tech is supposedly here to solve.' Every limb supported.",
+   "fromFile": "verdicts-ai-i419-433.json"
+  },
+  "425": {
+   "index": 425,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the NLG function is omitted in this release because there remains a risk of the AI generating unethical replies",
+   "note": "Live Steam store page (app 2280000), raw HTML fetched with a browser UA and ?l=english. The NLG section states the omission and reason verbatim; 'leaving only pre-written responses' follows from the same passage, which describes NLG as what 'would generate natural replies to questions that did not have a pre-written response.'",
+   "fromFile": "verdicts-ai-i419-433.json"
+  },
+  "426": {
+   "index": 426,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "After 30 minutes, I'd barely gotten anywhere ... repeating the same few phrases over and over",
+   "note": "Live host returned HTTP 405 to a browser-UA curl and WebFetch returned empty; recovered via Wayback raw capture https://web.archive.org/web/20230425103036id_/... (byline Giovanni Colantonio, April 25 2023 confirmed on the capture). Page: 'After 30 minutes, I'd barely gotten anywhere. Nothing I was typing ended in an answer and I mostly found myself repeating the same few phrases over and over to move the story along... My investigation felt every bit as unnatural and frustrating as classic text adventure games.' Raw page reached, not a summary.",
+   "fromFile": "verdicts-ai-i419-433.json"
+  },
+  "427": {
+   "index": 427,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "What exactly are users seeing here that wasn't already shown in games like AI Dungeon years ago?",
+   "note": "Same Wayback raw capture of the Digital Trends article. Preceding sentences supply the 'with generation removed' limb: 'Square Enix noted that it had to remove the demo's Natural Language Generation tool for now, citing the current risk of \"unethical replies.\" ... so its absence here is a little confusing.' Quote verbatim.",
+   "fromFile": "verdicts-ai-i419-433.json"
+  },
+  "428": {
+   "index": 428,
+   "verdict": "PARTIAL",
+   "trueWording": "the demo now sits at a 'Very Negative' rating with a total of 236 posts from users",
+   "note": "Live Time Extension page fetched raw (Jack Yarwood, 24 Apr 2023 update). First limb verbatim-supported. The 2026 Steam figure is genuinely true - I fetched the Steam store page in the same pass and it reads 'Very Negative (476) - 15% of the 476 user reviews for this software are positive' - but it is not on the cited page, so this claim's source attribution is wrong for that half. Also worth flagging: the quote 'a dumber input system than Zork' is on the page only as reader comment #4 (NatiaAdamo, 25 Apr 2023), not the article's own words; citing it as Time Extension's assessment would misattribute it. The article's own line is 'the game repeating lines like \"Hmm...\", \"Maybe we should focus on the task at hand\", and \"I'm not sure what to say about that\" to anything but the most precise of inputs.'",
+   "unsupportedLimb": "'as of 2026-09-06 the Steam page shows 15% positive of 476' - absent from this page (it is on the Steam store page, where I confirmed it); and the Zork quote is a reader comment, not the article",
+   "fromFile": "verdicts-ai-i419-433.json"
+  },
+  "429": {
+   "index": 429,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it couldn't write all the code or create great narrative",
+   "note": "Live Keywords Studios page, raw HTML. 'The team of three quickly discovered the technology's limitations, it couldn't write all the code or create great narrative. Clearly, they needed to add humans, so with the support of other studio heads worldwide, the small team expanded to include domain experts for every discipline.' The three-developer limb: 'Three seasoned game developers from Electric Square proposed they try and build a \"shippable game using Generative AI\".'",
+   "fromFile": "verdicts-ai-i419-433.json"
+  },
+  "430": {
+   "index": 430,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "first drafts of dialogue, helping with storyline brainstorming",
+   "note": "Same Keywords page, 'Useful today' list: 'such as concept art iteration, first drafts of dialogue, helping with storyline brainstorming, and on the code side, ChatGPT proved to be a valuable aid...'. The 'not finished narrative' limb is carried by the same article's 'it couldn't write all the code or create great narrative.'",
+   "fromFile": "verdicts-ai-i419-433.json"
+  },
+  "431": {
+   "index": 431,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "GenAI eventually failed to generate a significant portion of the code or planned assets",
+   "note": "Same Keywords page: 'Despite designing the game around the understood limitations of GenAI at that time: a relatively simple, single-player, narrative-driven 2D game, GenAI eventually failed to generate a significant portion of the code or planned assets.' The 'deliberately simple narrative-driven 2D game' limb is the page's own concessive clause.",
+   "fromFile": "verdicts-ai-i419-433.json"
+  },
+  "432": {
+   "index": 432,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "we ultimately utilized bench resource from seven different game development studios ... the tooling was unable to replace talent",
+   "note": "Live Game Developer page (Chris Kerr, March 13 2024), raw HTML. Bodson quote carries 'over 400 tools' and 'bench resource from seven different game development studios as part of the project, as the tooling was unable to replace talent.' Not-released limb: 'Bodson said the GenAI title won't be made public, so we'll never know the full extent of its successes and shortcomings.' The page attributes it to 'the company's latest fiscal report' rather than naming FY2023; the March 2024 dateline makes that the FY2023 report, but the label itself is inferred, not printed.",
+   "fromFile": "verdicts-ai-i419-433.json"
+  },
+  "433": {
+   "index": 433,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "they seem impressive for a chat bot ... characters feel very specific ... generic dialogue",
+   "note": "Live text.npr.org transcript (Vincent Acovino, March 14 2024), raw text. Sawyer: 'A lot of the demos, they - I'm not going to lie. Like, they seem impressive for a chat bot. And that's not nothing.' and 'The appeal for our players is that the characters feel very specific. The replies your character can give feel very specific. I'm not looking to make a lot of - I hate to say it, but generic dialogue.' Quote verbatim; note the transcript spells it 'chat bot' (two words). Sawyer is identified as studio design director at Obsidian Entertainment.",
+   "fromFile": "verdicts-ai-i419-433.json"
+  },
+  "434": {
+   "index": 434,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Where these agents are good at are in basically creating these believable, like, micro-moments.",
+   "note": "Raw NPR text transcript fetched (200, browser UA). Park's full line continues 'But they're likely not going to be used to create individual, like, really fun stories.' Both limbs verbatim; Park identified as a Stanford AI researcher.",
+   "fromFile": "verdicts-ai-i434-448.json"
+  },
+  "435": {
+   "index": 435,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "they don't become mid-level... don't become seniors... the vibrant, creative voices",
+   "note": "Verbatim on the raw transcript, full chain intact: 'When we eliminate positions for juniors, then that means that they don't become mid-level, which means they don't become seniors, which means they don't become the vibrant, creative voices and directors of tomorrow.' The 'writing positions' limb is carried by Acovino's preceding line about junior writers being put out of work.",
+   "fromFile": "verdicts-ai-i434-448.json"
+  },
+  "436": {
+   "index": 436,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I want to play games made by human beings... not games made by soulless machines",
+   "note": "Verbatim. Barone's full line supports both limbs: 'the AI might become so good... that it's indistinguishable from the best, you know, human writers' and 'I want to play games made by human beings.' He is identified as the writer/developer of Stardew Valley.",
+   "fromFile": "verdicts-ai-i434-448.json"
+  },
+  "437": {
+   "index": 437,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "There's just no recognizable thread or resolution to any of its freeform tales",
+   "note": "Verbatim on the raw TapSmart page. The second limb is directly supported one sentence earlier: 'It's even up you to wrap the story up and purposefully start again' (sic, 'up you' in the original).",
+   "fromFile": "verdicts-ai-i434-448.json"
+  },
+  "438": {
+   "index": 438,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "there's the persistent feeling that you're the one doing all the heavy lifting",
+   "note": "Word-for-word on the page; the only difference is the typographic apostrophe (page: 'you're' with U+2019). The 'occasional sense' limb is the page's own clause. The page hedges it as 'the persistent feeling that', and 'to make it cohere' is the claim's gloss, supported by the adjacent sentences about no thread or resolution and the player having to wrap the story up.",
+   "fromFile": "verdicts-ai-i434-448.json"
+  },
+  "439": {
+   "index": 439,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a fever dream of frustratingly vague witnesses and bizarre non-sequiturs",
+   "note": "Verbatim. All limbs present: 'On another run, I was a detective on a murder case... And not in an artfully noirish way either.'",
+   "fromFile": "verdicts-ai-i434-448.json"
+  },
+  "440": {
+   "index": 440,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "stabbed 'again' in my sleep (there was no first time)",
+   "note": "Verbatim including the curly quotes around 'again'. The door limb is separately supported earlier on the same page: 'The locked door I'm presented with at the outset of an apocalyptic scenario suddenly becomes a wide open door without a lock.'",
+   "fromFile": "verdicts-ai-i434-448.json"
+  },
+  "441": {
+   "index": 441,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "little to no memory of what you've already established or what the initial prompt is",
+   "note": "Word-for-word on the raw 148Apps page, differing only in the typographic apostrophe (page: 'you've' with U+2019). The second limb is supported later: 'it's not unusual for stories to hop off the rails immediately unless you're there to keep reminding the bot what your story is supposed to be about.'",
+   "fromFile": "verdicts-ai-i434-448.json"
+  },
+  "442": {
+   "index": 442,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "stories have hit dead end loops where no matter what I type, I keep getting the same reply",
+   "note": "Verbatim; the assigned quote sits inside the page's own dead-end-loop sentence, so both limbs are the source's own words.",
+   "fromFile": "verdicts-ai-i434-448.json"
+  },
+  "443": {
+   "index": 443,
+   "verdict": "VERIFIED_SUBSTANCE",
+   "trueWording": "hops genres, trades out characters, and even takes control of your character",
+   "note": "Graded SUBSTANCE only because the claim carries an empty quote field, so there is no quotation to check word for word. All three behaviours are on the raw page in one clause: 'a story that hops genres, trades out characters, and even takes control of your character to move things along.' The page frames this positively ('sometimes it's also fun to follow').",
+   "fromFile": "verdicts-ai-i434-448.json"
+  },
+  "444": {
+   "index": 444,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "couldn't make up its mind whether I'd witnessed or been a victim of a plane crash",
+   "note": "Verbatim: 'another abrupt shift that upended everything occurred before long.' Recorded difference, not hidden: the page says the AI couldn't decide whether the narrator had 'been a victim of' the crash, where the claim says 'survived' it; the witnessed-versus-in-the-crash contrast and the indecision are the page's own. Page dated 12 January 2020, rating 4 of 5, by Craig Grannell, matching the source line.",
+   "fromFile": "verdicts-ai-i434-448.json"
+  },
+  "445": {
+   "index": 445,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "the words seem very generic. They lack that incisiveness... with human written language",
+   "note": "Verbatim in section 4.1.3 (participant p11). Participants are the study's twenty professional comedians who perform live (abstract and section 1.1). Precision note: the paper counts 'Six participants' who described outputs as 'bland' or 'generic', not all twenty.",
+   "fromFile": "verdicts-ai-i434-448.json"
+  },
+  "446": {
+   "index": 446,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "it really had no idea how to punch up or punch down. It had no perspective",
+   "note": "Verbatim in section 4.4.1 (p6), full quote 'It had no perspective, so it couldn't take any risks in terms of jokes.' The calibration limb is the paper's own framing sentence: 'By contrast, LLMs could not perform such calibration', and the punch-up/punch-down clause supplies 'who a joke targets'.",
+   "fromFile": "verdicts-ai-i434-448.json"
+  },
+  "447": {
+   "index": 447,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "producing bland and biased comedy tropes, akin to 'cruise ship comedy material from the 1950s'",
+   "note": "Verbatim in the abstract; the participant quote continues ', but a bit less racist' after the quoted fragment. The abstract attributes it to 'most participants', supporting both the mid-century-staleness limb and the bland-and-biased-tropes limb.",
+   "fromFile": "verdicts-ai-i434-448.json"
+  },
+  "448": {
+   "index": 448,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "they only used LLMs for setup and structure... I more often than not provide the punchline",
+   "note": "Verbatim: 'just consistently bad [...] didn't really improve on the jokes' (p10, section 4.1.2). The setup/structure limb is the page's own sentence ('Many participants noted that they only used LLMs for setup and structure generation due to their inability to generate humorous outputs'), and the punchline limb is section 4.1.4's p17 quote. Precision note: the paper says 'many participants', not all comedians.",
+   "fromFile": "verdicts-ai-i434-448.json"
+  },
+  "464": {
+   "index": 464,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "GPT-4 and Claude can produce excellent summaries, but only about half the time.",
+   "note": "Raw arXiv HTML (arxiv.org/html/2403.01061) reached; byline Subbiah/Chilton/McKeown confirmed. Quote is verbatim in the Introduction's key-findings list ('Our key findings are: 1.) GPT-4 and Claude can produce excellent summaries, but only about half the time.'). Every limb holds: the models evaluated are GPT-4, Claude-2.1 and Llama-2-70B on 25 unpublished short stories judged by their own authors, so 'literary summaries' is faithful to the setting.",
+   "fromFile": "verdicts-ai-i464-478.json"
+  },
+  "465": {
+   "index": 465,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Nearly all the writers noticed a 'default' voice, bland and somewhat elementary.",
+   "note": "Raw arXiv HTML (2211.05030) reached; byline Ippolito/Yuan/Coenen/Burnam confirmed. Section 7.1: 'Nearly all the writers noticed that there seemed to be a “default” voice to the language model’s generations, one that was bland and somewhat elementary in its use of language.' Quote verbatim; every limb supported. The claim drops only the hedge 'somewhat'.",
+   "fromFile": "verdicts-ai-i464-478.json"
+  },
+  "466": {
+   "index": 466,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Multiple participants compared Wordcraft's suggestions to a novice fan fiction writer.",
+   "note": "Both limbs sit in adjacent sentences of Section 7.1: 'MT described this as the AI having an implicit target audience: internet users. Multiple participants compared Wordcraft’s suggestions to those of a novice fan fiction writer.' Quote verbatim. Attribution nuance worth knowing: the fan-fiction comparison is 'multiple participants' (matching 'several writers'), while the internet-users audience is one writer's (MT's) description of the same default voice; the page orders the two the other way round from the claim.",
+   "fromFile": "verdicts-ai-i464-478.json"
+  },
+  "467": {
+   "index": 467,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Wordcraft insisted on pushing the story toward a warrior hero fighting invaders.",
+   "note": "Section 7.2: YW's premise deliberately made the heroes cartographers and builders rather than warriors, 'but Wordcraft insisted on pushing the story toward the well-worn trope of a warrior hero fighting back enemy invaders.' The quoted genre line follows immediately and verbatim, attributed to NG: 'For Wordcraft, “fantasy is high fantasy, science fiction is robots and spaceships”'. Both limbs supported.",
+   "fromFile": "verdicts-ai-i464-478.json"
+  },
+  "468": {
+   "index": 468,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The system kept suggesting she insert a male character; unspecified gender defaulted male.",
+   "note": "Section 7.2: 'NG noted the difficulty in writing a story with a lesbian romance plot–the system kept suggesting that she insert a male character or that she have the female protagonists talk about friendship. WT found that when no gender was specified, Wordcraft tended to default to a male voice.' Quote verbatim; both limbs supported, each by a named participant.",
+   "fromFile": "verdicts-ai-i464-478.json"
+  },
+  "469": {
+   "index": 469,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The software seemed very reluctant to generate people doing mean things.",
+   "note": "Section 8.2: the page itself supplies the safety-tuning causation — LaMDA was finetuned on data 'labeled by human annotators as safe and sensible', and 'This intentional biasing is a strength in some respects… but it can also be limiting. For example, MT found that “the software seemed very reluctant to generate people doing mean things”'. Quote verbatim. The 'flattening conflict' limb is the paper's own consequence in its wording: 'a literary world where no character is ever mean is unlikely to be a very interesting one.'",
+   "fromFile": "verdicts-ai-i464-478.json"
+  },
+  "470": {
+   "index": 470,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Wordcraft attempted to insert a character named 'Sarah' into every participant's story.",
+   "note": "Section 7.3: 'several of Wordcraft’s controls were implemented with exemplars that contained the name “Sarah.” This had the unintended consequence that Wordcraft attempted to insert a character named “Sarah” into every single participant’s story.' Quote verbatim including the curly apostrophe; both limbs (exemplar cause, universal effect) supported.",
+   "fromFile": "verdicts-ai-i464-478.json"
+  },
+  "471": {
+   "index": 471,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "All participants complained the model's understanding seemed superficial if not absent.",
+   "note": "Section 7.5 ('Model’s Natural Language Understanding is Superficial and Insufficient'): 'All participants complained that the language model’s understanding seemed superficial if not entirely absent.' Quote verbatim. The length limb is supported two sentences later: 'This problem got worse, the longer the story,' with the 1024-token LaMDA sequence limit given as the technical cause.",
+   "fromFile": "verdicts-ai-i464-478.json"
+  },
+  "472": {
+   "index": 472,
+   "verdict": "PARTIAL",
+   "trueWording": "Wordcraft generally suggests simple and sensible metaphors.",
+   "unsupportedLimb": "the exclusivity 'only' — the page says Wordcraft 'generally' suggests simple and sensible metaphors, not that it offered nothing else",
+   "note": "Quote is verbatim in Section 8.2, attributed to JM: 'Wordcraft generally suggests simple and sensible metaphors; but sometimes one wants metaphors to be complex, or not quite sensible.' The wanting-complex-metaphors limb is fully supported (JM's generic 'one wants' covers the claim's 'writers wanted'). Only the quantifier fails: the claim's 'offered only simple, sensible metaphors' is exclusive where the page is merely typical ('generally').",
+   "fromFile": "verdicts-ai-i464-478.json"
+  },
+  "473": {
+   "index": 473,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Section 7.2 heading: 'Suggestions too Easily Revert to Tropes and Repetition'.",
+   "note": "The quote is verbatim as the title of Section 7.2, inside the paper's numbered list '7 System Limitations Experienced by Participants' — which supports the claim's 'a named system limitation' limb precisely: it is a named subsection of the limitations section, not an incidental remark.",
+   "fromFile": "verdicts-ai-i464-478.json"
+  },
+  "474": {
+   "index": 474,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It writes exactly the same story over and over with a new skin on it.",
+   "note": "Raw arXiv HTML (2309.12570) reached; byline Chakrabarty/Padmakumar/Brahman/Muresan confirmed. Table 8 (participant feedback on AI weaknesses), SH: 'It feels oftentimes as if it writes exactly the same story over and over again with a new skin on it, rather than even generating a different feeling arc given even vastly different prompts. It has one narrative that it knows how to write, and that’s all it does.' Quote verbatim; 'new surface' = 'new skin', 'regardless of prompt' = 'given even vastly different prompts'. The plural 'writers' is carried by neighbouring entries in the same table (ATK on redoing rather than building, NM on paragraphs that 'always feel similar').",
+   "fromFile": "verdicts-ai-i464-478.json"
+  },
+  "475": {
+   "index": 475,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It effectively autocompletes with the most obvious version of whatever you ask for.",
+   "note": "Table 8, MC: 'A teacher once told me that the best fiction writing is the opposite of autocomplete - this system, on the other hand, effectively autocompletes with the most obvious version of whatever you ask for.' Quote verbatim; the claim's 'the opposite of good fiction' limb is the page's own antecedent clause about the best fiction writing.",
+   "fromFile": "verdicts-ai-i464-478.json"
+  },
+  "476": {
+   "index": 476,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "It is much better at telling than showing — reversing the writing maxim.",
+   "note": "Table 8, MC: 'It still relies on cliches, and it is much better at telling than showing - reversing the writing maxim. It can’t effectively write real scenes with realistic dialogue and details, but can generate general sketches based on well-known tropes.' Quote verbatim; both limbs supported nearly word for word (the claim's 'cannot' compresses the page's 'can’t effectively').",
+   "fromFile": "verdicts-ai-i464-478.json"
+  },
+  "477": {
+   "index": 477,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "All the endings were 'Here is the lesson learnt'; uplifting and didactic.",
+   "note": "Table 8, under 'Overly Moralistic and Predictable Endings', MG: 'It seems that the ChatGPT is very moralistic - all the endings it gave me are all very much “Here is the lesson learnt”.ChatGPT seems very into being uplifting and didactic to the audience and not every short story wants to do that'. Quote verbatim. Every limb holds, including the universal 'Every ending' (page: 'all the endings it gave me') and 'whether or not the story wanted it' (page: 'not every short story wants to do that').",
+   "fromFile": "verdicts-ai-i464-478.json"
+  },
+  "478": {
+   "index": 478,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Unwillingness to accept nuance; anything that strays is a flaw.",
+   "note": "Table 8, under 'Lack of Nuance Subtext or Symbolism', SH: 'Its unwillingness to accept nuance. The story must be either happy or entirely fatalistic and the model finds that anything that strays is a flaw in the work.' Quote verbatim; 'resists ambiguity' = 'unwillingness to accept nuance', and the treats-as-flawed limb is the page's own trailing clause.",
+   "fromFile": "verdicts-ai-i464-478.json"
   }
  }
 }

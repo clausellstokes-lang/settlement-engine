@@ -1,0 +1,38 @@
+{
+ "role": "verifier",
+ "name": "dnd",
+ "angle": null,
+ "tag": "i109-123",
+ "lines": 100,
+ "firstTs": "2026-09-06T17:44:09.094Z",
+ "lastTs": "2026-09-06T17:50:04.308Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 21
+ },
+ "urlsFetched": [
+  "https://baatag.blogspot.com/2026/04/elements-of-key-4-rules-for-key-writing.html",
+  "https://dungeons.hismajestytheworm.games/docs/chapter10/",
+  "http://into-the-dark-rpg.blogspot.com/2016/07/bryce-lynchs-adventure-design-tips.html",
+  "https://pelgranepress.com/2012/02/01/five-keys-to-punchier-prose/",
+  "https://rayvallese.com/writing-with-style/",
+  "https://critical-hits.com/blog/2010/08/27/thinking-outside-the-boxed-text/",
+  "https://www.dndbeyond.com/posts/625-lets-design-an-adventure-boxed-text",
+  "https://tenfootpole.org/ironspike/?page_id=1201",
+  "https://tenfootpole.org/ironspike/?p=5395",
+  "https://coinsandscrolls.blogspot.com/2019/09/osr-sharpening-axe-how-i-plan-and-write.html",
+  "https://alldeadgenerations.blogspot.com/2022/12/dungeon-design-process-and-keys.html",
+  "https://dungeons.hismajestytheworm.games/docs/chapter1/"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "Every quote checked against raw page text. Now writing the checkpoint file.",
+ "run": "wf_f9424af6-fcf",
+ "agent": "a35396cfbfa3a06d5",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c0ab83ac-75ff-46f3-914c-736055337f6e/subagents/workflows/wf_f9424af6-fcf/agent-a35396cfbfa3a06d5.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": {
+  "path": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/26b2203a-14d7-409e-a7aa-8d0f3b0517db/scratchpad/prose-research/sweep/verdicts-dnd-i109-123.json",
+  "exists": false
+ }
+}
