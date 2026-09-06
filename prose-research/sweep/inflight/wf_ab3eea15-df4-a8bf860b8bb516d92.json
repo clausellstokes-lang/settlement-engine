@@ -1,0 +1,36 @@
+{
+ "role": "finder",
+ "name": "hobb",
+ "angle": "critics-absent",
+ "tag": null,
+ "lines": 54,
+ "firstTs": "2026-09-06T18:57:44.696Z",
+ "lastTs": "2026-09-06T18:59:45.203Z",
+ "tools": {
+  "Read": 1,
+  "ToolSearch": 1,
+  "Bash": 7,
+  "WebSearch": 4,
+  "WebFetch": 3
+ },
+ "urlsFetched": [
+  "https://www.google.com/search?q=%22Robin+Hobb%22+site%3Areactormag.com+review+Hobb",
+  "https://duckduckgo.com/html/?q=site%3Areactormag.com+%22Robin+Hobb%22",
+  "https://reactormag.com/?s=Robin+Hobb",
+  "https://reactormag.com/[a-z0-9\\-",
+  "https://html.duckduckgo.com/html/?q=site%3Areactormag.com+%22Robin+Hobb%22",
+  "http://web.archive.org/cdx/search/cdx?url=tor.com*&filter=urlkey:.*hobb.*&collapse=urlkey&fl=original,timestamp,statuscode&limit=200",
+  "https://www.mojeek.com/search?q=%22Robin+Hobb%22+Liz+Bourke",
+  "http://web.archive.org/cdx/search/cdx?url=tor.com*&filter=urlkey:.*robin-hobb.*&collapse=urlkey&fl=original,timestamp&limit=400",
+  "http://web.archive.org/cdx/search/cdx?url=reactormag.com*&filter=urlkey:.*robin-hobb.*&collapse=urlkey&fl=original,timestamp&limit=200",
+  "http://web.archive.org/cdx/search/cdx?url=tor.com*&filter=urlkey:.*fool.*quest.*&collapse=urlkey&fl=original,timestamp&limit=200",
+  "http://web.archive.org/cdx/search/cdx?url=tor.com*&filter=urlkey:.*assassin.*fate.*&collapse=urlkey&fl=original,timestamp&limit=200"
+ ],
+ "filesWritten": [],
+ "lastAssistantText": "I'll start by reading the finder method that binds this work.",
+ "run": "wf_ab3eea15-df4",
+ "agent": "a8bf860b8bb516d92",
+ "transcript": "/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/059d4243-f837-4b07-8096-8c9ca76b03fb/subagents/workflows/wf_ab3eea15-df4/agent-a8bf860b8bb516d92.jsonl",
+ "journal": "in-flight",
+ "checkpointFile": null
+}

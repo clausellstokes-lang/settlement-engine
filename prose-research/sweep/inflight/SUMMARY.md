@@ -1,4 +1,4 @@
-# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 14:54:40 (inflight-scan.py; every 120 s; the autosave seals this dir)
+# IN-FLIGHT AGENT PROGRESS — scanned 2026-09-06 15:00:43 (inflight-scan.py; every 120 s; the autosave seals this dir)
 
 | sweep | role | angle / chunk | journal | urls fetched | files written | checkpoint | last activity |
 |---|---|---|---|---:|---|---|---|
@@ -7,6 +7,7 @@
 | ai | finder | critics-direct | result | 45 | — | 128 claims, complete=True @14:02:13 | 17:26:31 |
 | ai | regrade | regrade-r4 | failed | 0 | — | — | 17:50:56 |
 | ai | regrade | regrade-r5 | failed | 0 | mk-r5.mjs | — | 18:42:09 |
+| ai | synth |  | in-flight | 0 | — | — | 18:59:47 |
 | ai | synth |  | failed | 0 | — | — | 18:42:10 |
 | ai | synth |  | failed | 0 | — | — | 17:50:57 |
 | ai | verifier | i254-268 | result | 6 | — | verdict file WRITTEN | 17:32:27 |
@@ -91,6 +92,7 @@
 | dnd | finder | scholarship-history | result | 95 | — | 112 claims, complete=True @14:01:31 | 17:35:10 |
 | dnd | regrade | regrade-r4 | failed | 0 | — | — | 17:51:07 |
 | dnd | regrade | regrade-r5 | failed | 0 | — | — | 18:42:51 |
+| dnd | regrade | regrade-r6 | in-flight | 0 | — | — | 19:00:41 |
 | dnd | synth |  | failed | 0 | — | — | 18:42:52 |
 | dnd | synth |  | failed | 0 | — | — | 17:51:08 |
 | dnd | verifier | i109-123 | result | 11 | — | verdict file WRITTEN | 18:11:17 |
@@ -176,7 +178,7 @@
 | dnd | verifier | i709-723 | failed | 0 | — | verdict file WRITTEN | 17:51:06 |
 | dnd | verifier | i724-738 | failed | 0 | — | verdict file absent | 18:42:06 |
 | dnd | verifier | i724-738 | failed | 0 | — | verdict file absent | 17:51:06 |
-| dnd | verifier | i724-795 | in-flight | 0 | — | verdict file absent | 18:54:31 |
+| dnd | verifier | i724-795 | result | 12 | — | verdict file WRITTEN | 19:00:26 |
 | dnd | verifier | i739-753 | failed | 0 | — | verdict file absent | 18:42:06 |
 | dnd | verifier | i739-753 | failed | 0 | — | verdict file absent | 17:51:06 |
 | dnd | verifier | i754-759 | failed | 0 | — | verdict file absent | 17:51:06 |
@@ -187,21 +189,25 @@
 | dnd | verifier | i784-798 | failed | 0 | — | verdict file absent | 18:42:50 |
 | dnd | verifier | i79-93 | result | 15 | — | verdict file WRITTEN | 17:41:58 |
 | dnd | verifier | i790-804 | failed | 0 | — | verdict file absent | 17:51:06 |
-| dnd | verifier | i796-842 | in-flight | 0 | — | verdict file absent | 18:54:32 |
+| dnd | verifier | i796-842 | result | 10 | — | verdict file WRITTEN | 18:59:33 |
 | dnd | verifier | i799-813 | failed | 0 | — | verdict file absent | 18:42:50 |
 | dnd | verifier | i805-819 | failed | 0 | — | verdict file absent | 17:51:06 |
 | dnd | verifier | i814-828 | failed | 0 | — | verdict file absent | 18:42:50 |
 | dnd | verifier | i820-834 | failed | 0 | — | verdict file absent | 17:51:07 |
 | dnd | verifier | i829-843 | failed | 0 | — | verdict file absent | 18:42:50 |
 | dnd | verifier | i835-849 | failed | 0 | — | verdict file absent | 17:51:07 |
-| dnd | verifier | i843-870 | in-flight | 0 | — | verdict file absent | 18:54:37 |
+| dnd | verifier | i843-870 | result | 7 | — | verdict file WRITTEN | 18:58:35 |
 | dnd | verifier | i844-858 | failed | 0 | — | verdict file absent | 18:42:51 |
 | dnd | verifier | i850-864 | failed | 0 | — | verdict file absent | 17:51:07 |
 | dnd | verifier | i859-871 | failed | 0 | — | verdict file absent | 18:42:51 |
 | dnd | verifier | i865-871 | failed | 0 | — | verdict file absent | 17:51:07 |
-| dnd | verifier | i871-871 | in-flight | 1 | — | verdict file absent | 18:54:39 |
+| dnd | verifier | i871-871 | result | 1 | — | verdict file WRITTEN | 18:55:16 |
 | dnd | verifier | i94-108 | result | 14 | — | verdict file WRITTEN | 17:42:38 |
 | hobb | critic |  | result | 0 | critic-hobb.md | — | 18:29:49 |
+| hobb | finder | critics-absent | in-flight | 11 | — | — | 18:59:45 |
+| hobb | finder | dropped-and-routes | in-flight | 2 | — | — | 19:00:30 |
+| hobb | finder | epigraph-census | in-flight | 8 | — | — | 19:00:01 |
+| hobb | finder | translators | in-flight | 7 | — | — | 19:00:41 |
 | hobb | regrade | regrade-r4 | result | 0 | — | — | 17:37:59 |
 | hobb | synth |  | result | 0 | section-hobb.md | — | 18:17:47 |
 | hobb | synth |  | in-flight | 0 | — | — | 17:48:45 |
@@ -231,7 +237,7 @@
 | hobb | verifier | i60-74 | result | 9 | — | verdict file WRITTEN | 17:02:10 |
 | hobb | verifier | i75-89 | result | 5 | — | verdict file WRITTEN | 17:02:42 |
 | hobb | verifier | i90-104 | result | 8 | — | verdict file WRITTEN | 17:05:31 |
-| kay | critic |  | in-flight | 0 | — | — | 18:54:28 |
+| kay | critic |  | in-flight | 0 | — | — | 18:59:56 |
 | kay | critic |  | failed | 0 | — | — | 18:42:13 |
 | kay | critic |  | failed | 0 | — | — | 17:51:51 |
 | kay | finder | craft | result | 112 | — | 163 claims, complete=True @14:02:12 | 17:25:51 |
@@ -300,9 +306,13 @@
 | leguin | critic |  | result | 32 | critic-leguin.md | — | 18:21:42 |
 | leguin | critic |  | failed | 0 | — | — | 18:42:15 |
 | leguin | critic |  | failed | 0 | — | — | 17:51:02 |
+| leguin | finder | academic-2 | in-flight | 2 | — | 30 claims, complete=False @14:37:34 | 19:00:34 |
 | leguin | finder | academic-2 | failed | 44 | — | 30 claims, complete=False @14:37:34 | 18:42:07 |
+| leguin | finder | close-2 | in-flight | 2 | — | 66 claims, complete=False @14:40:38 | 19:00:40 |
 | leguin | finder | close-2 | failed | 48 | — | 66 claims, complete=False @14:40:38 | 18:42:06 |
+| leguin | finder | record-register | in-flight | 4 | — | 26 claims, complete=False @14:36:43 | 19:00:41 |
 | leguin | finder | record-register | failed | 15 | — | 26 claims, complete=False @14:36:43 | 18:42:14 |
+| leguin | finder | voice-2 | in-flight | 4 | — | 35 claims, complete=False @14:36:52 | 19:00:41 |
 | leguin | finder | voice-2 | failed | 31 | — | 35 claims, complete=False @14:36:52 | 18:42:07 |
 | leguin | regrade | regrade-r4 | result | 0 | build-leguin-r4.mjs | — | 17:31:56 |
 | leguin | regrade | regrade-r6 | failed | 0 | — | — | 18:42:14 |
@@ -337,7 +347,7 @@
 | martin | finder | measurement | result | 60 | — | 60 claims, complete=True @14:02:13 | 17:19:44 |
 | martin | regrade | regrade-r4 | failed | 0 | — | — | 17:51:22 |
 | martin | regrade | regrade-r5 | result | 0 | — | — | 18:33:01 |
-| martin | synth |  | in-flight | 0 | — | — | 18:54:40 |
+| martin | synth |  | in-flight | 0 | — | — | 18:57:45 |
 | martin | synth |  | failed | 0 | — | — | 18:41:30 |
 | martin | synth |  | failed | 0 | — | — | 17:51:23 |
 | martin | verifier | i330-344 | result | 5 | — | verdict file WRITTEN | 17:24:27 |
@@ -418,6 +428,10 @@
 | tolkien | verifier | i868-873 | result | 2 | verdicts-tolkien-i868-873.json | verdict file WRITTEN | 17:33:38 |
 | wolfe | critic |  | result | 0 | critic-wolfe.md | — | 18:34:19 |
 | wolfe | critic |  | failed | 0 | — | — | 17:52:41 |
+| wolfe | finder | counter | in-flight | 19 | — | — | 19:00:25 |
+| wolfe | finder | editors | in-flight | 11 | — | — | 19:00:31 |
+| wolfe | finder | le-guin | in-flight | 7 | — | — | 19:00:39 |
+| wolfe | finder | measure | in-flight | 13 | — | — | 19:00:19 |
 | wolfe | regrade | regrade-r4 | result | 0 | — | — | 17:43:04 |
 | wolfe | synth |  | result | 0 | section-wolfe.md | — | 18:23:22 |
 | wolfe | synth |  | failed | 0 | wolfe-features.mjs | — | 17:52:40 |

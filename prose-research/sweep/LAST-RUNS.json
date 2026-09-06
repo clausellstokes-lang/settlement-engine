@@ -1,51 +1,51 @@
 {
- "_doc": "the LAST launch of every sweep (chair, 2026-09-06 14:12, session 19ace14d: ROUND 5 = the COMPLETION of round 4 after the 13:51 session-limit death — no finders, verify the remainder under S-BOUND triage (--triage), regrade where round 4's regrade never ran, synth + critic; leguin critic-only via skipSynth (v3.3)): runId (this session's; dies with it), argsFile, tag, script. resume-research.sh reads this to rebuild the next round from the files. ⚠ TAG vs OWNER ROUND: r5 here is NOT the owner's 'round 5' — it completes round 4; the owner's 'at most one more round' for dnd/ai/kay/leguin/wolfe/hobb is still unspent and will carry tag r6 with this note.",
+ "_doc": "the LAST launch of every sweep (chair Fable 5.1, session 059d4243, 2026-09-06 14:58 after the ACCOUNT SWITCH: every 19ace14d run died; rebuilt by resume-research.sh (tolkien/kay/leguin/martin/dnd/ai) and the hand-built r6 top-ups (wolfe/hobb) launched as built): runId (this session's; dies with it), argsFile, tag, script. TAG LAW: a tag is a LAUNCH COUNTER — kay r6 = critic only; martin r6 / ai r6 = synth+critic (regrade-r5 already landed); dnd r6 = 46 triaged claims + regrade + synth + critic; leguin r7 = the r6 top-up's COMPLETION (4 finders re-run with PRIOR PROGRESS hints, 50 folded claims verified, regrade, synth, critic; existingHashes omitted — the merge dedupes by content); wolfe r6 / hobb r6 = the ONE critic-driven top-up (S-BOUND rule 4). tolkien: nothingToRun — STOPPED (rule 4). After these: dry-check, then dnd/ai's one targeted round ONLY if their new critics still name the PLACE / ARCHIVAL hole; nothing after.",
  "tolkien": {
-  "runId": "wf_bf5b8fda-a24",
-  "argsFile": "args-tolkien-r5.json",
-  "tag": "r5",
-  "script": "research-workflow-v3.js (v3.3: skipSynth; compact chunks + legacy {file,indices} for triage gaps)"
+  "runId": "(none — nothingToRun 14:55)",
+  "argsFile": "args-tolkien-r6.json",
+  "tag": "r6-not-launched",
+  "script": "STOPPED by S-BOUND rule 4; section 14:20 + critic 14:42 stand"
  },
  "kay": {
-  "runId": "wf_f5b527e0-155",
-  "argsFile": "args-kay-r5.json",
-  "tag": "r5",
-  "script": "research-workflow-v3.js (v3.3: skipSynth; compact chunks + legacy {file,indices} for triage gaps)"
+  "runId": "wf_6aaded2c-7c9",
+  "argsFile": "args-kay-r6.json",
+  "tag": "r6",
+  "script": "research-workflow-v3.js (v3.4) — critic only (skipSynth)"
  },
  "leguin": {
-  "runId": "wf_2b731d5b-460",
-  "argsFile": "args-leguin-r6.json",
-  "tag": "r6",
-  "script": "research-workflow-v3.js (v3.4) — THE ONE CRITIC-DRIVEN TOP-UP (S-BOUND rule 4): 4 extra angles, regrade, synth, critic; existingHashes omitted from the paste (merge dedupes by content)"
+  "runId": "wf_29dbbf1f-9e3",
+  "argsFile": "args-leguin-r7.json",
+  "tag": "r7",
+  "script": "research-workflow-v3.js (v3.4) — completion of the r6 top-up (4 finders re-run w/ hints, 4 chunks, regrade, synth, critic); existingHashes omitted"
  },
  "wolfe": {
-  "runId": "wf_328e2797-84f",
-  "argsFile": "args-wolfe-r5.json",
-  "tag": "r5",
-  "script": "research-workflow-v3.js (v3.3: skipSynth; compact chunks + legacy {file,indices} for triage gaps)"
+  "runId": "wf_5c6be9e9-17f",
+  "argsFile": "args-wolfe-r6.json",
+  "tag": "r6",
+  "script": "research-workflow-v3.js (v3.4) — THE ONE TOP-UP: 7 extra angles + regrade + synth + critic"
  },
  "martin": {
-  "runId": "wf_ed535e1b-537",
-  "argsFile": "args-martin-r5.json",
-  "tag": "r5",
-  "script": "research-workflow-v3.js (v3.3: skipSynth; compact chunks + legacy {file,indices} for triage gaps)"
+  "runId": "wf_004aff7a-269",
+  "argsFile": "args-martin-r6.json",
+  "tag": "r6",
+  "script": "research-workflow-v3.js (v3.4) — synth + critic, regrade false (r5 landed)"
  },
  "hobb": {
-  "runId": "wf_06d7ffd7-48b",
-  "argsFile": "args-hobb-r5.json",
-  "tag": "r5",
-  "script": "research-workflow-v3.js (v3.3: skipSynth; compact chunks + legacy {file,indices} for triage gaps)"
+  "runId": "wf_ab3eea15-df4",
+  "argsFile": "args-hobb-r6.json",
+  "tag": "r6",
+  "script": "research-workflow-v3.js (v3.4) — THE ONE TOP-UP: 4 extra angles + regrade + synth + critic"
  },
  "dnd": {
-  "runId": "wf_a9298963-fdf",
-  "argsFile": "args-dnd-r5.json",
-  "tag": "r5",
-  "script": "research-workflow-v3.js (v3.3: skipSynth; compact chunks + legacy {file,indices} for triage gaps)"
+  "runId": "wf_df0a321b-0f2",
+  "argsFile": "args-dnd-r6.json",
+  "tag": "r6",
+  "script": "research-workflow-v3.js (v3.4) — 4 chunks (46 claims after triage) + regrade + synth + critic"
  },
  "ai": {
-  "runId": "wf_bcc0efc7-47c",
-  "argsFile": "args-ai-r5.json",
-  "tag": "r5",
-  "script": "research-workflow-v3.js (v3.3: skipSynth; compact chunks + legacy {file,indices} for triage gaps)"
+  "runId": "wf_e04d8c44-23e",
+  "argsFile": "args-ai-r6.json",
+  "tag": "r6",
+  "script": "research-workflow-v3.js (v3.4) — synth + critic, regrade false (r5 landed 14:42)"
  }
 }

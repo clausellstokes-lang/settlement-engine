@@ -15797,6 +15797,13 @@
    "note": "Quote verbatim on the same raw page, immediately after the read-aloud sentence; the claim's 'long passages set in italics' matches the antecedent 'There are long stretches of read-aloud, in italics.'",
    "fromFile": "verdicts-dnd-i709-723.json"
   },
+  "724": {
+   "index": 724,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "In this context detail is bad. It is trivia.",
+   "note": "Raw page fetched (HTTP 200, browser UA). Post 'The Swan Hollow Intrigue', posted September 5, 2026 by Bryce Lynch. Quote verbatim in the paragraph opening on the confusion between details and specifics; the same paragraph sets specificity against detail, so every limb (distinguishes detail from specificity; calls it trivia; says detail is bad) is on the page.",
+   "fromFile": "verdicts-dnd-i724-795.json"
+  },
   "725": {
    "index": 725,
    "verdict": "SKIPPED_TRIAGE",
@@ -15846,6 +15853,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-dnd-triage-r6.json"
   },
+  "732": {
+   "index": 732,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "trying to recapture the campaign instead of the scenario",
+   "note": "Raw page fetched (HTTP 200). 'Ptolus: Running the Campaign - From Table to Page', January 5th, 2018, The Alexandrian. Quote verbatim; it is introduced as what you must be wary of when going table-to-page, i.e. adapting his own home campaign (The Complex of Zombies) into a publishable scenario, and the following paragraphs give the falls-in-love-with-an-NPC example. Warning limb supported.",
+   "fromFile": "verdicts-dnd-i724-795.json"
+  },
   "733": {
    "index": 733,
    "verdict": "SKIPPED_TRIAGE",
@@ -15873,6 +15887,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "737": {
+   "index": 737,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "That IS the goal of good writing.",
+   "note": "Raw page fetched (HTTP 200). 'The Lions of Tell Arn Part 2 - The City & The City', posted July 6, 2026 by Bryce Lynch. The sentence immediately follows his description of a designer who called up a mental image, lived the room, and got it on paper so the reading DM can pick it up and run it as imagined. Transfer limb supported.",
+   "fromFile": "verdicts-dnd-i724-795.json"
   },
   "738": {
    "index": 738,
@@ -15908,6 +15929,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "743": {
+   "index": 743,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "pads it like a school paper stretched to an assigned length",
+   "note": "Raw page fetched (HTTP 200); the tag URL serves the full post 'How much description should a dungeon key include?', November 21, 2016, by David Hartlage. Quote verbatim in the section headed 'Longer descriptions', judging the 1989 Gamescience expanded Tegel Manor entry B9 BEDROOM against the shorter original. 'Expanded room description' and 'good middle sentence' limbs both on the page.",
+   "fromFile": "verdicts-dnd-i724-795.json"
   },
   "744": {
    "index": 744,
@@ -15993,6 +16021,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-dnd-triage-r6.json"
   },
+  "756": {
+   "index": 756,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Austere. Uncurtained windows let the gloomy light",
+   "note": "Raw page fetched (HTTP 200). 'Bullet Points vs Prose', March 23, 2023, Luke Gearing. HTML confirms the layout: each room heading is followed by a <p> prose version and then a <ul> bullet version. Room '10) Study' prose opens with the one-word sentence 'Austere.' before the desk, dust and papers; the bullet twin instead opens 'Study - austere and spartan...'. One-word-first and before-inventory limbs both hold.",
+   "fromFile": "verdicts-dnd-i724-795.json"
+  },
   "757": {
    "index": 757,
    "verdict": "SKIPPED_TRIAGE",
@@ -16006,6 +16041,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "759": {
+   "index": 759,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Use your outline (that is, your headings) to build a skeleton",
+   "note": "Raw page fetched (HTTP 200). 'Techniques to Write Adventures', September 14, 2021, Luke Gearing, under the heading 'Outline To Fuck'. The same sentence continues that your words, the details, are the meat; the following paragraph describes typing headings first in Markdown. Skeleton-first and words-as-meat limbs both supported.",
+   "fromFile": "verdicts-dnd-i724-795.json"
   },
   "760": {
    "index": 760,
@@ -16034,6 +16076,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "764": {
+   "index": 764,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "presents his dungeon ideas as part of a coherent adventure",
+   "note": "Raw page fetched (HTTP 200). 'Part 46: \"Zenopus Built a Tower\"', Friday, February 6, 2015, section 'SAMPLE DUNGEON'. Page: the OD&D Sample Level is just a collection of examples whereas Holmes presents his dungeon ideas as part of a coherent adventure, almost a mini-setting. Both sides of the contrast are on the page. Attribution note: the post byline reads 'Zenopus Archives'; the name Zach Howard appears nowhere on the page (0 hits) and the Blogger profile does not render it, so the personal name rests on the source field, not this page.",
+   "fromFile": "verdicts-dnd-i724-795.json"
   },
   "765": {
    "index": 765,
@@ -16077,6 +16126,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-dnd-triage-r6.json"
   },
+  "771": {
+   "index": 771,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "here we at least get full English sentences describing each area",
+   "note": "Raw page fetched (HTTP 200). 'Early Evolution of Encounter Text', Delta's D&D Hotspot, October 2021, section heading '1976 - Lost Caverns of Tsojconth Tournament' (Gygax's Winter Con V document). The sentence begins 'Rather than bullet-point atoms...', which carries the moved-from-bullet-points limb; the preceding section is the 1974 Castle Greyhawk bullet notes.",
+   "fromFile": "verdicts-dnd-i724-795.json"
+  },
   "772": {
    "index": 772,
    "verdict": "SKIPPED_TRIAGE",
@@ -16119,6 +16175,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-dnd-triage-r6.json"
   },
+  "778": {
+   "index": 778,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "monster stat blocks grew too big to comfortably fit within the paragraph",
+   "note": "Raw page fetched (HTTP 200). Same post, section '1982 - Lost Caverns of Tsojcanth Publication' (heading precedes this paragraph; next heading is 1984). Delta writes that he finds it interesting to pinpoint in this one document the moment when monster stat blocks grew too big to comfortably fit within the paragraph text and had to move to a dedicated place. Locates-the-moment limb explicit.",
+   "fromFile": "verdicts-dnd-i724-795.json"
+  },
   "779": {
    "index": 779,
    "verdict": "SKIPPED_TRIAGE",
@@ -16132,6 +16195,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "781": {
+   "index": 781,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Room descriptions have important object in bold with parenthesis containing details",
+   "note": "Raw page fetched (HTTP 200); the comment thread is in the served HTML. Comment by Warren D., October 25, 2021, on Delta's D&D Hotspot. Praise limb explicit two lines earlier, where he calls the best text innovations those championed by the OSR with Old-School Essentials as his example; he then gives a worked room example with the bolded object and parenthetical detail.",
+   "fromFile": "verdicts-dnd-i724-795.json"
   },
   "782": {
    "index": 782,
@@ -16161,6 +16231,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-dnd-triage-r6.json"
   },
+  "786": {
+   "index": 786,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "a compact series of encounters appropriate for a specific level of play",
+   "note": "Raw page fetched (HTTP 200). 'Dungeon Delve: WTF?', The Alexandrian. The sentence sits in an indented block (padding-left/right 60px in the HTML) among the passages Alexander quotes from the Dungeon Delve introduction, which he introduces as written by Bill Slavicsek, WotC Director of R&D. The block continues that the book holds 30 Delves, one per level, three encounters each. Definition and attribution limbs both supported.",
+   "fromFile": "verdicts-dnd-i724-795.json"
+  },
   "787": {
    "index": 787,
    "verdict": "SKIPPED_TRIAGE",
@@ -16174,6 +16251,20 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "789": {
+   "index": 789,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "They still signpost traps and treasure with bold italics",
+   "note": "Raw page fetched (HTTP 200). 'Designing Layout and Information in Adventures', Welcome to the Deathtrap, Sunday August 29, 2021 (Brian C. Rideout), section 'The Evolution of Dungeons & Dragons' Information Design'. Full page sentence continues 'at the start of the appropriate paragraph'. Subject 'They' is Wizards of the Coast, reached via his copy of D&D5e's Candlekeep Mysteries, so the 5th-Edition limb is the page's own referent; the sentence ends by noting it is still a wall of text with boxed description.",
+   "fromFile": "verdicts-dnd-i724-795.json"
+  },
+  "790": {
+   "index": 790,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "clearly signposted monsters, treasure, traps, and tactics using indentation and icons",
+   "note": "Raw page fetched (HTTP 200). Same post and section. The page continues 'and presented in a specific order', plus Encounter Level at the start of each encounter, so the specific-order limb is on the page and the attribution to 3rd edition's structure is explicit.",
+   "fromFile": "verdicts-dnd-i724-795.json"
   },
   "791": {
    "index": 791,
@@ -16195,6 +16286,27 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "794": {
+   "index": 794,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "unless you hook the reader in the first half-page",
+   "note": "Raw page fetched (HTTP 200). 'Let's Design an Adventure: Adventure Hooks and Opening Scenes', by Shawn Merwin, published 2019-10-23, section 'You May Ask Yourself, How Did I Get Here?'. Taught limb explicit: he frames it as one of the most sobering things he was told in his creative writing classes. One nuance, not a missing limb: the page hedges the consequence as readers being unlikely to finish, where the claim says 'go unfinished'.",
+   "fromFile": "verdicts-dnd-i724-795.json"
+  },
+  "795": {
+   "index": 795,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "might not be necessary in adventure writing",
+   "note": "Raw page fetched (HTTP 200). Same post and section, same paragraph as 794. The page attributes 'razor's edge audience-grabbing' to fiction writing and says the same sort of it might not be necessary in adventure writing, then adds that it is still important to start as strongly as you can.",
+   "fromFile": "verdicts-dnd-i724-795.json"
+  },
+  "796": {
+   "index": 796,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "The “where” is the opening scene, and the “why”…",
+   "note": "Raw page fetched (HTTP 200, browser UA). Quote is word-for-word in the section 'You May Ask Yourself, How Did I Get Here?', which first poses the two reader questions (where am I / why am I here) that the claim maps onto scene and hook. Byline Shawn Merwin, D&D Beyond, Oct 23 2019, all confirmed on page.",
+   "fromFile": "verdicts-dnd-i796-842.json"
   },
   "797": {
    "index": 797,
@@ -16238,12 +16350,26 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-dnd-triage-r6.json"
   },
+  "803": {
+   "index": 803,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“selling 750,000 copies a year”; 1981 D&D boom",
+   "note": "Raw page fetched (HTTP 200). Quote verbatim in the final substantive paragraph of the Peterson excerpt; the same sentence ties Keep on the Borderlands (B2), shipped with the Moldvay Basic Set, to the height of the D&D boom in 1981. Page is introduced as a never-before-seen piece cut from Peterson's Game Wizards, so the attribution to Peterson holds.",
+   "fromFile": "verdicts-dnd-i796-842.json"
+  },
   "804": {
    "index": 804,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "805": {
+   "index": 805,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“The language is casual and informal”",
+   "note": "Raw page fetched (HTTP 200). Quote verbatim in the Introduction under the heading 'The Base Rules', in a sentence about the GAZ books being designed for beginning players; the antecedent 'these books' is the Gazetteer line, so the claim's scope is right.",
+   "fromFile": "verdicts-dnd-i796-842.json"
   },
   "806": {
    "index": 806,
@@ -16258,6 +16384,13 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "808": {
+   "index": 808,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“descriptions in this chapter are mostly meant for players”",
+   "note": "Raw page fetched (HTTP 200). Quote verbatim, but it sits in the section 'Gaz 1 Part 2: Maps, Characters and More History of Karameikos', NOT 'Gaz 1 Part 4: The Lay of the Land' as the citation's page field says - same URL, wrong section; fix the locator before reuse. The claim's 'rather than the DM' is the contrast implied by 'mostly meant for players', not words on the page; the stated purpose there is letting players decide where their characters are from.",
+   "fromFile": "verdicts-dnd-i796-842.json"
   },
   "809": {
    "index": 809,
@@ -16294,6 +16427,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-dnd-triage-r6.json"
   },
+  "814": {
+   "index": 814,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“Unlike Gygax, whose prose resembled a baroque sermon”",
+   "note": "Raw page fetched (HTTP 200). Quote verbatim inside the section 'The Teacher: Frank Mentzer and the Human Face of D&D', where Gygax's prose is the foil for Mentzer's teacherly style. Byline Serban Ionita, The RPG Gazette, posted November 11 2025.",
+   "fromFile": "verdicts-dnd-i796-842.json"
+  },
   "815": {
    "index": 815,
    "verdict": "SKIPPED_TRIAGE",
@@ -16307,6 +16447,20 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "817": {
+   "index": 817,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“Literary and media scholars studied the forms of textuality, authorship”",
+   "note": "PDF fetched (HTTP 200) and text-extracted with pypdf, 31 pages. Quote verbatim; the sentence names literary and media scholars, and it sits inside the paragraph that opens 'In the 2000s, scholars in fields such as sociology...', so the decade limb is carried by the paragraph frame. This is the White Rose accepted manuscript of the Routledge chapter.",
+   "fromFile": "verdicts-dnd-i796-842.json"
+  },
+  "818": {
+   "index": 818,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“independent authors like Peterson (2012) and Appelcline (2015)”",
+   "note": "Same PDF, same page-region as index 817. Quote verbatim. Two nuances worth carrying: the chapter says 'like' Peterson and Appelcline, marking them as exemplars rather than the only producers, and its object is 'TRPGs and RPGs more generally', slightly wider than the claim's 'tabletop role-playing games'.",
+   "fromFile": "verdicts-dnd-i796-842.json"
   },
   "819": {
    "index": 819,
@@ -16371,6 +16525,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-dnd-triage-r6.json"
   },
+  "828": {
+   "index": 828,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“the most important thing to know about world building is, who”",
+   "note": "Raw page fetched (HTTP 200). Quote verbatim, twice on the page (body line and pull-quote), spoken by Wolfgang Baur in the opening exchange after the host's first prompt. The claim drops Baur's hedge 'I think'; the sentence completes by asking who you are doing it for, which is the claim's second limb. Seminar part 1, dated July 14 2025.",
+   "fromFile": "verdicts-dnd-i796-842.json"
+  },
   "829": {
    "index": 829,
    "verdict": "SKIPPED_TRIAGE",
@@ -16392,12 +16553,40 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-dnd-triage-r6.json"
   },
+  "832": {
+   "index": 832,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“this town hates this town over here”",
+   "note": "Raw page fetched (HTTP 200). Quote verbatim, spoken by Zeb Cook in the exchange on conflict, about the worst worldbuilding books being 'literally just lists of places and people'. The claim's 'never saying' renders the page's 'They don't spend any time saying', and 'the town next to it' renders 'this town over here'.",
+   "fromFile": "verdicts-dnd-i796-842.json"
+  },
+  "833": {
+   "index": 833,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“You are not creating a world for yourself”",
+   "note": "Raw page fetched (HTTP 200). Quote verbatim, Cook speaking, prefaced by 'if I'm doing something for publication', which supports the claim's 'published'; the next sentence supplies the 'for other players to take and use' limb. The citation's page field says 'exchange on choosing a theme'; the actual context is the exchange on deciding what to work on and for whom.",
+   "fromFile": "verdicts-dnd-i796-842.json"
+  },
+  "834": {
+   "index": 834,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“needs to be super clear what kind of adventures take place”",
+   "note": "Raw page fetched (HTTP 200). Quote verbatim, twice (body and pull-quote), spoken by Richard Green. The claim's 'at once' renders the page's condition 'when you pick up a new game or a new setting book'; the sentence continues with what the characters are going to get up to.",
+   "fromFile": "verdicts-dnd-i796-842.json"
+  },
   "835": {
    "index": 835,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "836": {
+   "index": 836,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“to stack as many boxes of dynamite as possible”",
+   "note": "Raw page fetched (HTTP 200). The Gnome Stew review quotes Baur directly - 'As Wolfgang Baur says in his opening essay' - and closes the quotation with the page cite '(12)', so both the opening-essay limb and the p.12 locator are on the page. Note this is the reviewer quoting the book, not the book itself; the primary source is Kobold Guide to Worldbuilding p.12.",
+   "fromFile": "verdicts-dnd-i796-842.json"
   },
   "837": {
    "index": 837,
@@ -16413,12 +16602,89 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-dnd-triage-r6.json"
   },
+  "839": {
+   "index": 839,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“conceptualizing TRPGs as, first and foremost, “literary gametexts””",
+   "note": "PDF fetched (HTTP 200) and text-extracted with pypdf, 12 pages, International Journal of Role-Playing issue 18. Quote verbatim in section '1. INTRODUCTION', where Mizer attributes the framing to Carbonell (2019, 3) alongside Gagne and contrasts it with his own anthropological angle.",
+   "fromFile": "verdicts-dnd-i796-842.json"
+  },
+  "840": {
+   "index": 840,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“emerges as a set of practices which are only later codified”",
+   "note": "Same PDF, section '1. INTRODUCTION', two sentences after the index-839 quote. Quote verbatim; the page reads 'I will argue the role-playing game emerges as...', so it is Mizer's own argument, and the codification is 'in the formulation of a gametext', matching the claim's final limb.",
+   "fromFile": "verdicts-dnd-i796-842.json"
+  },
   "841": {
    "index": 841,
    "verdict": "SKIPPED_TRIAGE",
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "842": {
+   "index": 842,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“centering the gametexts and gametools that create gameplay”",
+   "note": "Raw page fetched (HTTP 200). Quote verbatim; the page's own frame is that Dread Trident 'claims to add to posthuman theorization' by this approach, i.e. the reviewer reporting the book's claim. Burton endorses the substance elsewhere in the review (the book expands posthuman discourse, shifting posthumanism from bodies to spaces), so the claim's 'theorises the posthuman by centering...' holds. Byline Adrianna Burton, Analog Game Studies, January 9 2022.",
+   "fromFile": "verdicts-dnd-i796-842.json"
+  },
+  "843": {
+   "index": 843,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "answers this question through a series of close readings",
+   "note": "Live page (analoggamestudies.org, browser UA). Sentence sits in the paragraph beginning 'Dread Trident's audience appears to be literary studies scholars'; page reads 'this question' (the book's stated secondary-focus question about gametexts and tools), which the claim renders as 'his question'. Quoted fragment appears word for word, and 'of several TRPGs' follows it on the page.",
+   "fromFile": "verdicts-dnd-i843-870.json"
+  },
+  "844": {
+   "index": 844,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Dread Trident's audience appears to be literary studies scholars",
+   "note": "Live page. Opens the paragraph on audience; quoted fragment is word for word, reviewer Adrianna Burton, dated January 9, 2022, matching the citation.",
+   "fromFile": "verdicts-dnd-i843-870.json"
+  },
+  "845": {
+   "index": 845,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "an overlooked area of investigation for literary scholars",
+   "note": "Live page (liverpooluniversitypress.blog). First answer, opening sentence, in Carbonell's own voice ('I was interested in how role-playing gametexts appeared to be...'). Note the source narrows the group with a following qualifier about fantasy and science fiction that the claim drops; no contradiction, but the claim is the broader statement.",
+   "fromFile": "verdicts-dnd-i843-870.json"
+  },
+  "846": {
+   "index": 846,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "I then began my close readings of the archives",
+   "note": "Live page. Closes the first answer's second paragraph. 'The archives' is unqualified in that sentence; the same sentence ends by locating the finding in the play of these gametexts, and the second answer supplies the forty years of published material, so the claim's gloss 'of published role-playing material' is carried by the page.",
+   "fromFile": "verdicts-dnd-i843-870.json"
+  },
+  "847": {
+   "index": 847,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "because of its simplicity or lack of textual and psychological depth",
+   "note": "Live page, second answer. The 'disputes' limb rests on the sentence's own structure: it is easy to say this, but that 'high-brow' critique holds less weight today when all manner of cultural activity is open to investigation.",
+   "fromFile": "verdicts-dnd-i843-870.json"
+  },
+  "848": {
+   "index": 848,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "forty years of published material was out there, waiting to be mined",
+   "note": "Live page, second answer, word for word. Two limbs are contextual rather than stated: 'role-playing' comes from the question being about TRPGs, and 'by a literary scholar' from the same sentence's opening, where Carbonell says he returned to it as an adult and literary scholar when he realised this. The page does not name a mining agent explicitly.",
+   "fromFile": "verdicts-dnd-i843-870.json"
+  },
+  "849": {
+   "index": 849,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "where we see literary tropes push up against game mechanics",
+   "note": "Live page, answer to the question on a standout TRPG. The sentence names D&D as exemplary for anyone interested in fantasy studies, then locates that 'middle ground' with the quoted words; both limbs on the page.",
+   "fromFile": "verdicts-dnd-i843-870.json"
+  },
+  "850": {
+   "index": 850,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "an impulse which Carbonell argues is also reflected in early TRPGs",
+   "note": "Live page (sfrareview.org), review signed Clare Wall, filed under 52.1, posted January 10, 2022. The preceding clause attributes to Lovecraft a materialism and impulse to categorize in rich description; the quoted fragment follows it word for word.",
+   "fromFile": "verdicts-dnd-i843-870.json"
   },
   "851": {
    "index": 851,
@@ -16440,6 +16706,20 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "854": {
+   "index": 854,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Boxed text replaces that conversation with oration",
+   "note": "Live wizards.com URL now 302s to the modern dnd.wizards.com shell (article gone), so this is the Wayback raw capture 20140530180347id_. Sentence stands in 'Undercover Insight #1: Boxed Text = MEGO'. Attribution to Noonan holds on the page: the byline is Decker and Noonan, the column is introduced as the design side, and the undercover narrator is named as Dave. The article also ranks this as the strongest of three factors ('the conversation vs. oration factor'), matching 'mechanism for the failure'.",
+   "fromFile": "verdicts-dnd-i843-870.json"
+  },
+  "855": {
+   "index": 855,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "At its heart, a D&D game is a conversation",
+   "note": "Same Wayback capture, same section, word for word; it opens the working theory for why listening comprehension drops during boxed text.",
+   "fromFile": "verdicts-dnd-i843-870.json"
   },
   "856": {
    "index": 856,
@@ -16469,6 +16749,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-dnd-triage-r6.json"
   },
+  "860": {
+   "index": 860,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "“research” is pretty qualitative … science-speak for “quite possibly bogus”",
+   "note": "Same Wayback capture, in the section headed \"Here's the Plan: We're Going Undercover!\", word for word including the gloss. One nuance: the passage is first-person singular (the wandering observer), though the article is bylined by both authors, so 'the authors' is a byline-level attribution.",
+   "fromFile": "verdicts-dnd-i843-870.json"
+  },
   "861": {
    "index": 861,
    "verdict": "SKIPPED_TRIAGE",
@@ -16497,6 +16784,13 @@
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-dnd-triage-r6.json"
   },
+  "865": {
+   "index": 865,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "close examination of TRPG rulebooks is central to understanding",
+   "note": "PDF fetched directly from journals.uu.se and text-extracted; author David Jara, University of Heidelberg, IJRP Issue 4. Opening sentence of section 4, CONCLUSION; the remainder of the sentence describes these games allowing complex, highly collaborative interactive narratives, which the claim compresses to 'build narratives'.",
+   "fromFile": "verdicts-dnd-i843-870.json"
+  },
   "866": {
    "index": 866,
    "verdict": "SKIPPED_TRIAGE",
@@ -16510,6 +16804,34 @@
    "trueWording": "",
    "note": "S-BOUND: the feature already has three or more verified independent sources; not verified this round",
    "fromFile": "verdicts-dnd-triage-r6.json"
+  },
+  "868": {
+   "index": 868,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "their titles say less about the books as artifacts",
+   "note": "Same PDF, section 3.3 (Rulebook (Meta-)Framing Devices), in the passage treating titles as initial paratexts and naming Dungeons and Dragons, Vampire and Paranoia; the sentence's second half gives the type of stories that can be told with them.",
+   "fromFile": "verdicts-dnd-i843-870.json"
+  },
+  "869": {
+   "index": 869,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "roughly classified as Histories, Influences, Analyses, and Futures",
+   "note": "Live page (stuartellisgorman.com), post dated 1 August 2024. Second body paragraph: the volume is subdivided into four sections so classified; quoted fragment word for word.",
+   "fromFile": "verdicts-dnd-i843-870.json"
+  },
+  "870": {
+   "index": 870,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "Far more attention has been paid in scholarship to the origins",
+   "note": "Same live page, the paragraph on the history section. The sentence continues with the early years of D&D, the TSR era, rather than the more recent editions, supporting the 'than to later editions' limb.",
+   "fromFile": "verdicts-dnd-i843-870.json"
+  },
+  "871": {
+   "index": 871,
+   "verdict": "VERIFIED_VERBATIM",
+   "trueWording": "his chapter on the development of experience and the concept of leveling",
+   "note": "Raw HTML fetched with a browser UA (HTTP 200, 71,732 bytes) and stripped to text; no summarizer used. The quoted string appears as an exact substring in the paragraph that opens the Histories-section discussion (\"As a historian, it's no surprise that I liked the first section...\"), reading in full: Jon Peterson's contributions to the field, and his chapter on the development of experience and the concept of leveling up is fascinating. Every limb holds: the reviewer is Stuart Gorman, the post is dated 1 August 2024, the volume is Fifty Years of Dungeons and Dragons ed. Sidhu, Carter and Zagal, the chapter is attributed to Peterson, and the subject is experience plus levelling up. Only spelling differs (page: leveling; claim: levelling), which is orthographic, not substantive.",
+   "fromFile": "verdicts-dnd-i871-871.json"
   }
  }
 }
