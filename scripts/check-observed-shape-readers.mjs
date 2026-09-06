@@ -95,7 +95,7 @@ import {
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
-  validateSchema17Baseline,
+  validateSchema18Baseline,
 } from './lib/observed-shape-baseline.mjs';
 import {
   parseExactFlags,
@@ -1309,7 +1309,7 @@ export function assertExplainedWriterRowTags(
   baseline,
   entries = EXPLAINED_WRITER_EXEMPTIONS,
 ) {
-  validateSchema17Baseline(baseline);
+  validateSchema18Baseline(baseline);
   assertExplainedWriterExemptions(entries);
   const declarations = new Map(entries.map((entry) => [entry.identity, entry]));
   const genesis = baseline.frozenAtSha === baseline.migrationReview.subjectSha;
@@ -2550,10 +2550,15 @@ export function baselineOf({
       'That derived re-freeze may only lower or delete rows; the governed reasoned path may raise tagged rows only.',
       'Detector changes require a new governed instrument migration.',
       'The RETIRED schema-3 exact "<key> on <shape> @ <origin> # <site>" spelling cannot enter this file.',
-      'SCHEMA 10 = schema 9\'s topology, tag law and eight-identity M8/M9 bank, ALL UNCHANGED,',
-      're-governed to the landed inputs a second time: two dossier-prose generated',
-      '(subject-but-unscanned) sources were regenerated and package.json gained one lint-staged',
-      'binding, with the lockfile untouched. This rung declares no identity and retunes nothing.',
+      'SCHEMA 18 = schema 17\'s topology, tag law and NINE-identity declared M8/M9 bank, ALL',
+      'UNCHANGED, re-governed so the migration receipt\'s SUBJECT COMMIT lies inside the lineage',
+      'that carries this register: a genesis taken in one dock and replayed into another leaves',
+      '`migrationReview.subjectSha` unreachable, and `validateBaselineHistory` — which',
+      'reconstructs this receipt FROM THAT COMMIT\'S TREE — then refuses the gate AND every',
+      '--write until a rung re-anchors it. This rung declares no identity, retunes nothing and',
+      'moves no row: its reconciliation is EMPTY. Of the nine declared bank entries EIGHT bank',
+      'reads today; `isCriminal on incomeSources` has banked nothing since schema 17 made its',
+      'writer observable, and banked is always a subset of declared.',
       'The byte-frozen detector is unchanged; its output is narrowed by THREE clearing filters —',
       'CR-OSR-FREEZE-6 shape-family union (M6), the M11 DOM-global receiver exclusion, the M12',
       'language-surface residual — while M8/M9 findings stay present under sparse rowTags. All are inside',
@@ -2561,7 +2566,7 @@ export function baselineOf({
       'An untagged row means: a guarded read, of a real record rather than browser or language surface,',
       'of a key no writer the corpus runs produces and no declared out-of-corpus writer explains.',
       'A tagged row stays visible as governed explained-writer debt under its numeric ceiling and reason.',
-      'Schemas 4–9 are the RETIRED numeric predecessors.',
+      'Schemas 4–17 are the RETIRED numeric predecessors.',
     ],
     schema: BASELINE_SCHEMA,
     frozen: new Date().toISOString().slice(0, 10),
@@ -2735,7 +2740,7 @@ export async function run(argv = [], overrides = {}) {
     createScanArtifact,
     validateScanArtifact,
     assertFindingSourceEvidence,
-    validateBaseline: validateSchema17Baseline,
+    validateBaseline: validateSchema18Baseline,
     assertExplainedWriterRowTags,
     validateBaselineHistory,
     committedInputManifestsFor,

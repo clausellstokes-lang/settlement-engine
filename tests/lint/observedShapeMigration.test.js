@@ -32,6 +32,7 @@ import {
   heuristicMigrationReport,
   COMPANION_GATE_TARGET_SCHEMA,
   STRESS_TOPOLOGY_TARGET_SCHEMA,
+  LINEAGE_REANCHOR_TARGET_SCHEMA,
   LEAF_MIGRATION_PREDECESSOR,
   migrationBundleOf,
   migrationReport,
@@ -1161,7 +1162,8 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
       // ⭐ THE DEFAULT TARGET IS THE LIVE RUNG, so this message moves with it AGAIN: 17
       // takes a schema-16 predecessor. It read schema-15 while 16 was live, and
       // schema-14 while 15 was.
-      ])).toThrow(/predecessor baseline must be a schema-16 object/);
+      // ⭐ AND AGAIN AT THE LINEAGE-REANCHOR RUNG: 18 takes a schema-17 predecessor.
+      ])).toThrow(/predecessor baseline must be a schema-17 object/);
       // …and the RETIRED live target of the previous mint is still reachable by
       // name, still refusing the same schema-2 predecessor for its own reason.
       expect(() => runMigration([
@@ -1185,8 +1187,8 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
       // became a defined rung at §893.4, so a probe still naming it would be asserting
       // that a VALID target is refused — the stale-pin failure this comment warns about.
       expect(() => runMigration([
-        `--predecessor=${predecessorPath}`, `--legacy=${legacyPath}`, '--target-schema=18',
-      ])).toThrow(/--target-schema must be 17/);
+        `--predecessor=${predecessorPath}`, `--legacy=${legacyPath}`, '--target-schema=19',
+      ])).toThrow(/--target-schema must be 18/);
       expect(() => runMigration([`--predecessor=${predecessorPath}`, '--target-schema=3']))
         .toThrow(/usage:/);
     } finally {
@@ -1226,7 +1228,9 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
     expect(STABLE_CORE_TARGET_SCHEMA).toBe(15);
     // ⚠ 16 IS NOW A RETIRED TARGET AND KEEPS ITS NUMBER, by the same law as 8 above.
     expect(COMPANION_GATE_TARGET_SCHEMA).toBe(16);
+    // ⚠ 17 IS NOW A RETIRED TARGET AND KEEPS ITS NUMBER, by the same law as 8 above.
     expect(STRESS_TOPOLOGY_TARGET_SCHEMA).toBe(17);
+    expect(LINEAGE_REANCHOR_TARGET_SCHEMA).toBe(18);
     // ⚠⚠ THE CHAIN IS SINGLE-STEP, PINNED AS AN EXACT TABLE. A skipped rung —
     // 2 → 6, which would re-bank a two-mints-old inventory as if four filters
     // had run — is not expressible, because no such pairing exists.
@@ -1240,6 +1244,10 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
       // with 16, so a schema-15 predecessor cannot reach the live number by skipping the
       // rung that widened the corpus's reach.
       17: 16,
+      // ⭐ 18 -> 17, the lineage-reanchor rung. The chain stays SINGLE-STEP: 18 pairs
+      // only with 17, so a schema-16 predecessor cannot reach the live number by skipping
+      // the rung that re-anchored the receipt inside the lineage carrying the register.
+      18: 17,
     });
     // The kind is DERIVED from the table, so a target can never name a migration
     // it did not perform.
@@ -1273,13 +1281,13 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
     // schema 10 became live. A probe left pointing at a number the table has
     // since adopted stops proving the predicate is total and starts proving
     // nothing at all, while still passing for the wrong reason.
-    expect(() => heuristicMigrationReport(fixture.predecessor, fixture.legacy, text, 18))
-      .toThrow(/leaf migration target must be 4 or 5 or 6 or 7 or 8 or 9 or 10 or 11 or 12 or 13 or 14 or 15 or 16 or 17;/);
+    expect(() => heuristicMigrationReport(fixture.predecessor, fixture.legacy, text, 19))
+      .toThrow(/leaf migration target must be 4 or 5 or 6 or 7 or 8 or 9 or 10 or 11 or 12 or 13 or 14 or 15 or 16 or 17 or 18;/);
     // ⚠ AND OMITTING IT IS THE SAME REFUSAL, WHICH IS WHY THERE IS NO DEFAULT:
     // a defaulted target is the one input in this chain a caller could get wrong
     // silently, and it would decide which migration ran.
     expect(() => heuristicMigrationReport(fixture.predecessor, fixture.legacy, text))
-      .toThrow(/leaf migration target must be 4 or 5 or 6 or 7 or 8 or 9 or 10 or 11 or 12 or 13 or 14 or 15 or 16 or 17;/);
+      .toThrow(/leaf migration target must be 4 or 5 or 6 or 7 or 8 or 9 or 10 or 11 or 12 or 13 or 14 or 15 or 16 or 17 or 18;/);
 
     // A6 positive arm: one valid schema-6 envelope can advance exactly one rung
     // to 7, retaining the numeric inventory alphabet and reconciliation ledger.

@@ -123,6 +123,44 @@
  *     changes `migrate-observed-shape-readers.mjs`, which is itself a member. See
  *     `STRESS_TOPOLOGY_SCANNER_DELTA_PATHS`.
  *
+ *   schema 17 -> 18 (LIVE)   the same tagged numeric reconciliation, and THE FIRST RUNG
+ *     WHOSE SUBJECT IS THE RECEIPT'S OWN PROVENANCE RATHER THAN THE DETECTOR OR THE
+ *     CORPUS. Nothing about what the instrument SEES moves; what moves is where its
+ *     receipt can be READ FROM.
+ *       - WHY A RUNG IS THE ONLY ROAD. `validateBaselineHistory` requires
+ *         `migrationReview.subjectSha` to be a committed ancestor of HEAD and then
+ *         reconstructs the whole receipt — predecessor baseline text, scan/source/
+ *         detector/execution tree digests — FROM THAT COMMIT'S TREE. Schema 17's genesis
+ *         was taken in its lane's own dock and CHERRY-PICKED into the composed lineage,
+ *         so its subject sha is reachable as an object but is not an ancestor of any
+ *         commit that carries the register. The receipt cannot reconstruct from anything
+ *         in this lineage, and the validator therefore refuses the ORDINARY GATE and
+ *         every `--write` alike — it runs before the scan, so the instrument returns 1
+ *         in zero seconds without looking at a single file. ⛔ A hand-edited `subjectSha`
+ *         would not reconstruct either; it would only make the receipt a lie. The
+ *         governed migration path is the one door that does not consult history, because
+ *         it BRINGS its own predecessor bytes in the bundle, so a rung is the only lawful
+ *         re-anchoring and this is it.
+ *       - IT MOVES NO ROW, AND THAT IS THE FENCE. Rung 17 cleared twelve; this one is
+ *         verdict-only like 13, 14, 15 and 16, and its reconciliation must be EMPTY —
+ *         `predecessorGone`, `predecessorNew`, `predecessorIncreased` and
+ *         `predecessorDecreased` are ALL required to be 0. Measured before the rung was
+ *         cut: the tip's live scan reproduces the frozen register exactly (1,972 findings
+ *         / 1,397 identities / 386 files, zero rows gone, new or count-moved), so any
+ *         movement at all would mean this rung's own bookkeeping changed a verdict, which
+ *         a re-anchoring may not do.
+ *       - THE ONE FIGURE THAT DOES MOVE IS AN OBSERVATION KEY.
+ *         `corpusMeta.simulationFlagsLit` goes 80 -> 81, because the register was frozen
+ *         before SEAT-78 minted `irregularForceEnabled` and the corpus lights every
+ *         simulation flag it can see. That is a `CORPUS_OBSERVATION_KEYS` member —
+ *         RECORDED by `corpusCompatibilityOf`, never refused — while all four
+ *         EXECUTION keys (seeds 4, configs 4, generations 16, pulseIntervals 12) are
+ *         measured unmoved, which is what makes the two sides the same experiment.
+ *     Its delta is THREE instrument paths, the bookkeeping set every verdict-only rung
+ *     moves, MEASURED against the predecessor's own recorded manifest — at which all
+ *     ELEVEN detector inputs were byte-identical before this rung was written. See
+ *     `LINEAGE_REANCHOR_SCANNER_DELTA_PATHS`.
+ *
  * In every family, the predecessor baseline and scan artifacts are
  * canonical, content-addressed inputs sharing one committed source, execution
  * tree, executed corpus and scan configuration. The legacy detector is the
@@ -164,6 +202,7 @@ import {
   validateSchema14Baseline,
   validateSchema15Baseline,
   validateSchema16Baseline,
+  validateSchema17Baseline,
 } from './lib/observed-shape-baseline.mjs';
 
 export const MIGRATION_REPORT_SCHEMA = 2;
@@ -380,6 +419,49 @@ export const COMPANION_GATE_TARGET_SCHEMA = 16;
  *  judgeable. Topology without pulse is a pure shrink; topology WITH pulse is a new
  *  baseline wearing a shrink's clothes. */
 export const STRESS_TOPOLOGY_TARGET_SCHEMA = 17;
+
+/* ⭐⭐ THE SCHEMA 17 → 18 RUNG — THE LINEAGE RE-ANCHORING (lane OSR-SCHEMA18).
+ *
+ *  WHAT MOVED, AND IT IS NEITHER THE DETECTOR NOR THE CORPUS — the first rung whose
+ *  subject is the RECEIPT'S OWN PROVENANCE. Every filter, every threshold, every declared
+ *  bank entry and the whole executed corpus definition are byte-for-byte what schema 17
+ *  governed. What changed is which commit the receipt can be reconstructed FROM.
+ *
+ *  ⭐ WHY THE INSTRUMENT NEEDED IT. `validateBaselineHistory` demands that
+ *  `migrationReview.subjectSha` be a committed ancestor of HEAD and then rebuilds the
+ *  receipt from that commit's tree. Schema 17's genesis was executed in lane
+ *  OSR-SCHEMA17's own dock (subject `0742f8ff5`) and CHERRY-PICKED into the composed
+ *  desk lineage as a different sha, so the subject commit is reachable as a git OBJECT
+ *  but is an ancestor of nothing that carries the register. The validator runs BEFORE
+ *  the scan, so the whole instrument — the ordinary gate, `--report` and every `--write`
+ *  — returned 1 in zero seconds without reading one source file, and
+ *  `base-state-capsule.mjs`, which shells out to it, could not regenerate either.
+ *  ⛔ THE ONE CURE THAT IS NOT AVAILABLE IS EDITING `subjectSha`: the digests would not
+ *  reconstruct from the substituted commit, so the receipt would stop being checkable
+ *  and start being a claim. The governed migration path is the only door that does not
+ *  consult history — it carries its own predecessor bytes inside the reviewed bundle —
+ *  which is exactly why a rung, and only a rung, can re-anchor a register.
+ *
+ *  ⛔ THIS RUNG MOVES NO ROW AND MUST NOT — the difference from 17, which cleared twelve,
+ *  and the same discipline 13, 14, 15 and 16 kept. Measured before the rung was cut, via
+ *  `--scan-only --scan-mode=legacy-leaf`, which reaches a real scan because it never
+ *  enters the gate branch that validates history:
+ *
+ *      identities 1397 → 1397 · findings 1972 → 1972 · files 386 → 386
+ *      GONE 0 · NEW 0 · RAISED 0 · LOWERED 0
+ *
+ *  ⛔ THE FENCE IS THE ZERO ON ALL FOUR, not merely on `new`/`increased` as at rung 17.
+ *  A shrink is lawful when the corpus's reach genuinely grew; here it did not grow, so a
+ *  vanished row could only mean this rung's own bookkeeping changed a verdict — and a
+ *  re-anchoring that moves a verdict is not a re-anchoring.
+ *
+ *  ⚠ ONE OBSERVATION KEY MOVES: `corpusMeta.simulationFlagsLit` 80 → 81. The register was
+ *  frozen before SEAT-78 minted `irregularForceEnabled`, and the corpus lights every
+ *  simulation flag it can see. `corpusCompatibilityOf` RECORDS the three observation keys
+ *  and REFUSES only the four execution keys, all of which are measured unmoved. That one
+ *  figure is also the whole of the writer-reach walker's declared debt against this
+ *  register: two banked ratchet rows read `expected 81 to be 80` until this write. */
+export const LINEAGE_REANCHOR_TARGET_SCHEMA = 18;
 
 /**
  * The complete, reviewed detector transition admitted by the retired 6→7 mint.
@@ -639,6 +721,41 @@ export const STRESS_TOPOLOGY_SCANNER_DELTA_PATHS = Object.freeze([
   'scripts/migrate-observed-shape-readers.mjs',
 ]);
 
+/**
+ * The schema-17 → 18 delta: THREE paths — the bookkeeping set and nothing else.
+ *
+ * ⛔ MEASURED, NEVER LISTED, and this rung's measurement has an unusually clean shape.
+ * Each of the ELEVEN governed detector inputs was hashed against the PREDECESSOR'S OWN
+ * RECORDED MANIFEST at the composed tip BEFORE a byte of this rung was written, and ALL
+ * ELEVEN came back byte-identical — including `package.json` and `package-lock.json`,
+ * measured rather than asserted, because any `package.json` byte is itself a mint
+ * trigger. The delta is therefore exactly the set this rung goes on to touch, and it was
+ * re-measured after the set was written, because writing it changes
+ * `migrate-observed-shape-readers.mjs`, which is itself a member. The declared set is a
+ * FIXED POINT of its own measurement. A mis-declared delta set is how rung 10 → 11 became
+ * permanently unmigratable.
+ *
+ *   - `check-observed-shape-readers.mjs` — the live-validator binding moving from
+ *     `validateSchema17Baseline` to `validateSchema18Baseline`, and the register's `_doc`
+ *     header, which had described SCHEMA 10 and an eight-identity bank through eight
+ *     rungs of drift;
+ *   - `observed-shape-baseline.mjs` — the 17 → 18 bump, the retired-17 constant and its
+ *     re-bound validator;
+ *   - `migrate-observed-shape-readers.mjs` — this rung.
+ *
+ * ⛔ THREE RATHER THAN FOUR, and the missing one is the point: 16 → 17 carried a fourth
+ * path because its SUBJECT was `observed-shape-corpus.mjs`, a detector input outside the
+ * bookkeeping set. This rung's subject is not a file at all — it is the receipt's
+ * provenance — so it moves nothing beyond the three files every verdict-only rung moves.
+ * An extra path here, or one of these three remaining byte-identical, is a different
+ * migration and fails closed.
+ */
+export const LINEAGE_REANCHOR_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
 export const BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS = Object.freeze([
   'package-lock.json',
   'package.json',
@@ -669,6 +786,8 @@ const COMPANION_GATE_SCANNER_TRANSITION_POLICY =
   'schema-15-to-16-exact-scanner-transition-v1';
 const STRESS_TOPOLOGY_SCANNER_TRANSITION_POLICY =
   'schema-16-to-17-exact-scanner-transition-v1';
+const LINEAGE_REANCHOR_SCANNER_TRANSITION_POLICY =
+  'schema-17-to-18-exact-scanner-transition-v1';
 const CORPUS_COVERAGE_SCANNER_TRANSITION_POLICY =
   'schema-7-to-8-exact-scanner-transition-v1';
 const EPOCH_DARK_CORPUS_SCANNER_TRANSITION_POLICY =
@@ -704,6 +823,7 @@ export const LEAF_MIGRATION_PREDECESSOR = Object.freeze({
   [STABLE_CORE_TARGET_SCHEMA]: PRESET_LIGHT_TARGET_SCHEMA,
   [COMPANION_GATE_TARGET_SCHEMA]: STABLE_CORE_TARGET_SCHEMA,
   [STRESS_TOPOLOGY_TARGET_SCHEMA]: COMPANION_GATE_TARGET_SCHEMA,
+  [LINEAGE_REANCHOR_TARGET_SCHEMA]: STRESS_TOPOLOGY_TARGET_SCHEMA,
 });
 
 /**
@@ -742,6 +862,10 @@ const LEAF_PREDECESSOR_VALIDATOR = Object.freeze({
   // RETIRED literal from this rung onward, so this entry keeps validating schema 16
   // as schema 16 after the live number moves past it.
   [COMPANION_GATE_TARGET_SCHEMA]: validateSchema16Baseline,
+  // The schema-18 rung's own predecessor. `validateSchema17Baseline` is bound to the
+  // RETIRED literal from this rung onward, so this entry keeps validating schema 17
+  // as schema 17 after the live number moves past it.
+  [STRESS_TOPOLOGY_TARGET_SCHEMA]: validateSchema17Baseline,
 });
 
 const RETIRED_EXACT_MIGRATION_KIND = `observed-shape-schema-2-to-${RETIRED_EXACT_TARGET_SCHEMA}-migration`;
@@ -1168,6 +1292,21 @@ const SCANNER_TRANSITION_BY_TARGET = new Map([
     // under `scripts/`, which are not subject paths at all, so the digest cannot move
     // and the report's `unscannedMovement` is null. The permission is carried because
     // the class is lawful, not because this rung exercises it.
+    reviewableUnscannedMovement: true,
+  })],
+  [LINEAGE_REANCHOR_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: LINEAGE_REANCHOR_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: LINEAGE_REANCHOR_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9 — the flag is PER-TARGET and never
+    // retroactive. `unscannedInputDigestOf` is the SUBJECT tree minus the SCAN tree,
+    // and the subject tree is `src/**`; this rung touches three files under `scripts/`,
+    // which are not subject paths at all, so the digest cannot move BY THIS RUNG. It is
+    // carried because this rung is cut TWENTY-FIVE CARS later than its predecessor's
+    // freeze — the widest gap any rung has spanned — and a landed generated-source
+    // re-record anywhere in that span is exactly the movement targets 9 and 10 declared
+    // reviewable. Refusing it here would refuse the re-anchoring for a movement that
+    // belongs to the lineage rather than to the instrument.
     reviewableUnscannedMovement: true,
   })],
   [STRESS_TOPOLOGY_TARGET_SCHEMA, Object.freeze({
@@ -2247,15 +2386,17 @@ export function run(argv = process.argv.slice(2)) {
   // any mismatch into a refusal rather than a silent mode switch.
   const targetSchema = command.targetSchema
     ? Number(command.targetSchema)
-    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : STRESS_TOPOLOGY_TARGET_SCHEMA);
+    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : LINEAGE_REANCHOR_TARGET_SCHEMA);
   if (![RETIRED_EXACT_TARGET_SCHEMA, HEURISTIC_TARGET_SCHEMA, FILTERED_TARGET_SCHEMA,
     SURFACE_FILTERED_TARGET_SCHEMA, BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
     CORPUS_COVERAGE_TARGET_SCHEMA, EPOCH_DARK_CORPUS_TARGET_SCHEMA,
     PROSE_REGEN_TARGET_SCHEMA, TREASURY_ADMISSION_TARGET_SCHEMA,
     GENESIS_TIES_TARGET_SCHEMA, DEAD_DEPENDENCY_TARGET_SCHEMA,
     PRESET_LIGHT_TARGET_SCHEMA, STABLE_CORE_TARGET_SCHEMA,
-    COMPANION_GATE_TARGET_SCHEMA, STRESS_TOPOLOGY_TARGET_SCHEMA].includes(targetSchema)) {
-    throw new Error(`observed-shape --target-schema must be ${STRESS_TOPOLOGY_TARGET_SCHEMA} (live stress-topology leaf),`
+    COMPANION_GATE_TARGET_SCHEMA, STRESS_TOPOLOGY_TARGET_SCHEMA,
+    LINEAGE_REANCHOR_TARGET_SCHEMA].includes(targetSchema)) {
+    throw new Error(`observed-shape --target-schema must be ${LINEAGE_REANCHOR_TARGET_SCHEMA} (live lineage-reanchor leaf),`
+      + ` ${STRESS_TOPOLOGY_TARGET_SCHEMA} (retired stress-topology leaf),`
       + ` ${COMPANION_GATE_TARGET_SCHEMA} (retired companion-gate leaf),`
       + ` ${STABLE_CORE_TARGET_SCHEMA} (retired stable-core leaf),`
       + ` ${PRESET_LIGHT_TARGET_SCHEMA} (retired preset-light leaf),`
